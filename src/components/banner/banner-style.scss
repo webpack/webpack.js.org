@@ -1,0 +1,13 @@
+// Styling for the Banner component
+
+@import 'utilities/scss/partials/colors';
+
+.banner {
+	min-width: 1280px;
+	background: map-get($colors, mine-shaft);
+
+	&-inner {
+		padding:0.5em 1em;
+		box-sizing:border-box;
+	}
+}
