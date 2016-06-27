@@ -13,22 +13,18 @@
     "build",
     "tool"
   ],
-
   "repository": {
     "type": "git",
     "url": "https://github.com/webpack/webpack.io.git"
   },
-
   "bugs": {
     "url": "https://github.com/webpack/webpack.io/issues"
   },
-
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "sudo webpack -p",
     "dev-server": "sudo webpack-dev-server"
   },
-
   "devDependencies": {
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
@@ -43,7 +39,6 @@
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   },
-
   "dependencies": {
     "react": "^15.1.0",
     "react-dom": "^15.1.0"
