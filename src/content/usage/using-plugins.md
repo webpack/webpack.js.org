@@ -1,0 +1,1 @@
+> plugins configuration option
