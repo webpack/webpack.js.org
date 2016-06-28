@@ -1,5 +1,5 @@
 // Import Dependencies
-import React from 'react'
+import React, { Component } from 'react'
 
 // Import Components
 import Icon from 'Components/icon/icon'
@@ -7,15 +7,54 @@ import Icon from 'Components/icon/icon'
 // Load Styling
 import './logo-style'
 
-// Create the "Logo" component
-let Logo = props => {
-	return (
-		<a className="logo">
-			<Icon theme="light" depth={ 20 } />
-			<span className={ `logo-text -${ props.theme || 'dark' }`}>Webpack</span>
-		</a>
-	)
+// Export the "Logo" component
+export default class Logo extends Component {
+    constructor(props) {
+        super(props)
+
+        this.listeners = {
+            spin: this._triggerSpin.bind(this),
+            reset: this._triggerReset.bind(this)
+        }
+    }
+
+    render() {
+        return (
+            <a className="logo" ref={ ref => this.container = ref }>
+                <Icon ref={ ref => this.icon = ref } theme="light" depth={ 20 } />
+                <span className={ `logo-text -${ this.props.theme || 'dark' }`}>Webpack</span>
+            </a>
+        )
+    }
+
+    componentDidMount() {
+        this.container.addEventListener('mouseenter', this.listeners.spin)
+        this.container.addEventListener('mouseleave', this.listeners.reset)
+    }
+
+    componentWillUnmount() {
+        this.container.removeEventListener('mouseenter', this.listeners.spin)
+        this.container.removeEventListener('mouseleave', this.listeners.reset)
+    }
+
+    /**
+     * Proxy to Icon's spin method
+     *
+     * @param {object} e - Native event
+     */
+    _triggerSpin(e) {
+        this.icon.spin(e)
+    }
+
+    /**
+     * Proxy to Icon's reset method
+     *
+     * @param {object} e - Native event
+     */
+    _triggerReset(e) {
+        this.icon.reset(e)
+    }     
 }
 
-// Export it
-export default Logo
+
+
