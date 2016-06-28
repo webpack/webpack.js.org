@@ -4,47 +4,51 @@ import Webpack from 'webpack'
 
 // Export the dev configuration
 export default {
-	context: Path.resolve('./src'),
-	entry: {
-		index: './app'
-	},
+    target: 'web',
+    devtool: 'source-map',
 
-	module: {
-		loaders: [
-			{ test: /\.js$/, exclude: /node_modules/, loader: 'babel' },
-			{ test: /\.scss$/, loader: 'style!css!sass' }
-		]
-	},
+    context: Path.resolve('./src'),
+    entry: {
+        index: './app'
+    },
 
-	sassLoader: {
-		includePaths: [
-			Path.resolve('./src')
-		]
-	},
+    module: {
+        loaders: [
+            { test: /\.js$/, exclude: /node_modules/, loader: 'babel' },
+            { test: /\.scss$/, loader: 'style!css!sass' }
+        ]
+    },
 
-	resolve: {
-		root: Path.resolve('./node_modules'),
-		extensions: [ '.js', '.scss', '' ],
-		alias: {
-			Components: Path.resolve('./src/components'),
-			Utilities: Path.resolve('./src/utilities')
-		}
-	},
+    sassLoader: {
+        includePaths: [
+            Path.resolve('./src')
+        ]
+    },
 
-	resolveLoader: {
-		root: Path.resolve('./node_modules')
-	},
+    resolve: {
+        root: Path.resolve('./node_modules'),
+        extensions: [ '.js', '.scss', '' ],
+        alias: {
+            Components: Path.resolve('./src/components'),
+            Utilities: Path.resolve('./src/utilities')
+        }
+    },
 
-	devServer: {
-		port: 8080,
-		inline: true,
-		compress: true,
-		contentBase: 'dist/'
-	},
+    resolveLoader: {
+        root: Path.resolve('./node_modules')
+    },
 
-	output: {
-		path: '/dist/build',
-		publicPath: '/build/',
-		filename: '[name].bundle.js'
-	}
+    devServer: {
+        port: 8080,
+        inline: true,
+        compress: true,
+        contentBase: 'dist/',
+        historyApiFallback: true
+    },
+
+    output: {
+        path: '/dist/build',
+        publicPath: '/build/',
+        filename: '[name].bundle.js'
+    }
 }
