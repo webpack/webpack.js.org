@@ -1,14 +1,19 @@
 // Import Dependencies
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 // Import Components
-import Splash from 'Components/splash/splash'
+import Frame from 'Components/frame/frame'
 
 // Load Base Styling
 import 'Utilities/scss/reset'
 
-// 
+// Create the site
 ReactDOM.render((
-	<Splash />
+	<Router history={ browserHistory }>
+        <Route path="/" component={ Frame }>
+            
+        </Route>
+    </Router>
 ), document.getElementById('root'))
