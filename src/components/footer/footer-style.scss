@@ -1,0 +1,14 @@
+// Styling for the Footer component
+
+@import 'utilities/scss/partials/colors';
+@import 'utilities/scss/partials/screens';
+
+.footer {
+    min-width:map-get($screens, desktop);
+    background: map-get($colors, alto);
+
+    &-inner {
+        padding:0.25em 1em;
+        box-sizing:border-box;
+    }
+}
