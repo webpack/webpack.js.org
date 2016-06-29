@@ -43,7 +43,7 @@ export default {
 	},
 
 	output: {
-		path: '/dist/build',
+		path: 'dist/build',
 		publicPath: '/build/',
 		filename: '[name].bundle.js'
 	}
