@@ -1,0 +1,10 @@
+// Styling for the Splash component (temporary)
+
+.splash {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:92vh;
+
+    span { text-transform:uppercase; color: #999; }
+}
