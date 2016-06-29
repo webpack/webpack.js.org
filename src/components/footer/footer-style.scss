@@ -2,13 +2,37 @@
 
 @import 'utilities/scss/partials/colors';
 @import 'utilities/scss/partials/screens';
+@import 'utilities/scss/partials/functions';
 
 .footer {
     min-width:map-get($screens, desktop);
     background: map-get($colors, alto);
 
     &-inner {
-        padding:0.25em 1em;
+        display:flex;
+        padding:0.5em 1em;
         box-sizing:border-box;
+
+        &-middle { flex:0 0 auto; }
+
+        &-left,
+        &-right { 
+            flex:1 1 auto; 
+            padding:0.2em 0;
+        }
+
+        &-right { text-align:right; }
+
+        &-link {
+            font-size:getFontSize(-2);
+            margin-right:2em;
+            text-decoration:none;
+            text-transform:uppercase;
+            color:map-get($colors, dusty-grey);
+            transition:color 250ms;
+
+            &:last-child { margin-right:0; }
+            &:hover { color:map-get($colors, mine-shaft); }
+        }
     }
 }
