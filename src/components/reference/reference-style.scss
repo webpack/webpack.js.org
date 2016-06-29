@@ -1,0 +1,10 @@
+// Styling for the Reference component (temporary)
+
+.reference {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:92vh;
+
+    span { text-transform:uppercase; color: #999; }
+}
