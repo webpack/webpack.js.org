@@ -46,9 +46,9 @@ export default {
         historyApiFallback: true
     },
 
-    output: {
-        path: '/dist/build',
-        publicPath: '/build/',
-        filename: '[name].bundle.js'
-    }
+	output: {
+		path: 'dist/build',
+		publicPath: '/build/',
+		filename: '[name].bundle.js'
+	}
 }
