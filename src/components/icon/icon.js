@@ -9,59 +9,59 @@ import './icon-style'
 export default class Icon extends Component {
   constructor(props) {
     super(props)
-    
+
     this.listeners = {
       spin: this._spin.bind(this),
       reset: this._reset.bind(this)
     }
-    
+
     this.state = {
       x: 0,
       y: 0,
       z: 0
     }
   }
-  
+
   render() {
     let { x, y, z } = this.state,
         { theme, depth } = this.props
-    
+
     return (
       <span ref={ ref => this.container = ref }
         className={ `icon -${theme}` }
-        style={{ 
-           width: `${depth}px`,
-           'margin-left': `${depth * 0.5}px`,
-           'padding-bottom': `${depth * 0.3}px`
+        style={{
+          width: `${depth}px`,
+          marginLeft: `${depth * 0.5}px`,
+          paddingBottom: `${depth * 0.3}px`
         }}>
         <figure className="icon-cube -outer"
-          style={{ 
-            width: `${depth}px`, 
+          style={{
+            width: `${depth}px`,
             height: `${depth}px`,
-            transform: `translateX(-50%) 
-                        scale3d(1,1,1) 
-                        rotateX(${x}deg) 
-                        rotateY(${y}deg) 
-                        rotateZ(${z}deg)` 
+            transform: `translateX(-50%)
+                        scale3d(1,1,1)
+                        rotateX(${x}deg)
+                        rotateY(${y}deg)
+                        rotateZ(${z}deg)`
           }}>
           { this._getFaces() }
         </figure>
-        <figure className="icon-cube -inner" 
-          style={{ 
-            width: `${depth}px`, 
+        <figure className="icon-cube -inner"
+          style={{
+            width: `${depth}px`,
             height: `${depth}px`,
-            transform: `translateX(-50%) 
-                        scale3d(0.5,0.5,0.5) 
-                        rotateX(${-x}deg) 
-                        rotateY(${-y}deg) 
-                        rotateZ(${-z}deg)` 
+            transform: `translateX(-50%)
+                        scale3d(0.5,0.5,0.5)
+                        rotateX(${-x}deg)
+                        rotateY(${-y}deg)
+                        rotateZ(${-z}deg)`
           }}>
           { this._getFaces() }
         </figure>
       </span>
     )
   }
-  
+
   componentDidMount() {
     this.container.addEventListener('mouseenter', this.listeners.spin)
     this.container.addEventListener('mouseleave', this.listeners.reset)
@@ -86,11 +86,11 @@ export default class Icon extends Component {
       'rotateY(90deg)',
       'rotateY(180deg)'
     ].map((rotation, i) => {
-      return <section key={ i } className="icon-cube-face" 
+      return <section key={ i } className="icon-cube-face"
         style={{ transform: `${rotation} translateZ(${ this.props.depth / 2 }px)` }} />
     })
   }
-  
+
   /**
    * Get a random axis
    *
@@ -98,10 +98,10 @@ export default class Icon extends Component {
    */
   _getRandomAxis() {
     let axes = Object.keys(this.state)
-    
+
     return axes[ Math.floor(Math.random() * axes.length) ]
   }
-  
+
   /**
    * Spin the cubes in opposite directions semi-randomly
    *
@@ -111,12 +111,12 @@ export default class Icon extends Component {
     let obj = {},
         axis = this._getRandomAxis(),
         sign = Math.random() < 0.5 ? -1 : 1
- 
+
     obj[axis] = sign * 90
-    
+
     this.setState(obj)
   }
-  
+
   /**
    * Rotate the cubes back to their original position
    *
@@ -131,16 +131,13 @@ export default class Icon extends Component {
   }
 }
 
-// Check incoming props for issues 
+// Check incoming props for issues
 Icon.propTypes = {
 
 }
 
-// Set up defaults 
+// Set up defaults
 Icon.defaultProps = {
   theme: 'default',
   depth: 30
 }
-
-
-
