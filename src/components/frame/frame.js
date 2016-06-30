@@ -10,9 +10,11 @@ import './frame-style'
 
 // Export the "Frame" component
 export default props => {
+    let splash = props.location.pathname === '/'
+
     return (
         <div className="frame">
-            <Banner />
+            <Banner theme={ splash ? 'light' : 'dark' } />
             { props.children }
             <Footer />
         </div>
