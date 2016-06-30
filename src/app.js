@@ -8,7 +8,6 @@ import Splash from 'Components/splash/splash'
 // Load Base Styling
 import 'Utilities/scss/reset'
 
-// 
 ReactDOM.render((
 	<Splash />
 ), document.getElementById('root'))
