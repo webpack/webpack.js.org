@@ -147,7 +147,7 @@ Icon.propTypes = {
 // Set up defaults 
 Icon.defaultProps = {
     hover: false,
-    theme: 'default',
+    theme: 'dark',
     depth: 30
 }
 
