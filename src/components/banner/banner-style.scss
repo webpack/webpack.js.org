@@ -6,11 +6,16 @@
 
 .banner {
     min-width:map-get($screens, desktop);
-    background: map-get($colors, mine-shaft);
+    background:map-get($colors, mine-shaft);
+    transition:background 250ms;
 
     &-inner {
         padding:0.5em 1em;
         box-sizing:border-box;
+    }
+
+    &-logo {
+        text-decoration:none;
     }
 
     &-nav {
@@ -22,11 +27,17 @@
             margin-left:2.5em;
             text-transform:uppercase;
             text-decoration:none;
-            color:map-get($colors, alto);
+            color:map-get($colors, dusty-grey);
             transition:color 250ms;
 
             &:hover,
             &.-active { color:map-get($colors, white); }
         }
+    }
+
+    &.-light { 
+        background: transparent; 
+
+        .banner-nav-link:hover { color:map-get($colors, mine-shaft); }
     }
 }

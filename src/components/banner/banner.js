@@ -12,9 +12,11 @@ import './banner-style'
 // Create the Banner component
 let Banner = props => {
     return (
-        <header className="banner">
+        <header className={ `banner -${ props.theme || 'dark' }` }>
             <Container className="banner-inner">
-                <Logo theme="light" />
+                <Link className="banner-logo" to={{ pathname: '/' }}>
+                    <Logo theme={ props.theme === 'light' ? 'dark' : 'light' } />
+                </Link>
 
                 <nav className="banner-nav">
                     <Link className="banner-nav-link" activeClassName="-active" to={{ pathname: '/guides' }}>Guides</Link>
