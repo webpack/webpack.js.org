@@ -33,6 +33,8 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
     "css-loader": "^0.23.1",
+    "eslint": "1.6.0",
+    "eslint-loader": "^1.3.0",
     "modularscale-sass": "^2.1.1",
     "node-sass": "^3.8.0",
     "sass-loader": "^3.2.1",
