@@ -46,13 +46,13 @@ export default {
         port: 8080,
         inline: true,
         compress: true,
-        contentBase: 'dist/',
+        contentBase: Path.normalize('dist/'),
         historyApiFallback: true
     },
 
 	output: {
-		path: 'dist/build',
-		publicPath: '/build/',
+		path: Path.join('dist', 'build'),
+		publicPath: Path.normalize('/build/'),
 		filename: '[name].bundle.js'
 	}
 }
