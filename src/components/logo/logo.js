@@ -20,12 +20,12 @@ export default class Logo extends Component {
 
     render() {
         return (
-            <a className="logo" ref={ ref => this.container = ref }>
+            <span className="logo" ref={ ref => this.container = ref }>
                 <Icon ref={ ref => this.icon = ref } 
                     theme={ this.props.theme || 'dark' } 
                     depth={ 20 } />
                 <span className={ `logo-text -${ this.props.theme || 'dark' }`}>Webpack</span>
-            </a>
+            </span>
         )
     }
 
