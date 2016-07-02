@@ -14,9 +14,13 @@ export default {
 
     module: {
         loaders: [
-            { test: /\.js$/, exclude: /node_modules/, loader: 'babel' },
+            { test: /\.js$/, exclude: /node_modules/, loader: 'babel!eslint' },
             { test: /\.scss$/, loader: 'style!css!sass' }
         ]
+    },
+
+    eslint: {
+        configFile: Path.resolve('./.eslintrc.json')
     },
 
     sassLoader: {

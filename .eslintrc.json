@@ -1,0 +1,21 @@
+{
+    "extends": "eslint:recommended",
+
+    "ecmaFeatures": {
+        "modules": true,
+        "jsx": true
+    },
+
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+
+    rules: {
+        "no-undef": 2,
+        "no-unreachable": 2,
+        "semi": [ 2, 'never' ],
+        "no-unused-vars": 0,
+        "no-console": 0
+    }
+}
