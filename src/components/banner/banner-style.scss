@@ -7,6 +7,7 @@
 .banner {
     min-width:map-get($screens, desktop);
     background:map-get($colors, mine-shaft);
+    user-select:none;
     transition:background 250ms;
 
     &-inner {
@@ -39,6 +40,7 @@
         position:absolute; 
         width:100%;
         top:0;
+        z-index:5;
     }
 
     &.-light { 
