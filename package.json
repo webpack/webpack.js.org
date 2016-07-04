@@ -45,6 +45,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "highlight.js": "^9.5.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.5.1"
