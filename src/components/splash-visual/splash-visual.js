@@ -1,6 +1,9 @@
 // Import Dependencies
 import React, { Component } from 'react'
 
+// Import Components
+import SplashNode from 'Components/splash-node/splash-node'
+
 // Load Styling
 import './splash-visual-style'
 
@@ -9,7 +12,36 @@ export default class SplashVisual extends Component {
     render() {
         return (
             <div className="splash-visual">
+                <section className="splash-visual-modules">
+                    <div className="splash-visual-modules-column">
+                        <SplashNode />
+                        <SplashNode type="css" />
+                        <SplashNode type="jade" />
+                        <SplashNode type="coffee" />
+                        <SplashNode type="css" />
+                    </div>
+                    <div className="splash-visual-modules-column">
+                        <SplashNode type="img" />
+                        <SplashNode type="less" />
+                        <SplashNode type="less" />
+                        <SplashNode />
+                    </div>
+                    <div className="splash-visual-modules-column">
+                        <SplashNode type="less" />
+                        <SplashNode type="css" />
+                        <SplashNode type="jade" />
+                    </div>
+                    <div className="splash-visual-modules-column">
+                        <SplashNode />
+                        <SplashNode type="coffee" />
+                    </div>
+                </section>
 
+                <section className="splash-visual-transformation" />
+
+                <section className="splash-visual-output">
+                    
+                </section>
             </div>
         )
     }
