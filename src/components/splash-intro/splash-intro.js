@@ -10,14 +10,21 @@ import Content from './quick-start'
 import 'highlight.js/styles/tomorrow-night-eighties'
 import './splash-intro-style'
 
-console.debug(Hljs)
-Hljs.initHighlightingOnLoad()
-
 // Export the "SplashIntro" component
 export default class SplashIntro extends Component {
     render() {
         return (
-            <div className="splash-intro" dangerouslySetInnerHTML={{ __html: Content }} />
+            <div ref={ ref => this.container = ref }
+                className="splash-intro" 
+                dangerouslySetInnerHTML={{ __html: Content }} />
         )
+    }
+
+    componentDidMount() {
+        let elements = this.container.getElementsByTagName('code')
+
+        Array.from(elements).forEach(item => {
+            Hljs.highlightBlock(item)
+        })
     }
 }
