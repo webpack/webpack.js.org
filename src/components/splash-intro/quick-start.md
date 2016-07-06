@@ -4,9 +4,6 @@ Webpack works by actually running your code, starting through files called [entr
 
 Below are a few examples of how modules, anything from HTML, CSS and JavaScript to images or fonts, can be retrieved and processed through Webpack. Feel free to jump straight into the documentation or see the guides section for more detailed examples and tutorials.
 
-    // Webpack takes modules with dependencies
-    //  and emits static assets representing those modules
-
     // Modules can be retrieved via CommonJS
     var commonjs = require("./commonjs");
 
