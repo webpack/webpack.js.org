@@ -1,0 +1,22 @@
+// Styling for the SplashFile component
+
+@import 'utilities/scss/partials/functions';
+
+.splash-file {
+    &-icon {
+        width:getFontSize(2);
+        height:getFontSize(2);
+        display:inline-block;
+        vertical-align:middle;
+        margin-right:0.25em;
+        background-size:contain;
+        background-repeat:no-repeat;
+        background-position:center center;
+
+        &.-html { background-image:url(./html-icon.png); }
+        &.-css { background-image:url(./css-icon.png); }
+        &.-js { background-image:url(./js-icon.png); }
+        &.-ico { background-image:url(./ico-icon.png); }
+        &.-other { background-image:url(./blank-icon.png); }
+    }
+}
