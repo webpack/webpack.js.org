@@ -17,7 +17,8 @@ export default {
             { test: /\.js$/, exclude: /node_modules/, loader: 'babel!eslint' },
             { test: /\.scss$/, loader: 'style!css!sass' },
             { test: /\.css$/, loader: 'style!css' },
-            { test: /\.md$/, loader: 'html!markdown' }
+            { test: /\.md$/, loader: 'html!markdown' },
+            { test: /\.(png|jpg|svg|gif)$/, loader: 'file!image-webpack' }
         ]
     },
 
