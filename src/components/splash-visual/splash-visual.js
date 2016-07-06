@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 
 // Import Components
 import SplashNode from 'Components/splash-node/splash-node'
+import SplashFile from 'Components/splash-file/splash-file'
 
 // Load Styling
 import './splash-visual-style'
@@ -40,7 +41,14 @@ export default class SplashVisual extends Component {
                 <section className="splash-visual-transformation" />
 
                 <section className="splash-visual-output">
-                    
+                    <div className="splash-visual-output-files">
+                        <SplashFile type="html">index.html</SplashFile>
+                        <SplashFile type="ico">favicon.ico</SplashFile>
+                        <SplashFile type="css">style.bundle.css</SplashFile>
+                        <SplashFile>style.bundle.css.map</SplashFile>
+                        <SplashFile type="js">index.bundle.js</SplashFile>
+                        <SplashFile>index.bundle.js.map</SplashFile>
+                    </div>
                 </section>
             </div>
         )

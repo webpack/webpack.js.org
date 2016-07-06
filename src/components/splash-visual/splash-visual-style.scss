@@ -30,5 +30,17 @@
         background-size:50% auto;
     }
 
-    &-output { background:white; }
+    &-output {
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        &-files {
+            .splash-file { 
+                display:block; 
+
+                &:not(:last-child) { margin-bottom:0.75em; }
+            }
+        }
+    }
 }
