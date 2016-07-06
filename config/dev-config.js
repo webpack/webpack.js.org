@@ -15,7 +15,10 @@ export default {
     module: {
         loaders: [
             { test: /\.js$/, exclude: /node_modules/, loader: 'babel!eslint' },
-            { test: /\.scss$/, loader: 'style!css!sass' }
+            { test: /\.scss$/, loader: 'style!css!sass' },
+            { test: /\.css$/, loader: 'style!css' },
+            { test: /\.md$/, loader: 'html!markdown' },
+            { test: /\.(png|jpg|svg|gif)$/, loader: 'file!image-webpack' }
         ]
     },
 
@@ -31,7 +34,7 @@ export default {
 
     resolve: {
         root: Path.resolve('./node_modules'),
-        extensions: [ '.js', '.scss', '' ],
+        extensions: [ '.js', '.md', '.css', '.scss', '' ],
         alias: {
             Components: Path.resolve('./src/components'),
             Utilities: Path.resolve('./src/utilities')

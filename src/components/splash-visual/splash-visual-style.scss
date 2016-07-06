@@ -1,0 +1,46 @@
+// Styling for the SplashVisual component
+
+.splash-visual {
+    display:flex;
+    align-content:stretch;
+
+    &-modules,
+    &-transformation,
+    &-output { 
+        display:flex;
+        flex:0 0 33.333%;
+    }
+
+    &-modules { 
+        align-content:stretch;
+
+        &-column {
+            display:flex;
+            flex:1 1 auto;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+
+            .splash-node:not(:last-child) { margin-bottom:1em; }
+        }
+    }
+
+    &-transformation { 
+        background:url(./arrow.png) no-repeat center center; 
+        background-size:50% auto;
+    }
+
+    &-output {
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        &-files {
+            .splash-file { 
+                display:block; 
+
+                &:not(:last-child) { margin-bottom:0.75em; }
+            }
+        }
+    }
+}

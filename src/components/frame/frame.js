@@ -14,7 +14,7 @@ export default props => {
 
     return (
         <div className="frame">
-            <Banner theme={ splash ? 'light' : 'dark' } />
+            <Banner theme={ splash ? 'light' : 'dark' } absolute={ splash } />
             { props.children }
             <Footer />
         </div>

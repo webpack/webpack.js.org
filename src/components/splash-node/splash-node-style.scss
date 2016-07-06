@@ -1,0 +1,25 @@
+// Styling for the SplashNode component
+
+@import 'utilities/scss/partials/colors';
+
+.splash-node {
+    display:flex;
+    background:map-get($colors, white);
+    align-items:center;
+    justify-content:center;
+
+    &-logo {
+        width:60%;
+        height:60%;
+        background-size:contain;
+        background-position:center center;
+        background-repeat:no-repeat;
+
+        &.-js { background-image:url(./js-logo.png); }
+        &.-css { background-image:url(./css-logo.png); }
+        &.-coffee { background-image:url(./coffee-logo.png); }
+        &.-jade { background-image:url(./jade-logo.png); }
+        &.-less { background-image:url(./less-logo.png); }
+        &.-img { background-image:url(./img-logo.png); }
+    }
+}

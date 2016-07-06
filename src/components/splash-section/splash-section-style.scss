@@ -1,0 +1,16 @@
+// Styling for the SplashSection component
+
+@import 'utilities/scss/partials/colors';
+@import 'utilities/scss/partials/screens';
+
+.splash-section {
+    min-width:map-get($screens, desktop);
+
+    &.-light { background:map-get($colors, white); }
+    &.-grey { background:map-get($colors, concrete); }
+    &.-dark { background:map-get($colors, mine-shaft); }
+
+    &-content {
+        padding:3em 1em;
+    }
+}
