@@ -9,8 +9,10 @@ import './splash-section-style'
 
 // Create the "SplashSection" component
 let SplashSection = props => {
+    let { theme = 'light' } = props
+
     return (
-        <section className={`splash-section -${props.theme || 'light'}`}>
+        <section className={`splash-section -${theme}`}>
             <Container className="splash-section-content">
                 { props.children }
             </Container>
