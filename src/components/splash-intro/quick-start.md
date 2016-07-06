@@ -12,11 +12,12 @@ Below are a few examples of how modules, anything from HTML, CSS and JavaScript 
         // ...
     });
 
-    // "Loaders" can be used to process files
-    // They can be used by prefixing the filepath in a ‘require’
-    require("coffee!./cup.coffee");
+    // Loaders can process different types of files
+    // Use them by prefixing the filepath in a ‘require’
+    var cup = require("coffee!./cup.coffee");
+    var data = require("json!./data.json");
 
-    // ... or set up in the config for particular extensions
+    // ... or setting them up in the config for various extensions
     //  which simplifies your require call
     require("./cup.coffee");
 
@@ -28,7 +29,7 @@ Below are a few examples of how modules, anything from HTML, CSS and JavaScript 
         return require("./templates/" + name + ".jade");
     }
 
-    // Lazy loading is also possible using the bundle-loader
+    // Lazy loading is possible using the bundle-loader
     function loadTemplateAsync(name, callback) {
         require(["bundle?lazy!./templates/" + name + ".jade"], function(templateBundle) {
             templateBundle(callback);
