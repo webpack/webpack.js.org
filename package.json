@@ -1,6 +1,6 @@
 {
   "name": "webpack.io",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "The main site for all things Webpack.",
   "homepage": "https://github.com/webpack/webpack.io",
