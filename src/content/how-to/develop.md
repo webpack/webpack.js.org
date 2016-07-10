@@ -1,6 +1,7 @@
 ---
-title: Using dev-server
+title: How to Develop?
 ---
+> watch
 > caching
 > dev middleware
 > in memory compilation
