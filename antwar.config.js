@@ -18,7 +18,7 @@ module.exports = {
       },
       resolveLoader: {
         alias: {
-          markdown: path.join(__dirname, 'loaders', 'markdown')
+          markdown: path.join(__dirname, 'src', 'loaders', 'markdown')
         }
       }
     },
@@ -73,7 +73,7 @@ module.exports = {
     prevnextPlugin()
   ],
   layout: function() {
-    return require('./layouts/Body.jsx')
+    return require('./src/layouts/Body.jsx')
   },
   style: function() {
     // load custom style files global to the site here
@@ -84,7 +84,7 @@ module.exports = {
       path: function() {
         // This is a good place for individual pages you want to access
         // through the root of the site.
-        return require.context('./pages', false, /^\.\/.*\.jsx$/);
+        return require.context('./src/pages', false, /^\.\/.*\.jsx$/);
       }
     }
   }
