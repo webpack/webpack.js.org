@@ -89,6 +89,6 @@ module.exports = {
     },
     guides: require('./src/content/guides'),
     support: require('./src/content/support'),
-    usage: require('./src/content/usage')
+    using: require('./src/content/using')
   }
 }

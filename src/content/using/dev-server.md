@@ -1,7 +1,6 @@
 ---
-title: Using watch and dev-server
+title: Using dev-server
 ---
-> watch
 > caching
 > dev middleware
 > in memory compilation
