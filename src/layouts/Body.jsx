@@ -44,14 +44,6 @@ const Nav = (props) => (
       url: '/how-to'
     },
     {
-      title: 'Using',
-      url: '/using'
-    },
-    {
-      title: 'Contribute',
-      url: '/contribute'
-    },
-    {
       title: 'Analyze',
       url: '/analyze'
     },

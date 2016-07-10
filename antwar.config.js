@@ -103,16 +103,6 @@ module.exports = {
           /^\.\/.*\.md$/
         );
       }
-    ),
-    using: section(
-      'Using',
-      function() {
-        return require.context(
-          'json!yaml-frontmatter!./src/content/using',
-          false,
-          /^\.\/.*\.md$/
-        );
-      }
     )
   }
 }
