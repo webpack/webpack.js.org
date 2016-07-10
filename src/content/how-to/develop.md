@@ -1,6 +1,10 @@
 ---
-title: How to Develop?
+title: How to Use Develop Using Webpack?
 ---
+> devtool
+> output.pathinfo
+> hot module replacement
+
 > watch
 > caching
 > dev middleware
