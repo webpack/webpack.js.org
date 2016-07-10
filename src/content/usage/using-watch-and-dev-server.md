@@ -1,3 +1,6 @@
+---
+title: Using watch and dev-server
+---
 > watch
 > caching
 > dev middleware

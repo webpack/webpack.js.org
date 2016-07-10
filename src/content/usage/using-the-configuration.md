@@ -1,3 +1,6 @@
+---
+title: Using the Configuration
+---
 > configuration file
 > possible extensions, i. e. .babel.js
 > exporting a function and --env

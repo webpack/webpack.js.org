@@ -1,3 +1,6 @@
+---
+title: Using the CLI
+---
 > Cli call
 > Cli options
 > --config

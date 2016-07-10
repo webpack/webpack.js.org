@@ -1,7 +1,6 @@
 import React from 'react'
 
 import Disqus from 'antwar-helpers/components/Disqus'
-import Moment from 'antwar-helpers/components/Moment'
 
 export default React.createClass({
   displayName: 'GuidePage',
