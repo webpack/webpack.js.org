@@ -74,7 +74,7 @@ module.exports = {
     return require('./layouts/Body.jsx')
   },
   style: function() {
-    // load custom style files global to the site here
+    // Load custom style files global to the site here
     require('react-ghfork/gh-fork-ribbon.css');
   },
   paths: {
