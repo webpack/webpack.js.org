@@ -88,7 +88,6 @@ module.exports = {
       }
     },
     'how-to': require('./src/content/how-to'),
-    support: require('./src/content/support'),
     using: require('./src/content/using')
   }
 }
