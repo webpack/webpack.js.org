@@ -1,5 +1,5 @@
 ---
-title: Using the Configuration
+title: Configuration
 ---
 > configuration file
 > possible extensions, i. e. .babel.js
