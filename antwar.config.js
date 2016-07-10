@@ -17,11 +17,6 @@ module.exports = {
             Components: path.resolve('./src/components'),
             Utilities: path.resolve('./src/utilities')
         }
-      },
-      resolveLoader: {
-        alias: {
-          markdown: path.join(__dirname, 'src', 'loaders', 'markdown')
-        }
       }
     },
     build: function(plugins) {
