@@ -1,5 +1,5 @@
 ---
-title: How to Resolve Dependencies?
+title: Module Resolution
 ---
 > how webpack resolves requests
 > incl. resolving options
