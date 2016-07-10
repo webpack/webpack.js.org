@@ -86,36 +86,42 @@ module.exports = {
     },
     concepts: section(
       'Concepts',
-      require.context(
-        'json!yaml-frontmatter!./src/content/concepts',
-        false,
-        /^\.\/.*\.md$/
-      )
+      function() {
+        return require.context(
+          'json!yaml-frontmatter!./src/content/concepts',
+          false,
+          /^\.\/.*\.md$/
+        );
+      }
     ),
     'how-to': section(
       'How to',
-      require.context(
-        'json!yaml-frontmatter!./src/content/how-to',
-        false,
-        /^\.\/.*\.md$/
-      )
+      function() {
+        return require.context(
+          'json!yaml-frontmatter!./src/content/how-to',
+          false,
+          /^\.\/.*\.md$/
+        );
+      }
     ),
     using: section(
       'Using',
-      require.context(
-        'json!yaml-frontmatter!./src/content/using',
-        false,
-        /^\.\/.*\.md$/
-      )
+      function() {
+        return require.context(
+          'json!yaml-frontmatter!./src/content/using',
+          false,
+          /^\.\/.*\.md$/
+        );
+      }
     )
   }
 }
 
-function section(title, content) {
+function section(title, contentCb) {
   return {
     title: title,
     path: function() {
-      return content;
+      return contentCb();
     },
     processPage: {
       url: function(o) {
