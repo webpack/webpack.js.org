@@ -7,7 +7,7 @@ export default React.createClass({
     const section = this.props.section
 
     return (
-      <div className="grid">
+      <div className="section-index__wrapper">
         <h1>{section.title}</h1>
 
         <ul className="section-list">{section.pages().map((page, i) => {

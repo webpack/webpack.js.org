@@ -3,8 +3,8 @@ import {Link} from 'react-router'
 import Container from './Container'
 import Logo from './Logo'
 
-const Navigation = ({ theme, pages }) => (
-  <div className={`navigation -${theme}`}>
+const Navigation = ({ theme = '', pages }) => (
+  <div className={`navigation ${theme}`}>
     <Container className="navigation-inner">
       <Link className="navigation-logo" to={{ pathname: '/' }}>
         <Logo theme={ theme === 'light' ? 'dark' : 'light' } />

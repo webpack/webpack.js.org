@@ -10,7 +10,7 @@ export default React.createClass({
     const config = this.props.config
 
     return (
-      <div className="section__wrapper">
+      <div className="section-page__wrapper">
         <h1 className="section__heading">{page.title}</h1>
 
         <div className="section">

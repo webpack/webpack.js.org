@@ -8,3 +8,9 @@
 body {
     font:300 16px/1 'Open Sans', 'Century Gothic', sans-serif;
 }
+
+.section-index__wrapper, .section-page__wrapper {
+  padding : 2em;
+  max-width: 800px;
+  margin: 0 auto;
+}
