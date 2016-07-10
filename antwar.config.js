@@ -75,7 +75,9 @@ module.exports = {
   },
   style: function() {
     require('react-ghfork/gh-fork-ribbon.css');
-    require('utilities/scss/reset.scss');
+    require('./styles/prism.css');
+    require('styles/reset.scss');
+    require('styles/custom.scss');
   },
   paths: {
     '/': {

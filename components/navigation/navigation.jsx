@@ -3,10 +3,8 @@ import {Link} from 'react-router'
 import Container from 'Components/container/container'
 import Logo from 'Components/logo/logo'
 
-import './navigation-style.scss'
-
-export default ({ pages, theme }) => (
-  <div className={`navigation-${theme || 'dark'}`}>
+const Navigation = ({ theme, pages }) => (
+  <div className={`navigation -${theme}`}>
     <Container className="navigation-inner">
       <Link className="navigation-logo" to={{ pathname: '/' }}>
         <Logo theme={ theme === 'light' ? 'dark' : 'light' } />
@@ -24,3 +22,5 @@ export default ({ pages, theme }) => (
     </Container>
   </div>
 )
+
+export default Navigation

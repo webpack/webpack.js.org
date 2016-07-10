@@ -1,9 +1,6 @@
 // Import Dependencies
 import React, { Component, PropTypes } from 'react'
 
-// Load Styling
-import './icon-style'
-
 // Export the "Icon" component
 // TODO: Consider breaking 'icon-cube' into its own component
 export default class Icon extends Component {

@@ -1,5 +1,3 @@
-// Color Scheme
-
 $colors: (
     regent: #8a929d,
     lynch: #617693,
@@ -14,4 +12,10 @@ $colors: (
     dusty-grey: #999999,
     dove-grey: #666666,
     mine-shaft: #333333
+);
+
+$screens: (
+    desktop: 1280px,
+    laptop: 960px,
+    tablet: 720px
 );

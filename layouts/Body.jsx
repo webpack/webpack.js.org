@@ -13,9 +13,9 @@ export default React.createClass({
 
     return (
       <Body {...props}>
-        {props.children}
-
         <Nav />
+
+        {props.children}
 
         <Fork className="right ribbon"
           project="webpack/webpack"

@@ -4,9 +4,6 @@ import React, { Component } from 'react'
 // Import Components
 import Icon from 'Components/icon/icon'
 
-// Load Styling
-import './logo-style'
-
 // Export the "Logo" component
 export default class Logo extends Component {
     constructor(props) {
