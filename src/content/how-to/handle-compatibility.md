@@ -1,5 +1,5 @@
 ---
-title: Compatibility
+title: How to Handle Compatibility?
 ---
 > require.main
 > require.cache

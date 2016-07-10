@@ -1,5 +1,5 @@
 ---
-title: Output
+title: How to Handle Output?
 ---
 > output.path
 > output.filename

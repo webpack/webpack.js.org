@@ -1,5 +1,5 @@
 ---
-title: Code Splitting
+title: How to Split Code?
 ---
 > what is code splitting
 > System.import

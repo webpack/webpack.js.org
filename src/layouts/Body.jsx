@@ -36,12 +36,12 @@ const Nav = (props) => (
       url: '/',
     },
     {
-      title: 'Guides',
-      url: '/guides'
+      title: 'How to',
+      url: '/how-to'
     },
     {
-      title: 'Usage',
-      url: '/usage'
+      title: 'Using',
+      url: '/using'
     },
     {
       title: 'Support',

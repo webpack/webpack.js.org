@@ -87,7 +87,7 @@ module.exports = {
         return require.context('./src/content', false, /^\.\/.*\.jsx$/);
       }
     },
-    guides: require('./src/content/guides'),
+    'how-to': require('./src/content/how-to'),
     support: require('./src/content/support'),
     using: require('./src/content/using')
   }

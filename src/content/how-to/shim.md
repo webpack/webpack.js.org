@@ -1,5 +1,5 @@
 ---
-title: Shimming
+title: How to Shim?
 ---
 > import-loader
 > exports-loader

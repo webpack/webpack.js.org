@@ -1,5 +1,5 @@
 ---
-title: Library and Externals
+title: How to Author Libraries?
 ---
 > library option
 > externals option
