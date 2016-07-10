@@ -1,5 +1,5 @@
 ---
-title: Using the API
+title: Node.js API
 ---
 > webpack()
 > run()

@@ -98,6 +98,16 @@ module.exports = {
           /^\.\/.*\.md$/
         );
       }
+    ),
+    'api': section(
+      'API',
+      function() {
+        return require.context(
+          'json!yaml-frontmatter!./content/api',
+          false,
+          /^\.\/.*\.md$/
+        );
+      }
     )
   }
 }
