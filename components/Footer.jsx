@@ -3,11 +3,8 @@ import React from 'react'
 
 // Import Components
 import { Link } from 'react-router'
-import Icon from 'Components/icon/icon'
-import Container from 'Components/container/container'
-
-// Load Styling
-import './footer-style'
+import Icon from './Icon'
+import Container from './Container'
 
 // Create the "Footer" component
 let Footer = props => {

@@ -3,5 +3,8 @@
 @import "styles";
 
 @import url(https://fonts.googleapis.com/css?family=Averia+Sans+Libre:400,300);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,600,700,400italic);
 
-// Add custom SCSS here
+body {
+    font:300 16px/1 'Open Sans', 'Century Gothic', sans-serif;
+}

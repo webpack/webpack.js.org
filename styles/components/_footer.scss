@@ -1,9 +1,3 @@
-// Styling for the Footer component
-
-@import 'utilities/scss/partials/colors';
-@import 'utilities/scss/partials/screens';
-@import 'utilities/scss/partials/functions';
-
 .footer {
     min-width:map-get($screens, desktop);
     background: map-get($colors, alto);

@@ -1,7 +1,8 @@
 import React from 'react'
 import Fork from 'react-ghfork'
 import Gitter from '../components/Gitter'
-import Navigation from '../components/navigation/navigation'
+import Navigation from '../components/Navigation'
+import Footer from '../components/Footer'
 import Body from 'antwar-helpers/layouts/Body'
 
 export default React.createClass({
@@ -16,6 +17,8 @@ export default React.createClass({
         <Nav />
 
         {props.children}
+
+        <Footer />
 
         <Fork className="right ribbon"
           project="webpack/webpack"

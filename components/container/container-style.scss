@@ -1,8 +1,0 @@
-// Styling for the Container component
-
-@import 'utilities/scss/partials/screens';
-
-.container {
-    width:map-get($screens, desktop);
-    margin:0 auto;
-}

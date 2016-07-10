@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 
 // Import Components
-import Icon from 'Components/icon/icon'
+import Icon from './Icon'
 
 // Export the "Logo" component
 export default class Logo extends Component {

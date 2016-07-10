@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router'
-import Container from 'Components/container/container'
-import Logo from 'Components/logo/logo'
+import Container from './Container'
+import Logo from './Logo'
 
 const Navigation = ({ theme, pages }) => (
   <div className={`navigation -${theme}`}>
