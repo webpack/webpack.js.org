@@ -1,21 +1,22 @@
 var path = require('path');
 var prevnextPlugin = require('antwar-prevnext-plugin');
-var markdown = require('./src/utils/markdown');
-var highlight = require('./src/utils/highlight');
+var markdown = require('./utilities/markdown');
+var highlight = require('./utilities/highlight');
 
 module.exports = {
   webpack: {
     common: {
-      sassLoader: {
+      // XXX: needed?
+      /*sassLoader: {
         includePaths: [
           path.resolve('./src')
         ]
-      },
+      },*/
       resolve: {
         extensions: ['', '.js', 'jsx', '.scss'],
         alias: {
-            Components: path.resolve('./src/components'),
-            Utilities: path.resolve('./src/utilities')
+          Components: path.resolve('./components'),
+          Utilities: path.resolve('./utilities')
         }
       }
     },
@@ -70,7 +71,7 @@ module.exports = {
     prevnextPlugin()
   ],
   layout: function() {
-    return require('./src/layouts/Body.jsx')
+    return require('./layouts/Body.jsx')
   },
   style: function() {
     // load custom style files global to the site here
@@ -81,14 +82,14 @@ module.exports = {
       path: function() {
         // This is a good place for individual pages you want to access
         // through the root of the site.
-        return require.context('./src/content', false, /^\.\/.*\.jsx$/);
+        return require.context('./content', false, /^\.\/.*\.jsx$/);
       }
     },
     concepts: section(
       'Concepts',
       function() {
         return require.context(
-          'json!yaml-frontmatter!./src/content/concepts',
+          'json!yaml-frontmatter!./content/concepts',
           false,
           /^\.\/.*\.md$/
         );
@@ -98,7 +99,7 @@ module.exports = {
       'How to',
       function() {
         return require.context(
-          'json!yaml-frontmatter!./src/content/how-to',
+          'json!yaml-frontmatter!./content/how-to',
           false,
           /^\.\/.*\.md$/
         );
@@ -125,10 +126,10 @@ function section(title, contentCb) {
     },
     layouts: {
       index: function() {
-        return require('./src/layouts/SectionIndex.jsx').default
+        return require('./layouts/SectionIndex.jsx').default
       },
       page: function() {
-        return require('./src/layouts/SectionPage.jsx').default
+        return require('./layouts/SectionPage.jsx').default
       }
     },
     redirects: {} // <from>: <to>
