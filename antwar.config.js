@@ -80,8 +80,6 @@ module.exports = {
   paths: {
     '/': {
       path: function() {
-        // This is a good place for individual pages you want to access
-        // through the root of the site.
         return require.context('./content', false, /^\.\/.*\.jsx$/);
       }
     },
