@@ -1,0 +1,26 @@
+import React from 'react'
+import {Link} from 'react-router'
+import Container from 'Components/container/container'
+import Logo from 'Components/logo/logo'
+
+import './navigation-style.scss'
+
+export default ({ pages, theme }) => (
+  <div className={`navigation-${theme || 'dark'}`}>
+    <Container className="navigation-inner">
+      <Link className="navigation-logo" to={{ pathname: '/' }}>
+        <Logo theme={ theme === 'light' ? 'dark' : 'light' } />
+      </Link>
+
+      <nav className="navigation-nav">{pages.map((link, i) => (
+        <Link
+          key={`link-${i}`}
+          className="navigation-nav-link"
+          activeClassName="-active"
+          to={link.url}>
+          {link.title}
+        </Link>
+      ))}</nav>
+    </Container>
+  </div>
+)

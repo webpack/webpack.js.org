@@ -1,10 +1,10 @@
-// Styling for the Banner component
+// Styling for the Navigation component
 
 @import 'utilities/scss/partials/colors';
 @import 'utilities/scss/partials/screens';
 @import 'utilities/scss/partials/functions';
 
-.banner {
+.navigation {
     min-width:map-get($screens, desktop);
     background:map-get($colors, mine-shaft);
     transition:background 250ms;
@@ -35,9 +35,9 @@
         }
     }
 
-    &.-light { 
-        background: transparent; 
+    &.-light {
+        background: transparent;
 
-        .banner-nav-link:hover { color:map-get($colors, mine-shaft); }
+        .navigation-nav-link:hover { color:map-get($colors, mine-shaft); }
     }
 }
