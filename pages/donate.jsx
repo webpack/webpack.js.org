@@ -7,4 +7,4 @@ const Donate = () => (
 )
 Donate.description = 'XXX: donate description goes here';
 
-export default Donate
+module.exports = Donate

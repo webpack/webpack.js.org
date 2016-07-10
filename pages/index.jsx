@@ -7,4 +7,4 @@ const Index = () => (
 )
 Index.description = 'XXX: site description goes here';
 
-export default Index
+module.exports = Index

@@ -7,4 +7,4 @@ const Contribute = () => (
 )
 Contribute.description = 'XXX: contribute description goes here';
 
-export default Contribute
+module.exports = Contribute

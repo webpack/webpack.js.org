@@ -7,4 +7,4 @@ const Analyze = () => (
 )
 Analyze.description = 'XXX: analyze description goes here';
 
-export default Analyze
+module.exports = Analyze
