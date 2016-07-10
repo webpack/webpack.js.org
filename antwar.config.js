@@ -1,5 +1,7 @@
 var path = require('path');
 var prevnextPlugin = require('antwar-prevnext-plugin');
+var markdown = require('./src/utils/markdown');
+var highlight = require('./src/utils/highlight');
 
 module.exports = {
   webpack: {
@@ -87,7 +89,49 @@ module.exports = {
         return require.context('./src/content', false, /^\.\/.*\.jsx$/);
       }
     },
-    'how-to': require('./src/content/how-to'),
-    using: require('./src/content/using')
+    'how-to': section(
+      'How to',
+      require.context(
+        'json!yaml-frontmatter!./src/content/how-to',
+        false,
+        /^\.\/.*\.md$/
+      )
+    ),
+    using: section(
+      'Using',
+      require.context(
+        'json!yaml-frontmatter!./src/content/using',
+        false,
+        /^\.\/.*\.md$/
+      )
+    )
   }
+}
+
+function section(title, content) {
+  return {
+    title: title,
+    path: function() {
+      return content;
+    },
+    processPage: {
+      url: function(o) {
+        return o.sectionName + '/' + o.fileName.split('.')[0]
+      },
+      content: function(o) {
+        var content = o.file.__content.split('\n').slice(1).join('\n')
+
+        return markdown().process(content, highlight)
+      }
+    },
+    layouts: {
+      index: function() {
+        return require('./src/layouts/SectionIndex.jsx').default
+      },
+      page: function() {
+        return require('./src/layouts/SectionPage.jsx').default
+      }
+    },
+    redirects: {} // <from>: <to>
+  };
 }
