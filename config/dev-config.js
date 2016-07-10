@@ -20,7 +20,7 @@ export default {
     },
 
     eslint: {
-        configFile: Path.resolve('./.eslintrc.json')
+        configFile: Path.resolve('./.eslintrc')
     },
 
     sassLoader: {
