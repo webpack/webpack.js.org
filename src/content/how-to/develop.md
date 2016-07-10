@@ -1,5 +1,5 @@
 ---
-title: How to Use Develop Using Webpack?
+title: How to Develop?
 ---
 > devtool
 > output.pathinfo
