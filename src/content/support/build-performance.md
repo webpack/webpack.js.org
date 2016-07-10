@@ -1,3 +1,6 @@
+---
+title: Build Performance
+---
 > incremental builds
 > profile
 > analyse tool
@@ -7,5 +10,5 @@
 > resolving
 > DllPlugin
 
-> see also [[devepment tools]]
+> see also [[development tools]]
 > see also [[resolving]]
