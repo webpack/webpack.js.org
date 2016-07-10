@@ -89,6 +89,14 @@ module.exports = {
         return require.context('./src/content', false, /^\.\/.*\.jsx$/);
       }
     },
+    concepts: section(
+      'Concepts',
+      require.context(
+        'json!yaml-frontmatter!./src/content/concepts',
+        false,
+        /^\.\/.*\.md$/
+      )
+    ),
     'how-to': section(
       'How to',
       require.context(

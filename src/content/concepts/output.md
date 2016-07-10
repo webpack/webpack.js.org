@@ -1,5 +1,5 @@
 ---
-title: Using Output
+title: Output
 ---
 > output.path
 > output.filename

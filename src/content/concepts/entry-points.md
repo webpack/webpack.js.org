@@ -1,5 +1,5 @@
 ---
-title: Using Entry Points
+title: Entry Points
 ---
 > single entry
 > array entry

@@ -1,4 +1,4 @@
 ---
-title: Using Plugins
+title: Plugins
 ---
 > plugins configuration option
