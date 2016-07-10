@@ -6,12 +6,6 @@ var highlight = require('./utilities/highlight');
 module.exports = {
   webpack: {
     common: {
-      // XXX: needed?
-      /*sassLoader: {
-        includePaths: [
-          path.resolve('./src')
-        ]
-      },*/
       resolve: {
         extensions: ['', '.js', 'jsx', '.scss'],
         alias: {
