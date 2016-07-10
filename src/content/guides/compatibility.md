@@ -1,3 +1,6 @@
+---
+title: Compatibility
+---
 > require.main
 > require.cache
 > module.loaded

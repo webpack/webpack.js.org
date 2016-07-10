@@ -1,3 +1,6 @@
+---
+title: Library and Externals
+---
 > library option
 > externals option
 

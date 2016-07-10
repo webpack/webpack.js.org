@@ -35,13 +35,17 @@
     "css-loader": "^0.23.1",
     "eslint": "3.0.1",
     "eslint-loader": "^1.4.1",
+    "json-loader": "^0.5.4",
     "marked": "^0.3.5",
     "modularscale-sass": "^2.1.1",
     "moment": "^2.14.1",
     "node-sass": "^3.8.0",
+    "prism-languages": "^0.3.1",
+    "prismjs": "^1.5.1",
     "sass-loader": "^4.0.0",
     "sitemap-static": "^0.3.1",
-    "style-loader": "^0.13.1"
+    "style-loader": "^0.13.1",
+    "yaml-frontmatter-loader": "0.0.3"
   },
   "dependencies": {
     "react": "^15.2.1",

@@ -1,3 +1,6 @@
+---
+title: Output
+---
 > output.path
 > output.filename
 > output.publicPath
