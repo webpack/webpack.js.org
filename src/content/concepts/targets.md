@@ -1,5 +1,5 @@
 ---
-title: How to Use Targets?
+title: Targets
 ---
 > webworker
 > node
