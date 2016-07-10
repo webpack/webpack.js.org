@@ -18,10 +18,10 @@ module.exports = {
   },
   layouts: {
     index: function() {
-      return require('../../layouts/UsageIndex.jsx').default
+      return require('../../layouts/SectionIndex.jsx').default
     },
     page: function() {
-      return require('../../layouts/UsagePage.jsx').default
+      return require('../../layouts/SectionPage.jsx').default
     }
   },
   redirects: {} // <from>: <to>
