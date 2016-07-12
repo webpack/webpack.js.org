@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "antwar": "^0.6.0-beta3",
+    "antwar-cli": "^0.6.5",
     "antwar-helpers": "^0.2.1",
     "antwar-prevnext-plugin": "^0.3.0",
     "babel-eslint": "^6.1.2",
