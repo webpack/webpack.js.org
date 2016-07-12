@@ -35,7 +35,6 @@ module.exports = {
       return {
         module: {
           loaders: [
-            //{ test: /\.js$/, exclude: /node_modules/, loaders: ['babel', 'eslint'] },
             {
               test: /\.scss$/,
               loaders: ['style', 'css', 'sass']

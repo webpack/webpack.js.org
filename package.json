@@ -31,8 +31,6 @@
     "antwar-cli": "^0.6.5",
     "antwar-helpers": "^0.2.1",
     "antwar-prevnext-plugin": "^0.3.0",
-    "babel-eslint": "^6.1.2",
-    "babel-loader": "^6.2.4",
     "css-loader": "^0.23.1",
     "eslint": "3.0.1",
     "eslint-loader": "^1.4.1",
