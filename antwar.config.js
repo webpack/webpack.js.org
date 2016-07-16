@@ -75,11 +75,16 @@ module.exports = {
     require('react-ghfork/gh-fork-ribbon.css');
   },
   paths: {
-    '/': {
-      path: function() {
-        return require.context('./content', false, /^\.\/.*\.jsx$/);
+    '/': section(
+      'Index',
+      function() {
+        return require.context(
+          'json!yaml-frontmatter!./content',
+          false,
+          /^\.\/.*\.md$/
+        );
       }
-    },
+    ),
     concepts: section(
       'Concepts',
       function() {

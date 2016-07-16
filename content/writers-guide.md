@@ -1,7 +1,6 @@
-# Writers Guide
-
-XXX
-
+---
+title: Writers Guide
+---
 ## Formatting
 
 > This is a blockquote.
