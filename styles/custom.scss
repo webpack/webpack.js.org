@@ -14,3 +14,14 @@ body {
   max-width: 800px;
   margin: 0 auto;
 }
+
+.previous-page, .next-page {
+  top: calc(50%);
+  position: fixed;
+}
+.previous-page {
+  left: 1em;
+}
+.next-page {
+  right: 1em;
+}
