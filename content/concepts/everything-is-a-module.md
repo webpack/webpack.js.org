@@ -6,6 +6,4 @@ title: Everything is a Module
 
 > module tree
 
-T> static build and restrictions
-
-W> This is a warning.
+> static build and restrictions
