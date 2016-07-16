@@ -1,5 +1,5 @@
 ---
-title: Writers Guide
+title: Writer's Guide
 ---
 ## Formatting
 
