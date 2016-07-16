@@ -29,7 +29,7 @@
   "devDependencies": {
     "antwar": "^0.6.0-beta4",
     "antwar-cli": "^0.6.5",
-    "antwar-helpers": "^0.2.1",
+    "antwar-helpers": "^0.2.2",
     "antwar-prevnext-plugin": "^0.3.0",
     "css-loader": "^0.23.1",
     "eslint": "3.0.1",
