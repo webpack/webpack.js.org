@@ -67,7 +67,6 @@ module.exports = {
     return require('./layouts/Body.jsx')
   },
   style: function() {
-    require('./styles/reset.scss');
     require('./styles/custom.scss');
     require('./styles/prism.css');
     require('./styles/fontello.css');
