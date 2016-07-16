@@ -67,10 +67,13 @@ module.exports = {
     return require('./layouts/Body.jsx')
   },
   style: function() {
-    require('react-ghfork/gh-fork-ribbon.css');
+    require('./styles/reset.scss');
+    require('./styles/custom.scss');
     require('./styles/prism.css');
-    require('styles/reset.scss');
-    require('styles/custom.scss');
+    require('./styles/fontello.css');
+    require('./styles/fontello-codes.css');
+    require('./styles/fontello-embedded.css');
+    require('react-ghfork/gh-fork-ribbon.css');
   },
   paths: {
     '/': {
