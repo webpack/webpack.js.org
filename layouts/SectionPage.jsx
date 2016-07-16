@@ -1,6 +1,6 @@
 import React from 'react'
-
 import Disqus from 'antwar-helpers/components/Disqus'
+import PrevNextMini from 'antwar-helpers/components/PrevNextMini'
 
 export default React.createClass({
   displayName: 'SectionPage',
@@ -20,6 +20,8 @@ export default React.createClass({
             <div id="disqus_thread" />
           </div>
         </div>
+
+        <PrevNextMini page={page} />
 
         <Disqus shortname="webpack" />
       </div>
