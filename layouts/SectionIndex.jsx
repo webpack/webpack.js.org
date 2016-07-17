@@ -10,7 +10,7 @@ export default React.createClass({
       <div className="section-index__wrapper">
         <h1>{section.title}</h1>
 
-        <ul className="section-list">{section.pages().map((page, i) => {
+        <ul className="section-list">{section.pages().reverse().map((page, i) => {
           return (
             <li key={`section-list-item-${i}`}>
               <h3 className="section-list__heading">
