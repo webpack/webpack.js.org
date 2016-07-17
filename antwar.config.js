@@ -68,6 +68,7 @@ module.exports = {
   },
   style: function() {
     require('./styles/custom.scss');
+    require('./styles/min.css'); // http://mincss.com/
     require('./styles/prism.css');
     require('./styles/fontello.css');
     require('./styles/fontello-codes.css');

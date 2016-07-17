@@ -11,6 +11,20 @@ body {
     font:300 16px/1 'Open Sans', 'Century Gothic', sans-serif;
 }
 
+ol, ul, p, pre {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.header-anchor-select {
+  display: none;
+  margin-left: 0.25em;
+}
+.header:active .header-anchor-select,
+.header:hover .header-anchor-select {
+  display: inline;
+}
+
 .section-index__wrapper, .section-page__wrapper {
   padding : 2em;
   max-width: 800px;

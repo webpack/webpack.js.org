@@ -15,7 +15,7 @@ export default React.createClass({
       <div className="section-page__wrapper">
         <h1 className="section__heading">{page.title}</h1>
 
-        <a href={editUrl} target="_blank">Edit</a>
+        <a href={editUrl} className="btn btn-sm" target="_blank">Edit</a>
 
         <div className="section">
           <div className="section__content">
@@ -26,7 +26,7 @@ export default React.createClass({
         </div>
 
         <div className="toc-nav__wrapper">
-          <h4 className="toc-nav--header">{section.title}</h4>
+          <h2 className="toc-nav--header">{section.title}</h2>
           <Toc sectionPages={() => section.pages().reverse()} page={page} />
         </div>
 
