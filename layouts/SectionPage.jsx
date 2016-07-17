@@ -1,6 +1,7 @@
 import React from 'react'
 import Disqus from 'antwar-helpers/components/Disqus'
 import PrevNextMini from 'antwar-helpers/components/PrevNextMini'
+import Toc from 'antwar-helpers/components/Toc'
 
 export default React.createClass({
   displayName: 'SectionPage',
@@ -19,6 +20,11 @@ export default React.createClass({
 
             <div id="disqus_thread" />
           </div>
+        </div>
+
+        <div className="toc-nav__wrapper">
+          <h4 className="toc-nav--header">{section.title}</h4>
+          <Toc sectionPages={() => section.pages().reverse()} page={page} />
         </div>
 
         <PrevNextMini page={page} />
