@@ -75,8 +75,7 @@ module.exports = {
     require('react-ghfork/gh-fork-ribbon.css');
   },
   paths: {
-    '/': section(
-      'Index',
+    '/': root(
       function() {
         return require.context(
           'json!yaml-frontmatter!./content',
@@ -116,6 +115,31 @@ module.exports = {
       }
     )
   }
+}
+
+function root(contentCb) {
+  return {
+    title: 'Webpack',
+    path: function() {
+      return contentCb();
+    },
+    processPage: {
+      url: function(o) {
+        return o.sectionName + '/' + o.fileName.split('.')[0]
+      },
+      content: function(o) {
+        var content = o.file.__content.split('\n').slice(1).join('\n')
+
+        return markdown().process(content, highlight)
+      }
+    },
+    layouts: {
+      page: function() {
+        return require('./layouts/RootPage.jsx').default
+      }
+    },
+    redirects: {} // <from>: <to>
+  };
 }
 
 function section(title, contentCb) {
