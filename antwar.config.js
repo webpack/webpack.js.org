@@ -4,22 +4,70 @@ var markdown = require('./utilities/markdown');
 var highlight = require('./utilities/highlight');
 
 module.exports = {
+  // TODO: push to antwar.webpack.js or so. easier to handle ExtractTextPlugin etc.
   webpack: {
-    common: {
-      resolve: {
-        extensions: ['', '.js', 'jsx', '.scss'],
-        alias: {
-          Components: path.resolve('./components'),
-          Utilities: path.resolve('./utilities')
+    common: function(options) {
+      var includes = options.includes;
+
+      return {
+        resolve: {
+          extensions: ['', '.js', 'jsx', '.scss'],
+          alias: {
+            Components: path.resolve('./components'),
+            Utilities: path.resolve('./utilities')
+          }
+        },
+        module: {
+          loaders: [
+            {
+              test: /\.jsx?$/,
+              loader: 'babel',
+              query: {
+                cacheDirectory: true,
+                compact: true,
+                presets: [
+                  require.resolve('babel-preset-es2015'),
+                  require.resolve('babel-preset-react')
+                ]
+              },
+              include: includes.concat([
+                path.dirname(require.resolve('antwar-helpers/components')),
+                path.dirname(require.resolve('antwar-helpers/layouts')),
+                path.join(__dirname, 'components'),
+                path.join(__dirname, 'layouts')
+              ])
+            },
+            // This is a weird one. Acorn dep?
+            {
+              test: /\.json$/,
+              loader: 'json',
+              include: [
+                require.resolve('globals/globals.json'),
+                require.resolve('regexpu-core/data/iu-mappings.json')
+              ]
+            }
+          ]
         }
-      }
+      };
     },
     build: function(plugins) {
       var ExtractTextPlugin = plugins.ExtractTextPlugin;
 
       return {
+        plugins: [
+          new ExtractTextPlugin('[name].css', {
+            allChunks: true
+          })
+        ],
         module: {
           loaders: [
+            {
+              test: /\.css$/,
+              loader: ExtractTextPlugin.extract(
+                'style',
+                'css'
+              )
+            },
             {
               test: /\.scss$/,
               loader: ExtractTextPlugin.extract(
@@ -36,8 +84,19 @@ module.exports = {
         module: {
           loaders: [
             {
+              test: /\.css$/,
+              loaders: ['style', 'css'],
+              include: [
+                require.resolve('react-ghfork/gh-fork-ribbon.css'),
+                path.join(__dirname, 'styles')
+              ]
+            },
+            {
               test: /\.scss$/,
-              loaders: ['style', 'css', 'sass']
+              loaders: ['style', 'css', 'sass'],
+              include: [
+                path.join(__dirname, 'styles')
+              ]
             }
           ]
         }
