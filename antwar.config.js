@@ -3,6 +3,13 @@ var prevnextPlugin = require('antwar-prevnext-plugin');
 var markdown = require('./utilities/markdown');
 var highlight = require('./utilities/highlight');
 
+// TODO: push to separate webpack config file
+var CSS_PATHS = [
+  require.resolve('normalize.css/normalize.css'),
+  require.resolve('react-ghfork/gh-fork-ribbon.css'),
+  path.join(__dirname, 'styles')
+];
+
 module.exports = {
   // TODO: push to antwar.webpack.js or so. easier to handle ExtractTextPlugin etc.
   webpack: {
@@ -66,7 +73,8 @@ module.exports = {
               loader: ExtractTextPlugin.extract(
                 'style',
                 'css'
-              )
+              ),
+              include: CSS_PATHS
             },
             {
               test: /\.scss$/,
@@ -86,10 +94,7 @@ module.exports = {
             {
               test: /\.css$/,
               loaders: ['style', 'css'],
-              include: [
-                require.resolve('react-ghfork/gh-fork-ribbon.css'),
-                path.join(__dirname, 'styles')
-              ]
+              include: CSS_PATHS
             },
             {
               test: /\.scss$/,
@@ -126,8 +131,9 @@ module.exports = {
     return require('./layouts/Body.jsx')
   },
   style: function() {
+    require('./node_modules/normalize.css/normalize.css');
     require('./styles/custom.scss');
-    require('./styles/min.css'); // http://mincss.com/
+    require('./styles/min.css'); // http://mincss.com/. @Greg, drop this?
     require('./styles/prism.css');
     require('./styles/fontello.css');
     require('./styles/fontello-codes.css');
