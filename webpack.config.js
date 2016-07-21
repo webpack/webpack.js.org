@@ -40,15 +40,6 @@ function commonConfig(includes) {
             path.join(__dirname, 'layouts')
           ])
         },
-        // This is a weird one. Acorn dep?
-        {
-          test: /\.json$/,
-          loader: 'json',
-          include: [
-            require.resolve('globals/globals.json'),
-            require.resolve('regexpu-core/data/iu-mappings.json')
-          ]
-        },
         {
           test: /\.woff$/,
           loaders: ['url?prefix=font/&limit=5000&mimetype=application/font-woff']
