@@ -33,14 +33,6 @@ function commonConfig(includes) {
         {
           test: /\.jsx?$/,
           loader: 'babel',
-          query: {
-            cacheDirectory: true,
-            compact: true,
-            presets: [
-              require.resolve('babel-preset-es2015'),
-              require.resolve('babel-preset-react')
-            ]
-          },
           include: includes.concat([
             path.dirname(require.resolve('antwar-helpers/components')),
             path.dirname(require.resolve('antwar-helpers/layouts')),
