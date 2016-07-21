@@ -49,14 +49,6 @@ const Nav = (props) => (
     {
       title: 'API',
       url: '/api'
-    },
-    {
-      title: 'Analyze',
-      url: '/analyze'
-    },
-    {
-      title: 'Donate',
-      url: '/donate'
     }
   ]} />
 )

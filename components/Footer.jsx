@@ -1,20 +1,17 @@
-// Import Dependencies
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router';
 
-// Import Components
-import { Link } from 'react-router'
-import Icon from './Icon'
-import Container from './Container'
+import Icon from './Icon';
+import Container from './Container';
 
-// Create the "Footer" component
-let Footer = props => {
+export default props => {
     return (
         <footer className="footer">
             <Container className="footer-inner">
                 <section className="footer-inner-left">
-                    <Link className="footer-inner-link" to={{ pathname: '/license' }}>License</Link>
-                    <a className="footer-inner-link" href="https://github.com/webpack/webpack/graphs/contributors">Contributors</a>
-                    <a className="footer-inner-link" href="https://github.com/webpack/webpack/issues">Issues</a>
+                    <Link className="footer-inner-link" to="get-started">Get Started</Link>
+                    <Link className="footer-inner-link" to="analyze">Analyze</Link>
+                    <Link className="footer-inner-link" to="contribute">Contribute</Link>
                 </section>
 
                 <section className="footer-inner-middle">
@@ -24,14 +21,10 @@ let Footer = props => {
                 </section>
 
                 <section className="footer-inner-right">
-                    <Link className="footer-inner-link" to={{ pathname: '/about' }}>About</Link>
-                    <Link className="footer-inner-link" to={{ pathname: '/resources' }}>Resources</Link>
-                    <Link className="footer-inner-link" to={{ pathname: '/donate' }}>Donate</Link>
+                    <Link className="footer-inner-link" to="changelog">Changelog</Link>
+                    <Link className="footer-inner-link" to="license">License</Link>
                 </section>
             </Container>
         </footer>
     )
 }
-
-// Export it
-export default Footer
