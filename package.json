@@ -27,8 +27,8 @@
     "sitemap": "cd build && sitemap-static --prefix=http://webpack.io.github.io/webpack.io/ > sitemap.xml"
   },
   "devDependencies": {
-    "antwar": "^0.7.0-beta1",
-    "antwar-cli": "^0.6.5",
+    "antwar": "^0.7.0",
+    "antwar-cli": "^0.6.6",
     "antwar-helpers": "^0.3.0",
     "antwar-prevnext-plugin": "^0.3.0",
     "babel-core": "^6.10.4",
@@ -38,6 +38,7 @@
     "css-loader": "^0.23.1",
     "eslint": "3.0.1",
     "eslint-loader": "^1.4.1",
+    "file-loader": "^0.9.0",
     "json-loader": "^0.5.4",
     "markdown-loader": "^0.1.7",
     "marked": "^0.3.5",
@@ -47,9 +48,12 @@
     "normalize.css": "^4.2.0",
     "prism-languages": "^0.3.1",
     "prismjs": "^1.5.1",
+    "raw-loader": "^0.5.1",
     "sass-loader": "^4.0.0",
     "sitemap-static": "^0.3.1",
     "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack-merge": "^0.14.0",
     "yaml-frontmatter-loader": "0.0.3"
   },
   "dependencies": {
