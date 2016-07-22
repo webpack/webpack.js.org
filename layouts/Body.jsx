@@ -40,15 +40,15 @@ const Nav = (props) => (
     },
     {
       title: 'Concepts',
-      url: '/concepts'
+      url: 'concepts'
     },
     {
       title: 'How to',
-      url: '/how-to'
+      url: 'how-to'
     },
     {
       title: 'API',
-      url: '/api'
+      url: 'api'
     }
   ]} />
 )
