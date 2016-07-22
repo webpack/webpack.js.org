@@ -1,10 +1,6 @@
-// Import Dependencies
 import React, { Component } from 'react'
-
-// Import Components
 import Icon from './Icon'
 
-// Export the "Logo" component
 export default class Logo extends Component {
     constructor(props) {
         super(props)
