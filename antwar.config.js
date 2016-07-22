@@ -120,9 +120,7 @@ function processPage() {
       return o.sectionName + '/' + o.fileName.split('.')[0]
     },
     content: function(o) {
-      var content = o.file.__content.split('\n').slice(1).join('\n')
-
-      return markdown().process(content, highlight)
+      return markdown().process(o.file.__content, highlight)
     }
   };
 }
