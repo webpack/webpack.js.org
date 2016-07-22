@@ -6,9 +6,9 @@
     </url>    <url>
         <loc>http://webpack.github.io/webpack.io/api/index.html</loc>
     </url>    <url>
-        <loc>http://webpack.github.io/webpack.io/changelog/index.html</loc>
-    </url>    <url>
         <loc>http://webpack.github.io/webpack.io/concepts/index.html</loc>
+    </url>    <url>
+        <loc>http://webpack.github.io/webpack.io/changelog/index.html</loc>
     </url>    <url>
         <loc>http://webpack.github.io/webpack.io/contribute/index.html</loc>
     </url>    <url>
@@ -24,9 +24,9 @@
     </url>    <url>
         <loc>http://webpack.github.io/webpack.io/api/configuration/index.html</loc>
     </url>    <url>
-        <loc>http://webpack.github.io/webpack.io/api/loaders/index.html</loc>
-    </url>    <url>
         <loc>http://webpack.github.io/webpack.io/api/node/index.html</loc>
+    </url>    <url>
+        <loc>http://webpack.github.io/webpack.io/api/loaders/index.html</loc>
     </url>    <url>
         <loc>http://webpack.github.io/webpack.io/api/plugins/index.html</loc>
     </url>    <url>
@@ -50,9 +50,9 @@
     </url>    <url>
         <loc>http://webpack.github.io/webpack.io/how-to/cache/index.html</loc>
     </url>    <url>
-        <loc>http://webpack.github.io/webpack.io/how-to/contribute/index.html</loc>
-    </url>    <url>
         <loc>http://webpack.github.io/webpack.io/how-to/develop/index.html</loc>
+    </url>    <url>
+        <loc>http://webpack.github.io/webpack.io/how-to/contribute/index.html</loc>
     </url>    <url>
         <loc>http://webpack.github.io/webpack.io/how-to/generate-production-build/index.html</loc>
     </url>    <url>
