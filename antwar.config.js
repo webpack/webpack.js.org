@@ -5,7 +5,7 @@ var highlight = require('./utilities/highlight');
 
 module.exports = {
   //assets: [] // custom assets to copy into the build
-  sitePrefix: 'http://webpack.github.io/webpack.io',
+  sitePrefix: '//webpack.github.io/webpack.io',
   output: 'build',
   title: 'webpack',
   keywords: ['webpack', 'javascript', 'web development', 'programming'],
