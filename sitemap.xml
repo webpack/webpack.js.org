@@ -10,9 +10,9 @@
     </url>    <url>
         <loc>http://webpack.github.io/webpack.io/concepts/index.html</loc>
     </url>    <url>
-        <loc>http://webpack.github.io/webpack.io/contribute/index.html</loc>
-    </url>    <url>
         <loc>http://webpack.github.io/webpack.io/get-started/index.html</loc>
+    </url>    <url>
+        <loc>http://webpack.github.io/webpack.io/contribute/index.html</loc>
     </url>    <url>
         <loc>http://webpack.github.io/webpack.io/how-to/index.html</loc>
     </url>    <url>
@@ -42,9 +42,9 @@
     </url>    <url>
         <loc>http://webpack.github.io/webpack.io/concepts/plugins/index.html</loc>
     </url>    <url>
-        <loc>http://webpack.github.io/webpack.io/concepts/targets/index.html</loc>
-    </url>    <url>
         <loc>http://webpack.github.io/webpack.io/concepts/output/index.html</loc>
+    </url>    <url>
+        <loc>http://webpack.github.io/webpack.io/concepts/targets/index.html</loc>
     </url>    <url>
         <loc>http://webpack.github.io/webpack.io/how-to/author-libraries/index.html</loc>
     </url>    <url>
