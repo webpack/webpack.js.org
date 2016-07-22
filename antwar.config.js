@@ -82,25 +82,16 @@ module.exports = {
 function root(contentCb) {
   return {
     title: 'Webpack',
-    path: function() {
+    path: function() { // Load path content
       return contentCb();
     },
-    processPage: {
-      url: function(o) {
-        return o.sectionName + '/' + o.fileName.split('.')[0]
-      },
-      content: function(o) {
-        var content = o.file.__content.split('\n').slice(1).join('\n')
-
-        return markdown().process(content, highlight)
-      }
-    },
-    layouts: {
+    processPage: processPage(), // Process individual page (url, content)
+    layouts: { // Layouts (page/sectino)
       page: function() {
         return require('./layouts/RootPage.jsx').default
       }
     },
-    redirects: {} // <from>: <to>
+    redirects: {} // Redirects <from>: <to>
   };
 }
 
@@ -110,16 +101,7 @@ function section(title, contentCb) {
     path: function() {
       return contentCb();
     },
-    processPage: {
-      url: function(o) {
-        return o.sectionName + '/' + o.fileName.split('.')[0]
-      },
-      content: function(o) {
-        var content = o.file.__content.split('\n').slice(1).join('\n')
-
-        return markdown().process(content, highlight)
-      }
-    },
+    processPage: processPage(),
     layouts: {
       index: function() {
         return require('./layouts/SectionIndex.jsx').default
@@ -129,5 +111,18 @@ function section(title, contentCb) {
       }
     },
     redirects: {} // <from>: <to>
+  };
+}
+
+function processPage() {
+  return {
+    url: function(o) {
+      return o.sectionName + '/' + o.fileName.split('.')[0]
+    },
+    content: function(o) {
+      var content = o.file.__content.split('\n').slice(1).join('\n')
+
+      return markdown().process(content, highlight)
+    }
   };
 }
