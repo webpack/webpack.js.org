@@ -1,0 +1,67 @@
+<html lang="en"><head><title>webpack - Writer&#x27;s Guide</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"/><meta name="description" content="
+
+Process
+
+Check related issue if an article links to one.
+Hit edit and expand on the structure.
+PR …"/><meta name="keywords" content="webpack,javascript,web development,programming"/><link rel="icon" type="image/png" href="/assets/img/favicon.png"/><link rel="stylesheet" href="/assets/main.css"/></head><body><main role="main"><div class="navigation "><div class="container navigation-inner"><a class="navigation-logo" href="/"><span class="logo"><span class="icon -light" style="width:20px;margin-left:10px;padding-bottom:10px;"><figure class="icon-cube -outer" style="width:20px;height:20px;transform:translateX(-50%) 
+                        scale3d(1,1,1) 
+                        rotateX(0deg) 
+                        rotateY(0deg) 
+                        rotateZ(0deg);"><section class="icon-cube-face" style="transform:rotateX(0deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateX(-90deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateX(90deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateY(-90deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateY(90deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateY(180deg) translateZ(10px);"></section></figure><figure class="icon-cube -inner" style="width:20px;height:20px;transform:translateX(-50%) 
+                        scale3d(0.5,0.5,0.5) 
+                        rotateX(0deg) 
+                        rotateY(0deg) 
+                        rotateZ(0deg);"><section class="icon-cube-face" style="transform:rotateX(0deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateX(-90deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateX(90deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateY(-90deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateY(90deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateY(180deg) translateZ(10px);"></section></figure></span><span class="logo-text -light">Webpack</span></span></a><nav class="navigation-nav"><a class="navigation-nav-link" href="/">Home</a><a class="navigation-nav-link" href="/concepts">Concepts</a><a class="navigation-nav-link" href="/how-to">How to</a><a class="navigation-nav-link" href="/api">API</a></nav></div></div><div class="section-page__wrapper"><h1 class="section__heading">Writer&#x27;s Guide</h1><div class="section"><div class="section__content"><div><h2 class="header"><a class="header-anchor" href="#process" id="process"></a><span class="text">Process</span><a class="header-anchor-select" href="#process">#</a></h2>
+<ol>
+<li>Check related issue if an article links to one.</li>
+<li>Hit <code>edit</code> and expand on the structure.</li>
+<li>PR changes.</li>
+</ol>
+<h2 class="header"><a class="header-anchor" href="#article-structure" id="article-structure"></a><span class="text">Article Structure</span><a class="header-anchor-select" href="#article-structure">#</a></h2>
+<ol>
+<li>Brief introduction - a paragraph or two so you get the basic idea. Tell what you are going to tell.</li>
+<li>Main content - tell what you promised to tell.</li>
+<li>Conclusion - tell what you told and recap the main points.</li>
+<li>References - link to related articles and external resources so people can read and learn more about the topic.</li>
+</ol>
+<h2 class="header"><a class="header-anchor" href="#running-the-site" id="running-the-site"></a><span class="text">Running the Site</span><a class="header-anchor-select" href="#running-the-site">#</a></h2>
+<ol>
+<li><code>npm i</code></li>
+<li><code>npm start</code></li>
+<li><a href="http://localhost:3000">http://localhost:3000</a></li>
+</ol>
+<p>The site will update itself as you make changes.</p>
+<h2 class="header"><a class="header-anchor" href="#formatting" id="formatting"></a><span class="text">Formatting</span><a class="header-anchor-select" href="#formatting">#</a></h2>
+<h3 class="header"><a class="header-anchor" href="#code" id="code"></a><span class="text">Code</span><a class="header-anchor-select" href="#code">#</a></h3>
+<p><strong>Syntax: <code>javascript ...</code></strong></p>
+<pre><code class="lang-javascript"><span class="token keyword" >function</span> foo <span class="token punctuation" >(</span><span class="token punctuation" >)</span> <span class="token punctuation" >{</span>
+  <span class="token keyword" >return</span> <span class="token string" >'bar'</span><span class="token punctuation" >;</span>
+<span class="token punctuation" >}</span>
+
+<span class="token function" >foo</span><span class="token punctuation" >(</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+</code></pre>
+<h3 class="header"><a class="header-anchor" href="#quotes" id="quotes"></a><span class="text">Quotes</span><a class="header-anchor-select" href="#quotes">#</a></h3>
+<h4 class="header"><a class="header-anchor" href="#blockquote" id="blockquote"></a><span class="text">Blockquote</span><a class="header-anchor-select" href="#blockquote">#</a></h4>
+<p><strong>Syntax: ></strong></p>
+<blockquote>
+<p>This is a blockquote.</p>
+</blockquote>
+<h4 class="header"><a class="header-anchor" href="#tip" id="tip"></a><span class="text">Tip</span><a class="header-anchor-select" href="#tip">#</a></h4>
+<p><strong>Syntax: T></strong></p>
+<blockquote class="tip"><i class="icon-attention-circled"></i>This is a tip.</blockquote><p><strong>Syntax: W></strong></p>
+<blockquote class="warning"><i class="icon-attention"></i>This is a warning.</blockquote></div></div></div></div><footer class="footer"><div class="container footer-inner"><section class="footer-inner-left"><a class="footer-inner-link" href="get-started">Get Started</a><a class="footer-inner-link" href="analyze">Analyze</a><a class="footer-inner-link" href="contribute">Contribute</a></section><section class="footer-inner-middle"><a href="/"><span class="icon -dark" style="width:18px;margin-left:9px;padding-bottom:9px;"><figure class="icon-cube -outer" style="width:18px;height:18px;transform:translateX(-50%) 
+                        scale3d(1,1,1) 
+                        rotateX(0deg) 
+                        rotateY(0deg) 
+                        rotateZ(0deg);"><section class="icon-cube-face" style="transform:rotateX(0deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateX(-90deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateX(90deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateY(-90deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateY(90deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateY(180deg) translateZ(9px);"></section></figure><figure class="icon-cube -inner" style="width:18px;height:18px;transform:translateX(-50%) 
+                        scale3d(0.5,0.5,0.5) 
+                        rotateX(0deg) 
+                        rotateY(0deg) 
+                        rotateZ(0deg);"><section class="icon-cube-face" style="transform:rotateX(0deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateX(-90deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateX(90deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateY(-90deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateY(90deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateY(180deg) translateZ(9px);"></section></figure></span></a></section><section class="footer-inner-right"><a class="footer-inner-link" href="changelog">Changelog</a><a class="footer-inner-link" href="license">License</a></section></div></footer><div class="right ribbon github-fork-ribbon-wrapper"><div class="github-fork-ribbon" style="background-color:black;"><a href="https://github.com/webpack/webpack" target="_blank">Fork me on GitHub</a></div></div><div><div class="gitter-open-chat-button">Need help?</div><script type="text/javascript">
+            ((window.gitter = {}).chat = {}).options = {
+              showChatByDefault: false,
+              activationElement: '.gitter-open-chat-button',
+              room: 'webpack/webpack'
+            };
+          </script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async="" defer=""></script></div></main></body></html>
