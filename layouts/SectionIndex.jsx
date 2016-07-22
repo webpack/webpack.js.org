@@ -14,7 +14,7 @@ export default React.createClass({
           return (
             <li key={`section-list-item-${i}`}>
               <h3 className="section-list__heading">
-                <Link to={'/' + page.url}>{page.title}</Link>
+                <Link to={page.url}>{page.title}</Link>
               </h3>
 
               <p className="section-list__preview">{page.preview}</p>
