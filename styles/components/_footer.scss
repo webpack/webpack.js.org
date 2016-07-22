@@ -4,7 +4,7 @@
 
   &-inner {
     display:flex;
-    padding:0.5em 1em;
+    padding:0.3em 1em;
     box-sizing:border-box;
 
     &-middle { flex:0 0 auto; }
@@ -12,7 +12,7 @@
     &-left,
     &-right { 
       flex:1 1 auto; 
-      padding:0.4em 0;
+      padding:0.45em 0;
     }
 
     &-right { text-align:right; }
