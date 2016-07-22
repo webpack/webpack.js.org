@@ -27,7 +27,7 @@ export default React.createClass({
 
         <div className="toc-nav__wrapper">
           <h2 className="toc-nav--header">{section.title}</h2>
-          <Toc sectionPages={() => section.pages().reverse()} page={page} />
+          <Toc sectionPages={section.pages()} page={page} />
         </div>
 
         <PrevNextMini page={page} />
