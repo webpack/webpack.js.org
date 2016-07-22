@@ -24,7 +24,7 @@
     "start": "antwar -d",
     "build": "antwar -b && npm run sitemap",
     "deploy": "antwar -D",
-    "sitemap": "cd build && sitemap-static --prefix=http://webpack.io.github.io/webpack.io/ > sitemap.xml"
+    "sitemap": "cd build && sitemap-static --prefix=http://webpack.github.io/webpack.io/ > sitemap.xml"
   },
   "devDependencies": {
     "antwar": "^0.7.0",
