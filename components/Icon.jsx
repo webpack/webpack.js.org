@@ -29,7 +29,7 @@ export default class Icon extends Component {
                 style={{ 
                     width: `${depth}px`,
                     marginLeft: `${depth * 0.5}px`,
-                    paddingBottom: `${depth * 0.3}px`
+                    paddingBottom: `${depth * 0.35}px`
                 }}>
                 <figure className="icon-cube -outer"
                     style={{ 
