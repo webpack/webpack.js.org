@@ -11,10 +11,11 @@ export default React.createClass({
     const props = this.props
     const section = props.section
     const pathname = props.location.pathname
+    const home = props.config && props.config.home;
 
     return (
       <Body {...props}>
-        <Nav />
+        <Nav home={home} />
 
         {props.children}
 
@@ -36,7 +37,7 @@ const Nav = (props) => (
   <Navigation {...props} pages={[
     {
       title: 'Home',
-      url: '/',
+      url: props.home || '/',
     },
     {
       title: 'Concepts',
