@@ -26,32 +26,32 @@ export default class Icon extends Component {
         return (
             <span ref={ ref => this.container = ref }
                 className={ `icon -${theme}` }
-                style={{ 
+                style={{
                     width: `${depth}px`,
                     marginLeft: `${depth * 0.5}px`,
                     paddingBottom: `${depth * 0.5}px`
                 }}>
                 <figure className="icon-cube -outer"
-                    style={{ 
-                        width: `${depth}px`, 
+                    style={{
+                        width: `${depth}px`,
                         height: `${depth}px`,
-                        transform: `translateX(-50%) 
-                        scale3d(1,1,1) 
-                        rotateX(${x}deg) 
-                        rotateY(${y}deg) 
-                        rotateZ(${z}deg)` 
+                        transform: `translateX(-50%)
+                        scale3d(1,1,1)
+                        rotateX(${x}deg)
+                        rotateY(${y}deg)
+                        rotateZ(${z}deg)`
                     }}>
                     { this._getFaces() }
                 </figure>
-                <figure className="icon-cube -inner" 
-                    style={{ 
-                        width: `${depth}px`, 
+                <figure className="icon-cube -inner"
+                    style={{
+                        width: `${depth}px`,
                         height: `${depth}px`,
-                        transform: `translateX(-50%) 
-                        scale3d(0.5,0.5,0.5) 
-                        rotateX(${-x}deg) 
-                        rotateY(${-y}deg) 
-                        rotateZ(${-z}deg)` 
+                        transform: `translateX(-50%)
+                        scale3d(0.5,0.5,0.5)
+                        rotateX(${-x}deg)
+                        rotateY(${-y}deg)
+                        rotateZ(${-z}deg)`
                     }}>
                     { this._getFaces() }
                 </figure>
@@ -88,7 +88,7 @@ export default class Icon extends Component {
             'rotateY(180deg)'
         ].map((rotation, i) => {
             return (
-                <section key={ i } className="icon-cube-face" 
+                <section key={ i } className="icon-cube-face"
                     style={{ transform: `${rotation} translateZ(${ this.props.depth / 2 }px)` }} />
             )
         })
@@ -134,14 +134,14 @@ export default class Icon extends Component {
     }
 }
 
-// Check incoming props for issues 
+// Check incoming props for issues
 Icon.propTypes = {
     hover: PropTypes.bool,
     theme: PropTypes.string,
     depth: PropTypes.number
 }
 
-// Set up defaults 
+// Set up defaults
 Icon.defaultProps = {
     hover: false,
     theme: 'dark',
