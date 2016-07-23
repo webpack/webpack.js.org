@@ -1,0 +1,21 @@
+.logo {
+  display:inline-block;
+
+  .icon { vertical-align:top; }
+
+  &-text {
+    font-size:1.3em;
+    font-family:'Averia Sans Libre';
+    margin-left:0.25em;
+    line-height:1.4;
+    transition:color 250ms;
+
+    &.-dark { color:map-get($colors, dove-grey); }
+    &.-light { color:map-get($colors, concrete); }
+  }
+
+  &:hover .logo-text {
+    &.-dark { color:map-get($colors, mine-shaft); }
+    &.-light { color:map-get($colors, parchment); }
+  }
+}

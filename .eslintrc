@@ -1,0 +1,18 @@
+{
+    "extends": "eslint:recommended",
+
+    "parser": "babel-eslint",
+
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+
+    rules: {
+        "no-undef": 2,
+        "no-unreachable": 2,
+        "no-unused-vars": 0,
+        "no-console": 0
+    }
+}
