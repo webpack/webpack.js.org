@@ -36,10 +36,6 @@ export default React.createClass({
 const Nav = (props) => (
   <Navigation {...props} pages={[
     {
-      title: 'Home',
-      url: props.home || '/',
-    },
-    {
       title: 'Concepts',
       url: 'concepts'
     },
