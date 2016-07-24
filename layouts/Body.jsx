@@ -8,9 +8,9 @@ import Footer from '../components/Footer'
 export default React.createClass({
   displayName: 'Body',
   render() {
-    const props = this.props
-    const section = props.section
-    const pathname = props.location.pathname
+    const props = this.props;
+    const section = props.section;
+    const pathname = props.location.pathname;
     const home = props.config && props.config.home;
 
     return (
