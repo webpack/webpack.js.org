@@ -27,7 +27,7 @@ The site will update itself as you make changes.
 
 ### Code
 
-**Syntax: ```javascript ... ```**
+**Syntax: \`\`\`javascript ... \`\`\`**
 
 ```javascript
 function foo () {
