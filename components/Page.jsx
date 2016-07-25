@@ -4,14 +4,16 @@ import Container from './Container';
 import Sidebar from './Sidebar';
 
 export default props => {
-  let { section } = props;
+  let { section, page } = props,
+      edit = `https://github.com/webpack/webpack.io/tree/master/content/${page.url}.md`;
 
   return (
     <Container className="page">
       <Sidebar pages={ section.pages() } />
       <section className="page-content">
-        <h1>{ section.title }</h1>
-        <p>Filled in by a section index...</p>
+        <h1>{ page.title }</h1>
+        <a className="page-edit" href={ edit }>Edit this Page</a>
+        <div dangerouslySetInnerHTML={{ __html: page.content }} />
       </section>
     </Container>
   );
