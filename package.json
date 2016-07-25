@@ -24,6 +24,7 @@
     "start": "antwar -d",
     "build": "antwar -b && npm run sitemap",
     "deploy": "antwar -D",
+    "lint": "eslint . --ext .js --ext .jsx",
     "sitemap": "cd build && sitemap-static --prefix=http://webpack.github.io/webpack.io/ > sitemap.xml"
   },
   "devDependencies": {
