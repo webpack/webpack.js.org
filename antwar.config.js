@@ -105,7 +105,7 @@ function section(title, contentCb) {
     processPage: processPage(),
     layouts: {
       index: function() {
-        return require('./layouts/SectionIndex.jsx').default
+        return require('./components/Page.jsx').default
       },
       page: function() {
         return require('./layouts/SectionPage.jsx').default
