@@ -11,29 +11,4 @@ body {
   background:map-get($colors, concrete);
 }
 
-ol, ul, p, pre {
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-
-.header-anchor-select {
-  display: none;
-  margin-left: 0.25em;
-}
-
-.header:active .header-anchor-select,
-.header:hover .header-anchor-select {
-  display: inline;
-}
-
-.section-page {
-  padding: 1em;
-}
-
-.previous-page, .next-page {
-  top: calc(50%);
-  position: fixed;
-}
-
-.previous-page { left: 1em; }
-.next-page { right: 1em; }
+// TODO: Add base styling for markdown and such
