@@ -15,7 +15,7 @@ export default ({ home = '/', theme = '', pages }) => (
           key={ `link-${i}` }
           className="navigation-nav-link"
           activeClassName="-active"
-          to={ link.url }>
+          to={ `/${link.url}` }>
           { link.title }
         </Link>
       )) }</nav>
