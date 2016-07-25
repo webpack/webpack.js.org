@@ -16,7 +16,7 @@ module.exports = {
   pageTitle: function(config, pageTitle) {
     var siteName = config.name;
 
-    if(pageTitle === 'index') {
+    if (pageTitle === 'index') {
       return siteName;
     }
 
