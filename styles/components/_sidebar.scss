@@ -1,0 +1,15 @@
+.sidebar {
+  padding:1em;
+  background:transparentize(map-get($colors, white), 0.5);
+
+  &-link {
+    margin-bottom:0.5em;
+
+    &-text {
+      font-size:getFontSize(-1);
+      text-transform:uppercase;
+      text-decoration:none;
+      color:map-get($colors, dove-grey);
+    }
+  }
+}
