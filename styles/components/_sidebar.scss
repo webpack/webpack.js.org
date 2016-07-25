@@ -7,9 +7,13 @@
 
     &-text {
       font-size:getFontSize(-1);
+      font-weight:400;
       text-transform:uppercase;
       text-decoration:none;
-      color:map-get($colors, dove-grey);
+      color:map-get($colors, dusty-grey);
+      transition:color 250ms;
+
+      &:hover { color:map-get($colors, mine-shaft); }
     }
   }
 }

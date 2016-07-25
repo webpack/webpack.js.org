@@ -15,14 +15,14 @@
   &-nav {
     float:right;
     padding:0.55em 0;
-    margin-right:2.5em;
+    margin-right:3em;
 
     &-link {
       font-size:getFontSize(-2);
       margin-left:2.5em;
       text-transform:uppercase;
       text-decoration:none;
-      color:map-get($colors, dusty-grey);
+      color:map-get($colors, alto);
       transition:color 250ms;
 
       &:hover,
