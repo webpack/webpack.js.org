@@ -32,7 +32,7 @@ function commonConfig(includes) {
       loaders: [
         {
           test: /\.jsx?$/,
-          loader: 'babel',
+          loader: 'babel!eslint',
           include: includes.concat([
             path.dirname(require.resolve('antwar-helpers/components')),
             path.dirname(require.resolve('antwar-helpers/layouts')),
@@ -65,6 +65,10 @@ function commonConfig(includes) {
           loaders: ['raw']
         }
       ]
+    },
+    eslint: {
+      fix: true,
+      configFile: require.resolve('./.eslintrc')
     }
   };
 }
