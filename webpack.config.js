@@ -36,8 +36,7 @@ function commonConfig(includes) {
           include: includes.concat([
             path.dirname(require.resolve('antwar-helpers/components')),
             path.dirname(require.resolve('antwar-helpers/layouts')),
-            path.join(__dirname, 'components'),
-            path.join(__dirname, 'layouts')
+            path.join(__dirname, 'components')
           ])
         },
         {

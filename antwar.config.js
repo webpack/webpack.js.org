@@ -26,7 +26,7 @@ module.exports = {
     prevnextPlugin()
   ],
   layout: function() {
-    return require('./layouts/Body.jsx')
+    return require('./components/Body.jsx')
   },
   style: function() {
     require('./node_modules/normalize.css/normalize.css');
@@ -87,9 +87,9 @@ function root(contentCb) {
       return contentCb();
     },
     processPage: processPage(), // Process individual page (url, content)
-    layouts: { // Layouts (page/sectino)
+    layouts: { // Layouts (page/section)
       page: function() {
-        return require('./layouts/RootPage.jsx').default
+        return require('./components/Splash.jsx').default
       }
     },
     redirects: {} // Redirects <from>: <to>
@@ -108,7 +108,7 @@ function section(title, contentCb) {
         return require('./components/Page.jsx').default
       },
       page: function() {
-        return require('./layouts/SectionPage.jsx').default
+        return require('./components/SectionPage.jsx').default
       }
     },
     redirects: {} // <from>: <to>
