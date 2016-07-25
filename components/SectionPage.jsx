@@ -5,7 +5,7 @@ import Toc from 'antwar-helpers/components/Toc';
 import Container from './Container';
 
 export default props => {
-  let { section, page, config } = props,
+  let { section, page } = props,
       editUrl = `https://github.com/webpack/webpack.io/tree/master/content/${page.url}.md`;
 
   return (
