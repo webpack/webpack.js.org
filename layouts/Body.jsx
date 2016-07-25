@@ -11,7 +11,12 @@ export default React.createClass({
     const props = this.props;
     const section = props.section;
     const pathname = props.location.pathname;
-    const home = props.config && props.config.home;
+    let home = props.config && props.config.home;
+
+    // XXX: drop this once there is root domain
+    if (home && __DEV__) { // eslint-disable-line no-undef
+      home = '/';
+    }
 
     return (
       <Body {...props}>
