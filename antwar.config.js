@@ -108,7 +108,7 @@ function section(title, contentCb) {
         return require('./components/Page.jsx').default
       },
       page: function() {
-        return require('./components/SectionPage.jsx').default
+        return require('./components/Page.jsx').default
       }
     },
     redirects: {} // <from>: <to>
