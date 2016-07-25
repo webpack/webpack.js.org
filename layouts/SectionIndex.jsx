@@ -1,10 +1,10 @@
-import React from 'react'
-import {Link} from 'react-router'
+import React from 'react';
+import {Link} from 'react-router';
 
 export default React.createClass({
   displayName: 'SectionIndex',
   render() {
-    const section = this.props.section
+    const section = this.props.section;
 
     return (
       <div className="section-index__wrapper">
@@ -19,9 +19,9 @@ export default React.createClass({
 
               <p className="section-list__preview">{page.preview}</p>
             </li>
-          )
+          );
         })}</ul>
       </div>
-    )
+    );
   }
-})
+});

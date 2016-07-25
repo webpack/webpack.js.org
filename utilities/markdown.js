@@ -52,7 +52,7 @@ module.exports = function(section) {
       return marked.parser(tokens, markedDefaults);
     }
   };
-}
+};
 
 function parseQuotes(data) {
   var tokens = marked.lexer(data).map(function(t) {

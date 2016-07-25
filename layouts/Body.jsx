@@ -1,9 +1,9 @@
-import React from 'react'
-import Fork from 'react-ghfork'
-import Body from 'antwar-helpers/layouts/Body'
-import Gitter from 'antwar-helpers/components/Gitter'
-import Navigation from '../components/Navigation'
-import Footer from '../components/Footer'
+import React from 'react';
+import Fork from 'react-ghfork';
+import Body from 'antwar-helpers/layouts/Body';
+import Gitter from 'antwar-helpers/components/Gitter';
+import Navigation from '../components/Navigation';
+import Footer from '../components/Footer';
 
 export default React.createClass({
   displayName: 'Body',
@@ -29,9 +29,9 @@ export default React.createClass({
 
         <Gitter room={'webpack/webpack'} title="Need help?" />
       </Body>
-    )
+    );
   }
-})
+});
 
 const Nav = (props) => (
   <Navigation {...props} pages={[
@@ -48,4 +48,4 @@ const Nav = (props) => (
       url: 'api'
     }
   ]} />
-)
+);

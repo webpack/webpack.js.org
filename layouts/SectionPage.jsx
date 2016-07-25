@@ -1,15 +1,15 @@
-import React from 'react'
-import Disqus from 'antwar-helpers/components/Disqus'
-import PrevNextMini from 'antwar-helpers/components/PrevNextMini'
-import Toc from 'antwar-helpers/components/Toc'
+import React from 'react';
+import Disqus from 'antwar-helpers/components/Disqus';
+import PrevNextMini from 'antwar-helpers/components/PrevNextMini';
+import Toc from 'antwar-helpers/components/Toc';
 
 export default React.createClass({
   displayName: 'SectionPage',
   render() {
-    const section = this.props.section
-    const page = this.props.page
-    const config = this.props.config
-    const editUrl = `https://github.com/webpack/webpack.io/tree/master/content/${page.url}.md`
+    const section = this.props.section;
+    const page = this.props.page;
+    const config = this.props.config;
+    const editUrl = `https://github.com/webpack/webpack.io/tree/master/content/${page.url}.md`;
 
     return (
       <div className="section-page__wrapper">
@@ -34,6 +34,6 @@ export default React.createClass({
 
         <Disqus shortname="webpack" />
       </div>
-    )
+    );
   }
-})
+});

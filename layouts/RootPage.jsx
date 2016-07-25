@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 export default React.createClass({
   displayName: 'SectionPage',
   render() {
-    const page = this.props.page
+    const page = this.props.page;
 
     return (
       <div className="section-page__wrapper">
@@ -15,6 +15,6 @@ export default React.createClass({
           </div>
         </div>
       </div>
-    )
+    );
   }
-})
+});
