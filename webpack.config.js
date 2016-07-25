@@ -26,7 +26,7 @@ module.exports = function(env, options) {
 function commonConfig(includes) {
   return {
     resolve: {
-      extensions: ['', '.js', 'jsx', '.scss']
+      extensions: ['', '.js', '.jsx', '.scss']
     },
     module: {
       loaders: [
