@@ -1,7 +1,21 @@
 .page {
+  position:relative;
   display:flex;
 
   .sidebar { flex:0 0 20%; }
+
+  // TODO: at least some of this should go in base styling
+  &-edit {
+    position:absolute;
+    top:1em; right:1em;
+    font-size:getFontSize(-1);
+    text-transform:uppercase;
+    text-decoration:none;
+    color:map-get($colors, lynch);
+    transition:color 250ms;
+
+    &:hover { color:map-get($colors, chatham); }
+  }
 
   &-content { 
     flex:0 0 80%; 
