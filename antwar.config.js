@@ -30,7 +30,7 @@ module.exports = {
   },
   style: function() {
     require('./node_modules/normalize.css/normalize.css');
-    require('./styles/custom.scss');
+    require('./styles/index.scss');
     require('./styles/prism.css');
     require('./styles/fontello.css');
     require('./styles/fontello-codes.css');
