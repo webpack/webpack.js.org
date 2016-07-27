@@ -1,5 +1,6 @@
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var Autoprefixer = require('autoprefixer');
 var merge = require('webpack-merge');
 
 module.exports = function(env, options) {
@@ -68,6 +69,9 @@ function commonConfig(includes) {
     eslint: {
       fix: true,
       configFile: require.resolve('./.eslintrc')
+    },
+    postcss: function() {
+      return [ Autoprefixer ];
     }
   };
 }
@@ -83,7 +87,7 @@ function developmentConfig(stylePaths) {
         },
         {
           test: /\.scss$/,
-          loaders: ['style', 'css', 'sass'],
+          loaders: ['style', 'css', 'postcss', 'sass'],
           include: stylePaths
         }
       ]
@@ -112,7 +116,7 @@ function buildConfig(stylePaths) {
           test: /\.scss$/,
           loader: ExtractTextPlugin.extract(
             'style',
-            'css!sass'
+            'css!postcss!sass'
           ),
           include: stylePaths
         }
