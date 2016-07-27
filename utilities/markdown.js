@@ -59,6 +59,7 @@ function parseQuotes(data) {
     if(t.type === 'paragraph') {
       return parseCustomQuote(t, 'T>', 'tip') ||
         parseCustomQuote(t, 'W>', 'warning') ||
+        parseCustomQuote(t, '?>', 'todo') ||
         t;
     }
 
@@ -74,7 +75,18 @@ function parseCustomQuote(token, match, className) {
     var text = token.text;
 
     if(text.indexOf(match) === 0) {
-      var icon = className === 'tip' ? 'icon-attention-circled' : 'icon-attention';
+      var icon;
+      switch(className) {
+        case 'tip':
+          icon = 'icon-attention-circled';
+          break;
+        case 'warning':
+          icon = 'icon-attention';
+          break;
+        default:
+          icon = 'icon-right-open';
+          break;
+      }
 
       return {
         type: 'html',
