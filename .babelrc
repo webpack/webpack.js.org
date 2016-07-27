@@ -1,5 +1,4 @@
 {
-  "compact": true,
   "presets": [
     "es2015",
     "react"
