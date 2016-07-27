@@ -9,7 +9,7 @@ export default React.createClass({
     const section = this.props.section;
     const page = this.props.page;
     const config = this.props.config;
-    const editUrl = `https://github.com/webpack/webpack.io/tree/master/content/${page.url}.md`;
+    const editUrl = `https://github.com/webpack/webpack.io/edit/master/content/${page.url}.md`;
 
     return (
       <div className="section-page__wrapper">

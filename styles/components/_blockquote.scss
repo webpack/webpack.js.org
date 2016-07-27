@@ -39,4 +39,13 @@ blockquote {
     padding: 1em;
     margin-bottom: 1em;
   }
+
+  &.todo {
+    color: #696969;
+
+    font-size: medium;
+    background-color: #FFF5FB;
+    padding: 1em;
+    margin-bottom: 1em;
+  }
 }
