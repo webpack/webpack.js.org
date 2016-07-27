@@ -1,7 +1,7 @@
 import React from 'react';
 import Disqus from 'antwar-helpers/components/Disqus';
 import PrevNextMini from 'antwar-helpers/components/PrevNextMini';
-import Toc from 'antwar-helpers/components/Toc';
+import Toc from '../components/Toc';
 
 export default React.createClass({
   displayName: 'SectionPage',
