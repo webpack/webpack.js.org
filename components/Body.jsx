@@ -25,6 +25,11 @@ export default props => {
       { pathname } = location,
       { home = '/' } = config;
 
+  // XXX: drop this once there is root domain
+  if (home && __DEV__) { // eslint-disable-line no-undef
+    home = '/';
+  }
+
   return (
     <Body { ...props }>
       <Navigation home={ home } pages={ pages } />
