@@ -21,9 +21,7 @@
       font-size:getFontSize(-2);
       margin-left:2.5em;
       text-transform:uppercase;
-      text-decoration:none;
       color:map-get($colors, alto);
-      transition:color 250ms;
 
       &:hover,
       &.-active { color:map-get($colors, white); }
