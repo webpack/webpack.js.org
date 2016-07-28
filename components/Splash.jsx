@@ -9,15 +9,10 @@ export default props => {
       <div className="splash-visualization">
 
       </div>
-      
+
       <Container className="splash-content">
         <h1>{ page.title }</h1>
-
-        <div className="section">
-          <div className="section__content">
-            <div dangerouslySetInnerHTML={{ __html: page.content }} />
-          </div>
-        </div>
+        <div dangerouslySetInnerHTML={{ __html: page.content }} />
       </Container>
     </div>
   );
