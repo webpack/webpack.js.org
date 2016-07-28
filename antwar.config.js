@@ -26,17 +26,16 @@ module.exports = {
     prevnextPlugin()
   ],
   layout: function() {
-    return require('./layouts/Body.jsx')
+    return require('./components/Body.jsx')
   },
   style: function() {
     require('./node_modules/normalize.css/normalize.css');
-    require('./styles/min.css'); // http://mincss.com/. @Greg, drop this?
     require('./styles/prism.css');
     require('./styles/fontello.css');
     require('./styles/fontello-codes.css');
     require('./styles/fontello-embedded.css');
     require('react-ghfork/gh-fork-ribbon.css');
-    require('./styles/custom.scss');
+    require('./styles/index.scss');
   },
   paths: {
     '/': root(
@@ -88,9 +87,9 @@ function root(contentCb) {
       return contentCb();
     },
     processPage: processPage(), // Process individual page (url, content)
-    layouts: { // Layouts (page/sectino)
+    layouts: { // Layouts (page/section)
       page: function() {
-        return require('./layouts/RootPage.jsx').default
+        return require('./components/Splash.jsx').default
       }
     },
     redirects: {} // Redirects <from>: <to>
@@ -106,10 +105,10 @@ function section(title, contentCb) {
     processPage: processPage(),
     layouts: {
       index: function() {
-        return require('./layouts/SectionIndex.jsx').default
+        return require('./components/Page.jsx').default
       },
       page: function() {
-        return require('./layouts/SectionPage.jsx').default
+        return require('./components/Page.jsx').default
       }
     },
     redirects: {} // <from>: <to>
