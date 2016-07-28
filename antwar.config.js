@@ -30,12 +30,12 @@ module.exports = {
   },
   style: function() {
     require('./node_modules/normalize.css/normalize.css');
-    require('./styles/index.scss');
     require('./styles/prism.css');
     require('./styles/fontello.css');
     require('./styles/fontello-codes.css');
     require('./styles/fontello-embedded.css');
     require('react-ghfork/gh-fork-ribbon.css');
+    require('./styles/index.scss');
   },
   paths: {
     '/': root(
