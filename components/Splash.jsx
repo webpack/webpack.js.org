@@ -5,14 +5,20 @@ export default props => {
   let { page } = props;
 
   return (
-    <Container className="section-page">
-      <h1 className="section__heading">{ page.title }</h1>
+    <div className="splash">
+      <div className="splash-visualization">
 
-      <div className="section">
-        <div className="section__content">
-          <div dangerouslySetInnerHTML={{ __html: page.content }} />
-        </div>
       </div>
-    </Container>
+      
+      <Container className="splash-content">
+        <h1>{ page.title }</h1>
+
+        <div className="section">
+          <div className="section__content">
+            <div dangerouslySetInnerHTML={{ __html: page.content }} />
+          </div>
+        </div>
+      </Container>
+    </div>
   );
 };
