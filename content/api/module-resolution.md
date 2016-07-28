@@ -1,5 +1,5 @@
 ---
-title: How Module Resolution Works?
+title: Module Resolution
 ---
 > how webpack resolves requests
 > incl. resolving options
