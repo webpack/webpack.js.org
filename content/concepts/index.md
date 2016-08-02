@@ -3,7 +3,7 @@ title: Introduction
 ---
 ## Overview
 
-*webpack* is a _module_ _bundler_ for modern JavaScript applications.
+*webpack* is a _module bundler_ for modern JavaScript applications.
 
 ### What is a module?
 
@@ -43,7 +43,7 @@ The webpack community has built _loaders_ for a wide variety of popular language
 
 * [CoffeeScript](http://coffeescript.org)
 * [TypeScript](https://www.typescriptlang.org)
-* [Babel](https://babeljs.io)
+* [ESNext (Babel)](https://babeljs.io)
 * [Sass](http://sass-lang.com)
 * [Less](http://lesscss.org)
 * [Stylus](http://stylus-lang.com)
