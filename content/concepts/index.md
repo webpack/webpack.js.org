@@ -1,11 +1,4 @@
 ---
-<<<<<<< HEAD
-title: Concepts
----
-
-TODO
-
-=======
 title: Introduction
 ---
 ## Overview
@@ -61,9 +54,4 @@ For a full list, see [**the list of loaders**](https://webpack.github.io/docs/li
 
 ### Recap
 
-<<<<<<< HEAD
-[^1] webpack 1 requires a specific loader to convert ECMAScript2015 `import`, however this is possible out of the box via webpack 2
->>>>>>> 20df545... Renamed the file to index, as well as clean up a variety of notes.
-=======
 We are just starting to scratch the surface of webpack and its features, but we are equipped with a great grasp on terminology you will frequent throughout this guide. Its time to now dive into the [Core Concepts (Entry, Output, Loaders, Plugins)](./concepts/core-concepts)!
->>>>>>> 01a48bc... Cleaned up some style added tips for HTTP and added a recap for segue to next doc
