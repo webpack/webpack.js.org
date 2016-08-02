@@ -24,13 +24,23 @@
       color:map-get($colors, alto);
 
       &:hover,
-      &.-active { color:map-get($colors, white); }
+      &.-active { 
+        color:map-get($colors, white); 
+      }
     }
   }
 
-  &.-light {
+  &.-splash { 
+    position:absolute; 
+    width:100%;
+    top:0;
+    z-index:5;
     background: transparent;
 
-    .navigation-nav-link:hover { color:map-get($colors, mine-shaft); }
+    .navigation-nav-link {
+      color:map-get($colors, dusty-grey);
+
+      &:hover { color:map-get($colors, mine-shaft); }
+    }
   }
 }

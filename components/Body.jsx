@@ -32,7 +32,7 @@ export default props => {
 
   return (
     <Body { ...props }>
-      <Navigation home={ home } pages={ pages } />
+      <Navigation home={ home } pages={ pages } splash={ pathname === '/' } />
 
       { props.children }
 
