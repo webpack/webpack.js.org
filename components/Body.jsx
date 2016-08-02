@@ -16,8 +16,8 @@ const Body = ({ children }) => {
   return (
     <div>
       <Navigation home="/" pages={ pages } />
-        <Sidecar />
-        { children }
+      <Sidecar />
+      { children }
       <Footer />
 
       <GoogleAnalytics analyticsId="UA-46921629-2" />
