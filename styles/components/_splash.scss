@@ -1,5 +1,25 @@
 .splash {
+  &-viz {
+    display:flex;
+    height:100vh;
+    min-height:750px;
+
+    &-modules,
+    &-output { 
+      flex:0 0 40%; 
+    }
+
+    &-icon {
+      display:flex;
+      flex:1 1 auto;
+      align-items:center;
+      justify-content:center;
+    }
+  }
+
   &-content {
-    padding:1em;
+    background:map-get($colors, white);
+
+    &-inner { padding:1em; }
   }
 }
