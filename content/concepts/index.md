@@ -8,6 +8,7 @@ TODO
 =======
 title: Introduction
 ---
+## Overview
 
 *webpack* is a _module_ _bundler_ for modern JavaScript applications.
 
@@ -28,21 +29,24 @@ webpack builds on lessons learned from these systems and applies the concept of 
 In contrast to Node.js modules, webpack _modules_ can express their _dependencies_ in a variety of ways. A few examples are:
 
 * A JavaScript `require()` statement
-* An ECMAScript2015 `import` statement [^1]
+* An ECMAScript2015 `import` statement
 * An AMD `define` and `require` statement
 * An `@import` statement inside of a css/sass/less file.
 * An image url in a stylesheet or html file. 
 
+T> webpack 1 requires a specific loader to convert ECMAScript2015 `import`, however this is possible out of the box via webpack 2
+
 ### webpack, dependency graph, and bundles
 
-Any time one file depends on another (as seen above), webpack treats this as a _dependency_. This allows webpack to take non-code assets, such as images or web fonts, and also provide them as _dependencies_ for your application.
+Any time one file depends on another, webpack treats this as a _dependency_. This allows webpack to take non-code assets, such as images or web fonts, and also provide them as _dependencies_ for your application.
 
 When webpack processes your application, it starts from a list of modules defined on the command line or in its config file.
-Starting from these _entry points_, webpack recursively builds a _dependency graph_ that includes every module your application needs, then packages all of those modules into a small number of _bundles_ - often, just one - to be loaded by the browser.
-Bundling your application is especially powerful for HTTP/1.1 clients, as it minimizes the number of times your app has to wait while the browser starts a new request. For HTTP/2, you can also use Code Splitting and bundling through webpack for the [best optimization](https://medium.com/webpack/webpack-http-2-7083ec3f3ce6#.7y5d3hz59).
+Starting from these _entry points_, webpack recursively builds a _dependency graph_ that includes every module your application needs, then packages all of those modules into a small number of _bundles_ - often, just one - to be loaded by the browser. 
 
-webpack supports modules written in many languages and preprocessors, via _loaders_. _Loaders_ describe to webpack **how** to process non-javascript _modules_ and include these _dependencies_ into your _bundles_.
-The webpack community has built loaders for a wide variety of popular languages and language processors, including:
+T> Bundling your application is especially powerful for *HTTP/1.1* clients, as it minimizes the number of times your app has to wait while the browser starts a new request. For *HTTP/2*, you can also use Code Splitting and bundling through webpack for the [best optimization](https://medium.com/webpack/webpack-http-2-7083ec3f3ce6#.7y5d3hz59).
+
+webpack supports modules written in a variety of languages and preprocessors, via _loaders_. _Loaders_ describe to webpack **how** to process non-javascript _modules_ and include these _dependencies_ into your _bundles_.
+The webpack community has built _loaders_ for a wide variety of popular languages and language processors, including:
 
 * [CoffeeScript](http://coffeescript.org)
 * [TypeScript](https://www.typescriptlang.org)
@@ -51,8 +55,15 @@ The webpack community has built loaders for a wide variety of popular languages 
 * [Less](http://lesscss.org)
 * [Stylus](http://stylus-lang.com)
 
-And many others.
-For a full list, see **the documentation** (TODO: link to loader list or NPM), or **write your own** (TODO: link to loader tutorial).
+And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for **any stack**, while staying **unopinionated** about your development, testing, and production workflows. 
 
+For a full list, see [**the list of loaders**](https://webpack.github.io/docs/list-of-loaders.html) or [**write your own**](./api/loaders).
+
+### Recap
+
+<<<<<<< HEAD
 [^1] webpack 1 requires a specific loader to convert ECMAScript2015 `import`, however this is possible out of the box via webpack 2
 >>>>>>> 20df545... Renamed the file to index, as well as clean up a variety of notes.
+=======
+We are just starting to scratch the surface of webpack and its features, but we are equipped with a great grasp on terminology you will frequent throughout this guide. Its time to now dive into the [Core Concepts (Entry, Output, Loaders, Plugins)](./concepts/core-concepts)!
+>>>>>>> 01a48bc... Cleaned up some style added tips for HTTP and added a recap for segue to next doc
