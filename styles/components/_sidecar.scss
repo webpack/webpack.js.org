@@ -7,7 +7,7 @@
 
 .sidecar {
   position: fixed;
-  top:100px;
+  top:75px;
   right:0;
 
   &-item {
@@ -19,9 +19,16 @@
     text-align:center;
     background:#333;
     color:#fff;
+    opacity:0.9;
+    transition:all 250ms;
 
     &.-github { }
     &.-gitter { background:#ed1965; }
     &.-medium { background:#19aa6e; }
+
+    &:hover { 
+      opacity:1;
+      color:#fff;
+    }
   }  
 }
