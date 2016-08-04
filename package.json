@@ -31,7 +31,7 @@
   "devDependencies": {
     "antwar": "^0.7.3",
     "antwar-cli": "^0.6.6",
-    "antwar-helpers": "^0.7.4",
+    "antwar-helpers": "^0.8.0",
     "antwar-prevnext-plugin": "^0.4.0",
     "autoprefixer": "^6.3.7",
     "babel-core": "^6.10.4",
