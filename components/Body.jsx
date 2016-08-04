@@ -1,7 +1,5 @@
 import React from 'react';
-import Fork from 'react-ghfork';
 import Body from 'antwar-helpers/layouts/Body';
-import Gitter from 'antwar-helpers/components/Gitter';
 import Navigation from './Navigation';
 import Footer from './Footer';
 
@@ -37,14 +35,6 @@ export default props => {
       { props.children }
 
       <Footer />
-
-      <Fork className="right ribbon"
-        project="webpack/webpack"
-        text="Fork me on GitHub"
-        style={{ backgroundColor: 'black' }}
-        target="_blank" />
-
-      <Gitter room={ 'webpack/webpack' } title="Need help?" />
     </Body>
   );
 };
