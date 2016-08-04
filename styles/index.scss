@@ -40,11 +40,23 @@ a {
   text-decoration:none;
   transition:color 250ms;
 
-  &:hover { color:map-get($colors, chatham); }
+  &:hover { color:darken(map-get($colors, tussock), 15%); }
+
+  &.header-anchor-select {
+    margin-left:0.5em;
+  }
 }
 
-p, blockquote, ul, ol, dl, li, table, pre {
-  margin:16px 0;
+p, blockquote, table, pre {
+  margin:1em 0;
+}
+
+ul, ol, dl {
+  margin:0.5em 0 1em;
+}
+
+li {
+  margin:0.5em 0;
 }
 
 hr {
@@ -125,6 +137,10 @@ table {
 
 img {
   max-width: 100%;
+}
+
+b, strong {
+  font-weight:600;
 }
 
 code, tt {
