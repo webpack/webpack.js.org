@@ -4,18 +4,10 @@ import Navigation from './Navigation';
 import Footer from './Footer';
 
 const pages = [
-  {
-    title: 'Concepts',
-    url: 'concepts'
-  },
-  {
-    title: 'How to',
-    url: 'how-to'
-  },
-  {
-    title: 'API',
-    url: 'api'
-  }
+  { title: 'Concepts', url: 'concepts' },
+  { title: 'How to', url: 'how-to' },
+  { title: 'API', url: 'api' },
+  { title: 'Github', url: '//github.com/webpack/webpack.io' }
 ];
 
 export default props => {
