@@ -20,23 +20,6 @@ body {
   background:map-get($colors, concrete);
 }
 
-// Customize Gitter Link 
-// TODO: Consider moving to somewhere else
-.gitter-open-chat-button {
-  right:0;
-  bottom:200px;
-  padding:1em 2em;
-  border-radius:0.5em 0.5em 0 0;
-  transform-origin:right bottom;
-  transform:rotate(-90deg);
-  transition:background-color 250ms;
-}
-
-// Customize Github Fork Ribbon 
-.github-fork-ribbon-wrapper {
-  z-index:100;
-}
-
 h1 { font-size: getFontSize(4); }
 h2 { font-size: getFontSize(3); }
 h3 { font-size: getFontSize(2); }
