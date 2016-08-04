@@ -1,6 +1,7 @@
 import React from 'react';
 import Body from 'antwar-helpers/layouts/Body';
 import Navigation from './Navigation';
+import Sidecar from './Sidecar';
 import Footer from './Footer';
 
 const pages = [
@@ -23,9 +24,8 @@ export default props => {
   return (
     <Body { ...props }>
       <Navigation home={ home } pages={ pages } />
-
-      { props.children }
-
+        <Sidecar />
+        { props.children }
       <Footer />
     </Body>
   );
