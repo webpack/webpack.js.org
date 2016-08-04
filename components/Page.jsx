@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import Link from './Link';
 import Container from './Container';
 import Sidebar from './Sidebar';
 

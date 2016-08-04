@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import Link from './Link';
 import Icon from './Icon';
 import Container from './Container';
 
