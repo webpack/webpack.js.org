@@ -1,13 +1,12 @@
 /**
  * Styling
  *
- * This file contains or imports all styling for the site.
+ * This file contains the main styling for the site.
  * Markdown styling is based on https://gist.github.com/tuzz/3331384.
  * Component stylesheets are imported last so as to override anything specified here.
  *
  */
 
-@import "reset";
 @import "functions";
 @import "vars";
 

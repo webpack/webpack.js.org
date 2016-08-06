@@ -29,7 +29,7 @@ module.exports = {
     return require('./components/Body.jsx')
   },
   style: function() {
-    require('./node_modules/normalize.css/normalize.css');
+    require('./styles/reset.css');
     require('./styles/prism.css');
     require('./styles/fontello.css');
     require('./styles/index.scss');
