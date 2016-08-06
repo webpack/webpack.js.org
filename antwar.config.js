@@ -32,8 +32,6 @@ module.exports = {
     require('./node_modules/normalize.css/normalize.css');
     require('./styles/prism.css');
     require('./styles/fontello.css');
-    require('./styles/fontello-codes.css');
-    require('./styles/fontello-embedded.css');
     require('./styles/index.scss');
   },
   paths: {
