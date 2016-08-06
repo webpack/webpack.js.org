@@ -34,7 +34,6 @@ module.exports = {
     require('./styles/fontello.css');
     require('./styles/fontello-codes.css');
     require('./styles/fontello-embedded.css');
-    require('react-ghfork/gh-fork-ribbon.css');
     require('./styles/index.scss');
   },
   paths: {
