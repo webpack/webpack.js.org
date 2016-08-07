@@ -32,6 +32,7 @@ module.exports = {
     require('./styles/reset.css');
     require('./styles/prism.css');
     require('./styles/fontello.css');
+    require('./styles/icons.css');
     require('./styles/index.scss');
   },
   paths: {
