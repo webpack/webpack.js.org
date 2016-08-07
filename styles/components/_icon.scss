@@ -1,4 +1,4 @@
-.icon {
+.webpack-icon {
   position:relative;
   display:inline-block;
   transform-style:preserve-3d;
@@ -35,40 +35,40 @@
 }
 
 &.-dark {
-    .icon-cube.-outer .icon-cube-face:after {
+    .webpack-icon-cube.-outer .webpack-icon-cube-face:after {
       background:rgba(126, 169, 232, .5);
     }
 
-    .icon-cube.-inner .icon-cube-face:after {
+    .webpack-icon-cube.-inner .webpack-icon-cube-face:after {
       background:rgba(16, 58, 177, .4);
     }
 
     &:hover {
-      .icon-cube.-outer .icon-cube-face:after {
+      .webpack-icon-cube.-outer .webpack-icon-cube-face:after {
         background:transparentize(#333333, 0.8);
       }
 
-      .icon-cube.-inner .icon-cube-face:after {
+      .webpack-icon-cube.-inner .webpack-icon-cube-face:after {
         background:transparentize(#f39c12, 0.4);
       }
     }
   }
 
   &.-light {
-    .icon-cube.-outer .icon-cube-face:after {
+    .webpack-icon-cube.-outer .webpack-icon-cube-face:after {
       background:transparentize(map-get($colors, concrete), 0.8);
     }
 
-    .icon-cube.-inner .icon-cube-face:after {
+    .webpack-icon-cube.-inner .webpack-icon-cube-face:after {
       background:transparentize(map-get($colors, tussock), 0.4);
     }
 
     &:hover {
-      .icon-cube.-outer .icon-cube-face:after {
+      .webpack-icon-cube.-outer .webpack-icon-cube-face:after {
         background:transparentize(map-get($colors, white), 0.8);
       }
 
-      .icon-cube.-inner .icon-cube-face:after {
+      .webpack-icon-cube.-inner .webpack-icon-cube-face:after {
         background:transparentize(map-get($colors, lynch), 0.6);
       }
     }
