@@ -2,26 +2,59 @@
   position: fixed;
   top:75px;
   right:0;
+  z-index:100;
 
   &-item {
-    position: relative;
-    display: block;
-    width:2.5em;
-    height:2.5em;
-    line-height:2.5em;
-    text-align:center;
-    background:#333;
-    color:#fff;
-    opacity:0.9;
+    display:inline-block;
+    padding:0.75em;
+    float:right;
+    clear:both;
+    color:map-get($colors, alto);
     transition:all 250ms;
 
-    &.-github { }
-    &.-gitter { background:#ed1965; }
-    &.-medium { background:#19aa6e; }
-
-    &:hover { 
-      opacity:1;
-      color:#fff;
+    span {
+      display:block;
+      float:left;
+      font-size:getFontSize(-1);
+      width:0;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      transition:width 250ms;
     }
+
+    i { vertical-align:middle; }
+
+    &.-github { 
+      background:#444;
+
+      &:hover { 
+        background:#333; 
+
+        span { width:95px; }
+      }
+    }
+
+    &.-gitter { 
+      background:desaturate(#ed1965, 15%);
+
+      &:hover { 
+        background:#ed1965; 
+
+        span { width:125px; }
+      }
+    }
+
+    &.-medium { 
+      background:desaturate(#19aa6e, 15%); 
+
+      &:hover { 
+        background:#19aa6e; 
+
+        span { width:95px; }
+      }
+    }
+
+    &:hover { color:map-get($colors, white); }
   }  
 }
