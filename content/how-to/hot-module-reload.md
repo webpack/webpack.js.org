@@ -3,7 +3,7 @@ title: How to Configure Hot Module Replacement?
 ---
 Hot Module Replacement (HMR) exchanges, adds, or removes modules while an application is running without a page reload. HMR is particularly useful in applications using a single state tree, since components are "dumb" and will reflect the latest application state, even after their source is changed and they are replaced. 
 
-Webpack's power lies in its customizablity, and there are MANY ways of configuring HMR given the needs of a partiular project. The approach described below uses Babel and React, but these tools are not necessary for HMR to work. If you'd like to see examples of other approaches, please request them or, better yet, open up a PR with an addition! 
+Webpack's power lies in its customizablity, and there are MANY ways of configuring HMR given the needs of a particular project. The approach described below uses Babel and React, but these tools are not necessary for HMR to work. If you'd like to see examples of other approaches, please request them or, better yet, open up a PR with an addition! 
 
 ##Project Config
 This guide will be demonstrating the use of HMR with Babel, React, and PostCSS (using CSS Modules). To follow along, please add the following deps to your `package.json`:
@@ -33,7 +33,7 @@ Your `.babelrc` file should look like the following:
 
 There's a few things to note here. First, in the presets, we're using es2015-webpack, which is a Babel preset that enables support for es2015 while DISABLING conversion to CommonJS module format. Since Webpack 2 understands import/export syntax, the es2015-webpack preset (unlike the general es2015 preset) allows Webpack to perform tree-shaking and dead code elimination.
 
-The stage-2 preset is up to your comfort with adopting new technoligies; stage-0 will keep you on the bleeding age.
+The stage-2 preset is up to your comfort with adopting new technologies; stage-0 will keep you on the bleeding age.
 
 Finally, the React preset will enable React specific transpilation, while the react-hot-loader/babel plugin will enable your React code to work with HMR.
 
