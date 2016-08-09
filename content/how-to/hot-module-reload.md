@@ -26,16 +26,24 @@ Your `.babelrc` file should look like the following:
 
 ```js
 {
-  "presets": ["es2015-webpack", "stage-2", "react"],
-  "plugins": ["react-hot-loader/babel"]
+  "presets": [
+    ["es2015", {"modules": false}], 
+    //Webpack understands the native import syntax, and uses it for tree shaking
+
+    "stage-2", 
+    //Specifies what level of language features to activate.
+    //State 2 is "draft", 4 is finished, 0 is strawman.
+    //See https://tc39.github.io/process-document/
+
+    "react"
+    //Transpile React components to JS
+  ],
+  "plugins": [
+    "react-hot-loader/babel"
+    //Enables React code to work with HMR.
+  ]
 }
 ```
-
-There's a few things to note here. First, in the presets, we're using es2015-webpack, which is a Babel preset that enables support for es2015 while DISABLING conversion to CommonJS module format. Since Webpack 2 understands import/export syntax, the es2015-webpack preset (unlike the general es2015 preset) allows Webpack to perform tree-shaking and dead code elimination.
-
-The stage-2 preset is up to your comfort with adopting new technologies; stage-0 will keep you on the bleeding age.
-
-Finally, the React preset will enable React specific transpilation, while the react-hot-loader/babel plugin will enable your React code to work with HMR.
 
 ###Webpack config
 While there's many ways of setting up your Webpack config - via API, via multiple or single config files, etc - here is the basic information you should have available:
