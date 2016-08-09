@@ -6,29 +6,20 @@ Hot Module Replacement (HMR) exchanges, adds, or removes modules while an applic
 Webpack's power lies in its customizablity, and there are MANY ways of configuring HMR given the needs of a partiular project. The approach described below uses Babel and React, but these tools are not necessary for HMR to work. If you'd like to see examples of other approaches, please request them or, better yet, open up a PR with an addition! 
 
 ##Project Config
-To use HMR, you'll need the following dependencies:
-
-* webpack 2 (tested with 2.1.0-beta.20)
-* webpack-dev-server 2 (tested with 2.1.0-beta.0)
-
 This guide will be demonstrating the use of HMR with Babel, React, and PostCSS (using CSS Modules). To follow along, please add the following deps to your `package.json`:
 
-```js
-"devDependencies": {
-    "babel": "^6.5.2",
-    "babel-core": "^6.11.4",
-    "babel-loader": "^6.2.4",
-    "babel-preset-es2015-webpack": "^6.4.2",
-    "babel-preset-react": "^6.11.1",
-    "babel-preset-stage-2": "^6.11.0",
-    "css-loader": "^0.23.1",
-    "postcss-loader": "^0.9.1",
-    "react-hot-loader": "^3.0.0-beta.1",
-    "style-loader": "^0.13.1",
-    "webpack": "^2.1.0-beta.20",
-    "webpack-dev-server": "^2.1.0-beta.0"
-  }
+To use HMR, you'll need the following dependencies:
+
+```shell
+npm install --save-dev babel@6.5.2 babel-core@6.13.2 babel-loader@6.2.4 babel-preset-es2015@6.13.2 babel-preset-react@6.11.1 babel-preset-stage-2@6.13.0 css-loader@0.23.1 postcss-loader@0.9.1 react-hot-loader@3.0.0-beta.1 style-loader@0.13.1 webpack@2.1.0-beta.20 webpack-dev-server@2.1.0-beta.0
 ```
+
+In addition, for the purposes of this walkthrough, you'll need:
+
+```shell
+npm install --save react@15.3.0 react-dom@15.3.0 
+```
+
 
 ###Babel Config
 Your `.babelrc` file should look like the following:
