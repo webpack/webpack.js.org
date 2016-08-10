@@ -3,7 +3,7 @@ import React from 'react';
 export default props => {
   return (
     <aside className="sidecar">
-      <a href="https://github.com/webpack/webpack.io" className="sidecar-item -github">
+      <a href="https://github.com/webpack/webpack" className="sidecar-item -github">
         <span>See the Repo</span>
         <i className="icon-github" />
       </a>
