@@ -20,6 +20,7 @@ export default props => {
         </section>
 
         <section className="footer-inner-right">
+          <Link className="footer-inner-link" to="//gitter.im/webpack/webpack">Support</Link>
           <Link className="footer-inner-link" to="changelog">Changelog</Link>
           <Link className="footer-inner-link" to="license">License</Link>
         </section>

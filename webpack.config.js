@@ -5,8 +5,6 @@ var merge = require('webpack-merge');
 
 module.exports = function(env, options) {
   var stylePaths = [
-    require.resolve('normalize.css/normalize.css'),
-    require.resolve('react-ghfork/gh-fork-ribbon.css'),
     path.join(process.cwd(), 'styles')
   ];
 

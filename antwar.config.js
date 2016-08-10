@@ -29,12 +29,9 @@ module.exports = {
     return require('./components/Body.jsx')
   },
   style: function() {
-    require('./node_modules/normalize.css/normalize.css');
+    require('./styles/reset.css');
     require('./styles/prism.css');
-    require('./styles/fontello.css');
-    require('./styles/fontello-codes.css');
-    require('./styles/fontello-embedded.css');
-    require('react-ghfork/gh-fork-ribbon.css');
+    require('./styles/icons.css');
     require('./styles/index.scss');
   },
   paths: {

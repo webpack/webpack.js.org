@@ -1,51 +1,39 @@
-// defaults to black/white!!! feel free to tweak
 blockquote {
   background: black;
   color: white;
-
   padding: 0.5em;
   margin-bottom: 1em;
-
   border: 1px solid rgba(0,0,0,0.03);
-
   font-family: sans-serif;
   font-style: inherit;
   font-size: 80%;
-
   border-radius: 7px;
 
-  code {
-    color: black;
-  }
+  code { color: black; }
+  p { margin: 0; }
 
-  p {
-    margin: 0;
+  &.tip,
+  &.warning,
+  &.todo {
+    color: #696969;
+    font-size: medium;
+    padding: 1em;
+    margin-bottom: 1em;
+
+    .tip-icon {
+      margin-right:0.5em;
+    }
   }
 
   &.tip {
-    color: #696969;
-
-    font-size: medium;
     background-color: #F5FFFB;
-    padding: 1em;
-    margin-bottom: 1em;
   }
 
   &.warning {
-    color: #696969;
-
-    font-size: medium;
     background-color: #FFFFFA;
-    padding: 1em;
-    margin-bottom: 1em;
   }
 
   &.todo {
-    color: #696969;
-
-    font-size: medium;
     background-color: #FFF5FB;
-    padding: 1em;
-    margin-bottom: 1em;
   }
 }

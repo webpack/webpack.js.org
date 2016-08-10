@@ -47,6 +47,7 @@ module.exports = function(section) {
         renderer: renderer,
         xhtml: false
       };
+      
       var tokens = parseQuotes(content);
 
       return marked.parser(tokens, markedDefaults);
@@ -56,7 +57,7 @@ module.exports = function(section) {
 
 function parseQuotes(data) {
   var tokens = marked.lexer(data).map(function(t) {
-    if(t.type === 'paragraph') {
+    if (t.type === 'paragraph') {
       return parseCustomQuote(t, 'T>', 'tip') ||
         parseCustomQuote(t, 'W>', 'warning') ||
         parseCustomQuote(t, '?>', 'todo') ||
@@ -65,26 +66,27 @@ function parseQuotes(data) {
 
     return t;
   });
+
   tokens.links = [];
 
   return tokens;
 }
 
 function parseCustomQuote(token, match, className) {
-  if(token.type === 'paragraph') {
+  if (token.type === 'paragraph') {
     var text = token.text;
 
-    if(text.indexOf(match) === 0) {
+    if (text.indexOf(match) === 0) {
       var icon;
       switch(className) {
         case 'tip':
-          icon = 'icon-attention-circled';
+          icon = 'icon-info tip-icon';
           break;
         case 'warning':
-          icon = 'icon-attention';
+          icon = 'icon-warning tip-icon';
           break;
         default:
-          icon = 'icon-right-open';
+          icon = 'icon-chevron-right tip-icon';
           break;
       }
 

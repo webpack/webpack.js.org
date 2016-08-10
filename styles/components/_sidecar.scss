@@ -1,0 +1,76 @@
+.sidecar {
+  position: fixed;
+  top:75px;
+  right:0;
+  z-index:100;
+
+  &-item {
+    display:inline-block;
+    padding:0.75em;
+    float:right;
+    clear:both;
+    color:map-get($colors, alto);
+    transition:all 250ms;
+
+    span {
+      display:block;
+      float:left;
+      font-size:getFontSize(-1);
+      width:0;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      transition:width 250ms;
+    }
+
+    i { 
+      display:inline-block;
+      width:16px;
+      vertical-align:middle; 
+    }
+
+    // TODO: clean up hardcoded widths (can't animate to width auto) using flex or something
+
+    &.-github { 
+      background:#444;
+
+      &:hover { 
+        background:#333; 
+
+        span { width:95px; }
+      }
+    }
+
+    &.-gitter { 
+      background:desaturate(#ed1965, 15%);
+
+      &:hover { 
+        background:#ed1965; 
+
+        span { width:125px; }
+      }
+    }
+
+    &.-medium { 
+      background:desaturate(#19aa6e, 15%); 
+
+      &:hover { 
+        background:#19aa6e; 
+
+        span { width:95px; }
+      }
+    }
+
+    &.-so {
+      background:desaturate(#f48024, 15%);
+
+      &:hover {
+        background:#f48024;
+
+        span { width:155px; }
+      }
+    }
+
+    &:hover { color:map-get($colors, white); }
+  }  
+}
