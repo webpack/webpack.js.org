@@ -23,7 +23,13 @@
       transition:width 250ms;
     }
 
-    i { vertical-align:middle; }
+    i { 
+      display:inline-block;
+      width:16px;
+      vertical-align:middle; 
+    }
+
+    // TODO: clean up hardcoded widths (can't animate to width auto) using flex or something
 
     &.-github { 
       background:#444;
@@ -52,6 +58,16 @@
         background:#19aa6e; 
 
         span { width:95px; }
+      }
+    }
+
+    &.-so {
+      background:desaturate(#f48024, 15%);
+
+      &:hover {
+        background:#f48024;
+
+        span { width:155px; }
       }
     }
 

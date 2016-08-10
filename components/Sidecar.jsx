@@ -15,6 +15,10 @@ export default props => {
         <span>Visit Our Blog</span>
         <i className="icon-medium" />
       </a>
+      <a href="http://stackoverflow.com/questions/tagged/webpack" className="sidecar-item -so">
+        <span>Browse Webpack on SO</span>
+        <i className="icon-stack-overflow" />
+      </a>
     </aside>
   );
 };
