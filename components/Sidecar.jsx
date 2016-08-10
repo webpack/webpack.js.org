@@ -11,7 +11,7 @@ export default props => {
         <span>Get Help on Gitter</span>
         <i className="icon-gitter" />
       </a>
-      <a href="#" className="sidecar-item -medium">
+      <a href="https://medium.com/webpack" className="sidecar-item -medium">
         <span>Visit Our Blog</span>
         <i className="icon-medium" />
       </a>
