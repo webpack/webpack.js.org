@@ -1,60 +1,61 @@
-<html lang="en"><head><title>webpack - Concepts</title><base href="//webpack.github.io/webpack.io/"/><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"/><meta name="description"/><meta name="keywords" content="webpack,javascript,web development,programming"/><link rel="icon" type="image/png" href="//webpack.github.io/webpack.io/assets/img/favicon.png"/><link rel="stylesheet" href="//webpack.github.io/webpack.io/assets/main.css"/></head><body><main role="main"><div class="navigation "><div class="container navigation-inner"><a class="navigation-logo" href="index.html"><span class="logo"><span class="icon -light" style="width:20px;margin-left:10px;padding-bottom:10px;"><figure class="icon-cube -outer" style="width:20px;height:20px;transform:translateX(-50%)
-                        scale3d(1,1,1)
-                        rotateX(0deg)
-                        rotateY(0deg)
-                        rotateZ(0deg);"><section class="icon-cube-face" style="transform:rotateX(0deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateX(-90deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateX(90deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateY(-90deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateY(90deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateY(180deg) translateZ(10px);"></section></figure><figure class="icon-cube -inner" style="width:20px;height:20px;transform:translateX(-50%)
-                        scale3d(0.5,0.5,0.5)
-                        rotateX(0deg)
-                        rotateY(0deg)
-                        rotateZ(0deg);"><section class="icon-cube-face" style="transform:rotateX(0deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateX(-90deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateX(90deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateY(-90deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateY(90deg) translateZ(10px);"></section><section class="icon-cube-face" style="transform:rotateY(180deg) translateZ(10px);"></section></figure></span><span class="logo-text -light">Webpack</span></span></a><nav class="navigation-nav"><a class="navigation-nav-link" href="index.html">Home</a><a class="navigation-nav-link -active" href="concepts">Concepts</a><a class="navigation-nav-link" href="how-to">How to</a><a class="navigation-nav-link" href="api">API</a></nav></div></div><div class="section-index__wrapper"><h1>Concepts</h1><ul class="section-list"><li><h3 class="section-list__heading"><a href="concepts/targets">Targets</a></h3><p class="section-list__preview">
- webworker
- node
- async-node
- node-webkit
- electron
- electron-main
- electron-renderer
-</p></li><li><h3 class="section-list__heading"><a href="concepts/plugins">Plugins</a></h3><p class="section-list__preview">
- plugins configuration option
-</p></li><li><h3 class="section-list__heading"><a href="concepts/output">Output</a></h3><p class="section-list__preview">
- output.path
- output.filename
- output.publicPath
- output.chunkFilename
- output.jsonpFunction
- ...
+<html lang="en"><head><title>webpack - Introduction</title><base href="//webpack.github.io/webpack.io/"/><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"/><meta name="description" content="
+Overview
 
-…</p></li><li><h3 class="section-list__heading"><a href="concepts/module-resolution">Module Resolution</a></h3><p class="section-list__preview">
- how webpack resolves requests
- incl. resolving options
-</p></li><li><h3 class="section-list__heading"><a href="concepts/loaders">Loaders</a></h3><p class="section-list__preview">
- module.loaders configuration option
- test, include, exclude, loader, query
-</p></li><li><h3 class="section-list__heading"><a href="concepts/everything-is-a-module">Everything is a Module</a></h3><p class="section-list__preview">
+webpack is a module bundler for modern JavaScript applications.
 
- everything is a module with dependencies
+ What is a module?
 
- module tree
-
- static build and restrictions
-</p></li><li><h3 class="section-list__heading"><a href="concepts/entry-points">Entry Points</a></h3><p class="section-list__preview">
- single entry
- array entry
- multiple entries
-</p></li><li><h3 class="section-list__heading"><a href="concepts/compared-to-other-systems">Compared to Other Systems</a></h3><p class="section-list__preview">
- concepts compared to script-tags, require.js, System.js, JSPM, browserify
-</p></li></ul></div><footer class="footer"><div class="container footer-inner"><section class="footer-inner-left"><a class="footer-inner-link" href="get-started">Get Started</a><a class="footer-inner-link" href="analyze">Analyze</a><a class="footer-inner-link" href="contribute">Contribute</a></section><section class="footer-inner-middle"><a href="/"><span class="icon -dark" style="width:18px;margin-left:9px;padding-bottom:9px;"><figure class="icon-cube -outer" style="width:18px;height:18px;transform:translateX(-50%)
-                        scale3d(1,1,1)
-                        rotateX(0deg)
-                        rotateY(0deg)
-                        rotateZ(0deg);"><section class="icon-cube-face" style="transform:rotateX(0deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateX(-90deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateX(90deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateY(-90deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateY(90deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateY(180deg) translateZ(9px);"></section></figure><figure class="icon-cube -inner" style="width:18px;height:18px;transform:translateX(-50%)
-                        scale3d(0.5,0.5,0.5)
-                        rotateX(0deg)
-                        rotateY(0deg)
-                        rotateZ(0deg);"><section class="icon-cube-face" style="transform:rotateX(0deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateX(-90deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateX(90deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateY(-90deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateY(90deg) translateZ(9px);"></section><section class="icon-cube-face" style="transform:rotateY(180deg) translateZ(9px);"></section></figure></span></a></section><section class="footer-inner-right"><a class="footer-inner-link" href="changelog">Changelog</a><a class="footer-inner-link" href="license">License</a></section></div></footer><div class="right ribbon github-fork-ribbon-wrapper"><div class="github-fork-ribbon" style="background-color:black;"><a href="https://github.com/webpack/webpack" target="_blank">Fork me on GitHub</a></div></div><div><div class="gitter-open-chat-button">Need help?</div><script type="text/javascript">
-            ((window.gitter = {}).chat = {}).options = {
-              showChatByDefault: false,
-              activationElement: '.gitter-open-chat-button',
-              room: 'webpack/webpack'
-            };
-          </script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async="" defer=""></script></div></main></body></html>
+In m…"/><meta name="keywords" content="webpack,javascript,web development,programming"/><link rel="icon" type="image/png" href="//webpack.github.io/webpack.io/assets/img/favicon.png"/><link rel="stylesheet" href="//webpack.github.io/webpack.io/assets/main.css"/></head><body><main role="main"><div class="navigation "><div class="container navigation-inner"><a class="navigation-logo" href="index.html"><span class="logo"><span class="webpack-icon -light" style="width:20px;margin-left:10px;padding-bottom:10px;"><figure class="webpack-icon-cube -outer" style="width:20px;height:20px;transform:translateX(-50%)
+              scale3d(1,1,1)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(10px);"></section></figure><figure class="webpack-icon-cube -inner" style="width:20px;height:20px;transform:translateX(-50%)
+              scale3d(0.5,0.5,0.5)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(10px);"></section></figure></span><span class="logo-text -light">Webpack</span></span></a><nav class="navigation-nav"><a class="navigation-nav-link -active" href="/concepts">Concepts</a><a class="navigation-nav-link" href="/how-to">How to</a><a class="navigation-nav-link" href="/api">API</a><a class="navigation-nav-link" href="///github.com/webpack/webpack.io">Github</a></nav></div></div><aside class="sidecar"><a href="https://github.com/webpack/webpack" class="sidecar-item -github"><span>See the Repo</span><i class="icon-github"></i></a><a href="#" class="sidecar-item -gitter"><span>Get Help on Gitter</span><i class="icon-gitter"></i></a><a href="https://medium.com/webpack" class="sidecar-item -medium"><span>Visit Our Blog</span><i class="icon-medium"></i></a><a href="http://stackoverflow.com/questions/tagged/webpack" class="sidecar-item -so"><span>Browse Webpack on SO</span><i class="icon-stack-overflow"></i></a></aside><div class="container page"><nav class="sidebar"><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/targets">Targets</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/plugins">Plugins</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/output">Output</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/loaders">Loaders</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/index">Introduction</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/everything-is-a-module">Everything is a Module</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/entry-points">Entry Points</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/core-concepts">Core Concepts</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/compared-to-other-systems">Compared to Other Systems</a></div></nav><section class="page-content"><h1>Introduction</h1><a class="page-edit" href="https://github.com/webpack/webpack.io/edit/master/content/concepts/index.md">Edit this Page  <i class="icon-edit"></i></a><div><h2 class="header"><a class="header-anchor" href="#overview" id="overview"></a><span class="text">Overview</span><a class="header-anchor-select" href="#overview">#</a></h2>
+<p><em>webpack</em> is a <em>module bundler</em> for modern JavaScript applications.</p>
+<h3 class="header"><a class="header-anchor" href="#what-is-a-module-" id="what-is-a-module-"></a><span class="text">What is a module?</span><a class="header-anchor-select" href="#what-is-a-module-">#</a></h3>
+<p>In <a href="https://en.wikipedia.org/wiki/Modular_programming">modular programming</a>, developers break programs up into discrete chunks of functionality called a <em>module</em>.</p>
+<p>Each module has a smaller surface area than a full program, making verification, debugging, and testing trivial. 
+Well-written <em>modules</em> provide solid abstractions and encapsulation boundaries, so that each module has a coherent design and a clear purpose within the overall application.</p>
+<p>Node.js has supported modular programming almost since its inception. 
+On the web, however, support for <em>modules</em> has been slow to arrive.
+Multiple tools exist that support modular JavaScript on the web, with a variety of benefits and limitations.
+webpack builds on lessons learned from these systems and applies the concept of <em>modules</em> to any file in your project. </p>
+<h3 class="header"><a class="header-anchor" href="#what-is-a-webpack-module-" id="what-is-a-webpack-module-"></a><span class="text">What is a webpack module?</span><a class="header-anchor-select" href="#what-is-a-webpack-module-">#</a></h3>
+<p>In contrast to Node.js modules, webpack <em>modules</em> can express their <em>dependencies</em> in a variety of ways. A few examples are:</p>
+<ul>
+<li>A JavaScript <code>require()</code> statement</li>
+<li>An ECMAScript2015 <code>import</code> statement</li>
+<li>An AMD <code>define</code> and <code>require</code> statement</li>
+<li>An <code>@import</code> statement inside of a css/sass/less file.</li>
+<li>An image url in a stylesheet or html file. </li>
+</ul>
+<blockquote class="tip"><i class="icon-info tip-icon"></i>webpack 1 requires a specific loader to convert ECMAScript2015 <code>import</code>, however this is possible out of the box via webpack 2</blockquote><h3 class="header"><a class="header-anchor" href="#webpack-dependency-graph-and-bundles" id="webpack-dependency-graph-and-bundles"></a><span class="text">webpack, dependency graph, and bundles</span><a class="header-anchor-select" href="#webpack-dependency-graph-and-bundles">#</a></h3>
+<p>Any time one file depends on another, webpack treats this as a <em>dependency</em>. This allows webpack to take non-code assets, such as images or web fonts, and also provide them as <em>dependencies</em> for your application.</p>
+<p>When webpack processes your application, it starts from a list of modules defined on the command line or in its config file.
+Starting from these <em>entry points</em>, webpack recursively builds a <em>dependency graph</em> that includes every module your application needs, then packages all of those modules into a small number of <em>bundles</em> - often, just one - to be loaded by the browser. </p>
+<blockquote class="tip"><i class="icon-info tip-icon"></i>Bundling your application is especially powerful for <em>HTTP/1.1</em> clients, as it minimizes the number of times your app has to wait while the browser starts a new request. For <em>HTTP/2</em>, you can also use Code Splitting and bundling through webpack for the <a href="https://medium.com/webpack/webpack-http-2-7083ec3f3ce6#.7y5d3hz59">best optimization</a>.</blockquote><p>webpack supports modules written in a variety of languages and preprocessors, via <em>loaders</em>. <em>Loaders</em> describe to webpack <strong>how</strong> to process non-javascript <em>modules</em> and include these <em>dependencies</em> into your <em>bundles</em>.
+The webpack community has built <em>loaders</em> for a wide variety of popular languages and language processors, including:</p>
+<ul>
+<li><a href="http://coffeescript.org">CoffeeScript</a></li>
+<li><a href="https://www.typescriptlang.org">TypeScript</a></li>
+<li><a href="https://babeljs.io">ESNext (Babel)</a></li>
+<li><a href="http://sass-lang.com">Sass</a></li>
+<li><a href="http://lesscss.org">Less</a></li>
+<li><a href="http://stylus-lang.com">Stylus</a></li>
+</ul>
+<p>And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for <strong>any stack</strong>, while staying <strong>unopinionated</strong> about your development, testing, and production workflows. </p>
+<p>For a full list, see <a href="https://webpack.github.io/docs/list-of-loaders.html"><strong>the list of loaders</strong></a> or <a href="./api/loaders"><strong>write your own</strong></a>.</p>
+<h3 class="header"><a class="header-anchor" href="#recap" id="recap"></a><span class="text">Recap</span><a class="header-anchor-select" href="#recap">#</a></h3>
+<p>We are just starting to scratch the surface of webpack and its features, but we are equipped with a great grasp on terminology you will frequent throughout this guide. Its time to now dive into the <a href="./concepts/core-concepts">Core Concepts (Entry, Output, Loaders, Plugins)</a>!</p>
+</div></section></div><footer class="footer"><div class="container footer-inner"><section class="footer-inner-left"><a class="footer-inner-link" href="get-started">Get Started</a><a class="footer-inner-link" href="analyze">Analyze</a><a class="footer-inner-link" href="contribute">Contribute</a></section><section class="footer-inner-middle"><a href="/"><span class="webpack-icon -dark" style="width:18px;margin-left:9px;padding-bottom:9px;"><figure class="webpack-icon-cube -outer" style="width:18px;height:18px;transform:translateX(-50%)
+              scale3d(1,1,1)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(9px);"></section></figure><figure class="webpack-icon-cube -inner" style="width:18px;height:18px;transform:translateX(-50%)
+              scale3d(0.5,0.5,0.5)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(9px);"></section></figure></span></a></section><section class="footer-inner-right"><a class="footer-inner-link" href="//gitter.im/webpack/webpack">Support</a><a class="footer-inner-link" href="changelog">Changelog</a><a class="footer-inner-link" href="license">License</a></section></div></footer></main></body></html>
