@@ -9,7 +9,10 @@ blockquote {
   font-size: 80%;
   border-radius: 7px;
 
-  code { color: black; }
+  code { 
+    color: black;
+  }
+
   p { margin: 0; }
 
   &.tip,
