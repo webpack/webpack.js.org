@@ -38,7 +38,7 @@ Starting from these _entry points_, webpack recursively builds a _dependency gra
 
 T> Bundling your application is especially powerful for *HTTP/1.1* clients, as it minimizes the number of times your app has to wait while the browser starts a new request. For *HTTP/2*, you can also use Code Splitting and bundling through webpack for the [best optimization](https://medium.com/webpack/webpack-http-2-7083ec3f3ce6#.7y5d3hz59).
 
-webpack supports modules written in a variety of languages and preprocessors, via _loaders_. _Loaders_ describe to webpack **how** to process non-javascript _modules_ and include these _dependencies_ into your _bundles_.
+webpack supports modules written in a variety of languages and preprocessors, via _loaders_. _Loaders_ describe to webpack **how** to process non-JavaScript _modules_ and include these _dependencies_ into your _bundles_.
 The webpack community has built _loaders_ for a wide variety of popular languages and language processors, including:
 
 * [CoffeeScript](http://coffeescript.org)
@@ -54,4 +54,4 @@ For a full list, see [**the list of loaders**](https://webpack.github.io/docs/li
 
 ### Recap
 
-We are just starting to scratch the surface of webpack and its features, but we are equipped with a great grasp on terminology you will frequent throughout this guide. Its time to now dive into the [Core Concepts (Entry, Output, Loaders, Plugins)](./concepts/core-concepts)!
+We are just starting to scratch the surface of webpack and its features, but we are equipped with a great grasp on terminology you will frequent throughout this guide. It's time to now dive into the [Core Concepts (Entry, Output, Loaders, Plugins)](./concepts/core-concepts)!
