@@ -69,13 +69,13 @@ your pull request should be accepted quickly.
 There are two different pipelines for submitting contributions based on what the 
 contribution is for:
 
-* **Code Changes**  
-  Issue the PR to the [develop](https://github.com/webpack/webpack.io/tree/develop) branch.  
-  *A contribution that is adding/changing the code that runs the wiki.*  
-
 * **Content Changes**  
   Issue the PR to the [master](https://github.com/webpack/webpack.io/tree/master) branch.  
   *A contribution that is adding/changing content on the wiki.*
+
+* **Code Changes**  
+  Issue the PR to the [develop](https://github.com/webpack/webpack.io/tree/develop) branch.  
+  *A contribution that is adding/changing the code that runs the wiki.*  
 
 ## Thank you!
 
