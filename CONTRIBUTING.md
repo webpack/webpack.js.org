@@ -1,25 +1,16 @@
 # Contributing
 
-From opening a bug report to creating a pull request: every contribution is
+From adding an issue for a documentation suggestion to creating a pull request: every contribution is
 appreciated and welcome. If you're planning to implement a new section or page 
-please create an issue first. This way we can ensure that your precious
-work is not in vain.
-
-There are two types of contributions for the wiki:
-
-* **Content Changes**  
-  *Additions and changes to the content of the Wiki.*  
-
-* **Code Changes**  
-  *Enhancements and fixes to the code that runs the Wiki.*
-
-We greatly appreciate contributions to either one!
+please create an issue first.
 
 ## Setup
 
-* Install [Node.js](https://nodejs.org/) if you have not already
+* Install [Node.js](https://nodejs.org/) if you have not already.  
+  *Note: Node 6 or greater may be required for "best results".*
 * Fork the **webpack.io** repo at [https://github.com/webpack/webpack.io](https://github.com/webpack/webpack.io).
 * `git clone <your-clone-url> && cd webpack.io`
+* `git checkout develop`
 * `npm install`
 * `npm run build`
 * `npm start`
@@ -31,13 +22,15 @@ Making a branch in your fork for you contribution is helpful in the following wa
 * It allows you to have multiple contributions in as PRs at once.
 * It allows us to identify what your contribution is about from the branch name.
 
+You will want to checkout the `develop` branch locally before creating your new branch.
+
 There are two types of branches:
 * Feature
 * Hotfix
 
 ### Features
 If your contribution is something new, like a new section or page or a new chunk 
-to an existing page or a code enhancement, you can create a branch with the 
+to an existing page, you can create a branch with the 
 following naming convetion:  
 ```
 feature/<the-new-feature>
@@ -54,10 +47,10 @@ following naming convention:
 ```
 hotfix/<the-fix>
 ```
-So, for example, if you are fixing base hrefs for navigation in the footer 
-to use the top level path, your branch could have the name:
+So, for example, if you are fixing spelling on the api configuration page for 
+an option, your branch could have the name:
 ```
-hotfix/fix-base-path-in-footer-links
+hotfix/fix-option-property-spelling-on-api-configuration
 ```
 
 ## Submitting Changes
@@ -66,16 +59,7 @@ After getting some feedback, push to your fork branch and submit a pull request.
 may suggest some changes or improvements or alternatives, but for small changes
 your pull request should be accepted quickly.
 
-There are two different pipelines for submitting contributions based on what the 
-contribution is for:
-
-* **Content Changes**  
-  Issue the PR to the [master](https://github.com/webpack/webpack.io/tree/master) branch.  
-  *A contribution that is adding/changing content on the wiki.*
-
-* **Code Changes**  
-  Issue the PR to the [develop](https://github.com/webpack/webpack.io/tree/develop) branch.  
-  *A contribution that is adding/changing the code that runs the wiki.*  
+Issue the PR to the [develop](https://github.com/webpack/webpack.io/tree/develop) branch.  
 
 ## Thank you!
 
