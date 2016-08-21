@@ -7,10 +7,10 @@ work is not in vain.
 
 There are two types of contributions for the wiki:
 
-* Content Changes  
+* **Content Changes**  
   *Additions and changes to the content of the Wiki.*  
 
-* Code Changes  
+* **Code Changes**  
   *Enhancements and fixes to the code that runs the Wiki.*
 
 We greatly appreciate contributions to either one!
@@ -19,7 +19,7 @@ We greatly appreciate contributions to either one!
 
 * Install [Node.js](https://nodejs.org/) if you have not already
 * Fork the **webpack.io** repo at [https://github.com/webpack/webpack.io](https://github.com/webpack/webpack.io).
-* `git clone <your-clone-url> && cd docs`
+* `git clone <your-clone-url> && cd webpack.io`
 * `npm install`
 * `npm run build`
 * `npm start`
@@ -69,11 +69,12 @@ your pull request should be accepted quickly.
 There are two different pipelines for submitting contributions based on what the 
 contribution is for:
 
-* Code Changes  
-  Issue the PR to the **develop** branch.  
-  *A contribution that is adding/changing the code that runs the wiki.*
-* Content Changes  
-  Issue the PR to the **master** branch.  
+* **Code Changes**  
+  Issue the PR to the [develop](https://github.com/webpack/webpack.io/tree/develop) branch.  
+  *A contribution that is adding/changing the code that runs the wiki.*  
+
+* **Content Changes**  
+  Issue the PR to the [master](https://github.com/webpack/webpack.io/tree/master) branch.  
   *A contribution that is adding/changing content on the wiki.*
 
 ## Thank you!
