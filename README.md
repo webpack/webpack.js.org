@@ -10,6 +10,8 @@ To develop, please pull the project, `cd` into the directory and run:
 - `npm run build` to create a production version of the site.
 - `npm start` to develop on a local webpack-dev-server (should be [here](http://localhost:3000/)).
 
+For more information see the [contributors page](https://github.com/webpack/webpack.io/blob/develop/CONTRIBUTING.md)
+
 ## Content Progress
 
 Fully completed can be removed from this list. If there's a topic you would like to contribute in, check out the related issue and comment there.
