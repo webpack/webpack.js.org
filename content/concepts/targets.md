@@ -34,8 +34,7 @@ The following is a list of values you can pass to the target property.
 * `"node"` Compile for usage in a node.js-like environment (use `require` to load chunks)
 * `"async-node"` Compile for usage in a node.js-like environment (use `fs` and `vm` to load chunks async)
 * `"node-webkit"` Compile for usage in webkit, uses jsonp chunk loading but also supports build in node.js modules plus require("nw.gui") (experimental)
-* `"electron"` Compile for usage in [Electron](http://electron.atom.io/) – supports `require`-ing Electron-specific modules.
-* `"electron-renderer"` Compile for electron renderer process, provide a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environment and `NodeTargetPlugin` and `ExternalsPlugin` for commonjs and electron bulit-in modules. *Note: need `webpack` >= 1.12.15.*
+* `"electron-renderer"` Compile for electron renderer process, provide a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environment and `NodeTargetPlugin` and `ExternalsPlugin` for commonjs and electron bulit-in modules. *Note: need `webpack` >= 1.12.15.
 
 Each _target_ has a variety of deployment/environment specific additions, support to fit its needs. 
 
@@ -43,10 +42,10 @@ For example, when you use the `electron` target, *webpack* includes multiple `el
 
 ### Multiple Targets
 
-Although webpack does **not** support multiple strings being passed into the target property, you can create an isomorphic/universal library by bundling two separate configurations: 
+Although webpack does **not** support multiple strings being passed into the target property, you can create an isomorphic library by bundling two separate configurations: 
 
 **webpack.config.js**
-```javascript
+```javascriptis
 
 module.exports = [ serverConfig, clientConfig ];
 
