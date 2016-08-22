@@ -3,24 +3,25 @@ title: Targets
 ---
 ## Overview
 
-Because JavaScript can be written for both server & browser, *webpack* offer's multiple deployment _targets_.
+Because JavaScript can be written for both server and browser, webpack offers multiple deployment _targets_.
 
-*webpack* offer's a variety of deployment _targets_ that you can set in your webpack [configuration](./api/configuration).
+webpack offers a variety of deployment _targets_ that you can set in your webpack [configuration](./api/configuration).
 
-W> The webpack `target` property is not to be confused with the `output.target` property. For more information see [our guide](./concepts/output) on the `output` property.
+W> The webpack `target` property is not to be confused with the `output.libraryTarget` property. For more information see [our guide](./concepts/output) on the `output` property.
 
 
 ### Usage
 
 To set the `target` property, you simply set the target value in your webpack config: 
 
-```javascript
-// webpack.config.js
 
+**webpack.config.js**
+
+```javascript
 module.exports = config;
 
 config = {
-  target: 'node' // <===== Just pass the name of the target  
+  target: 'node'
 }
 ```
 
@@ -44,8 +45,8 @@ For example, when you use the `electron` target, *webpack* includes multiple `el
 
 Although webpack does **not** support multiple strings being passed into the target property, you can create an isomorphic/universal library by bundling two separate configurations: 
 
+**webpack.config.js**
 ```javascript
-//webpack.config.js
 
 module.exports = [ serverConfig, clientConfig ];
 
@@ -77,4 +78,3 @@ As seen from the options above there are multiple different deployment _targets_
 
 #### `webworker`: 
  * *webpack* source: https://github.com/webpack/webpack/tree/master/examples/web-worker
-
