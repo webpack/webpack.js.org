@@ -3,9 +3,7 @@ title: Targets
 ---
 ## Overview
 
-Because JavaScript can be written for both server and browser, webpack offers multiple deployment _targets_.
-
-webpack offers a variety of deployment _targets_ that you can set in your webpack [configuration](./api/configuration).
+Because JavaScript can be written for both server and browser, webpack offers multiple deployment _targets_ that you can set in your webpack [configuration](./api/configuration).
 
 W> The webpack `target` property is not to be confused with the `output.libraryTarget` property. For more information see [our guide](./concepts/output) on the `output` property.
 
@@ -21,7 +19,7 @@ To set the `target` property, you simply set the target value in your webpack co
 module.exports = config;
 
 config = {
-  target: 'node'
+  target: 'node' 
 }
 ```
 
