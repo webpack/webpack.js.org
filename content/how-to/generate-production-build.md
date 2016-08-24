@@ -8,6 +8,10 @@ Generating production builds with Webpack is straight-forward. There are three t
 - Node environment
 - Minification
 
+For simplification the code examples bellow involves a single Webpack config file.
+
+?> TODO: Add reference link to "Splitting configuration"
+
 ## Source maps
 
 We encourage you to have source maps enabled in production. They are useful for debugging and to run benchmark tests. Webpack can generate inline source maps included in the bundles or separated files.
@@ -20,23 +24,33 @@ One of the good options to go is using `cheap-module-source-map` which simplifie
 
 The second step is to tell Webpack to generate a production build by setting the node environment variable to `production`. Webpack will not include any extra useful code, warnings and checks used in development.
 
+The `DefinePlugin` creates **compile** time constants. Useful for injecting your node environment as seen below.
+
+?> TODO: Add a link to the `ProvidePlugin` documentation
+
 ```js
-plugins: [
-  new webpack.DefinePlugin({
-    'process.env': {
-      'NODE_ENV': JSON.stringify('production')
-    }
-  })
-],
+// webpack.config.js
+module.exports = {
+  //...
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    })
+  ]
+  // ...
+}
 ```
 
-Spoiler: Setting the env var only won't make your bundle smaller. This take us to the last step:
+T> Spoiler: Setting the env var only won't make your bundle smaller. This take us to the last step:
 
 ## Minification
 
 Webpack comes with UglifyJS plugin which minimize the output. You can pass an object containing [UglifyJS options](https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin).
 
 ```js
+// webpack.config.js
 module.exports = {
   //...
   plugins:[
@@ -56,3 +70,5 @@ module.exports = {
 ```
 
 That's it! You're all set to ship production code.
+
+?> TODO: Add reading reference link to "How to manage multiple configurations"
