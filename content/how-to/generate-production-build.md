@@ -8,10 +8,6 @@ Generating production builds with Webpack is straight-forward. There are three t
 - Node environment
 - Minification
 
-For simplification the code examples bellow involves a single Webpack config file.
-
-?> TODO: Add reference link to "Splitting configuration"
-
 ## Source maps
 
 We encourage you to have source maps enabled in production. They are useful for debugging and to run benchmark tests. Webpack can generate inline source maps included in the bundles or separated files.
@@ -72,3 +68,4 @@ module.exports = {
 That's it! You're all set to ship production code.
 
 ?> TODO: Add reading reference link to "How to manage multiple configurations"
+?> TODO: Add reference link to "Splitting configuration"
