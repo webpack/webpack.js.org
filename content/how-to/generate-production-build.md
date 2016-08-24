@@ -4,17 +4,17 @@ title: How to Generate a Production Build?
 
 Generating production builds with Webpack is straight-forward. There are three things to keep in mind:
 
-- Source maps
+- Source Maps
 - Node environment
 - Minification
 
-## Source maps
+## Source Maps
 
-We encourage you to have source maps enabled in production. They are useful for debugging and to run benchmark tests. Webpack can generate inline source maps included in the bundles or separated files.
+We encourage you to have Source Maps enabled in production. They are useful for debugging and to run benchmark tests. Webpack can generate inline Source Maps included in the bundles or separated files.
 
-In your configuration, use the `devtools` object to set the source map type. We currently support seven types of source maps. You can find more information about them in our [configuration](https://webpack.github.io/docs/configuration.html#devtool) documentation page.
+In your configuration, use the `devtools` object to set the Source Map type. We currently support seven types of Source Maps. You can find more information about them in our [configuration](https://webpack.github.io/docs/configuration.html#devtool) documentation page.
 
-One of the good options to go is using `cheap-module-source-map` which simplifies the source maps to a single mapping per line.
+One of the good options to go is using `cheap-module-source-map` which simplifies the Source Maps to a single mapping per line.
 
 ## Node environment variable
 
