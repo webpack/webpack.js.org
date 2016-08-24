@@ -10,6 +10,7 @@
 @import "functions";
 @import "vars";
 
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono);
 @import url(https://fonts.googleapis.com/css?family=Averia+Sans+Libre:400,300);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,600,700,400italic);
 
@@ -143,6 +144,7 @@ b, strong {
 }
 
 code, tt {
+  font-family:'Ubuntu Mono', monospace;
   margin: 0 2px;
   padding: 0 5px;
   white-space: nowrap;
