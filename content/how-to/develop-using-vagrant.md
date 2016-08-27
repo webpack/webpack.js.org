@@ -14,7 +14,7 @@ end
 
 Next, install webpack and webpack-dev-server in your project;
 
-```
+```shell
 npm install webpack webpack-dev-server --save-dev
 ```
 
@@ -45,7 +45,7 @@ Note that you also need to create an `app.js` file.
 
 Now, let's run the server:
 
-```
+```shell
 webpack-dev-server --host 0.0.0.0 --public 10.10.10.61:8080 --watch-poll
 ```
 
@@ -64,7 +64,7 @@ To mimick a more production-like environment, it is also possible to proxy the w
 
 In your nginx config file, add the following:
 
-```
+```nginx
 server {
   location / {
     proxy_pass http://127.0.0.1:8080;
