@@ -1,5 +1,5 @@
 ---
-title: How to Develop using Vagrant
+title: How to Develop Using Vagrant
 ---
 
 If you have a more advanced project and use [Vagrant](https://www.vagrantup.com/) to run your development environment in a Virtual Machine, you'll often want to also run webpack in the VM.
@@ -16,7 +16,7 @@ end
 
 Next, install webpack and webpack-dev-server in your project;
 
-```shell
+```sh
 npm install webpack webpack-dev-server --save-dev
 ```
 
@@ -49,7 +49,7 @@ Note that you also need to create an `app.js` file.
 
 Now, let's run the server:
 
-```shell
+```sh
 webpack-dev-server --host 0.0.0.0 --public 10.10.10.61:8080 --watch-poll
 ```
 
