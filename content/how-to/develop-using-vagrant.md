@@ -4,6 +4,8 @@ title: How to Develop using Vagrant
 
 If you have a more advanced project and use [Vagrant](https://www.vagrantup.com/) to run your development environment in a Virtual Machine, you'll often want to also run webpack in the VM.
 
+## Configuring the Project
+
 To start, make sure that the `Vagrantfile` has a static IP;
 
 ```ruby
@@ -43,6 +45,8 @@ And create a `index.html` file. The script tag should point to your bundle. If `
 
 Note that you also need to create an `app.js` file.
 
+## Running the Server
+
 Now, let's run the server:
 
 ```shell
@@ -51,14 +55,14 @@ webpack-dev-server --host 0.0.0.0 --public 10.10.10.61:8080 --watch-poll
 
 By default the server will only be accessible from localhost. We'll be accessing it from our host PC, so we need to change `--host` to allow this.
 
-webpack-dev-server will include a script in your bundle that connects to a websocket to reload when a change in any of your files occurs.
-The `--public` flag makes sure the script knows where to look for the websocket. The server will use port `8080` by default, so we should also specify that here.
+webpack-dev-server will include a script in your bundle that connects to a WebSocket to reload when a change in any of your files occurs.
+The `--public` flag makes sure the script knows where to look for the WebSocket. The server will use port `8080` by default, so we should also specify that here.
 
 `--watch-poll` makes sure that webpack can detect changes in your files. By default webpack listens to events triggered by the filesystem, but VirtualBox has many problems with this.
 
 The server should be accessible on `http://10.10.10.61:8080` now! If you make a change in `app.js`, it should live reload.
 
-## Advanced usage with nginx
+## Advanced Usage with nginx
 
 To mimick a more production-like environment, it is also possible to proxy the webpack-dev-server with nginx.
 
@@ -81,7 +85,7 @@ server {
 }
 ```
 
-The `proxy_set_header` lines are very important, because they allow the websocket to work correctly.
+The `proxy_set_header` lines are very important, because they allow the WebSocket to work correctly.
 
 The command to start webpack-dev-server can then be changed to this:
 
@@ -90,3 +94,7 @@ webpack-dev-server --public 10.10.10.61 --watch-poll
 ```
 
 This makes the server only accessible on `127.0.0.1`, which is fine, because nginx takes care of making it available on your host PC.
+
+## Conclusion
+
+We made the Vagrant box accessible from a static IP, and then made webpack-dev-server publicly accessible so it is reachable from a browser. We then tackled a common problem that VirtualBox doesn't send out filesystem events, causing the server to not reload on file changes.
