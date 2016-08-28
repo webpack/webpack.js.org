@@ -23,13 +23,13 @@ export default class Icon extends Component {
 
     return (
       <span ref={ ref => this.container = ref }
-          className={ `icon -${theme}` }
+          className={ `webpack-icon -${theme}` }
           style={{
             width: `${depth}px`,
             marginLeft: `${depth * 0.5}px`,
             paddingBottom: `${depth * 0.5}px`
           }}>
-        <figure className="icon-cube -outer"
+        <figure className="webpack-icon-cube -outer"
             style={{
               width: `${depth}px`,
               height: `${depth}px`,
@@ -41,7 +41,7 @@ export default class Icon extends Component {
             }}>
             { this._getFaces() }
         </figure>
-        <figure className="icon-cube -inner"
+        <figure className="webpack-icon-cube -inner"
             style={{
               width: `${depth}px`,
               height: `${depth}px`,
@@ -86,7 +86,7 @@ export default class Icon extends Component {
       'rotateY(180deg)'
     ].map((rotation, i) => {
       return (
-        <section key={ i } className="icon-cube-face"
+        <section key={ i } className="webpack-icon-cube-face"
             style={{ transform: `${rotation} translateZ(${ this.props.depth / 2 }px)` }} />
       );
     });

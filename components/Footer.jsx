@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import Link from './Link';
 import Icon from './Icon';
 import Container from './Container';
 
@@ -20,6 +20,7 @@ export default props => {
         </section>
 
         <section className="footer-inner-right">
+          <Link className="footer-inner-link" to="//gitter.im/webpack/webpack">Support</Link>
           <Link className="footer-inner-link" to="changelog">Changelog</Link>
           <Link className="footer-inner-link" to="license">License</Link>
         </section>

@@ -29,9 +29,9 @@
     "sitemap": "cd build && sitemap-static --prefix=http://webpack.github.io/webpack.io/ > sitemap.xml"
   },
   "devDependencies": {
-    "antwar": "^0.7.2",
+    "antwar": "^0.8.1",
     "antwar-cli": "^0.6.6",
-    "antwar-helpers": "^0.7.4",
+    "antwar-helpers": "^0.8.0",
     "antwar-prevnext-plugin": "^0.4.0",
     "autoprefixer": "^6.3.7",
     "babel-core": "^6.10.4",
@@ -50,7 +50,6 @@
     "modularscale-sass": "^2.1.1",
     "moment": "^2.14.1",
     "node-sass": "^3.8.0",
-    "normalize.css": "^4.2.0",
     "postcss-loader": "^0.9.1",
     "prism-languages": "^0.3.1",
     "prismjs": "^1.5.1",
@@ -65,7 +64,6 @@
   "dependencies": {
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
-    "react-ghfork": "^0.3.5",
     "react-router": "^2.5.2"
   }
 }

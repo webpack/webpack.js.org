@@ -1,16 +1,16 @@
 /**
  * Styling
  *
- * This file contains or imports all styling for the site.
+ * This file contains the main styling for the site.
  * Markdown styling is based on https://gist.github.com/tuzz/3331384.
  * Component stylesheets are imported last so as to override anything specified here.
  *
  */
 
-@import "reset";
 @import "functions";
 @import "vars";
 
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono);
 @import url(https://fonts.googleapis.com/css?family=Averia+Sans+Libre:400,300);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,600,700,400italic);
 
@@ -40,11 +40,23 @@ a {
   text-decoration:none;
   transition:color 250ms;
 
-  &:hover { color:map-get($colors, chatham); }
+  &:hover { color:darken(map-get($colors, tussock), 15%); }
+
+  &.header-anchor-select {
+    margin-left:0.5em;
+  }
 }
 
-p, blockquote, ul, ol, dl, li, table, pre {
-  margin:16px 0;
+p, blockquote, table, pre {
+  margin:1em 0;
+}
+
+ul, ol, dl {
+  margin:0.5em 0 1em;
+}
+
+li {
+  margin:0.5em 0;
 }
 
 hr {
@@ -127,7 +139,12 @@ img {
   max-width: 100%;
 }
 
+b, strong {
+  font-weight:600;
+}
+
 code, tt {
+  font-family:'Ubuntu Mono', monospace;
   margin: 0 2px;
   padding: 0 5px;
   white-space: nowrap;

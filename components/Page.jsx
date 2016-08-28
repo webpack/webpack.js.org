@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import Link from './Link';
 import Container from './Container';
 import Sidebar from './Sidebar';
 
@@ -12,7 +12,12 @@ export default props => {
       <Sidebar pages={ section.pages() } />
       <section className="page-content">
         <h1>{ page.title }</h1>
-        <a className="page-edit" href={ edit }>Edit this Page</a>
+
+        <a className="page-edit" href={ edit }>
+          Edit this Page&nbsp;&nbsp;
+          <i className="icon-edit" />
+        </a>
+
         <div dangerouslySetInnerHTML={{ __html: page.content }} />
       </section>
     </Container>
