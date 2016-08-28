@@ -14,7 +14,7 @@ export default props => {
     <nav className="sidebar">
       {
         props.pages.map((page, i) => (
-          <div className="sidebar-page" key={ `sidebar-section-${i}` }>
+          <div className="sidebar-page" key={ `sidebar-page-${i}` }>
             <span className="sidebar-page-title">
               <Link to={ `/${page.url}` }>{ page.title }</Link>
               <i className="sidebar-page-toggle icon-chevron-down" />
@@ -23,8 +23,9 @@ export default props => {
             <ul className="sidebar-page-sections">
               {
                 // Temporary for testing, should just be page.sections.map(...)
-                page.title === 'Targets' ? sections.map(section => (
-                  <li className="sidebar-page-section">
+                page.title === 'Targets' ? sections.map((section, j) => (
+                  <li className="sidebar-page-section" 
+                      key={ `sidebar-page-${i}-section-${j}` }>
                     <Link to={ `/${page.url}#${section.id}` }>{ section.title }</Link>
                   </li>
                 )) : ''
