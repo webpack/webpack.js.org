@@ -45,7 +45,7 @@ For example, when you use the `electron-main` _target_, *webpack* includes multi
 Although webpack does **not** support multiple strings being passed into the `target` property, you can create an isomorphic library by bundling two separate configurations: 
 
 **webpack.config.js**
-```javascriptis
+```javascript
 
 module.exports = [ serverConfig, clientConfig ];
 
@@ -59,9 +59,9 @@ var serverConfig = {
 }
 
 var clientConfig = {
-  target: 'web' // <=== can be omitted as default is 'web'
+  target: 'web', // <=== can be omitted as default is 'web'
   output: {
-    path: 'dist'
+    path: 'dist',
     filename: 'lib.js'
   }
   //...

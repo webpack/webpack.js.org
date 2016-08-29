@@ -1,7 +1,10 @@
 .logo {
   display:inline-block;
 
-  .icon { vertical-align:top; }
+  .icon,
+  &-text { 
+    vertical-align:top; 
+  }
 
   &-text {
     font-size:1.3em;

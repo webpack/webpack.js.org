@@ -29,7 +29,7 @@
     "sitemap": "cd build && sitemap-static --prefix=http://webpack.github.io/webpack.io/ > sitemap.xml"
   },
   "devDependencies": {
-    "antwar": "^0.7.3",
+    "antwar": "^0.8.1",
     "antwar-cli": "^0.6.6",
     "antwar-helpers": "^0.8.0",
     "antwar-prevnext-plugin": "^0.4.0",
