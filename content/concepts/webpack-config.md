@@ -122,3 +122,51 @@ export class NgCliWebpackConfig {
   }
 }
 ```
+
+#### Using JSX (React JS Markup) and Babel to create a JSON Configuration that webpack can understand. (Courtesy of [Jason Miller](https://twitter.com/_developit))
+
+```javascript
+/* Lib: git.io/jsxobj */
+
+/** @jsx h */
+function h(name, attrs, ...children) {
+  let obj = { name, ...attrs };
+  if (typeof name==='function') obj = name(obj);
+  [].concat(...children).forEach( child => {
+    let { name } = child;
+    if (name) {
+      obj[name] = child;
+      delete child.name;
+    }
+    else obj.value = child;
+  });
+  return obj;
+}
+
+// example of an import'd plugin
+const CustomPlugin = config => ({
+  ...config,
+  name: 'custom-plugin'
+});
+
+const CONFIG = (
+  <webpack target="web" watch>
+    <entry path="src/index.js" />
+    <resolve>
+      <alias {...{
+        react: 'preact-compat',
+        'react-dom': 'preact-compat'
+      }} />
+    </resolve>
+    <plugins>
+      <uglify-js opts={{
+        compression: true,
+        mangle: false
+      }} />
+      <CustomPlugin foo="bar" />
+    </plugins>
+  </webpack>
+);
+
+document.body.textContent = JSON.stringify(CONFIG, 0, '  ');
+```
