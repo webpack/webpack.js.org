@@ -3,11 +3,11 @@ title: CLI
 ---
 ## Overview
 
-webpack provides a Command Line Interface(CLI) to configure and interact with your build.This is mostly useful in case of early prototyping, profiling, writing npm scripts or personal customization of the build.For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`.Any parameters sent to the CLI will map to a corresponding parameter in the config file.
+webpack provides a Command Line Interface(CLI) to configure and interact with your build. This is mostly useful in case of early prototyping, profiling, writing npm scripts or personal customization of the build. For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the config file.
 
 ## Installation
 
-[//]: <> (TODO: Link to webpack installation article)
+[//]: <?> (TODO: Link to webpack installation article)
 
 ``` sh
 npm install webpack -g
@@ -82,7 +82,7 @@ webpack --env=DEVELOPMENT
 **Print result of webpack as a JSON**
 
 In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option the output can be a JSON object.This response is accepted by webpack's [analyse tool](http://webpack.github.com/analyse). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
-[//]: <> (TODO: Link to webpack analyse article)
+[//]: <?> (TODO: Link to webpack analyse article)
 ``` sh
 webpack --json , webpack -j, webpack -j > stats.json
 ```
@@ -232,8 +232,7 @@ These options allow webpack to display various stats and style them differently 
 
 ### Profiling
 
-This option profiles the compilation and includes this information in the stats output
-It gives you an in depth idea of which step in the compilation is taking how long. This can help you optimise your build in a more informed manner.
+This option profiles the compilation and includes this information in the stats output. It gives you an in depth idea of which step in the compilation is taking how long. This can help you optimise your build in a more informed manner.
 
 ```sh
 webpack --profile
