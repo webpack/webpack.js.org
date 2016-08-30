@@ -252,3 +252,7 @@ main.5e17f4dff47bc1a007c0.js 373 bytes 2 [emitted] main
 ```
 
 Notice that vendor chunk has the same filename!
+
+## References
+
+* https://medium.com/@okonetchnikov/long-term-caching-of-static-assets-with-webpack-1ecb139adb95#.vtwnssps4
