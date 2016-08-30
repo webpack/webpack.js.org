@@ -47,7 +47,7 @@ Fully completed can be removed from this list. If there's a topic you would like
 ### `/how-to`
 
 * Author libraries - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#9](https://github.com/webpack/webpack.io/issues/9)
-* Cache - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#2](https://github.com/webpack/webpack.io/issues/2)
+* Cache - ![](https://img.shields.io/badge/progress-100%25-yellowgreen.svg) - [#2](https://github.com/webpack/webpack.io/issues/2)
 * Develop - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#26](https://github.com/webpack/webpack.io/issues/26)
 * Generate a production build - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#11](https://github.com/webpack/webpack.io/issues/11)
 * Handle compatibility - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#4](https://github.com/webpack/webpack.io/issues/4)
