@@ -55,9 +55,7 @@ But the problem here is that, *each* time we create a new build, all filenames w
 
 What if we could produce the same filename if the contents of the file did not change between builds? For example, the file where we put all our libraries and other vendor stuff does not change that often.
 
-### Pro Tip!
-
-> Separate your vendor and application code with [CommonsChunkPlugin](http://webpack.github.io/docs/list-of-plugins.html#2-explicit-vendor-chunk) and create an explicit vendor chunk to prevent it from changing too often.
+T> Separate your vendor and application code with [CommonsChunkPlugin](http://webpack.github.io/docs/list-of-plugins.html#2-explicit-vendor-chunk) and create an explicit vendor chunk to prevent it from changing too often.
 
 Webpack allows you to generate hashes depending on the file contents. Here is the updated config:
 
@@ -79,11 +77,9 @@ main.155567618f4367cd1cb8.js 1.43 kB 0 [emitted] main
 vendor.c2330c22cd2decb5da5a.js 1.43 kB 1 [emitted] vendor
 ```
 
-### Pro Tip!
+T> Don’t use [chunkhash] in development since this will increase compilation time. Separate development and production configs and use [name].js for development and [name].[chunkhash].js in production.
 
-> Don’t use [chunkhash] in development since this will increase compilation time. Separate development and production configs and use [name].js for development and [name].[chunkhash].js in production.
-
-Due to an [issue in Webpack](https://github.com/webpack/webpack/issues/1315), this method of generating hashes still isn’t deterministic. To ensure hashes are generated based on the file contents, use [webpack-md5-hash plugin](https://github.com/erm0l0v/webpack-md5-hash). Here is an example how to integrate it into your project: https://github.com/okonet/webpack-long-term-cache-demo/pull/3/files
+W> Due to this [issue in Webpack](https://github.com/webpack/webpack/issues/1315), this method of generating hashes still isn’t deterministic. To ensure hashes are generated based on the file contents, use [webpack-md5-hash plugin](https://github.com/erm0l0v/webpack-md5-hash). Here is an example how to integrate it into your project: https://github.com/okonet/webpack-long-term-cache-demo/pull/3/files
 
 ## Get filenames from webpack compilation stats
 
@@ -215,7 +211,7 @@ module.exports = {
 
 ```
 
-Or, if you're using [webpack-html-plugin](https://github.com/ampedandwired/html-webpack-plugin), you can use [inline-manifest-webpack-plugin](https://github.com/szrenwei/inline-manifest-webpack-plugin) to do this.
+T> If you're using [webpack-html-plugin](https://github.com/ampedandwired/html-webpack-plugin), you can use [inline-manifest-webpack-plugin](https://github.com/szrenwei/inline-manifest-webpack-plugin) to do this.
 
 Using this config the vendor chunk should not be changing its hash unless you change its code or dependencies. Here is a sample output for 2 runs with `moduleB.js` being changed between the runs:
 
