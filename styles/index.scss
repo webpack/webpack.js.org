@@ -26,9 +26,10 @@ h4 { font-size: getFontSize(1); }
 h5 { font-size: getFontSize(0); }
 h6 { font-size: getFontSize(-1); }
 
-h1, h2, h3, h4, h5, h6 { 
-  font-weight:400; 
-  margin:0.5em 0; 
+h1, h2, h3, h4, h5, h6 {
+  font-weight:400;
+  margin:0.5em 0;
+  text-transform: capitalize;
 
   &:first-child { margin-top:0; }
   tt, code { font-size:inherit; }
