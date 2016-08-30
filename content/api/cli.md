@@ -3,15 +3,14 @@ title: CLI
 ---
 ## Overview
 
-`webpack` provides a command line interface(cli) to configure and interact with your build.
-This is mostly useful in case of early prototyping, profiling, writing npm scripts or personal customization of the build.
-For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`.
-Any parameters sent to the CLI will map to a corresponding parameter in the config file.
+webpack provides a Command Line Interface(CLI) to configure and interact with your build.This is mostly useful in case of early prototyping, profiling, writing npm scripts or personal customization of the build.For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`.Any parameters sent to the CLI will map to a corresponding parameter in the config file.
 
 ## Installation
 
+[//]: <> (TODO: Link to webpack installation article)
+
 ``` sh
-$ npm install webpack -g
+npm install webpack -g
 ```
 
 The `webpack` command is now available globally.
@@ -38,17 +37,18 @@ If your project structure is as follows -
     ├── index2.js
     └── others.js
 ```
-
-`webpack src/index.js dist/bundle.js`
+```
+webpack src/index.js dist/bundle.js
 	This will bundle your source code with entry as `index.js` and the output bundle file will have a path of `dist` and the filename will be `bundle.js`
 
 	| Asset     | Size    | Chunks      | Chunk Names |
 	|-----------|---------|-------------|-------------|
 	| bundle.js | 1.54 kB | 0 [emitted] | index       |
-		[0] ./src/index.js 51 bytes {0} [built]
-		[1] ./src/others.js 29 bytes {0} [built]
-
-`webpack index=./src/index.js entry2=./src/index2.js dist/bundle.js`
+	[0] ./src/index.js 51 bytes {0} [built]
+	[1] ./src/others.js 29 bytes {0} [built]
+```
+```
+webpack index=./src/index.js entry2=./src/index2.js dist/bundle.js
 	This will form the bundle with both the files as separate entry points.
 
 	| Asset     | Size    | Chunks        | Chunk Names   |
@@ -57,35 +57,37 @@ If your project structure is as follows -
 	[0] ./src/index.js 51 bytes {0} [built]
 	[0] ./src/index2.js 54 bytes {1} [built]
 	[1] ./src/others.js 29 bytes {0} {1} [built]
+```
 
-### Common options
+### Common Options
 
-<b>List all of the options available on the cli</b>
+**List all of the options available on the cli**
 ``` sh
 webpack --help , webpack -h
 ```
 
-<b>Build source using a config file</b>
-<p>Specifies a different configuration file to pick up. Use this if you want to specify something different than `webpack.config.js`, which is the default.</p>
+**Build source using a config file**
+
+Specifies a different configuration file to pick up. Use this if you want to specify something different than `webpack.config.js`, which is the default.
 
 ``` sh
 webpack --config example.config.js
 ```
 
-<b>Send environment variable to be used in webpack config file</b>
+**Send environment variable to be used in webpack config file**
 ``` sh
 webpack --env=DEVELOPMENT
 ```
 
-<b>Print result of webpack as a JSON</b>
-<p>In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option the output can be a JSON object</p>
-<p>This response is accepted by webpack's [analyse tool](http://webpack.github.com/analyse). The analyse tool will take in the JSON and provide all the details of the build in graphical form</p>
+**Print result of webpack as a JSON**
 
+In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option the output can be a JSON object.This response is accepted by webpack's [analyse tool](http://webpack.github.com/analyse). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
+[//]: <> (TODO: Link to webpack analyse article)
 ``` sh
 webpack --json , webpack -j, webpack -j > stats.json
 ```
 
-### Output options
+### Output Options
 
 This set of options allows you to manipulate certain output parameters of your build.
 
@@ -96,12 +98,12 @@ This set of options allows you to manipulate certain output parameters of your b
 | --output-chunk-filename      | The output filename for additional chunks                       | string     | filename with [id] instead of [name] or [id] prefixed |
 | --output-source-map-filename | The output filename for the SourceMap                           | string     | [name].map or [outputFilename].map                    |
 | --output-public-path         | The public path for the assets                                  | string     | /                                                     |
-| --output-jsonp-function      | The name of the jsonp function used for chunk loading           | string     | webpackJsonp                                          |
+| --output-jsonp-function      | The name of the JSONP function used for chunk loading           | string     | webpackJsonp                                          |
 | --output-pathinfo            | Include a comment with the request for every dependency         | boolean    | false                                                 |
 | --output-library             | Expose the exports of the entry point as library                | string     |                                                       |
 | --output-library-target      | The type for exposing the exports of the entry,point as library | string     | var                                                   |
 
-#### Example usage
+#### Example Usage
 
 ``` sh
 webpack index=./src/index.js index2=./src/index2.js --output-path='./dist' --output-filename='[name][hash].bundle.js'
@@ -129,7 +131,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 	[2] ./src/index2.js 54 bytes {0} [built]
 ```
 
-### Debug options
+### Debug Options
 
 This set of options allows you to better debug the application containing assets compiled with webpack
 
@@ -139,7 +141,7 @@ This set of options allows you to better debug the application containing assets
 | --devtool  | Define source map type for the bundled resources | string     | -             |
 | --progress | Print compilation progress in percentage         | boolean    | false         |
 
-### Module options
+### Module Options
 
 These options allow you to bind modules as allowed by webpack
 
@@ -149,7 +151,7 @@ These options allow you to bind modules as allowed by webpack
 | --module-bind-post | Bind an extension to a post loader |                             |
 | --module-bind-pre  | Bind an extension to a pre loader  |                             |
 
-### Watch options
+### Watch Options
 
 These options makes the build watch for changes in files of the dependency graph and perform the build again.
 
@@ -160,7 +162,7 @@ These options makes the build watch for changes in files of the dependency graph
 | --watch-aggregate-timeout | Timeout for gathering changes while watching            |
 | --watch-poll              | The polling interval for watching (also enable polling) |
 
-### Optimize options
+### Optimize Options
 
 These options allow to manipulate optimisations for a production build using webpack
 
@@ -171,7 +173,7 @@ These options allow to manipulate optimisations for a production build using web
 | --optimize-minimize       | Minimize javascript and switches loaders to minimizing | UglifyJsPlugin & LoaderOptionsPlugin |
 | --optimize-dedupe         | Optimize duplicate module sources in the bundle        | DedupePlugin                         |
 
-### Resolve options
+### Resolve Options
 
 These allow to configure the webpack resolver with aliases and extensions.
 
@@ -181,7 +183,7 @@ These allow to configure the webpack resolver with aliases and extensions.
 | --resolve-extensions   | Setup extensions that should be used to resolve,modules | --resolve-extensions .es6 .js .ts           |
 | --resolve-loader-alias | Minimize javascript and switches loaders to minimizing  |                                             |
 
-### Stats options
+### Stats Options
 
 These options allow webpack to display various stats and style them differently in the console output.
 
@@ -204,7 +206,7 @@ These options allow webpack to display various stats and style them differently 
 | --display-error-details | Display details about errors                                       | boolean |
 | --verbose, -v           | Show more details                                                  | boolean |
 
-### Advanced options
+### Advanced Options
 
 | Parameter             | Explanation                                                      | Usage                                       |
 |-----------------------|------------------------------------------------------------------|---------------------------------------------|
