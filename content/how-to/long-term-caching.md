@@ -38,7 +38,7 @@ module.exports = {
 
 Running webpack with this config will produce the following output:
 
-```
+```bash
 Hash: 55e783391098c2496a8f
 Version: webpack 1.10.1
 Time: 58ms
@@ -74,7 +74,7 @@ module.exports = {
 
 This config will also create 2 files, but in this case, each file will get its own unique hash.
 
-```
+```bash
 main.155567618f4367cd1cb8.js 1.43 kB 0 [emitted] main
 vendor.c2330c22cd2decb5da5a.js 1.43 kB 1 [emitted] vendor
 ```
@@ -124,10 +124,10 @@ Alternatively, just use one of these plugins to export JSON files:
 
 A sample output of webpack-manifest-plugin for our config looks like:
 
-```
+```json
 {
-  “main.js”: “main.155567618f4367cd1cb8.js”,
-  “vendor.js”: “vendor.c2330c22cd2decb5da5a.js”
+  "main.js": "main.155567618f4367cd1cb8.js",
+  "vendor.js": "vendor.c2330c22cd2decb5da5a.js"
 }
 ```
 
@@ -219,7 +219,7 @@ Or, if you're using [webpack-html-plugin](https://github.com/ampedandwired/html-
 
 Using this config the vendor chunk should not be changing its hash unless you change its code or dependencies. Here is a sample output for 2 runs with `moduleB.js` being changed between the runs:
 
-```
+```bash
 > webpack
 
 Hash: 92670583f688a262fdad
