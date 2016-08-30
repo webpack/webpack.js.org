@@ -30,12 +30,15 @@ Fully completed can be removed from this list. If there's a topic you would like
 
 ### `/api`
 
-* CLI - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#24](https://github.com/webpack/webpack.io/issues/24)
 * Configuration - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#25](https://github.com/webpack/webpack.io/issues/25)
 * Loaders - ![](https://img.shields.io/badge/progress-0%25-yellowgreen.svg) - [#21](https://github.com/webpack/webpack.io/issues/21)
 * Module Resolution - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#12](https://github.com/webpack/webpack.io/issues/12)
 * Node - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#23](https://github.com/webpack/webpack.io/issues/23)
 * Plugins - ![](https://img.shields.io/badge/progress-0%25-yellowgreen.svg) - [#37](https://github.com/webpack/webpack.io/issues/37)
+
+#### Done
+
+* CLI - ![](https://img.shields.io/badge/progress-100%25-green.svg) - [#24](https://github.com/webpack/webpack.io/issues/24)
 
 ### `/concepts`
 
