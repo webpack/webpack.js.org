@@ -22,7 +22,7 @@ Fully completed can be removed from this list. If there's a topic you would like
 * Changelog - ![](https://img.shields.io/badge/progress-0%25-yellowgreen.svg)
 * Contribute - ![](https://img.shields.io/badge/progress-10%25-yellowgreen.svg)
 * Get Started - ![](https://img.shields.io/badge/progress-10%25-yellowgreen.svg) - [#15](https://github.com/webpack/webpack.io/issues/15)
-* License - ![](https://img.shields.io/badge/progress-100%25-yellowgreen.svg)
+* License - ![](https://img.shields.io/badge/progress-100%25-green.svg)
 * Writer's Guide - ![](https://img.shields.io/badge/progress-50%25-yellowgreen.svg)
 
 ### `/api`
