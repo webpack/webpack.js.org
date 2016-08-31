@@ -22,15 +22,13 @@ However, this is not a recommended practice. This locks you down to a specific v
 npm install webpack --save-dev
 
 npm install webpack@<version> --save-dev
-
 ```
 
-If you are using npm scripts in your project, npm will try to look for webpack installation in your local modules for which this installation technique is useful
-```
-package.json
+If you are using npm scripts in your project, npm will try to look for webpack installation in your local modules for which this installation technique is useful.
 
-scripts: {
-	start: webpack --config mywebpack.config.js
+```json
+"scripts": {
+	"start": "webpack --config mywebpack.config.js"
 }
 ```
 
@@ -38,4 +36,12 @@ This is standard and recommended practice.
 
 ### Bleeding Edge
 
-If you are enthusiastic about using the latest that webpack has to offer (beware - may be unstable), clone the [webpack repository](https://github.com/webpack/webpack). You can follow the instructions at [this page](https://github.com/webpack/webpack/blob/master/CONTRIBUTING.md) to run the latest master and learn/test/use all the new exciting features!
+If you are enthusiastic about using the latest that webpack has to offer (beware - may be unstable), clone the [webpack repository](https://github.com/webpack/webpack). You can follow the instructions at [this page](https://github.com/webpack/webpack/blob/master/CONTRIBUTING.md) to run the latest master.
+
+You could also point to specific tags by
+``` sh
+git tag -l 	[Lists all the tags]
+git checkout tags/<tag_name>
+```
+
+This way, you can learn/test/use all the new exciting features!
