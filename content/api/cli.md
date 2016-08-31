@@ -7,13 +7,7 @@ webpack provides a Command Line Interface(CLI) to configure and interact with yo
 
 ## Installation
 
-?> (TODO: Link to webpack installation article)
-
-```bash
-npm install webpack -g
-```
-
-The `webpack` command is now available globally.
+Have a look at [this page](/how-to/install-webpack)
 
 ### Common Usage
 
