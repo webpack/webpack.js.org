@@ -36,7 +36,7 @@ Your `.babelrc` file should look like the following:
 
     "stage-2",
     //Specifies what level of language features to activate.
-    //State 2 is "draft", 4 is finished, 0 is strawman.
+    //Stage 2 is "draft", 4 is finished, 0 is strawman.
     //See https://tc39.github.io/process-document/
 
     "react"
