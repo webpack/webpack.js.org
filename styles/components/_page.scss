@@ -8,7 +8,8 @@
   }
 
   &-content { 
-    flex:1 1 auto; 
+    flex:0 0 77.5%; 
+    max-width:77.5%;
     padding:1.5em;
     background:map-get($colors, white);
   }

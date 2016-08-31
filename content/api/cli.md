@@ -9,7 +9,7 @@ webpack provides a Command Line Interface(CLI) to configure and interact with yo
 
 ?> (TODO: Link to webpack installation article)
 
-``` sh
+```bash
 npm install webpack -g
 ```
 
@@ -17,7 +17,7 @@ The `webpack` command is now available globally.
 
 ### Common Usage
 
-``` sh
+```bash
 webpack <entry> [<entry>] <output>
 ```
 | Parameter | Configuration Mapping         | Explanation                                                                                                                                                             |
@@ -62,7 +62,7 @@ webpack index=./src/index.js entry2=./src/index2.js dist/bundle.js
 ### Common Options
 
 **List all of the options available on the cli**
-``` sh
+```bash
 webpack --help , webpack -h
 ```
 
@@ -70,12 +70,12 @@ webpack --help , webpack -h
 
 Specifies a different configuration file to pick up. Use this if you want to specify something different than `webpack.config.js`, which is the default.
 
-``` sh
+```bash
 webpack --config example.config.js
 ```
 
 **Send environment variable to be used in webpack config file**
-``` sh
+```bash
 webpack --env=DEVELOPMENT
 ```
 
@@ -85,7 +85,7 @@ In every other case, webpack prints out a set of stats showing bundle, chunk and
 
 ?> (TODO: Link to webpack analyse article)
 
-``` sh
+```bash
 webpack --json , webpack -j, webpack -j > stats.json
 ```
 
@@ -107,7 +107,7 @@ This set of options allows you to manipulate certain output parameters of your b
 
 #### Example Usage
 
-``` sh
+```bash
 webpack index=./src/index.js index2=./src/index2.js --output-path='./dist' --output-filename='[name][hash].bundle.js'
 
 | Asset                                | Size    | Chunks      | Chunk Names   |
@@ -119,7 +119,7 @@ webpack index=./src/index.js index2=./src/index2.js --output-path='./dist' --out
 	[2] ./src/index2.js 54 bytes {0} [built]
 ```
 
-``` sh
+```bash
 webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --output-filename='[name][hash].bundle.js' --devtool source-map --output-source-map-filename='[name]123.map'
 
 | Asset                                | Size    | Chunks      | Chunk Names   |
@@ -236,7 +236,7 @@ These options allow webpack to display various stats and style them differently 
 
 This option profiles the compilation and includes this information in the stats output. It gives you an in depth idea of which step in the compilation is taking how long. This can help you optimise your build in a more informed manner.
 
-```sh
+```bash
 webpack --profile
 
 30ms building modules

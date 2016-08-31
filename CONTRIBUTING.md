@@ -18,7 +18,7 @@ please create an issue first.
 
 ## Branching Your Changes
 
-Making a branch in your fork for you contribution is helpful in the following ways:  
+Making a branch in your fork for your contribution is helpful in the following ways:  
 * It allows you to have multiple contributions in as PRs at once.
 * It allows us to identify what your contribution is about from the branch name.
 
