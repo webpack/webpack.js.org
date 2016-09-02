@@ -14,13 +14,13 @@ To follow along, please add the following deps to your `package.json`:
 
 To use HMR, you'll need the following dependencies:
 
-```shell
+```bash
 npm install --save-dev babel@6.5.2 babel-core@6.13.2 babel-loader@6.2.4 babel-preset-es2015@6.13.2 babel-preset-react@6.11.1 babel-preset-stage-2@6.13.0 css-loader@0.23.1 postcss-loader@0.9.1 react-hot-loader@3.0.0-beta.1 style-loader@0.13.1 webpack@2.1.0-beta.20 webpack-dev-server@2.1.0-beta.0
 ```
 
 In addition, for the purposes of this walkthrough, you'll need:
 
-```shell
+```bash
 npm install --save react@15.3.0 react-dom@15.3.0
 ```
 
