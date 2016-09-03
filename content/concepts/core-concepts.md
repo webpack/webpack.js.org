@@ -48,13 +48,13 @@ T> You may see the term **emitted** or **emit** used throughout our documentatio
 The `output` property has [many more configurable features](../api/configuration), but lets spend some time understanding some of the most [common use cases for the `output` property](./output).
 
 ### Loaders
-The goal of webpack is to have all of your assets in your project **managed** or **known** by webpack. (This doesn't mean that they all have to be bundled together). webpack treats [every file (.css, .html, scss, jpg, etc.) as a module](./everything-is-a-module). However, webpack can only treat them as _javascript modules_. 
+The goal is to have all of your assets in your project to be **webpack's** conscern and not the browser. (This doesn't mean that they all have to be bundled together). webpack treats [every file (.css, .html, scss, jpg, etc.) as a module](./everything-is-a-module). However, webpack **only understands javascript**.
 
 **Loaders describes to webpack _how to treat these files as modules_ as they are added to your dependency graph.**
 
 At a high level, they have two purposes in your webpack config. 
-1. Identify what files belong to which loader. (`test` property)
-2. Transform that file so that it can be added to your dependency graph (and eventually your bundle) (`loader` property)
+1. Identify what files should be transformed by a certain loader. (`test` property)
+2. Transform that file so that it can be added to your dependency graph (and eventually your bundle). (`loader` property)
 
 **webpack.config.js**
 ```
