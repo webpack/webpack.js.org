@@ -1,5 +1,5 @@
 ---
-title: Webpack Config
+title: Configuration
 ---
 
 ## Overview 
@@ -64,7 +64,7 @@ let targets = ['web', 'webworker', 'node', 'async-node', 'node-webkit', 'electro
 module.exports = targets;
 ```
 
-#### Using TypeScript with typings to create a class which [generates configs](https://github.com/angular/angular-cli/blob/master/addon/ng2/models/webpack-config.ts)
+#### Using TypeScript to create a class which the angular-cli uses to [generate configs](https://github.com/angular/angular-cli/blob/master/addon/ng2/models/webpack-config.ts)
 **webpack.config.ts**
 ```typescript
 import * as webpackMerge from 'webpack-merge';
@@ -126,7 +126,7 @@ export class NgCliWebpackConfig {
 #### Using JSX (React JS Markup) and Babel to create a JSON Configuration that webpack can understand. (Courtesy of [Jason Miller](https://twitter.com/_developit))
 
 ```javascript
-/* Lib: git.io/jsxobj */
+import h from 'jsxobj';
 
 /** @jsx h */
 function h(name, attrs, ...children) {
