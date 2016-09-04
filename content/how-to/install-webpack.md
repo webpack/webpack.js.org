@@ -34,14 +34,13 @@ If you are using npm scripts in your project, npm will try to look for webpack i
 
 This is standard and recommended practice.
 
+T> To run the local installation of webpack you can access its bin version as `node_modules/.bin/webpack`
+
+
 ### Bleeding Edge
 
-If you are enthusiastic about using the latest that webpack has to offer (beware - may be unstable), clone the [webpack repository](https://github.com/webpack/webpack). You can follow the instructions at [this page](https://github.com/webpack/webpack/blob/master/CONTRIBUTING.md) to run the latest master.
+If you are enthusiastic about using the latest that webpack has to offer (beware - may be unstable), you can install directly from the webpack repository using
 
-You could also point to specific tags by
 ``` sh
-git tag -l 	[Lists all the tags]
-git checkout tags/<tag_name>
+npm install webpack/webpack#<tagname/branchname>
 ```
-
-This way, you can learn/test/use all the new exciting features!
