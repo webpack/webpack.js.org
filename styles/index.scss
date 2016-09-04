@@ -61,9 +61,8 @@ li {
 }
 
 hr {
-  background: transparent url("http://tinyurl.com/bq5kskr") repeat-x 0 0;
-  color: map-get($colors, alto);
-  height: 4px;
+  height: 0.5em;
+  border:0;
 }
 
 ul, ol {
