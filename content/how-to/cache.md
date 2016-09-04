@@ -11,7 +11,9 @@ To enable long-term caching of static resources produced by webpack:
 
 ## The problem
 
-Each time something needs to be updated in our code, it has to be re-deployed on the server and then re-downloaded by all clients. This is clearly very inefficient since fetching resources over the network can be slow. This is why browsers cache static resources. But the way it works has a pitfall: if we don’t change filenames of our resources when deploying a new version, browser might think it hasn’t been updated and client will get a cached version of it.
+Each time something needs to be updated in our code, it has to be re-deployed on the server and then re-downloaded by all clients. This is clearly inefficient since fetching resources over the network can be slow. This is why browsers cache static resources.
+
+The way it works has a pitfall: if we don’t change filenames of our resources when deploying a new version, browser might think it hasn’t been updated and client will get a cached version of it.
 
 Probably the simplest way to tell the browser to download a newer version is to alter asset’s file name. In a pre-webpack era we used to add a build number to the filenames as a parameter and then increment it:
 
@@ -62,9 +64,9 @@ Webpack allows you to generate hashes depending on the file contents. Here is th
 ```js
 // webpack.config.js
 module.exports = {
-  ...
+  …
   output: {
-    ...
+    …
     filename: '[name].[chunkhash].js'
   }
 };
@@ -100,12 +102,12 @@ In order to reference a correct file in the HTML, we’ll need some information 
 ```js
 // webpack.config.js
 module.exports = {
-  ...
+  …
   plugins: [
     function() {
       this.plugin("done", function(stats) {
         require("fs").writeFileSync(
-          path.join(__dirname, "...", "stats.json"),
+          path.join(__dirname, "…", "stats.json"),
           JSON.stringify(stats.toJson()));
       });
     }

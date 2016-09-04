@@ -85,7 +85,7 @@ server {
 }
 ```
 
-The `proxy_set_header` lines are very important, because they allow the WebSocket to work correctly.
+The `proxy_set_header` lines are important, because they allow the WebSockets to work correctly.
 
 The command to start webpack-dev-server can then be changed to this:
 
