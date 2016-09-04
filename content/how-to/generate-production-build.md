@@ -27,7 +27,7 @@ The `DefinePlugin` creates **compile** time constants. Useful for injecting your
 ```js
 // webpack.config.js
 module.exports = {
-  //...
+  //…
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
@@ -35,7 +35,7 @@ module.exports = {
       }
     })
   ]
-  // ...
+  // …
 }
 ```
 
@@ -48,7 +48,7 @@ Webpack comes with UglifyJS plugin which minimize the output. You can pass an ob
 ```js
 // webpack.config.js
 module.exports = {
-  //...
+  //…
   plugins:[
     new webpack.DefinePlugin({
       'process.env':{
@@ -61,7 +61,7 @@ module.exports = {
       }
     })
   ]
-  //...
+  //…
 }
 ```
 

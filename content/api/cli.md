@@ -3,7 +3,7 @@ title: CLI
 ---
 ## Overview
 
-webpack provides a Command Line Interface(CLI) to configure and interact with your build. This is mostly useful in case of early prototyping, profiling, writing npm scripts or personal customization of the build. For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the config file.
+webpack provides a Command Line Interface (CLI) to configure and interact with your build. This is mostly useful in case of early prototyping, profiling, writing npm scripts or personal customization of the build. For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the config file.
 
 ## Installation
 
@@ -17,7 +17,7 @@ webpack <entry> [<entry>] <output>
 | Parameter | Configuration Mapping         | Explanation                                                                                                                                                             |
 |-----------|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | entry     | entry                         | A filename or a set of named filenames which act as the entry point to build your project. If you pass a pair in the form of `=` you can create an additional entry point. |
-| output    | output.path + output.filename | A path and filename for the bundled file to be saved in.                                                                                                                |
+| output    | output.path + output.filename | A path and filename for the bundled file to be saved in. |
 
 #### Examples
 
