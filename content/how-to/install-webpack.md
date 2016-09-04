@@ -8,7 +8,7 @@ We assume you have `node` and `npm` already installed.
 
 ### Global Installation
 
-``` sh
+``` bash
 npm install webpack -g
 ```
 
@@ -18,7 +18,7 @@ However, this is not a recommended practice. This locks you down to a specific v
 
 ### Local Installation
 
-``` sh
+``` bash
 npm install webpack --save-dev
 
 npm install webpack@<version> --save-dev
@@ -41,6 +41,6 @@ T> To run the local installation of webpack you can access its bin version as `n
 
 If you are enthusiastic about using the latest that webpack has to offer (beware - may be unstable), you can install directly from the webpack repository using
 
-``` sh
+``` bash
 npm install webpack/webpack#<tagname/branchname>
 ```
