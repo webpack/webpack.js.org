@@ -52,10 +52,11 @@ The `output` property has [many more configurable features](../api/configuration
 
 [**Learn more!**](./output)
 
+
 ## Loaders
 The goal is to have all of your assets in your project to be **webpack's** concern and not the browser. (This doesn't mean that they all have to be bundled together). webpack treats [every file (.css, .html, .scss, .jpg, etc.) as a module](./everything-is-a-module). However, webpack **only understands JavaScript**.
 
-**Loaders describes to webpack _how to treat these files as modules_ as they are added to your dependency graph.**
+**Loaders tell webpack _how to treat these files as modules_ as they are added to your dependency graph.**
 
 At a high level, they have two purposes in your webpack config. 
 1. Identify what files should be transformed by a certain loader. (`test` property)
@@ -71,7 +72,7 @@ At a high level, they have two purposes in your webpack config.
       filename: 'my-first-webpack.bundle.js',
       path: __dirname + 'dist/'
     },
-    modules: {
+    module: {
       loaders: [
         {test: /.jsx?$/, loader: 'babel-loader'} 
       ]
@@ -107,7 +108,7 @@ In order to use a plugin, you just need to `require()` it and add it to the `plu
       filename: 'my-first-webpack.bundle.js',
       path: __dirname + 'dist/'
     },
-    modules: {
+    module: {
       loaders: [
         {test: /.jsx?$/, loader: 'babel-loader'} 
       ]
