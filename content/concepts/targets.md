@@ -55,7 +55,7 @@ var serverConfig = {
     path: 'dist',
     filename: 'lib.node.js'
   }
-  //... 
+  //… 
 }
 
 var clientConfig = {
@@ -64,7 +64,7 @@ var clientConfig = {
     path: 'dist',
     filename: 'lib.js'
   }
-  //...
+  //…
 }
 
 ```

@@ -22,17 +22,23 @@ Fully completed can be removed from this list. If there's a topic you would like
 * Changelog - ![](https://img.shields.io/badge/progress-0%25-yellowgreen.svg)
 * Contribute - ![](https://img.shields.io/badge/progress-10%25-yellowgreen.svg)
 * Get Started - ![](https://img.shields.io/badge/progress-10%25-yellowgreen.svg) - [#15](https://github.com/webpack/webpack.io/issues/15)
-* License - ![](https://img.shields.io/badge/progress-100%25-yellowgreen.svg)
 * Writer's Guide - ![](https://img.shields.io/badge/progress-50%25-yellowgreen.svg)
+
+#### Done
+
+* License - ![](https://img.shields.io/badge/progress-100%25-green.svg)
 
 ### `/api`
 
-* CLI - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#24](https://github.com/webpack/webpack.io/issues/24)
 * Configuration - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#25](https://github.com/webpack/webpack.io/issues/25)
 * Loaders - ![](https://img.shields.io/badge/progress-0%25-yellowgreen.svg) - [#21](https://github.com/webpack/webpack.io/issues/21)
 * Module Resolution - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#12](https://github.com/webpack/webpack.io/issues/12)
 * Node - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#23](https://github.com/webpack/webpack.io/issues/23)
 * Plugins - ![](https://img.shields.io/badge/progress-0%25-yellowgreen.svg) - [#37](https://github.com/webpack/webpack.io/issues/37)
+
+#### Done
+
+* CLI - ![](https://img.shields.io/badge/progress-100%25-green.svg) - [#24](https://github.com/webpack/webpack.io/issues/24)
 
 ### `/concepts`
 
@@ -42,14 +48,15 @@ Fully completed can be removed from this list. If there's a topic you would like
 * Loaders - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#50](https://github.com/webpack/webpack.io/issues/50)
 * Output - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#10](https://github.com/webpack/webpack.io/issues/10)
 * Plugins - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#51](https://github.com/webpack/webpack.io/issues/51)
-* Targets - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#14](https://github.com/webpack/webpack.io/issues/14)
+
+#### Done
+
+* Targets - ![](https://img.shields.io/badge/progress-100%25-green.svg) - [#14](https://github.com/webpack/webpack.io/issues/14)
 
 ### `/how-to`
 
 * Author libraries - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#9](https://github.com/webpack/webpack.io/issues/9)
-* Cache - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#2](https://github.com/webpack/webpack.io/issues/2)
 * Develop - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#26](https://github.com/webpack/webpack.io/issues/26)
-* Generate a production build - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#11](https://github.com/webpack/webpack.io/issues/11)
 * Handle compatibility - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#4](https://github.com/webpack/webpack.io/issues/4)
 * Handle dependencies - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#5](https://github.com/webpack/webpack.io/issues/5)
 * Improve build performance - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#16](https://github.com/webpack/webpack.io/issues/16)
@@ -58,6 +65,11 @@ Fully completed can be removed from this list. If there's a topic you would like
 * Upgrade from webpack 1 - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#20](https://github.com/webpack/webpack.io/issues/20)
 * Use with Docker - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#44](https://github.com/webpack/webpack.io/issues/44)
 * Use with third party tools - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#53](https://github.com/webpack/webpack.io/issues/53)
+
+#### Done
+
+* Cache - ![](https://img.shields.io/badge/progress-100%25-green.svg) - [#2](https://github.com/webpack/webpack.io/issues/2)
+* Generate a production build - ![](https://img.shields.io/badge/progress-100%25-green.svg) - [#11](https://github.com/webpack/webpack.io/issues/11)
 
 ## Git Flow
 

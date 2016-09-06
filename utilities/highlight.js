@@ -5,13 +5,16 @@ var languages = require('prism-languages');
 var highlight = Prism.highlight;
 
 module.exports = function(code, language) {
-  try {
-    language = language || 'bash';
+  language = language || 'bash';
 
+  try {
     return highlight(code, languages[language]);
-  }
-  catch(err) {
-    console.warn('Failed to highlight', language, code, err);
+
+  } catch (error) {
+    if (!languages[language]) {
+      console.warn('Prism does not support this language: ', language);
+
+    } else console.warn('Prism failed to highlight: ', error);
   }
 
   return code;

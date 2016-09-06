@@ -16,7 +16,7 @@ end
 
 Next, install webpack and webpack-dev-server in your project;
 
-```sh
+```bash
 npm install webpack webpack-dev-server --save-dev
 ```
 
@@ -49,7 +49,7 @@ Note that you also need to create an `app.js` file.
 
 Now, let's run the server:
 
-```sh
+```bash
 webpack-dev-server --host 0.0.0.0 --public 10.10.10.61:8080 --watch-poll
 ```
 
@@ -85,7 +85,7 @@ server {
 }
 ```
 
-The `proxy_set_header` lines are very important, because they allow the WebSocket to work correctly.
+The `proxy_set_header` lines are important, because they allow the WebSockets to work correctly.
 
 The command to start webpack-dev-server can then be changed to this:
 
