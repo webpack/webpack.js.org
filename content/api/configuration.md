@@ -4,6 +4,8 @@ title: Configuration
 
 Webpack is fed a configuration object. It is passed in one of two ways depending on how you are using Webpack: through the Command Line (CLI) or via Node. Either method also allows an array of configuration objects, which are processed in parallel. This is more efficient than calling Webpack multiple times. All the available configuration options are specified below...
 
+---
+
 #### Context
 
 The base directory, an absolute path, for resolving entry points.
@@ -12,9 +14,11 @@ The base directory, an absolute path, for resolving entry points.
 context: __dirname + ‘/src’
 ```
 
-#### Entry Points
+---
 
-The point or points to enter the application. This value can be a string, array, or object:
+#### Entry
+
+The entry point(s) to enter the application. This value can be a string, array, or object:
 
 ```js
 entry: {
@@ -23,6 +27,10 @@ entry: {
   contact: ‘./contact.js’
 }
 ```
+
+?> TODO: Add more details on passing a string/array and how this will affect bundle names
+
+---
 
 #### Output
 
@@ -35,6 +43,8 @@ output: {
   publicPath: ‘/assets/’
 }
 ```
+
+---
 
 #### Output.filename
 
@@ -55,6 +65,8 @@ Using hashes based on each chunks' content:
 filename: [chunkhash].bundle.js
 ```
 
+---
+
 #### Output.path
 
 The output directory as an **absolute** path. Note that the `[hash]` subsitution may be used here as well.
@@ -62,6 +74,8 @@ The output directory as an **absolute** path. Note that the `[hash]` subsitution
 ```js
 path: __dirname + '/dist/assets'
 ```
+
+---
 
 #### Output.publicPath
 
@@ -85,6 +99,8 @@ background-image: url(/assets/spinner.gif);
 
 [Webpack Dev Server]() also takes a hint from `publicPath`, using it to determine where to serve the output files from. 
 
+---
+
 #### Output.chunkFilename
 
 ?> TODO: Is this just an option for naming child chunks and loader generated chunks?
@@ -92,6 +108,8 @@ background-image: url(/assets/spinner.gif);
 #### Output.sourceMapFilename
 
 Configure how source maps are named. The substitutions allowed here are `[id]` for chunk ID, `[file]` for the name of file being mapped, and `[hash]` (same as above).
+
+---
 
 #### Output.devtoolModuleFilenameTemplate
 
@@ -121,9 +139,13 @@ devtoolModuleFilenameTemplate: info => {
 }
 ```
 
+---
+
 #### Output.devtoolFallbackModuleFilenameTemplate
 
 A fallback used when the template string or function above yields duplicates. 
+
+---
 
 #### Output.devtoolLineToLine
 
@@ -135,6 +157,8 @@ Pass a boolean to enable or disable this feature for all modules (defaults to `f
 devtoolLineToLine: { test: /\.js$/, include: 'src/utilities' }
 ```
 
+---
+
 #### Output.hotUpdateChunkFilename
 
 Customize the filenames of hot update chunks. The only subsitutions allowed here are `[id]` and `[hash]`, the default being:
@@ -142,6 +166,8 @@ Customize the filenames of hot update chunks. The only subsitutions allowed here
 ```js
 hotUpdateChunkFilename: "[id].[hash].hot-update.js"
 ```
+
+---
 
 #### Output.hotUpdateMainFilename
 
@@ -151,17 +177,23 @@ Customize the main hot update filename. `[hash]` is the only available subsituti
 hotUpdateMainFilename: "[hash].hot-update.json"
 ```
 
+---
+
 #### Output.hotUpdateFunction
 
 A JSONP function used to asynchronously load hot-update chunks.
 
 ?> TODO: Add more details
 
+---
+
 #### Output.jsonpFunction
 
 A JSONP function used to asynchronously load chunks. A shorter function may reduce filesize a bit.
 
 ?> TODO: Add more details
+
+---
 
 #### Output.pathinfo
 
@@ -171,6 +203,8 @@ Tell Webpack to include comments in bundles with information about the contained
 pathinfo: true
 ```
 
+---
+
 #### Output.library
 
 Use `library`, and `libraryTarget` below, when writing a JavaScript library that should be published as a single file. Pass a string with the name of the library:
@@ -178,6 +212,8 @@ Use `library`, and `libraryTarget` below, when writing a JavaScript library that
 ```js
 library: "MyLibrary"
 ```
+
+---
 
 #### Output.libraryTarget
 
@@ -191,18 +227,119 @@ Configure how the library will be exposed. Any one of the following options can 
 
 `libraryTarget: "commonjs2"` - Expose it using the `module.exports` object
 
-`libraryTarget: "amd"` - Expose it using [Asynchronous Module Defintion][1] (AMD)
+`libraryTarget: "amd"` - Expose it using [Asynchronous Module Defintion]() (AMD)
 
-`libraryTarget: "umd"` - Expose it using [Universal Module Definition][1] (UMD)
+`libraryTarget: "umd"` - Expose it using [Universal Module Definition]() (UMD)
+
+---
+
+#### Output.umdNamedDefine
+
+When using `libraryTarget: "umd"`, setting:
+
+```js
+umdNamedDefine: true
+```
+
+will name the AMD module of the UMD build.
+
+---
+
+#### Output.sourcePrefix
+
+Change the prefix for each line in the output bundles. The default is tabs:
+
+```js
+sourcePrefix: "\t"
+```
+
+T> This option can be helpful in [fixing issues with multiline strings]().
+
+---
+
+#### Output.crossOriginLoading
+
+Enable [cross-origin]() loading of [chunks](). The following values are accepted...
+
+`crossOriginLoading: false` - Disables cross-origin loading (default)
+
+`crossOriginLoading: "anonymous"` - Enable cross-origin loading **without credentials**
+
+`crossOriginLoading: "use-credentials"` - Enable cross-origin loading **with credentials**
+
+---
+
+#### Module
+
+These options determine how the [different types of modules](/concepts/everything-is-a-module) within a project will be treated.
+
+---
+
+#### Loader Objects
+
+Loader objects are used in a few places throughout the configuration. They identify groups of modules using regular expressions. [Loaders](/concepts/loaders) can then be used, and chained together, to process, transform, or manipulate that group of modules. Loader objects can contain the following properties:
+
+`test: /\.js/` - Identify one or more file extensions using a [regex](), string, or function
+
+`include: /\/src/` - Include modules using a regex, string, or function
+
+`exclude: /node_modules/` - Exclude modules using a regex, string, or function
+
+`loader: "babel!eslint"` - A ! delimited string of loaders to use on these modules
+
+`loaders: [ "babel", "eslint" ]` - An array of loaders to use on these modules
+
+W> Note that loaders are always read from **right to left** whether passed via a delimited string or an array. In the example above, the [eslint-loader]() will lint, and possibly fix syntax in, the JavaScript modules and then hand them off to the [babel-loader]() for transpiling.
+
+---
+
+#### Module.preLoaders
+
+An array of [loader objects]() to be used as the first step in the loading process. In the example above, linting could be broken out into a *preLoader*:
+
+```js
+module: {
+  preLoaders: [
+    { test: /\.js/, exclude: /node_modules/, loader: 'eslint' }
+  ],
+  ...
+}
+```
+
+---
+
+#### Module.loaders
+
+An array of [loader objects]() to be used as the second step in the loading process. Many times `module.loaders` will be the only set of loader objects needed. A basic configuration might look like this:
+
+```js
+module: {
+  loaders: [
+    { test: /\.js/, exclude: /node_modules/, loader: 'babel!eslint' },
+    { test: /\.css/, loader: 'style!css' },
+    { test: /\.(jpg|png|gif), loader: 'file!img' }
+  ]
+}
+```
+
+---
+
+#### Module.postLoaders
+
+An array of [loader objects]() to be used as the last step in the loading process.
+
+?> TODO: any good examples?
 
 ---
 
 
-?> TODO: make sure everything links to the necessary areas for further reading
+?> TODO: Finish and add links to the necessary areas for further reading. Would be nice to [figure out](https://github.com/chjj/marked/issues/310) reference-style links in marked first.
 
 ?> TODO: consider breaking out template string substitutions into its own section and then referrring to it from throughout the rest of the page. It seems like there's a lot of overlap between sections there.
 
-#### Configuration Setup
+---
+
+#### Passing a Configuration
 
 ?> TODO: exporting a function and --env
 
@@ -210,8 +347,12 @@ Configure how the library will be exposed. Any one of the following options can 
 
 ?> TODO: exporting multiple configurations
 
+---
+
 #### External Configurations
 
 ?> TODO: possible extensions, i. e. .babel.js
 
 [1]: http://davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/
+[2]: https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin
+[3]: https://github.com/webpack/webpack/issues/1161
