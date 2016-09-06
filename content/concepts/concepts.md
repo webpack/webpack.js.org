@@ -69,7 +69,7 @@ At a high level, they have two purposes in your webpack config.
     entry: './path/to/my/entry/file.js',
     output: {
       filename: 'my-first-webpack.bundle.js',
-      path: __dirname + 'dist/'
+      path: './dist'
     },
     module: {
       loaders: [
@@ -105,7 +105,7 @@ In order to use a plugin, you just need to `require()` it and add it to the `plu
     entry: './path/to/my/entry/file.js',
     output: {
       filename: 'my-first-webpack.bundle.js',
-      path: __dirname + 'dist/'
+      path: './dist'
     },
     module: {
       loaders: [
