@@ -3,3 +3,6 @@ node_js:
   - "6"
 script:
   - bash ./scripts/deploy.sh
+sudo: required
+install:
+  sudo pip install proselint
