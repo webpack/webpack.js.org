@@ -83,7 +83,7 @@ In the configuration above we have defined our loader with its two required prop
 
 > "Hey webpack compiler, when you come across a path that resolves to a '.js' or '.jsx' file inside of a require() statement, use the babel-loader to transform it before you bundle it together".
 
-W> It is important to remember when defining loaders in your webpack config, you are defining them under `module.loaders`, and not `loaders`.
+W> It is important to remember when defining loaders in your webpack config, you are defining them under `module.loaders`, and not `loaders`. 
 
 There are more specific properties to define on loaders that we haven't yet covered. 
 
@@ -109,7 +109,7 @@ In order to use a plugin, you just need to `require()` it and add it to the `plu
     },
     module: {
       loaders: [
-        {test: /.jsx?$/, loader: 'babel-loader'} 
+        {test: /\.(js|jsx)$/, loader: 'babel-loader'} 
       ]
     },
     plugins: [
