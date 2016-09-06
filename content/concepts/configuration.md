@@ -2,7 +2,6 @@
 title: Configuration
 ---
 
-## Overview 
 You may have noticed that few webpack configurations look exactly alike. This is because **webpack's configuration file is a JavaScript file that exports an object.** This object, is then parsed by webpack based upon its defined properties.
 
 ### Examples
