@@ -4,10 +4,10 @@ title: Configuration
 
 You may have noticed that few webpack configurations look exactly alike. This is because **webpack's configuration file is a JavaScript file that exports an object.** This object, is then parsed by webpack based upon its defined properties.
 
-### Examples
+## Examples
 The following examples below describe how webpacks configuration object can be both expressive and configurable because _it is code_: 
 
-#### The simplest of examples
+### The simplest of examples
 **webpack.config.js**
 ```javascript 
 module.exports = {
@@ -20,7 +20,7 @@ module.exports = {
 
 ```
 
-#### Generating multiple targets and configs and exporting the entire array.
+### Generating multiple targets and configs and exporting the entire array.
 **webpack.config.js**
 ```javascript
 var path = require('path');
@@ -63,7 +63,7 @@ let targets = ['web', 'webworker', 'node', 'async-node', 'node-webkit', 'electro
 module.exports = targets;
 ```
 
-#### Using TypeScript to create a class which the angular-cli uses to [generate configs](https://github.com/angular/angular-cli/blob/master/addon/ng2/models/webpack-config.ts)
+### Using TypeScript to create a class which the angular-cli uses to [generate configs](https://github.com/angular/angular-cli/blob/master/addon/ng2/models/webpack-config.ts)
 **webpack.config.ts**
 ```typescript
 import * as webpackMerge from 'webpack-merge';
@@ -122,7 +122,7 @@ export class NgCliWebpackConfig {
 }
 ```
 
-#### Using JSX (React JS Markup) and Babel to create a JSON Configuration that webpack can understand. (Courtesy of [Jason Miller](https://twitter.com/_developit))
+### Using JSX (React JS Markup) and Babel to create a JSON Configuration that webpack can understand. (Courtesy of [Jason Miller](https://twitter.com/_developit))
 
 ```javascript
 import h from 'jsxobj';
