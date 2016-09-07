@@ -75,7 +75,7 @@ webpack --env=DEVELOPMENT
 
 **Print result of webpack as a JSON**
 
-In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option the output can be a JSON object.This response is accepted by webpack's [analyse tool](http://webpack.github.com/analyse). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
+In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option the output can be a JSON object.This response is accepted by webpack's [analyse tool](https://webpack.github.com/analyse). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
 
 ?> (TODO: Link to webpack analyse article)
 

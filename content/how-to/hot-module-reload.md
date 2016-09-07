@@ -12,7 +12,7 @@ given the needs of a particular project. The approach described below uses Babel
 React, but these tools are not necessary for HMR to work.
 If you'd like to see examples of other approaches,
 please request them or, better yet,
-[open up a PR with an addition](https://github.com/webpack/webpack.io)!
+[open up a PR with an addition](https://github.com/webpack/webpack.js.org)!
 
 ##Project Config
 This guide will be demonstrating the use of HMR with Babel,
@@ -141,8 +141,8 @@ module.exports = env => {
 There's a lot going on above, and not all of it is related to HMR.
 You may benefit from reading the
 [full documentation](https://webpack.github.io/docs/webpack-dev-server.html)
-on webpack dev server, and the [other articles](https://webpack.github.io/webpack.io/concepts/)
-here on webpack.io.
+on webpack dev server, and the [other articles](https://webpack.js.org/concepts/)
+here on webpack.js.org.
 
 The basic assumption here is that your JS entry is located at `./src/index.js`,
 and that you're using CSS Modules for your styling.
