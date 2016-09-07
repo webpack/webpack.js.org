@@ -10,12 +10,13 @@
 @import "functions";
 @import "vars";
 
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono);
 @import url(https://fonts.googleapis.com/css?family=Averia+Sans+Libre:400,300);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,600,700,400italic);
 
 body {
   font:300 getFontSize(0) 'Open Sans', 'Century Gothic', sans-serif;
-  color:map-get($colors, mine-shaft);
+  color:map-get($colors, emperor);
   background:map-get($colors, concrete);
 }
 
@@ -26,9 +27,9 @@ h4 { font-size: getFontSize(1); }
 h5 { font-size: getFontSize(0); }
 h6 { font-size: getFontSize(-1); }
 
-h1, h2, h3, h4, h5, h6 { 
-  font-weight:400; 
-  margin:0.5em 0; 
+h1, h2, h3, h4, h5, h6 {
+  font-weight:400;
+  margin:0.5em 0;
 
   &:first-child { margin-top:0; }
   tt, code { font-size:inherit; }
@@ -58,10 +59,10 @@ li {
   margin:0.5em 0;
 }
 
-hr {
-  background: transparent url("http://tinyurl.com/bq5kskr") repeat-x 0 0;
-  color: map-get($colors, alto);
-  height: 4px;
+hr { // TODO: Revisit this
+  padding:0.5em 0;
+  border:0;
+  margin:0;
 }
 
 ul, ol {
@@ -143,6 +144,7 @@ b, strong {
 }
 
 code, tt {
+  font-family:'Ubuntu Mono', monospace;
   margin: 0 2px;
   padding: 0 5px;
   white-space: nowrap;
