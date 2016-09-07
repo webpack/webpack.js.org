@@ -8,7 +8,7 @@ const pages = [
   { title: 'Concepts', url: 'concepts' },
   { title: 'How to', url: 'how-to' },
   { title: 'API', url: 'api' },
-  { title: 'Github', url: '//github.com/webpack/webpack.io' }
+  { title: 'Github', url: '//github.com/webpack/webpack.js.org' }
 ];
 
 export default props => {
