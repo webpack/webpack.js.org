@@ -14,7 +14,7 @@ module.exports = function(section) {
 
   // patch ids (this.options.headerPrefix can be undefined!)
   renderer.heading = function(text, level, raw) {
-    var id = raw.toLowerCase().replace(/[^\w]+/g, '-');
+    var id = raw.toLowerCase().replace(/`/g, '').replace(/[^\w]+/g, '-');
 
     return '<h'
       + level
@@ -26,6 +26,25 @@ module.exports = function(section) {
       + '</h'
       + level
       + '>\n';
+  };
+
+  var codeTemplate = renderer.code;
+  renderer.code = function(code, lang, escaped) {
+    if(lang === 'js-with-links') {
+      var links = [];
+      code = code.replace(/\[(.+?)\]\((.+?)\)/g, match => {
+        match = /\[(.+?)\]\((.+?)\)/.exec(match);
+        links.push('<a class="code-link" href="' + match[2] + '">' + match[1] + '</a>');
+        return "MARKDOWNLINK_" + (links.length - 1) + "_";
+      })
+      var rendered = codeTemplate.call(this, code, "js", escaped);
+      rendered = rendered.replace(/MARKDOWNLINK_(\d+)_/g, match => {
+        var idx = +(/MARKDOWNLINK_(\d+)_/.exec(match)[1]);
+        return links[idx];
+      });
+      return rendered;
+    }
+    return codeTemplate.call(this, code, lang, escaped);
   };
 
   return {
