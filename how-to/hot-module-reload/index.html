@@ -1,0 +1,234 @@
+<html lang="en"><head><title>webpack - How to Configure Hot Module Replacement?</title><base href="//webpack.js.org/"/><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"/><meta name="description" content="
+Hot Module Replacement (HMR) exchanges, adds, or removes modules while an
+application is running …"/><meta name="keywords" content="webpack,javascript,web development,programming"/><link rel="icon" type="image/png" href="//webpack.js.org/assets/img/favicon.png"/><link rel="stylesheet" href="//webpack.js.org/assets/main.css"/></head><body><main role="main"><div class="navigation "><div class="container navigation-inner"><a class="navigation-logo" href="index.html"><span class="logo"><span class="webpack-icon -light" style="width:20px;margin-left:10px;padding-bottom:10px;"><figure class="webpack-icon-cube -outer" style="width:20px;height:20px;transform:translateX(-50%)
+              scale3d(1,1,1)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(10px);"></section></figure><figure class="webpack-icon-cube -inner" style="width:20px;height:20px;transform:translateX(-50%)
+              scale3d(0.5,0.5,0.5)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(10px);"></section></figure></span><span class="logo-text -light">Webpack</span></span></a><nav class="navigation-nav"><a class="navigation-nav-link" href="/concepts">Concepts</a><a class="navigation-nav-link" href="/how-to">How to</a><a class="navigation-nav-link" href="/api">API</a><a class="navigation-nav-link" href="///github.com/webpack/webpack.js.org">Github</a></nav></div></div><aside class="sidecar"><a href="https://github.com/webpack/webpack" class="sidecar-item -github"><span>See the Repo</span><i class="icon-github"></i></a><a href="#" class="sidecar-item -gitter"><span>Get Help on Gitter</span><i class="icon-gitter"></i></a><a href="https://medium.com/webpack" class="sidecar-item -medium"><span>Visit Our Blog</span><i class="icon-medium"></i></a><a href="http://stackoverflow.com/questions/tagged/webpack" class="sidecar-item -so"><span>Browse Webpack on SO</span><i class="icon-stack-overflow"></i></a></aside><div class="container page"><nav class="sidebar"><div class="sidebar-link"><a class="sidebar-link-text" href="/how-to/use-with-third-party-tools">How to Use with Third Party Tools?</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/how-to/use-with-docker">How to Use with Docker?</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/how-to/upgrade-from-webpack-1">How to Upgrade from Webpack 1?</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/how-to/split-code">How to Split Code?</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/how-to/shim">How to Shim?</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/how-to/set-up-hmr-with-react">How to Set Up Hot Module Replacement with React?</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/how-to/install-webpack">How to Install webpack?</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/how-to/index">How to</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/how-to/improve-build-performance">How to Improve Build Performance?</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/how-to/hot-module-reload">How to Configure Hot Module Replacement?</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/how-to/handle-dependencies">How to Handle Dependencies?</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/how-to/handle-compatibility">How to Handle Compatibility?</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/how-to/generate-production-build">How to Generate a Production Build?</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/how-to/develop">How to Develop?</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/how-to/develop-using-vagrant">How to Develop Using Vagrant</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/how-to/cache">How to Cache?</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/how-to/author-libraries">How to Author Libraries?</a></div></nav><section class="page-content"><h1>How to Configure Hot Module Replacement?</h1><a class="page-edit" href="https://github.com/webpack/webpack.js.org/edit/master/content/how-to/hot-module-reload.md">Edit this Page  <i class="icon-edit"></i></a><div><p>Hot Module Replacement (HMR) exchanges, adds, or removes modules while an
+application is running without a page reload.
+HMR is particularly useful in applications using a single state tree,
+since components are &quot;dumb&quot; and will reflect the latest application state, even
+after their source is changed and they are replaced.</p>
+<p>Webpack&#39;s power lies in its customizablity, and there are MANY ways of configuring HMR
+given the needs of a particular project. The approach described below uses Babel and
+React, but these tools are not necessary for HMR to work.
+If you&#39;d like to see examples of other approaches,
+please request them or, better yet,
+<a href="https://github.com/webpack/webpack.js.org">open up a PR with an addition</a>!</p>
+<p>##Project Config
+This guide will be demonstrating the use of HMR with Babel,
+React, and PostCSS (using CSS Modules).
+To follow along, please add the following deps to your <code>package.json</code>:</p>
+<p>To use HMR, you&#39;ll need the following dependencies:</p>
+<pre><code class="lang-bash">npm <span class="token function" >install</span> --save-dev babel@6.5.2 babel-core@6.13.2 babel-loader@6.2.4 babel-preset-es2015@6.13.2 babel-preset-react@6.11.1 babel-preset-stage-2@6.13.0 css-loader@0.23.1 postcss-loader@0.9.1 react-hot-loader@3.0.0-beta.1 style-loader@0.13.1 webpack@2.1.0-beta.20 webpack-dev-server@2.1.0-beta.0
+</code></pre>
+<p>In addition, for the purposes of this walkthrough, you&#39;ll need:</p>
+<pre><code class="lang-bash">npm <span class="token function" >install</span> --save react@15.3.0 react-dom@15.3.0
+</code></pre>
+<p>###Babel Config
+Your <code>.babelrc</code> file should look like the following:</p>
+<pre><code class="lang-js"><span class="token punctuation" >{</span>
+  <span class="token string" >"presets"</span><span class="token punctuation" >:</span> <span class="token punctuation" >[</span>
+    <span class="token punctuation" >[</span><span class="token string" >"es2015"</span><span class="token punctuation" >,</span> <span class="token punctuation" >{</span><span class="token string" >"modules"</span><span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >}</span><span class="token punctuation" >]</span><span class="token punctuation" >,</span>
+    <span class="token comment" spellcheck="true">//Webpack understands the native import syntax, and uses it for tree shaking</span>
+
+    <span class="token string" >"stage-2"</span><span class="token punctuation" >,</span>
+    <span class="token comment" spellcheck="true">//Specifies what level of language features to activate.</span>
+    <span class="token comment" spellcheck="true">//State 2 is "draft", 4 is finished, 0 is strawman.</span>
+    <span class="token comment" spellcheck="true">//See https://tc39.github.io/process-document/</span>
+
+    <span class="token string" >"react"</span>
+    <span class="token comment" spellcheck="true">//Transpile React components to JS</span>
+  <span class="token punctuation" >]</span><span class="token punctuation" >,</span>
+  <span class="token string" >"plugins"</span><span class="token punctuation" >:</span> <span class="token punctuation" >[</span>
+    <span class="token string" >"react-hot-loader/babel"</span>
+    <span class="token comment" spellcheck="true">//Enables React code to work with HMR.</span>
+  <span class="token punctuation" >]</span>
+<span class="token punctuation" >}</span>
+</code></pre>
+<p>###Webpack config
+While there&#39;s many ways of setting up your Webpack config - via API,
+via multiple or single config files, etc - here is the basic information
+you should have available.</p>
+<pre><code class="lang-js"><span class="token keyword" >const</span> <span class="token punctuation" >{</span> resolve <span class="token punctuation" >}</span> <span class="token operator" >=</span> <span class="token function" >require</span><span class="token punctuation" >(</span><span class="token string" >'path'</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+<span class="token keyword" >const</span> webpack <span class="token operator" >=</span> <span class="token function" >require</span><span class="token punctuation" >(</span><span class="token string" >'webpack'</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+
+module<span class="token punctuation" >.</span>exports <span class="token operator" >=</span> env <span class="token operator" >=</span><span class="token operator" >></span> <span class="token punctuation" >{</span>
+  <span class="token keyword" >return</span> <span class="token punctuation" >{</span>
+    entry<span class="token punctuation" >:</span> <span class="token punctuation" >[</span>
+      <span class="token string" >'react-hot-loader/patch'</span><span class="token punctuation" >,</span>
+      <span class="token comment" spellcheck="true">//activate HMR for React</span>
+
+      <span class="token string" >'webpack-dev-server/client?http://localhost:8080'</span><span class="token punctuation" >,</span>
+      <span class="token comment" spellcheck="true">//bundle the client for webpack dev server</span>
+      <span class="token comment" spellcheck="true">//and connect to the provided endpoint</span>
+
+      <span class="token string" >'webpack/hot/only-dev-server'</span><span class="token punctuation" >,</span>
+      <span class="token comment" spellcheck="true">//bundle the client for hot reloading</span>
+      <span class="token comment" spellcheck="true">//only- means to only hot reload for successful updates</span>
+
+
+      <span class="token string" >'./index.js'</span>
+      <span class="token comment" spellcheck="true">//the entry point of our app</span>
+    <span class="token punctuation" >]</span><span class="token punctuation" >,</span>
+    output<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
+      filename<span class="token punctuation" >:</span> <span class="token string" >'bundle.js'</span><span class="token punctuation" >,</span>
+      <span class="token comment" spellcheck="true">//the output bundle</span>
+
+      path<span class="token punctuation" >:</span> <span class="token function" >resolve</span><span class="token punctuation" >(</span>__dirname<span class="token punctuation" >,</span> <span class="token string" >'dist'</span><span class="token punctuation" >)</span><span class="token punctuation" >,</span>
+
+      publicPath<span class="token punctuation" >:</span> <span class="token string" >'/'</span>
+      <span class="token comment" spellcheck="true">//necessary for HMR to know where to load the hot update chunks</span>
+    <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
+
+    context<span class="token punctuation" >:</span> <span class="token function" >resolve</span><span class="token punctuation" >(</span>__dirname<span class="token punctuation" >,</span> <span class="token string" >'src'</span><span class="token punctuation" >)</span><span class="token punctuation" >,</span>
+
+    devtool<span class="token punctuation" >:</span> <span class="token string" >'inline-source-map'</span><span class="token punctuation" >,</span>
+
+    devServer<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
+      hot<span class="token punctuation" >:</span> <span class="token boolean" >true</span><span class="token punctuation" >,</span>
+      <span class="token comment" spellcheck="true">//activate hot reloading</span>
+
+      contentBase<span class="token punctuation" >:</span> <span class="token string" >'/dist'</span>
+      <span class="token comment" spellcheck="true">//match the output path</span>
+
+      publicPath<span class="token punctuation" >:</span> <span class="token string" >'/'</span>
+      <span class="token comment" spellcheck="true">//match the output publicPath</span>
+    <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
+
+    module<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
+      loaders<span class="token punctuation" >:</span> <span class="token punctuation" >[</span>
+        <span class="token punctuation" >{</span> test<span class="token punctuation" >:</span> <span class="token regex" >/\.js$/</span><span class="token punctuation" >,</span>
+          loaders<span class="token punctuation" >:</span> <span class="token punctuation" >[</span>
+            <span class="token string" >'babel'</span><span class="token punctuation" >,</span>
+          <span class="token punctuation" >]</span><span class="token punctuation" >,</span>
+          exclude<span class="token punctuation" >:</span> <span class="token regex" >/node_modules/</span>
+        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
+        <span class="token punctuation" >{</span>
+          test<span class="token punctuation" >:</span> <span class="token regex" >/\.css$/</span><span class="token punctuation" >,</span>
+          loaders<span class="token punctuation" >:</span> <span class="token punctuation" >[</span>
+            <span class="token string" >'style'</span><span class="token punctuation" >,</span>
+            <span class="token string" >'css-loader?modules'</span><span class="token punctuation" >,</span>
+            <span class="token string" >'postcss-loader'</span><span class="token punctuation" >,</span>
+          <span class="token punctuation" >]</span><span class="token punctuation" >,</span>
+        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
+      <span class="token punctuation" >]</span><span class="token punctuation" >,</span>
+    <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
+
+    plugins<span class="token punctuation" >:</span> <span class="token punctuation" >[</span>
+      <span class="token keyword" >new</span> <span class="token class-name" >webpack<span class="token punctuation" >.</span>HotModuleReplacementPlugin</span><span class="token punctuation" >(</span><span class="token punctuation" >)</span><span class="token punctuation" >,</span>
+      <span class="token comment" spellcheck="true">//activates HMR</span>
+
+      <span class="token keyword" >new</span> <span class="token class-name" >webpack<span class="token punctuation" >.</span>NamedModulesPlugin</span><span class="token punctuation" >(</span><span class="token punctuation" >)</span><span class="token punctuation" >,</span>
+      <span class="token comment" spellcheck="true">//prints more readable module names in the browser console on HMR updates</span>
+    <span class="token punctuation" >]</span><span class="token punctuation" >,</span>
+  <span class="token punctuation" >}</span>
+<span class="token punctuation" >}</span><span class="token punctuation" >;</span>
+</code></pre>
+<p>There&#39;s a lot going on above, and not all of it is related to HMR.
+You may benefit from reading the
+<a href="https://webpack.github.io/docs/webpack-dev-server.html">full documentation</a>
+on webpack dev server, and the <a href="https://webpack.js.org/concepts/">other articles</a>
+here on webpack.js.org.</p>
+<p>The basic assumption here is that your JS entry is located at <code>./src/index.js</code>,
+and that you&#39;re using CSS Modules for your styling.</p>
+<p>Please see the comments inline that explain each portion of the config. The main
+areas to look are the <code>devServer</code> key and the <code>entry</code> key. The <code>HotModuleReplacementPlugin</code> is
+also necessary to include in the <code>plugins</code> array.</p>
+<p>There are two modules included here for the purposes of this guide.
+The react-hot-loader addition to the entry, as noted above, is necessary to enable
+HMR with React components. The NamedModulesPlugin is a useful addition
+to better understand what modules are being updated when using HMR.</p>
+<p>###Code
+In this guide, we&#39;re using the following files:</p>
+<pre><code class="lang-js"><span class="token comment" spellcheck="true">// ./src/index.js</span>
+<span class="token keyword" >import</span> React <span class="token keyword" >from</span> <span class="token string" >'react'</span><span class="token punctuation" >;</span>
+<span class="token keyword" >import</span> ReactDOM <span class="token keyword" >from</span> <span class="token string" >'react-dom'</span><span class="token punctuation" >;</span>
+<span class="token keyword" >import</span> <span class="token punctuation" >{</span> AppContainer <span class="token punctuation" >}</span> <span class="token keyword" >from</span> <span class="token string" >'react-hot-loader'</span>
+
+<span class="token keyword" >import</span> App <span class="token keyword" >from</span> <span class="token string" >'./components/App'</span><span class="token punctuation" >;</span>
+
+<span class="token keyword" >const</span> render <span class="token operator" >=</span> <span class="token punctuation" >(</span><span class="token punctuation" >)</span> <span class="token operator" >=</span><span class="token operator" >></span> <span class="token punctuation" >{</span>
+  ReactDOM<span class="token punctuation" >.</span><span class="token function" >render</span><span class="token punctuation" >(</span>
+    <span class="token operator" >&lt;</span>AppContainer<span class="token operator" >></span>
+      <span class="token operator" >&lt;</span>App<span class="token operator" >/</span><span class="token operator" >></span>
+    <span class="token operator" >&lt;</span><span class="token operator" >/</span>AppContainer<span class="token operator" >></span><span class="token punctuation" >,</span>
+    document<span class="token punctuation" >.</span><span class="token function" >getElementById</span><span class="token punctuation" >(</span><span class="token string" >'root'</span><span class="token punctuation" >)</span>
+  <span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+<span class="token punctuation" >}</span><span class="token punctuation" >;</span>
+
+<span class="token function" >render</span><span class="token punctuation" >(</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+
+<span class="token comment" spellcheck="true">// Hot Module Replacement API</span>
+<span class="token keyword" >if</span> <span class="token punctuation" >(</span>module<span class="token punctuation" >.</span>hot<span class="token punctuation" >)</span> <span class="token punctuation" >{</span>
+  module<span class="token punctuation" >.</span>hot<span class="token punctuation" >.</span><span class="token function" >accept</span><span class="token punctuation" >(</span><span class="token string" >'./components/App'</span><span class="token punctuation" >,</span> render<span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+<span class="token punctuation" >}</span>
+
+
+<span class="token comment" spellcheck="true">// ./src/components/App.js</span>
+<span class="token keyword" >import</span> React <span class="token keyword" >from</span> <span class="token string" >'react'</span><span class="token punctuation" >;</span>
+<span class="token keyword" >import</span> styles <span class="token keyword" >from</span> <span class="token string" >'./App.css'</span><span class="token punctuation" >;</span>
+
+<span class="token keyword" >const</span> App <span class="token operator" >=</span> <span class="token punctuation" >(</span><span class="token punctuation" >)</span> <span class="token operator" >=</span><span class="token operator" >></span> <span class="token punctuation" >(</span>
+  <span class="token operator" >&lt;</span>div className<span class="token operator" >=</span><span class="token punctuation" >{</span>styles<span class="token punctuation" >.</span>app<span class="token punctuation" >}</span><span class="token operator" >></span>
+    <span class="token operator" >&lt;</span>h2<span class="token operator" >></span>Hello<span class="token punctuation" >,</span> <span class="token operator" >&lt;</span><span class="token operator" >/</span>h2<span class="token operator" >></span>
+  <span class="token operator" >&lt;</span><span class="token operator" >/</span>div<span class="token operator" >></span>
+<span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+
+<span class="token keyword" >export</span> <span class="token keyword" >default</span> App<span class="token punctuation" >;</span>
+</code></pre>
+<pre><code class="lang-css"><span class="token selector" >// ./src/components/App<span class="token class" >.css</span>
+<span class="token class" >.app</span> </span><span class="token punctuation" >{</span>
+    <span class="token property" >text-size-adjust</span><span class="token punctuation" >:</span> none<span class="token punctuation" >;</span>
+    <span class="token property" >font-family</span><span class="token punctuation" >:</span> helvetica, arial, sans-serif<span class="token punctuation" >;</span>
+    <span class="token property" >line-height</span><span class="token punctuation" >:</span> <span class="token number" >200%</span><span class="token punctuation" >;</span>
+    <span class="token property" >padding</span><span class="token punctuation" >:</span> <span class="token number" >6</span>px <span class="token number" >20</span>px <span class="token number" >30</span>px<span class="token punctuation" >;</span>
+<span class="token punctuation" >}</span>
+</code></pre>
+<p>Now, the above code is using React, but it doesn&#39;t need to be. In fact,
+the only thing that matters above is the code refering to <code>module</code>.
+First, we wrap the HMR code inside of <code>module.hot</code> check;
+webpack exposes <code>module</code> to the code, and if we are running with <code>hot: true</code> configured,
+we&#39;ll enter the inside of the conditional.</p>
+<p>While the module API offers more options than what&#39;s above, the most
+important element is the <code>module.hot.accept</code> call.
+It specific how to handle changes to specific dependencies.</p>
+<p>So in this case, <code>module.hot</code> will fire the <code>render</code> method ONLY
+when <code>src/components/App.js</code> changes! Note that would also include when the
+dependencies of <code>App.js</code> change -
+so the <code>render</code> method will file not just for changes made directly to the
+source of <code>App.js</code>, but also changes made to <code>App.css</code>, since <code>App.css</code>
+is included in <code>App.js</code>.</p>
+<p>###Package.json
+Finally, we need to start up webpack dev server to bundle our code and see HMR in action.
+We can use the following package.json entry:</p>
+<pre><code class="lang-js">  <span class="token string" >"start"</span> <span class="token punctuation" >:</span> <span class="token string" >"webpack-dev-server --env.dev"</span><span class="token punctuation" >,</span>
+</code></pre>
+<p>Run <code>npm start</code>, open up your browser to <code>localhost:8080</code>,
+and you should see the folling entries printed in your console.log:</p>
+<pre><code>dev-server.js:49<span class="token punctuation" >[</span>HMR<span class="token punctuation" >]</span> Waiting <span class="token keyword" >for</span> update signal from WDS…
+only-dev-server.js:74<span class="token punctuation" >[</span>HMR<span class="token punctuation" >]</span> Waiting <span class="token keyword" >for</span> update signal from WDS…
+client?c7c8:24 <span class="token punctuation" >[</span>WDS<span class="token punctuation" >]</span> Hot Module Replacement enabled.
+</code></pre><p>Go ahead and edit and save your App.js file.
+You should see something like the following in your console.log:</p>
+<pre><code><span class="token punctuation" >[</span>WDS<span class="token punctuation" >]</span> App updated. Recompiling…
+client?c7c8:91 <span class="token punctuation" >[</span>WDS<span class="token punctuation" >]</span> App hot update…
+dev-server.js:45 <span class="token punctuation" >[</span>HMR<span class="token punctuation" >]</span> Checking <span class="token keyword" >for</span> updates on the server…
+log-apply-result.js:20 <span class="token punctuation" >[</span>HMR<span class="token punctuation" >]</span> Updated modules:
+log-apply-result.js:22 <span class="token punctuation" >[</span>HMR<span class="token punctuation" >]</span>  - ./components/App.js
+dev-server.js:27 <span class="token punctuation" >[</span>HMR<span class="token punctuation" >]</span> App is up to date.
+</code></pre><p>Note that HMR specifies the paths of the updated modules.
+That&#39;s because we&#39;re using the NamedModules plugin!</p>
+</div></section></div><footer class="footer"><div class="container footer-inner"><section class="footer-inner-left"><a class="footer-inner-link" href="get-started">Get Started</a><a class="footer-inner-link" href="analyze">Analyze</a><a class="footer-inner-link" href="contribute">Contribute</a></section><section class="footer-inner-middle"><a href="/"><span class="webpack-icon -dark" style="width:18px;margin-left:9px;padding-bottom:9px;"><figure class="webpack-icon-cube -outer" style="width:18px;height:18px;transform:translateX(-50%)
+              scale3d(1,1,1)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(9px);"></section></figure><figure class="webpack-icon-cube -inner" style="width:18px;height:18px;transform:translateX(-50%)
+              scale3d(0.5,0.5,0.5)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(9px);"></section></figure></span></a></section><section class="footer-inner-right"><a class="footer-inner-link" href="//gitter.im/webpack/webpack">Support</a><a class="footer-inner-link" href="changelog">Changelog</a><a class="footer-inner-link" href="license">License</a></section></div></footer></main></body></html>

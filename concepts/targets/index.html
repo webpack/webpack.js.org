@@ -1,12 +1,7 @@
-<html lang="en"><head><title>webpack - Targets</title><base href="//webpack.github.io/webpack.io/"/><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"/><meta name="description" content="
- webworker
- node
- async-node
- node-webkit
- electron
- electron-main
- electron-renderer
-"/><meta name="keywords" content="webpack,javascript,web development,programming"/><link rel="icon" type="image/png" href="//webpack.github.io/webpack.io/assets/img/favicon.png"/><link rel="stylesheet" href="//webpack.github.io/webpack.io/assets/main.css"/></head><body><main role="main"><div class="navigation "><div class="container navigation-inner"><a class="navigation-logo" href="index.html"><span class="logo"><span class="webpack-icon -light" style="width:20px;margin-left:10px;padding-bottom:10px;"><figure class="webpack-icon-cube -outer" style="width:20px;height:20px;transform:translateX(-50%)
+<html lang="en"><head><title>webpack - Targets</title><base href="//webpack.js.org/"/><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"/><meta name="description" content="
+Overview
+
+Because JavaScript can be written for both server and browser, webpack offers multiple…"/><meta name="keywords" content="webpack,javascript,web development,programming"/><link rel="icon" type="image/png" href="//webpack.js.org/assets/img/favicon.png"/><link rel="stylesheet" href="//webpack.js.org/assets/main.css"/></head><body><main role="main"><div class="navigation "><div class="container navigation-inner"><a class="navigation-logo" href="index.html"><span class="logo"><span class="webpack-icon -light" style="width:20px;margin-left:10px;padding-bottom:10px;"><figure class="webpack-icon-cube -outer" style="width:20px;height:20px;transform:translateX(-50%)
               scale3d(1,1,1)
               rotateX(0deg)
               rotateY(0deg)
@@ -14,16 +9,59 @@
               scale3d(0.5,0.5,0.5)
               rotateX(0deg)
               rotateY(0deg)
-              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(10px);"></section></figure></span><span class="logo-text -light">Webpack</span></span></a><nav class="navigation-nav"><a class="navigation-nav-link" href="/concepts">Concepts</a><a class="navigation-nav-link" href="/how-to">How to</a><a class="navigation-nav-link" href="/api">API</a><a class="navigation-nav-link" href="///github.com/webpack/webpack.io">Github</a></nav></div></div><aside class="sidecar"><a href="https://github.com/webpack/webpack" class="sidecar-item -github"><span>See the Repo</span><i class="icon-github"></i></a><a href="#" class="sidecar-item -gitter"><span>Get Help on Gitter</span><i class="icon-gitter"></i></a><a href="https://medium.com/webpack" class="sidecar-item -medium"><span>Visit Our Blog</span><i class="icon-medium"></i></a><a href="http://stackoverflow.com/questions/tagged/webpack" class="sidecar-item -so"><span>Browse Webpack on SO</span><i class="icon-stack-overflow"></i></a></aside><div class="container page"><nav class="sidebar"><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/targets">Targets</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/plugins">Plugins</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/output">Output</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/loaders">Loaders</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/index">Introduction</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/everything-is-a-module">Everything is a Module</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/entry-points">Entry Points</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/core-concepts">Core Concepts</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/compared-to-other-systems">Compared to Other Systems</a></div></nav><section class="page-content"><h1>Targets</h1><a class="page-edit" href="https://github.com/webpack/webpack.io/edit/master/content/concepts/targets.md">Edit this Page  <i class="icon-edit"></i></a><div><blockquote>
-<p>webworker
-node
-async-node
-node-webkit
-electron
-electron-main
-electron-renderer</p>
-</blockquote>
-</div></section></div><footer class="footer"><div class="container footer-inner"><section class="footer-inner-left"><a class="footer-inner-link" href="get-started">Get Started</a><a class="footer-inner-link" href="analyze">Analyze</a><a class="footer-inner-link" href="contribute">Contribute</a></section><section class="footer-inner-middle"><a href="/"><span class="webpack-icon -dark" style="width:18px;margin-left:9px;padding-bottom:9px;"><figure class="webpack-icon-cube -outer" style="width:18px;height:18px;transform:translateX(-50%)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(10px);"></section></figure></span><span class="logo-text -light">Webpack</span></span></a><nav class="navigation-nav"><a class="navigation-nav-link" href="/concepts">Concepts</a><a class="navigation-nav-link" href="/how-to">How to</a><a class="navigation-nav-link" href="/api">API</a><a class="navigation-nav-link" href="///github.com/webpack/webpack.js.org">Github</a></nav></div></div><aside class="sidecar"><a href="https://github.com/webpack/webpack" class="sidecar-item -github"><span>See the Repo</span><i class="icon-github"></i></a><a href="#" class="sidecar-item -gitter"><span>Get Help on Gitter</span><i class="icon-gitter"></i></a><a href="https://medium.com/webpack" class="sidecar-item -medium"><span>Visit Our Blog</span><i class="icon-medium"></i></a><a href="http://stackoverflow.com/questions/tagged/webpack" class="sidecar-item -so"><span>Browse Webpack on SO</span><i class="icon-stack-overflow"></i></a></aside><div class="container page"><nav class="sidebar"><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/targets">Targets</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/plugins">Plugins</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/output">Output</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/modules">Modules</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/loaders">Loaders</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/index">Introduction</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/entry-points">Entry Points</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/core-concepts">Core Concepts</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/compared-to-other-systems">Compared to Other Systems</a></div></nav><section class="page-content"><h1>Targets</h1><a class="page-edit" href="https://github.com/webpack/webpack.js.org/edit/master/content/concepts/targets.md">Edit this Page  <i class="icon-edit"></i></a><div><h2 class="header"><a class="header-anchor" href="#overview" id="overview"></a><span class="text">Overview</span><a class="header-anchor-select" href="#overview">#</a></h2>
+<p>Because JavaScript can be written for both server and browser, webpack offers multiple deployment <em>targets</em> that you can set in your webpack <a href="./api/configuration">configuration</a>.</p>
+<blockquote class="warning"><i class="icon-warning tip-icon"></i>The webpack <code>target</code> property is not to be confused with the <code>output.libraryTarget</code> property. For more information see <a href="./concepts/output">our guide</a> on the <code>output</code> property.</blockquote><h3 class="header"><a class="header-anchor" href="#usage" id="usage"></a><span class="text">Usage</span><a class="header-anchor-select" href="#usage">#</a></h3>
+<p>To set the <code>target</code> property, you simply set the target value in your webpack config: </p>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="lang-javascript">module<span class="token punctuation" >.</span>exports <span class="token operator" >=</span> config<span class="token punctuation" >;</span>
+
+config <span class="token operator" >=</span> <span class="token punctuation" >{</span>
+  target<span class="token punctuation" >:</span> <span class="token string" >'node'</span> 
+<span class="token punctuation" >}</span>
+</code></pre>
+<h3 class="header"><a class="header-anchor" href="#options" id="options"></a><span class="text">Options</span><a class="header-anchor-select" href="#options">#</a></h3>
+<p>The following is a list of values you can pass to the <code>target</code> property. </p>
+<ul>
+<li><code>&quot;web&quot;</code> Compile for usage in a browser-like environment (default)</li>
+<li><code>&quot;webworker&quot;</code> Compile as WebWorker</li>
+<li><code>&quot;node&quot;</code> Compile for usage in a node.js-like environment (use <code>require</code> to load chunks)</li>
+<li><code>&quot;async-node&quot;</code> Compile for usage in a node.js-like environment (use <code>fs</code> and <code>vm</code> to load chunks async)</li>
+<li><code>&quot;node-webkit&quot;</code> Compile for usage in webkit, uses jsonp chunk loading but also supports build in node.js modules plus require(&quot;nw.gui&quot;) (experimental)</li>
+<li><code>&quot;electron-main&quot;</code> Compile for electron renderer process, provide a target using <code>JsonpTemplatePlugin</code>, <code>FunctionModulePlugin</code> for browser environment and <code>NodeTargetPlugin</code> and <code>ExternalsPlugin</code> for commonjs and electron bulit-in modules. *Note: need <code>webpack</code> &gt;= 1.12.15.</li>
+</ul>
+<p>Each <em>target</em> has a variety of deployment/environment specific additions, support to fit its needs. </p>
+<p>For example, when you use the <code>electron-main</code> <em>target</em>, <em>webpack</em> includes multiple <code>electron-main</code> specific variables. For more information on which templates and <em>externals</em> are used, you can refer <a href="https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js#L70-L185">directly to the webpack source code</a>.</p>
+<blockquote class="todo"><i class="icon-chevron-right tip-icon"></i>We should expand on this further. What specifically is included.</blockquote><h3 class="header"><a class="header-anchor" href="#multiple-targets" id="multiple-targets"></a><span class="text">Multiple Targets</span><a class="header-anchor-select" href="#multiple-targets">#</a></h3>
+<p>Although webpack does <strong>not</strong> support multiple strings being passed into the <code>target</code> property, you can create an isomorphic library by bundling two separate configurations: </p>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="lang-javascript">
+module<span class="token punctuation" >.</span>exports <span class="token operator" >=</span> <span class="token punctuation" >[</span> serverConfig<span class="token punctuation" >,</span> clientConfig <span class="token punctuation" >]</span><span class="token punctuation" >;</span>
+
+<span class="token keyword" >var</span> serverConfig <span class="token operator" >=</span> <span class="token punctuation" >{</span>
+  target<span class="token punctuation" >:</span> <span class="token string" >'node'</span><span class="token punctuation" >,</span>
+  output<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
+    path<span class="token punctuation" >:</span> <span class="token string" >'dist'</span><span class="token punctuation" >,</span>
+    filename<span class="token punctuation" >:</span> <span class="token string" >'lib.node.js'</span>
+  <span class="token punctuation" >}</span>
+  <span class="token comment" spellcheck="true">//… </span>
+<span class="token punctuation" >}</span>
+
+<span class="token keyword" >var</span> clientConfig <span class="token operator" >=</span> <span class="token punctuation" >{</span>
+  target<span class="token punctuation" >:</span> <span class="token string" >'web'</span><span class="token punctuation" >,</span> <span class="token comment" spellcheck="true">// &lt;=== can be omitted as default is 'web'</span>
+  output<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
+    path<span class="token punctuation" >:</span> <span class="token string" >'dist'</span><span class="token punctuation" >,</span>
+    filename<span class="token punctuation" >:</span> <span class="token string" >'lib.js'</span>
+  <span class="token punctuation" >}</span>
+  <span class="token comment" spellcheck="true">//…</span>
+<span class="token punctuation" >}</span>
+</code></pre>
+<p>The example above will create a <code>lib.js</code> and <code>lib.node.js</code> file in your <code>dist</code> folder.</p>
+<h3 class="header"><a class="header-anchor" href="#resources" id="resources"></a><span class="text">Resources</span><a class="header-anchor-select" href="#resources">#</a></h3>
+<p>As seen from the options above there are multiple different deployment <em>targets</em> that you can choose from. Below is a list of examples, and resources that you can refer to. </p>
+<h4 class="header"><a class="header-anchor" href="#bundle-output-comparison-" id="bundle-output-comparison-"></a><span class="text">Bundle Output Comparison:</span><a class="header-anchor-select" href="#bundle-output-comparison-">#</a></h4>
+<p>  <strong><a href="https://github.com/TheLarkInn/compare-webpack-target-bundles">compare-webpack-target-bundles</a></strong>: A great resource for testing and viewing different webpack <em>targets</em>. Also great for bug reporting. </p>
+<blockquote class="todo"><i class="icon-chevron-right tip-icon"></i>Need to find up to date examples of these webpack targets being used in live code or boilerplates.</blockquote></div></section></div><footer class="footer"><div class="container footer-inner"><section class="footer-inner-left"><a class="footer-inner-link" href="get-started">Get Started</a><a class="footer-inner-link" href="analyze">Analyze</a><a class="footer-inner-link" href="contribute">Contribute</a></section><section class="footer-inner-middle"><a href="/"><span class="webpack-icon -dark" style="width:18px;margin-left:9px;padding-bottom:9px;"><figure class="webpack-icon-cube -outer" style="width:18px;height:18px;transform:translateX(-50%)
               scale3d(1,1,1)
               rotateX(0deg)
               rotateY(0deg)
