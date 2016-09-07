@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "antwar -d",
-    "build": "antwar -b && npm run sitemap",
+    "build": "antwar -b && npm run sitemap && echo webpack.js.org > build/CNAME",
     "deploy": "antwar -D",
     "lint": "eslint . --ext .js --ext .jsx --ext .md",
     "test": "npm run lint",
