@@ -53,7 +53,7 @@ The `output` property has [many more configurable features](../api/configuration
 
 
 ## Loaders
-The goal is to have all of your assets in your project to be **webpack's** concern and not the browser. (This doesn't mean that they all have to be bundled together). webpack treats [every file (.css, .html, .scss, .jpg, etc.) as a module](./everything-is-a-module). However, webpack **only understands JavaScript**.
+The goal is to have all of your assets in your project to be **webpack's** concern and not the browser. (This doesn't mean that they all have to be bundled together). webpack treats [every file (.css, .html, .scss, .jpg, etc.) as a module](./modules). However, webpack **only understands JavaScript**.
 
 **Loaders tell webpack _how to treat these files as modules_ as they are added to your dependency graph.**
 
