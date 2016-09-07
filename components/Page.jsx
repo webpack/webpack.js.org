@@ -5,7 +5,7 @@ import Sidebar from './Sidebar';
 
 export default props => {
   let { section, page } = props,
-      edit = `https://github.com/webpack/webpack.io/edit/master/content/${page.url}.md`;
+      edit = `https://github.com/webpack/webpack.js.org/edit/master/content/${page.url}.md`;
 
   return (
     <Container className="page">

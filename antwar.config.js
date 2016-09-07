@@ -5,7 +5,7 @@ var highlight = require('./utilities/highlight');
 
 module.exports = {
   //assets: [] // custom assets to copy into the build
-  siteBase: '//webpack.github.io/webpack.io/',
+  siteBase: '//webpack.js.org/',
   home: 'index.html', // XXX: drop once there's a root domain
   output: 'build',
   title: 'webpack',
