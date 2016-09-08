@@ -6,7 +6,9 @@ Webpack is fed a configuration object. It is passed in one of two ways depending
 
 ---
 
-#### Context
+### Context
+
+`string`
 
 The base directory, an absolute path, for resolving entry points.
 
@@ -16,9 +18,11 @@ context: __dirname + ‘/src’
 
 ---
 
-#### Entry
+### Entry
 
-The entry point(s) to enter the application. This value can be a string, array, or object:
+`string` `array` `object`
+
+The point or points to enter the application. 
 
 ```js
 entry: {
@@ -32,7 +36,7 @@ entry: {
 
 ---
 
-#### Output
+### Output
 
 A set of options instructing Webpack on how and where it should output your bundles, assets and anything else you bundle up or load with Webpack. Below is a simple example followed by descriptions of each individual `output` option.
 
@@ -46,7 +50,9 @@ output: {
 
 ---
 
-#### Output.filename
+### Output.filename
+
+`string`
 
 This option determines the name of each output bundle. For a single `entry` point with no children, this can be a static name. However, when creating multiple bundles via more than one entry point, [code splitting](), or various [plugins](), you should use one of the following substitutions to give each bundle a unique name...
 
@@ -67,7 +73,9 @@ filename: [chunkhash].bundle.js
 
 ---
 
-#### Output.path
+### Output.path
+
+`string`
 
 The output directory as an **absolute** path. Note that the `[hash]` subsitution may be used here as well.
 
@@ -77,7 +85,9 @@ path: __dirname + '/dist/assets'
 
 ---
 
-#### Output.publicPath
+### Output.publicPath
+
+`string`
 
 This option specifies the public address of the output files when referenced in a browser. For [loaders]() that embed `<script>` or `<link>` tags or reference assets like images, `publicPath` is used as the `href` or `url()` to the file when it’s different than their location on disk (as specified by `path`). This can be helpful when you want to host some or all output files on a different domain or CDN. As with `path` you can use the `[hash]` substitution for a better caching profile.
 
@@ -101,17 +111,25 @@ background-image: url(/assets/spinner.gif);
 
 ---
 
-#### Output.chunkFilename
+### Output.chunkFilename
+
+`string`
 
 ?> TODO: Is this just an option for naming child chunks and loader generated chunks?
 
-#### Output.sourceMapFilename
+---
+
+### Output.sourceMapFilename
+
+`string`
 
 Configure how source maps are named. The substitutions allowed here are `[id]` for chunk ID, `[file]` for the name of file being mapped, and `[hash]` (same as above).
 
 ---
 
-#### Output.devtoolModuleFilenameTemplate
+### Output.devtoolModuleFilenameTemplate
+
+`string` `function`
 
 Customize the names used in each source map's `sources` array. This can be done by passing a template string or function. For example, when using `devtool: 'eval'`, this is the default:
 
@@ -141,13 +159,17 @@ devtoolModuleFilenameTemplate: info => {
 
 ---
 
-#### Output.devtoolFallbackModuleFilenameTemplate
+### Output.devtoolFallbackModuleFilenameTemplate
+
+`string` `function`
 
 A fallback used when the template string or function above yields duplicates. 
 
 ---
 
-#### Output.devtoolLineToLine
+### Output.devtoolLineToLine
+
+`boolean` `object`
 
 Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines. 
 
@@ -159,7 +181,9 @@ devtoolLineToLine: { test: /\.js$/, include: 'src/utilities' }
 
 ---
 
-#### Output.hotUpdateChunkFilename
+### Output.hotUpdateChunkFilename
+
+`string`
 
 Customize the filenames of hot update chunks. The only subsitutions allowed here are `[id]` and `[hash]`, the default being:
 
@@ -169,7 +193,9 @@ hotUpdateChunkFilename: "[id].[hash].hot-update.js"
 
 ---
 
-#### Output.hotUpdateMainFilename
+### Output.hotUpdateMainFilename
+
+`string`
 
 Customize the main hot update filename. `[hash]` is the only available subsitution, the default being:
 
@@ -179,7 +205,9 @@ hotUpdateMainFilename: "[hash].hot-update.json"
 
 ---
 
-#### Output.hotUpdateFunction
+### Output.hotUpdateFunction
+
+`function`
 
 A JSONP function used to asynchronously load hot-update chunks.
 
@@ -187,7 +215,9 @@ A JSONP function used to asynchronously load hot-update chunks.
 
 ---
 
-#### Output.jsonpFunction
+### Output.jsonpFunction
+
+`function`
 
 A JSONP function used to asynchronously load chunks. A shorter function may reduce filesize a bit.
 
@@ -195,7 +225,9 @@ A JSONP function used to asynchronously load chunks. A shorter function may redu
 
 ---
 
-#### Output.pathinfo
+### Output.pathinfo
+
+`boolean`
 
 Tell Webpack to include comments in bundles with information about the contained modules. This option defaults to `false` and **should not** be used in production.
 
@@ -205,7 +237,9 @@ pathinfo: true
 
 ---
 
-#### Output.library
+### Output.library
+
+`string`
 
 Use `library`, and `libraryTarget` below, when writing a JavaScript library that should be published as a single file. Pass a string with the name of the library:
 
@@ -215,7 +249,9 @@ library: "MyLibrary"
 
 ---
 
-#### Output.libraryTarget
+### Output.libraryTarget
+
+`string`
 
 Configure how the library will be exposed. Any one of the following options can be used:
 
@@ -233,7 +269,9 @@ Configure how the library will be exposed. Any one of the following options can 
 
 ---
 
-#### Output.umdNamedDefine
+### Output.umdNamedDefine
+
+`boolean`
 
 When using `libraryTarget: "umd"`, setting:
 
@@ -245,7 +283,9 @@ will name the AMD module of the UMD build.
 
 ---
 
-#### Output.sourcePrefix
+### Output.sourcePrefix
+
+`string`
 
 Change the prefix for each line in the output bundles. The default is tabs:
 
@@ -257,7 +297,9 @@ T> This option can be helpful in [fixing issues with multiline strings]().
 
 ---
 
-#### Output.crossOriginLoading
+### Output.crossOriginLoading
+
+`boolean` `string`
 
 Enable [cross-origin]() loading of [chunks](). The following values are accepted...
 
@@ -269,13 +311,13 @@ Enable [cross-origin]() loading of [chunks](). The following values are accepted
 
 ---
 
-#### Module
+### Module
 
 These options determine how the [different types of modules](/concepts/everything-is-a-module) within a project will be treated.
 
 ---
 
-#### Loader Objects
+### Loader Objects
 
 Loader objects are used in a few places throughout the configuration. They identify groups of modules using regular expressions. [Loaders](/concepts/loaders) can then be used, and chained together, to process, transform, or manipulate that group of modules. Loader objects can contain the following properties:
 
@@ -293,7 +335,9 @@ W> Note that loaders are always read from **right to left** whether passed via a
 
 ---
 
-#### Module.preLoaders
+### Module.preLoaders
+
+`array`
 
 An array of [loader objects]() to be used as the first step in the loading process. In the example above, linting could be broken out into a *preLoader*:
 
@@ -308,7 +352,9 @@ module: {
 
 ---
 
-#### Module.loaders
+### Module.loaders
+
+`array`
 
 An array of [loader objects]() to be used as the second step in the loading process. Many times `module.loaders` will be the only set of loader objects needed. A basic configuration might look like this:
 
@@ -324,7 +370,9 @@ module: {
 
 ---
 
-#### Module.postLoaders
+### Module.postLoaders
+
+`array`
 
 An array of [loader objects]() to be used as the last step in the loading process.
 
@@ -332,7 +380,9 @@ An array of [loader objects]() to be used as the last step in the loading proces
 
 ---
 
-#### Module.noParse
+### Module.noParse
+
+`regex` `array`
 
 Prevent Webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries...
 
@@ -342,7 +392,7 @@ noParse: /jquery|backbone/
 
 ---
 
-#### Module Contexts
+### Module Contexts
 
 General description...
 
@@ -369,15 +419,13 @@ module: {
 
 ---
 
-#### Resolve
+### Resolve
 
 Configure how modules are resolved. For example, when calling `import "lodash"` in ES6, the `resolve` options can change where Webpack goes to look for `"lodash"` (see [modulesDirectories]()).
 
 ---
 
-#### Resolve.root
-
-Tell Webpack what directories should be searched when resolving modules. 
+### Resolve.root
 
 `string` `array`
 
@@ -389,7 +437,9 @@ W> The value or values **must be an absolute path(s)**.
 
 ---
 
-#### Resolve.fallback
+### Resolve.fallback
+
+`string` `array`
 
 Add a fallback(s) for instances where Webpack is unable to resolve a module in the given `root` or `modulesDirectories`. This option takes the same values as `root` above.
 
@@ -397,22 +447,29 @@ W> As with `root`, the value or values **must be an absolute path(s)**.
 
 ---
 
-#### Resolve.modulesDirectories
+### Resolve.modulesDirectories
+
+`array`
 
 
 
 ---
 
-#### Resolve.extensions
+### Resolve.extensions
+
+`array`
 
 
 
 ---
 
-#### Resolve.alias
+### Resolve.alias
+
+`object`
 
 
 
+---
 
 ?> TODO: Finish and add links to the necessary areas for further reading. Would be nice to [figure out](https://github.com/chjj/marked/issues/310) reference-style links in marked first.
 
@@ -420,7 +477,7 @@ W> As with `root`, the value or values **must be an absolute path(s)**.
 
 ---
 
-#### Passing a Configuration
+### Passing a Configuration
 
 ?> TODO: exporting a function and --env
 
@@ -430,7 +487,7 @@ W> As with `root`, the value or values **must be an absolute path(s)**.
 
 ---
 
-#### External Configurations
+### External Configurations
 
 ?> TODO: possible extensions, i. e. .babel.js
 
