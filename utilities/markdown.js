@@ -30,21 +30,45 @@ module.exports = function(section) {
 
   var codeTemplate = renderer.code;
   renderer.code = function(code, lang, escaped) {
-    if(lang === 'js-with-links') {
-      var links = [];
+    var linksEnabled = false;
+    var detailsEnabled = false;
+    if(/-with-links/.test(lang)) {
+      linksEnabled = true;
+      lang = lang.replace(/-with-links/, "");
+    }
+    if(/-with-details/.test(lang)) {
+      detailsEnabled = true;
+      lang = lang.replace(/-with-details/, "");
+    }
+    var links = [];
+    if(linksEnabled) {
       code = code.replace(/\[(.+?)\]\((.+?)\)/g, match => {
         match = /\[(.+?)\]\((.+?)\)/.exec(match);
         links.push('<a class="code-link" href="' + match[2] + '">' + match[1] + '</a>');
         return "MARKDOWNLINK_" + (links.length - 1) + "_";
       });
-      var rendered = codeTemplate.call(this, code, "js", escaped);
+    }
+    if(detailsEnabled) {
+      code = code.replace(/<details>/g, "MARKDOWNDETAILSSTART\n");
+      code = code.replace(/ *<\/details>(\n)?/g, "\nMARKDOWNDETAILSEND\n");
+      code = code.replace(/<summary>/g, "\nMARKDOWNSUMMARYSTART\n");
+      code = code.replace(/ *<\/summary>/g, "\nMARKDOWNSUMMARYEND");
+      code = code.replace(/(?:  )?( *)MARKDOWNDETAILSSTART([\s\S]*?)MARKDOWNSUMMARYSTART\n/g, "MARKDOWNDETAILSSTART$2MARKDOWNSUMMARYSTART\n$1");
+    }
+    var rendered = codeTemplate.call(this, code, lang, escaped);
+    if(linksEnabled) {
       rendered = rendered.replace(/MARKDOWNLINK_(\d+)_/g, match => {
         var idx = +(/MARKDOWNLINK_(\d+)_/.exec(match)[1]);
         return links[idx];
       });
-      return rendered;
     }
-    return codeTemplate.call(this, code, lang, escaped);
+    if(detailsEnabled) {
+      rendered = rendered.replace(/MARKDOWNDETAILSSTART.*?\n/g, "<details>");
+      rendered = rendered.replace(/\n.*?MARKDOWNDETAILSEND.*?\n/g, "</details>");
+      rendered = rendered.replace(/\n.*?MARKDOWNSUMMARYSTART.*?\n/g, "<summary>");
+      rendered = rendered.replace(/\n.*?MARKDOWNSUMMARYEND.*?\n/g, "</summary>");
+    }
+    return rendered
   };
 
   return {
