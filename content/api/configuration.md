@@ -469,7 +469,35 @@ W> As with `root`, the value or values **must be an absolute path(s)**.
 
 `object`
 
+Create aliases to `import` or `require` certain modules more easily. For example, to alias a bunch of commonly used `src/` folders:
 
+```js
+alias: {
+  Utilities: __dirname + '/src/utilities/',
+  Templates: __dirname + '/src/templates/'
+}
+```
+
+Now, instead of using relative paths when importing:
+
+```js
+import Utility from 'Utilities/utility';
+```
+
+A trailing `$` can also be added to the given object's keys to signify an exact match:
+
+```js
+alias: {
+  xyz$: __dirname + '/path/to/file.js'
+}
+```
+
+which would yield these results:
+
+```js
+import Test1 from 'xyz'; // Success, file.js is resolved and imported
+import Test2 from 'xyz/file.js'; // Error, /path/to/file.js/file.js is invalid
+```
 
 ---
 
