@@ -134,8 +134,8 @@ module.exports = env => {
 There's a lot going on above, and not all of it is related to HMR.
 You may benefit from reading the
 [full documentation](https://webpack.github.io/docs/webpack-dev-server.html)
-on webpack dev server, and the [other articles](https://webpack.github.io/webpack.io/concepts/)
-here on webpack.io.
+on webpack dev server, and the [other articles](https://webpack.js.org/concepts/)
+here on webpack.js.org.
 
 The basic assumption here is that your JS entry is located at `./src/index.js`,
 and that you're using CSS Modules for your styling.
