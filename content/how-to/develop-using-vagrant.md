@@ -26,7 +26,7 @@ Make sure to have a `webpack.config.js` file. If you haven't already, use this a
 module.exports = {
   context: __dirname,
   entry: "./app.js"
-}
+};
 ```
 
 And create a `index.html` file. The script tag should point to your bundle. If `output.filename` is not specified in the config, this will be `bundle.js`.
@@ -89,7 +89,7 @@ The `proxy_set_header` lines are important, because they allow the WebSockets to
 
 The command to start webpack-dev-server can then be changed to this:
 
-```
+```shell
 webpack-dev-server --public 10.10.10.61 --watch-poll
 ```
 
