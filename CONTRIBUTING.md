@@ -8,8 +8,8 @@ please create an issue first.
 
 * Install [Node.js](https://nodejs.org/) if you have not already.  
   *Note: Node 6 or greater may be required for "best results".*
-* Fork the **webpack.io** repo at [https://github.com/webpack/webpack.io](https://github.com/webpack/webpack.io).
-* `git clone <your-clone-url> && cd webpack.io`
+* Fork the **webpack.js.org** repo at [https://github.com/webpack/webpack.js.org](https://github.com/webpack/webpack.js.org).
+* `git clone <your-clone-url> && cd webpack.js.org`
 * `git checkout develop`
 * `npm install`
 * `npm run build`
@@ -59,7 +59,7 @@ After getting some feedback, push to your fork branch and submit a pull request.
 may suggest some changes or improvements or alternatives, but for small changes
 your pull request should be accepted quickly.
 
-Issue the PR to the [develop](https://github.com/webpack/webpack.io/tree/develop) branch.  
+Issue the PR to the [develop](https://github.com/webpack/webpack.js.org/tree/develop) branch.
 
 ## Thank you!
 
