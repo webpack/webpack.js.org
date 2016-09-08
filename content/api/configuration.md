@@ -453,7 +453,13 @@ W> As with `root`, the value or values **must be an absolute path(s)**.
 
 `array`
 
+Determine what directories should be searched for installed packages and libraries. These directories will be scanned for similarly to how Node scans for `node_modules`... by looking through the current directory as well as it's ancestors (i.e. `./node_modules`, `../node_modules`, and on). It defaults to:
 
+```js
+modulesDirectories: [ "node_modules", "web_modules" ]
+```
+
+Unlike `root` and `fallback`, **absolute paths are not necessary** and should only be used when there is a hierarchy within these folders.
 
 ---
 
@@ -461,7 +467,19 @@ W> As with `root`, the value or values **must be an absolute path(s)**.
 
 `array`
 
+Automatically resolve certain extensions. This defaults to:
 
+```js
+extensions: [ "", ".webpack.js", ".web.js", ".js" ]
+```
+
+which is what enables users to leave off the extension when importing:
+
+```js
+import File from '../path/to/file'
+```
+
+W> Setting this option will **override the default array**, meaning that Webpack will no longer try to resolve modules using the default extensions. For modules that are imported with their extension, e.g. `import SomeFile from "./somefile.ext"`, to be properly resolved, an empty string must be included in the array. Similarly, for modules that are imported without extensions, e.g. `import _ from "underscore"`, to be resolved to files with `.js` extensions, you must include ".js" in your array.
 
 ---
 
