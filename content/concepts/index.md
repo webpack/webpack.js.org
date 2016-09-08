@@ -5,7 +5,7 @@ title: Introduction
 
 *webpack* is a _module bundler_ for modern JavaScript applications.
 
-### What is a module?
+### What is a module
 
 In [modular programming](https://en.wikipedia.org/wiki/Modular_programming), developers break programs up into discrete chunks of functionality called a _module_.
 
@@ -17,7 +17,7 @@ On the web, however, support for _modules_ has been slow to arrive.
 Multiple tools exist that support modular JavaScript on the web, with a variety of benefits and limitations.
 webpack builds on lessons learned from these systems and applies the concept of _modules_ to any file in your project. 
 
-### What is a webpack module?
+### What is a webpack module
 
 In contrast to Node.js modules, webpack _modules_ can express their _dependencies_ in a variety of ways. A few examples are:
 

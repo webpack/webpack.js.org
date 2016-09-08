@@ -18,9 +18,9 @@ To set the `target` property, you simply set the target value in your webpack co
 ```javascript
 module.exports = config;
 
-config = {
+const config = {
   target: 'node' 
-}
+};
 ```
 
 ### Options
@@ -45,6 +45,7 @@ For example, when you use the `electron-main` _target_, *webpack* includes multi
 Although webpack does **not** support multiple strings being passed into the `target` property, you can create an isomorphic library by bundling two separate configurations: 
 
 **webpack.config.js**
+
 ```javascript
 
 module.exports = [ serverConfig, clientConfig ];
@@ -56,7 +57,7 @@ var serverConfig = {
     filename: 'lib.node.js'
   }
   //… 
-}
+};
 
 var clientConfig = {
   target: 'web', // <=== can be omitted as default is 'web'
@@ -65,7 +66,7 @@ var clientConfig = {
     filename: 'lib.js'
   }
   //…
-}
+};
 
 ```
 
@@ -75,7 +76,8 @@ The example above will create a `lib.js` and `lib.node.js` file in your `dist` f
 
 As seen from the options above there are multiple different deployment _targets_ that you can choose from. Below is a list of examples, and resources that you can refer to. 
 
-#### Bundle Output Comparison:
+#### Bundle Output Comparison
+
   **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**: A great resource for testing and viewing different webpack _targets_. Also great for bug reporting. 
 
 ?> Need to find up to date examples of these webpack targets being used in live code or boilerplates.
