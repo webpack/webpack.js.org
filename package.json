@@ -24,12 +24,14 @@
     "start": "antwar -d",
     "build": "antwar -b && npm run sitemap && echo webpack.js.org > build/CNAME",
     "deploy": "antwar -D",
-    "markdownlint": "markdownlint --config ./.markdownlintrc *.md",
     "lint": "eslint . --ext .js --ext .jsx --ext .md",
-    "test": "npm run lint && npm run markdownlint",
+    "markdownlint": "markdownlint --config ./.markdownlintrc **/*.md *.md",
+    "sociallint": "alex ./**/*.md",
+    "test": "npm run sociallint && npm run markdownlint && npm run lint ",
     "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml"
   },
   "devDependencies": {
+    "alex": "^3.1.0",
     "antwar": "^0.8.1",
     "antwar-cli": "^0.6.6",
     "antwar-helpers": "^0.8.0",
