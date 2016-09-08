@@ -332,6 +332,87 @@ An array of [loader objects]() to be used as the last step in the loading proces
 
 ---
 
+#### Module.noParse
+
+Prevent Webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries...
+
+```js
+noParse: /jquery|backbone/
+```
+
+---
+
+#### Module Contexts
+
+General description...
+
+Here are the available options with their defaults:
+
+```js
+module: {
+  ...,
+  unknownContextRequest: ".",
+  unknownContextRegExp: /^\.\/.*$/,
+  unknownContextRecursive: true,
+  unknownContextCritical: true,
+  exprContextRequest: ".",
+  exprContextRegExp: /^\.\/.*$/,
+  exprContextRecursive: true,
+  exprContextCritical: true,
+  wrappedContextRegExp: /.*/,
+  wrappedContextRecursive: true,
+  wrappedContextCritical: false
+}
+```
+
+?> TODO: learn more on this, frankly I haven't needed these options and am a bit confused about what they're used for even after reading through the [current section](http://webpack.github.io/docs/configuration.html#automatically-created-contexts-defaults-module-xxxcontextxxx) a few times.
+
+---
+
+#### Resolve
+
+Configure how modules are resolved. For example, when calling `import "lodash"` in ES6, the `resolve` options can change where Webpack goes to look for `"lodash"` (see [modulesDirectories]()).
+
+---
+
+#### Resolve.root
+
+Tell Webpack what directories should be searched when resolving modules. 
+
+`string` `array`
+
+```js
+root: __dirname + '/src'
+```
+
+W> The value or values **must be an absolute path(s)**.
+
+---
+
+#### Resolve.fallback
+
+Add a fallback(s) for instances where Webpack is unable to resolve a module in the given `root` or `modulesDirectories`. This option takes the same values as `root` above.
+
+W> As with `root`, the value or values **must be an absolute path(s)**.
+
+---
+
+#### Resolve.modulesDirectories
+
+
+
+---
+
+#### Resolve.extensions
+
+
+
+---
+
+#### Resolve.alias
+
+
+
 
 ?> TODO: Finish and add links to the necessary areas for further reading. Would be nice to [figure out](https://github.com/chjj/marked/issues/310) reference-style links in marked first.
 
