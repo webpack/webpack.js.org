@@ -101,7 +101,7 @@ A loader outputting HTML might emit something like this:
 <link href="/assets/spinner.gif" />
 ```
 
-or when loading images in CSS:
+or when loading an image in CSS:
 
 ```css
 background-image: url(/assets/spinner.gif);
@@ -149,7 +149,7 @@ The following substitutions are available in template strings:
 [all-loaders] // Automatic and explicit loaders and params up to the name of the first loader
 ```
 
-When using a function, the same options camelCased, are available via the `info` parameter:
+When using a function, the same options are available camel-cased via the `info` parameter:
 
 ```js
 devtoolModuleFilenameTemplate: info => {
@@ -428,6 +428,8 @@ Configure how modules are resolved. For example, when calling `import "lodash"` 
 ### Resolve.root
 
 `string` `array`
+
+Tell Webpack what directories should be searched when resolving modules. 
 
 ```js
 root: __dirname + '/src'
