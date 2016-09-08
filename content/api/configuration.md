@@ -2,7 +2,7 @@
 title: Configuration
 ---
 
-Webpack is fed a configuration object. It is passed in one of two ways depending on how you are using Webpack: through the Command Line (CLI) or via Node. Either method also allows an array of configuration objects, which are processed in parallel. This is more efficient than calling Webpack multiple times. All the available configuration options are specified below...
+webpack is fed a configuration object. It is passed in one of two ways depending on how you are using webpack: through the Command Line (CLI) or via Node. Either method also allows an array of configuration objects, which are processed in parallel. This is more efficient than calling webpack multiple times. All the available configuration options are specified below...
 
 ---
 
@@ -38,7 +38,7 @@ entry: {
 
 ### Output
 
-A set of options instructing Webpack on how and where it should output your bundles, assets and anything else you bundle up or load with Webpack. Below is a simple example followed by descriptions of each individual `output` option.
+A set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle up or load with webpack. Below is a simple example followed by descriptions of each individual `output` option.
 
 ```js
 output: {
@@ -107,7 +107,7 @@ or when loading an image in CSS:
 background-image: url(/assets/spinner.gif);
 ```
 
-[Webpack Dev Server]() also takes a hint from `publicPath`, using it to determine where to serve the output files from. 
+[webpack Dev Server]() also takes a hint from `publicPath`, using it to determine where to serve the output files from. 
 
 ---
 
@@ -229,7 +229,7 @@ A JSONP function used to asynchronously load chunks. A shorter function may redu
 
 `boolean`
 
-Tell Webpack to include comments in bundles with information about the contained modules. This option defaults to `false` and **should not** be used in production.
+Tell webpack to include comments in bundles with information about the contained modules. This option defaults to `false` and **should not** be used in production.
 
 ```js
 pathinfo: true
@@ -384,7 +384,7 @@ An array of [loader objects]() to be used as the last step in the loading proces
 
 `regex` `array`
 
-Prevent Webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries...
+Prevent webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries...
 
 ```js
 noParse: /jquery|backbone/
@@ -421,7 +421,7 @@ module: {
 
 ### Resolve
 
-Configure how modules are resolved. For example, when calling `import "lodash"` in ES6, the `resolve` options can change where Webpack goes to look for `"lodash"` (see [modulesDirectories]()).
+Configure how modules are resolved. For example, when calling `import "lodash"` in ES6, the `resolve` options can change where webpack goes to look for `"lodash"` (see [modulesDirectories]()).
 
 ---
 
@@ -429,7 +429,7 @@ Configure how modules are resolved. For example, when calling `import "lodash"` 
 
 `string` `array`
 
-Tell Webpack what directories should be searched when resolving modules. 
+Tell webpack what directories should be searched when resolving modules. 
 
 ```js
 root: __dirname + '/src'
@@ -443,7 +443,7 @@ W> The value or values **must be an absolute path(s)**.
 
 `string` `array`
 
-Add a fallback(s) for instances where Webpack is unable to resolve a module in the given `root` or `modulesDirectories`. This option takes the same values as `root` above.
+Add a fallback(s) for instances where webpack is unable to resolve a module in the given `root` or `modulesDirectories`. This option takes the same values as `root` above.
 
 W> As with `root`, the value or values **must be an absolute path(s)**.
 
@@ -479,7 +479,7 @@ which is what enables users to leave off the extension when importing:
 import File from '../path/to/file'
 ```
 
-W> Setting this option will **override the default array**, meaning that Webpack will no longer try to resolve modules using the default extensions. For modules that are imported with their extension, e.g. `import SomeFile from "./somefile.ext"`, to be properly resolved, an empty string must be included in the array. Similarly, for modules that are imported without extensions, e.g. `import _ from "underscore"`, to be resolved to files with `.js` extensions, you must include ".js" in your array.
+W> Setting this option will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions. For modules that are imported with their extension, e.g. `import SomeFile from "./somefile.ext"`, to be properly resolved, an empty string must be included in the array. Similarly, for modules that are imported without extensions, e.g. `import _ from "underscore"`, to be resolved to files with `.js` extensions, you must include ".js" in your array.
 
 ---
 
