@@ -1,8 +1,10 @@
 'use strict';
 
-// disable automatic highlight on content loaded
-var script = document.currentScript || [].slice.call(document.getElementsByTagName("script")).pop();
-script.setAttribute("data-manual", "");
+if(typeof document !== "undefined") {
+  // disable automatic highlight on content loaded
+  var script = document.currentScript || [].slice.call(document.getElementsByTagName("script")).pop();
+  script.setAttribute("data-manual", "");
+}
 
 var Prism = require('prismjs');
 var languages = require('prism-languages');
