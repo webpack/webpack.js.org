@@ -36,7 +36,7 @@ module.exports = function(section) {
         match = /\[(.+?)\]\((.+?)\)/.exec(match);
         links.push('<a class="code-link" href="' + match[2] + '">' + match[1] + '</a>');
         return "MARKDOWNLINK_" + (links.length - 1) + "_";
-      })
+      });
       var rendered = codeTemplate.call(this, code, "js", escaped);
       rendered = rendered.replace(/MARKDOWNLINK_(\d+)_/g, match => {
         var idx = +(/MARKDOWNLINK_(\d+)_/.exec(match)[1]);

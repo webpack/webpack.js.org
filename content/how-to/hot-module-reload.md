@@ -1,6 +1,7 @@
 ---
 title: How to Configure Hot Module Replacement?
 ---
+
 Hot Module Replacement (HMR) exchanges, adds, or removes modules while an
 application is running without a page reload.
 HMR is particularly useful in applications using a single state tree,
@@ -14,28 +15,30 @@ If you'd like to see examples of other approaches,
 please request them or, better yet,
 [open up a PR with an addition](https://github.com/webpack/webpack.js.org)!
 
-##Project Config
+## Project Config
+
 This guide will be demonstrating the use of HMR with Babel,
 React, and PostCSS (using CSS Modules).
 To follow along, please add the following deps to your `package.json`:
 
 To use HMR, you'll need the following dependencies:
 
-```bash
+```shell
 npm install --save-dev babel@6.5.2 babel-core@6.13.2 babel-loader@6.2.4 babel-preset-es2015@6.13.2 babel-preset-react@6.11.1 babel-preset-stage-2@6.13.0 css-loader@0.23.1 postcss-loader@0.9.1 react-hot-loader@3.0.0-beta.1 style-loader@0.13.1 webpack@2.1.0-beta.20 webpack-dev-server@2.1.0-beta.0
 ```
 
 In addition, for the purposes of this walkthrough, you'll need:
 
-```bash
+```shell
 npm install --save react@15.3.0 react-dom@15.3.0
 ```
 
 
-###Babel Config
+### Babel Config
+
 Your `.babelrc` file should look like the following:
 
-```js
+```shell
 {
   "presets": [
     ["es2015", {"modules": false}],
@@ -56,7 +59,8 @@ Your `.babelrc` file should look like the following:
 }
 ```
 
-###Webpack config
+### Webpack config
+
 While there's many ways of setting up your Webpack config - via API,
 via multiple or single config files, etc - here is the basic information
 you should have available.
@@ -101,7 +105,7 @@ module.exports = env => {
       hot: true,
       //activate hot reloading
 
-      contentBase: '/dist'
+      contentBase: '/dist',
       //match the output path
 
       publicPath: '/'
@@ -134,7 +138,7 @@ module.exports = env => {
       new webpack.NamedModulesPlugin(),
       //prints more readable module names in the browser console on HMR updates
     ],
-  }
+  };
 };
 ```
 
@@ -156,14 +160,15 @@ The react-hot-loader addition to the entry, as noted above, is necessary to enab
 HMR with React components. The NamedModulesPlugin is a useful addition
 to better understand what modules are being updated when using HMR.
 
-###Code
+### Code
+
 In this guide, we're using the following files:
 
 ```js
 // ./src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader'
+import { AppContainer } from 'react-hot-loader';
 
 import App from './components/App';
 
@@ -182,8 +187,9 @@ render();
 if (module.hot) {
   module.hot.accept('./components/App', render);
 }
+```
 
-
+```js
 // ./src/components/App.js
 import React from 'react';
 import styles from './App.css';
@@ -224,18 +230,23 @@ so the `render` method will file not just for changes made directly to the
 source of `App.js`, but also changes made to `App.css`, since `App.css`
 is included in `App.js`.
 
-###Package.json
+### Package.json
+
 Finally, we need to start up webpack dev server to bundle our code and see HMR in action.
 We can use the following package.json entry:
 
-```js
-  "start" : "webpack-dev-server --env.dev",
+```json
+{
+  "scripts": {
+    "start" : "webpack-dev-server --env.dev",
+  }
+}
 ```
 
 Run `npm start`, open up your browser to `localhost:8080`,
 and you should see the folling entries printed in your console.log:
 
-```
+```shell
 dev-server.js:49[HMR] Waiting for update signal from WDS…
 only-dev-server.js:74[HMR] Waiting for update signal from WDS…
 client?c7c8:24 [WDS] Hot Module Replacement enabled.
@@ -244,7 +255,7 @@ client?c7c8:24 [WDS] Hot Module Replacement enabled.
 Go ahead and edit and save your App.js file.
 You should see something like the following in your console.log:
 
-```
+```shell
 [WDS] App updated. Recompiling…
 client?c7c8:91 [WDS] App hot update…
 dev-server.js:45 [HMR] Checking for updates on the server…
@@ -252,6 +263,7 @@ log-apply-result.js:20 [HMR] Updated modules:
 log-apply-result.js:22 [HMR]  - ./components/App.js
 dev-server.js:27 [HMR] App is up to date.
 ```
+
 Note that HMR specifies the paths of the updated modules.
 That's because we're using the NamedModules plugin!
 

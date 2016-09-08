@@ -3,7 +3,9 @@ title: CLI
 ---
 ## Overview
 
-webpack provides a Command Line Interface (CLI) to configure and interact with your build. This is mostly useful in case of early prototyping, profiling, writing npm scripts or personal customization of the build. For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the config file.
+webpack provides a Command Line Interface (CLI) to configure and interact with your build. This is mostly useful in case of early prototyping, profiling, writing npm scripts or personal customization of the build. 
+
+For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the config file.
 
 ## Installation
 
@@ -11,9 +13,10 @@ Have a look at [this page](/how-to/install-webpack)
 
 ### Common Usage
 
-```bash
+```shell
 webpack <entry> [<entry>] <output>
 ```
+
 | Parameter | Configuration Mapping         | Explanation                                                                                                                                                             |
 |-----------|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | entry     | entry                         | A filename or a set of named filenames which act as the entry point to build your project. If you pass a pair in the form of `=` you can create an additional entry point. |
@@ -22,7 +25,8 @@ webpack <entry> [<entry>] <output>
 #### Examples
 
 If your project structure is as follows -
-```
+
+```shell
 .
 ├── dist
 ├── index.html
@@ -31,7 +35,8 @@ If your project structure is as follows -
     ├── index2.js
     └── others.js
 ```
-```
+
+```shell
 webpack src/index.js dist/bundle.js
 	This will bundle your source code with entry as `index.js` and the output bundle file will have a path of `dist` and the filename will be `bundle.js`
 
@@ -41,7 +46,8 @@ webpack src/index.js dist/bundle.js
 	[0] ./src/index.js 51 bytes {0} [built]
 	[1] ./src/others.js 29 bytes {0} [built]
 ```
-```
+
+```shell
 webpack index=./src/index.js entry2=./src/index2.js dist/bundle.js
 	This will form the bundle with both the files as separate entry points.
 
@@ -56,7 +62,8 @@ webpack index=./src/index.js entry2=./src/index2.js dist/bundle.js
 ### Common Options
 
 **List all of the options available on the cli**
-```bash
+
+```shell
 webpack --help , webpack -h
 ```
 
@@ -64,22 +71,24 @@ webpack --help , webpack -h
 
 Specifies a different configuration file to pick up. Use this if you want to specify something different than `webpack.config.js`, which is the default.
 
-```bash
+```shell
 webpack --config example.config.js
 ```
 
 **Send environment variable to be used in webpack config file**
-```bash
+
+```shell
 webpack --env=DEVELOPMENT
 ```
 
 **Print result of webpack as a JSON**
 
-In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option the output can be a JSON object.This response is accepted by webpack's [analyse tool](https://webpack.github.com/analyse). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
+In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option the output can be a JSON object.This response is accepted by webpack's [analyse tool](https://webpack.github.com/analyse).
+The analyse tool will take in the JSON and provide all the details of the build in graphical form.
 
 ?> (TODO: Link to webpack analyse article)
 
-```bash
+```shell
 webpack --json , webpack -j, webpack -j > stats.json
 ```
 
@@ -101,7 +110,7 @@ This set of options allows you to manipulate certain output parameters of your b
 
 #### Example Usage
 
-```bash
+```shell
 webpack index=./src/index.js index2=./src/index2.js --output-path='./dist' --output-filename='[name][hash].bundle.js'
 
 | Asset                                | Size    | Chunks      | Chunk Names   |
@@ -113,7 +122,7 @@ webpack index=./src/index.js index2=./src/index2.js --output-path='./dist' --out
 	[2] ./src/index2.js 54 bytes {0} [built]
 ```
 
-```bash
+```shell
 webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --output-filename='[name][hash].bundle.js' --devtool source-map --output-source-map-filename='[name]123.map'
 
 | Asset                                | Size    | Chunks      | Chunk Names   |
@@ -230,7 +239,7 @@ These options allow webpack to display various stats and style them differently 
 
 This option profiles the compilation and includes this information in the stats output. It gives you an in depth idea of which step in the compilation is taking how long. This can help you optimise your build in a more informed manner.
 
-```bash
+```shell
 webpack --profile
 
 30ms building modules

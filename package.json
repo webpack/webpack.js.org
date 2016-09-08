@@ -25,7 +25,7 @@
     "build": "antwar -b && npm run sitemap && echo webpack.js.org > build/CNAME",
     "deploy": "antwar -D",
     "lint": "eslint . --ext .js --ext .jsx --ext .md",
-    "markdownlint": "markdownlint --config ./.markdownlintrc **/*.md *.md",
+    "markdownlint": "markdownlint --config ./.markdownlintrc **/*.md *.md ./content/**/*.md",
     "sociallint": "alex ./**/*.md",
     "test": "npm run sociallint && npm run markdownlint && npm run lint ",
     "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml"
