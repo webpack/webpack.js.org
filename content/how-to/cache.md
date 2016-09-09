@@ -17,7 +17,7 @@ The way it works has a pitfall: if we don’t change filenames of our resources 
 
 Probably the simplest way to tell the browser to download a newer version is to alter asset’s file name. In a pre-webpack era we used to add a build number to the filenames as a parameter and then increment it:
 
-```shell
+```bash
 application.js?build=1
 application.css?build=1
 ```

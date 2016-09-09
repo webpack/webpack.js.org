@@ -89,7 +89,7 @@ The `proxy_set_header` lines are important, because they allow the WebSockets to
 
 The command to start webpack-dev-server can then be changed to this:
 
-```shell
+```bash
 webpack-dev-server --public 10.10.10.61 --watch-poll
 ```
 
