@@ -12,13 +12,15 @@ title: Configuration
 
 ?> TODO: exporting multiple configurations
 
+---
+
 ### External Configurations
 
 ?> TODO: possible extensions, i. e. .babel.js
 
 ---
 
-webpack is fed a configuration object. It is passed in one of two ways depending on how you are using webpack: through the Command Line (CLI) or via Node. Either method also allows an array of configuration objects, which are processed in parallel. This is more efficient than calling webpack multiple times. All the available configuration options are specified below...
+Webpack is fed a configuration object. It is passed in one of two ways depending on how you are using webpack: through the Command Line (CLI) or via Node. Either method also allows an array of configuration objects, which are processed in parallel. This is more efficient than calling webpack multiple times. All the available configuration options are specified below...
 
 ---
 
