@@ -616,12 +616,62 @@ import Test2 from 'xyz/file.js'; // Error, /path/to/file.js/file.js is invalid
 
 ---
 
+### `resolve.packageMains`
+
+`array`
+
+When importing from an npm package, e.g. `import * as D3 from "d3"`, this option will determine which fields in it's `package.json` are checked. It defaults to:
+
+```js
+packageMains: [ "webpack", "browser", "web", "browserify", [ "jam", "main" ], "main" ]
+```
+
+For example, the current version of [D3]() (4.2.2) contains these fields:
+
+```js
+{
+  ...
+  main: 'build/d3.node.js',
+  browser: 'build/d3.js',
+  module: 'index',
+  'jsnext:main': 'index',
+  ...
+}
+```
+
+This means that when we `import * as D3 from "d3"` this will really resolve to either the `main` or `browser` files. 
+
+?> TODO: Discuss order here... I'm assuming they're read from left to right meaning `browser` is what would be imported in the example? What does the nested array, i.e. `[ "jam", "main" ]`, do?
+
+---
+
+### `resolve.packageAlias`
+
+`string`
+
+Specify a field, such as `browser`, to be parsed according to [this specification](https://github.com/defunctzombie/package-browser-field-spec).
+
+---
+
+### `resolve.unsafeCache`
+
+`regex` `array` `boolean`
+
+Enable aggressive, but **unsafe**, caching of modules. Passing `true` will cache everything. A regular expression, or an array of regular expressions, can be used to test file paths and only cache certain modules. For example, to only cache utilities:
+
+```js
+unsafeCache: /src\/utilities/
+```
+
+W> Changes to cached paths may cause failure in rare cases.
+
+---
+
 ?> TODO: Finish and add links to the necessary areas for further reading. Would be nice to [figure out](https://github.com/chjj/marked/issues/310) reference-style links in marked first.
 
 ?> TODO: consider breaking out template string substitutions into its own section and then referrring to it from throughout the rest of the page. It seems like there's a lot of overlap between sections there.
 
 ---
-
 
 [1]: http://davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/
 [2]: https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin
