@@ -123,6 +123,8 @@ entry: {
 
 ### `output`
 
+`object`
+
 A set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle up or load with webpack. Below is a simple example followed by descriptions of each individual `output` option.
 
 ```js
@@ -398,6 +400,8 @@ Enable [cross-origin]() loading of [chunks](). The following values are accepted
 
 ### `module`
 
+`object`
+
 These options determine how the [different types of modules](/concepts/everything-is-a-module) within a project will be treated.
 
 ---
@@ -477,7 +481,7 @@ noParse: /jquery|backbone/
 
 ---
 
-### `module Contexts`
+### Module Contexts
 
 General description...
 
@@ -500,11 +504,13 @@ module: {
 }
 ```
 
-?> TODO: learn more on this, frankly I haven't needed these options and am a bit confused about what they're used for even after reading through the [current section](http://webpack.github.io/docs/configuration.html#automatically-created-contexts-defaults-module-xxxcontextxxx) a few times.
+?> TODO: need help on this, frankly I haven't needed these options and am a bit confused about what they're used for even after reading through the [current section](http://webpack.github.io/docs/configuration.html#automatically-created-contexts-defaults-module-xxxcontextxxx) a few times.
 
 ---
 
 ### `resolve`
+
+`object`
 
 Configure how modules are resolved. For example, when calling `import "lodash"` in ES6, the `resolve` options can change where webpack goes to look for `"lodash"` (see [modulesDirectories]()).
 
@@ -581,7 +587,13 @@ alias: {
 }
 ```
 
-Now, instead of using relative paths when importing:
+Now, instead of using relative paths when importing like so:
+
+```js
+import Utility from '../../utilities/utility';
+```
+
+you can use the alias:
 
 ```js
 import Utility from 'Utilities/utility';
