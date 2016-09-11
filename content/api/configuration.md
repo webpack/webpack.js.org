@@ -43,13 +43,13 @@ Webpack is fed a configuration object. It is passed in one of two ways depending
     [filename](#output-filename): "[name].js", // string
     // the filename template for [entry chunks](chunks)
 
-    [chunkFilename](#output-chunkFilename): "[id].js",
+    [chunkFilename](#output-chunkfilename): "[id].js",
     // the filename template for additional chunks
 
     [library](#output-library): "MyLibrary", // string,
     // the name of the exported library
 
-    [libraryTarget](#output-libraryTarget): "commonjs" | "amd" | "umd"
+    [libraryTarget](#output-librarytarget): "commonjs" | "amd" | "umd"
 
     // [...](#Advanced-configuration-options)
 
@@ -62,23 +62,7 @@ Webpack is fed a configuration object. It is passed in one of two ways depending
 }
 ```
 
-
-
-
-### `entry`
-
-### `output`
-
-### `output.path`
-
-### `output.filename`
-
-### `output.chunkFilename`
-
-### `output.library`
-
-### `output.libraryTarget`
-
+---
 
 ## Advanced configuration options
 
