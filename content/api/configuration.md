@@ -694,6 +694,72 @@ W> This option is only available in `resolveLoader` **not** `resolve`.
 
 ---
 
+### `externals`
+
+`string` `regex` `function` `array` `object`
+
+**Prevent bundling** of certain `import`ed packages and instead retrieve these *external packages at runtime*. For example, to include [jQuery]() from a CDN instead of bundling it:
+
+**index.html**
+
+```html
+...
+<script src="https://code.jquery.com/jquery-3.1.0.js"
+  integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="
+  crossorigin="anonymous"></script>
+...
+```
+
+**webpack.config.js**
+
+```js
+externals: {
+  jquery: 'jQuery'
+}
+```
+
+This leaves any dependant modules unchanged, i.e. the code shown below will still work:
+
+```js
+import $ from 'jquery';
+
+$('.my-element').animate(...);
+```
+
+?> TODO: Add more details on the various ways of doing this using an `object`, `function`, etc. Also add how this is connected to [`output.libraryTarget`]() and maybe how it's useful when building libraries if this isn't already evident.
+
+---
+
+### `target`
+
+`string`
+
+Tell webpack what environment the application is targeting. The following options are supported:
+
+`target: "web"` - Compile for usage in a browser
+
+`target: "webworker"` - Compile as a [WebWorker]()
+
+`target: "node"` - Compile for [NodeJS](), using `require` to load chunks
+
+`target: "node-webkit"` - Compile for [Webkit](), using [JSONP]() to load chunks
+
+T> Allows importing of built-in node modules and [`nw.gui`]() (experimental).
+
+`target: "async-node"` - Use `fs` and `vm` to load chunks asynchronously
+
+`target: "electron"` - Compile for [Electron](http://electron.atom.io/)
+
+T> Allows importing of Electron-specific modules.
+
+It defaults to:
+
+```js
+target: "web"
+```
+
+---
+
 ?> TODO: Finish and add links to the necessary areas for further reading. Would be nice to [figure out](https://github.com/chjj/marked/issues/310) reference-style links in marked first.
 
 ?> TODO: consider breaking out template string substitutions into its own section and then referrring to it from throughout the rest of the page. It seems like there's a lot of overlap between sections there.
