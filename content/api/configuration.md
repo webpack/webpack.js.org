@@ -760,6 +760,32 @@ target: "web"
 
 ---
 
+### `bail`
+
+`boolean`
+
+Fail out on the first error instead of tolerating it. By default webpack will log these errors in red in the terminal, as well as the browser console when using [HMR](), but continue bundling. Turning it on:
+
+```js
+bail: true
+```
+
+will force webpack to exit it's bundling process.
+
+W> Note that this will become the default behavior in webpack 2.x
+
+---
+
+### `profile`
+
+`boolean`
+
+Capture a "profile" of the application, including statistics and hints, which can then be dissected using the [Analyze]() tool.
+
+T> Use the [StatsPlugin](https://www.npmjs.com/package/stats-webpack-plugin) for more control.
+
+---
+
 ?> TODO: Finish and add links to the necessary areas for further reading. Would be nice to [figure out](https://github.com/chjj/marked/issues/310) reference-style links in marked first.
 
 ?> TODO: consider breaking out template string substitutions into its own section and then referrring to it from throughout the rest of the page. It seems like there's a lot of overlap between sections there.
