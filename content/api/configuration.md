@@ -24,7 +24,7 @@ Webpack is fed a configuration object. It is passed in one of two ways depending
 
 ---
 
-## Basic configuration options
+### Configuration Options
 
 ``` js-with-links-with-details
 {
