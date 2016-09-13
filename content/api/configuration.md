@@ -1206,6 +1206,21 @@ T> See [`output.sourceMapFilename`](#output-sourcemapfilename) to customize the 
 
 ---
 
+### `devServer`
+
+`object`
+
+This set of options is picked up by [webpack-dev-server]() and can be used to change it's behavior in various ways. Here's a simple example that [gzips]() and serves everything from our `/dist` directory:
+
+```js
+devServer: {
+  contentBase: "dist/",
+  compress: true
+}
+```
+
+---
+
 ?> TODO: Finish and add links to the necessary areas for further reading. Would be nice to [figure out](https://github.com/chjj/marked/issues/310) reference-style links in marked first.
 
 ?> TODO: consider breaking out template string substitutions into its own section and then referrring to it from throughout the rest of the page. It seems like there's a lot of overlap between sections there.
