@@ -7,7 +7,9 @@ You may have noticed that few webpack configurations look exactly alike. This is
 The following examples below describe how webpacks configuration object can be both expressive and configurable because _it is code_: 
 
 ## The simplest of examples
+
 **webpack.config.js**
+
 ```javascript 
 module.exports = {
   entry: './foo.js',
@@ -15,12 +17,14 @@ module.exports = {
     path: 'dist',
     filename: 'foo.bundle.js'
   }
-}
+};
 
 ```
 
-## Generating multiple targets and configs and exporting the entire array.
+## Generating multiple targets and configs and exporting the entire array
+
 **webpack.config.js**
+
 ```javascript
 var path = require('path');
 var webpack = require('webpack');
@@ -65,7 +69,9 @@ module.exports = targets;
 T> The most important part to take away from this document is that there are many different ways to format and style your webpack configuation. The key is to stick with something consistent that you and your team can understand and maintain.
 
 ## Using TypeScript to create a class which the angular-cli uses to [generate configs](https://github.com/angular/angular-cli/blob/master/addon/ng2/models/webpack-config.ts)
+
 **webpack.config.ts**
+
 ```typescript
 import * as webpackMerge from 'webpack-merge';
 import { CliConfig } from './config';
@@ -127,21 +133,6 @@ export class NgCliWebpackConfig {
 
 ```javascript
 import h from 'jsxobj';
-
-/** @jsx h */
-function h(name, attrs, ...children) {
-  let obj = { name, ...attrs };
-  if (typeof name==='function') obj = name(obj);
-  [].concat(...children).forEach( child => {
-    let { name } = child;
-    if (name) {
-      obj[name] = child;
-      delete child.name;
-    }
-    else obj.value = child;
-  });
-  return obj;
-}
 
 // example of an import'd plugin
 const CustomPlugin = config => ({
