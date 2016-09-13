@@ -1074,7 +1074,135 @@ W> Note that this will become the default behavior in webpack 2.x
 
 Capture a "profile" of the application, including statistics and hints, which can then be dissected using the [Analyze]() tool.
 
-T> Use the [StatsPlugin](https://www.npmjs.com/package/stats-webpack-plugin) for more control.
+T> Use the [StatsPlugin](https://www.npmjs.com/package/stats-webpack-plugin) for more control over the generated profile.
+
+---
+
+### `cache`
+
+`boolean` `object`
+
+Cache the generated webpack modules and chunks to improve build speed. Caching is enabled by default while in [watch mode](). To disable caching simply pass:
+
+```js
+cache: false
+```
+
+If an object is passed, webpack will use this object for caching. Keeping a reference to this object will allow one to share the same cache between compiler calls:
+
+```js
+let SharedCache = {};
+
+export default {
+  ...,
+  cache: SharedCache
+}
+```
+
+W> Don't share the cache between calls with different options.
+?> TODO: Elaborate on the warning and example - calls with different configuration options?
+
+---
+
+### `watch`
+
+`boolean`
+
+Turn on watch mode. This means that after the initial build, webpack will continue to watch for changes in any of the resolved files. Watch mode is turned off by default:
+
+```js
+watch: false
+```
+
+---
+
+### `watchOptions`
+
+`object`
+
+A set of options used to customize watch mode:
+
+```js
+watchOptions: {
+  aggregateTimeout: 300,
+  poll: 1000
+}
+```
+
+---
+
+### `watchOptions.aggregateTimeout`
+
+`number`
+
+Add a delay before rebuilding once the first file changed. This allows webpack to aggregate any other changes made during this time period into one rebuild. Pass a value in milliseconds:
+
+```js
+aggregateTimeout: 300 // The default
+```
+
+---
+
+### `watchOptions.poll`
+
+`boolean` `number`
+
+Turn on [polling]() by passing `true`, or specifying a poll interval in milliseconds:
+
+```js
+poll: 1000 // Check for changes every second
+```
+
+---
+
+### `debug`
+
+`boolean`
+
+Switch all loaders into debug mode to get more verbose feedback. This defaults to `false` to prevent unnecessary logging but can be easily turned on:
+
+```js
+debug: true
+```
+
+?> TODO: Consider adding an example of a certain loader emitting more details.
+
+---
+
+### `devtool`
+
+`string`
+
+Choose a style of [source mapping]() to enhance the debugging process. Be aware that the following options can affect build and rebuild speed dramatically...
+
+`eval` - Each module is executed with `eval` and `//@ sourceURL`
+
+`source-map` - A full SourceMap is emitted
+
+`hidden-source-map` - Same as `source-map`, but doesn't add a reference comment to the bundle
+
+`inline-source-map` - A SourceMap is added as DataUrl to the bundle
+
+`eval-source-map` - Each module is executed with `eval` and a SourceMap is added as DataUrl to the `eval`
+
+`cheap-source-map` - A SourceMap without column-mappings ignoring [loaded source maps]()
+
+`cheap-module-source-map` - A SourceMap without column-mappings that simplifies [loaded source maps]() to a single mapping per line
+
+ devtool                      | build | rebuild | production | quality                       
+------------------------------|-------|---------|------------|-------------------------------
+ eval                         | +++   | +++     | no         | generated code                
+ cheap-eval-source-map        | +     | ++      | no         | transformed code (lines only) 
+ cheap-source-map             | +     | o       | yes        | transformed code (lines only) 
+ cheap-module-eval-source-map | o     | ++      | no         | original source (lines only)  
+ cheap-module-source-map      | o     | -       | yes        | original source (lines only)  
+ eval-source-map              | --    | +       | no         | original source               
+ source-map                   | --    | --      | yes        | original source               
+
+
+T> See [`output.sourceMapFilename`](#output-sourcemapfilename) to customize the filenames of generated source maps.
+
+?> TODO: This section is pretty much just copied over from existing docs... imo more background is needed on the different types of source mapping, maybe via links to external sites that discuss the different types of source maps in more detail.
 
 ---
 
