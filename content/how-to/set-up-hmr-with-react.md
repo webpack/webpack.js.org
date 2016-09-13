@@ -15,13 +15,13 @@ To follow along, please add the following deps to your `package.json`:
 
 To use HMR, you'll need the following dependencies:
 
-```shell
+```bash
 npm install --save-dev babel@6.5.2 babel-core@6.13.2 babel-loader@6.2.4 babel-preset-es2015@6.13.2 babel-preset-react@6.11.1 babel-preset-stage-2@6.13.0 css-loader@0.23.1 postcss-loader@0.9.1 react-hot-loader@3.0.0-beta.1 style-loader@0.13.1 webpack@2.1.0-beta.20 webpack-dev-server@2.1.0-beta.0
 ```
 
 In addition, for the purposes of this walkthrough, you'll need:
 
-```shell
+```bash
 npm install --save react@15.3.0 react-dom@15.3.0
 ```
 
@@ -238,7 +238,7 @@ We can use the following package.json entry:
 Run `npm start`, open up your browser to `localhost:8080`,
 and you should see the folling entries printed in your console.log:
 
-```shell
+```bash
 dev-server.js:49[HMR] Waiting for update signal from WDS…
 only-dev-server.js:74[HMR] Waiting for update signal from WDS…
 client?c7c8:24 [WDS] Hot Module Replacement enabled.
@@ -247,7 +247,7 @@ client?c7c8:24 [WDS] Hot Module Replacement enabled.
 Go ahead and edit and save your App.js file.
 You should see something like the following in your console.log:
 
-```shell
+```bash
 [WDS] App updated. Recompiling…
 client?c7c8:91 [WDS] App hot update…
 dev-server.js:45 [HMR] Checking for updates on the server…
