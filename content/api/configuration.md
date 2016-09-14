@@ -1340,6 +1340,62 @@ port: 8080
 
 ---
 
+### `node`
+
+`object`
+
+Customize the NodeJS environment using polyfills or mocks:
+
+```js
+node: {
+  console: false,
+  global: true,
+  process: true,
+  Buffer: true,
+  __filename: "mock",
+  __dirname: "mock",
+  setImmediate: true
+}
+```
+
+?> TODO: Elaborate on this section. What does "mock" or "empty" do? Does `<node builtin>` in the current documentation mean you can enable, disable, or polyfill any global node functions? (it seems `setImmediate` is the example for that)
+
+---
+
+### `amd`
+
+`object`
+
+Set the value of `require.amd` or `define.amd`:
+
+```js
+amd: {
+  jQuery: true
+}
+```
+
+?> TODO: Again I don't think this is very clear, at least not without a link pointing to what this might be used for.
+
+---
+
+### `loader`
+
+`object`
+
+Expose custom values into the [loader context]().
+
+TODO: Add an example...
+
+---
+
+### `recordsPath`
+
+Description...
+
+?> TODO: Add example and description as well as details on `recordsInputPath` and `recordsOutputPath`.
+
+---
+
 ?> TODO: Finish and add links to the necessary areas for further reading. Would be nice to [figure out](https://github.com/chjj/marked/issues/310) reference-style links in marked first.
 
 ?> TODO: consider breaking out template string substitutions into its own section and then referrring to it from throughout the rest of the page. It seems like there's a lot of overlap between sections there.
