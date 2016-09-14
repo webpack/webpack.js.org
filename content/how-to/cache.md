@@ -1,5 +1,7 @@
 ---
 title: How to Cache?
+contributors:
+  - okonet
 ---
 
 To enable long-term caching of static resources produced by webpack:

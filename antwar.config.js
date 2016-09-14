@@ -118,7 +118,10 @@ function processPage() {
       return o.sectionName + '/' + o.fileName.split('.')[0]
     },
     content: function(o) {
-      return markdown().process(o.file.__content, highlight)
+      return markdown().process(o.file.__content, highlight);
+    },
+    contributors: function(o) {
+      return Array.isArray(o.file.contributors) && o.file.contributors.length && o.file.contributors.slice().sort();
     }
   };
 }
