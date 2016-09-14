@@ -1,5 +1,8 @@
 ---
 title: Configuration
+contributors:
+  - sokra
+  - gregvenech
 ---
 > configuration file
 > possible extensions, i. e. .babel.js

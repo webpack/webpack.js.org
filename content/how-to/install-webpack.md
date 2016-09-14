@@ -1,5 +1,7 @@
 ---
 title: How to Install webpack?
+contributors:
+  - pksjce
 ---
 
 ### Pre-requistes

@@ -1,5 +1,7 @@
 ---
 title: How to Set Up Hot Module Replacement with React?
+contributors:
+  - jmreidy
 ---
 Hot Module Replacement (HMR) exchanges, adds, or removes modules while an
 application is running without a page reload.

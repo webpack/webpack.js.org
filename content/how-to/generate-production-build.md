@@ -1,5 +1,7 @@
 ---
 title: How to Generate a Production Build?
+contributors:
+  - henriquea
 ---
 
 Generating production builds with Webpack is straight-forward. There are three things to keep in mind:
