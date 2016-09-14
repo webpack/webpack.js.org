@@ -784,6 +784,20 @@ module: {
 
 ---
 
+### `plugins`
+
+`array`
+
+A list of [webpack plugins]() used for a wide variety of tasks. For example, when multiple bundles share some of the same dependencies the [CommonsChunkPlugin]() could be useful to extract these into a shared bundle. This could be added like so:
+
+```js
+plugins: [
+  new webpack.optimize.CommonsChunkPlugin({
+    ...
+  })
+]
+```
+
 ### `resolve`
 
 `object`
