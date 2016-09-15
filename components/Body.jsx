@@ -24,8 +24,10 @@ export default props => {
   return (
     <Body { ...props }>
       <Navigation home={ home } pages={ pages } />
-        <Sidecar />
-        { props.children }
+      <Sidecar />
+
+      { props.children }
+      
       <Footer />
     </Body>
   );
