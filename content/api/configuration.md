@@ -439,7 +439,7 @@ path: path.resolve(__dirname, 'dist/assets')
 
 `string`
 
-This option specifies the public address of the output files when referenced in a browser. For [loaders]() that embed `<script>` or `<link>` tags or reference assets like images, `publicPath` is used as the `href` or `url()` to the file when it’s different than their location on disk (as specified by `path`). This can be helpful when you want to host some or all output files on a different domain or CDN. As with `path` you can use the `[hash]` substitution for a better caching profile.
+This option specifies the public address of the output files when referenced in a browser. For [loaders](/concepts/loaders) that embed `<script>` or `<link>` tags or reference assets like images, `publicPath` is used as the `href` or `url()` to the file when it’s different than their location on disk (as specified by `path`). This can be helpful when you want to host some or all output files on a different domain or CDN. As with `path` you can use the `[hash]` substitution for a better caching profile.
 
 ```js
 publicPath: '/assets/'
@@ -457,7 +457,7 @@ or when loading an image in CSS:
 background-image: url(/assets/spinner.gif);
 ```
 
-[webpack Dev Server]() also takes a hint from `publicPath`, using it to determine where to serve the output files from. 
+[webpack-dev-server]() also takes a hint from `publicPath`, using it to determine where to serve the output files from. 
 
 ---
 
@@ -523,7 +523,7 @@ A fallback used when the template string or function above yields duplicates.
 
 Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines. 
 
-Pass a boolean to enable or disable this feature for all modules (defaults to `false`). An object similar to [loader objects]() is also allowed. For example, to enable this feature for all javascript files within a certain directory:
+Pass a boolean to enable or disable this feature for all modules (defaults to `false`). An object similar to [loader objects](#loader-objects) is also allowed. For example, to enable this feature for all javascript files within a certain directory:
 
 ```js
 devtoolLineToLine: { test: /\.js$/, include: 'src/utilities' }
@@ -613,9 +613,9 @@ Configure how the library will be exposed. Any one of the following options can 
 
 `libraryTarget: "commonjs2"` - Expose it using the `module.exports` object
 
-`libraryTarget: "amd"` - Expose it using [Asynchronous Module Defintion]() (AMD)
+`libraryTarget: "amd"` - Expose it using [Asynchronous Module Defintion](http://davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/) (AMD)
 
-`libraryTarget: "umd"` - Expose it using [Universal Module Definition]() (UMD)
+`libraryTarget: "umd"` - Expose it using [Universal Module Definition](http://davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/) (UMD)
 
 ---
 
@@ -643,7 +643,7 @@ Change the prefix for each line in the output bundles. The default is tabs:
 sourcePrefix: "\t"
 ```
 
-T> This option can be helpful in [fixing issues with multiline strings]().
+T> This option can be helpful in [fixing issues with multiline strings](https://github.com/webpack/webpack/issues/1161).
 
 ---
 
@@ -651,7 +651,7 @@ T> This option can be helpful in [fixing issues with multiline strings]().
 
 `boolean` `string`
 
-Enable [cross-origin]() loading of [chunks](). The following values are accepted...
+Enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) loading of [chunks](). The following values are accepted...
 
 `crossOriginLoading: false` - Disables cross-origin loading (default)
 
@@ -673,7 +673,7 @@ These options determine how the [different types of modules](/concepts/everythin
 
 Loader objects are used in a few places throughout the configuration. They identify groups of modules using regular expressions. [Loaders](/concepts/loaders) can then be used, and chained together, to process, transform, or manipulate that group of modules in a variety of ways. Loader objects can contain the following properties:
 
-`test: /\.js/` - Identify one or more file extensions using a [regex](), string, or function
+`test: /\.js/` - Identify one or more file extensions using a [regex](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp), string, or function
 
 `include: /\/src/` - Include modules using a regex, string, or function
 
@@ -683,7 +683,7 @@ Loader objects are used in a few places throughout the configuration. They ident
 
 `loaders: [ "babel-loader", "eslint-loader" ]` - An array of loaders to use on these modules
 
-T> Loaders are always read from **right to left** whether passed via a string or an array. In the example above, the [eslint-loader]() will lint the JavaScript modules and then hand them off to the [babel-loader]() for transpiling. It's useful to think of this process as a series of nested function calls, i.e. `babelLoader(eslintLoader(...))`, each one passing it's return value on to the next.
+T> Loaders are always read from **right to left** whether passed via a string or an array. In the example above, the [eslint-loader](https://github.com/MoOx/eslint-loader) will lint the JavaScript modules and then hand them off to the [babel-loader](https://github.com/babel/babel-loader) for transpiling. It's useful to think of this process as a series of nested function calls, i.e. `babelLoader(eslintLoader(...))`, each one passing it's return value on to the next.
 
 ---
 
@@ -691,7 +691,7 @@ T> Loaders are always read from **right to left** whether passed via a string or
 
 `array`
 
-An array of [loader objects]() to be used as the first step in the loading process. In the example above, linting could be broken out into a *preLoader*:
+An array of [loader objects](#loader-objects) to be used as the first step in the loading process. In the example above, linting could be broken out into a *preLoader*:
 
 ```js
 module: {
@@ -708,7 +708,7 @@ module: {
 
 `array`
 
-An array of [loader objects]() to be used as the second step in the loading process. Many times `module.loaders` will be the only set of loader objects needed. A basic configuration might look like this:
+An array of [loader objects](#loader-objects) to be used as the second step in the loading process. Many times `module.loaders` will be the only set of loader objects needed. A basic configuration might look like this:
 
 ```js
 module: {
@@ -726,7 +726,7 @@ module: {
 
 `array`
 
-An array of [loader objects]() to be used as the last step in the loading process.
+An array of [loader objects](#loader-objects) to be used as the last step in the loading process.
 
 ?> TODO: any good examples?
 
@@ -789,7 +789,7 @@ plugins: [
 
 `object`
 
-Configure how modules are resolved. For example, when calling `import "lodash"` in ES6, the `resolve` options can change where webpack goes to look for `"lodash"` (see [modulesDirectories]()).
+Configure how modules are resolved. For example, when calling `import "lodash"` in ES6, the `resolve` options can change where webpack goes to look for `"lodash"` (see [`modulesDirectories`](#resolve-modulesdirectories)).
 
 ---
 
@@ -847,7 +847,7 @@ which is what enables users to leave off the extension when importing:
 import File from '../path/to/file'
 ```
 
-W> Setting this option will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions. For modules that are imported with their extension, e.g. `import SomeFile from "./somefile.ext"`, to be properly resolved, an empty string must be included in the array. Similarly, for modules that are imported without extensions, e.g. `import _ from "underscore"`, to be resolved to files with `.js` extensions, you must include ".js" in your array.
+W> Using this will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions. For modules that are imported with their extension, e.g. `import SomeFile from "./somefile.ext"`, to be properly resolved, an empty string must be included in the array.
 
 ---
 
@@ -903,7 +903,7 @@ When importing from an npm package, e.g. `import * as D3 from "d3"`, this option
 packageMains: [ "webpack", "browser", "web", "browserify", [ "jam", "main" ], "main" ]
 ```
 
-For example, the current version of [D3]() (4.2.2) contains these fields:
+For example, the current version of [D3](https://d3js.org/) (4.2.2) contains these fields:
 
 ```js
 {
@@ -948,7 +948,7 @@ W> Changes to cached paths may cause failure in rare cases.
 
 `object`
 
-This set of options is almost identical to the `resolve` set above, but is used only to resolve webpack's [loader]() packages. Here's the default:
+This set of options is almost identical to the `resolve` set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages. Here's the default:
 
 ```js
 resolveLoader: {
@@ -975,13 +975,13 @@ which would allow `import Text from "txt!./myText" or `loader: "txt"` within a [
 
 `array`
 
-Specify templates to help webpack resolve loader packages. Using the defaults shown above, when a module is imported through [loader objects]() or like so:
+Specify templates to help webpack resolve loader packages. Using the defaults shown above, when a module is imported through [loader objects](#loader-objects) or like so:
 
 ```js
 import Module from 'babel-loader!eslint-loader!./path/to/my/module';
 ```
 
-webpack will try to find the [babel loader]() using "babel-webpack-loader", "babel-web-loader", and so on on until the package is found.
+webpack will try to find the [babel loader](https://github.com/babel/babel-loader) using "babel-webpack-loader", "babel-web-loader", and so on on until the package is found.
 
 W> This option is only available in `resolveLoader` **not** `resolve`.
 
@@ -991,7 +991,7 @@ W> This option is only available in `resolveLoader` **not** `resolve`.
 
 `string` `regex` `function` `array` `object`
 
-**Prevent bundling** of certain `import`ed packages and instead retrieve these *external packages at runtime*. For example, to include [jQuery]() from a CDN instead of bundling it:
+**Prevent bundling** of certain `import`ed packages and instead retrieve these *external packages at runtime*. For example, to include [jQuery](https://jquery.com/) from a CDN instead of bundling it:
 
 **index.html**
 
@@ -1019,7 +1019,7 @@ import $ from 'jquery';
 $('.my-element').animate(...);
 ```
 
-?> TODO: Add more details on the various ways of doing this using an `object`, `function`, etc. Also add how this is connected to [`output.libraryTarget`]() and maybe how it's useful when building libraries if this isn't already evident.
+?> TODO: Add more details on the various ways of doing this using an `object`, `function`, etc. Also add how this is connected to [`output.libraryTarget`](#output-librarytarget) and maybe how it's useful when building libraries if this isn't already evident.
 
 ---
 
@@ -1031,13 +1031,13 @@ Tell webpack what environment the application is targeting. The following option
 
 `target: "web"` - Compile for usage in a browser
 
-`target: "webworker"` - Compile as a [WebWorker]()
+`target: "webworker"` - Compile as a [WebWorker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API)
 
-`target: "node"` - Compile for [NodeJS](), using `require` to load chunks
+`target: "node"` - Compile for [NodeJS](https://nodejs.org/en/), using `require` to load chunks
 
-`target: "node-webkit"` - Compile for [Webkit](), using [JSONP]() to load chunks
+`target: "node-webkit"` - Compile for [Webkit](https://webkit.org/), using [JSONP](https://sacha.me/articles/jsonp-demystified/) to load chunks
 
-T> Allows importing of built-in node modules and [`nw.gui`]() (experimental).
+T> Allows importing of built-in node modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental).
 
 `target: "async-node"` - Use `fs` and `vm` to load chunks asynchronously
 
@@ -1073,7 +1073,7 @@ W> Note that this will become the default behavior in webpack 2.x
 
 `boolean`
 
-Capture a "profile" of the application, including statistics and hints, which can then be dissected using the [Analyze]() tool.
+Capture a "profile" of the application, including statistics and hints, which can then be dissected using the [Analyze](https://webpack.github.io/analyse/) tool.
 
 T> Use the [StatsPlugin](https://www.npmjs.com/package/stats-webpack-plugin) for more control over the generated profile.
 
@@ -1148,7 +1148,7 @@ aggregateTimeout: 300 // The default
 
 `boolean` `number`
 
-Turn on [polling]() by passing `true`, or specifying a poll interval in milliseconds:
+Turn on [polling](http://whatis.techtarget.com/definition/polling) by passing `true`, or specifying a poll interval in milliseconds:
 
 ```js
 poll: 1000 // Check for changes every second
@@ -1174,7 +1174,7 @@ debug: true
 
 `string`
 
-Choose a style of [source mapping]() to enhance the debugging process. Be aware that the following options can affect build and rebuild speed dramatically...
+Choose a style of [source mapping](http://blog.teamtreehouse.com/introduction-source-maps) to enhance the debugging process. Be aware that the following options can affect build and rebuild speed dramatically...
 
 `eval` - Each module is executed with `eval` and `//@ sourceURL`
 
@@ -1211,7 +1211,7 @@ T> See [`output.sourceMapFilename`](#output-sourcemapfilename) to customize the 
 
 `object`
 
-This set of options is picked up by [webpack-dev-server]() and can be used to change it's behavior in various ways. Here's a simple example that [gzips]() and serves everything from our `/dist` directory:
+This set of options is picked up by [webpack-dev-server]() and can be used to change it's behavior in various ways. Here's a simple example that gzips and serves everything from our `/dist` directory:
 
 ```js
 devServer: {
@@ -1237,7 +1237,7 @@ that will give some background on where the server is located and what it's serv
 
 `string` `array`
 
-Tell the server where to serve content from. [`output.publicPath`]() will also be used to determine where the bundles should be served from.
+Tell the server where to serve content from. [`output.publicPath`](#output-publicpath) will also be used to determine where the bundles should be served from.
 
 ```js
 contentBase: "path/to/dist/"
@@ -1281,7 +1281,7 @@ T> Inline mode is recommended when using [Hot Module Replacement]().
 
 `boolean` `object`
 
-When using the [HTML5 History API](), the `index.html` page will likely have be served in place of any `404` responses. Enable this by passing:
+When using the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History), the `index.html` page will likely have be served in place of any `404` responses. Enable this by passing:
 
 ```js
 historyApiFallback: true
@@ -1307,7 +1307,7 @@ historyApiFallback: {
 
 `boolean`
 
-Enable [gzip compression]() for everything served:
+Enable [gzip compression](https://betterexplained.com/articles/how-to-optimize-your-site-with-gzip-compression/) for everything served:
 
 ```js
 compress: true
@@ -1383,9 +1383,7 @@ Description...
 
 ---
 
-?> TODO: Finish and add links to the necessary areas for further reading. Would be nice to [figure out](https://github.com/chjj/marked/issues/310) reference-style links in marked first.
-
-?> TODO: consider breaking out template string substitutions into its own section and then referrring to it from throughout the rest of the page. It seems like there's a lot of overlap between sections there.
+?> TODO: [Figure out][1] reference-style links in marked.
 
 ---
 
@@ -1411,6 +1409,4 @@ Separate page?
 
 ---
 
-[1]: http://davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/
-[2]: https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin
-[3]: https://github.com/webpack/webpack/issues/1161
+[1]: https://github.com/chjj/marked/issues/310
