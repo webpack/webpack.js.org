@@ -679,9 +679,9 @@ Loader objects are used in a few places throughout the configuration. They ident
 
 `exclude: /node_modules/` - Exclude modules using a regex, string, or function
 
-`loader: "babel!eslint"` - A ! delimited string of loaders to use on these modules
+`loader: "babel-loader!eslint-loader"` - A `!` delimited string of loaders to use on these modules
 
-`loaders: [ "babel", "eslint" ]` - An array of loaders to use on these modules
+`loaders: [ "babel-loader", "eslint-loader" ]` - An array of loaders to use on these modules
 
 W> Note that loaders are always read from **right to left** whether passed via a delimited string or an array. In the example above, the [eslint-loader]() will lint, and possibly fix syntax in, the JavaScript modules and then hand them off to the [babel-loader]() for transpiling.
 
@@ -696,7 +696,7 @@ An array of [loader objects]() to be used as the first step in the loading proce
 ```js
 module: {
   preLoaders: [
-    { test: /\.js/, exclude: /node_modules/, loader: 'eslint' }
+    { test: /\.js/, exclude: /node_modules/, loader: 'eslint-loader' }
   ],
   ...
 }
@@ -713,9 +713,9 @@ An array of [loader objects]() to be used as the second step in the loading proc
 ```js
 module: {
   loaders: [
-    { test: /\.js/, exclude: /node_modules/, loader: 'babel!eslint' },
-    { test: /\.css/, loader: 'style!css' },
-    { test: /\.(jpg|png|gif), loader: 'file!img' }
+    { test: /\.js/, exclude: /node_modules/, loader: 'babel-loader!eslint-loader' },
+    { test: /\.css/, loader: 'style-loader!css-loader' },
+    { test: /\.(jpg|png|gif), loader: 'file-loader!img-loader' }
   ]
 }
 ```
@@ -978,7 +978,7 @@ which would allow `import Text from "txt!./myText" or `loader: "txt"` within a [
 Specify templates to help webpack resolve loader packages. Using the defaults shown above, when a module is imported through [loader objects]() or like so:
 
 ```js
-import Module from 'babel!eslint!./path/to/my/module';
+import Module from 'babel-loader!eslint-loader!./path/to/my/module';
 ```
 
 webpack will try to find the [babel loader]() using "babel-webpack-loader", "babel-web-loader", and so on on until the package is found.
