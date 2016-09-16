@@ -61,7 +61,23 @@ T> A **"scalable webpack configurations"** are ones that can be reused and combi
 
 Below is a list of entry configurations and their real-world use cases:
 
+#### Separate App and Vendor Entries
 
+**webpack.config.js**
 
+```javascript
+module.exports = config;
+
+const config = {
+  entry: {
+    app: './src/app.js',
+    vendors: './src/vendors.js'
+  }
+};
+```
+
+**What does this do?** At face value this tells webpack to create dependency graphs starting at both `app.js` and `vendors.js`. These graphs are completely separate and independant of eachother. (AKA there will be a webpack bootstrap in each bundle).
+
+**Why?** This setup allows you to leverage [`CommonsChunkPlugin`](../api/plugins/commonschunkplugin) and extract any vendor references from your app code into your vendor code. If there is no vendor code in your application bundle, then you can have [long-term vendor-caching.](../hot-to/cache).
 
 
