@@ -19,7 +19,9 @@ contributors:
 
 ### External Configurations
 
-?> TODO: possible extensions, i. e. .babel.js
+?> TODO: possible extensions, e.g. `.babel.js`
+
+?> TODO: loader settings, e.g. `sassLoader`, `eslint` sections
 
 ---
 
