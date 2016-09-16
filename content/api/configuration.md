@@ -25,6 +25,8 @@ contributors:
 
 Webpack is fed a configuration object. It is passed in one of two ways depending on how you are using webpack: through the Command Line (CLI) or via Node. Either method also allows an array of configuration objects, which are processed in parallel. This is more efficient than calling webpack multiple times. All the available configuration options are specified below...
 
+T> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html). This prevents file path issues between operating systems. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more;
+
 ---
 
 ### Configuration Options
@@ -377,7 +379,7 @@ Webpack is fed a configuration object. It is passed in one of two ways depending
 The base directory, an absolute path, for resolving entry points.
 
 ```js
-context: __dirname + ‘/src’
+context: path.resolve(__dirname, ‘src’)
 ```
 
 ---
@@ -409,7 +411,7 @@ A set of options instructing webpack on how and where it should output your bund
 ```js
 output: {
   filename: ‘[name].bundle.js’,
-  path: __dirname + ‘/dist/assets’,
+  path: path.resolve(__dirname, ‘dist/assets’),
   publicPath: ‘/assets/’
 }
 ```
@@ -446,7 +448,7 @@ filename: [chunkhash].bundle.js
 The output directory as an **absolute** path. Note that the `[hash]` subsitution may be used here as well.
 
 ```js
-path: __dirname + '/dist/assets'
+path: path.resolve(__dirname, 'dist/assets')
 ```
 
 ---
@@ -816,7 +818,7 @@ Configure how modules are resolved. For example, when calling `import "lodash"` 
 Tell webpack what directories should be searched when resolving modules. 
 
 ```js
-root: __dirname + '/src'
+root: path.resolve(__dirname, 'src')
 ```
 
 W> The value or values **must be an absolute path(s)**.
@@ -875,8 +877,8 @@ Create aliases to `import` or `require` certain modules more easily. For example
 
 ```js
 alias: {
-  Utilities: __dirname + '/src/utilities/',
-  Templates: __dirname + '/src/templates/'
+  Utilities: path.resolve(__dirname, 'src/utilities/'),
+  Templates: path.resolve(__dirname, 'src/templates/')
 }
 ```
 
@@ -896,7 +898,7 @@ A trailing `$` can also be added to the given object's keys to signify an exact 
 
 ```js
 alias: {
-  xyz$: __dirname + '/path/to/file.js'
+  xyz$: path.resolve(__dirname, 'path/to/file.js')
 }
 ```
 
