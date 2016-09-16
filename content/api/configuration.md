@@ -5,29 +5,9 @@ contributors:
   - gregvenech
 ---
 
-?> TODO: Add a reference to [[Using the Cli]]
+Webpack is fed a configuration object. It is passed in one of two ways depending on how you are using webpack: through the [terminal]() or via [Node](). Learn more about the various ways this can be done in [Passing a Configuration](). All the available configuration options are specified below.
 
-### Passing a Configuration
-
-?> TODO: exporting a function and --env
-
-?> TODO: returning a Promise
-
-?> TODO: exporting multiple configurations
-
----
-
-### External Configurations
-
-?> TODO: possible extensions, e.g. `.babel.js`
-
-?> TODO: loader settings, e.g. `sassLoader`, `eslint` sections
-
----
-
-Webpack is fed a configuration object. It is passed in one of two ways depending on how you are using webpack: through the Command Line (CLI) or via Node. Either method also allows an array of configuration objects, which are processed in parallel. This is more efficient than calling webpack multiple times. All the available configuration options are specified below...
-
-T> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html). This prevents file path issues between operating systems. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more;
+T> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html). This prevents file path issues between operating systems. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more.
 
 ---
 
@@ -1406,6 +1386,28 @@ Description...
 ?> TODO: Finish and add links to the necessary areas for further reading. Would be nice to [figure out](https://github.com/chjj/marked/issues/310) reference-style links in marked first.
 
 ?> TODO: consider breaking out template string substitutions into its own section and then referrring to it from throughout the rest of the page. It seems like there's a lot of overlap between sections there.
+
+---
+
+## Passing a Configuration
+
+Separate page?
+
+?> TODO: exporting a function and --env
+
+?> TODO: returning a Promise
+
+?> TODO: exporting multiple configurations
+
+---
+
+## External Configurations
+
+Separate page?
+
+?> TODO: possible extensions, e.g. `.babel.js`
+
+?> TODO: loader settings, e.g. `sassLoader`, `eslint` sections
 
 ---
 
