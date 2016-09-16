@@ -671,7 +671,7 @@ These options determine how the [different types of modules](/concepts/everythin
 
 ### Loader Objects
 
-Loader objects are used in a few places throughout the configuration. They identify groups of modules using regular expressions. [Loaders](/concepts/loaders) can then be used, and chained together, to process, transform, or manipulate that group of modules. Loader objects can contain the following properties:
+Loader objects are used in a few places throughout the configuration. They identify groups of modules using regular expressions. [Loaders](/concepts/loaders) can then be used, and chained together, to process, transform, or manipulate that group of modules in a variety of ways. Loader objects can contain the following properties:
 
 `test: /\.js/` - Identify one or more file extensions using a [regex](), string, or function
 
@@ -683,7 +683,7 @@ Loader objects are used in a few places throughout the configuration. They ident
 
 `loaders: [ "babel-loader", "eslint-loader" ]` - An array of loaders to use on these modules
 
-W> Note that loaders are always read from **right to left** whether passed via a delimited string or an array. In the example above, the [eslint-loader]() will lint, and possibly fix syntax in, the JavaScript modules and then hand them off to the [babel-loader]() for transpiling.
+W> Note that loaders are always read from **right to left** whether passed via a string or an array. In the example above, the [eslint-loader]() will lint the JavaScript modules and then hand them off to the [babel-loader]() for transpiling.
 
 ---
 
@@ -967,7 +967,7 @@ alias: {
 }
 ```
 
-which would allow `import Text from "txt!./myText" or `loader: "txt"` within a [loader object](). The only additional option is `moduleTemplates`, detailed below...
+which would allow `import Text from "txt!./myText" or `loader: "txt"` within a [loader object](). The only additional option is `moduleTemplates` below.
 
 ---
 
