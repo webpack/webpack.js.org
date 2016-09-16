@@ -683,7 +683,7 @@ Loader objects are used in a few places throughout the configuration. They ident
 
 `loaders: [ "babel-loader", "eslint-loader" ]` - An array of loaders to use on these modules
 
-W> Note that loaders are always read from **right to left** whether passed via a string or an array. In the example above, the [eslint-loader]() will lint the JavaScript modules and then hand them off to the [babel-loader]() for transpiling.
+T> Loaders are always read from **right to left** whether passed via a string or an array. In the example above, the [eslint-loader]() will lint the JavaScript modules and then hand them off to the [babel-loader]() for transpiling. It's useful to think of this process as a series of nested function calls, i.e. `babelLoader(eslintLoader(...))`, each one passing it's return value on to the next.
 
 ---
 
