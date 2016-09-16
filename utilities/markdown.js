@@ -53,7 +53,7 @@ module.exports = function(section) {
       code = code.replace(/ *<\/details>(\n)?/g, "\nMARKDOWNDETAILSEND\n");
       code = code.replace(/<summary>/g, "\nMARKDOWNSUMMARYSTART\n");
       code = code.replace(/ *<\/summary>/g, "\nMARKDOWNSUMMARYEND");
-      code = code.replace(/(?:  )?( *)MARKDOWNDETAILSSTART([\s\S]*?)MARKDOWNSUMMARYSTART\n/g, "MARKDOWNDETAILSSTART$2MARKDOWNSUMMARYSTART\n$1");
+      code = code.replace(/(?:)?( *)MARKDOWNDETAILSSTART([\s\S]*?)MARKDOWNSUMMARYSTART\n/g, "MARKDOWNDETAILSSTART$2MARKDOWNSUMMARYSTART\n$1");
     }
     var rendered = codeTemplate.call(this, code, lang, escaped);
     if(linksEnabled) {
@@ -68,7 +68,7 @@ module.exports = function(section) {
       rendered = rendered.replace(/\n.*?MARKDOWNSUMMARYSTART.*?\n/g, "<summary>");
       rendered = rendered.replace(/\n.*?MARKDOWNSUMMARYEND.*?\n/g, "</summary>");
     }
-    return rendered
+    return rendered;
   };
 
   return {

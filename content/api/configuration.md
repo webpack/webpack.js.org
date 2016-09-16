@@ -1,5 +1,8 @@
 ---
 title: Configuration
+contributors:
+  - sokra
+  - gregvenech
 ---
 
 ?> TODO: Add a reference to [[Using the Cli]]

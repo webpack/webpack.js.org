@@ -1,5 +1,7 @@
 ---
 title: How to Configure Hot Module Replacement?
+contributors:
+  - jmreidy
 ---
 
 Hot Module Replacement (HMR) exchanges, adds, or removes modules while an

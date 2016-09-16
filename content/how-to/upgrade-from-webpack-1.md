@@ -1,5 +1,7 @@
 ---
 title: How to Upgrade from Webpack 1?
+contributors:
+  - sokra
 ---
 
 ### `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
