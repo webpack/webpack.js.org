@@ -1,4 +1,5 @@
 import React from 'react';
+import { GoogleAnalytics } from 'antwar-helpers';
 import Navigation from './Navigation';
 import Sidecar from './Sidecar';
 import Footer from './Footer';
@@ -17,6 +18,8 @@ const Body = ({ children }) => {
         <Sidecar />
         { children }
       <Footer />
+
+      <GoogleAnalytics analyticsId="UA-46921629-2" />
     </div>
   );
 };
