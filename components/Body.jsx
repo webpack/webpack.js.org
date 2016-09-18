@@ -1,5 +1,4 @@
 import React from 'react';
-import Body from 'antwar-helpers/layouts/Body';
 import Navigation from './Navigation';
 import Sidecar from './Sidecar';
 import Footer from './Footer';
@@ -11,22 +10,15 @@ const pages = [
   { title: 'Github', url: '//github.com/webpack/webpack.js.org' }
 ];
 
-export default props => {
-  let { section, location, config } = props,
-      { pathname } = location,
-      { home = '/' } = config;
-
-  // XXX: drop this once there is root domain
-  if (home && __DEV__) { // eslint-disable-line no-undef
-    home = '/';
-  }
-
+const Body = ({ children }) => {
   return (
-    <Body { ...props }>
-      <Navigation home={ home } pages={ pages } />
+    <div>
+      <Navigation home="/" pages={ pages } />
         <Sidecar />
-        { props.children }
+        { children }
       <Footer />
-    </Body>
+    </div>
   );
 };
+
+export default Body;

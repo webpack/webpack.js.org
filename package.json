@@ -21,9 +21,9 @@
     "url": "https://github.com/webpack/webpack.js.org/issues"
   },
   "scripts": {
-    "start": "antwar -d",
-    "build": "antwar -b && npm run sitemap && echo webpack.js.org > build/CNAME",
-    "deploy": "antwar -D",
+    "start": "node ./bootstrap.js",
+    "build": "node ./bootstrap.js && npm run sitemap && echo webpack.js.org > build/CNAME",
+    "deploy": "gh-pages -d build",
     "lint": "eslint . --ext .js --ext .jsx --ext .md",
     "markdownlint": "markdownlint --config ./.markdownlintrc **/*.md *.md ./content/**/*.md",
     "sociallint": "alex ./**/*.md",
@@ -32,10 +32,8 @@
   },
   "devDependencies": {
     "alex": "^3.1.0",
-    "antwar": "^0.8.1",
-    "antwar-cli": "^0.6.6",
-    "antwar-helpers": "^0.8.0",
-    "antwar-prevnext-plugin": "^0.4.0",
+    "antwar": "^0.8.1-alpha.7d8d0447",
+    "antwar-prevnext-plugin": "^0.8.1-alpha.7d8d0447",
     "autoprefixer": "^6.3.7",
     "babel-core": "^6.10.4",
     "babel-eslint": "^6.1.2",
@@ -48,6 +46,8 @@
     "eslint-plugin-markdown": "^1.0.0-beta.2",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
+    "gh-pages": "^0.11.0",
+    "html-webpack-plugin": "^2.22.0",
     "json-loader": "^0.5.4",
     "markdown-loader": "^0.1.7",
     "markdownlint": "^0.2.0",
@@ -64,6 +64,8 @@
     "sitemap-static": "^0.3.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1",
     "webpack-merge": "^0.14.0",
     "yaml-frontmatter-loader": "0.0.3"
   },
