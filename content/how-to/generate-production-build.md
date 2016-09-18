@@ -1,5 +1,7 @@
 ---
 title: How to Generate a Production Build?
+contributors:
+  - henriquea
 ---
 
 Generating production builds with Webpack is straight-forward. There are three things to keep in mind:
@@ -26,8 +28,10 @@ The `DefinePlugin` creates **compile** time constants. Useful for injecting your
 
 ```js
 // webpack.config.js
+const webpack = require('webpack');
+
 module.exports = {
-  //...
+  /*...*/
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
@@ -35,8 +39,8 @@ module.exports = {
       }
     })
   ]
-  // ...
-}
+  /*...*/
+};
 ```
 
 T> Spoiler: Setting the env var only won't make your bundle smaller. This take us to the last step:
@@ -47,8 +51,10 @@ Webpack comes with UglifyJS plugin which minimize the output. You can pass an ob
 
 ```js
 // webpack.config.js
+const webpack = require('webpack');
+
 module.exports = {
-  //...
+  /*...*/
   plugins:[
     new webpack.DefinePlugin({
       'process.env':{
@@ -61,8 +67,8 @@ module.exports = {
       }
     })
   ]
-  //...
-}
+  /*...*/
+};
 ```
 
 That's it! You're all set to ship production code.

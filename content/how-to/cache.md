@@ -1,21 +1,25 @@
 ---
 title: How to Cache?
+contributors:
+  - okonet
 ---
 
 To enable long-term caching of static resources produced by webpack:
 
 1. Use `[chunkhash]` to add a content-dependent cache-buster to each file.
-1. Use compiler stats to get the file names when requiring resources in HTML.
-1. Generate the chunk-manifest JSON and inline it into the HTML page before loading resources.
-1. Ensure that the entry point chunk containing the bootstrapping code doesn’t change its hash over time for the same set of dependencies.
+2. Use compiler stats to get the file names when requiring resources in HTML.
+3. Generate the chunk-manifest JSON and inline it into the HTML page before loading resources.
+4. Ensure that the entry point chunk containing the bootstrapping code doesn’t change its hash over time for the same set of dependencies.
 
 ## The problem
 
-Each time something needs to be updated in our code, it has to be re-deployed on the server and then re-downloaded by all clients. This is clearly very inefficient since fetching resources over the network can be slow. This is why browsers cache static resources. But the way it works has a pitfall: if we don’t change filenames of our resources when deploying a new version, browser might think it hasn’t been updated and client will get a cached version of it.
+Each time something needs to be updated in our code, it has to be re-deployed on the server and then re-downloaded by all clients. This is clearly inefficient since fetching resources over the network can be slow. This is why browsers cache static resources.
+
+The way it works has a pitfall: if we don’t change filenames of our resources when deploying a new version, browser might think it hasn’t been updated and client will get a cached version of it.
 
 Probably the simplest way to tell the browser to download a newer version is to alter asset’s file name. In a pre-webpack era we used to add a build number to the filenames as a parameter and then increment it:
 
-```
+```bash
 application.js?build=1
 application.css?build=1
 ```
@@ -24,6 +28,8 @@ It is even easier to do with webpack: each webpack build generates a unique hash
 
 ```js
 // webpack.config.js
+const path = require('path');
+
 module.exports = {
   entry: {
     vendor: './src/vendor.js',
@@ -55,16 +61,16 @@ But the problem here is that, *each* time we create a new build, all filenames w
 
 What if we could produce the same filename if the contents of the file did not change between builds? For example, the file where we put all our libraries and other vendor stuff does not change that often.
 
-T> Separate your vendor and application code with [CommonsChunkPlugin](http://webpack.github.io/docs/list-of-plugins.html#2-explicit-vendor-chunk) and create an explicit vendor chunk to prevent it from changing too often.
+T> Separate your vendor and application code with [CommonsChunkPlugin](https://webpack.github.io/docs/list-of-plugins.html#2-explicit-vendor-chunk) and create an explicit vendor chunk to prevent it from changing too often.
 
 Webpack allows you to generate hashes depending on the file contents. Here is the updated config:
 
 ```js
 // webpack.config.js
 module.exports = {
-  ...
+  /*...*/
   output: {
-    ...
+    /*...*/
     filename: '[name].[chunkhash].js'
   }
 };
@@ -99,13 +105,15 @@ In order to reference a correct file in the HTML, we’ll need some information 
 
 ```js
 // webpack.config.js
+const path = require('path');
+
 module.exports = {
-  ...
+  /*...*/
   plugins: [
     function() {
       this.plugin("done", function(stats) {
         require("fs").writeFileSync(
-          path.join(__dirname, "...", "stats.json"),
+          path.join(__dirname, "…", "stats.json"),
           JSON.stringify(stats.toJson()));
       });
     }

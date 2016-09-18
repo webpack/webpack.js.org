@@ -1,5 +1,7 @@
 ---
 title: How to Develop Using Vagrant
+contributors:
+  - SpaceK33z
 ---
 
 If you have a more advanced project and use [Vagrant](https://www.vagrantup.com/) to run your development environment in a Virtual Machine, you'll often want to also run webpack in the VM.
@@ -26,7 +28,7 @@ Make sure to have a `webpack.config.js` file. If you haven't already, use this a
 module.exports = {
   context: __dirname,
   entry: "./app.js"
-}
+};
 ```
 
 And create a `index.html` file. The script tag should point to your bundle. If `output.filename` is not specified in the config, this will be `bundle.js`.
@@ -85,11 +87,11 @@ server {
 }
 ```
 
-The `proxy_set_header` lines are very important, because they allow the WebSocket to work correctly.
+The `proxy_set_header` lines are important, because they allow the WebSockets to work correctly.
 
 The command to start webpack-dev-server can then be changed to this:
 
-```
+```bash
 webpack-dev-server --public 10.10.10.61 --watch-poll
 ```
 
