@@ -4,8 +4,11 @@ var markdown = require('./utilities/markdown');
 var highlight = require('./utilities/highlight');
 
 module.exports = {
+  template: {
+    title: 'webpack'
+  },
   //assets: [] // custom assets to copy into the build
-  siteBase: '//webpack.github.io/webpack.io/',
+  siteBase: '//webpack.js.org/',
   home: 'index.html', // XXX: drop once there's a root domain
   output: 'build',
   title: 'webpack',
@@ -26,13 +29,7 @@ module.exports = {
     prevnextPlugin()
   ],
   layout: function() {
-    return require('./components/Body.jsx')
-  },
-  style: function() {
-    require('./styles/reset.css');
-    require('./styles/prism.css');
-    require('./styles/icons.css');
-    require('./styles/index.scss');
+    return require('./components/Body.jsx').default
   },
   paths: {
     '/': root(
@@ -118,7 +115,10 @@ function processPage() {
       return o.sectionName + '/' + o.fileName.split('.')[0]
     },
     content: function(o) {
-      return markdown().process(o.file.__content, highlight)
+      return markdown().process(o.file.__content, highlight);
+    },
+    contributors: function(o) {
+      return Array.isArray(o.file.contributors) && o.file.contributors.length && o.file.contributors.slice().sort();
     }
   };
 }

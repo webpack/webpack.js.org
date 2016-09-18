@@ -2,7 +2,10 @@
   position:relative;
   display:flex;
 
-  .sidebar { flex:0 0 20%; }
+  .sidebar { 
+    flex:0 0 20%; 
+    max-width:20%;
+  }
 
   &-edit {
     position:absolute;
@@ -17,6 +20,7 @@
 
   &-content { 
     flex:0 0 80%; 
+    max-width:80%;
     padding:1em;
     background:map-get($colors, white);
   }
