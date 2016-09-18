@@ -55,9 +55,7 @@ Fully completed can be removed from this list. If there's a topic you would like
 
 ## Git Flow
 
-We are using the [git flow](http://nvie.com/posts/a-successful-git-branching-model/) branching model.
-
-Please direct all pull requests for code changes to the [develop](https://github.com/webpack/webpack.js.org/tree/develop) branch. [Content](https://github.com/webpack/webpack.js.org/tree/master/src/content) changes are fine on to make on master.
+We are using the [git flow](http://nvie.com/posts/a-successful-git-branching-model/) branching model. Please direct all pull requests to the [develop](https://github.com/webpack/webpack.js.org/tree/develop) branch.
 
 ## Editor Config
 
