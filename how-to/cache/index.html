@@ -1,8 +1,16 @@
-<html lang="en"><head><title>webpack - How to Cache?</title><base href="//webpack.js.org/"/><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"/><meta name="description" content="
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>webpack</title>
+    
 
-To enable long-term caching of static resources produced by webpack:
-
-Use [chunkhash] to add a…"/><meta name="keywords" content="webpack,javascript,web development,programming"/><link rel="icon" type="image/png" href="//webpack.js.org/assets/img/favicon.png"/><link rel="stylesheet" href="//webpack.js.org/assets/main.css"/></head><body><main role="main"><div class="navigation "><div class="container navigation-inner"><a class="navigation-logo" href="index.html"><span class="logo"><span class="webpack-icon -light" style="width:20px;margin-left:10px;padding-bottom:10px;"><figure class="webpack-icon-cube -outer" style="width:20px;height:20px;transform:translateX(-50%)
+    
+      <link href="/style.css" rel="stylesheet">
+    
+  </head>
+  <body>
+    <div><div class="navigation "><div class="container navigation-inner"><a class="navigation-logo" href="/"><span class="logo"><span class="webpack-icon -light" style="width:20px;margin-left:10px;padding-bottom:10px;"><figure class="webpack-icon-cube -outer" style="width:20px;height:20px;transform:translateX(-50%)
               scale3d(1,1,1)
               rotateX(0deg)
               rotateY(0deg)
@@ -21,10 +29,13 @@ Use [chunkhash] to add a…"/><meta name="keywords" content="webpack,javascript,
 <p>Each time something needs to be updated in our code, it has to be re-deployed on the server and then re-downloaded by all clients. This is clearly inefficient since fetching resources over the network can be slow. This is why browsers cache static resources.</p>
 <p>The way it works has a pitfall: if we don’t change filenames of our resources when deploying a new version, browser might think it hasn’t been updated and client will get a cached version of it.</p>
 <p>Probably the simplest way to tell the browser to download a newer version is to alter asset’s file name. In a pre-webpack era we used to add a build number to the filenames as a parameter and then increment it:</p>
-<pre><code>application.js?build<span class="token operator" >=</span>1
+<pre><code class="lang-bash">application.js?build<span class="token operator" >=</span>1
 application.css?build<span class="token operator" >=</span>1
-</code></pre><p>It is even easier to do with webpack: each webpack build generates a unique hash which can be used to compose a filename. The following example config will generate 2 files (1 per entry point) with a hash in filenames:</p>
+</code></pre>
+<p>It is even easier to do with webpack: each webpack build generates a unique hash which can be used to compose a filename. The following example config will generate 2 files (1 per entry point) with a hash in filenames:</p>
 <pre><code class="lang-js"><span class="token comment" spellcheck="true">// webpack.config.js</span>
+<span class="token keyword" >const</span> path <span class="token operator" >=</span> <span class="token function" >require</span><span class="token punctuation" >(</span><span class="token string" >'path'</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+
 module<span class="token punctuation" >.</span>exports <span class="token operator" >=</span> <span class="token punctuation" >{</span>
   entry<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
     vendor<span class="token punctuation" >:</span> <span class="token string" >'./src/vendor.js'</span><span class="token punctuation" >,</span>
@@ -52,9 +63,9 @@ vendor.55e783391098c2496a8f.js 1.43 kB 1 <span class="token punctuation" >[</spa
 <blockquote class="tip"><i class="icon-info tip-icon"></i>Separate your vendor and application code with <a href="https://webpack.github.io/docs/list-of-plugins.html#2-explicit-vendor-chunk">CommonsChunkPlugin</a> and create an explicit vendor chunk to prevent it from changing too often.</blockquote><p>Webpack allows you to generate hashes depending on the file contents. Here is the updated config:</p>
 <pre><code class="lang-js"><span class="token comment" spellcheck="true">// webpack.config.js</span>
 module<span class="token punctuation" >.</span>exports <span class="token operator" >=</span> <span class="token punctuation" >{</span>
-  …
+  <span class="token comment" spellcheck="true">/*...*/</span>
   output<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
-    …
+    <span class="token comment" spellcheck="true">/*...*/</span>
     filename<span class="token punctuation" >:</span> <span class="token string" >'[name].[chunkhash].js'</span>
   <span class="token punctuation" >}</span>
 <span class="token punctuation" >}</span><span class="token punctuation" >;</span>
@@ -72,8 +83,10 @@ vendor.c2330c22cd2decb5da5a.js 1.43 kB 1 <span class="token punctuation" >[</spa
 </code></pre>
 <p>In order to reference a correct file in the HTML, we’ll need some information about our build. This can be extracted from webpack compilation stats by using this simple plugin:</p>
 <pre><code class="lang-js"><span class="token comment" spellcheck="true">// webpack.config.js</span>
+<span class="token keyword" >const</span> path <span class="token operator" >=</span> <span class="token function" >require</span><span class="token punctuation" >(</span><span class="token string" >'path'</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+
 module<span class="token punctuation" >.</span>exports <span class="token operator" >=</span> <span class="token punctuation" >{</span>
-  …
+  <span class="token comment" spellcheck="true">/*...*/</span>
   plugins<span class="token punctuation" >:</span> <span class="token punctuation" >[</span>
     <span class="token keyword" >function</span><span class="token punctuation" >(</span><span class="token punctuation" >)</span> <span class="token punctuation" >{</span>
       <span class="token keyword" >this</span><span class="token punctuation" >.</span><span class="token function" >plugin</span><span class="token punctuation" >(</span><span class="token string" >"done"</span><span class="token punctuation" >,</span> <span class="token keyword" >function</span><span class="token punctuation" >(</span>stats<span class="token punctuation" >)</span> <span class="token punctuation" >{</span>
@@ -206,7 +219,7 @@ main.5e17f4dff47bc1a007c0.js 373 bytes 2 <span class="token punctuation" >[</spa
 <li><a href="https://medium.com/@okonetchnikov/long-term-caching-of-static-assets-with-webpack-1ecb139adb95#.vtwnssps4">https://medium.com/@okonetchnikov/long-term-caching-of-static-assets-with-webpack-1ecb139adb95#.vtwnssps4</a></li>
 <li><a href="https://gist.github.com/sokra/ff1b0290282bfa2c037bdb6dcca1a7aa">https://gist.github.com/sokra/ff1b0290282bfa2c037bdb6dcca1a7aa</a></li>
 </ul>
-</div></section></div><footer class="footer"><div class="container footer-inner"><section class="footer-inner-left"><a class="footer-inner-link" href="get-started">Get Started</a><a class="footer-inner-link" href="analyze">Analyze</a><a class="footer-inner-link" href="contribute">Contribute</a></section><section class="footer-inner-middle"><a href="/"><span class="webpack-icon -dark" style="width:18px;margin-left:9px;padding-bottom:9px;"><figure class="webpack-icon-cube -outer" style="width:18px;height:18px;transform:translateX(-50%)
+</div><div><hr/><p>Contributors to this page: (in alphabetical order)</p><div class="contributors-list"><a class="contributor" href="https://github.com/okonet"><img src="https://github.com/okonet.png?size=80"/><span class="contributor-name">okonet</span></a></div></div></section></div><footer class="footer"><div class="container footer-inner"><section class="footer-inner-left"><a class="footer-inner-link" href="get-started">Get Started</a><a class="footer-inner-link" href="analyze">Analyze</a><a class="footer-inner-link" href="contribute">Contribute</a></section><section class="footer-inner-middle"><a href="/"><span class="webpack-icon -dark" style="width:18px;margin-left:9px;padding-bottom:9px;"><figure class="webpack-icon-cube -outer" style="width:18px;height:18px;transform:translateX(-50%)
               scale3d(1,1,1)
               rotateX(0deg)
               rotateY(0deg)
@@ -214,4 +227,6 @@ main.5e17f4dff47bc1a007c0.js 373 bytes 2 <span class="token punctuation" >[</spa
               scale3d(0.5,0.5,0.5)
               rotateX(0deg)
               rotateY(0deg)
-              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(9px);"></section></figure></span></a></section><section class="footer-inner-right"><a class="footer-inner-link" href="//gitter.im/webpack/webpack">Support</a><a class="footer-inner-link" href="changelog">Changelog</a><a class="footer-inner-link" href="license">License</a></section></div></footer></main></body></html>
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(9px);"></section></figure></span></a></section><section class="footer-inner-right"><a class="footer-inner-link" href="//gitter.im/webpack/webpack">Support</a><a class="footer-inner-link" href="changelog">Changelog</a><a class="footer-inner-link" href="license">License</a></section></div></footer><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', ', UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
+  </body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>webpack</title>
+    
+
+    
+      <link href="/style.css" rel="stylesheet">
+    
+  </head>
+  <body>
+    <div><div class="navigation "><div class="container navigation-inner"><a class="navigation-logo" href="/"><span class="logo"><span class="webpack-icon -light" style="width:20px;margin-left:10px;padding-bottom:10px;"><figure class="webpack-icon-cube -outer" style="width:20px;height:20px;transform:translateX(-50%)
+              scale3d(1,1,1)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(10px);"></section></figure><figure class="webpack-icon-cube -inner" style="width:20px;height:20px;transform:translateX(-50%)
+              scale3d(0.5,0.5,0.5)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(10px);"></section></figure></span><span class="logo-text -light">Webpack</span></span></a><nav class="navigation-nav"><a class="navigation-nav-link" href="/concepts">Concepts</a><a class="navigation-nav-link" href="/how-to">How to</a><a class="navigation-nav-link" href="/api">API</a><a class="navigation-nav-link" href="///github.com/webpack/webpack.js.org">Github</a></nav></div></div><aside class="sidecar"><a href="https://github.com/webpack/webpack" class="sidecar-item -github"><span>See the Repo</span><i class="icon-github"></i></a><a href="#" class="sidecar-item -gitter"><span>Get Help on Gitter</span><i class="icon-gitter"></i></a><a href="https://medium.com/webpack" class="sidecar-item -medium"><span>Visit Our Blog</span><i class="icon-medium"></i></a><a href="http://stackoverflow.com/questions/tagged/webpack" class="sidecar-item -so"><span>Browse Webpack on SO</span><i class="icon-stack-overflow"></i></a></aside><div class="container page"><nav class="sidebar"><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/targets">Targets</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/plugins">Plugins</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/output">Output</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/modules">Modules</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/loaders">Loaders</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/index">Introduction</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/entry-points">Entry Points</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/configuration">Configuration</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/concepts">Concepts</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/compared-to-other-systems">Compared to Other Systems</a></div></nav><section class="page-content"><h1>Concepts</h1><a class="page-edit" href="https://github.com/webpack/webpack.js.org/edit/master/content/concepts/concepts.md">Edit this Page  <i class="icon-edit"></i></a><div><p>webpack is <a href="./api/configuration">incredibly configurable</a>, however, there are <strong>4 Core Concepts</strong> we feel you should understand before you get started! </p>
+<p>As part of your webpack learning journey, we wrote this document aimed to give you a <strong>high-level</strong> overview of these concepts, while still providing links to concept specific use-cases. </p>
+<h2 class="header"><a class="header-anchor" href="#entry" id="entry"></a><span class="text">Entry</span><a class="header-anchor-select" href="#entry">#</a></h2>
+<p>In the <a href="./index">previous article</a>, we mentioned that webpack creates a graph of all of your application&#39;s dependencies. The starting point of this graph is known as an <em>entry point</em>. The <em>Entry point</em> tells webpack <em>where to start</em> and follows the graph of dependendencies to know <em>what to bundle</em>. You can think of your applications <em>entry point</em> as the <strong>contextual root</strong> or <strong>the first file to kick off your app</strong>.</p>
+<p>In webpack we define <em>entry points</em> using the <code>entry</code> property in our <a href="./configuration">webpack configuration object</a>. </p>
+<p>The simplest example is seen below: </p>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="lang-javascript">  module<span class="token punctuation" >.</span>exports <span class="token operator" >=</span> config<span class="token punctuation" >;</span> 
+
+  <span class="token keyword" >const</span> config <span class="token operator" >=</span> <span class="token punctuation" >{</span>
+    entry<span class="token punctuation" >:</span> <span class="token string" >'./path/to/my/entry/file.js'</span> 
+  <span class="token punctuation" >}</span><span class="token punctuation" >;</span>
+</code></pre>
+<p>There are multiple ways to declare your <code>entry</code> property that are specific to your applications needs. </p>
+<p><a href="./entry-points"><strong>Learn more!</strong></a></p>
+<h2 class="header"><a class="header-anchor" href="#output" id="output"></a><span class="text">Output</span><a class="header-anchor-select" href="#output">#</a></h2>
+<p>Once you&#39;ve bundled all of your assets together, we still need to tell webpack <strong>where</strong> to bundle our application. The webpack <code>output</code> property describes to webpack <strong>how to treat bundled code</strong>. </p>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="lang-javascript">  module<span class="token punctuation" >.</span>exports <span class="token operator" >=</span> config<span class="token punctuation" >;</span> 
+
+  <span class="token keyword" >const</span> config <span class="token operator" >=</span> <span class="token punctuation" >{</span>
+    entry<span class="token punctuation" >:</span> <span class="token string" >'./path/to/my/entry/file.js'</span><span class="token punctuation" >,</span>
+    output<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
+      filename<span class="token punctuation" >:</span> <span class="token string" >'my-first-webpack.bundle.js'</span><span class="token punctuation" >,</span>
+      path<span class="token punctuation" >:</span> <span class="token string" >'./dist'</span>
+    <span class="token punctuation" >}</span>
+  <span class="token punctuation" >}</span><span class="token punctuation" >;</span>
+</code></pre>
+<p>In the example above, through the <code>output.filename</code> and <code>output.path</code> properties we are describing to webpack the name of our bundle, and where we want it to be emitted to.</p>
+<blockquote class="tip"><i class="icon-info tip-icon"></i>You may see the term <strong>emitted</strong> or <strong>emit</strong> used throughout our documentation and <a href="../api/plugins">plugin API</a>. This is a fancy term for &quot;produced or discharged&quot;.</blockquote><p>The <code>output</code> property has <a href="../api/configuration">many more configurable features</a>, but lets spend some time understanding some of the most common use cases for the <code>output</code> property. </p>
+<p><a href="./output"><strong>Learn more!</strong></a></p>
+<h2 class="header"><a class="header-anchor" href="#loaders" id="loaders"></a><span class="text">Loaders</span><a class="header-anchor-select" href="#loaders">#</a></h2>
+<p>The goal is to have all of your assets in your project to be <strong>webpack&#39;s</strong> concern and not the browser. (This doesn&#39;t mean that they all have to be bundled together). webpack treats <a href="./modules">every file (.css, .html, .scss, .jpg, etc.) as a module</a>. However, webpack <strong>only understands JavaScript</strong>.</p>
+<p><strong>Loaders tell webpack <em>how to treat these files as modules</em> as they are added to your dependency graph.</strong></p>
+<p>At a high level, they have two purposes in your webpack config. </p>
+<ol>
+<li>Identify what files should be transformed by a certain loader. (<code>test</code> property)</li>
+<li>Transform that file so that it can be added to your dependency graph (and eventually your bundle). (<code>loader</code> property)</li>
+</ol>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="lang-javascript">  module<span class="token punctuation" >.</span>exports <span class="token operator" >=</span> config<span class="token punctuation" >;</span> 
+
+  <span class="token keyword" >const</span> config <span class="token operator" >=</span> <span class="token punctuation" >{</span>
+    entry<span class="token punctuation" >:</span> <span class="token string" >'./path/to/my/entry/file.js'</span><span class="token punctuation" >,</span>
+    output<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
+      filename<span class="token punctuation" >:</span> <span class="token string" >'my-first-webpack.bundle.js'</span><span class="token punctuation" >,</span>
+      path<span class="token punctuation" >:</span> <span class="token string" >'./dist'</span>
+    <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
+    module<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
+      loaders<span class="token punctuation" >:</span> <span class="token punctuation" >[</span>
+        <span class="token punctuation" >{</span>test<span class="token punctuation" >:</span> <span class="token regex" >/\.(js|jsx)$/</span><span class="token punctuation" >,</span> loader<span class="token punctuation" >:</span> <span class="token string" >'babel-loader'</span><span class="token punctuation" >}</span> 
+      <span class="token punctuation" >]</span>
+    <span class="token punctuation" >}</span>
+  <span class="token punctuation" >}</span><span class="token punctuation" >;</span>
+</code></pre>
+<p>In the configuration above we have defined our loader with its two required properties: <code>test</code>, and <code>loader</code>. It tells webpack&#39;s compiler the following: </p>
+<blockquote>
+<p>&quot;Hey webpack compiler, when you come across a path that resolves to a &#39;.js&#39; or &#39;.jsx&#39; file inside of a require() statement, use the babel-loader to transform it before you bundle it together&quot;.</p>
+</blockquote>
+<blockquote class="warning"><i class="icon-warning tip-icon"></i>It is important to remember when defining loaders in your webpack config, you are defining them under <code>module.loaders</code>, and not <code>loaders</code>.</blockquote><p>There are more specific properties to define on loaders that we haven&#39;t yet covered. </p>
+<p><a href="&#39;./loaders&#39;"><strong>Learn more!</strong></a></p>
+<h2 class="header"><a class="header-anchor" href="#plugins" id="plugins"></a><span class="text">Plugins</span><a class="header-anchor-select" href="#plugins">#</a></h2>
+<p>Since Loaders only execute transforms on a per-file basis, Plugins are most commonly used (but not limited to) performing actions and custom functionality on &quot;compilations&quot; or &quot;chunks&quot; of your bundled modules <a href="./plugins">(and so much more)</a>. The webpack Plugin system is <a href="../api/plugins">extremely and powerful and customizable</a>. </p>
+<p>In order to use a plugin, you just need to <code>require()</code> it and add it to the <code>plugins</code> array. Since most plugins are customizable via options, you need to create an instance of it by calling it with <code>new</code>.</p>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="lang-javascript">  <span class="token keyword" >const</span> HtmlWebpackPlugin <span class="token operator" >=</span> <span class="token function" >require</span><span class="token punctuation" >(</span><span class="token string" >'html-webpack-plugin'</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span> <span class="token comment" spellcheck="true">//installed via npm</span>
+  <span class="token keyword" >const</span> webpack <span class="token operator" >=</span> <span class="token function" >require</span><span class="token punctuation" >(</span><span class="token string" >'webpack'</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span> <span class="token comment" spellcheck="true">//to access built-in plugins</span>
+
+  module<span class="token punctuation" >.</span>exports <span class="token operator" >=</span> config<span class="token punctuation" >;</span> 
+
+  <span class="token keyword" >const</span> config <span class="token operator" >=</span> <span class="token punctuation" >{</span>
+    entry<span class="token punctuation" >:</span> <span class="token string" >'./path/to/my/entry/file.js'</span><span class="token punctuation" >,</span>
+    output<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
+      filename<span class="token punctuation" >:</span> <span class="token string" >'my-first-webpack.bundle.js'</span><span class="token punctuation" >,</span>
+      path<span class="token punctuation" >:</span> <span class="token string" >'./dist'</span>
+    <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
+    module<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
+      loaders<span class="token punctuation" >:</span> <span class="token punctuation" >[</span>
+        <span class="token punctuation" >{</span>test<span class="token punctuation" >:</span> <span class="token regex" >/\.(js|jsx)$/</span><span class="token punctuation" >,</span> loader<span class="token punctuation" >:</span> <span class="token string" >'babel-loader'</span><span class="token punctuation" >}</span> 
+      <span class="token punctuation" >]</span>
+    <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
+    plugins<span class="token punctuation" >:</span> <span class="token punctuation" >[</span>
+      <span class="token keyword" >new</span> <span class="token class-name" >webpack<span class="token punctuation" >.</span>optimize<span class="token punctuation" >.</span>UglifyJsPlugin</span><span class="token punctuation" >(</span><span class="token punctuation" >)</span><span class="token punctuation" >,</span>
+      <span class="token keyword" >new</span> <span class="token class-name" >HtmlWebpackPlugin</span><span class="token punctuation" >(</span><span class="token punctuation" >{</span>template<span class="token punctuation" >:</span> <span class="token string" >'./src/index.html'</span><span class="token punctuation" >}</span><span class="token punctuation" >)</span>
+    <span class="token punctuation" >]</span>
+  <span class="token punctuation" >}</span><span class="token punctuation" >;</span>
+</code></pre>
+<p>There are many plugins that webpack provides out of the box! Check out our <a href="https://webpack.github.io/docs/list-of-plugins.html">list of plugins</a> for more information.</p>
+<p>Using plugins in your webpack config is straight-forward, however there are many use-cases that are worth discussing further. </p>
+<p><a href="./plugins"><strong>Learn more!</strong></a></p>
+</div></section></div><footer class="footer"><div class="container footer-inner"><section class="footer-inner-left"><a class="footer-inner-link" href="get-started">Get Started</a><a class="footer-inner-link" href="analyze">Analyze</a><a class="footer-inner-link" href="contribute">Contribute</a></section><section class="footer-inner-middle"><a href="/"><span class="webpack-icon -dark" style="width:18px;margin-left:9px;padding-bottom:9px;"><figure class="webpack-icon-cube -outer" style="width:18px;height:18px;transform:translateX(-50%)
+              scale3d(1,1,1)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(9px);"></section></figure><figure class="webpack-icon-cube -inner" style="width:18px;height:18px;transform:translateX(-50%)
+              scale3d(0.5,0.5,0.5)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(9px);"></section></figure></span></a></section><section class="footer-inner-right"><a class="footer-inner-link" href="//gitter.im/webpack/webpack">Support</a><a class="footer-inner-link" href="changelog">Changelog</a><a class="footer-inner-link" href="license">License</a></section></div></footer><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', ', UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
+  </body>
+</html>

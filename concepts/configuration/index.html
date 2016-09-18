@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>webpack</title>
+    
+
+    
+      <link href="/style.css" rel="stylesheet">
+    
+  </head>
+  <body>
+    <div><div class="navigation "><div class="container navigation-inner"><a class="navigation-logo" href="/"><span class="logo"><span class="webpack-icon -light" style="width:20px;margin-left:10px;padding-bottom:10px;"><figure class="webpack-icon-cube -outer" style="width:20px;height:20px;transform:translateX(-50%)
+              scale3d(1,1,1)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(10px);"></section></figure><figure class="webpack-icon-cube -inner" style="width:20px;height:20px;transform:translateX(-50%)
+              scale3d(0.5,0.5,0.5)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(10px);"></section></figure></span><span class="logo-text -light">Webpack</span></span></a><nav class="navigation-nav"><a class="navigation-nav-link" href="/concepts">Concepts</a><a class="navigation-nav-link" href="/how-to">How to</a><a class="navigation-nav-link" href="/api">API</a><a class="navigation-nav-link" href="///github.com/webpack/webpack.js.org">Github</a></nav></div></div><aside class="sidecar"><a href="https://github.com/webpack/webpack" class="sidecar-item -github"><span>See the Repo</span><i class="icon-github"></i></a><a href="#" class="sidecar-item -gitter"><span>Get Help on Gitter</span><i class="icon-gitter"></i></a><a href="https://medium.com/webpack" class="sidecar-item -medium"><span>Visit Our Blog</span><i class="icon-medium"></i></a><a href="http://stackoverflow.com/questions/tagged/webpack" class="sidecar-item -so"><span>Browse Webpack on SO</span><i class="icon-stack-overflow"></i></a></aside><div class="container page"><nav class="sidebar"><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/targets">Targets</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/plugins">Plugins</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/output">Output</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/modules">Modules</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/loaders">Loaders</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/index">Introduction</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/entry-points">Entry Points</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/configuration">Configuration</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/concepts">Concepts</a></div><div class="sidebar-link"><a class="sidebar-link-text" href="/concepts/compared-to-other-systems">Compared to Other Systems</a></div></nav><section class="page-content"><h1>Configuration</h1><a class="page-edit" href="https://github.com/webpack/webpack.js.org/edit/master/content/concepts/configuration.md">Edit this Page  <i class="icon-edit"></i></a><div><p>You may have noticed that few webpack configurations look exactly alike. This is because <strong>webpack&#39;s configuration file is a JavaScript file that exports an object.</strong> This object, is then parsed by webpack based upon its defined properties.</p>
+<p>The following examples below describe how webpacks configuration object can be both expressive and configurable because <em>it is code</em>: </p>
+<h2 class="header"><a class="header-anchor" href="#the-simplest-of-examples" id="the-simplest-of-examples"></a><span class="text">The simplest of examples</span><a class="header-anchor-select" href="#the-simplest-of-examples">#</a></h2>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="lang-javascript">module<span class="token punctuation" >.</span>exports <span class="token operator" >=</span> <span class="token punctuation" >{</span>
+  entry<span class="token punctuation" >:</span> <span class="token string" >'./foo.js'</span><span class="token punctuation" >,</span>
+  output<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
+    path<span class="token punctuation" >:</span> <span class="token string" >'dist'</span><span class="token punctuation" >,</span>
+    filename<span class="token punctuation" >:</span> <span class="token string" >'foo.bundle.js'</span>
+  <span class="token punctuation" >}</span>
+<span class="token punctuation" >}</span><span class="token punctuation" >;</span>
+</code></pre>
+<h2 class="header"><a class="header-anchor" href="#generating-multiple-targets-and-configs-and-exporting-the-entire-array" id="generating-multiple-targets-and-configs-and-exporting-the-entire-array"></a><span class="text">Generating multiple targets and configs and exporting the entire array</span><a class="header-anchor-select" href="#generating-multiple-targets-and-configs-and-exporting-the-entire-array">#</a></h2>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="lang-javascript"><span class="token keyword" >var</span> path <span class="token operator" >=</span> <span class="token function" >require</span><span class="token punctuation" >(</span><span class="token string" >'path'</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+<span class="token keyword" >var</span> webpack <span class="token operator" >=</span> <span class="token function" >require</span><span class="token punctuation" >(</span><span class="token string" >'webpack'</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+<span class="token keyword" >var</span> webpackMerge <span class="token operator" >=</span> <span class="token function" >require</span><span class="token punctuation" >(</span><span class="token string" >'webpack-merge'</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+
+<span class="token keyword" >var</span> baseConfig <span class="token operator" >=</span> <span class="token punctuation" >{</span>  
+  target<span class="token punctuation" >:</span> <span class="token string" >'async-node'</span><span class="token punctuation" >,</span>
+  entry<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
+    entry<span class="token punctuation" >:</span> <span class="token string" >'./entry.js'</span>
+  <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
+  output<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
+    filename<span class="token punctuation" >:</span> <span class="token string" >'[name].js'</span><span class="token punctuation" >,</span>
+    path<span class="token punctuation" >:</span> path<span class="token punctuation" >.</span><span class="token function" >resolve</span><span class="token punctuation" >(</span>__dirname<span class="token punctuation" >,</span> <span class="token string" >'./dist'</span><span class="token punctuation" >)</span>
+  <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
+  plugins<span class="token punctuation" >:</span> <span class="token punctuation" >[</span>
+    <span class="token keyword" >new</span> <span class="token class-name" >webpack<span class="token punctuation" >.</span>optimize<span class="token punctuation" >.</span>CommonsChunkPlugin</span><span class="token punctuation" >(</span><span class="token punctuation" >{</span>
+      name<span class="token punctuation" >:</span> <span class="token string" >'inline'</span><span class="token punctuation" >,</span>
+      filename<span class="token punctuation" >:</span> <span class="token string" >'inline.js'</span><span class="token punctuation" >,</span>
+      minChunks<span class="token punctuation" >:</span> <span class="token number" >Infinity</span>
+    <span class="token punctuation" >}</span><span class="token punctuation" >)</span><span class="token punctuation" >,</span>
+    <span class="token keyword" >new</span> <span class="token class-name" >webpack<span class="token punctuation" >.</span>optimize<span class="token punctuation" >.</span>AggressiveSplittingPlugin</span><span class="token punctuation" >(</span><span class="token punctuation" >{</span>
+        minSize<span class="token punctuation" >:</span> <span class="token number" >5000</span><span class="token punctuation" >,</span>
+        maxSize<span class="token punctuation" >:</span> <span class="token number" >10000</span>
+    <span class="token punctuation" >}</span><span class="token punctuation" >)</span><span class="token punctuation" >,</span>
+  <span class="token punctuation" >]</span>
+<span class="token punctuation" >}</span><span class="token punctuation" >;</span>
+
+<span class="token keyword" >let</span> targets <span class="token operator" >=</span> <span class="token punctuation" >[</span><span class="token string" >'web'</span><span class="token punctuation" >,</span> <span class="token string" >'webworker'</span><span class="token punctuation" >,</span> <span class="token string" >'node'</span><span class="token punctuation" >,</span> <span class="token string" >'async-node'</span><span class="token punctuation" >,</span> <span class="token string" >'node-webkit'</span><span class="token punctuation" >,</span> <span class="token string" >'electron-main'</span><span class="token punctuation" >]</span><span class="token punctuation" >.</span><span class="token function" >map</span><span class="token punctuation" >(</span><span class="token punctuation" >(</span>target<span class="token punctuation" >)</span> <span class="token operator" >=</span><span class="token operator" >></span> <span class="token punctuation" >{</span>
+  <span class="token keyword" >let</span> base <span class="token operator" >=</span> <span class="token function" >webpackMerge</span><span class="token punctuation" >(</span>baseConfig<span class="token punctuation" >,</span> <span class="token punctuation" >{</span>
+    target<span class="token punctuation" >:</span> target<span class="token punctuation" >,</span>
+    output<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
+      path<span class="token punctuation" >:</span> path<span class="token punctuation" >.</span><span class="token function" >resolve</span><span class="token punctuation" >(</span>__dirname<span class="token punctuation" >,</span> <span class="token string" >'./dist/'</span> <span class="token operator" >+</span> target<span class="token punctuation" >)</span><span class="token punctuation" >,</span>
+      filename<span class="token punctuation" >:</span> <span class="token string" >'[name].'</span> <span class="token operator" >+</span> target <span class="token operator" >+</span> <span class="token string" >'.js'</span>
+    <span class="token punctuation" >}</span>
+  <span class="token punctuation" >}</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+  <span class="token keyword" >return</span> base<span class="token punctuation" >;</span>
+<span class="token punctuation" >}</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+
+module<span class="token punctuation" >.</span>exports <span class="token operator" >=</span> targets<span class="token punctuation" >;</span>
+</code></pre>
+<blockquote class="tip"><i class="icon-info tip-icon"></i>The most important part to take away from this document is that there are many different ways to format and style your webpack configuation. The key is to stick with something consistent that you and your team can understand and maintain.</blockquote><h2 class="header"><a class="header-anchor" href="#using-typescript-to-create-a-class-which-the-angular-cli-uses-to-generate-configs-https-github-com-angular-angular-cli-blob-master-addon-ng2-models-webpack-config-ts-" id="using-typescript-to-create-a-class-which-the-angular-cli-uses-to-generate-configs-https-github-com-angular-angular-cli-blob-master-addon-ng2-models-webpack-config-ts-"></a><span class="text">Using TypeScript to create a class which the angular-cli uses to <a href="https://github.com/angular/angular-cli/blob/master/addon/ng2/models/webpack-config.ts">generate configs</a></span><a class="header-anchor-select" href="#using-typescript-to-create-a-class-which-the-angular-cli-uses-to-generate-configs-https-github-com-angular-angular-cli-blob-master-addon-ng2-models-webpack-config-ts-">#</a></h2>
+<p><strong>webpack.config.ts</strong></p>
+<pre><code class="lang-typescript"><span class="token keyword" >import</span> <span class="token operator" >*</span> as webpackMerge from <span class="token string" >'webpack-merge'</span><span class="token punctuation" >;</span>
+<span class="token keyword" >import</span> <span class="token punctuation" >{</span> CliConfig <span class="token punctuation" >}</span> from <span class="token string" >'./config'</span><span class="token punctuation" >;</span>
+<span class="token keyword" >import</span> <span class="token punctuation" >{</span>
+  getWebpackCommonConfig<span class="token punctuation" >,</span>
+  getWebpackDevConfigPartial<span class="token punctuation" >,</span>
+  getWebpackProdConfigPartial<span class="token punctuation" >,</span>
+  getWebpackMobileConfigPartial<span class="token punctuation" >,</span>
+  getWebpackMobileProdConfigPartial
+<span class="token punctuation" >}</span> from <span class="token string" >'./'</span><span class="token punctuation" >;</span>
+
+<span class="token keyword" >export</span> <span class="token keyword" >class</span> <span class="token class-name" >NgCliWebpackConfig</span> <span class="token punctuation" >{</span>
+  <span class="token comment" spellcheck="true">// TODO: When webpack2 types are finished lets replace all these any types</span>
+  <span class="token comment" spellcheck="true">// so this is more maintainable in the future for devs</span>
+  <span class="token keyword" >public</span> config<span class="token punctuation" >:</span> <span class="token keyword" >any</span><span class="token punctuation" >;</span>
+  <span class="token keyword" >private</span> webpackDevConfigPartial<span class="token punctuation" >:</span> <span class="token keyword" >any</span><span class="token punctuation" >;</span>
+  <span class="token keyword" >private</span> webpackProdConfigPartial<span class="token punctuation" >:</span> <span class="token keyword" >any</span><span class="token punctuation" >;</span>
+  <span class="token keyword" >private</span> webpackBaseConfig<span class="token punctuation" >:</span> <span class="token keyword" >any</span><span class="token punctuation" >;</span>
+  <span class="token keyword" >private</span> webpackMobileConfigPartial<span class="token punctuation" >:</span> <span class="token keyword" >any</span><span class="token punctuation" >;</span>
+  <span class="token keyword" >private</span> webpackMobileProdConfigPartial<span class="token punctuation" >:</span> <span class="token keyword" >any</span><span class="token punctuation" >;</span>
+
+  <span class="token keyword" >constructor</span><span class="token punctuation" >(</span><span class="token keyword" >public</span> ngCliProject<span class="token punctuation" >:</span> <span class="token keyword" >any</span><span class="token punctuation" >,</span> <span class="token keyword" >public</span> target<span class="token punctuation" >:</span> <span class="token keyword" >string</span><span class="token punctuation" >,</span> <span class="token keyword" >public</span> environment<span class="token punctuation" >:</span> <span class="token keyword" >string</span><span class="token punctuation" >,</span> outputDir<span class="token operator" >?</span><span class="token punctuation" >:</span> <span class="token keyword" >string</span><span class="token punctuation" >)</span> <span class="token punctuation" >{</span>
+    <span class="token keyword" >const</span> config<span class="token punctuation" >:</span> CliConfig <span class="token operator" >=</span> CliConfig<span class="token punctuation" >.</span><span class="token function" >fromProject</span><span class="token punctuation" >(</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+    <span class="token keyword" >const</span> appConfig <span class="token operator" >=</span> config<span class="token punctuation" >.</span>config<span class="token punctuation" >.</span>apps<span class="token punctuation" >[</span><span class="token number" >0</span><span class="token punctuation" >]</span><span class="token punctuation" >;</span>
+
+    appConfig<span class="token punctuation" >.</span>outDir <span class="token operator" >=</span> outputDir <span class="token operator" >||</span> appConfig<span class="token punctuation" >.</span>outDir<span class="token punctuation" >;</span>
+
+    <span class="token keyword" >this</span><span class="token punctuation" >.</span>webpackBaseConfig <span class="token operator" >=</span> <span class="token function" >getWebpackCommonConfig</span><span class="token punctuation" >(</span><span class="token keyword" >this</span><span class="token punctuation" >.</span>ngCliProject<span class="token punctuation" >.</span>root<span class="token punctuation" >,</span> environment<span class="token punctuation" >,</span> appConfig<span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+    <span class="token keyword" >this</span><span class="token punctuation" >.</span>webpackDevConfigPartial <span class="token operator" >=</span> <span class="token function" >getWebpackDevConfigPartial</span><span class="token punctuation" >(</span><span class="token keyword" >this</span><span class="token punctuation" >.</span>ngCliProject<span class="token punctuation" >.</span>root<span class="token punctuation" >,</span> appConfig<span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+    <span class="token keyword" >this</span><span class="token punctuation" >.</span>webpackProdConfigPartial <span class="token operator" >=</span> <span class="token function" >getWebpackProdConfigPartial</span><span class="token punctuation" >(</span><span class="token keyword" >this</span><span class="token punctuation" >.</span>ngCliProject<span class="token punctuation" >.</span>root<span class="token punctuation" >,</span> appConfig<span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+
+    <span class="token keyword" >if</span> <span class="token punctuation" >(</span>appConfig<span class="token punctuation" >.</span>mobile<span class="token punctuation" >)</span><span class="token punctuation" >{</span>
+      <span class="token keyword" >this</span><span class="token punctuation" >.</span>webpackMobileConfigPartial <span class="token operator" >=</span> <span class="token function" >getWebpackMobileConfigPartial</span><span class="token punctuation" >(</span><span class="token keyword" >this</span><span class="token punctuation" >.</span>ngCliProject<span class="token punctuation" >.</span>root<span class="token punctuation" >,</span> appConfig<span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+      <span class="token keyword" >this</span><span class="token punctuation" >.</span>webpackMobileProdConfigPartial <span class="token operator" >=</span> <span class="token function" >getWebpackMobileProdConfigPartial</span><span class="token punctuation" >(</span><span class="token keyword" >this</span><span class="token punctuation" >.</span>ngCliProject<span class="token punctuation" >.</span>root<span class="token punctuation" >,</span> appConfig<span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+      <span class="token keyword" >this</span><span class="token punctuation" >.</span>webpackBaseConfig <span class="token operator" >=</span> <span class="token function" >webpackMerge</span><span class="token punctuation" >(</span><span class="token keyword" >this</span><span class="token punctuation" >.</span>webpackBaseConfig<span class="token punctuation" >,</span> <span class="token keyword" >this</span><span class="token punctuation" >.</span>webpackMobileConfigPartial<span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+      <span class="token keyword" >this</span><span class="token punctuation" >.</span>webpackProdConfigPartial <span class="token operator" >=</span> <span class="token function" >webpackMerge</span><span class="token punctuation" >(</span><span class="token keyword" >this</span><span class="token punctuation" >.</span>webpackProdConfigPartial<span class="token punctuation" >,</span> <span class="token keyword" >this</span><span class="token punctuation" >.</span>webpackMobileProdConfigPartial<span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+    <span class="token punctuation" >}</span>
+
+    <span class="token keyword" >this</span><span class="token punctuation" >.</span><span class="token function" >generateConfig</span><span class="token punctuation" >(</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+  <span class="token punctuation" >}</span>
+
+  <span class="token function" >generateConfig</span><span class="token punctuation" >(</span><span class="token punctuation" >)</span><span class="token punctuation" >:</span> <span class="token keyword" >void</span> <span class="token punctuation" >{</span>
+    <span class="token keyword" >switch</span> <span class="token punctuation" >(</span><span class="token keyword" >this</span><span class="token punctuation" >.</span>target<span class="token punctuation" >)</span> <span class="token punctuation" >{</span>
+      <span class="token keyword" >case</span> <span class="token string" >"development"</span><span class="token punctuation" >:</span>
+        <span class="token keyword" >this</span><span class="token punctuation" >.</span>config <span class="token operator" >=</span> <span class="token function" >webpackMerge</span><span class="token punctuation" >(</span><span class="token keyword" >this</span><span class="token punctuation" >.</span>webpackBaseConfig<span class="token punctuation" >,</span> <span class="token keyword" >this</span><span class="token punctuation" >.</span>webpackDevConfigPartial<span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+        <span class="token keyword" >break</span><span class="token punctuation" >;</span>
+      <span class="token keyword" >case</span> <span class="token string" >"production"</span><span class="token punctuation" >:</span>
+        <span class="token keyword" >this</span><span class="token punctuation" >.</span>config <span class="token operator" >=</span> <span class="token function" >webpackMerge</span><span class="token punctuation" >(</span><span class="token keyword" >this</span><span class="token punctuation" >.</span>webpackBaseConfig<span class="token punctuation" >,</span> <span class="token keyword" >this</span><span class="token punctuation" >.</span>webpackProdConfigPartial<span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+        <span class="token keyword" >break</span><span class="token punctuation" >;</span>
+      <span class="token keyword" >default</span><span class="token punctuation" >:</span>
+        <span class="token keyword" >throw</span> <span class="token keyword" >new</span> <span class="token class-name" >Error</span><span class="token punctuation" >(</span><span class="token string" >"Invalid build target. Only 'development' and 'production' are available."</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+        <span class="token keyword" >break</span><span class="token punctuation" >;</span>
+    <span class="token punctuation" >}</span>
+  <span class="token punctuation" >}</span>
+<span class="token punctuation" >}</span>
+</code></pre>
+<h2 class="header"><a class="header-anchor" href="#using-jsx-react-js-markup-and-babel-to-create-a-json-configuration-that-webpack-can-understand-courtesy-of-jason-miller-https-twitter-com-_developit-" id="using-jsx-react-js-markup-and-babel-to-create-a-json-configuration-that-webpack-can-understand-courtesy-of-jason-miller-https-twitter-com-_developit-"></a><span class="text">Using JSX (React JS Markup) and Babel to create a JSON Configuration that webpack can understand. (Courtesy of <a href="https://twitter.com/_developit">Jason Miller</a>)</span><a class="header-anchor-select" href="#using-jsx-react-js-markup-and-babel-to-create-a-json-configuration-that-webpack-can-understand-courtesy-of-jason-miller-https-twitter-com-_developit-">#</a></h2>
+<pre><code class="lang-javascript"><span class="token keyword" >import</span> h <span class="token keyword" >from</span> <span class="token string" >'jsxobj'</span><span class="token punctuation" >;</span>
+
+<span class="token comment" spellcheck="true">// example of an import'd plugin</span>
+<span class="token keyword" >const</span> CustomPlugin <span class="token operator" >=</span> config <span class="token operator" >=</span><span class="token operator" >></span> <span class="token punctuation" >(</span><span class="token punctuation" >{</span>
+  <span class="token punctuation" >.</span><span class="token punctuation" >.</span><span class="token punctuation" >.</span>config<span class="token punctuation" >,</span>
+  name<span class="token punctuation" >:</span> <span class="token string" >'custom-plugin'</span>
+<span class="token punctuation" >}</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+
+<span class="token keyword" >const</span> CONFIG <span class="token operator" >=</span> <span class="token punctuation" >(</span>
+  <span class="token operator" >&lt;</span>webpack target<span class="token operator" >=</span><span class="token string" >"web"</span> watch<span class="token operator" >></span>
+    <span class="token operator" >&lt;</span>entry path<span class="token operator" >=</span><span class="token string" >"src/index.js"</span> <span class="token operator" >/</span><span class="token operator" >></span>
+    <span class="token operator" >&lt;</span>resolve<span class="token operator" >></span>
+      <span class="token operator" >&lt;</span>alias <span class="token punctuation" >{</span><span class="token punctuation" >.</span><span class="token punctuation" >.</span><span class="token punctuation" >.</span><span class="token punctuation" >{</span>
+        react<span class="token punctuation" >:</span> <span class="token string" >'preact-compat'</span><span class="token punctuation" >,</span>
+        <span class="token string" >'react-dom'</span><span class="token punctuation" >:</span> <span class="token string" >'preact-compat'</span>
+      <span class="token punctuation" >}</span><span class="token punctuation" >}</span> <span class="token operator" >/</span><span class="token operator" >></span>
+    <span class="token operator" >&lt;</span><span class="token operator" >/</span>resolve<span class="token operator" >></span>
+    <span class="token operator" >&lt;</span>plugins<span class="token operator" >></span>
+      <span class="token operator" >&lt;</span>uglify<span class="token operator" >-</span>js opts<span class="token operator" >=</span><span class="token punctuation" >{</span><span class="token punctuation" >{</span>
+        compression<span class="token punctuation" >:</span> <span class="token boolean" >true</span><span class="token punctuation" >,</span>
+        mangle<span class="token punctuation" >:</span> <span class="token boolean" >false</span>
+      <span class="token punctuation" >}</span><span class="token punctuation" >}</span> <span class="token operator" >/</span><span class="token operator" >></span>
+      <span class="token operator" >&lt;</span>CustomPlugin foo<span class="token operator" >=</span><span class="token string" >"bar"</span> <span class="token operator" >/</span><span class="token operator" >></span>
+    <span class="token operator" >&lt;</span><span class="token operator" >/</span>plugins<span class="token operator" >></span>
+  <span class="token operator" >&lt;</span><span class="token operator" >/</span>webpack<span class="token operator" >></span>
+<span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+
+document<span class="token punctuation" >.</span>body<span class="token punctuation" >.</span>textContent <span class="token operator" >=</span> JSON<span class="token punctuation" >.</span><span class="token function" >stringify</span><span class="token punctuation" >(</span>CONFIG<span class="token punctuation" >,</span> <span class="token number" >0</span><span class="token punctuation" >,</span> <span class="token string" >'  '</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+</code></pre>
+</div></section></div><footer class="footer"><div class="container footer-inner"><section class="footer-inner-left"><a class="footer-inner-link" href="get-started">Get Started</a><a class="footer-inner-link" href="analyze">Analyze</a><a class="footer-inner-link" href="contribute">Contribute</a></section><section class="footer-inner-middle"><a href="/"><span class="webpack-icon -dark" style="width:18px;margin-left:9px;padding-bottom:9px;"><figure class="webpack-icon-cube -outer" style="width:18px;height:18px;transform:translateX(-50%)
+              scale3d(1,1,1)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(9px);"></section></figure><figure class="webpack-icon-cube -inner" style="width:18px;height:18px;transform:translateX(-50%)
+              scale3d(0.5,0.5,0.5)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(9px);"></section></figure></span></a></section><section class="footer-inner-right"><a class="footer-inner-link" href="//gitter.im/webpack/webpack">Support</a><a class="footer-inner-link" href="changelog">Changelog</a><a class="footer-inner-link" href="license">License</a></section></div></footer><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', ', UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
+  </body>
+</html>
