@@ -4,7 +4,7 @@
   transition:background 250ms;
 
   &-inner {
-    padding:0.5em 1em;
+    padding:0.5em 1.5em;
     box-sizing:border-box;
   }
 
@@ -14,7 +14,7 @@
 
   &-nav {
     float:right;
-    padding:0.5em 0;
+    padding:0.45em 0;
 
     &-link {
       font-size:getFontSize(-2);
