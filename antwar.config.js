@@ -29,7 +29,7 @@ module.exports = {
     prevnextPlugin()
   ],
   layout: function() {
-    return require('./components/Body.jsx').default
+    return require('./components/Site.jsx').default
   },
   paths: {
     '/': root(
