@@ -21,15 +21,14 @@ export default props => {
             </span>
 
             <ul className="sidebar-page-sections">
-              {
-                // Temporary for testing, should just be page.sections.map(...)
+              {/*
                 page.title === 'Targets' ? sections.map((section, j) => (
                   <li className="sidebar-page-section" 
                       key={ `sidebar-page-${i}-section-${j}` }>
                     <Link to={ `/${page.url}#${section.id}` }>{ section.title }</Link>
                   </li>
                 )) : ''
-              }
+              */}
             </ul>
           </div>
         ))
