@@ -7,13 +7,15 @@ module.exports = {
   template: {
     title: 'webpack'
   },
-  //assets: [] // custom assets to copy into the build
+  assets: [
+    {
+      from: './fonts',
+      to: 'assets'
+    }
+  ],
   output: 'build',
   title: 'webpack',
   keywords: ['webpack', 'javascript', 'web development', 'programming'],
-  deploy: {
-    branch: 'gh-pages'
-  },
   pageTitle: function(config, pageTitle) {
     var siteName = config.name;
 
