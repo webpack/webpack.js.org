@@ -8,7 +8,6 @@ module.exports = {
     title: 'webpack'
   },
   //assets: [] // custom assets to copy into the build
-  home: 'index.html', // XXX: drop once there's a root domain
   output: 'build',
   title: 'webpack',
   keywords: ['webpack', 'javascript', 'web development', 'programming'],
