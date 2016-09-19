@@ -1,0 +1,13 @@
+.contributors-list {
+  .contributor {
+    padding:1em;
+    display: inline-block;
+    img {
+      height: 80px;
+    }
+    .contributor-name {
+      display: block;
+      text-align: center;
+    }
+  }
+}

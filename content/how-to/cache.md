@@ -1,13 +1,15 @@
 ---
 title: How to Cache?
+contributors:
+  - okonet
 ---
 
 To enable long-term caching of static resources produced by webpack:
 
 1. Use `[chunkhash]` to add a content-dependent cache-buster to each file.
-1. Use compiler stats to get the file names when requiring resources in HTML.
-1. Generate the chunk-manifest JSON and inline it into the HTML page before loading resources.
-1. Ensure that the entry point chunk containing the bootstrapping code doesn’t change its hash over time for the same set of dependencies.
+2. Use compiler stats to get the file names when requiring resources in HTML.
+3. Generate the chunk-manifest JSON and inline it into the HTML page before loading resources.
+4. Ensure that the entry point chunk containing the bootstrapping code doesn’t change its hash over time for the same set of dependencies.
 
 ## The problem
 
@@ -17,7 +19,7 @@ The way it works has a pitfall: if we don’t change filenames of our resources 
 
 Probably the simplest way to tell the browser to download a newer version is to alter asset’s file name. In a pre-webpack era we used to add a build number to the filenames as a parameter and then increment it:
 
-```
+```bash
 application.js?build=1
 application.css?build=1
 ```
@@ -26,6 +28,8 @@ It is even easier to do with webpack: each webpack build generates a unique hash
 
 ```js
 // webpack.config.js
+const path = require('path');
+
 module.exports = {
   entry: {
     vendor: './src/vendor.js',
@@ -64,9 +68,9 @@ Webpack allows you to generate hashes depending on the file contents. Here is th
 ```js
 // webpack.config.js
 module.exports = {
-  …
+  /*...*/
   output: {
-    …
+    /*...*/
     filename: '[name].[chunkhash].js'
   }
 };
@@ -101,8 +105,10 @@ In order to reference a correct file in the HTML, we’ll need some information 
 
 ```js
 // webpack.config.js
+const path = require('path');
+
 module.exports = {
-  …
+  /*...*/
   plugins: [
     function() {
       this.plugin("done", function(stats) {

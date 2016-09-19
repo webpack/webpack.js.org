@@ -1,11 +1,13 @@
 ---
 title: Introduction
+contributors:
+  - TheLarkInn
 ---
 ## Overview
 
 *webpack* is a _module bundler_ for modern JavaScript applications.
 
-### What is a module?
+### What is a module
 
 In [modular programming](https://en.wikipedia.org/wiki/Modular_programming), developers break programs up into discrete chunks of functionality called a _module_.
 
@@ -17,7 +19,7 @@ On the web, however, support for _modules_ has been slow to arrive.
 Multiple tools exist that support modular JavaScript on the web, with a variety of benefits and limitations.
 webpack builds on lessons learned from these systems and applies the concept of _modules_ to any file in your project. 
 
-### What is a webpack module?
+### What is a webpack module
 
 In contrast to Node.js modules, webpack _modules_ can express their _dependencies_ in a variety of ways. A few examples are:
 
@@ -54,4 +56,4 @@ For a full list, see [**the list of loaders**](https://webpack.github.io/docs/li
 
 ### Recap
 
-We are just starting to scratch the surface of webpack and its features, but we are equipped with a great grasp on terminology you will frequent throughout this guide. It's time to now dive into the [Core Concepts (Entry, Output, Loaders, Plugins)](./concepts/core-concepts)!
+We are just starting to scratch the surface of webpack and its features, but we are equipped with a great grasp on terminology you will frequent throughout this guide. It's time to now dive into the [Core Concepts (Entry, Output, Loaders, Plugins)](./concepts/concepts)!

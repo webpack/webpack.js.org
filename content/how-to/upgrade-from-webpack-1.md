@@ -1,5 +1,7 @@
 ---
 title: How to Upgrade from Webpack 1?
+contributors:
+  - sokra
 ---
 
 ### `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -76,7 +78,7 @@ If you abused the CLI to pass custom arguments to the configration like so:
 ``` js
 // webpack.config.js
 var customStuff = process.argv.indexOf("--custom-stuff") >= 0;
-// …
+/*...*/
 ```
 
 You may notice that this is no longer allowed. CLI is more strict now.
@@ -87,8 +89,8 @@ Instead there is an interface for passing arguments to the configuration. This s
 
 ``` js
 module.exports = function(env) {
-  var customStuff = env.customStuff;
-  // …
+  var config, customStuff = env.customStuff;
+  /*...*/
   return config;
 };
 ```
