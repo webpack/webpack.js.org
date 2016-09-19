@@ -28,9 +28,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/api/module-resolution/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/api/plugins/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/api/node/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/api/plugins/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/concepts/compared-to-other-systems/index.html</loc>
     </url>    <url>
