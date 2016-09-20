@@ -149,8 +149,7 @@
   }
 
   pre {
-    background-color: #f8f8f8;
-    border: 1px solid #cccccc;
+    background-color:map-get($colors, mine-shaft);
     font-size: 13px;
     line-height: 19px;
     overflow: auto;
@@ -162,6 +161,7 @@
       padding: 0;
       white-space: pre;
       border: none;
+      color:map-get($colors, concrete);
       background: transparent;
     }
 
