@@ -2,11 +2,12 @@
   &-viz {
     display:flex;
     height:100vh;
-    min-height:750px;
+    min-height:600px;
+    max-height:900px;
 
     &-modules,
     &-output { 
-      flex:0 0 40%; 
+      flex:0 0 43.25%; 
     }
 
     &-icon {
@@ -14,12 +15,28 @@
       flex:1 1 auto;
       align-items:center;
       justify-content:center;
+      
+      .webpack-icon {
+        margin-right:-1.75em;
+      }
+    }
+
+    &-modules {
+      background-image:url(../images/modules.png);
+      background-repeat:no-repeat;
+      background-position:-50px center;
+    }
+
+    &-output {
+      background-image:url(../images/output.png);
+      background-repeat:no-repeat;
+      background-position:-10px 48%;
     }
   }
 
   &-content {
     background:map-get($colors, white);
 
-    &-inner { padding:1em; }
+    &-inner { padding:1.5em; }
   }
 }
