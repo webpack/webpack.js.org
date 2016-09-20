@@ -1,6 +1,5 @@
 ---
-title: Frontpage
+title: Splash Content
 ---
 
-Frontpage content should go here.
-
+Still debating what to do with this section.
