@@ -28,9 +28,10 @@
   }
 
   hr {
-    background: transparent url("http://tinyurl.com/bq5kskr") repeat-x 0 0;
-    color: map-get($colors, alto);
-    height: 4px;
+    border:none;
+    background-color:map-get($colors, alto);
+    height:3px;
+    margin:2em 0;
   }
 
   ul, ol {
