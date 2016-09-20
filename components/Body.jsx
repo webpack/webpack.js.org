@@ -6,6 +6,7 @@ import Footer from './Footer';
 
 const pages = [
   { title: 'Concepts', url: 'concepts' },
+  { title: 'Configuration', url: 'configuration' },
   { title: 'How to', url: 'how-to' },
   { title: 'API', url: 'api' },
   { title: 'Github', url: '//github.com/webpack/webpack.js.org' }

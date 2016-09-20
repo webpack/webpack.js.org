@@ -51,6 +51,16 @@ module.exports = {
         );
       }
     ),
+    configuration: section(
+      'Configuration',
+      function() {
+        return require.context(
+          'json!yaml-frontmatter!./content/configuration',
+          false,
+          /^\.\/.*\.md$/
+        );
+      }
+    ),
     'how-to': section(
       'How to',
       function() {
@@ -61,7 +71,7 @@ module.exports = {
         );
       }
     ),
-    'api': section(
+    api: section(
       'API',
       function() {
         return require.context(
