@@ -166,3 +166,19 @@ The new naming is easier to understand to there are good reasons to upgrade the 
     ]
   }
 ```
+
+### `LoaderOptionPlugin` context
+
+Some loaders need context information and read them from the configuration. This need to be passed via loader options in long-term. See loader documentation for relevant options.
+
+To keep compatiblity with old loaders, this information can be passed via plugin:
+
+``` diff
+  plugins: [
++   new webpack.LoaderOptionsPlugin({
++     options: {
++       context: __dirname
++     }
++   })
+  ]
+```
