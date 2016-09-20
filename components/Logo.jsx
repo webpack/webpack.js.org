@@ -17,7 +17,7 @@ export default class Logo extends Component {
         <Icon ref={ ref => this.icon = ref } 
             theme={ this.props.theme || 'dark' } 
             depth={ 20 } />
-        <span className={ `logo-text -${ this.props.theme || 'dark' }`}>Webpack</span>
+        <span className={ `logo-text -${ this.props.theme || 'dark' }`}>webpack</span>
       </span>
     );
   }
