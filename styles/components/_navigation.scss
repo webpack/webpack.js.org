@@ -4,17 +4,19 @@
   transition:background 250ms;
 
   &-inner {
+    display:flex;
     padding:0.5em 1em;
     box-sizing:border-box;
   }
 
   &-logo {
-    text-decoration:none;
+    flex:0 0 auto;
   }
 
   &-nav {
-    float:right;
-    padding:0.5em 0;
+    flex:1 1 auto;
+    padding:0.2em 0 0.3em;
+    text-align:right;
 
     &-link {
       font-size:getFontSize(-2);

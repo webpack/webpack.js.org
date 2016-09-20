@@ -10,13 +10,13 @@
     &-left,
     &-right { 
       flex:1 1 auto; 
-      padding:0.45em 0;
+      padding:0.4em 0 0.5em;
     }
 
     &-middle { 
-      flex:0 0 auto; 
+      flex:0 0 auto;
 
-      .webpack-icon { margin-top:2px; }
+      .webpack-icon { margin-top:5px; }
     }
 
     &-right { 
