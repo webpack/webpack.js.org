@@ -1,6 +1,7 @@
 .page {
   position:relative;
   display:flex;
+  min-height:calc(100vh - 100px);
 
   .sidebar { 
     flex:0 0 22.5%; 

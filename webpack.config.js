@@ -100,6 +100,9 @@ function developmentConfig(stylePaths) {
 
 function buildConfig(stylePaths) {
   return {
+    output: {
+      publicPath: '/assets/'
+    },
     plugins: [
       new ExtractTextPlugin('[name].css', {
         allChunks: true
