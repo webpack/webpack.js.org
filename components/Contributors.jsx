@@ -1,12 +1,12 @@
 import React from 'react';
 
-export default ({ contributors = [] }) => {
+export default props => {
   return (
     <div className="contributors">
       <p>Contributors to this page: (in alphabetical order)</p>
       <div className="contributors__list">
         { 
-          contributors.map(contributor => (
+          (props.contributors || []).map(contributor => (
             <a key={ contributor } 
               className="contributors__person" 
               href={ "https://github.com/" + contributor }>
