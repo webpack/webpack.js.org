@@ -64,7 +64,7 @@
   blockquote {
     border-left: 4px solid #dddddd;
     padding:0.75em 1em;
-    color: #777777;
+    color:map-get($colors, dove-grey);
 
     > :first-child { margin-top: 0; }
     > :last-child { margin-bottom: 0; }
@@ -73,6 +73,7 @@
     &.warning,
     &.todo {
       border-left:none;
+      border-radius: 3px;
       color:map-get($colors, mine-shaft);
 
       .tip-icon {
