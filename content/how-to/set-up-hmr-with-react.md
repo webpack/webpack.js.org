@@ -218,7 +218,7 @@ important element is the `module.hot.accept` call.
 It specific how to handle changes to specific dependencies.
 
 So in this case, `module.hot` will fire the `render` method ONLY
-when `src/components/App.js` changes! Note that would also include when the
+when `src/components/App.js` changes. Note that would also include when the
 dependencies of `App.js` change -
 so the `render` method will file not just for changes made directly to the
 source of `App.js`, but also changes made to `App.css`, since `App.css`
@@ -259,6 +259,4 @@ dev-server.js:27 [HMR] App is up to date.
 ```
 
 Note that HMR specifies the paths of the updated modules.
-That's because we're using the NamedModules plugin!
-
-
+That's because we're using the NamedModules plugin.

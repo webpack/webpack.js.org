@@ -28,7 +28,8 @@
     "markdownlint": "markdownlint --config ./.markdownlintrc **/*.md *.md ./content/**/*.md",
     "sociallint": "alex ./**/*.md",
     "test": "npm run sociallint && npm run markdownlint && npm run lint ",
-    "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml"
+    "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml",
+    "proselint": "cp .proselintrc ~/ && proselint"
   },
   "devDependencies": {
     "alex": "^3.1.0",
