@@ -5,4 +5,5 @@ script:
   - bash ./scripts/deploy.sh
 sudo: required
 install:
+  npm install
   sudo pip install proselint
