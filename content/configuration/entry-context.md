@@ -11,26 +11,32 @@ contributors:
 
 `string`
 
-The base directory, an absolute path, for resolving entry points.
+The base directory, an **absolute path**, for resolving entry points and loaders from configuration.
 
-```js
-context: path.resolve(__dirname, ‘src’)
+``` js
+context: path.resolve(__dirname, "app")
 ```
+
+By default the current directory is used, but it's recommended to pass a value in your configuration. This makes your configuration independend from CWD.
 
 ---
 
 ### `entry`
 
-`string` `array` `object`
+`string | [string] | object { <key>: string | [string] }`
 
-The point or points to enter the application. 
+The point or points to enter the application. At this point the application starts executing. If an array is passed all items will be executed.
+
+A dynamically loaded module is **not** an entry point.
+
+Simple rule: one entry point per HTML page. SPA: one entry point, MPA: multiple entry points.
 
 ```js
 entry: {
-  home: ‘./home.js’,
-  about: ‘./about.js’,
-  contact: ‘./contact.js’
+  home: "./home.js",
+  about: "./about.js",
+  contact: "./contact.js"
 }
 ```
 
-?> Add more details on passing a string/array and how this will affect bundle names
+When combining with the [`output.library`](/configuration/output#output-library) option: If an array is passed only the last item is exported.

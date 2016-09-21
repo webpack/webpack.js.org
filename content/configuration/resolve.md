@@ -155,3 +155,10 @@ unsafeCache: /src\/utilities/
 ```
 
 W> Changes to cached paths may cause failure in rare cases.
+
+
+### `resolveLoader`
+
+`object`
+
+This set of options is identical to the `resolve` set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages.
