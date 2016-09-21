@@ -65,8 +65,8 @@ module.exports = function(section) {
     if(detailsEnabled) {
       rendered = rendered.replace(/MARKDOWNDETAILSSTART.*?\n/g, "<details>");
       rendered = rendered.replace(/\n.*?MARKDOWNDETAILSEND.*?\n/g, "</details>");
-      rendered = rendered.replace(/\n.*?MARKDOWNSUMMARYSTART.*?\n/g, "<summary>");
-      rendered = rendered.replace(/\n.*?MARKDOWNSUMMARYEND.*?\n/g, "</summary>");
+      rendered = rendered.replace(/\n.*?MARKDOWNSUMMARYSTART.*?\n/g, "<summary><span style='margin-left: -15px; cursor: pointer;'>");
+      rendered = rendered.replace(/\n.*?MARKDOWNSUMMARYEND.*?\n/g, "</span></summary>");
     }
     return rendered;
   };
