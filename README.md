@@ -1,3 +1,5 @@
+[![build status](https://secure.travis-ci.org/webpack/webpack.js.org.svg)](http://travis-ci.org/webpack/webpack.js.org)
+
 # webpack.js.org
 
 Guides, documentation, and all things Webpack.
