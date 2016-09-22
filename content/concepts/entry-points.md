@@ -101,7 +101,7 @@ const config = {
 
 **Why?** In a multi-page application, the server is going to fetch a new html document for you, and the page reloads this new document and assets are redownloaded. However this gives us the unique opportunity to do multiple things:
 
-- Use [`CommonsChunkPlugin`](../api/plugins/commonschunkplugin) to create bundles of shared application code.
+- Use [`CommonsChunkPlugin`](../api/plugins/commonschunkplugin) to create bundles of shared application code between each page.
 
 - Set up [long-term vendor-caching.](../how-to/cache) with the same plugin and techniques seen in the first example. Multi-page applications that reuse a lot of code/modules between entry points can greatly benefit from these techniques, as the amount of entry points increase. 
 
