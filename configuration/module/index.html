@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>webpack</title>
+    
+
+    
+      <link href="/style.css" rel="stylesheet">
+    
+  </head>
+  <body>
+    <div class="site"><div class="navigation "><div class="container navigation-inner"><a class="navigation-logo" href="/"><span class="logo"><span class="webpack-icon -light" style="width:20px;margin-left:10px;padding-bottom:10px;"><figure class="webpack-icon-cube -outer" style="width:20px;height:20px;transform:translateX(-50%)
+              scale3d(1,1,1)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(10px);"></section></figure><figure class="webpack-icon-cube -inner" style="width:20px;height:20px;transform:translateX(-50%)
+              scale3d(0.5,0.5,0.5)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(10px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(10px);"></section></figure></span><span class="logo-text -light">webpack</span></span></a><nav class="navigation-nav"><a class="navigation-nav-link" href="/concepts">Concepts</a><a class="navigation-nav-link" href="/configuration">Configuration</a><a class="navigation-nav-link" href="/how-to">How to</a><a class="navigation-nav-link" href="/api">API</a><a class="navigation-nav-link" href="///github.com/webpack/webpack.js.org">Github</a></nav></div></div><aside class="sidecar"><a href="https://github.com/webpack/webpack" class="sidecar-item -github"><span>See the Repo</span><i class="icon-github"></i></a><a href="#" class="sidecar-item -gitter"><span>Get Help on Gitter</span><i class="icon-gitter"></i></a><a href="https://medium.com/webpack" class="sidecar-item -medium"><span>Visit Our Blog</span><i class="icon-medium"></i></a><a href="http://stackoverflow.com/questions/tagged/webpack" class="sidecar-item -so"><span>Browse Webpack on SO</span><i class="icon-stack-overflow"></i></a></aside><div class="container page"><nav class="sidebar"><div class="sidebar-page"><span class="sidebar-page-title"><a href="/configuration/watch">Watch and WatchOptions</a><i class="sidebar-page-toggle icon-chevron-down"></i></span><ul class="sidebar-page-sections"></ul></div><div class="sidebar-page"><span class="sidebar-page-title"><a href="/configuration/target">Target</a><i class="sidebar-page-toggle icon-chevron-down"></i></span><ul class="sidebar-page-sections"></ul></div><div class="sidebar-page"><span class="sidebar-page-title"><a href="/configuration/resolve">Resolve</a><i class="sidebar-page-toggle icon-chevron-down"></i></span><ul class="sidebar-page-sections"></ul></div><div class="sidebar-page"><span class="sidebar-page-title"><a href="/configuration/plugins">Plugins</a><i class="sidebar-page-toggle icon-chevron-down"></i></span><ul class="sidebar-page-sections"></ul></div><div class="sidebar-page"><span class="sidebar-page-title"><a href="/configuration/passing-a-config">Passing a Configuration</a><i class="sidebar-page-toggle icon-chevron-down"></i></span><ul class="sidebar-page-sections"></ul></div><div class="sidebar-page"><span class="sidebar-page-title"><a href="/configuration/output">Output</a><i class="sidebar-page-toggle icon-chevron-down"></i></span><ul class="sidebar-page-sections"></ul></div><div class="sidebar-page"><span class="sidebar-page-title"><a href="/configuration/other-options">Other Options</a><i class="sidebar-page-toggle icon-chevron-down"></i></span><ul class="sidebar-page-sections"></ul></div><div class="sidebar-page"><span class="sidebar-page-title"><a href="/configuration/node">Node</a><i class="sidebar-page-toggle icon-chevron-down"></i></span><ul class="sidebar-page-sections"></ul></div><div class="sidebar-page"><span class="sidebar-page-title"><a href="/configuration/module">Module</a><i class="sidebar-page-toggle icon-chevron-down"></i></span><ul class="sidebar-page-sections"></ul></div><div class="sidebar-page"><span class="sidebar-page-title"><a href="/configuration/index">Configuration</a><i class="sidebar-page-toggle icon-chevron-down"></i></span><ul class="sidebar-page-sections"></ul></div><div class="sidebar-page"><span class="sidebar-page-title"><a href="/configuration/externals">Externals</a><i class="sidebar-page-toggle icon-chevron-down"></i></span><ul class="sidebar-page-sections"></ul></div><div class="sidebar-page"><span class="sidebar-page-title"><a href="/configuration/external-configs">External Configurations</a><i class="sidebar-page-toggle icon-chevron-down"></i></span><ul class="sidebar-page-sections"></ul></div><div class="sidebar-page"><span class="sidebar-page-title"><a href="/configuration/entry-context">Entry and Context</a><i class="sidebar-page-toggle icon-chevron-down"></i></span><ul class="sidebar-page-sections"></ul></div><div class="sidebar-page"><span class="sidebar-page-title"><a href="/configuration/devtool">Devtool</a><i class="sidebar-page-toggle icon-chevron-down"></i></span><ul class="sidebar-page-sections"></ul></div><div class="sidebar-page"><span class="sidebar-page-title"><a href="/configuration/dev-server">DevServer</a><i class="sidebar-page-toggle icon-chevron-down"></i></span><ul class="sidebar-page-sections"></ul></div></nav><section class="page-content"><h1>Module</h1><a class="page-edit" href="https://github.com/webpack/webpack.js.org/edit/master/content/configuration/module.md">Edit this Page  <i class="icon-edit"></i></a><div><p>These options determine how the <a href="/concepts/everything-is-a-module">different types of modules</a> within a project will be treated.</p>
+<h3 class="header"><a class="anchor" href="#module-rules" id="module-rules"></a><span class="text"><code>module.rules</code></span><a class="icon-link" href="#module-rules"></a></h3>
+<p><code>array</code></p>
+<p>An array of <a href="#rule">Rules</a> which are matched to requests when modules are created. These rules can modify how the module is created. They can apply loaders to the module, or modify the parser.</p>
+<h3 class="header"><a class="anchor" href="#rule" id="rule"></a><span class="text"><code>Rule</code></span><a class="icon-link" href="#rule"></a></h3>
+<p>A Rule can be separated into three parts: Conditions, Results and nested Rules.</p>
+<h4 class="header"><a class="anchor" href="#rule-conditions" id="rule-conditions"></a><span class="text"><code>Rule</code> conditions</span><a class="icon-link" href="#rule-conditions"></a></h4>
+<p>There are two input values for the conditions:</p>
+<p>The resource: An absolute path to the file requested. It&#39;s already resolved according the <a href="/configuration/resolve"><code>resolve</code> rules</a>.</p>
+<p>The issuer: An absolute path to the file of the module which requested the resource. It&#39;s the location of the import.</p>
+<p>Example: The <code>import &quot;./style.css&quot;</code> from <code>app.js</code>:</p>
+<p>Resource is <code>/path/to/style.css</code>. Issuer is <code>/path/to/app.js</code>.</p>
+<p>In a Rule the properties <a href="#rule-test"><code>test</code></a>, <a href="#rule-include"><code>include</code></a>, <a href="#rule-exclude"><code>exclude</code></a> and <a href="#rule-resource"><code>resource</code></a> are matched with the resource and the property <a href="#rule-issuer"><code>issuer</code></a> is matched with the issuer.</p>
+<p>When using multiple conditions, all conditions must match.</p>
+<h4 class="header"><a class="anchor" href="#rule-results" id="rule-results"></a><span class="text"><code>Rule</code> results</span><a class="icon-link" href="#rule-results"></a></h4>
+<p>Rule results are only used when the Rule condition matches.</p>
+<p>There are two output values of a Rule:</p>
+<p>The applied loaders: An array of loaders applied to the resource. Separated in pre-, post- and normal loaders.</p>
+<p>The parser options: An object with options which should be used to create the parser for this module.</p>
+<p>These properties affect the loaders: <a href="#rule-loader"><code>loader</code></a>, <a href="#rule-options"><code>options</code></a>, <a href="#rule-use"><code>use</code></a>.</p>
+<p>For compatibility also these properties: <a href="#rule-query"><code>query</code></a>, <a href="#rule-loaders"><code>loaders</code></a>.</p>
+<p>The <a href="#rule-enforce"><code>enforce</code></a> property affect the loader category. Whether it&#39;s an normal, pre- or post- loader.</p>
+<p>The <a href="#rule-parser"><code>parser</code></a> property affect the parser options.</p>
+<h3 class="header"><a class="anchor" href="#rule-nested-rules" id="rule-nested-rules"></a><span class="text"><code>Rule</code> nested rules</span><a class="icon-link" href="#rule-nested-rules"></a></h3>
+<p>With the properties <a href="#rule-rules"><code>rules</code></a> and <a href="#rule-oneof"><code>oneOf</code></a> nested rules can be specified.</p>
+<p>Nested rules are used when the Rule condition matches.</p>
+<h3 class="header"><a class="anchor" href="#rule-test" id="rule-test"></a><span class="text"><code>Rule.test</code></span><a class="icon-link" href="#rule-test"></a></h3>
+<p><code>Rule.test</code> is a shortcut to <code>Rule.resource.test</code>. See <a href="#rule-resource"><code>Rule.resource</code></a> and <a href="#condition"><code>Condition.test</code></a> for details.</p>
+<h3 class="header"><a class="anchor" href="#rule-include" id="rule-include"></a><span class="text"><code>Rule.include</code></span><a class="icon-link" href="#rule-include"></a></h3>
+<p><code>Rule.include</code> is a shortcut to <code>Rule.resource.include</code>. See <a href="#rule-resource"><code>Rule.resource</code></a> and <a href="#condition"><code>Condition.include</code></a> for details.</p>
+<h3 class="header"><a class="anchor" href="#rule-exclude" id="rule-exclude"></a><span class="text"><code>Rule.exclude</code></span><a class="icon-link" href="#rule-exclude"></a></h3>
+<p><code>Rule.exclude</code> is a shortcut to <code>Rule.resource.exclude</code>. See <a href="#rule-resource"><code>Rule.resource</code></a> and <a href="#condition"><code>Condition.exclude</code></a> for details.</p>
+<h3 class="header"><a class="anchor" href="#rule-resource" id="rule-resource"></a><span class="text"><code>Rule.resource</code></span><a class="icon-link" href="#rule-resource"></a></h3>
+<p>A <a href="#condition"><code>Condtion</code></a> matched with the resource. See details in <a href="#rule-conditions"><code>Rule</code> conditions</a>.</p>
+<h3 class="header"><a class="anchor" href="#rule-issuer" id="rule-issuer"></a><span class="text"><code>Rule.issuer</code></span><a class="icon-link" href="#rule-issuer"></a></h3>
+<p>A <a href="#condition"><code>Condtion</code></a> matched with the issuer. See details in <a href="#rule-conditions"><code>Rule</code> conditions</a>.</p>
+<h3 class="header"><a class="anchor" href="#rule-loader" id="rule-loader"></a><span class="text"><code>Rule.loader</code></span><a class="icon-link" href="#rule-loader"></a></h3>
+<p><code>Rule.loader</code> is a shortcut to <code>Rule.use: [ { loader } ]</code>. See <a href="#rule-use"><code>Rule.use</code></a> and <a href="#useentry-loader"><code>UseEntry.loader</code></a> for details.</p>
+<h3 class="header"><a class="anchor" href="#rule-options" id="rule-options"></a><span class="text"><code>Rule.options</code></span><a class="icon-link" href="#rule-options"></a></h3>
+<h3 class="header"><a class="anchor" href="#rule-query" id="rule-query"></a><span class="text"><code>Rule.query</code></span><a class="icon-link" href="#rule-query"></a></h3>
+<p><code>Rule.options</code> and <code>Rule.query</code> are shortcuts to <code>Rule.use: [ { options } ]</code>. See <a href="#rule-use"><code>Rule.use</code></a> and <a href="#useentry-options"><code>UseEntry.options</code></a> for details.</p>
+<p><code>Rule.query</code> only exists for compatiblity reasons. Use <code>Rule.options</code> instead.</p>
+<h3 class="header"><a class="anchor" href="#rule-loaders" id="rule-loaders"></a><span class="text"><code>Rule.loaders</code></span><a class="icon-link" href="#rule-loaders"></a></h3>
+<p><code>Rule.loaders</code> is an alias to <code>Rule.use</code>. See <a href="#rule-use"><code>Rule.use</code></a> for details.</p>
+<p>It exists for compatiblity reasons. Use <code>Rule.use</code> instead.</p>
+<h3 class="header"><a class="anchor" href="#rule-use" id="rule-use"></a><span class="text"><code>Rule.use</code></span><a class="icon-link" href="#rule-use"></a></h3>
+<p>A list of <a href="#useentry">UseEntries</a> which are applied to the module. Each entry specified a loader which should be used.</p>
+<p>Passing a string (i. e. <code>use: [ &quot;style-loader&quot; ]</code>) is a shortcut to the loader property (i. e. <code>use: [ { loader: &quot;style-loader &quot;} ]</code>).</p>
+<p>See <a href="#useentry">UseEntry</a> for details.</p>
+<h3 class="header"><a class="anchor" href="#rule-enforce" id="rule-enforce"></a><span class="text"><code>Rule.enforce</code></span><a class="icon-link" href="#rule-enforce"></a></h3>
+<p>Either <code>&quot;pre&quot;</code>, `&quot;post&quot; or no value.</p>
+<p>Specifies the category of the loader. No value means normal loader.</p>
+<p>There is also an additional category &quot;inlined loader&quot; which are loaders applied inline of the import/require.</p>
+<p>All loaders are sorted in the order <code>post, inline, normal, pre</code> and used in this order.</p>
+<p>All normal loaders can be omitted (overridden) by prefixing <code>!</code> in the request.</p>
+<p>All normal and pre loaders can be omitted (overridden) by prefixing <code>-!</code> in the request.</p>
+<p>All normal, post and pre loaders can be omitted (overridden) by prefixing <code>!!</code> in the request.</p>
+<p>Inline loaders and <code>!</code> prefixes should not be used as they are non-standard. They may be use by loader generated code.</p>
+<h3 class="header"><a class="anchor" href="#rule-rules" id="rule-rules"></a><span class="text"><code>Rule.rules</code></span><a class="icon-link" href="#rule-rules"></a></h3>
+<p>An array of <a href="#rule"><code>Rules</code></a> that is also used when the Rule matches.</p>
+<h3 class="header"><a class="anchor" href="#rule-oneof" id="rule-oneof"></a><span class="text"><code>Rule.oneOf</code></span><a class="icon-link" href="#rule-oneof"></a></h3>
+<p>An array of <a href="#rule"><code>Rules</code></a> from which only the first matching Rule is used when the Rule matches.</p>
+<h3 class="header"><a class="anchor" href="#rule-parser" id="rule-parser"></a><span class="text"><code>Rule.parser</code></span><a class="icon-link" href="#rule-parser"></a></h3>
+<p>An object with parser options. All applied parser options are merged.</p>
+<p>For each different parser options object a new parser is created and plugins can apply plugins depending on the parser options. Many of the default plugins apply their parser plugins only if a property in the parser options is not set or true.</p>
+<p>Examples (parser options by the default plugins):</p>
+<pre><code class="lang-js">parser<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
+  amd<span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span> <span class="token comment" spellcheck="true">// disable AMD</span>
+  commonjs<span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span> <span class="token comment" spellcheck="true">// disable CommonJs</span>
+  system<span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span> <span class="token comment" spellcheck="true">// disable System</span>
+  harmony<span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span> <span class="token comment" spellcheck="true">// disable harmony import/export</span>
+  requireInclude<span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span> <span class="token comment" spellcheck="true">// disable require.include</span>
+  requireEnsure<span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span> <span class="token comment" spellcheck="true">// disable require.ensure</span>
+  requireContext<span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span> <span class="token comment" spellcheck="true">// disable require.context</span>
+  browserify<span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span> <span class="token comment" spellcheck="true">// disable special handling of browserify bundles</span>
+  requireJs<span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span> <span class="token comment" spellcheck="true">// disable requirejs.*</span>
+  node<span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span> <span class="token comment" spellcheck="true">// disable __dirname, __filename, module, require.extensions, require.main, etc.</span>
+  node<span class="token punctuation" >:</span> <span class="token punctuation" >{</span><span class="token punctuation" >.</span><span class="token punctuation" >.</span><span class="token punctuation" >.</span><span class="token punctuation" >}</span> <span class="token comment" spellcheck="true">// reconfigure <a class="code-link" href="/configuration/node">node</a> layer on module level</span>
+<span class="token punctuation" >}</span>
+</code></pre>
+<h3 class="header"><a class="anchor" href="#condition" id="condition"></a><span class="text"><code>Condition</code></span><a class="icon-link" href="#condition"></a></h3>
+<p>Conditions can be one of these:</p>
+<ul>
+<li>A string: To match the input must start with the provided string. I. e. an absolute directory path, or absolute path to the file.</li>
+<li>A RegExp: It&#39;s tested with the input.</li>
+<li>A function: It&#39;s called with the input and must return a truthy value to match.</li>
+<li>An array of Conditions: At least one of the Condition must match.</li>
+<li>A object: All properties must match. Each property has a defined behavior.</li>
+</ul>
+<p><code>{ test: Condition }</code>: The Condition must match. The convention is the provide a RegExp or array of RegExps here, but it&#39;s not enforced.</p>
+<p><code>{ include: Condition }</code>: The Condition must match. The convention is the provide a string or array of strings here, but it&#39;s not enforced.</p>
+<p><code>{ exclude: Condition }</code>: The Condition must NOT match. The convention is the provide a string or array of strings here, but it&#39;s not enforced.</p>
+<p><code>{ and: [Condition] }</code>: All Conditions must match.</p>
+<p><code>{ or: [Condition] }</code>: Any Condition must match.</p>
+<p><code>{ not: Condition }</code>: The Condition must NOT match.</p>
+<p>Example:</p>
+<pre><code class="lang-js"><span class="token punctuation" >{</span>
+  test<span class="token punctuation" >:</span> <span class="token regex" >/\.css$/</span><span class="token punctuation" >,</span>
+  include<span class="token punctuation" >:</span> <span class="token punctuation" >[</span>
+    path<span class="token punctuation" >.</span><span class="token function" >resolve</span><span class="token punctuation" >(</span>__dirname<span class="token punctuation" >,</span> <span class="token string" >"app/styles"</span><span class="token punctuation" >)</span><span class="token punctuation" >,</span>
+    path<span class="token punctuation" >.</span><span class="token function" >resolve</span><span class="token punctuation" >(</span>__dirname<span class="token punctuation" >,</span> <span class="token string" >"vendor/styles"</span><span class="token punctuation" >)</span>
+  <span class="token punctuation" >]</span>
+<span class="token punctuation" >}</span>
+</code></pre>
+<h3 class="header"><a class="anchor" href="#useentry" id="useentry"></a><span class="text"><code>UseEntry</code></span><a class="icon-link" href="#useentry"></a></h3>
+<p><code>object</code></p>
+<p>It must have a <code>loader</code> property being a string. It is resolved relative to the configuration <a href="/configuration/entry-context#context"><code>context</code></a> with the loader resolving options (<a href="/configuration/resolve#resolveloader">resolveLoader</a>).</p>
+<p>It can have a <code>options</code> property being a string or object. This value is passed to the loader, which should interpret it as loader options.</p>
+<p>For compatibility a <code>query</code> property is also possible, which is an alias for the <code>options</code> property. Use the <code>options</code> property instead.</p>
+<p>Example:</p>
+<pre><code class="lang-js"><span class="token punctuation" >{</span>
+  loader<span class="token punctuation" >:</span> <span class="token string" >"css-loader"</span><span class="token punctuation" >,</span>
+  options<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
+    modules<span class="token punctuation" >:</span> <span class="token boolean" >true</span>
+  <span class="token punctuation" >}</span>
+<span class="token punctuation" >}</span>
+</code></pre>
+<p>Note that webpack need to generate an unique module identifier from resource and all loaders including options. It tries to do this with a <code>JSON.stringify</code> of the options object. This is fine in 99.9%, but may be not unique if you apply the same loaders with different options to the same resource and the options have some stringified values. It also breaks if the options object cannot be stringified (i. e. circular JSON). Because of this you can have a <code>ident</code> property in the options object which is used as unique identifier.</p>
+<h3 class="header"><a class="anchor" href="#module-noparse" id="module-noparse"></a><span class="text"><code>module.noParse</code></span><a class="icon-link" href="#module-noparse"></a></h3>
+<p><code>RegExp | [RegExp]</code></p>
+<p>Prevent webpack from parsing any files matching the given regular expression(s). Ignored files <strong>should not</strong> have calls to <code>import</code>, <code>require</code>, <code>define</code> or any other importing mechanism. This can boost build performance when ignoring large libraries...</p>
+<pre><code class="lang-js">noParse<span class="token punctuation" >:</span> <span class="token regex" >/jquery|backbone/</span>
+</code></pre>
+<h3 class="header"><a class="anchor" href="#module-contexts" id="module-contexts"></a><span class="text">Module Contexts</span><a class="icon-link" href="#module-contexts"></a></h3>
+<p>(Deprecated)</p>
+<p>These options describe the default settings for the context created when a dynamic dependency is encountered.</p>
+<p>Example for an <code>unknown</code> dynamic dependency: <code>require</code>.</p>
+<p>Example for an <code>expr</code> dynamic dependency: <code>require(expr)</code>.</p>
+<p>Example for an <code>wrapped</code> dynamic dependency: <code>require(&quot;./templates/&quot; + expr)</code>.</p>
+<p>Here are the available options with their defaults:</p>
+<pre><code class="lang-js">module<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
+  unknownContextRequest<span class="token punctuation" >:</span> <span class="token string" >"."</span><span class="token punctuation" >,</span>
+  unknownContextRegExp<span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span>
+  unknownContextRecursive<span class="token punctuation" >:</span> <span class="token boolean" >true</span><span class="token punctuation" >,</span>
+  unknownContextCritical<span class="token punctuation" >:</span> <span class="token boolean" >true</span><span class="token punctuation" >,</span>
+  exprContextRequest<span class="token punctuation" >:</span> <span class="token string" >"."</span><span class="token punctuation" >,</span>
+  exprContextRegExp<span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span>
+  exprContextRecursive<span class="token punctuation" >:</span> <span class="token boolean" >true</span><span class="token punctuation" >,</span>
+  exprContextCritical<span class="token punctuation" >:</span> <span class="token boolean" >true</span><span class="token punctuation" >,</span>
+  wrappedContextRegExp<span class="token punctuation" >:</span> <span class="token regex" >/.*/</span><span class="token punctuation" >,</span>
+  wrappedContextRecursive<span class="token punctuation" >:</span> <span class="token boolean" >true</span><span class="token punctuation" >,</span>
+  wrappedContextCritical<span class="token punctuation" >:</span> <span class="token boolean" >false</span>
+<span class="token punctuation" >}</span>
+</code></pre>
+<p>Note: You can use the <a href=""><code>ContextReplacementPlugin</code></a> to modify these values for individual dependencies. This also removes the warning.</p>
+<p>A few usecases:</p>
+<ul>
+<li>Warn for dynamic dependencies: <code>wrappedContextCritical: true</code>.</li>
+<li><code>require(expr)</code> should include the whole directory: <code>exprContextRegExp: /^\.\//</code></li>
+<li><code>require(&quot;./templates/&quot; + expr)</code> should not include subdirectories by default: <code>wrappedContextRecursive: false</code></li>
+</ul>
+</div><hr/><div class="contributors"><p>Contributors to this page: (in alphabetical order)</p><div class="contributors__list"><a class="contributors__person" href="https://github.com/gregvenech"><img src="https://github.com/gregvenech.png?size=80"/><span>gregvenech</span></a><a class="contributors__person" href="https://github.com/sokra"><img src="https://github.com/sokra.png?size=80"/><span>sokra</span></a></div></div></section></div><footer class="footer"><div class="container footer-inner"><section class="footer-inner-left"><a class="footer-inner-link" href="get-started">Get Started</a><a class="footer-inner-link" href="analyze">Analyze</a><a class="footer-inner-link" href="contribute">Contribute</a></section><section class="footer-inner-middle"><a href="/"><span class="webpack-icon -dark" style="width:18px;margin-left:9px;padding-bottom:9px;"><figure class="webpack-icon-cube -outer" style="width:18px;height:18px;transform:translateX(-50%)
+              scale3d(1,1,1)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(9px);"></section></figure><figure class="webpack-icon-cube -inner" style="width:18px;height:18px;transform:translateX(-50%)
+              scale3d(0.5,0.5,0.5)
+              rotateX(0deg)
+              rotateY(0deg)
+              rotateZ(0deg);"><section class="webpack-icon-cube-face" style="transform:rotateX(0deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateX(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(-90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(90deg) translateZ(9px);"></section><section class="webpack-icon-cube-face" style="transform:rotateY(180deg) translateZ(9px);"></section></figure></span></a></section><section class="footer-inner-right"><a class="footer-inner-link" href="//gitter.im/webpack/webpack">Support</a><a class="footer-inner-link" href="changelog">Changelog</a><a class="footer-inner-link" href="license">License</a></section></div></footer><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
+  </body>
+</html>
