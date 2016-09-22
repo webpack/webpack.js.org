@@ -55,7 +55,7 @@ Usage: `entry: {[entryChunkName: string]: string|Array<string>}`
 
 The object syntax is a more verbose, however scalable way of defining entry/entries in your application. 
 
-T> A **"scalable webpack configurations"** are ones that can be reused and combined with other partial configurations. This is a popular technique used to separate concerns by environment, build target, and runtime. They are then merged together using specialized tools like [webpack-merge](https://github.com/survivejs/webpack-merge).
+T> **"scalable webpack configurations"** are ones that can be reused and combined with other partial configurations. This is a popular technique used to separate concerns by environment, build target, and runtime. They are then merged together using specialized tools like [webpack-merge](https://github.com/survivejs/webpack-merge).
 
 ## Scenarios
 
@@ -76,8 +76,34 @@ const config = {
 };
 ```
 
-**What does this do?** At face value this tells webpack to create dependency graphs starting at both `app.js` and `vendors.js`. These graphs are completely separate and independant of eachother. (AKA there will be a webpack bootstrap in each bundle).
+**What does this do?** At face value this tells webpack to create dependency graphs starting at both `app.js` and `vendors.js`. These graphs are completely separate and independant of eachother. (AKA there will be a webpack bootstrap in each bundle). This is commonly seen with single page applications which have only one entry point (excluding vendors).
 
 **Why?** This setup allows you to leverage [`CommonsChunkPlugin`](../api/plugins/commonschunkplugin) and extract any vendor references from your app code into your vendor code. If there is no vendor code in your application bundle, then you can have [long-term vendor-caching.](../hot-to/cache).
+
+#### Multi Page Application
+
+**webpack.config.js**
+
+```javascript
+module.exports = config;
+
+const config = {
+  entry: {
+    pageOne: './src/pageOne/index.js',
+    pageTwo: './src/pageTwo/index.js',
+    pageThree: './src/pageThree/index.js',
+    vendors: './src/vendors.js'
+  }
+};
+```
+
+**What does this do?** We are telling webpack that we would like 4 separate dependency graphs (like the above example). 
+
+**Why?** In a multi-page application, the server is going to fetch a new html document for you, and the page reloads this new document and assets are redownloaded. However this gives us the unique opportunity to do multiple things:
+
+- Use [`CommonsChunkPlugin`](../api/plugins/commonschunkplugin) to create bundles of shared application code.
+
+- Set up [long-term vendor-caching.](../how-to/cache) with the same plugin and techniques seen in the first example. Multi-page applications that reuse a lot of code/modules between entry points can greatly benefit from these techniques, as the amount of entry points increase. 
+
 
 
