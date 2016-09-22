@@ -25,12 +25,15 @@ a {
   text-decoration:none;
   transition:color 250ms;
 
-  &:hover { color:darken(map-get($colors, tussock), 15%); }
-
-  &.header-anchor-select {
-    margin-left:0.5em;
+  &:hover { 
+    color:darken(map-get($colors, tussock), 15%); 
   }
 
+  &.icon-link {
+    font-size:0.7em;
+    vertical-align:super;
+    margin-left:0.25em;
+  }
 }
 
 @import "markdown";
