@@ -60,4 +60,5 @@ webpack/node-loader|node-loader||
 
 webpack/coverjs-loader|coverjs-loader||
 webpack/coffee-redux-loader|coffee-redux-loader||
+thelarkinn/angular2-template-loader|angular2-template-loader|thelarkinn|
 ```
