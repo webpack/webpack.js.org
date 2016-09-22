@@ -2,16 +2,13 @@
 title: Output
 ---
 
-## Overview
-
 Options affecting the output of the compilation. `output` options tell Webpack how to write the compiled files to disk. Note, that while there can be multiple `entry` points, only one `output` configuration is specified.
 
 If you use any hashing (`[hash]` or `[chunkhash]`), make sure to have a consistent ordering of modules. Use the `OccurrenceOrderPlugin` or `recordsPath`.
 
+## Usage
 
-### Usage
-
-To set the `output` property, you simply set the output value in your webpack config: 
+To set the `output` property, you simply set the output value in your webpack config:
 
 **webpack.config.js**
 
@@ -19,14 +16,13 @@ To set the `output` property, you simply set the output value in your webpack co
 module.exports = config;
 
 config = {
-  output: 'blah' 
+  output: 'blah'
 }
 ```
 
-### Options
+## Options
 
-The following is a list of values you can pass to the `output` property. 
-
+The following is a list of values you can pass to the `output` property.
 
 ### `output.filename`
 
