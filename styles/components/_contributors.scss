@@ -1,13 +1,21 @@
-.contributors-list {
-  .contributor {
-    padding:1em;
+.contributors {
+  &__person {
     display: inline-block;
+    margin-right:1em;
+
+    &:last-of-type {
+      margin-right:0;
+    }
+
     img {
       height: 80px;
+      border-radius:3px;
     }
-    .contributor-name {
+
+    span {
       display: block;
       text-align: center;
+      font-size:0.8em;
     }
   }
 }

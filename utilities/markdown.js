@@ -16,16 +16,11 @@ module.exports = function(section) {
   renderer.heading = function(text, level, raw) {
     var id = raw.toLowerCase().replace(/`/g, '').replace(/[^\w]+/g, '-');
 
-    return '<h'
-      + level
-      + ' class="header">'
-      + '<a class="header-anchor" href="#' + id + '" id="' + id + '"></a>'
-      + '<span class="text">'
-      + text
-      + '</span><a class="header-anchor-select" href="#' + id + '">#</a>'
-      + '</h'
-      + level
-      + '>\n';
+    return `<h${level} class="header">` +
+      `<a class="anchor" href="#${id}" id="${id}"></a>` +
+      `<span class="text">${text}</span>` +
+      `<a class="icon-link" href="#${id}"></a>` +
+      `</h${level}>\n`;
   };
 
   var codeTemplate = renderer.code;
@@ -150,21 +145,25 @@ function parseCustomQuote(token, match, className) {
 
     if (text.indexOf(match) === 0) {
       var icon;
+
       switch(className) {
         case 'tip':
-          icon = 'icon-info tip-icon';
+          icon = 'icon-info';
           break;
         case 'warning':
-          icon = 'icon-warning tip-icon';
+          icon = 'icon-warning';
           break;
         default:
-          icon = 'icon-chevron-right tip-icon';
+          icon = 'icon-chevron-right';
           break;
       }
 
       return {
         type: 'html',
-        text: '<blockquote class="' + className + '"><i class="' + icon + '"></i>' + text.slice(2).trim() + '</blockquote>',
+        text: `<blockquote class="${className}">` +
+          `<div class="tip-title"><i class="tip-icon ${icon}"></i>${className}</div>` +
+          text.slice(2).trim() +
+          '</blockquote>'
       };
     }
   }

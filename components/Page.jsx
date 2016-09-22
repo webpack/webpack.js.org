@@ -2,6 +2,7 @@ import React from 'react';
 import Link from './Link';
 import Container from './Container';
 import Sidebar from './Sidebar';
+import Contributors from './Contributors';
 
 export default props => {
   let { section, page } = props,
@@ -19,19 +20,10 @@ export default props => {
         </a>
 
         <div dangerouslySetInnerHTML={{ __html: page.content }} />
+        
+        <hr />
 
-        {page.contributors && <div>
-          <hr />
-          <p>Contributors to this page: (in alphabetical order)</p>
-          <div className="contributors-list">
-            {page.contributors.map(contributor => (
-              <a key={contributor} className="contributor" href={"https://github.com/" + contributor}>
-                <img src={"https://github.com/" + contributor + ".png?size=80"} />
-                <span className="contributor-name">{contributor}</span>
-              </a>
-            ))}
-          </div>
-        </div>}
+        <Contributors contributors={ page.contributors } />
       </section>
     </Container>
   );

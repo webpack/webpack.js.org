@@ -7,7 +7,6 @@ module.exports = function(env) {
   var cwd = process.cwd();
   var stylePaths = [
     path.join(cwd, 'styles', 'reset.css'),
-    path.join(cwd, 'styles', 'prism.css'),
     path.join(cwd, 'styles', 'icons.css'),
     path.join(cwd, 'styles', 'index.scss')
   ];
