@@ -15,9 +15,7 @@ given the needs of a particular project. The approach described below uses Babel
 React, but these tools are not necessary for HMR to work.
 If you'd like to see examples of other approaches,
 please request them or, better yet,
-[open up a PR with an addition](https://github.com/webpack/webpack.js.org)!
-
-## Project Config
+[open up a PR with an addition](https://github.com/webpack/webpack.io)
 
 This guide will be demonstrating the use of HMR with Babel,
 React, and PostCSS (using CSS Modules).
@@ -226,7 +224,7 @@ important element is the `module.hot.accept` call.
 It specific how to handle changes to specific dependencies.
 
 So in this case, `module.hot` will fire the `render` method ONLY
-when `src/components/App.js` changes! Note that would also include when the
+when `src/components/App.js` changes. Note that would also include when the
 dependencies of `App.js` change -
 so the `render` method will file not just for changes made directly to the
 source of `App.js`, but also changes made to `App.css`, since `App.css`
@@ -267,6 +265,4 @@ dev-server.js:27 [HMR] App is up to date.
 ```
 
 Note that HMR specifies the paths of the updated modules.
-That's because we're using the NamedModules plugin!
-
-
+That's because we're using the NamedModules plugin.

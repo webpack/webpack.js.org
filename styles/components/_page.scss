@@ -1,27 +1,28 @@
 .page {
   position:relative;
   display:flex;
+  min-height:calc(100vh - 100px);
 
   .sidebar { 
-    flex:0 0 20%; 
-    max-width:20%;
+    flex:0 0 25%; 
+    max-width:25%;
+  }
+
+  &-content { 
+    flex:0 0 75%; 
+    max-width:75%;
+    padding:1.5em;
+    background:map-get($colors, white);
   }
 
   &-edit {
     position:absolute;
-    top:1em; 
-    right:1em;
+    top:1.5em; 
+    right:1.5em;
     font-size:getFontSize(-1);
     text-transform:uppercase;
     color:map-get($colors, lynch);
 
     &:hover { color:map-get($colors, chatham); }
-  }
-
-  &-content { 
-    flex:0 0 80%; 
-    max-width:80%;
-    padding:1em;
-    background:map-get($colors, white);
   }
 }

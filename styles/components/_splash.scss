@@ -1,5 +1,59 @@
+// NOTE: The styling and positioning here is a bit hacky but only temporary until
+// we get the actual animation going
+
 .splash {
+  &-viz {
+    position:relative;
+    display:flex;
+    height:100vh;
+    min-height:600px;
+    max-height:900px;
+  }
+
+  &-modules,
+  &-output { 
+    flex:0 0 43.25%; 
+  }
+
+  &-icon {
+    display:flex;
+    flex:1 1 auto;
+    align-items:center;
+    justify-content:center;
+    
+    .webpack-icon {
+      margin-right:-1.75em;
+    }
+  }
+
+  &-modules {
+    background-image:url(../images/modules.png);
+    background-repeat:no-repeat;
+    background-position:-20px center;
+    background-size:90% auto;
+  }
+
+  &-output {
+    background-image:url(../images/output.png);
+    background-repeat:no-repeat;
+    background-position:-10px 48%;
+  }
+
+  &-headline {
+    position:absolute;
+    display:block;
+    width:100%;
+    bottom:10%;
+    left:0;
+    text-align:center;
+    font-size:ms(1);
+    font-style:italic;
+    color:map-get($colors, dove-grey);
+  }
+
   &-content {
-    padding:1em;
+    background:map-get($colors, white);
+
+    &-inner { padding:1.5em; }
   }
 }

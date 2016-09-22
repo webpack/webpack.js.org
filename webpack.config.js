@@ -7,7 +7,6 @@ module.exports = function(env) {
   var cwd = process.cwd();
   var stylePaths = [
     path.join(cwd, 'styles', 'reset.css'),
-    path.join(cwd, 'styles', 'prism.css'),
     path.join(cwd, 'styles', 'icons.css'),
     path.join(cwd, 'styles', 'index.scss')
   ];
@@ -100,6 +99,9 @@ function developmentConfig(stylePaths) {
 
 function buildConfig(stylePaths) {
   return {
+    output: {
+      publicPath: '/assets/'
+    },
     plugins: [
       new ExtractTextPlugin('[name].css', {
         allChunks: true
