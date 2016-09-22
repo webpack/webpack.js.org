@@ -78,7 +78,7 @@ const config = {
 
 **What does this do?** At face value this tells webpack to create dependency graphs starting at both `app.js` and `vendors.js`. These graphs are completely separate and independant of eachother. (AKA there will be a webpack bootstrap in each bundle). This is commonly seen with single page applications which have only one entry point (excluding vendors).
 
-**Why?** This setup allows you to leverage [`CommonsChunkPlugin`](../api/plugins/commonschunkplugin) and extract any vendor references from your app code into your vendor code. If there is no vendor code in your application bundle, then you can have [long-term vendor-caching.](../hot-to/cache).
+**Why?** This setup allows you to leverage [`CommonsChunkPlugin`](../api/plugins/commonschunkplugin) and extract any vendor references from your app bundle into your vendor bundle, replacing them with `__webpack_require__()` calls. If there is no vendor code in your application bundle, then you can achieve a common pattern in webpack known as [long-term vendor-caching.](../how-to/cache).
 
 #### Multi Page Application
 
