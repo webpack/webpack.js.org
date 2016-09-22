@@ -4,15 +4,18 @@ var markdown = require('./utilities/markdown');
 var highlight = require('./utilities/highlight');
 
 module.exports = {
-  //assets: [] // custom assets to copy into the build
-  siteBase: '//webpack.js.org/',
-  home: 'index.html', // XXX: drop once there's a root domain
+  template: {
+    title: 'webpack'
+  },
+  assets: [
+    {
+      from: './fonts',
+      to: 'assets'
+    }
+  ],
   output: 'build',
   title: 'webpack',
   keywords: ['webpack', 'javascript', 'web development', 'programming'],
-  deploy: {
-    branch: 'gh-pages'
-  },
   pageTitle: function(config, pageTitle) {
     var siteName = config.name;
 
@@ -26,13 +29,7 @@ module.exports = {
     prevnextPlugin()
   ],
   layout: function() {
-    return require('./components/Body.jsx')
-  },
-  style: function() {
-    require('./styles/reset.css');
-    require('./styles/prism.css');
-    require('./styles/icons.css');
-    require('./styles/index.scss');
+    return require('./components/Site.jsx').default
   },
   paths: {
     '/': root(
@@ -54,6 +51,16 @@ module.exports = {
         );
       }
     ),
+    configuration: section(
+      'Configuration',
+      function() {
+        return require.context(
+          'json!yaml-frontmatter!./content/configuration',
+          false,
+          /^\.\/.*\.md$/
+        );
+      }
+    ),
     'how-to': section(
       'How to',
       function() {
@@ -64,7 +71,7 @@ module.exports = {
         );
       }
     ),
-    'api': section(
+    api: section(
       'API',
       function() {
         return require.context(

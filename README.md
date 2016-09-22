@@ -1,3 +1,5 @@
+[![build status](https://secure.travis-ci.org/webpack/webpack.js.org.svg)](http://travis-ci.org/webpack/webpack.js.org)
+
 # webpack.js.org
 
 Guides, documentation, and all things Webpack.
@@ -36,9 +38,8 @@ Fully completed can be removed from this list. If there's a topic you would like
 
 - Compared to other systems - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#48](https://github.com/webpack/webpack.js.org/issues/48)
 - Entry points - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#8](https://github.com/webpack/webpack.js.org/issues/8)
-- Everything is a module - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#49](https://github.com/webpack/webpack.js.org/issues/49)
+- Modules - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#49](https://github.com/webpack/webpack.js.org/issues/49)
 - Loaders - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#50](https://github.com/webpack/webpack.js.org/issues/50)
-- Output - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#10](https://github.com/webpack/webpack.js.org/issues/10)
 - Plugins - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#51](https://github.com/webpack/webpack.js.org/issues/51)
 
 ### `/how-to`
@@ -52,13 +53,3 @@ Fully completed can be removed from this list. If there's a topic you would like
 - Split code - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#3](https://github.com/webpack/webpack.js.org/issues/3)
 - Use with Docker - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#44](https://github.com/webpack/webpack.js.org/issues/44)
 - Use with third party tools - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#53](https://github.com/webpack/webpack.js.org/issues/53)
-
-## Git Flow
-
-We are using the [git flow](http://nvie.com/posts/a-successful-git-branching-model/) branching model.
-
-Please direct all pull requests for code changes to the [develop](https://github.com/webpack/webpack.js.org/tree/develop) branch. [Content](https://github.com/webpack/webpack.js.org/tree/master/src/content) changes are fine on to make on master.
-
-## Editor Config
-
-The [.editorconfig](https://github.com/webpack/webpack.js.org/blob/develop/.editorconfig) in the root should ensure consistent formatting. Please make sure you've [installed the plugin](http://editorconfig.org/#download) if your text editor needs one.

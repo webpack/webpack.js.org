@@ -4,17 +4,19 @@
   transition:background 250ms;
 
   &-inner {
-    padding:0.5em 1em;
+    display:flex;
+    padding:0.5em 1.5em;
     box-sizing:border-box;
   }
 
   &-logo {
-    text-decoration:none;
+    flex:0 0 auto;
   }
 
   &-nav {
-    float:right;
-    padding:0.5em 0;
+    flex:1 1 auto;
+    padding:0.2em 0 0.3em;
+    text-align:right;
 
     &-link {
       font-size:getFontSize(-2);
@@ -23,13 +25,23 @@
       color:map-get($colors, alto);
 
       &:hover,
-      &.-active { color:map-get($colors, white); }
+      &.-active { 
+        color:map-get($colors, white); 
+      }
     }
   }
 
-  &.-light {
+  &.-splash { 
+    position:absolute; 
+    width:100%;
+    top:0;
+    z-index:5;
     background: transparent;
 
-    .navigation-nav-link:hover { color:map-get($colors, mine-shaft); }
+    .navigation-nav-link {
+      color:map-get($colors, dusty-grey);
+
+      &:hover { color:map-get($colors, mine-shaft); }
+    }
   }
 }

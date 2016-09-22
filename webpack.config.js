@@ -3,27 +3,33 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var Autoprefixer = require('autoprefixer');
 var merge = require('webpack-merge');
 
-module.exports = function(env, options) {
+module.exports = function(env) {
+  var cwd = process.cwd();
   var stylePaths = [
-    path.join(process.cwd(), 'styles')
+    path.join(cwd, 'styles', 'reset.css'),
+    path.join(cwd, 'styles', 'icons.css'),
+    path.join(cwd, 'styles', 'index.scss')
   ];
 
   switch(env) {
     case 'start':
       return merge(
-        commonConfig(options.paths),
+        commonConfig(stylePaths),
         developmentConfig(stylePaths)
       );
     case 'build':
       return merge(
-        commonConfig(options.paths),
+        commonConfig(stylePaths),
         buildConfig(stylePaths)
       );
   }
 };
 
-function commonConfig(includes) {
+function commonConfig(stylePaths) {
   return {
+    entry: {
+      style: stylePaths
+    },
     resolve: {
       extensions: ['', '.js', '.jsx', '.scss']
     },
@@ -32,11 +38,9 @@ function commonConfig(includes) {
         {
           test: /\.jsx?$/,
           loader: 'babel!eslint',
-          include: includes.concat([
-            path.dirname(require.resolve('antwar-helpers/components')),
-            path.dirname(require.resolve('antwar-helpers/layouts')),
+          include: [
             path.join(__dirname, 'components')
-          ])
+          ]
         },
         {
           test: /\.woff$/,
@@ -95,6 +99,9 @@ function developmentConfig(stylePaths) {
 
 function buildConfig(stylePaths) {
   return {
+    output: {
+      publicPath: '/assets/'
+    },
     plugins: [
       new ExtractTextPlugin('[name].css', {
         allChunks: true

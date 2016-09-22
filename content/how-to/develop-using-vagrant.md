@@ -62,7 +62,7 @@ The `--public` flag makes sure the script knows where to look for the WebSocket.
 
 `--watch-poll` makes sure that webpack can detect changes in your files. By default webpack listens to events triggered by the filesystem, but VirtualBox has many problems with this.
 
-The server should be accessible on `http://10.10.10.61:8080` now! If you make a change in `app.js`, it should live reload.
+The server should be accessible on `http://10.10.10.61:8080` now. If you make a change in `app.js`, it should live reload.
 
 ## Advanced Usage with nginx
 

@@ -28,7 +28,11 @@ More stuff was changed here. Not listed in detail as not commonly used. See [res
 
 ### `debug`
 
-The `debug` option was replaced by a plugin.
+The `debug` option switched loaders to debug mode in webpack 1. This need to be passed via loader options in long-term. See loader documentation for relevant options.
+
+The debug mode for loaders will be removed in webpack 3 or later.
+
+To keep compatiblity with old loaders, loaders can be switched to debug mode via plugin:
 
 ``` diff
 - debug: true,
@@ -50,6 +54,22 @@ This means if using SourceMaps for the minimized code you need to pass `sourceMa
     new UglifyJsPlugin({
 +     sourceMap: true
     })
+  ]
+```
+
+### `UglifyJsPlugin` minimize loaders
+
+The UglifyJsPlugin does not longer switch loaders into minimize mode. This need to be passed via loader options in long-term. See loader documentation for relevant options.
+
+The minimize mode for loaders will be removed in webpack 3 or later.
+
+To keep compatiblity with old loaders, loaders can be switched to minimize mode via plugin:
+
+``` diff
+  plugins: [
++   new webpack.LoaderOptionsPlugin({
++     minimize: true
++   })
   ]
 ```
 
@@ -100,3 +120,65 @@ See [CLI](../api/cli.md).
 ### `require.ensure` and AMD `require` is async
 
 These functions are now always async instead of calling their callback sync if the chunk is already loaded.
+
+### `module.loaders` is now `module.rules`
+
+The old loader configuration was superseeded by a more powerful rules system, which allows to configure loaders and more. 
+
+For compatiblity reasons the old syntax is still valid and the old names are parsed.
+
+The new naming is easier to understand to there are good reasons to upgrade the configuration.
+
+``` diff
+  module: {
+-   loaders: [
++   rules: [
+      {
+        test: /\.css$/,
+-       loaders: [
++       use: [
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader",
+-           query: {
++           options: {
+              modules: true
+            }
+        ]
+      }
+    ]
+  }
+```
+
+### `module.preLoaders` and `module.postLoaders` was removed
+
+``` diff
+  module: {
+-   preLoaders: [
++   rules: [
+      {
+        test: /\.js$/,
++       enforce: "pre",
+        loader: "eslint-loader"
+      }
+    ]
+  }
+```
+
+### `LoaderOptionPlugin` context
+
+Some loaders need context information and read them from the configuration. This need to be passed via loader options in long-term. See loader documentation for relevant options.
+
+To keep compatiblity with old loaders, this information can be passed via plugin:
+
+``` diff
+  plugins: [
++   new webpack.LoaderOptionsPlugin({
++     options: {
++       context: __dirname
++     }
++   })
+  ]
+```
