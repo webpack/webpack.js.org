@@ -164,6 +164,11 @@
       border: none;
       color:map-get($colors, concrete);
       background: transparent;
+
+      .code-details-summary-span {
+        margin-left: -15px;
+        cursor: pointer;
+      }
     }
 
     code, tt {
