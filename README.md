@@ -38,9 +38,8 @@ Fully completed can be removed from this list. If there's a topic you would like
 
 - Compared to other systems - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#48](https://github.com/webpack/webpack.js.org/issues/48)
 - Entry points - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#8](https://github.com/webpack/webpack.js.org/issues/8)
-- Everything is a module - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#49](https://github.com/webpack/webpack.js.org/issues/49)
+- Modules - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#49](https://github.com/webpack/webpack.js.org/issues/49)
 - Loaders - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#50](https://github.com/webpack/webpack.js.org/issues/50)
-- Output - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#10](https://github.com/webpack/webpack.js.org/issues/10)
 - Plugins - ![](https://img.shields.io/badge/progress-5%25-yellowgreen.svg) - [#51](https://github.com/webpack/webpack.js.org/issues/51)
 
 ### `/how-to`
