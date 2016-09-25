@@ -3,7 +3,7 @@ title: Entry Points
 sort: 0
 ---
 
-Like we mentioned in our [Core Concepts]('./concepts'), there are multiple ways to define the `entry` property in your webpack configuration. We will show you the ways you **can** configure the property, in addition to explaining why it may be useful to you.
+Like we mentioned in the [introduction]('./'), there are multiple ways to define the `entry` property in your webpack configuration. We will show you the ways you **can** configure the property, in addition to explaining why it may be useful to you.
 
 ## Single Entry (Shorthand) Syntax
 
