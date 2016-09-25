@@ -4,55 +4,134 @@ contributors:
   - TheLarkInn
 ---
 
-*webpack* is a _module bundler_ for modern JavaScript applications.
+*webpack* is a _module bundler_ for modern JavaScript applications. It is [incredibly configurable](./api/configuration), however, there are **4 Core Concepts** we feel you should understand before you get started!
 
-## What is a module
+As part of your webpack learning journey, we wrote this document aimed to give you a **high-level** overview of these concepts, while still providing links to concept specific use-cases.
 
-In [modular programming](https://en.wikipedia.org/wiki/Modular_programming), developers break programs up into discrete chunks of functionality called a _module_.
+## Entry
 
-Each module has a smaller surface area than a full program, making verification, debugging, and testing trivial.
-Well-written _modules_ provide solid abstractions and encapsulation boundaries, so that each module has a coherent design and a clear purpose within the overall application.
+In the [previous article](./index), we mentioned that webpack creates a graph of all of your application's dependencies. The starting point of this graph is known as an _entry point_. The _Entry point_ tells webpack _where to start_ and follows the graph of dependendencies to know _what to bundle_. You can think of your applications _entry point_ as the **contextual root** or **the first file to kick off your app**.
 
-Node.js has supported modular programming almost since its inception.
-On the web, however, support for _modules_ has been slow to arrive.
-Multiple tools exist that support modular JavaScript on the web, with a variety of benefits and limitations.
-webpack builds on lessons learned from these systems and applies the concept of _modules_ to any file in your project.
+In webpack we define _entry points_ using the `entry` property in our [webpack configuration object](./configuration).
 
-## What is a webpack module
+The simplest example is seen below:
 
-In contrast to Node.js modules, webpack _modules_ can express their _dependencies_ in a variety of ways. A few examples are:
+**webpack.config.js**
 
-* A JavaScript `require()` statement
-* An ECMAScript2015 `import` statement
-* An AMD `define` and `require` statement
-* An `@import` statement inside of a css/sass/less file.
-* An image url in a stylesheet or html file.
+```javascript
+  module.exports = config;
 
-T> webpack 1 requires a specific loader to convert ECMAScript2015 `import`, however this is possible out of the box via webpack 2
+  const config = {
+    entry: './path/to/my/entry/file.js'
+  };
 
-## webpack, dependency graph, and bundles
+```
 
-Any time one file depends on another, webpack treats this as a _dependency_. This allows webpack to take non-code assets, such as images or web fonts, and also provide them as _dependencies_ for your application.
+There are multiple ways to declare your `entry` property that are specific to your applications needs.
 
-When webpack processes your application, it starts from a list of modules defined on the command line or in its config file.
-Starting from these _entry points_, webpack recursively builds a _dependency graph_ that includes every module your application needs, then packages all of those modules into a small number of _bundles_ - often, just one - to be loaded by the browser.
+[**Learn more!**](./entry-points)
 
-T> Bundling your application is especially powerful for *HTTP/1.1* clients, as it minimizes the number of times your app has to wait while the browser starts a new request. For *HTTP/2*, you can also use Code Splitting and bundling through webpack for the [best optimization](https://medium.com/webpack/webpack-http-2-7083ec3f3ce6#.7y5d3hz59).
+## Output
 
-webpack supports modules written in a variety of languages and preprocessors, via _loaders_. _Loaders_ describe to webpack **how** to process non-JavaScript _modules_ and include these _dependencies_ into your _bundles_.
-The webpack community has built _loaders_ for a wide variety of popular languages and language processors, including:
+Once you've bundled all of your assets together, we still need to tell webpack **where** to bundle our application. The webpack `output` property describes to webpack **how to treat bundled code**.
 
-* [CoffeeScript](http://coffeescript.org)
-* [TypeScript](https://www.typescriptlang.org)
-* [ESNext (Babel)](https://babeljs.io)
-* [Sass](http://sass-lang.com)
-* [Less](http://lesscss.org)
-* [Stylus](http://stylus-lang.com)
+**webpack.config.js**
 
-And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for **any stack**, while staying **unopinionated** about your development, testing, and production workflows.
+```javascript
+  module.exports = config;
 
-For a full list, see [**the list of loaders**](https://webpack.github.io/docs/list-of-loaders.html) or [**write your own**](./api/loaders).
+  const config = {
+    entry: './path/to/my/entry/file.js',
+    output: {
+      filename: 'my-first-webpack.bundle.js',
+      path: './dist'
+    }
+  };
+```
 
-## Conclusion
+In the example above, through the `output.filename` and `output.path` properties we are describing to webpack the name of our bundle, and where we want it to be emitted to.
 
-We are just starting to scratch the surface of webpack and its features, but we are equipped with a great grasp on terminology you will frequent throughout this guide. It's time to now dive into the [Core Concepts (Entry, Output, Loaders, Plugins)](./concepts/concepts)!
+T> You may see the term **emitted** or **emit** used throughout our documentation and [plugin API](../api/plugins). This is a fancy term for "produced or discharged".
+
+The `output` property has [many more configurable features](../api/configuration), but lets spend some time understanding some of the most common use cases for the `output` property.
+
+[**Learn more!**](./output)
+
+
+## Loaders
+
+The goal is to have all of your assets in your project to be **webpack's** concern and not the browser. (This doesn't mean that they all have to be bundled together). webpack treats [every file (.css, .html, .scss, .jpg, etc.) as a module](./modules). However, webpack **only understands JavaScript**.
+
+**Loaders tell webpack _how to treat these files as modules_ as they are added to your dependency graph.**
+
+At a high level, they have two purposes in your webpack config.
+
+1. Identify what files should be transformed by a certain loader. (`test` property)
+2. Transform that file so that it can be added to your dependency graph (and eventually your bundle). (`loader` property)
+
+**webpack.config.js**
+
+```javascript
+  module.exports = config;
+
+  const config = {
+    entry: './path/to/my/entry/file.js',
+    output: {
+      filename: 'my-first-webpack.bundle.js',
+      path: './dist'
+    },
+    module: {
+      loaders: [
+        {test: /\.(js|jsx)$/, loader: 'babel-loader'}
+      ]
+    }
+  };
+```
+
+In the configuration above we have defined our loader with its two required properties: `test`, and `loader`. It tells webpack's compiler the following:
+
+> "Hey webpack compiler, when you come across a path that resolves to a '.js' or '.jsx' file inside of a require() statement, use the babel-loader to transform it before you bundle it together".
+
+W> It is important to remember when defining loaders in your webpack config, you are defining them under `module.loaders`, and not `loaders`.
+
+There are more specific properties to define on loaders that we haven't yet covered.
+
+[**Learn more!**]('./loaders')
+
+## Plugins
+
+Since Loaders only execute transforms on a per-file basis, Plugins are most commonly used (but not limited to) performing actions and custom functionality on "compilations" or "chunks" of your bundled modules [(and so much more)](./plugins). The webpack Plugin system is [extremely and powerful and customizable](../api/plugins).
+
+In order to use a plugin, you just need to `require()` it and add it to the `plugins` array. Since most plugins are customizable via options, you need to create an instance of it by calling it with `new`.
+
+**webpack.config.js**
+
+```javascript
+  const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
+  const webpack = require('webpack'); //to access built-in plugins
+
+  module.exports = config;
+
+  const config = {
+    entry: './path/to/my/entry/file.js',
+    output: {
+      filename: 'my-first-webpack.bundle.js',
+      path: './dist'
+    },
+    module: {
+      loaders: [
+        {test: /\.(js|jsx)$/, loader: 'babel-loader'}
+      ]
+    },
+    plugins: [
+      new webpack.optimize.UglifyJsPlugin(),
+      new HtmlWebpackPlugin({template: './src/index.html'})
+    ]
+  };
+```
+
+There are many plugins that webpack provides out of the box! Check out our [list of plugins](https://webpack.github.io/docs/list-of-plugins.html) for more information.
+
+Using plugins in your webpack config is straight-forward, however there are many use-cases that are worth discussing further.
+
+[**Learn more!**](./plugins)
