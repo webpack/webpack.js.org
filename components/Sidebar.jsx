@@ -14,7 +14,6 @@ export default props => {
     <nav className="sidebar">
       {
         props.pages
-          .filter(page => !/\/index$/.test(page.url)) // XXX: Remove once antwar is updated
           .map((page, i) => (
             <div className="sidebar-page" key={ `sidebar-page-${i}` }>
               <span className="sidebar-page-title">
