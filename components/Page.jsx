@@ -10,7 +10,7 @@ export default props => {
 
   return (
     <Container className="page">
-      <Sidebar pages={ section.pages() } />
+      <Sidebar sectionName={section.name} pages={ section.pages() } />
       <section className="page-content">
         <h1>{ page.title }</h1>
 

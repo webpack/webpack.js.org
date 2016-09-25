@@ -9,22 +9,21 @@ let sections = [
   { title: 'Multiple Targets', id: 'multiple-targets' }
 ];
 
-const Sidebar = props => {
-  return (
-    <nav className="sidebar">
-      {
-        props.pages.map((page, i) =>
-          <SidebarPage key={ `sidebar-page-${i}` } page={page} />
-        )
-      }
-    </nav>
-  );
-};
+const Sidebar = ({ sectionName, pages }) => (
+  <nav className="sidebar">
+    <SidebarPage url={`/${sectionName}`} title="Introduction" />
+    {
+      pages.map(({ url, title }, i) =>
+        <SidebarPage key={`sidebar-page-${i}`} url={`/${url}`} title={title} />
+      )
+    }
+  </nav>
+);
 
-const SidebarPage = ({ page }) => (
+const SidebarPage = ({ url, title }) => (
   <div className="sidebar-page">
     <span className="sidebar-page-title">
-      <Link to={ `/${page.url}` }>{ page.title }</Link>
+      <Link to={url}>{title}</Link>
       <i className="sidebar-page-toggle icon-chevron-down" />
     </span>
 
