@@ -13,25 +13,27 @@ export default props => {
   return (
     <nav className="sidebar">
       {
-        props.pages.map((page, i) => (
-          <div className="sidebar-page" key={ `sidebar-page-${i}` }>
-            <span className="sidebar-page-title">
-              <Link to={ `/${page.url}` }>{ page.title }</Link>
-              <i className="sidebar-page-toggle icon-chevron-down" />
-            </span>
+        props.pages
+          .filter(page => !/\/index$/.test(page.url)) // XXX: Remove once antwar is updated
+          .map((page, i) => (
+            <div className="sidebar-page" key={ `sidebar-page-${i}` }>
+              <span className="sidebar-page-title">
+                <Link to={ `/${page.url}` }>{ page.title }</Link>
+                <i className="sidebar-page-toggle icon-chevron-down" />
+              </span>
 
-            <ul className="sidebar-page-sections">
-              {/*
-                page.title === 'Targets' ? sections.map((section, j) => (
-                  <li className="sidebar-page-section" 
-                      key={ `sidebar-page-${i}-section-${j}` }>
-                    <Link to={ `/${page.url}#${section.id}` }>{ section.title }</Link>
-                  </li>
-                )) : ''
-              */}
-            </ul>
-          </div>
-        ))
+              <ul className="sidebar-page-sections">
+                {/*
+                  page.title === 'Targets' ? sections.map((section, j) => (
+                    <li className="sidebar-page-section" 
+                        key={ `sidebar-page-${i}-section-${j}` }>
+                      <Link to={ `/${page.url}#${section.id}` }>{ section.title }</Link>
+                    </li>
+                  )) : ''
+                */}
+              </ul>
+            </div>
+          ))
       }
     </nav>
   );
