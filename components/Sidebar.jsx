@@ -9,31 +9,36 @@ let sections = [
   { title: 'Multiple Targets', id: 'multiple-targets' }
 ];
 
-export default props => {
+const Sidebar = props => {
   return (
     <nav className="sidebar">
       {
-        props.pages
-          .map((page, i) => (
-            <div className="sidebar-page" key={ `sidebar-page-${i}` }>
-              <span className="sidebar-page-title">
-                <Link to={ `/${page.url}` }>{ page.title }</Link>
-                <i className="sidebar-page-toggle icon-chevron-down" />
-              </span>
-
-              <ul className="sidebar-page-sections">
-                {/*
-                  page.title === 'Targets' ? sections.map((section, j) => (
-                    <li className="sidebar-page-section" 
-                        key={ `sidebar-page-${i}-section-${j}` }>
-                      <Link to={ `/${page.url}#${section.id}` }>{ section.title }</Link>
-                    </li>
-                  )) : ''
-                */}
-              </ul>
-            </div>
-          ))
+        props.pages.map((page, i) =>
+          <SidebarPage key={ `sidebar-page-${i}` } page={page} />
+        )
       }
     </nav>
   );
 };
+
+const SidebarPage = ({ page }) => (
+  <div className="sidebar-page">
+    <span className="sidebar-page-title">
+      <Link to={ `/${page.url}` }>{ page.title }</Link>
+      <i className="sidebar-page-toggle icon-chevron-down" />
+    </span>
+
+    <ul className="sidebar-page-sections">
+      {/*
+        page.title === 'Targets' ? sections.map((section, j) => (
+          <li className="sidebar-page-section"
+              key={ `sidebar-page-${i}-section-${j}` }>
+            <Link to={ `/${page.url}#${section.id}` }>{ section.title }</Link>
+          </li>
+        )) : ''
+      */}
+    </ul>
+  </div>
+);
+
+export default Sidebar;
