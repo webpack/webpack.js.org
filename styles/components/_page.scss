@@ -8,14 +8,14 @@
     max-width:25%;
   }
 
-  &-content { 
+  &__content { 
     flex:0 0 75%; 
     max-width:75%;
     padding:1.5em;
     background:map-get($colors, white);
   }
 
-  &-edit {
+  &__edit {
     position:absolute;
     top:1.5em; 
     right:1.5em;
