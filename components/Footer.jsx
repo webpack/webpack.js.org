@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from './Link';
-import Icon from './Icon';
+import Cube from './Cube';
 import Container from './Container';
 
 export default props => {
@@ -15,7 +15,7 @@ export default props => {
 
         <section className="footer__middle">
           <Link to={{ pathname: '/' }}>
-            <Icon depth={ 18 } hover />
+            <Cube depth={ 18 } hover />
           </Link>
         </section>
 

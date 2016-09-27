@@ -1,6 +1,6 @@
 import React from 'react';
 import Container from './Container';
-import Icon from './Icon';
+import Cube from './Cube';
 import Link from './Link';
 
 export default props => {
@@ -14,7 +14,7 @@ export default props => {
         </div>
 
         <div className="splash-icon">
-          <Icon depth={ 150 } />
+          <Cube depth={ 150 } />
         </div>
 
         <div className="splash-output">
