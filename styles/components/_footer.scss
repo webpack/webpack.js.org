@@ -1,5 +1,5 @@
 .footer {
-  min-width:map-get($screens, desktop);
+  min-width:map-get($screens, large);
   background: map-get($colors, alto);
 
   &__inner {
