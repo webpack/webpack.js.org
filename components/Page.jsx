@@ -10,11 +10,11 @@ export default props => {
 
   return (
     <Container className="page">
-      <Sidebar pages={ section.pages() } />
-      <section className="page-content">
+      <Sidebar sectionName={section.name} pages={ section.pages() } />
+      <section className="page__content">
         <h1>{ page.title }</h1>
 
-        <a className="page-edit" href={ edit }>
+        <a className="page__edit" href={ edit }>
           Edit this Page&nbsp;&nbsp;
           <i className="icon-edit" />
         </a>

@@ -1,8 +1,7 @@
-// NOTE: The styling and positioning here is a bit hacky but only temporary until
-// we get the actual animation going
+// NOTE: This styling is somewhat temporary
 
 .splash {
-  &-viz {
+  &__viz {
     position:relative;
     display:flex;
     height:100vh;
@@ -10,36 +9,36 @@
     max-height:900px;
   }
 
-  &-modules,
-  &-output { 
+  &__modules,
+  &__output { 
     flex:0 0 43.25%; 
   }
 
-  &-icon {
+  &__icon {
     display:flex;
     flex:1 1 auto;
     align-items:center;
     justify-content:center;
+  }
     
-    .webpack-icon {
-      margin-right:-1.75em;
-    }
+  &__cube {
+    margin-right:-1.75em;
   }
 
-  &-modules {
+  &__modules {
     background-image:url(../images/modules.png);
     background-repeat:no-repeat;
     background-position:-20px center;
     background-size:90% auto;
   }
 
-  &-output {
+  &__output {
     background-image:url(../images/output.png);
     background-repeat:no-repeat;
     background-position:-10px 48%;
   }
 
-  &-headline {
+  &__headline {
     position:absolute;
     display:block;
     width:100%;
@@ -51,9 +50,11 @@
     color:map-get($colors, dove-grey);
   }
 
-  &-content {
+  &__section {
     background:map-get($colors, white);
+  }
 
-    &-inner { padding:1.5em; }
+  &__content { 
+    padding:1.5em; 
   }
 }
