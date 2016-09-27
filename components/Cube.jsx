@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-// TODO: Consider breaking 'icon-cube' into its own component
-export default class Icon extends Component {
+export default class Cube extends Component {
   constructor(props) {
     super(props);
 
@@ -19,17 +18,17 @@ export default class Icon extends Component {
 
   render() {
     let { x, y, z } = this.state,
-        { theme, depth } = this.props;
+        { theme, depth, className = '' } = this.props;
 
     return (
       <span ref={ ref => this.container = ref }
-          className={ `webpack-icon -${theme}` }
+          className={ `cube cube--${theme} ${className}` }
           style={{
             width: `${depth}px`,
             marginLeft: `${depth * 0.5}px`,
             paddingBottom: `${depth * 0.5}px`
           }}>
-        <figure className="webpack-icon-cube -outer"
+        <figure className="cube__outer"
             style={{
               width: `${depth}px`,
               height: `${depth}px`,
@@ -41,7 +40,7 @@ export default class Icon extends Component {
             }}>
             { this._getFaces() }
         </figure>
-        <figure className="webpack-icon-cube -inner"
+        <figure className="cube__inner"
             style={{
               width: `${depth}px`,
               height: `${depth}px`,
@@ -86,8 +85,12 @@ export default class Icon extends Component {
       'rotateY(180deg)'
     ].map((rotation, i) => {
       return (
-        <section key={ i } className="webpack-icon-cube-face"
-            style={{ transform: `${rotation} translateZ(${ this.props.depth / 2 }px)` }} />
+        <section 
+          key={ i } 
+          className="cube__face"
+          style={{ 
+            transform: `${rotation} translateZ(${ this.props.depth / 2 }px)` 
+          }} />
       );
     });
   }
@@ -132,19 +135,14 @@ export default class Icon extends Component {
   }
 }
 
-// Check incoming props for issues
-Icon.propTypes = {
+Cube.propTypes = {
   hover: PropTypes.bool,
   theme: PropTypes.string,
   depth: PropTypes.number
 };
 
-// Set up defaults
-Icon.defaultProps = {
+Cube.defaultProps = {
   hover: false,
   theme: 'dark',
   depth: 30
 };
-
-
-

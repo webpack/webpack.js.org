@@ -2,23 +2,35 @@
   position:relative;
   display:inline-block;
 
-  &-text {
+  &__text {
     font-size:1.3em;
     font-family:'Averia Sans Libre';
     margin-left:1.75em;
     line-height:1.4;
     transition:color 250ms;
-
-    &.-dark { color:map-get($colors, dove-grey); }
-    &.-light { color:map-get($colors, concrete); }
   }
 
-  .webpack-icon {
+  &__cube {
     position:absolute;
   }
 
-  &:hover .logo-text {
-    &.-dark { color:map-get($colors, mine-shaft); }
-    &.-light { color:map-get($colors, parchment); }
+  &--dark {
+    .logo__text { 
+      color:map-get($colors, dove-grey); 
+    }
+
+    &:hover .logo__text {
+      color:map-get($colors, mine-shaft);
+    }
+  }
+
+  &--light {
+    .logo__text { 
+      color:map-get($colors, concrete); 
+    }
+
+    &:hover .logo__text {
+      color:map-get($colors, parchment);
+    }
   }
 }

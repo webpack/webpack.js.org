@@ -2,37 +2,37 @@
   min-width:map-get($screens, desktop);
   background: map-get($colors, alto);
 
-  &-inner {
+  &__inner {
     display:flex;
     padding:0.3em 1.5em;
     box-sizing:border-box;
+  }
 
-    &-left,
-    &-right { 
-      flex:1 1 auto; 
-      padding:0.4em 0 0.5em;
-    }
+  &__left,
+  &__right { 
+    flex:1 1 auto; 
+    padding:0.4em 0 0.5em;
+  }
 
-    &-middle { 
-      flex:0 0 auto;
+  &__middle { 
+    flex:0 0 auto;
 
-      .webpack-icon { margin-top:5px; }
-    }
+    .cube { margin-top:5px; }
+  }
 
-    &-right { 
-      text-align:right; 
-    }
+  &__right { 
+    text-align:right; 
+  }
 
-    &-link {
-      font-size:getFontSize(-2);
-      margin-right:2em;
-      text-decoration:none;
-      text-transform:uppercase;
-      color:map-get($colors, dusty-grey);
-      transition:color 250ms;
+  &__link {
+    font-size:getFontSize(-2);
+    margin-right:2em;
+    text-decoration:none;
+    text-transform:uppercase;
+    color:map-get($colors, dusty-grey);
+    transition:color 250ms;
 
-      &:last-child { margin-right:0; }
-      &:hover { color:map-get($colors, mine-shaft); }
-    }
+    &:last-child { margin-right:0; }
+    &:hover { color:map-get($colors, mine-shaft); }
   }
 }

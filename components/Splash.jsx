@@ -1,6 +1,6 @@
 import React from 'react';
 import Container from './Container';
-import Icon from './Icon';
+import Cube from './Cube';
 import Link from './Link';
 
 export default props => {
@@ -8,20 +8,20 @@ export default props => {
 
   return (
     <div className="splash">
-      <section className="splash-viz">
-        <div className="splash-modules">
+      <section className="splash__viz">
+        <div className="splash__modules">
 
         </div>
 
-        <div className="splash-icon">
-          <Icon depth={ 150 } />
+        <div className="splash__icon">
+          <Cube className="splash__cube" depth={ 150 } />
         </div>
 
-        <div className="splash-output">
+        <div className="splash__output">
 
         </div>
 
-        <span className="splash-headline">
+        <span className="splash__headline">
           webpack transforms your&nbsp;
           <Link to="/concepts/modules">modules</Link>
           &nbsp;into production-ready&nbsp;
@@ -30,10 +30,12 @@ export default props => {
         </span>
       </section>
 
-      <section className="splash-content">
-        <Container className="splash-content-inner">
+      <section className="splash__section">
+        <Container className="splash__content">
           <h1>{ page.title }</h1>
-          <div dangerouslySetInnerHTML={{ __html: page.content }} />
+          <div dangerouslySetInnerHTML={{ 
+            __html: page.content 
+          }} />
         </Container>
       </section>
     </div>

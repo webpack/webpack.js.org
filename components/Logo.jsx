@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Icon from './Icon';
+import Cube from './Cube';
 
 export default class Logo extends Component {
   constructor(props) {
@@ -12,12 +12,18 @@ export default class Logo extends Component {
   }
 
   render() {
+    let { theme = 'dark' } = this.props;
+
     return (
-      <span className="logo" ref={ ref => this.container = ref }>
-        <Icon ref={ ref => this.icon = ref } 
-            theme={ this.props.theme || 'dark' } 
-            depth={ 20 } />
-        <span className={ `logo-text -${ this.props.theme || 'dark' }`}>webpack</span>
+      <span 
+        ref={ ref => this.container = ref } 
+        className={ `logo logo--${theme}` }>
+        <Cube 
+          ref={ ref => this.icon = ref }
+          className="logo__cube"
+          theme={ theme } 
+          depth={ 20 } />
+        <span className="logo__text">webpack</span>
       </span>
     );
   }
@@ -33,7 +39,7 @@ export default class Logo extends Component {
   }
 
   /**
-   * Proxy to Icon's spin method
+   * Proxy to Cube's spin method
    *
    * @param {object} e - Native event
    */
@@ -42,7 +48,7 @@ export default class Logo extends Component {
   }
 
   /**
-   * Proxy to Icon's reset method
+   * Proxy to Cube's reset method
    *
    * @param {object} e - Native event
    */
@@ -50,6 +56,3 @@ export default class Logo extends Component {
     this.icon.reset(e);
   }     
 }
-
-
-
