@@ -1,5 +1,6 @@
 ---
 title: Output
+sort: 1
 ---
 
 Options affecting the output of the compilation. `output` options tell Webpack how to write the compiled files to disk. Note, that while there can be multiple `entry` points, only one `output` configuration is specified.

@@ -1,54 +1,51 @@
 .sidebar {
   padding:1.5em;
   background:transparentize(map-get($colors, white), 0.5);
+}
 
-  &-page {
-    font-size:getFontSize(-1);
-    margin-bottom:0.5em;
+.sidebar-item {
+  font-size:getFontSize(-1);
+  margin-bottom:0.5em;
 
-    a, i { transition:color 250ms; }
+  &__title {
+    font-weight:400;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:map-get($colors, emperor);
 
-    &-title {
-      a {
-        font-weight:400;
-        text-transform:uppercase;
-        text-decoration:none;
-        color:map-get($colors, emperor);
+    &:hover { color:map-get($colors, tussock); }
+  }
 
-        &:hover { color:map-get($colors, tussock); }
-      }
+  &__toggle {
+    display:none; // Temporary
+    float:right;
+    line-height:1.5;
+    cursor:pointer;
+    color:map-get($colors, dusty-grey);
+    transition:color 250ms;
 
-      i {
-        display:none; // Temporary
-        float:right;
-        line-height:1.5;
-        cursor:pointer;
-        color:map-get($colors, dusty-grey);
+    &:hover { color:map-get($colors, mine-shaft); }
+  }
 
-        &:hover { color:map-get($colors, mine-shaft); }
-      }
-    }
+  &__sections {
+    display:none; // Temporary
+    list-style:none;
+    padding:0;
+    margin:0.25em 0 1em;
+  }
 
-    &-sections {
-      display:none; // Temporary
-      list-style:none;
-      padding:0;
-      margin:0.25em 0 1em;
-    }
+  &__section { 
+    margin:0;
 
-    &-section { 
-      margin:0;
+    a {
+      display:inline-block;
+      max-width:100%;
+      overflow:hidden;
+      white-space:nowrap;
+      text-overflow:ellipsis;
+      color:map-get($colors, dusty-grey);
 
-      a {
-        display:inline-block;
-        max-width:100%;
-        overflow:hidden;
-        white-space:nowrap;
-        text-overflow:ellipsis;
-        color:map-get($colors, dusty-grey);
-
-        &:hover { color:map-get($colors, mine-shaft); }
-      }
+      &:hover { color:map-get($colors, mine-shaft); }
     }
   }
 }

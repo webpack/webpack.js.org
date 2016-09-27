@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var path = require('path');
 var prevnextPlugin = require('antwar-prevnext-plugin');
 var markdown = require('./utilities/markdown');
@@ -105,6 +106,9 @@ function section(title, contentCb) {
     title: title,
     path: function() {
       return contentCb();
+    },
+    sort(pages) {
+      return _.sortBy(pages, page => page.file.sort);
     },
     processPage: processPage(),
     layouts: {
