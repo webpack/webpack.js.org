@@ -1,33 +1,32 @@
 .navigation {
-  min-width:map-get($screens, large);
-  background:map-get($colors, mine-shaft);
-  transition:background 250ms;
+  //width: map-get($screens, large);
+  background: map-get($colors, mine-shaft);
+  transition: background 250ms;
 
   &__inner {
-    display:flex;
-    padding:0.5em 1.5em;
-    box-sizing:border-box;
+    display: flex;
+    padding: 0.5em 1.5em;
   }
 
   &__logo {
-    flex:0 0 auto;
+    flex: 0 0 auto;
   }
 
   &__links {
-    flex:1 1 auto;
-    padding:0.2em 0 0.3em;
-    text-align:right;
+    flex: 1 1 auto;
+    padding: 0.2em 0 0.3em;
+    text-align: right;
   }
 
   &__link {
-    font-size:getFontSize(-2);
-    margin-left:2.5em;
-    text-transform:uppercase;
-    color:map-get($colors, alto);
+    font-size: getFontSize(-2);
+    margin-left: 2.5em;
+    text-transform: uppercase;
+    color: map-get($colors, alto);
 
     &:hover,
-    &--active { 
-      color:map-get($colors, white); 
+    &--active {
+      color: map-get($colors, white);
     }
   }
 }
