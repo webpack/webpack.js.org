@@ -4,9 +4,17 @@
     </url>    <url>
         <loc>https://webpack.js.org/analyze/index.html</loc>
     </url>    <url>
+        <loc>https://webpack.js.org/api/index.html</loc>
+    </url>    <url>
         <loc>https://webpack.js.org/changelog/index.html</loc>
     </url>    <url>
+        <loc>https://webpack.js.org/concepts/index.html</loc>
+    </url>    <url>
         <loc>https://webpack.js.org/contribute/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/get-started/index.html</loc>
     </url>    <url>
@@ -40,9 +48,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/concepts/output/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/concepts/targets/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/concepts/plugins/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts/targets/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/dev-server/index.html</loc>
     </url>    <url>
