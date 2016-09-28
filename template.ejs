@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title><%= webpackConfig.template.title %></title>
+
+    <% for (var file in webpackConfig.template.cssFiles) { %>
+      <link href="<%= webpackConfig.template.cssFiles[file] %>" rel="stylesheet">
+    <% } %>
+  </head>
+  <body>
+    <%- webpackConfig.html %>
+  </body>
+</html>

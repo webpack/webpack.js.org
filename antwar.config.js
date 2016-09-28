@@ -6,7 +6,8 @@ var highlight = require('./utilities/highlight');
 
 module.exports = {
   template: {
-    title: 'webpack'
+    title: 'webpack',
+    file: path.join(__dirname, 'template.ejs')
   },
   assets: [
     {
