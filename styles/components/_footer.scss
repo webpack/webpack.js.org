@@ -1,38 +1,44 @@
 .footer {
-  min-width:map-get($screens, large);
+  max-width: map-get($screens, large);
   background: map-get($colors, alto);
+}
 
-  &__inner {
-    display:flex;
-    padding:0.3em 1.5em;
-    box-sizing:border-box;
+.footer__inner {
+  display: flex;
+  padding: 0.3em 1.5em;
+}
+
+.footer__left,
+.footer__right {
+  flex: 1 1 auto;
+  padding: 0.4em 0 0.5em;
+}
+
+.footer__middle {
+  flex: 0 0 auto;
+
+  .cube {
+    margin-top: 5px;
   }
+}
 
-  &__left,
-  &__right { 
-    flex:1 1 auto; 
-    padding:0.4em 0 0.5em;
+.footer__right {
+  text-align: right;
+}
+
+.footer__link {
+  transition: color 250ms;
+
+  margin-right: 2em;
+  font-size: getFontSize(-2);
+  text-decoration: none;
+  text-transform: uppercase;
+  color: map-get($colors, dusty-grey);
+
+  &:last-child {
+    margin-right: 0;
   }
-
-  &__middle { 
-    flex:0 0 auto;
-
-    .cube { margin-top:5px; }
-  }
-
-  &__right { 
-    text-align:right; 
-  }
-
-  &__link {
-    font-size:getFontSize(-2);
-    margin-right:2em;
-    text-decoration:none;
-    text-transform:uppercase;
-    color:map-get($colors, dusty-grey);
-    transition:color 250ms;
-
-    &:last-child { margin-right:0; }
-    &:hover { color:map-get($colors, mine-shaft); }
+  &:hover {
+    color: map-get($colors, mine-shaft);
   }
 }
