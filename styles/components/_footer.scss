@@ -1,43 +1,61 @@
 .footer {
-  max-width: map-get($screens, large);
+  max-width:  map-get($screens, large);
+  margin:     auto;
   background: map-get($colors, alto);
 }
 
 .footer__inner {
-  display: flex;
-  padding: 0.3em 1.5em;
+  display:         flex;
+  flex-wrap:       wrap;
+  justify-content: space-between;
+  align-content:   center;
+
+  padding:         0.3em 1.5em;
+
+  @include break {
+    flex-direction: initial;
+  }
 }
 
 .footer__left,
 .footer__right {
-  flex: 1 1 auto;
-  padding: 0.4em 0 0.5em;
-}
+  flex:    0 0 auto;
 
-.footer__middle {
-  flex: 0 0 auto;
+  display: flex;
+  margin:  auto;
 
-  .cube {
-    margin-top: 5px;
+  @include break {
+    margin: 0;
   }
 }
 
-.footer__right {
-  text-align: right;
+.footer__middle {
+  display: none;
+
+  @include break {
+    flex:    0 0 auto;
+
+    display: block;
+
+    .cube {
+      margin-top: 5px;
+    }
+  }
 }
 
 .footer__link {
-  transition: color 250ms;
+  transition:      color 250ms;
 
-  margin-right: 2em;
-  font-size: getFontSize(-2);
+  padding:         1em;
+  font-size:       getFontSize(-2);
   text-decoration: none;
-  text-transform: uppercase;
-  color: map-get($colors, dusty-grey);
+  text-transform:  uppercase;
+  color:           map-get($colors, dusty-grey);
 
   &:last-child {
     margin-right: 0;
   }
+
   &:hover {
     color: map-get($colors, mine-shaft);
   }
