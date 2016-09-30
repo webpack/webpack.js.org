@@ -5,13 +5,13 @@ contributors:
   - TheLarkInn
 ---
 
-**Plugins** are the [backbone]('https://github.com/webpack/tapable') of webpack. webpack itself is built on the **same Plugin system** that you use in your webpack configuration!! 
+**Plugins** are the [backbone]('https://github.com/webpack/tapable') of webpack. webpack itself is built on the **same plugin system** that you use in your webpack configuration!! 
 
 They also serve the purpose of doing **anything else** that a [loader]('./loaders') cannot do.
 
 ## Anatomy
 
-A webpack **Plugin** is a JavaScript object that has an `apply` property. This `apply` property is called by the webpack compiler, giving access to the **entire** compilation lifecycle.
+A webpack **plugin** is a JavaScript object that has an `apply` property. This `apply` property is called by the webpack compiler, giving access to the **entire** compilation lifecycle. 
 
 
 **ConsoleLogOnBuildWebpackPlugin.js**
@@ -32,7 +32,7 @@ ConsoleLogOnBuildWebpackPlugin.prototype.apply = function(compiler) {
 
 ## Usage
 
-Since **Plugins** can take arguments/options, you must pass a `new` instance to the `plugins` property in your webpack configuration.
+Since **plugins** can take arguments/options, you must pass a `new` instance to the `plugins` property in your webpack configuration.
 
 Depending on how you are using webpack, there are multiple ways to use plugins.
 
@@ -54,7 +54,10 @@ Depending on how you are using webpack, there are multiple ways to use plugins.
     },
     module: {
       loaders: [
-        {test: /\.(js|jsx)$/, loader: 'babel-loader'}
+        {
+          test: /\.(js|jsx)$/, 
+          loader: 'babel-loader'
+        }
       ]
     },
     plugins: [
