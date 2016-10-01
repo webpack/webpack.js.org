@@ -3,3 +3,8 @@ npm-debug.log
 build
 .antwar
 
+.intermediate-representation/
+.netlify
+styles/geomanist/geomanist-regular.woff
+styles/geomanist/geomanist-regular.woff2
+public

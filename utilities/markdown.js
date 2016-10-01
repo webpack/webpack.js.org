@@ -114,7 +114,7 @@ module.exports = function(section) {
         renderer: renderer,
         xhtml: false
       };
-      
+
       var tokens = parseQuotes(content);
 
       return marked.parser(tokens, markedDefaults);

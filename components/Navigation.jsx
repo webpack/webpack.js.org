@@ -2,6 +2,7 @@ import React from 'react';
 import Link from './Link';
 import Container from './Container';
 import Logo from './Logo';
+import { rhythm, scale, options } from 'utilities/typography';
 
 export default ({ home = '/', pages }) => (
   <div className="navigation">
@@ -17,7 +18,13 @@ export default ({ home = '/', pages }) => (
               key={ `navigation__link${i}` }
               className="navigation__link"
               activeClassName="navigation__link--active"
-              to={ `/${link.url}` }>
+              to={ `/${link.url}` }
+              style={{
+                ...scale(-1/5),
+                fontFamily: options.headerFontFamily.join(','),
+                marginLeft: rhythm(1),
+              }}
+            >
               { link.title }
             </Link>
           ))

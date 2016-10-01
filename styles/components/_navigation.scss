@@ -5,7 +5,6 @@
 
   &__inner {
     display:flex;
-    padding:0.5em 1.5em;
     box-sizing:border-box;
   }
 
@@ -20,9 +19,8 @@
   }
 
   &__link {
-    font-size:getFontSize(-2);
-    margin-left:2.5em;
     text-transform:uppercase;
+    text-decoration:none;
     color:map-get($colors, alto);
 
     &:hover,

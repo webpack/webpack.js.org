@@ -6,7 +6,7 @@ title: Contribute
 
 ## Documentation
 
-[Writer's guide](writers-guide)
+[Writer's guide](writers-guide/)
 
 ## Technical Contribution
 

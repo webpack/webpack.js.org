@@ -4,24 +4,21 @@
 
   &__inner {
     display:flex;
-    padding:0.3em 1.5em;
     box-sizing:border-box;
   }
 
   &__left,
-  &__right { 
-    flex:1 1 auto; 
-    padding:0.4em 0 0.5em;
+  &__right {
+    flex:1 1 auto;
+    line-height: 30px;
   }
 
-  &__middle { 
+  &__middle {
     flex:0 0 auto;
-
-    .cube { margin-top:5px; }
   }
 
-  &__right { 
-    text-align:right; 
+  &__right {
+    text-align:right;
   }
 
   &__link {

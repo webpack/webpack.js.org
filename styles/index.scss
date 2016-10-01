@@ -10,23 +10,17 @@
 @import "functions";
 @import "vars";
 
-@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono);
-@import url(https://fonts.googleapis.com/css?family=Averia+Sans+Libre:300);
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,600,700,400italic);
-
 body {
-  font:300 getFontSize(0) 'Open Sans', 'Century Gothic', sans-serif;
   color:map-get($colors, emperor);
-  background:map-get($colors, concrete);
+  /*background:map-get($colors, concrete);*/
 }
 
 a {
   color:map-get($colors, tussock);
-  text-decoration:none;
   transition:color 250ms;
 
-  &:hover { 
-    color:darken(map-get($colors, tussock), 15%); 
+  &:hover {
+    color:darken(map-get($colors, tussock), 15%);
   }
 
   &.icon-link {
@@ -38,5 +32,5 @@ a {
 }
 
 @import "markdown";
-@import "~prismjs/themes/prism-funky";
+/*@import "~prismjs/themes/prism-funky";*/
 @import "styles";

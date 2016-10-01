@@ -1,24 +1,59 @@
 import React from 'react';
-import Link from './Link';
+import Link from 'react-router/lib/Link';
+import { rhythm, scale, options } from 'utilities/typography';
 
-const Sidebar = ({ sectionName, pages }) => (
-  <nav className="sidebar">
-    <Item url={ `/${sectionName}` } title="Introduction" />
+const Sidebar = ({ pathname, pages }) => {
+  const splitPathname = pathname.split('/')
+  const base = splitPathname[1]
+  const sectionPages = pages.filter((page) => {
+    return base === page.node.path.split('/')[1] &&
+      // This is the index page, since we always add it as "introduction"
+      // filter it out here.
+      page.node.path !== `/${base}/`
+  })
 
-    {
-      pages.map(({ url, title }, i) =>
-        <Item 
-          key={ `sidebar-item-${i}` } 
-          url={ `/${url}` } 
-          title={ title } />
-      )
-    }
-  </nav>
-);
+  return (
+    <nav
+      className="sidebar"
+      style={{
+        padding: rhythm(1),
+      }}
+    >
+      <Item url={ `/${base}/` } title="Introduction" />
+      {
+        sectionPages.map(({ node }, i) =>
+          <Item
+            key={ `sidebar-item-${i}` }
+            url={ node.path }
+            title={ node.frontmatter.title } />
+        )
+      }
+    </nav>
+  )
+};
 
 const Item = ({ url, title }) => (
-  <div className="sidebar-item">
-    <Link className="sidebar-item__title" to={ url }>{ title }</Link>
+  <div
+    className="sidebar-item"
+    style={{
+      ...scale(-1/5),
+      marginBottom: rhythm(1/4),
+      width: '100%',
+    }}
+  >
+    <Link
+      className="sidebar-item__title"
+      style={{
+        padding: rhythm(1/4),
+      }}
+      activeStyle={{
+        color: 'black',
+        fontWeight: 'bold',
+      }}
+      to={ url }
+    >
+      { title }
+    </Link>
     <i className="sidebar-item__toggle icon-chevron-down" />
     <ul className="sidebar-item__sections">
       {/*

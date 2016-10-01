@@ -29,7 +29,7 @@ The following is a list of values you can pass to the `output` property.
 
 Specifies the name of each output file on disk. You must **not** specify an absolute path here! The `output.path` option determines the location on disk the files are written. `filename` is used solely for naming the individual files.
 
-**single entry**
+#### single entry
 ``` javascript
 {
   entry: './src/app.js',
@@ -42,7 +42,7 @@ Specifies the name of each output file on disk. You must **not** specify an abso
 // writes to disk: ./build/bundle.js
 ```
 
-**multiple entries**
+#### multiple entries
 
 If your configuration creates more than a single "chunk" (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use substitutions to ensure that each file has a unique name.
 

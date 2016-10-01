@@ -19,12 +19,11 @@ The simplest example is seen below:
 **webpack.config.js**
 
 ```javascript
-  module.exports = config;
+module.exports = config;
 
-  const config = {
-    entry: './path/to/my/entry/file.js'
-  };
-
+const config = {
+  entry: './path/to/my/entry/file.js'
+};
 ```
 
 There are multiple ways to declare your `entry` property that are specific to your applications needs.
@@ -38,15 +37,15 @@ Once you've bundled all of your assets together, we still need to tell webpack *
 **webpack.config.js**
 
 ```javascript
-  module.exports = config;
+module.exports = config;
 
-  const config = {
-    entry: './path/to/my/entry/file.js',
-    output: {
-      filename: 'my-first-webpack.bundle.js',
-      path: './dist'
-    }
-  };
+const config = {
+  entry: './path/to/my/entry/file.js',
+  output: {
+    filename: 'my-first-webpack.bundle.js',
+    path: './dist'
+  }
+};
 ```
 
 In the example above, through the `output.filename` and `output.path` properties we are describing to webpack the name of our bundle, and where we want it to be emitted to.
@@ -72,20 +71,20 @@ At a high level, they have two purposes in your webpack config.
 **webpack.config.js**
 
 ```javascript
-  module.exports = config;
+module.exports = config;
 
-  const config = {
-    entry: './path/to/my/entry/file.js',
-    output: {
-      filename: 'my-first-webpack.bundle.js',
-      path: './dist'
-    },
-    module: {
-      loaders: [
-        {test: /\.(js|jsx)$/, loader: 'babel-loader'}
-      ]
-    }
-  };
+const config = {
+  entry: './path/to/my/entry/file.js',
+  output: {
+    filename: 'my-first-webpack.bundle.js',
+    path: './dist'
+  },
+  module: {
+    loaders: [
+      {test: /\.(js|jsx)$/, loader: 'babel-loader'}
+    ]
+  }
+};
 ```
 
 In the configuration above we have defined our loader with its two required properties: `test`, and `loader`. It tells webpack's compiler the following:
@@ -107,27 +106,27 @@ In order to use a plugin, you just need to `require()` it and add it to the `plu
 **webpack.config.js**
 
 ```javascript
-  const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
-  const webpack = require('webpack'); //to access built-in plugins
+const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
+const webpack = require('webpack'); //to access built-in plugins
 
-  module.exports = config;
+module.exports = config;
 
-  const config = {
-    entry: './path/to/my/entry/file.js',
-    output: {
-      filename: 'my-first-webpack.bundle.js',
-      path: './dist'
-    },
-    module: {
-      loaders: [
-        {test: /\.(js|jsx)$/, loader: 'babel-loader'}
-      ]
-    },
-    plugins: [
-      new webpack.optimize.UglifyJsPlugin(),
-      new HtmlWebpackPlugin({template: './src/index.html'})
+const config = {
+  entry: './path/to/my/entry/file.js',
+  output: {
+    filename: 'my-first-webpack.bundle.js',
+    path: './dist'
+  },
+  module: {
+    loaders: [
+      {test: /\.(js|jsx)$/, loader: 'babel-loader'}
     ]
-  };
+  },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin(),
+    new HtmlWebpackPlugin({template: './src/index.html'})
+  ]
+};
 ```
 
 There are many plugins that webpack provides out of the box! Check out our [list of plugins](https://webpack.github.io/docs/list-of-plugins.html) for more information.

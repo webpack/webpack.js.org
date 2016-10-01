@@ -1,15 +1,9 @@
 .sidebar {
-  padding:1.5em;
   background:transparentize(map-get($colors, white), 0.5);
 }
 
 .sidebar-item {
-  font-size:getFontSize(-1);
-  margin-bottom:0.5em;
-
   &__title {
-    font-weight:400;
-    text-transform:uppercase;
     text-decoration:none;
     color:map-get($colors, emperor);
 
@@ -19,7 +13,6 @@
   &__toggle {
     display:none; // Temporary
     float:right;
-    line-height:1.5;
     cursor:pointer;
     color:map-get($colors, dusty-grey);
     transition:color 250ms;
@@ -31,7 +24,6 @@
     display:none; // Temporary
     list-style:none;
     padding:0;
-    margin:0.25em 0 1em;
   }
 
   &__section { 

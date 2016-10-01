@@ -12,25 +12,23 @@ Usage: `entry: string|Array<string>`
 **webpack.config.js**
 
 ```javascript
-  module.exports = config;
+module.exports = config;
 
-  const config = {
-    entry: './path/to/my/entry/file.js'
-  };
-
+const config = {
+  entry: './path/to/my/entry/file.js'
+};
 ```
 
 The single entry syntax for the `entry` property is a short hand for:
 
 ```javascript
-  module.exports = config;
+module.exports = config;
 
-  const config = {
-    entry: {
-      main: './path/to/my/entry/file.js'
-    }
-  };
-
+const config = {
+  entry: {
+    main: './path/to/my/entry/file.js'
+  }
+};
 ```
 
 T> **What happens when you pass an array to `entry`?** Passing an array of file paths to the `entry` property creates what is known as a **"multi-main entry"**. This is useful when you would like to inject multiple dependent files together and graph their dependencies into one "chunk".
@@ -44,14 +42,14 @@ Usage: `entry: {[entryChunkName: string]: string|Array<string>}`
 **webpack.config.js**
 
 ```javascript
-  module.exports = config;
+module.exports = config;
 
-  const config = {
-    entry: {
-      app: './src/app.js',
-      vendors: './src/vendors.js'
-    }
-  };
+const config = {
+  entry: {
+    app: './src/app.js',
+    vendors: './src/vendors.js'
+  }
+};
 ```
 
 The object syntax is a more verbose, however scalable way of defining entry/entries in your application.
@@ -105,6 +103,3 @@ const config = {
 - Use [`CommonsChunkPlugin`](../api/plugins/commonschunkplugin) to create bundles of shared application code between each page. Multi-page applications that reuse a lot of code/modules between entry points can greatly benefit from these techniques, as the amount of entry points increase.
 
 - Set up [long-term vendor-caching.](../how-to/cache) with the same plugin and techniques seen in the first example.
-
-
-
