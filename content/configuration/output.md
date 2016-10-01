@@ -13,7 +13,7 @@ The top-level `output` key contains set of options instructing webpack on how an
 
 The output directory as an **absolute** path.
 
-``` js
+```js
 path: path.resolve(__dirname, 'dist/assets')
 ```
 
@@ -34,14 +34,14 @@ The default value is an empty string `""`.
 
 Simple rule: The URL of your [`output.path`](#output-path) from the view of the HTML page.
 
-``` js
+```js
 path: path.resolve(__dirname, "public/assets"),
 publicPath: "https://cdn.example.com/assets/"
 ```
 
 For this configuration:
 
-``` js
+```js
 publicPath: "/assets/",
 chunkFilename: "[id].chunk.js"
 ```
@@ -50,13 +50,13 @@ A request to a chunk will look like `/assets/4.chunk.js`.
 
 A loader outputting HTML might emit something like this:
 
-``` html
+```html
 <link href="/assets/spinner.gif" />
 ```
 
 or when loading an image in CSS:
 
-``` css
+```css
 background-image: url(/assets/spinner.gif);
 ```
 
