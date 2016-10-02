@@ -16,11 +16,11 @@ T> Options that are compatible with [webpack-dev-middleware]() have 🔑 next to
 
 `object`
 
-This set of options is picked up by [webpack-dev-server]() and can be used to change it's behavior in various ways. Here's a simple example that gzips and serves everything from our `/dist` directory:
+This set of options is picked up by [webpack-dev-server]() and can be used to change it's behavior in various ways. Here's a simple example that gzips and serves everything from our `dist/` directory:
 
 ```js
 devServer: {
-  contentBase: "dist/",
+  contentBase: path.join(__dirname, "dist"),
   compress: true,
   port: 9000
 }
@@ -37,6 +37,35 @@ content is served from dist/
 that will give some background on where the server is located and what it's serving.
 
 If you're using dev-server through the Node.js API, the options in `devServer` will be ignored. Pass the options as a second parameter instead: `new WebpackDevServer(compiler, {...})`.
+
+
+### `devServer.publicPath` 🔑
+
+`string`
+
+The bundled files will be available in the browser under this path.
+
+Imagine that the server is running under `http://localhost:8080` and `output.filename` is set to `bundle.js`. By default the `publicPath` is `"/"`, so your bundle is available as `http://localhost:8080/bundle.js`.
+
+The `publicPath` can be changed so the bundle is put in a directory:
+
+```js
+publicPath: "/assets/"
+```
+
+The bundle will now be available as `http://localhost:8080/assets/bundle.js`.
+
+T> Make sure `publicPath` always starts and ends with a forward slash.
+
+It is also possible to use a full URL. This is necessary for Hot Module Replacement.
+
+```js
+publicPath: "http://localhost:8080/assets/"
+```
+
+The bundle will also be available as `http://localhost:8080/assets/bundle.js`.
+
+T> It is recommended that `devServer.publicPath` is the same as `output.publicPath`.
 
 
 ### `devServer.quiet` 🔑
@@ -109,7 +138,7 @@ watchOptions: {
 }
 ```
 
-webpack uses the file system to get notified of file changes. In some cases this does not work. For example, when using Network File System (NFS). [vagrant](https://www.vagrantup.com/) also has a lot of problems with this. In these cases, use polling:
+webpack uses the file system to get notified of file changes. In some cases this does not work. For example, when using Network File System (NFS). [Vagrant](https://www.vagrantup.com/) also has a lot of problems with this. In these cases, use polling:
 
 ```js
 watchOptions: {
@@ -118,35 +147,6 @@ watchOptions: {
 ```
 
 If this is too heavy on the file system, you can change this to an integer to set the interval in milliseconds.
-
-
-### `devServer.publicPath` 🔑
-
-`string`
-
-The bundled files will be available under this prefix.
-
-Imagine that the server is running under `http://localhost:8080` and `output.filename` is set to `bundle.js`. By default the `publicPath` is `"/"`, so your bundle is available as `http://localhost:8080/bundle.js`.
-
-The `publicPath` can be changed so the bundle is put in a directory:
-
-```js
-publicPath: "/assets/"
-```
-
-The bundle will now be available as `http://localhost:8080/assets/bundle.js`.
-
-T> Make sure `publicPath` always starts and ends with a forward slash.
-
-It is also possible to use a full URL. This is necessary for Hot Module Replacement.
-
-```js
-publicPath: "http://localhost:8080/assets/"
-```
-
-The bundle will also be available as `http://localhost:8080/assets/bundle.js`.
-
-T> It is recommend that `devServer.publicPath` is the same as `output.publicPath`.
 
 
 ### `devServer.headers` 🔑
@@ -248,7 +248,7 @@ hot: true
 
 Toggle between the dev-server's [two different modes](). By default the application will be served with *inline mode* enabled. This means that a script will be inserted in your bundle to take care of live reloading, and build messages will appear in the browser console.
 
-It is also possible to use *iframe mode*, which uses an `<iframe>` under a notification bar with messages about the build. To switch to *iframe mode*:
+It is also possible to use **iframe mode**, which uses an `<iframe>` under a notification bar with messages about the build. To switch to **iframe mode**:
 
 ```js
 inline: false
@@ -267,7 +267,7 @@ When using the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/
 historyApiFallback: true
 ```
 
-By passing an object, this behavior can be controlled further using options like `rewrites`:
+By passing an object this behavior can be controlled further using options like `rewrites`:
 
 ```js
 historyApiFallback: {
@@ -279,7 +279,7 @@ historyApiFallback: {
 }
 ```
 
-When using dots in your path, you may need to use the `disableDotRule`:
+When using dots in your path (common with Angular), you may need to use the `disableDotRule`:
 
 ```js
 historyApiFallback: {
@@ -344,7 +344,7 @@ Proxying some URLs can be useful when you have a separate API backend developmen
 
 The dev-server makes use of the very powerful [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) package. Checkout its [documentation](https://github.com/chimurai/http-proxy-middleware#options) for more advanced usages.
 
-If you have a backend on `localhost:3000`, you can use this to enable proxying:
+With a backend on `localhost:3000`, you can use this to enable proxying:
 
 ```js
 proxy: {
@@ -418,13 +418,13 @@ Note that the console will *always* show bundle errors and warnings. This option
 
 `boolean` `object`
 
-If enabled, serves dev-server over HTTP/2 with HTTPS enabled.
+By default dev-server will be served over HTTP. It can optionally be served over HTTP/2 with HTTPS:
 
 ```js
 https: true
 ```
 
-By default, a self-signed certificate is used, but you can provide your own:
+With the above setting a self-signed certificate is used, but you can provide your own:
 
 ```js
 https: {
