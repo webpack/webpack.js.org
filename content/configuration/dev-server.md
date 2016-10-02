@@ -3,9 +3,12 @@ title: DevServer
 contributors:
   - sokra
   - gregvenech
+  - spacek33z
 ---
 
-?> Description...
+[webpack-dev-server]() can be used to quickly develop an application. See the ["How to Develop?"](../how-to/develop) to get started.
+
+This page describes the options that effect the behavior of webpack-dev-server (short: dev-server).
 
 ### `devServer`
 
@@ -17,7 +20,7 @@ This set of options is picked up by [webpack-dev-server]() and can be used to ch
 devServer: {
   contentBase: "dist/",
   compress: true,
-  port:9000
+  port: 9000
 }
 ```
 
@@ -31,18 +34,40 @@ content is served from dist/
 
 that will give some background on where the server is located and what it's serving.
 
+If you're using dev-server through the Node.js API, the options in `devServer` will be ignored. Pass the options as a second parameter instead: `new WebpackDevServer(compiler, {...})`.
+
 
 ### `devServer.contentBase`
 
 `string` `array`
 
-Tell the server where to serve content from. [`output.publicPath`](#output-publicpath) will also be used to determine where the bundles should be served from.
+Tell the server where to serve content from. This is only necessary if you want to serve static files. [`output.publicPath`](#output-publicpath) will be used to determine where the bundles should be served from, and takes precedence.
+
+By default it will use your current working directory to serve content, but you can modify this to another directory:
 
 ```js
-contentBase: "path/to/dist/"
+contentBase: path.join(__dirname, "public")
 ```
 
-?> Add more details/examples, for example how is an array handled? Absolute or relative paths both allowed? Recommended?
+Note that it is recommended to use an absolute path.
+
+It is also possible to serve from multiple directories:
+
+```js
+contentBase: [path.join(__dirname, "public"), path.join(__dirname, "assets")]
+```
+
+### `devServer.staticOptions`
+
+It is possible to configure advanced options for serving static files from `contentBase`. See the [Express documentation](http://expressjs.com/en/4x/api.html#express.static) for the possible options. An example:
+
+```js
+staticOptions: {
+  redirect: false
+}
+```
+
+T> This only works when using `contentBase` as a `string`.
 
 
 ### `devServer.hot`
@@ -58,17 +83,17 @@ hot: true
 ?> Add various other steps needed for this to work. (From my experience, and the current docs it looks like other steps are needed here - not like in the cmd line where it's just a flag)
 
 
-### `devServer.inline`
+### `devServer.inline` - CLI only
 
 `boolean`
 
-Toggle between the dev-server's [two different modes](). By default the application will be served in an `<iframe>` under a notification bar with messages about the build (this is called *iframe mode*). To switch to *inline mode*:
+Toggle between the dev-server's [two different modes](). By default the application will be served with *inline mode* enabled. This means that a script will be inserted in your bundle to take care of live reloading, and build messages will appear in the browser console.
+
+It is also possible to use *iframe mode*, which uses an `<iframe>` under a notification bar with messages about the build. To switch to *iframe mode*:
 
 ```js
-inline: true
+inline: false
 ```
-
-and see the application rendered normally with build messages in the browser console.
 
 T> Inline mode is recommended when using [Hot Module Replacement]().
 
@@ -95,7 +120,15 @@ historyApiFallback: {
 }
 ```
 
-?> Are other options available besides `rewrites`?
+When using dots in your path, you may need to use the `disableDotRule`:
+
+```js
+historyApiFallback: {
+  disableDotRule: true
+}
+```
+
+For more options and information, see the [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) documentation.
 
 
 ### `devServer.compress`
@@ -109,7 +142,18 @@ compress: true
 ```
 
 
-### `devServer.port`
+### `devServer.host` - CLI only
+
+`string`
+
+Specify a host to use. By default this is `localhost`. If you want your server to be accessible externally, specify it like this:
+
+```js
+host: "0.0.0.0"
+```
+
+
+### `devServer.port` - CLI only
 
 `number`
 
@@ -118,3 +162,117 @@ Specify a port number to listen for requests on:
 ```js
 port: 8080
 ```
+
+
+### `devServer.public` - CLI only
+
+`string`
+
+When using *inline mode* and you're proxying dev-server, the inline client script does not always know where to connect to. It will try to guess the URL of the server based on `window.location`, but if that fails you'll need to use this.
+
+For example, the dev-server is proxied by nginx, and available on `myapp.test`:
+
+```js
+public: "myapp.test:80"
+```
+
+
+### `devServer.proxy`
+
+`object`
+
+Proxying some URLs can be useful when you have a separate API backend development server and you want to send API requests on the same domain.
+
+The dev-server makes use of the very powerful [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) package. Checkout its [documentation](https://github.com/chimurai/http-proxy-middleware#options) for more advanced usages.
+
+If you have a backend on `localhost:3000`, you can use this to enable proxying:
+
+```js
+proxy: {
+  "/api": "http://localhost:3000"
+}
+```
+
+A request to `/api/users` will now proxy the request to `http://localhost:3000/api/users`.
+
+If you don't want `/api` to be passed along, we need to rewrite the path:
+
+```js
+proxy: {
+  "/api": {
+    target: "http://localhost:3000",
+    pathRewrite: {"^/api" : ""}
+  }
+}
+```
+
+A backend server running on HTTPS with an invalid certificate will not be accepted by default. If you want to, modify your config like this:
+
+```js
+proxy: {
+  "/api": {
+    target: "https://other-server.example.com",
+    secure: false
+  }
+}
+```
+
+Sometimes you don't want to proxy everything. It is possible to bypass the proxy based on the return value of a function.
+
+In the function you get access to the request, response and proxy options. It must return either `false` or a path that will be served instead of continuing to proxy the request.
+
+E.g. for a browser request, you want to serve a HTML page, but for an API request you want to proxy it. You could do something like this:
+
+```js
+proxy: {
+  "/api": {
+    target: "http://localhost:3000",
+    bypass: function(req, res, proxyOptions) {
+      if (req.headers.accept.indexOf("html") !== -1) {
+        console.log("Skipping proxy for browser request.");
+        return "/index.html";
+      }
+    }
+  }
+}
+```
+
+
+### `devServer.clientLogLevel`
+
+`string`
+
+When using *inline mode*, the console in your DevTools will show you messages e.g. before reloading, before an error or when Hot Module Replacement is enabled. This may be too verbose.
+
+You can prevent all these messages from showing, by using this option:
+
+```js
+clientLogLevel: "none"
+```
+
+Possible values are `none`, `error`, `warning` or `info` (default).
+
+Note that the console will *always* show bundle errors and warnings. This option only effects the message before it.
+
+
+### `devServer.https`
+
+`boolean` `object`
+
+If enabled, serves dev-server over HTTP/2 with HTTPS enabled.
+
+```js
+https: true
+```
+
+By default, a self-signed certificate is used, but you can provide your own:
+
+```js
+https: {
+  key: fs.readFileSync("/path/to/server.key"),
+  cert: fs.readFileSync("/path/to/server.crt"),
+  ca: fs.readFileSync("/path/to/ca.pem"),
+}
+```
+
+This object is passed straight to Node.js HTTPS module, so see the [HTTPS documentation](https://nodejs.org/api/https.html) for more information.
