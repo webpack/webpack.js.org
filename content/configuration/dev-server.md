@@ -10,7 +10,9 @@ contributors:
 
 This page describes the options that effect the behavior of webpack-dev-server (short: dev-server).
 
-### `devServer`
+T> Options that are compatible with [webpack-dev-middleware]() have 🔑 next to them.
+
+### `devServer` 
 
 `object`
 
@@ -35,6 +37,163 @@ content is served from dist/
 that will give some background on where the server is located and what it's serving.
 
 If you're using dev-server through the Node.js API, the options in `devServer` will be ignored. Pass the options as a second parameter instead: `new WebpackDevServer(compiler, {...})`.
+
+
+### `devServer.quiet` 🔑
+
+`boolean`
+
+With `quiet` enabled, nothing except the initial startup information will be written to the console. This also means that errors or warnings from webpack are not visible.
+
+```js
+quiet: true
+```
+
+
+### `devServer.noInfo` 🔑
+
+`boolean`
+
+With `noInfo` enabled, messages like the webpack bundle information that is shown when starting up and after each save, will be hidden. Errors and warnings will still be shown.
+
+```js
+noInfo: true
+```
+
+
+### `devServer.stats` 🔑
+
+`string` `object`
+
+This option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you want some bundle information, but not all of it.
+
+There are some presets: `none`, `errors-only`, `minimal` and `verbose`. Use them like this:
+
+```js
+stats: "errors-only"
+```
+
+You can control this even more granularly:
+
+```js
+stats: {
+  chunks: false,
+  hash: false
+}
+```
+
+The available options are: `hash`, `version`, `timings`, `assets`, `chunks`, `modules`, `reasons`, `children`, `source`, `errors`, `errorDetails`, `warnings`and `publicPath`.
+
+T> This option has no effect when used with `quiet` or `noInfo`.
+
+
+### `devServer.watchOptions` 🔑
+
+`object`
+
+Control options related to watching the files.
+
+You can control how many milliseconds webpack will wait before re-compiling if no additional change was detected. If you want to wait one second, set it like this:
+
+```js
+watchOptions: {
+  aggregateTimeout: 1000
+}
+```
+
+For some systems, watching many file systems can result in a lot of CPU or memory usage. If this is the case, it is possible to exclude a huge folder like `node_modules`:
+
+```js
+watchOptions: {
+  ignored: /node_modules/
+}
+```
+
+webpack uses the file system to get notified of file changes. In some cases this does not work. For example, when using Network File System (NFS). [vagrant](https://www.vagrantup.com/) also has a lot of problems with this. In these cases, use polling:
+
+```js
+watchOptions: {
+  poll: true
+}
+```
+
+If this is too heavy on the file system, you can change this to an integer to set the interval in milliseconds.
+
+
+### `devServer.publicPath` 🔑
+
+`string`
+
+The bundled files will be available under this prefix.
+
+Imagine that the server is running under `http://localhost:8080` and `output.filename` is set to `bundle.js`. By default the `publicPath` is `"/"`, so your bundle is available as `http://localhost:8080/bundle.js`.
+
+The `publicPath` can be changed so the bundle is put in a directory:
+
+```js
+publicPath: "/assets/"
+```
+
+The bundle will now be available as `http://localhost:8080/assets/bundle.js`.
+
+T> Make sure `publicPath` always starts and ends with a forward slash.
+
+It is also possible to use a full URL. This is necessary for Hot Module Replacement.
+
+```js
+publicPath: "http://localhost:8080/assets/"
+```
+
+The bundle will also be available as `http://localhost:8080/assets/bundle.js`.
+
+T> It is recommend that `devServer.publicPath` is the same as `output.publicPath`.
+
+
+### `devServer.headers` 🔑
+
+`object`
+
+Adds headers to all requests:
+
+```js
+headers: {
+  "X-Custom-Foo": "bar"
+}
+```
+
+
+### `devServer.lazy` 🔑
+
+`boolean`
+
+When `lazy` is enabled, the dev-server will only compile the bundle when it gets requested. This means that webpack will not watch any file changes. We call this **lazy mode**.
+
+```js
+lazy: true
+```
+
+T> `watchOptions` will have no effect when used with **lazy mode**.
+
+T> If you use the CLI, make sure **inline mode** is disabled.
+
+
+### `devServer.filename` 🔑
+
+`string`
+
+This option lets you reduce the compilations in **lazy mode**.
+By default in **lazy mode**, every request results in a new compilation. With `filename`, it's possible to only compile when a certain file is requested.
+
+If `output.filename` is set to `bundle.js` and `filename` is used like this:
+
+```js
+lazy: true,
+filename: "bundle.js"
+```
+
+It will now only compile the bundle when `/bundle.js` is requested.
+
+T> `filename` has no effect when used without **lazy mode**.
 
 
 ### `devServer.contentBase`
