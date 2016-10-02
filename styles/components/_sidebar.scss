@@ -1,13 +1,43 @@
 .sidebar {
-  display: none;
+  flex: 1;
 
-  @media (min-width: map-get($screens, medium)) {
-    flex: 1;
+  position: relative;
 
-    display: block;
+  @include break {
     max-width: 25%;
-    padding: 1.5em;
     background: transparentize(map-get($colors, white), 0.5);
+  }
+}
+
+.sidebar__inner {
+  will-change: transform;
+  transform: translate3D(-100%, 0, 0);
+  transition: transform 0.5s;
+
+  position: absolute;
+  width: 300px;
+  height: 100%;
+  max-height: calc(100vh - 45px);
+  overflow-y: auto;
+  padding: 1.5em;
+  background: map-get($colors, emperor);
+  color: map-get($colors, dusty-grey);
+  z-index: 1;
+
+  @include break {
+    position: static;
+    transform: none;
+    width: 100%;
+    background: transparent;
+    color: map-get($colors, emperor);
+  }
+
+  .nav-displayed & {
+    transform: translateX(0);
+
+    @include break {
+      transform: none;
+    }
   }
 }
 
@@ -19,7 +49,7 @@
     font-weight: 400;
     text-transform: uppercase;
     text-decoration: none;
-    color: map-get($colors, emperor);
+    color: inherit;
 
     &:hover {
       color: map-get($colors, tussock);

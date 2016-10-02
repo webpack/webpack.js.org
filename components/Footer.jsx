@@ -3,10 +3,10 @@ import Link from './Link';
 import Cube from './Cube';
 import Container from './Container';
 
-export default props => {
+export default (props) => {
   return (
-    <footer className="footer">
-      <Container className="footer__inner">
+    <Container className="footer">
+      <div className="footer__inner">
         <section className="footer__left">
           <Link className="footer__link" to="get-started">Get Started</Link>
           <Link className="footer__link" to="analyze">Analyze</Link>
@@ -24,7 +24,7 @@ export default props => {
           <Link className="footer__link" to="changelog">Changelog</Link>
           <Link className="footer__link" to="license">License</Link>
         </section>
-      </Container>
-    </footer>
+      </div>
+    </Container>
   );
 };
