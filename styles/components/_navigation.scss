@@ -49,6 +49,7 @@
   $size: 20px;
 
   display: block;
+  box-sizing: content-box;
   overflow: hidden;
   width: $wh;
   height: $wh;
