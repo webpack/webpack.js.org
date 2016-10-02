@@ -109,7 +109,7 @@ function section(title, contentCb) {
       return contentCb();
     },
     sort(pages) {
-      return _.sortBy(pages, page => page.file.sort);
+      return _.sortBy(pages, (page) => page.file.sort)
     },
     processPage: processPage(),
     layouts: {

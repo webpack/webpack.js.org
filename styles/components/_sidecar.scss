@@ -1,74 +1,88 @@
 .sidecar {
-  position: fixed;
-  top:75px;
-  right:0;
-  z-index:100;
+  display: none;
 
-  &__link {
-    display:inline-block;
-    padding:0.75em;
-    float:right;
-    clear:both;
-    color:map-get($colors, alto);
-    transition:all 250ms;
-
-    &:hover { color:map-get($colors, white); }
+  @include break(large) {
+    display: block;
+    position: fixed;
+    top: 75px;
+    right: 0;
+    z-index: 100;
   }
+}
 
-  &__label {
-    display:block;
-    float:left;
-    width:0;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    transition:width 250ms;
+.sidecar__link {
+  display: inline-block;
+  padding: 0.75em;
+  float: right;
+  clear: both;
+  color: map-get($colors, alto);
+  transition: all 250ms;
+
+  &:hover {
+    color: map-get($colors, white);
   }
+}
 
-  &__icon { 
-    display:inline-block;
-    width:16px;
-  }
+.sidecar__label {
+  display: block;
+  float: left;
+  width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: width 250ms;
+}
 
-  // TODO: Fix hardcoded widths using flex perhaps, can't animate to width auto
+.sidecar__icon {
+  display: inline-block;
+  width: 16px;
+}
 
-  .sidecar__link--github { 
-    background:#444;
+// TODO: Fix hardcoded widths using flex perhaps, can't animate to width auto
+.sidecar__link--github {
+  background: #444;
 
-    &:hover { 
-      background:#333; 
+  &:hover {
+    background: #333;
 
-      .sidecar__label { width:115px; }
+    .sidecar__label {
+      width: 115px;
     }
   }
+}
 
-  .sidecar__link--gitter { 
-    background:desaturate(#ed1965, 15%);
+.sidecar__link--gitter {
+  background: desaturate(#ed1965, 15%);
 
-    &:hover { 
-      background:#ed1965; 
+  &:hover {
+    background: #ed1965;
 
-      .sidecar__label { width:85px; }
+    .sidecar__label {
+      width: 85px;
     }
   }
+}
 
-  .sidecar__link--medium { 
-    background:desaturate(#19aa6e, 15%); 
+.sidecar__link--medium {
+  background: desaturate(#19aa6e, 15%);
 
-    &:hover { 
-      background:#19aa6e; 
+  &:hover {
+    background: #19aa6e;
 
-      .sidecar__label { width:115px; }
+    .sidecar__label {
+      width: 115px;
     }
   }
+}
 
-  .sidecar__link--so {
-    background:desaturate(#f48024, 15%);
+.sidecar__link--so {
+  background: desaturate(#f48024, 15%);
 
-    &:hover {
-      background:#f48024;
+  &:hover {
+    background: #f48024;
 
-      .sidecar__label { width:125px; }
+    .sidecar__label {
+      width: 125px;
     }
   }
 }
