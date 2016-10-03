@@ -84,6 +84,7 @@ query MarkdownTemplate($path: String!) {
         path
         frontmatter {
           title
+          sort
         }
       }
     }

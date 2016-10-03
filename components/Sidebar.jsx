@@ -1,16 +1,18 @@
 import React from 'react';
 import Link from 'react-router/lib/Link';
 import { rhythm, scale, options } from 'utilities/typography';
+import sortBy from 'lodash/sortBy'
 
 const Sidebar = ({ pathname, pages }) => {
   const splitPathname = pathname.split('/')
   const base = splitPathname[1]
-  const sectionPages = pages.filter((page) => {
+  let sectionPages = pages.filter((page) => {
     return base === page.node.path.split('/')[1] &&
       // This is the index page, since we always add it as "introduction"
       // filter it out here.
       page.node.path !== `/${base}/`
   })
+  sectionPages = sortBy(sectionPages, (page) => page.node.frontmatter.sort)
 
   return (
     <nav
