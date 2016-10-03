@@ -12,15 +12,37 @@ const pages = [
   { title: 'Github', url: '//github.com/webpack/webpack.js.org' }
 ];
 
-export default ({ children }) => {
-  return (
-    <div className="site">
-      <Navigation home="/" pages={ pages } />
-      <Sidecar />
-      { children }
-      <Footer />
+export default class Site extends React.Component {
+  constructor () {
+    super();
 
-      <GoogleAnalytics analyticsId="UA-46921629-2" />
-    </div>
-  );
-};
+    this.state = {
+      navDisplayed: false
+    };
+
+    this.onToggleNav = () => {
+      this.setState({navDisplayed: !this.state.navDisplayed});
+    };
+  }
+
+  componentWillUpdate (nextProps) {
+    console.log(nextProps);
+  }
+
+  render () {
+    let { children } = this.props;
+
+    const cls = this.state.navDisplayed ? 'site nav-displayed' : 'site';
+
+    return (
+      <div className={cls}>
+        <Navigation home="/" pages={ pages } onToggleNav={this.onToggleNav} />
+        <Sidecar />
+        { children }
+        <Footer />
+
+        <GoogleAnalytics analyticsId="UA-46921629-2" />
+      </div>
+    );
+  }
+}

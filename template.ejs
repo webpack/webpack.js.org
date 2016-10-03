@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title><%= webpackConfig.template.title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <% for (var file in webpackConfig.template.cssFiles) { %>
+      <link href="<%= webpackConfig.template.cssFiles[file] %>" rel="stylesheet">
+    <% } %>
+  </head>
+  <body>
+    <%- webpackConfig.html %>
+  </body>
+</html>

@@ -1,21 +1,23 @@
 .contributors {
-  &__person {
-    display: inline-block;
-    margin-right:1em;
 
-    &:last-of-type {
-      margin-right:0;
-    }
+}
 
-    img {
-      height: 80px;
-      border-radius:3px;
-    }
+.contributor {
+  display: inline-block;
+  margin-right: 1em;
 
-    span {
-      display: block;
-      text-align: center;
-      font-size:0.8em;
-    }
+  &:last-of-type {
+    margin-right: 0;
+  }
+
+  img {
+    height: 80px;
+    border-radius: 3px;
+  }
+
+  span {
+    display: block;
+    text-align: center;
+    font-size: 0.8em;
   }
 }

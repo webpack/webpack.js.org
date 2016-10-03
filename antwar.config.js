@@ -6,7 +6,8 @@ var highlight = require('./utilities/highlight');
 
 module.exports = {
   template: {
-    title: 'webpack'
+    title: 'webpack',
+    file: path.join(__dirname, 'template.ejs')
   },
   assets: [
     {
@@ -108,7 +109,7 @@ function section(title, contentCb) {
       return contentCb();
     },
     sort(pages) {
-      return _.sortBy(pages, page => page.file.sort);
+      return _.sortBy(pages, (page) => page.file.sort)
     },
     processPage: processPage(),
     layouts: {
@@ -130,6 +131,9 @@ function processPage() {
     },
     content: function(o) {
       return markdown().process(o.file.__content, highlight);
+    },
+    anchors: function(o) {
+      return markdown().getAnchors(o.file.__content);
     },
     contributors: function(o) {
       return Array.isArray(o.file.contributors) && o.file.contributors.length && o.file.contributors.slice().sort();
