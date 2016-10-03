@@ -39,6 +39,7 @@ const Item = ({ url, title }) => (
     className="sidebar-item"
     style={{
       ...scale(-1/5),
+      lineHeight: 1.6,
       marginBottom: rhythm(1/4),
       width: '100%',
     }}
@@ -46,7 +47,7 @@ const Item = ({ url, title }) => (
     <Link
       className="sidebar-item__title"
       style={{
-        padding: rhythm(1/4),
+        paddingBottom: rhythm(1/4),
       }}
       activeStyle={{
         color: 'black',
