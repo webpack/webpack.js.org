@@ -3,17 +3,15 @@ import React from 'react';
 export default props => {
   if (props.contributors) {
     return (
-      <div className="contributors">
+      <div>
         <hr />
-        <h4>Contributors:</h4>
+        <h3>Contributors:</h3>
         <div className="contributors__list">
-          { 
+          {
             (props.contributors || []).map(contributor => (
-              <a key={ contributor } 
-                className="contributors__person" 
+              <a key={ contributor }
                 href={ `https://github.com/${contributor}` }>
-                <img src={ `https://github.com/${contributor}.png?size=80` } />
-                <span>{ contributor }</span>
+                <img src={ `https://github.com/${contributor}.png?size=48` } />
               </a>
             ))
           }
