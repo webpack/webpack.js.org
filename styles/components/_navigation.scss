@@ -14,7 +14,6 @@
 
   &__links {
     flex:1 1 auto;
-    padding:0.2em 0 0.3em;
     text-align:right;
   }
 
@@ -23,9 +22,8 @@
     text-decoration:none;
     color:map-get($colors, alto);
 
-    &:hover,
-    &--active { 
-      color:map-get($colors, white); 
+    &:hover {
+      color:map-get($colors, white);
     }
   }
 }
