@@ -32,6 +32,13 @@ const theme = {
     'figure': {
       marginBottom: 0,
     },
+    blockquote: {
+      paddingLeft: rhythm(3/4),
+      paddingTop: rhythm(1/2),
+      paddingBottom: rhythm(1/2),
+      marginLeft: 0,
+      borderLeft: `${rhythm(1/4)} solid #CCC`,
+    },
     'blockquote.warning,blockquote.todo,blockquote.tip': {
       marginLeft: 0,
       marginTop: 0,
