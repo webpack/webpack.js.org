@@ -73,10 +73,9 @@ The output directory as an **absolute path** (required).
 
 `[hash]` is replaced by the hash of the compilation.
 
-
 **config.js**
 
-``` javascript
+```javascript
 output: {
 	path: "/home/proj/public/assets",
 	publicPath: "/assets/"
@@ -85,7 +84,7 @@ output: {
 ```
 
 **index.html**
-``` html
+```html
 <head>
   <link href="/assets/spinner.gif"/>
 </head>
@@ -94,7 +93,7 @@ And a more complicated example of using a CDN and hashes for assets.
 
 **config.js**
 
-``` javascript
+```javascript
 output: {
 	path: "/home/proj/cdn/assets/[hash]",
 	publicPath: "http://cdn.example.com/assets/[hash]/"
@@ -103,7 +102,7 @@ output: {
 
 **Note:** In cases when the eventual `publicPath` of output files isn't known at compile time, it can be left blank and set dynamically at runtime in the entry point file. If you don't know the `publicPath` while compiling, you can omit it and set `__webpack_public_path__` on your entry point.
 
-``` javascript
+```javascript
  __webpack_public_path__ = myRuntimePublicPath
 
 // rest of your application entry
