@@ -32,6 +32,10 @@ const theme = {
     'figure': {
       marginBottom: 0,
     },
+    pre: {
+      background: '#333333',
+      color: 'white',
+    },
     blockquote: {
       paddingLeft: rhythm(3/4),
       paddingTop: rhythm(1/2),

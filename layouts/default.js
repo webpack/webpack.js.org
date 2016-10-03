@@ -5,7 +5,7 @@ import Footer from 'components/Footer';
 import 'styles/index.scss'
 import 'styles/icons.css'
 import 'styles/geomanist/stylesheet.css'
-import 'prismjs/themes/prism-coy.css'
+import 'prismjs/themes/prism-funky.css'
 
 const pages = [
   { title: 'Concepts', url: 'concepts/' },
