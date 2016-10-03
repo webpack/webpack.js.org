@@ -118,6 +118,16 @@ module.exports = function(section) {
       var tokens = parseQuotes(content);
 
       return marked.parser(tokens, markedDefaults);
+    },
+
+    // Note that this should correspond with renderer.heading
+    getAnchors: function(content) {
+      return marked.lexer(content)
+        .filter(chunk => chunk.type === 'heading')
+        .map(chunk => ({
+          title: chunk.text.replace(/`/g, ''),
+          id: chunk.text.toLowerCase().replace(/`/g, '').replace(/[^\w]+/g, '-')
+        }));
     }
   };
 };

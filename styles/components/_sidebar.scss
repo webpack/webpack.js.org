@@ -1,7 +1,6 @@
 .sidebar {
-  flex: 1;
-
   position: relative;
+  flex: 1;
 
   @include break {
     max-width: 25%;
@@ -19,6 +18,7 @@
   height: 100%;
   max-height: calc(100vh - 45px);
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 1.5em;
   background: map-get($colors, emperor);
   color: map-get($colors, dusty-grey);
@@ -57,7 +57,6 @@
   }
 
   &__toggle {
-    display: none; // Temporary
     float: right;
     line-height: 1.5;
     cursor: pointer;
@@ -69,14 +68,14 @@
     }
   }
 
-  &__sections {
-    display: none; // Temporary
+  &__anchors {
+    display:none;
     list-style: none;
     padding: 0;
     margin: 0.25em 0 1em;
   }
 
-  &__section {
+  &__anchor {
     margin: 0;
 
     a {
@@ -90,6 +89,18 @@
       &:hover {
         color: map-get($colors, mine-shaft);
       }
+    }
+  }
+
+  &--empty {
+    .sidebar-item__toggle {
+      display:none;
+    }
+  }
+
+  &--open {
+    .sidebar-item__anchors {
+      display:block;
     }
   }
 }
