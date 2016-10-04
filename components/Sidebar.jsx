@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'react-router/lib/Link';
-import { rhythm, scale, options } from 'utilities/typography';
+import { rhythm, scale } from 'utilities/typography';
 import { merge, media, presets, style } from 'glamor'
 import sections, { basepath } from 'utilities/pages'
 
@@ -15,6 +15,7 @@ const Sidebar = ({ pages, location, activeSection }) => {
         display: 'block',
         flex: '0 0 25%',
         maxWidth: '25%',
+        paddingRight: rhythm(1),
       }))}
     >
       <Item url={ `/${activeSection}/` } title="Introduction" />
