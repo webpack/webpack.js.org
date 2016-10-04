@@ -24,6 +24,12 @@ const theme = {
         '300',
       ],
     },
+    {
+      name: 'Ubuntu Mono',
+      styles: [
+        '400',
+      ],
+    },
   ],
   plugins: [
     new CodePlugin(),
@@ -64,6 +70,9 @@ const theme = {
     hr: {
       background: '#dedede',
       height: '3px',
+    },
+    'tt,code': {
+      fontFamily: '"Ubuntu Mono", Consolas,"Roboto Mono","Liberation Mono",Menlo,Courier,monospace',
     },
   }),
 }
