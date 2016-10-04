@@ -27,6 +27,7 @@ export default ({ home = '/', pages, location, openSidebar }) => {
             fill={gray(85, 0, true)}
             {...merge({
               ...scale(3/5),
+              cursor: 'pointer',
               lineHeight: '29px',
               marginLeft: rhythm(-1/2),
               paddingRight: rhythm(1/2),
