@@ -1,12 +1,5 @@
 .page__content,
 .splash__content {
-  hr {
-    border:none;
-    background-color:map-get($colors, alto);
-    height:3px;
-    margin:2em 0;
-  }
-
   blockquote {
     /*border-left: 4px solid #dddddd;*/
     /*padding:0.75em 1em;*/

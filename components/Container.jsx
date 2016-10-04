@@ -1,7 +1,7 @@
 import React from 'react';
 import { rhythm } from 'utilities/typography'
 
-export default ({ className, style, children }) => {
+export default ({ className, style, children, ...otherProps }) => {
   if (!className) {
     className = ''
   }
@@ -12,6 +12,7 @@ export default ({ className, style, children }) => {
         padding: `${rhythm(1/2)} ${rhythm(1)}`,
         ...style,
       }}
+      {...otherProps}
     >
       { children }
     </div>

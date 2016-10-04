@@ -1,29 +1,25 @@
 import React from 'react';
 import Link from 'react-router/lib/Link';
 import { rhythm, scale, options } from 'utilities/typography';
-import sortBy from 'lodash/sortBy'
+import { merge, media, presets, style } from 'glamor'
+import sections, { basepath } from 'utilities/pages'
 
-const Sidebar = ({ pathname, pages }) => {
-  const splitPathname = pathname.split('/')
-  const base = splitPathname[1]
-  let sectionPages = pages.filter((page) => {
-    return base === page.node.path.split('/')[1] &&
-      // This is the index page, since we always add it as "introduction"
-      // filter it out here.
-      page.node.path !== `/${base}/`
-  })
-  sectionPages = sortBy(sectionPages, (page) => page.node.frontmatter.sort)
-
+const Sidebar = ({ pages, location, activeSection }) => {
   return (
     <nav
       className="sidebar"
-      style={{
-        padding: rhythm(1),
-      }}
+      {...merge({
+        display: 'none',
+      },
+      media(presets.tablet, {
+        display: 'block',
+        flex: '0 0 25%',
+        maxWidth: '25%',
+      }))}
     >
-      <Item url={ `/${base}/` } title="Introduction" />
+      <Item url={ `/${activeSection}/` } title="Introduction" />
       {
-        sectionPages.map(({ node }, i) =>
+        pages.map(({ node }, i) =>
           <Item
             key={ `sidebar-item-${i}` }
             url={ node.path }

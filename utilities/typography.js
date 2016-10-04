@@ -41,6 +41,7 @@ const theme = {
       paddingTop: rhythm(1/2),
       paddingBottom: rhythm(1/2),
       marginLeft: 0,
+      marginRight: 0,
       borderLeft: `${rhythm(1/4)} solid #CCC`,
     },
     'blockquote.warning,blockquote.todo,blockquote.tip': {
@@ -59,6 +60,10 @@ const theme = {
     },
     'h5 code': {
       ...scale(-1/5),
+    },
+    hr: {
+      background: '#dedede',
+      height: '3px',
     },
   }),
 }

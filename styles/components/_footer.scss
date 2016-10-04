@@ -1,10 +1,8 @@
 .footer {
-  min-width:map-get($screens, large);
   background: map-get($colors, alto);
 
   &__inner {
     display:flex;
-    box-sizing:border-box;
   }
 
   &__left,

@@ -3,6 +3,12 @@ import Link from './Link';
 import Cube from './Cube';
 import Container from './Container';
 
+// TODO fix footer's responsiveness
+/*
+          <Link className="footer__link" to="//gitter.im/webpack/webpack">Support</Link>
+          <Link className="footer__link" to="/changelog/">Changelog</Link>
+          <Link className="footer__link" to="/license/">License</Link>
+          */
 export default props => {
   return (
     <footer className="footer">
@@ -26,9 +32,6 @@ export default props => {
         </section>
 
         <section className="footer__right">
-          <Link className="footer__link" to="//gitter.im/webpack/webpack">Support</Link>
-          <Link className="footer__link" to="/changelog/">Changelog</Link>
-          <Link className="footer__link" to="/license/">License</Link>
         </section>
       </Container>
     </footer>

@@ -1,9 +1,18 @@
 import React from 'react';
+import { merge, media, presets, style } from 'glamor'
 import Link from './Link';
 
 export default props => {
   return (
-    <aside className="sidecar">
+    <aside
+      className="sidecar"
+      {...merge({
+        display: 'none',
+      },
+      media(presets.tablet, {
+        display: 'block',
+      }))}
+    >
       <Link className="sidecar__link sidecar__link--github" to="//github.com/webpack/webpack">
         <span className="sidecar__label">Fork the Repo</span>
         <i className="sidecar__icon icon-github" />

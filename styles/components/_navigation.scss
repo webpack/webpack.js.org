@@ -1,11 +1,9 @@
 .navigation {
-  min-width:map-get($screens, large);
   background:map-get($colors, mine-shaft);
   transition:background 250ms;
 
   &__inner {
     display:flex;
-    box-sizing:border-box;
   }
 
   &__logo {

@@ -15,13 +15,13 @@ export default class Logo extends Component {
     let { theme = 'dark' } = this.props;
 
     return (
-      <span 
-        ref={ ref => this.container = ref } 
+      <span
+        ref={ ref => this.container = ref }
         className={ `logo logo--${theme}` }>
-        <Cube 
+        <Cube
           ref={ ref => this.icon = ref }
           className="logo__cube"
-          theme={ theme } 
+          theme={ theme }
           depth={ 20 } />
         <span className="logo__text">webpack</span>
       </span>
@@ -34,8 +34,10 @@ export default class Logo extends Component {
   }
 
   componentWillUnmount() {
-    this.container.removeEventListener('mouseenter', this.listeners.spin);
-    this.container.removeEventListener('mouseleave', this.listeners.reset);
+    if (this.container) {
+      this.container.removeEventListener('mouseenter', this.listeners.spin);
+      this.container.removeEventListener('mouseleave', this.listeners.reset);
+    }
   }
 
   /**
@@ -54,5 +56,5 @@ export default class Logo extends Component {
    */
   _triggerReset(e) {
     this.icon.reset(e);
-  }     
+  }
 }
