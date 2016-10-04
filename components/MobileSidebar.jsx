@@ -21,6 +21,32 @@ Object.keys(groupedPages).forEach((k) => groupedPages[k] = sortBy(groupedPages[k
 
 // Replace the index page with one titled "introduction".
 
+const SidebarLink = ({ path, title }) => {
+  return (
+    <Link
+      to={path}
+      key={path}
+      activeStyle={{
+        background: 'rgba(0,0,0,0.15)',
+        color: 'black',
+      }}
+      {...style({
+        color: '#535353',
+        display: 'block',
+        padding: rhythm(1/4),
+        paddingLeft: rhythm(3/4),
+        paddingRight: rhythm(3/4),
+        marginLeft: rhythm(-3/4),
+        marginRight: rhythm(-3/4),
+        width: '100%',
+        textDecoration: 'none',
+      })}
+    >
+      {title}
+    </Link>
+  )
+}
+
 export default ({ children, isOpen, close, activeSection }) => {
   let opacity
   let transform
@@ -87,6 +113,20 @@ export default ({ children, isOpen, close, activeSection }) => {
         </h1>
         <h2>Sections</h2>
         <div
+          {...style({
+            marginBottom: rhythm(2),
+          })}
+        >
+          <SidebarLink
+            title='Get Started'
+            path='/get-started/'
+          />
+          <SidebarLink
+            title='Contribute'
+            path='/contribute/'
+          />
+        </div>
+        <div
           {...merge({
             display: 'block',
           },
@@ -95,13 +135,6 @@ export default ({ children, isOpen, close, activeSection }) => {
           }))}
         >
           {sections.map((section) => {
-            let activeStyles
-            if (basepath(section.url) === activeSection) {
-              activeStyles = {
-                background: 'rgba(0,0,0,0.15)',
-                color: 'black',
-              }
-            }
             return (
               <div
                 {...style({
@@ -110,26 +143,10 @@ export default ({ children, isOpen, close, activeSection }) => {
               >
                 <h3>{section.title}</h3>
                 {groupedPages[basepath(section.url)].map((page) => (
-                  <Link
-                    to={page.node.path}
-                    key={page.node.path}
-                    activeStyle={{
-                      ...activeStyles,
-                    }}
-                    {...style({
-                      color: '#535353',
-                      display: 'block',
-                      padding: rhythm(1/4),
-                      paddingLeft: rhythm(3/4),
-                      paddingRight: rhythm(3/4),
-                      marginLeft: rhythm(-3/4),
-                      marginRight: rhythm(-3/4),
-                      width: '100%',
-                      textDecoration: 'none',
-                    })}
-                  >
-                    {page.node.frontmatter.title}
-                  </Link>
+                  <SidebarLink
+                    title={page.node.frontmatter.title}
+                    path={page.node.path}
+                  />
                 ))}
               </div>
             )
