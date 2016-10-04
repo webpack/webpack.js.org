@@ -9,7 +9,33 @@ import Container from 'components/Container';
 import Contributors from 'components/Contributors';
 import sections, { basepath } from 'utilities/pages'
 import Sidebar from 'components/Sidebar';
-
+/*
+            <select
+              value={this.props.location.pathname}
+              onChange={(e) => browserHistory.push(e.target.value)}
+              {...merge({
+                marginBottom: rhythm(1)
+              },
+              media(presets.tablet, {
+                display: 'none',
+              }))}
+            >
+              <option
+                value={`/${activeSection}/`}
+                key={`/${activeSection}/`}
+              >
+                Introduction
+              </option>
+              {sectionPages.map((page) => (
+                <option
+                  value={page.node.path}
+                  key={page.node.path}
+                >
+                  {page.node.frontmatter.title}
+                </option>
+              ))}
+            </select>
+            */
 class MarkdownTemplate extends React.Component {
   render () {
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
@@ -39,12 +65,15 @@ class MarkdownTemplate extends React.Component {
         <div
           {...merge({
             display: 'flex',
+            flex: '0 1 auto',
+            flexWrap: 'wrap',
+            flexDirection: 'row',
             maxWidth: 1024,
             margin: '0 auto',
             padding: `${rhythm(1/2)} ${rhythm(3/4)}`,
           },
           media(presets.tablet, {
-            minWidth: 1024,
+            //minWidth: 1024,
             padding: 0,
             paddingTop: rhythm(1/2),
           }))}
@@ -60,48 +89,25 @@ class MarkdownTemplate extends React.Component {
               maxWidth: '100%',
             },
             media(presets.tablet, {
-              flex: '0 0 75%',
+              flexBasis: '75%',
               maxWidth: '75%',
+              flex: '3',
             }))}
           >
-            <select
-              value={this.props.location.pathname}
-              onChange={(e) => browserHistory.push(e.target.value)}
-              {...merge({
-                marginBottom: rhythm(1)
-              },
-              media(presets.tablet, {
-                display: 'none',
-              }))}
-            >
-              <option
-                value={`/${activeSection}/`}
-                key={`/${activeSection}/`}
-              >
-                Introduction
-              </option>
-              {sectionPages.map((page) => (
-                <option
-                  value={page.node.path}
-                  key={page.node.path}
-                >
-                  {page.node.frontmatter.title}
-                </option>
-              ))}
-            </select>
             <h1>{ title }</h1>
             <a
               className="page__edit"
               href={ edit }
               {...merge({
                 ...scale(-2/5),
-                display: 'none',
-                position: 'absolute',
-                right: rhythm(2.5),
-                top: rhythm(1.5),
+                //display: 'none',
+                //position: 'absolute',
+                //right: rhythm(2.5),
+                //top: rhythm(1.5),
+                marginBottom: rhythm(1/2),
               },
               media(presets.tablet, {
-                display: 'inline',
+                //display: 'inline',
               }))}
             >
               Edit this Page&nbsp;&nbsp;

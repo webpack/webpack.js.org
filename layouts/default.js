@@ -65,10 +65,9 @@ class DefaultLayout extends React.Component {
             minHeight: 'calc(100vh - 94px)',
             position: 'relative',
             paddingTop: rhythm(1/2),
-          },
-          media(presets.tablet, {
-            display: 'flex',
-          }))}
+            paddingLeft: rhythm(3/4),
+            paddingRight: rhythm(3/4),
+          })}
         >
           { this.props.children }
         </div>

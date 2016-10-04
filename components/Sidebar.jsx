@@ -14,8 +14,9 @@ const Sidebar = ({ pages, location, activeSection }) => {
       },
       media(presets.tablet, {
         display: 'block',
-        flex: '0 0 25%',
+        flexBasis: '25%',
         maxWidth: '25%',
+        flex: '1',
         paddingRight: rhythm(1),
       }))}
     >
