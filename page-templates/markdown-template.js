@@ -69,12 +69,11 @@ class MarkdownTemplate extends React.Component {
             flexDirection: 'row',
             maxWidth: 1024,
             margin: '0 auto',
-            padding: `${rhythm(1/2)} ${rhythm(3/4)}`,
           },
           media(presets.tablet, {
             //minWidth: 1024,
             padding: 0,
-            paddingTop: rhythm(1/2),
+            padding: `${rhythm(1/2)} ${rhythm(3/4)}`,
           }))}
         >
           <Sidebar
@@ -86,8 +85,10 @@ class MarkdownTemplate extends React.Component {
             className="page__content"
             {...merge({
               maxWidth: '100%',
+              paddingTop: rhythm(1/2),
             },
             media(presets.tablet, {
+              paddingTop: 0,
               flexBasis: '75%',
               maxWidth: '75%',
               flex: '3',

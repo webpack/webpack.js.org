@@ -18,10 +18,11 @@ const Sidebar = ({ pages, location, activeSection }) => {
         maxWidth: '25%',
         flex: '1',
         paddingRight: rhythm(1),
+        paddingTop: rhythm(1/4),
       }))}
     >
       <Sticky
-        top={77}
+        top={83}
       >
         <h3
           {...merge({
