@@ -14,6 +14,10 @@ import 'styles/icons.css'
 import 'styles/geomanist/stylesheet.css'
 import 'prismjs/themes/prism-funky.css'
 
+// Create references to html/body elements
+const htmlElement = document.querySelector('html');
+const bodyElement = document.querySelector('body');
+
 class DefaultLayout extends React.Component {
   constructor(props) {
     super(props)
@@ -22,9 +26,19 @@ class DefaultLayout extends React.Component {
     }
   }
   render() {
+    // Freeze the background when the overlay is open.
+    if (this.state.mobileSidebarOpen) {
+      htmlElement.style.overflow = 'hidden'
+      bodyElement.style.overflow = 'hidden'
+    } else {
+      htmlElement.style.overflow = 'visible'
+      bodyElement.style.overflow = 'visible'
+    }
     const activeSection = basepath(this.props.location.pathname)
     return (
-      <div className="site">
+      <div
+        className="site"
+      >
         <Navigation
           home="/"
           pages={ sections }
