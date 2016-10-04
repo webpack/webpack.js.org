@@ -86,6 +86,7 @@ class MarkdownTemplate extends React.Component {
             {...merge({
               maxWidth: '100%',
               paddingTop: rhythm(1/2),
+              paddingBottom: rhythm(1/2),
             },
             media(presets.tablet, {
               paddingTop: 0,
@@ -99,16 +100,10 @@ class MarkdownTemplate extends React.Component {
               className="page__edit"
               href={ edit }
               {...merge({
-                ...scale(-2/5),
-                //display: 'none',
-                //position: 'absolute',
-                //right: rhythm(2.5),
-                //top: rhythm(1.5),
-                marginBottom: rhythm(1/2),
+                display: 'block',
+                marginBottom: rhythm(1),
               },
-              media(presets.tablet, {
-                //display: 'inline',
-              }))}
+              )}
             >
               Edit this Page&nbsp;&nbsp;
               <i className="icon-edit" />

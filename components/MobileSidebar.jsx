@@ -1,8 +1,25 @@
 import React from 'react';
 import Link from 'react-router/lib/Link';
+import groupBy from 'lodash/groupBy'
+import sortBy from 'lodash/sortBy'
 import { merge, before, media, presets, style } from 'glamor'
 import { rhythm, scale } from 'utilities/typography'
-import { sections, basepath } from 'utilities/pages'
+import { sections, pages, basepath } from 'utilities/pages'
+
+// TODO this should just be a GraphQL query.
+// Group pages by section.
+const groupedPages = groupBy(pages, (page) => basepath(page.node.path))
+
+// Sort pages
+Object.keys(groupedPages).forEach((k) => groupedPages[k] = sortBy(groupedPages[k], (page) => {
+  if (page.node.path === `/${k}/`) {
+    return -100
+  } else {
+    return page.node.frontmatter.sort
+  }
+}))
+
+// Replace the index page with one titled "introduction".
 
 export default ({ children, isOpen, close, activeSection }) => {
   let opacity
@@ -18,7 +35,6 @@ export default ({ children, isOpen, close, activeSection }) => {
     <div
       {...merge({
         position: 'fixed',
-        overflowY: 'scroll',
         left: 0,
         top: 0,
         width: '100%',
@@ -57,6 +73,7 @@ export default ({ children, isOpen, close, activeSection }) => {
           transitionDuration: '130ms',
           transitionDelay: '0ms',
           padding: `${rhythm(1/2)} ${rhythm(3/4)}`,
+          overflowY: 'scroll',
         },
         media(presets.tablet, {
           display: 'none',
@@ -86,23 +103,35 @@ export default ({ children, isOpen, close, activeSection }) => {
               }
             }
             return (
-              <Link
-                to={section.url}
-                key={section.url}
+              <div
                 {...style({
-                  ...activeStyles,
-                  color: '#535353',
-                  display: 'block',
-                  padding: rhythm(1/2),
-                  paddingLeft: rhythm(3/4),
-                  paddingRight: rhythm(3/4),
-                  marginLeft: rhythm(-3/4),
-                  marginRight: rhythm(-3/4),
-                  width: '100%',
+                  marginBottom: rhythm(2),
                 })}
               >
-                {section.title}
-              </Link>
+                <h3>{section.title}</h3>
+                {groupedPages[basepath(section.url)].map((page) => (
+                  <Link
+                    to={page.node.path}
+                    key={page.node.path}
+                    activeStyle={{
+                      ...activeStyles,
+                    }}
+                    {...style({
+                      color: '#535353',
+                      display: 'block',
+                      padding: rhythm(1/4),
+                      paddingLeft: rhythm(3/4),
+                      paddingRight: rhythm(3/4),
+                      marginLeft: rhythm(-3/4),
+                      marginRight: rhythm(-3/4),
+                      width: '100%',
+                      textDecoration: 'none',
+                    })}
+                  >
+                    {page.node.frontmatter.title}
+                  </Link>
+                ))}
+              </div>
             )
           })}
         </div>
