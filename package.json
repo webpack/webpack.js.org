@@ -21,6 +21,7 @@
     "react-addons-shallow-compare": "^15.3.2",
     "react-headroom": "^2.1.2",
     "react-icons": "^2.2.1",
+    "react-stickynode": "^1.2.1",
     "react-typography": "^0.14.0",
     "sass-loader": "^4.0.2",
     "typography": "^0.14.0",

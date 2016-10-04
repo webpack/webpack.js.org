@@ -3,6 +3,7 @@ import Link from 'react-router/lib/Link';
 import { rhythm, scale } from 'utilities/typography';
 import { merge, media, presets, style } from 'glamor'
 import sections, { basepath } from 'utilities/pages'
+import Sticky from 'react-stickynode'
 
 const Sidebar = ({ pages, location, activeSection }) => {
   return (
@@ -18,15 +19,26 @@ const Sidebar = ({ pages, location, activeSection }) => {
         paddingRight: rhythm(1),
       }))}
     >
-      <Item url={ `/${activeSection}/` } title="Introduction" />
-      {
-        pages.map(({ node }, i) =>
-          <Item
-            key={ `sidebar-item-${i}` }
-            url={ node.path }
-            title={ node.frontmatter.title } />
-        )
-      }
+      <Sticky
+        top={77}
+      >
+        <h3
+          {...merge({
+            marginBottom: rhythm(1/2),
+          })}
+        >
+          {activeSection.toUpperCase()}
+        </h3>
+        <Item url={ `/${activeSection}/` } title="Introduction" />
+        {
+          pages.map(({ node }, i) =>
+            <Item
+              key={ `sidebar-item-${i}` }
+              url={ node.path }
+              title={ node.frontmatter.title } />
+          )
+        }
+      </Sticky>
     </nav>
   )
 };
