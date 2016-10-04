@@ -18,6 +18,7 @@ export default ({ children, isOpen, close, activeSection }) => {
     <div
       {...merge({
         position: 'fixed',
+        overflowY: 'scroll',
         left: 0,
         top: 0,
         width: '100%',

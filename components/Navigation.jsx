@@ -7,14 +7,16 @@ import { merge, media, presets } from 'glamor'
 import { basepath } from 'utilities/pages'
 import MenuIcon from 'react-icons/lib/md/menu'
 import gray from 'gray-percentage'
+import Headroom from 'react-headroom'
 
 export default ({ home = '/', pages, location, openSidebar }) => {
   const activeSection = basepath(location.pathname)
   return (
-    <div
-      className="navigation"
+    <Headroom
       style={{
         WebkitTransform: 'translate3d(0,0,0)',
+        background: '#333333',
+        transition: 'background 250ms',
       }}
     >
       <Container className="navigation__inner">
@@ -96,6 +98,6 @@ export default ({ home = '/', pages, location, openSidebar }) => {
           </a>
         </nav>
       </Container>
-    </div>
+    </Headroom>
   )
 };
