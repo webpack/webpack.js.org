@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'react-router/lib/Link';
 import { merge, before, media, presets, style } from 'glamor'
 import { rhythm, scale } from 'utilities/typography'
-import sections, { basepath } from 'utilities/pages'
+import { sections, basepath } from 'utilities/pages'
 
 export default ({ children, isOpen, close, activeSection }) => {
   let opacity
@@ -88,6 +88,7 @@ export default ({ children, isOpen, close, activeSection }) => {
             return (
               <Link
                 to={section.url}
+                key={section.url}
                 {...style({
                   ...activeStyles,
                   color: '#535353',

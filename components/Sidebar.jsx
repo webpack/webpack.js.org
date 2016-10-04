@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'react-router/lib/Link';
 import { rhythm, scale } from 'utilities/typography';
 import { merge, media, presets, style } from 'glamor'
-import sections, { basepath } from 'utilities/pages'
+import { sections, basepath } from 'utilities/pages'
 import Sticky from 'react-stickynode'
 
 const Sidebar = ({ pages, location, activeSection }) => {

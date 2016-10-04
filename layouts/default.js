@@ -5,7 +5,7 @@ import Footer from 'components/Footer';
 import { merge, media, presets, style } from 'glamor'
 import MobileSidebar from 'components/MobileSidebar';
 import Sidebar from 'components/Sidebar';
-import sections, { basepath } from 'utilities/pages'
+import { sections, basepath } from 'utilities/pages'
 import { rhythm, scale } from 'utilities/typography'
 
 // Import site CSS.
@@ -46,7 +46,7 @@ class DefaultLayout extends React.Component {
       >
         <Navigation
           home="/"
-          pages={ sections }
+          sections={ sections }
           location={ this.props.location }
           openSidebar={() => {
             this.setState({ mobileSidebarOpen: true })

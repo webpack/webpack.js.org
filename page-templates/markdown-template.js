@@ -7,7 +7,7 @@ import { merge, media, presets, style } from 'glamor'
 import { rhythm, scale } from 'utilities/typography'
 import Container from 'components/Container';
 import Contributors from 'components/Contributors';
-import sections, { basepath } from 'utilities/pages'
+import { sections, pages, basepath } from 'utilities/pages'
 import Sidebar from 'components/Sidebar';
 /*
             <select
@@ -46,7 +46,6 @@ class MarkdownTemplate extends React.Component {
 
     const activeSection = basepath(this.props.location.pathname)
     // Create <select> for navigating to subpages.
-    const pages = get(this.props, 'data.allMarkdown.edges')
     let sectionPages = pages.filter((page) => {
       return activeSection === basepath(page.node.path) &&
         // This is the index page, since we always add it as "introduction"
@@ -143,16 +142,16 @@ query MarkdownTemplate($path: String!) {
       contributors
     }
   }
-  allMarkdown {
-    edges {
-      node {
-        path
-        frontmatter {
-          title
-          sort
-        }
-      }
-    }
-  }
+  #allMarkdown {
+   # edges {
+    #  node {
+     #   path
+      #  frontmatter {
+       #   title
+        #  sort
+        #}
+     # }
+  #  }
+  #}
 }
 `

@@ -9,7 +9,7 @@ import MenuIcon from 'react-icons/lib/md/menu'
 import gray from 'gray-percentage'
 import Headroom from 'react-headroom'
 
-export default ({ home = '/', pages, location, openSidebar }) => {
+export default ({ home = '/', sections, location, openSidebar }) => {
   const activeSection = basepath(location.pathname)
   return (
     <Headroom
@@ -45,7 +45,7 @@ export default ({ home = '/', pages, location, openSidebar }) => {
 
         <nav className="navigation__links">
           {
-            pages.map((link, i) => {
+            sections.map((link, i) => {
               let activeStyles
               if (basepath(link.url) === activeSection) {
                 activeStyles = {
