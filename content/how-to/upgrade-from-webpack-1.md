@@ -242,9 +242,11 @@ typeof readFileSync === "function";
 
 It is important to note that you will want to tell babel to not parse these module symbols so webpack can use them. You can do this by setting the following in your .babelrc or babel-loader options. 
 
-```
+**.babelrc**
+
+```json
 {
-  presets: [
+  "presets": [
     ["es2015", { "modules": false }]
   ]
 }
