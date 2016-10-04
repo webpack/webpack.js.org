@@ -202,10 +202,9 @@ function onClick() {
 }
 ```
 
-
+Good news: Failure to load a chunk can be handled now because they are Promise based.
 
 #### Dynamic expressions
-Good news: Failure to load a chunk can be handled now.
 
 It's possible to pass an partial expression to `System.import`. This is handled similar to expressions in CommonJS (webpack creates a context with all possible files).
 
