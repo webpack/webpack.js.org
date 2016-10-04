@@ -11,7 +11,13 @@ export default props => {
             (props.contributors || []).map(contributor => (
               <a key={ contributor }
                 href={ `https://github.com/${contributor}` }>
-                <img src={ `https://github.com/${contributor}.png?size=48` } />
+                <img
+                  alt="Contributor to this page"
+                  style={{
+                    width: 48,
+                  }}
+                  src={ `https://github.com/${contributor}.png?size=96` }
+                />
               </a>
             ))
           }
