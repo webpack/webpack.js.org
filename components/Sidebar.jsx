@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Link from './Link';
 
 const Sidebar = ({ sectionName, pages }) => {
@@ -22,7 +22,7 @@ const Sidebar = ({ sectionName, pages }) => {
   );
 };
 
-class Item extends Component {
+class Item extends React.Component {
   constructor(props) {
     super(props);
 
@@ -39,7 +39,7 @@ class Item extends Component {
     return (
       <div className={ `sidebar-item ${emptyMod} ${openMod}` }>
         <Link className="sidebar-item__title" to={ url }>{ title }</Link>
-        <i className="sidebar-item__toggle icon-chevron-down" />
+        <i className="sidebar-item__toggle icon-chevron-down" onClick={ this.toggle.bind(this) } />
         <ul className="sidebar-item__anchors">
           {
             anchors.map((anchor, j) => (

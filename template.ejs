@@ -11,34 +11,9 @@
   </head>
   <body>
     <%- webpackConfig.html %>
+
+    <% for (var script of webpackConfig.template.jsFiles) { %>
+      <script src="<%= script %>" type="text/javascript"></script>
+    <% } %>
   </body>
-
-  <script>
-    (function () {
-      var menuDisplayed = false
-      var menuBtn       = document.getElementById('menu-btn')
-      var site          = document.getElementById('site')
-      var subItems      = document.querySelectorAll('.sidebar-item__toggle')
-
-      menuBtn.addEventListener('click', function () {
-        menuDisplayed = !menuDisplayed
-        menuDisplayed
-          ? site.classList.add('nav-displayed')
-          : site.classList.remove('nav-displayed')
-      })
-
-      function toggleSubItem (event) {
-        var parent = event.target.parentNode
-        var isOpen = parent.classList.contains('sidebar-item--open')
-
-        isOpen
-          ? parent.classList.remove('sidebar-item--open')
-          : parent.classList.add('sidebar-item--open')
-      }
-
-      Array.from(subItems).map(function (el) {
-        el.addEventListener('click', toggleSubItem)
-      })
-    }())
-  </script>
 </html>
