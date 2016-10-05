@@ -68,7 +68,7 @@ module.exports = {
       function() {
         return require.context(
           'json!yaml-frontmatter!./content/how-to',
-          false,
+          true,
           /^\.\/.*\.md$/
         );
       }

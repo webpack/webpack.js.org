@@ -6,10 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <% for (var file in webpackConfig.template.cssFiles) { %>
-      <link href="<%= webpackConfig.template.cssFiles[file] %>" rel="stylesheet">
+    <link href="<%= webpackConfig.template.cssFiles[file] %>" rel="stylesheet">
     <% } %>
   </head>
   <body>
     <%- webpackConfig.html %>
+
+    <% for (var script of webpackConfig.template.jsFiles) { %>
+      <script src="<%= script %>" type="text/javascript"></script>
+    <% } %>
   </body>
 </html>

@@ -20,22 +20,19 @@ export default class Site extends React.Component {
       navDisplayed: false
     };
 
-    this.onToggleNav = () => {
-      this.setState({navDisplayed: !this.state.navDisplayed});
-    };
-  }
-
-  componentWillUpdate (nextProps) {
-    console.log(nextProps);
+    // this.onToggleNav = () => {
+    //   this.setState({navDisplayed: !this.state.navDisplayed});
+    // };
   }
 
   render () {
     let { children } = this.props;
 
-    const cls = this.state.navDisplayed ? 'site nav-displayed' : 'site';
+    // TODO: restore
+    // const cls = this.state.navDisplayed ? 'site nav-displayed' : 'site';
 
     return (
-      <div className={cls}>
+      <div id="site" className="site">
         <Navigation home="/" pages={ pages } onToggleNav={this.onToggleNav} />
         <Sidecar />
         { children }

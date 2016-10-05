@@ -1,16 +1,25 @@
 import React from 'react';
+import Interactive from 'antwar-interactive';
 import Container from './Container';
 import Sidebar from './Sidebar';
 import Contributors from './Contributors';
 
-export default props => {
-  let { config, section, page } = props;
-
+export default ({ section, page }) => {
   let edit = `https://github.com/webpack/webpack.js.org/edit/master/content/${page.url}.md`;
 
   return (
     <Container className="page">
-      <Sidebar paths={config.paths} sectionName={section.name} pages={ section.pages() } />
+      <Interactive
+        id="components/Sidebar.jsx"
+        component={Sidebar}
+        sectionName={section.name}
+        pages={section.pages().map(page => ({
+          url: page.url,
+          title: page.title,
+          anchors: page.anchors
+        }))}
+      />
+
       <section className="page__content">
         <h1>{ page.title }</h1>
 

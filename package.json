@@ -35,13 +35,16 @@
   },
   "devDependencies": {
     "alex": "^3.1.0",
-    "antwar": "0.8.1-alpha.837c8039",
-    "antwar-helpers": "0.8.1-alpha.837c8039",
-    "antwar-prevnext-plugin": "0.8.1-alpha.837c8039",
+    "antwar": "0.8.1-alpha.7317a828",
+    "antwar-helpers": "0.8.1-alpha.7317a828",
+    "antwar-interactive": "0.8.1-alpha.7317a828",
+    "antwar-prevnext-plugin": "0.8.1-alpha.7317a828",
     "autoprefixer": "^6.3.7",
     "babel-core": "^6.10.4",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.5",
+    "babel-plugin-syntax-object-rest-spread": "^6.13.0",
+    "babel-plugin-transform-object-rest-spread": "^6.16.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "css-loader": "^0.25.0",
@@ -76,6 +79,8 @@
     "yaml-frontmatter-loader": "0.0.3"
   },
   "dependencies": {
+    "preact": "^6.2.1",
+    "preact-compat": "^3.6.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-router": "^2.8.1"

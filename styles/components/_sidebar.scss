@@ -2,10 +2,14 @@
   position: relative;
   flex: 1;
 
+// Disabled as interactive generates a div parent (need to attach the code somewhere)
+// This needs a better fix (no way to eliminate the div)
+/*
   @include break {
     max-width: 25%;
     background: transparentize(map-get($colors, white), 0.5);
   }
+*/
 }
 
 .sidebar__inner {
