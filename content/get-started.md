@@ -3,26 +3,21 @@ title: Get Started with Webpack
 ---
 #### Why `webpack`?
 
-It has traditionally been difficult to efficiently bundle and optimise front end applications and make them browser ready.
-The problems have generally been about not having a standard module system in client side javascript, having varied static assets such 
-as css, html, pngs, svgs, fonts which are essential to a web app. All of these static assets have to be transpiled(es2015 to es5),
-bundled(concatenate js and libraries) and optimised(uglified/minified) for the web.
+`webpack` is a module bundler.
+A bundler is a tool that builds all your project files to a single asset file that can be loaded onto a browser.
+It requires that your application files be written as [modules](/concepts/modules).
+The project structure consists of a single entry file with references to other modules as dependencies creating a tree like dependency graph.
+The dependency modules can belong to your application or can be third party libraries.
+The bundler creates this dependency graph and parses through it to include all the required modules in the final bundle.
+The final bundle file will contain all the modules in the right order of dependency and none of the modules will be duplicated.
+Other examples of module bundlers are [browserify]() and [rollupjs]()
 
-There are various tools that help us to do this(grunt, gulp, browserify etc). The modern ones can be roughly divided into two types of tools.
-##### Task runners
-Grunt and gulp fall into this category. In this eco system, transformations are applied on your code using task configuration.
-Each task can be performed using the respective plugin (grunt-concat, grunt-babel etc). A file is required to configure each of the tasks
-and to specify the order of the tasks for execution.
-##### Module bundlers
-Webpack, browserify, rollup are module bundlers.
-A module bundler is different in the sense that firstly, it mandates that your app is split into modules starting with an entry point file. Secondly, it creates a dependency
-graph by statically analysing your code for modular dependencies. Lastly, it bundles your application by following the dependency graph from the entry point.
+Unlike module bundlers, [Grunt](http://grunt),[Gulp](),[Broccoli]() are task runners.
+These tools perform a set of configured tasks in the order that the config file specifies.
+In fact, `webpack` can be run as [one of the tasks](/how-to/use-with-third-party-tools) by a task runner.
 
-Module bundlers are generally accepted to be a superior and reliable way of bundling all your static assets.
-
-Webpack can also
-* Transform the asset files to modules using loaders.(Eg-convert css files to modules, convert es2015 to commonjs modules)
-* Customise optimizations granularly on the created bundle through plugins.
-* Provide stats on the dependency graph of your application.
-* Provide code-splitting capabilities, so that you can load assets for your application as and when required by the end user.
+`webpack` can bundle javascript files written using Commonjs, AMD and ES2015 modules.
+It can also transform other assets(css, png, fonts..) to a module and bundle it together with the javascript.This is done using [loaders](/concepts/loaders).
+`webpack` can perform customised operations before, after or during bundle creation using [plugins](/concepts/plugins).
+You can also do advanced operations like [Hot module reloading](/how-to/hot-module-reload) and [Code splitting](/how-to/split-code) using `webpack`.
 
