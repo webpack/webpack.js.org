@@ -714,11 +714,13 @@ code[class*="language-"] {
   position: relative;
   -webkit-box-flex: 1;
       -ms-flex: 1;
-          flex: 1; }
-  @media (min-width: 768px) {
-    .sidebar {
-      max-width: 25%;
-      background: rgba(255, 255, 255, 0.5); } }
+          flex: 1;
+  /*
+  @include break {
+    max-width: 25%;
+    background: transparentize(map-get($colors, white), 0.5);
+  }
+*/ }
 
 .sidebar__inner {
   will-change: transform;

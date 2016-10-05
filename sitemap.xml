@@ -4,9 +4,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/analyze/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/api/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/changelog/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/api/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/concepts/index.html</loc>
     </url>    <url>
@@ -18,9 +18,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/how-to/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/organization/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/license/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/organization/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/writers-guide/index.html</loc>
     </url>    <url>
@@ -72,21 +72,19 @@
     </url>    <url>
         <loc>https://webpack.js.org/configuration/passing-a-config/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/configuration/plugins/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/configuration/resolve/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/target/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/watch/index.html</loc>
     </url>    <url>
+        <loc>https://webpack.js.org/configuration/plugins/index.html</loc>
+    </url>    <url>
         <loc>https://webpack.js.org/how-to/author-libraries/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/how-to/cache/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/how-to/develop/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/how-to/develop-using-vagrant/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/how-to/generate-production-build/index.html</loc>
     </url>    <url>
@@ -108,7 +106,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/how-to/upgrade-from-webpack-1/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/how-to/use-with-docker/index.html</loc>
+        <loc>https://webpack.js.org/how-to/develop/using-docker/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/how-to/use-with-third-party-tools/index.html</loc>
+        <loc>https://webpack.js.org/how-to/develop/using-third-party-tools/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to/develop/using-vagrant/index.html</loc>
     </url></urlset>
