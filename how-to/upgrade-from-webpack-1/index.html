@@ -10,7 +10,7 @@
     
   </head>
   <body>
-    <div id="site" class="site"><div class="navigation"><div class="container "><div class="navigation__inner"><button id="menu-btn" class="navigation__mobilebtn">Open navigation</button><a href="[object Object]" class="navigation__logo"><span class="logo logo--light"><span class="cube cube--light logo__cube" style="width:20px;margin-left:10px;padding-bottom:10px;"><figure class="cube__outer" style="width:20px;height:20px;transform:translateX(-50%)
+    <div id="site" class="site"><div class="navigation"><div class="container "><div class="navigation__inner"><button id="menu-btn" class="navigation__mobilebtn">Open navigation</button><a href="/" class="navigation__logo"><span class="logo logo--light"><span class="cube cube--light logo__cube" style="width:20px;margin-left:10px;padding-bottom:10px;"><figure class="cube__outer" style="width:20px;height:20px;transform:translateX(-50%)
               scale3d(1,1,1)
               rotateX(0deg)
               rotateY(0deg)
@@ -35,7 +35,7 @@
 <h3 class="header"><a class="anchor" href="#debug" id="debug"></a><span class="text"><code>debug</code></span><a class="icon-link" href="#debug"></a></h3>
 <p>The <code>debug</code> option switched loaders to debug mode in webpack 1. This need to be passed via loader options in long-term. See loader documentation for relevant options.</p>
 <p>The debug mode for loaders will be removed in webpack 3 or later.</p>
-<p>To keep compatiblity with old loaders, loaders can be switched to debug mode via plugin:</p>
+<p>To keep compatibility with old loaders, loaders can be switched to debug mode via plugin:</p>
 <pre><code class="lang-diff"><span class="token deleted" >- debug: true,</span>
   plugins: [
 <span class="token inserted" >+   new webpack.LoaderOptionsPlugin({</span>
@@ -56,7 +56,7 @@ This means if using SourceMaps for the minimized code you need to pass <code>sou
 <h3 class="header"><a class="anchor" href="#uglifyjsplugin-minimize-loaders" id="uglifyjsplugin-minimize-loaders"></a><span class="text"><code>UglifyJsPlugin</code> minimize loaders</span><a class="icon-link" href="#uglifyjsplugin-minimize-loaders"></a></h3>
 <p>The UglifyJsPlugin does not longer switch loaders into minimize mode. This need to be passed via loader options in long-term. See loader documentation for relevant options.</p>
 <p>The minimize mode for loaders will be removed in webpack 3 or later.</p>
-<p>To keep compatiblity with old loaders, loaders can be switched to minimize mode via plugin:</p>
+<p>To keep compatibility with old loaders, loaders can be switched to minimize mode via plugin:</p>
 <pre><code class="lang-diff">  plugins: [
 <span class="token inserted" >+   new webpack.LoaderOptionsPlugin({</span>
 <span class="token inserted" >+     minimize: true</span>
@@ -92,8 +92,8 @@ This means if using SourceMaps for the minimized code you need to pass <code>sou
 <h3 class="header"><a class="anchor" href="#require-ensure-and-amd-require-is-async" id="require-ensure-and-amd-require-is-async"></a><span class="text"><code>require.ensure</code> and AMD <code>require</code> is async</span><a class="icon-link" href="#require-ensure-and-amd-require-is-async"></a></h3>
 <p>These functions are now always async instead of calling their callback sync if the chunk is already loaded.</p>
 <h3 class="header"><a class="anchor" href="#module-loaders-is-now-module-rules" id="module-loaders-is-now-module-rules"></a><span class="text"><code>module.loaders</code> is now <code>module.rules</code></span><a class="icon-link" href="#module-loaders-is-now-module-rules"></a></h3>
-<p>The old loader configuration was superseeded by a more powerful rules system, which allows to configure loaders and more. </p>
-<p>For compatiblity reasons the old syntax is still valid and the old names are parsed.</p>
+<p>The old loader configuration was superseeded by a more powerful rules system, which allows to configure loaders and more.</p>
+<p>For compatibility reasons the old syntax is still valid and the old names are parsed.</p>
 <p>The new naming is easier to understand to there are good reasons to upgrade the configuration.</p>
 <pre><code class="lang-diff">  module: {
 <span class="token deleted" >-   loaders: [</span>
@@ -130,7 +130,7 @@ This means if using SourceMaps for the minimized code you need to pass <code>sou
 </code></pre>
 <h3 class="header"><a class="anchor" href="#loaderoptionplugin-context" id="loaderoptionplugin-context"></a><span class="text"><code>LoaderOptionPlugin</code> context</span><a class="icon-link" href="#loaderoptionplugin-context"></a></h3>
 <p>Some loaders need context information and read them from the configuration. This need to be passed via loader options in long-term. See loader documentation for relevant options.</p>
-<p>To keep compatiblity with old loaders, this information can be passed via plugin:</p>
+<p>To keep compatibility with old loaders, this information can be passed via plugin:</p>
 <pre><code class="lang-diff">  plugins: [
 <span class="token inserted" >+   new webpack.LoaderOptionsPlugin({</span>
 <span class="token inserted" >+     options: {</span>
@@ -139,7 +139,7 @@ This means if using SourceMaps for the minimized code you need to pass <code>sou
 <span class="token inserted" >+   })</span>
   ]
 </code></pre>
-</div><hr/><div class="contributors"><h4>Contributors</h4><div class="contributors__list"><a class="contributor" href="https://github.com/sokra"><img src="https://github.com/sokra.png?size=80"/><span>sokra</span></a></div></div></section></div><div class="container footer"><div class="footer__inner"><section class="footer__left"><a href="/get-started" class="footer__link">Get Started</a><a href="/analyze" class="footer__link">Analyze</a><a href="/contribute" class="footer__link">Contribute</a></section><section class="footer__middle"><a href="[object Object]"><span class="cube cube--dark " style="width:18px;margin-left:9px;padding-bottom:9px;"><figure class="cube__outer" style="width:18px;height:18px;transform:translateX(-50%)
+</div><hr/><div class="contributors"><h4>Contributors</h4><div class="contributors__list"><a class="contributor" href="https://github.com/sokra"><img src="https://github.com/sokra.png?size=80"/><span>sokra</span></a></div></div></section></div><div class="container footer"><div class="footer__inner"><section class="footer__left"><a href="/get-started" class="footer__link">Get Started</a><a href="/analyze" class="footer__link">Analyze</a><a href="/contribute" class="footer__link">Contribute</a></section><section class="footer__middle"><a href="/"><span class="cube cube--dark " style="width:18px;margin-left:9px;padding-bottom:9px;"><figure class="cube__outer" style="width:18px;height:18px;transform:translateX(-50%)
               scale3d(1,1,1)
               rotateX(0deg)
               rotateY(0deg)
@@ -147,10 +147,10 @@ This means if using SourceMaps for the minimized code you need to pass <code>sou
               scale3d(0.5,0.5,0.5)
               rotateX(0deg)
               rotateY(0deg)
-              rotateZ(0deg);"><section class="cube__face" style="transform:rotateX(0deg) translateZ(9px);"></section><section class="cube__face" style="transform:rotateX(-90deg) translateZ(9px);"></section><section class="cube__face" style="transform:rotateX(90deg) translateZ(9px);"></section><section class="cube__face" style="transform:rotateY(-90deg) translateZ(9px);"></section><section class="cube__face" style="transform:rotateY(90deg) translateZ(9px);"></section><section class="cube__face" style="transform:rotateY(180deg) translateZ(9px);"></section></figure></span></a></section><section class="footer__right"><a href="//gitter.im/webpack/webpack" class="footer__link">Support</a><a href="/changelog" class="footer__link">Changelog</a><a href="/license" class="footer__link">License</a></section></div></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
+              rotateZ(0deg);"><section class="cube__face" style="transform:rotateX(0deg) translateZ(9px);"></section><section class="cube__face" style="transform:rotateX(-90deg) translateZ(9px);"></section><section class="cube__face" style="transform:rotateX(90deg) translateZ(9px);"></section><section class="cube__face" style="transform:rotateY(-90deg) translateZ(9px);"></section><section class="cube__face" style="transform:rotateY(90deg) translateZ(9px);"></section><section class="cube__face" style="transform:rotateY(180deg) translateZ(9px);"></section></figure></span></a></section><section class="footer__right"><a href="//gitter.im/webpack/webpack" class="footer__link">Support</a><a href="https://github.com/webpack/webpack/releases" class="footer__link">Changelog</a><a href="/license" class="footer__link">License</a></section></div></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
 
     
-      <script src="/47bf5a55f54e4698b919549908ac5051.js" type="text/javascript"></script>
+      <script src="/fc5ba759da80ae747baa6b74f72b9afb.js" type="text/javascript"></script>
     
   </body>
 </html>
