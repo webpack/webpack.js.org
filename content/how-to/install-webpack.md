@@ -4,7 +4,7 @@ contributors:
   - pksjce
 ---
 
-### Pre-requistes
+### Pre-requisites
 
 We assume you have `node` and `npm` already installed.
 
