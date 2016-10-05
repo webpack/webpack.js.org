@@ -4,46 +4,54 @@ import { rhythm, scale } from 'utilities/typography';
 import { merge, media, presets, style } from 'glamor'
 import { sections, basepath } from 'utilities/pages'
 import Sticky from 'react-stickynode'
+import shallowCompare from 'react-addons-shallow-compare'
 
-const Sidebar = ({ pages, location, activeSection }) => {
-  return (
-    <nav
-      className="sidebar"
-      {...merge({
-        display: 'none',
-      },
-      media(presets.tablet, {
-        display: 'block',
-        flexBasis: '25%',
-        maxWidth: '25%',
-        flex: '1',
-        paddingRight: rhythm(1),
-        paddingTop: rhythm(1/4),
-      }))}
-    >
-      <Sticky
-        top={83}
+class Sidebar extends React.Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return shallowCompare(this, nextProps, nextState) &&
+      this.props.location.pathname !== nextProps.location.pathname
+  }
+  render() {
+    const { pages, location, activeSection } = this.props
+    return (
+      <nav
+        className="sidebar"
+        {...merge({
+          display: 'none',
+        },
+        media(presets.tablet, {
+          display: 'block',
+          flexBasis: '25%',
+          maxWidth: '25%',
+          flex: '1',
+          paddingRight: rhythm(1),
+          paddingTop: rhythm(1/4),
+        }))}
       >
-        <h3
-          {...merge({
-            marginBottom: rhythm(1/2),
-          })}
+        <Sticky
+          top={83}
         >
-          {activeSection.toUpperCase()}
-        </h3>
-        <Item url={ `/${activeSection}/` } title="Introduction" />
-        {
-          pages.map(({ node }, i) =>
-            <Item
-              key={ `sidebar-item-${i}` }
-              url={ node.path }
-              title={ node.frontmatter.title } />
-          )
-        }
-      </Sticky>
-    </nav>
-  )
-};
+          <h3
+            {...merge({
+              marginBottom: rhythm(1/2),
+            })}
+          >
+            {activeSection.toUpperCase()}
+          </h3>
+          <Item url={ `/${activeSection}/` } title="Introduction" />
+          {
+            pages.map(({ node }, i) =>
+              <Item
+                key={ `sidebar-item-${i}` }
+                url={ node.path }
+                title={ node.frontmatter.title } />
+            )
+          }
+        </Sticky>
+      </nav>
+    )
+  };
+}
 
 const Item = ({ url, title }) => (
   <div
