@@ -29,7 +29,7 @@ Choose a style of [source mapping](http://blog.teamtreehouse.com/introduction-so
 
  devtool                      | build | rebuild | production | quality                       
 ------------------------------|-------|---------|------------|--------------------------
-al                         | +++   | +++     | no         | generated code                
+ eval                         | +++   | +++     | no         | generated code                
  cheap-eval-source-map        | +     | ++      | no         | transformed code (lines only) 
  cheap-source-map             | +     | o       | yes        | transformed code (lines only) 
  cheap-module-eval-source-map | o     | ++      | no         | original source (lines only)  
