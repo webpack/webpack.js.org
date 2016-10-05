@@ -10,7 +10,7 @@ export default ({ home = '/', pages, onToggleNav }) => (
         <button id="menu-btn" className="navigation__mobilebtn" onClick={onToggleNav}>
           Open navigation
         </button>
-        <Link className="navigation__logo" to={{ pathname: home }}>
+        <Link className="navigation__logo" to="/">
           <Logo theme="light" />
         </Link>
 

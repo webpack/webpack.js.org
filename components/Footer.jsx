@@ -14,14 +14,14 @@ export default (props) => {
         </section>
 
         <section className="footer__middle">
-          <Link to={{ pathname: '/' }}>
+          <Link to="/">
             <Cube depth={ 18 } hover />
           </Link>
         </section>
 
         <section className="footer__right">
           <Link className="footer__link" to="//gitter.im/webpack/webpack">Support</Link>
-          <Link className="footer__link" to="/changelog">Changelog</Link>
+          <Link className="footer__link" to="https://github.com/webpack/webpack/releases">Changelog</Link>
           <Link className="footer__link" to="/license">License</Link>
         </section>
       </div>

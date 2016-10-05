@@ -32,7 +32,7 @@ The `debug` option switched loaders to debug mode in webpack 1. This need to be 
 
 The debug mode for loaders will be removed in webpack 3 or later.
 
-To keep compatiblity with old loaders, loaders can be switched to debug mode via plugin:
+To keep compatibility with old loaders, loaders can be switched to debug mode via plugin:
 
 ``` diff
 - debug: true,
@@ -63,7 +63,7 @@ The UglifyJsPlugin does not longer switch loaders into minimize mode. This need 
 
 The minimize mode for loaders will be removed in webpack 3 or later.
 
-To keep compatiblity with old loaders, loaders can be switched to minimize mode via plugin:
+To keep compatibility with old loaders, loaders can be switched to minimize mode via plugin:
 
 ``` diff
   plugins: [
@@ -123,9 +123,9 @@ These functions are now always async instead of calling their callback sync if t
 
 ### `module.loaders` is now `module.rules`
 
-The old loader configuration was superseeded by a more powerful rules system, which allows to configure loaders and more. 
+The old loader configuration was superseeded by a more powerful rules system, which allows to configure loaders and more.
 
-For compatiblity reasons the old syntax is still valid and the old names are parsed.
+For compatibility reasons the old syntax is still valid and the old names are parsed.
 
 The new naming is easier to understand to there are good reasons to upgrade the configuration.
 
@@ -171,7 +171,7 @@ The new naming is easier to understand to there are good reasons to upgrade the 
 
 Some loaders need context information and read them from the configuration. This need to be passed via loader options in long-term. See loader documentation for relevant options.
 
-To keep compatiblity with old loaders, this information can be passed via plugin:
+To keep compatibility with old loaders, this information can be passed via plugin:
 
 ``` diff
   plugins: [
