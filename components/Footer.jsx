@@ -14,7 +14,7 @@ export default (props) => {
         </section>
 
         <section className="footer__middle">
-          <Link to={{ pathname: '/' }}>
+          <Link to="/">
             <Cube depth={ 18 } hover />
           </Link>
         </section>
