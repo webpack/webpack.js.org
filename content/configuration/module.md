@@ -95,14 +95,14 @@ A [`Condtion`](#condition) matched with the issuer. See details in [`Rule` condi
 
 `Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.options`](#useentry-options) for details.
 
-`Rule.query` only exists for compatiblity reasons. Use `Rule.options` instead.
+`Rule.query` only exists for compatibility reasons. Use `Rule.options` instead.
 
 
 ### `Rule.loaders`
 
 `Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#rule-use) for details.
 
-It exists for compatiblity reasons. Use `Rule.use` instead.
+It exists for compatibility reasons. Use `Rule.use` instead.
 
 
 ### `Rule.use`
