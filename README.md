@@ -21,7 +21,6 @@ Fully completed can be removed from this list. If there's a topic you would like
 ### Root Level
 
 - Analyze - ![](https://img.shields.io/badge/progress-0%25-yellowgreen.svg)
-- Changelog - ![](https://img.shields.io/badge/progress-0%25-yellowgreen.svg)
 - Contribute - ![](https://img.shields.io/badge/progress-10%25-yellowgreen.svg)
 - Get Started - ![](https://img.shields.io/badge/progress-10%25-yellowgreen.svg) - [#15](https://github.com/webpack/webpack.js.org/issues/15)
 - Writer's Guide - ![](https://img.shields.io/badge/progress-50%25-yellowgreen.svg)

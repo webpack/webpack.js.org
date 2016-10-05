@@ -21,7 +21,7 @@ export default (props) => {
 
         <section className="footer__right">
           <Link className="footer__link" to="//gitter.im/webpack/webpack">Support</Link>
-          <Link className="footer__link" to="/changelog">Changelog</Link>
+          <Link className="footer__link" to="https://github.com/webpack/webpack/releases">Changelog</Link>
           <Link className="footer__link" to="/license">License</Link>
         </section>
       </div>
