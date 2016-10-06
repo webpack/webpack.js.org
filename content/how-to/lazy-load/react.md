@@ -4,7 +4,7 @@ contributors:
   - iammerrick
 ---
 
-A component can lazily load dependencies without it's consumer knowing using higher order functions, or a consumer can lazily load it's children without its children knowing using a component that takes a function and collection of modules, or some combination of both.
+A component can lazily load dependencies without its consumer knowing using higher order functions, or a consumer can lazily load its children without its children knowing using a component that takes a function and collection of modules, or some combination of both.
 
 ## LazilyLoad Component
 
