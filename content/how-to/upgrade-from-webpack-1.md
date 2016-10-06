@@ -183,12 +183,19 @@ To keep compatiblity with old loaders, this information can be passed via plugin
   ]
 ```
 
-
 #### Code Splitting with ES6
+
+In webpack v1, you could use `require.ensure` as a method to lazily-load chunks for your application: 
+
+```javascript
+require.ensure([], function(require) {
+  var foo = require("./module");
+});
+```
 
 The ES6 Loader spec defines `System.import` as method to load ES6 Modules dynamically on runtime.
 
-Webpack threads `System.import` as splitpoint and puts the requested module in a separate chunk.
+webpack threads `System.import` as a split-point and puts the requested module in a separate chunk.
 
 `System.import` takes the module name as argument and returns a Promise.
 
