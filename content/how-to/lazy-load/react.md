@@ -4,7 +4,7 @@ contributors:
   - iammerrick
 ---
 
-By using the [bundle-loader](https://github.com/webpack/bundle-loader) we are able to create a React component that allows us to declaratively split & load code in semantic bundles. We can also provide a higher order component function that will allow a component to specify its own dependencies. This allows consumers and authors of components to decide what is lazily loaded. A component can lazily load dependencies without it's consumer knowing, and a consumer can lazily load it's children without its children knowing, or some combination of both. By using the bundle loader we can semantically name chunks to intelligently load groups of code.
+A component can lazily load dependencies without it's consumer knowing using higher order functions, or a consumer can lazily load it's children without its children knowing using a component that takes a function and collection of modules, or some combination of both.
 
 ## LazilyLoad Component
 
@@ -12,11 +12,11 @@ Lets have a look at a consumer choosing to lazily load some components. The `imp
 
 ```jsx
 <LazilyLoad modules={{
-  TodoHandler: importLazy(require('bundle?lazy&name=todo!./components/TodoHandler')),
-  TodoMenuHandler: importLazy(require('bundle?lazy&name=todo!./components/TodoMenuHandler')),
-  TodoMenu: importLazy(require('bundle?lazy&name=todo!./components/TodoMenu')),
+  TodoHandler: () => importLazy(System.import('./components/TodoHandler')),
+  TodoMenuHandler: () => importLazy(System.import('./components/TodoMenuHandler')),
+  TodoMenu: () => importLazy(System.import('./components/TodoMenu')),
 }}>
-{({TodoDetailsHandler, TodoMenuHandler}) => (
+{({TodoHandler, TodoMenuHandler, TodoMenu}) => (
   <TodoHandler>
     <TodoMenuHandler>
       <TodoMenu />
@@ -53,12 +53,11 @@ class Highlight extends React.Component {
   }
 }
 export LazilyLoadFactory(Highlight, {
-  highlight: require('bundle?lazy!highlight'),
+  highlight: () => System.import('highlight'),
 });
 ```
 
-Notice how the consumer of Highlight component had no idea it had a dependency that was lazily loaded? Or that if a user had todos with no code we would never need to load highlight.js? Also, we didn't need to specify a name for the highlight.js library because we don't care if webpack gives it a bundle.
-
+Notice how the consumer of Highlight component had no idea it had a dependency that was lazily loaded? Or that if a user had todos with no code we would never need to load highlight.js? 
 
 
 ## The Code
@@ -67,10 +66,6 @@ Source code of the LazilyLoad component module which exports both the Component 
 
 ```jsx
 import React from 'react';
-
-const toPromise = (load) => (new Promise((resolve) => (
-  load(resolve)
-)));
 
 class LazilyLoad extends React.Component {
 
@@ -106,7 +101,7 @@ class LazilyLoad extends React.Component {
     const { modules } = props;
     const keys = Object.keys(modules);
 
-    Promise.all(keys.map((key) => toPromise(modules[key])))
+    Promise.all(keys.map((key) => modules[key]()))
       .then((values) => (keys.reduce((agg, key, index) => {
         agg[key] = values[index];
         return agg;
@@ -135,14 +130,22 @@ export const LazilyLoadFactory = (Component, modules) => {
   );
 };
 
-export const importLazy = (fetch) => (cb) => (
-   fetch((mod) => cb(mod.default))
+export const importLazy = (promise) => (
+  promise.then((result) => result.default)
 );
 
 export default LazilyLoad;
 ```
+## Tips
+
+- By using the bundle loader we can semantically name chunks to intelligently load groups of code.
+- Make sure if you are using the babel-preset-2015, to turn modules to false, this will allow webpack to handle modules.
 
 ## Dependencies
 
 - ES2015 + JSX
-- [bundle-loader](https://github.com/webpack/bundle-loader)
+
+## References
+
+- [Function as Child Components](http://merrickchristensen.com/articles/function-as-child-components.html)
+- [Example Repository](https://github.com/iammerrick/how-to-lazy-load-react-webpack)
