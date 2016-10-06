@@ -209,11 +209,11 @@ function onClick() {
 }
 ```
 
-Good news: Failure to load a chunk can be handled now because they are Promise based.
+Good news: Failure to load a chunk can be handled now because they are `Promise` based.
 
 #### Dynamic expressions
 
-It's possible to pass an partial expression to `System.import`. This is handled similar to expressions in CommonJS (webpack creates a context with all possible files).
+It's possible to pass an partial expression to `System.import`. This is handled similar to expressions in CommonJS (webpack creates a [context](https://webpack.github.io/docs/context.html) with all possible files).
 
 `System.import` creates a separate chunk for each possible module.
 
@@ -247,7 +247,7 @@ typeof fs.readFileSync === "function";
 typeof readFileSync === "function";
 ```
 
-It is important to note that you will want to tell babel to not parse these module symbols so webpack can use them. You can do this by setting the following in your .babelrc or babel-loader options. 
+It is important to note that you will want to tell Babel to not parse these module symbols so webpack can use them. You can do this by setting the following in your .babelrc or babel-loader options. 
 
 **.babelrc**
 
