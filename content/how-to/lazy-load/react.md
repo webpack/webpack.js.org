@@ -8,7 +8,7 @@ A component can lazily load dependencies without it's consumer knowing using hig
 
 ## LazilyLoad Component
 
-Lets have a look at a consumer choosing to lazily load some components. The `importLazy` is simply a function that returns the `default` property, this is for Babel/ES2015 interoperability. If you don't need that you can omit the `importLazy` helper.
+Lets have a look at a consumer choosing to lazily load some components. The `importLazy` is simply a function that returns the `default` property, this is for Babel/ES2015 interoperability. If you don't need that you can omit the `importLazy` helper. The `importLazy` function simply returns whatever was exported as `export default` in the target module.
 
 ```jsx
 <LazilyLoad modules={{
@@ -138,7 +138,7 @@ export default LazilyLoad;
 ```
 ## Tips
 
-- By using the bundle loader we can semantically name chunks to intelligently load groups of code.
+- By using the [bundle loader](https://github.com/webpack/bundle-loader) we can semantically name chunks to intelligently load groups of code.
 - Make sure if you are using the babel-preset-2015, to turn modules to false, this will allow webpack to handle modules.
 
 ## Dependencies
@@ -147,5 +147,8 @@ export default LazilyLoad;
 
 ## References
 
+- [Higher Order Components](http://reactpatterns.com/#Higher-order component)
+- [react-modules](https://github.com/threepointone/react-modules)
 - [Function as Child Components](http://merrickchristensen.com/articles/function-as-child-components.html)
 - [Example Repository](https://github.com/iammerrick/how-to-lazy-load-react-webpack)
+- [Bundle Loader](https://github.com/webpack/bundle-loader)
