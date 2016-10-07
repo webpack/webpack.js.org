@@ -185,7 +185,7 @@ To keep compatibility with old loaders, this information can be passed via plugi
 
 #### Code Splitting with ES6
 
-In webpack v1, you could use `require.ensure` as a method to lazily-load chunks for your application: 
+In webpack v1, you could use `require.ensure` as a method to lazily-load chunks for your application:
 
 ```javascript
 require.ensure([], function(require) {
@@ -247,7 +247,7 @@ typeof fs.readFileSync === "function";
 typeof readFileSync === "function";
 ```
 
-It is important to note that you will want to tell Babel to not parse these module symbols so webpack can use them. You can do this by setting the following in your .babelrc or babel-loader options. 
+It is important to note that you will want to tell Babel to not parse these module symbols so webpack can use them. You can do this by setting the following in your `.babelrc` or babel-loader options.
 
 **.babelrc**
 
