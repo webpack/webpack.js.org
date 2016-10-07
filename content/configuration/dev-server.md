@@ -10,13 +10,13 @@ contributors:
 
 This page describes the options that effect the behavior of webpack-dev-server (short: dev-server).
 
-T> Options that are compatible with [webpack-dev-middleware]() have 🔑 next to them.
+T> Options that are compatible with [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) have 🔑 next to them.
 
-### `devServer` 
+### `devServer`
 
 `object`
 
-This set of options is picked up by [webpack-dev-server]() and can be used to change it's behavior in various ways. Here's a simple example that gzips and serves everything from our `dist/` directory:
+This set of options is picked up by [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and can be used to change it's behavior in various ways. Here's a simple example that gzips and serves everything from our `dist/` directory:
 
 ```js
 devServer: {
