@@ -83,6 +83,7 @@
     "preact-compat": "^3.6.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
+    "react-highlight": "^0.9.0",
     "react-router": "^2.8.1"
   }
 }
