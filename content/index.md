@@ -20,7 +20,7 @@ module.exports = {
 
 **webpack.config.js**
 
-```javascript
+```js
 module.exports = {
   entry: './index.js',
   output: {
@@ -29,4 +29,18 @@ module.exports = {
 }
 ```
 
-## It's really that simple, [get started](/get-started) now!
+**page.html**
+
+```html
+<html>
+  <head>
+    ...
+  </head>
+  <body>
+    ...
+    <script src="/bundle.js"></script>
+  </body>
+</html>
+```
+
+## It's really that simple. [Get started](/get-started) now!
