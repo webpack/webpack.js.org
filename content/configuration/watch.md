@@ -3,9 +3,10 @@ title: Watch and WatchOptions
 contributors:
   - sokra
   - gregvenech
+  - SpaceK33z
 ---
 
-?> Description...
+Webpack can watch files and recompile whenever they change. This page explains how to enable this and a couple of tweaks you can make if watching does not properly for you.
 
 ### `watch`
 
@@ -17,6 +18,7 @@ Turn on watch mode. This means that after the initial build, webpack will contin
 watch: false
 ```
 
+T> In webpack-dev-server and webpack-dev-middleware watch mode is enabled by default.
 
 ### `watchOptions`
 
@@ -51,4 +53,21 @@ Turn on [polling](http://whatis.techtarget.com/definition/polling) by passing `t
 
 ```js
 poll: 1000 // Check for changes every second
+```
+
+T> If watching does not work for you, try out this option. Watching does not work with NFS and machines in VirtualBox.
+
+
+### `watchOptions.ignored`
+
+For some systems, watching many file systems can result in a lot of CPU or memory usage. It is possible to exclude a huge folder like `node_modules`:
+
+```js
+ignored: /node_modules/
+```
+
+It is also possible to use [anymatch](https://github.com/es128/anymatch) patterns:
+
+```js
+ignored: "files/**/*.js"
 ```
