@@ -1,5 +1,3 @@
-## Who said front-end code can't be modular?
-
 **index.js**
 
 ```js
@@ -18,14 +16,17 @@ module.exports = {
 }
 ```
 
-## Bundle your modules with webpack.
+## Bundle your [modules](/concepts/modules) with webpack.
 
 **webpack.config.js**
 
 ```javascript
   module.exports = {
-    entry: './index.js'
+    entry: './index.js',
+    output: {
+      path: 'bundle.js'
+    }
   };
 ```
 
-## It's really that simple.
+## It's really that simple, [get started](/get-started) now!
