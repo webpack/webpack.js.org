@@ -21,12 +21,12 @@ module.exports = {
 **webpack.config.js**
 
 ```javascript
-  module.exports = {
-    entry: './index.js',
-    output: {
-      path: 'bundle.js'
-    }
-  };
+module.exports = {
+  entry: './index.js',
+  output: {
+    path: 'bundle.js'
+  }
+}
 ```
 
 ## It's really that simple, [get started](/get-started) now!
