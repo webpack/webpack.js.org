@@ -135,7 +135,7 @@ A sample output of webpack-manifest-plugin for our config looks like:
 }
 ```
 
-The rest depends on your server setup. There is a nice [walk through for Rails-based projects](http://clarkdave.net/2015/01/how-to-use-webpack-with-rails/#including-precompiled-assets-in-views). Or, if your application doesn’t rely on any server-side rendering, it’s often enough to generate a single `index.html` file for your application. To do so, just use these 2 amazing plugins:
+The rest depends on your server setup. There is a nice [walk through for Rails-based projects](http://clarkdave.net/2015/01/how-to-use-webpack-with-rails/#including-precompiled-assets-in-views). For serverside rendering in node you can use [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools). Or, if your application doesn’t rely on any server-side rendering, it’s often enough to generate a single `index.html` file for your application. To do so, just use these 2 amazing plugins:
 
 * https://github.com/ampedandwired/html-webpack-plugin
 * https://github.com/szrenwei/inline-manifest-webpack-plugin
