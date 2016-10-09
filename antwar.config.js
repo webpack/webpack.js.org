@@ -31,7 +31,7 @@ module.exports = {
     prevnextPlugin()
   ],
   layout: function() {
-    return require('./components/Site.jsx').default
+    return require('./components/site/site.jsx').default
   },
   paths: {
     '/': root(
@@ -95,7 +95,7 @@ function root(contentCb) {
     processPage: processPage(), // Process individual page (url, content)
     layouts: { // Layouts (page/section)
       page: function() {
-        return require('./components/Splash.jsx').default
+        return require('./components/splash/splash.jsx').default
       }
     },
     redirects: {} // Redirects <from>: <to>
@@ -114,10 +114,10 @@ function section(title, contentCb) {
     processPage: processPage(),
     layouts: {
       index: function() {
-        return require('./components/Page.jsx').default
+        return require('./components/page/page.jsx').default
       },
       page: function() {
-        return require('./components/Page.jsx').default
+        return require('./components/page/page.jsx').default
       }
     },
     redirects: {} // <from>: <to>
