@@ -1,5 +1,6 @@
 import React from 'react';
-import Link from './Link';
+import Link from '../link/link';
+import './sidecar-style';
 
 export default props => {
   return (

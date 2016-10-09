@@ -1,8 +1,9 @@
 import React from 'react';
 import { GoogleAnalytics } from 'antwar-helpers';
-import Navigation from './Navigation';
-import Sidecar from './Sidecar';
-import Footer from './Footer';
+import Navigation from '../navigation/navigation';
+import Sidecar from '../sidecar/sidecar';
+import Footer from '../footer/footer';
+import './site-style';
 
 const pages = [
   { title: 'Concepts', url: 'concepts' },

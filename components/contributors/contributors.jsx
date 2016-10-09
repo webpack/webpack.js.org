@@ -1,4 +1,5 @@
 import React from 'react';
+import './contributors-style';
 
 export default ({contributors}) => {
   return (

@@ -1,7 +1,8 @@
 import React from 'react';
-import Link from './Link';
-import Cube from './Cube';
-import Container from './Container';
+import Link from '../link/link';
+import Cube from '../cube/cube';
+import Container from '../container/container';
+import './footer-style';
 
 export default (props) => {
   return (

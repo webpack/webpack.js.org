@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
+import './cube-style';
 
-export default class Cube extends Component {
+export default class Cube extends React.Component {
   constructor(props) {
     super(props);
 
