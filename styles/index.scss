@@ -1,17 +1,19 @@
 /**
  * Styling
  *
- * This file contains the main styling for the site.
- * Markdown styling is based on https://gist.github.com/tuzz/3331384.
- * Component stylesheets are imported last so as to override anything specified here.
+ * This file contains the base styling for the site.
  *
  */
-@import "functions";
-@import "vars";
-@import "mixins";
+
+@import 'vars';
+@import 'functions';
+
 @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono);
 @import url(https://fonts.googleapis.com/css?family=Averia+Sans+Libre:300);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,600,700,400italic);
+
+@import './reset';
+@import './icons';
 
 * {
   box-sizing: inherit;
@@ -44,6 +46,4 @@ a {
   }
 }
 
-@import "markdown";
-@import "~prismjs/themes/prism-funky";
-@import "styles";
+@import './markdown';
