@@ -5,8 +5,8 @@ import Container from './Container';
 
 export default (props) => {
   return (
-    <Container className="footer">
-      <div className="footer__inner">
+    <div className="footer">
+      <Container className="footer__inner">
         <section className="footer__left">
           <Link className="footer__link" to="/get-started">Get Started</Link>
           <Link className="footer__link" to="/analyze">Analyze</Link>
@@ -24,7 +24,7 @@ export default (props) => {
           <Link className="footer__link" to="https://github.com/webpack/webpack/releases">Changelog</Link>
           <Link className="footer__link" to="/license">License</Link>
         </section>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 };

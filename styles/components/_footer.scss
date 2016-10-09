@@ -1,8 +1,7 @@
 .footer {
-  //width: 100%;
-  //max-width: map-get($screens, large);
-  //margin: auto;
+  width: 100%;
   flex: 0 0 auto;
+  background: map-get($colors, alto);
 }
 
 .footer__inner {
@@ -10,9 +9,8 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: center;
-
-  padding: 0.3em 1.5em;
-  background: map-get($colors, alto);
+  padding-top: 0.3em;
+  padding-bottom: 0.35em;
 
   @include break {
     flex-direction: initial;
@@ -22,7 +20,6 @@
 .footer__left,
 .footer__right {
   flex: 0 0 auto;
-
   display: flex;
   margin: auto;
 
@@ -31,12 +28,23 @@
   }
 }
 
+.footer__left {
+  @include break {
+    padding-left:1.5em;
+  }
+}
+
+.footer__right {
+  @include break {
+    padding-right:1.5em;
+  }
+}
+
 .footer__middle {
   display: none;
 
   @include break {
     flex: 0 0 auto;
-
     display: block;
 
     .cube {
@@ -46,16 +54,15 @@
 }
 
 .footer__link {
-  transition: color 250ms;
-
-  padding: 1em;
+  padding: 1em 0;
   font-size: getFontSize(-2);
   text-decoration: none;
   text-transform: uppercase;
   color: map-get($colors, dusty-grey);
+  transition: color 250ms;
 
-  &:last-child {
-    margin-right: 0;
+  &:not(:last-child) {
+    margin-right: 1.5em;
   }
 
   &:hover {
