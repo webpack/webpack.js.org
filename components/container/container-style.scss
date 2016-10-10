@@ -5,8 +5,4 @@
   width: 100%;
   max-width: map-get($screens, large);
   margin: 0 auto;
-
-  @include break(large) {
-    padding-right: 40px;
-  }
 }
