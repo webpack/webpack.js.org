@@ -17,9 +17,7 @@
 
   @media (min-width: map-get($screens, medium)) {
     flex: 3;
-
     padding: 1.5em;
-    background: map-get($colors, white);
   }
 }
 
