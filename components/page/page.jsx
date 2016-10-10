@@ -1,8 +1,9 @@
 import React from 'react';
 import Interactive from 'antwar-interactive';
-import Container from './Container';
-import Sidebar from './Sidebar';
-import Contributors from './Contributors';
+import Container from '../container/container';
+import Sidebar from '../sidebar/sidebar';
+import Contributors from '../contributors/contributors';
+import './page-style';
 
 export default ({ section, page }) => {
   let edit = `https://github.com/webpack/webpack.js.org/edit/master/content/${page.url}.md`;
@@ -10,7 +11,7 @@ export default ({ section, page }) => {
   return (
     <Container className="page">
       <Interactive
-        id="components/Sidebar.jsx"
+        id="components/sidebar/sidebar.jsx"
         component={Sidebar}
         sectionName={section.name}
         pages={section.pages().map(page => ({

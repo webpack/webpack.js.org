@@ -1,3 +1,9 @@
+// Markdown styling is based on https://gist.github.com/tuzz/3331384.
+
+@import 'vars';
+@import 'functions';
+@import '~prismjs/themes/prism-funky';
+
 .page__content,
 .splash__content {
   h1 { font-size: getFontSize(4); }

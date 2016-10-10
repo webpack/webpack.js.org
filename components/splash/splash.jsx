@@ -1,7 +1,8 @@
 import React from 'react';
-import Container from './Container';
-import Cube from './Cube';
-import Link from './Link';
+import Container from '../container/container';
+import Cube from '../cube/cube';
+import Link from '../link/link';
+import './splash-style';
 
 export default props => {
   let { page } = props;

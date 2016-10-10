@@ -1,7 +1,8 @@
 import React from 'react';
-import Link from './Link';
-import Container from './Container';
-import Logo from './Logo';
+import Link from '../link/link';
+import Container from '../container/container';
+import Logo from '../logo/logo';
+import './navigation-style';
 
 export default ({ home = '/', pages, onToggleNav }) => (
   <div className="navigation">

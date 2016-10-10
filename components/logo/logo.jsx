@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import Cube from './Cube';
+import React from 'react';
+import Cube from '../cube/cube';
+import './logo-style';
 
-export default class Logo extends Component {
+export default class Logo extends React.Component {
   constructor(props) {
     super(props);
 

@@ -1,14 +1,5 @@
-.site {
-  display: flex;
-  flex-direction: column;
-
-  min-height: 100vh;
-  overflow: hidden;
-
-  &.nav-displayed {
-    height: 100vh;
-  }
-}
+@import 'vars';
+@import 'mixins';
 
 .container {
   width: 100%;

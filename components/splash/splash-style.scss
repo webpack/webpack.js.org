@@ -1,4 +1,4 @@
-// NOTE: This styling is somewhat temporary
+@import 'vars';
 
 .splash {
   &__viz {
@@ -26,14 +26,14 @@
   }
 
   &__modules {
-    background-image:url(../images/modules.png);
+    background-image:url(./modules.png);
     background-repeat:no-repeat;
     background-position:-20px center;
     background-size:90% auto;
   }
 
   &__output {
-    background-image:url(../images/output.png);
+    background-image:url(./output.png);
     background-repeat:no-repeat;
     background-position:-10px 48%;
   }

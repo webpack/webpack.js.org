@@ -1,3 +1,7 @@
+@import 'vars';
+@import 'mixins';
+@import 'functions';
+
 .footer {
   width: 100%;
   flex: 0 0 auto;
@@ -10,7 +14,7 @@
   justify-content: space-between;
   align-content: center;
   padding-top: 0.3em;
-  padding-bottom: 0.35em;
+  padding-bottom: 0.3em;
 
   @include break {
     flex-direction: initial;
