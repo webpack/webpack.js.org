@@ -64,7 +64,7 @@
   <span class="token punctuation" >}</span>
 <span class="token punctuation" >}</span><span class="token punctuation" >;</span>
 </code></pre>
-<p><strong>What does this do?</strong> At face value this tells webpack to create dependency graphs starting at both <code>app.js</code> and <code>vendors.js</code>. These graphs are completely separate and independant of eachother. (AKA there will be a webpack bootstrap in each bundle). This is commonly seen with single page applications which have only one entry point (excluding vendors).</p>
+<p><strong>What does this do?</strong> At face value this tells webpack to create dependency graphs starting at both <code>app.js</code> and <code>vendors.js</code>. These graphs are completely separate and independent of each other (there will be a webpack bootstrap in each bundle). This is commonly seen with single page applications which have only one entry point (excluding vendors).</p>
 <p><strong>Why?</strong> This setup allows you to leverage <a href="../../api/plugins/commonschunkplugin"><code>CommonsChunkPlugin</code></a> and extract any vendor references from your app bundle into your vendor bundle, replacing them with <code>__webpack_require__()</code> calls. If there is no vendor code in your application bundle, then you can achieve a common pattern in webpack known as <a href="../../how-to/cache">long-term vendor-caching.</a>.</p>
 <h4 class="header"><a class="anchor" href="#multi-page-application" id="multi-page-application"></a><span class="text">Multi Page Application</span><a class="icon-link" href="#multi-page-application"></a></h4>
 <p><strong>webpack.config.js</strong></p>
@@ -80,7 +80,7 @@
 <span class="token punctuation" >}</span><span class="token punctuation" >;</span>
 </code></pre>
 <p><strong>What does this do?</strong> We are telling webpack that we would like 4 separate dependency graphs (like the above example).</p>
-<p><strong>Why?</strong> In a multi-page application, the server is going to fetch a new html document for you, and the page reloads this new document and assets are redownloaded. However this gives us the unique opportunity to do multiple things:</p>
+<p><strong>Why?</strong> In a multi-page application, the server is going to fetch a new HTML document for you. The page reloads this new document and assets are redownloaded. However, this gives us the unique opportunity to do multiple things:</p>
 <ul>
 <li><p>Use <a href="../../api/plugins/commonschunkplugin"><code>CommonsChunkPlugin</code></a> to create bundles of shared application code between each page. Multi-page applications that reuse a lot of code/modules between entry points can greatly benefit from these techniques, as the amount of entry points increase.</p>
 </li>
