@@ -10,7 +10,7 @@ As part of your webpack learning journey, we wrote this document aimed to give y
 
 ## Entry
 
-In the [previous article](./index), we mentioned that webpack creates a graph of all of your application's dependencies. The starting point of this graph is known as an _entry point_. The _Entry point_ tells webpack _where to start_ and follows the graph of dependendencies to know _what to bundle_. You can think of your applications _entry point_ as the **contextual root** or **the first file to kick off your app**.
+webpack creates a graph of all of your application's dependencies. The starting point of this graph is known as an _entry point_. The _Entry point_ tells webpack _where to start_ and follows the graph of dependendencies to know _what to bundle_. You can think of your applications _entry point_ as the **contextual root** or **the first file to kick off your app**.
 
 In webpack we define _entry points_ using the `entry` property in our [webpack configuration object](./configuration).
 
