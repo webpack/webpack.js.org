@@ -54,9 +54,9 @@ Usage: `entry: {[entryChunkName: string]: string|Array<string>}`
   };
 ```
 
-The object syntax is a more verbose, however scalable way of defining entry/entries in your application.
+The object syntax is more verbose. However, this is the most scalable way of defining entry/entries in your application.
 
-T> **"scalable webpack configurations"** are ones that can be reused and combined with other partial configurations. This is a popular technique used to separate concerns by environment, build target, and runtime. They are then merged together using specialized tools like [webpack-merge](https://github.com/survivejs/webpack-merge).
+T> **"Scalable webpack configurations"** are ones that can be reused and combined with other partial configurations. This is a popular technique used to separate concerns by environment, build target and runtime. They are then merged together using specialized tools like [webpack-merge](https://github.com/survivejs/webpack-merge).
 
 ## Scenarios
 
@@ -105,6 +105,3 @@ const config = {
 - Use [`CommonsChunkPlugin`](../../api/plugins/commonschunkplugin) to create bundles of shared application code between each page. Multi-page applications that reuse a lot of code/modules between entry points can greatly benefit from these techniques, as the amount of entry points increase.
 
 - Set up [long-term vendor-caching.](../../how-to/cache) with the same plugin and techniques seen in the first example.
-
-
-
