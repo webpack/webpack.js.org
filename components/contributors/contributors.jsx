@@ -4,15 +4,14 @@ import './contributors-style';
 export default ({contributors}) => {
   return (
     <div className="contributors">
-      <h4>Contributors</h4>
+      <h3>Contributors:</h3>
       <div className="contributors__list">
         { 
           (contributors || []).map((contributor) => (
             <a key={ contributor } 
               className="contributor"
               href={ `https://github.com/${contributor}` }>
-              <img src={ `https://github.com/${contributor}.png?size=80` } />
-              <span>{ contributor }</span>
+              <img src={ `https://github.com/${contributor}.png?size=50` } />
             </a>
           ))
         }
