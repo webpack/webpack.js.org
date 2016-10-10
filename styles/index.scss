@@ -23,7 +23,6 @@ html {
 body {
   font: 300 getFontSize(0) 'Cabin', 'Century Gothic', sans-serif;
   color: map-get($colors, emperor);
-  background: map-get($colors, concrete);
 }
 
 a {
