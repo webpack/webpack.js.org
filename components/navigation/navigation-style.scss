@@ -2,9 +2,8 @@
 @import 'mixins';
 @import 'functions';
 
-.navigation {
+.headroom {
   flex: 0 0 auto;
-
   transition: background 250ms;
   background: map-get($colors, mine-shaft);
 }
