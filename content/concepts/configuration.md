@@ -6,7 +6,7 @@ You may have noticed that few webpack configurations look exactly alike. This is
 
 The following examples below describe how webpacks configuration object can be both expressive and configurable because _it is code_:
 
-## The simplest of examples
+## The Simplest Configuration
 
 **webpack.config.js**
 
@@ -18,10 +18,9 @@ module.exports = {
     filename: 'foo.bundle.js'
   }
 };
-
 ```
 
-## Generating multiple targets and configs and exporting the entire array
+## Multiple Targets
 
 **webpack.config.js**
 
@@ -68,7 +67,9 @@ module.exports = targets;
 
 T> The most important part to take away from this document is that there are many different ways to format and style your webpack configuation. The key is to stick with something consistent that you and your team can understand and maintain.
 
-## Using TypeScript to create a class which the angular-cli uses to [generate configs](https://github.com/angular/angular-cli/blob/master/addon/ng2/models/webpack-config.ts)
+## Using TypeScript
+
+In the example below we use TypeScript to create a class which the angular-cli uses to [generate configs](https://github.com/angular/angular-cli/blob/master/addon/ng2/models/webpack-config.ts).
 
 **webpack.config.ts**
 
@@ -129,7 +130,9 @@ export class NgCliWebpackConfig {
 }
 ```
 
-## Using JSX (React JS Markup) and Babel to create a JSON Configuration that webpack can understand. (Courtesy of [Jason Miller](https://twitter.com/_developit))
+## Using JSX
+
+In the example below JSX (React JS Markup) and Babel to create a JSON Configuration that webpack can understand. (Courtesy of [Jason Miller](https://twitter.com/_developit))
 
 ```javascript
 import h from 'jsxobj';
