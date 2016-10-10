@@ -16,7 +16,7 @@
 .page__content {
   overflow-x: hidden;
   width: 100%;
-  padding: 0.5em;
+  padding: 1.5em 1em;
 
   @media (min-width: map-get($screens, medium)) {
     flex: 3;
