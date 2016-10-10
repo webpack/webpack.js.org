@@ -1,14 +1,14 @@
 @import 'vars';
 
-@import url(https://fonts.googleapis.com/css?family=Averia+Sans+Libre:300);
-
 .logo {
   position:relative;
   display:inline-block;
 
   &__text {
     font-size:1.3em;
-    font-family:'Averia Sans Libre';
+    font-family:'Geomanist', 'Century Gothic', sans-serif;
+    font-weight:500;
+    letter-spacing:1px;
     margin-left:1.75em;
     line-height:1.4;
     transition:color 250ms;
@@ -30,11 +30,11 @@
 
   &--light {
     .logo__text { 
-      color:map-get($colors, concrete); 
+      color:map-get($colors, alto); 
     }
 
     &:hover .logo__text {
-      color:map-get($colors, parchment);
+      color:map-get($colors, white);
     }
   }
 }
