@@ -2,7 +2,7 @@ import React from 'react';
 import Headroom from 'react-headroom';
 import Link from '../link/link';
 import Container from '../container/container';
-import Logo from '../logo/logo';
+import LogoImg from './logo.png';
 import './navigation-style';
 
 export default ({ home = '/', pages, onToggleNav }) => (
@@ -11,8 +11,9 @@ export default ({ home = '/', pages, onToggleNav }) => (
       <button id="menu-btn" className="navigation__mobilebtn" onClick={onToggleNav}>
         Open navigation
       </button>
+
       <Link className="navigation__logo" to="/">
-        <Logo theme="light" />
+        <img src={ LogoImg } />
       </Link>
 
       <nav className="navigation__links">

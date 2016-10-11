@@ -21,6 +21,9 @@
 
 .navigation__logo {
   flex: 0 0 auto;
+  height: 35px;
+
+  img { height:100%; }
 }
 
 .navigation__links {
@@ -28,10 +31,9 @@
 
   @include break {
     flex: 1 1 auto;
-
-    display: block;
-    padding: 0.2em 0 0.3em;
-    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
 }
 
