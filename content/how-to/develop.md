@@ -4,21 +4,12 @@ contributors:
   - SpaceK33z
 ---
 
-On this page we'll explain three ways to develop with webpack. It is assumed you already have a webpack configuration file.
+On this page we'll explain how to get started with developing and how to choose one of three tools to develop. It is assumed you already have a webpack configuration file.
 
-webpack can be used with **watch mode**. In this mode webpack will watch your files, and recompile when they change.
-**webpack-dev-server** provides an easy to use development server with fast live reloading. If you already have a development server and want full flexibility, **webpack-dev-middleware** can be used as middleware.
-
-webpack-dev-server and webpack-dev-middleware use in-memory compilation, meaning that the bundle will not be saved to disk. This makes compiling faster and results in less mess on your file system.
-
-In most cases **you'll want to use webpack-dev-server**, since it's the easiest to get started with and offers much functionality out-of-the-box.
-
-We will explain how to get started with developing with each of the tools described above.
-
-W> Never use any of this in production. Ever.
+W> Never use any of these tools in production. Ever.
 
 
-## Adjusting Your Text Editor
+## 1. Adjusting Your Text Editor
 
 Some text editors have a "safe write" feature and enable this by default. As a result, saving a file will not always result in a recompile.
 
@@ -29,18 +20,28 @@ Each editor has a different way of disabling this. For the most common ones:
 * **Vim** - add `:set backupcopy=yes` in your settings.
 
 
-## Source Maps
+## 2. Source Maps
 
 When a JavaScript exception occurs, you'll often want to know what file and line is generating this error. Since webpack outputs files into one or more bundles, it can be inconvenient to trace the file.
 
 **Source maps** intend to fix this problem. There are a lot of [different options](../configuration/devtool) - each with their own advantages and disadvantages. To get started, we'll use this one:
 
-```
+```js
 devtool: "cheap-eval-source-map"
 ```
 
 
-## webpack Watch Mode
+## 3. Choosing a Tool
+
+webpack can be used with **watch mode**. In this mode webpack will watch your files, and recompile when they change.
+**webpack-dev-server** provides an easy to use development server with fast live reloading. If you already have a development server and want full flexibility, **webpack-dev-middleware** can be used as middleware.
+
+webpack-dev-server and webpack-dev-middleware use in-memory compilation, meaning that the bundle will not be saved to disk. This makes compiling faster and results in less mess on your file system.
+
+In most cases **you'll want to use webpack-dev-server**, since it's the easiest to get started with and offers much functionality out-of-the-box.
+
+
+### webpack Watch Mode
 
 webpack's watch mode watches files for changes. If any change is detected, it'll run the compilation again.
 
@@ -60,7 +61,8 @@ serve
 
 After each compilation, you will need to manually refresh your browser to see the changes.
 
-## webpack-dev-server
+
+### webpack-dev-server
 
 webpack-dev-server provides you with a server and live reloading. This is easy to setup.
 
@@ -95,7 +97,7 @@ By default **inline mode** is used. This mode injects the client - needed for li
 webpack-dev-server can do many more things such as proxying requests to your backend server. For more configuration options, see the [**devServer documentation**](../configuration/dev-server).
 
 
-## webpack-dev-middleware
+### webpack-dev-middleware
 
 webpack-dev-middleware works for connect-based middleware stacks. This can be useful if you already have a Node.js server or if you want to have full control over the server.
 
@@ -143,6 +145,7 @@ app.use(webpackDevMiddleware(compiler, {
 ```
 
 There are many more options you can use. For all configuration options, see the [**devServer documentation**](../configuration/dev-server).
+
 
 ## References
 
