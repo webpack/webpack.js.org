@@ -26,7 +26,8 @@ const commonConfig = {
         test: /\.jsx?$/,
         loader: 'babel!eslint',
         include: [
-          path.join(__dirname, 'components')
+          path.join(__dirname, 'components'),
+          path.join(__dirname, 'snippets')
         ]
       },
       {
