@@ -4,20 +4,20 @@ title: Node.js API
 Webpack provides a Node.js API which can be used directly in Node.js runtime. To get started with the Node.js API, require the `webpack` moule:
 
 ``` js
-const webpack = require('webpack');
+const webpack = require("webpack");
 ```
 
 Or if you’re using the ES6 modules interface:
 
 ``` js
-import webpack from 'webpack';
+import webpack from "webpack";
 ```
 
 ## Quick Run
 The imported `webpack` function is fed a Webpack [Configuration Object](/configuration/) and runs the webpack compiler if a callback funtion is provided:
 
 ``` js-with-links
-const webpack = require('webpack');
+const webpack = require("webpack");
 
 webpack({
   // [Configuration Object](/configuration/)
@@ -55,7 +55,7 @@ If you don’t pass the `webpack` runner function a callback, it will return a W
 Calling the `run` method on the `Compiler` intance is much like the quick run method mentioned above:
 
 ``` js-with-links
-const webpack = require('webpack');
+const webpack = require("webpack");
 
 const compiler = webpack({
   // [Configuration Object](/configuration/)
@@ -80,7 +80,7 @@ watch(watchOptions, callback)
 ```
 
 ``` js-with-links
-const webpack = require('webpack');
+const webpack = require("webpack");
 
 const compiler = webpack({
   // [Configuration Object](/configuration/)
@@ -113,7 +113,7 @@ The `watch` method returns an intance that exposes `.close(callback)` method. Ca
 
 ``` js
 watcher.close(() => {
-  console.log('Watching Ended.');
+  console.log("Watching Ended.");
 })
 ```
 
