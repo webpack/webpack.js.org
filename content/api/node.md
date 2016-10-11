@@ -22,7 +22,7 @@ const webpack = require("webpack");
 
 webpack({
   // [Configuration Object](/configuration/)
-}, (err, stats) => {
+}, (err, [stats](#stats-object)) => {
   // Done
   console.log(stats);
 });
@@ -78,7 +78,7 @@ const compiler = webpack({
   // [Configuration Object](/configuration/)
 });
 
-const watcher = comiler.watch({ /* watchOptions */}, (err, stats) => {
+const watcher = comiler.watch({ /* watchOptions */}, (err, [stats](#stats-object)) => {
   // Print watch/build result here...
   console.log(stats);
 });
@@ -92,14 +92,6 @@ First parameter is watchOptions object:
 |-------------------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------|
 | aggregateTimeout  | 300             | After a change the watcher waits that time (in milliseconds) for more changes.                                                        |
 | poll              | undefind (auto) | The watcher uses polling instead of native watchers. `true` uses the default interval, a number specifies a interval in milliseconds. |
-
-#### Watch Callback
-Second parameter is the callback function (standard Node.js error-first-data-last format). List of parameters:
-
-| Parameter | Explanation                                               |
-|-----------|-----------------------------------------------------------|
-| err       | `null` if the operation is successful, `Error` otherwise. |
-| stats     | [Stats Object](#stats-object) |
 
 ### End Watching
 
