@@ -89,7 +89,7 @@ const watcher = comiler.watch({
 });
 ```
 
-#### Watch Options
+### Watch Options
 
 First parameter is watchOptions object:
 
@@ -109,5 +109,9 @@ watcher.close(() => {
 ```
 
 ## Stats Object
+
+...
+
+### Error Handling
 
 ...
