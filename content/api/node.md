@@ -39,6 +39,12 @@ webpack([
 });
 ```
 
+#### Quick Run Callback
+| Parameter | Explanation                                               |
+|-----------|-----------------------------------------------------------|
+| err       | `null` if the operation is successful, `Error` otherwise. |
+| stats     | [Stats Object](#stats-object) |
+
 ## Compiler Instance
 If you don’t pass the `webpack` runner function a callback, it will return a Webpack `Compiler` intance. This instance can be used to manually trigger the Webpack runner or have it build and watch for changes. Much like the [CLI](/api/cli/) Api. The `Compiler` intance provides the following methods:
 
@@ -60,6 +66,12 @@ comiler.run((err, stats) => {
 });
 ```
 
+#### Rnu Callback
+| Parameter | Explanation                                               |
+|-----------|-----------------------------------------------------------|
+| err       | `null` if the operation is successful, `Error` otherwise. |
+| stats     | [Stats Object](#stats-object) |
+
 ## Watch
 Calling the `watch` method, triggers the Webpack runner, but then watches for changes (much like CLI: `wabpack --watch`), as soon as Webpack detects a change, runs again:
 
@@ -80,7 +92,7 @@ const watcher = comiler.watch({ /* watchOptions */}, (err, stats) => {
 });
 ```
 
-### Watch Options
+#### Watch Options
 First parameter is watchOptions object:
 
 | Key               | Default         | Explanation                                                                                                                           |
@@ -88,7 +100,7 @@ First parameter is watchOptions object:
 | aggregateTimeout  | 300             | After a change the watcher waits that time (in milliseconds) for more changes.                                                        |
 | poll              | undefind (auto) | The watcher uses polling instead of native watchers. `true` uses the default interval, a number specifies a interval in milliseconds. |
 
-### Callback
+#### Watch Callback
 Second parameter is the callback function (standard Node.js error-first-data-last format). List of parameters:
 
 | Parameter | Explanation                                               |
