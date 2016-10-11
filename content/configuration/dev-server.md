@@ -4,6 +4,7 @@ contributors:
   - sokra
   - gregvenech
   - spacek33z
+  - charlespwd
 ---
 
 [webpack-dev-server]() can be used to quickly develop an application. See the ["How to Develop?"](../how-to/develop) to get started.
@@ -207,6 +208,19 @@ To disable `contentBase`:
 ```js
 contentBase: false
 ```
+
+### `devServer.watchContentBase`
+
+`boolean`
+
+Tell the server to watch the files served by the `devServer.contentBase` option. File changes will trigger a full page reload.
+
+```js
+watchContentBase: true
+```
+
+It is disabled by default.
+
 
 ### `devServer.staticOptions`
 
