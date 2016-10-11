@@ -216,7 +216,6 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin()
   ]
 };
-
 ```
 
 T> If you're using [webpack-html-plugin](https://github.com/ampedandwired/html-webpack-plugin), you can use [inline-manifest-webpack-plugin](https://github.com/szrenwei/inline-manifest-webpack-plugin) to do this.
