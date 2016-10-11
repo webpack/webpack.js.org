@@ -11,14 +11,14 @@ webpack can be used with **watch mode**. In this mode webpack will watch your fi
 
 webpack-dev-server and webpack-dev-middleware use in-memory compilation, meaning that the bundle will not be saved to disk. This makes compiling faster and results in less mess on your file system.
 
-In most cases **you'll want to use webpack-dev-server**.
+In most cases **you'll want to use webpack-dev-server**, since it's the easiest to get started with and offers much functionality out-of-the-box.
 
 We will explain how to get started with developing with each of the tools described above.
 
 W> Never use any of this in production. Ever.
 
 
-### Adjusting Your Text Editor
+## Adjusting Your Text Editor
 
 Some text editors have a "safe write" feature and enable this by default. As a result, saving a file will not always result in a recompile.
 
@@ -29,9 +29,9 @@ Each editor has a different way of disabling this. For the most common ones:
 * **Vim** - add `:set backupcopy=yes` in your settings.
 
 
-### Source Maps
+## Source Maps
 
-When a Javascript exception occurs, you'll often want to know what file and line is generating this error. Since webpack outputs files into one or more bundles, it can be inconvenient to trace the file.
+When a JavaScript exception occurs, you'll often want to know what file and line is generating this error. Since webpack outputs files into one or more bundles, it can be inconvenient to trace the file.
 
 **Source maps** intend to fix this problem. There are a lot of [different options](../configuration/devtool) - each with their own advantages and disadvantages. To get started, we'll use this one:
 
@@ -40,29 +40,29 @@ devtool: "cheap-eval-source-map"
 ```
 
 
-### webpack Watch Mode
+## webpack Watch Mode
 
 webpack's watch mode watches files for changes. If any change is detected, it'll run the compilation again.
 
-We want webpack to display nice colors and a progress bar while it's compiling. Let's run the command:
+We also want a nice progress bar while it's compiling. Let's run the command:
 
 ```bash
-webpack --progress --colors --watch
+webpack --progress --watch
 ```
 
 Make a change in one of your files and hit save. You should see that it's recompiling.
 
-Watch mode makes no assumptions about a server, so you will need to provide your own. The most easy way to start a HTTP server is with:
+Watch mode makes no assumptions about a server, so you will need to provide your own. An easy server is [`serve`](https://github.com/tj/serve). After installing (`npm i serve -g`), you can execute it in the directory where the outputted files are:
 
 ```bash
-python -m SimpleHTTPServer
+serve
 ```
 
 After each compilation, you will need to manually refresh your browser to see the changes.
 
-### webpack-dev-server
+## webpack-dev-server
 
-webpack-dev-server provides you with a server and live reloading. This is relatively easy to setup.
+webpack-dev-server provides you with a server and live reloading. This is easy to setup.
 
 To prepare, make sure you have a `index.html` file that points to your bundle. Assuming that `output.filename` is `bundle.js`:
 
@@ -95,7 +95,7 @@ By default **inline mode** is used. This mode injects the client - needed for li
 webpack-dev-server can do many more things such as proxying requests to your backend server. For more configuration options, see the [**devServer documentation**](../configuration/dev-server).
 
 
-### webpack-dev-middleware
+## webpack-dev-middleware
 
 webpack-dev-middleware works for connect-based middleware stacks. This can be useful if you already have a Node.js server or if you want to have full control over the server.
 
