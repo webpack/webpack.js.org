@@ -1,7 +1,7 @@
 ---
 title: Node.js API
 ---
-Webpack provides a Node.js API which can be used directly in Node.js runtime. To get started with the Node.js API, require the `webpack` moule:
+Webpack provides a Node.js API which can be used directly in Node.js runtime. To get started with the Node.js API, require the `webpack` module:
 
 ``` js
 const webpack = require("webpack");
