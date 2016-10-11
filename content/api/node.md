@@ -15,7 +15,7 @@ import webpack from "webpack";
 
 ## Quick Run
 
-The imported `webpack` function is fed a Webpack [Configuration Object](/configuration/) and runs the webpack compiler if a callback funtion is provided:
+The imported `webpack` function is fed a Webpack [Configuration Object](/configuration/) and runs the webpack compiler if a callback function is provided:
 
 ``` js-with-links
 const webpack = require("webpack");
@@ -58,7 +58,7 @@ const compiler = webpack({
   // [Configuration Object](/configuration/)
 });
 
-comiler.run((err, [stats](#stats-object)) => {
+compiler.run((err, [stats](#stats-object)) => {
   // ...
 });
 ```
@@ -78,7 +78,7 @@ const compiler = webpack({
   // [Configuration Object](/configuration/)
 });
 
-const watcher = comiler.watch({
+const watcher = compiler.watch({
   <details><summary>/* watchOptions */</summary>
   aggregateTimeout: 300,
   poll: undefined
@@ -100,7 +100,7 @@ First parameter is watchOptions object:
 
 ### End Watching
 
-The `watch` method returns an intance that exposes `.close(callback)` method. Calling this method will end watching:
+The `watch` method returns an instance that exposes `.close(callback)` method. Calling this method will end watching:
 
 ``` js
 watcher.close(() => {
