@@ -14,6 +14,7 @@ import webpack from "webpack";
 ```
 
 ## Quick Run
+
 The imported `webpack` function is fed a Webpack [Configuration Object](/configuration/) and runs the webpack compiler if a callback funtion is provided:
 
 ``` js-with-links
@@ -29,29 +30,25 @@ webpack({
 
 **Note** that you can provide the `webpack` function with an array of configurations:
 
-``` js
+``` js-with-links
 webpack([
   { /* Configuration Object */ },
   { /* Configuration Object */ },
   { /* Configuration Object */ }
-], (err, stats) => {
+], (err, [stats](#stats-object)) => {
   // ...
 });
 ```
 
-#### Quick Run Callback
-| Parameter | Explanation                                               |
-|-----------|-----------------------------------------------------------|
-| err       | `null` if the operation is successful, `Error` otherwise. |
-| stats     | [Stats Object](#stats-object) |
-
 ## Compiler Instance
+
 If you don’t pass the `webpack` runner function a callback, it will return a Webpack `Compiler` intance. This instance can be used to manually trigger the Webpack runner or have it build and watch for changes. Much like the [CLI](/api/cli/) Api. The `Compiler` intance provides the following methods:
 
 * `.run(callback)`
 * `.watch(watchOptions, handler)`
 
 ## Run
+
 Calling the `run` method on the `Compiler` intance is much like the quick run method mentioned above:
 
 ``` js-with-links
@@ -61,22 +58,17 @@ const compiler = webpack({
   // [Configuration Object](/configuration/)
 });
 
-comiler.run((err, stats) => {
+comiler.run((err, [stats](#stats-object)) => {
   // ...
 });
 ```
 
-#### Rnu Callback
-| Parameter | Explanation                                               |
-|-----------|-----------------------------------------------------------|
-| err       | `null` if the operation is successful, `Error` otherwise. |
-| stats     | [Stats Object](#stats-object) |
-
 ## Watch
+
 Calling the `watch` method, triggers the Webpack runner, but then watches for changes (much like CLI: `webpack --watch`), as soon as Webpack detects a change, runs again:
 
-``` js
-watch(watchOptions, callback)
+``` js-with-links
+watch([watchOptions](#watch-options), callback)
 ```
 
 ``` js-with-links
@@ -93,6 +85,7 @@ const watcher = comiler.watch({ /* watchOptions */}, (err, stats) => {
 ```
 
 #### Watch Options
+
 First parameter is watchOptions object:
 
 | Key               | Default         | Explanation                                                                                                                           |
@@ -109,6 +102,7 @@ Second parameter is the callback function (standard Node.js error-first-data-las
 | stats     | [Stats Object](#stats-object) |
 
 ### End Watching
+
 The `watch` method returns an intance that exposes `.close(callback)` method. Calling this method will end watching:
 
 ``` js
@@ -118,4 +112,5 @@ watcher.close(() => {
 ```
 
 ## Stats Object
+
 ...
