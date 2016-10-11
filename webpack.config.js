@@ -8,13 +8,14 @@ var cwd = process.cwd();
 var stylePaths = [
   path.join(cwd, 'styles'),
   path.join(cwd, 'components'),
-  path.join(cwd, 'node_modules/highlight.js/styles', 'github-gist.css')
+  path.join(cwd, 'node_modules/highlight.js/styles')
 ];
 
 const commonConfig = {
   entry: {
     style: [
-      path.join(cwd, 'styles', 'index.scss')
+      path.join(cwd, 'styles', 'index.scss'),
+      path.join(cwd, 'node_modules/highlight.js/styles', 'github-gist.css')
     ]
   },
   resolve: {
