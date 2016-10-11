@@ -4,6 +4,7 @@ var Autoprefixer = require('autoprefixer');
 var merge = require('webpack-merge');
 var webpack = require('webpack');
 
+<<<<<<< HEAD
 var cwd = process.cwd();
 var stylePaths = [
   path.join(cwd, 'styles'),
@@ -106,6 +107,16 @@ const developmentConfig = {
     ]
   }
 };
+=======
+module.exports = function(env) {
+  var cwd = process.cwd();
+  var stylePaths = [
+    path.join(cwd, 'styles', 'reset.css'),
+    path.join(cwd, 'styles', 'icons.css'),
+    path.join(cwd, 'styles', 'index.scss'),
+    path.join(cwd, 'node_modules/highlight.js/styles', 'github-gist.css')
+  ];
+>>>>>>> Adds github-gist highlight
 
 const buildConfig = {
   output: {
