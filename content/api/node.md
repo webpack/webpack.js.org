@@ -71,14 +71,19 @@ Calling the `watch` method, triggers the Webpack runner, but then watches for ch
 watch([watchOptions](#watch-options), callback)
 ```
 
-``` js-with-links
+``` js-with-links-with-details
 const webpack = require("webpack");
 
 const compiler = webpack({
   // [Configuration Object](/configuration/)
 });
 
-const watcher = comiler.watch({ /* watchOptions */}, (err, [stats](#stats-object)) => {
+const watcher = comiler.watch({
+  <details><summary>/* watchOptions */</summary>
+  aggregateTimeout: 300,
+  poll: undefined
+  </details>
+}, (err, [stats](#stats-object)) => {
   // Print watch/build result here...
   console.log(stats);
 });
@@ -88,10 +93,10 @@ const watcher = comiler.watch({ /* watchOptions */}, (err, [stats](#stats-object
 
 First parameter is watchOptions object:
 
-| Key               | Default         | Explanation                                                                                                                           |
-|-------------------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| aggregateTimeout  | 300             | After a change the watcher waits that time (in milliseconds) for more changes.                                                        |
-| poll              | undefind (auto) | The watcher uses polling instead of native watchers. `true` uses the default interval, a number specifies a interval in milliseconds. |
+| Key               | Default           | Explanation                                                                                                                           |
+|-------------------|-------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| aggregateTimeout  | 300               | After a change the watcher waits that time (in milliseconds) for more changes.                                                        |
+| poll              | undefined (auto)  | The watcher uses polling instead of native watchers. `true` uses the default interval, a number specifies a interval in milliseconds. |
 
 ### End Watching
 
