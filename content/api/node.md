@@ -73,7 +73,7 @@ comiler.run((err, stats) => {
 | stats     | [Stats Object](#stats-object) |
 
 ## Watch
-Calling the `watch` method, triggers the Webpack runner, but then watches for changes (much like CLI: `wabpack --watch`), as soon as Webpack detects a change, runs again:
+Calling the `watch` method, triggers the Webpack runner, but then watches for changes (much like CLI: `webpack --watch`), as soon as Webpack detects a change, runs again:
 
 ``` js
 watch(watchOptions, callback)
