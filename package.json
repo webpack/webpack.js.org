@@ -55,6 +55,7 @@
     "file-loader": "^0.9.0",
     "gh-pages": "^0.11.0",
     "highlight-loader": "^0.7.2",
+    "html-loader": "^0.4.4",
     "html-webpack-plugin": "^2.22.0",
     "json-loader": "^0.5.4",
     "lodash": "^4.16.1",
