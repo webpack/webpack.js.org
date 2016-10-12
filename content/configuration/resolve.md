@@ -104,10 +104,19 @@ import Test2 from 'xyz/file.js'; // Error, /path/to/file.js/file.js is invalid
 
 `array`
 
-When importing from an npm package, e.g. `import * as D3 from "d3"`, this option will determine which fields in it's `package.json` are checked. It defaults to:
+When importing from an npm package, e.g. `import * as D3 from "d3"`, this option will determine which fields in it's `package.json` are checked. The default values will vary based upon the [`target`](../concepts/targets) specified in your webpack configuration. 
+
+When the `target` property is set to `webworker`, `web`, or left unspecified:
+
 
 ```js
 mainFields: ["browser", "module", "main"]
+```
+
+For any other target (including `node`):
+
+```js
+mainFields: ["module", "main"]
 ```
 
 For example, the `package.json` of [D3](https://d3js.org/) contains these fields:
@@ -122,7 +131,7 @@ For example, the `package.json` of [D3](https://d3js.org/) contains these fields
 }
 ```
 
-This means that when we `import * as D3 from "d3"` this will really resolve to the file in the `browser` property. The `browser` property takes precedence here because it's the first item in `mainFields`.
+This means that when we `import * as D3 from "d3"` this will really resolve to the file in the `browser` property. The `browser` property takes precedence here because it's the first item in `mainFields`. Meanwhile, a node application bundled by webpack will resolve by default to the file in the `module` field.
 
 ### `resolve.aliasFields`
 
