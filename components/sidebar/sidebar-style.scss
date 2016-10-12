@@ -1,6 +1,5 @@
 @import 'vars';
 @import 'mixins';
-@import 'functions';
 
 .sidebar {
   position: relative;
@@ -8,104 +7,41 @@
   min-height: 100%;
 
   &--visible {
-    .sidebar__inner { transform: translateX(0); }
+    @media (max-width: map-get($screens, medium)) {
+      .sidebar__inner { 
+        transform: translateX(0) !important;
+        width:100% !important;
+      }
 
-    .sidebar-item__title,
-    .sidebar-item__toggle { color: map-get($colors, white) !important; }
-    .sidebar-item__anchor a { color: map-get($colors, alto) !important; }
+      .sidebar-item__title,
+      .sidebar-item__toggle { color: map-get($colors, white) !important; }
+      .sidebar-item__anchor a { color: map-get($colors, alto) !important; }
+    }
   }
 }
 
 .sidebar__inner {
-  will-change: transform;
-  transform: translate3D(-100%, 0, 0);
-  transition: transform 0.5s;
-
   position: fixed;
-  width: 300px;
-  height: 100%;
-  max-height: calc(100vh - 45px);
+  width: 100%;
+  height: 100vh;
+  padding: 1.5em 1em;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 1.5em;
-  background: map-get($colors, emperor);
-  color: map-get($colors, alto);
   z-index: 1;
+  background: map-get($colors, emperor);
+  transition: transform 0.5s;
+
+  @media (max-width: map-get($screens, medium)) {
+    will-change: transform;
+    transform: translate3D(-100%, 0, 0) !important;
+  }
 
   @include break {
     position: static;
     transform: none;
-    width: 100%;
-    max-height:none;
+    height:auto;
+    padding:1.5em;
     background: transparent;
     color: map-get($colors, emperor);
-  }
-}
-
-.sidebar-item {
-  font-size: getFontSize(-1);
-  margin-bottom: 0.75em;
-
-  &__title {
-    font-weight: 400;
-    text-decoration: none;
-    color: inherit;
-
-    &:hover {
-      color: map-get($colors, tussock);
-    }
-  }
-
-  &__toggle {
-    float: right;
-    line-height: 1.5;
-    cursor: pointer;
-    color: map-get($colors, dusty-grey);
-    transition: color 250ms;
-
-    &:hover {
-      color: map-get($colors, mine-shaft);
-    }
-  }
-
-  &__anchors {
-    display:none;
-    list-style: none;
-    padding: 0;
-    margin: 0.5em 0 1em;
-  }
-
-  &__anchor {
-    margin:0.25em 0;
-
-    a {
-      display: inline-block;
-      max-width: 100%;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      color: map-get($colors, dusty-grey);
-
-      &:hover {
-        color: map-get($colors, mine-shaft);
-      }
-    }
-  }
-
-  &--empty {
-    .sidebar-item__toggle {
-      display:none;
-    }
-  }
-
-  &--open {
-    .sidebar-item__anchors {
-      display:block;
-    }
-
-    .sidebar-item__toggle {
-      margin-left:-2px;
-      transform:rotate(180deg) translateX(1px);
-    }
   }
 }

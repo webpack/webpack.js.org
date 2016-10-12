@@ -1,64 +1,67 @@
 import React from 'react';
-import Link from '../link/link';
+import { Sticky, StickyContainer } from 'react-sticky';
+import SidebarItem from '../sidebar-item/sidebar-item';
 import './sidebar-style';
 
-const Sidebar = ({ sectionName, pages }) => {
-  return (
-    <nav className="sidebar">
-      <div className="sidebar__inner">
-        <Item url={ `/${sectionName}` } title="Introduction" />
-        {
-          pages.map(({ url, title, anchors }, i) =>
-            <Item
-              key={ `sidebar-item-${i}` }
-              index={i}
-              url={ `/${url}` }
-              title={ title }
-              anchors={ anchors }
-            />
-          )
-        }
-      </div>
-    </nav>
-  );
-};
-
-class Item extends React.Component {
+export default class Sidebar extends React.Component {
   constructor(props) {
     super(props);
 
+    this._scroll = this._onScroll.bind(this);
     this.state = {
-      open: false
+      offset: 0
     };
   }
 
   render() {
-    let { index, url, title, anchors = [] } = this.props;
-    let emptyMod = !anchors.length ? 'sidebar-item--empty' : '';
-    let openMod = this.state.open ? 'sidebar-item--open' : '';
+    let { sectionName, pages } = this.props;
+    let { offset } = this.state;
 
     return (
-      <div className={ `sidebar-item ${emptyMod} ${openMod}` }>
-        <Link className="sidebar-item__title" to={ url }>{ title }</Link>
-        <i className="sidebar-item__toggle icon-chevron-down" onClick={ this.toggle.bind(this) } />
-        <ul className="sidebar-item__anchors">
+      <StickyContainer className="sidebar">
+        <Sticky className="sidebar__inner" style={{ marginTop: offset }}>
+          <SidebarItem 
+            url={ `/${sectionName}` } 
+            title="Introduction" />
+
           {
-            anchors.map((anchor, j) => (
-              <li className="sidebar-item__anchor" key={ `anchor-${index}-${j}` }>
-                <Link to={ `${url}#${anchor.id}` }>{ anchor.title }</Link>
-              </li>
-            ))
+            pages.map(({ url, title, anchors }, i) =>
+              <SidebarItem
+                key={ `sidebar-item-${i}` }
+                index={i}
+                url={ `/${url}` }
+                title={ title }
+                anchors={ anchors }
+              />
+            )
           }
-        </ul>
-      </div>
+        </Sticky>
+      </StickyContainer>
     );
   }
 
-  toggle(e) {
-    this.setState({
-      open: !this.state.open
-    });
+  componentDidMount() {
+    window.addEventListener('scroll', this._scroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._scroll);
+  }
+
+  _onScroll(e) {
+    let nav = document.querySelector('.navigation__inner');
+    let styles = nav ? getComputedStyle(nav) : {};
+    let overlayed = nav.parentNode.classList.contains('headroom--pinned');
+
+    if ( document.body.scrollTop !== 0 && overlayed ) {
+      this.setState({
+        offset: parseInt(styles.height, 10)
+      });
+
+    } else {
+      this.setState({
+        offset: 0
+      });
+    }
   }
 }
-
-export default Sidebar;

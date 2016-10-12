@@ -1,0 +1,71 @@
+@import 'vars';
+@import 'mixins';
+@import 'functions';
+
+.sidebar-item {
+  font-size: getFontSize(-1);
+  margin-bottom: 0.75em;
+
+  &__title {
+    font-weight: 400;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      color: map-get($colors, tussock);
+    }
+  }
+
+  &__toggle {
+    float: right;
+    line-height: 1.5;
+    cursor: pointer;
+    color: map-get($colors, dusty-grey);
+    transition: color 250ms;
+
+    &:hover {
+      color: map-get($colors, mine-shaft);
+    }
+  }
+
+  &__anchors {
+    display:none;
+    list-style: none;
+    padding: 0;
+    margin: 0.5em 0 1em;
+  }
+
+  &__anchor {
+    margin:0.25em 0;
+
+    a {
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: map-get($colors, dusty-grey);
+
+      &:hover {
+        color: map-get($colors, mine-shaft);
+      }
+    }
+  }
+
+  &--empty {
+    .sidebar-item__toggle {
+      display:none;
+    }
+  }
+
+  &--open {
+    .sidebar-item__anchors {
+      display:block;
+    }
+
+    .sidebar-item__toggle {
+      margin-left:-2px;
+      transform:rotate(180deg) translateX(1px);
+    }
+  }
+}
