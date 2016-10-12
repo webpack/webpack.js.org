@@ -12,7 +12,7 @@
 
     .sidebar-item__title,
     .sidebar-item__toggle { color: map-get($colors, white) !important; }
-    .sidebar-item__anchor a { color: map-get($colors, alto); }
+    .sidebar-item__anchor a { color: map-get($colors, alto) !important; }
   }
 }
 
