@@ -5,6 +5,15 @@
 .sidebar {
   position: relative;
   flex: 1;
+  min-height: 100%;
+
+  &--visible {
+    .sidebar__inner { transform: translateX(0); }
+
+    .sidebar-item__title,
+    .sidebar-item__toggle { color: map-get($colors, white) !important; }
+    .sidebar-item__anchor a { color: map-get($colors, alto); }
+  }
 }
 
 .sidebar__inner {
@@ -12,7 +21,7 @@
   transform: translate3D(-100%, 0, 0);
   transition: transform 0.5s;
 
-  position: absolute;
+  position: fixed;
   width: 300px;
   height: 100%;
   max-height: calc(100vh - 45px);
@@ -30,14 +39,6 @@
     max-height:none;
     background: transparent;
     color: map-get($colors, emperor);
-  }
-
-  .nav-displayed & {
-    transform: translateX(0);
-
-    @include break {
-      transform: none;
-    }
   }
 }
 
