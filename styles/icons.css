@@ -26,6 +26,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-menu:before {
+  content: "\e90a";
+}
 .icon-link:before {
   content: "\e909";
 }
