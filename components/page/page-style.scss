@@ -10,7 +10,12 @@
 
 // XXX: Temporary hack to fix sidebar width
 .page div:first-of-type {
-  flex:1;
+  flex:0 0 auto;
+  overflow:hidden;
+
+  @include break {
+    flex:0 0 25%;
+  }
 }
 
 .page__content {
