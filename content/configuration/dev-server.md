@@ -96,22 +96,13 @@ noInfo: true
 
 This option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you want some bundle information, but not all of it.
 
-There are some presets: `none`, `errors-only`, `minimal` and `verbose`. Use them like this:
+To show only errors in your bundle:
 
 ```js
 stats: "errors-only"
 ```
 
-You can control this even more granularly:
-
-```js
-stats: {
-  chunks: false,
-  hash: false
-}
-```
-
-The available options are: `hash`, `version`, `timings`, `assets`, `chunks`, `modules`, `reasons`, `children`, `source`, `errors`, `errorDetails`, `warnings`and `publicPath`.
+For more information, see the [**stats documentation**](./stats).
 
 T> This option has no effect when used with `quiet` or `noInfo`.
 
