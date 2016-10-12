@@ -20,15 +20,20 @@ export default class Navigation extends React.Component {
 
           <nav className="navigation__links">
             {
-              this.props.pages.map((link, i) => (
-                <Link
-                  key={ `navigation__link${i}` }
-                  className="navigation__link"
-                  activeClassName="navigation__link--active"
-                  to={ `/${link.url}` }>
-                  { link.title }
-                </Link>
-              ))
+              this.props.pages.map((link, i) => {
+                let { pathname } = window.location;
+                let active = pathname === `/${link.url}` || pathname.includes(`/${link.url}/`);
+                let activeClass = active ? 'navigation__link--active' : '';
+
+                return (
+                  <Link
+                    key={ `navigation__link${i}` }
+                    className={ `navigation__link ${activeClass}` }
+                    to={ `/${link.url}` }>
+                    { link.title }
+                  </Link>
+                );
+              })
             }
           </nav>
         </Container>
