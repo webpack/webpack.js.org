@@ -26,9 +26,11 @@
   display: flex;
   margin: auto;
   align-items: center;
+  padding: 0.25em 0;
 
   @include break {
     margin: 0;
+    padding: 0;
   }
 }
 
