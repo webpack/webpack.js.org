@@ -8,11 +8,13 @@ contributors:
 
 A resolver is a library which helps find the absolute path of a module.
 A module can be required as a dependency from another module as 
+
 ```js
-require('/path/to/module) 
+require('/path/to/module')
 //or 
 import mymodule from '/path/to/module'
 ```
+
 The dependency module can be from the application code or a third party library. The resolver helps 
 `webpack` find the module code that needs to be included in the bundle for every such `require()/import` statement.
 `webpack` uses [enhanced-resolve](https://github.com/webpack/enhanced-resolve) to resolve file paths while bundling modules.
@@ -27,6 +29,7 @@ The dependency module can be from the application code or a third party library.
 require("/home/me/file");
 require("C:\\Home\\me\\file");
 ```
+
 Since we already have the absolute path to the file, no further resolution is required.
 
 * Relative paths
@@ -35,6 +38,7 @@ Since we already have the absolute path to the file, no further resolution is re
 require("../src/file");
 require("./file");
 ```
+
 In this case, the directory of the resource file is taken to be the context directory. The given relative path is joined to the context path to produce the absolute path to the file.
 
 * Module path
@@ -43,6 +47,7 @@ In this case, the directory of the resource file is taken to be the context dire
 require("module");
 require("module/lib/file");
 ```
+
 Modules are searched for inside `moduleDirectories` which are specified using `resolve.moduleDirectories`. These module directories can be under multiple paths if the options under `resolve.root` is an array.
 If the library is not found inside any of these, the resolver defaults to the directories specified in `resolve.fallback`
 Aliasing, ie setting `resolve.alias` to an existing module path, allows you to replace the module path with an alias name during `require/import`.
