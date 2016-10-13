@@ -8,10 +8,10 @@ contributors:
 
 A resolver is a library which helps find the absolute path of a module.
 A module can be required as a dependency from another module as 
-```
-    require('/path/to/module) 
-        or 
-    import mymodule from '/path/to/module'
+```js
+require('/path/to/module) 
+//or 
+import mymodule from '/path/to/module'
 ```
 The dependency module can be from the application code or a third party library. The resolver helps 
 `webpack` find the module code that needs to be included in the bundle for every such `require()/import` statement.
@@ -23,24 +23,25 @@ The dependency module can be from the application code or a third party library.
 
 * Absolute paths
 
-```
-    require("/home/me/file");
-    require("C:\\Home\\me\\file");
+```js
+require("/home/me/file");
+require("C:\\Home\\me\\file");
 ```
 Since we already have the absolute path to the file, no further resolution is required.
 
 * Relative paths
 
+```js
+require("../src/file");
+require("./file");
 ```
-    require("../src/file");
-    require("./file");
-```
-In this case, the current directory is taken to be the context directory. The given relative path is joined to the context path to produce the absolute path to the file.
+In this case, the directory of the resource file is taken to be the context directory. The given relative path is joined to the context path to produce the absolute path to the file.
 
 * Module path
-```
-    require("module");
-    require("module/lib/file");
+
+```js
+require("module");
+require("module/lib/file");
 ```
 Modules are searched for inside `moduleDirectories` which are specified using `resolve.moduleDirectories`. These module directories can be under multiple paths if the options under `resolve.root` is an array.
 If the library is not found inside any of these, the resolver defaults to the directories specified in `resolve.fallback`

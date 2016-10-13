@@ -4,9 +4,14 @@ contributors:
   - sokra
   - gregvenech
   - SpaceK33z
+  - pksjce
 ---
 
+### Overview
+
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail.
+Have a look at [Module Resolution](concepts/module-resolution) for more explanation of how the resolver works.
+
 
 ### `resolve`
 
@@ -99,6 +104,34 @@ import Test1 from 'xyz'; // Success, file.js is resolved and imported
 import Test2 from 'xyz/file.js'; // Error, /path/to/file.js/file.js is invalid
 ```
 
+| `alias:` | `require("xyz")` | `require("xyz/file.js")` |
+| -------- | ---------------- | -------------------------|
+| `{}` | `/abc/node_modules/xyz/index.js` | `/abc/node_modules/xyz/file.js` |
+| `{ xyz: "/abs/path/to/file.js" }` | `/abs/path/to/file.js` | error |
+| `{ xyz$: "/abs/path/to/file.js" }` | `/abs/path/to/file.js` | `/abc/node_modules/xyz/file.js` |
+| `{ xyz: "./dir/file.js" }` | `/abc/dir/file.js` | error |
+| `{ xyz$: "./dir/file.js" }` | `/abc/dir/file.js` | `/abc/node_modules/xyz/file.js` |
+| `{ xyz: "/some/dir" }` | `/some/dir/index.js` | `/some/dir/file.js` |
+| `{ xyz$: "/some/dir" }` | `/some/dir/index.js` | `/abc/node_modules/xyz/file.js` |
+| `{ xyz: "./dir" }` | `/abc/dir/index.js` | `/abc/dir/file.js` |
+| `{ xyz: "modu" }` | `/abc/node_modules/modu/index.js` | `/abc/node_modules/modu/file.js` |
+| `{ xyz$: "modu" }` | `/abc/node_modules/modu/index.js` | `/abc/node_modules/xyz/file.js` |
+| `{ xyz: "modu/some/file.js" }` | `/abc/node_modules/modu/some/file.js` | error |
+| `{ xyz: "modu/dir" }` | `/abc/node_modules/modu/dir/index.js` | `/abc/node_modules/dir/file.js` |
+| `{ xyz: "xyz/dir" }` | `/abc/node_modules/xyz/dir/index.js` | `/abc/node_modules/xyz/dir/file.js` |
+| `{ xyz$: "xyz/dir" }` | `/abc/node_modules/xyz/dir/index.js` | `/abc/node_modules/xyz/file.js` |
+
+`index.js` may resolve to another file if defined in the `package.json`.
+
+`/abc/node_modules` may resolve in `/node_modules` too.
+
+### `resolve.descriptionFiles`
+
+`array`
+
+Default: `["package.json"]`
+
+The JSON files to use for descriptions.
 
 ### `resolve.mainFields`
 
@@ -133,6 +166,14 @@ For example, the `package.json` of [D3](https://d3js.org/) contains these fields
 
 This means that when we `import * as D3 from "d3"` this will really resolve to the file in the `browser` property. The `browser` property takes precedence here because it's the first item in `mainFields`. Meanwhile, a node application bundled by webpack will resolve by default to the file in the `module` field.
 
+### `resolve.mainFiles`
+
+`array`
+
+Default: `["index"]`
+
+The filename to be used while resolving directories.
+
 ### `resolve.aliasFields`
 
 `string`
@@ -143,6 +184,37 @@ Specify a field, such as `browser`, to be parsed according to [this specificatio
 aliasFields: ["browser"]
 ```
 
+### `resolve.enforceExtension`
+
+
+
+Default: `false`
+
+If false it will also try to use no extension from above
+
+### `resolve.moduleExtensions`
+
+`array`
+
+Example: `['-loaders']`
+
+These extensions are tried when resolving a module
+
+### `resolve.enforceModuleExtension`
+
+`bool`
+
+Default: `false`
+
+If false it's also try to use no module extension from above
+
+### `resolve.resolveToContext`
+
+`bool`
+
+Default: `false`
+
+If true, trying to resolve a context to its absolute path ends when a directory is found.
 
 ### `resolve.unsafeCache`
 
@@ -162,3 +234,22 @@ W> Changes to cached paths may cause failure in rare cases.
 `object`
 
 This set of options is identical to the `resolve` set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages.
+
+Default:
+```js
+{
+    modulesDirectories: ["web_loaders", "web_modules", "node_loaders", "node_modules"],
+    extensions: ["", ".webpack-loader.js", ".web-loader.js", ".loader.js", ".js"],
+    packageMains: ["webpackLoader", "webLoader", "loader", "main"]
+}
+```
+T> Note that you can use alias here and other features familiar from resolve. For example `{ txt: 'raw-loader' }` would shim `txt!templates/demo.txt` to use `raw-loader`.
+
+### `resolveLoader.moduleTemplates`
+
+`array`
+
+That's a `resolveLoader` only property.
+It describes alternatives for the module name that are tried.
+Default: `["*-webpack-loader", "*-web-loader", "*-loader", "*"]`
+
