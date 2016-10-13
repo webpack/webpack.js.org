@@ -23,7 +23,7 @@
 .sidebar__inner {
   position: fixed;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 50px); // XXX: Hacky, this should be removed with a better solution
   padding: 1.5em 1em;
   overflow-y: auto;
   overflow-x: hidden;
