@@ -13,6 +13,10 @@ module.exports = {
     {
       from: './fonts',
       to: 'assets'
+    },
+    {
+      from: './images',
+      to: 'assets'
     }
   ],
   output: 'build',

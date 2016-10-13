@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from '../link/link';
 import Container from '../container/container';
-import CubeImg from './cube.png';
+import CubeImg from '../../images/cube.png';
 import './footer-style';
 
 export default (props) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import Headroom from 'react-headroom';
 import Link from '../link/link';
 import Container from '../container/container';
-import LogoImg from './logo.png';
+import LogoImg from '../../images/logo.png';
 import './navigation-style';
 
 export default class Navigation extends React.Component {
