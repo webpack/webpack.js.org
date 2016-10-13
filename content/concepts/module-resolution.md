@@ -70,7 +70,7 @@ Every filesystem access is cached so that multiple parallel or serial requests t
 There is a configuration option `resolve.unsafeCache` which boosts performance by aggressive caching.
 Every resolve process is cached and isn’t ever purged. This is correct in most cases, but incorrect in edge cases (what edge cases?).
 
-Look at [Resolve API](../api/module-resolution) for more info on the configuration mentioned above.
+Look at [Resolve API](../configuration/resolve) for more info on the configuration mentioned above.
 
 
 
