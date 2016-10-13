@@ -1,5 +1,4 @@
 import React from 'react';
-import { Sticky, StickyContainer } from 'react-sticky';
 import SidebarItem from '../sidebar-item/sidebar-item';
 import './sidebar-style';
 
@@ -18,8 +17,8 @@ export default class Sidebar extends React.Component {
     let { offset } = this.state;
 
     return (
-      <StickyContainer className="sidebar">
-        <Sticky className="sidebar__inner" style={{ marginTop: offset }}>
+      <nav className="sidebar">
+        <div className="sidebar__inner">
           <SidebarItem 
             url={ `/${sectionName}` } 
             title="Introduction" />
@@ -35,8 +34,8 @@ export default class Sidebar extends React.Component {
               />
             )
           }
-        </Sticky>
-      </StickyContainer>
+        </div>
+      </nav>
     );
   }
 
