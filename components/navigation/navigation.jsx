@@ -1,5 +1,4 @@
 import React from 'react';
-import Headroom from 'react-headroom';
 import Link from '../link/link';
 import Container from '../container/container';
 import LogoImg from '../../images/logo.png';
@@ -8,7 +7,7 @@ import './navigation-style';
 export default class Navigation extends React.Component {
   render() {
     return (
-      <Headroom className="navigation">
+      <header className="navigation">
         <Container className="navigation__inner">
           <div className="navigation__mobile" onClick={ this._toggleSidebar }>
             <i className="icon-menu" />
@@ -37,7 +36,7 @@ export default class Navigation extends React.Component {
             }
           </nav>
         </Container>
-      </Headroom>
+      </header>
     );
   }
 
