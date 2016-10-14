@@ -2,6 +2,7 @@ import React from 'react';
 import Link from '../link/link';
 import Container from '../container/container';
 import LogoImg from '../../images/logo.png';
+import Logo from '../logo/logo';
 import './navigation-style';
 
 export default class Navigation extends React.Component {
@@ -14,7 +15,7 @@ export default class Navigation extends React.Component {
           </div>
 
           <Link className="navigation__logo" to="/">
-            <img src={ LogoImg } />
+            <Logo light />
           </Link>
 
           <nav className="navigation__links">
