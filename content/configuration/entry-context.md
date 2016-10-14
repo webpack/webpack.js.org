@@ -2,7 +2,7 @@
 title: Entry and Context
 contributors:
   - sokra
-  - gregvenech
+  - skipjack
 ---
 
 ?> TODO: Short description

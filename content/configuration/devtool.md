@@ -2,7 +2,7 @@
 title: Devtool
 contributors:
   - sokra
-  - gregvenech
+  - skipjack
 ---
 
 ?> Description...
