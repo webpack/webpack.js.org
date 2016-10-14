@@ -1,5 +1,5 @@
 import React from 'react';
-import CubeImg from '../../images/cube.png';
+import CubeImg from '../../assets/cube.png';
 import './logo-style';
 
 export default props => {

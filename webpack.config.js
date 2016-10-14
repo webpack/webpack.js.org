@@ -30,7 +30,7 @@ const commonConfig = {
       },
       {
         test: /\.woff2?$/,
-        loaders: ['url?prefix=font/&limit=5000&mimetype=application/font-woff']
+        loaders: ['url?prefix=font/&limit=50000&mimetype=application/font-woff']
       },
       {
         test: /\.jpg$/,

@@ -9,16 +9,6 @@ module.exports = {
     title: 'webpack',
     file: path.join(__dirname, 'template.ejs')
   },
-  assets: [
-    {
-      from: './fonts',
-      to: 'assets'
-    },
-    {
-      from: './images',
-      to: 'assets'
-    }
-  ],
   output: 'build',
   title: 'webpack',
   keywords: ['webpack', 'javascript', 'web development', 'programming'],
