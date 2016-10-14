@@ -18,7 +18,9 @@
   h1, h2, h3, h4, h5, h6 {
     font-family:'Geomanist', 'Century Gothic', sans-serif;
     font-weight:400;
-    margin:1.5em 0 0.5em;
+    line-height:1;
+    margin:1.5em 0 0.25em;
+    color:map-get($colors, mine-shaft);
 
     &:first-child { margin-top:0; }
     tt, code { font-size:inherit; }
@@ -149,6 +151,7 @@
   }
 
   b, strong {
+    color:map-get($colors, mine-shaft);
     font-weight:600;
   }
 
