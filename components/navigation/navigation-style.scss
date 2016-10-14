@@ -14,7 +14,7 @@
   padding: 0.5em 1em;
 
   @include break {
-    padding: 0.5em 1.5em;
+    padding:0 0 0 1.5em;
   }
 }
 
@@ -47,13 +47,18 @@
 }
 
 .navigation__link {
-  font-size: getFontSize(-2);
-  margin-left: 2.5em;
+  font-size: getFontSize(-1);
+  padding:1.5em;
   text-transform: uppercase;
   color: map-get($colors, dusty-grey);
+  transition:all 250ms;
 
   &:hover,
   &--active {
     color: map-get($colors, white);
+  }
+
+  &--active {
+    background: map-get($colors, emperor);
   }
 }
