@@ -24,7 +24,7 @@
   width: 100%;
   padding: 1.5em 1em;
 
-  @media (min-width: map-get($screens, medium)) {
+  @media break {
     flex: 3;
     padding: 1.5em;
   }
