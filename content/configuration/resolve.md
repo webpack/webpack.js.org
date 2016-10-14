@@ -190,7 +190,7 @@ aliasFields: ["browser"]
 
 Default: `false`
 
-If false it will also try to use no extension from above
+If false it will also try to use no extension from above.
 
 ### `resolve.moduleExtensions`
 
@@ -198,7 +198,7 @@ If false it will also try to use no extension from above
 
 Example: `['-loaders']`
 
-These extensions are tried when resolving a module
+These extensions are tried when resolving a module.
 
 ### `resolve.enforceModuleExtension`
 
@@ -206,7 +206,7 @@ These extensions are tried when resolving a module
 
 Default: `false`
 
-If false it's also try to use no module extension from above
+If false it's also try to use no module extension from above.
 
 ### `resolve.resolveToContext`
 
@@ -236,6 +236,7 @@ W> Changes to cached paths may cause failure in rare cases.
 This set of options is identical to the `resolve` set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages.
 
 Default:
+
 ```js
 {
     modulesDirectories: ["web_loaders", "web_modules", "node_loaders", "node_modules"],
@@ -243,13 +244,14 @@ Default:
     packageMains: ["webpackLoader", "webLoader", "loader", "main"]
 }
 ```
+
 T> Note that you can use alias here and other features familiar from resolve. For example `{ txt: 'raw-loader' }` would shim `txt!templates/demo.txt` to use `raw-loader`.
 
 ### `resolveLoader.moduleTemplates`
 
 `array`
 
-That's a `resolveLoader` only property.
-It describes alternatives for the module name that are tried.
+That's a `resolveLoader` only property.It describes alternatives for the module name that are tried.
+
 Default: `["*-webpack-loader", "*-web-loader", "*-loader", "*"]`
 
