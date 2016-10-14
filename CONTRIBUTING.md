@@ -62,6 +62,27 @@ After getting some feedback, push to your fork branch and submit a pull request.
 
 Issue the PR to the [develop](https://github.com/webpack/webpack.js.org/tree/develop) branch.
 
+## Contribution Recognition
+
+Any document that you edit, you can choose to add your name at the top of the document for recognition: 
+
+```markdown
+===
+title: Some Example Page
+contributors:
+  - TheLarkInn
+  - Sokra
+  - Bebraw
+  - Jhnns
+  - SpaceK33z
+===
+
+## Some Documentation
+
+```
+This will add your name and github profile photo to the document when live. This is a great way to own the awesome work that you do and encourage that you remember to do this in your PR's. 
+
+
 ## Thank you
 
 Webpack is insanely feature rich and documentation is a huge time sink. We greatly appreciate any time spent fixing typos or clarifying sections in the documentation.
