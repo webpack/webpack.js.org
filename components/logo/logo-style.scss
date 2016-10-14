@@ -16,7 +16,8 @@
     font-family:'Geomanist', 'Century Gothic', sans-serif;
     font-size:1.3em;
     font-weight:500;
-    letter-spacing:1px;
+    text-rendering: geometricPrecision;
+    letter-spacing:0.5px;
     margin-left:0.25em;
     margin-top:3px;
     color:map-get($colors, emperor);
