@@ -22,8 +22,7 @@ export default props => {
       <Interactive
         id="components/navigation/navigation.jsx"
         component={ Navigation }
-        pages={ pages }
-      />
+        pages={ pages } />
 
       <Sidecar />
       { props.children }

@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from '../link/link';
 import Container from '../container/container';
-import LogoImg from '../../images/logo.png';
 import Logo from '../logo/logo';
 import './navigation-style';
 
