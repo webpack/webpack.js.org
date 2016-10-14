@@ -64,7 +64,9 @@ Issue the PR to the [develop](https://github.com/webpack/webpack.js.org/tree/dev
 
 ## Contribution Recognition
 
-Any document that you edit, you can choose to add your name at the top of the document for recognition: 
+Any document that you edit, you can choose to add your Github username at the top of the document for recognition: 
+
+**example.md**
 
 ```markdown
 ===
@@ -80,7 +82,8 @@ contributors:
 ## Some Documentation
 
 ```
-This will add your name and github profile photo to the document when live. This is a great way to own the awesome work that you do and encourage that you remember to do this in your PR's. 
+
+This will add your name and Github profile photo to the document in production. This is a great way to own the awesome work that you do and encourage that you remember to do this in your PR's. 
 
 
 ## Thank you
