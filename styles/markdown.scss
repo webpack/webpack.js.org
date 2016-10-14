@@ -108,7 +108,9 @@
   }
 
   table {
-    padding: 0;
+    display:block;
+    width:100%;
+    overflow:auto;
 
     tr {
       border-top: 1px solid #cccccc;
@@ -134,6 +136,8 @@
       }
 
       th, td {
+        white-space: nowrap;
+
         > :first-child { margin-top: 0; }
         > :last-child { margin-bottom: 0; }
       }
