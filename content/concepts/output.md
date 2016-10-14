@@ -14,11 +14,11 @@ To set the `output` property, you simply set the output value in your webpack co
 **webpack.config.js**
 
 ```javascript
-module.exports = config;
-
-config = {
+const config = {
   output: 'blah'
-}
+};
+
+module.exports = config;
 ```
 
 ## Options
@@ -81,7 +81,6 @@ output: {
 	path: "/home/proj/public/assets",
 	publicPath: "/assets/"
 }
-
 ```
 
 **index.html**

@@ -4,6 +4,7 @@ contributors:
   - sokra
   - gregvenech
   - spacek33z
+  - charlespwd
 ---
 
 [webpack-dev-server]() can be used to quickly develop an application. See the ["How to Develop?"](../how-to/develop) to get started.
@@ -96,22 +97,13 @@ noInfo: true
 
 This option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you want some bundle information, but not all of it.
 
-There are some presets: `none`, `errors-only`, `minimal` and `verbose`. Use them like this:
+To show only errors in your bundle:
 
 ```js
 stats: "errors-only"
 ```
 
-You can control this even more granularly:
-
-```js
-stats: {
-  chunks: false,
-  hash: false
-}
-```
-
-The available options are: `hash`, `version`, `timings`, `assets`, `chunks`, `modules`, `reasons`, `children`, `source`, `errors`, `errorDetails`, `warnings`and `publicPath`.
+For more information, see the [**stats documentation**](./stats).
 
 T> This option has no effect when used with `quiet` or `noInfo`.
 
@@ -207,6 +199,19 @@ To disable `contentBase`:
 ```js
 contentBase: false
 ```
+
+### `devServer.watchContentBase`
+
+`boolean`
+
+Tell the server to watch the files served by the `devServer.contentBase` option. File changes will trigger a full page reload.
+
+```js
+watchContentBase: true
+```
+
+It is disabled by default.
+
 
 ### `devServer.staticOptions`
 

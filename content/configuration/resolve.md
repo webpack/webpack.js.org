@@ -3,50 +3,41 @@ title: Resolve
 contributors:
   - sokra
   - gregvenech
+  - SpaceK33z
 ---
 
-?> Add a description
+These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail.
 
 ### `resolve`
 
 `object`
 
-Configure how modules are resolved. For example, when calling `import "lodash"` in ES6, the `resolve` options can change where webpack goes to look for `"lodash"` (see [`modulesDirectories`](#resolve-modulesdirectories)).
+Configure how modules are resolved. For example, when calling `import "lodash"` in ES6, the `resolve` options can change where webpack goes to look for `"lodash"` (see [`modules`](#resolve-modules)).
 
 
-### `resolve.root`
-
-`string` `array`
-
-Tell webpack what directories should be searched when resolving modules. 
-
-```js
-root: path.resolve(__dirname, 'src')
-```
-
-W> The value or values **must be an absolute path(s)**.
-
-
-### `resolve.fallback`
-
-`string` `array`
-
-Add a fallback(s) for instances where webpack is unable to resolve a module in the given `root` or `modulesDirectories`. This option takes the same values as `root` above.
-
-W> As with `root`, the value or values **must be an absolute path(s)**.
-
-
-### `resolve.modulesDirectories`
+### `resolve.modules`
 
 `array`
 
-Determine what directories should be searched for installed packages and libraries. These directories will be scanned for similarly to how Node scans for `node_modules`... by looking through the current directory as well as it's ancestors (i.e. `./node_modules`, `../node_modules`, and on). It defaults to:
+Tell webpack what directories should be searched when resolving modules.
+
+Absolute and relative paths can both be used, but be aware that they will behave a bit different.
+
+A relative path will be scanned simarly to how Node scans for `node_modules`, by looking through the current directory as well as it's ancestors (i.e. `./node_modules`, `../node_modules`, and on).
+
+With an absolute path, it will only search in the given directory.
+
+`resolve.modules` defaults to:
 
 ```js
-modulesDirectories: [ "node_modules", "web_modules" ]
+modules: ["node_modules"]
 ```
 
-Unlike `root` and `fallback`, **absolute paths are not necessary** and should only be used when there is a hierarchy within these folders.
+If you want to add a directory to search in that takes precedences over `node_modules/`:
+
+```js
+modules: [path.resolve(__dirname, "src"), "node_modules"]
+```
 
 
 ### `resolve.extensions`
@@ -56,7 +47,7 @@ Unlike `root` and `fallback`, **absolute paths are not necessary** and should on
 Automatically resolve certain extensions. This defaults to:
 
 ```js
-extensions: [ "", ".webpack.js", ".web.js", ".js" ]
+extensions: [ ".js", ".json" ]
 ```
 
 which is what enables users to leave off the extension when importing:
@@ -109,17 +100,26 @@ import Test2 from 'xyz/file.js'; // Error, /path/to/file.js/file.js is invalid
 ```
 
 
-### `resolve.packageMains`
+### `resolve.mainFields`
 
 `array`
 
-When importing from an npm package, e.g. `import * as D3 from "d3"`, this option will determine which fields in it's `package.json` are checked. It defaults to:
+When importing from an npm package, e.g. `import * as D3 from "d3"`, this option will determine which fields in it's `package.json` are checked. The default values will vary based upon the [`target`](../concepts/targets) specified in your webpack configuration. 
+
+When the `target` property is set to `webworker`, `web`, or left unspecified:
+
 
 ```js
-packageMains: [ "webpack", "browser", "web", "browserify", [ "jam", "main" ], "main" ]
+mainFields: ["browser", "module", "main"]
 ```
 
-For example, the current version of [D3](https://d3js.org/) (4.2.2) contains these fields:
+For any other target (including `node`):
+
+```js
+mainFields: ["module", "main"]
+```
+
+For example, the `package.json` of [D3](https://d3js.org/) contains these fields:
 
 ```js
 {
@@ -127,21 +127,21 @@ For example, the current version of [D3](https://d3js.org/) (4.2.2) contains the
   main: 'build/d3.node.js',
   browser: 'build/d3.js',
   module: 'index',
-  'jsnext:main': 'index',
   ...
 }
 ```
 
-This means that when we `import * as D3 from "d3"` this will really resolve to either the `main` or `browser` files. 
+This means that when we `import * as D3 from "d3"` this will really resolve to the file in the `browser` property. The `browser` property takes precedence here because it's the first item in `mainFields`. Meanwhile, a node application bundled by webpack will resolve by default to the file in the `module` field.
 
-?> TODO: Discuss order here... I'm assuming they're read from left to right meaning `browser` is what would be imported in the example? What does the nested array, i.e. `[ "jam", "main" ]`, do?
-
-
-### `resolve.packageAlias`
+### `resolve.aliasFields`
 
 `string`
 
-Specify a field, such as `browser`, to be parsed according to [this specification](https://github.com/defunctzombie/package-browser-field-spec).
+Specify a field, such as `browser`, to be parsed according to [this specification](https://github.com/defunctzombie/package-browser-field-spec). Default:
+
+```js
+aliasFields: ["browser"]
+```
 
 
 ### `resolve.unsafeCache`
