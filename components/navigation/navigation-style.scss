@@ -38,10 +38,9 @@
 }
 
 .navigation__mobile {
-  position: absolute;
-  font-size: getFontSize(2);
+  font-size: 1.2em;
   display: flex;
-  left: -0.5em;
+  margin-right:0.25em;
   color: map-get($colors, white);
   transition: color 250ms;
 
