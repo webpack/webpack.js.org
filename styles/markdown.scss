@@ -1,0 +1,195 @@
+// Markdown styling is based on https://gist.github.com/tuzz/3331384.
+
+@import 'vars';
+@import 'functions';
+@import '~prismjs/themes/prism-funky';
+
+.page__content,
+.splash__content {
+  line-height:1.5em;
+
+  h1 { font-size: getFontSize(4); }
+  h2 { font-size: getFontSize(3); }
+  h3 { font-size: getFontSize(2); }
+  h4 { font-size: getFontSize(1); }
+  h5 { font-size: getFontSize(0); }
+  h6 { font-size: getFontSize(-1); }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family:'Geomanist', 'Century Gothic', sans-serif;
+    font-weight:400;
+    line-height:1;
+    margin:1.5em 0 0.25em;
+    color:map-get($colors, mine-shaft);
+
+    &:first-child { margin-top:0; }
+    tt, code { font-size:inherit; }
+  }
+
+  p, blockquote, table, pre {
+    margin:1em 0;
+  }
+
+  ul, ol, dl {
+    margin:0.5em 0 1em;
+  }
+
+  li {
+    margin:0.5em 0;
+  }
+
+  hr {
+    border:none;
+    background-color:map-get($colors, alto);
+    height:3px;
+    margin:2em 0;
+  }
+
+  ul, ol {
+    padding-left: 30px;
+
+    &:first-child { margin-top:0; }
+    &:last-child { margin-bottom:0; }
+  }
+
+  dl {
+    dt {
+      font-size: getFontSize(0);
+      font-weight: bold;
+      font-style: italic;
+      margin: 15px 0 5px;
+
+      &:first-child { padding: 0; }
+    }
+
+    dd {
+      margin: 0 0 15px;
+      padding: 0 15px;
+    }
+
+    dt, dd {
+      > :first-child { margin-top: 0; }
+      > :last-child { margin-bottom: 0; }
+    }
+  }
+
+  blockquote {
+    border-left: 4px solid #dddddd;
+    padding:0.75em 1em;
+    color:map-get($colors, dove-grey);
+
+    > :first-child { margin-top: 0; }
+    > :last-child { margin-bottom: 0; }
+
+    &.tip,
+    &.warning,
+    &.todo {
+      border-left:none;
+      border-radius: 3px;
+      color:map-get($colors, mine-shaft);
+
+      .tip-icon {
+        margin-right:0.5em;
+      }
+
+      .tip-title {
+        font-size:0.8em;
+        font-weight:600;
+        margin-bottom:0.5em;
+        text-transform:uppercase;
+      }
+
+      code {
+        background-color:transparentize(map-get($colors, alto), 0.5);
+      }
+    }
+
+    &.tip { background-color:transparentize(#1abc9c, 0.8); }
+    &.warning { background-color:transparentize(#f1c40f, 0.8); }
+    &.todo { background-color:transparentize(#e74c3c, 0.8); }
+  }
+
+  table {
+    display:block;
+    width:100%;
+    overflow:auto;
+
+    tr {
+      border-top: 1px solid #cccccc;
+      background-color: white;
+      margin: 0;
+      padding: 0;
+
+      &:nth-child(2n) { background-color: #f8f8f8; }
+
+      th {
+        font-weight: bold;
+        border: 1px solid #cccccc;
+        text-align: left;
+        margin: 0;
+        padding: 6px 13px;
+      }
+
+      td {
+        border: 1px solid #cccccc;
+        text-align: left;
+        margin: 0;
+        padding: 6px 13px;
+      }
+
+      th, td {
+        white-space: nowrap;
+
+        > :first-child { margin-top: 0; }
+        > :last-child { margin-bottom: 0; }
+      }
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  b, strong {
+    color:map-get($colors, mine-shaft);
+    font-weight:600;
+  }
+
+  code, tt {
+    font-family:'Ubuntu Mono', monospace;
+    margin: 0 2px;
+    padding: 0 5px;
+    white-space: nowrap;
+    border: 1px solid #eaeaea;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+  }
+
+  pre {
+    background-color:map-get($colors, mine-shaft);
+    font-size: 13px;
+    line-height: 19px;
+    overflow: auto;
+    padding: 6px 10px;
+    border-radius: 3px;
+
+    code {
+      margin: 0;
+      padding: 0;
+      white-space: pre;
+      border: none;
+      color:map-get($colors, concrete);
+      background: transparent;
+
+      .code-details-summary-span {
+        margin-left: -15px;
+        cursor: pointer;
+      }
+    }
+
+    code, tt {
+      background-color: transparent;
+      border: none;
+    }
+  }
+}

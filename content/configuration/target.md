@@ -2,7 +2,7 @@
 title: Target
 contributors:
   - sokra
-  - gregvenech
+  - skipjack
 ---
 
 ?> Compare with [the concept page](/concepts/targets) and determine what goes where.

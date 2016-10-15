@@ -2,21 +2,22 @@
 title: DevServer
 contributors:
   - sokra
-  - gregvenech
+  - skipjack
   - spacek33z
+  - charlespwd
 ---
 
 [webpack-dev-server]() can be used to quickly develop an application. See the ["How to Develop?"](../how-to/develop) to get started.
 
 This page describes the options that effect the behavior of webpack-dev-server (short: dev-server).
 
-T> Options that are compatible with [webpack-dev-middleware]() have 🔑 next to them.
+T> Options that are compatible with [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) have 🔑 next to them.
 
-### `devServer` 
+### `devServer`
 
 `object`
 
-This set of options is picked up by [webpack-dev-server]() and can be used to change it's behavior in various ways. Here's a simple example that gzips and serves everything from our `dist/` directory:
+This set of options is picked up by [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and can be used to change it's behavior in various ways. Here's a simple example that gzips and serves everything from our `dist/` directory:
 
 ```js
 devServer: {
@@ -96,22 +97,13 @@ noInfo: true
 
 This option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you want some bundle information, but not all of it.
 
-There are some presets: `none`, `errors-only`, `minimal` and `verbose`. Use them like this:
+To show only errors in your bundle:
 
 ```js
 stats: "errors-only"
 ```
 
-You can control this even more granularly:
-
-```js
-stats: {
-  chunks: false,
-  hash: false
-}
-```
-
-The available options are: `hash`, `version`, `timings`, `assets`, `chunks`, `modules`, `reasons`, `children`, `source`, `errors`, `errorDetails`, `warnings`and `publicPath`.
+For more information, see the [**stats documentation**](./stats).
 
 T> This option has no effect when used with `quiet` or `noInfo`.
 
@@ -122,22 +114,6 @@ T> This option has no effect when used with `quiet` or `noInfo`.
 
 Control options related to watching the files.
 
-You can control how many milliseconds webpack will wait before re-compiling if no additional change was detected. If you want to wait one second, set it like this:
-
-```js
-watchOptions: {
-  aggregateTimeout: 1000
-}
-```
-
-For some systems, watching many file systems can result in a lot of CPU or memory usage. If this is the case, it is possible to exclude a huge folder like `node_modules`:
-
-```js
-watchOptions: {
-  ignored: /node_modules/
-}
-```
-
 webpack uses the file system to get notified of file changes. In some cases this does not work. For example, when using Network File System (NFS). [Vagrant](https://www.vagrantup.com/) also has a lot of problems with this. In these cases, use polling:
 
 ```js
@@ -147,6 +123,8 @@ watchOptions: {
 ```
 
 If this is too heavy on the file system, you can change this to an integer to set the interval in milliseconds.
+
+See [WatchOptions](./watch) for more options.
 
 
 ### `devServer.headers` 🔑
@@ -198,7 +176,7 @@ T> `filename` has no effect when used without **lazy mode**.
 
 ### `devServer.contentBase`
 
-`string` `array`
+`boolean` `string` `array`
 
 Tell the server where to serve content from. This is only necessary if you want to serve static files. [`output.publicPath`](#output-publicpath) will be used to determine where the bundles should be served from, and takes precedence.
 
@@ -215,6 +193,25 @@ It is also possible to serve from multiple directories:
 ```js
 contentBase: [path.join(__dirname, "public"), path.join(__dirname, "assets")]
 ```
+
+To disable `contentBase`:
+
+```js
+contentBase: false
+```
+
+### `devServer.watchContentBase`
+
+`boolean`
+
+Tell the server to watch the files served by the `devServer.contentBase` option. File changes will trigger a full page reload.
+
+```js
+watchContentBase: true
+```
+
+It is disabled by default.
+
 
 ### `devServer.staticOptions`
 

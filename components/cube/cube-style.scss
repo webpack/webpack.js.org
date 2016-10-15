@@ -1,0 +1,79 @@
+@import 'vars';
+
+.cube {
+  position:relative;
+  display:inline-block;
+  transform-style:preserve-3d;
+  transform:rotateX(-33.5deg) rotateY(45deg);
+
+  &__inner,
+  &__outer {
+    display:inline-block;
+    transform-style:preserve-3d;
+    transition:transform 750ms;
+  }
+
+  &__inner {
+    position:absolute;
+    top:0;
+    left:0;
+  }
+
+  &__face {
+    position:absolute;
+    width:100%;
+    height:100%;
+    backface-visibility:hidden;
+    background:radial-gradient(transparent 30%,rgba(5,17,53,.2) 100%);
+
+    &:after {
+      content:'';
+      position:absolute;
+      display:block;
+      width:100%;
+      height:100%;
+      backface-visibility:hidden;
+      transition:background 750ms;
+    }
+  }
+
+  &--dark {
+    .cube__outer .cube__face:after {
+      background:rgba(126, 169, 232, 0.5);
+    }
+
+    .cube__inner .cube__face:after {
+      background:rgba(16, 58, 177, 0.4);
+    }
+
+    &:hover {
+      .cube__outer .cube__face:after {
+        background:transparentize(#333333, 0.8);
+      }
+
+      .cube__inner .cube__face:after {
+        background:transparentize(#f39c12, 0.4);
+      }
+    }
+  }
+
+  &--light {
+    .cube__outer .cube__face:after {
+      background:transparentize(map-get($colors, malibu), 0.6);
+    }
+
+    .cube__inner .cube__face:after {
+      background:transparentize(map-get($colors, denim), 0.2);
+    }
+
+    &:hover {
+      .cube__outer .cube__face:after {
+        background:transparentize(map-get($colors, malibu), 0.7);
+      }
+
+      .cube__inner .cube__face:after {
+        background:map-get($colors, denim);
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@
 title: Other Options
 contributors:
   - sokra
-  - gregvenech
+  - skipjack
 ---
 
 ?> These are all the other options that might not need an entire page. Either we need to create new pages for them, move them to an existing page, or keep an **Other Options** section like this and replace this TODO with a short description/lead-in paragraph.
