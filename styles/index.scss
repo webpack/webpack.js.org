@@ -46,4 +46,9 @@ a {
   }
 }
 
+#opencollective-banner h1 {
+  color: map-get($colors, emperor);
+  font: 300 getFontSize(3) 'Open Sans', 'Century Gothic', sans-serif;
+}
+
 @import './markdown';

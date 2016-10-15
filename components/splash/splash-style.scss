@@ -50,6 +50,15 @@
     color:map-get($colors, dove-grey);
   }
 
+  &__sponsorheadline {
+    font-style:italic;
+  }
+
+  &__sponsor { 
+    padding-top: 1.5em;
+    text-align: center;
+  }
+
   &__section {
     background:map-get($colors, white);
   }
