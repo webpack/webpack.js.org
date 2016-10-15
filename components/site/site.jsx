@@ -6,6 +6,7 @@ import Footer from '../footer/footer';
 import './site-style';
 
 const pages = [
+  { title: 'Donate', url: '//opencollective.com/webpack'},
   { title: 'Concepts', url: 'concepts' },
   { title: 'Configuration', url: 'configuration' },
   { title: 'How to', url: 'how-to' },
