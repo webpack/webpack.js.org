@@ -13,7 +13,7 @@ export default props => {
         <Container className="splash__content splash_sponsorheadline">
           <h1 id="opencollective-banner" className="splash__sponsorheadline">Help support webpack!</h1>
           <p>By your contributions, donations, and sponsorship, you allow webpack to thrive.</p>
-          <p>Your donations go directly towards supporting office hours, continued enhancements, and most importantly, great documenation and learning material!</p>
+          <p>Your donations go directly towards supporting office hours, continued enhancements, and most importantly, great documentation and learning material!</p>
           
           <object type="image/svg+xml" data="https://opencollective.com/webpack/sponsors.svg"></object>
           <object type="image/svg+xml" data="https://opencollective.com/webpack/backers.svg"></object>
