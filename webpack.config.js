@@ -97,7 +97,7 @@ const developmentConfig = {
 
 const buildConfig = {
   output: {
-    publicPath: '/assets/'
+    publicPath: '/'
   },
   plugins: [
     new ExtractTextPlugin('[name].css', {
