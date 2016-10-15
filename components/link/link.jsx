@@ -7,7 +7,11 @@ if (__DEV__) {
 }
 
 const Link = ({ to, ...props }) => {
-  if (__DEV__ && !startsWith(to, 'http')) {
+  if (startsWith(to, 'http') || startsWith(to, '//')) {
+    return <a href={to} target="_blank" {...props} />;
+  }
+
+  if (__DEV__) {
     return <RRouter.Link to={to} {...props} />;
   }
 
