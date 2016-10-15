@@ -6,8 +6,8 @@ export default class Cube extends React.Component {
     super(props);
 
     this.listeners = {
-      spin: this.spin.bind(this),
-      reset: this.reset.bind(this)
+      spin: this._spin.bind(this),
+      reset: this._reset.bind(this)
     };
 
     this.state = {
@@ -18,8 +18,8 @@ export default class Cube extends React.Component {
   }
 
   render() {
-    let { x, y, z } = this.state,
-        { theme, depth, className = '' } = this.props;
+    let { x, y, z } = this.state;
+    let { theme, depth, className = '' } = this.props;
 
     return (
       <span ref={ ref => this.container = ref }
@@ -58,16 +58,38 @@ export default class Cube extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.hover) {
+    let { hover, continuous } = this.props;
+
+    if (hover) {
       this.container.addEventListener('mouseenter', this.listeners.spin);
       this.container.addEventListener('mouseleave', this.listeners.reset);
+
+    } else if (continuous) {
+      let degrees = 0;
+      let axis = 'y';
+
+      this._interval = setInterval(() => {
+        let obj = {};
+        let sign = Math.random() < 0.5 ? -1 : 1;
+
+        obj[axis] = degrees += 90;
+
+        //axis = axis === 'x' ? 'y' : axis === 'y' ? 'z' : 'x'; 
+
+        this.setState(obj);
+      }, 1000);
     }
   }
 
   componentWillUnmount() {
-    if (this.props.hover) {
+    let { hover, continuous } = this.props;
+
+    if (hover) {
       this.container.removeEventListener('mouseenter', this.listeners.spin);
       this.container.removeEventListener('mouseleave', this.listeners.reset);
+
+    } else if (continuous) {
+      clearInterval(this._interval);
     }
   }
 
@@ -112,10 +134,10 @@ export default class Cube extends React.Component {
    *
    * @param {object} e - Native event
    */
-  spin(e) {
-    let obj = {},
-        axis = this._getRandomAxis(),
-        sign = Math.random() < 0.5 ? -1 : 1;
+  _spin(e) {
+    let obj = {};
+    let axis = this._getRandomAxis();
+    let sign = Math.random() < 0.5 ? -1 : 1;
 
     obj[axis] = sign * 90;
 
@@ -127,7 +149,7 @@ export default class Cube extends React.Component {
    *
    * @param {object} e - Native event
    */
-  reset(e) {
+  _reset(e) {
     this.setState({
       x: 0,
       y: 0,
