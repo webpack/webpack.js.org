@@ -2,7 +2,7 @@
 title: Configuration
 contributors:
   - sokra
-  - gregvenech
+  - skipjack
 ---
 
 Webpack is fed a configuration object. It is passed in one of two ways depending on how you are using webpack: through the [terminal]() or via [Node](). Learn more about the various ways this can be done in [Passing a Configuration](). All the available configuration options are specified below.

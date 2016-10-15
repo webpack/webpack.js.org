@@ -2,7 +2,7 @@
 title: Module
 contributors:
   - sokra
-  - gregvenech
+  - skipjack
 ---
 
 These options determine how the [different types of modules](/concepts/everything-is-a-module) within a project will be treated.

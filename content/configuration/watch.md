@@ -2,7 +2,7 @@
 title: Watch and WatchOptions
 contributors:
   - sokra
-  - gregvenech
+  - skipjack
   - SpaceK33z
 ---
 

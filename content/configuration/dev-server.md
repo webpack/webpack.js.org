@@ -2,7 +2,7 @@
 title: DevServer
 contributors:
   - sokra
-  - gregvenech
+  - skipjack
   - spacek33z
   - charlespwd
 ---

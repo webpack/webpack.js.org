@@ -2,7 +2,7 @@
 title: Resolve
 contributors:
   - sokra
-  - gregvenech
+  - skipjack
   - SpaceK33z
 ---
 

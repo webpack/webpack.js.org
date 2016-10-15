@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from '../link/link';
-import Cube from '../cube/cube';
 import Container from '../container/container';
+import CubeImg from '../../assets/cube.png';
 import './footer-style';
 
 export default (props) => {
@@ -15,8 +15,8 @@ export default (props) => {
         </section>
 
         <section className="footer__middle">
-          <Link to="/">
-            <Cube depth={ 18 } hover />
+          <Link to="/" className="footer__icon">
+            <img src={ CubeImg } />
           </Link>
         </section>
 

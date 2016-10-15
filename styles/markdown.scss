@@ -6,6 +6,8 @@
 
 .page__content,
 .splash__content {
+  line-height:1.5em;
+
   h1 { font-size: getFontSize(4); }
   h2 { font-size: getFontSize(3); }
   h3 { font-size: getFontSize(2); }
@@ -14,8 +16,11 @@
   h6 { font-size: getFontSize(-1); }
 
   h1, h2, h3, h4, h5, h6 {
+    font-family:'Geomanist', 'Century Gothic', sans-serif;
     font-weight:400;
-    margin:1.5em 0 0.5em;
+    line-height:1;
+    margin:1.5em 0 0.25em;
+    color:map-get($colors, mine-shaft);
 
     &:first-child { margin-top:0; }
     tt, code { font-size:inherit; }
@@ -105,7 +110,9 @@
   }
 
   table {
-    padding: 0;
+    display:block;
+    width:100%;
+    overflow:auto;
 
     tr {
       border-top: 1px solid #cccccc;
@@ -131,6 +138,8 @@
       }
 
       th, td {
+        white-space: nowrap;
+
         > :first-child { margin-top: 0; }
         > :last-child { margin-bottom: 0; }
       }
@@ -142,6 +151,7 @@
   }
 
   b, strong {
+    color:map-get($colors, mine-shaft);
     font-weight:600;
   }
 

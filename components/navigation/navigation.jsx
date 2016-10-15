@@ -4,31 +4,46 @@ import Container from '../container/container';
 import Logo from '../logo/logo';
 import './navigation-style';
 
-export default ({ home = '/', pages, onToggleNav }) => (
-  <div className="navigation">
-    <Container>
-      <div className="navigation__inner">
-        <button id="menu-btn" className="navigation__mobilebtn" onClick={onToggleNav}>
-          Open navigation
-        </button>
-        <Link className="navigation__logo" to="/">
-          <Logo theme="light" />
-        </Link>
+export default class Navigation extends React.Component {
+  render() {
+    return (
+      <header className="navigation">
+        <Container className="navigation__inner">
+          <div className="navigation__mobile" onClick={ this._toggleSidebar }>
+            <i className="icon-menu" />
+          </div>
 
-        <nav className="navigation__links">
-          {
-            pages.map((link, i) => (
-              <Link
-                key={ `navigation__link${i}` }
-                className="navigation__link"
-                activeClassName="navigation__link--active"
-                to={ `/${link.url}` }>
-                { link.title }
-              </Link>
-            ))
-          }
-        </nav>
-      </div>
-    </Container>
-  </div>
-);
+          <Link className="navigation__logo" to="/">
+            <Logo light />
+          </Link>
+
+          <nav className="navigation__links">
+            {
+              this.props.pages.map((link, i) => {
+                let { pathname } = window.location;
+                let active = pathname === `/${link.url}` || pathname.includes(`/${link.url}/`);
+                let activeClass = active ? 'navigation__link--active' : '';
+
+                return (
+                  <Link
+                    key={ `navigation__link${i}` }
+                    className={ `navigation__link ${activeClass}` }
+                    to={ `/${link.url}` }>
+                    { link.title }
+                  </Link>
+                );
+              })
+            }
+          </nav>
+        </Container>
+      </header>
+    );
+  }
+
+  _toggleSidebar(e) {
+    let sidebar = document.querySelector('.sidebar');
+    let modifier = 'sidebar--visible';
+
+    sidebar.classList.toggle(modifier);
+  }
+}

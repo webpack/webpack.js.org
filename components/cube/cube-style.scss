@@ -59,20 +59,20 @@
 
   &--light {
     .cube__outer .cube__face:after {
-      background:transparentize(map-get($colors, concrete), 0.8);
+      background:transparentize(map-get($colors, malibu), 0.6);
     }
 
     .cube__inner .cube__face:after {
-      background:transparentize(map-get($colors, tussock), 0.4);
+      background:transparentize(map-get($colors, denim), 0.2);
     }
 
     &:hover {
       .cube__outer .cube__face:after {
-        background:transparentize(map-get($colors, white), 0.8);
+        background:transparentize(map-get($colors, malibu), 0.7);
       }
 
       .cube__inner .cube__face:after {
-        background:transparentize(map-get($colors, lynch), 0.6);
+        background:map-get($colors, denim);
       }
     }
   }
