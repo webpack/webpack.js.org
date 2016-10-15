@@ -1,52 +1,9 @@
 @import 'vars';
+@import 'functions';
 
 .splash {
-  &__viz {
-    position:relative;
-    display:flex;
-    height:100vh;
-    min-height:600px;
-    max-height:900px;
-  }
-
-  &__modules,
-  &__output { 
-    flex:0 0 43.25%; 
-  }
-
-  &__icon {
-    display:flex;
-    flex:1 1 auto;
-    align-items:center;
-    justify-content:center;
-  }
-    
-  &__cube {
-    margin-right:-1.75em;
-  }
-
-  &__modules {
-    
-  }
-
-  &__output {
-    
-  }
-
-  &__headline {
-    position:absolute;
-    display:block;
-    width:100%;
-    bottom:10%;
-    left:0;
-    text-align:center;
-    font-size:ms(1);
-    font-style:italic;
-    color:map-get($colors, dove-grey);
-  }
-
   &__sponsorheadline {
-    font-style:italic;
+    //font-style:italic;
   }
 
   &__sponsor { 
@@ -55,7 +12,7 @@
   }
 
   &__section {
-    background:map-get($colors, white);
+    background:map-get($colors, concrete);
   }
 
   &__content { 

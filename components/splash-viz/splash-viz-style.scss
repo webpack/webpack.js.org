@@ -1,0 +1,48 @@
+@import 'vars';
+@import 'functions';
+
+.splash-viz {
+  position:relative;
+  display:flex;
+  height:100vh;
+  min-height:480px;
+
+  &__modules,
+  &__output { 
+    flex:0 0 43.25%; 
+  }
+
+  &__icon {
+    display:flex;
+    flex:1 1 auto;
+    align-items:center;
+    justify-content:center;
+  }
+    
+  &__cube {
+    margin-right:-1.75em;
+  }
+
+  &__modules {
+    
+  }
+
+  &__output {
+    display:flex;
+    flex-wrap:wrap;
+    align-content:center;
+    justify-content:center;
+  }
+
+  &__headline {
+    position:absolute;
+    display:block;
+    width:100%;
+    bottom:12%;
+    left:0;
+    text-align:center;
+    font-size:getFontSize(2);
+    font-style:italic;
+    color:map-get($colors, dove-grey);
+  }
+}
