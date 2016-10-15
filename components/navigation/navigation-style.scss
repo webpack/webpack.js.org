@@ -6,6 +6,25 @@
   flex: 0 0 auto;
   transition: background 250ms;
   background: map-get($colors, mine-shaft);
+
+  &--transparent {
+    position:relative;
+    display:flex;
+    justify-content: center;
+    background: transparent;
+
+    .navigation__inner {
+      position:absolute;
+    }
+
+    .navigation__link:hover {
+      color: map-get($colors, emperor);
+    }
+
+    .navigation__mobile {
+      color:map-get($colors, emperor);
+    }
+  }
 }
 
 .navigation__inner {
