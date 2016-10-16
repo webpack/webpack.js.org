@@ -6,11 +6,16 @@ import './navigation-style';
 
 export default class Navigation extends React.Component {
   render() {
-    let { pathname } = window.location;
-    let isIndex = pathname === '' || pathname === '/';
+    let pathname = '';
+    let isIndex = false;
+
+    if (typeof window !== 'undefined') {
+      pathname = window.location.pathname;
+      isIndex = pathname === '' || pathname === '/';
+    }
 
     return (
-      <header className={ `navigation ${isIndex ? 'navigation--transparent' : ''}` }>
+      <header className="navigation">
         <Container className="navigation__inner">
           <div className="navigation__mobile" onClick={ this._toggleSidebar }>
             <i className="icon-menu" />
