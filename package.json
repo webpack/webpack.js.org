@@ -23,6 +23,7 @@
   "scripts": {
     "start": "node ./bootstrap.js",
     "build": "node ./bootstrap.js && npm run sitemap && echo webpack.js.org > build/CNAME",
+    "build-test": "http-server build/",
     "deploy": "gh-pages -d build",
     "lint": "run-s lint:*",
     "lint:js": "eslint . --ext .js --ext .jsx",
@@ -55,6 +56,7 @@
     "file-loader": "^0.9.0",
     "gh-pages": "^0.11.0",
     "html-webpack-plugin": "^2.22.0",
+    "http-server": "^0.9.0",
     "json-loader": "^0.5.4",
     "lodash": "^4.16.1",
     "markdown-loader": "^0.1.7",
