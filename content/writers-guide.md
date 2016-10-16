@@ -37,6 +37,32 @@ function foo () {
 foo();
 ```
 
+### Lists
+
+* Boo
+* Foo
+* Zoo
+
+Lists should be ordered alphabetically.
+
+### Tables
+
+| Parameter  | Explanation                                      | Input type | Default value |
+|------------|--------------------------------------------------|------------|---------------|
+| --debug    | Switch loaders to debug mode                     | boolean    | false         |
+| --devtool  | Define source map type for the bundled resources | string     | -             |
+| --progress | Print compilation progress in percentage         | boolean    | false         |
+
+Same goes for tables.
+
+### Configuration Properties
+
+[./configuration] properties should be ordered alphabetically as well:
+
+* `devServer.contentBase`
+* `devServer.compress`
+* `devServer.hot`
+
 ### Quotes
 
 #### Blockquote

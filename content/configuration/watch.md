@@ -45,19 +45,6 @@ aggregateTimeout: 300 // The default
 ```
 
 
-### `watchOptions.poll`
-
-`boolean` `number`
-
-Turn on [polling](http://whatis.techtarget.com/definition/polling) by passing `true`, or specifying a poll interval in milliseconds:
-
-```js
-poll: 1000 // Check for changes every second
-```
-
-T> If watching does not work for you, try out this option. Watching does not work with NFS and machines in VirtualBox.
-
-
 ### `watchOptions.ignored`
 
 For some systems, watching many file systems can result in a lot of CPU or memory usage. It is possible to exclude a huge folder like `node_modules`:
@@ -71,3 +58,17 @@ It is also possible to use [anymatch](https://github.com/es128/anymatch) pattern
 ```js
 ignored: "files/**/*.js"
 ```
+
+
+### `watchOptions.poll`
+
+`boolean` `number`
+
+Turn on [polling](http://whatis.techtarget.com/definition/polling) by passing `true`, or specifying a poll interval in milliseconds:
+
+```js
+poll: 1000 // Check for changes every second
+```
+
+T> If watching does not work for you, try out this option. Watching does not work with NFS and machines in VirtualBox.
+

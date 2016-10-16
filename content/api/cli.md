@@ -3,7 +3,7 @@ title: CLI
 ---
 ## Overview
 
-webpack provides a Command Line Interface (CLI) to configure and interact with your build. This is mostly useful in case of early prototyping, profiling, writing npm scripts or personal customization of the build. 
+webpack provides a Command Line Interface (CLI) to configure and interact with your build. This is mostly useful in case of early prototyping, profiling, writing npm scripts or personal customization of the build.
 
 For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the config file.
 
@@ -98,15 +98,15 @@ This set of options allows you to manipulate certain output parameters of your b
 
 | Parameter                    | Explanation                                                     | Input type | Default value                                         |
 |------------------------------|-----------------------------------------------------------------|------------|-------------------------------------------------------|
-| --output-path                | The output path for compilation assets                          | string     | Current directory                                     |
-| --output-filename            | The output filename of the bundle                               | string     | [name].js                                             |
 | --output-chunk-filename      | The output filename for additional chunks                       | string     | filename with [id] instead of [name] or [id] prefixed |
-| --output-source-map-filename | The output filename for the SourceMap                           | string     | [name].map or [outputFilename].map                    |
-| --output-public-path         | The public path for the assets                                  | string     | /                                                     |
+| --output-filename            | The output filename of the bundle                               | string     | [name].js                                             |
 | --output-jsonp-function      | The name of the JSONP function used for chunk loading           | string     | webpackJsonp                                          |
-| --output-pathinfo            | Include a comment with the request for every dependency         | boolean    | false                                                 |
 | --output-library             | Expose the exports of the entry point as library                | string     |                                                       |
 | --output-library-target      | The type for exposing the exports of the entry,point as library | string     | var                                                   |
+| --output-path                | The output path for compilation assets                          | string     | Current directory                                     |
+| --output-pathinfo            | Include a comment with the request for every dependency         | boolean    | false                                                 |
+| --output-public-path         | The public path for the assets                                  | string     | /                                                     |
+| --output-source-map-filename | The output filename for the SourceMap                           | string     | [name].map or [outputFilename].map                    |
 
 #### Example Usage
 
@@ -163,9 +163,9 @@ These options makes the build watch for changes in files of the dependency graph
 | Parameter                 | Explanation                                             |
 |---------------------------|---------------------------------------------------------|
 | --watch, -w               | Watch the filesystem for changes                        |
-| --watch-stdin, --stdin    | Exit the process when stdin is closed                   |
 | --watch-aggregate-timeout | Timeout for gathering changes while watching            |
 | --watch-poll              | The polling interval for watching (also enable polling) |
+| --watch-stdin, --stdin    | Exit the process when stdin is closed                   |
 
 ### Optimize Options
 
@@ -173,10 +173,10 @@ These options allow to manipulate optimisations for a production build using web
 
 | Parameter                 | Explanation                                            | Plugin used                          |
 |---------------------------|--------------------------------------------------------|--------------------------------------|
+| --optimize-dedupe         | Optimize duplicate module sources in the bundle        | DedupePlugin                         |
 | --optimize-max-chunks     | Try to keep the chunk count below a limit              | LimitChunkCountPlugin                |
 | --optimize-min-chunk-size | Try to keep the chunk size above a limit               | MinChunkSizePlugin                   |
 | --optimize-minimize       | Minimize javascript and switches loaders to minimizing | UglifyJsPlugin & LoaderOptionsPlugin |
-| --optimize-dedupe         | Optimize duplicate module sources in the bundle        | DedupePlugin                         |
 
 ### Resolve Options
 
@@ -195,38 +195,38 @@ These options allow webpack to display various stats and style them differently 
 | Parameter               | Explanation                                                        | Type    |
 |-------------------------|--------------------------------------------------------------------|---------|
 | --color, --colors       | Enables/Disables colors on the console [default: (supports-color)] | boolean |
-| --sort-modules-by       | Sorts the modules list by property in module                       | string  |
-| --sort-chunks-by        | Sorts the chunks list by property in chunk                         | string  |
-| --sort-assets-by        | Sorts the assets list by property in asset                         | string  |
-| --hide-modules          | Hides info about modules                                           | boolean |
-| --display-exclude       | Exclude modules in the output                                      | boolean |
-| --display-modules       | Display even excluded modules in the output                        | boolean |
-| --display-chunks        | Display chunks in the output                                       | boolean |
-| --display-entrypoints   | Display entry points in the output                                 | boolean |
-| --display-origins       | Display origins of chunks in the output                            | boolean |
 | --display-cached        | Display also cached modules in the output                          | boolean |
 | --display-cached-assets | Display also cached assets in the output                           | boolean |
+| --display-chunks        | Display chunks in the output                                       | boolean |
+| --display-entrypoints   | Display entry points in the output                                 | boolean |
+| --display-error-details | Display details about errors                                       | boolean |
+| --display-exclude       | Exclude modules in the output                                      | boolean |
+| --display-modules       | Display even excluded modules in the output                        | boolean |
+| --display-origins       | Display origins of chunks in the output                            | boolean |
 | --display-reasons       | Display reasons about module inclusion in the output               | boolean |
 | --display-used-exports  | Display information about used exports in modules (Tree Shaking)   | boolean |
-| --display-error-details | Display details about errors                                       | boolean |
+| --hide-modules          | Hides info about modules                                           | boolean |
+| --sort-assets-by        | Sorts the assets list by property in asset                         | string  |
+| --sort-chunks-by        | Sorts the chunks list by property in chunk                         | string  |
+| --sort-modules-by       | Sorts the modules list by property in module                       | string  |
 | --verbose, -v           | Show more details                                                  | boolean |
 
 ### Advanced Options
 
 | Parameter             | Explanation                                                      | Usage                                       |
 |-----------------------|------------------------------------------------------------------|---------------------------------------------|
+| --bail                | Abort the compilation on first error                             |                                             |
+| --cache               | Enable in memory caching [Enabled by default for watch]          | --cache=false                               |
+| --define              | Define any free var in the bundle                                | --define process.env.NODE_ENV='development' |
+| --hot                 | Enables Hot Module Replacement [Uses HotModuleReplacementPlugin] | --hot=true                                  |
+| --labeled-modules     | Enables labeled modules [Uses LabeledModulesPlugin]              |                                             |
+| --plugin              | Load this plugin                                                 |                                             |
+| --prefetch            | Prefetch the particular file                                     | --prefetch=./files.js                       |
+| --provide             | Provide these modules as free vars in all modules                | --provide jQuery=jquery                     |
 | --records-input-path  | Path to the records file (reading)                               |                                             |
 | --records-output-path | Path to the records file (writing)                               |                                             |
 | --records-path        | Path to the records file                                         |                                             |
-| --define              | Define any free var in the bundle                                | --define process.env.NODE_ENV='development' |
 | --target              | The targeted execution enviroment                                | --target='node'                             |
-| --cache               | Enable in memory caching [Enabled by default for watch]          | --cache=false                               |
-| --hot                 | Enables Hot Module Replacement [Uses HotModuleReplacementPlugin] | --hot=true                                  |
-| --prefetch            | Prefetch the particular file                                     | --prefetch=./files.js                       |
-| --provide             | Provide these modules as free vars in all modules                | --provide jQuery=jquery                     |
-| --labeled-modules     | Enables labeled modules [Uses LabeledModulesPlugin]              |                                             |
-| --plugin              | Load this plugin                                                 |                                             |
-| --bail                | Abort the compilation on first error                             |                                             |
 
 ### Shortcuts
 

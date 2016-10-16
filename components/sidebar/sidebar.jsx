@@ -19,8 +19,8 @@ export default class Sidebar extends React.Component {
     return (
       <nav className="sidebar">
         <div className="sidebar__inner">
-          <SidebarItem 
-            url={ `/${sectionName}` } 
+          <SidebarItem
+            url={ `/${sectionName}` }
             title="Introduction" />
 
           {
