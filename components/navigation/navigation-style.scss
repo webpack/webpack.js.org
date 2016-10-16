@@ -6,6 +6,25 @@
   flex: 0 0 auto;
   transition: background 250ms;
   background: map-get($colors, mine-shaft);
+
+  &--transparent {
+    position:relative;
+    display:flex;
+    justify-content: center;
+    background: transparent;
+
+    .navigation__inner {
+      position:absolute;
+    }
+
+    .navigation__link:hover {
+      color: map-get($colors, emperor);
+    }
+
+    .navigation__mobile {
+      color:map-get($colors, emperor);
+    }
+  }
 }
 
 .navigation__inner {
@@ -19,10 +38,9 @@
 }
 
 .navigation__mobile {
-  position: absolute;
-  font-size: getFontSize(2);
+  font-size: 1.2em;
   display: flex;
-  left: -0.5em;
+  margin-right:0.25em;
   color: map-get($colors, white);
   transition: color 250ms;
 

@@ -27,7 +27,7 @@ webpack/fastparse|fastparse|sokra|
 webpack/json-loader|json-loader||
 webpack/url-loader|url-loader||
 webpack/webpack-sources|webpack-sources||
-webpack/extract-text-webpack-plugin|extract-text-webpack-plugin|Spacek33z|
+webpack/extract-text-webpack-plugin|extract-text-webpack-plugin||
 jtangelder/sass-loader|sass-loader|jhnns|
 webpack/karma-webpack|karma-webpack|MikaAK|
 webpack/imports-loader|imports-loader||
