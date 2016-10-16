@@ -13,10 +13,17 @@ export default props => {
         id="components/splash-viz/splash-viz.jsx"
         component={ SplashViz } />
 
+      <iframe 
+        className="splash__bin"
+        src="http://www.webpackbin.com/N1XOoynAZ"
+        sandbox="allow-scripts allow-same-origin allow-forms" />
+
+
       <section className="splash__section splash__sponsor">
-        <Container className="splash__content splash_sponsorheadline">
-          <h1 className="splash__sponsorheadline">Help support webpack!</h1>
-          <p>By your contributions, donations, and sponsorship, you allow webpack to thrive.</p>
+        <Container className="splash__content">
+          <h1>Support the Team!</h1>
+
+          <p>Through contributions, donations, and sponsorship, you allow webpack to thrive. Your donations directly support office hours, continued enhancements, and most importantly, great documentation and learning material!</p>
           
           <object type="image/svg+xml" data="https://opencollective.com/webpack/sponsors.svg"></object>
           <object type="image/svg+xml" data="https://opencollective.com/webpack/backers.svg"></object>
