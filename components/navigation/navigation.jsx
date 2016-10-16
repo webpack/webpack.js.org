@@ -43,8 +43,8 @@ export default class Navigation extends React.Component {
   }
 
   _toggleSidebar(e) {
-    let sidebar = document.querySelector('.sidebar');
-    let modifier = 'sidebar--visible';
+    let sidebar = document.querySelector('.sidebar-mobile');
+    let modifier = 'sidebar-mobile--visible';
 
     sidebar.classList.toggle(modifier);
   }
