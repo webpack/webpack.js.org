@@ -27,7 +27,7 @@ export default class SplashViz extends React.Component {
         </div>
 
         <div className="splash-viz__icon">
-          <Cube className="splash-viz__cube" depth={ 140 } continuous />
+          <Cube className="splash-viz__cube" depth={ 100 } continuous />
         </div>
 
         <div className="splash-viz__output">
@@ -38,13 +38,13 @@ export default class SplashViz extends React.Component {
           }
         </div>
 
-        <span className="splash-viz__headline">
+        {/*<span className="splash-viz__headline">
           webpack transforms your&nbsp;
           <Link to="/concepts/modules">modules</Link>
           &nbsp;into production-ready&nbsp;
           <Link to="/concepts/output">bundles</Link>
           &nbsp;and assets
-        </span>
+        </span>*/}
       </section>
     );
   }
