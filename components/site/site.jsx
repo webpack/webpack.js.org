@@ -2,11 +2,12 @@ import React from 'react';
 import Interactive from 'antwar-interactive';
 import { GoogleAnalytics } from 'antwar-helpers';
 import Navigation from '../navigation/navigation';
+import SidebarMobile from '../sidebar-mobile/sidebar-mobile';
 import Sidecar from '../sidecar/sidecar';
 import Footer from '../footer/footer';
 import './site-style';
 
-const pages = [
+const sections = [
   { title: 'Concepts', url: 'concepts' },
   { title: 'Configuration', url: 'configuration' },
   { title: 'How to', url: 'how-to' },
@@ -22,7 +23,12 @@ export default props => {
       <Interactive
         id="components/navigation/navigation.jsx"
         component={ Navigation }
-        pages={ pages } />
+        pages={ sections } />
+
+      <Interactive
+        id="components/sidebar-mobile/sidebar-mobile.jsx"
+        component={ SidebarMobile }
+        sections={ sections } />
 
       <Sidecar />
       { props.children }
