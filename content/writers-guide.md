@@ -55,6 +55,14 @@ Lists should be ordered alphabetically.
 
 Same goes for tables.
 
+### Configuration Properties
+
+[./configuration] properties should be ordered alphabetically as well:
+
+* `devServer.contentBase`
+* `devServer.compress`
+* `devServer.hot`
+
 ### Quotes
 
 #### Blockquote
