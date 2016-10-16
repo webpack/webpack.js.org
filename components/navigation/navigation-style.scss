@@ -38,9 +38,9 @@
 }
 
 .navigation__mobile {
+  position:absolute;
   font-size: 1.4em;
   display: flex;
-  margin-right:0.25em;
   color: map-get($colors, white);
   cursor: pointer;
   transition: color 250ms;
@@ -52,6 +52,10 @@
   @include break {
     display: none;
   }
+}
+
+.navigation__logo {
+  margin:auto;
 }
 
 .navigation__links {
