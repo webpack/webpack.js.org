@@ -134,9 +134,9 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
         [issuer](/configuration/module#rule-issuer): { test, include, exclude },
         // conditions for the issuer (the origin of the import)
 
-        [enforce](/configuration/module#rule-enfore): "pre",
-        [enforce](/configuration/module#rule-enfore): "post",
-        // apply these rule even if rules are overriden (advanced option)
+        [enforce](/configuration/module#rule-enforce): "pre",
+        [enforce](/configuration/module#rule-enforce): "post",
+        // apply these rule even if rules are overridden (advanced option)
 
         [loader](/configuration/module#rule-loader): "babel-loader",
         // the loader which should be applied, it'll be resolve relative to the context
