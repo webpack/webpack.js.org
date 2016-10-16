@@ -38,10 +38,11 @@
 }
 
 .navigation__mobile {
-  font-size: 1.2em;
+  font-size: 1.4em;
   display: flex;
   margin-right:0.25em;
   color: map-get($colors, white);
+  cursor: pointer;
   transition: color 250ms;
 
   &:active {
