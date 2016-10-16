@@ -20,50 +20,6 @@ Have a look at [Module Resolution](concepts/module-resolution) for more explanat
 Configure how modules are resolved. For example, when calling `import "lodash"` in ES6, the `resolve` options can change where webpack goes to look for `"lodash"` (see [`modules`](#resolve-modules)).
 
 
-### `resolve.modules`
-
-`array`
-
-Tell webpack what directories should be searched when resolving modules.
-
-Absolute and relative paths can both be used, but be aware that they will behave a bit different.
-
-A relative path will be scanned simarly to how Node scans for `node_modules`, by looking through the current directory as well as it's ancestors (i.e. `./node_modules`, `../node_modules`, and on).
-
-With an absolute path, it will only search in the given directory.
-
-`resolve.modules` defaults to:
-
-```js
-modules: ["node_modules"]
-```
-
-If you want to add a directory to search in that takes precedences over `node_modules/`:
-
-```js
-modules: [path.resolve(__dirname, "src"), "node_modules"]
-```
-
-
-### `resolve.extensions`
-
-`array`
-
-Automatically resolve certain extensions. This defaults to:
-
-```js
-extensions: [ ".js", ".json" ]
-```
-
-which is what enables users to leave off the extension when importing:
-
-```js
-import File from '../path/to/file'
-```
-
-W> Using this will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions. For modules that are imported with their extension, e.g. `import SomeFile from "./somefile.ext"`, to be properly resolved, an empty string must be included in the array.
-
-
 ### `resolve.alias`
 
 `object`
@@ -125,6 +81,18 @@ import Test2 from 'xyz/file.js'; // Error, /path/to/file.js/file.js is invalid
 
 `/abc/node_modules` may resolve in `/node_modules` too.
 
+
+### `resolve.aliasFields`
+
+`string`
+
+Specify a field, such as `browser`, to be parsed according to [this specification](https://github.com/defunctzombie/package-browser-field-spec). Default:
+
+```js
+aliasFields: ["browser"]
+```
+
+
 ### `resolve.descriptionFiles`
 
 `array`
@@ -132,6 +100,44 @@ import Test2 from 'xyz/file.js'; // Error, /path/to/file.js/file.js is invalid
 Default: `["package.json"]`
 
 The JSON files to use for descriptions.
+
+
+### `resolve.enforceExtension`
+
+`bool`
+
+Default: `false`
+
+If false it will also try to use no extension from above.
+
+
+### `resolve.enforceModuleExtension`
+
+`bool`
+
+Default: `false`
+
+If false it's also try to use no module extension from above.
+
+
+### `resolve.extensions`
+
+`array`
+
+Automatically resolve certain extensions. This defaults to:
+
+```js
+extensions: [ ".js", ".json" ]
+```
+
+which is what enables users to leave off the extension when importing:
+
+```js
+import File from '../path/to/file'
+```
+
+W> Using this will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions. For modules that are imported with their extension, e.g. `import SomeFile from "./somefile.ext"`, to be properly resolved, an empty string must be included in the array.
+
 
 ### `resolve.mainFields`
 
@@ -166,6 +172,7 @@ For example, the `package.json` of [D3](https://d3js.org/) contains these fields
 
 This means that when we `import * as D3 from "d3"` this will really resolve to the file in the `browser` property. The `browser` property takes precedence here because it's the first item in `mainFields`. Meanwhile, a node application bundled by webpack will resolve by default to the file in the `module` field.
 
+
 ### `resolve.mainFiles`
 
 `array`
@@ -174,23 +181,6 @@ Default: `["index"]`
 
 The filename to be used while resolving directories.
 
-### `resolve.aliasFields`
-
-`string`
-
-Specify a field, such as `browser`, to be parsed according to [this specification](https://github.com/defunctzombie/package-browser-field-spec). Default:
-
-```js
-aliasFields: ["browser"]
-```
-
-### `resolve.enforceExtension`
-
-
-
-Default: `false`
-
-If false it will also try to use no extension from above.
 
 ### `resolve.moduleExtensions`
 
@@ -200,13 +190,31 @@ Example: `['-loaders']`
 
 These extensions are tried when resolving a module.
 
-### `resolve.enforceModuleExtension`
 
-`bool`
+### `resolve.modules`
 
-Default: `false`
+`array`
 
-If false it's also try to use no module extension from above.
+Tell webpack what directories should be searched when resolving modules.
+
+Absolute and relative paths can both be used, but be aware that they will behave a bit different.
+
+A relative path will be scanned simarly to how Node scans for `node_modules`, by looking through the current directory as well as it's ancestors (i.e. `./node_modules`, `../node_modules`, and on).
+
+With an absolute path, it will only search in the given directory.
+
+`resolve.modules` defaults to:
+
+```js
+modules: ["node_modules"]
+```
+
+If you want to add a directory to search in that takes precedences over `node_modules/`:
+
+```js
+modules: [path.resolve(__dirname, "src"), "node_modules"]
+```
+
 
 ### `resolve.resolveToContext`
 
@@ -215,6 +223,7 @@ If false it's also try to use no module extension from above.
 Default: `false`
 
 If true, trying to resolve a context to its absolute path ends when a directory is found.
+
 
 ### `resolve.unsafeCache`
 
@@ -254,4 +263,3 @@ T> Note that you can use alias here and other features familiar from resolve. Fo
 That's a `resolveLoader` only property.It describes alternatives for the module name that are tried.
 
 Default: `["*-webpack-loader", "*-web-loader", "*-loader", "*"]`
-

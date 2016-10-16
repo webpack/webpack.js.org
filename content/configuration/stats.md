@@ -29,16 +29,16 @@ stats: {
 
 The available properties in this object are:
 
-* `hash`
-* `version`
-* `timings`
 * `assets`
-* `chunks`
-* `modules`
-* `reasons`
 * `children`
-* `source`
-* `errors`
+* `chunks`
 * `errorDetails`
-* `warnings`
+* `errors`
+* `hash`
+* `modules`
 * `publicPath`
+* `reasons`
+* `source`
+* `timings`
+* `version`
+* `warnings`

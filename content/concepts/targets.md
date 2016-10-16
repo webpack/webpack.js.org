@@ -29,12 +29,12 @@ module.exports = config;
 
 The following is a list of values you can pass to the `target` property.
 
+* `"async-node"` Compile for usage in a node.js-like environment (use `fs` and `vm` to load chunks async)
+* `"electron-main"` Compile for electron renderer process, provide a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environment and `NodeTargetPlugin` and `ExternalsPlugin` for commonjs and electron bulit-in modules. *Note: need `webpack` >= 1.12.15.
+* `"node"` Compile for usage in a node.js-like environment (use `require` to load chunks)
+* `"node-webkit"` Compile for usage in webkit, uses jsonp chunk loading but also supports build in node.js modules plus require("nw.gui") (experimental)
 * `"web"` Compile for usage in a browser-like environment (default)
 * `"webworker"` Compile as WebWorker
-* `"node"` Compile for usage in a node.js-like environment (use `require` to load chunks)
-* `"async-node"` Compile for usage in a node.js-like environment (use `fs` and `vm` to load chunks async)
-* `"node-webkit"` Compile for usage in webkit, uses jsonp chunk loading but also supports build in node.js modules plus require("nw.gui") (experimental)
-* `"electron-main"` Compile for electron renderer process, provide a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environment and `NodeTargetPlugin` and `ExternalsPlugin` for commonjs and electron bulit-in modules. *Note: need `webpack` >= 1.12.15.
 
 Each _target_ has a variety of deployment/environment specific additions, support to fit its needs.
 
