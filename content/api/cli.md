@@ -3,7 +3,7 @@ title: CLI
 ---
 ## Overview
 
-webpack provides a Command Line Interface (CLI) to configure and interact with your build. This is mostly useful in case of early prototyping, profiling, writing npm scripts or personal customization of the build. 
+webpack provides a Command Line Interface (CLI) to configure and interact with your build. This is mostly useful in case of early prototyping, profiling, writing npm scripts or personal customization of the build.
 
 For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the config file.
 
