@@ -88,8 +88,11 @@ function root(contentCb) {
     },
     processPage: processPage(), // Process individual page (url, content)
     layouts: { // Layouts (page/section)
-      page: function() {
+      index: function() {
         return require('./components/splash/splash.jsx').default
+      },
+      page: function() {
+        return require('./components/page/page.jsx').default
       }
     },
     redirects: {} // Redirects <from>: <to>
