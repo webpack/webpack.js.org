@@ -22,7 +22,7 @@ export default class Navigation extends React.Component {
           </div>
 
           <Link className="navigation__logo" to="/">
-            <Logo light={ !isIndex } />
+            <Logo light />
           </Link>
 
           <nav className="navigation__links">
