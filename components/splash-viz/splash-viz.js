@@ -38,13 +38,9 @@ export default class SplashViz extends React.Component {
           }
         </div>
 
-        {/*<span className="splash-viz__headline">
-          webpack transforms your&nbsp;
-          <Link to="/concepts/modules">modules</Link>
-          &nbsp;into production-ready&nbsp;
-          <Link to="/concepts/output">bundles</Link>
-          &nbsp;and assets
-        </span>*/}
+        <div className="splash-viz__headline">
+          Who says front-end code can't be modular?
+        </div>
       </section>
     );
   }
