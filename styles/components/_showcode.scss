@@ -1,0 +1,34 @@
+.showCode {
+    background-color:black;
+    .row {
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+    }
+    .col {
+        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+    }
+    .box {
+        font-size: 12px;
+    }
+    .col-1-5 { width: 20%; }
+    .col-2-5 { width: 40%; }
+    .col-3-5 { width: 60%; }
+    .col-4-5 { width: 80%; }
+    .col-5-5 { width: 100%; }
+
+    .col-1-12 { width: 8.33%; }
+    .col-2-12 { width: 16.66%; }
+    .col-3-12 { width: 25%; }
+    .col-4-12 { width: 33.33%; }
+    .col-5-12 { width: 41.66%; }
+    .col-6-12 { width: 50%; }
+    .col-7-12 { width: 58.33%; }
+    .col-8-12 { width: 66.66%; }
+    .col-9-12 { width: 75%; }
+    .col-10-12 { width: 83.33%; }
+    .col-11-12 { width: 91.66%; }
+    .col-12-12 { width: 100%; }
+}

@@ -3,7 +3,8 @@ import Container from '../container/container';
 import Cube from '../cube/cube';
 import Link from '../link/link';
 import './splash-style';
-
+import Interactive from 'antwar-interactive';
+import ShowCode from './../ShowCode';
 export default props => {
   let { page } = props;
 
@@ -40,7 +41,12 @@ export default props => {
           &nbsp;and assets
         </span>
       </section>
-
+      
+      <section>
+        <Interactive
+          id="components/ShowCode.jsx"
+          component={ShowCode}/>
+      </section>
       <section className="splash__section">
         <Container className="splash__content">
           <h1>{ page.title }</h1>

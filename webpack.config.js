@@ -7,13 +7,15 @@ var webpack = require('webpack');
 var cwd = process.cwd();
 var stylePaths = [
   path.join(cwd, 'styles'),
-  path.join(cwd, 'components')
+  path.join(cwd, 'components'),
+  path.join(cwd, 'node_modules/highlight.js/styles')
 ];
 
 const commonConfig = {
   entry: {
     style: [
-      path.join(cwd, 'styles', 'index.scss')
+      path.join(cwd, 'styles', 'index.scss'),
+      path.join(cwd, 'node_modules/highlight.js/styles', 'github-gist.css')
     ]
   },
   resolve: {
@@ -25,7 +27,8 @@ const commonConfig = {
         test: /\.jsx?$/,
         loader: 'babel!eslint',
         include: [
-          path.join(__dirname, 'components')
+          path.join(__dirname, 'components'),
+          path.join(__dirname, 'snippets')
         ]
       },
       {
@@ -47,6 +50,13 @@ const commonConfig = {
       {
         test: /\.html$/,
         loaders: ['raw']
+      },
+      {
+        test: /\.md$/,
+        include:[
+          path.join(__dirname, 'snippets')
+        ],
+        loader: 'html-loader!highlight-loader!markdown-loader'
       }
     ]
   },
