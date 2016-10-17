@@ -24,6 +24,20 @@
   }
 }
 
+.sidebar-mobile__close {
+  position:absolute;
+  right:16px;
+  top:19px;
+  font-size:1.5em;
+  cursor:pointer;
+  color:map-get($colors, dusty-grey);
+  transition:color 250ms;
+
+  &:hover {
+    color:map-get($colors, mine-shaft);
+  }
+}
+
 .sidebar-mobile__section {
   font-size: getFontSize(1);
   text-transform: uppercase;

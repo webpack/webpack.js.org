@@ -5,7 +5,10 @@ import './sidebar-mobile-style';
 export default class SidebarMobile extends React.Component {
   render() {
     return (
-      <nav className="sidebar-mobile">
+      <nav className="sidebar-mobile" ref={ ref => this.container = ref }>
+        <i className="sidebar-mobile__close icon-cross"
+          onClick={ this._close.bind(this) } />
+
         {
           this.props.sections.map(section => (
             <div key={ section.url }>
@@ -17,6 +20,16 @@ export default class SidebarMobile extends React.Component {
           ))
         }
       </nav>
+    );
+  }
+
+  /**
+   * Hide the sidebar
+   *
+   */
+  _close() {
+    this.container.classList.remove(
+      'sidebar-mobile--visible'
     );
   }
 }
