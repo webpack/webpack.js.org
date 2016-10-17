@@ -3,6 +3,12 @@ import Link from '../link/link';
 import './sidebar-mobile-style';
 
 export default class SidebarMobile extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this._handleBodyClick = this._handleBodyClick.bind(this);
+  }
+
   render() {
     return (
       <nav className="sidebar-mobile" ref={ ref => this.container = ref }>
@@ -21,6 +27,32 @@ export default class SidebarMobile extends React.Component {
         }
       </nav>
     );
+  }
+
+  componentDidMount() {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('click', this._handleBodyClick);
+    }
+  }
+
+  componentWillUnmount() {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('click', this._handleBodyClick);
+    }
+  }
+
+  /**
+   * Handle clicks 
+   *
+   * @param {object} e - Native click event
+   */
+  _handleBodyClick(e) {
+    if (
+      !e.target.classList.contains('icon-menu') &&
+      !this.container.contains(e.target)
+    ) {
+      this._close();
+    }
   }
 
   /**
