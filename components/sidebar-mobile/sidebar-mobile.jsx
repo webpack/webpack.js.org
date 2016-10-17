@@ -10,6 +10,13 @@ export default class SidebarMobile extends React.Component {
   }
 
   render() {
+    let pathname;
+
+    // TODO: Use this to show active sidebar-mobile__page
+    if (typeof window !== 'undefined') {
+      pathname = window.location.pathname;
+    }
+
     return (
       <nav className="sidebar-mobile" ref={ ref => this.container = ref }>
         <i className="sidebar-mobile__close icon-cross"
