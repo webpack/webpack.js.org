@@ -8,14 +8,41 @@
   }
 
   &__section {
-    
-  }
+    position:relative;
+    padding:8em 1.5em;
+    text-align:center;
 
-  &__content { 
-    padding:1.5em; 
-  }
+    pre { 
+      text-align:left; 
+    }
 
-  &__sponsor { 
-    text-align: center;
+    &:after {
+      content:'\e902';
+      position:absolute;
+      display:block;
+      width:100%;
+      top:0;
+      left:0;
+      font-size: 3em;
+      text-align:center;
+      color:map-get($colors, alto);
+      animation:500ms ease-in infinite alternate bounce;
+
+      /// XXX: Hacky, should be cleaned up
+      font-family: 'icons' !important;
+      speak: none;
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
   }
+}
+
+@keyframes bounce {
+  from { top: 0; }
+  to { top: 0.1em; }
 }
