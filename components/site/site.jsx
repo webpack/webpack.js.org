@@ -7,21 +7,30 @@ import Sidecar from '../sidecar/sidecar';
 import Footer from '../footer/footer';
 import './site-style';
 
-const sections = [
-  { title: 'Concepts', url: 'concepts' },
-  { title: 'Configuration', url: 'configuration' },
-  { title: 'How to', url: 'how-to' },
-  { title: 'API', url: 'api' },
-  { title: 'Donate', url: '//opencollective.com/webpack'}
-];
-
 export default props => {
+  // Retrieve section data
+  let sections = props.children.props.section.all()
+    .map(({ title, url, pages }) => ({
+      title,
+      url,
+      pages: pages.map(({ title, url }) => ({
+        title: title || url, // XXX: Title shouldn't be coming in as undefined
+        url
+      }))
+    }));
+
+  // Rename the root section ("Webpack" => "Other") and pop it to the end
+  let rootIndex = sections.findIndex(section => section.title === 'Webpack');
+  let rootSection = sections.splice(rootIndex, 1)[0];
+  rootSection.title = 'Other';
+  sections.push(rootSection);
+
   return (
     <div id="site" className="site">
       <Interactive
         id="components/navigation/navigation.jsx"
         component={ Navigation }
-        pages={ sections } />
+        sections={ sections } />
 
       <Interactive
         id="components/sidebar-mobile/sidebar-mobile.jsx"
