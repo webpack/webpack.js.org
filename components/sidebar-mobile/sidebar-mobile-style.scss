@@ -48,6 +48,7 @@
 .sidebar-mobile__page {
   display: block;
   padding: 0.5em 17px;
+  text-transform: capitalize;
   color: map-get($colors, dusty-grey);
 
   &:hover,

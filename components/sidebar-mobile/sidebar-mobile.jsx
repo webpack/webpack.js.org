@@ -10,28 +10,12 @@ export default class SidebarMobile extends React.Component {
   }
 
   render() {
-    let pathname;
-
-    // TODO: Use this to show active sidebar-mobile__page
-    if (typeof window !== 'undefined') {
-      pathname = window.location.pathname;
-    }
-
     return (
       <nav className="sidebar-mobile" ref={ ref => this.container = ref }>
         <i className="sidebar-mobile__close icon-cross"
           onClick={ this._close.bind(this) } />
 
-        {
-          this.props.sections.map(section => (
-            <div key={ section.url }>
-              <h3 className="sidebar-mobile__section">{ section.title }</h3>
-              <Link className="sidebar-mobile__page" to="#">Page 1</Link>
-              <Link className="sidebar-mobile__page" to="#">Page 2</Link>
-              <Link className="sidebar-mobile__page" to="#">Page 3</Link>
-            </div>
-          ))
-        }
+        { this._getSections() }
       </nav>
     );
   }
@@ -46,6 +30,37 @@ export default class SidebarMobile extends React.Component {
     if (typeof window !== 'undefined') {
       window.removeEventListener('click', this._handleBodyClick);
     }
+  }
+
+  _getSections() {
+    return this.props.sections.map(section => (
+      <div key={ section.url }>
+        <h3 className="sidebar-mobile__section">{ section.title }</h3>
+        { this._getPages(section.pages) }
+      </div>
+    ));
+  }
+
+  _getPages(pages) {
+    let pathname;
+
+    if (typeof window !== 'undefined') {
+      pathname = window.location.pathname;
+    }
+
+    return pages.map(page => {
+      let url = `/${page.url}`,
+        active = pathname === url;
+
+      return (
+        <Link
+          key={ url } 
+          className={ `sidebar-mobile__page ${active ? 'sidebar-mobile__page--active' : ''}` } 
+          to={ url }>
+          { page.title }
+        </Link>
+      );
+    });
   }
 
   /**
