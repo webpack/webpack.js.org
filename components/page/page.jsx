@@ -6,7 +6,7 @@ import Contributors from '../contributors/contributors';
 import './page-style';
 
 export default ({ section, page }) => {
-  let edit = `https://github.com/webpack/webpack.js.org/edit/develop/content/${page.url}.md`;
+  let edit = `https://github.com/vuefe/webpack.js.org/edit/develop/content/${page.url}.md`;
 
   return (
     <Container className="page">
@@ -25,7 +25,7 @@ export default ({ section, page }) => {
         <h1>{ page.title }</h1>
 
         <a className="page__edit" href={ edit }>
-          Edit this Page&nbsp;&nbsp;
+          编辑此页&nbsp;&nbsp;
           <i className="icon-edit" />
         </a>
 

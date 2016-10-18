@@ -1,5 +1,5 @@
 ---
-title: Resolve
+title: 解决
 contributors:
   - sokra
   - skipjack

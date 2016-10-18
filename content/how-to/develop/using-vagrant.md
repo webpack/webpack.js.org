@@ -1,5 +1,5 @@
 ---
-title: How to Develop Using Vagrant
+title: 如何用 Vagrant 开发？
 contributors:
   - SpaceK33z
 ---

@@ -8,7 +8,7 @@ export default props => {
   return (
     <span className={ `logo${light ? ' logo--light' : ''}` }>
       <img className="logo__icon" src={ CubeImg } />
-      <span className="logo__text">webpack</span>
+      <span className="logo__text">webpack 中文</span>
     </span>
   );    
 };

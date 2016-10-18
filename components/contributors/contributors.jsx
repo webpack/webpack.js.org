@@ -4,7 +4,7 @@ import './contributors-style';
 export default ({contributors}) => {
   return (
     <div className="contributors">
-      <h3>Contributors:</h3>
+      <h3>贡献者：</h3>
       <div className="contributors__list">
         { 
           (contributors || []).map((contributor) => (

@@ -1,5 +1,5 @@
 ---
-title: How to Set Up Hot Module Replacement with React?
+title: 如何基于 React 设置热重载？
 contributors:
   - jmreidy
 ---

@@ -1,5 +1,5 @@
 ---
-title: How to Handle Dependencies?
+title: 如何处理依赖？
 ---
 > es6 modules
 > commonjs

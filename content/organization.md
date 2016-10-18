@@ -1,5 +1,5 @@
 ---
-title: Organization
+title: 组织
 contributors:
   - sokra
 ---

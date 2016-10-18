@@ -1,5 +1,5 @@
 ---
-title: Stats
+title: 统计
 contributors:
   - SpaceK33z
 ---

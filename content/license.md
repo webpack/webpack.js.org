@@ -1,5 +1,5 @@
 ---
-title: License
+title: 遵循协议
 ---
 
 (The MIT License)

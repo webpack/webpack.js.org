@@ -7,11 +7,11 @@ import Footer from '../footer/footer';
 import './site-style';
 
 const pages = [
-  { title: 'Concepts', url: 'concepts' },
-  { title: 'Configuration', url: 'configuration' },
-  { title: 'How to', url: 'how-to' },
+  { title: '概念', url: 'concepts' },
+  { title: '配置', url: 'configuration' },
+  { title: '怎么做', url: 'how-to' },
   { title: 'API', url: 'api' },
-  { title: 'Donate', url: '//opencollective.com/webpack'}
+  { title: '捐献', url: '//opencollective.com/webpack'}
 ];
 
 export default props => {

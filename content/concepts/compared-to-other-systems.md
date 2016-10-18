@@ -1,5 +1,5 @@
 ---
-title: Compared to Other Systems
+title: 对比其它系统
 ---
 | Feature | webpack/webpack | jrburke/requirejs | substack/node-browserify | jspm/jspm-cli | rollup/rollup | brunch/brunch |
 |---------|-----------------|-------------------|--------------------------|---------------|---------------|---------------|

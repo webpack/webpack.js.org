@@ -1,5 +1,5 @@
 ---
-title: Loaders
+title: 加载器
 sort: 2
 ---
 > module.loaders configuration option

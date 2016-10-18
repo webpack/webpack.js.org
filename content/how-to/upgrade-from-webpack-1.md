@@ -1,5 +1,5 @@
 ---
-title: How to Upgrade from Webpack 1?
+title: 如何从 webpack1 升级？
 contributors:
   - sokra
 ---

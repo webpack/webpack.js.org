@@ -11,9 +11,9 @@ export default props => {
     <div className="splash">
       <section className="splash__section splash__sponsor">
         <Container className="splash__content splash_sponsorheadline">
-          <h1 id="opencollective-banner" className="splash__sponsorheadline">Help support webpack!</h1>
-          <p>By your contributions, donations, and sponsorship, you allow webpack to thrive.</p>
-          <p>Your donations go directly towards supporting office hours, continued enhancements, and most importantly, great documentation and learning material!</p>
+          <h1 id="opencollective-banner" className="splash__sponsorheadline">请支持 webpack !</h1>
+          <p>有你的贡献、捐款或者赞助，webpack 将得到大力发展</p>
+          <p>你的捐款将直接支持工作和持续改进，最重要的是，这有助于更好的文档和学习资料！</p>
           
           <object type="image/svg+xml" data="https://opencollective.com/webpack/sponsors.svg"></object>
           <object type="image/svg+xml" data="https://opencollective.com/webpack/backers.svg"></object>
@@ -33,11 +33,11 @@ export default props => {
         </div>
 
         <span className="splash__headline">
-          webpack transforms your&nbsp;
-          <Link to="/concepts/modules">modules</Link>
-          &nbsp;into production-ready&nbsp;
-          <Link to="/concepts/output">bundles</Link>
-          &nbsp;and assets
+          webpack 将&nbsp;
+          <Link to="/concepts/modules">模块</Link>
+          &nbsp;转换为 生产环境下的&nbsp;
+          <Link to="/concepts/output">包</Link>
+          &nbsp;和资源
         </span>
       </section>
 

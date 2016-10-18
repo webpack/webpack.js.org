@@ -1,5 +1,5 @@
 ---
-title: Externals
+title: 扩展
 contributors:
   - sokra
   - skipjack

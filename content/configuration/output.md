@@ -1,5 +1,5 @@
 ---
-title: Output
+title: 输出
 contributors:
   - sokra
   - skipjack

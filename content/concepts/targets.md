@@ -1,5 +1,5 @@
 ---
-title: Targets
+title: 目标
 contributors:
   - TheLarkInn
 ---

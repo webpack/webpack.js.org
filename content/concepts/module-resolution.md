@@ -1,5 +1,5 @@
 ---
-title: Module Resolution
+title: 模块解析
 contributors:
     - pksjce
 ---

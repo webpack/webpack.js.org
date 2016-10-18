@@ -1,5 +1,5 @@
 ---
-title: How to Configure Hot Module Replacement?
+title: 如何配置 HMR 热重载？
 contributors:
   - jmreidy
 ---

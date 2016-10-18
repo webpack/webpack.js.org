@@ -1,5 +1,5 @@
 ---
-title: Entry Points
+title: 入口
 sort: 0
 ---
 

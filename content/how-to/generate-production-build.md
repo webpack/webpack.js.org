@@ -1,5 +1,5 @@
 ---
-title: How to Generate a Production Build?
+title: 如何生成一个生产构建？
 contributors:
   - henriquea
 ---

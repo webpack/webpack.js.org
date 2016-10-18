@@ -1,5 +1,5 @@
 ---
-title: Get Started with Webpack
+title: Webpack 起步
 ---
 
 * basic concepts, get webpack up and running, technical focus

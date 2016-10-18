@@ -1,5 +1,5 @@
 ---
-title: How to Install webpack?
+title: 如何安装 webpack ?
 contributors:
   - pksjce
 ---

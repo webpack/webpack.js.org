@@ -1,5 +1,5 @@
 ---
-title: How to lazy load React 
+title: 如何懒加载 React ？
 contributors:
   - iammerrick
 ---

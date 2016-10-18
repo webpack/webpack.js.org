@@ -1,5 +1,5 @@
 ---
-title: Devtool
+title: 调试工具
 contributors:
   - sokra
   - skipjack

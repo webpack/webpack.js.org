@@ -1,5 +1,5 @@
 ---
-title: DevServer
+title: 开发服务器
 contributors:
   - sokra
   - skipjack

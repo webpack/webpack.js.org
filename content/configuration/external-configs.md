@@ -1,5 +1,5 @@
 ---
-title: External Configurations
+title: 扩展配置
 contributors:
   - sokra
   - skipjack

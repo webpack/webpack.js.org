@@ -1,5 +1,5 @@
 ---
-title: Other Options
+title: 其它选项
 contributors:
   - sokra
   - skipjack

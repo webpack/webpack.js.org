@@ -1,16 +1,16 @@
 ---
-title: Contribute
+title: 贡献
 ---
 
-> How to contribute to the project? List ways/means here.
+> 如何参与项目贡献？如下所列方法：
 
-## Documentation
+## 文档
 
-[Writer's guide](writers-guide)
+[作者指南](writers-guide)
 
-## Technical Contribution
+## 技术贡献
 
 
 
-## Donation
+## 捐献
 

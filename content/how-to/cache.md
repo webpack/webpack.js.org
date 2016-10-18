@@ -1,5 +1,5 @@
 ---
-title: How to Cache?
+title: 如何缓存？
 contributors:
   - okonet
 ---

@@ -1,5 +1,5 @@
 ---
-title: Modules
+title: 模块
 contributors:
   - TheLarkInn
 ---

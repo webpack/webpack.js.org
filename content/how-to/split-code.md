@@ -1,5 +1,5 @@
 ---
-title: How to Split Code?
+title: 如何分割代码？
 ---
 > what is code splitting
 > System.import

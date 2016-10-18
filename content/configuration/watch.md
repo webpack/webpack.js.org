@@ -1,5 +1,5 @@
 ---
-title: Watch and WatchOptions
+title: Watch 和 Watch 选项
 contributors:
   - sokra
   - skipjack

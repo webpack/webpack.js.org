@@ -1,5 +1,5 @@
 ---
-title: Passing a Configuration
+title: 通过配置
 contributors:
   - sokra
   - skipjack

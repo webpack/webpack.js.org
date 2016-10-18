@@ -1,5 +1,5 @@
 ---
-title: Dependency Graph
+title: 依赖关系
 contributors:
   - TheLarkInn
 ---

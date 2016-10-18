@@ -1,5 +1,5 @@
 ---
-title: Module
+title: 模块
 contributors:
   - sokra
   - skipjack

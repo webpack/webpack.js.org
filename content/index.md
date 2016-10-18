@@ -1,5 +1,5 @@
 ---
-title: Splash Content
+title: 快速内容
 ---
 
-Still debating what to do with this section.
+仍然在讨论如何处理这一部分。
