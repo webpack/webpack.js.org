@@ -1,7 +1,7 @@
 ---
 title: Node.js API
 ---
-Webpack provides a Node.js API which can be used directly in Node.js runtime. To get started with the Node.js API, require the `webpack` module:
+webpack provides a Node.js API which can be used directly in Node.js runtime. To get started with the Node.js API, require the `webpack` module:
 
 ``` js
 const webpack = require("webpack");
@@ -15,7 +15,7 @@ import webpack from "webpack";
 
 ## Quick Run
 
-The imported `webpack` function is fed a Webpack [Configuration Object](/configuration/) and runs the webpack compiler if a callback function is provided:
+The imported `webpack` function is fed a webpack [Configuration Object](/configuration/) and runs the webpack compiler if a callback function is provided:
 
 ``` js-with-links
 const webpack = require("webpack");
@@ -42,7 +42,7 @@ webpack([
 
 ## Compiler Instance
 
-If you don’t pass the `webpack` runner function a callback, it will return a Webpack `Compiler` intance. This instance can be used to manually trigger the Webpack runner or have it build and watch for changes. Much like the [CLI](/api/cli/) Api. The `Compiler` intance provides the following methods:
+If you don’t pass the `webpack` runner function a callback, it will return a webpack `Compiler` intance. This instance can be used to manually trigger the webpack runner or have it build and watch for changes. Much like the [CLI](/api/cli/) Api. The `Compiler` intance provides the following methods:
 
 * `.run(callback)`
 * `.watch(watchOptions, handler)`
@@ -65,7 +65,7 @@ compiler.run((err, [stats](#stats-object)) => {
 
 ## Watch
 
-Calling the `watch` method, triggers the Webpack runner, but then watches for changes (much like CLI: `webpack --watch`), as soon as Webpack detects a change, runs again:
+Calling the `watch` method, triggers the webpack runner, but then watches for changes (much like CLI: `webpack --watch`), as soon as webpack detects a change, runs again:
 
 ``` js-with-links
 watch([watchOptions](#watch-options), callback)
