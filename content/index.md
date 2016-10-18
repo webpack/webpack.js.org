@@ -45,4 +45,4 @@ module.exports = {
 </html>
 ```
 
-## It's really that simple. [Get started](/get-started) now!
+## It's that simple. [Get started](/get-started) now!
