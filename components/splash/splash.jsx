@@ -31,8 +31,17 @@ export default props => {
 
         <p>Through contributions, donations, and sponsorship, you allow webpack to thrive. Your donations directly support office hours, continued enhancements, and most importantly, great documentation and learning material!</p>
 
-        <Support number={ 5 } type={"sponsor"} />
-        <Support number={ 20 } type={"backer"} />
+        <Interactive
+          id="components/support/support.jsx"
+          component={ Support }
+          number={ 5 }
+          type="sponsor" />
+
+        <Interactive
+          id="components/support/support.jsx"
+          component={ Support }
+          number={ 20 }
+          type="backer" />
       </Container>
     </div>
   );
