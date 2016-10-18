@@ -1,5 +1,5 @@
 ---
-title: 如何懒加载 React ？
+title: 如何懒加载 React？
 contributors:
   - iammerrick
 ---

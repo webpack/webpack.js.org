@@ -6,6 +6,11 @@
 
 指南，文档，以及 webpack 的一切。
 
+## 关于翻译
+- [基础指引](https://github.com/vuefe/webpack.js.org/issues/1)
+- [webpack 2 - 中文翻译(进度 / 认领)](https://github.com/vuefe/webpack.js.org/issues/2)
+- [建议与说明](https://github.com/vuefe/webpack.js.org/issues/3)
+
 ## 参与贡献
 
 更多内容请看 [参与贡献](https://github.com/webpack/webpack.js.org/blob/develop/CONTRIBUTING.md)
