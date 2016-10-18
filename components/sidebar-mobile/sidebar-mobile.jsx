@@ -42,7 +42,7 @@ export default class SidebarMobile extends React.Component {
   }
 
   _getPages(pages) {
-    let pathname;
+    let pathname = '';
 
     if (typeof window !== 'undefined') {
       pathname = window.location.pathname;
@@ -50,7 +50,7 @@ export default class SidebarMobile extends React.Component {
 
     return pages.map(page => {
       let url = `/${page.url}`,
-        active = pathname === url;
+        active = pathname === url || pathname.includes(`${url}/`);
 
       return (
         <Link
