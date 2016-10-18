@@ -70,7 +70,7 @@ compiler.run((err, [stats](#stats-object)) => {
 Calling the `watch` method, triggers the webpack runner, but then watches for changes (much like CLI: `webpack --watch`), as soon as webpack detects a change, runs again:
 
 ``` js-with-links
-watch([watchOptions](#watch-options), callback)
+watch(watchOptions, callback)
 ```
 
 ``` js-with-links-with-details
