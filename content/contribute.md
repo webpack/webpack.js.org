@@ -6,7 +6,7 @@ title: 贡献
 
 ## 文档
 
-[作者指南](writers-guide)
+[作者指南](/writers-guide)
 
 ## 技术贡献
 

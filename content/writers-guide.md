@@ -19,7 +19,7 @@ title: 作者指南
 
 1. `npm i`
 2. `npm start`
-3. [http://localhost:3000](http://localhost:3000)
+3. `open http://localhost:3000`
 
 The site will update itself as you make changes.
 

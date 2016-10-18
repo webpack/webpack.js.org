@@ -140,6 +140,7 @@ module.exports = function(env) {
         interactiveConfig
       );
     case 'build':
+    case 'lint:links':
       return merge(
         commonConfig,
         buildConfig

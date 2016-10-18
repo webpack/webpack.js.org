@@ -42,4 +42,4 @@ The webpack community has built _loaders_ for a wide variety of popular language
 
 And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for **any stack**, while staying **unopinionated** about your development, testing, and production workflows.
 
-For a full list, see [**the list of loaders**](https://webpack.github.io/docs/list-of-loaders.html) or [**write your own**](./api/loaders).
+For a full list, see [**the list of loaders**](https://webpack.github.io/docs/list-of-loaders.html) or [**write your own**](/api/loaders).

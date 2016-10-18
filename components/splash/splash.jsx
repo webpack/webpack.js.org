@@ -20,24 +20,12 @@ export default props => {
         </Container>
       </section>
       <section className="splash__viz">
-        <div className="splash__modules">
-
-        </div>
-
         <div className="splash__icon">
           <Cube className="splash__cube" depth={ 150 } />
         </div>
 
-        <div className="splash__output">
-
-        </div>
-
         <span className="splash__headline">
-          webpack 将&nbsp;
-          <Link to="/concepts/modules">模块</Link>
-          &nbsp;转换为 生产环境下的&nbsp;
-          <Link to="/concepts/output">包</Link>
-          &nbsp;和资源
+          Who said front-end code can't be modular?
         </span>
       </section>
 
