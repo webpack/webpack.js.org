@@ -1,5 +1,7 @@
 ---
 title: Node.js API
+contributors:
+  - sallar
 ---
 webpack provides a Node.js API which can be used directly in Node.js runtime. To get started with the Node.js API, require the `webpack` module:
 
@@ -13,7 +15,7 @@ Or if you’re using the ES6 modules interface:
 import webpack from "webpack";
 ```
 
-## Quick Run
+## `webpack()`
 
 The imported `webpack` function is fed a webpack [Configuration Object](/configuration/) and runs the webpack compiler if a callback function is provided:
 
@@ -79,7 +81,7 @@ const compiler = webpack({
 });
 
 const watcher = compiler.watch({
-  <details><summary>/* watchOptions */</summary>
+  <details><summary>/* [watchOptions](/configuration/watch/#watchoptions) */</summary>
   aggregateTimeout: 300,
   poll: undefined
   </details>
@@ -89,16 +91,9 @@ const watcher = compiler.watch({
 });
 ```
 
-### Watch Options
+Watch options are [covered in detail here](/configuration/watch/#watchoptions).
 
-First parameter is watchOptions object:
-
-| Key               | Default           | Explanation                                                                                                                           |
-|-------------------|-------------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| aggregateTimeout  | 300               | After a change the watcher waits that time (in milliseconds) for more changes.                                                        |
-| poll              | undefined (auto)  | The watcher uses polling instead of native watchers. `true` uses the default interval, a number specifies a interval in milliseconds. |
-
-### End Watching
+### Close Watcher
 
 The `watch` method returns an instance that exposes `.close(callback)` method. Calling this method will end watching:
 
@@ -108,10 +103,16 @@ watcher.close(() => {
 })
 ```
 
+T> It’s not allowed to watch or run again before the existing watcher has been closed or invalidated.
+
+### Invalidate Watcher
+
+...
+
 ## Stats Object
 
 ...
 
-### Error Handling
+## Error Handling
 
 ...
