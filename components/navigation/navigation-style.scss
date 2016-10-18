@@ -12,6 +12,7 @@
     display:flex;
     justify-content: center;
     background: transparent;
+    z-index:5;
 
     .navigation__inner {
       position:absolute;

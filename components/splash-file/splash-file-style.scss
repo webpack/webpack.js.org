@@ -1,0 +1,31 @@
+.splash-file {
+  display:block;
+  flex:0 0 60%;
+  margin-bottom:0.5em;
+
+  &__img {
+    display:inline-block;
+    width:1.5em;
+    height:1.5em;
+    margin-right:0.5em;
+    vertical-align:middle;
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:center;
+
+    &--blank { background-image:url(../../assets/file-blank.png); }
+    &--css { background-image:url(../../assets/file-css.png); }
+    &--js { background-image:url(../../assets/file-js.png); }
+    &--html { background-image:url(../../assets/file-html.png); }
+    &--ico { background-image:url(../../assets/file-ico.png); }
+  }
+
+  &__name {
+
+  }
+
+  &__size {
+    float:right;
+    font-weight:600;
+  }
+}

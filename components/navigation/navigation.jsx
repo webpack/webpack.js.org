@@ -15,14 +15,14 @@ export default class Navigation extends React.Component {
     }
 
     return (
-      <header className="navigation">
+      <header className={ `navigation ${isIndex ? 'navigation--transparent' : ''}` }>
         <Container className="navigation__inner">
           <div className="navigation__mobile" onClick={ this._toggleSidebar }>
             <i className="icon-menu" />
           </div>
 
           <Link className="navigation__logo" to="/">
-            <Logo light />
+            <Logo light={ !isIndex } />
           </Link>
 
           <nav className="navigation__links">

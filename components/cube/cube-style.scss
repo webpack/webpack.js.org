@@ -2,7 +2,7 @@
 
 .cube {
   position:relative;
-  display:inline-block;
+  display:block;
   transform-style:preserve-3d;
   transform:rotateX(-33.5deg) rotateY(45deg);
 
@@ -10,7 +10,7 @@
   &__outer {
     display:inline-block;
     transform-style:preserve-3d;
-    transition:transform 750ms;
+    transition:transform 1000ms;
   }
 
   &__inner {
@@ -37,43 +37,21 @@
     }
   }
 
-  &--dark {
-    .cube__outer .cube__face:after {
-      background:rgba(126, 169, 232, 0.5);
-    }
-
-    .cube__inner .cube__face:after {
-      background:rgba(16, 58, 177, 0.4);
-    }
-
-    &:hover {
-      .cube__outer .cube__face:after {
-        background:transparentize(#333333, 0.8);
-      }
-
-      .cube__inner .cube__face:after {
-        background:transparentize(#f39c12, 0.4);
-      }
-    }
+  .cube__outer .cube__face:after {
+    background:transparentize(map-get($colors, malibu), 0.6);
   }
 
-  &--light {
+  .cube__inner .cube__face:after {
+    background:transparentize(map-get($colors, denim), 0.2);
+  }
+
+  &:hover {
     .cube__outer .cube__face:after {
-      background:transparentize(map-get($colors, malibu), 0.6);
+      background:transparentize(map-get($colors, malibu), 0.7);
     }
 
     .cube__inner .cube__face:after {
-      background:transparentize(map-get($colors, denim), 0.2);
-    }
-
-    &:hover {
-      .cube__outer .cube__face:after {
-        background:transparentize(map-get($colors, malibu), 0.7);
-      }
-
-      .cube__inner .cube__face:after {
-        background:map-get($colors, denim);
-      }
+      background:map-get($colors, denim);
     }
   }
 }

@@ -5,7 +5,6 @@
 .footer {
   width: 100%;
   flex: 0 0 auto;
-  background: map-get($colors, alto);
 }
 
 .footer__inner {
@@ -14,6 +13,7 @@
   justify-content: space-between;
   align-content: center;
   padding: 0.4em 0;
+  border-top:1px solid map-get($colors, concrete);
 
   @include break {
     flex-direction: initial;
