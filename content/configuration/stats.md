@@ -2,23 +2,24 @@
 title: 统计
 contributors:
   - SpaceK33z
+  - viko16
 ---
 
-The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
+`stats` 选项能让你准确地控制显示哪些包的信息。如果你希望得到部分包的信息（而不是一股脑全部输出），而不想使用 `quiet` 或者 `noInfo` 模式的时候，这个选项会是一个很好的折衷办法。
 
-T> For webpack-dev-server, this property needs to be in the `devServer` object.
+T> 对于 webpack-dev-server ，这个属性要放在 `devServer` 对象里。
 
 ## `stats`
 
 `object` `string`
 
-There are some presets: `none`, `errors-only`, `minimal` and `verbose`. Use them like this:
+预设选项：`none`, `errors-only`, `minimal` 和 `verbose`。使用方法：
 
 ```js
 stats: "errors-only"
 ```
 
-For more granular control, it is possible to specify exactly what information you want:
+对于更精细的控制，这样可以准确地指定你想要的信息：
 
 ```js
 stats: {
@@ -27,7 +28,7 @@ stats: {
 }
 ```
 
-The available properties in this object are:
+此对象的可用属性包括：
 
 * `assets`
 * `children`
