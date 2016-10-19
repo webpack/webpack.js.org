@@ -292,7 +292,7 @@ const fs = new MemoryFS();
 const compiler = webpack({ /* options*/ });
 
 compiler.outputFileSystem = fs;
-compiler.run((err, stats)  => {
+compiler.run((err, stats) => {
   // Read te output later:
   const content = fs.readFileSync("...");
 });
