@@ -30,7 +30,7 @@
 .navigation__inner {
   display: flex;
   align-items: center;
-  padding: 0.5em 1em;
+  padding: 0.6em 1em;
 
   @include break {
     padding:0 0 0 1.5em;
@@ -38,9 +38,10 @@
 }
 
 .navigation__mobile {
-  position:absolute;
-  font-size: 1.4em;
   display: flex;
+  font-size: 1.75em;
+  margin-left: -1em;
+  align-items: center;
   color: map-get($colors, white);
   cursor: pointer;
   transition: color 250ms;
