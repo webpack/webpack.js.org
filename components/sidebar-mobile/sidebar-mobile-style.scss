@@ -10,6 +10,7 @@
   top: 0;
   overflow-y: auto;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   background: map-get($colors, white);
   transform: translate3D(-100%, 0, 0);
   transition: all 500ms;
