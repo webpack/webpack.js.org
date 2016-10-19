@@ -23,12 +23,14 @@ export default class SidebarMobile extends React.Component {
   componentDidMount() {
     if (typeof window !== 'undefined') {
       window.addEventListener('click', this._handleBodyClick);
+      window.addEventListener('touchstart', this._handleBodyClick);
     }
   }
 
   componentWillUnmount() {
     if (typeof window !== 'undefined') {
       window.removeEventListener('click', this._handleBodyClick);
+      window.removeEventListener('touchstart', this._handleBodyClick);
     }
   }
 
