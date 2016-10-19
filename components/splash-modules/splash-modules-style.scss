@@ -1,0 +1,14 @@
+.splash-modules {
+  width:100%;
+  height:100%;
+
+  .links line {
+    stroke: #999;
+    stroke-opacity: 0.6;
+  }
+
+  .nodes circle {
+    stroke: #fff;
+    stroke-width: 1.5px;
+  }
+}
