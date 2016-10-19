@@ -1,6 +1,7 @@
 import React from 'react';
 import Cube from '../cube/cube';
 import Link from '../link/link';
+import SplashModules from '../splash-modules/splash-modules';
 import SplashFile from '../splash-file/splash-file';
 import './splash-viz-style';
 
@@ -23,7 +24,7 @@ export default class SplashViz extends React.Component {
     return (
       <section className="splash-viz">
         <div className="splash-viz__modules">
-
+          <SplashModules />
         </div>
 
         <div className="splash-viz__icon">
