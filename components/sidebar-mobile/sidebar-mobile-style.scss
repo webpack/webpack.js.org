@@ -51,7 +51,7 @@
   text-transform: capitalize;
   color: map-get($colors, dusty-grey);
 
-  &:hover,
+  &:active,
   &--active {
     color: map-get($colors, mine-shaft);
     background: map-get($colors, alto);
