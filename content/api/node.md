@@ -3,15 +3,26 @@ title: Node.js API
 contributors:
   - sallar
 ---
-webpack provides a Node.js API which can be used directly in Node.js runtime. To get started with the Node.js API, require the `webpack` module:
+## Overview
+
+webpack provides a Node.js API which can be used directly in Node.js runtime.
+
+The Node.js API is useful in scenarios in which you need to customize the build or development process since all the reporting and error handling must be done manually and webpack only does the compiling part.
+
+## Installation
+
+To start using webpack Node.js API, first install webpack if you haven’t yet:
+
+```
+npm install webpack --save-dev
+```
+
+Then require the webpack module in your Node.js script:
 
 ``` js
 const webpack = require("webpack");
-```
 
-Or if you’re using the ES6 modules interface:
-
-``` js
+// Or if you prefer ES6:
 import webpack from "webpack";
 ```
 
@@ -41,6 +52,8 @@ webpack([
   // ...
 });
 ```
+
+T> The `err` object **will not** include compilation errors and those must be handled separately using `stats.hasErrors()` which will be covered in detail in [Error Handling](#error-handling) section of this guide. The `err` object will only contain webpack-related issues, such as misconfiguration, etc.
 
 ## Compiler Instance
 
