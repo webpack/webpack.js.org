@@ -50,8 +50,6 @@ const config = {
 
 T> 你可能看到项目 **生成(emitted 或 emit)** 贯穿我们整个文档和[插件 API](../api/plugins)。它是“生产(produced) 或 排放(discharged)”的特殊术语。
 
-T> You may see the term **emitted** or **emit** used throughout our documentation and [plugin API](../api/plugins). This is a fancy term for "produced or discharged".
-
  `output` 属性有[很多可配置的特性](../api/configuration)，让我们花费一些时间理解 `output` 属性中一些最常见的用例。
 
 [**了解更多！**](./output)
