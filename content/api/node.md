@@ -238,4 +238,40 @@ webpack({
 
 ## Error Handling
 
-...
+For a good error handling, you need to account for these three types of errors:
+
+- Fatal webpack errors (wrong configuration, etc)
+- Compilation errors (missing modules, syntax errors, etc)
+- Compilation warnings
+
+Here’s an example that does all that:
+
+``` js-with-links
+const webpack = require("webpack");
+
+webpack({
+  // [Configuration Object](/configuration/)
+}, (err, stats) => {
+  if (err) {
+    console.error(err.stack || err);
+    if (err.details) {
+      console.error(err.details);
+    }
+    return;
+  }
+
+  const info = stats.toJSON();
+
+  if (stats.hasErrors()) {
+    console.error(info.errors);
+  }
+
+  if (stats.hasWarnings()) {
+    console.warn(info.warnings)
+  }
+
+  // Log result...
+});
+```
+
+## Compiling to Memory
