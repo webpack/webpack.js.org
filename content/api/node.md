@@ -275,3 +275,21 @@ webpack({
 ```
 
 ## Compiling to Memory
+
+webpack writes the output to the specified files on disk. If you want webpack to output them to a different kind of file system (memory, webDAV, etc), you can set the `outputFileSystem` option on the compiler:
+
+``` js
+const MemoryFS = require("memory-fs");
+const webpack = require("webpack");
+
+const fs = new MemoryFS();
+const compiler = webpack({ /* options*/ });
+
+compiler.outputFileSystem = fs;
+compiler.run((err, stats)  => {
+  // Read te output later:
+  const content = fs.readFileSync("...");
+});
+```
+
+T> The output file system you provide needs to be compatible with Node’s own [`fs`](https://nodejs.org/api/fs.html) module interface. 
