@@ -200,7 +200,41 @@ stats.toJSON({
 });
 ```
 
+> Here’s [an example of this function’s output](https://github.com/webpack/analyse/blob/master/app/pages/upload/example.json)
+
 ### `stats.toString(options)`
+
+Returns a formatted string of the compilation information (similar to [CLI](/api/cli) output).
+
+Options are the same as [`stats.toJSON(options)`](/api/node#stats-tojson-options-) with one addition:
+
+``` js
+stats.toString({
+  // ...
+  // Add console colors
+  colors: true
+});
+```
+
+Here’s an example of `stats.toString()` usage:
+
+``` js-with-links
+const webpack = require("webpack");
+
+webpack({
+  // [Configuration Object](/configuration/)
+}, (err, stats) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  console.log(stats.toString({
+    chunks: false,  // Makes the build much quieter
+    colors: true    // Shows colors in the console
+  }));
+});
+```
 
 ## Error Handling
 
