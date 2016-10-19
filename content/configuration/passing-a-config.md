@@ -2,7 +2,7 @@
 title: Passing a Configuration
 contributors:
   - sokra
-  - gregvenech
+  - skipjack
 ---
 
 ...

@@ -14,16 +14,57 @@ To set the `output` property, you simply set the output value in your webpack co
 **webpack.config.js**
 
 ```javascript
-module.exports = config;
-
-config = {
+const config = {
   output: 'blah'
-}
+};
+
+module.exports = config;
 ```
 
 ## Options
 
 The following is a list of values you can pass to the `output` property.
+
+### `output.chunkFilename`
+
+The filename of non-entry chunks as a relative path inside the `output.path` directory.
+
+`[id]` is replaced by the id of the chunk.
+
+`[name]` is replaced by the name of the chunk (or with the id when the chunk has no name).
+
+`[hash]` is replaced by the hash of the compilation.
+
+`[chunkhash]` is replaced by the hash of the chunk.
+
+### `output.crossOriginLoading`
+
+This option enables cross-origin loading of chunks.
+
+Possible values are:
+
+`false` - Disable cross-origin loading.
+
+`"anonymous"` - Cross-origin loading is enabled. When using `anonymous` no credentials will be sent with the request.
+
+`"use-credentials"` - Cross-origin loading is enabled and credentials will be send with the request.
+
+For more information on cross-origin loading see [MDN](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin)
+
+> Default: `false`
+
+> see also [[library and externals]]
+> see also [[Development Tools]]
+
+### `output.devtoolLineToLine`
+
+Enable line-to-line mapped mode for all/specified modules. Line-to-line mapped mode uses a simple SourceMap where each line of the generated source is mapped to the same line of the original source. It's a performance optimization. Only use it if your performance needs to be better and you are sure that input lines match which generated lines.
+
+`true` enables it for all modules (not recommended)
+
+An object `{test, include, exclude}` similar to `module.loaders` enables it for specific files.
+
+> Default: disabled
 
 ### `output.filename`
 
@@ -67,83 +108,6 @@ If your configuration creates more than a single "chunk" (as with multiple entry
 // writes to disk: ./build/app.js, ./build/search.js
 ```
 
-### `output.path`
-
-The output directory as an **absolute path** (required).
-
-`[hash]` is replaced by the hash of the compilation.
-
-
-**config.js**
-
-``` javascript
-output: {
-	path: "/home/proj/public/assets",
-	publicPath: "/assets/"
-}
-
-```
-
-**index.html**
-``` html
-<head>
-  <link href="/assets/spinner.gif"/>
-</head>
-```
-And a more complicated example of using a CDN and hashes for assets.
-
-**config.js**
-
-``` javascript
-output: {
-	path: "/home/proj/cdn/assets/[hash]",
-	publicPath: "http://cdn.example.com/assets/[hash]/"
-}
-```
-
-**Note:** In cases when the eventual `publicPath` of output files isn't known at compile time, it can be left blank and set dynamically at runtime in the entry point file. If you don't know the `publicPath` while compiling, you can omit it and set `__webpack_public_path__` on your entry point.
-
-``` javascript
- __webpack_public_path__ = myRuntimePublicPath
-
-// rest of your application entry
-```
-
-### `output.chunkFilename`
-
-The filename of non-entry chunks as a relative path inside the `output.path` directory.
-
-`[id]` is replaced by the id of the chunk.
-
-`[name]` is replaced by the name of the chunk (or with the id when the chunk has no name).
-
-`[hash]` is replaced by the hash of the compilation.
-
-`[chunkhash]` is replaced by the hash of the chunk.
-
-### `output.sourceMapFilename`
-
-The filename of the SourceMaps for the JavaScript files. They are inside the `output.path` directory.
-
-`[file]` is replaced by the filename of the JavaScript file.
-
-`[id]` is replaced by the id of the chunk.
-
-`[hash]` is replaced by the hash of the compilation.
-
-> Default: `"[file].map"`
-
-
-### `output.devtoolLineToLine`
-
-Enable line-to-line mapped mode for all/specified modules. Line-to-line mapped mode uses a simple SourceMap where each line of the generated source is mapped to the same line of the original source. It's a performance optimization. Only use it if your performance needs to be better and you are sure that input lines match which generated lines.
-
-`true` enables it for all modules (not recommended)
-
-An object `{test, include, exclude}` similar to `module.loaders` enables it for specific files.
-
-> Default: disabled
-
 ### `output.hotUpdateChunkFilename`
 
 The filename of the Hot Update Chunks. They are inside the `output.path` directory.
@@ -153,6 +117,12 @@ The filename of the Hot Update Chunks. They are inside the `output.path` directo
 `[hash]` is replaced by the hash of the compilation. (The last hash stored in the records)
 
 > Default: `"[id].[hash].hot-update.js"`
+
+### `output.hotUpdateFunction`
+
+The JSONP function used by webpack for async loading of hot update chunks.
+
+> Default: `"webpackHotUpdate"`
 
 ### `output.hotUpdateMainFilename`
 
@@ -169,13 +139,6 @@ The JSONP function used by webpack for asnyc loading of chunks.
 A shorter function may reduce the filesize a bit. Use a different identifier when having multiple webpack instances on a single page.
 
 > Default: `"webpackJsonp"`
-
-### `output.hotUpdateFunction`
-
-The JSONP function used by webpack for async loading of hot update chunks.
-
-> Default: `"webpackHotUpdate"`
-
 
 ### `output.library`
 
@@ -203,22 +166,55 @@ Which format to export the library:
 
 If `output.library` is not set, but `output.libraryTarget` is set to a value other than `var`, every property of the exported object is copied (Except `amd`, `commonjs2` and `umd`).
 
+### `output.path`
 
-### `output.crossOriginLoading`
+The output directory as an **absolute path** (required).
 
-This option enables cross-origin loading of chunks.
+`[hash]` is replaced by the hash of the compilation.
 
-Possible values are:
 
-`false` - Disable cross-origin loading.
+**config.js**
 
-`"anonymous"` - Cross-origin loading is enabled. When using `anonymous` no credentials will be sent with the request.
+``` javascript
+output: {
+	path: "/home/proj/public/assets",
+	publicPath: "/assets/"
+}
+```
 
-`"use-credentials"` - Cross-origin loading is enabled and credentials will be send with the request.
+**index.html**
+``` html
+<head>
+  <link href="/assets/spinner.gif"/>
+</head>
+```
+And a more complicated example of using a CDN and hashes for assets.
 
-For more information on cross-origin loading see [MDN](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin)
+**config.js**
 
-> Default: `false`
+``` javascript
+output: {
+	path: "/home/proj/cdn/assets/[hash]",
+	publicPath: "http://cdn.example.com/assets/[hash]/"
+}
+```
 
-> see also [[library and externals]]
-> see also [[Development Tools]]
+**Note:** In cases when the eventual `publicPath` of output files isn't known at compile time, it can be left blank and set dynamically at runtime in the entry point file. If you don't know the `publicPath` while compiling, you can omit it and set `__webpack_public_path__` on your entry point.
+
+``` javascript
+ __webpack_public_path__ = myRuntimePublicPath
+
+// rest of your application entry
+```
+
+### `output.sourceMapFilename`
+
+The filename of the SourceMaps for the JavaScript files. They are inside the `output.path` directory.
+
+`[file]` is replaced by the filename of the JavaScript file.
+
+`[id]` is replaced by the id of the chunk.
+
+`[hash]` is replaced by the hash of the compilation.
+
+> Default: `"[file].map"`

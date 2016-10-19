@@ -2,10 +2,20 @@
 title: Module
 contributors:
   - sokra
-  - gregvenech
+  - skipjack
 ---
 
 These options determine how the [different types of modules](/concepts/everything-is-a-module) within a project will be treated.
+
+### `module.noParse`
+
+`RegExp | [RegExp]`
+
+Prevent webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries...
+
+```js
+noParse: /jquery|backbone/
+```
 
 ### `module.rules`
 
@@ -60,60 +70,6 @@ With the properties [`rules`](#rule-rules) and [`oneOf`](#rule-oneof) nested rul
 Nested rules are used when the Rule condition matches.
 
 
-### `Rule.test`
-
-`Rule.test` is a shortcut to `Rule.resource.test`. See [`Rule.resource`](#rule-resource) and [`Condition.test`](#condition) for details.
-
-
-### `Rule.include`
-
-`Rule.include` is a shortcut to `Rule.resource.include`. See [`Rule.resource`](#rule-resource) and [`Condition.include`](#condition) for details.
-
-
-### `Rule.exclude`
-
-`Rule.exclude` is a shortcut to `Rule.resource.exclude`. See [`Rule.resource`](#rule-resource) and [`Condition.exclude`](#condition) for details.
-
-
-### `Rule.resource`
-
-A [`Condtion`](#condition) matched with the resource. See details in [`Rule` conditions](#rule-conditions).
-
-
-### `Rule.issuer`
-
-A [`Condtion`](#condition) matched with the issuer. See details in [`Rule` conditions](#rule-conditions).
-
-
-### `Rule.loader`
-
-`Rule.loader` is a shortcut to `Rule.use: [ { loader } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.loader`](#useentry-loader) for details.
-
-
-### `Rule.options`
-### `Rule.query`
-
-`Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.options`](#useentry-options) for details.
-
-`Rule.query` only exists for compatibility reasons. Use `Rule.options` instead.
-
-
-### `Rule.loaders`
-
-`Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#rule-use) for details.
-
-It exists for compatibility reasons. Use `Rule.use` instead.
-
-
-### `Rule.use`
-
-A list of [UseEntries](#useentry) which are applied to the module. Each entry specified a loader which should be used.
-
-Passing a string (i. e. `use: [ "style-loader" ]`) is a shortcut to the loader property (i. e. `use: [ { loader: "style-loader "} ]`).
-
-See [UseEntry](#useentry) for details.
-
-
 ### `Rule.enforce`
 
 Either `"pre"`, `"post" or no value.
@@ -133,14 +89,43 @@ All normal, post and pre loaders can be omitted (overridden) by prefixing `!!` i
 Inline loaders and `!` prefixes should not be used as they are non-standard. They may be use by loader generated code.
 
 
-### `Rule.rules`
+### `Rule.exclude`
 
-An array of [`Rules`](#rule) that is also used when the Rule matches.
+`Rule.exclude` is a shortcut to `Rule.resource.exclude`. See [`Rule.resource`](#rule-resource) and [`Condition.exclude`](#condition) for details.
+
+
+### `Rule.include`
+
+`Rule.include` is a shortcut to `Rule.resource.include`. See [`Rule.resource`](#rule-resource) and [`Condition.include`](#condition) for details.
+
+
+### `Rule.issuer`
+
+A [`Condtion`](#condition) matched with the issuer. See details in [`Rule` conditions](#rule-conditions).
+
+
+### `Rule.loader`
+
+`Rule.loader` is a shortcut to `Rule.use: [ { loader } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.loader`](#useentry-loader) for details.
+
+
+### `Rule.loaders`
+
+`Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#rule-use) for details.
+
+It exists for compatibility reasons. Use `Rule.use` instead.
 
 
 ### `Rule.oneOf`
 
 An array of [`Rules`](#rule) from which only the first matching Rule is used when the Rule matches.
+
+
+### `Rule.options / Rule.query`
+
+`Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.options`](#useentry-options) for details.
+
+`Rule.query` only exists for compatibility reasons. Use `Rule.options` instead.
 
 
 ### `Rule.parser`
@@ -166,6 +151,30 @@ parser: {
   node: {...} // reconfigure [node](/configuration/node) layer on module level
 }
 ```
+
+
+### `Rule.resource`
+
+A [`Condtion`](#condition) matched with the resource. See details in [`Rule` conditions](#rule-conditions).
+
+
+### `Rule.rules`
+
+An array of [`Rules`](#rule) that is also used when the Rule matches.
+
+
+### `Rule.test`
+
+`Rule.test` is a shortcut to `Rule.resource.test`. See [`Rule.resource`](#rule-resource) and [`Condition.test`](#condition) for details.
+
+
+### `Rule.use`
+
+A list of [UseEntries](#useentry) which are applied to the module. Each entry specified a loader which should be used.
+
+Passing a string (i. e. `use: [ "style-loader" ]`) is a shortcut to the loader property (i. e. `use: [ { loader: "style-loader "} ]`).
+
+See [UseEntry](#useentry) for details.
 
 
 ### `Condition`
@@ -227,17 +236,6 @@ Example:
 Note that webpack need to generate an unique module identifier from resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9%, but may be not unique if you apply the same loaders with different options to the same resource and the options have some stringified values. It also breaks if the options object cannot be stringified (i. e. circular JSON). Because of this you can have a `ident` property in the options object which is used as unique identifier.
 
 
-### `module.noParse`
-
-`RegExp | [RegExp]`
-
-Prevent webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries...
-
-```js
-noParse: /jquery|backbone/
-```
-
-
 ### Module Contexts
 
 (Deprecated)
@@ -254,17 +252,17 @@ Here are the available options with their defaults:
 
 ```js
 module: {
-  unknownContextRequest: ".",
-  unknownContextRegExp: false,
-  unknownContextRecursive: true,
-  unknownContextCritical: true,
-  exprContextRequest: ".",
-  exprContextRegExp: false,
-  exprContextRecursive: true,
   exprContextCritical: true,
-  wrappedContextRegExp: /.*/,
-  wrappedContextRecursive: true,
+  exprContextRecursive: true,
+  exprContextRegExp: false,
+  exprContextRequest: ".",
+  unknownContextCritical: true,
+  unknownContextRecursive: true,
+  unknownContextRegExp: false,
+  unknownContextRequest: ".",
   wrappedContextCritical: false
+  wrappedContextRecursive: true,
+  wrappedContextRegExp: /.*/,
 }
 ```
 

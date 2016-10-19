@@ -6,6 +6,11 @@ title: License
 
 Copyright © 2012-2016 Tobias Koppers and other contributors
 
+The webpack logo and icon are under a different license which can be 
+found [here](https://github.com/webpack/media).
+
+Except where otherwise stated:
+
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
 'Software'), to deal in the Software without restriction, including

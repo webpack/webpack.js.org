@@ -1,0 +1,82 @@
+@import 'vars';
+@import 'mixins';
+@import 'functions';
+
+.navigation {
+  flex: 0 0 auto;
+  transition: background 250ms;
+  background: map-get($colors, mine-shaft);
+
+  &--transparent {
+    position:relative;
+    display:flex;
+    justify-content: center;
+    background: transparent;
+
+    .navigation__inner {
+      position:absolute;
+    }
+
+    .navigation__link:hover {
+      color: map-get($colors, emperor);
+    }
+
+    .navigation__mobile {
+      color:map-get($colors, emperor);
+    }
+  }
+}
+
+.navigation__inner {
+  display: flex;
+  align-items: center;
+  padding: 0.5em 1em;
+
+  @include break {
+    padding:0 0 0 1.5em;
+  }
+}
+
+.navigation__mobile {
+  font-size: 1.2em;
+  display: flex;
+  margin-right:0.25em;
+  color: map-get($colors, white);
+  transition: color 250ms;
+
+  &:active {
+    color: map-get($colors, alto);
+  }
+
+  @include break {
+    display: none;
+  }
+}
+
+.navigation__links {
+  display: none;
+
+  @include break {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+
+.navigation__link {
+  font-size: getFontSize(-1);
+  padding:1.5em;
+  text-transform: uppercase;
+  color: map-get($colors, dusty-grey);
+  transition:all 250ms;
+
+  &:hover,
+  &--active {
+    color: map-get($colors, white);
+  }
+
+  &--active {
+    background: map-get($colors, emperor);
+  }
+}

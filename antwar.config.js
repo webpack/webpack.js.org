@@ -9,12 +9,6 @@ module.exports = {
     title: 'webpack',
     file: path.join(__dirname, 'template.ejs')
   },
-  assets: [
-    {
-      from: './fonts',
-      to: 'assets'
-    }
-  ],
   output: 'build',
   title: 'webpack',
   keywords: ['webpack', 'javascript', 'web development', 'programming'],
@@ -31,7 +25,7 @@ module.exports = {
     prevnextPlugin()
   ],
   layout: function() {
-    return require('./components/Site.jsx').default
+    return require('./components/site/site.jsx').default
   },
   paths: {
     '/': root(
@@ -84,7 +78,7 @@ module.exports = {
       }
     )
   }
-}
+};
 
 function root(contentCb) {
   return {
@@ -94,8 +88,11 @@ function root(contentCb) {
     },
     processPage: processPage(), // Process individual page (url, content)
     layouts: { // Layouts (page/section)
+      index: function() {
+        return require('./components/splash/splash.jsx').default
+      },
       page: function() {
-        return require('./components/Splash.jsx').default
+        return require('./components/page/page.jsx').default
       }
     },
     redirects: {} // Redirects <from>: <to>
@@ -114,10 +111,10 @@ function section(title, contentCb) {
     processPage: processPage(),
     layouts: {
       index: function() {
-        return require('./components/Page.jsx').default
+        return require('./components/page/page.jsx').default
       },
       page: function() {
-        return require('./components/Page.jsx').default
+        return require('./components/page/page.jsx').default
       }
     },
     redirects: {} // <from>: <to>

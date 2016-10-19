@@ -1,0 +1,40 @@
+@import 'vars';
+
+.logo {
+  display:flex;
+  float:left;
+  align-items:middle;
+
+  &__icon {
+    width:auto;
+    height:35px;
+    opacity:0.9;
+    transition:opacity 250ms;
+  }
+
+  &__text {
+    font-family:'Geomanist', 'Century Gothic', sans-serif;
+    font-size:1.5em;
+    font-weight:500;
+    text-rendering: geometricPrecision;
+    margin-left:0.25em;
+    color:map-get($colors, emperor);
+    transition:color 250ms;
+  }
+
+  &:hover {
+    .logo__icon { opacity:1; }
+    .logo__text { color:map-get($colors, mine-shaft); }
+  }
+
+  &--light {
+    .logo__text { 
+      color:map-get($colors, concrete);
+      //color:rgb(246, 250, 251); 
+    }
+
+    &:hover .logo__text {
+      color:map-get($colors, white);
+    }
+  }
+}

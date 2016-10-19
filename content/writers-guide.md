@@ -19,7 +19,7 @@ title: Writer's Guide
 
 1. `npm i`
 2. `npm start`
-3. [http://localhost:3000](http://localhost:3000)
+3. `open http://localhost:3000`
 
 The site will update itself as you make changes.
 
@@ -36,6 +36,32 @@ function foo () {
 
 foo();
 ```
+
+### Lists
+
+* Boo
+* Foo
+* Zoo
+
+Lists should be ordered alphabetically.
+
+### Tables
+
+| Parameter  | Explanation                                      | Input type | Default value |
+|------------|--------------------------------------------------|------------|---------------|
+| --debug    | Switch loaders to debug mode                     | boolean    | false         |
+| --devtool  | Define source map type for the bundled resources | string     | -             |
+| --progress | Print compilation progress in percentage         | boolean    | false         |
+
+Same goes for tables.
+
+### Configuration Properties
+
+[./configuration] properties should be ordered alphabetically as well:
+
+* `devServer.contentBase`
+* `devServer.compress`
+* `devServer.hot`
 
 ### Quotes
 

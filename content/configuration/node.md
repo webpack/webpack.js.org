@@ -2,7 +2,7 @@
 title: Node
 contributors:
   - sokra
-  - gregvenech
+  - skipjack
 ---
 
 ### `node`
