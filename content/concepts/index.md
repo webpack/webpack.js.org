@@ -2,6 +2,7 @@
 title: 介绍
 contributors:
   - TheLarkInn
+  - dear-lizhihua
 ---
 
 *webpack* 是一个现代的 JavaScript 应用_模块打包器(module bundler)_。它有着[难以置信的配置](./api/configuration)，然而，我们认为你必须在开始前先了解 **4 个核心概念**！

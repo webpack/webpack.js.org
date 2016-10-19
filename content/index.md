@@ -16,8 +16,7 @@ module.exports = {
 }
 ```
 
-## Bundle your [modules](/concepts/modules) with webpack.
-
+## 用 webpack 打包[模块](/concepts/modules)。
 **webpack.config.js**
 
 ```js
@@ -43,4 +42,4 @@ module.exports = {
 </html>
 ```
 
-## It's really that simple. [Get started](/get-started) now!
+## 很简单。 即刻[起步](/get-started)！
