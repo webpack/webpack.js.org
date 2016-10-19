@@ -34,6 +34,11 @@ export default class SidebarMobile extends React.Component {
     }
   }
 
+  /**
+   * Get markup for each section
+   *
+   * @return {array} - Markup containing sections and links
+   */
   _getSections() {
     return this.props.sections.map(section => (
       <div key={ section.url }>
@@ -43,6 +48,12 @@ export default class SidebarMobile extends React.Component {
     ));
   }
 
+  /**
+   * Retrieve markup for page links
+   *
+   * @param {array} pages - A list of page objects
+   * @return {array} - Markup containing the page links
+   */
   _getPages(pages) {
     let pathname = '';
 
@@ -66,7 +77,7 @@ export default class SidebarMobile extends React.Component {
   }
 
   /**
-   * Handle clicks 
+   * Handle clicks on content
    *
    * @param {object} e - Native click event
    */
