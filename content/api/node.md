@@ -124,7 +124,83 @@ T> It’s not allowed to watch or run again before the existing watcher has been
 
 ## Stats Object
 
-...
+The `stats` object that is passed as a second argument of the [`webpack()`](#webpack-) callback, is a good source of information about the code compilation process. It includes:
+
+- Errors and Warnings (if any)
+- Timings
+- Module and Chunk information
+- etc.
+
+The [webpack CLI](/api/cli) uses this information to display a nicely formatted output in your console.
+
+This object exposes these methods:
+
+### `stats.hasErrors()`
+
+Can be used to check if there were errors while compiling. Returns `true` or `false`.
+
+### `stats.hasWarnings()`
+
+Can be used to check if there were warnings while compiling. Returns `true` or `false`.
+
+### `stats.toJSON(options)`
+
+Returns compilation information as a JSON object. `options` can be either a string to specify the granularity level or an object of options in which you can customize the output completely. E.g:
+
+``` js
+stats.toJSON("minimal");
+```
+
+| Option | Alternative | Description |
+|--------|-------------|-------------|
+| `none`        | `false` | Output nothing |
+| `errors-only` | *none*  | Only output when errors happen |
+| `minimal`     | *none*  | Only output when errors or new compilation happen |
+| `normal`      | `true`  | Standard output |
+| `verbose`     | *none*  | Output everything |
+
+Or an object of options. **Note** that all items are optional:
+
+``` js
+stats.toJSON({
+  // Context directory for request shortening
+  context: "../src/",
+  // Add the hash of the compilation
+  hash: true,
+  // Add webpack version information
+  version: true,
+  // Add timing information
+  timings: true,
+  // Add asset Information
+  assets: true,
+  // Add chunk information (setting this to `false` allows for a less verbose output)
+  chunks: true,
+  // Add built modules information to chunk information
+  chunkModules: true,
+  // Add built modules information
+  modules: true,
+  // Add children information
+  children: true,
+  // Add information about cached (not built) modules
+  cached: true,
+  // Add information about the reasons why modules are included
+  reasons: true,
+  // Add the source code of modules
+  source: true,
+  // Add details to errors (like resolving log)
+  errorDetails: true,
+  // Add the origins of chunks and chunk merging info
+  chunkOrigins: true,
+  // Sort the modules by a field
+  modulesSort: "field",
+  // Sort the chunks by a field
+  chunksSort: "field",
+  // Sort assets by a filed
+  assetsSort: "field"
+});
+```
+
+### `stats.toString(options)`
 
 ## Error Handling
 
