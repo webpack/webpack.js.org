@@ -78,9 +78,9 @@ compiler.run((err, [stats](#stats-object)) => {
 });
 ```
 
-## Watch
+## Watching
 
-Calling the `watch` method, triggers the webpack runner, but then watches for changes (much like CLI: `webpack --watch`), as soon as webpack detects a change, runs again:
+Calling the `watch` method, triggers the webpack runner, but then watches for changes (much like CLI: `webpack --watch`), as soon as webpack detects a change, runs again. Returns an instance of `Watching`.
 
 ``` js-with-links
 watch(watchOptions, callback)
@@ -93,7 +93,7 @@ const compiler = webpack({
   // [Configuration Object](/configuration/)
 });
 
-const watcher = compiler.watch({
+const watching = compiler.watch({
   <details><summary>/* [watchOptions](/configuration/watch/#watchoptions) */</summary>
   aggregateTimeout: 300,
   poll: undefined
@@ -104,23 +104,29 @@ const watcher = compiler.watch({
 });
 ```
 
-Watch options are [covered in detail here](/configuration/watch/#watchoptions).
+`Watching` options are [covered in detail here](/configuration/watch/#watchoptions).
 
-### Close Watcher
+### Close `Watching`
 
-The `watch` method returns an instance that exposes `.close(callback)` method. Calling this method will end watching:
+The `watch` method returns a `Watching` instance that exposes `.close(callback)` method. Calling this method will end watching:
 
 ``` js
-watcher.close(() => {
+watching.close(() => {
   console.log("Watching Ended.");
-})
+});
 ```
 
 T> It’s not allowed to watch or run again before the existing watcher has been closed or invalidated.
 
-### Invalidate Watcher
+### Invalidate `Watching`
 
-...
+Manually invalidate the current compiling round, but don’t stop watching.
+
+``` js
+watching.invalidate(() => {
+  console.warn("Invalidated.");
+});
+```
 
 ## Stats Object
 
