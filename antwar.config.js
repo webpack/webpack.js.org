@@ -78,7 +78,7 @@ module.exports = {
       }
     )
   }
-}
+};
 
 function root(contentCb) {
   return {
