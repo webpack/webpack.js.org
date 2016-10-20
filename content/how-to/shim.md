@@ -1,12 +1,12 @@
 ---
-title: How to Shim Third party libraries?
+title: How to Shim Third Party Libraries?
 ---
 
-`webpack` as a module bundler can understand modules written as ES2015 modules, CommonJs or AMD. But many times, while using third party libraries, we see that they expect dependencies which are global aka `$` for `jquery`. They might also be creating global variables which need to be exported. Here we will see different ways to help webpack understand these __broken modules__.
+`webpack` as a module bundler can understand modules written as ES2015 modules, CommonJS or AMD. But many times, while using third party libraries, we see that they expect dependencies which are global aka `$` for `jquery`. They might also be creating global variables which need to be exported. Here we will see different ways to help webpack understand these __broken modules__.
 
 ### Prefer unminified src(CommonJs/AMD) files over bundled `dist` versions.
 
-Most modules link the `dist` version in the `main` field of their `package.json`. While this is useful for most developers, for webpack it is better to alias the src version because this way webpack is able to optimize dependencies better (e.g. when using the [DedupePlugin]()). However in most cases `dist` works fine as well.
+Most modules link the `dist` version in the `main` field of their `package.json`. While this is useful for most developers, for webpack it is better to alias the src version because this way webpack is able to optimize dependencies better (e.g. when using the [DedupePlugin](/concepts/plugins#DedupePlugin)). However in most cases `dist` works fine as well.
 
 ``` javascript
 // webpack.config.js
@@ -22,7 +22,7 @@ module.exports = {
 ```
 
 ### ProvidePlugin
-The [ProvidePlugin]() makes a module available as a variable in every other module required by `webpack`. The module is required only if you use the variable.
+The [ProvidePlugin](/concepts/plugins#ProvidePlugin) makes a module available as a variable in every other module required by `webpack`. The module is required only if you use the variable.
 Most legacy modules rely on the presence of specific globals, like jQuery plugins do on `$` or `jQuery`. In this scenario, you can configure webpack to prepend `var $ = require(“jquery”)` everytime it encounters the global `$` identifier.
 
 ``` javascript
@@ -54,8 +54,6 @@ module: {
 }
 ```
 
-Another example,
-
 There are modules that support different module styles, like AMD, CommonJS and legacy. However, most of the time they first check for `define` and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting `define = false`
 
 ```javascript
@@ -71,7 +69,7 @@ module: {
 
 ### `exports-loader`
 
-Let's say a library creates a global variable that it expects it's consumers to use. In this case we can use [`exports-loader`](https://github.com/webpack/exports-loader), to export that global variable in commonjs format.
+Let's say a library creates a global variable that it expects it's consumers to use. In this case we can use [`exports-loader`](https://github.com/webpack/exports-loader), to export that global variable in CommonJS format.
 
 ```javascript
 module: {
@@ -89,7 +87,7 @@ module: {
 
 ### `scripts-loader`
 
-The [scripts-loader]() evaluates code in the global context, just like you would add the code into a `script` tag. In this mode every normal library should work. require, module, etc. are undefined.
+The [scripts-loader](https://github.com/webpack/script-loader) evaluates code in the global context, just like you would add the code into a `script` tag. In this mode every normal library should work. require, module, etc. are undefined.
 Note: The file is added as string to the bundle. It is not minimized by `webpack`, so use a minimized version. There is also no dev tool support for libraries added by this loader.
 
 ```javascript
