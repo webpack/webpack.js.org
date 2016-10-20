@@ -36,7 +36,7 @@ The resource: An absolute path to the file requested. It's already resolved acco
 
 The issuer: An absolute path to the file of the module which requested the resource. It's the location of the import.
 
-Example: The `import "./style.css"` from `app.js`:
+**Example:** The `import "./style.css"` from `app.js`:
 
 Resource is `/path/to/style.css`. Issuer is `/path/to/app.js`.
 
@@ -134,7 +134,7 @@ An object with parser options. All applied parser options are merged.
 
 For each different parser options object a new parser is created and plugins can apply plugins depending on the parser options. Many of the default plugins apply their parser plugins only if a property in the parser options is not set or true.
 
-Examples (parser options by the default plugins):
+**Examples** (parser options by the default plugins):
 
 ``` js-with-links
 parser: {
@@ -199,7 +199,7 @@ Conditions can be one of these:
 
 `{ not: Condition }`: The Condition must NOT match.
 
-Example:
+**Example:**
 
 ``` js
 {
@@ -222,7 +222,7 @@ It can have a `options` property being a string or object. This value is passed 
 
 For compatibility a `query` property is also possible, which is an alias for the `options` property. Use the `options` property instead.
 
-Example:
+**Example:**
 
 ``` js
 {
