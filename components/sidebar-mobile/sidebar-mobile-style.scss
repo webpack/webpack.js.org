@@ -51,6 +51,7 @@
   padding: 0.5em 17px;
   text-transform: capitalize;
   color: map-get($colors, dusty-grey);
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 
   &:active,
   &--active {
