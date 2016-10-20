@@ -268,7 +268,7 @@ module: {
 
 Note: You can use the `ContextReplacementPlugin` to modify these values for individual dependencies. This also removes the warning.
 
-A few usecases:
+A few use cases:
 
 * Warn for dynamic dependencies: `wrappedContextCritical: true`.
 * `require(expr)` should include the whole directory: `exprContextRegExp: /^\.\//`
