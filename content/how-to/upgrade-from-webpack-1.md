@@ -6,7 +6,7 @@ contributors:
 
 ### `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
 
-These options were replaced by a single option `resolve.modules`. See [resolving](../configuration/resolve) for more usage.
+These options were replaced by a single option `resolve.modules`. See [resolving](/configuration/resolve) for more usage.
 
 ``` diff
   resolve: {
@@ -20,11 +20,11 @@ These options were replaced by a single option `resolve.modules`. See [resolving
 
 ### `resolve.extensions`
 
-This option no longer requires passing an empty string. This behavior was moved to `resolve.enforceExtension`. See [resolving](../configuration/resolve) for more usage.
+This option no longer requires passing an empty string. This behavior was moved to `resolve.enforceExtension`. See [resolving](/configuration/resolve) for more usage.
 
 ### `resolve.*`
 
-More stuff was changed here. Not listed in detail as it's not commonly used. See [resolving](../configuration/resolve) for details.
+More stuff was changed here. Not listed in detail as it's not commonly used. See [resolving](/configuration/resolve) for details.
 
 ### `debug`
 

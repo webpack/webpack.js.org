@@ -1,0 +1,61 @@
+@import 'vars';
+@import 'functions';
+@import 'mixins';
+
+.sidebar-mobile {
+  position: fixed;
+  width: 280px;
+  height: 100vh;
+  z-index: 100;
+  top: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  background: map-get($colors, white);
+  transform: translate3D(-100%, 0, 0);
+  transition: all 500ms;
+
+  @include break {
+    display: none;
+  }
+
+  &--visible {
+    transform: translate3D(0, 0, 0);
+    box-shadow: 0 0 5px map-get($colors, emperor);
+  }
+}
+
+.sidebar-mobile__close {
+  position:absolute;
+  right:16px;
+  top:19px;
+  font-size:1.5em;
+  cursor:pointer;
+  color:map-get($colors, dusty-grey);
+  transition:color 250ms;
+
+  &:hover {
+    color:map-get($colors, mine-shaft);
+  }
+}
+
+.sidebar-mobile__section {
+  font-size: getFontSize(1);
+  text-transform: uppercase;
+  color: map-get($colors, mine-shaft);
+  margin: 1em 16px 0.25em;
+}
+
+.sidebar-mobile__page {
+  display: block;
+  padding: 0.5em 17px;
+  text-transform: capitalize;
+  color: map-get($colors, dusty-grey);
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+  &:active,
+  &--active {
+    color: map-get($colors, mine-shaft);
+    background: map-get($colors, alto);
+  }
+}

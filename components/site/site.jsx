@@ -2,27 +2,40 @@ import React from 'react';
 import Interactive from 'antwar-interactive';
 import { GoogleAnalytics } from 'antwar-helpers';
 import Navigation from '../navigation/navigation';
+import SidebarMobile from '../sidebar-mobile/sidebar-mobile';
 import Sidecar from '../sidecar/sidecar';
 import Footer from '../footer/footer';
 import './site-style';
 
-const pages = [
-  { title: '概念', url: 'concepts' },
-  { title: '配置', url: 'configuration' },
-  { title: '怎么做', url: 'how-to' },
-  { title: 'API', url: 'api' },
-  { title: '捐献', url: '//opencollective.com/webpack'}
-];
-
 export default props => {
-  let { children } = props;
+  // Retrieve section data
+  let sections = props.children.props.section.all()
+    .map(({ title, url, pages }) => ({
+      title,
+      url,
+      pages: pages.map(({ title, url }) => ({
+        title: title || url, // XXX: Title shouldn't be coming in as undefined
+        url
+      }))
+    }));
+
+  // Rename the root section ("Webpack" => "Other") and pop it to the end
+  let rootIndex = sections.findIndex(section => section.title === 'Webpack');
+  let rootSection = sections.splice(rootIndex, 1)[0];
+  rootSection.title = 'Other';
+  sections.push(rootSection);
 
   return (
     <div id="site" className="site">
       <Interactive
         id="components/navigation/navigation.jsx"
         component={ Navigation }
-        pages={ pages } />
+        sections={ sections } />
+
+      <Interactive
+        id="components/sidebar-mobile/sidebar-mobile.jsx"
+        component={ SidebarMobile }
+        sections={ sections } />
 
       <Sidecar />
       { props.children }

@@ -27,7 +27,7 @@ export default class Navigation extends React.Component {
 
           <nav className="navigation__links">
             {
-              this.props.pages.map((link, i) => {
+              this.props.sections.filter(section => section.title !== 'Other').map((link, i) => {
                 let active = pathname === `/${link.url}` || pathname.includes(`/${link.url}/`);
                 let activeClass = active ? 'navigation__link--active' : '';
 
@@ -41,6 +41,10 @@ export default class Navigation extends React.Component {
                 );
               })
             }
+
+            <Link className={ 'navigation__link' } to={ '//opencollective.com/webpack' }>
+              Donate
+            </Link>
           </nav>
         </Container>
       </header>
@@ -48,8 +52,8 @@ export default class Navigation extends React.Component {
   }
 
   _toggleSidebar(e) {
-    let sidebar = document.querySelector('.sidebar');
-    let modifier = 'sidebar--visible';
+    let sidebar = document.querySelector('.sidebar-mobile');
+    let modifier = 'sidebar-mobile--visible';
 
     sidebar.classList.toggle(modifier);
   }
