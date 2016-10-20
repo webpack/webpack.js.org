@@ -1,11 +1,12 @@
 @import 'vars';
 @import 'functions';
+@import 'mixins';
 
 .splash-viz {
   position:relative;
   display:flex;
   height:100vh;
-  min-height:480px;
+  min-height:320px;
   max-height:720px;
   background:linear-gradient(
     to bottom right, 
@@ -16,7 +17,7 @@
 
   &__modules,
   &__output { 
-    flex:0 0 43.25%; 
+    flex:0 0 43.25%;
   }
 
   &__icon {
@@ -31,24 +32,37 @@
   }
 
   &__modules {
-    
+    display:none;
+
+    @include break {
+      display:block;
+    }
   }
 
   &__output {
-    display:flex;
-    flex-wrap:wrap;
-    align-content:center;
-    justify-content:center;
+    display:none;
+
+    @include break {
+      display:flex;
+      flex-wrap:wrap;
+      align-content:center;
+      justify-content:center;
+    }
   }
 
   &__headline {
     position:absolute;
     display:block;
     width:100%;
-    bottom:12%;
+    bottom:5%;
     left:0;
+    padding:0 1em;
     text-align:center;
     font-size:getFontSize(2);
     font-family:'Geomanist', 'Century Gothic', sans-serif;
+
+    @include break {
+      bottom:10%;
+    }
   }
 }

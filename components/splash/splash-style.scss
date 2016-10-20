@@ -1,5 +1,6 @@
 @import 'vars';
 @import 'functions';
+@import 'mixins';
 
 .splash {
   &__bin {
@@ -9,8 +10,12 @@
 
   &__section {
     position:relative;
-    padding:8em 1.5em;
+    padding:5em 1em;
     text-align:center;
+
+    @include break {
+      padding:8em 1.5em;
+    }
 
     pre { 
       text-align:left; 
