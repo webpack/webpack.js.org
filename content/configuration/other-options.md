@@ -25,7 +25,7 @@ amd: {
 
 `boolean`
 
-Fail out on the first error instead of tolerating it. By default webpack will log these errors in red in the terminal, as well as the browser console when using [HMR](), but continue bundling. Turning it on:
+Fail out on the first error instead of tolerating it. By default webpack will log these errors in red in the terminal, as well as the browser console when using HMR, but continue bundling. Turning it on:
 
 ```js
 bail: true
@@ -39,7 +39,7 @@ W> Note that this will become the default behavior in webpack 2.x
 
 `boolean` `object`
 
-Cache the generated webpack modules and chunks to improve build speed. Caching is enabled by default while in [watch mode](). To disable caching simply pass:
+Cache the generated webpack modules and chunks to improve build speed. Caching is enabled by default while in watch mode. To disable caching simply pass:
 
 ```js
 cache: false
@@ -75,7 +75,7 @@ debug: true
 
 `object`
 
-Expose custom values into the [loader context]().
+Expose custom values into the loader context.
 
 ?> Add an example...
 

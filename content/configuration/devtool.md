@@ -23,9 +23,9 @@ Choose a style of [source mapping](http://blog.teamtreehouse.com/introduction-so
 
 `eval-source-map` - Each module is executed with `eval` and a SourceMap is added as DataUrl to the `eval`
 
-`cheap-source-map` - A SourceMap without column-mappings ignoring [loaded source maps]()
+`cheap-source-map` - A SourceMap without column-mappings ignoring loaded source maps
 
-`cheap-module-source-map` - A SourceMap without column-mappings that simplifies [loaded source maps]() to a single mapping per line
+`cheap-module-source-map` - A SourceMap without column-mappings that simplifies loaded source maps to a single mapping per line
 
  devtool                      | build | rebuild | production | quality
 ------------------------------|-------|---------|------------|--------------------------

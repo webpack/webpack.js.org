@@ -25,7 +25,7 @@ By default `[id].js` is used or a value inferred from [`output.filename`](#outpu
 
 Only used when [`target`](/configuration/target) is web, which uses JSONP for loading on-demand chunks, by adding script tags.
 
-Enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) loading of [chunks](). The following values are accepted...
+Enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) loading of chunks. The following values are accepted...
 
 `crossOriginLoading: false` - Disables cross-origin loading (default)
 
@@ -105,7 +105,7 @@ For a single [`entry`](/configuration/entry-context#entry) point, this can be a 
 filename: "bundle.js"
 ```
 
-However, when creating multiple bundles via more than one entry point, [code splitting](), or various [plugins](), you should use one of the following substitutions to give each bundle a unique name...
+However, when creating multiple bundles via more than one entry point, code splitting, or various plugins, you should use one of the following substitutions to give each bundle a unique name...
 
 Using entry name:
 
@@ -299,7 +299,7 @@ or when loading an image in CSS:
 background-image: url(/assets/spinner.gif);
 ```
 
-The [webpack-dev-server]() also takes a hint from `publicPath`, using it to determine where to serve the output files from.
+The webpack-dev-server also takes a hint from `publicPath`, using it to determine where to serve the output files from.
 
 Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/how-to/cache) for details.
 

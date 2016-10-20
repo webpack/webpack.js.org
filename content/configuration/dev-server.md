@@ -7,7 +7,7 @@ contributors:
   - charlespwd
 ---
 
-[webpack-dev-server]() can be used to quickly develop an application. See the ["How to Develop?"](/how-to/develop) to get started.
+webpack-dev-server can be used to quickly develop an application. See the ["How to Develop?"](/how-to/develop) to get started.
 
 This page describes the options that effect the behavior of webpack-dev-server (short: dev-server).
 
@@ -175,7 +175,7 @@ host: "0.0.0.0"
 
 `boolean`
 
-Enable webpack's [Hot Module Replacement]() feature:
+Enable webpack's Hot Module Replacement feature:
 
 ```js
 hot: true
@@ -211,7 +211,7 @@ This object is passed straight to Node.js HTTPS module, so see the [HTTPS docume
 
 `boolean`
 
-Toggle between the dev-server's [two different modes](). By default the application will be served with *inline mode* enabled. This means that a script will be inserted in your bundle to take care of live reloading, and build messages will appear in the browser console.
+Toggle between the dev-server's two different modes. By default the application will be served with *inline mode* enabled. This means that a script will be inserted in your bundle to take care of live reloading, and build messages will appear in the browser console.
 
 It is also possible to use **iframe mode**, which uses an `<iframe>` under a notification bar with messages about the build. To switch to **iframe mode**:
 
@@ -219,7 +219,7 @@ It is also possible to use **iframe mode**, which uses an `<iframe>` under a not
 inline: false
 ```
 
-T> Inline mode is recommended when using [Hot Module Replacement]().
+T> Inline mode is recommended when using Hot Module Replacement.
 
 
 ## `devServer.lazy` 🔑

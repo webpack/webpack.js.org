@@ -5,7 +5,7 @@ contributors:
   - skipjack
 ---
 
-These options determine how the [different types of modules](/concepts/everything-is-a-module) within a project will be treated.
+These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
 
 ## `module.noParse`
 
@@ -266,7 +266,7 @@ module: {
 }
 ```
 
-Note: You can use the [`ContextReplacementPlugin`]() to modify these values for individual dependencies. This also removes the warning.
+Note: You can use the `ContextReplacementPlugin` to modify these values for individual dependencies. This also removes the warning.
 
 A few usecases:
 

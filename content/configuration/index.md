@@ -5,12 +5,11 @@ contributors:
   - skipjack
 ---
 
-Webpack is fed a configuration object. It is passed in one of two ways depending on how you are using webpack: through the [terminal]() or via [Node](). Learn more about the various ways this can be done in [Passing a Configuration](). All the available configuration options are specified below.
+Webpack is fed a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
 
 T> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html). This prevents file path issues between operating systems. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more.
 
-
-### Configuration Options
+## Options
 
 ``` js-with-links-with-details
 {
@@ -38,7 +37,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
     [filename](/configuration/output#output-filename): "[name].js", // for multiple entry points
     [filename](/configuration/output#output-filename): "[chunkhash].js", // for [long term caching](/how-to/cache)
     </details>
-    // the filename template for [entry chunks](chunks)
+    // the filename template for entry chunks
 
     <details><summary>[publicPath](/configuration/output#output-publicpath): "/assets/", // string</summary>
     [publicPath](/configuration/output#output-publicpath): "",
@@ -291,7 +290,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 
   [context](/configuration/entry-context#context): __dirname, // string (absolute path!)
   // the home directory for webpack
-  // the [entry](entry) and [module.rules.loader](/configuration/module#rule-loader) option
+  // the [entry](/configuration/entry-context) and [module.rules.loader](/configuration/module#rule-loader) option
   //   is resolved relative to this directory
 
   <details><summary>[target](/configuration/target): "web", // enum</summary>

@@ -8,15 +8,13 @@ contributors:
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail.
-Have a look at [Module Resolution](concepts/module-resolution) for more explanation of how the resolver works.
-
+Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
 
 ## `resolve`
 
 `object`
 
 Configure how modules are resolved. For example, when calling `import "lodash"` in ES6, the `resolve` options can change where webpack goes to look for `"lodash"` (see [`modules`](#resolve-modules)).
-
 
 ## `resolve.alias`
 
@@ -141,7 +139,7 @@ W> Using this will **override the default array**, meaning that webpack will no 
 
 `array`
 
-When importing from an npm package, e.g. `import * as D3 from "d3"`, this option will determine which fields in it's `package.json` are checked. The default values will vary based upon the [`target`](../concepts/targets) specified in your webpack configuration. 
+When importing from an npm package, e.g. `import * as D3 from "d3"`, this option will determine which fields in it's `package.json` are checked. The default values will vary based upon the [`target`](/concepts/targets) specified in your webpack configuration.
 
 When the `target` property is set to `webworker`, `web`, or left unspecified:
 
