@@ -72,7 +72,7 @@ Nested rules are used when the Rule condition matches.
 
 ## `Rule.enforce`
 
-Either `"pre"`, `"post" or no value.
+Either `"pre"`, `"post"` or no value.
 
 Specifies the category of the loader. No value means normal loader.
 
