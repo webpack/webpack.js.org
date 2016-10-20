@@ -38,7 +38,7 @@ module.exports = {
       }
     ),
     concepts: section(
-      'Concepts',
+      '概念',
       function() {
         return require.context(
           'json!yaml-frontmatter!./content/concepts',
@@ -48,7 +48,7 @@ module.exports = {
       }
     ),
     configuration: section(
-      'Configuration',
+      '配置',
       function() {
         return require.context(
           'json!yaml-frontmatter!./content/configuration',
@@ -58,7 +58,7 @@ module.exports = {
       }
     ),
     'how-to': section(
-      'How to',
+      '怎么做',
       function() {
         return require.context(
           'json!yaml-frontmatter!./content/how-to',
