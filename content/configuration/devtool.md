@@ -7,7 +7,7 @@ contributors:
 
 ?> Description...
 
-### `devtool`
+## `devtool`
 
 `string`
 
@@ -27,15 +27,15 @@ Choose a style of [source mapping](http://blog.teamtreehouse.com/introduction-so
 
 `cheap-module-source-map` - A SourceMap without column-mappings that simplifies [loaded source maps]() to a single mapping per line
 
- devtool                      | build | rebuild | production | quality                       
+ devtool                      | build | rebuild | production | quality
 ------------------------------|-------|---------|------------|--------------------------
- eval                         | +++   | +++     | no         | generated code                
- cheap-eval-source-map        | +     | ++      | no         | transformed code (lines only) 
- cheap-source-map             | +     | o       | yes        | transformed code (lines only) 
- cheap-module-eval-source-map | o     | ++      | no         | original source (lines only)  
- cheap-module-source-map      | o     | -       | yes        | original source (lines only)  
- eval-source-map              | --    | +       | no         | original source               
- source-map                   | --    | --      | yes        | original source               
+ eval                         | +++   | +++     | no         | generated code
+ cheap-eval-source-map        | +     | ++      | no         | transformed code (lines only)
+ cheap-source-map             | +     | o       | yes        | transformed code (lines only)
+ cheap-module-eval-source-map | o     | ++      | no         | original source (lines only)
+ cheap-module-source-map      | o     | -       | yes        | original source (lines only)
+ eval-source-map              | --    | +       | no         | original source
+ source-map                   | --    | --      | yes        | original source
 
 
 T> See [`output.sourceMapFilename`](#output-sourcemapfilename) to customize the filenames of generated source maps.

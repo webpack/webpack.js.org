@@ -7,7 +7,7 @@ contributors:
 
 ?> Description
 
-### `externals`
+## `externals`
 
 `string` `regex` `function` `array` `object`
 

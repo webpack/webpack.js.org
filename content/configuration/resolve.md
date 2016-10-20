@@ -7,20 +7,18 @@ contributors:
   - pksjce
 ---
 
-### Overview
-
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail.
 Have a look at [Module Resolution](concepts/module-resolution) for more explanation of how the resolver works.
 
 
-### `resolve`
+## `resolve`
 
 `object`
 
 Configure how modules are resolved. For example, when calling `import "lodash"` in ES6, the `resolve` options can change where webpack goes to look for `"lodash"` (see [`modules`](#resolve-modules)).
 
 
-### `resolve.alias`
+## `resolve.alias`
 
 `object`
 
@@ -82,7 +80,7 @@ import Test2 from 'xyz/file.js'; // Error, /path/to/file.js/file.js is invalid
 `/abc/node_modules` may resolve in `/node_modules` too.
 
 
-### `resolve.aliasFields`
+## `resolve.aliasFields`
 
 `string`
 
@@ -93,7 +91,7 @@ aliasFields: ["browser"]
 ```
 
 
-### `resolve.descriptionFiles`
+## `resolve.descriptionFiles`
 
 `array`
 
@@ -102,7 +100,7 @@ Default: `["package.json"]`
 The JSON files to use for descriptions.
 
 
-### `resolve.enforceExtension`
+## `resolve.enforceExtension`
 
 `bool`
 
@@ -111,7 +109,7 @@ Default: `false`
 If false it will also try to use no extension from above.
 
 
-### `resolve.enforceModuleExtension`
+## `resolve.enforceModuleExtension`
 
 `bool`
 
@@ -120,7 +118,7 @@ Default: `false`
 If false it's also try to use no module extension from above.
 
 
-### `resolve.extensions`
+## `resolve.extensions`
 
 `array`
 
@@ -139,7 +137,7 @@ import File from '../path/to/file'
 W> Using this will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions. For modules that are imported with their extension, e.g. `import SomeFile from "./somefile.ext"`, to be properly resolved, an empty string must be included in the array.
 
 
-### `resolve.mainFields`
+## `resolve.mainFields`
 
 `array`
 
@@ -173,7 +171,7 @@ For example, the `package.json` of [D3](https://d3js.org/) contains these fields
 This means that when we `import * as D3 from "d3"` this will really resolve to the file in the `browser` property. The `browser` property takes precedence here because it's the first item in `mainFields`. Meanwhile, a node application bundled by webpack will resolve by default to the file in the `module` field.
 
 
-### `resolve.mainFiles`
+## `resolve.mainFiles`
 
 `array`
 
@@ -182,7 +180,7 @@ Default: `["index"]`
 The filename to be used while resolving directories.
 
 
-### `resolve.moduleExtensions`
+## `resolve.moduleExtensions`
 
 `array`
 
@@ -191,7 +189,7 @@ Example: `['-loaders']`
 These extensions are tried when resolving a module.
 
 
-### `resolve.modules`
+## `resolve.modules`
 
 `array`
 
@@ -216,7 +214,7 @@ modules: [path.resolve(__dirname, "src"), "node_modules"]
 ```
 
 
-### `resolve.resolveToContext`
+## `resolve.resolveToContext`
 
 `bool`
 
@@ -225,7 +223,7 @@ Default: `false`
 If true, trying to resolve a context to its absolute path ends when a directory is found.
 
 
-### `resolve.unsafeCache`
+## `resolve.unsafeCache`
 
 `regex` `array` `boolean`
 
@@ -238,7 +236,7 @@ unsafeCache: /src\/utilities/
 W> Changes to cached paths may cause failure in rare cases.
 
 
-### `resolveLoader`
+## `resolveLoader`
 
 `object`
 
@@ -256,7 +254,7 @@ Default:
 
 T> Note that you can use alias here and other features familiar from resolve. For example `{ txt: 'raw-loader' }` would shim `txt!templates/demo.txt` to use `raw-loader`.
 
-### `resolveLoader.moduleTemplates`
+## `resolveLoader.moduleTemplates`
 
 `array`
 

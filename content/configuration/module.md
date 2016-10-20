@@ -7,7 +7,7 @@ contributors:
 
 These options determine how the [different types of modules](/concepts/everything-is-a-module) within a project will be treated.
 
-### `module.noParse`
+## `module.noParse`
 
 `RegExp | [RegExp]`
 
@@ -17,18 +17,18 @@ Prevent webpack from parsing any files matching the given regular expression(s).
 noParse: /jquery|backbone/
 ```
 
-### `module.rules`
+## `module.rules`
 
 `array`
 
 An array of [Rules](#rule) which are matched to requests when modules are created. These rules can modify how the module is created. They can apply loaders to the module, or modify the parser.
 
 
-### `Rule`
+## `Rule`
 
 A Rule can be separated into three parts: Conditions, Results and nested Rules.
 
-#### `Rule` conditions
+### `Rule` conditions
 
 There are two input values for the conditions:
 
@@ -44,7 +44,7 @@ In a Rule the properties [`test`](#rule-test), [`include`](#rule-include), [`exc
 
 When using multiple conditions, all conditions must match.
 
-#### `Rule` results
+### `Rule` results
 
 Rule results are only used when the Rule condition matches.
 
@@ -63,14 +63,14 @@ The [`enforce`](#rule-enforce) property affect the loader category. Whether it's
 The [`parser`](#rule-parser) property affect the parser options.
 
 
-### `Rule` nested rules
+## `Rule` nested rules
 
 With the properties [`rules`](#rule-rules) and [`oneOf`](#rule-oneof) nested rules can be specified.
 
 Nested rules are used when the Rule condition matches.
 
 
-### `Rule.enforce`
+## `Rule.enforce`
 
 Either `"pre"`, `"post" or no value.
 
@@ -89,46 +89,46 @@ All normal, post and pre loaders can be omitted (overridden) by prefixing `!!` i
 Inline loaders and `!` prefixes should not be used as they are non-standard. They may be use by loader generated code.
 
 
-### `Rule.exclude`
+## `Rule.exclude`
 
 `Rule.exclude` is a shortcut to `Rule.resource.exclude`. See [`Rule.resource`](#rule-resource) and [`Condition.exclude`](#condition) for details.
 
 
-### `Rule.include`
+## `Rule.include`
 
 `Rule.include` is a shortcut to `Rule.resource.include`. See [`Rule.resource`](#rule-resource) and [`Condition.include`](#condition) for details.
 
 
-### `Rule.issuer`
+## `Rule.issuer`
 
 A [`Condtion`](#condition) matched with the issuer. See details in [`Rule` conditions](#rule-conditions).
 
 
-### `Rule.loader`
+## `Rule.loader`
 
 `Rule.loader` is a shortcut to `Rule.use: [ { loader } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.loader`](#useentry-loader) for details.
 
 
-### `Rule.loaders`
+## `Rule.loaders`
 
 `Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#rule-use) for details.
 
 It exists for compatibility reasons. Use `Rule.use` instead.
 
 
-### `Rule.oneOf`
+## `Rule.oneOf`
 
 An array of [`Rules`](#rule) from which only the first matching Rule is used when the Rule matches.
 
 
-### `Rule.options / Rule.query`
+## `Rule.options / Rule.query`
 
 `Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.options`](#useentry-options) for details.
 
 `Rule.query` only exists for compatibility reasons. Use `Rule.options` instead.
 
 
-### `Rule.parser`
+## `Rule.parser`
 
 An object with parser options. All applied parser options are merged.
 
@@ -153,22 +153,22 @@ parser: {
 ```
 
 
-### `Rule.resource`
+## `Rule.resource`
 
 A [`Condtion`](#condition) matched with the resource. See details in [`Rule` conditions](#rule-conditions).
 
 
-### `Rule.rules`
+## `Rule.rules`
 
 An array of [`Rules`](#rule) that is also used when the Rule matches.
 
 
-### `Rule.test`
+## `Rule.test`
 
 `Rule.test` is a shortcut to `Rule.resource.test`. See [`Rule.resource`](#rule-resource) and [`Condition.test`](#condition) for details.
 
 
-### `Rule.use`
+## `Rule.use`
 
 A list of [UseEntries](#useentry) which are applied to the module. Each entry specified a loader which should be used.
 
@@ -177,7 +177,7 @@ Passing a string (i. e. `use: [ "style-loader" ]`) is a shortcut to the loader p
 See [UseEntry](#useentry) for details.
 
 
-### `Condition`
+## `Condition`
 
 Conditions can be one of these:
 
@@ -212,7 +212,7 @@ Example:
 ```
 
 
-### `UseEntry`
+## `UseEntry`
 
 `object`
 
@@ -236,7 +236,7 @@ Example:
 Note that webpack need to generate an unique module identifier from resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9%, but may be not unique if you apply the same loaders with different options to the same resource and the options have some stringified values. It also breaks if the options object cannot be stringified (i. e. circular JSON). Because of this you can have a `ident` property in the options object which is used as unique identifier.
 
 
-### Module Contexts
+## Module Contexts
 
 (Deprecated)
 

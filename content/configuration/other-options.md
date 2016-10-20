@@ -7,8 +7,7 @@ contributors:
 
 ?> These are all the other options that might not need an entire page. Either we need to create new pages for them, move them to an existing page, or keep an **Other Options** section like this and replace this TODO with a short description/lead-in paragraph.
 
-
-### `amd`
+## `amd`
 
 `object`
 
@@ -22,8 +21,7 @@ amd: {
 
 ?> I don't think this is very clear, at least not without a link pointing to what this might be used for.
 
-
-### `bail`
+## `bail`
 
 `boolean`
 
@@ -37,8 +35,7 @@ will force webpack to exit it's bundling process.
 
 W> Note that this will become the default behavior in webpack 2.x
 
-
-### `cache`
+## `cache`
 
 `boolean` `object`
 
@@ -62,8 +59,7 @@ export default {
 W> Don't share the cache between calls with different options.
 ?> Elaborate on the warning and example - calls with different configuration options?
 
-
-### `debug`
+## `debug`
 
 `boolean`
 
@@ -75,8 +71,7 @@ debug: true
 
 ?> Consider adding an example of a certain loader emitting more details.
 
-
-### `loader`
+## `loader`
 
 `object`
 
@@ -84,8 +79,7 @@ Expose custom values into the [loader context]().
 
 ?> Add an example...
 
-
-### `profile`
+## `profile`
 
 `boolean`
 
@@ -93,8 +87,19 @@ Capture a "profile" of the application, including statistics and hints, which ca
 
 T> Use the [StatsPlugin](https://www.npmjs.com/package/stats-webpack-plugin) for more control over the generated profile.
 
+## `recordsPath`
 
-### `recordsPath`
+Description...
+
+?> Add example and description as well as details on `recordsInputPath` and `recordsOutputPath`.
+
+## `recordsInputPath`
+
+Description...
+
+?> Add example and description as well as details on `recordsInputPath` and `recordsOutputPath`.
+
+## `recordsOutputPath`
 
 Description...
 

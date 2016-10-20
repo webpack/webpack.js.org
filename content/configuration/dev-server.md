@@ -13,7 +13,7 @@ This page describes the options that effect the behavior of webpack-dev-server (
 
 T> Options that are compatible with [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) have 🔑 next to them.
 
-### `devServer`
+## `devServer`
 
 `object`
 
@@ -40,7 +40,7 @@ that will give some background on where the server is located and what it's serv
 If you're using dev-server through the Node.js API, the options in `devServer` will be ignored. Pass the options as a second parameter instead: `new WebpackDevServer(compiler, {...})`.
 
 
-### `devServer.clientLogLevel`
+## `devServer.clientLogLevel`
 
 `string`
 
@@ -57,7 +57,7 @@ Possible values are `none`, `error`, `warning` or `info` (default).
 Note that the console will *always* show bundle errors and warnings. This option only effects the message before it.
 
 
-### `devServer.compress`
+## `devServer.compress`
 
 `boolean`
 
@@ -68,7 +68,7 @@ compress: true
 ```
 
 
-### `devServer.contentBase`
+## `devServer.contentBase`
 
 `boolean` `string` `array`
 
@@ -95,7 +95,7 @@ contentBase: false
 ```
 
 
-### `devServer.filename` 🔑
+## `devServer.filename` 🔑
 
 `string`
 
@@ -114,7 +114,7 @@ It will now only compile the bundle when `/bundle.js` is requested.
 T> `filename` has no effect when used without **lazy mode**.
 
 
-### `devServer.headers` 🔑
+## `devServer.headers` 🔑
 
 `object`
 
@@ -127,7 +127,7 @@ headers: {
 ```
 
 
-### `devServer.historyApiFallback`
+## `devServer.historyApiFallback`
 
 `boolean` `object`
 
@@ -160,7 +160,7 @@ historyApiFallback: {
 For more options and information, see the [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) documentation.
 
 
-### `devServer.host` - CLI only
+## `devServer.host` - CLI only
 
 `string`
 
@@ -171,7 +171,7 @@ host: "0.0.0.0"
 ```
 
 
-### `devServer.hot`
+## `devServer.hot`
 
 `boolean`
 
@@ -184,7 +184,7 @@ hot: true
 ?> Add various other steps needed for this to work. (From my experience, and the current docs it looks like other steps are needed here - not like in the cmd line where it's just a flag)
 
 
-### `devServer.https`
+## `devServer.https`
 
 `boolean` `object`
 
@@ -207,7 +207,7 @@ https: {
 This object is passed straight to Node.js HTTPS module, so see the [HTTPS documentation](https://nodejs.org/api/https.html) for more information.
 
 
-### `devServer.inline` - CLI only
+## `devServer.inline` - CLI only
 
 `boolean`
 
@@ -222,7 +222,7 @@ inline: false
 T> Inline mode is recommended when using [Hot Module Replacement]().
 
 
-### `devServer.lazy` 🔑
+## `devServer.lazy` 🔑
 
 `boolean`
 
@@ -237,7 +237,7 @@ T> `watchOptions` will have no effect when used with **lazy mode**.
 T> If you use the CLI, make sure **inline mode** is disabled.
 
 
-### `devServer.noInfo` 🔑
+## `devServer.noInfo` 🔑
 
 `boolean`
 
@@ -248,7 +248,7 @@ noInfo: true
 ```
 
 
-### `devServer.port` - CLI only
+## `devServer.port` - CLI only
 
 `number`
 
@@ -259,7 +259,7 @@ port: 8080
 ```
 
 
-### `devServer.proxy`
+## `devServer.proxy`
 
 `object`
 
@@ -320,7 +320,7 @@ proxy: {
 ```
 
 
-### `devServer.public` - CLI only
+## `devServer.public` - CLI only
 
 `string`
 
@@ -333,7 +333,7 @@ public: "myapp.test:80"
 ```
 
 
-### `devServer.publicPath` 🔑
+## `devServer.publicPath` 🔑
 
 `string`
 
@@ -362,7 +362,7 @@ The bundle will also be available as `http://localhost:8080/assets/bundle.js`.
 T> It is recommended that `devServer.publicPath` is the same as `output.publicPath`.
 
 
-### `devServer.quiet` 🔑
+## `devServer.quiet` 🔑
 
 `boolean`
 
@@ -373,7 +373,7 @@ quiet: true
 ```
 
 
-### `devServer.staticOptions`
+## `devServer.staticOptions`
 
 It is possible to configure advanced options for serving static files from `contentBase`. See the [Express documentation](http://expressjs.com/en/4x/api.html#express.static) for the possible options. An example:
 
@@ -386,7 +386,7 @@ staticOptions: {
 T> This only works when using `contentBase` as a `string`.
 
 
-### `devServer.stats` 🔑
+## `devServer.stats` 🔑
 
 `string` `object`
 
@@ -403,7 +403,7 @@ For more information, see the [**stats documentation**](./stats).
 T> This option has no effect when used with `quiet` or `noInfo`.
 
 
-### `devServer.watchContentBase`
+## `devServer.watchContentBase`
 
 `boolean`
 
@@ -416,7 +416,7 @@ watchContentBase: true
 It is disabled by default.
 
 
-### `devServer.watchOptions` 🔑
+## `devServer.watchOptions` 🔑
 
 `object`
 

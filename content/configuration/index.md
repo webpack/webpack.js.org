@@ -366,7 +366,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 
   [recordsPath](other-options#recordspath): path.resolve(__dirname, "build/records.json"),
   [recordsInputPath](other-options#recordsinputpath): path.resolve(__dirname, "build/records.json"),
-  [recordsOutputPath](other-options#recordsiutputpath): path.resolve(__dirname, "build/records.json"),
+  [recordsOutputPath](other-options#recordsoutputpath): path.resolve(__dirname, "build/records.json"),
   // TODO
 
   </details>
