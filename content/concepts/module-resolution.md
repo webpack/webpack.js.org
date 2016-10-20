@@ -5,15 +5,15 @@ contributors:
 ---
 
 A resolver is a library which helps find the absolute path of a module.
-A module can be required as a dependency from another module as 
+A module can be required as a dependency from another module as
 
 ```js
 require('/path/to/module')
-//or 
+//or
 import mymodule from '/path/to/module'
 ```
 
-The dependency module can be from the application code or a third party library. The resolver helps 
+The dependency module can be from the application code or a third party library. The resolver helps
 `webpack` find the module code that needs to be included in the bundle for every such `require()/import` statement.
 `webpack` uses [enhanced-resolve](https://github.com/webpack/enhanced-resolve) to resolve file paths while bundling modules.
 
@@ -51,7 +51,7 @@ Aliasing, ie setting `resolve.alias` to an existing module path, allows you to r
 
 Once the path is resolved based on the above rule, the resolver checks if the path points to a file or to a directory. If the path points to a file then it is bundled straightaway.
 But if the path points to a folder, then the following steps are taken to find the right file with the right extension.
-* The right file is determined using the `main: "<filename>.js"` field in `package.json`. 
+* The right file is determined using the `main: "<filename>.js"` field in `package.json`.
 * If there is no package.json or the main file is not found, `resolve.mainFiles` configuration option is looked up.
 * If this also fails, then it looks for a file named `index` by default.
 * `resolve.extensions` tells the resolver which extensions (eg - `.js, .jsx`) are acceptable for resolution.
@@ -68,4 +68,4 @@ Every filesystem access is cached so that multiple parallel or serial requests t
 
 There is a configuration option `resolve.unsafeCache` which boosts performance by aggressive caching.Every resolve process is cached and isn’t ever purged. This is correct in most cases, but incorrect in edge cases (what edge cases?).
 
-Look at [Resolve API](../configuration/resolve) for more info on the configuration mentioned above.
+Look at [Resolve API](/configuration/resolve) for more info on the configuration mentioned above.

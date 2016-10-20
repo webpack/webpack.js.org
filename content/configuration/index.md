@@ -5,12 +5,11 @@ contributors:
   - skipjack
 ---
 
-Webpack is fed a configuration object. It is passed in one of two ways depending on how you are using webpack: through the [terminal]() or via [Node](). Learn more about the various ways this can be done in [Passing a Configuration](). All the available configuration options are specified below.
+Webpack is fed a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
 
 T> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html). This prevents file path issues between operating systems. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more.
 
-
-### Configuration Options
+## Options
 
 ``` js-with-links-with-details
 {
@@ -38,7 +37,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
     [filename](/configuration/output#output-filename): "[name].js", // for multiple entry points
     [filename](/configuration/output#output-filename): "[chunkhash].js", // for [long term caching](/how-to/cache)
     </details>
-    // the filename template for [entry chunks](chunks)
+    // the filename template for entry chunks
 
     <details><summary>[publicPath](/configuration/output#output-publicpath): "/assets/", // string</summary>
     [publicPath](/configuration/output#output-publicpath): "",
@@ -141,7 +140,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
         [loader](/configuration/module#rule-loader): "babel-loader",
         // the loader which should be applied, it'll be resolve relative to the context
 
-        [options](/configuration/module#rule-options): {
+        [options](/configuration/module#rule-options-rule-query): {
           presets: ["es2015"]
         },
         // options for the loader
@@ -215,7 +214,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
     // extensions that are used
 
     [alias](/configuration/resolve#resolve-alias): {
-      // a list of module name aliasings
+      // a list of module name aliases
 
       "module": "new-module"
       // alias "module" -> "new-module" and "module/path/file" -> "new-module/path/file"
@@ -224,15 +223,15 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
       // alias "only-module" -> "new-module", but not "module/path/file" -> "new-module/path/file"
     },
     <details><summary>/* alternative alias syntax (click to show) */</summary>
-    [alias](/configuration/resolve#resolve-alias): [ 
+    [alias](/configuration/resolve#resolve-alias): [
       {
-        [name](/configuration/resolve#resolve-alias-name): "module",
+        **name**: "module",
         // the old request
 
-        [alias](/configuration/resolve#resolve-alias-alias): "new-module",
+        **alias**: "new-module",
         // the new request
 
-        [onlyModule](/configuration/resolve#resolve-alias-onlyModule): true
+        **onlyModule**: true
         // if true only "module" is aliased
         // if false "module/inner/path" is also aliased
       }
@@ -291,7 +290,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 
   [context](/configuration/entry-context#context): __dirname, // string (absolute path!)
   // the home directory for webpack
-  // the [entry](entry) and [module.rules.loader](/configuration/module#rule-loader) option
+  // the [entry](/configuration/entry-context) and [module.rules.loader](/configuration/module#rule-loader) option
   //   is resolved relative to this directory
 
   <details><summary>[target](/configuration/target): "web", // enum</summary>
@@ -350,11 +349,11 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
   // enables watching
 
   [watchOptions](watch#watchoptions): {
-    [aggregateTimeout](#watchoptions.aggregatetimeout): 1000, // in ms
+    [aggregateTimeout](watch#watchoptions-aggregatetimeout): 1000, // in ms
     // aggregates multiple changes to a single rebuild
 
-    [poll](watch#watchoptions.poll): true,
-    [poll](watch#watchoptions.poll): 500, // intervall in ms
+    [poll](watch#watchoptions-poll): true,
+    [poll](watch#watchoptions-poll): 500, // intervall in ms
     // enables polling mode for watching
     // must be used on filesystems that doesn't notify on change
     // i. e. nfs shares
@@ -366,7 +365,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 
   [recordsPath](other-options#recordspath): path.resolve(__dirname, "build/records.json"),
   [recordsInputPath](other-options#recordsinputpath): path.resolve(__dirname, "build/records.json"),
-  [recordsOutputPath](other-options#recordsiutputpath): path.resolve(__dirname, "build/records.json"),
+  [recordsOutputPath](other-options#recordsoutputpath): path.resolve(__dirname, "build/records.json"),
   // TODO
 
   </details>

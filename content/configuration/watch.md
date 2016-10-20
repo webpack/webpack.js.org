@@ -9,7 +9,7 @@ contributors:
 
 Webpack 可以监听文件变化，当它们修改后会重新编译。这个页面介绍了如何启用这个功能，以及当 Watch 不正常的时候你可以做的一些调整。
 
-### `watch`
+## `watch`
 
 `boolean`
 
@@ -21,7 +21,7 @@ watch: false
 
 T> webpack-dev-server 和 webpack-dev-middleware 里 Watch 模式默认开启。
 
-### `watchOptions`
+## `watchOptions`
 
 `object`
 
@@ -34,8 +34,7 @@ watchOptions: {
 }
 ```
 
-
-### `watchOptions.aggregateTimeout`
+## `watchOptions.aggregateTimeout`
 
 `number`
 
@@ -45,8 +44,7 @@ watchOptions: {
 aggregateTimeout: 300 // 默认值
 ```
 
-
-### `watchOptions.ignored`
+## `watchOptions.ignored`
 
 对于某些系统，监听大量文件系统会导致大量的 CPU 或内存占用。这个选项可以排除一些巨大的文件夹，例如 `node_modules`：
 
@@ -60,8 +58,7 @@ ignored: /node_modules/
 ignored: "files/**/*.js"
 ```
 
-
-### `watchOptions.poll`
+## `watchOptions.poll`
 
 `boolean` `number`
 

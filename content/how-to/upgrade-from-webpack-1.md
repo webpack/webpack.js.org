@@ -195,7 +195,7 @@ require.ensure([], function(require) {
 
 The ES6 Loader spec defines `System.import` as method to load ES6 Modules dynamically on runtime.
 
-webpack threads `System.import` as a split-point and puts the requested module in a separate chunk.
+webpack treats `System.import` as a split-point and puts the requested module in a separate chunk.
 
 `System.import` takes the module name as argument and returns a Promise.
 
