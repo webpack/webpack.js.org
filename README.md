@@ -1,7 +1,7 @@
 [![构建统计](https://secure.travis-ci.org/webpack/webpack.js.org.svg)](http://travis-ci.org/webpack/webpack.js.org)
 
-# webpack.vuefe.cn 
-
+#  webpack
+> http://webpack2.leanapp.cn/
 > webpack2 中文
 
 指南，文档，以及 webpack 的一切。
