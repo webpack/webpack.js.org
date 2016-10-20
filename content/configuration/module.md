@@ -101,7 +101,7 @@ Inline loaders and `!` prefixes should not be used as they are non-standard. The
 
 ## `Rule.issuer`
 
-A [`Condtion`](#condition) matched with the issuer. See details in [`Rule` conditions](#rule-conditions).
+A [`Condition`](#condition) matched with the issuer. See details in [`Rule` conditions](#rule-conditions).
 
 
 ## `Rule.loader`
@@ -155,7 +155,7 @@ parser: {
 
 ## `Rule.resource`
 
-A [`Condtion`](#condition) matched with the resource. See details in [`Rule` conditions](#rule-conditions).
+A [`Condition`](#condition) matched with the resource. See details in [`Rule` conditions](#rule-conditions).
 
 
 ## `Rule.rules`
