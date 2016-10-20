@@ -3,17 +3,14 @@ title: Targets
 contributors:
   - TheLarkInn
 ---
-## Overview
 
-Because JavaScript can be written for both server and browser, webpack offers multiple deployment _targets_ that you can set in your webpack [configuration](./api/configuration).
+Because JavaScript can be written for both server and browser, webpack offers multiple deployment _targets_ that you can set in your webpack [configuration](/configuration).
 
-W> The webpack `target` property is not to be confused with the `output.libraryTarget` property. For more information see [our guide](./concepts/output) on the `output` property.
+W> The webpack `target` property is not to be confused with the `output.libraryTarget` property. For more information see [our guide](/concepts/output) on the `output` property.
 
-
-### Usage
+## Usage
 
 To set the `target` property, you simply set the target value in your webpack config:
-
 
 **webpack.config.js**
 
@@ -25,7 +22,7 @@ const config = {
 module.exports = config;
 ```
 
-### Options
+## Options
 
 The following is a list of values you can pass to the `target` property.
 
@@ -42,7 +39,7 @@ For example, when you use the `electron-main` _target_, *webpack* includes multi
 
 ?> We should expand on this further. What specifically is included.
 
-### Multiple Targets
+## Multiple Targets
 
 Although webpack does **not** support multiple strings being passed into the `target` property, you can create an isomorphic library by bundling two separate configurations:
 
@@ -72,11 +69,11 @@ module.exports = [ serverConfig, clientConfig ];
 
 The example above will create a `lib.js` and `lib.node.js` file in your `dist` folder.
 
-### Resources
+## Resources
 
 As seen from the options above there are multiple different deployment _targets_ that you can choose from. Below is a list of examples, and resources that you can refer to.
 
-#### Bundle Output Comparison
+### Bundle Output Comparison
 
   **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**: A great resource for testing and viewing different webpack _targets_. Also great for bug reporting.
 

@@ -38,6 +38,6 @@ Choose a style of [source mapping](http://blog.teamtreehouse.com/introduction-so
  source-map                   | --    | --      | yes        | original source
 
 
-T> See [`output.sourceMapFilename`](#output-sourcemapfilename) to customize the filenames of generated source maps.
+T> See [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilename) to customize the filenames of generated source maps.
 
 ?> This section is pretty much just copied over from existing docs... imo more background is needed on the different types of source mapping, maybe via links to external sites that discuss the different types of source maps in more detail.

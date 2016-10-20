@@ -261,3 +261,15 @@ T> Note that you can use alias here and other features familiar from resolve. Fo
 That's a `resolveLoader` only property.It describes alternatives for the module name that are tried.
 
 Default: `["*-webpack-loader", "*-web-loader", "*-loader", "*"]`
+
+## `resolve.plugins`
+
+?> Description
+
+## `resolve.symlinks`
+
+?> Description
+
+## `resolve.cachePredicate`
+
+?> Description

@@ -141,7 +141,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
         [loader](/configuration/module#rule-loader): "babel-loader",
         // the loader which should be applied, it'll be resolve relative to the context
 
-        [options](/configuration/module#rule-options): {
+        [options](/configuration/module#rule-options-rule-query): {
           presets: ["es2015"]
         },
         // options for the loader
@@ -215,7 +215,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
     // extensions that are used
 
     [alias](/configuration/resolve#resolve-alias): {
-      // a list of module name aliasings
+      // a list of module name aliases
 
       "module": "new-module"
       // alias "module" -> "new-module" and "module/path/file" -> "new-module/path/file"
@@ -224,15 +224,15 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
       // alias "only-module" -> "new-module", but not "module/path/file" -> "new-module/path/file"
     },
     <details><summary>/* alternative alias syntax (click to show) */</summary>
-    [alias](/configuration/resolve#resolve-alias): [ 
+    [alias](/configuration/resolve#resolve-alias): [
       {
-        [name](/configuration/resolve#resolve-alias-name): "module",
+        **name**: "module",
         // the old request
 
-        [alias](/configuration/resolve#resolve-alias-alias): "new-module",
+        **alias**: "new-module",
         // the new request
 
-        [onlyModule](/configuration/resolve#resolve-alias-onlyModule): true
+        **onlyModule**: true
         // if true only "module" is aliased
         // if false "module/inner/path" is also aliased
       }
@@ -350,11 +350,11 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
   // enables watching
 
   [watchOptions](watch#watchoptions): {
-    [aggregateTimeout](#watchoptions.aggregatetimeout): 1000, // in ms
+    [aggregateTimeout](watch#watchoptions-aggregatetimeout): 1000, // in ms
     // aggregates multiple changes to a single rebuild
 
-    [poll](watch#watchoptions.poll): true,
-    [poll](watch#watchoptions.poll): 500, // intervall in ms
+    [poll](watch#watchoptions-poll): true,
+    [poll](watch#watchoptions-poll): 500, // intervall in ms
     // enables polling mode for watching
     // must be used on filesystems that doesn't notify on change
     // i. e. nfs shares

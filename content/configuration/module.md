@@ -54,9 +54,9 @@ The applied loaders: An array of loaders applied to the resource. Separated in p
 
 The parser options: An object with options which should be used to create the parser for this module.
 
-These properties affect the loaders: [`loader`](#rule-loader), [`options`](#rule-options), [`use`](#rule-use).
+These properties affect the loaders: [`loader`](#rule-loader), [`options`](#rule-options-rule-query), [`use`](#rule-use).
 
-For compatibility also these properties: [`query`](#rule-query), [`loaders`](#rule-loaders).
+For compatibility also these properties: [`query`](#rule-options-rule-query), [`loaders`](#rule-loaders).
 
 The [`enforce`](#rule-enforce) property affect the loader category. Whether it's an normal, pre- or post- loader.
 
@@ -106,7 +106,7 @@ A [`Condtion`](#condition) matched with the issuer. See details in [`Rule` condi
 
 ## `Rule.loader`
 
-`Rule.loader` is a shortcut to `Rule.use: [ { loader } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.loader`](#useentry-loader) for details.
+`Rule.loader` is a shortcut to `Rule.use: [ { loader } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.loader`](#useentry) for details.
 
 
 ## `Rule.loaders`
@@ -123,7 +123,7 @@ An array of [`Rules`](#rule) from which only the first matching Rule is used whe
 
 ## `Rule.options / Rule.query`
 
-`Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.options`](#useentry-options) for details.
+`Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.options`](#useentry) for details.
 
 `Rule.query` only exists for compatibility reasons. Use `Rule.options` instead.
 

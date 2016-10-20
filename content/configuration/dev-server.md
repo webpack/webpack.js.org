@@ -7,7 +7,7 @@ contributors:
   - charlespwd
 ---
 
-[webpack-dev-server]() can be used to quickly develop an application. See the ["How to Develop?"](../how-to/develop) to get started.
+[webpack-dev-server]() can be used to quickly develop an application. See the ["How to Develop?"](/how-to/develop) to get started.
 
 This page describes the options that effect the behavior of webpack-dev-server (short: dev-server).
 
@@ -72,7 +72,7 @@ compress: true
 
 `boolean` `string` `array`
 
-Tell the server where to serve content from. This is only necessary if you want to serve static files. [`output.publicPath`](#output-publicpath) will be used to determine where the bundles should be served from, and takes precedence.
+Tell the server where to serve content from. This is only necessary if you want to serve static files. [`devServer.publicPath`](#devserver-publicpath-) will be used to determine where the bundles should be served from, and takes precedence.
 
 By default it will use your current working directory to serve content, but you can modify this to another directory:
 
@@ -398,7 +398,7 @@ To show only errors in your bundle:
 stats: "errors-only"
 ```
 
-For more information, see the [**stats documentation**](./stats).
+For more information, see the [**stats documentation**](/configuration/stats).
 
 T> This option has no effect when used with `quiet` or `noInfo`.
 
@@ -432,4 +432,4 @@ watchOptions: {
 
 If this is too heavy on the file system, you can change this to an integer to set the interval in milliseconds.
 
-See [WatchOptions](./watch) for more options.
+See [WatchOptions](/configuration/watch) for more options.

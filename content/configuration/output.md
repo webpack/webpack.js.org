@@ -40,7 +40,7 @@ Enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/scr
 
 A fallback used when the template string or function above yields duplicates.
 
-See [`output.devtoolModuleFilenameTemplate`](#output-devtoolModuleFilenameTemplate).
+See [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametemplate).
 
 
 ## `output.devtoolLineToLine`
@@ -49,7 +49,7 @@ See [`output.devtoolModuleFilenameTemplate`](#output-devtoolModuleFilenameTempla
 
 (Deprecated: Not really used, not really useable, write an issue if you have a other opinion)
 
-Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines. 
+Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines.
 
 Pass a boolean to enable or disable this feature for all modules (defaults to `false`). An object with `test`, `include`, `exclude` is also allowed. For example, to enable this feature for all javascript files within a certain directory:
 
@@ -90,7 +90,7 @@ devtoolModuleFilenameTemplate: info => {
 }
 ```
 
-If multiple modules would result in the same name, [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolFallbackModuleFilenameTemplate) is used instead for these modules.
+If multiple modules would result in the same name, [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolfallbackmodulefilenametemplate) is used instead for these modules.
 
 
 ## `output.filename`
@@ -121,7 +121,7 @@ filename: "[id].bundle.js"
 
 Using the unique hash generated for every build:
 
-``` js 
+``` js
 filename: "[name].[hash].bundle.js"
 ```
 
@@ -137,7 +137,7 @@ The default value is `"[name].js"`.
 
 Note this option is called filename but you are still allowed to something like `"js/[name]/bundle.js"` to create a folder structure.
 
-Note this options does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#output-chunkFilename) option is used. It also doesn't affect files created by loaders. For these files see loader options.
+Note this options does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#output-chunkfilename) option is used. It also doesn't affect files created by loaders. For these files see loader options.
 
 
 ## `output.hotUpdateChunkFilename`
@@ -163,7 +163,7 @@ Only used when [`target`](/configuration/target) is web, which uses JSONP for lo
 
 A JSONP function used to asynchronously load hot-update chunks.
 
-For details see [`output.jsonpFunction`](#output-jsonpFunction).
+For details see [`output.jsonpFunction`](#output-jsonpfunction).
 
 
 ## `output.hotUpdateMainFilename`
@@ -206,7 +206,7 @@ Use `library`, and `libraryTarget` below, when writing a JavaScript library that
 library: "MyLibrary"
 ```
 
-The name is used depending on the value of the [`output.libraryTarget`](#output-libraryTarget) options.
+The name is used depending on the value of the [`output.libraryTarget`](#output-librarytarget) options.
 
 Note that `output.libraryTarget` defaults to `var`. This means if only `output.library` is used it is exported as variable declaration (when used as script tag it's avaiable in the global scope after execution).
 

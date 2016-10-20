@@ -39,4 +39,4 @@ import $ from 'jquery';
 $('.my-element').animate(...);
 ```
 
-?> TODO: Add more details on the various ways of doing this using an `object`, `function`, etc. Also add how this is connected to [`output.libraryTarget`](#output-librarytarget) and maybe how it's useful when building libraries if this isn't already evident.
+?> TODO: Add more details on the various ways of doing this using an `object`, `function`, etc. Also add how this is connected to [`output.libraryTarget`](/configuration/output#output-librarytarget) and maybe how it's useful when building libraries if this isn't already evident.
