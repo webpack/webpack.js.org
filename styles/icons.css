@@ -26,6 +26,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-cross:before {
+  content: "\e90b";
+}
 .icon-menu:before {
   content: "\e90a";
 }
