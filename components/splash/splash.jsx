@@ -27,7 +27,7 @@ export default props => {
         sandbox="allow-scripts allow-same-origin allow-forms" />*/}
 
       <Container className="splash__section">
-        <h1>Support the Team!</h1>
+        <h1>Support the Team</h1>
 
         <p>Through contributions, donations, and sponsorship, you allow webpack to thrive. Your donations directly support office hours, continued enhancements, and most importantly, great documentation and learning material!</p>
 
