@@ -6,13 +6,7 @@ import './navigation-style';
 
 export default class Navigation extends React.Component {
   render() {
-    let pathname = '';
-    let isIndex = false;
-
-    if (typeof window !== 'undefined') {
-      pathname = window.location.pathname;
-      isIndex = pathname === '' || pathname === '/';
-    }
+    const { pageUrl, sections } = this.props;
 
     return (
       <header className={ `navigation ${isIndex ? 'navigation--transparent' : ''}` }>
@@ -27,8 +21,8 @@ export default class Navigation extends React.Component {
 
           <nav className="navigation__links">
             {
-              this.props.sections.filter(section => section.title !== 'Other').map((link, i) => {
-                let active = pathname === `/${link.url}` || pathname.includes(`/${link.url}/`);
+              sections.filter(section => section.title !== 'Other').map((link, i) => {
+                let active = pageUrl.includes(`${link.url}/`);
                 let activeClass = active ? 'navigation__link--active' : '';
 
                 return (

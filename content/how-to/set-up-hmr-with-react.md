@@ -99,7 +99,7 @@ module.exports = env => {
       hot: true,
       //activate hot reloading
 
-      contentBase: '/dist',
+      contentBase: resolve(__dirname, 'dist'),
       //match the output path
 
       publicPath: '/'

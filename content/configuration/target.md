@@ -7,7 +7,7 @@ contributors:
 
 ?> Compare with [the concept page](/concepts/targets) and determine what goes where.
 
-### `target`
+## `target`
 
 `string`
 

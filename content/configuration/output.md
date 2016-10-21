@@ -8,7 +8,7 @@ contributors:
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
 
 
-### `output.chunkFilename`
+## `output.chunkFilename`
 
 `string`
 
@@ -19,13 +19,13 @@ Note that these filenames need to be generated at runtime to send the requests f
 By default `[id].js` is used or a value inferred from [`output.filename`](#output-filename) (`[name]` is replaced with `[id]` or `[id].` is prepended).
 
 
-### `output.crossOriginLoading`
+## `output.crossOriginLoading`
 
 `boolean` `string`
 
 Only used when [`target`](/configuration/target) is web, which uses JSONP for loading on-demand chunks, by adding script tags.
 
-Enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) loading of [chunks](). The following values are accepted...
+Enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) loading of chunks. The following values are accepted...
 
 `crossOriginLoading: false` - Disables cross-origin loading (default)
 
@@ -34,22 +34,22 @@ Enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/scr
 `crossOriginLoading: "use-credentials"` - Enable cross-origin loading **with credentials**
 
 
-### `output.devtoolFallbackModuleFilenameTemplate`
+## `output.devtoolFallbackModuleFilenameTemplate`
 
 `string | function(info)`
 
 A fallback used when the template string or function above yields duplicates.
 
-See [`output.devtoolModuleFilenameTemplate`](#output-devtoolModuleFilenameTemplate).
+See [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametemplate).
 
 
-### `output.devtoolLineToLine`
+## `output.devtoolLineToLine`
 
 `boolean | object`
 
 (Deprecated: Not really used, not really useable, write an issue if you have a other opinion)
 
-Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines. 
+Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines.
 
 Pass a boolean to enable or disable this feature for all modules (defaults to `false`). An object with `test`, `include`, `exclude` is also allowed. For example, to enable this feature for all javascript files within a certain directory:
 
@@ -58,7 +58,7 @@ devtoolLineToLine: { test: /\.js$/, include: 'src/utilities' }
 ```
 
 
-### `output.devtoolModuleFilenameTemplate`
+## `output.devtoolModuleFilenameTemplate`
 
 `string | function(info)`
 
@@ -90,10 +90,10 @@ devtoolModuleFilenameTemplate: info => {
 }
 ```
 
-If multiple modules would result in the same name, [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolFallbackModuleFilenameTemplate) is used instead for these modules.
+If multiple modules would result in the same name, [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolfallbackmodulefilenametemplate) is used instead for these modules.
 
 
-### `output.filename`
+## `output.filename`
 
 `string`
 
@@ -105,7 +105,7 @@ For a single [`entry`](/configuration/entry-context#entry) point, this can be a 
 filename: "bundle.js"
 ```
 
-However, when creating multiple bundles via more than one entry point, [code splitting](), or various [plugins](), you should use one of the following substitutions to give each bundle a unique name...
+However, when creating multiple bundles via more than one entry point, code splitting, or various plugins, you should use one of the following substitutions to give each bundle a unique name...
 
 Using entry name:
 
@@ -121,7 +121,7 @@ filename: "[id].bundle.js"
 
 Using the unique hash generated for every build:
 
-``` js 
+``` js
 filename: "[name].[hash].bundle.js"
 ```
 
@@ -137,10 +137,10 @@ The default value is `"[name].js"`.
 
 Note this option is called filename but you are still allowed to something like `"js/[name]/bundle.js"` to create a folder structure.
 
-Note this options does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#output-chunkFilename) option is used. It also doesn't affect files created by loaders. For these files see loader options.
+Note this options does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#output-chunkfilename) option is used. It also doesn't affect files created by loaders. For these files see loader options.
 
 
-### `output.hotUpdateChunkFilename`
+## `output.hotUpdateChunkFilename`
 
 `string`
 
@@ -155,7 +155,7 @@ hotUpdateChunkFilename: "[id].[hash].hot-update.js"
 Here is no need to change it.
 
 
-### `output.hotUpdateFunction`
+## `output.hotUpdateFunction`
 
 `function`
 
@@ -163,10 +163,10 @@ Only used when [`target`](/configuration/target) is web, which uses JSONP for lo
 
 A JSONP function used to asynchronously load hot-update chunks.
 
-For details see [`output.jsonpFunction`](#output-jsonpFunction).
+For details see [`output.jsonpFunction`](#output-jsonpfunction).
 
 
-### `output.hotUpdateMainFilename`
+## `output.hotUpdateMainFilename`
 
 `string`
 
@@ -181,7 +181,7 @@ hotUpdateMainFilename: "[hash].hot-update.json"
 Here is no need to change it.
 
 
-### `output.jsonpFunction`
+## `output.jsonpFunction`
 
 `function`
 
@@ -194,7 +194,7 @@ It's required to change it if multiple webpack runtimes (from different compilat
 If using the [`output.library`](#output-library) option, the library name is automatically appended.
 
 
-### `output.library`
+## `output.library`
 
 `string`
 
@@ -206,12 +206,12 @@ Use `library`, and `libraryTarget` below, when writing a JavaScript library that
 library: "MyLibrary"
 ```
 
-The name is used depending on the value of the [`output.libraryTarget`](#output-libraryTarget) options.
+The name is used depending on the value of the [`output.libraryTarget`](#output-librarytarget) options.
 
 Note that `output.libraryTarget` defaults to `var`. This means if only `output.library` is used it is exported as variable declaration (when used as script tag it's avaiable in the global scope after execution).
 
 
-### `output.libraryTarget`
+## `output.libraryTarget`
 
 `string`
 
@@ -233,7 +233,7 @@ Configure how the library will be exposed. Any one of the following options can 
 
 `libraryTarget: "var"` - Expose it as a variable (i.e. `var MyLibrary = ...`)
 
-### `output.path`
+## `output.path`
 
 `string`
 
@@ -246,7 +246,7 @@ path: path.resolve(__dirname, 'dist/assets')
 Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/how-to/cache) for details.
 
 
-### `output.pathinfo`
+## `output.pathinfo`
 
 `boolean`
 
@@ -259,7 +259,7 @@ pathinfo: true
 Note it also adds some info about tree shaking to the generate bundle.
 
 
-### `output.publicPath`
+## `output.publicPath`
 
 `string`
 
@@ -299,7 +299,7 @@ or when loading an image in CSS:
 background-image: url(/assets/spinner.gif);
 ```
 
-The [webpack-dev-server]() also takes a hint from `publicPath`, using it to determine where to serve the output files from.
+The webpack-dev-server also takes a hint from `publicPath`, using it to determine where to serve the output files from.
 
 Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/how-to/cache) for details.
 
@@ -315,7 +315,7 @@ publicPath: "", // relative to HTML page (same directory)
 ```
 
 
-### `output.sourceMapFilename`
+## `output.sourceMapFilename`
 
 `string`
 
@@ -326,7 +326,7 @@ Configure how source maps are named. By default `"[file].map"` is used.
 Technically the `[name]`, `[id]`, `[hash]` and `[chunkhash]` [placeholders](#output-filename) can be used, if generating a SourceMap for chunks. In addition to that the `[file]` placeholder is replaced with the filename of the original file. It's recommended to only use the `[file]` placeholder, as the other placeholders won't work when generating SourceMaps for non-chunk files. Best leave the default.
 
 
-### `output.sourcePrefix`
+## `output.sourcePrefix`
 
 `string`
 
@@ -341,7 +341,7 @@ Note by default an empty string is used. Using some kind of indention makes bund
 There is no need to change it.
 
 
-### `output.umdNamedDefine`
+## `output.umdNamedDefine`
 
 `boolean`
 
