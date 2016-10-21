@@ -2,11 +2,11 @@
 title: 配置
 ---
 
-You may have noticed that few webpack configurations look exactly alike. This is because **webpack's configuration file is a JavaScript file that exports an object.** This object, is then parsed by webpack based upon its defined properties.
+你可能已经注意到，很少有 webpack 配置看起来很完全相同。这是因为 **webpack 的配置文件是 JavaScript 文件导出的一个对象。**此对象，由 webpack 根据对象定义的属性进行解析。
 
-The following examples below describe how webpack's configuration object can be both expressive and configurable because _it is code_:
+接下来的例子展示了 webpack 配置对象如何表达和配置，因为_配置对象是代码_：
 
-## The Simplest Configuration
+## 最简单的配置
 
 **webpack.config.js**
 
@@ -20,7 +20,7 @@ module.exports = {
 };
 ```
 
-## Multiple Targets
+## 多个目标
 
 **webpack.config.js**
 
@@ -65,11 +65,11 @@ let targets = ['web', 'webworker', 'node', 'async-node', 'node-webkit', 'electro
 module.exports = targets;
 ```
 
-T> The most important part to take away from this document is that there are many different ways to format and style your webpack configuation. The key is to stick with something consistent that you and your team can understand and maintain.
+T> 作为这篇文档最重要的部分是，会有许多不同格式和风格的 webpack 配置。你和你的团队在理解和维护上能够保持一致才是关键。
 
-## Using TypeScript
+## 使用 TypeScript
 
-In the example below we use TypeScript to create a class which the angular-cli uses to [generate configs](https://github.com/angular/angular-cli/).
+在下面的例子我们使用 TypeScript 创建一个类(class)，这个类使用了 angular-cli 的[生成配置](https://github.com/angular/angular-cli/)。
 
 **webpack.config.ts**
 
@@ -130,14 +130,14 @@ export class NgCliWebpackConfig {
 }
 ```
 
-## Using JSX
+## 使用 JSX
 
-In the example below JSX (React JS Markup) and Babel to create a JSON Configuration that webpack can understand. (Courtesy of [Jason Miller](https://twitter.com/_developit))
+在下面例子中，JSX（React JS 标记）和 Babel 创建了一个 webpack 可以识别的 JSON 配置。（由[Jason Miller](https://twitter.com/_developit)提供）
 
 ```javascript
 import h from 'jsxobj';
 
-// example of an import'd plugin
+// 导入插件的例子
 const CustomPlugin = config => ({
   ...config,
   name: 'custom-plugin'
