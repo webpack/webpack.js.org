@@ -18,7 +18,7 @@ module.exports = {
 }
 ```
 
-## Bundle your [modules](/concepts/modules) with webpack.
+## Bundle with webpack.
 
 **webpack.config.js**
 
@@ -45,4 +45,5 @@ module.exports = {
 </html>
 ```
 
-## It's that simple. [Get started](/get-started) now!
+## It's that simple. 
+## [Get Started](/get-started)
