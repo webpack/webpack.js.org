@@ -21,6 +21,10 @@
       text-align:left; 
     }
 
+    .icon-link {
+      display:none;
+    }
+
     &:after {
       content:'\e902';
       position:absolute;
@@ -31,7 +35,7 @@
       font-size: 3em;
       text-align:center;
       color:map-get($colors, alto);
-      animation:500ms ease-in infinite alternate bounce;
+      animation:500ms ease-in infinite alternate bounce-top;
 
       /// XXX: Hacky, should be cleaned up
       font-family: 'icons' !important;
@@ -44,10 +48,20 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
+
+    &:not(:nth-child(2)):after {
+      top:-0.5em;
+      animation:500ms ease-in infinite alternate bounce;
+    }
   }
 }
 
-@keyframes bounce {
+@keyframes bounce-top {
   from { top: 0; }
   to { top: 0.1em; }
+}
+
+@keyframes bounce {
+  from { top: -0.5em; }
+  to { top: -0.4em; }
 }
