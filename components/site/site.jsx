@@ -30,7 +30,8 @@ export default props => {
       <Interactive
         id="components/navigation/navigation.jsx"
         component={ Navigation }
-        sections={ sections } />
+        sections={ sections }
+        pageUrl={ props.children.props.page.url } />
 
       <Interactive
         id="components/sidebar-mobile/sidebar-mobile.jsx"
