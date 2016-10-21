@@ -3,15 +3,16 @@ title: 插件
 sort: 3
 contributors:
   - TheLarkInn
+  - dear-lizhihua
 ---
 
-**Plugins** are the [backbone](https://github.com/webpack/tapable) of webpack. webpack itself is built on the **same plugin system** that you use in your webpack configuration!!
+插件是 wepback 的[支柱](https://github.com/webpack/tapable)功能。在你使用 webpack 配置时，webpack 自身也构建于**同样的插件系统**上！
 
-They also serve the purpose of doing **anything else** that a [loader](/concepts/loaders) cannot do.
+插件目的在于解决 [loader](/concepts/loaders) 无法实现的其他事。
 
-## Anatomy
+## 剖析
 
-A webpack **plugin** is a JavaScript object that has an `apply` property. This `apply` property is called by the webpack compiler, giving access to the **entire** compilation lifecycle.
+webpack **插件**是一个具有 `apply` 属性的 JavaScript 对象。 `apply` 属性会被 webpack 解析器(compiler)调用，并且可在整个编译生命周期(compilation lifecycle)访问。
 
 
 **ConsoleLogOnBuildWebpackPlugin.js**
@@ -30,19 +31,19 @@ ConsoleLogOnBuildWebpackPlugin.prototype.apply = function(compiler) {
 };
 ```
 
-## Usage
+## 用法
 
-Since **plugins** can take arguments/options, you must pass a `new` instance to the `plugins` property in your webpack configuration.
+由于**插件**可以接收参数/选项，你必须在wepback配置中，向 `plugins` 属性传入 `new` 实例。
 
-Depending on how you are using webpack, there are multiple ways to use plugins.
+基于您如何使用 webpack，有多种使用插件的方式。
 
-### Configuration
+### 配置
 
 **webpack.config.js**
 
 ```javascript
-const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
-const webpack = require('webpack'); //to access built-in plugins
+const HtmlWebpackPlugin = require('html-webpack-plugin'); //通过 npm 安装
+const webpack = require('webpack'); //访问内置的插件
 
 const config = {
   entry: './path/to/my/entry/file.js',
@@ -72,7 +73,7 @@ module.exports = config;
 **some-node-script.js**
 
 ```javascript
-  const webpack = require('webpack'); //to access webpack runtime
+  const webpack = require('webpack'); //运行时(runtime)访问 webpack
   const configuration = require('./webpack.config.js');
 
   let compiler = webpack(configuration);
@@ -83,4 +84,4 @@ module.exports = config;
   });
 ```
 
-T> Did you know: The example seen above is extremely similar to the [webpack runtime itself!](https://github.com/webpack/webpack/blob/master/bin/webpack.js#L290-L292) There are lots of great usage examples hiding in the [webpack source code](https://github.com/webpack/webpack) that you can apply to your own configurations and scripts!
+T> 你知道吗：以上看到的例子和[webpack 本身运行时](https://github.com/webpack/webpack/blob/master/bin/webpack.js#L290-L292)极其类似。[wepback 源码](https://github.com/webpack/webpack)中隐藏有大量使用示例，你可以应用到自己的配置和脚本中。
