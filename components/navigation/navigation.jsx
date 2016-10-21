@@ -6,7 +6,13 @@ import './navigation-style';
 
 export default class Navigation extends React.Component {
   render() {
-    const { pageUrl, sections } = this.props;
+    let { pageUrl, sections } = this.props;
+    let pathname, isIndex;
+
+    if (typeof window !== undefined) {
+      pathname = window.location.pathname;
+      isIndex = pathname = '/';
+    }
 
     return (
       <header className={ `navigation ${isIndex ? 'navigation--transparent' : ''}` }>
