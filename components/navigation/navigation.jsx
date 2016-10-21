@@ -9,9 +9,9 @@ export default class Navigation extends React.Component {
     let { pageUrl, sections } = this.props;
     let pathname, isIndex;
 
-    if (typeof window !== undefined) {
+    if (typeof window !== 'undefined') {
       pathname = window.location.pathname;
-      isIndex = pathname = '/';
+      isIndex = pathname === '/';
     }
 
     return (
