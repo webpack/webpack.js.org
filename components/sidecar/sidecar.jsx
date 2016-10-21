@@ -9,7 +9,7 @@ export default props => {
         <span className="sidecar__label">Fork the Repo</span>
         <i className="sidecar__icon icon-github" />
       </Link>
-      <Link className="sidecar__link sidecar__link--gitter" to="#">
+      <Link className="sidecar__link sidecar__link--gitter js-gitter-toggle-chat-button" to="#">
         <span className="sidecar__label">Find Help</span>
         <i className="sidecar__icon icon-gitter" />
       </Link>

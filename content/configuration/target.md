@@ -7,19 +7,20 @@ contributors:
 
 ?> Compare with [the concept page](/concepts/targets) and determine what goes where.
 
-### `target`
+## `target`
 
 `string`
 
 Tell webpack what environment the application is targeting. The following options are supported:
 
+`target: "node"` - Compile for [NodeJS](https://nodejs.org/en/), using `require` to load chunks
+
+`target: "node-webkit"` - Compile for [Webkit](https://webkit.org/), using [JSONP](https://sacha.me/articles/jsonp-demystified/) to load chunks
+
 `target: "web"` - Compile for usage in a browser
 
 `target: "webworker"` - Compile as a [WebWorker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API)
 
-`target: "node"` - Compile for [NodeJS](https://nodejs.org/en/), using `require` to load chunks
-
-`target: "node-webkit"` - Compile for [Webkit](https://webkit.org/), using [JSONP](https://sacha.me/articles/jsonp-demystified/) to load chunks
 
 T> Allows importing of built-in node modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental).
 

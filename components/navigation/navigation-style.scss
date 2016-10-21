@@ -6,12 +6,31 @@
   flex: 0 0 auto;
   transition: background 250ms;
   background: map-get($colors, mine-shaft);
+
+  &--transparent {
+    position:relative;
+    display:flex;
+    justify-content: center;
+    background: transparent;
+
+    .navigation__inner {
+      position:absolute;
+    }
+
+    .navigation__link:hover {
+      color: map-get($colors, emperor);
+    }
+
+    .navigation__mobile {
+      color:map-get($colors, emperor);
+    }
+  }
 }
 
 .navigation__inner {
   display: flex;
   align-items: center;
-  padding: 0.5em 1em;
+  padding: 0.6em 1em;
 
   @include break {
     padding:0 0 0 1.5em;
@@ -19,11 +38,12 @@
 }
 
 .navigation__mobile {
-  position: absolute;
-  font-size: getFontSize(2);
   display: flex;
-  left: -0.5em;
+  font-size: 1.75em;
+  margin-left: -1em;
+  align-items: center;
   color: map-get($colors, white);
+  cursor: pointer;
   transition: color 250ms;
 
   &:active {
@@ -33,6 +53,10 @@
   @include break {
     display: none;
   }
+}
+
+.navigation__logo {
+  margin:auto;
 }
 
 .navigation__links {

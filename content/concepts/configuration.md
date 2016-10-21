@@ -69,7 +69,7 @@ T> The most important part to take away from this document is that there are man
 
 ## Using TypeScript
 
-In the example below we use TypeScript to create a class which the angular-cli uses to [generate configs](https://github.com/angular/angular-cli/blob/master/addon/ng2/models/webpack-config.ts).
+In the example below we use TypeScript to create a class which the angular-cli uses to [generate configs](https://github.com/angular/angular-cli/).
 
 **webpack.config.ts**
 

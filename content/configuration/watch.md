@@ -8,7 +8,7 @@ contributors:
 
 Webpack can watch files and recompile whenever they change. This page explains how to enable this and a couple of tweaks you can make if watching does not properly for you.
 
-### `watch`
+## `watch`
 
 `boolean`
 
@@ -20,7 +20,7 @@ watch: false
 
 T> In webpack-dev-server and webpack-dev-middleware watch mode is enabled by default.
 
-### `watchOptions`
+## `watchOptions`
 
 `object`
 
@@ -33,8 +33,7 @@ watchOptions: {
 }
 ```
 
-
-### `watchOptions.aggregateTimeout`
+## `watchOptions.aggregateTimeout`
 
 `number`
 
@@ -44,21 +43,7 @@ Add a delay before rebuilding once the first file changed. This allows webpack t
 aggregateTimeout: 300 // The default
 ```
 
-
-### `watchOptions.poll`
-
-`boolean` `number`
-
-Turn on [polling](http://whatis.techtarget.com/definition/polling) by passing `true`, or specifying a poll interval in milliseconds:
-
-```js
-poll: 1000 // Check for changes every second
-```
-
-T> If watching does not work for you, try out this option. Watching does not work with NFS and machines in VirtualBox.
-
-
-### `watchOptions.ignored`
+## `watchOptions.ignored`
 
 For some systems, watching many file systems can result in a lot of CPU or memory usage. It is possible to exclude a huge folder like `node_modules`:
 
@@ -71,3 +56,16 @@ It is also possible to use [anymatch](https://github.com/es128/anymatch) pattern
 ```js
 ignored: "files/**/*.js"
 ```
+
+## `watchOptions.poll`
+
+`boolean` `number`
+
+Turn on [polling](http://whatis.techtarget.com/definition/polling) by passing `true`, or specifying a poll interval in milliseconds:
+
+```js
+poll: 1000 // Check for changes every second
+```
+
+T> If watching does not work for you, try out this option. Watching does not work with NFS and machines in VirtualBox.
+

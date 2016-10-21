@@ -5,20 +5,30 @@ contributors:
   - skipjack
 ---
 
-These options determine how the [different types of modules](/concepts/everything-is-a-module) within a project will be treated.
+These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
 
-### `module.rules`
+## `module.noParse`
+
+`RegExp | [RegExp]`
+
+Prevent webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries...
+
+```js
+noParse: /jquery|backbone/
+```
+
+## `module.rules`
 
 `array`
 
 An array of [Rules](#rule) which are matched to requests when modules are created. These rules can modify how the module is created. They can apply loaders to the module, or modify the parser.
 
 
-### `Rule`
+## `Rule`
 
 A Rule can be separated into three parts: Conditions, Results and nested Rules.
 
-#### `Rule` conditions
+### `Rule` conditions
 
 There are two input values for the conditions:
 
@@ -26,7 +36,7 @@ The resource: An absolute path to the file requested. It's already resolved acco
 
 The issuer: An absolute path to the file of the module which requested the resource. It's the location of the import.
 
-Example: The `import "./style.css"` from `app.js`:
+**Example:** The `import "./style.css"` from `app.js`:
 
 Resource is `/path/to/style.css`. Issuer is `/path/to/app.js`.
 
@@ -34,7 +44,7 @@ In a Rule the properties [`test`](#rule-test), [`include`](#rule-include), [`exc
 
 When using multiple conditions, all conditions must match.
 
-#### `Rule` results
+### `Rule` results
 
 Rule results are only used when the Rule condition matches.
 
@@ -44,79 +54,25 @@ The applied loaders: An array of loaders applied to the resource. Separated in p
 
 The parser options: An object with options which should be used to create the parser for this module.
 
-These properties affect the loaders: [`loader`](#rule-loader), [`options`](#rule-options), [`use`](#rule-use).
+These properties affect the loaders: [`loader`](#rule-loader), [`options`](#rule-options-rule-query), [`use`](#rule-use).
 
-For compatibility also these properties: [`query`](#rule-query), [`loaders`](#rule-loaders).
+For compatibility also these properties: [`query`](#rule-options-rule-query), [`loaders`](#rule-loaders).
 
 The [`enforce`](#rule-enforce) property affect the loader category. Whether it's an normal, pre- or post- loader.
 
 The [`parser`](#rule-parser) property affect the parser options.
 
 
-### `Rule` nested rules
+## `Rule` nested rules
 
 With the properties [`rules`](#rule-rules) and [`oneOf`](#rule-oneof) nested rules can be specified.
 
 Nested rules are used when the Rule condition matches.
 
 
-### `Rule.test`
+## `Rule.enforce`
 
-`Rule.test` is a shortcut to `Rule.resource.test`. See [`Rule.resource`](#rule-resource) and [`Condition.test`](#condition) for details.
-
-
-### `Rule.include`
-
-`Rule.include` is a shortcut to `Rule.resource.include`. See [`Rule.resource`](#rule-resource) and [`Condition.include`](#condition) for details.
-
-
-### `Rule.exclude`
-
-`Rule.exclude` is a shortcut to `Rule.resource.exclude`. See [`Rule.resource`](#rule-resource) and [`Condition.exclude`](#condition) for details.
-
-
-### `Rule.resource`
-
-A [`Condtion`](#condition) matched with the resource. See details in [`Rule` conditions](#rule-conditions).
-
-
-### `Rule.issuer`
-
-A [`Condtion`](#condition) matched with the issuer. See details in [`Rule` conditions](#rule-conditions).
-
-
-### `Rule.loader`
-
-`Rule.loader` is a shortcut to `Rule.use: [ { loader } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.loader`](#useentry-loader) for details.
-
-
-### `Rule.options`
-### `Rule.query`
-
-`Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.options`](#useentry-options) for details.
-
-`Rule.query` only exists for compatibility reasons. Use `Rule.options` instead.
-
-
-### `Rule.loaders`
-
-`Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#rule-use) for details.
-
-It exists for compatibility reasons. Use `Rule.use` instead.
-
-
-### `Rule.use`
-
-A list of [UseEntries](#useentry) which are applied to the module. Each entry specified a loader which should be used.
-
-Passing a string (i. e. `use: [ "style-loader" ]`) is a shortcut to the loader property (i. e. `use: [ { loader: "style-loader "} ]`).
-
-See [UseEntry](#useentry) for details.
-
-
-### `Rule.enforce`
-
-Either `"pre"`, `"post" or no value.
+Either `"pre"`, `"post"` or no value.
 
 Specifies the category of the loader. No value means normal loader.
 
@@ -133,23 +89,52 @@ All normal, post and pre loaders can be omitted (overridden) by prefixing `!!` i
 Inline loaders and `!` prefixes should not be used as they are non-standard. They may be use by loader generated code.
 
 
-### `Rule.rules`
+## `Rule.exclude`
 
-An array of [`Rules`](#rule) that is also used when the Rule matches.
+`Rule.exclude` is a shortcut to `Rule.resource.exclude`. See [`Rule.resource`](#rule-resource) and [`Condition.exclude`](#condition) for details.
 
 
-### `Rule.oneOf`
+## `Rule.include`
+
+`Rule.include` is a shortcut to `Rule.resource.include`. See [`Rule.resource`](#rule-resource) and [`Condition.include`](#condition) for details.
+
+
+## `Rule.issuer`
+
+A [`Condition`](#condition) matched with the issuer. See details in [`Rule` conditions](#rule-conditions).
+
+
+## `Rule.loader`
+
+`Rule.loader` is a shortcut to `Rule.use: [ { loader } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.loader`](#useentry) for details.
+
+
+## `Rule.loaders`
+
+`Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#rule-use) for details.
+
+It exists for compatibility reasons. Use `Rule.use` instead.
+
+
+## `Rule.oneOf`
 
 An array of [`Rules`](#rule) from which only the first matching Rule is used when the Rule matches.
 
 
-### `Rule.parser`
+## `Rule.options / Rule.query`
+
+`Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.options`](#useentry) for details.
+
+`Rule.query` only exists for compatibility reasons. Use `Rule.options` instead.
+
+
+## `Rule.parser`
 
 An object with parser options. All applied parser options are merged.
 
 For each different parser options object a new parser is created and plugins can apply plugins depending on the parser options. Many of the default plugins apply their parser plugins only if a property in the parser options is not set or true.
 
-Examples (parser options by the default plugins):
+**Examples** (parser options by the default plugins):
 
 ``` js-with-links
 parser: {
@@ -168,7 +153,31 @@ parser: {
 ```
 
 
-### `Condition`
+## `Rule.resource`
+
+A [`Condition`](#condition) matched with the resource. See details in [`Rule` conditions](#rule-conditions).
+
+
+## `Rule.rules`
+
+An array of [`Rules`](#rule) that is also used when the Rule matches.
+
+
+## `Rule.test`
+
+`Rule.test` is a shortcut to `Rule.resource.test`. See [`Rule.resource`](#rule-resource) and [`Condition.test`](#condition) for details.
+
+
+## `Rule.use`
+
+A list of [UseEntries](#useentry) which are applied to the module. Each entry specified a loader which should be used.
+
+Passing a string (i. e. `use: [ "style-loader" ]`) is a shortcut to the loader property (i. e. `use: [ { loader: "style-loader "} ]`).
+
+See [UseEntry](#useentry) for details.
+
+
+## `Condition`
 
 Conditions can be one of these:
 
@@ -190,7 +199,7 @@ Conditions can be one of these:
 
 `{ not: Condition }`: The Condition must NOT match.
 
-Example:
+**Example:**
 
 ``` js
 {
@@ -203,7 +212,7 @@ Example:
 ```
 
 
-### `UseEntry`
+## `UseEntry`
 
 `object`
 
@@ -213,7 +222,7 @@ It can have a `options` property being a string or object. This value is passed 
 
 For compatibility a `query` property is also possible, which is an alias for the `options` property. Use the `options` property instead.
 
-Example:
+**Example:**
 
 ``` js
 {
@@ -227,18 +236,7 @@ Example:
 Note that webpack need to generate an unique module identifier from resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9%, but may be not unique if you apply the same loaders with different options to the same resource and the options have some stringified values. It also breaks if the options object cannot be stringified (i. e. circular JSON). Because of this you can have a `ident` property in the options object which is used as unique identifier.
 
 
-### `module.noParse`
-
-`RegExp | [RegExp]`
-
-Prevent webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries...
-
-```js
-noParse: /jquery|backbone/
-```
-
-
-### Module Contexts
+## Module Contexts
 
 (Deprecated)
 
@@ -254,23 +252,23 @@ Here are the available options with their defaults:
 
 ```js
 module: {
-  unknownContextRequest: ".",
-  unknownContextRegExp: false,
-  unknownContextRecursive: true,
-  unknownContextCritical: true,
-  exprContextRequest: ".",
-  exprContextRegExp: false,
-  exprContextRecursive: true,
   exprContextCritical: true,
-  wrappedContextRegExp: /.*/,
-  wrappedContextRecursive: true,
+  exprContextRecursive: true,
+  exprContextRegExp: false,
+  exprContextRequest: ".",
+  unknownContextCritical: true,
+  unknownContextRecursive: true,
+  unknownContextRegExp: false,
+  unknownContextRequest: ".",
   wrappedContextCritical: false
+  wrappedContextRecursive: true,
+  wrappedContextRegExp: /.*/,
 }
 ```
 
-Note: You can use the [`ContextReplacementPlugin`]() to modify these values for individual dependencies. This also removes the warning.
+Note: You can use the `ContextReplacementPlugin` to modify these values for individual dependencies. This also removes the warning.
 
-A few usecases:
+A few use cases:
 
 * Warn for dynamic dependencies: `wrappedContextCritical: true`.
 * `require(expr)` should include the whole directory: `exprContextRegExp: /^\.\//`

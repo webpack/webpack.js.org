@@ -6,7 +6,7 @@ contributors:
 
 ### `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
 
-These options were replaced by a single option `resolve.modules`. See [resolving](../configuration/resolve) for more usage.
+These options were replaced by a single option `resolve.modules`. See [resolving](/configuration/resolve) for more usage.
 
 ``` diff
   resolve: {
@@ -20,11 +20,11 @@ These options were replaced by a single option `resolve.modules`. See [resolving
 
 ### `resolve.extensions`
 
-This option no longer requires passing an empty string. This behavior was moved to `resolve.enforceExtension`. See [resolving](../configuration/resolve) for more usage.
+This option no longer requires passing an empty string. This behavior was moved to `resolve.enforceExtension`. See [resolving](/configuration/resolve) for more usage.
 
 ### `resolve.*`
 
-More stuff was changed here. Not listed in detail as it's not commonly used. See [resolving](../configuration/resolve) for details.
+More stuff was changed here. Not listed in detail as it's not commonly used. See [resolving](/configuration/resolve) for details.
 
 ### `debug`
 
@@ -195,7 +195,7 @@ require.ensure([], function(require) {
 
 The ES6 Loader spec defines `System.import` as method to load ES6 Modules dynamically on runtime.
 
-webpack threads `System.import` as a split-point and puts the requested module in a separate chunk.
+webpack treats `System.import` as a split-point and puts the requested module in a separate chunk.
 
 `System.import` takes the module name as argument and returns a Promise.
 

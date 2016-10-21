@@ -3,45 +3,17 @@
 
 .sidebar {
   position: relative;
+  display: none;
   flex: 1;
   min-height: 100%;
 
-  &--visible {
-    @media (max-width: map-get($screens, medium)) {
-      .sidebar__inner { 
-        transform: translateX(0) !important;
-        width:100% !important;
-      }
-
-      .sidebar-item__title,
-      .sidebar-item__toggle { color: map-get($colors, white) !important; }
-      .sidebar-item__anchor a { color: map-get($colors, alto) !important; }
-    }
+  @include break {
+    display:block;
   }
 }
 
 .sidebar__inner {
-  position: fixed;
-  width: 100%;
-  height: calc(100vh - 50px); // XXX: Hacky, this should be removed with a better solution
-  padding: 1.5em 1em;
+  padding: 1.5em;
   overflow-y: auto;
   overflow-x: hidden;
-  z-index: 1;
-  background: map-get($colors, emperor);
-  transition: transform 0.5s;
-
-  @media (max-width: map-get($screens, medium)) {
-    will-change: transform;
-    transform: translate3D(-100%, 0, 0) !important;
-  }
-
-  @include break {
-    position: static;
-    transform: none;
-    height:auto;
-    padding:1.5em;
-    background: transparent;
-    color: map-get($colors, emperor);
-  }
 }

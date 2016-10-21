@@ -7,7 +7,7 @@ contributors:
 
 ?> TODO: Short description
 
-### `context`
+## `context`
 
 `string`
 
@@ -21,7 +21,7 @@ By default the current directory is used, but it's recommended to pass a value i
 
 ---
 
-### `entry`
+## `entry`
 
 `string | [string] | object { <key>: string | [string] }`
 

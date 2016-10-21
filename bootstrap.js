@@ -1,14 +1,14 @@
 const antwar = require('antwar');
-const webpack = require('./webpack.config');
-const configuration = require('./antwar.config');
+
+const environment = process.env.npm_lifecycle_event;
 
 // Patch Babel env to make HMR switch work
-process.env.BABEL_ENV = process.env.npm_lifecycle_event;
+process.env.BABEL_ENV = environment;
 
-antwar({
-  configuration,
-  environment: process.env.npm_lifecycle_event,
-  webpack
+antwar[environment]({
+  environment,
+  antwar: require('./antwar.config'),
+  webpack: require('./webpack.config')
 }).catch(function (err) {
   console.error(err);
 });
