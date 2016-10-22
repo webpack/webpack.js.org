@@ -7,13 +7,8 @@ import './navigation-style';
 export default class Navigation extends React.Component {
   render() {
     let { pageUrl, sections } = this.props;
-    let pathname, isIndex;
-
-    if (typeof window !== 'undefined') {
-      pathname = window.location.pathname;
-      isIndex = pathname === '/';
-    }
-
+    let isIndex = pageUrl === '/index';
+    
     return (
       <header className={ `navigation ${isIndex ? 'navigation--transparent' : ''}` }>
         <Container className="navigation__inner">
