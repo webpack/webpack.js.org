@@ -1,5 +1,7 @@
 ---
 title: 配置
+contributors:
+  - dear-lizhihua
 ---
 
 你可能已经注意到，很少有 webpack 配置看起来很完全相同。这是因为 **webpack 的配置文件是 JavaScript 文件导出的一个对象。**此对象，由 webpack 根据对象定义的属性进行解析。
