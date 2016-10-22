@@ -74,7 +74,7 @@ export default class Cube extends React.Component {
 
         obj[axis] = degrees += 90;
 
-        //axis = axis === 'x' ? 'y' : axis === 'y' ? 'z' : 'x'; 
+        // axis = axis === 'x' ? 'y' : axis === 'y' ? 'z' : 'x'; 
 
         this.setState(obj);
       }, 1000);
