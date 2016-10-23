@@ -95,7 +95,7 @@ const buildConfig = {
     publicPath: '/'
   },
   plugins: [
-    new ExtractTextPlugin('[name].css', {
+    new ExtractTextPlugin('[chunkhash].css', {
       allChunks: true
     })
   ],
