@@ -6,7 +6,7 @@ contributors:
 
 In webpack, when you use the css-loader and import CSS into your Javascript files, the CSS is bundled along with your Javascript.
 This has the disadvantage that, you will not be able to utilize the browser's ability to load CSS asynchronously and parallely. Instead, your page will have to wait until your whole Javascript bundle is loaded, to style itself.
-webpack can help with this problem by bundling the CSS separately using [Extract-Text-Webpack-Plugin](https://github.com/webpack/extract-text-webpack-plugin) and the [css-loader](https://github.com/webpack/css-loader)
+webpack can help with this problem by bundling the CSS separately using [Extract-Text-Webpack-Plugin](https://github.com/webpack/extract-text-webpack-plugin) and the [css-loader](https://github.com/webpack/css-loader).
 
 ## Using `css-loader`
 

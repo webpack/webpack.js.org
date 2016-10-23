@@ -4,7 +4,7 @@ contributors:
   - pksjce
 ---
 
-Code splitting is the most compelling feature for  `webpack` usage. `webpack`, with some configuration, can tweak your app such that, you can split your code into various bundles and load them on demand.
+Code splitting is the most compelling feature for  `webpack` usage. You can split your code into various bundles and load them on demand with`webpack`. It allows to tweak an application for these optimisations using the configuration.
 You can load them at a later time in your code or in a specific route only or on an event from the user even.
 
 There are mainly two kind of code-splits that need to be accomplished with `webpack`
@@ -22,7 +22,7 @@ There are mainly two kind of code-splits that need to be accomplished with `webp
 
 #### CSS splitting
 
-An application owner would want to split all the css into a separate bundle. This enhances caheability of the resource bundle and also allows the browser to parallely load the bundle which makes for a solid performance improvement.
+An application owner would want to split all the css into a separate bundle. This enhances cacheability of the resource bundle and also allows the browser to parallely load the bundle which makes for a solid performance improvement.
 Learn [how to split your css using Extract-Text-Webpack-Plugin](/how-to/code-splitting/splitting-css)
 
 
