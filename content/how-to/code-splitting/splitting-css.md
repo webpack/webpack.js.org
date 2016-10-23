@@ -72,7 +72,9 @@ module.exports = function () {
             loaders: [{
                 test: /\.css$/,
                 exclude: /node_modules/,
-                loader: Extract.extract('css-loader?sourceMap')
+                loader: Extract.extract({
+                    loader: 'css-loader?sourceMap'
+                })
             }]
         },
         devtool: 'source-map',
