@@ -8,8 +8,7 @@ On this page we'll explain how to get started with developing and how to choose 
 
 W> Never use any of these tools in production. Ever.
 
-
-## 1. Adjusting Your Text Editor
+## Adjusting Your Text Editor
 
 Some text editors have a "safe write" feature and enable this by default. As a result, saving a file will not always result in a recompile.
 
@@ -19,8 +18,7 @@ Each editor has a different way of disabling this. For the most common ones:
 * **IntelliJ** - use search in the preferences to find "safe write" and disable it.
 * **Vim** - add `:set backupcopy=yes` in your settings.
 
-
-## 2. Source Maps
+## Source Maps
 
 When a JavaScript exception occurs, you'll often want to know what file and line is generating this error. Since webpack outputs files into one or more bundles, it can be inconvenient to trace the file.
 
@@ -30,8 +28,7 @@ When a JavaScript exception occurs, you'll often want to know what file and line
 devtool: "cheap-eval-source-map"
 ```
 
-
-## 3. Choosing a Tool
+## Choosing a Tool
 
 webpack can be used with **watch mode**. In this mode webpack will watch your files, and recompile when they change.
 **webpack-dev-server** provides an easy to use development server with fast live reloading. If you already have a development server and want full flexibility, **webpack-dev-middleware** can be used as middleware.
@@ -39,7 +36,6 @@ webpack can be used with **watch mode**. In this mode webpack will watch your fi
 webpack-dev-server and webpack-dev-middleware use in-memory compilation, meaning that the bundle will not be saved to disk. This makes compiling faster and results in less mess on your file system.
 
 In most cases **you'll want to use webpack-dev-server**, since it's the easiest to get started with and offers much functionality out-of-the-box.
-
 
 ### webpack Watch Mode
 
@@ -60,7 +56,6 @@ serve
 ```
 
 After each compilation, you will need to manually refresh your browser to see the changes.
-
 
 ### webpack-dev-server
 
@@ -95,7 +90,6 @@ Now you have live reloading working, you can take it even a step further: Hot Mo
 By default **inline mode** is used. This mode injects the client - needed for live reloading and showing build errors - in your bundle. With inline mode you will get build errors and warnings in your DevTools console.
 
 webpack-dev-server can do many more things such as proxying requests to your backend server. For more configuration options, see the [**devServer documentation**](/configuration/dev-server).
-
 
 ### webpack-dev-middleware
 
