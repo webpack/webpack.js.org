@@ -11,11 +11,6 @@ var stylePaths = [
 ];
 
 const commonConfig = {
-  entry: {
-    style: [
-      path.join(cwd, 'styles', 'index.scss')
-    ]
-  },
   resolve: {
     extensions: ['', '.js', '.jsx', '.scss']
   },

@@ -2,6 +2,7 @@ import React from 'react';
 import Container from '../container/container';
 import Cube from '../cube/cube';
 import Link from '../link/link';
+import '../../styles';
 import './splash-style';
 
 export default props => {
