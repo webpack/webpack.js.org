@@ -83,6 +83,40 @@ It's no longer neccessary to specify it in configuration.
   ]
 ```
 
+### `ExtractTextWebpackPlugin` - breaking change
+
+[ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) 1.0.0 does not work with webpack 2. The changes are mainly syntactical
+
+#### `ExtractTextPlugin.extract`
+
+```diff
+module: {
+  loaders: [
+    test: /.css$/,
+-    loader: ExtractTextPlugin.extract['css-loader']
++    loader: ExtractTextPlugin.extract({
++               fallbackLoader: "style-loader",
++               loader: "css-loader",
++               publicPath: "/dist" // Overrides output.publicPath
++     })
+  ]
+}
+```
+
+#### `new ExtractTextPlugin({options})`
+
+```diff
+plugins: [
+-  new ExtractTextPlugin("bundle.css", {allChunks: true, disable: false})
++  new ExtractTextPlugin({
++   filename: "bundle.css",
++   disable: false,
++   allChunks: true
++  })
+]
+```
+
+
 ### full dynamic requires now fail by default
 
 A dependency with only an expression (i. e. `require(expr)`) will now create an empty context instead of an context of the complete directory.

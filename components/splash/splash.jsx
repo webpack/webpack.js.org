@@ -2,6 +2,7 @@ import React from 'react';
 import Container from '../container/container';
 import Cube from '../cube/cube';
 import Link from '../link/link';
+import '../../styles';
 import './splash-style';
 
 export default props => {
@@ -11,7 +12,7 @@ export default props => {
     <div className="splash">
       <section className="splash__section splash__sponsor">
         <Container className="splash__content splash_sponsorheadline">
-          <h1 id="opencollective-banner" className="splash__sponsorheadline">请支持 webpack !</h1>
+          <h1 id="opencollective-banner" className="splash__sponsorheadline">请支持 webpack！</h1>
           <p>有你的贡献、捐款或者赞助，webpack 将得到大力发展</p>
           <p>你的捐款将直接支持工作和持续改进，最重要的是，这有助于更好的文档和学习资料！</p>
 

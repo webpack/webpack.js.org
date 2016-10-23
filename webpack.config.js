@@ -11,11 +11,6 @@ var stylePaths = [
 ];
 
 const commonConfig = {
-  entry: {
-    style: [
-      path.join(cwd, 'styles', 'index.scss')
-    ]
-  },
   resolve: {
     extensions: ['', '.js', '.jsx', '.scss']
   },
@@ -100,7 +95,7 @@ const buildConfig = {
     publicPath: '/'
   },
   plugins: [
-    new ExtractTextPlugin('[name].css', {
+    new ExtractTextPlugin('[chunkhash].css', {
       allChunks: true
     })
   ],
