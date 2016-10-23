@@ -4,3 +4,74 @@ contributors:
   - pksjce
 ---
 
+In this section, we will discuss how webpack splits code using `require.ensure()`.
+
+### `require.ensure()`
+
+webpack statically parses for `require.ensure()` in the code while building and adds the modules here into a separate chunk. This new chunk is loaded on demand by webpack through jsonp.
+
+The syntax is as follows
+
+``` javascript
+require.ensure(dependencies: String[], callback: function(require), chunkName: String)
+```
+
+#### dependencies
+This is an array of strings where we can declare all the modules that need to be made available before all the code in the callback function can be executed.
+
+#### callback
+This is the callback function that webpack will execute once the dependencies are loaded. An implementation of the require object is sent as a parameter to this function. This is so that, we can further `require()` the dependencies and any other modules for execution.
+
+#### chunkName
+The chunkName is the name given to the chunk created by this particular `require.ensure()`. By giving the same name at various different split points of `require.ensure()`, we can make sure all the dependencies are collectively put in the same bundle.
+
+Let us consider the following project
+
+```
+\\ file structure
+    |
+    js --|
+    |    |-- entry.js
+    |    |-- a.js
+    |    |-- b.js
+    webpack.config.js
+    |
+    dist 
+```
+
+```javascript
+\\ entry.js
+
+require('a')
+require.ensure([], function(require){
+    require('b')
+})
+
+\\ a.js
+console.log('***** I AM a *****')
+
+\\ b.js
+console.log('***** I AM b *****')
+```
+
+``` javascript
+\\ webpack.config.js
+
+module.exports = function(env) {
+    return {
+        entry: './js/entry.js',
+        output: {
+            filename: 'bundle.js',
+            path: './dist'
+        }
+    }
+}
+```
+On running webpack on this project, we find that webpack has created two new bundles, `bundle.js` and `0.bundle.js`.
+
+`entry.js` and `a.js` are bundled in `bundle.js`.
+
+`b.js` is bundled in `0.bundle.js`.
+
+
+https://www.npmjs.com/package/require-ensure-shim
