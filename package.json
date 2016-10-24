@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "node ./bootstrap.js",
-    "build": "rm -rf build/ && node ./bootstrap.js && npm run sitemap && echo webpack.js.org > build/CNAME",
+    "build": "rm -rf build/ && node ./bootstrap.js && npm run sitemap && echo webpack.vuefe.cn > build/CNAME",
     "build-test": "http-server build/",
     "deploy": "gh-pages -d build",
     "lint": "run-s lint:*",
