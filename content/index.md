@@ -1,3 +1,5 @@
+## Write your code.
+
 **index.js**
 
 ```js
@@ -16,7 +18,7 @@ module.exports = {
 }
 ```
 
-## Bundle your [modules](/concepts/modules) with webpack.
+## Bundle with webpack.
 
 **webpack.config.js**
 
@@ -43,4 +45,5 @@ module.exports = {
 </html>
 ```
 
-## It's really that simple. [Get started](/get-started) now!
+## It's that simple. 
+## [Get Started](/get-started)
