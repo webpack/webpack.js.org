@@ -121,11 +121,13 @@ plugins: [
 
 A dependency with only an expression (i. e. `require(expr)`) will now create an empty context instead of an context of the complete directory.
 
-Best refactor this code as it won't work with ES6 Modules. If this is not possible you can use the `ContextReplacementPlugin` to hint the compiler to the correct resolvings. See [dynamic dependencies](dynamic-dependencies).
+Best refactor this code as it won't work with ES6 Modules. If this is not possible you can use the `ContextReplacementPlugin` to hint the compiler to the correct resolving.
+
+?> Link to an article about dynamic dependencies.
 
 ### Using custom arguments in CLI and configuration
 
-If you abused the CLI to pass custom arguments to the configration like so:
+If you abused the CLI to pass custom arguments to the configuration like so:
 
 `webpack --custom-stuff`
 
@@ -151,13 +153,13 @@ module.exports = function(env) {
 
 See [CLI](../api/cli).
 
-### `require.ensure` and AMD `require` is async
+### `require.ensure` and AMD `require` is asynchronous
 
-These functions are now always async instead of calling their callback sync if the chunk is already loaded.
+These functions are now always asynchronous instead of calling their callback sync if the chunk is already loaded.
 
 ### `module.loaders` is now `module.rules`
 
-The old loader configuration was superseeded by a more powerful rules system, which allows to configure loaders and more.
+The old loader configuration was superseded by a more powerful rules system, which allows to configure loaders and more.
 
 For compatibility reasons the old syntax is still valid and the old names are parsed.
 

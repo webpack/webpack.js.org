@@ -1,3 +1,5 @@
+## Write your code.
+
 **index.js**
 
 ```js
@@ -16,7 +18,7 @@ module.exports = {
 }
 ```
 
-## 用 webpack 打包[模块](/concepts/modules)。
+## 用 webpack 打包[模块]。
 **webpack.config.js**
 
 ```js
@@ -42,4 +44,5 @@ module.exports = {
 </html>
 ```
 
-## 很简单。 即刻[起步](/get-started)！
+## 很简单。
+## 即刻[起步](/get-started)

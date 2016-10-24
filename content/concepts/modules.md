@@ -5,8 +5,6 @@ contributors:
   - dear-lizhihua
 ---
 
-?> 一切都是具有依赖、模块树、模块解析、静态构建和约束性的模块。
-
 在[模块化编程](https://en.wikipedia.org/wiki/Modular_programming)，开发者将程序分解成称为_模块_的离散功能块。
 
 每个模块具有比完整程序更小的接触面，使得校验、调试、测试轻而易举。

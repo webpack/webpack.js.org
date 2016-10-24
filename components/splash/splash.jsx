@@ -1,45 +1,44 @@
 import React from 'react';
+import Interactive from 'antwar-interactive';
 import Container from '../container/container';
-import Cube from '../cube/cube';
-import Link from '../link/link';
+import SplashViz from '../splash-viz/splash-viz';
 import '../../styles';
 import './splash-style';
+import Support from '../support/support';
 
 export default props => {
   let { page } = props;
 
   return (
     <div className="splash">
-      <section className="splash__section splash__sponsor">
-        <Container className="splash__content splash_sponsorheadline">
-          <h1 id="opencollective-banner" className="splash__sponsorheadline">请支持 webpack！</h1>
-          <p>有你的贡献、捐款或者赞助，webpack 将得到大力发展</p>
-          <p>你的捐款将直接支持工作和持续改进，最重要的是，这有助于更好的文档和学习资料！</p>
+      <Interactive
+        id="components/splash-viz/splash-viz.jsx"
+        component={ SplashViz } />
 
-          <object type="image/svg+xml" data="https://opencollective.com/webpack/sponsors.svg"></object>
-          <object type="image/svg+xml" data="https://opencollective.com/webpack/backers.svg"></object>
-        </Container>
-      </section>
-      <section className="splash__viz">
-        <div className="splash__icon">
-          <Cube className="splash__cube" depth={ 150 } />
-        </div>
+      <Container className="splash__section">
+        <h1>{ page.title }</h1>
+        <div dangerouslySetInnerHTML={{
+          __html: page.content
+        }} />
+      </Container>
 
-        <span className="splash__headline">
-          谁说前端代码不能模块化？
-        </span>
-      </section>
+      <Container className="splash__section">
+        <h1>请支持团队</h1>
 
-      <section className="splash__section">
-        <Container className="splash__content">
-          <h1>{ page.title }</h1>
-          <div dangerouslySetInnerHTML={{
-            __html: page.content
-          }} />
-        </Container>
-      </section>
+        <p>有你的贡献、捐款或者赞助，webpack 将得到大力发展。你的捐款将直接支持工作和持续改进，最重要的是，这有助于更好的文档和学习资料！</p>
 
+        <Interactive
+          id="components/support/support.jsx"
+          component={ Support }
+          number={ 5 }
+          type="sponsor" />
 
+        <Interactive
+          id="components/support/support.jsx"
+          component={ Support }
+          number={ 20 }
+          type="backer" />
+      </Container>
     </div>
   );
 };
