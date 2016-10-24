@@ -22,35 +22,38 @@ export default class Cube extends React.Component {
     let { theme, depth, className = '' } = this.props;
 
     return (
-      <span ref={ ref => this.container = ref }
-          className={ `cube cube--${theme} ${className}` }
+      <span 
+        ref={ ref => this.container = ref }
+        className={ `cube cube--${theme} ${className}` }
+        style={{
+          width: `${depth}px`,
+          marginLeft: `${depth * 0.5}px`,
+          paddingBottom: `${depth * 0.5}px`
+        }}>
+        <figure 
+          className="cube__outer"
           style={{
             width: `${depth}px`,
-            marginLeft: `${depth * 0.5}px`,
-            paddingBottom: `${depth * 0.5}px`
+            height: `${depth}px`,
+            transform: `translateX(-50%)
+            scale3d(1,1,1)
+            rotateX(${x}deg)
+            rotateY(${y}deg)
+            rotateZ(${z}deg)`
           }}>
-        <figure className="cube__outer"
-            style={{
-              width: `${depth}px`,
-              height: `${depth}px`,
-              transform: `translateX(-50%)
-              scale3d(1,1,1)
-              rotateX(${x}deg)
-              rotateY(${y}deg)
-              rotateZ(${z}deg)`
-            }}>
             { this._getFaces() }
         </figure>
-        <figure className="cube__inner"
-            style={{
-              width: `${depth}px`,
-              height: `${depth}px`,
-              transform: `translateX(-50%)
-              scale3d(0.5,0.5,0.5)
-              rotateX(${-x}deg)
-              rotateY(${-y}deg)
-              rotateZ(${-z}deg)`
-            }}>
+        <figure 
+          className="cube__inner"
+          style={{
+            width: `${depth}px`,
+            height: `${depth}px`,
+            transform: `translateX(-50%)
+            scale3d(0.5,0.5,0.5)
+            rotateX(${-x}deg)
+            rotateY(${-y}deg)
+            rotateZ(${-z}deg)`
+          }}>
             { this._getFaces() }
         </figure>
       </span>
