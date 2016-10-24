@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">    <url>
+        <loc>https://webpack.js.org/analyze\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/contribute\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/get-started\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/index\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/license\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/organization\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/writers-guide\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/api\cli\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/api\index\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/api\loaders\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/api\node\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/api\plugins\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts\compared-to-other-systems\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts\configuration\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts\dependency-graph\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts\entry-points\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts\index\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts\loaders\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts\module-resolution\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts\modules\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts\output\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts\plugins\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts\targets\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration\dev-server\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration\devtool\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration\entry-context\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration\external-configs\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration\externals\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration\index\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration\module\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration\node\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration\other-options\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration\output\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration\passing-a-config\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration\plugins\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration\resolve\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration\stats\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration\target\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration\watch\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to\author-libraries\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to\cache\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to\develop\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to\handle-compatibility\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to\generate-production-build\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to\handle-dependencies\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to\hot-module-reload\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to\improve-build-performance\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to\index\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to\install-webpack\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to\set-up-hmr-with-react\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to\shim\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to\split-code\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to\upgrade-from-webpack-1\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to\develop\using-third-party-tools\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to\develop\using-docker\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to\develop\using-vagrant\index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to\lazy-load\react\index.html</loc>
+    </url></urlset>

@@ -29,7 +29,7 @@ export default class Navigation extends React.Component {
                   <Link
                     key={ `navigation__link${i}` }
                     className={ `navigation__link ${activeClass}` }
-                    to={ `/${link.url}` }>
+                    to={ `/${link.url}/index` }>
                     { link.title }
                   </Link>
                 );
@@ -37,7 +37,7 @@ export default class Navigation extends React.Component {
             }
 
             <Link className={ 'navigation__link' } to={ '//opencollective.com/webpack' }>
-              Donate
+              捐献
             </Link>
           </nav>
         </Container>
