@@ -1,16 +1,17 @@
 ---
-title: 目标
+title: 部署目标
 contributors:
   - TheLarkInn
+  - dear-lizhihua
 ---
 
-Because JavaScript can be written for both server and browser, webpack offers multiple deployment _targets_ that you can set in your webpack [configuration](/configuration).
+因为服务器和浏览器代码都可以用 JavaScript 编写，所以 webpack 提供了多种部署_目标(target)_，你可以在你的 webpack [配置](/configuration)中设置。
 
-W> The webpack `target` property is not to be confused with the `output.libraryTarget` property. For more information see [our guide](/concepts/output) on the `output` property.
+W> webpack `target` 属性不要和 `output.libraryTarget` 属性混淆。有关 `output` 属性的更多信息，请查看[我们的指南](/concepts/output)。
 
-## Usage
+## 用法
 
-To set the `target` property, you simply set the target value in your webpack config:
+要设置 `target` 属性，只需要在你的 webpack 配置中设置 target 的值。
 
 **webpack.config.js**
 
@@ -22,26 +23,26 @@ const config = {
 module.exports = config;
 ```
 
-## Options
+## 选项
 
-The following is a list of values you can pass to the `target` property.
+以下是可以传递给 `target` 属性的值的列表。
 
-* `"async-node"` Compile for usage in a node.js-like environment (use `fs` and `vm` to load chunks async)
-* `"electron-main"` Compile for electron renderer process, provide a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environment and `NodeTargetPlugin` and `ExternalsPlugin` for commonjs and electron bulit-in modules. *Note: need `webpack` >= 1.12.15.
-* `"node"` Compile for usage in a node.js-like environment (use `require` to load chunks)
-* `"node-webkit"` Compile for usage in webkit, uses jsonp chunk loading but also supports build in node.js modules plus require("nw.gui") (experimental)
-* `"web"` Compile for usage in a browser-like environment (default)
-* `"webworker"` Compile as WebWorker
+* `"async-node"` 编译为 类 node.js(node.js-like) 环境可用（使用 `fs` 和 `vm` 加载异步块）
+* `"electron-main"` Compile for electron renderer process, provide a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environment and `NodeTargetPlugin` and `ExternalsPlugin` for commonjs and electron bulit-in modules. *注意: 需要 `webpack` >= 1.12.15。
+* `"node"` 编译为 类 node.js(node.js-like) 环境可用（使用 `require` 加载块）
+* `"node-webkit"` 编译为 webkit 可用，使用 jsonp 分块加载，但也支持在 node.js 模块构建添加 require("nw.gui") （实验性质）
+* `"web"` 编译为 类浏览器(browser-like) 环境可用（默认）
+* `"webworker"` 当作 WebWorker 编译
 
-Each _target_ has a variety of deployment/environment specific additions, support to fit its needs.
+每个_target_都有各种部署/环境特定的附加项，以支持满足其需求。
 
-For example, when you use the `electron-main` _target_, *webpack* includes multiple `electron-main` specific variables. For more information on which templates and _externals_ are used, you can refer [directly to the webpack source code](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js#L70-L185).
+例如，当你的使用 _target_ 是 `electron-main`，*webpack* 包含多个 `electron-main` 特定的变量。有关使用哪些模板和 _externals_ 的更多信息，您可以直接参考 [webpack 源码](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js#L70-L185)。
 
 ?> We should expand on this further. What specifically is included.
 
-## Multiple Targets
+## 多个目标
 
-Although webpack does **not** support multiple strings being passed into the `target` property, you can create an isomorphic library by bundling two separate configurations:
+尽管 webpack 不支持向 `target` 传入多个字符串，你可以通过打包两份分离的配置来创建同构的库：
 
 **webpack.config.js**
 
@@ -56,7 +57,7 @@ var serverConfig = {
 };
 
 var clientConfig = {
-  target: 'web', // <=== can be omitted as default is 'web'
+  target: 'web', // <=== 默认是 'web'，可省略
   output: {
     path: 'dist',
     filename: 'lib.js'
@@ -67,14 +68,14 @@ var clientConfig = {
 module.exports = [ serverConfig, clientConfig ];
 ```
 
-The example above will create a `lib.js` and `lib.node.js` file in your `dist` folder.
+上面的例子将在你的 `dist` 文件夹下创建 `lib.js` 和 `lib.node.js` 文件。
 
-## Resources
+## 资源
 
-As seen from the options above there are multiple different deployment _targets_ that you can choose from. Below is a list of examples, and resources that you can refer to.
+从上面的选项可以看出有多个不同的部署_目标_可供选择。下面是一个示例列表，以及你可以参考的资源。
 
-### Bundle Output Comparison
+### 打包输出比较
 
-  **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**: A great resource for testing and viewing different webpack _targets_. Also great for bug reporting.
+  **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**：大量有关「测试和查看不同的 webpack _目标_」的资源。也有大量 bug 报告。
 
 ?> Need to find up to date examples of these webpack targets being used in live code or boilerplates.
