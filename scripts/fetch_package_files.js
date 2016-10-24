@@ -28,7 +28,7 @@ function main() {
   mkdirp.sync(output);
 
   const stdin = process.openStdin();
-  let input = '';
+  var input = '';
 
   stdin.setEncoding('utf8');
   stdin.on('data', function(d) {
@@ -94,7 +94,7 @@ function fetchPackageFiles(options, finalCb) {
 
 // TODO: push this type of to a script of its own to keep this generic
 function yamlHeadmatter(fields) {
-  let ret = '---\n';
+  var ret = '---\n';
 
   Object.keys(fields).forEach(function(field) {
     ret += field + ': ' + fields[field] + '\n';
