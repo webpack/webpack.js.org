@@ -14,7 +14,7 @@ export default class SplashViz extends React.Component {
         { name: 'index.html', type: 'html', size: 2039 },
         { name: 'index.bundle.js', type: 'js', size: 20394 },
         { name: 'index.bundle.js.map', type: 'blank', size: 20459 },
-        { name: 'style.bundle.css', type: 'css', size: 32948 },
+        { name: 'style.bundle.css', type: 'css', size: 12948 },
         { name: 'favicon.ico', type: 'ico', size: 23794 }
       ]
     };
