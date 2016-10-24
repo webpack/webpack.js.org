@@ -66,9 +66,18 @@ function fetchPackageFiles(options, finalCb) {
           return cb(err);
         }
 
-        return fs.writeFile(
-          path.resolve(options.output, pkg.name + path.extname(file)),
-          body,
+        // TODO: push this type of to a script of its own to keep this generic
+        return async.parallel(
+          [
+            fs.writeFile.bind(null,
+              path.resolve(options.output, pkg.name + path.extname(file)),
+              yamlHeadmatter({ title: pkg.name }) + body
+            ),
+            fs.writeFile.bind(null,
+              path.resolve(options.output, pkg.name + '.json'),
+              JSON.stringify(pkg, null, 2)
+            )
+          ],
           function(err) {
             if (err) {
               return cb(err);
@@ -81,4 +90,15 @@ function fetchPackageFiles(options, finalCb) {
     },
     finalCb
   );
+}
+
+// TODO: push this type of to a script of its own to keep this generic
+function yamlHeadmatter(fields) {
+  let ret = '---\n';
+
+  Object.keys(fields).forEach(function(field) {
+    ret += field + ': ' + fields[field] + '\n';
+  });
+
+  return ret + '---\n';
 }

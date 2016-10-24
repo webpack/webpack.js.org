@@ -76,6 +76,26 @@ module.exports = {
           /^\.\/.*\.md$/
         );
       }
+    ),
+    loaders: section(
+      'Loaders',
+      function() {
+        return require.context(
+          'json!yaml-frontmatter!./generated/loaders',
+          false,
+          /^\.\/.*\.md$/
+        );
+      }
+    ),
+    plugins: section(
+      'Plugins',
+      function() {
+        return require.context(
+          'json!yaml-frontmatter!./generated/plugins',
+          false,
+          /^\.\/.*\.md$/
+        );
+      }
     )
   }
 };

@@ -21,11 +21,12 @@
     "url": "https://github.com/webpack/webpack.js.org/issues"
   },
   "scripts": {
-    "start": "node ./bootstrap.js",
-    "build": "rm -rf build/ && node ./bootstrap.js && npm run sitemap && echo webpack.js.org > build/CNAME",
+    "start": "npm run init:generated && node ./bootstrap.js",
+    "build": "npm run init:generated && rm -rf build/ && node ./bootstrap.js && npm run sitemap && echo webpack.js.org > build/CNAME",
     "build-test": "http-server build/",
     "deploy": "gh-pages -d build",
     "fetch": "scripts/fetch.sh",
+    "init:generated": "mkdirp ./generated/loaders && cp -rf ./content/loaders/ ./generated/loaders && mkdirp ./generated/plugins && cp -rf ./content/plugins/ ./generated/plugins",
     "lint": "run-s lint:*",
     "lint:links": "hyperlink build/index.html -r | tap-nyan",
     "lint:js": "eslint . --ext .js --ext .jsx",
