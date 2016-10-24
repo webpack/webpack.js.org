@@ -41,7 +41,19 @@ const entry = {
             {
               name: 'history-dep-2.js',
               type: 'javascript',
-              size: 3874
+              size: 3874,
+              deps: [
+                {
+                  name: 'display.js',
+                  type: 'javascript',
+                  size: 8974
+                },
+                {
+                  name: 'display-style.less',
+                  type: 'less',
+                  size: 3874
+                }
+              ]
             }
           ]
         }
@@ -63,6 +75,23 @@ const entry = {
           size: 9823
         }
       ]
+    },
+    {
+      name: 'component2.js',
+      type: 'javascript',
+      size: 2394,
+      deps: [
+        {
+          name: 'component2-style.scss',
+          type: 'sass',
+          size: 378
+        },
+        {
+          name: 'sub-component.js',
+          type: 'javascript',
+          size: 378
+        }
+      ]
     }
   ]
 };
@@ -81,13 +110,25 @@ export default class SplashModules extends React.Component {
 	render() {
     return (
       <svg className="splash-modules" ref={ ref => this.container = ref }>
+        {
+          this.nodes.map(node => {
+            return (node.deps || []).map(dep => (
+              <path 
+                key={ `${node.name}-${dep.name}` }
+                className="splash-modules__link"
+                d={ this._getPath(node, dep.name) } />
+            ));
+          })
+        }
+        
         { 
           this.nodes.map(node => (
-            <g key={ node.name } 
+            <g 
+              key={ node.name } 
               className="splash-modules__node" 
               transform={`translate(${node.x - 30}, ${node.y - 30})`}>
               <image href={ images[node.type] } width="60" height="60" />
-              <text x="30" y="-3">{ node.name }</text>
+              <text x="30">{ node.name }</text>
             </g>
           ))
         }
@@ -97,9 +138,12 @@ export default class SplashModules extends React.Component {
 
   componentDidMount() {
     setTimeout(() => {
+      let style = getComputedStyle(this.container);
+
       this.setState({
-        width: parseInt( getComputedStyle(this.container).width, 10 ),
-        height: parseInt( getComputedStyle(this.container).height, 10)
+        width: parseInt( style.width, 10 ),
+        height: parseInt( style.height, 10)
+
       }, () => {
         this._addNode(entry);
         this.forceUpdate();
@@ -131,5 +175,12 @@ export default class SplashModules extends React.Component {
         this._addNode(child, level + 1, y, module.deps.length - 1, i);
       });
     }
+  }
+
+  _getPath(node, dependency) {
+    let dep = this.nodes.find(item => item.name === dependency);
+    let i = d3.interpolate([node.x, node.y], [dep.x, dep.y]);
+
+    return `M${i(0.25)[0]},${i(0.25)[1]}L${i(0.75)[0]},${i(0.75)[1]}Z`;
   }
 }
