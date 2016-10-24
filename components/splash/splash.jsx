@@ -22,11 +22,6 @@ export default props => {
         }} />
       </Container>
 
-      {/*<iframe 
-        className="splash__bin"
-        src="http://www.webpackbin.com/N1XOoynAZ"
-        sandbox="allow-scripts allow-same-origin allow-forms" />*/}
-
       <Container className="splash__section">
         <h1>Support the Team</h1>
 
