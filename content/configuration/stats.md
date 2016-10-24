@@ -68,7 +68,7 @@ stats: {
   source: true,
   // 增加时间信息
   timings: true,
-  // 增加 Webpack 版本信息
+  // 增加 webpack 版本信息
   version: true,
   // 增加提示
   warnings: true
