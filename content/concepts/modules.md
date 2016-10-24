@@ -4,8 +4,6 @@ contributors:
   - TheLarkInn
 ---
 
-?> everything is a module with dependencies, module tree, module resolution, static build and restrictions
-
 In [modular programming](https://en.wikipedia.org/wiki/Modular_programming), developers break programs up into discrete chunks of functionality called a _module_.
 
 Each module has a smaller surface area than a full program, making verification, debugging, and testing trivial.
