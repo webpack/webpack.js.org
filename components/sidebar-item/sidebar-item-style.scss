@@ -52,20 +52,25 @@
     }
   }
 
-  &--empty {
-    .sidebar-item__toggle {
-      display:none;
-    }
-  }
-
   &--open {
     .sidebar-item__anchors {
       display:block;
     }
 
+    .sidebar-item__title {
+      color: #c0903f;
+    }
+
     .sidebar-item__toggle {
       margin-left:-2px;
       transform:rotate(180deg) translateX(1px);
+    }
+  }
+
+  &--empty {
+    .sidebar-item__toggle,
+    .sidebar-item__anchors {
+      display: none;
     }
   }
 }
