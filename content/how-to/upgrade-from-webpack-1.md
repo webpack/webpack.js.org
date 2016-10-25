@@ -2,6 +2,7 @@
 title: How to Upgrade from Webpack 1?
 contributors:
   - sokra
+  - jhnns
 ---
 
 ### `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -26,21 +27,65 @@ This option no longer requires passing an empty string. This behavior was moved 
 
 More stuff was changed here. Not listed in detail as it's not commonly used. See [resolving](/configuration/resolve) for details.
 
-### `debug`
+### `module.loaders` is now `module.rules`
 
-The `debug` option switched loaders to debug mode in webpack 1. This need to be passed via loader options in long-term. See loader documentation for relevant options.
-
-The debug mode for loaders will be removed in webpack 3 or later.
-
-To keep compatibility with old loaders, loaders can be switched to debug mode via plugin:
+The old loader configuration was superseded by a more powerful rules system, which allows to configure loaders and more.
+For compatibility reasons the old syntax is still valid and the old names are parsed.
+The new naming is easier to understand to there are good reasons to upgrade the configuration.
 
 ``` diff
-- debug: true,
-  plugins: [
-+   new webpack.LoaderOptionsPlugin({
-+     debug: true
-+   })
-  ]
+  module: {
+-   loaders: [
++   rules: [
+      {
+        test: /\.css$/,
+-       loaders: [
++       use: [
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader",
+-           query: {
++           options: {
+              modules: true
+            }
+        ]
+      }
+    ]
+  }
+```
+
+### Automatic `-loader` module name extension removed
+
+It is not possible anymore to omit the `-loader` extension when referencing loaders:
+
+``` diff
+        loaders: [
+-           "style",
++           "style-loader",
+-           "css",
++           "css-loader",
+-           "less",
++           "less-loader",
+        ]
+```
+
+See [#2986](https://github.com/webpack/webpack/issues/2986) for the reason behind this change.
+
+### `module.preLoaders` and `module.postLoaders` was removed
+
+``` diff
+  module: {
+-   preLoaders: [
++   rules: [
+      {
+        test: /\.js$/,
++       enforce: "pre",
+        loader: "eslint-loader"
+      }
+    ]
+  }
 ```
 
 ### `UglifyJsPlugin` sourceMap
@@ -117,7 +162,7 @@ plugins: [
 ```
 
 
-### full dynamic requires now fail by default
+### Full dynamic requires now fail by default
 
 A dependency with only an expression (i. e. `require(expr)`) will now create an empty context instead of an context of the complete directory.
 
@@ -157,53 +202,7 @@ See [CLI](../api/cli).
 
 These functions are now always asynchronous instead of calling their callback sync if the chunk is already loaded.
 
-### `module.loaders` is now `module.rules`
-
-The old loader configuration was superseded by a more powerful rules system, which allows to configure loaders and more.
-
-For compatibility reasons the old syntax is still valid and the old names are parsed.
-
-The new naming is easier to understand to there are good reasons to upgrade the configuration.
-
-``` diff
-  module: {
--   loaders: [
-+   rules: [
-      {
-        test: /\.css$/,
--       loaders: [
-+       use: [
-          {
-            loader: "style-loader"
-          },
-          {
-            loader: "css-loader",
--           query: {
-+           options: {
-              modules: true
-            }
-        ]
-      }
-    ]
-  }
-```
-
-### `module.preLoaders` and `module.postLoaders` was removed
-
-``` diff
-  module: {
--   preLoaders: [
-+   rules: [
-      {
-        test: /\.js$/,
-+       enforce: "pre",
-        loader: "eslint-loader"
-      }
-    ]
-  }
-```
-
-### `LoaderOptionPlugin` context
+### `LoaderOptionsPlugin` context
 
 Some loaders need context information and read them from the configuration. This need to be passed via loader options in long-term. See loader documentation for relevant options.
 
@@ -215,6 +214,23 @@ To keep compatibility with old loaders, this information can be passed via plugi
 +     options: {
 +       context: __dirname
 +     }
++   })
+  ]
+```
+
+### `debug`
+
+The `debug` option switched loaders to debug mode in webpack 1. This need to be passed via loader options in long-term. See loader documentation for relevant options.
+
+The debug mode for loaders will be removed in webpack 3 or later.
+
+To keep compatibility with old loaders, loaders can be switched to debug mode via plugin:
+
+``` diff
+- debug: true,
+  plugins: [
++   new webpack.LoaderOptionsPlugin({
++     debug: true
 +   })
   ]
 ```

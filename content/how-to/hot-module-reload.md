@@ -2,6 +2,7 @@
 title: How to Configure Hot Module Replacement?
 contributors:
   - jmreidy
+  - jhnns
 ---
 
 Hot Module Replacement (HMR) exchanges, adds, or removes modules while an
@@ -116,14 +117,14 @@ module.exports = env => {
       loaders: [
         { test: /\.js$/,
           loaders: [
-            'babel',
+            'babel-loader',
           ],
           exclude: /node_modules/
         },
         {
           test: /\.css$/,
           loaders: [
-            'style',
+            'style-loader',
             'css-loader?modules',
             'postcss-loader',
           ],
