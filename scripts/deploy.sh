@@ -8,6 +8,7 @@ SOURCE_BRANCH="master"
 if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]; then
     echo "Skipping deploy; just doing a build and linting links."
     npm run build
+    # npm run fetch - Relies on third party files, disabled for now
     npm run lint:links
     exit 0
 fi
@@ -15,6 +16,9 @@ fi
 # Save some useful information
 REPO=`git config remote.origin.url`
 SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
+
+# Fetch loaders/plugins etc.
+npm run fetch
 
 # Run our build
 npm run build

@@ -17,8 +17,6 @@
 
 ## 内容进度
 
-查看 [MVP 里程碑](https://github.com/webpack/webpack.js.org/issues?q=is%3Aopen+is%3Aissue+milestone%3A%22Webpack+2+-+Documentation+MVP%22) 获取最新状态。
-
 
 ## 如何进行翻译？
 

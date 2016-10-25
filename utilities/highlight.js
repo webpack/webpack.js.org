@@ -14,6 +14,10 @@ var highlight = Prism.highlight;
 module.exports = function(code, language) {
   language = language || 'bash';
 
+  if (language === 'sh' || language === 'text') {
+    language = 'bash';
+  }
+
   try {
     return highlight(code, languages[language]);
 
