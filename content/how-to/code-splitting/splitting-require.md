@@ -12,7 +12,7 @@ webpack statically parses for `require.ensure()` in the code while building and 
 
 The syntax is as follows
 
-``` javascript
+```javascript
 require.ensure(dependencies: String[], callback: function(require), chunkName: String)
 ```
 
