@@ -27,11 +27,15 @@ export default props => {
 
         <p>Through contributions, donations, and sponsorship, you allow webpack to thrive. Your donations directly support office hours, continued enhancements, and most importantly, great documentation and learning material!</p>
 
+        <h2>Sponsors</h2>
+
         <Interactive
           id="components/support/support.jsx"
           component={ Support }
           number={ 5 }
           type="sponsor" />
+
+        <h2>Backers</h2>
 
         <Interactive
           id="components/support/support.jsx"
