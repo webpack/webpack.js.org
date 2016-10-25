@@ -73,5 +73,25 @@ On running webpack on this project, we find that webpack has created two new bun
 
 `b.js` is bundled in `0.bundle.js`.
 
+### Gotchas for require.ensure()
 
-https://www.npmjs.com/package/require-ensure-shim
+#### empty array as parameter
+
+```javascript
+require.ensure([], function(require){
+    require('./a.js')
+})
+```
+
+The above code ensures that a split point is created and `a.js` is bundled separately by webpack.
+
+#### dependencies as parameter
+
+```javascript
+require.ensure(['./a.js'], function(require) {
+    require('./b.js');
+})
+```
+
+In the above code, `a.js` and `b.js` are bundled together and split from the main bundle. But only the contents of `b.js` are executed. The contents of `a.js` are only made available and not executed.
+To execute `a.js`, we will have to require it in a sync manner like `require('./a.js')` for the Javascript to get executed.
