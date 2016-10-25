@@ -6,7 +6,7 @@ contributors:
 
 In this section, we will discuss how webpack splits code using `require.ensure()`.
 
-### `require.ensure()`
+## `require.ensure()`
 
 webpack statically parses for `require.ensure()` in the code while building and adds the modules here into a separate chunk. This new chunk is loaded on demand by webpack through jsonp.
 
@@ -27,7 +27,7 @@ The chunkName is the name given to the chunk created by this particular `require
 
 Let us consider the following project
 
-```
+```bash
 \\ file structure
     |
     js --|
@@ -54,7 +54,7 @@ console.log('***** I AM a *****')
 console.log('***** I AM b *****')
 ```
 
-``` javascript
+```javascript
 \\ webpack.config.js
 
 module.exports = function(env) {
@@ -73,9 +73,9 @@ On running webpack on this project, we find that webpack has created two new bun
 
 `b.js` is bundled in `0.bundle.js`.
 
-### Gotchas for require.ensure()
+## Gotchas for `require.ensure()`
 
-#### empty array as parameter
+### Empty Array as Parameter
 
 ```javascript
 require.ensure([], function(require){
@@ -85,7 +85,7 @@ require.ensure([], function(require){
 
 The above code ensures that a split point is created and `a.js` is bundled separately by webpack.
 
-#### dependencies as parameter
+### Dependencies as Parameter
 
 ```javascript
 require.ensure(['./a.js'], function(require) {
@@ -94,4 +94,4 @@ require.ensure(['./a.js'], function(require) {
 ```
 
 In the above code, `a.js` and `b.js` are bundled together and split from the main bundle. But only the contents of `b.js` are executed. The contents of `a.js` are only made available and not executed.
-To execute `a.js`, we will have to require it in a sync manner like `require('./a.js')` for the Javascript to get executed.
+To execute `a.js`, we will have to require it in a sync manner like `require('./a.js')` for the JavaScript to get executed.

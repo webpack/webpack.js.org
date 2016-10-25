@@ -4,7 +4,11 @@ contributors:
   - pksjce
 ---
 
-A typical application uses third party libraries for framework/functionality needs. Particular versions of these libraries are used and code here does not change often. However, the application code changes frequently. Bundling application code with third party code would be inefficient. This is because the browser can cache asset files based on the cache header and files can be cached without needing to call the cdn again if it's contents don't change. To take advantage of this, we want to keep the hash of the vendor files constant regardless of application code changes. We can do this only when we separate the bundles for vendor and application code.
+A typical application uses third party libraries for framework/functionality needs. Particular versions of these libraries are used and code here does not change often. However, the application code changes frequently.
+
+Bundling application code with third party code would be inefficient. This is because the browser can cache asset files based on the cache header and files can be cached without needing to call the cdn again if it's contents don't change. To take advantage of this, we want to keep the hash of the vendor files constant regardless of application code changes.
+
+We can do this only when we separate the bundles for vendor and application code.
 
 Let's consider a sample application, that uses [momentjs](https://www.npmjs.com/package/moment) which is a time formatting library commonly used.
 
@@ -14,8 +18,8 @@ Install `moment` as follows in your application directory.
 
 The index file will require `moment` as a dependency and log the current date as follows
 
+__index.js__
 ```javascript
-\\ index.js
 
 var moment = require('moment');
 console.log(moment().format())
@@ -24,8 +28,9 @@ console.log(moment().format())
 
 We can bundle the application with webpack using the following config
 
+__webpack.config.js__
+
 ```javascript
-\\ webpack.config.js
 
 modules.export = function(env) {
     return {
@@ -42,12 +47,13 @@ On running `webpack` in your application, if you inspect the resulting bundle, y
 
 This is not ideal for the application. If the code in `index.js` changes, then the whole bundle is rebuilt. The browser will have to load a new copy of the new bundle even though most of it hasn't changed at all.
 
-### Multiple entries
+## Multiple Entries
 
 Let's try to mitigate this by adding a separate entry point for `moment` and name it `vendor`
 
+__webpack.config.js__
+
 ```javascript
-\\ webpack.config.js
 
 modules.export = function(env) {
     return {
@@ -67,14 +73,15 @@ On running `webpack` now, we see that two bundles have been created. If you insp
 
 It is for this reason, that we will need to use the [CommonsChunkPlugin](https://github.com/webpack/webpack/blob/master/lib/optimize/CommonsChunkPlugin.js).
 
-### CommonsChunkPlugin
+## `CommonsChunkPlugin`
 
 This is a pretty complex plugin. It fundamentally allows us to extract all the common modules from different bundles and add them to the common bundle. If a common bundle does not exist, then it creates a new one.
 
-We can modify our webpack config file to use the CommonsChunkPlugin as follows
+We can modify our webpack config file to use the `CommonsChunkPlugin` as follows
+
+__webpack.config.js__
 
 ```javascript
-\\ webpack.config.js
 
 var webpack = require('webpack');
 modules.export = function(env) {
@@ -97,7 +104,7 @@ modules.export = function(env) {
 ```
 Now run `webpack` on your application. Bundle inspection shows that `moment` code is present only in the vendor bundle.
 
-### Manifest file
+## Manifest File
 
 But, if we change application code and run `webpack` again, we see that the hash for the vendor file changes. Even though we achieved separate bundles for `vendor` and `main` bundles, we see that the `vendor` bundle changes when the application code changes.
 This means that we still don't reap the benefits of browser caching because the hash for vendor file changes on every build and the browser will have to reload the file.
@@ -106,8 +113,9 @@ The issue here is that on every build, webpack generates some webpack runtime co
 
 To prevent this, we need extract out the runtime into a separate manifest file. Even though we are creating another bundle, the overhead is offset by the long term caching benefits that we obtain on the `vendor` file.
 
+__webpack.config.js__
+
 ```javascript
-\\ webpack.config.js
 
 var webpack = require('webpack');
 modules.export = function(env) {

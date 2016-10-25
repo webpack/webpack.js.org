@@ -17,9 +17,8 @@ There are mainly two kind of code-splits that need to be accomplished with `webp
 
 `require.ensure()` is the CommonJS way of including assets asynchronously. By adding `require.ensure([<fileurl>])`, we can define a split point in the code. webpack can then create a separate bundle of all the code inside this split point.
 Learn [how to split your code using `require.ensure()`](/how-to/code-splitting/splitting-require)
-### Code splitting with System.import
-### Making Common chunks
-### Code splitting using bundle loader
+
+?> Document `System.import()`
 
 ## Resource splitting for cacheing and parallel loads
 
