@@ -69,7 +69,9 @@ export default class SidebarMobile extends React.Component {
         <Link
           key={ url } 
           className={ `sidebar-mobile__page ${active ? 'sidebar-mobile__page--active' : ''}` } 
-          to={ url }>
+          to={ url }
+          onClick={ this._close.bind(this) }
+        >
           { page.title }
         </Link>
       );
