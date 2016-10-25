@@ -34,14 +34,17 @@
   padding: 0.6em 1em;
 
   @include break {
-    padding:0 0 0 1.5em;
+    padding: 0.6em 1em;
+  }
+
+  @include break('large') {
+    padding: 0 1em 0 1.6em;
   }
 }
 
 .navigation__mobile {
   display: flex;
   font-size: 1.5em;
-  margin-left: -1em;
   align-items: center;
   color: map-get($colors, white);
   cursor: pointer;
@@ -51,19 +54,29 @@
     color: map-get($colors, alto);
   }
 
-  @include break {
+  @include break('large') {
     display: none;
   }
 }
 
 .navigation__logo {
-  margin:auto;
+  margin: auto;
+  position: relative;
+  left: -1em;
+
+  @include break {
+    left: -1.5em;
+  }
+
+  @include break('large') {
+    left: 0;
+  }
 }
 
 .navigation__links {
   display: none;
 
-  @include break {
+  @include break('large') {
     flex: 1 1 auto;
     display: flex;
     align-items: center;
