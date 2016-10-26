@@ -20,6 +20,7 @@ export default ({ section, page }) => {
           title: page.title,
           anchors: page.anchors
         }))}
+        currentPage={ page.url.replace("/index", "") }
       />
 
       <section className="page__content">

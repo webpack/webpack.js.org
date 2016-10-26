@@ -3,14 +3,16 @@ import SidebarItem from '../sidebar-item/sidebar-item';
 import './sidebar-style';
 
 export default props => {
-  let { sectionName, pages } = props;
+  let { sectionName, pages, currentPage } = props;
 
   return (
     <nav className="sidebar">
       <div className="sidebar__inner">
         <SidebarItem 
           url={ `/${sectionName}` } 
-          title="Introduction" />
+          title="Introduction"
+          currentPage= { currentPage }
+        />
 
         {
           pages.map(({ url, title, anchors }, i) =>
@@ -20,6 +22,7 @@ export default props => {
               url={ `/${url}` }
               title={ title }
               anchors={ anchors }
+              currentPage= { currentPage }
             />
           )
         }

@@ -12,9 +12,10 @@ export default class SidebarItem extends React.Component {
   }
 
   render() {
-    let { index, url, title, anchors = [] } = this.props;
+    let { index, url, title, anchors = [], currentPage } = this.props;
     let emptyMod = !anchors.length ? 'sidebar-item--empty' : '';
-    let openMod = this.state.open ? 'sidebar-item--open' : '';
+    let active = `/${currentPage}` === url;
+    let openMod = (active || this.state.open) ? 'sidebar-item--open' : '';
 
     return (
       <div className={ `sidebar-item ${emptyMod} ${openMod}` }>

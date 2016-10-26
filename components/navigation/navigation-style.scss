@@ -34,6 +34,10 @@
   padding: 0.6em 1em;
 
   @include break {
+    padding:0 1.5em;
+  }
+
+  @include break('large') {
     padding:0 0 0 1.5em;
   }
 }
@@ -69,21 +73,33 @@
     align-items: center;
     justify-content: flex-end;
   }
+
+  @include break('large') {
+    padding-right:0;
+  }
 }
 
 .navigation__link {
-  font-size: getFontSize(-1);
-  padding:1.5em;
-  text-transform: uppercase;
-  color: map-get($colors, dusty-grey);
-  transition:all 250ms;
+  @include break {
+    font-size: getFontSize(-1);
+    text-transform: uppercase;
+    color: map-get($colors, dusty-grey);
+    transition:all 250ms;
+    padding:1.75em 0;
+    margin-left:1.5em;
+  }
+
+  @include break('large') {
+    padding:1.5em;
+    margin-left:0;
+
+    &--active {
+      background: map-get($colors, emperor);
+    }
+  }
 
   &:hover,
   &--active {
     color: map-get($colors, white);
-  }
-
-  &--active {
-    background: map-get($colors, emperor);
   }
 }
