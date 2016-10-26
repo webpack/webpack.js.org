@@ -136,7 +136,7 @@ It's no longer neccessary to specify it in configuration.
 
 ```diff
 module: {
-  loaders: [
+  rules: [
     test: /.css$/,
 -    loader: ExtractTextPlugin.extract['css-loader']
 +    loader: ExtractTextPlugin.extract({
