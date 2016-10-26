@@ -2,6 +2,7 @@
 title: Introduction
 contributors:
   - TheLarkInn
+  - jhnns
 ---
 
 *webpack* is a _module bundler_ for modern JavaScript applications. It is [incredibly configurable](/configuration), however, there are **4 Core Concepts** we feel you should understand before you get started!
