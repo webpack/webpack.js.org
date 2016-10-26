@@ -71,7 +71,7 @@ modules.export = function(env) {
 
 On running `webpack` now, we see that two bundles have been created. If you inspect these though, you will find that the code for `moment` is present in both the files!
 
-It is for this reason, that we will need to use the [CommonsChunkPlugin](/configuration/plugins).
+It is for this reason, that we will need to use the [CommonsChunkPlugin](/plugins/commons-chunk-plugin).
 
 ## `CommonsChunkPlugin`
 
