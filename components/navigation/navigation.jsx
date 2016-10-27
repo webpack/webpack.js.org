@@ -5,12 +5,22 @@ import Logo from '../logo/logo';
 import './navigation-style';
 
 export default class Navigation extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      searchMode: false
+    };
+  }
+
   render() {
     let { pageUrl, sections } = this.props;
     let isIndex = pageUrl === '/index';
+    let transparentClass = isIndex ? 'navigation--transparent' : '';
+    let searchClass = this.state.searchMode ? 'navigation--search-mode' : '';
     
     return (
-      <header className={ `navigation ${isIndex ? 'navigation--transparent' : ''}` }>
+      <header className={ `navigation ${transparentClass} ${searchClass}` }>
         <Container className="navigation__inner">
           <div className="navigation__mobile" onClick={ this._toggleSidebar }>
             <i className="icon-menu" />
@@ -37,19 +47,47 @@ export default class Navigation extends React.Component {
               })
             }
 
-            <Link className={ 'navigation__link' } to={ '//opencollective.com/webpack' }>
+            <Link className="navigation__link" to={ '//opencollective.com/webpack' }>
               Donate
             </Link>
           </nav>
+
+          <div className="navigation__search">
+            <input 
+              type="text" 
+              className="navigation__search-input"
+              placeholder="Coming soon..." />
+            <span 
+              className="navigation__search-icon"
+              onClick={ this._toggleSearch.bind(this) }>
+              &#9906;
+            </span>
+          </div>
         </Container>
       </header>
     );
   }
 
+  /**
+   * Toggle the SidebarMobile component
+   * 
+   * @param {object} e - Native click event
+   */
   _toggleSidebar(e) {
     let sidebar = document.querySelector('.sidebar-mobile');
     let modifier = 'sidebar-mobile--visible';
 
     sidebar.classList.toggle(modifier);
+  }
+
+  /**
+   * Toggle search mode
+   * 
+   * @param {object} e - Native click event
+   */
+  _toggleSearch(e) {
+    this.setState({
+      searchMode: !this.state.searchMode
+    });
   }
 }
