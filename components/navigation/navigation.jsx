@@ -56,10 +56,13 @@ export default class Navigation extends React.Component {
             <input 
               type="text" 
               className="navigation__search-input"
-              placeholder="Coming soon..." />
+              placeholder="Coming soon..."
+              onFocus={ this._toggleSearch.bind(this, true) }
+              onChange={ this._handleSearch.bind(this) } />
             <span 
               className="navigation__search-icon"
-              onClick={ this._toggleSearch.bind(this) }>
+              ref={ ref => this.input = ref }
+              onClick={ this._toggleSearch.bind(this, !this.state.searchMode) }>
               &#9906;
             </span>
           </div>
@@ -83,11 +86,26 @@ export default class Navigation extends React.Component {
   /**
    * Toggle search mode
    * 
-   * @param {object} e - Native click event
+   * @param {boolean} state - True/false or null to toggle
    */
-  _toggleSearch(e) {
+  _toggleSearch(state) {
     this.setState({
-      searchMode: !this.state.searchMode
+      searchMode: state
     });
+  }
+
+  /**
+   * Handle searching
+   * 
+   * @param {object} - Native click event
+   */
+  _handleSearch(e) {
+    window.dispatchEvent(
+      new CustomEvent('search', {
+        detail: {
+          text: e.target.value
+        }
+      })
+    );
   }
 }

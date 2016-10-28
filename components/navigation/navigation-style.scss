@@ -73,6 +73,7 @@
 
 .navigation__link {
   @include break {
+    display:inline-block;
     font-size: getFontSize(-1);
     text-transform: uppercase;
     color: map-get($colors, dusty-grey);
@@ -99,19 +100,36 @@
 }
 
 .navigation__search {
-  display:flex;
   flex:0 0 auto;
+  display:flex;
   padding:0.8em 0;
   justify-content:flex-end;
 
   &-input {
+    font-family:'Cabin', 'Century Gothic', sans-serif;
+    font-size:14px;
+    text-indent:0.5em;
     width:0;
     background:transparent;
     border:none;
     padding:0;
     border-bottom:1px solid map-get($colors, emperor);
     margin-right:0;
+    box-shadow:none;
     transition:all 250ms;
+    color: map-get($colors, white);
+    text-shadow: 0 0 0 map-get($colors, concrete);
+    -webkit-text-fill-color: transparent;
+
+    &:focus {
+      outline:none;
+    }
+
+    &::-webkit-input-placeholder{
+      color:map-get($colors, dove-grey);
+      text-shadow: none;
+      -webkit-text-fill-color: initial;
+    }
   }
 
   &-icon {
@@ -131,9 +149,11 @@
 
 .navigation--search-mode {
   .navigation__link {
-    font-size:0;
+    pointer-events:none;
+    overflow:hidden;
+    white-space:nowrap;
+    padding:1.5em 0;
     opacity:0;
-    visibility:none;
   }
 
   .navigation__search-input {
