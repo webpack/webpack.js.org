@@ -1,0 +1,22 @@
+@import 'vars';
+
+.search-results {
+  position:relative;
+
+  &__inner {
+    position:absolute;
+    top:0;
+    right:0;
+    width:500px;
+    height:0;
+    z-index:5;
+    background:map-get($colors, white);
+    transition:all 250ms;
+  }
+
+  &--visible {
+    .search-results__inner {
+      height:350px;
+    }
+  }
+}
