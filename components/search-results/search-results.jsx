@@ -7,6 +7,7 @@ export default class SearchResults extends React.Component {
     super(props);
 
     this._handleSearch = this._handleSearch.bind(this);
+    this._handleBodyClick = this._handleBodyClick.bind(this);
     this.state = {
       visible: false,
       results: []
@@ -18,7 +19,7 @@ export default class SearchResults extends React.Component {
 
     return (
       <Container className={ `search-results ${visibleClass}` }>
-        <div className="search-results__inner">
+        <div className="search-results__inner" ref={ ref => this.container = ref }>
 
         </div>
       </Container>
@@ -27,12 +28,19 @@ export default class SearchResults extends React.Component {
 
   componentDidMount() {
     window.addEventListener('search', this._handleSearch);
+    window.addEventListener('click', this._handleBodyClick);
   }
 
   componentWillUnmount() {
     window.removeEventListener('search', this._handleSearch);
+    window.removeEventListener('click', this._handleBodyClick);
   }
 
+  /**
+   * Fetch and display search results
+   * 
+   * @param {object} e - Custom search event
+   */
   _handleSearch(e) {
     let { text = '' } = e.detail;
 
@@ -40,8 +48,22 @@ export default class SearchResults extends React.Component {
       if (!this.state.visible) this.setState({ visible: true });
       // TODO: Get search results
 
-    } else {
-      this.setState({ visible: false });
+    } else this.setState({ visible: false });
+  }
+
+  /**
+   * Hide the results on outer clicks
+   * 
+   * @param {object} e - Native click event
+   */
+  _handleBodyClick(e) {
+    if (this.state.visible) {
+      if (
+        !e.target.classList.contains('navigation__search-input') &&
+        !this.container.contains(e.target)
+      ) {
+        this.setState({ visible: false });
+      }
     }
   }
 }
