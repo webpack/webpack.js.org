@@ -58,11 +58,10 @@ export default class Navigation extends React.Component {
               type="text" 
               className="navigation__search-input"
               placeholder="Coming soon..."
-              onFocus={ this._toggleSearch.bind(this, true) }
+              onFocus={ this._handleFocus.bind(this) }
               onChange={ this._handleSearch.bind(this) } />
             <span 
               className="navigation__search-icon"
-              ref={ ref => this.input = ref }
               onClick={ this._toggleSearch.bind(this, !this.state.searchMode) }>
               &#9906;
             </span>
@@ -93,6 +92,19 @@ export default class Navigation extends React.Component {
     this.setState({
       searchMode: state
     });
+  }
+
+  /**
+   * Handle focus events on the search input
+   * 
+   * @param {object} e - Native focus event
+   */
+  _handleFocus(e) {
+    this._toggleSearch(true);
+
+    if (e.target.value.length) {
+      this._handleSearch(e);
+    }
   }
 
   /**
