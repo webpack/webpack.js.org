@@ -1,4 +1,5 @@
 import React from 'react';
+import CustomEvent from 'custom-event';
 import Link from '../link/link';
 import Container from '../container/container';
 import Logo from '../logo/logo';
