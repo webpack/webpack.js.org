@@ -60,11 +60,11 @@ export default class Navigation extends React.Component {
               placeholder="Coming soon..."
               onFocus={ this._handleFocus.bind(this) }
               onChange={ this._handleSearch.bind(this) } />
-            <span 
+            <button 
               className="navigation__search-icon"
               onClick={ this._toggleSearch.bind(this, !this.state.searchMode) }>
               &#9906;
-            </span>
+            </button>
           </div>
         </Container>
       </header>

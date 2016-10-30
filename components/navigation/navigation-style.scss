@@ -126,10 +126,6 @@
       -webkit-text-fill-color: transparent;
       transition:all 250ms;
 
-      &:focus {
-        outline:none;
-      }
-
       &::-webkit-input-placeholder{
         color:map-get($colors, dove-grey);
         text-shadow: none;
@@ -144,11 +140,19 @@
       font-weight:800;
       color:map-get($colors, dusty-grey);
       cursor:pointer;
+      background:transparent;
+      padding:0;
+      border:none;
       transition:color 250ms;
 
       &:hover {
         color:map-get($colors, white);
       }
+    }
+
+    &-input:focus,
+    &-icon:focus {
+      outline:none;
     }
   }
 }
