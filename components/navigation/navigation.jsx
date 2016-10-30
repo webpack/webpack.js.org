@@ -57,6 +57,7 @@ export default class Navigation extends React.Component {
             <input 
               type="text" 
               className="navigation__search-input"
+              ref={ ref => this.searchInput = ref }
               placeholder="Coming soon..."
               onFocus={ this._handleFocus.bind(this) }
               onChange={ this._handleSearch.bind(this) } />
@@ -91,6 +92,8 @@ export default class Navigation extends React.Component {
   _toggleSearch(state) {
     this.setState({
       searchMode: state
+    }, () => {
+      if (state) this.searchInput.focus();
     });
   }
 
