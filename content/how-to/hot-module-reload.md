@@ -2,6 +2,7 @@
 title: 如何配置 HMR 热重载？
 contributors:
   - jmreidy
+  - jhnns
 ---
 
 Hot Module Replacement (HMR) exchanges, adds, or removes modules while an
@@ -116,14 +117,14 @@ module.exports = env => {
       loaders: [
         { test: /\.js$/,
           loaders: [
-            'babel',
+            'babel-loader',
           ],
           exclude: /node_modules/
         },
         {
           test: /\.css$/,
           loaders: [
-            'style',
+            'style-loader',
             'css-loader?modules',
             'postcss-loader',
           ],

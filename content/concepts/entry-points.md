@@ -5,6 +5,7 @@ contributors:
   - dear-lizhihua
 ---
 
+Like we mentioned in the [introduction](./), there are multiple ways to define the `entry` property in your webpack configuration. We will show you the ways you **can** configure the `entry` property, in addition to explaining why it may be useful to you.
 正如我们在[介绍](./)中提到的，在 webpack 配置中有多种方式定义 `entry` 属性。除了解释为什么它可能对你有用，我们还将向你展示如何**能够**配置 `entry` 属性。
 
 ## 单入口（简写）语法
@@ -73,7 +74,7 @@ const config = {
 
 **是什么？**从表面上看，这告诉我们 webpack 从 `app.js` 和 `vendors.js` 开始创建依赖图表(dependency graph)。这些图表是完全分离、互相独立的（每个 bundle 中都有一个 webpack 引导(bootstrap)）。在只有一个入口点（不包括公共库）的单页应用中比较常见。
 
-**为什么？**此设置允许你使用`CommonsChunkPlugin`并从 app 包 提取 公共引用(vendor reference) 到 vendor 包，并把公共引用的部分替换为 `__webpack_require__()` 调用。如果应用包中了没有公共代码，那么你可以在 webpack 中实现被称为 [持久缓存](/how-to/cache) 的通用模式。
+**为什么？**此设置允许你使用`CommonsChunkPlugin`并从 app 包 提取 公共引用(vendor reference) 到 vendor 包，并把公共引用的部分替换为 `__webpack_require__()` 调用。如果应用包中了没有公共代码，那么你可以在 webpack 中实现被称为 [长效缓存](/how-to/cache) 的通用模式。
 
 #### 多页应用
 
@@ -96,4 +97,4 @@ const config = {
 
 - 使用 `CommonsChunkPlugin` 在每个页面间创建 应用共享代码 的 包文件(bundle)。由于入口点增多，多页应用能够在入口点重用大量代码/模块，这样可以极大的从这些新技术受益。
 
-- 使用在第一个示例中相同的插件和技术设置[持久缓存](/how-to/cache)
+- 使用在第一个示例中相同的插件和技术设置[长效缓存](/how-to/cache)

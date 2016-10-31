@@ -3,6 +3,7 @@ title: 插件
 sort: 3
 contributors:
   - TheLarkInn
+  - jhnns
   - dear-lizhihua
 ---
 

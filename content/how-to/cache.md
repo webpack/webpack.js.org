@@ -61,7 +61,7 @@ But the problem here is that, *each* time we create a new build, all filenames w
 
 What if we could produce the same filename if the contents of the file did not change between builds? For example, the file where we put all our libraries and other vendor stuff does not change that often.
 
-T> Separate your vendor and application code with [CommonsChunkPlugin](https://webpack.github.io/docs/list-of-plugins.html#2-explicit-vendor-chunk) and create an explicit vendor chunk to prevent it from changing too often.
+T> Separate your vendor and application code with [CommonsChunkPlugin](/plugins/commons-chunk-plugin) and create an explicit vendor chunk to prevent it from changing too often.
 
 Webpack allows you to generate hashes depending on the file contents. Here is the updated config:
 

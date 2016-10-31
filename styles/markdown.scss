@@ -135,6 +135,10 @@
         text-align: left;
         margin: 0;
         padding: 6px 13px;
+
+        img {
+          max-width:none;
+        }
       }
 
       th, td {

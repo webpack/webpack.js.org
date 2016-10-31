@@ -12,6 +12,7 @@ export default (props) => {
           <Link className="footer__link" to="/get-started">起步</Link>
           <Link className="footer__link" to="/analyze">分析</Link>
           <Link className="footer__link" to="/contribute">贡献</Link>
+          <Link className="footer__link" to="/comparison">比较</Link>
         </section>
 
         <section className="footer__middle">

@@ -2,6 +2,7 @@
 title: 如何基于 React 设置热重载？
 contributors:
   - jmreidy
+  - jhnns
 ---
 Hot Module Replacement (HMR) exchanges, adds, or removes modules while an
 application is running without a page reload.
@@ -110,14 +111,14 @@ module.exports = env => {
       loaders: [
         { test: /\.js$/,
           loaders: [
-            'babel',
+            'babel-loader',
           ],
           exclude: /node_modules/
         },
         {
           test: /\.css$/,
           loaders: [
-            'style',
+            'style-loader',
             'css-loader?modules',
             'postcss-loader',
           ],
