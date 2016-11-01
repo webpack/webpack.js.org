@@ -263,7 +263,7 @@ function onClick() {
 
 Good news: Failure to load a chunk can be handled now because they are `Promise` based.
 
-Caveat: `react.ensure` allows for easy chunk naming with the optional third argument, but `System.import` API doesn't offer that capability. If you want to keep that functionality, you can continue using `react.ensure`.
+Caveat: `require.ensure` allows for easy chunk naming with the optional third argument, but `System.import` API doesn't offer that capability. If you want to keep that functionality, you can continue using `require.ensure`.
 
 ```javascript
 require.ensure([], function(require) {
