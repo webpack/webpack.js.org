@@ -11,7 +11,7 @@ As part of your webpack learning journey, we wrote this document aimed to give y
 
 ## Entry
 
-webpack creates a graph of all of your application's dependencies. The starting point of this graph is known as an _entry point_. The _Entry point_ tells webpack _where to start_ and follows the graph of dependencies to know _what to bundle_. You can think of your applications _entry point_ as the **contextual root** or **the first file to kick off your app**.
+webpack creates a graph of all of your application's dependencies. The starting point of this graph is known as an _entry point_. The _entry point_ tells webpack _where to start_ and follows the graph of dependencies to know _what to bundle_. You can think of your application's _entry point_ as the **contextual root** or **the first file to kick off your app**.
 
 In webpack we define _entry points_ using the `entry` property in our [webpack configuration object](/configuration).
 
@@ -27,7 +27,7 @@ const config = {
 module.exports = config;
 ```
 
-There are multiple ways to declare your `entry` property that are specific to your applications needs.
+There are multiple ways to declare your `entry` property that are specific to your application's needs.
 
 [**Learn more!**](/concepts/entry-points)
 
@@ -51,16 +51,16 @@ In the example above, through the `output.filename` and `output.path` properties
 
 T> You may see the term **emitted** or **emit** used throughout our documentation and [plugin API](/api/plugins). This is a fancy term for "produced or discharged".
 
-The `output` property has [many more configurable features](/configuration), but lets spend some time understanding some of the most common use cases for the `output` property.
+The `output` property has [many more configurable features](/configuration), but let's spend some time understanding some of the most common use cases for the `output` property.
 
 [**Learn more!**](/concepts/output)
 
 
 ## Loaders
 
-The goal is to have all of your assets in your project to be **webpack's** concern and not the browser. (This doesn't mean that they all have to be bundled together). webpack treats [every file (.css, .html, .scss, .jpg, etc.) as a module](/concepts/modules). However, webpack **only understands JavaScript**.
+The goal is to have all of the assets in your project to be **webpack's** concern and not the browser's. (This doesn't mean that they all have to be bundled together). webpack treats [every file (.css, .html, .scss, .jpg, etc.) as a module](/concepts/modules). However, webpack **only understands JavaScript**.
 
-**Loaders tell webpack _how to treat these files as modules_ as they are added to your dependency graph.**
+**Loaders in webpack _transform these files into modules_ as they are added to your dependency graph.**
 
 At a high level, they have two purposes in your webpack config.
 
@@ -84,9 +84,9 @@ const config = {
 };
 ```
 
-In the configuration above we have defined our loader with its two required properties: `test`, and `loader`. It tells webpack's compiler the following:
+In the configuration above we have defined our loader with it's two required properties: `test`, and `loader`. This tells webpack's compiler the following:
 
-> "Hey webpack compiler, when you come across a path that resolves to a '.js' or '.jsx' file inside of a require() statement, use the babel-loader to transform it before you bundle it together".
+> "Hey webpack compiler, when you come across a path that resolves to a '.js' or '.jsx' file inside of a `require()`/`import` statement, use the `babel-loader` to transform it before you add it to the bundle".
 
 W> It is important to remember when defining loaders in your webpack config, you are defining them under `module.loaders`, and not `loaders`.
 
@@ -96,9 +96,9 @@ There are more specific properties to define on loaders that we haven't yet cove
 
 ## Plugins
 
-Since Loaders only execute transforms on a per-file basis, Plugins are most commonly used (but not limited to) performing actions and custom functionality on "compilations" or "chunks" of your bundled modules [(and so much more)](/concepts/plugins). The webpack Plugin system is [extremely powerful and customizable](/api/plugins).
+Since Loaders only execute transforms on a per-file basis, `plugins` are most commonly used (but not limited to) performing actions and custom functionality on "compilations" or "chunks" of your bundled modules [(and so much more)](/concepts/plugins). The webpack Plugin system is [extremely powerful and customizable](/api/plugins).
 
-In order to use a plugin, you just need to `require()` it and add it to the `plugins` array. Since most plugins are customizable via options, you need to create an instance of it by calling it with `new`.
+In order to use a plugin, you just need to `require()` it and add it to the `plugins` array. Most plugins are customizable via options. Since you can use a plugin multiple times in a config for different purposes, you need to create an instance of it by calling it with `new`.
 
 **webpack.config.js**
 
@@ -126,7 +126,7 @@ const config = {
 module.exports = config;
 ```
 
-There are many plugins that webpack provides out of the box! Check out our [list of plugins](https://webpack.github.io/docs/list-of-plugins.html) for more information.
+There are many plugins that webpack provides out of the box! Check out our [list of plugins](/plugins) for more information.
 
 Using plugins in your webpack config is straight-forward, however there are many use-cases that are worth discussing further.
 
