@@ -20,9 +20,11 @@ T> Often webpack users use npm `scripts` as their task runner. This is a good st
 
 T> Even though webpack core focuses on bundling, you can find a variety of extensions that allow you to use it in a task runner kind of way.
 
-## Getting Started
+## Prerequisites
 
-W> Before getting started, make sure you have a fresh version of [Node.js](https://nodejs.org/en/) installed. The current LTS is an ideal starting point. You may run into a variety of issues with the older versions as they may be missing functionality webpack or related packages might need.
+Before getting started, make sure you have a fresh version of [Node.js](https://nodejs.org/en/) installed. The current LTS is an ideal starting point. You may run into a variety of issues with the older versions as they may be missing functionality webpack or related packages might need.
+
+## Getting Started
 
 Although it is possible to install webpack globally, it is a good practice to maintain it as a *development dependency* of your project. This way you can control the version and have something that works also in a *Continuous Integration* environment. The problem with global dependencies is that they may lead to hard to debug issues.
 
