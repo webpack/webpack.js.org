@@ -9,6 +9,7 @@
     <% for (var file in webpackConfig.template.cssFiles) { %>
       <link href="<%= webpackConfig.template.cssFiles[file] %>" rel="stylesheet">
     <% } %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
   </head>
   <body>
     <%- webpackConfig.html %>
@@ -23,5 +24,6 @@
       };
     </script>
     <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
   </body>
 </html>

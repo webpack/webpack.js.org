@@ -14,6 +14,14 @@ export default class Navigation extends React.Component {
     };
   }
 
+  componentDidMount() {
+    window.docsearch({
+      apiKey: 'fac401d1a5f68bc41f01fb6261661490',
+      indexName: 'webpack-js-org',
+      inputSelector: '.navigation__search-input'
+    });
+  }
+
   render() {
     let { pageUrl, sections } = this.props;
     let isIndex = pageUrl === '/index';
