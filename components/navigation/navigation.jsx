@@ -66,7 +66,7 @@ export default class Navigation extends React.Component {
               type="text" 
               className="navigation__search-input"
               ref={ ref => this.searchInput = ref }
-              placeholder="Coming soon..."
+              placeholder="Search the docs..."
               onFocus={ this._handleFocus.bind(this) }
               onChange={ this._handleSearch.bind(this) } />
             <button 
