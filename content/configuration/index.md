@@ -137,7 +137,9 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
         [enforce](/configuration/module#rule-enforce): "post",
         // apply these rule even if rules are overridden (advanced option)
 
-        [loader](/configuration/module#rule-loader): "babel-loader",
+        <details><summary>[loader](/configuration/module#rule-loader): "babel-loader",</summary>
+        [loader](/configuration/module#rule-loader): "babel", // automatically resolves to babel-loader
+        </details>
         // the loader which should be applied, it'll be resolve relative to the context
 
         [options](/configuration/module#rule-options-rule-query): {
