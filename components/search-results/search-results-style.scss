@@ -1,0 +1,24 @@
+@import 'vars';
+
+.search-results {
+  position:relative;
+
+  &__inner {
+    position:absolute;
+    width:500px;
+    height:0;
+    padding:0 1.5em;
+    top:0;
+    right:0;
+    z-index:5;
+    background:map-get($colors, concrete);
+    transition:all 250ms;
+  }
+
+  &--visible {
+    .search-results__inner {
+      height:350px;
+      padding:1.5em;
+    }
+  }
+}
