@@ -3,6 +3,7 @@ title: Configuration
 contributors:
   - sokra
   - skipjack
+  - grgur
 ---
 
 Webpack is fed a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
@@ -139,6 +140,8 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 
         [loader](/configuration/module#rule-loader): "babel-loader",
         // the loader which should be applied, it'll be resolve relative to the context
+        // -loader suffix is no longer optional in Webpack 2 for clarity reasons
+        // Webpack 1 upgrade guide: https://webpack.js.org/how-to/upgrade-from-webpack-1/
 
         [options](/configuration/module#rule-options-rule-query): {
           presets: ["es2015"]
