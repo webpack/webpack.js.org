@@ -278,15 +278,16 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
     </details>
   },
 
-  <details><summary>[devtool](/configuration/devtool): "source-map", // enum</summary>
+  <details><summary>[devtool](/configuration/devtool): "source-map", // enum </summary>
   [devtool](/configuration/devtool): "inline-source-map", // inlines SourceMap into orginal file
   [devtool](/configuration/devtool): "eval-source-map", // inlines SourceMap per module
   [devtool](/configuration/devtool): "hidden-source-map", // SourceMap without reference in original file
   [devtool](/configuration/devtool): "cheap-source-map", // cheap-variant of SourceMap without module mappings
   [devtool](/configuration/devtool): "cheap-module-source-map", // cheap-variant of SourceMap with module mappings
-  [devtool](/configuration/devtool): "eval", // no SourceMap, but named modules
+  [devtool](/configuration/devtool): "eval", // no SourceMap, but named modules. Fastest at the expense of detail. 
   </details>
   // enhance debugging by adding meta info for the browser devtools
+  // source-map most detailed at the expense of build speed.
 
   [context](/configuration/entry-context#context): __dirname, // string (absolute path!)
   // the home directory for webpack
