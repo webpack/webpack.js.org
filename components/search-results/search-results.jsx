@@ -42,13 +42,6 @@ export default class SearchResults extends React.Component {
    * @param {object} e - Custom search event
    */
   _handleSearch(e) {
-    let { text = '' } = e.detail;
-
-    if (text.length) {
-      if (!this.state.visible) this.setState({ visible: true });
-      // TODO: Get search results
-
-    } else this.setState({ visible: false });
   }
 
   /**
