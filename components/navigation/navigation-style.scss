@@ -154,6 +154,10 @@
     &-icon:focus {
       outline:none;
     }
+
+    .algolia-autocomplete {
+      display: flex !important;
+    }
   }
 }
 
