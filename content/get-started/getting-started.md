@@ -2,29 +2,13 @@
 title: Get Started with Webpack
 contributors:
   - bebraw
+sort: 3
 ---
 
 ## Getting Started
 
-Although it is possible to install webpack globally, it is a good practice to maintain it as a *development dependency* of your project. This way you can control the version and have something that works also in a *Continuous Integration* environment. The problem with global dependencies is that they may lead to hard to debug issues.
-
-As a first step, set up a demo project:
-
-```bash
-mkdir webpack-demo -- Create a new directory
-cd webpack-demo -- Access the directory
-npm init -y -- Initialize the project
-```
-
-After this process you should have a directory that contains a *package.json* file. That is where we maintain our project dependencies and in this case tasks as well.
-
-To get webpack installed, invoke:
-
-```bash
-npm i webpack -D -- Install webpack as a development dependency
-```
-
-Once it has installed, you should see a new directory, *node_modules*. In addition to webpack, it will contain quite a few of other packages. If you check out *package.json* at the project root, you should see webpack as a development dependency to your project (the `devDependencies` section).
+webpack is a tool to build javascript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/get-started/install-webpack).
+webpack simplifies your workflow by quickly constructing a dependency graph of your application and bundling them in the right order. webpack can be configured to customise optimisations to your code, to split vendor/css/js code for production, have a hot reloaded dev server and many such cool features. Learn more about [why you should use webpack](/get-started/why-webpack).
 
 ## Running webpack
 
