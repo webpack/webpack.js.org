@@ -10,18 +10,119 @@ sort: 3
 webpack is a tool to build javascript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/get-started/install-webpack).
 webpack simplifies your workflow by quickly constructing a dependency graph of your application and bundling them in the right order. webpack can be configured to customise optimisations to your code, to split vendor/css/js code for production, have a hot reloaded dev server and many such cool features. Learn more about [why you should use webpack](/get-started/why-webpack).
 
-## Running webpack
+## Creating a bundle
 
-To prove that webpack works, we can try to running it through terminal. Try this:
+Create a demo directory to try out webpack. [Install webpack](/get-started/install-webpack).
 
 ```bash
-npm bin -- Figure out npm bin directory
-node_modules/.bin/webpack -- Execute webpack
+mkdir webpack-demo && cd webpack-demo
+npm init -y
+npm install --save-dev webpack
+webpack --help //Shows a list of valid cli commands
+npm install --save lodash
 ```
 
-Assuming you found the bin directory and ran webpack successfully, you should see quite a bit of information including webpack version, link to the usage guide, and available flags.
+Now create an `index.js` file.
 
-Given it's not particularly fun to run webpack this way, we can set up a little shortcut. Adjust *package.json* like this:
+```javascript
+import _ from 'lodash';
+
+function component () {
+  var element = document.createElement('div');
+
+  element.innerHTML = _.map(['Hello','webpack'], function(item){
+    return item + ' ';
+  });
+
+  return element;
+};
+
+document.body.appendChild(component());
+```
+
+To run this piece of code, one usually has the below html
+
+```html
+<html>
+  <head>
+      <title>Webpack demo</title>
+      <script src='https://unpkg.com/lodash@4.16.6' type='text/javascript'/>
+      <script src='index.js' type='text/javascript'/> 
+  </head>
+  <body>
+  </body>
+</html>
+```
+
+Now run `webpack` on this folder with the entry file to be `index.js` and to output a `bundle.js` file which bundles all the code required for the page.
+
+```bash
+webpack --entry index.js --output bundle.js
+
+Hash: a3c861a7d42fc8944524
+Version: webpack 2.2.0
+Time: 90ms
+   Asset     Size  Chunks             Chunk Names
+index.js  1.56 kB       0  [emitted]  main
+   [0] ./app/index.js 170 bytes {0} [built]
+
+```
+
+Now modify the index.html as
+
+```diff
+<html>
+  <head>
+      <title>Webpack demo</title>
+-      <script src='https://unpkg.com/lodash@4.16.6' type='text/javascript'/>
+-      <script src='index.js' type='text/javascript'/>
++      <script src='bundle.js' type='text/javascript'/>
+  </head>
+  <body>
+    <div id='root'></div>
+  </body>
+</html>
+```
+
+If not for webpack, you would have to manage the order of loading for your files ie load `lodash` first and then `index.js` and any other client code in that order.
+By including a single `bundle.js` gets rid of these complexities.
+
+## Using webpack with a config
+
+For more complex configuration, we can use a configuration file that webpack can reference to bundle your code.
+The above CLI command would be represented in config as follows -
+
+__webpack.config.js__
+```javascript
+module.exports = function(env){
+  return {
+    entry: 'index.js'
+    output: {
+      filename: 'bundle.js'
+    }
+  }
+}
+```
+
+This file can be run by webpack as
+
+```bash
+webpack --config webpack.config.js
+
+Hash: a3c861a7d42fc8944524
+Version: webpack 2.2.0
+Time: 90ms
+   Asset     Size  Chunks             Chunk Names
+index.js  1.56 kB       0  [emitted]  main
+   [0] ./app/index.js 170 bytes {0} [built]
+
+```
+
+The config file allows for all the flexibility in using webpack. We can add loaders, plugins, resolve options and many other enhancements to our bundles using this configuration file.
+
+## Using webpack with npm
+
+Given it's not particularly fun to run webpack from the CLI this way, we can set up a little shortcut. Adjust *package.json* like this:
 
 ```json
 {
@@ -35,69 +136,7 @@ Given it's not particularly fun to run webpack this way, we can set up a little 
 
 You can now achieve the same as above by using `npm run build` command. npm picks up the scripts through it and patches the environment temporarily so that it contains the bin commands. You will see this convention a lot of projects out there.
 
-webpack doesn't do anything useful yet, but we can fix that next by adding some files to the project and then bundling them.
-
 T> I use `webpack --` so that we can pass custom parameters to webpack through npm.
-
-## Bundling with webpack
-
-To keep it simple, create an entry point to the application like this:
-
-**app/index.js**
-
-```javascript
-function component () {
-  var element = document.createElement('h1');
-
-  element.innerHTML = 'Hello world';
-
-  return element;
-};
-
-document.body.appendChild(component());
-```
-
-To build it, invoke `npm run build -- app build/index.js`. As a result you should see something like this in the terminal:
-
-```bash
-Hash: a3c861a7d42fc8944524
-Version: webpack 2.2.0
-Time: 90ms
-   Asset     Size  Chunks             Chunk Names
-index.js  1.56 kB       0  [emitted]  main
-   [0] ./app/index.js 170 bytes {0} [built]
-```
-
-If you check out the *build* directory, it should contain the built file. It contains some familiar code from above, but in addition it contains webpack bootstrapping code. That code makes more sense as you add dependencies to your project.
-
-T> Try adding another file to your project and point to it from *app/index.js* using either a CommonJS `require` or ES6 `import` statement. webpack should pick it up and include it to your bundle.
-
-## Setting Up Configuration
-
-Given you'll run into the limits of the CLI interface quite fast, most projects contain a specific configuration file normally named as *webpack.config.js*. We can handle configuration related concerns there. To achieve the same as above without the CLI portion, you could write configuration like this:
-
-**webpack.config.js**
-
-```javascript
-const path = require('path');
-
-const PATHS = {
-  app: path.join(__dirname, 'app'),
-  build: path.join(__dirname, 'build')
-};
-
-module.exports = {
-  entry: {
-    app: PATHS.app
-  },
-  output: {
-    path: PATHS.build,
-    filename: 'index.js' // Try also [name].js
-  }
-};
-```
-
-If you run `npm run build` now, you should get the same result. Even though this is more verbose than the earlier solution, we can begin to untap the power of webpack now by adding loaders and plugins.
 
 ## Conclusion
 
