@@ -3,6 +3,7 @@ title: 配置
 contributors:
   - sokra
   - skipjack
+  - grgur
   - dear-lizhihua
 ---
 
@@ -140,6 +141,8 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
 
         [loader](/configuration/module#rule-loader): "babel-loader",
         // 应该应用的 loader，它相对上下文解析
+        // 为了更清晰，`-loader` 后缀在 Webpack 2 中不再是可选的
+        // 查看 [webpack 1 升级指南](/how-to/upgrade-from-webpack-1)。
 
         [options](/configuration/module#rule-options-rule-query): {
           presets: ["es2015"]
@@ -285,9 +288,10 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
   [devtool](/configuration/devtool): "hidden-source-map", // SourceMap 不在源文件中引用
   [devtool](/configuration/devtool): "cheap-source-map", // 没有模块映射(module mappings)的 SourceMap 低级变体(cheap-variant)
   [devtool](/configuration/devtool): "cheap-module-source-map", // 有模块映射(module mappings)的 SourceMap 低级变体(cheap-variant)
-  [devtool](/configuration/devtool): "eval", // 没有模块映射，而是命名模块
+  [devtool](/configuration/devtool): "eval", // 没有模块映射，而是命名模块。以牺牲细节达到最快。
   </details>
   // 通过在浏览器调试工具(browser devtools)中添加元信息(meta info)增强调试
+  // 牺牲了构建速度的 `source-map' 是最详细的。
 
   [context](/configuration/entry-context#context): __dirname, // string（绝对路径！）
   // webpack 的主目录

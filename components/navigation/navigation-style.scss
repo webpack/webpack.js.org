@@ -36,10 +36,6 @@
   @include break {
     padding:0 1.5em;
   }
-
-  @include break('large') {
-    padding:0 0 0 1.5em;
-  }
 }
 
 .navigation__mobile {
@@ -73,33 +69,108 @@
     align-items: center;
     justify-content: flex-end;
   }
-
-  @include break('large') {
-    padding-right:0;
-  }
 }
 
 .navigation__link {
   @include break {
+    display:inline-block;
     font-size: getFontSize(-1);
     text-transform: uppercase;
     color: map-get($colors, dusty-grey);
     transition:all 250ms;
-    padding:1.75em 0;
-    margin-left:1.5em;
+    padding:1.5em 0.75em;
+
+    &:last-child {
+      margin-right:0.75em;
+    }
   }
 
   @include break('large') {
     padding:1.5em;
-    margin-left:0;
-
-    &--active {
-      background: map-get($colors, emperor);
-    }
   }
 
   &:hover,
   &--active {
     color: map-get($colors, white);
+  }
+
+  &--active {
+    background: map-get($colors, emperor);
+  }
+}
+
+.navigation__search {
+  display:none;
+}
+
+@include break {
+  .navigation__search {
+    flex:0 0 auto;
+    display:flex;
+    justify-content:flex-end;
+    padding:0.8em 0;
+
+    &-input {
+      padding:0;
+      border:none;
+      background:transparent;
+
+      width:0;
+      font-size:14px;
+      font-family:'Cabin', 'Century Gothic', sans-serif;
+      text-indent:0.5em;
+      border-bottom:1px solid map-get($colors, emperor);
+      margin-right:0;
+      color: map-get($colors, white);
+      text-shadow: 0 0 0 map-get($colors, concrete);
+      -webkit-text-fill-color: transparent;
+      transition:all 250ms;
+
+      &::-webkit-input-placeholder{
+        color:map-get($colors, dove-grey);
+        text-shadow: none;
+        -webkit-text-fill-color: initial;
+      }
+    }
+
+    &-icon {
+      display:inline-block;
+      font-size:getFontSize(1);
+      transform:rotate(-45deg);
+      font-weight:800;
+      color:map-get($colors, dusty-grey);
+      cursor:pointer;
+      background:transparent;
+      padding:0;
+      border:none;
+      transition:color 250ms;
+
+      &:hover {
+        color:map-get($colors, white);
+      }
+    }
+
+    &-input:focus,
+    &-icon:focus {
+      outline:none;
+    }
+  }
+}
+
+@include break {
+  .navigation--search-mode {
+    .navigation__link {
+      pointer-events:none;
+      overflow:hidden;
+      white-space:nowrap;
+      padding:1.5em 0;
+      margin-right:-35px;
+      opacity:0;
+    }
+
+    .navigation__search-input {
+      margin-right:0.5em;
+      width:400px;
+    }
   }
 }

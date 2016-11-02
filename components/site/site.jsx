@@ -2,9 +2,10 @@ import React from 'react';
 import Interactive from 'antwar-interactive';
 import { GoogleAnalytics } from 'antwar-helpers';
 import Navigation from '../navigation/navigation';
-import SidebarMobile from '../sidebar-mobile/sidebar-mobile';
 import Sidecar from '../sidecar/sidecar';
 import Footer from '../footer/footer';
+import SidebarMobile from '../sidebar-mobile/sidebar-mobile';
+import SearchResults from '../search-results/search-results';
 import './site-style';
 
 export default props => {
@@ -19,7 +20,7 @@ export default props => {
       }))
     }));
 
-  // Rename the root section ("Webpack" => "Other") and pop it to the end
+  // Rename the root section ("Webpack" => "Other") and push it to the end
   let rootIndex = sections.findIndex(section => section.title === 'Webpack');
   let rootSection = sections.splice(rootIndex, 1)[0];
   rootSection.title = '其他';
@@ -37,6 +38,10 @@ export default props => {
         id="components/sidebar-mobile/sidebar-mobile.jsx"
         component={ SidebarMobile }
         sections={ sections } />
+
+      <Interactive
+        id="components/search-results/search-results.jsx"
+        component={ SearchResults } />
 
       <Sidecar />
       { props.children }

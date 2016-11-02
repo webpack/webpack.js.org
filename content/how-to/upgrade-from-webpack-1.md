@@ -3,6 +3,7 @@ title: 如何从 webpack1 升级？
 contributors:
   - sokra
   - jhnns
+  - grgur
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -261,6 +262,14 @@ function onClick() {
 ```
 
 Good news: Failure to load a chunk can be handled now because they are `Promise` based.
+
+Caveat: `require.ensure` allows for easy chunk naming with the optional third argument, but `System.import` API doesn't offer that capability. If you want to keep that functionality, you can continue using `require.ensure`.
+
+```javascript
+require.ensure([], function(require) {
+  var foo = require("./module");
+}, 'custom-chunk-name');
+```
 
 ### Dynamic expressions
 

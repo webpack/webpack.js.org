@@ -91,6 +91,7 @@
     "yaml-frontmatter-loader": "0.0.3"
   },
   "dependencies": {
+    "custom-event": "^1.0.1",
     "d3": "^4.2.7",
     "filesize": "^3.3.0",
     "preact": "^6.2.1",
