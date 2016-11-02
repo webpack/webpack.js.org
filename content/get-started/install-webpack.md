@@ -1,12 +1,13 @@
 ---
-title: How to Install webpack?
+title: Installation
 contributors:
   - pksjce
+  - bebraw
 ---
 
 ### Pre-requisites
 
-We assume you have `node` and `npm` already installed.
+Before getting started, make sure you have a fresh version of [Node.js](https://nodejs.org/en/) installed. The current LTS is an ideal starting point. You may run into a variety of issues with the older versions as they may be missing functionality webpack or related packages might need.
 
 ### Global Installation
 
