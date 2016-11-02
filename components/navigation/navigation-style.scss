@@ -18,12 +18,11 @@
       position:absolute;
     }
 
-    .navigation__link:hover {
+    .navigation__link:hover,
+    .navigation__mobile,
+    .navigation__search-input,
+    .navigation__search-icon:hover {
       color: map-get($colors, emperor);
-    }
-
-    .navigation__mobile {
-      color:map-get($colors, emperor);
     }
   }
 }
@@ -123,7 +122,6 @@
       margin-right:0;
       color: map-get($colors, white);
       text-shadow: 0 0 0 map-get($colors, concrete);
-      -webkit-text-fill-color: transparent;
       transition:all 250ms;
 
       &::-webkit-input-placeholder{
