@@ -2,9 +2,10 @@
 title: 组织
 contributors:
   - sokra
+  - dear-lizhihua
 ---
 
-A list of all commonly used projects in the webpack ecosystem. Ordered by npm downloads and github stars after that.
+webpack 生态系统中所有常用项目列表。下面根据 npm 下载次数和 github star 个数排序
 
 ``` stats
 webpack/memory-fs|memory-fs|sokra|Stable

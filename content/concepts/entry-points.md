@@ -5,7 +5,6 @@ contributors:
   - dear-lizhihua
 ---
 
-Like we mentioned in the [introduction](./), there are multiple ways to define the `entry` property in your webpack configuration. We will show you the ways you **can** configure the `entry` property, in addition to explaining why it may be useful to you.
 正如我们在[介绍](./)中提到的，在 webpack 配置中有多种方式定义 `entry` 属性。除了解释为什么它可能对你有用，我们还将向你展示如何**能够**配置 `entry` 属性。
 
 ## 单入口（简写）语法
