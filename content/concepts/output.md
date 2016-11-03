@@ -15,7 +15,7 @@ To set the `output` property, you simply set the output value in your webpack co
 
 ```javascript
 const config = {
-  output: 'blah'
+  output: 'bundle.js'
 };
 
 module.exports = config;
@@ -64,7 +64,7 @@ Enable line-to-line mapped mode for all/specified modules. Line-to-line mapped m
 
 An object `{test, include, exclude}` similar to `module.loaders` enables it for specific files.
 
-> Default: disabled
+> Default: `false`
 
 ### `output.filename`
 
