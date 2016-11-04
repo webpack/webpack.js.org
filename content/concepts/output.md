@@ -17,7 +17,7 @@ contributors:
 
 ```javascript
 const config = {
-  output: 'blah'
+  output: 'bundle.js'
 };
 
 module.exports = config;
@@ -66,7 +66,7 @@ module.exports = config;
 
 `{test, include, exclude}`对象 在特定文件启用（类似于 `module.loaders`）。
 
-> 默认值：disabled
+> 默认值：`false`
 
 ### `output.filename`
 
