@@ -40,7 +40,7 @@ export default class SplashViz extends React.Component {
         </div>
 
         <div className="splash-viz__headline">
-          Who says front-end code can't be modular?
+          谁说前端代码不能模块化？
         </div>
       </section>
     );
