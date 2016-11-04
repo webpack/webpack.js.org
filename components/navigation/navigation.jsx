@@ -106,6 +106,8 @@ export default class Navigation extends React.Component {
    * 
    */
   _openSearch() {
+    let container = document.querySelector('.navigation');
+    
     container.classList.add('navigation--search-mode');
   }
 }
