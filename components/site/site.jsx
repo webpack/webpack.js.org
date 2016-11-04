@@ -5,7 +5,6 @@ import Navigation from '../navigation/navigation';
 import Sidecar from '../sidecar/sidecar';
 import Footer from '../footer/footer';
 import SidebarMobile from '../sidebar-mobile/sidebar-mobile';
-import SearchResults from '../search-results/search-results';
 import './site-style';
 
 export default props => {
@@ -38,10 +37,6 @@ export default props => {
         id="components/sidebar-mobile/sidebar-mobile.jsx"
         component={ SidebarMobile }
         sections={ sections } />
-
-      <Interactive
-        id="components/search-results/search-results.jsx"
-        component={ SearchResults } />
 
       <Sidecar />
       { props.children }
