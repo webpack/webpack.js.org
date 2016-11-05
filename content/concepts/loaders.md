@@ -7,7 +7,7 @@ contributors:
 
 ## What are loaders?
 
-Loaders are transformations that are applied on a resource file of your app. They are functions (running in node.js) that take the source of a resource file as the parameter and return the new source.
+Loaders are transformations that are applied on a resource file of your application. They are functions (running in Node.js) that take the source of a resource file as the parameter and return the new source.
 
 For example, you can use loaders to tell webpack to load TypeScript or JSX.
 
@@ -23,9 +23,8 @@ For example, you can use loaders to tell webpack to load TypeScript or JSX.
 * Loaders can access the configuration.
 * Plugins can give loaders more features.
 * Loaders can emit additional arbitrary files.
-* etc.
 
-If you are interested in some loader examples head off to the [[list of loaders]].
+If you are interested in some loader examples head off to the [list of loaders](./).
 
 ## Resolving loaders
 
