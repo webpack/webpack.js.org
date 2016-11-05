@@ -46,4 +46,4 @@ module.exports = {
 ```
 
 ## It's that simple. 
-## [Get Started](/get-started/getting-started)
+## [Get Started](/get-started)
