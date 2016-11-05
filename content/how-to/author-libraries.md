@@ -11,7 +11,7 @@ webpack is a tool which can be used to bundle application code and also to bundl
 We have here a small wrapper library to convert number 1 to 5 from number to word and vice-versa. It looks something like this.
 
 __index.js__
-```JavaScript
+```javascript
 import _ from 'lodash';
 import numRef from './ref.json';
 
@@ -59,8 +59,7 @@ Add basic webpack configuration.
 Also add a [`.babelrc`](https://babeljs.io/docs/usage/babelrc/) file so that you can write webpack config in es2015 syntax.
 
 __webpack.config.babel.js__
-```JavaScript
-
+```javascript
 export default () => (
     {
         entry: './index.js',
@@ -81,7 +80,7 @@ But it will not work without adding relevant loaders for transpiling the code.
 We will add a `babel-loader` as our library is written in es2015 syntax. Add preset [`babel-preset-es2015-webpack`](https://www.npmjs.com/package/babel-preset-es2015-webpack) to transpile for webpack2.
 Similarly a `json-loader` is required to precompile our json fixture file.
 
-```JavaScript
+```javascript
 export default () => (
     {
         ...
@@ -109,19 +108,65 @@ It would be unnecessary for your library to bundle a library like `lodash`. Henc
 
 This can be done using the `externals` configuration as
 
-```JavaScript
-export.default () => (
-    {
-        ...
-        externals: [{
-            '_' : 'lodash'
-        }]
-        ...
-    }
-)
+```javascript
+export.default () => ({
+    ...
+    externals: [{
+        '_' : 'lodash'
+    }]
+    ...
+})
 ```
 
 This means that your library expects `lodash` to be available in the consumers environment, with a global name of `_`. It essentially aliases `_` to the library `lodash`.
 Also this configuration prevents webpack from bundling this external library to your library code.
 
 ### Add `libraryTarget`
+
+For widespread use of the library, we would like it to be compatible in different environments, ie CommonJs, AMD, nodejs and as a global variable.
+
+To make your library available for reuse, add `library` property in webpack configuration.
+
+```javascript
+export default = () => ({
+    ...
+    output: {
+        ...
+        library: 'webpackNumbers'
+    }
+    ...
+})
+```
+
+This makes your library bundle to be available as a global variable when imported.
+To make the library compatible with other environments, add `libraryTarget` property to the config.
+
+```javascript
+export default = () => ({
+    ...
+    output: {
+        ...
+        library: 'webpackNumbers',
+        libraryTarget:'umd' // Possible value - amd, commonjs, commonjs2, commonjs-module, this, var
+    }
+    ...
+})
+```
+
+If `library` property is set and `libraryTarget` is set to be `var` by default, as given in the [config reference](configuration/output).
+
+### Final steps
+
+[Tweak your production build using webpack](how-to/generate-production-build).
+
+Add the path to your generated bundle as the package's main file in `package.json`
+
+```json
+{
+    ...
+    "main": "dist/webpack-numbers.js"
+    ...
+}
+```
+
+Now you can [publish it as an npm package](https://docs.npmjs.com/getting-started/publishing-npm-packages) and find it at [unpkg.com](https://unpkg.com/#/) to distribute it to your users.
