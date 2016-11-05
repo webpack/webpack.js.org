@@ -3,7 +3,7 @@ title: Installation
 contributors:
   - pksjce
   - bebraw
-sort: 2
+sort: 1
 ---
 
 ### Pre-requisites

@@ -142,5 +142,3 @@ T> I use `webpack --` so that we can pass custom parameters to webpack through n
 
 Now that you have a basic build together, you should dig into the [basic concepts](/concepts) and [configuration](/configuration) of webpack to understand its design better. Check out also the [how to section](/how-to) in order to see how to resolve common problems. The [API](/api) section digs into lower level.
 
-**[Next, concepts >](/concepts)**
-
