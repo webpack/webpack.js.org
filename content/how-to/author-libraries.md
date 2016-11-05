@@ -153,11 +153,11 @@ export default = () => ({
 })
 ```
 
-If `library` property is set and `libraryTarget` is set to be `var` by default, as given in the [config reference](configuration/output).
+If `library` property is set and `libraryTarget` is set to be `var` by default, as given in the [config reference](/configuration/output).
 
 ### Final steps
 
-[Tweak your production build using webpack](how-to/generate-production-build).
+[Tweak your production build using webpack](/how-to/generate-production-build).
 
 Add the path to your generated bundle as the package's main file in `package.json`
 
