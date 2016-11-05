@@ -42,6 +42,39 @@ const converttonum = (word) => {
 module.exports = createTransalator();
 
 ```
+
+The usage spec for the library will be as follows.
+
+```javascript
+// ES2015 modules
+
+import webpackNumbers from 'webpack-numbers';
+
+    ...
+    webpackNumbers.wordtonum('Two') /// output is 2
+    ...
+
+// CommonJs modules
+
+var webpackNumbers = require('webpack-numbers');
+...
+webpackNumbers.numtoword(3); // output is Three
+...
+
+// As a script tag
+
+<html>
+...
+<script src='https://unpkg.com/webpack-numbers' type='text/javascript'/>
+<script type='text/javascript'>
+    ...
+    /* webpackNumbers is available as a global variable */
+    webpackNumbers.wordtonum('Five') //output is 5
+    ...
+</script>
+</html>
+```
+
 For full library configuration and code please refer to [webpack-library-example](https://github.com/kalcifer/webpack-library-example)
 
 ## Configure webpack
