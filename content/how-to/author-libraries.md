@@ -4,9 +4,9 @@ contributors:
     - pksjce
 ---
 
-webpack is a tool which can be used to bundle application code and also to bundle library code. If you are the author of JavaScript library and are looking to streamline your bundle strategy then this document will help you.
+webpack is a tool which can be used to bundle application code and also to bundle library code. If you are the author of a JavaScript library and are looking to streamline your bundle strategy then this document will help you.
 
-## Author a library
+## Author a Library
 
 We have here a small wrapper library to convert number 1 to 5 from number to word and vice-versa. It looks something like this.
 
@@ -84,7 +84,7 @@ Now the agenda is to bundle this library
   - Name of the library is `webpack-numbers` and the variable is `webpackNumbers`.
   - Library can be imported as `import webpackNumbers from 'webpack-numbers'` or `require('webpack-numbers')`.
   - Library can be accessed through global variable `webpackNumbers` when included through `script` tag.
-  - Library can be accessed inside nodejs.
+  - Library can be accessed inside Node.js.
 
 ### Add webpack
 
@@ -107,10 +107,10 @@ export default () => (
 
 This adds basic configuration to bundle the library.
 
-### Add loaders
+### Add Loaders
 
 But it will not work without adding relevant loaders for transpiling the code.
-We will add a `babel-loader` as our library is written in es2015 syntax. Add preset [`babel-preset-es2015-webpack`](https://www.npmjs.com/package/babel-preset-es2015-webpack) to transpile for webpack2.
+We will add a `babel-loader` as our library is written in es2015 syntax. Add preset [`babel-preset-es2015`](https://www.npmjs.com/package/babel-preset-es2015) to transpile es2015 to es5. But for webpack2 we can disable `modules` as webpack2 understands es2015 module system.
 Similarly a `json-loader` is required to precompile our json fixture file.
 
 ```javascript
@@ -123,7 +123,9 @@ export default () => (
                 exclude: /node_modules/,
                 use: 'babel-loader',
                 options: {
-                    presets: ['es2015-webpack']
+                    presets: [
+                        ["es2015", { "modules": false }]
+                    ]
                 }
             }, {
                 test: /.json$/,
@@ -188,7 +190,7 @@ export default = () => ({
 
 If `library` property is set and `libraryTarget` is set to be `var` by default, as given in the [config reference](/configuration/output).
 
-### Final steps
+### Final Steps
 
 [Tweak your production build using webpack](/how-to/generate-production-build).
 
