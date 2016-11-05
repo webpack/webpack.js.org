@@ -36,7 +36,7 @@ By convention, though not required, loaders are usually named as `XXX-loader`, w
 
 You may reference loaders by its full (actual) name (e.g. `json-loader`), or by its shorthand name (e.g. `json`).
 
-The loader name convention and precedence search order is defined by [`resolveLoader.moduleTemplates`](http://webpack.github.io/docs/configuration.html#resolveloader-moduletemplates) within the webpack configuration API.
+The loader name convention and precedence search order is defined by [`resolveLoader.moduleTemplates`](/configuration/resolve#resolveloader) within the webpack configuration API.
 
 Loader name conventions may be useful, especially when referencing them within `require()` statements; see usage below.
 
@@ -53,6 +53,7 @@ or
 ```sh
 $ npm install xxx-loader --save-dev
 ```
+
 ## Usage
 
 There are multiple ways to use loaders in your app:
