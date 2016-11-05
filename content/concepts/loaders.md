@@ -28,7 +28,7 @@ If you are interested in some loader examples head off to the [list of loaders](
 
 ## Resolving loaders
 
-Loaders are [[resolved similar to modules | resolving]]. A loader module is expected to export a function and to be written in node.js compatible JavaScript. In the common case you manage loaders with npm, but you can also have loaders as files in your app.
+Loaders are [resolved similar to modules](/). A loader module is expected to export a function and to be written in node.js compatible JavaScript. In the common case you manage loaders with npm, but you can also have loaders as files in your app.
 
 ### Referencing loaders
 
