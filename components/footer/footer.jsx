@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from '../link/link';
 import Container from '../container/container';
-import CubeImg from '../../assets/cube.png';
+import Icon from '../../assets/icon-square-small.svg';
 import './footer-style';
 
 export default (props) => {
@@ -17,7 +17,7 @@ export default (props) => {
 
         <section className="footer__middle">
           <Link to="/" className="footer__icon">
-            <img src={ CubeImg } />
+            <img src={ Icon } />
           </Link>
         </section>
 
