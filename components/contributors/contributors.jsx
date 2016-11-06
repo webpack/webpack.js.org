@@ -8,6 +8,7 @@ export default ({contributors}) => {
 
   return (
     <div className="contributors">
+      <hr />
       <h3>Contributors:</h3>
       <div className="contributors__list">
         {
