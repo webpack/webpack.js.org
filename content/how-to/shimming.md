@@ -1,5 +1,6 @@
 ---
-title: How to Shim Third Party Libraries?
+title: Shimming
+sort: 10
 contributors:
   - pksjce
   - jhnns

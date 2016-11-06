@@ -1,5 +1,6 @@
 ---
-title: How to Generate a Production Build?
+title: Building for Production
+sort: 7
 contributors:
   - henriquea
 ---

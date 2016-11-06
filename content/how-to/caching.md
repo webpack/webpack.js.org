@@ -1,5 +1,6 @@
 ---
-title: How to Cache?
+title: Caching
+sort: 9
 contributors:
   - okonet
 ---

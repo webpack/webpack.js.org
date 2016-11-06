@@ -1,5 +1,6 @@
 ---
-title: How to Split Code?
+title: Code Splitting
+sort: 2
 contributors:
   - pksjce
 ---
