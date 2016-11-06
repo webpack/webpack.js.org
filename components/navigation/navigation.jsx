@@ -3,6 +3,7 @@ import Link from '../link/link';
 import Container from '../container/container';
 import Logo from '../logo/logo';
 import './navigation-style';
+import './search-style';
 
 export default class Navigation extends React.Component {
   render() {
