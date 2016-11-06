@@ -1,0 +1,32 @@
+@import 'vars';
+
+.support {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding:10px 5px;
+
+  &__item {
+    margin:0 5px;
+  }
+
+  &__bottom {
+    flex:0 0 100%;
+    margin-top:10px;
+  }
+
+  &__button {
+    display:inline-block;
+    padding:0.5em 1em;
+    text-transform:uppercase;
+    background:map-get($colors, denim);
+    color:map-get($colors, concrete);
+    border-radius:1.25em;
+    transition:all 250ms;
+
+    &:hover {
+      background:map-get($colors, emperor);
+      color:map-get($colors, white);
+    }
+  }
+}

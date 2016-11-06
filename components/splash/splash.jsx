@@ -1,44 +1,48 @@
 import React from 'react';
+import Interactive from 'antwar-interactive';
 import Container from '../container/container';
-import Cube from '../cube/cube';
-import Link from '../link/link';
+import SplashViz from '../splash-viz/splash-viz';
+import '../../styles';
 import './splash-style';
+import Support from '../support/support';
 
 export default props => {
   let { page } = props;
 
   return (
     <div className="splash">
-      <section className="splash__section splash__sponsor">
-        <Container className="splash__content splash_sponsorheadline">
-          <h1 id="opencollective-banner" className="splash__sponsorheadline">Help support webpack!</h1>
-          <p>By your contributions, donations, and sponsorship, you allow webpack to thrive.</p>
-          <p>Your donations go directly towards supporting office hours, continued enhancements, and most importantly, great documentation and learning material!</p>
-          
-          <object type="image/svg+xml" data="https://opencollective.com/webpack/sponsors.svg"></object>
-          <object type="image/svg+xml" data="https://opencollective.com/webpack/backers.svg"></object>
-        </Container>
-      </section>
-      <section className="splash__viz">
-        <div className="splash__icon">
-          <Cube className="splash__cube" depth={ 150 } />
-        </div>
+      <Interactive
+        id="components/splash-viz/splash-viz.jsx"
+        component={ SplashViz } />
 
-        <span className="splash__headline">
-          Who said front-end code can't be modular?
-        </span>
-      </section>
+      <Container className="splash__section">
+        <h1>{ page.title }</h1>
+        <div dangerouslySetInnerHTML={{ 
+          __html: page.content 
+        }} />
+      </Container>
 
-      <section className="splash__section">
-        <Container className="splash__content">
-          <h1>{ page.title }</h1>
-          <div dangerouslySetInnerHTML={{ 
-            __html: page.content 
-          }} />
-        </Container>
-      </section>        
+      <Container className="splash__section">
+        <h1>Support the Team</h1>
 
+        <p>Through contributions, donations, and sponsorship, you allow webpack to thrive. Your donations directly support office hours, continued enhancements, and most importantly, great documentation and learning material!</p>
 
+        <h2>Sponsors</h2>
+
+        <Interactive
+          id="components/support/support.jsx"
+          component={ Support }
+          number={ 5 }
+          type="sponsor" />
+
+        <h2>Backers</h2>
+
+        <Interactive
+          id="components/support/support.jsx"
+          component={ Support }
+          number={ 20 }
+          type="backer" />
+      </Container>
     </div>
   );
 };

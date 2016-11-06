@@ -3,6 +3,7 @@ title: Plugins
 sort: 3
 contributors:
   - TheLarkInn
+  - jhnns
 ---
 
 **Plugins** are the [backbone](https://github.com/webpack/tapable) of webpack. webpack itself is built on the **same plugin system** that you use in your webpack configuration!!

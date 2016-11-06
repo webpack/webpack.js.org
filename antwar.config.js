@@ -31,7 +31,7 @@ module.exports = {
     '/': root(
       function() {
         return require.context(
-          'json!yaml-frontmatter!./content',
+          'json-loader!yaml-frontmatter-loader!./content',
           false,
           /^\.\/.*\.md$/
         );
@@ -41,7 +41,7 @@ module.exports = {
       'Concepts',
       function() {
         return require.context(
-          'json!yaml-frontmatter!./content/concepts',
+          'json-loader!yaml-frontmatter-loader!./content/concepts',
           false,
           /^\.\/.*\.md$/
         );
@@ -51,7 +51,7 @@ module.exports = {
       'Configuration',
       function() {
         return require.context(
-          'json!yaml-frontmatter!./content/configuration',
+          'json-loader!yaml-frontmatter-loader!./content/configuration',
           false,
           /^\.\/.*\.md$/
         );
@@ -61,7 +61,7 @@ module.exports = {
       'How to',
       function() {
         return require.context(
-          'json!yaml-frontmatter!./content/how-to',
+          'json-loader!yaml-frontmatter-loader!./content/how-to',
           true,
           /^\.\/.*\.md$/
         );
@@ -71,7 +71,27 @@ module.exports = {
       'API',
       function() {
         return require.context(
-          'json!yaml-frontmatter!./content/api',
+          'json-loader!yaml-frontmatter-loader!./content/api',
+          false,
+          /^\.\/.*\.md$/
+        );
+      }
+    ),
+    loaders: section(
+      'Loaders',
+      function() {
+        return require.context(
+          'json-loader!yaml-frontmatter-loader!./generated/loaders',
+          false,
+          /^\.\/.*\.md$/
+        );
+      }
+    ),
+    plugins: section(
+      'Plugins',
+      function() {
+        return require.context(
+          'json-loader!yaml-frontmatter-loader!./generated/plugins',
           false,
           /^\.\/.*\.md$/
         );

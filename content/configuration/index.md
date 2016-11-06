@@ -3,6 +3,7 @@ title: Configuration
 contributors:
   - sokra
   - skipjack
+  - grgur
 ---
 
 Webpack is fed a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
@@ -139,6 +140,8 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 
         [loader](/configuration/module#rule-loader): "babel-loader",
         // the loader which should be applied, it'll be resolve relative to the context
+        // -loader suffix is no longer optional in Webpack 2 for clarity reasons
+        // see [webpack 1 upgrade guide](/how-to/upgrade-from-webpack-1)
 
         [options](/configuration/module#rule-options-rule-query): {
           presets: ["es2015"]
@@ -278,15 +281,16 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
     </details>
   },
 
-  <details><summary>[devtool](/configuration/devtool): "source-map", // enum</summary>
+  <details><summary>[devtool](/configuration/devtool): "source-map", // enum </summary>
   [devtool](/configuration/devtool): "inline-source-map", // inlines SourceMap into orginal file
   [devtool](/configuration/devtool): "eval-source-map", // inlines SourceMap per module
   [devtool](/configuration/devtool): "hidden-source-map", // SourceMap without reference in original file
   [devtool](/configuration/devtool): "cheap-source-map", // cheap-variant of SourceMap without module mappings
   [devtool](/configuration/devtool): "cheap-module-source-map", // cheap-variant of SourceMap with module mappings
-  [devtool](/configuration/devtool): "eval", // no SourceMap, but named modules
+  [devtool](/configuration/devtool): "eval", // no SourceMap, but named modules. Fastest at the expense of detail. 
   </details>
   // enhance debugging by adding meta info for the browser devtools
+  // source-map most detailed at the expense of build speed.
 
   [context](/configuration/entry-context#context): __dirname, // string (absolute path!)
   // the home directory for webpack

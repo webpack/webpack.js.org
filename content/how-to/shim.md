@@ -1,5 +1,8 @@
 ---
 title: How to Shim Third Party Libraries?
+contributors:
+  - pksjce
+  - jhnns
 ---
 
 `webpack` as a module bundler can understand modules written as ES2015 modules, CommonJS or AMD. But many times, while using third party libraries, we see that they expect dependencies which are global aka `$` for `jquery`. They might also be creating global variables which need to be exported. Here we will see different ways to help webpack understand these __broken modules__.
@@ -48,7 +51,7 @@ module: {
     loaders: [
         {
             test: /[\/\\]node_modules[\/\\]some-module[\/\\]index\.js$/,
-            loader: "imports?this=>window"
+            loader: "imports-loader?this=>window"
         }
     ]
 }

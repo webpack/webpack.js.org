@@ -11,11 +11,6 @@ var stylePaths = [
 ];
 
 const commonConfig = {
-  entry: {
-    style: [
-      path.join(cwd, 'styles', 'index.scss')
-    ]
-  },
   resolve: {
     extensions: ['', '.js', '.jsx', '.scss']
   },
@@ -23,30 +18,30 @@ const commonConfig = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loader: 'babel!eslint',
+        loader: 'babel-loader!eslint-loader',
         include: [
           path.join(__dirname, 'components')
         ]
       },
       {
         test: /\.woff2?$/,
-        loaders: ['url?prefix=font/&limit=50000&mimetype=application/font-woff']
+        loaders: ['url-loader?prefix=font/&limit=50000&mimetype=application/font-woff']
       },
       {
         test: /\.jpg$/,
-        loaders: ['file']
+        loaders: ['file-loader']
       },
       {
         test: /\.png$/,
-        loaders: ['file']
+        loaders: ['file-loader']
       },
       {
         test: /\.svg$/,
-        loaders: ['raw']
+        loaders: ['raw-loader']
       },
       {
         test: /\.html$/,
-        loaders: ['raw']
+        loaders: ['raw-loader']
       }
     ]
   },
@@ -83,12 +78,12 @@ const developmentConfig = {
     loaders: [
       {
         test: /\.css$/,
-        loaders: ['style', 'css'],
+        loaders: ['style-loader', 'css-loader'],
         include: stylePaths
       },
       {
         test: /\.scss$/,
-        loaders: ['style', 'css', 'postcss', 'sass'],
+        loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
         include: stylePaths
       }
     ]
@@ -100,7 +95,7 @@ const buildConfig = {
     publicPath: '/'
   },
   plugins: [
-    new ExtractTextPlugin('[name].css', {
+    new ExtractTextPlugin('[chunkhash].css', {
       allChunks: true
     })
   ],
@@ -109,16 +104,16 @@ const buildConfig = {
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract(
-          'style',
-          'css'
+          'style-loader',
+          'css-loader'
         ),
         include: stylePaths
       },
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract(
-          'style',
-          'css!postcss!sass'
+          'style-loader',
+          'css-loader!postcss-loader!sass-loader'
         ),
         include: stylePaths
       }
