@@ -1,5 +1,6 @@
 ---
-title: How to Develop?
+title: Developing and Debugging
+sort: 4
 contributors:
   - SpaceK33z
 ---

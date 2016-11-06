@@ -1,5 +1,6 @@
 ---
-title: How to Author Libraries?
+title: Authoring Libraries
+sort: 12
 contributors:
     - pksjce
 ---

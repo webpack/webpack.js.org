@@ -1,5 +1,6 @@
 ---
-title: How to Handle Dependencies?
+title: Dependency Management
+sort: 3
 ---
 > es6 modules
 > commonjs

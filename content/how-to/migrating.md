@@ -1,5 +1,6 @@
 ---
-title: How to Upgrade from Webpack 1?
+title: Migrating from v1 to v2
+sort: 13
 contributors:
   - sokra
   - jhnns
