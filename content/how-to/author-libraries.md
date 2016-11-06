@@ -15,31 +15,19 @@ __index.js__
 import _ from 'lodash';
 import numRef from './ref.json';
 
-function createTransalator() {
-    return {
-        numtoword: (num) => {
-            return num < 0 || num > 5 ? 'This is a failure' : converttoword(num);
-        },
-        wordtonum: (word) => {
-            const num = converttonum(word);
-            return num === -1 ? 'This is a failure' : num;
-        }
+const numToWord = function(num) {
+        return _.reduce(numRef, (accum, ref) => {
+            return ref.num === num ? ref.word : accum;
+        }, '');
     };
-}
 
-const converttoword = (num) => {
-    return _.reduce(numRef, (accum, ref) => {
-        return ref.num === num ? ref.word : accum;
-    }, '');
-};
+const wordToNum = function(word) {
+        return _.reduce(numRef, (accum, ref) => {
+            return ref.word === word && word.toLowerCase() ? ref.num : accum;
+        }, -1);
+    };
 
-const converttonum = (word) => {
-    return _.reduce(numRef, (accum, ref) => {
-        return ref.word === word && word.toLowerCase() ? ref.num : accum;
-    }, -1);
-};
-
-module.exports = createTransalator();
+export {numToWord, wordToNum}
 
 ```
 
@@ -51,14 +39,14 @@ The usage spec for the library will be as follows.
 import webpackNumbers from 'webpack-numbers';
 
     ...
-    webpackNumbers.wordtonum('Two') /// output is 2
+    webpackNumbers.wordToNum('Two') /// output is 2
     ...
 
 // CommonJs modules
 
 var webpackNumbers = require('webpack-numbers');
 ...
-webpackNumbers.numtoword(3); // output is Three
+webpackNumbers.numToWord(3); // output is Three
 ...
 
 // As a script tag
@@ -69,7 +57,7 @@ webpackNumbers.numtoword(3); // output is Three
 <script type='text/javascript'>
     ...
     /* webpackNumbers is available as a global variable */
-    webpackNumbers.wordtonum('Five') //output is 5
+    webpackNumbers.wordToNum('Five') //output is 5
     ...
 </script>
 </html>
@@ -89,19 +77,17 @@ Now the agenda is to bundle this library
 ### Add webpack
 
 Add basic webpack configuration.
-Also add a [`.babelrc`](https://babeljs.io/docs/usage/babelrc/) file so that you can write webpack config in es2015 syntax.
 
-__webpack.config.babel.js__
+__webpack.config.js__
 ```javascript
-export default () => (
-    {
-        entry: './index.js',
-        output: {
-            path: './dist',
-            filename: 'webpack-numbers.js'
-        }
+
+module.exports = {
+    entry: './index.js',
+    output: {
+        path: './dist',
+        filename: 'webpack-numbers.js'
     }
-);
+};
 
 ```
 
@@ -110,31 +96,18 @@ This adds basic configuration to bundle the library.
 ### Add Loaders
 
 But it will not work without adding relevant loaders for transpiling the code.
-We will add a `babel-loader` as our library is written in es2015 syntax. Add preset [`babel-preset-es2015`](https://www.npmjs.com/package/babel-preset-es2015) to transpile es2015 to es5. But for webpack2 we can disable `modules` as webpack2 understands es2015 module system.
-Similarly a `json-loader` is required to precompile our json fixture file.
+Here, we need a [`json-loader`](https://github.com/webpack/json-loader) is required to precompile our json fixture file.
 
 ```javascript
-export default () => (
-    {
-        ...
-        module: {
-            rules: [{
-                test: /.js$/,
-                exclude: /node_modules/,
-                use: 'babel-loader',
-                options: {
-                    presets: [
-                        ["es2015", { "modules": false }]
-                    ]
-                }
-            }, {
-                test: /.json$/,
-                exclude: /node_modules/,
-                use: 'json-loader'
-            }]
-        }
+module.exports = {
+    // ...
+    module: {
+        rules: [{
+            test: /.json$/,
+            use: 'json-loader'
+        }]
     }
-);
+};
 ```
 ### Add `externals`
 
@@ -144,13 +117,13 @@ It would be unnecessary for your library to bundle a library like `lodash`. Henc
 This can be done using the `externals` configuration as
 
 ```javascript
-export.default () => ({
+module.exports = {
     ...
     externals: [{
         '_' : 'lodash'
     }]
     ...
-})
+};
 ```
 
 This means that your library expects `lodash` to be available in the consumers environment, with a global name of `_`. It essentially aliases `_` to the library `lodash`.
@@ -163,21 +136,21 @@ For widespread use of the library, we would like it to be compatible in differen
 To make your library available for reuse, add `library` property in webpack configuration.
 
 ```javascript
-export default = () => ({
+module.exports = {
     ...
     output: {
         ...
         library: 'webpackNumbers'
     }
     ...
-})
+};
 ```
 
 This makes your library bundle to be available as a global variable when imported.
 To make the library compatible with other environments, add `libraryTarget` property to the config.
 
 ```javascript
-export default = () => ({
+module.exports = {
     ...
     output: {
         ...
@@ -185,7 +158,7 @@ export default = () => ({
         libraryTarget:'umd' // Possible value - amd, commonjs, commonjs2, commonjs-module, this, var
     }
     ...
-})
+};
 ```
 
 If `library` property is set and `libraryTarget` is set to be `var` by default, as given in the [config reference](/configuration/output).
