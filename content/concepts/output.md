@@ -1,6 +1,9 @@
 ---
 title: Output
 sort: 1
+contributors:
+  - sokra
+  - tomasAlabes
 ---
 
 Options affecting the output of the compilation. `output` options tell Webpack how to write the compiled files to disk. Note, that while there can be multiple `entry` points, only one `output` configuration is specified.
@@ -148,23 +151,107 @@ Use this if you are writing a library and want to publish it as single file.
 
 ### `output.libraryTarget`
 
-Which format to export the library:
-
-`"var"` - Export by setting a variable: `var Library = xxx` (default)
-
-`"this"` - Export by setting a property of `this`: `this["Library"] = xxx`
-
-`"commonjs"` - Export by setting a property of `exports`: `exports["Library"] = xxx`
-
-`"commonjs2"` - Export by setting `module.exports`: `module.exports = xxx`
-
-`"amd"` - Export to AMD (optionally named - set the name via the library option)
-
-`"umd"` - Export to AMD, CommonJS2 or as property in root
-
 > Default: `"var"`
 
-If `output.library` is not set, but `output.libraryTarget` is set to a value other than `var`, every property of the exported object is copied (Except `amd`, `commonjs2` and `umd`).
+You developed your library in a very modular fashion using all the power of webpack. But have you thought how your users are going to consume it? Here’s where `libraryTarget` config comes in.
+
+_First a quick note, to give your library a name (you should), set the output.library config to it._
+
+The following options are supported:
+
+`target: "var"` - (default) When your library is loaded, the **return value of your entry point** will be assigned to a variable:
+
+```javascript
+var yourLib = _entry_return_;
+// your users will use your library like:
+yourLib.doSomething();
+```
+(Not specifying a `output.library` will cancel this var configuration)
+
+`target: "this"` - When your library is loaded, the **return value of your entry point** will be assigned to this, the meaning of `this` is up to you:
+
+```javascript
+this["yourLib"] = _entry_return_;
+// your users will use your library like:
+this.yourLib.doSomething();
+yourLib.doSomething(); //if this is window
+```
+
+`target: "commonjs"` - When your library is loaded, the return value of your entry point will be part of the exports object. As the name implies, this is used in commonjs environments:
+
+```javascript
+exports["yourLib"] = _entry_return_;
+//your users will use your library like:
+require("yourLib").doSomething();
+```
+`target: "commonjs2"` - When your library is loaded, the return value of your entry point will be part of the exports object. As the name implies, this is used in commonjs environments:
+
+```javascript
+module.exports = _entry_return_;
+//your users will use your library like:
+require("yourLib").doSomething();
+```
+
+_Wondering the difference between commonjs and commonjs2? Check [this](https://github.com/webpack/webpack/issues/1114) out. (They are pretty much the same)_
+
+`target: "amd "` - In this case webpack will surround you library with an AMD.
+But there is a very important pre-requisite, your entry chunk must be defined with the define property, if not, webpack wil create the AMD module, but without dependencies. I learned this the hard way, it’s logical but not obvious I think. Anyway… the output will be something like this:
+
+```javascript
+define([], function() {
+	//what this module returns is what your entry chunk returns
+});
+```
+But if you download this script, first you may get a error: define is not defined, it’s ok! if you are distributing your library as amd, then your users need to use requirejs to load it. But, require([_what_])? `output.library`!
+
+```javascript
+output: {
+	name: "yourLib",
+	libraryTarget: "amd"
+}
+```
+And the module will be:
+```javascript
+define("yourLib", [], function() {
+	//what this module returns is what your entry chunk returns
+});
+```
+
+```javascript
+// And then your users will be able to do:
+require(["yourLib"], function(yourLib){
+	yourLib.doSomething();
+});
+```
+
+`target: "umd"` - This is a way for your library to work with all module definitions (and where aren’t modules at all). It will work with commonjs, amd and as global variable.
+Here to name your module you need the another property:
+
+```javascript
+output: {
+	name: "yourLib",
+	libraryTarget: "umd",
+	umdNamedDefine: true
+}
+```
+
+And finally the output is:
+```javascript
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define("yourLib", [], factory);
+	else if(typeof exports === 'object')
+		exports["yourLib"] = factory();
+	else
+		root["yourLib"] = factory();
+})(this, function() {
+	//what this module returns is what your entry chunk returns
+});
+```
+
+Module proof library.
 
 ### `output.path`
 
