@@ -119,15 +119,12 @@ This can be done using the `externals` configuration as
 ```javascript
 module.exports = {
     ...
-    externals: [{
-        '_' : 'lodash'
-    }]
+    externals:['lodash']
     ...
 };
 ```
 
-This means that your library expects `lodash` to be available in the consumers environment, with a global name of `_`. It essentially aliases `_` to the library `lodash`.
-Also this configuration prevents webpack from bundling this external library to your library code.
+This means that your library expects a dependency named `lodash` to be available in the consumers environment.
 
 ### Add `libraryTarget`
 
