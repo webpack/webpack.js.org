@@ -182,7 +182,7 @@ Add the path to your generated bundle as the package's main file in `package.jso
 
 __package.json__
 
-```json
+```javascript
 {
     ...
     "main": "dist/webpack-numbers.js",
