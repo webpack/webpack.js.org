@@ -24,12 +24,13 @@ npm install --save lodash
 
 Now create an `index.js` file.
 
-```javascript
-import _ from 'lodash';
+__app/index.js__
 
+```javascript
 function component () {
   var element = document.createElement('div');
 
+  /* dependency on lodash in the next line */
   element.innerHTML = _.map(['Hello','webpack'], function(item){
     return item + ' ';
   });
@@ -42,22 +43,63 @@ document.body.appendChild(component());
 
 To run this piece of code, one usually has the below html
 
+__index.html__
+
 ```html
 <html>
   <head>
       <title>Webpack demo</title>
-      <script src='https://unpkg.com/lodash@4.16.6' type='text/javascript'/>
-      <script src='index.js' type='text/javascript'/> 
+      <script src='https://unpkg.com/lodash@4.16.6' type='text/javascript'></script>
+      <script src='index.js' type='text/javascript'></script> 
   </head>
   <body>
   </body>
 </html>
 ```
 
+In this example, there are implicit dependencies between the script tags.
+
+`index.js` depends on `lodash` being included in the page before it runs. It is implicit because `index.js` never declared a need for `lodash`; it just assumes that a global variable `_` exists.
+
+There are problems with managing JavaScript projects this way:
+  - If a dependency is missing, or is included in the wrong order, the application will not function at all. 
+  - If a dependency is included but is not used, then there is a lot of unnecessary code that the browser has to download.
+
+To bundle the `lodash` dependency with the `index.js`, we need to import `lodash`.
+
+__app/index.js__
+
+```diff
++ import _ from `lodash`;
+
+function component () {
+  ...
+```
+
+Also we will need to change the `index.html` to expect a single bundled js file.
+
+```diff
+<html>
+  <head>
+      <title>Webpack demo</title>
+-      <script src='https://unpkg.com/lodash@4.16.6' type='text/javascript'></script>
+-      <script src='index.js' type='text/javascript'></script>
++      <script src='dist/bundle.js' type='text/javascript'></script>
+  </head>
+  <body>
+    <div id='root'></div>
+  </body>
+</html>
+```
+
+Here, `index.js` explicitly requires `lodash` to be present, and binds it as `_` (no global scope pollution).
+
+By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order. Also unused dependencies will not be included in the bundle.
+
 Now run `webpack` on this folder with the entry file to be `index.js` and to output a `bundle.js` file which bundles all the code required for the page.
 
 ```bash
-webpack --entry index.js --output bundle.js
+webpack app/index.js dist/bundle.js
 
 Hash: a3c861a7d42fc8944524
 Version: webpack 2.2.0
@@ -68,25 +110,6 @@ index.js  1.56 kB       0  [emitted]  main
 
 ```
 
-Now modify the index.html as
-
-```diff
-<html>
-  <head>
-      <title>Webpack demo</title>
--      <script src='https://unpkg.com/lodash@4.16.6' type='text/javascript'/>
--      <script src='index.js' type='text/javascript'/>
-+      <script src='bundle.js' type='text/javascript'/>
-  </head>
-  <body>
-    <div id='root'></div>
-  </body>
-</html>
-```
-
-If not for webpack, you would have to manage the order of loading for your files ie load `lodash` first and then `index.js` and any other client code in that order.
-By including a single `bundle.js` gets rid of these complexities.
-
 ## Using webpack with a config
 
 For more complex configuration, we can use a configuration file that webpack can reference to bundle your code.
@@ -94,13 +117,12 @@ The above CLI command would be represented in config as follows -
 
 __webpack.config.js__
 ```javascript
-module.exports = function(env){
-  return {
-    entry: 'index.js'
+{
+    entry: './app/index.js'
     output: {
-      filename: 'bundle.js'
+      filename: 'bundle.js',
+      path: './dist'
     }
-  }
 }
 ```
 
@@ -117,6 +139,7 @@ index.js  1.56 kB       0  [emitted]  main
    [0] ./app/index.js 170 bytes {0} [built]
 
 ```
+T> If a `webpack.config.js` is present, `webpack` command picks it up by default.
 
 The config file allows for all the flexibility in using webpack. We can add loaders, plugins, resolve options and many other enhancements to our bundles using this configuration file.
 

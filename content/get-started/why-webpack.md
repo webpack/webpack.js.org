@@ -6,11 +6,12 @@ contributors:
 sort: 2
 ---
 
-You might be familiar with tools like Make, Grunt, Gulp, Browserify, or Brunch. Make is the oldest and the most known one as it's a general build tool and its history goes back to the 70s. More specialized *task runners*, like Grunt and Gulp, are focused on JavaScript and have healthy plugin ecosystems around them.
+webpack is usually compared to tools like Make, Grunt, Gulp, Browserify or Brunch. However, some of these tools (Make, Grunt, and Gulp, which are task runners) have a much different purpose than webpack, which is a module bundler. Comparing them directly could lead to sorts of confusion, so let’s first draw a distinction between these types of tools.
 
 ## What Are Task Runners?
 
-Task runners literally make it easier to handle tasks, such as linting, building, or developing your project. Compared to *bundlers* like Browserify, Brunch, or webpack, they have a higher level focus. As you might guess from the term bundler, the goal of these tools is to achieve something lower level.
+Task runners literally make it easier to handle tasks, such as linting, building, or developing your project. Compared to *bundlers* like Browserify, Brunch, or webpack, they have a higher level focus. Bundlers, on the other hand, have a much more specific goal.
+
 
 ## What Are Bundlers?
 
