@@ -7,8 +7,8 @@ sort: 3
 
 ## Getting Started
 
-webpack is a tool to build javascript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/get-started/install-webpack).
-webpack simplifies your workflow by quickly constructing a dependency graph of your application and bundling them in the right order. webpack can be configured to customise optimisations to your code, to split vendor/css/js code for production, have a hot reloaded dev server and many such cool features. Learn more about [why you should use webpack](/get-started/why-webpack).
+webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/get-started/install-webpack).
+webpack simplifies your workflow by quickly constructing a dependency graph of your application and bundling them in the right order. webpack can be configured to customise optimisations to your code, to split vendor/css/js code for production, run a development server that hot-reloads your code without page refresh and many such cool features. Learn more about [why you should use webpack](/get-started/why-webpack).
 
 ## Creating a bundle
 
@@ -18,7 +18,7 @@ Create a demo directory to try out webpack. [Install webpack](/get-started/insta
 mkdir webpack-demo && cd webpack-demo
 npm init -y
 npm install --save-dev webpack
-webpack --help //Shows a list of valid cli commands
+webpack --help # Shows a list of valid cli commands
 npm install --save lodash
 ```
 
@@ -30,13 +30,13 @@ __app/index.js__
 function component () {
   var element = document.createElement('div');
 
-  /* dependency on lodash in the next line */
+  /* lodash is required for the next line to work */
   element.innerHTML = _.map(['Hello','webpack'], function(item){
     return item + ' ';
   });
 
   return element;
-};
+}
 
 document.body.appendChild(component());
 ```
@@ -48,9 +48,9 @@ __index.html__
 ```html
 <html>
   <head>
-      <title>Webpack demo</title>
-      <script src='https://unpkg.com/lodash@4.16.6' type='text/javascript'></script>
-      <script src='index.js' type='text/javascript'></script> 
+    <title>Webpack demo</title>
+    <script src='https://unpkg.com/lodash@4.16.6' type='text/javascript'></script>
+    <script src='index.js' type='text/javascript'></script>
   </head>
   <body>
   </body>
@@ -81,10 +81,10 @@ Also we will need to change the `index.html` to expect a single bundled js file.
 ```diff
 <html>
   <head>
-      <title>Webpack demo</title>
--      <script src='https://unpkg.com/lodash@4.16.6' type='text/javascript'></script>
--      <script src='index.js' type='text/javascript'></script>
-+      <script src='dist/bundle.js' type='text/javascript'></script>
+    <title>Webpack demo</title>
+-   <script src='https://unpkg.com/lodash@4.16.6' type='text/javascript'></script>
+-   <script src='index.js' type='text/javascript'></script>
++   <script src='dist/bundle.js' type='text/javascript'></script>
   </head>
   <body>
     <div id='root'></div>
@@ -117,12 +117,12 @@ The above CLI command would be represented in config as follows -
 
 __webpack.config.js__
 ```javascript
-{
-    entry: './app/index.js'
-    output: {
-      filename: 'bundle.js',
-      path: './dist'
-    }
+module.exports = {
+  entry: './app/index.js'
+  output: {
+    filename: 'bundle.js',
+    path: './dist'
+  }
 }
 ```
 
@@ -141,7 +141,7 @@ index.js  1.56 kB       0  [emitted]  main
 ```
 T> If a `webpack.config.js` is present, `webpack` command picks it up by default.
 
-The config file allows for all the flexibility in using webpack. We can add loaders, plugins, resolve options and many other enhancements to our bundles using this configuration file.
+The config file allows for all the flexibility in using webpack. We can add loader rules, plugins, resolve options and many other enhancements to our bundles using this configuration file.
 
 ## Using webpack with npm
 
