@@ -10,24 +10,22 @@ webpack is a tool which can be used to bundle application code and also to bundl
 
 We have here a small wrapper library to convert number 1 to 5 from number to word and vice-versa. It looks something like this.
 
-__index.js__
+__src/index.js__
 ```javascript
 import _ from 'lodash';
 import numRef from './ref.json';
 
-const numToWord = function(num) {
-        return _.reduce(numRef, (accum, ref) => {
-            return ref.num === num ? ref.word : accum;
-        }, '');
-    };
+export function numToWord(num) {
+    return _.reduce(numRef, (accum, ref) => {
+        return ref.num === num ? ref.word : accum;
+    }, '');
+};
 
-const wordToNum = function(word) {
-        return _.reduce(numRef, (accum, ref) => {
-            return ref.word === word && word.toLowerCase() ? ref.num : accum;
-        }, -1);
-    };
-
-export {numToWord, wordToNum}
+export function wordToNum(word) {
+    return _.reduce(numRef, (accum, ref) => {
+        return ref.word === word && word.toLowerCase() ? ref.num : accum;
+    }, -1);
+};
 
 ```
 
@@ -36,7 +34,7 @@ The usage spec for the library will be as follows.
 ```javascript
 // ES2015 modules
 
-import webpackNumbers from 'webpack-numbers';
+import * as webpackNumbers from 'webpack-numbers';
 
     ...
     webpackNumbers.wordToNum('Two') /// output is 2
@@ -79,10 +77,11 @@ Now the agenda is to bundle this library
 Add basic webpack configuration.
 
 __webpack.config.js__
+
 ```javascript
 
 module.exports = {
-    entry: './index.js',
+    entry: './src/index.js',
     output: {
         path: './dist',
         filename: 'webpack-numbers.js'
@@ -97,6 +96,8 @@ This adds basic configuration to bundle the library.
 
 But it will not work without adding relevant loaders for transpiling the code.
 Here, we need a [`json-loader`](https://github.com/webpack/json-loader) is required to precompile our json fixture file.
+
+__webpack.config.js__
 
 ```javascript
 module.exports = {
@@ -116,10 +117,19 @@ It would be unnecessary for your library to bundle a library like `lodash`. Henc
 
 This can be done using the `externals` configuration as
 
+__webpack.config.js__
+
 ```javascript
 module.exports = {
     ...
-    externals:['lodash']
+    externals: {
+        "lodash": {
+            commonjs: "lodash",
+            commonjs2: "lodash",
+            amd: "lodash",
+            root: "_"
+        }
+    }
     ...
 };
 ```
@@ -131,6 +141,8 @@ This means that your library expects a dependency named `lodash` to be available
 For widespread use of the library, we would like it to be compatible in different environments, ie CommonJs, AMD, nodejs and as a global variable.
 
 To make your library available for reuse, add `library` property in webpack configuration.
+
+__webpack.config.js__
 
 ```javascript
 module.exports = {
@@ -145,6 +157,8 @@ module.exports = {
 
 This makes your library bundle to be available as a global variable when imported.
 To make the library compatible with other environments, add `libraryTarget` property to the config.
+
+__webpack.config.js__
 
 ```javascript
 module.exports = {
@@ -166,10 +180,13 @@ If `library` property is set and `libraryTarget` is set to be `var` by default, 
 
 Add the path to your generated bundle as the package's main file in `package.json`
 
+__package.json__
+
 ```json
 {
     ...
-    "main": "dist/webpack-numbers.js"
+    "main": "dist/webpack-numbers.js",
+    "module": "src/index.js", // To add as standard module as per https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage
     ...
 }
 ```
