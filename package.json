@@ -23,7 +23,7 @@
   "scripts": {
     "start": "npm run init:generated && node ./bootstrap.js",
     "build": "npm run init:generated && rm -rf build/ && node ./bootstrap.js && npm run sitemap && echo webpack.js.org > build/CNAME",
-    "build-test": "http-server build/",
+    "build-test": "npm run build && http-server build/",
     "deploy": "gh-pages -d build",
     "fetch": "scripts/fetch.sh",
     "init:generated": "mkdirp ./generated/loaders && ncp ./content/loaders/ ./generated/loaders && mkdirp ./generated/plugins && ncp ./content/plugins/ ./generated/plugins",
@@ -91,7 +91,6 @@
     "yaml-frontmatter-loader": "0.0.3"
   },
   "dependencies": {
-    "custom-event": "^1.0.1",
     "d3": "^4.2.7",
     "filesize": "^3.3.0",
     "preact": "^6.2.1",
