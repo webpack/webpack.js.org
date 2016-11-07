@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/assets/favicon.ico">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     <% for (var file in webpackConfig.template.cssFiles) { %>
       <link href="<%= webpackConfig.template.cssFiles[file] %>" rel="stylesheet">
     <% } %>
+    
+    <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
   </head>
   <body>
     <%- webpackConfig.html %>
@@ -16,12 +19,14 @@
     <% for (var script of webpackConfig.template.jsFiles) { %>
       <script src="<%= script %>" type="text/javascript"></script>
     <% } %>
+
     <script>
       ((window.gitter = {}).chat = {}).options = {
         room: 'webpack/webpack',
         activationElement: false
       };
     </script>
+    
     <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
   </body>
 </html>

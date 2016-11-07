@@ -1,27 +1,17 @@
 import React from 'react';
-import CustomEvent from 'custom-event';
 import Link from '../link/link';
 import Container from '../container/container';
 import Logo from '../logo/logo';
 import './navigation-style';
 
 export default class Navigation extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      searchMode: false
-    };
-  }
-
   render() {
     let { pageUrl, sections } = this.props;
     let isIndex = pageUrl === '/index';
     let transparentClass = isIndex ? 'navigation--transparent' : '';
-    let searchClass = this.state.searchMode ? 'navigation--search-mode' : '';
 
     return (
-      <header className={ `navigation ${transparentClass} ${searchClass}` }>
+      <header className={ `navigation ${transparentClass}` }>
         <Container className="navigation__inner">
           <div className="navigation__mobile" onClick={ this._toggleSidebar }>
             <i className="icon-menu" />
@@ -48,22 +38,19 @@ export default class Navigation extends React.Component {
               })
             }
 
-            <Link className="navigation__link" to={ '//opencollective.com/webpack' }>
+            <Link className="navigation__link" to="//opencollective.com/webpack">
               捐献
             </Link>
           </nav>
 
           <div className="navigation__search">
-            <input
-              type="text"
+            <input 
+              type="text" 
               className="navigation__search-input"
-              ref={ ref => this.searchInput = ref }
-              placeholder="Coming soon..."
-              onFocus={ this._handleFocus.bind(this) }
-              onChange={ this._handleSearch.bind(this) } />
-            <button
+              placeholder="Search documentation…" />
+            <button 
               className="navigation__search-icon"
-              onClick={ this._toggleSearch.bind(this, !this.state.searchMode) }>
+              onClick={ this._toggleSearch.bind(this) }>
               &#9906;
             </button>
           </div>
@@ -72,9 +59,27 @@ export default class Navigation extends React.Component {
     );
   }
 
+  componentDidMount() {
+    if (typeof window !== 'undefined') {
+      // Initialize DocSearch/Algolia
+      window.docsearch({
+        apiKey: 'fac401d1a5f68bc41f01fb6261661490',
+        indexName: 'webpack-js-org',
+        inputSelector: '.navigation__search-input'
+      });
+
+      // Open the search on tabbing for usability
+      window.addEventListener('keyup', e => {
+        if (e.which === 9 && e.target.classList.contains('navigation__search-input')) {
+          this._openSearch();
+        }
+      });
+    }
+  }
+
   /**
    * Toggle the SidebarMobile component
-   *
+   * 
    * @param {object} e - Native click event
    */
   _toggleSidebar(e) {
@@ -85,43 +90,24 @@ export default class Navigation extends React.Component {
   }
 
   /**
-   * Toggle search mode
+   * Toggle the search input
    *
-   * @param {boolean} state - True/false or null to toggle
    */
-  _toggleSearch(state) {
-    this.setState({
-      searchMode: state
-    }, () => {
-      if (state) this.searchInput.focus();
-    });
+  _toggleSearch() {
+    let container = document.querySelector('.navigation');
+    let input = document.querySelector('.navigation__search-input');
+    let state = container.classList.toggle('navigation--search-mode');
+
+    if ( state === true ) input.focus();
   }
 
   /**
-   * Handle focus events on the search input
+   * Expand the search input
    *
-   * @param {object} e - Native focus event
    */
-  _handleFocus(e) {
-    this._toggleSearch(true);
+  _openSearch() {
+    let container = document.querySelector('.navigation');
 
-    if (e.target.value.length) {
-      this._handleSearch(e);
-    }
-  }
-
-  /**
-   * Handle searching
-   *
-   * @param {object} - Native click event
-   */
-  _handleSearch(e) {
-    window.dispatchEvent(
-      new CustomEvent('search', {
-        detail: {
-          text: e.target.value
-        }
-      })
-    );
+    container.classList.add('navigation--search-mode');
   }
 }
