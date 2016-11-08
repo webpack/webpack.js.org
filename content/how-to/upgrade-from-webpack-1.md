@@ -114,7 +114,11 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
 ``` diff
   plugins: [
 +   new webpack.LoaderOptionsPlugin({
-+     minimize: true
++     options: {
++       htmlLoader: {
++         minimize: true
++       }
++     }
 +   })
   ]
 ```
