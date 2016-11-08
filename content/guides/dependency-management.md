@@ -1,7 +1,8 @@
 ---
 title: Dependency Management
-sort: 3
+sort: 6
 ---
+
 > es6 modules
 > commonjs
 > amd

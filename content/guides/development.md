@@ -1,6 +1,6 @@
 ---
-title: Developing and Debugging
-sort: 4
+title: Development
+sort: 9
 contributors:
   - SpaceK33z
 ---

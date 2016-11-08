@@ -1,6 +1,6 @@
 ---
 title: Hot Module Replacement - React
-sort: 6
+sort: 8
 contributors:
   - jmreidy
   - jhnns
