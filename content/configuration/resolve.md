@@ -8,9 +8,8 @@ contributors:
   - dear-lizhihua
 ---
 
-这些选项能够改变模块如何被解析。webpack 提供合理的默认选项，但是可能有解析细节需要修改。
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail.
-解析器(resolver)如何工作的更多说明，请查看[模块解析](/concepts/module-resolution)
+
 Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
 
 ## `resolve`
