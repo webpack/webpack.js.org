@@ -5,6 +5,31 @@ import Logo from '../logo/logo';
 import './navigation-style';
 import './search-style';
 
+let Links = [
+  { 
+    title: 'Concepts', 
+    url: '/concepts' 
+  },
+  { 
+    title: 'Guides', 
+    url: '/guides' 
+  },
+  { 
+    title: 'Documentation', 
+    url: '/configuration',
+    children: [
+      { title: 'Configuration', url: '/configuration' },
+      { title: 'Loaders', url: '/loaders' },
+      { title: 'Plugins', url: '/plugins' },
+      { title: 'API', url: '/api' }
+    ]
+  },
+  { 
+    title: 'Donate', 
+    url: '//opencollective.com/webpack' 
+  }
+];
+
 export default class Navigation extends React.Component {
   render() {
     let { pageUrl, sections } = this.props;
@@ -24,24 +49,19 @@ export default class Navigation extends React.Component {
 
           <nav className="navigation__links">
             {
-              sections.filter(section => ['Other', 'Get-Started'].indexOf(section.title) === -1).map((link, i) => {
-                let active = pageUrl.includes(`${link.url}/`);
-                let activeClass = active ? 'navigation__link--active' : '';
+              // sections.filter(section => ['Other', 'Get-Started'].indexOf(section.title) === -1).map((link, i) => {
+              //   let active = pageUrl.includes(`${link.url}/`);
+              //   let activeClass = active ? 'navigation__link--active' : '';
 
-                return (
-                  <Link
-                    key={ `navigation__link${i}` }
-                    className={ `navigation__link ${activeClass}` }
-                    to={ `/${link.url}` }>
-                    { link.title }
-                  </Link>
-                );
-              })
+              Links.map(link => (
+                <Link
+                  key={ `navigation__link-${link.title}` }
+                  className="navigation__link"
+                  to={ link.url }>
+                  { link.title }
+                </Link>
+              ))
             }
-
-            <Link className="navigation__link" to="//opencollective.com/webpack">
-              Donate
-            </Link>
           </nav>
 
           <div className="navigation__search">
@@ -62,14 +82,12 @@ export default class Navigation extends React.Component {
 
   componentDidMount() {
     if (typeof window !== 'undefined') {
-      // Initialize DocSearch/Algolia
       window.docsearch({
         apiKey: 'fac401d1a5f68bc41f01fb6261661490',
         indexName: 'webpack-js-org',
         inputSelector: '.navigation__search-input'
       });
 
-      // Open the search on tabbing for usability
       window.addEventListener('keyup', e => {
         if (e.which === 9 && e.target.classList.contains('navigation__search-input')) {
           this._openSearch();
