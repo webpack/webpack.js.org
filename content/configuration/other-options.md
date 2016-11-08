@@ -104,3 +104,7 @@ Description...
 Description...
 
 ?> Add example and description as well as details on `recordsInputPath` and `recordsOutputPath`.
+
+***
+
+> 原文：https://webpack.js.org/configuration/other-options/

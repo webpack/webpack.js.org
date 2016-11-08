@@ -42,3 +42,7 @@ contributors:
 T> 参考 [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilename) 来自定义生成 source map 的文件名。
 
 ?> This section is pretty much just copied over from existing docs... imo more background is needed on the different types of source mapping, maybe via links to external sites that discuss the different types of source maps in more detail.
+
+***
+
+> 原文：https://webpack.js.org/configuration/devtool/

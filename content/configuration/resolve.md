@@ -1,13 +1,15 @@
 ---
-title: 解决
+title: 解析
 contributors:
   - sokra
   - skipjack
   - SpaceK33z
   - pksjce
+  - dear-lizhihua
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail.
+
 Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
 
 ## `resolve`
@@ -271,3 +273,7 @@ Default: `["*-webpack-loader", "*-web-loader", "*-loader", "*"]`
 ## `resolve.cachePredicate`
 
 ?> Description
+
+***
+
+> 原文：https://webpack.js.org/configuration/resolve/

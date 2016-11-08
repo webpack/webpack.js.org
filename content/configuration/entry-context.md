@@ -40,3 +40,7 @@ entry: {
 ```
 
 当结合 [`output.library`](/configuration/output#output-library) 选项时：如果传入数组，则只导出最后一项。
+
+***
+
+> 原文：https://webpack.js.org/configuration/entry-context/

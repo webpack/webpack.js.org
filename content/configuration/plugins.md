@@ -24,3 +24,7 @@ plugins: [
 A more complex example, using multiple plugins, might look something like this:
 
 ?> Add a more detailed example
+
+***
+
+> 原文：https://webpack.js.org/configuration/plugins/
