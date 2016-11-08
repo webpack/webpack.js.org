@@ -17,7 +17,7 @@ contributors:
 context: path.resolve(__dirname, "app")
 ```
 
-默认使用当前目录，但是推荐在配置中传递一个值。这使得你的配置独立于 CWD。（译者注：是说这个么？[CWD](http://gruntjs.com/configuring-tasks#building-the-files-object-dynamically)）
+默认使用当前目录，但是推荐在配置中传递一个值。这使得你的配置独立于 CWD。（译者注：这个？[CWD](http://gruntjs.com/configuring-tasks#building-the-files-object-dynamically)）
 
 ---
 
