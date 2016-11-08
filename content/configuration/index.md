@@ -376,3 +376,7 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
   </details>
 }
 ```
+
+***
+
+> 原文：https://webpack.js.org/configuration/

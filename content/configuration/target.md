@@ -36,3 +36,7 @@ T> 允许引入 Electron 特有的模块
 ```js
 target: "web"
 ```
+
+***
+
+> 原文：https://webpack.js.org/configuration/target/

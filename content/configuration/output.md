@@ -352,3 +352,7 @@ umdNamedDefine: true
 ```
 
 will name the AMD module of the UMD build. Otherwise a anonymous `define` is used.
+
+***
+
+> 原文：https://webpack.js.org/configuration/output/

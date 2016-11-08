@@ -434,3 +434,7 @@ watchOptions: {
 如果这对文件系统来说太重了的话，你可以修改间隔时间（以毫秒为单位），将其设置为一个整数。
 
 查看 [WatchOptions](/configuration/watch) 更多选项。
+
+***
+
+> 原文：https://webpack.js.org/configuration/dev-server/

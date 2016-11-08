@@ -74,3 +74,7 @@ stats: {
   warnings: true
 };
 ```
+
+***
+
+> 原文：https://webpack.js.org/configuration/stats/

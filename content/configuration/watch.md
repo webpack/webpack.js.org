@@ -70,3 +70,6 @@ poll: 1000 // 每秒检查一次变动
 
 T> 如果监听没生效，试试这个选项吧。Watch 在 NFS 和 VirtualBox 机器上不适用。
 
+***
+
+> 原文：https://webpack.js.org/configuration/watch/
