@@ -79,3 +79,7 @@ module.exports = [ serverConfig, clientConfig ];
   **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**：大量有关「测试和查看不同的 webpack _目标_」的资源。也有大量 bug 报告。
 
 ?> Need to find up to date examples of these webpack targets being used in live code or boilerplates.
+
+***
+
+> 原文：https://webpack.js.org/concepts/targets/

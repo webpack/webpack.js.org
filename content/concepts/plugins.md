@@ -85,4 +85,8 @@ module.exports = config;
   });
 ```
 
-T> 你知道吗：以上看到的例子和[webpack 本身运行时](https://github.com/webpack/webpack/blob/master/bin/webpack.js#L290-L292)极其类似。[wepback 源码](https://github.com/webpack/webpack)中隐藏有大量使用示例，你可以应用到自己的配置和脚本中。
+T> 你知道吗：以上看到的例子和 [webpack 本身运行时](https://github.com/webpack/webpack/blob/master/bin/webpack.js#L290-L292)极其类似。[wepback 源码](https://github.com/webpack/webpack)中隐藏有大量使用示例，你可以应用到自己的配置和脚本中。
+
+***
+
+> 原文：https://webpack.js.org/concepts/plugins/

@@ -220,3 +220,7 @@ JavaScript 文件 SourceMap 的文件名。它们在 `output.path` 目录中。
 `[hash]` 被编译(compilation)的 hash 替换。
 
 > 默认值：`"[file].map"`
+
+***
+
+> 原文：https://webpack.js.org/concepts/output/

@@ -166,3 +166,7 @@ const CONFIG = (
 
 document.body.textContent = JSON.stringify(CONFIG, 0, '  ');
 ```
+
+***
+
+> 原文：https://webpack.js.org/concepts/configuration/
