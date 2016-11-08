@@ -1,8 +1,9 @@
 ---
-title: 扩展
+title: 外部扩展(external)
 contributors:
   - sokra
   - skipjack
+  - dear-lizhihua
 ---
 
 ?> Description
@@ -11,7 +12,7 @@ contributors:
 
 `string` `regex` `function` `array` `object`
 
-**Prevent bundling** of certain `import`ed packages and instead retrieve these *external packages at runtime*. For example, to include [jQuery](https://jquery.com/) from a CDN instead of bundling it:
+**防止打包**某些 `import` 的包(package)，而是*在运行时再去获取这些外部扩展包(package)*。例如，从 CDN 引入 [jQuery](https://jquery.com/)，而不是把它打包在源文件中：
 
 **index.html**
 
@@ -31,7 +32,7 @@ externals: {
 }
 ```
 
-This leaves any dependant modules unchanged, i.e. the code shown below will still work:
+这样就脱离了那些不需要改动的独立模块，换句话，下面展示的代码还可以正常运行：
 
 ```js
 import $ from 'jquery';
