@@ -59,7 +59,10 @@
   display:block;
   height:35px;
 
-  img { height:100%; width:auto; }
+  img { 
+    width:auto;
+    height:100%; 
+  }
 }
 
 .footer__link {

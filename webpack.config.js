@@ -37,7 +37,7 @@ const commonConfig = {
       },
       {
         test: /\.svg$/,
-        loaders: ['raw-loader']
+        loaders: ['file-loader']
       },
       {
         test: /\.html$/,
