@@ -4,3 +4,7 @@ sort: 2
 ---
 > module.loaders configuration option
 > test, include, exclude, loader, query
+
+***
+
+> 原文：https://webpack.js.org/concepts/loaders/

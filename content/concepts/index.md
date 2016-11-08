@@ -12,9 +12,9 @@ contributors:
 
 ## 入口(Entry)
 
-webpack 将创建所有应用程序 依赖关系(dependency)图表(graph)。图表的起点被称之为 _入口起点(entry point)_。_入口起点_告诉 webpack _从哪里开始_，并遵循着依赖关系图表知道_打包什么_。可以将您的应用_入口起点_认为是 **根上下文(contextual root)** 或 **app第一个启动文件**。
+webpack 将创建所有应用程序 依赖关系(dependency)图表(graph)。图表的起点被称之为 _入口起点(entry point)_。_入口起点_告诉 webpack _从哪里开始_，并遵循着依赖关系图表知道_打包什么_。可以将您的应用_入口起点_认为是 **根上下文(contextual root)** 或 **app 第一个启动文件**。
 
-在 webpack 我们在[webpack 配置对象](/configuration)中使用 `entry` 属性来定义 _入口_。
+在 webpack 我们在 [webpack 配置对象](/configuration)中使用 `entry` 属性来定义 _入口_。
 
 接下来我们看一个最简单的例子：
 
@@ -34,7 +34,7 @@ module.exports = config;
 
 ## 出口(Output)
 
-一旦你已经将所有 资源(assets) 打包在一起，我们仍然需要告诉 webpack 在 **哪里** 打包我们的应用。wepback 的 `output` 属性描述了**如何处理打包代码**。
+一旦你已经将所有 资源(assets) 打包在一起，我们仍然需要告诉 webpack 在**哪里**打包我们的应用。wepback 的 `output` 属性描述了**如何处理打包代码**。
 
 **webpack.config.js**
 
@@ -97,7 +97,7 @@ W> 重要的是要记得，在 webpack 配置中定义 loader 时，要定义在
 
 ## 插件(Plugins)
 
-由于加载器仅基于单个文件执行转换，`插件`最常用于（但不限于）在打包模块的“编译(compilation)”和“组块(chunk)”时执行操作和自定义功能[（查看更多）](/concepts/plugins)。webpack 的插件系统[极其强大和可定制](/api/plugins)。
+由于加载器仅基于单个文件执行转换，`插件`最常用于（但不限于）在打包模块的“编译(compilation)”和“分块(chunk)”时执行操作和自定义功能[（查看更多）](/concepts/plugins)。webpack 的插件系统[极其强大和可定制](/api/plugins)。
 
 为了使用插件，你只需要 `require()` 它们，并且把它们添加到 `plugins` 数组。多数插件可以通过选项(option)自定义。由于你可以在一个配置多次使用插件用于不同的目的，因此你需要使用 `new` 来创建插件的实例，并且调用插件。
 
@@ -132,3 +132,7 @@ webpack 提供许多开箱可用的插件！查阅我们的[插件列表](/plugi
 在 webpack 配置中使用插件是直接的，然而有很多用例值得我们深入讨论。
 
 [**了解更多！**](/concepts/plugins)
+
+***
+
+> 原文：https://webpack.js.org/concepts/

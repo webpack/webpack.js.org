@@ -69,3 +69,7 @@ require("module/lib/file");
 `resolve.unsafeCache` 配置选项通过主动缓存提高的性能。每个解析过程都被缓存，并且永远不会被清除。在多数情况下是正确的，但是边缘情况下是错误的（什么是边缘情况？）。
 
 有关上述配置的更多信息，请查看[解析 API](/configuration/resolve)。
+
+***
+
+> 原文：https://webpack.js.org/concepts/module-resolution/
