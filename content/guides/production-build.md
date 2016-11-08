@@ -1,6 +1,6 @@
 ---
 title: Building for Production
-sort: 7
+sort: 13
 contributors:
   - henriquea
 ---

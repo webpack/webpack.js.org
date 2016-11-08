@@ -1,5 +1,6 @@
 ---
-title: How to Split CSS?
+title: Code Splitting - CSS
+sort: 3
 contributors:
   - pksjce
 ---

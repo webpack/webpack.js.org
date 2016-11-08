@@ -1,5 +1,6 @@
 ---
-title: How to lazy load React 
+title: Lazy Loading - React
+sort: 14
 contributors:
   - iammerrick
 ---

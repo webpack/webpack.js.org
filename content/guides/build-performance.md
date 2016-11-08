@@ -1,6 +1,6 @@
 ---
 title: Improving Build Performance
-sort: 8
+sort: 15
 ---
 
 > incremental builds

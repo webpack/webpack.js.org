@@ -1,6 +1,6 @@
 ---
 title: Hot Module Replacement
-sort: 5
+sort: 7
 contributors:
   - jmreidy
   - jhnns

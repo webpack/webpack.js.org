@@ -57,22 +57,22 @@ module.exports = {
         );
       }
     ),
+    guides: section(
+      'Guides',
+      function() {
+        return require.context(
+          'json-loader!yaml-frontmatter-loader!./content/guides',
+          true,
+          /^\.\/.*\.md$/
+        );
+      }
+    ),
     configuration: section(
       'Configuration',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/configuration',
           false,
-          /^\.\/.*\.md$/
-        );
-      }
-    ),
-    'how-to': section(
-      'How to',
-      function() {
-        return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/how-to',
-          true,
           /^\.\/.*\.md$/
         );
       }
