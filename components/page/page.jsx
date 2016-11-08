@@ -33,8 +33,6 @@ export default ({ section, page }) => {
 
         <div dangerouslySetInnerHTML={{ __html: page.content }} />
 
-        <hr />
-
         <Contributors contributors={ page.contributors } />
       </section>
     </Container>

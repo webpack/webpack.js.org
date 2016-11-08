@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from '../link/link';
 import Container from '../container/container';
-import CubeImg from '../../assets/cube.png';
+import Icon from '../../assets/icon-square-small.svg';
 import './footer-style';
 
 export default (props) => {
@@ -17,11 +17,12 @@ export default (props) => {
 
         <section className="footer__middle">
           <Link to="/" className="footer__icon">
-            <img src={ CubeImg } />
+            <img src={ Icon } />
           </Link>
         </section>
 
         <section className="footer__right">
+          <Link className="footer__link" to="/branding">品牌</Link>
           <Link className="footer__link" to="//gitter.im/webpack/webpack">支持</Link>
           <Link className="footer__link" to="https://github.com/webpack/webpack/releases">更新日志</Link>
           <Link className="footer__link" to="/license">遵循协议</Link>

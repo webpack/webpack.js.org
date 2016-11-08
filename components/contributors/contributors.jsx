@@ -8,7 +8,8 @@ export default ({contributors}) => {
 
   return (
     <div className="contributors">
-      <h3>贡献者：</h3>
+      <hr />
+      <h3>Contributors:</h3>
       <div className="contributors__list">
         {
           (contributors).map((contributor) => (
