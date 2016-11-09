@@ -37,7 +37,7 @@ require("../src/file");
 require("./file");
 ```
 
-In this case, the directory of the resource file is taken to be the context directory. The given relative path is joined to the context path to produce the absolute path to the file.
+In this case, the directory of the resource file is taken to be the context directory (the directory of the currently processed file). The given relative path is joined to the context path to produce the absolute path to the file.
 
 * Module path
 
@@ -47,7 +47,7 @@ require("module/lib/file");
 ```
 
 Modules are searched for inside directories which are specified using `resolve.modules`, which is can be an array comprising of different paths.
-Aliasing, ie setting `resolve.alias` to an existing module path, allows you to replace the module path with an alias name during `require/import`.
+Aliasing, i. e. setting `resolve.alias` to an existing module path, allows you to replace the module path with an alias name during `require/import`.
 
 Once the path is resolved based on the above rule, the resolver checks if the path points to a file or to a directory. If the path points to a file then it is bundled straightaway.
 But if the path points to a folder, then the following steps are taken to find the right file with the right extension.
