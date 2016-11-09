@@ -14,7 +14,7 @@ Have a look at [Module Resolution](/concepts/module-resolution) for more explana
 
 `object`
 
-Configure how modules are resolved. For example, when calling `import "lodash"` in ES6, the `resolve` options can change where webpack goes to look for `"lodash"` (see [`modules`](#resolve-modules)).
+Configure how modules are resolved. For example, when calling `import "lodash"` in ES2015, the `resolve` options can change where webpack goes to look for `"lodash"` (see [`modules`](#resolve-modules)).
 
 ## `resolve.alias`
 

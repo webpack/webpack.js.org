@@ -18,7 +18,7 @@ webpack builds on lessons learned from these systems and applies the concept of 
 
 In contrast to Node.js modules, webpack _modules_ can express their _dependencies_ in a variety of ways. A few examples are:
 
-* An ECMAScript2015 `import` statement
+* An ES2015 `import` statement
 * A JavaScript `require()` statement
 * An AMD `define` and `require` statement
 * An `@import` statement inside of a css/sass/less file.
