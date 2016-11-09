@@ -233,6 +233,10 @@ Configure how the library will be exposed. Any one of the following options can 
 
 `libraryTarget: "var"` - Expose it as a variable (i.e. `var MyLibrary = ...`)
 
+`libraryTarget: "assign"` - Expose it as a property on a variable (i.e. `MY_CUSTOM_LIB["name/from/output.library"] = ...`)
+
+`libraryTarget: "jsonp"` - Expose it as jsonp wrapped code using the name from output.library  (i.e. `NameFromOutputLibrary(__webpack_compiled_code__)`)
+
 ## `output.path`
 
 `string`
