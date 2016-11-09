@@ -225,7 +225,7 @@ Configure how the library will be exposed. Any one of the following options can 
 
 `libraryTarget: "commonjs2"` - Expose it using the `module.exports` object (`output.library` is ignored)
 
-`libraryTarget: "commonjs-module"` - Expose it using the `module.exports` object (`output.library` is ignored), `__esModule` is defined (it's threaded as ES6 Module in interop mode)
+`libraryTarget: "commonjs-module"` - Expose it using the `module.exports` object (`output.library` is ignored), `__esModule` is defined (it's threaded as ES2015 Module in interop mode)
 
 `libraryTarget: "this"` - Expose it as a property of `this` (i.e. `this["MyLibrary"] = ...`)
 
