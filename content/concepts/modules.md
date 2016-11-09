@@ -22,7 +22,7 @@ In contrast to Node.js modules, webpack _modules_ can express their _dependencie
 * An ECMAScript2015 `import` statement
 * An AMD `define` and `require` statement
 * An `@import` statement inside of a css/sass/less file.
-* An image url in a stylesheet or html file.
+* An image url in a stylesheet (`url(...)`) or html (`<img src=...>`) file.
 
 T> webpack 1 requires a specific loader to convert ECMAScript2015 `import`, however this is possible out of the box via webpack 2
 
