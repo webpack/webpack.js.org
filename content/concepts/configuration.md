@@ -1,8 +1,25 @@
 ---
 title: Configuration
+contributors:
 ---
 
-You may have noticed that few webpack configurations look exactly alike. This is because **webpack's configuration file is a JavaScript file that exports an object.** This object, is then parsed by webpack based upon its defined properties.
+You may have noticed that few webpack configurations look exactly alike. This is because **webpack's configuration file is a JavaScript file that exports an object.** This object is then processed by webpack based upon its defined properties.
+
+Because it's a standard node.js CommonJs module, you **can do the following**:
+
+* import other files via `require(...)`
+* use utilities on npm via `require(...)`
+* use JS controlflow expressions i. e. the `?:` operator
+* use constants or variables for often used values
+* write and execute function to generate a part of the configuration
+
+Use these features when appropriate.
+
+**You should NOT use the following things**. Technically you could use them, but it's **not recommended**:
+
+* Access CLI arguments, when using the webpack CLI (instead write your own CLI, or use `--env`)
+* Export non-deterministic values (calling webpack twice should result in the same output files)
+* Write very long configurations (instead split the configuration into multiple files)
 
 The following examples below describe how webpack's configuration object can be both expressive and configurable because _it is code_:
 
@@ -35,8 +52,8 @@ var baseConfig = {
     entry: './entry.js'
   },
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js'
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({

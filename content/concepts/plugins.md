@@ -6,7 +6,7 @@ contributors:
   - jhnns
 ---
 
-**Plugins** are the [backbone](https://github.com/webpack/tapable) of webpack. webpack itself is built on the **same plugin system** that you use in your webpack configuration!!
+**Plugins** are the [backbone](https://github.com/webpack/tapable) of webpack. webpack itself is built on the **same plugin system** that you use in your webpack configuration!
 
 They also serve the purpose of doing **anything else** that a [loader](/concepts/loaders) cannot do.
 
@@ -30,6 +30,8 @@ ConsoleLogOnBuildWebpackPlugin.prototype.apply = function(compiler) {
   });
 };
 ```
+
+T> As clever JS developer you may remember the `Function.prototype.apply` method. Because of this method you can pass any function as plugin (`this` will point to the `compiler`). You can use this style to inline custom plugins in your configuration.
 
 ## Usage
 
@@ -69,6 +71,8 @@ module.exports = config;
 ```
 
 ### Node API
+
+?> Even when using the Node API, users should pass plugins via the `plugins` property in the configuration. Using `compiler.apply` should not be the recommended way.
 
 **some-node-script.js**
 

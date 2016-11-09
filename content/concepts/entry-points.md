@@ -1,6 +1,8 @@
 ---
 title: Entry Points
 sort: 0
+contributors:
+  - TheLarkInn
 ---
 
 Like we mentioned in the [introduction](./), there are multiple ways to define the `entry` property in your webpack configuration. We will show you the ways you **can** configure the `entry` property, in addition to explaining why it may be useful to you.
@@ -73,6 +75,8 @@ const config = {
 
 **Why?** This setup allows you to leverage `CommonsChunkPlugin` and extract any vendor references from your app bundle into your vendor bundle, replacing them with `__webpack_require__()` calls. If there is no vendor code in your application bundle, then you can achieve a common pattern in webpack known as [long-term vendor-caching](/how-to/cache).
 
+?> Consider removing this scenario in favor of the DllPlugin, which provides a better vendor-splitting.
+
 #### Multi Page Application
 
 **webpack.config.js**
@@ -82,16 +86,15 @@ const config = {
   entry: {
     pageOne: './src/pageOne/index.js',
     pageTwo: './src/pageTwo/index.js',
-    pageThree: './src/pageThree/index.js',
-    vendors: './src/vendors.js'
+    pageThree: './src/pageThree/index.js'
   }
 };
 ```
 
-**What does this do?** We are telling webpack that we would like 4 separate dependency graphs (like the above example).
+**What does this do?** We are telling webpack that we would like 3 separate dependency graphs (like the above example).
 
 **Why?** In a multi-page application, the server is going to fetch a new HTML document for you. The page reloads this new document and assets are redownloaded. However, this gives us the unique opportunity to do multiple things:
 
 - Use `CommonsChunkPlugin` to create bundles of shared application code between each page. Multi-page applications that reuse a lot of code/modules between entry points can greatly benefit from these techniques, as the amount of entry points increase.
 
-- Set up [long-term vendor-caching](/how-to/cache) with the same plugin and techniques seen in the first example.
+T> As a rule of thumb: for one HTML use exactly one entry point.
