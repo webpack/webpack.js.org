@@ -37,7 +37,7 @@ The usage spec for the library will be as follows.
 import * as webpackNumbers from 'webpack-numbers';
 
 ...
-webpackNumbers.wordToNum('Two') /// output is 2
+webpackNumbers.wordToNum('Two') // output is 2
 ...
 
 // CommonJs modules
