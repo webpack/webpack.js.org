@@ -138,7 +138,7 @@ This means that your library expects a dependency named `lodash` to be available
 
 ### Add `libraryTarget`
 
-For widespread use of the library, we would like it to be compatible in different environments, ie CommonJs, AMD, nodejs and as a global variable.
+For widespread use of the library, we would like it to be compatible in different environments, i. e. CommonJs, AMD, Node.js and as a global variable.
 
 To make your library available for reuse, add `library` property in webpack configuration.
 

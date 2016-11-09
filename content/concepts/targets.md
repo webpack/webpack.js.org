@@ -26,10 +26,10 @@ module.exports = config;
 
 The following is a list of values you can pass to the `target` property.
 
-* `"async-node"` Compile for usage in a node.js-like environment (use `fs` and `vm` to load chunks async)
+* `"async-node"` Compile for usage in a Node.js-like environment (use `fs` and `vm` to load chunks async)
 * `"electron-main"` Compile for electron renderer process, provide a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environment and `NodeTargetPlugin` and `ExternalsPlugin` for commonjs and electron bulit-in modules. *Note: need `webpack` >= 1.12.15.
-* `"node"` Compile for usage in a node.js-like environment (uses node.js `require` to load chunks)
-* `"node-webkit"` Compile for usage in webkit, uses jsonp chunk loading but also supports build in node.js modules plus require("nw.gui") (experimental)
+* `"node"` Compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks)
+* `"node-webkit"` Compile for usage in webkit, uses jsonp chunk loading but also supports build in Node.js modules plus require("nw.gui") (experimental)
 * `"web"` Compile for usage in a browser-like environment (default)
 * `"webworker"` Compile as WebWorker
 

@@ -159,14 +159,14 @@ For example, the `package.json` of [D3](https://d3js.org/) contains these fields
 ```js
 {
   ...
-  main: 'build/d3.node.js',
+  main: 'build/d3.Node.js',
   browser: 'build/d3.js',
   module: 'index',
   ...
 }
 ```
 
-This means that when we `import * as D3 from "d3"` this will really resolve to the file in the `browser` property. The `browser` property takes precedence here because it's the first item in `mainFields`. Meanwhile, a node application bundled by webpack will resolve by default to the file in the `module` field.
+This means that when we `import * as D3 from "d3"` this will really resolve to the file in the `browser` property. The `browser` property takes precedence here because it's the first item in `mainFields`. Meanwhile, a Node.js application bundled by webpack will resolve by default to the file in the `module` field.
 
 
 ## `resolve.mainFiles`
