@@ -21,7 +21,7 @@ The dependency module can be from the application code or a third party library.
 
 `webpack` resolves three kinds of file paths
 
-* Absolute paths
+### Absolute paths
 
 ```js
 import "/home/me/file";
@@ -30,7 +30,7 @@ import "C:\\Users\\me\\file";
 
 Since we already have the absolute path to the file, no further resolution is required.
 
-* Relative paths
+### Relative paths
 
 ```js
 import "../src/file";
@@ -39,7 +39,7 @@ import "./file";
 
 In this case, the directory of the resource file is taken to be the context directory (the directory of the currently processed file). The given relative path is joined to the context path to produce the absolute path to the file.
 
-* Module path
+### Module path
 
 ```js
 import "module";
