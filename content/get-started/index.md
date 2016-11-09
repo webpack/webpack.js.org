@@ -151,7 +151,7 @@ Given it's not particularly fun to run webpack from the CLI this way, we can set
 {
   ...
   "scripts": {
-    "build": "webpack --"
+    "build": "webpack"
   },
   ...
 }
@@ -159,7 +159,7 @@ Given it's not particularly fun to run webpack from the CLI this way, we can set
 
 You can now achieve the same as above by using `npm run build` command. npm picks up the scripts through it and patches the environment temporarily so that it contains the bin commands. You will see this convention a lot of projects out there.
 
-T> I use `webpack --` so that we can pass custom parameters to webpack through npm.
+T> You can pass custom parameters to webpack by adding two dashes to the `npm run build` command, e.g. `npm run build -- --colors`.
 
 ## Conclusion
 
