@@ -42,16 +42,16 @@ Let us consider the following project
 ```javascript
 \\ entry.js
 
-require('a')
+require('a');
 require.ensure([], function(require){
-    require('b')
-})
+    require('b');
+});
 
 \\ a.js
-console.log('***** I AM a *****')
+console.log('***** I AM a *****');
 
 \\ b.js
-console.log('***** I AM b *****')
+console.log('***** I AM b *****');
 ```
 
 ```javascript
@@ -79,8 +79,8 @@ On running webpack on this project, we find that webpack has created two new bun
 
 ```javascript
 require.ensure([], function(require){
-    require('./a.js')
-})
+    require('./a.js');
+});
 ```
 
 The above code ensures that a split point is created and `a.js` is bundled separately by webpack.
@@ -90,7 +90,7 @@ The above code ensures that a split point is created and `a.js` is bundled separ
 ```javascript
 require.ensure(['./a.js'], function(require) {
     require('./b.js');
-})
+});
 ```
 
 In the above code, `a.js` and `b.js` are bundled together and split from the main bundle. But only the contents of `b.js` are executed. The contents of `a.js` are only made available and not executed.
