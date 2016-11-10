@@ -16,7 +16,7 @@ Have a look at [Module Resolution](/concepts/module-resolution) for more explana
 
 `object`
 
-Configure how modules are resolved. For example, when calling `import "lodash"` in ES6, the `resolve` options can change where webpack goes to look for `"lodash"` (see [`modules`](#resolve-modules)).
+Configure how modules are resolved. For example, when calling `import "lodash"` in ES2015, the `resolve` options can change where webpack goes to look for `"lodash"` (see [`modules`](#resolve-modules)).
 
 ## `resolve.alias`
 
@@ -58,7 +58,7 @@ import Test1 from 'xyz'; // Success, file.js is resolved and imported
 import Test2 from 'xyz/file.js'; // Error, /path/to/file.js/file.js is invalid
 ```
 
-| `alias:` | `require("xyz")` | `require("xyz/file.js")` |
+| `alias:` | `import "xyz"` | `import "xyz/file.js"` |
 | -------- | ---------------- | -------------------------|
 | `{}` | `/abc/node_modules/xyz/index.js` | `/abc/node_modules/xyz/file.js` |
 | `{ xyz: "/abs/path/to/file.js" }` | `/abs/path/to/file.js` | error |
@@ -161,14 +161,14 @@ For example, the `package.json` of [D3](https://d3js.org/) contains these fields
 ```js
 {
   ...
-  main: 'build/d3.node.js',
+  main: 'build/d3.Node.js',
   browser: 'build/d3.js',
   module: 'index',
   ...
 }
 ```
 
-This means that when we `import * as D3 from "d3"` this will really resolve to the file in the `browser` property. The `browser` property takes precedence here because it's the first item in `mainFields`. Meanwhile, a node application bundled by webpack will resolve by default to the file in the `module` field.
+This means that when we `import * as D3 from "d3"` this will really resolve to the file in the `browser` property. The `browser` property takes precedence here because it's the first item in `mainFields`. Meanwhile, a Node.js application bundled by webpack will resolve by default to the file in the `module` field.
 
 
 ## `resolve.mainFiles`

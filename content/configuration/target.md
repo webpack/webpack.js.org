@@ -23,7 +23,7 @@ contributors:
 `target: "webworker"` - 编译成一个 [WebWorker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API)
 
 
-T> 允许引入 node 内置模块和 [`nw.gui`](http://docs.nwjs.io/en/latest/) （实验性的）
+T> 允许引入 Node.js 内置模块和 [`nw.gui`](http://docs.nwjs.io/en/latest/) （实验性）
 
 `target: "async-node"` - 使用 `fs` and `vm` 异步加载包
 

@@ -22,7 +22,7 @@ __index.js__
 ```javascript
 
 var moment = require('moment');
-console.log(moment().format())
+console.log(moment().format());
 
 ```
 
@@ -134,7 +134,7 @@ modules.export = function(env) {
             })
         ]
     }
-}
+};
 ```
 
 With the above webpack config, we see three bundles being generated. `vendor`, `main` and `manifest` bundles.

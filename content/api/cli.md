@@ -9,7 +9,7 @@ For proper usage and easy distribution of this configuration, webpack can be con
 
 ## Installation
 
-Have a look at [this page](/how-to/install-webpack)
+Have a look at [this page](/get-started/install-webpack)
 
 ### Common Usage
 

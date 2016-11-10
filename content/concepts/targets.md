@@ -27,6 +27,12 @@ module.exports = config;
 
 以下是可以传递给 `target` 属性的值的列表。
 
+* `"async-node"` Compile for usage in a Node.js-like environment (use `fs` and `vm` to load chunks async)
+* `"electron-main"` Compile for electron renderer process, provide a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environment and `NodeTargetPlugin` and `ExternalsPlugin` for commonjs and electron bulit-in modules. *Note: need `webpack` >= 1.12.15.
+* `"node"` Compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks)
+* `"node-webkit"` Compile for usage in webkit, uses jsonp chunk loading but also supports build in Node.js modules plus require("nw.gui") (experimental)
+* `"web"` Compile for usage in a browser-like environment (default)
+* `"webworker"` Compile as WebWorker
 * `"async-node"` 编译为 类 node.js(node.js-like) 环境可用（使用 `fs` 和 `vm` 加载异步块）
 * `"electron-main"` Compile for electron renderer process, provide a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environment and `NodeTargetPlugin` and `ExternalsPlugin` for commonjs and electron bulit-in modules. *注意: 需要 `webpack` >= 1.12.15。
 * `"node"` 编译为 类 node.js(node.js-like) 环境可用（使用 `require` 加载块）

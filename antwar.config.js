@@ -37,6 +37,16 @@ module.exports = {
         );
       }
     ),
+    'get-started': section(
+      'Get-Started',
+      function() {
+        return require.context(
+          'json-loader!yaml-frontmatter-loader!./content/get-started',
+          false,
+          /^\.\/.*\.md$/
+        )
+      }
+    ),
     concepts: section(
       '概念',
       function() {

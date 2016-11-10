@@ -1,20 +1,18 @@
 ## 编写代码
 
-**index.js**
+**app.js**
 
 ```js
-const foo = require('./foo.js')
+import bar from './foo';
 
-foo.bar()
+bar():
 ```
 
 **foo.js**
 
 ```js
-module.exports = {
-  bar: function () {
-    //
-  }
+export function bar() {
+  //
 }
 ```
 
@@ -23,9 +21,9 @@ module.exports = {
 
 ```js
 module.exports = {
-  entry: './index.js',
+  entry: './app.js',
   output: {
-    path: 'bundle.js'
+    filename: 'bundle.js'
   }
 }
 ```
@@ -39,7 +37,7 @@ module.exports = {
   </head>
   <body>
     ...
-    <script src="/bundle.js"></script>
+    <script src="bundle.js"></script>
   </body>
 </html>
 ```

@@ -33,7 +33,7 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
 
     [path](/configuration/output#output-path): path.resolve(__dirname, "dist"), // string
     // 所有输出文件的目标路径
-    // 必须是绝对路径（使用 node.js 的 path 模块）
+    // 必须是绝对路径（使用 Node.js 的 path 模块）
 
     <details><summary>[filename](/configuration/output#output-filename): "bundle.js", // string</summary>
     [filename](/configuration/output#output-filename): "[name].js", // 用于多个入口点(entry point)（出口点？）
@@ -51,8 +51,8 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
     // 导出库(exported library)的名称
 
     <details><summary>[libraryTarget](/configuration/output#output-librarytarget): "umd", // 枚举</summary>
-    [libraryTarget](/configuration/output#output-librarytarget): "umd-module", // 包裹在 UMD 中的 ES6 模块
-    [libraryTarget](/configuration/output#output-librarytarget): "commonjs-module", // 包裹在 CommonJs 中的 ES6 模块
+    [libraryTarget](/configuration/output#output-librarytarget): "umd-module", // 包裹在 UMD 中的 ES2015 模块
+    [libraryTarget](/configuration/output#output-librarytarget): "commonjs-module", // 包裹在 CommonJs 中的 ES2015 模块
     [libraryTarget](/configuration/output#output-librarytarget): "commonjs2", // 使用 module.exports 导出
     [libraryTarget](/configuration/output#output-librarytarget): "commonjs", // 作为 exports 的属性导出
     [libraryTarget](/configuration/output#output-librarytarget): "amd", // 使用 AMD 定义方法来定义
@@ -301,7 +301,7 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
   <details><summary>[target](/configuration/target): "web", // 枚举</summary>
   [target](/configuration/target): "webworker", // WebWorker
   [target](/configuration/target): "node", // node.js 通过 require
-  [target](/configuration/target): "async-node", // node.js 通过 fs and vm
+  [target](/configuration/target): "async-node", // Node.js 通过 fs and vm
   [target](/configuration/target): "node-webkit", // nw.js
   [target](/configuration/target): "electron-main", // electron，主进程(main process)
   [target](/configuration/target): "electron-renderer", // electron，渲染进程(renderer process)

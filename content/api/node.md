@@ -20,7 +20,7 @@ Then require the webpack module in your Node.js script:
 ``` js
 const webpack = require("webpack");
 
-// Or if you prefer ES6:
+// Or if you prefer ES2015:
 import webpack from "webpack";
 ```
 

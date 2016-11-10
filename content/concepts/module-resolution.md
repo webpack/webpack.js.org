@@ -21,29 +21,29 @@ import mymodule from '/path/to/module'
 
 `webpack` 解析三种文件路径
 
-* 绝对路径
+### 绝对路径
 
 ```js
-require("/home/me/file");
-require("C:\\Home\\me\\file");
+import "/home/me/file";
+import "C:\\Users\\me\\file";
 ```
 
 由于我们已经有了文件的绝对路径，因此不需要进一步解析。
 
-* 相对路径
+### 相对路径
 
 ```js
-require("../src/file");
-require("./file");
+import "../src/file";
+import "./file";
 ```
 
-在示例中，资源文件的目录被认为是上下文目录(context directory)。给定的相对路径被追加到上下文路径(context path)，以生成文件绝对路径(absolute path)。
+在示例中，资源文件的目录被认为是上下文目录(context directory)（当前处理文件的目录）。给定的相对路径被追加到上下文路径(context path)，以生成文件绝对路径(absolute path)。
 
-* 模块路径
+### 模块路径
 
 ```js
-require("module");
-require("module/lib/file");
+import "module";
+import "module/lib/file";
 ```
 
 模块被指定在 `resolve.modules` 的内部目录中搜索，该目录可以是由不同的路径组成的数组。

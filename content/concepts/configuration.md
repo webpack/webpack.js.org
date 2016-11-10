@@ -16,7 +16,7 @@ contributors:
 module.exports = {
   entry: './foo.js',
   output: {
-    path: 'dist',
+    path: path.resolve(__dirname, 'dist'),
     filename: 'foo.bundle.js'
   }
 };
@@ -38,7 +38,7 @@ var baseConfig = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, './dist')
+    path: path.resolve(__dirname, 'dist')
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
@@ -57,7 +57,7 @@ let targets = ['web', 'webworker', 'node', 'async-node', 'node-webkit', 'electro
   let base = webpackMerge(baseConfig, {
     target: target,
     output: {
-      path: path.resolve(__dirname, './dist/' + target),
+      path: path.resolve(__dirname, 'dist/' + target),
       filename: '[name].' + target + '.js'
     }
   });
@@ -145,7 +145,7 @@ const CustomPlugin = config => ({
   name: 'custom-plugin'
 });
 
-const CONFIG = (
+export default (
   <webpack target="web" watch>
     <entry path="src/index.js" />
     <resolve>
@@ -163,8 +163,6 @@ const CONFIG = (
     </plugins>
   </webpack>
 );
-
-document.body.textContent = JSON.stringify(CONFIG, 0, '  ');
 ```
 
 ***

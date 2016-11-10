@@ -23,7 +23,7 @@ export default class Navigation extends React.Component {
 
           <nav className="navigation__links">
             {
-              sections.filter(section => section.title !== 'Other').map((link, i) => {
+              sections.filter(section => ['Other', 'Get-Started'].indexOf(section.title) === -1).map((link, i) => {
                 let active = pageUrl.includes(`${link.url}/`);
                 let activeClass = active ? 'navigation__link--active' : '';
 

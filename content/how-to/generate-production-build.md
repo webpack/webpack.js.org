@@ -20,9 +20,9 @@ One of the good options to go is using `cheap-module-source-map` which simplifie
 
 ## Node environment variable
 
-The second step is to tell webpack to generate a production build by setting the node environment variable to `production`. webpack will not include any extra useful code, warnings and checks used in development.
+The second step is to tell webpack to generate a production build by setting the Node.js environment variable to `production`. webpack will not include any extra useful code, warnings and checks used in development.
 
-The `DefinePlugin` creates **compile** time constants. Useful for injecting your node environment as seen below.
+The `DefinePlugin` creates **compile** time constants. Useful for injecting your Node.js environment as seen below.
 
 ?> TODO: Add a link to the `ProvidePlugin` documentation
 
