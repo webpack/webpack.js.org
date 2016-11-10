@@ -2,21 +2,22 @@
 title: 如何生成一个生产构建？
 contributors:
   - henriquea
+  - xie qianyue
 ---
 
-Generating production builds with webpack is straight-forward. There are three things to keep in mind:
+使用 webpack 来构建生产版本 (production build) 并不困难。只需要记住下面三点：
 
 - Source Maps
-- Node environment
+- Node 环境
 - Minification
 
 ## Source Maps
 
-We encourage you to have Source Maps enabled in production. They are useful for debugging and to run benchmark tests. Webpack can generate inline Source Maps included in the bundles or separated files.
+我们鼓励你在生产环境中也使用 Source Maps。它有助于你进行调试和基准测试 (benchmark test)。Webpack 能够在打包文件 (bundle) 中嵌入 inline Source Maps，或者生成 Source Maps 到新的文件中。
 
-In your configuration, use the `devtools` object to set the Source Map type. We currently support seven types of Source Maps. You can find more information about them in our [configuration](/configuration/devtool) documentation page.
+在配置文件中使用 `devtools` 对象来设置 Source Maps 的类别。现阶段我们支持七种类别。你可以在[配置](configuration/devtool)页面里找到关于类别的更多信息。
 
-One of the good options to go is using `cheap-module-source-map` which simplifies the Source Maps to a single mapping per line.
+`cheap-module-source-map` 是诸多实用选项之一，它能够简化 Source Maps，使其只包含对应的行信息。
 
 ## Node environment variable
 
