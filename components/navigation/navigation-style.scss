@@ -16,6 +16,11 @@
 
     .navigation__inner {
       position:absolute;
+      left:0;
+
+      @include break {
+        left:auto;
+      }
     }
 
     .navigation__link:hover,

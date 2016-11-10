@@ -8,9 +8,9 @@ A resolver is a library which helps find the absolute path of a module.
 A module can be required as a dependency from another module as
 
 ```js
-require('/path/to/module')
-//or
-import mymodule from '/path/to/module'
+import mymodule from 'path/to/module'
+// or
+require('path/to/module')
 ```
 
 The dependency module can be from the application code or a third party library. The resolver helps
@@ -21,33 +21,33 @@ The dependency module can be from the application code or a third party library.
 
 `webpack` resolves three kinds of file paths
 
-* Absolute paths
+### Absolute paths
 
 ```js
-require("/home/me/file");
-require("C:\\Home\\me\\file");
+import "/home/me/file";
+import "C:\\Users\\me\\file";
 ```
 
 Since we already have the absolute path to the file, no further resolution is required.
 
-* Relative paths
+### Relative paths
 
 ```js
-require("../src/file");
-require("./file");
+import "../src/file";
+import "./file";
 ```
 
-In this case, the directory of the resource file is taken to be the context directory. The given relative path is joined to the context path to produce the absolute path to the file.
+In this case, the directory of the resource file is taken to be the context directory (the directory of the currently processed file). The given relative path is joined to the context path to produce the absolute path to the file.
 
-* Module path
+### Module path
 
 ```js
-require("module");
-require("module/lib/file");
+import "module";
+import "module/lib/file";
 ```
 
 Modules are searched for inside directories which are specified using `resolve.modules`, which is can be an array comprising of different paths.
-Aliasing, ie setting `resolve.alias` to an existing module path, allows you to replace the module path with an alias name during `require/import`.
+Aliasing, i. e. setting `resolve.alias` to an existing module path, allows you to replace the module path with an alias name during `require/import`.
 
 Once the path is resolved based on the above rule, the resolver checks if the path points to a file or to a directory. If the path points to a file then it is bundled straightaway.
 But if the path points to a folder, then the following steps are taken to find the right file with the right extension.

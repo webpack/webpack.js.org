@@ -22,7 +22,7 @@ Tell webpack what environment the application is targeting. The following option
 `target: "webworker"` - Compile as a [WebWorker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API)
 
 
-T> Allows importing of built-in node modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental).
+T> Allows importing of built-in Node.js modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental).
 
 `target: "async-node"` - Use `fs` and `vm` to load chunks asynchronously
 
