@@ -1,6 +1,32 @@
 ---
-title: Compared to Other Systems
+title: Why webpack?
+contributors:
+  - pksjce
+  - bebraw
+sort: 2
 ---
+
+webpack is usually compared to tools like Make, Grunt, Gulp, Browserify or Brunch. However, some of these tools (Make, Grunt, and Gulp, which are task runners) have a much different purpose than webpack, which is a module bundler. Comparing them directly could lead to sorts of confusion, so let’s first draw a distinction between these types of tools.
+
+## What Are Task Runners?
+
+Task runners literally make it easier to handle tasks, such as linting, building, or developing your project. Compared to *bundlers* like Browserify, Brunch, or webpack, they have a higher level focus. Bundlers, on the other hand, have a much more specific goal.
+
+
+## What Are Bundlers?
+
+Roughly put bundlers take assets, such as JavaScript files in, and then transform them into format that's suitable for the browser of the end user to consume. This process of bundling happens to be one of the most important problems in web development and solving it well you can remove a large part of pain from the process.
+
+Bundlers can work in tandem with task runners. You can still benefit from their higher level tooling while leaving the problem of bundling to more specialized tools. [grunt-webpack](https://www.npmjs.com/package/grunt-webpack) and [gulp-webpack](https://www.npmjs.com/package/gulp-webpack) are good examples of integrations.
+
+T> Often webpack users use npm `scripts` as their task runner. This is a good starting point. Cross-platform support can become a problem, but there are several workarounds for that.
+
+T> Even though webpack core focuses on bundling, you can find a variety of extensions that allow you to use it in a task runner kind of way.
+
+## Comparison
+
+webpack however is not the only module bundler out there. If you are choosing between using webpack or any of the bundler's below, here is a feature by feature comparison on how webpack fares against the current competition.
+
 | Feature | webpack/webpack | jrburke/requirejs | substack/node-browserify | jspm/jspm-cli | rollup/rollup | brunch/brunch |
 |---------|-----------------|-------------------|--------------------------|---------------|---------------|---------------|
 | Additional chunks are loaded on demand | **yes** | **yes** | no | [System.import](https://github.com/systemjs/systemjs/blob/master/docs/system-api.md#systemimportmodulename--normalizedparentname---promisemodule) | no | no |
@@ -29,7 +55,7 @@ title: Compared to Other Systems
 | Preprocessing | **loaders, [transforms](https://github.com/webpack/transform-loader)** | loaders | transforms | plugin translate | plugin transforms | compilers, optimizers |
 | Replacement for browser | `web_modules`, `.web.js`, package.json field, alias config option | alias option | package.json field, alias option | package.json, alias option | no |
 | Requirable files | file system | **web** | file system | through plugins | file system or through plugins | file system |
-| Runtime overhead | **243B + 20B per module + 4B per dependency** | 14.7kB + 0B per module + (3B + X) per dependency | 415B + 25B per module + (6B + 2X) per dependency | 5.5kB for self-executing bundles, 38kB for full loader and polyfill, 0 plain modules, 293B CJS, 139B ES6 System.register before gzip | **none for ES2015 modules** (other formats may have)
+| Runtime overhead | **243B + 20B per module + 4B per dependency** | 14.7kB + 0B per module + (3B + X) per dependency | 415B + 25B per module + (6B + 2X) per dependency | 5.5kB for self-executing bundles, 38kB for full loader and polyfill, 0 plain modules, 293B CJS, 139B ES2015 System.register before gzip | **none for ES2015 modules** (other formats may have)
 | Watch mode | yes | not required | yes | not needed in dev | no | yes |
 
 ♦ in production mode (opposite in development mode)

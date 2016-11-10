@@ -32,7 +32,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 
     [path](/configuration/output#output-path): path.resolve(__dirname, "dist"), // string
     // the target directory for all output files
-    // must be an absolute path (use the node.js path module)
+    // must be an absolute path (use the Node.js path module)
 
     <details><summary>[filename](/configuration/output#output-filename): "bundle.js", // string</summary>
     [filename](/configuration/output#output-filename): "[name].js", // for multiple entry points
@@ -50,8 +50,8 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
     // the name of the exported library
 
     <details><summary>[libraryTarget](/configuration/output#output-librarytarget): "umd", // enum</summary>
-    [libraryTarget](/configuration/output#output-librarytarget): "umd-module", // ES6 module wrapped in UMD
-    [libraryTarget](/configuration/output#output-librarytarget): "commonjs-module", // ES6 module wrapped in CommonJs
+    [libraryTarget](/configuration/output#output-librarytarget): "umd-module", // ES2015 module wrapped in UMD
+    [libraryTarget](/configuration/output#output-librarytarget): "commonjs-module", // ES2015 module wrapped in CommonJs
     [libraryTarget](/configuration/output#output-librarytarget): "commonjs2", // exported with module.exports
     [libraryTarget](/configuration/output#output-librarytarget): "commonjs", // exported as properties to exports
     [libraryTarget](/configuration/output#output-librarytarget): "amd", // defined with AMD defined method
@@ -299,8 +299,8 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 
   <details><summary>[target](/configuration/target): "web", // enum</summary>
   [target](/configuration/target): "webworker", // WebWorker
-  [target](/configuration/target): "node", // node.js via require
-  [target](/configuration/target): "async-node", // node.js via fs and vm
+  [target](/configuration/target): "node", // Node.js via require
+  [target](/configuration/target): "async-node", // Node.js via fs and vm
   [target](/configuration/target): "node-webkit", // nw.js
   [target](/configuration/target): "electron-main", // electron, main process
   [target](/configuration/target): "electron-renderer", // electron, renderer process
