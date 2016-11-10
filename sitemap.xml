@@ -4,9 +4,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/analyze/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/api/index.html</loc>
+        <loc>https://webpack.js.org/branding/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/comparison/index.html</loc>
+        <loc>https://webpack.js.org/api/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/concepts/index.html</loc>
     </url>    <url>
@@ -14,9 +14,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/contribute/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/how-to/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/get-started/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/license/index.html</loc>
     </url>    <url>
@@ -60,17 +60,15 @@
     </url>    <url>
         <loc>https://webpack.js.org/configuration/entry-context/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/configuration/external-configs/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/configuration/externals/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration/external-configs/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/module/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/node/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/other-options/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/configuration/output/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/passing-a-config/index.html</loc>
     </url>    <url>
@@ -80,9 +78,15 @@
     </url>    <url>
         <loc>https://webpack.js.org/configuration/stats/index.html</loc>
     </url>    <url>
+        <loc>https://webpack.js.org/configuration/output/index.html</loc>
+    </url>    <url>
         <loc>https://webpack.js.org/configuration/target/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/watch/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/get-started/install-webpack/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/get-started/why-webpack/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/how-to/author-libraries/index.html</loc>
     </url>    <url>
@@ -99,8 +103,6 @@
         <loc>https://webpack.js.org/how-to/hot-module-reload/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/how-to/improve-build-performance/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/how-to/install-webpack/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/how-to/set-up-hmr-with-react/index.html</loc>
     </url>    <url>
@@ -176,17 +178,17 @@
     </url>    <url>
         <loc>https://webpack.js.org/plugins/i18n-webpack-plugin/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/how-to/code-splitting/splitting-css/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/how-to/code-splitting/splitting-require/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/how-to/code-splitting/splitting-vendor/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/how-to/develop/using-docker/index.html</loc>
+        <loc>https://webpack.js.org/how-to/code-splitting/splitting-css/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/how-to/develop/using-third-party-tools/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/how-to/develop/using-vagrant/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/how-to/develop/using-docker/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/how-to/lazy-load/react/index.html</loc>
     </url></urlset>
