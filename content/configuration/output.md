@@ -13,6 +13,16 @@ The top-level `output` key contains set of options instructing webpack on how an
 
 `string`
 
+The filename of non-entry chunks as a relative path inside the `output.path` directory.
+
+`[id]` is replaced by the id of the chunk.
+
+`[name]` is replaced by the name of the chunk (or with the id when the chunk has no name).
+
+`[hash]` is replaced by the hash of the compilation.
+
+`[chunkhash]` is replaced by the hash of the chunk.
+
 This options determines the name of on-demand loaded chunk files. See [`output.filename`](#output-filename) option for details on the possible values.
 
 Note that these filenames need to be generated at runtime to send the requests for chunks. Because of this placeholders like `[name]` and `[chunkhash]` need to add a mapping from chunk id to placeholder value to the output bundle with the webpack runtime. This increases the size and may invalidate the bundle when placeholder value for any chunk changes.
@@ -34,6 +44,12 @@ Enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/scr
 
 `crossOriginLoading: "use-credentials"` - Enable cross-origin loading **with credentials**
 
+For more information on cross-origin loading see [MDN](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin)
+
+> Default: `false`
+
+> see also [[library and externals]]
+> see also [[Development Tools]]
 
 ## `output.devtoolFallbackModuleFilenameTemplate`
 
@@ -140,25 +156,66 @@ Note this option is called filename but you are still allowed to something like 
 
 Note this options does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#output-chunkfilename) option is used. It also doesn't affect files created by loaders. For these files see loader options.
 
+More examples:
+
+**single entry**
+``` javascript
+{
+  entry: './src/app.js',
+  output: {
+    filename: 'bundle.js',
+    path: __dirname + '/build'
+  }
+}
+
+// writes to disk: ./build/bundle.js
+```
+
+**multiple entries**
+
+If your configuration creates more than a single "chunk" (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use substitutions to ensure that each file has a unique name.
+
+`[name]` is replaced by the name of the chunk.
+
+`[hash]` is replaced by the hash of the compilation.
+
+`[chunkhash]` is replaced by the hash of the chunk.
+
+``` javascript
+{
+  entry: {
+    app: './src/app.js',
+    search: './src/search.js'
+  },
+  output: {
+    filename: '[name].js',
+    path: __dirname + '/build'
+  }
+}
+
+// writes to disk: ./build/app.js, ./build/search.js
+```
+
 
 ## `output.hotUpdateChunkFilename`
 
 `string`
 
-Customize the filenames of hot update chunks. See [`output.filename`](#output-filename) option for details on the possible values.
+The filename of the Hot Update Chunks. They are inside the `output.path` directory.
 
-The only placeholders allowed here are `[id]` and `[hash]`, the default being:
+`[id]` is replaced by the id of the chunk.
 
-``` js
-hotUpdateChunkFilename: "[id].[hash].hot-update.js"
-```
+`[hash]` is replaced by the hash of the compilation. (The last hash stored in the records)
 
-Here is no need to change it.
-
+> Default: `"[id].[hash].hot-update.js"`
 
 ## `output.hotUpdateFunction`
 
 `function`
+
+The JSONP function used by webpack for async loading of hot update chunks.
+
+> Default: `"webpackHotUpdate"`
 
 Only used when [`target`](/configuration/target) is web, which uses JSONP for loading hot updates.
 
@@ -171,20 +228,19 @@ For details see [`output.jsonpFunction`](#output-jsonpfunction).
 
 `string`
 
-Customize the main hot update filename. See [`output.filename`](#output-filename) option for details on the possible values.
+The filename of the Hot Update Main File. It is inside the `output.path` directory.
 
-`[hash]` is the only available placeholder, the default being:
+`[hash]` is replaced by the hash of the compilation. (The last hash stored in the records)
 
-``` js
-hotUpdateMainFilename: "[hash].hot-update.json"
-```
+> Default: `"[hash].hot-update.json"`
 
-Here is no need to change it.
-
+See [`output.filename`](#output-filename) option for details on the possible values.
 
 ## `output.jsonpFunction`
 
 `function`
+
+> Default: `"webpackJsonp"`
 
 Only used when [`target`](/configuration/target) is web, which uses JSONP for loading on-demand chunks.
 
@@ -215,6 +271,8 @@ Note that `output.libraryTarget` defaults to `var`. This means if only `output.l
 ## `output.libraryTarget`
 
 `string`
+
+> Default: `"var"`
 
 Read the [library guide](/how-to/author-libraries) for details.
 
@@ -337,14 +395,32 @@ Module proof library.
 
 `string`
 
-The output directory as an **absolute** path.
+The output directory as an **absolute path** (required).
 
-```js
+**config.js**
+
+```javascript
 path: path.resolve(__dirname, 'dist/assets')
 ```
 
-Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/how-to/cache) for details.
+And a more complicated example of using a CDN and hashes for assets.
 
+**config.js**
+
+``` javascript
+output: {
+	path: path.resolve(__dirname, "proj/cdn/assets/[hash]"),
+	publicPath: "http://cdn.example.com/assets/[hash]/"
+}
+```
+
+**Note:** In cases when the eventual `publicPath` of output files isn't known at compile time, it can be left blank and set dynamically at runtime in the entry point file. If you don't know the `publicPath` while compiling, you can omit it and set `__webpack_public_path__` on your entry point.
+
+``` javascript
+ __webpack_public_path__ = myRuntimePublicPath
+
+// rest of your application entry
+```
 
 ## `output.pathinfo`
 
