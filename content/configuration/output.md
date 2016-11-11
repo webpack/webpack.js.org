@@ -3,6 +3,7 @@ title: Output
 contributors:
   - sokra
   - skipjack
+  - tomasAlabes
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -217,21 +218,120 @@ Note that `output.libraryTarget` defaults to `var`. This means if only `output.l
 
 Read the [library guide](/how-to/author-libraries) for details.
 
-Configure how the library will be exposed. Any one of the following options can be used: (the examples assume `library: "MyLibrary"`)
+Configure how the library will be exposed. Any one of the following options can be used.
+_To give your library a name, set the `output.library` config to it (the examples assume `library: "MyLibrary"`)_
 
-`libraryTarget: "amd"` - Expose it using [Asynchronous Module Defintion](http://davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/) (AMD)
+The following options are supported:
 
-`libraryTarget: "commonjs"` - Expose it using the `exports` object (i.e. `exports["MyLibrary"] = ...`)
 
-`libraryTarget: "commonjs2"` - Expose it using the `module.exports` object (`output.library` is ignored)
+`libraryTarget: "var"` - (default) When your library is loaded, the **return value of your entry point** will be assigned to a variable:
+
+```javascript
+var MyLibrary = _entry_return_;
+
+// your users will use your library like:
+MyLibrary.doSomething();
+```
+(Not specifying a `output.library` will cancel this var configuration)
+
+
+`libraryTarget: "this"` - When your library is loaded, the **return value of your entry point** will be assigned to this, the meaning of `this` is up to you:
+
+```javascript
+this["MyLibrary"] = _entry_return_;
+
+// your users will use your library like:
+this.MyLibrary.doSomething();
+MyLibrary.doSomething(); //if this is window
+```
+
+
+`libraryTarget: "commonjs"` - When your library is loaded, the return value of your entry point will be part of the exports object. As the name implies, this is used in commonjs environments:
+
+```javascript
+exports["MyLibrary"] = _entry_return_;
+
+//your users will use your library like:
+require("MyLibrary").doSomething();
+```
+
+`libraryTarget: "commonjs2"` - When your library is loaded, the return value of your entry point will be part of the exports object. As the name implies, this is used in commonjs environments:
+
+```javascript
+module.exports = _entry_return_;
+
+//your users will use your library like:
+require("MyLibrary").doSomething();
+```
+
+_Wondering the difference between commonjs and commonjs2? Check [this](https://github.com/webpack/webpack/issues/1114) out (they are pretty much the same)._
+
 
 `libraryTarget: "commonjs-module"` - Expose it using the `module.exports` object (`output.library` is ignored), `__esModule` is defined (it's threaded as ES6 Module in interop mode)
 
-`libraryTarget: "this"` - Expose it as a property of `this` (i.e. `this["MyLibrary"] = ...`)
 
-`libraryTarget: "umd"` - Expose it using [Universal Module Definition](http://davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/) (UMD)
+`libraryTarget: "amd "` - In this case webpack will surround you library with an AMD.
+But there is a very important pre-requisite, your entry chunk must be defined with the define property, if not, webpack wil create the AMD module, but without dependencies. I learned this the hard way, it’s logical but not obvious I think. Anyway… the output will be something like this:
 
-`libraryTarget: "var"` - Expose it as a variable (i.e. `var MyLibrary = ...`)
+```javascript
+define([], function() {
+	//what this module returns is what your entry chunk returns
+});
+```
+But if you download this script, first you may get a error: define is not defined, it’s ok! if you are distributing your library as amd, then your users need to use requirejs to load it. But, require([_what_])? `output.library`!
+
+```javascript
+output: {
+	name: "MyLibrary",
+	libraryTarget: "amd"
+}
+```
+
+And the module will be:
+
+```javascript
+define("MyLibrary", [], function() {
+	//what this module returns is what your entry chunk returns
+});
+```
+
+```javascript
+// And then your users will be able to do:
+require(["MyLibrary"], function(MyLibrary){
+	MyLibrary.doSomething();
+});
+```
+
+
+`libraryTarget: "umd"` - This is a way for your library to work with all module definitions (and where aren’t modules at all). It will work with commonjs, amd and as global variable.
+Here to name your module you need the another property:
+
+```javascript
+output: {
+	name: "MyLibrary",
+	libraryTarget: "umd",
+	umdNamedDefine: true
+}
+```
+
+And finally the output is:
+```javascript
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define("MyLibrary", [], factory);
+	else if(typeof exports === 'object')
+		exports["MyLibrary"] = factory();
+	else
+		root["MyLibrary"] = factory();
+})(this, function() {
+	//what this module returns is what your entry chunk returns
+});
+```
+
+Module proof library.
+
 
 ## `output.path`
 
