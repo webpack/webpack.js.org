@@ -45,10 +45,7 @@ $('.my-element').animate(...);
 
 T> __consumer__ here is any end user application that includes the library that you have bundled using webpack.
 
-## Usage
-
 Your bundle which has external dependencies can be used in various module contexts mainly [CommonJS, AMD, global and ES2015 modules](/concepts/modules). The external library may be available in any of the above form but under different variables.
-
 
 `externals` supports the following module contexts
 
@@ -56,20 +53,7 @@ Your bundle which has external dependencies can be used in various module contex
   * __commonjs__ -  The consumer application may be using a CommonJS module system and hence the external library should be available as a CommonJS module.
   * __amd__ - Similar to the above line but using AMD module system.
 
-```javascript
-externals : {
-  'jQuery',
-  lodash : {
-    commonjs: "lodash",
-    amd: "lodash",
-    root: "_" // indicates global variable
-  },
-  react: 'react',
-  subtract: ['./math', 'subtract']
-}
-```
-
-In the above example, we have a master case of `externals` usage.
+`externals` accepts various syntax and interprets them in different manners.
 
 ### string
 
@@ -77,14 +61,40 @@ In the above example, we have a master case of `externals` usage.
 
 ### array
 
+```javascript
+externals: {
+  subtract: ['./math', 'subtract']
+}
+```
+
 `subtract: ['./math', 'subtract']` converts to a parent child contruct, where `./math` is the parent module and your bundle only requires the subset under `subtract` variable.
 
 ### object
+
+```javascript
+externals : {
+  react: 'react'
+}
+
+// or
+
+externals : {
+  lodash : {
+    commonjs: "lodash",
+    amd: "lodash",
+    root: "_" // indicates global variable
+  }
+}
+```
 
 This syntax is used to describe all the possible ways that an external library can be available. `lodash` here is available as `lodash` under AMD and CommonJS module systems but available as `_` in a global variable form.
 
 ### function
 
-?> TODO - Not sure how to use it in function form.
+?> TODO - Not sure how to use it in and function form. Would be great to see a sample.
+
+### regex
+
+?> TODO - I think its overkill to list externals as regex.
 
 For more information on how to use this configuration, please refer to the article on [how to author a library](/how-to/author-libraries).
