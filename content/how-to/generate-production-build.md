@@ -48,7 +48,7 @@ T> 小提示: 配置环境变量并不能够使打包文件变小。Minification
 
 ## Minification
 
-webpack comes with UglifyJS plugin which minimize the output. You can pass an object containing [UglifyJS options](https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin).
+Webpack 使用 UglifyJS 插件来缩小打包文件。你可以在初始化时传入一个包含 [UglifyJS 选项](https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin) 的对象。
 
 ```js
 // webpack.config.js
@@ -72,7 +72,7 @@ module.exports = {
 };
 ```
 
-That's it! You're all set to ship production code.
+好了！到这里为止，你已经为构建生产代码做好配置了。
 
-?> TODO: Add reading reference link to "How to manage multiple configurations"
-?> TODO: Add reference link to "Splitting configuration"
+?> TODO: 加上一条 "How to manage multiple configurations" 的参考链接
+?> TODO: 加上一条 "Splitting configuration" 的参考链接
