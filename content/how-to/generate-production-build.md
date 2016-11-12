@@ -19,13 +19,13 @@ contributors:
 
 `cheap-module-source-map` 是诸多实用选项之一，它能够简化 Source Maps，使其只包含对应的行信息。
 
-## Node environment variable
+## Node 环境变量
 
-The second step is to tell webpack to generate a production build by setting the Node.js environment variable to `production`. webpack will not include any extra useful code, warnings and checks used in development.
+第二步便是设置 Node.js 环境变量为 `production`，以便 webpack 生成生产构建。Webpack 此时将不会生成或执行开发环境的额外代码，warning 和检查。
 
-The `DefinePlugin` creates **compile** time constants. Useful for injecting your Node.js environment as seen below.
+`DefinePlugin` 属性能够配置**编译**时常量。这对配置 Node.js 的环境变量非常有用，看下面的例子。
 
-?> TODO: Add a link to the `ProvidePlugin` documentation
+?> TODO: 加上 `ProvidePlugin` 属性的文档链接
 
 ```js
 // webpack.config.js
@@ -44,7 +44,7 @@ module.exports = {
 };
 ```
 
-T> Spoiler: Setting the env var only won't make your bundle smaller. This take us to the last step:
+T> 小提示: 配置环境变量并不能够使打包文件变小。Minification 将会在下一步也是最后一步谈到：
 
 ## Minification
 
