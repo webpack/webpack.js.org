@@ -1,5 +1,6 @@
 ---
 title: Watch and WatchOptions
+sort: 12
 contributors:
   - sokra
   - skipjack
