@@ -1,6 +1,6 @@
 ---
 title: Entry Points
-sort: 0
+sort: 2
 ---
 
 Like we mentioned in the [introduction](./), there are multiple ways to define the `entry` property in your webpack configuration. We will show you the ways you **can** configure the `entry` property, in addition to explaining why it may be useful to you.
