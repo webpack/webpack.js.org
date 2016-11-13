@@ -1,6 +1,6 @@
 ---
 title: Entry Points
-sort: 0
+sort: 2
 contributors:
   - TheLarkInn
 ---
