@@ -177,3 +177,23 @@
     }
   }
 }
+
+.navigation__bottom {
+  background:map-get($colors, emperor);
+}
+
+.navigation__child {
+  font-size: getFontSize(-1);
+  margin:0.5em 1em 0.6em;
+  color:map-get($colors, dusty-grey);
+  text-transform: uppercase;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &:hover,
+  &--active {
+    color:map-get($colors, white);
+  }
+}

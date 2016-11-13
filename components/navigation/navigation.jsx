@@ -5,23 +5,23 @@ import Logo from '../logo/logo';
 import './navigation-style';
 import './search-style';
 
-let Links = [
+let Sections = [
   { 
     title: 'Concepts', 
-    url: '/concepts' 
+    url: 'concepts' 
   },
   { 
     title: 'Guides', 
-    url: '/guides' 
+    url: 'guides' 
   },
   { 
     title: 'Documentation', 
-    url: '/configuration',
+    url: 'configuration',
     children: [
-      { title: 'Configuration', url: '/configuration' },
-      { title: 'Loaders', url: '/loaders' },
-      { title: 'Plugins', url: '/plugins' },
-      { title: 'API', url: '/api' }
+      { title: 'Configuration', url: 'configuration' },
+      { title: 'Loaders', url: 'loaders' },
+      { title: 'Plugins', url: 'plugins' },
+      { title: 'API', url: 'api' }
     ]
   },
   { 
@@ -49,18 +49,19 @@ export default class Navigation extends React.Component {
 
           <nav className="navigation__links">
             {
-              // sections.filter(section => ['Other', 'Get-Started'].indexOf(section.title) === -1).map((link, i) => {
-              //   let active = pageUrl.includes(`${link.url}/`);
-              //   let activeClass = active ? 'navigation__link--active' : '';
+              Sections.map(section => {
+                let active = this._isActive(section);
+                let activeMod = active ? 'navigation__link--active' : '';
 
-              Links.map(link => (
-                <Link
-                  key={ `navigation__link-${link.title}` }
-                  className="navigation__link"
-                  to={ link.url }>
-                  { link.title }
-                </Link>
-              ))
+                return (
+                  <Link
+                    key={ `navigation__link-${section.title}` }
+                    className={ `navigation__link ${activeMod}` }
+                    to={ `/${section.url}` }>
+                    { section.title }
+                  </Link>
+                );
+              })
             }
           </nav>
 
@@ -76,6 +77,31 @@ export default class Navigation extends React.Component {
             </button>
           </div>
         </Container>
+
+        {
+          Sections.filter(section => this._isActive(section) && section.children).map(section => {
+            return (
+              <div className="navigation__bottom" key={ section.title }>
+                <Container className="navigation__inner">
+                  {
+                    section.children.map(child => {
+                      let activeMod = this._isActive(child) ? 'navigation__child--active' : '';
+
+                      return (
+                        <Link
+                          key={ `navigation__child-${child.title}` }
+                          className={ `navigation__child ${activeMod}` }
+                          to={ `/${child.url}` }>
+                          { child.title }
+                        </Link>
+                      );
+                    })
+                  }
+                </Container>
+              </div>
+            );
+          })
+        }
       </header>
     );
   }
@@ -94,6 +120,21 @@ export default class Navigation extends React.Component {
         }
       });
     }
+  }
+
+  /**
+   * Check if section is active
+   * 
+   * @param {object} section - An object describing the section
+   * @return {bool} - Whether or not the given section is active
+   */
+  _isActive(section) {
+    let { pageUrl } = this.props;
+
+    if (section.children) {
+      return section.children.some(child => pageUrl.includes(`${child.url}/`));
+
+    } else return pageUrl.includes(`${section.url}/`);
   }
 
   /**
