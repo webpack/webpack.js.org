@@ -1,5 +1,6 @@
 ---
 title: External Configurations
+sort: 3
 contributors:
   - sokra
   - skipjack

@@ -1,5 +1,6 @@
 ---
 title: Stats
+sort: 15
 contributors:
   - SpaceK33z
   - sallar

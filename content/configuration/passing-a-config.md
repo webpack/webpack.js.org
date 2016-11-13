@@ -1,5 +1,6 @@
 ---
 title: Passing a Configuration
+sort: 2
 contributors:
   - sokra
   - skipjack

@@ -1,5 +1,6 @@
 ---
 title: Configuration
+sort: 1
 contributors:
   - sokra
   - skipjack

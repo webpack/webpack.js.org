@@ -1,5 +1,6 @@
 ---
 title: Plugins
+sort: 8
 contributors:
   - sokra
   - skipjack
