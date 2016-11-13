@@ -2,6 +2,7 @@ import React from 'react';
 import SidebarItem from '../sidebar-item/sidebar-item';
 import * as api from "./api";
 import './app-style';
+import VoteSlider from './slider/slider';
 
 function updateByProperty(array, property, propertyValue, update) {
   return array.map(item => {
@@ -152,6 +153,13 @@ export default class VoteApp extends React.Component {
           }}>Update</button>
           <h1>{listInfo.displayName}</h1>
           <div>{listInfo.description}</div>
+          <VoteSlider minValue={0} maxValue={30} startValue={10} step={2} radius={100} />
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <VoteSlider minValue={-3} maxValue={3} startValue={-2} step={1} radius={100} />
           <ul className="vote-app__items-list">
             { listInfo.items.map(item => <li>
               <span className="vote-app__item-title">{item.title}</span>
