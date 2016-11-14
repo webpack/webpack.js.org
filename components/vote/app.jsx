@@ -115,8 +115,8 @@ export default class VoteApp extends React.Component {
         ...selfInfo,
         currencies: updateByProperty(selfInfo.currencies, "name", currencyName, currency => ({
           ...currency,
-          used: currency.used + value,
-          remaining: currency.remaining - value
+          used: currency.used + diffValue,
+          remaining: currency.remaining - diffValue
         }))
       }
     });
@@ -165,7 +165,7 @@ export default class VoteApp extends React.Component {
                   let maximum = voteSettings.maximum || 100; // infinity
                   let minimum = voteSettings.minimum || 0;
                   if(currencyInfo && currencyInfo.remaining < maximum) maximum = currencyInfo.remaining;
-                  let startValue = (userVote && userVote.votes) ? userVote.votes: minimum;
+                  let startValue = (userVote && userVote.votes) ? userVote.votes: 0;
 
                   return <li className={"vote-app__vote-" + voteSettings.name} key={voteSettings.name} title={userVote ? "You voted " + userVote.votes + "." : "Login to see your votes."}>
                     <div className="vote-app__vote-value">
@@ -181,7 +181,7 @@ export default class VoteApp extends React.Component {
                                       diff = v - userVote.votes;
                                     }
 
-                                    this.vote(item.id, voteSettings.name, v, diff, voteSettings.currency, voteSettings.score * v);
+                                    this.vote(item.id, voteSettings.name, v, diff, voteSettings.currency, voteSettings.score * diff);
                                   }}
                       />
                     }

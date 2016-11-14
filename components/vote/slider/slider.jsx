@@ -45,9 +45,6 @@ export default class VoteSlider extends React.Component {
                 onTouchMove={(e) => {
                   this.move(e);
                 }}
-                onTouchEnd={() => {
-                  this.moveEnd();
-                }}
                 onTouchCancel={() => {
                   this.moveEnd();
                 }}
@@ -64,11 +61,8 @@ export default class VoteSlider extends React.Component {
                 onMouseMove={(e) => {
                   this.move(e);
                 }}
-                onMouseUp={() => {
-                  this.moveEnd();
-                }}
-                onMouseOut={() => {
-                  this.moveEnd();
+                onClick={(e) => {
+                  this.click(e);
                 }}
         />
       );
@@ -80,13 +74,23 @@ export default class VoteSlider extends React.Component {
    * Basic initialization when component mount
    */
   componentDidMount() {
+    if(this.isTouch) {
+      document.body.addEventListener('touchend', () => {
+        this.moveEnd();
+      });
+    } else {
+      document.body.addEventListener('mouseup', () => {
+        this.moveEnd();
+      });
+    }
+
     this.canvas={
       centerWidth: (this.canvasWidth/2),
       bottomHeight: this.canvasHeight - this.buttonRadius
     };
 
-    var top = -Math.cos(this.state.rad) * this.radius + this.canvas.bottomHeight;
-    var left = Math.sin(this.state.rad) * this.radius + this.canvas.centerWidth;
+    const top = -Math.cos(this.state.rad) * this.radius + this.canvas.bottomHeight;
+    const left = Math.sin(this.state.rad) * this.radius + this.canvas.centerWidth;
 
     // button position
     this.setState({
@@ -136,11 +140,11 @@ export default class VoteSlider extends React.Component {
       return;
     }
 
-    var position = this.position(event);
-    var left = position.x - this.element.offsetLeft - (this.canvas.centerWidth);
-    var top = position.y - this.element.offsetTop - (this.canvas.bottomHeight);
-    var deg = this.toDegrees(Math.atan2(left, -top));
-    var rad = this.toRadians(deg);
+    const position = this.position(event);
+    let left = position.x - this.element.offsetLeft - (this.canvas.centerWidth);
+    let top = position.y - this.element.offsetTop - (this.canvas.bottomHeight);
+    const deg = this.toDegrees(Math.atan2(left, -top));
+    const rad = this.toRadians(deg);
 
     //check if movement is in right restrictions
     if(this.checkLimit(rad) === false) {
@@ -169,14 +173,29 @@ export default class VoteSlider extends React.Component {
     this.moveToStep();
   }
 
+  click(event) {
+    const position = this.position(event);
+    let left = position.x - this.element.offsetLeft - (this.canvas.centerWidth);
+    let top = position.y - this.element.offsetTop - (this.canvas.bottomHeight);
+    const deg = this.toDegrees(Math.atan2(left, -top));
+    const rad = this.toRadians(deg);
+
+    //check if movement is in right restrictions
+    if(this.checkLimit(rad) === false) {
+      return;
+    }
+
+    this.moveToStep(rad);
+  }
+
   /**
    * Move current radiant to the closest step
    */
-  moveToStep() {
-    var rad = (Math.round((this.state.rad + (this.halfRad)) / this.stepRad) * this.stepRad) - (this.halfRad);
-    var left = Math.sin(rad) * this.radius + this.canvas.centerWidth;
-    var top = -Math.cos(rad) * this.radius + this.canvas.bottomHeight;
-    var value = this.getValue(rad);
+  moveToStep(rad = this.state.rad) {
+    rad = (Math.round((rad + (this.halfRad)) / this.stepRad) * this.stepRad) - (this.halfRad);
+    const left = Math.sin(rad) * this.radius + this.canvas.centerWidth;
+    const top = -Math.cos(rad) * this.radius + this.canvas.bottomHeight;
+    const value = this.getValue(rad);
 
     this.setState({
       buttonLeft: (left - this.buttonRadius),
@@ -193,11 +212,8 @@ export default class VoteSlider extends React.Component {
    * Draw the slider
    */
   drawSlider() {
-    var context = this.element.getContext('2d');
-    var top = null;
-    var left = null;
-    var tempRad = null;
-    var stepsNum = this.numSteps + 1;
+    const context = this.element.getContext('2d');
+    const stepsNum = this.numSteps + 1;
 
     context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
 
@@ -213,10 +229,9 @@ export default class VoteSlider extends React.Component {
     for (var j = 0; j < stepsNum; j++) {
       context.beginPath();
       context.globalAlpha = 1;
-      tempRad = this.stepRad * j - this.halfRad;
-
-      left =Math.sin(tempRad) * (this.radius + (this.sliderWidth / 2)) + this.canvas.centerWidth;
-      top = -Math.cos(tempRad) * (this.radius + (this.sliderWidth / 2)) + this.canvas.bottomHeight;
+      let tempRad = this.stepRad * j - this.halfRad;
+      let left =Math.sin(tempRad) * (this.radius + (this.sliderWidth / 2)) + this.canvas.centerWidth;
+      let top = -Math.cos(tempRad) * (this.radius + (this.sliderWidth / 2)) + this.canvas.bottomHeight;
       context.moveTo(left, top);
 
       left =Math.sin(tempRad) * (this.radius - (this.sliderWidth / 2)) + this.canvas.centerWidth;
@@ -264,7 +279,7 @@ export default class VoteSlider extends React.Component {
    * @returns {number} Current real value on the slider
    */
   getValue(rad) {
-    var newRad = rad + this.halfRad;
+    const newRad = rad + this.halfRad;
 
     return (this.minValue + ((newRad / this.stepRad) * this.step)).toFixed(0);
   }
@@ -283,8 +298,8 @@ export default class VoteSlider extends React.Component {
    * @returns {number} Initial value in radians
    */
   initValue() {
-    var normalized = this.startValue + Math.abs(this.minValue);
-    var rad = this.stepRad * (normalized / this.step);
+    const normalized = this.startValue + Math.abs(this.minValue);
+    const rad = this.stepRad * (normalized / this.step);
 
     return rad - this.halfRad;
   }
@@ -314,10 +329,6 @@ export default class VoteSlider extends React.Component {
    * @returns {*} If property exists we return given property, otherwise we return default value
    */
   checkProp(prop, value) {
-    if(prop === undefined) {
-      return value;
-    }
-
-    return prop;
+    return (prop === undefined) ? value : prop;
   }
 }
