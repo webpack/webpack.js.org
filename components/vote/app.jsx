@@ -91,7 +91,7 @@ export default class VoteApp extends React.Component {
     });
   }
 
-  vote(itemId, voteName, value, currencyName, score) {
+  vote(itemId, voteName, value, diffValue, currencyName, score) {
     let { selfInfo, listInfo } = this.state;
     let { voteAppToken } = localStorage;
     this.setState({
@@ -102,11 +102,11 @@ export default class VoteApp extends React.Component {
           ...item,
           votes: updateByProperty(item.votes, "name", voteName, vote => ({
             ...vote,
-            votes: vote.votes + value
+            votes: vote.votes + diffValue
           })),
           userVotes: updateByProperty(item.userVotes, "name", voteName, vote => ({
             ...vote,
-            votes: vote.votes + value
+            votes: value
           })),
           score: item.score + score
         }))
@@ -153,13 +153,6 @@ export default class VoteApp extends React.Component {
           }}>Update</button>
           <h1>{listInfo.displayName}</h1>
           <div>{listInfo.description}</div>
-          <VoteSlider minValue={0} maxValue={30} startValue={10} step={2} radius={100} />
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <VoteSlider minValue={-3} maxValue={3} startValue={-2} step={1} radius={100} />
           <ul className="vote-app__items-list">
             { listInfo.items.map(item => <li>
               <span className="vote-app__item-title">{item.title}</span>
@@ -169,25 +162,29 @@ export default class VoteApp extends React.Component {
                   let vote = item.votes[idx];
                   let userVote = item.userVotes && item.userVotes[idx];
                   let currencyInfo = selfInfo && voteSettings.currency && this.findByName(selfInfo.currencies, voteSettings.currency);
-                  let maximum = voteSettings.maximum || Infinity;
+                  let maximum = voteSettings.maximum || 100; // infinity
                   let minimum = voteSettings.minimum || 0;
-                  let maxVote = userVote && maximum - userVote.votes;
-                  let minVote = userVote && minimum - userVote.votes;
-                  if(currencyInfo && currencyInfo.remaining < maxVote) maxVote = currencyInfo.remaining;
-                  let renderVoteButton = (v) => {
-                    return <button disabled={inProgress} onClick={() => {
-                      this.vote(item.id, voteSettings.name, v, voteSettings.currency, voteSettings.score * v);
-                    }}>{ v > 0 ? "+" + v : v }</button>;
-                  };
+                  if(currencyInfo && currencyInfo.remaining < maximum) maximum = currencyInfo.remaining;
+                  let startValue = (userVote && userVote.votes) ? userVote.votes: minimum;
+
                   return <li className={"vote-app__vote-" + voteSettings.name} key={voteSettings.name} title={userVote ? "You voted " + userVote.votes + "." : "Login to see your votes."}>
                     <div className="vote-app__vote-value">
                       {vote.votes > 0 && voteSettings.minimum < 0 ? "+" + vote.votes : vote.votes}
                       {userVote && userVote.votes ? " (You: " + (userVote.votes > 0 && voteSettings.minimum < 0 ? "+" + userVote.votes : userVote.votes) + ")" : ""}
                     </div>
-                    { selfInfo && <div className="vote-app__vote-buttons">
-                      <div className="vote-app__vote-negative">{this.getNiceVoteValues(Math.min(100, -minVote)).map(v => renderVoteButton(-v))}</div>
-                      <div className="vote-app__vote-positive">{this.getNiceVoteValues(Math.min(100, maxVote)).map(v => renderVoteButton(v))}</div>
-                    </div> }
+                    { selfInfo &&
+                      <VoteSlider minValue={minimum} maxValue={maximum} startValue={startValue} step={voteSettings.step} color={voteSettings.color}
+                                  valueChanged={(v) => {
+                                    let diff = v;
+
+                                    if((userVote && userVote.votes)) {
+                                      diff = v - userVote.votes;
+                                    }
+
+                                    this.vote(item.id, voteSettings.name, v, diff, voteSettings.currency, voteSettings.score * v);
+                                  }}
+                      />
+                    }
                   </li>;
                 })}
                 <li className="vote-app__vote-score" key="score">

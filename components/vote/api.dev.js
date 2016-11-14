@@ -13,18 +13,24 @@ let lists = {
         name: "influence",
         currency: "influence",
         maximum: 30,
-        score: 1
+        score: 1,
+        step: 2,
+        color: "blue"
       },
       {
         name: "golden",
         currency: "goldenInfluence",
-        score: 1
+        score: 1,
+        step: 10,
+        color: "#bfa203"
       },
       {
         name: "thumb",
         minimum: -5,
         maximum: 5,
-        score: 5
+        score: 5,
+        step: 1,
+        color: "#535353"
       }
     ],
     items: [

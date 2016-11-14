@@ -10,7 +10,7 @@ export default class VoteSlider extends React.Component {
     this.maxValue = this.checkProp(props.maxValue, 100);                  // maximal value for the number
     this.startValue = this.checkProp(props.startValue, this.minValue);    // maximal value for the number
     this.step = this.checkProp(props.step, 10);                           // amount for one step
-    this.radius = this.checkProp(props.radius, 50);                       // radius of the circle
+    this.radius = this.checkProp(props.radius, 100);                       // radius of the circle
     this.sliderWidth = this.checkProp(props.sliderWidth, 10);             // width of the slider line
     this.buttonRadius = this.checkProp(props.buttonRadius, 10);           // radius of the button on the slider
 
@@ -36,51 +36,41 @@ export default class VoteSlider extends React.Component {
   render() {
     if(this.isTouch) {
       return (
-        <div>
-          <canvas width={this.canvasWidth}
-                  height={this.canvasHeight}
-                  ref={(ele) => this.element = ele}
-                  onTouchStart={() => {
-                    this.moveStart();
-                  }}
-                  onTouchMove={(e) => {
-                    this.move(e);
-                  }}
-                  onTouchEnd={() => {
-                    this.moveEnd();
-                  }}
-                  onTouchCancel={() => {
-                    this.moveEnd();
-                  }}
-          />
-          <span>
-            { this.state.value }
-          </span>
-        </div>
+        <canvas width={this.canvasWidth}
+                height={this.canvasHeight}
+                ref={(ele) => this.element = ele}
+                onTouchStart={() => {
+                  this.moveStart();
+                }}
+                onTouchMove={(e) => {
+                  this.move(e);
+                }}
+                onTouchEnd={() => {
+                  this.moveEnd();
+                }}
+                onTouchCancel={() => {
+                  this.moveEnd();
+                }}
+        />
       );
     } else {
       return (
-        <div>
-          <canvas width={this.canvasWidth}
-                  height={this.canvasHeight}
-                  ref={(ele) => this.element = ele}
-                  onMouseDown={() => {
-                    this.moveStart();
-                  }}
-                  onMouseMove={(e) => {
-                    this.move(e);
-                  }}
-                  onMouseUp={() => {
-                    this.moveEnd();
-                  }}
-                  onMouseOut={() => {
-                    this.moveEnd();
-                  }}
-          />
-          <span>
-            { this.state.value }
-          </span>
-        </div>
+        <canvas width={this.canvasWidth}
+                height={this.canvasHeight}
+                ref={(ele) => this.element = ele}
+                onMouseDown={() => {
+                  this.moveStart();
+                }}
+                onMouseMove={(e) => {
+                  this.move(e);
+                }}
+                onMouseUp={() => {
+                  this.moveEnd();
+                }}
+                onMouseOut={() => {
+                  this.moveEnd();
+                }}
+        />
       );
     }
 
@@ -186,14 +176,17 @@ export default class VoteSlider extends React.Component {
     var rad = (Math.round((this.state.rad + (this.halfRad)) / this.stepRad) * this.stepRad) - (this.halfRad);
     var left = Math.sin(rad) * this.radius + this.canvas.centerWidth;
     var top = -Math.cos(rad) * this.radius + this.canvas.bottomHeight;
+    var value = this.getValue(rad);
 
     this.setState({
       buttonLeft: (left - this.buttonRadius),
       buttonTop: (top - this.buttonRadius),
       inAction: false,
       rad: rad,
-      value: this.getValue(rad)
+      value: value
     });
+
+    this.props.valueChanged(parseInt(value));
   }
 
   /**
@@ -254,6 +247,14 @@ export default class VoteSlider extends React.Component {
     context.lineWidth = 1;
     context.strokeStyle = '#c3c3c3';
     context.stroke();
+    context.closePath();
+
+    // current value
+    context.beginPath();
+    context.font = "20px Cabin";
+    context.fillStyle = "#535353";
+    context.textAlign = "center";
+    context.fillText(this.state.value, this.canvas.centerWidth, this.canvas.bottomHeight);
     context.closePath();
   }
 
