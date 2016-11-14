@@ -3,6 +3,7 @@ title: Introduction
 contributors:
   - TheLarkInn
   - jhnns
+  - grgur
 ---
 
 *webpack* is a _module bundler_ for modern JavaScript applications. It is [incredibly configurable](/configuration), however, there are **4 Core Concepts** we feel you should understand before you get started!
@@ -111,8 +112,8 @@ const config = {
     path: './dist'
   },
   module: {
-    loaders: [
-      {test: /\.(js|jsx)$/, loader: 'babel-loader'}
+    rules: [
+      {test: /\.(js|jsx)$/, use: 'babel-loader'}
     ]
   },
   plugins: [
