@@ -3,20 +3,12 @@ title: 如何配置 HMR 热重载？
 contributors:
   - jmreidy
   - jhnns
+  - xie qianyue
 ---
 
-Hot Module Replacement (HMR) exchanges, adds, or removes modules while an
-application is running without a page reload.
-HMR is particularly useful in applications using a single state tree,
-since components are "dumb" and will reflect the latest application state, even
-after their source is changed and they are replaced.
+模块热重载 (HMR) 的作用是，在应用运行时，无需刷新页面，便能替换、增加、删除必要的模块。HMR 对于那些由单一状态树构成的应用非常有用。因为这些应用的组件是 "dumb" (相对于 "smart") 的，所以在组件的代码更改后，组件的状态依然能够正确反映应用的最新状态。
 
-Webpack's power lies in its customizablity, and there are MANY ways of configuring HMR
-given the needs of a particular project. The approach described below uses Babel and
-React, but these tools are not necessary for HMR to work.
-If you'd like to see examples of other approaches,
-please request them or, better yet,
-[open up a PR with an addition](https://github.com/webpack/webpack.io)
+Webpack 的强项是它的可定制性。根据特定项目的需求，有很多配置 HMR 的方式。下面的配置方式面向使用 Babel 和 React 的项目，其中一些工具并不是 HMR 所必需的。如果你想看看其他配置的样例，你可以向我们提出来，或者更好的方式是，提交一个 [PR](https://github.com/webpack/webpack.io) 吧。 
 
 This guide will be demonstrating the use of HMR with Babel,
 React, and PostCSS (using CSS Modules).
