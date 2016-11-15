@@ -10,22 +10,17 @@ contributors:
 
 Webpack 的强项是它的可定制性。根据特定项目的需求，有很多配置 HMR 的方式。下面的配置方式面向使用 Babel 和 React 的项目，其中一些工具并不是 HMR 所必需的。如果你想看看其他配置的样例，你可以向我们提出来，或者更好的方式是，提交一个 [PR](https://github.com/webpack/webpack.io) 吧。 
 
-This guide will be demonstrating the use of HMR with Babel,
-React, and PostCSS (using CSS Modules).
-To follow along, please add the following deps to your `package.json`:
-
-To use HMR, you'll need the following dependencies:
+下面将会示范怎么在 Babel, React 和 PostCSS（使用 CSS 模块）的项目中配置 HMR。为此，你需要在你的 `package.json` 加上以下依赖，可以通过下面的命令来安装：
 
 ```bash
 npm install --save-dev babel@6.5.2 babel-core@6.13.2 babel-loader@6.2.4 babel-preset-es2015@6.13.2 babel-preset-react@6.11.1 babel-preset-stage-2@6.13.0 css-loader@0.23.1 postcss-loader@0.9.1 react-hot-loader@3.0.0-beta.1 style-loader@0.13.1 webpack@2.1.0-beta.20 webpack-dev-server@2.1.0-beta.0
 ```
 
-In addition, for the purposes of this walkthrough, you'll need:
+另外，你也需要安装 React：
 
 ```bash
 npm install --save react@15.3.0 react-dom@15.3.0
 ```
-
 
 ### Babel Config
 
