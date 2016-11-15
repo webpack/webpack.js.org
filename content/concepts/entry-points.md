@@ -2,6 +2,7 @@
 title: 入口
 sort: 0
 contributors:
+  - TheLarkInn
   - dear-lizhihua
 ---
 
@@ -75,6 +76,8 @@ const config = {
 
 **为什么？**此设置允许你使用`CommonsChunkPlugin`并从 app 包 提取 公共引用(vendor reference) 到 vendor 包，并把公共引用的部分替换为 `__webpack_require__()` 调用。如果应用包中了没有公共代码，那么你可以在 webpack 中实现被称为 [长效缓存](/how-to/cache) 的通用模式。
 
+?> Consider removing this scenario in favor of the DllPlugin, which provides a better vendor-splitting.
+
 #### 多页应用
 
 **webpack.config.js**
@@ -84,20 +87,18 @@ const config = {
   entry: {
     pageOne: './src/pageOne/index.js',
     pageTwo: './src/pageTwo/index.js',
-    pageThree: './src/pageThree/index.js',
-    vendors: './src/vendors.js'
+    pageThree: './src/pageThree/index.js'
   }
 };
 ```
 
-**是什么？**我们告诉 webpack 需要 4 个独立分离的依赖图表（如上面的例子）。
+**是什么？**我们告诉 webpack 需要 3 个独立分离的依赖图表（如上面的例子）。
 
 **为什么？**在多页应用中，服务器将为您获取一个新的 HTML 文档。页面重新加载新文档，并且资源被重新下载。然而，这给了我们独特的机会去做很多事：
 
 - 使用 `CommonsChunkPlugin` 为每个页面间的应用共享代码创建 bundle。由于入口起点增多，多页应用能够在入口起点重用大量代码/模块，这样可以极大的从这些新技术受益。
 
-- 使用在第一个示例中相同的插件和技术设置[长效缓存](/how-to/cache)
-
+T> 根据经验：一个 HTML 只使用一个入口起点。
 ***
 
 > 原文：https://webpack.js.org/concepts/entry-points/

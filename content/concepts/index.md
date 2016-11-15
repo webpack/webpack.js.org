@@ -3,6 +3,7 @@ title: 介绍
 contributors:
   - TheLarkInn
   - jhnns
+  - grgur
   - dear-lizhihua
 ---
 
@@ -21,16 +22,14 @@ webpack 将创建所有应用程序 依赖关系(dependency)图表(graph)。图�
 **webpack.config.js**
 
 ```javascript
-const config = {
+module.exports = {
   entry: './path/to/my/entry/file.js'
 };
-
-module.exports = config;
 ```
 
 这里有多种方式声明应用程序所需的特定 `entry` 属性。
 
-[**了解更多！**](/concepts/entry-points)
+[了解更多！](/concepts/entry-points)
 
 ## 出口(Output)
 
@@ -39,11 +38,11 @@ module.exports = config;
 **webpack.config.js**
 
 ```javascript
-const config = {
+module.exports = {
   entry: './path/to/my/entry/file.js',
   output: {
-    filename: 'my-first-webpack.bundle.js',
-    path: './dist'
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'my-first-webpack.bundle.js'
   }
 };
 ```
@@ -54,7 +53,7 @@ T> 你可能看到项目 **生成(emitted 或 emit)** 贯穿我们整个文档�
 
  `output` 属性具有[更多可配置的特性](/configuration)，但让我们花一些时间了解 `output` 属性的一些最常见的用例。
 
-[**了解更多！**](/concepts/output)
+[了解更多！](/concepts/output)
 
 
 ## 加载器(Loader)
@@ -66,7 +65,7 @@ webpack 的目标是，让项目中的所有资源都成为 **webpack** 的关�
 webpack 配置在更高层面有两个目标。
 
 1. 识别出(identify)应该被特定的加载器转换(transform)的文件
-2. 转换能够被添加到依赖图表的文件（并且最终打包）(`loader` 属性)
+2. 转换能够被添加到依赖图表的文件（并且最终打包）(`use` 属性)
 
 **webpack.config.js**
 
@@ -74,26 +73,26 @@ webpack 配置在更高层面有两个目标。
 const config = {
   entry: './path/to/my/entry/file.js',
   output: {
-    filename: 'my-first-webpack.bundle.js',
-    path: './dist'
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'my-first-webpack.bundle.js'
   },
   module: {
-    loaders: [
-      {test: /\.(js|jsx)$/, loader: 'babel-loader'}
+    rules: [
+      {test: /\.(js|jsx)$/, use: 'babel-loader'}
     ]
   }
 };
 ```
 
-以上配置中，我们定义了 loader 的两个必选属性：`test` 和 `loader`。它告诉 webpack 编译器(compiler) 如下：
+以上配置中，我们定义了使用加载器的规则，它有两个必需的属性：`test` 和 `use`。它告诉 webpack 编译器(compiler) 如下：
 
-> “嘿，webpack 编译器，当你碰到「在 `require()`/`import` 语句中被解析为 '.js' 或 '.jsx' 的路径」时，在你把它们添加并打包之前，要先使用 `babel-loader` 去转换”。
+> “嘿，webpack 编译器，当你碰到「在 `require()`/`import` 语句中被解析为 '.js' 或 '.jsx' 的路径」时，在你把它们添加并打包之前，要先**使用** `babel-loader` 去转换”。
 
-W> 重要的是要记得，在 webpack 配置中定义 loader 时，要定义在 `module.loaders` 中，而不是 `loaders`。
+W> 重要的是要记得，在 webpack 配置中定义 loader 时，要定义在 `module.rules` 中，而不是 `rules`。在定义错时 webpack 会提出严重的警告。
 
 我们还有尚未提到的 loader，可以设定更多特定属性。
 
-[**了解更多！**](/concepts/loaders)
+[了解更多！](/concepts/loaders)
 
 ## 插件(Plugins)
 
@@ -114,8 +113,8 @@ const config = {
     path: './dist'
   },
   module: {
-    loaders: [
-      {test: /\.(js|jsx)$/, loader: 'babel-loader'}
+    rules: [
+      {test: /\.(js|jsx)$/, use: 'babel-loader'}
     ]
   },
   plugins: [
@@ -131,7 +130,7 @@ webpack 提供许多开箱可用的插件！查阅我们的[插件列表](/plugi
 
 在 webpack 配置中使用插件是直接的，然而有很多用例值得我们深入讨论。
 
-[**了解更多！**](/concepts/plugins)
+[了解更多！](/concepts/plugins)
 
 ***
 

@@ -6,6 +6,22 @@ contributors:
 
 你可能已经注意到，很少有 webpack 配置看起来很完全相同。这是因为 **webpack 的配置文件是 JavaScript 文件导出的一个对象。**此对象，由 webpack 根据对象定义的属性进行解析。
 
+Because it's a standard node.js CommonJs module, you **can do the following**:
+
+* import other files via `require(...)`
+* use utilities on npm via `require(...)`
+* use JS controlflow expressions i. e. the `?:` operator
+* use constants or variables for often used values
+* write and execute function to generate a part of the configuration
+
+Use these features when appropriate.
+
+**You should NOT use the following things**. Technically you could use them, but it's **not recommended**:
+
+* Access CLI arguments, when using the webpack CLI (instead write your own CLI, or use `--env`)
+* Export non-deterministic values (calling webpack twice should result in the same output files)
+* Write very long configurations (instead split the configuration into multiple files)
+
 接下来的例子展示了 webpack 配置对象如何表达和配置，因为_配置对象是代码_：
 
 ## 最简单的配置
@@ -37,8 +53,8 @@ var baseConfig = {
     entry: './entry.js'
   },
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js'
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({

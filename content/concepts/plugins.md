@@ -32,6 +32,8 @@ ConsoleLogOnBuildWebpackPlugin.prototype.apply = function(compiler) {
 };
 ```
 
+T> As clever JS developer you may remember the `Function.prototype.apply` method. Because of this method you can pass any function as plugin (`this` will point to the `compiler`). You can use this style to inline custom plugins in your configuration.
+
 ## 用法
 
 由于**插件**可以接收参数/选项，你必须在wepback配置中，向 `plugins` 属性传入 `new` 实例。
@@ -70,6 +72,8 @@ module.exports = config;
 ```
 
 ### Node API
+
+?> Even when using the Node API, users should pass plugins via the `plugins` property in the configuration. Using `compiler.apply` should not be the recommended way.
 
 **some-node-script.js**
 

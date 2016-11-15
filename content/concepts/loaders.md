@@ -1,9 +1,10 @@
 ---
 title: 加载器
 sort: 2
+contributors:
 ---
-> module.loaders configuration option
-> test, include, exclude, loader, query
+
+?> Write about how rules work and what's the purpose of loaders.
 
 ***
 
