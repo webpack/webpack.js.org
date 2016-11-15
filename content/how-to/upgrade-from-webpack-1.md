@@ -30,9 +30,9 @@ More stuff was changed here. Not listed in detail as it's not commonly used. See
 
 ## `module.loaders` is now `module.rules`
 
-The old loader configuration was superseded by a more powerful rules system, which allows to configure loaders and more.
-For compatibility reasons the old syntax is still valid and the old names are parsed.
-The new naming is easier to understand to there are good reasons to upgrade the configuration.
+The old loader configuration was superseded by a more powerful rules system, which allows configuration of loaders and more.
+For compatibility reasons, the old `module.loaders` syntax is still valid and the old names are parsed.
+The new naming conventions are easier to understand and are a good reason to upgrade the configuration to using `module.rules`.
 
 ``` diff
   module: {
@@ -92,7 +92,7 @@ See [#2986](https://github.com/webpack/webpack/issues/2986) for the reason behin
 ## `UglifyJsPlugin` sourceMap
 
 The `sourceMap` option of the `UglifyJsPlugin` now defaults to `false` instead of `true`.
-This means if using SourceMaps for the minimized code you need to pass `sourceMap: true`.
+This means that if you are using source maps for minimized code, you need to set `sourceMap: true` for `UglifyJsPlugin`.
 
 ``` diff
   devtool: "source-map",
@@ -105,7 +105,7 @@ This means if using SourceMaps for the minimized code you need to pass `sourceMa
 
 ## `UglifyJsPlugin` minimize loaders
 
-The UglifyJsPlugin does not longer switch loaders into minimize mode. This need to be passed via loader options in long-term. See loader documentation for relevant options.
+`UglifyJsPlugin` no longer switches loaders into minimize mode. The `minimize: true` setting needs to be passed via loader options in long-term. See loader documentation for relevant options.
 
 The minimize mode for loaders will be removed in webpack 3 or later.
 
