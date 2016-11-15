@@ -3,15 +3,19 @@ title: Externals
 contributors:
   - sokra
   - skipjack
+  - pksjce
 ---
 
-?> Description
+`externals` configuration in webpack provides a way of not including a dependency in the bundle. Instead the created bundle relies on that dependency to be present in the consumers environment.
+This typically applies to library developers though application developers can make good use of this feature too.
 
 ## `externals`
 
 `string` `regex` `function` `array` `object`
 
-**Prevent bundling** of certain `import`ed packages and instead retrieve these *external packages at runtime*. For example, to include [jQuery](https://jquery.com/) from a CDN instead of bundling it:
+**Prevent bundling** of certain `import`ed packages and instead retrieve these *external packages at runtime*.
+
+For example, to include [jQuery](https://jquery.com/) from a CDN instead of bundling it:
 
 **index.html**
 
@@ -25,7 +29,7 @@ contributors:
 
 **webpack.config.js**
 
-```js
+```javascript
 externals: {
   jquery: 'jQuery'
 }
@@ -33,10 +37,64 @@ externals: {
 
 This leaves any dependant modules unchanged, i.e. the code shown below will still work:
 
-```js
+```javascript
 import $ from 'jquery';
 
 $('.my-element').animate(...);
 ```
 
-?> TODO: Add more details on the various ways of doing this using an `object`, `function`, etc. Also add how this is connected to [`output.libraryTarget`](/configuration/output#output-librarytarget) and maybe how it's useful when building libraries if this isn't already evident.
+T> __consumer__ here is any end user application that includes the library that you have bundled using webpack.
+
+Your bundle which has external dependencies can be used in various module contexts mainly [CommonJS, AMD, global and ES2015 modules](/concepts/modules). The external library may be available in any of the above form but under different variables.
+
+`externals` supports the following module contexts
+
+  * __global__ - An external library can be available as a global variable. The consumer can achieve this by including the external library in a script tag. This is the default setting for externals.
+  * __commonjs__ -  The consumer application may be using a CommonJS module system and hence the external library should be available as a CommonJS module.
+  * __amd__ - Similar to the above line but using AMD module system.
+
+`externals` accepts various syntax and interprets them in different manners.
+
+### string
+
+`jQuery` in the externals indicates that your bundle will need `jQuery` variable in the global form.
+
+### array
+
+```javascript
+externals: {
+  subtract: ['./math', 'subtract']
+}
+```
+
+`subtract: ['./math', 'subtract']` converts to a parent child contruct, where `./math` is the parent module and your bundle only requires the subset under `subtract` variable.
+
+### object
+
+```javascript
+externals : {
+  react: 'react'
+}
+
+// or
+
+externals : {
+  lodash : {
+    commonjs: "lodash",
+    amd: "lodash",
+    root: "_" // indicates global variable
+  }
+}
+```
+
+This syntax is used to describe all the possible ways that an external library can be available. `lodash` here is available as `lodash` under AMD and CommonJS module systems but available as `_` in a global variable form.
+
+### function
+
+?> TODO - Not sure how to use it in and function form. Would be great to see a sample.
+
+### regex
+
+?> TODO - I think its overkill to list externals as regex.
+
+For more information on how to use this configuration, please refer to the article on [how to author a library](/how-to/author-libraries).
