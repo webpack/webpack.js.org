@@ -22,9 +22,9 @@ npm install --save-dev babel@6.5.2 babel-core@6.13.2 babel-loader@6.2.4 babel-pr
 npm install --save react@15.3.0 react-dom@15.3.0
 ```
 
-### Babel Config
+### Babel 配置
 
-Your `.babelrc` file should look like the following:
+你的 `.babelrc` 配置文件或许会和下面的配置相差无几：
 
 ```bash
 {
@@ -47,11 +47,9 @@ Your `.babelrc` file should look like the following:
 }
 ```
 
-### Webpack config
+### Webpack 配置
 
-While there's many ways of setting up your Webpack config - via API,
-via multiple or single config files, etc - here is the basic information
-you should have available.
+当然，有很多方法来设置你的 webpack ── 例如通过 API 配置，由单个或多个配置文件来配置，等等。下面是一个基本的配置，可以供你作为参考：
 
 ```js
 const { resolve } = require('path');
@@ -130,18 +128,11 @@ module.exports = env => {
 };
 ```
 
-There's a lot going on above, and not all of it is related to HMR.
-You may benefit from reading the
-[full documentation](https://webpack.github.io/docs/webpack-dev-server.html)
-on webpack dev server, and the [other articles](https://webpack.js.org/concepts/)
-here on webpack.js.org.
+上面的内容涵盖了 webpack 配置的方方面面，并不是全部都和 HMR 相关。这个 webpack 开发服务器的[完整的文档](https://webpack.github.io/docs/webpack-dev-server.html)能够让你对它了解更多，这些在 webpack.js.org 上的[文章](https://webpack.js.org/concepts/)也应该一读。
 
-The basic assumption here is that your JS entry is located at `./src/index.js`,
-and that you're using CSS Modules for your styling.
+这里有一个基本假设，便是你的 JS 入口在 `./src/index.js`，还有，你在使用 CSS 模块。
 
-Please see the comments inline that explain each portion of the config. The main
-areas to look are the `devServer` key and the `entry` key. The `HotModuleReplacementPlugin` is
-also necessary to include in the `plugins` array.
+配置中的注释或许能够帮助你理解一二。有两个主要的部分值得一看： `devServer` 键和 `entry` 键。另外，`HotModuleReplacementPlugin` 是必须加到 `plugins` 数组中去的。
 
 There are two modules included here for the purposes of this guide.
 The react-hot-loader addition to the entry, as noted above, is necessary to enable
