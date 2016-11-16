@@ -132,7 +132,7 @@ Using hashes based on each chunks' content:
 filename: "[chunkhash].bundle.js"
 ```
 
-Make sure the read the [Caching guide](/how-to/cache) for details. There are more steps involved than just setting this option.
+Make sure the read the [Caching guide](/guides/caching) for details. There are more steps involved than just setting this option.
 
 The default value is `"[name].js"`.
 
@@ -199,7 +199,7 @@ If using the [`output.library`](#output-library) option, the library name is aut
 
 `string`
 
-Read the [library guide](/how-to/author-libraries) for details.
+Read the [library guide](/guides/author-libraries) for details.
 
 Use `library`, and `libraryTarget` below, when writing a JavaScript library that should export values, which can be used by other code depending on it. Pass a string with the name of the library:
 
@@ -216,7 +216,7 @@ Note that `output.libraryTarget` defaults to `var`. This means if only `output.l
 
 `string`
 
-Read the [library guide](/how-to/author-libraries) for details.
+Read the [library guide](/guides/author-libraries) for details.
 
 Configure how the library will be exposed. Any one of the following options can be used: (the examples assume `library: "MyLibrary"`)
 
@@ -244,7 +244,7 @@ The output directory as an **absolute** path.
 path: path.resolve(__dirname, 'dist/assets')
 ```
 
-Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/how-to/cache) for details.
+Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching) for details.
 
 
 ## `output.pathinfo`
@@ -302,7 +302,7 @@ background-image: url(/assets/spinner.gif);
 
 The webpack-dev-server also takes a hint from `publicPath`, using it to determine where to serve the output files from.
 
-Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/how-to/cache) for details.
+Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching) for details.
 
 Examples:
 

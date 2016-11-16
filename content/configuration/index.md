@@ -37,7 +37,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 
     <details><summary>[filename](/configuration/output#output-filename): "bundle.js", // string</summary>
     [filename](/configuration/output#output-filename): "[name].js", // for multiple entry points
-    [filename](/configuration/output#output-filename): "[chunkhash].js", // for [long term caching](/how-to/cache)
+    [filename](/configuration/output#output-filename): "[chunkhash].js", // for [long term caching](/guides/caching)
     </details>
     // the filename template for entry chunks
 
@@ -67,7 +67,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
     // include useful path info about modules, exports, requests, etc. into the generated code
 
     [chunkFilename](/configuration/output#output-chunkfilename): "[id].js",
-    [chunkFilename](/configuration/output#output-chunkfilename): "[chunkhash].js", // for [long term caching](/how-to/cache)
+    [chunkFilename](/configuration/output#output-chunkfilename): "[chunkhash].js", // for [long term caching](/guides/caching)
     // the filename template for additional chunks
 
     [jsonpFunction](/configuration/output#output-jsonpfunction): "myWebpackJsonp", // string
@@ -142,7 +142,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
         [loader](/configuration/module#rule-loader): "babel-loader",
         // the loader which should be applied, it'll be resolve relative to the context
         // -loader suffix is no longer optional in Webpack 2 for clarity reasons
-        // see [webpack 1 upgrade guide](/how-to/upgrade-from-webpack-1)
+        // see [webpack 1 upgrade guide](/guides/migrating)
 
         [options](/configuration/module#rule-options-rule-query): {
           presets: ["es2015"]

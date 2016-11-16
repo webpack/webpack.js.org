@@ -178,7 +178,7 @@ If `library` property is set and `libraryTarget` is set to be `var` by default, 
 
 ### Final Steps
 
-[Tweak your production build using webpack](/how-to/generate-production-build).
+[Tweak your production build using webpack](/guides/production-build).
 
 Add the path to your generated bundle as the package's main file in `package.json`
 
