@@ -4,33 +4,48 @@ export default class VoteSlider extends React.Component {
   constructor(props) {
     super(props);
 
-    // props
+    this.precalculate(props);
+
+     // initial state
+    this.state = {
+      inAction: false,
+      value: props.value
+    };
+  }
+
+  precalculate(props) {
+        // props
     this.color = this.checkProp(props.color, '#e78829');                  // color of the circle
     this.minValue = this.checkProp(props.minValue, -100);                 // minimal value for the number
     this.maxValue = this.checkProp(props.maxValue, 100);                  // maximal value for the number
-    this.startValue = this.checkProp(props.startValue, this.minValue);    // maximal value for the number
+    this.visibleMaxValue = this.checkProp(props.visibleMaxValue, this.maxValue);    // maximal value for the number
     this.step = this.checkProp(props.step, 10);                           // amount for one step
-    this.radius = this.checkProp(props.radius, 100);                       // radius of the circle
+    this.radius = this.checkProp(props.radius, 100);                      // radius of the circle
     this.sliderWidth = this.checkProp(props.sliderWidth, 10);             // width of the slider line
     this.buttonRadius = this.checkProp(props.buttonRadius, 10);           // radius of the button on the slider
-
 
     // calculations that are used all around the class
     this.canvasWidth = (this.radius * 2) + (this.buttonRadius * 2) + 2;
     this.canvasHeight = this.canvasWidth / 2 + this.buttonRadius;
     this.numSteps = ((Math.abs(this.minValue) + Math.abs(this.maxValue)) / this.step);
+    this.visibleNumSteps = ((Math.abs(this.minValue) + Math.abs(this.visibleMaxValue)) / this.step);
     this.isTouch = ("ontouchstart" in document.documentElement);
     this.halfRad = Math.PI * 0.5;
-    this.stepRad = Math.PI / this.numSteps;
+    this.stepRad = Math.PI / this.visibleNumSteps;
+    this.zeroRad = this.getRad(Math.max(0, this.minValue));
 
-    // initial state
-    this.state = {
-      inAction: false,
-      buttonTop: 0,
-      buttonLeft: 0,
-      value: this.startValue,
-      rad: this.initValue()
+    this.canvas = {
+      centerWidth: (this.canvasWidth/2),
+      bottomHeight: this.canvasHeight - this.buttonRadius
     };
+  }
+
+  componentWillReceiveProps(props) {
+    this.precalculate(props);
+
+    this.setState({
+      value: props.value
+    });
   }
 
   render() {
@@ -83,20 +98,7 @@ export default class VoteSlider extends React.Component {
         this.moveEnd();
       });
     }
-
-    this.canvas={
-      centerWidth: (this.canvasWidth/2),
-      bottomHeight: this.canvasHeight - this.buttonRadius
-    };
-
-    const top = -Math.cos(this.state.rad) * this.radius + this.canvas.bottomHeight;
-    const left = Math.sin(this.state.rad) * this.radius + this.canvas.centerWidth;
-
-    // button position
-    this.setState({
-      buttonTop:(top - this.buttonRadius),
-      buttonLeft:(left - this.buttonRadius)
-    });
+    this.drawSlider();
   }
 
   /**
@@ -146,18 +148,7 @@ export default class VoteSlider extends React.Component {
     const deg = this.toDegrees(Math.atan2(left, -top));
     const rad = this.toRadians(deg);
 
-    //check if movement is in right restrictions
-    if(this.checkLimit(rad) === false) {
-      return;
-    }
-
-    left = Math.sin(rad) * this.radius + this.canvas.centerWidth;
-    top = -Math.cos(rad) * this.radius + this.canvas.bottomHeight;
-
     this.setState({
-      buttonLeft: (left - this.buttonRadius),
-      buttonTop: (top - this.buttonRadius),
-      rad: rad,
       value: this.getValue(rad)
     });
   }
@@ -170,7 +161,7 @@ export default class VoteSlider extends React.Component {
       return;
     }
 
-    this.moveToStep();
+    this.finishAction();
   }
 
   click(event) {
@@ -180,32 +171,19 @@ export default class VoteSlider extends React.Component {
     const deg = this.toDegrees(Math.atan2(left, -top));
     const rad = this.toRadians(deg);
 
-    //check if movement is in right restrictions
-    if(this.checkLimit(rad) === false) {
-      return;
-    }
-
-    this.moveToStep(rad);
+    this.finishAction(this.getValue(rad));
   }
 
   /**
    * Move current radiant to the closest step
    */
-  moveToStep(rad = this.state.rad) {
-    rad = (Math.round((rad + (this.halfRad)) / this.stepRad) * this.stepRad) - (this.halfRad);
-    const left = Math.sin(rad) * this.radius + this.canvas.centerWidth;
-    const top = -Math.cos(rad) * this.radius + this.canvas.bottomHeight;
-    const value = this.getValue(rad);
-
+  finishAction(value = this.state.value) {
     this.setState({
-      buttonLeft: (left - this.buttonRadius),
-      buttonTop: (top - this.buttonRadius),
       inAction: false,
-      rad: rad,
       value: value
     });
 
-    this.props.valueChanged(parseInt(value));
+    this.props.valueChanged(value);
   }
 
   /**
@@ -213,28 +191,27 @@ export default class VoteSlider extends React.Component {
    */
   drawSlider() {
     const context = this.element.getContext('2d');
-    const stepsNum = this.numSteps + 1;
 
     context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
 
     // basic track
     context.beginPath();
-    context.arc(this.canvas.centerWidth, this.canvas.bottomHeight, this.radius, Math.PI, 2*Math.PI);
+    context.arc(this.canvas.centerWidth, this.canvas.bottomHeight, this.radius, 1.5 * Math.PI - this.halfRad, 1.5 * Math.PI + this.halfRad);
     context.strokeStyle='rgb(202,203,204)';
     context.lineWidth = this.sliderWidth;
     context.stroke();
     context.closePath();
 
     // steps
-    for (var j = 0; j < stepsNum; j++) {
+    for (var j = 0; j < this.numSteps + 1; j++) {
       context.beginPath();
       context.globalAlpha = 1;
-      let tempRad = this.stepRad * j - this.halfRad;
-      let left =Math.sin(tempRad) * (this.radius + (this.sliderWidth / 2)) + this.canvas.centerWidth;
+      let tempRad = this.stepRad * Math.min(j, this.numSteps) - this.halfRad;
+      let left = Math.sin(tempRad) * (this.radius + (this.sliderWidth / 2)) + this.canvas.centerWidth;
       let top = -Math.cos(tempRad) * (this.radius + (this.sliderWidth / 2)) + this.canvas.bottomHeight;
       context.moveTo(left, top);
 
-      left =Math.sin(tempRad) * (this.radius - (this.sliderWidth / 2)) + this.canvas.centerWidth;
+      left = Math.sin(tempRad) * (this.radius - (this.sliderWidth / 2)) + this.canvas.centerWidth;
       top = -Math.cos(tempRad) * (this.radius - (this.sliderWidth / 2)) + this.canvas.bottomHeight;
       context.lineTo(left, top);
 
@@ -247,30 +224,38 @@ export default class VoteSlider extends React.Component {
     // slider line
     context.beginPath();
     context.globalAlpha = 0.6;
-    context.arc(this.canvas.centerWidth, this.canvas.bottomHeight, this.radius, Math.PI, (this.state.rad + Math.PI*1.5));
+    let rad = this.getRad();
+    if(rad > this.zeroRad)
+      context.arc(this.canvas.centerWidth, this.canvas.bottomHeight, this.radius, 1.5 * Math.PI + this.zeroRad, 1.5 * Math.PI + rad);
+    else
+      context.arc(this.canvas.centerWidth, this.canvas.bottomHeight, this.radius, 1.5 * Math.PI + rad, 1.5 * Math.PI + this.zeroRad);
     context.strokeStyle = this.color;
     context.lineWidth = this.sliderWidth;
     context.stroke();
     context.closePath();
 
     // button on slider line
+    let buttonPos = this.getButtonPos();
     context.beginPath();
     context.globalAlpha = 1;
-    context.arc((this.state.buttonLeft + this.buttonRadius), (this.state.buttonTop + this.buttonRadius), this.buttonRadius, 0, 2*Math.PI);
+    context.arc((buttonPos.left + this.buttonRadius), (buttonPos.top + this.buttonRadius), this.buttonRadius, 0, 2*Math.PI);
     context.fillStyle = '#eeefef';
     context.fill();
     context.lineWidth = 1;
     context.strokeStyle = '#c3c3c3';
     context.stroke();
     context.closePath();
+  }
 
-    // current value
-    context.beginPath();
-    context.font = "20px Cabin";
-    context.fillStyle = "#535353";
-    context.textAlign = "center";
-    context.fillText(this.state.value, this.canvas.centerWidth, this.canvas.bottomHeight);
-    context.closePath();
+  getButtonPos(rad = this.getRad()) {
+    const top = -Math.cos(rad) * this.radius + this.canvas.bottomHeight;
+    const left = Math.sin(rad) * this.radius + this.canvas.centerWidth;
+
+    // button position
+    return {
+      top: top - this.buttonRadius,
+      left: left - this.buttonRadius
+    };
   }
 
   /**
@@ -281,7 +266,21 @@ export default class VoteSlider extends React.Component {
   getValue(rad) {
     const newRad = rad + this.halfRad;
 
-    return (this.minValue + ((newRad / this.stepRad) * this.step)).toFixed(0);
+    const newValue = Math.round(this.minValue + ((newRad / this.stepRad) * this.step));
+
+    if(newValue >= this.maxValue) return this.maxValue;
+    if(newValue <= this.minValue) return this.minValue;
+
+    return Math.round(newValue / this.step) * this.step;
+  }
+
+  /**
+   * Get the current radians on the slider from the real value
+   * @param rad {number} Current real value on the slider
+   * @returns {number} Current radians on the slider
+   */
+  getRad(value = this.state.value) {
+    return (value - this.minValue) / this.step * this.stepRad - this.halfRad;
   }
 
   /**

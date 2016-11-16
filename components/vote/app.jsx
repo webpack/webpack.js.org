@@ -52,6 +52,13 @@ export default class VoteApp extends React.Component {
     }
   }
 
+  componentWillReceiveProps(props) {
+    if(!this.isBrowserSupported())
+      return;
+
+    this.updateList(props);
+  }
+
   updateSelf() {
     let { voteAppToken } = localStorage;
     if(voteAppToken) {
@@ -72,8 +79,8 @@ export default class VoteApp extends React.Component {
     }
   }
 
-  updateList() {
-    let { name } = this.props;
+  updateList(props = this.props) {
+    let { name } = props;
     let { voteAppToken } = localStorage;
     this.setState({
       isFetchingList: true
@@ -91,9 +98,8 @@ export default class VoteApp extends React.Component {
     });
   }
 
-  vote(itemId, voteName, value, diffValue, currencyName, score) {
+  localVote(itemId, voteName, diffValue, currencyName, score) {
     let { selfInfo, listInfo } = this.state;
-    let { voteAppToken } = localStorage;
     this.setState({
       isVoting: this.state.isVoting + 1,
       listInfo: listInfo && {
@@ -106,7 +112,7 @@ export default class VoteApp extends React.Component {
           })),
           userVotes: updateByProperty(item.userVotes, "name", voteName, vote => ({
             ...vote,
-            votes: value
+            votes: vote.votes + diffValue
           })),
           score: item.score + score
         }))
@@ -120,7 +126,20 @@ export default class VoteApp extends React.Component {
         }))
       }
     });
-    api.vote(voteAppToken, itemId, voteName, value).then(() => {
+  }
+
+  vote(itemId, voteName, diffValue, currencyName, score) {
+    if(!diffValue) return;
+    this.localVote(itemId, voteName, diffValue, currencyName, score);
+    let { voteAppToken } = localStorage;
+    api.vote(voteAppToken, itemId, voteName, diffValue).catch(e => {
+      console.error(e);
+      // revert local vote
+      this.localVote(itemId, voteName, -diffValue, currencyName, score);
+      this.setState({
+        isVoting: this.state.isVoting - 1
+      });
+    }).then(() => {
       this.setState({
         isVoting: this.state.isVoting - 1
       });
@@ -143,6 +162,18 @@ export default class VoteApp extends React.Component {
 
     const inProgress = isFetchingList || isFetchingSelf || isCreating || isVoting;
 
+    let maxVoteInfo = listInfo && listInfo.possibleVotes.map(() => 0);
+
+    if(listInfo) listInfo.items.forEach(item => {
+      if(item.userVotes) {
+        maxVoteInfo.forEach((max, idx) => {
+          let votes = item.userVotes[idx].votes;
+          if(votes > max)
+            maxVoteInfo[idx] = votes;
+        });
+      }
+    });
+
     return (
       <div className="vote-app">
         {this.renderSelf()}
@@ -154,7 +185,7 @@ export default class VoteApp extends React.Component {
           <h1>{listInfo.displayName}</h1>
           <div>{listInfo.description}</div>
           <ul className="vote-app__items-list">
-            { listInfo.items.map(item => <li>
+            { listInfo.items.map(item => <li key={item.id}>
               <span className="vote-app__item-title">{item.title}</span>
               <span>{item.description}</span><br />
               <ul className="vote-app__vote-list">
@@ -162,10 +193,11 @@ export default class VoteApp extends React.Component {
                   let vote = item.votes[idx];
                   let userVote = item.userVotes && item.userVotes[idx];
                   let currencyInfo = selfInfo && voteSettings.currency && this.findByName(selfInfo.currencies, voteSettings.currency);
-                  let maximum = voteSettings.maximum || 100; // infinity
+                  let maximum = voteSettings.maximum || 1000; // infinity
                   let minimum = voteSettings.minimum || 0;
-                  if(currencyInfo && currencyInfo.remaining < maximum) maximum = currencyInfo.remaining;
-                  let startValue = (userVote && userVote.votes) ? userVote.votes: 0;
+                  let value = (userVote && userVote.votes) ? userVote.votes: 0;
+                  if(currencyInfo && currencyInfo.remaining + value < maximum) maximum = currencyInfo.remaining + value;
+                  let visibleMaxValue = voteSettings.maximum || (maxVoteInfo[idx] + currencyInfo.remaining);
 
                   return <li className={"vote-app__vote-" + voteSettings.name} key={voteSettings.name} title={userVote ? "You voted " + userVote.votes + "." : "Login to see your votes."}>
                     <div className="vote-app__vote-value">
@@ -173,7 +205,8 @@ export default class VoteApp extends React.Component {
                       {userVote && userVote.votes ? " (You: " + (userVote.votes > 0 && voteSettings.minimum < 0 ? "+" + userVote.votes : userVote.votes) + ")" : ""}
                     </div>
                     { selfInfo &&
-                      <VoteSlider minValue={minimum} maxValue={maximum} startValue={startValue} step={voteSettings.step} color={voteSettings.color}
+                      <VoteSlider minValue={minimum} maxValue={maximum} visibleMaxValue={visibleMaxValue} 
+                                  value={value} step={this.getStep(visibleMaxValue)} color={this.getColor(voteSettings.name)}
                                   valueChanged={(v) => {
                                     let diff = v;
 
@@ -181,7 +214,7 @@ export default class VoteApp extends React.Component {
                                       diff = v - userVote.votes;
                                     }
 
-                                    this.vote(item.id, voteSettings.name, v, diff, voteSettings.currency, voteSettings.score * diff);
+                                    this.vote(item.id, voteSettings.name, diff, voteSettings.currency, voteSettings.score * diff);
                                   }}
                       />
                     }
@@ -264,5 +297,18 @@ export default class VoteApp extends React.Component {
     if(maximum)
       arr.push(maximum);
     return arr;
+  }
+
+  getStep(maximum) {
+    return Math.floor(maximum / 20) * 2 || 1;
+  }
+
+  getColor(name) {
+    switch(name) {
+      case "influence": return "blue";
+      case "golden": return "#bfa203";
+      case "thumb": return "#535353";
+    }
+    return undefined;
   }
 }
