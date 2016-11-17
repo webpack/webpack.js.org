@@ -48,7 +48,7 @@ See [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametempla
 
 `boolean | object`
 
-(Deprecated: Not really used, not really useable, write an issue if you have a other opinion)
+(Deprecated: Not really used, not really usable, write an issue if you have a other opinion)
 
 Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines.
 
