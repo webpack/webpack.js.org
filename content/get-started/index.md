@@ -2,6 +2,7 @@
 title: Get Started with Webpack
 contributors:
   - bebraw
+  - varunjayaraman
 sort: 3
 ---
 
