@@ -38,7 +38,7 @@ There are two types of branches:
 
 ### Features
 
-If your contribution is something new, like a new section or page or a new chunk to an existing page, you can create a branch with the following naming convetion:  
+If your contribution is something new, like a new section or page or a new chunk to an existing page, you can create a branch with the following naming convention:  
 
 `feature/<the-new-feature>`
 

@@ -246,7 +246,7 @@ We can use the following package.json entry:
 ```
 
 Run `npm start`, open up your browser to `localhost:8080`,
-and you should see the folling entries printed in your console.log:
+and you should see the following entries printed in your console.log:
 
 ```bash
 dev-server.js:49[HMR] Waiting for update signal from WDS…

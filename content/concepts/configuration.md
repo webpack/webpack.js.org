@@ -84,7 +84,7 @@ let targets = ['web', 'webworker', 'node', 'async-node', 'node-webkit', 'electro
 module.exports = targets;
 ```
 
-T> The most important part to take away from this document is that there are many different ways to format and style your webpack configuation. The key is to stick with something consistent that you and your team can understand and maintain.
+T> The most important part to take away from this document is that there are many different ways to format and style your webpack configuration. The key is to stick with something consistent that you and your team can understand and maintain.
 
 ## Using TypeScript
 

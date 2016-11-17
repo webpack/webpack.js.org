@@ -226,7 +226,7 @@ These options allow webpack to display various stats and style them differently 
 | --records-input-path  | Path to the records file (reading)                               |                                             |
 | --records-output-path | Path to the records file (writing)                               |                                             |
 | --records-path        | Path to the records file                                         |                                             |
-| --target              | The targeted execution enviroment                                | --target='node'                             |
+| --target              | The targeted execution environment                                | --target='node'                             |
 
 ### Shortcuts
 
