@@ -197,8 +197,7 @@ HMR 的 API 还提供了其他的选项，上面的配置并没有全部提及�
 
 ### Package.json
 
-Finally, we need to start up webpack dev server to bundle our code and see HMR in action.
-We can use the following package.json entry:
+最后，让我们启动 webpack 开发服务器来生成打包文件，看看 HMR 的运行效果吧。我们可以按照下面那样设置 pacakge.json 的启动命令：
 
 ```json
 {
@@ -208,8 +207,7 @@ We can use the following package.json entry:
 }
 ```
 
-Run `npm start`, open up your browser to `localhost:8080`,
-and you should see the folling entries printed in your console.log:
+运行 `npm start`。然后打开浏览器，在地址栏输入 `localhost:8080`。这时候应该在你的 console.log 中会看到下面的输出：
 
 ```bash
 dev-server.js:49[HMR] Waiting for update signal from WDS…
@@ -217,8 +215,7 @@ only-dev-server.js:74[HMR] Waiting for update signal from WDS…
 client?c7c8:24 [WDS] Hot Module Replacement enabled.
 ```
 
-Go ahead and edit and save your App.js file.
-You should see something like the following in your console.log:
+接着你可以对 App.js 作出修改并保存。你的 console.log 应该会显示下面的信息：
 
 ```bash
 [WDS] App updated. Recompiling…
@@ -229,5 +226,4 @@ log-apply-result.js:22 [HMR]  - ./components/App.js
 dev-server.js:27 [HMR] App is up to date.
 ```
 
-Note that HMR specifies the paths of the updated modules.
-That's because we're using the NamedModules plugin.
+我们可以看到，HMR 标记出了被修改文件的路径。这便是 NamedModules 插件所起的作用。
