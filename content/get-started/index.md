@@ -44,7 +44,7 @@ document.body.appendChild(component());
 
 To run this piece of code, one usually has the below html
 
-__app/index.html__
+__index.html__
 
 ```html
 <html>
@@ -53,7 +53,7 @@ __app/index.html__
     <script src='https://unpkg.com/lodash@4.16.6' type='text/javascript'></script>
   </head>
   <body>
-    <script src='index.js' type='text/javascript'></script>
+    <script src='app/index.js' type='text/javascript'></script>
   </body>
 </html>
 ```
