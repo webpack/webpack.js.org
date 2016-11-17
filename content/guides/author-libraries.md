@@ -1,5 +1,6 @@
 ---
-title: How to Author Libraries?
+title: Authoring Libraries
+sort: 18
 contributors:
     - pksjce
 ---
@@ -177,7 +178,7 @@ If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var
 
 ### Final Steps
 
-[Tweak your production build using webpack](/how-to/generate-production-build).
+[Tweak your production build using webpack](/guides/production-build).
 
 Add the path to your generated bundle as the package's main file in `package.json`
 

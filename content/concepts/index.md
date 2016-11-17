@@ -1,5 +1,6 @@
 ---
-title: Introduction
+title: Concepts
+sort: 1
 contributors:
   - TheLarkInn
   - jhnns

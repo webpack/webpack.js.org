@@ -1,16 +1,23 @@
 ---
-title: How to Set Up Hot Module Replacement with React?
+title: Hot Module Replacement
+sort: 7
 contributors:
   - jmreidy
   - jhnns
 ---
+
 Hot Module Replacement (HMR) exchanges, adds, or removes modules while an
 application is running without a page reload.
 HMR is particularly useful in applications using a single state tree,
 since components are "dumb" and will reflect the latest application state, even
 after their source is changed and they are replaced.
 
-## Project Config
+Webpack's power lies in its customizablity, and there are MANY ways of configuring HMR
+given the needs of a particular project. The approach described below uses Babel and
+React, but these tools are not necessary for HMR to work.
+If you'd like to see examples of other approaches,
+please request them or, better yet,
+[open up a PR with an addition](https://github.com/webpack/webpack.io)
 
 This guide will be demonstrating the use of HMR with Babel,
 React, and PostCSS (using CSS Modules).
@@ -33,7 +40,7 @@ npm install --save react@15.3.0 react-dom@15.3.0
 
 Your `.babelrc` file should look like the following:
 
-```json
+```bash
 {
   "presets": [
     ["es2015", {"modules": false}],
@@ -41,7 +48,7 @@ Your `.babelrc` file should look like the following:
 
     "stage-2",
     //Specifies what level of language features to activate.
-    //Stage 2 is "draft", 4 is finished, 0 is strawman.
+    //State 2 is "draft", 4 is finished, 0 is strawman.
     //See https://tc39.github.io/process-document/
 
     "react"
@@ -100,7 +107,7 @@ module.exports = env => {
       hot: true,
       //activate hot reloading
 
-      contentBase: resolve(__dirname, 'dist'),
+      contentBase: '/dist',
       //match the output path
 
       publicPath: '/'
@@ -163,9 +170,7 @@ In this guide, we're using the following files:
 // ./src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import { AppContainer } from 'react-hot-loader';
-// AppContainer is a necessary wrapper component for HMR
 
 import App from './components/App';
 
@@ -187,6 +192,7 @@ if (module.hot) {
 ```
 
 ```js
+// ./src/components/App.js
 import React from 'react';
 import styles from './App.css';
 
@@ -209,7 +215,8 @@ export default App;
 }
 ```
 
-The important thing to note in the code above is the `module` reference.
+Now, the above code is using React, but it doesn't need to be. In fact,
+the only thing that matters above is the code refering to `module`.
 First, we wrap the HMR code inside of `module.hot` check;
 webpack exposes `module` to the code, and if we are running with `hot: true` configured,
 we'll enter the inside of the conditional.
@@ -232,8 +239,8 @@ We can use the following package.json entry:
 
 ```json
 {
-  "scripts" : {
-    "start" : "webpack-dev-server --env.dev"
+  "scripts": {
+    "start" : "webpack-dev-server --env.dev",
   }
 }
 ```

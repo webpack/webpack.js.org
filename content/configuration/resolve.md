@@ -1,5 +1,6 @@
 ---
 title: Resolve
+sort: 7
 contributors:
   - sokra
   - skipjack

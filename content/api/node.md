@@ -1,8 +1,10 @@
 ---
 title: Node.js API
+sort: 3
 contributors:
   - sallar
 ---
+
 webpack provides a Node.js API which can be used directly in Node.js runtime.
 
 The Node.js API is useful in scenarios in which you need to customize the build or development process since all the reporting and error handling must be done manually and webpack only does the compiling part.

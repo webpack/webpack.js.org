@@ -1,5 +1,6 @@
 ---
 title: Module Resolution
+sort: 8
 contributors:
     - pksjce
 ---

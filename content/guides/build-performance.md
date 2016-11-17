@@ -1,6 +1,8 @@
 ---
-title: How to Improve Build Performance?
+title: Improving Build Performance
+sort: 15
 ---
+
 > incremental builds
 > profile
 > analyse tool

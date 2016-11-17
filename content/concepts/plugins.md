@@ -1,6 +1,6 @@
 ---
 title: Plugins
-sort: 3
+sort: 5
 contributors:
   - TheLarkInn
   - jhnns
