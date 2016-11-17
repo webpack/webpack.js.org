@@ -1,8 +1,10 @@
 ---
-title: Introduction
+title: Concepts
+sort: 1
 contributors:
   - TheLarkInn
   - jhnns
+  - grgur
 ---
 
 *webpack* is a _module bundler_ for modern JavaScript applications. It is [incredibly configurable](/configuration), however, there are **4 Core Concepts** we feel you should understand before you get started!
@@ -20,16 +22,14 @@ The simplest example is seen below:
 **webpack.config.js**
 
 ```javascript
-const config = {
+module.exports = {
   entry: './path/to/my/entry/file.js'
 };
-
-module.exports = config;
 ```
 
 There are multiple ways to declare your `entry` property that are specific to your application's needs.
 
-[**Learn more!**](/concepts/entry-points)
+[Learn more!](/concepts/entry-points)
 
 ## Output
 
@@ -38,11 +38,11 @@ Once you've bundled all of your assets together, we still need to tell webpack *
 **webpack.config.js**
 
 ```javascript
-const config = {
+module.exports = {
   entry: './path/to/my/entry/file.js',
   output: {
-    filename: 'my-first-webpack.bundle.js',
-    path: './dist'
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'my-first-webpack.bundle.js'
   }
 };
 ```
@@ -53,7 +53,7 @@ T> You may see the term **emitted** or **emit** used throughout our documentatio
 
 The `output` property has [many more configurable features](/configuration), but let's spend some time understanding some of the most common use cases for the `output` property.
 
-[**Learn more!**](/concepts/output)
+[Learn more!](/concepts/output)
 
 
 ## Loaders
@@ -65,7 +65,7 @@ The goal is to have all of the assets in your project to be **webpack's** concer
 At a high level, they have two purposes in your webpack config.
 
 1. Identify what files should be transformed by a certain loader. (`test` property)
-2. Transform that file so that it can be added to your dependency graph (and eventually your bundle). (`loader` property)
+2. Transform that file so that it can be added to your dependency graph (and eventually your bundle). (`use` property)
 
 **webpack.config.js**
 
@@ -73,26 +73,26 @@ At a high level, they have two purposes in your webpack config.
 const config = {
   entry: './path/to/my/entry/file.js',
   output: {
-    filename: 'my-first-webpack.bundle.js',
-    path: './dist'
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'my-first-webpack.bundle.js'
   },
   module: {
-    loaders: [
-      {test: /\.(js|jsx)$/, loader: 'babel-loader'}
+    rules: [
+      {test: /\.(js|jsx)$/, use: 'babel-loader'}
     ]
   }
 };
 ```
 
-In the configuration above we have defined our loader with it's two required properties: `test`, and `loader`. This tells webpack's compiler the following:
+In the configuration above we have defined a rules which used our loader with it's two required properties: `test`, and `use`. This tells webpack's compiler the following:
 
-> "Hey webpack compiler, when you come across a path that resolves to a '.js' or '.jsx' file inside of a `require()`/`import` statement, use the `babel-loader` to transform it before you add it to the bundle".
+> "Hey webpack compiler, when you come across a path that resolves to a '.js' or '.jsx' file inside of a `require()`/`import` statement, **use** the `babel-loader` to transform it before you add it to the bundle".
 
-W> It is important to remember when defining loaders in your webpack config, you are defining them under `module.loaders`, and not `loaders`.
+W> It is important to remember when defining rules in your webpack config, you are defining them under `module.rules`, and not `rules`. But webpack will yell at you when doing this incorrectly.
 
 There are more specific properties to define on loaders that we haven't yet covered.
 
-[**Learn more!**](/concepts/loaders)
+[Learn more!](/concepts/loaders)
 
 ## Plugins
 
@@ -113,8 +113,8 @@ const config = {
     path: './dist'
   },
   module: {
-    loaders: [
-      {test: /\.(js|jsx)$/, loader: 'babel-loader'}
+    rules: [
+      {test: /\.(js|jsx)$/, use: 'babel-loader'}
     ]
   },
   plugins: [
@@ -130,4 +130,4 @@ There are many plugins that webpack provides out of the box! Check out our [list
 
 Using plugins in your webpack config is straight-forward, however there are many use-cases that are worth discussing further.
 
-[**Learn more!**](/concepts/plugins)
+[Learn more!](/concepts/plugins)

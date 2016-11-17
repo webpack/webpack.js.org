@@ -1,10 +1,11 @@
 ---
-title: How to Split CSS?
+title: Code Splitting - CSS
+sort: 3
 contributors:
   - pksjce
 ---
 
-In webpack, when you use the css-loader and import CSS into your JavaScript files, the CSS is bundled along with your Javascript.
+In webpack, when you use the css-loader and import CSS into your JavaScript files, the CSS is bundled along with your JavaScript.
 This has the disadvantage that, you will not be able to utilize the browser's ability to load CSS asynchronously and parallel. Instead, your page will have to wait until your whole JavaScript bundle is loaded, to style itself.
 webpack can help with this problem by bundling the CSS separately using [extract-text-webpack-plugin](https://github.com/webpack/extract-text-webpack-plugin) and the [css-loader](https://github.com/webpack/css-loader).
 

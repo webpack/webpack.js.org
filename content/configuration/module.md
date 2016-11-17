@@ -1,5 +1,6 @@
 ---
 title: Module
+sort: 6
 contributors:
   - sokra
   - skipjack

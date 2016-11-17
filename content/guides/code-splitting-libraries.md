@@ -1,5 +1,6 @@
 ---
-title: How to Split Vendor Files?
+title: Code Splitting - Libraries
+sort: 4
 contributors:
   - pksjce
 ---

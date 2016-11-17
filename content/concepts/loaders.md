@@ -1,6 +1,8 @@
 ---
 title: Loaders
-sort: 2
+sort: 4
+contributors:
+
 ---
-> module.loaders configuration option
-> test, include, exclude, loader, query
+
+?> Write about how rules work and what's the purpose of loaders.

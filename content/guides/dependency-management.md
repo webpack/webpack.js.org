@@ -1,6 +1,8 @@
 ---
-title: How to Handle Dependencies?
+title: Dependency Management
+sort: 6
 ---
+
 > es6 modules
 > commonjs
 > amd
