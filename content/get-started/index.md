@@ -44,7 +44,7 @@ document.body.appendChild(component());
 
 To run this piece of code, one usually has the below html
 
-__index.html__
+__app/index.html__
 
 ```html
 <html>
