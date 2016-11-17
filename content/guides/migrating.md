@@ -73,6 +73,13 @@ It is not possible anymore to omit the `-loader` extension when referencing load
         ]
 ```
 
+You can still opt-in to the old behavior with the resolveLoader.moduleExtensions configuration option.
+``` javascript
+resolveLoader: {
+  moduleExtensions: ["-loader"]
+}
+```
+
 See [#2986](https://github.com/webpack/webpack/issues/2986) for the reason behind this change.
 
 ## `module.preLoaders` and `module.postLoaders` was removed
