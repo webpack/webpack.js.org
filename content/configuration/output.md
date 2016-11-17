@@ -209,7 +209,7 @@ library: "MyLibrary"
 
 The name is used depending on the value of the [`output.libraryTarget`](#output-librarytarget) options.
 
-Note that `output.libraryTarget` defaults to `var`. This means if only `output.library` is used it is exported as variable declaration (when used as script tag it's avaiable in the global scope after execution).
+Note that `output.libraryTarget` defaults to `var`. This means if only `output.library` is used it is exported as variable declaration (when used as script tag it's available in the global scope after execution).
 
 
 ## `output.libraryTarget`
@@ -220,7 +220,7 @@ Read the [library guide](/guides/author-libraries) for details.
 
 Configure how the library will be exposed. Any one of the following options can be used: (the examples assume `library: "MyLibrary"`)
 
-`libraryTarget: "amd"` - Expose it using [Asynchronous Module Defintion](http://davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/) (AMD)
+`libraryTarget: "amd"` - Expose it using [Asynchronous Module Definition](http://davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/) (AMD)
 
 `libraryTarget: "commonjs"` - Expose it using the `exports` object (i.e. `exports["MyLibrary"] = ...`)
 

@@ -122,7 +122,7 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
 
 ## `OccurrenceOrderPlugin` is now on by default
 
-It's no longer neccessary to specify it in configuration.
+It's no longer necessary to specify it in configuration.
 
 ``` diff
   plugins: [
