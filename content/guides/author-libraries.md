@@ -174,7 +174,7 @@ module.exports = {
 };
 ```
 
-If `library` property is set and `libraryTarget` is set to be `var` by default, as given in the [config reference](/configuration/output).
+If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [config reference](/configuration/output).
 
 ### Final Steps
 
