@@ -134,14 +134,11 @@ module.exports = env => {
 
 配置中的注释或许能够帮助你理解一二。有两个主要的部分值得一看： `devServer` 键和 `entry` 键。另外，`HotModuleReplacementPlugin` 是必须加到 `plugins` 数组中去的。
 
-There are two modules included here for the purposes of this guide.
-The react-hot-loader addition to the entry, as noted above, is necessary to enable
-HMR with React components. The NamedModulesPlugin is a useful addition
-to better understand what modules are being updated when using HMR.
+这里特别要提一下下面的两个模块。在 `entry` 里的 `react-hot-loader`，是 React 配置 HMR 必不可少的模块。还有 `NamedModulesPlugin`，它的用处在于，能让你知道热重载时是哪个模块作出了变动。
 
 ### Code
 
-In this guide, we're using the following files:
+下面是和上面配置相关的代码：
 
 ```js
 // ./src/index.js
@@ -192,22 +189,11 @@ export default App;
 }
 ```
 
-Now, the above code is using React, but it doesn't need to be. In fact,
-the only thing that matters above is the code refering to `module`.
-First, we wrap the HMR code inside of `module.hot` check;
-webpack exposes `module` to the code, and if we are running with `hot: true` configured,
-we'll enter the inside of the conditional.
+上面代码中用到了 React，但这对于 HMR 并不是必需的。事实上，上面的代码中最重要是引用 `module` 的那一部分代码。首先，我们把 HMR 的触发重载代码放在了 `module.hot` 的条件判断中；webpack 向代码暴露了 `module` 对象，如果我们设置了 `hot: true`，`module.hot` 条件判断里的代码便会执行。
 
-While the module API offers more options than what's above, the most
-important element is the `module.hot.accept` call.
-It specific how to handle changes to specific dependencies.
+HMR 的 API 还提供了其他的选项，上面的配置并没有全部提及，但最重要的是 `module.hot.accept` 调用。它指定了依据特定的依赖，怎样处理代码的更新。
 
-So in this case, `module.hot` will fire the `render` method ONLY
-when `src/components/App.js` changes. Note that would also include when the
-dependencies of `App.js` change -
-so the `render` method will file not just for changes made directly to the
-source of `App.js`, but also changes made to `App.css`, since `App.css`
-is included in `App.js`.
+在上面的例子中，`module.hot` 只有在 `src/components/App.js` 更新时，才回触发 `render` 方法。值得注意的是，`App.js` 的更新包括了它里面依赖的更新 ── 除了 `App.js` 本身更新之外，如果 `App.css` 更新了，也会触发 `render` 方法，因为 `App.css` 包含在 `App.js` 里面。
 
 ### Package.json
 
