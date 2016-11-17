@@ -50,9 +50,9 @@ __index.html__
   <head>
     <title>Webpack demo</title>
     <script src='https://unpkg.com/lodash@4.16.6' type='text/javascript'></script>
-    <script src='index.js' type='text/javascript'></script>
   </head>
   <body>
+    <script src='index.js' type='text/javascript'></script>
   </body>
 </html>
 ```
