@@ -68,7 +68,7 @@ externals: {
 }
 ```
 
-`subtract: ['./math', 'subtract']` converts to a parent child contruct, where `./math` is the parent module and your bundle only requires the subset under `subtract` variable.
+`subtract: ['./math', 'subtract']` converts to a parent child construct, where `./math` is the parent module and your bundle only requires the subset under `subtract` variable.
 
 ### object
 
