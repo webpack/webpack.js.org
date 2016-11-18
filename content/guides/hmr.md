@@ -1,5 +1,6 @@
 ---
-title: How to Configure Hot Module Replacement?
+title: Hot Module Replacement
+sort: 7
 contributors:
   - jmreidy
   - jhnns
@@ -11,7 +12,7 @@ HMR is particularly useful in applications using a single state tree,
 since components are "dumb" and will reflect the latest application state, even
 after their source is changed and they are replaced.
 
-Webpack's power lies in its customizablity, and there are MANY ways of configuring HMR
+Webpack's power lies in its customizability, and there are MANY ways of configuring HMR
 given the needs of a particular project. The approach described below uses Babel and
 React, but these tools are not necessary for HMR to work.
 If you'd like to see examples of other approaches,
@@ -20,7 +21,7 @@ please request them or, better yet,
 
 This guide will be demonstrating the use of HMR with Babel,
 React, and PostCSS (using CSS Modules).
-To follow along, please add the following deps to your `package.json`:
+To follow along, please add the following dependencies to your `package.json`:
 
 To use HMR, you'll need the following dependencies:
 
@@ -51,7 +52,7 @@ Your `.babelrc` file should look like the following:
     //See https://tc39.github.io/process-document/
 
     "react"
-    //Transpile React components to JS
+    //Transpile React components to JavaScript
   ],
   "plugins": [
     "react-hot-loader/babel"
@@ -149,7 +150,7 @@ You may benefit from reading the
 on webpack dev server, and the [other articles](https://webpack.js.org/concepts/)
 here on webpack.js.org.
 
-The basic assumption here is that your JS entry is located at `./src/index.js`,
+The basic assumption here is that your JavaScript entry is located at `./src/index.js`,
 and that you're using CSS Modules for your styling.
 
 Please see the comments inline that explain each portion of the config. The main
@@ -215,7 +216,7 @@ export default App;
 ```
 
 Now, the above code is using React, but it doesn't need to be. In fact,
-the only thing that matters above is the code refering to `module`.
+the only thing that matters above is the code referring to `module`.
 First, we wrap the HMR code inside of `module.hot` check;
 webpack exposes `module` to the code, and if we are running with `hot: true` configured,
 we'll enter the inside of the conditional.
@@ -245,7 +246,7 @@ We can use the following package.json entry:
 ```
 
 Run `npm start`, open up your browser to `localhost:8080`,
-and you should see the folling entries printed in your console.log:
+and you should see the following entries printed in your console.log:
 
 ```bash
 dev-server.js:49[HMR] Waiting for update signal from WDS…

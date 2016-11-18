@@ -1,6 +1,8 @@
 ---
 title: Configuration
+sort: 6
 contributors:
+- TheLarkInn
 ---
 
 You may have noticed that few webpack configurations look exactly alike. This is because **webpack's configuration file is a JavaScript file that exports an object.** This object is then processed by webpack based upon its defined properties.
@@ -9,7 +11,7 @@ Because it's a standard node.js CommonJs module, you **can do the following**:
 
 * import other files via `require(...)`
 * use utilities on npm via `require(...)`
-* use JS controlflow expressions i. e. the `?:` operator
+* use JavaScript control flow expressions i. e. the `?:` operator
 * use constants or variables for often used values
 * write and execute function to generate a part of the configuration
 
@@ -82,7 +84,7 @@ let targets = ['web', 'webworker', 'node', 'async-node', 'node-webkit', 'electro
 module.exports = targets;
 ```
 
-T> The most important part to take away from this document is that there are many different ways to format and style your webpack configuation. The key is to stick with something consistent that you and your team can understand and maintain.
+T> The most important part to take away from this document is that there are many different ways to format and style your webpack configuration. The key is to stick with something consistent that you and your team can understand and maintain.
 
 ## Using TypeScript
 
@@ -149,7 +151,7 @@ export class NgCliWebpackConfig {
 
 ## Using JSX
 
-In the example below JSX (React JS Markup) and Babel to create a JSON Configuration that webpack can understand. (Courtesy of [Jason Miller](https://twitter.com/_developit))
+In the example below JSX (React JavaScript Markup) and Babel to create a JSON Configuration that webpack can understand. (Courtesy of [Jason Miller](https://twitter.com/_developit))
 
 ```javascript
 import h from 'jsxobj';

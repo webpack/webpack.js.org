@@ -1,9 +1,11 @@
 ---
-title: How to Set Up Hot Module Replacement with React?
+title: Hot Module Replacement - React
+sort: 8
 contributors:
   - jmreidy
   - jhnns
 ---
+
 Hot Module Replacement (HMR) exchanges, adds, or removes modules while an
 application is running without a page reload.
 HMR is particularly useful in applications using a single state tree,
@@ -14,7 +16,7 @@ after their source is changed and they are replaced.
 
 This guide will be demonstrating the use of HMR with Babel,
 React, and PostCSS (using CSS Modules).
-To follow along, please add the following deps to your `package.json`:
+To follow along, please add the following dependencies to your `package.json`:
 
 To use HMR, you'll need the following dependencies:
 
@@ -45,7 +47,7 @@ Your `.babelrc` file should look like the following:
     //See https://tc39.github.io/process-document/
 
     "react"
-    //Transpile React components to JS
+    //Transpile React components to JavaScript
   ],
   "plugins": [
     "react-hot-loader/babel"
@@ -143,7 +145,7 @@ You may benefit from reading the
 on webpack dev server, and the [other articles](https://webpack.js.org/concepts/)
 here on webpack.js.org.
 
-The basic assumption here is that your JS entry is located at `./src/index.js`,
+The basic assumption here is that your JavaScript entry is located at `./src/index.js`,
 and that you're using CSS Modules for your styling.
 
 Please see the comments inline that explain each portion of the config. The main
@@ -239,7 +241,7 @@ We can use the following package.json entry:
 ```
 
 Run `npm start`, open up your browser to `localhost:8080`,
-and you should see the folling entries printed in your console.log:
+and you should see the following entries printed in your console.log:
 
 ```bash
 dev-server.js:49[HMR] Waiting for update signal from WDS…

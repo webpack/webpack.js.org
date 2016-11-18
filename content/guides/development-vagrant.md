@@ -1,5 +1,6 @@
 ---
-title: How to Develop Using Vagrant
+title: Development - Vagrant
+sort: 12
 contributors:
   - SpaceK33z
   - xie-qianyue

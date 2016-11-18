@@ -1,5 +1,6 @@
 ---
-title: How to Shim Third Party Libraries?
+title: Shimming
+sort: 17
 contributors:
   - pksjce
   - jhnns
@@ -26,7 +27,7 @@ module.exports = {
 
 ## ProvidePlugin
 The [ProvidePlugin](/concepts/plugins#ProvidePlugin) makes a module available as a variable in every other module required by `webpack`. The module is required only if you use the variable.
-Most legacy modules rely on the presence of specific globals, like jQuery plugins do on `$` or `jQuery`. In this scenario, you can configure webpack to prepend `var $ = require(“jquery”)` everytime it encounters the global `$` identifier.
+Most legacy modules rely on the presence of specific globals, like jQuery plugins do on `$` or `jQuery`. In this scenario, you can configure webpack to prepend `var $ = require(“jquery”)` every time it encounters the global `$` identifier.
 
 ``` javascript
 var webpack = require("webpack");

@@ -1,5 +1,6 @@
 ---
 title: Resolve
+sort: 7
 contributors:
   - sokra
   - skipjack
@@ -178,15 +179,6 @@ Default: `["index"]`
 The filename to be used while resolving directories.
 
 
-## `resolve.moduleExtensions`
-
-`array`
-
-Example: `['-loaders']`
-
-These extensions are tried when resolving a module.
-
-
 ## `resolve.modules`
 
 `array`
@@ -259,6 +251,16 @@ T> Note that you can use alias here and other features familiar from resolve. Fo
 That's a `resolveLoader` only property.It describes alternatives for the module name that are tried.
 
 Default: `["*-webpack-loader", "*-web-loader", "*-loader", "*"]`
+
+
+## `resolveLoader.moduleExtensions`
+
+`array`
+
+Example: `['-loaders']`
+
+These extensions which are tried when resolving a module.
+
 
 ## `resolve.plugins`
 

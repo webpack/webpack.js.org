@@ -1,5 +1,6 @@
 ---
-title: How to Split Using require.ensure()?
+title: Code Splitting - Using Require
+sort: 5
 contributors:
   - pksjce
 ---
