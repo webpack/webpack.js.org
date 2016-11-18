@@ -1,7 +1,7 @@
 ---
-title: cli 工具
+title: CLI 工具
+sort: 2
 ---
-## Overview
 
 webpack provides a Command Line Interface (CLI) to configure and interact with your build. This is mostly useful in case of early prototyping, profiling, writing npm scripts or personal customization of the build.
 
@@ -226,7 +226,7 @@ These options allow webpack to display various stats and style them differently 
 | --records-input-path  | Path to the records file (reading)                               |                                             |
 | --records-output-path | Path to the records file (writing)                               |                                             |
 | --records-path        | Path to the records file                                         |                                             |
-| --target              | The targeted execution enviroment                                | --target='node'                             |
+| --target              | The targeted execution environment                                | --target='node'                             |
 
 ### Shortcuts
 

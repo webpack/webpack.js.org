@@ -1,12 +1,12 @@
 ---
 title: 入口
-sort: 0
+sort: 2
 contributors:
   - TheLarkInn
   - dear-lizhihua
 ---
 
-正如我们在[介绍](./)中提到的，在 webpack 配置中有多种方式定义 `entry` 属性。除了解释为什么它可能对你有用，我们还将向你展示如何**能够**配置 `entry` 属性。
+正如我们在[介绍](/get-started/#using-webpack-with-a-config)中提到的，在 webpack 配置中有多种方式定义 `entry` 属性。除了解释为什么它可能对你有用，我们还将向你展示如何**能够**配置 `entry` 属性。
 
 ## 单入口（简写）语法
 
@@ -74,7 +74,7 @@ const config = {
 
 **是什么？**从表面上看，这告诉我们 webpack 从 `app.js` 和 `vendors.js` 开始创建依赖图表(dependency graph)。这些图表是完全分离、互相独立的（每个 bundle 中都有一个 webpack 引导(bootstrap)）。在只有一个入口起点（不包括公共库）的单页应用中比较常见。
 
-**为什么？**此设置允许你使用`CommonsChunkPlugin`并从 app 包 提取 公共引用(vendor reference) 到 vendor 包，并把公共引用的部分替换为 `__webpack_require__()` 调用。如果应用包中了没有公共代码，那么你可以在 webpack 中实现被称为 [长效缓存](/how-to/cache) 的通用模式。
+**为什么？**此设置允许你使用`CommonsChunkPlugin`并从 app 包 提取 公共引用(vendor reference) 到 vendor 包，并把公共引用的部分替换为 `__webpack_require__()` 调用。如果应用包中了没有公共代码，那么你可以在 webpack 中实现被称为 [长效缓存](/guides/caching)的通用模式。
 
 ?> Consider removing this scenario in favor of the DllPlugin, which provides a better vendor-splitting.
 

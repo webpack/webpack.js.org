@@ -1,5 +1,6 @@
 ---
 title: 外部扩展(external)
+sort: 13
 contributors:
   - sokra
   - skipjack
@@ -68,7 +69,7 @@ externals: {
 }
 ```
 
-`subtract: ['./math', 'subtract']` converts to a parent child contruct, where `./math` is the parent module and your bundle only requires the subset under `subtract` variable.
+`subtract: ['./math', 'subtract']` converts to a parent child construct, where `./math` is the parent module and your bundle only requires the subset under `subtract` variable.
 
 ### object
 
@@ -98,7 +99,7 @@ This syntax is used to describe all the possible ways that an external library c
 
 ?> TODO - I think its overkill to list externals as regex.
 
-For more information on how to use this configuration, please refer to the article on [how to author a library](/how-to/author-libraries).
+For more information on how to use this configuration, please refer to the article on [how to author a library](/guides/author-libraries).
 
 ***
 

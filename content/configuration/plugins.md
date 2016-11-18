@@ -1,5 +1,6 @@
 ---
 title: 插件
+sort: 8
 contributors:
   - sokra
   - skipjack

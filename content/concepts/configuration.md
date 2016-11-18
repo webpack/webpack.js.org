@@ -1,6 +1,8 @@
 ---
 title: 配置
+sort: 6
 contributors:
+- TheLarkInn
   - dear-lizhihua
 ---
 
@@ -10,7 +12,7 @@ Because it's a standard node.js CommonJs module, you **can do the following**:
 
 * import other files via `require(...)`
 * use utilities on npm via `require(...)`
-* use JS controlflow expressions i. e. the `?:` operator
+* use JavaScript control flow expressions i. e. the `?:` operator
 * use constants or variables for often used values
 * write and execute function to generate a part of the configuration
 
@@ -150,7 +152,8 @@ export class NgCliWebpackConfig {
 
 ## 使用 JSX
 
-在下面例子中，JSX（React JS 标记）和 Babel 创建了一个 webpack 可以识别的 JSON 配置。（由[Jason Miller](https://twitter.com/_developit)提供）
+在下面例子中，JSX（React JavaScript 标记）和 Babel 创建了一个 webpack 可以识别的 JSON 配置。（由[Jason Miller](https://twitter.com/_developit)提供）
+
 
 ```javascript
 import h from 'jsxobj';

@@ -1,5 +1,6 @@
 ---
 title: 解析
+sort: 7
 contributors:
   - sokra
   - skipjack
@@ -261,6 +262,16 @@ T> Note that you can use alias here and other features familiar from resolve. Fo
 That's a `resolveLoader` only property.It describes alternatives for the module name that are tried.
 
 Default: `["*-webpack-loader", "*-web-loader", "*-loader", "*"]`
+
+
+## `resolveLoader.moduleExtensions`
+
+`array`
+
+Example: `['-loaders']`
+
+These extensions which are tried when resolving a module.
+
 
 ## `resolve.plugins`
 

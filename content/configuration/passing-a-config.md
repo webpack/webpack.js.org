@@ -1,5 +1,6 @@
 ---
-title: 通过配置
+title: 传递配置
+sort: 2
 contributors:
   - sokra
   - skipjack

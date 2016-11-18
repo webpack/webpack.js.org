@@ -1,6 +1,6 @@
 ---
 title: 插件
-sort: 3
+sort: 5
 contributors:
   - TheLarkInn
   - jhnns
@@ -32,7 +32,7 @@ ConsoleLogOnBuildWebpackPlugin.prototype.apply = function(compiler) {
 };
 ```
 
-T> As clever JS developer you may remember the `Function.prototype.apply` method. Because of this method you can pass any function as plugin (`this` will point to the `compiler`). You can use this style to inline custom plugins in your configuration.
+T> As clever JavaScript developer you may remember the `Function.prototype.apply` method. Because of this method you can pass any function as plugin (`this` will point to the `compiler`). You can use this style to inline custom plugins in your configuration.
 
 ## 用法
 

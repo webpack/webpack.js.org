@@ -1,5 +1,6 @@
 ---
 title: DevServer
+sort: 9
 contributors:
   - sokra
   - skipjack
@@ -8,7 +9,7 @@ contributors:
   - dear-lizhihua
 ---
 
-webpack-dev-server 能够用于快速开发应用程序。请查看[“如何开发？”](/how-to/develop)入门。
+webpack-dev-server 能够用于快速开发应用程序。请查看[“如何开发？”](/guides/development)入门。
 
 此页面描述影响 webpack-dev-server(简写为：dev-server) 行为的选项。
 

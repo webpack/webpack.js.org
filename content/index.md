@@ -11,7 +11,7 @@ bar():
 **foo.js**
 
 ```js
-export function bar() {
+export default function bar() {
   //
 }
 ```

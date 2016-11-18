@@ -1,5 +1,6 @@
 ---
 title: 输出
+sort: 5
 contributors:
   - sokra
   - skipjack
@@ -47,7 +48,7 @@ See [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametempla
 
 `boolean | object`
 
-(Deprecated: Not really used, not really useable, write an issue if you have a other opinion)
+(Deprecated: Not really used, not really usable, write an issue if you have a other opinion)
 
 Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines.
 
@@ -131,7 +132,7 @@ Using hashes based on each chunks' content:
 filename: "[chunkhash].bundle.js"
 ```
 
-Make sure the read the [Caching guide](/how-to/cache) for details. There are more steps involved than just setting this option.
+Make sure the read the [Caching guide](/guides/caching) for details. There are more steps involved than just setting this option.
 
 The default value is `"[name].js"`.
 
@@ -198,7 +199,7 @@ If using the [`output.library`](#output-library) option, the library name is aut
 
 `string`
 
-Read the [library guide](/how-to/author-libraries) for details.
+Read the [library guide](/guides/author-libraries) for details.
 
 Use `library`, and `libraryTarget` below, when writing a JavaScript library that should export values, which can be used by other code depending on it. Pass a string with the name of the library:
 
@@ -208,18 +209,18 @@ library: "MyLibrary"
 
 The name is used depending on the value of the [`output.libraryTarget`](#output-librarytarget) options.
 
-Note that `output.libraryTarget` defaults to `var`. This means if only `output.library` is used it is exported as variable declaration (when used as script tag it's avaiable in the global scope after execution).
+Note that `output.libraryTarget` defaults to `var`. This means if only `output.library` is used it is exported as variable declaration (when used as script tag it's available in the global scope after execution).
 
 
 ## `output.libraryTarget`
 
 `string`
 
-Read the [library guide](/how-to/author-libraries) for details.
+Read the [library guide](/guides/author-libraries) for details.
 
 Configure how the library will be exposed. Any one of the following options can be used: (the examples assume `library: "MyLibrary"`)
 
-`libraryTarget: "amd"` - Expose it using [Asynchronous Module Defintion](http://davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/) (AMD)
+`libraryTarget: "amd"` - Expose it using [Asynchronous Module Definition](http://davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/) (AMD)
 
 `libraryTarget: "commonjs"` - Expose it using the `exports` object (i.e. `exports["MyLibrary"] = ...`)
 
@@ -243,7 +244,7 @@ The output directory as an **absolute** path.
 path: path.resolve(__dirname, 'dist/assets')
 ```
 
-Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/how-to/cache) for details.
+Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching) for details.
 
 
 ## `output.pathinfo`
@@ -301,7 +302,7 @@ background-image: url(/assets/spinner.gif);
 
 The webpack-dev-server also takes a hint from `publicPath`, using it to determine where to serve the output files from.
 
-Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/how-to/cache) for details.
+Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching) for details.
 
 Examples:
 

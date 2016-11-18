@@ -1,5 +1,6 @@
 ---
 title: 扩展配置
+sort: 3
 contributors:
   - sokra
   - skipjack

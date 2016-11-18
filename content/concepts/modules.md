@@ -1,5 +1,6 @@
 ---
 title: 模块
+sort: 7
 contributors:
   - TheLarkInn
   - dear-lizhihua

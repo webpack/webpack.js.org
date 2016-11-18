@@ -1,5 +1,6 @@
 ---
 title: 配置
+sort: 1
 contributors:
   - sokra
   - skipjack
@@ -37,7 +38,7 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
 
     <details><summary>[filename](/configuration/output#output-filename): "bundle.js", // string</summary>
     [filename](/configuration/output#output-filename): "[name].js", // 用于多个入口点(entry point)（出口点？）
-    [filename](/configuration/output#output-filename): "[chunkhash].js", // 用于[长效缓存](/how-to/cache)
+    [filename](/configuration/output#output-filename): "[chunkhash].js", // 用于[长效缓存](/guides/cache)
     </details>
     // 「入口分块(entry chunk)」的文件名模板（出口分块？）
 
@@ -67,7 +68,7 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
     // 在生成代码时，引入相关的模块、导出、请求等有帮助的路径信息。
 
     [chunkFilename](/configuration/output#output-chunkfilename): "[id].js",
-    [chunkFilename](/configuration/output#output-chunkfilename): "[chunkhash].js", // 长效缓存(/how-to/cache)
+    [chunkFilename](/configuration/output#output-chunkfilename): "[chunkhash].js", // 长效缓存(/guides/caching)
     // 「附加分块(additional chunk)」的文件名模板
 
     [jsonpFunction](/configuration/output#output-jsonpfunction): "myWebpackJsonp", // string
@@ -142,7 +143,7 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
         [loader](/configuration/module#rule-loader): "babel-loader",
         // 应该应用的 loader，它相对上下文解析
         // 为了更清晰，`-loader` 后缀在 Webpack 2 中不再是可选的
-        // 查看 [webpack 1 升级指南](/how-to/upgrade-from-webpack-1)。
+        // 查看 [webpack 1 升级指南](/guides/migrating)。
 
         [options](/configuration/module#rule-options-rule-query): {
           presets: ["es2015"]

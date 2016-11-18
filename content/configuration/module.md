@@ -1,5 +1,6 @@
 ---
 title: 模块(module)
+sort: 6
 contributors:
   - sokra
   - skipjack

@@ -1,5 +1,6 @@
 ---
 title: Devtool
+sort: 10
 contributors:
   - sokra
   - skipjack
