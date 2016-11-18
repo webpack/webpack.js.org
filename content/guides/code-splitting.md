@@ -1,5 +1,5 @@
 ---
-title: 分割代码
+title: 代码分割
 sort: 2
 contributors:
   - pksjce

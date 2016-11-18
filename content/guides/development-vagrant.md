@@ -1,5 +1,5 @@
 ---
-title: 使用 Vagrant 开发
+title: 开发 - Vagrant
 sort: 12
 contributors:
   - SpaceK33z

@@ -57,22 +57,22 @@ module.exports = {
         );
       }
     ),
+    guides: section(
+      '指南',
+      function() {
+        return require.context(
+          'json-loader!yaml-frontmatter-loader!./content/guides',
+          true,
+          /^\.\/.*\.md$/
+        );
+      }
+    ),
     configuration: section(
       '配置',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/configuration',
           false,
-          /^\.\/.*\.md$/
-        );
-      }
-    ),
-    'how-to': section(
-      '怎么做',
-      function() {
-        return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/how-to',
-          true,
           /^\.\/.*\.md$/
         );
       }
@@ -105,6 +105,14 @@ module.exports = {
           false,
           /^\.\/.*\.md$/
         );
+      }
+    ),
+    vote: voteList(
+      'Voting',
+      {
+        index: true,
+        feedback: true,
+        moneyDistribution: true,
       }
     )
   }
@@ -165,5 +173,47 @@ function processPage() {
     contributors: function(o) {
       return Array.isArray(o.file.contributors) && o.file.contributors.length && o.file.contributors.slice().sort();
     }
+  };
+}
+
+function voteList(title, lists) {
+  return {
+    title: title,
+    path: function() {
+      function context(request) {
+        var name = /^\.\/(.*)\.md$/.exec(request)[1];
+        return {
+          name: name,
+          __content: '' // make antwar happy
+        };
+      }
+      context.keys = function() {
+        return Object.keys(lists).map(k => './' + k + '.md');
+      };
+      return context;
+    },
+    processPage: {
+      url: function(o) {
+        return 'vote/' + o.file.name;
+      },
+      name: function(o) {
+        return o.file.name;
+      },
+      anchors: function(o) {
+        return [];
+      },
+      content: function(o) {
+        return '';
+      }
+    },
+    layouts: {
+      index: function() {
+        return require('./components/vote/list.jsx').default
+      },
+      page: function() {
+        return require('./components/vote/list.jsx').default
+      }
+    },
+    redirects: {} // <from>: <to>
   };
 }

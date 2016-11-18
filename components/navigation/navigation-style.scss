@@ -178,44 +178,22 @@
   }
 }
 
-.algolia-autocomplete {
-  display: flex !important;
+.navigation__bottom {
+  background:map-get($colors, emperor);
+}
 
-  .ds-dropdown-menu {
-    box-shadow:none;
+.navigation__child {
+  font-size: getFontSize(-1);
+  margin:0.5em 1em 0.6em;
+  color:map-get($colors, dusty-grey);
+  text-transform: uppercase;
 
-    &:before {
-      content:none;
-    }
-
-    [class^=ds-dataset-] {
-      border-color:map-get($colors, alto);
-      border-radius:3px;
-    }
+  &:first-of-type {
+    margin-left: 0;
   }
 
-  .algolia-docsearch-suggestion--category-header {
-    border-color:map-get($colors, alto);
-  }
-
-  .algolia-docsearch-suggestion--highlight {
-    color:map-get($colors, denim);
-    background:rgba(map-get($colors, malibu), .2);
-  }
-
-  .ds-dropdown-menu .ds-suggestion.ds-cursor .algolia-docsearch-suggestion--content {
-    background:rgba(map-get($colors, dusty-grey), .15)!important;
-  }
-
-  .algolia-docsearch-suggestion--subcategory-column {
-    color:map-get($colors, dove-grey);
-  }
-
-  .algolia-docsearch-suggestion--category-header {
-    color:map-get($colors, mine-shaft);
-  }
-
-  .algolia-docsearch-suggestion--title {
-    color:map-get($colors, mine-shaft);
+  &:hover,
+  &--active {
+    color:map-get($colors, white);
   }
 }

@@ -1,5 +1,5 @@
 ---
-title: 模块热替换 - React
+title: 模块热更新 - React
 sort: 8
 contributors:
   - jmreidy
