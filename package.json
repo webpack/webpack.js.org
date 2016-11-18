@@ -49,7 +49,7 @@
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.5",
     "babel-plugin-transform-object-rest-spread": "^6.16.0",
-    "babel-preset-latest": "^6.16.0",
+    "babel-preset-env": "^0.0.8",
     "babel-preset-react": "^6.11.1",
     "css-loader": "^0.25.0",
     "eslint": "3.6.0",
