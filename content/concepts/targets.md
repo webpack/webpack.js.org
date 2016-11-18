@@ -28,12 +28,12 @@ module.exports = config;
 
 以下是可以传递给 `target` 属性的值的列表。
 
-* `"async-node"` Compile for usage in a Node.js-like environment (use `fs` and `vm` to load chunks async)
-* `"electron-main"` Compile for electron renderer process, provide a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environment and `NodeTargetPlugin` and `ExternalsPlugin` for commonjs and electron bulit-in modules. *Note: need `webpack` >= 1.12.15.
-* `"node"` Compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks)
-* `"node-webkit"` Compile for usage in webkit, uses jsonp chunk loading but also supports build in Node.js modules plus require("nw.gui") (experimental)
-* `"web"` Compile for usage in a browser-like environment (default)
-* `"webworker"` Compile as WebWorker
+* `"async-node"` 编译为类 Node.js 环境可用（使用 `fs` 和 `vm` 加载异步分块）
+* `"electron-main"` 编译为 electron 渲染进程，使用 `JsonpTemplatePlugin`, `FunctionModulePlugin` 来为浏览器环境提供目标，使用 `NodeTargetPlugin` 和 `ExternalsPlugin` 为 commonjs 和 electron 内置模块提供目标。*注意：需要 `webpack` >= 1.12.15。
+* `"node"` 编译为类 Node.js 环境可用（使用 `fs` 和 `vm` 加载分块）
+* `"node-webkit"` 编译为 webkit 中可用，使用 jsonp 加载分块，但也支持在 Node.js 模块加入 require("nw.gui")（实验性质）
+* `"web"` 编译为类浏览器环境可用（默认）
+* `"webworker"` 作为 WebWorker 编译
 
 每个_target_都有各种部署/环境特定的附加项，以支持满足其需求。
 
