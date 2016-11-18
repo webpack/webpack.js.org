@@ -26,7 +26,7 @@ contributors:
 
 T> 允许引入 Node.js 内置模块和 [`nw.gui`](http://docs.nwjs.io/en/latest/) （实验性）
 
-`target: "async-node"` - 使用 `fs` and `vm` 异步加载包
+`target: "async-node"` - 使用 `fs` and `vm` 加载异步分块
 
 `target: "electron"` - 编译给 [Electron](http://electron.atom.io/)
 
