@@ -3,24 +3,44 @@
 
 .sidebar-mobile {
   position: fixed;
-  width: 280px;
+  width: 295px;
   height: 100vh;
   z-index: 100;
   top: 0;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  background: getColor(white);
   transform: translate3D(-100%, 0, 0);
+  transform: translate3D(calc(-100% + 5px), 0, 0);
   transition: all 500ms;
 
   @include break {
     display: none;
   }
-
+  
   &--visible {
     transform: translate3D(0, 0, 0);
-    box-shadow: 0 0 5px getColor(emperor);
+  }
+
+  &.no-delay{
+    transition-duration: 0ms;
+  }
+
+  .opener{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    left: 285px;
+  }
+
+  .sidebar-content{
+    position: relative;
+    width: 285px;
+    height: 100vh;
+    overflow-x: hidden;
+    background: map-get($colors, white);
+    box-shadow: 0 0 5px map-get($colors, emperor);
   }
 }
 
