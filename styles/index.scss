@@ -29,15 +29,16 @@ a {
   text-decoration: none;
   transition: color 250ms;
 
-  &:hover {
-    color: darken(map-get($colors, denim), 5%);
-  }
-
   &.icon-link {
     display: inline-block;
-    margin-left: 0.5em;
     font-size: 0.7em;
-    transform: rotate(-135deg);
+    margin-left: 16px;
+    transform: rotate(-45deg);
+    color:lighten(map-get($colors, dusty-grey), 10%);
+  }
+
+  &:hover {
+    color: darken(map-get($colors, denim), 5%);
   }
 }
 
