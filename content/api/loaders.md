@@ -57,7 +57,7 @@ By default, the resource file is treated as utf-8 string and passed as String to
 module.exports = function(content) {
 	assert(content instanceof Buffer);
 	return someSyncOperation(content);
-	// return val`ue can` be a `Buffer` too
+	// return value can be a `Buffer` too
 	// This is also allowed if loader is not "raw"
 };
 module.exports.raw = true;
