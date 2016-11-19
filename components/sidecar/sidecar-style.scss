@@ -39,6 +39,7 @@
 .sidecar__icon {
   display: inline-block;
   width: 16px;
+  vertical-align: middle;
 }
 
 // TODO: Fix hardcoded widths using flex perhaps, can't animate to width auto
