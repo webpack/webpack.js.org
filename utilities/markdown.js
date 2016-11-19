@@ -114,7 +114,7 @@ module.exports = function(section) {
         renderer: renderer,
         xhtml: false
       };
-      
+
       var tokens = parseQuotes(content);
 
       return marked.parser(tokens, markedDefaults);
@@ -172,7 +172,7 @@ function parseCustomQuote(token, match, className) {
         type: 'html',
         text: `<blockquote class="${className}">` +
           `<div class="tip-title"><i class="tip-icon ${icon}"></i>${className}</div>` +
-          text.slice(2).trim() +
+          `<div class="tip-content"> ${text.slice(2).trim()} </div>` +
           '</blockquote>'
       };
     }

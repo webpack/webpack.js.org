@@ -86,7 +86,6 @@
     &.todo {
       border-left:none;
       border-radius: 3px;
-      color:map-get($colors, mine-shaft);
 
       .tip-icon {
         margin-right:0.5em;
@@ -99,14 +98,27 @@
         text-transform:uppercase;
       }
 
+      .tip-content {
+        font-style: italic;
+      }
+
       code {
         background-color:transparentize(map-get($colors, alto), 0.5);
       }
     }
 
-    &.tip { background-color:transparentize(#1abc9c, 0.8); }
-    &.warning { background-color:transparentize(#f1c40f, 0.8); }
-    &.todo { background-color:transparentize(#e74c3c, 0.8); }
+    &.tip {
+      background-color: #DCF2FD;
+      color: #618ca0;
+    }
+    &.warning {
+      background-color: #fbedb7;
+      color: #8c8466;
+    }
+    &.todo {
+      background-color: #fbddcd;
+      color: #907a6e;
+    }
   }
 
   table {
@@ -155,7 +167,6 @@
   }
 
   b, strong {
-    color:map-get($colors, mine-shaft);
     font-weight:600;
   }
 
