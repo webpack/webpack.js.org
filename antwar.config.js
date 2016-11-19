@@ -87,6 +87,16 @@ module.exports = {
         );
       }
     ),
+    pluginsapi: section(
+      'Plugins API',
+      function() {
+        return require.context(
+          'json-loader!yaml-frontmatter-loader!./content/pluginsapi',
+          false,
+          /^\.\/.*\.md$/
+        );
+      }
+    ),
     loaders: section(
       'Loaders',
       function() {
