@@ -6,30 +6,6 @@
   flex: 0 0 auto;
   transition: background 250ms;
   background: map-get($colors, elephant);
-
-  &--transparent {
-    position:relative;
-    display:flex;
-    justify-content: center;
-    background: transparent;
-    z-index:5;
-
-    .navigation__inner {
-      position:absolute;
-      left:0;
-
-      @include break {
-        left:auto;
-      }
-    }
-
-    .navigation__link:hover,
-    .navigation__mobile,
-    .navigation__search-input,
-    .navigation__search-icon:hover {
-      color: map-get($colors, white);
-    }
-  }
 }
 
 .navigation__inner {

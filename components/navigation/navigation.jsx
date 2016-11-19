@@ -33,18 +33,16 @@ let Sections = [
 export default class Navigation extends React.Component {
   render() {
     let { pageUrl, sections } = this.props;
-    let isIndex = pageUrl === '/index';
-    let transparentClass = isIndex ? 'navigation--transparent' : '';
     
     return (
-      <header className={ `navigation ${transparentClass}` }>
+      <header className="navigation">
         <Container className="navigation__inner">
           <div className="navigation__mobile" onClick={ this._toggleSidebar }>
             <i className="icon-menu" />
           </div>
 
           <Link className="navigation__logo" to="/">
-            <Logo light={ !isIndex } />
+            <Logo light={ true } />
           </Link>
 
           <nav className="navigation__links">
