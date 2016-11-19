@@ -123,7 +123,7 @@ export default class SidebarMobile extends React.Component {
 
   _handleTouchStart(e){
     initialTouchPosition.x = e.touches[0].pageX;
-    initialTouchPosition.y = e.touches[0].clientY;
+    initialTouchPosition.y = e.touches[0].pageY;
     //for instant transform along with the touch
     this.container.classList.add("no-delay");
   }
@@ -137,7 +137,7 @@ export default class SidebarMobile extends React.Component {
       e.preventDefault();
       this.container.style.transform="translateX(-"+xDiff+"px)";
       lastTouchPosition.x = e.touches[0].pageX;
-      lastTouchPosition.y = e.touches[0].clientY;
+      lastTouchPosition.y = e.touches[0].pageY;
     }
   }
 
@@ -150,7 +150,7 @@ export default class SidebarMobile extends React.Component {
       e.preventDefault();
       this.container.style.transform="translateX(calc(-100% + "+xDiff+"px))";
       lastTouchPosition.x = e.touches[0].pageX;
-      lastTouchPosition.y = e.touches[0].clientY;
+      lastTouchPosition.y = e.touches[0].pageY;
     }
   }
 
