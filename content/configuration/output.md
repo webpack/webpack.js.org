@@ -13,9 +13,9 @@ The top-level `output` key contains set of options instructing webpack on how an
 
 `string`
 
-This options determines the name of on-demand loaded chunk files. See [`output.filename`](#output-filename) option for details on the possible values.
+This option determines the name of on-demand loaded chunk files. See [`output.filename`](#output-filename) option for details on the possible values.
 
-Note that these filenames need to be generated at runtime to send the requests for chunks. Because of this placeholders like `[name]` and `[chunkhash]` need to add a mapping from chunk id to placeholder value to the output bundle with the webpack runtime. This increases the size and may invalidate the bundle when placeholder value for any chunk changes.
+Note that these filenames need to be generated at runtime to send the requests for chunks. Because of this, placeholders like `[name]` and `[chunkhash]` need to add a mapping from chunk id to placeholder value to the output bundle with the webpack runtime. This increases the size and may invalidate the bundle when placeholder value for any chunk changes.
 
 By default `[id].js` is used or a value inferred from [`output.filename`](#output-filename) (`[name]` is replaced with `[id]` or `[id].` is prepended).
 
@@ -28,7 +28,7 @@ Only used when [`target`](/configuration/target) is web, which uses JSONP for lo
 
 Enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) loading of chunks. The following values are accepted...
 
-`crossOriginLoading: false` - Disables cross-origin loading (default)
+`crossOriginLoading: false` - Disable cross-origin loading (default)
 
 `crossOriginLoading: "anonymous"` - Enable cross-origin loading **without credentials**
 
@@ -257,14 +257,14 @@ Tell webpack to include comments in bundles with information about the contained
 pathinfo: true
 ```
 
-Note it also adds some info about tree shaking to the generate bundle.
+Note it also adds some info about tree shaking to the generated bundle.
 
 
 ## `output.publicPath`
 
 `string`
 
-This is a pretty important option when using on-demand-loading or loading external resources like images, files, etc. If an incorrect value is specified you'll receive 404 errors while loading these resources.
+This is an important option when using on-demand-loading or loading external resources like images, files, etc. If an incorrect value is specified you'll receive 404 errors while loading these resources.
 
 This option specifies the **public URL** of the output directory when referenced in a browser. A relative URL is resolved relative to the HTML page (or `<base>` tag). Server-relative URLs, protocol-relative URLs or absolute URLs are also possible and sometimes required, i. e. when hosting assets on a CDN.
 
@@ -352,4 +352,4 @@ When using `libraryTarget: "umd"`, setting:
 umdNamedDefine: true
 ```
 
-will name the AMD module of the UMD build. Otherwise a anonymous `define` is used.
+will name the AMD module of the UMD build. Otherwise an anonymous `define` is used.
