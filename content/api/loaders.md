@@ -8,7 +8,7 @@ contributors:
 Loaders allow you to preprocess files as you `require()` or “load” them. Loaders are kind of like “tasks” in other build tools, 
 and provide a powerful way to handle front-end build steps. Loaders can transform files from a different language (like CoffeeScript to JavaScript), or inline images as data URLs. Loaders even allow you to do things like `require()` css files right in your JavaScript!
 
-To tell webpack to transform a module with a loader, you can specify the loader in the webpack [configuration](../configuration) file (preferred) or in the module request, such as in a `require()` call.
+To tell webpack to transform a module with a loader, you can specify the loader in the webpack [configuration](/configuration) file (preferred) or in the module request, such as in a `require()` call.
 
 ?> When /concepts/loaders merges, we should link to the many usages of loaders found there (require vs configuration) from this page.
 
@@ -307,4 +307,4 @@ Hacky access to the Module object being loaded.
 
 ### Custom `loaderContext` Properties
 
-Custom properties can be added to the `loaderContext` by either specifying values on the `loader` proprty on your webpack [configuration](../configuration), or by creating a [custom plugin](./plugins) that hooks into the `normal-module-loader` event which gives you access to the `loaderContext` to modify or extend. 
+Custom properties can be added to the `loaderContext` by either specifying values on the `loader` proprty on your webpack [configuration](/configuration), or by creating a [custom plugin](./plugins) that hooks into the `normal-module-loader` event which gives you access to the `loaderContext` to modify or extend. 
