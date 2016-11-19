@@ -1,4 +1,4 @@
-@import 'vars';
+@import 'functions';
 
 .algolia-autocomplete {
   display: flex !important;
@@ -11,33 +11,33 @@
     }
 
     [class^=ds-dataset-] {
-      border-color: map-get($colors, alto);
+      border-color: getColor(alto);
       border-radius: 3px;
     }
   }
 
   .algolia-docsearch-suggestion--category-header {
-    border-color:map-get($colors, alto);
+    border-color:getColor(alto);
   }
 
   .algolia-docsearch-suggestion--highlight {
-    color:map-get($colors, denim);
-    background:rgba(map-get($colors, malibu), 0.2);
+    color:getColor(denim);
+    background:rgba(getColor(malibu), 0.2);
   }
 
   .ds-dropdown-menu .ds-suggestion.ds-cursor .algolia-docsearch-suggestion--content {
-    background:rgba(map-get($colors, dusty-grey), 0.15) !important;
+    background:rgba(getColor(dusty-grey), 0.15) !important;
   }
 
   .algolia-docsearch-suggestion--subcategory-column {
-    color:map-get($colors, dove-grey);
+    color:getColor(dove-grey);
   }
 
   .algolia-docsearch-suggestion--category-header {
-    color:map-get($colors, mine-shaft);
+    color:getColor(mine-shaft);
   }
 
   .algolia-docsearch-suggestion--title {
-    color:map-get($colors, mine-shaft);
+    color:getColor(mine-shaft);
   }
 }

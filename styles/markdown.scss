@@ -20,7 +20,7 @@
     font-weight:400;
     line-height:1;
     margin:1.5em 0 0.25em;
-    color:map-get($colors, mine-shaft);
+    color:getColor(mine-shaft);
 
     &:first-child { margin-top:0; }
     tt, code { font-size:inherit; }
@@ -40,7 +40,7 @@
 
   hr {
     border:none;
-    background-color:map-get($colors, alto);
+    background-color:getColor(alto);
     height:3px;
     margin:2em 0;
   }
@@ -76,7 +76,7 @@
   blockquote {
     border-left: 4px solid #dddddd;
     padding:0.75em 1em;
-    color:map-get($colors, dove-grey);
+    color:getColor(dove-grey);
 
     > :first-child { margin-top: 0; }
     > :last-child { margin-bottom: 0; }
@@ -92,7 +92,7 @@
       }
 
       code {
-        background-color:transparentize(map-get($colors, alto), 0.5);
+        background-color:transparentize(getColor(alto), 0.5);
       }
     }
 
@@ -170,7 +170,7 @@
   }
 
   pre {
-    background-color:map-get($colors, mine-shaft);
+    background-color:getColor(mine-shaft);
     font-size: 13px;
     line-height: 19px;
     overflow: auto;
@@ -182,7 +182,7 @@
       padding: 0;
       white-space: pre;
       border: none;
-      color:map-get($colors, concrete);
+      color:getColor(concrete);
       background: transparent;
 
       .code-details-summary-span {

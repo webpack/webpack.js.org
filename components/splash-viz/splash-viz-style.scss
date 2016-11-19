@@ -1,4 +1,3 @@
-@import 'vars';
 @import 'functions';
 @import 'mixins';
 
@@ -10,9 +9,9 @@
   max-height:720px;
   background:linear-gradient(
     to bottom right, 
-    map-get($colors, white) 0%, 
-    map-get($colors, white) 25%,
-    map-get($colors, alto) 100%
+    getColor(white) 0%, 
+    getColor(white) 25%,
+    getColor(alto) 100%
   );
 
   &__modules,

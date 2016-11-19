@@ -1,11 +1,10 @@
-@import 'vars';
 @import 'mixins';
 @import 'functions';
 
 .navigation {
   flex: 0 0 auto;
   transition: background 250ms;
-  background: map-get($colors, elephant);
+  background: getColor(elephant);
 }
 
 .navigation__inner {
@@ -23,12 +22,12 @@
   font-size: 1.5em;
   margin-left: -1em;
   align-items: center;
-  color: map-get($colors, white);
+  color: getColor(white);
   cursor: pointer;
   transition: color 250ms;
 
   &:active {
-    color: map-get($colors, alto);
+    color: getColor(alto);
   }
 
   @include break {
@@ -56,7 +55,7 @@
     display:inline-block;
     font-size: getFontSize(-1);
     text-transform: uppercase;
-    color: map-get($colors, white);
+    color: getColor(white);
     transition:all 250ms;
     padding:1.5em 0.75em;
 
@@ -71,11 +70,11 @@
 
   &:hover,
   &--active {
-    color: map-get($colors, white);
+    color: getColor(white);
   }
 
   &--active {
-    background: lighten(map-get($colors, elephant), 5%);
+    background: lighten(getColor(elephant), 5%);
   }
 }
 
@@ -99,14 +98,14 @@
       font-size:14px;
       font-family:'Cabin', 'Century Gothic', sans-serif;
       text-indent:0.5em;
-      border-bottom:1px solid map-get($colors, fiord);
+      border-bottom:1px solid getColor(fiord);
       margin-right:0;
-      color: map-get($colors, white);
-      text-shadow: 0 0 0 map-get($colors, concrete);
+      color: getColor(white);
+      text-shadow: 0 0 0 getColor(concrete);
       transition:all 250ms;
 
       &::-webkit-input-placeholder{
-        color: lighten(map-get($colors, fiord), 10%);
+        color: lighten(getColor(fiord), 10%);
         text-shadow: none;
         -webkit-text-fill-color: initial;
       }
@@ -117,7 +116,7 @@
       font-size:getFontSize(1);
       transform:rotate(-45deg);
       font-weight:800;
-      color:map-get($colors, alto);
+      color:getColor(alto);
       cursor:pointer;
       background:transparent;
       padding:0;
@@ -125,7 +124,7 @@
       transition:color 250ms;
 
       &:hover {
-        color:map-get($colors, white);
+        color:getColor(white);
       }
     }
 
@@ -155,13 +154,13 @@
 }
 
 .navigation__bottom {
-  background: lighten(map-get($colors, elephant), 5%);
+  background: lighten(getColor(elephant), 5%);
 }
 
 .navigation__child {
   font-size: getFontSize(-1);
   margin:0.5em 1em 0.6em;
-  color:map-get($colors, alto);
+  color:getColor(alto);
   text-transform: uppercase;
 
   &:first-of-type {
@@ -170,6 +169,6 @@
 
   &:hover,
   &--active {
-    color:map-get($colors, white);
+    color:getColor(white);
   }
 }
