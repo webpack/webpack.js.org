@@ -6,6 +6,7 @@ import Sidecar from '../sidecar/sidecar';
 import Footer from '../footer/footer';
 import SidebarMobile from '../sidebar-mobile/sidebar-mobile';
 import './site-style';
+import '../../styles/icon.font.js';
 
 export default props => {
   // Retrieve section data
