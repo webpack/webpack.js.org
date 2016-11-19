@@ -18,7 +18,7 @@ Choose a style of [source mapping](http://blog.teamtreehouse.com/introduction-so
 
 `source-map` - A full SourceMap is emitted
 
-`hidden-source-map` - Same as `source-map`, but doesn't add a reference comment to the bundle
+`hidden-source-map` - Same as `source-map`, but doesn't add a reference comment to the bundle. Useful if you only want SourceMaps to map error stack traces from error reports, but don't want to expose your SourceMap for the browser development tools.
 
 `inline-source-map` - A SourceMap is added as DataUrl to the bundle
 
