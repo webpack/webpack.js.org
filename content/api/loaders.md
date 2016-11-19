@@ -1,20 +1,24 @@
 ---
 title: Loader API
 sort: 4
+contributors:
+    - TheLarkInn
 ---
 
-Loaders allow you to preprocess files as you require() or “load” them. Loaders are kind of like “tasks” in other build tools, 
-and provide a powerful way to handle frontend build steps. Loaders can transform files from a different language like, CoffeeScript to JavaScript, or inline images as data URLs. Loaders even allow you to do things like require() css files right in your JavaScript!
+Loaders allow you to preprocess files as you `require()` or “load” them. Loaders are kind of like “tasks” in other build tools, 
+and provide a powerful way to handle front-end build steps. Loaders can transform files from a different language (like CoffeeScript to JavaScript), or inline images as data URLs. Loaders even allow you to do things like `require()` css files right in your JavaScript!
 
 To tell webpack to transform a module with a loader, you can specify the loader in the webpack [configuration](../configuration) file (preferred) or in the module request, such as in a `require()` call.
 
+?> When /concepts/loaders merges, we should link to the many usages of loaders found there (require vs configuration) from this page.
+
 ## How to write a loader
 
-A loader is just a file that exports a function. The compiler calls this function and passes the result of the previous loader or the resource file into it. The this context of the function is filled-in by the compiler with some useful methods that allow the loader to, among other things, change its invocation style to async or get query parameters. The first loader is passed one argument: the content of the resource file. The compiler expects a result from the last loader. The result should be a String or a Buffer (which is converted to a string), representing the JavaScript source code of the module. An optional SourceMap result (as JSON object) may also be passed.
+A loader is just a JavaScript module that exports a function. The compiler calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by the compiler with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters. The first loader is passed one argument: the content of the resource file. The compiler expects a result from the last loader. The result should be a `String` or a `Buffer` (which is converted to a string), representing the JavaScript source code of the module. An optional SourceMap result (as JSON object) may also be passed.
 
 A single result can be returned in **sync mode**. For multiple results the `this.callback()` must be called. In **async mode** `this.async()` must be called. It returns `this.callback()` if **async mode** is allowed. Then the loader must return `undefined` and call the callback.
 
-## Example
+## Examples
 
 ### Sync Loader
 
@@ -41,11 +45,11 @@ module.exports = function(content) {
 };
 ```
 
-T> It’s recommended to give an asynchronous loader a fall back to synchronous mode. This isn’t required for webpack, but allows to run the loader sync using [enhanced-require](http://github.com/webpack/enhanced-resolve).
+T> It’s recommended to give an asynchronous loader a fall-back to synchronous mode. This isn’t required for webpack, but allows the loader to run  synchronously using [enhanced-require](http://github.com/webpack/enhanced-resolve).
 
 ### "Raw" Loader
 
-By default the resource file is treated as utf-8 string and passed as String to the loader. By setting raw to true the loader is passed the raw `Buffer`. Every loader is allowed to deliver its result as `String` or as `Buffer`. The compiler converts them between loaders.
+By default, the resource file is treated as utf-8 string and passed as String to the loader. By setting raw to true the loader is passed the raw `Buffer`. Every loader is allowed to deliver its result as `String` or as `Buffer`. The compiler converts them between loaders.
 
 **raw-loader.js**
 
@@ -53,19 +57,19 @@ By default the resource file is treated as utf-8 string and passed as String to 
 module.exports = function(content) {
 	assert(content instanceof Buffer);
 	return someSyncOperation(content);
-	// return value can be a Buffer too
+	// return val`ue can` be a `Buffer` too
 	// This is also allowed if loader is not "raw"
 };
 module.exports.raw = true;
 ``` 
 
-### Pitching loader
+### Pitching Loader
 
 The order of chained loaders are **always** called from right to left. But, in some cases, loaders do not care about the results of the previous loader or the resource. They only care for **metadata**. The `pitch` method on the loaders is called from **left to right** before the loaders are called (from right to left). 
 
 If a loader delivers a result in the `pitch` method the process turns around and skips the remaining loaders, continuing with the calls to the more left loaders. `data` can be passed between pitch and normal call.
 
-``` javascript
+```javascript
 module.exports = function(content) {
 	return someSyncOperation(content, this.data.value);
 };
@@ -80,12 +84,12 @@ module.exports.pitch = function(remainingRequest, precedingRequest, data) {
 
 ## The loader context 
 
-The loader context represents the properties that are available inside of a loader assigned to the `this` property
+The loader context represents the properties that are available inside of a loader assigned to the `this` property. 
 
 Given the following example this require call is used:
 In `/abc/file.js`:
 
-``` javascript
+```javascript
 require("./loader1?xyz!loader2!./resource?rrr");
 ```
 
@@ -117,7 +121,7 @@ A data object shared between the pitch and the normal phase.
 
 ### `cacheable`
 
-``` javascript
+```typescript
 cacheable(flag = true: boolean)
 ```
 
@@ -127,7 +131,7 @@ A cacheable loader must have a deterministic result, when inputs and dependencie
 
 ### `loaders`
 
-``` javascript
+```typescript
 loaders = [{request: string, path: string, query: string, module: function}]
 ```
 
@@ -135,7 +139,7 @@ An array of all the loaders. It is writeable in the pitch phase.
 
 In the example:
 
-``` javascript
+```javascript
 [
   { request: "/abc/loader1.js?xyz",
 	path: "/abc/loader1.js",
@@ -176,7 +180,7 @@ In the example: `"?rrr"`
 
 ### `emitWarning`
 
-``` javascript
+```typescript
 emitWarning(message: string)
 ```
 
@@ -184,7 +188,7 @@ Emit a warning.
 
 ### `emitError`
 
-``` javascript
+```typescript
 emitError(message: string)
 ```
 
@@ -192,7 +196,7 @@ Emit an error.
 
 ### `exec`
 
-``` javascript
+```typescript
 exec(code: string, filename: string)
 ```
 
@@ -202,7 +206,7 @@ T> Don't use `require(this.resourcePath)`, use this function to make loaders cha
 
 ### `resolve`
 
-``` javascript
+```typescript
 resolve(context: string, request: string, callback: function(err, result: string))
 ```
 
@@ -210,7 +214,7 @@ Resolve a request like a require expression.
 
 ### `resolveSync`
 
-``` javascript
+```typescript
 resolveSync(context: string, request: string) -> string
 ```
 
@@ -218,16 +222,16 @@ Resolve a request like a require expression.
 
 ### `addDependency`
 
-``` javascript
+```typescript
 addDependency(file: string)
 dependency(file: string) // shortcut
 ```
 
-Add a file as dependency of the loader result in order to make them watchable.
+Adds a file as dependency of the loader result in order to make them watchable. For example, [html-loader](http://github.com/webpack/html-loader) uses this technique as it finds `src` and `src-set` attributes. Then, it sets the url's for those attributes as dependencies of the html file that is parsed.  
 
 ### `addContextDependency`
 
-``` javascript
+```typescript
 addContextDependency(directory: string)
 ```
 
@@ -235,7 +239,7 @@ Add a directory as dependency of the loader result.
 
 ### `clearDependencies`
 
-``` javascript
+```typescript
 clearDependencies()
 ```
 
@@ -273,15 +277,17 @@ Example values: `"web"`, `"node"`
 
 ### `webpack`
 
-Set to true when this is compiled by webpack.
+This boolean is set to true when this is compiled by webpack.
+
+T> Loaders were originally designed to also work as Babel transforms. Therefore if you write a loader that works for both, you can use this property to know if there is access to additional loaderContext and webpack features. 
 
 ### `emitFile`
 
-``` javascript
+```typescript
 emitFile(name: string, content: Buffer|String, sourceMap: {...})
 ```
 
-Emit a file. This is webpack-specific
+Emit a file. This is webpack-specific.
 
 ### `fs`
 
@@ -301,4 +307,4 @@ Hacky access to the Module object being loaded.
 
 ### Custom `loaderContext` Properties
 
-Custom properties can be added to the `loaderContext` by either specifying values on the `loader` proprty on your webpack [configuration](../configuration), or by creating a [custom plugin](./plugins) which hooks into the `normal-module-loader` event which gives you access to the `loaderContext` to modify or extend. 
+Custom properties can be added to the `loaderContext` by either specifying values on the `loader` proprty on your webpack [configuration](../configuration), or by creating a [custom plugin](./plugins) that hooks into the `normal-module-loader` event which gives you access to the `loaderContext` to modify or extend. 
