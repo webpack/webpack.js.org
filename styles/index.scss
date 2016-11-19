@@ -26,12 +26,12 @@ body {
 }
 
 a {
-  color: map-get($colors, tussock);
+  color: lighten(map-get($colors, denim), 5%);
   text-decoration: none;
   transition: color 250ms;
 
   &:hover {
-    color: darken(map-get($colors, tussock), 15%);
+    color: darken(map-get($colors, denim), 5%);
   }
 
   &.icon-link {
