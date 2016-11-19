@@ -22,7 +22,7 @@ such as node and the browser.
 
 ## Rules
 
-[`Module.rules`](https://webpack.js.org/configuration/module/#module-rules) allow you to specify several loaders within your Webpack configuration.
+[`Module.rules`](https://webpack.js.org/configuration/module/#module-rules) allow you to specify several loaders within your webpack configuration.
 This is a concise way to display loaders, and helps to have clean code as 
 well as you have a full overview of each respective loader. 
 
@@ -54,7 +54,7 @@ This uses the loader “jade” for “.jade” files and the loaders “style�
 ---
  - Loaders can be chained. They are applied in a pipeline to the resource. A chain
  of loaders are compiled chronologically. The first loader in a chain of loaders 
- returns an value to the next and at the end loader, Webpack expects JavaScript
+ returns an value to the next and at the end loader, webpack expects JavaScript
  to be returned.
  - Loaders can be synchronous or asynchronous.
  - Loaders run in Node.js and can do everything that’s possible there.
