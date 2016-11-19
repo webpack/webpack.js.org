@@ -5,7 +5,7 @@
 .navigation {
   flex: 0 0 auto;
   transition: background 250ms;
-  background: map-get($colors, mine-shaft);
+  background: map-get($colors, elephant);
 
   &--transparent {
     position:relative;
@@ -27,7 +27,7 @@
     .navigation__mobile,
     .navigation__search-input,
     .navigation__search-icon:hover {
-      color: map-get($colors, emperor);
+      color: map-get($colors, white);
     }
   }
 }
@@ -80,7 +80,7 @@
     display:inline-block;
     font-size: getFontSize(-1);
     text-transform: uppercase;
-    color: map-get($colors, dusty-grey);
+    color: map-get($colors, white);
     transition:all 250ms;
     padding:1.5em 0.75em;
 
@@ -99,7 +99,7 @@
   }
 
   &--active {
-    background: map-get($colors, emperor);
+    background: lighten(map-get($colors, elephant), 5%);
   }
 }
 
@@ -123,14 +123,14 @@
       font-size:14px;
       font-family:'Cabin', 'Century Gothic', sans-serif;
       text-indent:0.5em;
-      border-bottom:1px solid map-get($colors, emperor);
+      border-bottom:1px solid map-get($colors, fiord);
       margin-right:0;
       color: map-get($colors, white);
       text-shadow: 0 0 0 map-get($colors, concrete);
       transition:all 250ms;
 
       &::-webkit-input-placeholder{
-        color:map-get($colors, dove-grey);
+        color: lighten(map-get($colors, fiord), 10%);
         text-shadow: none;
         -webkit-text-fill-color: initial;
       }
@@ -141,7 +141,7 @@
       font-size:getFontSize(1);
       transform:rotate(-45deg);
       font-weight:800;
-      color:map-get($colors, dusty-grey);
+      color:map-get($colors, alto);
       cursor:pointer;
       background:transparent;
       padding:0;
@@ -179,13 +179,13 @@
 }
 
 .navigation__bottom {
-  background:map-get($colors, emperor);
+  background: lighten(map-get($colors, elephant), 5%);
 }
 
 .navigation__child {
   font-size: getFontSize(-1);
   margin:0.5em 1em 0.6em;
-  color:map-get($colors, dusty-grey);
+  color:map-get($colors, alto);
   text-transform: uppercase;
 
   &:first-of-type {

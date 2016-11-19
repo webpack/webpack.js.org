@@ -12,7 +12,7 @@
     color: inherit;
 
     &:hover {
-      color: map-get($colors, tussock);
+      color: lighten(map-get($colors, denim), 5%);
     }
   }
 
@@ -58,7 +58,7 @@
     }
 
     .sidebar-item__title {
-      color: #c0903f;
+      color: lighten(map-get($colors, denim), 5%);
     }
 
     .sidebar-item__toggle {
