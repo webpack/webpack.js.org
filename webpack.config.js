@@ -106,6 +106,14 @@ const buildConfig = {
   module: {
     loaders: [
       {
+        test: /\.font.js$/,
+        loader: ExtractTextPlugin.extract(
+          'style-loader', 
+          'css-loader', 
+          'fontgen-loader'
+        )
+      },
+      {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract(
           'style-loader',
