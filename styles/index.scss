@@ -35,6 +35,10 @@ a {
     margin-left: 16px;
     transform: rotate(-45deg);
     color:lighten(getColor(dusty-grey), 10%);
+
+    &:hover {
+      color: lighten(getColor(denim), 5%);
+    }
   }
 
   &:hover {
