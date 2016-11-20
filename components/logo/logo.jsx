@@ -1,11 +1,9 @@
 import React from 'react';
-import Icon from '../../assets/site-logo.svg';
+import Logo from '../../assets/site-logo.svg';
 import './logo-style';
 
-export default props => {
-  let { light } = props;
-
+export default () => {
   return (
-    <img className="logo" src={ Icon } />
+    <img className="logo" src={ Logo } />
   );
 };
