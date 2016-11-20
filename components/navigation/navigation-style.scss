@@ -120,6 +120,10 @@
       background:transparent;
       transition:color 250ms;
 
+      &.icon-cross {
+        display:none;
+      }
+
       &:hover {
         color:getColor(white);
       }
@@ -146,6 +150,14 @@
     .navigation__search-input {
       margin-right:0.5em;
       width:400px;
+    }
+
+    .navigation__search-icon.icon-cross {
+      display:block;
+    }
+
+    .navigation__search-icon.icon-magnifying-glass {
+      display:none;
     }
   }
 }

@@ -5,6 +5,7 @@ import Logo from '../logo/logo';
 import './navigation-style';
 import './search-style';
 
+// TODO: Maybe by updating the routing scheme later on we can avoid hardcoding this?
 let Sections = [
   { 
     title: 'Concepts', 
@@ -30,6 +31,7 @@ let Sections = [
   }
 ];
 
+// TODO: Move back to using state once we can handle algolia on our own
 export default class Navigation extends React.Component {
   render() {
     let { pageUrl, sections } = this.props;
@@ -67,9 +69,13 @@ export default class Navigation extends React.Component {
             <input 
               type="text" 
               className="navigation__search-input"
-              placeholder="Search documentation…" />
+              placeholder="Search documentation…"
+              onBlur={ this._toggleSearch.bind(this) } />
             <button 
               className="navigation__search-icon icon-magnifying-glass"
+              onClick={ this._toggleSearch.bind(this) } />
+            <button 
+              className="navigation__search-icon icon-cross"
               onClick={ this._toggleSearch.bind(this) } />
           </div>
         </Container>
