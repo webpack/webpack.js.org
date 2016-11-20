@@ -10,6 +10,7 @@
 .navigation__inner {
   display: flex;
   align-items: center;
+  position: relative;
   padding: 0.6em 1em;
 
   @include break {
@@ -20,7 +21,7 @@
 .navigation__mobile {
   display: flex;
   font-size: 1.5em;
-  margin-left: -1em;
+  position: absolute;
   align-items: center;
   color: getColor(white);
   cursor: pointer;
