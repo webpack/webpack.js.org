@@ -1,76 +1,72 @@
 ---
 title: Loaders
+sort: 1
 contributors:
   - ev1stensberg
   - TheLarkInn
-sort: 1
+  - manekinekko
+  - SpaceK33z
 ---
 
-Loaders are generic functions that makes builds more flexible. This is being
-done in the build step, and loaders get registered to the compiler through a 
-`require` statement. To simplify source code, several loaders can be specified 
-through [Module.rules](https://webpack.js.org/configuration/module/#module-rules) 
-to have loaders explicitly in one place. One could do the following using 
-a `require` statement to attain one or more loaders:
+As explained in detail on the [concepts page](/concepts/loaders), loaders are transformations that are applied on a resource file of your application. Loaders allow you to, for example, configure how webpack should handle a CSS file.
 
-```js
-require('style-loader!css-loader!less-loader!./someStyle.less')
+A loader is typically a npm package, which you can install as a development dependency:
+
+```sh
+npm install css-loader --save-dev
 ```
-W> Avoid using the require convention if your scripts are meant to work 
-without adopting environment specific rules in order to achieve functionality, 
-such as node and the browser.
 
-## Rules
+There are three ways to use loaders in your application:
 
-[`Module.rules`](https://webpack.js.org/configuration/module/#module-rules) allow you to specify several loaders within your Webpack configuration.
+* via configuration
+* explicit in the `require` statement
+* via CLI
+
+## Via Configuration
+
+[`module.rules`](https://webpack.js.org/configuration/module/#module-rules) allows you to specify several loaders within your webpack configuration.
 This is a concise way to display loaders, and helps to have clean code as 
-well as you have a full overview of each respective loader. 
+well as you have a full overview of each respective loader.
 
 ```js
   module: {
     rules: [
-      { loader: 'css-loader', options: {
-        modules: true
-        }
-      },
-      { loader: 'postcss-loader'},
-      { loader: 'sass-loader'}
+      {
+        test: /\.css$/,
+        use: [
+          { loader: 'style-loader'},
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true
+            }
+          }
+        ]
+      }
     ]
   }
 ```
-T> Use module.rules whenever possible, as this will reduce boilerplate in your 
-source code and allows you debug or locate a loader faster if something goes south.
 
-## CLI
+## Via `require`
 
-Optionally, you could also use loaders through the CLI. 
+It's possible to specify the loaders in the `require` statement (or `define`, `require.ensure`, etc.). Separate loaders from the resource with `!`. Each part is resolved relative to the current directory.
 
-`$ webpack --module-bind jade --module-bind 'css=style!css'`
+```js
+require('style-loader!css-loader?modules!./styles.css');
+```
+
+It's possible to overwrite any loaders in the configuration by prefixing the entire rule with `!`.
+
+Options can be passed with a query parameter, just like on the web (`?key=value&foo=bar`). It's also possible to use a JSON object (`?{"key":"value","foo":"bar"}`).
+
+T> Use `module.rules` whenever possible, as this will reduce boilerplate in your source code and allows you to debug or locate a loader faster if something goes south.
+
+## Via CLI
+
+Optionally, you could also use loaders through the CLI:
+
+```sh
+webpack --module-bind jade --module-bind 'css=style!css'
+```
 
 This uses the loader “jade” for “.jade” files and the loaders “style” and “css” for “.css” files.
-
-## Loader Features
-
----
- - Loaders can be chained. They are applied in a pipeline to the resource. A chain
- of loaders are compiled chronologically. The first loader in a chain of loaders 
- returns an value to the next and at the end loader, webpack expects JavaScript
- to be returned.
- - Loaders can be synchronous or asynchronous.
- - Loaders run in Node.js and can do everything that’s possible there.
- - Loaders accept query parameters. This can be used to pass configuration to the loader.
- - Plugins can give loaders more features.
- - Loaders can emit additional arbitrary files.
- - Loaders can accept an options object
- ---
- 
-Loaders allows more power in the JavaScript ecosystem through preprocessing 
-functions(loaders). Users now have more flexibility to include fine-grained logic
-such as compression, packaging, language translations and [more](https://webpack.github.io/docs/list-of-loaders.html)!
-
-## API Reference
-
----
- - [List of Loaders](https://webpack.github.io/docs/list-of-loaders.html)
- - [module.rules](https://webpack.js.org/configuration/module/#module-rules)
- - [Using Loaders(Old Website)](https://webpack.github.io/docs/using-loaders.html)
