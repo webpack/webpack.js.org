@@ -109,8 +109,7 @@ const buildConfig = {
         test: /\.font.js$/,
         loader: ExtractTextPlugin.extract(
           'style-loader', 
-          'css-loader', 
-          'fontgen-loader'
+          'css-loader!fontgen-loader?embed'
         )
       },
       {
