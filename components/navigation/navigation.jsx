@@ -69,10 +69,8 @@ export default class Navigation extends React.Component {
               className="navigation__search-input"
               placeholder="Search documentation…" />
             <button 
-              className="navigation__search-icon"
-              onClick={ this._toggleSearch.bind(this) }>
-              &#9906;
-            </button>
+              className="navigation__search-icon icon-magnifying-glass"
+              onClick={ this._toggleSearch.bind(this) } />
           </div>
         </Container>
 

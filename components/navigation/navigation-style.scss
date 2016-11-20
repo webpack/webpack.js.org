@@ -112,15 +112,12 @@
     }
 
     &-icon {
-      display:inline-block;
-      font-size:getFontSize(1);
-      transform:rotate(-45deg);
-      font-weight:800;
-      color:getColor(alto);
-      cursor:pointer;
-      background:transparent;
+      font-size:1em;
       padding:0;
       border:none;
+      cursor:pointer;
+      color:getColor(alto);
+      background:transparent;
       transition:color 250ms;
 
       &:hover {
