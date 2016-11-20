@@ -154,7 +154,12 @@
 }
 
 .navigation__bottom {
+  display:none;
   background: lighten(getColor(elephant), 5%);
+
+  @include break {
+    display:block;
+  }
 }
 
 .navigation__child {
