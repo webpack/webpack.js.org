@@ -1,3 +1,5 @@
+@import 'functions';
+
 .splash-file {
   display:block;
   flex:0 0 60%;
@@ -20,8 +22,9 @@
     &--ico { background-image:url(../../assets/file-ico.png); }
   }
 
-  &__name {
-
+  &__name,
+  &__size {
+    color:getColor(alto);
   }
 
   &__size {

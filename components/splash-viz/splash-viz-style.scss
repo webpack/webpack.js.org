@@ -4,15 +4,9 @@
 .splash-viz {
   position:relative;
   display:flex;
-  height:100vh;
+  height:calc(100vh - 55px);
   min-height:320px;
-  max-height:720px;
-  background:linear-gradient(
-    to bottom right, 
-    getColor(white) 0%, 
-    getColor(white) 25%,
-    getColor(alto) 100%
-  );
+  background:getColor(elephant);
 
   &__modules,
   &__output { 
@@ -27,7 +21,9 @@
   }
     
   &__cube {
-    margin-right:-1.25em;
+    img {
+      width:100%;
+    }
   }
 
   &__modules {
@@ -46,22 +42,6 @@
       flex-wrap:wrap;
       align-content:center;
       justify-content:center;
-    }
-  }
-
-  &__headline {
-    position:absolute;
-    display:block;
-    width:100%;
-    bottom:5%;
-    left:0;
-    padding:0 1em;
-    text-align:center;
-    font-size:getFontSize(2);
-    font-family:'Geomanist', 'Century Gothic', sans-serif;
-
-    @include break {
-      bottom:10%;
     }
   }
 }

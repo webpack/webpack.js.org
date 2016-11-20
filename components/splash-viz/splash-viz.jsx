@@ -1,8 +1,7 @@
 import React from 'react';
-import Cube from '../cube/cube';
 import Link from '../link/link';
-import SplashModules from '../splash-modules/splash-modules';
 import SplashFile from '../splash-file/splash-file';
+import Icon from '../../assets/icon-square-big.svg';
 import './splash-viz-style';
 
 export default class SplashViz extends React.Component {
@@ -24,11 +23,11 @@ export default class SplashViz extends React.Component {
     return (
       <section className="splash-viz">
         <div className="splash-viz__modules">
-          <SplashModules />
+          
         </div>
 
         <div className="splash-viz__icon">
-          <Cube className="splash-viz__cube" depth={ 100 } continuous />
+          <img src={ Icon } />
         </div>
 
         <div className="splash-viz__output">
@@ -37,10 +36,6 @@ export default class SplashViz extends React.Component {
               <SplashFile key={ i } { ...file } />
             ))
           }
-        </div>
-
-        <div className="splash-viz__headline">
-          Who says front-end code can't be modular?
         </div>
       </section>
     );
