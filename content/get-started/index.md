@@ -9,7 +9,7 @@ sort: 3
 ## 起步
 
 webpack 是构建我们应用程序中 JavaScript 模块的工具。从使用 `webpack` [cli](/api/cli) 或 [api](/api/node) ，并按照[安装说明](/get-started/install-webpack)开始。
-webpack 简化快速构建应用程序依赖图表的流程，以正确的顺序打包他们。webpack 能够配置自定义优化代码，在生产环境构建时拆分 vendor/css/js 代码，运行开发服务实现页面无刷新、代码热重载，以及其他非常酷炫的特性。了解更多关于[为什么使用 wepback](/get-started/why-webpack)
+webpack 简化快速构建应用程序依赖图表的流程，以正确的顺序打包他们。webpack 能够配置自定义优化代码，在生产环境构建时拆分 vendor/css/js 代码，运行开发服务实现页面无刷新、代码热重载，以及其他非常酷炫的特性。了解更多关于[为什么使用 wepback](/get-started/why-webpack)。
 
 ## 创建一个包文件
 

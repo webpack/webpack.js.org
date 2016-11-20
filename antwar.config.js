@@ -38,7 +38,7 @@ module.exports = {
       }
     ),
     'get-started': section(
-      'Get-Started',
+      '起步',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/get-started',
@@ -88,7 +88,7 @@ module.exports = {
       }
     ),
     loaders: section(
-      'Loaders',
+      '加载器',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./generated/loaders',
@@ -98,7 +98,7 @@ module.exports = {
       }
     ),
     plugins: section(
-      'Plugins',
+      '插件',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./generated/plugins',
