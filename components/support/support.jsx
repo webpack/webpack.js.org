@@ -17,7 +17,7 @@ export default ({number, type}) => {
 
       <div className="support__bottom">
         <a className="support__button" href="https://opencollective.com/webpack#support">
-          Become a { type }
+          Become a { type.replace(/\b./g, m => m.toUpperCase()) }
         </a>
       </div>
     </div>

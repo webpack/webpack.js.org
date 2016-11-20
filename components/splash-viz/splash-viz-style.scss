@@ -1,19 +1,13 @@
-@import 'vars';
 @import 'functions';
 @import 'mixins';
 
 .splash-viz {
   position:relative;
   display:flex;
-  height:100vh;
+  height:calc(100vh - 55px);
   min-height:320px;
-  max-height:720px;
-  background:linear-gradient(
-    to bottom right, 
-    map-get($colors, white) 0%, 
-    map-get($colors, white) 25%,
-    map-get($colors, alto) 100%
-  );
+  max-height:960px;
+  background:getColor(elephant);
 
   &__modules,
   &__output { 
@@ -28,14 +22,18 @@
   }
     
   &__cube {
-    margin-right:-1.25em;
+    img {
+      width:100%;
+    }
   }
 
   &__modules {
     display:none;
 
     @include break {
-      display:block;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
   }
 
@@ -47,22 +45,6 @@
       flex-wrap:wrap;
       align-content:center;
       justify-content:center;
-    }
-  }
-
-  &__headline {
-    position:absolute;
-    display:block;
-    width:100%;
-    bottom:5%;
-    left:0;
-    padding:0 1em;
-    text-align:center;
-    font-size:getFontSize(2);
-    font-family:'Geomanist', 'Century Gothic', sans-serif;
-
-    @include break {
-      bottom:10%;
     }
   }
 }

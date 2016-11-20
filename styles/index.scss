@@ -10,7 +10,6 @@
 
 @import './reset';
 @import './fonts';
-@import './icons';
 
 * {
   box-sizing: inherit;
@@ -22,23 +21,24 @@ html {
 
 body {
   font: 400 getFontSize(0) 'Cabin', 'Century Gothic', sans-serif;
-  color: map-get($colors, emperor);
+  color: getColor(emperor);
 }
 
 a {
-  color: lighten(map-get($colors, denim), 5%);
+  color: lighten(getColor(denim), 5%);
   text-decoration: none;
   transition: color 250ms;
 
-  &:hover {
-    color: darken(map-get($colors, denim), 5%);
-  }
-
   &.icon-link {
     display: inline-block;
-    margin-left: 0.5em;
     font-size: 0.7em;
-    transform: rotate(-135deg);
+    margin-left: 16px;
+    transform: rotate(-45deg);
+    color:lighten(getColor(dusty-grey), 10%);
+  }
+
+  &:hover {
+    color: darken(getColor(denim), 5%);
   }
 }
 

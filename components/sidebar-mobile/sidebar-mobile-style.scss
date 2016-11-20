@@ -1,4 +1,3 @@
-@import 'vars';
 @import 'functions';
 @import 'mixins';
 
@@ -11,7 +10,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  background: map-get($colors, white);
+  background: getColor(white);
   transform: translate3D(-100%, 0, 0);
   transition: all 500ms;
 
@@ -21,7 +20,7 @@
 
   &--visible {
     transform: translate3D(0, 0, 0);
-    box-shadow: 0 0 5px map-get($colors, emperor);
+    box-shadow: 0 0 5px getColor(emperor);
   }
 }
 
@@ -31,18 +30,18 @@
   top:19px;
   font-size:1.5em;
   cursor:pointer;
-  color:map-get($colors, dusty-grey);
+  color:getColor(dusty-grey);
   transition:color 250ms;
 
   &:hover {
-    color:map-get($colors, mine-shaft);
+    color:getColor(mine-shaft);
   }
 }
 
 .sidebar-mobile__section {
   font-size: getFontSize(1);
   text-transform: uppercase;
-  color: map-get($colors, mine-shaft);
+  color: getColor(mine-shaft);
   margin: 1em 16px 0.25em;
 }
 
@@ -50,12 +49,12 @@
   display: block;
   padding: 0.5em 17px;
   text-transform: capitalize;
-  color: map-get($colors, dusty-grey);
+  color: getColor(dusty-grey);
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 
   &:active,
   &--active {
-    color: map-get($colors, mine-shaft);
-    background: map-get($colors, alto);
+    color: getColor(mine-shaft);
+    background: getColor(alto);
   }
 }
