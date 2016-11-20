@@ -14,7 +14,7 @@ contributors:
 * 通过 `require(...)` 使用 npm 的工具函数
 * 使用 JavaScript 控制流表达式，例如 `?:` 操作符
 * 对常用值使用常量或变量
-* 遍写并执行 function 来生成部分配置
+* 编写并执行 function 来生成部分配置
 
 
 在合适的时机使用这些特性。

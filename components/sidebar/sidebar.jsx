@@ -10,7 +10,7 @@ export default props => {
       <div className="sidebar__inner">
         <SidebarItem 
           url={ `/${sectionName}` } 
-          title="Introduction"
+          title="介绍"
           currentPage= { currentPage }
         />
 
