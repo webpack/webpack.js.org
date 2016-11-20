@@ -17,6 +17,30 @@ For more information on `Tapable` visit the [tapable repository](https://github.
 
 ## Creating a Plugin
 
+A plugin for `webpack` consists of
 
+  - A named JavaScript function.
+  - Defines `apply` method in it's prototype.
+  - Specifies webpack's event hook to attach itself.
+  - Manipulates webpack internal instance specific data.
+  - Invokes webpack provided callback after functionality is complete.
+
+```javascript
+// A named JavaScript function.
+function MyExampleWebpackPlugin() {
+
+};
+
+// Defines `apply` method in it's prototype.
+MyExampleWebpackPlugin.prototype.apply = function(compiler) {
+  // Specifies webpack's event hook to attach itself.
+  compiler.plugin('webpacksEventHook', function(compilation /* Manipulates webpack internal instance specific data. */, callback) {
+    console.log("This is an example plugin!!!");
+
+    // Invokes webpack provided callback after functionality is complete.
+    callback();
+  });
+};
+```
 
 ### Different Plugin Shapes
