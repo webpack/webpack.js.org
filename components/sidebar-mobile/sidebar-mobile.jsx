@@ -18,12 +18,12 @@ export default class SidebarMobile extends React.Component {
         onTouchStart={this._handleTouchStart.bind(this)}
         onTouchMove={this._handleTouchMove.bind(this)}
         onTouchEnd={this._handleTouchEnd.bind(this)}>
-        <div className="opener"
+        <div className="sidebar-mobile__toggle"
           onTouchStart={this._handleTouchStart.bind(this)}
           onTouchMove={this._handleOpenerTouchMove.bind(this)}
           onTouchEnd={this._handleTouchEnd.bind(this)}>
         </div>
-        <div className="sidebar-content">
+        <div className="sidebar-mobile__content">
           <i className="sidebar-mobile__close icon-cross"
           onClick={ this._close.bind(this) } />
           
