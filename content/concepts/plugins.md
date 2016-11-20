@@ -14,7 +14,6 @@ They also serve the purpose of doing **anything else** that a [loader](/concepts
 
 A webpack **plugin** is a JavaScript object that has an `apply` property. This `apply` property is called by the webpack compiler, giving access to the **entire** compilation lifecycle.
 
-
 **ConsoleLogOnBuildWebpackPlugin.js**
 
 ```javascript
