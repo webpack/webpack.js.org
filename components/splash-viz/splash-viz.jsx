@@ -32,11 +32,13 @@ export default class SplashViz extends React.Component {
         </div>
 
         <div className="splash-viz__output">
-          {
-            this.state.files.map((file, i) => (
-              <SplashFile key={ i } { ...file } />
-            ))
-          }
+          <div className="splash-viz__files">
+            {
+              this.state.files.map((file, i) => (
+                <SplashFile key={ i } { ...file } />
+              ))
+            }
+          </div>
         </div>
       </section>
     );
