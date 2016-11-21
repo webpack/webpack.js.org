@@ -293,7 +293,7 @@ Whether to resolve symlinks to their symlinked location. Defaults to `true`.
 
 `function`
 
-A function which decides wheter a request should be cached or not. An object is passed to the function with `path` and `request` properties. Default:
+A function which decides whether a request should be cached or not. An object is passed to the function with `path` and `request` properties. Default:
 
 ```js
 cachePredicate: function() { return true }
