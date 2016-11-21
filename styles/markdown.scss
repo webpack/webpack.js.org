@@ -92,7 +92,7 @@
       }
 
       code {
-        background-color:transparentize(getColor(alto), 0.5);
+        color: inherit;
       }
     }
 
@@ -162,11 +162,12 @@
   code, tt {
     font-family:'Ubuntu Mono', monospace;
     margin: 0 2px;
-    padding: 0 5px;
+    padding: 2px 6px;
     white-space: nowrap;
-    border: 1px solid #eaeaea;
-    background-color: #f8f8f8;
+    background-color: transparentize(getColor(fiord), 0.94);
     border-radius: 3px;
+    text-shadow: 0 1px 0 transparentize(getColor(white), 0.5);
+    color: getColor(elephant);
   }
 
   pre {
@@ -184,6 +185,7 @@
       border: none;
       color:getColor(concrete);
       background: transparent;
+      text-shadow: none;
 
       .code-details-summary-span {
         margin-left: -15px;
