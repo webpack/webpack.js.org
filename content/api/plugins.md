@@ -1,6 +1,6 @@
 ---
 title: Plugin API
-sort: 5
+sort: 4
 ---
 
 > TODO
