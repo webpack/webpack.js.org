@@ -27,7 +27,7 @@
   }
 }
 
-.sidebar-mobile___toggle {
+.sidebar-mobile__toggle {
   position: absolute;
   top: 45px;
   bottom: 0;
@@ -40,8 +40,8 @@
   width: 285px;
   height: 100vh;
   overflow-x: hidden;
-  background: map-get($colors, white);
-  box-shadow: 0 0 5px map-get($colors, emperor);
+  background: getColor(white);
+  box-shadow: 0 0 5px getColor(emperor);
 }
 
 .sidebar-mobile__close {
