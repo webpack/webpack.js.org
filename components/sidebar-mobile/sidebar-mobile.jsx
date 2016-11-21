@@ -2,6 +2,9 @@ import React from 'react';
 import Link from '../link/link';
 import './sidebar-mobile-style';
 
+let initialTouchPosition = {};
+let lastTouchPosition = {};
+
 export default class SidebarMobile extends React.Component {
   constructor(props) {
     super(props);
@@ -11,11 +14,26 @@ export default class SidebarMobile extends React.Component {
 
   render() {
     return (
-      <nav className="sidebar-mobile" ref={ ref => this.container = ref }>
-        <i className="sidebar-mobile__close icon-cross"
-          onClick={ this._close.bind(this) } />
+      <nav 
+        className="sidebar-mobile" 
+        ref={ ref => this.container = ref } 
+        onTouchStart={this._handleTouchStart.bind(this)}
+        onTouchMove={this._handleTouchMove.bind(this)}
+        onTouchEnd={this._handleTouchEnd.bind(this)}>
 
-        { this._getSections() }
+        <div 
+          className="sidebar-mobile__toggle"
+          onTouchStart={this._handleTouchStart.bind(this)}
+          onTouchMove={this._handleOpenerTouchMove.bind(this)}
+          onTouchEnd={this._handleTouchEnd.bind(this)} />
+
+        <div className="sidebar-mobile__content">
+          <i 
+            className="sidebar-mobile__close icon-cross"
+            onClick={ this._close.bind(this) } />
+          
+          { this._getSections() }
+        </div>
       </nav>
     );
   }
@@ -42,7 +60,7 @@ export default class SidebarMobile extends React.Component {
   _getSections() {
     return this.props.sections.map(section => (
       <div key={ section.url }>
-        <h3 className="sidebar-mobile__section">{ section.title }</h3>
+        <h3 className='sidebar-mobile__section'>{ section.title }</h3>
         { this._getPages(section.pages) }
       </div>
     ));
@@ -70,8 +88,7 @@ export default class SidebarMobile extends React.Component {
           key={ url } 
           className={ `sidebar-mobile__page ${active ? 'sidebar-mobile__page--active' : ''}` } 
           to={ url }
-          onClick={ this._close.bind(this) }
-        >
+          onClick={ this._close.bind(this) }>
           { page.title }
         </Link>
       );
@@ -100,5 +117,59 @@ export default class SidebarMobile extends React.Component {
     this.container.classList.remove(
       'sidebar-mobile--visible'
     );
+  }
+
+  _open() {
+    this.container.classList.add(
+      'sidebar-mobile--visible'
+    );
+  }
+
+  _handleTouchStart(e){
+    initialTouchPosition.x = e.touches[0].pageX;
+    initialTouchPosition.y = e.touches[0].pageY;
+
+    // For instant transform along with the touch
+    this.container.classList.add('no-delay');
+  }
+
+  _handleTouchMove(e){
+    let xDiff = initialTouchPosition.x - e.touches[0].pageX;
+    let yDiff = initialTouchPosition.y - e.touches[0].pageY;
+    let factor = Math.abs(yDiff / xDiff);
+
+    // Factor makes sure horizontal and vertical scroll dont take place together
+    if (xDiff>0 && factor < 0.8) {
+      e.preventDefault();
+      this.container.style.transform = `translateX(-${xDiff}px)`;
+      lastTouchPosition.x = e.touches[0].pageX;
+      lastTouchPosition.y = e.touches[0].pageY;
+    }
+  }
+
+  _handleOpenerTouchMove(e){
+    let xDiff = e.touches[0].pageX - initialTouchPosition.x;
+    let yDiff = initialTouchPosition.y - e.touches[0].pageY;
+    let factor = Math.abs(yDiff / xDiff);
+
+    // Factor makes sure horizontal and vertical scroll dont take place together
+    if (xDiff > 0 && xDiff < 295 && factor < 0.8) {
+      e.preventDefault();
+      this.container.style.transform = `translateX(calc(-100% + ${xDiff}px))`;
+      lastTouchPosition.x = e.touches[0].pageX;
+      lastTouchPosition.y = e.touches[0].pageY;
+    }
+  }
+
+  _handleTouchEnd(e){
+    // Free up all the inline styling
+    this.container.classList.remove('no-delay');
+    this.container.style = '';
+
+    if (initialTouchPosition.x - lastTouchPosition.x > 100) {
+      this._close();
+    } else if (lastTouchPosition.x - initialTouchPosition.x > 100) {
+      this._open();
+    }
   }
 }
