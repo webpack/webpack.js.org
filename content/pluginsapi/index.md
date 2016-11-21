@@ -3,7 +3,7 @@ title: Plugins API
 sort: 1
 ---
 
-webpack provides flexible and powerful customization api in the form of plugins. Using plugins, we can plug functionality into webpack. Additionaly, webpack provides lifecycle hooks into which plugins can be registered. At each of these lifecycle points, webpack will run all of the registered plugins and provide them with the current state of the webpack compilation.
+webpack provides flexible and powerful customization api in the form of plugins. Using plugins, we can plug functionality into webpack. Additionally, webpack provides lifecycle hooks into which plugins can be registered. At each of these lifecycle points, webpack will run all of the registered plugins and provide them with the current state of the webpack compilation.
 
 ## Tapable & Tapable instances
 
