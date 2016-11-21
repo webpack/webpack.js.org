@@ -12,6 +12,12 @@ HMR is particularly useful in applications using a single state tree,
 since components are "dumb" and will reflect the latest application state, even
 after their source is changed and they are replaced.
 
+webpack's power lies in its customizability, and there are MANY ways of configuring HMR
+given the needs of a particular project. The approach described below uses Babel and
+React, but these tools are not necessary for HMR to work.
+
+T> If you'd like to see examples of other approaches, please request them or better yet, [open up a PR with an addition](https://github.com/webpack/webpack.js.org).
+
 ## Project Config
 
 This guide will be demonstrating the use of HMR with Babel,
@@ -39,26 +45,26 @@ Your `.babelrc` file should look like the following:
 {
   "presets": [
     ["es2015", {"modules": false}],
-    //Webpack understands the native import syntax, and uses it for tree shaking
+    // webpack understands the native import syntax, and uses it for tree shaking
 
     "stage-2",
-    //Specifies what level of language features to activate.
-    //Stage 2 is "draft", 4 is finished, 0 is strawman.
-    //See https://tc39.github.io/process-document/
+    // Specifies what level of language features to activate.
+    // Stage 2 is "draft", 4 is finished, 0 is strawman.
+    // See https://tc39.github.io/process-document/
 
     "react"
-    //Transpile React components to JavaScript
+    // Transpile React components to JavaScript
   ],
   "plugins": [
     "react-hot-loader/babel"
-    //Enables React code to work with HMR.
+    // Enables React code to work with HMR.
   ]
 }
 ```
 
-### Webpack config
+### webpack Config
 
-While there's many ways of setting up your Webpack config - via API,
+While there's many ways of setting up your webpack config - via API,
 via multiple or single config files, etc - here is the basic information
 you should have available.
 
@@ -66,86 +72,82 @@ you should have available.
 const { resolve } = require('path');
 const webpack = require('webpack');
 
-module.exports = env => {
-  return {
-    entry: [
-      'react-hot-loader/patch',
-      //activate HMR for React
+module.exports = {
+  entry: [
+    'react-hot-loader/patch',
+    // activate HMR for React
 
-      'webpack-dev-server/client?http://localhost:8080',
-      //bundle the client for webpack dev server
-      //and connect to the provided endpoint
+    'webpack-dev-server/client?http://localhost:8080',
+    // bundle the client for webpack-dev-server
+    // and connect to the provided endpoint
 
-      'webpack/hot/only-dev-server',
-      //bundle the client for hot reloading
-      //only- means to only hot reload for successful updates
+    'webpack/hot/only-dev-server',
+    // bundle the client for hot reloading
+    // only- means to only hot reload for successful updates
 
 
-      './index.js'
-      //the entry point of our app
+    './index.js'
+    // the entry point of our app
+  ],
+  output: {
+    filename: 'bundle.js',
+    // the output bundle
+
+    path: resolve(__dirname, 'dist'),
+
+    publicPath: '/'
+    // necessary for HMR to know where to load the hot update chunks
+  },
+
+  context: resolve(__dirname, 'src'),
+
+  devtool: 'inline-source-map',
+
+  devServer: {
+    hot: true,
+    // activate hot reloading
+
+    contentBase: resolve(__dirname, 'dist'),
+    // match the output path
+
+    publicPath: '/'
+    // match the output `publicPath`
+  },
+
+  module: {
+    loaders: [
+      { test: /\.js$/,
+        loaders: [
+          'babel-loader',
+        ],
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        loaders: [
+          'style-loader',
+          'css-loader?modules',
+          'postcss-loader',
+        ],
+      },
     ],
-    output: {
-      filename: 'bundle.js',
-      //the output bundle
+  },
 
-      path: resolve(__dirname, 'dist'),
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    // activates HMR
 
-      publicPath: '/'
-      //necessary for HMR to know where to load the hot update chunks
-    },
-
-    context: resolve(__dirname, 'src'),
-
-    devtool: 'inline-source-map',
-
-    devServer: {
-      hot: true,
-      //activate hot reloading
-
-      contentBase: resolve(__dirname, 'dist'),
-      //match the output path
-
-      publicPath: '/'
-      //match the output publicPath
-    },
-
-    module: {
-      loaders: [
-        { test: /\.js$/,
-          loaders: [
-            'babel-loader',
-          ],
-          exclude: /node_modules/
-        },
-        {
-          test: /\.css$/,
-          loaders: [
-            'style-loader',
-            'css-loader?modules',
-            'postcss-loader',
-          ],
-        },
-      ],
-    },
-
-    plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-      //activates HMR
-
-      new webpack.NamedModulesPlugin(),
-      //prints more readable module names in the browser console on HMR updates
-    ],
-  };
+    new webpack.NamedModulesPlugin(),
+    // prints more readable module names in the browser console on HMR updates
+  ],
 };
 ```
 
 There's a lot going on above, and not all of it is related to HMR.
 You may benefit from reading the
-[full documentation](https://webpack.github.io/docs/webpack-dev-server.html)
-on webpack dev server, and the [other articles](https://webpack.js.org/concepts/)
-here on webpack.js.org.
+[webpack-dev-server options](/configuration/dev-server) and the [concept pages](/concepts).
 
-The basic assumption here is that your JavaScript entry is located at `./src/index.js`,
+The basic assumption here is that your JavaScript entry is located at `./src/index.js`
 and that you're using CSS Modules for your styling.
 
 Please see the comments inline that explain each portion of the config. The main
@@ -154,7 +156,7 @@ also necessary to include in the `plugins` array.
 
 There are two modules included here for the purposes of this guide.
 The react-hot-loader addition to the entry, as noted above, is necessary to enable
-HMR with React components. The NamedModulesPlugin is a useful addition
+HMR with React components. The `NamedModulesPlugin` is a useful addition
 to better understand what modules are being updated when using HMR.
 
 ### Code
@@ -229,18 +231,18 @@ is included in `App.js`.
 
 ### Package.json
 
-Finally, we need to start up webpack dev server to bundle our code and see HMR in action.
+Finally, we need to start up webpack-dev-server to bundle our code and see HMR in action.
 We can use the following package.json entry:
 
 ```json
 {
   "scripts" : {
-    "start" : "webpack-dev-server --env.dev"
+    "start" : "webpack-dev-server"
   }
 }
 ```
 
-Run `npm start`, open up your browser to `localhost:8080`,
+Run `npm start`, open up your browser to `http://localhost:8080`,
 and you should see the following entries printed in your console.log:
 
 ```bash
@@ -249,7 +251,7 @@ only-dev-server.js:74[HMR] Waiting for update signal from WDS…
 client?c7c8:24 [WDS] Hot Module Replacement enabled.
 ```
 
-Go ahead and edit and save your App.js file.
+Go ahead and edit and save your `App.js` file.
 You should see something like the following in your console.log:
 
 ```bash
@@ -262,4 +264,4 @@ dev-server.js:27 [HMR] App is up to date.
 ```
 
 Note that HMR specifies the paths of the updated modules.
-That's because we're using the NamedModules plugin.
+That's because we're using `NamedModulesPlugin`.
