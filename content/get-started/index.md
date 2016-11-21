@@ -119,7 +119,7 @@ The above CLI command would be represented in config as follows -
 __webpack.config.js__
 ```javascript
 module.exports = {
-  entry: './app/index.js'
+  entry: './app/index.js',
   output: {
     filename: 'bundle.js',
     path: './dist'
