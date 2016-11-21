@@ -6,14 +6,12 @@ contributors:
   - jhnns
 ---
 
-Hot Module Replacement (HMR) exchanges, adds, or removes modules while an
-application is running without a page reload.
+As explained in detail on the [concept page](/concepts/hot-module-replacement), Hot Module Replacement (HMR)exchanges, adds, or removes modules while an application is running without a page reload.
 HMR is particularly useful in applications using a single state tree,
 since components are "dumb" and will reflect the latest application state, even
 after their source is changed and they are replaced.
 
-webpack's power lies in its customizability, and there are MANY ways of configuring HMR
-given the needs of a particular project. The approach described below uses Babel and
+The approach described below uses Babel and
 React, but these tools are not necessary for HMR to work.
 
 T> If you'd like to see examples of other approaches, please request them or better yet, [open up a PR with an addition](https://github.com/webpack/webpack.js.org).
