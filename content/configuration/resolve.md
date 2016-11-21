@@ -288,7 +288,11 @@ plugins: [new DirectoryNamedWebpackPlugin()]
 
 `boolean`
 
-Whether to resolve symlinks to their symlinked location. Defaults to `true`.
+Whether to resolve symlinks to their symlinked location. Default:
+
+```js
+symlinks: true
+```
 
 
 ## `resolve.cachePredicate`
