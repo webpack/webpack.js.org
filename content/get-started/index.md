@@ -119,7 +119,7 @@ The above CLI command would be represented in config as follows -
 __webpack.config.js__
 ```javascript
 module.exports = {
-  entry: './app/index.js'
+  entry: './app/index.js',
   output: {
     filename: 'bundle.js',
     path: './dist'
@@ -158,7 +158,7 @@ Given it's not particularly fun to run webpack from the CLI this way, we can set
 }
 ```
 
-You can now achieve the same as above by using `npm run build` command. npm picks up the scripts through it and patches the environment temporarily so that it contains the bin commands. You will see this convention a lot of projects out there.
+You can now achieve the same as above by using `npm run build` command. npm picks up the scripts through it and patches the environment temporarily so that it contains the bin commands. You will see this convention in a lot of projects out there.
 
 T> You can pass custom parameters to webpack by adding two dashes to the `npm run build` command, e.g. `npm run build -- --colors`.
 
