@@ -5,7 +5,7 @@
 ```js
 import bar from './foo';
 
-bar():
+bar();
 ```
 
 **foo.js**
