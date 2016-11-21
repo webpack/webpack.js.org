@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - SpaceK33z
   - pksjce
+  - sebastiandeutsch
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail.
@@ -94,27 +95,33 @@ aliasFields: ["browser"]
 
 `array`
 
-Default: `["package.json"]`
+The JSON files to use for descriptions. Default:
 
-The JSON files to use for descriptions.
+```js
+descriptionFiles: ["package.json"]
+```
 
 
 ## `resolve.enforceExtension`
 
-`bool`
+`boolean`
 
-Default: `false`
+If `true`, it will not allow extension-less files. So by default `require('./foo')` works if `./foo` has a `.js` extension, but with this enabled only `require('./foo.js')` will work. Default:
 
-If false it will also try to use no extension from above.
+```js
+enforceExtension: false
+```
 
 
 ## `resolve.enforceModuleExtension`
 
-`bool`
+`boolean`
 
-Default: `false`
+Whether to require to use an extension for modules (e.g. loaders). Default:
 
-If false it's also try to use no module extension from above.
+```js
+enforceModuleExtension: false
+```
 
 
 ## `resolve.extensions`
@@ -124,7 +131,7 @@ If false it's also try to use no module extension from above.
 Automatically resolve certain extensions. This defaults to:
 
 ```js
-extensions: [ ".js", ".json" ]
+extensions: [".js", ".json"]
 ```
 
 which is what enables users to leave off the extension when importing:
@@ -174,9 +181,11 @@ This means that when we `import * as D3 from "d3"` this will really resolve to t
 
 `array`
 
-Default: `["index"]`
+The filename to be used while resolving directories. Default:
 
-The filename to be used while resolving directories.
+```js
+mainFiles: ["index"]
+```
 
 
 ## `resolve.modules`
@@ -206,18 +215,26 @@ modules: [path.resolve(__dirname, "src"), "node_modules"]
 
 ## `resolve.resolveToContext`
 
-`bool`
+`boolean`
 
-Default: `false`
+If `true`, trying to resolve a context to its absolute path ends when a directory is found. Default:
 
-If true, trying to resolve a context to its absolute path ends when a directory is found.
+```js
+resolveToContext: false
+```
 
 
 ## `resolve.unsafeCache`
 
 `regex` `array` `boolean`
 
-Enable aggressive, but **unsafe**, caching of modules. Passing `true` will cache everything. A regular expression, or an array of regular expressions, can be used to test file paths and only cache certain modules. For example, to only cache utilities:
+Enable aggressive, but **unsafe**, caching of modules. Passing `true` will cache everything. Default:
+
+```js
+unsafeCache: true
+```
+
+A regular expression, or an array of regular expressions, can be used to test file paths and only cache certain modules. For example, to only cache utilities:
 
 ```js
 unsafeCache: /src\/utilities/
@@ -230,9 +247,7 @@ W> Changes to cached paths may cause failure in rare cases.
 
 `object`
 
-This set of options is identical to the `resolve` set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages.
-
-Default:
+This set of options is identical to the `resolve` set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages. Default:
 
 ```js
 {
@@ -244,32 +259,42 @@ Default:
 
 T> Note that you can use alias here and other features familiar from resolve. For example `{ txt: 'raw-loader' }` would shim `txt!templates/demo.txt` to use `raw-loader`.
 
-## `resolveLoader.moduleTemplates`
-
-`array`
-
-That's a `resolveLoader` only property.It describes alternatives for the module name that are tried.
-
-Default: `["*-webpack-loader", "*-web-loader", "*-loader", "*"]`
-
 
 ## `resolveLoader.moduleExtensions`
 
 `array`
 
-Example: `['-loaders']`
+The extensions which are tried when resolving a module (e.g. loaders). By default this is an empty array.
 
-These extensions which are tried when resolving a module.
+If you want to use loaders without the `-loader` suffix, you can use this:
+
+```js
+moduleExtensions: ['-loaders']
+```
 
 
 ## `resolve.plugins`
 
-?> Description
+A list of additional resolve plugins which should be applied. It allows plugins such as [`DirectoryNamedWebpackPlugin`](https://www.npmjs.com/package/directory-named-webpack-plugin).
+
+```js
+plugins: [new DirectoryNamedWebpackPlugin()]
+```
+
 
 ## `resolve.symlinks`
 
-?> Description
+`boolean`
+
+Whether to resolve symlinks to their symlinked location. Defaults to `true`.
+
 
 ## `resolve.cachePredicate`
 
-?> Description
+`function`
+
+A function which decides wheter a request should be cached or not. An object is passed to the function with `path` and `request` properties. Default:
+
+```js
+cachePredicate: function() { return true }
+```
