@@ -58,12 +58,29 @@ export default class SidebarMobile extends React.Component {
    * @return {array} - Markup containing sections and links
    */
   _getSections() {
-    return this.props.sections.map(section => (
-      <div key={ section.url }>
-        <h3 className='sidebar-mobile__section'>{ section.title }</h3>
-        { this._getPages(section.pages) }
-      </div>
-    ));
+    let pathname = '';
+
+    if (typeof window !== 'undefined') {
+      pathname = window.location.pathname;
+    }
+
+    return this.props.sections.map(section => {
+      let active = pathname === section.url || pathname.includes(`/${section.url}`),
+          absoluteUrl = `/${section.url}`;
+      return (
+        <div key={ absoluteUrl }>
+          <Link 
+            className={ `sidebar-mobile__section sidebar-mobile__section--block ${active ? 'sidebar-mobile__section--active' : ''}` } 
+            key={ absoluteUrl }
+            to={ absoluteUrl }
+            onClick={ this._close.bind(this) }>  
+            <h3>{ section.title }</h3>
+          </Link>
+          
+          { this._getPages(section.pages) }
+        </div>
+      );
+    });
   }
 
   /**
