@@ -3,7 +3,7 @@ import SidebarItem from '../sidebar-item/sidebar-item';
 import './sidebar-style';
 
 export default props => {
-  let { sectionName, pages, currentPage, version } = props;
+  let { sectionName, pages, currentPage } = props;
 
   return (
     <nav className="sidebar">
