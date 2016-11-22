@@ -63,6 +63,15 @@
   text-transform: uppercase;
   color: getColor(mine-shaft);
   margin: 1em 16px 0.25em;
+
+  &--block {
+    display: block;
+  }
+
+  &:active,
+  &--active {
+    color: getColor(malibu);
+  }
 }
 
 .sidebar-mobile__page {
