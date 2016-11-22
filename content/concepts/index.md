@@ -7,29 +7,23 @@ contributors:
   - grgur
 ---
 
-*webpack* is a _module bundler_ for modern JavaScript applications. It is [incredibly configurable](/configuration), however, there are **4 Core Concepts** we feel you should understand before you get started!
-
-As part of your webpack learning journey, we wrote this document aimed to give you a **high-level** overview of these concepts, while still providing links to concept specific use-cases.
+*Webpack* is a _module bundler_ for modern javascript applications. This document will give you a high-level overview of  **4 Core Concepts** you should understand before you start [configuring it.](/configuration)
 
 ## Entry
 
-webpack creates a graph of all of your application's dependencies. The starting point of this graph is known as an _entry point_. The _entry point_ tells webpack _where to start_ and follows the graph of dependencies to know _what to bundle_. You can think of your application's _entry point_ as the **contextual root** or **the first file to kick off your app**.
+Webpack creates a graph of all of your application's dependencies. The root node of dependencies graph is known as an _entry point_. The _entry point_ tells webpack _where to start_ and follows the graph of dependencies to know _what to bundle_. 
 
-In webpack we define _entry points_ using the `entry` property in our [webpack configuration object](/configuration).
+In webpack we define _entry points_ using the `entry` property in the [configuration object](/configuration).
 
 The simplest example is seen below:
 
 **webpack.config.js**
-
 ```javascript
 module.exports = {
   entry: './path/to/my/entry/file.js'
 };
 ```
-
-There are multiple ways to declare your `entry` property that are specific to your application's needs.
-
-[Learn more!](/concepts/entry-points)
+There are multiple ways to declare your `entry` property that are specific to your application's needs. Check out [the entry points documentation](/concepts/entry-points) to learn more.
 
 ## Output
 
