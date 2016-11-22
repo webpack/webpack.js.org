@@ -9,7 +9,7 @@ It is exported by `webpack` api under `webpack.Compiler`.
 
 The compiler is used by webpack by instantiating it and then calling the `run` method. Below is a trivial example of how one might use the `Compiler`. In fact, this is very close to how webpack itself uses it.
 
-[__compiler-examples__](https://github.com/pksjce/webpack-internal-examples/blob/master/compiler-example.js)
+[__compiler-example__](https://github.com/pksjce/webpack-internal-examples/blob/master/compiler-example.js)
 
 ```javascript
 // Can be imported from webpack package
@@ -49,10 +49,10 @@ compiler.run(callback);
 The `Compiler` is what we call a `Tapable` instance. By this, we mean that it mixes in `Tapable` class to imbibe functionality to register and call plugins on itself.
 All user facing plugins are first registered on the `Compiler`.
 The working of a Compiler can be condensed into the following highlights
- - Usually there is one master instance of Compiler. Child instances for delegating are possible.
+ - Usually there is one master instance of Compiler. Child compilers can be created for delegating specific tasks.
  - A lot of the complexity in creating a compiler goes into populating all the relevant options for it.
  - `webpack` has [`WebpackOptionsDefaulter`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js) and [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js) specifically designed to provide the `Compiler` with all the intial data it requires.
- - The `Compiler` is just a skeleton which performs bare minimum functionality to keep a lifecycle running. It delegates all the loading/bundling/writing work to various plugins.
+ - The `Compiler` is just ultimately just a function which performs bare minimum functionality to keep a lifecycle running. It delegates all the loading/bundling/writing work to various plugins.
  - `new LogPlugin(args).apply(compiler)` registers the plugin to any particular hook event in the `Compiler`'s lifecycle.
  - The `Compiler` exposes a `run` method which kickstarts all compilation work for `webpack`. When that is done, it should call the passed in `callback` function. All the tail end work of logging stats and errors are done in this callback function.
 
