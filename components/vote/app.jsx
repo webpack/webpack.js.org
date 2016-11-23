@@ -3,7 +3,9 @@ import 'whatwg-fetch';
 import SidebarItem from '../sidebar-item/sidebar-item';
 import * as api from "./api";
 import './app-style';
+import './influence-style';
 import VoteButton from './button/button';
+import Influence from './influence.jsx';
 
 function updateByProperty(array, property, propertyValue, update) {
   return array.map(item => {
@@ -177,6 +179,15 @@ export default class VoteApp extends React.Component {
 
     return (
       <div className="vote-app">
+        <div className="vote-app__influence">
+          <div className="vote-app__influence-descriptions">  
+            <Influence className="vote-app__influence-section" type="normal"/>
+            <Influence className="vote-app__influence-section" type="golden"/>
+          </div>
+          <div className="vote-app__influence-disclaimer">
+            DISCLAIMER: Since this feature is its Alpha stages, the formula for calculating influence may change.
+          </div>
+        </div>
         {this.renderSelf()}
         { listInfo && <div>
           <button className="vote-app__update-button" disabled={inProgress} onClick={() => {
