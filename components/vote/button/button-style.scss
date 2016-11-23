@@ -4,11 +4,12 @@
     font-size: 150%;
   }
 
-  &__value, &__my-value, &__upMax, &__up10, &__up1, &__down1, &__down10, &__downMax {
+  &__value, &__my-value, &__upDown {
     display: block;
+    width: 90px;
   }
 
-  &__upMax, &__up10, &__up1, &__down1, &__down10, &__downMax {
+  &__upDown {
     border: 0;
     padding: 0;
     margin: 0;

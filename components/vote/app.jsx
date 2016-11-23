@@ -115,7 +115,7 @@ export default class VoteApp extends React.Component {
             ...vote,
             votes: vote.votes + diffValue
           })),
-          score: item.score + score
+          score: item.score + score * diffValue
         }))
       },
       selfInfo: selfInfo && {
@@ -204,8 +204,8 @@ export default class VoteApp extends React.Component {
                       return <td>
                         <VoteButton 
                           className={"vote-app__vote-" + voteSettings.name}
-                          value={vote.votes} myValue={userVote.votes} 
-                          maxUp={maximum - userVote.votes} maxDown={userVote.votes - minimum} 
+                          value={vote.votes} myValue={value}
+                          maxUp={userVote ? maximum - value : 0} maxDown={userVote ? value - minimum : 0} 
                           color={this.getColor(voteSettings.name)} onVote={(diffValue) => {
                             this.vote(item.id, voteSettings.name, diffValue, voteSettings.currency, voteSettings.score);
                           }} />
