@@ -18,4 +18,4 @@ For more information see the [contributors page](https://github.com/webpack/webp
 
 ## Content Progress
 
-Check out the [MVP Milestone](https://github.com/webpack/webpack.js.org/issues?q=is%3Aopen+is%3Aissue+milestone%3A%22Webpack+2+-+Documentation+MVP%22) for the current status.
+Check out the [MVP Milestone](https://github.com/webpack/webpack.js.org/milestones) for the current status.
