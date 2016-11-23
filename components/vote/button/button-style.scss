@@ -1,0 +1,16 @@
+.vote-button {
+  text-align: center;
+  &__value {
+    font-size: 150%;
+  }
+
+  &__value, &__my-value, &__upMax, &__up10, &__up1, &__down1, &__down10, &__downMax {
+    display: block;
+  }
+
+  &__upMax, &__up10, &__up1, &__down1, &__down10, &__downMax {
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+}
