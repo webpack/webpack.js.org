@@ -1,7 +1,33 @@
 @import 'vars';
 @import 'mixins';
+@import 'functions';
 
 .vote-app {
+  margin: 1.5em;
+
+  &__influence-descriptions {
+    display: flex;
+    flex-direction: column;
+
+    @include break(medium) {
+      flex-direction: row;
+    }
+  }
+
+  &__influence-section {
+    flex: 0 0 100%;
+  }
+
+  &__influence-disclaimer {
+    padding: 1em 0;
+    flex: 0 0 100%;
+    font-size: smaller;
+    color: red;
+    @include break(medium) {
+      text-align: center;
+    }
+  }
+
   &__self-info {
     margin-top: 10px;
   }
