@@ -4,8 +4,9 @@ require("./button-style.scss");
 export default (props) => {
   let { value, myValue, maxDown, maxUp, color, onVote, className } = props;
 
-  let click = (n) => {
+  let click = (e, n) => {
     onVote(Math.min(maxUp, Math.max(n, -maxDown)));
+    e.preventDefault();
     return false;
   };
 
@@ -18,9 +19,9 @@ export default (props) => {
 
   let makeTriangle = (n, fn, size, minForEnabled) => {
     const enabled = n > 0 ? (maxUp >= minForEnabled) : (maxDown >= minForEnabled);
-    return <a href="#" 
+    return <a href="#"
       title={titleText(n)} 
-      onClick={() => click(n)} 
+      onClick={e => click(e, n)} 
       className="vote-button__upMax">
         {fn({size: size, color: enabled ? color : "transparent"})}
     </a>;
