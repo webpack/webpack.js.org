@@ -181,7 +181,7 @@ export default class SidebarMobile extends React.Component {
   _handleTouchEnd(e){
     // Free up all the inline styling
     this.container.classList.remove('no-delay');
-    this.container.style = '';
+    this.container.style.transform = '';
 
     if (initialTouchPosition.x - lastTouchPosition.x > 100) {
       this._close();
