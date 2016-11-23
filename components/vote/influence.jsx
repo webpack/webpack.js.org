@@ -15,7 +15,7 @@ export default class InfluenceComponent extends React.Component {
         ) : (
             <section className="influence-info influence-info__section">
                 <h1 className="influence-info__header">What is Golden Influence?</h1>
-                <p><em>Golden Influence</em> is equal to 10 <i>normal influence</i>. Golden Influence is obtained by being a backer or sponsor on our <a href="https://opencollective.com/webpack">Open Collective page</a>.</p>            
+                <p><em>Golden Influence</em> is equal to 100 <i>normal influence</i>. Golden Influence is obtained by being a backer or sponsor on our <a href="https://opencollective.com/webpack">Open Collective page</a>.</p>            
             </section>
         ));
     }
