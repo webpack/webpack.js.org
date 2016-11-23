@@ -1,4 +1,5 @@
 import React from 'react';
+import 'whatwg-fetch';
 import SidebarItem from '../sidebar-item/sidebar-item';
 import * as api from "./api";
 import './app-style';
@@ -26,7 +27,7 @@ export default class VoteApp extends React.Component {
   }
 
   isBrowserSupported() {
-    return typeof localStorage === 'object' && typeof fetch === 'function';
+    return typeof localStorage === 'object';
   }
 
   componentDidMount() {
