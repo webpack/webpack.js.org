@@ -18,21 +18,33 @@ export default (props) => {
   };
 
   let makeTriangle = (n, fn, size, minForEnabled) => {
-    const enabled = n > 0 ? (maxUp >= minForEnabled) : (maxDown >= minForEnabled);
-    return <a href="#"
-      title={titleText(n)} 
-      onClick={e => click(e, n)} 
-      className="vote-button__upMax">
-        {fn({size: size, color: enabled ? color : "transparent"})}
-    </a>;
+    const enabled = n !== 0 && (n > 0 ? (maxUp >= minForEnabled) : (maxDown >= minForEnabled));
+    const className = "vote-button__upDown";
+    if(enabled) {
+      return <a href="#"
+        title={titleText(n)}
+        onClick={e => click(e, n)}
+        className={className}>
+          {fn({size: size, color: color})}
+      </a>;
+    } else {
+      return <a
+        className={className}>
+          {fn({size: size, color: "#eee"})}
+      </a>;
+    }
   };
 
   return <div className="vote-button" style={{color: color}}>
     {makeTriangle(Infinity, triangleUp, 30, 11)}
     {makeTriangle(10, triangleUp, 20, 2)}
     {makeTriangle(1, triangleUp, 15, 1)}
-    <div className="vote-button__value"><span className={className}>{value}</span></div>
-    <div className="vote-button__my-value">(<span className={className}>{myValue}</span>)</div>
+    <div className="vote-button__value" title={value + " was voted in total by all users."}>
+      <span className={className}>{value}</span>
+    </div>
+    <div className="vote-button__my-value" title={myValue + " was voted by you."}>
+      (<span className={className}>{myValue}</span>)
+    </div>
     {makeTriangle(-1, triangleDown, 15, 1)}
     {makeTriangle(-10, triangleDown, 20, 2)}
     {makeTriangle(-Infinity, triangleDown, 30, 11)}

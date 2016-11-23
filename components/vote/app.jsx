@@ -1,8 +1,11 @@
 import React from 'react';
+import 'whatwg-fetch';
 import SidebarItem from '../sidebar-item/sidebar-item';
 import * as api from "./api";
 import './app-style';
+import './influence-style';
 import VoteButton from './button/button';
+import Influence from './influence.jsx';
 
 function updateByProperty(array, property, propertyValue, update) {
   return array.map(item => {
@@ -26,7 +29,7 @@ export default class VoteApp extends React.Component {
   }
 
   isBrowserSupported() {
-    return typeof localStorage === 'object' && typeof fetch === 'function';
+    return typeof localStorage === 'object';
   }
 
   componentDidMount() {
@@ -114,7 +117,7 @@ export default class VoteApp extends React.Component {
             ...vote,
             votes: vote.votes + diffValue
           })),
-          score: item.score + score
+          score: item.score + score * diffValue
         }))
       },
       selfInfo: selfInfo && {
@@ -176,6 +179,15 @@ export default class VoteApp extends React.Component {
 
     return (
       <div className="vote-app">
+        <div className="vote-app__influence">
+          <div className="vote-app__influence-descriptions">  
+            <Influence className="vote-app__influence-section" type="normal"/>
+            <Influence className="vote-app__influence-section" type="golden"/>
+          </div>
+          <div className="vote-app__influence-disclaimer">
+            DISCLAIMER: Since this feature is its Alpha stages, the formula for calculating influence may change.
+          </div>
+        </div>
         {this.renderSelf()}
         { listInfo && <div>
           <button className="vote-app__update-button" disabled={inProgress} onClick={() => {
@@ -203,8 +215,8 @@ export default class VoteApp extends React.Component {
                       return <td>
                         <VoteButton 
                           className={"vote-app__vote-" + voteSettings.name}
-                          value={vote.votes} myValue={userVote.votes} 
-                          maxUp={maximum - userVote.votes} maxDown={userVote.votes - minimum} 
+                          value={vote.votes} myValue={value}
+                          maxUp={userVote ? maximum - value : 0} maxDown={userVote ? value - minimum : 0} 
                           color={this.getColor(voteSettings.name)} onVote={(diffValue) => {
                             this.vote(item.id, voteSettings.name, diffValue, voteSettings.currency, voteSettings.score);
                           }} />
