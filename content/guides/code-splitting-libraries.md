@@ -33,7 +33,7 @@ __webpack.config.js__
 
 ```javascript
 
-modules.export = function(env) {
+module.exports = function(env) {
     return {
         entry: './index.js',
         output: {
@@ -56,7 +56,7 @@ __webpack.config.js__
 
 ```javascript
 
-modules.export = function(env) {
+module.exports = function(env) {
     return {
         entry: {
             main: './index.js',
@@ -85,7 +85,7 @@ __webpack.config.js__
 ```javascript
 
 var webpack = require('webpack');
-modules.export = function(env) {
+module.exports = function(env) {
     return {
         entry: {
             main: './index.js',
@@ -119,7 +119,7 @@ __webpack.config.js__
 ```javascript
 
 var webpack = require('webpack');
-modules.export = function(env) {
+module.exports = function(env) {
     return {
         entry: {
             main: './index.js',
