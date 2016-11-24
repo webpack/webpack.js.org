@@ -63,7 +63,25 @@ While it essentially performs the same functionality while watching, there are s
 
 ## MultiCompiler
 
-?> Can create child compilers?
+This module, MultiCompiler, allows webpack to run multiple configurations in separate compiler.
+If the `options` parameter in the webpack's NodeJS api is an array of options, webpack applies separate compilers and calls the `callback` method at the end of each compiler execution.
+
+```javascript
+var webpack = require('webpack');
+
+var config1 = {
+  entry: './index1.js',
+  output: {filename: 'bundle1.js'}
+}
+var config2 = {
+  entry: './index2.js',
+  output: {filename:'bundle2.js'}
+}
+
+webpack([config1, config2], (err, stats) => {
+  process.stdout.write(stats.toString() + "\n");
+})
+```
 
 ## Event Hooks
 
