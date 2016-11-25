@@ -6,7 +6,7 @@ contributors:
   - pastelsky
 ---
 
-Code splitting is one of the most compelling feature of webpack. It allows you to split your code into various bundles which you can then load on demand — like when a user navigates to a matching route, or on an event from the user. This allows for smaller bundles, and allows you to control resource load prioritization, which if used correctly, can have a major impact on your application load time.
+Code splitting is one of the most compelling features of webpack. It allows you to split your code into various bundles which you can then load on demand — like when a user navigates to a matching route, or on an event from the user. This allows for smaller bundles, and allows you to control resource load prioritization, which if used correctly, can have a major impact on your application load time.
 
 There are mainly two kinds of code splitting that can be accomplished with webpack:
 
@@ -19,8 +19,6 @@ A typical application can depend on many third party libraries for framework/fun
 If we keep code from these libraries onto its own bundle, separate from the application code, we can leverage browser's caching mechanism to cache these files for longer durations on the end user's machine. 
 
 For this to work, the `hash` portion in the vendor filename must remain constant, regardless of application code changes. Learn [how to split vendor/library](/guides/code-splitting-libraries) code using the CommonsChunkPlugin.
-
-T> Setting far cache expiry headers on your hashed resources allows browser to cache them for a longer time, reducing the need for re-downloading these resources by end users.
 
 ### CSS splitting
 
