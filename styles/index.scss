@@ -9,7 +9,6 @@
 @import 'functions';
 
 @import './reset';
-@import './fonts';
 
 * {
   box-sizing: inherit;
@@ -20,7 +19,7 @@ html {
 }
 
 body {
-  font: 400 getFontSize(0) 'Cabin', 'Century Gothic', sans-serif;
+  font: 400 getFontSize(0) $font-stack-body;
   color: getColor(emperor);
 }
 
