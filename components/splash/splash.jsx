@@ -28,10 +28,10 @@ export default props => {
         <p>有你的贡献、捐款或者赞助，webpack 将得到大力发展。你的捐款将直接支持工作和持续改进，最重要的是，这有助于更好的文档和学习资料！</p>
 
         <h2>Sponsors</h2>
-        <Support number={ 20 } type="sponsor" />
+        <Support number={ 5 } type="sponsor" />
 
         <h2>Backers</h2>
-        <Support number={ 100 } type="backer" />
+        <Support number={ 20 } type="backer" />
       </Container>
     </div>
   );

@@ -1,1 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200"><title>icon-square-big</title><path fill="#FFF" d="M600 0l530.3 300v600L600 1200 69.7 900V300z"/><path fill="#8ED6FB" class="st1" d="M1035.6 879.3l-418.1 236.5V931.6L878 788.3l157.6 91zm28.6-25.9V358.8l-153 88.3V765l153 88.4zm-901.5 25.9l418.1 236.5V931.6L320.3 788.3l-157.6 91zm-28.6-25.9V358.8l153 88.3V765l-153 88.4zM152 326.8L580.8 84.2v178.1L306.1 413.4l-2.1 1.2-152-87.8zm894.3 0L617.5 84.2v178.1l274.7 151.1 2.1 1.2 152-87.8z"/><path fill="#1C78C0" d="M580.8 889.7l-257-141.3v-280l257 148.4v272.9zm36.7 0l257-141.3v-280l-257 148.4v272.9zm-18.3-283.6zM341.2 436l258-141.9 258 141.9-258 149-258-149z"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="450 -450 1200 1200" style="enable-background:new 450 -450 1200 1200;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#8ED6FB;}
+	.st2{fill:#1C78C0;}
+</style>
+<title>icon-square-big</title>
+<desc>Created with Sketch.</desc>
+<g id="Icon">
+	<g id="icon-square-big">
+		<g id="cube" transform="translate(163.000000, 106.000000)">
+			<polygon id="border" class="st0" points="886.6,-556 1416.9,-256 1416.9,344 886.6,644 356.3,344 356.3,-256 			"/>
+			<g transform="translate(47.000000, 61.000000)">
+				<g>
+					<path id="outer-cube" class="st1" d="M1275.2,262.3L857.1,498.8V314.6l260.5-143.3L1275.2,262.3z M1303.8,236.4v-494.6
+						l-153,88.3v301.2v16.7L1303.8,236.4z M402.3,262.3l418.1,236.5V314.6L559.9,171.3L402.3,262.3z M373.7,236.4v-494.6l153,88.3
+						v301.2v16.7L373.7,236.4z M391.6-290.2l428.8-242.6v178.1L545.7-203.6l-2.1,1.2L391.6-290.2z M1285.9-290.2L857.1-532.8v178.1
+						l274.7,151.1l2.1,1.2L1285.9-290.2z"/>
+					<path id="inner-cube" class="st2" d="M820.4,272.7l-257-141.3v-280l257,148.4V272.7z M857.1,272.7l257-141.3v-280L857.1-0.2
+						V272.7z M838.8-10.9L838.8-10.9L838.8-10.9L838.8-10.9z M580.8-181l258-141.9l258,141.9l-258,149L580.8-181z"/>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>

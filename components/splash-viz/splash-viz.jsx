@@ -1,8 +1,8 @@
 import React from 'react';
+import Cube from '../cube/cube';
 import Link from '../link/link';
+import SplashModules from '../splash-modules/splash-modules';
 import SplashFile from '../splash-file/splash-file';
-import Icon from '../../assets/icon-square-big.svg';
-import Modules from '../../assets/modules.png';
 import './splash-viz-style';
 
 export default class SplashViz extends React.Component {
@@ -24,21 +24,23 @@ export default class SplashViz extends React.Component {
     return (
       <section className="splash-viz">
         <div className="splash-viz__modules">
-          <img src={ Modules } />
+          <SplashModules />
         </div>
 
         <div className="splash-viz__icon">
-          <img src={ Icon } />
+          <Cube className="splash-viz__cube" depth={ 100 } continuous />
         </div>
 
         <div className="splash-viz__output">
-          <div className="splash-viz__files">
-            {
-              this.state.files.map((file, i) => (
-                <SplashFile key={ i } { ...file } />
-              ))
-            }
-          </div>
+          {
+            this.state.files.map((file, i) => (
+              <SplashFile key={ i } { ...file } />
+            ))
+          }
+        </div>
+
+        <div className="splash-viz__headline">
+          谁说前端代码不能模块化？
         </div>
       </section>
     );

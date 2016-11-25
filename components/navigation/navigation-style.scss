@@ -1,16 +1,40 @@
+@import 'vars';
 @import 'mixins';
 @import 'functions';
 
 .navigation {
   flex: 0 0 auto;
   transition: background 250ms;
-  background: getColor(elephant);
+  background: map-get($colors, mine-shaft);
+
+  &--transparent {
+    position:relative;
+    display:flex;
+    justify-content: center;
+    background: transparent;
+    z-index:5;
+
+    .navigation__inner {
+      position:absolute;
+      left:0;
+
+      @include break {
+        left:auto;
+      }
+    }
+
+    .navigation__link:hover,
+    .navigation__mobile,
+    .navigation__search-input,
+    .navigation__search-icon:hover {
+      color: map-get($colors, emperor);
+    }
+  }
 }
 
 .navigation__inner {
   display: flex;
   align-items: center;
-  position: relative;
   padding: 0.6em 1em;
 
   @include break {
@@ -21,14 +45,14 @@
 .navigation__mobile {
   display: flex;
   font-size: 1.5em;
-  position: absolute;
+  margin-left: -1em;
   align-items: center;
-  color: getColor(white);
+  color: map-get($colors, white);
   cursor: pointer;
   transition: color 250ms;
 
   &:active {
-    color: getColor(alto);
+    color: map-get($colors, alto);
   }
 
   @include break {
@@ -56,7 +80,7 @@
     display:inline-block;
     font-size: getFontSize(-1);
     text-transform: uppercase;
-    color: getColor(white);
+    color: map-get($colors, dusty-grey);
     transition:all 250ms;
     padding:1.5em 0.75em;
 
@@ -71,11 +95,11 @@
 
   &:hover,
   &--active {
-    color: getColor(white);
+    color: map-get($colors, white);
   }
 
   &--active {
-    background: lighten(getColor(elephant), 5%);
+    background: map-get($colors, emperor);
   }
 }
 
@@ -99,34 +123,33 @@
       font-size:14px;
       font-family:'Cabin', 'Century Gothic', sans-serif;
       text-indent:0.5em;
-      border-bottom:1px solid getColor(fiord);
+      border-bottom:1px solid map-get($colors, emperor);
       margin-right:0;
-      color: getColor(white);
-      text-shadow: 0 0 0 getColor(concrete);
+      color: map-get($colors, white);
+      text-shadow: 0 0 0 map-get($colors, concrete);
       transition:all 250ms;
 
       &::-webkit-input-placeholder{
-        color: lighten(getColor(fiord), 10%);
+        color:map-get($colors, dove-grey);
         text-shadow: none;
         -webkit-text-fill-color: initial;
       }
     }
 
     &-icon {
-      font-size:1em;
+      display:inline-block;
+      font-size:getFontSize(1);
+      transform:rotate(-45deg);
+      font-weight:800;
+      color:map-get($colors, dusty-grey);
+      cursor:pointer;
+      background:transparent;
       padding:0;
       border:none;
-      cursor:pointer;
-      color:getColor(alto);
-      background:transparent;
       transition:color 250ms;
 
-      &.icon-cross {
-        display:none;
-      }
-
       &:hover {
-        color:getColor(white);
+        color:map-get($colors, white);
       }
     }
 
@@ -152,30 +175,17 @@
       margin-right:0.5em;
       width:400px;
     }
-
-    .navigation__search-icon.icon-cross {
-      display:block;
-    }
-
-    .navigation__search-icon.icon-magnifying-glass {
-      display:none;
-    }
   }
 }
 
 .navigation__bottom {
-  display:none;
-  background: lighten(getColor(elephant), 5%);
-
-  @include break {
-    display:block;
-  }
+  background:map-get($colors, emperor);
 }
 
 .navigation__child {
   font-size: getFontSize(-1);
   margin:0.5em 1em 0.6em;
-  color:getColor(alto);
+  color:map-get($colors, dusty-grey);
   text-transform: uppercase;
 
   &:first-of-type {
@@ -184,6 +194,6 @@
 
   &:hover,
   &--active {
-    color:getColor(white);
+    color:map-get($colors, white);
   }
 }

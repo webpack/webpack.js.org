@@ -18,7 +18,7 @@ const commonConfig = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loaders: ['babel-loader', 'eslint-loader'],
+        loader: 'babel-loader!eslint-loader',
         include: [
           path.join(__dirname, 'components')
         ]
@@ -77,10 +77,6 @@ const developmentConfig = {
   module: {
     loaders: [
       {
-        test: /\.font.js$/,
-        loaders: ['style-loader', 'css-loader', 'fontgen-loader']
-      },
-      {
         test: /\.css$/,
         loaders: ['style-loader', 'css-loader'],
         include: stylePaths
@@ -105,13 +101,6 @@ const buildConfig = {
   ],
   module: {
     loaders: [
-      {
-        test: /\.font.js$/,
-        loader: ExtractTextPlugin.extract(
-          'style-loader', 
-          'css-loader!fontgen-loader?embed'
-        )
-      },
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract(

@@ -1,41 +1,42 @@
+@import 'vars';
 @import 'functions';
 @import 'mixins';
 
 .splash-viz {
   position:relative;
   display:flex;
-  height:calc(100vh - 55px);
+  height:100vh;
   min-height:320px;
   max-height:720px;
-  background:getColor(elephant);
+  background:linear-gradient(
+    to bottom right, 
+    map-get($colors, white) 0%, 
+    map-get($colors, white) 25%,
+    map-get($colors, alto) 100%
+  );
 
   &__modules,
   &__output { 
-    flex:0 0 45%;
-  }
-
-  &__modules {
-    display:none;
-
-    @include break {
-      display:flex;
-      align-items:center;
-      justify-content: flex-end;
-
-      img {
-        margin-right:10%;
-        width:40%;
-        max-width:400px;
-      }
-    }
+    flex:0 0 43.25%;
   }
 
   &__icon {
     display:flex;
     flex:1 1 auto;
     align-items:center;
+    justify-content:center;
+  }
+    
+  &__cube {
+    margin-right:-1.25em;
+  }
 
-    img { width:100%; }
+  &__modules {
+    display:none;
+
+    @include break {
+      display:block;
+    }
   }
 
   &__output {
@@ -43,13 +44,25 @@
 
     @include break {
       display:flex;
-      align-items:center;
+      flex-wrap:wrap;
+      align-content:center;
+      justify-content:center;
     }
   }
 
-  &__files {
-    width:40%;
-    max-width:400px;
-    margin-left:10%;
+  &__headline {
+    position:absolute;
+    display:block;
+    width:100%;
+    bottom:5%;
+    left:0;
+    padding:0 1em;
+    text-align:center;
+    font-size:getFontSize(2);
+    font-family:'Geomanist', 'Century Gothic', sans-serif;
+
+    @include break {
+      bottom:10%;
+    }
   }
 }

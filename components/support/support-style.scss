@@ -1,4 +1,4 @@
-@import 'functions';
+@import 'vars';
 
 .support {
   display: flex;
@@ -17,15 +17,16 @@
 
   &__button {
     display:inline-block;
-    padding:0.4em 1em;
-    border:2px solid getColor(denim);
-    color:getColor(denim);
+    padding:0.5em 1em;
+    text-transform:uppercase;
+    background:map-get($colors, denim);
+    color:map-get($colors, concrete);
     border-radius:1.25em;
     transition:all 250ms;
 
     &:hover {
-      background:getColor(denim);
-      color:getColor(white);
+      background:map-get($colors, emperor);
+      color:map-get($colors, white);
     }
   }
 }

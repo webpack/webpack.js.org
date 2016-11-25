@@ -20,7 +20,7 @@
     font-weight:400;
     line-height:1;
     margin:1.5em 0 0.25em;
-    color:getColor(mine-shaft);
+    color:map-get($colors, mine-shaft);
 
     &:first-child { margin-top:0; }
     tt, code { font-size:inherit; }
@@ -40,7 +40,7 @@
 
   hr {
     border:none;
-    background-color:getColor(alto);
+    background-color:map-get($colors, alto);
     height:3px;
     margin:2em 0;
   }
@@ -76,7 +76,7 @@
   blockquote {
     border-left: 4px solid #dddddd;
     padding:0.75em 1em;
-    color:getColor(dove-grey);
+    color:map-get($colors, dove-grey);
 
     > :first-child { margin-top: 0; }
     > :last-child { margin-bottom: 0; }
@@ -86,28 +86,27 @@
     &.todo {
       border-left:none;
       border-radius: 3px;
+      color:map-get($colors, mine-shaft);
 
-      .tip-content {
-        font-style: italic;
+      .tip-icon {
+        margin-right:0.5em;
+      }
+
+      .tip-title {
+        font-size:0.8em;
+        font-weight:600;
+        margin-bottom:0.5em;
+        text-transform:uppercase;
       }
 
       code {
-        color: inherit;
+        background-color:transparentize(map-get($colors, alto), 0.5);
       }
     }
 
-    &.tip {
-      background-color: #DCF2FD;
-      color: #618ca0;
-    }
-    &.warning {
-      background-color: #fbedb7;
-      color: #8c8466;
-    }
-    &.todo {
-      background-color: #fbddcd;
-      color: #907a6e;
-    }
+    &.tip { background-color:transparentize(#1abc9c, 0.8); }
+    &.warning { background-color:transparentize(#f1c40f, 0.8); }
+    &.todo { background-color:transparentize(#e74c3c, 0.8); }
   }
 
   table {
@@ -156,22 +155,22 @@
   }
 
   b, strong {
+    color:map-get($colors, mine-shaft);
     font-weight:600;
   }
 
   code, tt {
     font-family:'Ubuntu Mono', monospace;
     margin: 0 2px;
-    padding: 2px 6px;
+    padding: 0 5px;
     white-space: nowrap;
-    background-color: transparentize(getColor(fiord), 0.94);
+    border: 1px solid #eaeaea;
+    background-color: #f8f8f8;
     border-radius: 3px;
-    text-shadow: 0 1px 0 transparentize(getColor(white), 0.5);
-    color: getColor(elephant);
   }
 
   pre {
-    background-color:getColor(mine-shaft);
+    background-color:map-get($colors, mine-shaft);
     font-size: 13px;
     line-height: 19px;
     overflow: auto;
@@ -183,9 +182,8 @@
       padding: 0;
       white-space: pre;
       border: none;
-      color:getColor(concrete);
+      color:map-get($colors, concrete);
       background: transparent;
-      text-shadow: none;
 
       .code-details-summary-span {
         margin-left: -15px;

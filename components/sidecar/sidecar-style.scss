@@ -1,4 +1,4 @@
-@import 'functions';
+@import 'vars';
 @import 'mixins';
 
 .sidecar {
@@ -18,11 +18,11 @@
   padding: 0.75em;
   float: right;
   clear: both;
-  color: getColor(alto);
+  color: map-get($colors, alto);
   transition: all 250ms;
 
   &:hover {
-    color: getColor(white);
+    color: map-get($colors, white);
   }
 }
 
@@ -39,7 +39,6 @@
 .sidecar__icon {
   display: inline-block;
   width: 16px;
-  vertical-align: middle;
 }
 
 // TODO: Fix hardcoded widths using flex perhaps, can't animate to width auto

@@ -1,3 +1,4 @@
+@import 'vars';
 @import 'mixins';
 @import 'functions';
 
@@ -12,7 +13,7 @@
   justify-content: space-between;
   align-content: center;
   padding: 0.4em 0;
-  border-top:1px solid getColor(concrete);
+  border-top:1px solid map-get($colors, concrete);
 
   @include break {
     flex-direction: initial;
@@ -67,13 +68,13 @@
 .footer__link {
   font-size: getFontSize(-2);
   text-transform: uppercase;
-  color: getColor(dusty-grey);
+  color: map-get($colors, dusty-grey);
 
   &:not(:last-child) {
     margin-right: 1.5em;
   }
 
   &:hover {
-    color: getColor(mine-shaft);
+    color: map-get($colors, mine-shaft);
   }
 }

@@ -14,6 +14,12 @@ export default ({number, type}) => {
             alt={ `${type} avatar` } />
         </a>
       )}
+
+      <div className="support__bottom">
+        <a className="support__button" href="https://opencollective.com/webpack#support">
+          Become a { type }
+        </a>
+      </div>
     </div>
   );
 };

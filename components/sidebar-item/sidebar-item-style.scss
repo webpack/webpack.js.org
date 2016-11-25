@@ -1,3 +1,4 @@
+@import 'vars';
 @import 'mixins';
 @import 'functions';
 
@@ -11,7 +12,7 @@
     color: inherit;
 
     &:hover {
-      color: lighten(getColor(denim), 5%);
+      color: map-get($colors, tussock);
     }
   }
 
@@ -19,11 +20,11 @@
     float: right;
     line-height: 1.5;
     cursor: pointer;
-    color: getColor(dusty-grey);
+    color: map-get($colors, dusty-grey);
     transition: color 250ms;
 
     &:hover {
-      color: getColor(mine-shaft);
+      color: map-get($colors, mine-shaft);
     }
   }
 
@@ -32,10 +33,6 @@
     list-style: none;
     padding: 0;
     margin: 0.5em 0 1em;
-  }
-
-  &__version {
-    margin-bottom: 10px;
   }
 
   &__anchor {
@@ -47,10 +44,10 @@
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      color: getColor(dusty-grey);
+      color: map-get($colors, dusty-grey);
 
       &:hover {
-        color: getColor(mine-shaft);
+        color: map-get($colors, mine-shaft);
       }
     }
   }
@@ -61,7 +58,7 @@
     }
 
     .sidebar-item__title {
-      color: lighten(getColor(denim), 5%);
+      color: #c0903f;
     }
 
     .sidebar-item__toggle {

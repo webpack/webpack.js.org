@@ -8,7 +8,7 @@ import {
   vote as devVote
 } from "./api.dev";
 
-const API_URL = "https://oswils44oj.execute-api.us-east-1.amazonaws.com/production/";
+const API_URL = "https://ipttmcpme6.execute-api.us-east-1.amazonaws.com/production";
 const GITHUB_CLIENT_ID = "4d355e2799cb8926c665";
 const PRODUCTION_HOST = "webpack.js.org";
 
