@@ -27,4 +27,4 @@ Tells webpack which environment the application is targeting. The following valu
 |`web`| Compile for usage in a browser-like environment **(default)** |
 |`webworker`| Compile as WebWorker |
 
-For example, when set the `target` to `"electron"`, webpack includes multiple electron specific variables. For more information on which templates and externals are used, you can refer to webpack's [source code](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js#L70-L185).
+For example, when the `target` is set to `"electron"`, webpack includes multiple electron specific variables. For more information on which templates and externals are used, you can refer to webpack's [source code](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js#L70-L185).
