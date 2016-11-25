@@ -19,7 +19,7 @@ export default props => {
       </Link>
       <Link className="sidecar__link sidecar__link--so" to="//stackoverflow.com/questions/tagged/webpack">
         <span className="sidecar__label">Stack Overflow</span>
-        <i className="sidecar__icon icon-stack-overflow" />
+        <i className="sidecar__icon icon-stack-exchange" />
       </Link>
     </aside>
   );

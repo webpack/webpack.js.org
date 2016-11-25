@@ -1,28 +1,47 @@
-@import 'vars';
 @import 'functions';
 @import 'mixins';
 
 .sidebar-mobile {
   position: fixed;
-  width: 280px;
+  width: 295px;
   height: 100vh;
   z-index: 100;
   top: 0;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  background: map-get($colors, white);
   transform: translate3D(-100%, 0, 0);
+  transform: translate3D(calc(-100% + 5px), 0, 0);
   transition: all 500ms;
 
   @include break {
     display: none;
   }
-
+  
   &--visible {
     transform: translate3D(0, 0, 0);
-    box-shadow: 0 0 5px map-get($colors, emperor);
   }
+
+  &.no-delay{
+    transition-duration: 0ms;
+  }
+}
+
+.sidebar-mobile__toggle {
+  position: absolute;
+  top: 45px;
+  bottom: 0;
+  width: 32px;
+  left: 285px;
+}
+
+.sidebar-mobile__content {
+  position: relative;
+  width: 285px;
+  height: 100vh;
+  overflow-x: hidden;
+  background: getColor(white);
+  box-shadow: 0 0 5px getColor(emperor);
 }
 
 .sidebar-mobile__close {
@@ -31,31 +50,40 @@
   top:19px;
   font-size:1.5em;
   cursor:pointer;
-  color:map-get($colors, dusty-grey);
+  color:getColor(dusty-grey);
   transition:color 250ms;
 
   &:hover {
-    color:map-get($colors, mine-shaft);
+    color:getColor(mine-shaft);
   }
 }
 
 .sidebar-mobile__section {
   font-size: getFontSize(1);
   text-transform: uppercase;
-  color: map-get($colors, mine-shaft);
+  color: getColor(mine-shaft);
   margin: 1em 16px 0.25em;
+
+  &--block {
+    display: block;
+  }
+
+  &:active,
+  &--active {
+    color: getColor(malibu);
+  }
 }
 
 .sidebar-mobile__page {
   display: block;
   padding: 0.5em 17px;
   text-transform: capitalize;
-  color: map-get($colors, dusty-grey);
+  color: getColor(dusty-grey);
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 
   &:active,
   &--active {
-    color: map-get($colors, mine-shaft);
-    background: map-get($colors, alto);
+    color: getColor(mine-shaft);
+    background: getColor(alto);
   }
 }

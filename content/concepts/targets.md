@@ -17,27 +17,13 @@ W> webpack `target` 属性不要和 `output.libraryTarget` 属性混淆。有关
 **webpack.config.js**
 
 ```javascript
-const config = {
+module.exports = {
   target: 'node'
 };
-
-module.exports = config;
 ```
 
-## 选项
-
-以下是可以传递给 `target` 属性的值的列表。
-
-* `"async-node"` Compile for usage in a Node.js-like environment (use `fs` and `vm` to load chunks async)
-* `"electron-main"` Compile for electron renderer process, provide a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environment and `NodeTargetPlugin` and `ExternalsPlugin` for commonjs and electron bulit-in modules. *Note: need `webpack` >= 1.12.15.
-* `"node"` Compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks)
-* `"node-webkit"` Compile for usage in webkit, uses jsonp chunk loading but also supports build in Node.js modules plus require("nw.gui") (experimental)
-* `"web"` Compile for usage in a browser-like environment (default)
-* `"webworker"` Compile as WebWorker
-
-每个_target_都有各种部署/环境特定的附加项，以支持满足其需求。
-
-例如，当你的使用 _target_ 是 `electron-main`，*webpack* 包含多个 `electron-main` 特定的变量。有关使用哪些模板和 _externals_ 的更多信息，您可以直接参考 [webpack 源码](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js#L70-L185)。
+每个_目标_都有各种部署/环境特定的附加项，以支持满足其需求。查看[可用目标](/configuration/target)。
+Each _target_ has a variety of deployment/environment specific additions, support to fit its needs. See what [targets are available](/configuration/target).
 
 ?> We should expand on this further. What specifically is included.
 

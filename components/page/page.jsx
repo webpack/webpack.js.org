@@ -2,6 +2,7 @@ import React from 'react';
 import Interactive from 'antwar-interactive';
 import Container from '../container/container';
 import Sidebar from '../sidebar/sidebar';
+import Sidecar from '../sidecar/sidecar';
 import Contributors from '../contributors/contributors';
 import '../../styles';
 import './page-style';
@@ -11,6 +12,7 @@ export default ({ section, page }) => {
 
   return (
     <Container className="page">
+      <Sidecar />
       <Interactive
         id="components/sidebar/sidebar.jsx"
         component={Sidebar}

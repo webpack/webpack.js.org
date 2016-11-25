@@ -5,6 +5,7 @@ contributors:
   - sokra
   - jhnns
   - grgur
+  - domfarolino
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -281,7 +282,7 @@ require.ensure([], function(require) {
 
 ### Dynamic expressions
 
-It's possible to pass an partial expression to `System.import`. This is handled similar to expressions in CommonJS (webpack creates a [context](https://webpack.github.io/docs/context.html) with all possible files).
+It's possible to pass a partial expression to `System.import`. This is handled similar to expressions in CommonJS (webpack creates a [context](https://webpack.github.io/docs/context.html) with all possible files).
 
 `System.import` creates a separate chunk for each possible module.
 

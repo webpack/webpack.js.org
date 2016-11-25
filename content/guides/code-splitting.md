@@ -5,7 +5,7 @@ contributors:
   - pksjce
 ---
 
-Code splitting is the most compelling feature for  `webpack` usage. You can split your code into various bundles and load them on demand with`webpack`. It allows to tweak an application for these optimisations using the configuration.
+Code splitting is the most compelling feature for  `webpack` usage. You can split your code into various bundles and load them on demand with `webpack`. It allows to tweak an application for these optimisations using the configuration.
 You can load them at a later time in your code or in a specific route only or on an event from the user even.
 
 There are mainly two kind of code-splits that need to be accomplished with `webpack`

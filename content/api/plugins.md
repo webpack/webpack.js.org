@@ -1,6 +1,6 @@
 ---
 title: 插件 API
-sort: 5
+sort: 4
 ---
 
 > TODO

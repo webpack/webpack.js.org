@@ -13,7 +13,7 @@ contributors:
 
 `RegExp | [RegExp]`
 
-防止 webpack 解析那些任何与给定正则表达式相匹配的文件。忽略的文件**不应该有**调用 `import`, `require`, `define`  或者任何其他导入机制。忽略大型库文件(library)可以提高构建性能……
+防止 webpack 解析那些任何与给定正则表达式相匹配的文件。忽略的文件**不应该被** `import`, `require`, `define`  或者任何其他导入机制调用。忽略大型库文件(library)可以提高构建性能。
 
 ```js
 noParse: /jquery|backbone/
@@ -26,35 +26,33 @@ noParse: /jquery|backbone/
 创建模块时，匹配请求的[规则](#rule)数组。这些规则能够修改模块的创建方式。这些规则能够对模块(module)应用加载器(loader)，或者修改解析器(parser)。
 
 
-## `Rule`
+## Rule
 
-每个规则可以分为三部分：条件(condition)，结果(result)和嵌套规则(nested rule)。
+每个规则可以分为三部分 - 条件(condition)，结果(result)和嵌套规则(nested rule)。
 
-### `Rule` 条件
+### Rule 条件
 
 条件有两种输入值：
 
-resource：请求文件的绝对路径。它已经根据 [`resolve` 规则](/configuration/resolve)解析。
+1. resource：请求文件的绝对路径。它已经根据 [`resolve` 规则](/configuration/resolve)解析。
 
-The issuer: 被请求资源(requested the resource)的模块文件的绝对路径。是导入时的位置。
+2. issuer: 被请求资源(requested the resource)的模块文件的绝对路径。是导入时的位置。
 
-**例如:** 从 `app.js` `导入 "./style.css"`:
-
-resource 是 `/path/to/style.css`. issuer 是 `/path/to/app.js`。
+**例如:** 从 `app.js` `导入 "./style.css"`，resource 是 `/path/to/style.css`. issuer 是 `/path/to/app.js`。
 
 在规则中，属性 [`test`](#rule-test), [`include`](#rule-include), [`exclude`](#rule-exclude) 和 [`resource`](#rule-resource) 对 resource 匹配，并且属性 [`issuer`](#rule-issuer) 对 issuer 匹配。
 
 当使用多个条件时，所有条件都匹配。
 
-### `Rule` 结果
+### Rule 结果
 
 规则结果只在规则条件匹配时使用。
 
 规则有两种输入值：
 
-应用的 loader：应用在 resource 上的 loader 数组。分为前置的，后置的，普通的 loader。
+1. 应用的 loader：应用在 resource 上的 loader 数组。
 
-parser 选项：用于为模块创建解析器的选项对象。
+2. Parser 选项：用于为模块创建解析器的选项对象。
 
 这些属性会影响 loader：[`loader`](#rule-loader), [`options`](#rule-options-rule-query), [`use`](#rule-use)。
 
@@ -65,16 +63,15 @@ parser 选项：用于为模块创建解析器的选项对象。
 [`parser`](#rule-parser) 属性会影响 parser 选项。
 
 
-## `Rule` 嵌套规则
+## 嵌套的 Rule
 
-使用属性 [`rules`](#rule-rules) 和 [`oneOf`](#rule-oneof) 可以指定嵌套规则。
+可以使用属性 [`rules`](#rule-rules) 和 [`oneOf`](#rule-oneof) 指定嵌套规则。
 
-嵌套规则(nested rule)在当规则条件(rule condition)匹配时使用。
-
+这些规则用于在规则条件(rule condition)匹配时进行取值。
 
 ## `Rule.enforce`
 
-可以是 `"pre"`, `"post"` 或没有值三种之一。
+可能的值有：`"pre" | "post"`
 
 指定 loader 种类。没有值表示是普通 loader。
 

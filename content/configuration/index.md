@@ -8,7 +8,7 @@ contributors:
   - dear-lizhihua
 ---
 
-Webpack 是需要传入一个配置对象。取决于你如何使用 webpack，可以通过两种方式之一：终端或Node.js。下面指定了所有可用的配置选项。
+Webpack 是需要传入一个配置对象。取决于你如何使用 webpack，可以通过两种方式之一：终端或 Node.js。下面指定了所有可用的配置选项。
 
 T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs.org/api/path.html)。这可以防止操作系统的文件路径问题。更多相关请查看[此章节](https://nodejs.org/api/path.html#path_windows_vs_posix)。
 

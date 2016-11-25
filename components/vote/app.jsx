@@ -1,8 +1,11 @@
 import React from 'react';
+import 'whatwg-fetch';
 import SidebarItem from '../sidebar-item/sidebar-item';
 import * as api from "./api";
 import './app-style';
-import VoteSlider from './slider/slider';
+import './influence-style';
+import VoteButton from './button/button';
+import Influence from './influence.jsx';
 
 function updateByProperty(array, property, propertyValue, update) {
   return array.map(item => {
@@ -26,7 +29,7 @@ export default class VoteApp extends React.Component {
   }
 
   isBrowserSupported() {
-    return typeof localStorage === 'object' && typeof fetch === 'function';
+    return typeof localStorage === 'object';
   }
 
   componentDidMount() {
@@ -65,14 +68,14 @@ export default class VoteApp extends React.Component {
       this.setState({
         isFetchingSelf: true
       });
-      api.getSelf(voteAppToken).then(result => {
-        this.setState({
-          selfInfo: result,
-          isFetchingSelf: false
-        });
-      }).catch(e => {
+      api.getSelf(voteAppToken).catch(e => {
         this.setState({
           selfInfo: null,
+          isFetchingSelf: false
+        });
+      }).then(result => {
+        this.setState({
+          selfInfo: result,
           isFetchingSelf: false
         });
       });
@@ -85,14 +88,14 @@ export default class VoteApp extends React.Component {
     this.setState({
       isFetchingList: true
     });
-    api.getList(voteAppToken, name).then(result => {
-      this.setState({
-        listInfo: result,
-        isFetchingList: false
-      });
-    }).catch(e => {
+    api.getList(voteAppToken, name).catch(e => {
       this.setState({
         listInfo: null,
+        isFetchingList: false
+      });
+    }).then(result => {
+      this.setState({
+        listInfo: result,
         isFetchingList: false
       });
     });
@@ -114,7 +117,7 @@ export default class VoteApp extends React.Component {
             ...vote,
             votes: vote.votes + diffValue
           })),
-          score: item.score + score
+          score: item.score + score * diffValue
         }))
       },
       selfInfo: selfInfo && {
@@ -176,6 +179,15 @@ export default class VoteApp extends React.Component {
 
     return (
       <div className="vote-app">
+        <div className="vote-app__influence">
+          <div className="vote-app__influence-descriptions">  
+            <Influence className="vote-app__influence-section" type="normal"/>
+            <Influence className="vote-app__influence-section" type="golden"/>
+          </div>
+          <div className="vote-app__influence-disclaimer">
+            DISCLAIMER: Since this feature is its Alpha stages, the formula for calculating influence may change.
+          </div>
+        </div>
         {this.renderSelf()}
         { listInfo && <div>
           <button className="vote-app__update-button" disabled={inProgress} onClick={() => {
@@ -186,44 +198,37 @@ export default class VoteApp extends React.Component {
           <div>{listInfo.description}</div>
           <ul className="vote-app__items-list">
             { listInfo.items.map(item => <li key={item.id}>
-              <span className="vote-app__item-title">{item.title}</span>
-              <span>{item.description}</span><br />
-              <ul className="vote-app__vote-list">
-                {listInfo.possibleVotes.map((voteSettings, idx) => {
-                  let vote = item.votes[idx];
-                  let userVote = item.userVotes && item.userVotes[idx];
-                  let currencyInfo = selfInfo && voteSettings.currency && this.findByName(selfInfo.currencies, voteSettings.currency);
-                  let maximum = voteSettings.maximum || 1000; // infinity
-                  let minimum = voteSettings.minimum || 0;
-                  let value = (userVote && userVote.votes) ? userVote.votes: 0;
-                  if(currencyInfo && currencyInfo.remaining + value < maximum) maximum = currencyInfo.remaining + value;
-                  let visibleMaxValue = voteSettings.maximum || (maxVoteInfo[idx] + currencyInfo.remaining);
-
-                  return <li className={"vote-app__vote-" + voteSettings.name} key={voteSettings.name} title={userVote ? "You voted " + userVote.votes + "." : "Login to see your votes."}>
-                    <div className="vote-app__vote-value">
-                      {vote.votes > 0 && voteSettings.minimum < 0 ? "+" + vote.votes : vote.votes}
-                      {userVote && userVote.votes ? " (You: " + (userVote.votes > 0 && voteSettings.minimum < 0 ? "+" + userVote.votes : userVote.votes) + ")" : ""}
-                    </div>
-                    { selfInfo &&
-                      <VoteSlider minValue={minimum} maxValue={maximum} visibleMaxValue={visibleMaxValue} 
-                                  value={value} step={this.getStep(visibleMaxValue)} color={this.getColor(voteSettings.name)}
-                                  valueChanged={(v) => {
-                                    let diff = v;
-
-                                    if((userVote && userVote.votes)) {
-                                      diff = v - userVote.votes;
-                                    }
-
-                                    this.vote(item.id, voteSettings.name, diff, voteSettings.currency, voteSettings.score * diff);
-                                  }}
-                      />
-                    }
-                  </li>;
-                })}
-                <li className="vote-app__vote-score" key="score">
-                  Score {item.score}
-                </li>
-              </ul>
+              <table className="vote-app__item-table">
+                <tbody>
+                  <tr>
+                    <td className="vote-app__item-score">
+                      {item.score}
+                    </td>
+                    {listInfo.possibleVotes.map((voteSettings, idx) => {
+                      let vote = item.votes[idx];
+                      let userVote = item.userVotes && item.userVotes[idx];
+                      let currencyInfo = selfInfo && voteSettings.currency && this.findByName(selfInfo.currencies, voteSettings.currency);
+                      let maximum = voteSettings.maximum || 1000; // infinity
+                      let minimum = voteSettings.minimum || 0;
+                      let value = (userVote && userVote.votes) ? userVote.votes: 0;
+                      if(currencyInfo && currencyInfo.remaining + value < maximum) maximum = currencyInfo.remaining + value;
+                      return <td>
+                        <VoteButton 
+                          className={"vote-app__vote-" + voteSettings.name}
+                          value={vote.votes} myValue={value}
+                          maxUp={userVote ? maximum - value : 0} maxDown={userVote ? value - minimum : 0} 
+                          color={this.getColor(voteSettings.name)} onVote={(diffValue) => {
+                            this.vote(item.id, voteSettings.name, diffValue, voteSettings.currency, voteSettings.score);
+                          }} />
+                      </td>;
+                    })}
+                    <td className="vote-app__item-content">
+                      <span className="vote-app__item-title">{item.title}</span>
+                      <span>{item.description}</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </li>)}
             { listInfo.isAdmin && <li className="vote-app__admin">
               <div><input type="text" value={this.state.newTitle} disabled={inProgress} onChange={e => this.setState({newTitle: e.target.value})} /></div>
@@ -258,7 +263,7 @@ export default class VoteApp extends React.Component {
   }
 
   renderSelf() {
-    let { selfInfo, isFetchingSelf } = this.state;
+    let { listInfo, selfInfo, isFetchingSelf } = this.state;
     if(!selfInfo) {
       if(isFetchingSelf) {
         return <div className="vote-app__self-info">Loading user info...</div>;
@@ -272,11 +277,13 @@ export default class VoteApp extends React.Component {
           delete window.localStorage.voteAppToken;
           window.location.reload();
         }}>Log out</button>
-        <ul className="vote-app__currency-list">
-          { selfInfo.currencies.map(currency => <li className={"vote-app__currency-" + currency.name} title={`${currency.description}\nYou used ${currency.used} of a total of ${currency.value} ${currency.displayName}.`}>
+        { listInfo && <ul className="vote-app__currency-list">
+          { selfInfo.currencies
+            .filter(currency => listInfo.possibleVotes.some(voteSettings => voteSettings.currency === currency.name))
+            .map(currency => <li className={"vote-app__currency-" + currency.name} title={`${currency.description}\nYou used ${currency.used} of a total of ${currency.value} ${currency.displayName}.`}>
             {currency.remaining} {currency.displayName}
           </li>) }
-        </ul>
+        </ul> }
       </div>;
     }
   }
