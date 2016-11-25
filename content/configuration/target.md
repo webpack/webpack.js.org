@@ -19,12 +19,12 @@ Tells webpack which environment the application is targeting. The following valu
 
 | `target`      | Description            |
 | ------------- |------------------------|
-| `"async-node"`| Compile for usage in a Node.js-like environment (uses `fs` and `vm` to load chunks asynchronously)    |
-| `"electron"`      | Compile for [Electron](http://electron.atom.io/) renderer process, provide a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJs and Electron built-in modules. |
-| `"electron-renderer"` | Compile for [Electron](http://electron.atom.io/) for `renderer-process` |
+| `async-node`| Compile for usage in a Node.js-like environment (uses `fs` and `vm` to load chunks asynchronously)    |
+| `electron`      | Compile for [Electron](http://electron.atom.io/) renderer process, provide a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJs and Electron built-in modules. |
+| `electron-renderer` | Compile for [Electron](http://electron.atom.io/) for `renderer-process` |
 | `"node"` | Compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks) |
-|`"node-webkit"`|  Compile for usage in WebKit and uses JSONP for chunk loading. Allows importing of built-in Node.js modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental) |
-|`"web"`| Compile for usage in a browser-like environment **(default)** |
-|`"webworker"`| Compile as WebWorker |
+|`node-webkit`|  Compile for usage in WebKit and uses JSONP for chunk loading. Allows importing of built-in Node.js modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental) |
+|`web`| Compile for usage in a browser-like environment **(default)** |
+|`webworker`| Compile as WebWorker |
 
 For example, when set the `target` to `"electron"`, webpack includes multiple electron specific variables. For more information on which templates and externals are used, you can refer to webpack's [source code](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js#L70-L185).
