@@ -1,5 +1,5 @@
 ---
-title: Installation
+title: 安装
 sort: 1
 contributors:
   - pksjce

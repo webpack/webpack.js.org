@@ -32,7 +32,7 @@ ConsoleLogOnBuildWebpackPlugin.prototype.apply = function(compiler) {
 };
 ```
 
-T> As clever JavaScript developer you may remember the `Function.prototype.apply` method. Because of this method you can pass any function as plugin (`this` will point to the `compiler`). You can use this style to inline custom plugins in your configuration.
+T> 聪明的 JavaScript 开发者，你可能还记得 `Function.prototype.apply` 方法。通过这个方法你可以把任意函数作为插件传递（`this` 将指向 `compiler`）。你可以在你的配置中使用内联样式的自定义插件。
 
 ## 用法
 

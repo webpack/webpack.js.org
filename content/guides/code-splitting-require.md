@@ -1,5 +1,5 @@
 ---
-title: Code Splitting - Using Require
+title: 代码分割 - 使用 Require
 sort: 5
 contributors:
   - pksjce

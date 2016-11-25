@@ -8,25 +8,25 @@ import './search-style';
 // TODO: Maybe by updating the routing scheme later on we can avoid hardcoding this?
 let Sections = [
   {
-    title: 'Concepts',
+    title: '概念',
     url: 'concepts'
   },
   {
-    title: 'Guides',
+    title: '指南',
     url: 'guides'
   },
   {
-    title: 'Documentation',
+    title: '文档',
     url: 'configuration',
     children: [
       { title: 'API', url: 'api' },
-      { title: 'Configuration', url: 'configuration' },
-      { title: 'Loaders', url: 'loaders' },
-      { title: 'Plugins', url: 'plugins' }
+      { title: '配置', url: 'configuration' },
+      { title: '加载器', url: 'loaders' },
+      { title: '插件', url: 'plugins' }
     ]
   },
   {
-    title: 'Donate',
+    title: '捐助',
     url: '//opencollective.com/webpack'
   }
 ];
