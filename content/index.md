@@ -1,3 +1,6 @@
+---
+title: Webpack
+---
 ## Write your code.
 
 **app.js**
@@ -43,5 +46,5 @@ module.exports = {
 </html>
 ```
 
-## It's that simple. 
+## It's that simple.
 ## [Get Started](/get-started)
