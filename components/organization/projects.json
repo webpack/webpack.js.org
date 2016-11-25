@@ -1,0 +1,244 @@
+
+[
+	{
+		"repo": "webpack/memory-fs",
+		"npm": "memory-fs",
+		"maintainer": "sokra"
+	},
+	{
+		"repo": "webpack/webpack",
+		"npm": "webpack",
+		"maintainer": "sokra"
+	},
+	{
+		"repo": "webpack/loader-utils",
+		"npm": "loader-utils",
+		"maintainer": "sokra"
+	},
+	{
+		"repo": "webpack/source-list-map",
+		"npm": "source-list-map",
+		"maintainer": "sokra"
+	},
+	{
+		"repo": "webpack/enhanced-resolve",
+		"npm": "enhanced-resolve",
+		"maintainer": "sokra"
+	},
+	{
+		"repo": "webpack/tapable",
+		"npm": "tapable",
+		"maintainer": "sokra"
+	},
+	{
+		"repo": "webpack/watchpack",
+		"npm": "watchpack",
+		"maintainer": "sokra"
+	},
+	{
+		"repo": "webpack/node-libs-browser",
+		"npm": "node-libs-browser",
+		"maintainer": ""
+	},
+	{
+		"repo": "webpack/webpack-dev-server",
+		"npm": "webpack-dev-server",
+		"maintainer": "Spacek33z"
+	},
+	{
+		"repo": "webpack/file-loader",
+		"npm": "file-loader",
+		"maintainer": "sokra"
+	},
+	{
+		"repo": "webpack/style-loader",
+		"npm": "style-loader",
+		"maintainer": "sokra"
+	},
+	{
+		"repo": "webpack/css-loader",
+		"npm": "css-loader",
+		"maintainer": "sokra"
+	},
+	{
+		"repo": "webpack/webpack-dev-middleware",
+		"npm": "webpack-dev-middleware",
+		"maintainer": "Spacek33z"
+	},
+	{
+		"repo": "webpack/fastparse",
+		"npm": "fastparse",
+		"maintainer": "sokra"
+	},
+	{
+		"repo": "webpack/json-loader",
+		"npm": "json-loader",
+		"maintainer": ""
+	},
+	{
+		"repo": "webpack/url-loader",
+		"npm": "url-loader",
+		"maintainer": ""
+	},
+	{
+		"repo": "webpack/webpack-sources",
+		"npm": "webpack-sources",
+		"maintainer": ""
+	},
+	{
+		"repo": "webpack/extract-text-webpack-plugin",
+		"npm": "extract-text-webpack-plugin",
+		"maintainer": ""
+	},
+	{
+		"repo": "jtangelder/sass-loader",
+		"npm": "sass-loader",
+		"maintainer": "jhnns"
+	},
+	{
+		"repo": "webpack/karma-webpack",
+		"npm": "karma-webpack",
+		"maintainer": "MikaAK"
+	},
+	{
+		"repo": "webpack/imports-loader",
+		"npm": "imports-loader",
+		"maintainer": ""
+	},
+	{
+		"repo": "webpack/raw-loader",
+		"npm": "raw-loader",
+		"maintainer": ""
+	},
+	{
+		"repo": "webpack/exports-loader",
+		"npm": "exports-loader",
+		"maintainer": ""
+	},
+	{
+		"repo": "webpack/less-loader",
+		"npm": "less-loader",
+		"maintainer": ""
+	},
+	{
+		"repo": "webpack/expose-loader",
+		"npm": "expose-loader",
+		"maintainer": ""
+	},
+	{
+		"repo": "webpack/html-loader",
+		"npm": "html-loader",
+		"maintainer": "hemanth"
+	},
+	{
+		"repo": "webpack/loader-runner",
+		"npm": "loader-runner",
+		"maintainer": ""
+	},
+	{
+		"repo": "webpack/script-loader",
+		"npm": "script-loader",
+		"maintainer": ""
+	},
+	{
+		"repo": "shama/webpack-stream",
+		"npm": "webpack-stream",
+		"maintainer": "shama"
+	},
+	{
+		"repo": "webpack/source-map-loader",
+		"npm": "source-map-loader",
+		"maintainer": ""
+	},
+	{
+		"repo": "webpack/null-loader",
+		"npm": "null-loader",
+		"maintainer": ""
+	},
+	{
+		"repo": "webpack/compression-webpack-plugin",
+		"npm": "compression-webpack-plugin",
+		"maintainer": "palmerj3"
+	},
+	{
+		"repo": "webpack/transform-loader",
+		"npm": "transform-loader",
+		"maintainer": "minwe"
+	},
+	{
+		"repo": "webpack/grunt-webpack",
+		"npm": "grunt-webpack",
+		"maintainer": "danez"
+	},
+	{
+		"repo": "webpack/jshint-loader",
+		"npm": "jshint-loader",
+		"maintainer": "kostasmanionis"
+	},
+	{
+		"repo": "webpack/bundle-loader",
+		"npm": "bundle-loader",
+		"maintainer": ""
+	},
+	{
+		"repo": "webpack/coffee-loader",
+		"npm": "coffee-loader",
+		"maintainer": ""
+	},
+	{
+		"repo": "webpack/worker-loader",
+		"npm": "worker-loader",
+		"maintainer": 
+	},
+	{
+		"repo": "webpack/mocha-loader",
+		"npm": "mocha-loader",
+		"maintainer": "tricoder42"
+	},
+	{
+		"repo": "webpack/react-proxy-loader",
+		"npm": "react-proxy-loader",
+		"maintainer": ""
+	},
+	{
+		"repo": "webpack/multi-loader",
+		"npm": "multi-loader",
+		"maintainer": ""
+	},
+	{
+		"repo": "webpack/val-loader",
+		"npm": "val-loader",
+		"maintainer": ""
+	},
+	{
+		"repo": "webpack/i18n-webpack-plugin",
+		"npm": "i18n-webpack-plugin",
+		"maintainer": "EcutDavid"
+	},
+	{
+		"repo": "webpack/json5-loader",
+		"npm": "json5-loader",
+		"maintainer": "gdi2290"
+	},
+	{
+		"repo": "webpack/node-loader",
+		"npm": "node-loader",
+		"maintainer": ""
+	},
+	{
+		"repo": "webpack/coverjs-loader",
+		"npm": "coverjs-loader",
+		"maintainer": ""
+	},
+	{
+		"repo": "webpack/coffee-redux-loader",
+		"npm": "coffee-redux-loader",
+		"maintainer": ""
+	},
+	{
+		"repo": "thelarkinn/angular2-template-loader",
+		"npm": "angular2-template-loader",
+		"maintainer": "thelarkinn"
+	}
+]
+	
