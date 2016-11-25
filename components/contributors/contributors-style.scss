@@ -18,7 +18,7 @@
     box-shadow: 0 0 2px rgba(0,0,0,0.3);
   }
 
-  .contributor-name {
+  .contributor__name {
     color: getColor(fiord);
     margin-top: -6px;
     box-shadow: 0 0 2px rgba(0,0,0,0.3);
@@ -30,7 +30,7 @@
   }
 
   &:hover {
-    .contributor-name {
+    .contributor__name {
       color: lighten(getColor(denim), 5%);
     }
   }

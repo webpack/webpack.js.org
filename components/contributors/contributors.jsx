@@ -17,7 +17,7 @@ export default ({contributors}) => {
               className="contributor"
               href={ `https://github.com/${contributor}` }>
               <img src={ `https://github.com/${contributor}.png?size=90` } />
-              <span className="contributor-name"> {contributor}</span>
+              <span className="contributor__name"> {contributor}</span>
             </a>
           ))
         }
