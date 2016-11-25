@@ -9,14 +9,15 @@ export default ({contributors}) => {
   return (
     <div className="contributors">
       <hr />
-      <h3>Contributors:</h3>
+      <h3>Contributors</h3>
       <div className="contributors__list">
         {
           (contributors).map((contributor) => (
             <a key={ contributor }
               className="contributor"
               href={ `https://github.com/${contributor}` }>
-              <img src={ `https://github.com/${contributor}.png?size=50` } />
+              <img src={ `https://github.com/${contributor}.png?size=90` } />
+              <span className="contributor-name"> {contributor}</span>
             </a>
           ))
         }
