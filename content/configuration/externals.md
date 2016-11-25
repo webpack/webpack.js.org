@@ -1,5 +1,5 @@
 ---
-title: 外部扩展(external)
+title: Externals
 sort: 13
 contributors:
   - sokra

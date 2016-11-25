@@ -1,5 +1,5 @@
 ---
-title: Plugins API
+title: 插件 API
 sort: 1
 ---
 

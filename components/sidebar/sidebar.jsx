@@ -8,7 +8,8 @@ export default props => {
   return (
     <nav className="sidebar">
       <div className="sidebar__inner">
-        <SidebarItem 
+        <h3 className="sidebar-item__version">Version 2.1</h3>
+        <SidebarItem
           url={ `/${sectionName}` } 
           title="介绍"
           currentPage= { currentPage }
