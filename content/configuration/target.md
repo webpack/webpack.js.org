@@ -17,7 +17,7 @@ webpack can compile for multiple environments or _targets_. To understand what a
 
 Tells webpack which environment the application is targeting. The following values are supported:
 
-| `target`      | Descriptions           |
+| `target`      | Description            |
 | ------------- |------------------------|
 | `"async-node"`| Compile for usage in a Node.js-like environment (uses `fs` and `vm` to load chunks asynchronously)    |
 | `"electron"`      | Compile for [Electron](http://electron.atom.io/) renderer process, provide a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJs and Electron built-in modules. |
