@@ -25,7 +25,7 @@ body {
 }
 
 a {
-  color: lighten(getColor(denim), 5%);
+  color: $text-color-highlight;
   text-decoration: none;
   transition: color 250ms;
 
@@ -37,7 +37,7 @@ a {
     color:lighten(getColor(dusty-grey), 10%);
 
     &:hover {
-      color: lighten(getColor(denim), 5%);
+      color: $text-color-highlight;
     }
   }
 
