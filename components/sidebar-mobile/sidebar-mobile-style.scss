@@ -3,7 +3,7 @@
 
 .sidebar-mobile {
   position: fixed;
-  width: 295px;
+  width: 300px;
   height: 100vh;
   z-index: 100;
   top: 0;
@@ -11,6 +11,7 @@
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   transform: translate3D(-100%, 0, 0);
+  transform: translate3D(calc(-100% + 5px), 0, 0);
   transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
 
   @include break {
@@ -48,7 +49,7 @@
   position:absolute;
   cursor:pointer;
   right: 22px;
-  top: 28px;
+  top: 22px;
   font-size: 1.3em;
   background: getColor(denim);
   color: getColor(white);
