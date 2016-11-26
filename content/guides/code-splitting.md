@@ -3,16 +3,35 @@ title: Code Splitting
 sort: 2
 contributors:
   - pksjce
+  - pastelsky
 ---
 
-Code splitting is the most compelling feature for  `webpack` usage. You can split your code into various bundles and load them on demand with `webpack`. It allows to tweak an application for these optimisations using the configuration.
-You can load them at a later time in your code or in a specific route only or on an event from the user even.
+Code splitting is one of the most compelling features of webpack. It allows you to split your code into various bundles which you can then load on demand — like when a user navigates to a matching route, or on an event from the user. This allows for smaller bundles, and allows you to control resource load prioritization, which if used correctly, can have a major impact on your application load time.
 
-There are mainly two kind of code-splits that need to be accomplished with `webpack`
+There are mainly two kinds of code splitting that can be accomplished with webpack:
+
+## Resource splitting for caching and parallel loads
+
+### Vendor code splitting
+
+A typical application can depend on many third party libraries for framework/functionality needs. Unlike the application code, code present in these libraries do not change very often. 
+
+If we keep code from these libraries onto its own bundle, separate from the application code, we can leverage browser's caching mechanism to cache these files for longer durations on the end user's machine. 
+
+For this to work, the `hash` portion in the vendor filename must remain constant, regardless of application code changes. Learn [how to split vendor/library](/guides/code-splitting-libraries) code using the CommonsChunkPlugin.
+
+### CSS splitting
+
+You might also want to split your styles into a separate bundle, independent from application logic. 
+This enhances cacheability of your styles and allows the browser to load the styles in-parallel with your application code, thus preventing a FOUC (flash of unstyled content).
+
+Learn [how to split css](/guides/code-splitting-css) using the `ExtractTextWebpackPlugin`.
 
 ## On demand code-splitting
 
-`webpack` can help us split our code into logical pieces or chunks as per our application routes or as per predicted user behaviour. This means that we can load non-essential assets when the user performs an action like route change and demands for it.
+While resource splitting of the previous kind requires the user to specify the split points upfront in the configuration, one can also create dynamic split points in the application code.
+
+This can be used for more granular chunking of code, for eg. as per our application routes or as per predicted user behaviour. This allows the user to load non-essential assets on demand.
 
 ### Code splitting with `require.ensure()`
 
@@ -21,15 +40,4 @@ Learn [how to split code](/guides/code-splitting-require) using `require.ensure(
 
 ?> Document `System.import()`
 
-## Resource splitting for cacheing and parallel loads
 
-### CSS splitting
-
-An application owner would want to split all the css into a separate bundle. This enhances cacheability of the resource bundle and also allows the browser to parallely load the bundle which makes for a solid performance improvement.
-Learn [how to split css](/guides/code-splitting-css) using the ExtractTextWebpackPlugin.
-
-### Vendor code splitting
-
-A typical application uses third party libraries for framework/functionality needs. Particular versions of these libraries are used and code here does not change often. However, the application code changes frequently. Bundling application code with third party code would be inefficient. This is because the browser can cache asset files based on the cache header. To take advantage of this, we want to keep the hash of the vendor files constant regardless of application code changes. We can do this only when we separate the bundles for vendor and application code.
-
-Learn [how to split vendor/library](/guides/code-splitting-libraries) code using the CommonsChunkPlugin.
