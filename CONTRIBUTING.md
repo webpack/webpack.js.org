@@ -14,6 +14,12 @@ From adding an issue for a documentation suggestion to creating a pull request: 
 * `npm start`
 * Visit [http://localhost:3000](http://localhost:3000) to preview your changes before making a pull request.
 
+## Contributor License Agreement
+
+When submitting your contribution, a CLA (Contributor License Agreement) bot will come by to verify that you signed the CLA. If it is your first time, it will link you to the right place to sign it. However, if you have committed your contributions using an email that is not the same as your email used on GitHub, the CLA bot can't accept your contribution.
+
+Run `git config user.email` to see your Git email, and verify it with [your GitHub email](https://github.com/settings/emails).
+
 ## Editor Config
 
 The [.editorconfig](https://github.com/webpack/webpack.js.org/blob/develop/.editorconfig) in the root should ensure consistent formatting. Please make sure you've [installed the plugin](http://editorconfig.org/#download) if your text editor needs one.
@@ -88,4 +94,4 @@ This will add your name and Github profile photo to the document in production. 
 
 ## Thank you
 
-Webpack is insanely feature rich and documentation is a huge time sink. We greatly appreciate any time spent fixing typos or clarifying sections in the documentation.
+webpack is insanely feature rich and documentation is a huge time sink. We greatly appreciate any time spent fixing typos or clarifying sections in the documentation.
