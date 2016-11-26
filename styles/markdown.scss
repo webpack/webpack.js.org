@@ -171,6 +171,10 @@
     color: getColor(elephant);
   }
 
+  a code {
+    color: $text-color-highlight;
+  }
+
   pre {
     background-color:getColor(mine-shaft);
     font-size: 13px;
