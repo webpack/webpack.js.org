@@ -54,7 +54,7 @@ const config = {
     path: './dist'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader'
