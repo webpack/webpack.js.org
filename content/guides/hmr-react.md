@@ -137,6 +137,8 @@ module.exports = {
 
 配置中的注释或许能够帮助你理解一二。有两个主要的部分值得一看： `devServer` 键和 `entry` 键。另外，`HotModuleReplacementPlugin` 是必须加到 `plugins` 数组中去的。
 
+这里特别要提一下下面的两个模块。在 `entry` 里的 `react-hot-loader`，是 React 配置 HMR 必不可少的模块。还有 `NamedModulesPlugin`，它的用处在于，能让你知道热重载时是哪个模块作出了变动。
+
 ### Code
 
 下面是和上面配置相关的代码：
