@@ -72,12 +72,19 @@ pre[class*="lang-"] {
   color: desaturate(#2dd271, 25%)
 }
 
+.token.inserted {
+  color: #9df29d;
+}
+
+.token.deleted {
+  color: #f79494;
+}
+
 .token.operator,
 .token.entity,
 .token.url,
 .language-css .token.string,
-.toke.variable,
-.token.inserted {
+.toke.variable {
   color: #a9becc;
 }
 
@@ -99,8 +106,4 @@ pre[class*="lang-"] {
 
 .token.entity {
   cursor: help;
-}
-
-.token.deleted {
-  color: red;
 }
