@@ -68,9 +68,11 @@ export default class SidebarMobile extends React.Component {
       let active = pathname === section.url || pathname.includes(`/${section.url}`),
           absoluteUrl = `/${section.url}`;
       return (
-        <div key={ absoluteUrl }>
-          <Link 
-            className={ `sidebar-mobile__section sidebar-mobile__section--block ${active ? 'sidebar-mobile__section--active' : ''}` } 
+        <div
+          className={ `sidebar-mobile__section ${active ? 'sidebar-mobile__section--active' : ''}` }
+          key={ absoluteUrl }>
+          <Link
+            className="sidebar-mobile__section-header"
             key={ absoluteUrl }
             to={ absoluteUrl }
             onClick={ this._close.bind(this) }>  
