@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/e9dbee3c91951dfe5ef0.css" rel="stylesheet">
+      <link href="/152bc62c34b5504f1bbd.css" rel="stylesheet">
     
     
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -21,7 +21,7 @@
 <span class="token comment" spellcheck="true">// =&gt; emits file.png as file in the output directory and returns the public url</span>
 <span class="token comment" spellcheck="true">// =&gt; returns i. e. &quot;/public-path/0dcbbaa701328a3c262cfd45869e351f.png&quot;</span>
 </code></pre>
-<p>By default the filename of the resulting file is the MD5 hash of the file&apos;s contents 
+<p>By default the filename of the resulting file is the MD5 hash of the file&apos;s contents
 with the original extension of the required resource.</p>
 <p>By default a file is emitted, however this can be disabled if required (e.g. for server
 side packages).</p>
@@ -30,11 +30,11 @@ side packages).</p>
 <span class="token comment" spellcheck="true">// =&gt; returns i. e. &quot;/public-path/0dcbbaa701328a3c262cfd45869e351f.png&quot;</span>
 </code></pre>
 <h2 class="header"><a class="anchor" href="#filename-templates" id="filename-templates"></a><span class="text">Filename templates</span><a class="icon-link" href="#filename-templates"></a></h2>
-<p>You can configure a custom filename template for your file using the query
-parameter <code>name</code>. For instance, to copy a file from your <code>context</code> directory
-into the output directory retaining the full directory structure, you might
-use <code>?name=[path][name].[ext]</code>.</p>
-<h3 class="header"><a class="anchor" href="#filename-template-placeholders" id="filename-template-placeholders"></a><span class="text">Filename template placeholders</span><a class="icon-link" href="#filename-template-placeholders"></a></h3>
+<p>You can configure a custom filename template for your file using the query parameter <code>name</code>. For instance, to copy a file from your <code>context</code> directory into the output directory retaining the full directory structure, you might use <code>?name=[path][name].[ext]</code>.</p>
+<p>By default, the path and name you specify will output the file in that same directory and will also use that same URL path to access the file.</p>
+<p>You can specify custom output and public paths by using the <code>outputPath</code> and <code>publicPath</code> query name parameters:</p>
+<pre><code>loader: <span class="token string">&quot;file-loader?name=[name].[ext]&amp;publicPath=assets/foo/&amp;outputPath=app/images/&quot;</span>
+</code></pre><h3 class="header"><a class="anchor" href="#filename-template-placeholders" id="filename-template-placeholders"></a><span class="text">Filename template placeholders</span><a class="icon-link" href="#filename-template-placeholders"></a></h3>
 <ul>
 <li><code>[ext]</code> the extension of the resource</li>
 <li><code>[name]</code> the basename of the resource</li>
