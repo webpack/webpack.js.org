@@ -25,7 +25,7 @@ const commonConfig = {
       },
       {
         test: /\.woff2?$/,
-        loaders: ['file-loader']
+        loaders: ['url-loader?prefix=font/&limit=50000&mimetype=application/font-woff']
       },
       {
         test: /\.jpg$/,
