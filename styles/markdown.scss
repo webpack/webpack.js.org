@@ -15,14 +15,14 @@
   h6 { font-size: getFontSize(-1); }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family:'Geomanist', 'Century Gothic', sans-serif;
-    font-weight:400;
+    font-family: $font-stack-heading;
+    font-weight:600;
     line-height:1;
     margin:1.5em 0 0.25em;
-    color:getColor(mine-shaft);
+    color:getColor(fiord);
 
     &:first-child { margin-top:0; }
-    tt, code { font-size:inherit; }
+    tt, code { font-size: 90%; color: inherit }
   }
 
   p, blockquote, table, pre {
@@ -159,13 +159,18 @@
   }
 
   code, tt {
-    font-family:'Ubuntu Mono', monospace;
+    font-family: $font-stack-code;
+    font-size: 90%;
     margin: 0 2px;
     padding: 2px 6px;
     white-space: nowrap;
     background-color: transparentize(getColor(fiord), 0.94);
     border-radius: 3px;
     text-shadow: 0 1px 0 transparentize(getColor(white), 0.4);
+  }
+
+  a code {
+    color: $text-color-highlight;
   }
 
   pre {

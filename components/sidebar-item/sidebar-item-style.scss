@@ -11,7 +11,7 @@
     color: inherit;
 
     &:hover {
-      color: lighten(getColor(denim), 5%);
+      color: $text-color-highlight;
     }
   }
 
@@ -61,7 +61,7 @@
     }
 
     .sidebar-item__title {
-      color: lighten(getColor(denim), 5%);
+      color: $text-color-highlight;
     }
 
     .sidebar-item__toggle {

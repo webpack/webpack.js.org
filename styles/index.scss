@@ -6,10 +6,10 @@
  */
 
 @import 'vars';
+@import 'fonts';
 @import 'functions';
 
 @import './reset';
-@import './fonts';
 
 * {
   box-sizing: inherit;
@@ -20,12 +20,12 @@ html {
 }
 
 body {
-  font: 400 getFontSize(0) 'Cabin', 'Century Gothic', sans-serif;
-  color: getColor(emperor);
+  font: 400 getFontSize(0) $font-stack-body;
+  color: getColor(elephant);
 }
 
 a {
-  color: lighten(getColor(denim), 5%);
+  color: $text-color-highlight;
   text-decoration: none;
   transition: color 250ms;
 
@@ -37,7 +37,7 @@ a {
     color:lighten(getColor(dusty-grey), 10%);
 
     &:hover {
-      color: lighten(getColor(denim), 5%);
+      color: $text-color-highlight;
     }
   }
 
