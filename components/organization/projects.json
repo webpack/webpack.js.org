@@ -188,7 +188,7 @@
 	{
 		"repo": "webpack/worker-loader",
 		"npm": "worker-loader",
-		"maintainer": 
+		"maintainer": ""
 	},
 	{
 		"repo": "webpack/mocha-loader",
