@@ -49,7 +49,7 @@ export default class NewButton extends Component {
       (<span className={className}>{myValue}</span>)
     </div>
   </div>): (<div className="vote-new-button" style={{color: color}}>
-    <div className="vote-new-button__value" title={value + " was voted in total by all users."}>
+    <div className="vote-new-button__logout-value" title={value + " was voted in total by all users."}>
       <span className={className}>{value}</span>
     </div>
   </div>);
