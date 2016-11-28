@@ -43,6 +43,10 @@ const commonConfig = {
       {
         test: /\.html$/,
         loaders: ['raw-loader']
+      },
+      {
+        test: /\.json$/,
+        loaders: ['json-loader']
       }
     ]
   },
