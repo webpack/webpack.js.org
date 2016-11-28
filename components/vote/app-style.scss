@@ -65,12 +65,34 @@
     }
   }
 
+  &__userinfo {
+    outline: none;
+    border: none;
+    background: getColor(elephant);
+    color: white;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 13px;
+    display: inline-block;
+    padding: 3px 10px;
+
+    img {
+      height: 25px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+  }
+
   &__self-info {
     margin-top: 10px;
   }
 
+  &__button-area {
+    margin: 5px 0;
+  }
+
   &__update-button {
-    float: right;
+    
   }
 
   h1 {
