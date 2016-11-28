@@ -14,8 +14,12 @@
       }
   }
 
-  &__influence-description {
+  &__influence {
     flex: 0 0 80%;
+  }
+
+  &__influence-description {
+    display: flex;
   }
 
   &__user-section {
@@ -23,12 +27,11 @@
   }
   
   &__influence-section {
-    flex: 0 0 100%;
+    flex: 0 0 50%;
   }
 
   &__influence-disclaimer {
     padding: 1em 0;
-    flex: 0 0 100%;
     font-size: smaller;
     color: red;
     @include break(medium) {
@@ -70,7 +73,6 @@
     border: none;
     background: getColor(elephant);
     color: white;
-    cursor: pointer;
     border-radius: 3px;
     font-size: 13px;
     display: inline-block;

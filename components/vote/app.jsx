@@ -179,13 +179,15 @@ export default class VoteApp extends React.Component {
     return (
       <div className="vote-app">
         <div className="vote-app__influence">
-          <div className="vote-app__influence-disclaimer">
-            DISCLAIMER: Since this feature is its Alpha stages, the formula for calculating influence may change.
-          </div>
           <div className="vote-app__top">
-            <div className="vote-app__influence-description">
-              <Influence className="vote-app__influence-section" type="normal"/>
-              <Influence className="vote-app__influence-section" type="golden"/>
+            <div className="vote-app__influence">
+              <div className="vote-app__influence-description">
+                <Influence className="vote-app__influence-section" type="normal"/>
+                <Influence className="vote-app__influence-section" type="golden"/>
+              </div>
+              <div className="vote-app__influence-disclaimer">
+                DISCLAIMER: Since this feature is its Alpha stages, the formula for calculating influence may change.
+              </div>
             </div>
             <div className="vote-app__user-section">
               {this.renderSelf(inProgress)}
