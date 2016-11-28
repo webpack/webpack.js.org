@@ -128,14 +128,32 @@
     }
   }
 
-  &__item-table td {
-    vertical-align: middle;
+  &__item-card {
+    display: flex;
+    flex-direction: column;
+
+    @include break(medium){
+      flex-direction: row;
+    }
+  }
+
+  &__score-section {
+    display: flex;
+    flex: 0 0 40%;
+    border: 1px solid lightgray;
+    padding: 0 0 0 20px;
+    margin-right: 30px;
   }
 
   &__item-score {
-    font-size: 150%;
-    width: 90px;
-    text-align: right;
+    align-self: center;
+    font-size: 20pt;
+    flex: 0 0 20%;
+  }
+
+  &__item-button {
+      flex: 0 0 40%;
+      align-self: center;
   }
 
   &__items-list {
