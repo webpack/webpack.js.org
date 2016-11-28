@@ -4,7 +4,6 @@ import Container from '../container/container';
 import Sidebar from '../sidebar/sidebar';
 import Sidecar from '../sidecar/sidecar';
 import Contributors from '../contributors/contributors';
-import '../../styles';
 import './page-style';
 import '../sidebar/sidebar-style';
 
