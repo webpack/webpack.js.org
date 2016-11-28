@@ -188,10 +188,10 @@ export default class VoteApp extends React.Component {
         </div>
         {this.renderSelf()}
         { listInfo && <div>
-          <button className="vote-app__update-button" disabled={inProgress} onClick={() => {
+          {voteAppToken && <button className="vote-app__update-button" disabled={inProgress} onClick={() => {
             this.updateSelf();
             this.updateList();
-          }}>Update</button>
+          }}>Update</button>}
           <h1>{listInfo.displayName}</h1>
           <div>{listInfo.description}</div>
           <ul className="vote-app__items-list">

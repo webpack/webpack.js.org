@@ -1,7 +1,8 @@
 import React from 'react';
 
 export default (props) => {
-  let { value, myValue, maxDown, maxUp, color, onVote, className } = props;
+  let { value, myValue, maxDown, maxUp, color, onVote, className, isLoginActive } = props;
+  let {voteAppToken} = localStorage;
 
   let click = (e, n) => {
     onVote(Math.min(maxUp, Math.max(n, -maxDown)));
@@ -34,7 +35,7 @@ export default (props) => {
     }
   };
 
-  return <div className="vote-button" style={{color: color}}>
+  return voteAppToken ? (<div className="vote-button" style={{color: color}}>
     {makeTriangle(Infinity, triangleUp, 30, 11)}
     {makeTriangle(10, triangleUp, 20, 2)}
     {makeTriangle(1, triangleUp, 15, 1)}
@@ -47,7 +48,11 @@ export default (props) => {
     {makeTriangle(-1, triangleDown, 15, 1)}
     {makeTriangle(-10, triangleDown, 20, 2)}
     {makeTriangle(-Infinity, triangleDown, 30, 11)}
-  </div>;
+  </div>): (<div className="vote-button" style={{color: color}}>
+    <div className="vote-button__value" title={value + " was voted in total by all users."}>
+      <span className={className}>{value}</span>
+    </div>
+  </div>);
 };
 
 function triangleUp({color, size}) {
