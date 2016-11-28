@@ -5,7 +5,7 @@ import * as api from "./api";
 import VoteButton from './button/button';
 import VoteItem from './button/new-button';
 import Influence from './influence.jsx';
-import GithubMark from '../../assets/github-mark-32.png';
+import GithubMark from '../../assets/github-logo.svg';
 
 function updateByProperty(array, property, propertyValue, update) {
   return array.map(item => {

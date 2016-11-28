@@ -39,8 +39,8 @@ export default class NewButton extends Component {
     const {color, className, value, myValue} = this.props;
     return voteAppToken ? (<div className="vote-new-button" style={{color: color}}>
     <div className="vote-new-button__arrows">
-      {this.makeTriangle(1, triangleUp, 6, 1)}
-      {this.makeTriangle(-1, triangleDown, 6, 1)}
+      {this.makeTriangle(1, triangleUp, 10, 1)}
+      {this.makeTriangle(-1, triangleDown, 10, 1)}
     </div>
     <div className="vote-new-button__value" title={value + " was voted in total by all users."}>
       <span className={className}>{value}</span>
