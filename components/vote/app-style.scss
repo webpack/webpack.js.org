@@ -10,20 +10,30 @@
       flex-direction: column;
      
       @include break(medium) {
-        flex-direction: row-reverse;
+        flex-direction: row;
       }
   }
 
   &__influence {
-    flex: 0 0 80%;
+    flex: 0 0 75%;
   }
 
   &__influence-description {
     display: flex;
+    flex-direction: column;
+
+    @include break(medium) {
+      flex-direction: row;
+    }
   }
 
   &__user-section {
-    flex: 0 0 20%;
+    flex: 0 0 25%;
+    padding-left: 20px;
+
+    @include break(large) {
+      border-left: 2px solid getColor(elephant);
+    }
   }
   
   &__influence-section {
@@ -98,8 +108,9 @@
   }
 
   h1 {
-    font-size: 20pt;
+    font-size: 16pt;
     font-weight: bold;
+    margin-bottom: 10px;
   }
 
   &__item-title {
