@@ -5,6 +5,9 @@ import Navigation from '../navigation/navigation';
 import Footer from '../footer/footer';
 import SidebarMobile from '../sidebar-mobile/sidebar-mobile';
 import './site-style';
+
+// Load base styling
+import '../../styles';
 import '../../styles/icon.font.js';
 import '../container/container-style.scss';
 import '../navigation/navigation-style';
