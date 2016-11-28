@@ -4,6 +4,7 @@ import SidebarItem from '../sidebar-item/sidebar-item';
 import * as api from "./api";
 import VoteButton from './button/button';
 import Influence from './influence.jsx';
+import GithubMark from '../../assets/github-mark-32.png';
 
 function updateByProperty(array, property, propertyValue, update) {
   return array.map(item => {
@@ -178,15 +179,19 @@ export default class VoteApp extends React.Component {
     return (
       <div className="vote-app">
         <div className="vote-app__influence">
-          <div className="vote-app__influence-descriptions">  
-            <Influence className="vote-app__influence-section" type="normal"/>
-            <Influence className="vote-app__influence-section" type="golden"/>
-          </div>
           <div className="vote-app__influence-disclaimer">
             DISCLAIMER: Since this feature is its Alpha stages, the formula for calculating influence may change.
           </div>
+          <div className="vote-app__top">
+            <div className="vote-app__influence-description">
+              <Influence className="vote-app__influence-section" type="normal"/>
+              <Influence className="vote-app__influence-section" type="golden"/>
+            </div>
+            <div className="vote-app__user-section">
+              {this.renderSelf()}
+            </div>
+          </div>
         </div>
-        {this.renderSelf()}
         { listInfo && <div>
           {voteAppToken && <button className="vote-app__update-button" disabled={inProgress} onClick={() => {
             this.updateSelf();
@@ -266,9 +271,9 @@ export default class VoteApp extends React.Component {
       if(isFetchingSelf) {
         return <div className="vote-app__self-info">Loading user info...</div>;
       }
-      return <div className="vote-app__self-info">You are not logged in. <button onClick={() => {
+      return <div className="vote-app__login-button"><button onClick={() => {
         api.startLogin(window.location + "");   
-      }}>Login with Github</button></div>;
+      }}>Login with Github <img src={GithubMark}/> </button></div>;
     } else {
       return <div className="vote-app__self-info">
         You are logged in as {selfInfo.login}. <button onClick={() => {

@@ -5,15 +5,23 @@
 .vote-app {
   margin: 1.5em;
 
-  &__influence-descriptions {
-    display: flex;
-    flex-direction: column;
-
-    @include break(medium) {
-      flex-direction: row;
-    }
+  &__top {
+      display: flex;
+      flex-direction: column;
+     
+      @include break(medium) {
+        flex-direction: row-reverse;
+      }
   }
 
+  &__influence-description {
+    flex: 0 0 80%;
+  }
+
+  &__user-section {
+    flex: 0 0 20%;
+  }
+  
   &__influence-section {
     flex: 0 0 100%;
   }
@@ -25,6 +33,35 @@
     color: red;
     @include break(medium) {
       text-align: center;
+    }
+  }
+
+  &__login-button {
+    margin: 20px 0;
+
+    button {
+      border: none;
+      outline: none;
+      color: getColor(white);
+      background: getColor(elephant);
+      padding: 5px 10px 5px 10px;
+      border-radius: 2px;
+      font-size: 13px;
+      cursor: pointer;
+
+      &:hover {
+        background: black;
+      }
+
+      &:active {
+        background: getColor(elephant)
+      }
+    }
+    
+    img {
+      vertical-align: middle;
+      height: 25px;
+      padding-left: 5px;
     }
   }
 
