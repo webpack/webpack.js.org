@@ -2,8 +2,6 @@ import React from 'react';
 import 'whatwg-fetch';
 import SidebarItem from '../sidebar-item/sidebar-item';
 import * as api from "./api";
-import './app-style';
-import './influence-style';
 import VoteButton from './button/button';
 import Influence from './influence.jsx';
 

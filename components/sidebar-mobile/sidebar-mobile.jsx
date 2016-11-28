@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from '../link/link';
-import './sidebar-mobile-style';
 
 let initialTouchPosition = {};
 let lastTouchPosition = {};
@@ -14,24 +13,24 @@ export default class SidebarMobile extends React.Component {
 
   render() {
     return (
-      <nav 
-        className="sidebar-mobile" 
-        ref={ ref => this.container = ref } 
+      <nav
+        className="sidebar-mobile"
+        ref={ ref => this.container = ref }
         onTouchStart={this._handleTouchStart.bind(this)}
         onTouchMove={this._handleTouchMove.bind(this)}
         onTouchEnd={this._handleTouchEnd.bind(this)}>
 
-        <div 
+        <div
           className="sidebar-mobile__toggle"
           onTouchStart={this._handleTouchStart.bind(this)}
           onTouchMove={this._handleOpenerTouchMove.bind(this)}
           onTouchEnd={this._handleTouchEnd.bind(this)} />
 
         <div className="sidebar-mobile__content">
-          <i 
+          <i
             className="sidebar-mobile__close icon-cross"
             onClick={ this._close.bind(this) } />
-          
+
           { this._getSections() }
         </div>
       </nav>
@@ -75,10 +74,10 @@ export default class SidebarMobile extends React.Component {
             className="sidebar-mobile__section-header"
             key={ absoluteUrl }
             to={ absoluteUrl }
-            onClick={ this._close.bind(this) }>  
+            onClick={ this._close.bind(this) }>
             <h3>{ section.title }</h3>
           </Link>
-          
+
           { this._getPages(section.pages) }
         </div>
       );
@@ -104,8 +103,8 @@ export default class SidebarMobile extends React.Component {
 
       return (
         <Link
-          key={ url } 
-          className={ `sidebar-mobile__page ${active ? 'sidebar-mobile__page--active' : ''}` } 
+          key={ url }
+          className={ `sidebar-mobile__page ${active ? 'sidebar-mobile__page--active' : ''}` }
           to={ url }
           onClick={ this._close.bind(this) }>
           { page.title }

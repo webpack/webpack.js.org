@@ -1,6 +1,5 @@
 import React from 'react';
 import FileSize from 'filesize';
-import './splash-file-style';
 
 export default props => {
   return (
