@@ -3,7 +3,6 @@ import 'whatwg-fetch';
 import SidebarItem from '../sidebar-item/sidebar-item';
 import * as api from "./api";
 import VoteButton from './button/button';
-import VoteItem from './button/new-button';
 import Influence from './influence.jsx';
 import GithubMark from '../../assets/github-logo.svg';
 
@@ -212,7 +211,7 @@ export default class VoteApp extends React.Component {
                     let value = (userVote && userVote.votes) ? userVote.votes: 0;
                     if(currencyInfo && currencyInfo.remaining + value < maximum) maximum = currencyInfo.remaining + value;
                     return <div className="vote-app__item-button">
-                    <VoteItem
+                    <VoteButton
                       className={"vote-app__vote-"+voteSettings.name}
                       value={vote.votes} myValue={value}
                       maxUp={userVote ? maximum - value : 0}
@@ -221,7 +220,7 @@ export default class VoteApp extends React.Component {
                       isLoggedIn = {!!voteAppToken}
                       onVote={(diffValue) => {
                         this.vote(item.id, voteSettings.name, diffValue, voteSettings.currency, voteSettings.score);
-                      }}></VoteItem></div>;
+                      }}></VoteButton></div>;
                   })}
                 </div>
                 <div className="vote-app__item-content">

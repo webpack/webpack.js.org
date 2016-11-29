@@ -1,29 +1,29 @@
-import React from 'react';
+import React, {Component} from 'react';
+import "./button-style.scss";
 
-export default (props) => {
-  let { value, myValue, maxDown, maxUp, color, onVote, className, isLoginActive } = props;
-  let {voteAppToken} = localStorage;
-
-  let click = (e, n) => {
+export default class NewButton extends Component {
+  handleClick (e, n) {
+    const {maxUp, maxDown, onVote} = this.props;
     onVote(Math.min(maxUp, Math.max(n, -maxDown)));
     e.preventDefault();
     return false;
-  };
+  }
 
-  let titleText = (n) => {
+  titleText (n, maxUp, maxDown) {
     n = Math.min(maxUp, Math.max(n, -maxDown));
     if(n === 0)
       return "";
     return n > 0 ? "+" + n : "" + n;
-  };
+  }
 
-  let makeTriangle = (n, fn, size, minForEnabled) => {
+  makeTriangle (n, fn, size, minForEnabled) {
+    const {maxUp, maxDown, color} = this.props;
     const enabled = n !== 0 && (n > 0 ? (maxUp >= minForEnabled) : (maxDown >= minForEnabled));
-    const className = "vote-button__upDown";
+    const className = "vote-new-button__upDown";
     if(enabled) {
       return <a href="#"
-        title={titleText(n)}
-        onClick={e => click(e, n)}
+        title={this.titleText(n, maxUp, maxDown)}
+        onClick={e => this.handleClick(e, n)}
         className={className}>
           {fn({size: size, color: color})}
       </a>;
@@ -33,27 +33,27 @@ export default (props) => {
           {fn({size: size, color: "#eee"})}
       </a>;
     }
-  };
-
-  return voteAppToken ? (<div className="vote-button" style={{color: color}}>
-    {makeTriangle(Infinity, triangleUp, 30, 11)}
-    {makeTriangle(10, triangleUp, 20, 2)}
-    {makeTriangle(1, triangleUp, 15, 1)}
-    <div className="vote-button__value" title={value + " was voted in total by all users."}>
+  }
+  render() {
+    const {color, className, value, myValue, isLoggedIn} = this.props;
+    return isLoggedIn ? (<div className="vote-new-button" style={{color: color}}>
+    <div className="vote-new-button__arrows">
+      {this.makeTriangle(1, triangleUp, 10, 1)}
+      {this.makeTriangle(-1, triangleDown, 10, 1)}
+    </div>
+    <div className="vote-new-button__value" title={value + " was voted in total by all users."}>
       <span className={className}>{value}</span>
     </div>
-    <div className="vote-button__my-value" title={myValue + " was voted by you."}>
+    <div className="vote-new-button__my-value" title={myValue + " was voted by you."}>
       (<span className={className}>{myValue}</span>)
     </div>
-    {makeTriangle(-1, triangleDown, 15, 1)}
-    {makeTriangle(-10, triangleDown, 20, 2)}
-    {makeTriangle(-Infinity, triangleDown, 30, 11)}
-  </div>): (<div className="vote-button" style={{color: color}}>
-    <div className="vote-button__value" title={value + " was voted in total by all users."}>
+  </div>): (<div className="vote-new-button" style={{color: color}}>
+    <div className="vote-new-button__logout-value" title={value + " was voted in total by all users."}>
       <span className={className}>{value}</span>
     </div>
   </div>);
-};
+  }
+}
 
 function triangleUp({color, size}) {
   let path = `m ${size},0 -${size},${size / 3 * 2} ${size*2},0 z`;
