@@ -6,12 +6,12 @@
   margin: 1.5em;
 
   &__top {
-      display: flex;
-      flex-direction: column;
-     
-      @include break(medium) {
-        flex-direction: row;
-      }
+    display: flex;
+    flex-direction: column;
+
+    @include break(medium) {
+      flex-direction: row;
+    }
   }
 
   &__influence {
