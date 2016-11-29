@@ -140,7 +140,11 @@ It's no longer necessary to specify it in configuration.
 
 ## `ExtractTextWebpackPlugin` - breaking change
 
-[ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) 1.0.0 does not work with webpack 2. The changes are mainly syntactical
+[ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) 1.0.0 does not work with webpack v2. You will need to install ExtractTextPlugin v2 explicitly.
+
+`npm install --save-dev extract-text-webpack-plugin@beta`
+
+ The configuration changes for this plugin are mainly syntactical.
 
 ### `ExtractTextPlugin.extract`
 
