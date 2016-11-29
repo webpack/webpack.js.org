@@ -211,12 +211,14 @@ export default class VoteApp extends React.Component {
                     let minimum = voteSettings.minimum || 0;
                     let value = (userVote && userVote.votes) ? userVote.votes: 0;
                     if(currencyInfo && currencyInfo.remaining + value < maximum) maximum = currencyInfo.remaining + value;
-                    return <div className="vote-app__item-button"><VoteItem
+                    return <div className="vote-app__item-button">
+                    <VoteItem
                       className={"vote-app__vote-"+voteSettings.name}
                       value={vote.votes} myValue={value}
                       maxUp={userVote ? maximum - value : 0}
                       maxDown={userVote ? value - minimum : 0}
                       color={this.getColor(voteSettings.name)}
+                      isLoggedIn = {!!voteAppToken}
                       onVote={(diffValue) => {
                         this.vote(item.id, voteSettings.name, diffValue, voteSettings.currency, voteSettings.score);
                       }}></VoteItem></div>;
