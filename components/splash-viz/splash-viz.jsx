@@ -3,7 +3,6 @@ import Link from '../link/link';
 import SplashFile from '../splash-file/splash-file';
 import Icon from '../../assets/icon-square-big.svg';
 import Modules from '../../assets/modules.png';
-import './splash-viz-style';
 
 export default class SplashViz extends React.Component {
   constructor(props) {

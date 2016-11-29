@@ -1,5 +1,4 @@
 import React from 'react';
-require("./button-style.scss");
 
 export default (props) => {
   let { value, myValue, maxDown, maxUp, color, onVote, className } = props;

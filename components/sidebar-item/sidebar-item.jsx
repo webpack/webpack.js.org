@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from '../link/link';
-import './sidebar-item-style';
 
 export default class SidebarItem extends React.Component {
   constructor(props) {

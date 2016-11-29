@@ -1,5 +1,4 @@
 import React from 'react';
-import './influence-style.scss';
 
 export default class InfluenceComponent extends React.Component {
     constructor(props) {

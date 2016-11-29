@@ -4,6 +4,9 @@ import Container from '../container/container';
 import VoteApp from './app';
 import '../../styles';
 import './list-style';
+import './app-style';
+import './influence-style';
+import './button/button-style';
 
 export default ({ section, page }) => {
   return (

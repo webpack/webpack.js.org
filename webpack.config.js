@@ -1,5 +1,6 @@
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var Autoprefixer = require('autoprefixer');
 var merge = require('webpack-merge');
 var webpack = require('webpack');
@@ -25,7 +26,7 @@ const commonConfig = {
       },
       {
         test: /\.woff2?$/,
-        loaders: ['url-loader?prefix=font/&limit=50000&mimetype=application/font-woff']
+        loaders: ['url-loader?prefix=font/&limit=10000&mimetype=application/font-woff']
       },
       {
         test: /\.jpg$/,
@@ -54,7 +55,13 @@ const commonConfig = {
   },
   sassLoader: {
     includePaths: [ path.join('./styles/partials') ]
-  }
+  },
+  plugins: [
+    new CopyWebpackPlugin([{
+      from: './assets',
+      to: './assets'
+    }])
+  ]
 };
 
 const interactiveConfig = {
@@ -95,9 +102,6 @@ const developmentConfig = {
 };
 
 const buildConfig = {
-  output: {
-    publicPath: '/'
-  },
   plugins: [
     new ExtractTextPlugin('[chunkhash].css', {
       allChunks: true
@@ -108,7 +112,7 @@ const buildConfig = {
       {
         test: /\.font.js$/,
         loader: ExtractTextPlugin.extract(
-          'style-loader', 
+          'style-loader',
           'css-loader!fontgen-loader?embed'
         )
       },
@@ -142,7 +146,6 @@ module.exports = function(env) {
     case 'interactive':
       return merge(
         commonConfig,
-        buildConfig,
         interactiveConfig
       );
     case 'build':
