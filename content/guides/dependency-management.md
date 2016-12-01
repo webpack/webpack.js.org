@@ -1,6 +1,8 @@
 ---
 title: Dependency Management
 sort: 6
+contributors:
+  - ndelangen
 ---
 
 > es6 modules
