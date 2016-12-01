@@ -30,6 +30,8 @@ The following examples below describe how webpack's configuration object can be 
 **webpack.config.js**
 
 ```javascript
+var path = require('path');
+
 module.exports = {
   entry: './foo.js',
   output: {
