@@ -49,6 +49,8 @@ W> There are some issues with Source Maps in Chrome. [We need your help!](https:
 
 `cheap-module-source-map` - A SourceMap without column-mappings that simplifies loaded Source Maps to a single mapping per line.
 
+`nosources` - This option prevents the generation of a SourceMap file for your project.
+
 T> See [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilename) to customize the filenames of generated Source Maps.
 
 ?> This page needs more information to make it easier for users to choose a good option.
