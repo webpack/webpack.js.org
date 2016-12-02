@@ -37,6 +37,7 @@ module.exports = {
         );
       }
     ),
+
     'get-started': section(
       'Get-Started',
       function() {
@@ -47,6 +48,7 @@ module.exports = {
         )
       }
     ),
+
     concepts: section(
       'Concepts',
       function() {
@@ -57,6 +59,7 @@ module.exports = {
         );
       }
     ),
+
     guides: section(
       'Guides',
       function() {
@@ -67,6 +70,7 @@ module.exports = {
         );
       }
     ),
+
     configuration: section(
       'Configuration',
       function() {
@@ -77,6 +81,7 @@ module.exports = {
         );
       }
     ),
+
     api: section(
       'API',
       function() {
@@ -87,6 +92,7 @@ module.exports = {
         );
       }
     ),
+
     pluginsapi: section(
       'Plugins API',
       function() {
@@ -97,6 +103,7 @@ module.exports = {
         );
       }
     ),
+
     loaders: section(
       'Loaders',
       function() {
@@ -107,6 +114,7 @@ module.exports = {
         );
       }
     ),
+
     plugins: section(
       'Plugins',
       function() {
@@ -117,6 +125,7 @@ module.exports = {
         );
       }
     ),
+
     vote: voteList(
       'Voting',
       {
@@ -124,7 +133,17 @@ module.exports = {
         feedback: true,
         moneyDistribution: true,
       }
-    )
+    ),
+
+    organization: {
+      title: 'organization',
+      path: '/organization',
+      layouts: { 
+        index: function() {
+          return require('./components/organization/organization.jsx').default
+        }
+      }
+    }
   }
 };
 
