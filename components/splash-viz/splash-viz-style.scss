@@ -34,8 +34,15 @@
     display:flex;
     flex:1 1 auto;
     align-items:center;
+    justify-content: center;
 
-    img { width:100%; }
+    img { 
+      width:50%; 
+
+      @include break {
+        width:100%;
+      }
+    }
   }
 
   &__output {
