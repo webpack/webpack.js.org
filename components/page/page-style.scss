@@ -39,9 +39,11 @@
   @include break {
     position: absolute;
     display: block;
-    top: 1.4em;
-    right: 1.75em;
+    top: 1.5em;
+    right: 1.5em;
     font-size: getFontSize(-1);
     text-transform: uppercase;
+
+    i { font-size:0.8em; }
   }
 }

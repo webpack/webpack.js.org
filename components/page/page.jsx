@@ -30,7 +30,8 @@ export default ({ section, page }) => {
         <h1>{ page.title }</h1>
 
         <a className="page__edit" href={ edit }>
-          Edit this Page&nbsp;&nbsp;
+          Edit this Page
+          &nbsp;&nbsp;
           <i className="icon-edit" />
         </a>
 
