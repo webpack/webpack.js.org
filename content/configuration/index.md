@@ -52,7 +52,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 
     <details><summary>[libraryTarget](/configuration/output#output-librarytarget): "umd", // enum</summary>
     [libraryTarget](/configuration/output#output-librarytarget): "umd-module", // ES2015 module wrapped in UMD
-    [libraryTarget](/configuration/output#output-librarytarget): "commonjs-module", // ES2015 module wrapped in CommonJs
+    [libraryTarget](/configuration/output#output-librarytarget): "commonjs-module", // ES2015 module wrapped in CommonJS
     [libraryTarget](/configuration/output#output-librarytarget): "commonjs2", // exported with module.exports
     [libraryTarget](/configuration/output#output-librarytarget): "commonjs", // exported as properties to exports
     [libraryTarget](/configuration/output#output-librarytarget): "amd", // defined with AMD defined method

@@ -137,7 +137,7 @@ For each different parser options object a new parser is created and plugins can
 ``` js-with-links
 parser: {
   amd: false, // disable AMD
-  commonjs: false, // disable CommonJs
+  commonjs: false, // disable CommonJS
   system: false, // disable System
   harmony: false, // disable harmony import/export
   requireInclude: false, // disable require.include

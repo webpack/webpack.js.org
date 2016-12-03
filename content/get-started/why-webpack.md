@@ -33,9 +33,9 @@ webpack however is not the only module bundler out there. If you are choosing be
 | AMD `define` | **yes** | **yes** | [deamdify](https://github.com/jaredhanson/deamdify) | yes | no | yes |
 | AMD `require` | **yes** | **yes** | no | yes | no | yes |
 | AMD `require` loads on demand | **yes** | with manual configuration | no | yes | no | no |
-| CommonJs `exports` | **yes** | only wrapping in `define` | **yes** | yes | [commonjs-plugin](https://github.com/rollup/rollup-plugin-commonjs) | yes |
-| CommonJs `require` | **yes** | only wrapping in `define` | **yes** | yes | [commonjs-plugin](https://github.com/rollup/rollup-plugin-commonjs) | yes |
-| CommonJs `require.resolve` | **yes** | no | no | no | no |
+| CommonJS `exports` | **yes** | only wrapping in `define` | **yes** | yes | [commonjs-plugin](https://github.com/rollup/rollup-plugin-commonjs) | yes |
+| CommonJS `require` | **yes** | only wrapping in `define` | **yes** | yes | [commonjs-plugin](https://github.com/rollup/rollup-plugin-commonjs) | yes |
+| CommonJS `require.resolve` | **yes** | no | no | no | no |
 | Concat in require `require("./fi" + "le")` | **yes** | no♦ | no | no | no |
 | Debugging support | **SourceUrl, SourceMaps** | not required | SourceMaps | **SourceUrl, SourceMaps** | **SourceUrl, SourceMaps** | SourceMaps |
 | Dependencies | 19MB / 127 packages | 11MB / 118 packages | **1.2MB / 1 package** | 26MB / 131 packages | ?MB / 3 packages
