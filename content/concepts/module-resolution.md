@@ -47,7 +47,7 @@ import "module";
 import "module/lib/file";
 ```
 
-Modules are searched for inside directories which are specified using `resolve.modules`, which is can be an array comprising of different paths.
+Modules are searched for inside directories which are specified using `resolve.modules`, which can be an array comprising of different paths.
 Aliasing, i. e. setting `resolve.alias` to an existing module path, allows you to replace the module path with an alias name during `require/import`.
 
 Once the path is resolved based on the above rule, the resolver checks if the path points to a file or to a directory. If the path points to a file then it is bundled straightaway.
