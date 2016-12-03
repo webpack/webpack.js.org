@@ -53,8 +53,8 @@ webpackNumbers.numToWord(3); // output is Three
 
 <html>
 ...
-<script src='https://unpkg.com/webpack-numbers' type='text/javascript'/>
-<script type='text/javascript'>
+<script src="https://unpkg.com/webpack-numbers"></script>
+<script>
     ...
     /* webpackNumbers is available as a global variable */
     webpackNumbers.wordToNum('Five') //output is 5
