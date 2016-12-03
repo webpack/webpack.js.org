@@ -139,7 +139,7 @@ parser: {
   amd: false, // disable AMD
   commonjs: false, // disable CommonJS
   system: false, // disable SystemJS
-  harmony: false, // disable harmony import/export
+  harmony: false, // disable ES6 Harmony import/export
   requireInclude: false, // disable require.include
   requireEnsure: false, // disable require.ensure
   requireContext: false, // disable require.context
