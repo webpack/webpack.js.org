@@ -143,7 +143,7 @@ parser: {
   requireInclude: false, // disable require.include
   requireEnsure: false, // disable require.ensure
   requireContext: false, // disable require.context
-  browserify: false, // disable special handling of browserify bundles
+  browserify: false, // disable special handling of Browserify bundles
   requireJs: false, // disable requirejs.*
   node: false, // disable __dirname, __filename, module, require.extensions, require.main, etc.
   node: {...} // reconfigure [node](/configuration/node) layer on module level
