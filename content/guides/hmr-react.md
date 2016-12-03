@@ -6,7 +6,7 @@ contributors:
   - jhnns
 ---
 
-As explained in detail on the [concept page](/concepts/hot-module-replacement), Hot Module Replacement (HMR)exchanges, adds, or removes modules while an application is running without a page reload.
+As explained in detail on the [concept page](/concepts/hot-module-replacement), Hot Module Replacement (HMR) exchanges, adds, or removes modules while an application is running without a page reload.
 HMR is particularly useful in applications using a single state tree,
 since components are "dumb" and will reflect the latest application state, even
 after their source is changed and they are replaced.
