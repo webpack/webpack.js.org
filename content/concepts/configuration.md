@@ -7,7 +7,7 @@ contributors:
 
 You may have noticed that few webpack configurations look exactly alike. This is because **webpack's configuration file is a JavaScript file that exports an object.** This object is then processed by webpack based upon its defined properties.
 
-Because it's a standard node.js CommonJs module, you **can do the following**:
+Because it's a standard node.js CommonJS module, you **can do the following**:
 
 * import other files via `require(...)`
 * use utilities on npm via `require(...)`
