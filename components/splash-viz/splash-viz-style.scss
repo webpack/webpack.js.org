@@ -10,7 +10,7 @@
   background:getColor(elephant);
 
   &__modules,
-  &__output { 
+  &__output {
     flex:0 0 45%;
   }
 
@@ -36,8 +36,8 @@
     align-items:center;
     justify-content: center;
 
-    img { 
-      width:50%; 
+    img {
+      width:45%; 
 
       @include break {
         width:100%;
