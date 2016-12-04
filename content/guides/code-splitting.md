@@ -3,18 +3,18 @@ title: 代码分割
 sort: 2
 contributors:
   - pksjce
+  - xie qianyue
 ---
 
-Code splitting is the most compelling feature for  `webpack` usage. You can split your code into various bundles and load them on demand with `webpack`. It allows to tweak an application for these optimisations using the configuration.
-You can load them at a later time in your code or in a specific route only or on an event from the user even.
+代码分割是 `webpack` 中最为人称道的特性。你可以把你的代码分割到不同的打包文件(bundle)中，再让 `webpack` 按需加载。这样你便可以对你的程序进行微调优化。你可以延迟加载打包文件，或者只在特定路由下加载，或者被用户事件触发才加载。
 
-There are mainly two kind of code-splits that need to be accomplished with `webpack`
+总的来说，有两类需要 `webpack` 完成的代码分割工作。
 
-## On demand code-splitting
+## 按需分割代码
 
-`webpack` can help us split our code into logical pieces or chunks as per our application routes or as per predicted user behaviour. This means that we can load non-essential assets when the user performs an action like route change and demands for it.
+`webpack` 能够按照程序路由或者用户行为把代码分割成更小的逻辑模块。这样的话，我们可以在用户作出某些行为时，例如改变路由时，才去加载某些资源。
 
-### Code splitting with `require.ensure()`
+### 使用 `require.ensure()` 分割代码
 
 `require.ensure()` is the CommonJS way of including assets asynchronously. By adding `require.ensure([<fileurl>])`, we can define a split point in the code. webpack can then create a separate bundle of all the code inside this split point.
 Learn [how to split code](/guides/code-splitting-require) using `require.ensure()`.
