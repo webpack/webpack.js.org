@@ -1,3 +1,35 @@
+@import 'functions';
+
 .organization {
-    
+  padding:1.5em;
+}
+
+.organization__projects {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-around;
+}
+
+.organization__project {
+  width:300px;
+  height:400px;
+  margin-right:1em;
+  margin-bottom:1em;
+  padding:1em;
+  border-radius:2px;
+  box-shadow:0 0 3px getColor(dove-grey); 
+  overflow:hidden;
+  background:getColor(concrete);
+  transition:all 250ms;
+
+  // TODO: Fix this, refactor Page and Contributors components
+  .contributors h3,
+  .contributors hr {
+    display:none;
+  }
+
+  &:hover {
+    box-shadow:0 0 5px getColor(emperor);
+    background:white;
+  }
 }
