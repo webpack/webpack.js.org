@@ -24,6 +24,7 @@ Choose a style of [source mapping](http://blog.teamtreehouse.com/introduction-so
  cheap-module-source-map      | o     | -       | yes        | original source (lines only)
  eval-source-map              | --    | +       | no         | original source
  source-map                   | --    | --      | yes        | original source
+ nosources-source-map         | --    | --      | yes        | without source content
 
 Some of these values are suited for development and some for production. For development you typically want very fast Source Maps at the cost of bundle size, but for production you want separate Source Maps that are accurate.
 
@@ -49,7 +50,7 @@ W> There are some issues with Source Maps in Chrome. [We need your help!](https:
 
 `cheap-module-source-map` - A SourceMap without column-mappings that simplifies loaded Source Maps to a single mapping per line.
 
-`nosources` - This option prevents the generation of a SourceMap file for your project.
+`nosources-source-map` - A SourceMap is created without the sourcesContent in it.
 
 T> See [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilename) to customize the filenames of generated Source Maps.
 
