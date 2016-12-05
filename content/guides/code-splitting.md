@@ -16,20 +16,20 @@ contributors:
 
 ### 使用 `require.ensure()` 分割代码
 
-`require.ensure()` is the CommonJS way of including assets asynchronously. By adding `require.ensure([<fileurl>])`, we can define a split point in the code. webpack can then create a separate bundle of all the code inside this split point.
-Learn [how to split code](/guides/code-splitting-require) using `require.ensure()`.
+`require.ensure()` 使用 CommonJS 的方式异步导入资源。我们可以通过 `require.ensure([<fileurl>])` 来在代码中定义一个分割点。webpack 便能够为这个分割点内的所有代码创建一个独立的打包文件。参考[这里](/guides/code-splitting-require)，学习如何使用 `require.ensure()`。
 
 ?> Document `System.import()`
 
-## Resource splitting for cacheing and parallel loads
+## 分割资源实现缓存和并行加载
 
-### CSS splitting
+### 分割 CSS
 
-An application owner would want to split all the css into a separate bundle. This enhances cacheability of the resource bundle and also allows the browser to parallely load the bundle which makes for a solid performance improvement.
-Learn [how to split css](/guides/code-splitting-css) using the ExtractTextWebpackPlugin.
+你也可以把 css 代码分割到独立的打包文件中。这样做能够提高打包文件的缓存能力，也能够让浏览器并行加载打包文件，使加载速度获得显著的提升。
 
-### Vendor code splitting
+参考[这里](/guides/code-splitting-css)，学习如何使用 ExtractTextWebpackPlugin 分割 CSS。
 
-A typical application uses third party libraries for framework/functionality needs. Particular versions of these libraries are used and code here does not change often. However, the application code changes frequently. Bundling application code with third party code would be inefficient. This is because the browser can cache asset files based on the cache header. To take advantage of this, we want to keep the hash of the vendor files constant regardless of application code changes. We can do this only when we separate the bundles for vendor and application code.
+### 分割第三方库代码
 
-Learn [how to split vendor/library](/guides/code-splitting-libraries) code using the CommonsChunkPlugin.
+很多应用都会因为框架或对于某个功能的需求而用到第三方库。在一段时间内，项目中引用的第三方库版本不会改变，它们的代码也不会改变。然而，程序本身的代码却频繁迭代。把第三方库和程序自身代码一块打包的效率将是非常低下的。如果我们能够把第三库的代码和程序自身的代码分割开来的话，即使程序代码更改了，第三方库的打包文件的 hash 也不会改变。而浏览器能够根据请求的 cache header 缓存资源文件，这样第三方库的打包文件便能够被缓存起来。 
+
+参考[这里](/guides/code-splitting-libraries)，学习如何使用 CommonsChunkPlugin。
