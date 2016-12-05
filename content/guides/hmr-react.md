@@ -223,7 +223,7 @@ The important thing to note in the code above is the `module` reference.
     ```
     ["es2015", {"modules": false}],
     ```
-    like we did in [Project Config](#project-config);
+    like we did in [Babel Config](#babel-config);
 
 So in this case, `module.hot.accept` will fire the `render` method whenever `src/components/App.js` or its dependencies are changed - which means the `render` method will also fire when the `App.css` is changed, since `App.css` is included in `App.js`.
 
