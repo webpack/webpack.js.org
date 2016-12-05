@@ -62,7 +62,7 @@ Your `.babelrc` file should look like the following:
 
 ### webpack Config
 
-While there's many ways of setting up your webpack config - via API,
+While there're many ways of setting up your webpack config - via API,
 via multiple or single config files, etc - here is the basic information
 you should have available.
 
@@ -103,7 +103,7 @@ module.exports = {
 
   devServer: {
     hot: true,
-    // activate hot reloading
+    // enable HMR on the server
 
     contentBase: resolve(__dirname, 'dist'),
     // match the output path
@@ -133,7 +133,7 @@ module.exports = {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    // activates HMR
+    // enable HMR globally
 
     new webpack.NamedModulesPlugin(),
     // prints more readable module names in the browser console on HMR updates
@@ -152,10 +152,14 @@ Please see the comments inline that explain each portion of the config. The main
 areas to look are the `devServer` key and the `entry` key. The `HotModuleReplacementPlugin` is
 also necessary to include in the `plugins` array.
 
-There are two modules included here for the purposes of this guide.
-The react-hot-loader addition to the entry, as noted above, is necessary to enable
-HMR with React components. The `NamedModulesPlugin` is a useful addition
+There are two modules included here for the purposes of this guide:
+
+- The `react-hot-loader` addition to the entry, as noted above, is necessary to enable
+HMR with React components.
+
+- The `NamedModulesPlugin` is a useful addition
 to better understand what modules are being updated when using HMR.
+
 
 ### Code
 
@@ -212,25 +216,26 @@ export default App;
 ```
 
 The important thing to note in the code above is the `module` reference.
-First, we wrap the HMR code inside of `module.hot` check;
-webpack exposes `module` to the code, and if we are running with `hot: true` configured,
-we'll enter the inside of the conditional.
 
-While the module API offers more options than what's above, the most
-important element is the `module.hot.accept` call.
-It specific how to handle changes to specific dependencies.
+1. Webpack will expose `module.hot` to our code since we set `devServer: { hot: true }`;
 
-So in this case, `module.hot` will fire the `render` method ONLY
-when `src/components/App.js` changes. Note that would also include when the
-dependencies of `App.js` change -
-so the `render` method will file not just for changes made directly to the
-source of `App.js`, but also changes made to `App.css`, since `App.css`
-is included in `App.js`.
+2. Thus we can use the `module.hot` hook to enable HMR for specific resources (Here's `App.js`). The most important API here is `module.hot.accept`, which specifies how to handle changes to specific dependencies.
+
+3. Note that because Webpack 2 has built-in support for ES2015 modules, you won't need to re-require your root component in `module.hot.accept`. To make this work, you need to change the Babel ES2015 preset in `.babelrc` to be:
+  
+  ```
+  ["es2015", {"modules": false}]
+  ```
+  
+  like what we did in [Babel Config](#babel-config). Note that disabling Babel's module plugin is not only necessary for HMR. If you don't disable it you'll run into many other issues (see [Migrating from v1 to v2](/guides/migrating/#mixing-es2015-with-amd-and-commonjs) and [webpack-tree-shaking](http://www.2ality.com/2015/12/webpack-tree-shaking.html)).
+
+So in this case, `module.hot.accept` will fire the `render` method whenever `src/components/App.js` or its dependencies are changed - which means the `render` method will also fire when the `App.css` is changed, since `App.css` is included in `App.js`.
+
 
 ### Package.json
 
-Finally, we need to start up webpack-dev-server to bundle our code and see HMR in action.
-We can use the following package.json entry:
+Finally, we need to start up `webpack-dev-server` to bundle our code and see HMR in action.
+We can use the following `package.json` entry:
 
 ```json
 {
