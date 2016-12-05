@@ -153,8 +153,10 @@ areas to look are the `devServer` key and the `entry` key. The `HotModuleReplace
 also necessary to include in the `plugins` array.
 
 There are two modules included here for the purposes of this guide:
+
 - The `react-hot-loader` addition to the entry, as noted above, is necessary to enable
 HMR with React components.
+
 - The `NamedModulesPlugin` is a useful addition
 to better understand what modules are being updated when using HMR.
 
@@ -220,10 +222,12 @@ The important thing to note in the code above is the `module` reference.
 2. Thus we can use the `module.hot` hook to enable HMR for specific resources (Here's `App.js`). The most important API here is `module.hot.accept`, which specifies how to handle changes to specific dependencies.
 
 3. Note that because Webpack 2 has built-in support for ES2015 modules, you won't need to re-require your root component in `module.hot.accept`. To make this work, you need to change the Babel ES2015 preset in `.babelrc` to be:
-    ```
-    ["es2015", {"modules": false}],
-    ```
-    like we did in [Babel Config](#babel-config);
+  
+  ```
+  ["es2015", {"modules": false}]
+  ```
+  
+  like what we did in [Babel Config](#babel-config). Note that disabling Babel's module plugin is not only necessary for HMR. If you don't disable it you'll run into many other issues (see [What's new in webpack 2](https://gist.github.com/sokra/27b24881210b56bbaff7) and [webpack-tree-shaking](http://www.2ality.com/2015/12/webpack-tree-shaking.html)).
 
 So in this case, `module.hot.accept` will fire the `render` method whenever `src/components/App.js` or its dependencies are changed - which means the `render` method will also fire when the `App.css` is changed, since `App.css` is included in `App.js`.
 
