@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/152bc62c34b5504f1bbd.css" rel="stylesheet">
+      <link href="/007e23f2228375c0f9c2.css" rel="stylesheet">
     
     
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -78,6 +78,17 @@
 <pre><code class="lang-html">&apos;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>http://cdn.example.com/49eba9f/a9f92ca.jpg</span>
       <span class="token attr-name">data-src</span><span class="token attr-value"><span class="token punctuation">=</span>data:image/png;base64,...</span><span class="token punctuation">&gt;</span></span>&apos;
 </code></pre>
+<p>or specify the <code>minimize</code> query in your <code>webpack.conf.js</code></p>
+<pre><code class="lang-js">module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  loaders<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+    test<span class="token punctuation">:</span> <span class="token regex">/\.html$/</span><span class="token punctuation">,</span>
+    loader<span class="token punctuation">:</span> <span class="token string">&apos;html&apos;</span><span class="token punctuation">,</span>
+    query<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      minimize<span class="token punctuation">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <h3 class="header"><a class="anchor" href="#-root-relative-urls" id="-root-relative-urls"></a><span class="text">&apos;Root-relative&apos; URLs</span><a class="icon-link" href="#-root-relative-urls"></a></h3>
 <p>For urls that start with a <code>/</code>, the default behavior is to not translate them.
 If a <code>root</code> query parameter is set, however, it will be prepended to the url
@@ -119,7 +130,7 @@ and then translated.</p>
 <ul>
 <li><code>module.exports</code> (default, cjs format). &quot;Hello world&quot; becomes <code>module.exports = &quot;Hello world&quot;;</code></li>
 <li><code>exports.default</code> (when <code>exportAsDefault</code> param is set, es6to5 format). &quot;Hello world&quot; becomes <code>exports.default = &quot;Hello world&quot;;</code></li>
-<li><code>exports default</code> (when <code>exportAsEs6Default</code> param is set, es6 format). &quot;Hello world&quot; becomes <code>exports default &quot;Hello world&quot;;</code></li>
+<li><code>export default</code> (when <code>exportAsEs6Default</code> param is set, es6 format). &quot;Hello world&quot; becomes <code>export default &quot;Hello world&quot;;</code></li>
 </ul>
 <h3 class="header"><a class="anchor" href="#advanced-options" id="advanced-options"></a><span class="text">Advanced options</span><a class="icon-link" href="#advanced-options"></a></h3>
 <p>If you need to pass <a href="https://github.com/webpack/html-loader/pull/46">more advanced options</a>, especially those which cannot be stringified, you can also define an <code>htmlLoader</code>-property on your <code>webpack.config.js</code>:</p>
@@ -134,7 +145,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         loader<span class="token punctuation">:</span> <span class="token string">&quot;html&quot;</span>
       <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
-  <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
   htmlLoader<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     ignoreCustomFragments<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token operator">/</span>\<span class="token punctuation">{</span>\<span class="token punctuation">{</span><span class="token punctuation">.</span><span class="token operator">*</span><span class="token operator">?</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">/</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
     root<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&apos;assets&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -152,7 +163,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         loader<span class="token punctuation">:</span> <span class="token string">&quot;html?config=otherHtmlLoaderConfig&quot;</span>
       <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
-  <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
   otherHtmlLoaderConfig<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
   <span class="token punctuation">}</span>
