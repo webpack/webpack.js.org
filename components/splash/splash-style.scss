@@ -7,6 +7,10 @@
     padding:5em 1em;
     text-align:center;
 
+    &:last-child {
+      padding-top: 0;
+    }
+
     @include break {
       padding:8em 1.5em;
     }
