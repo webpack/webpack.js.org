@@ -50,7 +50,7 @@ W> There are some issues with Source Maps in Chrome. [We need your help!](https:
 
 `cheap-module-source-map` - A SourceMap without column-mappings that simplifies loaded Source Maps to a single mapping per line.
 
-`nosources-source-map` - A SourceMap is created without the sourcesContent in it.
+`nosources-source-map` - A SourceMap is created without the `sourcesContent` in it. It can be used to map stack traces on the client without exposing all of the source code.
 
 T> See [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilename) to customize the filenames of generated Source Maps.
 
