@@ -151,7 +151,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
       },
 
       {
-        [test](/configuration/module#rule-test): "\.html$"
+        [test](/configuration/module#rule-test): "\.html$",
 
         [use](/configuration/module#rule-use): [
           // apply multiple loaders and options
