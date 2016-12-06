@@ -3,16 +3,17 @@ title: 代码分割 - CSS
 sort: 3
 contributors:
   - pksjce
+  - xie qianyue
 ---
 
-In webpack, when you use the css-loader and import CSS into your JavaScript files, the CSS is bundled along with your JavaScript.
-This has the disadvantage that, you will not be able to utilize the browser's ability to load CSS asynchronously and parallel. Instead, your page will have to wait until your whole JavaScript bundle is loaded, to style itself.
-webpack can help with this problem by bundling the CSS separately using [extract-text-webpack-plugin](https://github.com/webpack/extract-text-webpack-plugin) and the [css-loader](https://github.com/webpack/css-loader).
+如果你使用 css-loader，并且在 JavaScript 文件里导入了 CSS，webpack 会把 CSS 代码和 JavaScript 代码一块打包。
+这样做的坏处是，浏览器不能异步或并行加载你的 CSS 代码。也就是说，浏览器在加载整个 JavaScript 打包文件后，才能开始渲染 CSS。
+webpack 能很好地解决这个问题，通过使用 [extract-text-webpack-plugin](https://github.com/webpack/extract-text-webpack-plugin) 和 [css-loader](https://github.com/webpack/css-loader)，来把 CSS 打包文件分离开来。
 
-## Using `css-loader`
+## 使用 `css-loader`
 
-To import css into your JavaScript code like [any other module](concept/modules), you will have to use the [css-loader](https://github.com/webpack/css-loader)
-The webpack config with `css-loader` will look like
+你可以使用 [css-loader](https://github.com/webpack/css-loader) 来向你的 JavaScript 代码导入 CSS [模块](concept/modules)。
+`css-loader` 在 webpack 中的配置可以参考下面的代码：
 
 ```javascript
 //webpack.config.js
@@ -31,15 +32,17 @@ modules.exports = function(env){
 }
 ```
 
-## Using `extract-text-webpack-plugin` - ExtractTextPlugin
+## 使用 `extract-text-webpack-plugin` - ExtractTextPlugin
 
-Install this plugin as follows
+使用下面的命令来安装插件：
+
 ```
 npm i --save-dev extract-text-webpack-plugin
 ```
 
-To use this `ExtractTextPlugin`, it needs to be added to the `webpack.config.js` file in two steps.
-### In the loader
+为了使用 `ExtractTextPlugin` 插件, 我们需要在 `webpack.config.js` 中的两个地方作出配置.
+
+### 在 loader 中
 
 Adapting from the previous example with the `css-loader`, we should add `ExtractTextPlugin` as follows
 
