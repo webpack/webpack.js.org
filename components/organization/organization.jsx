@@ -30,7 +30,7 @@ export default props => {
               <h6>Downloads and Stars</h6>
               <Shield content={ `npm/dm/${org.npm}`} label="npm" />
               &nbsp;
-              <Shield content={ `github/stars/${org.repo}` } label="*" />
+              <Shield content={ `github/stars/${org.repo}` } label="&#10029;" />
               
               <h6>Activity</h6>
               <Shield 
