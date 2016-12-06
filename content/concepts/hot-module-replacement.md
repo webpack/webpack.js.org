@@ -13,7 +13,7 @@ application is running without a page reload. You basically can update changed m
 
 ### From The App View
 
-The app code asks the HMR runtime to check of updates. The HMR runtime downloads the updates (async) and tell the app code that an update is available. The app code asks the HMR runtime to apply updates. The HMR runtime applies the update (sync). The app code may or may not require user interaction in this process (you decide).
+The app code asks the HMR runtime to check for updates. The HMR runtime downloads the updates (async) and tell the app code that an update is available. The app code asks the HMR runtime to apply updates. The HMR runtime applies the update (sync). The app code may or may not require user interaction in this process (you decide).
 
 ### From The Compiler (webpack) View
 
