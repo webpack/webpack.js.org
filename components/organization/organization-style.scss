@@ -7,17 +7,16 @@
 .organization__projects {
   display:flex;
   flex-wrap:wrap;
-  justify-content:space-around;
 }
 
 .organization__project {
-  width:300px;
+  width:275px;
   height:400px;
   margin-right:1em;
   margin-bottom:1em;
   padding:1em;
   border-radius:2px;
-  box-shadow:0 0 3px getColor(dove-grey); 
+  box-shadow:0 0 1px getColor(dove-grey); 
   overflow:hidden;
   background:getColor(concrete);
   transition:all 250ms;
