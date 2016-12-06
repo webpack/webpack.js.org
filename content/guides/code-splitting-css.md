@@ -42,9 +42,9 @@ npm i --save-dev extract-text-webpack-plugin
 
 为了使用 `ExtractTextPlugin` 插件, 我们需要在 `webpack.config.js` 中的两个地方作出配置.
 
-### 在 loader 中
+### 在 loader 项中
 
-Adapting from the previous example with the `css-loader`, we should add `ExtractTextPlugin` as follows
+在之前使用 `css-loader` 例子中，我们再加上 `ExtractTextPlugin` 插件：
 
 ```javascript
 ...
@@ -52,16 +52,16 @@ loader: ExtractTextPlugin.extract('css-loader?sourceMap') //Can be used without 
 ...
 ```
 
-### In the plugin
+### 在 plugins 项中
 
 ```javascript
 new ExtractTextPlugin({ filename: 'bundle.css', disable: false, allChunks: true })
 ```
 
-With above two steps, you can generate a new bundle specifically for all the CSS modules and add them as a separate tag in the `index.html`
-For more info on how to use the api please go to [`ExtractTextPlugin` api](https://github.com/webpack/extract-text-webpack-plugin#api).
+通过上面的两步配置，我们生成了一个独立的 CSS 模块的打包文件，然后便可以在 `index.html` 中将它导入。
+关于 `ExtractTextPlugin` 插件 API 的更多信息，请参考[这里](https://github.com/webpack/extract-text-webpack-plugin#api)。
 
-The full config for splitting css with `ExtractTextPlugin` is as follows
+下面是使用 `ExtractTextPlugin` 分割  CSS 的完整配置：
 
 ```javascript
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
