@@ -13,7 +13,7 @@ contributors:
 
 ## require with expression
 
-A context is created if your request contains expressions, so the _exact_ module is not known on compile time.
+A context is created if your request contains expressions, so the **exact** module is not known on compile time.
 
 Example:
 ```javascript
@@ -29,7 +29,7 @@ Regular expression: /^.*\.ejs$/
 
 **context module**
 
-A context module is generated. It contains references to _all modules in that directory_ that can be required with a request matching the regular expression. The context module contains a map which translates requests to module ids.
+A context module is generated. It contains references to **all modules in that directory** that can be required with a request matching the regular expression. The context module contains a map which translates requests to module ids.
 
 Example:
 ```javascript
@@ -43,7 +43,7 @@ The context module also contains some runtime logic to access the map.
 
 This means dynamic requires are supported but will cause all possible modules to be included in the bundle.
 
-## require.context
+## `require.context`
 
 You can create your own context with the require.context function. 
 It allow to pass a directory, regular expression and a flag if subdirectories should be searched too.
