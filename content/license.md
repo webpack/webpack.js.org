@@ -32,4 +32,4 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ----
 
-The content is available under [Creative Commons BY 4.0](https://creativecommons.org/licenses/by/4.0/) license.
+The content is available under [Creative Commons BY 4.0](https://creativecommons.org/licenses/by/4.0/) license meaning attribution is required should you use the content elsewhere. The code samples use [CC0 1.0 Universal (CC0 1.0) (Public Domain)](https://creativecommons.org/publicdomain/zero/1.0/) and you are free to use them as you like.
