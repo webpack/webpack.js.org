@@ -25,7 +25,7 @@ To follow along, please add the following dependencies to your `package.json`:
 To use HMR, you'll need the following dependencies:
 
 ```bash
-npm install --save-dev babel@6.5.2 babel-core@6.13.2 babel-loader@6.2.4 babel-preset-es2015@6.13.2 babel-preset-react@6.11.1 babel-preset-stage-2@6.13.0 css-loader@0.23.1 postcss-loader@0.9.1 react-hot-loader@3.0.0-beta.1 style-loader@0.13.1 webpack@2.1.0-beta.20 webpack-dev-server@2.1.0-beta.0
+npm install --save-dev babel@6.5.2 babel-core@6.13.2 babel-loader@6.2.4 babel-preset-es2015@6.13.2 babel-preset-react@6.11.1 babel-preset-stage-2@6.13.0 css-loader@0.23.1 postcss-loader@0.9.1 react-hot-loader@3.0.0-beta.6 style-loader@0.13.1 webpack@2.1.0-beta.20 webpack-dev-server@2.1.0-beta.0
 ```
 
 In addition, for the purposes of this walkthrough, you'll need:
@@ -175,20 +175,23 @@ import { AppContainer } from 'react-hot-loader';
 
 import App from './components/App';
 
-const render = () => {
+const render = (Component) => {
   ReactDOM.render(
     <AppContainer>
-      <App/>
+      <Component/>
     </AppContainer>,
     document.getElementById('root')
   );
 };
 
-render();
+render(App);
 
 // Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('./components/App', render);
+  module.hot.accept('./components/App', () => {
+    const NewApp = require('./components/App').default
+    render(NewApp)
+  });
 }
 ```
 
