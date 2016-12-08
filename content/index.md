@@ -6,12 +6,12 @@ title: webpack
 **app.js**
 
 ```js
-import bar from './foo';
+import bar from './bar';
 
 bar();
 ```
 
-**foo.js**
+**bar.js**
 
 ```js
 export default function bar() {
