@@ -29,7 +29,11 @@
 
   &__user-section {
     flex: 0 0 25%;
-    padding-left: 20px;
+    padding: 0 0 30px;
+
+    @include break(medium) {
+      padding: 0 0 0 20px;
+    }
 
     @include break(large) {
       border-left: 2px solid getColor(elephant);
@@ -44,6 +48,7 @@
     padding: 1em 0;
     font-size: smaller;
     color: red;
+
     @include break(medium) {
       text-align: center;
     }
@@ -141,19 +146,34 @@
     display: flex;
     flex: 0 0 40%;
     border: 1px solid lightgray;
-    padding: 0 0 0 20px;
-    margin-right: 30px;
+    user-select: none;
+    flex-wrap: wrap;
+
+    @include break(medium){
+      margin-right: 30px;
+      padding: 0 0 0 20px;
+    }
   }
 
   &__item-score {
     align-self: center;
     font-size: 20pt;
-    flex: 0 0 20%;
+    flex: 0 0 100%;
+    text-align: center;
+
+    @include break(medium){
+      flex: 0 0 20%;
+      text-align: left;
+    }
   }
 
   &__item-button {
-      flex: 0 0 40%;
+    flex: 0 0 50%;
       align-self: center;
+
+    @include break(medium){
+      flex: 0 0 40%;
+    }
   }
 
   &__items-list {
@@ -161,7 +181,7 @@
 
     & > li {
       display: block;
-      padding: 5px;
+      padding: 5px 0;
     }
   }
 

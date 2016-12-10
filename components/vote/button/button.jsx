@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import "./button-style.scss";
 
 export default class NewButton extends Component {
-  handleClick (e, n) {
+  handleClick (n) {
     const {maxUp, maxDown, onVote} = this.props;
     onVote(Math.min(maxUp, Math.max(n, -maxDown)));
-    e.preventDefault();
     return false;
   }
 
@@ -16,30 +14,90 @@ export default class NewButton extends Component {
     return n > 0 ? "+" + n : "" + n;
   }
 
-  makeTriangle (n, fn, size, minForEnabled) {
+  makeTriangle (n, fn, size, minForEnabled, increase) {
     const {maxUp, maxDown, color} = this.props;
     const enabled = n !== 0 && (n > 0 ? (maxUp >= minForEnabled) : (maxDown >= minForEnabled));
     const className = "vote-new-button__upDown";
+
     if(enabled) {
-      return <a href="#"
+      return <span
         title={this.titleText(n, maxUp, maxDown)}
-        onClick={e => this.handleClick(e, n)}
-        className={className}>
-          {fn({size: size, color: color})}
-      </a>;
+        onClick={() => this.handleClick(n)}
+        onMouseDown={() => this.startCounter(increase)}
+        onMouseUp={() => this.stopCounter()}
+        onMouseOut={() => this.stopCounter()}
+        onTouchStart={() => this.startCounter(increase)}
+        onTouchEnd={() => this.stopCounter()}
+        onTouchCancel={() => this.stopCounter()}
+        className={className}
+      >
+        {fn({size: size, color: color})}
+      </span>;
     } else {
-      return <a
-        className={className}>
-          {fn({size: size, color: "#eee"})}
-      </a>;
+      return <span
+        className={className}
+      >
+        {fn({size: size, color: "#eee"})}
+      </span>;
     }
   }
+
+  startCounter(increase) {
+    let current = 0;
+    let add = 0;
+    const that = this;
+
+      if (this.interval) {
+          clearInterval(this.interval);
+      }
+
+    this.interval = setInterval(function() {
+        // increase for 1 between 0 and 5
+      if(current <= 5) {
+          current++;
+          add = 1;
+      }
+      // increase for 2 between 6 and 10
+      else if(current <= 10) {
+          current+=2;
+          add = 2;
+      }
+      // increase for 5 between 11 and 40
+      else if(current <= 40) {
+          current+=5;
+          add = 5;
+      }
+      // increase for 10 between 41 and 70
+      else if(current <= 70) {
+          current+=10;
+          add = 10;
+      }
+      // increase for 15 after 71
+      else {
+          current+=15;
+          add = 15;
+      }
+
+      if(!increase) {
+          add *= -1;
+      }
+
+      that.handleClick(add);
+    }, 200);
+  }
+
+  stopCounter() {
+      if (this.interval) {
+        clearInterval(this.interval);
+      }
+  }
+
   render() {
     const {color, className, value, myValue, isLoggedIn} = this.props;
     return isLoggedIn ? (<div className="vote-new-button" style={{color: color}}>
     <div className="vote-new-button__arrows">
-      {this.makeTriangle(1, triangleUp, 10, 1)}
-      {this.makeTriangle(-1, triangleDown, 10, 1)}
+      {this.makeTriangle(1, triangleUp, 10, 1, true)}
+      {this.makeTriangle(-1, triangleDown, 10, 1, false)}
     </div>
     <div className="vote-new-button__value" title={value + " was voted in total by all users."}>
       <span className={className}>{value}</span>

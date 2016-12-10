@@ -1,6 +1,5 @@
 import React from 'react';
 import 'whatwg-fetch';
-import SidebarItem from '../sidebar-item/sidebar-item';
 import * as api from "./api";
 import VoteButton from './button/button';
 import Influence from './influence.jsx';
@@ -211,16 +210,19 @@ export default class VoteApp extends React.Component {
                     let value = (userVote && userVote.votes) ? userVote.votes: 0;
                     if(currencyInfo && currencyInfo.remaining + value < maximum) maximum = currencyInfo.remaining + value;
                     return <div className="vote-app__item-button">
-                    <VoteButton
-                      className={"vote-app__vote-"+voteSettings.name}
-                      value={vote.votes} myValue={value}
-                      maxUp={userVote ? maximum - value : 0}
-                      maxDown={userVote ? value - minimum : 0}
-                      color={this.getColor(voteSettings.name)}
-                      isLoggedIn = {!!voteAppToken}
-                      onVote={(diffValue) => {
-                        this.vote(item.id, voteSettings.name, diffValue, voteSettings.currency, voteSettings.score);
-                      }}></VoteButton></div>;
+                      <VoteButton
+                        className={"vote-app__vote-" + voteSettings.name}
+                        value={vote.votes}
+                        myValue={value}
+                        maxUp={userVote ? maximum - value : 0}
+                        maxDown={userVote ? value - minimum : 0}
+                        color={this.getColor(voteSettings.name)}
+                        isLoggedIn = {!!voteAppToken}
+                        onVote={(diffValue) => {
+                          this.vote(item.id, voteSettings.name, diffValue, voteSettings.currency, voteSettings.score);
+                        }}
+                      />
+                    </div>;
                   })}
                 </div>
                 <div className="vote-app__item-content">

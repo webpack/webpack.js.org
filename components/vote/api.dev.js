@@ -12,16 +12,13 @@ let lists = {
       {
         name: "influence",
         currency: "influence",
-        maximum: 30,
         score: 1,
-        step: 2,
         color: "blue"
       },
       {
         name: "golden",
         currency: "goldenInfluence",
         score: 1,
-        step: 10,
         color: "#bfa203"
       }
     ],
