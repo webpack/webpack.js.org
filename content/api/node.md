@@ -1,8 +1,11 @@
 ---
 title: Node.js API
+sort: 3
 contributors:
   - sallar
+  - rynclark
 ---
+
 webpack provides a Node.js API which can be used directly in Node.js runtime.
 
 The Node.js API is useful in scenarios in which you need to customize the build or development process since all the reporting and error handling must be done manually and webpack only does the compiling part.
@@ -20,7 +23,7 @@ Then require the webpack module in your Node.js script:
 ``` js
 const webpack = require("webpack");
 
-// Or if you prefer ES6:
+// Or if you prefer ES2015:
 import webpack from "webpack";
 ```
 
@@ -150,15 +153,15 @@ Can be used to check if there were errors while compiling. Returns `true` or `fa
 
 Can be used to check if there were warnings while compiling. Returns `true` or `false`.
 
-### `stats.toJSON(options)`
+### `stats.toJson(options)`
 
 Returns compilation information as a JSON object. `options` can be either a string (a preset) or an object for more granular control:
 
 ``` js-with-links
-stats.toJSON("minimal"); // [more options: "verbose", etc](/configuration/stats).
+stats.toJson("minimal"); // [more options: "verbose", etc](/configuration/stats).
 ```
 ``` js
-stats.toJSON({
+stats.toJson({
   assets: false,
   hash: true
 });
@@ -172,7 +175,7 @@ All available options and presets are described in [Stats documentation](/config
 
 Returns a formatted string of the compilation information (similar to [CLI](/api/cli) output).
 
-Options are the same as [`stats.toJSON(options)`](/api/node#stats-tojson-options-) with one addition:
+Options are the same as [`stats.toJson(options)`](/api/node#stats-tojson-options-) with one addition:
 
 ``` js
 stats.toString({
@@ -226,7 +229,7 @@ webpack({
     return;
   }
 
-  const info = stats.toJSON();
+  const info = stats.toJson();
 
   if (stats.hasErrors()) {
     console.error(info.errors);
@@ -253,7 +256,7 @@ const compiler = webpack({ /* options*/ });
 
 compiler.outputFileSystem = fs;
 compiler.run((err, stats) => {
-  // Read te output later:
+  // Read the output later:
   const content = fs.readFileSync("...");
 });
 ```

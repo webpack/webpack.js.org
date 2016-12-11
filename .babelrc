@@ -1,10 +1,9 @@
 {
   "presets": [
-    "es2015",
+    "env",
     "react"
   ],
   "plugins": [
-    "syntax-object-rest-spread",
     "transform-object-rest-spread"
   ]
 }

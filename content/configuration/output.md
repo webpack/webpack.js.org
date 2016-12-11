@@ -1,5 +1,6 @@
 ---
 title: Output
+sort: 5
 contributors:
   - sokra
   - skipjack
@@ -13,19 +14,9 @@ The top-level `output` key contains set of options instructing webpack on how an
 
 `string`
 
-The filename of non-entry chunks as a relative path inside the `output.path` directory.
-
-`[id]` is replaced by the id of the chunk.
-
-`[name]` is replaced by the name of the chunk (or with the id when the chunk has no name).
-
-`[hash]` is replaced by the hash of the compilation.
-
-`[chunkhash]` is replaced by the hash of the chunk.
-
 This options determines the name of on-demand loaded chunk files. See [`output.filename`](#output-filename) option for details on the possible values.
 
-Note that these filenames need to be generated at runtime to send the requests for chunks. Because of this placeholders like `[name]` and `[chunkhash]` need to add a mapping from chunk id to placeholder value to the output bundle with the webpack runtime. This increases the size and may invalidate the bundle when placeholder value for any chunk changes.
+Note that these filenames need to be generated at runtime to send the requests for chunks. Because of this, placeholders like `[name]` and `[chunkhash]` need to add a mapping from chunk id to placeholder value to the output bundle with the webpack runtime. This increases the size and may invalidate the bundle when placeholder value for any chunk changes.
 
 By default `[id].js` is used or a value inferred from [`output.filename`](#output-filename) (`[name]` is replaced with `[id]` or `[id].` is prepended).
 
@@ -38,18 +29,12 @@ Only used when [`target`](/configuration/target) is web, which uses JSONP for lo
 
 Enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) loading of chunks. The following values are accepted...
 
-`crossOriginLoading: false` - Disables cross-origin loading (default)
+`crossOriginLoading: false` - Disable cross-origin loading (default)
 
 `crossOriginLoading: "anonymous"` - Enable cross-origin loading **without credentials**
 
 `crossOriginLoading: "use-credentials"` - Enable cross-origin loading **with credentials**
 
-For more information on cross-origin loading see [MDN](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin)
-
-> Default: `false`
-
-> see also [[library and externals]]
-> see also [[Development Tools]]
 
 ## `output.devtoolFallbackModuleFilenameTemplate`
 
@@ -64,7 +49,7 @@ See [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametempla
 
 `boolean | object`
 
-(Deprecated: Not really used, not really useable, write an issue if you have a other opinion)
+(Deprecated: Not really used, not really usable, write an issue if you have a other opinion)
 
 Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines.
 
@@ -148,7 +133,7 @@ Using hashes based on each chunks' content:
 filename: "[chunkhash].bundle.js"
 ```
 
-Make sure the read the [Caching guide](/how-to/cache) for details. There are more steps involved than just setting this option.
+Make sure the read the [Caching guide](/guides/caching) for details. There are more steps involved than just setting this option.
 
 The default value is `"[name].js"`.
 
@@ -156,66 +141,24 @@ Note this option is called filename but you are still allowed to something like 
 
 Note this options does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#output-chunkfilename) option is used. It also doesn't affect files created by loaders. For these files see loader options.
 
-More examples:
-
-**single entry**
-``` javascript
-{
-  entry: './src/app.js',
-  output: {
-    filename: 'bundle.js',
-    path: __dirname + '/build'
-  }
-}
-
-// writes to disk: ./build/bundle.js
-```
-
-**multiple entries**
-
-If your configuration creates more than a single "chunk" (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use substitutions to ensure that each file has a unique name.
-
-`[name]` is replaced by the name of the chunk.
-
-`[hash]` is replaced by the hash of the compilation.
-
-`[chunkhash]` is replaced by the hash of the chunk.
-
-``` javascript
-{
-  entry: {
-    app: './src/app.js',
-    search: './src/search.js'
-  },
-  output: {
-    filename: '[name].js',
-    path: __dirname + '/build'
-  }
-}
-
-// writes to disk: ./build/app.js, ./build/search.js
-```
-
-
 ## `output.hotUpdateChunkFilename`
 
 `string`
 
-The filename of the Hot Update Chunks. They are inside the `output.path` directory.
+Customize the filenames of hot update chunks. See [`output.filename`](#output-filename) option for details on the possible values.
 
-`[id]` is replaced by the id of the chunk.
+The only placeholders allowed here are `[id]` and `[hash]`, the default being:
 
-`[hash]` is replaced by the hash of the compilation. (The last hash stored in the records)
+``` js
+hotUpdateChunkFilename: "[id].[hash].hot-update.js"
+```
 
-> Default: `"[id].[hash].hot-update.js"`
+Here is no need to change it.
+
 
 ## `output.hotUpdateFunction`
 
 `function`
-
-The JSONP function used by webpack for async loading of hot update chunks.
-
-> Default: `"webpackHotUpdate"`
 
 Only used when [`target`](/configuration/target) is web, which uses JSONP for loading hot updates.
 
@@ -228,19 +171,19 @@ For details see [`output.jsonpFunction`](#output-jsonpfunction).
 
 `string`
 
-The filename of the Hot Update Main File. It is inside the `output.path` directory.
+Customize the main hot update filename. See [`output.filename`](#output-filename) option for details on the possible values.
 
-`[hash]` is replaced by the hash of the compilation. (The last hash stored in the records)
+`[hash]` is the only available placeholder, the default being:
 
-> Default: `"[hash].hot-update.json"`
+``` js
+hotUpdateMainFilename: "[hash].hot-update.json"
+```
 
-See [`output.filename`](#output-filename) option for details on the possible values.
+Here is no need to change it.
 
 ## `output.jsonpFunction`
 
 `function`
-
-> Default: `"webpackJsonp"`
 
 Only used when [`target`](/configuration/target) is web, which uses JSONP for loading on-demand chunks.
 
@@ -255,7 +198,7 @@ If using the [`output.library`](#output-library) option, the library name is aut
 
 `string`
 
-Read the [library guide](/how-to/author-libraries) for details.
+Read the [library guide](/guides/author-libraries) for details.
 
 Use `library`, and `libraryTarget` below, when writing a JavaScript library that should export values, which can be used by other code depending on it. Pass a string with the name of the library:
 
@@ -265,7 +208,7 @@ library: "MyLibrary"
 
 The name is used depending on the value of the [`output.libraryTarget`](#output-librarytarget) options.
 
-Note that `output.libraryTarget` defaults to `var`. This means if only `output.library` is used it is exported as variable declaration (when used as script tag it's avaiable in the global scope after execution).
+Note that `output.libraryTarget` defaults to `var`. This means if only `output.library` is used it is exported as variable declaration (when used as script tag it's available in the global scope after execution).
 
 
 ## `output.libraryTarget`
@@ -277,7 +220,8 @@ Note that `output.libraryTarget` defaults to `var`. This means if only `output.l
 Read the [library guide](/how-to/author-libraries) for details.
 
 Configure how the library will be exposed. Any one of the following options can be used.
-_To give your library a name, set the `output.library` config to it (the examples assume `library: "MyLibrary"`)_
+
+> To give your library a name, set the `output.library` config to it (the examples assume `library: "MyLibrary"`)
 
 The following options are supported:
 
@@ -325,18 +269,27 @@ require("MyLibrary").doSomething();
 _Wondering the difference between commonjs and commonjs2? Check [this](https://github.com/webpack/webpack/issues/1114) out (they are pretty much the same)._
 
 
-`libraryTarget: "commonjs-module"` - Expose it using the `module.exports` object (`output.library` is ignored), `__esModule` is defined (it's threaded as ES6 Module in interop mode)
+`libraryTarget: "commonjs-module"` - Expose it using the `module.exports` object (`output.library` is ignored), `__esModule` is defined (it's threaded as ES2015 Module in interop mode)
 
 
-`libraryTarget: "amd "` - In this case webpack will surround you library with an AMD.
-But there is a very important pre-requisite, your entry chunk must be defined with the define property, if not, webpack wil create the AMD module, but without dependencies. I learned this the hard way, it’s logical but not obvious I think. Anyway… the output will be something like this:
+`libraryTarget: "amd"` - In this case webpack will make your library an AMD module.
+
+But there is a very important pre-requisite, your entry chunk must be defined with the define property, if not, webpack wil create the AMD module, but without dependencies. 
+The output will be something like this:
 
 ```javascript
 define([], function() {
 	//what this module returns is what your entry chunk returns
 });
 ```
-But if you download this script, first you may get a error: define is not defined, it’s ok! if you are distributing your library as amd, then your users need to use requirejs to load it. But, require([_what_])? `output.library`!
+But if you download this script, first you may get a error: `define is not defined`, it’s ok! 
+If you are distributing your library with AMD, then your users need to use RequireJS to load it. 
+
+Now that you have requirejs loaded, you can load your library.
+
+But, `require([ _what?_ ])`? 
+
+`output.library`!
 
 ```javascript
 output: {
@@ -345,13 +298,15 @@ output: {
 }
 ```
 
-And the module will be:
+So your module will be like:
 
 ```javascript
 define("MyLibrary", [], function() {
 	//what this module returns is what your entry chunk returns
 });
 ```
+
+And you can use it like this:
 
 ```javascript
 // And then your users will be able to do:
@@ -360,8 +315,7 @@ require(["MyLibrary"], function(MyLibrary){
 });
 ```
 
-
-`libraryTarget: "umd"` - This is a way for your library to work with all module definitions (and where aren’t modules at all). It will work with commonjs, amd and as global variable.
+`libraryTarget: "umd"` - This is a way for your library to work with all module definitions (and where aren't modules at all). It will work with CommonJS, amd AMD as global variable.
 Here to name your module you need the another property:
 
 ```javascript
@@ -403,24 +357,7 @@ The output directory as an **absolute path** (required).
 path: path.resolve(__dirname, 'dist/assets')
 ```
 
-And a more complicated example of using a CDN and hashes for assets.
-
-**config.js**
-
-``` javascript
-output: {
-	path: path.resolve(__dirname, "proj/cdn/assets/[hash]"),
-	publicPath: "http://cdn.example.com/assets/[hash]/"
-}
-```
-
-**Note:** In cases when the eventual `publicPath` of output files isn't known at compile time, it can be left blank and set dynamically at runtime in the entry point file. If you don't know the `publicPath` while compiling, you can omit it and set `__webpack_public_path__` on your entry point.
-
-``` javascript
- __webpack_public_path__ = myRuntimePublicPath
-
-// rest of your application entry
-```
+Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching) for details.
 
 ## `output.pathinfo`
 
@@ -432,14 +369,14 @@ Tell webpack to include comments in bundles with information about the contained
 pathinfo: true
 ```
 
-Note it also adds some info about tree shaking to the generate bundle.
+Note it also adds some info about tree shaking to the generated bundle.
 
 
 ## `output.publicPath`
 
 `string`
 
-This is a pretty important option when using on-demand-loading or loading external resources like images, files, etc. If an incorrect value is specified you'll receive 404 errors while loading these resources.
+This is an important option when using on-demand-loading or loading external resources like images, files, etc. If an incorrect value is specified you'll receive 404 errors while loading these resources.
 
 This option specifies the **public URL** of the output directory when referenced in a browser. A relative URL is resolved relative to the HTML page (or `<base>` tag). Server-relative URLs, protocol-relative URLs or absolute URLs are also possible and sometimes required, i. e. when hosting assets on a CDN.
 
@@ -477,7 +414,7 @@ background-image: url(/assets/spinner.gif);
 
 The webpack-dev-server also takes a hint from `publicPath`, using it to determine where to serve the output files from.
 
-Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/how-to/cache) for details.
+Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching) for details.
 
 Examples:
 
@@ -527,4 +464,4 @@ When using `libraryTarget: "umd"`, setting:
 umdNamedDefine: true
 ```
 
-will name the AMD module of the UMD build. Otherwise a anonymous `define` is used.
+will name the AMD module of the UMD build. Otherwise an anonymous `define` is used.

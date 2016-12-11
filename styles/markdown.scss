@@ -1,8 +1,7 @@
 // Markdown styling is based on https://gist.github.com/tuzz/3331384.
-
 @import 'vars';
 @import 'functions';
-@import '~prismjs/themes/prism-funky';
+@import 'prism-theme';
 
 .page__content,
 .splash__section {
@@ -16,14 +15,14 @@
   h6 { font-size: getFontSize(-1); }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family:'Geomanist', 'Century Gothic', sans-serif;
-    font-weight:400;
+    font-family: $font-stack-heading;
+    font-weight:600;
     line-height:1;
     margin:1.5em 0 0.25em;
-    color:map-get($colors, mine-shaft);
+    color:getColor(fiord);
 
     &:first-child { margin-top:0; }
-    tt, code { font-size:inherit; }
+    tt, code { font-size: 90%; color: inherit }
   }
 
   p, blockquote, table, pre {
@@ -40,7 +39,7 @@
 
   hr {
     border:none;
-    background-color:map-get($colors, alto);
+    background-color:getColor(alto);
     height:3px;
     margin:2em 0;
   }
@@ -76,7 +75,7 @@
   blockquote {
     border-left: 4px solid #dddddd;
     padding:0.75em 1em;
-    color:map-get($colors, dove-grey);
+    color:getColor(dove-grey);
 
     > :first-child { margin-top: 0; }
     > :last-child { margin-bottom: 0; }
@@ -86,27 +85,28 @@
     &.todo {
       border-left:none;
       border-radius: 3px;
-      color:map-get($colors, mine-shaft);
 
-      .tip-icon {
-        margin-right:0.5em;
-      }
-
-      .tip-title {
-        font-size:0.8em;
-        font-weight:600;
-        margin-bottom:0.5em;
-        text-transform:uppercase;
+      .tip-content {
+        font-style: italic;
       }
 
       code {
-        background-color:transparentize(map-get($colors, alto), 0.5);
+        color: inherit;
       }
     }
 
-    &.tip { background-color:transparentize(#1abc9c, 0.8); }
-    &.warning { background-color:transparentize(#f1c40f, 0.8); }
-    &.todo { background-color:transparentize(#e74c3c, 0.8); }
+    &.tip {
+      background-color: #DCF2FD;
+      color: #618ca0;
+    }
+    &.warning {
+      background-color: #fbedb7;
+      color: #8c8466;
+    }
+    &.todo {
+      background-color: #fbddcd;
+      color: #907a6e;
+    }
   }
 
   table {
@@ -155,26 +155,31 @@
   }
 
   b, strong {
-    color:map-get($colors, mine-shaft);
     font-weight:600;
   }
 
   code, tt {
-    font-family:'Ubuntu Mono', monospace;
+    font-family: $font-stack-code;
+    font-size: 90%;
     margin: 0 2px;
-    padding: 0 5px;
+    padding: 2px 6px;
     white-space: nowrap;
-    border: 1px solid #eaeaea;
-    background-color: #f8f8f8;
+    background-color: transparentize(getColor(fiord), 0.94);
     border-radius: 3px;
+    text-shadow: 0 1px 0 transparentize(getColor(white), 0.4);
+  }
+
+  a code {
+    color: $text-color-highlight;
   }
 
   pre {
-    background-color:map-get($colors, mine-shaft);
+    background-color: rgba(238, 238, 238, 0.35);
+    background-color: getColor(elephant);
     font-size: 13px;
     line-height: 19px;
     overflow: auto;
-    padding: 6px 10px;
+    padding: 8px 16px;
     border-radius: 3px;
 
     code {
@@ -182,12 +187,25 @@
       padding: 0;
       white-space: pre;
       border: none;
-      color:map-get($colors, concrete);
       background: transparent;
+      text-shadow: 0 1px 0 transparentize(darken(getColor(elephant), 10%), 0.5);
+      color: desaturate(getColor(malibu), 40%);
 
       .code-details-summary-span {
         margin-left: -15px;
         cursor: pointer;
+      }
+
+      a {
+        border-bottom: 1px dotted getColor(denim);
+      }
+
+      .code-link {
+        position: relative;
+
+        &:hover {
+          color: lighten(getColor(denim), 15%);
+        }
       }
     }
 

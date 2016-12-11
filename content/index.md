@@ -1,20 +1,21 @@
+---
+title: webpack
+---
 ## Write your code.
 
-**index.js**
+**app.js**
 
 ```js
-const foo = require('./foo.js')
+import bar from './bar';
 
-foo.bar()
+bar();
 ```
 
-**foo.js**
+**bar.js**
 
 ```js
-module.exports = {
-  bar: function () {
-    //
-  }
+export default function bar() {
+  //
 }
 ```
 
@@ -24,9 +25,9 @@ module.exports = {
 
 ```js
 module.exports = {
-  entry: './index.js',
+  entry: './app.js',
   output: {
-    path: 'bundle.js'
+    filename: 'bundle.js'
   }
 }
 ```
@@ -40,10 +41,10 @@ module.exports = {
   </head>
   <body>
     ...
-    <script src="/bundle.js"></script>
+    <script src="bundle.js"></script>
   </body>
 </html>
 ```
 
-## It's that simple. 
+## It's that simple.
 ## [Get Started](/get-started)

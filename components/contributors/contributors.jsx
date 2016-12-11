@@ -8,14 +8,16 @@ export default ({contributors}) => {
 
   return (
     <div className="contributors">
-      <h3>Contributors:</h3>
+      <hr />
+      <h3>Contributors</h3>
       <div className="contributors__list">
         {
-          (contributors).map((contributor) => (
+          contributors.map(contributor => (
             <a key={ contributor }
               className="contributor"
               href={ `https://github.com/${contributor}` }>
-              <img src={ `https://github.com/${contributor}.png?size=50` } />
+              <img src={ `https://github.com/${contributor}.png?size=90` } />
+              <span className="contributor__name"> {contributor}</span>
             </a>
           ))
         }

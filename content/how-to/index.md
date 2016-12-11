@@ -1,6 +1,0 @@
----
-title: How to
----
-
-TODO
-

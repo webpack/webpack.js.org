@@ -2,15 +2,18 @@ import React from 'react';
 import Interactive from 'antwar-interactive';
 import Container from '../container/container';
 import Sidebar from '../sidebar/sidebar';
+import Sidecar from '../sidecar/sidecar';
 import Contributors from '../contributors/contributors';
 import '../../styles';
 import './page-style';
+import '../sidebar/sidebar-style';
 
 export default ({ section, page }) => {
   let edit = `https://github.com/webpack/webpack.js.org/edit/develop/content/${page.url}.md`;
 
   return (
     <Container className="page">
+      <Sidecar />
       <Interactive
         id="components/sidebar/sidebar.jsx"
         component={Sidebar}
@@ -27,13 +30,12 @@ export default ({ section, page }) => {
         <h1>{ page.title }</h1>
 
         <a className="page__edit" href={ edit }>
-          Edit this Page&nbsp;&nbsp;
+          Edit this Page
+          &nbsp;&nbsp;
           <i className="icon-edit" />
         </a>
 
         <div dangerouslySetInnerHTML={{ __html: page.content }} />
-
-        <hr />
 
         <Contributors contributors={ page.contributors } />
       </section>

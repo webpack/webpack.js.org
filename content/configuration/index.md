@@ -1,12 +1,13 @@
 ---
 title: Configuration
+sort: 1
 contributors:
   - sokra
   - skipjack
   - grgur
 ---
 
-Webpack is fed a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
+Webpack is fed via a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
 
 T> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html). This prevents file path issues between operating systems. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more.
 
@@ -32,11 +33,11 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 
     [path](/configuration/output#output-path): path.resolve(__dirname, "dist"), // string
     // the target directory for all output files
-    // must be an absolute path (use the node.js path module)
+    // must be an absolute path (use the Node.js path module)
 
     <details><summary>[filename](/configuration/output#output-filename): "bundle.js", // string</summary>
     [filename](/configuration/output#output-filename): "[name].js", // for multiple entry points
-    [filename](/configuration/output#output-filename): "[chunkhash].js", // for [long term caching](/how-to/cache)
+    [filename](/configuration/output#output-filename): "[chunkhash].js", // for [long term caching](/guides/caching)
     </details>
     // the filename template for entry chunks
 
@@ -50,8 +51,8 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
     // the name of the exported library
 
     <details><summary>[libraryTarget](/configuration/output#output-librarytarget): "umd", // enum</summary>
-    [libraryTarget](/configuration/output#output-librarytarget): "umd-module", // ES6 module wrapped in UMD
-    [libraryTarget](/configuration/output#output-librarytarget): "commonjs-module", // ES6 module wrapped in CommonJs
+    [libraryTarget](/configuration/output#output-librarytarget): "umd-module", // ES2015 module wrapped in UMD
+    [libraryTarget](/configuration/output#output-librarytarget): "commonjs-module", // ES2015 module wrapped in CommonJS
     [libraryTarget](/configuration/output#output-librarytarget): "commonjs2", // exported with module.exports
     [libraryTarget](/configuration/output#output-librarytarget): "commonjs", // exported as properties to exports
     [libraryTarget](/configuration/output#output-librarytarget): "amd", // defined with AMD defined method
@@ -66,7 +67,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
     // include useful path info about modules, exports, requests, etc. into the generated code
 
     [chunkFilename](/configuration/output#output-chunkfilename): "[id].js",
-    [chunkFilename](/configuration/output#output-chunkfilename): "[chunkhash].js", // for [long term caching](/how-to/cache)
+    [chunkFilename](/configuration/output#output-chunkfilename): "[chunkhash].js", // for [long term caching](/guides/caching)
     // the filename template for additional chunks
 
     [jsonpFunction](/configuration/output#output-jsonpfunction): "myWebpackJsonp", // string
@@ -141,7 +142,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
         [loader](/configuration/module#rule-loader): "babel-loader",
         // the loader which should be applied, it'll be resolve relative to the context
         // -loader suffix is no longer optional in Webpack 2 for clarity reasons
-        // see [webpack 1 upgrade guide](/how-to/upgrade-from-webpack-1)
+        // see [webpack 1 upgrade guide](/guides/migrating)
 
         [options](/configuration/module#rule-options-rule-query): {
           presets: ["es2015"]
@@ -150,7 +151,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
       },
 
       {
-        [test](/configuration/module#rule-test): "\.html$"
+        [test](/configuration/module#rule-test): "\.html$",
 
         [use](/configuration/module#rule-use): [
           // apply multiple loaders and options
@@ -299,8 +300,8 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 
   <details><summary>[target](/configuration/target): "web", // enum</summary>
   [target](/configuration/target): "webworker", // WebWorker
-  [target](/configuration/target): "node", // node.js via require
-  [target](/configuration/target): "async-node", // node.js via fs and vm
+  [target](/configuration/target): "node", // Node.js via require
+  [target](/configuration/target): "async-node", // Node.js via fs and vm
   [target](/configuration/target): "node-webkit", // nw.js
   [target](/configuration/target): "electron-main", // electron, main process
   [target](/configuration/target): "electron-renderer", // electron, renderer process

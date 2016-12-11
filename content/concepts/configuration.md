@@ -1,8 +1,27 @@
 ---
 title: Configuration
+sort: 6
+contributors:
+- TheLarkInn
 ---
 
-You may have noticed that few webpack configurations look exactly alike. This is because **webpack's configuration file is a JavaScript file that exports an object.** This object, is then parsed by webpack based upon its defined properties.
+You may have noticed that few webpack configurations look exactly alike. This is because **webpack's configuration file is a JavaScript file that exports an object.** This object is then processed by webpack based upon its defined properties.
+
+Because it's a standard Node.js CommonJS module, you **can do the following**:
+
+* import other files via `require(...)`
+* use utilities on npm via `require(...)`
+* use JavaScript control flow expressions i. e. the `?:` operator
+* use constants or variables for often used values
+* write and execute function to generate a part of the configuration
+
+Use these features when appropriate.
+
+**You should NOT use the following things**. Technically you could use them, but it's **not recommended**:
+
+* Access CLI arguments, when using the webpack CLI (instead write your own CLI, or use `--env`)
+* Export non-deterministic values (calling webpack twice should result in the same output files)
+* Write very long configurations (instead split the configuration into multiple files)
 
 The following examples below describe how webpack's configuration object can be both expressive and configurable because _it is code_:
 
@@ -11,10 +30,12 @@ The following examples below describe how webpack's configuration object can be 
 **webpack.config.js**
 
 ```javascript
+var path = require('path');
+
 module.exports = {
   entry: './foo.js',
   output: {
-    path: 'dist',
+    path: path.resolve(__dirname, 'dist'),
     filename: 'foo.bundle.js'
   }
 };
@@ -35,8 +56,8 @@ var baseConfig = {
     entry: './entry.js'
   },
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, './dist')
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js'
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
@@ -55,7 +76,7 @@ let targets = ['web', 'webworker', 'node', 'async-node', 'node-webkit', 'electro
   let base = webpackMerge(baseConfig, {
     target: target,
     output: {
-      path: path.resolve(__dirname, './dist/' + target),
+      path: path.resolve(__dirname, 'dist/' + target),
       filename: '[name].' + target + '.js'
     }
   });
@@ -65,7 +86,7 @@ let targets = ['web', 'webworker', 'node', 'async-node', 'node-webkit', 'electro
 module.exports = targets;
 ```
 
-T> The most important part to take away from this document is that there are many different ways to format and style your webpack configuation. The key is to stick with something consistent that you and your team can understand and maintain.
+T> The most important part to take away from this document is that there are many different ways to format and style your webpack configuration. The key is to stick with something consistent that you and your team can understand and maintain.
 
 ## Using TypeScript
 
@@ -132,7 +153,7 @@ export class NgCliWebpackConfig {
 
 ## Using JSX
 
-In the example below JSX (React JS Markup) and Babel to create a JSON Configuration that webpack can understand. (Courtesy of [Jason Miller](https://twitter.com/_developit))
+In the example below JSX (React JavaScript Markup) and Babel to create a JSON Configuration that webpack can understand. (Courtesy of [Jason Miller](https://twitter.com/_developit))
 
 ```javascript
 import h from 'jsxobj';
@@ -143,7 +164,7 @@ const CustomPlugin = config => ({
   name: 'custom-plugin'
 });
 
-const CONFIG = (
+export default (
   <webpack target="web" watch>
     <entry path="src/index.js" />
     <resolve>
@@ -161,6 +182,4 @@ const CONFIG = (
     </plugins>
   </webpack>
 );
-
-document.body.textContent = JSON.stringify(CONFIG, 0, '  ');
 ```

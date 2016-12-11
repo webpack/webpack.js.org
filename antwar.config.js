@@ -37,12 +37,32 @@ module.exports = {
         );
       }
     ),
+    'get-started': section(
+      'Get-Started',
+      function() {
+        return require.context(
+          'json-loader!yaml-frontmatter-loader!./content/get-started',
+          false,
+          /^\.\/.*\.md$/
+        )
+      }
+    ),
     concepts: section(
       'Concepts',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/concepts',
           false,
+          /^\.\/.*\.md$/
+        );
+      }
+    ),
+    guides: section(
+      'Guides',
+      function() {
+        return require.context(
+          'json-loader!yaml-frontmatter-loader!./content/guides',
+          true,
           /^\.\/.*\.md$/
         );
       }
@@ -57,21 +77,21 @@ module.exports = {
         );
       }
     ),
-    'how-to': section(
-      'How to',
-      function() {
-        return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/how-to',
-          true,
-          /^\.\/.*\.md$/
-        );
-      }
-    ),
     api: section(
       'API',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/api',
+          false,
+          /^\.\/.*\.md$/
+        );
+      }
+    ),
+    pluginsapi: section(
+      'Plugins API',
+      function() {
+        return require.context(
+          'json-loader!yaml-frontmatter-loader!./content/pluginsapi',
           false,
           /^\.\/.*\.md$/
         );
@@ -95,6 +115,14 @@ module.exports = {
           false,
           /^\.\/.*\.md$/
         );
+      }
+    ),
+    vote: voteList(
+      'Voting',
+      {
+        index: true,
+        feedback: true,
+        moneyDistribution: true,
       }
     )
   }
@@ -155,5 +183,47 @@ function processPage() {
     contributors: function(o) {
       return Array.isArray(o.file.contributors) && o.file.contributors.length && o.file.contributors.slice().sort();
     }
+  };
+}
+
+function voteList(title, lists) {
+  return {
+    title: title,
+    path: function() {
+      function context(request) {
+        var name = /^\.\/(.*)\.md$/.exec(request)[1];
+        return {
+          name: name,
+          __content: '' // make antwar happy
+        };
+      }
+      context.keys = function() {
+        return Object.keys(lists).map(k => './' + k + '.md');
+      };
+      return context;
+    },
+    processPage: {
+      url: function(o) {
+        return 'vote/' + o.file.name;
+      },
+      name: function(o) {
+        return o.file.name;
+      },
+      anchors: function(o) {
+        return [];
+      },
+      content: function(o) {
+        return '';
+      }
+    },
+    layouts: {
+      index: function() {
+        return require('./components/vote/list.jsx').default
+      },
+      page: function() {
+        return require('./components/vote/list.jsx').default
+      }
+    },
+    redirects: {} // <from>: <to>
   };
 }

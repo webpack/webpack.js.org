@@ -1,5 +1,6 @@
 ---
 title: Module
+sort: 6
 contributors:
   - sokra
   - skipjack
@@ -11,7 +12,7 @@ These options determine how the [different types of modules](/concepts/modules) 
 
 `RegExp | [RegExp]`
 
-Prevent webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries...
+Prevent webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries.
 
 ```js
 noParse: /jquery|backbone/
@@ -24,35 +25,33 @@ noParse: /jquery|backbone/
 An array of [Rules](#rule) which are matched to requests when modules are created. These rules can modify how the module is created. They can apply loaders to the module, or modify the parser.
 
 
-## `Rule`
+## Rule
 
-A Rule can be separated into three parts: Conditions, Results and nested Rules.
+A Rule can be separated into three parts — Conditions, Results and nested Rules.
 
-### `Rule` conditions
+### Rule conditions
 
 There are two input values for the conditions:
 
-The resource: An absolute path to the file requested. It's already resolved according the [`resolve` rules](/configuration/resolve).
+1. The resource: An absolute path to the file requested. It's already resolved according the [`resolve` rules](/configuration/resolve).
 
-The issuer: An absolute path to the file of the module which requested the resource. It's the location of the import.
+2. The issuer: An absolute path to the file of the module which requested the resource. It's the location of the import.
 
-**Example:** The `import "./style.css"` from `app.js`:
-
-Resource is `/path/to/style.css`. Issuer is `/path/to/app.js`.
+**Example:** When we `import "./style.css"` from `app.js`, the resource is `/path/to/style.css` and the issuer is `/path/to/app.js`.
 
 In a Rule the properties [`test`](#rule-test), [`include`](#rule-include), [`exclude`](#rule-exclude) and [`resource`](#rule-resource) are matched with the resource and the property [`issuer`](#rule-issuer) is matched with the issuer.
 
 When using multiple conditions, all conditions must match.
 
-### `Rule` results
+### Rule results
 
-Rule results are only used when the Rule condition matches.
+Rule results are used only when the Rule condition matches.
 
 There are two output values of a Rule:
 
-The applied loaders: An array of loaders applied to the resource. Separated in pre-, post- and normal loaders.
+1. Applied loaders: An array of loaders applied to the resource.
 
-The parser options: An object with options which should be used to create the parser for this module.
+2. Parser options: An options object which should be used to create the parser for this module.
 
 These properties affect the loaders: [`loader`](#rule-loader), [`options`](#rule-options-rule-query), [`use`](#rule-use).
 
@@ -63,16 +62,15 @@ The [`enforce`](#rule-enforce) property affect the loader category. Whether it's
 The [`parser`](#rule-parser) property affect the parser options.
 
 
-## `Rule` nested rules
+## Nested rules
 
-With the properties [`rules`](#rule-rules) and [`oneOf`](#rule-oneof) nested rules can be specified.
+Nested rules can be specified under the properties [`rules`](#rule-rules) and [`oneOf`](#rule-oneof). 
 
-Nested rules are used when the Rule condition matches.
-
+These rules are evaluated when the Rule condition matches.
 
 ## `Rule.enforce`
 
-Either `"pre"`, `"post"` or no value.
+Possible values: `"pre" | "post"`
 
 Specifies the category of the loader. No value means normal loader.
 
@@ -139,13 +137,13 @@ For each different parser options object a new parser is created and plugins can
 ``` js-with-links
 parser: {
   amd: false, // disable AMD
-  commonjs: false, // disable CommonJs
-  system: false, // disable System
-  harmony: false, // disable harmony import/export
+  commonjs: false, // disable CommonJS
+  system: false, // disable SystemJS
+  harmony: false, // disable ES6 Harmony import/export
   requireInclude: false, // disable require.include
   requireEnsure: false, // disable require.ensure
   requireContext: false, // disable require.context
-  browserify: false, // disable special handling of browserify bundles
+  browserify: false, // disable special handling of Browserify bundles
   requireJs: false, // disable requirejs.*
   node: false, // disable __dirname, __filename, module, require.extensions, require.main, etc.
   node: {...} // reconfigure [node](/configuration/node) layer on module level

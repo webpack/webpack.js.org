@@ -2,10 +2,16 @@ import React from 'react';
 import Interactive from 'antwar-interactive';
 import { GoogleAnalytics } from 'antwar-helpers';
 import Navigation from '../navigation/navigation';
-import Sidecar from '../sidecar/sidecar';
 import Footer from '../footer/footer';
 import SidebarMobile from '../sidebar-mobile/sidebar-mobile';
 import './site-style';
+import '../../styles/icon.font.js';
+import '../container/container-style.scss';
+import '../navigation/navigation-style';
+import '../navigation/search-style';
+import '../sidebar-mobile/sidebar-mobile-style';
+import '../sidebar-item/sidebar-item-style';
+import '../logo/logo-style';
 
 export default props => {
   // Retrieve section data
@@ -38,7 +44,6 @@ export default props => {
         component={ SidebarMobile }
         sections={ sections } />
 
-      <Sidecar />
       { props.children }
       <Footer />
 

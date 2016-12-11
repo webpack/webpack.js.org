@@ -1,0 +1,108 @@
+@import 'vars';
+@import 'mixins';
+@import 'functions';
+
+.vote-app {
+  margin: 1.5em;
+
+  &__influence-descriptions {
+    display: flex;
+    flex-direction: column;
+
+    @include break(medium) {
+      flex-direction: row;
+    }
+  }
+
+  &__influence-section {
+    flex: 0 0 100%;
+  }
+
+  &__influence-disclaimer {
+    padding: 1em 0;
+    flex: 0 0 100%;
+    font-size: smaller;
+    color: red;
+    @include break(medium) {
+      text-align: center;
+    }
+  }
+
+  &__self-info {
+    margin-top: 10px;
+  }
+
+  &__update-button {
+    float: right;
+  }
+
+  h1 {
+    font-size: 20pt;
+    font-weight: bold;
+  }
+
+  &__item-title {
+    font-size: 16pt;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+
+  &__currency-list {
+    display: block;
+
+    & > li {
+      display: inline-block;
+      padding: 5px;
+    }
+  }
+
+  &__item-table td {
+    vertical-align: middle;
+  }
+
+  &__item-score {
+    font-size: 150%;
+    width: 90px;
+    text-align: right;
+  }
+
+  &__items-list {
+    display: block;
+
+    & > li {
+      display: block;
+      padding: 5px;
+    }
+  }
+
+  &__currency-influence, &__vote-influence {
+    color: blue;
+    &:before {
+      content: "♦\2009";
+    }
+  }
+
+  &__currency-goldenInfluence, &__vote-golden {
+    color: #bfa203;
+    &:before {
+      content: "♦\2009";
+    }
+  }
+
+  &__currency-support, &__vote-support {
+    color: green;
+    &:before {
+      content: "$\2009";
+    }
+  }
+
+  &__vote-thumb {
+
+  }
+
+  &__admin {
+    input, textarea, button {
+      width: 100%;
+    }
+  }
+}

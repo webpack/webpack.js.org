@@ -1,14 +1,8 @@
 import React from 'react';
-import CubeImg from '../../assets/cube.png';
-import './logo-style';
+import Logo from '../../assets/site-logo.svg';
 
-export default props => {
-  let { light } = props;
-
+export default () => {
   return (
-    <span className={ `logo${light ? ' logo--light' : ''}` }>
-      <img className="logo__icon" src={ CubeImg } />
-      <span className="logo__text">webpack</span>
-    </span>
-  );    
+    <img className="logo" src={ Logo } />
+  );
 };

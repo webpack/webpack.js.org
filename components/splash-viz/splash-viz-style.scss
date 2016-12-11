@@ -1,41 +1,47 @@
-@import 'vars';
 @import 'functions';
 @import 'mixins';
 
 .splash-viz {
   position:relative;
   display:flex;
-  height:100vh;
+  height:calc(100vh - 55px);
   min-height:320px;
   max-height:720px;
-  background:linear-gradient(
-    to bottom right, 
-    map-get($colors, white) 0%, 
-    map-get($colors, white) 25%,
-    map-get($colors, alto) 100%
-  );
+  background:getColor(elephant);
 
   &__modules,
-  &__output { 
-    flex:0 0 43.25%;
-  }
-
-  &__icon {
-    display:flex;
-    flex:1 1 auto;
-    align-items:center;
-    justify-content:center;
-  }
-    
-  &__cube {
-    margin-right:-1.25em;
+  &__output {
+    flex:0 0 45%;
   }
 
   &__modules {
     display:none;
 
     @include break {
-      display:block;
+      display:flex;
+      align-items:center;
+      justify-content: flex-end;
+
+      img {
+        margin-right:10%;
+        width:40%;
+        max-width:400px;
+      }
+    }
+  }
+
+  &__icon {
+    display:flex;
+    flex:1 1 auto;
+    align-items:center;
+    justify-content: center;
+
+    img {
+      width:45%; 
+
+      @include break {
+        width:100%;
+      }
     }
   }
 
@@ -44,25 +50,13 @@
 
     @include break {
       display:flex;
-      flex-wrap:wrap;
-      align-content:center;
-      justify-content:center;
+      align-items:center;
     }
   }
 
-  &__headline {
-    position:absolute;
-    display:block;
-    width:100%;
-    bottom:5%;
-    left:0;
-    padding:0 1em;
-    text-align:center;
-    font-size:getFontSize(2);
-    font-family:'Geomanist', 'Century Gothic', sans-serif;
-
-    @include break {
-      bottom:10%;
-    }
+  &__files {
+    width:40%;
+    max-width:400px;
+    margin-left:10%;
   }
 }
