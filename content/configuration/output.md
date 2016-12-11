@@ -4,6 +4,7 @@ sort: 5
 contributors:
   - sokra
   - skipjack
+  - tomasAlabes
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -249,7 +250,7 @@ MyLibrary.doSomething(); //if this is window
 ```
 
 
-`libraryTarget: "commonjs"` - When your library is loaded, the return value of your entry point will be part of the exports object. As the name implies, this is used in commonjs environments:
+`libraryTarget: "commonjs"` - When your library is loaded, the return value of your entry point will be part of the exports object. As the name implies, this is used in CommonJS environments:
 
 ```javascript
 exports["MyLibrary"] = _entry_return_;
@@ -258,7 +259,7 @@ exports["MyLibrary"] = _entry_return_;
 require("MyLibrary").doSomething();
 ```
 
-`libraryTarget: "commonjs2"` - When your library is loaded, the return value of your entry point will be part of the exports object. As the name implies, this is used in commonjs environments:
+`libraryTarget: "commonjs2"` - When your library is loaded, the return value of your entry point will be part of the exports object. As the name implies, this is used in CommonJS environments:
 
 ```javascript
 module.exports = _entry_return_;
@@ -267,7 +268,7 @@ module.exports = _entry_return_;
 require("MyLibrary").doSomething();
 ```
 
-_Wondering the difference between commonjs and commonjs2? Check [this](https://github.com/webpack/webpack/issues/1114) out (they are pretty much the same)._
+_Wondering the difference between CommonJS and CommonJS2? Check [this](https://github.com/webpack/webpack/issues/1114) out (they are pretty much the same)._
 
 
 `libraryTarget: "commonjs-module"` - Expose it using the `module.exports` object (`output.library` is ignored), `__esModule` is defined (it's threaded as ES2015 Module in interop mode)
@@ -286,7 +287,7 @@ define([], function() {
 But if you download this script, first you may get a error: `define is not defined`, it’s ok! 
 If you are distributing your library with AMD, then your users need to use RequireJS to load it. 
 
-Now that you have requirejs loaded, you can load your library.
+Now that you have RequireJS loaded, you can load your library.
 
 But, `require([ _what?_ ])`? 
 
@@ -316,8 +317,10 @@ require(["MyLibrary"], function(MyLibrary){
 });
 ```
 
-`libraryTarget: "umd"` - This is a way for your library to work with all module definitions (and where aren't modules at all). It will work with CommonJS, amd AMD as global variable.
-Here to name your module you need the another property:
+`libraryTarget: "umd"` - This is a way for your library to work with all the module definitions (and where aren't modules at all). 
+It will work with CommonJS, AMD and as global variable. You can check the [UMD Repository](https://github.com/umdjs/umd) to know more about it. 
+
+In this case, you need the another property to name your module:
 
 ```javascript
 output: {
@@ -344,6 +347,8 @@ And finally the output is:
 ```
 
 Module proof library.
+
+The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
 
 
 ## `output.path`
