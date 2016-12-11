@@ -218,7 +218,7 @@ Note that `output.libraryTarget` defaults to `var`. This means if only `output.l
 
 > Default: `"var"`
 
-Read the [library guide](/how-to/author-libraries) for details.
+Read the [library guide](/guides/author-libraries) for details.
 
 Configure how the library will be exposed. Any one of the following options can be used.
 
