@@ -4,6 +4,7 @@ sort: 5
 contributors:
   - sokra
   - skipjack
+  - tomasAlabes
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -13,7 +14,7 @@ The top-level `output` key contains set of options instructing webpack on how an
 
 `string`
 
-This option determines the name of on-demand loaded chunk files. See [`output.filename`](#output-filename) option for details on the possible values.
+This options determines the name of on-demand loaded chunk files. See [`output.filename`](#output-filename) option for details on the possible values.
 
 Note that these filenames need to be generated at runtime to send the requests for chunks. Because of this, placeholders like `[name]` and `[chunkhash]` need to add a mapping from chunk id to placeholder value to the output bundle with the webpack runtime. This increases the size and may invalidate the bundle when placeholder value for any chunk changes.
 
@@ -140,7 +141,6 @@ Note this option is called filename but you are still allowed to something like 
 
 Note this options does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#output-chunkfilename) option is used. It also doesn't affect files created by loaders. For these files see loader options.
 
-
 ## `output.hotUpdateChunkFilename`
 
 `string`
@@ -181,7 +181,6 @@ hotUpdateMainFilename: "[hash].hot-update.json"
 
 Here is no need to change it.
 
-
 ## `output.jsonpFunction`
 
 `function`
@@ -216,36 +215,149 @@ Note that `output.libraryTarget` defaults to `var`. This means if only `output.l
 
 `string`
 
-Read the [library guide](/guides/author-libraries) for details.
+> Default: `"var"`
 
-Configure how the library will be exposed. Any one of the following options can be used: (the examples assume `library: "MyLibrary"`)
+Read the [library guide](/how-to/author-libraries) for details.
 
-`libraryTarget: "amd"` - Expose it using [Asynchronous Module Definition](http://davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/) (AMD)
+Configure how the library will be exposed. Any one of the following options can be used.
 
-`libraryTarget: "commonjs"` - Expose it using the `exports` object (i.e. `exports["MyLibrary"] = ...`)
+> To give your library a name, set the `output.library` config to it (the examples assume `library: "MyLibrary"`)
 
-`libraryTarget: "commonjs2"` - Expose it using the `module.exports` object (`output.library` is ignored)
+The following options are supported:
+
+
+`libraryTarget: "var"` - (default) When your library is loaded, the **return value of your entry point** will be assigned to a variable:
+
+```javascript
+var MyLibrary = _entry_return_;
+
+// your users will use your library like:
+MyLibrary.doSomething();
+```
+(Not specifying a `output.library` will cancel this var configuration)
+
+
+`libraryTarget: "this"` - When your library is loaded, the **return value of your entry point** will be assigned to this, the meaning of `this` is up to you:
+
+```javascript
+this["MyLibrary"] = _entry_return_;
+
+// your users will use your library like:
+this.MyLibrary.doSomething();
+MyLibrary.doSomething(); //if this is window
+```
+
+
+`libraryTarget: "commonjs"` - When your library is loaded, the return value of your entry point will be part of the exports object. As the name implies, this is used in commonjs environments:
+
+```javascript
+exports["MyLibrary"] = _entry_return_;
+
+//your users will use your library like:
+require("MyLibrary").doSomething();
+```
+
+`libraryTarget: "commonjs2"` - When your library is loaded, the return value of your entry point will be part of the exports object. As the name implies, this is used in commonjs environments:
+
+```javascript
+module.exports = _entry_return_;
+
+//your users will use your library like:
+require("MyLibrary").doSomething();
+```
+
+_Wondering the difference between commonjs and commonjs2? Check [this](https://github.com/webpack/webpack/issues/1114) out (they are pretty much the same)._
+
 
 `libraryTarget: "commonjs-module"` - Expose it using the `module.exports` object (`output.library` is ignored), `__esModule` is defined (it's threaded as ES2015 Module in interop mode)
 
-`libraryTarget: "this"` - Expose it as a property of `this` (i.e. `this["MyLibrary"] = ...`)
 
-`libraryTarget: "umd"` - Expose it using [Universal Module Definition](http://davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/) (UMD)
+`libraryTarget: "amd"` - In this case webpack will make your library an AMD module.
 
-`libraryTarget: "var"` - Expose it as a variable (i.e. `var MyLibrary = ...`)
+But there is a very important pre-requisite, your entry chunk must be defined with the define property, if not, webpack wil create the AMD module, but without dependencies. 
+The output will be something like this:
+
+```javascript
+define([], function() {
+	//what this module returns is what your entry chunk returns
+});
+```
+But if you download this script, first you may get a error: `define is not defined`, it’s ok! 
+If you are distributing your library with AMD, then your users need to use RequireJS to load it. 
+
+Now that you have requirejs loaded, you can load your library.
+
+But, `require([ _what?_ ])`? 
+
+`output.library`!
+
+```javascript
+output: {
+	name: "MyLibrary",
+	libraryTarget: "amd"
+}
+```
+
+So your module will be like:
+
+```javascript
+define("MyLibrary", [], function() {
+	//what this module returns is what your entry chunk returns
+});
+```
+
+And you can use it like this:
+
+```javascript
+// And then your users will be able to do:
+require(["MyLibrary"], function(MyLibrary){
+	MyLibrary.doSomething();
+});
+```
+
+`libraryTarget: "umd"` - This is a way for your library to work with all module definitions (and where aren't modules at all). It will work with CommonJS, amd AMD as global variable.
+Here to name your module you need the another property:
+
+```javascript
+output: {
+	name: "MyLibrary",
+	libraryTarget: "umd",
+	umdNamedDefine: true
+}
+```
+
+And finally the output is:
+```javascript
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define("MyLibrary", [], factory);
+	else if(typeof exports === 'object')
+		exports["MyLibrary"] = factory();
+	else
+		root["MyLibrary"] = factory();
+})(this, function() {
+	//what this module returns is what your entry chunk returns
+});
+```
+
+Module proof library.
+
 
 ## `output.path`
 
 `string`
 
-The output directory as an **absolute** path.
+The output directory as an **absolute path** (required).
 
-```js
+**config.js**
+
+```javascript
 path: path.resolve(__dirname, 'dist/assets')
 ```
 
 Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching) for details.
-
 
 ## `output.pathinfo`
 
