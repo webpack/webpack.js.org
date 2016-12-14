@@ -21,6 +21,7 @@
     cursor: pointer;
     color: getColor(dusty-grey);
     transition: color 250ms;
+    margin-left: 1.5rem;
 
     &:hover {
       color: getColor(mine-shaft);
