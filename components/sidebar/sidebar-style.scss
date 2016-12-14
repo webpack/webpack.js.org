@@ -2,7 +2,7 @@
 @import 'mixins';
 
 .sidebar {
-  position: relative;
+  position: absolute;
   display: none;
   flex: 1;
   min-height: 100%;
