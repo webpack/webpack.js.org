@@ -273,15 +273,15 @@ require.ensure([], function(require) {
 });
 ```
 
-The ES2015 Loader spec defines `System.import` as method to load ES2015 Modules dynamically on runtime.
+The ES2015 Loader spec defines `import()` as method to load ES2015 Modules dynamically on runtime.
 
-webpack treats `System.import` as a split-point and puts the requested module in a separate chunk.
+webpack treats `import()` as a split-point and puts the requested module in a separate chunk.
 
-`System.import` takes the module name as argument and returns a Promise.
+`import()` takes the module name as argument and returns a Promise.
 
 ``` js
 function onClick() {
-  System.import("./module").then(module => {
+  import("./module").then(module => {
     module.default;
   }).catch(err => {
     console.log("Chunk loading failed");
@@ -291,7 +291,7 @@ function onClick() {
 
 Good news: Failure to load a chunk can be handled now because they are `Promise` based.
 
-Caveat: `require.ensure` allows for easy chunk naming with the optional third argument, but `System.import` API doesn't offer that capability yet. If you want to keep that functionality, you can continue using `require.ensure`.
+Caveat: `require.ensure` allows for easy chunk naming with the optional third argument, but `import` API doesn't offer that capability yet. If you want to keep that functionality, you can continue using `require.ensure`.
 
 ```javascript
 require.ensure([], function(require) {
@@ -299,15 +299,17 @@ require.ensure([], function(require) {
 }, 'custom-chunk-name');
 ```
 
+(Note on the deprecated `System.import`: Webpack's use of `System.import` didn't fit the proposed spec, so it was deprecated in [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) in favor of `import()`)
+
 ### Dynamic expressions
 
-It's possible to pass a partial expression to `System.import`. This is handled similar to expressions in CommonJS (webpack creates a [context](https://webpack.github.io/docs/context.html) with all possible files).
+It's possible to pass a partial expression to `import()`. This is handled similar to expressions in CommonJS (webpack creates a [context](https://webpack.github.io/docs/context.html) with all possible files).
 
-`System.import` creates a separate chunk for each possible module.
+`import()` creates a separate chunk for each possible module.
 
 ``` js
 function route(path, query) {
-  return System.import("./routes/" + path + "/route")
+  return import("./routes/" + path + "/route")
     .then(route => new route.Route(query));
 }
 // This creates a separate chunk for each possible route
