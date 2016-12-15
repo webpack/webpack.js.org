@@ -136,12 +136,8 @@ module.exports = {
     ),
 
     organization: {
-      title: 'organization',
-      path: '/organization',
-      layouts: { 
-        index: function() {
-          return require('./components/organization/organization.jsx').default
-        }
+      path() {
+        return require('./components/organization/organization.jsx').default
       }
     }
   }
