@@ -85,7 +85,7 @@ See [#2986](https://github.com/webpack/webpack/issues/2986) for the reason behin
 
 ## `json-loader` is not required anymore
 
-When no loader has been configured for a JSON file, webpack will automatically try to load the JSON 
+When no loader has been configured for a JSON file, webpack will automatically try to load the JSON
 file with the [json-loader](https://github.com/webpack/json-loader).
 
 ``` diff
@@ -94,7 +94,7 @@ file with the [json-loader](https://github.com/webpack/json-loader).
 -       loader: "json-loader"
 -   }
 ```
- 
+
 [We decided to do this](https://github.com/webpack/webpack/issues/3363) in order to iron out environment differences
   between webpack and node.js/browserify.
 
@@ -183,9 +183,9 @@ module: {
 plugins: [
 -  new ExtractTextPlugin("bundle.css", {allChunks: true, disable: false})
 +  new ExtractTextPlugin({
-+   filename: "bundle.css",
-+   disable: false,
-+   allChunks: true
++    filename: "bundle.css",
++    disable: false,
++    allChunks: true
 +  })
 ]
 ```
