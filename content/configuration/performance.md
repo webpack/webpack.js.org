@@ -5,7 +5,7 @@ contributors:
   - thelarkinn
 ---
 
-The options allows you to control how webpack notifies you of assets and entrypoints that exceed a specific file limit. 
+These options allows you to control how webpack notifies you of assets and entrypoints that exceed a specific file limit. 
 This feature was inspired by the idea of [webpack Performance Budgets](https://github.com/webpack/webpack/issues/3216).
 
 ## `performance`
