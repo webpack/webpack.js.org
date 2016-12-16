@@ -1,5 +1,5 @@
 ---
-title: Getting Started
+title: Getting Started with Webpack 2
 sort: 3
 contributors:
   - bebraw
