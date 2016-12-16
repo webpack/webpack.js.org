@@ -88,7 +88,7 @@ const config = {
 };
 ```
 
-In the configuration above we have defined a rule which used our loader with its two required properties: `test`, and `use`. This tells webpack's compiler the following:
+In the configuration above we have defined a `rules` property for a single module with two required properties: `test`, and `use`. This tells webpack's compiler the following:
 
 > "Hey webpack compiler, when you come across a path that resolves to a '.js' or '.jsx' file inside of a `require()`/`import` statement, **use** the `babel-loader` to transform it before you add it to the bundle".
 
