@@ -9,6 +9,8 @@ contributors:
 
 Webpack is fed via a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
 
+T> New to webpack? Check out our guide to some of webpack's [core concepts](/concepts) to get started!
+
 T> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html). This prevents file path issues between operating systems. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more.
 
 ## Options
