@@ -282,7 +282,7 @@ webpack treats `import()` as a split-point and puts the requested module in a se
 ``` js
 function onClick() {
   import("./module").then(module => {
-    module.default;
+    return module.default;
   }).catch(err => {
     console.log("Chunk loading failed");
   });
