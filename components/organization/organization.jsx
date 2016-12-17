@@ -1,6 +1,7 @@
 import React from 'react';
 import Container from '../container/container';
 import Contributors from '../contributors/contributors';
+import Link from '../link/link';
 import Items from './projects.json';
 import './organization-style';
 
@@ -55,7 +56,15 @@ export default props => {
               <Shield content={ `github/issues-pr-raw/${org.repo}` } label="prs" />
               
               <h6>Maintainers</h6>
-              <Contributors contributors={[ org.maintainer ]} />
+              {
+                (() => {
+                  if (org.maintainer) {
+                    return <Contributors contributors={[ org.maintainer ]} />;
+
+                  } else return <Link to="https://github.com/webpack/webpack/issues/2734">Maintainer needed...</Link>;
+                })()
+              }
+              
             </div>
           ))
         }
