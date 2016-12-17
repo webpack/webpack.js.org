@@ -1,9 +1,9 @@
 import React from 'react';
 import 'whatwg-fetch';
-import SidebarItem from '../sidebar-item/sidebar-item';
 import * as api from "./api";
 import VoteButton from './button/button';
 import Influence from './influence.jsx';
+import GithubMark from '../../assets/github-logo.svg';
 
 function updateByProperty(array, property, propertyValue, update) {
   return array.map(item => {
@@ -174,59 +174,62 @@ export default class VoteApp extends React.Component {
         });
       }
     });
-
+    listInfo && console.log(listInfo);
     return (
       <div className="vote-app">
         <div className="vote-app__influence">
-          <div className="vote-app__influence-descriptions">  
-            <Influence className="vote-app__influence-section" type="normal"/>
-            <Influence className="vote-app__influence-section" type="golden"/>
-          </div>
-          <div className="vote-app__influence-disclaimer">
-            DISCLAIMER: Since this feature is its Alpha stages, the formula for calculating influence may change.
+          <div className="vote-app__top">
+            <div className="vote-app__influence">
+              <div className="vote-app__influence-description">
+                <Influence className="vote-app__influence-section" type="normal"/>
+                <Influence className="vote-app__influence-section" type="golden"/>
+              </div>
+              <div className="vote-app__influence-disclaimer">
+                DISCLAIMER: Since this feature is its Alpha stages, the formula for calculating influence may change.
+              </div>
+            </div>
+            <div className="vote-app__user-section">
+              {this.renderSelf(inProgress)}
+            </div>
           </div>
         </div>
-        {this.renderSelf()}
         { listInfo && <div>
-          <button className="vote-app__update-button" disabled={inProgress} onClick={() => {
-            this.updateSelf();
-            this.updateList();
-          }}>Update</button>
           <h1>{listInfo.displayName}</h1>
           <div>{listInfo.description}</div>
           <ul className="vote-app__items-list">
             { listInfo.items.map(item => <li key={item.id}>
-              <table className="vote-app__item-table">
-                <tbody>
-                  <tr>
-                    <td className="vote-app__item-score">
-                      {item.score}
-                    </td>
-                    {listInfo.possibleVotes.map((voteSettings, idx) => {
-                      let vote = item.votes[idx];
-                      let userVote = item.userVotes && item.userVotes[idx];
-                      let currencyInfo = selfInfo && voteSettings.currency && this.findByName(selfInfo.currencies, voteSettings.currency);
-                      let maximum = voteSettings.maximum || 1000; // infinity
-                      let minimum = voteSettings.minimum || 0;
-                      let value = (userVote && userVote.votes) ? userVote.votes: 0;
-                      if(currencyInfo && currencyInfo.remaining + value < maximum) maximum = currencyInfo.remaining + value;
-                      return <td>
-                        <VoteButton 
-                          className={"vote-app__vote-" + voteSettings.name}
-                          value={vote.votes} myValue={value}
-                          maxUp={userVote ? maximum - value : 0} maxDown={userVote ? value - minimum : 0} 
-                          color={this.getColor(voteSettings.name)} onVote={(diffValue) => {
-                            this.vote(item.id, voteSettings.name, diffValue, voteSettings.currency, voteSettings.score);
-                          }} />
-                      </td>;
-                    })}
-                    <td className="vote-app__item-content">
-                      <span className="vote-app__item-title">{item.title}</span>
-                      <span>{item.description}</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <div className="vote-app__item-card">
+                <div className="vote-app__score-section">
+                  <div className="vote-app__item-score">{item.score}</div>
+                  {listInfo.possibleVotes.map((voteSettings, idx) => {
+                    let vote = item.votes[idx];
+                    let userVote = item.userVotes && item.userVotes[idx];
+                    let currencyInfo = selfInfo && voteSettings.currency && this.findByName(selfInfo.currencies, voteSettings.currency);
+                    let maximum = voteSettings.maximum || 1000; // infinity
+                    let minimum = voteSettings.minimum || 0;
+                    let value = (userVote && userVote.votes) ? userVote.votes: 0;
+                    if(currencyInfo && currencyInfo.remaining + value < maximum) maximum = currencyInfo.remaining + value;
+                    return <div className="vote-app__item-button">
+                      <VoteButton
+                        className={"vote-app__vote-" + voteSettings.name}
+                        value={vote.votes}
+                        myValue={value}
+                        maxUp={userVote ? maximum - value : 0}
+                        maxDown={userVote ? value - minimum : 0}
+                        color={this.getColor(voteSettings.name)}
+                        isLoggedIn = {!!voteAppToken}
+                        onVote={(diffValue) => {
+                          this.vote(item.id, voteSettings.name, diffValue, voteSettings.currency, voteSettings.score);
+                        }}
+                      />
+                    </div>;
+                  })}
+                </div>
+                <div className="vote-app__item-content">
+                  <span className="vote-app__item-title">{item.title}</span>
+                  <span>{item.description}</span>
+                </div>
+              </div>
             </li>)}
             { listInfo.isAdmin && <li className="vote-app__admin">
               <div><input type="text" value={this.state.newTitle} disabled={inProgress} onChange={e => this.setState({newTitle: e.target.value})} /></div>
@@ -260,21 +263,21 @@ export default class VoteApp extends React.Component {
     );
   }
 
-  renderSelf() {
+  renderSelf (inProgress) {
     let { listInfo, selfInfo, isFetchingSelf } = this.state;
     if(!selfInfo) {
       if(isFetchingSelf) {
         return <div className="vote-app__self-info">Loading user info...</div>;
       }
-      return <div className="vote-app__self-info">You are not logged in. <button onClick={() => {
+      return <div className="vote-app__login-button"><button onClick={() => {
         api.startLogin(window.location + "");   
-      }}>Login with Github</button></div>;
+      }}>Login with Github <img src={GithubMark}/> </button></div>;
     } else {
       return <div className="vote-app__self-info">
-        You are logged in as {selfInfo.login}. <button onClick={() => {
-          delete window.localStorage.voteAppToken;
-          window.location.reload();
-        }}>Log out</button>
+        <div className="vote-app__userinfo" >
+          <img alt={selfInfo.login} src={selfInfo.avatar} />
+          {selfInfo.login}
+        </div>
         { listInfo && <ul className="vote-app__currency-list">
           { selfInfo.currencies
             .filter(currency => listInfo.possibleVotes.some(voteSettings => voteSettings.currency === currency.name))
@@ -282,6 +285,16 @@ export default class VoteApp extends React.Component {
             {currency.remaining} {currency.displayName}
           </li>) }
         </ul> }
+        <div className="vote-app__button-area">
+          <button className="vote-app__logout-button" onClick={() => {
+            delete window.localStorage.voteAppToken;
+            window.location.reload();
+          }}>Logout</button>
+          <button className="vote-app__update-button" disabled={inProgress} onClick={() => {
+              this.updateSelf();
+              this.updateList();
+            }}>Update</button>
+        </div>
       </div>;
     }
   }

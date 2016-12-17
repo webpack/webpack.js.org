@@ -5,7 +5,7 @@
 .vote-app {
   margin: 1.5em;
 
-  &__influence-descriptions {
+  &__top {
     display: flex;
     flex-direction: column;
 
@@ -14,31 +14,108 @@
     }
   }
 
+  &__influence {
+    flex: 0 0 75%;
+  }
+
+  &__influence-description {
+    display: flex;
+    flex-direction: column;
+
+    @include break(medium) {
+      flex-direction: row;
+    }
+  }
+
+  &__user-section {
+    flex: 0 0 25%;
+    padding: 0 0 30px;
+
+    @include break(medium) {
+      padding: 0 0 0 20px;
+    }
+
+    @include break(large) {
+      border-left: 2px solid getColor(elephant);
+    }
+  }
+  
   &__influence-section {
-    flex: 0 0 100%;
+    flex: 0 0 50%;
   }
 
   &__influence-disclaimer {
     padding: 1em 0;
-    flex: 0 0 100%;
     font-size: smaller;
     color: red;
+
     @include break(medium) {
       text-align: center;
     }
+  }
+
+  &__login-button {
+    margin: 20px 0;
+
+    button {
+      border: none;
+      outline: none;
+      color: getColor(white);
+      background: getColor(elephant);
+      padding: 5px 10px 5px 10px;
+      border-radius: 2px;
+      font-size: 13px;
+      cursor: pointer;
+
+      &:hover {
+        background: black;
+      }
+
+      &:active {
+        background: getColor(elephant)
+      }
+    }
+
+    img {
+      height: 25px;
+      vertical-align: middle;
+      padding-left: 5px;
+    }
+  }
+
+  &__userinfo {
+    outline: none;
+    border: none;
+    background: getColor(elephant);
+    color: white;
+    border-radius: 3px;
+    font-size: 13px;
+    display: inline-block;
+    padding: 3px 10px;
+
+    img {
+      height: 25px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }  
   }
 
   &__self-info {
     margin-top: 10px;
   }
 
+  &__button-area {
+    margin: 5px 0;
+  }
+
   &__update-button {
-    float: right;
+    
   }
 
   h1 {
-    font-size: 20pt;
+    font-size: 16pt;
     font-weight: bold;
+    margin-bottom: 10px;
   }
 
   &__item-title {
@@ -56,14 +133,47 @@
     }
   }
 
-  &__item-table td {
-    vertical-align: middle;
+  &__item-card {
+    display: flex;
+    flex-direction: column;
+
+    @include break(medium){
+      flex-direction: row;
+    }
+  }
+
+  &__score-section {
+    display: flex;
+    flex: 0 0 40%;
+    border: 1px solid lightgray;
+    user-select: none;
+    flex-wrap: wrap;
+
+    @include break(medium){
+      margin-right: 30px;
+      padding: 0 0 0 20px;
+    }
   }
 
   &__item-score {
-    font-size: 150%;
-    width: 90px;
-    text-align: right;
+    align-self: center;
+    font-size: 20pt;
+    flex: 0 0 100%;
+    text-align: center;
+
+    @include break(medium){
+      flex: 0 0 20%;
+      text-align: left;
+    }
+  }
+
+  &__item-button {
+    flex: 0 0 50%;
+      align-self: center;
+
+    @include break(medium){
+      flex: 0 0 40%;
+    }
   }
 
   &__items-list {
@@ -71,7 +181,7 @@
 
     & > li {
       display: block;
-      padding: 5px;
+      padding: 5px 0;
     }
   }
 
