@@ -86,6 +86,8 @@ const config = {
     ]
   }
 };
+
+module.exports = config;
 ```
 
 In the configuration above we have defined a `rules` property for a single module with two required properties: `test`, and `use`. This tells webpack's compiler the following:
