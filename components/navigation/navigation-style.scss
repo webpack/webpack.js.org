@@ -34,6 +34,10 @@
   @include break {
     display: none;
   }
+
+  .icon-menu {
+    display: inline-flex;
+  }
 }
 
 .navigation__logo {
