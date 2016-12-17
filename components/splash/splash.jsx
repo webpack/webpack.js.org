@@ -5,7 +5,6 @@ import SplashViz from '../splash-viz/splash-viz';
 import '../../styles';
 import './splash-style';
 import '../splash-viz/splash-viz-style';
-import '../splash-file/splash-file-style';
 import Support from '../support/support';
 
 export default props => {
