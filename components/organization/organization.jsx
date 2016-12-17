@@ -25,7 +25,7 @@ export default props => {
                 <h4>{ org.repo }</h4>
               </a>
 
-              <p>Short description...</p>
+              <p>{ org.description }</p>
 
               <h6>Downloads and Stars</h6>
               <Shield content={ `npm/dm/${org.npm}`} label="npm" />
