@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import './text-rotater.scss';
+import './text-rotater-style.scss';
 
 export default class TextRotater extends React.PureComponent {
 
