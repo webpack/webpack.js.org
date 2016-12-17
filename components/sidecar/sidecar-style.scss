@@ -15,11 +15,19 @@
 
 .sidecar__link {
   display: inline-block;
-  padding: 0.75em;
+  padding: 0.65em;
   float: right;
   clear: both;
-  color: getColor(alto);
+  color: getColor(concrete);
   transition: all 250ms;
+
+  &:first-of-type {
+    border-top-left-radius: 3px;
+  }
+
+  &:last-of-type {
+    border-bottom-left-radius: 3px;
+  }
 
   &:hover {
     color: getColor(white);
@@ -38,8 +46,9 @@
 
 .sidecar__icon {
   display: inline-block;
-  width: 16px;
+  width: 18px;
   vertical-align: middle;
+  font-size: 18px;
 }
 
 // TODO: Fix hardcoded widths using flex perhaps, can't animate to width auto
@@ -68,10 +77,10 @@
 }
 
 .sidecar__link--medium {
-  background: desaturate(#19aa6e, 15%);
+  background: desaturate(#02b875, 15%);
 
   &:hover {
-    background: #19aa6e;
+    background: #02b875;
 
     .sidecar__label {
       width: 115px;
@@ -80,10 +89,10 @@
 }
 
 .sidecar__link--so {
-  background: desaturate(#f48024, 15%);
+  background: desaturate(#fe7a15, 15%);
 
   &:hover {
-    background: #f48024;
+    background: #fe7a15;
 
     .sidecar__label {
       width: 125px;
