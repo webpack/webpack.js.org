@@ -113,16 +113,17 @@ module.exports = {
   },
 
   module: {
-    loaders: [
-      { test: /\.js$/,
-        loaders: [
+    rules: [
+      {
+        test: /\.js$/,
+        use: [
           'babel-loader',
         ],
         exclude: /node_modules/
       },
       {
         test: /\.css$/,
-        loaders: [
+        use: [
           'style-loader',
           'css-loader?modules',
           'postcss-loader',
