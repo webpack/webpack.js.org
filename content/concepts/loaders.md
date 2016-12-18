@@ -5,6 +5,7 @@ contributors:
   - manekinekko
   - ev1stensberg
   - SpaceK33z
+  - gangachris
 ---
 
 Loaders are transformations that are applied on a resource file of your application. They are functions (running in Node.js) that take the source of a resource file as the parameter and return the new source.
@@ -13,7 +14,7 @@ For example, you can use loaders to tell webpack to load a CSS file or to conver
 
 ## Loader Features
 
-* Loaders can be chained. They are applied in a pipeline to the resource. A chain of loaders are compiled chronologically. The first loader in a chain of loaders returns an value to the next and at the end loader, webpack expects JavaScript to be returned.
+* Loaders can be chained. They are applied in a pipeline to the resource. A chain of loaders are compiled chronologically. The first loader in a chain of loaders returns a value to the next and at the end loader, webpack expects JavaScript to be returned.
 * Loaders can be synchronous or asynchronous.
 * Loaders run in Node.js and can do everything that’s possible there.
 * Loaders accept query parameters. This can be used to pass configuration to the loader.
@@ -22,7 +23,7 @@ For example, you can use loaders to tell webpack to load a CSS file or to conver
 * Plugins can give loaders more features.
 * Loaders can emit additional arbitrary files.
 
-Loaders allows more power in the JavaScript ecosystem through preprocessing 
+Loaders allows more power in the JavaScript ecosystem through preprocessing
 functions (loaders). Users now have more flexibility to include fine-grained logic such as compression, packaging, language translations and [more](/loaders).
 
 ## Resolving Loaders
