@@ -12,7 +12,7 @@ export default class SplashViz extends React.Component {
       <section className="splash-viz">
         <h1 className="splash-viz__heading">
           <span> bundle your</span>
-          <TextRotator repeatDelay={ 5000 }>
+          <TextRotator repeatDelay={ 5000 } maxWidth={ 110 }>
             <span> assets </span>
             <span> scripts </span>
             <span> images </span>
