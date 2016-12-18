@@ -51,7 +51,7 @@ export default class TextRotater extends React.PureComponent {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, maxWidth } = this.props;
     const { currentIndex, contentHeight } = this.state;
     const childrenCount = React.Children.count(children);
 
@@ -65,7 +65,7 @@ export default class TextRotater extends React.PureComponent {
           className="text-rotater__wrap"
           ref={ trw => (this.textRotatorWrap = trw) }
           onTransitionEnd={ this.handleTransitionEnd }
-          style={ { height: contentHeight } }
+          style={ { height: contentHeight, width: maxWidth } }
         >
           { currentChild }
           { nextChild }
@@ -85,5 +85,8 @@ TextRotater.propTypes = {
   children: PropTypes.arrayOf(PropTypes.node),
   delay: PropTypes.number,
   repeatDelay: PropTypes.number,
+  // Needed to prevent jump when
+  // rotating between texts of different widths
+  maxWidth: PropTypes.number,
 };
 
