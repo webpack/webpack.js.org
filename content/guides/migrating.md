@@ -250,7 +250,7 @@ To keep compatibility with old loaders, this information can be passed via plugi
 
 The `debug` option switched loaders to debug mode in webpack 1. This need to be passed via loader options in long-term. See loader documentation for relevant options.
 
-The debug mode for loaders will be removed in webpack 3 or later.
+The debug mode for loaders will be removed in Webpack 3 or later.
 
 To keep compatibility with old loaders, loaders can be switched to debug mode via plugin:
 
@@ -346,5 +346,53 @@ It is important to note that you will want to tell Babel to not parse these modu
   "presets": [
     ["es2015", { "modules": false }]
   ]
+}
+```
+
+Or if you're using the latest standards, use this method:
+
+```json
+{
+  "presets": [
+    ["latest", {
+      "es2015": { "modules": false }
+    }]
+  ]
+}
+```
+
+Please note, if you have server-side rendering enabled, you Node.js does not natively support the `import` syntax and modifying this file will edit how Babel handles files in Node.js as well. A way around this is to load babel-core before running your web server.
+
+```js
+require('babel-core/register')({ presets: ['es2015'] })
+```
+
+You can instead add Babel presets to your server-side Webpack configuration depending on your needs.
+
+```js
+{
+  loader: 'babel-loader?presets[]=es2015,presets[]=react'
+}
+```
+
+## Other Configuration Settings
+
+Any configuration options not supported in the documentation will cause `WebpackOptionsValidationError` errors. These might show up from any configuration options which have either not been moved to their proper place in Webpack 2, loader-specific settings on the root such as `postcss`, or any placebo properties which weren't actually being used. These should be removed to prevent validations errors.
+
+Also note Webpack's configuration is strongly typed so any values that are expected as strings cannot be boolean. A previous configuration might have had:
+
+```js
+{
+  cert: isSecure && fs.readFileSync('./domain-crt.txt'),
+  key: isSecure && fs.readFileSync('./key.pem'),
+}
+```
+
+In this case, `cert` and `key` now expect `String` values; thus, only `null` or `''` will work here and the properties should be rewritten as such:
+
+```js
+{
+  cert: isSecure ? fs.readFileSync('./domain-crt.txt') : null,
+  key: isSecure ? fs.readFileSync('./key.pem') : null,
 }
 ```
