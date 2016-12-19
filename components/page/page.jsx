@@ -36,6 +36,9 @@ export default ({ section, page }) => {
 
         <div dangerouslySetInnerHTML={{ __html: page.content }} />
 
+
+        <hr style={{ display: page.contributors.length ? 'block' : 'none' }} />
+        <h3 style={{ display: page.contributors.length ? 'block' : 'none' }}>Contributors</h3>
         <Contributors contributors={ page.contributors } />
       </section>
     </Container>

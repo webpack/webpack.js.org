@@ -21,12 +21,6 @@
   background:getColor(concrete);
   transition:all 250ms;
 
-  // TODO: Fix this, refactor Page and Contributors components
-  .contributors h3,
-  .contributors hr {
-    display:none;
-  }
-
   &:hover {
     box-shadow:0 0 5px getColor(emperor);
     background:white;
