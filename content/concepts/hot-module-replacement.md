@@ -30,7 +30,7 @@ The compiler addtionally makes sure that module and chunk ids are consistent bet
 
 ### From The Module View
 
-HMR is an opt-in feature, so it only affects modules that contains HMR code. The documentation describes the API that is available in modules. In general the module developer writes handlers that are called when a dependency of this module is updated. The developer can also write a handler that is called when this module is updated.
+HMR is an opt-in feature that affects only modules containing HMR code. You can consider patching styling through style-loader as a good example. To make this work, style-loader implements the HMR interface. Implementing it you describe what should happen when a module is updated. In this case we simply replace the styling with the one received through HMR.
 
 In most cases it's not mandatory to write HMR code in every module. If a module has no HMR handlers the update bubbles up. This means a single handler can handle an update to a complete module tree. If a single module in this tree is updated, the complete module tree is reloaded (only reloaded not transferred).
 
