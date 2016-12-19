@@ -27,7 +27,7 @@
 	{
 		"repo": "webpack/enhanced-resolve",
 		"npm": "enhanced-resolve",
-		"description": "Offers an async require.resolve function that's highly configurable.",
+		"description": "A highly configurable asynchronous require.resolve function.",
 		"maintainer": "sokra"
 	},
 	{
@@ -51,7 +51,7 @@
 	{
 		"repo": "webpack/webpack-dev-server",
 		"npm": "webpack-dev-server",
-		"description": "Serves a webpack application, updating the browser on file changes.",
+		"description": "A development server that updates the browser on file changes.",
 		"maintainer": "Spacek33z"
 	},
 	{
@@ -75,13 +75,13 @@
 	{
 		"repo": "webpack/webpack-dev-middleware",
 		"npm": "webpack-dev-middleware",
-		"description": "Offers a dev middleware for webpack, which arguments a live bundle to a directory.",
+		"description": "Middleware which arguments a live bundle to a directory.",
 		"maintainer": "Spacek33z"
 	},
 	{
 		"repo": "webpack/fastparse",
 		"npm": "fastparse",
-		"description": "A simple parser, based on a statemachine and regular expressions.",
+		"description": "A simple parser based on a statemachine and regular expressions.",
 		"maintainer": "sokra"
 	},
 	{
@@ -177,7 +177,7 @@
 	{
 		"repo": "webpack/source-map-loader",
 		"npm": "source-map-loader",
-		"description": "Extract sourceMappingURL comments from modules to pass to webpack.",
+		"description": "Extract source-map comments from modules to pass to webpack.",
 		"maintainer": ""
 	},
 	{
@@ -189,7 +189,7 @@
 	{
 		"repo": "webpack/compression-webpack-plugin",
 		"npm": "compression-webpack-plugin",
-		"description": "Prepare compressed versions of assets to serve them with Content-Encoding.",
+		"description": "Compress assets to serve with Content-Encoding.",
 		"maintainer": "palmerj3"
 	},
 	{
@@ -243,7 +243,7 @@
 	{
 		"repo": "webpack/multi-loader",
 		"npm": "multi-loader",
-		"description": "Load and split a module into multiple modules loaded with different loaders.",
+		"description": "Split a module and import each piece with different loaders.",
 		"maintainer": ""
 	},
 	{
@@ -285,7 +285,7 @@
 	{
 		"repo": "thelarkinn/angular2-template-loader",
 		"npm": "angular2-template-loader",
-		"description": "Chain-to loader for webpack that inlines all html and style's in angular2 components.",
+		"description": "Load angular2 components, inlining all html and styling.",
 		"maintainer": "thelarkinn"
 	}
 ]
