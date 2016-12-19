@@ -16,7 +16,7 @@ export default props => {
     <Container className="organization page__content">
       <h1>The Organization</h1>
 
-      <p>A list of all commonly used projects in the webpack ecosystem.</p>
+      <p>The list below provides a brief overview of all commonly used projects in the webpack ecosystem.</p>
 
       <div className="organization__projects">
         {
