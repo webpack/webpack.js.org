@@ -47,7 +47,7 @@ import "module";
 import "module/lib/file";
 ```
 
-Modules are searched for inside directories which are specified using `resolve.modules`, which can be an array comprising of different paths.
+Modules are searched for inside directories which are specified using `resolve.modules`, which can be an array comprised of different paths.
 Aliasing, i. e. setting `resolve.alias` to an existing module path, allows you to replace the module path with an alias name during `require/import`.
 
 Once the path is resolved based on the above rule, the resolver checks if the path points to a file or to a directory. If the path points to a file then it is bundled straightaway.
@@ -67,6 +67,6 @@ Every filesystem access is cached so that multiple parallel or serial requests t
 
 ### Unsafe caching
 
-There is a configuration option `resolve.unsafeCache` which boosts performance by aggressive caching.Every resolve process is cached and isn’t ever purged. This is correct in most cases, but incorrect in edge cases (what edge cases?).
+There is a configuration option `resolve.unsafeCache` which boosts performance by aggressive caching. Every resolve process is cached and isn’t ever purged. This is correct in most cases, but incorrect in edge cases (what edge cases?).
 
 Look at [Resolve API](/configuration/resolve) for more info on the configuration mentioned above.
