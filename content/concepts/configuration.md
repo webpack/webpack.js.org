@@ -13,7 +13,7 @@ Because it's a standard Node.js CommonJS module, you **can do the following**:
 * use utilities on npm via `require(...)`
 * use JavaScript control flow expressions i. e. the `?:` operator
 * use constants or variables for often used values
-* write and execute function to generate a part of the configuration
+* write and execute functions to generate a part of the configuration
 
 Use these features when appropriate.
 
@@ -153,7 +153,7 @@ export class NgCliWebpackConfig {
 
 ## Using JSX
 
-In the example below JSX (React JavaScript Markup) and Babel to create a JSON Configuration that webpack can understand. (Courtesy of [Jason Miller](https://twitter.com/_developit))
+In the example below JSX (React JavaScript Markup) and Babel are used to create a JSON Configuration that webpack can understand. (Courtesy of [Jason Miller](https://twitter.com/_developit))
 
 ```javascript
 import h from 'jsxobj';
