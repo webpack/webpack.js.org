@@ -33,7 +33,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
   [output](/configuration/output): {
     // options related how webpack emits results
 
-    [path](/configuration/output#output-path): path.resolve(__dirname, "dist"), // string
+    [path](/configuration/output#output-path): path.resolve("dist"), // string
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
 
@@ -121,10 +121,10 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
       {
         [test](/configuration/module#rule-test): /\.jsx?$/,
         [include](/configuration/module#rule-include): [
-          path.resolve(__dirname, "app")
+          path.resolve("app")
         ],
         [exclude](/configuration/module#rule-exclude): [
-          path.resolve(__dirname, "app/demo-files")
+          path.resolve("app/demo-files")
         ]
         // matching conditions, each accepting regular expression or string
         // test and include behave equal, both must be matched
@@ -212,7 +212,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 
     [modules](/configuration/resolve#resolve-modules): [
       "node_modules",
-      path.resolve(__dirname, "app")
+      path.resolve("app")
     ],
     // directories where to look for modules
 
@@ -370,9 +370,9 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
     /* TODO */
   },
 
-  [recordsPath](other-options#recordspath): path.resolve(__dirname, "build/records.json"),
-  [recordsInputPath](other-options#recordsinputpath): path.resolve(__dirname, "build/records.json"),
-  [recordsOutputPath](other-options#recordsoutputpath): path.resolve(__dirname, "build/records.json"),
+  [recordsPath](other-options#recordspath): path.resolve("build/records.json"),
+  [recordsInputPath](other-options#recordsinputpath): path.resolve("build/records.json"),
+  [recordsOutputPath](other-options#recordsoutputpath): path.resolve("build/records.json"),
   // TODO
 
   </details>
