@@ -23,7 +23,7 @@ For example, you can use loaders to tell webpack to load a CSS file or to conver
 * Plugins can give loaders more features.
 * Loaders can emit additional arbitrary files.
 
-Loaders allows more power in the JavaScript ecosystem through preprocessing
+Loaders allow more power in the JavaScript ecosystem through preprocessing
 functions (loaders). Users now have more flexibility to include fine-grained logic such as compression, packaging, language translations and [more](/loaders).
 
 ## Resolving Loaders
