@@ -5,6 +5,7 @@ contributors:
   - sokra
   - skipjack
   - grgur
+  - bondz
 ---
 
 Webpack is fed via a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
@@ -348,7 +349,10 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 
   [profile](other-options#profile): true, // boolean
   // capture timing information
-
+  
+  [bail](other-options#bail): true, //boolean
+  // fail out on the first error instead of tolerating it.
+  
   [cache](other-options#cache): false, // boolean
   // disable/enable caching
 
