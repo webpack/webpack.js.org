@@ -16,7 +16,7 @@ In the future this plugin may be removed.
 new webpack.LoaderOptionsPlugin(options)
 ```
 
-* `options.debug` (`boolean`): Whether loaders should be in `debug` mode or not.
+* `options.debug` (`boolean`): Whether loaders should be in `debug` mode or not. `debug` will be removed as of webpack 3.
 * `options.minimize` (`boolean`): Where loaders can be switched to minimize mode.
 * `options.options` (`object`): A configuration object that can be used to configure older loaders - this will take the same schema a `webpack.config.js`
 
