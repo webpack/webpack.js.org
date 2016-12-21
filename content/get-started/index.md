@@ -1,12 +1,10 @@
 ---
-title: Get Started with Webpack
+title: Getting Started
+sort: 3
 contributors:
   - bebraw
   - varunjayaraman
-sort: 3
 ---
-
-## Getting Started
 
 webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/get-started/install-webpack).
 webpack simplifies your workflow by quickly constructing a dependency graph of your application and bundling them in the right order. webpack can be configured to customise optimisations to your code, to split vendor/css/js code for production, run a development server that hot-reloads your code without page refresh and many such cool features. Learn more about [why you should use webpack](/get-started/why-webpack).
@@ -50,10 +48,10 @@ __index.html__
 <html>
   <head>
     <title>Webpack demo</title>
-    <script src="https://unpkg.com/lodash@4.16.6" type="text/javascript"></script>
+    <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
-    <script src="app/index.js" type="text/javascript"></script>
+    <script src="app/index.js"></script>
   </body>
 </html>
 ```
@@ -83,11 +81,11 @@ Also we will need to change the `index.html` to expect a single bundled js file.
 <html>
   <head>
     <title>Webpack demo</title>
--   <script src="https://unpkg.com/lodash@4.16.6" type="text/javascript"></script>
--   <script src="app/index.js" type="text/javascript"></script>
+-   <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
-+   <script src="dist/bundle.js" type="text/javascript"></script>
+-   <script src="app/index.js"></script>
++   <script src="dist/bundle.js"></script>
   </body>
 </html>
 ```

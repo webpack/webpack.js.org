@@ -21,7 +21,7 @@ modules.exports = function(env){
     entry: '..',
     ...
     module: {
-        loaders: [{
+        rules: [{
             test: /\.css$/,
             exclude: /node_modules/,
             loader: 'css-loader'
@@ -70,10 +70,10 @@ module.exports = function () {
             filename: 'bundle.js'
         },
         module: {
-            loaders: [{
+            rules: [{
                 test: /\.css$/,
                 exclude: /node_modules/,
-                loader: Extract.extract({
+                loader: ExtractTextPlugin.extract({
                     loader: 'css-loader?sourceMap'
                 })
             }]

@@ -7,13 +7,13 @@ contributors:
 
 You may have noticed that few webpack configurations look exactly alike. This is because **webpack's configuration file is a JavaScript file that exports an object.** This object is then processed by webpack based upon its defined properties.
 
-Because it's a standard node.js CommonJs module, you **can do the following**:
+Because it's a standard Node.js CommonJS module, you **can do the following**:
 
 * import other files via `require(...)`
 * use utilities on npm via `require(...)`
 * use JavaScript control flow expressions i. e. the `?:` operator
 * use constants or variables for often used values
-* write and execute function to generate a part of the configuration
+* write and execute functions to generate a part of the configuration
 
 Use these features when appropriate.
 
@@ -30,6 +30,8 @@ The following examples below describe how webpack's configuration object can be 
 **webpack.config.js**
 
 ```javascript
+var path = require('path');
+
 module.exports = {
   entry: './foo.js',
   output: {
@@ -151,7 +153,7 @@ export class NgCliWebpackConfig {
 
 ## Using JSX
 
-In the example below JSX (React JavaScript Markup) and Babel to create a JSON Configuration that webpack can understand. (Courtesy of [Jason Miller](https://twitter.com/_developit))
+In the example below JSX (React JavaScript Markup) and Babel are used to create a JSON Configuration that webpack can understand. (Courtesy of [Jason Miller](https://twitter.com/_developit))
 
 ```javascript
 import h from 'jsxobj';

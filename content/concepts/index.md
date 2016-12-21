@@ -38,6 +38,8 @@ Once you've bundled all of your assets together, we still need to tell webpack *
 **webpack.config.js**
 
 ```javascript
+var path = require('path');
+
 module.exports = {
   entry: './path/to/my/entry/file.js',
   output: {
@@ -51,7 +53,7 @@ In the example above, through the `output.filename` and `output.path` properties
 
 T> You may see the term **emitted** or **emit** used throughout our documentation and [plugin API](/api/plugins). This is a fancy term for "produced or discharged".
 
-The `output` property has [many more configurable features](/configuration), but let's spend some time understanding some of the most common use cases for the `output` property.
+The `output` property has [many more configurable features](/configuration/output), but let's spend some time understanding some of the most common use cases for the `output` property.
 
 [Learn more!](/concepts/output)
 
@@ -70,6 +72,8 @@ At a high level, they have two purposes in your webpack config.
 **webpack.config.js**
 
 ```javascript
+var path = require('path');
+
 const config = {
   entry: './path/to/my/entry/file.js',
   output: {
@@ -84,7 +88,7 @@ const config = {
 };
 ```
 
-In the configuration above we have defined a rules which used our loader with it's two required properties: `test`, and `use`. This tells webpack's compiler the following:
+In the configuration above we have defined a `rules` property for a single module with two required properties: `test`, and `use`. This tells webpack's compiler the following:
 
 > "Hey webpack compiler, when you come across a path that resolves to a '.js' or '.jsx' file inside of a `require()`/`import` statement, **use** the `babel-loader` to transform it before you add it to the bundle".
 

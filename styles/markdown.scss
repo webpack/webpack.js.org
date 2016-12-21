@@ -1,8 +1,7 @@
 // Markdown styling is based on https://gist.github.com/tuzz/3331384.
-
 @import 'vars';
 @import 'functions';
-@import '~prismjs/themes/prism-funky';
+@import 'prism-theme';
 
 .page__content,
 .splash__section {
@@ -16,14 +15,14 @@
   h6 { font-size: getFontSize(-1); }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family:'Geomanist', 'Century Gothic', sans-serif;
-    font-weight:400;
+    font-family: $font-stack-heading;
+    font-weight:600;
     line-height:1;
     margin:1.5em 0 0.25em;
-    color:getColor(mine-shaft);
+    color:getColor(fiord);
 
     &:first-child { margin-top:0; }
-    tt, code { font-size:inherit; }
+    tt, code { font-size: 90%; color: inherit }
   }
 
   p, blockquote, table, pre {
@@ -160,22 +159,27 @@
   }
 
   code, tt {
-    font-family:'Ubuntu Mono', monospace;
+    font-family: $font-stack-code;
+    font-size: 90%;
     margin: 0 2px;
     padding: 2px 6px;
     white-space: nowrap;
     background-color: transparentize(getColor(fiord), 0.94);
     border-radius: 3px;
-    text-shadow: 0 1px 0 transparentize(getColor(white), 0.5);
-    color: getColor(elephant);
+    text-shadow: 0 1px 0 transparentize(getColor(white), 0.4);
+  }
+
+  a code {
+    color: $text-color-highlight;
   }
 
   pre {
-    background-color:getColor(mine-shaft);
+    background-color: rgba(238, 238, 238, 0.35);
+    background-color: getColor(elephant);
     font-size: 13px;
     line-height: 19px;
     overflow: auto;
-    padding: 6px 10px;
+    padding: 8px 16px;
     border-radius: 3px;
 
     code {
@@ -183,13 +187,25 @@
       padding: 0;
       white-space: pre;
       border: none;
-      color:getColor(concrete);
       background: transparent;
-      text-shadow: none;
+      text-shadow: 0 1px 0 transparentize(darken(getColor(elephant), 10%), 0.5);
+      color: desaturate(getColor(malibu), 40%);
 
       .code-details-summary-span {
         margin-left: -15px;
         cursor: pointer;
+      }
+
+      a {
+        border-bottom: 1px dotted getColor(denim);
+      }
+
+      .code-link {
+        position: relative;
+
+        &:hover {
+          color: lighten(getColor(denim), 15%);
+        }
       }
     }
 

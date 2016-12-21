@@ -2,21 +2,19 @@ import React from 'react';
 import Link from '../link/link';
 import Container from '../container/container';
 import Logo from '../logo/logo';
-import './navigation-style';
-import './search-style';
 
 // TODO: Maybe by updating the routing scheme later on we can avoid hardcoding this?
 let Sections = [
-  { 
-    title: 'Concepts', 
-    url: 'concepts' 
+  {
+    title: 'Concepts',
+    url: 'concepts'
   },
-  { 
-    title: 'Guides', 
-    url: 'guides' 
+  {
+    title: 'Guides',
+    url: 'guides'
   },
-  { 
-    title: 'Documentation', 
+  {
+    title: 'Documentation',
     url: 'configuration',
     children: [
       { title: 'API', url: 'api' },
@@ -25,16 +23,16 @@ let Sections = [
       { title: 'Plugins', url: 'plugins' }
     ]
   },
-  { 
-    title: 'Donate', 
-    url: '//opencollective.com/webpack' 
+  {
+    title: 'Donate',
+    url: '//opencollective.com/webpack'
   }
 ];
 
 // TODO: Move back to using state once we can handle algolia on our own
 export default class Navigation extends React.Component {
   render() {
-    let { pageUrl, sections } = this.props;
+    let { pageUrl = '' } = this.props;
     
     return (
       <header className="navigation">
@@ -66,15 +64,15 @@ export default class Navigation extends React.Component {
           </nav>
 
           <div className="navigation__search">
-            <input 
-              type="text" 
+            <input
+              type="text"
               className="navigation__search-input"
               placeholder="Search documentation…"
               onBlur={ this._toggleSearch.bind(this) } />
-            <button 
+            <button
               className="navigation__search-icon icon-magnifying-glass"
               onClick={ this._toggleSearch.bind(this) } />
-            <button 
+            <button
               className="navigation__search-icon icon-cross"
               onClick={ this._toggleSearch.bind(this) } />
           </div>
@@ -126,12 +124,12 @@ export default class Navigation extends React.Component {
 
   /**
    * Check if section is active
-   * 
+   *
    * @param {object} section - An object describing the section
    * @return {bool} - Whether or not the given section is active
    */
   _isActive(section) {
-    let { pageUrl } = this.props;
+    let { pageUrl = '' } = this.props;
 
     if (section.children) {
       return section.children.some(child => pageUrl.includes(`${child.url}/`));
@@ -141,7 +139,7 @@ export default class Navigation extends React.Component {
 
   /**
    * Toggle the SidebarMobile component
-   * 
+   *
    * @param {object} e - Native click event
    */
   _toggleSidebar(e) {
@@ -153,7 +151,7 @@ export default class Navigation extends React.Component {
 
   /**
    * Toggle the search input
-   * 
+   *
    */
   _toggleSearch() {
     let container = document.querySelector('.navigation');
@@ -165,11 +163,11 @@ export default class Navigation extends React.Component {
 
   /**
    * Expand the search input
-   * 
+   *
    */
   _openSearch() {
     let container = document.querySelector('.navigation');
-    
+
     container.classList.add('navigation--search-mode');
   }
 }

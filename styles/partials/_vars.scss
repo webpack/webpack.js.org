@@ -3,8 +3,6 @@ $colors: (
   denim: #1D78C1,
   fiord: #465E69,
   elephant: #2B3A42,
-  calico: #dfc08b,
-  tussock: #c0903f,
   white: #ffffff,
   concrete: #f2f2f2,
   alto: #dedede,
@@ -18,3 +16,10 @@ $screens: (
   large: 1024px,
   medium: 768px
 );
+
+$font-stack-body: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+$font-stack-heading: Geomanist, sans-serif;
+$font-stack-code: 'Source Code Pro', Consolas, "Liberation Mono", Menlo, Courier, monospace;
+
+$text-color-highlight: lighten(map-get($colors, denim), 5%);
+

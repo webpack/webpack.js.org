@@ -14,7 +14,6 @@ They also serve the purpose of doing **anything else** that a [loader](/concepts
 
 A webpack **plugin** is a JavaScript object that has an `apply` property. This `apply` property is called by the webpack compiler, giving access to the **entire** compilation lifecycle.
 
-
 **ConsoleLogOnBuildWebpackPlugin.js**
 
 ```javascript
@@ -31,7 +30,7 @@ ConsoleLogOnBuildWebpackPlugin.prototype.apply = function(compiler) {
 };
 ```
 
-T> As clever JavaScript developer you may remember the `Function.prototype.apply` method. Because of this method you can pass any function as plugin (`this` will point to the `compiler`). You can use this style to inline custom plugins in your configuration.
+T> As a clever JavaScript developer you may remember the `Function.prototype.apply` method. Because of this method you can pass any function as plugin (`this` will point to the `compiler`). You can use this style to inline custom plugins in your configuration.
 
 ## Usage
 
@@ -54,7 +53,7 @@ const config = {
     path: './dist'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader'

@@ -61,19 +61,6 @@ W> Don't share the cache between calls with different options.
 
 ?> Elaborate on the warning and example - calls with different configuration options?
 
-
-## `debug`
-
-`boolean`
-
-Switch all loaders into debug mode to get more verbose feedback. This defaults to `false` to prevent unnecessary logging but can be easily turned on:
-
-```js
-debug: true
-```
-
-?> Consider adding an example of a certain loader emitting more details.
-
 ## `loader`
 
 `object`

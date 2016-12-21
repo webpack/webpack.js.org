@@ -2,9 +2,11 @@ import React from 'react';
 import Interactive from 'antwar-interactive';
 import Container from '../container/container';
 import SplashViz from '../splash-viz/splash-viz';
-import '../../styles';
-import './splash-style';
 import Support from '../support/support';
+import './splash-style';
+import '../splash-viz/splash-viz-style';
+import '../cube/cube-style';
+import '../text-rotater/text-rotater-style.scss';
 
 export default props => {
   let { page } = props;
@@ -17,8 +19,8 @@ export default props => {
 
       <Container className="splash__section">
         <h1>{ page.title }</h1>
-        <div dangerouslySetInnerHTML={{ 
-          __html: page.content 
+        <div dangerouslySetInnerHTML={{
+          __html: page.content
         }} />
       </Container>
 

@@ -37,14 +37,14 @@
     color: getColor(dusty-grey);
 
     .algolia-docsearch-suggestion--highlight {
-      color: lighten(getColor(denim), 5%);
+      color: $text-color-highlight;
       box-shadow: none;
       font-weight: bold;
     }
   }
 
   .algolia-docsearch-suggestion--highlight {
-    color: lighten(getColor(denim), 5%);
+    color: $text-color-highlight;
     background: rgba(getColor(malibu), 0.15);
   }
 

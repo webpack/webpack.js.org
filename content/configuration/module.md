@@ -137,13 +137,13 @@ For each different parser options object a new parser is created and plugins can
 ``` js-with-links
 parser: {
   amd: false, // disable AMD
-  commonjs: false, // disable CommonJs
-  system: false, // disable System
-  harmony: false, // disable harmony import/export
+  commonjs: false, // disable CommonJS
+  system: false, // disable SystemJS
+  harmony: false, // disable ES6 Harmony import/export
   requireInclude: false, // disable require.include
   requireEnsure: false, // disable require.ensure
   requireContext: false, // disable require.context
-  browserify: false, // disable special handling of browserify bundles
+  browserify: false, // disable special handling of Browserify bundles
   requireJs: false, // disable requirejs.*
   node: false, // disable __dirname, __filename, module, require.extensions, require.main, etc.
   node: {...} // reconfigure [node](/configuration/node) layer on module level

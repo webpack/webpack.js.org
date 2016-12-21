@@ -3,6 +3,7 @@ title: Node.js API
 sort: 3
 contributors:
   - sallar
+  - rynclark
 ---
 
 webpack provides a Node.js API which can be used directly in Node.js runtime.
@@ -255,7 +256,7 @@ const compiler = webpack({ /* options*/ });
 
 compiler.outputFileSystem = fs;
 compiler.run((err, stats) => {
-  // Read te output later:
+  // Read the output later:
   const content = fs.readFileSync("...");
 });
 ```

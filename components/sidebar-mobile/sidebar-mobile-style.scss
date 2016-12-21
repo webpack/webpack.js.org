@@ -3,7 +3,7 @@
 
 .sidebar-mobile {
   position: fixed;
-  width: 295px;
+  width: 300px;
   height: 100vh;
   z-index: 100;
   top: 0;
@@ -12,12 +12,12 @@
   -webkit-overflow-scrolling: touch;
   transform: translate3D(-100%, 0, 0);
   transform: translate3D(calc(-100% + 5px), 0, 0);
-  transition: all 500ms;
+  transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
 
   @include break {
     display: none;
   }
-  
+
   &--visible {
     transform: translate3D(0, 0, 0);
   }
@@ -40,37 +40,55 @@
   width: 285px;
   height: 100vh;
   overflow-x: hidden;
+  padding: 12px 0;
   background: getColor(white);
-  box-shadow: 0 0 5px getColor(emperor);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .sidebar-mobile__close {
   position:absolute;
-  right:16px;
-  top:19px;
-  font-size:1.5em;
   cursor:pointer;
-  color:getColor(dusty-grey);
-  transition:color 250ms;
+  right: 22px;
+  top: 22px;
+  font-size: 1.3em;
+  background: getColor(denim);
+  color: getColor(white);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 150ms;
+  -webkit-tap-highlight-color: transparent;
 
   &:hover {
-    color:getColor(mine-shaft);
+    background: darken(getColor(denim), 20%);
   }
 }
 
 .sidebar-mobile__section {
-  font-size: getFontSize(1);
-  text-transform: uppercase;
-  color: getColor(mine-shaft);
-  margin: 1em 16px 0.25em;
+  border-left: 2px solid transparent;
+  padding-bottom:0.5em;
 
-  &--block {
-    display: block;
-  }
-
-  &:active,
   &--active {
-    color: getColor(malibu);
+    border-left: 2px solid getColor(malibu);
+
+    .sidebar-mobile__section-header {
+      color: lighten(getColor(fiord), 15%)
+    }
+  }
+}
+
+.sidebar-mobile__section-header {
+  text-transform: uppercase;
+  color: getColor(elephant);
+  padding: 0.75em 16px 0.25em;
+  font-weight: 600;
+  display: block;
+
+  .sidebar-mobile__content div:not(:first-of-type) & {
+    border-top: 1px solid getColor(alto);
   }
 }
 
@@ -78,12 +96,17 @@
   display: block;
   padding: 0.5em 17px;
   text-transform: capitalize;
-  color: getColor(dusty-grey);
+  color: getColor(dove-grey);
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 
   &:active,
   &--active {
     color: getColor(mine-shaft);
-    background: getColor(alto);
+    font-weight: 600;
+    background: #F1F4F4;
+  }
+
+  &:hover {
+    color: inherit;
   }
 }
