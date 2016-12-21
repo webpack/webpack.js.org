@@ -4,9 +4,7 @@ import Container from '../container/container';
 import SplashViz from '../splash-viz/splash-viz';
 import Support from '../support/support';
 import './splash-style';
-import './splash-style';
 import '../splash-viz/splash-viz-style';
-import Support from '../support/support';
 
 export default props => {
   let { page } = props;
