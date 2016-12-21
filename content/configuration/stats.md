@@ -34,7 +34,7 @@ For more granular control, it is possible to specify exactly what information yo
 stats: {
   // Add asset Information
   assets: true,
-  // Sort assets by a filed
+  // Sort assets by a field
   assetsSort: "field",
   // Add information about cached (not built) modules
   cached: true,
