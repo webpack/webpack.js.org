@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import './cube-style';
 
 export default class Cube extends React.Component {
   constructor(props) {

@@ -6,4 +6,4 @@ module.exports = {
   cssTemplate: './icon.template.hbs',
   fixedWidth: true,
   types: [ 'woff' ]
-}
+};

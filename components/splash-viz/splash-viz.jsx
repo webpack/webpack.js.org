@@ -3,7 +3,6 @@ import React from 'react';
 import Cube from '../cube/cube';
 import TextRotator from '../text-rotater/text-rotater';
 import Modules from '../../assets/homepage-modules.svg';
-import './splash-viz-style';
 
 export default class SplashViz extends React.Component {
 

@@ -5,6 +5,8 @@ import SplashViz from '../splash-viz/splash-viz';
 import Support from '../support/support';
 import './splash-style';
 import '../splash-viz/splash-viz-style';
+import '../cube/cube-style';
+import '../text-rotater/text-rotater-style.scss';
 
 export default props => {
   let { page } = props;
