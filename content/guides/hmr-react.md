@@ -113,16 +113,17 @@ module.exports = {
   },
 
   module: {
-    loaders: [
-      { test: /\.js$/,
-        loaders: [
+    rules: [
+      {
+        test: /\.js$/,
+        use: [
           'babel-loader',
         ],
         exclude: /node_modules/
       },
       {
         test: /\.css$/,
-        loaders: [
+        use: [
           'style-loader',
           'css-loader?modules',
           'postcss-loader',
@@ -234,7 +235,24 @@ The important thing to note in the code above is the `module` reference.
 
 So in this case, `module.hot.accept` will fire the `render` method whenever `src/components/App.js` or its dependencies are changed - which means the `render` method will also fire when the `App.css` is changed, since `App.css` is included in `App.js`.
 
+###index.html
 
+This needs to be placed inside of `dist` in your project root. webpack-dev-server will not run without it.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example Index</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="bundle.js"></script>
+</body>
+</html>
+
+```
 ### Package.json
 
 Finally, we need to start up `webpack-dev-server` to bundle our code and see HMR in action.

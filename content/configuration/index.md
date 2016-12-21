@@ -5,6 +5,7 @@ contributors:
   - sokra
   - skipjack
   - grgur
+  - bondz
 ---
 
 Webpack is fed via a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
@@ -284,6 +285,19 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
     </details>
   },
 
+  [performance](/configuration/performance): {
+    <details><summary>[hints](/configuration/performance#performance-hints): "warning", // enum </summary>
+    [hints](/configuration/performance#performance-hints): "error", // emit errors for perf hints
+    [hints](/configuration/performance#performance-hints): false, // turn off perf hints
+    </details>
+    [maxAssetSize](/configuration/performance#performance-maxassetsize): 200000, // int (in bytes),
+    [maxEntrypointSize](/configuration/performance#performance-maxentrypointsize): 400000, // int (in bytes)
+    [assetFilter](/configuration/performance#performance-assetfilter): function(assetFilename) { 
+      // Function predicate that provides asset filenames
+      return assetName.endsWith('.css') || assetName.endsWith('.js');
+    }
+  },
+
   <details><summary>[devtool](/configuration/devtool): "source-map", // enum </summary>
   [devtool](/configuration/devtool): "inline-source-map", // inlines SourceMap into orginal file
   [devtool](/configuration/devtool): "eval-source-map", // inlines SourceMap per module
@@ -340,7 +354,8 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
     // ...
   ],
   // list of additional plugins
-
+  
+  
   <details><summary>/* Advanced configuration (click to show) */</summary>
 
   [resolveLoader](/configuration/resolve#resolveloader): { /* same as resolve */ }
@@ -348,7 +363,10 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 
   [profile](other-options#profile): true, // boolean
   // capture timing information
-
+  
+  [bail](other-options#bail): true, //boolean
+  // fail out on the first error instead of tolerating it.
+  
   [cache](other-options#cache): false, // boolean
   // disable/enable caching
 

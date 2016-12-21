@@ -53,7 +53,7 @@ In the example above, through the `output.filename` and `output.path` properties
 
 T> You may see the term **emitted** or **emit** used throughout our documentation and [plugin API](/api/plugins). This is a fancy term for "produced or discharged".
 
-The `output` property has [many more configurable features](/configuration), but let's spend some time understanding some of the most common use cases for the `output` property.
+The `output` property has [many more configurable features](/configuration/output), but let's spend some time understanding some of the most common use cases for the `output` property.
 
 [Learn more!](/concepts/output)
 

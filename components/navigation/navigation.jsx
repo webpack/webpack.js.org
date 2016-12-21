@@ -32,8 +32,8 @@ let Sections = [
 // TODO: Move back to using state once we can handle algolia on our own
 export default class Navigation extends React.Component {
   render() {
-    let { pageUrl, sections } = this.props;
-
+    let { pageUrl = '' } = this.props;
+    
     return (
       <header className="navigation">
         <Container className="navigation__inner">
@@ -129,7 +129,7 @@ export default class Navigation extends React.Component {
    * @return {bool} - Whether or not the given section is active
    */
   _isActive(section) {
-    let { pageUrl } = this.props;
+    let { pageUrl = '' } = this.props;
 
     if (section.children) {
       return section.children.some(child => pageUrl.includes(`${child.url}/`));

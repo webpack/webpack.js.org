@@ -4,7 +4,6 @@ import Container from '../container/container';
 import Sidebar from '../sidebar/sidebar';
 import Sidecar from '../sidecar/sidecar';
 import Contributors from '../contributors/contributors';
-import '../../styles';
 import './page-style';
 import '../sidebar/sidebar-style';
 
@@ -37,6 +36,9 @@ export default ({ section, page }) => {
 
         <div dangerouslySetInnerHTML={{ __html: page.content }} />
 
+
+        <hr style={{ display: page.contributors.length ? 'block' : 'none' }} />
+        <h3 style={{ display: page.contributors.length ? 'block' : 'none' }}>Contributors</h3>
         <Contributors contributors={ page.contributors } />
       </section>
     </Container>

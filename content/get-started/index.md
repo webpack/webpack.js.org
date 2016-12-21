@@ -82,9 +82,9 @@ Also we will need to change the `index.html` to expect a single bundled js file.
   <head>
     <title>Webpack demo</title>
 -   <script src="https://unpkg.com/lodash@4.16.6"></script>
--   <script src="app/index.js"></script>
   </head>
   <body>
+-   <script src="app/index.js"></script>
 +   <script src="dist/bundle.js"></script>
   </body>
 </html>

@@ -37,6 +37,7 @@ module.exports = {
         );
       }
     ),
+
     'get-started': section(
       'Get-Started',
       function() {
@@ -47,6 +48,7 @@ module.exports = {
         )
       }
     ),
+
     concepts: section(
       'Concepts',
       function() {
@@ -57,6 +59,7 @@ module.exports = {
         );
       }
     ),
+
     guides: section(
       'Guides',
       function() {
@@ -67,6 +70,7 @@ module.exports = {
         );
       }
     ),
+
     configuration: section(
       'Configuration',
       function() {
@@ -77,6 +81,7 @@ module.exports = {
         );
       }
     ),
+
     api: section(
       'API',
       function() {
@@ -87,6 +92,7 @@ module.exports = {
         );
       }
     ),
+
     pluginsapi: section(
       'Plugins API',
       function() {
@@ -97,6 +103,7 @@ module.exports = {
         );
       }
     ),
+
     loaders: section(
       'Loaders',
       function() {
@@ -107,6 +114,7 @@ module.exports = {
         );
       }
     ),
+
     plugins: section(
       'Plugins',
       function() {
@@ -117,14 +125,30 @@ module.exports = {
         );
       }
     ),
-    vote: voteList(
-      'Voting',
-      {
-        index: true,
-        feedback: true,
-        moneyDistribution: true,
+    
+    vote: {
+      path() {
+        return require('./components/vote/list.jsx').default
       }
-    )
+    },
+
+    'vote/feedback': {
+      path() {
+        return require('./components/vote/list.jsx').default
+      }
+    },
+
+    'vote/moneyDistribution': {
+      path() {
+        return require('./components/vote/list.jsx').default
+      }
+    },
+
+    organization: {
+      path() {
+        return require('./components/organization/organization.jsx').default
+      }
+    }
   }
 };
 
@@ -183,47 +207,5 @@ function processPage() {
     contributors: function(o) {
       return Array.isArray(o.file.contributors) && o.file.contributors.length && o.file.contributors.slice().sort();
     }
-  };
-}
-
-function voteList(title, lists) {
-  return {
-    title: title,
-    path: function() {
-      function context(request) {
-        var name = /^\.\/(.*)\.md$/.exec(request)[1];
-        return {
-          name: name,
-          __content: '' // make antwar happy
-        };
-      }
-      context.keys = function() {
-        return Object.keys(lists).map(k => './' + k + '.md');
-      };
-      return context;
-    },
-    processPage: {
-      url: function(o) {
-        return 'vote/' + o.file.name;
-      },
-      name: function(o) {
-        return o.file.name;
-      },
-      anchors: function(o) {
-        return [];
-      },
-      content: function(o) {
-        return '';
-      }
-    },
-    layouts: {
-      index: function() {
-        return require('./components/vote/list.jsx').default
-      },
-      page: function() {
-        return require('./components/vote/list.jsx').default
-      }
-    },
-    redirects: {} // <from>: <to>
   };
 }
