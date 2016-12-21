@@ -13,7 +13,8 @@ export default class Cube extends React.Component {
     this.state = {
       x: 0,
       y: 0,
-      z: 0
+      z: 0,
+      iteration: 0,
     };
   }
 
@@ -47,7 +48,7 @@ export default class Cube extends React.Component {
             rotateY(${y}deg)
             rotateZ(${z}deg)`
           }}>
-            { this._getFaces() }
+            { this._getFaces('outer') }
         </figure>
         <figure
           className="cube__inner"
@@ -60,7 +61,7 @@ export default class Cube extends React.Component {
             rotateY(${-y}deg)
             rotateZ(${-z}deg)`
           }}>
-            { this._getFaces() }
+            { this._getFaces('inner') }
         </figure>
       </span>
       </div>
@@ -80,14 +81,9 @@ export default class Cube extends React.Component {
 
       this._interval = setInterval(() => {
         let obj = {};
-        let sign = Math.random() < 0.5 ? -1 : 1;
-
         obj[axis] = degrees += 90;
 
-        // axis = axis === 'x' ? 'y' : axis === 'y' ? 'z' : 'x'; 
-
-        this.setState(obj);
-        console.log('cube spin');
+        this.setState({ ...obj, iteration: (this.state.iteration + 1) % 4 });
       }, repeatDelay);
     }
   }
@@ -107,9 +103,53 @@ export default class Cube extends React.Component {
   /**
    * Get all faces for a cube
    *
+   * @param {'inner' | 'outer' } type
    * @return {array} - An array of nodes
    */
-  _getFaces() {
+  _getFaces(type) {
+    let { iteration } = this.state;
+
+    // Keep the thicker border on
+    // the outside on each iteration
+    const borderWidthMap = {
+      0: {
+        left: [1, 1, 1, 6],
+        right: [6, 1, 1, 1],
+        top: [1, 1, 1, 1],
+        bottom: [6, 1, 1, 6],
+      },
+      1: {
+        left: [1, 1, 1, 1],
+        right: [1, 1, 1, 1],
+        top: [1, 1, 1, 1],
+        bottom: [1, 1, 1, 1],
+      },
+      2: {
+        left: [1, 1, 6, 6],
+        right: [6, 6, 1, 1],
+        top: [6, 1, 1, 6],
+        bottom: [1, 6, 6, 1],
+      },
+      3: {
+        left: [6, 1, 1, 1],
+        right: [1, 6, 1, 1],
+        top: [1, 1, 1, 1],
+        bottom: [6, 6, 1, 1],
+      },
+      4: {
+        left: [1, 1, 6, 1],
+        right: [1, 1, 1, 6],
+        top: [1, 1, 1, 1],
+        bottom: [1, 1, 6, 6],
+      },
+      5: {
+        left: [1, 6, 1, 1],
+        right: [1, 1, 6, 1],
+        top: [1, 1, 1, 1],
+        bottom: [1, 6, 6, 1],
+      }
+    };
+
     return [
       'rotateX(0deg)',
       'rotateX(-90deg)',
@@ -118,12 +158,20 @@ export default class Cube extends React.Component {
       'rotateY(90deg)',
       'rotateY(180deg)'
     ].map((rotation, i) => {
+      const borderStyles = type === 'outer' ? {
+          borderTopWidth: borderWidthMap[i].top[iteration],
+          borderRightWidth: borderWidthMap[i].right[iteration],
+          borderBottomWidth: borderWidthMap[i].bottom[iteration],
+          borderLeftWidth: borderWidthMap[i].left[iteration],
+        } : {};
+
       return (
         <section 
           key={ i } 
           className="cube__face"
-          style={{ 
-            transform: `${rotation} translateZ(${ this.props.depth / 2 }px)` 
+          style={{
+            transform: `${rotation} translateZ(${ this.props.depth / 2 }px)`,
+            ...borderStyles,
           }} />
       );
     });

@@ -22,7 +22,7 @@ export default class SplashViz extends React.Component {
         <div className="splash-viz__modules">
           <img src={ Modules }/>
         </div>
-        <Cube className="splash-viz__cube" depth={ 140 } repeatDelay={ 5000 } continuous/>
+        <Cube className="splash-viz__cube" depth={ 120 } repeatDelay={ 5000 } continuous/>
       </section>
     );
   }
