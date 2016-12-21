@@ -32,3 +32,6 @@ new webpack.LoaderOptionsPlugin({
   }
 })
 ```
+
+contributors:
+    - johnnyreilly
