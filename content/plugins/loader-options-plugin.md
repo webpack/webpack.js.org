@@ -1,5 +1,7 @@
 ---
 title: loader-options-plugin
+contributors:
+    - johnnyreilly
 ---
 
 ?> Review this content
@@ -33,5 +35,3 @@ new webpack.LoaderOptionsPlugin({
 })
 ```
 
-contributors:
-    - johnnyreilly
