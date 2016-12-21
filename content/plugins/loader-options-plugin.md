@@ -19,6 +19,7 @@ new webpack.LoaderOptionsPlugin(options)
 * `options.options` (`object`): A configuration object that can be used to configure older loaders - this will take the same schema a `webpack.config.js`
 
 * `options.options.context` (`string`): The context that can be used to configure older loaders
+* other options as in a `webpack.config.js`....
 
 ## Examples
 
