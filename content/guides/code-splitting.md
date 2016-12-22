@@ -1,10 +1,10 @@
 ---
-title: Code Splitting
+title: 代码拆分
 sort: 2
 contributors:
   - pksjce
   - pastelsky
-  - xie qianyue
+  - xie-qianyue
   - dear-lizhihua
 ---
 

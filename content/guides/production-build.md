@@ -3,7 +3,7 @@ title: 生产环境构建
 sort: 13
 contributors:
   - henriquea
-  - xie qianyue
+  - xie-qianyue
 ---
 
 使用 webpack 来构建生产版本 (production build) 并不困难。只需要记住下面三点：

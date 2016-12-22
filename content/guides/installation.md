@@ -3,7 +3,7 @@ title: 安装
 sort: 1
 contributors:
   - pksjce
-  - xie qianyue
+  - xie-qianyue
 ---
 
 ### 前提条件
