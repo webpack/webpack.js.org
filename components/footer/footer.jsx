@@ -11,7 +11,7 @@ export default (props) => {
         <section className="footer__left">
           <Link className="footer__link" to="/get-started/index">起步</Link>
           <Link className="footer__link" to="/organization">组织</Link>
-          <Link className="footer__link" to="/contribute">恭喜</Link>
+          <Link className="footer__link" to="/contribute">贡献</Link>
           <Link className="footer__link" to="/get-started/why-webpack#comparison">比较</Link>
         </section>
 

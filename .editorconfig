@@ -6,7 +6,7 @@ root = true
 charset = utf-8
 
 # 4 space indentation
-[*.{md,js,jsx,scss}]
+[*.{md,js,jsx,scss,hbs}]
 indent_style = space
 indent_size = 2
 

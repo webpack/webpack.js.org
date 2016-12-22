@@ -94,7 +94,7 @@ module.exports = function(section) {
         renderer: renderer,
         xhtml: false
       };
-      
+
       var tokens = parseQuotes(content);
 
       return marked.parser(tokens, markedDefaults);
@@ -134,25 +134,25 @@ function parseCustomQuote(token, match, className) {
     var text = token.text;
 
     if (text.indexOf(match) === 0) {
-      var icon;
+      // var icon;
 
-      switch(className) {
-        case 'tip':
-          icon = 'icon-info';
-          break;
-        case 'warning':
-          icon = 'icon-warning';
-          break;
-        default:
-          icon = 'icon-chevron-right';
-          break;
-      }
+      // TODO: Update icons and styling
+      // switch(className) {
+      //   case 'tip':
+      //     icon = 'icon-info';
+      //     break;
+      //   case 'warning':
+      //     icon = 'icon-warning';
+      //     break;
+      //   default:
+      //     icon = 'icon-chevron-right';
+      //     break;
+      // }
 
       return {
         type: 'html',
         text: `<blockquote class="${className}">` +
-          `<div class="tip-title"><i class="tip-icon ${icon}"></i>${className}</div>` +
-          text.slice(2).trim() +
+          `<div class="tip-content"> ${text.slice(2).trim()} </div>` +
           '</blockquote>'
       };
     }
