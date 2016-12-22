@@ -13,9 +13,9 @@ Lets have a look at a consumer choosing to lazily load some components. The `imp
 
 ```jsx
 <LazilyLoad modules={{
-  TodoHandler: () => importLazy(System.import('./components/TodoHandler')),
-  TodoMenuHandler: () => importLazy(System.import('./components/TodoMenuHandler')),
-  TodoMenu: () => importLazy(System.import('./components/TodoMenu')),
+  TodoHandler: () => importLazy(import('./components/TodoHandler')),
+  TodoMenuHandler: () => importLazy(import('./components/TodoMenuHandler')),
+  TodoMenu: () => importLazy(import('./components/TodoMenu')),
 }}>
 {({TodoHandler, TodoMenuHandler, TodoMenu}) => (
   <TodoHandler>
@@ -54,7 +54,7 @@ class Highlight extends React.Component {
   }
 }
 export LazilyLoadFactory(Highlight, {
-  highlight: () => System.import('highlight'),
+  highlight: () => import('highlight'),
 });
 ```
 

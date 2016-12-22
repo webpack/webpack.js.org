@@ -2,9 +2,11 @@ import React from 'react';
 import Interactive from 'antwar-interactive';
 import Container from '../container/container';
 import SplashViz from '../splash-viz/splash-viz';
-import '../../styles';
-import './splash-style';
 import Support from '../support/support';
+import './splash-style';
+import './splash-style';
+import '../splash-viz/splash-viz-style';
+import '../splash-file/splash-file-style';
 
 export default props => {
   let { page } = props;

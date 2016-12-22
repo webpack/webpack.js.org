@@ -5,10 +5,13 @@ contributors:
   - sokra
   - skipjack
   - grgur
+  - bondz
   - dear-lizhihua
 ---
 
 Webpack 是需要传入一个配置对象。取决于你如何使用 webpack，可以通过两种方式之一：终端或 Node.js。下面指定了所有可用的配置选项。
+
+T> New to webpack? Check out our guide to some of webpack's [core concepts](/concepts) to get started!
 
 T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs.org/api/path.html)。这可以防止操作系统的文件路径问题。更多相关请查看[此章节](https://nodejs.org/api/path.html#path_windows_vs_posix)。
 
@@ -53,7 +56,7 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
 
     <details><summary>[libraryTarget](/configuration/output#output-librarytarget): "umd", // 枚举</summary>
     [libraryTarget](/configuration/output#output-librarytarget): "umd-module", // 包裹在 UMD 中的 ES2015 模块
-    [libraryTarget](/configuration/output#output-librarytarget): "commonjs-module", // 包裹在 CommonJs 中的 ES2015 模块
+    [libraryTarget](/configuration/output#output-librarytarget): "commonjs-module", // 包裹在 CommonJS 中的 ES2015 模块
     [libraryTarget](/configuration/output#output-librarytarget): "commonjs2", // 使用 module.exports 导出
     [libraryTarget](/configuration/output#output-librarytarget): "commonjs", // 作为 exports 的属性导出
     [libraryTarget](/configuration/output#output-librarytarget): "amd", // 使用 AMD 定义方法来定义
@@ -283,12 +286,25 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
     </details>
   },
 
-  <details><summary>[devtool](/configuration/devtool): "source-map", // 枚举</summary>
-  [devtool](/configuration/devtool): "inline-source-map", // 将 SourceMap 嵌入到源文件中
+  [performance](/configuration/performance): {
+    <details><summary>[hints](/configuration/performance#performance-hints): "warning", // 枚举 </summary>
+    [hints](/configuration/performance#performance-hints): "error", // 性能提示中抛出错误
+    [hints](/configuration/performance#performance-hints): false, // 关闭性能提示
+    </details>
+    [maxAssetSize](/configuration/performance#performance-maxassetsize): 200000, // 整数类型（以字节为单位）
+    [maxEntrypointSize](/configuration/performance#performance-maxentrypointsize): 400000, // 整数类型（以字节为单位）
+    [assetFilter](/configuration/performance#performance-assetfilter): function(assetFilename) {
+      // 提供资源文件名的断言函数
+      return assetName.endsWith('.css') || assetName.endsWith('.js');
+    }
+  },
+
+  <details><summary>[devtool](/configuration/devtool): "source-map", // enum </summary>
+  [devtool](/configuration/devtool): "inline-source-map", // 嵌入到源文件中
   [devtool](/configuration/devtool): "eval-source-map", // 将 SourceMap 嵌入到每个模块中
   [devtool](/configuration/devtool): "hidden-source-map", // SourceMap 不在源文件中引用
   [devtool](/configuration/devtool): "cheap-source-map", // 没有模块映射(module mappings)的 SourceMap 低级变体(cheap-variant)
-  [devtool](/configuration/devtool): "cheap-module-source-map", // 有模块映射(module mappings)的 SourceMap 低级变体(cheap-variant)
+  [devtool](/configuration/devtool): "cheap-module-source-map", // 有模块映射(module mappings)的 SourceMap 低级变体
   [devtool](/configuration/devtool): "eval", // 没有模块映射，而是命名模块。以牺牲细节达到最快。
   </details>
   // 通过在浏览器调试工具(browser devtools)中添加元信息(meta info)增强调试
@@ -340,13 +356,17 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
   ],
   // 附加插件列表
 
+
   <details><summary>/* 高级配置（点击展示） */</summary>
 
   [resolveLoader](/configuration/resolve#resolveloader): { /* 等同于 resolve */ }
-  // separate resolve options for loaders
+  // 独立解析选项的 loader
 
   [profile](other-options#profile): true, // boolean
   // 捕获时机信息
+
+  [bail](other-options#bail): true, //boolean
+  // 在第一个错误出错时抛出，而不是无视错误。
 
   [cache](other-options#cache): false, // boolean
   // 禁用/启用缓存

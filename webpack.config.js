@@ -1,5 +1,6 @@
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var Autoprefixer = require('autoprefixer');
 var merge = require('webpack-merge');
 var webpack = require('webpack');
@@ -18,14 +19,14 @@ const commonConfig = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loader: 'babel-loader!eslint-loader',
+        loaders: ['babel-loader', 'eslint-loader'],
         include: [
           path.join(__dirname, 'components')
         ]
       },
       {
         test: /\.woff2?$/,
-        loaders: ['url-loader?prefix=font/&limit=50000&mimetype=application/font-woff']
+        loaders: ['url-loader?prefix=font/&limit=10000&mimetype=application/font-woff']
       },
       {
         test: /\.jpg$/,
@@ -42,6 +43,10 @@ const commonConfig = {
       {
         test: /\.html$/,
         loaders: ['raw-loader']
+      },
+      {
+        test: /\.json$/,
+        loaders: ['json-loader']
       }
     ]
   },
@@ -54,7 +59,13 @@ const commonConfig = {
   },
   sassLoader: {
     includePaths: [ path.join('./styles/partials') ]
-  }
+  },
+  plugins: [
+    new CopyWebpackPlugin([{
+      from: './assets',
+      to: './assets'
+    }])
+  ]
 };
 
 const interactiveConfig = {
@@ -77,6 +88,10 @@ const developmentConfig = {
   module: {
     loaders: [
       {
+        test: /\.font.js$/,
+        loaders: ['style-loader', 'css-loader', 'fontgen-loader']
+      },
+      {
         test: /\.css$/,
         loaders: ['style-loader', 'css-loader'],
         include: stylePaths
@@ -91,9 +106,6 @@ const developmentConfig = {
 };
 
 const buildConfig = {
-  output: {
-    publicPath: '/'
-  },
   plugins: [
     new ExtractTextPlugin('[chunkhash].css', {
       allChunks: true
@@ -101,6 +113,13 @@ const buildConfig = {
   ],
   module: {
     loaders: [
+      {
+        test: /\.font.js$/,
+        loader: ExtractTextPlugin.extract(
+          'style-loader',
+          'css-loader!fontgen-loader?embed'
+        )
+      },
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract(
@@ -131,7 +150,6 @@ module.exports = function(env) {
     case 'interactive':
       return merge(
         commonConfig,
-        buildConfig,
         interactiveConfig
       );
     case 'build':

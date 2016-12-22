@@ -39,6 +39,8 @@ module.exports = {
 **webpack.config.js**
 
 ```javascript
+var path = require('path');
+
 module.exports = {
   entry: './path/to/my/entry/file.js',
   output: {
@@ -52,7 +54,7 @@ module.exports = {
 
 T> 你可能看到项目**生成(emitted 或 emit)**贯穿我们整个文档和[插件 API](/api/plugins)。它是“生产(produced) 或 排放(discharged)”的特殊术语。
 
- `output` 属性具有[更多可配置的特性](/configuration)，但让我们花一些时间了解 `output` 属性的一些最常见的用例。
+ `output` 属性具有[更多可配置的特性](/configuration/output)，但让我们花一些时间了解 `output` 属性的一些最常见的用例。
 
 [了解更多！](/concepts/output)
 
@@ -71,6 +73,8 @@ webpack 配置在更高层面有两个目标。
 **webpack.config.js**
 
 ```javascript
+var path = require('path');
+
 const config = {
   entry: './path/to/my/entry/file.js',
   output: {
@@ -85,7 +89,7 @@ const config = {
 };
 ```
 
-以上配置中，我们定义了使用加载器的规则，它有两个必需的属性：`test` 和 `use`。它告诉 webpack 编译器(compiler) 如下：
+以上配置中，我们定义了为一个独立的 module 定义了 `rules` 属性，里面包含两个必须属性：`test` 和 `use`。这可以告诉 webpack 编译器(compiler) 如下：
 
 > “嘿，webpack 编译器，当你碰到「在 `require()`/`import` 语句中被解析为 '.js' 或 '.jsx' 的路径」时，在你把它们添加并打包之前，要先**使用** `babel-loader` 去转换”。
 

@@ -138,9 +138,9 @@ noParse: /jquery|backbone/
 ``` js-with-links
 parser: {
   amd: false, // 禁用 AMD
-  commonjs: false, // 禁用 CommonJs
-  system: false, // 禁用 System
-  harmony: false, // 禁用 harmony import/export
+  commonjs: false, // 禁用 CommonJS
+  system: false, // 禁用 SystemJS
+  harmony: false, // 禁用 ES6 Harmony import/export
   requireInclude: false, // 禁用 require.include
   requireEnsure: false, // 禁用 require.ensure
   requireContext: false, // 禁用 require.context

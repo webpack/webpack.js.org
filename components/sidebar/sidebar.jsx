@@ -1,6 +1,5 @@
 import React from 'react';
 import SidebarItem from '../sidebar-item/sidebar-item';
-import './sidebar-style';
 
 export default props => {
   let { sectionName, pages, currentPage } = props;
@@ -10,11 +9,10 @@ export default props => {
       <div className="sidebar__inner">
         <h3 className="sidebar-item__version">Version 2.1</h3>
         <SidebarItem
-          url={ `/${sectionName}` } 
+          url={ `/${sectionName}` }
           title="介绍"
           currentPage= { currentPage }
         />
-
         {
           pages.map(({ url, title, anchors }, i) =>
             <SidebarItem

@@ -8,14 +8,13 @@ contributors:
 
 你可能已经注意到，很少有 webpack 配置看起来很完全相同。这是因为 **webpack 的配置文件是 JavaScript 文件导出的一个对象。**此对象，由 webpack 根据对象定义的属性进行解析。
 
-因为 webpack 配置是标准的 node.js CommonJs 模块，你可以**如下**：
+因为 webpack 配置是标准的 Node.js CommonJS 模块，你可以**如下**：
 
 * 通过 `require(...)` 导入其他文件
 * 通过 `require(...)` 使用 npm 的工具函数
 * 使用 JavaScript 控制流表达式，例如 `?:` 操作符
 * 对常用值使用常量或变量
-* 编写并执行 function 来生成部分配置
-
+* 编写并执行函数来生成部分配置
 
 在合适的时机使用这些特性。
 
@@ -32,6 +31,8 @@ contributors:
 **webpack.config.js**
 
 ```javascript
+var path = require('path');
+
 module.exports = {
   entry: './foo.js',
   output: {
@@ -153,7 +154,7 @@ export class NgCliWebpackConfig {
 
 ## 使用 JSX
 
-在下面例子中，JSX（React JavaScript 标记）和 Babel 创建了一个 webpack 可以识别的 JSON 配置。（由[Jason Miller](https://twitter.com/_developit)提供）
+在下面例子中，JSX（React JavaScript 标记语法）和 Babel 创建了一个 webpack 可以识别的 JSON 配置。（由[Jason Miller](https://twitter.com/_developit)提供）
 
 
 ```javascript

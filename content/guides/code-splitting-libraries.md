@@ -37,7 +37,7 @@ module.exports = function(env) {
     return {
         entry: './index.js',
         output: {
-            filename: '[chunkhash].[name].js`,
+            filename: '[chunkhash].[name].js',
             path: './dist'
         }
     }
@@ -63,7 +63,7 @@ module.exports = function(env) {
             vendor: 'moment'
         },
         output: {
-            filename: '[chunkhash].[name].js`,
+            filename: '[chunkhash].[name].js',
             path: './dist'
         }
     }
@@ -92,7 +92,7 @@ module.exports = function(env) {
             vendor: 'moment'
         },
         output: {
-            filename: '[chunkhash].[name].js`,
+            filename: '[chunkhash].[name].js',
             path: './dist'
         },
         plugins: [
@@ -126,7 +126,7 @@ module.exports = function(env) {
             vendor: 'moment'
         },
         output: {
-            filename: '[chunkhash].[name].js`,
+            filename: '[chunkhash].[name].js',
             path: './dist'
         },
         plugins: [

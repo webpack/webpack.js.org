@@ -2,11 +2,12 @@
 title: 模块热更新 - React
 sort: 8
 contributors:
+  - jmreidy
   - jhnns
   - xie qianyue
 ---
 
-正如在 [concept](/concepts/hot-module-replacement) 那章提到的，模块热重载 (HMR) 的作用是，在应用运行时，无需刷新页面，便能替换、增加、删除必要的模块。
+正如在 [概念](/concepts/hot-module-replacement)章节提到的，模块热重载(HMR)的作用是，在应用运行时，无需刷新页面，便能替换、增加、删除必要的模块。
 HMR 对于那些由单一状态树构成的应用非常有用。因为这些应用的组件是 "dumb" (相对于 "smart") 的，所以在组件的代码更改后，组件的状态依然能够正确反映应用的最新状态。
 
 下面的介绍是基于 Babel 和 React 的，但它们对于 HMR 并不是必需的。
@@ -18,7 +19,7 @@ T> 如果你想了解别的配置方式，可以告诉我们，或者更好的�
 下面将会示范怎么在 Babel, React 和 PostCSS（使用 CSS 模块）的项目中配置 HMR。为此，你需要在你的 `package.json` 加上以下依赖，可以通过下面的命令来安装：
 
 ```bash
-npm install --save-dev babel@6.5.2 babel-core@6.13.2 babel-loader@6.2.4 babel-preset-es2015@6.13.2 babel-preset-react@6.11.1 babel-preset-stage-2@6.13.0 css-loader@0.23.1 postcss-loader@0.9.1 react-hot-loader@3.0.0-beta.1 style-loader@0.13.1 webpack@2.1.0-beta.20 webpack-dev-server@2.1.0-beta.0
+npm install --save-dev babel@6.5.2 babel-core@6.13.2 babel-loader@6.2.4 babel-preset-es2015@6.13.2 babel-preset-react@6.11.1 babel-preset-stage-2@6.13.0 css-loader@0.23.1 postcss-loader@0.9.1 react-hot-loader@3.0.0-beta.6 style-loader@0.13.1 webpack@2.1.0-beta.20 webpack-dev-server@2.1.0-beta.0
 ```
 
 另外，你也需要安装 React：
@@ -27,11 +28,12 @@ npm install --save-dev babel@6.5.2 babel-core@6.13.2 babel-loader@6.2.4 babel-pr
 npm install --save react@15.3.0 react-dom@15.3.0
 ```
 
+
 ### Babel 配置
 
 你的 `.babelrc` 配置文件或许会和下面的配置相差无几：
 
-```bash
+```json
 {
   "presets": [
     ["es2015", {"modules": false}],
@@ -93,7 +95,7 @@ module.exports = {
 
   devServer: {
     hot: true,
-    // activate hot reloading
+    // enable HMR on the server
 
     contentBase: resolve(__dirname, 'dist'),
     // match the output path
@@ -103,16 +105,17 @@ module.exports = {
   },
 
   module: {
-    loaders: [
-      { test: /\.js$/,
-        loaders: [
+    rules: [
+      {
+        test: /\.js$/,
+        use: [
           'babel-loader',
         ],
         exclude: /node_modules/
       },
       {
         test: /\.css$/,
-        loaders: [
+        use: [
           'style-loader',
           'css-loader?modules',
           'postcss-loader',
@@ -123,7 +126,7 @@ module.exports = {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    // activates HMR
+    // enable HMR globally
 
     new webpack.NamedModulesPlugin(),
     // prints more readable module names in the browser console on HMR updates
@@ -137,7 +140,12 @@ module.exports = {
 
 配置中的注释或许能够帮助你理解一二。有两个主要的部分值得一看： `devServer` 键和 `entry` 键。另外，`HotModuleReplacementPlugin` 是必须加到 `plugins` 数组中去的。
 
-这里特别要提一下下面的两个模块。在 `entry` 里的 `react-hot-loader`，是 React 配置 HMR 必不可少的模块。还有 `NamedModulesPlugin`，它的用处在于，能让你知道热重载时是哪个模块作出了变动。
+这里特别要提一下下面的两个模块：
+
+- 在 `entry` 里的 `react-hot-loader`，是 React 配置 HMR 必不可少的模块。
+
+- 还有 `NamedModulesPlugin`，它的用处在于，能让你知道热重载时是哪个模块作出了变动。
+
 
 ### Code
 
@@ -153,20 +161,23 @@ import { AppContainer } from 'react-hot-loader';
 
 import App from './components/App';
 
-const render = () => {
+const render = (Component) => {
   ReactDOM.render(
     <AppContainer>
-      <App/>
+      <Component/>
     </AppContainer>,
     document.getElementById('root')
   );
 };
 
-render();
+render(App);
 
 // Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('./components/App', render);
+  module.hot.accept('./components/App', () => {
+    const NewApp = require('./components/App').default
+    render(NewApp)
+  });
 }
 ```
 
@@ -193,15 +204,43 @@ export default App;
 }
 ```
 
-事实上，上面的代码中最重要是引用 `module` 的那一部分代码。首先，我们把 HMR 的触发重载代码放在了 `module.hot` 的条件判断中；webpack 向代码暴露了 `module` 对象，如果我们设置了 `hot: true`，`module.hot` 条件判断里的代码便会执行。
+事实上，上面的代码中最重要是引用 `module` 的那一部分代码。
 
-HMR 的 API 还提供了其他的选项，上面的配置并没有全部提及，但最重要的是 `module.hot.accept` 调用。它指定了依据特定的依赖，怎样处理代码的更新。
+1. 如果我们设置了 `devServer: { hot: true }`，webpack 会暴露 `module.hot` 给我们的代码；
 
-在上面的例子中，`module.hot` 只有在 `src/components/App.js` 更新时，才回触发 `render` 方法。值得注意的是，`App.js` 的更新包括了它里面依赖的更新 ── 除了 `App.js` 本身更新之外，如果 `App.css` 更新了，也会触发 `render` 方法，因为 `App.css` 包含在 `App.js` 里面。
+2. 因此，我们可以使用 `module.hot` 钩子函数为特定资源启用 HMR（这里是`App.js`）。这里最重要的 API 是 `module.hot.accept`，它指定如何处理对特定依赖的更改。
 
+3. 注意，因为 Webpack 2 对 ES2015 模块有内置的支持，你不需要在 `module.hot.accept` 中重新引入你的根组件。要完成这项工作，你需要更改 Babel ES2015 在 `.babelrc` 的预设：
+
+  ```
+  ["es2015", {"modules": false}]
+  ```
+
+  like what we did in [Babel Config](#babel-config). Note that disabling Babel's module plugin is not only necessary for HMR. If you don't disable it you'll run into many other issues (see [Migrating from v1 to v2](/guides/migrating/#mixing-es2015-with-amd-and-commonjs) and [webpack-tree-shaking](http://www.2ality.com/2015/12/webpack-tree-shaking.html)).
+
+So in this case, `module.hot.accept` will fire the `render` method whenever `src/components/App.js` or its dependencies are changed - which means the `render` method will also fire when the `App.css` is changed, since `App.css` is included in `App.js`.
+
+###index.html
+
+This needs to be placed inside of `dist` in your project root. webpack-dev-server will not run without it.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example Index</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="bundle.js"></script>
+</body>
+</html>
+
+```
 ### Package.json
 
-最后，让我们启动 webpack 开发服务器来生成打包文件，看看 HMR 的运行效果吧。我们可以使用下面的代码来设置 pacakge.json：
+最后，让我们启动 `webpack-dev-server` 来生成打包文件，看看 HMR 的运行效果吧。我们可以使用下面的 `package.json` 进入：
 
 ```json
 {

@@ -2,9 +2,8 @@ import React from 'react';
 import Link from '../link/link';
 import Container from '../container/container';
 import Logo from '../logo/logo';
-import './navigation-style';
-import './search-style';
 
+// TODO: Maybe by updating the routing scheme later on we can avoid hardcoding this?
 let Sections = [
   {
     title: '概念',
@@ -25,26 +24,25 @@ let Sections = [
     ]
   },
   {
-    title: '捐助',
+    title: 'Donate',
     url: '//opencollective.com/webpack'
   }
 ];
 
+// TODO: Move back to using state once we can handle algolia on our own
 export default class Navigation extends React.Component {
   render() {
-    let { pageUrl, sections } = this.props;
-    let isIndex = pageUrl === '/index';
-    let transparentClass = isIndex ? 'navigation--transparent' : '';
+    let { pageUrl = '' } = this.props;
     
     return (
-      <header className={ `navigation ${transparentClass}` }>
+      <header className="navigation">
         <Container className="navigation__inner">
           <div className="navigation__mobile" onClick={ this._toggleSidebar }>
             <i className="icon-menu" />
           </div>
 
           <Link className="navigation__logo" to="/">
-            <Logo light={ !isIndex } />
+            <Logo light={ true } />
           </Link>
 
           <nav className="navigation__links">
@@ -57,7 +55,7 @@ export default class Navigation extends React.Component {
                   <Link
                     key={ `navigation__link-${section.title}` }
                     className={ `navigation__link ${activeMod}` }
-                    to={ `/${section.url}/index` }>
+                    to={ `/${section.url}` }>
                     { section.title }
                   </Link>
                 );
@@ -66,15 +64,17 @@ export default class Navigation extends React.Component {
           </nav>
 
           <div className="navigation__search">
-            <input 
-              type="text" 
+            <input
+              type="text"
               className="navigation__search-input"
-              placeholder="Search documentation…" />
-            <button 
-              className="navigation__search-icon"
-              onClick={ this._toggleSearch.bind(this) }>
-              &#9906;
-            </button>
+              placeholder="Search documentation…"
+              onBlur={ this._toggleSearch.bind(this) } />
+            <button
+              className="navigation__search-icon icon-magnifying-glass"
+              onClick={ this._toggleSearch.bind(this) } />
+            <button
+              className="navigation__search-icon icon-cross"
+              onClick={ this._toggleSearch.bind(this) } />
           </div>
         </Container>
 
@@ -129,7 +129,7 @@ export default class Navigation extends React.Component {
    * @return {bool} - Whether or not the given section is active
    */
   _isActive(section) {
-    let { pageUrl } = this.props;
+    let { pageUrl = '' } = this.props;
 
     if (section.children) {
       return section.children.some(child => pageUrl.includes(`${child.url}/`));
@@ -139,7 +139,7 @@ export default class Navigation extends React.Component {
 
   /**
    * Toggle the SidebarMobile component
-   * 
+   *
    * @param {object} e - Native click event
    */
   _toggleSidebar(e) {
@@ -151,7 +151,7 @@ export default class Navigation extends React.Component {
 
   /**
    * Toggle the search input
-   * 
+   *
    */
   _toggleSearch() {
     let container = document.querySelector('.navigation');
@@ -163,11 +163,11 @@ export default class Navigation extends React.Component {
 
   /**
    * Expand the search input
-   * 
+   *
    */
   _openSearch() {
     let container = document.querySelector('.navigation');
-    
+
     container.classList.add('navigation--search-mode');
   }
 }

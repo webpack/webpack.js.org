@@ -13,7 +13,7 @@ application is running without a page reload. You basically can update changed m
 
 ### From The App View
 
-The app code asks the HMR runtime to check of updates. The HMR runtime downloads the updates (async) and tell the app code that an update is available. The app code asks the HMR runtime to apply updates. The HMR runtime applies the update (sync). The app code may or may not require user interaction in this process (you decide).
+The app code asks the HMR runtime to check for updates. The HMR runtime downloads the updates (async) and tell the app code that an update is available. The app code asks the HMR runtime to apply updates. The HMR runtime applies the update (sync). The app code may or may not require user interaction in this process (you decide).
 
 ### From The Compiler (webpack) View
 
@@ -24,19 +24,19 @@ In addition to the normal assets the compiler need to emit the "Update" to allow
 
 The manifest contains the new compilation hash and a list of all update chunks (2.).
 
-The update chunks contains code for all updated modules in this chunk (or a flag if a module was removed).
+The update chunks contain code for all updated modules in this chunk (or a flag if a module was removed).
 
-The compiler addtionally makes sure that module and chunk ids as consistent between these builds. It uses a "records" json file to store them between builds (on it store them in memory).
+The compiler addtionally makes sure that module and chunk ids are consistent between these builds. It uses a "records" json file to store them between builds (or it stores them in memory).
 
 ### From The Module View
 
-HMR is an opt-in feature, so it only affects modules that contains HMR code. The documentation describes the API that is available in modules. In general the module developer writes handlers that are called when a dependency of this module is updated. The developer can also write a handler that is called when this module is updated.
+HMR is an opt-in feature that affects only modules containing HMR code. You can consider patching styling through style-loader as a good example. To make this work, style-loader implements the HMR interface. Implementing it you describe what should happen when a module is updated. In this case we simply replace the styling with the one received through HMR.
 
-In most cases it's not mandatory to write HMR code in every module. If a module has no HMR handlers the update bubbles up. This means a single handler can handle a update to a complete module tree. If a single module in this tree is updated, the complete module tree is reloaded (only reloaded not transferred).
+In most cases it's not mandatory to write HMR code in every module. If a module has no HMR handlers the update bubbles up. This means a single handler can handle an update to a complete module tree. If a single module in this tree is updated, the complete module tree is reloaded (only reloaded not transferred).
 
 ### From The HMR Runtime View (Technical)
 
-For the module system runtime is additional code emitted to track module `parents` and `children`.
+For the module system runtime additional code is emitted to track module `parents` and `children`.
 
 On the management side the runtime supports two methods: `check` and `apply`.
 
@@ -44,13 +44,13 @@ A `check` does a HTTP request to the update manifest. When this request fails, t
 
 For each new chunk request in the ready state the update chunk is also downloaded.
 
-The `apply` method flags all updated modules as invalid. For each invalid module there need to be a update handler in the module or update handlers in every parent. Else the invalid buddles up and mark all parents as invalid too. This process continues until no more "bubble up" occurs. If it bubbles up from an entry point the process fails.
+The `apply` method flags all updated modules as invalid. For each invalid module there need to be a update handler in the module or update handlers in every parent. Else the invalid buddles up and marks all parents as invalid too. This process continues until no more "bubble up" occurs. If it bubbles up from an entry point the process fails.
 
 Now all invalid modules are disposed (dispose handler) and unloaded. Then the current hash is updated and all "accept" handlers are called. The runtime switches back to the `idle` state and everything continues as normal.
 
 ## What can I do with it?
 
-You can use it in development as LiveReload replacement. webpack-dev-server supports a hot mode which tries to update with HMR before trying to reload the whole page. See how to implement [HMR with React](/guides/hmr-react) for example.
+You can use it in development as a LiveReload replacement. webpack-dev-server supports a hot mode which tries to update with HMR before trying to reload the whole page. See how to implement [HMR with React](/guides/hmr-react) for example.
 
 Some loaders already generate modules that are hot-updateable. i.e. the `style-loader` can exchange the stylesheet. You don't need to do anything special.
 

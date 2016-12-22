@@ -19,12 +19,13 @@ This option controls if and how Source Maps are generated.
  devtool                      | build | rebuild | production | quality
 ------------------------------|-------|---------|------------|--------------------------
  eval                         | +++   | +++     | no         | 生成代码
- cheap-eval-source-map        | +     | ++      | no         | 转换过的代码（仅限行）
- cheap-source-map             | +     | o       | yes        | 转换过的代码（仅限行）
- cheap-module-eval-source-map | o     | ++      | no         | 原始源（仅限行）
- cheap-module-source-map      | o     | -       | yes        | 原始源（仅限行）
- eval-source-map              | --    | +       | no         | 原始源
- source-map                   | --    | --      | yes        | 原始源
+ cheap-eval-source-map        | +     | ++      | no         | 转换后代码（仅限行）
+ cheap-source-map             | +     | o       | yes        | 转换后代码（仅限行）
+ cheap-module-eval-source-map | o     | ++      | no         | 原始源码（仅限行）
+ cheap-module-source-map      | o     | -       | yes        | 原始源码（仅限行）
+ eval-source-map              | --    | +       | no         | 原始源码
+ source-map                   | --    | --      | yes        | 原始源码
+  nosources-source-map         | --    | --      | yes        | 无源码内容
 
 Some of these values are suited for development and some for production. For development you typically want very fast Source Maps at the cost of bundle size, but for production you want separate Source Maps that are accurate.
 
@@ -49,6 +50,8 @@ W> There are some issues with Source Maps in Chrome. [We need your help!](https:
 `cheap-source-map` - A SourceMap without column-mappings ignoring loaded Source Maps.
 
 `cheap-module-source-map` - A SourceMap without column-mappings that simplifies loaded Source Maps to a single mapping per line.
+
+`nosources-source-map` - A SourceMap is created without the `sourcesContent` in it. It can be used to map stack traces on the client without exposing all of the source code.
 
 T> See [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilename) to customize the filenames of generated Source Maps.
 

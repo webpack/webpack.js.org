@@ -27,7 +27,6 @@ export function wordToNum(word) {
         return ref.word === word && word.toLowerCase() ? ref.num : accum;
     }, -1);
 };
-
 ```
 
 The usage spec for the library will be as follows.
@@ -41,7 +40,7 @@ import * as webpackNumbers from 'webpack-numbers';
 webpackNumbers.wordToNum('Two') // output is 2
 ...
 
-// CommonJs modules
+// CommonJS modules
 
 var webpackNumbers = require('webpack-numbers');
 
@@ -53,8 +52,8 @@ webpackNumbers.numToWord(3); // output is Three
 
 <html>
 ...
-<script src='https://unpkg.com/webpack-numbers' type='text/javascript'/>
-<script type='text/javascript'>
+<script src="https://unpkg.com/webpack-numbers"></script>
+<script>
     ...
     /* webpackNumbers is available as a global variable */
     webpackNumbers.wordToNum('Five') //output is 5
@@ -140,7 +139,7 @@ This means that your library expects a dependency named `lodash` to be available
 
 ### Add `libraryTarget`
 
-For widespread use of the library, we would like it to be compatible in different environments, i. e. CommonJs, AMD, Node.js and as a global variable.
+For widespread use of the library, we would like it to be compatible in different environments, i. e. CommonJS, AMD, Node.js and as a global variable.
 
 To make your library available for reuse, add `library` property in webpack configuration.
 

@@ -1,5 +1,5 @@
 ---
-title: 代码分割 - 使用 Require
+title: 代码分割 - 使用 RequireJS
 sort: 5
 contributors:
   - pksjce

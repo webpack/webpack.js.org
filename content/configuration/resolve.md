@@ -272,7 +272,7 @@ The extensions which are tried when resolving a module (e.g. loaders). By defaul
 If you want to use loaders without the `-loader` suffix, you can use this:
 
 ```js
-moduleExtensions: ['-loaders']
+moduleExtensions: ['-loader']
 ```
 
 

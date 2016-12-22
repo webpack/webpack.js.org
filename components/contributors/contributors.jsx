@@ -8,11 +8,9 @@ export default ({contributors}) => {
 
   return (
     <div className="contributors">
-      <hr />
-      <h3>Contributors</h3>
       <div className="contributors__list">
         {
-          (contributors).map((contributor) => (
+          contributors.map(contributor => (
             <a key={ contributor }
               className="contributor"
               href={ `https://github.com/${contributor}` }>
