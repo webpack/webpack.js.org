@@ -3,10 +3,11 @@ title: 安装
 contributors:
   - pksjce
   - bebraw
+  - dear-lizhihua
 sort: 1
 ---
 
-### Pre-requisites
+### 预备知识
 
 Before getting started, make sure you have a fresh version of [Node.js](https://nodejs.org/en/) installed. The current LTS is an ideal starting point. You may run into a variety of issues with the older versions as they may be missing functionality webpack or related packages might need.
 
