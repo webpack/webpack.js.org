@@ -8,7 +8,7 @@ import './page-style';
 import '../sidebar/sidebar-style';
 
 export default ({ section, page }) => {
-  let edit = `https://github.com/webpack/webpack.js.org/edit/develop/content/${page.url}.md`;
+  let edit = `https://github.com/vuefe/webpack2/edit/cn/content/${page.url}.md`;
 
   return (
     <Container className="page">

@@ -164,3 +164,6 @@ T> 你可以通过向 `npm run build` 命令添加两个中横线，给 webpack 
 
 现在你应该有一个基本的架构，你应该深入 webpack [基本概念](/concepts)和[配置](/configuration)来更好地理解其设计。还要查看[指南](/guides)来学习如何处理常见问题。[API](/api) 章节可以深入底层。
 
+***
+
+> 原文：https://webpack.js.org/get-started/
