@@ -182,6 +182,7 @@ if (module.hot) {
 ```
 
 ```js
+// ./src/components/App.js
 import React from 'react';
 import styles from './App.css';
 
@@ -220,7 +221,7 @@ export default App;
 
 So in this case, `module.hot.accept` will fire the `render` method whenever `src/components/App.js` or its dependencies are changed - which means the `render` method will also fire when the `App.css` is changed, since `App.css` is included in `App.js`.
 
-###index.html
+### index.html
 
 This needs to be placed inside of `dist` in your project root. webpack-dev-server will not run without it.
 

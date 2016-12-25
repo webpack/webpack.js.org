@@ -22,6 +22,7 @@
   display: flex;
   font-size: 1.5em;
   position: absolute;
+  top: .64em;
   align-items: center;
   color: getColor(white);
   cursor: pointer;
@@ -33,6 +34,10 @@
 
   @include break {
     display: none;
+  }
+
+  .icon-menu {
+    display: inline-flex;
   }
 }
 
