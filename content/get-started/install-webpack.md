@@ -9,7 +9,7 @@ sort: 1
 
 ### 预备知识
 
-在开始前，先要确认你已经安装 [Node.js](https://nodejs.org/en/) 的最新版本。使用最新的 LTS 是理想的版本。使用旧版本，你可能遇到各种问题，因为它们可能缺少 webpack 功能或缺少相关 package 包。
+在开始前，先要确认你已经安装 [Node.js](https://nodejs.org/en/) 的最新版本。使用 Node.js 最新的 LTS 版本，是理想的启动入口。使用旧版本，你可能遇到各种问题，因为它们可能缺少 webpack 功能或缺少相关 package 包。
 
 ### 全局安装
 
@@ -39,7 +39,7 @@ npm install webpack@<version> --save-dev
 
 这是标准和推荐的用法。
 
-T> 要运行本地安装的 webpack，你可以访问其 bin 版本为 `node_modules/.bin/webpack`
+T> 要运行本地安装的 webpack，你可以通过 `node_modules/.bin/webpack` 访问其 bin 版本
 
 
 ### 前沿领域
@@ -49,3 +49,7 @@ T> 要运行本地安装的 webpack，你可以访问其 bin 版本为 `node_mod
 ``` bash
 npm install webpack/webpack#<tagname/branchname>
 ```
+
+***
+
+> 原文：https://webpack.js.org/get-started/install-webpack/
