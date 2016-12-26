@@ -145,29 +145,29 @@ webpack 用于异步加载(async loading)块(chunk)的 JSONP 函数。
 
 ### `output.library`
 
-如果设置过，可将包(bundle)导出为库(library)。`output.library` 是库的名称。
+如果设置过此选项，会将 bundle 导出为 library。`output.library` 是 library 的名称。
 
-如果你正在编写库并且想要将其发布为一个单文件，请使用此选项。
+如果你正在编写 library ，并且需要将其发布为单独的文件，请使用此选项。
 
 ### `output.libraryTarget`
 
-导出库的格式
+library 的导出格式
 
 `"var"` - 通过设置一个变量导出：`var Library = xxx`（默认）
 
-`"this"` - 通过设置 `this` 的一个属性导出：`this["Library"] = xxx`
+`"this"` - 通过设置 `this` 的属性导出：`this["Library"] = xxx`
 
-`"commonjs"` - 通过设置 `exports` 的一个属性导出：`exports["Library"] = xxx`
+`"commonjs"` - 通过设置 `exports` 的属性导出：`exports["Library"] = xxx`
 
 `"commonjs2"` - 通过设置 `module.exports`：`module.exports = xxx`
 
-`"amd"` - 导出到 AMD（可选命名 - 通过 library 选项设置名称）
+`"amd"` - 导出为 AMD（可选命名 - 通过 library 选项设置名称）
 
-`"umd"` - 导出到 AMD，CommonJS2 或者 root 的一个属性
+`"umd"` - 导出到 AMD，CommonJS2 或者 root 的属性
 
 > 默认值：`"var"`
 
-如果 `output.library` 未设置，但是 `output.libraryTarget` 被设置为 `var` 以外的值，则导出对象的每个属性都被复制（除了 `amd`，`commonjs2` 和 `umd`）。
+如果 `output.library` 未设置，但是 `output.libraryTarget` 被设置为 `var` 以外的值，则「所导出对象」的每个属性都被复制到「对应的被导出对象」上（除了 `amd`，`commonjs2` 和 `umd`）。
 
 ### `output.path`
 
