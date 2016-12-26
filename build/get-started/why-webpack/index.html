@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>为什么选择 webpack？</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#2B3A42">
+    <link rel="shortcut icon" href="/assets/favicon.ico">
+
+    <!--<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:200,400,400i,500" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+    
+      <link href="/a941685fba1636b71c4d.css" rel="stylesheet">
+    
+
+    <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+  </head>
+  <body>
+    <div id="site" class="site"><div class="interactive" id="components/navigation/navigation.jsx" data-props="{&quot;sections&quot;:[{&quot;title&quot;:&quot;&#x8D77;&#x6B65;&quot;,&quot;url&quot;:&quot;get-started&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;&#x5B89;&#x88C5;&quot;,&quot;url&quot;:&quot;get-started/install-webpack&quot;},{&quot;title&quot;:&quot;&#x4E3A;&#x4EC0;&#x4E48;&#x9009;&#x62E9; webpack&#xFF1F;&quot;,&quot;url&quot;:&quot;get-started/why-webpack&quot;}]},{&quot;title&quot;:&quot;&#x6982;&#x5FF5;&quot;,&quot;url&quot;:&quot;concepts&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;&#x5165;&#x53E3;&quot;,&quot;url&quot;:&quot;concepts/entry-points&quot;},{&quot;title&quot;:&quot;&#x8F93;&#x51FA;&quot;,&quot;url&quot;:&quot;concepts/output&quot;},{&quot;title&quot;:&quot;&#x52A0;&#x8F7D;&#x5668;(Loader)&quot;,&quot;url&quot;:&quot;concepts/loaders&quot;},{&quot;title&quot;:&quot;&#x63D2;&#x4EF6;&quot;,&quot;url&quot;:&quot;concepts/plugins&quot;},{&quot;title&quot;:&quot;&#x914D;&#x7F6E;&quot;,&quot;url&quot;:&quot;concepts/configuration&quot;},{&quot;title&quot;:&quot;&#x6A21;&#x5757;&quot;,&quot;url&quot;:&quot;concepts/modules&quot;},{&quot;title&quot;:&quot;&#x6A21;&#x5757;&#x89E3;&#x6790;&quot;,&quot;url&quot;:&quot;concepts/module-resolution&quot;},{&quot;title&quot;:&quot;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&quot;,&quot;url&quot;:&quot;concepts/dependency-graph&quot;},{&quot;title&quot;:&quot;&#x90E8;&#x7F72;&#x76EE;&#x6807;&quot;,&quot;url&quot;:&quot;concepts/targets&quot;},{&quot;title&quot;:&quot;Hot Module Replacement&quot;,&quot;url&quot;:&quot;concepts/hot-module-replacement&quot;}]},{&quot;title&quot;:&quot;&#x6307;&#x5357;&quot;,&quot;url&quot;:&quot;guides&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;&#x5B89;&#x88C5;&quot;,&quot;url&quot;:&quot;guides/installation&quot;},{&quot;title&quot;:&quot;&#x4EE3;&#x7801;&#x62C6;&#x5206;&quot;,&quot;url&quot;:&quot;guides/code-splitting&quot;},{&quot;title&quot;:&quot;&#x4EE3;&#x7801;&#x5206;&#x5272; - CSS&quot;,&quot;url&quot;:&quot;guides/code-splitting-css&quot;},{&quot;title&quot;:&quot;&#x4EE3;&#x7801;&#x5206;&#x5272; - Libraries&quot;,&quot;url&quot;:&quot;guides/code-splitting-libraries&quot;},{&quot;title&quot;:&quot;&#x4EE3;&#x7801;&#x5206;&#x5272; - &#x4F7F;&#x7528; RequireJS&quot;,&quot;url&quot;:&quot;guides/code-splitting-require&quot;},{&quot;title&quot;:&quot;&#x7BA1;&#x7406;&#x4F9D;&#x8D56;&quot;,&quot;url&quot;:&quot;guides/dependency-management&quot;},{&quot;title&quot;:&quot;&#x6A21;&#x5757;&#x70ED;&#x66F4;&#x65B0; - React&quot;,&quot;url&quot;:&quot;guides/hmr-react&quot;},{&quot;title&quot;:&quot;&#x5F00;&#x53D1;&quot;,&quot;url&quot;:&quot;guides/development&quot;},{&quot;title&quot;:&quot;&#x5F00;&#x53D1; - Docker&quot;,&quot;url&quot;:&quot;guides/development-docker&quot;},{&quot;title&quot;:&quot;&#x5904;&#x7406;&#x517C;&#x5BB9;&quot;,&quot;url&quot;:&quot;guides/compatibility&quot;},{&quot;title&quot;:&quot;&#x5F00;&#x53D1; - &#x7B2C;&#x4E09;&#x65B9;&#x5DE5;&#x5177;&quot;,&quot;url&quot;:&quot;guides/development-third-party&quot;},{&quot;title&quot;:&quot;&#x5F00;&#x53D1; - Vagrant&quot;,&quot;url&quot;:&quot;guides/development-vagrant&quot;},{&quot;title&quot;:&quot;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x6784;&#x5EFA;&quot;,&quot;url&quot;:&quot;guides/production-build&quot;},{&quot;title&quot;:&quot;&#x61D2;&#x52A0;&#x8F7D; - React&quot;,&quot;url&quot;:&quot;guides/lazy-load-react&quot;},{&quot;title&quot;:&quot;Public Path&quot;,&quot;url&quot;:&quot;guides/public-path&quot;},{&quot;title&quot;:&quot;&#x6539;&#x5584;&#x6784;&#x5EFA;&#x6027;&#x80FD;&quot;,&quot;url&quot;:&quot;guides/build-performance&quot;},{&quot;title&quot;:&quot;&#x7F13;&#x5B58;&quot;,&quot;url&quot;:&quot;guides/caching&quot;},{&quot;title&quot;:&quot;Shim&quot;,&quot;url&quot;:&quot;guides/shimming&quot;},{&quot;title&quot;:&quot;Authoring Libraries&quot;,&quot;url&quot;:&quot;guides/author-libraries&quot;},{&quot;title&quot;:&quot;&#x4ECE; v1 &#x8FC1;&#x79FB;&#x5230; v2&quot;,&quot;url&quot;:&quot;guides/migrating&quot;}]},{&quot;title&quot;:&quot;&#x914D;&#x7F6E;&quot;,&quot;url&quot;:&quot;configuration&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;&#x4F20;&#x9012;&#x914D;&#x7F6E;&quot;,&quot;url&quot;:&quot;configuration/passing-a-config&quot;},{&quot;title&quot;:&quot;&#x6269;&#x5C55;&#x914D;&#x7F6E;&quot;,&quot;url&quot;:&quot;configuration/external-configs&quot;},{&quot;title&quot;:&quot;entry &#x548C; context&quot;,&quot;url&quot;:&quot;configuration/entry-context&quot;},{&quot;title&quot;:&quot;&#x8F93;&#x51FA;&quot;,&quot;url&quot;:&quot;configuration/output&quot;},{&quot;title&quot;:&quot;&#x6A21;&#x5757;&quot;,&quot;url&quot;:&quot;configuration/module&quot;},{&quot;title&quot;:&quot;&#x89E3;&#x6790;&quot;,&quot;url&quot;:&quot;configuration/resolve&quot;},{&quot;title&quot;:&quot;&#x63D2;&#x4EF6;&quot;,&quot;url&quot;:&quot;configuration/plugins&quot;},{&quot;title&quot;:&quot;DevServer&quot;,&quot;url&quot;:&quot;configuration/dev-server&quot;},{&quot;title&quot;:&quot;Devtool&quot;,&quot;url&quot;:&quot;configuration/devtool&quot;},{&quot;title&quot;:&quot;&#x76EE;&#x6807;&quot;,&quot;url&quot;:&quot;configuration/target&quot;},{&quot;title&quot;:&quot;Watch &#x548C; WatchOptions&quot;,&quot;url&quot;:&quot;configuration/watch&quot;},{&quot;title&quot;:&quot;Externals&quot;,&quot;url&quot;:&quot;configuration/externals&quot;},{&quot;title&quot;:&quot;Node&quot;,&quot;url&quot;:&quot;configuration/node&quot;},{&quot;title&quot;:&quot;Performance&quot;,&quot;url&quot;:&quot;configuration/performance&quot;},{&quot;title&quot;:&quot;&#x7EDF;&#x8BA1;&quot;,&quot;url&quot;:&quot;configuration/stats&quot;},{&quot;title&quot;:&quot;&#x5176;&#x5B83;&#x9009;&#x9879;&quot;,&quot;url&quot;:&quot;configuration/other-options&quot;}]},{&quot;title&quot;:&quot;API&quot;,&quot;url&quot;:&quot;api&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;CLI &#x5DE5;&#x5177;&quot;,&quot;url&quot;:&quot;api/cli&quot;},{&quot;title&quot;:&quot;Node.js API&quot;,&quot;url&quot;:&quot;api/node&quot;},{&quot;title&quot;:&quot;&#x52A0;&#x8F7D;&#x5668; API&quot;,&quot;url&quot;:&quot;api/loaders&quot;},{&quot;title&quot;:&quot;&#x63D2;&#x4EF6; API&quot;,&quot;url&quot;:&quot;api/plugins&quot;}]},{&quot;title&quot;:&quot;Plugins API&quot;,&quot;url&quot;:&quot;pluginsapi&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Tapable&quot;,&quot;url&quot;:&quot;pluginsapi/tapable&quot;},{&quot;title&quot;:&quot;Compiler&quot;,&quot;url&quot;:&quot;pluginsapi/compiler&quot;},{&quot;title&quot;:&quot;Compilation&quot;,&quot;url&quot;:&quot;pluginsapi/compilation&quot;},{&quot;title&quot;:&quot;Context/Normal Module Factories&quot;,&quot;url&quot;:&quot;pluginsapi/module-factories&quot;},{&quot;title&quot;:&quot;Resolver&quot;,&quot;url&quot;:&quot;pluginsapi/resolver&quot;},{&quot;title&quot;:&quot;Dependency&quot;,&quot;url&quot;:&quot;pluginsapi/dependency&quot;},{&quot;title&quot;:&quot;Parser&quot;,&quot;url&quot;:&quot;pluginsapi/parser&quot;},{&quot;title&quot;:&quot;Template&quot;,&quot;url&quot;:&quot;pluginsapi/template&quot;},{&quot;title&quot;:&quot;Examples&quot;,&quot;url&quot;:&quot;pluginsapi/examples&quot;}]},{&quot;title&quot;:&quot;Loaders&quot;,&quot;url&quot;:&quot;loaders&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;Plugins&quot;,&quot;url&quot;:&quot;plugins&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;commons-chunk-plugin&quot;,&quot;url&quot;:&quot;plugins/commons-chunk-plugin&quot;},{&quot;title&quot;:&quot;loader-options-plugin&quot;,&quot;url&quot;:&quot;plugins/loader-options-plugin&quot;},{&quot;title&quot;:&quot;source-map-dev-tool-plugin.md&quot;,&quot;url&quot;:&quot;plugins/source-map-dev-tool-plugin&quot;}]},{&quot;url&quot;:&quot;vote&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;vote/feedback&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;vote/moneyDistribution&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;organization&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;&#x5176;&#x4ED6;&quot;,&quot;url&quot;:&quot;/&quot;,&quot;pages&quot;:[]}],&quot;pageUrl&quot;:&quot;get-started/why-webpack&quot;}"><header class="navigation"></header></div><div class="interactive" id="components/sidebar-mobile/sidebar-mobile.jsx" data-props="{&quot;sections&quot;:[{&quot;title&quot;:&quot;&#x8D77;&#x6B65;&quot;,&quot;url&quot;:&quot;get-started&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;&#x5B89;&#x88C5;&quot;,&quot;url&quot;:&quot;get-started/install-webpack&quot;},{&quot;title&quot;:&quot;&#x4E3A;&#x4EC0;&#x4E48;&#x9009;&#x62E9; webpack&#xFF1F;&quot;,&quot;url&quot;:&quot;get-started/why-webpack&quot;}]},{&quot;title&quot;:&quot;&#x6982;&#x5FF5;&quot;,&quot;url&quot;:&quot;concepts&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;&#x5165;&#x53E3;&quot;,&quot;url&quot;:&quot;concepts/entry-points&quot;},{&quot;title&quot;:&quot;&#x8F93;&#x51FA;&quot;,&quot;url&quot;:&quot;concepts/output&quot;},{&quot;title&quot;:&quot;&#x52A0;&#x8F7D;&#x5668;(Loader)&quot;,&quot;url&quot;:&quot;concepts/loaders&quot;},{&quot;title&quot;:&quot;&#x63D2;&#x4EF6;&quot;,&quot;url&quot;:&quot;concepts/plugins&quot;},{&quot;title&quot;:&quot;&#x914D;&#x7F6E;&quot;,&quot;url&quot;:&quot;concepts/configuration&quot;},{&quot;title&quot;:&quot;&#x6A21;&#x5757;&quot;,&quot;url&quot;:&quot;concepts/modules&quot;},{&quot;title&quot;:&quot;&#x6A21;&#x5757;&#x89E3;&#x6790;&quot;,&quot;url&quot;:&quot;concepts/module-resolution&quot;},{&quot;title&quot;:&quot;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&quot;,&quot;url&quot;:&quot;concepts/dependency-graph&quot;},{&quot;title&quot;:&quot;&#x90E8;&#x7F72;&#x76EE;&#x6807;&quot;,&quot;url&quot;:&quot;concepts/targets&quot;},{&quot;title&quot;:&quot;Hot Module Replacement&quot;,&quot;url&quot;:&quot;concepts/hot-module-replacement&quot;}]},{&quot;title&quot;:&quot;&#x6307;&#x5357;&quot;,&quot;url&quot;:&quot;guides&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;&#x5B89;&#x88C5;&quot;,&quot;url&quot;:&quot;guides/installation&quot;},{&quot;title&quot;:&quot;&#x4EE3;&#x7801;&#x62C6;&#x5206;&quot;,&quot;url&quot;:&quot;guides/code-splitting&quot;},{&quot;title&quot;:&quot;&#x4EE3;&#x7801;&#x5206;&#x5272; - CSS&quot;,&quot;url&quot;:&quot;guides/code-splitting-css&quot;},{&quot;title&quot;:&quot;&#x4EE3;&#x7801;&#x5206;&#x5272; - Libraries&quot;,&quot;url&quot;:&quot;guides/code-splitting-libraries&quot;},{&quot;title&quot;:&quot;&#x4EE3;&#x7801;&#x5206;&#x5272; - &#x4F7F;&#x7528; RequireJS&quot;,&quot;url&quot;:&quot;guides/code-splitting-require&quot;},{&quot;title&quot;:&quot;&#x7BA1;&#x7406;&#x4F9D;&#x8D56;&quot;,&quot;url&quot;:&quot;guides/dependency-management&quot;},{&quot;title&quot;:&quot;&#x6A21;&#x5757;&#x70ED;&#x66F4;&#x65B0; - React&quot;,&quot;url&quot;:&quot;guides/hmr-react&quot;},{&quot;title&quot;:&quot;&#x5F00;&#x53D1;&quot;,&quot;url&quot;:&quot;guides/development&quot;},{&quot;title&quot;:&quot;&#x5F00;&#x53D1; - Docker&quot;,&quot;url&quot;:&quot;guides/development-docker&quot;},{&quot;title&quot;:&quot;&#x5904;&#x7406;&#x517C;&#x5BB9;&quot;,&quot;url&quot;:&quot;guides/compatibility&quot;},{&quot;title&quot;:&quot;&#x5F00;&#x53D1; - &#x7B2C;&#x4E09;&#x65B9;&#x5DE5;&#x5177;&quot;,&quot;url&quot;:&quot;guides/development-third-party&quot;},{&quot;title&quot;:&quot;&#x5F00;&#x53D1; - Vagrant&quot;,&quot;url&quot;:&quot;guides/development-vagrant&quot;},{&quot;title&quot;:&quot;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x6784;&#x5EFA;&quot;,&quot;url&quot;:&quot;guides/production-build&quot;},{&quot;title&quot;:&quot;&#x61D2;&#x52A0;&#x8F7D; - React&quot;,&quot;url&quot;:&quot;guides/lazy-load-react&quot;},{&quot;title&quot;:&quot;Public Path&quot;,&quot;url&quot;:&quot;guides/public-path&quot;},{&quot;title&quot;:&quot;&#x6539;&#x5584;&#x6784;&#x5EFA;&#x6027;&#x80FD;&quot;,&quot;url&quot;:&quot;guides/build-performance&quot;},{&quot;title&quot;:&quot;&#x7F13;&#x5B58;&quot;,&quot;url&quot;:&quot;guides/caching&quot;},{&quot;title&quot;:&quot;Shim&quot;,&quot;url&quot;:&quot;guides/shimming&quot;},{&quot;title&quot;:&quot;Authoring Libraries&quot;,&quot;url&quot;:&quot;guides/author-libraries&quot;},{&quot;title&quot;:&quot;&#x4ECE; v1 &#x8FC1;&#x79FB;&#x5230; v2&quot;,&quot;url&quot;:&quot;guides/migrating&quot;}]},{&quot;title&quot;:&quot;&#x914D;&#x7F6E;&quot;,&quot;url&quot;:&quot;configuration&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;&#x4F20;&#x9012;&#x914D;&#x7F6E;&quot;,&quot;url&quot;:&quot;configuration/passing-a-config&quot;},{&quot;title&quot;:&quot;&#x6269;&#x5C55;&#x914D;&#x7F6E;&quot;,&quot;url&quot;:&quot;configuration/external-configs&quot;},{&quot;title&quot;:&quot;entry &#x548C; context&quot;,&quot;url&quot;:&quot;configuration/entry-context&quot;},{&quot;title&quot;:&quot;&#x8F93;&#x51FA;&quot;,&quot;url&quot;:&quot;configuration/output&quot;},{&quot;title&quot;:&quot;&#x6A21;&#x5757;&quot;,&quot;url&quot;:&quot;configuration/module&quot;},{&quot;title&quot;:&quot;&#x89E3;&#x6790;&quot;,&quot;url&quot;:&quot;configuration/resolve&quot;},{&quot;title&quot;:&quot;&#x63D2;&#x4EF6;&quot;,&quot;url&quot;:&quot;configuration/plugins&quot;},{&quot;title&quot;:&quot;DevServer&quot;,&quot;url&quot;:&quot;configuration/dev-server&quot;},{&quot;title&quot;:&quot;Devtool&quot;,&quot;url&quot;:&quot;configuration/devtool&quot;},{&quot;title&quot;:&quot;&#x76EE;&#x6807;&quot;,&quot;url&quot;:&quot;configuration/target&quot;},{&quot;title&quot;:&quot;Watch &#x548C; WatchOptions&quot;,&quot;url&quot;:&quot;configuration/watch&quot;},{&quot;title&quot;:&quot;Externals&quot;,&quot;url&quot;:&quot;configuration/externals&quot;},{&quot;title&quot;:&quot;Node&quot;,&quot;url&quot;:&quot;configuration/node&quot;},{&quot;title&quot;:&quot;Performance&quot;,&quot;url&quot;:&quot;configuration/performance&quot;},{&quot;title&quot;:&quot;&#x7EDF;&#x8BA1;&quot;,&quot;url&quot;:&quot;configuration/stats&quot;},{&quot;title&quot;:&quot;&#x5176;&#x5B83;&#x9009;&#x9879;&quot;,&quot;url&quot;:&quot;configuration/other-options&quot;}]},{&quot;title&quot;:&quot;API&quot;,&quot;url&quot;:&quot;api&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;CLI &#x5DE5;&#x5177;&quot;,&quot;url&quot;:&quot;api/cli&quot;},{&quot;title&quot;:&quot;Node.js API&quot;,&quot;url&quot;:&quot;api/node&quot;},{&quot;title&quot;:&quot;&#x52A0;&#x8F7D;&#x5668; API&quot;,&quot;url&quot;:&quot;api/loaders&quot;},{&quot;title&quot;:&quot;&#x63D2;&#x4EF6; API&quot;,&quot;url&quot;:&quot;api/plugins&quot;}]},{&quot;title&quot;:&quot;Plugins API&quot;,&quot;url&quot;:&quot;pluginsapi&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Tapable&quot;,&quot;url&quot;:&quot;pluginsapi/tapable&quot;},{&quot;title&quot;:&quot;Compiler&quot;,&quot;url&quot;:&quot;pluginsapi/compiler&quot;},{&quot;title&quot;:&quot;Compilation&quot;,&quot;url&quot;:&quot;pluginsapi/compilation&quot;},{&quot;title&quot;:&quot;Context/Normal Module Factories&quot;,&quot;url&quot;:&quot;pluginsapi/module-factories&quot;},{&quot;title&quot;:&quot;Resolver&quot;,&quot;url&quot;:&quot;pluginsapi/resolver&quot;},{&quot;title&quot;:&quot;Dependency&quot;,&quot;url&quot;:&quot;pluginsapi/dependency&quot;},{&quot;title&quot;:&quot;Parser&quot;,&quot;url&quot;:&quot;pluginsapi/parser&quot;},{&quot;title&quot;:&quot;Template&quot;,&quot;url&quot;:&quot;pluginsapi/template&quot;},{&quot;title&quot;:&quot;Examples&quot;,&quot;url&quot;:&quot;pluginsapi/examples&quot;}]},{&quot;title&quot;:&quot;Loaders&quot;,&quot;url&quot;:&quot;loaders&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;Plugins&quot;,&quot;url&quot;:&quot;plugins&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;commons-chunk-plugin&quot;,&quot;url&quot;:&quot;plugins/commons-chunk-plugin&quot;},{&quot;title&quot;:&quot;loader-options-plugin&quot;,&quot;url&quot;:&quot;plugins/loader-options-plugin&quot;},{&quot;title&quot;:&quot;source-map-dev-tool-plugin.md&quot;,&quot;url&quot;:&quot;plugins/source-map-dev-tool-plugin&quot;}]},{&quot;url&quot;:&quot;vote&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;vote/feedback&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;vote/moneyDistribution&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;organization&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;&#x5176;&#x4ED6;&quot;,&quot;url&quot;:&quot;/&quot;,&quot;pages&quot;:[]}]}"><nav class="sidebar-mobile"></nav></div><div class="container page"><aside class="sidecar"><a href="//github.com/webpack/webpack" target="_blank" class="sidecar__link sidecar__link--github"><span class="sidecar__label">&#x514B;&#x9686;&#x4ED3;&#x5E93;</span><i class="sidecar__icon icon-github"></i></a><a href="#" class="sidecar__link sidecar__link--gitter js-gitter-toggle-chat-button"><span class="sidecar__label">&#x5BFB;&#x6C42;&#x5E2E;&#x52A9;</span><i class="sidecar__icon icon-gitter"></i></a><a href="//medium.com/webpack" target="_blank" class="sidecar__link sidecar__link--medium"><span class="sidecar__label">&#x8BBF;&#x95EE;&#x535A;&#x5BA2;</span><i class="sidecar__icon icon-medium"></i></a><a href="//stackoverflow.com/questions/tagged/webpack" target="_blank" class="sidecar__link sidecar__link--so"><span class="sidecar__label">Stack Overflow</span><i class="sidecar__icon icon-stack-overflow"></i></a></aside><div class="interactive" id="components/sidebar/sidebar.jsx" data-props="{&quot;sectionName&quot;:&quot;get-started&quot;,&quot;pages&quot;:[{&quot;url&quot;:&quot;get-started/install-webpack&quot;,&quot;title&quot;:&quot;&#x5B89;&#x88C5;&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;&#x9884;&#x5907;&#x77E5;&#x8BC6;&quot;,&quot;id&quot;:&quot;-&quot;},{&quot;title&quot;:&quot;&#x5168;&#x5C40;&#x5B89;&#x88C5;&quot;,&quot;id&quot;:&quot;-&quot;},{&quot;title&quot;:&quot;&#x672C;&#x5730;&#x5B89;&#x88C5;&quot;,&quot;id&quot;:&quot;-&quot;},{&quot;title&quot;:&quot;&#x524D;&#x6CBF;&#x9886;&#x57DF;&quot;,&quot;id&quot;:&quot;-&quot;}]},{&quot;url&quot;:&quot;get-started/why-webpack&quot;,&quot;title&quot;:&quot;&#x4E3A;&#x4EC0;&#x4E48;&#x9009;&#x62E9; webpack&#xFF1F;&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;&#x4EC0;&#x4E48;&#x662F;&#x4EFB;&#x52A1;&#x8FD0;&#x884C;&#x5668;&#xFF1F;&quot;,&quot;id&quot;:&quot;-&quot;},{&quot;title&quot;:&quot;&#x4EC0;&#x4E48;&#x662F;&#x6253;&#x5305;&#x5668;&#xFF1F;&quot;,&quot;id&quot;:&quot;-&quot;},{&quot;title&quot;:&quot;&#x5BF9;&#x6BD4;&quot;,&quot;id&quot;:&quot;-&quot;}]}],&quot;currentPage&quot;:&quot;get-started/why-webpack&quot;}"><nav class="sidebar"></nav></div><section class="page__content"><h1>&#x4E3A;&#x4EC0;&#x4E48;&#x9009;&#x62E9; webpack&#xFF1F;</h1><a class="page__edit" href="https://github.com/vuefe/webpack2/edit/cn/content/get-started/why-webpack.md">&#x7F16;&#x8F91;&#x6B64;&#x9875; &#xA0;&#xA0;<i class="icon-edit"></i></a><div><p>webpack &#x901A;&#x5E38;&#x4F1A;&#x88AB;&#x62FF;&#x6765;&#x548C;&#x5176;&#x4ED6;&#x5DE5;&#x5177;&#xFF08;&#x4F8B;&#x5982; Make, Grunt, Gulp, Browserify &#x6216;&#x8005; Brunch&#xFF09;&#x5BF9;&#x6BD4;&#x3002;&#x7136;&#x800C;&#xFF0C;&#x8FD9;&#x5176;&#x4E2D;&#x4E00;&#x4E9B;&#x5DE5;&#x5177;&#xFF08;Make, Grunt &#x548C; Gulp &#x662F;&#x4EFB;&#x52A1;&#x8FD0;&#x884C;&#x5668;(task runner)&#xFF09;&#x4E0E; webpack &#x76F8;&#x6BD4;&#xFF0C;&#x5B83;&#x4EEC;&#x5728;&#x7528;&#x9014;&#x4E0A;&#x6709;&#x5F88;&#x591A;&#x4E0D;&#x540C;&#xFF0C;webpack &#x662F;&#x4E00;&#x4E2A;&#x6A21;&#x5757;&#x6253;&#x5305;&#x5668;(module bundler)&#x3002;&#x76F4;&#x63A5;&#x5BF9;&#x6BD4;&#x5B83;&#x4EEC;&#x53EF;&#x80FD;&#x4F1A;&#x5E26;&#x6765;&#x5404;&#x79CD;&#x56F0;&#x60D1;&#xFF0C;&#x6240;&#x4EE5;&#x8BA9;&#x6211;&#x4EEC;&#x5148;&#x5217;&#x51FA;&#x8FD9;&#x4E9B;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x5DE5;&#x5177;&#x4E4B;&#x95F4;&#x7684;&#x5DEE;&#x5F02;&#x3002;</p>
+<h2 class="header"><a class="anchor" href="#-" id="-"></a><span class="text">&#x4EC0;&#x4E48;&#x662F;&#x4EFB;&#x52A1;&#x8FD0;&#x884C;&#x5668;&#xFF1F;</span><a class="icon-link" href="#-"></a></h2>
+<p>&#x7B80;&#x5355;&#x4ECE;&#x5B57;&#x9762;&#x7406;&#x89E3;&#xFF0C;&#x4EFB;&#x52A1;&#x8FD0;&#x884C;&#x5668;&#x5C31;&#x662F;&#x7528;&#x6765;&#x5904;&#x7406;&#x4EFB;&#x52A1;&#xFF0C;&#x4F8B;&#x5982;&#x9879;&#x76EE;&#x7684;&#x68C0;&#x67E5;&#x3001;&#x6784;&#x5EFA;&#x3001;&#x53D1;&#x5E03;&#x3002;&#x5BF9;&#x6BD4;<em>&#x6253;&#x5305;&#x5668;</em>&#xFF08;&#x5982; Browserify, Brunch &#x6216;&#x8005; webpack&#xFF09;&#xFF0C;&#x4EFB;&#x52A1;&#x8FD0;&#x884C;&#x5668;&#x5173;&#x6CE8;&#x5728;&#x504F;&#x91CD;&#x4E8E;&#x4E0A;&#x5C42;&#x7684;&#x95EE;&#x9898;&#x4E0A;&#x9762;&#x3002;&#x6362;&#x53E5;&#x8BDD;&#x8BF4;&#xFF0C;&#x6253;&#x5305;&#x5668;&#x6709;&#x7740;&#x66F4;&#x591A;&#x7EC6;&#x8282;&#x4E0A;&#x7684;&#x76EE;&#x6807;&#x3002;</p>
+<h2 class="header"><a class="anchor" href="#-" id="-"></a><span class="text">&#x4EC0;&#x4E48;&#x662F;&#x6253;&#x5305;&#x5668;&#xFF1F;</span><a class="icon-link" href="#-"></a></h2>
+<p>&#x5927;&#x6982;&#x8BF4;&#xFF0C;&#x6253;&#x5305;&#x5668;&#x63A5;&#x6536;&#x8D44;&#x6E90;&#xFF08;&#x4F8B;&#x5982; JavaScript &#x6587;&#x4EF6;&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x8F6C;&#x6362;&#x4E3A;&#x9002;&#x5408;&#x5BA2;&#x6237;&#x7AEF;&#x6D4F;&#x89C8;&#x5668;&#x53EF;&#x7528;&#x7684;&#x8D44;&#x6E90;&#x3002;&#x8FD9;&#x4E2A;&#x6253;&#x5305;&#x8FC7;&#x7A0B;&#x6070;&#x597D;&#x662F; web &#x5F00;&#x53D1;&#x4E2D;&#x6700;&#x91CD;&#x8981;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x5E76;&#x4E14;&#x89E3;&#x51B3;&#x6B64;&#x95EE;&#x9898;&#x53EF;&#x4EE5;&#x6D88;&#x9664;&#x5F00;&#x53D1;&#x8FC7;&#x7A0B;&#x4E2D;&#x7684;&#x5927;&#x90E8;&#x5206;&#x75DB;&#x70B9;&#x3002;</p>
+<p>&#x6253;&#x5305;&#x5668;&#x80FD;&#x591F;&#x548C;&#x4EFB;&#x52A1;&#x8FD0;&#x884C;&#x5668;&#x4E32;&#x8054;&#x5728;&#x4E00;&#x8D77;&#x5DE5;&#x4F5C;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x5C06;&#x9AD8;&#x5C42;&#x6B21;&#x7684;&#x95EE;&#x9898;&#x4EA4;&#x7ED9;&#x4EFB;&#x52A1;&#x8FD0;&#x884C;&#x5668;&#x5DE5;&#x5177;&#xFF0C;&#x800C;&#x7559;&#x4E0B;&#x6253;&#x5305;&#x90E8;&#x5206;&#x7ED9;&#x66F4;&#x4E13;&#x4E1A;&#x7684;&#x6253;&#x5305;&#x5668;&#x5DE5;&#x5177;&#x3002;<a href="https://www.npmjs.com/package/grunt-webpack">grunt-webpack</a> &#x548C; <a href="https://www.npmjs.com/package/gulp-webpack">gulp-webpack</a> &#x90FD;&#x662F;&#x975E;&#x5E38;&#x597D;&#x7684;&#x96C6;&#x6210;&#x793A;&#x4F8B;&#x3002;</p>
+<blockquote class="tip"><div class="tip-content"> &#x901A;&#x5E38; webpack &#x7528;&#x6237;&#x4F7F;&#x7528; npm <code>scripts</code> &#x4F5C;&#x4E3A;&#x5B83;&#x4EEC;&#x7684;&#x4EFB;&#x52A1;&#x8FD0;&#x884C;&#x5668;&#x542F;&#x52A8;&#x5165;&#x53E3;&#xFF0C;&#x8FD9;&#x662F;&#x6BD4;&#x8F83;&#x63A8;&#x8350;&#x7684;&#x505A;&#x6CD5;&#x3002;&#x8DE8;&#x5E73;&#x53F0;&#x652F;&#x6301;&#x53EF;&#x80FD;&#x4F1A;&#x6210;&#x4E3A;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x91CC;&#x6709;&#x51E0;&#x4E2A;&#x53EF;&#x884C;&#x63AA;&#x65BD;&#x3002; </div></blockquote><blockquote class="tip"><div class="tip-content"> &#x5C3D;&#x7BA1; webpack &#x6838;&#x5FC3;&#x5173;&#x6CE8;&#x4E8E;&#x6253;&#x5305;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x627E;&#x5230;&#x5404;&#x79CD;&#x6269;&#x5C55;(extension)&#xFF0C;&#x8FD8;&#x662F;&#x53EF;&#x4EE5;&#x8BA9;&#x4F60;&#x7528;&#x4EFB;&#x52A1;&#x7BA1;&#x7406;&#x5668;&#x7684;&#x65B9;&#x5F0F;&#x53BB;&#x4F7F;&#x7528; webpack&#x3002; </div></blockquote><h2 class="header"><a class="anchor" href="#-" id="-"></a><span class="text">&#x5BF9;&#x6BD4;</span><a class="icon-link" href="#-"></a></h2>
+<p>&#x7136;&#x800C; webpack &#x4E0D;&#x4EC5;&#x4EC5;&#x4F5C;&#x4E3A;&#x6A21;&#x5757;&#x6253;&#x5305;&#x5668;&#x5B58;&#x5728;&#x3002;&#x5982;&#x679C;&#x4F60;&#x8981;&#x5728;&#x4F7F;&#x7528; webpack &#x6216;&#x4E0B;&#x9762;&#x4EFB;&#x610F;&#x7684;&#x6253;&#x5305;&#x5668;&#x4E4B;&#x95F4;&#x8FDB;&#x884C;&#x9009;&#x62E9;&#xFF0C;&#x8FD9;&#x91CC;&#x5217;&#x51FA;&#x4E86; webpack &#x7279;&#x6027;&#xFF0C;&#x4EE5;&#x53CA;&#x548C;&#x5176;&#x4ED6;&#x7ADE;&#x54C1;&#x4E4B;&#x95F4;&#x7684;&#x529F;&#x80FD;&#x5BF9;&#x6BD4;&#x3002;</p>
+<table>
+<thead>
+<tr>
+<th>&#x7279;&#x6027;</th>
+<th>webpack/webpack</th>
+<th>jrburke/requirejs</th>
+<th>substack/node-browserify</th>
+<th>jspm/jspm-cli</th>
+<th>rollup/rollup</th>
+<th>brunch/brunch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#x6309;&#x9700;&#x52A0;&#x8F7D;&#x9644;&#x52A0;&#x6A21;&#x5757;</td>
+<td><strong>yes</strong></td>
+<td><strong>yes</strong></td>
+<td>no</td>
+<td><a href="https://github.com/systemjs/systemjs/blob/master/docs/system-api.md#systemimportmodulename--normalizedparentname---promisemodule">System.import</a></td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td>AMD <code>define</code></td>
+<td><strong>yes</strong></td>
+<td><strong>yes</strong></td>
+<td><a href="https://github.com/jaredhanson/deamdify">deamdify</a></td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>AMD <code>require</code></td>
+<td><strong>yes</strong></td>
+<td><strong>yes</strong></td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>AMD <code>require</code> &#x6309;&#x9700;&#x52A0;&#x8F7D;</td>
+<td><strong>yes</strong></td>
+<td>&#x624B;&#x52A8;&#x914D;&#x7F6E;</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td>CommonJS <code>exports</code></td>
+<td><strong>yes</strong></td>
+<td>&#x53EA;&#x5305;&#x542B;&#x5728; <code>define</code> &#x4E2D;</td>
+<td><strong>yes</strong></td>
+<td>yes</td>
+<td><a href="https://github.com/rollup/rollup-plugin-commonjs">commonjs-plugin</a></td>
+<td>yes</td>
+</tr>
+<tr>
+<td>CommonJS <code>require</code></td>
+<td><strong>yes</strong></td>
+<td>&#x53EA;&#x5305;&#x542B;&#x5728; <code>define</code> &#x4E2D;</td>
+<td><strong>yes</strong></td>
+<td>yes</td>
+<td><a href="https://github.com/rollup/rollup-plugin-commonjs">commonjs-plugin</a></td>
+<td>yes</td>
+</tr>
+<tr>
+<td>CommonJS <code>require.resolve</code></td>
+<td><strong>yes</strong></td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td>require &#x4E2D;&#x62FC;&#x63A5; <code>require(&quot;./fi&quot; + &quot;le&quot;)</code></td>
+<td><strong>yes</strong></td>
+<td>no&#x2666;</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td>&#x8C03;&#x8BD5;&#x652F;&#x6301;</td>
+<td><strong>SourceUrl, SourceMaps</strong></td>
+<td>&#x4E0D;&#x9700;&#x8981;</td>
+<td>SourceMaps</td>
+<td><strong>SourceUrl, SourceMaps</strong></td>
+<td><strong>SourceUrl, SourceMaps</strong></td>
+<td>SourceMaps</td>
+</tr>
+<tr>
+<td>&#x4F9D;&#x8D56;</td>
+<td>19MB / 127 &#x4E2A;&#x7A0B;&#x5E8F;&#x5305;</td>
+<td>11MB / 118 &#x4E2A;&#x7A0B;&#x5E8F;&#x5305;</td>
+<td><strong>1.2MB / 1 &#x4E2A;&#x7A0B;&#x5E8F;&#x5305;</strong></td>
+<td>26MB / 131 &#x4E2A;&#x7A0B;&#x5E8F;&#x5305;</td>
+<td>?MB / 3 &#x4E2A;&#x7A0B;&#x5E8F;&#x5305;</td>
+</tr>
+<tr>
+<td>ES2015 <code>import</code>/<code>export</code></td>
+<td><strong>yes</strong>(vr. 2)</td>
+<td>no</td>
+<td>no</td>
+<td><strong>yes</strong></td>
+<td><strong>yes</strong></td>
+<td>yes, &#x901A;&#x8FC7; <a href="https://github.com/gcollazo/es6-module-transpiler-brunch">es6 &#x6A21;&#x5757;&#x8F6C;&#x6362;&#x5668;</a></td>
+</tr>
+<tr>
+<td>require (guided) &#x4E2D;&#x7684;&#x8868;&#x8FBE;&#x5F0F; <code>require(&quot;./templates/&quot; + template)</code></td>
+<td><strong>yes (all files matching included)</strong></td>
+<td>no&#x2666;</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td>require (free) &#x4E2D;&#x7684;&#x8868;&#x8FBE;&#x5F0F; <code>require(moduleName)</code></td>
+<td>&#x624B;&#x52A8;&#x914D;&#x7F6E;</td>
+<td>no&#x2666;</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td>&#x751F;&#x6210;&#x5355;&#x72EC;&#x5305;</td>
+<td><strong>yes</strong></td>
+<td>yes&#x2666;</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&#x95F4;&#x63A5;&#x7684; require <code>var r = require; r(&quot;./file&quot;)</code></td>
+<td><strong>yes</strong></td>
+<td>no&#x2666;</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td>&#x5206;&#x522B;&#x52A0;&#x8F7D;&#x6BCF;&#x4E2A;&#x6587;&#x4EF6;</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td>&#x635F;&#x574F;&#x7684;&#x8DEF;&#x5F84;&#x540D;</td>
+<td><strong>yes</strong></td>
+<td>no</td>
+<td>&#x90E8;&#x5206;</td>
+<td>yes</td>
+<td>&#x4E0D;&#x9700;&#x8981;&#xFF08;&#x8DEF;&#x5F84;&#x540D;&#x79F0;&#x4E0D;&#x5728;&#x5305;&#x4E2D;&#xFF09;</td>
+<td>no</td>
+</tr>
+<tr>
+<td>&#x538B;&#x7F29;</td>
+<td>uglify</td>
+<td>uglify, closure compiler</td>
+<td><a href="https://github.com/hughsk/uglifyify">uglifyify</a></td>
+<td>yes</td>
+<td><a href="https://github.com/TrySound/rollup-plugin-uglify">uglify-plugin</a></td>
+<td><a href="https://github.com/brunch/uglify-js-brunch">UglifyJS-brunch</a></td>
+</tr>
+<tr>
+<td>&#x7528; common bundle &#x6784;&#x5EFA;&#x591A;&#x9875;</td>
+<td>&#x624B;&#x52A8;&#x914D;&#x7F6E;</td>
+<td><strong>yes</strong></td>
+<td>&#x624B;&#x52A8;&#x914D;&#x7F6E;</td>
+<td>&#x4F7F;&#x7528;&#x5305;&#x7B97;&#x6CD5;</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td>&#x591A;&#x4E2A; bundle</td>
+<td><strong>yes</strong></td>
+<td>&#x624B;&#x52A8;&#x914D;&#x7F6E;</td>
+<td>&#x624B;&#x52A8;&#x914D;&#x7F6E;</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Node.js &#x5185;&#x7F6E; libs <code>require(&quot;path&quot;)</code></td>
+<td><strong>yes</strong></td>
+<td>no</td>
+<td><strong>yes</strong></td>
+<td><strong>yes</strong></td>
+<td><a href="https://github.com/rollup/rollup-plugin-node-resolve">node-resolve-plugin</a></td>
+</tr>
+<tr>
+<td>Node.js &#x5176;&#x4ED6;</td>
+<td>process, __dir/filename, global</td>
+<td>-</td>
+<td>process, __dir/filename, global</td>
+<td>process, __dir/filename, global for cjs</td>
+<td>global (<a href="https://github.com/rollup/rollup-plugin-commonjs">commonjs-plugin</a>)</td>
+</tr>
+<tr>
+<td>&#x63D2;&#x4EF6;</td>
+<td><strong>yes</strong></td>
+<td>yes</td>
+<td><strong>yes</strong></td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&#x9884;&#x5904;&#x7406;</td>
+<td><strong>loaders, <a href="https://github.com/webpack/transform-loader">transforms</a></strong></td>
+<td>loaders</td>
+<td>transforms</td>
+<td>plugin translate</td>
+<td>plugin transforms</td>
+<td>compilers, optimizers</td>
+</tr>
+<tr>
+<td>&#x6D4F;&#x89C8;&#x5668;&#x66FF;&#x6362;</td>
+<td><code>web_modules</code>, <code>.web.js</code>, package.json field, alias config option</td>
+<td>alias option</td>
+<td>package.json field, alias option</td>
+<td>package.json, alias option</td>
+<td>no</td>
+</tr>
+<tr>
+<td>&#x53EF; require &#x6587;&#x4EF6;</td>
+<td>&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;</td>
+<td><strong>web</strong></td>
+<td>&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;</td>
+<td>&#x901A;&#x8FC7;&#x63D2;&#x4EF6;</td>
+<td>&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x6216;&#x901A;&#x8FC7;&#x63D2;&#x4EF6;</td>
+<td>&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;</td>
+</tr>
+<tr>
+<td>&#x8FD0;&#x884C;&#x65F6;&#x5F00;&#x9500;</td>
+<td><strong>243B + 20B &#x6BCF;&#x4E2A;&#x6A21;&#x5757; + 4B &#x6BCF;&#x4E2A;&#x4F9D;&#x8D56;</strong></td>
+<td>14.7kB + 0B &#x6BCF;&#x4E2A;&#x6A21;&#x5757; + (3B + X) &#x6BCF;&#x4E2A;&#x4F9D;&#x8D56;</td>
+<td>415B + 25B &#x6BCF;&#x4E2A;&#x6A21;&#x5757; + (6B + 2X) &#x6BCF;&#x4E2A;&#x4F9D;&#x8D56;</td>
+<td>5.5kB for &#x81EA;&#x6267;&#x884C; bundle, 38kB &#x5168;&#x90E8; loader &#x548C; polyfill, 0 &#x666E;&#x901A;&#x6A21;&#x5757;, 293B CJS, 139B ES2015 System.register before gzip</td>
+<td><strong>none for ES2015 modules</strong>&#xFF08;&#x53EF;&#x80FD;&#x6709;&#x5176;&#x4ED6;&#x683C;&#x5F0F;&#xFF09;</td>
+</tr>
+<tr>
+<td>&#x89C2;&#x5BDF;&#x6A21;&#x5F0F;</td>
+<td>yes</td>
+<td>&#x4E0D;&#x9700;&#x8981;</td>
+<td>yes</td>
+<td>&#x5F00;&#x53D1;&#x4E0D;&#x9700;&#x8981;</td>
+<td>no</td>
+<td>yes</td>
+</tr>
+</tbody>
+</table>
+<p>&#x2666; &#x5728;&#x751F;&#x4EA7;&#x6A21;&#x5F0F;&#xFF08;&#x5728;&#x5F00;&#x53D1;&#x6A21;&#x5F0F;&#x4E2D;&#x76F8;&#x53CD;&#xFF09;</p>
+<p>X&#x662F;&#x8DEF;&#x5F84;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x957F;&#x5EA6;</p>
+<hr>
+<blockquote>
+<p>&#x539F;&#x6587;&#xFF1A;<a href="https://webpack.js.org/get-started/why-webpack/">https://webpack.js.org/get-started/why-webpack/</a></p>
+</blockquote>
+</div><hr style="display:block;"><h3 style="display:block;">Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/bebraw"><img src="https://github.com/bebraw.png?size=90"><span class="contributor__name"> bebraw</span></a><a class="contributor" href="https://github.com/dear-lizhihua"><img src="https://github.com/dear-lizhihua.png?size=90"><span class="contributor__name"> dear-lizhihua</span></a><a class="contributor" href="https://github.com/pksjce"><img src="https://github.com/pksjce.png?size=90"><span class="contributor__name"> pksjce</span></a></div></div></section></div><div class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/get-started" class="footer__link">&#x8D77;&#x6B65;</a><a href="/organization" class="footer__link">&#x7EC4;&#x7EC7;</a><a href="/contribute" class="footer__link">&#x8D21;&#x732E;</a><a href="/get-started/why-webpack#comparison" class="footer__link">&#x6BD4;&#x8F83;</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg"></a></section><section class="footer__right"><a href="/branding" class="footer__link">&#x54C1;&#x724C;</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">&#x652F;&#x6301;</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">&#x66F4;&#x65B0;&#x65E5;&#x5FD7;</a><a href="/license" class="footer__link">&#x9075;&#x5FAA;&#x534F;&#x8BAE;</a></section></div></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
+
+    
+      <script src="/0244fc6a8d2490ad4cb74be2131ce54f.js"></script>
+    
+
+    <script>
+      ((window.gitter = {}).chat = {}).options = {
+        room: 'webpack/webpack',
+        activationElement: false
+      };
+    </script>
+
+    <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+  </body>
+</html>
