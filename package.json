@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "npm run init:generated && node ./bootstrap.js",
-    "build": "npm run init:generated && rm -rf build/ && node ./bootstrap.js && npm run sitemap && echo webpack.js.org > build/CNAME",
+    "build": "npm run init:generated && rm -rf build/ && node ./bootstrap.js && npm run sitemap && echo webpack.vuefe.cn > build/CNAME",
     "build-test": "npm run build && http-server build/",
     "deploy": "gh-pages -d build",
     "fetch": "scripts/fetch.sh",
@@ -35,7 +35,7 @@
     "lint:social": "alex ./**/*.md",
     "lint:prose": "ncp .proselintrc ~/ && proselint",
     "test": "npm run lint ",
-    "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml"
+    "sitemap": "cd build && sitemap-static --prefix=https://webpack.vuefe.cn/ > sitemap.xml"
   },
   "devDependencies": {
     "alex": "^3.1.0",
