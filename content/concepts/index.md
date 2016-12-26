@@ -87,6 +87,8 @@ const config = {
     ]
   }
 };
+
+module.exports = config;
 ```
 
 以上配置中，我们定义了为一个独立的 module 定义了 `rules` 属性，里面包含两个必须属性：`test` 和 `use`。这可以告诉 webpack 编译器(compiler) 如下：

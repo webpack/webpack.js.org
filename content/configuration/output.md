@@ -324,9 +324,8 @@ In this case, you need the another property to name your module:
 
 ```javascript
 output: {
-	name: "MyLibrary",
-	libraryTarget: "umd",
-	umdNamedDefine: true
+	library: "MyLibrary",
+	libraryTarget: "umd"
 }
 ```
 

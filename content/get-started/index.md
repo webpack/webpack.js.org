@@ -4,6 +4,7 @@ sort: 3
 contributors:
   - bebraw
   - varunjayaraman
+  - cntanglijun
   - dear-lizhihua
 ---
 
@@ -17,8 +18,9 @@ webpack 简化快速构建应用程序依赖图表的流程，以正确的顺序
 ```bash
 mkdir webpack-demo && cd webpack-demo
 npm init -y
-npm install --save-dev webpack
-webpack --help # 显示有效的命令行列表
+npm install --save-dev webpack@beta
+./node_modules/.bin/webpack --help # 显示有效的命令行列表
+.\node_modules\.bin\webpack --help # windows 用户请使用此路径
 npm install --save lodash
 ```
 

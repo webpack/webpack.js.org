@@ -39,7 +39,7 @@ module.exports = {
     ),
 
     'get-started': section(
-      'Get-Started',
+      '起步',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/get-started',
@@ -50,7 +50,7 @@ module.exports = {
     ),
 
     concepts: section(
-      'Concepts',
+      '概念',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/concepts',
@@ -61,7 +61,7 @@ module.exports = {
     ),
 
     guides: section(
-      'Guides',
+      '指南',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/guides',
@@ -72,7 +72,7 @@ module.exports = {
     ),
 
     configuration: section(
-      'Configuration',
+      '配置',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/configuration',
