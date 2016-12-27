@@ -20,7 +20,7 @@ Example:
 require("./template/" + name + ".ejs");
 ```
 
-Webpack parses the require statement and extracts some information:
+Webpack parses the `require()` call and extracts some information:
 
 ```
 Directory: ./template
@@ -45,8 +45,9 @@ This means dynamic requires are supported but will cause all possible modules to
 
 ## `require.context`
 
-You can create your own context with the require.context function. 
-It allow to pass a directory, regular expression and a flag if subdirectories should be searched too.
+You can create your own context with the `require.context()` function.
+It allows you to pass in a directory to search, a flag indicating whether subdirectories should be searched
+too, and a regular expression to match files against.
 
 Webpack parses for `require.context()` in the code while building.
 
@@ -84,7 +85,7 @@ function importAll (r) {
 }
 importAll(require.context('../components/', true, /\.js$/));
   ```
-  
+
   ```javascript
 var cache = {};
 function importAll (r) {
