@@ -36,10 +36,12 @@ consists of two parts:
 The manifest contains the new compilation hash and a list of all update chunks.
 
 Each update chunk contains code for all updated modules in the respective chunk
-(or a flag if a module was removed).
+(or a flag indicating that the module was removed).
 
-The compiler addtionally makes sure that module IDs and chunk IDs are consistent
-between these builds. It stores these IDs in a "records" JSON file or in memory.
+The compiler makes sure that module IDs and chunk IDs are consistent
+between these builds. It typically stores these IDs in memory (for example, when
+using [webpack-dev-server](/configuration/dev-server/)), but it's also possible to
+store them in a JSON file.
 
 ### From The Module View
 
