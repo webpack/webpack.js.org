@@ -25,7 +25,7 @@ contributors:
 ### 分离 CSS
 
 你可能需要将你的样式分离到单独的 bundle 中，与应用程序的逻辑分离。
-这加强了样式的可缓存性，并且浏览器能够并行加载应用程序代码中的样式文件，避免无样式的内容造成闪烁(FOUC - flash of unstyled content)。
+这加强了样式的可缓存性，并且浏览器能够并行加载应用程序代码中的样式文件，避免无样式内容造成的闪烁问题(FOUC - flash of unstyled content)。
 
 学习[如何使用 `ExtractTextWebpackPlugin` 来分离 css](/guides/code-splitting-css)。
 
