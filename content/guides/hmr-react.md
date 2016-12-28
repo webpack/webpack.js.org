@@ -19,7 +19,7 @@ T> 如果你想了解别的配置方式，可以告诉我们，或者更好的�
 下面将会示范怎么在 Babel, React 和 PostCSS（使用 CSS 模块）的项目中配置 HMR。为此，你需要在你的 `package.json` 加上以下依赖，可以通过下面的命令来安装：
 
 ```bash
-npm install --save-dev babel@6.5.2 babel-core@6.13.2 babel-loader@6.2.4 babel-preset-es2015@6.13.2 babel-preset-react@6.11.1 babel-preset-stage-2@6.13.0 css-loader@0.23.1 postcss-loader@0.9.1 react-hot-loader@3.0.0-beta.6 style-loader@0.13.1 webpack@2.1.0-beta.20 webpack-dev-server@2.1.0-beta.0
+npm install --save-dev babel@6.5.2 babel-core@6.13.2 babel-loader@6.2.4 babel-preset-es2015@6.13.2 babel-preset-react@6.11.1 babel-preset-stage-2@6.13.0 css-loader@0.23.1 postcss-loader@0.9.1 react-hot-loader@3.0.0-beta.6 style-loader@0.13.1 webpack@2.1.0-beta.25 webpack-dev-server@2.1.0-beta.0
 ```
 
 另外，你也需要安装 React：

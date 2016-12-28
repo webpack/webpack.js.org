@@ -169,7 +169,7 @@ These options makes the build watch for changes in files of the dependency graph
 
 ### Optimize Options
 
-These options allow to manipulate optimisations for a production build using webpack
+These options allow you to manipulate optimisations for a production build using webpack
 
 | Parameter                 | Explanation                                            | Plugin used                          |
 |---------------------------|--------------------------------------------------------|--------------------------------------|
@@ -180,7 +180,7 @@ These options allow to manipulate optimisations for a production build using web
 
 ### Resolve Options
 
-These allow to configure the webpack resolver with aliases and extensions.
+These allow you to configure the webpack resolver with aliases and extensions.
 
 | Parameter              | Explanation                                             | Example                                     |
 |------------------------|---------------------------------------------------------|---------------------------------------------|
