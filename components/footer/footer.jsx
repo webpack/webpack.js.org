@@ -26,6 +26,7 @@ export default (props) => {
           <Link className="footer__link" to="//gitter.im/webpack/webpack">支持</Link>
           <Link className="footer__link" to="https://github.com/webpack/webpack/releases">更新日志</Link>
           <Link className="footer__link" to="/license">遵循协议</Link>
+          <Link className="footer__link" to="//shang.qq.com/wpa/qunwpa?idkey=952973ba58b7ecc503b7eea941a5f31a87887864bb7b350bb9a7cf2921c426d7">QQ群298566020</Link>
         </section>
       </Container>
     </div>

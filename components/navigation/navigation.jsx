@@ -24,7 +24,11 @@ let Sections = [
     ]
   },
   {
-    title: 'Donate',
+    title: 'QQ群298566020',
+    url: '//shang.qq.com/wpa/qunwpa?idkey=952973ba58b7ecc503b7eea941a5f31a87887864bb7b350bb9a7cf2921c426d7',
+  },
+  {
+    title: '捐赠',
     url: '//opencollective.com/webpack'
   }
 ];
