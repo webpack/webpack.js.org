@@ -71,8 +71,87 @@ module.exports = {
   /*...*/
 };
 ```
+When we do have multiple configurations in mind for different environments, the easiest way is to write seperate js files for 
+each environment. For example:
+##config/dev.js
+```js
+module.exports = function(env) {
+    debug: true,
+    devtool: 'cheap-module-source-map',
+    output: {
+      path: path.join(__dirname, '/../dist/assets'),
+      filename: '[name].bundle.js',
+      publicPath: publicPath,
+      sourceMapFilename: '[name].map'
+    },
+    devServer: {
+      port: 7777,
+      host: 'localhost',
+      historyApiFallback: true,
+      noInfo: false,
+      stats: 'minimal',
+      publicPath: publicPath
+    },
+ });
+```
+##config/prod.js
+```js
+module.exports = function(env) {
+debug: false,
+    output: {
+      path: path.join(__dirname, '/../dist/assets'),
+      filename: '[name].bundle.js',
+      publicPath: publicPath,
+      sourceMapFilename: '[name].map'
+    },
+    plugins: [
+      new DedupePlugin(),
+      new UglifyJsPlugin({
+        beautify: false,
+        mangle: { screw_ie8 : true, keep_fnames: true },
+        compress: { screw_ie8: true },
+        comments: false
+      })
+    ]
+});
+```
+Have our webpack.config.js has the following snippet:
+```js
+function buildConfig(env) {
+  var config;
+  switch (env) {
+    case 'prod':
+      config = require('./config/prod.js')({env: 'prod'});
+      break;
+    case 'qa':
+      config = require('./config/qa.js')({env: 'qa'});
+      break;
+    case 'test':
+      config = require('./config/test.js')({env: 'test'});
+      break;
+    case 'dev':
+      config = require('./config/dev.js')({env: 'dev'});
+      break;
+    default:
+      config = require('./config/dev.js')({env: 'dev'});
+      break;
+  }
+  return config;
+}
 
-That's it! You're all set to ship production code.
+module.exports = buildConfig(env);
+```
+And from our package.json, where we build our application using webpack, the command goes like this:
+```js
+ "build:dev": "webpack --env=dev --progress --profile --colors",
+ "build:dist": "webpack --env=qa --progress --profile --colors",
+```
 
-?> TODO: Add reading reference link to "How to manage multiple configurations"
-?> TODO: Add reference link to "Splitting configuration"
+You could see that we passed the environment variable to our webpack.config.js file. From there we used a simple
+switch-case to build for the environment we passed by simply loading the right js file.
+
+An advanced approach would be to have a base configuration file, put in all common functionalities,
+and then have environment specific files and simply use 'webpack-merge' to merge them. This would help to avoid code repetitions.
+
+To manage different variables for different environments, the approach is to use 'Define plugin':
+Create global constants. Have their values decided in the environment specific files.
