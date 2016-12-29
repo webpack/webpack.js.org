@@ -105,7 +105,10 @@ debug: false,
       sourceMapFilename: '[name].map'
     },
     plugins: [
-      new DedupePlugin(),
+      new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
       new UglifyJsPlugin({
         beautify: false,
         mangle: { screw_ie8 : true, keep_fnames: true },
