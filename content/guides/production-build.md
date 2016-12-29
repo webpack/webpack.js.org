@@ -75,74 +75,57 @@ When we do have multiple configurations in mind for different environments, the 
 each environment. For example:
 ##config/dev.js
 ```js
-module.exports = function(env) {
+module.exports = function (env) {
     debug: true,
     devtool: 'cheap-module-source-map',
     output: {
-      path: path.join(__dirname, '/../dist/assets'),
-      filename: '[name].bundle.js',
-      publicPath: publicPath,
-      sourceMapFilename: '[name].map'
+        path: path.join(__dirname, '/../dist/assets'),
+        filename: '[name].bundle.js',
+        publicPath: publicPath,
+        sourceMapFilename: '[name].map'
     },
     devServer: {
-      port: 7777,
-      host: 'localhost',
-      historyApiFallback: true,
-      noInfo: false,
-      stats: 'minimal',
-      publicPath: publicPath
-    },
- });
+        port: 7777,
+        host: 'localhost',
+        historyApiFallback: true,
+        noInfo: false,
+        stats: 'minimal',
+        publicPath: publicPath
+    }
+}
 ```
 ##config/prod.js
 ```js
-module.exports = function(env) {
-debug: false,
+module.exports = function (env) {
+    debug: false,
     output: {
-      path: path.join(__dirname, '/../dist/assets'),
-      filename: '[name].bundle.js',
-      publicPath: publicPath,
-      sourceMapFilename: '[name].map'
+        path: path.join(__dirname, '/../dist/assets'),
+        filename: '[name].bundle.js',
+        publicPath: publicPath,
+        sourceMapFilename: '[name].map'
     },
     plugins: [
-      new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false
-    }),
-      new UglifyJsPlugin({
-        beautify: false,
-        mangle: { screw_ie8 : true, keep_fnames: true },
-        compress: { screw_ie8: true },
-        comments: false
-      })
+        new webpack.LoaderOptionsPlugin({
+            minimize: true,
+            debug: false
+        }),
+        new UglifyJsPlugin({
+            beautify: false,
+            mangle: {
+                screw_ie8: true,
+                keep_fnames: true
+            },
+            compress: {
+                screw_ie8: true
+            },
+            comments: false
+        })
     ]
-});
+}
 ```
 Have our webpack.config.js has the following snippet:
 ```js
-function buildConfig(env) {
-  var config;
-  switch (env) {
-    case 'prod':
-      config = require('./config/prod.js')({env: 'prod'});
-      break;
-    case 'qa':
-      config = require('./config/qa.js')({env: 'qa'});
-      break;
-    case 'test':
-      config = require('./config/test.js')({env: 'test'});
-      break;
-    case 'dev':
-      config = require('./config/dev.js')({env: 'dev'});
-      break;
-    default:
-      config = require('./config/dev.js')({env: 'dev'});
-      break;
-  }
-  return config;
-}
-
-module.exports = buildConfig(env);
+return require('./config/' + env + '.js')({ env: env })
 ```
 And from our package.json, where we build our application using webpack, the command goes like this:
 ```js
