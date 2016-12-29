@@ -125,7 +125,11 @@ module.exports = function (env) {
 ```
 Have our webpack.config.js has the following snippet:
 ```js
-return require('./config/' + env + '.js')({ env: env })
+function buildConfig(env) {
+  return require('./config/' + env + '.js')({ env: env })
+}
+
+module.exports = buildConfig(env);
 ```
 And from our package.json, where we build our application using webpack, the command goes like this:
 ```js
