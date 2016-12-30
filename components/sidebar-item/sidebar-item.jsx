@@ -25,7 +25,7 @@ export default class SidebarItem extends React.Component {
           {
             anchors.map((anchor, j) => (
               <li className="sidebar-item__anchor" key={ `anchor-${index}-${j}` }>
-                <a href={ '#' + anchor.id }>{ anchor.title}</a>
+                <Link to={ `${url}#${anchor.id}` }>{ anchor.title }</Link>
               </li>
             ))
           }
