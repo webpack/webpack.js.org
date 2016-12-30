@@ -4,54 +4,92 @@ sort: 11
 contributors:
 - SpaceK33z
 - sokra
+- GRardB
 ---
 
-Hot Module Replacement (HMR) exchanges, adds, or removes modules while an
-application is running without a page reload. You basically can update changed modules without a full page reload.
+Hot Module Replacement (HMR) exchanges, adds, or removes
+[modules](/concepts/modules/) while an application is running without a
+page reload. This allows you to speed up development time by updating
+individual modules when they are changed without refreshing the page.
 
 ## How Does It Work?
 
 ### From The App View
 
-The app code asks the HMR runtime to check for updates. The HMR runtime downloads the updates (async) and tell the app code that an update is available. The app code asks the HMR runtime to apply updates. The HMR runtime applies the update (sync). The app code may or may not require user interaction in this process (you decide).
+1. The app code asks the HMR runtime to check for updates.
+2. The HMR runtime downloads the updates (asynchronously) and tells the app
+code that an update is available.
+3. The app code then asks the HMR runtime to apply the updates.
+4. The HMR runtime applies the update (synchronously).
+
+You can set up HMR so that this process happens automatically, or you can
+choose to require user interaction for updates to occur.
 
 ### From The Compiler (webpack) View
 
-In addition to the normal assets the compiler need to emit the "Update" to allow updating from previous version to this version. The "Update" contains two parts:
+In addition to the normal assets, the compiler needs to emit an "update"
+to allow updating from previous version to the new version. The "update"
+consists of two parts:
 
-1. the update manifest (JSON)
-2. one or multiple update chunks (JavaScript)
+1. The update manifest (JSON)
+2. One or more update chunks (JavaScript)
 
-The manifest contains the new compilation hash and a list of all update chunks (2.).
+The manifest contains the new compilation hash and a list of all update chunks.
 
-The update chunks contain code for all updated modules in this chunk (or a flag if a module was removed).
+Each update chunk contains code for all updated modules in the respective chunk
+(or a flag indicating that the module was removed).
 
-The compiler addtionally makes sure that module and chunk ids are consistent between these builds. It uses a "records" json file to store them between builds (or it stores them in memory).
+The compiler makes sure that module IDs and chunk IDs are consistent
+between these builds. It typically stores these IDs in memory (for example, when
+using [webpack-dev-server](/configuration/dev-server/)), but it's also possible to
+store them in a JSON file.
 
 ### From The Module View
 
-HMR is an opt-in feature that affects only modules containing HMR code. You can consider patching styling through style-loader as a good example. To make this work, style-loader implements the HMR interface. Implementing it you describe what should happen when a module is updated. In this case we simply replace the styling with the one received through HMR.
+HMR is an opt-in feature that only affects modules containing HMR code. One example
+would be patching styling through the [style-loder](https://github.com/webpack/style-loader).
+In order for patching to work, style-loader implements the HMR interface; when it
+receives an update through HMR, it replaces the old styles with the new ones.
 
-In most cases it's not mandatory to write HMR code in every module. If a module has no HMR handlers the update bubbles up. This means a single handler can handle an update to a complete module tree. If a single module in this tree is updated, the complete module tree is reloaded (only reloaded not transferred).
+Similarly, when implementing the HMR interface in a module, you can describe what should
+happen when the module is updated. However, in most cases, it's not mandatory to write
+HMR code in every module. If a module has no HMR handlers, the update bubbles up. This
+means that a single handler can handle an update to a complete module tree. If a single
+module in this tree is updated, the complete module tree is reloaded (only reloaded,
+not transferred).
 
 ### From The HMR Runtime View (Technical)
 
-For the module system runtime additional code is emitted to track module `parents` and `children`.
+For the module system runtime, additional code is emitted to track module `parents` and `children`.
 
-On the management side the runtime supports two methods: `check` and `apply`.
+On the management side, the runtime supports two methods: `check` and `apply`.
 
-A `check` does a HTTP request to the update manifest. When this request fails, there is no update available. Elsewise the list of updated chunks is compared to the list of currently loaded chunks. For each loaded chunk the corresponding update chunk is downloaded. All module updates as stored in the runtime as update. The runtime switches into the `ready` state, meaning an update has been downloaded and is ready to be applied.
+A `check` makes an HTTP request to the update manifest. If this request fails,
+there is no update available. If it succeeds, the list of updated chunks is compared
+to the list of currently loaded chunks. For each loaded chunk, the corresponding
+update chunk is downloaded. All module updates are stored in the runtime.
+When all update chunks have been downloaded and are ready to be applied, the runtime
+switches into the `ready` state.
 
-For each new chunk request in the ready state the update chunk is also downloaded.
+The `apply` method flags all updated modules as invalid. For each invalid module,
+there needs to be an update handler in the module or update handlers in its parent(s).
+Otherwise, the invalid flag bubbles up and marks its parent(s) as invalid too. Each bubble
+continues until the app's entry point or a module with an update handler is reached
+(whichever comes first). If it bubbles up from an entry point, the process fails.
 
-The `apply` method flags all updated modules as invalid. For each invalid module there need to be a update handler in the module or update handlers in every parent. Else the invalid buddles up and marks all parents as invalid too. This process continues until no more "bubble up" occurs. If it bubbles up from an entry point the process fails.
-
-Now all invalid modules are disposed (dispose handler) and unloaded. Then the current hash is updated and all "accept" handlers are called. The runtime switches back to the `idle` state and everything continues as normal.
+Afterwards, all invalid modules are disposed (via the dispose handler) and unloaded.
+The current hash is then updated and all "accept" handlers are called. The runtime
+switches back to the `idle` state and everything continues as normal.
 
 ## What can I do with it?
 
-You can use it in development as a LiveReload replacement. webpack-dev-server supports a hot mode which tries to update with HMR before trying to reload the whole page. See how to implement [HMR with React](/guides/hmr-react) for example.
+You can use it in development as a LiveReload replacement.
+[webpack-dev-server](/configuration/dev-server/) supports a
+hot mode in which it tries to update with HMR before trying to reload the whole page. See how
+to implement [HMR with React](/guides/hmr-react) as an example.
 
-Some loaders already generate modules that are hot-updateable. i.e. the `style-loader` can exchange the stylesheet. You don't need to do anything special.
+Some loaders already generate modules that are hot-updateable. For example, the `style-loader`
+can swap out a page's stylesheets. For modules like this, you don't need to do anything special.
 
-webpack's power lies in its customizability, and there are *many* ways of configuring HMR given the needs of a particular project.
+webpack's power lies in its customizability, and there are *many* ways of configuring HMR
+depending on the needs of a particular project.

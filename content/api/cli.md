@@ -173,7 +173,6 @@ These options allow you to manipulate optimisations for a production build using
 
 | Parameter                 | Explanation                                            | Plugin used                          |
 |---------------------------|--------------------------------------------------------|--------------------------------------|
-| --optimize-dedupe         | Optimize duplicate module sources in the bundle        | DedupePlugin                         |
 | --optimize-max-chunks     | Try to keep the chunk count below a limit              | LimitChunkCountPlugin                |
 | --optimize-min-chunk-size | Try to keep the chunk size above a limit               | MinChunkSizePlugin                   |
 | --optimize-minimize       | Minimize javascript and switches loaders to minimizing | UglifyJsPlugin & LoaderOptionsPlugin |
