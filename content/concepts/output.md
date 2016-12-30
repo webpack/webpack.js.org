@@ -1,5 +1,5 @@
 ---
-title: 输出
+title: 输出(Output)
 sort: 3
 contributors:
   - TheLarkInn

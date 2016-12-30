@@ -1,5 +1,5 @@
 ---
-title: Hot Module Replacement
+title: 模块热替换(Hot Module Replacement)
 sort: 11
 contributors:
 - SpaceK33z
