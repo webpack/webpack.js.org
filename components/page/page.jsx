@@ -6,6 +6,7 @@ import Sidecar from '../sidecar/sidecar';
 import Contributors from '../contributors/contributors';
 import './page-style';
 import '../sidebar/sidebar-style';
+import { trimEnd } from 'lodash';
 
 export default ({ section, page }) => {
   let edit = `https://github.com/webpack/webpack.js.org/edit/develop/content/${trimEnd(page.url, '/')}.md`;
