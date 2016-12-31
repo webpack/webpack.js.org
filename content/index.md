@@ -3,6 +3,9 @@ title: webpack
 ---
 ## Write your code.
 
+<div class="homepage__wrap">
+<div class="homepage__left">
+
 **app.js**
 
 ```js
@@ -10,6 +13,8 @@ import bar from './bar';
 
 bar();
 ```
+
+</div><div class="homepage__right">
 
 **bar.js**
 
@@ -19,7 +24,13 @@ export default function bar() {
 }
 ```
 
+</div>
+</div>
+
 ## Bundle with webpack.
+
+<div class="homepage__wrap">
+<div class="homepage__left">
 
 **webpack.config.js**
 
@@ -31,6 +42,8 @@ module.exports = {
   }
 }
 ```
+
+</div><div class="homepage__right">
 
 **page.html**
 
@@ -47,6 +60,9 @@ module.exports = {
 ```
 
 Then run `webpack` on the command-line to create `bundle.js`.
+
+</div>
+</div>
 
 ## It's that simple.
 ## [Get Started](/get-started)
