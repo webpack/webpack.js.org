@@ -1,5 +1,5 @@
 ---
-title: 部署目标
+title: 部署目标(Targets)
 sort: 10
 contributors:
   - TheLarkInn

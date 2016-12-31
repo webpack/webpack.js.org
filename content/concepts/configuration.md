@@ -1,5 +1,5 @@
 ---
-title: 配置
+title: 配置(Configuration)
 sort: 6
 contributors:
 - TheLarkInn

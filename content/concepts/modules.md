@@ -1,5 +1,5 @@
 ---
-title: 模块
+title: 模块(Modules)
 sort: 7
 contributors:
   - TheLarkInn

@@ -1,5 +1,5 @@
 ---
-title: 依赖关系
+title: 依赖图表(Dependency Graph)
 sort: 9
 contributors:
   - TheLarkInn
