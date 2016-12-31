@@ -33,7 +33,7 @@ import "C:\\Users\\me\\file";
 
 Since we already have the absolute path to the file, no further resolution is required.
 
-### Relative paths
+### 2. Relative paths
 
 ```js
 import "../src/file1";
@@ -42,7 +42,7 @@ import "./file2";
 
 In this case, the directory of the resource file where the `import` or `require` occurs is taken to be the context directory. The relative path specified in the `import/require` is joined to this context path to produce the absolute path to the module.
 
-### Module paths
+###  3. Module paths
 
 ```js
 import "module";
