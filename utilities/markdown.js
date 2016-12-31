@@ -71,7 +71,7 @@ module.exports = function(section) {
       rendered = rendered.replace(/\n.*?MARKDOWNSUMMARYSTART.*?\n/g, "<summary><span class='code-details-summary-span'>");
       rendered = rendered.replace(/\n.*?MARKDOWNSUMMARYEND.*?\n/g, "</span></summary>");
     }
-    
+
     return rendered;
   };
 
@@ -95,7 +95,8 @@ module.exports = function(section) {
         xhtml: false
       };
 
-      var tokens = parseQuotes(content);
+      var tokens = parseContent(content);
+      tokens.links = [];
 
       return marked.parser(tokens, markedDefaults);
     },
@@ -112,21 +113,61 @@ module.exports = function(section) {
   };
 };
 
-function parseQuotes(data) {
-  var tokens = marked.lexer(data).map(function(t) {
+function parseContent(data) {
+  var tokens = [];
+
+  marked.lexer(data).forEach(function(t) {
+    // add custom quotes
     if (t.type === 'paragraph') {
-      return parseCustomQuote(t, 'T>', 'tip') ||
+      var quote = parseCustomQuote(t, 'T>', 'tip') ||
         parseCustomQuote(t, 'W>', 'warning') ||
         parseCustomQuote(t, '?>', 'todo') ||
         t;
-    }
 
-    return t;
+      tokens.push(quote);
+    }
+    // handle html
+    else if (t.type === 'html') {
+      tokens = tokens.concat(handleHTML(t));
+    }
+    // just add other types
+    else {
+      tokens.push(t);
+    }
   });
 
-  tokens.links = [];
-
   return tokens;
+}
+
+function handleHTML(t) {
+    var tokens = [];
+
+    // Split code in markdown, so that HTML inside code is not parsed
+    var codeArray = t.text.split(/(```(.|\n)*```)/g).filter(v => (v !== '' && v !== '\n'));
+
+    // if only one item in codeArray, then it's already parsed
+    if(codeArray.length == 1) {
+      return t;
+    }
+
+    codeArray.forEach(item => {
+      // if item is not code, then check for html tags and parse accordingly
+      if (item.indexOf('```') !== 0) {
+        // split all html tags
+        var htmlArray = item.split(/\s*(<[^>]*>)/g).filter(v => (v !== '' && v !== '\n'));
+
+        // handle every single item separately
+        htmlArray.forEach(function (html) {
+          tokens = tokens.concat(parseContent(html));
+        });
+      }
+      // normally parse code block
+      else {
+        tokens = tokens.concat(parseContent(item));
+      }
+    });
+
+    return tokens;
 }
 
 function parseCustomQuote(token, match, className) {
