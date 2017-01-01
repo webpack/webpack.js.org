@@ -1,5 +1,5 @@
 ---
-title: 模块热更新 - React
+title: 模块热替换 - React
 sort: 8
 contributors:
   - jmreidy
@@ -7,7 +7,7 @@ contributors:
   - xie-qianyue
 ---
 
-正如在 [概念](/concepts/hot-module-replacement)章节提到的，模块热重载(HMR)的作用是，在应用运行时，无需刷新页面，便能替换、增加、删除必要的模块。
+正如在[概念](/concepts/hot-module-replacement)章节提到的，模块热替换(HMR)的作用是，在应用运行时，无需刷新页面，便能替换、增加、删除必要的模块。
 HMR 对于那些由单一状态树构成的应用非常有用。因为这些应用的组件是 "dumb" (相对于 "smart") 的，所以在组件的代码更改后，组件的状态依然能够正确反映应用的最新状态。
 
 下面的介绍是基于 Babel 和 React 的，但它们对于 HMR 并不是必需的。

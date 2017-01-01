@@ -1,95 +1,62 @@
 ---
-title: Hot Module Replacement
+title: 模块热替换(Hot Module Replacement)
 sort: 11
 contributors:
 - SpaceK33z
 - sokra
 - GRardB
+- dear-lizhihua
 ---
 
-Hot Module Replacement (HMR) exchanges, adds, or removes
-[modules](/concepts/modules/) while an application is running without a
-page reload. This allows you to speed up development time by updating
-individual modules when they are changed without refreshing the page.
+模块热替换功能会在应用程序运行过程中替换、添加或删除[模块](/concepts/modules/)，而无需重新加载页面。这使得你可以在独立模块变更后，无需刷新整个页面，就可以更新这些模块，极大地加速了开发时间。
 
-## How Does It Work?
+## 这一切是如何运行的？
 
-### From The App View
+### 站在 App 的角度
 
-1. The app code asks the HMR runtime to check for updates.
-2. The HMR runtime downloads the updates (asynchronously) and tells the app
-code that an update is available.
-3. The app code then asks the HMR runtime to apply the updates.
-4. The HMR runtime applies the update (synchronously).
+1. app 代码要求 HMR runtime 检查更新。
+2. HMR runtime （异步）下载更新，然后通知 app 代码更新可用。
+3. app 代码要求 HMR runtime 应用更新。
+4. HMR runtime （异步）应用更新。
 
-You can set up HMR so that this process happens automatically, or you can
-choose to require user interaction for updates to occur.
+你可以设置 HMR，使此进程自动触发更新，或者你可以选择要求在用户交互后进行更新。
 
-### From The Compiler (webpack) View
+### 站在编译器(webpack) 的角度
 
-In addition to the normal assets, the compiler needs to emit an "update"
-to allow updating from previous version to the new version. The "update"
-consists of two parts:
+除了普通资源，编译器(compiler)需要发出 "update"，以允许更新之前的版本到新的版本。"update" 由两部分组成：
 
-1. The update manifest (JSON)
-2. One or more update chunks (JavaScript)
+1. 待更新 manifest (JSON)
+2. 一个或多个待更新 chunk (JavaScript)
 
-The manifest contains the new compilation hash and a list of all update chunks.
+manifest 包括新的编译 hash 和所有的待更新 chunk 目录。
 
-Each update chunk contains code for all updated modules in the respective chunk
-(or a flag indicating that the module was removed).
+每个待更新 chunk 包括用于与所有被更新模块相对应 chunk 的代码（或一个 flag 用于表明模块要被移除）。
 
-The compiler makes sure that module IDs and chunk IDs are consistent
-between these builds. It typically stores these IDs in memory (for example, when
-using [webpack-dev-server](/configuration/dev-server/)), but it's also possible to
-store them in a JSON file.
+编译器确保模块 ID 和 chunk ID 在这些构建之间保持一致。通常将这些 ID 存储在内存中（例如，当使用 [webpack-dev-server](/configuration/dev-server/) 时），但是也可能将它们存储在一个 JSON 文件中。
 
-### From The Module View
+### 站在模块的角度
 
-HMR is an opt-in feature that only affects modules containing HMR code. One example
-would be patching styling through the [style-loder](https://github.com/webpack/style-loader).
-In order for patching to work, style-loader implements the HMR interface; when it
-receives an update through HMR, it replaces the old styles with the new ones.
+HMR 是可选功能，只会影响包含 HRM 代码的模块。举个例子，通过 [style-loder](https://github.com/webpack/style-loader) 为 style 样式追加补丁。
+为了运行追加补丁，style-loader 实现了 HMR 接口；当它通过 HRM 接收到更新，它会使用新的样式替换旧的样式。
 
-Similarly, when implementing the HMR interface in a module, you can describe what should
-happen when the module is updated. However, in most cases, it's not mandatory to write
-HMR code in every module. If a module has no HMR handlers, the update bubbles up. This
-means that a single handler can handle an update to a complete module tree. If a single
-module in this tree is updated, the complete module tree is reloaded (only reloaded,
-not transferred).
+类似的，当在一个模块中实现了 HMR 接口，你可以描述出当模块被更新后发生了什么。然而在多数情况下，不需要强制在每个模块中写入 HMR 代码。如果一个模块没有 HMR 处理函数，更新就会冒泡。这意味着一个简单的处理函数能够对整个模块树(complete module tree)进行处理。如果在这个模块树中，一个单独的模块被更新，那么整个模块树都会被重新加载（只会重新加载，不会迁移）。
 
-### From The HMR Runtime View (Technical)
+### 站在 HMR Runtime 的角度 (Technical)
 
-For the module system runtime, additional code is emitted to track module `parents` and `children`.
+对于模块系统的 runtime，附加的代码被发送到 `parents` 和 `children` 跟踪模块。
 
-On the management side, the runtime supports two methods: `check` and `apply`.
+在管理方面，runtime 支持两个方法 `check` 和 `apply`。
 
-A `check` makes an HTTP request to the update manifest. If this request fails,
-there is no update available. If it succeeds, the list of updated chunks is compared
-to the list of currently loaded chunks. For each loaded chunk, the corresponding
-update chunk is downloaded. All module updates are stored in the runtime.
-When all update chunks have been downloaded and are ready to be applied, the runtime
-switches into the `ready` state.
+`check` 发送 HTTP 请求来更新 manifest。如果请求失败，说明没有可用更新。如果请求成功，待更新 chunk 会和当前加载过的 chunk 进行比较。对每个加载过的 chunk，会下载相对应的待更新 chunk。当所有待更新 chunk 完成下载，就会准备切换到 `ready` 状态。
 
-The `apply` method flags all updated modules as invalid. For each invalid module,
-there needs to be an update handler in the module or update handlers in its parent(s).
-Otherwise, the invalid flag bubbles up and marks its parent(s) as invalid too. Each bubble
-continues until the app's entry point or a module with an update handler is reached
-(whichever comes first). If it bubbles up from an entry point, the process fails.
+`apply` 方法将所有被更新模块标记为无效。对于每个无效模块，都需要在模块中有一个更新处理函数，或者在它的父级模块们中有更新处理函数。否则，无效标记冒泡，并将父级也标记为无效。每个冒泡继续直到到达应用程序入口起点，或者到达带有更新处理函数的模块（以最先到达为准）。如果它从入口起点开始冒泡，则此过程失败。
 
-Afterwards, all invalid modules are disposed (via the dispose handler) and unloaded.
-The current hash is then updated and all "accept" handlers are called. The runtime
-switches back to the `idle` state and everything continues as normal.
+之后，所有无效模块都被（通过 dispose 处理函数）处理和解除加载。然后更新当前 hash，并且调用所有 "accept" 处理函数。runtime 切换回`闲置`状态，一切照常继续。
 
-## What can I do with it?
+## 我能够使用 HMR 做什么？
 
-You can use it in development as a LiveReload replacement.
-[webpack-dev-server](/configuration/dev-server/) supports a
-hot mode in which it tries to update with HMR before trying to reload the whole page. See how
-to implement [HMR with React](/guides/hmr-react) as an example.
+你可以在开发过程中将 HMR 作为 LiveReload 的替代。[webpack-dev-server](/configuration/dev-server/) 支持热模式，在试图重新加载整个页面之前，热模式会尝试使用 HMR 来更新。查看如何实现[在 React 项目中使用 HRM](/guides/hmr-react) 为例。
 
-Some loaders already generate modules that are hot-updateable. For example, the `style-loader`
-can swap out a page's stylesheets. For modules like this, you don't need to do anything special.
+一些 loader 已经生成可热更新的模块。例如，`style-loader` 能够置换出页面的样式表。对于这样的模块，你不需要做任何特殊处理。
 
-webpack's power lies in its customizability, and there are *many* ways of configuring HMR
-depending on the needs of a particular project.
+webpack 的强大之处在于它的可定制化，取决于特定项目需求，这里有*许多*配置 HMR 的方式。

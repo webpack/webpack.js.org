@@ -1,5 +1,5 @@
 ---
-title: 入口
+title: 入口起点(Entry Points)
 sort: 2
 contributors:
   - TheLarkInn
