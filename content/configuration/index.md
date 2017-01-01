@@ -12,7 +12,7 @@ Webpack is fed via a configuration object. It is passed in one of two ways depen
 
 T> New to webpack? Check out our guide to some of webpack's [core concepts](/concepts) to get started!
 
-T> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html). This prevents file path issues between operating systems. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more.
+T> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html) and prefix it with the [__dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) global. This prevents file path issues between operating systems and allows relative paths to work as expected. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more info on POSIX vs. Windows paths.
 
 ## Options
 

@@ -25,7 +25,7 @@ To follow along, please add the following dependencies to your `package.json`:
 To use HMR, you'll need the following dependencies:
 
 ```bash
-npm install --save-dev babel@6.5.2 babel-core@6.13.2 babel-loader@6.2.4 babel-preset-es2015@6.13.2 babel-preset-react@6.11.1 babel-preset-stage-2@6.13.0 css-loader@0.23.1 postcss-loader@0.9.1 react-hot-loader@3.0.0-beta.6 style-loader@0.13.1 webpack@2.1.0-beta.20 webpack-dev-server@2.1.0-beta.0
+npm install --save-dev babel@6.5.2 babel-core@6.13.2 babel-loader@6.2.4 babel-preset-es2015@6.13.2 babel-preset-react@6.11.1 babel-preset-stage-2@6.13.0 css-loader@0.23.1 postcss-loader@0.9.1 react-hot-loader@3.0.0-beta.6 style-loader@0.13.1 webpack@2.1.0-beta.25 webpack-dev-server@2.1.0-beta.0
 ```
 
 In addition, for the purposes of this walkthrough, you'll need:
@@ -197,6 +197,7 @@ if (module.hot) {
 ```
 
 ```js
+// ./src/components/App.js
 import React from 'react';
 import styles from './App.css';
 
@@ -235,7 +236,7 @@ The important thing to note in the code above is the `module` reference.
 
 So in this case, `module.hot.accept` will fire the `render` method whenever `src/components/App.js` or its dependencies are changed - which means the `render` method will also fire when the `App.css` is changed, since `App.css` is included in `App.js`.
 
-###index.html
+### index.html
 
 This needs to be placed inside of `dist` in your project root. webpack-dev-server will not run without it.
 
