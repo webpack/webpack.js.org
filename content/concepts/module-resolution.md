@@ -10,20 +10,20 @@ A resolver is a library which helps in locating a module by its absolute path.
 A module can be required as a dependency from another module as:
 
 ```js
-import module from 'path/to/module'
+import foo from 'path/to/module'
 // or
 require('path/to/module')
 ```
 
 The dependency module can be from the application code or a third party library. The resolver helps
-webpack find the module code that needs to be included in the bundle for every such `require`/`import` statement.
+webpack finds the module code that needs to be included in the bundle for every such `require`/`import` statement.
 webpack uses [enhanced-resolve](https://github.com/webpack/enhanced-resolve) to resolve file paths while bundling modules.
 
 ## Resolving rules in webpack
 
 Using `enhanced-resolve`, webpack can resolve three kinds of file paths:
 
-### 1. Absolute paths
+### Absolute paths
 
 ```js
 import "/home/me/file";
@@ -33,7 +33,7 @@ import "C:\\Users\\me\\file";
 
 Since we already have the absolute path to the file, no further resolution is required.
 
-### 2. Relative paths
+### Relative paths
 
 ```js
 import "../src/file1";
@@ -42,7 +42,7 @@ import "./file2";
 
 In this case, the directory of the resource file where the `import` or `require` occurs is taken to be the context directory. The relative path specified in the `import/require` is joined to this context path to produce the absolute path to the module.
 
-###  3. Module paths
+### Module paths
 
 ```js
 import "module";
@@ -61,7 +61,7 @@ If the path points to a folder, then the following steps are taken to find the r
 * If there is no `package.json` or if the main fields do not return a valid path, file names specified in the [`resolve.mainFiles`](/configuration/resolve/#resolve-mainfiles) configuration option are looked for in order, to see if a matching filename exists in the imported/required directory .
 * The file extension is then resolved in a similar way using the `resolve.extensions` option.
 
-Webpack provides reasonable [defaults](/configuration/resolve) for these options depending on your build target.
+webpack provides reasonable [defaults](/configuration/resolve) for these options depending on your build target.
 
 ## Resolving Loaders
 
