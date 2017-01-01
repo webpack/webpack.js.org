@@ -4,6 +4,7 @@ sort: 3
 contributors:
   - bebraw
   - varunjayaraman
+  - cntanglijun
 ---
 
 webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/get-started/install-webpack).
@@ -16,8 +17,9 @@ Create a demo directory to try out webpack. [Install webpack](/get-started/insta
 ```bash
 mkdir webpack-demo && cd webpack-demo
 npm init -y
-npm install --save-dev webpack
-webpack --help # Shows a list of valid cli commands
+npm install --save-dev webpack@beta
+./node_modules/.bin/webpack --help # Shows a list of valid cli commands
+.\node_modules\.bin\webpack --help # For windows users
 npm install --save lodash
 ```
 

@@ -214,4 +214,21 @@
       border: none;
     }
   }
+
+  p {
+    code, tt {
+      display: inline-block;
+      max-width: 100%;
+      line-height: initial;
+      overflow: auto;
+      margin: 0;
+      vertical-align: middle;
+    }
+  }
+
+  span {
+    code, tt {
+      white-space: pre-line;
+    }
+  }
 }

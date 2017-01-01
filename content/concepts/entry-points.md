@@ -97,4 +97,4 @@ const config = {
 
 - Use `CommonsChunkPlugin` to create bundles of shared application code between each page. Multi-page applications that reuse a lot of code/modules between entry points can greatly benefit from these techniques, as the amount of entry points increase.
 
-T> As a rule of thumb: for one HTML use exactly one entry point.
+T> As a rule of thumb: for each HTML document use exactly one entry point.
