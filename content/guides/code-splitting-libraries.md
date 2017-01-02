@@ -37,7 +37,7 @@ module.exports = function(env) {
     return {
         entry: './index.js',
         output: {
-            filename: '[chunkhash].[name].js',
+            filename: 'bundle.js',
             path: './dist'
         }
     }
