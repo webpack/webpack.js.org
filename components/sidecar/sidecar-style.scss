@@ -4,7 +4,7 @@
 .sidecar {
   display: none;
 
-  @media (min-width: 1085px) {
+  @include break(large) {
     display: block;
     position: fixed;
     top: 100px;
