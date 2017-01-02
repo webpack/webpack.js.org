@@ -1,5 +1,5 @@
 ---
-title: Command Line Interface (CLI)
+title: Command Line Interface
 sort: 2
 ---
 

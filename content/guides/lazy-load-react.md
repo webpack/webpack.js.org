@@ -148,7 +148,7 @@ export default LazilyLoad;
 
 ## References
 
-- [Higher Order Components](http://reactpatterns.com/#higher-order-component)
+- [Higher Order Components](http://reactpatterns.com/#Higher-order component)
 - [react-modules](https://github.com/threepointone/react-modules)
 - [Function as Child Components](http://merrickchristensen.com/articles/function-as-child-components.html)
 - [Example Repository](https://github.com/iammerrick/how-to-lazy-load-react-webpack)

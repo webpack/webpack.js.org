@@ -3,6 +3,7 @@ title: Building for Production
 sort: 13
 contributors:
   - henriquea
+  - rajagopal4890
 ---
 
 Generating production builds with webpack is straight-forward. There are three things to keep in mind:
@@ -29,6 +30,7 @@ The `DefinePlugin` creates **compile** time constants. Useful for injecting your
 
 ```js
 // webpack.config.js
+
 const webpack = require('webpack');
 
 module.exports = {
@@ -52,6 +54,7 @@ webpack comes with UglifyJS plugin which minimize the output. You can pass an ob
 
 ```js
 // webpack.config.js
+
 const webpack = require('webpack');
 
 module.exports = {
@@ -75,8 +78,10 @@ module.exports = {
 
 When we do have multiple configurations in mind for different environments, the easiest way is to write seperate js files for 
 each environment. For example:
-####config/dev.js
+
 ```js
+//config/dev.js
+
 module.exports = function (env) {
     debug: true,
     devtool: 'cheap-module-source-map',
@@ -96,8 +101,10 @@ module.exports = function (env) {
     }
 }
 ```
-####config/prod.js
+
 ```js
+//config/prod.js
+
 module.exports = function (env) {
     debug: false,
     output: {
@@ -146,8 +153,9 @@ An advanced approach would be to have a base configuration file, put in all comm
 and then have environment specific files and simply use 'webpack-merge' to merge them. This would help to avoid code repetitions.
 For example, you could have all your base configurations like resolving your js, ts, png, jpeg, json and so on.. in a common base file as follows:
 
-####base.js
 ```js
+//base.js
+
 module.exports = function() {
     return {
         entry: {
@@ -203,8 +211,9 @@ module.exports = function() {
 And then merge this base config with an environment specific configuration file using 'webpack-merge'. 
 Let us look at an example where we merge our prod file, mentioned above, with this base config file using 'webpack-merge':
 
-####prod.js (updated)
 ```js
+//prod.js (updated)
+
 const webpackMerge = require('webpack-merge');
 
 const commonConfig = require('./base.js');
