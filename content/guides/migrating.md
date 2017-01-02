@@ -249,7 +249,7 @@ module.exports = {
 } 
 ```
 
-### What is options?
+### What are `options`?
 
 Good question. Well, strictly speaking it's 2 possible things; both ways to configure a webpack loader. Classically `options` was called `query` and was a string which could be appended to the name of the loader. Much like a query string but actually with [greater powers](https://github.com/webpack/loader-utils#parsequery):
 
