@@ -52,21 +52,7 @@ Running `webpack -p` (or `--define process.env.NODE_ENV="production"`) defines t
 
 Technically, `NODE_ENV` is a system environment variable that Node exposes into running scripts. It is used by convention to determine development-vs-production behavior, by both server tools, build scripts, and client-side libraries.
 
-On one side, this allows you to conditionally modify the build configuration, for instance change the [output filename](/configuration/output/#output-filename):
-
-```js
-// webpack.config.js
-const webpack = require('webpack');
-
-module.exports = {
-  /*...*/
-  output: {
-    filename: process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js'
-  }
-};
-```
-
-Secondly, this invokes the [`DefinePlugin`](/plugins/define-plugin), which perform search-and-replace operations on the original source code. Any occurrence of `process.env.NODE_ENV` in the imported code is replaced by by `"production"`. Thus, checks like `if (process.env.NODE_ENV !== 'production') console.log('...')` are evaluated to `if (false) console.log('...')` and finally minified away using `UglifyJS`.
+This invokes the [`DefinePlugin`](/plugins/define-plugin), which perform search-and-replace operations on the original source code. Any occurrence of `process.env.NODE_ENV` in the imported code is replaced by by `"production"`. Thus, checks like `if (process.env.NODE_ENV !== 'production') console.log('...')` are evaluated to `if (false) console.log('...')` and finally minified away using `UglifyJS`.
 
 ## The manual way: Configuring webpack for multiple environments
 
