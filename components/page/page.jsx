@@ -6,9 +6,10 @@ import Sidecar from '../sidecar/sidecar';
 import Contributors from '../contributors/contributors';
 import './page-style';
 import '../sidebar/sidebar-style';
+import { trimEnd } from 'lodash';
 
 export default ({ section, page }) => {
-  let edit = `https://github.com/vuefe/webpack2/edit/cn/content/${page.url}.md`;
+  let edit = `https://github.com/vuefe/webpack2/edit/cn/content/${trimEnd(page.url, '/')}.md`;
 
   return (
     <Container className="page">
