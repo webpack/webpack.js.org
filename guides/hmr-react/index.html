@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/657be5c4ac6d7e1b54f4.css" rel="stylesheet">
+      <link href="/102f3143b532caa0004e.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -201,13 +201,19 @@ to better understand what modules are being updated when using HMR.</p>
 </code></pre>
 <p>The important thing to note in the code above is the <code>module</code> reference.</p>
 <ol>
-<li><p>Webpack will expose <code>module.hot</code> to our code since we set <code>devServer: { hot: true }</code>;</p>
+<li><p>webpack will expose <code>module.hot</code> to our code since we set <code>devServer: { hot: true }</code>;</p>
 </li>
 <li><p>Thus we can use the <code>module.hot</code> hook to enable HMR for specific resources (Here&apos;s <code>App.js</code>). The most important API here is <code>module.hot.accept</code>, which specifies how to handle changes to specific dependencies.</p>
 </li>
-<li><p>Note that because Webpack 2 has built-in support for ES2015 modules, you won&apos;t need to re-require your root component in <code>module.hot.accept</code>. To make this work, you need to change the Babel ES2015 preset in <code>.babelrc</code> to be:</p>
+<li><p>Note that because webpack 2 has built-in support for ES2015 modules, you won&apos;t need to re-require your root component in <code>module.hot.accept</code>. To make this work, you need to change the Babel ES2015 preset in <code>.babelrc</code> to be:</p>
 <pre><code><span class="token punctuation">[</span><span class="token string">&quot;es2015&quot;</span>, <span class="token punctuation">{</span><span class="token string">&quot;modules&quot;</span><span class="token keyword">:</span> false<span class="token punctuation">}</span><span class="token punctuation">]</span>
 </code></pre><p>like what we did in <a href="#babel-config">Babel Config</a>. Note that disabling Babel&apos;s module plugin is not only necessary for HMR. If you don&apos;t disable it you&apos;ll run into many other issues (see <a href="/guides/migrating/#mixing-es2015-with-amd-and-commonjs">Migrating from v1 to v2</a> and <a href="http://www.2ality.com/2015/12/webpack-tree-shaking.html">webpack-tree-shaking</a>).</p>
+</li>
+<li><p>Note that if you&apos;re using ES6 modules in your webpack 2 configuration file, and you change your <code>.babelrc</code> file in #3 above, you either need to use <code>require</code> or create two <code>.babelrc</code> files (issue <a href="https://github.com/webpack/webpack.js.org/issues/154">here</a>):</p>
+<ul>
+<li>One in the project root directory with `&quot;presets&quot;: [&quot;es2015&quot;]</li>
+<li>One in the home directory for webpack to build. For this example, in <code>src/</code>.</li>
+</ul>
 </li>
 </ol>
 <p>So in this case, <code>module.hot.accept</code> will fire the <code>render</code> method whenever <code>src/components/App.js</code> or its dependencies are changed - which means the <code>render</code> method will also fire when the <code>App.css</code> is changed, since <code>App.css</code> is included in <code>App.js</code>.</p>
@@ -251,7 +257,7 @@ dev-server.js:27 <span class="token punctuation">[</span>HMR<span class="token p
 </code></pre>
 <p>Note that HMR specifies the paths of the updated modules.
 That&apos;s because we&apos;re using <code>NamedModulesPlugin</code>.</p>
-</div><hr style="display:block;"><h3 style="display:block;">Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/jhnns"><img src="https://github.com/jhnns.png?size=90"><span class="contributor__name"> jhnns</span></a><a class="contributor" href="https://github.com/jmreidy"><img src="https://github.com/jmreidy.png?size=90"><span class="contributor__name"> jmreidy</span></a></div></div></section></div><div class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/get-started" class="footer__link">Get Started</a><a href="/organization" class="footer__link">Organization</a><a href="/contribute" class="footer__link">Contribute</a><a href="/get-started/why-webpack#comparison" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg"></a></section><section class="footer__right"><a href="/branding" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Support</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link">License</a></section></div></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
+</div><hr style="display:block;"><h3 style="display:block;">Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/jhnns"><img src="https://github.com/jhnns.png?size=90"><span class="contributor__name"> jhnns</span></a><a class="contributor" href="https://github.com/jmreidy"><img src="https://github.com/jmreidy.png?size=90"><span class="contributor__name"> jmreidy</span></a><a class="contributor" href="https://github.com/sararubin"><img src="https://github.com/sararubin.png?size=90"><span class="contributor__name"> sararubin</span></a></div></div></section></div><div class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/get-started" class="footer__link">Get Started</a><a href="/organization" class="footer__link">Organization</a><a href="/contribute" class="footer__link">Contribute</a><a href="/get-started/why-webpack#comparison" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg"></a></section><section class="footer__right"><a href="/branding" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Support</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link">License</a></section></div></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
 
     
       <script src="/eb0881062a0b804943fa71a2cd92e5cd.js"></script>
