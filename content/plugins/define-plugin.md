@@ -25,6 +25,8 @@ console.log("Running App version " + VERSION);
 if(!BROWSER_SUPPORTS_HTML5) require("html5shiv");
 ```
 
+T> Note that because the plugin does a direct text replacement, the value given to it must include actual quotes inside of the string itself. Typically, this is done either with alternate quotes, such as `'"production"'`, or by using `JSON.stringify('production')`.
+
 Each key passed into `DefinePlugin` is an identifier or multiple identifiers joined with `.`.
 
 * If the value is a string it will be used as a code fragment.
