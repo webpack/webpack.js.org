@@ -246,3 +246,7 @@ You will notice three major updates to our 'prod.js' file.
 The choice of what is going to be common across all your environments is upto you, however. We have just demonstrated a few that could typically be common across environments when we build our application.
 
 You just saw, how powerful 'webpack-merge' is, that, it just saved us from a lot of code repetitions.
+
+***
+
+> 原文：https://webpack.js.org/guides/production-build/

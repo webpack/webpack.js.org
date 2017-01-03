@@ -88,3 +88,7 @@ module.exports = function () {
     }
 }
 ```
+
+***
+
+> 原文：https://webpack.js.org/guides/code-splitting-css/

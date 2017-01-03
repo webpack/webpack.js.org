@@ -193,3 +193,7 @@ __package.json__
 ```
 
 Now you can [publish it as an npm package](https://docs.npmjs.com/getting-started/publishing-npm-packages) and find it at [unpkg.com](https://unpkg.com/#/) to distribute it to your users.
+
+***
+
+https://webpack.js.org/guides/author-libraries/

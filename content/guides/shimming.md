@@ -113,3 +113,7 @@ module: {
     ]
 }
 ```
+
+***
+
+> 原文：https://webpack.js.org/guides/shimming/

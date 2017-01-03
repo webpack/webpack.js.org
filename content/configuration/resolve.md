@@ -1,5 +1,5 @@
 ---
-title: 解析
+title: 解析(Resolve)
 sort: 7
 contributors:
   - sokra

@@ -1,9 +1,10 @@
 ---
-title: entry 和 context
+title: Entry 和 Context
 sort: 4
 contributors:
   - sokra
   - skipjack
+  - dear-lizhihua
 ---
 
 ?> TODO: Short description

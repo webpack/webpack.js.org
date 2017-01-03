@@ -47,3 +47,7 @@ T> 当你在本地安装 webpack 后，你能够在 `node_modules/.bin/webpack` 
 ``` bash
 npm install webpack/webpack#<tagname/branchname>
 ```
+
+***
+
+> 原文：https://webpack.js.org/guides/installation/
