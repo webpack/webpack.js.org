@@ -1,5 +1,5 @@
 ---
-title: 插件
+title: 插件(Plugins)
 sort: 8
 contributors:
   - sokra

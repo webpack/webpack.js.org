@@ -1,5 +1,5 @@
 ---
-title: 统计
+title: 统计(Stats)
 sort: 15
 contributors:
   - SpaceK33z

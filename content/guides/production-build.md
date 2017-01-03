@@ -77,3 +77,7 @@ module.exports = {
 
 ?> TODO: 加上一条 "How to manage multiple configurations" 的参考链接
 ?> TODO: 加上一条 "Splitting configuration" 的参考链接
+
+***
+
+> 原文：https://webpack.js.org/guides/production-build/

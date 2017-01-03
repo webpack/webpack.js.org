@@ -139,3 +139,7 @@ module.exports = function(env) {
 ```
 
 With the above webpack config, we see three bundles being generated. `vendor`, `main` and `manifest` bundles.
+
+***
+
+> 原文：https://webpack.js.org/guides/code-splitting-libraries/

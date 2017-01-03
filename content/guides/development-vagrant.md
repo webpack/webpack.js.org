@@ -101,3 +101,7 @@ webpack-dev-server --public 10.10.10.61 --watch-poll
 ## 小结
 
 我们使 Vagrant box 能够被固定 IP 访问。然后开放 webpack-dev-server，让我们通过浏览器便能访问它。最后解决了 VirtualBox 文件系统的事件触发问题，让服务器在文件更改后能够重新加载。
+
+***
+
+> 原文：https://webpack.js.org/guides/development-vagrant/

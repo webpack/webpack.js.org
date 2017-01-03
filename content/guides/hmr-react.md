@@ -271,3 +271,7 @@ dev-server.js:27 [HMR] App is up to date.
 ```
 
 我们可以看到，HMR 标记出了被修改文件的路径。这便是 NamedModules 插件所起的作用。
+
+***
+
+> 原文：https://webpack.js.org/guides/hmr-react/

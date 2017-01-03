@@ -14,3 +14,7 @@ sort: 15
 
 > see also [[development tools]]
 > see also [[resolving]]
+
+***
+
+> 原文：https://webpack.js.org/guides/build-performance/

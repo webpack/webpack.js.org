@@ -265,3 +265,7 @@ Notice that vendor chunk has the same filename!
 
 * https://medium.com/@okonetchnikov/long-term-caching-of-static-assets-with-webpack-1ecb139adb95#.vtwnssps4
 * https://gist.github.com/sokra/ff1b0290282bfa2c037bdb6dcca1a7aa
+
+***
+
+https://webpack.js.org/guides/caching/
