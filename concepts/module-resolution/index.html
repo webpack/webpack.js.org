@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/102f3143b532caa0004e.css" rel="stylesheet">
+      <link href="/7b7650633a69e74b8dcd.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -52,7 +52,7 @@ You can replace the original module path by an alternate path by creating an ali
 </ul>
 <p>If the path points to a folder, then the following steps are taken to find the right file with the right extension:</p>
 <ul>
-<li>If the folder contains a <code>package.json</code> file, then fields specified in <a href="/configuration/resolve/#resolve-mainfields"><code>resolve.mainFiles</code></a> configuration option are looked up in order, and the first such field in <code>package.json</code> determines the file path. </li>
+<li>If the folder contains a <code>package.json</code> file, then fields specified in <a href="/configuration/resolve/#resolve-mainfields"><code>resolve.mainFields</code></a> configuration option are looked up in order, and the first such field in <code>package.json</code> determines the file path. </li>
 <li>If there is no <code>package.json</code> or if the main fields do not return a valid path, file names specified in the <a href="/configuration/resolve/#resolve-mainfiles"><code>resolve.mainFiles</code></a> configuration option are looked for in order, to see if a matching filename exists in the imported/required directory .</li>
 <li>The file extension is then resolved in a similar way using the <code>resolve.extensions</code> option.</li>
 </ul>
