@@ -71,11 +71,11 @@ module.exports = {
   /*...*/
 };
 ```
-##Configuring webpack for multiple environments
+## Configuring webpack for multiple environments
 
 When we do have multiple configurations in mind for different environments, the easiest way is to write seperate js files for 
 each environment. For example:
-####config/dev.js
+#### config/dev.js
 ```js
 module.exports = function (env) {
     debug: true,
@@ -96,7 +96,7 @@ module.exports = function (env) {
     }
 }
 ```
-####config/prod.js
+#### config/prod.js
 ```js
 module.exports = function (env) {
     debug: false,
@@ -146,7 +146,7 @@ An advanced approach would be to have a base configuration file, put in all comm
 and then have environment specific files and simply use 'webpack-merge' to merge them. This would help to avoid code repetitions.
 For example, you could have all your base configurations like resolving your js, ts, png, jpeg, json and so on.. in a common base file as follows:
 
-####base.js
+#### base.js
 ```js
 module.exports = function() {
     return {
@@ -203,7 +203,7 @@ module.exports = function() {
 And then merge this base config with an environment specific configuration file using 'webpack-merge'. 
 Let us look at an example where we merge our prod file, mentioned above, with this base config file using 'webpack-merge':
 
-####prod.js (updated)
+#### prod.js (updated)
 ```js
 const webpackMerge = require('webpack-merge');
 
