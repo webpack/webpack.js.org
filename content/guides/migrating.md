@@ -6,7 +6,7 @@ contributors:
   - jhnns
   - grgur
   - domfarolino
-  - johnnyreilly
+  - johnnyreilly
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
