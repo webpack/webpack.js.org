@@ -6,6 +6,7 @@ contributors:
   - jhnns
   - grgur
   - domfarolino
+  - johnnyreilly
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -229,6 +230,55 @@ See [CLI](/api/cli).
 ## `require.ensure` and AMD `require` is asynchronous
 
 These functions are now always asynchronous instead of calling their callback sync if the chunk is already loaded.
+
+## Loader configuration is through `options`
+
+You can *no longer* configure a loader with a custom property in the `webpack.config.js`. It must be done through the `options`. The following configuration with the `ts` property is no longer valid with webpack 2:
+
+```js
+module.exports = { 
+  ...
+  module: { 
+    use: [{ 
+      test: /\.tsx?$/,
+      loader: 'ts-loader'
+    }]
+  },
+  // does not work with webpack 2
+  ts: { transpileOnly: false } 
+} 
+```
+
+### What are `options`?
+
+Good question. Well, strictly speaking it's 2 possible things; both ways to configure a webpack loader. Classically `options` was called `query` and was a string which could be appended to the name of the loader. Much like a query string but actually with [greater powers](https://github.com/webpack/loader-utils#parsequery):
+
+```js
+module.exports = { 
+  ...
+  module: { 
+    use: [{ 
+      test: /\.tsx?$/,
+      loader: 'ts-loader?' + JSON.stringify({ transpileOnly: false })
+    }]
+  }
+} 
+```
+
+But it can also be a separately specified object that's supplied alongside a loader:
+
+```js
+module.exports = { 
+  ...
+  module: { 
+    use: [{ 
+      test: /\.tsx?$/,
+      loader: 'ts-loader'
+      options:  { transpileOnly: false }
+    }]
+  }
+} 
+```
 
 ## `LoaderOptionsPlugin` context
 
