@@ -66,6 +66,13 @@ function fetchPackageFiles(options, finalCb) {
           return cb(err);
         }
 
+        if (body && file === 'README.md') {
+          body = body
+            .replace(/^[^]*?<h2[^>]*>/m, '## ') // drop everything up to first <h2>
+            .replace(/<h2[^>]*>/g, '## ') // replace any <h2> with ##
+            .replace(/<\/h2>/g, ''); // drop </h2>
+        }
+
         // TODO: push this type of to a script of its own to keep this generic
         return async.parallel(
           [
