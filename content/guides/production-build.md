@@ -4,15 +4,41 @@ sort: 13
 contributors:
   - henriquea
   - rajagopal4890
+  - markerikson
+  - simon04
 ---
 
-Generating production builds with webpack is straight-forward. There are three things to keep in mind:
+This page explains how to generate production builds with webpack.
 
-- Source Maps
-- Node environment
-- Minification
+## The automatic way
 
-## Source Maps
+Running `webpack -p` (or equivalently `webpack --optimize-minimize --define process.env.NODE_ENV="production"`). This performs the following steps:
+
+- Minification using `UglifyJsPlugin`
+- Runs the `LoaderOptionsPlugin`, see its [documentation](/plugins/loader-options-plugin)
+- Sets the Node environment variable
+
+### Minification
+
+webpack comes with `UglifyJsPlugin`, which runs [UglifyJS](http://lisperator.net/uglifyjs/) in order to minimize the output. The plugin supports all of [UglifyJS options](https://github.com/mishoo/UglifyJS2#usage). Specifying `--optimize-minimize` on the command line, the following plugin configuration is added:
+
+```js
+// webpack.config.js
+const webpack = require('webpack');
+
+module.exports = {
+  /*...*/
+  plugins:[
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: options.devtool && (options.devtool.indexOf("sourcemap") >= 0 || options.devtool.indexOf("source-map") >= 0)
+    })
+  ]
+};
+```
+
+Thus, depending on the [devtool options](/configuration/devtool), Source Maps are generated.
+
+### Source Maps
 
 We encourage you to have Source Maps enabled in production. They are useful for debugging and to run benchmark tests. Webpack can generate inline Source Maps included in the bundles or separated files.
 
@@ -20,63 +46,31 @@ In your configuration, use the `devtools` object to set the Source Map type. We 
 
 One of the good options to go is using `cheap-module-source-map` which simplifies the Source Maps to a single mapping per line.
 
-## Node environment variable
+### Node environment variable
 
-The second step is to tell webpack to generate a production build by setting the Node.js environment variable to `production`. webpack will not include any extra useful code, warnings and checks used in development.
-
-The `DefinePlugin` creates **compile** time constants. Useful for injecting your Node.js environment as seen below.
-
-?> TODO: Add a link to the `ProvidePlugin` documentation
+Running `webpack -p` (or `--define process.env.NODE_ENV="production"`) invokes the [`DefinePlugin`](/plugins/define-plugin) in the following way:
 
 ```js
 // webpack.config.js
-
-const webpack = require('webpack');
-
-module.exports = {
-  /*...*/
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    })
-  ]
-  /*...*/
-};
-```
-
-T> Spoiler: Setting the env var only won't make your bundle smaller. This take us to the last step:
-
-## Minification
-
-webpack comes with UglifyJS plugin which minimize the output. You can pass an object containing [UglifyJS options](https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin).
-
-```js
-// webpack.config.js
-
 const webpack = require('webpack');
 
 module.exports = {
   /*...*/
   plugins:[
     new webpack.DefinePlugin({
-      'process.env':{
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress:{
-        warnings: true
-      }
+      'process.env.NODE_ENV': JSON.stringify('production')
     })
   ]
-  /*...*/
 };
 ```
-## Configuring webpack for multiple environments
 
-When we do have multiple configurations in mind for different environments, the easiest way is to write seperate js files for 
+The `DefinePlugin` performs search-and-replace operations on the original source code. Any occurrence of `process.env.NODE_ENV` in the imported code is replaced by by `"production"`. Thus, checks like `if (process.env.NODE_ENV !== 'production') console.log('...')` are evaluated to `if (false) console.log('...')` and finally minified away using `UglifyJS`.
+
+T> Technically, `NODE_ENV` is a system environment variable that Node.js exposes into running scripts. It is used by convention to determine development-vs-production behavior, by both server tools, build scripts, and client-side libraries. Contrary to expectations, `process.env.NODE_ENV` is not set to `"production"` __within__ the build script `webpack.config.js`, see [#2537](https://github.com/webpack/webpack/issues/2537). Thus, conditionals like `process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js'` do not work as expected.
+
+## The manual way: Configuring webpack for multiple environments
+
+When we do have multiple configurations in mind for different environments, the easiest way is to write seperate js files for
 each environment. For example:
 
 ** dev.js **
