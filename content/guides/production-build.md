@@ -48,11 +48,25 @@ One of the good options to go is using `cheap-module-source-map` which simplifie
 
 ### Node environment variable
 
-Running `webpack -p` (or `--define process.env.NODE_ENV="production"`) defines the `NODE_ENV` environment variable as `"production"`.
+Running `webpack -p` (or `--define process.env.NODE_ENV="production"`) invokes the [`DefinePlugin`](/plugins/define-plugin) in the following way:
 
-Technically, `NODE_ENV` is a system environment variable that Node exposes into running scripts. It is used by convention to determine development-vs-production behavior, by both server tools, build scripts, and client-side libraries.
+```js
+// webpack.config.js
+const webpack = require('webpack');
 
-This invokes the [`DefinePlugin`](/plugins/define-plugin), which perform search-and-replace operations on the original source code. Any occurrence of `process.env.NODE_ENV` in the imported code is replaced by by `"production"`. Thus, checks like `if (process.env.NODE_ENV !== 'production') console.log('...')` are evaluated to `if (false) console.log('...')` and finally minified away using `UglifyJS`.
+module.exports = {
+  /*...*/
+  plugins:[
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    })
+  ]
+};
+```
+
+The `DefinePlugin` performs search-and-replace operations on the original source code. Any occurrence of `process.env.NODE_ENV` in the imported code is replaced by by `"production"`. Thus, checks like `if (process.env.NODE_ENV !== 'production') console.log('...')` are evaluated to `if (false) console.log('...')` and finally minified away using `UglifyJS`.
+
+T> Technically, `NODE_ENV` is a system environment variable that Node.js exposes into running scripts. It is used by convention to determine development-vs-production behavior, by both server tools, build scripts, and client-side libraries. Contrary to expectations, `process.env.NODE_ENV` is not set to `"production"` __within__ the build script `webpack.config.js`, see [#2537](https://github.com/webpack/webpack/issues/2537). Thus, conditionals like `process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js'` do not work as expected.
 
 ## The manual way: Configuring webpack for multiple environments
 
