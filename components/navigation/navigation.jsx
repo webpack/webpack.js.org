@@ -8,22 +8,22 @@ let Sections = [
   {
     title: 'Concepts',
     url: 'concepts'
-  },
-  {
+  }, {
     title: 'Guides',
     url: 'guides'
-  },
-  {
-    title: 'Documentation',
-    url: 'configuration',
-    children: [
-      { title: 'API', url: 'api' },
-      { title: 'Configuration', url: 'configuration' },
-      { title: 'Loaders', url: 'loaders' },
-      { title: 'Plugins', url: 'plugins' }
-    ]
-  },
-  {
+  }, {
+    title: 'API',
+    url: 'api'
+  }, {
+    title: 'Configuration',
+    url: 'configuration'
+  }, {
+    title: 'Loaders',
+    url: 'loaders'
+  }, {
+    title: 'Plugins',
+    url: 'plugins'
+  }, {
     title: 'Donate',
     url: '//opencollective.com/webpack'
   }
