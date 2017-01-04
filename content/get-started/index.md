@@ -5,6 +5,7 @@ contributors:
   - bebraw
   - varunjayaraman
   - cntanglijun
+  - chrisVillanueva
 ---
 
 webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/get-started/install-webpack).
@@ -23,7 +24,7 @@ npm install --save-dev webpack@beta
 npm install --save lodash
 ```
 
-Now create an `index.js` file.
+Now create subdirectory `app` with an `index.js` file.
 
 __app/index.js__
 
@@ -49,7 +50,7 @@ __index.html__
 ```html
 <html>
   <head>
-    <title>Webpack demo</title>
+    <title>Webpack 2 demo</title>
     <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
@@ -63,7 +64,7 @@ In this example, there are implicit dependencies between the script tags.
 `index.js` depends on `lodash` being included in the page before it runs. It is implicit because `index.js` never declared a need for `lodash`; it just assumes that a global variable `_` exists.
 
 There are problems with managing JavaScript projects this way:
-  - If a dependency is missing, or is included in the wrong order, the application will not function at all. 
+  - If a dependency is missing, or is included in the wrong order, the application will not function at all.
   - If a dependency is included but is not used, then there is a lot of unnecessary code that the browser has to download.
 
 To bundle the `lodash` dependency with the `index.js`, we need to import `lodash`.
@@ -82,7 +83,7 @@ Also we will need to change the `index.html` to expect a single bundled js file.
 ```diff
 <html>
   <head>
-    <title>Webpack demo</title>
+    <title>Webpack 2 demo</title>
 -   <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
@@ -109,11 +110,13 @@ index.js  1.56 kB       0  [emitted]  main
    [0] ./app/index.js 170 bytes {0} [built]
 
 ```
+Open `index.html` in your browser to see the result of a successful bundle.
+You should see a page with the following text: 'Hello ,webpack'.
 
 ## Using webpack with a config
 
-For more complex configuration, we can use a configuration file that webpack can reference to bundle your code.
-The above CLI command would be represented in config as follows -
+For more complex configuration, we can use a configuration file that webpack can reference to bundle your code.  After you create a `webpack.config.js` file, represent the CLI command above
+with the following config settings -
 
 __webpack.config.js__
 ```javascript
@@ -139,7 +142,10 @@ index.js  1.56 kB       0  [emitted]  main
    [0] ./app/index.js 170 bytes {0} [built]
 
 ```
+
 T> If a `webpack.config.js` is present, `webpack` command picks it up by default.
+
+T> If you created a successful `dist/bundle.js` file using the 'Creating a bundle' section, delete the `dist` subdirectory to validate output from your `webpack.config.js` file settings.
 
 The config file allows for all the flexibility in using webpack. We can add loader rules, plugins, resolve options and many other enhancements to our bundles using this configuration file.
 
