@@ -11,7 +11,7 @@ To learn more about Typescript [click here](https://www.typescriptlang.org).
 ## Basic Setup
 
 In order to get started with Webpack and Typescript, first we must install webpack in our project.
-If you didn't do so already please check out [Webpack Installation Guide](http://localhost:3000/guides/installation).
+If you didn't do so already please check out [Webpack Installation Guide](https://webpack.js.org/guides/installation/).
 
 To start using webpack with Typescript you need a couple of things:
 1. Install the Typescript compiler in your project.
@@ -80,6 +80,57 @@ difference between awesome-typescript-loader and ts-loader.
 You can read more about it [here](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader).
 
 In this guide we will be using ts-loader as currently it is easier enabling additional webpack features such as importing non code assets into your project.
+
+## Enabling source maps
+
+In order to enable source maps we first must configure typescript to output inline source maps to our compiled javascript files.
+This is done by setting the sourceMap property to true.
+ 
+__tsconfig.json__
+```json
+{
+  "sourceMap": true
+}
+```
+
+Once typescript is configured to output source maps we need to tell webpack 
+to extract these source maps and pass them to the browser, this way we will get the source file
+exactly as we see it in our code editor.
+
+__webpack.config.js__
+```js
+module.exports = {
+ entry: './index.ts',
+ output: {
+   filename: '/bundle.js',
+   path: '/'
+ },
+ module: {
+   rules: [
+     {
+       enforce: 'pre',
+       test: /\.js$/,
+       loader: "source-map-loader"
+     },
+   ]
+ },
+ devtool: 'inline-source-map',
+};
+```
+ 
+First we add a new loader called source-map-loader. 
+
+To install it run: 
+
+`npm install --save-dev source-map-loader`.
+
+Once the loader is installed we need to tell webpack we want to run this loader before any other loaders by using the `enforce: 'pre'` configuration flag.
+Finally we need to enable source maps in webpack by specifying the `devtool` property.
+Currently we use the 'inline-source-map' setting, to read more about this settings and see other options check out the [devtool documentation](https://webpack.js.org/configuration/devtool/).
+
+ 
+ 
+ 
 
 ## Using 3rd Party Libraries
 
