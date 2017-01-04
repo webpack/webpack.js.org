@@ -222,7 +222,7 @@ module.exports = function(env) {
                     'NODE_ENV': JSON.stringify('prod')
                 }
             }),
-            new webpack.optimize.UglifyJsPlugin(), ({
+            new webpack.optimize.UglifyJsPlugin({
                 beautify: false,
                 mangle: {
                     screw_ie8: true,
