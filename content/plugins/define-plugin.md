@@ -6,17 +6,17 @@ title: DefinePlugin
 new webpack.DefinePlugin(definitions)
 ```
 
-The `DefinePlugin` allows you to create global constants which can be configured at **compile** time. This can be very useful for allowing different behaviour between development builds and release builds.  For example, you might use a global constant to determine whether logging takes place; perhaps you perform logging in your development build but not in the release build.  That's the sort of scenario the `DefinePlugin` facilitates.
+The `DefinePlugin` allows you to create global constants which can be configured at **compile** time. This can be very useful for allowing different behaviour between development builds and release builds. For example, you might use a global constant to determine whether logging takes place; perhaps you perform logging in your development build but not in the release build. That's the sort of scenario the `DefinePlugin` facilitates.
 
-Example:
+**Example:**
 
 ``` javascript
 new webpack.DefinePlugin({
-	PRODUCTION: JSON.stringify(true),
-	VERSION: JSON.stringify("5fa3b9"),
-	BROWSER_SUPPORTS_HTML5: true,
-	TWO: "1+1",
-	"typeof window": JSON.stringify("object")
+  PRODUCTION: JSON.stringify(true),
+  VERSION: JSON.stringify("5fa3b9"),
+  BROWSER_SUPPORTS_HTML5: true,
+  TWO: "1+1",
+  "typeof window": JSON.stringify("object")
 })
 ```
 
@@ -36,21 +36,25 @@ Each key passed into `DefinePlugin` is an identifier or multiple identifiers joi
 
 The values will be inlined into the code which allows a minification pass to remove the redundant conditional.
 
-Example:
+**Example:**
 
 ``` javascript
-if (!PRODUCTION)
-	console.log('Debug info')
-if (PRODUCTION)
-	console.log('Production log')
+if (!PRODUCTION) {
+  console.log('Debug info')
+}
+if (PRODUCTION) {
+  console.log('Production log')
+}
 `````
 After passing through webpack with no minification results in:
 
 ``` javascript
-if (!true)
-	console.log('Debug info')
-if (true)
-	console.log('Production log')
+if (!true) {
+  console.log('Debug info')
+}
+if (true) {
+  console.log('Production log')
+}
 ```
 
 and then after a minification pass results in:
