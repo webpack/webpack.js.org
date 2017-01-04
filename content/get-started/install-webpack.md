@@ -15,7 +15,7 @@ Note that this documentation is for webpack 2, for which there is not yet a stab
 ### Global Installation
 
 ``` bash
-npm install webpack@beta -g
+npm install webpack -g
 ```
 
 The `webpack` command is now available globally.
@@ -25,7 +25,7 @@ However, this is not a recommended practice. This locks you down to a specific v
 ### Local Installation
 
 ``` bash
-npm install webpack@beta --save-dev
+npm install webpack --save-dev
 
 npm install webpack@<version> --save-dev
 ```
