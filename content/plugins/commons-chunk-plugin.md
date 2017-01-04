@@ -1,20 +1,53 @@
 ---
 title: commons-chunk-plugin
+contributors:
+  - bebraw
+  - simon04
 ---
-
-?> Review this content
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin(options)
 ```
 
-* `options.name` or `options.names` (`string|string[]`): The chunk name of the commons chunk. An existing chunk can be selected by passing a name of an existing chunk. If an array of strings is passed this is equal to invoking the plugin multiple times for each chunk name. If omitted and `options.async` or `options.children` is set all chunks are used, otherwise `options.filename` is used as chunk name.
-* `options.filename` (`string`): The filename template for the commons chunk. Can contain the same placeholder as `output.filename`. If omitted the original filename is not modified (usually `output.filename` or `output.chunkFilename`).
-* `options.minChunks` (`number|Infinity|function(module, count) -> boolean`): The minimum number of chunks which need to contain a module before it's moved into the commons chunk. The number must be greater than or equal 2 and lower than or equal to the number of chunks. Passing `Infinity` just creates the commons chunk, but moves no modules into it. By providing a `function` you can add custom logic. (Defaults to the number of chunks)
-* `options.chunks` (`string[]`): Select the source chunks by chunk names. The chunk must be a child of the commons chunk. If omitted all entry chunks are selected.
-* `options.children` (`boolean`): If `true` all children of the commons chunk are selected
-* `options.async` (`boolean|string`): If `true` a new async commons chunk is created as child of `options.name` and sibling of `options.chunks`. It is loaded in parallel with `options.chunks`. It is possible to change the name of the output file by providing the desired string instead of `true`.
-* `options.minSize` (`number`): Minimum size of all common module before a commons chunk is created.
+## Options
+
+```javascript
+{
+  name: string, // or
+  names: string[],
+  // The chunk name of the commons chunk. An existing chunk can be selected by passing a name of an existing chunk.
+  // If an array of strings is passed this is equal to invoking the plugin multiple times for each chunk name.
+  // If omitted and `options.async` or `options.children` is set all chunks are used,
+  // otherwise `options.filename` is used as chunk name.
+
+  filename: string,
+  // The filename template for the commons chunk. Can contain the same placeholder as `output.filename`.
+  // If omitted the original filename is not modified (usually `output.filename` or `output.chunkFilename`).
+
+  minChunks: number|Infinity|function(module, count) -> boolean,
+  // The minimum number of chunks which need to contain a module before it's moved into the commons chunk.
+  // The number must be greater than or equal 2 and lower than or equal to the number of chunks.
+  // Passing `Infinity` just creates the commons chunk, but moves no modules into it.
+  // By providing a `function` you can add custom logic. (Defaults to the number of chunks)
+
+  chunks: string[],
+  // Select the source chunks by chunk names. The chunk must be a child of the commons chunk.
+  // If omitted all entry chunks are selected.
+
+  children: boolean,
+  // If `true` all children of the commons chunk are selected
+
+  async: boolean|string,
+  // If `true` a new async commons chunk is created as child of `options.name` and sibling of `options.chunks`.
+  // It is loaded in parallel with `options.chunks`. It is possible to change the name of the output file
+  // by providing the desired string instead of `true`.
+
+  minSize: number,
+  // Minimum size of all common module before a commons chunk is created.
+}
+```
+
+T> The deprecated webpack 1 constructor `new webpack.optimize.CommonsChunkPlugin(options, filenameTemplate, selectedChunks, minChunks)` is no longer supported. Use a corresponding options object instead.
 
 ## Examples
 
@@ -92,7 +125,7 @@ new CommonsChunkPlugin({
 
 ### Extra async commons chunk
 
-Similar to 3., but instead of moving common modules into the parent (which increases initial load time) a new async-loaded additional commons chunk is used. This is automatically downloaded in parallel when the additional chunk is downloaded.
+Similar to the above one, but instead of moving common modules into the parent (which increases initial load time) a new async-loaded additional commons chunk is used. This is automatically downloaded in parallel when the additional chunk is downloaded.
 
 ```javascript
 new CommonsChunkPlugin({
