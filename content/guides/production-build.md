@@ -76,7 +76,6 @@ each environment. For example:
 ** dev.js **
 ```js
 module.exports = function (env) {
-    debug: true,
     devtool: 'cheap-module-source-map',
     output: {
         path: path.join(__dirname, '/../dist/assets'),
@@ -98,7 +97,6 @@ module.exports = function (env) {
 ** prod.js **
 ```js
 module.exports = function (env) {
-    debug: false,
     output: {
         path: path.join(__dirname, '/../dist/assets'),
         filename: '[name].bundle.js',
@@ -210,7 +208,6 @@ const commonConfig = require('./base.js');
 
 module.exports = function(env) {
     return webpackMerge(commonConfig(), {
-        debug: false,
         plugins: [
             new webpack.LoaderOptionsPlugin({
                 minimize: true,
@@ -221,7 +218,7 @@ module.exports = function(env) {
                     'NODE_ENV': JSON.stringify('prod')
                 }
             }),
-            new webpack.optimize.UglifyJsPlugin(), ({
+            new webpack.optimize.UglifyJsPlugin({
                 beautify: false,
                 mangle: {
                     screw_ie8: true,
