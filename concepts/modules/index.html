@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/89e4ae1d76f76da01d1f.css" rel="stylesheet">
+      <link href="/5aa358ada49ede8c0a29.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -25,15 +25,15 @@ On the web, however, support for <em>modules</em> has been slow to arrive.
 Multiple tools exist that support modular JavaScript on the web, with a variety of benefits and limitations.
 webpack builds on lessons learned from these systems and applies the concept of <em>modules</em> to any file in your project.</p>
 <h2 class="header"><a class="anchor" href="#what-is-a-webpack-module" id="what-is-a-webpack-module"></a><span class="text">What is a webpack Module</span><a class="icon-link" href="#what-is-a-webpack-module"></a></h2>
-<p>In contrast to Node.js modules, webpack <em>modules</em> can express their <em>dependencies</em> in a variety of ways. A few examples are:</p>
+<p>In contrast to <a href="https://nodejs.org/api/modules.html">Node.js modules</a>, webpack <em>modules</em> can express their <em>dependencies</em> in a variety of ways. A few examples are:</p>
 <ul>
-<li>An ES2015 <code>import</code> statement</li>
-<li>A JavaScript <code>require()</code> statement</li>
-<li>An AMD <code>define</code> and <code>require</code> statement</li>
-<li>An <code>@import</code> statement inside of a css/sass/less file.</li>
+<li>An <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">ES2015 <code>import</code></a> statement</li>
+<li>A <a href="http://www.commonjs.org/specs/modules/1.0/">CommonJS</a> <code>require()</code> statement</li>
+<li>An <a href="https://github.com/amdjs/amdjs-api/blob/master/AMD.md">AMD</a> <code>define</code> and <code>require</code> statement</li>
+<li>An <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@import"><code>@import</code> statement</a> inside of a css/sass/less file.</li>
 <li>An image url in a stylesheet (<code>url(...)</code>) or html (<code>&lt;img src=...&gt;</code>) file.</li>
 </ul>
-<blockquote class="tip"><div class="tip-content"> webpack 1 requires a specific loader to convert ECMAScript2015 <code>import</code>, however this is possible out of the box via webpack 2 </div></blockquote><h2 class="header"><a class="anchor" href="#supported-module-types" id="supported-module-types"></a><span class="text">Supported Module Types</span><a class="icon-link" href="#supported-module-types"></a></h2>
+<blockquote class="tip"><div class="tip-content"> webpack 1 requires a specific loader to convert ES2015 <code>import</code>, however this is possible out of the box via webpack 2 </div></blockquote><h2 class="header"><a class="anchor" href="#supported-module-types" id="supported-module-types"></a><span class="text">Supported Module Types</span><a class="icon-link" href="#supported-module-types"></a></h2>
 <p>webpack supports modules written in a variety of languages and preprocessors, via <em>loaders</em>. <em>Loaders</em> describe to webpack <strong>how</strong> to process non-JavaScript <em>modules</em> and include these <em>dependencies</em> into your <em>bundles</em>.
 The webpack community has built <em>loaders</em> for a wide variety of popular languages and language processors, including:</p>
 <ul>
@@ -45,8 +45,8 @@ The webpack community has built <em>loaders</em> for a wide variety of popular l
 <li><a href="http://stylus-lang.com">Stylus</a></li>
 </ul>
 <p>And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for <strong>any stack</strong>, while staying <strong>unopinionated</strong> about your development, testing, and production workflows.</p>
-<p>For a full list, see <a href="https://webpack.github.io/docs/list-of-loaders.html"><strong>the list of loaders</strong></a> or <a href="/api/loaders"><strong>write your own</strong></a>.</p>
-</div><hr style="display:block;"><h3 style="display:block;">Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/TheLarkInn"><img src="https://github.com/TheLarkInn.png?size=90"><span class="contributor__name"> TheLarkInn</span></a></div></div></section></div><div class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/get-started" class="footer__link">Get Started</a><a href="/organization" class="footer__link">Organization</a><a href="/contribute" class="footer__link">Contribute</a><a href="/get-started/why-webpack#comparison" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg"></a></section><section class="footer__right"><a href="/branding" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Support</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link">License</a></section></div></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
+<p>For a full list, see <a href="/loaders"><strong>the list of loaders</strong></a> or <a href="/api/loaders"><strong>write your own</strong></a>.</p>
+</div><hr style="display:block;"><h3 style="display:block;">Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/TheLarkInn"><img src="https://github.com/TheLarkInn.png?size=90"><span class="contributor__name"> TheLarkInn</span></a><a class="contributor" href="https://github.com/simon04"><img src="https://github.com/simon04.png?size=90"><span class="contributor__name"> simon04</span></a></div></div></section></div><div class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/get-started" class="footer__link">Get Started</a><a href="/organization" class="footer__link">Organization</a><a href="/contribute" class="footer__link">Contribute</a><a href="/get-started/why-webpack#comparison" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg"></a></section><section class="footer__right"><a href="/branding" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Support</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link">License</a></section></div></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
 
     
       <script src="/a4864e6e0c169e78e5bea4d258bb6b19.js"></script>
