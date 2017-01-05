@@ -108,7 +108,7 @@ module.exports = {
       'Loaders',
       function() {
         return require.context(
-          'json-loader!yaml-frontmatter-loader!./generated/loaders',
+          'json-loader!yaml-frontmatter-loader!./content/loaders',
           false,
           /^\.\/.*\.md$/
         );
@@ -119,7 +119,7 @@ module.exports = {
       'Plugins',
       function() {
         return require.context(
-          'json-loader!yaml-frontmatter-loader!./generated/plugins',
+          'json-loader!yaml-frontmatter-loader!./content/plugins',
           false,
           /^\.\/.*\.md$/
         );
