@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/4420e76c6ad3707a3ddf.css" rel="stylesheet">
+      <link href="/88cb02e79568c93c52fe.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -64,7 +64,6 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 each environment. For example:</p>
 <p><strong> dev.js </strong></p>
 <pre><code class="lang-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>env<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    debug<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     devtool<span class="token punctuation">:</span> <span class="token string">&apos;cheap-module-source-map&apos;</span><span class="token punctuation">,</span>
     output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
         path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&apos;/../dist/assets&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -84,7 +83,6 @@ each environment. For example:</p>
 </code></pre>
 <p><strong> prod.js </strong></p>
 <pre><code class="lang-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>env<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    debug<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
     output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
         path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&apos;/../dist/assets&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
         filename<span class="token punctuation">:</span> <span class="token string">&apos;[name].bundle.js&apos;</span><span class="token punctuation">,</span>
@@ -188,7 +186,6 @@ Let us look at an example where we merge our prod file, mentioned above, with th
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>env<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token function">webpackMerge</span><span class="token punctuation">(</span><span class="token function">commonConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
-        debug<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
         plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
             <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>LoaderOptionsPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
                 minimize<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -199,7 +196,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
                     <span class="token string">&apos;NODE_ENV&apos;</span><span class="token punctuation">:</span> JSON<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token string">&apos;prod&apos;</span><span class="token punctuation">)</span>
                 <span class="token punctuation">}</span>
             <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>optimize<span class="token punctuation">.</span>UglifyJsPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+            <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>optimize<span class="token punctuation">.</span>UglifyJsPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
                 beautify<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                 mangle<span class="token punctuation">:</span> <span class="token punctuation">{</span>
                     screw_ie8<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
