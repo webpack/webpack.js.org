@@ -8,11 +8,11 @@
     </url>    <url>
         <loc>https://webpack.js.org/branding/index.html</loc>
     </url>    <url>
+        <loc>https://webpack.js.org/concepts/index.html</loc>
+    </url>    <url>
         <loc>https://webpack.js.org/configuration/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/contribute/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/concepts/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/get-started/index.html</loc>
     </url>    <url>
@@ -34,11 +34,31 @@
     </url>    <url>
         <loc>https://webpack.js.org/api/cli/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/api/node/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/api/loaders/index.html</loc>
     </url>    <url>
+        <loc>https://webpack.js.org/api/node/index.html</loc>
+    </url>    <url>
         <loc>https://webpack.js.org/api/plugins/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts/configuration/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts/dependency-graph/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts/entry-points/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts/hot-module-replacement/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts/loaders/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts/module-resolution/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts/modules/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts/output/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts/plugins/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts/targets/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/dev-server/index.html</loc>
     </url>    <url>
@@ -71,26 +91,6 @@
         <loc>https://webpack.js.org/configuration/target/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/watch/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/concepts/configuration/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/concepts/dependency-graph/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/concepts/entry-points/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/concepts/hot-module-replacement/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/concepts/loaders/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/concepts/module-resolution/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/concepts/modules/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/concepts/output/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/concepts/plugins/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/concepts/targets/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/get-started/install-webpack/index.html</loc>
     </url>    <url>
