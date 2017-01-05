@@ -1,6 +1,6 @@
 const antwar = require('antwar');
 
-const environment = process.env.npm_lifecycle_event;
+const environment = process.env.npm_lifecycle_event || 'build';
 
 // Patch Babel env to make HMR switch work
 process.env.BABEL_ENV = environment;
