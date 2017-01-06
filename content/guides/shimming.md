@@ -1,5 +1,5 @@
 ---
-title: Shimming
+title: Shim
 sort: 17
 contributors:
   - pksjce
@@ -127,3 +127,7 @@ module.exports = {
   }
 };
 ```
+
+***
+
+> 原文：https://webpack.js.org/guides/shimming/

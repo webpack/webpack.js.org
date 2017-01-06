@@ -1,5 +1,5 @@
 ---
-title: Loaders
+title: Loader
 sort: 1
 contributors:
   - ev1stensberg

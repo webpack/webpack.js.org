@@ -55,3 +55,7 @@ __webpack_public_path__ = process.env.ASSET_PATH;
 That's all you need. Since we're already using the `DefinePlugin` on our
 configuration, `process.env.ASSET_PATH` will always be defined so we can safely
 do that.
+
+***
+
+> 原文：https://webpack.js.org/guides/public-path/

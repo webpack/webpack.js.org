@@ -1,5 +1,5 @@
 ---
-title: Development
+title: 开发
 sort: 9
 contributors:
   - SpaceK33z
@@ -145,3 +145,7 @@ There are many more options you can use. For all configuration options, see the 
 ## References
 
 * [SurviveJS - Automatic Browser Refresh](http://survivejs.com/webpack/developing-with-webpack/automatic-browser-refresh/)
+
+***
+
+> 原文：https://webpack.js.org/guides/development/

@@ -1,14 +1,15 @@
 ---
-title: Building for Production
+title: 生产环境构建
 sort: 13
 contributors:
   - henriquea
   - rajagopal4890
   - markerikson
   - simon04
+  - xie-qianyue
 ---
 
-This page explains how to generate production builds with webpack.
+此页解释了如何使用 webpack 生成用于生产环境的 build。
 
 ## The automatic way
 
@@ -19,6 +20,8 @@ Running `webpack -p` (or equivalently `webpack --optimize-minimize --define proc
 - Sets the Node environment variable
 
 ### Minification
+
+webpack 自带了 `UglifyJsPlugin`，它运行 [UglifyJS](http://lisperator.net/uglifyjs/) 来最小化输出文件。你可以在初始化时传入一个包含 [UglifyJS 选项](https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin) 的对象。
 
 webpack comes with `UglifyJsPlugin`, which runs [UglifyJS](http://lisperator.net/uglifyjs/) in order to minimize the output. The plugin supports all of [UglifyJS options](https://github.com/mishoo/UglifyJS2#usage). Specifying `--optimize-minimize` on the command line, the following plugin configuration is added:
 
@@ -241,3 +244,7 @@ You will notice three major updates to our 'prod.js' file.
 The choice of what is going to be common across all your environments is upto you, however. We have just demonstrated a few that could typically be common across environments when we build our application. 
 
 You just saw, how powerful 'webpack-merge' is, that, it just saved us from a lot of code repetitions.
+
+***
+
+> 原文：https://webpack.js.org/guides/production-build/

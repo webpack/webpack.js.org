@@ -1,5 +1,5 @@
 ---
-title: Improving Build Performance
+title: 改善构建性能
 sort: 15
 ---
 
@@ -14,3 +14,7 @@ sort: 15
 
 > see also [[development tools]]
 > see also [[resolving]]
+
+***
+
+> 原文：https://webpack.js.org/guides/build-performance/

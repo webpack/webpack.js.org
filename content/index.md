@@ -1,7 +1,7 @@
 ---
 title: webpack
 ---
-## Write your code.
+## 编写代码
 
 **app.js**
 
@@ -19,8 +19,7 @@ export default function bar() {
 }
 ```
 
-## Bundle with webpack.
-
+## 用 webpack 打包[模块]
 **webpack.config.js**
 
 ```js
@@ -48,5 +47,5 @@ module.exports = {
 
 Then run `webpack` on the command-line to create `bundle.js`.
 
-## It's that simple.
-## [Get Started](/get-started)
+## 很简单
+## 即刻[起步](/get-started)

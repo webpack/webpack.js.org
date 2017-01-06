@@ -1,5 +1,5 @@
 ---
-title: Code Splitting - Using RequireJS
+title: 代码分割 - 使用 RequireJS
 sort: 5
 contributors:
   - pksjce
@@ -96,3 +96,7 @@ require.ensure(['./a.js'], function(require) {
 
 In the above code, `a.js` and `b.js` are bundled together and split from the main bundle. But only the contents of `b.js` are executed. The contents of `a.js` are only made available and not executed.
 To execute `a.js`, we will have to require it in a sync manner like `require('./a.js')` for the JavaScript to get executed.
+
+***
+
+> 原文：https://webpack.js.org/guides/code-splitting-require/

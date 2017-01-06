@@ -1,9 +1,10 @@
 ---
-title: Entry and Context
+title: Entry 和 Context
 sort: 4
 contributors:
   - sokra
   - skipjack
+  - dear-lizhihua
 ---
 
 ?> TODO: Short description
@@ -12,13 +13,13 @@ contributors:
 
 `string`
 
-The base directory, an **absolute path**, for resolving entry points and loaders from configuration.
+基础目录，**绝对路径**，用于从配置中解析入口起点(entry point)和加载器(loader)
 
 ``` js
 context: path.resolve(__dirname, "app")
 ```
 
-By default the current directory is used, but it's recommended to pass a value in your configuration. This makes your configuration independent from CWD.
+默认使用当前目录，但是推荐在配置中传递一个值。这使得你的配置独立于 CWD。（译者注：这个？[CWD](http://gruntjs.com/configuring-tasks#building-the-files-object-dynamically)）
 
 ---
 
@@ -26,11 +27,11 @@ By default the current directory is used, but it's recommended to pass a value i
 
 `string | [string] | object { <key>: string | [string] }`
 
-The point or points to enter the application. At this point the application starts executing. If an array is passed all items will be executed.
+起点或是应用程序的起点入口。从这个起点开始，应用程序启动执行。如果传递一个数组，那么数组的每一项都会执行。
 
-A dynamically loaded module is **not** an entry point.
+动态加载的模块**不是**入口起点。
 
-Simple rule: one entry point per HTML page. SPA: one entry point, MPA: multiple entry points.
+简单规则：每个 HTML 页面都有一个入口起点。单页应用(SPA)：一个入口起点，多页应用(MPA)：多个入口起点。
 
 ```js
 entry: {
@@ -40,4 +41,8 @@ entry: {
 }
 ```
 
-When combining with the [`output.library`](/configuration/output#output-library) option: If an array is passed only the last item is exported.
+当结合 [`output.library`](/configuration/output#output-library) 选项时：如果传入数组，则只导出最后一项。
+
+***
+
+> 原文：https://webpack.js.org/configuration/entry-context/

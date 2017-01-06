@@ -5,6 +5,7 @@ contributors:
   - sokra
   - skipjack
   - pksjce
+  - dear-lizhihua
 ---
 
 `externals` configuration in webpack provides a way of not including a dependency in the bundle. Instead the created bundle relies on that dependency to be present in the consumers environment.
@@ -14,9 +15,9 @@ This typically applies to library developers though application developers can m
 
 `string` `regex` `function` `array` `object`
 
-**Prevent bundling** of certain `import`ed packages and instead retrieve these *external packages at runtime*.
+**防止打包**某些 `import` 的包(package)，而是*在运行时再去获取这些外部扩展包(package)*。
 
-For example, to include [jQuery](https://jquery.com/) from a CDN instead of bundling it:
+例如，从 CDN 引入 [jQuery](https://jquery.com/)，而不是把它打包在源文件中：
 
 **index.html**
 
@@ -36,7 +37,7 @@ externals: {
 }
 ```
 
-This leaves any dependant modules unchanged, i.e. the code shown below will still work:
+这样就脱离了那些不需要改动的独立模块，换句话，下面展示的代码还可以正常运行：
 
 ```javascript
 import $ from 'jquery';
@@ -99,3 +100,7 @@ This syntax is used to describe all the possible ways that an external library c
 ?> TODO - I think its overkill to list externals as regex.
 
 For more information on how to use this configuration, please refer to the article on [how to author a library](/guides/author-libraries).
+
+***
+
+> 原文：https://webpack.js.org/configuration/externals/

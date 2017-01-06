@@ -1,14 +1,15 @@
 ---
-title: Stats
+title: 统计(Stats)
 sort: 15
 contributors:
   - SpaceK33z
   - sallar
+  - viko16
 ---
 
-The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
+`stats` 选项能让你准确地控制显示哪些包的信息。如果你希望得到部分包的信息（而不是一股脑全部输出），而不想使用 `quiet` 或者 `noInfo` 模式的时候，这个选项是一个很好的折衷办法。
 
-T> For webpack-dev-server, this property needs to be in the `devServer` object.
+T> 对于 webpack-dev-server ，这个属性要放在 `devServer` 对象里。
 
 W> This option does not have any effect when using the Node.js API.
 
@@ -16,7 +17,7 @@ W> This option does not have any effect when using the Node.js API.
 
 `object` `string`
 
-There are some presets available to use as a shortcut. Use them like this:
+预设选项：`none`, `errors-only`, `minimal` 和 `verbose`。使用方法：
 
 ```js
 stats: "errors-only"
@@ -24,55 +25,59 @@ stats: "errors-only"
 
 | Preset | Alternative | Description |
 |--------|-------------|-------------|
-| `"errors-only"` | *none*  | Only output when errors happen |
-| `"minimal"`     | *none*  | Only output when errors or new compilation happen |
-| `"none"`        | `false` | Output nothing |
-| `"normal"`      | `true`  | Standard output |
-| `"verbose"`     | *none*  | Output everything |
+| `"errors-only"` | *none*  | 只在发生错误时输出 |
+| `"minimal"`     | *none*  | 只在发生错误 或是 新的编译时输出 |
+| `"none"`        | `false` | 没有输出 |
+| `"normal"`      | `true`  | 标准输出 |
+| `"verbose"`     | *none*  | 全部输出 |
 
-For more granular control, it is possible to specify exactly what information you want. Please note that all of the options in this object are optional.
+对于更加精细的控制，这些选项可以准确地列出你想要的信息。请注意，此对象中的所有选项都是可选的。
 
 ``` js
 stats: {
-  // Add asset Information
+  // 增加资源信息
   assets: true,
-  // Sort assets by a field
+  // 对资源按指定的项进行排序
   assetsSort: "field",
-  // Add information about cached (not built) modules
+  // 增加缓存了的（但没构建）模块的信息
   cached: true,
-  // Add children information
+  // 增加子级的信息
   children: true,
-  // Add chunk information (setting this to `false` allows for a less verbose output)
+  // 增加包信息（设置为 `false` 能允许较少的冗长输出）
   chunks: true,
-  // Add built modules information to chunk information
+  // 将内置模块信息增加到包信息
   chunkModules: true,
-  // Add the origins of chunks and chunk merging info
+  // 增加包 和 包合并 的来源信息
   chunkOrigins: true,
-  // Sort the chunks by a field
+  // 对包按指定的项进行排序
   chunksSort: "field",
-  // Context directory for request shortening
+  // 用于缩短请求的上下文目录
   context: "../src/",
-  // Add errors
+  // 增加错误信息
   errors: true,
-  // Add details to errors (like resolving log)
+  // 增加错误的详细信息（就像解析日志一样）
   errorDetails: true,
-  // Add the hash of the compilation
+  // 增加编译的哈希值
   hash: true,
-  // Add built modules information
+  // 增加内置的模块信息
   modules: true,
-  // Sort the modules by a field
+  // 对模块按指定的项进行排序
   modulesSort: "field",
-  // Add public path information
+  // 增加 publicPath 的信息
   publicPath: true,
-  // Add information about the reasons why modules are included
+  // 增加模块被引入的原因
   reasons: true,
-  // Add the source code of modules
+  // 增加模块的源码
   source: true,
-  // Add timing information
+  // 增加时间信息
   timings: true,
-  // Add webpack version information
+  // 增加 webpack 版本信息
   version: true,
-  // Add warnings
+  // 增加提示
   warnings: true
 };
 ```
+
+***
+
+> 原文：https://webpack.js.org/configuration/stats/

@@ -1,5 +1,5 @@
 ---
-title: Resolve
+title: 解析(Resolve)
 sort: 7
 contributors:
   - sokra
@@ -7,6 +7,7 @@ contributors:
   - SpaceK33z
   - pksjce
   - sebastiandeutsch
+  - dear-lizhihua
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail.
@@ -304,3 +305,7 @@ A function which decides whether a request should be cached or not. An object is
 ```js
 cachePredicate: function() { return true }
 ```
+
+***
+
+> 原文：https://webpack.js.org/configuration/resolve/

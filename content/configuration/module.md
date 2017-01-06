@@ -1,19 +1,20 @@
 ---
-title: Module
+title: 模块
 sort: 6
 contributors:
   - sokra
   - skipjack
   - jouni-kantola
+  - dear-lizhihua
 ---
 
-These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
+这些选项决定了如何处理项目中的[不同类型的模块](/concepts/modules)。
 
 ## `module.noParse`
 
 `RegExp | [RegExp]`
 
-Prevent webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries.
+防止 webpack 解析那些任何与给定正则表达式相匹配的文件。忽略的文件**不应该被** `import`, `require`, `define`  或者任何其他导入机制调用。忽略大型库文件(library)可以提高构建性能。
 
 ```js
 noParse: /jquery|backbone/
@@ -23,155 +24,155 @@ noParse: /jquery|backbone/
 
 `array`
 
-An array of [Rules](#rule) which are matched to requests when modules are created. These rules can modify how the module is created. They can apply loaders to the module, or modify the parser.
+创建模块时，匹配请求的[规则](#rule)数组。这些规则能够修改模块的创建方式。这些规则能够对模块(module)应用加载器(loader)，或者修改解析器(parser)。
 
 
 ## Rule
 
-A Rule can be separated into three parts — Conditions, Results and nested Rules.
+每个规则可以分为三部分 - 条件(condition)，结果(result)和嵌套规则(nested rule)。
 
-### Rule conditions
+### Rule 条件
 
-There are two input values for the conditions:
+条件有两种输入值：
 
-1. The resource: An absolute path to the file requested. It's already resolved according the [`resolve` rules](/configuration/resolve).
+1. resource：请求文件的绝对路径。它已经根据 [`resolve` 规则](/configuration/resolve)解析。
 
-2. The issuer: An absolute path to the file of the module which requested the resource. It's the location of the import.
+2. issuer: 被请求资源(requested the resource)的模块文件的绝对路径。是导入时的位置。
 
-**Example:** When we `import "./style.css"` from `app.js`, the resource is `/path/to/style.css` and the issuer is `/path/to/app.js`.
+**例如:** 从 `app.js` `导入 "./style.css"`，resource 是 `/path/to/style.css`. issuer 是 `/path/to/app.js`。
 
-In a Rule the properties [`test`](#rule-test), [`include`](#rule-include), [`exclude`](#rule-exclude) and [`resource`](#rule-resource) are matched with the resource and the property [`issuer`](#rule-issuer) is matched with the issuer.
+在规则中，属性 [`test`](#rule-test), [`include`](#rule-include), [`exclude`](#rule-exclude) 和 [`resource`](#rule-resource) 对 resource 匹配，并且属性 [`issuer`](#rule-issuer) 对 issuer 匹配。
 
-When using multiple conditions, all conditions must match.
+当使用多个条件时，所有条件都匹配。
 
-### Rule results
+### Rule 结果
 
-Rule results are used only when the Rule condition matches.
+规则结果只在规则条件匹配时使用。
 
-There are two output values of a Rule:
+规则有两种输入值：
 
-1. Applied loaders: An array of loaders applied to the resource.
+1. 应用的 loader：应用在 resource 上的 loader 数组。
 
-2. Parser options: An options object which should be used to create the parser for this module.
+2. Parser 选项：用于为模块创建解析器的选项对象。
 
-These properties affect the loaders: [`loader`](#rule-loader), [`options`](#rule-options-rule-query), [`use`](#rule-use).
+这些属性会影响 loader：[`loader`](#rule-loader), [`options`](#rule-options-rule-query), [`use`](#rule-use)。
 
-For compatibility also these properties: [`query`](#rule-options-rule-query), [`loaders`](#rule-loaders).
+也兼容这些属性：[`query`](#rule-options-rule-query), [`loaders`](#rule-loaders)。
 
-The [`enforce`](#rule-enforce) property affect the loader category. Whether it's an normal, pre- or post- loader.
+[`enforce`](#rule-enforce) 属性会影响 loader 种类。不论是普通的，前置的，后置的 loader。
 
-The [`parser`](#rule-parser) property affect the parser options.
+[`parser`](#rule-parser) 属性会影响 parser 选项。
 
 
-## Nested rules
+## 嵌套的 Rule
 
-Nested rules can be specified under the properties [`rules`](#rule-rules) and [`oneOf`](#rule-oneof). 
+可以使用属性 [`rules`](#rule-rules) 和 [`oneOf`](#rule-oneof) 指定嵌套规则。
 
-These rules are evaluated when the Rule condition matches.
+这些规则用于在规则条件(rule condition)匹配时进行取值。
 
 ## `Rule.enforce`
 
-Possible values: `"pre" | "post"`
+可能的值有：`"pre" | "post"`
 
-Specifies the category of the loader. No value means normal loader.
+指定 loader 种类。没有值表示是普通 loader。
 
-There is also an additional category "inlined loader" which are loaders applied inline of the import/require.
+还有一个额外的种类"行内 loader"，loader 被应用在 import/require 行内。
 
-All loaders are sorted in the order `post, inline, normal, pre` and used in this order.
+所有 loader 通过 `后置, 行内, 普通, 前置` 排序，并按此顺序使用。
 
-All normal loaders can be omitted (overridden) by prefixing `!` in the request.
+所有普通 loader 可以通过在请求中加上 `!` 前缀来忽略（覆盖）。
 
-All normal and pre loaders can be omitted (overridden) by prefixing `-!` in the request.
+所有普通和前置 loader 可以通过在请求中加上 `-!` 前缀来忽略（覆盖）。
 
-All normal, post and pre loaders can be omitted (overridden) by prefixing `!!` in the request.
+所有普通，后置和前置 loader 可以通过在请求中加上 `!!` 前缀来忽略（覆盖）。
 
-Inline loaders and `!` prefixes should not be used as they are non-standard. They may be use by loader generated code.
+不应该使用行内 loader 和 `!` 前缀，因为它们是非标准的。它们可在由 loader 生成的代码中使用。
 
 
 ## `Rule.exclude`
 
-`Rule.exclude` is a shortcut to `Rule.resource.exclude`. See [`Rule.resource`](#rule-resource) and [`Condition.exclude`](#condition) for details.
+`Rule.exclude` 是 `Rule.resource.exclude` 的简写。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.exclude`](#condition)。
 
 
 ## `Rule.include`
 
-`Rule.include` is a shortcut to `Rule.resource.include`. See [`Rule.resource`](#rule-resource) and [`Condition.include`](#condition) for details.
+`Rule.include` 是 `Rule.resource.include` 的简写。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.include`](#condition)。
 
 
 ## `Rule.issuer`
 
-A [`Condition`](#condition) matched with the issuer. See details in [`Rule` conditions](#rule-conditions).
+[`条件`](#condition)会匹配 issuer。在 [`Rule` 条件](#rule-conditions) 中查看详细。
 
 
 ## `Rule.loader`
 
-`Rule.loader` is a shortcut to `Rule.use: [ { loader } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.loader`](#useentry) for details.
+`Rule.loader` 是 `Rule.use: [ { loader } ]` 的简写。详细请查看 [`Rule.use`](#rule-use) 和 [`UseEntry.loader`](#useentry)。
 
 
 ## `Rule.loaders`
 
-`Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#rule-use) for details.
+`Rule.loaders` 是 `Rule.use` 的别名。详细请查看 [`Rule.use`](#rule-use)。
 
-It exists for compatibility reasons. Use `Rule.use` instead.
+由于兼容性原因而存在。请使用 `Rule.use` 代替。
 
 
 ## `Rule.oneOf`
 
-An array of [`Rules`](#rule) from which only the first matching Rule is used when the Rule matches.
+[`规则`](#rule)数组，当规则匹配时，只使用第一个匹配规则。
 
 
 ## `Rule.options / Rule.query`
 
-`Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.options`](#useentry) for details.
+`Rule.options` 和 `Rule.query` 是 `Rule.use: [ { options } ]` 的简写。详细请查看 [`Rule.use`](#rule-use) 和 [`UseEntry.options`](#useentry)。
 
-`Rule.query` only exists for compatibility reasons. Use `Rule.options` instead.
+`Rule.query` 仅由于兼容性原因而存在。请使用 `Rule.options` 代替。
 
 
 ## `Rule.parser`
 
-An object with parser options. All applied parser options are merged.
+解析选项对象。所有应用的解析选项被合并。
 
-For each different parser options object a new parser is created and plugins can apply plugins depending on the parser options. Many of the default plugins apply their parser plugins only if a property in the parser options is not set or true.
+为每个不同的解析器选项对象，创建新的解析器，并且插件可以应用在那些依赖解析器选项的插件。许多默认插件，仅在解析器选项属性未设置或为 true 时，应用解析器插件。
 
-**Examples** (parser options by the default plugins):
+**示例**（默认的插件解析器选项）：
 
 ``` js-with-links
 parser: {
-  amd: false, // disable AMD
-  commonjs: false, // disable CommonJS
-  system: false, // disable SystemJS
-  harmony: false, // disable ES6 Harmony import/export
-  requireInclude: false, // disable require.include
-  requireEnsure: false, // disable require.ensure
-  requireContext: false, // disable require.context
-  browserify: false, // disable special handling of Browserify bundles
-  requireJs: false, // disable requirejs.*
-  node: false, // disable __dirname, __filename, module, require.extensions, require.main, etc.
-  node: {...} // reconfigure [node](/configuration/node) layer on module level
+  amd: false, // 禁用 AMD
+  commonjs: false, // 禁用 CommonJS
+  system: false, // 禁用 SystemJS
+  harmony: false, // 禁用 ES6 Harmony import/export
+  requireInclude: false, // 禁用 require.include
+  requireEnsure: false, // 禁用 require.ensure
+  requireContext: false, // 禁用 require.context
+  browserify: false, // 禁用特殊处理的 browserify bundle
+  requireJs: false, // 禁用 requirejs.*
+  node: false, // 禁用 __dirname, __filename, module, require.extensions, require.main 等。
+  node: {...} // 在模块级别(module level)上重新配置 [node](/configuration/node) 层(layer)
 }
 ```
 
 
 ## `Rule.resource`
 
-A [`Condition`](#condition) matched with the resource. See details in [`Rule` conditions](#rule-conditions).
+[`条件`](#condition)会匹配 resource。在 [`Rule` 条件](#rule-conditions) 中查看详细。
 
 
 ## `Rule.rules`
 
-An array of [`Rules`](#rule) that is also used when the Rule matches.
+[`规则`](#rule)数组，当规则匹配时使用。
 
 
 ## `Rule.test`
 
-`Rule.test` is a shortcut to `Rule.resource.test`. See [`Rule.resource`](#rule-resource) and [`Condition.test`](#condition) for details.
+`Rule.test` 是 `Rule.resource.test` 的简写。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.test`](#condition)。
 
 
 ## `Rule.use`
 
-A list of [UseEntries](#useentry) which are applied to modules. Each entry specifies a loader to be used.
+应用于模块的 [UseEntries](#useentry) 列表。每个入口(entry)指定使用一个 loader。
 
-Passing a string (i.e. `use: [ "style-loader" ]`) is a shortcut to the loader property (i.e. `use: [ { loader: "style-loader "} ]`).
+传递字符串（如：`use: [ "style-loader" ]`）是 loader 属性的简写方式（如：`use: [ { loader: "style-loader "} ]`）。
 
 Loaders can be chained by passing multiple loaders, which will be applied from right to left (last to first configured).
 
@@ -195,30 +196,30 @@ use: [
 ]
 ```
 
-See [UseEntry](#useentry) for details.
+详细请查看 [UseEntry](#useentry)。
 
 
-## `Condition`
+## `条件`
 
-Conditions can be one of these:
+条件可以是这些之一：
 
-* A string: To match the input must start with the provided string. I. e. an absolute directory path, or absolute path to the file.
-* A RegExp: It's tested with the input.
-* A function: It's called with the input and must return a truthy value to match.
-* An array of Conditions: At least one of the Condition must match.
-* A object: All properties must match. Each property has a defined behavior.
+* 字符串：匹配输入必须以提供的字符串开始。是的。目录绝对路径或文件绝对路径。
+* 正则表达式：test 输入值。
+* 函数：调用输入的函数，必须返回一个真值(truthy value)以匹配。
+* 条件数组：至少一个匹配条件。
+* 对象：匹配所有属性。每个属性都有一个定义行为。
 
-`{ test: Condition }`: The Condition must match. The convention is the provide a RegExp or array of RegExps here, but it's not enforced.
+`{ test: Condition }`：匹配条件。约定了提供一个正则或正则数组，但不是强制的。
 
-`{ include: Condition }`: The Condition must match. The convention is the provide a string or array of strings here, but it's not enforced.
+`{ include: Condition }`：匹配条件。约定了提供一个字符串或字符串数组，但不是强制的。
 
-`{ exclude: Condition }`: The Condition must NOT match. The convention is the provide a string or array of strings here, but it's not enforced.
+`{ exclude: Condition }`：不能匹配条件。约定了提供一个字符串或字符串数组，但不是强制的。
 
-`{ and: [Condition] }`: All Conditions must match.
+`{ and: [Condition] }`：匹配所有条件
 
-`{ or: [Condition] }`: Any Condition must match.
+`{ or: [Condition] }`：匹配任何条件
 
-`{ not: Condition }`: The Condition must NOT match.
+`{ not: Condition }`：不能匹配条件
 
 **Example:**
 
@@ -237,11 +238,11 @@ Conditions can be one of these:
 
 `object`
 
-It must have a `loader` property being a string. It is resolved relative to the configuration [`context`](/configuration/entry-context#context) with the loader resolving options ([resolveLoader](/configuration/resolve#resolveloader)).
+必须有一个 `loader` 属性是字符串。它使用 loader 解析选项（[resolveLoader](/configuration/resolve#resolveloader)），相对于配置中的 [`context`](/configuration/entry-context#context) 来解析。
 
-It can have a `options` property being a string or object. This value is passed to the loader, which should interpret it as loader options.
+可以有一个 `options` 属性为字符串或对象。值可以传递到 loader 中，将其理解为 loader 选项。
 
-For compatibility a `query` property is also possible, which is an alias for the `options` property. Use the `options` property instead.
+由于兼容性原因，也可能有 `query` 属性，它是 `options` 属性的别名。使用 `options` 属性替代。
 
 **Example:**
 
@@ -254,22 +255,22 @@ For compatibility a `query` property is also possible, which is an alias for the
 }
 ```
 
-Note that webpack need to generate an unique module identifier from resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9%, but may be not unique if you apply the same loaders with different options to the same resource and the options have some stringified values. It also breaks if the options object cannot be stringified (i. e. circular JSON). Because of this you can have a `ident` property in the options object which is used as unique identifier.
+注意，webpack 需要生成资源和所有 loader 的独立模块标识，包括选项。它尝试对选项对象使用 `JSON.stringify`。这在 99.9% 的情况下是可以的，但是如果将相同的 loader 应用于相同资源的不同选项，并且选项具有一些带字符的值，则可能不是唯一的。如果选项对象不被字符化（例如循环 JSON），它也会中断。因此，你可以在选项对象使用 `ident` 属性，作为唯一标识符。
 
 
-## Module Contexts
+## 模块上下文
 
-(Deprecated)
+（废弃）
 
-These options describe the default settings for the context created when a dynamic dependency is encountered.
+这些选项描述了当遇到动态依赖时，创建上下文的默认设置。
 
-Example for an `unknown` dynamic dependency: `require`.
+例如，`未知的(unknown)` 动态依赖：`require`。
 
-Example for an `expr` dynamic dependency: `require(expr)`.
+例如，`表达式(expr)` 动态依赖：`require(expr)`。
 
-Example for an `wrapped` dynamic dependency: `require("./templates/" + expr)`.
+例如，`包裹的(wrapped)` 动态依赖：`require("./templates/" + expr)`。
 
-Here are the available options with their defaults:
+以下是其默认值的可用选项
 
 ```js
 module: {
@@ -287,11 +288,14 @@ module: {
 }
 ```
 
-Note: You can use the `ContextReplacementPlugin` to modify these values for individual dependencies. This also removes the warning.
+注意：你可以使用 `ContextReplacementPlugin` 来修改这些单个依赖的值。这也会删除警告。
 
-A few use cases:
+几个用例：
 
-* Warn for dynamic dependencies: `wrappedContextCritical: true`.
-* `require(expr)` should include the whole directory: `exprContextRegExp: /^\.\//`
-* `require("./templates/" + expr)` should not include subdirectories by default: `wrappedContextRecursive: false`
+* 动态依赖的警告：`wrappedContextCritical: true`。
+* `require(expr)` 应该包含整个目录：`exprContextRegExp: /^\.\//`
+* `require("./templates/" + expr)` 不应该包含默认子目录：`wrappedContextRecursive: false`
 
+***
+
+> 原文：https://webpack.js.org/configuration/module/

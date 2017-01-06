@@ -1,5 +1,5 @@
 ---
-title: Migrating from v1 to v2
+title: 从 v1 迁移到 v2
 sort: 19
 contributors:
   - sokra
@@ -457,3 +457,7 @@ It is important to note that you will want to tell Babel to not parse these modu
   ]
 }
 ```
+
+***
+
+> 原文：https://webpack.js.org/guides/migrating/

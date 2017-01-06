@@ -5,6 +5,7 @@ contributors:
   - sokra
   - skipjack
   - SpaceK33z
+  - dear-lizhihua
 ---
 
 This option controls if and how Source Maps are generated.
@@ -13,18 +14,18 @@ This option controls if and how Source Maps are generated.
 
 `string` `false`
 
-Choose a style of [source mapping](http://blog.teamtreehouse.com/introduction-source-maps) to enhance the debugging process. These values can affect build and rebuild speed dramatically.
+选择一种 [源映射(source mapping)](http://blog.teamtreehouse.com/introduction-source-maps) 来增强调试过程。注意，以下选项能够可能会显著地影响构建(build)和重构建(rebuild)的速度……
 
  devtool                      | build | rebuild | production | quality
 ------------------------------|-------|---------|------------|--------------------------
- eval                         | +++   | +++     | no         | generated code
- cheap-eval-source-map        | +     | ++      | no         | transformed code (lines only)
- cheap-source-map             | +     | o       | yes        | transformed code (lines only)
- cheap-module-eval-source-map | o     | ++      | no         | original source (lines only)
- cheap-module-source-map      | o     | -       | yes        | original source (lines only)
- eval-source-map              | --    | +       | no         | original source
- source-map                   | --    | --      | yes        | original source
- nosources-source-map         | --    | --      | yes        | without source content
+ eval                         | +++   | +++     | no         | 生成代码
+ cheap-eval-source-map        | +     | ++      | no         | 转换后代码（仅限行）
+ cheap-source-map             | +     | o       | yes        | 转换后代码（仅限行）
+ cheap-module-eval-source-map | o     | ++      | no         | 原始源码（仅限行）
+ cheap-module-source-map      | o     | -       | yes        | 原始源码（仅限行）
+ eval-source-map              | --    | +       | no         | 原始源码
+ source-map                   | --    | --      | yes        | 原始源码
+  nosources-source-map         | --    | --      | yes        | 无源码内容
 
 Some of these values are suited for development and some for production. For development you typically want very fast Source Maps at the cost of bundle size, but for production you want separate Source Maps that are accurate.
 
@@ -61,3 +62,7 @@ T> See [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilena
 - [Enabling Sourcemaps](http://survivejs.com/webpack/developing-with-webpack/enabling-sourcemaps/)
 - [webpack devtool source map](http://cheng.logdown.com/posts/2016/03/25/679045
 )
+
+***
+
+> 原文：https://webpack.js.org/configuration/devtool/

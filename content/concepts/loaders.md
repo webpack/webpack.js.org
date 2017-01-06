@@ -1,5 +1,5 @@
 ---
-title: Loaders
+title: 加载器(Loaders)
 sort: 4
 contributors:
   - manekinekko
@@ -35,3 +35,7 @@ Loaders are [resolved similar to modules](/concepts/module-resolution/). A loade
 By convention, loaders are usually named as `XXX-loader`, where `XXX` is the context name. For example, `json-loader`.
 
 The loader name convention and precedence search order is defined by [`resolveLoader.moduleTemplates`](/configuration/resolve#resolveloader) within the webpack configuration API.
+
+***
+
+> 原文：https://webpack.js.org/concepts/loaders/

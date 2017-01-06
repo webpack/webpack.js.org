@@ -1,5 +1,5 @@
 ---
-title: Writer's Guide
+title: 作者指南
 ---
 
 ## Process

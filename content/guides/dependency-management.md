@@ -1,5 +1,5 @@
 ---
-title: Dependency Management
+title: 管理依赖
 sort: 6
 contributors:
   - ndelangen
@@ -95,3 +95,7 @@ The exported function has 3 properties: `resolve`, `keys`, `id`.
   // At build-time cache will be polulated with all required modules.
   ```
 - `id` is the module id of the context module. This may be useful for `module.hot.accept`.
+
+***
+
+> 原文：https://webpack.js.org/guides/dependency-management/

@@ -1,5 +1,5 @@
 ---
-title: Lazy Loading - React
+title: 懒加载 - React
 sort: 14
 contributors:
   - iammerrick
@@ -153,3 +153,7 @@ export default LazilyLoad;
 - [Function as Child Components](http://merrickchristensen.com/articles/function-as-child-components.html)
 - [Example Repository](https://github.com/iammerrick/how-to-lazy-load-react-webpack)
 - [Bundle Loader](https://github.com/webpack/bundle-loader)
+
+***
+
+> 原文：https://webpack.js.org/guides/lazy-load-react/

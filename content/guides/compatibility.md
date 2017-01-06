@@ -1,5 +1,5 @@
 ---
-title: Handling Compatibility
+title: 处理兼容
 sort: 11
 ---
 
@@ -11,3 +11,7 @@ sort: 11
 > __dirname
 > __filename
 > module.id
+
+***
+
+> 原文：https://webpack.js.org/guides/compatibility/
