@@ -46,5 +46,7 @@ module.exports = {
 </html>
 ```
 
+Then run `webpack` on the command-line to create `bundle.js`.
+
 ## It's that simple.
 ## [Get Started](/get-started)
