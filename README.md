@@ -19,3 +19,7 @@ For more information see the [contributors page](https://github.com/webpack/webp
 ## Content Progress
 
 Check out the [MVP Milestone](https://github.com/webpack/webpack.js.org/milestones) for the current status.
+
+## License
+
+The content is available under [Creative Commons BY 4.0](https://creativecommons.org/licenses/by/4.0/) license.
