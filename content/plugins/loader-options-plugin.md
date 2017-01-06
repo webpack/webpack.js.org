@@ -29,7 +29,7 @@ new webpack.LoaderOptionsPlugin(options)
 new webpack.LoaderOptionsPlugin({
   minimize: true,
   debug: false,
-  options {
+  options: {
     context: __dirname
   }
 })
