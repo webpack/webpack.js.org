@@ -10,6 +10,8 @@ The `stats` option lets you precisely control what bundle information gets displ
 
 T> For webpack-dev-server, this property needs to be in the `devServer` object.
 
+W> This option does not have any effect when using the Node.js API.
+
 ## `stats`
 
 `object` `string`
