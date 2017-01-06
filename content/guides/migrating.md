@@ -7,6 +7,7 @@ contributors:
   - grgur
   - domfarolino
   - johnnyreilly
+  - jouni-kantola
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -58,6 +59,62 @@ The new naming conventions are easier to understand and are a good reason to upg
       }
     ]
   }
+```
+
+## Chaining loaders
+
+Like in webpack v1, loaders can be chained to pass results from loader to loader. Using the [rule.use](/configuration/module#rule-use)
+configuration option, `use` can be set to a list of loaders. Loaders are evaluated from right to left (last to first configured).
+In webpack v1, loaders were commonly chained with `!`. This style is only supported using the legacy option `module.loaders`.
+
+```javascript
+// legacy loader chaining
+module: {
+  loaders: {
+    test: /\.less$/,
+    loader: "style-loader!css-loader!less-loader"
+  }
+}
+
+// v2 loader chaining with loader names
+module: {
+  rules: [
+    {
+      test: /\.less$/,
+      use: [
+        "style-loader",
+        "css-loader",
+        "less-loader"
+      ]
+    }
+  ]
+}
+
+// v2 loader chaining with configuration objects for each loader
+module: {
+  rules: [
+    {
+      test: /\.less$/,
+      use: [
+        {
+          loader: 'style-loader'
+        },
+        {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1
+          }
+        },
+        {
+          loader: 'less-loader',
+          options: {
+            noIeCompat: true
+          }
+        }
+      ]
+    }
+  ]
+}
 ```
 
 ## Automatic `-loader` module name extension removed
