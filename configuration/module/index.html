@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/f0b36995fd98b61a62eb.css" rel="stylesheet">
+      <link href="/37d9523e4d380be9b1fe.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -105,8 +105,27 @@
 <h2 class="header"><a class="anchor" href="#rule-test" id="rule-test"></a><span class="text"><code>Rule.test</code></span><a class="icon-link" href="#rule-test"></a></h2>
 <p><code>Rule.test</code> is a shortcut to <code>Rule.resource.test</code>. See <a href="#rule-resource"><code>Rule.resource</code></a> and <a href="#condition"><code>Condition.test</code></a> for details.</p>
 <h2 class="header"><a class="anchor" href="#rule-use" id="rule-use"></a><span class="text"><code>Rule.use</code></span><a class="icon-link" href="#rule-use"></a></h2>
-<p>A list of <a href="#useentry">UseEntries</a> which are applied to the module. Each entry specified a loader which should be used.</p>
-<p>Passing a string (i. e. <code>use: [ &quot;style-loader&quot; ]</code>) is a shortcut to the loader property (i. e. <code>use: [ { loader: &quot;style-loader &quot;} ]</code>).</p>
+<p>A list of <a href="#useentry">UseEntries</a> which are applied to modules. Each entry specifies a loader to be used.</p>
+<p>Passing a string (i.e. <code>use: [ &quot;style-loader&quot; ]</code>) is a shortcut to the loader property (i.e. <code>use: [ { loader: &quot;style-loader &quot;} ]</code>).</p>
+<p>Loaders can be chained by passing multiple loaders, which will be applied from right to left (last to first configured).</p>
+<pre><code class="lang-javascript">use<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    loader<span class="token punctuation">:</span> <span class="token string">&apos;css-loader&apos;</span><span class="token punctuation">,</span>
+    options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      importLoaders<span class="token punctuation">:</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    loader<span class="token punctuation">:</span> <span class="token string">&apos;less-loader&apos;</span><span class="token punctuation">,</span>
+    options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      noIeCompat<span class="token punctuation">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre>
 <p>See <a href="#useentry">UseEntry</a> for details.</p>
 <h2 class="header"><a class="anchor" href="#condition" id="condition"></a><span class="text"><code>Condition</code></span><a class="icon-link" href="#condition"></a></h2>
 <p>Conditions can be one of these:</p>
@@ -174,7 +193,7 @@
 <li><code>require(expr)</code> should include the whole directory: <code>exprContextRegExp: /^\.\//</code></li>
 <li><code>require(&quot;./templates/&quot; + expr)</code> should not include subdirectories by default: <code>wrappedContextRecursive: false</code></li>
 </ul>
-</div><hr style="display:block;"><h3 style="display:block;">Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/skipjack"><img src="https://github.com/skipjack.png?size=90"><span class="contributor__name"> skipjack</span></a><a class="contributor" href="https://github.com/sokra"><img src="https://github.com/sokra.png?size=90"><span class="contributor__name"> sokra</span></a></div></div></section></div><div class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/get-started" class="footer__link">Get Started</a><a href="/organization" class="footer__link">Organization</a><a href="/contribute" class="footer__link">Contribute</a><a href="/get-started/why-webpack#comparison" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg"></a></section><section class="footer__right"><a href="/branding" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Support</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link">License</a></section></div></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
+</div><hr style="display:block;"><h3 style="display:block;">Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/jouni-kantola"><img src="https://github.com/jouni-kantola.png?size=90"><span class="contributor__name"> jouni-kantola</span></a><a class="contributor" href="https://github.com/skipjack"><img src="https://github.com/skipjack.png?size=90"><span class="contributor__name"> skipjack</span></a><a class="contributor" href="https://github.com/sokra"><img src="https://github.com/sokra.png?size=90"><span class="contributor__name"> sokra</span></a></div></div></section></div><div class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/get-started" class="footer__link">Get Started</a><a href="/organization" class="footer__link">Organization</a><a href="/contribute" class="footer__link">Contribute</a><a href="/get-started/why-webpack#comparison" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg"></a></section><section class="footer__right"><a href="/branding" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Support</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link">License</a></section></div></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
 
     
       <script src="/0aba2dbab7e34fd3682452dee49849a7.js"></script>
