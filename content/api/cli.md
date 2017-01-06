@@ -1,6 +1,8 @@
 ---
 title: Command Line Interface (CLI)
 sort: 2
+contributors:
+    - ev1stensberg
 ---
 
 webpack provides a Command Line Interface (CLI) to configure and interact with your build. This is mostly useful in case of early prototyping, profiling, writing npm scripts or personal customization of the build.
@@ -10,6 +12,8 @@ For proper usage and easy distribution of this configuration, webpack can be con
 ## Installation
 
 Have a look at [this page](/get-started/install-webpack)
+
+?> The new CLI for webpack is under development. New features are being added such as the `--init` flag. [Check it out!](https://github.com/webpack/webpack-cli)
 
 ### Common Usage
 
@@ -163,6 +167,7 @@ These options makes the build watch for changes in files of the dependency graph
 | Parameter                 | Explanation                                             |
 |---------------------------|---------------------------------------------------------|
 | --watch, -w               | Watch the filesystem for changes                        |
+| --save, -s                | Recompiles on save regardless of changes                |
 | --watch-aggregate-timeout | Timeout for gathering changes while watching            |
 | --watch-poll              | The polling interval for watching (also enable polling) |
 | --watch-stdin, --stdin    | Exit the process when stdin is closed                   |
