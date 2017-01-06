@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/37d9523e4d380be9b1fe.css" rel="stylesheet">
+      <link href="/fbc34ccea19361fe7156.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -28,7 +28,7 @@ npm <span class="token function">install</span> --save-dev webpack@beta
 .\node_modules\.bin\webpack --help <span class="token comment" spellcheck="true"># For windows users</span>
 npm <span class="token function">install</span> --save lodash
 </code></pre>
-<p>Now create subdirectory <code>app</code> with an <code>index.js</code> file.</p>
+<p>Now create an <code>index.js</code> file.</p>
 <p><strong>app/index.js</strong></p>
 <pre><code class="lang-javascript"><span class="token keyword">function</span> component <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">var</span> element <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&apos;div&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -47,7 +47,7 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
 <p><strong>index.html</strong></p>
 <pre><code class="lang-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>Webpack 2 demo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>Webpack demo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>https://unpkg.com/lodash@4.16.6<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
@@ -59,7 +59,7 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
 <p><code>index.js</code> depends on <code>lodash</code> being included in the page before it runs. It is implicit because <code>index.js</code> never declared a need for <code>lodash</code>; it just assumes that a global variable <code>_</code> exists.</p>
 <p>There are problems with managing JavaScript projects this way:</p>
 <ul>
-<li>If a dependency is missing, or is included in the wrong order, the application will not function at all.</li>
+<li>If a dependency is missing, or is included in the wrong order, the application will not function at all. </li>
 <li>If a dependency is included but is not used, then there is a lot of unnecessary code that the browser has to download.</li>
 </ul>
 <p>To bundle the <code>lodash</code> dependency with the <code>index.js</code>, we need to import <code>lodash</code>.</p>
@@ -72,7 +72,7 @@ function component () {
 <p>Also we will need to change the <code>index.html</code> to expect a single bundled js file.</p>
 <pre><code class="lang-diff"><span class="token deleted">&lt;html&gt;</span>
   &lt;head&gt;
-    &lt;title&gt;Webpack 2 demo&lt;/title&gt;
+    &lt;title&gt;Webpack demo&lt;/title&gt;
 <span class="token deleted">-   &lt;script src=&quot;https://unpkg.com/lodash@4.16.6&quot;&gt;&lt;/script&gt;</span>
   &lt;/head&gt;
   &lt;body&gt;
@@ -93,11 +93,9 @@ Time: 90ms
 index.js  1.56 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  main
    <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./app/index.js 170 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
 </code></pre>
-<blockquote class="tip"><div class="tip-content"> If you created a local <code>webpack@beta</code> build, be sure to reference <code>webpack</code> with <code>./node_modules/.bin/webpack</code> on the command line. </div></blockquote><p>Open <code>index.html</code> in your browser to see the result of a successful bundle.
-You should see a page with the following text: &apos;Hello ,webpack&apos;.</p>
 <h2 class="header"><a class="anchor" href="#using-webpack-with-a-config" id="using-webpack-with-a-config"></a><span class="text">Using webpack with a config</span><a class="icon-link" href="#using-webpack-with-a-config"></a></h2>
-<p>For more complex configuration, we can use a configuration file that webpack can reference to bundle your code.  After you create a <code>webpack.config.js</code> file, represent the CLI command above
-with the following config settings -</p>
+<p>For more complex configuration, we can use a configuration file that webpack can reference to bundle your code.
+The above CLI command would be represented in config as follows -</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token punctuation">:</span> <span class="token string">&apos;./app/index.js&apos;</span><span class="token punctuation">,</span>
@@ -117,7 +115,7 @@ Time: 90ms
 index.js  1.56 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  main
    <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./app/index.js 170 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
 </code></pre>
-<blockquote class="tip"><div class="tip-content"> If a <code>webpack.config.js</code> is present, <code>webpack</code> command picks it up by default. </div></blockquote><blockquote class="tip"><div class="tip-content"> If you created a successful <code>dist/bundle.js</code> file using the &apos;Creating a bundle&apos; section, delete the <code>dist</code> subdirectory to validate output from your <code>webpack.config.js</code> file settings. </div></blockquote><p>The config file allows for all the flexibility in using webpack. We can add loader rules, plugins, resolve options and many other enhancements to our bundles using this configuration file.</p>
+<blockquote class="tip"><div class="tip-content"> If a <code>webpack.config.js</code> is present, <code>webpack</code> command picks it up by default. </div></blockquote><p>The config file allows for all the flexibility in using webpack. We can add loader rules, plugins, resolve options and many other enhancements to our bundles using this configuration file.</p>
 <h2 class="header"><a class="anchor" href="#using-webpack-with-npm" id="using-webpack-with-npm"></a><span class="text">Using webpack with npm</span><a class="icon-link" href="#using-webpack-with-npm"></a></h2>
 <p>Given it&apos;s not particularly fun to run webpack from the CLI this way, we can set up a little shortcut. Adjust <em>package.json</em> like this:</p>
 <pre><code class="lang-json"><span class="token punctuation">{</span>
@@ -131,7 +129,7 @@ index.js  1.56 kB       0  <span class="token punctuation">[</span>emitted<span 
 <p>You can now achieve the same as above by using <code>npm run build</code> command. npm picks up the scripts through it and patches the environment temporarily so that it contains the bin commands. You will see this convention in a lot of projects out there.</p>
 <blockquote class="tip"><div class="tip-content"> You can pass custom parameters to webpack by adding two dashes to the <code>npm run build</code> command, e.g. <code>npm run build -- --colors</code>. </div></blockquote><h2 class="header"><a class="anchor" href="#conclusion" id="conclusion"></a><span class="text">Conclusion</span><a class="icon-link" href="#conclusion"></a></h2>
 <p>Now that you have a basic build together, you should dig into the <a href="/concepts">basic concepts</a> and <a href="/configuration">configuration</a> of webpack to better understand its design. Also check out the <a href="/guides">guides</a> to learn how to approach common problems. The <a href="/api">API</a> section digs into lower level.</p>
-</div><hr style="display:block;"><h3 style="display:block;">Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/bebraw"><img src="https://github.com/bebraw.png?size=90"><span class="contributor__name"> bebraw</span></a><a class="contributor" href="https://github.com/chrisVillanueva"><img src="https://github.com/chrisVillanueva.png?size=90"><span class="contributor__name"> chrisVillanueva</span></a><a class="contributor" href="https://github.com/cntanglijun"><img src="https://github.com/cntanglijun.png?size=90"><span class="contributor__name"> cntanglijun</span></a><a class="contributor" href="https://github.com/varunjayaraman"><img src="https://github.com/varunjayaraman.png?size=90"><span class="contributor__name"> varunjayaraman</span></a></div></div></section></div><div class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/get-started" class="footer__link">Get Started</a><a href="/organization" class="footer__link">Organization</a><a href="/contribute" class="footer__link">Contribute</a><a href="/get-started/why-webpack#comparison" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg"></a></section><section class="footer__right"><a href="/branding" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Support</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link">License</a></section></div></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
+</div><hr style="display:block;"><h3 style="display:block;">Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/bebraw"><img src="https://github.com/bebraw.png?size=90"><span class="contributor__name"> bebraw</span></a><a class="contributor" href="https://github.com/cntanglijun"><img src="https://github.com/cntanglijun.png?size=90"><span class="contributor__name"> cntanglijun</span></a><a class="contributor" href="https://github.com/varunjayaraman"><img src="https://github.com/varunjayaraman.png?size=90"><span class="contributor__name"> varunjayaraman</span></a></div></div></section></div><div class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/get-started" class="footer__link">Get Started</a><a href="/organization" class="footer__link">Organization</a><a href="/contribute" class="footer__link">Contribute</a><a href="/get-started/why-webpack#comparison" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg"></a></section><section class="footer__right"><a href="/branding" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Support</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link">License</a></section></div></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
 
     
       <script src="/934741d880441acf1c5d436f3954c055.js"></script>
