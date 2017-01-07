@@ -72,14 +72,15 @@ Run the following command to once again verify successful local installation of 
 ```bash
 npm list --depth=0  #View list of project top-level packages
 ```
-Now we need to ensure babel is properly configured to transpile es2015 and React code
-into the webpack bundle file.
 
 ### Babel Config
 
-Your `.babelrc` file should look like the following:
+Now we need to ensure babel is properly configured to transpile es2015 and React code
+into ES5 for the webpack bundle file. Create a `.babelrc` file at the root of your project
+directory and add these settings:
 
 ```json
+// .babelrc
 {
   "presets": [
     ["es2015", {"modules": false}],
@@ -102,9 +103,10 @@ Your `.babelrc` file should look like the following:
 
 ### webpack Config
 
-While there're many ways of setting up your webpack config - via API,
-via multiple or single config files, etc - here is the basic information
-you should have available.
+There are many ways to setup your webpack config file -- via API,
+multiple or single config files, etc.  We will use a basic
+configuration, so your `webpack.config.js` file should resemble
+this:
 
 ```js
 const { resolve } = require('path');
@@ -189,9 +191,9 @@ You may benefit from reading the
 The basic assumption here is that your JavaScript entry is located at `./src/index.js`
 and that you're using CSS Modules for your styling.
 
-Please see the comments inline that explain each portion of the config. The main
-areas to look are the `devServer` key and the `entry` key. The `HotModuleReplacementPlugin` is
-also necessary to include in the `plugins` array.
+Please refer to inline comments within the file for config setting explanation. The main
+areas to look are the `devServer` and `entry` keys. The `HotModuleReplacementPlugin` in
+the `plugins` array is necessary for HMR functionality.
 
 There are two modules included here for the purposes of this guide:
 
