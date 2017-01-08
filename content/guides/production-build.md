@@ -21,9 +21,8 @@ Running `webpack -p` (or equivalently `webpack --optimize-minimize --define proc
 
 ### Minification
 
-webpack 自带了 `UglifyJsPlugin`，它运行 [UglifyJS](http://lisperator.net/uglifyjs/) 来最小化输出文件。你可以在初始化时传入一个包含 [UglifyJS 选项](https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin) 的对象。
+webpack 自带了 `UglifyJsPlugin`，它运行 [UglifyJS](http://lisperator.net/uglifyjs/) 来最小化输出文件。此插件支持所有的 [UglifyJS 选项](https://github.com/mishoo/UglifyJS2#usage)。在命令行中指定 `--optimize-minimize`，会在 plugins 配置中添加：
 
-webpack comes with `UglifyJsPlugin`, which runs [UglifyJS](http://lisperator.net/uglifyjs/) in order to minimize the output. The plugin supports all of [UglifyJS options](https://github.com/mishoo/UglifyJS2#usage). Specifying `--optimize-minimize` on the command line, the following plugin configuration is added:
 
 ```js
 // webpack.config.js

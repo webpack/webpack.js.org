@@ -21,10 +21,6 @@ export default props => {
         <span className="sidecar__label">Stack Overflow</span>
         <i className="sidecar__icon icon-stack-overflow" />
       </Link>
-      <Link className="sidecar__link sidecar__link--github" to="//shang.qq.com/wpa/qunwpa?idkey=952973ba58b7ecc503b7eea941a5f31a87887864bb7b350bb9a7cf2921c426d7">
-        <span className="sidecar__label">QQ群298566020</span>
-        <i className="sidecar__icon icon-gitter" />
-      </Link>
     </aside>
   );
 };
