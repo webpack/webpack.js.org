@@ -29,7 +29,7 @@ webpack 2 installed. webpack documentation provides help with
 [get started](/get-started).  Feel free to review those sections before
 starting this guide.
 
-Open a terminal an enter these commands to begin this guide.
+Open a terminal an enter these commands:
 
 ```bash
 mkdir webpack-react-hmr && cd webpack-react-hmr
@@ -37,7 +37,7 @@ npm init -y                                             # Creates package.json
 npm install --save-dev webpack@2.1.0-beta.25            # Local webpack installation
 npm install --save-dev webpack-dev-server@2.1.0-beta.0  # Local webpack-dev-server installation
 ```
-T> After installation, you may see `WARN` messages related to your `package.json` file.  Update *description* and *repository* fields if you want to resolve warnings.  However, the missing fields will not disrupt `webpack-react-hmr` builds.  For more information on `package.json` settings, visit [this page here](https://docs.npmjs.com/files/package.json).
+T> After installation, you may see `WARN` messages related to your `package.json` file.  Update **description** and **repository** fields if you want to resolve warnings.  However, the missing fields will not disrupt `webpack-react-hmr` builds.  For more information on `package.json` settings, visit [this page](https://docs.npmjs.com/files/package.json).
 
 You should now be in the `webpack-react-hmr` project directory with webpack
 installed.  You can verify successful installation with the following
@@ -47,16 +47,14 @@ command:
 npm list --depth=0  #View list of project top-level packages
 ```
 
-T> If you have any issues with installation, click the "Find Help" button
-on the right-side fixed sidebar.
+T> If you have any issues with installation, hover on the right sidebar and click the "Find Help" button.
 
 After installation success, you can begin adding HMR and React dependencies.
 
 
 ## Project Config
 
-The next step is to  add the following dependencies to your `package.json` file.
-To use HMR, you'll need to install the following dependencies:
+The next step is to add the following npm packages in `package.json` and install them on your machine. To use HMR, you'll need the dependencies listed below.  Run this command in your terminal:
 
 ```bash
 npm install --save-dev babel@6.5.2 babel-core@6.13.2 babel-loader@6.2.4 babel-preset-es2015@6.13.2 babel-preset-react@6.11.1 babel-preset-stage-2@6.13.0 css-loader@0.23.1 postcss-loader@0.9.1 react-hot-loader@3.0.0-beta.6 style-loader@0.13.1
@@ -68,14 +66,14 @@ For the purpose of this walkthrough, you'll also need the following React depend
 npm install --save react@15.3.0 react-dom@15.3.0
 ```
 
-Run the following command to once again verify successful local installation of all packages:
+Run the following command to verify successful local installation of all project config packages:
 ```bash
 npm list --depth=0  #View list of project top-level packages
 ```
 
 ### Babel Config
 
-Now we need to ensure babel is properly configured to transpile es2015 and React code
+Now we need to ensure babel is properly configured to transpile ES2015 and React code
 into ES5 for the webpack bundle file. Create a `.babelrc` file at the root of your project
 directory and add these settings:
 
@@ -107,8 +105,8 @@ directory and add these settings:
 
 There are many ways to setup your webpack config file -- via API,
 multiple or single config files, etc.  We will use a basic
-configuration, so your `webpack.config.js` file should resemble
-this:
+configuration, so create a `webpack.config.js` file at the root of your
+project directory and enter this code:
 
 ```js
 
@@ -194,7 +192,7 @@ You may benefit from reading the
 [webpack-dev-server options](/configuration/dev-server) and the [concept pages](/concepts).
 
 The basic assumption here is that your `index.js` entry file is located within
-the `./src` subdirectory and that your css file is preprocessed with CSS Loader Modules .
+the `./src` subdirectory and that css files are preprocessed with CSS Loader Modules .
 
 Please refer to inline comments within the file for config setting explanation. The main
 areas to look are the `devServer` and `entry` keys. The `HotModuleReplacementPlugin` in
@@ -213,13 +211,13 @@ to better understand what modules are being updated when using HMR.
 
 Now we need to create our application source files with the following steps:
 
-Create a `./src` subdirectory at the root of your `webpack-react-hmr` project.  All application files will be located here.
+Create a `src` subdirectory at the root of your `webpack-react-hmr` project.  All application files will be located here.
 
-Next, `cd` into the `./src` subdirectory, create an `index.js` file, and place the code provided below into the file:
+Next, `cd` into the `src` subdirectory, create an `index.js` file, and place the code provided below into the file:
 
 ```js
 
-// ./src/index.js
+// src/index.js
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -269,13 +267,13 @@ The important thing to note in the code above is the `module` reference.
 
 So in this case, `module.hot.accept` will fire the `render` method whenever `src/components/App.js` or its dependencies are changed - which means the `render` method will also fire when the `App.css` is changed, since `App.css` is included in `App.js`.
 
-We need to create a new subdirectory within `./src` and name it `components`.  Now, `cd` into `components` (so your path from project root is `./src/components`) and create two application files:  `App.js` and `App.css`.
+Next, need to create a new subdirectory within `src` and name it `components`.  Move into `components` (so your path from project root is `src/components`) and create two application files:  `App.js` and `App.css`.
 
 **App.js** should contain the code below:
 
 ```js
 
-// ./src/components/App.js
+// src/components/App.js
 
 import React from 'react';
 import styles from './App.css';
@@ -292,7 +290,7 @@ export default App;
 **App.css** should contain the styles written below:
 ```css
 
-/* ./src/components/App.css */
+/* src/components/App.css */
 
 .app {
     text-size-adjust: none;
@@ -306,7 +304,7 @@ The final step is to make our `index.html` file.  This file will render the app 
 **index.html** requires the following markup:
 
 ```html
-<!-- ./dist/index.html -->
+<!-- dist/index.html -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -348,8 +346,7 @@ only-dev-server.js:74[HMR] Waiting for update signal from WDS…
 client?c7c8:24 [WDS] Hot Module Replacement enabled.
 ```
 
-Go ahead and edit your `App.js` file with new text (ex. "Hello, There") and save it.
-You should see something like the following in your browser's console.log:
+Go ahead and edit your `src/components/App.js` file with new text (ex. "Hello, There") and save it. You should see something like the following in your browser's console.log:
 
 ```bash
 [WDS] App updated. Recompiling…
