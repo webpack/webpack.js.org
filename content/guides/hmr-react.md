@@ -80,7 +80,9 @@ into ES5 for the webpack bundle file. Create a `.babelrc` file at the root of yo
 directory and add these settings:
 
 ```json
+
 // .babelrc
+
 {
   "presets": [
     ["es2015", {"modules": false}],
@@ -109,6 +111,9 @@ configuration, so your `webpack.config.js` file should resemble
 this:
 
 ```js
+
+// ./webpack.config.js
+
 const { resolve } = require('path');
 const webpack = require('webpack');
 
@@ -188,8 +193,8 @@ There's a lot going on above, and not all of it is related to HMR.
 You may benefit from reading the
 [webpack-dev-server options](/configuration/dev-server) and the [concept pages](/concepts).
 
-The basic assumption here is that your JavaScript entry is located at `./src/index.js`
-and that you're using CSS Modules for your styling.
+The basic assumption here is that your `index.js` entry file is located within
+the `./src` subdirectory and that your css file is preprocessed with CSS Loader Modules .
 
 Please refer to inline comments within the file for config setting explanation. The main
 areas to look are the `devServer` and `entry` keys. The `HotModuleReplacementPlugin` in
@@ -206,10 +211,16 @@ to better understand what modules are being updated when using HMR.
 
 ### Code
 
-In this guide, we're using the following files:
+Now we need to create our application source files with the following steps:
+
+Create a `./src` subdirectory at the root of your `webpack-react-hmr` project.  All application files will be located here.
+
+Next, `cd` into the `./src` subdirectory, create an `index.js` file, and place the code provided below into the file:
 
 ```js
+
 // ./src/index.js
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -238,30 +249,6 @@ if (module.hot) {
 }
 ```
 
-```js
-// ./src/components/App.js
-import React from 'react';
-import styles from './App.css';
-
-const App = () => (
-  <div className={styles.app}>
-    <h2>Hello, </h2>
-  </div>
-);
-
-export default App;
-```
-
-```css
-// ./src/components/App.css
-.app {
-    text-size-adjust: none;
-    font-family: helvetica, arial, sans-serif;
-    line-height: 200%;
-    padding: 6px 20px 30px;
-}
-```
-
 The important thing to note in the code above is the `module` reference.
 
 1. webpack will expose `module.hot` to our code since we set `devServer: { hot: true }`;
@@ -282,11 +269,45 @@ The important thing to note in the code above is the `module` reference.
 
 So in this case, `module.hot.accept` will fire the `render` method whenever `src/components/App.js` or its dependencies are changed - which means the `render` method will also fire when the `App.css` is changed, since `App.css` is included in `App.js`.
 
-### index.html
+We need to create a new subdirectory within `./src` and name it `components`.  Now, `cd` into `components` (so your path from project root is `./src/components`) and create two application files:  `App.js` and `App.css`.
 
-This needs to be placed inside of `dist` in your project root. webpack-dev-server will not run without it.
+**App.js** should contain the code below:
+
+```js
+
+// ./src/components/App.js
+
+import React from 'react';
+import styles from './App.css';
+
+const App = () => (
+  <div className={styles.app}>
+    <h2>Hello, </h2>
+  </div>
+);
+
+export default App;
+```
+
+**App.css** should contain the styles written below:
+```css
+
+/* ./src/components/App.css */
+
+.app {
+    text-size-adjust: none;
+    font-family: helvetica, arial, sans-serif;
+    line-height: 200%;
+    padding: 6px 20px 30px;
+}
+```
+The final step is to make our `index.html` file.  This file will render the app in a user's browser and reference our `bundle.js` output file. webpack-dev-server will not run without it.  At this point, you should move back to the project's root directory.  When you are there, create another subdirectory named `dist`.  Now `cd` into `dist` and create the `index.html` file.
+
+**index.html** requires the following markup:
 
 ```html
+<!-- ./dist/index.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -300,21 +321,26 @@ This needs to be placed inside of `dist` in your project root. webpack-dev-serve
 </html>
 
 ```
+
+
 ### Package.json
 
-Finally, we need to start up `webpack-dev-server` to bundle our code and see HMR in action.
-We can use the following `package.json` entry:
+We can edit our `package.json` file to start up `webpack-dev-server`, bundle our code, and see HMR in action by using an npm script command. Open the file and add the `start` script written below:
 
 ```json
 {
   "scripts" : {
-    "start" : "webpack-dev-server"
+    "start" : "./node_modules/.bin/webpack-dev-server"
   }
 }
 ```
 
+T> This command references a local webpack-dev-server installation.  Window users will need to use
+   `.\node_modules\.bin\webpack-dev-server` for the command to work
+
+
 Run `npm start`, open up your browser to `http://localhost:8080`,
-and you should see the following entries printed in your console.log:
+and you should see the following entries printed in your browser's console.log:
 
 ```bash
 dev-server.js:49[HMR] Waiting for update signal from WDS…
@@ -323,7 +349,7 @@ client?c7c8:24 [WDS] Hot Module Replacement enabled.
 ```
 
 Go ahead and edit and save your `App.js` file.
-You should see something like the following in your console.log:
+You should see something like the following in your browser's console.log:
 
 ```bash
 [WDS] App updated. Recompiling…
@@ -336,3 +362,5 @@ dev-server.js:27 [HMR] App is up to date.
 
 Note that HMR specifies the paths of the updated modules.
 That's because we're using `NamedModulesPlugin`.
+
+You are now able to work on your React application with HMR enabled.
