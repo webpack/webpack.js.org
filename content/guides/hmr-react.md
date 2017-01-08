@@ -348,7 +348,7 @@ only-dev-server.js:74[HMR] Waiting for update signal from WDS…
 client?c7c8:24 [WDS] Hot Module Replacement enabled.
 ```
 
-Go ahead and edit and save your `App.js` file.
+Go ahead and edit your `App.js` file with new text (ex. "Hello, There") and save it.
 You should see something like the following in your browser's console.log:
 
 ```bash
