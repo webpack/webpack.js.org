@@ -24,6 +24,6 @@ new webpack.EnvironmentPlugin({
 })
 ```
 
-If a variable is undefined on build webpack gives a warning on build. This can be suppressed with a default value or a `null` value.
+If the variable is undefine on build, webpack gives a warning. This can be suppressed with a default value or a `null` value.
 
 T> Variables coming from `process.env` are always strings, so unlike [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) variables are stringified before replaced. Undefined variables are an exception.
