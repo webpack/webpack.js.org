@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - grgur
   - bondz
+  - sricc
 ---
 
 Webpack is fed via a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
@@ -294,7 +295,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
     [maxEntrypointSize](/configuration/performance#performance-maxentrypointsize): 400000, // int (in bytes)
     [assetFilter](/configuration/performance#performance-assetfilter): function(assetFilename) { 
       // Function predicate that provides asset filenames
-      return assetName.endsWith('.css') || assetName.endsWith('.js');
+      return assetFilename.endsWith('.css') || assetFilename.endsWith('.js');
     }
   },
 
