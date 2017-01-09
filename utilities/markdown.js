@@ -139,11 +139,42 @@ function parseContent(data) {
   return tokens;
 }
 
+function handleHTMLSplit(tokens, htmlArray, merging) {
+  const htmlItem =  htmlArray[0];
+  htmlArray = htmlArray.slice(1);
+  const tickSplit = htmlItem.split('`');
+  const tickLength = tickSplit.length;
+
+  // detect start of the inline code
+  if(merging.length === 0 && tickLength%2 === 0) {
+    merging = htmlItem;
+  }
+  // append code inside the inline code
+  else if(merging.length > 0 && tickLength === 1) {
+    merging += htmlItem;
+  }
+  // finish inline code
+  else if(merging.length > 0 && tickLength > 1) {
+    htmlArray.unshift(tickSplit.slice(1, tickLength).join("`"));
+    merging += tickSplit[0]+"`";
+    tokens = tokens.concat(parseContent(merging));
+    merging = "";
+  }  else if (merging.length === 0) {
+    tokens = tokens.concat(parseContent(htmlItem));
+  }
+
+  if(htmlArray.length === 0) {
+    return tokens;
+  }
+
+  return handleHTMLSplit(tokens, htmlArray, merging);
+}
+
 function handleHTML(t) {
-    var tokens = [];
+    let tokens = [];
 
     // Split code in markdown, so that HTML inside code is not parsed
-    var codeArray = t.text.split(/(```(.|\n)*```)/g).filter(v => (v !== '' && v !== '\n'));
+    const codeArray = t.text.split(/(```(.|\n)*```)/g).filter(v => (v && v !== '' && v !== '\n'));
 
     // if only one item in codeArray, then it's already parsed
     if(codeArray.length == 1) {
@@ -154,12 +185,8 @@ function handleHTML(t) {
       // if item is not code, then check for html tags and parse accordingly
       if (item.indexOf('```') !== 0) {
         // split all html tags
-        var htmlArray = item.split(/\s*(<[^>]*>)/g).filter(v => (v !== '' && v !== '\n'));
-
-        // handle every single item separately
-        htmlArray.forEach(function (html) {
-          tokens = tokens.concat(parseContent(html));
-        });
+        const htmlArray = item.split(/\s*(<[^>]*>)/g).filter(v => (v !== '' && v !== '\n'));
+        tokens = handleHTMLSplit(tokens, htmlArray, "");
       }
       // normally parse code block
       else {
