@@ -1,3 +1,7 @@
+### 前方直达 => [webpack 2 翻译任务认领说明 - 入口目录](https://github.com/webpack-china/webpack.js.org/issues/17)
+
+##### 下方内容请忽略
+
 [![build status](https://secure.travis-ci.org/webpack/webpack.js.org.svg)](http://travis-ci.org/webpack/webpack.js.org)
 
 # webpack.js.org
