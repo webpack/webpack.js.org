@@ -15,26 +15,25 @@ For example, you can use loaders to tell webpack to load a CSS file or to conver
 ## Loader Features
 
 * Loaders can be chained. They are applied in a pipeline to the resource. A chain of loaders are compiled chronologically. The first loader in a chain of loaders returns a value to the next and at the end loader, webpack expects JavaScript to be returned.
-* Loaders can be synchronous or asynchronous.
-* Loaders run in Node.js and can do everything that’s possible there.
-* Loaders accept query parameters. This can be used to pass configuration to the loader.
-* Loaders can also be configured with an `options` object.
-* Normal modules can export a loader in addition to the normal `main` via `package.json` with the `loader` field.
-* Plugins can give loaders more features.
-* Loaders can emit additional arbitrary files.
+* loader 可以是同步或异步函数。
+* loader 运行在 Node.js 中，并且能够执行任何可能的操作。
+* loader 接受查询参数。用于 loader 间传递配置。
+* loader 也能够使用 `options` 对象进行配置。
+* 除了直接使用 `package.json` 的 `main` 属性，还可以将普通的 npm 模块导出为 loader，做法是在 `package.json` 里定义一个 loader 字段。
+* 插件可以给 loader 带来更多功能。
+* loader 能够产生额外的任意文件。
 
-Loaders allow more power in the JavaScript ecosystem through preprocessing
-functions (loaders). Users now have more flexibility to include fine-grained logic such as compression, packaging, language translations and [more](/loaders).
+loader 通过(loader)预处理函数，为 JavaScript 生态系统提供了更多有力功能。用户现在可以更加灵活的引入细粒度逻辑，例如压缩、打包、语言翻译和[其他更多](/loaders)。
 
-## Resolving Loaders
+## 解析 Loader
 
-Loaders are [resolved similar to modules](/concepts/module-resolution/). A loader module is expected to export a function and to be written in Node.js compatible JavaScript. In the common case you manage loaders with npm, but you can also have loaders as files in your app.
+loader [解析类似于模块](/concepts/module-resolution/)。loader 模块需要导出一个函数，并且使用兼容 Node.js 的 JavaScript 编写。在通常情况下，你可以使用 npm 管理 loader，但是你也可以在应用程序中将 loader 作为文件使用。
 
-### Referencing Loaders
+### 引用 Loader
 
-By convention, loaders are usually named as `XXX-loader`, where `XXX` is the context name. For example, `json-loader`.
+按照约定，loader 通常被命名为 `XXX-loader`，`XXX` 是上下文的名称，例如 `json-loader`。
 
-The loader name convention and precedence search order is defined by [`resolveLoader.moduleTemplates`](/configuration/resolve#resolveloader) within the webpack configuration API.
+loader 的名称约定和优先搜索顺序，由 webpack 配置 API 中的  [`resolveLoader.moduleTemplates`](/configuration/resolve#resolveloader) 定义。
 
 ***
 
