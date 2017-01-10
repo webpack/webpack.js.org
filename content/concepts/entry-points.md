@@ -99,6 +99,7 @@ const config = {
 - 使用 `CommonsChunkPlugin` 为每个页面间的应用共享代码创建 bundle。由于入口起点增多，多页应用能够在入口起点重用大量代码/模块，这样可以极大的从这些新技术受益。
 
 T> 根据经验：每个 HTML 文档只使用一个入口起点。
+
 ***
 
 > 原文：https://webpack.js.org/concepts/entry-points/

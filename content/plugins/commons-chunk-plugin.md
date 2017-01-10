@@ -142,3 +142,7 @@ new CommonsChunkPlugin({
   // (3 children must share the module before it's separated)
 })
 ```
+
+***
+
+> 原文：https://webpack.js.org/loaders/

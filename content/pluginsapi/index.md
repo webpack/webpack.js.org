@@ -87,5 +87,6 @@ This plugin pattern is expected for events like `"before-resolve"` and `"after-r
 
 `applyPluginsParallelBailResult(name: string, args: any..., callback: (err: Error, result: any) -> void)`
 
+***
 
-
+> 原文：https://webpack.js.org/loaders/

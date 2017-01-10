@@ -69,3 +69,7 @@ The compiler executes the plugin at the appropriate point in its lifecycle by
 ```javascript
 this.apply*("emit",options) // will fetch all plugins under 'emit' name and run them.
 ```
+
+***
+
+> 原文：https://webpack.js.org/loaders/

@@ -308,3 +308,7 @@ Hacky access to the Module object being loaded.
 ### Custom `loaderContext` Properties
 
 Custom properties can be added to the `loaderContext` by either specifying values on the `loader` proprty on your webpack [configuration](/configuration), or by creating a [custom plugin](/api/plugins) that hooks into the `normal-module-loader` event which gives you access to the `loaderContext` to modify or extend. 
+
+***
+
+> 原文：https://webpack.js.org/api/loaders/

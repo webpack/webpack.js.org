@@ -70,3 +70,7 @@ webpack --module-bind jade --module-bind 'css=style!css'
 ```
 
 This uses the loader “jade” for “.jade” files and the loaders “style” and “css” for “.css” files.
+
+***
+
+> 原文：https://webpack.js.org/loaders/

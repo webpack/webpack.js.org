@@ -95,3 +95,7 @@ performance: {
 ```
 
 The example above will only give you performance hints based on `.js` files.
+
+***
+
+> 原文：https://webpack.js.org/configuration/performance/

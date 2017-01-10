@@ -262,3 +262,7 @@ compiler.run((err, stats) => {
 ```
 
 T> The output file system you provide needs to be compatible with Node’s own [`fs`](https://nodejs.org/api/fs.html) module interface. 
+
+***
+
+> 原文：https://webpack.js.org/api/node/

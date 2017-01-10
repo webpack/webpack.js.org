@@ -62,3 +62,7 @@ and then after a minification pass results in:
 ``` javascript
 console.log('Production log')
 ```
+
+***
+
+> 原文：https://webpack.js.org/loaders/

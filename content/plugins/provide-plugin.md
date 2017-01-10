@@ -38,3 +38,7 @@ new webpack.ProvidePlugin({
   'window.jQuery': 'jquery'
 })
 ```
+
+***
+
+> 原文：https://webpack.js.org/loaders/

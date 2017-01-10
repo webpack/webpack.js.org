@@ -1,5 +1,5 @@
 ---
-title: 作者指南
+title: 作者指引
 ---
 
 ## Process

@@ -163,4 +163,7 @@ Here we declare a new module for svg by specifying any import that ends in __.sv
 If we wanted to be more explicit about this being a url we could define the type as string.
 
 This applies not only to svg but any custom loader you may want to use which includes css, scss, json or any other file you may wish to load in your project.
- 
+
+***
+
+> 原文：https://webpack.js.org/guides/webpack-and-typescript/
