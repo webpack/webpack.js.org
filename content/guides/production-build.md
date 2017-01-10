@@ -13,7 +13,7 @@ contributors:
 
 ## The automatic way
 
-Running `webpack -p` (or equivalently `webpack --optimize-minimize --define process.env.NODE_ENV="production"`). This performs the following steps:
+Running `webpack -p` (or equivalently `webpack --optimize-minimize --define process.env.NODE_ENV="'production'"`). This performs the following steps:
 
 - Minification using `UglifyJsPlugin`
 - Runs the `LoaderOptionsPlugin`, see its [documentation](/plugins/loader-options-plugin)

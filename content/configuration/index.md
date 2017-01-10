@@ -6,7 +6,7 @@ contributors:
   - skipjack
   - grgur
   - bondz
-  - dear-lizhihua
+  - sricc
 ---
 
 Webpack 是需要传入一个配置对象。取决于你如何使用 webpack，可以通过两种方式之一：终端或 Node.js。下面指定了所有可用的配置选项。
@@ -295,7 +295,7 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
     [maxEntrypointSize](/configuration/performance#performance-maxentrypointsize): 400000, // 整数类型（以字节为单位）
     [assetFilter](/configuration/performance#performance-assetfilter): function(assetFilename) {
       // 提供资源文件名的断言函数
-      return assetName.endsWith('.css') || assetName.endsWith('.js');
+      return assetFilename.endsWith('.css') || assetFilename.endsWith('.js');
     }
   },
 
