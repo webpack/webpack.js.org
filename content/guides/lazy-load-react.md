@@ -13,9 +13,9 @@ Lets have a look at a consumer choosing to lazily load some components. The `imp
 
 ```jsx
 <LazilyLoad modules={{
-  TodoHandler: () => importLazy(import('./components/TodoHandler')),
-  TodoMenuHandler: () => importLazy(import('./components/TodoMenuHandler')),
-  TodoMenu: () => importLazy(import('./components/TodoMenu')),
+  TodoHandler: () => importLazy(require('./components/TodoHandler')),
+  TodoMenuHandler: () => importLazy(require('./components/TodoMenuHandler')),
+  TodoMenu: () => importLazy(require('./components/TodoMenu')),
 }}>
 {({TodoHandler, TodoMenuHandler, TodoMenu}) => (
   <TodoHandler>
