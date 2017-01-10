@@ -8,13 +8,13 @@ contributors:
   - gangachris
 ---
 
-Loaders are transformations that are applied on a resource file of your application. They are functions (running in Node.js) that take the source of a resource file as the parameter and return the new source.
+loader 是对应用程序中资源文件进行转换。它们是（运行在 Node.js 中的）函数，可以将资源文件作为参数的来源，然后返回新的资源文件。
 
-For example, you can use loaders to tell webpack to load a CSS file or to convert TypeScript to JavaScript.
+例如，你可以使用 loader 告诉 webpack 加载 CSS 文件，或者将 TypeScript 转为 JavaScript。
 
-## Loader Features
+## Loader 特性
 
-* Loaders can be chained. They are applied in a pipeline to the resource. A chain of loaders are compiled chronologically. The first loader in a chain of loaders returns a value to the next and at the end loader, webpack expects JavaScript to be returned.
+* loader 支持链式传递。能够对资源使用流水线( pipeline)。loader 链式按照时间先后顺序进行编译。loader 链中的第一个 loader 返回值给下一个 loader，并且在最后一个 loader，webpack 按照预期的 JavaScript 返回。
 * loader 可以是同步或异步函数。
 * loader 运行在 Node.js 中，并且能够执行任何可能的操作。
 * loader 接受查询参数。用于 loader 间传递配置。
