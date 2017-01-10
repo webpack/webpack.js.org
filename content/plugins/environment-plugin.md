@@ -34,7 +34,7 @@ T> Warning is gived if the value is undefined. This can be suppressed with a def
 new webpack.EnvironmentPlugin({
   NODE_ENV: 'development',
   DEBUG: false,
-  TITLE: 'There's a problem on the horizon. There is no horizon.'
+  TITLE: 'There\'s a problem on the horizon. There is no horizon.'
 })
 ```
 
