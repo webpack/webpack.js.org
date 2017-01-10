@@ -7,7 +7,6 @@ contributors:
   - SpaceK33z
   - pksjce
   - sebastiandeutsch
-  - dear-lizhihua
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail.

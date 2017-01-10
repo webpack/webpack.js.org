@@ -3,7 +3,6 @@ title: 依赖图表(Dependency Graph)
 sort: 9
 contributors:
   - TheLarkInn
-  - dear-lizhihua
 ---
 
 任何时候一个文件依赖于另一个文件，webpack 把这个文件当作_依赖_处理。这使得 webpack 可以接收非代码资源(non-code asset)（例如图像或 web 字体），并且也能把它们作为_依赖_提供给你的应用。

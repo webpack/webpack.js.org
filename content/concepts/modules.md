@@ -4,7 +4,6 @@ sort: 7
 contributors:
   - TheLarkInn
   - simon04
-  - dear-lizhihua
 ---
 
 在[模块化编程](https://en.wikipedia.org/wiki/Modular_programming)，开发者将程序分解成称为_模块_的离散功能块。

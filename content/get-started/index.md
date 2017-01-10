@@ -6,7 +6,6 @@ contributors:
   - varunjayaraman
   - cntanglijun
   - chrisVillanueva
-  - dear-lizhihua
 ---
 
 webpack 是构建我们应用程序中 JavaScript 模块的工具。从使用 `webpack` [cli](/api/cli) 或 [api](/api/node) ，并按照[安装说明](/get-started/install-webpack)开始。

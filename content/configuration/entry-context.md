@@ -4,7 +4,6 @@ sort: 4
 contributors:
   - sokra
   - skipjack
-  - dear-lizhihua
 ---
 
 ?> TODO: Short description

@@ -3,7 +3,6 @@ title: 安装
 contributors:
   - pksjce
   - bebraw
-  - dear-lizhihua
 sort: 1
 ---
 

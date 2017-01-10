@@ -5,7 +5,6 @@ contributors:
   - sokra
   - skipjack
   - SpaceK33z
-  - viko16
 ---
 
 webpack 可以监听文件变化，当它们修改后会重新编译。这个页面介绍了如何启用这个功能，以及当 Watch 不正常的时候你可以做的一些调整。

@@ -3,7 +3,6 @@ title: 为什么选择 webpack？
 contributors:
   - pksjce
   - bebraw
-  - dear-lizhihua
 sort: 2
 ---
 

@@ -5,7 +5,6 @@ contributors:
   - sokra
   - skipjack
   - pksjce
-  - dear-lizhihua
 ---
 
 `externals` configuration in webpack provides a way of not including a dependency in the bundle. Instead the created bundle relies on that dependency to be present in the consumers environment.

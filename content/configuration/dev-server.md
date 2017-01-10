@@ -6,7 +6,6 @@ contributors:
   - skipjack
   - spacek33z
   - charlespwd
-  - dear-lizhihua
 ---
 
 webpack-dev-server 能够用于快速开发应用程序。请查看[“如何开发？”](/guides/development)入门。

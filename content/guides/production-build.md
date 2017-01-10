@@ -6,7 +6,6 @@ contributors:
   - rajagopal4890
   - markerikson
   - simon04
-  - xie-qianyue
 ---
 
 此页解释了如何使用 webpack 生成用于生产环境的 build。

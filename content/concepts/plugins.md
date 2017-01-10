@@ -4,7 +4,6 @@ sort: 5
 contributors:
   - TheLarkInn
   - jhnns
-  - dear-lizhihua
 ---
 
 插件是 wepback 的[支柱](https://github.com/webpack/tapable)功能。在你使用 webpack 配置时，webpack 自身也构建于**同样的插件系统**上！

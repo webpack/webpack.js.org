@@ -5,7 +5,6 @@ contributors:
   - sokra
   - skipjack
   - jouni-kantola
-  - dear-lizhihua
 ---
 
 这些选项决定了如何处理项目中的[不同类型的模块](/concepts/modules)。

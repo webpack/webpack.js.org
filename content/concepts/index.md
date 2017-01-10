@@ -5,16 +5,15 @@ contributors:
   - TheLarkInn
   - jhnns
   - grgur
-  - dear-lizhihua
 ---
 
-*webpack* 是一个现代的 JavaScript 应用_模块打包器(module bundler)_。它有着[难以置信的配置](/configuration)，然而，我们认为你必须在开始前先了解 **四个核心概念**！
+*webpack* 是一个现代的 JavaScript 应用_模块打包器(module bundler)_。它有着[难以置信的配置](/configuration)，然而，我们认为你必须在开始前先了解**四个核心概念**！
 
 作为您的 webpack 学习旅程的一部分，我们写这篇文档目的在于向你传递这些概念的**高度**概述，同时仍然提供特定概念的相关用例。
 
 ## 入口(Entry)
 
-webpack 将创建所有应用程序依赖关系图表(dependency graph)。图表的起点被称之为_入口起点(entry point)_。_入口起点_告诉 webpack _从哪里开始_，并遵循着依赖关系图表知道_打包什么_。可以将您的应用_入口起点_认为是 **根上下文(contextual root)** 或 **app 第一个启动文件**。
+webpack 将创建所有应用程序依赖关系图表(dependency graph)。图表的起点被称之为_入口起点(entry point)_。_入口起点_告诉 webpack _从哪里开始_，并遵循着依赖关系图表知道_打包什么_。可以将您的应用_入口起点_认为是**根上下文(contextual root)**或 **app 第一个启动文件**。
 
 在 webpack 我们在 [webpack 配置对象](/configuration)中使用 `entry` 属性来定义 _入口_。
 

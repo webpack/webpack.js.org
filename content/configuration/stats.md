@@ -4,7 +4,6 @@ sort: 15
 contributors:
   - SpaceK33z
   - sallar
-  - viko16
 ---
 
 `stats` 选项能让你准确地控制显示哪些包的信息。如果你希望得到部分包的信息（而不是一股脑全部输出），而不想使用 `quiet` 或者 `noInfo` 模式的时候，这个选项是一个很好的折衷办法。

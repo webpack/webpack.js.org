@@ -4,7 +4,6 @@ sort: 8
 contributors:
     - pksjce
     - pastelsky
-    - dear-lizhihua
 ---
 
 解析器是一个通过绝对路径来帮助定位模块的库(library)。

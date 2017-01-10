@@ -3,7 +3,6 @@ title: 代码分割 - CSS
 sort: 3
 contributors:
   - pksjce
-  - xie-qianyue
 ---
 
 如果你使用 css-loader，并且在 JavaScript 文件里导入了 CSS，webpack 会把 CSS 代码和 JavaScript 代码一块打包。

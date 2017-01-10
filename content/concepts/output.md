@@ -3,7 +3,6 @@ title: 输出(Output)
 sort: 3
 contributors:
   - TheLarkInn
-  - dear-lizhihua
 ---
 
 选项影响编译输出。`output` 选项控制 webpack 如何向硬盘写入编译文件。注意，即使可以存在多个`入口`点，但只指定一个`输出`配置。

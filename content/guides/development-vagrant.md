@@ -3,7 +3,6 @@ title: 开发 - Vagrant
 sort: 12
 contributors:
   - SpaceK33z
-  - xie-qianyue
 ---
 
 如果你在开发一个更大的项目，并且开发环境是在虚拟机上运行 [Vagrant](https://www.vagrantup.com/) 的话，那么你或许需要在虚拟机上运行 webpack。

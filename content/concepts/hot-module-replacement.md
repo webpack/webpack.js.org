@@ -5,7 +5,6 @@ contributors:
 - SpaceK33z
 - sokra
 - GRardB
-- dear-lizhihua
 ---
 
 模块热替换功能会在应用程序运行过程中替换、添加或删除[模块](/concepts/modules/)，而无需重新加载页面。这使得你可以在独立模块变更后，无需刷新整个页面，就可以更新这些模块，极大地加速了开发时间。

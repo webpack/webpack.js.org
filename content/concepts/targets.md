@@ -3,7 +3,6 @@ title: 部署目标(Targets)
 sort: 10
 contributors:
   - TheLarkInn
-  - dear-lizhihua
 ---
 
 因为服务器和浏览器代码都可以用 JavaScript 编写，所以 webpack 提供了多种部署_目标(target)_，你可以在你的 webpack [配置](/configuration)中设置。

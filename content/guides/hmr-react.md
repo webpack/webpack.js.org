@@ -5,7 +5,6 @@ contributors:
   - jmreidy
   - jhnns
   - sararubin
-  - xie-qianyue
 ---
 
 正如在[概念](/concepts/hot-module-replacement)章节提到的，模块热替换(HMR)的作用是，在应用运行时，无需刷新页面，便能替换、增加、删除必要的模块。

@@ -7,8 +7,6 @@ contributors:
   - skipjack
   - SpaceK33z
   - pastelsky
-  - viko16
-  - dear-lizhihua
 ---
 
 webpack can compile for multiple environments or _targets_. To understand what a target is in detail, read [the concepts](/concepts/targets).
