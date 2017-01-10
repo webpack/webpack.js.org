@@ -424,7 +424,7 @@ Examples:
 
 ``` js
 publicPath: "https://cdn.example.com/assets/", // CDN (always HTTPS)
-publicPath: "//cdn.example.com/assets/", // CDM (same protocol)
+publicPath: "//cdn.example.com/assets/", // CDN (same protocol)
 publicPath: "/assets/", // server-relative
 publicPath: "assets/", // relative to HTML page
 publicPath: "../assets/", // relative to HTML page
