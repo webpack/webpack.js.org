@@ -549,7 +549,7 @@ Changes only relevant for loader authors.
 
 ### Cacheable
 
-Loaders are not cacheable by default. Loaders must opt-out if they are not cacheable.
+Loaders are now cacheable by default. Loaders must opt-out if they are not cacheable.
 
 ``` diff
   // Cacheable loader
