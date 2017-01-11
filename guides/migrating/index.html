@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/0bac1556a8cdfca13a53.css" rel="stylesheet">
+      <link href="/45a7e8d44782e97ddc3a.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -395,7 +395,7 @@ book<span class="token punctuation">.</span><span class="token keyword">default<
 <h2 class="header"><a class="anchor" href="#loader-changes" id="loader-changes"></a><span class="text">Loader changes</span><a class="icon-link" href="#loader-changes"></a></h2>
 <p>Changes only relevant for loader authors.</p>
 <h3 class="header"><a class="anchor" href="#cacheable" id="cacheable"></a><span class="text">Cacheable</span><a class="icon-link" href="#cacheable"></a></h3>
-<p>Loaders are not cacheable by default. Loaders must opt-out if they are not cacheable.</p>
+<p>Loaders are now cacheable by default. Loaders must opt-out if they are not cacheable.</p>
 <pre><code class="lang-diff">  // Cacheable loader
   module.exports = function(source) {
 <span class="token deleted">-   this.cacheable();</span>
