@@ -484,9 +484,9 @@ It is important to note that you will want to tell Babel to not parse these modu
 
 ## Hints
 
-No need to change something, but opportiunities
+No need to change something, but opportunities
 
-### Templates strings
+### Template strings
 
 webpack now supports template strings in expressions. This means you can start using them in webpack constructs:
 
@@ -497,10 +497,11 @@ webpack now supports template strings in expressions. This means you can start u
 
 ### Configuration Promise
 
-webpack now supports returning a Promise from the configuration file. This allows to do async processing in you configuration file.
+webpack now supports returning a `Promise` from the configuration file. This allows to do async processing in you configuration file.
+
+**webpack.config.js**
 
 ``` js
-// webpack.config.js
 module.exports = function() {
   return fetchLangs().then(lang => ({
     entry: "...",
@@ -532,7 +533,7 @@ module: {
 
 There are some new CLI options for you to use:
 
-`--define process.env.NODE_ENV="production"` See DefinePlugin.
+`--define process.env.NODE_ENV="production"` See [`DefinePlugin`](/plugins/define-plugin/).
 
 `--display-depth` displays the distance to the entry point for each module.
 
