@@ -8,8 +8,8 @@ contributors:
   - chrisVillanueva
 ---
 
-webpack 是构建我们应用程序中 JavaScript 模块的工具。从使用 `webpack` [cli](/api/cli) 或 [api](/api/node) ，并按照[安装说明](/get-started/install-webpack)开始。
-webpack 简化快速构建应用程序依赖图表的流程，以正确的顺序打包他们。webpack 能够配置自定义优化代码，在生产环境构建时拆分 vendor/css/js 代码，运行开发服务实现页面无刷新、代码热重载，以及其他非常酷炫的特性。了解更多关于[为什么使用 wepback](/get-started/why-webpack)。
+webpack 是构建我们应用程序中 JavaScript 模块的工具。从使用 `webpack` [cli](/api/cli) 或 [api](/api/node) ，并按照[安装](/get-started/install-webpack)开始。
+webpack 简化快速构建应用程序依赖图表的流程，以正确的顺序打包他们。webpack 能够配置自定义优化代码，在生产环境构建时拆分 vendor/css/js 代码，运行开发服务实现页面无刷新、代码热重载，以及其他非常酷炫的特性。了解更多关于[为什么选择 webpack](/get-started/why-webpack)。
 
 ## 创建一个包文件
 
@@ -111,15 +111,13 @@ index.js  1.56 kB       0  [emitted]  main
 
 ```
 
-T> If you created a local `webpack@beta` build, be sure to reference `webpack` with `./node_modules/.bin/webpack` on the command line.
+T> 如果你想创建了局部的 `webpack@beta` 版本，要通过其进行构建过程，请务必在命令行中通过 `./node_modules/.bin/webpack` 来引用 `webpack`。
 
-Open `index.html` in your browser to see the result of a successful bundle.
-You should see a page with the following text: 'Hello ,webpack'.
+在浏览器中打开 `webpack.config.js`，查看成功后 bundle 的结果。
+你应该看到带有以下文本的页面：'Hello ,webpack'。
 
 ## 使用带有配置的 webpack
 
-For more complex configuration, we can use a configuration file that webpack can reference to bundle your code.  After you create a `webpack.config.js` file, represent the CLI command above
-with the following config settings -
 对于更复杂的配置，我们可以使用配置文件，webpack 会引用它来打包代码。
 然后创建一个 `webpack.config.js` 文件，上面的 CLI 命令可以以下面的配置表示
 
@@ -150,7 +148,7 @@ index.js  1.56 kB       0  [emitted]  main
 
 T> 如果存在 `webpack.config.js`，`webpack` 命令将默认选择使用它。
 
-T> If you created a successful `dist/bundle.js` file using the 'Creating a bundle' section, delete the `dist` subdirectory to validate output from your `webpack.config.js` file settings.
+T> 如果使用上面"创建一个包文件"章节，已经成功创建过 `dist/bundle.js` 文件，请删除 `dist` 子目录，来验证通过 `webpack.config.js` 文件的设置，所输出内容是否符合预期。
 
 配置文件可以更加灵活地使用 webpack。使用配置文件，我们可以对我们的包文件添加加载器规则、插件、解析选项，以及许多其他增强功能。
 
