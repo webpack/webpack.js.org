@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/45a7e8d44782e97ddc3a.css" rel="stylesheet">
+      <link href="/8625ab9f04a40078123f.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -41,22 +41,22 @@
 <pre><code class="lang-html"><span class="token comment" spellcheck="true">&lt;!-- file.html --&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>image.png<span class="token punctuation">&quot;</span></span> <span class="token attr-name">data-src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>image2x.png<span class="token punctuation">&quot;</span></span> <span class="token punctuation">&gt;</span></span>
 </code></pre>
-<pre><code class="lang-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html!./file.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="lang-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-loader!./file.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">// =&gt; &apos;&lt;img src=&quot;http://cdn.example.com/49eba9f/a992ca.png&quot;</span>
 <span class="token comment" spellcheck="true">//         data-src=&quot;image2x.png&quot;&gt;&apos;</span>
 </code></pre>
-<pre><code class="lang-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html?attrs=img:data-src!./file.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="lang-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-loader?attrs=img:data-src!./file.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">// =&gt; &apos;&lt;img src=&quot;image.png&quot; data-src=&quot;data:image/png;base64,...&quot; &gt;&apos;</span>
 </code></pre>
-<pre><code class="lang-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html?attrs=img:src img:data-src!./file.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html?attrs[]=img:src&amp;attrs[]=img:data-src!./file.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="lang-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-loader?attrs=img:src img:data-src!./file.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-loader?attrs[]=img:src&amp;attrs[]=img:data-src!./file.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">// =&gt; &apos;&lt;img  src=&quot;http://cdn.example.com/49eba9f/a992ca.png&quot;        </span>
 <span class="token comment" spellcheck="true">//           data-src=&quot;data:image/png;base64,...&quot; &gt;&apos;</span>
 </code></pre>
-<pre><code class="lang-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html?-attrs!./file.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="lang-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-loader?-attrs!./file.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">// =&gt; &apos;&lt;img  src=&quot;image.jpg&quot;  data-src=&quot;image2x.png&quot; &gt;&apos;</span>
 </code></pre>
@@ -83,24 +83,24 @@ and then translated.</p>
 <pre><code class="lang-html"><span class="token comment" spellcheck="true">&lt;!-- file.html --&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>/image.jpg<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
 </code></pre>
-<pre><code class="lang-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html!./file.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="lang-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-loader!./file.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">// =&gt; &apos;&lt;img  src=&quot;/image.jpg&quot;&gt;&apos;</span>
 </code></pre>
-<pre><code class="lang-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html?root=.!./file.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="lang-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-loader?root=.!./file.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">// =&gt; &apos;&lt;img  src=&quot;http://cdn.example.com/49eba9f/a992ca.jpg&quot;&gt;&apos;</span>
 </code></pre>
 <h3 class="header"><a class="anchor" href="#interpolation" id="interpolation"></a><span class="text">Interpolation</span><a class="icon-link" href="#interpolation"></a></h3>
 <p>You can use <code>interpolate</code> flag to enable interpolation syntax for ES6 template strings, like so:</p>
-<pre><code class="lang-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html?interpolate!./file.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="lang-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-loader?interpolate!./file.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <pre><code class="lang-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>${require(`./images/gallery.png`)}<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>${require(&apos;./components/gallery.html&apos;)}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
 </code></pre>
 <p>And if you only want to use <code>require</code> in template and any other <code>${}</code> are not to be translated, you can set <code>interpolate</code> flag to <code>require</code>, like so:</p>
-<pre><code class="lang-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html?interpolate=require!./file.ftl&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="lang-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-loader?interpolate=require!./file.ftl&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <pre><code class="lang-html">
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>#list</span> <span class="token attr-name">list</span> <span class="token attr-name">as</span> <span class="token attr-name">list</span><span class="token punctuation">&gt;</span></span>
@@ -128,7 +128,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     loaders<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
         test<span class="token punctuation">:</span> <span class="token regex">/\.html$/</span><span class="token punctuation">,</span>
-        loader<span class="token punctuation">:</span> <span class="token string">&quot;html&quot;</span>
+        loader<span class="token punctuation">:</span> <span class="token string">&quot;html-loader&quot;</span>
       <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -139,14 +139,14 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 </code></pre>
-<p>If you need to define two different loader configs, you can also change the config&apos;s property name via <code>html?config=otherHtmlLoaderConfig</code>:</p>
+<p>If you need to define two different loader configs, you can also change the config&apos;s property name via <code>html-loader?config=otherHtmlLoaderConfig</code>:</p>
 <pre><code class="lang-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
   module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     loaders<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
         test<span class="token punctuation">:</span> <span class="token regex">/\.html$/</span><span class="token punctuation">,</span>
-        loader<span class="token punctuation">:</span> <span class="token string">&quot;html?config=otherHtmlLoaderConfig&quot;</span>
+        loader<span class="token punctuation">:</span> <span class="token string">&quot;html-loader?config=otherHtmlLoaderConfig&quot;</span>
       <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
