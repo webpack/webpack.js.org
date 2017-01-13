@@ -10,9 +10,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/concepts/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/configuration/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/contribute/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/get-started/index.html</loc>
     </url>    <url>
@@ -20,9 +20,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/license/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/organization/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/organization/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/plugins/index.html</loc>
     </url>    <url>
@@ -36,9 +36,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/api/loaders/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/api/node/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/api/plugins/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/api/node/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/concepts/configuration/index.html</loc>
     </url>    <url>
@@ -64,17 +64,17 @@
     </url>    <url>
         <loc>https://webpack.js.org/configuration/devtool/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/configuration/entry-context/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/configuration/external-configs/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration/entry-context/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/externals/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/module/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/configuration/node/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/configuration/other-options/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration/node/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/output/index.html</loc>
     </url>    <url>
@@ -82,11 +82,11 @@
     </url>    <url>
         <loc>https://webpack.js.org/configuration/performance/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/configuration/plugins/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/configuration/resolve/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/stats/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration/plugins/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/target/index.html</loc>
     </url>    <url>
@@ -138,9 +138,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/guides/webpack-and-typescript/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/bundle-loader/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/coffee-loader/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/loaders/bundle-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/coffee-redux-loader/index.html</loc>
     </url>    <url>
@@ -150,9 +150,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/loaders/exports-loader/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/expose-loader/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/file-loader/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/loaders/expose-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/html-loader/index.html</loc>
     </url>    <url>
@@ -170,11 +170,11 @@
     </url>    <url>
         <loc>https://webpack.js.org/loaders/mocha-loader/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/multi-loader/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/node-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/null-loader/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/loaders/multi-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/raw-loader/index.html</loc>
     </url>    <url>
@@ -194,9 +194,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/loaders/worker-loader/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/plugins/commons-chunk-plugin/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/plugins/component-webpack-plugin/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/plugins/commons-chunk-plugin/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/plugins/compression-webpack-plugin/index.html</loc>
     </url>    <url>
