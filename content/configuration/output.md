@@ -1,5 +1,5 @@
 ---
-title: 输出
+title: 输出(Output)
 sort: 5
 contributors:
   - sokra
@@ -7,7 +7,7 @@ contributors:
   - tomasAlabes
 ---
 
-The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
+位于对象最顶级 `output` 键，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundles、assets 和和其他你所打包或使用 webpack 载入的任何内容」。
 
 
 ## `output.chunkFilename`
