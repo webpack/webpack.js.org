@@ -7,6 +7,7 @@ contributors:
   - grgur
   - bondz
   - sricc
+  - terinjokes
 ---
 
 Webpack is fed via a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
@@ -224,11 +225,15 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
     [alias](/configuration/resolve#resolve-alias): {
       // a list of module name aliases
 
-      "module": "new-module"
+      "module": "new-module",
       // alias "module" -> "new-module" and "module/path/file" -> "new-module/path/file"
 
       "only-module$": "new-module",
       // alias "only-module" -> "new-module", but not "module/path/file" -> "new-module/path/file"
+
+      "module": path.resolve(__dirname, "app/third/module.js"),
+      // alias "module" -> "./app/third/module.js" and "module/file" results in error
+      // modules aliases are imported relative to the current context
     },
     <details><summary>/* alternative alias syntax (click to show) */</summary>
     [alias](/configuration/resolve#resolve-alias): [
