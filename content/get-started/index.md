@@ -114,7 +114,7 @@ index.js  1.56 kB       0  [emitted]  main
 T> If you created a local `webpack@beta` build, be sure to reference `webpack` with `./node_modules/.bin/webpack` on the command line.
 
 Open `index.html` in your browser to see the result of a successful bundle.
-You should see a page with the following text: 'Hello ,webpack'.
+You should see a page with the following text: 'Hello webpack'.
 
 ## 使用带有配置的 webpack
 

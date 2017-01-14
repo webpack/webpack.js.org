@@ -7,6 +7,7 @@ contributors:
   - grgur
   - bondz
   - sricc
+  - terinjokes
 ---
 
 Webpack 是需要传入一个配置对象。取决于你如何使用 webpack，可以通过两种方式之一：终端或 Node.js。下面指定了所有可用的配置选项。
@@ -224,11 +225,15 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
     [alias](/configuration/resolve#resolve-alias): {
       // 模块别名列表
 
-      "module": "new-module"
-      // 起别名："module" -> "new-module" ，和 "module/path/file" -> "new-module/path/file"
+      "module": "new-module",
+      // 起别名："module" -> "new-module" 和 "module/path/file" -> "new-module/path/file"
 
       "only-module$": "new-module",
-      // // 起别名："only-module" -> "new-module"，但不匹配 "module/path/file" -> "new-module/path/file"
+      // 起别名 "only-module" -> "new-module"，但不匹配 "module/path/file" -> "new-module/path/file"
+
+      "module": path.resolve(__dirname, "app/third/module.js"),
+      // 起别名 "module" -> "./app/third/module.js" 和 "module/file" 会导致错误
+      // 模块别名相对于当前上下文导入
     },
     <details><summary>/* 可供选择的别名语法（点击展示） */</summary>
     [alias](/configuration/resolve#resolve-alias): [
