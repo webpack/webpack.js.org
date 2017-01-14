@@ -1,5 +1,5 @@
 ---
-title: 目标(Targets)
+title: 构建目标(Targets)
 sort: 11
 contributors:
   - juangl
