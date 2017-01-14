@@ -19,6 +19,8 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 ## Options
 
 ``` js-with-links-with-details
+var path = require('path');
+
 {
   // click on the name of the option to get to the detailed documentation
   // click on the items with arrows to show more examples / advanced options
