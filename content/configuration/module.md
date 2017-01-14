@@ -1,5 +1,5 @@
 ---
-title: 模块
+title: 模块(Module)
 sort: 6
 contributors:
   - sokra
