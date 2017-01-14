@@ -14,46 +14,46 @@ contributors:
 
 `string`
 
-This option determines the name of on-demand loaded chunk files. See [`output.filename`](#output-filename) option for details on the possible values.
+此选项决定了按需加载(on-demand loaded)的 chunk 文件的名称。有关可取的值的详细信息，请查看 [`output.filename`](#output-filename) 选项。
 
-Note that these filenames need to be generated at runtime to send the requests for chunks. Because of this, placeholders like `[name]` and `[chunkhash]` need to add a mapping from chunk id to placeholder value to the output bundle with the webpack runtime. This increases the size and may invalidate the bundle when placeholder value for any chunk changes.
+注意，这些文件名需要在 runtime 根据 chunk 发送的请求去生成。因此，需要在 webpack runtime 输出 bundle 值时，将 chunk id 的值对应映射到占位符(如 `[name]` 和 `[chunkhash]`)。这会增加文件大小，并且在任何 chunk 的占位符值修改后，都会使 bundle 失效。
 
-By default `[id].js` is used or a value inferred from [`output.filename`](#output-filename) (`[name]` is replaced with `[id]` or `[id].` is prepended).
+默认使用 `[id].js` 或从 [`output.filename`](#output-filename) 中推断出的值（`[name]` 会被预先替换为 `[id]` 或 `[id].`）。
 
 
 ## `output.crossOriginLoading`
 
 `boolean` `string`
 
-Only used when [`target`](/configuration/target) is web, which uses JSONP for loading on-demand chunks, by adding script tags.
+只用于 [`target`](/configuration/target) 是 web，使用了通过 script 标签的 JSONP 来按需加载 chunk。
 
-Enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) loading of chunks. The following values are accepted...
+启用 [cross-origin 属性](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) 加载 chunk。以下是可接收的值……
 
-`crossOriginLoading: false` - Disable cross-origin loading (default)
+`crossOriginLoading: false` - 禁用跨域加载（默认）
 
-`crossOriginLoading: "anonymous"` - Enable cross-origin loading **without credentials**
+`crossOriginLoading: "anonymous"` - **不带凭据(credential)**启用跨域加载
 
-`crossOriginLoading: "use-credentials"` - Enable cross-origin loading **with credentials**
+`crossOriginLoading: "use-credentials"` - **带凭据(credential)**启用跨域加载 **with credentials**
 
 
 ## `output.devtoolFallbackModuleFilenameTemplate`
 
 `string | function(info)`
 
-A fallback used when the template string or function above yields duplicates.
+当上面的模板字符串或函数产生重复时使用的备用内容。
 
-See [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametemplate).
+查看 [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametemplate)。
 
 
 ## `output.devtoolLineToLine`
 
 `boolean | object`
 
-(Deprecated: Not really used, not really usable, write an issue if you have a other opinion)
+(弃用：无用，不可用，如果你有其他意见请写 issue 给我们)
 
-Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines.
+对所有或某些模块启用「行到行映射(line to line mapping)」。这将生成基本的资源映射(source map)，即生成资源(generated source)的每一行，映射到原始资源(original source)的同一行。这是一个性能优化点，并且应该只需要输入行(input line)和生成行(generated line)相匹配时才使用。
 
-Pass a boolean to enable or disable this feature for all modules (defaults to `false`). An object with `test`, `include`, `exclude` is also allowed. For example, to enable this feature for all javascript files within a certain directory:
+传入 boolean 值，对所有模块启用或禁用此功能（默认 `false`）。对象可有 `test`, `include`, `exclude` 三种属性。例如，对某个特定目录中所有 javascript 文件启用此功能：
 
 ``` js
 devtoolLineToLine: { test: /\.js$/, include: 'src/utilities' }

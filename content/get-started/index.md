@@ -111,16 +111,13 @@ index.js  1.56 kB       0  [emitted]  main
 
 ```
 
-
-T> 如果你想创建了局部的 `webpack@beta` 版本，要通过其进行构建过程，请务必在命令行中通过 `./node_modules/.bin/webpack` 来引用 `webpack`。
+T> 如果你创建了局部的 `webpack@beta` 版本，要通过其进行构建过程，请务必在命令行中通过 `./node_modules/.bin/webpack` 来引用 `webpack`。
 
 在浏览器中打开 `webpack.config.js`，查看成功后 bundle 的结果。
 你应该看到带有以下文本的页面：'Hello webpack'。
 
 ## 使用带有配置的 webpack
 
-For more complex configuration, we can use a configuration file that webpack can reference to bundle your code.  After you create a `webpack.config.js` file, represent the CLI command above
-with the following config settings -
 对于更复杂的配置，我们可以使用配置文件，webpack 会引用它来打包代码。
 然后创建一个 `webpack.config.js` 文件，上面的 CLI 命令可以以下面的配置表示
 
@@ -175,7 +172,7 @@ T> 你可以通过向 `npm run build` 命令添加两个中横线，给 webpack 
 
 ## 结论
 
-现在你应该有一个基本的架构，你应该深入 webpack [基本概念](/concepts)和[配置](/configuration)来更好地理解其设计。还要查看[指南](/guides)来学习如何处理常见问题。[API](/api) 章节可以深入底层。
+现在你已经一起学习了基本的构建过程，你应该深入 webpack [基本概念](/concepts)和[配置](/configuration)来更好地理解其设计。还要查看[指南](/guides)来学习如何处理常见问题。[API](/api) 章节可以深入底层。
 
 ***
 

@@ -5,7 +5,7 @@ contributors:
   - TheLarkInn
 ---
 
-选项影响编译输出。`output` 选项控制 webpack 如何向硬盘写入编译文件。注意，即使可以存在多个`入口`点，但只指定一个`输出`配置。
+选项影响编译输出。`output` 选项控制 webpack 如何向硬盘写入编译文件。注意，即使可以存在多个`入口`起点，但只指定一个`输出`配置。
 
 如果你用了哈希（`[hash]` 或 `[chunkhash]`），请确保模块具有一致的顺序。可以使用 `OccurrenceOrderPlugin` 或 `recordsPath`。
 
@@ -60,11 +60,11 @@ module.exports = config;
 
 ### `output.devtoolLineToLine`
 
-所有/指定模块启用 行到行映射模式(line-to-line mapped mode)。行到行映射模式使用一个简单的 SourceMap，其中生成源码(generated source)的每一行都映射到原始源码(original source)的同一行。这是一个可以性能优化的地方。当你需要更好的性能，并且要确保输入行(input line)和生成行(generated line)匹配时，才会考虑启用。
+所有/指定模块启用行到行映射(line-to-line mapped)模式。行到行映射模式使用一个简单的 SourceMap，即生成资源(generated source)的每一行都映射到原始资源(original source)的同一行。这是一个性能优化点。当你需要更好的性能，并且只要确保输入行(input line)和生成行(generated line)匹配时，才会考虑启用。
 
 `true` 在所有模块启用（不推荐）
 
-`{test, include, exclude}`对象 在特定文件启用（类似于 `module.loaders`）。
+`{test, include, exclude}` 对象，对特定文件启用（类似于 `module.loaders`）。
 
 > 默认值：`false`
 
