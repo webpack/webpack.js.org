@@ -17,7 +17,9 @@ To set the `output` property, you simply set the output value in your webpack co
 
 ```javascript
 const config = {
-  output: 'bundle.js'
+  output: {
+    filename: 'bundle.js'
+  }
 };
 
 module.exports = config;
