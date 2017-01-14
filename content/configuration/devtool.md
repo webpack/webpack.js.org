@@ -1,5 +1,5 @@
 ---
-title: Devtool
+title: 开发工具(Devtool)
 sort: 10
 contributors:
   - sokra

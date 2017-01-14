@@ -1,5 +1,5 @@
 ---
-title: 传递配置
+title: 传递配置(Passing a Configuration)
 sort: 2
 contributors:
   - sokra

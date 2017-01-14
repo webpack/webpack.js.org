@@ -1,5 +1,5 @@
 ---
-title: 其它选项
+title: 其它选项(Other Options)
 sort: 16
 contributors:
   - sokra
