@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/528f4e5d8a5ece77cb74.css" rel="stylesheet">
+      <link href="/cba268e63bb054c87b76.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -35,7 +35,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>The <a href="/plugins/provide-plugin"><code>provide-plugin</code></a> makes a module available as a variable in every other module required by <code>webpack</code>. The module is required only if you use the variable.
 Most legacy modules rely on the presence of specific globals, like jQuery plugins do on <code>$</code> or <code>jQuery</code>. In this scenario, you can configure webpack to prepend <code>var $ = require(&#x201C;jquery&#x201D;)</code> every time it encounters the global <code>$</code> identifier.</p>
 <pre><code class="lang-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  module<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>ProvidePlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       $<span class="token punctuation">:</span> <span class="token string">&apos;jquery&apos;</span><span class="token punctuation">,</span>
       jQuery<span class="token punctuation">:</span> <span class="token string">&apos;jquery&apos;</span>
