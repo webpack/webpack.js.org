@@ -5,7 +5,7 @@ From adding an issue for a documentation suggestion to creating a pull request: 
 ## Setup
 
 * Install [Node.js](https://nodejs.org/) if you have not already.
-  *Note: Node 4-6 is required for "best results".*. Node 7 may have issues!
+  *Note: Node 6.9.* is required for "best results".*. Node 7 may have issues!
 * Fork the **webpack.js.org** repo at [https://github.com/webpack/webpack.js.org](https://github.com/webpack/webpack.js.org).
 * `git clone <your-clone-url> && cd webpack.js.org`
 * `npm install`
