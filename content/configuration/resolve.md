@@ -215,17 +215,6 @@ modules: [path.resolve(__dirname, "src"), "node_modules"]
 ```
 
 
-## `resolve.resolveToContext`
-
-`boolean`
-
-If `true`, trying to resolve a context to its absolute path ends when a directory is found. Default:
-
-```js
-resolveToContext: false
-```
-
-
 ## `resolve.unsafeCache`
 
 `regex` `array` `boolean`
