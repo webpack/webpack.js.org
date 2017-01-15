@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/649f623aeb10c4a517bd.css" rel="stylesheet">
+      <link href="/7d064b00defa112aabd2.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -235,7 +235,6 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>See <a href="/api/cli">CLI</a>.</p>
 <h2 class="header"><a class="anchor" href="#require-ensure-and-amd-require-is-asynchronous" id="require-ensure-and-amd-require-is-asynchronous"></a><span class="text"><code>require.ensure</code> and AMD <code>require</code> is asynchronous</span><a class="icon-link" href="#require-ensure-and-amd-require-is-asynchronous"></a></h2>
 <p>These functions are now always asynchronous instead of calling their callback sync if the chunk is already loaded.</p>
-<p><strong>nb <code>require.ensure</code> now depends upon native <code>Promise</code>s.  If using <code>require.ensure</code> in an environment that lacks them then you will need a polyfill. </strong></p>
 <h2 class="header"><a class="anchor" href="#loader-configuration-is-through-options" id="loader-configuration-is-through-options"></a><span class="text">Loader configuration is through <code>options</code></span><a class="icon-link" href="#loader-configuration-is-through-options"></a></h2>
 <p>You can <em>no longer</em> configure a loader with a custom property in the <code>webpack.config.js</code>. It must be done through the <code>options</code>. The following configuration with the <code>ts</code> property is no longer valid with webpack 2:</p>
 <pre><code class="lang-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span> 
