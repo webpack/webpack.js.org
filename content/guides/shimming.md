@@ -32,7 +32,7 @@ Most legacy modules rely on the presence of specific globals, like jQuery plugin
 
 ```javascript
 module.exports = {
-  module: [
+  plugins: [
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
