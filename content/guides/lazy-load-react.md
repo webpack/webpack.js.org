@@ -77,26 +77,29 @@ class LazilyLoad extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this._isMounted = true;
-    this.load();
+  componentWillMount() {
+    this.load(this.props);
   }
 
-  componentDidUpdate(previous) {
-    if (this.props.modules === previous.modules) return null;
-    this.load();
+  componentDidMount() {
+    this._isMounted = true;
+  }
+
+  componentWillReceiveProps(next) {
+    if (next.modules === this.props.modules) return null;
+    this.load(next);
   }
 
   componentWillUnmount() {
     this._isMounted = false;
   }
 
-  load() {
+  load(props) {
     this.setState({
       isLoaded: false,
     });
 
-    const { modules } = this.props;
+    const { modules } = props;
     const keys = Object.keys(modules);
 
     Promise.all(keys.map((key) => modules[key]()))
