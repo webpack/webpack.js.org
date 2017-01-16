@@ -6,9 +6,10 @@ contributors:
   - TheLarkInn
   - manekinekko
   - SpaceK33z
+  - mikeerickson
 ---
 
-As explained in detail on the [concepts page](/concepts/loaders), loaders are transformations that are applied on a resource file of your application. Loaders allow you to, for example, configure how webpack should handle a CSS file.
+As explained on the [concepts page](/concepts/loaders), loaders are transformations that are applied on a resource file of your application. Loaders allow you to, for example, configure how webpack should handle a CSS file.
 
 A loader is typically a npm package, which you can install as a development dependency:
 
@@ -25,8 +26,22 @@ There are three ways to use loaders in your application:
 ## Via Configuration
 
 [`module.rules`](https://webpack.js.org/configuration/module/#module-rules) allows you to specify several loaders within your webpack configuration.
-This is a concise way to display loaders, and helps to have clean code as 
+This is a concise way to display loaders, and helps to have clean code as
 well as you have a full overview of each respective loader.
+
+#### Webpack Rules Shorthand Syntax
+The following example demonstrates how to use the [`module.rules`](https://webpack.js.org/configuration/module/#module-rules) shorthand sytnax for defining loaders
+
+```javascript
+  module: {
+    rules: [
+      {test: /\.css$/, loaders: ['style-loader','css-loader']}          // transform css files
+    ]
+  }
+  ...
+```
+#### Webpack Rules Use Syntax
+If you need more configuration options, you can also use the [`use`](https://webpack.js.org/configuration/module/#rule-use) syntax
 
 ```js
   module: {

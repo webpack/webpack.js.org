@@ -66,49 +66,8 @@ $ npm install --save-dev babel-loader css-loader style-loader sass-loader
 ```
 ## Options
 
-The following is a list of values you can pass to the `module.rules` array.  Each element shall contain an object defining the desired loader.
-
-### `test (required)`
-
-The `test` property contains a regex of the files you wish to transform
-
-`eg /\.js$/` will transform all files which end with `.js`
-
-### `loader (either loader or loaders required)`
-
-The `loader` property contains the name of the desired loader (eg `babel-loader`). If you wish to apply more than one transformation, use `loaders` property.
-
-`eg. loader: 'babel-loader'` will apply babel transformation to all `.js` files
-
-### `loaders (either loader or loaders required)`
-
-The `loaders` property shall contain an array of loaders (reads right to left) which you wish to apply.
-
-`eg. ['style-loader','css-loader']` will apply `css` then `style` tranformation
-
-### `use`
-
-The `use` property can be used instead of the `loaders` -or- `loaders` properties, where each array element contains a `loader` object
-
-```javascript
-  module: {
-    rules: [
-      ...
-      {test: /\.js$/, use: [{loader: 'babel-loader'},{loader: 'eslint-loader'}]}
-      ...
-    ]
-  },
-```
-
-### `include`
-
-The `include` property will contain a regex of path patterns you wish to use during transformation.  If property is not supplied, the default webpack `context` pathname will be used.
-
-### `exclude`
-
-The `execlude` property will contain a regex path patterns you wish to ignore during transformation.
-
-`eg. exclude: /bower_components|node_modules` will ignore supplied paths
+The above example demonstrates the different approaches which can be used when defining the `module.rules` section of your `webpack.config.js` file.
+For complete details, refer to [loaders section](/loaders).
 
 #### Omitting Loader Error
 
