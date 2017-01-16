@@ -59,7 +59,7 @@ const config = {
   ...
 };
 ```
-#### Install Webpack Loader modules
+### Install Webpack Loader modules
 Each of the specified rules requires one or more loaders.  In the `webpack.config.js` we referenced the following loaders
 ```
 $ npm install --save-dev babel-loader css-loader style-loader sass-loader
@@ -69,7 +69,7 @@ $ npm install --save-dev babel-loader css-loader style-loader sass-loader
 The above example demonstrates the different approaches which can be used when defining the `module.rules` section of your `webpack.config.js` file.
 For complete details, refer to [loaders section](/loaders).
 
-#### Omitting Loader Error
+### Omitting Loader Error
 
 If you fail to define a loader for the desired files within your project, you will receive an error similar to the following:
 
@@ -92,5 +92,5 @@ module: {
 }
 ...
 ```
-#### Loader Convention and Precedence
+### Loader Convention and Precedence
 The loader name convention and precedence search order is defined by [`resolveLoader.moduleTemplates`](/configuration/resolve#resolveloader) within the webpack configuration API.

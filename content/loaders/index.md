@@ -29,7 +29,7 @@ There are three ways to use loaders in your application:
 This is a concise way to display loaders, and helps to have clean code as
 well as you have a full overview of each respective loader.
 
-#### Webpack Rules Shorthand Syntax
+### Webpack Rules Shorthand Syntax
 The following example demonstrates how to use the [`module.rules`](https://webpack.js.org/configuration/module/#module-rules) shorthand sytnax for defining loaders
 
 ```javascript
@@ -40,7 +40,7 @@ The following example demonstrates how to use the [`module.rules`](https://webpa
   }
   ...
 ```
-#### Webpack Rules Use Syntax
+### Webpack Rules Use Syntax
 If you need more configuration options, you can also use the [`use`](https://webpack.js.org/configuration/module/#rule-use) syntax
 
 ```js
