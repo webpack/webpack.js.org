@@ -196,7 +196,7 @@ mainFiles: ["index"]
 
 Tell webpack what directories should be searched when resolving modules.
 
-Absolute and relative paths can both be used, but be aware that they will behave a bit different.
+Absolute and relative paths can both be used, but be aware that they will behave a bit differently.
 
 A relative path will be scanned simarly to how Node scans for `node_modules`, by looking through the current directory as well as it's ancestors (i.e. `./node_modules`, `../node_modules`, and on).
 
