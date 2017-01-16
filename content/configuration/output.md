@@ -295,7 +295,7 @@ But, `require([ _what?_ ])`?
 
 ```javascript
 output: {
-	name: "MyLibrary",
+	library: "MyLibrary",
 	libraryTarget: "amd"
 }
 ```
