@@ -73,11 +73,11 @@ For complete details, refer to [loaders section](/loaders).
 
 If you fail to define a loader for the desired files within your project, you will receive an error similar to the following:
 
-`Module not found: Error: Can't resolve 'json-loader' in ...`
+`Module not found: Error: Can't resolve 'sass-loader' in ...`
 
-This can be cured by installing `json-loader`
+This can be cured by installing `sass-loader`
 
-`$ npm install --save-dev json-loader`
+`$ npm install --save-dev sass-loader`
 
 And referencing the loader within your `webpack.config.js`
 
@@ -86,7 +86,7 @@ And referencing the loader within your `webpack.config.js`
 module: {
   rules: [
     ...
-    {test: /\.json$/, loader: 'json-loader'},
+    {test: /\s[a|c]ss$/, loader: 'sass-loader'}
     ...
   ]
 }
