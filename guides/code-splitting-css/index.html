@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/bd17b20d97e11a4814ab.css" rel="stylesheet">
+      <link href="/bd0521df703ecd7df076.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -21,7 +21,7 @@
 This has the disadvantage that, you will not be able to utilize the browser&apos;s ability to load CSS asynchronously and parallel. Instead, your page will have to wait until your whole JavaScript bundle is loaded, to style itself.
 webpack can help with this problem by bundling the CSS separately using <a href="https://github.com/webpack/extract-text-webpack-plugin">extract-text-webpack-plugin</a> and the <a href="https://github.com/webpack/css-loader">css-loader</a>.</p>
 <h2 class="header"><a class="anchor" href="#using-css-loader" id="using-css-loader"></a><span class="text">Using <code>css-loader</code></span><a class="icon-link" href="#using-css-loader"></a></h2>
-<p>To import css into your JavaScript code like <a href="concept/modules">any other module</a>, you will have to use the <a href="https://github.com/webpack/css-loader">css-loader</a>
+<p>To import css into your JavaScript code like <a href="/concepts/modules">any other module</a>, you will have to use the <a href="https://github.com/webpack/css-loader">css-loader</a>.
 The webpack config with <code>css-loader</code> will look like</p>
 <pre><code class="lang-javascript"><span class="token comment" spellcheck="true">//webpack.config.js</span>
 
@@ -51,8 +51,8 @@ loader<span class="token punctuation">:</span> ExtractTextPlugin<span class="tok
 <h3 class="header"><a class="anchor" href="#in-the-plugin" id="in-the-plugin"></a><span class="text">In the plugin</span><a class="icon-link" href="#in-the-plugin"></a></h3>
 <pre><code class="lang-javascript"><span class="token keyword">new</span> <span class="token class-name">ExtractTextPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span> filename<span class="token punctuation">:</span> <span class="token string">&apos;bundle.css&apos;</span><span class="token punctuation">,</span> disable<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> allChunks<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
 </code></pre>
-<p>With above two steps, you can generate a new bundle specifically for all the CSS modules and add them as a separate tag in the <code>index.html</code>
-For more info on how to use the api please go to <a href="https://github.com/webpack/extract-text-webpack-plugin#api"><code>ExtractTextPlugin</code> api</a>.</p>
+<p>With above two steps, you can generate a new bundle specifically for all the CSS modules and add them as a separate tag in the <code>index.html</code>.
+For more information on how to use the api, please go to <a href="https://github.com/webpack/extract-text-webpack-plugin#api"><code>ExtractTextPlugin</code> api</a>.</p>
 <p>The full config for splitting css with <code>ExtractTextPlugin</code> is as follows</p>
 <pre><code class="lang-javascript"><span class="token keyword">var</span> ExtractTextPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;extract-text-webpack-plugin&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
