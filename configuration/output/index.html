@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/0a07c3c1a55cd810f658.css" rel="stylesheet">
+      <link href="/9ae8a4b5bb3d0206cc92.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -158,7 +158,7 @@ MyLibrary<span class="token punctuation">.</span><span class="token function">do
 <p><em>Wondering the difference between CommonJS and CommonJS2? Check <a href="https://github.com/webpack/webpack/issues/1114">this</a> out (they are pretty much the same).</em></p>
 <p><code>libraryTarget: &quot;commonjs-module&quot;</code> - Expose it using the <code>module.exports</code> object (<code>output.library</code> is ignored), <code>__esModule</code> is defined (it&apos;s threaded as ES2015 Module in interop mode)</p>
 <p><code>libraryTarget: &quot;amd&quot;</code> - In this case webpack will make your library an AMD module.</p>
-<p>But there is a very important pre-requisite, your entry chunk must be defined with the define property, if not, webpack wil create the AMD module, but without dependencies. 
+<p>But there is a very important pre-requisite, your entry chunk must be defined with the define property, if not, webpack will create the AMD module, but without dependencies. 
 The output will be something like this:</p>
 <pre><code class="lang-javascript"><span class="token function">define</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">//what this module returns is what your entry chunk returns</span>
