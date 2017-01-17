@@ -1,5 +1,5 @@
 ---
-title: Code Splitting - Using RequireJS
+title: Code Splitting - Using require.ensure
 sort: 5
 contributors:
   - pksjce
