@@ -16,7 +16,7 @@ These options determine how the [different types of modules](/concepts/modules) 
 Prevent webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries.
 
 ```js
-noParse: /jquery|backbone/
+noParse: /jquery|lodash/
 ```
 
 ## `module.rules`
