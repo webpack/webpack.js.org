@@ -276,7 +276,7 @@ _Wondering the difference between CommonJS and CommonJS2? Check [this](https://g
 
 `libraryTarget: "amd"` - In this case webpack will make your library an AMD module.
 
-But there is a very important pre-requisite, your entry chunk must be defined with the define property, if not, webpack wil create the AMD module, but without dependencies. 
+But there is a very important pre-requisite, your entry chunk must be defined with the define property, if not, webpack will create the AMD module, but without dependencies. 
 The output will be something like this:
 
 ```javascript
