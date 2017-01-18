@@ -76,6 +76,7 @@ each environment. For example:
 ** dev.js **
 ```js
 module.exports = function (env) {
+  return {
     devtool: 'cheap-module-source-map',
     output: {
         path: path.join(__dirname, '/../dist/assets'),
@@ -91,12 +92,14 @@ module.exports = function (env) {
         stats: 'minimal',
         publicPath: publicPath
     }
+  }
 }
 ```
 
 ** prod.js **
 ```js
 module.exports = function (env) {
+  return {
     output: {
         path: path.join(__dirname, '/../dist/assets'),
         filename: '[name].bundle.js',
@@ -120,6 +123,7 @@ module.exports = function (env) {
             comments: false
         })
     ]
+  }
 }
 ```
 Have the following snippet in our webpack.config.js:
