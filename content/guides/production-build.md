@@ -6,6 +6,7 @@ contributors:
   - rajagopal4890
   - markerikson
   - simon04
+  - kisnows
 ---
 
 This page explains how to generate production builds with webpack.
