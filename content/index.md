@@ -3,6 +3,9 @@ title: webpack
 ---
 ## 编写代码
 
+<div class="homepage__wrap">
+<div class="homepage__left">
+
 **app.js**
 
 ```js
@@ -10,6 +13,8 @@ import bar from './bar';
 
 bar();
 ```
+
+</div><div class="homepage__right">
 
 **bar.js**
 
@@ -19,7 +24,14 @@ export default function bar() {
 }
 ```
 
-## 使用 webpack 打包[模块](/concepts/modules)
+</div>
+</div>
+
+## 使用 webpack 打包。
+
+<div class="homepage__wrap">
+<div class="homepage__left">
+
 **webpack.config.js**
 
 ```js
@@ -30,6 +42,8 @@ module.exports = {
   }
 }
 ```
+
+</div><div class="homepage__right">
 
 **page.html**
 
@@ -46,6 +60,9 @@ module.exports = {
 ```
 
 然后在命令行运行 `webpack` 就会创建 `bundle.js`.
+
+</div>
+</div>
 
 ## 让一切变得简单
 ## 立即[开始](/get-started)

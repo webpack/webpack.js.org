@@ -19,6 +19,8 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
 ## 选项
 
 ``` js-with-links-with-details
+var path = require('path');
+
 {
   // 点击选项名称，获取文档详细
   // 点击带箭头的项目，展示「更多示例 / 高级选项」

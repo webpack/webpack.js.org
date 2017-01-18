@@ -17,7 +17,9 @@ contributors:
 
 ```javascript
 const config = {
-  output: 'bundle.js'
+  output: {
+    filename: 'bundle.js'
+  }
 };
 
 module.exports = config;

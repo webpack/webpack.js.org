@@ -1,5 +1,5 @@
 ---
-title: 代码分割 - 使用 RequireJS
+title: 代码拆分 - 使用 require.ensure
 sort: 5
 contributors:
   - pksjce

@@ -11,7 +11,7 @@ webpack 能很好地解决这个问题，通过使用 [extract-text-webpack-plug
 
 ## 使用 `css-loader`
 
-你可以使用 [css-loader](https://github.com/webpack/css-loader) 来向你的 JavaScript 代码导入 CSS [模块](concept/modules)。
+你可以使用 [css-loader](https://github.com/webpack/css-loader) 来向你的 JavaScript 代码导入 CSS [模块](/concept/modules)。
 `css-loader` 在 webpack 中的配置可以参考下面的代码：
 
 ```javascript

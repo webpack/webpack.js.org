@@ -312,6 +312,8 @@ See [CLI](/api/cli).
 
 These functions are now always asynchronous instead of calling their callback sync if the chunk is already loaded.
 
+**nb `require.ensure` now depends upon native `Promise`s.  If using `require.ensure` in an environment that lacks them then you will need a polyfill. **
+
 ## Loader configuration is through `options`
 
 You can *no longer* configure a loader with a custom property in the `webpack.config.js`. It must be done through the `options`. The following configuration with the `ts` property is no longer valid with webpack 2:
