@@ -13,7 +13,7 @@ This option controls if and how Source Maps are generated.
 
 `string` `false`
 
-选择一种 [源映射(source mapping)](http://blog.teamtreehouse.com/introduction-source-maps) 来增强调试过程。注意，以下选项能够可能会显著地影响构建(build)和重构建(rebuild)的速度……
+选择一种[源映射(source mapping)](http://blog.teamtreehouse.com/introduction-source-maps)来增强调试过程。注意，以下选项能够可能会显著地影响构建(build)和重构建(rebuild)的速度……
 
  devtool                      | build | rebuild | production | quality
 ------------------------------|-------|---------|------------|--------------------------
