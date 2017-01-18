@@ -8,6 +8,7 @@ contributors:
   - domfarolino
   - johnnyreilly
   - jouni-kantola
+  - frederikprijck
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -333,7 +334,7 @@ You can *no longer* configure a loader with a custom property in the `webpac
 module.exports = { 
   ...
   module: { 
-    use: [{ 
+    rules: [{ 
       test: /\.tsx?$/,
       loader: 'ts-loader'
     }]
@@ -351,7 +352,7 @@ Good question. Well, strictly speaking it's 2 possible things; both ways to conf
 module.exports = { 
   ...
   module: { 
-    use: [{ 
+    rules: [{ 
       test: /\.tsx?$/,
       loader: 'ts-loader?' + JSON.stringify({ transpileOnly: false })
     }]
@@ -365,7 +366,7 @@ But it can also be a separately specified object that's supplied alongside a loa
 module.exports = { 
   ...
   module: { 
-    use: [{ 
+    rules: [{ 
       test: /\.tsx?$/,
       loader: 'ts-loader'
       options:  { transpileOnly: false }
