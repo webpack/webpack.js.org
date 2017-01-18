@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/2868ee6e42490681fd16.css" rel="stylesheet">
+      <link href="/324ca21120c8d4fd026a.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -90,9 +90,9 @@
 </tr>
 </tbody>
 </table>
-<p>Some of these values are suited for development and some for production. For development you typically want very fast Source Maps at the cost of bundle size, but for production you want separate Source Maps that are accurate.</p>
+<p>Some of these values are suited for development and some for production. For development you typically want fast Source Maps at the cost of bundle size, but for production you want separate Source Maps that are accurate.</p>
 <blockquote class="warning"><div class="tip-content"> There are some issues with Source Maps in Chrome. <a href="https://github.com/webpack/webpack/issues/3165">We need your help!</a>. </div></blockquote><h3 class="header"><a class="anchor" href="#for-development" id="for-development"></a><span class="text">For development</span><a class="icon-link" href="#for-development"></a></h3>
-<p><code>eval</code> - Each module is executed with <code>eval()</code> and <code>//@ sourceURL</code>. This is very fast. The main disadvantage is that it doesn&apos;t display line numbers correctly since it gets mapped to transpiled code instead of the original code.</p>
+<p><code>eval</code> - Each module is executed with <code>eval()</code> and <code>//@ sourceURL</code>. This is pretty fast. The main disadvantage is that it doesn&apos;t display line numbers correctly since it gets mapped to transpiled code instead of the original code.</p>
 <p><code>inline-source-map</code> - A SourceMap is added as DataUrl to the bundle.</p>
 <p><code>eval-source-map</code> - Each module is executed with <code>eval()</code> and a SourceMap is added as DataUrl to the <code>eval()</code>. Initially it is slow, but it provides fast rebuild speed and yields real files. Line numbers are correctly mapped since it gets mapped to the original code.</p>
 <p><code>cheap-module-eval-source-map</code> - Like <code>eval-source-map</code>, each module is executed with <code>eval()</code> and a SourceMap is added as DataUrl to the <code>eval()</code>. It is &quot;cheap&quot; because it doesn&apos;t have column mappings, it only maps line numbers.</p>

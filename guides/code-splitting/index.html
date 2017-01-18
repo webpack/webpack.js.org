@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/2868ee6e42490681fd16.css" rel="stylesheet">
+      <link href="/324ca21120c8d4fd026a.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -21,7 +21,7 @@
 <p>There are mainly two kinds of code splitting that can be accomplished with webpack:</p>
 <h2 class="header"><a class="anchor" href="#resource-splitting-for-caching-and-parallel-loads" id="resource-splitting-for-caching-and-parallel-loads"></a><span class="text">Resource splitting for caching and parallel loads</span><a class="icon-link" href="#resource-splitting-for-caching-and-parallel-loads"></a></h2>
 <h3 class="header"><a class="anchor" href="#vendor-code-splitting" id="vendor-code-splitting"></a><span class="text">Vendor code splitting</span><a class="icon-link" href="#vendor-code-splitting"></a></h3>
-<p>A typical application can depend on many third party libraries for framework/functionality needs. Unlike application code, code present in these libraries does not change very often. </p>
+<p>A typical application can depend on many third party libraries for framework/functionality needs. Unlike application code, code present in these libraries does not change often.</p>
 <p>If we keep code from these libraries in its own bundle, separate from the application code, we can leverage the browser&apos;s caching mechanism to cache these files for longer durations on the end user&apos;s machine. </p>
 <p>For this to work, the <code>hash</code> portion in the vendor filename must remain constant, regardless of application code changes. Learn <a href="/guides/code-splitting-libraries">how to split vendor/library</a> code using the CommonsChunkPlugin.</p>
 <h3 class="header"><a class="anchor" href="#css-splitting" id="css-splitting"></a><span class="text">CSS splitting</span><a class="icon-link" href="#css-splitting"></a></h3>
