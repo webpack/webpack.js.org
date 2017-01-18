@@ -191,7 +191,7 @@ Only used when [`target`](/configuration/target) is web, which uses JSONP for lo
 
 A JSONP function name used to asynchronously load chunks or join multiple initial chunks (CommonsChunkPlugin, AggressiveSplittingPlugin).
 
-It's required to change it if multiple webpack runtimes (from different compilation) are used on the same page.
+This needs to be changed if multiple webpack runtimes (from different compilation) are used on the same webpage.
 
 If using the [`output.library`](#output-library) option, the library name is automatically appended.
 

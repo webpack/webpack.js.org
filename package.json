@@ -36,7 +36,7 @@
     "lint:md": "eslint . --ext .md",
     "lint:markdown": "markdownlint --config ./.markdownlintrc **/*.md *.md ./content/**/*.md",
     "lint:social": "alex ./**/*.md",
-    "lint:prose": "ncp .proselintrc ~/ && proselint",
+    "lint:prose": "cp .proselintrc ~/ && proselint content",
     "test": "npm run lint ",
     "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml"
   },
@@ -76,6 +76,7 @@
     "mkdirp": "^0.5.1",
     "modularscale-sass": "^2.1.1",
     "moment": "^2.15.1",
+    "ncp": "^2.0.0",
     "node-sass": "^3.9.3",
     "npm-run-all": "^3.1.0",
     "postcss-loader": "^0.13.0",
