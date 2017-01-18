@@ -3,6 +3,7 @@ title: Code Splitting - CSS
 sort: 3
 contributors:
   - pksjce
+  - jonwheeler
 ---
 
 In webpack, when you use the css-loader and import CSS into your JavaScript files, the CSS is bundled along with your JavaScript.
@@ -17,7 +18,7 @@ The webpack config with `css-loader` will look like
 ```javascript
 //webpack.config.js
 
-modules.exports = function(env){
+module.exports = function(env){
     entry: '..',
     ...
     module: {
