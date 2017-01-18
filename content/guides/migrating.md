@@ -324,7 +324,7 @@ See [CLI](/api/cli).
 
 These functions are now always asynchronous instead of calling their callback sync if the chunk is already loaded.
 
-**nb `require.ensure` now depends upon native `Promise`s.  If using `require.ensure` in an environment that lacks them then you will need a polyfill. **
+**nb `require.ensure` now depends upon native `Promise`s. If using `require.ensure` in an environment that lacks them then you will need a polyfill. **
 
 ## Loader configuration is through `options`
 

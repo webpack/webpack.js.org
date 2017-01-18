@@ -10,7 +10,7 @@ sort: 1
 
 Before getting started, make sure you have a fresh version of [Node.js](https://nodejs.org/en/) installed. The current LTS is an ideal starting point. You may run into a variety of issues with the older versions as they may be missing functionality webpack or related packages might need.
 
-Note that this documentation is for webpack 2, for which there is not yet a stable release.  You can get the most recent beta by installing with the `beta` tag (see below).
+Note that this documentation is for webpack 2, for which there is not yet a stable release. You can get the most recent beta by installing with the `beta` tag (see below).
 
 ### Global Installation
 

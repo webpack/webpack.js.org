@@ -118,7 +118,7 @@ You should see a page with the following text: 'Hello webpack'.
 
 ## Using webpack with a config
 
-For more complex configuration, we can use a configuration file that webpack can reference to bundle your code.  After you create a `webpack.config.js` file, represent the CLI command above
+For more complex configuration, we can use a configuration file that webpack can reference to bundle your code. After you create a `webpack.config.js` file, represent the CLI command above
 with the following config settings -
 
 __webpack.config.js__

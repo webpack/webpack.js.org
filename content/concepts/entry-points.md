@@ -52,7 +52,7 @@ const config = {
 
 The object syntax is more verbose. However, this is the most scalable way of defining entry/entries in your application.
 
-T> **"Scalable webpack configurations"** are ones that can be reused and combined with other partial configurations. This is a popular technique used to separate concerns by environment, build target and runtime. They are then merged together using specialized tools like [webpack-merge](https://github.com/survivejs/webpack-merge).
+T> **"Scalable webpack configurations"** are ones that can be reused and combined with other partial configurations. This is a popular technique used to separate concerns by environment, build target and runtime. They are then merged using specialized tools like [webpack-merge](https://github.com/survivejs/webpack-merge).
 
 ## Scenarios
 
