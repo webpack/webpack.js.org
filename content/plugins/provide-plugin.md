@@ -9,11 +9,11 @@ contributors:
 new webpack.ProvidePlugin({identifier1: 'module1', /* ... */})
 ```
 
-Automatically loads modules. Whenever the `identifier` is encountered as free variable in a module, the `module` is loaded automatically and the `identifier` is filled with the exports of the loaded `module`.
+自动加载模块。 任何时候，当 `identifier` 被当作未赋值的变量时， `module` 就会自动被加载，并且 `identifier` 会被这个 `module` 输出的内容所赋值。
 
-## Typical use-cases
+## 典型的例子
 
-### Use jQuery
+### 使用 jQuery
 
 ```javascript
 new webpack.ProvidePlugin({
@@ -24,14 +24,14 @@ new webpack.ProvidePlugin({
 
 ```javascript
 // in a module
-$('#item'); // <= just works
-jQuery('#item'); // <= just works
-// $ is automatically set to the exports of module "jquery"
+$('#item'); // <= 起作用
+jQuery('#item'); // <= 起作用
+// $ 自动被设置为 "jquery" 输出的内容
 ```
 
-### Use jQuery with Angular 1
+### 使用 jQuery 和 Angular 1
 
-Angular looks for `window.jQuery` in order to determine whether jQuery is present, see the [source code](https://github.com/angular/angular.js/blob/v1.5.9/src/Angular.js#L1821-L1823)
+Angular 会寻找 `window.jQuery` 来决定 jQuery 是否存在, 查看 [源码](https://github.com/angular/angular.js/blob/v1.5.9/src/Angular.js#L1821-L1823)
 
 ```javascript
 new webpack.ProvidePlugin({
