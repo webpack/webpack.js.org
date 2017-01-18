@@ -31,7 +31,7 @@ jQuery('#item'); // <= 起作用
 
 ### 使用 jQuery 和 Angular 1
 
-Angular 会寻找 `window.jQuery` 来决定 jQuery 是否存在, 查看 [source code](https://github.com/angular/angular.js/blob/v1.5.9/src/Angular.js#L1821-L1823)
+Angular 会寻找 `window.jQuery` 来决定 jQuery 是否存在, 查看 [源码](https://github.com/angular/angular.js/blob/v1.5.9/src/Angular.js#L1821-L1823)
 
 ```javascript
 new webpack.ProvidePlugin({
