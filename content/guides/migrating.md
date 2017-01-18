@@ -224,6 +224,17 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
   ]
 ```
 
+## `BannerPlugin` - breaking change
+
+`BannerPlugin` no longer accept two parameters but rather only a single options object.
+
+``` diff
+  plugins: [
+-    new webpack.BannerPlugin('Banner', {raw: true, entryOnly: true});
++    new webpack.BannerPlugin({banner: 'Banner', raw: true, entryOnly: true});
+  ]
+```
+
 ## `OccurrenceOrderPlugin` is now on by default
 
 It's no longer necessary to specify it in configuration.
