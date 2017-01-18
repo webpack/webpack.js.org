@@ -161,7 +161,7 @@ new CommonsChunkPlugin({
     // If module has a path, and inside of the path exists the name "somelib", 
     // and it is used in 3 separate chunks/entries, then break it out into
     // a separate chunk with chunk keyname "my-single-lib-chunk", and filename "my-single-lib-chunk.js"
-    return module.resouce && (/somelib/).test(module.resource) && count === 3;
+    return module.resource && (/somelib/).test(module.resource) && count === 3;
   }
 });
 ```
