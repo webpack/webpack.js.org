@@ -142,3 +142,28 @@ new CommonsChunkPlugin({
   // (3 children must share the module before it's separated)
 })
 ```
+
+### Passing the `minChunks` property a function
+
+You also have the ability to pass the `minChunks` property a function. This function is called by the `CommonsChunkPlugin` and calls the function with `module` and `count` arguments. 
+
+The `module` property represents each module in the chunks you have provided via the `names` property. 
+
+The `count` property represents how many chunks the `module` is used in. 
+
+This option is useful when you want to have fine-grained control over how the CommonsChunk algorithm determins where modules should be moved to.
+
+```javascript
+new CommonsChunkPlugin({
+  name: "my-single-lib-chunk",
+  filename: "my-single-lib-chunk.js",
+  minChunks: function(module, countOfHowManyTimesThisModuleIsUsedAcrossAllChunks) {
+    // If module has a path, and inside of the path exists the name "somelib", 
+    // and it is used in 3 separate chunks/entries, then break it out into
+    // a separate chunk with chunk keyname "my-single-lib-chunk", and filename "my-single-lib-chunk.js"
+    return module.resouce && (/somelib/).test(module.resource) && count === 3;
+  }
+});
+```
+
+As seen above, this example allows you to move only one lib to a separate file if and only if all conditions are met inside the function. 
