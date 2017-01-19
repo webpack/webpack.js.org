@@ -7,7 +7,7 @@ contributors:
   - tomasAlabes
 ---
 
-位于对象最顶级 `output` 键，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundles、assets 和和其他你所打包或使用 webpack 载入的任何内容」。
+位于对象最顶级 `output` 键，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
 
 
 ## `output.chunkFilename`
@@ -51,7 +51,7 @@ contributors:
 
 (弃用：无用，不可用，如果你有其他意见请写 issue 给我们)
 
-对所有或某些模块启用「行到行映射(line to line mapping)」。这将生成基本的资源映射(source map)，即生成资源(generated source)的每一行，映射到原始资源(original source)的同一行。这是一个性能优化点，并且应该只需要输入行(input line)和生成行(generated line)相匹配时才使用。
+对所有或某些模块启用「行到行映射(line to line mapping)」。这将生成基本的源映射(source map)，即生成资源(generated source)的每一行，映射到原始资源(original source)的同一行。这是一个性能优化点，并且应该只需要输入行(input line)和生成行(generated line)相匹配时才使用。
 
 传入 boolean 值，对所有模块启用或禁用此功能（默认 `false`）。对象可有 `test`, `include`, `exclude` 三种属性。例如，对某个特定目录中所有 javascript 文件启用此功能：
 
@@ -64,27 +64,30 @@ devtoolLineToLine: { test: /\.js$/, include: 'src/utilities' }
 
 `string | function(info)`
 
-This option is only used when [`devtool`](/configuration/devtool) uses an options which requires module names.
+此选项仅在 「[`devtool`](/configuration/devtool) 使用了需要模块名称的选项」时使用。
 
-Customize the names used in each source map's `sources` array. This can be done by passing a template string or function. For example, when using `devtool: 'eval'`, this is the default:
+自定义每个 source map 的 `sources` 数组中使用的名称。可以通过传递模板字符串(template string)或者函数来完成。例如，当使用 `devtool: 'eval'`，默认值是：
 
 ``` js
 devtoolModuleFilenameTemplate: "webpack:///[resource-path]?[loaders]"
 ```
 
-The following substitutions are available in template strings:
+模板字符串(template string)中做以下替换：
 
 ``` js
-[absolute-resource-path] // The absolute filename
 [all-loaders] // Automatic and explicit loaders and params up to the name of the first loader
-[hash] // The hash of the module identifier
-[id] // The module identifier
 [loaders] // Explicit loaders and params up to the name of the first loader
 [resource] // The path used to resolve the file and any query params used on the first loader
 [resource-path] // Same as above without the query params
+[absolute-resource-path] // 绝对路径文件名
+[all-loaders] // 自动和显式的 loader，以及第一个 loader 名称的参数
+[hash] // 模块标识符的 hash
+[id] // 模块标识符
+[loaders] // 显式的 loader，以及第一个 loader 名称的参数
+[resource] // 用于解析文件的路径和用于第一个 loader 的任意查询参数
 ```
 
-When using a function, the same options are available camel-cased via the `info` parameter:
+当使用一个函数，同样的选项要通过 `info` 参数并使用驼峰式(camel-cased)：
 
 ``` js
 devtoolModuleFilenameTemplate: info => {
@@ -92,108 +95,108 @@ devtoolModuleFilenameTemplate: info => {
 }
 ```
 
-If multiple modules would result in the same name, [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolfallbackmodulefilenametemplate) is used instead for these modules.
+如果多个模块产生相同的名称，使用 [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolfallbackmodulefilenametemplate) 来代替这些模块。
 
 
 ## `output.filename`
 
 `string`
 
-This option determines the name of each output bundle. The bundle is written to the directory specified by the [`output.path`](#output-path) option.
+此选项决定了每个输出 bundle 的名称。这些 bundle 将写入到 [`output.path`](#output-path) 选项指定的目录下。
 
-For a single [`entry`](/configuration/entry-context#entry) point, this can be a static name.
+对于单个[`入口`](/configuration/entry-context#entry)起点，filename 会是一个静态名称。
 
 ``` js
 filename: "bundle.js"
 ```
 
-However, when creating multiple bundles via more than one entry point, code splitting, or various plugins, you should use one of the following substitutions to give each bundle a unique name...
+然而，当通过多个入口起点(entry point)、代码拆分(code splitting)或各种插件(plugin)创建多个 bundle，应该使用以下一种替换方式，来赋予每个 bundle 一个唯一的名称……
 
-Using entry name:
+使用入口名称：
 
 ``` js
 filename: "[name].bundle.js"
 ```
 
-Using internal chunk id:
+使用内部 chunk id
 
 ``` js
 filename: "[id].bundle.js"
 ```
 
-Using the unique hash generated for every build:
+使用每次构建过程中，唯一的 hash 生成
 
 ``` js
 filename: "[name].[hash].bundle.js"
 ```
 
-Using hashes based on each chunks' content:
+使用基于每个 chunk 内容的 hash：
 
 ``` js
 filename: "[chunkhash].bundle.js"
 ```
 
-Make sure the read the [Caching guide](/guides/caching) for details. There are more steps involved than just setting this option.
+请确保已阅读过[指南 - 缓存](/guides/caching)的详细信息。这里涉及更多步骤，不仅仅是设置此选项。
 
-The default value is `"[name].js"`.
+默认值是 `"[name].js"`。
 
-Note this option is called filename but you are still allowed to something like `"js/[name]/bundle.js"` to create a folder structure.
+注意此选项被称为文件名，但是你还是可以创建像 `"js/[name]/bundle.js"` 这样的文件夹结构。
 
-Note this options does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#output-chunkfilename) option is used. It also doesn't affect files created by loaders. For these files see loader options.
+注意，此选项不会影响那些「按需加载 chunk」的输出文件。对于这些文件，请使用 [`output.chunkFilename`](#output-chunkfilename) 选项来控制输出。同样也不影响通过 loader 创建的文件，对于这些文件，请查看 loader 选项来输出控制。
 
 
 ## `output.hotUpdateChunkFilename`
 
 `string`
 
-Customize the filenames of hot update chunks. See [`output.filename`](#output-filename) option for details on the possible values.
+自定义热更新 chunk 的文件名。可选的值的详细信息，请查看 [`output.filename`](#output-filename) 选项。
 
-The only placeholders allowed here are `[id]` and `[hash]`, the default being:
+占位符只能是 `[id]` 和 `[hash]`，默认值是：
 
 ``` js
 hotUpdateChunkFilename: "[id].[hash].hot-update.js"
 ```
 
-Here is no need to change it.
+这里没有必要修改它。
 
 
 ## `output.hotUpdateFunction`
 
 `function`
 
-Only used when [`target`](/configuration/target) is web, which uses JSONP for loading hot updates.
+只在 [`target`](/configuration/target) 是 web 时使用，用于加载热更新(hot update)的 JSONP 函数。
 
-A JSONP function used to asynchronously load hot-update chunks.
+JSONP 函数用于异步加载(async load)热更新(hot-update) chunk。
 
-For details see [`output.jsonpFunction`](#output-jsonpfunction).
+详细请查看 [`output.jsonpFunction`](#output-jsonpfunction)。
 
 
 ## `output.hotUpdateMainFilename`
 
 `string`
 
-Customize the main hot update filename. See [`output.filename`](#output-filename) option for details on the possible values.
+自定义热更新的主文件名(main filename)。可选的值的详细信息，请查看 [`output.filename`](#output-filename) 选项
 
-`[hash]` is the only available placeholder, the default being:
+占位符只能是 `[hash]`，默认值是：
 
 ``` js
 hotUpdateMainFilename: "[hash].hot-update.json"
 ```
 
-Here is no need to change it.
+这里没有必要修改它。
 
 
 ## `output.jsonpFunction`
 
 `function`
 
-Only used when [`target`](/configuration/target) is web, which uses JSONP for loading on-demand chunks.
+只在 [`target`](/configuration/target) 是 web 时使用，用于按需加载(load on-demand) chunk 的 JSONP 函数。
 
-A JSONP function name used to asynchronously load chunks or join multiple initial chunks (CommonsChunkPlugin, AggressiveSplittingPlugin).
+JSONP 函数用于异步加载(async load) chunk，或者拼接多个初始 chunk(CommonsChunkPlugin, AggressiveSplittingPlugin)。
 
-This needs to be changed if multiple webpack runtimes (from different compilation) are used on the same webpage.
+如果在同一网页中使用了多个（来自不同编译(compilation)的）webpack runtime，则需要修改此选项。
 
-If using the [`output.library`](#output-library) option, the library name is automatically appended.
+如果使用了 [`output.library`](#output-library) 选项，library 名称时自动追加的。
 
 
 ## `output.library`

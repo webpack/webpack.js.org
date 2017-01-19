@@ -124,7 +124,7 @@ module.exports = config;
 
 ### `output.hotUpdateFunction`
 
-webpack 用于异步加载(async loading)热更新块(hot update chunk)的 JSONP 函数。
+webpack 用于异步加载(async load)热更新(hot update) chunk 的 JSONP 函数。
 
 > 默认值：`"webpackHotUpdate"`
 
