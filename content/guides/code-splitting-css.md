@@ -1,5 +1,5 @@
 ---
-title: 代码分割 - CSS
+title: 代码拆分 - CSS
 sort: 3
 contributors:
   - pksjce

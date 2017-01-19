@@ -1,5 +1,5 @@
 ---
-title: 代码分割 - Libraries
+title: 代码拆分 - Libraries
 sort: 4
 contributors:
   - pksjce
