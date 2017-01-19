@@ -124,9 +124,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/guides/hmr-react/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/guides/lazy-load-react/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/guides/installation/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/guides/lazy-load-react/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/guides/migrating/index.html</loc>
     </url>    <url>
@@ -164,9 +164,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/loaders/json-loader/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/less-loader/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/json5-loader/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/loaders/less-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/mocha-loader/index.html</loc>
     </url>    <url>
@@ -200,9 +200,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/plugins/compression-webpack-plugin/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/plugins/extract-text-webpack-plugin/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/plugins/define-plugin/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/plugins/extract-text-webpack-plugin/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/plugins/i18n-webpack-plugin/index.html</loc>
     </url>    <url>
@@ -210,9 +210,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/plugins/provide-plugin/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/pluginsapi/compilation/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/plugins/source-map-dev-tool-plugin/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/pluginsapi/compilation/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/pluginsapi/compiler/index.html</loc>
     </url>    <url>
@@ -220,9 +220,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/pluginsapi/examples/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/pluginsapi/parser/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/pluginsapi/module-factories/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/pluginsapi/parser/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/pluginsapi/resolver/index.html</loc>
     </url>    <url>

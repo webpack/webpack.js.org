@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/df22715b871560e4f337.css" rel="stylesheet">
+      <link href="/f904fa033b07a809dc4b.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -59,14 +59,17 @@ If you didn&apos;t do so already please check out <a href="https://webpack.js.or
        test<span class="token punctuation">:</span> <span class="token regex">/\.tsx?$/</span><span class="token punctuation">,</span>
        loader<span class="token punctuation">:</span> <span class="token string">&apos;ts-loader&apos;</span><span class="token punctuation">,</span>
        exclude<span class="token punctuation">:</span> <span class="token regex">/node_modules/</span><span class="token punctuation">,</span>
-     <span class="token punctuation">}</span>
+     <span class="token punctuation">}</span><span class="token punctuation">,</span>
    <span class="token punctuation">]</span>
- <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span> 
+ resolve<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+   extensions<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;.tsx&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;.ts&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;.js&quot;</span><span class="token punctuation">]</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 </code></pre>
 <p>Here we specify our entry point to be <strong>index.ts</strong> in our current directory, 
 an output file called <strong>bundle.js</strong> 
-and our TypeScript loader that is in charge of compiling our TypeScript file to JavaScript.</p>
+and our TypeScript loader that is in charge of compiling our TypeScript file to JavaScript. We also add <code>resolve.extensions</code> to instruct webpack what file extensions to use when resolving Typescript modules.</p>
 <h2 class="header"><a class="anchor" href="#typescript-loaders" id="typescript-loaders"></a><span class="text">Typescript loaders</span><a class="icon-link" href="#typescript-loaders"></a></h2>
 <p>Currently there are 2 loaders for TypeScript available:</p>
 <ul>
@@ -102,7 +105,15 @@ exactly as we see it in our code editor.</p>
        test<span class="token punctuation">:</span> <span class="token regex">/\.js$/</span><span class="token punctuation">,</span>
        loader<span class="token punctuation">:</span> <span class="token string">&quot;source-map-loader&quot;</span>
      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+     <span class="token punctuation">{</span>
+       enforce<span class="token punctuation">:</span> <span class="token string">&apos;pre&apos;</span><span class="token punctuation">,</span>
+       test<span class="token punctuation">:</span> <span class="token regex">/\.js$/</span><span class="token punctuation">,</span>
+       use<span class="token punctuation">:</span> <span class="token string">&quot;source-map-loader&quot;</span>
+     <span class="token punctuation">}</span>
    <span class="token punctuation">]</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ resolve<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+   extensions<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;.tsx&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;.ts&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;.js&quot;</span><span class="token punctuation">]</span>
  <span class="token punctuation">}</span><span class="token punctuation">,</span>
  devtool<span class="token punctuation">:</span> <span class="token string">&apos;inline-source-map&apos;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
