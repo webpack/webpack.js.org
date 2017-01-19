@@ -21,7 +21,6 @@ npm init -y
 npm install --save-dev webpack@beta
 ./node_modules/.bin/webpack --help # Shows a list of valid cli commands
 .\node_modules\.bin\webpack --help # For windows users
-npm install --save lodash
 ```
 
 Now create subdirectory `app` with an `index.js` file.
@@ -65,7 +64,13 @@ There are problems with managing JavaScript projects this way:
   - If a dependency is missing, or is included in the wrong order, the application will not function at all.
   - If a dependency is included but is not used, then there is a lot of unnecessary code that the browser has to download.
 
-To bundle the `lodash` dependency with the `index.js`, we need to import `lodash`.
+To bundle the `lodash` dependency with the `index.js`, we first need to install `lodash`
+
+```
+npm install --save lodash
+```
+
+and then import it.
 
 __app/index.js__
 
