@@ -1,5 +1,5 @@
 ---
-title: Module Resolution
+title: 模块解析(Module Resolution)
 sort: 8
 contributors:
     - pksjce
@@ -15,7 +15,7 @@ import foo from 'path/to/module'
 require('path/to/module')
 ```
 
-依赖模块可以来自应用程序代码或第三方库。解析器帮助 `webpack` 找到包(bundle)中需要引入的模块代码，这些代码在包含在每个 `require`/`import` 这样的语句中。
+依赖模块可以来自应用程序代码或第三方库。解析器帮助 `webpack` 找到 bundle 中需要引入的模块代码，这些代码在包含在每个 `require`/`import` 这样的语句中。
 当打包模块时，`webpack` 使用[增强解析](https://github.com/webpack/enhanced-resolve)来解析文件路径
 
 ## webpack 中的解析规则

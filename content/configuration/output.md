@@ -203,32 +203,32 @@ JSONP 函数用于异步加载(async load) chunk，或者拼接多个初始 chun
 
 `string`
 
-Read the [library guide](/guides/author-libraries) for details.
+有关详细信息，请阅读[指南 - library](/guides/author-libraries)。
 
-Use `library`, and `libraryTarget` below, when writing a JavaScript library that should export values, which can be used by other code depending on it. Pass a string with the name of the library:
+在编写一个导出值的 JavaScript library 时，可以使用下面的 `library` 和 `libraryTarget`，导出值可以作为其他代码的依赖。传入 library 名称的字符串。
 
 ``` js
 library: "MyLibrary"
 ```
 
-The name is used depending on the value of the [`output.libraryTarget`](#output-librarytarget) options.
+library 名称取决于 [`output.libraryTarget`](#output-librarytarget) 选项的值。
 
-Note that `output.libraryTarget` defaults to `var`. This means if only `output.library` is used it is exported as variable declaration (when used as script tag it's available in the global scope after execution).
+注意，`output.libraryTarget` 的默认值是 var。这意味着，如果使用 `output.libraryTarget` 的默认值，`output.library` 会将值作为变量声明导出（当使用 script 标签时，其执行后在全局作用域可用）。
 
 
 ## `output.libraryTarget`
 
 `string`
 
-> Default: `"var"`
+> 默认值： `"var"`
 
-Read the [library guide](/guides/author-libraries) for details.
+有关详细信息，请阅读[指南 - library](/guides/author-libraries)。
 
-Configure how the library will be exposed. Any one of the following options can be used.
+配置如何暴露 library。可以使用下面的选项中的任意一个。
 
-> To give your library a name, set the `output.library` config to it (the examples assume `library: "MyLibrary"`)
+> 设置 `output.library` 来配置 library 的名称。（例子假设 `library: "MyLibrary"`）
 
-The following options are supported:
+支持以下选项：
 
 
 `libraryTarget: "var"` - (default) When your library is loaded, the **return value of your entry point** will be assigned to a variable:
