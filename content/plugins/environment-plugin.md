@@ -11,7 +11,7 @@ new webpack.EnvironmentPlugin(keys)
 ```
 
 ## How to use
-EnvironmentPlugin accepts either an array of keys, or an object with default values.
+EnvironmentPlugin accepts either an array of keys or an object with default values.
 
 ```js
 new webpack.EnvironmentPlugin(['NODE_ENV', 'VERSION'])
