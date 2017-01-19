@@ -61,14 +61,14 @@ module.exports = {
    ]
  }, 
  resolve: {
-   extensions: ["*", ".tsx", ".ts", ".js"]
+   extensions: [".tsx", ".ts", ".js"]
  },
 };
 ```
  
 Here we specify our entry point to be __index.ts__ in our current directory, 
 an output file called __bundle.js__ 
-and our TypeScript loader that is in charge of compiling our TypeScript file to JavaScript. We also add `resolve.extensions` to insruct webpack what file extensions to use when resolving Typescript modules.
+and our TypeScript loader that is in charge of compiling our TypeScript file to JavaScript. We also add `resolve.extensions` to instruct webpack what file extensions to use when resolving Typescript modules.
 
 ## Typescript loaders
 
@@ -122,7 +122,7 @@ module.exports = {
    ]
  },
  resolve: {
-   extensions: ["*", ".tsx", ".ts", ".js"]
+   extensions: [".tsx", ".ts", ".js"]
  },
  devtool: 'inline-source-map',
 };
