@@ -24,7 +24,7 @@ This is an array of strings where we can declare all the modules that need to be
 This is the callback function that webpack will execute once the dependencies are loaded. An implementation of the require object is sent as a parameter to this function. This is so that, we can further `require()` the dependencies and any other modules for execution.
 
 #### chunkName
-The chunkName is the name given to the chunk created by this particular `require.ensure()`. By giving the same name at various different split points of `require.ensure()`, we can make sure all the dependencies are collectively put in the same bundle.
+The chunkName is the name given to the chunk created by this particular `require.ensure()`. By giving the same name at different split points of `require.ensure()`, we can make sure all the dependencies are collectively put in the same bundle.
 
 Let us consider the following project
 

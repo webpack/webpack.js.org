@@ -16,7 +16,7 @@ contributors:
 防止 webpack 解析那些任何与给定正则表达式相匹配的文件。忽略的文件**不应该被** `import`, `require`, `define`  或者任何其他导入机制调用。忽略大型库文件(library)可以提高构建性能。
 
 ```js
-noParse: /jquery|backbone/
+noParse: /jquery|lodash/
 ```
 
 ## `module.rules`

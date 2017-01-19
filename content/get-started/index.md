@@ -33,9 +33,7 @@ function component () {
   var element = document.createElement('div');
 
   /* 需要引入 lodash，下一行才能正常工作 */
-  element.innerHTML = _.map(['Hello','webpack'], function(item){
-    return item + ' ';
-  });
+  element.innerHTML = _.join(['Hello','webpack'], ' ');
 
   return element;
 }
@@ -118,8 +116,7 @@ T> 如果你创建了局部的 `webpack@beta` 版本，要通过其进行构建�
 
 ## 使用带有配置的 webpack
 
-对于更复杂的配置，我们可以使用配置文件，webpack 会引用它来打包代码。
-然后创建一个 `webpack.config.js` 文件，上面的 CLI 命令可以以下面的配置表示
+对于更复杂的配置，我们可以使用配置文件，webpack 会引用它来打包代码。然后创建一个 `webpack.config.js` 文件，上面的 CLI 命令可以以下面的配置表示
 
 __webpack.config.js__
 ```javascript

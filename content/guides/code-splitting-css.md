@@ -3,6 +3,7 @@ title: 代码分割 - CSS
 sort: 3
 contributors:
   - pksjce
+  - jonwheeler
 ---
 
 如果你使用 css-loader，并且在 JavaScript 文件里导入了 CSS，webpack 会把 CSS 代码和 JavaScript 代码一块打包。
@@ -17,7 +18,7 @@ webpack 能很好地解决这个问题，通过使用 [extract-text-webpack-plug
 ```javascript
 //webpack.config.js
 
-modules.exports = function(env){
+module.exports = function(env){
     entry: '..',
     ...
     module: {

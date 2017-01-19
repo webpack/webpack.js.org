@@ -26,13 +26,13 @@ This option controls if and how Source Maps are generated.
  source-map                   | --    | --      | yes        | 原始源码
   nosources-source-map         | --    | --      | yes        | 无源码内容
 
-Some of these values are suited for development and some for production. For development you typically want very fast Source Maps at the cost of bundle size, but for production you want separate Source Maps that are accurate.
+Some of these values are suited for development and some for production. For development you typically want fast Source Maps at the cost of bundle size, but for production you want separate Source Maps that are accurate.
 
 W> There are some issues with Source Maps in Chrome. [We need your help!](https://github.com/webpack/webpack/issues/3165).
 
 ### For development
 
-`eval` - Each module is executed with `eval()` and `//@ sourceURL`. This is very fast. The main disadvantage is that it doesn't display line numbers correctly since it gets mapped to transpiled code instead of the original code.
+`eval` - Each module is executed with `eval()` and `//@ sourceURL`. This is pretty fast. The main disadvantage is that it doesn't display line numbers correctly since it gets mapped to transpiled code instead of the original code.
 
 `inline-source-map` - A SourceMap is added as DataUrl to the bundle.
 
