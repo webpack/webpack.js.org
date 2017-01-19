@@ -6,9 +6,10 @@ title: define-plugin
 new webpack.DefinePlugin(definitions)
 ```
 
-The `DefinePlugin` allows you to create global constants which can be configured at **compile** time. This can be useful for allowing different behaviour between development builds and release builds. For example, you might use a global constant to determine whether logging takes place; perhaps you perform logging in your development build but not in the release build. That's the sort of scenario the `DefinePlugin` facilitates.
+允许你创建一个在编译时可以配置的全局常量。这可能会对开发模式和发布模式的构建允许不同的行为非常有用。比如,你可能会用一个全局的常量来决定 log 在开发模式触发而不是发布模式。这仅仅是 `DefinePlugin` 提供的便利的一个场景。
+ 
 
-**Example:**
+**示例:**
 
 ``` javascript
 new webpack.DefinePlugin({
@@ -25,18 +26,18 @@ console.log("Running App version " + VERSION);
 if(!BROWSER_SUPPORTS_HTML5) require("html5shiv");
 ```
 
-T> Note that because the plugin does a direct text replacement, the value given to it must include actual quotes inside of the string itself. Typically, this is done either with alternate quotes, such as `'"production"'`, or by using `JSON.stringify('production')`.
+T> 注意，因为这个插件直接做的文本替换,给定的值必须包含字符串本身内的实际引号。通常，有两种方式来达到这个效果，使用 `'"production"'`, 或者使用 `JSON.stringify('production')`。
 
-Each key passed into `DefinePlugin` is an identifier or multiple identifiers joined with `.`.
+每个传进 `DefinePlugin` 的键值都是一个标志符或者多个用 `.` 连接起来的标志符。
 
-* If the value is a string it will be used as a code fragment.
-* If the value isn't a string, it will be stringified (including functions).
-* If the value is an object all keys are defined the same way.
-* If you prefix `typeof` to the key, it's only defined for typeof calls.
+* 如果这个值是一个字符串，它会被当作一个代码片段来使用。
+* 如果这个值不是字符串，它会被转化为字符串(包括函数)。
+* 如果这个值是一个对象，它所有的 key 会被同样的方式定义。
+* 如果在一个 key 前面加了 `typeof`,它会被定义为 typeof 调用。
 
-The values will be inlined into the code which allows a minification pass to remove the redundant conditional.
+这些值会被内联进那些允许传一个代码压缩参数的代码中，从而减少冗余的条件判断。
 
-**Example:**
+**示例:**
 
 ``` javascript
 if (!PRODUCTION) {
@@ -46,7 +47,7 @@ if (PRODUCTION) {
   console.log('Production log')
 }
 `````
-After passing through webpack with no minification results in:
+通过没有使用压缩的 webpack 的结果:
 
 ``` javascript
 if (!true) {
@@ -57,7 +58,7 @@ if (true) {
 }
 ```
 
-and then after a minification pass results in:
+通过使用压缩的 webpack 的结果:
 
 ``` javascript
 console.log('Production log')
