@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/6420fc5783c20e182249.css" rel="stylesheet">
+      <link href="/78fc335ffb8a660b07f2.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -26,7 +26,6 @@ npm init -y
 npm <span class="token function">install</span> --save-dev webpack@beta
 ./node_modules/.bin/webpack --help <span class="token comment" spellcheck="true"># Shows a list of valid cli commands</span>
 .\node_modules\.bin\webpack --help <span class="token comment" spellcheck="true"># For windows users</span>
-npm <span class="token function">install</span> --save lodash
 </code></pre>
 <p>Now create a subdirectory <code>app</code> with an <code>index.js</code> file.</p>
 <p><strong>app/index.js</strong></p>
@@ -60,7 +59,9 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
 <li>If a dependency is missing, or is included in the wrong order, the application will not function at all.</li>
 <li>If a dependency is included but is not used, then there is a lot of unnecessary code that the browser has to download.</li>
 </ul>
-<p>To bundle the <code>lodash</code> dependency with <code>index.js</code>, we need to import <code>lodash</code> from <code>index.js</code>.</p>
+<p>To bundle the <code>lodash</code> dependency with <code>index.js</code>, we need to first install <code>lodash</code></p>
+<pre><code>npm <span class="token function">install</span> --save lodash
+</code></pre><p>and then import it.</p>
 <p><strong>app/index.js</strong></p>
 <pre><code class="lang-diff"><span class="token inserted">+ import _ from &apos;lodash&apos;;</span>
 
