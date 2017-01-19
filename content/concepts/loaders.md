@@ -6,6 +6,7 @@ contributors:
   - ev1stensberg
   - SpaceK33z
   - gangachris
+  - mikeerickson
 ---
 
 Loaders are transformations that are applied on a resource file of your application. They are functions (running in Node.js) that take the source of a resource file as the parameter and return the new source.
@@ -32,6 +33,64 @@ Loaders are [resolved similar to modules](/concepts/module-resolution/). A loade
 
 ### Referencing Loaders
 
-By convention, loaders are usually named as `XXX-loader`, where `XXX` is the context name. For example, `json-loader`.
+By convention, loaders are usually named as `xxx-loader`, where `xxx` is the context name. For example, `babel-loader`.
 
+In the following example, we will configure webpack to run all files which end with `.js` through the `babel-loader`.
+
+All webpack loaders are standard npm modules and installed via npm from command line as follows:
+
+
+## Usage
+
+To set the `loader` property, you define the `module.rules` array value in your webpack config:
+
+**webpack.config.js**
+
+```javascript
+const config = {
+  ...
+  module: {
+    rules: [
+      {test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/}, // transform js files
+      {test: /\s[a|c]ss$/, loader: 'sass-loader'}                       // transform sass files
+      {test: /\.css$/, loaders: ['style-loader','css-loader']}          // transform css files
+    ]
+  }
+  ...
+};
+```
+### Install Webpack Loader modules
+Each of the specified rules requires one or more loaders.  In the `webpack.config.js` we referenced the following loaders
+```
+$ npm install --save-dev babel-loader css-loader style-loader sass-loader
+```
+## Options
+
+The above example demonstrates the different approaches which can be used when defining the `module.rules` section of your `webpack.config.js` file.
+For complete details, refer to [loaders section](/loaders).
+
+### Omitting Loader Error
+
+If you fail to define a loader for the desired files within your project, you will receive an error similar to the following:
+
+`Module not found: Error: Can't resolve 'sass-loader' in ...`
+
+This can be cured by installing `sass-loader`
+
+`$ npm install --save-dev sass-loader`
+
+And referencing the loader within your `webpack.config.js`
+
+```
+...
+module: {
+  rules: [
+    ...
+    {test: /\s[a|c]ss$/, loader: 'sass-loader'}
+    ...
+  ]
+}
+...
+```
+### Loader Convention and Precedence
 The loader name convention and precedence search order is defined by [`resolveLoader.moduleTemplates`](/configuration/resolve#resolveloader) within the webpack configuration API.
