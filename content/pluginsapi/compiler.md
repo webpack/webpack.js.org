@@ -3,11 +3,11 @@ title: Compiler
 sort: 2
 ---
 
-The `Compiler` module of webpack is the main engine that creates a compilation instance with all the options passed through webpack CLI or `webpack` api or webpack comfiguration file.
+The `Compiler` module of webpack is the main engine that creates a compilation instance with all the options passed through webpack CLI or `webpack` api or webpack configuration file.
 
 It is exported by `webpack` api under `webpack.Compiler`.
 
-The compiler is used by webpack by instantiating it and then calling the `run` method. Below is a trivial example of how one might use the `Compiler`. In fact, this is very close to how webpack itself uses it.
+The compiler is used by webpack by instantiating it and then calling the `run` method. Below is a trivial example of how one might use the `Compiler`. In fact, this is really close to how webpack itself uses it.
 
 [__compiler-example__](https://github.com/pksjce/webpack-internal-examples/blob/master/compiler-example.js)
 

@@ -8,6 +8,7 @@ contributors:
   - domfarolino
   - johnnyreilly
   - jouni-kantola
+  - frederikprijck
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -224,6 +225,17 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
   ]
 ```
 
+## `BannerPlugin` - breaking change
+
+`BannerPlugin` no longer accept two parameters but rather only a single options object.
+
+``` diff
+  plugins: [
+-    new webpack.BannerPlugin('Banner', {raw: true, entryOnly: true});
++    new webpack.BannerPlugin({banner: 'Banner', raw: true, entryOnly: true});
+  ]
+```
+
 ## `OccurrenceOrderPlugin` is now on by default
 
 It's no longer necessary to specify it in configuration.
@@ -312,7 +324,7 @@ See [CLI](/api/cli).
 
 These functions are now always asynchronous instead of calling their callback sync if the chunk is already loaded.
 
-**nb `require.ensure` now depends upon native `Promise`s.  If using `require.ensure` in an environment that lacks them then you will need a polyfill. **
+**nb `require.ensure` now depends upon native `Promise`s. If using `require.ensure` in an environment that lacks them then you will need a polyfill. **
 
 ## Loader configuration is through `options`
 
@@ -322,7 +334,7 @@ You can *no longer* configure a loader with a custom property in the `webpac
 module.exports = { 
   ...
   module: { 
-    use: [{ 
+    rules: [{ 
       test: /\.tsx?$/,
       loader: 'ts-loader'
     }]
@@ -340,7 +352,7 @@ Good question. Well, strictly speaking it's 2 possible things; both ways to conf
 module.exports = { 
   ...
   module: { 
-    use: [{ 
+    rules: [{ 
       test: /\.tsx?$/,
       loader: 'ts-loader?' + JSON.stringify({ transpileOnly: false })
     }]
@@ -354,7 +366,7 @@ But it can also be a separately specified object that's supplied alongside a loa
 module.exports = { 
   ...
   module: { 
-    use: [{ 
+    rules: [{ 
       test: /\.tsx?$/,
       loader: 'ts-loader'
       options:  { transpileOnly: false }

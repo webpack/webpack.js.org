@@ -52,7 +52,7 @@ const config = {
 
 对象语法会比较繁琐。然而，这是应用程序中定义入口的最可扩展的方式。
 
-T> **“webpack 的可扩展配置”**是可重用的，并且可以与其他配置组合使用。这是一种流行的技术，用于将关注点(concern)从环境(environment)、构建目标(build target)、运行时(runtime)中分离。然后使用专门的工具（如 [webpack-merge](https://github.com/survivejs/webpack-merge)）把它们合并在一起。
+T> **“webpack 的可扩展配置”**是可重用的，并且可以与其他配置组合使用。这是一种流行的技术，用于将关注点(concern)从环境(environment)、构建目标(build target)、运行时(runtime)中分离。然后使用专门的工具（如 [webpack-merge](https://github.com/survivejs/webpack-merge)）将它们合并。
 
 ## 常见场景
 

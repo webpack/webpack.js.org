@@ -83,7 +83,7 @@ module.exports = {
     rules: [{
       test: require.resolve("some-module"), 
       use: 'exports-loader?file,parse=helpers.parse'
-      // adds below code the the file's source:
+      // adds below code the file's source:
       //  exports["file"] = file;
       //  exports["parse"] = helpers.parse;
     }]
