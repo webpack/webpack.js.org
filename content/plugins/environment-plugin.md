@@ -10,7 +10,7 @@ The EnvironmentPlugin lets you list specific variables from `process.env` to be 
 new webpack.EnvironmentPlugin(keys)
 ```
 
-### How to use
+## How to use
 EnvironmentPlugin accepts either an array of keys, or an object with default values.
 
 ```js
