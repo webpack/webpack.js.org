@@ -21,7 +21,7 @@ const config = {
 module.exports = config;
 ```
 
-The single entry syntax for the `entry` property is a short hand for:
+The single entry syntax for the `entry` property is a shorthand for:
 
 ```javascript
 const config = {
