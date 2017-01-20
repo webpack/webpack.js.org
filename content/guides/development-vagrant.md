@@ -3,6 +3,7 @@ title: Development - Vagrant
 sort: 12
 contributors:
   - SpaceK33z
+  - chrisVillanueva
 ---
 
 If you have a more advanced project and use [Vagrant](https://www.vagrantup.com/) to run your development environment in a Virtual Machine, you'll often want to also run webpack in the VM.
@@ -67,7 +68,7 @@ The server should be accessible on `http://10.10.10.61:8080` now. If you make a 
 
 ## Advanced Usage with nginx
 
-To mimick a more production-like environment, it is also possible to proxy the webpack-dev-server with nginx.
+To mimic a more production-like environment, it is also possible to proxy the webpack-dev-server with nginx.
 
 In your nginx config file, add the following:
 
