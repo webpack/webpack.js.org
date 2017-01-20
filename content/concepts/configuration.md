@@ -158,7 +158,7 @@ In the example below JSX (React JavaScript Markup) and Babel are used to create 
 ```javascript
 import h from 'jsxobj';
 
-// example of an import'd plugin
+// example of an imported plugin
 const CustomPlugin = config => ({
   ...config,
   name: 'custom-plugin'

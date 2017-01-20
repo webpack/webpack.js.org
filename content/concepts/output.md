@@ -145,7 +145,7 @@ The filename of the Hot Update Main File. It is inside the `output.path` directo
 
 The JSONP function used by webpack for asnyc loading of chunks.
 
-A shorter function may reduce the filesize a bit. Use a different identifier when having multiple webpack instances on a single page.
+A shorter function may reduce the file size a bit. Use a different identifier when having multiple webpack instances on a single page.
 
 > Default: `"webpackJsonp"`
 
