@@ -232,3 +232,4 @@ The filename of the SourceMaps for the JavaScript files. They are inside the `ou
 `[hash]` is replaced by the hash of the compilation.
 
 > Default: `"[file].map"`
+

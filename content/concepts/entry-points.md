@@ -3,6 +3,7 @@ title: Entry Points
 sort: 2
 contributors:
   - TheLarkInn
+  - chrisVillanueva
 ---
 
 Like we mentioned in the [introduction](/get-started/#using-webpack-with-a-config), there are multiple ways to define the `entry` property in your webpack configuration. We will show you the ways you **can** configure the `entry` property, in addition to explaining why it may be useful to you.
