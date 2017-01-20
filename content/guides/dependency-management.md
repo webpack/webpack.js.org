@@ -3,6 +3,7 @@ title: Dependency Management
 sort: 6
 contributors:
   - ndelangen
+  - chrisVillanueva
 ---
 
 > es6 modules
@@ -92,6 +93,6 @@ The exported function has 3 properties: `resolve`, `keys`, `id`.
     r.keys().forEach(key => cache[key] = r(key));
   }
   importAll(require.context('../components/', true, /\.js$/));
-  // At build-time cache will be polulated with all required modules.
+  // At build-time cache will be populated with all required modules.
   ```
 - `id` is the module id of the context module. This may be useful for `module.hot.accept`.
