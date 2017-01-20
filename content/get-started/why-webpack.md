@@ -3,6 +3,7 @@ title: Why webpack?
 contributors:
   - pksjce
   - bebraw
+  - chrisVillanueva
 sort: 2
 ---
 
@@ -25,7 +26,7 @@ T> Even though webpack core focuses on bundling, you can find a variety of exten
 
 ## Comparison
 
-webpack however is not the only module bundler out there. If you are choosing between using webpack or any of the bundler's below, here is a feature by feature comparison on how webpack fares against the current competition.
+webpack however is not the only module bundler out there. If you are choosing between using webpack or any of the bundlers below, here is a feature by feature comparison on how webpack fares against the current competition.
 
 | Feature | webpack/webpack | jrburke/requirejs | substack/node-browserify | jspm/jspm-cli | rollup/rollup | brunch/brunch |
 |---------|-----------------|-------------------|--------------------------|---------------|---------------|---------------|
