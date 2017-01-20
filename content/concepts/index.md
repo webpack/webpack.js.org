@@ -15,7 +15,7 @@ contributors:
 
 webpack 将创建所有应用程序依赖关系图表(dependency graph)。图表的起点被称之为_入口起点(entry point)_。_入口起点_告诉 webpack _从哪里开始_，并遵循着依赖关系图表知道_打包什么_。可以将您的应用_入口起点_认为是**根上下文(contextual root)**或 **app 第一个启动文件**。
 
-在 webpack 我们在 [webpack 配置对象](/configuration)中使用 `entry` 属性来定义 _入口_。
+在 webpack 中，我们使用 [webpack 配置对象](/configuration) 中的 `entry` 属性来定义_入口_。
 
 接下来我们看一个最简单的例子：
 
