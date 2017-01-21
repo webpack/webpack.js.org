@@ -3,6 +3,7 @@ title: Output
 sort: 3
 contributors:
   - TheLarkInn
+  - chyipin
 ---
 
 Options affecting the output of the compilation. `output` options tell Webpack how to write the compiled files to disk. Note, that while there can be multiple `entry` points, only one `output` configuration is specified.
@@ -23,7 +24,7 @@ An [`output.path`](#output-path) as an **absolute path** for what directory you 
 const config = {
   output: {
     filename: 'bundle.js',
-    output: '/home/proj/public/assets'
+    path: '/home/proj/public/assets'
   }
 };
 
