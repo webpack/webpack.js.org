@@ -4,9 +4,10 @@ sort: 4
 contributors:
   - sokra
   - skipjack
+  - tarang9211
 ---
 
-?> TODO: Short description
+The entry object is where Webpack looks to start building the bundle. The context is an absolute string to the directory that contains the entry files.
 
 ## `context`
 
