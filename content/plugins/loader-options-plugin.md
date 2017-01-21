@@ -1,7 +1,8 @@
 ---
-title: loader-options-plugin
+title: Loader Options Plugin
+sort: 5
 contributors:
-    - johnnyreilly
+  - johnnyreilly
 ---
 
 ?> Review this content
