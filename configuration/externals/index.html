@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/80bdc03a1313ae3cd4d9.css" rel="stylesheet">
+      <link href="/be479fba035c39e7f88e.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -45,6 +45,7 @@ This typically applies to library developers though application developers can m
 <ul>
 <li><strong>global</strong> - An external library can be available as a global variable. The consumer can achieve this by including the external library in a script tag. This is the default setting for externals.</li>
 <li><strong>commonjs</strong> -  The consumer application may be using a CommonJS module system and hence the external library should be available as a CommonJS module.</li>
+<li><strong>commonjs2</strong> -  Similar to the above line but where the export is <code>module.exports.default</code>.</li>
 <li><strong>amd</strong> - Similar to the above line but using AMD module system.</li>
 </ul>
 <p><code>externals</code> accepts various syntax and interprets them in different manners.</p>
