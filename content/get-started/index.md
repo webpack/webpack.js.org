@@ -19,9 +19,8 @@ webpack 简化快速构建应用程序依赖图表的流程，以正确的顺序
 mkdir webpack-demo && cd webpack-demo
 npm init -y
 npm install --save-dev webpack@beta
-./node_modules/.bin/webpack --help # 显示有效的命令行列表
+./node_modules/.bin/webpack --help # 显示有效的 CLI 命令列表
 .\node_modules\.bin\webpack --help # windows 用户请使用此路径
-npm install --save lodash
 ```
 
 现在在 `app` 子目录下创建一个 `index.js` 文件。
@@ -41,7 +40,7 @@ function component () {
 document.body.appendChild(component());
 ```
 
-要运行这段代码，通常需要有以下 html
+要运行这段代码，通常需要有以下 HTML
 
 __index.html__
 
@@ -57,7 +56,7 @@ __index.html__
 </html>
 ```
 
-在此示例中，脚本标签之间存在隐式依赖关系。
+在此示例中，`<script>` 标签之间存在隐含依赖关系。
 
 在运行 `index.js` 之前，会依赖于页面中引入的 `lodash`。由于 `index.js` 并未显式声明需要引入 `lodash`；只是假定推测已经存在一个全局变量 `_`。
 
@@ -65,7 +64,13 @@ __index.html__
   - 如果依赖不存在，或者引入顺序错误，应用程序将功能异常。
   - 如果引入依赖但是并没有使用，那样就会存在许多浏览器下载好却无用的代码。
 
-在 `index.js` 中打包 `lodash` 依赖，我们需要导入 `lodash`。
+在 `index.js` 中打包 `lodash` 依赖，首先我们需要安装 `lodash`。
+
+```
+npm install --save lodash
+```
+
+然后 import lodash。
 
 __app/index.js__
 
@@ -76,7 +81,8 @@ function component () {
   ...
 ```
 
-此外，按照预期我们需要修改 `index.html` 中去引入单个 js 打包文件。
+Also we will need to change the `index.html` to expect a single bundled js file.
+我们还要修改 `index.html`，来引入按照预期打包的单个 js 文件。
 
 ```diff
 <html>
@@ -95,7 +101,7 @@ function component () {
 
 通过展示出模块所需依赖，webpack 能够利用这些信息去构建依赖图表。然后 webpack 使用图表生成一个优化过的包文件，脚本还将以正确的顺序执行。并且没有用到的依赖将不会被包文件引入。
 
-现在在此文件夹下运行 `webpack`，其中 `index.js` 是输入文件，并输出 `bundle.js` 文件，此文件已打包页面所需的所有代码。
+现在在此文件夹下运行 `webpack`，其中 `index.js` 是输入文件，`bundle.js` 是输出文件，输出文件已打包此页面所需的所有代码。
 
 ```bash
 webpack app/index.js dist/bundle.js
@@ -116,7 +122,7 @@ T> 如果你创建了局部的 `webpack@beta` 版本，要通过其进行构建�
 
 ## 使用带有配置的 webpack
 
-对于更复杂的配置，我们可以使用配置文件，webpack 会引用它来打包代码。然后创建一个 `webpack.config.js` 文件，上面的 CLI 命令可以以下面的配置表示
+对于更复杂的配置，我们可以使用配置文件，webpack 会引用它来打包代码。然后创建一个 `webpack.config.js` 文件，你可以使用以下配置表示上述 CLI 命令。
 
 __webpack.config.js__
 ```javascript
@@ -129,7 +135,7 @@ module.exports = {
 }
 ```
 
-此文件可以由 webpack 运行
+此文件可以由接下来的 webpack 命令运行。
 
 ```bash
 webpack --config webpack.config.js
@@ -169,7 +175,7 @@ T> 你可以通过向 `npm run build` 命令添加两个中横线，给 webpack 
 
 ## 结论
 
-现在你已经一起学习了基本的构建过程，你应该深入 webpack [基本概念](/concepts)和[配置](/configuration)来更好地理解其设计。还要查看[指南](/guides)来学习如何处理常见问题。[API](/api) 章节可以深入底层。
+现在你已经一起学习了基本的构建过程，你应该深入 webpack [基本概念](/concepts)和[配置](/configuration)来更好地理解其设计。还要查看[指南](/guides)来学习如何处理常见问题。[API](/api) 章节可以深入底层功能。
 
 ***
 
