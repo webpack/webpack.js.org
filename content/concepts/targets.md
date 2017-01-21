@@ -3,6 +3,7 @@ title: Targets
 sort: 10
 contributors:
   - TheLarkInn
+  - rouzbeh84
 ---
 
 Because JavaScript can be written for both server and browser, webpack offers multiple deployment _targets_ that you can set in your webpack [configuration](/configuration).
