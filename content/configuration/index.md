@@ -12,8 +12,7 @@ contributors:
 
 Webpack 是需要传入一个配置对象。取决于你如何使用 webpack，可以通过两种方式之一：终端或 Node.js。下面指定了所有可用的配置选项。
 
-T> New to webpack? Check out our guide to some of webpack's [core concepts](/concepts) to get started!
-
+T> 刚接触 webpack？从我们的 webpack 指南里查看一些 webpack 的[核心概念](/concepts)开始学习吧！
 T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs.org/api/path.html)，并在它前面加上 [__dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname)这个全局变量。可以防止不同操作系统之间的文件路径问题，并且可以使相对路径按照预期工作。更多「POSIX 和 Windows」的相关信息请查看[此章节](https://nodejs.org/api/path.html#path_windows_vs_posix)。
 
 ## 选项
