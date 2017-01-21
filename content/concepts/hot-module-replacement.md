@@ -5,6 +5,7 @@ contributors:
 - SpaceK33z
 - sokra
 - GRardB
+- rouzbeh84
 ---
 
 Hot Module Replacement (HMR) exchanges, adds, or removes
