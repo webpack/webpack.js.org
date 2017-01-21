@@ -36,7 +36,7 @@ var path = require('path');
   // and webpack starts bundling
 
   [output](/configuration/output): {
-    // options related how webpack emits results
+    // options related to how webpack emits results
 
     [path](/configuration/output#output-path): path.resolve(__dirname, "dist"), // string
     // the target directory for all output files
@@ -131,8 +131,8 @@ var path = require('path');
         [exclude](/configuration/module#rule-exclude): [
           path.resolve(__dirname, "app/demo-files")
         ]
-        // matching conditions, each accepting regular expression or string
-        // test and include behave equal, both must be matched
+        // these are matching conditions, each accepting a regular expression or string
+        // test and include have the same behavior, both must be matched
         // exclude must not be matched (takes preferrence over test and include)
         // Best practices:
         // - Use RegExp only in test and for filename matching
@@ -144,10 +144,10 @@ var path = require('path');
 
         [enforce](/configuration/module#rule-enforce): "pre",
         [enforce](/configuration/module#rule-enforce): "post",
-        // apply these rule even if rules are overridden (advanced option)
+        // flags to apply these rules, even if they are overridden (advanced option)
 
         [loader](/configuration/module#rule-loader): "babel-loader",
-        // the loader which should be applied, it'll be resolve relative to the context
+        // the loader which should be applied, it'll be resolved relative to the context
         // -loader suffix is no longer optional in Webpack 2 for clarity reasons
         // see [webpack 1 upgrade guide](/guides/migrating)
 
