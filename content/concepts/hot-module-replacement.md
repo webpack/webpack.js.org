@@ -47,7 +47,7 @@ store them in a JSON file.
 ### From The Module View
 
 HMR is an opt-in feature that only affects modules containing HMR code. One example
-would be patching styling through the [style-loder](https://github.com/webpack/style-loader).
+would be patching styling through the [style-loader](https://github.com/webpack/style-loader).
 In order for patching to work, style-loader implements the HMR interface; when it
 receives an update through HMR, it replaces the old styles with the new ones.
 
@@ -88,7 +88,8 @@ You can use it in development as a LiveReload replacement.
 hot mode in which it tries to update with HMR before trying to reload the whole page. See how
 to implement [HMR with React](/guides/hmr-react) as an example.
 
-Some loaders already generate modules that are hot-updateable. For example, the `style-loader`
+
+Some loaders already generate modules that are hot-updatable. For example, the `style-loader`
 can swap out a page's stylesheets. For modules like this, you don't need to do anything special.
 
 webpack's power lies in its customizability, and there are *many* ways of configuring HMR

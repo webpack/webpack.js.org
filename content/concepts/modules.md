@@ -40,6 +40,6 @@ The webpack community has built _loaders_ for a wide variety of popular language
 * [Less](http://lesscss.org)
 * [Stylus](http://stylus-lang.com)
 
-And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for **any stack**, while staying **unopinionated** about your development, testing, and production workflows.
+And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for **any stack**, while staying **non-opinionated** about your development, testing, and production workflows.
 
 For a full list, see [**the list of loaders**](/loaders) or [**write your own**](/api/loaders).
