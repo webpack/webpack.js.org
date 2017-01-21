@@ -52,6 +52,7 @@ Your bundle which has external dependencies can be used in various module contex
 
   * __global__ - An external library can be available as a global variable. The consumer can achieve this by including the external library in a script tag. This is the default setting for externals.
   * __commonjs__ -  The consumer application may be using a CommonJS module system and hence the external library should be available as a CommonJS module.
+  * __commonjs2__ -  Similar to the above line but where the export is `module.exports.default`.
   * __amd__ - Similar to the above line but using AMD module system.
 
 `externals` accepts various syntax and interprets them in different manners.
