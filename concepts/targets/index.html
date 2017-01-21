@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/2ca6f8393ca10efc5998.css" rel="stylesheet">
+      <link href="/916aac8e7b7a313c4ff3.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -25,8 +25,9 @@
   target<span class="token punctuation">:</span> <span class="token string">&apos;node&apos;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 </code></pre>
+<p>In the example above, using <code>node</code> webpack will compile for usage in a Node.js-like environment (uses Node.js <code>require</code> to load chunks and not touch any built in modules like <code>fs</code> or <code>path</code>).</p>
 <p>Each <em>target</em> has a variety of deployment/environment specific additions, support to fit its needs. See what <a href="/configuration/target">targets are available</a>.</p>
-<blockquote class="todo"><div class="tip-content"> We should expand on this further. What specifically is included. </div></blockquote><h2 class="header"><a class="anchor" href="#multiple-targets" id="multiple-targets"></a><span class="text">Multiple Targets</span><a class="icon-link" href="#multiple-targets"></a></h2>
+<blockquote class="todo"><div class="tip-content"> Further expansion for other popular target values </div></blockquote><h2 class="header"><a class="anchor" href="#multiple-targets" id="multiple-targets"></a><span class="text">Multiple Targets</span><a class="icon-link" href="#multiple-targets"></a></h2>
 <p>Although webpack does <strong>not</strong> support multiple strings being passed into the <code>target</code> property, you can create an isomorphic library by bundling two separate configurations:</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-javascript"><span class="token keyword">var</span> serverConfig <span class="token operator">=</span> <span class="token punctuation">{</span>

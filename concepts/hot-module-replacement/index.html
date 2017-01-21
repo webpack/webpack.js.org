@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/2ca6f8393ca10efc5998.css" rel="stylesheet">
+      <link href="/916aac8e7b7a313c4ff3.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -49,7 +49,7 @@ using <a href="/configuration/dev-server/">webpack-dev-server</a>), but it&apos;
 store them in a JSON file.</p>
 <h3 class="header"><a class="anchor" href="#from-the-module-view" id="from-the-module-view"></a><span class="text">From The Module View</span><a class="icon-link" href="#from-the-module-view"></a></h3>
 <p>HMR is an opt-in feature that only affects modules containing HMR code. One example
-would be patching styling through the <a href="https://github.com/webpack/style-loader">style-loder</a>.
+would be patching styling through the <a href="https://github.com/webpack/style-loader">style-loader</a>.
 In order for patching to work, style-loader implements the HMR interface; when it
 receives an update through HMR, it replaces the old styles with the new ones.</p>
 <p>Similarly, when implementing the HMR interface in a module, you can describe what should
@@ -80,7 +80,7 @@ switches back to the <code>idle</code> state and everything continues as normal.
 <a href="/configuration/dev-server/">webpack-dev-server</a> supports a
 hot mode in which it tries to update with HMR before trying to reload the whole page. See how
 to implement <a href="/guides/hmr-react">HMR with React</a> as an example.</p>
-<p>Some loaders already generate modules that are hot-updateable. For example, the <code>style-loader</code>
+<p>Some loaders already generate modules that are hot-updatable. For example, the <code>style-loader</code>
 can swap out a page&apos;s stylesheets. For modules like this, you don&apos;t need to do anything special.</p>
 <p>webpack&apos;s power lies in its customizability, and there are <em>many</em> ways of configuring HMR
 depending on the needs of a particular project.</p>
