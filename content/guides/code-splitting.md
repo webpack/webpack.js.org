@@ -14,9 +14,9 @@ There are mainly two kinds of code splitting that can be accomplished with webpa
 
 ### Vendor code splitting
 
-A typical application can depend on many third party libraries for framework/functionality needs. Unlike the application code, code present in these libraries do not change very often. 
+A typical application can depend on many third party libraries for framework/functionality needs. Unlike application code, code present in these libraries does not change often.
 
-If we keep code from these libraries onto its own bundle, separate from the application code, we can leverage browser's caching mechanism to cache these files for longer durations on the end user's machine. 
+If we keep code from these libraries in its own bundle, separate from the application code, we can leverage the browser's caching mechanism to cache these files for longer durations on the end user's machine. 
 
 For this to work, the `hash` portion in the vendor filename must remain constant, regardless of application code changes. Learn [how to split vendor/library](/guides/code-splitting-libraries) code using the CommonsChunkPlugin.
 
@@ -31,7 +31,7 @@ Learn [how to split css](/guides/code-splitting-css) using the `ExtractTextWebpa
 
 While resource splitting of the previous kind requires the user to specify the split points upfront in the configuration, one can also create dynamic split points in the application code.
 
-This can be used for more granular chunking of code, for eg. as per our application routes or as per predicted user behaviour. This allows the user to load non-essential assets on demand.
+This can be used for more granular chunking of code, for example, per our application routes or as per predicted user behaviour. This allows the user to load non-essential assets on demand.
 
 ### Code splitting with `require.ensure()`
 

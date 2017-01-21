@@ -7,7 +7,7 @@ export default props => {
   return (
     <nav className="sidebar">
       <div className="sidebar__inner">
-        <h3 className="sidebar-item__version">Version 2.1</h3>
+        <h3 className="sidebar-item__version">Version 2.2</h3>
         <SidebarItem
           url={ `/${sectionName}` }
           title="Introduction"

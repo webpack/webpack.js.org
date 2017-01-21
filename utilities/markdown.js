@@ -71,7 +71,7 @@ module.exports = function(section) {
       rendered = rendered.replace(/\n.*?MARKDOWNSUMMARYSTART.*?\n/g, "<summary><span class='code-details-summary-span'>");
       rendered = rendered.replace(/\n.*?MARKDOWNSUMMARYEND.*?\n/g, "</span></summary>");
     }
-    
+
     return rendered;
   };
 
@@ -95,7 +95,8 @@ module.exports = function(section) {
         xhtml: false
       };
 
-      var tokens = parseQuotes(content);
+      var tokens = parseContent(content);
+      tokens.links = [];
 
       return marked.parser(tokens, markedDefaults);
     },
@@ -112,21 +113,88 @@ module.exports = function(section) {
   };
 };
 
-function parseQuotes(data) {
-  var tokens = marked.lexer(data).map(function(t) {
+function parseContent(data) {
+  var tokens = [];
+
+  marked.lexer(data).forEach(function(t) {
+    // add custom quotes
     if (t.type === 'paragraph') {
-      return parseCustomQuote(t, 'T>', 'tip') ||
+      var quote = parseCustomQuote(t, 'T>', 'tip') ||
         parseCustomQuote(t, 'W>', 'warning') ||
         parseCustomQuote(t, '?>', 'todo') ||
         t;
-    }
 
-    return t;
+      tokens.push(quote);
+    }
+    // handle html
+    else if (t.type === 'html') {
+      tokens = tokens.concat(handleHTML(t));
+    }
+    // just add other types
+    else {
+      tokens.push(t);
+    }
   });
 
-  tokens.links = [];
-
   return tokens;
+}
+
+function handleHTMLSplit(tokens, htmlArray, merging) {
+  const htmlItem =  htmlArray[0];
+  htmlArray = htmlArray.slice(1);
+  const tickSplit = htmlItem.split('`');
+  const tickLength = tickSplit.length;
+
+  // detect start of the inline code
+  if(merging.length === 0 && tickLength%2 === 0) {
+    merging = htmlItem;
+  }
+  // append code inside the inline code
+  else if(merging.length > 0 && tickLength === 1) {
+    merging += htmlItem;
+  }
+  // finish inline code
+  else if(merging.length > 0 && tickLength > 1) {
+    htmlArray.unshift(tickSplit.slice(1, tickLength).join("`"));
+    merging += tickSplit[0]+"`";
+    tokens = tokens.concat(parseContent(merging));
+    merging = "";
+  }  else if (merging.length === 0) {
+    tokens = tokens.concat(parseContent(htmlItem));
+  }
+
+  if(htmlArray.length === 0) {
+    return tokens;
+  }
+
+  return handleHTMLSplit(tokens, htmlArray, merging);
+}
+
+function handleHTML(t) {
+    let tokens = [];
+
+    // Split code in markdown, so that HTML inside code is not parsed
+    const codeArray = t.text.split(/(```(.|\n)*```)/g).filter(v => (v && v !== '' && v !== '\n'));
+
+    // if only one item in codeArray, then it's already parsed
+    if(codeArray.length == 1) {
+      return t;
+    }
+
+    codeArray.forEach(item => {
+      // if item is not code, then check for html tags and parse accordingly
+      if (item.indexOf('```') !== 0) {
+        // split all html tags
+        const htmlArray = item.split(/\s*(<[^>]*>)/g).filter(v => (v !== '' && v !== '\n'));
+        tokens = handleHTMLSplit(tokens, htmlArray, "");
+      }
+      // normally parse code block
+      else {
+        tokens = tokens.concat(parseContent(item));
+      }
+    });
+
+    return tokens;
 }
 
 function parseCustomQuote(token, match, className) {

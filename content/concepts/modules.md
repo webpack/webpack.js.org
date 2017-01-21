@@ -3,6 +3,7 @@ title: Modules
 sort: 7
 contributors:
   - TheLarkInn
+  - simon04
 ---
 
 In [modular programming](https://en.wikipedia.org/wiki/Modular_programming), developers break programs up into discrete chunks of functionality called a _module_.
@@ -17,15 +18,15 @@ webpack builds on lessons learned from these systems and applies the concept of 
 
 ## What is a webpack Module
 
-In contrast to Node.js modules, webpack _modules_ can express their _dependencies_ in a variety of ways. A few examples are:
+In contrast to [Node.js modules](https://nodejs.org/api/modules.html), webpack _modules_ can express their _dependencies_ in a variety of ways. A few examples are:
 
-* An ES2015 `import` statement
-* A JavaScript `require()` statement
-* An AMD `define` and `require` statement
-* An `@import` statement inside of a css/sass/less file.
+* An [ES2015 `import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) statement
+* A [CommonJS](http://www.commonjs.org/specs/modules/1.0/) `require()` statement
+* An [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) `define` and `require` statement
+* An [`@import` statement](https://developer.mozilla.org/en-US/docs/Web/CSS/@import) inside of a css/sass/less file.
 * An image url in a stylesheet (`url(...)`) or html (`<img src=...>`) file.
 
-T> webpack 1 requires a specific loader to convert ECMAScript2015 `import`, however this is possible out of the box via webpack 2
+T> webpack 1 requires a specific loader to convert ES2015 `import`, however this is possible out of the box via webpack 2
 
 ## Supported Module Types
 
@@ -41,4 +42,4 @@ The webpack community has built _loaders_ for a wide variety of popular language
 
 And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for **any stack**, while staying **non-opinionated** about your development, testing, and production workflows.
 
-For a full list, see [**the list of loaders**](https://webpack.github.io/docs/list-of-loaders.html) or [**write your own**](/api/loaders).
+For a full list, see [**the list of loaders**](/loaders) or [**write your own**](/api/loaders).

@@ -77,29 +77,26 @@ class LazilyLoad extends React.Component {
     };
   }
 
-  componentWillMount() {
-    this.load(this.props);
-  }
-
   componentDidMount() {
     this._isMounted = true;
+    this.load();
   }
 
-  componentWillReceiveProps(next) {
-    if (next.modules === this.props.modules) return null;
-    this.load(next);
+  componentDidUpdate(previous) {
+    if (this.props.modules === previous.modules) return null;
+    this.load();
   }
 
   componentWillUnmount() {
     this._isMounted = false;
   }
 
-  load(props) {
+  load() {
     this.setState({
       isLoaded: false,
     });
 
-    const { modules } = props;
+    const { modules } = this.props;
     const keys = Object.keys(modules);
 
     Promise.all(keys.map((key) => modules[key]()))
@@ -148,7 +145,7 @@ export default LazilyLoad;
 
 ## References
 
-- [Higher Order Components](http://reactpatterns.com/#Higher-order component)
+- [Higher Order Components](http://reactpatterns.com/#higher-order-component)
 - [react-modules](https://github.com/threepointone/react-modules)
 - [Function as Child Components](http://merrickchristensen.com/articles/function-as-child-components.html)
 - [Example Repository](https://github.com/iammerrick/how-to-lazy-load-react-webpack)

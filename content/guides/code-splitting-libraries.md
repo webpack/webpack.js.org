@@ -11,7 +11,7 @@ Bundling application code with third party code would be inefficient. This is be
 
 We can do this only when we separate the bundles for vendor and application code.
 
-Let's consider a sample application, that uses [momentjs](https://www.npmjs.com/package/moment) which is a time formatting library commonly used.
+Let's consider a sample application that uses [momentjs](https://www.npmjs.com/package/moment), a commonly used time formatting library.
 
 Install `moment` as follows in your application directory.
 

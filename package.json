@@ -5,7 +5,7 @@
   "description": "The main site for all things Webpack.",
   "homepage": "https://github.com/webpack/webpack.js.org",
   "author": "Greg Venech",
-  "license": "ISC",
+  "license": "CC BY",
   "main": "n/a",
   "keywords": [
     "webpack",
@@ -20,20 +20,23 @@
   "bugs": {
     "url": "https://github.com/webpack/webpack.js.org/issues"
   },
+  "engines": {
+    "node": ">=6.9"
+  },
   "scripts": {
     "start": "npm run init:generated && node ./bootstrap.js",
     "build": "npm run init:generated && rm -rf build/ && node ./bootstrap.js && npm run sitemap && echo webpack.js.org > build/CNAME",
     "build-test": "npm run build && http-server build/",
     "deploy": "gh-pages -d build",
     "fetch": "scripts/fetch.sh",
-    "init:generated": "mkdirp ./generated/loaders && ncp ./content/loaders/ ./generated/loaders && mkdirp ./generated/plugins && ncp ./content/plugins/ ./generated/plugins",
+    "init:generated": "mkdirp ./generated/loaders && mkdirp ./generated/plugins ",
     "lint": "run-s lint:*",
     "lint:links": "hyperlink build/index.html -r | tap-min",
     "lint:js": "eslint . --ext .js --ext .jsx",
     "lint:md": "eslint . --ext .md",
     "lint:markdown": "markdownlint --config ./.markdownlintrc **/*.md *.md ./content/**/*.md",
     "lint:social": "alex ./**/*.md",
-    "lint:prose": "ncp .proselintrc ~/ && proselint",
+    "lint:prose": "cp .proselintrc ~/ && proselint content",
     "test": "npm run lint ",
     "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml"
   },
@@ -59,7 +62,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "fontgen-loader": "^0.2.1",
-    "gh-pages": "^0.11.0",
+    "gh-pages": "^0.12.0",
     "github": "^5.2.3",
     "html-webpack-plugin": "^2.22.0",
     "http-server": "^0.9.0",

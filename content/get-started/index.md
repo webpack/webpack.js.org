@@ -4,6 +4,8 @@ sort: 3
 contributors:
   - bebraw
   - varunjayaraman
+  - cntanglijun
+  - chrisVillanueva
 ---
 
 webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/get-started/install-webpack).
@@ -16,12 +18,12 @@ Create a demo directory to try out webpack. [Install webpack](/get-started/insta
 ```bash
 mkdir webpack-demo && cd webpack-demo
 npm init -y
-npm install --save-dev webpack
-webpack --help # Shows a list of valid cli commands
-npm install --save lodash
+npm install --save-dev webpack@beta
+./node_modules/.bin/webpack --help # Shows a list of valid cli commands
+.\node_modules\.bin\webpack --help # For windows users
 ```
 
-Now create an `index.js` file.
+Now create a subdirectory `app` with an `index.js` file.
 
 __app/index.js__
 
@@ -30,9 +32,7 @@ function component () {
   var element = document.createElement('div');
 
   /* lodash is required for the next line to work */
-  element.innerHTML = _.map(['Hello','webpack'], function(item){
-    return item + ' ';
-  });
+  element.innerHTML = _.join(['Hello','webpack'], ' ');
 
   return element;
 }
@@ -40,14 +40,14 @@ function component () {
 document.body.appendChild(component());
 ```
 
-To run this piece of code, one usually has the below html
+To run this piece of code, one usually has the below HTML
 
 __index.html__
 
 ```html
 <html>
   <head>
-    <title>Webpack demo</title>
+    <title>Webpack 2 demo</title>
     <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
@@ -56,15 +56,21 @@ __index.html__
 </html>
 ```
 
-In this example, there are implicit dependencies between the script tags.
+In this example, there are implicit dependencies between the `<script>` tags.
 
 `index.js` depends on `lodash` being included in the page before it runs. It is implicit because `index.js` never declared a need for `lodash`; it just assumes that a global variable `_` exists.
 
 There are problems with managing JavaScript projects this way:
-  - If a dependency is missing, or is included in the wrong order, the application will not function at all. 
+  - If a dependency is missing, or is included in the wrong order, the application will not function at all.
   - If a dependency is included but is not used, then there is a lot of unnecessary code that the browser has to download.
 
-To bundle the `lodash` dependency with the `index.js`, we need to import `lodash`.
+To bundle the `lodash` dependency with `index.js`, we need to first install `lodash`
+
+```
+npm install --save lodash
+```
+
+and then import it.
 
 __app/index.js__
 
@@ -75,12 +81,12 @@ function component () {
   ...
 ```
 
-Also we will need to change the `index.html` to expect a single bundled js file.
+We also need to change `index.html` to expect a single bundled js file.
 
 ```diff
 <html>
   <head>
-    <title>Webpack demo</title>
+    <title>Webpack 2 demo</title>
 -   <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
@@ -94,7 +100,7 @@ Here, `index.js` explicitly requires `lodash` to be present, and binds it as `_`
 
 By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order. Also unused dependencies will not be included in the bundle.
 
-Now run `webpack` on this folder with the entry file to be `index.js` and to output a `bundle.js` file which bundles all the code required for the page.
+Now run `webpack` on this folder with `index.js` as the entry file and `bundle.js` as the output file in which all code required for the page is bundled.
 
 ```bash
 webpack app/index.js dist/bundle.js
@@ -108,10 +114,15 @@ index.js  1.56 kB       0  [emitted]  main
 
 ```
 
+T> If you created a local `webpack@beta` build, be sure to reference `webpack` with `./node_modules/.bin/webpack` on the command line.
+
+Open `index.html` in your browser to see the result of a successful bundle.
+You should see a page with the following text: 'Hello webpack'.
+
 ## Using webpack with a config
 
-For more complex configuration, we can use a configuration file that webpack can reference to bundle your code.
-The above CLI command would be represented in config as follows -
+For a more complex configuration, we can use a configuration file that webpack can reference to bundle your code. After you create a `webpack.config.js` file, you can represent the CLI command above
+with the following config settings.
 
 __webpack.config.js__
 ```javascript
@@ -124,7 +135,7 @@ module.exports = {
 }
 ```
 
-This file can be run by webpack as
+This file can be run by webpack as follows.
 
 ```bash
 webpack --config webpack.config.js
@@ -137,7 +148,10 @@ index.js  1.56 kB       0  [emitted]  main
    [0] ./app/index.js 170 bytes {0} [built]
 
 ```
+
 T> If a `webpack.config.js` is present, `webpack` command picks it up by default.
+
+T> If you created a successful `dist/bundle.js` file using the 'Creating a bundle' section, delete the `dist` subdirectory to validate output from your `webpack.config.js` file settings.
 
 The config file allows for all the flexibility in using webpack. We can add loader rules, plugins, resolve options and many other enhancements to our bundles using this configuration file.
 
@@ -161,5 +175,5 @@ T> You can pass custom parameters to webpack by adding two dashes to the `npm ru
 
 ## Conclusion
 
-Now that you have a basic build together, you should dig into the [basic concepts](/concepts) and [configuration](/configuration) of webpack to better understand its design. Also check out the [guides](/guides) to learn how to approach common problems. The [API](/api) section digs into lower level.
+Now that you have a basic build together, you should dig into the [basic concepts](/concepts) and [configuration](/configuration) of webpack to better understand its design. Also check out the [guides](/guides) to learn how to approach common problems. The [API](/api) section digs into the lower level features.
 

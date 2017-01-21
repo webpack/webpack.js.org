@@ -39,4 +39,8 @@
   display: inline-flex;
   flex-direction: column;
   text-align: left;
+
+  > * {
+    flex-shrink: 0;
+  }
 }

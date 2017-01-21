@@ -107,22 +107,34 @@ module.exports = {
     loaders: section(
       'Loaders',
       function() {
-        return require.context(
+        const content = require.context(
+          'json-loader!yaml-frontmatter-loader!./content/loaders',
+          false,
+          /^\.\/.*\.md$/
+        );
+        const generated = require.context(
           'json-loader!yaml-frontmatter-loader!./generated/loaders',
           false,
           /^\.\/.*\.md$/
         );
+        return combineContexts(content, generated);
       }
     ),
 
     plugins: section(
       'Plugins',
       function() {
-        return require.context(
+        const content = require.context(
+          'json-loader!yaml-frontmatter-loader!./content/plugins',
+          false,
+          /^\.\/.*\.md$/
+        );
+        const generated = require.context(
           'json-loader!yaml-frontmatter-loader!./generated/plugins',
           false,
           /^\.\/.*\.md$/
         );
+        return combineContexts(content, generated);
       }
     ),
     
@@ -208,4 +220,20 @@ function processPage() {
       return Array.isArray(o.file.contributors) && o.file.contributors.length && o.file.contributors.slice().sort();
     }
   };
+}
+
+function combineContexts(context1, context2) {
+  function webpackContext(req) {
+    try {
+      return context1(req);
+    } catch (e) {
+      return context2(req);
+    }
+  }
+  webpackContext.keys = () => {
+    let keys1 = context1.keys();
+    let keys2 = context2.keys();
+    return _.chain(keys1).concat(keys2).uniq().value();
+  };
+  return webpackContext;
 }

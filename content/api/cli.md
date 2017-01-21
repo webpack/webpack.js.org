@@ -1,6 +1,8 @@
 ---
-title: Command Line Interface
+title: Command Line Interface (CLI)
 sort: 2
+contributors:
+    - ev1stensberg
 ---
 
 webpack provides a Command Line Interface (CLI) to configure and interact with your build. This is mostly useful in case of early prototyping, profiling, writing npm scripts or personal customization of the build.
@@ -10,6 +12,8 @@ For proper usage and easy distribution of this configuration, webpack can be con
 ## Installation
 
 Have a look at [this page](/get-started/install-webpack)
+
+?> The new CLI for webpack is under development. New features are being added such as the `--init` flag. [Check it out!](https://github.com/webpack/webpack-cli)
 
 ### Common Usage
 
@@ -163,24 +167,24 @@ These options makes the build watch for changes in files of the dependency graph
 | Parameter                 | Explanation                                             |
 |---------------------------|---------------------------------------------------------|
 | --watch, -w               | Watch the filesystem for changes                        |
+| --save, -s                | Recompiles on save regardless of changes                |
 | --watch-aggregate-timeout | Timeout for gathering changes while watching            |
 | --watch-poll              | The polling interval for watching (also enable polling) |
 | --watch-stdin, --stdin    | Exit the process when stdin is closed                   |
 
 ### Optimize Options
 
-These options allow to manipulate optimisations for a production build using webpack
+These options allow you to manipulate optimisations for a production build using webpack
 
 | Parameter                 | Explanation                                            | Plugin used                          |
 |---------------------------|--------------------------------------------------------|--------------------------------------|
-| --optimize-dedupe         | Optimize duplicate module sources in the bundle        | DedupePlugin                         |
 | --optimize-max-chunks     | Try to keep the chunk count below a limit              | LimitChunkCountPlugin                |
 | --optimize-min-chunk-size | Try to keep the chunk size above a limit               | MinChunkSizePlugin                   |
 | --optimize-minimize       | Minimize javascript and switches loaders to minimizing | UglifyJsPlugin & LoaderOptionsPlugin |
 
 ### Resolve Options
 
-These allow to configure the webpack resolver with aliases and extensions.
+These allow you to configure the webpack resolver with aliases and extensions.
 
 | Parameter              | Explanation                                             | Example                                     |
 |------------------------|---------------------------------------------------------|---------------------------------------------|

@@ -4,6 +4,7 @@ sort: 6
 contributors:
   - sokra
   - skipjack
+  - jouni-kantola
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -15,7 +16,7 @@ These options determine how the [different types of modules](/concepts/modules) 
 Prevent webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries.
 
 ```js
-noParse: /jquery|backbone/
+noParse: /jquery|lodash/
 ```
 
 ## `module.rules`
@@ -168,9 +169,31 @@ An array of [`Rules`](#rule) that is also used when the Rule matches.
 
 ## `Rule.use`
 
-A list of [UseEntries](#useentry) which are applied to the module. Each entry specified a loader which should be used.
+A list of [UseEntries](#useentry) which are applied to modules. Each entry specifies a loader to be used.
 
-Passing a string (i. e. `use: [ "style-loader" ]`) is a shortcut to the loader property (i. e. `use: [ { loader: "style-loader "} ]`).
+Passing a string (i.e. `use: [ "style-loader" ]`) is a shortcut to the loader property (i.e. `use: [ { loader: "style-loader "} ]`).
+
+Loaders can be chained by passing multiple loaders, which will be applied from right to left (last to first configured).
+
+```javascript
+use: [
+  {
+    loader: 'style-loader'
+  },
+  {
+    loader: 'css-loader',
+    options: {
+      importLoaders: 1
+    }
+  },
+  {
+    loader: 'less-loader',
+    options: {
+      noIeCompat: true
+    }
+  }
+]
+```
 
 See [UseEntry](#useentry) for details.
 

@@ -10,10 +10,12 @@ sort: 1
 
 Before getting started, make sure you have a fresh version of [Node.js](https://nodejs.org/en/) installed. The current LTS is an ideal starting point. You may run into a variety of issues with the older versions as they may be missing functionality webpack or related packages might need.
 
+Note that this documentation is for webpack 2, for which there is not yet a stable release. You can get the most recent beta by installing with the `beta` tag (see below).
+
 ### Global Installation
 
 ``` bash
-npm install webpack -g
+npm install webpack@beta -g
 ```
 
 The `webpack` command is now available globally.
@@ -23,7 +25,7 @@ However, this is not a recommended practice. This locks you down to a specific v
 ### Local Installation
 
 ``` bash
-npm install webpack --save-dev
+npm install webpack@beta --save-dev
 
 npm install webpack@<version> --save-dev
 ```

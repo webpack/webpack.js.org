@@ -21,7 +21,7 @@ Use these features when appropriate.
 
 * Access CLI arguments, when using the webpack CLI (instead write your own CLI, or use `--env`)
 * Export non-deterministic values (calling webpack twice should result in the same output files)
-* Write very long configurations (instead split the configuration into multiple files)
+* Write long configurations (instead split the configuration into multiple files)
 
 The following examples below describe how webpack's configuration object can be both expressive and configurable because _it is code_:
 

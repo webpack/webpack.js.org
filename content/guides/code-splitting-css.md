@@ -3,6 +3,7 @@ title: Code Splitting - CSS
 sort: 3
 contributors:
   - pksjce
+  - jonwheeler
 ---
 
 In webpack, when you use the css-loader and import CSS into your JavaScript files, the CSS is bundled along with your JavaScript.
@@ -11,13 +12,13 @@ webpack can help with this problem by bundling the CSS separately using [extract
 
 ## Using `css-loader`
 
-To import css into your JavaScript code like [any other module](concept/modules), you will have to use the [css-loader](https://github.com/webpack/css-loader)
+To import css into your JavaScript code like [any other module](/concepts/modules), you will have to use the [css-loader](https://github.com/webpack/css-loader).
 The webpack config with `css-loader` will look like
 
 ```javascript
 //webpack.config.js
 
-modules.exports = function(env){
+module.exports = function(env){
     entry: '..',
     ...
     module: {
@@ -55,8 +56,8 @@ loader: ExtractTextPlugin.extract('css-loader?sourceMap') //Can be used without 
 new ExtractTextPlugin({ filename: 'bundle.css', disable: false, allChunks: true })
 ```
 
-With above two steps, you can generate a new bundle specifically for all the CSS modules and add them as a separate tag in the `index.html`
-For more info on how to use the api please go to [`ExtractTextPlugin` api](https://github.com/webpack/extract-text-webpack-plugin#api).
+With above two steps, you can generate a new bundle specifically for all the CSS modules and add them as a separate tag in the `index.html`.
+For more information on how to use the api, please go to [`ExtractTextPlugin` api](https://github.com/webpack/extract-text-webpack-plugin#api).
 
 The full config for splitting css with `ExtractTextPlugin` is as follows
 

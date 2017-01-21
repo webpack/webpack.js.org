@@ -4,6 +4,8 @@ sort: 8
 contributors:
   - jmreidy
   - jhnns
+  - sararubin
+  - aiduryagin
 ---
 
 As explained in detail on the [concept page](/concepts/hot-module-replacement), Hot Module Replacement (HMR) exchanges, adds, or removes modules while an application is running without a page reload.
@@ -25,7 +27,7 @@ To follow along, please add the following dependencies to your `package.json`:
 To use HMR, you'll need the following dependencies:
 
 ```bash
-npm install --save-dev babel@6.5.2 babel-core@6.13.2 babel-loader@6.2.4 babel-preset-es2015@6.13.2 babel-preset-react@6.11.1 babel-preset-stage-2@6.13.0 css-loader@0.23.1 postcss-loader@0.9.1 react-hot-loader@3.0.0-beta.6 style-loader@0.13.1 webpack@2.1.0-beta.20 webpack-dev-server@2.1.0-beta.0
+npm install --save-dev babel-core@6.13.2 babel-loader@6.2.4 babel-preset-es2015@6.13.2 babel-preset-react@6.11.1 babel-preset-stage-2@6.13.0 css-loader@0.23.1 postcss-loader@0.9.1 react-hot-loader@3.0.0-beta.6 style-loader@0.13.1 webpack@2.1.0-beta.25 webpack-dev-server@2.1.0-beta.0
 ```
 
 In addition, for the purposes of this walkthrough, you'll need:
@@ -197,6 +199,7 @@ if (module.hot) {
 ```
 
 ```js
+// ./src/components/App.js
 import React from 'react';
 import styles from './App.css';
 
@@ -221,11 +224,11 @@ export default App;
 
 The important thing to note in the code above is the `module` reference.
 
-1. Webpack will expose `module.hot` to our code since we set `devServer: { hot: true }`;
+1. webpack will expose `module.hot` to our code since we set `devServer: { hot: true }`;
 
 2. Thus we can use the `module.hot` hook to enable HMR for specific resources (Here's `App.js`). The most important API here is `module.hot.accept`, which specifies how to handle changes to specific dependencies.
 
-3. Note that because Webpack 2 has built-in support for ES2015 modules, you won't need to re-require your root component in `module.hot.accept`. To make this work, you need to change the Babel ES2015 preset in `.babelrc` to be:
+3. Note that because webpack 2 has built-in support for ES2015 modules, you won't need to re-require your root component in `module.hot.accept`. To make this work, you need to change the Babel ES2015 preset in `.babelrc` to be:
   
   ```
   ["es2015", {"modules": false}]
@@ -233,9 +236,13 @@ The important thing to note in the code above is the `module` reference.
   
   like what we did in [Babel Config](#babel-config). Note that disabling Babel's module plugin is not only necessary for HMR. If you don't disable it you'll run into many other issues (see [Migrating from v1 to v2](/guides/migrating/#mixing-es2015-with-amd-and-commonjs) and [webpack-tree-shaking](http://www.2ality.com/2015/12/webpack-tree-shaking.html)).
 
+4. Note that if you're using ES6 modules in your webpack 2 configuration file, and you change your `.babelrc` file in #3 above, you either need to use `require` or create two `.babelrc` files (issue [here](https://github.com/webpack/webpack.js.org/issues/154)):
+  * One in the project root directory with `"presets": ["es2015"]
+  * One in the home directory for webpack to build. For this example, in `src/`.
+
 So in this case, `module.hot.accept` will fire the `render` method whenever `src/components/App.js` or its dependencies are changed - which means the `render` method will also fire when the `App.css` is changed, since `App.css` is included in `App.js`.
 
-###index.html
+### index.html
 
 This needs to be placed inside of `dist` in your project root. webpack-dev-server will not run without it.
 

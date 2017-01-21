@@ -6,6 +6,9 @@ contributors:
   - jhnns
   - grgur
   - domfarolino
+  - johnnyreilly
+  - jouni-kantola
+  - frederikprijck
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -54,8 +57,36 @@ The new naming conventions are easier to understand and are a good reason to upg
               modules: true
             }
         ]
+      },
+      {
+        test: /\.jsx$/,
+        loader: "babel-loader", // Do not use "use" here
+        options: {
+          // ...
+        }
       }
     ]
+  }
+```
+
+## Chaining loaders
+
+Like in webpack v1, loaders can be chained to pass results from loader to loader. Using the [rule.use](/configuration/module#rule-use)
+configuration option, `use` can be set to a list of loaders.
+In webpack v1, loaders were commonly chained with `!`. This style is only supported using the legacy option `module.loaders`.
+
+``` diff
+  module: {
+-   loaders: {
++   rules: {
+      test: /\.less$/,
+-     loader: "style-loader!css-loader!less-loader"
++     use: [
++       "style-loader",
++       "css-loader",
++       "less-loader"
++     ]
+    }
   }
 ```
 
@@ -64,21 +95,28 @@ The new naming conventions are easier to understand and are a good reason to upg
 It is not possible anymore to omit the `-loader` extension when referencing loaders:
 
 ``` diff
-        loaders: [
--           "style",
-+           "style-loader",
--           "css",
-+           "css-loader",
--           "less",
-+           "less-loader",
+  module: {
+    rules: [
+      {
+        use: [
+-         "style",
++         "style-loader",
+-         "css",
++         "css-loader",
+-         "less",
++         "less-loader",
         ]
+      }
+    ]
+  }
 ```
 
-You can still opt-in to the old behavior with the resolveLoader.moduleExtensions configuration option.
-``` javascript
-resolveLoader: {
-  moduleExtensions: ["-loader"]
-}
+You can still opt-in to the old behavior with the `resolveLoader.moduleExtensions` configuration option, but this is not recommended.
+
+``` diff
++ resolveLoader: {
++   moduleExtensions: ["-loader"]
++ }
 ```
 
 See [#2986](https://github.com/webpack/webpack/issues/2986) for the reason behind this change.
@@ -89,14 +127,42 @@ When no loader has been configured for a JSON file, webpack will automatically t
 file with the [json-loader](https://github.com/webpack/json-loader).
 
 ``` diff
--   {
+  module: {
+    rules: [
+-     {
 -       test: /\.json/,
 -       loader: "json-loader"
--   }
+-     }
+    ]
+  }
 ```
 
 [We decided to do this](https://github.com/webpack/webpack/issues/3363) in order to iron out environment differences
-  between webpack and node.js/browserify.
+  between webpack, node.js and browserify.
+
+## Loaders in configuration resolve relative to context
+
+In webpack 1 configured loaders resolve relative to the matched file.
+Since webpack 2 configured loaders resolve relative to the `context` option.
+
+This solves some problems with duplicate modules caused by loaders when using `npm link` or referencing modules outside of the `context`.
+
+You may remove some hacks to work around this:
+
+``` diff
+  module: {
+    rules: [
+      {
+        // ...
+-       loader: require.resolve("my-loader")
++       loader: "my-loader"
+      }
+    ]
+  },
+  resolveLoader: {
+-   root: path.resolve(__dirname, "node_modules")
+  }
+```
 
 ## `module.preLoaders` and `module.postLoaders` was removed
 
@@ -116,13 +182,29 @@ file with the [json-loader](https://github.com/webpack/json-loader).
 ## `UglifyJsPlugin` sourceMap
 
 The `sourceMap` option of the `UglifyJsPlugin` now defaults to `false` instead of `true`.
-This means that if you are using source maps for minimized code, you need to set `sourceMap: true` for `UglifyJsPlugin`.
+This means that if you are using source maps for minimized code or want correct line numbers for uglifyjs warnings, you need to set `sourceMap: true` for `UglifyJsPlugin`.
 
 ``` diff
   devtool: "source-map",
   plugins: [
     new UglifyJsPlugin({
 +     sourceMap: true
+    })
+  ]
+```
+
+## `UglifyJsPlugin` warnings
+
+The `compress.warnings` option of the `UglifyJsPlugin` now defaults to `false` instead of `true`.
+This means that if you want to see uglifyjs warnings, you need to set `compress.warnings` to `true`.
+
+``` diff
+  devtool: "source-map",
+  plugins: [
+    new UglifyJsPlugin({
++     compress: {
++       warnings: true
++     }
     })
   ]
 ```
@@ -140,6 +222,17 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
 +   new webpack.LoaderOptionsPlugin({
 +     minimize: true
 +   })
+  ]
+```
+
+## `BannerPlugin` - breaking change
+
+`BannerPlugin` no longer accept two parameters but rather only a single options object.
+
+``` diff
+  plugins: [
+-    new webpack.BannerPlugin('Banner', {raw: true, entryOnly: true});
++    new webpack.BannerPlugin({banner: 'Banner', raw: true, entryOnly: true});
   ]
 ```
 
@@ -167,12 +260,12 @@ It's no longer necessary to specify it in configuration.
 module: {
   rules: [
     test: /.css$/,
--    loader: ExtractTextPlugin.extract['css-loader']
+-    loader: ExtractTextPlugin.extract("style-loader", "css-loader", { publicPath: "/dist" })
 +    loader: ExtractTextPlugin.extract({
-+               fallbackLoader: "style-loader",
-+               loader: "css-loader",
-+               publicPath: "/dist" // Overrides output.publicPath
-+     })
++      fallbackLoader: "style-loader",
++      loader: "css-loader",
++      publicPath: "/dist"
++    })
   ]
 }
 ```
@@ -181,7 +274,7 @@ module: {
 
 ```diff
 plugins: [
--  new ExtractTextPlugin("bundle.css", {allChunks: true, disable: false})
+-  new ExtractTextPlugin("bundle.css", { allChunks: true, disable: false })
 +  new ExtractTextPlugin({
 +    filename: "bundle.css",
 +    disable: false,
@@ -207,7 +300,8 @@ If you abused the CLI to pass custom arguments to the configuration like so:
 ``` js
 // webpack.config.js
 var customStuff = process.argv.indexOf("--custom-stuff") >= 0;
-/*...*/
+/* ... */
+module.exports = config;
 ```
 
 You may notice that this is no longer allowed. The CLI is more strict now.
@@ -218,8 +312,8 @@ Instead there is an interface for passing arguments to the configuration. This s
 
 ``` js
 module.exports = function(env) {
-  var config, customStuff = env.customStuff;
-  /*...*/
+  var customStuff = env.customStuff;
+  /* ... */
   return config;
 };
 ```
@@ -229,6 +323,57 @@ See [CLI](/api/cli).
 ## `require.ensure` and AMD `require` is asynchronous
 
 These functions are now always asynchronous instead of calling their callback sync if the chunk is already loaded.
+
+**nb `require.ensure` now depends upon native `Promise`s. If using `require.ensure` in an environment that lacks them then you will need a polyfill. **
+
+## Loader configuration is through `options`
+
+You can *no longer* configure a loader with a custom property in the `webpack.config.js`. It must be done through the `options`. The following configuration with the `ts` property is no longer valid with webpack 2:
+
+```js
+module.exports = { 
+  ...
+  module: { 
+    rules: [{ 
+      test: /\.tsx?$/,
+      loader: 'ts-loader'
+    }]
+  },
+  // does not work with webpack 2
+  ts: { transpileOnly: false } 
+} 
+```
+
+### What are `options`?
+
+Good question. Well, strictly speaking it's 2 possible things; both ways to configure a webpack loader. Classically `options` was called `query` and was a string which could be appended to the name of the loader. Much like a query string but actually with [greater powers](https://github.com/webpack/loader-utils#parsequery):
+
+```js
+module.exports = { 
+  ...
+  module: { 
+    rules: [{ 
+      test: /\.tsx?$/,
+      loader: 'ts-loader?' + JSON.stringify({ transpileOnly: false })
+    }]
+  }
+} 
+```
+
+But it can also be a separately specified object that's supplied alongside a loader:
+
+```js
+module.exports = { 
+  ...
+  module: { 
+    rules: [{ 
+      test: /\.tsx?$/,
+      loader: 'ts-loader'
+      options:  { transpileOnly: false }
+    }]
+  }
+} 
+```
 
 ## `LoaderOptionsPlugin` context
 
@@ -263,7 +408,7 @@ To keep compatibility with old loaders, loaders can be switched to debug mode vi
   ]
 ```
 
-### Code Splitting with ES2015
+## Code Splitting with ES2015
 
 In webpack v1, you could use `require.ensure` as a method to lazily-load chunks for your application:
 
@@ -296,12 +441,14 @@ Caveat: `require.ensure` allows for easy chunk naming with the optional third ar
 ```javascript
 require.ensure([], function(require) {
   var foo = require("./module");
-}, 'custom-chunk-name');
+}, "custom-chunk-name");
 ```
 
 (Note on the deprecated `System.import`: Webpack's use of `System.import` didn't fit the proposed spec, so it was deprecated in [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) in favor of `import()`)
 
-### Dynamic expressions
+If you want to use `import` with [Babel](http://babeljs.io/), you'll need to install/add the [dynamic-import](http://babeljs.io/docs/plugins/syntax-dynamic-import/) syntax plugin while it's still Stage 3 to get around the parser error. When the proposal is added to the spec this won't be necessary anymore.
+
+## Dynamic expressions
 
 It's possible to pass a partial expression to `import()`. This is handled similar to expressions in CommonJS (webpack creates a [context](https://webpack.github.io/docs/context.html) with all possible files).
 
@@ -309,15 +456,15 @@ It's possible to pass a partial expression to `import()`. This is handled simila
 
 ``` js
 function route(path, query) {
-  return import("./routes/" + path + "/route")
+  return import(`./routes/${path}/route`)
     .then(route => new route.Route(query));
 }
 // This creates a separate chunk for each possible route
 ```
 
-### Mixing ES2015 with AMD and CommonJS
+## Mixing ES2015 with AMD and CommonJS
 
-As for AMD and CommonJS you can freely mix all three module types (even within the same file). Webpack behaves similar to babel in this case:
+As for AMD and CommonJS you can freely mix all three module types (even within the same file). Webpack behaves similar to babel and node-eps in this case:
 
 ```javascript
 // CommonJS consuming ES2015 Module
@@ -348,3 +495,123 @@ It is important to note that you will want to tell Babel to not parse these modu
   ]
 }
 ```
+
+## Hints
+
+No need to change something, but opportunities
+
+### Template strings
+
+webpack now supports template strings in expressions. This means you can start using them in webpack constructs:
+
+``` diff
+- require("./templates/" + name);
++ require(`./templates/${name}`);
+```
+
+### Configuration Promise
+
+webpack now supports returning a `Promise` from the configuration file. This allows to do async processing in you configuration file.
+
+**webpack.config.js**
+
+``` js
+module.exports = function() {
+  return fetchLangs().then(lang => ({
+    entry: "...",
+    // ...
+    plugins: [
+      new DefinePlugin({ LANGUAGE: lang })
+    ]
+  }));
+};
+```
+
+### Advanced loader matching
+
+webpack now supports more things to match on for loaders.
+
+``` js
+module: {
+  rules: [
+    {
+      resource: /filename/, // matches "/path/filename.js"
+      resourceQuery: /querystring/, // matches "/filename.js?querystring"
+      issuer: /filename/, // matches "/path/something.js" if requested from "/path/filename.js"
+    }
+  ]
+}
+```
+
+### More CLI options
+
+There are some new CLI options for you to use:
+
+`--define process.env.NODE_ENV="production"` See [`DefinePlugin`](/plugins/define-plugin/).
+
+`--display-depth` displays the distance to the entry point for each module.
+
+`--display-used-exports` display info about which exports are used in a module.
+
+`--display-max-modules` sets the number for modules displayed in the output (defaults to 15).
+
+`-p` also defines `process.env.NODE_ENV` to `"production"` now.
+
+## Loader changes
+
+Changes only relevant for loader authors.
+
+### Cacheable
+
+Loaders are now cacheable by default. Loaders must opt-out if they are not cacheable.
+
+``` diff
+  // Cacheable loader
+  module.exports = function(source) {
+-   this.cacheable();
+    return source;
+  }
+```
+
+``` diff
+  // Not cacheable loader
+  module.exports = function(source) {
++   this.cacheable(false);
+    return source;
+  }
+```
+
+### Complex options
+
+webpack 1 only support `JSON.stringify`-able options for loaders.
+webpack 2 now supports any JS object as loader options.
+
+Using complex options comes with one restriction. You may need to have a `ident` for the option object to make it referencable by other loaders.
+
+Having an `ident` on the options object means to be able to reference this options object in inline loaders. Here is an example:
+
+`require("some-loader??by-ident!resource")`
+
+``` js
+{
+  test: /.../,
+  loader: "...",
+  options: {
+    ident: "by-ident",
+    magic: () => return Math.random()
+  }
+}
+```
+
+This inline style should not be used by regular code, but it's often used by loader generated code.
+I. e. the style-loader generates a module that `require`s the remaining request (which exports the CSS).
+
+``` js
+// style-loader generated code (simplified)
+var addStyle = require("./add-style");
+var css = require("-!css-loader?{"modules":true}!postcss-loader??postcss-ident");
+
+addStyle(css);
+```
+
+So if you use complex options tell your users about the `ident`.

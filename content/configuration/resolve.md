@@ -142,7 +142,7 @@ which is what enables users to leave off the extension when importing:
 import File from '../path/to/file'
 ```
 
-W> Using this will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions. For modules that are imported with their extension, e.g. `import SomeFile from "./somefile.ext"`, to be properly resolved, an empty string must be included in the array.
+W> Using this will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions. For modules that are imported with their extension, e.g. `import SomeFile from "./somefile.ext"`, to be properly resolved, a string containing "\*" must be included in the array.
 
 
 ## `resolve.mainFields`
@@ -196,7 +196,7 @@ mainFiles: ["index"]
 
 Tell webpack what directories should be searched when resolving modules.
 
-Absolute and relative paths can both be used, but be aware that they will behave a bit different.
+Absolute and relative paths can both be used, but be aware that they will behave a bit differently.
 
 A relative path will be scanned simarly to how Node scans for `node_modules`, by looking through the current directory as well as it's ancestors (i.e. `./node_modules`, `../node_modules`, and on).
 
@@ -212,17 +212,6 @@ If you want to add a directory to search in that takes precedences over `node_mo
 
 ```js
 modules: [path.resolve(__dirname, "src"), "node_modules"]
-```
-
-
-## `resolve.resolveToContext`
-
-`boolean`
-
-If `true`, trying to resolve a context to its absolute path ends when a directory is found. Default:
-
-```js
-resolveToContext: false
 ```
 
 

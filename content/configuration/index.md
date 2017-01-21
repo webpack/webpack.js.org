@@ -6,17 +6,21 @@ contributors:
   - skipjack
   - grgur
   - bondz
+  - sricc
+  - terinjokes
 ---
 
 Webpack is fed via a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
 
 T> New to webpack? Check out our guide to some of webpack's [core concepts](/concepts) to get started!
 
-T> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html). This prevents file path issues between operating systems. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more.
+T> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html) and prefix it with the [__dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) global. This prevents file path issues between operating systems and allows relative paths to work as expected. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more info on POSIX vs. Windows paths.
 
 ## Options
 
 ``` js-with-links-with-details
+var path = require('path');
+
 {
   // click on the name of the option to get to the detailed documentation
   // click on the items with arrows to show more examples / advanced options
@@ -223,11 +227,15 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
     [alias](/configuration/resolve#resolve-alias): {
       // a list of module name aliases
 
-      "module": "new-module"
+      "module": "new-module",
       // alias "module" -> "new-module" and "module/path/file" -> "new-module/path/file"
 
       "only-module$": "new-module",
       // alias "only-module" -> "new-module", but not "module/path/file" -> "new-module/path/file"
+
+      "module": path.resolve(__dirname, "app/third/module.js"),
+      // alias "module" -> "./app/third/module.js" and "module/file" results in error
+      // modules aliases are imported relative to the current context
     },
     <details><summary>/* alternative alias syntax (click to show) */</summary>
     [alias](/configuration/resolve#resolve-alias): [
@@ -294,7 +302,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
     [maxEntrypointSize](/configuration/performance#performance-maxentrypointsize): 400000, // int (in bytes)
     [assetFilter](/configuration/performance#performance-assetfilter): function(assetFilename) { 
       // Function predicate that provides asset filenames
-      return assetName.endsWith('.css') || assetName.endsWith('.js');
+      return assetFilename.endsWith('.css') || assetFilename.endsWith('.js');
     }
   },
 

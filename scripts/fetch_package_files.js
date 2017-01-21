@@ -57,21 +57,32 @@ function fetchPackageFiles(options, finalCb) {
     options.input,
     options.limit,
     function(pkg, cb) {
-      const url = (
-        'https://raw.githubusercontent.com/' + pkg.full_name + '/master/' + file
-      );
+      const branch = 'master';
+      const url = ['https://raw.githubusercontent.com', pkg.full_name, branch, file].join('/');
 
       request(url, function(err, response, body) {
         if (err) {
           return cb(err);
         }
 
+        if (body && file === 'README.md') {
+          body = body
+            .replace(/^[^]*?<h2[^>]*>/m, '## ') // drop everything up to first <h2>
+            .replace(/<h2[^>]*>/g, '## ') // replace any <h2> with ##
+            .replace(/<\/h2>/g, ''); // drop </h2>
+        }
+
         // TODO: push this type of to a script of its own to keep this generic
+        let headmatter = yamlHeadmatter({
+          title: pkg.name,
+          source: url,
+          edit: [pkg.html_url, 'edit', branch, file].join('/'),
+        });
         return async.parallel(
           [
             fs.writeFile.bind(null,
               path.resolve(options.output, pkg.name + path.extname(file)),
-              yamlHeadmatter({ title: pkg.name }) + body
+              headmatter + body
             ),
             fs.writeFile.bind(null,
               path.resolve(options.output, pkg.name + '.json'),
