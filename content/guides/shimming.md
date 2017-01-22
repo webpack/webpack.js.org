@@ -93,7 +93,7 @@ module.exports = {
 
 ## `script-loader`
 
-The [script-loader](/loaders/script-loader/) evaluates code in the global context, just like you would add the code into a `script` tag. In this mode, every normal library should work. require, module, etc. are undefined.
+The [script-loader](/loaders/script-loader/) evaluates code in the global context, just like you would add the code into a `script` tag. In this mode, every normal library should work. `require`, `module`, etc. are undefined.
 
 W> The file is added as string to the bundle. It is not minimized by `webpack`, so use a minimized version. There is also no dev tool support for libraries added by this loader.
 
