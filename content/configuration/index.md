@@ -130,8 +130,8 @@ var path = require('path');
         [exclude](/configuration/module#rule-exclude): [
           path.resolve(__dirname, "app/demo-files")
         ]
-        // 匹配条件，每个选项都接收正则表达式或字符串
-        // test 和 include 行为等同，都是必须匹配选项
+        // 这里是匹配条件，每个选项都接收一个正则表达式或字符串
+        // test 和 include 具有相同的作用，都是必须匹配选项
         // exclude 是必不匹配选项（优先于 test 和 include）
         // 最佳实践：
         // - 只在 test 和 文件名匹配 中使用正则表达式
@@ -143,7 +143,7 @@ var path = require('path');
 
         [enforce](/configuration/module#rule-enforce): "pre",
         [enforce](/configuration/module#rule-enforce): "post",
-        // 即使规则被覆盖也要应用这些规则（高级选项）
+        // 标识应用这些规则，即使规则覆盖（高级选项）
 
         [loader](/configuration/module#rule-loader): "babel-loader",
         // 应该应用的 loader，它相对上下文解析

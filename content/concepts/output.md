@@ -3,6 +3,8 @@ title: 输出(Output)
 sort: 3
 contributors:
   - TheLarkInn
+  - chyipin
+  - rouzbeh84
 ---
 
 选项影响编译输出。`output` 选项控制 webpack 如何向硬盘写入编译文件。注意，即使可以存在多个`入口`起点，但只指定一个`输出`配置。
@@ -11,14 +13,19 @@ contributors:
 
 ## 用法(Usage)
 
-设置 `output` 属性，只需要在你的 webpack 配置简单的设置输出值：
+在 webpack 中配置 `output` 属性的最低要求是，将它的值设置为一个对象，包括以下两点：
+
+编译文件的`文件名(filename)`首选：`// main.js || bundle.js || index.js`
+
+[`output.path`](#output-path) 对应一个**绝对路径**，此路径是你希望一次性打包的目录。
 
 **webpack.config.js**
 
 ```javascript
 const config = {
   output: {
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    path: '/home/proj/public/assets'
   }
 };
 
@@ -58,6 +65,7 @@ module.exports = config;
 > 默认值：`false`
 
 > 参考[[library and externals]]
+
 > 参考[[Development Tools]]
 
 ### `output.devtoolLineToLine`
@@ -75,7 +83,8 @@ module.exports = config;
 指定硬盘每个输出文件的名称。在这里你**不能**指定绝对路径！`output.path` 选项规定了文件被写入硬盘的位置。`filename` 仅用于命名每个文件。
 
 **单个入口**
-``` javascript
+
+```javascript
 {
   entry: './src/app.js',
   output: {
@@ -192,20 +201,21 @@ output: {
   <link href="/assets/spinner.gif"/>
 </head>
 ```
+
 接下来是一个更复杂的例子，来说明对资源使用 CDN 和 hash。
 
 **config.js**
 
-``` javascript
+```javascript
 output: {
-	path: "/home/proj/cdn/assets/[hash]",
-	publicPath: "http://cdn.example.com/assets/[hash]/"
+    path: "/home/proj/cdn/assets/[hash]",
+    publicPath: "http://cdn.example.com/assets/[hash]/"
 }
 ```
 
 **注意：**在编译时不知道最终输出文件的 `publicPath` 的情况下，`publicPath` 可以留空，并且在入口点文件运行时动态设置。如果你在编译时不知道 `publicPath`，你可以先忽略它，并且在入口点设置 `__webpack_public_path__`。
 
-``` javascript
+```javascript
  __webpack_public_path__ = myRuntimePublicPath
 
 // 其他的应用程序入口

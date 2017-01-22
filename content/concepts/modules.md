@@ -4,6 +4,7 @@ sort: 7
 contributors:
   - TheLarkInn
   - simon04
+  - rouzbeh84
 ---
 
 在[模块化编程](https://en.wikipedia.org/wiki/Modular_programming)，开发者将程序分解成称为_模块_的离散功能块。
@@ -40,7 +41,7 @@ webpack 社区已经为以及各种流行语言和语言处理器构建了_加�
 * [Less](http://lesscss.org)
 * [Stylus](http://stylus-lang.com)
 
-总的来说，webpack 提供了可定制的、强大和丰富的 API，允许**任何技术栈**使用 webpack，保持了在你的开发、测试和生成流程中**无侵入性**。
+总的来说，webpack 提供了可定制的、强大和丰富的 API，允许**任何技术栈**使用 webpack，保持了在你的开发、测试和生成流程中**无侵入性(non-opinionated)**。
 
 有关完整列表，请参考[**加载器列表**](/loaders) 或 [**自己编写**](/api/loaders)。
 

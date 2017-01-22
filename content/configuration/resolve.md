@@ -238,11 +238,11 @@ W> Changes to cached paths may cause failure in rare cases.
 
 `object`
 
-This set of options is identical to the `resolve` set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages. Default:
+This set of options is identical to the `resolve` property set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages. Default:
 
 ```js
 {
-    modulesDirectories: ["web_loaders", "web_modules", "node_loaders", "node_modules"],
+    modules: ["web_loaders", "web_modules", "node_loaders", "node_modules"],
     extensions: ["", ".webpack-loader.js", ".web-loader.js", ".loader.js", ".js"],
     packageMains: ["webpackLoader", "webLoader", "loader", "main"]
 }

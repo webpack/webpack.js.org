@@ -3,6 +3,7 @@ title: 部署目标(Targets)
 sort: 10
 contributors:
   - TheLarkInn
+  - rouzbeh84
 ---
 
 因为服务器和浏览器代码都可以用 JavaScript 编写，所以 webpack 提供了多种部署_目标(target)_，你可以在你的 webpack [配置](/configuration)中设置。
@@ -21,12 +22,13 @@ module.exports = {
 };
 ```
 
-每个_目标_都有各种部署/环境特定的附加项，以支持满足其需求。查看[可用目标](/configuration/target)。
-Each _target_ has a variety of deployment/environment specific additions, support to fit its needs. See what [targets are available](/configuration/target).
+在上面例子中，使用 `node` webpack 会编译为用于「类 Node.js」环境（使用 Node.js 的 `require` ，而不是使用任意内置模块（如 `fs` 或 `path`）来加载 chunk）。
 
-?> We should expand on this further. What specifically is included.
+每个_target_都有各种部署(deployment)/环境(environment)特定的附加项，以支持满足其需求。查看[target 的可用值](/configuration/target)。
 
-## 多个目标
+?>Further expansion for other popular target values
+
+## 多个 Target
 
 尽管 webpack 不支持向 `target` 传入多个字符串，你可以通过打包两份分离的配置来创建同构的库：
 
@@ -62,7 +64,7 @@ module.exports = [ serverConfig, clientConfig ];
 
 ### 打包输出比较
 
-  **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**：大量有关「测试和查看不同的 webpack _目标_」的资源。也有大量 bug 报告。
+  **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**：大量有关「测试和查看不同的 webpack _target_」的资源。也有大量 bug 报告。
 
 ?> Need to find up to date examples of these webpack targets being used in live code or boilerplates.
 

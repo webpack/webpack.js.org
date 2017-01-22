@@ -4,6 +4,7 @@ sort: 5
 contributors:
   - TheLarkInn
   - jhnns
+  - rouzbeh84
 ---
 
 插件是 wepback 的[支柱](https://github.com/webpack/tapable)功能。在你使用 webpack 配置时，webpack 自身也构建于**同样的插件系统**上！
@@ -12,7 +13,7 @@ contributors:
 
 ## 剖析
 
-webpack **插件**是一个具有 `apply` 属性的 JavaScript 对象。 `apply` 属性会被 webpack 解析器(compiler)调用，并且可在整个编译生命周期(compilation lifecycle)访问。
+webpack **插件**是一个具有 [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 属性的 JavaScript 对象。 `apply` 属性会被 webpack 解析器(compiler)调用，并且可在整个编译生命周期(compilation lifecycle)访问。
 
 
 **ConsoleLogOnBuildWebpackPlugin.js**
