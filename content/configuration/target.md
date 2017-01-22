@@ -9,7 +9,7 @@ contributors:
   - pastelsky
 ---
 
-webpack can compile for multiple environments or _targets_. To understand what a target is in detail, read [the concepts](/concepts/targets).
+webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 target 的详细信息，请阅读[概念]章节(/concepts/targets)。
 
 ## `target`
 
