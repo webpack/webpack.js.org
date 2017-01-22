@@ -3,6 +3,7 @@ title: Public Path
 sort: 14
 contributors:
   - rafaelrinaldi
+  - chrisVillanueva
 ---
 
 Webpack has a highly useful configuration that let you specify the base path for
@@ -11,7 +12,7 @@ all the assets on your application. It's called `publicPath`.
 ## Use cases
 
 There are a few use cases on real applications where this feature becomes
-specially neat.
+especially neat.
 
 ### Set value on build time
 

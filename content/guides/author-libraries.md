@@ -135,7 +135,7 @@ module.exports = {
 };
 ```
 
-This means that your library expects a dependency named `lodash` to be available in the consumers environment.
+This means that your library expects a dependency named `lodash` to be available in the consumer's environment.
 
 ### Add `libraryTarget`
 
