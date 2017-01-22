@@ -19,7 +19,6 @@ export default props => {
 
       <div className="splash__section splash__section__dark">
         <Container>
-          <h1>{ page.title }</h1>
           <div dangerouslySetInnerHTML={{
             __html: page.content
           }} />
