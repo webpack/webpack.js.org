@@ -3,11 +3,12 @@ title: 代码拆分 - Libraries
 sort: 4
 contributors:
   - pksjce
+  - chrisVillanueva
 ---
 
 A typical application uses third party libraries for framework/functionality needs. Particular versions of these libraries are used and code here does not change often. However, the application code changes frequently.
 
-Bundling application code with third party code would be inefficient. This is because the browser can cache asset files based on the cache header and files can be cached without needing to call the cdn again if it's contents don't change. To take advantage of this, we want to keep the hash of the vendor files constant regardless of application code changes.
+Bundling application code with third party code would be inefficient. This is because the browser can cache asset files based on the cache header and files can be cached without needing to call the cdn again if its contents don't change. To take advantage of this, we want to keep the hash of the vendor files constant regardless of application code changes.
 
 We can do this only when we separate the bundles for vendor and application code.
 

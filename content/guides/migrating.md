@@ -9,6 +9,7 @@ contributors:
   - johnnyreilly
   - jouni-kantola
   - frederikprijck
+  - chrisVillanueva
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -72,7 +73,7 @@ The new naming conventions are easier to understand and are a good reason to upg
 ## Chaining loaders
 
 Like in webpack v1, loaders can be chained to pass results from loader to loader. Using the [rule.use](/configuration/module#rule-use)
-configuration option, `use` can be set to a list of loaders.
+ configuration option, `use` can be set to a list of loaders.
 In webpack v1, loaders were commonly chained with `!`. This style is only supported using the legacy option `module.loaders`.
 
 ``` diff
@@ -331,17 +332,17 @@ These functions are now always asynchronous instead of calling their callback sy
 You can *no longer* configure a loader with a custom property in the `webpack.config.js`. It must be done through the `options`. The following configuration with the `ts` property is no longer valid with webpack 2:
 
 ```js
-module.exports = { 
+module.exports = {
   ...
-  module: { 
-    rules: [{ 
+  module: {
+    rules: [{
       test: /\.tsx?$/,
       loader: 'ts-loader'
     }]
   },
   // does not work with webpack 2
-  ts: { transpileOnly: false } 
-} 
+  ts: { transpileOnly: false }
+}
 ```
 
 ### What are `options`?
@@ -349,30 +350,30 @@ module.exports = {
 Good question. Well, strictly speaking it's 2 possible things; both ways to configure a webpack loader. Classically `options` was called `query` and was a string which could be appended to the name of the loader. Much like a query string but actually with [greater powers](https://github.com/webpack/loader-utils#parsequery):
 
 ```js
-module.exports = { 
+module.exports = {
   ...
-  module: { 
-    rules: [{ 
+  module: {
+    rules: [{
       test: /\.tsx?$/,
       loader: 'ts-loader?' + JSON.stringify({ transpileOnly: false })
     }]
   }
-} 
+}
 ```
 
 But it can also be a separately specified object that's supplied alongside a loader:
 
 ```js
-module.exports = { 
+module.exports = {
   ...
-  module: { 
-    rules: [{ 
+  module: {
+    rules: [{
       test: /\.tsx?$/,
-      loader: 'ts-loader'
+      loader: 'ts-loader',
       options:  { transpileOnly: false }
     }]
   }
-} 
+}
 ```
 
 ## `LoaderOptionsPlugin` context
@@ -586,7 +587,7 @@ Loaders are now cacheable by default. Loaders must opt-out if they are not cache
 webpack 1 only support `JSON.stringify`-able options for loaders.
 webpack 2 now supports any JS object as loader options.
 
-Using complex options comes with one restriction. You may need to have a `ident` for the option object to make it referencable by other loaders.
+Using complex options comes with one restriction. You may need to have a `ident` for the option object to make it referenceable by other loaders.
 
 Having an `ident` on the options object means to be able to reference this options object in inline loaders. Here is an example:
 

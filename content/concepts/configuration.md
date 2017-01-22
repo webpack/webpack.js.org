@@ -106,7 +106,7 @@ import {
 } from './';
 
 export class NgCliWebpackConfig {
-  // TODO: When webpack2 types are finished lets replace all these any types
+  // TODO: When webpack2 types are finished let's replace all these any types
   // so this is more maintainable in the future for devs
   public config: any;
   private webpackDevConfigPartial: any;

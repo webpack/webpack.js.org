@@ -3,6 +3,7 @@ title: Public Path
 sort: 14
 contributors:
   - rafaelrinaldi
+  - chrisVillanueva
 ---
 
 Webpack提供一个非常有用的配置，该配置能帮助你为项目中的所有资源指定一个基础路径。它被称为`公共路径`。

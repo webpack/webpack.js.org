@@ -3,13 +3,14 @@ title: 惰性加载 - React
 sort: 14
 contributors:
   - iammerrick
+  - chrisVillanueva
 ---
 
 A component can lazily load dependencies without its consumer knowing using higher order functions, or a consumer can lazily load its children without its children knowing using a component that takes a function and collection of modules, or some combination of both.
 
 ## LazilyLoad Component
 
-Lets have a look at a consumer choosing to lazily load some components. The `importLazy` is simply a function that returns the `default` property, this is for Babel/ES2015 interoperability. If you don't need that you can omit the `importLazy` helper. The `importLazy` function simply returns whatever was exported as `export default` in the target module.
+Let's have a look at a consumer choosing to lazily load some components. The `importLazy` is simply a function that returns the `default` property, this is for Babel/ES2015 interoperability. If you don't need that you can omit the `importLazy` helper. The `importLazy` function simply returns whatever was exported as `export default` in the target module.
 
 ```jsx
 <LazilyLoad modules={{
@@ -58,7 +59,7 @@ export LazilyLoadFactory(Highlight, {
 });
 ```
 
-Notice how the consumer of Highlight component had no idea it had a dependency that was lazily loaded? Or that if a user had todos with no code we would never need to load highlight.js? 
+Notice how the consumer of Highlight component had no idea it had a dependency that was lazily loaded? Or that if a user had todos with no code we would never need to load highlight.js?
 
 
 ## The Code

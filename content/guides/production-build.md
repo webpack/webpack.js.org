@@ -7,6 +7,7 @@ contributors:
   - markerikson
   - simon04
   - kisnows
+  - chrisVillanueva
 ---
 
 此页解释了如何使用 webpack 生成用于生产环境的 build。
@@ -72,7 +73,7 @@ T> Technically, `NODE_ENV` is a system environment variable that Node.js exposes
 
 ## The manual way: Configuring webpack for multiple environments
 
-When we do have multiple configurations in mind for different environments, the easiest way is to write seperate js files for
+When we do have multiple configurations in mind for different environments, the easiest way is to write separate js files for
 each environment. For example:
 
 ** dev.js **
@@ -203,7 +204,7 @@ module.exports = function() {
     };
 }
 ```
-And then merge this base config with an environment specific configuration file using 'webpack-merge'. 
+And then merge this base config with an environment specific configuration file using 'webpack-merge'.
 Let us look at an example where we merge our prod file, mentioned above, with this base config file using 'webpack-merge':
 
 ** prod.js (updated) **
@@ -241,10 +242,10 @@ module.exports = function(env) {
 ```
 You will notice three major updates to our 'prod.js' file.
 * 'webpack-merge' with the 'base.js'.
-* We have move 'output' property to 'base.js'. Just to stress on that point that our output property, here, is common across all our environments and that we refactored our 'prod.js' and moved it to our 'base.js', the common configuartion file. 
+* We have move 'output' property to 'base.js'. Just to stress on that point that our output property, here, is common across all our environments and that we refactored our 'prod.js' and moved it to our 'base.js', the common configuration file.
 * We have defined the 'process.env.NODE_ENV' to be 'prod' using the 'DefinePlugin'. Now across the application 'process.env.NODE_ENV' would have the value, 'prod', when we build our application for production environment. Likewise we can manage various variables of our choice, specific to environments this way.
 
-The choice of what is going to be common across all your environments is upto you, however. We have just demonstrated a few that could typically be common across environments when we build our application. 
+The choice of what is going to be common across all your environments is up to you, however. We have just demonstrated a few that could typically be common across environments when we build our application.
 
 You just saw, how powerful 'webpack-merge' is, that, it just saved us from a lot of code repetitions.
 

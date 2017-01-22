@@ -3,6 +3,7 @@ title: 开发 - Vagrant
 sort: 12
 contributors:
   - SpaceK33z
+  - chrisVillanueva
 ---
 
 如果你在开发一个更大的项目，并且开发环境是在虚拟机上运行 [Vagrant](https://www.vagrantup.com/) 的话，那么你或许需要在虚拟机上运行 webpack。
@@ -32,7 +33,7 @@ module.exports = {
 };
 ```
 
-然后创建 `index.html`。其中的 `script` 标签应当指向你的打包文件(bundle)。如果 `output.filename` 没有在配置里设定，它的默认值便是 `bundle.js`。 
+然后创建 `index.html`。其中的 `script` 标签应当指向你的打包文件(bundle)。如果 `output.filename` 没有在配置里设定，它的默认值便是 `bundle.js`。
 
 ```html
 <!DOCTYPE html>
@@ -60,13 +61,13 @@ webpack-dev-server --host 0.0.0.0 --public 10.10.10.61:8080 --watch-poll
 
 webpack-dev-server 会在打包文件中加上一段连接 WebSocket 的脚本(script)，一旦你的文件被更改，服务器便会重新加载应用。`--public` 参数便是为了告诉脚本从哪里去找 WebSocket。服务器默认使用 `8080` 端口，我们也需要在这里标明。
 
-`--watch-poll` 确保 webpack 能够察觉到文件的更改。默认配置下，webpack 会监听文件系统触发的相关事件，但是 VirtualBox 总会有这样或那样的的问题。 
+`--watch-poll` 确保 webpack 能够察觉到文件的更改。默认配置下，webpack 会监听文件系统触发的相关事件，但是 VirtualBox 总会有这样或那样的的问题。
 
 现在服务器应该能够通过 `http://10.10.10.61:8080` 访问了。如果你改动了 `app.js`，应用便会重新加载。
 
 ## 使用 nginx
 
-如果你需要更进一步模仿生产环境，可以使用 nginx 来代理 webpack-dev-server。
+为了更好的模拟类生产环境(production-like environment)，还可以用 nginx 来代理 webpack-dev-server。
 
 在你的 nginx 配置文件中，加入下面代码：
 
