@@ -89,4 +89,4 @@ This plugin pattern is expected for events like `"before-resolve"` and `"after-r
 
 ***
 
-> 原文：https://webpack.js.org/loaders/
+> 原文：https://webpack.js.org/pluginsapi/

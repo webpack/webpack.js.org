@@ -306,3 +306,7 @@ SOFTWARE.
 
 [cover]: https://codecov.io/gh/webpack/html-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack/html-loader
+
+***
+
+> 原文：https://webpack.js.org/loaders/html-loader/

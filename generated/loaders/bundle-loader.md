@@ -42,3 +42,7 @@ require("bundle-loader?lazy&name=my-chunk!./file.js");
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/loaders/bundle-loader/

@@ -51,3 +51,7 @@ You don't have to combine it with the mocha loader, it's independent. So if you 
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/loaders/coverjs-loader/

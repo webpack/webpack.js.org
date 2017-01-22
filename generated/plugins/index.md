@@ -1,9 +1,9 @@
 ---
-title: Plugin
+title: Plugins
 ---
 
 ?> TODO
 
 ***
 
-> 原文：https://webpack.js.org/loaders/
+> 原文：https://webpack.js.org/plugins/

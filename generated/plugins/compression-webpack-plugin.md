@@ -41,3 +41,7 @@ Option Arguments for Zopfli (see [node-zopfli](https://github.com/pierreingleber
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/plugins/compression-webpack-plugin/

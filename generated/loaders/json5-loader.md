@@ -131,3 +131,7 @@ Don't forget to polyfill require if you want to use it in Node.js. See the webpa
 
 [cover]: https://coveralls.io/repos/github/webpack/json-loader/badge.svg?branch=master
 [cover-url]: https://coveralls.io/github/webpack/json-loader?branch=master
+
+***
+
+> 原文：https://webpack.js.org/loaders/json5-loader/

@@ -1,5 +1,5 @@
 ---
-title: Shim
+title: Shimming
 sort: 17
 contributors:
   - pksjce

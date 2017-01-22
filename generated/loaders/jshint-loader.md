@@ -88,3 +88,7 @@ WARNING in ./path/to/file.js
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/loaders/jshint-loader/

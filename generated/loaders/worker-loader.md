@@ -52,3 +52,7 @@ _.has(o, 'foo') // true
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/loaders/worker-loader/

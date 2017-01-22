@@ -33,3 +33,7 @@ This extracts all SourceMaps from all files. That's not so performance-wise so y
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/loaders/source-map-loader/

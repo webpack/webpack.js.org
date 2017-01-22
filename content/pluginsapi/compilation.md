@@ -7,4 +7,4 @@ sort: 3
 
 ***
 
-> 原文：https://webpack.js.org/loaders/
+> 原文：https://webpack.js.org/pluginsapi/compilation/

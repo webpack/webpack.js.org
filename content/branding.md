@@ -27,3 +27,7 @@ Here you can find design assets needed for displaying webpack's logo or icon. Se
 <a download href="../assets/icon-square-big.svg" style="display:inline-block;float:left;width:200px;">
 ![Individual Icon](../assets/icon-square-big.svg)
 </a>
+
+***
+
+> 原文：https://webpack.js.org/branding/

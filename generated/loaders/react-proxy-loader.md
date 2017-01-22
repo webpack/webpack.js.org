@@ -66,3 +66,7 @@ var Component = require("react-proxy-loader?name=chunkName!./Component");
 # License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/loaders/react-proxy-loader/
