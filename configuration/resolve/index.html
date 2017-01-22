@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/c36892049d959ef7c65e.css" rel="stylesheet">
+      <link href="/7908ea1d8e5ee424c888.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -203,9 +203,9 @@ Have a look at <a href="/concepts/module-resolution">Module Resolution</a> for m
 </code></pre>
 <blockquote class="warning"><div class="tip-content"> Changes to cached paths may cause failure in rare cases. </div></blockquote><h2 class="header"><a class="anchor" href="#resolveloader" id="resolveloader"></a><span class="text"><code>resolveLoader</code></span><a class="icon-link" href="#resolveloader"></a></h2>
 <p><code>object</code></p>
-<p>This set of options is identical to the <code>resolve</code> set above, but is used only to resolve webpack&apos;s <a href="/concepts/loaders">loader</a> packages. Default:</p>
+<p>This set of options is identical to the <code>resolve</code> property set above, but is used only to resolve webpack&apos;s <a href="/concepts/loaders">loader</a> packages. Default:</p>
 <pre><code class="lang-js"><span class="token punctuation">{</span>
-    modulesDirectories<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;web_loaders&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;web_modules&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;node_loaders&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;node_modules&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    modules<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;web_loaders&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;web_modules&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;node_loaders&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;node_modules&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
     extensions<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;.webpack-loader.js&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;.web-loader.js&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;.loader.js&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;.js&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
     packageMains<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;webpackLoader&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;webLoader&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;loader&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;main&quot;</span><span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
