@@ -34,11 +34,11 @@ W> There are some issues with Source Maps in Chrome. [We need your help!](https:
 
 `eval` - Each module is executed with `eval()` and `//@ sourceURL`. This is pretty fast. The main disadvantage is that it doesn't display line numbers correctly since it gets mapped to transpiled code instead of the original code.
 
-`inline-source-map` - A SourceMap is added as DataUrl to the bundle.
+`inline-source-map` - A SourceMap is added as a DataUrl to the bundle.
 
-`eval-source-map` - Each module is executed with `eval()` and a SourceMap is added as DataUrl to the `eval()`. Initially it is slow, but it provides fast rebuild speed and yields real files. Line numbers are correctly mapped since it gets mapped to the original code.
+`eval-source-map` - Each module is executed with `eval()` and a SourceMap is added as a DataUrl to the `eval()`. Initially it is slow, but it provides fast rebuild speed and yields real files. Line numbers are correctly mapped since it gets mapped to the original code.
 
-`cheap-module-eval-source-map` - Like `eval-source-map`, each module is executed with `eval()` and a SourceMap is added as DataUrl to the `eval()`. It is "cheap" because it doesn't have column mappings, it only maps line numbers.
+`cheap-module-eval-source-map` - Like `eval-source-map`, each module is executed with `eval()` and a SourceMap is added as a DataUrl to the `eval()`. It is "cheap" because it doesn't have column mappings, it only maps line numbers.
 
 ### For production
 
