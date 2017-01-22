@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/22924b290663af099e88.css" rel="stylesheet">
+      <link href="/61716a80b5939437440c.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -34,7 +34,7 @@
   <span class="token comment" spellcheck="true">// and webpack starts bundling</span>
 
   <a class="code-link" href="/configuration/output">output</a><span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// options related how webpack emits results</span>
+    <span class="token comment" spellcheck="true">// options related to how webpack emits results</span>
 
     <a class="code-link" href="/configuration/output#output-path">path</a><span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// string</span>
     <span class="token comment" spellcheck="true">// the target directory for all output files</span>
@@ -119,8 +119,8 @@
         <a class="code-link" href="/configuration/module#rule-exclude">exclude</a><span class="token punctuation">:</span> <span class="token punctuation">[</span>
           path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;app/demo-files&quot;</span><span class="token punctuation">)</span>
         <span class="token punctuation">]</span>
-        <span class="token comment" spellcheck="true">// matching conditions, each accepting regular expression or string</span>
-        <span class="token comment" spellcheck="true">// test and include behave equal, both must be matched</span>
+        <span class="token comment" spellcheck="true">// these are matching conditions, each accepting a regular expression or string</span>
+        <span class="token comment" spellcheck="true">// test and include have the same behavior, both must be matched</span>
         <span class="token comment" spellcheck="true">// exclude must not be matched (takes preferrence over test and include)</span>
         <span class="token comment" spellcheck="true">// Best practices:</span>
         <span class="token comment" spellcheck="true">// - Use RegExp only in test and for filename matching</span>
@@ -132,10 +132,10 @@
 
         <a class="code-link" href="/configuration/module#rule-enforce">enforce</a><span class="token punctuation">:</span> <span class="token string">&quot;pre&quot;</span><span class="token punctuation">,</span>
         <a class="code-link" href="/configuration/module#rule-enforce">enforce</a><span class="token punctuation">:</span> <span class="token string">&quot;post&quot;</span><span class="token punctuation">,</span>
-        <span class="token comment" spellcheck="true">// apply these rule even if rules are overridden (advanced option)</span>
+        <span class="token comment" spellcheck="true">// flags to apply these rules, even if they are overridden (advanced option)</span>
 
         <a class="code-link" href="/configuration/module#rule-loader">loader</a><span class="token punctuation">:</span> <span class="token string">&quot;babel-loader&quot;</span><span class="token punctuation">,</span>
-        <span class="token comment" spellcheck="true">// the loader which should be applied, it&apos;ll be resolve relative to the context</span>
+        <span class="token comment" spellcheck="true">// the loader which should be applied, it&apos;ll be resolved relative to the context</span>
         <span class="token comment" spellcheck="true">// -loader suffix is no longer optional in Webpack 2 for clarity reasons</span>
         <span class="token comment" spellcheck="true">// see <a class="code-link" href="/guides/migrating">webpack 1 upgrade guide</a></span>
 
