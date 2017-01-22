@@ -1,14 +1,14 @@
 ---
-title: 部署目标(Targets)
+title: 构建目标(Targets)
 sort: 10
 contributors:
   - TheLarkInn
   - rouzbeh84
 ---
 
-因为服务器和浏览器代码都可以用 JavaScript 编写，所以 webpack 提供了多种部署_目标(target)_，你可以在你的 webpack [配置](/configuration)中设置。
+因为服务器和浏览器代码都可以用 JavaScript 编写，所以 webpack 提供了多种_构建目标(target)_，你可以在你的 webpack [配置](/configuration)中设置。
 
-W> webpack `target` 属性不要和 `output.libraryTarget` 属性混淆。有关 `output` 属性的更多信息，请查看[我们的指南](/concepts/output)。
+W> webpack 的 `target` 属性不要和 `output.libraryTarget` 属性混淆。有关 `output` 属性的更多信息，请查看[我们的指南](/concepts/output)。
 
 ## 用法
 

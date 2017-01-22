@@ -1,5 +1,5 @@
 ---
-title: 扩展配置(External Configurations)
+title: 外部扩展配置(External Configurations)
 sort: 3
 contributors:
   - sokra
