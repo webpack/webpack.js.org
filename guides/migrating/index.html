@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/a5d273211264603257c4.css" rel="stylesheet">
+      <link href="/29186392212288bcaf53.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -65,7 +65,7 @@ The new naming conventions are easier to understand and are a good reason to upg
 </code></pre>
 <h2 class="header"><a class="anchor" href="#chaining-loaders" id="chaining-loaders"></a><span class="text">Chaining loaders</span><a class="icon-link" href="#chaining-loaders"></a></h2>
 <p>Like in webpack v1, loaders can be chained to pass results from loader to loader. Using the <a href="/configuration/module#rule-use">rule.use</a>
-configuration option, <code>use</code> can be set to a list of loaders.
+ configuration option, <code>use</code> can be set to a list of loaders.
 In webpack v1, loaders were commonly chained with <code>!</code>. This style is only supported using the legacy option <code>module.loaders</code>.</p>
 <pre><code class="lang-diff">  module: {
 <span class="token deleted">-   loaders: {</span>
@@ -245,24 +245,24 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><strong>nb <code>require.ensure</code> now depends upon native <code>Promise</code>s. If using <code>require.ensure</code> in an environment that lacks them then you will need a polyfill. </strong></p>
 <h2 class="header"><a class="anchor" href="#loader-configuration-is-through-options" id="loader-configuration-is-through-options"></a><span class="text">Loader configuration is through <code>options</code></span><a class="icon-link" href="#loader-configuration-is-through-options"></a></h2>
 <p>You can <em>no longer</em> configure a loader with a custom property in the <code>webpack.config.js</code>. It must be done through the <code>options</code>. The following configuration with the <code>ts</code> property is no longer valid with webpack 2:</p>
-<pre><code class="lang-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span> 
+<pre><code class="lang-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-  module<span class="token punctuation">:</span> <span class="token punctuation">{</span> 
-    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> 
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
       test<span class="token punctuation">:</span> <span class="token regex">/\.tsx?$/</span><span class="token punctuation">,</span>
       loader<span class="token punctuation">:</span> <span class="token string">&apos;ts-loader&apos;</span>
     <span class="token punctuation">}</span><span class="token punctuation">]</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// does not work with webpack 2</span>
-  ts<span class="token punctuation">:</span> <span class="token punctuation">{</span> transpileOnly<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span> 
+  ts<span class="token punctuation">:</span> <span class="token punctuation">{</span> transpileOnly<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <h3 class="header"><a class="anchor" href="#what-are-options-" id="what-are-options-"></a><span class="text">What are <code>options</code>?</span><a class="icon-link" href="#what-are-options-"></a></h3>
 <p>Good question. Well, strictly speaking it&apos;s 2 possible things; both ways to configure a webpack loader. Classically <code>options</code> was called <code>query</code> and was a string which could be appended to the name of the loader. Much like a query string but actually with <a href="https://github.com/webpack/loader-utils#parsequery">greater powers</a>:</p>
-<pre><code class="lang-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span> 
+<pre><code class="lang-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-  module<span class="token punctuation">:</span> <span class="token punctuation">{</span> 
-    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> 
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
       test<span class="token punctuation">:</span> <span class="token regex">/\.tsx?$/</span><span class="token punctuation">,</span>
       loader<span class="token punctuation">:</span> <span class="token string">&apos;ts-loader?&apos;</span> <span class="token operator">+</span> JSON<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token punctuation">{</span> transpileOnly<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span><span class="token punctuation">]</span>
@@ -270,10 +270,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span>
 </code></pre>
 <p>But it can also be a separately specified object that&apos;s supplied alongside a loader:</p>
-<pre><code class="lang-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span> 
+<pre><code class="lang-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-  module<span class="token punctuation">:</span> <span class="token punctuation">{</span> 
-    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> 
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
       test<span class="token punctuation">:</span> <span class="token regex">/\.tsx?$/</span><span class="token punctuation">,</span>
       loader<span class="token punctuation">:</span> <span class="token string">&apos;ts-loader&apos;</span>
       options<span class="token punctuation">:</span>  <span class="token punctuation">{</span> transpileOnly<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
@@ -419,7 +419,7 @@ book<span class="token punctuation">.</span><span class="token keyword">default<
 <h3 class="header"><a class="anchor" href="#complex-options" id="complex-options"></a><span class="text">Complex options</span><a class="icon-link" href="#complex-options"></a></h3>
 <p>webpack 1 only support <code>JSON.stringify</code>-able options for loaders.
 webpack 2 now supports any JS object as loader options.</p>
-<p>Using complex options comes with one restriction. You may need to have a <code>ident</code> for the option object to make it referencable by other loaders.</p>
+<p>Using complex options comes with one restriction. You may need to have a <code>ident</code> for the option object to make it referenceable by other loaders.</p>
 <p>Having an <code>ident</code> on the options object means to be able to reference this options object in inline loaders. Here is an example:</p>
 <p><code>require(&quot;some-loader??by-ident!resource&quot;)</code></p>
 <pre><code class="lang-js"><span class="token punctuation">{</span>
@@ -440,7 +440,7 @@ I. e. the style-loader generates a module that <code>require</code>s the remaini
 <span class="token function">addStyle</span><span class="token punctuation">(</span>css<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>So if you use complex options tell your users about the <code>ident</code>.</p>
-</div><hr style="display:block;"><h3 style="display:block;">Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/domfarolino"><img src="https://github.com/domfarolino.png?size=90"><span class="contributor__name"> domfarolino</span></a><a class="contributor" href="https://github.com/frederikprijck"><img src="https://github.com/frederikprijck.png?size=90"><span class="contributor__name"> frederikprijck</span></a><a class="contributor" href="https://github.com/grgur"><img src="https://github.com/grgur.png?size=90"><span class="contributor__name"> grgur</span></a><a class="contributor" href="https://github.com/jhnns"><img src="https://github.com/jhnns.png?size=90"><span class="contributor__name"> jhnns</span></a><a class="contributor" href="https://github.com/johnnyreilly"><img src="https://github.com/johnnyreilly.png?size=90"><span class="contributor__name"> johnnyreilly</span></a><a class="contributor" href="https://github.com/jouni-kantola"><img src="https://github.com/jouni-kantola.png?size=90"><span class="contributor__name"> jouni-kantola</span></a><a class="contributor" href="https://github.com/sokra"><img src="https://github.com/sokra.png?size=90"><span class="contributor__name"> sokra</span></a></div></div></section></div><div class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/get-started" class="footer__link">Get Started</a><a href="/organization" class="footer__link">Organization</a><a href="/contribute" class="footer__link">Contribute</a><a href="/get-started/why-webpack#comparison" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg"></a></section><section class="footer__right"><a href="/branding" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Support</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link">License</a><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" class="footer__license"><img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png"></a></section></div></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
+</div><hr style="display:block;"><h3 style="display:block;">Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/chrisVillanueva"><img src="https://github.com/chrisVillanueva.png?size=90"><span class="contributor__name"> chrisVillanueva</span></a><a class="contributor" href="https://github.com/domfarolino"><img src="https://github.com/domfarolino.png?size=90"><span class="contributor__name"> domfarolino</span></a><a class="contributor" href="https://github.com/frederikprijck"><img src="https://github.com/frederikprijck.png?size=90"><span class="contributor__name"> frederikprijck</span></a><a class="contributor" href="https://github.com/grgur"><img src="https://github.com/grgur.png?size=90"><span class="contributor__name"> grgur</span></a><a class="contributor" href="https://github.com/jhnns"><img src="https://github.com/jhnns.png?size=90"><span class="contributor__name"> jhnns</span></a><a class="contributor" href="https://github.com/johnnyreilly"><img src="https://github.com/johnnyreilly.png?size=90"><span class="contributor__name"> johnnyreilly</span></a><a class="contributor" href="https://github.com/jouni-kantola"><img src="https://github.com/jouni-kantola.png?size=90"><span class="contributor__name"> jouni-kantola</span></a><a class="contributor" href="https://github.com/sokra"><img src="https://github.com/sokra.png?size=90"><span class="contributor__name"> sokra</span></a></div></div></section></div><div class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/get-started" class="footer__link">Get Started</a><a href="/organization" class="footer__link">Organization</a><a href="/contribute" class="footer__link">Contribute</a><a href="/get-started/why-webpack#comparison" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg"></a></section><section class="footer__right"><a href="/branding" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Support</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link">License</a><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" class="footer__license"><img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png"></a></section></div></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
 
     
       <script src="/b75e81f4704ae6210223b311cc8c9471.js"></script>
