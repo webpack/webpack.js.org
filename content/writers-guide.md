@@ -57,7 +57,7 @@ Same goes for tables.
 
 ### Configuration Properties
 
-[./configuration] properties should be ordered alphabetically as well:
+The [configuration](/configuration) properties should be ordered alphabetically as well:
 
 * `devServer.contentBase`
 * `devServer.compress`
