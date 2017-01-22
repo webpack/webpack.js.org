@@ -7,11 +7,11 @@ contributors:
   - simon04
 ---
 
-`webpack` as a module bundler can understand modules written as ES2015 modules, CommonJS or AMD. But many times, while using third party libraries, we see that they expect dependencies which are global aka `$` for `jquery`. They might also be creating global variables which need to be exported. Here we will see different ways to help webpack understand these __broken modules__.
+`webpack` as a module bundler can understand modules written as ES2015 modules, CommonJS or AMD. But many times, while using third party libraries, we see that they expect dependencies which are global, AKA `$` for `jquery`. They might also be creating global variables which need to be exported. Here we will see different ways to help webpack understand these __broken modules__.
 
 ## Prefer unminified CommonJS/AMD files over bundled `dist` versions.
 
-Most modules link the `dist` version in the `main` field of their `package.json`. While this is useful for most developers, for webpack it is better to alias the src version because this way webpack is able to optimize dependencies better. However in most cases `dist` works fine as well.
+Most modules link the `dist` version in the `main` field of their `package.json`. While this is useful for most developers, for Webpack it is better to alias the src version because this way webpack is able to optimize dependencies better. However in most cases `dist` works fine as well.
 
 ``` javascript
 // webpack.config.js
@@ -74,7 +74,7 @@ module.exports = {
 
 ## `exports-loader`
 
-Let's say a library creates a global variable that it expects it's consumers to use. In this case we can use [`exports-loader`](/loaders/exports-loader/), to export that global variable in CommonJS format. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
+Let's say a library creates a global variable that it expects its consumers to use; In this case, we can use [`exports-loader`](/loaders/exports-loader/), to export that global variable in CommonJS format. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
 
 **webpack.config.js**
 ```javascript
@@ -93,7 +93,7 @@ module.exports = {
 
 ## `script-loader`
 
-The [script-loader](/loaders/script-loader/) evaluates code in the global context, just like you would add the code into a `script` tag. In this mode every normal library should work. require, module, etc. are undefined.
+The [script-loader](/loaders/script-loader/) evaluates code in the global context, just like you would add the code into a `script` tag. In this mode, every normal library should work. require, module, etc. are undefined.
 
 W> The file is added as string to the bundle. It is not minimized by `webpack`, so use a minimized version. There is also no dev tool support for libraries added by this loader.
 
