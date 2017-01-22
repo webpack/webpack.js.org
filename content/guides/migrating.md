@@ -156,7 +156,7 @@ You may remove some hacks to work around this:
       {
         // ...
 -       loader: require.resolve("my-loader")
-+       loader: "my-loader"
++       use: "my-loader"
       }
     ]
   },
@@ -174,7 +174,7 @@ You may remove some hacks to work around this:
       {
         test: /\.js$/,
 +       enforce: "pre",
-        loader: "eslint-loader"
+        use: "eslint-loader"
       }
     ]
   }
@@ -262,7 +262,7 @@ module: {
   rules: [
     test: /.css$/,
 -    loader: ExtractTextPlugin.extract("style-loader", "css-loader", { publicPath: "/dist" })
-+    loader: ExtractTextPlugin.extract({
++    use: ExtractTextPlugin.extract({
 +      fallbackLoader: "style-loader",
 +      loader: "css-loader",
 +      publicPath: "/dist"
@@ -355,7 +355,7 @@ module.exports = {
   module: {
     rules: [{
       test: /\.tsx?$/,
-      loader: 'ts-loader?' + JSON.stringify({ transpileOnly: false })
+      use: 'ts-loader?' + JSON.stringify({ transpileOnly: false })
     }]
   }
 }
@@ -369,7 +369,7 @@ module.exports = {
   module: {
     rules: [{
       test: /\.tsx?$/,
-      loader: 'ts-loader'
+      use: 'ts-loader'
       options:  { transpileOnly: false }
     }]
   }
@@ -596,7 +596,7 @@ Having an `ident` on the options object means to be able to reference this optio
 ``` js
 {
   test: /.../,
-  loader: "...",
+  use: "...",
   options: {
     ident: "by-ident",
     magic: () => return Math.random()
