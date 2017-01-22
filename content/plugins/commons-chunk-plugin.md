@@ -170,4 +170,4 @@ As seen above, this example allows you to move only one lib to a separate file i
 
 ***
 
-> 原文：https://webpack.js.org/loaders/
+> 原文：https://webpack.js.org/plugins/commons-chunk-plugin/

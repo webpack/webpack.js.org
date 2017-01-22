@@ -33,3 +33,7 @@ var exportsOfFile2 = require("coffee-loader?literate!./file.litcoffee");
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/loaders/coffee-loader/

@@ -1,5 +1,5 @@
 ---
-title: 加载器(Loader)
+title: 加载器(Loaders)
 sort: 1
 contributors:
   - ev1stensberg

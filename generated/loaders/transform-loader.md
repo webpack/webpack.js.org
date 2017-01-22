@@ -121,3 +121,7 @@ The loader is applied to all JS files, which can incur a performance hit with wa
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/loaders/transform-loader/

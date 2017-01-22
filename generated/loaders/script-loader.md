@@ -19,3 +19,7 @@ Does nothing in node.js.
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/loaders/script-loader/

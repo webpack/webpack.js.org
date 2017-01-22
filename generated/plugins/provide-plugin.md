@@ -41,4 +41,4 @@ new webpack.ProvidePlugin({
 
 ***
 
-> 原文：https://webpack.js.org/loaders/
+> 原文：https://webpack.js.org/plugins/provide-plugin/

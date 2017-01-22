@@ -34,3 +34,7 @@ var multi = require("multi-loader");
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/loaders/multi-loader/

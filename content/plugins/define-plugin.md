@@ -66,4 +66,4 @@ console.log('Production log')
 
 ***
 
-> 原文：https://webpack.js.org/loaders/
+> 原文：https://webpack.js.org/plugins/define-plugin/

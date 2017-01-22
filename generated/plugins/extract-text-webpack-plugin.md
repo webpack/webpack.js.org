@@ -110,3 +110,7 @@ module.exports = {
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/plugins/extract-text-webpack-plugin/
