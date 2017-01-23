@@ -11,7 +11,7 @@ contributors:
 
 ## Prefer unminified CommonJS/AMD files over bundled `dist` versions.
 
-Most modules link the `dist` version in the `main` field of their `package.json`. While this is useful for most developers, for Webpack it is better to alias the src version because this way webpack is able to optimize dependencies better. However in most cases `dist` works fine as well.
+Most modules link the `dist` version in the `main` field of their `package.json`. While this is useful for most developers, for webpack it is better to alias the src version because this way webpack is able to optimize dependencies better. However in most cases `dist` works fine as well.
 
 ``` javascript
 // webpack.config.js
