@@ -8,6 +8,7 @@ contributors:
   - simon04
   - kisnows
   - chrisVillanueva
+  - swapnilmishra
 ---
 
 This page explains how to generate production builds with webpack.
@@ -128,13 +129,13 @@ module.exports = function (env) {
   }
 }
 ```
-Have the following snippet in our webpack.config.js:
+Have the following snippet in your webpack.config.js:
 ```js
 function buildConfig(env) {
   return require('./config/' + env + '.js')({ env: env })
 }
 
-module.exports = buildConfig(env);
+module.exports = buildConfig;
 ```
 And from our package.json, where we build our application using webpack, the command goes like this:
 ```js
