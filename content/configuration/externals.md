@@ -1,5 +1,5 @@
 ---
-title: 扩展(Externals)
+title: 外部扩展(Externals)
 sort: 13
 contributors:
   - sokra
@@ -36,7 +36,7 @@ externals: {
 }
 ```
 
-这样就脱离了那些不需要改动的独立模块，换句话，下面展示的代码还可以正常运行：
+这样就剥离了那些不需要改动的独立模块，换句话，下面展示的代码还可以正常运行：
 
 ```javascript
 import $ from 'jquery';
