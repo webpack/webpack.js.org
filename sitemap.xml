@@ -40,17 +40,17 @@
     </url>    <url>
         <loc>https://webpack.js.org/api/plugins/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/concepts/configuration/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/concepts/dependency-graph/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts/configuration/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/concepts/entry-points/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/concepts/hot-module-replacement/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/concepts/loaders/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/concepts/module-resolution/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts/loaders/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/concepts/modules/index.html</loc>
     </url>    <url>
@@ -102,9 +102,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/guides/caching/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/guides/code-splitting/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/guides/code-splitting-css/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/guides/code-splitting/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/guides/code-splitting-libraries/index.html</loc>
     </url>    <url>
@@ -128,9 +128,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/guides/lazy-load-react/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/guides/migrating/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/guides/production-build/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/guides/migrating/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/guides/public-path/index.html</loc>
     </url>    <url>
