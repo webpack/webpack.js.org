@@ -3,21 +3,21 @@ title: coffee-loader
 source: https://raw.githubusercontent.com/webpack/coffee-loader/master/README.md
 edit: https://github.com/webpack/coffee-loader/edit/master/README.md
 ---
-# coffee-script loader for webpack
+# 对于webpack的coffee-script的载入器
 
-## Usage
+## 使用
 
 ``` javascript
 var exportsOfFile = require("coffee-loader!./file.coffee");
-// => return exports of executed and compiled file.coffee
+// => 返回file.coffeee执行和编译结果的导出
 
 var exportsOfFile2 = require("coffee-loader?literate!./file.litcoffee");
-// can also compile literate files.
+// 也可以编译字面上的文件
 ```
 
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
+[文档：使用载入器](http://webpack.github.io/docs/using-loaders.html)
 
-### Recommended configuration
+### 推荐配置
 
 ``` javascript
 {
@@ -30,7 +30,7 @@ var exportsOfFile2 = require("coffee-loader?literate!./file.litcoffee");
 }
 ```
 
-## License
+## 证书
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
 
