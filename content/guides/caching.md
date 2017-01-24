@@ -2,7 +2,8 @@
 title: 缓存
 sort: 16
 contributors:
-  - scq000
+  - TheLarkInn
+  - jouni-kantola
 ---
 
 为了能够长期缓存webpack生成的静态资源:
@@ -11,29 +12,29 @@ contributors:
 
 2. 将webpack mainfest提取到一个单独的文件中去。
 
-3. 对于一组依赖关系相同的资源，确保包含引导代码的入口起点chunk，不会随时间改变它的哈希值。
+3. 对于一组依赖关系相同的资源，确保包含引导代码的入口起点模块(entry chunk)不会随时间改变它的哈希值。
 
     对于更优化的设置:
 
-4. 当需要HTML中的资源时，使用编译器(compiler)统计信息来获取文件名。
+4. 当需要在HTML中加载资源时，使用编译器统计信息(compiler stats)来获取文件名。
 
-5. 生成JSON格式的模块清单文件(chunk manifest)，并在页面资源加载之前内联进HTML中去。
+5. 生成模块清单(chunk manifest)的JSON内容，并在页面资源加载之前内联进HTML中去。
 
 
 ## 问题
 
-每次需要在代码中更新内容时，服务器都必须重新部署，然后由所有客户端重新下载。 这显然是低效的，因为通过网络获取资源可能会很慢。 这也就是为什么浏览器需要缓存资源的原因。
+每次需要在代码中更新内容时，服务器都必须重新部署，然后再由所有客户端重新下载。 这显然是低效的，因为通过网络获取资源可能会很慢。 这也就是为什么浏览器需要缓存资源的原因。
 
 但是采用这种方式有一个缺陷：如果我们在部署新版本时不更改资源的文件名，浏览器可能会认为它没有被更新，就会使用它的缓存版本。
 
-告诉浏览器下载较新版本的一种简单方法就是更改资源的文件名。 在webpack之前的时代，我们一般会添加一个内部版本号作为参数，然后每次递增：
+告诉浏览器下载较新版本的一种简单方法就是更改资源的文件名。在webpack之前的时代，我们一般会添加一个内部版本号作为参数，然后逐次递增：
 
 ```bash
 application.js?build=1
 application.css?build=1
 ```
 
-使用 webpack 就更简单了。每次webpack构建时都会生成一个唯一的哈希值，可以用来组成一个包括输出[占位符](/concepts/output/#options)的文件名。
+使用webpack就更简单了。通过包含输出[占位符](/concepts/output/#options)，每次webpack构建时都会生成一个唯一的哈希值用来构成文件名。
 
 以下这个配置示例会生成两个在文件名中带有哈希值的文件（每个都有一个入口点）：
 
@@ -98,11 +99,11 @@ vendor.50cfb8f89ce2262e5325.js  2.58 kB       0  [emitted]  vendor
    [1] ./src/vendor.js 63 bytes {0} [built]
 ```
 
-T> 不要在开发环境下使用[chunkhash]，因为这会增加编译时间。将开发和生产环境的配置分开，并在开发环境中使用[name].js的文件名， 在生产环境中使用[name].[chunkhash].js文件名。
+T> 不要在开发环境下使用[chunkhash]，因为这会增加编译时间。将开发和生产模式的配置分开，并在开发模式中使用[name].js的文件名， 在生产模式中使用[name].[chunkhash].js文件名。
 
 ## 从webpack编译统计中获取文件名
 
-在开发模式下，你只要在 HTML中直接引用 JavaScript 文件：
+在开发模式下，你只要在HTML中直接引用JavaScript文件：
 
 ```html
 <script src="vendor.js"></script>
@@ -152,13 +153,13 @@ module.exports = {
 
 ## 确定性的哈希值
 
-为了最小化生成的文件大小，webpack使用标识符而不是模块名称。 在编译期间，生成标识符，映射到块文件名，然后放入一个名为*chunk manifest*的JavaScript对象中。
+为了最小化生成的文件大小，webpack使用标识符而不是模块名称。在编译期间，生成标识符并映射到块文件名，然后放入一个名为*chunk manifest*的JavaScript对象中。
 
-为了生成保存在构建中的标识符，webpack提供了`NamedModulesPlugin`（推荐用于开发）和`HashedModuleIdsPlugin`（推荐用于生产）这两个插件。
+为了生成保存在构建中的标识符，webpack提供了`NamedModulesPlugin`（推荐用于开发模式）和`HashedModuleIdsPlugin`（推荐用于生产模式）这两个插件。
 
-> TODO: When exist, link to `NamedModulesPlugin` and `HashedModuleIdsPlugin` docs pages
+> TODO: 如果存在, 链接到`NamedModulesPlugin`和`HashedModuleIdsPlugin`文档页
 
-> TODO: Describe how the option `recordsPath` option works
+> TODO: 描述`recordsPath`选项如何工作
 
 然后将chunk manifest（与引导/运行时代码一起）放入entry chunk，这对webpack打包的代码工作是至关重要的。
 
