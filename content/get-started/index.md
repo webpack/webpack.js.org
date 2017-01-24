@@ -116,7 +116,7 @@ index.js  1.56 kB       0  [emitted]  main
 
 T> If you created a local `webpack@beta` build, be sure to reference `webpack` with `./node_modules/.bin/webpack` on the command line.
 
-if you try to open `index.html` file in your browser, you will see a blank page, or a error in the console with the following message: `import declarations may only appear at top level of a module`. This means that webpack is bundling the non-transpiled ES6 code, which is why these import/export statements are being found. babel-loader must therefore not be transpiling what you expect.
+At this moment, if you try to open `index.html` file in your browser, you will see a blank page, or a error in the console with the following message: `import declarations may only appear at top level of a module`. This means that webpack is bundling the non-transpiled ES6 code, which is why these import/export statements are being found. babel-loader must therefore not be transpiling what you expect.
 To fix that, let's add a package called Babel that will be responsible to transpile our source code.
 
 ```
@@ -144,10 +144,14 @@ module.exports = {
         loaders:
         [
             {
+                // Our *.js inputs/sources
                 test: /\.jsx?$/,
+                // We assure that it won't read the node_modules files
                 exclude: /node_modules/,
+                // we define our loader/module
                 loader: 'babel',
                 query: {
+                    // we define the preset to be transpiled by babel
                     presets: ['es2015']
                 }
 
