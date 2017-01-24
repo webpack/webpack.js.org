@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/7f31bf39056ae6ec0e7d.css" rel="stylesheet">
+      <link href="/ab870cf75a1ac0a82878.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -88,7 +88,7 @@ In <code>/abc/file.js</code>:</p>
 <h3 class="header"><a class="anchor" href="#cacheable" id="cacheable"></a><span class="text"><code>cacheable</code></span><a class="icon-link" href="#cacheable"></a></h3>
 <pre><code class="lang-typescript"><span class="token function">cacheable</span><span class="token punctuation">(</span>flag <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">)</span>
 </code></pre>
-<p>Make this loader result cacheable. By default it&apos;s not cacheable.</p>
+<p>By default, loader results are cacheable. Call this method passing <code>false</code> to make the loader&apos;s result not cacheable.</p>
 <p>A cacheable loader must have a deterministic result, when inputs and dependencies haven&apos;t changed. This means the loader shouldn&apos;t have other dependencies than specified with <code>this.addDependency</code>. Most loaders are deterministic and cacheable.</p>
 <h3 class="header"><a class="anchor" href="#loaders" id="loaders"></a><span class="text"><code>loaders</code></span><a class="icon-link" href="#loaders"></a></h3>
 <pre><code class="lang-typescript">loaders <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>request<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">,</span> path<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">,</span> query<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">module</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">}</span><span class="token punctuation">]</span>
