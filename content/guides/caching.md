@@ -3,7 +3,6 @@ title: 缓存
 sort: 16
 contributors:
   - okonet
-  - TheLarkInn
   - jouni-kantola
 ---
 
