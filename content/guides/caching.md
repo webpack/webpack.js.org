@@ -2,6 +2,7 @@
 title: 缓存
 sort: 16
 contributors:
+  - okonet
   - TheLarkInn
   - jouni-kantola
 ---
@@ -9,17 +10,11 @@ contributors:
 为了能够长期缓存webpack生成的静态资源:
 
 1. 使用`[chunkhash]`向每个文件添加一个依赖于内容的缓存杀手(cache-buster)。
-
 2. 将webpack mainfest提取到一个单独的文件中去。
-
 3. 对于一组依赖关系相同的资源，确保包含引导代码的入口起点模块(entry chunk)不会随时间改变它的哈希值。
-
     对于更优化的设置:
-
 4. 当需要在HTML中加载资源时，使用编译器统计信息(compiler stats)来获取文件名。
-
 5. 生成模块清单(chunk manifest)的JSON内容，并在页面资源加载之前内联进HTML中去。
-
 
 ## 问题
 
