@@ -5,8 +5,7 @@ edit: https://github.com/webpack/source-map-loader/edit/master/README.md
 ---
 # webpack的source map loader
 
-Extracts SourceMaps for source files that as added as `sourceMappingURL` comment.
-为源文件提取SourceMaps作为sourceMappingURL注释。
+为原文件提取SourceMaps作为 `sourceMappingURL` 的注释。
 
 ## 使用
 
@@ -28,8 +27,7 @@ module.exports = {
 };
 ```
 
-This extracts all SourceMaps from all files. That's not so performance-wise so you may only want to apply the loader to relevant files.
-这将从所有文件中提取所有SourceMaps。这不是那么的性能，所以你可能只想把loader应用到相关的文件中去。
+这将从所有文件中提取所有SourceMaps。这不是那么的性能，所以你可能只想应用加载器到相关的文件。
 
 ## License
 
