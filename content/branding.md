@@ -6,7 +6,7 @@ contributors:
   - rouzbeh84
 ---
 
-Here you can find guidelines, assets, and licenses in regards to the **webpack** project. See our official [media repository](https://github.com/webpack/media) for more information and to find the [license](https://github.com/webpack/media/blob/master/LICENSE) that governs this work. Click any of the images to download them.
+Here you can find **webpack** project brand guidelines, assets, and license. See our official [media repository](https://github.com/webpack/media) for more information and to find the [license](https://github.com/webpack/media/blob/master/LICENSE) that governs this work. Click any of the images to download them.
 
 ## [Jump to All Original Media Files](https://github.com/webpack/media)
 
