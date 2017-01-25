@@ -56,7 +56,7 @@ Square-sized icon for smaller areas (like favicons):
 
 T> For those of you following our guidelines and have gotten this far, we've made a special smaller size image used especially for custom emoji (like in a slack or gitter channel ;))
 
-<img src="./assets/icon-square-small-slack.png" width="50" alt="icon square small example">
+<img src="/assets/icon-square-small-slack.png" width="50" alt="icon square small example">
 
 ## Font
 
