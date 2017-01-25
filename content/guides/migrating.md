@@ -57,6 +57,7 @@ The new naming conventions are easier to understand and are a good reason to upg
 +           options: {
               modules: true
             }
+          }
         ]
       },
       {
