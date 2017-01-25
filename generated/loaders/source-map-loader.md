@@ -7,7 +7,7 @@ edit: https://github.com/webpack/source-map-loader/edit/master/README.md
 
 为原文件提取SourceMaps作为 `sourceMappingURL` 的注释。
 
-## Usage
+## 使用
 
 [文档：使用loaders](https://webpack.js.org/concepts/#loaders)
 
