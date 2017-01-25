@@ -1,5 +1,6 @@
 ---
 title: provide-plugin
+sort: 6
 contributors:
   - sokra
   - simon04

@@ -1,5 +1,6 @@
 ---
 title: commons-chunk-plugin
+sort: 3
 contributors:
   - bebraw
   - simon04
@@ -108,7 +109,7 @@ new CommonsChunkPlugin({
 
 Hint: In combination with long term caching you may need to use [this plugin](https://github.com/diurnalist/chunk-manifest-webpack-plugin) to avoid that the vendor chunk changes. You should also use records to ensure stable module ids.
 
-###  Move common modules into the parent chunk
+### Move common modules into the parent chunk
 
 With Code Splitting multiple child chunks of a chunk can have common modules. You can move these common modules into the parent (This reduces overall size, but has a negative effect on the initial load time. It can be useful if it is expected that a user need to download many sibling chunks).
 
@@ -147,20 +148,20 @@ new CommonsChunkPlugin({
 
 ### Passing the `minChunks` property a function
 
-You also have the ability to pass the `minChunks` property a function. This function is called by the `CommonsChunkPlugin` and calls the function with `module` and `count` arguments. 
+You also have the ability to pass the `minChunks` property a function. This function is called by the `CommonsChunkPlugin` and calls the function with `module` and `count` arguments.
 
-The `module` property represents each module in the chunks you have provided via the `names` property. 
+The `module` property represents each module in the chunks you have provided via the `names` property.
 
-The `count` property represents how many chunks the `module` is used in. 
+The `count` property represents how many chunks the `module` is used in.
 
-This option is useful when you want to have fine-grained control over how the CommonsChunk algorithm determins where modules should be moved to.
+This option is useful when you want to have fine-grained control over how the CommonsChunk algorithm determines where modules should be moved to.
 
 ```javascript
 new CommonsChunkPlugin({
   name: "my-single-lib-chunk",
   filename: "my-single-lib-chunk.js",
   minChunks: function(module, countOfHowManyTimesThisModuleIsUsedAcrossAllChunks) {
-    // If module has a path, and inside of the path exists the name "somelib", 
+    // If module has a path, and inside of the path exists the name "somelib",
     // and it is used in 3 separate chunks/entries, then break it out into
     // a separate chunk with chunk keyname "my-single-lib-chunk", and filename "my-single-lib-chunk.js"
     return module.resource && (/somelib/).test(module.resource) && count === 3;
@@ -168,4 +169,4 @@ new CommonsChunkPlugin({
 });
 ```
 
-As seen above, this example allows you to move only one lib to a separate file if and only if all conditions are met inside the function. 
+As seen above, this example allows you to move only one lib to a separate file if and only if all conditions are met inside the function.
