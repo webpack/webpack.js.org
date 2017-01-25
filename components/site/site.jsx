@@ -28,8 +28,8 @@ export default props => {
       }))
     }));
 
-  // Rename the root section ("Webpack" => "Other") and push it to the end
-  let rootIndex = sections.findIndex(section => section.title === 'Webpack');
+  // Rename the root section ("webpack" => "Other") and push it to the end
+  let rootIndex = sections.findIndex(section => section.title === 'webpack');
   let rootSection = sections.splice(rootIndex, 1)[0];
   rootSection.title = 'Other';
   sections.push(rootSection);

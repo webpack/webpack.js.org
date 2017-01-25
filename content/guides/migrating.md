@@ -451,7 +451,7 @@ require.ensure([], function(require) {
 }, "custom-chunk-name");
 ```
 
-(Note on the deprecated `System.import`: Webpack's use of `System.import` didn't fit the proposed spec, so it was deprecated in [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) in favor of `import()`)
+(Note on the deprecated `System.import`: webpack's use of `System.import` didn't fit the proposed spec, so it was deprecated in [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) in favor of `import()`)
 
 If you want to use `import` with [Babel](http://babeljs.io/), you'll need to install/add the [dynamic-import](http://babeljs.io/docs/plugins/syntax-dynamic-import/) syntax plugin while it's still Stage 3 to get around the parser error. When the proposal is added to the spec this won't be necessary anymore.
 
@@ -471,7 +471,7 @@ function route(path, query) {
 
 ## Mixing ES2015 with AMD and CommonJS
 
-As for AMD and CommonJS you can freely mix all three module types (even within the same file). Webpack behaves similar to babel and node-eps in this case:
+As for AMD and CommonJS you can freely mix all three module types (even within the same file). webpack behaves similar to babel and node-eps in this case:
 
 ```javascript
 // CommonJS consuming ES2015 Module
