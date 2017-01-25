@@ -246,7 +246,7 @@ This needs to be placed inside of `dist` in your project root. webpack-dev-serve
 ```
 ### Package.json
 
-最后，让我们启动 `webpack-dev-server` 来生成打包文件，看看 HMR 的运行效果吧。我们可以使用下面的 `package.json` 进入：
+最后，让我们启动 `webpack-dev-server` 来打包我们的代码，看看 HMR 的运行效果吧。我们可以使用下面的 `package.json` 进入：
 
 ```json
 {
