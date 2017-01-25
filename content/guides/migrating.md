@@ -10,6 +10,7 @@ contributors:
   - jouni-kantola
   - frederikprijck
   - chrisVillanueva
+  - bebraw
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -225,6 +226,10 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
 +   })
   ]
 ```
+
+## `DedupePlugin` has been removed
+
+`webpack.optimize.DedupePlugin` isn't needed anymore. Remove it from your configuration.
 
 ## `BannerPlugin` - breaking change
 
