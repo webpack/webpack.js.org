@@ -3,13 +3,13 @@ title: worker-loader
 source: https://raw.githubusercontent.com/webpack/worker-loader/master/README.md
 edit: https://github.com/webpack/worker-loader/edit/master/README.md
 ---
-# worker loader for webpack
+# webpack的worker loader
 
-## Usage
+## 使用
 
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
+[文档：使用loaders](http://webpack.github.io/docs/using-loaders.html)
 
-Import the worker file:
+导入worker文件：
 
 ``` javascript
 // main.js
@@ -21,13 +21,14 @@ worker.onmessage = function(event) {...};
 worker.addEventListener("message", function(event) {...});
 ```
 
-You can also inline the worker as a blob with the `inline` parameter:
+您还可以使用inline参数将worker作为blob内联：
+
 ``` javascript
 var MyWorker = require("worker-loader?inline!./file.js");
 ```
 
 
-The worker file can import dependencies just like any other file:
+worker文件可以像任何其他文件一样导入依赖关系：
 
 ``` javascript
 // file.js
@@ -38,7 +39,7 @@ var o = {foo: 'foo'}
 _.has(o, 'foo') // true
 ```
 
-You can even use ES6 modules if you have the babel-loader configured:
+如果你配置了babel-loader，你甚至可以使用ES6模块：
 
 ``` javascript
 // file.js
