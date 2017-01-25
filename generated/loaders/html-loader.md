@@ -4,20 +4,23 @@ source: https://raw.githubusercontent.com/webpack/html-loader/master/README.md
 edit: https://github.com/webpack/html-loader/edit/master/README.md
 ---
 ## 安装
+
 ```bash
 npm i -D html-loader
 ```
 
-## 使用
-默认情况下，每个本地的 `<img src="image.png">` 都需要 （`require('./image.png')`） 来进行加载。您可能需要为配置中的图片指定加载器（推荐 `file-loader` 或 `url-loader` ）
+## Usage
 
-您可以通过查询参数attrs指定此加载器应处理哪个标签属性组合。传递数组或以空格分隔的<tag>：<attribute>组合列表。（默认值：attrs = img：src）
+默认情况下，每个本地的 `<img src="image.png">` 都需要通过 require （`require('./image.png')`）来进行加载。您可能需要在配置中为图片指定 loader（推荐 `file-loader` 或 `url-loader` ）
 
-要完全禁用标签属性处理（例如，如果你在客户端处理图片加载），您可以传入attrs = false。
+您可以通过查询参数 `attrs`，来指定哪个标签属性组合(tag-attribute combination)应该被此 loader 处理。传递数组或以空格分隔的 `<tag>:<attribute>` 组合的列表。（默认值：`attrs=img:src`）
 
-## 例子
+要完全禁用对标签属性的处理（例如，如果你在客户端处理图片加载），你可以传入 `attrs=false`。
+
+## 示例
 
 使用此配置：
+
 ```js
 {
   module: {
@@ -64,14 +67,14 @@ require("html-loader?-attrs!./file.html");
 // => '<img  src="image.jpg"  data-src="image2x.png" >'
 ```
 
-通过运行`webpack --optimize-minimize`来最小化优化
+通过运行 `webpack --optimize-minimize` 来最小化
 
 ```html
 '<img src=http://cdn.example.com/49eba9f/a9f92ca.jpg
       data-src=data:image/png;base64,...>'
 ```
 
-或在您的`webpack.conf.js`中指定`minimize`查询
+或者在 `webpack.conf.js` 中指定 `minimize` 查询参数
 
 ```js
 module: {
@@ -85,11 +88,12 @@ module: {
 }
 ```
 
-### 'Root-relative' 网址
+### 'Root-relative' URLs
 
-对于以/开头的网址，默认行为是不编译它们。如果设置了根查询参数，它将被添加到URL之前，然后被编译。
+对于以 `/` 开头的 url，默认行为是不转换它们。如果设置了 `root` 查询参数，它将被添加到 URL 之前，然后进行转换。
 
-具有与上述相同的配置：
+和上面配置相同：
+
 ``` html
 <!-- file.html -->
 <img src="/image.jpg">
@@ -109,7 +113,7 @@ require("html-loader?root=.!./file.html");
 
 ### 插值
 
-您可以使用 `interpolate` 标志为ES6模板字符串启用插值语法，如下所示：
+您可以使用 `interpolate` 标记，为 ES6 模板字符串启用插值语法，就像这样：
 
 ```js
 require("html-loader?interpolate!./file.html");
@@ -120,7 +124,7 @@ require("html-loader?interpolate!./file.html");
 
 <div>${require('./components/gallery.html')}</div>
 ```
-如果你只想使用模板中的 `require` 和任何其它的 `${}` 不被编译，你可以设置 `interpolate` 标志为 `require`，像这样：
+如果你只想在模板中使用 `require`，任何其它的 `${}` 不被转换，你可以设置 `interpolate` 标记为 `require`，就像这样：
 
 ```js
 require("html-loader?interpolate=require!./file.ftl");
@@ -139,15 +143,15 @@ require("html-loader?interpolate=require!./file.ftl");
 
 ### 导出格式
 
-有不同的导出格式可用：
+这里有几种不同的可用导出格式：
 
-+ ```module.exports``` (默认配置, cjs 格式). "Hello world" becomes ```module.exports = "Hello world";```
-+ ```exports.default``` (当设置 ```exportAsDefault``` 参数时，es6to5格式). "Hello world" becomes ```exports.default = "Hello world";```
-+ ```export default``` (当设置 ```exportAsEs6Default``` 参数时, es6 格式). "Hello world" becomes ```export default "Hello world";```
++ ```module.exports```（默认配置，cjs 格式）。"Hello world" 转为 ```module.exports = "Hello world";```
++ ```exports.default``` (当设置了 ```exportAsDefault``` 参数，es6to5 格式）。"Hello world" 转为 ```exports.default = "Hello world";```
++ ```export default``` (当设置了 ```exportAsEs6Default``` 参数，es6 格式)。"Hello world" 转为 ```export default "Hello world";```
 
 ### 高级选项
 
-如果你需要传递更多的[高级选项](https://github.com/webpack/html-loader/pull/46)，特别是那些不能被字符串化，你还可以在你的 `webpack.config.js` 中定义一个 `htmlLoader` 属性：
+如果你需要传递[更多高级选项](https://github.com/webpack/html-loader/pull/46)，特别是那些不能被字符串化，你还可以在 `webpack.config.js` 中定义一个 `htmlLoader` 属性：
 
 ```js
 var path = require('path')
@@ -170,7 +174,7 @@ module.exports = {
 };
 ```
 
-如果你需要定义两个不同的加载器配置，你也可以通过 `html-loader?config=otherHtmlLoaderConfig` 改变配置的属性名：
+如果你需要定义两个不同的 loader 配置，你也可以通过 `html-loader?config=otherHtmlLoaderConfig` 改变配置的属性名：
 
 ```js
 module.exports = {
@@ -189,15 +193,15 @@ module.exports = {
 };
 ```
 
-### 导出到HTML文件
+### 导出到 HTML 文件
 
-一个很常见的情况是将HTML导出到自己的.html文件中，直接为它们提供服务，而不是使用javascript注入。这可以通过3个loaders的组合来实现：
+一个很常见的场景，将 HTML 导出到 _.html_ 文件中，直接访问它们，而不是使用 javascript 注入。这可以通过3个 loader 的组合来实现：
 
 - [file-loader](https://github.com/webpack/file-loader)
 - [extract-loader](https://github.com/peerigon/extract-loader)
 - html-loader
 
-html-loader将解析URL，并请求图片和你所期望的一切。extract-loader会将javascript解析为合适的html文件，确保图片被required并指向正确的路径，file-loader将为您写入.html文件。例：
+html-loader 将解析 URL，并请求图片和你所期望的一切资源。extract-loader 会将 javascript 解析为合适的 html 文件，确保引用的图片指向正确的路径，file-loader 将结果写入 .html 文件。示例：
 
 ```js
 {
@@ -206,7 +210,7 @@ html-loader将解析URL，并请求图片和你所期望的一切。extract-load
 }
 ```
 
-## 维护者
+## 维护人员
 
 <table>
   <tbody>
