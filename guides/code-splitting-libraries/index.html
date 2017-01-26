@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/bb7f6713d5f9f4955c4b.css" rel="stylesheet">
+      <link href="/7de544b06804dbbcf23f.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -25,19 +25,19 @@
 <p><code>npm install --save moment</code></p>
 <p>The index file will require <code>moment</code> as a dependency and log the current date as follows</p>
 <p><strong>index.js</strong></p>
-<pre><code class="lang-javascript">
-<span class="token keyword">var</span> moment <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;moment&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="lang-javascript"><span class="token keyword">var</span> moment <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;moment&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">moment</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>We can bundle the application with webpack using the following config</p>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="lang-javascript">
+<pre><code class="lang-javascript"><span class="token keyword">var</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;path&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>env<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token punctuation">{</span>
         entry<span class="token punctuation">:</span> <span class="token string">&apos;./index.js&apos;</span><span class="token punctuation">,</span>
         output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
             filename<span class="token punctuation">:</span> <span class="token string">&apos;[chunkhash].[name].js&apos;</span><span class="token punctuation">,</span>
-            path<span class="token punctuation">:</span> <span class="token string">&apos;./dist&apos;</span>
+            path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&apos;dist&apos;</span><span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
@@ -47,7 +47,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h2 class="header"><a class="anchor" href="#multiple-entries" id="multiple-entries"></a><span class="text">Multiple Entries</span><a class="icon-link" href="#multiple-entries"></a></h2>
 <p>Let&apos;s try to mitigate this by adding a separate entry point for <code>moment</code> and name it <code>vendor</code></p>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="lang-javascript">
+<pre><code class="lang-javascript"><span class="token keyword">var</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;path&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>env<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token punctuation">{</span>
         entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
@@ -56,7 +57,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
         output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
             filename<span class="token punctuation">:</span> <span class="token string">&apos;[chunkhash].[name].js&apos;</span><span class="token punctuation">,</span>
-            path<span class="token punctuation">:</span> <span class="token string">&apos;./dist&apos;</span>
+            path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&apos;dist&apos;</span><span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
@@ -67,8 +68,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>This is a pretty complex plugin. It fundamentally allows us to extract all the common modules from different bundles and add them to the common bundle. If a common bundle does not exist, then it creates a new one.</p>
 <p>We can modify our webpack config file to use the <code>CommonsChunkPlugin</code> as follows</p>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="lang-javascript">
-<span class="token keyword">var</span> webpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;webpack&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="lang-javascript"><span class="token keyword">var</span> webpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;webpack&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;path&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>env<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token punctuation">{</span>
         entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
@@ -77,7 +79,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
         output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
             filename<span class="token punctuation">:</span> <span class="token string">&apos;[chunkhash].[name].js&apos;</span><span class="token punctuation">,</span>
-            path<span class="token punctuation">:</span> <span class="token string">&apos;./dist&apos;</span>
+            path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&apos;dist&apos;</span><span class="token punctuation">)</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
         plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
             <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>optimize<span class="token punctuation">.</span>CommonsChunkPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
@@ -94,8 +96,9 @@ This means that we still don&apos;t reap the benefits of browser caching because
 <p>The issue here is that on every build, webpack generates some webpack runtime code, which helps webpack do it&apos;s job. When there is a single bundle, the runtime code resides in it. But when multiple bundles are generated, the runtime code is extracted into the common module, here the <code>vendor</code> file.</p>
 <p>To prevent this, we need extract out the runtime into a separate manifest file. Even though we are creating another bundle, the overhead is offset by the long term caching benefits that we obtain on the <code>vendor</code> file.</p>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="lang-javascript">
-<span class="token keyword">var</span> webpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;webpack&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="lang-javascript"><span class="token keyword">var</span> webpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;webpack&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;path&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>env<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token punctuation">{</span>
         entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
@@ -104,7 +107,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
         output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
             filename<span class="token punctuation">:</span> <span class="token string">&apos;[chunkhash].[name].js&apos;</span><span class="token punctuation">,</span>
-            path<span class="token punctuation">:</span> <span class="token string">&apos;./dist&apos;</span>
+            path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&apos;dist&apos;</span><span class="token punctuation">)</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
         plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
             <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>optimize<span class="token punctuation">.</span>CommonsChunkPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
@@ -115,7 +118,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 </code></pre>
 <p>With the above webpack config, we see three bundles being generated. <code>vendor</code>, <code>main</code> and <code>manifest</code> bundles.</p>
-</div><hr style="display:block;"><h3 style="display:block;">Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/chrisVillanueva"><img src="https://github.com/chrisVillanueva.png?size=90"><span class="contributor__name"> chrisVillanueva</span></a><a class="contributor" href="https://github.com/pksjce"><img src="https://github.com/pksjce.png?size=90"><span class="contributor__name"> pksjce</span></a></div></div></section></div><div class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/get-started" class="footer__link">Get Started</a><a href="/organization" class="footer__link">Organization</a><a href="/contribute" class="footer__link">Contribute</a><a href="/get-started/why-webpack#comparison" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg"></a></section><section class="footer__right"><a href="/branding" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Support</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link">License</a><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" class="footer__license"><img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png"></a></section></div></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
+</div><hr style="display:block;"><h3 style="display:block;">Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/chrisVillanueva"><img src="https://github.com/chrisVillanueva.png?size=90"><span class="contributor__name"> chrisVillanueva</span></a><a class="contributor" href="https://github.com/johnstew"><img src="https://github.com/johnstew.png?size=90"><span class="contributor__name"> johnstew</span></a><a class="contributor" href="https://github.com/pksjce"><img src="https://github.com/pksjce.png?size=90"><span class="contributor__name"> pksjce</span></a></div></div></section></div><div class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/get-started" class="footer__link">Get Started</a><a href="/organization" class="footer__link">Organization</a><a href="/contribute" class="footer__link">Contribute</a><a href="/get-started/why-webpack#comparison" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg"></a></section><section class="footer__right"><a href="/branding" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Support</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link">License</a><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" class="footer__license"><img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png"></a></section></div></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
 
     
       <script src="/8e4e882a7c5e16e3c19bd58dbb75f44d.js"></script>
