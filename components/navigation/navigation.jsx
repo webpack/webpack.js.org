@@ -20,7 +20,8 @@ let Sections = [
       { title: 'API', url: 'api' },
       { title: 'Configuration', url: 'configuration' },
       { title: 'Loaders', url: 'loaders' },
-      { title: 'Plugins', url: 'plugins' }
+      { title: 'Plugins', url: 'plugins' },
+      { title: 'Development', url: 'development' }
     ]
   },
   {
