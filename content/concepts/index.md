@@ -5,6 +5,7 @@ contributors:
   - TheLarkInn
   - jhnns
   - grgur
+  - johnstew
 ---
 
 *webpack* is a _module bundler_ for modern JavaScript applications. It is [incredibly configurable](/configuration), however, there are **Four Core Concepts** we feel you should understand before you get started!
@@ -111,12 +112,13 @@ In order to use a plugin, you just need to `require()` it and add it to the `plu
 ```javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 const webpack = require('webpack'); //to access built-in plugins
+const path = require('path');
 
 const config = {
   entry: './path/to/my/entry/file.js',
   output: {
-    filename: 'my-first-webpack.bundle.js',
-    path: './dist'
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'my-first-webpack.bundle.js'
   },
   module: {
     rules: [
