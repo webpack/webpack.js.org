@@ -4,7 +4,7 @@ title: extract-text-webpack-plugin
 
 # extract text plugin for webpack 2
 
-和 webpack 1 版本相比 API 已经发生改变。对于 webpack 1 版本，请看 [webpack-1 分支的 README 文档](https://github.com/webpack/extract-text-webpack-plugin/blob/webpack-1/README.md)。
+和 webpack 1 版本相比 API 已经发生改变。对于 webpack 1 版本，请查看 [webpack-1 分支的 README 文档](https://github.com/webpack/extract-text-webpack-plugin/blob/webpack-1/README.md)。
 
 ## 安装
 
