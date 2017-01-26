@@ -34,7 +34,7 @@ module.exports = {
 #### entry-file.js
 ```js
 /*与其他loader配合需要的额外配置 (polyfills, ...)*/
-const context = require.context(/*directory*/'mocha-loader!./tests', /*recursive*/true, /*match files*//_test.js$/);
+const context = require.context(/*目录*/'mocha-loader!./tests', /*循环*/true, /*符合条件的文件*//_test.js$/);
 context.keys().forEach(context);
 ```
 

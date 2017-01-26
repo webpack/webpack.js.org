@@ -38,19 +38,19 @@ npm install --save react@15.3.0 react-dom@15.3.0
 {
   "presets": [
     ["es2015", {"modules": false}],
-    // webpack understands the native import syntax, and uses it for tree shaking
+    // webpack现在已经支持原生的import语句了, 并且将其运用在tree-shaking特性上
 
     "stage-2",
-    // Specifies what level of language features to activate.
-    // Stage 2 is "draft", 4 is finished, 0 is strawman.
-    // See https://tc39.github.io/process-document/
+    // 规定JS运用的语言规范层级
+    // Stage 2 是 "草案", 4 是 "已完成", 0 is "稻草人(strawman)"。
+    // 详情查看 https://tc39.github.io/process-document/
 
     "react"
-    // Transpile React components to JavaScript
+    // 转译React组件为JS代码
   ],
   "plugins": [
     "react-hot-loader/babel"
-    // Enables React code to work with HMR.
+    // 开启react代码的模块热替换（HMR）
   ]
 }
 ```
@@ -66,27 +66,28 @@ const webpack = require('webpack');
 module.exports = {
   entry: [
     'react-hot-loader/patch',
-    // activate HMR for React
+    // 开启react代码的模块热替换（HMR）
 
     'webpack-dev-server/client?http://localhost:8080',
-    // bundle the client for webpack-dev-server
-    // and connect to the provided endpoint
+    // 为webpack-dev-server的环境打包好运行代码
+    // 然后连接到指定服务器域名与端口
 
     'webpack/hot/only-dev-server',
-    // bundle the client for hot reloading
-    // only- means to only hot reload for successful updates
+    // 为热替换（HMR）打包好运行代码
+    // only- 意味着只有成功更新运行代码才会执行热替换（HMR）
 
 
     './index.js'
-    // the entry point of our app
+    // 我们app的入口文件
   ],
   output: {
     filename: 'bundle.js',
-    // the output bundle
+    // 输出的打包文件
 
     path: resolve(__dirname, 'dist'),
 
     publicPath: '/'
+    // 对于热替换（HMR）是必须的，让程序知道在哪里载入热更新的模块（chunk）
     // necessary for HMR to know where to load the hot update chunks
   },
 
@@ -96,13 +97,13 @@ module.exports = {
 
   devServer: {
     hot: true,
-    // enable HMR on the server
+    // 开启服务器的模块热替换（HMR）
 
     contentBase: resolve(__dirname, 'dist'),
-    // match the output path
+    // 输出文件的路径
 
     publicPath: '/'
-    // match the output `publicPath`
+    // 和上文output的"publicPath"值保持一致
   },
 
   module: {
@@ -127,9 +128,10 @@ module.exports = {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    // enable HMR globally
+    // 开启全局的模块热替换（HMR）
 
     new webpack.NamedModulesPlugin(),
+    // 当模块热替换（HMR）时在浏览器控制台输出对用户更友好的模块名字信息
     // prints more readable module names in the browser console on HMR updates
   ],
 };
@@ -217,9 +219,9 @@ export default App;
   ["es2015", {"modules": false}]
   ```
 
-  与我们在 [Babel 配置文件](#babel-config) 所配置的是一样的。注意，不仅仅只有模块热替换的场景需要禁用Babel模块插件。如果你不将此插件禁用，你可能会遇到许多其他的问题(查看 [从webpack v1 迁移到 v2](/guides/migrating/#mixing-es2015-with-amd-and-commonjs) and [webpack-tree-shaking](http://www.2ality.com/2015/12/webpack-tree-shaking.html))。
+  与我们在 [Babel 配置文件](#babel-config) 中所配置的是一样的。注意，不仅仅只有模块热替换的场景需要禁用Babel模块插件。如果你不将此插件禁用，你可能会遇到许多其他的问题(查看 [从webpack v1 迁移到 v2](/guides/migrating/#mixing-es2015-with-amd-and-commonjs) 和 [webpack-tree-shaking](http://www.2ality.com/2015/12/webpack-tree-shaking.html))。
 
-4. 注意，如果你在webpack 2 配置文件中启用了ES6模块，并且按照上文#3 的配置，修改了你的`.babelrc` 文件，你需要使用`require`命令或者创建两个`.babelrc`文件(查看问题 [这里](https://github.com/webpack/webpack.js.org/issues/154)):
+4. 注意，如果你在webpack 2 配置文件中启用了ES6模块，并且按照上文#3 的配置，修改了你的`.babelrc` 文件，你需要使用`require`命令，或者，创建两个`.babelrc`文件(查看问题 [这里](https://github.com/webpack/webpack.js.org/issues/154)):
   * 一个文件放置在项目的根目录，并且加上配置: `"presets": ["es2015"]`
   * 另一个文件放置在webpack要构建代码的主目录。在这个例子里，放置的目录路径是`src/`
 

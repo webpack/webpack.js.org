@@ -25,15 +25,12 @@ module.exports = {
 		// 查询jslint配置项，请参考 http://www.jshint.com/docs/options/
 		// 例如
 		camelcase: true,
-		//jslint的错误在默认情况下会显示为warning（警告）信息
-		//将emitErrors参数设置为true可使错误显示为error（错误）信息
+		//jslint的错误信息在默认情况下会显示为warning（警告）类信息
+		//将emitErrors参数设置为true可使错误显示为error（错误）类信息
 		emitErrors: false,
     //jshint默认情况下不会打断webpack编译
     //如果你想在jshint出现错误时，立刻停止编译
-    //设置failOnHint参数
-		// jshint to not interrupt the compilation
-		// if you want any file with jshint errors to fail
-		// set failOnHint to true
+    //请设置failOnHint参数为true
 		failOnHint: false,
 
 		// 自定义报告函数
@@ -43,19 +40,19 @@ module.exports = {
 ```
 
 ### 自定义报告函数
-在默认情况下，`jshint-loader`会提供一个默认的报告方法。
-然而，如果你想自定义报告函数，你可以向`jshint`配置下 key 为`report`下的配置项传入自定义的函数（请参考上文的用法）
+在默认情况下，`jshint-loader`会提供一个默认的报告方法。  
+然而，如果你想自定义报告函数，你可以在`jshint`配置下 key 为`report`下的配置项里传入自定义的函数（参考上文的用法）  
 然后，jshint将会生成与以下示例结构一致的错误/警告信息（数组）给报告函数。
 ```js
 [
 {
     id:        [字符串, 通常是 '(error)'],
-    code:      [字符串, 错误/警告（error/warning）code],
+    code:      [字符串, 错误/警告（error/warning）编码],
     reason:    [字符串, 错误/警告（error/warning）信息],
-    evidence:  [字符串, 对应生成此错误的code]
+    evidence:  [字符串, 对应生成此错误的编码]
     line:      [数字]
     character: [数字]
-    scope:     [字符串, 信息作用域;
+    scope:     [字符串, 消息作用域;
                 通常是 '(main)' 除非代码被解析(eval)了]
 
     [+ 还有一些旧有的参数，一般用户不必了解]
@@ -66,9 +63,7 @@ module.exports = {
 ```
 报告函数会将loader的上下文信息保存在`this`后执行。你可以使用`this.emitWarning(...)`或者`this.emitError(...)`方法,手动触发信息的报告。请参考[关于loader上下文的webpack文档](http://webpack.github.io/docs/loaders.html#loader-context).  
 ####**注意:** `jshint reporters` 是与  `jshint-loader` **不兼容**的!  
-这是因为reporter的输入来源，只能从一个文件读取，而不能同时多个文件。在这种方式下的错误报告，是与jshint的[传统reporters](http://www.jshint.com/docs/reporters/) 不一样的，因为loader插件（例如 jshint-loader）是会在每一个源文件上执行的，所以它们的报告函数也会分别对应每一个源文件上执行。
-This is due to the fact that reporter input is only processed from one file; not multiple files. Error reporting in this manner differs from [tranditional reporters](http://www.jshint.com/docs/reporters/) for jshint
-since the loader plugin (i.e. jshint-loader) is executed for each source file; and thus the reporter is executed for each file.
+这是因为reporter的输入来源，只能从一个文件，而不能同时从多个文件读取。在这种方式下的错误报告，是与jshint的[传统 reporters ](http://www.jshint.com/docs/reporters/) 不一样的，因为loader插件（例如 jshint-loader）是会在每一个源文件上执行的，因此它们的报告函数也会分别对应每一个源文件上执行。
 webpack控制台输出的格式大致如下：
 ```js
 ...
