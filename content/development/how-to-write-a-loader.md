@@ -9,7 +9,7 @@ This function is called when a resource should be transformed by this loader.
 
 In the simple case, when only a single loader is applied to the resource, the loader is called with one parameter: the content of the resource file as string.
 
-The loader can access the [[loader API | loaders]] on the `this` context in the function.
+The loader can access the [[loader API | loaders]](api/loaders/) on the `this` context in the function.
 
 A sync loader that only wants to give a one value can simply `return` it. In every other case the loader can give back any number of values with the `this.callback(err, values...)` function. Errors are passed to the `this.callback` function or thrown in a sync loader.
 

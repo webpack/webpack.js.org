@@ -20,7 +20,7 @@ These two components are an integral part of any Webpack plugin (especially a `c
 
 ## Basic plugin architecture
 
-Plugins are instanceable objects with an `apply` method on their prototype. This `apply` method is called once by the Webpack compiler while installing the plugin. The `apply` method is given a reference to the underlying Webpack compiler, which grants access to compiler callbacks. A simple plugin is structured as follows:
+Plugins are instantiated objects with an `apply` method on their prototype. This `apply` method is called once by the Webpack compiler while installing the plugin. The `apply` method is given a reference to the underlying Webpack compiler, which grants access to compiler callbacks. A simple plugin is structured as follows:
 
 ```javascript
 function HelloWorldPlugin(options) {
