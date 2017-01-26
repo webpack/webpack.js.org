@@ -22,15 +22,15 @@ module.exports = {
 }
 ```
 
-Arguments:
+参数：
 
-* `asset`: 目标资源名称。 `[file]` 被替换成原始资源。`[path]` 被替换成原始资源的路径， `[query]` 被替换成查询字符串。默认值是 `"[path].gz[query]"`。
-* `algorithm`: 可以是 `function(buf, callback)` 或者 string。对于字符串来说依照 `zlib` 的算法(或者 `zopfli` 算法)。默认值是 `"gzip"`。
-* `test`: 所有匹配该正则的资源都会被处理。默认值是所有资源。
-* `threshold`: 只有大于该值的资源会被处理。单位是 bytes。默认值是 `0`.
-* `minRatio`: 只有压缩率大于这个值的资源才会被处理。默认值是 `0.8`.
+* `asset`： 目标资源名称。 `[file]` 会被替换成原始资源。`[path]` 会被替换成原始资源的路径， `[query]` 会被替换成查询字符串。默认值是 `"[path].gz[query]"`。
+* `algorithm`： 可以是 `function(buf, callback)` 或者字符串。对于字符串来说依照 `zlib` 的算法(或者 `zopfli` 的算法)。默认值是 `"gzip"`。
+* `test`： 所有匹配该正则的资源都会被处理。默认值是全部资源。
+* `threshold`： 只有大小大于该值的资源会被处理。单位是 bytes。默认值是 `0`。
+* `minRatio`： 只有压缩率小于这个值的资源才会被处理。默认值是 `0.8`。
 
-Zopfli 的参数选项 (查看 [node-zopfli](https://github.com/pierreinglebert/node-zopfli#options) doc for details):
+Zopfli 的参数选项 (详情请查看 [node-zopfli](https://github.com/pierreinglebert/node-zopfli#options) 文档)：
 * verbose: Default: false,
 * verbose_more: Default: false,
 * numiterations: Default: 15,
