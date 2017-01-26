@@ -4,6 +4,7 @@ sort: 5
 contributors:
   - pksjce
   - rahulcs
+  - johnstew
 ---
 
 In this section, we will discuss how webpack splits code using `require.ensure()`.
@@ -38,7 +39,7 @@ Let us consider the following project
     |    |-- b.js
     webpack.config.js
     |
-    dist 
+    dist
 ```
 
 ```javascript
@@ -58,13 +59,14 @@ console.log('***** I AM b *****');
 
 ```javascript
 \\ webpack.config.js
+var path = require('path');
 
 module.exports = function(env) {
     return {
         entry: './js/entry.js',
         output: {
             filename: 'bundle.js',
-            path: './dist'
+            path: path.resolve(__dirname, 'dist')
         }
     }
 }

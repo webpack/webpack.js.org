@@ -71,6 +71,17 @@ module.exports = {
       }
     ),
 
+    development: section(
+      'Development',
+      function() {
+        return require.context(
+          'json-loader!yaml-frontmatter-loader!./content/development',
+          true,
+          /^\.\/.*\.md$/
+        );
+      }
+    ),
+
     configuration: section(
       'Configuration',
       function() {

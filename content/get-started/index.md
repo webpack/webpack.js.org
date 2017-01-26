@@ -6,6 +6,7 @@ contributors:
   - varunjayaraman
   - cntanglijun
   - chrisVillanueva
+  - johnstew
 ---
 
 webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/get-started/install-webpack).
@@ -126,13 +127,15 @@ with the following config settings.
 
 __webpack.config.js__
 ```javascript
+var path = require('path');
+
 module.exports = {
   entry: './app/index.js',
   output: {
     filename: 'bundle.js',
-    path: './dist'
+    path: path.resolve(__dirname, 'dist')
   }
-}
+};
 ```
 
 This file can be run by webpack as follows.
@@ -176,4 +179,3 @@ T> You can pass custom parameters to webpack by adding two dashes to the `npm ru
 ## Conclusion
 
 Now that you have a basic build together, you should dig into the [basic concepts](/concepts) and [configuration](/configuration) of webpack to better understand its design. Also check out the [guides](/guides) to learn how to approach common problems. The [API](/api) section digs into the lower level features.
-
