@@ -87,7 +87,7 @@ module.exports = {
     path: resolve(__dirname, 'dist'),
 
     publicPath: '/'
-    // 对于热替换（HMR）是必须的，让程序知道在哪里载入热更新的模块（chunk）
+    // 对于热替换（HMR）是必须的，让webpack知道在哪里载入热更新的模块（chunk）
     // necessary for HMR to know where to load the hot update chunks
   },
 
@@ -175,7 +175,7 @@ const render = (Component) => {
 
 render(App);
 
-// Hot Module Replacement API
+// 模块热替换的 API
 if (module.hot) {
   module.hot.accept('./components/App', () => {
     render(App)
