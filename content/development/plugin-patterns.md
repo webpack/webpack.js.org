@@ -51,7 +51,7 @@ module.exports = MyPlugin;
 
 ### Monitoring the watch graph
 
-While running Webpack middleware, each compilation includes a `fileDependencies` array (what files are being watched) and a `fileTimestamps` hash that maps watched file paths to a timestamp. These are extremely useful for detecting what files have changed within the compilation:
+While running webpack middleware, each compilation includes a `fileDependencies` array (what files are being watched) and a `fileTimestamps` hash that maps watched file paths to a timestamp. These are extremely useful for detecting what files have changed within the compilation:
 
 ```javascript
 function MyPlugin() {
