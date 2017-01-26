@@ -93,24 +93,6 @@ module.exports = {
 
 This adds basic configuration to bundle the library.
 
-### Add Loaders
-
-But it will not work without adding relevant loaders for transpiling the code.
-Here, we need a [`json-loader`](https://github.com/webpack/json-loader) is required to precompile our json fixture file.
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-    // ...
-    module: {
-        rules: [{
-            test: /.json$/,
-            use: 'json-loader'
-        }]
-    }
-};
-```
 ### Add `externals`
 
 Now, if you run `webpack`, you will find that a largish bundle file is created. If you inspect the file, you will find that lodash has been bundled along with your code.

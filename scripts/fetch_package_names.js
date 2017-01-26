@@ -10,14 +10,18 @@ if (require.main === module) {
 }
 
 function main() {
-  const suffix = process.argv[2];
+  const organization = process.argv[2];
+  const suffix = process.argv[3];
 
+  if(!organization) {
+    return console.error('Missing organization!');
+  }
   if(!suffix) {
     return console.error('Missing suffix!');
   }
 
   fetchPackageNames({
-    organization: 'webpack',
+    organization: organization,
     suffix: suffix
   }, function(err, d) {
     if (err) {
