@@ -3,6 +3,7 @@ title: Authoring Libraries
 sort: 18
 contributors:
     - pksjce
+    - johnstew
 ---
 
 webpack is a tool which can be used to bundle application code and also to bundle library code. If you are the author of a JavaScript library and are looking to streamline your bundle strategy then this document will help you.
@@ -80,11 +81,12 @@ Add basic webpack configuration.
 __webpack.config.js__
 
 ```javascript
+var path = require('path');
 
 module.exports = {
     entry: './src/index.js',
     output: {
-        path: './dist',
+        path: path.resolve(__dirname, 'dist'),
         filename: 'webpack-numbers.js'
     }
 };

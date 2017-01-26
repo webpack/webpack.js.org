@@ -5,6 +5,7 @@ contributors:
   - TheLarkInn
   - jhnns
   - rouzbeh84
+  - johnstew
 ---
 
 **Plugins** are the [backbone](https://github.com/webpack/tapable) of webpack. webpack itself is built on the **same plugin system** that you use in your webpack configuration!
@@ -46,12 +47,13 @@ Depending on how you are using webpack, there are multiple ways to use plugins.
 ```javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 const webpack = require('webpack'); //to access built-in plugins
+const path = require('path');
 
 const config = {
   entry: './path/to/my/entry/file.js',
   output: {
     filename: 'my-first-webpack.bundle.js',
-    path: './dist'
+    path: path.resolve(__dirname, 'dist')
   },
   module: {
     rules: [
