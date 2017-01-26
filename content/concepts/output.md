@@ -64,9 +64,9 @@ For more information on cross-origin loading see [MDN](https://developer.mozilla
 
 > Default: `false`
 
-> see also [[library and externals]]
+> see also [library](/guides/author-libraries/)
 
-> see also [[Development Tools]]
+> see also [Development Tools](/guides/development/#choosing-a-tool)
 
 ### `output.devtoolLineToLine`
 
