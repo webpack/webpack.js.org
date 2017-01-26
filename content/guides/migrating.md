@@ -10,6 +10,7 @@ contributors:
   - jouni-kantola
   - frederikprijck
   - chrisVillanueva
+  - bebraw
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -55,6 +56,7 @@ contributors:
 +           options: {
               modules: true
             }
+          }
         ]
       },
       {
@@ -219,7 +221,11 @@ loaders 的压缩模式将在 webpack 3 或更高的版本中被取消。
   ]
 ```
 
-## `BannerPlugin` - 大改变
+## `DedupePlugin` 被移除
+
+不再需要 `webpack.optimize.DedupePlugin`。请从配置中移除。
+
+## `BannerPlugin` - 破坏性改动
 
 `BannerPlugin` 不在接受两个参数而是只接受单独的 options 对象。
 

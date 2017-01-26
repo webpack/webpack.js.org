@@ -125,7 +125,7 @@ A data object shared between the pitch and the normal phase.
 cacheable(flag = true: boolean)
 ```
 
-Make this loader result cacheable. By default it's not cacheable.
+By default, loader results are cacheable. Call this method passing `false` to make the loader's result not cacheable.
 
 A cacheable loader must have a deterministic result, when inputs and dependencies haven't changed. This means the loader shouldn't have other dependencies than specified with `this.addDependency`. Most loaders are deterministic and cacheable.
 

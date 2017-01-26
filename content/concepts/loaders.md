@@ -14,7 +14,7 @@ loader 是对应用程序中资源文件进行转换。它们是（运行在 Nod
 
 ## Loader 特性
 
-* loader 支持链式传递。能够对资源使用流水线( pipeline)。loader 链式按照时间先后顺序进行编译。loader 链中的第一个 loader 返回值给下一个 loader，并且在最后一个 loader，webpack 按照预期的 JavaScript 返回。
+* loader 支持链式传递。能够对资源使用流水线( pipeline)。loader 链式按照时间先后顺序进行编译。loader 链中的第一个 loader 返回值给下一个 loader。在最后一个 loader，webpack 按照预期的 JavaScript 返回。
 * loader 可以是同步或异步函数。
 * loader 运行在 Node.js 中，并且能够执行任何可能的操作。
 * loader 接受查询参数。用于 loader 间传递配置。

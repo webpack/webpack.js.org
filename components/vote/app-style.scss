@@ -136,6 +136,8 @@
   &__item-card {
     display: flex;
     flex-direction: column;
+    margin-top: 30px;
+    margin-bottom: 30px;
 
     @include break(medium){
       flex-direction: row;

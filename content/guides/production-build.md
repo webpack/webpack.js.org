@@ -8,6 +8,7 @@ contributors:
   - simon04
   - kisnows
   - chrisVillanueva
+  - swapnilmishra
 ---
 
 此页解释了如何使用 webpack 生成用于生产环境的 build。
@@ -129,13 +130,13 @@ module.exports = function (env) {
   }
 }
 ```
-Have the following snippet in our webpack.config.js:
+Have the following snippet in your webpack.config.js:
 ```js
 function buildConfig(env) {
   return require('./config/' + env + '.js')({ env: env })
 }
 
-module.exports = buildConfig(env);
+module.exports = buildConfig;
 ```
 And from our package.json, where we build our application using webpack, the command goes like this:
 ```js
