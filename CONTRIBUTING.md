@@ -59,8 +59,7 @@ contributors:
 
 ```
 
-This will add your name and GitHub profile photo to the document in production. It's a great way to own the awesome work that you do and we encourage you to
-do this in your PRs.
+This will add your name and GitHub profile photo to the document in production. It's a great way to own the awesome work that you do and we encourage you to do this in your PRs.
 
 
 ## Thank you
