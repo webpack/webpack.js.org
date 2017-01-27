@@ -48,7 +48,7 @@ __index.html__
 ```html
 <html>
   <head>
-    <title>Webpack 2 demo</title>
+    <title>webpack 2 demo</title>
     <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
@@ -87,7 +87,7 @@ We also need to change `index.html` to expect a single bundled js file.
 ```diff
 <html>
   <head>
-    <title>Webpack 2 demo</title>
+    <title>webpack 2 demo</title>
 -   <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>

@@ -21,7 +21,7 @@ Example:
 require("./template/" + name + ".ejs");
 ```
 
-Webpack parses the `require()` call and extracts some information:
+webpack parses the `require()` call and extracts some information:
 
 ```
 Directory: ./template
@@ -50,7 +50,7 @@ You can create your own context with the `require.context()` function.
 It allows you to pass in a directory to search, a flag indicating whether subdirectories should be searched
 too, and a regular expression to match files against.
 
-Webpack parses for `require.context()` in the code while building.
+webpack parses for `require.context()` in the code while building.
 
 The syntax is as follows:
 

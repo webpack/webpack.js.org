@@ -1,5 +1,5 @@
 ---
-title: Webpack merge, tag and release process
+title: webpack merge, tag and release process
 contributors:
   - d3viant0ne
 ---

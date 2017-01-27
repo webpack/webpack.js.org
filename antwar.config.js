@@ -148,7 +148,7 @@ module.exports = {
         return combineContexts(content, generated);
       }
     ),
-    
+
     vote: {
       path() {
         return require('./components/vote/list.jsx').default
@@ -177,7 +177,7 @@ module.exports = {
 
 function root(contentCb) {
   return {
-    title: 'Webpack',
+    title: 'webpack',
     path: function() { // Load path content
       return contentCb();
     },
