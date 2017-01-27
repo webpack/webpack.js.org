@@ -92,8 +92,7 @@ var path = require('path');
 module.exports = function(env) {
     return {
         entry: {
-            main: './index.js',
-            vendor: 'moment'
+            main: './index.js'
         },
         output: {
             filename: '[chunkhash].[name].js',
