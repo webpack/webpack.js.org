@@ -68,7 +68,7 @@ export default class Sidebar extends Component {
                 title={ title }
                 anchors={ anchors }
                 currentPage= { currentPage }
-              />
+                onToggle={ this._recalculate.bind(this) } />
             )
           }
         </div>
