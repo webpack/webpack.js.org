@@ -13,5 +13,8 @@ cp -rf ./content/plugins/ ./generated/plugins
 # Fetches github.com/webpack/*-webpack-plugin repositories
 ./scripts/fetch_package_names.js "webpack" "-webpack-plugin" | ./scripts/fetch_package_files.js "README.md" "./generated/plugins"
 
+# Fetches github.com/webpack-contrib/*-loader repositories
+./scripts/fetch_package_names.js "webpack-contrib" "-loader" | ./scripts/fetch_package_files.js "README.md" "./generated/loaders"
+
 # Fetches github.com/webpack-contrib/*-webpack-plugin repositories
 ./scripts/fetch_package_names.js "webpack-contrib" "-webpack-plugin" | ./scripts/fetch_package_files.js "README.md" "./generated/plugins"

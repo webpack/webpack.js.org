@@ -10,7 +10,8 @@ title: Contribute
 
 ## Technical Contribution
 
-
+[Development guide](/development)
 
 ## Donation
 
+[Open Collective](https://opencollective.com/webpack)

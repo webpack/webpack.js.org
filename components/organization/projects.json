@@ -15,7 +15,7 @@
 	{
 		"repo": "webpack/loader-utils",
 		"npm": "loader-utils",
-		"description": "Webpack loader utilities.",
+		"description": "webpack loader utilities.",
 		"maintainer": "sokra"
 	},
 	{
@@ -289,4 +289,3 @@
 		"maintainer": "thelarkinn"
 	}
 ]
-	

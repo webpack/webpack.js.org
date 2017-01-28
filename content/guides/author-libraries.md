@@ -3,6 +3,7 @@ title: Authoring Libraries
 sort: 18
 contributors:
     - pksjce
+    - johnstew
 ---
 
 webpack is a tool which can be used to bundle application code and also to bundle library code. If you are the author of a JavaScript library and are looking to streamline your bundle strategy then this document will help you.
@@ -80,11 +81,12 @@ Add basic webpack configuration.
 __webpack.config.js__
 
 ```javascript
+var path = require('path');
 
 module.exports = {
     entry: './src/index.js',
     output: {
-        path: './dist',
+        path: path.resolve(__dirname, 'dist'),
         filename: 'webpack-numbers.js'
     }
 };
@@ -93,24 +95,6 @@ module.exports = {
 
 This adds basic configuration to bundle the library.
 
-### Add Loaders
-
-But it will not work without adding relevant loaders for transpiling the code.
-Here, we need a [`json-loader`](https://github.com/webpack/json-loader) is required to precompile our json fixture file.
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-    // ...
-    module: {
-        rules: [{
-            test: /.json$/,
-            use: 'json-loader'
-        }]
-    }
-};
-```
 ### Add `externals`
 
 Now, if you run `webpack`, you will find that a largish bundle file is created. If you inspect the file, you will find that lodash has been bundled along with your code.
