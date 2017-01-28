@@ -12,15 +12,7 @@ Before getting started, make sure you have a fresh version of [Node.js](https://
 
 Note that this documentation is for webpack 2, for which there is not yet a stable release. You can get the most recent beta by installing with the `beta` tag (see below).
 
-### Global Installation
-
-``` bash
-npm install webpack@beta -g
-```
-
-The `webpack` command is now available globally.
-
-However, this is not a recommended practice. This locks you down to a specific version of webpack and might fail in projects that use a different version. The next section tells you how to install webpack locally in a project.
+The next section tells you how to install webpack locally in a project.
 
 ### Local Installation
 
@@ -41,6 +33,17 @@ If you are using npm scripts in your project, npm will try to look for webpack i
 This is standard and recommended practice.
 
 T> To run the local installation of webpack you can access its bin version as `node_modules/.bin/webpack`
+
+
+### Global Installation
+
+W> Note that a global webpack installation is not a recommended practice. This locks you down to a specific version of webpack and might fail in projects that use a different version.
+
+``` bash
+npm install webpack@beta -g
+```
+
+The `webpack` command is now available globally.
 
 
 ### Bleeding Edge
