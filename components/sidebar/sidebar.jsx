@@ -4,34 +4,49 @@ import SidebarItem from '../sidebar-item/sidebar-item';
 export default class Sidebar extends Component {
   constructor(props) {
     super(props);
-    this.state = {shouldFixSidebar: false};
+
+    this.state = {
+      fixed: false,
+      top: 0
+    };
   }
 
   componentDidMount() {
-    document.addEventListener('scroll', this.onScroll.bind(this));
+    document.addEventListener('scroll', this._recalculate.bind(this));
   }
 
   componentWillUnmount() {
-    document.removeEventListener('scroll', this.onScroll.bind(this));
+    document.removeEventListener('scroll', this._recalculate.bind(this));
   }
 
-  onScroll() {
-    let { scrollY } = window;
-    let offsetY = document.querySelector('header').offsetHeight || 55;
-    let shouldFixSidebar = scrollY >= offsetY;
+  _recalculate() {
+    let { scrollY, innerHeight } = window;
+    let { scrollHeight } = document.body;
+    let { offsetHeight } = this._container;
+    let distToBottom = scrollHeight - scrollY - innerHeight;
+    let headerHeight = document.querySelector('header').offsetHeight;
+    let footerHeight = document.querySelector('footer').offsetHeight;
+    let allowedHeight = distToBottom < footerHeight ? innerHeight - (footerHeight - distToBottom) : offsetHeight;
+    let extraHeight = offsetHeight > allowedHeight ? offsetHeight - allowedHeight : 0;
+    let fixed = scrollY >= headerHeight;
 
-    this.setState({shouldFixSidebar});
+    this.setState({ 
+      fixed,
+      top: scrollY - headerHeight - extraHeight
+    });
   }
 
   render() {
     let { sectionName, pages, currentPage } = this.props;
-    let { shouldFixSidebar } = this.state;
+    let { fixed, top, allowedHeight } = this.state;
 
     return (
-      <nav className="sidebar" style={ shouldFixSidebar ? {
-        position: 'fixed',
-        top: 0
-      } : null }>
+      <nav 
+        className="sidebar" 
+        ref={ ref => this._container = ref }
+        style={ fixed ? {
+          top: top
+        } : null }>
 
         <div className="sidebar__inner">
           <h3 className="sidebar-item__version">Version 2.2</h3>
