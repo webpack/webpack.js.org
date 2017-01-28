@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/7b93963f7a8152958ad1.css" rel="stylesheet">
+      <link href="/3a81623cdec647d9eeaf.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -31,9 +31,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
         test<span class="token punctuation">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span>
-        loader<span class="token punctuation">:</span> ExtractTextPlugin<span class="token punctuation">.</span><span class="token function">extract</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        use<span class="token punctuation">:</span> ExtractTextPlugin<span class="token punctuation">.</span><span class="token function">extract</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
           fallbackLoader<span class="token punctuation">:</span> <span class="token string">&quot;style-loader&quot;</span><span class="token punctuation">,</span>
-          loader<span class="token punctuation">:</span> <span class="token string">&quot;css-loader&quot;</span>
+          use<span class="token punctuation">:</span> <span class="token string">&quot;css-loader&quot;</span>
         <span class="token punctuation">}</span><span class="token punctuation">)</span>
       <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
@@ -119,7 +119,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h4 class="header"><a class="anchor" href="#-extract" id="-extract"></a><span class="text"><code>#extract</code></span><a class="icon-link" href="#-extract"></a></h4>
 <pre><code class="lang-js">ExtractTextPlugin<span class="token punctuation">.</span><span class="token function">extract</span><span class="token punctuation">(</span>options<span class="token punctuation">:</span> loader <span class="token operator">|</span> object<span class="token punctuation">)</span>
 </code></pre>
-<p>Creates an extracting loader from an existing loader. Supports loaders of type <code>{ loader: string; query: object }</code>.</p>
+<p>Creates an extracting loader from an existing loader. Supports loaders of type <code>{ loader: [name]-loader -&gt; {String}, options: {} -&gt; {Object} }</code>.</p>
 <table>
 <thead>
 <tr>
@@ -159,11 +159,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     use<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
         test<span class="token punctuation">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span>
-        loader<span class="token punctuation">:</span> extractCSS<span class="token punctuation">.</span><span class="token function">extract</span><span class="token punctuation">(</span><span class="token punctuation">[</span> <span class="token string">&apos;css-loader&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;postcss-loader&apos;</span> <span class="token punctuation">]</span><span class="token punctuation">)</span>
+        use<span class="token punctuation">:</span> extractCSS<span class="token punctuation">.</span><span class="token function">extract</span><span class="token punctuation">(</span><span class="token punctuation">[</span> <span class="token string">&apos;css-loader&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;postcss-loader&apos;</span> <span class="token punctuation">]</span><span class="token punctuation">)</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">{</span>
         test<span class="token punctuation">:</span> <span class="token regex">/\.html$/i</span><span class="token punctuation">,</span>
-        loader<span class="token punctuation">:</span> extractLESS<span class="token punctuation">.</span><span class="token function">extract</span><span class="token punctuation">(</span><span class="token punctuation">[</span> <span class="token string">&apos;css-loader&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;less-loader&apos;</span> <span class="token punctuation">]</span><span class="token punctuation">)</span>
+        use<span class="token punctuation">:</span> extractLESS<span class="token punctuation">.</span><span class="token function">extract</span><span class="token punctuation">(</span><span class="token punctuation">[</span> <span class="token string">&apos;css-loader&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;less-loader&apos;</span> <span class="token punctuation">]</span><span class="token punctuation">)</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
