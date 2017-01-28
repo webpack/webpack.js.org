@@ -22,9 +22,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/license/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/organization/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/loaders/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/plugins/index.html</loc>
     </url>    <url>
@@ -38,9 +38,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/api/loaders/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/api/node/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/api/plugins/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/api/node/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/concepts/configuration/index.html</loc>
     </url>    <url>
@@ -98,9 +98,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/development/how-to-write-a-plugin/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/development/plugin-patterns/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/development/release-process/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/development/plugin-patterns/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/get-started/install-webpack/index.html</loc>
     </url>    <url>
@@ -134,11 +134,11 @@
     </url>    <url>
         <loc>https://webpack.js.org/guides/hmr-react/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/guides/installation/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/guides/lazy-load-react/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/guides/migrating/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/guides/installation/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/guides/production-build/index.html</loc>
     </url>    <url>
@@ -192,11 +192,11 @@
     </url>    <url>
         <loc>https://webpack.js.org/loaders/script-loader/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/source-map-loader/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/style-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/transform-loader/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/loaders/source-map-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/url-loader/index.html</loc>
     </url>    <url>
