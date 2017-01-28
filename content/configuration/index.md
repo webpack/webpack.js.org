@@ -10,7 +10,7 @@ contributors:
   - terinjokes
 ---
 
-Webpack is fed via a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
+webpack is fed via a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
 
 T> New to webpack? Check out our guide to some of webpack's [core concepts](/concepts) to get started!
 
@@ -148,7 +148,7 @@ var path = require('path');
 
         [loader](/configuration/module#rule-loader): "babel-loader",
         // the loader which should be applied, it'll be resolved relative to the context
-        // -loader suffix is no longer optional in Webpack 2 for clarity reasons
+        // -loader suffix is no longer optional in webpack2 for clarity reasons
         // see [webpack 1 upgrade guide](/guides/migrating)
 
         [options](/configuration/module#rule-options-rule-query): {

@@ -1,5 +1,5 @@
 ---
-title: Webpack & Typescript
+title: webpack & Typescript
 sort: 20
 contributors:
   - morsdyce

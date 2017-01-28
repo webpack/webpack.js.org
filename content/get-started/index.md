@@ -7,6 +7,7 @@ contributors:
   - cntanglijun
   - chrisVillanueva
   - johnstew
+  - simon04
 ---
 
 webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/get-started/install-webpack).
@@ -48,7 +49,7 @@ __index.html__
 ```html
 <html>
   <head>
-    <title>Webpack 2 demo</title>
+    <title>webpack 2 demo</title>
     <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
@@ -87,7 +88,7 @@ We also need to change `index.html` to expect a single bundled js file.
 ```diff
 <html>
   <head>
-    <title>Webpack 2 demo</title>
+    <title>webpack 2 demo</title>
 -   <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
@@ -104,7 +105,7 @@ By stating what dependencies a module needs, webpack can use this information to
 Now run `webpack` on this folder with `index.js` as the entry file and `bundle.js` as the output file in which all code required for the page is bundled.
 
 ```bash
-webpack app/index.js dist/bundle.js
+./node_modules/.bin/webpack app/index.js dist/bundle.js
 
 Hash: a3c861a7d42fc8944524
 Version: webpack 2.2.0
@@ -114,8 +115,9 @@ index.js  1.56 kB       0  [emitted]  main
    [0] ./app/index.js 170 bytes {0} [built]
 
 ```
+T> Output may vary. If the build is successful then you are good to go.
 
-T> If you created a local `webpack@beta` build, be sure to reference `webpack` with `./node_modules/.bin/webpack` on the command line.
+T> If you [installed webpack globally](/get-started/install-webpack#global-installation), you have to invoke webpack using `webpack`.
 
 Open `index.html` in your browser to see the result of a successful bundle.
 You should see a page with the following text: 'Hello webpack'.

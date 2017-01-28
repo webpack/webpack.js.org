@@ -6,7 +6,7 @@ contributors:
   - chrisVillanueva
 ---
 
-Webpack has a highly useful configuration that let you specify the base path for
+webpack has a highly useful configuration that let you specify the base path for
 all the assets on your application. It's called `publicPath`.
 
 ## Use cases
@@ -45,7 +45,7 @@ export default {
 
 ### Set value on the fly
 
-Another possible use case is to set the public path on the fly. Webpack exposes
+Another possible use case is to set the public path on the fly. webpack exposes
 a global variable that let's you do that, it's called `__webpack_public_path__`.
 So in your application entry point, you can simply do this:
 

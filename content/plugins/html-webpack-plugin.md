@@ -39,7 +39,7 @@ This will generate a file `dist/index.html` containing the following:
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Webpack App</title>
+    <title>webpack App</title>
   </head>
   <body>
     <script src="index_bundle.js"></script>

@@ -2,7 +2,7 @@
 
 # webpack.js.org
 
-Guides, documentation, and all things Webpack.
+Guides, documentation, and all things webpack.
 
 ## Contributing
 
