@@ -19,6 +19,10 @@ export default class Sidebar extends Component {
     document.removeEventListener('scroll', this._recalculate.bind(this));
   }
 
+  /**
+   * Re-calculate fixed state and position
+   * 
+   */
   _recalculate() {
     let { scrollY, innerHeight } = window;
     let { scrollHeight } = document.body;
