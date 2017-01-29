@@ -19,7 +19,7 @@ let Sections = [
     children: [
       { title: 'API', url: 'api' },
       { title: '配置', url: 'configuration' },
-      { title: '加载器', url: 'loaders' },
+      { title: 'LOADER', url: 'loaders' },
       { title: '插件', url: 'plugins' },
       { title: '开发', url: 'development' }
     ]
