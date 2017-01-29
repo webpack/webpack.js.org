@@ -63,9 +63,9 @@ loader 通过(loader)预处理函数，为 JavaScript 生态系统提供了更�
 
 ## 解析 Loader
 
-Loaders follow the standard [module resolution](/concepts/module-resolution/). In most cases you will be loaders from the [module path](/concepts/module-resolution/#module-paths) (think `npm install`, `node_modules`).
+loader 遵循标准的[模块解析](/concepts/module-resolution/)。多数情况下，loader 将从[模块路径](/concepts/module-resolution/#module-paths)（通常将模块路径认为是 `npm install`, `node_modules`）解析。
 
-[How to write a loader?](/development/how-to-write-a-loader) A loader module is expected to export a function and to be written in Node.js compatible JavaScript. In the common case you manage loaders with npm, but you can also have loaders as files in your app.
+[如何编写模块？](/development/how-to-write-a-loader)loader 模块需要导出为一个函数，并且使用 Node.js 兼容的 JavaScript 编写。在多数情况下，你会使用 npm 来管理 loader，但是你也可以将应用程序中的文件作为 loader。
 
 按照约定，loader 通常被命名为 `XXX-loader`，`XXX` 是上下文的名称，例如 `json-loader`。
 
