@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/57039a22e3964e1ba7fd.css" rel="stylesheet">
+      <link href="/1877d0547edf4959594d.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -68,7 +68,7 @@ It must accept arguments from the previous plugin that was executed. The value f
 <li><strong>asynchronous</strong> When all the plugins are applied asynchronously using</li>
 </ul>
 <p><code>applyPluginsAsync(name: string, args: any..., callback: (err?: Error) -&gt; void)</code></p>
-<p>The plugin handler functions are called with all args and a callback function with the signature <code>(err?: Error) -&gt; void</code>. The hander functions are called in order of registration.<code>callback</code> is called after all the handlers are called.
+<p>The plugin handler functions are called with all args and a callback function with the signature <code>(err?: Error) -&gt; void</code>. The handler functions are called in order of registration.<code>callback</code> is called after all the handlers are called.
 This is also a commonly used pattern for events like <code>&quot;emit&quot;</code>, <code>&quot;run&quot;</code>.</p>
 <ul>
 <li><strong>async waterfall</strong> The plugins will be applied asynchronously in the waterfall manner.</li>
