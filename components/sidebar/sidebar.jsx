@@ -43,6 +43,7 @@ export default class Sidebar extends Component {
   render() {
     let { sectionName, pages, currentPage } = this.props;
     let { fixed, top, allowedHeight } = this.state;
+    let isGuides = sectionName === 'guides';
 
     return (
       <nav 
@@ -54,11 +55,18 @@ export default class Sidebar extends Component {
 
         <div className="sidebar__inner">
           <h3 className="sidebar-item__version">Version 2.2</h3>
+
           <SidebarItem
             url={ `/${sectionName}` }
             title="Introduction"
             currentPage= { currentPage }
           />
+
+          { isGuides ? (
+            <SidebarItem
+              url={ `/get-started` }
+              title="Get Started" />
+          ) : null }
           {
             pages.map(({ url, title, anchors }, i) =>
               <SidebarItem
