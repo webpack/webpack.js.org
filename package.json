@@ -98,7 +98,7 @@
     "d3": "^4.2.7",
     "filesize": "^3.3.0",
     "preact": "^6.2.1",
-    "preact-compat": "^3.6.0",
+    "preact-compat": "3.11.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-router": "^2.8.1",
