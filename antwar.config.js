@@ -72,7 +72,7 @@ module.exports = {
     ),
 
     development: section(
-      'Development',
+      '开发',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/development',

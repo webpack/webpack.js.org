@@ -12,19 +12,7 @@ sort: 1
 
 注意，本文档适用于 webpack 2，目前还尚未发布 stable 版本。你可以通过在安装时使用 ` beta ` 标签来获取最新beta版本（查看下文）。
 
-<<<<<<< HEAD
-### 全局安装
-
-``` bash
-npm install webpack@beta -g
-```
-
-现在可以在全局使用 `webpack` 命令了。
-
-然而，这并不是推荐用法。这会将你的 webpack 锁定到特定版本，并且可能在使用 webpack 不同版本的项目中失败。接下来的章节向你介绍如何在项目中本地安装 webpack。
-=======
-The next section tells you how to install webpack locally in a project.
->>>>>>> master
+下一章节告诉你如何在本地项目中安装 webpack。
 
 ### 本地安装
 
@@ -47,12 +35,9 @@ npm install webpack@<version> --save-dev
 T> 要运行本地安装的 webpack，你可以通过 `node_modules/.bin/webpack` 访问其 bin 版本
 
 
-<<<<<<< HEAD
-### 前沿领域
-=======
-### Global Installation
+### 全局安装
 
-W> Note that a global webpack installation is not a recommended practice. This locks you down to a specific version of webpack and might fail in projects that use a different version.
+W> 注意，全局安装 webpack 不是推荐用法。这会将你的 webpack 锁定到特定版本，并且可能在使用 webpack 不同版本的项目中失败。
 
 ``` bash
 npm install webpack@beta -g
@@ -61,8 +46,7 @@ npm install webpack@beta -g
 The `webpack` command is now available globally.
 
 
-### Bleeding Edge
->>>>>>> master
+### 前沿领域
 
 如果你热衷于使用 webpack 提供的最新版本（当心 - 可能不稳定），你可以直接从 webpack 仓库中安装
 

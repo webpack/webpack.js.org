@@ -117,7 +117,6 @@ index.js  1.56 kB       0  [emitted]  main
 
 ```
 T> 输出可能会稍有不同。如果构建成功，那么你就可以继续。
-Output may vary. If the build is successful then you are good to go.
 
 T> 如果你在[全局安装 webpack](/get-started/install-webpack#global-installation)，你必须使用 `webpack` 来调用 webpack。
 
