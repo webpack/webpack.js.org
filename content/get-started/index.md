@@ -10,12 +10,12 @@ contributors:
   - simon04
 ---
 
-webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/get-started/install-webpack).
+webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/guides/installation).
 webpack simplifies your workflow by quickly constructing a dependency graph of your application and bundling them in the right order. webpack can be configured to customise optimisations to your code, to split vendor/css/js code for production, run a development server that hot-reloads your code without page refresh and many such cool features. Learn more about [why you should use webpack](/get-started/why-webpack).
 
 ## Creating a bundle
 
-Create a demo directory to try out webpack. [Install webpack](/get-started/install-webpack).
+Create a demo directory to try out webpack. [Install webpack](/guides/installation).
 
 ```bash
 mkdir webpack-demo && cd webpack-demo
@@ -117,7 +117,7 @@ index.js  1.56 kB       0  [emitted]  main
 ```
 T> Output may vary. If the build is successful then you are good to go.
 
-T> If you [installed webpack globally](/get-started/install-webpack#global-installation), you have to invoke webpack using `webpack`.
+T> If you [installed webpack globally](/guides/installation#global-installation), you have to invoke webpack using `webpack`.
 
 Open `index.html` in your browser to see the result of a successful bundle.
 You should see a page with the following text: 'Hello webpack'.
