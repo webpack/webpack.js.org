@@ -177,7 +177,7 @@ export default class VoteApp extends React.Component {
     listInfo && console.log(listInfo);
     return (
       <div className="vote-app">
-        <div className="vote-app-title">
+        <div className="vote-app__title">
           Vote
         </div>
         <div className="vote-app__influence">
