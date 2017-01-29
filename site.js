@@ -49639,13 +49639,6 @@ module.exports =
 	      pages = props.pages,
 	      currentPage = props.currentPage;
 
-	  var getStarted = null;
-	  if (sectionName === 'guides') {
-	    getStarted = _react2.default.createElement(_sidebarItem2.default, {
-	      url: '/get-started',
-	      title: 'Get Started'
-	    });
-	  }
 
 	  return _react2.default.createElement(
 	    'nav',
@@ -49663,7 +49656,6 @@ module.exports =
 	        title: 'Introduction',
 	        currentPage: currentPage
 	      }),
-	      getStarted,
 	      pages.map(function (_ref, i) {
 	        var url = _ref.url,
 	            title = _ref.title,
