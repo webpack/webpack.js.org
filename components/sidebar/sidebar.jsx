@@ -3,15 +3,6 @@ import SidebarItem from '../sidebar-item/sidebar-item';
 
 export default props => {
   let { sectionName, pages, currentPage } = props;
-  let getStarted = null;
-  if (sectionName === 'guides') {
-    getStarted = (
-        <SidebarItem
-          url={ `/get-started` }
-          title="Get Started"
-        />
-    );
-  }
 
   return (
     <nav className="sidebar">
@@ -22,7 +13,6 @@ export default props => {
           title="Introduction"
           currentPage= { currentPage }
         />
-        { getStarted }
         {
           pages.map(({ url, title, anchors }, i) =>
             <SidebarItem
