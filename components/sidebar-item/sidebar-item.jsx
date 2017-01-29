@@ -36,8 +36,14 @@ export default class SidebarItem extends React.Component {
   }
 
   toggle(e) {
+    let { onToggle } = this.props;
+
     this.setState({
       open: !this.state.open
+    }, () => {
+      if (typeof onToggle === 'function') {
+        onToggle();
+      }
     });
   }
 }
