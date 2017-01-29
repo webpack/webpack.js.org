@@ -5,6 +5,7 @@ contributors:
   - pksjce
   - chrisVillanueva
   - johnstew
+  - rafde
 ---
 
 A typical application uses third party libraries for framework/functionality needs. Particular versions of these libraries are used and code here does not change often. However, the application code changes frequently.
@@ -108,6 +109,38 @@ module.exports = function(env) {
 }
 ```
 Now run `webpack` on your application. Bundle inspection shows that `moment` code is present only in the vendor bundle.
+
+## Implicit Common Vendor Chunk
+
+You can configure a `CommonsChunkPlugin` instance to only accept vendor libraries.
+ 
+ __webpack.config.js__
+ 
+```javascript
+var webpack = require('webpack');
+var path = require('path');
+
+module.exports = function() {
+    return {
+        entry: {
+            main: './index.js'
+        },
+        output: {
+            filename: '[chunkhash].[name].js',
+            path: path.resolve(__dirname, 'dist')
+        },
+        plugins: [
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor',
+                minChunks: function (module) {
+                   // this assumes your vendor imports exist in the node_modules directory
+                   return module.context && module.context.indexOf('node_modules') !== -1;
+                }
+            })
+        ]
+    };
+}
+```
 
 ## Manifest File
 
