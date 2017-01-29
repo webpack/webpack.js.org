@@ -5,6 +5,7 @@ contributors:
   - TheLarkInn
   - jhnns
   - grgur
+  - johnstew
 ---
 
 *webpack* 是一个现代的 JavaScript 应用_模块打包器(module bundler)_。它有着[难以置信的配置](/configuration)，然而，我们认为你必须在开始前先了解**四个核心概念**！
@@ -111,12 +112,13 @@ W> 重要的是要记得，在 webpack 配置中定义 loader 时，要定义在
 ```javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 const webpack = require('webpack'); //to access built-in plugins
+const path = require('path');
 
 const config = {
   entry: './path/to/my/entry/file.js',
   output: {
-    filename: 'my-first-webpack.bundle.js',
-    path: './dist'
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'my-first-webpack.bundle.js'
   },
   module: {
     rules: [

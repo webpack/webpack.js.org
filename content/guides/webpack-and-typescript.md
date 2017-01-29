@@ -1,5 +1,5 @@
 ---
-title: Webpack 和 TypeScript
+title: webpack 和 TypeScript
 sort: 20
 contributors:
   - morsdyce
@@ -67,7 +67,7 @@ module.exports = {
 ```
 
 这个例子里我们指定了入口起点为当前目录的 __index.ts__ 文件，输出文件命名为 __bundle.js__，以及负责把 TypeScript 编译成 JavaScript 的 TypeScript loader，同时也添加了 `resolve.extensions` 来告诉 webpack 在解析查找 TypeScript 模块时该检索哪些文件扩展名。
- 
+
 ## TypeScript loaders
 
 当前有 2 个可用的 TypeScript loader：
@@ -125,8 +125,8 @@ module.exports = {
 首先我们添加一个新 loader，名为 source-map-loader，运行下面的命令安装：
 `npm install --save-dev source-map-loader`。
 
-这个 loader 安装完成后，我们想让这个 loader 比其他任何 loader 都要先运行，可以使用 `enforce: 'pre'` 这个配置项来标记。最后，我们需要通过指定 `devtool` 来启用 webpack 的 source maps 功能，当前我们使用的是 'inline-source-map' 这个属性值。想了解更多关于这个属性值的特性和其他属性值选项，可以查看 [devtool 文档](https://webpack.js.org/configuration/devtool/)。 
- 
+这个 loader 安装完成后，我们想让这个 loader 比其他任何 loader 都要先运行，可以使用 `enforce: 'pre'` 这个配置项来标记。最后，我们需要通过指定 `devtool` 来启用 webpack 的 source maps 功能，当前我们使用的是 'inline-source-map' 这个属性值。想了解更多关于这个属性值的特性和其他属性值选项，可以查看 [devtool 文档](https://webpack.js.org/configuration/devtool/)。
+
 
 ## 使用第三方库
 

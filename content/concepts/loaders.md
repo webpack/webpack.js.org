@@ -6,11 +6,51 @@ contributors:
   - ev1stensberg
   - SpaceK33z
   - gangachris
+  - simon04
 ---
 
 loader 是对应用程序中资源文件进行转换。它们是（运行在 Node.js 中的）函数，可以将资源文件作为参数的来源，然后返回新的资源文件。
 
+<<<<<<< HEAD
 例如，你可以使用 loader 告诉 webpack 加载 CSS 文件，或者将 TypeScript 转为 JavaScript。
+=======
+## Example
+
+For example, you can use loaders to tell webpack to load a CSS file or to convert TypeScript to JavaScript. Firstly, install the corresponding loaders:
+
+```
+npm install --save-dev css-loader
+npm install --save-dev ts-loader
+```
+
+Secondly, configure in your `webpack.config.js` that for every `.css` file the `css-loader` should be used and analogously for `.ts` files and the `ts-loader`:
+
+**webpack.config.js**
+
+```js-with-links-with-details
+module.exports = {
+  module: {
+    rules: [
+      {test: /\.css$/, use: ['css-loader'](/loaders/css-loader)},
+      {test: /\.ts$/, use: ['ts-loader'](https://github.com/TypeStrong/ts-loader)}
+    ]
+  }
+};
+```
+
+Note that according to the [configuration options](/configuration#options), the following specifications define the identical loader usage:
+
+```js-with-links-with-details
+{test: /\.css$/, [loader](/configuration/module#rule-loader): 'css-loader'}
+// or equivalently
+{test: /\.css$/, [use](/configuration/module#rule-use): 'css-loader'}
+// or equivalently
+{test: /\.css$/, [use](/configuration/module#rule-use): {
+  loader: 'css-loader',
+  options: {}
+}}
+```
+>>>>>>> master
 
 ## Loader 特性
 
@@ -27,9 +67,15 @@ loader 通过(loader)预处理函数，为 JavaScript 生态系统提供了更�
 
 ## 解析 Loader
 
+<<<<<<< HEAD
 loader [解析类似于模块](/concepts/module-resolution/)。loader 模块需要导出一个函数，并且使用兼容 Node.js 的 JavaScript 编写。在通常情况下，你可以使用 npm 管理 loader，但是你也可以在应用程序中将 loader 作为文件使用。
 
 ### 引用 Loader
+=======
+Loaders follow the standard [module resolution](/concepts/module-resolution/). In most cases you will be loaders from the [module path](/concepts/module-resolution/#module-paths) (think `npm install`, `node_modules`).
+
+[How to write a loader?](/development/how-to-write-a-loader) A loader module is expected to export a function and to be written in Node.js compatible JavaScript. In the common case you manage loaders with npm, but you can also have loaders as files in your app.
+>>>>>>> master
 
 按照约定，loader 通常被命名为 `XXX-loader`，`XXX` 是上下文的名称，例如 `json-loader`。
 

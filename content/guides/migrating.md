@@ -444,7 +444,7 @@ require.ensure([], function(require) {
 }, "custom-chunk-name");
 ```
 
-（注意废弃的 `System.import`：Webpack 对 `System.import` 的使用不符合新提出的标准，所以它在 [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28)  版本中被废弃，转向支持 `import()`）
+（注意废弃的 `System.import`：webpack 对 `System.import` 的使用不符合新提出的标准，所以它在 [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28)  版本中被废弃，转向支持 `import()`）
 
 由于这个建议还在 Stage 3，如果你想要同时使用 `import` 和 [Babel](http://babeljs.io/)，你需要安装/添加 [dynamic-import](http://babeljs.io/docs/plugins/syntax-dynamic-import/) 语法插件来绕过解析错误。当建议被添加到规范之后，就不再需要这个语法插件了。
 
