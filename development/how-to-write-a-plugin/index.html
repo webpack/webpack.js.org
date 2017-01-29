@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/a2845daf68bd9592a970.css" rel="stylesheet">
+      <link href="/837e06eb0c4f3686710c.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -32,7 +32,7 @@
 <li><a href="https://github.com/webpack/webpack/blob/master/lib/Compilation.js">Compilation Source</a></li>
 </ul>
 <h2 class="header"><a class="anchor" href="#basic-plugin-architecture" id="basic-plugin-architecture"></a><span class="text">Basic plugin architecture</span><a class="icon-link" href="#basic-plugin-architecture"></a></h2>
-<p>Plugins are instanceable objects with an <code>apply</code> method on their prototype. This <code>apply</code> method is called once by the webpack compiler while installing the plugin. The <code>apply</code> method is given a reference to the underlying webpack compiler, which grants access to compiler callbacks. A simple plugin is structured as follows:</p>
+<p>Plugins are instantiated objects with an <code>apply</code> method on their prototype. This <code>apply</code> method is called once by the Webpack compiler while installing the plugin. The <code>apply</code> method is given a reference to the underlying Webpack compiler, which grants access to compiler callbacks. A simple plugin is structured as follows:</p>
 <pre><code class="lang-javascript"><span class="token keyword">function</span> <span class="token function">HelloWorldPlugin</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// Setup the plugin instance with options...</span>
 <span class="token punctuation">}</span>
@@ -73,7 +73,7 @@ HelloCompilationPlugin<span class="token punctuation">.</span>prototype<span cla
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> HelloCompilationPlugin<span class="token punctuation">;</span>
 </code></pre>
-<p>For more information on what callbacks are available on the <code>compiler</code>, <code>compilation</code>, and other important objects, see the [[plugins API|plugins]] doc.</p>
+<p>For more information on what callbacks are available on the <code>compiler</code>, <code>compilation</code>, and other important objects, see the <a href="/api/plugins/">plugins</a> doc.</p>
 <h2 class="header"><a class="anchor" href="#async-compilation-plugins" id="async-compilation-plugins"></a><span class="text">Async compilation plugins</span><a class="icon-link" href="#async-compilation-plugins"></a></h2>
 <p>Some compilation plugin steps are asynchronous, and pass a callback function that <em>must</em> be invoked when your plugin is finished running.</p>
 <pre><code class="lang-javascript"><span class="token keyword">function</span> <span class="token function">HelloAsyncPlugin</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
