@@ -177,22 +177,25 @@ export default class VoteApp extends React.Component {
     listInfo && console.log(listInfo);
     return (
       <div className="vote-app">
-        <div className="vote-app__influence">
-          <div className="vote-app__top">
-            <div className="vote-app__influence">
-              <div className="vote-app__influence-description">
-                <Influence className="vote-app__influence-section" type="normal"/>
-                <Influence className="vote-app__influence-section" type="golden"/>
+        <div className="vote-app__title">
+           Vote
+         </div>
+          <div className="vote-app__influence">
+            <div className="vote-app__top">
+              <div className="vote-app__influence">
+                <div className="vote-app__influence-description">
+                  <Influence className="vote-app__influence-section" type="normal"/>
+                  <Influence className="vote-app__influence-section" type="golden"/>
+                </div>
+                <div className="vote-app__influence-disclaimer">
+                  DISCLAIMER: Since this feature is its Alpha stages, the formula for calculating influence may change.
+                </div>
               </div>
-              <div className="vote-app__influence-disclaimer">
-                DISCLAIMER: Since this feature is its Alpha stages, the formula for calculating influence may change.
+              <div className="vote-app__user-section">
+                {this.renderSelf(inProgress)}
               </div>
-            </div>
-            <div className="vote-app__user-section">
-              {this.renderSelf(inProgress)}
             </div>
           </div>
-        </div>
         { listInfo && <div>
           <h1>{listInfo.displayName}</h1>
           <div>{listInfo.description}</div>
@@ -270,7 +273,7 @@ export default class VoteApp extends React.Component {
         return <div className="vote-app__self-info">Loading user info...</div>;
       }
       return <div className="vote-app__login-button"><button onClick={() => {
-        api.startLogin(window.location + "");   
+        api.startLogin(window.location + "");
       }}>Login with Github <img src={GithubMark}/> </button></div>;
     } else {
       return <div className="vote-app__self-info">
