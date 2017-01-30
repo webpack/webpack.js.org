@@ -2,10 +2,11 @@
 @import 'mixins';
 
 .sidebar {
-  position: relative;
+  position: absolute;
   display: none;
-  flex: 1;
-  min-height: 100%;
+  width: 100%;
+  max-height: 100%;
+  overflow: auto;
 
   @include break {
     display:block;
@@ -14,6 +15,5 @@
 
 .sidebar__inner {
   padding: 1.5em;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
 }

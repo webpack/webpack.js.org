@@ -2,10 +2,12 @@
 @import 'functions';
 
 .sidebar-item {
+  position: relative;
   font-size: getFontSize(-1);
   margin-bottom: 0.75em;
 
   &__title {
+    padding-right: 15px;
     font-weight: 400;
     text-decoration: none;
     color: inherit;
@@ -16,11 +18,13 @@
   }
 
   &__toggle {
-    float: right;
+    position: absolute;
+    right: 0;
     line-height: 1.5;
     cursor: pointer;
     color: getColor(dusty-grey);
     transition: color 250ms;
+    margin-left: 1.5rem;
 
     &:hover {
       color: getColor(mine-shaft);

@@ -9,9 +9,9 @@
 }
 
 // XXX: Temporary hack to fix sidebar width
-.page div:first-of-type {
+.page > div:first-of-type {
   flex: 0 0 auto;
-  overflow: auto;
+  position: relative;
 
   @include break {
     flex:0 0 30%;
