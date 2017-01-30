@@ -3,13 +3,12 @@ title: mocha-loader
 source: https://raw.githubusercontent.com/webpack/mocha-loader/master/README.md
 edit: https://github.com/webpack/mocha-loader/edit/master/README.md
 ---
-# mocha loader for webpack
+# webpack的mocha-loader
+## 用法
 
-## Usage
+### 命令行
 
-### Command Line
-
-*Hint*: when using `!` in the bash command line, you must escape it by prepending a `\`
+*提示*: 当需要在命令行输入"！"时， 你需要在其前面插入 `\` 将其转义。
 
 ``` text
 webpack-dev-server 'mocha!./my-client-tests.js' --options webpackOptions.js
@@ -18,7 +17,7 @@ webpack-dev-server 'mocha!./my-client-tests.js' --options webpackOptions.js
 ``` text
 enhanced-require 'mocha!./my-server-tests.js'
 ```
-### Config
+### 配置
 #### webpack.config.js
 
 ```js
@@ -34,8 +33,8 @@ module.exports = {
 
 #### entry-file.js
 ```js
-/*additional setup with other loaders (polyfills, ...)*/
-const context = require.context(/*directory*/'mocha-loader!./tests', /*recursive*/true, /*match files*//_test.js$/);
+/*与其他loader配合需要的额外配置 (polyfills, ...)*/
+const context = require.context(/*目录*/'mocha-loader!./tests', /*循环*/true, /*符合条件的文件*//_test.js$/);
 context.keys().forEach(context);
 ```
 

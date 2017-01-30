@@ -4,6 +4,7 @@ sort: 3
 contributors:
   - pksjce
   - jonwheeler
+  - johnstew
 ---
 
 如果你使用 css-loader，并且在 JavaScript 文件里导入了 CSS，webpack 会把 CSS 代码和 JavaScript 代码一块打包。
@@ -65,11 +66,13 @@ new ExtractTextPlugin({ filename: 'bundle.css', disable: false, allChunks: true 
 
 ```javascript
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var path = require('path');
+
 module.exports = function () {
     return {
         entry: './main.js',
         output: {
-            path: './dist',
+            path: path.resolve(__dirname, 'dist'),
             filename: 'bundle.js'
         },
         module: {

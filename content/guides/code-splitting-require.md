@@ -4,6 +4,7 @@ sort: 5
 contributors:
   - pksjce
   - rahulcs
+  - johnstew
 ---
 
 在这一节，我们会讨论 webpack 如何使用 `require.ensure()` 进行代码拆分。
@@ -38,7 +39,7 @@ chunkName 是提供给这个特定的 `require.ensure()` 的 chunk 的名称。�
     |    |-- b.js
     webpack.config.js
     |
-    dist 
+    dist
 ```
 
 ```javascript
@@ -58,13 +59,14 @@ console.log('***** I AM b *****');
 
 ```javascript
 \\ webpack.config.js
+var path = require('path');
 
 module.exports = function(env) {
     return {
         entry: './js/entry.js',
         output: {
             filename: 'bundle.js',
-            path: './dist'
+            path: path.resolve(__dirname, 'dist')
         }
     }
 }

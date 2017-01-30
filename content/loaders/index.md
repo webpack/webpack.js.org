@@ -10,6 +10,8 @@ contributors:
 
 正如在[概念](/concepts/loaders)中解释说明，loader 是对应用程序中的资源文件进行转换的转换器。举个例子，loader 允许你配置 webpack 如何去处理 CSS 文件。
 
+?> Move the general usage documentation to the [concepts page](/concepts/loaders) and focus here on describing the available loaders (similar to [plugins](/plugins)).
+
 loader 通常以 npm 包的形式存在，你可以用将它作为一个开发依赖(development dependency)来安装：
 
 ```sh
@@ -53,6 +55,7 @@ npm install css-loader --save-dev
 ```js
 require('style-loader!css-loader?modules!./styles.css');
 ```
+
 可以通过在整个规则(rule)前面加上 `!` 来覆盖配置文件的任意 loader。
 
 可以通过一组查询参数传递 loader 选项，就像在 web 上一样（`?key=value&foo=bar`），也可以使用一个 JSON 对象（`?{"key":"value","foo":"bar"}`）。

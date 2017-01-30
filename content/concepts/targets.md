@@ -4,6 +4,7 @@ sort: 10
 contributors:
   - TheLarkInn
   - rouzbeh84
+  - johnstew
 ---
 
 因为服务器和浏览器代码都可以用 JavaScript 编写，所以 webpack 提供了多种_构建目标(target)_，你可以在你的 webpack [配置](/configuration)中设置。
@@ -35,10 +36,11 @@ module.exports = {
 **webpack.config.js**
 
 ```javascript
+var path = require('path');
 var serverConfig = {
   target: 'node',
   output: {
-    path: 'dist',
+    path: path.resolve(__dirname, 'dist'),
     filename: 'lib.node.js'
   }
   //…
@@ -47,7 +49,7 @@ var serverConfig = {
 var clientConfig = {
   target: 'web', // <=== 默认是 'web'，可省略
   output: {
-    path: 'dist',
+    path: path.resolve(__dirname, 'dist'),
     filename: 'lib.js'
   }
   //…

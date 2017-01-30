@@ -8,6 +8,7 @@ contributors:
   - simon04
   - kisnows
   - chrisVillanueva
+  - swapnilmishra
 ---
 
 此页解释了如何使用 webpack 生成用于生产环境的 build。
@@ -43,7 +44,7 @@ Thus, depending on the [devtool options](/configuration/devtool), Source Maps ar
 
 ### Source Maps
 
-We encourage you to have Source Maps enabled in production. They are useful for debugging and to run benchmark tests. Webpack can generate inline Source Maps included in the bundles or separated files.
+We encourage you to have Source Maps enabled in production. They are useful for debugging and to run benchmark tests. webpack can generate inline Source Maps included in the bundles or separated files.
 
 In your configuration, use the `devtools` object to set the Source Map type. We currently support seven types of Source Maps. You can find more information about them in our [configuration](/configuration/devtool) documentation page.
 
@@ -129,13 +130,13 @@ module.exports = function (env) {
   }
 }
 ```
-Have the following snippet in our webpack.config.js:
+Have the following snippet in your webpack.config.js:
 ```js
 function buildConfig(env) {
   return require('./config/' + env + '.js')({ env: env })
 }
 
-module.exports = buildConfig(env);
+module.exports = buildConfig;
 ```
 And from our package.json, where we build our application using webpack, the command goes like this:
 ```js

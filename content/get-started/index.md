@@ -6,6 +6,8 @@ contributors:
   - varunjayaraman
   - cntanglijun
   - chrisVillanueva
+  - johnstew
+  - simon04
 ---
 
 webpack 是构建我们应用程序中 JavaScript 模块的工具。从使用 `webpack` [cli](/api/cli) 或 [api](/api/node) ，并按照[安装说明](/get-started/install-webpack)开始。
@@ -47,7 +49,7 @@ __index.html__
 ```html
 <html>
   <head>
-    <title>Webpack 2 demo</title>
+    <title>webpack 2 demo</title>
     <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
@@ -87,7 +89,7 @@ Also we will need to change the `index.html` to expect a single bundled js file.
 ```diff
 <html>
   <head>
-    <title>Webpack 2 demo</title>
+    <title>webpack 2 demo</title>
 -   <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
@@ -104,7 +106,7 @@ Also we will need to change the `index.html` to expect a single bundled js file.
 现在在此文件夹下运行 `webpack`，其中 `index.js` 是输入文件，`bundle.js` 是输出文件，输出文件已打包此页面所需的所有代码。
 
 ```bash
-webpack app/index.js dist/bundle.js
+./node_modules/.bin/webpack app/index.js dist/bundle.js
 
 Hash: a3c861a7d42fc8944524
 Version: webpack 2.2.0
@@ -114,8 +116,9 @@ index.js  1.56 kB       0  [emitted]  main
    [0] ./app/index.js 170 bytes {0} [built]
 
 ```
+T> 输出可能会稍有不同。如果构建成功，那么你就可以继续。
 
-T> 如果你创建了局部的 `webpack@beta` 版本，要通过其进行构建过程，请务必在命令行中通过 `./node_modules/.bin/webpack` 来引用 `webpack`。
+T> 如果你在[全局安装 webpack](/get-started/install-webpack#global-installation)，你必须使用 `webpack` 来调用 webpack。
 
 在浏览器中打开 `webpack.config.js`，查看成功后 bundle 的结果。
 你应该看到带有以下文本的页面：'Hello webpack'。
@@ -126,13 +129,15 @@ T> 如果你创建了局部的 `webpack@beta` 版本，要通过其进行构建�
 
 __webpack.config.js__
 ```javascript
+var path = require('path');
+
 module.exports = {
   entry: './app/index.js',
   output: {
     filename: 'bundle.js',
-    path: './dist'
+    path: path.resolve(__dirname, 'dist')
   }
-}
+};
 ```
 
 此文件可以由接下来的 webpack 命令运行。

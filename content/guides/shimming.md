@@ -74,7 +74,7 @@ module.exports = {
 
 ## `exports-loader`
 
-比如说，一个 library 创建了一个全局变量，它期望使用者通过全局变量去使用。在这种情况下，我们能够使用 [`exports-loader`](/loaders/exports-loader/)，将全局变量导出为 CommonJS 格式。比如，为了将 `file` 导出为 `file` 以及将 `helpers.parse` 导出为 `parse`：
+比如说，一个 library 创建了一个全局变量，它期望使用者通过全局变量去使用；在这种情况下，我们能够使用 [`exports-loader`](/loaders/exports-loader/)，将全局变量导出为 CommonJS 格式。比如，为了将 `file` 导出为 `file` 以及将 `helpers.parse` 导出为 `parse`：
 
 **webpack.config.js**
 ```javascript
@@ -93,8 +93,7 @@ module.exports = {
 
 ## `script-loader`
 
-
-[script-loader](/loaders/script-loader/) 在全局上下文中执行代码，如同你在 `script` 标签中加入代码。在这种模式下普通的 library 都能够正常运行。访问 require, module 等变量则是 undefined。
+[script-loader](/loaders/script-loader/) 在全局上下文中执行代码，如同你在 `script` 标签中加入代码。在这种模式下，普通的 library 都能够正常运行。访问 `require`, `module` 等变量则是 undefined。
 
 W> 文件作为字符串添加到 bundle 中。它不会被 `webpack` 压缩，因此如果使用了一个压缩后的版本，没有开发工具支持调试此 loader 添加的 library。
 
