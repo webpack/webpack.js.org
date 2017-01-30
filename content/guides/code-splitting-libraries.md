@@ -4,6 +4,7 @@ sort: 4
 contributors:
   - pksjce
   - chrisVillanueva
+  - johnstew
 ---
 
 A typical application uses third party libraries for framework/functionality needs. Particular versions of these libraries are used and code here does not change often. However, the application code changes frequently.
@@ -22,7 +23,6 @@ The index file will require `moment` as a dependency and log the current date as
 
 __index.js__
 ```javascript
-
 var moment = require('moment');
 console.log(moment().format());
 
@@ -33,13 +33,14 @@ We can bundle the application with webpack using the following config
 __webpack.config.js__
 
 ```javascript
+var path = require('path');
 
 module.exports = function(env) {
     return {
         entry: './index.js',
         output: {
             filename: '[chunkhash].[name].js',
-            path: './dist'
+            path: path.resolve(__dirname, 'dist')
         }
     }
 }
@@ -56,6 +57,7 @@ Let's try to mitigate this by adding a separate entry point for `moment` and nam
 __webpack.config.js__
 
 ```javascript
+var path = require('path');
 
 module.exports = function(env) {
     return {
@@ -65,7 +67,7 @@ module.exports = function(env) {
         },
         output: {
             filename: '[chunkhash].[name].js',
-            path: './dist'
+            path: path.resolve(__dirname, 'dist')
         }
     }
 }
@@ -84,8 +86,9 @@ We can modify our webpack config file to use the `CommonsChunkPlugin` as follows
 __webpack.config.js__
 
 ```javascript
-
 var webpack = require('webpack');
+var path = require('path');
+
 module.exports = function(env) {
     return {
         entry: {
@@ -94,7 +97,7 @@ module.exports = function(env) {
         },
         output: {
             filename: '[chunkhash].[name].js',
-            path: './dist'
+            path: path.resolve(__dirname, 'dist')
         },
         plugins: [
             new webpack.optimize.CommonsChunkPlugin({
@@ -118,8 +121,9 @@ To prevent this, we need extract out the runtime into a separate manifest file. 
 __webpack.config.js__
 
 ```javascript
-
 var webpack = require('webpack');
+var path = require('path');
+
 module.exports = function(env) {
     return {
         entry: {
@@ -128,7 +132,7 @@ module.exports = function(env) {
         },
         output: {
             filename: '[chunkhash].[name].js',
-            path: './dist'
+            path: path.resolve(__dirname, 'dist')
         },
         plugins: [
             new webpack.optimize.CommonsChunkPlugin({

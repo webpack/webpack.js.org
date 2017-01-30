@@ -7,7 +7,7 @@ contributors:
   - tarang9211
 ---
 
-The entry object is where Webpack looks to start building the bundle. The context is an absolute string to the directory that contains the entry files.
+entry 对象是用于 webpack 查找启动并构建 bundle。其上下文是入口文件所处的目录的绝对路径的字符串。
 
 ## `context`
 
