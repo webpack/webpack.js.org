@@ -1,21 +1,21 @@
 ---
 title: node-loader
-source: https://raw.githubusercontent.com/webpack/node-loader/master/README.md
-edit: https://github.com/webpack/node-loader/edit/master/README.md
+source: https://raw.githubusercontent.com/webpack-contrib/node-loader/master/README.md
+edit: https://github.com/webpack-contrib/node-loader/edit/master/README.md
 ---
-## Install
+## 安装
 
 ```bash
 npm install --save-dev node-loader
 ```
 
-## Usage
+## 用法
 
-Executes [node add-ons](https://nodejs.org/dist/latest/docs/api/addons.html) in [enhanced-require](https://github.com/webpack/enhanced-require).
+在 [enhanced-require](https://github.com/webpack/enhanced-require) 中执行 [node add-ons](https://nodejs.org/dist/latest/docs/api/addons.html) 
 
-Use the loader either via your webpack config, CLI or inline.
+通过 webpack 配置、命令行或者内联使用加载器。
 
-### Via webpack config (recommended)
+### 通过 webpack 配置（推荐）
 
 **webpack.config.js**
 ```js
@@ -31,41 +31,41 @@ module.exports = {
 }
 ```
 
-**In your application**
+**在你的项目中**
 ```js
 import node from 'file.node';
 ```
 
-### CLI
+### 通过命令行（CLI）
 
 ```bash
 webpack --module-bind 'node=node-loader'
 ```
 
-**In your application**
+**在你的项目中**
 ```js
 import node from 'file.node';
 ```
 
-### Inline
+### 内联使用
 
-**In your application**
+**在你的项目中**
 ```js
 import node from 'node-loader!./file.node';
 ```
 
-## Maintainer
+## 维护者
 
 <table>
   <tbody>
     <tr>
       <td align="center">
-        <img width="150 height="150" src="https://github.com/sokra.png?s=150">
+        <img width="150" height="150" src="https://github.com/sokra.png?s=150">
         <br>
         <a href="https://github.com/sokra">Tobias Koppers</a>
       </td>
-    <tr>
-  <tbody>
+    </tr>
+  </tbody>
 </table>
 
 
@@ -86,7 +86,3 @@ import node from 'node-loader!./file.node';
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
-
-***
-
-> 原文：https://webpack.js.org/loaders/node-loader/
