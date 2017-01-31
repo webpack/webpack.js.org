@@ -2,22 +2,31 @@
 title: Output
 sort: 3
 contributors:
-- TheLarkInn
+  - TheLarkInn
+  - chyipin
+  - rouzbeh84
 ---
 
-Options affecting the output of the compilation. `output` options tell Webpack how to write the compiled files to disk. Note, that while there can be multiple `entry` points, only one `output` configuration is specified.
+Options affecting the output of the compilation. `output` options tell webpack how to write the compiled files to disk. Note, that while there can be multiple `entry` points, only one `output` configuration is specified.
 
 If you use any hashing (`[hash]` or `[chunkhash]`), make sure to have a consistent ordering of modules. Use the `OccurrenceOrderPlugin` or `recordsPath`.
 
 ## Usage
 
-To set the `output` property, you simply set the output value in your webpack config:
+The minimum requirements for the `output` property in your webpack config is to set its value to an object including the following two things :
+
+Your preferred `filename` of the compiled file: `// main.js || bundle.js || index.js`
+
+An [`output.path`](#output-path) as an **absolute path** for what directory you prefer it to go in once bundled.
 
 **webpack.config.js**
 
 ```javascript
 const config = {
-  output: 'bundle.js'
+  output: {
+    filename: 'bundle.js',
+    path: '/home/proj/public/assets'
+  }
 };
 
 module.exports = config;
@@ -55,8 +64,9 @@ For more information on cross-origin loading see [MDN](https://developer.mozilla
 
 > Default: `false`
 
-> see also [[library and externals]]
-> see also [[Development Tools]]
+> see also [library](/guides/author-libraries/)
+
+> see also [Development Tools](/guides/development/#choosing-a-tool)
 
 ### `output.devtoolLineToLine`
 
@@ -73,7 +83,8 @@ An object `{test, include, exclude}` similar to `module.loaders` enables it for 
 Specifies the name of each output file on disk. You must **not** specify an absolute path here! The `output.path` option determines the location on disk the files are written. `filename` is used solely for naming the individual files.
 
 **single entry**
-``` javascript
+
+```javascript
 {
   entry: './src/app.js',
   output: {
@@ -95,7 +106,7 @@ If your configuration creates more than a single "chunk" (as with multiple entry
 
 `[chunkhash]` is replaced by the hash of the chunk.
 
-``` javascript
+```javascript
 {
   entry: {
     app: './src/app.js',
@@ -136,9 +147,9 @@ The filename of the Hot Update Main File. It is inside the `output.path` directo
 
 ### `output.jsonpFunction`
 
-The JSONP function used by webpack for asnyc loading of chunks.
+The JSONP function used by webpack for async loading of chunks.
 
-A shorter function may reduce the filesize a bit. Use a different identifier when having multiple webpack instances on a single page.
+A shorter function may reduce the file size a bit. Use a different identifier when having multiple webpack instances on a single page.
 
 > Default: `"webpackJsonp"`
 
@@ -174,36 +185,37 @@ The output directory as an **absolute path** (required).
 
 `[hash]` is replaced by the hash of the compilation.
 
-
 **config.js**
 
-``` javascript
+```javascript
 output: {
-	path: "/home/proj/public/assets",
-	publicPath: "/assets/"
+    path: "/home/proj/public/assets",
+    publicPath: "/assets/"
 }
 ```
 
 **index.html**
-``` html
+
+```html
 <head>
   <link href="/assets/spinner.gif"/>
 </head>
 ```
+
 And a more complicated example of using a CDN and hashes for assets.
 
 **config.js**
 
-``` javascript
+```javascript
 output: {
-	path: "/home/proj/cdn/assets/[hash]",
-	publicPath: "http://cdn.example.com/assets/[hash]/"
+    path: "/home/proj/cdn/assets/[hash]",
+    publicPath: "http://cdn.example.com/assets/[hash]/"
 }
 ```
 
 **Note:** In cases when the eventual `publicPath` of output files isn't known at compile time, it can be left blank and set dynamically at runtime in the entry point file. If you don't know the `publicPath` while compiling, you can omit it and set `__webpack_public_path__` on your entry point.
 
-``` javascript
+```javascript
  __webpack_public_path__ = myRuntimePublicPath
 
 // rest of your application entry
@@ -220,3 +232,4 @@ The filename of the SourceMaps for the JavaScript files. They are inside the `ou
 `[hash]` is replaced by the hash of the compilation.
 
 > Default: `"[file].map"`
+

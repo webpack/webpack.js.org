@@ -177,6 +177,9 @@ export default class VoteApp extends React.Component {
     listInfo && console.log(listInfo);
     return (
       <div className="vote-app">
+        <div className="vote-app__title">
+          Vote
+        </div>
         <div className="vote-app__influence">
           <div className="vote-app__top">
             <div className="vote-app__influence">
@@ -270,7 +273,7 @@ export default class VoteApp extends React.Component {
         return <div className="vote-app__self-info">Loading user info...</div>;
       }
       return <div className="vote-app__login-button"><button onClick={() => {
-        api.startLogin(window.location + "");   
+        api.startLogin(window.location + "");
       }}>Login with Github <img src={GithubMark}/> </button></div>;
     } else {
       return <div className="vote-app__self-info">

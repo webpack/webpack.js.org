@@ -4,6 +4,8 @@ sort: 5
 contributors:
   - TheLarkInn
   - jhnns
+  - rouzbeh84
+  - johnstew
 ---
 
 **Plugins** are the [backbone](https://github.com/webpack/tapable) of webpack. webpack itself is built on the **same plugin system** that you use in your webpack configuration!
@@ -12,7 +14,7 @@ They also serve the purpose of doing **anything else** that a [loader](/concepts
 
 ## Anatomy
 
-A webpack **plugin** is a JavaScript object that has an `apply` property. This `apply` property is called by the webpack compiler, giving access to the **entire** compilation lifecycle.
+A webpack **plugin** is a JavaScript object that has an [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) property. This `apply` property is called by the webpack compiler, giving access to the **entire** compilation lifecycle.
 
 **ConsoleLogOnBuildWebpackPlugin.js**
 
@@ -45,12 +47,13 @@ Depending on how you are using webpack, there are multiple ways to use plugins.
 ```javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 const webpack = require('webpack'); //to access built-in plugins
+const path = require('path');
 
 const config = {
   entry: './path/to/my/entry/file.js',
   output: {
     filename: 'my-first-webpack.bundle.js',
-    path: './dist'
+    path: path.resolve(__dirname, 'dist')
   },
   module: {
     rules: [

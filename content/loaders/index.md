@@ -10,6 +10,8 @@ contributors:
 
 As explained in detail on the [concepts page](/concepts/loaders), loaders are transformations that are applied on a resource file of your application. Loaders allow you to, for example, configure how webpack should handle a CSS file.
 
+?> Move the general usage documentation to the [concepts page](/concepts/loaders) and focus here on describing the available loaders (similar to [plugins](/plugins)).
+
 A loader is typically a npm package, which you can install as a development dependency:
 
 ```sh

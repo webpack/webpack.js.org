@@ -9,7 +9,7 @@ import '../sidebar/sidebar-style';
 import { trimEnd } from 'lodash';
 
 export default ({ section, page }) => {
-  let edit = page.edit || `https://github.com/webpack/webpack.js.org/edit/master/content/${trimEnd(page.url, '/')}.md`;
+  let edit = page.edit || `https://github.com/webpack/webpack.js.org/edit/master/content/${trimEnd(page.url, '/')}${page.type === 'index' ? '/index' : ''}.md`;
 
   return (
     <Container className="page">

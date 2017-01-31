@@ -2,7 +2,7 @@
   "name": "webpack.js.org",
   "version": "0.0.0",
   "private": true,
-  "description": "The main site for all things Webpack.",
+  "description": "The main site for all things webpack.",
   "homepage": "https://github.com/webpack/webpack.js.org",
   "author": "Greg Venech",
   "license": "CC BY",
@@ -20,6 +20,9 @@
   "bugs": {
     "url": "https://github.com/webpack/webpack.js.org/issues"
   },
+  "engines": {
+    "node": ">=6.9"
+  },
   "scripts": {
     "start": "npm run init:generated && node ./bootstrap.js",
     "build": "npm run init:generated && rm -rf build/ && node ./bootstrap.js && npm run sitemap && echo webpack.js.org > build/CNAME",
@@ -33,7 +36,7 @@
     "lint:md": "eslint . --ext .md",
     "lint:markdown": "markdownlint --config ./.markdownlintrc **/*.md *.md ./content/**/*.md",
     "lint:social": "alex ./**/*.md",
-    "lint:prose": "ncp .proselintrc ~/ && proselint",
+    "lint:prose": "cp .proselintrc ~/ && proselint content",
     "test": "npm run lint ",
     "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml"
   },
@@ -73,6 +76,7 @@
     "mkdirp": "^0.5.1",
     "modularscale-sass": "^2.1.1",
     "moment": "^2.15.1",
+    "ncp": "^2.0.0",
     "node-sass": "^3.9.3",
     "npm-run-all": "^3.1.0",
     "postcss-loader": "^0.13.0",
@@ -94,7 +98,7 @@
     "d3": "^4.2.7",
     "filesize": "^3.3.0",
     "preact": "^6.2.1",
-    "preact-compat": "^3.6.0",
+    "preact-compat": "3.11.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-router": "^2.8.1",

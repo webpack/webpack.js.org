@@ -21,7 +21,7 @@ Use these features when appropriate.
 
 * Access CLI arguments, when using the webpack CLI (instead write your own CLI, or use `--env`)
 * Export non-deterministic values (calling webpack twice should result in the same output files)
-* Write very long configurations (instead split the configuration into multiple files)
+* Write long configurations (instead split the configuration into multiple files)
 
 The following examples below describe how webpack's configuration object can be both expressive and configurable because _it is code_:
 
@@ -106,7 +106,7 @@ import {
 } from './';
 
 export class NgCliWebpackConfig {
-  // TODO: When webpack2 types are finished lets replace all these any types
+  // TODO: When webpack2 types are finished let's replace all these any types
   // so this is more maintainable in the future for devs
   public config: any;
   private webpackDevConfigPartial: any;
@@ -158,7 +158,7 @@ In the example below JSX (React JavaScript Markup) and Babel are used to create 
 ```javascript
 import h from 'jsxobj';
 
-// example of an import'd plugin
+// example of an imported plugin
 const CustomPlugin = config => ({
   ...config,
   name: 'custom-plugin'

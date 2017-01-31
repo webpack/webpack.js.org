@@ -8,6 +8,8 @@ node_js:
 script:
   - bash ./scripts/deploy.sh
 sudo: required
+cache: yarn
 install:
-  - npm install
+  - npm i yarn -g
+  - yarn
   - sudo pip install proselint

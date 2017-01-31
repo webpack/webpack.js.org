@@ -5,7 +5,7 @@ From adding an issue for a documentation suggestion to creating a pull request: 
 ## Setup
 
 * Install [Node.js](https://nodejs.org/) if you have not already.
-  *Note: Node 4-6 is required for "best results".*. Node 7 may have issues!
+  *Note: Node 6.9.* is required for "best results".*. Node 7 may have issues!
 * Fork the **webpack.js.org** repo at [https://github.com/webpack/webpack.js.org](https://github.com/webpack/webpack.js.org).
 * `git clone <your-clone-url> && cd webpack.js.org`
 * `npm install`
@@ -40,7 +40,7 @@ Issue the PR to the [master](https://github.com/webpack/webpack.js.org/tree/mast
 
 ## Contribution Recognition
 
-Any document that you edit, you can choose to add your GitHub username at the top of the document for recognition:
+You can choose to add your GitHub username for recognition at the top of any markdown document you edit:
 
 **example.md**
 
@@ -59,7 +59,7 @@ contributors:
 
 ```
 
-This will add your name and GitHub profile photo to the document in production. This is a great way to own the awesome work that you do and encourage that you remember to do this in your PR's.
+This will add your name and GitHub profile photo to the document in production. It's a great way to own the awesome work that you do and we encourage you to do this in your PRs.
 
 
 ## Thank you

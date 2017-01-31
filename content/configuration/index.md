@@ -7,9 +7,10 @@ contributors:
   - grgur
   - bondz
   - sricc
+  - terinjokes
 ---
 
-Webpack is fed via a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
+webpack is fed via a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
 
 T> New to webpack? Check out our guide to some of webpack's [core concepts](/concepts) to get started!
 
@@ -18,6 +19,8 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 ## Options
 
 ``` js-with-links-with-details
+var path = require('path');
+
 {
   // click on the name of the option to get to the detailed documentation
   // click on the items with arrows to show more examples / advanced options
@@ -33,7 +36,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
   // and webpack starts bundling
 
   [output](/configuration/output): {
-    // options related how webpack emits results
+    // options related to how webpack emits results
 
     [path](/configuration/output#output-path): path.resolve(__dirname, "dist"), // string
     // the target directory for all output files
@@ -128,8 +131,8 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
         [exclude](/configuration/module#rule-exclude): [
           path.resolve(__dirname, "app/demo-files")
         ]
-        // matching conditions, each accepting regular expression or string
-        // test and include behave equal, both must be matched
+        // these are matching conditions, each accepting a regular expression or string
+        // test and include have the same behavior, both must be matched
         // exclude must not be matched (takes preferrence over test and include)
         // Best practices:
         // - Use RegExp only in test and for filename matching
@@ -141,11 +144,11 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 
         [enforce](/configuration/module#rule-enforce): "pre",
         [enforce](/configuration/module#rule-enforce): "post",
-        // apply these rule even if rules are overridden (advanced option)
+        // flags to apply these rules, even if they are overridden (advanced option)
 
         [loader](/configuration/module#rule-loader): "babel-loader",
-        // the loader which should be applied, it'll be resolve relative to the context
-        // -loader suffix is no longer optional in Webpack 2 for clarity reasons
+        // the loader which should be applied, it'll be resolved relative to the context
+        // -loader suffix is no longer optional in webpack2 for clarity reasons
         // see [webpack 1 upgrade guide](/guides/migrating)
 
         [options](/configuration/module#rule-options-rule-query): {
@@ -224,11 +227,15 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
     [alias](/configuration/resolve#resolve-alias): {
       // a list of module name aliases
 
-      "module": "new-module"
+      "module": "new-module",
       // alias "module" -> "new-module" and "module/path/file" -> "new-module/path/file"
 
       "only-module$": "new-module",
       // alias "only-module" -> "new-module", but not "module/path/file" -> "new-module/path/file"
+
+      "module": path.resolve(__dirname, "app/third/module.js"),
+      // alias "module" -> "./app/third/module.js" and "module/file" results in error
+      // modules aliases are imported relative to the current context
     },
     <details><summary>/* alternative alias syntax (click to show) */</summary>
     [alias](/configuration/resolve#resolve-alias): [

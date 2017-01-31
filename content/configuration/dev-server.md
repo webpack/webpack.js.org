@@ -266,7 +266,7 @@ port: 8080
 
 Proxying some URLs can be useful when you have a separate API backend development server and you want to send API requests on the same domain.
 
-The dev-server makes use of the very powerful [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) package. Checkout its [documentation](https://github.com/chimurai/http-proxy-middleware#options) for more advanced usages.
+The dev-server makes use of the powerful [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) package. Checkout its [documentation](https://github.com/chimurai/http-proxy-middleware#options) for more advanced usages.
 
 With a backend on `localhost:3000`, you can use this to enable proxying:
 

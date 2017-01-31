@@ -4,14 +4,15 @@ contributors:
   - einarlove
 ---
 
-The EnvironmentPlugin lets you list specific variables from `process.env` to be replaced on **compile** allowing your code to be run in the browser or later with the same configuration when built.
+The EnvironmentPlugin is a shorthand for using the [define-plugin](/plugins/define-plugin)
+on [`process.env`](https://nodejs.org/api/process.html#process_process_env) keys.
 
 ```js
 new webpack.EnvironmentPlugin(keys)
 ```
 
 ## How to use
-EnvironmentPlugin accepts either an array of keys or an object with default values.
+The EnvironmentPlugin accepts either an array of keys or an object with default values.
 
 ```js
 new webpack.EnvironmentPlugin(['NODE_ENV', 'VERSION'])

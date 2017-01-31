@@ -196,7 +196,7 @@ mainFiles: ["index"]
 
 Tell webpack what directories should be searched when resolving modules.
 
-Absolute and relative paths can both be used, but be aware that they will behave a bit different.
+Absolute and relative paths can both be used, but be aware that they will behave a bit differently.
 
 A relative path will be scanned simarly to how Node scans for `node_modules`, by looking through the current directory as well as it's ancestors (i.e. `./node_modules`, `../node_modules`, and on).
 
@@ -212,17 +212,6 @@ If you want to add a directory to search in that takes precedences over `node_mo
 
 ```js
 modules: [path.resolve(__dirname, "src"), "node_modules"]
-```
-
-
-## `resolve.resolveToContext`
-
-`boolean`
-
-If `true`, trying to resolve a context to its absolute path ends when a directory is found. Default:
-
-```js
-resolveToContext: false
 ```
 
 
@@ -249,12 +238,12 @@ W> Changes to cached paths may cause failure in rare cases.
 
 `object`
 
-This set of options is identical to the `resolve` set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages. Default:
+This set of options is identical to the `resolve` property set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages. Default:
 
 ```js
 {
-    modulesDirectories: ["web_loaders", "web_modules", "node_loaders", "node_modules"],
-    extensions: ["", ".webpack-loader.js", ".web-loader.js", ".loader.js", ".js"],
+    modules: ["web_loaders", "web_modules", "node_loaders", "node_modules"],
+    extensions: [".webpack-loader.js", ".web-loader.js", ".loader.js", ".js"],
     packageMains: ["webpackLoader", "webLoader", "loader", "main"]
 }
 ```

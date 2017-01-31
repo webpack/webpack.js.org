@@ -191,7 +191,7 @@ Only used when [`target`](/configuration/target) is web, which uses JSONP for lo
 
 A JSONP function name used to asynchronously load chunks or join multiple initial chunks (CommonsChunkPlugin, AggressiveSplittingPlugin).
 
-It's required to change it if multiple webpack runtimes (from different compilation) are used on the same page.
+This needs to be changed if multiple webpack runtimes (from different compilation) are used on the same webpage.
 
 If using the [`output.library`](#output-library) option, the library name is automatically appended.
 
@@ -276,7 +276,7 @@ _Wondering the difference between CommonJS and CommonJS2? Check [this](https://g
 
 `libraryTarget: "amd"` - In this case webpack will make your library an AMD module.
 
-But there is a very important pre-requisite, your entry chunk must be defined with the define property, if not, webpack wil create the AMD module, but without dependencies. 
+But there is a very important pre-requisite, your entry chunk must be defined with the define property, if not, webpack will create the AMD module, but without dependencies. 
 The output will be something like this:
 
 ```javascript
@@ -295,7 +295,7 @@ But, `require([ _what?_ ])`?
 
 ```javascript
 output: {
-	name: "MyLibrary",
+	library: "MyLibrary",
 	libraryTarget: "amd"
 }
 ```
@@ -424,7 +424,7 @@ Examples:
 
 ``` js
 publicPath: "https://cdn.example.com/assets/", // CDN (always HTTPS)
-publicPath: "//cdn.example.com/assets/", // CDM (same protocol)
+publicPath: "//cdn.example.com/assets/", // CDN (same protocol)
 publicPath: "/assets/", // server-relative
 publicPath: "assets/", // relative to HTML page
 publicPath: "../assets/", // relative to HTML page

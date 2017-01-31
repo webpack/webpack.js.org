@@ -17,24 +17,27 @@ export default props => {
         id="components/splash-viz/splash-viz.jsx"
         component={ SplashViz } />
 
-      <Container className="splash__section">
-        <h1>{ page.title }</h1>
-        <div dangerouslySetInnerHTML={{
-          __html: page.content
-        }} />
-      </Container>
+      <div className="splash__section splash__section__dark">
+        <Container>
+          <div dangerouslySetInnerHTML={{
+            __html: page.content
+          }} />
+        </Container>
+      </div>
 
-      <Container className="splash__section">
-        <h1>Support the Team</h1>
+      <div className="splash__section">
+        <Container>
+          <h1>Support the Team</h1>
 
-        <p>Through contributions, donations, and sponsorship, you allow webpack to thrive. Your donations directly support office hours, continued enhancements, and most importantly, great documentation and learning material!</p>
+          <p>Through contributions, donations, and sponsorship, you allow webpack to thrive. Your donations directly support office hours, continued enhancements, and most importantly, great documentation and learning material!</p>
 
-        <h2>Sponsors</h2>
-        <Support number={ 20 } type="sponsor" />
+          <h2>Sponsors</h2>
+          <Support number={ 40 } type="sponsor" />
 
-        <h2>Backers</h2>
-        <Support number={ 100 } type="backer" />
-      </Container>
+          <h2>Backers</h2>
+          <Support number={ 130 } type="backer" />
+        </Container>
+      </div>
     </div>
   );
 };

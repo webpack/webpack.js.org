@@ -6,13 +6,16 @@ contributors:
   - rajagopal4890
   - markerikson
   - simon04
+  - kisnows
+  - chrisVillanueva
+  - swapnilmishra
 ---
 
 This page explains how to generate production builds with webpack.
 
 ## The automatic way
 
-Running `webpack -p` (or equivalently `webpack --optimize-minimize --define process.env.NODE_ENV="production"`). This performs the following steps:
+Running `webpack -p` (or equivalently `webpack --optimize-minimize --define process.env.NODE_ENV="'production'"`). This performs the following steps:
 
 - Minification using `UglifyJsPlugin`
 - Runs the `LoaderOptionsPlugin`, see its [documentation](/plugins/loader-options-plugin)
@@ -40,7 +43,7 @@ Thus, depending on the [devtool options](/configuration/devtool), Source Maps ar
 
 ### Source Maps
 
-We encourage you to have Source Maps enabled in production. They are useful for debugging and to run benchmark tests. Webpack can generate inline Source Maps included in the bundles or separated files.
+We encourage you to have Source Maps enabled in production. They are useful for debugging and to run benchmark tests. webpack can generate inline Source Maps included in the bundles or separated files.
 
 In your configuration, use the `devtools` object to set the Source Map type. We currently support seven types of Source Maps. You can find more information about them in our [configuration](/configuration/devtool) documentation page.
 
@@ -70,12 +73,13 @@ T> Technically, `NODE_ENV` is a system environment variable that Node.js exposes
 
 ## The manual way: Configuring webpack for multiple environments
 
-When we do have multiple configurations in mind for different environments, the easiest way is to write seperate js files for
+When we do have multiple configurations in mind for different environments, the easiest way is to write separate js files for
 each environment. For example:
 
 ** dev.js **
 ```js
 module.exports = function (env) {
+  return {
     devtool: 'cheap-module-source-map',
     output: {
         path: path.join(__dirname, '/../dist/assets'),
@@ -91,12 +95,14 @@ module.exports = function (env) {
         stats: 'minimal',
         publicPath: publicPath
     }
+  }
 }
 ```
 
 ** prod.js **
 ```js
 module.exports = function (env) {
+  return {
     output: {
         path: path.join(__dirname, '/../dist/assets'),
         filename: '[name].bundle.js',
@@ -120,15 +126,16 @@ module.exports = function (env) {
             comments: false
         })
     ]
+  }
 }
 ```
-Have the following snippet in our webpack.config.js:
+Have the following snippet in your webpack.config.js:
 ```js
 function buildConfig(env) {
   return require('./config/' + env + '.js')({ env: env })
 }
 
-module.exports = buildConfig(env);
+module.exports = buildConfig;
 ```
 And from our package.json, where we build our application using webpack, the command goes like this:
 ```js
@@ -177,7 +184,7 @@ module.exports = function() {
                 loaders: ['to-string-loader', 'css-loader']
             }, {
                 test: /\.(jpg|png|gif)$/,
-                loader: 'file'
+                loader: 'file-loader'
             }, {
                 test: /\.(woff|woff2|eot|ttf|svg)$/,
                 loader: 'url-loader?limit=100000'
@@ -197,7 +204,7 @@ module.exports = function() {
     };
 }
 ```
-And then merge this base config with an environment specific configuration file using 'webpack-merge'. 
+And then merge this base config with an environment specific configuration file using 'webpack-merge'.
 Let us look at an example where we merge our prod file, mentioned above, with this base config file using 'webpack-merge':
 
 ** prod.js (updated) **
@@ -235,9 +242,9 @@ module.exports = function(env) {
 ```
 You will notice three major updates to our 'prod.js' file.
 * 'webpack-merge' with the 'base.js'.
-* We have move 'output' property to 'base.js'. Just to stress on that point that our output property, here, is common across all our environments and that we refactored our 'prod.js' and moved it to our 'base.js', the common configuartion file. 
+* We have move 'output' property to 'base.js'. Just to stress on that point that our output property, here, is common across all our environments and that we refactored our 'prod.js' and moved it to our 'base.js', the common configuration file.
 * We have defined the 'process.env.NODE_ENV' to be 'prod' using the 'DefinePlugin'. Now across the application 'process.env.NODE_ENV' would have the value, 'prod', when we build our application for production environment. Likewise we can manage various variables of our choice, specific to environments this way.
 
-The choice of what is going to be common across all your environments is upto you, however. We have just demonstrated a few that could typically be common across environments when we build our application. 
+The choice of what is going to be common across all your environments is up to you, however. We have just demonstrated a few that could typically be common across environments when we build our application.
 
 You just saw, how powerful 'webpack-merge' is, that, it just saved us from a lot of code repetitions.

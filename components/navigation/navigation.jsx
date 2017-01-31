@@ -20,12 +20,17 @@ let Sections = [
       { title: 'API', url: 'api' },
       { title: 'Configuration', url: 'configuration' },
       { title: 'Loaders', url: 'loaders' },
-      { title: 'Plugins', url: 'plugins' }
+      { title: 'Plugins', url: 'plugins' },
+      { title: 'Development', url: 'development' }
     ]
   },
   {
     title: 'Donate',
     url: '//opencollective.com/webpack'
+  },
+  {
+    title: 'Blog',
+    url: '//medium.com/webpack'
   }
 ];
 
@@ -33,7 +38,7 @@ let Sections = [
 export default class Navigation extends React.Component {
   render() {
     let { pageUrl = '' } = this.props;
-    
+
     return (
       <header className="navigation">
         <Container className="navigation__inner">

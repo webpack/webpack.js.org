@@ -1,23 +1,19 @@
 ---
 title: Installation
-sort: 1
 contributors:
   - pksjce
+  - bebraw
+  - simon04
+sort: 1
 ---
 
 ### Pre-requisites
 
-We assume you have `node` and `npm` already installed.
+Before getting started, make sure you have a fresh version of [Node.js](https://nodejs.org/en/) installed. The current LTS is an ideal starting point. You may run into a variety of issues with the older versions as they may be missing functionality webpack or related packages might need.
 
-### Global Installation
+Note that this documentation is for webpack 2, for which there is not yet a stable release. You can get the most recent beta by installing with the `beta` tag (see below).
 
-``` bash
-npm install webpack -g
-```
-
-The `webpack` command is now available globally.
-
-However, this is not a recommended practice. This locks you down to a specific version of webpack and might fail in projects that use a different version. The next section tells you how to install webpack locally in a project.
+The next section tells you how to install webpack locally in a project.
 
 ### Local Installation
 
@@ -38,6 +34,17 @@ If you are using npm scripts in your project, npm will try to look for webpack i
 This is standard and recommended practice.
 
 T> To run the local installation of webpack you can access its bin version as `node_modules/.bin/webpack`
+
+
+### Global Installation
+
+W> Note that a global webpack installation is not a recommended practice. This locks you down to a specific version of webpack and might fail in projects that use a different version.
+
+``` bash
+npm install webpack -g
+```
+
+The `webpack` command is now available globally.
 
 
 ### Bleeding Edge

@@ -3,13 +3,15 @@ title: Authoring Libraries
 sort: 18
 contributors:
     - pksjce
+    - johnstew
+    - simon04
 ---
 
 webpack is a tool which can be used to bundle application code and also to bundle library code. If you are the author of a JavaScript library and are looking to streamline your bundle strategy then this document will help you.
 
 ## Author a Library
 
-We have here a small wrapper library to convert number 1 to 5 from number to word and vice-versa. It looks something like this.
+Let's assume that you are writing a small library `webpack-numbers` allowing to convert numbers 1 to 5 from their numeric to a textual representation and vice-versa. The implementation makes use of ES6 modules, and might look like this:
 
 __src/index.js__
 ```javascript
@@ -32,8 +34,6 @@ export function wordToNum(word) {
 The usage spec for the library will be as follows.
 
 ```javascript
-// ES2015 modules
-
 import * as webpackNumbers from 'webpack-numbers';
 
 ...
@@ -47,8 +47,10 @@ var webpackNumbers = require('webpack-numbers');
 ...
 webpackNumbers.numToWord(3); // output is Three
 ...
+```
 
-// As a script tag
+```html
+// Or as a script tag
 
 <html>
 ...
@@ -67,7 +69,7 @@ For full library configuration and code please refer to [webpack-library-example
 ## Configure webpack
 
 Now the agenda is to bundle this library
-  - Without bundling lodash but requiring it to be loaded by the consumer.
+  - Without bundling `lodash` but requiring it to be loaded by the consumer.
   - Name of the library is `webpack-numbers` and the variable is `webpackNumbers`.
   - Library can be imported as `import webpackNumbers from 'webpack-numbers'` or `require('webpack-numbers')`.
   - Library can be accessed through global variable `webpackNumbers` when included through `script` tag.
@@ -80,11 +82,12 @@ Add basic webpack configuration.
 __webpack.config.js__
 
 ```javascript
+var path = require('path');
 
 module.exports = {
     entry: './src/index.js',
     output: {
-        path: './dist',
+        path: path.resolve(__dirname, 'dist'),
         filename: 'webpack-numbers.js'
     }
 };
@@ -93,24 +96,6 @@ module.exports = {
 
 This adds basic configuration to bundle the library.
 
-### Add Loaders
-
-But it will not work without adding relevant loaders for transpiling the code.
-Here, we need a [`json-loader`](https://github.com/webpack/json-loader) is required to precompile our json fixture file.
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-    // ...
-    module: {
-        rules: [{
-            test: /.json$/,
-            use: 'json-loader'
-        }]
-    }
-};
-```
 ### Add `externals`
 
 Now, if you run `webpack`, you will find that a largish bundle file is created. If you inspect the file, you will find that lodash has been bundled along with your code.
@@ -135,7 +120,7 @@ module.exports = {
 };
 ```
 
-This means that your library expects a dependency named `lodash` to be available in the consumers environment.
+This means that your library expects a dependency named `lodash` to be available in the consumer's environment.
 
 ### Add `libraryTarget`
 

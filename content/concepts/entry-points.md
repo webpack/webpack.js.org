@@ -3,6 +3,7 @@ title: Entry Points
 sort: 2
 contributors:
   - TheLarkInn
+  - chrisVillanueva
 ---
 
 Like we mentioned in the [introduction](/get-started/#using-webpack-with-a-config), there are multiple ways to define the `entry` property in your webpack configuration. We will show you the ways you **can** configure the `entry` property, in addition to explaining why it may be useful to you.
@@ -21,7 +22,7 @@ const config = {
 module.exports = config;
 ```
 
-The single entry syntax for the `entry` property is a short hand for:
+The single entry syntax for the `entry` property is a shorthand for:
 
 ```javascript
 const config = {
@@ -52,7 +53,7 @@ const config = {
 
 The object syntax is more verbose. However, this is the most scalable way of defining entry/entries in your application.
 
-T> **"Scalable webpack configurations"** are ones that can be reused and combined with other partial configurations. This is a popular technique used to separate concerns by environment, build target and runtime. They are then merged together using specialized tools like [webpack-merge](https://github.com/survivejs/webpack-merge).
+T> **"Scalable webpack configurations"** are ones that can be reused and combined with other partial configurations. This is a popular technique used to separate concerns by environment, build target and runtime. They are then merged using specialized tools like [webpack-merge](https://github.com/survivejs/webpack-merge).
 
 ## Scenarios
 

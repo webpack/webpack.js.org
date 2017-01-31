@@ -4,6 +4,7 @@ sort: 16
 contributors:
   - sokra
   - skipjack
+  - terinjokes
 ---
 
 ?> These are all the other options that might not need an entire page. Either we need to create new pages for them, move them to an existing page, or keep an **Other Options** section like this and replace this TODO with a short description/lead-in paragraph.
@@ -20,7 +21,11 @@ amd: {
 }
 ```
 
-?> I don't think this is very clear, at least not without a link pointing to what this might be used for.
+Certain popular modules written for AMD, most notably jQuery versions 1.7.0 to 1.9.1, will only register as an AMD module if the loader indicates it has taken [special allowances](https://github.com/amdjs/amdjs-api/wiki/jQuery-and-AMD) for multiple versions being included on a page.
+The allowances were the ability to restrict registrations to a specific version or to support different sandboxes with different defined modules.
+
+This option allows you to set the key your module looks for to a truthy value.
+As it happens, the AMD support in webpack ignores the defined name anyways.
 
 
 ## `bail`

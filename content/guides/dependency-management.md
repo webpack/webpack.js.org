@@ -3,6 +3,7 @@ title: Dependency Management
 sort: 6
 contributors:
   - ndelangen
+  - chrisVillanueva
 ---
 
 > es6 modules
@@ -20,7 +21,7 @@ Example:
 require("./template/" + name + ".ejs");
 ```
 
-Webpack parses the `require()` call and extracts some information:
+webpack parses the `require()` call and extracts some information:
 
 ```
 Directory: ./template
@@ -49,7 +50,7 @@ You can create your own context with the `require.context()` function.
 It allows you to pass in a directory to search, a flag indicating whether subdirectories should be searched
 too, and a regular expression to match files against.
 
-Webpack parses for `require.context()` in the code while building.
+webpack parses for `require.context()` in the code while building.
 
 The syntax is as follows:
 
@@ -92,6 +93,6 @@ The exported function has 3 properties: `resolve`, `keys`, `id`.
     r.keys().forEach(key => cache[key] = r(key));
   }
   importAll(require.context('../components/', true, /\.js$/));
-  // At build-time cache will be polulated with all required modules.
+  // At build-time cache will be populated with all required modules.
   ```
 - `id` is the module id of the context module. This may be useful for `module.hot.accept`.

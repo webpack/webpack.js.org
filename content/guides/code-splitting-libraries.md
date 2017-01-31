@@ -3,15 +3,18 @@ title: Code Splitting - Libraries
 sort: 4
 contributors:
   - pksjce
+  - chrisVillanueva
+  - johnstew
+  - rafde
 ---
 
 A typical application uses third party libraries for framework/functionality needs. Particular versions of these libraries are used and code here does not change often. However, the application code changes frequently.
 
-Bundling application code with third party code would be inefficient. This is because the browser can cache asset files based on the cache header and files can be cached without needing to call the cdn again if it's contents don't change. To take advantage of this, we want to keep the hash of the vendor files constant regardless of application code changes.
+Bundling application code with third party code would be inefficient. This is because the browser can cache asset files based on the cache header and files can be cached without needing to call the cdn again if its contents don't change. To take advantage of this, we want to keep the hash of the vendor files constant regardless of application code changes.
 
 We can do this only when we separate the bundles for vendor and application code.
 
-Let's consider a sample application, that uses [momentjs](https://www.npmjs.com/package/moment) which is a time formatting library commonly used.
+Let's consider a sample application that uses [momentjs](https://www.npmjs.com/package/moment), a commonly used time formatting library.
 
 Install `moment` as follows in your application directory.
 
@@ -21,7 +24,6 @@ The index file will require `moment` as a dependency and log the current date as
 
 __index.js__
 ```javascript
-
 var moment = require('moment');
 console.log(moment().format());
 
@@ -32,13 +34,14 @@ We can bundle the application with webpack using the following config
 __webpack.config.js__
 
 ```javascript
+var path = require('path');
 
 module.exports = function(env) {
     return {
         entry: './index.js',
         output: {
             filename: '[chunkhash].[name].js',
-            path: './dist'
+            path: path.resolve(__dirname, 'dist')
         }
     }
 }
@@ -55,6 +58,7 @@ Let's try to mitigate this by adding a separate entry point for `moment` and nam
 __webpack.config.js__
 
 ```javascript
+var path = require('path');
 
 module.exports = function(env) {
     return {
@@ -64,7 +68,7 @@ module.exports = function(env) {
         },
         output: {
             filename: '[chunkhash].[name].js',
-            path: './dist'
+            path: path.resolve(__dirname, 'dist')
         }
     }
 }
@@ -83,8 +87,9 @@ We can modify our webpack config file to use the `CommonsChunkPlugin` as follows
 __webpack.config.js__
 
 ```javascript
-
 var webpack = require('webpack');
+var path = require('path');
+
 module.exports = function(env) {
     return {
         entry: {
@@ -93,7 +98,7 @@ module.exports = function(env) {
         },
         output: {
             filename: '[chunkhash].[name].js',
-            path: './dist'
+            path: path.resolve(__dirname, 'dist')
         },
         plugins: [
             new webpack.optimize.CommonsChunkPlugin({
@@ -104,6 +109,38 @@ module.exports = function(env) {
 }
 ```
 Now run `webpack` on your application. Bundle inspection shows that `moment` code is present only in the vendor bundle.
+
+## Implicit Common Vendor Chunk
+
+You can configure a `CommonsChunkPlugin` instance to only accept vendor libraries.
+ 
+ __webpack.config.js__
+ 
+```javascript
+var webpack = require('webpack');
+var path = require('path');
+
+module.exports = function() {
+    return {
+        entry: {
+            main: './index.js'
+        },
+        output: {
+            filename: '[chunkhash].[name].js',
+            path: path.resolve(__dirname, 'dist')
+        },
+        plugins: [
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor',
+                minChunks: function (module) {
+                   // this assumes your vendor imports exist in the node_modules directory
+                   return module.context && module.context.indexOf('node_modules') !== -1;
+                }
+            })
+        ]
+    };
+}
+```
 
 ## Manifest File
 
@@ -117,8 +154,9 @@ To prevent this, we need extract out the runtime into a separate manifest file. 
 __webpack.config.js__
 
 ```javascript
-
 var webpack = require('webpack');
+var path = require('path');
+
 module.exports = function(env) {
     return {
         entry: {
@@ -127,7 +165,7 @@ module.exports = function(env) {
         },
         output: {
             filename: '[chunkhash].[name].js',
-            path: './dist'
+            path: path.resolve(__dirname, 'dist')
         },
         plugins: [
             new webpack.optimize.CommonsChunkPlugin({

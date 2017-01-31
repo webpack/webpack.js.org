@@ -71,6 +71,17 @@ module.exports = {
       }
     ),
 
+    development: section(
+      'Development',
+      function() {
+        return require.context(
+          'json-loader!yaml-frontmatter-loader!./content/development',
+          true,
+          /^\.\/.*\.md$/
+        );
+      }
+    ),
+
     configuration: section(
       'Configuration',
       function() {
@@ -137,7 +148,7 @@ module.exports = {
         return combineContexts(content, generated);
       }
     ),
-    
+
     vote: {
       path() {
         return require('./components/vote/list.jsx').default
@@ -166,7 +177,7 @@ module.exports = {
 
 function root(contentCb) {
   return {
-    title: 'Webpack',
+    title: 'webpack',
     path: function() { // Load path content
       return contentCb();
     },
@@ -233,7 +244,7 @@ function combineContexts(context1, context2) {
   webpackContext.keys = () => {
     let keys1 = context1.keys();
     let keys2 = context2.keys();
-    return _.chain(keys1).concat(keys2).uniq().value();
+    return _.chain(keys1).concat(keys2).sortBy().uniq().value();
   };
   return webpackContext;
 }

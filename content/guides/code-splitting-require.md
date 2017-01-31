@@ -1,8 +1,10 @@
 ---
-title: Code Splitting - Using RequireJS
+title: Code Splitting - Using require.ensure
 sort: 5
 contributors:
   - pksjce
+  - rahulcs
+  - johnstew
 ---
 
 In this section, we will discuss how webpack splits code using `require.ensure()`.
@@ -24,7 +26,7 @@ This is an array of strings where we can declare all the modules that need to be
 This is the callback function that webpack will execute once the dependencies are loaded. An implementation of the require object is sent as a parameter to this function. This is so that, we can further `require()` the dependencies and any other modules for execution.
 
 #### chunkName
-The chunkName is the name given to the chunk created by this particular `require.ensure()`. By giving the same name at various different split points of `require.ensure()`, we can make sure all the dependencies are collectively put in the same bundle.
+The chunkName is the name given to the chunk created by this particular `require.ensure()`. By giving the same name at different split points of `require.ensure()`, we can make sure all the dependencies are collectively put in the same bundle.
 
 Let us consider the following project
 
@@ -37,7 +39,7 @@ Let us consider the following project
     |    |-- b.js
     webpack.config.js
     |
-    dist 
+    dist
 ```
 
 ```javascript
@@ -57,13 +59,14 @@ console.log('***** I AM b *****');
 
 ```javascript
 \\ webpack.config.js
+var path = require('path');
 
 module.exports = function(env) {
     return {
         entry: './js/entry.js',
         output: {
             filename: 'bundle.js',
-            path: './dist'
+            path: path.resolve(__dirname, 'dist')
         }
     }
 }
@@ -73,6 +76,8 @@ On running webpack on this project, we find that webpack has created two new bun
 `entry.js` and `a.js` are bundled in `bundle.js`.
 
 `b.js` is bundled in `0.bundle.js`.
+
+?> `require.ensure` relies on `Promises` internally. If you use `require.ensure` with older browsers, remember to shim `Promise.` [es6-promise polyfill](https://github.com/stefanpenner/es6-promise).
 
 ## Gotchas for `require.ensure()`
 
