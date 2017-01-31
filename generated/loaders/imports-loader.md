@@ -96,3 +96,7 @@ imports-loader?define=>false
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/loaders/imports-loader/
