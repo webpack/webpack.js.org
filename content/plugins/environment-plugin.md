@@ -5,8 +5,7 @@ contributors:
   - einarlove
 ---
 
-The EnvironmentPlugin is a shorthand for using the [define-plugin](/plugins/define-plugin)
-on [`process.env`](https://nodejs.org/api/process.html#process_process_env) keys.
+The EnvironmentPlugin is a shorthand for using the [define-plugin](/plugins/define-plugin) on [`process.env`](https://nodejs.org/api/process.html#process_process_env) keys.
 
 ```js
 new webpack.EnvironmentPlugin(keys)
