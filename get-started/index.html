@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/f0dbf787b46d9191aa88.css" rel="stylesheet">
+      <link href="/dd24eb7445e117a1dfeb.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -24,8 +24,10 @@ webpack simplifies your workflow by quickly constructing a dependency graph of y
 <pre><code class="lang-bash"><span class="token function">mkdir</span> webpack-demo <span class="token operator">&amp;&amp;</span> <span class="token function">cd</span> webpack-demo
 npm init -y
 npm <span class="token function">install</span> --save-dev webpack
-./node_modules/.bin/webpack --help <span class="token comment" spellcheck="true"># Shows a list of valid cli commands</span>
+</code></pre>
+<pre><code class="lang-bash">./node_modules/.bin/webpack --help <span class="token comment" spellcheck="true"># Shows a list of valid cli commands</span>
 .\node_modules\.bin\webpack --help <span class="token comment" spellcheck="true"># For windows users</span>
+webpack --help <span class="token comment" spellcheck="true"># If you installed webpack globally</span>
 </code></pre>
 <p>Now create a subdirectory <code>app</code> with an <code>index.js</code> file.</p>
 <p><strong>app/index.js</strong></p>
@@ -85,15 +87,21 @@ function component () {
 <p>Now run <code>webpack</code> on this folder with <code>index.js</code> as the entry file and <code>bundle.js</code> as the output file in which all code required for the page is bundled.</p>
 <pre><code class="lang-bash">./node_modules/.bin/webpack app/index.js dist/bundle.js
 
-Hash: a3c861a7d42fc8944524
+Hash: ff6c1d39b26f89b3b7bb
 Version: webpack 2.2.0
-Time: 90ms
-   Asset     Size  Chunks             Chunk Names
-index.js  1.56 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  main
-   <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./app/index.js 170 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+Time: 385ms
+    Asset    Size  Chunks                    Chunk Names
+bundle.js  544 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  main
+   <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./~/lodash/lodash.js 540 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>1<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 509 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>2<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>3<span class="token punctuation">]</span> ./app/index.js 278 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
 </code></pre>
-<blockquote class="tip"><div class="tip-content"> Output may vary. If the build is successful then you are good to go. </div></blockquote><blockquote class="tip"><div class="tip-content"> If you <a href="/guides/installation#global-installation">installed webpack globally</a>, you have to invoke webpack using <code>webpack</code>. </div></blockquote><p>Open <code>index.html</code> in your browser to see the result of a successful bundle.
+<blockquote class="tip"><div class="tip-content"> Output may vary. If the build is successful then you are good to go. </div></blockquote><p>Open <code>index.html</code> in your browser to see the result of a successful bundle.
 You should see a page with the following text: &apos;Hello webpack&apos;.</p>
+<h2 class="header"><a class="anchor" href="#using-es6-modules-with-webpack" id="using-es6-modules-with-webpack"></a><span class="text">Using ES6 modules with webpack</span><a class="icon-link" href="#using-es6-modules-with-webpack"></a></h2>
+<p>Noticed the use of <a href="https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/import">ES6 module import</a> (alias ES2015, <em>harmony</em>) in <code>app/index.js</code>? Although <code>import</code>/<code>export</code> statements are not supported in browsers (yet), using them is fine since webpack will replace those instructions with an ES5 compatible wrapper code. Inspect <code>dist/bundle.js</code> to convince yourself.</p>
+<p>Note that webpack will not touch your code other than <code>import</code>/<code>export</code>. In case you are using other <a href="http://es6-features.org/">ES6 features</a>, make sure to use a transpiler such as <a href="https://babeljs.io/">Babel</a> or <a href="https://buble.surge.sh/guide/">Bubl&#xE9;</a>.</p>
 <h2 class="header"><a class="anchor" href="#using-webpack-with-a-config" id="using-webpack-with-a-config"></a><span class="text">Using webpack with a config</span><a class="icon-link" href="#using-webpack-with-a-config"></a></h2>
 <p>For a more complex configuration, we can use a configuration file that webpack can reference to bundle your code. After you create a <code>webpack.config.js</code> file, you can represent the CLI command above
 with the following config settings.</p>
@@ -111,12 +119,15 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>This file can be run by webpack as follows.</p>
 <pre><code class="lang-bash">webpack --config webpack.config.js
 
-Hash: a3c861a7d42fc8944524
+Hash: ff6c1d39b26f89b3b7bb
 Version: webpack 2.2.0
-Time: 90ms
-   Asset     Size  Chunks             Chunk Names
-index.js  1.56 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  main
-   <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./app/index.js 170 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+Time: 390ms
+    Asset    Size  Chunks                    Chunk Names
+bundle.js  544 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  main
+   <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./~/lodash/lodash.js 540 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>1<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 509 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>2<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>3<span class="token punctuation">]</span> ./app/index.js 278 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
 </code></pre>
 <blockquote class="tip"><div class="tip-content"> If a <code>webpack.config.js</code> is present, <code>webpack</code> command picks it up by default. </div></blockquote><blockquote class="tip"><div class="tip-content"> If you created a successful <code>dist/bundle.js</code> file using the &apos;Creating a bundle&apos; section, delete the <code>dist</code> subdirectory to validate output from your <code>webpack.config.js</code> file settings. </div></blockquote><p>The config file allows for all the flexibility in using webpack. We can add loader rules, plugins, resolve options and many other enhancements to our bundles using this configuration file.</p>
 <h2 class="header"><a class="anchor" href="#using-webpack-with-npm" id="using-webpack-with-npm"></a><span class="text">Using webpack with npm</span><a class="icon-link" href="#using-webpack-with-npm"></a></h2>
