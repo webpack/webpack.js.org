@@ -81,7 +81,7 @@ and then import it.
 __app/index.js__
 
 ```diff
-+ import _ from 'lodash';
++ import * as _ from 'lodash';
 
 function component () {
   ...
