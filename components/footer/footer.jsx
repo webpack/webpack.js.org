@@ -7,7 +7,7 @@ import './footer-style';
 
 export default (props) => {
   return (
-    <div className="footer">
+    <footer className="footer">
       <Container className="footer__inner">
         <section className="footer__left">
           <Link className="footer__link" to="/get-started">起步</Link>
@@ -31,6 +31,6 @@ export default (props) => {
           <CC />
         </section>
       </Container>
-    </div>
+    </footer>
   );
 };
