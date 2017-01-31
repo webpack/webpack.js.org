@@ -20,7 +20,7 @@ Create a demo directory to try out webpack. [Install webpack](/guides/installati
 ```bash
 mkdir webpack-demo && cd webpack-demo
 npm init -y
-npm install --save-dev webpack@beta
+npm install --save-dev webpack
 ./node_modules/.bin/webpack --help # Shows a list of valid cli commands
 .\node_modules\.bin\webpack --help # For windows users
 ```
