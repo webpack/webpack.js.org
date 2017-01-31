@@ -107,13 +107,15 @@ Now run `webpack` on this folder with `index.js` as the entry file and `bundle.j
 ```bash
 ./node_modules/.bin/webpack app/index.js dist/bundle.js
 
-Hash: a3c861a7d42fc8944524
+Hash: ff6c1d39b26f89b3b7bb
 Version: webpack 2.2.0
-Time: 90ms
-   Asset     Size  Chunks             Chunk Names
-index.js  1.56 kB       0  [emitted]  main
-   [0] ./app/index.js 170 bytes {0} [built]
-
+Time: 385ms
+    Asset    Size  Chunks                    Chunk Names
+bundle.js  544 kB       0  [emitted]  [big]  main
+   [0] ./~/lodash/lodash.js 540 kB {0} [built]
+   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
+   [3] ./app/index.js 278 bytes {0} [built]
 ```
 T> Output may vary. If the build is successful then you are good to go.
 
@@ -121,6 +123,10 @@ T> If you [installed webpack globally](/guides/installation#global-installation)
 
 Open `index.html` in your browser to see the result of a successful bundle.
 You should see a page with the following text: 'Hello webpack'.
+
+## Using ES6 modules with webpack
+
+Noticed the use of [ES6 module import](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/import) (alias ES2015, *harmony*) in `app/index.js`? Although `import`/`export` statements are not supported in browsers (yet), using them is fine since webpack will replace those instructions with an ES5 compatible wrapper code. Inspect `dist/bundle.js` to convince yourself.
 
 ## Using webpack with a config
 
@@ -145,13 +151,15 @@ This file can be run by webpack as follows.
 ```bash
 webpack --config webpack.config.js
 
-Hash: a3c861a7d42fc8944524
+Hash: ff6c1d39b26f89b3b7bb
 Version: webpack 2.2.0
-Time: 90ms
-   Asset     Size  Chunks             Chunk Names
-index.js  1.56 kB       0  [emitted]  main
-   [0] ./app/index.js 170 bytes {0} [built]
-
+Time: 390ms
+    Asset    Size  Chunks                    Chunk Names
+bundle.js  544 kB       0  [emitted]  [big]  main
+   [0] ./~/lodash/lodash.js 540 kB {0} [built]
+   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
+   [3] ./app/index.js 278 bytes {0} [built]
 ```
 
 T> If a `webpack.config.js` is present, `webpack` command picks it up by default.
