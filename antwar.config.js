@@ -38,6 +38,14 @@ module.exports = {
       }
     ),
 
+    'get-started': {
+      redirects: {
+        '': '/guides/get-started',
+        'install-webpack': '/guides/installation',
+        'why-webpack': '/guides/why-webpack',
+      }
+    },
+
     concepts: section(
       'Concepts',
       function() {
