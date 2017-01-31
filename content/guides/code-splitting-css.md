@@ -47,7 +47,7 @@ Adapting from the previous example with the `css-loader`, we should add `Extract
 
 ```javascript
 ...
-loader: ExtractTextPlugin.extract('css-loader?sourceMap') //Can be used without sourcemaps too.
+use: ExtractTextPlugin.extract({loader:'css-loader',options:{sourceMap:true}) //Can be used without sourcemaps too.
 ...
 ```
 
@@ -77,8 +77,11 @@ module.exports = function () {
             rules: [{
                 test: /\.css$/,
                 exclude: /node_modules/,
-                loader: ExtractTextPlugin.extract({
-                    loader: 'css-loader?sourceMap'
+                use: ExtractTextPlugin.extract({
+                    loader: 'css-loader',
+                    options: {
+                      sourceMap: true
+                    }
                 })
             }]
         },
