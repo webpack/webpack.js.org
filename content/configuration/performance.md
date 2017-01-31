@@ -5,23 +5,23 @@ contributors:
   - thelarkinn
 ---
 
-These options allows you to control how webpack notifies you of assets and entrypoints that exceed a specific file limit. 
-This feature was inspired by the idea of [webpack Performance Budgets](https://github.com/webpack/webpack/issues/3216).
+这些选项可以控制 webpack 如何通知「资源(asset)和入口起点超过指定文件限制」。
+此功能受到 [webpack 性能评估](https://github.com/webpack/webpack/issues/3216)的启发。
 
 ## `performance`
 
 `object`
 
-Configure how performance hints are shown. For example if you have an asset that is over 250kb, webpack will emit a warning notifiying you of this.
+配置如何展示性能提示。例如，如果一个资源超过 250kb，webpack 会对此输出一个警告来通知你。
 
 
 ## `performance.hints`
 
 `boolean | "error" | "warning"`
 
-Turns hints on/off. In addition, tells webpack to throw either an error or a warning when hints are found. This property is set to `"warning"` by default.
+打开/关闭提示。此外，当找到提示时，告诉 webpack 抛出一个错误或警告。此属性默认设置为 `"warning"`。
 
-Given an asset is created that is over 250kb:
+给定一个创建后超过 250kb 的资源：
 
 ```js
 performance: {
@@ -29,7 +29,7 @@ performance: {
 }
 ```
 
-No hint warnings or errors are shown.
+不展示警告或错误提示。
 
 ```js
 performance: {
@@ -37,7 +37,7 @@ performance: {
 }
 ```
 
-A warning will be displayed notifying you of a large asset. We recommend something like this for development environments.
+将展示一条警告，通知你这是体积大的资源。在开发环境，我们推荐这样。
 
 ```js
 performance: {
@@ -45,13 +45,13 @@ performance: {
 }
 ```
 
-An error will be displayed notifying you of a large asset. We recommend using `hints: "error"` during production builds to help prevent deploying production bundles that are too large, impacting webpage performance. 
+将展示一条错误，通知你这是体积大的资源。在生产环境构建时，我们推荐使用 `hints: "error"`，有助于防止把体积巨大的 bundle 部署到生产环境，从而影响网页的性能。
 
 ## `performance.maxEntrypointSize`
 
 `int`
 
-An entrypoint represents all assets that would be utilized during initial load time for a specific entry. This option controls when webpack should emit performance hints based on the maximum entrypoint size. The default value is `250000` (bytes).
+入口起点表示针对指定的入口，对于所有资源，要充分利用初始加载时(initial load time)期间。此选项根据入口起点的最大体积，控制 webpack 何时生成性能提示。默认值是：`250000` (bytes)。
 
 ```js
 performance: {
@@ -63,7 +63,7 @@ performance: {
 
 `int`
 
-An asset is any emitted file from webpack. This option controls when webpack emits a performance hint based on individual asset size. The default value is `250000` (bytes).
+资源(asset)是从 webpack 生成的任何文件。此选项根据单个资源体积，控制 webpack 何时生成性能提示。默认值是：`250000` (bytes)。
 
 
 ```js
@@ -76,7 +76,7 @@ performance: {
 
 `Function`
 
-This property allows webpack to control what files are used to calculate performance hints. The default function is seen below: 
+此属性允许 webpack 控制用于计算性能提示的文件。默认函数如下：
 
 ```js
 function(assetFilename) {
@@ -84,7 +84,7 @@ function(assetFilename) {
 };
 ```
 
-You can override this property by passing your own function in: 
+你可以通过传递自己的函数来覆盖此属性：
 
 ```js 
 performance: {
@@ -94,7 +94,7 @@ performance: {
 }
 ```
 
-The example above will only give you performance hints based on `.js` files.
+以上示例将只给你基于 `.js` 文件的性能提示。
 
 ***
 
