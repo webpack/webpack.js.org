@@ -77,3 +77,7 @@ require("url-loader?prefix=img/!./file.png");
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/loaders/url-loader/
