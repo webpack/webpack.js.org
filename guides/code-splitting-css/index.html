@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/e401be77865fa4d3b730.css" rel="stylesheet">
+      <link href="/40f63f61aa22ba5dab5c.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -45,7 +45,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h3 class="header"><a class="anchor" href="#in-the-loader" id="in-the-loader"></a><span class="text">In the loader</span><a class="icon-link" href="#in-the-loader"></a></h3>
 <p>Adapting from the previous example with the <code>css-loader</code>, we should add <code>ExtractTextPlugin</code> as follows</p>
 <pre><code class="lang-javascript"><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-loader<span class="token punctuation">:</span> ExtractTextPlugin<span class="token punctuation">.</span><span class="token function">extract</span><span class="token punctuation">(</span><span class="token string">&apos;css-loader?sourceMap&apos;</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//Can be used without sourcemaps too.</span>
+use<span class="token punctuation">:</span> ExtractTextPlugin<span class="token punctuation">.</span><span class="token function">extract</span><span class="token punctuation">(</span><span class="token punctuation">{</span>loader<span class="token punctuation">:</span><span class="token string">&apos;css-loader&apos;</span><span class="token punctuation">,</span>options<span class="token punctuation">:</span><span class="token punctuation">{</span>sourceMap<span class="token punctuation">:</span><span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//Can be used without sourcemaps too.</span>
 <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 </code></pre>
 <h3 class="header"><a class="anchor" href="#in-the-plugin" id="in-the-plugin"></a><span class="text">In the plugin</span><a class="icon-link" href="#in-the-plugin"></a></h3>
@@ -68,8 +68,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
             rules<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
                 test<span class="token punctuation">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span>
                 exclude<span class="token punctuation">:</span> <span class="token regex">/node_modules/</span><span class="token punctuation">,</span>
-                loader<span class="token punctuation">:</span> ExtractTextPlugin<span class="token punctuation">.</span><span class="token function">extract</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-                    loader<span class="token punctuation">:</span> <span class="token string">&apos;css-loader?sourceMap&apos;</span>
+                use<span class="token punctuation">:</span> ExtractTextPlugin<span class="token punctuation">.</span><span class="token function">extract</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+                    loader<span class="token punctuation">:</span> <span class="token string">&apos;css-loader&apos;</span><span class="token punctuation">,</span>
+                    options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                      sourceMap<span class="token punctuation">:</span> <span class="token boolean">true</span>
+                    <span class="token punctuation">}</span>
                 <span class="token punctuation">}</span><span class="token punctuation">)</span>
             <span class="token punctuation">}</span><span class="token punctuation">]</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>

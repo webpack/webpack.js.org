@@ -10,9 +10,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/concepts/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/contribute/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/configuration/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/contribute/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/development/index.html</loc>
     </url>    <url>
@@ -102,11 +102,11 @@
     </url>    <url>
         <loc>https://webpack.js.org/development/release-process/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/get-started/install-webpack/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/get-started/why-webpack/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/guides/author-libraries/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/get-started/install-webpack/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/guides/build-performance/index.html</loc>
     </url>    <url>
@@ -142,9 +142,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/guides/production-build/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/guides/shimming/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/guides/public-path/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/guides/shimming/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/guides/webpack-and-typescript/index.html</loc>
     </url>    <url>
