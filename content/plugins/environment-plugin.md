@@ -1,6 +1,7 @@
 ---
 title: environment-plugin
 contributors:
+  - simon04
   - einarlove
 ---
 
