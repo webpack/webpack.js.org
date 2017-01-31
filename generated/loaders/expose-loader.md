@@ -1,34 +1,31 @@
 ---
 title: expose-loader
-source: https://raw.githubusercontent.com/webpack/expose-loader/master/README.md
-edit: https://github.com/webpack/expose-loader/edit/master/README.md
+source: https://raw.githubusercontent.com/webpack-contrib/expose-loader/master/README.md
+edit: https://github.com/webpack-contrib/expose-loader/edit/master/README.md
 ---
 # expose loader for webpack
 
-The expose loader adds modules to the global object. This is useful
-for debugging, or supporting libraries that depend on libraries in
-globals.
+expose loader 用来把模块暴露到全局变量。这个功对调试或者支持依赖其他全局库的库时很有用。
 
-**Note**: Modules must be `require()`'d within in your bundle, or they will not
-be exposed.
+** 注意**: 模块必须在你的 bundle 中被 `require()` 过，否则他们将不会被暴露。
 
-## Usage
+##  用法
 
 ``` javascript
 require("expose-loader?libraryName!./file.js");
-// Exposes the exports for file.js to the global context on property "libraryName".
-// In web browsers, window.libraryName is then available.
+// 通过属性名 "libraryName" 暴露 file.js 的 exports 到全局上下文。
+// 在浏览器中，就将可以使用 window.libraryName 。
 ```
 
-This line works to expose React to the web browser to enable the Chrome React devtools:
+下面这行代码暴露 React 到浏览器全局，用来开启 Chrome React devtools ：
 
 ```
 require("expose-loader?React!react");
 ```
 
-Thus, `window.React` is then available to the Chrome React devtools extension.
+然后，`window.React` 就可以被 Chrome React devtools 扩展使用。
 
-Alternately, you can set this in your config file:
+或者，你可以通过配置文件来设置：
 
 ```
 module: {
@@ -37,7 +34,7 @@ module: {
   ]
 }
 ```
-Also for multiple expose you can use `!` in loader string:
+如果要重复暴露到多个变量，可以在加载器字符串中使用 `!` ：
 ```
 module: {
   loaders: [
@@ -46,14 +43,9 @@ module: {
 }
 ```
 
-The `require.resolve` is a node.js call (unrelated to `require.resolve` in webpack
-processing -- check the node.js docs instead). `require.resolve` gives you the
-absolute path to the module ("/.../app/node_modules/react/react.js"). So the
-expose only applies to the react module. And it's only exposed when used in the
-bundle.
+`require.resolve` 是一个 node.js 调用（与 webpack 处理中的 `require.resolve` 无关 —— 可以阅读 node.js 文档）。`require.resolve` 用来得到模块对应的绝对路径（"/.../app/node_modules/react/react.js"），所以这里只会对 React 进行暴露。并且只在 bundle 中用到它时进行暴露。
 
-
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
+[文档：使用加载器](http://webpack.github.io/docs/using-loaders.html)
 
 ## License
 

@@ -1,39 +1,39 @@
 ---
 title: imports-loader
-source: https://raw.githubusercontent.com/webpack/imports-loader/master/README.md
-edit: https://github.com/webpack/imports-loader/edit/master/README.md
+source: https://raw.githubusercontent.com/webpack-contrib/imports-loader/master/README.md
+edit: https://github.com/webpack-contrib/imports-loader/edit/master/README.md
 ---
 # imports loader for webpack
 
-The imports loader allows you to use modules that depend on specific global variables.
+imports loader 允许你依赖特定的全局变量来使用模块。
 
-This is useful for third-party modules that rely on global variables like `$` or `this` being the `window` object. The imports loader can add the necessary `require('whatever')` calls, so those modules work with webpack.
+这对一些依赖全局变量的第三方模块（例如 `window` 下的 `$` 或者 `this`）很有用。imports loader 会添加必要的 `require('whatever')` 调用，让这些模块可以在 webpack 中使用。
 
-## Installation
+##  安装
 
 ```
 npm install imports-loader
 ```
 
-## Usage
+## 用法
 
-Given you have this file `example.js`
+假设你有 `example.js` 这个文件
 
 ```javascript
 $("img").doSomeAwesomeJqueryPluginStuff();
 ```
 
-then you can inject the `$` variable into the module by configuring the imports-loader like this:
+然后你可以像下面这样通过配置 imports-loader 插入 `$` 变量到模块中：
 
 ``` javascript
 require("imports-loader?$=jquery!./example.js");
 ```
 
-This simply prepends `var $ = require("jquery");` to `example.js`.
+这将简单的把 `var $ = require("jquery");` 前置插入到 `example.js` 中。
 
-### Syntax
+### 语法
 
-Query value | Equals
+加载器查询值 | 含义
 ------------|-------
 `angular` | `var angular = require("angular");`
 `$=jquery` | `var $ = require("jquery");`
@@ -41,9 +41,9 @@ Query value | Equals
 `config=>{size:50}` | `var config = {size:50};`
 `this=>window` | `(function () { ... }).call(window);`
 
-### Multiple values
+### 多个值
 
-Multiple values are separated by comma `,`:
+使用逗号 `,` 来分隔和使用多个值：
 
 ```javascript
 require("imports-loader?$=jquery,angular,config=>{size:50}!./file.js");
@@ -51,7 +51,7 @@ require("imports-loader?$=jquery,angular,config=>{size:50}!./file.js");
 
 ### webpack.config.js
 
-As always, you should rather configure this in your `webpack.config.js`:
+同样的，在你的 `webpack.config.js` 配置文件中进行配置会更好：
 
 ```javascript
 // ./webpack.config.js
@@ -69,29 +69,29 @@ module.exports = {
 };
 ```
 
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
+[文档：使用加载器](http://webpack.github.io/docs/using-loaders.html)
 
-## Typical use-cases
+## 典型的使用场景
 
-### jQuery plugins
+### jQuery 插件
 
 `imports-loader?$=jquery`
 
-### Custom Angular modules
+### 自定义的 Angular 模块
 
 `imports-loader?angular`
 
-### Disable AMD
+### 禁用 AMD
 
-There are many modules that check for a `define` function before using CommonJS. Since webpack is capable of both, they default to AMD in this case, which can be a problem if the implementation is quirky.
+有很多模块在使用 CommonJS 前会进行 `define` 函数的检查。自从 webpack 两种格式都可以使用后，在这种场景下默认使用了 AMD 可能会造成某些问题（如果接口的实现比较古怪）。
 
-Then you can easily disable the AMD path by writing
+你可以像下面这样轻松的禁用 AMD 
 
 ```javascript
 imports-loader?define=>false
 ```
 
-For further hints on compatibility issues, check out [Shimming Modules](http://webpack.github.io/docs/shimming-modules.html) of the official docs.
+关于兼容性问题的更多提示，可以参考官方的文档 [Shimming Modules](http://webpack.github.io/docs/shimming-modules.html)。
 
 ## License
 
