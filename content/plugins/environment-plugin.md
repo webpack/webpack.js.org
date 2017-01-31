@@ -27,7 +27,7 @@ new webpack.EnvironmentPlugin({
 })
 ```
 
-T> Warning is gived if the value is undefined. This can be suppressed with a default value or a value of `null`.
+T> Warning is given if the value is undefined. This can be suppressed with a default value or a value of `null`.
 
 ## Example
 
