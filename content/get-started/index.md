@@ -21,8 +21,12 @@ Create a demo directory to try out webpack. [Install webpack](/guides/installati
 mkdir webpack-demo && cd webpack-demo
 npm init -y
 npm install --save-dev webpack
+```
+
+```bash
 ./node_modules/.bin/webpack --help # Shows a list of valid cli commands
 .\node_modules\.bin\webpack --help # For windows users
+webpack --help # If you installed webpack globally
 ```
 
 Now create a subdirectory `app` with an `index.js` file.
@@ -118,8 +122,6 @@ bundle.js  544 kB       0  [emitted]  [big]  main
    [3] ./app/index.js 278 bytes {0} [built]
 ```
 T> Output may vary. If the build is successful then you are good to go.
-
-T> If you [installed webpack globally](/guides/installation#global-installation), you have to invoke webpack using `webpack`.
 
 Open `index.html` in your browser to see the result of a successful bundle.
 You should see a page with the following text: 'Hello webpack'.
