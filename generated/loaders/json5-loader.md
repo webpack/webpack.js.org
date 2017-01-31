@@ -131,3 +131,7 @@ console.log(appConfig.env) // 'production'
 
 [cover]: https://coveralls.io/repos/github/webpack/json-loader/badge.svg?branch=master
 [cover-url]: https://coveralls.io/github/webpack/json-loader?branch=master
+
+***
+
+> 原文：https://webpack.js.org/loaders/json5-loader/
