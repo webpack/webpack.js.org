@@ -60,7 +60,7 @@ serve
 
 After each compilation, you will need to manually refresh your browser to see the changes.
 
-#### Watch Mode with Chrome DevTools Workspaces
+### Watch Mode with Chrome DevTools Workspaces
 
 If you set up Chrome to [persist changes when saving from the _Sources_ panel](https://medium.com/@rafaelideleon/webpack-your-chrome-devtools-workspaces-cb9cca8d50da)
 so you don't have to refresh the page, you will have to setup webpack to use
