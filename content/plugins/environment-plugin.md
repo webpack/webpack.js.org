@@ -5,11 +5,17 @@ contributors:
   - einarlove
 ---
 
-The EnvironmentPlugin is a shorthand for using the [define-plugin](/plugins/define-plugin) on [`process.env`](https://nodejs.org/api/process.html#process_process_env) keys.
-
+The EnvironmentPlugin is a shorthand for using the [DefinePlugin](/plugins/define-plugin) on [`process.env`](https://nodejs.org/api/process.html#process_process_env) keys.
 ```js
-new webpack.EnvironmentPlugin(keys)
+new webpack.DefinePlugin({
+  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+})
 ```
+can be replaced with
+```js
+new webpack.EnvironmentPlugin([ 'NODE_ENV' ])
+```
+
 
 ## How to use
 The EnvironmentPlugin accepts either an array of keys or an object with default values.
@@ -59,4 +65,4 @@ if ('production' !== 'production' || 'false' === 'true') {
 }
 ```
 
-W> Variables coming from `process.env` are always strings, so unlike [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) variables are stringified before replaced. Undefined variables are an exception.
+W> Variables coming from `process.env` are always strings, so unlike [DefinePlugin](/plugins/define-plugin) variables are stringified before replaced. Undefined variables are an exception.
