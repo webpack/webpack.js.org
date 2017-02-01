@@ -172,7 +172,7 @@ host: "0.0.0.0"
 ```
 
 
-## `devServer.hot` - CLI only
+## `devServer.hot`
 
 `boolean`
 
@@ -185,7 +185,7 @@ hot: true
 ?> Add various other steps needed for this to work. (From my experience, and the current docs it looks like other steps are needed here - not like in the cmd line where it's just a flag)
 
 
-## `devServer.hotOnly`
+## `devServer.hotOnly` - CLI only
 
 `boolean`
 
