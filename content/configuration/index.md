@@ -240,13 +240,13 @@ var path = require('path');
     <details><summary>/* alternative alias syntax (click to show) */</summary>
     [alias](/configuration/resolve#resolve-alias): [
       {
-        **name**: "module",
+        name: "module",
         // the old request
 
-        **alias**: "new-module",
+        alias: "new-module",
         // the new request
 
-        **onlyModule**: true
+        onlyModule: true
         // if true only "module" is aliased
         // if false "module/inner/path" is also aliased
       }
