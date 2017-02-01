@@ -152,7 +152,7 @@ module.exports = {
     output: {
         ...
         library: 'webpackNumbers',
-        libraryTarget:'umd' // Possible value - amd, commonjs, commonjs2, commonjs-module, this, var
+        libraryTarget: 'umd' // Possible value - amd, commonjs, commonjs2, commonjs-module, this, var
     }
     ...
 };
