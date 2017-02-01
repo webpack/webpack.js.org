@@ -90,9 +90,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/configuration/stats/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/configuration/target/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/configuration/watch/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration/target/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/development/how-to-write-a-loader/index.html</loc>
     </url>    <url>
@@ -170,9 +170,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/loaders/jshint-loader/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/json-loader/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/json5-loader/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/loaders/json-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/less-loader/index.html</loc>
     </url>    <url>
@@ -214,9 +214,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/plugins/extract-text-webpack-plugin/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/plugins/html-webpack-plugin/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/plugins/i18n-webpack-plugin/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/plugins/html-webpack-plugin/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/plugins/loader-options-plugin/index.html</loc>
     </url>    <url>
