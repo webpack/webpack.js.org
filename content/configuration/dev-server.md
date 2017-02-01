@@ -172,7 +172,7 @@ host: "0.0.0.0"
 ```
 
 
-## `devServer.hot`
+## `devServer.hot` - CLI only
 
 `boolean`
 
@@ -189,7 +189,7 @@ hot: true
 
 `boolean`
 
-Enables Hot Module Replacement (see [`devServer.hot`](#devserver-hot-)) without page refresh as fallback in case of build failures.
+Enables Hot Module Replacement (see [`devServer.hot`](#devserver-hot)) without page refresh as fallback in case of build failures.
 
 ```js
 hotOnly: true
