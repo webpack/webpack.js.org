@@ -1,5 +1,5 @@
 ---
-title: source-map-dev-tool-plugin
+title: SourceMapDevToolPlugin
 contributors:
     - johnnyreilly
 ---
@@ -23,4 +23,3 @@ new webpack.SourceMapDevToolPlugin(options)
 ## Examples
 
 ?> TODO
-

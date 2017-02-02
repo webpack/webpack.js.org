@@ -1,14 +1,14 @@
 ---
-title: loader-options-plugin
+title: LoaderOptionsPlugin
 contributors:
     - johnnyreilly
 ---
 
 ?> Review this content
 
-The `loader-options-plugin` is unlike other plugins.  It exists to help people move from webpack 1 to webpack 2.  With webpack 2 the schema for a `webpack.config.js` became stricter; no longer open for extension by other loaders / plugins.  With webpack 2 the intention is that you pass `options` directly to loaders / plugins. i.e. options are **not** global / shared.
+The `LoaderOptionsPlugin` is unlike other plugins.  It exists to help people move from webpack 1 to webpack 2.  With webpack 2 the schema for a `webpack.config.js` became stricter; no longer open for extension by other loaders / plugins.  With webpack 2 the intention is that you pass `options` directly to loaders / plugins. i.e. options are **not** global / shared.
 
-However, until a loader has been updated to depend upon options being passed directly to them, the `loader-options-plugin` exists to bridge the gap.  You can configure global / shared loader options with this plugin and all loaders will receive these options.
+However, until a loader has been updated to depend upon options being passed directly to them, the `LoaderOptionsPlugin` exists to bridge the gap.  You can configure global / shared loader options with this plugin and all loaders will receive these options.
 
 In the future this plugin may be removed.
 
@@ -34,4 +34,3 @@ new webpack.LoaderOptionsPlugin({
   }
 })
 ```
-

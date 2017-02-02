@@ -48,8 +48,8 @@ store them in a JSON file.
 ### From The Module View
 
 HMR is an opt-in feature that only affects modules containing HMR code. One example
-would be patching styling through the [style-loader](https://github.com/webpack/style-loader).
-In order for patching to work, style-loader implements the HMR interface; when it
+would be patching styling through the [`style-loader`](https://github.com/webpack/style-loader).
+In order for patching to work, `style-loader` implements the HMR interface; when it
 receives an update through HMR, it replaces the old styles with the new ones.
 
 Similarly, when implementing the HMR interface in a module, you can describe what should

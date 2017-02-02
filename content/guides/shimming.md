@@ -26,8 +26,8 @@ module.exports = {
 };
 ```
 
-## `provide-plugin`
-The [`provide-plugin`](/plugins/provide-plugin) makes a module available as a variable in every other module required by `webpack`. The module is required only if you use the variable.
+## `ProvidePlugin`
+The [`ProvidePlugin`](/plugins/provide-plugin) makes a module available as a variable in every other module required by `webpack`. The module is required only if you use the variable.
 Most legacy modules rely on the presence of specific globals, like jQuery plugins do on `$` or `jQuery`. In this scenario, you can configure webpack to prepend `var $ = require(“jquery”)` every time it encounters the global `$` identifier.
 
 ```javascript
@@ -51,7 +51,7 @@ For example, Some legacy modules rely on `this` being the `window` object. This 
 module.exports = {
   module: {
     rules: [{
-      test: require.resolve("some-module"), 
+      test: require.resolve("some-module"),
       use: 'imports-loader?this=>window'
     }]
   }
@@ -65,7 +65,7 @@ There are modules that support different [module styles](/concepts/modules), lik
 module.exports = {
   module: {
     rules: [{
-      test: require.resolve("some-module"), 
+      test: require.resolve("some-module"),
       use: 'imports-loader?define=>false'
     }]
   }
@@ -81,7 +81,7 @@ Let's say a library creates a global variable that it expects its consumers to u
 module.exports = {
   module: {
     rules: [{
-      test: require.resolve("some-module"), 
+      test: require.resolve("some-module"),
       use: 'exports-loader?file,parse=helpers.parse'
       // adds below code the file's source:
       //  exports["file"] = file;
@@ -93,7 +93,7 @@ module.exports = {
 
 ## `script-loader`
 
-The [script-loader](/loaders/script-loader/) evaluates code in the global context, just like you would add the code into a `script` tag. In this mode, every normal library should work. `require`, `module`, etc. are undefined.
+The [`script-loader`](/loaders/script-loader/) evaluates code in the global context, just like you would add the code into a `script` tag. In this mode, every normal library should work. `require`, `module`, etc. are undefined.
 
 W> The file is added as string to the bundle. It is not minimized by `webpack`, so use a minimized version. There is also no dev tool support for libraries added by this loader.
 
@@ -106,7 +106,7 @@ GLOBAL_CONFIG = {};
 
 ```javascript
 require('script-loader!legacy.js');
-``` 
+```
 
 … basically yields:
 
@@ -116,7 +116,7 @@ eval("GLOBAL_CONFIG = {};");
 
 ## `noParse` option
 
-When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module as [`noParse`](/configuration/module/#module-noparse). Then `webpack` will just include the module without parsing it, which can be used to improve the build time. 
+When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module as [`noParse`](/configuration/module/#module-noparse). Then `webpack` will just include the module without parsing it, which can be used to improve the build time.
 
 W> Any feature requiring the AST, like the `ProvidePlugin`, will not work.
 
