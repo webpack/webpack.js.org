@@ -38,16 +38,13 @@ module.exports = {
       }
     ),
 
-    'get-started': section(
-      'Get-Started',
-      function() {
-        return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/get-started',
-          false,
-          /^\.\/.*\.md$/
-        )
+    'get-started': {
+      redirects: {
+        '': '/guides/get-started',
+        'install-webpack': '/guides/installation',
+        'why-webpack': '/guides/why-webpack',
       }
-    ),
+    },
 
     concepts: section(
       'Concepts',
