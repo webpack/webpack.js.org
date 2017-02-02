@@ -14,3 +14,7 @@ webpack has a rich plugin interface. Most of the features within webpack itself 
 |[compression-webpack-plugin](/plugins/compression-webpack-plugin)|Prepare compressed versions of assets to serve them with Content-Encoding|
 |[i18n-webpack-plugin](/plugins/i18n-webpack-plugin)|Adds i18n support to your bundles|
 |[html-webpack-plugin](/plugins/html-webpack-plugin)| Simplifies creation of HTML files (`index.html`) to serve your bundles|
+
+
+![Awesome](../assets/awesome-badge.svg)
+For more third-party plugins, see the list from [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#webpack-plugins).
