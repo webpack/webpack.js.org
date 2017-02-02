@@ -97,7 +97,7 @@ We also need to change `index.html` to expect a single bundled js file.
   </head>
   <body>
 -   <script src="app/index.js"></script>
-+   <script src="dist/bundle.js"></script>
++   <script src="../dist/bundle.js"></script>
   </body>
 </html>
 ```
