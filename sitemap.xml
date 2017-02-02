@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">    <url>
         <loc>https://webpack.js.org/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/analyze/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/api/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/branding/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/analyze/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/concepts/index.html</loc>
     </url>    <url>
@@ -22,9 +22,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/license/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/organization/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/loaders/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/plugins/index.html</loc>
     </url>    <url>
@@ -152,8 +152,6 @@
     </url>    <url>
         <loc>https://webpack.js.org/guides/why-webpack/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/babel-loader/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/bundle-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/coffee-loader/index.html</loc>
@@ -166,6 +164,8 @@
     </url>    <url>
         <loc>https://webpack.js.org/loaders/exports-loader/index.html</loc>
     </url>    <url>
+        <loc>https://webpack.js.org/loaders/babel-loader/index.html</loc>
+    </url>    <url>
         <loc>https://webpack.js.org/loaders/expose-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/file-loader/index.html</loc>
@@ -176,9 +176,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/loaders/imports-loader/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/json-loader/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/jshint-loader/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/loaders/json-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/json5-loader/index.html</loc>
     </url>    <url>
@@ -224,9 +224,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/plugins/extract-text-webpack-plugin/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/plugins/i18n-webpack-plugin/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/plugins/html-webpack-plugin/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/plugins/i18n-webpack-plugin/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/plugins/loader-options-plugin/index.html</loc>
     </url>    <url>
