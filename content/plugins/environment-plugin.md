@@ -6,63 +6,74 @@ contributors:
 ---
 
 The EnvironmentPlugin is a shorthand for using the [DefinePlugin](/plugins/define-plugin) on [`process.env`](https://nodejs.org/api/process.html#process_process_env) keys.
-```js
+
+## Usage
+
+The EnvironmentPlugin accepts either an array of keys.
+
+```javascript
+new webpack.EnvironmentPlugin(['NODE_ENV', 'DEBUG'])
+```
+
+This is equivalent to the following DefinePlugin application:
+
+```javascript
 new webpack.DefinePlugin({
-  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+  'process.env.DEBUG': JSON.stringify(process.env.DEBUG)
 })
 ```
-can be replaced with
-```js
-new webpack.EnvironmentPlugin([ 'NODE_ENV' ])
-```
 
+T> Not specifying the environment variable raises an "EnvironmentPlugin - `${key}` environment variable is undefined" error.
 
-## How to use
-The EnvironmentPlugin accepts either an array of keys or an object with default values.
+## Usage with default values
 
-```js
-new webpack.EnvironmentPlugin(['NODE_ENV', 'VERSION'])
-```
-
-When given an object, the values are used as defaults for when they are not defined in `process.env`.
+Alternatively, the EnvironmentPlugin supports an object, which maps keys to their default values. The default value for a key is taken if the key is undefined in `process.env`.
 
 ```js
 new webpack.EnvironmentPlugin({
-  NODE_ENV: 'development',
-  VERSION: 33,
+  NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
+  DEBUG: false
 })
 ```
 
-T> Warning is given if the value is undefined. This can be suppressed with a default value or a value of `null`.
+W> Variables coming from `process.env` are always strings.
 
-## Example
+T> Unlike [DefinePlugin](/plugins/define-plugin), default values are applied to `JSON.stringify` by the EnvironmentPlugin.
 
-```js
-new webpack.EnvironmentPlugin({
-  NODE_ENV: 'development',
-  DEBUG: false,
-  TITLE: 'There\'s a problem on the horizon. There is no horizon.'
-})
-```
+T> To specify an unset default value, use `null` instead of `undefined`.
+
+**Example:**
+
+Let's investigate the result when running the previous EnvironmentPlugin configuration on a test file `entry.js`: 
 
 ```js
-// entry.js
-document.title = process.env.TITLE
-
-if (process.env.NODE_ENV !== 'production' || process.env.DEBUG === 'true') {
-  document.title = process.env.TITLE_IN_DEBUG
+if (process.env.NODE_ENV === 'production') {
+  console.log('Welcome to production');
+}
+if (process.env.DEBUG) {
+  console.log('Debugging output');
 }
 ```
 
-When executing `$ NODE_ENV=production webpack` in the terminal to build, entry.js becomes this:
+When executing `NODE_ENV=production webpack` in the terminal to build, `entry.js` becomes this:
 
 ```js
-// entry.js
-document.title = 'There\'s a problem on the horizon. There is no horizon.'
-
-if ('production' !== 'production' || 'false' === 'true') {
-  document.title = process.env.TITLE_IN_DEBUG // undefined
+if ('production' === 'production') { // <-- 'production' from NODE_ENV is taken
+  console.log('Welcome to production');
+}
+if (false) { // <-- default value is taken
+  console.log('Debugging output');
 }
 ```
 
-W> Variables coming from `process.env` are always strings, so unlike [DefinePlugin](/plugins/define-plugin) variables are stringified before replaced. Undefined variables are an exception.
+Running `DEBUG=false webpack` yields:
+
+```js
+if ('development' === 'production') { // <-- default value is taken
+  console.log('Welcome to production');
+}
+if ('false') { // <-- 'false' from DEBUG is taken
+  console.log('Debugging output');
+}
+```
