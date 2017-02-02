@@ -58,8 +58,6 @@ var path = require('path');
     // the name of the exported library
 
     <details><summary>[libraryTarget](/configuration/output#output-librarytarget): "umd", // enum</summary>
-    [libraryTarget](/configuration/output#output-librarytarget): "umd-module", // ES2015 module wrapped in UMD
-    [libraryTarget](/configuration/output#output-librarytarget): "commonjs-module", // ES2015 module wrapped in CommonJS
     [libraryTarget](/configuration/output#output-librarytarget): "commonjs2", // exported with module.exports
     [libraryTarget](/configuration/output#output-librarytarget): "commonjs", // exported as properties to exports
     [libraryTarget](/configuration/output#output-librarytarget): "amd", // defined with AMD defined method
@@ -240,13 +238,13 @@ var path = require('path');
     <details><summary>/* alternative alias syntax (click to show) */</summary>
     [alias](/configuration/resolve#resolve-alias): [
       {
-        **name**: "module",
+        name: "module",
         // the old request
 
-        **alias**: "new-module",
+        alias: "new-module",
         // the new request
 
-        **onlyModule**: true
+        onlyModule: true
         // if true only "module" is aliased
         // if false "module/inner/path" is also aliased
       }

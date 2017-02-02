@@ -3,6 +3,7 @@ title: Development
 sort: 9
 contributors:
   - SpaceK33z
+  - rafde
 ---
 
 On this page we'll explain how to get started with developing and how to choose one of three tools to develop. It is assumed you already have a webpack configuration file.
@@ -59,6 +60,24 @@ serve
 
 After each compilation, you will need to manually refresh your browser to see the changes.
 
+### Watch Mode with Chrome DevTools Workspaces
+
+If you set up Chrome to [persist changes when saving from the _Sources_ panel](https://medium.com/@rafaelideleon/webpack-your-chrome-devtools-workspaces-cb9cca8d50da)
+so you don't have to refresh the page, you will have to setup webpack to use
+
+```javascript
+devtool: "inline-source-map"
+```
+
+to continue editing and saving your changes from Chrome or source files.
+
+There are some _gotchas_ about using workspaces with watch:
+
+- Large chunks (such as a common chunk that is over 1MB) that are rebuilt could cause the page to blank, 
+which will force you to refresh the browser.
+- Smaller chunks will be faster to build than larger chunks since `inline-source-map` is slower 
+due to having to base64 encode the original source code.
+ 
 ### webpack-dev-server
 
 webpack-dev-server provides you with a server and live reloading. This is easy to setup.
@@ -146,3 +165,4 @@ There are many more options you can use. For all configuration options, see the 
 ## References
 
 * [SurviveJS - Automatic Browser Refresh](http://survivejs.com/webpack/developing-with-webpack/automatic-browser-refresh/)
+* [Webpack your Chrome DevTools Workspaces](https://medium.com/@rafaelideleon/webpack-your-chrome-devtools-workspaces-cb9cca8d50da)
