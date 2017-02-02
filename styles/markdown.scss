@@ -98,14 +98,26 @@
     &.tip {
       background-color: #DCF2FD;
       color: #618ca0;
+      .tip-content::before {
+        content: 'ℹ';
+        font-style: normal;
+      }
     }
     &.warning {
       background-color: #fbedb7;
       color: #8c8466;
+      .tip-content::before {
+        content: '⚠';
+        font-style: normal;
+      }
     }
     &.todo {
       background-color: #fbddcd;
       color: #907a6e;
+      .tip-content::before {
+        content: '[TODO]';
+        font-style: normal;
+      }
     }
   }
 
