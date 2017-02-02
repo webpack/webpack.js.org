@@ -127,7 +127,7 @@ See [#2986](https://github.com/webpack/webpack/issues/2986) for the reason behin
 ## `json-loader` is not required anymore
 
 When no loader has been configured for a JSON file, webpack will automatically try to load the JSON
-file with the [json-loader](https://github.com/webpack/json-loader).
+file with the [`json-loader`](https://github.com/webpack/json-loader).
 
 ``` diff
   module: {
@@ -491,7 +491,7 @@ typeof fs.readFileSync === "function";
 typeof readFileSync === "function";
 ```
 
-It is important to note that you will want to tell Babel to not parse these module symbols so webpack can use them. You can do this by setting the following in your `.babelrc` or babel-loader options.
+It is important to note that you will want to tell Babel to not parse these module symbols so webpack can use them. You can do this by setting the following in your `.babelrc` or `babel-loader` options.
 
 **.babelrc**
 
@@ -611,7 +611,7 @@ Having an `ident` on the options object means to be able to reference this optio
 ```
 
 This inline style should not be used by regular code, but it's often used by loader generated code.
-I. e. the style-loader generates a module that `require`s the remaining request (which exports the CSS).
+I. e. the `style-loader` generates a module that `require`s the remaining request (which exports the CSS).
 
 ``` js
 // style-loader generated code (simplified)

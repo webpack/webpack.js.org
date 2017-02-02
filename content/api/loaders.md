@@ -5,7 +5,7 @@ contributors:
     - TheLarkInn
 ---
 
-Loaders allow you to preprocess files as you `require()` or “load” them. Loaders are kind of like “tasks” in other build tools, 
+Loaders allow you to preprocess files as you `require()` or “load” them. Loaders are kind of like “tasks” in other build tools,
 and provide a powerful way to handle front-end build steps. Loaders can transform files from a different language (like CoffeeScript to JavaScript), or inline images as data URLs. Loaders even allow you to do things like `require()` css files right in your JavaScript!
 
 To tell webpack to transform a module with a loader, you can specify the loader in the webpack [configuration](/configuration) file (preferred) or in the module request, such as in a `require()` call.
@@ -30,7 +30,7 @@ module.exports = function(content) {
 };
 ```
 
-### Async Loader 
+### Async Loader
 
 **async-loader.js**
 
@@ -61,11 +61,11 @@ module.exports = function(content) {
 	// This is also allowed if loader is not "raw"
 };
 module.exports.raw = true;
-``` 
+```
 
 ### Pitching Loader
 
-The order of chained loaders are **always** called from right to left. But, in some cases, loaders do not care about the results of the previous loader or the resource. They only care for **metadata**. The `pitch` method on the loaders is called from **left to right** before the loaders are called (from right to left). 
+The order of chained loaders are **always** called from right to left. But, in some cases, loaders do not care about the results of the previous loader or the resource. They only care for **metadata**. The `pitch` method on the loaders is called from **left to right** before the loaders are called (from right to left).
 
 If a loader delivers a result in the `pitch` method the process turns around and skips the remaining loaders, continuing with the calls to the more left loaders. `data` can be passed between pitch and normal call.
 
@@ -82,9 +82,9 @@ module.exports.pitch = function(remainingRequest, precedingRequest, data) {
 };
 ```
 
-## The loader context 
+## The loader context
 
-The loader context represents the properties that are available inside of a loader assigned to the `this` property. 
+The loader context represents the properties that are available inside of a loader assigned to the `this` property.
 
 Given the following example this require call is used:
 In `/abc/file.js`:
@@ -93,7 +93,7 @@ In `/abc/file.js`:
 require("./loader1?xyz!loader2!./resource?rrr");
 ```
 
-### `version` 
+### `version`
 
 **Loader API version.** Currently `2`. This is useful for providing backwards compatibility. Using the version you can specify custom logic or fallbacks for breaking changes.  
 
@@ -227,7 +227,7 @@ addDependency(file: string)
 dependency(file: string) // shortcut
 ```
 
-Adds a file as dependency of the loader result in order to make them watchable. For example, [html-loader](https://github.com/webpack/html-loader) uses this technique as it finds `src` and `src-set` attributes. Then, it sets the url's for those attributes as dependencies of the html file that is parsed.  
+Adds a file as dependency of the loader result in order to make them watchable. For example, [`html-loader`](https://github.com/webpack/html-loader) uses this technique as it finds `src` and `src-set` attributes. Then, it sets the url's for those attributes as dependencies of the html file that is parsed.  
 
 ### `addContextDependency`
 
@@ -279,7 +279,7 @@ Example values: `"web"`, `"node"`
 
 This boolean is set to true when this is compiled by webpack.
 
-T> Loaders were originally designed to also work as Babel transforms. Therefore if you write a loader that works for both, you can use this property to know if there is access to additional loaderContext and webpack features. 
+T> Loaders were originally designed to also work as Babel transforms. Therefore if you write a loader that works for both, you can use this property to know if there is access to additional loaderContext and webpack features.
 
 ### `emitFile`
 
@@ -307,4 +307,4 @@ Hacky access to the Module object being loaded.
 
 ### Custom `loaderContext` Properties
 
-Custom properties can be added to the `loaderContext` by either specifying values on the `loader` proprty on your webpack [configuration](/configuration), or by creating a [custom plugin](/api/plugins) that hooks into the `normal-module-loader` event which gives you access to the `loaderContext` to modify or extend. 
+Custom properties can be added to the `loaderContext` by either specifying values on the `loader` proprty on your webpack [configuration](/configuration), or by creating a [custom plugin](/api/plugins) that hooks into the `normal-module-loader` event which gives you access to the `loaderContext` to modify or extend.

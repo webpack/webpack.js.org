@@ -23,6 +23,12 @@ title: Writer's Guide
 
 The site will update itself as you make changes.
 
+## Typesetting
+
+* webpack should always be written in lower-case letters. Even at the beginning of a sentence. ([source](https://github.com/webpack/media#name))
+* loaders are enclosed in backticks and [kebab-cased](https://en.wikipedia.org/w/index.php?title=Kebab_case): `css-loader`, `ts-loader`, …
+* plugins are enclosed in backticks and [camel-cased](https://en.wikipedia.org/wiki/Camel_case): `BannerPlugin`, `NpmInstallWebpackPlugin`, …
+
 ## Formatting
 
 ### Code
@@ -84,4 +90,3 @@ W> This is a warning.
 **Syntax: ?\>**
 
 ?> This is a todo.
-

@@ -78,9 +78,16 @@ function fetchPackageFiles(options, finalCb) {
             .replace(/<\/h2>/g, ''); // drop </h2>
         }
 
+        var title = pkg.name;
+        if (title.match(/-plugin$/)) {
+          title = _.camelCase(title);
+          title = _.upperFirst(title);
+          title = title.replace(/I18N/, 'I18n');
+        }
+
         // TODO: push this type of to a script of its own to keep this generic
         let headmatter = yamlHeadmatter({
-          title: pkg.name,
+          title: title,
           source: url,
           edit: [pkg.html_url, 'edit', branch, file].join('/'),
         });

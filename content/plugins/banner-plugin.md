@@ -1,5 +1,5 @@
 ---
-title: banner-plugin
+title: BannerPlugin
 contributors:
   - simon04
 ---

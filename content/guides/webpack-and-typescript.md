@@ -20,8 +20,8 @@ To start using webpack with Typescript you need a couple of things:
 
 You can install the TypeScript compiler and the TypeScript loader from npm by running:
  `npm install --save-dev typescript ts-loader`
- 
-__tsconfig.json__ 
+
+__tsconfig.json__
 
 The tsconfig file can start as an empty configuration file, here you can see an example of a basic configuration for TypeScript to compile to es5 as well as providing support for JSX.
 
@@ -59,35 +59,35 @@ module.exports = {
        exclude: /node_modules/,
      },
    ]
- }, 
+ },
  resolve: {
    extensions: [".tsx", ".ts", ".js"]
  },
 };
 ```
- 
-Here we specify our entry point to be __index.ts__ in our current directory, 
-an output file called __bundle.js__ 
+
+Here we specify our entry point to be __index.ts__ in our current directory,
+an output file called __bundle.js__
 and our TypeScript loader that is in charge of compiling our TypeScript file to JavaScript. We also add `resolve.extensions` to instruct webpack what file extensions to use when resolving Typescript modules.
 
 ## Typescript loaders
 
 Currently there are 2 loaders for TypeScript available:
-* [awesome-typescript-loader](https://github.com/s-panferov/awesome-typescript-loader)
-* [ts-loader](https://github.com/TypeStrong/ts-loader)
+* [`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader)
+* [`ts-loader`](https://github.com/TypeStrong/ts-loader)
 
-Awesome TypeScript loader has created a wonderful explanation of the 
-difference between awesome-typescript-loader and ts-loader. 
+Awesome TypeScript loader has created a wonderful explanation of the
+difference between `awesome-typescript-loader` and `ts-loader`.
 
 You can read more about it [here](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader).
 
-In this guide we will be using ts-loader as currently it is easier enabling additional webpack features such as importing non code assets into your project.
+In this guide we will be using `ts-loader` as currently it is easier enabling additional webpack features such as importing non code assets into your project.
 
 ## Enabling source maps
 
 In order to enable source maps we first must configure TypeScript to output inline source maps to our compiled JavaScript files.
 This is done by setting the sourceMap property to true.
- 
+
 __tsconfig.json__
 ```json
 {
@@ -95,7 +95,7 @@ __tsconfig.json__
 }
 ```
 
-Once TypeScript is configured to output source maps we need to tell webpack 
+Once TypeScript is configured to output source maps we need to tell webpack
 to extract these source maps and pass them to the browser, this way we will get the source file
 exactly as we see it in our code editor.
 
@@ -127,10 +127,10 @@ module.exports = {
  devtool: 'inline-source-map',
 };
 ```
- 
-First we add a new loader called source-map-loader. 
 
-To install it run: 
+First we add a new loader called `source-map-loader`.
+
+To install it run:
 
 `npm install --save-dev source-map-loader`.
 
@@ -138,9 +138,9 @@ Once the loader is installed we need to tell webpack we want to run this loader 
 Finally we need to enable source maps in webpack by specifying the `devtool` property.
 Currently we use the 'inline-source-map' setting, to read more about this setting and see other options check out the [devtool documentation](https://webpack.js.org/configuration/devtool/).
 
- 
- 
- 
+
+
+
 
 ## Using 3rd Party Libraries
 
@@ -174,4 +174,3 @@ Here we declare a new module for svg by specifying any import that ends in __.sv
 If we wanted to be more explicit about this being a url we could define the type as string.
 
 This applies not only to svg but any custom loader you may want to use which includes css, scss, json or any other file you may wish to load in your project.
- 

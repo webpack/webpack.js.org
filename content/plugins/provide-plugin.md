@@ -1,5 +1,5 @@
 ---
-title: provide-plugin
+title: ProvidePlugin
 contributors:
   - sokra
   - simon04
