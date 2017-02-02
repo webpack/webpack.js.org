@@ -62,11 +62,6 @@ export default class Sidebar extends Component {
             currentPage= { currentPage }
           />
 
-          { isGuides ? (
-            <SidebarItem
-              url={ `/get-started` }
-              title="Get Started" />
-          ) : null }
           {
             pages.map(({ url, title, anchors }, i) =>
               <SidebarItem
