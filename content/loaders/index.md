@@ -54,3 +54,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 * `vue-loader` Loads and compiles [Vue Components](https://vuejs.org/v2/guide/components.html)
 * `polymer-loader` Process HTML & CSS with preprocessor of choice and `require()` Web Components like first-class modules
 * `angular2-template-loader` Loads and compiles [Angular](https://angular.io/) Components
+
+
+![Awesome](../assets/awesome-badge.svg)
+For more third-party loaders, see the list from [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#loaders).
