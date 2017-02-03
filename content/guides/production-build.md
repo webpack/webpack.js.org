@@ -114,7 +114,7 @@ module.exports = function (env) {
             minimize: true,
             debug: false
         }),
-        new UglifyJsPlugin({
+        new webpack.optimize.UglifyJsPlugin({
             beautify: false,
             mangle: {
                 screw_ie8: true,
