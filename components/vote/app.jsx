@@ -153,7 +153,7 @@ export default class VoteApp extends React.Component {
     if(!this.isBrowserSupported())
       return <div>Your browser is not supported.</div>;
 
-    let { selfInfo, listInfo, isVoting, isFetchingList, isFetchingSelf, isCreating, isLoginActive } = this.state;
+    let { selfInfo, listInfo, isVoting, isFetchingList, isFetchingSelf, isCreating, isLoginActive, editItem, editItemTitle, editItemDescription } = this.state;
 
     let { voteAppToken } = localStorage;
 
@@ -220,7 +220,7 @@ export default class VoteApp extends React.Component {
                         maxUp={userVote ? maximum - value : 0}
                         maxDown={userVote ? value - minimum : 0}
                         color={this.getColor(voteSettings.name)}
-                        isLoggedIn = {!!voteAppToken}
+                        canVote = {!!voteAppToken && !item.locked}
                         onVote={(diffValue) => {
                           this.vote(item.id, voteSettings.name, diffValue, voteSettings.currency, voteSettings.score);
                         }}
@@ -228,10 +228,87 @@ export default class VoteApp extends React.Component {
                     </div>;
                   })}
                 </div>
-                <div className="vote-app__item-content">
+                { editItem !== item.id && <div className="vote-app__item-content">
                   <span className="vote-app__item-title">{item.title}</span>
                   <span>{item.description}</span>
-                </div>
+                  { listInfo.isAdmin && <div>
+                    <button onClick={() => {
+                      this.setState({
+                        isCreating: true
+                      });
+                      api.configItem(voteAppToken, item.id, { locked: true }).then(() => {
+                        this.setState({
+                          isCreating: false
+                        });
+                        this.updateList();
+                      });
+                    }}>Lock</button>
+                    <button onClick={() => {
+                      this.setState({
+                        isCreating: true
+                      });
+                      api.configItem(voteAppToken, item.id, { locked: false }).then(() => {
+                        this.setState({
+                          isCreating: false
+                        });
+                        this.updateList();
+                      });
+                    }}>Unlock</button>
+                    <button onClick={() => {
+                      this.setState({
+                        isCreating: true
+                      });
+                      api.configItem(voteAppToken, item.id, { archived: true }).then(() => {
+                        this.setState({
+                          isCreating: false
+                        });
+                        this.updateList();
+                      });
+                    }}>Archive</button>
+                    <button onClick={() => {
+                      this.setState({
+                        isCreating: true
+                      });
+                      api.configItem(voteAppToken, item.id, { archived: false }).then(() => {
+                        this.setState({
+                          isCreating: false
+                        });
+                        this.updateList();
+                      });
+                    }}>Unarchive</button>
+                    <button onClick={() => {
+                      this.setState({
+                        isCreating: true,
+                        editItem: item.id,
+                        editItemTitle: item.title,
+                        editItemDescription: item.description
+                      });
+                    }}>Edit</button>
+                  </div> }
+                </div> }
+                { editItem === item.id && <div className="vote-app__item-content">
+                  <div className="vote-app__item-title">
+                    <input className="vote-app__item-edit-title" type="text" value={editItemTitle} onChange={e => this.setState({ editItemTitle: e.target.value })} />
+                  </div>
+                  <div>
+                    <textarea className="vote-app__item-edit-description" value={editItemDescription} onChange={e => this.setState({ editItemDescription: e.target.value })} />
+                  </div>
+                  <div><button onClick={() => {
+                    this.setState({
+                      editItem: null,
+                      isCreating: true
+                    });
+                    api.configItem(voteAppToken, item.id, {
+                      description: editItemDescription,
+                      title: editItemTitle
+                    }).then(() => {
+                      this.setState({
+                        isCreating: false
+                      });
+                      this.updateList();
+                    });
+                  }}>Done Editing</button></div>
+                </div> }
               </div>
             </li>)}
             { listInfo.isAdmin && <li className="vote-app__admin">
