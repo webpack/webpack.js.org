@@ -170,6 +170,10 @@
     font-weight:600;
   }
 
+  i, em {
+    font-style: italic;
+  }
+
   code, tt {
     font-family: $font-stack-code;
     font-size: 90%;
