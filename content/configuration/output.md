@@ -5,6 +5,7 @@ contributors:
   - sokra
   - skipjack
   - tomasAlabes
+  - mattce
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -369,7 +370,7 @@ And finally the output is:
 Module proof library.
 
 
-`libraryTarget: "assign"` - Here webpack will blindly generates an implied global.
+`libraryTarget: "assign"` - Here webpack will blindly generate an implied global.
  
  ```javascript
  MyLibrary = _entry_return_;
