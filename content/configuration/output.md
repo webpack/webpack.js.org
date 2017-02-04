@@ -250,7 +250,27 @@ MyLibrary.doSomething(); //if this is window
 ```
 
 
-`libraryTarget: "commonjs"` - When your library is loaded, the return value of your entry point will be part of the exports object. As the name implies, this is used in CommonJS environments:
+`libraryTarget: "window"` - When your library is loaded, **the return value of your entry point** will be part `window` object.
+ 
+ ```javascript
+ window["MyLibrary"] = _entry_return_;
+
+//your users will use your library like:
+window.MyLibrary.doSomething();
+ ```
+
+
+`libraryTarget: "global"` - When your library is loaded, **the return value of your entry point** will be part `global` object.
+ 
+ ```javascript
+ global["MyLibrary"] = _entry_return_;
+
+//your users will use your library like:
+global.MyLibrary.doSomething();
+ ```
+
+
+`libraryTarget: "commonjs"` - When your library is loaded, **the return value of your entry point** will be part of the exports object. As the name implies, this is used in CommonJS environments:
 
 ```javascript
 exports["MyLibrary"] = _entry_return_;
@@ -259,7 +279,8 @@ exports["MyLibrary"] = _entry_return_;
 require("MyLibrary").doSomething();
 ```
 
-`libraryTarget: "commonjs2"` - When your library is loaded, the return value of your entry point will be part of the exports object. As the name implies, this is used in CommonJS environments:
+
+`libraryTarget: "commonjs2"` - When your library is loaded, **the return value of your entry point** will be part of the exports object. As the name implies, this is used in CommonJS environments:
 
 ```javascript
 module.exports = _entry_return_;
@@ -320,7 +341,7 @@ require(["MyLibrary"], function(MyLibrary){
 `libraryTarget: "umd"` - This is a way for your library to work with all the module definitions (and where aren't modules at all). 
 It will work with CommonJS, AMD and as global variable. You can check the [UMD Repository](https://github.com/umdjs/umd) to know more about it. 
 
-In this case, you need the another property to name your module:
+In this case, you need the `library` property to name your module:
 
 ```javascript
 output: {
@@ -346,6 +367,21 @@ And finally the output is:
 ```
 
 Module proof library.
+
+
+`libraryTarget: "assign"` - Here webpack will blindly generates an implied global.
+ 
+ ```javascript
+ MyLibrary = _entry_return_;
+ ```
+Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
+
+
+`libraryTarget: "jsonp"` - This will wrap the return value of your entry point into a jsonp wrapper.
+ 
+ ```javascript
+ MyLibrary( _entry_return_ );
+ ```
 
 The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
 
