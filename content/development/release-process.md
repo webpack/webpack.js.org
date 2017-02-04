@@ -64,3 +64,7 @@ _你将得到版本 `1.1.0` 而不再是自动生成的版本 `1.0.1`._
 ## 提交和标签签名
 
 如果你有设置你的 GPG，可以在执行 `standard-version` 命令时添加 `--sign` or `-s` 参数。
+
+***
+
+> 原文：https://webpack.js.org/development/release-process/

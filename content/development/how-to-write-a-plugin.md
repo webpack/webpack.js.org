@@ -131,3 +131,7 @@ FileListPlugin.prototype.apply = function(compiler) {
 
 module.exports = FileListPlugin;
 ```
+
+***
+
+> 原文：https://webpack.js.org/development/how-to-write-a-plugin/
