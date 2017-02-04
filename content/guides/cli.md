@@ -49,12 +49,16 @@ See [configuration](/configuration) for the options in the configuration file.
   --progress   Print compilation progress in percentage                [boolean]
 ```
 
+*See also*: [Building for Production](/guides/production-build)
+
+
 ### Module options
 ```
   --module-bind       Bind an extension to a loader                     [string]
   --module-bind-post                                                    [string]
   --module-bind-pre                                                     [string]
 ```
+
 
 ### Output options
 ```
@@ -75,6 +79,9 @@ See [configuration](/configuration) for the options in the configuration file.
   --output-library-target       The type for exposing the exports of the entry
                                 point as library                        [string]
 ```
+
+*See also*: [Output](/configuration/output)
+
 
 ### Advanced options
 ```
@@ -101,6 +108,9 @@ See [configuration](/configuration) for the options in the configuration file.
                              stats                                     [boolean]
 ```
 
+*See also*: [Plugins](/concepts/plugins), [Hot Module Replacement](/concepts/hot-module-replacement), [Shimming](/guides/shimming)
+
+
 ### Resolving options
 ```
   --resolve-alias         Setup a module alias for resolving (Example:
@@ -111,6 +121,9 @@ See [configuration](/configuration) for the options in the configuration file.
   --resolve-loader-alias  Setup a loader alias for resolving            [string]
 ```
 
+*See also*: [Shimming](/guides/shimming)
+
+
 ### Optimizing options
 ```
   --optimize-max-chunks      Try to keep the chunk count below a limit
@@ -118,6 +131,9 @@ See [configuration](/configuration) for the options in the configuration file.
   --optimize-minimize        Minimize javascript and switches loaders to
                              minimizing                                [boolean]
 ```
+
+*See also*: [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin), [Building for Production](/guides/production-build)
+
 
 ### Stats options
 ```
@@ -149,6 +165,7 @@ See [configuration](/configuration) for the options in the configuration file.
   --display-error-details     Display details about errors             [boolean]
   --verbose                   Show more details                        [boolean]
 ```
+
 
 ### Options
 ```
