@@ -88,6 +88,10 @@
   display:none;
 }
 
+.navigation__icon {
+  display: none;
+}
+
 @include break {
   .navigation__search {
     flex:0 0 auto;
@@ -138,6 +142,12 @@
     &-icon:focus {
       outline:none;
     }
+  }
+
+  .navigation__icon {
+    display: block;
+    margin-left: 1em;
+    color: getColor(white);
   }
 }
 

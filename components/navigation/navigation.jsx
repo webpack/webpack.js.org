@@ -81,6 +81,14 @@ export default class Navigation extends React.Component {
               className="navigation__search-icon icon-cross"
               onClick={ this._toggleSearch.bind(this) } />
           </div>
+
+          <Link className="navigation__icon" to="//github.com/webpack/webpack">
+            <i className="sidecar__icon icon-github" />
+          </Link>
+
+          <Link className="navigation__icon" to="//stackoverflow.com/questions/tagged/webpack">
+            <i className="sidecar__icon icon-stack-overflow" />
+          </Link>
         </Container>
 
         {
