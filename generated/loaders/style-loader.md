@@ -2,76 +2,70 @@
 title: style-loader
 source: https://raw.githubusercontent.com/webpack/style-loader/master/README.md
 edit: https://github.com/webpack/style-loader/edit/master/README.md
+
 ---
-# style loader for webpack
+# webpack的样式加载器
 
-Adds CSS to the DOM by injecting a `<style>` tag
+通过注入`<style>`标签将CSS添加到DOM中
 
-## Install
-
+## 安装
 ```
 npm install style-loader --save-dev
 ```
 
-## Usage
+## 用法
 
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
+[文档：使用加载器](http://webpack.github.io/docs/using-loaders.html)
 
-### Simple API
-
+### 简单API
 ``` javascript
 require("style-loader!raw-loader!./file.css");
-// => add rules in file.css to document
+// => 在file.css文件中添加规则
 ```
 
-It's recommended to combine it with the [`css-loader`](https://github.com/webpack/css-loader): `require("style-loader!css-loader!./file.css")`.
+建议将它与[`css-loader`](https://github.com/webpack/css-loader)结合使用: `require("style-loader!css-loader!./file.css")`.
 
-It's also possible to add a URL instead of a CSS string:
-
+也可以添加URL而不是CSS字符串：
 ``` javascript
 require("style-loader/url!file-loader!./file.css");
-// => add a <link rel="stylesheet"> to file.css to document
+// => 把<link rel=“stylesheet”这一行添加到文档file.css中
 ```
 
-### Local scope CSS
+### 本地作用域的CSS
+(实验)
 
-(experimental)
-
-When using [local scope CSS](https://github.com/webpack/css-loader#local-scope) the module exports the generated identifiers:
-
+当使用本地[作用域的CSS](https://github.com/webpack/css-loader#local-scope)时，模块导出生成的标识符：
 ``` javascript
 var style = require("style-loader!css-loader!./file.css");
 style.placeholder1 === "z849f98ca812bc0d099a43e0f90184"
 ```
 
-### Reference-counted API
-
+### 引用计数API
 ``` javascript
 var style = require("style-loader/useable!css-loader!./file.css");
 style.use(); // = style.ref();
 style.unuse(); // = style.unref();
 ```
 
-Styles are not added on `require`, but instead on call to `use`/`ref`. Styles are removed from page if `unuse`/`unref` is called exactly as often as `use`/`ref`.
+样式不会在`require`上添加，而是在调用`use`/`ref`时添加样式。如果`unuse`/`unref`的调用次数与`use`/`ref`一样，样式则会从页面中删除
 
-Note: Behavior is undefined when `unuse`/`unref` is called more often than `use`/`ref`. Don't do that.
+注意：当`unuse`/`unref`被调用次数多时，行为是未定义的。所以不要这样做。
 
-### Options
+### 选项
 
 #### `insertAt`
 
-By default, the style-loader appends `<style>` elements to the end of the `<head>` tag of the page. This will cause CSS created by the loader to take priority over CSS already present in the document head. To insert style elements at the beginning of the head, set this query parameter to 'top', e.g. `require('../style.css?insertAt=top')`.
+默认情况下，样式加载器将`<style>`元素附加到页面的`<head>`标记的末尾。这将导致由加载器创建的CSS优先于文档头中已经存在的CSS。要在头部的开头插入样式元素，请将此查询参数设置为“top”，例如。`require('../style.css?insertAt=top')`.
 
 #### `singleton`
 
-If defined, the style-loader will re-use a single `<style>` element, instead of adding/removing individual elements for each required module. **Note:** this option is on by default in IE9, which has strict limitations on the number of style tags allowed on a page. You can enable or disable it with the singleton query parameter (`?singleton` or `?-singleton`).
+如果已定义，则style-loader将重用单个 `<style>` 元素，而不是为每个所需的模块添加/删除单个元素。注意：默认情况下，IE9中启用此选项，这对页面上允许的样式标记数有严格的限制。您可以使用singleton查询参数启用或禁用它(`?singleton` or `?-singleton`)。
 
-## Recommended configuration
+## 推荐配置
 
-By convention the reference-counted API should be bound to `.useable.css` and the simple API to `.css` (similar to other file types, i.e. `.useable.less` and `.less`).
+按照惯例，引用计数的API应绑定到.useable.css，而简单的API绑定到.css（其他文件类型也类似，即.useable.less和.less）
 
-So the recommended configuration for webpack is:
-
+所以推荐的webpack配置是
 ``` javascript
 {
   module: {
@@ -86,7 +80,7 @@ So the recommended configuration for webpack is:
       {
         test: /\.useable\.css$/,
         use: [
-          { 
+          {
             loader: "style-loader",
             options: {
               useable: true
@@ -100,8 +94,11 @@ So the recommended configuration for webpack is:
 }
 ```
 
-**Note** about source maps support and assets referenced with `url`: when style loader is used with ?sourceMap option, the CSS modules will be generated as `Blob`s, so relative paths don't work (they would be relative to `chrome:blob` or `chrome:devtools`). In order for assets to maintain correct paths setting `output.publicPath` property of webpack configuration must be set, so that absolute paths are generated.
-
+关于source map支持和资源方面，引用URL应注意：当样式加载器与？sourceMap选项一起使用时，CSS模块将生成为`Blob`s，因此相对路径无法辨别（它们将是相对于`chrome:blob`或`chrome:devtools`）。为了使资源保持正确的路径，必须设置webpack配置的`output.publicPath`属性，以便生成绝对路径。
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/loaders/style-loader/

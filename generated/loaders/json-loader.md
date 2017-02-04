@@ -1,18 +1,18 @@
 ---
 title: json-loader
-source: https://raw.githubusercontent.com/webpack/json-loader/master/README.md
-edit: https://github.com/webpack/json-loader/edit/master/README.md
+source: https://raw.githubusercontent.com/webpack-contrib/json-loader/master/README.md
+edit: https://github.com/webpack-contrib/json-loader/edit/master/README.md
 ---
-## Install
+## 安装
 
 ```bash
 npm install --save-dev json-loader
 ```
 
-## Usage
+## 用法
 
 
-### Configuration (recommended)
+### 通过配置（推荐）
 
 **webpack.config.js**
 ```js
@@ -32,7 +32,7 @@ module.exports = {
 import json from 'file.json';
 ```
 
-### CLI
+### 通过命令行（CLI）
 
 ```bash
 webpack --module-bind 'json=json-loader'
@@ -42,24 +42,24 @@ webpack --module-bind 'json=json-loader'
 import json from 'file.json';
 ```
 
-### Inline
+### 内联使用
 
 ```js
 import json from 'json-loader!file.json';
 ```
 
-## Maintainer
+## 维护者
 
 <table>
   <tbody>
     <tr>
       <td align="center">
-        <img width="150 height="150" src="https://github.com/sokra.png?s=150">
+        <img width="150" height="150" src="https://github.com/sokra.png?s=150">
         <br>
         <a href="https://github.com/sokra">Tobias Koppers</a>
       </td>
-    <tr>
-  <tbody>
+    </tr>
+  </tbody>
 </table>
 
 [npm]: https://img.shields.io/npm/v/json-loader.svg
@@ -79,3 +79,7 @@ import json from 'json-loader!file.json';
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/loaders/json-loader/

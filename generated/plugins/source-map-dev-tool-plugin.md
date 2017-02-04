@@ -1,5 +1,5 @@
 ---
-title: source-map-dev-tool-plugin.md
+title: source-map-dev-tool-plugin
 contributors:
     - johnnyreilly
 ---
@@ -26,4 +26,4 @@ new webpack.SourceMapDevToolPlugin(options)
 
 ***
 
-> 原文：https://webpack.js.org/loaders/
+> 原文：https://webpack.js.org/plugins/source-map-dev-tool-plugin/

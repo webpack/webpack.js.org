@@ -12,8 +12,9 @@ sort: 15
 > resolving
 > DllPlugin
 
-> see also [[development tools]]
-> see also [[resolving]]
+[Development Tools](/guides/development/#choosing-a-tool)
+
+> see also [resolving](/concepts/module-resolution/#resolving-rules-in-webpack)
 
 ***
 

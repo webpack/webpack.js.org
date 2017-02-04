@@ -6,12 +6,14 @@ contributors:
   - varunjayaraman
   - cntanglijun
   - chrisVillanueva
+  - johnstew
+  - simon04
 ---
 
 webpack 是构建我们应用程序中 JavaScript 模块的工具。从使用 `webpack` [cli](/api/cli) 或 [api](/api/node) ，并按照[安装说明](/get-started/install-webpack)开始。
 webpack 简化快速构建应用程序依赖图表的流程，以正确的顺序打包他们。webpack 能够配置自定义优化代码，在生产环境构建时拆分 vendor/css/js 代码，运行开发服务实现页面无刷新、代码热重载，以及其他非常酷炫的特性。了解更多关于[为什么使用 wepback](/get-started/why-webpack)。
 
-## 创建一个包文件
+## 创建一个 bundle 文件
 
 创建一个示例目录来尝试 wepback。[安装 webpack](/get-started/install-webpack)。
 
@@ -47,7 +49,7 @@ __index.html__
 ```html
 <html>
   <head>
-    <title>Webpack 2 demo</title>
+    <title>webpack 2 demo</title>
     <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
@@ -87,7 +89,7 @@ Also we will need to change the `index.html` to expect a single bundled js file.
 ```diff
 <html>
   <head>
-    <title>Webpack 2 demo</title>
+    <title>webpack 2 demo</title>
 -   <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
@@ -99,12 +101,12 @@ Also we will need to change the `index.html` to expect a single bundled js file.
 
 这里，`index.js` 显式要求引入的 `lodash` 必须存在，然后将它以 `_` 的别名绑定（不会造成全局范围变量名污染）。
 
-通过展示出模块所需依赖，webpack 能够利用这些信息去构建依赖图表。然后 webpack 使用图表生成一个优化过的包文件，脚本还将以正确的顺序执行。并且没有用到的依赖将不会被包文件引入。
+通过展示出模块所需依赖，webpack 能够利用这些信息去构建依赖图表。然后 webpack 使用图表生成一个优化过的 bundle，脚本还将以正确的顺序执行。并且没有用到的依赖将不会被 bundle 引入。
 
 现在在此文件夹下运行 `webpack`，其中 `index.js` 是输入文件，`bundle.js` 是输出文件，输出文件已打包此页面所需的所有代码。
 
 ```bash
-webpack app/index.js dist/bundle.js
+./node_modules/.bin/webpack app/index.js dist/bundle.js
 
 Hash: a3c861a7d42fc8944524
 Version: webpack 2.2.0
@@ -114,8 +116,9 @@ index.js  1.56 kB       0  [emitted]  main
    [0] ./app/index.js 170 bytes {0} [built]
 
 ```
+T> 输出可能会稍有不同。如果构建成功，那么你就可以继续。
 
-T> 如果你创建了局部的 `webpack@beta` 版本，要通过其进行构建过程，请务必在命令行中通过 `./node_modules/.bin/webpack` 来引用 `webpack`。
+T> 如果你在[全局安装 webpack](/get-started/install-webpack#global-installation)，你必须使用 `webpack` 来调用 webpack。
 
 在浏览器中打开 `webpack.config.js`，查看成功后 bundle 的结果。
 你应该看到带有以下文本的页面：'Hello webpack'。
@@ -126,13 +129,15 @@ T> 如果你创建了局部的 `webpack@beta` 版本，要通过其进行构建�
 
 __webpack.config.js__
 ```javascript
+var path = require('path');
+
 module.exports = {
   entry: './app/index.js',
   output: {
     filename: 'bundle.js',
-    path: './dist'
+    path: path.resolve(__dirname, 'dist')
   }
-}
+};
 ```
 
 此文件可以由接下来的 webpack 命令运行。
@@ -151,9 +156,9 @@ index.js  1.56 kB       0  [emitted]  main
 
 T> 如果存在 `webpack.config.js`，`webpack` 命令将默认选择使用它。
 
-T> 如果使用上面"创建一个包文件"章节，已经成功创建过 `dist/bundle.js` 文件，请删除 `dist` 子目录，来验证通过 `webpack.config.js` 文件的设置，所输出内容是否符合预期。
+T> 如果使用上面"创建一个 bundle 文件"章节，已经成功创建过 `dist/bundle.js` 文件，请删除 `dist` 子目录，来验证通过 `webpack.config.js` 文件的设置，所输出内容是否符合预期。
 
-配置文件可以更加灵活地使用 webpack。使用配置文件，我们可以对我们的包文件添加加载器规则、插件、解析选项，以及许多其他增强功能。
+配置文件可以更加灵活地使用 webpack。使用配置文件，我们可以对我们的 bundle 添加加载器规则、插件、解析选项，以及许多其他增强功能。
 
 ## 使用引入 npm 的 webpack
 

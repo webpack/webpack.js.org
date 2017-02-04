@@ -1,24 +1,23 @@
 ---
 title: val-loader
-source: https://raw.githubusercontent.com/webpack/val-loader/master/README.md
-edit: https://github.com/webpack/val-loader/edit/master/README.md
+source: https://raw.githubusercontent.com/webpack-contrib/val-loader/master/README.md
+edit: https://github.com/webpack-contrib/val-loader/edit/master/README.md
 ---
 # val loader for webpack
 
-## Usage
+## 用法
 
 ``` javascript
 var a = require("val-loader!./file.js");
-// => excute file.js while compiling and 
-//    take the result as javascript code for including
+// => 在编译时执行 file.js 并把结果转为 javascript 代码包含到文件中
 ```
 
-Don't forget to polyfill `require` if you want to use it in node.
-See `webpack` documentation.
+如果要在 Node.js 中使用，不要忘记兼容（polyfill）`require`。可以参考 `webpack` 文档。
 
-The excution of file.js has polyfill already applied.
 
-This loader is also useful if you want to provide data for another loader:
+在执行 file.js 时如果有 polyfill 也已经会被使用。
+
+这个加载器也可以用在你需要提供数据给另一个加载器的时候：
 
 ``` javascript
 require("css-loader!val-loader!./generateCss.js");
@@ -27,3 +26,7 @@ require("css-loader!val-loader!./generateCss.js");
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/loaders/val-loader/

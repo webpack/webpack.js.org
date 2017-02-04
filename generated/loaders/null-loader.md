@@ -6,3 +6,7 @@ edit: https://github.com/webpack/null-loader/edit/master/README.md
 # null-loader
 
 A loader that returns an empty module.
+
+***
+
+> 原文：https://webpack.js.org/loaders/null-loader/

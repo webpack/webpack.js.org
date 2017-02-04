@@ -4,30 +4,31 @@ sort: 5
 contributors:
   - pksjce
   - rahulcs
+  - johnstew
 ---
 
-In this section, we will discuss how webpack splits code using `require.ensure()`.
+在这一节，我们会讨论 webpack 如何使用 `require.ensure()` 进行代码拆分。
 
 ## `require.ensure()`
 
-webpack statically parses for `require.ensure()` in the code while building and adds the modules here into a separate chunk. This new chunk is loaded on demand by webpack through jsonp.
+webpack 在编译时，会静态地解析代码中的 `require.ensure()`，同时将模块添加到一个分开的 chunk 当中。这个新的 chunk 会被 webpack 通过 `jsonp` 来按需加载。
 
-The syntax is as follows
+语法如下：
 
 ```javascript
 require.ensure(dependencies: String[], callback: function(require), chunkName: String)
 ```
 
-#### dependencies
-This is an array of strings where we can declare all the modules that need to be made available before all the code in the callback function can be executed.
+#### 依赖 dependencies
+这是一个字符串数组，通过这个参数，在所有的回调函数的代码被执行前，我们可以将所有需要用到的模块进行声明。
 
-#### callback
-This is the callback function that webpack will execute once the dependencies are loaded. An implementation of the require object is sent as a parameter to this function. This is so that, we can further `require()` the dependencies and any other modules for execution.
+#### 回调 callback
+当所有的依赖都加载完成后，webpack会执行这个回调函数。`require` 对象的一个实现会作为一个参数传递给这个回调函数。因此，我们可以进一步 `require()` 依赖和其它模块提供下一步的执行。
 
-#### chunkName
-The chunkName is the name given to the chunk created by this particular `require.ensure()`. By giving the same name at different split points of `require.ensure()`, we can make sure all the dependencies are collectively put in the same bundle.
+#### chunk名称 chunkName
+chunkName 是提供给这个特定的 `require.ensure()` 的 chunk 的名称。通过提供 `require.ensure()` 不同执行点相同的名称，我们可以保证所有的依赖都会一起放进相同的 文件束(bundle)。
 
-Let us consider the following project
+让我们来看以下的项目
 
 ```bash
 \\ file structure
@@ -38,7 +39,7 @@ Let us consider the following project
     |    |-- b.js
     webpack.config.js
     |
-    dist 
+    dist
 ```
 
 ```javascript
@@ -58,28 +59,29 @@ console.log('***** I AM b *****');
 
 ```javascript
 \\ webpack.config.js
+var path = require('path');
 
 module.exports = function(env) {
     return {
         entry: './js/entry.js',
         output: {
             filename: 'bundle.js',
-            path: './dist'
+            path: path.resolve(__dirname, 'dist')
         }
     }
 }
 ```
-On running webpack on this project, we find that webpack has created two new bundles, `bundle.js` and `0.bundle.js`.
+通过执行这个项目的 webpack 构建，我们发现 webpack 创建了2个新的文件束， `bundle.js` 和 `0.bundle.js`。
 
-`entry.js` and `a.js` are bundled in `bundle.js`.
+`entry.js` 和 `a.js` 被打包进 `bundle.js`.
 
-`b.js` is bundled in `0.bundle.js`.
+`b.js` 被打包进 `0.bundle.js`.
 
-?> `require.ensure` relies on `Promises` internally. If you use `require.ensure` with older browsers, remember to shim `Promise.` [es6-promise polyfill](https://github.com/stefanpenner/es6-promise).
+?> `require.ensure` 内部依赖于 `Promises`。 如果你在旧的浏览器中使用 `require.ensure` 请记得 去 shim `Promise.` [es6-promise polyfill](https://github.com/stefanpenner/es6-promise).
 
-## Gotchas for `require.ensure()`
+## `require.ensure()` 的坑点
 
-### Empty Array as Parameter
+### 空数组作为参数
 
 ```javascript
 require.ensure([], function(require){
@@ -87,9 +89,9 @@ require.ensure([], function(require){
 });
 ```
 
-The above code ensures that a split point is created and `a.js` is bundled separately by webpack.
+以上代码保证了拆分点被创建，而且 `a.js` 被 webpack 分开打包。
 
-### Dependencies as Parameter
+### 依赖作为参数
 
 ```javascript
 require.ensure(['./a.js'], function(require) {
@@ -97,8 +99,9 @@ require.ensure(['./a.js'], function(require) {
 });
 ```
 
-In the above code, `a.js` and `b.js` are bundled together and split from the main bundle. But only the contents of `b.js` are executed. The contents of `a.js` are only made available and not executed.
-To execute `a.js`, we will have to require it in a sync manner like `require('./a.js')` for the JavaScript to get executed.
+上面代码， `a.js` 和 `b.js` 都被打包到一起，而且从主文件束中拆分出来。但只有 `b.js` 的内容被执行。`a.js` 的内容仅仅是可被使用，但并没有被输出。
+
+想去执行 `a.js`，我们需要异步地引用它，如 `require('./a.js')`，让它的 JavaScritp 被执行。
 
 ***
 

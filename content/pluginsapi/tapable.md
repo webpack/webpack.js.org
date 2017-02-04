@@ -72,4 +72,4 @@ this.apply*("emit",options) // will fetch all plugins under 'emit' name and run 
 
 ***
 
-> 原文：https://webpack.js.org/loaders/
+> 原文：https://webpack.js.org/pluginsapi/tapable/
