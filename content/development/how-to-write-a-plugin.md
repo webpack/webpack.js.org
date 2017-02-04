@@ -1,31 +1,30 @@
 ---
-title: How to write a plugin?
+title: 如何编写一个插件？
 sort: 2
 ---
 
-Plugins expose the full potential of the webpack engine to third-party developers. Using staged build callbacks, developers can introduce their own behaviors into the webpack build process. Building plugins is a bit more advanced than building loaders, because you'll need to understand some of the webpack low-level internals to hook into them. Be prepared to read some source code!
+插件向第三方开发者提供了 webpack 引擎中完整的能力。使用阶段式的构建回调，开发者可以引入它们自己的行为到 webpack 构建流程中。创建插件比创建加载器更加高级，因为你将需要理解一些 webpack 底层的内部特性来做相应的勾子，所以做好阅读一些源码的准备！
 
-## Compiler and Compilation
+## 编译器（Compiler）和编译（Compilation）
 
-Among the two most important resources while developing plugins are the `compiler` and `compilation` objects. Understanding their roles is an important first step in extending the webpack engine.
+在插件开发中最重要的两个资源就是 `compiler` 和 `compilation` 对象。理解它们的角色是扩展 webpack 引擎重要的第一步。
 
-- The `compiler` object represents the fully configured webpack environment. This object is built once upon starting webpack, and is configured with all operational settings including options, loaders, and plugins. When applying a plugin to the webpack environment, the plugin will receive a reference to this compiler. Use the compiler to access the main webpack environment.
+- `compiler` 对象代表了完整的 webpack 环境配置。这个对象在启动 webpack 时被一次性建立，并在所有可操作的设置中被配置，包括原始配置，加载器和插件。当在 webpack 环境中应用一个插件时，插件将收到一个编译器对象的引用。可以使用它来访问 webpack 的主环境。
 
-- A `compilation` object represents a single build of versioned assets. While running webpack development middleware, a new compilation will be created each time a file change is detected, thus generating a new set of compiled assets. A compilation surfaces information about the present state of module resources, compiled assets, changed files, and watched dependencies. The compilation also provides many callback points at which a plugin may choose to perform custom actions.
+- `compilation` 对象代表了一次单一的版本构建和生成资源。当运行 webpack 开发环境中间件时，每当检测到一个文件变化，一次新的编译将被创建，从而生成一组新的编译资源。一个编译对象表现了当前的模块资源、编译生成资源、变化的文件、以及被跟踪依赖的状态信息。编译对象也提供了很多关键点回调供插件做自定义处理时选择使用。
 
-These two components are an integral part of any webpack plugin (especially a `compilation`), so developers will benefit by familiarizing themselves with these source files:
+这两个成员是任何 webpack 插件不可或缺的部分（特别是 `compilation`），如果开发者阅读它们的源码并进行熟悉，将获益匪浅：
 
 - [Compiler Source](https://github.com/webpack/webpack/blob/master/lib/Compiler.js)
 - [Compilation Source](https://github.com/webpack/webpack/blob/master/lib/Compilation.js)
 
-## Basic plugin architecture
+## 基本插件架构
 
-
-Plugins are instantiated objects with an `apply` method on their prototype. This `apply` method is called once by the Webpack compiler while installing the plugin. The `apply` method is given a reference to the underlying Webpack compiler, which grants access to compiler callbacks. A simple plugin is structured as follows:
+插件都是被实例化的带有 `apply` 原型方法的对象。这个 `apply` 方法在安装插件时将被 webpack 编译器调用一次。`apply` 方法提供了一个对应的编译器对象的引用，从而可以访问到相关的编译器回调。一个简单的插件结构如下：
 
 ```javascript
 function HelloWorldPlugin(options) {
-  // Setup the plugin instance with options...
+  // 使用配置（options）设置插件实例
 }
 
 HelloWorldPlugin.prototype.apply = function(compiler) {
@@ -37,32 +36,32 @@ HelloWorldPlugin.prototype.apply = function(compiler) {
 module.exports = HelloWorldPlugin;
 ```
 
-Then to install the plugin, just include an instance in your webpack config `plugins` array:
+然后要安装这个插件，只需要在你的 webpack 配置的 `plugin` 数组中加入一个实例：
 
 ```javascript
 var HelloWorldPlugin = require('hello-world');
 
 var webpackConfig = {
-  // ... config settings here ...
+  // ... 这里是其他配置 ...
   plugins: [
     new HelloWorldPlugin({options: true})
   ]
 };
 ```
 
-## Accessing the compilation
+## 访问编译
 
-Using the compiler object, you may bind callbacks that provide a reference to each new compilation. These compilations provide callbacks for hooking into numerous steps within the build process.
+使用编译器对象时，你可以绑定提供了编译对象引用的回调拿到每次新的编译对象。这些编译对象提供了构建流程中很多步骤的回调来做勾子。
 
 ```javascript
 function HelloCompilationPlugin(options) {}
 
 HelloCompilationPlugin.prototype.apply = function(compiler) {
 
-  // Setup callback for accessing a compilation:
+  // 设置回调来访问编译对象：
   compiler.plugin("compilation", function(compilation) {
 
-    // Now setup callbacks for accessing compilation steps:
+    // 现在设置回调来访问编译中的步骤：
     compilation.plugin("optimize", function() {
       console.log("Assets are being optimized.");
     });
@@ -72,11 +71,11 @@ HelloCompilationPlugin.prototype.apply = function(compiler) {
 module.exports = HelloCompilationPlugin;
 ```
 
-For more information on what callbacks are available on the `compiler`, `compilation`, and other important objects, see the [plugins](/api/plugins/) doc.
+关于 `compiler` 和 `compilation` 的更多可用的回调和信息，以及其它重要的对象，请参考 [插件](/api/plugins/) 文档。
 
-## Async compilation plugins
+## 异步编译插件
 
-Some compilation plugin steps are asynchronous, and pass a callback function that _must_ be invoked when your plugin is finished running.
+有一些编译插件中的步骤是异步的，这样要传递一个回调函数，并且在插件运行结束时回调_必须_被调用。
 
 ```javascript
 function HelloAsyncPlugin(options) {}
@@ -84,7 +83,7 @@ function HelloAsyncPlugin(options) {}
 HelloAsyncPlugin.prototype.apply = function(compiler) {
   compiler.plugin("emit", function(compilation, callback) {
 
-    // Do something async...
+    // 做一些异步处理……
     setTimeout(function() {
       console.log("Done with async work...");
       callback();
@@ -96,27 +95,27 @@ HelloAsyncPlugin.prototype.apply = function(compiler) {
 module.exports = HelloAsyncPlugin;
 ```
 
-## Example
+## 示例
 
-Once we can latch onto the webpack compiler and each individual compilations, the possibilities become endless for what we can do with the engine itself. We can reformat existing files, create derivative files, or fabricate entirely new assets.
+一旦能我们深入理解 webpack 编译器和每个独立的编译，我们依赖 webpack 引擎将有无限多的事可以做。我们可以重新格式化已有的文件，创建衍生的文件，或者制作全新的生成文件。
 
-Let's write a simple example plugin that generates a new build file called `filelist.md`; the contents of which will list all of the asset files in our build. This plugin might look something like this:
+让我们来写一个简单的示例插件，生成一个叫做 `filelist.md` 的新文件；文件内容是所有构建生成的文件的列表。这个插件大概像下面这样：
 
 ```javascript
 function FileListPlugin(options) {}
 
 FileListPlugin.prototype.apply = function(compiler) {
   compiler.plugin('emit', function(compilation, callback) {
-    // Create a header string for the generated file:
+    // 创建一个头部字符串：
     var filelist = 'In this build:\n\n';
 
-    // Loop through all compiled assets,
-    // adding a new line item for each filename.
+    // 检查所有编译好的资源文件：
+    // 为每个文件名新增一行
     for (var filename in compilation.assets) {
       filelist += ('- '+ filename +'\n');
     }
 
-    // Insert this list into the webpack build as a new file asset:
+    // 把它作为一个新的文件资源插入到 webpack 构建中：
     compilation.assets['filelist.md'] = {
       source: function() {
         return filelist;
