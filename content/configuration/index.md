@@ -8,6 +8,7 @@ contributors:
   - bondz
   - sricc
   - terinjokes
+  - mattce
 ---
 
 webpack is fed via a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
@@ -57,12 +58,18 @@ var path = require('path');
     [library](/configuration/output#output-library): "MyLibrary", // string,
     // the name of the exported library
 
-    <details><summary>[libraryTarget](/configuration/output#output-librarytarget): "umd", // enum</summary>
-    [libraryTarget](/configuration/output#output-librarytarget): "commonjs2", // exported with module.exports
-    [libraryTarget](/configuration/output#output-librarytarget): "commonjs", // exported as properties to exports
-    [libraryTarget](/configuration/output#output-librarytarget): "amd", // defined with AMD defined method
-    [libraryTarget](/configuration/output#output-librarytarget): "this", // property set on this
-    [libraryTarget](/configuration/output#output-librarytarget): "var", // variable defined in root scope
+    <details><summary>[libraryTarget](/configuration/output#output-librarytarget): "umd", // universal module definition</summary>
+        [libraryTarget](/configuration/output#output-librarytarget): "umd2", // universal module definition
+        [libraryTarget](/configuration/output#output-librarytarget): "commonjs2", // exported with module.exports
+        [libraryTarget](/configuration/output#output-librarytarget): "commonjs-module", // exports with module.exports
+        [libraryTarget](/configuration/output#output-librarytarget): "commonjs", // exported as properties to exports
+        [libraryTarget](/configuration/output#output-librarytarget): "amd", // defined with AMD defined method
+        [libraryTarget](/configuration/output#output-librarytarget): "this", // property set on this
+        [libraryTarget](/configuration/output#output-librarytarget): "var", // variable defined in root scope
+        [libraryTarget](/configuration/output#output-librarytarget): "assign", // blind assignment
+        [libraryTarget](/configuration/output#output-librarytarget): "window", // property set to window object
+        [libraryTarget](/configuration/output#output-librarytarget): "global", // property set to global object
+        [libraryTarget](/configuration/output#output-librarytarget): "jsonp", // jsonp wrapper
     </details>
     // the type of the exported library
 
