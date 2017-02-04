@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/a61e4e56865893849959.css" rel="stylesheet">
+      <link href="/6c32a0d05ffcd51bfe12.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -69,7 +69,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>On running webpack on this project, we find that webpack has created two new bundles, <code>bundle.js</code> and <code>0.bundle.js</code>.</p>
 <p><code>entry.js</code> and <code>a.js</code> are bundled in <code>bundle.js</code>.</p>
 <p><code>b.js</code> is bundled in <code>0.bundle.js</code>.</p>
-<blockquote class="todo"><div class="tip-content"> <code>require.ensure</code> relies on <code>Promises</code> internally. If you use <code>require.ensure</code> with older browsers, remember to shim <code>Promise.</code> <a href="https://github.com/stefanpenner/es6-promise">es6-promise polyfill</a>. </div></blockquote><h2 class="header"><a class="anchor" href="#gotchas-for-require-ensure-" id="gotchas-for-require-ensure-"></a><span class="text">Gotchas for <code>require.ensure()</code></span><a class="icon-link" href="#gotchas-for-require-ensure-"></a></h2>
+<blockquote class="warning"><div class="tip-content"> <code>require.ensure</code> relies on <code>Promises</code> internally. If you use <code>require.ensure</code> with older browsers, remember to shim <code>Promise.</code> <a href="https://github.com/stefanpenner/es6-promise">es6-promise polyfill</a>. </div></blockquote><h2 class="header"><a class="anchor" href="#gotchas-for-require-ensure-" id="gotchas-for-require-ensure-"></a><span class="text">Gotchas for <code>require.ensure()</code></span><a class="icon-link" href="#gotchas-for-require-ensure-"></a></h2>
 <h3 class="header"><a class="anchor" href="#empty-array-as-parameter" id="empty-array-as-parameter"></a><span class="text">Empty Array as Parameter</span><a class="icon-link" href="#empty-array-as-parameter"></a></h3>
 <pre><code class="lang-javascript">require<span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>require<span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;./a.js&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
