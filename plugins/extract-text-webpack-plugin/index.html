@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/32a6a0c968d049402d0a.css" rel="stylesheet">
+      <link href="/78b64caef22925f75c1d.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -32,8 +32,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">{</span>
         test<span class="token punctuation">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span>
         use<span class="token punctuation">:</span> ExtractTextPlugin<span class="token punctuation">.</span><span class="token function">extract</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-          fallbackLoader<span class="token punctuation">:</span> <span class="token string">&quot;style-loader&quot;</span><span class="token punctuation">,</span>
-          loader<span class="token punctuation">:</span> <span class="token string">&quot;css-loader&quot;</span>
+          fallback<span class="token punctuation">:</span> <span class="token string">&quot;style-loader&quot;</span><span class="token punctuation">,</span>
+          use<span class="token punctuation">:</span> <span class="token string">&quot;css-loader&quot;</span>
         <span class="token punctuation">}</span><span class="token punctuation">)</span>
       <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
@@ -106,6 +106,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <td style="text-align:center"><code>{Boolean}</code></td>
 <td style="text-align:left">Disables the plugin</td>
 </tr>
+<tr>
+<td style="text-align:center"><strong><code>options.ignoreOrder</code></strong></td>
+<td style="text-align:center"><code>{Boolean}</code></td>
+<td style="text-align:left">Disables order check (useful for CSS Modules!), <code>false</code> by default</td>
+</tr>
 </tbody>
 </table>
 <ul>
@@ -130,12 +135,12 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><strong><code>options.loader</code></strong></td>
+<td style="text-align:center"><strong><code>options.use</code></strong></td>
 <td style="text-align:center"><code>{String}</code>/<code>{Object}</code></td>
 <td style="text-align:left">Loader(s) that should be used for converting the resource to a CSS exporting module <em>(required)</em></td>
 </tr>
 <tr>
-<td style="text-align:center"><strong><code>options.fallbackLoader</code></strong></td>
+<td style="text-align:center"><strong><code>options.fallback</code></strong></td>
 <td style="text-align:center"><code>{String}</code>/<code>{Object}</code></td>
 <td style="text-align:left">loader(e.g <code>&apos;style-loader&apos;</code>) that should be used when the CSS is not extracted (i.e. in an additional chunk when <code>allChunks: false</code>)</td>
 </tr>
