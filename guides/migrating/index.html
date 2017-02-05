@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/beeb235bed0c3ac7ef47.css" rel="stylesheet">
+      <link href="/a5dd2c32ba533ba864b5.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -205,8 +205,8 @@ This means that if you want to see uglifyjs warnings, you need to set <code>comp
     test: /.css$/,
 <span class="token deleted">-    loader: ExtractTextPlugin.extract(&quot;style-loader&quot;, &quot;css-loader&quot;, { publicPath: &quot;/dist&quot; })</span>
 <span class="token inserted">+    loader: ExtractTextPlugin.extract({</span>
-<span class="token inserted">+      fallbackLoader: &quot;style-loader&quot;,</span>
-<span class="token inserted">+      loader: &quot;css-loader&quot;,</span>
+<span class="token inserted">+      fallback: &quot;style-loader&quot;,</span>
+<span class="token inserted">+      use: &quot;css-loader&quot;,</span>
 <span class="token inserted">+      publicPath: &quot;/dist&quot;</span>
 <span class="token inserted">+    })</span>
   ]
