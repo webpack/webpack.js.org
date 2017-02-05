@@ -1,11 +1,12 @@
 ---
 title: 代码拆分 - Libraries
-sort: 4
+sort: 32
 contributors:
   - pksjce
   - chrisVillanueva
   - johnstew
   - rafde
+  - bartushek
 ---
 
 A typical application uses third party libraries for framework/functionality needs. Particular versions of these libraries are used and code here does not change often. However, the application code changes frequently.
@@ -113,9 +114,9 @@ Now run `webpack` on your application. Bundle inspection shows that `moment` cod
 ## Implicit Common Vendor Chunk
 
 You can configure a `CommonsChunkPlugin` instance to only accept vendor libraries.
- 
+
  __webpack.config.js__
- 
+
 ```javascript
 var webpack = require('webpack');
 var path = require('path');
@@ -177,6 +178,8 @@ module.exports = function(env) {
 ```
 
 With the above webpack config, we see three bundles being generated. `vendor`, `main` and `manifest` bundles.
+
+T> Note that long-term bundle caching is achieved with content-based hashing policy `chunkhash`. Learn more about [caching](/guides/caching/).
 
 ***
 

@@ -1,6 +1,6 @@
 ---
 title: 起步
-sort: 3
+sort: 0
 contributors:
   - bebraw
   - varunjayaraman
@@ -10,19 +10,23 @@ contributors:
   - simon04
 ---
 
-webpack 是构建我们应用程序中 JavaScript 模块的工具。从使用 `webpack` [cli](/api/cli) 或 [api](/api/node) ，并按照[安装说明](/get-started/install-webpack)开始。
-webpack 简化快速构建应用程序依赖图表的流程，以正确的顺序打包他们。webpack 能够配置自定义优化代码，在生产环境构建时拆分 vendor/css/js 代码，运行开发服务实现页面无刷新、代码热重载，以及其他非常酷炫的特性。了解更多关于[为什么使用 wepback](/get-started/why-webpack)。
+webpack 是构建我们应用程序中 JavaScript 模块的工具。从使用 `webpack` [cli](/api/cli) 或 [api](/api/node) ，并按照[安装说明](/guides/installation)开始。
+webpack 简化快速构建应用程序依赖图表的流程，以正确的顺序打包他们。webpack 能够配置自定义优化代码，在生产环境构建时拆分 vendor/css/js 代码，运行开发服务实现页面无刷新、代码热重载，以及其他非常酷炫的特性。了解更多关于[为什么使用 wepback](/guides/why-webpack)。
 
 ## 创建一个 bundle 文件
 
-创建一个示例目录来尝试 wepback。[安装 webpack](/get-started/install-webpack)。
+创建一个示例目录来尝试 wepback。[安装 webpack](/guides/installation)。
 
 ```bash
 mkdir webpack-demo && cd webpack-demo
 npm init -y
-npm install --save-dev webpack@beta
+npm install --save-dev webpack
+```
+
+```bash
 ./node_modules/.bin/webpack --help # 显示有效的 CLI 命令列表
 .\node_modules\.bin\webpack --help # windows 用户请使用此路径
+webpack --help # 如果你在全局安装了 webpack
 ```
 
 现在在 `app` 子目录下创建一个 `index.js` 文件。
@@ -108,20 +112,26 @@ Also we will need to change the `index.html` to expect a single bundled js file.
 ```bash
 ./node_modules/.bin/webpack app/index.js dist/bundle.js
 
-Hash: a3c861a7d42fc8944524
+Hash: ff6c1d39b26f89b3b7bb
 Version: webpack 2.2.0
-Time: 90ms
-   Asset     Size  Chunks             Chunk Names
-index.js  1.56 kB       0  [emitted]  main
-   [0] ./app/index.js 170 bytes {0} [built]
-
+Time: 385ms
+    Asset    Size  Chunks                    Chunk Names
+bundle.js  544 kB       0  [emitted]  [big]  main
+   [0] ./~/lodash/lodash.js 540 kB {0} [built]
+   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
+   [3] ./app/index.js 278 bytes {0} [built]
 ```
 T> 输出可能会稍有不同。如果构建成功，那么你就可以继续。
 
-T> 如果你在[全局安装 webpack](/get-started/install-webpack#global-installation)，你必须使用 `webpack` 来调用 webpack。
-
 在浏览器中打开 `webpack.config.js`，查看成功后 bundle 的结果。
 你应该看到带有以下文本的页面：'Hello webpack'。
+
+## Using ES6 modules with webpack
+
+Noticed the use of [ES6 module import](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/import) (alias ES2015, *harmony*) in `app/index.js`? Although `import`/`export` statements are not supported in browsers (yet), using them is fine since webpack will replace those instructions with an ES5 compatible wrapper code. Inspect `dist/bundle.js` to convince yourself.
+
+Note that webpack will not touch your code other than `import`/`export`. In case you are using other [ES6 features](http://es6-features.org/), make sure to use a transpiler such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/).
 
 ## 使用带有配置的 webpack
 
@@ -145,13 +155,15 @@ module.exports = {
 ```bash
 webpack --config webpack.config.js
 
-Hash: a3c861a7d42fc8944524
+Hash: ff6c1d39b26f89b3b7bb
 Version: webpack 2.2.0
-Time: 90ms
-   Asset     Size  Chunks             Chunk Names
-index.js  1.56 kB       0  [emitted]  main
-   [0] ./app/index.js 170 bytes {0} [built]
-
+Time: 390ms
+    Asset    Size  Chunks                    Chunk Names
+bundle.js  544 kB       0  [emitted]  [big]  main
+   [0] ./~/lodash/lodash.js 540 kB {0} [built]
+   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
+   [3] ./app/index.js 278 bytes {0} [built]
 ```
 
 T> 如果存在 `webpack.config.js`，`webpack` 命令将默认选择使用它。

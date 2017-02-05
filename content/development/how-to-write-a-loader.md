@@ -48,9 +48,9 @@ I could write a loader that compiles the template from source, execute it and re
 
 Instead I should write loaders for every task in this use case and apply them all (pipeline):
 
-* jade-loader: Convert template to a module that exports a function.
-* apply-loader: Takes a function exporting module and returns raw result by applying query parameters.
-* html-loader: Takes HTML and exports a string exporting module.
+* `jade-loader`: Convert template to a module that exports a function.
+* `apply-loader`: Takes a function exporting module and returns raw result by applying query parameters.
+* `html-loader`: Takes HTML and exports a string exporting module.
 
 ### Generate modules that are modular
 
@@ -112,9 +112,9 @@ There are two options to do this:
 * Transform them to `require`s.
 * Use the `this.resolve` function to resolve the path
 
-Example 1 css-loader: The css-loader transform dependencies to `require`s, by replacing `@import`s with a require to the other stylesheet (processed with the css-loader too) and `url(...)` with a `require` to the referenced file.
+Example 1 `css-loader`: The `css-loader` transform dependencies to `require`s, by replacing `@import`s with a require to the other stylesheet (processed with the `css-loader` too) and `url(...)` with a `require` to the referenced file.
 
-Example 2 less-loader: The less-loader cannot transform `@import`s to `require`s, because all less files need to be compiled in one pass to track variables and mixins. Therefore the less-loader extends the less compiler with a custom path resolving logic. This custom logic uses `this.resolve` to resolve the file with the configuration of the module system (aliasing, custom module directories, etc.).
+Example 2 `less-loader`: The `less-loader` cannot transform `@import`s to `require`s, because all less files need to be compiled in one pass to track variables and mixins. Therefore the `less-loader` extends the less compiler with a custom path resolving logic. This custom logic uses `this.resolve` to resolve the file with the configuration of the module system (aliasing, custom module directories, etc.).
 
 If the language only accept relative urls (like css: `url(file)` always means `./file`), there is the `~`-convention to specify references to modules:
 
@@ -153,7 +153,7 @@ using a peerDependency allows the application developer to specify the exact ver
 
 ### Programmable objects as `query`-option
 
-there are situations where your loader requires programmable objects with functions which cannot stringified as `query`-string. The less-loader, for example, provides the possibility to specify [LESS-plugins](https://github.com/webpack/less-loader#less-plugins). In these cases, a loader is allowed to extend webpack's `options`-object to retrieve that specific option. In order to avoid name collisions, however, it is important that the option is namespaced under the loader's camelCased npm-name.
+there are situations where your loader requires programmable objects with functions which cannot stringified as `query`-string. The `less-loader`, for example, provides the possibility to specify [LESS-plugins](https://github.com/webpack/less-loader#less-plugins). In these cases, a loader is allowed to extend webpack's `options`-object to retrieve that specific option. In order to avoid name collisions, however, it is important that the option is namespaced under the loader's camelCased npm-name.
 
 **Example:**
 
