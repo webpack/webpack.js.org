@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 
 export default class TextRotater extends React.PureComponent {
-
   constructor(props) {
     super(props);
     this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
@@ -21,7 +20,9 @@ export default class TextRotater extends React.PureComponent {
     }, 50);
 
     setTimeout(() => {
-      this.textRotatorWrap.classList.add('text-rotater--slide-up');
+      if (this.textRotatorWrap) {
+        this.textRotatorWrap.classList.add('text-rotater--slide-up');
+      }
     }, delay);
 
     window.addEventListener('resize', this.calculateContentHeight);
@@ -39,14 +40,20 @@ export default class TextRotater extends React.PureComponent {
 
   handleTransitionEnd() {
     const { children, repeatDelay } = this.props;
-    this.textRotatorWrap.classList.remove('text-rotater--slide-up');
-    this.setState({
-      currentIndex: (this.state.currentIndex + 1) % React.Children.count(children),
-    }, () => {
-      setTimeout(() => {
-        this.textRotatorWrap.classList.add('text-rotater--slide-up');
-      }, repeatDelay);
-    });
+
+    if (this.textRotatorWrap) {
+      this.textRotatorWrap.classList.remove('text-rotater--slide-up');
+      
+      this.setState({
+        currentIndex: (this.state.currentIndex + 1) % React.Children.count(children),
+      }, () => {
+        setTimeout(() => {
+          if (this.textRotatorWrap) {
+            this.textRotatorWrap.classList.add('text-rotater--slide-up');
+          }
+        }, repeatDelay);
+      });
+    }
   }
 
   render() {
@@ -54,9 +61,17 @@ export default class TextRotater extends React.PureComponent {
     const { currentIndex, contentHeight } = this.state;
     const childrenCount = React.Children.count(children);
 
-    const currentChild = React.cloneElement(children[currentIndex], { ref: c => (this.content = c)});
+    const currentChild = React.cloneElement(
+      children[currentIndex], { 
+        ref: c => (this.content = c)
+      }
+    );
 
-    const nextChild = React.cloneElement(children[(currentIndex + 1) % childrenCount]);
+    const nextChild = React.cloneElement(
+      children[
+        (currentIndex + 1) % childrenCount
+      ]
+    );
 
     return (
       <div className="text-rotater">
@@ -64,8 +79,7 @@ export default class TextRotater extends React.PureComponent {
           className="text-rotater__wrap"
           ref={ trw => (this.textRotatorWrap = trw) }
           onTransitionEnd={ this.handleTransitionEnd }
-          style={ { height: contentHeight, width: maxWidth } }
-        >
+          style={ { height: contentHeight, width: maxWidth } }>
           { currentChild }
           { nextChild }
         </div>
@@ -79,7 +93,6 @@ TextRotater.defaultProps = {
   repeatDelay: 3000,
 };
 
-
 TextRotater.propTypes = {
   children: PropTypes.arrayOf(PropTypes.node),
   delay: PropTypes.number,
@@ -88,4 +101,3 @@ TextRotater.propTypes = {
   // rotating between texts of different widths
   maxWidth: PropTypes.number,
 };
-
