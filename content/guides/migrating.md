@@ -1,6 +1,6 @@
 ---
 title: Migrating from v1 to v2
-sort: 19
+sort: 20
 contributors:
   - sokra
   - jhnns
@@ -269,8 +269,8 @@ module: {
     test: /.css$/,
 -    loader: ExtractTextPlugin.extract("style-loader", "css-loader", { publicPath: "/dist" })
 +    loader: ExtractTextPlugin.extract({
-+      fallbackLoader: "style-loader",
-+      loader: "css-loader",
++      fallback: "style-loader",
++      use: "css-loader",
 +      publicPath: "/dist"
 +    })
   ]

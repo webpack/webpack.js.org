@@ -1,6 +1,6 @@
 ---
 title: Caching
-sort: 16
+sort: 41
 contributors:
   - okonet
   - jouni-kantola
