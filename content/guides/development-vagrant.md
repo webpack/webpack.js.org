@@ -1,6 +1,6 @@
 ---
 title: Development - Vagrant
-sort: 12
+sort: 51
 contributors:
   - SpaceK33z
   - chrisVillanueva

@@ -1,6 +1,6 @@
 ---
 title: Code Splitting - Using require.ensure
-sort: 5
+sort: 33
 contributors:
   - pksjce
   - rahulcs

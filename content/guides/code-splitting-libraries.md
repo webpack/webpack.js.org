@@ -1,6 +1,6 @@
 ---
 title: Code Splitting - Libraries
-sort: 4
+sort: 32
 contributors:
   - pksjce
   - chrisVillanueva

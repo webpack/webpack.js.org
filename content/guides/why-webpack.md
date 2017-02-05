@@ -5,7 +5,6 @@ contributors:
   - bebraw
   - chrisVillanueva
   - tashian
-sort: 2
 ---
 
 webpack is a module bundler, like Browserify or Brunch. It is not a task runner. Make, Grunt, or Gulp are task runners. But people get confused about the difference, so let's clear that up right away.
