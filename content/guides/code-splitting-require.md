@@ -1,6 +1,6 @@
 ---
 title: Code Splitting - Using require.ensure
-sort: 5
+sort: 33
 contributors:
   - pksjce
   - rahulcs
@@ -77,7 +77,7 @@ On running webpack on this project, we find that webpack has created two new bun
 
 `b.js` is bundled in `0.bundle.js`.
 
-?> `require.ensure` relies on `Promises` internally. If you use `require.ensure` with older browsers, remember to shim `Promise.` [es6-promise polyfill](https://github.com/stefanpenner/es6-promise).
+W> `require.ensure` relies on `Promises` internally. If you use `require.ensure` with older browsers, remember to shim `Promise.` [es6-promise polyfill](https://github.com/stefanpenner/es6-promise).
 
 ## Gotchas for `require.ensure()`
 

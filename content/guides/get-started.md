@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-sort: 3
+sort: 0
 contributors:
   - bebraw
   - varunjayaraman
@@ -10,19 +10,23 @@ contributors:
   - simon04
 ---
 
-webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/get-started/install-webpack).
-webpack simplifies your workflow by quickly constructing a dependency graph of your application and bundling them in the right order. webpack can be configured to customise optimisations to your code, to split vendor/css/js code for production, run a development server that hot-reloads your code without page refresh and many such cool features. Learn more about [why you should use webpack](/get-started/why-webpack).
+webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/guides/installation).
+webpack simplifies your workflow by quickly constructing a dependency graph of your application and bundling them in the right order. webpack can be configured to customise optimisations to your code, to split vendor/css/js code for production, run a development server that hot-reloads your code without page refresh and many such cool features. Learn more about [why you should use webpack](/guides/why-webpack).
 
 ## Creating a bundle
 
-Create a demo directory to try out webpack. [Install webpack](/get-started/install-webpack).
+Create a demo directory to try out webpack. [Install webpack](/guides/installation).
 
 ```bash
 mkdir webpack-demo && cd webpack-demo
 npm init -y
-npm install --save-dev webpack@beta
+npm install --save-dev webpack
+```
+
+```bash
 ./node_modules/.bin/webpack --help # Shows a list of valid cli commands
 .\node_modules\.bin\webpack --help # For windows users
+webpack --help # If you installed webpack globally
 ```
 
 Now create a subdirectory `app` with an `index.js` file.
@@ -107,20 +111,26 @@ Now run `webpack` on this folder with `index.js` as the entry file and `bundle.j
 ```bash
 ./node_modules/.bin/webpack app/index.js dist/bundle.js
 
-Hash: a3c861a7d42fc8944524
+Hash: ff6c1d39b26f89b3b7bb
 Version: webpack 2.2.0
-Time: 90ms
-   Asset     Size  Chunks             Chunk Names
-index.js  1.56 kB       0  [emitted]  main
-   [0] ./app/index.js 170 bytes {0} [built]
-
+Time: 385ms
+    Asset    Size  Chunks                    Chunk Names
+bundle.js  544 kB       0  [emitted]  [big]  main
+   [0] ./~/lodash/lodash.js 540 kB {0} [built]
+   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
+   [3] ./app/index.js 278 bytes {0} [built]
 ```
 T> Output may vary. If the build is successful then you are good to go.
 
-T> If you [installed webpack globally](/get-started/install-webpack#global-installation), you have to invoke webpack using `webpack`.
-
 Open `index.html` in your browser to see the result of a successful bundle.
 You should see a page with the following text: 'Hello webpack'.
+
+## Using ES6 modules with webpack
+
+Noticed the use of [ES6 module import](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/import) (alias ES2015, *harmony*) in `app/index.js`? Although `import`/`export` statements are not supported in browsers (yet), using them is fine since webpack will replace those instructions with an ES5 compatible wrapper code. Inspect `dist/bundle.js` to convince yourself.
+
+Note that webpack will not touch your code other than `import`/`export`. In case you are using other [ES6 features](http://es6-features.org/), make sure to use a transpiler such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/).
 
 ## Using webpack with a config
 
@@ -145,13 +155,15 @@ This file can be run by webpack as follows.
 ```bash
 webpack --config webpack.config.js
 
-Hash: a3c861a7d42fc8944524
+Hash: ff6c1d39b26f89b3b7bb
 Version: webpack 2.2.0
-Time: 90ms
-   Asset     Size  Chunks             Chunk Names
-index.js  1.56 kB       0  [emitted]  main
-   [0] ./app/index.js 170 bytes {0} [built]
-
+Time: 390ms
+    Asset    Size  Chunks                    Chunk Names
+bundle.js  544 kB       0  [emitted]  [big]  main
+   [0] ./~/lodash/lodash.js 540 kB {0} [built]
+   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
+   [3] ./app/index.js 278 bytes {0} [built]
 ```
 
 T> If a `webpack.config.js` is present, `webpack` command picks it up by default.

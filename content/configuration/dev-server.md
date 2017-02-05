@@ -18,7 +18,7 @@ T> Options that are compatible with [webpack-dev-middleware](https://github.com/
 
 `object`
 
-This set of options is picked up by [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and can be used to change it's behavior in various ways. Here's a simple example that gzips and serves everything from our `dist/` directory:
+This set of options is picked up by [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and can be used to change its behavior in various ways. Here's a simple example that gzips and serves everything from our `dist/` directory:
 
 ```js
 devServer: {
@@ -183,6 +183,17 @@ hot: true
 ```
 
 ?> Add various other steps needed for this to work. (From my experience, and the current docs it looks like other steps are needed here - not like in the cmd line where it's just a flag)
+
+
+## `devServer.hotOnly` - CLI only
+
+`boolean`
+
+Enables Hot Module Replacement (see [`devServer.hot`](#devserver-hot)) without page refresh as fallback in case of build failures.
+
+```js
+hotOnly: true
+```
 
 
 ## `devServer.https`

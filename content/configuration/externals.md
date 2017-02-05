@@ -93,7 +93,22 @@ This syntax is used to describe all the possible ways that an external library c
 
 ### function
 
-?> TODO - Not sure how to use it in and function form. Would be great to see a sample.
+It might be useful to define your own function to control the behavior of what you want to externalize from webpack. [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals), for example, excludes all modules from the node_modules and provides some options to, for example, whitelist packages.
+
+It basically comes down to this:
+
+```javascript
+externals: [
+  function(context, request, callback) {
+    if (/^yourregex$/.test(request)){
+      return callback(null, 'commonjs ' + request);
+    }
+    callback();
+  }
+],
+```
+
+The `'commonjs ' + request` defines the type of module that needs to be externalized.
 
 ### regex
 

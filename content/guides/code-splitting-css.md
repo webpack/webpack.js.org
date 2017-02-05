@@ -1,19 +1,19 @@
 ---
 title: Code Splitting - CSS
-sort: 3
+sort: 31
 contributors:
   - pksjce
   - jonwheeler
   - johnstew
 ---
 
-In webpack, when you use the css-loader and import CSS into your JavaScript files, the CSS is bundled along with your JavaScript.
+In webpack, when you use the `css-loader` and import CSS into your JavaScript files, the CSS is bundled along with your JavaScript.
 This has the disadvantage that, you will not be able to utilize the browser's ability to load CSS asynchronously and parallel. Instead, your page will have to wait until your whole JavaScript bundle is loaded, to style itself.
-webpack can help with this problem by bundling the CSS separately using [extract-text-webpack-plugin](https://github.com/webpack/extract-text-webpack-plugin) and the [css-loader](https://github.com/webpack/css-loader).
+webpack can help with this problem by bundling the CSS separately using [extract-text-webpack-plugin](https://github.com/webpack/extract-text-webpack-plugin) and the [`css-loader`](https://github.com/webpack/css-loader).
 
 ## Using `css-loader`
 
-To import css into your JavaScript code like [any other module](/concepts/modules), you will have to use the [css-loader](https://github.com/webpack/css-loader).
+To import css into your JavaScript code like [any other module](/concepts/modules), you will have to use the [`css-loader`](https://github.com/webpack/css-loader).
 The webpack config with `css-loader` will look like
 
 ```javascript
@@ -47,7 +47,7 @@ Adapting from the previous example with the `css-loader`, we should add `Extract
 
 ```javascript
 ...
-loader: ExtractTextPlugin.extract('css-loader?sourceMap') //Can be used without sourcemaps too.
+use: ExtractTextPlugin.extract({loader:'css-loader',options:{sourceMap:true}) //Can be used without sourcemaps too.
 ...
 ```
 
@@ -77,8 +77,11 @@ module.exports = function () {
             rules: [{
                 test: /\.css$/,
                 exclude: /node_modules/,
-                loader: ExtractTextPlugin.extract({
-                    loader: 'css-loader?sourceMap'
+                use: ExtractTextPlugin.extract({
+                    loader: 'css-loader',
+                    options: {
+                      sourceMap: true
+                    }
                 })
             }]
         },
