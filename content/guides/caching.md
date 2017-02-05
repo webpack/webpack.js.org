@@ -1,6 +1,6 @@
 ---
 title: Caching
-sort: 16
+sort: 41
 contributors:
   - okonet
   - jouni-kantola
@@ -153,7 +153,7 @@ To generate identifiers that are preserved over builds, webpack supply the `Name
 
 > TODO: When exist, link to `NamedModulesPlugin` and `HashedModuleIdsPlugin` docs pages
 
-> TODO: Describe how the option `recordsPath` option works 
+> TODO: Describe how the option `recordsPath` option works
 
 The chunk manifest (along with bootstrapping/runtime code) is then placed into the entry chunk and it is crucial for webpack-packaged code to work.
 
