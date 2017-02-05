@@ -10,9 +10,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/concepts/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/configuration/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/contribute/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/development/index.html</loc>
     </url>    <url>
@@ -22,9 +22,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/license/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/organization/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/organization/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/plugins/index.html</loc>
     </url>    <url>
@@ -72,9 +72,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/configuration/externals/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/configuration/node/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/configuration/module/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration/node/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/other-options/index.html</loc>
     </url>    <url>
@@ -154,11 +154,11 @@
     </url>    <url>
         <loc>https://webpack.js.org/loaders/babel-loader/index.html</loc>
     </url>    <url>
+        <loc>https://webpack.js.org/loaders/bundle-loader/index.html</loc>
+    </url>    <url>
         <loc>https://webpack.js.org/loaders/coffee-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/coffee-redux-loader/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/loaders/bundle-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/coverjs-loader/index.html</loc>
     </url>    <url>
@@ -190,9 +190,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/loaders/node-loader/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/raw-loader/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/null-loader/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/loaders/raw-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/react-proxy-loader/index.html</loc>
     </url>    <url>
@@ -204,9 +204,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/loaders/transform-loader/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/val-loader/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/url-loader/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/loaders/val-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/worker-loader/index.html</loc>
     </url>    <url>
