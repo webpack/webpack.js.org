@@ -1,6 +1,6 @@
 ---
 title: Migrating from v1 to v2
-sort: 19
+sort: 20
 contributors:
   - sokra
   - jhnns

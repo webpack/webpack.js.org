@@ -1,6 +1,5 @@
 ---
 title: Handling Compatibility
-sort: 11
 ---
 
 ?> require.main
