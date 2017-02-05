@@ -1,6 +1,6 @@
 ---
 title: 代码拆分
-sort: 2
+sort: 30
 contributors:
   - pksjce
   - pastelsky
@@ -16,14 +16,14 @@ contributors:
 
 一个典型的应用程序，会依赖于许多提供框架/功能需求的第三方库代码。不同于应用程序代码，这些第三方库代码不会频繁修改。
 
-如果我们将这些库(library)中的代码，保留到与应用程序代码相独立的 bundle 上，我们就可以利用浏览器缓存机制，把这些文件长时间的缓存到用户的机器上。
+如果我们将这些库(library)中的代码，保留到与应用程序代码相独立的 bundle上，我们就可以利用浏览器缓存机制，把这些文件长时间的缓存到用户的机器上。
 
 为了完成这个目标，不管应用程序代码如何变化，vendor 文件名中的 `hash` 部分都必须保持不变。学习[如何使用 CommonsChunkPlugin 分离 vendor/library](/guides/code-splitting-libraries) 代码。
 
 ### 分离 CSS
 
-你可能需要将你的样式分离到单独的 bundle 中，与应用程序的逻辑分离。
-这加强了样式的可缓存性，并且浏览器能够并行加载应用程序代码中的样式文件，避免无样式内容造成的闪烁问题(FOUC - flash of unstyled content)。
+你可能需要将你的样式分离到单独的 bundle中，与应用程序的逻辑分离。
+这加强了样式的可缓存性，并且浏览器能够并行加载应用程序代码中的样式文件，避免无样式内容造成的闪烁问题( FOUC -flash of unstyled content)。
 
 学习[如何使用 `ExtractTextWebpackPlugin` 来分离 css](/guides/code-splitting-css)。
 

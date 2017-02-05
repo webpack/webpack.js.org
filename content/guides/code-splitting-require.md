@@ -1,6 +1,6 @@
 ---
 title: 代码拆分 - 使用 require.ensure
-sort: 5
+sort: 33
 contributors:
   - pksjce
   - rahulcs
@@ -77,7 +77,7 @@ module.exports = function(env) {
 
 `b.js` 被打包进 `0.bundle.js`.
 
-?> `require.ensure` 内部依赖于 `Promises`。 如果你在旧的浏览器中使用 `require.ensure` 请记得 去 shim `Promise.` [es6-promise polyfill](https://github.com/stefanpenner/es6-promise).
+W> `require.ensure` 内部依赖于 `Promises`。 如果你在旧的浏览器中使用 `require.ensure` 请记得 去 shim `Promise.` [es6-promise polyfill](https://github.com/stefanpenner/es6-promise).
 
 ## `require.ensure()` 的坑点
 

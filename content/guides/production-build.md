@@ -1,6 +1,6 @@
 ---
 title: 生产环境构建
-sort: 13
+sort: 40
 contributors:
   - henriquea
   - rajagopal4890
@@ -46,7 +46,7 @@ Thus, depending on the [devtool options](/configuration/devtool), Source Maps ar
 
 We encourage you to have Source Maps enabled in production. They are useful for debugging and to run benchmark tests. webpack can generate inline Source Maps included in the bundles or separated files.
 
-In your configuration, use the `devtools` object to set the Source Map type. We currently support seven types of Source Maps. You can find more information about them in our [configuration](/configuration/devtool) documentation page.
+In your configuration, use the `devtool` object to set the Source Map type. We currently support seven types of Source Maps. You can find more information about them in our [configuration](/configuration/devtool) documentation page.
 
 One of the good options to go is using `cheap-module-source-map` which simplifies the Source Maps to a single mapping per line.
 
@@ -115,7 +115,7 @@ module.exports = function (env) {
             minimize: true,
             debug: false
         }),
-        new UglifyJsPlugin({
+        new webpack.optimize.UglifyJsPlugin({
             beautify: false,
             mangle: {
                 screw_ie8: true,

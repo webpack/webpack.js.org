@@ -1,15 +1,15 @@
 ---
 title: Authoring Libraries
-sort: 18
 contributors:
     - pksjce
     - johnstew
+    - simon04
 ---
 webpack是一个用来打包应用（application）和库（library）的代码的工具。如果你是一个JavaScript库的作者，并且想要将你的打包逻辑给流程化（streamline），那么这篇文档将会帮助到你。
 
 ## 创建一个库
 
-这里有一个小的库，可以将数字1到5在其单词形式和数字形式之间转换。代码如下：
+假设你正在写一个小的 library `webpack-numbers'，允许将数字1到5从数字转换为文本表示，反之亦然。实现使用ES6模块，可能看起来像这样：
 
 __src/index.js__
 ```javascript
@@ -31,13 +31,10 @@ export function wordToNum(word) {
 该库的使用方式如下：
 
 ```javascript
-// 使用 ES2015 模块引入
-
 import * as webpackNumbers from 'webpack-numbers';
 ...
 webpackNumbers.wordToNum('Two') // 输出 2
 ...
-
 
 // 使用 CommonJS 模块引入
 
@@ -45,8 +42,9 @@ var webpackNumbers = require('webpack-numbers');
 ...
 webpackNumbers.numToWord(3); // output is Three
 ...
+```
 
-
+```html
 // 使用 script 标签引入
 
 <html>
@@ -168,7 +166,7 @@ module.exports = {
     output: {
         ...
         library: 'webpackNumbers',
-        libraryTarget:'umd' // 其他可取值 - amd, commonjs, commonjs2, commonjs-module, this, var
+        libraryTarget: 'umd' // 其他可取值 - amd, commonjs, commonjs2, commonjs-module, this, var
     }
     ...
 };

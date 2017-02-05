@@ -1,5 +1,5 @@
 ---
-title: define-plugin
+title: DefinePlugin
 ---
 
 ``` javascript

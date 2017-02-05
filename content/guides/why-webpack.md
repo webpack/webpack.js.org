@@ -4,7 +4,6 @@ contributors:
   - pksjce
   - bebraw
   - chrisVillanueva
-sort: 2
 ---
 
 webpack 通常会被拿来和其他工具（例如 Make, Grunt, Gulp, Browserify 或者 Brunch）对比。然而，这其中一些工具（Make, Grunt 和 Gulp 是任务执行器(task runner)）与 webpack 相比，它们在用途上有很多不同，webpack 是一个模块打包器(module bundler)。直接对比它们可能会带来各种困惑，所以让我们先列出这些不同类型工具之间的差异。

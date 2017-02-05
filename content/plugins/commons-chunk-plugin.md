@@ -1,5 +1,5 @@
 ---
-title: commons-chunk-plugin
+title: CommonsChunkPlugin
 contributors:
   - bebraw
   - simon04
@@ -105,7 +105,7 @@ new CommonsChunkPlugin({
 <script src="app.js" charset="utf-8"></script>
 ```
 
-提示：结合长期缓存，你可能需要使用这个[插件](https://github.com/diurnalist/chunk-manifest-webpack-plugin)去避免 公共chunk 改变。 你也需要使用 `records` 去保持稳定的模块 id。
+提示：结合长期缓存，你可能需要使用 [`ChunkManifestWebpackPlugin`](https://github.com/diurnalist/chunk-manifest-webpack-plugin) 去避免 公共chunk 改变。 你也需要使用 `records` 去保持稳定的模块 id。
 
 ###  将公共模块打包进父 chunk
 
@@ -148,9 +148,9 @@ new CommonsChunkPlugin({
 
 你也可以给 `minChunks` 传入一个函数。这个函数会被 `CommonsChunkPlugin` 插件回调，并且调用函数时会传入 `module` 和 `count` 参数。
 
-`module` 参数代表每个 chunks 里的模块，这些 chunks是你通过 `name` 参数传入的。
+ `module` 参数代表每个 chunks 里的模块，这些 chunks是你通过 `name` 参数传入的。
 
-`count` 参数表示 `module` 被使用的 chunk 数量。
+ `count` 参数表示 `module` 被使用的 chunk 数量。
 
 当你想要对 `CommonsChunk` 如何决定模块被打包到哪里的算法有更为细致的控制， 这个配置就会非常有用。
 
@@ -160,9 +160,9 @@ new CommonsChunkPlugin({
   name: "my-single-lib-chunk",
   filename: "my-single-lib-chunk.js",
   minChunks: function(module, countOfHowManyTimesThisModuleIsUsedAcrossAllChunks) {
-    // 如果模块是一个路径，而且在路径中有 "somelib" 这个名字出现，
+    // 如果模块是一个路径，而且在路径中有 "somelib"这个名字出现，
     // 而且它还被三个不同的 chunks/入口chunk 所使用，那请将它拆分到
-    // 另一个分开的 chunk 中，chunk 的 keyname 是 "my-single-lib-chunk"， 而文件名是
+    // 另一个分开的 chunk 中，chunk 的 keyname 是"my-single-lib-chunk"， 而文件名是
     // "my-single-lib-chunk.js"
     return module.resource && (/somelib/).test(module.resource) && count === 3;
   }
