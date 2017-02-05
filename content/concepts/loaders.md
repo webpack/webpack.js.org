@@ -28,7 +28,7 @@ Secondly, configure in your `webpack.config.js` that for every `.css` file the `
 module.exports = {
   module: {
     rules: [
-      {test: /\.css$/, use: ['css-loader'](/loaders/css-loader)},
+      {test: /\.css$/, use: ['css-loader'](https://github.com/webpack/css-loader)},
       {test: /\.ts$/, use: ['ts-loader'](https://github.com/TypeStrong/ts-loader)}
     ]
   }
