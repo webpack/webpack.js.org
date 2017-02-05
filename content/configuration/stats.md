@@ -52,6 +52,8 @@ stats: {
   chunksSort: "field",
   // Context directory for request shortening
   context: "../src/",
+  // `webpack --colors` equivalent
+  colors: true,
   // Add errors
   errors: true,
   // Add details to errors (like resolving log)
