@@ -5,7 +5,7 @@ edit: https://github.com/webpack/null-loader/edit/master/README.md
 ---
 # null-loader
 
-A loader that returns an empty module.
+返回空模块的 加载器(loader)
 
 ***
 
