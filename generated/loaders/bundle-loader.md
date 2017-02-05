@@ -3,37 +3,37 @@ title: bundle-loader
 source: https://raw.githubusercontent.com/webpack/bundle-loader/master/README.md
 edit: https://github.com/webpack/bundle-loader/edit/master/README.md
 ---
-# bundle loader for webpack
+# webpack 的文件束加载器
 
 ## Usage
 
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
+[文档: 使用加载器](http://webpack.github.io/docs/using-loaders.html)
 
 ``` javascript
-// The chunk is requested, when you require the bundle
+// 当你引用 文件束 (bundle) 的时候，chunk 会被浏览器加载。
 var waitForChunk = require("bundle-loader!./file.js");
 
-// To wait until the chunk is available (and get the exports)
-//  you need to async wait for it.
+// 为了等待 chunk 的加载完成 (而且为了拿到 exports 输出)
+// 你需要异步去等待它
 waitForChunk(function(file) {
-	// use file like is was required with
+	// 这里可以使用file，就像是用下面的代码require进来一样
 	// var file = require("./file.js");
 });
-// wraps the require in a require.ensure block
+// 将 require 包裹在 require.ensure 的代码块中
 ```
 
-The file is requested when you require the bundle loader. If you want it to request it lazy, use:
+当你引用文件束的时候，chunk 会被浏览器加载。如果你想它懒加载，请用：
 
 ``` javascript
 var load = require("bundle-loader?lazy!./file.js");
 
-// The chunk is not requested until you call the load function
+// 文件束不会被加载，除非你调用了 call 函数
 load(function(file) {
 
 });
 ```
 
-You may set name for bundle (`name` query parameter). See [documentation](https://github.com/webpack/loader-utils#interpolatename).
+你可能会给文件束设名称(`name` 查询参数)。请查看[documentation](https://github.com/webpack/loader-utils#interpolatename).
 
 ``` javascript
 require("bundle-loader?lazy&name=my-chunk!./file.js");
@@ -42,3 +42,7 @@ require("bundle-loader?lazy&name=my-chunk!./file.js");
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/loaders/bundle-loader/

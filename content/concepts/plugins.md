@@ -5,6 +5,7 @@ contributors:
   - TheLarkInn
   - jhnns
   - rouzbeh84
+  - johnstew
 ---
 
 插件是 wepback 的[支柱](https://github.com/webpack/tapable)功能。在你使用 webpack 配置时，webpack 自身也构建于**同样的插件系统**上！
@@ -47,12 +48,13 @@ T> 作为一个聪明的 JavaScript 开发者，你可能还记得 `Function.pro
 ```javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //通过 npm 安装
 const webpack = require('webpack'); //访问内置的插件
+const path = require('path');
 
 const config = {
   entry: './path/to/my/entry/file.js',
   output: {
     filename: 'my-first-webpack.bundle.js',
-    path: './dist'
+    path: path.resolve(__dirname, 'dist')
   },
   module: {
     loaders: [

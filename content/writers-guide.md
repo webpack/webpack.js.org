@@ -57,7 +57,7 @@ Same goes for tables.
 
 ### Configuration Properties
 
-[./configuration] properties should be ordered alphabetically as well:
+The [configuration](/configuration) properties should be ordered alphabetically as well:
 
 * `devServer.contentBase`
 * `devServer.compress`
@@ -85,3 +85,6 @@ W> This is a warning.
 
 ?> This is a todo.
 
+***
+
+> 原文：https://webpack.js.org/writers-guide/

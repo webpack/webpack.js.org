@@ -14,3 +14,8 @@ title: 贡献
 
 ## 捐献
 
+[Open Collective](https://opencollective.com/webpack)
+
+***
+
+> 原文：https://webpack.js.org/contribute/

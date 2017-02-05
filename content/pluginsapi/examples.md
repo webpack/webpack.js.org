@@ -7,4 +7,4 @@ sort: 9
 
 ***
 
-> 原文：https://webpack.js.org/loaders/
+> 原文：https://webpack.js.org/pluginsapi/examples/

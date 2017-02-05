@@ -19,13 +19,18 @@ let Sections = [
     children: [
       { title: 'API', url: 'api' },
       { title: '配置', url: 'configuration' },
-      { title: '加载器', url: 'loaders' },
-      { title: '插件', url: 'plugins' }
+      { title: 'LOADER', url: 'loaders' },
+      { title: '插件', url: 'plugins' },
+      { title: '开发', url: 'development' }
     ]
   },
   {
     title: '捐赠',
     url: '//opencollective.com/webpack'
+  },
+  {
+    title: 'Blog',
+    url: '//medium.com/webpack'
   }
 ];
 
@@ -33,7 +38,7 @@ let Sections = [
 export default class Navigation extends React.Component {
   render() {
     let { pageUrl = '' } = this.props;
-    
+
     return (
       <header className="navigation">
         <Container className="navigation__inner">

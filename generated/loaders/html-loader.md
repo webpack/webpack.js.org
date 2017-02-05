@@ -3,7 +3,7 @@ title: html-loader
 source: https://raw.githubusercontent.com/webpack/html-loader/master/README.md
 edit: https://github.com/webpack/html-loader/edit/master/README.md
 ---
-## Install
+## 安装
 
 ```bash
 npm i -D html-loader
@@ -11,15 +11,15 @@ npm i -D html-loader
 
 ## Usage
 
-By default every local `<img src="image.png">` is required (`require('./image.png')`). You may need to specify loaders for images in your configuration (recommended `file-loader` or `url-loader`).
+默认情况下，每个本地的 `<img src="image.png">` 都需要通过 require （`require('./image.png')`）来进行加载。您可能需要在配置中为图片指定 loader（推荐 `file-loader` 或 `url-loader` ）
 
-You can specify which tag-attribute combination should be processed by this loader via the query parameter `attrs`. Pass an array or a space-separated list of `<tag>:<attribute>` combinations. (Default: `attrs=img:src`)
+您可以通过查询参数 `attrs`，来指定哪个标签属性组合(tag-attribute combination)应该被此 loader 处理。传递数组或以空格分隔的 `<tag>:<attribute>` 组合的列表。（默认值：`attrs=img:src`）
 
-To completely disable tag-attribute processing (for instance, if you're handling image loading on the client side) you can pass in `attrs=false`.
+要完全禁用对标签属性的处理（例如，如果你在客户端处理图片加载），你可以传入 `attrs=false`。
 
-## Examples
+## 示例
 
-With this configuration:
+使用此配置：
 
 ```js
 {
@@ -67,14 +67,14 @@ require("html-loader?-attrs!./file.html");
 // => '<img  src="image.jpg"  data-src="image2x.png" >'
 ```
 
-minimized by running `webpack --optimize-minimize`
+通过运行 `webpack --optimize-minimize` 来最小化
 
 ```html
 '<img src=http://cdn.example.com/49eba9f/a9f92ca.jpg
       data-src=data:image/png;base64,...>'
 ```
 
-or specify the `minimize` query in your `webpack.conf.js`
+或者在 `webpack.conf.js` 中指定 `minimize` 查询参数
 
 ```js
 module: {
@@ -90,11 +90,9 @@ module: {
 
 ### 'Root-relative' URLs
 
-For urls that start with a `/`, the default behavior is to not translate them.
-If a `root` query parameter is set, however, it will be prepended to the url
-and then translated.
+对于以 `/` 开头的 url，默认行为是不转换它们。如果设置了 `root` 查询参数，它将被添加到 URL 之前，然后进行转换。
 
-With the same configuration as above:
+和上面配置相同：
 
 ``` html
 <!-- file.html -->
@@ -113,9 +111,9 @@ require("html-loader?root=.!./file.html");
 // => '<img  src="http://cdn.example.com/49eba9f/a992ca.jpg">'
 ```
 
-### Interpolation
+### 插值
 
-You can use `interpolate` flag to enable interpolation syntax for ES6 template strings, like so:
+您可以使用 `interpolate` 标记，为 ES6 模板字符串启用插值语法，就像这样：
 
 ```js
 require("html-loader?interpolate!./file.html");
@@ -126,7 +124,7 @@ require("html-loader?interpolate!./file.html");
 
 <div>${require('./components/gallery.html')}</div>
 ```
-And if you only want to use `require` in template and any other `${}` are not to be translated, you can set `interpolate` flag to `require`, like so:
+如果你只想在模板中使用 `require`，任何其它的 `${}` 不被转换，你可以设置 `interpolate` 标记为 `require`，就像这样：
 
 ```js
 require("html-loader?interpolate=require!./file.ftl");
@@ -143,17 +141,17 @@ require("html-loader?interpolate=require!./file.ftl");
 <div>${require('./components/gallery.html')}</div>
 ```
 
-### Export formats
+### 导出格式
 
-There are different export formats available:
+这里有几种不同的可用导出格式：
 
-+ ```module.exports``` (default, cjs format). "Hello world" becomes ```module.exports = "Hello world";```
-+ ```exports.default``` (when ```exportAsDefault``` param is set, es6to5 format). "Hello world" becomes ```exports.default = "Hello world";```
-+ ```export default``` (when ```exportAsEs6Default``` param is set, es6 format). "Hello world" becomes ```export default "Hello world";```
++ ```module.exports```（默认配置，cjs 格式）。"Hello world" 转为 ```module.exports = "Hello world";```
++ ```exports.default``` (当设置了 ```exportAsDefault``` 参数，es6to5 格式）。"Hello world" 转为 ```exports.default = "Hello world";```
++ ```export default``` (当设置了 ```exportAsEs6Default``` 参数，es6 格式)。"Hello world" 转为 ```export default "Hello world";```
 
-### Advanced options
+### 高级选项
 
-If you need to pass [more advanced options](https://github.com/webpack/html-loader/pull/46), especially those which cannot be stringified, you can also define an `htmlLoader`-property on your `webpack.config.js`:
+如果你需要传递[更多高级选项](https://github.com/webpack/html-loader/pull/46)，特别是那些不能被字符串化，你还可以在 `webpack.config.js` 中定义一个 `htmlLoader` 属性：
 
 ```js
 var path = require('path')
@@ -176,7 +174,7 @@ module.exports = {
 };
 ```
 
-If you need to define two different loader configs, you can also change the config's property name via `html-loader?config=otherHtmlLoaderConfig`:
+如果你需要定义两个不同的 loader 配置，你也可以通过 `html-loader?config=otherHtmlLoaderConfig` 改变配置的属性名：
 
 ```js
 module.exports = {
@@ -195,20 +193,15 @@ module.exports = {
 };
 ```
 
-### Export into HTML files
+### 导出到 HTML 文件
 
-A very common scenario is exporting the HTML into their own _.html_ file, to
-serve them directly instead of injecting with javascript. This can be achieved
-with a combination of 3 loaders:
+一个很常见的场景，将 HTML 导出到 _.html_ 文件中，直接访问它们，而不是使用 javascript 注入。这可以通过3个 loader 的组合来实现：
 
 - [file-loader](https://github.com/webpack/file-loader)
 - [extract-loader](https://github.com/peerigon/extract-loader)
 - html-loader
 
-The html-loader will parse the URLs, require the images and everything you
-expect. The extract loader will parse the javascript back into a proper html
-file, ensuring images are required and point to proper path, and the file loader
-will write the _.html_ file for you. Example:
+html-loader 将解析 URL，并请求图片和你所期望的一切资源。extract-loader 会将 javascript 解析为合适的 html 文件，确保引用的图片指向正确的路径，file-loader 将结果写入 .html 文件。示例：
 
 ```js
 {
@@ -217,7 +210,7 @@ will write the _.html_ file for you. Example:
 }
 ```
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
@@ -306,3 +299,7 @@ SOFTWARE.
 
 [cover]: https://codecov.io/gh/webpack/html-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack/html-loader
+
+***
+
+> 原文：https://webpack.js.org/loaders/html-loader/

@@ -3,6 +3,7 @@ title: Authoring Libraries
 sort: 18
 contributors:
     - pksjce
+    - johnstew
 ---
 webpack是一个用来打包应用（application）和库（library）的代码的工具。如果你是一个JavaScript库的作者，并且想要将你的打包逻辑给流程化（streamline），那么这篇文档将会帮助到你。
 
@@ -77,11 +78,12 @@ webpackNumbers.numToWord(3); // output is Three
 __webpack.config.js__
 
 ```javascript
+var path = require('path');
 
 module.exports = {
     entry: './src/index.js',
     output: {
-        path: './dist',
+        path: path.resolve(__dirname, 'dist'),
         filename: 'webpack-numbers.js'
     }
 };

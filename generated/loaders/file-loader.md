@@ -3,57 +3,54 @@ title: file-loader
 source: https://raw.githubusercontent.com/webpack/file-loader/master/README.md
 edit: https://github.com/webpack/file-loader/edit/master/README.md
 ---
-## Install
+## 安装
 
 ```bash
 npm install --save-dev file-loader
 ```
 
-## Usage
+## 用法
 
-By default the filename of the resulting file is the MD5 hash of the file's contents
-with the original extension of the required resource.
+默认情况下，生成的文件的文件名就是文件内容的 MD5 哈希值并会保留所引用资源的原始扩展名。
 
 ``` javascript
 var url = require("file-loader!./file.png");
-// => emits file.png as file in the output directory and returns the public url
-// => returns i. e. "/public-path/0dcbbaa701328a3c262cfd45869e351f.png"
+// => 输出 file.png 文件到输出目录并返回public url
+// => 即返回 "/public-path/0dcbbaa701328a3c262cfd45869e351f.png"
 ```
 
-By default a file is emitted, however this can be disabled if required (e.g. for server
-side packages).
+默认情况下，文件会被输出，不过如果需要的话，也可以不输出（比如使用了服务端的 packages）。
 
 ``` javascript
 var url = require("file-loader?emitFile=false!./file.png");
-// => returns the public url but does NOT emit a file
-// => returns i. e. "/public-path/0dcbbaa701328a3c262cfd45869e351f.png"
+// => 返回public url 但是不输出文件
+// => 即返回 "/public-path/0dcbbaa701328a3c262cfd45869e351f.png"
 ```
 
-#### Filename templates
+#### 文件名模板
 
-You can configure a custom filename template for your file using the query parameter `name`. For instance, to copy a file from your `context` directory into the output directory retaining the full directory structure, you might use `?name=[path][name].[ext]`.
+你可以使用查询参数 `name` 为你的文件配置自定义的文件名模板。例如，从你的 `context` 目录复制文件到输出目录，并且保留完整的目录结构，你可以使用 `?name=[path][name].[ext]` 。
 
-By default, the path and name you specify will output the file in that same directory and will also use that same URL path to access the file.
+默认情况下，会按照你指定的路径和文件名输出文件，且使用相同的 URL 路径来访问文件。
 
-You can specify custom output and public paths by using the `outputPath` and `publicPath` query name parameters:
+你可以使用 `outputPath` 和 `publicPath` 查询名称参数来指定自定义的输出路径和发布目录。
 
 ```
 use: "file-loader?name=[name].[ext]&publicPath=assets/foo/&outputPath=app/images/"
 ```
 
-#### Filename template placeholders
+#### 文件名模板占位符
 
-* `[ext]` the extension of the resource
-* `[name]` the basename of the resource
-* `[path]` the path of the resource relative to the `context` query parameter or option.
-* `[hash]` the hash of the content, `hex`-encoded `md5` by default
-* `[<hashType>:hash:<digestType>:<length>]` optionally you can configure
-  * other `hashType`s, i. e. `sha1`, `md5`, `sha256`, `sha512`
-  * other `digestType`s, i. e. `hex`, `base26`, `base32`, `base36`, `base49`, `base52`, `base58`, `base62`, `base64`
-  * and `length` the length in chars
-* `[N]` the N-th match obtained from matching the current file name against the query param `regExp`
-
-#### Examples
+* `[ext]` 资源扩展名
+* `[name]` 资源的基本名称
+* `[path]` 资源相对于 `context` 查询参数或者配置的路径
+* `[hash]` 内容的哈希值，默认为十六进制编码的 `md5`
+* `[<hashType>:hash:<digestType>:<length>]` 可选配置
+  * 其他的 `hashType`, 即 `sha1`, `md5`, `sha256`, `sha512`
+  * 其他的 `digestType`, 即 `hex`, `base26`, `base32`, `base36`, `base49`, `base52`, `base58`, `base62`, `base64`
+  * `length` 字符的长度
+* `[N]` 当前文件名按照查询参数 `regExp` 匹配后获得到第 N 个匹配结果
+#### 示例
 
 ``` javascript
 require("file-loader?name=js/[hash].script.[ext]!./javascript.js");
@@ -67,11 +64,11 @@ require("file-loader?name=[hash]!./flash.txt");
 
 require("file-loader?name=[sha512:hash:base64:7].[ext]!./image.png");
 // => gdyb21L.png
-// use sha512 hash instead of md5 and with only 7 chars of base64
+// 使用 sha512 哈希值替代 md5 并且使用 base64 的 7 个字符
 
 require("file-loader?name=img-[sha512:hash:base64:7].[ext]!./image.jpg");
 // => img-VqzT5ZC.jpg
-// use custom name, sha512 hash instead of md5 and with only 7 chars of base64
+// 使用自定义名称，sha512 哈希值替代 md5 并且使用 base64 的 7 个字符
 
 require("file-loader?name=picture.png!./myself.png");
 // => picture.png
@@ -80,11 +77,11 @@ require("file-loader?name=[path][name].[ext]?[hash]!./dir/file.png")
 // => dir/file.png?e43b20c069c4a01867c31e98cbce33c9
 ```
 
-## Contributing
+## 贡献
 
-Don't hesitate to create a pull request. Every contribution is appreciated. In development you can start the tests by calling `npm test`.
+不要犹豫去创建一个pull request。所有的贡献行为都会被感谢。开发时，可以使用 `npm test` 来进行测试。
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
@@ -133,3 +130,7 @@ Don't hesitate to create a pull request. Every contribution is appreciated. In d
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/loaders/file-loader/
