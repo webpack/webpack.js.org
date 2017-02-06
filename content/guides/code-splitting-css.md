@@ -1,94 +1,68 @@
 ---
 title: Code Splitting - CSS
-sort: 3
+sort: 31
 contributors:
   - pksjce
   - jonwheeler
   - johnstew
+  - simon04
 ---
 
-In webpack, when you use the `css-loader` and import CSS into your JavaScript files, the CSS is bundled along with your JavaScript.
-This has the disadvantage that, you will not be able to utilize the browser's ability to load CSS asynchronously and parallel. Instead, your page will have to wait until your whole JavaScript bundle is loaded, to style itself.
-webpack can help with this problem by bundling the CSS separately using [extract-text-webpack-plugin](https://github.com/webpack/extract-text-webpack-plugin) and the [`css-loader`](https://github.com/webpack/css-loader).
+To bundle CSS files with webpack, import CSS into your JavaScript code like [any other module](/concepts/modules), and use the `css-loader` (which outputs the CSS as JS module), and optionally apply the `ExtractTextWebpackPlugin` (which extracts the bundled CSS and outputs CSS files).
+
+## Importing CSS
+
+Import the CSS file like a JavaScript module, for instance in `vendor.js`:
+
+```javascript
+import 'bootstrap/dist/css/bootstrap.css';
+```
 
 ## Using `css-loader`
 
-To import css into your JavaScript code like [any other module](/concepts/modules), you will have to use the [`css-loader`](https://github.com/webpack/css-loader).
-The webpack config with `css-loader` will look like
+Configure the [`css-loader`](/loaders/css-loader) in `webpack.config.js` as follows:
 
 ```javascript
-//webpack.config.js
-
-module.exports = function(env){
-    entry: '..',
-    ...
+module.exports = {
     module: {
         rules: [{
             test: /\.css$/,
-            exclude: /node_modules/,
-            loader: 'css-loader'
+            use: 'css-loader'
         }]
     }
-    ...
 }
 ```
 
-## Using `extract-text-webpack-plugin` - ExtractTextPlugin
+As a result, the CSS is bundled along with your JavaScript.
 
-Install this plugin as follows
+This has the disadvantage that, you will not be able to utilize the browser's ability to load CSS asynchronously and parallel. Instead, your page will have to wait until your whole JavaScript bundle is loaded, to style itself.
+
+webpack can help with this problem by bundling the CSS separately using the `ExtractTextWebpackPlugin`.
+
+## Using `ExtractTextWebpackPlugin`
+
+Install the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) plugin as follows
 ```
 npm i --save-dev extract-text-webpack-plugin
 ```
 
-To use this `ExtractTextPlugin`, it needs to be added to the `webpack.config.js` file in two steps.
-### In the loader
+To use this plugin, it needs to be added to the `webpack.config.js` file in two steps.
 
-Adapting from the previous example with the `css-loader`, we should add `ExtractTextPlugin` as follows
-
-```javascript
-...
-use: ExtractTextPlugin.extract({loader:'css-loader',options:{sourceMap:true}) //Can be used without sourcemaps too.
-...
-```
-
-### In the plugin
-
-```javascript
-new ExtractTextPlugin({ filename: 'bundle.css', disable: false, allChunks: true })
+```diff
+module.exports = {
+    module: {
+         rules: [{
+             test: /\.css$/,
+-            use: 'css-loader'
++            use: ExtractTextPlugin.extract({
++                use: 'css-loader'
++            })
+         }]
+     },
++    plugins: [
++        new ExtractTextPlugin('styles.css'),
++    ]
+}
 ```
 
 With above two steps, you can generate a new bundle specifically for all the CSS modules and add them as a separate tag in the `index.html`.
-For more information on how to use the api, please go to [`ExtractTextPlugin` api](https://github.com/webpack/extract-text-webpack-plugin#api).
-
-The full config for splitting css with `ExtractTextPlugin` is as follows
-
-```javascript
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var path = require('path');
-
-module.exports = function () {
-    return {
-        entry: './main.js',
-        output: {
-            path: path.resolve(__dirname, 'dist'),
-            filename: 'bundle.js'
-        },
-        module: {
-            rules: [{
-                test: /\.css$/,
-                exclude: /node_modules/,
-                use: ExtractTextPlugin.extract({
-                    loader: 'css-loader',
-                    options: {
-                      sourceMap: true
-                    }
-                })
-            }]
-        },
-        devtool: 'source-map',
-        plugins: [
-            new ExtractTextPlugin({ filename: 'bundle.css', disable: false, allChunks: true })
-        ]
-    }
-}
-```

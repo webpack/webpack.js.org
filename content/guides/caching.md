@@ -1,6 +1,6 @@
 ---
 title: Caching
-sort: 16
+sort: 41
 contributors:
   - okonet
   - jouni-kantola
@@ -137,7 +137,7 @@ Alternatively, just use one of these plugins to export JSON files:
 * https://www.npmjs.com/package/webpack-manifest-plugin
 * https://www.npmjs.com/package/assets-webpack-plugin
 
-A sample output when using `webpack-manifest-plugin` in our config looks like:
+A sample output when using `WebpackManifestPlugin` in our config looks like:
 
 ```json
 {
@@ -151,9 +151,9 @@ A sample output when using `webpack-manifest-plugin` in our config looks like:
 To minimize the size of generated files, webpack uses identifiers instead of module names. During compilation, identifiers are generated, mapped to chunk filenames and then put into a JavaScript object called *chunk manifest*.
 To generate identifiers that are preserved over builds, webpack supply the `NamedModulesPlugin` (recommended for development) and `HashedModuleIdsPlugin` (recommended for production).
 
-> TODO: When exist, link to `NamedModulesPlugin` and `HashedModuleIdsPlugin` docs pages
+?> When exist, link to `NamedModulesPlugin` and `HashedModuleIdsPlugin` docs pages
 
-> TODO: Describe how the option `recordsPath` option works 
+?> Describe how the option `recordsPath` option works
 
 The chunk manifest (along with bootstrapping/runtime code) is then placed into the entry chunk and it is crucial for webpack-packaged code to work.
 
@@ -161,7 +161,7 @@ T> Separate your vendor and application code with [CommonsChunkPlugin](/plugins/
 
 The problem with this, is the same as before: Whenever we change any part of the code it will, even if the rest of its contents wasn’t altered, update our entry chunk to include the new manifest. This in turn, will lead to a new hash and dismiss the long-term caching.
 
-To fix that, we should use [chunk-manifest-webpack-plugin](https://github.com/diurnalist/chunk-manifest-webpack-plugin), which will extract the manifest to a separate JSON file. This replaces the chunk manifest with a variable in the webpack runtime. But we can do even better; we can extract the runtime into a separate entry by using `CommonsChunkPlugin`. Here is an updated `webpack.config.js` which will produce the manifest and runtime files in our build directory:
+To fix that, we should use [`ChunkManifestWebpackPlugin`](https://github.com/diurnalist/chunk-manifest-webpack-plugin), which will extract the manifest to a separate JSON file. This replaces the chunk manifest with a variable in the webpack runtime. But we can do even better; we can extract the runtime into a separate entry by using `CommonsChunkPlugin`. Here is an updated `webpack.config.js` which will produce the manifest and runtime files in our build directory:
 
 ```js
 // webpack.config.js
@@ -268,7 +268,7 @@ Notice that **vendor chunk has the same filename**, and **so does the manifest**
 
 Inlining the chunk manifest and webpack runtime (to prevent extra HTTP requests), depends on your server setup. There is a nice [walkthrough for Rails-based projects](http://clarkdave.net/2015/01/how-to-use-webpack-with-rails/#including-precompiled-assets-in-views). For server-side rendering in Node.js you can use [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools).
 
-T> If your application doesn’t rely on any server-side rendering, it’s often enough to generate a single `index.html` file for your application. To do so, use i.e. [webpack-html-plugin](https://github.com/ampedandwired/html-webpack-plugin) in combination with [script-ext-html-webpack-plugin](https://github.com/numical/script-ext-html-webpack-plugin) or [inline-manifest-webpack-plugin](https://github.com/szrenwei/inline-manifest-webpack-plugin). It will simplify the setup dramatically.
+T> If your application doesn’t rely on any server-side rendering, it’s often enough to generate a single `index.html` file for your application. To do so, use i.e. [`HtmlWebpackPlugin`](https://github.com/ampedandwired/html-webpack-plugin) in combination with [`ScriptExtHtmlWebpackPlugin`](https://github.com/numical/script-ext-html-webpack-plugin) or [`InlineManifestWebpackPlugin`](https://github.com/szrenwei/inline-manifest-webpack-plugin). It will simplify the setup dramatically.
 
 ## References
 
