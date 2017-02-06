@@ -38,9 +38,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/api/loaders/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/api/plugins/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/api/node/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/api/plugins/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/concepts/configuration/index.html</loc>
     </url>    <url>
@@ -72,9 +72,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/configuration/externals/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/configuration/node/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/configuration/module/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration/node/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/other-options/index.html</loc>
     </url>    <url>
@@ -246,13 +246,13 @@
     </url>    <url>
         <loc>https://webpack.js.org/pluginsapi/examples/index.html</loc>
     </url>    <url>
+        <loc>https://webpack.js.org/pluginsapi/module-factories/index.html</loc>
+    </url>    <url>
         <loc>https://webpack.js.org/pluginsapi/parser/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/pluginsapi/resolver/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/pluginsapi/tapable/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/pluginsapi/module-factories/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/pluginsapi/template/index.html</loc>
     </url>    <url>
