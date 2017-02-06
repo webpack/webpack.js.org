@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/3d432969ced92eae0c89.css" rel="stylesheet">
+      <link href="/fceabc85b553b2295c09.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -67,7 +67,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 </code></pre>
 <h3 class="header"><a class="anchor" href="#do-not-keep-state-between-runs-and-modules" id="do-not-keep-state-between-runs-and-modules"></a><span class="text">Do not keep state between runs and modules</span><a class="icon-link" href="#do-not-keep-state-between-runs-and-modules"></a></h3>
-<p>A loader should be independent of other modules compiled (expect of these issued by the loader).</p>
+<p>A loader should be independent of other modules compiled (except of these issued by the loader).</p>
 <p>A loader should be independent of previous compilations of the same module.</p>
 <h3 class="header"><a class="anchor" href="#mark-dependencies" id="mark-dependencies"></a><span class="text">Mark dependencies</span><a class="icon-link" href="#mark-dependencies"></a></h3>
 <p>If a loader uses external resources (i. e. by reading from filesystem), they <strong>must</strong> tell about that. This information is used to invalidate cacheable loaders and recompile in watch mode.</p>
