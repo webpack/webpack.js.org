@@ -2,17 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">    <url>
         <loc>https://webpack.js.org/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/analyze/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/api/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/analyze/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/branding/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/concepts/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/configuration/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/contribute/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/development/index.html</loc>
     </url>    <url>
@@ -20,11 +20,11 @@
     </url>    <url>
         <loc>https://webpack.js.org/guides/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/organization/index.html</loc>
+        <loc>https://webpack.js.org/license/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/license/index.html</loc>
+        <loc>https://webpack.js.org/organization/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/plugins/index.html</loc>
     </url>    <url>
@@ -36,11 +36,11 @@
     </url>    <url>
         <loc>https://webpack.js.org/api/cli/index.html</loc>
     </url>    <url>
+        <loc>https://webpack.js.org/api/loaders/index.html</loc>
+    </url>    <url>
         <loc>https://webpack.js.org/api/node/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/api/plugins/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/api/loaders/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/concepts/configuration/index.html</loc>
     </url>    <url>
@@ -67,6 +67,8 @@
         <loc>https://webpack.js.org/configuration/devtool/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/entry-context/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration/environment/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/external-configs/index.html</loc>
     </url>    <url>
@@ -114,9 +116,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/guides/code-splitting/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/guides/code-splitting-css/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/guides/code-splitting-libraries/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/guides/code-splitting-css/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/guides/code-splitting-require/index.html</loc>
     </url>    <url>
@@ -196,11 +198,11 @@
     </url>    <url>
         <loc>https://webpack.js.org/loaders/raw-loader/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/react-proxy-loader/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/script-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/source-map-loader/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/loaders/react-proxy-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/style-loader/index.html</loc>
     </url>    <url>
