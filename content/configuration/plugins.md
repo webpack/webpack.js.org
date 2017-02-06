@@ -24,7 +24,7 @@ plugins: [
 
 A more complex example, using multiple plugins, might look something like this:
 ```js
-// importing plugins that dont come by default in webpack
+// importing plugins that do not come by default in webpack
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var DashboardPlugin = require('webpack-dashboard/plugin');
 
