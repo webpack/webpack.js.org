@@ -136,7 +136,7 @@ module.exports = {
 * https://www.npmjs.com/package/webpack-manifest-plugin
 * https://www.npmjs.com/package/assets-webpack-plugin
 
-在我们当前配置下，使用`webpack-manifest-plugin`插件后一个示例输出像这样：
+在我们当前配置下，使用 `WebpackManifestPlugin` 后一个示例输出像这样：
 
 ```json
 {
@@ -151,9 +151,9 @@ module.exports = {
 
 为了生成保存在构建中的标识符，webpack提供了`NamedModulesPlugin`（推荐用于开发模式）和`HashedModuleIdsPlugin`（推荐用于生产模式）这两个插件。
 
-> TODO: 如果存在, 链接到`NamedModulesPlugin`和`HashedModuleIdsPlugin`文档页
+?> TODO: 如果存在, 链接到`NamedModulesPlugin`和`HashedModuleIdsPlugin`文档页
 
-> TODO: 描述`recordsPath`选项如何工作
+?> TODO: 描述`recordsPath`选项如何工作
 
 然后将chunk manifest（与引导/运行时代码一起）放入entry chunk，这对webpack打包的代码工作是至关重要的。
 
@@ -161,7 +161,7 @@ T> 使用[CommonsChunkPlugin](/plugins/commons-chunk-plugin) 将公共库(vendor
 
 这个问题和以前一样：每当我们改变代码的任何部分时，即使它的内容的其余部分没有改变，都会更新我们的入口块以便包含新的映射(manifest)。 这反过来，将产生一个新的哈希值并且使长效缓存失效。
 
-要解决这个问题，我们应该使用[chunk-manifest-webpack-plugin](https://github.com/diurnalist/chunk-manifest-webpack-plugin)，它会将manifest提取到一个单独的JSON文件中。 这将用一个webpack runtime的变量替换掉chunk manifest。 但我们可以做得更好；我们可以使用`CommonsChunkPlugin`将运行时提取到一个单独的入口块(entry)中去。这里是一个更新后的`webpack.config.js`，将生成我们的构建目录中的manifest和runtime文件：
+要解决这个问题，我们应该使用[`ChunkManifestWebpackPlugin`](https://github.com/diurnalist/chunk-manifest-webpack-plugin)，它会将manifest提取到一个单独的JSON文件中。 这将用一个webpack runtime的变量替换掉chunk manifest。 但我们可以做得更好；我们可以使用`CommonsChunkPlugin`将运行时提取到一个单独的入口块(entry)中去。这里是一个更新后的`webpack.config.js`，将生成我们的构建目录中的manifest和runtime文件：
 
 ```js
 // webpack.config.js
@@ -270,7 +270,7 @@ manifest.d41d8cd98f00b204e980.js    5.56 kB       2  [emitted]  manifest
 
 要内联chunk manifest还是选择webpack runtime（以防止额外的HTTP请求），取决于你的服务器设置。这有一个很好的[演练Rails基础](http://clarkdave.net/2015/01/how-to-use-webpack-with-rails/#including-precompiled-assets-in-views)的项目。 对于在Node.js中的服务器端渲染，你可以使用 [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools)。
 
-T> 如果你的应用程序不依赖于任何服务器端渲染，通常只需为应用程序生成一个`index.html`文件即可。 为此，请使用如[webpack-html-plugin](https://github.com/ampedandwired/html-webpack-plugin)加上[script-ext-html-webpack-plugin](https://github.com/numical/script-ext-html-webpack-plugin) 或者[inline-manifest-webpack-plugin](https://github.com/szrenwei/inline-manifest-webpack-plugin)的组合。 这将会大大地简化设置。
+T> 如果你的应用程序不依赖于任何服务器端渲染，通常只需为应用程序生成一个`index.html`文件即可。 为此，请使用如[`HtmlWebpackPlugin`](https://github.com/ampedandwired/html-webpack-plugin)加上[`ScriptExtHtmlWebpackPlugin`](https://github.com/numical/script-ext-html-webpack-plugin) 或者[`InlineManifestWebpackPlugin`](https://github.com/szrenwei/inline-manifest-webpack-plugin)的组合。这将会大大地简化设置。
 
 ## 参考
 
