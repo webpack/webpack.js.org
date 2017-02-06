@@ -8,15 +8,15 @@ contributors:
   - johnstew
 ---
 
-*webpack* 是一个现代的 JavaScript 应用_模块打包器(module bundler)_。它有着[难以置信的配置](/configuration)，然而，我们认为你必须在开始前先了解**四个核心概念**！
+*webpack* 是一个现代的 JavaScript 应用程序的_模块打包器(module bundler)_。它有着[难以置信的配置](/configuration)，然而，我们认为你必须在开始前先了解**四个核心概念**！
 
 作为您的 webpack 学习旅程的一部分，我们写这篇文档目的在于向你传递这些概念的**高度**概述，同时仍然提供特定概念的相关用例。
 
 ## 入口(Entry)
 
-webpack 将创建所有应用程序依赖关系图表(dependency graph)。图表的起点被称之为_入口起点(entry point)_。_入口起点_告诉 webpack _从哪里开始_，并遵循着依赖关系图表知道_打包什么_。可以将您的应用_入口起点_认为是**根上下文(contextual root)**或 **app 第一个启动文件**。
+webpack 将创建所有应用程序的依赖关系图表(dependency graph)。图表的起点被称之为_入口起点(entry point)_。_入口起点_告诉 webpack _从哪里开始_，并遵循着依赖关系图表知道_要打包什么_。可以将您应用程序的_入口起点_认为是**根上下文(contextual root)**或 **app 第一个启动文件**。
 
-在 webpack 中，我们使用 [webpack 配置对象](/configuration) 中的 `entry` 属性来定义_入口_。
+在 webpack 中，我们使用 [webpack 配置对象(webpack configuration object)](/configuration) 中的 `entry` 属性来定义_入口_。
 
 接下来我们看一个最简单的例子：
 
@@ -34,7 +34,7 @@ module.exports = {
 
 ## 出口(Output)
 
-一旦你已经将所有 资源(assets) 打包在一起，我们仍然需要告诉 webpack 在**哪里**打包我们的应用。wepback 的 `output` 属性描述了**如何处理打包代码**。
+将所有的资源(assets)归拢在一起后，我们还需要告诉 webpack **在哪里**打包我们的应用程序。webpack 的 `output` 属性描述了**如何处理归拢在一起的代码**(bundled code)。
 
 **webpack.config.js**
 
@@ -50,24 +50,24 @@ module.exports = {
 };
 ```
 
-在上面例子中，我们正在通过 `output.filename` 和 `output.path` 属性来描述 webpack 包的名称，以及我们想要 生成(emit) 在哪里。
+在上面例子中，我们正在通过 `output.filename` 和 `output.path` 属性来描述 webpack bundle 的名称，以及我们想要生成(emit)在哪里。
 
 T> 你可能看到项目**生成(emitted 或 emit)**贯穿我们整个文档和[插件 API](/api/plugins)。它是“生产(produced) 或 排放(discharged)”的特殊术语。
 
- `output` 属性具有[更多可配置的特性](/configuration/output)，但让我们花一些时间了解 `output` 属性的一些最常见的用例。
+ `output` 属性还有[更多可配置的特性](/configuration/output)，但让我们花一些时间先了解一些 `output` 属性的最常见的用例。
 
 [了解更多！](/concepts/output)
 
 
 ## 加载器(Loader)
 
-webpack 的目标是，让项目中的所有资源都成为 **webpack** 的关注点，而浏览器不需要考虑这些（这并不意味着资源都必须打包在一起）。 webpack 把 [每个文件(.css, .html, .scss, .jpg, etc.) 都作为模块](/concepts/modules) 处理。然而 webpack **只了解 JavaScript**。
+webpack 的目标是，让 **webpack** 聚焦于项目中的所有资源(asset)，而浏览器不需要关注考虑这些（这并不意味着资源(asset)都必须打包在一起）。webpack 把[每个文件(.css, .html, .scss, .jpg, etc.) 都作为模块](/concepts/modules)处理。而且 webpack **只理解 JavaScript**。
 
 **因为文件已被添加到了依赖图表，所以 webpack 加载器会_将这些文件转换为模块_。**
 
 webpack 配置在更高层面有两个目标。
 
-1. 识别出(identify)应该被特定的加载器转换(transform)的文件
+1. 识别出(identify)应该被指定的加载器转换(transform)的文件
 2. 转换能够被添加到依赖图表的文件（并且最终打包）(`use` 属性)
 
 **webpack.config.js**
