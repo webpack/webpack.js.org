@@ -99,7 +99,7 @@ require("file-loader?name=[path][name].[ext]?[hash]!./dir/file.png")
         <a href="https://github.com/">Kees Kluskens</a>
       </td>
       <td align="center">
-        <img width="150 height="150"
+        <img width="150" height="150"
         src="https://avatars.githubusercontent.com/mobitar?v=3">
         <br />
         <a href="https://github.com/">Mo Bitar</a>
