@@ -1,11 +1,11 @@
 ---
 title: coverjs-loader
-source: https://raw.githubusercontent.com/webpack-contrib/coverjs-loader/master/README.md
-edit: https://github.com/webpack-contrib/coverjs-loader/edit/master/README.md
+source: https://raw.githubusercontent.com/webpack/coverjs-loader/master/README.md
+edit: https://github.com/webpack/coverjs-loader/edit/master/README.md
 ---
 # coverjs loader for webpack
 
-## Usage
+## 用法
 
 ``` javascript
 webpack-dev-server "mocha!./cover-my-client-tests.js" --options webpackOptions.js
@@ -14,16 +14,16 @@ webpack-dev-server "mocha!./cover-my-client-tests.js" --options webpackOptions.j
 ``` javascript
 // webpackOptions.js
 module.exports = {
-	// your webpack options
+	// 你的 webpack options
 	output: "bundle.js",
 	publicPrefix: "/",
 	debug: true,
 	includeFilenames: true,
 	watch: true,
 
-	// the coverjs loader binding
+	// 绑定 coverjs loader
 	postLoaders: [{
-		test: "", // every file
+		test: "", // 所有文件
 		exclude: [
 			"node_modules.chai",
 			"node_modules.coverjs-loader",
@@ -43,11 +43,15 @@ after(function() {
 });
 ```
 
-See [the-big-test](https://github.com/webpack/the-big-test) for an example.
+参考示例 [the-big-test](https://github.com/webpack/the-big-test)。
 
-You don't have to combine it with the mocha loader, it's independent. So if you want to cover a normal app usage, you can do so. The `reportHtml` function just appends the output to the body.
+这是一个独立的加载器，你不必一定把它和 mocha loader 结合一起使用。如果你想 cover 一个普通的项目，也可以直接使用它。`reportHtml` 方法会把输出内容添加到 body 中。
 
 
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/loaders/coverjs-loader/

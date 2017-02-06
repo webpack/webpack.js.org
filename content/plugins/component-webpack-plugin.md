@@ -1,7 +1,7 @@
 ---
-title: ComponentWebpackPlugin
-source: https://raw.githubusercontent.com/webpack-contrib/component-webpack-plugin/master/README.md
-edit: https://github.com/webpack-contrib/component-webpack-plugin/edit/master/README.md
+title: component-webpack-plugin
+source: https://raw.githubusercontent.com/webpack/component-webpack-plugin/master/README.md
+edit: https://github.com/webpack/component-webpack-plugin/edit/master/README.md
 ---
 # component for webpack
 
@@ -46,3 +46,7 @@ module.exports = {
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/plugins/component-webpack-plugin/
