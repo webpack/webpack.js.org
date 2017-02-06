@@ -1,24 +1,24 @@
 ---
-title: SourceMapDevToolPlugin
+title: source-map-dev-tool-plugin
 contributors:
     - johnnyreilly
 ---
 
 ?> Review this content
 
-给资源添加 SourceMap。
+Adds SourceMaps for assets.
 
 ```javascript
 new webpack.SourceMapDevToolPlugin(options)
 ```
 
-* `options.test` / `options.include` / `options.exclude` (`string|RegExp|Array`): 用来规定哪些资源应该被处理。可以是 `RegExp`（匹配资源文件名），也可以是 `string`（资源文件名的开头）或者包含以上两种的 `Array`（需要匹配其中一个），`test` 如果没有设置，默认为 `.js` 文件。
-* `options.filename` (`string`): 定义 SourceMap 输出的文件名。如果不设置，SourceMap 会放在代码文件里。
-* `options.append` (`string`): 添加到原始资源之后。通常是 `#sourceMappingURL` 注释。`[url]`会被替换成 SourceMap 文件的路径。`false` 禁用添加。
-* `options.moduleFilenameTemplate` / `options.fallbackModuleFilenameTemplate` (`string`): 查看 `output.devtoolModuleFilenameTemplate`。
-* `options.module` (`boolean`):  (默认为 `true`) 当 `false` loaders 不产生 SourceMaps 时，将转换后的代码作为源.
-* `options.columns` (`boolean`):  (默认为 `true`) 当 SourceMaps 里的 `false` column 映射 (mappings) 被忽略时，会使用一个更快的 SourceMap 实现。
-* `options.lineToLine` (`{test: string|RegExp|Array, include: string|RegExp|Array, exclude: string|RegExp|Array}` 使用简单（快速）的「行到行资源映射(line to line source mappings)」来匹配模块。
+* `options.test` / `options.include` / `options.exclude` (`string|RegExp|Array`): Used to determine which assets should be processed. Each one can be a `RegExp` (asset filename is matched), a `string` (asset filename need to start with this string) or an `Array` of those (any of them need to be matched). `test` defaults to `.js` files if omitted.
+* `options.filename` (`string`): defines the output filename of the SourceMap. If no value is provided the SourceMap is inlined.
+* `options.append` (`string`): is appended to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the SourceMap file. `false` disables the appending.
+* `options.moduleFilenameTemplate` / `options.fallbackModuleFilenameTemplate` (`string`): see `output.devtoolModuleFilenameTemplate`.
+* `options.module` (`boolean`):  (defaults to `true`) When `false` loaders do not generate SourceMaps and the transformed code is used as source instead.
+* `options.columns` (`boolean`):  (defaults to `true`) When `false` column mappings in SourceMaps are ignored and a faster SourceMap implementation is used.
+* `options.lineToLine` (`{test: string|RegExp|Array, include: string|RegExp|Array, exclude: string|RegExp|Array}` matched modules uses simple (faster) line to line source mappings.
 
 ## Examples
 

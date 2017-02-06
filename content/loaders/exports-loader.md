@@ -5,29 +5,33 @@ edit: https://github.com/webpack-contrib/exports-loader/edit/master/README.md
 ---
 # exports loader for webpack
 
-The `exports-loader` loader exports variables from inside the file by appending `exports[...] = ...` statements.
+`exports-loader` 通过在文件中追加 `exports[...] = ...` 语句读取导出的变量。
 
-## Installation
+##  安装
 
 ```
 npm install exports-loader
 ```
 
-## Usage
+##  用法
 
 ``` javascript
 require("exports-loader?file,parse=helpers.parse!./file.js");
-// adds below code the the file's source:
+//  将添加下面的代码:
 //  exports["file"] = file;
 //  exports["parse"] = helpers.parse;
 
 require("exports-loader?file!./file.js");
-// adds below code the the file's source:
+//  将添加下面的代码:
 //  module.exports = file;
 ```
 
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
+[文档: 使用加载器](http://webpack.github.io/docs/using-loaders.html)
 
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/loaders/exports-loader/
