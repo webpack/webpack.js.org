@@ -151,9 +151,9 @@ A sample output when using `webpack-manifest-plugin` in our config looks like:
 To minimize the size of generated files, webpack uses identifiers instead of module names. During compilation, identifiers are generated, mapped to chunk filenames and then put into a JavaScript object called *chunk manifest*.
 To generate identifiers that are preserved over builds, webpack supply the `NamedModulesPlugin` (recommended for development) and `HashedModuleIdsPlugin` (recommended for production).
 
-> TODO: When exist, link to `NamedModulesPlugin` and `HashedModuleIdsPlugin` docs pages
+?> When exist, link to `NamedModulesPlugin` and `HashedModuleIdsPlugin` docs pages
 
-> TODO: Describe how the option `recordsPath` option works
+?> Describe how the option `recordsPath` option works
 
 The chunk manifest (along with bootstrapping/runtime code) is then placed into the entry chunk and it is crucial for webpack-packaged code to work.
 
