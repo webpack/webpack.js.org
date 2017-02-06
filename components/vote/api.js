@@ -5,7 +5,8 @@ import {
   getSelf as devGetSelf,
   getList as devGetList,
   createItem as devCreateItem,
-  vote as devVote
+  vote as devVote,
+  configItem as devConfigItem
 } from "./api.dev";
 
 const API_URL = "https://oswils44oj.execute-api.us-east-1.amazonaws.com/production/";
@@ -104,6 +105,22 @@ export function vote(token, itemId, voteName, value) {
     },
     body: JSON.stringify({
       count: value
+    }),
+    method: "POST"
+  }).then((res) => res.json()).then(result => {
+    return true;
+  });
+}
+
+export function configItem(token, itemId, config) {
+  if(window.location.host !== PRODUCTION_HOST)
+    return devConfigItem(token, itemId, config);
+  return fetch(API_URL + "/config/" + itemId + "?token=" + token, {
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      config: config
     }),
     method: "POST"
   }).then((res) => res.json()).then(result => {

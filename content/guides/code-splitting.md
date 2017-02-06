@@ -1,6 +1,6 @@
 ---
 title: 代码拆分
-sort: 2
+sort: 30
 contributors:
   - pksjce
   - pastelsky

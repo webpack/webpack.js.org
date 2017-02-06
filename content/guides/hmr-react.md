@@ -1,6 +1,5 @@
 ---
 title: 模块热替换 - React
-sort: 8
 contributors:
   - jmreidy
   - jhnns
@@ -88,7 +87,6 @@ module.exports = {
 
     publicPath: '/'
     // 对于热替换（HMR）是必须的，让webpack知道在哪里载入热更新的模块（chunk）
-    // necessary for HMR to know where to load the hot update chunks
   },
 
   context: resolve(__dirname, 'src'),
@@ -132,7 +130,6 @@ module.exports = {
 
     new webpack.NamedModulesPlugin(),
     // 当模块热替换（HMR）时在浏览器控制台输出对用户更友好的模块名字信息
-    // prints more readable module names in the browser console on HMR updates
   ],
 };
 ```
@@ -214,7 +211,6 @@ export default App;
 2. 因此，我们可以使用 `module.hot` 钩子函数为特定资源启用 HMR（这里是`App.js`）。这里最重要的 API 是 `module.hot.accept`，它指定如何处理对特定依赖的更改。
 
 3. 注意，因为 webpack 2 对 ES2015 模块有内置的支持，你不需要在 `module.hot.accept` 中重新引入你的根组件。要完成这项工作，你需要更改 Babel ES2015 在 `.babelrc` 的预设值：
-
   ```
   ["es2015", {"modules": false}]
   ```
@@ -226,7 +222,6 @@ export default App;
   * 另一个文件放置在webpack要构建代码的主目录。在这个例子里，放置的目录路径是`src/`
 
 所以，在这种情景下，当 `src/components/App.js` 或者它的依赖文件被更改了， `module.hot.accept` 将会触发 `render` 方法，这意味着，因为 `App.js` 里面包含了对 `App.css` 的引用, 所以 `render` 方法同样会在 `App.css` 被修改的时候触发，
-
 
 ### index.html
 

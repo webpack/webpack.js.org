@@ -13,11 +13,7 @@ loader是导出`function`的节点模块。
 
 一个同步loader可以通过`return`来返回这个值。在其他情况下，loader可以通过`this.callback(err, values...)`函数返回任意数量的值。错误会被传到`this.callback`函数或者在同步loader中抛出。
 
-The loader is expected to give back one or two values. The first value is a resulting JavaScript code as string or buffer. The second optional value is a SourceMap as JavaScript object.
-
 这个loader应该返回一个或者两个值。第一个值是JavaScript代码产生的字符串或者缓冲区。第二个可选的值是JavaScript对象的SourceMap。
-
-In the complex case, when multiple loaders are chained, only the last loader gets the resource file and only the first loader is expected to give back one or two values (JavaScript and SourceMap). Values that any other loader give back are passed to the previous loader.
 
 在复杂的情况下，当多个loaders被链接的时候，只有最后一个loader能够获取资源文件并且只有第一个loader预期返回一个或者两个值（JavaScript和SourceMap）。其它任何loader返回的值会传到之前的loader中。
 
@@ -49,8 +45,6 @@ module.exports = function(source, map) {
 例子：通过应用查询参数来将模板文件渲染成HTML。
 
 我可以写一个能够将源文件编译成模板的loader，执行并且返回一个模板，这个模板能够导出一个包含HTML代码的字符串。这样是不好的。
-
-Instead I should write loaders for every task in this use case and apply them all (pipeline):
 
 相反，我应该为这个用例中的每一个任务写入loaders并且应用它们（管道）：
 
@@ -118,9 +112,9 @@ module.exports = function(source) {
 * 将它们转化成 `require`s。
 * 使用`this.resolve`函数来解析路径。
 
-例子1 css-loader：css-loader将依赖转换成 `require`s，通过使用引入其它样式表（也是通过css-loader来处理）来代替`@import`以及通过`require`其它的引用文件来代替`url(...)`。
+例子1 `css-loader`：`css-loader` 将依赖转换成 `require`，通过使用引入其它样式表（也是通过`css-loader`来处理）来代替`@import`以及通过`require`其它的引用文件来代替`url(...)`。
 
-例子2 less-loader：less-loader不能够将`@import`S转换成 `require`s，因为所有的less文件需要一起编译来跟踪变量和mixins。因此less-loader通过一个定制的路径解析逻辑来拓展less编译器。这个定制的逻辑使用`this.resolve`通过模块系统的配置（别名使用，定制的模块目录，等等）来解析文件。
+例子2 `less-loader`：`less-loader` 不能够将`@import` 转换成 `require`，因为所有的less文件需要一起编译来跟踪变量和mixins。因此 `less-loader` 通过一个定制的路径解析逻辑来拓展less编译器。这个定制的逻辑使用`this.resolve`通过模块系统的配置（别名使用，定制的模块目录，等等）来解析文件。
 
 如果语言只支持相对路径（比如在css中：`url(file)`总是表示`./file`），利用`~`约定来规定模块的引用。
 
@@ -159,9 +153,9 @@ return "var runtime = require(" +
 
 ### 将可编程对象当作`query`选项
 
-在某些情况下，你的loader需要可编程对象，其函数不能作为`query`字符串进行字符串化。例如，less-loader提供了指定[LESS-plugins](https://github.com/webpack/less-loader#less-plugins)的可能性。在这些情况下，允许loader拓展webpack的`options`对象来检索特定选项。然而，为了避免名称冲突，重要的是该选项在loader的驼峰npm-name下的命名空间。
+在某些情况下，你的loader需要可编程对象，其函数不能作为`query`字符串进行字符串化。例如，`less-loader` 提供了指定[LESS-plugins](https://github.com/webpack/less-loader#less-plugins)的可能性。在这些情况下，允许loader拓展webpack的`options`对象来检索特定选项。然而，为了避免名称冲突，重要的是该选项在loader的驼峰npm-name下的命名空间。
 
-**例子：**
+**示例：**
 
 ```javascript
 // webpack.config.js

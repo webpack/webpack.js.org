@@ -1,6 +1,6 @@
 ---
 title: Shimming
-sort: 17
+sort: 61
 contributors:
   - pksjce
   - jhnns
@@ -26,8 +26,8 @@ module.exports = {
 };
 ```
 
-## `provide-plugin`
-The [`provide-plugin`](/plugins/provide-plugin) 可以将模块作为一个变量，被 `webpack` 在其他每个模块中引用。只有你需要使用此变量的时候，这个模块才会被 require 进来。
+## `ProvidePlugin`
+The [`ProvidePlugin`](/plugins/provide-plugin) 可以将模块作为一个变量，被 `webpack` 在其他每个模块中引用。只有你需要使用此变量的时候，这个模块才会被 require 进来。
 多数之前遗留的模块，会依赖于已存在的某些特定全局变量，比如 jQuery 插件中的 `$` 或者 `jQuery`。在这种场景，你可以在每次遇到全局标识符 `$` 的时候，在 webpack 中预先设置 `var $ = require(“jquery”)`。
 
 ```javascript
@@ -51,7 +51,7 @@ module.exports = {
 module.exports = {
   module: {
     rules: [{
-      test: require.resolve("some-module"), 
+      test: require.resolve("some-module"),
       use: 'imports-loader?this=>window'
     }]
   }
@@ -65,7 +65,7 @@ webpack 中的模块支持不同的[模块风格](/concepts/modules)，比如AMD
 module.exports = {
   module: {
     rules: [{
-      test: require.resolve("some-module"), 
+      test: require.resolve("some-module"),
       use: 'imports-loader?define=>false'
     }]
   }
@@ -81,7 +81,7 @@ module.exports = {
 module.exports = {
   module: {
     rules: [{
-      test: require.resolve("some-module"), 
+      test: require.resolve("some-module"),
       use: 'exports-loader?file,parse=helpers.parse'
       // 在文件的源码中加入以下代码
       //  exports["file"] = file;
@@ -93,7 +93,7 @@ module.exports = {
 
 ## `script-loader`
 
-[script-loader](/loaders/script-loader/) 在全局上下文中执行代码，如同你在 `script` 标签中加入代码。在这种模式下，普通的 library 都能够正常运行。访问 `require`, `module` 等变量则是 undefined。
+[`script-loader`](/loaders/script-loader/) 在全局上下文中执行代码，如同你在 `script` 标签中加入代码。在这种模式下，普通的 library 都能够正常运行。访问 `require`, `module` 等变量则是 undefined。
 
 W> 文件作为字符串添加到 bundle 中。它不会被 `webpack` 压缩，因此如果使用了一个压缩后的版本，没有开发工具支持调试此 loader 添加的 library。
 
@@ -116,7 +116,7 @@ eval("GLOBAL_CONFIG = {};");
 
 ## `noParse` 选项
 
-当模块没有 AMD/CommonJS 的版本时，并且你希望直接引入 `dist` 版本，你可以将这个模块标记为 [`noParse`](/configuration/module/#module-noparse)。然后 `webpack` 将会直接引入这个模块并且不会解析它，这样可以用来改善构建时间。
+当模块没有 AMD/CommonJS 的版本时，并且你希望直接引入 `dist`版本，你可以将这个模块标记为 [`noParse`](/configuration/module/#module-noparse)。然后 `webpack` 将会直接引入这个模块并且不会解析它，这样可以用来改善构建时间。
 
 W> 任何用到 AST 特性（比如 `ProvidePlugin`）都不会工作。
 
