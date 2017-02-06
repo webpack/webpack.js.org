@@ -4,20 +4,16 @@ contributors:
   - pksjce
   - bebraw
   - chrisVillanueva
+  - tashian
 ---
 
-webpack 通常会被拿来和其他工具（例如 Make, Grunt, Gulp, Browserify 或者 Brunch）对比。然而，这其中一些工具（Make, Grunt 和 Gulp 是任务执行器(task runner)）与 webpack 相比，它们在用途上有很多不同，webpack 是一个模块打包器(module bundler)。直接对比它们可能会带来各种困惑，所以让我们先列出这些不同类型工具之间的差异。
+webpack 是一个模块打包器(module bundler)，就像 Browserify 或 Brunch。而不是一个任务执行器(task runner)。由于有人对这之间的差异感到困惑，所以我们会在此澄清。
 
-## 什么是任务执行器？
+任务执行器就是用来自动化处理常见的开发任务，例如项目的检查(lint)、构建(build)、测试(test)。相对于*打包器(bundler)*，任务执行器则聚焦于上层。
 
-简单从字面理解，任务执行器就是用来处理任务，例如项目的检查、构建、发布。对比*打包器*（如 Browserify, Brunch 或者 webpack），任务执行器关注在偏重于上层的问题上面。换句话说，打包器有着更多细节上的目标。
+打包器(bundler)帮助您取得准备用于部署的 JavaScript 和样式表，将它们转换为适合浏览器的可用格式。例如，JavaScript 可以压缩、拆分 chunk 和按需加载(loaded on-demand)，以提高性能。bundle 是 web 开发中最重要的挑战之一，解决此问题可以消除开发过程中的大部分痛点。
 
-
-## 什么是打包器？
-
-大概说，打包器接收资源（例如 JavaScript 文件），然后转换为适合客户端浏览器可用的资源。这个打包过程恰好是 web 开发中最重要的问题，并且解决此问题可以消除开发过程中的大部分痛点。
-
-打包器能够和任务执行器串联在一起工作。你可以将高层次的问题交给任务执行器工具，而留下打包部分给更专业的打包器工具。[grunt-webpack](https://www.npmjs.com/package/grunt-webpack) 和 [gulp-webpack](https://www.npmjs.com/package/gulp-webpack) 都是非常好的集成示例。
+webpack 能够协同任务执行器一起工作。你可以得益于，使用上层的工具，而将打包部分的问题留给 webpack。[grunt-webpack](https://www.npmjs.com/package/grunt-webpack) 和 [gulp-webpack](https://www.npmjs.com/package/gulp-webpack) 都是非常好的示例。
 
 T> 通常 webpack 用户使用 npm `scripts` 作为它们的任务执行器启动入口，这是比较推荐的做法。跨平台支持可能会成为一个问题，但是这里有几个可行措施。
 
@@ -25,7 +21,7 @@ T> 尽管 webpack 核心关注于打包，你可以找到各种扩展(extension)
 
 ## 对比
 
-然而 webpack 不仅仅作为模块打包器存在。如果你要在使用 webpack 或下面任意的打包器之间进行选择，这里列出了 webpack 特性，以及和其他竞品之间的功能对比。
+webpack 不仅仅作为模块打包器存在。如果你要在使用 webpack 或下面任意的打包器之间进行选择，这里列出了 webpack 特性，以及和其他竞品之间的功能对比。
 
 | 特性 | webpack/webpack | jrburke/requirejs | substack/node-browserify | jspm/jspm-cli | rollup/rollup | brunch/brunch |
 |---------|-----------------|-------------------|--------------------------|---------------|---------------|---------------|
