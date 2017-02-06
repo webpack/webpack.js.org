@@ -18,7 +18,7 @@ webpack 有着大量的插件接口(plugin interface)。多数功能由 webpack 
 
 
 ![Awesome](../assets/awesome-badge.svg)
-For more third-party plugins, see the list from [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#webpack-plugins).
+更多第三方插件，请查看 [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#webpack-plugins) 列表。
 
 ***
 

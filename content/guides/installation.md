@@ -37,8 +37,7 @@ T> 当你在本地安装 webpack 后，你能够在 `node_modules/.bin/webpack` 
 
 ### 全局安装
 
-W> Note that a global webpack installation is not a recommended practice. This locks you down to a specific version of webpack and might fail in projects that use a different version.
-W> 注意，不推荐全局安装 webpack。这会锁定了 webpack 到指定版本，并且在使用不同的 webpack 版本的项目中可能会失败。
+W> 注意，不推荐全局安装 webpack。这会锁定 webpack 到指定版本，并且在使用不同的 webpack 版本的项目中可能会导致构建失败。
 
 ``` bash
 npm install webpack -g
