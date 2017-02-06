@@ -12,6 +12,7 @@
 .page > div:first-of-type {
   flex: 0 0 auto;
   position: relative;
+  overflow: hidden;
 
   @include break {
     flex:0 0 30%;

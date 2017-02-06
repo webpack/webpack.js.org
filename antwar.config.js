@@ -38,16 +38,13 @@ module.exports = {
       }
     ),
 
-    'get-started': section(
-      '起步',
-      function() {
-        return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/get-started',
-          false,
-          /^\.\/.*\.md$/
-        )
+    'get-started': {
+      redirects: {
+        '': '/guides/get-started',
+        'install-webpack': '/guides/installation',
+        'why-webpack': '/guides/why-webpack',
       }
-    ),
+    },
 
     concepts: section(
       '概念',
@@ -242,8 +239,6 @@ function combineContexts(context1, context2) {
     }
   }
   webpackContext.keys = () => {
-    "use strict";
-
     let keys1 = context1.keys();
     let keys2 = context2.keys();
     return _.chain(keys1).concat(keys2).sortBy().uniq().value();

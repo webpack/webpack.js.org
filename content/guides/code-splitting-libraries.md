@@ -1,11 +1,12 @@
 ---
 title: 代码拆分 - 库(Libraries)
-sort: 4
+sort: 32
 contributors:
   - pksjce
   - chrisVillanueva
   - johnstew
   - rafde
+  - bartushek
 ---
 一个典型的应用程序会使用第三方框架、工具库。这些库一般使用特定的版本并且其代码不经常改变。然而，应用本身的代码会频繁改变。
 
@@ -114,7 +115,7 @@ module.exports = function(env) {
 你可以将 `CommonsChunkPlugin` 配置为只接受 vendor 库。
  
  __webpack.config.js__
- 
+
 ```javascript
 var webpack = require('webpack');
 var path = require('path');
@@ -176,6 +177,8 @@ module.exports = function(env) {
 ```
 
 使用上面的 webpack 配置，我们看到生成了三个bundle：`vendor`、`main`和`manifest`。
+
+T> 注意，长效的 bundle 缓存是通过“基于内容的 hash 策略”来实现的（content-based hashing）。查阅更多关于[缓存](/guides/caching/)。
 
 ***
 

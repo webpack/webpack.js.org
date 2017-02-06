@@ -6,7 +6,7 @@ contributors:
   - chrisVillanueva
 ---
 
-正如我们在[介绍](/get-started/#using-webpack-with-a-config)中提到的，在 webpack 配置中有多种方式定义 `entry` 属性。除了解释为什么它可能对你有用，我们还将向你展示如何**能够**配置 `entry` 属性。
+正如我们在[介绍](/guides/get-started/#using-webpack-with-a-config)中提到的，在 webpack 配置中有多种方式定义 `entry` 属性。除了解释为什么它可能对你有用，我们还将向你展示如何**能够**配置 `entry` 属性。
 
 ## 单入口（简写）语法
 

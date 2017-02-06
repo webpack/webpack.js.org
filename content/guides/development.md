@@ -1,8 +1,9 @@
 ---
 title: 开发
-sort: 9
+sort: 50
 contributors:
   - SpaceK33z
+  - rafde
 ---
 
 在这一章节，我们将会解释如何开始开发并且如何从三种开发工具中进行选择。这里假设你已经有了一个 webpack 配置文件。
@@ -59,6 +60,24 @@ serve
 ```
 
 在每一次编译后，你需要手动刷新你的浏览器来查看更改。
+
+### Watch Mode with Chrome DevTools Workspaces
+
+If you set up Chrome to [persist changes when saving from the _Sources_ panel](https://medium.com/@rafaelideleon/webpack-your-chrome-devtools-workspaces-cb9cca8d50da)
+so you don't have to refresh the page, you will have to setup webpack to use
+
+```javascript
+devtool: "inline-source-map"
+```
+
+to continue editing and saving your changes from Chrome or source files.
+
+There are some _gotchas_ about using workspaces with watch:
+
+- Large chunks (such as a common chunk that is over 1MB) that are rebuilt could cause the page to blank,
+which will force you to refresh the browser.
+- Smaller chunks will be faster to build than larger chunks since `inline-source-map` is slower
+due to having to base64 encode the original source code.
 
 ### webpack-dev-server
 
@@ -146,6 +165,7 @@ app.use(webpackDevMiddleware(compiler, {
 ## 参考
 
 * [SurviveJS - Automatic Browser Refresh](http://survivejs.com/webpack/developing-with-webpack/automatic-browser-refresh/)
+* [Webpack your Chrome DevTools Workspaces](https://medium.com/@rafaelideleon/webpack-your-chrome-devtools-workspaces-cb9cca8d50da)
 
 ***
 

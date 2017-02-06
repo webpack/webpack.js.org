@@ -1,6 +1,6 @@
 ---
 title: 管理依赖
-sort: 6
+sort: 60
 contributors:
   - ndelangen
   - chrisVillanueva

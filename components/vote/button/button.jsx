@@ -93,8 +93,8 @@ export default class NewButton extends Component {
   }
 
   render() {
-    const {color, className, value, myValue, isLoggedIn} = this.props;
-    return isLoggedIn ? (<div className="vote-new-button" style={{color: color}}>
+    const {color, className, value, myValue, canVote} = this.props;
+    return canVote ? (<div className="vote-new-button" style={{color: color}}>
     <div className="vote-new-button__arrows">
       {this.makeTriangle(1, triangleUp, 10, 1, true)}
       {this.makeTriangle(-1, triangleDown, 10, 1, false)}
