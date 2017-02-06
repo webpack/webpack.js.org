@@ -3,21 +3,22 @@ title: less-loader
 source: https://raw.githubusercontent.com/webpack-contrib/less-loader/master/README.md
 edit: https://github.com/webpack-contrib/less-loader/edit/master/README.md
 ---
-## Install
+## 安装
 
 ```bash
 npm install --save-dev less-loader less
 ```
 
-## Usage
+## 用法
 
-Use [`less-loader`](https://github.com/webpack/less-loader) in tandem with [css-loader](https://github.com/webpack/css-loader) & [style-loader](https://github.com/webpack/style-loader) to add LESS support for webpack.
+一起使用[`less-loader`](https://github.com/webpack/less-loader)、[css-loader](https://github.com/webpack/css-loader)和[style-loader](https://github.com/webpack/style-loader)，添加对 webpack 的 LESS 支持。
 
-Use the loader either via your webpack config, CLI or inline.
+通过 webpack 配置、命令行或者内联方式使用这个 loader。
 
-### Via webpack config (recommended)
+### 通过 webpack 配置（推荐）
 
 **webpack.config.js**
+
 ```js
 module.exports = {
   module: {
@@ -35,34 +36,35 @@ module.exports = {
 }
 ```
 
-**In your application**
+**在你的项目中**
+
 ```js
 import css from 'file.less';
 ```
 
-### CLI
+### 命令行方式（CLI）
 
 ```bash
 webpack --module-bind 'less=style-loader!css-loader!less-loader'
 ```
+**在你的项目中**
 
-**In your application**
 ```js
 import css from 'file.less';
 ```
+### 内联方式
 
-### Inline
+**在你的项目中**
 
-**In your application**
 ```js
 import css from 'style-loader!css-loader!less-loader!./file.less';
 ```
 
-## Options
+## 选项
 
-You can pass any LESS specific options to less-loader via loader options or query parameters.
+通过 loader 的选项或者查询参数，你可以将任何 LESS 特定的选项传递给 less-loader。
 
-See the [LESS documentation](http://lesscss.org/usage/#command-line-usage-options) for all available options. LESS translates dash-case to camelCase. Certain options which take values (e.g. `lessc --modify-var="a=b"`) are better handled with the [JSON Syntax](http://webpack.github.io/docs/using-loaders.html#query-parameters)
+有关所有可用选项，请参阅[LESS 文档](http://lesscss.org/usage/#command-line-usage-options)。LESS 把 dash-case 为 camelCase。采用值的某些选项（比如 `lessc --modify-var="a=b"` ），最好使用[JSON 语法](http://webpack.github.io/docs/using-loaders.html#query-parameters)处理。
 
 ```js
 {
@@ -75,10 +77,9 @@ See the [LESS documentation](http://lesscss.org/usage/#command-line-usage-option
 }
 ```
 
-### Plugins
+### 插件
 
-In order to use [plugins](http://lesscss.org/usage/#plugins), simply set
-the `options.lessPlugins`-option on your `webpack.config.js`.
+为了使用[插件](http://lesscss.org/usage/#plugins)，只需在你的 `webpack.config.js` 文件中，简单地设置 `options.lessPlugins` 选项既可。
 
 ```js
 const CleanCSSPlugin = require('less-plugin-clean-css');
@@ -94,29 +95,29 @@ const CleanCSSPlugin = require('less-plugin-clean-css');
     }
 }
 ```
-
 ### Imports
 
-webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/configuration/resolve/). The less-loader stubs less' `fileLoader` and passes all queries to the webpack resolving engine. Thus you can import your less-modules from `node_modules`. Just prepend them with a `~` which tells webpack to look-up the [`modules`](https://webpack.js.org/configuration/resolve/#resolve-modules)
+webpack 提供了一种[高级的机制解析文件](https://webpack.js.org/configuration/resolve/)。less-loader 根除 less `fileLoader`，并且将所有的查询参数传递给 webpack 解析引擎。所以，你可以从 `node_modules` 导入你的 less 模块。只要加一个 `~` 前缀，告诉 webpack 去查询[`模块`](https://webpack.js.org/configuration/resolve/#resolve-modules)。
 
 ```css
 @import "~bootstrap/less/bootstrap";
 ```
 
-It's important to only prepend it with `~`, because `~/` resolves to the home-directory. webpack needs to distinguish between `bootstrap` and `~bootstrap` because css- and less-files have no special syntax for importing relative files. Writing `@import "file"` is the same as `@import "./file";`
+只要加前缀 `~` 十分必要，因为 `~/` 解析为主目录。webpack 需要区分 `bootstrap` 和 `~bootstrap` ，因为 css 和 less 文件对于导入相对路径的文件没有特殊语法。所以写 `@import "file"` 和 `@import "./file";` 是一样的效果。
 
-Also please note that for [CSS modules](https://github.com/css-modules/css-modules), relative file paths do not work as expected. Please see [this issue for the explanation](https://github.com/webpack/less-loader/issues/109#issuecomment-253797335).
+还要注意，对于[CSS 模块](https://github.com/css-modules/css-modules)，相对文件路径不会生效。请参阅[此issue的解释](https://github.com/webpack/less-loader/issues/109#issuecomment-253797335)。
 
 ### Sourcemaps
 
-Because of browser limitations, sourcemaps are only available in conjunction with the [extract-text-webpack-plugin](https://github.com/webpack/extract-text-webpack-plugin). Use that plugin to extract the CSS code from the generated JS bundle into a separate file (which improves performance because JS and CSS are loaded in parallel).
+因为浏览器的限制，只有结合[extract-text-webpack-plugin](https://github.com/webpack/extract-text-webpack-plugin)才能使用 suorcemaps。使用这个插件，从生成的JS bundle 中提取 css 代码到一个单独的文件（这样可以提高性能，因为 JS 和 CSS 并行加载）。
 
 **webpack.config.js**
+
 ```js
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  // must be 'source-map' or 'inline-source-map'
+  // 必须是'source-map'或者'inline-source-map'
   devtool: 'source-map',
   module: {
     rules: [
@@ -125,7 +126,7 @@ module.exports = {
         use: ExtractTextPlugin.extract(
           fallbackLoader: 'style-loader',
           loaders: [
-            // activate source maps via loader query
+            // 通过loader参数激活source maps
             {
               loader: 'css-loader',
               options: { sourceMap: true, importLoaders: 1 }
@@ -140,21 +141,21 @@ module.exports = {
     ]
   },
   plugins: [
-    // extract CSS into separate file
+    // 提取 CSS 到单独的文件中
     new ExtractTextPlugin('app.bundle.css')
   ]
 }
 ```
 
-If you want to view the original LESS files inside Chrome and even edit it,  [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). Checkout [test/sourceMap](https://github.com/webpack/less-loader/tree/master/test) for a running example. Make sure to serve the content with an HTTP server.
+如果你想在Chrome浏览器中查看原始的LESS文件，甚至编辑它。[有一篇很好的博客文章](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0)。查看[test/sourceMap](https://github.com/webpack/less-loader/tree/master/test)目录，获取运行例子。要确保使用HTTP服务器提供内容。
 
-## Contributing
+## 贡献
 
-Don't hesitate to create a pull request. Every contribution is appreciated. In development you can start the tests by calling `npm test`.
+不要犹豫啦，创建一个PR。每一份奉献都是值得欣赏的。在开发中，你可以通过运行 `npm test` 启动测试。
 
-The tests are basically just comparing the generated css with a reference css-file located under `test/css`. You can easily generate a reference css-file by calling `node test/helpers/generateCss.js <less-file-without-less-extension>`. It passes the less-file to less and writes the output to the `test/css`-folder.
+测试基本上只是比较生成的 css 文件和位于 `test/css` 目录下的引用 css 文件。通过运行 `node test/helpers/generateCss.js <less-file-without-less-extension>`，你可以轻松地生成引用 css 文件。它将 less 文件传递给 less，并且把输出写入到 `test/css` 文件夹下。
 
-## Maintainer
+## 维护者
 
 <table>
   <tbody>
@@ -186,3 +187,7 @@ The tests are basically just comparing the generated css with a reference css-fi
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/loaders/less-loader/
