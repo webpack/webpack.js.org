@@ -5,7 +5,7 @@ edit: https://github.com/webpack/coffee-redux-loader/edit/master/README.md
 ---
 # coffee-script-redux loader for webpack
 
-## Usage
+## Usage使用
 
 ``` javascript
 var exportsOfFile = require("coffee-redux-loader!./file.coffee");
@@ -14,6 +14,8 @@ var exportsOfFile = require("coffee-redux-loader!./file.coffee");
 
 Don't forget to polyfill `require` if you want to use it in node.
 See `webpack` documentation.
+如果你要使用coffee-redux-loader在node的运行环境里面，必须在开始的时候用'require'引入这个组件，更多详见'webpack'的文档
+
 
 ## License
 
