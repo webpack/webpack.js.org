@@ -117,7 +117,7 @@ webpack 提供了一种[高级的机制解析文件](https://webpack.js.org/conf
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  // 必须是'source-map'或者'inline-source-map'
+  // 必须是 'source-map' 或者 'inline-source-map'
   devtool: 'source-map',
   module: {
     rules: [
@@ -126,7 +126,7 @@ module.exports = {
         use: ExtractTextPlugin.extract(
           fallbackLoader: 'style-loader',
           loaders: [
-            // 通过loader参数激活source maps
+            // 通过 loader 参数激活 source maps
             {
               loader: 'css-loader',
               options: { sourceMap: true, importLoaders: 1 }
