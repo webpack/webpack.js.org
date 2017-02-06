@@ -63,12 +63,12 @@ T> 你可能看到项目**生成(emitted 或 emit)**贯穿我们整个文档和[
 
 webpack 的目标是，让 **webpack** 聚焦于项目中的所有资源(asset)，而浏览器不需要关注考虑这些（这并不意味着资源(asset)都必须打包在一起）。webpack 把[每个文件(.css, .html, .scss, .jpg, etc.) 都作为模块](/concepts/modules)处理。而且 webpack **只理解 JavaScript**。
 
-**因为文件已被添加到了依赖图表，所以 webpack 加载器会_将这些文件转换为模块_。**
+**webpack loader 会_将这些文件转换为模块_，而转换后的文件会被添加到依赖图表中。**
 
-webpack 配置在更高层面有两个目标。
+在更高层面，webpack 的配置有两个目标。
 
-1. 识别出(identify)应该被指定的加载器转换(transform)的文件
-2. 转换能够被添加到依赖图表的文件（并且最终打包）(`use` 属性)
+1. 识别出(identify)应该被对应的 loader 进行转换(transform)的那些文件
+2. 由于进行过文件转换，所以能够将被转换的文件添加到依赖图表（并且最终添加到 bundle 中）(`use` 属性)
 
 **webpack.config.js**
 
@@ -91,9 +91,9 @@ const config = {
 module.exports = config;
 ```
 
-以上配置中，我们定义了为一个独立的 module 定义了 `rules` 属性，里面包含两个必须属性：`test` 和 `use`。这可以告诉 webpack 编译器(compiler) 如下：
+以上配置中，我们对一个单独的 module 对象定义了 `rules` 属性，里面包含两个必须属性：`test` 和 `use`。这可以告诉 webpack compiler 如下：
 
-> “嘿，webpack 编译器，当你碰到「在 `require()`/`import` 语句中被解析为 '.js' 或 '.jsx' 的路径」时，在你把它们添加并打包之前，要先**使用** `babel-loader` 去转换”。
+> “嘿，webpack compiler，当你碰到「在 `require()`/`import` 语句中被解析为 '.js' 或 '.jsx' 的路径」时，在你把它们添加并打包之前，要先**使用** `babel-loader` 去转换”。
 
 W> 重要的是要记得，在 webpack 配置中定义 loader 时，要定义在 `module.rules` 中，而不是 `rules`。在定义错时 webpack 会提出严重的警告。
 
@@ -103,9 +103,10 @@ W> 重要的是要记得，在 webpack 配置中定义 loader 时，要定义在
 
 ## 插件(Plugins)
 
-由于加载器仅基于单个文件执行转换，`插件`最常用于（但不限于）在打包模块的“编译(compilation)”和“分块(chunk)”时执行操作和自定义功能[（查看更多）](/concepts/plugins)。webpack 的插件系统[极其强大和可定制](/api/plugins)。
+由于 loader 仅在每个文件的基础上执行转换，而 `插件(plugins)` 最常用于（但不限于）在打包模块的“compilation”和“chunk”生命周期执行操作和自定义功能[（查看更多）](/concepts/plugins)。webpack 的插件系统[极其强大和可定制化](/api/plugins)。
 
-为了使用插件，你只需要 `require()` 它们，并且把它们添加到 `plugins` 数组。多数插件可以通过选项(option)自定义。由于你可以在一个配置多次使用插件用于不同的目的，因此你需要使用 `new` 来创建插件的实例，并且调用插件。
+由于你可以在一个配置多次使用插件用于不同的目的
+想要使用一个插件，你只需要 `require()` 它，然后把它添加到 `plugins` 数组中。多数插件可以通过选项(option)自定义。由于需要在一个配置中，多次使用一个插件，来针对不同的目的，因此你需要使用 `new` 来创建插件的实例，并且通过实例来调用插件。
 
 **webpack.config.js**
 
@@ -136,7 +137,7 @@ module.exports = config;
 
 webpack 提供许多开箱可用的插件！查阅我们的[插件列表](/plugins)展示更多信息。
 
-在 webpack 配置中使用插件是直接的，然而有很多用例值得我们深入讨论。
+在 webpack 配置中使用插件是简单直接的，然而还是有很多用例值得我们深入讨论。
 
 [了解更多！](/concepts/plugins)
 
