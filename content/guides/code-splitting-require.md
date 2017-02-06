@@ -1,9 +1,10 @@
 ---
 title: 代码拆分 - 使用 require.ensure
-sort: 5
+sort: 33
 contributors:
   - pksjce
   - rahulcs
+  - johnstew
 ---
 
 在这一节，我们会讨论 webpack 如何使用 `require.ensure()` 进行代码拆分。
@@ -38,7 +39,7 @@ chunkName 是提供给这个特定的 `require.ensure()` 的 chunk 的名称。�
     |    |-- b.js
     webpack.config.js
     |
-    dist 
+    dist
 ```
 
 ```javascript
@@ -58,13 +59,14 @@ console.log('***** I AM b *****');
 
 ```javascript
 \\ webpack.config.js
+var path = require('path');
 
 module.exports = function(env) {
     return {
         entry: './js/entry.js',
         output: {
             filename: 'bundle.js',
-            path: './dist'
+            path: path.resolve(__dirname, 'dist')
         }
     }
 }
@@ -75,7 +77,7 @@ module.exports = function(env) {
 
 `b.js` 被打包进 `0.bundle.js`.
 
-?> `require.ensure` 内部依赖于 `Promises`。 如果你在旧的浏览器中使用 `require.ensure` 请记得 去 shim `Promise.` [es6-promise polyfill](https://github.com/stefanpenner/es6-promise).
+W> `require.ensure` 内部依赖于 `Promises`。 如果你在旧的浏览器中使用 `require.ensure` 请记得 去 shim `Promise.` [es6-promise polyfill](https://github.com/stefanpenner/es6-promise).
 
 ## `require.ensure()` 的坑点
 

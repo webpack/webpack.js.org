@@ -5,9 +5,10 @@ contributors:
   - sokra
   - skipjack
   - tomasAlabes
+  - mattce
 ---
 
-位于对象最顶级 `output` 键，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
+ `output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
 
 
 ## `output.chunkFilename`
@@ -250,6 +251,26 @@ MyLibrary.doSomething(); //如果 this 是 window
 ```
 
 
+`libraryTarget: "window"` - When your library is loaded, **the return value of your entry point** will be part `window` object.
+
+ ```javascript
+ window["MyLibrary"] = _entry_return_;
+
+//your users will use your library like:
+window.MyLibrary.doSomething();
+ ```
+
+
+`libraryTarget: "global"` - When your library is loaded, **the return value of your entry point** will be part `global` object.
+
+ ```javascript
+ global["MyLibrary"] = _entry_return_;
+
+//your users will use your library like:
+global.MyLibrary.doSomething();
+ ```
+
+
 `libraryTarget: "commonjs"` - 当 library 加载完成，**入口起点的返回值**将分配于 exports 对象上。这个名称也意味着模块用于 CommonJS 环境：
 
 ```javascript
@@ -320,7 +341,7 @@ require(["MyLibrary"], function(MyLibrary){
 `libraryTarget: "umd"` - 这是一种可以将你的 library 能够在所有的模块定义下都可运行的方式（并且导出的完全不是模块）。
 它将在 CommonJS, AMD 环境下运行，或将模块导出到 global 下的变量。你可以查看 [UMD 仓库](https://github.com/umdjs/umd) 来了解更多相关信息。
 
-在这个例子中，你需要另一个属性来命名你的模块：
+在这个例子中，你需要 `library` 属性来命名你的模块：
 
 ```javascript
 output: {
@@ -346,6 +367,21 @@ output: {
 ```
 
 模块验证 library。
+
+
+`libraryTarget: "assign"` - Here webpack will blindly generate an implied global.
+
+ ```javascript
+ MyLibrary = _entry_return_;
+ ```
+Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
+
+
+`libraryTarget: "jsonp"` - This will wrap the return value of your entry point into a jsonp wrapper.
+
+ ```javascript
+ MyLibrary( _entry_return_ );
+ ```
 
 你的 library 的依赖将由 [`externals`](/configuration/externals/) 配置定义。
 
@@ -436,39 +472,40 @@ publicPath: "", // 相对于 HTML 页面（目录相同）
 
 `string`
 
-This option is only used when [`devtool`](/configuration/devtool) uses a SourceMap option which writes an output file.
+ 此选项会向硬盘写入一个输出文件，只在 [`devtool`](/configuration/devtool) 启用了 SourceMap 选项时才使用。
 
-Configure how source maps are named. By default `"[file].map"` is used.
 
-Technically the `[name]`, `[id]`, `[hash]` and `[chunkhash]` [placeholders](#output-filename) can be used, if generating a SourceMap for chunks. In addition to that the `[file]` placeholder is replaced with the filename of the original file. It's recommended to only use the `[file]` placeholder, as the other placeholders won't work when generating SourceMaps for non-chunk files. Best leave the default.
+配置 source map 的命名方式。默认使用 `"[file].map"`。
+
+技术上看，对于 chunk 生成的 SourceMap，可以使用 `[name]`, `[id]`, `[hash]` 和 `[chunkhash]` [占位符(placeholder)](#output-filename)。除了替换这些占位符，`[file]` 占位符还可以被替换为原始文件(original file)的文件名。建议只使用 `[file]` 占位符，因为其他占位符在非 chunk 文件生成的 SourceMap 时不起作用。最好保持默认。
 
 
 ## `output.sourcePrefix`
 
 `string`
 
-Change the prefix for each line in the output bundles.
+修改输出 bundle 中每行的前缀。
 
 ``` js
 sourcePrefix: "\t"
 ```
 
-Note by default an empty string is used. Using some kind of indention makes bundles look more pretty, but will cause issues with multi-line string.
+注意，默认情况下使用空字符串。使用一些缩进会看起来更美观，但是可能导致多行字符串中的问题。
 
-There is no need to change it.
+这里没有必要修改它。
 
 
 ## `output.umdNamedDefine`
 
 `boolean`
 
-When using `libraryTarget: "umd"`, setting:
+当使用了 `libraryTarget: "umd"`，设置：
 
 ``` js
 umdNamedDefine: true
 ```
 
-will name the AMD module of the UMD build. Otherwise an anonymous `define` is used.
+会对 UMD 的构建过程中的 AMD 模块进行命名。否则就使用匿名的 `define`。
 
 ***
 

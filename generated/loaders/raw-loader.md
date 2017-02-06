@@ -1,19 +1,19 @@
 ---
 title: raw-loader
-source: https://raw.githubusercontent.com/webpack/raw-loader/master/README.md
-edit: https://github.com/webpack/raw-loader/edit/master/README.md
+source: https://raw.githubusercontent.com/webpack-contrib/raw-loader/master/README.md
+edit: https://github.com/webpack-contrib/raw-loader/edit/master/README.md
 ---
-## Install
+## 安装
 
 ```bash
 npm install --save-dev raw-loader
 ```
 
-## Usage
+## 用法
 
-Use the loader either via your webpack config, CLI or inline.
+通过 webpack 配置、命令行或者内联使用加载器。
 
-### Via webpack config (recommended)
+### 通过 webpack 配置（推荐）
 
 **webpack.config.js**
 ```js
@@ -29,41 +29,41 @@ module.exports = {
 }
 ```
 
-**In your application**
+**在你的项目中**
 ```js
 import txt from 'file.txt';
 ```
 
-### CLI
+### 通过命令行（CLI）
 
 ```bash
 webpack --module-bind 'txt=raw-loader'
 ```
 
-**In your application**
+**在你的项目中**
 ```js
 import txt from 'file.txt';
 ```
 
-### Inline
+### 内联使用
 
-**In your application**
+**在你的项目中**
 ```js
 import txt from 'raw-loader!./file.txt';
 ```
 
-## Maintainers
+## 维护者
 
 <table>
   <tbody>
     <tr>
       <td align="center">
-        <img width="150 height="150" src="https://github.com/sokra.png?s=150">
-        <br>
+        <img width="150" height="150" src="https://avatars.githubusercontent.com/sokra?v=3">
+        </br>
         <a href="https://github.com/sokra">Tobias Koppers</a>
       </td>
-    <tr>
-  <tbody>
+    </tr>
+  </tbody>
 </table>
 
 [npm]: https://img.shields.io/npm/v/raw-loader.svg

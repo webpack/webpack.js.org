@@ -64,9 +64,9 @@ module.exports = config;
 
 > 默认值：`false`
 
-> 参考[[library and externals]]
+> 参考[library](/guides/author-libraries/)
 
-> 参考[[Development Tools]]
+> 参考[Development Tools](/guides/development/#choosing-a-tool)
 
 ### `output.devtoolLineToLine`
 

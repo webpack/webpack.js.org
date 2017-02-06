@@ -4,19 +4,23 @@
 .splash {
   &__section {
     position:relative;
-    padding:5em 1em;
     text-align:center;
 
-    &:last-child {
-      padding-top: 0;
+    &__dark {
+      background-color:#f3f3f3;
     }
 
-    @include break {
-      padding:8em 1.5em;
+    .container {
+      padding:5em 1em;
+
+      @include break {
+        padding-left:1.5em;
+        padding-right:1.5em;
+      }
     }
 
-    pre { 
-      text-align:left; 
+    pre {
+      text-align:left;
     }
 
     .icon-link {

@@ -4,11 +4,11 @@ title: extract-text-webpack-plugin
 
 # extract text plugin for webpack 2
 
-API 从版本1起已经改变。用于 webpack 1 的版本，请看[the README in the webpack-1 branch](https://github.com/webpack/extract-text-webpack-plugin/blob/webpack-1/README.md)。
+和 webpack 1 版本相比 API 已经发生改变。对于 webpack 1 版本，请查看 [webpack-1 分支的 README 文档](https://github.com/webpack/extract-text-webpack-plugin/blob/webpack-1/README.md)。
 
 ## 安装
 
-> 你可以用 [npm](https://nodejs.org/en/) 或者 [yarn](https://yarnpkg.com/)安装它。
+> 可以使用 [npm](https://nodejs.org/en/) 或者 [yarn](https://yarnpkg.com/) 来安装。
 
 ```sh
 npm install --save-dev extract-text-webpack-plugin
@@ -18,7 +18,7 @@ or
 yarn add --dev extract-text-webpack-plugin
 ```
 
-## css的使用例子
+## CSS 的用法示例
 
 ``` javascript
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -37,23 +37,23 @@ module.exports = {
 }
 ```
 
-它会将所有的 入口chunk (entry chunks) 中的 `require("style.css")` 移动到分开的 css 文件。因此，你的样式不再内联到 javascript 里面，但会放到一个单独的 css 包文件 (`styles.css`)当中。 如果你的样式文件大小较大，这会更快，因为样式文件会跟 javascript 包并行加载。
+它会将每个「入口 chunk(entry chunks)」中的 `require("style.css")` 移动到分离的 css 输出文件中。所以，你的样式不再内联到 javascript 里面，而是分离到 css bundle(`styles.css`) 文件中。如果样式总量很大，加载就会变得很快，因为样式 bundle 会并行加载到 javascript bundle 中。
 
-优点:
+优势：
 
-* 更少 style 标签 (旧版本的 IE 浏览器有限制)
-*  CSS SourceMap (使用 `devtool: "source-map"` 和 `css-loader?sourceMap` 配置)
+* 更少的 style 标签（旧版本的 IE 浏览器对 style 标签数量有限制）
+* CSS SourceMap（使用 `devtool: "source-map"` 和 `css-loader?sourceMap` 配置）
 * CSS 请求并行
 * CSS 单独缓存
-* 更快的浏览器运行时 (更少代码和 DOM 的运行)
+* 更快的浏览器运行时(runtime)（减少代码和减少 DOM 操作）
 
-警告:
+警告：
 
 * 额外的 HTTP 请求
 * 更长的编译时间
 * 更复杂的配置
-* 没有运行时的公共路径修改
-* 没有热替换
+* 没有运行时(runtime)的公共路径修改
+* 没有模块热替换
 
 ## API
 
@@ -61,32 +61,32 @@ module.exports = {
 new ExtractTextPlugin(options: filename | object)
 ```
 
-* `options.filename: string` _(必填)_ 生成文件的文件名。会包含 `[name]`, `[id]` 和 `[contenthash]`
+* `options.filename: string` _（必选）_ 生成文件的文件名。可能包含 `[name]`, `[id]` 和 `[contenthash]`
   * `[name]` chunk 的名称
   * `[id]` chunk 的数量 
-  * `[contenthash]` 根据提取文件内容的哈希值
-* `options.allChunks: boolean` 向所有额外的 chunk 提取（默认只提取初始加载模块）
+  * `[contenthash]` 提取文件内容的哈希值
+* `options.allChunks: boolean` 向所有额外的 chunk 中提取（默认情况下，只从初始chunk 提取）
 * `options.disable: boolean` 禁用插件
-* `options.id: string` 此插件实例的唯一id。 （仅限高级用途，默认情况下自动生成）
+* `options.id: string` 此插件实例的唯一 id。（仅限于高级用法，默认情况下自动生成）
 
-The `ExtractTextPlugin` 每个 入口chunk 都会生成一个文件，所以当你使用多个 入口chunk 的时候，你必须使用 `[name]`, `[id]` 或者 `[contenthash]`.
+`ExtractTextPlugin` 为每个入口 chunk 生成一个输出文件，所以在使用多个入口时，你必须使用 `[name]`, `[id]` 或者 `[contenthash]`。
 
 ``` javascript
 ExtractTextPlugin.extract(options: loader | object)
 ```
 
-从已经有的加载器里创建一个提取的加载器，支持加载器类似，如 `{ loader: string; query: object }`。
+从已有的 loader 中创建一个用于提取的 loader，支持的 loader 如 `{ loader: string; query: object }` 这种类型。
 
-* `options.loader: string | object | loader[]` _(必填)_ 加载器应用于将资源转换成 css 输出模块。
-* `options.fallbackLoader: string | object | loader[]` 加载器应用于当 css 没有被提取(也就是一个额外的 chunk，当 `allChunks: false`)
-* `options.publicPath: string` 对加载器的 `publicPath` 配置重写
+* `options.loader: string | object | loader[]` _(必选)_loader 用于将资源转换为 css 导出模块
+* `options.fallbackLoader: string | object | loader[]` loader 用于在 css 没有被提取时(例如，在 `allChunks: false` 时的额外的 chunk)
+* `options.publicPath: string` 重写 loader 的 `publicPath` 设置
 
-这也是一个 提取函数的实例。如果你有多于一个 `ExtractTextPlugin` 插件 你应使用这种办法。
+在 extract 实例还有一个 extract 函数。如果有多个 `ExtractTextPlugin` 实例，你应该使用此方法。
 
 ```javascript
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-// 多个提取实例
+// 多个 extract 实例
 let extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
 let extractLESS = new ExtractTextPlugin('stylesheets/[name].less');
 

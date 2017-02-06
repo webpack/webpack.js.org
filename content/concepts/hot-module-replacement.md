@@ -36,8 +36,8 @@ manifest 包括新的编译 hash 和所有的待更新 chunk 目录。
 
 ### 站在模块的角度
 
-HMR 是可选功能，只会影响包含 HRM 代码的模块。举个例子，通过 [style-loader](https://github.com/webpack/style-loader) 为 style 样式追加补丁。
-为了运行追加补丁，style-loader 实现了 HMR 接口；当它通过 HRM 接收到更新，它会使用新的样式替换旧的样式。
+HMR 是可选功能，只会影响包含 HRM 代码的模块。举个例子，通过 [`style-loader`](https://github.com/webpack/style-loader) 为 style 样式追加补丁。
+为了运行追加补丁，`style-loader` 实现了 HMR 接口；当它通过 HRM 接收到更新，它会使用新的样式替换旧的样式。
 
 类似的，当在一个模块中实现了 HMR 接口，你可以描述出当模块被更新后发生了什么。然而在多数情况下，不需要强制在每个模块中写入 HMR 代码。如果一个模块没有 HMR 处理函数，更新就会冒泡。这意味着一个简单的处理函数能够对整个模块树(complete module tree)进行处理。如果在这个模块树中，一个单独的模块被更新，那么整个模块树都会被重新加载（只会重新加载，不会迁移）。
 
@@ -56,6 +56,7 @@ HMR 是可选功能，只会影响包含 HRM 代码的模块。举个例子，�
 ## 我能够使用 HMR 做什么？
 
 你可以在开发过程中将 HMR 作为 LiveReload 的替代。[webpack-dev-server](/configuration/dev-server/) 支持热模式，在试图重新加载整个页面之前，热模式会尝试使用 HMR 来更新。查看如何实现[在 React 项目中使用 HRM](/guides/hmr-react) 为例。
+
 
 一些 loader 已经生成可热更新的模块。例如，`style-loader` 能够置换出页面的样式表。对于这样的模块，你不需要做任何特殊处理。
 

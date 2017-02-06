@@ -11,7 +11,7 @@ For proper usage and easy distribution of this configuration, webpack can be con
 
 ## Installation
 
-Have a look at [this page](/get-started/install-webpack)
+Have a look at [this page](/guides/installation)
 
 ?> The new CLI for webpack is under development. New features are being added such as the `--init` flag. [Check it out!](https://github.com/webpack/webpack-cli)
 
@@ -234,10 +234,10 @@ These options allow webpack to display various stats and style them differently 
 
 ### Shortcuts
 
-| Shortcut | Replaces                                                                                  |
-|----------|-------------------------------------------------------------------------------------------|
-| -d       | --debug --devtool eval-cheap-module-source-map --output-pathinfo                          |
-| -p       | --optimize-minimize --define,process.env.NODE_ENV="production" --optimize-occurence-order |
+| Shortcut | Replaces                                                         |
+|----------|------------------------------------------------------------------|
+| -d       | --debug --devtool eval-cheap-module-source-map --output-pathinfo |
+| -p       | --optimize-minimize --define process.env.NODE_ENV="production"   |
 
 ### Profiling
 

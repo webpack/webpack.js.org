@@ -8,9 +8,10 @@ contributors:
   - bondz
   - sricc
   - terinjokes
+  - mattce
 ---
 
-Webpack 是需要传入一个配置对象。取决于你如何使用 webpack，可以通过两种方式之一：终端或 Node.js。下面指定了所有可用的配置选项。
+webpack 是需要传入一个配置对象。取决于你如何使用 webpack，可以通过两种方式之一：终端或 Node.js。下面指定了所有可用的配置选项。
 
 T> 刚接触 webpack？请查看我们提供的指南，从 webpack 一些[核心概念](/concepts)开始学习吧！
 T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs.org/api/path.html)，并在它前面加上 [__dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname)这个全局变量。可以防止不同操作系统之间的文件路径问题，并且可以使相对路径按照预期工作。更多「POSIX 和 Windows」的相关信息请查看[此章节](https://nodejs.org/api/path.html#path_windows_vs_posix)。
@@ -56,14 +57,18 @@ var path = require('path');
     [library](/configuration/output#output-library): "MyLibrary", // string,
     // 导出库(exported library)的名称
 
-    <details><summary>[libraryTarget](/configuration/output#output-librarytarget): "umd", // 枚举</summary>
-    [libraryTarget](/configuration/output#output-librarytarget): "umd-module", // 包裹在 UMD 中的 ES2015 模块
-    [libraryTarget](/configuration/output#output-librarytarget): "commonjs-module", // 包裹在 CommonJS 中的 ES2015 模块
-    [libraryTarget](/configuration/output#output-librarytarget): "commonjs2", // 使用 module.exports 导出
-    [libraryTarget](/configuration/output#output-librarytarget): "commonjs", // 作为 exports 的属性导出
-    [libraryTarget](/configuration/output#output-librarytarget): "amd", // 使用 AMD 定义方法来定义
-    [libraryTarget](/configuration/output#output-librarytarget): "this", // 在 this 上设置属性
-    [libraryTarget](/configuration/output#output-librarytarget): "var", // 变量定义于根作用域下
+    <details><summary>[libraryTarget](/configuration/output#output-librarytarget): "umd", // 通用模块定义</summary>
+        [libraryTarget](/configuration/output#output-librarytarget): "umd2", // 通用模块定义
+        [libraryTarget](/configuration/output#output-librarytarget): "commonjs2", // exported with module.exports
+        [libraryTarget](/configuration/output#output-librarytarget): "commonjs-module", // 使用 module.exports 导出
+        [libraryTarget](/configuration/output#output-librarytarget): "commonjs", // 作为 exports 的属性导出
+        [libraryTarget](/configuration/output#output-librarytarget): "amd", // 使用 AMD 定义方法来定义
+        [libraryTarget](/configuration/output#output-librarytarget): "this", // 在 this 上设置属性
+        [libraryTarget](/configuration/output#output-librarytarget): "var", // 变量定义于根作用域下
+        [libraryTarget](/configuration/output#output-librarytarget): "assign", // 盲分配(blind assignment)
+        [libraryTarget](/configuration/output#output-librarytarget): "window", // 在 window 对象上设置属性
+        [libraryTarget](/configuration/output#output-librarytarget): "global", // property set to global object
+        [libraryTarget](/configuration/output#output-librarytarget): "jsonp", // jsonp wrapper
     </details>
     // 导出库(exported library)的类型
 
@@ -147,7 +152,7 @@ var path = require('path');
 
         [loader](/configuration/module#rule-loader): "babel-loader",
         // 应该应用的 loader，它相对上下文解析
-        // 为了更清晰，`-loader` 后缀在 Webpack 2 中不再是可选的
+        // 为了更清晰，`-loader` 后缀在 webpack 2 中不再是可选的
         // 查看 [webpack 1 升级指南](/guides/migrating)。
 
         [options](/configuration/module#rule-options-rule-query): {
@@ -239,13 +244,13 @@ var path = require('path');
     <details><summary>/* 可供选择的别名语法（点击展示） */</summary>
     [alias](/configuration/resolve#resolve-alias): [
       {
-        **name**: "module",
+        name: "module",
         // 旧的请求
 
-        **alias**: "new-module",
+        alias: "new-module",
         // 新的请求
 
-        **onlyModule**: true
+        onlyModule: true
         // 如果为 true，只有 "module" 是别名
         // 如果为 false，"module/inner/path" 也是别名
       }

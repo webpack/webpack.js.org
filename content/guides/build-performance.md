@@ -1,19 +1,26 @@
 ---
 title: 改善构建性能
-sort: 15
 ---
 
-> incremental builds
-> profile
-> analyse tool
-> dirty chunks ([chunkhash])
-> source maps
-> PrefetchPlugin
-> resolving
-> DllPlugin
+?> incremental builds
 
-> see also [[development tools]]
-> see also [[resolving]]
+?> profile
+
+?> analyse tool
+
+?> dirty chunks ([chunkhash])
+
+?> source maps
+
+?> PrefetchPlugin
+
+?> resolving
+
+?> DllPlugin
+
+[Development Tools](/guides/development/#choosing-a-tool)
+
+> see also [resolving](/concepts/module-resolution/#resolving-rules-in-webpack)
 
 ***
 

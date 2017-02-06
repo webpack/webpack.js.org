@@ -1,37 +1,36 @@
 ---
 title: 缓存
-sort: 16
+sort: 41
 contributors:
   - okonet
   - jouni-kantola
 ---
 
-To enable long-term caching of static resources produced by webpack:
+为了能够长期缓存webpack生成的静态资源:
 
-1. Use `[chunkhash]` to add a content-dependent cache-buster to each file.
-2. Extract the webpack manifest into a separate file.
-3. Ensure that the entry point chunk containing the bootstrapping code doesn’t change hash over time for the same set of dependencies.
+1. 使用`[chunkhash]`向每个文件添加一个依赖于内容的缓存杀手(cache-buster)。
+2. 将webpack mainfest提取到一个单独的文件中去。
+3. 对于一组依赖关系相同的资源，确保包含引导代码的入口起点模块(entry chunk)不会随时间改变它的哈希值。
+    对于更优化的设置:
+4. 当需要在HTML中加载资源时，使用编译器统计信息(compiler stats)来获取文件名。
+5. 生成模块清单(chunk manifest)的JSON内容，并在页面资源加载之前内联进HTML中去。
 
-    For even more optimized setup:
-4. Use compiler stats to get the file names when requiring resources in HTML.
-5. Generate the chunk manifest JSON and inline it into the HTML page before loading resources.
+## 问题
 
+每次需要在代码中更新内容时，服务器都必须重新部署，然后再由所有客户端重新下载。 这显然是低效的，因为通过网络获取资源可能会很慢。 这也就是为什么浏览器需要缓存资源的原因。
 
-## The problem
+但是采用这种方式有一个缺陷：如果我们在部署新版本时不更改资源的文件名，浏览器可能会认为它没有被更新，就会使用它的缓存版本。
 
-Each time something needs to be updated in our code, it has to be re-deployed on the server and then re-downloaded by all clients. This is clearly inefficient since fetching resources over the network can be slow. This is why browsers cache static resources.
-
-The way it works has a pitfall: If we don’t change filenames of our resources when deploying a new version, the browser might think it hasn’t been updated and client will get a cached version of it.
-
-A simple way to tell the browser to download a newer version is to alter the asset’s file name. In a pre-webpack era we used to add a build number to the filenames as a parameter and then increment it:
+告诉浏览器下载较新版本的一种简单方法就是更改资源的文件名。在webpack之前的时代，我们一般会添加一个内部版本号作为参数，然后逐次递增：
 
 ```bash
 application.js?build=1
 application.css?build=1
 ```
 
-It is even easier to do with webpack. Each webpack build generates a unique hash which can be used to compose a filename, by including output [placeholders](/concepts/output/#options).
-The following example config will generate 2 files (1 per entry) with hashes in filenames:
+使用webpack就更简单了。通过包含输出[占位符](/concepts/output/#options)，每次webpack构建时都会生成一个唯一的哈希值用来构成文件名。
+
+以下这个配置示例会生成两个在文件名中带有哈希值的文件（每个都有一个入口点）：
 
 ```js
 // webpack.config.js
@@ -49,7 +48,7 @@ module.exports = {
 };
 ```
 
-Running webpack with this config will produce the following output:
+使用这个配置文件运行webpack会生成下面的结果：
 
 ```bash
 Hash: 2a6c1fee4b5b0d2c9285
@@ -62,13 +61,13 @@ vendor.2a6c1fee4b5b0d2c9285.js  2.58 kB       0  [emitted]  vendor
    [1] ./src/vendor.js 63 bytes {0} [built]
 ```
 
-But the problem here is, builds after *any file update* will update all filenames and clients will have to re-download all application code. So how can we guarantee that clients always get the latest versions of assets without re-downloading all of them?
+但是这里的问题是，在*任何文件更新*之后构建就会更新所有文件名，然后客户端就不得不重新下载所有代码。 那么我们如何保证客户端始终获得最新版本的资源，而又不需要重新下载所有的资源呢？
 
-## Generating unique hashes for each file
+## 为每个文件生成唯一的哈希值
 
-What if we could produce the same filename, if the contents of the file did not change between builds? For example, it would be unnecessary to re-download a vendor file, when no dependencies have been updated, only application code.
+如果文件内容在两次构建之间没有变化，就生成相同的文件名的话会怎么样？例如，当依赖没有更新，只有应用代码更新的时候，就没有必要去重新下载一个公共库(vendor)文件。
 
-webpack allows you to generate hashes depending on file contents, by replacing the placeholder `[hash]` with `[chunkhash]`. Here is the updated config:
+webpack允许你根据文件内容生成哈希值，只要用`[chunkhash]`替换`[hash]`就可以了。以下是新的配置：
 
 ```diff
 module.exports = {
@@ -81,7 +80,7 @@ module.exports = {
 };
 ```
 
-This config will also create 2 files, but in this case, each file will get its own unique hash.
+这个配置文件也会生成两个文件，但是在这种情况下，每个文件会获得自己唯一的哈希值。
 
 ```bash
 Hash: cfba4af36e2b11ef15db
@@ -94,25 +93,25 @@ vendor.50cfb8f89ce2262e5325.js  2.58 kB       0  [emitted]  vendor
    [1] ./src/vendor.js 63 bytes {0} [built]
 ```
 
-T> Don’t use [chunkhash] in development since this will increase compilation time. Separate development and production configs and use [name].js for development and [name].[chunkhash].js in production.
+T> 不要在开发环境下使用[chunkhash]，因为这会增加编译时间。将开发和生产模式的配置分开，并在开发模式中使用[name].js的文件名， 在生产模式中使用[name].[chunkhash].js文件名。
 
-## Get filenames from webpack compilation stats
+## 从webpack编译统计中获取文件名
 
-When working in development mode, you just reference JavaScript files by entry point name in your HTML.
+在开发模式下，你只要在HTML中直接引用JavaScript文件：
 
 ```html
 <script src="vendor.js"></script>
 <script src="main.js"></script>
 ```
 
-Although, each time we build for production, we’ll get different file names. Something, that looks like this:
+而每次在生产环境中构建，我们都会得到不同的文件名。类似这样：
 
 ```html
 <script src="vendor.50cfb8f89ce2262e5325.js"></script>
 <script src="main.70b594fe8b07bcedaa98.js"></script>
 ```
 
-In order to reference a correct file in the HTML, we’ll need information about our build. This can be extracted from webpack compilation stats by using this plugin:
+为了在HTML中引用正确的文件，我们需要一些有关构建的信息。这可以使用下面这个插件，从webpack编译统计中提取：
 
 ```js
 // webpack.config.js
@@ -132,12 +131,12 @@ module.exports = {
 };
 ```
 
-Alternatively, just use one of these plugins to export JSON files:
+或者，只需使用以下其中一个插件去导出JSON文件：
 
 * https://www.npmjs.com/package/webpack-manifest-plugin
 * https://www.npmjs.com/package/assets-webpack-plugin
 
-A sample output when using `webpack-manifest-plugin` in our config looks like:
+在我们当前配置下，使用`webpack-manifest-plugin`插件后一个示例输出像这样：
 
 ```json
 {
@@ -146,22 +145,23 @@ A sample output when using `webpack-manifest-plugin` in our config looks like:
 }
 ```
 
-## Deterministic hashes
+## 确定性的哈希值
 
-To minimize the size of generated files, webpack uses identifiers instead of module names. During compilation, identifiers are generated, mapped to chunk filenames and then put into a JavaScript object called *chunk manifest*.
-To generate identifiers that are preserved over builds, webpack supply the `NamedModulesPlugin` (recommended for development) and `HashedModuleIdsPlugin` (recommended for production).
+为了最小化生成的文件大小，webpack使用标识符而不是模块名称。在编译期间，生成标识符并映射到块文件名，然后放入一个名为*chunk manifest*的JavaScript对象中。
 
-> TODO: When exist, link to `NamedModulesPlugin` and `HashedModuleIdsPlugin` docs pages
+为了生成保存在构建中的标识符，webpack提供了`NamedModulesPlugin`（推荐用于开发模式）和`HashedModuleIdsPlugin`（推荐用于生产模式）这两个插件。
 
-> TODO: Describe how the option `recordsPath` option works
+> TODO: 如果存在, 链接到`NamedModulesPlugin`和`HashedModuleIdsPlugin`文档页
 
-The chunk manifest (along with bootstrapping/runtime code) is then placed into the entry chunk and it is crucial for webpack-packaged code to work.
+> TODO: 描述`recordsPath`选项如何工作
 
-T> Separate your vendor and application code with [CommonsChunkPlugin](/plugins/commons-chunk-plugin) and create an explicit vendor chunk to prevent it from changing too often. When `CommonsChunkPlugin` is used, the runtime code is moved to the *last* common entry.
+然后将chunk manifest（与引导/运行时代码一起）放入entry chunk，这对webpack打包的代码工作是至关重要的。
 
-The problem with this, is the same as before: Whenever we change any part of the code it will, even if the rest of its contents wasn’t altered, update our entry chunk to include the new manifest. This in turn, will lead to a new hash and dismiss the long-term caching.
+T> 使用[CommonsChunkPlugin](/plugins/commons-chunk-plugin) 将公共库(vendor)和应用程序代码分离开来，并创建一个显式的vendor chunk以防止它频繁更改。 当使用`CommonsChunkPlugin`时，运行时代码会被移动到*最后*一个公共入口(entry)。
 
-To fix that, we should use [chunk-manifest-webpack-plugin](https://github.com/diurnalist/chunk-manifest-webpack-plugin), which will extract the manifest to a separate JSON file. This replaces the chunk manifest with a variable in the webpack runtime. But we can do even better; we can extract the runtime into a separate entry by using `CommonsChunkPlugin`. Here is an updated `webpack.config.js` which will produce the manifest and runtime files in our build directory:
+这个问题和以前一样：每当我们改变代码的任何部分时，即使它的内容的其余部分没有改变，都会更新我们的入口块以便包含新的映射(manifest)。 这反过来，将产生一个新的哈希值并且使长效缓存失效。
+
+要解决这个问题，我们应该使用[chunk-manifest-webpack-plugin](https://github.com/diurnalist/chunk-manifest-webpack-plugin)，它会将manifest提取到一个单独的JSON文件中。 这将用一个webpack runtime的变量替换掉chunk manifest。 但我们可以做得更好；我们可以使用`CommonsChunkPlugin`将运行时提取到一个单独的入口块(entry)中去。这里是一个更新后的`webpack.config.js`，将生成我们的构建目录中的manifest和runtime文件：
 
 ```js
 // webpack.config.js
@@ -184,7 +184,7 @@ module.exports = {
 };
 ```
 
-As we removed the manifest from the entry chunk, now it’s our responsibility to provide webpack with it. The `manifestVariable` option in the example above is the name of the global variable where webpack will look for the manifest JSON. This *should be defined before we require our bundle in HTML*. This is achieved by inlining the contents of the JSON in HTML. Our HTML head section should look like this:
+因为我们从入口块(entry chunk)中移除了manifest，所以我们现在有责任为webpack提供它。上面示例中的`manifestVariable`选项是全局变量的名称，webpack将利用它查找manifest JSON对象。这个变量*应该在我们引入bundle到HTML之前就定义好*。这是通过在HTML中内联JSON的内容来实现的。我们的HTML头部应该像这样：
 
 ```html
 <html>
@@ -200,9 +200,9 @@ As we removed the manifest from the entry chunk, now it’s our responsibility t
 </html>
 ```
 
-At the end of the day, the hashes for the files should be based on the file content. For this use [webpack-chunk-hash](https://github.com/alexindigo/webpack-chunk-hash) or [webpack-md5-hash](https://github.com/erm0l0v/webpack-md5-hash).
+在结束时，文件的哈希值应该基于文件的内容。对此，我们可以使用[webpack-chunk-hash](https://github.com/alexindigo/webpack-chunk-hash)或者[webpack-md5-hash](https://github.com/erm0l0v/webpack-md5-hash)。
 
-So the final `webpack.config.js` should look like this:
+所以最终的`webpack.config.js`看起来像这样：
 
 ```js
 var path = require("path");
@@ -235,7 +235,9 @@ module.exports = {
 };
 ```
 
-Using this config the vendor chunk should not be changing its hash, unless you update its code or dependencies. Here is a sample output for 2 runs with `moduleB.js` being changed between the runs:
+T> 如果你正在使用 [webpack-html-plugin](https://github.com/ampedandwired/html-webpack-plugin)，你可以使用 [inline-manifest-webpack-plugin](https://github.com/szrenwei/inline-manifest-webpack-plugin)去做这个。
+
+使用这个配置，vendor chunk就不会更改哈希值，除非你修改了它的代码或者依赖。下面是两次构建的输出，在运行期间修改了`moduleB.js`：
 
 ```bash
 > node_modules/.bin/webpack
@@ -262,15 +264,15 @@ Time: 87ms
 manifest.d41d8cd98f00b204e980.js    5.56 kB       2  [emitted]  manifest
 ```
 
-Notice that **vendor chunk has the same filename**, and **so does the manifest** since we’ve extracted the manifest chunk!
+注意，**vendor chunk具有相同的文件名**，manifest也是一样的，因为我们已经提取了manifest chunk！
 
-## Manifest inlining
+## 内联Manifest
 
-Inlining the chunk manifest and webpack runtime (to prevent extra HTTP requests), depends on your server setup. There is a nice [walkthrough for Rails-based projects](http://clarkdave.net/2015/01/how-to-use-webpack-with-rails/#including-precompiled-assets-in-views). For server-side rendering in Node.js you can use [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools).
+要内联chunk manifest还是选择webpack runtime（以防止额外的HTTP请求），取决于你的服务器设置。这有一个很好的[演练Rails基础](http://clarkdave.net/2015/01/how-to-use-webpack-with-rails/#including-precompiled-assets-in-views)的项目。 对于在Node.js中的服务器端渲染，你可以使用 [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools)。
 
-T> If your application doesn’t rely on any server-side rendering, it’s often enough to generate a single `index.html` file for your application. To do so, use i.e. [webpack-html-plugin](https://github.com/ampedandwired/html-webpack-plugin) in combination with [script-ext-html-webpack-plugin](https://github.com/numical/script-ext-html-webpack-plugin) or [inline-manifest-webpack-plugin](https://github.com/szrenwei/inline-manifest-webpack-plugin). It will simplify the setup dramatically.
+T> 如果你的应用程序不依赖于任何服务器端渲染，通常只需为应用程序生成一个`index.html`文件即可。 为此，请使用如[webpack-html-plugin](https://github.com/ampedandwired/html-webpack-plugin)加上[script-ext-html-webpack-plugin](https://github.com/numical/script-ext-html-webpack-plugin) 或者[inline-manifest-webpack-plugin](https://github.com/szrenwei/inline-manifest-webpack-plugin)的组合。 这将会大大地简化设置。
 
-## References
+## 参考
 
 * https://medium.com/@okonetchnikov/long-term-caching-of-static-assets-with-webpack-1ecb139adb95#.vtwnssps4
 * https://gist.github.com/sokra/ff1b0290282bfa2c037bdb6dcca1a7aa

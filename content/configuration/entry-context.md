@@ -7,7 +7,7 @@ contributors:
   - tarang9211
 ---
 
-The entry object is where Webpack looks to start building the bundle. The context is an absolute string to the directory that contains the entry files.
+entry 对象是用于 webpack 查找启动并构建 bundle。其上下文是入口文件所处的目录的绝对路径的字符串。
 
 ## `context`
 
@@ -19,7 +19,7 @@ The entry object is where Webpack looks to start building the bundle. The contex
 context: path.resolve(__dirname, "app")
 ```
 
-默认使用当前目录，但是推荐在配置中传递一个值。这使得你的配置独立于 CWD。（译者注：这个？[CWD](https://nodejs.org/docs/latest/api/process.html#process_process_cwd)）
+默认使用当前目录，但是推荐在配置中传递一个值。这使得你的配置独立于 CWD。（译者注：current working directory）
 
 ---
 
