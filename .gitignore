@@ -1,6 +1,6 @@
 node_modules
 npm-debug.log
 build
-# generated
+generated
 .antwar
 .idea
