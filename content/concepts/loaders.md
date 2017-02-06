@@ -6,6 +6,7 @@ contributors:
   - ev1stensberg
   - SpaceK33z
   - gangachris
+  - TheLarkInn
   - simon04
 ---
 
@@ -20,7 +21,7 @@ npm install --save-dev css-loader
 npm install --save-dev ts-loader
 ```
 
-其次，配置 `webpack.config.js`，对每个 `.css` 文件使用 `css-loader`，然后类似地，对每个 `.ts` 文件使用 `ts-loader`：
+其次，配置 `webpack.config.js`，对每个 `.css` 文件使用 [`css-loader`](/loaders/css-loader)，然后类似地，对每个 `.ts` 文件使用 `ts-loader`：
 
 **webpack.config.js**
 
@@ -47,6 +48,63 @@ module.exports = {
   options: {}
 }}
 ```
+
+## Configuration
+
+There are three ways to use loaders in your application:
+
+* via configuration
+* explicit in the `require` statement
+* via CLI
+
+### Via `webpack.config.js`
+
+[`module.rules`](https://webpack.js.org/configuration/module/#module-rules) allows you to specify several loaders within your webpack configuration.
+This is a concise way to display loaders, and helps to have clean code as
+well as you have a full overview of each respective loader.
+
+```js
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          { loader: 'style-loader'},
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true
+            }
+          }
+        ]
+      }
+    ]
+  }
+```
+
+### Via `require`
+
+It's possible to specify the loaders in the `require` statement (or `define`, `require.ensure`, etc.). Separate loaders from the resource with `!`. Each part is resolved relative to the current directory.
+
+```js
+require('style-loader!css-loader?modules!./styles.css');
+```
+
+It's possible to overwrite any loaders in the configuration by prefixing the entire rule with `!`.
+
+Options can be passed with a query parameter, just like on the web (`?key=value&foo=bar`). It's also possible to use a JSON object (`?{"key":"value","foo":"bar"}`).
+
+T> Use `module.rules` whenever possible, as this will reduce boilerplate in your source code and allows you to debug or locate a loader faster if something goes south.
+
+### Via CLI
+
+Optionally, you could also use loaders through the CLI:
+
+```sh
+webpack --module-bind jade --module-bind 'css=style!css'
+```
+
+This uses the `jade-loader` for `.jade` files, and the [`style-loader`](/loaders/style-loader) and [`css-loader`](/loaders/css-loader) for `.css` files.
 
 ## Loader 特性
 

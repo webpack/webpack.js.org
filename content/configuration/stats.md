@@ -52,6 +52,8 @@ stats: {
   chunksSort: "field",
   // 用于缩短请求的上下文目录
   context: "../src/",
+  // `webpack --colors` 等同于
+  colors: true,
   // 增加错误信息
   errors: true,
   // 增加错误的详细信息（就像解析日志一样）
