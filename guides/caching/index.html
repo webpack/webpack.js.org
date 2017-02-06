@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/e8a9e4690f0041816552.css" rel="stylesheet">
+      <link href="/624d3b97f3b80b0f3c7a.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -114,7 +114,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <li><a href="https://www.npmjs.com/package/webpack-manifest-plugin">https://www.npmjs.com/package/webpack-manifest-plugin</a></li>
 <li><a href="https://www.npmjs.com/package/assets-webpack-plugin">https://www.npmjs.com/package/assets-webpack-plugin</a></li>
 </ul>
-<p>A sample output when using <code>webpack-manifest-plugin</code> in our config looks like:</p>
+<p>A sample output when using <code>WebpackManifestPlugin</code> in our config looks like:</p>
 <pre><code class="lang-json"><span class="token punctuation">{</span>
   &quot;main.js&quot;<span class="token operator">:</span> <span class="token string">&quot;main.155567618f4367cd1cb8.js&quot;</span><span class="token punctuation">,</span>
   &quot;vendor.js&quot;<span class="token operator">:</span> <span class="token string">&quot;vendor.c2330c22cd2decb5da5a.js&quot;</span>
@@ -125,7 +125,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 To generate identifiers that are preserved over builds, webpack supply the <code>NamedModulesPlugin</code> (recommended for development) and <code>HashedModuleIdsPlugin</code> (recommended for production).</p>
 <blockquote class="todo"><div class="tip-content"> When exist, link to <code>NamedModulesPlugin</code> and <code>HashedModuleIdsPlugin</code> docs pages </div></blockquote><blockquote class="todo"><div class="tip-content"> Describe how the option <code>recordsPath</code> option works </div></blockquote><p>The chunk manifest (along with bootstrapping/runtime code) is then placed into the entry chunk and it is crucial for webpack-packaged code to work.</p>
 <blockquote class="tip"><div class="tip-content"> Separate your vendor and application code with <a href="/plugins/commons-chunk-plugin">CommonsChunkPlugin</a> and create an explicit vendor chunk to prevent it from changing too often. When <code>CommonsChunkPlugin</code> is used, the runtime code is moved to the <em>last</em> common entry. </div></blockquote><p>The problem with this, is the same as before: Whenever we change any part of the code it will, even if the rest of its contents wasn&#x2019;t altered, update our entry chunk to include the new manifest. This in turn, will lead to a new hash and dismiss the long-term caching.</p>
-<p>To fix that, we should use <a href="https://github.com/diurnalist/chunk-manifest-webpack-plugin">chunk-manifest-webpack-plugin</a>, which will extract the manifest to a separate JSON file. This replaces the chunk manifest with a variable in the webpack runtime. But we can do even better; we can extract the runtime into a separate entry by using <code>CommonsChunkPlugin</code>. Here is an updated <code>webpack.config.js</code> which will produce the manifest and runtime files in our build directory:</p>
+<p>To fix that, we should use <a href="https://github.com/diurnalist/chunk-manifest-webpack-plugin"><code>ChunkManifestWebpackPlugin</code></a>, which will extract the manifest to a separate JSON file. This replaces the chunk manifest with a variable in the webpack runtime. But we can do even better; we can extract the runtime into a separate entry by using <code>CommonsChunkPlugin</code>. Here is an updated <code>webpack.config.js</code> which will produce the manifest and runtime files in our build directory:</p>
 <pre><code class="lang-js"><span class="token comment" spellcheck="true">// webpack.config.js</span>
 <span class="token keyword">var</span> ChunkManifestPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;chunk-manifest-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -215,7 +215,7 @@ manifest.d41d8cd98f00b204e980.js    5.56 kB       2  <span class="token punctuat
 <p>Notice that <strong>vendor chunk has the same filename</strong>, and <strong>so does the manifest</strong> since we&#x2019;ve extracted the manifest chunk!</p>
 <h2 class="header"><a class="anchor" href="#manifest-inlining" id="manifest-inlining"></a><span class="text">Manifest inlining</span><a class="icon-link" href="#manifest-inlining"></a></h2>
 <p>Inlining the chunk manifest and webpack runtime (to prevent extra HTTP requests), depends on your server setup. There is a nice <a href="http://clarkdave.net/2015/01/how-to-use-webpack-with-rails/#including-precompiled-assets-in-views">walkthrough for Rails-based projects</a>. For server-side rendering in Node.js you can use <a href="https://github.com/halt-hammerzeit/webpack-isomorphic-tools">webpack-isomorphic-tools</a>.</p>
-<blockquote class="tip"><div class="tip-content"> If your application doesn&#x2019;t rely on any server-side rendering, it&#x2019;s often enough to generate a single <code>index.html</code> file for your application. To do so, use i.e. <a href="https://github.com/ampedandwired/html-webpack-plugin">webpack-html-plugin</a> in combination with <a href="https://github.com/numical/script-ext-html-webpack-plugin">script-ext-html-webpack-plugin</a> or <a href="https://github.com/szrenwei/inline-manifest-webpack-plugin">inline-manifest-webpack-plugin</a>. It will simplify the setup dramatically. </div></blockquote><h2 class="header"><a class="anchor" href="#references" id="references"></a><span class="text">References</span><a class="icon-link" href="#references"></a></h2>
+<blockquote class="tip"><div class="tip-content"> If your application doesn&#x2019;t rely on any server-side rendering, it&#x2019;s often enough to generate a single <code>index.html</code> file for your application. To do so, use i.e. <a href="https://github.com/ampedandwired/html-webpack-plugin"><code>HtmlWebpackPlugin</code></a> in combination with <a href="https://github.com/numical/script-ext-html-webpack-plugin"><code>ScriptExtHtmlWebpackPlugin</code></a> or <a href="https://github.com/szrenwei/inline-manifest-webpack-plugin"><code>InlineManifestWebpackPlugin</code></a>. It will simplify the setup dramatically. </div></blockquote><h2 class="header"><a class="anchor" href="#references" id="references"></a><span class="text">References</span><a class="icon-link" href="#references"></a></h2>
 <ul>
 <li><a href="https://medium.com/@okonetchnikov/long-term-caching-of-static-assets-with-webpack-1ecb139adb95#.vtwnssps4">https://medium.com/@okonetchnikov/long-term-caching-of-static-assets-with-webpack-1ecb139adb95#.vtwnssps4</a></li>
 <li><a href="https://gist.github.com/sokra/ff1b0290282bfa2c037bdb6dcca1a7aa">https://gist.github.com/sokra/ff1b0290282bfa2c037bdb6dcca1a7aa</a></li>
