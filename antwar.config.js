@@ -65,8 +65,6 @@ module.exports = {
           true,
           /^\.\/.*\.md$/
         );
-      }, {
-        'why-webpack': '/guides/comparison'
       }
     ),
 
