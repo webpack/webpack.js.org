@@ -181,26 +181,30 @@
 }
 
 .navigation__bottom {
-  display:none;
+  display: none;
   background: lighten(getColor(elephant), 5%);
 
   @include break {
-    display:block;
+    display: block;
   }
 }
 
 .navigation__child {
   font-size: getFontSize(-1);
-  margin:0.5em 1em 0.6em;
-  color:getColor(alto);
+  margin: 0.5em 1em 0.6em;
+  color: getColor(alto);
   text-transform: uppercase;
 
   &:first-of-type {
     margin-left: 0;
   }
 
-  &:hover,
+  &:hover {
+    color: getColor(malibu);
+  }
+
   &--active {
-    color:getColor(white);
+    color: getColor(white);
+    font-weight: 600;
   }
 }
