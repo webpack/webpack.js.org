@@ -9,7 +9,7 @@ module.exports = function(section) {
   var renderer = new marked.Renderer();
 
   renderer.image = function(href, title, text) {
-    return '<img src="' + section + href + '" alt="' + text + '">';
+    return '<img src="' + href + '" alt="' + text + '">';
   };
 
   // patch ids (this.options.headerPrefix can be undefined!)
