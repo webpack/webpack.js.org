@@ -80,7 +80,7 @@ module.exports = function(source) {
 
 ### Do not keep state between runs and modules
 
-A loader should be independent of other modules compiled (expect of these issued by the loader).
+A loader should be independent of other modules compiled (except of these issued by the loader).
 
 A loader should be independent of previous compilations of the same module.
 

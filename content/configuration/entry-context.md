@@ -19,7 +19,7 @@ The base directory, an **absolute path**, for resolving entry points and loaders
 context: path.resolve(__dirname, "app")
 ```
 
-By default the current directory is used, but it's recommended to pass a value in your configuration. This makes your configuration independent from CWD.
+By default the current directory is used, but it's recommended to pass a value in your configuration. This makes your configuration independent from CWD (current working directory).
 
 ---
 
