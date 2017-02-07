@@ -74,6 +74,10 @@
     padding:1.5em;
   }
 
+  &:hover {
+    color: getColor(malibu);
+  }
+
   &--active {
     background: lighten(getColor(elephant), 5%);
   }
@@ -129,7 +133,7 @@
       }
 
       &:hover {
-        color:getColor(white);
+        color:getColor(malibu);
       }
     }
 
@@ -143,6 +147,10 @@
     display: block;
     margin-left: 1em;
     color: getColor(white);
+
+    &:hover {
+      color: getColor(malibu);
+    }
   }
 }
 
