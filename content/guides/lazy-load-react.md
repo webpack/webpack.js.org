@@ -136,7 +136,7 @@ export default LazilyLoad;
 ```
 ## 贴士
 
-- 利用[bundle loader]（https://github.com/webpack/bundle-loader），我们可以语义化的命名chunk来智能的加载代码块。
+- 利用[bundle loader](https://github.com/webpack/bundle-loader)，我们可以语义化的命名chunk来智能的加载代码块。
 - 如果你正在使用babel-preset-2015，请确保将参数modules设置为false，以允许webpack处理相应的模块。
 
 ## 依赖
