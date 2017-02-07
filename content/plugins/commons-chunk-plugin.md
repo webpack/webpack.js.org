@@ -58,7 +58,7 @@ T> The deprecated webpack 1 constructor `new webpack.optimize.CommonsChunkPlugin
 Generate an extra chunk, which contains common modules shared between entry points.
 
 ```javascript
-new CommonsChunkPlugin({
+new webpack.optimize.CommonsChunkPlugin({
   name: "commons",
   // (the commons chunk name)
 
@@ -89,7 +89,7 @@ entry: {
   vendor: ["jquery", "other-lib"],
   app: "./entry"
 }
-new CommonsChunkPlugin({
+new webpack.optimize.CommonsChunkPlugin({
   name: "vendor",
 
   // filename: "vendor.js"
@@ -113,7 +113,7 @@ Hint: In combination with long term caching you may need to use the [`ChunkManif
 With Code Splitting multiple child chunks of a chunk can have common modules. You can move these common modules into the parent (This reduces overall size, but has a negative effect on the initial load time. It can be useful if it is expected that a user need to download many sibling chunks).
 
 ```javascript
-new CommonsChunkPlugin({
+new webpack.optimize.CommonsChunkPlugin({
   // names: ["app", "subPageA"]
   // (choose the chunks, or omit for all chunks)
 
@@ -130,7 +130,7 @@ new CommonsChunkPlugin({
 Similar to the above one, but instead of moving common modules into the parent (which increases initial load time) a new async-loaded additional commons chunk is used. This is automatically downloaded in parallel when the additional chunk is downloaded.
 
 ```javascript
-new CommonsChunkPlugin({
+new webpack.optimize.CommonsChunkPlugin({
   // names: ["app", "subPageA"]
   // (choose the chunks, or omit for all chunks)
 
@@ -156,7 +156,7 @@ The `count` property represents how many chunks the `module` is used in.
 This option is useful when you want to have fine-grained control over how the CommonsChunk algorithm determins where modules should be moved to.
 
 ```javascript
-new CommonsChunkPlugin({
+new webpack.optimize.CommonsChunkPlugin({
   name: "my-single-lib-chunk",
   filename: "my-single-lib-chunk.js",
   minChunks: function(module, countOfHowManyTimesThisModuleIsUsedAcrossAllChunks) {
