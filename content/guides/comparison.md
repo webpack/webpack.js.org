@@ -1,31 +1,14 @@
 ---
-title: Why webpack?
+title: Comparison with other bundlers
 contributors:
   - pksjce
   - bebraw
   - chrisVillanueva
+  - tashian
+  - simon04
 ---
 
-webpack is usually compared to tools like Make, Grunt, Gulp, Browserify or Brunch. However, some of these tools (Make, Grunt, and Gulp, which are task runners) have a much different purpose than webpack, which is a module bundler. Comparing them directly could lead to sorts of confusion, so let’s first draw a distinction between these types of tools.
-
-## What Are Task Runners?
-
-Task runners literally make it easier to handle tasks, such as linting, building, or developing your project. Compared to *bundlers* like Browserify, Brunch, or webpack, they have a higher level focus. Bundlers, on the other hand, have a much more specific goal.
-
-
-## What Are Bundlers?
-
-Roughly put bundlers take assets, such as JavaScript files in, and then transform them into format that's suitable for the browser of the end user to consume. This process of bundling happens to be one of the most important problems in web development and solving it well can remove a large part of pain from the process.
-
-Bundlers can work in tandem with task runners. You can still benefit from their higher level tooling while leaving the problem of bundling to more specialized tools. [grunt-webpack](https://www.npmjs.com/package/grunt-webpack) and [gulp-webpack](https://www.npmjs.com/package/gulp-webpack) are good examples of integrations.
-
-T> Often webpack users use npm `scripts` as their task runner. This is a good starting point. Cross-platform support can become a problem, but there are several workarounds for that.
-
-T> Even though webpack core focuses on bundling, you can find a variety of extensions that allow you to use it in a task runner kind of way.
-
-## Comparison
-
-webpack however is not the only module bundler out there. If you are choosing between using webpack or any of the bundlers below, here is a feature by feature comparison on how webpack fares against the current competition.
+webpack is not the only module bundler out there. If you are choosing between using webpack or any of the bundlers below, here is a feature-by-feature comparison on how webpack fares against the current competition.
 
 | Feature | webpack/webpack | jrburke/requirejs | substack/node-browserify | jspm/jspm-cli | rollup/rollup | brunch/brunch |
 |---------|-----------------|-------------------|--------------------------|---------------|---------------|---------------|
