@@ -2,7 +2,7 @@
   "name": "webpack.js.org",
   "version": "0.0.0",
   "private": true,
-  "description": "The main site for all things Webpack.",
+  "description": "The main site for all things webpack.",
   "homepage": "https://github.com/webpack/webpack.js.org",
   "author": "Greg Venech",
   "license": "CC BY",
@@ -24,8 +24,8 @@
     "node": ">=6.9"
   },
   "scripts": {
-    "start": "npm run init:generated && node ./bootstrap.js",
-    "build": "npm run init:generated && rm -rf build/ && node ./bootstrap.js && npm run sitemap && echo webpack.js.org > build/CNAME",
+    "start": "scripts/copyfiles.sh && npm run init:generated && node ./bootstrap.js",
+    "build": "scripts/copyfiles.sh && npm run init:generated && rm -rf build/ && node ./bootstrap.js && npm run sitemap && echo webpack.js.org > build/CNAME",
     "build-test": "npm run build && http-server build/",
     "deploy": "gh-pages -d build",
     "fetch": "scripts/fetch.sh",
@@ -98,7 +98,7 @@
     "d3": "^4.2.7",
     "filesize": "^3.3.0",
     "preact": "^6.2.1",
-    "preact-compat": "^3.6.0",
+    "preact-compat": "3.11.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-router": "^2.8.1",

@@ -31,7 +31,7 @@ module.exports = function(content) {
 };
 ```
 
-### 异步 Loader 
+### 异步 Loader
 
 **async-loader.js**
 
@@ -63,7 +63,7 @@ module.exports = function(content) {
 	// 这里即使不是一个 raw Loader，也是被允许的
 };
 module.exports.raw = true;
-``` 
+```
 
 ### Pitching Loader
 
@@ -84,7 +84,7 @@ module.exports.pitch = function(remainingRequest, precedingRequest, data) {
 };
 ```
 
-## The loader context 
+## The loader context
 
 Loader context 表示 Loader 给 `this` 中添加的一些可用的方法或者属性
 
@@ -94,7 +94,7 @@ Loader context 表示 Loader 给 `this` 中添加的一些可用的方法或者�
 require("./loader1?xyz!loader2!./resource?rrr");
 ```
 
-### `version` 
+### `version`
 
 **Loader API 的版本号。**目前是 `2`。这对于向后兼容性有一些用处。通过这个版本号你可以指定特定的逻辑，或者对一些不兼容的改版做降级处理。
 
@@ -126,7 +126,7 @@ require("./loader1?xyz!loader2!./resource?rrr");
 cacheable(flag = true: boolean)
 ```
 
-决定 Loader 的处理结果是否被缓存。默认值为不缓存。
+默认情况下，Loader 的处理结果是会被缓存的。调用这个方法然后传入 `false`，可以关闭 Loader 的缓存。
 
 一个可缓存的 Loader 要求在输入和相关依赖没有变化时，绝对产生一个确定性的固定处理结果。这意味着 Loader 除了 `this.addDependency` 里指定的以外，不应该有其它任何外部依赖。目前大多数 Loader 都是确定性、可缓存的。
 
@@ -284,7 +284,7 @@ options 的值将会传递给 Complier
 
 如果是 Webpack 编译的，这个布尔值会被设置为真。
 
-T> Loader 最初被设计为像 Babel 那样做转换工作。如果你编写了一个 Loader 可以同时兼容二者，那么可以使用这个属性表明是否存在可用的 loaderContext 和 Webpack 的特性。 
+T> Loader 最初被设计为像 Babel 那样做转换工作。如果你编写了一个 Loader 可以同时兼容二者，那么可以使用这个属性表明是否存在可用的 loaderContext 和 Webpack 的特性。
 
 ### `emitFile`
 

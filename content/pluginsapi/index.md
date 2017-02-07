@@ -1,87 +1,86 @@
 ---
 title: 插件 API
 sort: 1
+contributors:
+  - jeffrygan(藤蔓)
 ---
 
-webpack provides flexible and powerful customization api in the form of plugins. Using plugins, we can plug functionality into webpack. Additionally, webpack provides lifecycle hooks into which plugins can be registered. At each of these lifecycle points, webpack will run all of the registered plugins and provide them with the current state of the webpack compilation.
+webpack以插件的形式提供了灵活强大的自定义api功能。使用插件,我们可以为webpack添加功能。另外,webpack提供生命周期钩子以便插件注册。在每个生命周期点,webpack会运行所有注册的插件,并提供当前webpack编译状态信息。
 
-## Tapable & Tapable instances
+## Tapable & Tapable 示例
 
-The plugin architecture is mainly possible for webpack due to an internal library named `Tapable`.
-**Tapable Instances** are classes in the webpack source code which have been extended or mixed in from class `Tapable`.
+webpack的插件架构主要依赖于内部库 `Tapable` 。
+webpack源代码中的一些 **Tapable Instances** 类都继承或混合了 `Tapable` 类。
 
-For plugin authors, it is important to know which are the `Tapable` instances in the webpack source code. These instances provide a variety of event hooks into which custom plugins can be attached.
-Hence, throughout this section are a list of all of the webpack `Tapable` instances (and their event hooks), which plugin authors can utilize.
+对于插件作者来说,知道webpack源代码中有哪些 `Tapable` 实例是非常重要的。这些实例提供各种事件钩子,以便附加自定义插件。
+因此,这章节会罗列除webpack中所有的 `Tapable` 实例(以及它们的事件钩子),便于写插件的作者使用。
+关于 `Tapable` 的更多内容可以访问[tapable repository](https://github.com/webpack/tapable),或访问[complete overview](./tapable)
 
-For more information on `Tapable` visit the [tapable repository](https://github.com/webpack/tapable) or visit the [complete overview](./tapable)
+## 创建一个插件
+一个 `webpack` 插件包含以下内容
 
-## Creating a Plugin
-
-A plugin for `webpack` consists of
-
-  - A named JavaScript function.
-  - Defines `apply` method in it's prototype.
-  - Specifies webpack's event hook to attach itself.
-  - Manipulates webpack internal instance specific data.
-  - Invokes webpack provided callback after functionality is complete.
+  - 一个命名的JavaScript函数
+  - 在其原型上定义`apply`方法
+  - 为它添加webpack的特定事件钩子
+  - 处理webpack内部特定数据实例
+  - 完成功能后调用webpack提供的回调函数
 
 ```javascript
-// A named JavaScript function.
+// 一个命名的JavaScript函数。
 function MyExampleWebpackPlugin() {
 
 };
 
-// Defines `apply` method in it's prototype.
+// 在其原型上定义`apply`方法
 MyExampleWebpackPlugin.prototype.apply = function(compiler) {
-  // Specifies webpack's event hook to attach itself.
-  compiler.plugin('webpacksEventHook', function(compilation /* Manipulates webpack internal instance specific data. */, callback) {
+  // 为它添加webpack的事件钩子
+  compiler.plugin('webpacksEventHook', function(compilation /* 处理webpack内部特定数据实例。 */, callback) {
     console.log("This is an example plugin!!!");
 
-    // Invokes webpack provided callback after functionality is complete.
+    // 完成功能后调用webpack提供的回调函数
     callback();
   });
 };
 ```
 
-### Different Plugin Shapes
+### 不同的插件类型
+插件可以按照注册事件不同进行分类。每个事件钩子决定它是如何应用插件注册表。
 
-A plugin can be classified into types based on the event it is registered to. Every event hook decides how it is going to apply the plugins in its registry.
-
-- __synchronous__ The Tapable instance applies plugins using
+- __同步__ Tapable实例应用插件使用
 
 `applyPlugins(name: string, args: any...)`
 
 `applyPluginsBailResult(name: string, args: any...)`
 
-This means that each of the plugin callbacks will be invoked one after the other with the specific `args`.
-This is the simplest format for a plugin. Many useful events like `"compile"`, `"this-compilation"` expect plugins to have synchronous execution.
+这意味着每个插件的回调函数将会被一个接一个的执行,伴随特定的 `args` 参数。
+这是最简单的插件格式。很多有用的事件,比如 `"compile"`, `"this-compilation"` 都希望插件按同步方式执行
 
-- __waterfall__ Plugins applied using
+- __瀑布__ 应用插件的方法
 
 `applyPluginsWaterfall(name: string, init: any, args: any...)`
 
-Here each of the plugins are called one after the other with the args from the return value of the previous plugin. The plugin must take into consider the order of its execution.
-It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. This pattern is used in the Tapable instances which are related to the `webpack` templates like `ModuleTemplate`, `ChunkTemplate` etc.
+这里的每一个插件都会被一个接一个按顺序的调用,其参数是上一个插件返回的值。因此这些插件必须要考虑执行顺序。
+它必须接受上一个插件执行后返回的参数。第一个插件接受的参数是 `init` 。这种模式通常用于和 `webpack` 模板相关的Tapable实例,比如 `ModuleTemplate`, `ChunkTemplate` 等。
 
-- __asynchronous__ When all the plugins are applied asynchronously using
+- __异步__ 当所有插件都使用异步的方法
 
 `applyPluginsAsync(name: string, args: any..., callback: (err?: Error) -> void)`
 
-The plugin handler functions are called with all args and a callback function with the signature `(err?: Error) -> void`. The hander functions are called in order of registration.`callback` is called after all the handlers are called.
-This is also a commonly used pattern for events like `"emit"`, `"run"`.
+插件的处理函数调用时伴随所有args参数和一个包含 `(err?: Error) -> void` 签名的回调函数。这些处理函数按照注册顺序被调用。当所有处理函数都执行后 `callback` 会被调用。
+这种模式通常用于像 `"emit"`, `"run"` 这样的事件。
 
-- __async waterfall__ The plugins will be applied asynchronously in the waterfall manner.
+- __异步 瀑布__ 这些插件将以瀑布形式被异步使用
 
 `applyPluginsAsyncWaterfall(name: string, init: any, callback: (err: Error, result: any) -> void)`
 
-The plugin handler functions are called with the current value and a callback function with the signature `(err: Error, nextValue: any) -> void.` When called `nextValue` is the current value for the next handler. The current value for the first handler is `init`. After all handlers are applied, callback is called with the last value. If any handler passes a value for `err`, the callback is called with this error and no more handlers are called.
-This plugin pattern is expected for events like `"before-resolve"` and `"after-resolve"`.
+这个插件的处理函数被调用时伴随一个当前值和一个包含 `(err: Error, nextValue: any) -> void.` 的函数。其中 `nextValue` 指定是下一个处理函数的当前值。第一个处理函数的当前值是 `init` 。当所有处理函数都应用后会调用callback方法,伴随最后的得到的值。如果有一个处理函数返回 `err` 值,会直接调用callback方法,伴随这个err值,并且其它处理函数不会再被调用。
+这种插件模式通常用于像 `"before-resolve"` 和 `"after-resolve"` 这样的事件。
 
-- __async series__ It is the same as asynchronous but if any of the plugins registered fails, then no more plugins are called.
+- __异步 连续__ 这个和异步方式类似,但如果某个插件注册失败,其它插件不会再被调用。
 
 `applyPluginsAsyncSeries(name: string, args: any..., callback: (err: Error, result: any) -> void)`
 
--__parallel__ -
+-__并行__ -
 
 `applyPluginsParallel(name: string, args: any..., callback: (err?: Error) -> void)`
 

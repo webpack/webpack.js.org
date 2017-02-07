@@ -38,16 +38,13 @@ module.exports = {
       }
     ),
 
-    'get-started': section(
-      '起步',
-      function() {
-        return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/get-started',
-          false,
-          /^\.\/.*\.md$/
-        )
+    'get-started': {
+      redirects: {
+        '': '/guides/get-started',
+        'install-webpack': '/guides/installation',
+        'why-webpack': '/guides/why-webpack',
       }
-    ),
+    },
 
     concepts: section(
       '概念',
@@ -65,6 +62,17 @@ module.exports = {
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/guides',
+          true,
+          /^\.\/.*\.md$/
+        );
+      }
+    ),
+
+    development: section(
+      '开发',
+      function() {
+        return require.context(
+          'json-loader!yaml-frontmatter-loader!./content/development',
           true,
           /^\.\/.*\.md$/
         );
@@ -137,7 +145,7 @@ module.exports = {
         return combineContexts(content, generated);
       }
     ),
-    
+
     vote: {
       path() {
         return require('./components/vote/list.jsx').default
@@ -166,7 +174,7 @@ module.exports = {
 
 function root(contentCb) {
   return {
-    title: 'Webpack',
+    title: 'webpack',
     path: function() { // Load path content
       return contentCb();
     },
@@ -235,7 +243,7 @@ function combineContexts(context1, context2) {
 
     let keys1 = context1.keys();
     let keys2 = context2.keys();
-    return _.chain(keys1).concat(keys2).uniq().value();
+    return _.chain(keys1).concat(keys2).sortBy().uniq().value();
   };
   return webpackContext;
 }

@@ -1,5 +1,5 @@
 ---
-title: source-map-dev-tool-plugin.md
+title: source-map-dev-tool-plugin
 contributors:
     - johnnyreilly
 ---

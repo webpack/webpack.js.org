@@ -11,7 +11,7 @@ Webpack 提供了命令行接口（CLI），以便对构建过程进行配置和
 
 ## 安装
 
-参考[这页](/get-started/install-webpack)
+参考[这页](/guides/installation)
 
 ?> 新的 Wbpack CLI 正在开发中。例如 `--init` 参数这样的新特性正在加入中。[查看详情！](https://github.com/webpack/webpack-cli)
 

@@ -1,6 +1,6 @@
 ---
 title: 开发 - Vagrant
-sort: 12
+sort: 51
 contributors:
   - SpaceK33z
   - chrisVillanueva
@@ -33,7 +33,7 @@ module.exports = {
 };
 ```
 
-然后创建 `index.html`。其中的 `script` 标签应当指向你的打包文件(bundle)。如果 `output.filename` 没有在配置里设定，它的默认值便是 `bundle.js`。
+然后创建 `index.html`。其中的 `script` 标签应当指向你的 bundle。如果 `output.filename` 没有在配置里设定，它的默认值便是 `bundle.js`。
 
 ```html
 <!DOCTYPE html>
@@ -59,7 +59,7 @@ webpack-dev-server --host 0.0.0.0 --public 10.10.10.61:8080 --watch-poll
 
 默认配置下，服务器只允许在本地访问。通过更改 `--host` 参数，便能够在我们的 PC 上访问它。
 
-webpack-dev-server 会在打包文件中加上一段连接 WebSocket 的脚本(script)，一旦你的文件被更改，服务器便会重新加载应用。`--public` 参数便是为了告诉脚本从哪里去找 WebSocket。服务器默认使用 `8080` 端口，我们也需要在这里标明。
+webpack-dev-server 会在 bundle 中加上一段连接 WebSocket 的脚本(script)，一旦你的文件被更改，服务器便会重新加载应用。`--public` 参数便是为了告诉脚本从哪里去找 WebSocket。服务器默认使用 `8080` 端口，我们也需要在这里标明。
 
 `--watch-poll` 确保 webpack 能够察觉到文件的更改。默认配置下，webpack 会监听文件系统触发的相关事件，但是 VirtualBox 总会有这样或那样的的问题。
 
