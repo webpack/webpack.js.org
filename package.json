@@ -24,8 +24,8 @@
     "node": ">=6.9"
   },
   "scripts": {
-    "start": "npm run init:generated && node ./bootstrap.js",
-    "build": "npm run init:generated && rm -rf build/ && node ./bootstrap.js && npm run sitemap && echo webpack.js.org > build/CNAME",
+    "start": "scripts/copyfiles.sh && npm run init:generated && node ./bootstrap.js",
+    "build": "scripts/copyfiles.sh && npm run init:generated && rm -rf build/ && node ./bootstrap.js && npm run sitemap && echo webpack.js.org > build/CNAME",
     "build-test": "npm run build && http-server build/",
     "deploy": "gh-pages -d build",
     "fetch": "scripts/fetch.sh",

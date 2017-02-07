@@ -239,6 +239,8 @@ function combineContexts(context1, context2) {
     }
   }
   webpackContext.keys = () => {
+    "use strict";
+
     let keys1 = context1.keys();
     let keys2 = context2.keys();
     return _.chain(keys1).concat(keys2).sortBy().uniq().value();
