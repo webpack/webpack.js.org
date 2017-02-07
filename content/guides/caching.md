@@ -266,7 +266,7 @@ Notice that **vendor chunk has the same filename**, and **so does the manifest**
 
 ## Manifest inlining
 
-Inlining the chunk manifest and webpack runtime (to prevent extra HTTP requests), depends on your server setup. There is a nice [walkthrough for Rails-based projects](http://clarkdave.net/2015/01/how-to-use-webpack-with-rails/#including-precompiled-assets-in-views). For server-side rendering in Node.js you can use [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools).
+Inlining the chunk manifest and webpack runtime (to prevent extra HTTP requests), depends on your server setup. There is a nice [walkthrough for Rails-based projects](https://brigade.engineering/setting-up-webpack-with-rails-c62aea149679). For server-side rendering in Node.js you can use [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools).
 
 T> If your application doesn’t rely on any server-side rendering, it’s often enough to generate a single `index.html` file for your application. To do so, use i.e. [webpack-html-plugin](https://github.com/ampedandwired/html-webpack-plugin) in combination with [script-ext-html-webpack-plugin](https://github.com/numical/script-ext-html-webpack-plugin) or [inline-manifest-webpack-plugin](https://github.com/szrenwei/inline-manifest-webpack-plugin). It will simplify the setup dramatically.
 
