@@ -5,7 +5,7 @@ contributors:
 ---
 ## Install
 
-The `NormalModuleReplacementPlugin` is a built-in  Webpack plugin. There is nothing to do except requiring webpack.
+The `NormalModuleReplacementPlugin` is a built-in webpack plugin.
 
 
 ## Usage
@@ -14,13 +14,13 @@ The `NormalModuleReplacementPlugin` is a built-in  Webpack plugin. There is noth
 new webpack.NormalModuleReplacementPlugin(resourceRegExp, newResource)
 ```
 
-The `NormalModuleReplacementPlugin` allows you to replace resources that match `resourceRegExp` with `newResource`. If `newResource` is relative, it is resolved relative to the previous resource. If `newResource` is a function, it is expected to overwrite the **request** attribute of the supplied object.
+The `NormalModuleReplacementPlugin` allows you to replace resources that match `resourceRegExp` with `newResource`. If `newResource` is relative, it is resolved relative to the previous resource. If `newResource` is a function, it is expected to overwrite the request attribute of the supplied resource.
 
 This can be useful for allowing different behaviour between builds.
 
 ## Basic example
 
-Replace a specific module when building for development environment.
+Replace a specific module when building for development environment ([read more](/configuration/environment)).
 
 
 Say you have a config file `some/path/config.development.module.js` and a special version for production in `some/path/config.production.module.js`
@@ -36,17 +36,16 @@ new webpack.NormalModuleReplacementPlugin(
 
 ## Advanced example
 
-Conditional build depending on an environment var.
+Conditional build depending on an environment var ([read more](/configuration/environment)).
 
 Say you want a configuration with specific values for different build targets.
 
 ``` javascript
-// Usual config omitted for brevity
-module.exports = env => {
-  const appTarget = env.APP_TARGET || 'VERSION_A';
+module.exports = function(env) {
+  var appTarget = env.APP_TARGET || 'VERSION_A';
   return {
     plugins: [
-      new webpack.NormalModuleReplacementPlugin(/(.*)-APP_TARGET(\.*)/, resource => {
+      new webpack.NormalModuleReplacementPlugin(/(.*)-APP_TARGET(\.*)/, function(resource) {
         resource.request = resource.request.replace(/-APP_TARGET/, `-${appTarget}`);
       })
     ]
@@ -57,13 +56,13 @@ module.exports = env => {
 
 Create the two config files:
 
-app/config-VERSION_A.js:
+**app/config-VERSION_A.js:**
 ``` javascript
 export default {
   title : 'I am version A'
 }
 ```
-app/config-VERSION_B.js:
+**app/config-VERSION_B.js:**
 ``` javascript
 export default {
   title : 'I am version B'
