@@ -60,3 +60,7 @@ loader 通过在 `require()` 语句中使用 `loadername!` 前缀来激活，或
 
 ![Awesome](../assets/awesome-badge.svg)
 更多第三方 loader，查看 [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#loaders) 列表。
+
+***
+
+> 原文：https://webpack.js.org/loaders/

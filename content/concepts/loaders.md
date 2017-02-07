@@ -49,19 +49,19 @@ module.exports = {
 }}
 ```
 
-## Configuration
+## 配置
 
-There are three ways to use loaders in your application:
+在你的应用程序中，有三种方式使用 loader：
 
-* via configuration
-* explicit in the `require` statement
-* via CLI
+* 通过配置
+* 在 `require` 语句中显示使用
+* 通过 CLI
 
-### Via `webpack.config.js`
+### 通过 `webpack.config.js`
 
-[`module.rules`](https://webpack.js.org/configuration/module/#module-rules) allows you to specify several loaders within your webpack configuration.
-This is a concise way to display loaders, and helps to have clean code as
-well as you have a full overview of each respective loader.
+[`module.rules`](https://webpack.js.org/configuration/module/#module-rules) 允许你在 webpack 配置中指定几个 loader。
+
+这是展示 loader 的一种简明的方式，并且有助于简洁代码，以及对每个相应的 loader 有一个完整的概述。
 
 ```js
   module: {
@@ -82,29 +82,29 @@ well as you have a full overview of each respective loader.
   }
 ```
 
-### Via `require`
+### 通过 `require`
 
-It's possible to specify the loaders in the `require` statement (or `define`, `require.ensure`, etc.). Separate loaders from the resource with `!`. Each part is resolved relative to the current directory.
+可以在 `require` 语句（或 `define`, `require.ensure`, 等语句）中指定 loader。使用 `!` 将资源中的 loader 分开。分开的每个部分都相对于当前目录解析。
 
 ```js
 require('style-loader!css-loader?modules!./styles.css');
 ```
 
-It's possible to overwrite any loaders in the configuration by prefixing the entire rule with `!`.
+通过前置整个规则及使用 `!`，可以覆盖到配置中的任意 loader。
 
-Options can be passed with a query parameter, just like on the web (`?key=value&foo=bar`). It's also possible to use a JSON object (`?{"key":"value","foo":"bar"}`).
+选项可以传递查询参数，就像在 web 中那样（`?key=value&foo=bar`）。也可以使用 JSON 对象（`?{"key":"value","foo":"bar"}`）。
 
-T> Use `module.rules` whenever possible, as this will reduce boilerplate in your source code and allows you to debug or locate a loader faster if something goes south.
+T> 尽可能使用 `module.rules`，因为这样可以在源码中减少引用，并且可以更快调试和定位 loader，避免代码越来越糟。
 
-### Via CLI
+### 通过 CLI
 
-Optionally, you could also use loaders through the CLI:
+可选项，你也可以通过 CLI 使用 loader：
 
 ```sh
 webpack --module-bind jade --module-bind 'css=style!css'
 ```
 
-This uses the `jade-loader` for `.jade` files, and the [`style-loader`](/loaders/style-loader) and [`css-loader`](/loaders/css-loader) for `.css` files.
+这会对 `.jade` 文件使用 `jade-loader`，对 `.css` 文件使用 [`style-loader`](/loaders/style-loader) 和 [`css-loader`](/loaders/css-loader)。
 
 ## Loader 特性
 
@@ -117,7 +117,7 @@ This uses the `jade-loader` for `.jade` files, and the [`style-loader`](/loaders
 * 插件可以给 loader 带来更多功能。
 * loader 能够产生额外的任意文件。
 
-loader 通过(loader)预处理函数，为 JavaScript 生态系统提供了更多有力功能。用户现在可以更加灵活的引入细粒度逻辑，例如压缩、打包、语言翻译和[其他更多](/loaders)。
+loader 通过 loader 预处理函数，为 JavaScript 生态系统提供了更多有力功能。用户现在可以更加灵活的引入细粒度逻辑，例如压缩、打包、语言翻译和[其他更多](/loaders)。
 
 ## 解析 Loader
 
