@@ -80,7 +80,7 @@ module.exports = function(source) {
 
 ### 不要在运行和模块间保存状态
 
-loader应该和其它编译后的模块相互独立。（期望这些能够被loader处理）
+loader应该和其它编译后的模块相互独立。（除了能够被loader处理的这些问题）
 
 loader应该和相同模块的之前汇编相互独立。
 
