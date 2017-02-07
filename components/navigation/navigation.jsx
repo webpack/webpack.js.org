@@ -6,26 +6,26 @@ import Logo from '../logo/logo';
 // TODO: Maybe by updating the routing scheme later on we can avoid hardcoding this?
 let Sections = [
   {
-    title: 'Concepts',
+    title: '概念',
     url: 'concepts'
   },
   {
-    title: 'Guides',
+    title: '指南',
     url: 'guides'
   },
   {
-    title: 'Documentation',
+    title: '文档',
     url: 'configuration',
     children: [
       { title: 'API', url: 'api' },
-      { title: 'Configuration', url: 'configuration' },
-      { title: 'Loaders', url: 'loaders' },
-      { title: 'Plugins', url: 'plugins' },
-      { title: 'Development', url: 'development' }
+      { title: '配置', url: 'configuration' },
+      { title: 'LOADER', url: 'loaders' },
+      { title: '插件', url: 'plugins' },
+      { title: '开发', url: 'development' }
     ]
   },
   {
-    title: 'Donate',
+    title: '捐赠',
     url: '//opencollective.com/webpack'
   },
   {

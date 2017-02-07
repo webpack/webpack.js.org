@@ -1,17 +1,21 @@
 ---
-title: Contribute
+title: 贡献
 ---
 
-> How to contribute to the project? List ways/means here.
+> 如何参与项目贡献？如下所列方法：
 
-## Documentation
+## 文档
 
-[Writer's guide](/writers-guide)
+[作者指南](/writers-guide)
 
-## Technical Contribution
+## 技术贡献
 
-[Development guide](/development)
 
-## Donation
+
+## 捐献
 
 [Open Collective](https://opencollective.com/webpack)
+
+***
+
+> 原文：https://webpack.js.org/contribute/

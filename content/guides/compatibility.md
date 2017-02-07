@@ -1,5 +1,5 @@
 ---
-title: Handling Compatibility
+title: 处理兼容
 ---
 
 ?> require.main
@@ -17,3 +17,7 @@ title: Handling Compatibility
 ?> __filename
 
 ?> module.id
+
+***
+
+> 原文：https://webpack.js.org/guides/compatibility/

@@ -1,5 +1,5 @@
 ---
-title: Other Options
+title: 其它选项(Other Options)
 sort: 16
 contributors:
   - sokra
@@ -13,7 +13,7 @@ contributors:
 
 `object`
 
-Set the value of `require.amd` or `define.amd`:
+设置 `require.amd` 或 `define.amd` 的值：
 
 ```js
 amd: {
@@ -21,37 +21,37 @@ amd: {
 }
 ```
 
-Certain popular modules written for AMD, most notably jQuery versions 1.7.0 to 1.9.1, will only register as an AMD module if the loader indicates it has taken [special allowances](https://github.com/amdjs/amdjs-api/wiki/jQuery-and-AMD) for multiple versions being included on a page.
-The allowances were the ability to restrict registrations to a specific version or to support different sandboxes with different defined modules.
+某些流行的模块是按照 AMD 规范编写的，最引人瞩目的 jQuery 版本在 1.7.0 到 1.9.1，如果 loader 提示它对页面包含的多个版本采取了[特殊许可](https://github.com/amdjs/amdjs-api/wiki/jQuery-and-AMD)时，才会注册为 AMD 模块。
+许可权限是具有「限制指定版本注册」或「支持有不同定义模块的不同沙盒」的能力。
 
-This option allows you to set the key your module looks for to a truthy value.
-As it happens, the AMD support in webpack ignores the defined name anyways.
+此选项允许将模块查找的键(key)设置为真值(truthy value)。
+发生这种情况时，webpack 中的 AMD 支持将忽略定义的名称。
 
 
 ## `bail`
 
 `boolean`
 
-Fail out on the first error instead of tolerating it. By default webpack will log these errors in red in the terminal, as well as the browser console when using HMR, but continue bundling. To enable it:
+在第一个错误出现时抛出失败结果，而不是容忍它。默认情况下，当使用 HMR 时，webpack 会将在终端以及浏览器控制台中，以红色文字记录这些错误，但仍然继续进行打包。要启用它：
 
 ```js
 bail: true
 ```
 
-This will force webpack to exit its bundling process.
+这将迫使 webpack 退出其打包过程。
 
 
 ## `cache`
 
 `boolean` `object`
 
-Cache the generated webpack modules and chunks to improve build speed. Caching is enabled by default while in watch mode. To disable caching simply pass:
+缓存生成的 webpack 模块和 chunk，来改善构建速度。缓存默认在观察模式(watch mode)启用。禁用缓存只需简单传入：
 
 ```js
 cache: false
 ```
 
-If an object is passed, webpack will use this object for caching. Keeping a reference to this object will allow one to share the same cache between compiler calls:
+如果传递一个对象，webpack 将使用这个对象进行缓存。保持对此对象的引用，将可以在 compiler 调用之间共享同一缓存：
 
 ```js
 let SharedCache = {};
@@ -62,7 +62,7 @@ export default {
 }
 ```
 
-W> Don't share the cache between calls with different options.
+W> 不要在不同选项的调用之间共享缓存。
 
 ?> Elaborate on the warning and example - calls with different configuration options?
 
@@ -70,7 +70,7 @@ W> Don't share the cache between calls with different options.
 
 `object`
 
-Expose custom values into the loader context.
+在 loader 上下文中暴露自定义值。
 
 ?> Add an example...
 
@@ -79,9 +79,9 @@ Expose custom values into the loader context.
 
 `boolean`
 
-Capture a "profile" of the application, including statistics and hints, which can then be dissected using the [Analyze](https://webpack.github.io/analyse/) tool.
+捕获一个应用程序"配置文件"，包括统计和提示，然后可以使用 [Analyze](https://webpack.github.io/analyse/) 分析工具进行详细分析。
 
-T> Use the [StatsPlugin](https://www.npmjs.com/package/stats-webpack-plugin) for more control over the generated profile.
+T> 使用 [StatsPlugin](https://www.npmjs.com/package/stats-webpack-plugin) 可以更好地控制生成的配置文件。
 
 
 ## `recordsPath`
@@ -103,3 +103,7 @@ Description...
 Description...
 
 ?> Add example and description as well as details on `recordsInputPath` and `recordsOutputPath`.
+
+***
+
+> 原文：https://webpack.js.org/configuration/other-options/

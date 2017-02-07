@@ -1,5 +1,5 @@
 ---
-title: Configuration
+title: 配置
 sort: 1
 contributors:
   - sokra
@@ -11,20 +11,19 @@ contributors:
   - mattce
 ---
 
-webpack is fed via a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
+webpack 是需要传入一个配置对象(configuration object)。取决于你如何使用 webpack，可以通过两种方式之一：终端或 Node.js。下面指定了所有可用的配置选项。
 
-T> New to webpack? Check out our guide to some of webpack's [core concepts](/concepts) to get started!
+T> 刚接触 webpack？请查看我们提供的指南，从 webpack 一些[核心概念](/concepts)开始学习吧！
+T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs.org/api/path.html)，并在它前面加上 [__dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname)这个全局变量。可以防止不同操作系统之间的文件路径问题，并且可以使相对路径按照预期工作。更多「POSIX 和 Windows」的相关信息请查看[此章节](https://nodejs.org/api/path.html#path_windows_vs_posix)。
 
-T> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html) and prefix it with the [__dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) global. This prevents file path issues between operating systems and allows relative paths to work as expected. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more info on POSIX vs. Windows paths.
-
-## Options
+## 选项
 
 ``` js-with-links-with-details
 var path = require('path');
 
 {
-  // click on the name of the option to get to the detailed documentation
-  // click on the items with arrows to show more examples / advanced options
+  // 点击选项名称，获取文档详细
+  // 点击带箭头的项目，展示「更多示例 / 高级选项」
 
   <details><summary>[entry](/configuration/entry-context#entry): "./app/entry", // string | object | array</summary>
   [entry](/configuration/entry-context#entry): ["./app/entry1", "./app/entry2"],
@@ -33,100 +32,100 @@ var path = require('path');
     b: ["./app/entry-b1", "./app/entry-b2"]
   },
   </details>
-  // Here the application starts executing
-  // and webpack starts bundling
+  // 这里应用程序开始执行
+  // webpack 开始打包
 
   [output](/configuration/output): {
-    // options related to how webpack emits results
+    // webpack 如何输出结果的相关选项
 
     [path](/configuration/output#output-path): path.resolve(__dirname, "dist"), // string
-    // the target directory for all output files
-    // must be an absolute path (use the Node.js path module)
+    // 所有输出文件的目标路径
+    // 必须是绝对路径（使用 Node.js 的 path 模块）
 
     <details><summary>[filename](/configuration/output#output-filename): "bundle.js", // string</summary>
-    [filename](/configuration/output#output-filename): "[name].js", // for multiple entry points
-    [filename](/configuration/output#output-filename): "[chunkhash].js", // for [long term caching](/guides/caching)
+    [filename](/configuration/output#output-filename): "[name].js", // 用于多个入口点(entry point)（出口点？）
+    [filename](/configuration/output#output-filename): "[chunkhash].js", // 用于[长效缓存](/guides/cache)
     </details>
-    // the filename template for entry chunks
+    // 「入口分块(entry chunk)」的文件名模板（出口分块？）
 
     <details><summary>[publicPath](/configuration/output#output-publicpath): "/assets/", // string</summary>
     [publicPath](/configuration/output#output-publicpath): "",
     [publicPath](/configuration/output#output-publicpath): "https://cdn.example.com/",
     </details>
-    // the url to the output directory resolved relative to the HTML page
+    // 输出解析文件的目录，url 相对于 HTML 页面
 
     [library](/configuration/output#output-library): "MyLibrary", // string,
-    // the name of the exported library
+    // 导出库(exported library)的名称
 
-    <details><summary>[libraryTarget](/configuration/output#output-librarytarget): "umd", // universal module definition</summary>
-        [libraryTarget](/configuration/output#output-librarytarget): "umd2", // universal module definition
+    <details><summary>[libraryTarget](/configuration/output#output-librarytarget): "umd", // 通用模块定义</summary>
+        [libraryTarget](/configuration/output#output-librarytarget): "umd2", // 通用模块定义
         [libraryTarget](/configuration/output#output-librarytarget): "commonjs2", // exported with module.exports
-        [libraryTarget](/configuration/output#output-librarytarget): "commonjs-module", // exports with module.exports
-        [libraryTarget](/configuration/output#output-librarytarget): "commonjs", // exported as properties to exports
-        [libraryTarget](/configuration/output#output-librarytarget): "amd", // defined with AMD defined method
-        [libraryTarget](/configuration/output#output-librarytarget): "this", // property set on this
-        [libraryTarget](/configuration/output#output-librarytarget): "var", // variable defined in root scope
-        [libraryTarget](/configuration/output#output-librarytarget): "assign", // blind assignment
-        [libraryTarget](/configuration/output#output-librarytarget): "window", // property set to window object
+        [libraryTarget](/configuration/output#output-librarytarget): "commonjs-module", // 使用 module.exports 导出
+        [libraryTarget](/configuration/output#output-librarytarget): "commonjs", // 作为 exports 的属性导出
+        [libraryTarget](/configuration/output#output-librarytarget): "amd", // 使用 AMD 定义方法来定义
+        [libraryTarget](/configuration/output#output-librarytarget): "this", // 在 this 上设置属性
+        [libraryTarget](/configuration/output#output-librarytarget): "var", // 变量定义于根作用域下
+        [libraryTarget](/configuration/output#output-librarytarget): "assign", // 盲分配(blind assignment)
+        [libraryTarget](/configuration/output#output-librarytarget): "window", // 在 window 对象上设置属性
         [libraryTarget](/configuration/output#output-librarytarget): "global", // property set to global object
         [libraryTarget](/configuration/output#output-librarytarget): "jsonp", // jsonp wrapper
     </details>
-    // the type of the exported library
+    // 导出库(exported library)的类型
 
-    <details><summary>/* Advanced output configuration (click to show) */</summary>
+    <details><summary>/* 高级输出配置（点击显示） */</summary>
 
     [pathinfo](/configuration/output#output-pathinfo): true, // boolean
-    // include useful path info about modules, exports, requests, etc. into the generated code
+    // 在生成代码时，引入相关的模块、导出、请求等有帮助的路径信息。
 
     [chunkFilename](/configuration/output#output-chunkfilename): "[id].js",
-    [chunkFilename](/configuration/output#output-chunkfilename): "[chunkhash].js", // for [long term caching](/guides/caching)
-    // the filename template for additional chunks
+    [chunkFilename](/configuration/output#output-chunkfilename): "[chunkhash].js", // 长效缓存(/guides/caching)
+    // 「附加分块(additional chunk)」的文件名模板
 
     [jsonpFunction](/configuration/output#output-jsonpfunction): "myWebpackJsonp", // string
-    // name of the JSONP function used to load chunks
+    // 用于加载分块的 JSONP 函数名
 
     [sourceMapFilename](/configuration/output#output-sourcemapfilename): "[file].map", // string
     [sourceMapFilename](/configuration/output#output-sourcemapfilename): "sourcemaps/[file].map", // string
-    // the filename template of the source map location
+    // 「source map 位置」的文件名模板
 
     [devtoolModuleFilenameTemplate](/configuration/output#output-devtoolmodulefilenametemplate): "webpack:///[resource-path]", // string
-    // the name template for modules in a devtool
+    // 「devtool 中模块」的文件名模板
 
     [devtoolFallbackModuleFilenameTemplate](/configuration/output#output-devtoolfallbackmodulefilenametemplate): "webpack:///[resource-path]?[hash]", // string
-    // the name template for modules in a devtool (used for conflicts)
+    // 「devtool 中模块」的文件名模板（用于冲突）
 
     [umdNamedDefine](/configuration/output#output-umdnameddefine): true, // boolean
-    // use a named AMD module in UMD library
+    // 在 UMD 库中使用命名的 AMD 模块
 
-    [crossOriginLoading](/configuration/output#output-crossoriginloading): "use-credentials", // enum
+    [crossOriginLoading](/configuration/output#output-crossoriginloading): "use-credentials", // 枚举
     [crossOriginLoading](/configuration/output#output-crossoriginloading): "anonymous",
     [crossOriginLoading](/configuration/output#output-crossoriginloading): false,
-    // specifies how cross origin request are issued by the runtime
+    // 指定运行时如何发出跨域请求问题
 
-    <details><summary>/* Expert output configuration (on own risk) */</summary>
+    <details><summary>/* 专家级输出配置（自行承担风险） */</summary>
 
     [devtoolLineToLine](/configuration/output#output-devtoollinetoline): {
       test: /\.jsx$/
     },
-    // use a simple 1:1 mapped SourceMaps for these modules (faster)
+    // 为这些模块使用 1:1 映射 SourceMaps（快速）
 
     [hotUpdateMainFilename](/configuration/output#output-hotupdatemainfilename): "[hash].hot-update.json", // string
-    // filename template for HMR manifest
+    // 「HMR 清单」的文件名模板
 
     [hotUpdateChunkFilename](/configuration/output#output-hotupdatechunkfilename): "[id].[hash].hot-update.js", // string
-    // filename template for HMR chunks
+    // 「HMR 分块」的文件名模板
 
     [sourcePrefix](/configuration/output#output-sourceprefix): "\t", // string
-    // prefix module sources in bundle for better readablitity
+    // 包内前置式模块资源具有更好可读性
     </details>
     </details>
   },
 
   [module](/configuration/module): {
-    // configuration regarding modules
+    // 关于模块配置
 
     [rules](/configuration/module#module-rules): [
-      // rules for modules (configure loaders, parser options, etc.)
+      // 模块规则（配置加载器、解析器等选项）
 
       {
         [test](/configuration/module#rule-test): /\.jsx?$/,
@@ -136,37 +135,37 @@ var path = require('path');
         [exclude](/configuration/module#rule-exclude): [
           path.resolve(__dirname, "app/demo-files")
         ]
-        // these are matching conditions, each accepting a regular expression or string
-        // test and include have the same behavior, both must be matched
-        // exclude must not be matched (takes preferrence over test and include)
-        // Best practices:
-        // - Use RegExp only in test and for filename matching
-        // - Use arrays of absolute paths in include and exclude
-        // - Try to avoid exclude and prefer include
+        // 这里是匹配条件，每个选项都接收一个正则表达式或字符串
+        // test 和 include 具有相同的作用，都是必须匹配选项
+        // exclude 是必不匹配选项（优先于 test 和 include）
+        // 最佳实践：
+        // - 只在 test 和 文件名匹配 中使用正则表达式
+        // - 在 include 和 exclude 中使用绝对路径数组
+        // - 尽量避免 exclude，更倾向于使用 include
 
         [issuer](/configuration/module#rule-issuer): { test, include, exclude },
-        // conditions for the issuer (the origin of the import)
+        // issuer 条件（导入源）
 
         [enforce](/configuration/module#rule-enforce): "pre",
         [enforce](/configuration/module#rule-enforce): "post",
-        // flags to apply these rules, even if they are overridden (advanced option)
+        // 标识应用这些规则，即使规则覆盖（高级选项）
 
         [loader](/configuration/module#rule-loader): "babel-loader",
-        // the loader which should be applied, it'll be resolved relative to the context
-        // -loader suffix is no longer optional in webpack2 for clarity reasons
-        // see [webpack 1 upgrade guide](/guides/migrating)
+        // 应该应用的 loader，它相对上下文解析
+        // 为了更清晰，`-loader` 后缀在 webpack 2 中不再是可选的
+        // 查看 [webpack 1 升级指南](/guides/migrating)。
 
         [options](/configuration/module#rule-options-rule-query): {
           presets: ["es2015"]
         },
-        // options for the loader
+        // loader 的可选项
       },
 
       {
-        [test](/configuration/module#rule-test): "\.html$",
+        [test](/configuration/module#rule-test): "\.html$"
 
         [use](/configuration/module#rule-use): [
-          // apply multiple loaders and options
+          // 应用多个 loader 和选项
           "htmllint-loader",
           {
             loader: "html-loader",
@@ -178,28 +177,28 @@ var path = require('path');
       },
 
       { [oneOf](/configuration/module#rule-oneof): [ /* rules */ ] }
-      // only use one of these nested rules
+      // 只使用这些嵌套规则之一
 
       { [rules](/configuration/module#rule-rules): [ /* rules */ ] }
-      // use all of these nested rules (combine with conditions to be useful)
+      // 使用所有这些嵌套规则（合并可用条件）
 
-      { [resource](/configuration/module#rule-resource): { [and](/configuration/module#condition): [ /* conditions */ ] } }
-      // matches only if all conditions are matched
+      { [resource](/configuration/module#rule-resource): { [and](/configuration/module#condition): [ /* 条件 */ ] } }
+      // 仅当所有条件都匹配时才匹配
 
-      { [resource](/configuration/module#rule-resource): { [or](/configuration/module#condition): [ /* conditions */ ] } }
-      { [resource](/configuration/module#rule-resource): [ /* conditions */ ] }
-      // matches if any condition is matched (default for arrays)
+      { [resource](/configuration/module#rule-resource): { [or](/configuration/module#condition): [ /* 条件 */ ] } }
+      { [resource](/configuration/module#rule-resource): [ /* 条件 */ ] }
+      // 任意条件匹配时匹配（默认为数组）
 
-      { [resource](/configuration/module#rule-resource): { [not](/configuration/module#condition): /* condition */ } }
-      // matches if the condition is not matched
+      { [resource](/configuration/module#rule-resource): { [not](/configuration/module#condition): /* 条件 */ } }
+      // 条件不匹配时匹配
     ],
 
-    <details><summary>/* Advanced module configuration (click to show) */</summary>
+    <details><summary>/* 高级模块配置（点击展示） */</summary>
 
     [noParse](/configuration/module#module-noparse): [
       /special-library\.js$/
     ],
-    // do not parse this module
+    // 不解析这里的模块
 
     unknownContextRequest: ".",
     unknownContextRecursive: true,
@@ -217,76 +216,76 @@ var path = require('path');
   },
 
   [resolve](/configuration/resolve): {
-    // options for resolving module requests
-    // (does not apply to resolving to loaders)
+    // 解析模块请求的选项
+    // （不适用于对加载器(loader)解析）
 
     [modules](/configuration/resolve#resolve-modules): [
       "node_modules",
       path.resolve(__dirname, "app")
     ],
-    // directories where to look for modules
+    // 用于查找模块的目录
 
     [extensions](/configuration/resolve#resolve-extensions): [".js", ".json", ".jsx", ".css"],
-    // extensions that are used
+    // 使用的扩展名
 
     [alias](/configuration/resolve#resolve-alias): {
-      // a list of module name aliases
+      // 模块别名列表
 
       "module": "new-module",
-      // alias "module" -> "new-module" and "module/path/file" -> "new-module/path/file"
+      // 起别名："module" -> "new-module" 和 "module/path/file" -> "new-module/path/file"
 
       "only-module$": "new-module",
-      // alias "only-module" -> "new-module", but not "module/path/file" -> "new-module/path/file"
+      // 起别名 "only-module" -> "new-module"，但不匹配 "module/path/file" -> "new-module/path/file"
 
       "module": path.resolve(__dirname, "app/third/module.js"),
-      // alias "module" -> "./app/third/module.js" and "module/file" results in error
-      // modules aliases are imported relative to the current context
+      // 起别名 "module" -> "./app/third/module.js" 和 "module/file" 会导致错误
+      // 模块别名相对于当前上下文导入
     },
-    <details><summary>/* alternative alias syntax (click to show) */</summary>
+    <details><summary>/* 可供选择的别名语法（点击展示） */</summary>
     [alias](/configuration/resolve#resolve-alias): [
       {
         name: "module",
-        // the old request
+        // 旧的请求
 
         alias: "new-module",
-        // the new request
+        // 新的请求
 
         onlyModule: true
-        // if true only "module" is aliased
-        // if false "module/inner/path" is also aliased
+        // 如果为 true，只有 "module" 是别名
+        // 如果为 false，"module/inner/path" 也是别名
       }
     ],
     </details>
 
-    <details><summary>/* Advanced resolve configuration (click to show) */</summary>
+    <details><summary>/* 高级解析选项（点击展示） */</summary>
 
     [symlinks](/configuration/resolve#resolve-symlinks): true,
-    // follow symlinks to new location
+    // 遵循符号链接(symlinks)到新位置
 
     [descriptionFiles](/configuration/resolve#resolve-descriptionfiles): ["package.json"],
-    // files that are read for package description
+    // 从 package 描述中读取的文件
 
     [mainFields](/configuration/resolve#resolve-mainfields): ["main"],
-    // properties that are read from description file
-    // when a folder is requested
+    // 从描述文件中读取的属性
+    // 当请求文件夹时
 
     [aliasFields](/configuration/resolve#resolve-aliasfields): ["browser"],
-    // properites that are read from description file
-    // to alias requests in this package
+    // 从描述文件中读取的属性
+    // 以对此 package 的请求起别名
 
     [enforceExtension](/configuration/resolve#resolve-enforceextension): false,
-    // if true request must not include an extensions
-    // if false request may already include an extension
+    // 如果为 true，请求必不包括扩展名
+    // 如果为 false，请求可以包括扩展名
 
     [moduleExtensions](/configuration/resolve#resolve-moduleextensions): ["-module"],
     [enforceModuleExtension](/configuration/resolve#resolve-enforcemoduleextension): false,
-    // like extensions/enforceExtension but for module names instead of files
+    // 类似 extensions/enforceExtension，但是用模块名替换文件
 
     [unsafeCache](/configuration/resolve#resolve-unsafecache): true,
     [unsafeCache](/configuration/resolve#resolve-unsafecache): {},
-    // enables caching for resolved requests
-    // this is unsafe as folder structure may change
-    // but preformance improvement is really big
+    // 为解析的请求启用缓存
+    // 这是不安全，因为文件夹结构可能会改动
+    // 但是性能改善是很大的
 
     [cachePredicate](/configuration/resolve#resolve-cachepredicate): (path, request) => true,
     // predicate function which selects requests for caching
@@ -294,55 +293,55 @@ var path = require('path');
     [plugins](/configuration/resolve#resolve-plugins): [
       // ...
     ]
-    // additional plugins applied to the resolver
+    // 应用于解析器的附加插件
     </details>
   },
 
   [performance](/configuration/performance): {
-    <details><summary>[hints](/configuration/performance#performance-hints): "warning", // enum </summary>
-    [hints](/configuration/performance#performance-hints): "error", // emit errors for perf hints
-    [hints](/configuration/performance#performance-hints): false, // turn off perf hints
+    <details><summary>[hints](/configuration/performance#performance-hints): "warning", // 枚举 </summary>
+    [hints](/configuration/performance#performance-hints): "error", // 性能提示中抛出错误
+    [hints](/configuration/performance#performance-hints): false, // 关闭性能提示
     </details>
-    [maxAssetSize](/configuration/performance#performance-maxassetsize): 200000, // int (in bytes),
-    [maxEntrypointSize](/configuration/performance#performance-maxentrypointsize): 400000, // int (in bytes)
-    [assetFilter](/configuration/performance#performance-assetfilter): function(assetFilename) { 
-      // Function predicate that provides asset filenames
+    [maxAssetSize](/configuration/performance#performance-maxassetsize): 200000, // 整数类型（以字节为单位）
+    [maxEntrypointSize](/configuration/performance#performance-maxentrypointsize): 400000, // 整数类型（以字节为单位）
+    [assetFilter](/configuration/performance#performance-assetfilter): function(assetFilename) {
+      // 提供资源文件名的断言函数
       return assetFilename.endsWith('.css') || assetFilename.endsWith('.js');
     }
   },
 
   <details><summary>[devtool](/configuration/devtool): "source-map", // enum </summary>
-  [devtool](/configuration/devtool): "inline-source-map", // inlines SourceMap into orginal file
-  [devtool](/configuration/devtool): "eval-source-map", // inlines SourceMap per module
-  [devtool](/configuration/devtool): "hidden-source-map", // SourceMap without reference in original file
-  [devtool](/configuration/devtool): "cheap-source-map", // cheap-variant of SourceMap without module mappings
-  [devtool](/configuration/devtool): "cheap-module-source-map", // cheap-variant of SourceMap with module mappings
-  [devtool](/configuration/devtool): "eval", // no SourceMap, but named modules. Fastest at the expense of detail. 
+  [devtool](/configuration/devtool): "inline-source-map", // 嵌入到源文件中
+  [devtool](/configuration/devtool): "eval-source-map", // 将 SourceMap 嵌入到每个模块中
+  [devtool](/configuration/devtool): "hidden-source-map", // SourceMap 不在源文件中引用
+  [devtool](/configuration/devtool): "cheap-source-map", // 没有模块映射(module mappings)的 SourceMap 低级变体(cheap-variant)
+  [devtool](/configuration/devtool): "cheap-module-source-map", // 有模块映射(module mappings)的 SourceMap 低级变体
+  [devtool](/configuration/devtool): "eval", // 没有模块映射，而是命名模块。以牺牲细节达到最快。
   </details>
-  // enhance debugging by adding meta info for the browser devtools
-  // source-map most detailed at the expense of build speed.
+  // 通过在浏览器调试工具(browser devtools)中添加元信息(meta info)增强调试
+  // 牺牲了构建速度的 `source-map' 是最详细的。
 
-  [context](/configuration/entry-context#context): __dirname, // string (absolute path!)
-  // the home directory for webpack
-  // the [entry](/configuration/entry-context) and [module.rules.loader](/configuration/module#rule-loader) option
-  //   is resolved relative to this directory
+  [context](/configuration/entry-context#context): __dirname, // string（绝对路径！）
+  // webpack 的主目录
+  // [entry](/configuration/entry-context) 和 [module.rules.loader](/configuration/module#rule-loader) 选项
+  // 相对于此目录解析
 
-  <details><summary>[target](/configuration/target): "web", // enum</summary>
+  <details><summary>[target](/configuration/target): "web", // 枚举</summary>
   [target](/configuration/target): "webworker", // WebWorker
-  [target](/configuration/target): "node", // Node.js via require
-  [target](/configuration/target): "async-node", // Node.js via fs and vm
+  [target](/configuration/target): "node", // node.js 通过 require
+  [target](/configuration/target): "async-node", // Node.js 通过 fs and vm
   [target](/configuration/target): "node-webkit", // nw.js
-  [target](/configuration/target): "electron-main", // electron, main process
-  [target](/configuration/target): "electron-renderer", // electron, renderer process
-  [target](/configuration/target): (compiler) => { /* ... */ }, // custom
+  [target](/configuration/target): "electron-main", // electron，主进程(main process)
+  [target](/configuration/target): "electron-renderer", // electron，渲染进程(renderer process)
+  [target](/configuration/target): (compiler) => { /* ... */ }, // 自定义
   </details>
-  // the environment in which the bundle should run
-  // changes chunk loading behavior and available modules
+  // 包(bundle)应该运行的环境
+  // 更改 块加载行为(chunk loading behavior) 和 可用模块(available module)
 
   <details><summary>[externals](/configuration/externals): ["react", /^@angular\//],</summary>
-  [externals](/configuration/externals): "react", // string (exact match)
-  [externals](/configuration/externals): /^[a-z\-]+($|\/)/, // Regex
-  [externals](/configuration/externals): { // object
+  [externals](/configuration/externals): "react", // string（精确匹配）
+  [externals](/configuration/externals): /^[a-z\-]+($|\/)/, // 正则
+  [externals](/configuration/externals): { // 对象
     angular: "this angular", // this["angular"]
     react: { // UMD
       commonjs: "react",
@@ -353,7 +352,7 @@ var path = require('path');
   },
   [externals](/configuration/externals): (request) => { /* ... */ return "commonjs " + request }
   </details>
-  // Don't follow/bundle these modules, but request them at runtime from the environment
+  // 不要遵循/打包这些模块，而是在运行时从环境中请求他们
 
   [stats](stats): {
     /* TODO */
@@ -366,35 +365,35 @@ var path = require('path');
   [plugins](plugins): [
     // ...
   ],
-  // list of additional plugins
-  
-  
-  <details><summary>/* Advanced configuration (click to show) */</summary>
+  // 附加插件列表
 
-  [resolveLoader](/configuration/resolve#resolveloader): { /* same as resolve */ }
-  // separate resolve options for loaders
+
+  <details><summary>/* 高级配置（点击展示） */</summary>
+
+  [resolveLoader](/configuration/resolve#resolveloader): { /* 等同于 resolve */ }
+  // 独立解析选项的 loader
 
   [profile](other-options#profile): true, // boolean
-  // capture timing information
-  
+  // 捕获时机信息
+
   [bail](other-options#bail): true, //boolean
-  // fail out on the first error instead of tolerating it.
-  
+  // 在第一个错误出错时抛出，而不是无视错误。
+
   [cache](other-options#cache): false, // boolean
-  // disable/enable caching
+  // 禁用/启用缓存
 
   [watch](watch#watch): true, // boolean
-  // enables watching
+  // 启用观察
 
   [watchOptions](watch#watchoptions): {
     [aggregateTimeout](watch#watchoptions-aggregatetimeout): 1000, // in ms
-    // aggregates multiple changes to a single rebuild
+    // 将多个更改聚合到单个重构建(rebuild)
 
     [poll](watch#watchoptions-poll): true,
-    [poll](watch#watchoptions-poll): 500, // intervall in ms
-    // enables polling mode for watching
-    // must be used on filesystems that doesn't notify on change
-    // i. e. nfs shares
+    [poll](watch#watchoptions-poll): 500, // 间隔单位 ms
+    // 启用轮询观察模式
+    // 必须用在不通知更改的文件系统中
+    // 即 nfs shares（译者注：[Network FileSystem](http://linux.vbird.org/linux_server/0330nfs/0330nfs.php)，最大的功能就是可以透過網路，讓不同的機器、不同的作業系統、可以彼此分享個別的檔案 ( share file )）
   },
 
   [node](node): {
@@ -409,3 +408,7 @@ var path = require('path');
   </details>
 }
 ```
+
+***
+
+> 原文：https://webpack.js.org/configuration/

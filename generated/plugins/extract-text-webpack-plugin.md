@@ -1,0 +1,144 @@
+---
+title: ExtractTextWebpackPlugin
+source: https://raw.githubusercontent.com/webpack-contrib/extract-text-webpack-plugin/master/README.md
+edit: https://github.com/webpack-contrib/extract-text-webpack-plugin/edit/master/README.md
+---
+## Install
+
+```bash
+npm install --save-dev extract-text-webpack-plugin
+```
+
+## Usage
+
+> :warning: For webpack v1, see [the README in the webpack-1 branch](https://github.com/webpack/extract-text-webpack-plugin/blob/webpack-1/README.md).
+
+```js
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
+      }
+    ]
+  },
+  plugins: [
+    new ExtractTextPlugin("styles.css"),
+  ]
+}
+```
+
+It moves every `require("style.css")` in entry chunks into a separate CSS file. So your styles are no longer inlined into the JS bundle, but separate in a CSS bundle file (`styles.css`). If your total stylesheet volume is big, it will be faster because the CSS bundle is loaded in parallel to the JS bundle.
+
+|Advantages|Caveats|
+|:---------|:------|
+| Fewer style tags (older IE has a limit) | Additional HTTP request |
+| CSS SourceMap (with `devtool: "source-map"` and `extract-text-webpack-plugin?sourceMap`) | Longer compilation time |
+| CSS requested in parallel | No runtime public path modification |
+| CSS cached separate | No Hot Module Replacement |
+| Faster runtime (less code and DOM operations) | ... |
+
+## Options
+
+```js
+new ExtractTextPlugin(options: filename | object)
+```
+
+|Name|Type|Description|
+|:--:|:--:|:----------|
+|**`id`**|`{String}`|Unique ident for this plugin instance. (For advanced usage only, by default automatically generated)|
+|**`filename`**|`{String}`|Name of the result file. May contain `[name]`, `[id]` and `[contenthash]`|
+|**`options.allChunks`**|`{Boolean}`|Extract from all additional chunks too (by default it extracts only from the initial chunk(s))|
+|**`options.disable`**|`{Boolean}`|Disables the plugin|
+|**`options.ignoreOrder`**|`{Boolean}`|Disables order check (useful for CSS Modules!), `false` by default|
+
+* `[name]` name of the chunk
+* `[id]` number of the chunk
+* `[contenthash]` hash of the content of the extracted file
+
+> :warning: `ExtractTextPlugin` generates a file **per entry**, so you must use `[name]`, `[id]` or `[contenthash]` when using multiple entries.
+
+#### `#extract`
+
+```js
+ExtractTextPlugin.extract(options: loader | object)
+```
+
+Creates an extracting loader from an existing loader. Supports loaders of type `{ loader: [name]-loader -> {String}, options: {} -> {Object} }`.
+
+|Name|Type|Description|
+|:--:|:--:|:----------|
+|**`options.use`**|`{String}`/`{Object}`|Loader(s) that should be used for converting the resource to a CSS exporting module _(required)_|
+|**`options.fallback`**|`{String}`/`{Object}`|loader(e.g `'style-loader'`) that should be used when the CSS is not extracted (i.e. in an additional chunk when `allChunks: false`)|
+|**`options.publicPath`**|`{String}`|Override the `publicPath` setting for this loader|
+
+
+#### Multiple Instances
+
+There is also an `extract` function on the instance. You should use this if you have more than one instance of  `ExtractTextPlugin`.
+
+```js
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+// Create multiple instances
+const extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
+const extractLESS = new ExtractTextPlugin('stylesheets/[name].less');
+
+module.exports = {
+  module: {
+    use: [
+      {
+        test: /\.css$/,
+        use: extractCSS.extract([ 'css-loader', 'postcss-loader' ])
+      },
+      {
+        test: /\.html$/i,
+        use: extractLESS.extract([ 'css-loader', 'less-loader' ])
+      },
+    ]
+  },
+  plugins: [
+    extractCSS,
+    extractLESS
+  ]
+};
+```
+
+## Maintainer
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="150 height="150" src="https://github.com/sokra.png?s=150">
+        <br>
+        <a href="https://github.com/sokra">Tobias Koppers</a>
+      </td>
+    <tr>
+  <tbody>
+</table>
+
+
+[npm]: https://img.shields.io/npm/v/extract-text-webpack-plugin.svg
+[npm-url]: https://npmjs.com/package/extract-text-webpack-plugin
+
+[node]: https://img.shields.io/node/v/extract-text-webpack-plugin.svg
+[node-url]: https://nodejs.org
+
+[deps]: https://david-dm.org/webpack-contrib/extract-text-webpack-plugin.svg
+[deps-url]: https://david-dm.org/webpack-contrib/extract-text-webpack-plugin
+
+[tests]: http://img.shields.io/travis/webpack-contrib/extract-text-webpack-plugin.svg
+[tests-url]: https://travis-ci.org/webpack-contrib/extract-text-webpack-plugin
+
+[cover]: https://coveralls.io/repos/github/webpack-contrib/extract-text-webpack-plugin/badge.svg
+[cover-url]: https://coveralls.io/github/webpack-contrib/extract-text-webpack-plugin
+
+[chat]: https://badges.gitter.im/webpack/webpack.svg
+[chat-url]: https://gitter.im/webpack/webpack

@@ -1,5 +1,5 @@
 ---
-title: Resolve
+title: 解析(Resolve)
 sort: 7
 contributors:
   - sokra
@@ -293,3 +293,7 @@ A function which decides whether a request should be cached or not. An object is
 ```js
 cachePredicate: function() { return true }
 ```
+
+***
+
+> 原文：https://webpack.js.org/configuration/resolve/

@@ -1,5 +1,5 @@
 ---
-title: Plugins
+title: 插件(Plugins)
 sort: 8
 contributors:
   - sokra
@@ -56,3 +56,7 @@ plugins: [
   new webpack.HotModuleReplacementPlugin(),
 ]
 ```
+
+***
+
+> 原文：https://webpack.js.org/configuration/plugins/

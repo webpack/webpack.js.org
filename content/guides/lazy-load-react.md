@@ -1,15 +1,15 @@
 ---
-title: Lazy Loading - React
+title: 惰性加载 - React
 contributors:
   - iammerrick
   - chrisVillanueva
 ---
 
-A component can lazily load dependencies without its consumer knowing using higher order functions, or a consumer can lazily load its children without its children knowing using a component that takes a function and collection of modules, or some combination of both.
+一个组件可以通过使用一些高阶函数来懒加载它的依赖，无需通过它的父元素，同时，一个父元素可以使用一个接受函数和一系列模块的组件来懒加载它的子元素，无需通过它的子元素，或者混合使用这两种方式。
 
-## LazilyLoad Component
+## 懒加载的组件
 
-Let's have a look at a consumer choosing to lazily load some components. The `importLazy` is simply a function that returns the `default` property, this is for Babel/ES2015 interoperability. If you don't need that you can omit the `importLazy` helper. The `importLazy` function simply returns whatever was exported as `export default` in the target module.
+我们来看一个父元素在选择懒加载一些组件的例子。`importLazy` 只是一个简单的返回 `default` 属性的函数，是为了兼容Babel/ES2015。如果你不需要，可以去掉 `importLazy` 方法。`importLazy` 只是返回了目标模块里面任何被 `export default` 的部分。
 
 ```jsx
 <LazilyLoad modules={{
@@ -27,9 +27,9 @@ Let's have a look at a consumer choosing to lazily load some components. The `im
 </LazilyLoad>
 ```
 
-## Higher Order Component
+## 高阶组件方式
 
-As a component, you can also make sure your own dependencies are lazily loaded. This is useful if a component relies on a really heavy library. Let's say we have a Todo component that optionally supports code highlighting...
+一个组件也可以确保自己的依赖是被懒加载的。如果一个组件依赖了比较重的库时，会用到这一点。比如我们有一个让代码选择性的高亮显示的Todo组件......
 
 ```jsx
 class Todo extends React.Component {
@@ -43,14 +43,14 @@ class Todo extends React.Component {
 }
 ```
 
-We could then make sure the expensive library powering the Highlight component is only loaded when we actually want to highlight some code:
+然后我们就可以保证，那个支持Highlight组件的重的库仅仅在我们真正想要高亮一些代码的时候再加载：
 
 ```jsx
 // Highlight.js
 class Highlight extends React.Component {
   render() {
     const {Highlight} = this.props.highlight;
-    // highlight js is now on our props for use
+    // highlight js 现在在props里面以备使用
   }
 }
 export LazilyLoadFactory(Highlight, {
@@ -58,12 +58,11 @@ export LazilyLoadFactory(Highlight, {
 });
 ```
 
-Notice how the consumer of Highlight component had no idea it had a dependency that was lazily loaded? Or that if a user had todos with no code we would never need to load highlight.js?
+请注意，Highlight组件的父元素不知道它有一个依赖会被懒惰加，这是怎么实现的？ 或者如果所有todo里面都没有代码，我们就永远不需要加载highlight.js了吗？
 
+## 代码
 
-## The Code
-
-Source code of the LazilyLoad component module which exports both the Component interface and the higher order component interface, as well as the importLazy function to make ES2015 defaults feel a bit more natural.
+暴露出一个组件及其高阶组件接口的LazilyLoad组件模块的源代码（如下），（里面有一个）让ES2015的定义更自然的importLazy函数。
 
 ```jsx
 import React from 'react';
@@ -134,19 +133,23 @@ export const importLazy = (promise) => (
 
 export default LazilyLoad;
 ```
-## Tips
+## 贴士
 
-- By using the [bundle loader](https://github.com/webpack/bundle-loader) we can semantically name chunks to intelligently load groups of code.
-- Make sure if you are using the babel-preset-2015, to turn modules to false, this will allow webpack to handle modules.
+- 利用[bundle loader](https://github.com/webpack/bundle-loader)，我们可以语义化的命名chunk来智能的加载代码块。
+- 如果你正在使用babel-preset-2015，请确保将参数modules设置为false，以允许webpack处理相应的模块。
 
-## Dependencies
+## 依赖
 
 - ES2015 + JSX
 
-## References
+## 参考
 
 - [Higher Order Components](http://reactpatterns.com/#higher-order-component)
 - [react-modules](https://github.com/threepointone/react-modules)
 - [Function as Child Components](http://merrickchristensen.com/articles/function-as-child-components.html)
 - [Example Repository](https://github.com/iammerrick/how-to-lazy-load-react-webpack)
 - [Bundle Loader](https://github.com/webpack/bundle-loader)
+
+***
+
+> 原文：https://webpack.js.org/guides/lazy-load-react/

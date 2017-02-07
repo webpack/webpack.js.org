@@ -47,7 +47,7 @@ module.exports = {
     },
 
     concepts: section(
-      'Concepts',
+      '概念',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/concepts',
@@ -58,20 +58,18 @@ module.exports = {
     ),
 
     guides: section(
-      'Guides',
+      '指南',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/guides',
           true,
           /^\.\/.*\.md$/
         );
-      }, {
-        'why-webpack': '/guides/comparison'
       }
     ),
 
     development: section(
-      'Development',
+      '开发',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/development',
@@ -82,7 +80,7 @@ module.exports = {
     ),
 
     configuration: section(
-      'Configuration',
+      '配置',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/configuration',
@@ -241,6 +239,8 @@ function combineContexts(context1, context2) {
     }
   }
   webpackContext.keys = () => {
+    "use strict";
+
     let keys1 = context1.keys();
     let keys2 = context2.keys();
     return _.chain(keys1).concat(keys2).sortBy().uniq().value();

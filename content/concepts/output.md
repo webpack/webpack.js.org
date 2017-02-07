@@ -1,5 +1,5 @@
 ---
-title: Output
+title: 输出(Output)
 sort: 3
 contributors:
   - TheLarkInn
@@ -7,17 +7,17 @@ contributors:
   - rouzbeh84
 ---
 
-Options affecting the output of the compilation. `output` options tell webpack how to write the compiled files to disk. Note, that while there can be multiple `entry` points, only one `output` configuration is specified.
+此选项影响 compilation 对象的输出。`output` 选项控制 webpack 如何向硬盘写入编译文件。注意，即使可以存在多个`入口`起点，但只指定一个`输出`配置。
 
-If you use any hashing (`[hash]` or `[chunkhash]`), make sure to have a consistent ordering of modules. Use the `OccurrenceOrderPlugin` or `recordsPath`.
+如果你用了哈希（`[hash]` 或 `[chunkhash]`），请确保模块具有一致的顺序。可以使用 `OccurrenceOrderPlugin` 或 `recordsPath`。
 
-## Usage
+## 用法(Usage)
 
-The minimum requirements for the `output` property in your webpack config is to set its value to an object including the following two things :
+在 webpack 中配置 `output` 属性的最低要求是，将它的值设置为一个对象，包括以下两点：
 
-Your preferred `filename` of the compiled file: `// main.js || bundle.js || index.js`
+编译文件的`文件名(filename)`，首选推荐：`// main.js || bundle.js || index.js`
 
-An [`output.path`](#output-path) as an **absolute path** for what directory you prefer it to go in once bundled.
+[`output.path`](#output-path) 对应一个**绝对路径**，此路径是你希望一次性打包的目录。
 
 **webpack.config.js**
 
@@ -32,57 +32,57 @@ const config = {
 module.exports = config;
 ```
 
-## Options
+## 选项(Options)
 
-The following is a list of values you can pass to the `output` property.
+以下列出可以向 `output` 属性传入的值。
 
 ### `output.chunkFilename`
 
-The filename of non-entry chunks as a relative path inside the `output.path` directory.
+非入口的 chunk(non-entry chunk) 的文件名，路径相对于 `output.path` 目录。
 
-`[id]` is replaced by the id of the chunk.
+`[id]` 被 chunk 的 id 替换。
 
-`[name]` is replaced by the name of the chunk (or with the id when the chunk has no name).
+`[name]` 被 chunk 的 name 替换（或者，在 chunk 没有 name 时使用 id 替换）。
 
-`[hash]` is replaced by the hash of the compilation.
+`[hash]` 被 compilation 生命周期的 hash 替换。
 
-`[chunkhash]` is replaced by the hash of the chunk.
+`[chunkhash]` 被 chunk 的 hash 替换。
 
 ### `output.crossOriginLoading`
 
-This option enables cross-origin loading of chunks.
+此选项启用跨域加载(cross-origin loading) chunk。
 
-Possible values are:
+可选的值有：
 
-`false` - Disable cross-origin loading.
+`false` - 禁用跨域加载
 
-`"anonymous"` - Cross-origin loading is enabled. When using `anonymous` no credentials will be sent with the request.
+`"anonymous"` - 启用跨域加载。当使用 `anonymous` 时，发送不带凭据(credential)的请求。
 
-`"use-credentials"` - Cross-origin loading is enabled and credentials will be send with the request.
+`"use-credentials"` - 启用跨域加载。发送带凭据(credential)的请求。
 
-For more information on cross-origin loading see [MDN](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin)
+更多跨域加载信息请查看 [MDN](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin)
 
-> Default: `false`
+> 默认值：`false`
 
-> see also [library](/guides/author-libraries/)
+> 参考 [library](/guides/author-libraries/)
 
-> see also [Development Tools](/guides/development/#choosing-a-tool)
+> 参考 [开发工具](/guides/development/#choosing-a-tool)
 
 ### `output.devtoolLineToLine`
 
-Enable line-to-line mapped mode for all/specified modules. Line-to-line mapped mode uses a simple SourceMap where each line of the generated source is mapped to the same line of the original source. It's a performance optimization. Only use it if your performance needs to be better and you are sure that input lines match which generated lines.
+所有/指定模块启用行到行映射(line-to-line mapped)模式。行到行映射模式使用一个简单的 SourceMap，即生成资源(generated source)的每一行都映射到原始资源(original source)的同一行。这是一个可做性能优化之处。当你需要更好的性能，并且只要确保输入行(input line)和生成行(generated line)匹配时，才会考虑启用。
 
-`true` enables it for all modules (not recommended)
+`true` 在所有模块启用（不推荐）
 
-An object `{test, include, exclude}` similar to `module.loaders` enables it for specific files.
+`{test, include, exclude}` 对象，对特定文件启用（类似于 `module.loaders`）。
 
-> Default: `false`
+> 默认值：`false`
 
 ### `output.filename`
 
-Specifies the name of each output file on disk. You must **not** specify an absolute path here! The `output.path` option determines the location on disk the files are written. `filename` is used solely for naming the individual files.
+指定硬盘每个输出文件的名称。在这里你**不能**指定为绝对路径！`output.path` 选项规定了文件被写入硬盘的位置。`filename` 仅用于命名每个文件。
 
-**single entry**
+**单个入口**
 
 ```javascript
 {
@@ -93,20 +93,20 @@ Specifies the name of each output file on disk. You must **not** specify an abso
   }
 }
 
-// writes to disk: ./build/bundle.js
+// 写入到硬盘：./build/bundle.js
 ```
 
-**multiple entries**
+**多个入口**
 
-If your configuration creates more than a single "chunk" (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use substitutions to ensure that each file has a unique name.
+如果你的配置创建了多个 "chunk"（例如使用多个入口起点或使用类似 CommonsChunkPlugin 的插件），你应该使用以下的替换方式来确保每个文件名都不重复。
 
-`[name]` is replaced by the name of the chunk.
+`[name]` 被 chunk 的 name 替换。
 
-`[hash]` is replaced by the hash of the compilation.
+`[hash]` 被 compilation 生命周期的 hash 替换。
 
-`[chunkhash]` is replaced by the hash of the chunk.
+`[chunkhash]` 被 chunk 的 hash 替换。
 
-```javascript
+``` javascript
 {
   entry: {
     app: './src/app.js',
@@ -118,91 +118,91 @@ If your configuration creates more than a single "chunk" (as with multiple entry
   }
 }
 
-// writes to disk: ./build/app.js, ./build/search.js
+// 写入到硬盘：./build/app.js, ./build/search.js
 ```
 
 ### `output.hotUpdateChunkFilename`
 
-The filename of the Hot Update Chunks. They are inside the `output.path` directory.
+热更新 chunk(Hot Update Chunk) 的文件名。它们在 `output.path` 目录中。
 
-`[id]` is replaced by the id of the chunk.
+`[id]` 被 chunk 的 id 替换。
 
-`[hash]` is replaced by the hash of the compilation. (The last hash stored in the records)
+`[hash]` 被 compilation 生命周期的 hash 替换。（最后一个 hash 存储在记录中）
 
-> Default: `"[id].[hash].hot-update.js"`
+> 默认值：`"[id].[hash].hot-update.js"`
 
 ### `output.hotUpdateFunction`
 
-The JSONP function used by webpack for async loading of hot update chunks.
+webpack 中用于异步加载(async load)热更新(hot update) chunk 的 JSONP 函数。
 
-> Default: `"webpackHotUpdate"`
+> 默认值：`"webpackHotUpdate"`
 
 ### `output.hotUpdateMainFilename`
 
-The filename of the Hot Update Main File. It is inside the `output.path` directory.
+热更新主文件(hot update main file)的文件名。
 
-`[hash]` is replaced by the hash of the compilation. (The last hash stored in the records)
+`[hash]` 被 compilation 生命周期的 hash 替换。（最后一个 hash 存储在记录中）
 
-> Default: `"[hash].hot-update.json"`
+> 默认值：`"[hash].hot-update.json"`
 
 ### `output.jsonpFunction`
 
-The JSONP function used by webpack for async loading of chunks.
+webpack 中用于异步加载(async loading) chunk 的 JSONP 函数。
 
-A shorter function may reduce the file size a bit. Use a different identifier when having multiple webpack instances on a single page.
+较短的函数可能会减少文件大小。当单页有多个 webpack 实例时，请使用不同的标识符(identifier)。
 
-> Default: `"webpackJsonp"`
+> 默认值：`"webpackJsonp"`
 
 ### `output.library`
 
-If set, export the bundle as library. `output.library` is the name.
+如果设置此选项，会将 bundle 导出为 library。`output.library` 是 library 的名称。
 
-Use this if you are writing a library and want to publish it as single file.
+如果你正在编写 library，并且需要将其发布为单独的文件，请使用此选项。
 
 ### `output.libraryTarget`
 
-Which format to export the library:
+library 的导出格式
 
-`"var"` - Export by setting a variable: `var Library = xxx` (default)
+`"var"` - 导出为一个变量：`var Library = xxx`（默认）
 
-`"this"` - Export by setting a property of `this`: `this["Library"] = xxx`
+`"this"` - 导出为 `this` 的一个属性：`this["Library"] = xxx`
 
-`"commonjs"` - Export by setting a property of `exports`: `exports["Library"] = xxx`
+`"commonjs"` - 导出为 `exports` 的一个属性：`exports["Library"] = xxx`
 
-`"commonjs2"` - Export by setting `module.exports`: `module.exports = xxx`
+`"commonjs2"` - 通过 `module.exports`：`module.exports = xxx` 导出
 
-`"amd"` - Export to AMD (optionally named - set the name via the library option)
+`"amd"` - 导出为 AMD（可选命名 - 通过 library 选项设置名称）
 
-`"umd"` - Export to AMD, CommonJS2 or as property in root
+`"umd"` - 导出为 AMD，CommonJS2 或者导出为 root 的属性
 
-> Default: `"var"`
+> 默认值：`"var"`
 
-If `output.library` is not set, but `output.libraryTarget` is set to a value other than `var`, every property of the exported object is copied (Except `amd`, `commonjs2` and `umd`).
+如果 `output.library` 未设置，但是 `output.libraryTarget` 被设置为 `var` 以外的值，则「所导出对象」的每个属性都被复制到「对应的被导出对象」上（除了 `amd`，`commonjs2` 和 `umd`）。
 
 ### `output.path`
 
-The output directory as an **absolute path** (required).
+导出目录为**绝对路径**（必选项）。
 
-`[hash]` is replaced by the hash of the compilation.
+`[hash]` 被 compilation 生命周期的 hash 替换。
+
 
 **config.js**
 
-```javascript
+``` javascript
 output: {
-    path: "/home/proj/public/assets",
-    publicPath: "/assets/"
+	path: "/home/proj/public/assets",
+	publicPath: "/assets/"
 }
 ```
 
 **index.html**
-
-```html
+``` html
 <head>
   <link href="/assets/spinner.gif"/>
 </head>
 ```
 
-And a more complicated example of using a CDN and hashes for assets.
+接下来是一个更复杂的例子，来说明对资源使用 CDN 和 hash。
 
 **config.js**
 
@@ -213,23 +213,26 @@ output: {
 }
 ```
 
-**Note:** In cases when the eventual `publicPath` of output files isn't known at compile time, it can be left blank and set dynamically at runtime in the entry point file. If you don't know the `publicPath` while compiling, you can omit it and set `__webpack_public_path__` on your entry point.
+**注意：**在编译时不知道最终输出文件的 `publicPath` 的情况下，`publicPath` 可以留空，并且在入口起点文件运行时动态设置。如果你在编译时不知道 `publicPath`，你可以先忽略它，并且在入口起点设置 `__webpack_public_path__`。
 
 ```javascript
  __webpack_public_path__ = myRuntimePublicPath
 
-// rest of your application entry
+// 其他的应用程序入口
 ```
 
 ### `output.sourceMapFilename`
 
-The filename of the SourceMaps for the JavaScript files. They are inside the `output.path` directory.
+JavaScript 文件的 SourceMap 的文件名。它们在 `output.path` 目录中。
 
-`[file]` is replaced by the filename of the JavaScript file.
+`[file]` 被 JavaScript 文件的文件名替换。
 
-`[id]` is replaced by the id of the chunk.
+`[id]` 被 chunk 的 id 替换。
 
-`[hash]` is replaced by the hash of the compilation.
+`[hash]` 被 compilation 生命周期的 hash 替换。
 
-> Default: `"[file].map"`
+> 默认值：`"[file].map"`
 
+***
+
+> 原文：https://webpack.js.org/concepts/output/

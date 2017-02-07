@@ -1,5 +1,5 @@
 ---
-title: Concepts
+title: 概念
 sort: 1
 contributors:
   - TheLarkInn
@@ -8,17 +8,17 @@ contributors:
   - johnstew
 ---
 
-*webpack* is a _module bundler_ for modern JavaScript applications. It is [incredibly configurable](/configuration), however, there are **Four Core Concepts** we feel you should understand before you get started!
+*webpack* 是一个现代的 JavaScript 应用程序的_模块打包器(module bundler)_。它有着[难以置信的配置](/configuration)，然而，我们认为你必须在开始前先了解**四个核心概念**！
 
-As part of your webpack learning journey, we wrote this document aimed to give you a **high-level** overview of these concepts, while still providing links to concept specific use-cases.
+作为您的 webpack 学习旅程的一部分，我们写这篇文档目的在于向你传递这些概念的**高度**概述，同时仍然提供特定概念的相关用例。
 
-## Entry
+## 入口(Entry)
 
-webpack creates a graph of all of your application's dependencies. The starting point of this graph is known as an _entry point_. The _entry point_ tells webpack _where to start_ and follows the graph of dependencies to know _what to bundle_. You can think of your application's _entry point_ as the **contextual root** or **the first file to kick off your app**.
+webpack 将创建所有应用程序的依赖关系图表(dependency graph)。图表的起点被称之为_入口起点(entry point)_。_入口起点_告诉 webpack _从哪里开始_，并遵循着依赖关系图表知道_要打包什么_。可以将您应用程序的_入口起点_认为是**根上下文(contextual root)**或 **app 第一个启动文件**。
 
-In webpack we define _entry points_ using the `entry` property in our [webpack configuration object](/configuration).
+在 webpack 中，我们使用 [webpack 配置对象(webpack configuration object)](/configuration) 中的 `entry` 属性来定义_入口_。
 
-The simplest example is seen below:
+接下来我们看一个最简单的例子：
 
 **webpack.config.js**
 
@@ -28,13 +28,13 @@ module.exports = {
 };
 ```
 
-There are multiple ways to declare your `entry` property that are specific to your application's needs.
+这里有多种方式声明应用程序所需的特定 `entry` 属性。
 
-[Learn more!](/concepts/entry-points)
+[了解更多！](/concepts/entry-points)
 
-## Output
+## 出口(Output)
 
-Once you've bundled all of your assets together, we still need to tell webpack **where** to bundle our application. The webpack `output` property describes to webpack **how to treat bundled code**.
+将所有的资源(assets)归拢在一起后，我们还需要告诉 webpack **在哪里**打包我们的应用程序。webpack 的 `output` 属性描述了**如何处理归拢在一起的代码**(bundled code)。
 
 **webpack.config.js**
 
@@ -50,25 +50,25 @@ module.exports = {
 };
 ```
 
-In the example above, through the `output.filename` and `output.path` properties we are describing to webpack the name of our bundle, and where we want it to be emitted to.
+在上面例子中，我们正在通过 `output.filename` 和 `output.path` 属性来描述 webpack bundle 的名称，以及我们想要生成(emit)在哪里。
 
-T> You may see the term **emitted** or **emit** used throughout our documentation and [plugin API](/api/plugins). This is a fancy term for "produced or discharged".
+T> 你可能看到项目**生成(emitted 或 emit)**贯穿我们整个文档和[插件 API](/api/plugins)。它是“生产(produced) 或 排放(discharged)”的特殊术语。
 
-The `output` property has [many more configurable features](/configuration/output), but let's spend some time understanding some of the most common use cases for the `output` property.
+ `output` 属性还有[更多可配置的特性](/configuration/output)，但让我们花一些时间先了解一些 `output` 属性的最常见的用例。
 
-[Learn more!](/concepts/output)
+[了解更多！](/concepts/output)
 
 
-## Loaders
+## 加载器(Loader)
 
-The goal is to have all of the assets in your project to be **webpack's** concern and not the browser's. (This doesn't mean that they all have to be bundled together). webpack treats [every file (.css, .html, .scss, .jpg, etc.) as a module](/concepts/modules). However, webpack **only understands JavaScript**.
+webpack 的目标是，让 **webpack** 聚焦于项目中的所有资源(asset)，而浏览器不需要关注考虑这些（这并不意味着资源(asset)都必须打包在一起）。webpack 把[每个文件(.css, .html, .scss, .jpg, etc.) 都作为模块](/concepts/modules)处理。而且 webpack **只理解 JavaScript**。
 
-**Loaders in webpack _transform these files into modules_ as they are added to your dependency graph.**
+**webpack loader 会_将这些文件转换为模块_，而转换后的文件会被添加到依赖图表中。**
 
-At a high level, they have two purposes in your webpack config.
+在更高层面，webpack 的配置有两个目标。
 
-1. Identify what files should be transformed by a certain loader. (`test` property)
-2. Transform that file so that it can be added to your dependency graph (and eventually your bundle). (`use` property)
+1. 识别出(identify)应该被对应的 loader 进行转换(transform)的那些文件
+2. 由于进行过文件转换，所以能够将被转换的文件添加到依赖图表（并且最终添加到 bundle 中）(`use` 属性)
 
 **webpack.config.js**
 
@@ -91,21 +91,22 @@ const config = {
 module.exports = config;
 ```
 
-In the configuration above we have defined a `rules` property for a single module with two required properties: `test`, and `use`. This tells webpack's compiler the following:
+以上配置中，我们对一个单独的 module 对象定义了 `rules` 属性，里面包含两个必须属性：`test` 和 `use`。这可以告诉 webpack compiler 如下：
 
-> "Hey webpack compiler, when you come across a path that resolves to a '.js' or '.jsx' file inside of a `require()`/`import` statement, **use** the `babel-loader` to transform it before you add it to the bundle".
+> “嘿，webpack compiler，当你碰到「在 `require()`/`import` 语句中被解析为 '.js' 或 '.jsx' 的路径」时，在你把它们添加并打包之前，要先**使用** `babel-loader` 去转换”。
 
-W> It is important to remember when defining rules in your webpack config, you are defining them under `module.rules`, and not `rules`. But webpack will yell at you when doing this incorrectly.
+W> 重要的是要记得，在 webpack 配置中定义 loader 时，要定义在 `module.rules` 中，而不是 `rules`。在定义错时 webpack 会提出严重的警告。
 
-There are more specific properties to define on loaders that we haven't yet covered.
+我们还有尚未提到的 loader，可以设定更多特定属性。
 
-[Learn more!](/concepts/loaders)
+[了解更多！](/concepts/loaders)
 
-## Plugins
+## 插件(Plugins)
 
-Since Loaders only execute transforms on a per-file basis, `plugins` are most commonly used (but not limited to) performing actions and custom functionality on "compilations" or "chunks" of your bundled modules [(and so much more)](/concepts/plugins). The webpack Plugin system is [extremely powerful and customizable](/api/plugins).
+由于 loader 仅在每个文件的基础上执行转换，而 `插件(plugins)` 最常用于（但不限于）在打包模块的“compilation”和“chunk”生命周期执行操作和自定义功能[（查看更多）](/concepts/plugins)。webpack 的插件系统[极其强大和可定制化](/api/plugins)。
 
-In order to use a plugin, you just need to `require()` it and add it to the `plugins` array. Most plugins are customizable via options. Since you can use a plugin multiple times in a config for different purposes, you need to create an instance of it by calling it with `new`.
+由于你可以在一个配置多次使用插件用于不同的目的
+想要使用一个插件，你只需要 `require()` 它，然后把它添加到 `plugins` 数组中。多数插件可以通过选项(option)自定义。由于需要在一个配置中，多次使用一个插件，来针对不同的目的，因此你需要使用 `new` 来创建插件的实例，并且通过实例来调用插件。
 
 **webpack.config.js**
 
@@ -134,8 +135,12 @@ const config = {
 module.exports = config;
 ```
 
-There are many plugins that webpack provides out of the box! Check out our [list of plugins](/plugins) for more information.
+webpack 提供许多开箱可用的插件！查阅我们的[插件列表](/plugins)展示更多信息。
 
-Using plugins in your webpack config is straight-forward, however there are many use-cases that are worth discussing further.
+在 webpack 配置中使用插件是简单直接的，然而还是有很多用例值得我们深入讨论。
 
-[Learn more!](/concepts/plugins)
+[了解更多！](/concepts/plugins)
+
+***
+
+> 原文：https://webpack.js.org/concepts/

@@ -1,5 +1,5 @@
 ---
-title: Migrating from v1 to v2
+title: 从 v1 迁移到 v2
 sort: 20
 contributors:
   - sokra
@@ -15,7 +15,7 @@ contributors:
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
 
-These options were replaced by a single option `resolve.modules`. See [resolving](/configuration/resolve) for more usage.
+上述配置项被一个单独的配置项 `resolve.modules` 取代。详见 [resolving](/configuration/resolve)。
 
 ``` diff
   resolve: {
@@ -29,17 +29,15 @@ These options were replaced by a single option `resolve.modules`. See [resolving
 
 ## `resolve.extensions`
 
-This option no longer requires passing an empty string. This behavior was moved to `resolve.enforceExtension`. See [resolving](/configuration/resolve) for more usage.
+此配置项不再需要传一个空字符串。此行为被迁移到 `resolve.enforceExtension`。详见 [resolving](/configuration/resolve)。
 
 ## `resolve.*`
 
-More stuff was changed here. Not listed in detail as it's not commonly used. See [resolving](/configuration/resolve) for details.
+还有更多的变化，由于不常用，不在这里详细列出。详见 [resolving](/configuration/resolve)。
 
-## `module.loaders` is now `module.rules`
+## `module.loaders` 改成了 `module.rules`
 
-The old loader configuration was superseded by a more powerful rules system, which allows configuration of loaders and more.
-For compatibility reasons, the old `module.loaders` syntax is still valid and the old names are parsed.
-The new naming conventions are easier to understand and are a good reason to upgrade the configuration to using `module.rules`.
+旧的 loader 配置被更强大的 rules 系统取代，后者允许配置 loader 以及其他更多项。为了兼容旧版，`module.loaders` 语法被保留，旧的属性名依然可以被解析。新的命名约定更易于理解并且是升级配置使用 `module.rules` 的好理由。
 
 ``` diff
   module: {
@@ -72,11 +70,9 @@ The new naming conventions are easier to understand and are a good reason to upg
   }
 ```
 
-## Chaining loaders
+## 链式 loaders
 
-Like in webpack v1, loaders can be chained to pass results from loader to loader. Using the [rule.use](/configuration/module#rule-use)
- configuration option, `use` can be set to a list of loaders.
-In webpack v1, loaders were commonly chained with `!`. This style is only supported using the legacy option `module.loaders`.
+与 v1 版本相同，loaders 可以链式调用，上一个 loader 的输出被作为输入传给下一个 loader。使用 [rule.use](/configuration/module#rule-use) 配置项，`use` 可以设置为一个 loaders 的列表。在 v1 版本中，loaders 通常被用 `!` 连写。这一写法在新版中只在使用旧的 `module.loaders` 时有效。
 
 ``` diff
   module: {
@@ -93,7 +89,7 @@ In webpack v1, loaders were commonly chained with `!`. This style is only suppor
   }
 ```
 
-## Automatic `-loader` module name extension removed
+## 取消了在模块名中自动添加 `-loader`  后缀
 
 It is not possible anymore to omit the `-loader` extension when referencing loaders:
 
@@ -114,7 +110,7 @@ It is not possible anymore to omit the `-loader` extension when referencing load
   }
 ```
 
-You can still opt-in to the old behavior with the `resolveLoader.moduleExtensions` configuration option, but this is not recommended.
+你仍然可以启用这一旧行为，方法是通过配置 `resolveLoader.moduleExtensions` 项，但是我们不推荐这么做。
 
 ``` diff
 + resolveLoader: {
@@ -122,12 +118,11 @@ You can still opt-in to the old behavior with the `resolveLoader.moduleExtension
 + }
 ```
 
-See [#2986](https://github.com/webpack/webpack/issues/2986) for the reason behind this change.
+了解这一改变背后的原因，请参阅 [#2986](https://github.com/webpack/webpack/issues/2986)。
 
-## `json-loader` is not required anymore
+## `json-loader` 不再需要手动添加
 
-When no loader has been configured for a JSON file, webpack will automatically try to load the JSON
-file with the [`json-loader`](https://github.com/webpack/json-loader).
+如果没有为 JSON 文件配置 loader，webpack 将自动尝试通过 加载 [`json-loader`](https://github.com/webpack/json-loader) JSON 文件。
 
 ``` diff
   module: {
@@ -140,17 +135,15 @@ file with the [`json-loader`](https://github.com/webpack/json-loader).
   }
 ```
 
-[We decided to do this](https://github.com/webpack/webpack/issues/3363) in order to iron out environment differences
-  between webpack, node.js and browserify.
+[我们决定这么做](https://github.com/webpack/webpack/issues/3363) 以消弭 webpack、 node.js 和 browserify 之间的环境差异。
 
-## Loaders in configuration resolve relative to context
+## loader 默认的 resolve 配置是相对于 context 的
 
-In webpack 1 configured loaders resolve relative to the matched file.
-Since webpack 2 configured loaders resolve relative to the `context` option.
+在 webpack 1 中，loader 默认配置下 resolve 相对于被匹配的文件。而在 webpack 2 中默认配置的 resolve 相对于 `context` 配置项。
 
-This solves some problems with duplicate modules caused by loaders when using `npm link` or referencing modules outside of the `context`.
+这解决了一些问题，比如使用 `npm link` 或引用 `context` 之外的模块时导致重复载入。
 
-You may remove some hacks to work around this:
+你可以不再需要使用一些变通方案了：
 
 ``` diff
   module: {
@@ -167,7 +160,7 @@ You may remove some hacks to work around this:
   }
 ```
 
-## `module.preLoaders` and `module.postLoaders` was removed
+## 取消了 `module.preLoaders` 以及 `module.postLoaders`
 
 ``` diff
   module: {
@@ -184,8 +177,8 @@ You may remove some hacks to work around this:
 
 ## `UglifyJsPlugin` sourceMap
 
-The `sourceMap` option of the `UglifyJsPlugin` now defaults to `false` instead of `true`.
-This means that if you are using source maps for minimized code or want correct line numbers for uglifyjs warnings, you need to set `sourceMap: true` for `UglifyJsPlugin`.
+`UglifyJsPlugin` 的 `sourceMap` 配置项现在默认为 `false` 而不是 `true`。
+这意味着如果你在压缩代码时启用了 source map，或者想要让 uglifyjs 的警告能够对应到正确的代码行，你需要将 `UglifyJsPlugin` 的 `sourceMap` 设为 `true`。
 
 ``` diff
   devtool: "source-map",
@@ -198,8 +191,8 @@ This means that if you are using source maps for minimized code or want correct 
 
 ## `UglifyJsPlugin` warnings
 
-The `compress.warnings` option of the `UglifyJsPlugin` now defaults to `false` instead of `true`.
-This means that if you want to see uglifyjs warnings, you need to set `compress.warnings` to `true`.
+`UglifyJsPlugin` 的 `compress.warnings` 配置项现在默认为 `false` 而不是 `true`。
+这意味着如果你想要看到 uglifyjs 的警告信息，你需要将 `compress.warnings` 设为 `true`。
 
 ``` diff
   devtool: "source-map",
@@ -212,13 +205,13 @@ This means that if you want to see uglifyjs warnings, you need to set `compress.
   ]
 ```
 
-## `UglifyJsPlugin` minimize loaders
+## `UglifyJsPlugin` 压缩 loaders
 
-`UglifyJsPlugin` no longer switches loaders into minimize mode. The `minimize: true` setting needs to be passed via loader options in long-term. See loader documentation for relevant options.
+`UglifyJsPlugin` 不再压缩 loaders。在未来很长一段时间里，需要通过设置 `minimize:true` 来压缩 loaders。参考 loader 文档里的相关配置项。
 
-The minimize mode for loaders will be removed in webpack 3 or later.
+loaders 的压缩模式将在 webpack 3 或更高的版本中被取消。
 
-To keep compatibility with old loaders, loaders can be switched to minimize mode via plugin:
+为了兼容旧的 loaders，loaders 可以通过插件来切换到压缩模式：
 
 ``` diff
   plugins: [
@@ -228,13 +221,13 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
   ]
 ```
 
-## `DedupePlugin` has been removed
+## `DedupePlugin` 被移除
 
-`webpack.optimize.DedupePlugin` isn't needed anymore. Remove it from your configuration.
+不再需要 `webpack.optimize.DedupePlugin`。请从配置中移除。
 
-## `BannerPlugin` - breaking change
+## `BannerPlugin` - 破坏性改动
 
-`BannerPlugin` no longer accept two parameters but rather only a single options object.
+`BannerPlugin` 不在接受两个参数而是只接受单独的 options 对象。
 
 ``` diff
   plugins: [
@@ -243,9 +236,9 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
   ]
 ```
 
-## `OccurrenceOrderPlugin` is now on by default
+## `OccurrenceOrderPlugin` 被默认加载
 
-It's no longer necessary to specify it in configuration.
+我们不再需要在配置里指定它：
 
 ``` diff
   plugins: [
@@ -253,13 +246,13 @@ It's no longer necessary to specify it in configuration.
   ]
 ```
 
-## `ExtractTextWebpackPlugin` - breaking change
+## `ExtractTextWebpackPlugin` - 大改变
 
-[ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) 1.0.0 does not work with webpack v2. You will need to install ExtractTextPlugin v2 explicitly.
+[ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) 1.0.0 不能在 webpack v2 下工作。 你需要明确地安装 ExtractTextPlugin v2。
 
 `npm install --save-dev extract-text-webpack-plugin@beta`
 
- The configuration changes for this plugin are mainly syntactical.
+这一插件的配置变化主要体现在语法上。
 
 ### `ExtractTextPlugin.extract`
 
@@ -269,8 +262,8 @@ module: {
     test: /.css$/,
 -    loader: ExtractTextPlugin.extract("style-loader", "css-loader", { publicPath: "/dist" })
 +    loader: ExtractTextPlugin.extract({
-+      fallback: "style-loader",
-+      use: "css-loader",
++      fallbackLoader: "style-loader",
++      loader: "css-loader",
 +      publicPath: "/dist"
 +    })
   ]
@@ -290,17 +283,17 @@ plugins: [
 ]
 ```
 
-## Full dynamic requires now fail by default
+## 全动态 requires 现在默认会失败
 
-A dependency with only an expression (i. e. `require(expr)`) will now create an empty context instead of an context of the complete directory.
+只有一个表达式的依赖（例如 `require(expr)`）将创建一个空的 context 而不是一个完整目录的 context。
 
-Best refactor this code as it won't work with ES2015 Modules. If this is not possible you can use the `ContextReplacementPlugin` to hint the compiler to the correct resolving.
+如果有上面那样的代码，最好把它重构了，因为在 ES2015 模块下它不可以用。如果你确定不会有 ES2015 模块，你可以使用 `ContextReplacementPlugin` 来提示编译器进行正确的处理。
 
-?> Link to an article about dynamic dependencies.
+?> 此处欠一篇关于动态依赖的文章。
 
-### Using custom arguments in CLI and configuration
+### 在 CLI 和配置中使用自定义参数
 
-If you abused the CLI to pass custom arguments to the configuration like so:
+如果你之前滥用 CLI 来传自定义参数到配置中，比如：
 
 `webpack --custom-stuff`
 
@@ -311,9 +304,9 @@ var customStuff = process.argv.indexOf("--custom-stuff") >= 0;
 module.exports = config;
 ```
 
-You may notice that this is no longer allowed. The CLI is more strict now.
+你将会发现新版中不再允许这么做。CLI 现在更加严格了。
 
-Instead there is an interface for passing arguments to the configuration. This should be used instead. Future tool may rely on this.
+替代地，现在提供了一个接口来传递参数给配置。我们应该采用这种新方式，在未来许多工具将可能依赖它。
 
 `webpack --env.customStuff`
 
@@ -325,17 +318,17 @@ module.exports = function(env) {
 };
 ```
 
-See [CLI](/api/cli).
+详见 [CLI](/api/cli)。
 
-## `require.ensure` and AMD `require` is asynchronous
+## `require.ensure` 以及 AMD `require` 的异步
 
-These functions are now always asynchronous instead of calling their callback sync if the chunk is already loaded.
+现在这些函数总是异步的，而不是当 chunk 已经加载过的时候同步调用它们的 callback。
 
-**nb `require.ensure` now depends upon native `Promise`s. If using `require.ensure` in an environment that lacks them then you will need a polyfill. **
+**注意 `require.ensure` 现在依赖于原生的 `Promise`。如果在不支持 Promise 的环境里使用 `require.ensure`，你需要添加 polyfill。**
 
-## Loader configuration is through `options`
+## 通过 `options` 配置 loader
 
-You can *no longer* configure a loader with a custom property in the `webpack.config.js`. It must be done through the `options`. The following configuration with the `ts` property is no longer valid with webpack 2:
+你不能再通过 `webpack.config.js` 的自定义属性来配置 loader。只能通过 `options` 来配置。下面配置的 `ts` 属性在 webpack 2 下不再有效：
 
 ```js
 module.exports = {
@@ -351,9 +344,9 @@ module.exports = {
 }
 ```
 
-### What are `options`?
+### 什么是 `options`?
 
-Good question. Well, strictly speaking it's 2 possible things; both ways to configure a webpack loader. Classically `options` was called `query` and was a string which could be appended to the name of the loader. Much like a query string but actually with [greater powers](https://github.com/webpack/loader-utils#parsequery):
+好问题。严格来说，有两种办法，都可以用来配置 webpack 的 loader。典型的 `options` 被称为 `query`，是一个可以被添加到 loader 名之后的字符串。它比较像一个 query string，但是实际上有[更强大的能力](https://github.com/webpack/loader-utils#parsequery)：
 
 ```js
 module.exports = {
@@ -367,7 +360,7 @@ module.exports = {
 }
 ```
 
-But it can also be a separately specified object that's supplied alongside a loader:
+不过它也可以分开来，写成一个单独的对象，紧跟在 loader 属性后面：
 
 ```js
 module.exports = {
@@ -384,9 +377,9 @@ module.exports = {
 
 ## `LoaderOptionsPlugin` context
 
-Some loaders need context information and read them from the configuration. This need to be passed via loader options in long-term. See loader documentation for relevant options.
+有的 loader 需要从配置中读取一些 context 信息。在未来很长一段时间里，这将需要通过 loader options 传入。详见 loader 文档的相关选项。
 
-To keep compatibility with old loaders, this information can be passed via plugin:
+为了保持对旧 loaders 的兼容，这些信息可以通过插件传进来：
 
 ``` diff
   plugins: [
@@ -400,11 +393,11 @@ To keep compatibility with old loaders, this information can be passed via plugi
 
 ## `debug`
 
-The `debug` option switched loaders to debug mode in webpack 1. This need to be passed via loader options in long-term. See loader documentation for relevant options.
+在 webpack 1 中 `debug` 配置项切换 loaders 到 debug 模式。在未来很长一段时间里，这将需要通过 loader 配置项传递。详见 loader 文档的相关选项。
 
-The debug mode for loaders will be removed in webpack 3 or later.
+loaders 的 debug 模式将在 webpack 3 或后续版本中取消。
 
-To keep compatibility with old loaders, loaders can be switched to debug mode via plugin:
+为了保持对旧 loaders 的兼容，loader 可以通过插件来切换到 debug 模式：
 
 ``` diff
 - debug: true,
@@ -415,9 +408,9 @@ To keep compatibility with old loaders, loaders can be switched to debug mode vi
   ]
 ```
 
-## Code Splitting with ES2015
+## ES2015 的代码分割
 
-In webpack v1, you could use `require.ensure` as a method to lazily-load chunks for your application:
+在 webpack v1 中，你能使用 `require.ensure` 作为方法来懒加载 chunks 到你的应用中：
 
 ```javascript
 require.ensure([], function(require) {
@@ -425,11 +418,11 @@ require.ensure([], function(require) {
 });
 ```
 
-The ES2015 Loader spec defines `import()` as method to load ES2015 Modules dynamically on runtime.
+ES2015 模块加载规范定义了 `import()` 方法来运行时动态地加载 ES2015 模块。
 
-webpack treats `import()` as a split-point and puts the requested module in a separate chunk.
+webpack 将 `import()` 作为分割点并将被请求的模块放到一个单独的 chunk 中。
 
-`import()` takes the module name as argument and returns a Promise.
+`import()` 接收模块名作为参数，并返回一个 Promise。
 
 ``` js
 function onClick() {
@@ -441,9 +434,9 @@ function onClick() {
 }
 ```
 
-Good news: Failure to load a chunk can be handled now because they are `Promise` based.
+好消息是：如果加载 chunk 失败，我们可以进行处理，因为现在它基于 `Promise`。
 
-Caveat: `require.ensure` allows for easy chunk naming with the optional third argument, but `import` API doesn't offer that capability yet. If you want to keep that functionality, you can continue using `require.ensure`.
+警告：`require.ensure` 允许用可选的第三个参数为 chunk 简单命名，但是 `import` API 还未提供这个能力。如果你想要保留这个功能，你可以继续使用 `require.ensure`。
 
 ```javascript
 require.ensure([], function(require) {
@@ -451,27 +444,27 @@ require.ensure([], function(require) {
 }, "custom-chunk-name");
 ```
 
-(Note on the deprecated `System.import`: webpack's use of `System.import` didn't fit the proposed spec, so it was deprecated in [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) in favor of `import()`)
+（注意废弃的 `System.import`：webpack 对 `System.import` 的使用不符合新提出的标准，所以它在 [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28)  版本中被废弃，转向支持 `import()`）
 
-If you want to use `import` with [Babel](http://babeljs.io/), you'll need to install/add the [dynamic-import](http://babeljs.io/docs/plugins/syntax-dynamic-import/) syntax plugin while it's still Stage 3 to get around the parser error. When the proposal is added to the spec this won't be necessary anymore.
+由于这个建议还在 Stage 3，如果你想要同时使用 `import` 和 [Babel](http://babeljs.io/)，你需要安装/添加 [dynamic-import](http://babeljs.io/docs/plugins/syntax-dynamic-import/) 语法插件来绕过解析错误。当建议被添加到规范之后，就不再需要这个语法插件了。
 
-## Dynamic expressions
+## 动态表达式
 
-It's possible to pass a partial expression to `import()`. This is handled similar to expressions in CommonJS (webpack creates a [context](https://webpack.github.io/docs/context.html) with all possible files).
+可以传递部分表达式给 `import()`。这与 CommonJS 对表达式的处理方式一致（webpack 为所有可能匹配的文件创建 context）。
 
-`import()` creates a separate chunk for each possible module.
+`import()` 为每一个可能的模块创建独立的 chunk。
 
 ``` js
 function route(path, query) {
   return import(`./routes/${path}/route`)
     .then(route => new route.Route(query));
 }
-// This creates a separate chunk for each possible route
+// 上面代码为每个可能的路由创建独立的 chunk
 ```
 
-## Mixing ES2015 with AMD and CommonJS
+## 混合使用 ES2015、AMD 和 CommonJS
 
-As for AMD and CommonJS you can freely mix all three module types (even within the same file). webpack behaves similar to babel and node-eps in this case:
+你可以自由混合使用三种模块类型（甚至在同一个文件中）。在这个情况中 webpack 的行为和 babel 以及 node-eps 一致：
 
 ```javascript
 // CommonJS consuming ES2015 Module
@@ -491,7 +484,7 @@ typeof fs.readFileSync === "function";
 typeof readFileSync === "function";
 ```
 
-It is important to note that you will want to tell Babel to not parse these module symbols so webpack can use them. You can do this by setting the following in your `.babelrc` or `babel-loader` options.
+It is important to note that you will want to tell Babel to not parse these module symbols so webpack can use them. You can do this by setting the following in your `.babelrc` or babel-loader options.
 
 **.babelrc**
 
@@ -505,20 +498,20 @@ It is important to note that you will want to tell Babel to not parse these modu
 
 ## Hints
 
-No need to change something, but opportunities
+不需要改变什么，不过也可以改变。
 
-### Template strings
+### 模板字符串
 
-webpack now supports template strings in expressions. This means you can start using them in webpack constructs:
+webpack 现在支持表达式中的模板字符串了。这意味着你可以在 webpack 构建中使用它们：
 
 ``` diff
 - require("./templates/" + name);
 + require(`./templates/${name}`);
 ```
 
-### Configuration Promise
+### 配置中使用 Promise
 
-webpack now supports returning a `Promise` from the configuration file. This allows to do async processing in you configuration file.
+webpack 现在支持在配置文件中返回 `Promise` 了。这让你能在配置文件中做异步处理。
 
 **webpack.config.js**
 
@@ -534,9 +527,9 @@ module.exports = function() {
 };
 ```
 
-### Advanced loader matching
+### 高级 loader 匹配
 
-webpack now supports more things to match on for loaders.
+webpack 现在支持对 loader 进行更多方式的匹配。
 
 ``` js
 module: {
@@ -550,27 +543,27 @@ module: {
 }
 ```
 
-### More CLI options
+### 更多的 CLI 参数项
 
-There are some new CLI options for you to use:
+你可以使用一些新的 CLI 参数项：
 
-`--define process.env.NODE_ENV="production"` See [`DefinePlugin`](/plugins/define-plugin/).
+`--define process.env.NODE_ENV="production"` 见 [`DefinePlugin`](/plugins/define-plugin/)。
 
-`--display-depth` displays the distance to the entry point for each module.
+`--display-depth` 显示每个模块到入口的距离。
 
-`--display-used-exports` display info about which exports are used in a module.
+`--display-used-exports` 显示一个模块中被使用的 exports 信息。
 
-`--display-max-modules` sets the number for modules displayed in the output (defaults to 15).
+`--display-max-modules` 设置输出时显示的模块数量（默认是 15）。
 
-`-p` also defines `process.env.NODE_ENV` to `"production"` now.
+`-p` 能够定义 `process.env.NODE_ENV` 为 `"production"`。
 
-## Loader changes
+## Loader 变化
 
-Changes only relevant for loader authors.
+仅与 loader 作者有关的改变。
 
 ### Cacheable
 
-Loaders are now cacheable by default. Loaders must opt-out if they are not cacheable.
+Loaders 现在默认可被缓存。Loaders 如果不想被缓存，需要选择不被缓存。
 
 ``` diff
   // Cacheable loader
@@ -588,14 +581,13 @@ Loaders are now cacheable by default. Loaders must opt-out if they are not cache
   }
 ```
 
-### Complex options
+### 复合 options
 
-webpack 1 only support `JSON.stringify`-able options for loaders.
-webpack 2 now supports any JS object as loader options.
+webpack 1 只支持能够 `JSON.stringify` 的对象作为配置项。webpack 2 现在支持任意 JS 对象作为 loader 配置项。
 
-Using complex options comes with one restriction. You may need to have a `ident` for the option object to make it referenceable by other loaders.
+使用复合 options 只有一个附加条件。你需要在 options 对象上添加一个 `ident`，让它能够被其他 loader 引用。
 
-Having an `ident` on the options object means to be able to reference this options object in inline loaders. Here is an example:
+options 对象上有了 `ident` ，内联的 loader 就可以引用这个 options 对象。下面是个例子：
 
 `require("some-loader??by-ident!resource")`
 
@@ -610,8 +602,7 @@ Having an `ident` on the options object means to be able to reference this optio
 }
 ```
 
-This inline style should not be used by regular code, but it's often used by loader generated code.
-I. e. the `style-loader` generates a module that `require`s the remaining request (which exports the CSS).
+这种内联风格在常规的代码里一般用不着，但是在 loader 生成的代码里比较常见。比如，`style-loader` 生成一个模块，通过 `require` 加载其余的请求（它们输出 CSS）。
 
 ``` js
 // style-loader generated code (simplified)
@@ -621,4 +612,8 @@ var css = require("-!css-loader?{"modules":true}!postcss-loader??postcss-ident")
 addStyle(css);
 ```
 
-So if you use complex options tell your users about the `ident`.
+所以如果你使用复合 options，告诉你的用户你使用的 `ident`。
+
+***
+
+> 原文：https://webpack.js.org/guides/migrating/

@@ -1,5 +1,5 @@
 ---
-title: DevServer
+title: 开发中 Server(DevServer)
 sort: 9
 contributors:
   - sokra
@@ -8,17 +8,17 @@ contributors:
   - charlespwd
 ---
 
-webpack-dev-server can be used to quickly develop an application. See the ["How to Develop?"](/guides/development) to get started.
+webpack-dev-server 能够用于快速开发应用程序。请查看[“如何开发？”](/guides/development)入门。
 
-This page describes the options that effect the behavior of webpack-dev-server (short: dev-server).
+此页面描述影响 webpack-dev-server(简写为：dev-server) 行为的选项。
 
-T> Options that are compatible with [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) have 🔑 next to them.
+T> 与 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) 兼容的选项旁边有 🔑。
 
 ## `devServer`
 
 `object`
 
-This set of options is picked up by [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and can be used to change its behavior in various ways. Here's a simple example that gzips and serves everything from our `dist/` directory:
+通过来自 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 的这些选项，能够用多种方式改变其行为。这里有一个简单的例子，所有来自 `dist/` 目录的文件都做 gzip 压缩和提供为服务：
 
 ```js
 devServer: {
@@ -28,7 +28,7 @@ devServer: {
 }
 ```
 
-When the server is started, there will be a message prior to the list of resolved modules:
+当服务器启动时，在解析模块列表之前会有一条消息：
 
 ```bash
 http://localhost:9000/
@@ -36,33 +36,33 @@ webpack result is served from /build/
 content is served from dist/
 ```
 
-that will give some background on where the server is located and what it's serving.
+这将给出一些背景知识，就能知道服务器的访问位置，并且知道服务已启动。
 
-If you're using dev-server through the Node.js API, the options in `devServer` will be ignored. Pass the options as a second parameter instead: `new WebpackDevServer(compiler, {...})`.
+如果你通过 Node.js API 来使用 dev-server， `devServer` 中的选项将被忽略。将选项作为第二个参数传入： `new WebpackDevServer(compiler, {...})`。
 
 
 ## `devServer.clientLogLevel`
 
 `string`
 
-When using *inline mode*, the console in your DevTools will show you messages e.g. before reloading, before an error or when Hot Module Replacement is enabled. This may be too verbose.
+当使用*内联模式(inline mode)*时，在开发工具(DevTools)的控制台(console)将显示消息，如：在重新加载之前，在一个错误之前，或者模块热替换(Hot Module Replacement)启用时。这可能显得很繁琐。
 
-You can prevent all these messages from showing, by using this option:
+你可以阻止所有这些消息显示，使用这个选项：
 
 ```js
 clientLogLevel: "none"
 ```
 
-Possible values are `none`, `error`, `warning` or `info` (default).
+可能的值有 `none`, `error`, `warning` 或者 `info`（默认值）。
 
-Note that the console will *always* show bundle errors and warnings. This option only effects the message before it.
+注意，控制台将*始终*显示 bundle 的错误和警告。这个选项只影响它之前的消息。
 
 
 ## `devServer.compress`
 
 `boolean`
 
-Enable [gzip compression](https://betterexplained.com/articles/how-to-optimize-your-site-with-gzip-compression/) for everything served:
+一切服务都启用[gzip 压缩](https://betterexplained.com/articles/how-to-optimize-your-site-with-gzip-compression/)：
 
 ```js
 compress: true
@@ -73,23 +73,23 @@ compress: true
 
 `boolean` `string` `array`
 
-Tell the server where to serve content from. This is only necessary if you want to serve static files. [`devServer.publicPath`](#devserver-publicpath-) will be used to determine where the bundles should be served from, and takes precedence.
+告诉服务器从哪里提供内容。只有在你想要提供静态文件时才需要。[`devServer.publicPath`](#devserver-publicpath-) 将用于确定应该从哪里提供 bundle，并且此选项优先。
 
-By default it will use your current working directory to serve content, but you can modify this to another directory:
+默认情况下，将使用当前工作目录作为提供内容的目录，但是你可以修改为其他目录：
 
 ```js
 contentBase: path.join(__dirname, "public")
 ```
 
-Note that it is recommended to use an absolute path.
+注意，推荐使用绝对路径。
 
-It is also possible to serve from multiple directories:
+但是也可以从多个目录提供内容：
 
 ```js
 contentBase: [path.join(__dirname, "public"), path.join(__dirname, "assets")]
 ```
 
-To disable `contentBase`:
+禁用 `contentBase`：
 
 ```js
 contentBase: false
@@ -100,26 +100,26 @@ contentBase: false
 
 `string`
 
-This option lets you reduce the compilations in **lazy mode**.
-By default in **lazy mode**, every request results in a new compilation. With `filename`, it's possible to only compile when a certain file is requested.
+在**惰性模式**中，此选项可减少编译。
+默认在**惰性模式**，每个请求结果都会产生全新的编译。使用 `filename`，可以只在某个文件时被请求时编译。
 
-If `output.filename` is set to `bundle.js` and `filename` is used like this:
+如果 `output.filename` 设置为 `bundle.js` ，`filename` 使用如下：
 
 ```js
 lazy: true,
 filename: "bundle.js"
 ```
 
-It will now only compile the bundle when `/bundle.js` is requested.
+现在只有在请求 `/bundle.js` 时候，才会编译 bundle。
 
-T> `filename` has no effect when used without **lazy mode**.
+T> `filename` 在不使用**惰性加载**时没有效果。
 
 
 ## `devServer.headers` 🔑
 
 `object`
 
-Adds headers to all requests:
+在所有请求中添加首部内容：
 
 ```js
 headers: {
@@ -132,13 +132,13 @@ headers: {
 
 `boolean` `object`
 
-When using the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History), the `index.html` page will likely have be served in place of any `404` responses. Enable this by passing:
+当使用[HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History)，任意的 `404` 响应可以提供为 `index.html` 页面。通过传入以下启用：
 
 ```js
 historyApiFallback: true
 ```
 
-By passing an object this behavior can be controlled further using options like `rewrites`:
+通过传入一个对象，比如使用 `rewrites` 这个选项，此行为可进一步地控制：
 
 ```js
 historyApiFallback: {
@@ -150,7 +150,7 @@ historyApiFallback: {
 }
 ```
 
-When using dots in your path (common with Angular), you may need to use the `disableDotRule`:
+当路径中使用点(dot)（常见于 Angular），你可能需要使用 `disableDotRule`：
 
 ```js
 historyApiFallback: {
@@ -158,14 +158,14 @@ historyApiFallback: {
 }
 ```
 
-For more options and information, see the [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) documentation.
+更多选项和信息，查看 [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) 文档。
 
 
-## `devServer.host` - CLI only
+## `devServer.host` - 只用在命令行工具(CLI)
 
 `string`
 
-Specify a host to use. By default this is `localhost`. If you want your server to be accessible externally, specify it like this:
+指定使用一个 host。默认是 `localhost`。如果你希望服务器外部可访问，指定如下：
 
 ```js
 host: "0.0.0.0"
@@ -176,7 +176,7 @@ host: "0.0.0.0"
 
 `boolean`
 
-Enable webpack's Hot Module Replacement feature:
+启用 webpack 的模块热替换特性：
 
 ```js
 hot: true
@@ -200,13 +200,13 @@ hotOnly: true
 
 `boolean` `object`
 
-By default dev-server will be served over HTTP. It can optionally be served over HTTP/2 with HTTPS:
+默认情况下，dev-server 通过 HTTP 提供服务。也可以选择带有 HTTPS 的 HTTP/2 提供服务：
 
 ```js
 https: true
 ```
 
-With the above setting a self-signed certificate is used, but you can provide your own:
+使用以下设置自签名证书，但是你可以提供自己的：
 
 ```js
 https: {
@@ -216,55 +216,55 @@ https: {
 }
 ```
 
-This object is passed straight to Node.js HTTPS module, so see the [HTTPS documentation](https://nodejs.org/api/https.html) for more information.
+此对象直接传递到 Node.js HTTPS 模块，所以更多信息请查看 [HTTPS 文档](https://nodejs.org/api/https.html)。
 
 
-## `devServer.inline` - CLI only
+## `devServer.inline` - 只用在命令行工具(CLI)
 
 `boolean`
 
-Toggle between the dev-server's two different modes. By default the application will be served with *inline mode* enabled. This means that a script will be inserted in your bundle to take care of live reloading, and build messages will appear in the browser console.
+在 dev-server 的两种不同模式之间切换。默认情况下，应用程序启用*内联模式(inline mode)*。这意味着一段处理实时重载的脚本被插入到你的包(bundle)中，并且构建消息将会出现在浏览器控制台。
 
-It is also possible to use **iframe mode**, which uses an `<iframe>` under a notification bar with messages about the build. To switch to **iframe mode**:
+也可以使用 **iframe 模式**，它在通知栏下面使用 `<iframe>` 标签，包含了关于构建的消息。切换到 **iframe 模式**：
 
 ```js
 inline: false
 ```
 
-T> Inline mode is recommended when using Hot Module Replacement.
+T> 当使用模块热替换时，建议使用内联模式(inline mode)。
 
 
 ## `devServer.lazy` 🔑
 
 `boolean`
 
-When `lazy` is enabled, the dev-server will only compile the bundle when it gets requested. This means that webpack will not watch any file changes. We call this **lazy mode**.
+当启用 `lazy` 时，dev-server 只有在请求时才编译包(bundle)。这意味着 webpack 不会监视任何文件改动。我们称之为“**惰性模式**”。
 
 ```js
 lazy: true
 ```
 
-T> `watchOptions` will have no effect when used with **lazy mode**.
+T> `watchOptions` 在使用**惰性模式**时无效。
 
-T> If you use the CLI, make sure **inline mode** is disabled.
+T> 如果使用命令行工具(CLI)，请确保**内联模式(inline mode)**被禁用。
 
 
 ## `devServer.noInfo` 🔑
 
 `boolean`
 
-With `noInfo` enabled, messages like the webpack bundle information that is shown when starting up and after each save, will be hidden. Errors and warnings will still be shown.
+启用 `noInfo` 后，诸如「启动时和每次保存之后，那些显示的 webpack 包(bundle)信息」的消息将被隐藏。错误和警告仍然会显示。
 
 ```js
 noInfo: true
 ```
 
 
-## `devServer.port` - CLI only
+## `devServer.port` - 只用在命令行工具(CLI)
 
 `number`
 
-Specify a port number to listen for requests on:
+指定要监听请求的端口号：
 
 ```js
 port: 8080
@@ -275,11 +275,11 @@ port: 8080
 
 `object`
 
-Proxying some URLs can be useful when you have a separate API backend development server and you want to send API requests on the same domain.
+如果你有单独的后端开发服务器 API，并且希望在同域名下发送 API 请求 ，那么代理某些 URL 会很有用。
 
-The dev-server makes use of the powerful [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) package. Checkout its [documentation](https://github.com/chimurai/http-proxy-middleware#options) for more advanced usages.
+dev-server 使用了非常强大的 [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) 包。更多高级用法，请查阅其[文档](https://github.com/chimurai/http-proxy-middleware#options)。
 
-With a backend on `localhost:3000`, you can use this to enable proxying:
+在 `localhost:3000` 上有后端服务的话，你可以这样启用代理：
 
 ```js
 proxy: {
@@ -287,9 +287,9 @@ proxy: {
 }
 ```
 
-A request to `/api/users` will now proxy the request to `http://localhost:3000/api/users`.
+请求到 `/api/users` 现在会被代理到请求 `http://localhost:3000/api/users`。
 
-If you don't want `/api` to be passed along, we need to rewrite the path:
+如果你不想始终传递 `/api` ，则需要重写路径：
 
 ```js
 proxy: {
@@ -300,7 +300,7 @@ proxy: {
 }
 ```
 
-A backend server running on HTTPS with an invalid certificate will not be accepted by default. If you want to, modify your config like this:
+默认情况下，不接受运行在 HTTPS 上，且使用了无效证书的后端服务器。如果你想要接受，修改配置如下：
 
 ```js
 proxy: {
@@ -311,11 +311,11 @@ proxy: {
 }
 ```
 
-Sometimes you don't want to proxy everything. It is possible to bypass the proxy based on the return value of a function.
+有时你不想代理所有的请求。可以基于一个函数的返回值绕过代理。
 
-In the function you get access to the request, response and proxy options. It must return either `false` or a path that will be served instead of continuing to proxy the request.
+在函数中你可以访问请求体、响应体和代理选项。必须返回 `false` 或路径，来跳过代理请求。
 
-E.g. for a browser request, you want to serve a HTML page, but for an API request you want to proxy it. You could do something like this:
+例如：对于浏览器请求，你想要提供一个 HTML 页面，但是对于 API 请求则保持代理。你可以这样做：
 
 ```js
 proxy: {
@@ -332,13 +332,13 @@ proxy: {
 ```
 
 
-## `devServer.public` - CLI only
+## `devServer.public` - 只用在命令行工具(CLI)
 
 `string`
 
-When using *inline mode* and you're proxying dev-server, the inline client script does not always know where to connect to. It will try to guess the URL of the server based on `window.location`, but if that fails you'll need to use this.
+当使用*内联模式(inline mode)*并代理 dev-server 时，内联的客户端脚本并不总是知道要连接到什么地方。它会尝试根据 `window.location` 来猜测服务器的 URL，但是如果失败，你需要这样。
 
-For example, the dev-server is proxied by nginx, and available on `myapp.test`:
+例如，dev-server 被代理到 nginx，并且在 `myapp.test` 上可用：
 
 ```js
 public: "myapp.test:80"
@@ -349,36 +349,36 @@ public: "myapp.test:80"
 
 `string`
 
-The bundled files will be available in the browser under this path.
+此路径下的打包文件可在浏览器中访问。
 
-Imagine that the server is running under `http://localhost:8080` and `output.filename` is set to `bundle.js`. By default the `publicPath` is `"/"`, so your bundle is available as `http://localhost:8080/bundle.js`.
+假设服务器运行在 `http://localhost:8080` 并且 `output.filename` 被设置为 `bundle.js`。默认 `publicPath` 是 `"/"`，所以你的包(bundle)可以通过 `http://localhost:8080/bundle.js` 访问。
 
-The `publicPath` can be changed so the bundle is put in a directory:
+可以修改 `publicPath`，将 bundle 放在一个目录：
 
 ```js
 publicPath: "/assets/"
 ```
 
-The bundle will now be available as `http://localhost:8080/assets/bundle.js`.
+你的包现在可以通过 `http://localhost:8080/assets/bundle.js` 访问。
 
-T> Make sure `publicPath` always starts and ends with a forward slash.
+T> 确保 `publicPath` 总是以斜杠(/)开头和结尾。
 
-It is also possible to use a full URL. This is necessary for Hot Module Replacement.
+也可以使用一个完整的 URL。这是模块热替换所必需的。
 
 ```js
 publicPath: "http://localhost:8080/assets/"
 ```
 
-The bundle will also be available as `http://localhost:8080/assets/bundle.js`.
+bundle 可以通过 `http://localhost:8080/assets/bundle.js` 访问。
 
-T> It is recommended that `devServer.publicPath` is the same as `output.publicPath`.
+T> `devServer.publicPath` 和 `output.publicPath` 一样被推荐。
 
 
 ## `devServer.quiet` 🔑
 
 `boolean`
 
-With `quiet` enabled, nothing except the initial startup information will be written to the console. This also means that errors or warnings from webpack are not visible.
+启用 `quiet` 后，除了初始启动信息之外的任何内容都不会被打印到控制台。这也意味着来自 webpack 的错误或警告在控制台不可见。
 
 ```js
 quiet: true
@@ -387,7 +387,7 @@ quiet: true
 
 ## `devServer.staticOptions`
 
-It is possible to configure advanced options for serving static files from `contentBase`. See the [Express documentation](http://expressjs.com/en/4x/api.html#express.static) for the possible options. An example:
+可以从 `contentBase` 提供的静态文件来配置高级选项。可用的选项请查看 [Express 文档](http://expressjs.com/en/4x/api.html#express.static)。一个例子：
 
 ```js
 staticOptions: {
@@ -395,46 +395,46 @@ staticOptions: {
 }
 ```
 
-T> This only works when using `contentBase` as a `string`.
+T> 只在 `contentBase` 是一个`字符串`时有效。
 
 
 ## `devServer.stats` 🔑
 
 `string` `object`
 
-This option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you want some bundle information, but not all of it.
+此选项允许你精确控制 bundle 信息展示。这可以是一个很好的中间层，如果你想要只展示某些 bundle 信息，但不是所有的信息。
 
-To show only errors in your bundle:
+只展示 bunlde 中的错误：
 
 ```js
 stats: "errors-only"
 ```
 
-For more information, see the [**stats documentation**](/configuration/stats).
+更多信息，请查看 [**stats 文档**](/configuration/stats)。
 
-T> This option has no effect when used with `quiet` or `noInfo`.
+T> 使用 `quiet` 或 `noInfo` 时，此选项无效。
 
 
 ## `devServer.watchContentBase`
 
 `boolean`
 
-Tell the server to watch the files served by the `devServer.contentBase` option. File changes will trigger a full page reload.
+告诉服务器监视那些通过 `devServer.contentBase` 选项提供的文件。文件改动将触发整个页面重新加载。
 
 ```js
 watchContentBase: true
 ```
 
-It is disabled by default.
+默认被禁用。
 
 
 ## `devServer.watchOptions` 🔑
 
 `object`
 
-Control options related to watching the files.
+与监视文件相关的控制选项。
 
-webpack uses the file system to get notified of file changes. In some cases this does not work. For example, when using Network File System (NFS). [Vagrant](https://www.vagrantup.com/) also has a lot of problems with this. In these cases, use polling:
+webpack 使用文件系统(file system)获取文件改动的通知。在某些情况下，不会正常工作。例如，当使用 Network File System (NFS) 时。[Vagrant](https://www.vagrantup.com/) 也有很多问题。在这些情况下，请使用轮询：
 
 ```js
 watchOptions: {
@@ -442,6 +442,10 @@ watchOptions: {
 }
 ```
 
-If this is too heavy on the file system, you can change this to an integer to set the interval in milliseconds.
+如果这对文件系统来说太重了的话，你可以修改间隔时间（以毫秒为单位），将其设置为一个整数。
 
-See [WatchOptions](/configuration/watch) for more options.
+查看 [WatchOptions](/configuration/watch) 更多选项。
+
+***
+
+> 原文：https://webpack.js.org/configuration/dev-server/

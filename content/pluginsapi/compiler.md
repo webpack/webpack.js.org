@@ -116,3 +116,7 @@ This a reference guide to all the event hooks exposed by the `Compiler`.
 ## Examples
 
 ?> Adds examples of usage for some of the above events
+
+***
+
+> 原文：https://webpack.js.org/pluginsapi/compiler/

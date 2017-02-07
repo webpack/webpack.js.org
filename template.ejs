@@ -7,12 +7,23 @@
     <meta name="theme-color" content="#2B3A42">
     <link rel="shortcut icon" href="/assets/favicon.ico">
 
-    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:200,400,400i,500" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:200,400,400i,500" rel="stylesheet">-->
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     <% for (var file in webpackConfig.template.cssFiles) { %>
       <link href="<%= webpackConfig.template.cssFiles[file] %>" rel="stylesheet">
     <% } %>
+
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?39edd8e76884f07399be96cd422c9af3";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
   </head>
