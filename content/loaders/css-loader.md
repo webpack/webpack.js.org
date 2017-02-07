@@ -3,17 +3,17 @@ title: css-loader
 source: https://raw.githubusercontent.com/webpack-contrib/css-loader/master/README.md
 edit: https://github.com/webpack-contrib/css-loader/edit/master/README.md
 ---
-## Install
+## 安装
 
 ```bash
 npm install --save-dev css-loader
 ```
 
-## Usage
+## 用法
 
-Use the loader either via your webpack config, CLI or inline.
+通过 webpack 配置，CLI或内联使用 loader。
 
-### Via webpack config (recommended)
+### 通过 webpack 配置 (推荐)
 
 **webpack.config.js**
 ```js
@@ -29,7 +29,7 @@ module.exports = {
 }
 ```
 
-**In your application**
+**在你的程序中**
 ```js
 import css from 'file.css';
 ```
@@ -40,43 +40,43 @@ import css from 'file.css';
 webpack --module-bind 'css=style-loader!css-loader'
 ```
 
-**In your application**
+**在你的程序中**
 ```js
 import css from 'file.css';
 ```
 
-### Inline
+### 内联
 
-**In your application**
+**在你的程序中**
 ```js
 import css from 'style-loader!css-loader!./file.css';
 ```
 
-## Options
+## 选项
 
-`@import` and `url()` are interpreted like `import` and will be resolved by the css-loader.
-Good loaders for requiring your assets are the [file-loader](https://github.com/webpack/file-loader)
-and the [url-loader](https://github.com/webpack/url-loader) which you should specify in your config (see below).
+`@import` 和 `url()` 被当做成 `import` 并且会被 css-loader 解析.
+比较好的 loaders 对于请求你的生产资源是 [file-loader](https://github.com/webpack/file-loader)
+和 [url-loader](https://github.com/webpack/url-loader) 并且指定相应的配置 (见下文).
 
-To be compatible with existing css files (if not in CSS Module mode):
+兼容现有的 css 文件 (当不是在 css 模块模式):
 
 * `url(image.png)` => `require('./image.png')`
 * `url(~module/image.png)` => `require('module/image.png')`
 
-## Options
+## 选项
 
-|Name|Default|Description|
+|名称|默认值|描述|
 |:--:|:-----:|:----------|
-|**`root`**|`/`|Path to resolve URLs, URLs starting with `/` will not be translated|
-|**`modules`**|`false`|Enable/Disable CSS Modules|
-|**`import`** |`true`| Enable/Disable @import handling|
-|**`url`**|`true`| Enable/Disable `url()` handling|
-|**`minimize`**|`false`|Enable/Disable minification|
-|**`sourceMap`**|`false`|Enable/Disable Sourcemaps|
-|**`camelCase`**|`false`|Export Classnames in CamelCase|
-|**`importLoaders`**|`0`|Number of loaders applied before CSS loader|
+|**`root`**|`/`|解析 URLs 路径, URLs 以 `/` 开头将不会被翻译|
+|**`modules`**|`false`| 启用/禁用 css-modules 模式|
+|**`import`** |`true`| 启用/禁用 @import 处理|
+|**`url`**|`true`| 启用/禁用 `url()` 处理|
+|**`minimize`**|`true`| 启用/禁用 压缩|
+|**`sourceMap`**|`false`| 启用/禁用 Sourcemaps|
+|**`camelCase`**|`false`| 导出以驼峰化命名的类名|
+|**`importLoaders`**|`0`| 在 css-loader 前应用的 loader 的数|
 
-This webpack config can load CSS files, embed small png images as Data URLs and JPG images as files.
+此 webpack 配置可以加载 CSS 文件，嵌入小的 png 图像数据的 url 和 JPG 图像文件。
 
 **webpack.config.js**
 ```js
@@ -102,12 +102,11 @@ module.exports = {
 
 ### Root
 
-For URLs that start with a `/`, the default behavior is to not translate them:
+对于以一个 `/` 开头的 URLs，默认行为是不翻译：
 
 * `url(/image.png)` => `url(/image.png)`
 
-If a `root` query parameter is set, however, it will be prepended to the URL
-and then translated:
+如果设置了 root 参数，那么 root 参数将被添加到 URL 前面，然后被翻译：
 
 **webpack.config.js**
 ```js
@@ -127,17 +126,17 @@ rules: [
 
 * `url(/image.png)` => `require('./image.png')`
 
-Using 'Root-relative' urls is not recommended. You should only use it for legacy CSS files.
+不建议使用 'Root-relative' urls，您应该只将其用于旧版 CSS 文件。
 
-### CSS Scope
+### CSS 作用域
 
-By default CSS exports all class names into a global selector scope. Styles can be locally scoped to avoid globally scoping styles.
+默认情况下，CSS将所有的类暴露到全局的选择器作用域中。样式可以在局部作用域中，避免全局作用域的样式。
 
-The syntax `:local(.className)` can be used to declare `className` in the local scope. The local identifiers are exported by the module.
+语法 `:local(.className)` 可以被用来在局部作用域中声明 `className`。局部的作用域标识符会以模块形式暴露出去。
 
-With `:local` (without brackets) local mode can be switched on for this selector. `:global(.className)` can be used to declare an explicit global selector. With `:global` (without brackets) global mode can be switched on for this selector.
+使用 `:local` （无括号）可以为此选择器启用局部模式。 `：global（.className）`可以用来声明一个明确的全局选择器。使用`：global`（无括号）可以为此选择器打开全局模式。
 
-The loader replaces local selectors with unique identifiers. The choosen unique identifiers are exported by the module.
+加载器会用唯一的标识符来替换局部选择器。所选择的唯一标识符以模块形式暴露出去。
 
 **app.css**
 ```css
@@ -155,7 +154,7 @@ The loader replaces local selectors with unique identifiers. The choosen unique 
 ._23_aKvs-b8bW2Vg3fwHozO ._13LGdX8RMStbBE9w-t0gZ1 .global-class-name { color: blue; }
 ```
 
-> Note: Identifiers are exported
+> 注意: 标识符被输出
 
 ``` js
 exports.locals = {
@@ -164,16 +163,16 @@ exports.locals = {
 }
 ```
 
-CamelCase is recommended for local selectors. They are easier to use in the within the imported JS module.
+建议本地选择器使用驼峰化。它们在导入 JS 模块中更容易使用。
 
-`url()` URLs in block scoped (`:local .abc`) rules behave like requests in modules:
+`url()` URLs 在块作用域 (`:local .abc`) 规则中的表现像模块中的请求。
 
 * `./file.png` instead of `file.png`
 * `module/file.png` instead of `~module/file.png`
 
-You can use `:local(#someId)`, but this is not recommended. Use classes instead of ids.
+你可以使用 `:local(#someId)`，但它不被推荐。推荐用 class 代替 id。
 
-You can configure the generated ident with the `localIdentName` query parameter (default `[hash:base64]`).
+你可以使用 `localIdentName` 查询参数（默认 `[hash:base64]`）来配置生成的 ident。
 
  **webpack.config.js**
  ```js
@@ -191,7 +190,7 @@ You can configure the generated ident with the `localIdentName` query parameter 
 }
 ```
 
-You can also specify the absolute path to your custom `getLocalIdent` function to generate classname based on a different schema. Note that this requires `webpack >= v2.x.` since to be able to pass function in. For example:
+您还可以指定自定义 `getLocalIdent` 函数的绝对路径，以根据不同的模式生成类名。注意这需要 `webpack >= v2.x.` 因为能够传递函数。示例：
 
 ```js
 {
@@ -211,17 +210,18 @@ You can also specify the absolute path to your custom `getLocalIdent` function t
 }
 ```
 
-Note: For prerendering with extract-text-webpack-plugin you should use `css-loader/locals` instead of `style-loader!css-loader` **in the prerendering bundle**. It doesn't embed CSS but only exports the identifier mappings.
+注意: 对于使用extract-text-webpack-plugin预呈现，你应该在 **在预渲染 bundle 中** 使用css-loader / locals而不是style-loader！css-loader。它不嵌入CSS，但只导出标识符映射。
 
-### [CSS Modules](https://github.com/css-modules/css-modules)
 
-The query parameter `modules` enables the **CSS Modules** spec.
+### [CSS 模块](https://github.com/css-modules/css-modules)
 
-This enables local scoped CSS by default. (You can switch it off with `:global(...)` or `:global` for selectors and/or rules.)
+查询参数模块启用 **CSS 模块** 规范。
 
-### CSS Composing
+这将默认启用本地作用于 CSS。（您可以使用`:global(...)` 或 `:global`选择器或/和规则将其关闭。）
 
-When declaring a local class name you can compose a local class from another local class name.
+### 组合 CSS 
+
+当声明一个本地类名时，你可以从另一个本地类名组合成一个本地类。
 
 ``` css
 :local(.className) {
@@ -235,7 +235,7 @@ When declaring a local class name you can compose a local class from another loc
 }
 ```
 
-This doesn't result in any change to the CSS itself but exports multiple class names:
+这不会更改 CSS 本身，但可以导出更多的类名。
 
 ```js
 exports.locals = {
@@ -255,9 +255,9 @@ exports.locals = {
 }
 ```
 
-### Importing CSS Locals
+### 导入本地 CSS
 
-To import a local class name from another module:
+从其他模块导入本地类名：
 
 ``` css
 :local(.continueButton) {
@@ -273,7 +273,7 @@ To import a local class name from another module:
 }
 ```
 
-To import from multiple modules use multiple `composes:` rules.
+要从多个模块导入，请使用多个 `composes:` 规则。
 
 ``` css
 :local(.className) {
@@ -286,11 +286,12 @@ To import from multiple modules use multiple `composes:` rules.
 
 ### SourceMaps
 
-To include Sourcemaps set the `sourceMap` query param.
+包含 Sourcemaps 的，设置 `sourceMap`查询参数。
 
-I. e. the extract-text-webpack-plugin can handle them.
+即 extract-text-webpack-plugin 可以处理它们。
 
-They are not enabled by default because they expose a runtime overhead and increase in bundle size (JS SourceMap do not). In addition to that relative paths are buggy and you need to use an absolute public path which include the server URL.
+默认情况下不启用它们，因为它们暴露了运行时的开销并增加了 bundle 的大小 (JS SourceMap 不会)。此外，相对路径是错误的，您需要使用包含服务器 URL 的绝对公用路径。
+
 
 **webpack.config.js**
 ```js
@@ -309,9 +310,9 @@ They are not enabled by default because they expose a runtime overhead and incre
 
 ### ImportLoaders
 
-The query parameter `importLoaders` allow to configure which loaders should be applied to `@import`ed resources.
+应用于 `@import` 资源的 loaders 的查询参数 `importLoaders` 允许配置。
 
-`importLoaders`: That many loaders after the css-loader are used to import resources.
+`importLoaders`: 在 css-loader 之后的许多 loaders 用于导入资源。
 
 **webpack.config.js**
 ```js
@@ -329,15 +330,17 @@ The query parameter `importLoaders` allow to configure which loaders should be a
 }
 ```
 
-This may change in the future, when the module system (i. e. webpack) supports loader matching by origin.
 
-### Minification
+当模块系统 (即 webpack) 支持通过源的 loader 匹配时，这可能在将来会改变。
 
-By default the css-loader minimizes the css if specified by the module system.
+### 最小化
 
-In some cases the minification is destructive to the css, so you can provide some options to it. cssnano is used for minification and you find a [list of options here](http://cssnano.co/options/).
+默认情况下，css-loader 是通过特定的模块系统来进行压缩 css 的。
 
-You can also disable or enforce minification with the `minimize` query parameter.
+某种情况下，压缩 css 是具有破坏性的，所以可以提供一些可选项。cssnano 被用来进行压缩，并且它具有一个[可配置项列表](http://cssnano.co/options/).
+
+也可以通过设置 查询参数`minimize` 的禁用或者启用来进行压缩。
+
 
 **webpack.config.js**
 ```js
@@ -356,7 +359,7 @@ You can also disable or enforce minification with the `minimize` query parameter
 
 ### CamelCase
 
-By default, the exported JSON keys mirror the class names. If you want to camelize class names (useful in JS), pass the query parameter `camelCase` to css-loader.
+默认情况下，导出 JSON 键值对形式的类名。如果想要 camelize 类名(在 JS 中应用)，通过设置 css-loader 的查询参数 camelCase 即可实现。
 
 **webpack.config.js**
 ```js
@@ -381,7 +384,7 @@ By default, the exported JSON keys mirror the class names. If you want to cameli
 import { className } from 'file.css';
 ```
 
-## Maintainer
+## 维护人员
 
 <table>
   <tbody>
