@@ -2,73 +2,59 @@
 title: Loaders
 sort: 1
 contributors:
-  - ev1stensberg
-  - TheLarkInn
-  - manekinekko
-  - SpaceK33z
+  - simon04
 ---
 
-As explained in detail on the [concepts page](/concepts/loaders), loaders are transformations that are applied on a resource file of your application. Loaders allow you to, for example, configure how webpack should handle a CSS file.
+webpack enables use of [loaders](/concepts/loaders) to preprocess files. This allows you to bundle any static resource way beyond JavaScript. You can easily write your own loaders using Node.js.
 
-?> Move the general usage documentation to the [concepts page](/concepts/loaders) and focus here on describing the available loaders (similar to [plugins](/plugins)).
+Loaders are activated by using `loadername!` prefixes in `require()` statements, or are automatically applied via regex from your webpack configuration – see [configuration](/concepts/loaders#configuration).
 
-A loader is typically a npm package, which you can install as a development dependency:
+## Files
+* [`raw-loader`](/loaders/raw-loader) Loads raw content of a file (utf-8)
+* [`val-loader`](/loaders/val-loader) Executes code as module and consider exports as JS code
+* [`url-loader`](/loaders/url-loader) Works like the file loader, but can return a [data URL](https://tools.ietf.org/html/rfc2397) if the file is smaller than a limit
+* [`file-loader`](/loaders/file-loader) Emits the file into the output folder and returns the (relative) URL
 
-```sh
-npm install css-loader --save-dev
-```
+## JSON
+* [`json-loader`](/loaders/json-loader) Loads a [JSON](http://json.org/) file (included by default)
+* [`json5-loader`](/loaders/json5-loader) Loads and transpiles a [JSON 5](http://json5.org/) file
+* `cson-loader` Loads and transpiles a [CSON](https://github.com/bevry/cson#what-is-cson) file
 
-There are three ways to use loaders in your application:
+## Transpiling
+* [`script-loader`](/loaders/script-loader) Executes a JavaScript file once in global context (like in script tag), requires are not parsed
+* [`babel-loader`](/loaders/babel-loader) Loads ES2015+ code and transpiles to ES5 using [Babel](https://babeljs.io/)
+* `traceur-loader` Loads ES2015+ code and transpiles to ES5 using [Traceur](https://github.com/google/traceur-compiler#readme)
+* `typescript-loader` Loads [TypeScript](https://www.typescriptlang.org/) like JavaScript
+* [`coffee-loader`](/loaders/coffee-loader) Loads [CoffeeScript](http://coffeescript.org/) like JavaScript
 
-* via configuration
-* explicit in the `require` statement
-* via CLI
+## Templating
+* [`html-loader`](/loaders/html-loader) Exports HTML as string, require references to static resources
+* `pug-loader` Loads Pug templates and returns a function
+* `jade-loader` Loads Jade templates and returns a function
+* `markdown-loader` Compiles Markdown to HTML
+* `posthtml-loader` Loads and transforms a HTML file using [PostHTML](https://github.com/posthtml/posthtml)
+* `handlebars-loader` Compiles Handlebars to HTML
 
-## Via Configuration
+## Styling
+* [`style-loader`](/loaders/style-loader) Add exports of a module as style to DOM
+* [`css-loader`](/loaders/css-loader) Loads CSS file with resolved imports and returns CSS code
+* [`less-loader`](/loaders/less-loader) Loads and compiles a LESS file
+* `sass-loader` Loads and compiles a SASS/SCSS file
+* `stylus-loader` Loads and compiles a Stylus file
+* `postcss-loader` Loads and transforms a CSS/SSS file using [PostCSS](http://postcss.org)
 
-[`module.rules`](https://webpack.js.org/configuration/module/#module-rules) allows you to specify several loaders within your webpack configuration.
-This is a concise way to display loaders, and helps to have clean code as 
-well as you have a full overview of each respective loader.
+## Linting && Testing
+* [`mocha-loader`](/loaders/mocha-loader) Tests with [mocha](https://mochajs.org/) (Browser/NodeJS)
+* `eslint-loader` PreLoader for linting code using [ESLint](http://eslint.org/)
+* [`jshint-loader`](/loaders/jshint-loader) PreLoader for linting code using [JSHint](http://jshint.com/about/)
+* `jscs-loader` PreLoader for code style checking using [JSCS](http://jscs.info/)
+* [`coverjs-loader`](/loaders/coverjs-loader) PreLoader to determine the testing coverage using [CoverJS](https://github.com/arian/CoverJS)
 
-```js
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          { loader: 'style-loader'},
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true
-            }
-          }
-        ]
-      }
-    ]
-  }
-```
+## Frameworks
+* `vue-loader` Loads and compiles [Vue Components](https://vuejs.org/v2/guide/components.html)
+* `polymer-loader` Process HTML & CSS with preprocessor of choice and `require()` Web Components like first-class modules
+* `angular2-template-loader` Loads and compiles [Angular](https://angular.io/) Components
 
-## Via `require`
 
-It's possible to specify the loaders in the `require` statement (or `define`, `require.ensure`, etc.). Separate loaders from the resource with `!`. Each part is resolved relative to the current directory.
-
-```js
-require('style-loader!css-loader?modules!./styles.css');
-```
-
-It's possible to overwrite any loaders in the configuration by prefixing the entire rule with `!`.
-
-Options can be passed with a query parameter, just like on the web (`?key=value&foo=bar`). It's also possible to use a JSON object (`?{"key":"value","foo":"bar"}`).
-
-T> Use `module.rules` whenever possible, as this will reduce boilerplate in your source code and allows you to debug or locate a loader faster if something goes south.
-
-## Via CLI
-
-Optionally, you could also use loaders through the CLI:
-
-```sh
-webpack --module-bind jade --module-bind 'css=style!css'
-```
-
-This uses the loader “jade” for “.jade” files and the loaders “style” and “css” for “.css” files.
+![Awesome](../assets/awesome-badge.svg)
+For more third-party loaders, see the list from [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#loaders).

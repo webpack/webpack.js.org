@@ -99,7 +99,7 @@ This a reference guide to all the event hooks exposed by the `Compiler`.
 | __`watch-run`__            | Before starting compilation after watch | `compiler`           | async      |
 | __`normal-module-factory`__ | After creating a `NormalModuleFactory` | `normalModuleFactory`| sync      |
 | __`context-module-factory`__ | After creating a `ContextModuleFactory` | `contextModuleFactory`| sync      |
-| __`before-compile`__       | Compilation parameters created      | `compilationParams`` | sync       |
+| __`before-compile`__       | Compilation parameters created      | `compilationParams`  | sync       |
 | __`compile`__              | Before creating new compilation     | `compilationParams`  | sync       |
 | __`this-compilation`__     | Before emitting `compilation` event | `compilation`        | sync       |
 | __`compilation`__          | Compilation creation completed      | `compilation`        | sync       |
@@ -115,4 +115,4 @@ This a reference guide to all the event hooks exposed by the `Compiler`.
 
 ## Examples
 
-?> TODO: Adds examples of usage for some of the above events
+?> Adds examples of usage for some of the above events
