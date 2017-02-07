@@ -1,8 +1,6 @@
 ---
 title: 插件 API
 sort: 1
-contributors:
-  - jeffrygan(藤蔓)
 ---
 
 webpack以插件的形式提供了灵活强大的自定义api功能。使用插件,我们可以为webpack添加功能。另外,webpack提供生命周期钩子以便插件注册。在每个生命周期点,webpack会运行所有注册的插件,并提供当前webpack编译状态信息。

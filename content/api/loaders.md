@@ -15,9 +15,7 @@ contributors:
 
 所谓 Loader 只是导出了一个函数的 JavaScript 模块。Compiler 会调用这个函数，然后把之前 Loader 产生的结果或者资源文件传入进去。这个函数中的 `this` 里会有一些 Compiler 添加的很有用的方法，比如可以让 Loader 的调用方式变成异步的，或者得到一些 query 参数。第一个 Loader 传入的参数只有一个：资源文件的内容。Complier 会接收上一个 Loader 产生的处理结果。这些处理结果应该是一些 `String` 或者 `Buffer`（被转换为一个 string），代表模块的 JavaScript 源码。另外可选的 SourceMap 信息（作为一个 JSON 对象）可能也会被传入。
 
-
 如果是单个处理结果，可以在**同步模式**中直接返回。如果有多个处理结果，则需要调用 `this.callback()`。在**异步模式**中，需要调用 `this.async()`，如果异步模式被允许，那么它会返回 `this.callback()`，随后 Loader 必须返回 `undefined` 并且调用调用回调函数。
-
 
 ## 示例
 
