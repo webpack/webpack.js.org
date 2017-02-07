@@ -278,7 +278,7 @@ var path = require('path');
     // if true request must not include an extensions
     // if false request may already include an extension
 
-    [moduleExtensions](/configuration/resolve#resolve-moduleextensions): ["-module"],
+    [moduleExtensions](/configuration/resolve#resolveloader-moduleextensions): ["-module"],
     [enforceModuleExtension](/configuration/resolve#resolve-enforcemoduleextension): false,
     // like extensions/enforceExtension but for module names instead of files
 
