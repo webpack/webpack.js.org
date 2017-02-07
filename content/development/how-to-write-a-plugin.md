@@ -1,5 +1,5 @@
 ---
-title: 如何编写一个插件？
+title: 如何编写一个插件？(How to write a plugin?)
 sort: 2
 ---
 
