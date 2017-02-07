@@ -1,6 +1,6 @@
 ---
 title: 从 v1 迁移到 v2
-sort: 19
+sort: 20
 contributors:
   - sokra
   - jhnns
@@ -122,7 +122,7 @@ It is not possible anymore to omit the `-loader` extension when referencing load
 
 ## `json-loader` 不再需要手动添加
 
-如果没有为 JSON 文件配置 loader，webpack 将自动尝试通过 加载 [json-loader](https://github.com/webpack/json-loader) JSON 文件。
+如果没有为 JSON 文件配置 loader，webpack 将自动尝试通过 加载 [`json-loader`](https://github.com/webpack/json-loader) JSON 文件。
 
 ``` diff
   module: {
@@ -602,7 +602,7 @@ options 对象上有了 `ident` ，内联的 loader 就可以引用这个 option
 }
 ```
 
-这种内联风格在常规的代码里一般用不着，但是在 loader 生成的代码里比较常见。比如，style-loader 生成一个模块，通过 `require` 加载其余的请求（它们输出 CSS）。
+这种内联风格在常规的代码里一般用不着，但是在 loader 生成的代码里比较常见。比如，`style-loader` 生成一个模块，通过 `require` 加载其余的请求（它们输出 CSS）。
 
 ``` js
 // style-loader generated code (simplified)

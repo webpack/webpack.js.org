@@ -1,6 +1,5 @@
 ---
-title: 懒加载 - React
-sort: 14
+title: 惰性加载 - React
 contributors:
   - iammerrick
   - chrisVillanueva

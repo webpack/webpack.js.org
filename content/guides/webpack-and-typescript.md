@@ -1,6 +1,5 @@
 ---
-title: webpack 和 TypeScript
-sort: 20
+title: webpack 和 Typescript
 contributors:
   - morsdyce
 ---
@@ -65,20 +64,20 @@ module.exports = {
  },
 };
 ```
-
-这个例子里我们指定了入口起点为当前目录的 __index.ts__ 文件，输出文件命名为 __bundle.js__，以及负责把 TypeScript 编译成 JavaScript 的 TypeScript loader，同时也添加了 `resolve.extensions` 来告诉 webpack 在解析查找 TypeScript 模块时该检索哪些文件扩展名。
+ 
+这个例子里我们指定了入口起点为当前目录的 __index.ts__ 文件，输出文件命名为 __bundle.js__，以及负责把 TypeScript 编译成 JavaScript的 TypeScript loader，同时也添加了 `resolve.extensions` 来告诉 webpack 在解析查找 TypeScript 模块时该检索哪些文件扩展名。
 
 ## TypeScript loaders
 
 当前有 2 个可用的 TypeScript loader：
-* [awesome-typescript-loader](https://github.com/s-panferov/awesome-typescript-loader)
-* [ts-loader](https://github.com/TypeStrong/ts-loader)
+* [`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader)
+* [`ts-loader`](https://github.com/TypeStrong/ts-loader)
 
-Awesome TypeScript loader 文档里已经很好的解释了 awesome-typescript-loader 和 ts-loader 的区别。
+Awesome TypeScript loader 文档里已经很好的解释了 `awesome-typescript-loader` 和 `ts-loader` 的区别。
 
 可以阅读 [这篇文章](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader) 了解更多。
 
-在本指南中，我们将使用ts-loader，因为它更简便地启用额外的 webpack 功能，例如将非代码资源导入到项目中。
+在本指南中，我们将使用 `ts-loader`，因为它更简便地启用额外的 webpack 功能，例如将非代码资源导入到项目中。
 
 ## 启用 source maps 功能
 
@@ -91,7 +90,8 @@ __tsconfig.json__
 }
 ```
 
-当开启了 TypeScript 的 source maps 输出特性后，我们需要告诉 webpack 来提取这些 source maps 并发送给浏览器，这样我们在浏览器看到的源码文件，就跟在代码编辑器中看到的一样。
+当开启了 TypeScript 的 source maps 输出特性后，我们需要告诉 webpack
+来提取这些 source maps 并发送给浏览器，这样我们在浏览器看到的源码文件，就跟在代码编辑器中看到的一样。
 
 __webpack.config.js__
 ```js
@@ -122,15 +122,23 @@ module.exports = {
 };
 ```
 
-首先我们添加一个新 loader，名为 source-map-loader，运行下面的命令安装：
+首先我们添加一个新 loader，名为 source-map-loader。
+
+运行下面的命令安装：
+
 `npm install --save-dev source-map-loader`。
 
-这个 loader 安装完成后，我们想让这个 loader 比其他任何 loader 都要先运行，可以使用 `enforce: 'pre'` 这个配置项来标记。最后，我们需要通过指定 `devtool` 来启用 webpack 的 source maps 功能，当前我们使用的是 'inline-source-map' 这个属性值。想了解更多关于这个属性值的特性和其他属性值选项，可以查看 [devtool 文档](https://webpack.js.org/configuration/devtool/)。
+这个 loader 安装完成后，我们想让这个 loader 比其他任何 loader 都要先运行，可以使用 `enforce: 'pre'` 这个配置项来标记。
+最后，我们需要通过指定 `devtool` 来启用 webpack 的 source maps 功能。
+当前我们使用的是 'inline-source-map' 这个属性值。想了解更多关于这个属性值的特性和其他属性值选项，可以查看 [devtool 文档](https://webpack.js.org/configuration/devtool/)。
 
+ 
+ 
+ 
 
 ## 使用第三方库
 
-当从 npm 安装第三方库时，记住一定要同时安装这个库的类型声明文件。
+当从 npm安装第三方库时，记住一定要同时安装这个库的类型声明文件。
 
 你可以从 @types 仓库找到并安装这些第三方库的类型声明文件。
 
@@ -159,5 +167,6 @@ declare module "*.svg" {
 这不仅适用于 svg，也适用于其他任何你想使用的自定义 loader，包括css，scss，json或是你希望加载到项目中的其他任何文件。
 
 ***
+ 
 
 > 原文：https://webpack.js.org/guides/webpack-and-typescript/

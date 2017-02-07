@@ -1,16 +1,15 @@
 ---
 title: Authoring Libraries
-sort: 18
 contributors:
     - pksjce
     - johnstew
+    - simon04
 ---
+webpack是一个用来打包应用（application）和库（library）的代码的工具。如果你是一个JavaScript库的作者，并且想要将你的打包逻辑给流程化（streamline），那么这篇文档将会帮助到你。
 
-webpack is a tool which can be used to bundle application code and also to bundle library code. If you are the author of a JavaScript library and are looking to streamline your bundle strategy then this document will help you.
+## 创建一个库
 
-## Author a Library
-
-We have here a small wrapper library to convert number 1 to 5 from number to word and vice-versa. It looks something like this.
+假设你正在写一个小的 library `webpack-numbers'，允许将数字1到5从数字转换为文本表示，反之亦然。实现使用ES6模块，可能看起来像这样：
 
 __src/index.js__
 ```javascript
@@ -29,54 +28,50 @@ export function wordToNum(word) {
     }, -1);
 };
 ```
-
-The usage spec for the library will be as follows.
+该库的使用方式如下：
 
 ```javascript
-// ES2015 modules
-
 import * as webpackNumbers from 'webpack-numbers';
-
 ...
-webpackNumbers.wordToNum('Two') // output is 2
+webpackNumbers.wordToNum('Two') // 输出 2
 ...
 
-// CommonJS modules
+// 使用 CommonJS 模块引入
 
 var webpackNumbers = require('webpack-numbers');
-
 ...
 webpackNumbers.numToWord(3); // output is Three
 ...
+```
 
-// As a script tag
+```html
+// 使用 script 标签引入
 
 <html>
 ...
 <script src="https://unpkg.com/webpack-numbers"></script>
 <script>
     ...
-    /* webpackNumbers is available as a global variable */
-    webpackNumbers.wordToNum('Five') //output is 5
+    /* webpackNumbers 是一个全局变量 */
+    webpackNumbers.wordToNum('Five') //输出 5
     ...
 </script>
 </html>
 ```
+完整的源代码和配置请参阅 [webpack-library-example](https://github.com/kalcifer/webpack-library-example)。
 
-For full library configuration and code please refer to [webpack-library-example](https://github.com/kalcifer/webpack-library-example)
+## 配置 webpack
 
-## Configure webpack
+现在需要打包这个库，同时要完成以下要求：
+  - 不要打包 lodash，而是引用（require）用户加载好的lodash。
+  - 库的名字是 `webpack-numbers`，而其变量是 `webpackNumbers`。
+  - 库可以用两种方式来引入：`import webpackNumbers from 'webpack-numbers'` 或者 `require('webpack-numbers')`。
+  - 当库通过 `script` 标签引入的时候，可以通过全局变量 `webpackNumbers` 来使用。
+  - 库可以在 Node.js 中使用。
 
-Now the agenda is to bundle this library
-  - Without bundling lodash but requiring it to be loaded by the consumer.
-  - Name of the library is `webpack-numbers` and the variable is `webpackNumbers`.
-  - Library can be imported as `import webpackNumbers from 'webpack-numbers'` or `require('webpack-numbers')`.
-  - Library can be accessed through global variable `webpackNumbers` when included through `script` tag.
-  - Library can be accessed inside Node.js.
+### 增加 webpack
 
-### Add webpack
-
-Add basic webpack configuration.
+增加基本的 webpack 配置。
 
 __webpack.config.js__
 
@@ -93,14 +88,33 @@ module.exports = {
 
 ```
 
-This adds basic configuration to bundle the library.
+以上代码是打包该库的基本配置。
 
-### Add `externals`
+### 增加 Loaders
 
-Now, if you run `webpack`, you will find that a largish bundle file is created. If you inspect the file, you will find that lodash has been bundled along with your code.
-It would be unnecessary for your library to bundle a library like `lodash`. Hence you would want to give up control of this external library to the consumer of your library.
+我们还需要增加相关的 loader 来编译代码。这里需要一个 `json-loader` 来预编译我们的json文件。
 
-This can be done using the `externals` configuration as
+__webpack.config.js__
+
+```javascript
+module.exports = {
+    // ...
+    module: {
+        rules: [{
+            test: /.json$/,
+            use: 'json-loader'
+        }]
+    }
+};
+```
+
+### 增加 `externals`
+
+现在，如果执行 `webpack`，你会发现输出了一个非常巨大的文件。进一步观察该文件，你会发现 lodash 和你的代码被一起打包了。
+
+然而对于你的库本身来说，并不需要打包 `lodash`。因此你可能会想将该外部库（external）的控制权交给你的库的用户。
+
+这一点可以通过配置 `externals` 来实现：
 
 __webpack.config.js__
 
@@ -119,13 +133,13 @@ module.exports = {
 };
 ```
 
-This means that your library expects a dependency named `lodash` to be available in the consumer's environment.
+这意味着你的库需要能够在用户的环境中获取一个名为 `lodash` 的依赖。
 
-### Add `libraryTarget`
+### 增加 `libraryTarget`
 
-For widespread use of the library, we would like it to be compatible in different environments, i. e. CommonJS, AMD, Node.js and as a global variable.
+为了让该库能够被广泛使用，你需要让它能够兼容不同的环境，例如 CommonJS，AMD，Node.js 或者作为一个全局变量。
 
-To make your library available for reuse, add `library` property in webpack configuration.
+为了让你的代码能够被重用，需要在 webpack 配置中增加一个 `library` 属性。
 
 __webpack.config.js__
 
@@ -140,8 +154,9 @@ module.exports = {
 };
 ```
 
-This makes your library bundle to be available as a global variable when imported.
-To make the library compatible with other environments, add `libraryTarget` property to the config.
+这能让你的库被引入后，可以通过全局变量来使用。
+
+为了让库可以兼容其他环境，还需要在配置中增加 `libraryTarget` 属性。
 
 __webpack.config.js__
 
@@ -151,19 +166,19 @@ module.exports = {
     output: {
         ...
         library: 'webpackNumbers',
-        libraryTarget:'umd' // Possible value - amd, commonjs, commonjs2, commonjs-module, this, var
+        libraryTarget: 'umd' // 其他可取值 - amd, commonjs, commonjs2, commonjs-module, this, var
     }
     ...
 };
 ```
 
-If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [config reference](/configuration/output).
+如果设置了 `library` 但没设置 `libraryTarget`， 则`libraryTarget` 默认为 `var`，详见 [config 文档](/configuration/output) 。
 
-### Final Steps
+### 最终步骤
 
-[Tweak your production build using webpack](/guides/production-build).
+[使用 webpack 打包你的生产代码](/guides/production-build).
 
-Add the path to your generated bundle as the package's main file in `package.json`
+在 `package.json` 中指定主文件（main file）为你生成的文件的路径。
 
 __package.json__
 
@@ -171,13 +186,12 @@ __package.json__
 {
     ...
     "main": "dist/webpack-numbers.js",
-    "module": "src/index.js", // To add as standard module as per https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage
+    "module": "src/index.js", // 增加标准的模块，参照： https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage
     ...
 }
 ```
 
-Now you can [publish it as an npm package](https://docs.npmjs.com/getting-started/publishing-npm-packages) and find it at [unpkg.com](https://unpkg.com/#/) to distribute it to your users.
-
+现在你可以 [将其作为一个 npm 包来发布](https://docs.npmjs.com/getting-started/publishing-npm-packages) 并且在 [unpkg.com](https://unpkg.com/#/) 找到它并向你的用户分发。
 ***
 
-https://webpack.js.org/guides/author-libraries/
+> 原文：https://webpack.js.org/guides/author-libraries/

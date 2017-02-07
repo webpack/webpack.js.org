@@ -147,7 +147,15 @@ export function vote(token, itemId, voteName, value) {
     usedCurrencies[pv.currency] += value;
   }
   allItems[itemId][voteName] = (allItems[itemId][voteName] || 0) + value;
-  return delay(500).then(() => ({
-    ok: true
-  }));
+  return delay(500).then(() => true);
+}
+
+export function configItem(token, itemId, config) {
+  if(token !== "developer")
+    return Promise.reject(new Error("Not logged in as developer"));
+  var item = allItems[itemId];
+  Object.keys(config).forEach(key => {
+    item[key] = config[key];
+  });
+  return delay(500).then(() => true);
 }

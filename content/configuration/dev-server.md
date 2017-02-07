@@ -185,6 +185,17 @@ hot: true
 ?> Add various other steps needed for this to work. (From my experience, and the current docs it looks like other steps are needed here - not like in the cmd line where it's just a flag)
 
 
+## `devServer.hotOnly` - CLI only
+
+`boolean`
+
+Enables Hot Module Replacement (see [`devServer.hot`](#devserver-hot)) without page refresh as fallback in case of build failures.
+
+```js
+hotOnly: true
+```
+
+
 ## `devServer.https`
 
 `boolean` `object`

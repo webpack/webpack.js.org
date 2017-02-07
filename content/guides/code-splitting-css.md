@@ -1,19 +1,19 @@
 ---
 title: 代码拆分 - CSS
-sort: 3
+sort: 31
 contributors:
   - pksjce
   - jonwheeler
   - johnstew
 ---
 
-如果你使用 css-loader，并且在 JavaScript 文件里导入了 CSS，webpack 会把 CSS 代码和 JavaScript 代码一块打包。
+如果你使用 `css-loader`，并且在 JavaScript 文件里导入了 CSS，webpack 会把 CSS 代码和 JavaScript 代码一块打包。
 这样做的坏处是，浏览器不能异步或并行加载你的 CSS 代码。也就是说，浏览器在加载整个 JavaScript 打包文件后，才能开始渲染 CSS。
-webpack 能很好地解决这个问题，通过使用 [extract-text-webpack-plugin](https://github.com/webpack/extract-text-webpack-plugin) 和 [css-loader](https://github.com/webpack/css-loader)，来把 CSS 打包文件分离开来。
+webpack 能很好地解决这个问题，通过使用 [extract-text-webpack-plugin](https://github.com/webpack/extract-text-webpack-plugin) 和 [`css-loader`](https://github.com/webpack/css-loader)，来把 CSS 打包文件分离开来。
 
 ## 使用 `css-loader`
 
-你可以使用 [css-loader](https://github.com/webpack/css-loader) 来向你的 JavaScript 代码导入 CSS [模块](/concept/modules)。
+你可以使用 [`css-loader`](https://github.com/webpack/css-loader) 来向你的 JavaScript 代码导入 CSS [模块](/concept/modules)。
 `css-loader` 在 webpack 中的配置可以参考下面的代码：
 
 ```javascript
@@ -49,7 +49,7 @@ npm i --save-dev extract-text-webpack-plugin
 
 ```javascript
 ...
-loader: ExtractTextPlugin.extract('css-loader?sourceMap') //Can be used without sourcemaps too.
+use: ExtractTextPlugin.extract({loader:'css-loader',options:{sourceMap:true}) //Can be used without sourcemaps too.
 ...
 ```
 
@@ -79,8 +79,11 @@ module.exports = function () {
             rules: [{
                 test: /\.css$/,
                 exclude: /node_modules/,
-                loader: ExtractTextPlugin.extract({
-                    loader: 'css-loader?sourceMap'
+                use: ExtractTextPlugin.extract({
+                    loader: 'css-loader',
+                    options: {
+                      sourceMap: true
+                    }
                 })
             }]
         },

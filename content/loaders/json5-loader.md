@@ -115,7 +115,7 @@ console.log(appConfig.env) // 'production'
 
 ## LICENSE
 
-#### [MIT](./LICENSE)
+MIT
 
 [npm]: https://img.shields.io/npm/v/json-loader.svg
 [npm-url]: https://npmjs.com/package/json-loader
