@@ -1,14 +1,14 @@
 ---
-title: Environment
+title: 环境(Environment)
 contributors:
   - simon04
 ---
 
-Eventually you will find the need to disambiguate in your `webpack.config.js` between [development](/guides/development) and [production builds](/guides/production-build). You have (at least) two options:
+最终，你会发现需要在[开发](/guides/development)和[生产构建](/guides/production-build)之间，消除 `webpack.config.js` 的差异。你（至少）需要两个选项：
 
-## Using `--env`
+## 使用 `--env`
 
-The webpack CLI support specifying build environment keys via `--cli` such as `--env.production` or `--env.platform=web`. To make use of those settings, change the configuration object into a function in `webpack.config.js`:
+webpack CLI 支持通过 `--cli` 指定构建环境键(build environment key)（如 `--env.production` 或 `--env.platform=web`）。要使用这些设置，请将 `webpack.config.js` 中的配置对象(configuration object)更改为一个函数：
 
 ```diff
 -module.exports = {
@@ -16,16 +16,16 @@ The webpack CLI support specifying build environment keys via `--cli` such as `-
 +  return {
     plugins: [
       new webpack.optimize.UglifyJsPlugin({
-+        compress: env.production // compress only in production build
++        compress: env.production // 只在生产环境构建时压缩
       })
     ]
 +  };
 };
 ```
 
-## Using environment variables
+## 使用环境变量
 
-Alternatively, the standard approach in Node.js modules can be applied: Set an environment variable when running webpack and refer to the variables using Node's [`process.env`](https://nodejs.org/api/process.html#process_process_env). The variable `NODE_ENV` is commonly used as de-facto standard (see [here](https://dzone.com/articles/what-you-should-know-about-node-env)).
+或者，可以使用 Node.js 中的标准方式：在运行 webpack 时设置环境变量，并且使用 Node.js 的 [`process.env`](https://nodejs.org/api/process.html#process_process_env) 引用变量。`NODE_ENV` 变量通常被视为事实标准（查看[这里](https://dzone.com/articles/what-you-should-know-about-node-env)）。
 
 **webpack.config.js**
 ```diff
@@ -38,7 +38,7 @@ module.exports = {
 };
 ```
 
-Use the [`cross-env`](https://www.npmjs.com/package/cross-env) package to cross-platform-set environment variables:
+使用 [`cross-env`](https://www.npmjs.com/package/cross-env) 包来跨平台设置(cross-platform-set)环境变量：
 
 **package.json**
 ```json

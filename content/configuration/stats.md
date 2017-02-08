@@ -10,7 +10,7 @@ contributors:
 
 T> 对于 webpack-dev-server ，这个属性要放在 `devServer` 对象里。
 
-W> This option does not have any effect when using the Node.js API.
+W> 在使用 Node.js API 后，此选项无效。
 
 ## `stats`
 
