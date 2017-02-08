@@ -5,7 +5,6 @@ contributors:
   - thelarkinn
   - pksjce
   - e-cloud
-  - jeffrygan
 ---
 
 [Tapable](https://github.com/webpack/tapable)是一个小型库,能够让我们为javascript模块添加并应用插件。
