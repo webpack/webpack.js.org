@@ -20,8 +20,9 @@ Tells webpack which environment the application is targeting. The following valu
 | `target`      | Description            |
 | ------------- |------------------------|
 | `async-node`| Compile for usage in a Node.js-like environment (uses `fs` and `vm` to load chunks asynchronously)    |
-| `electron`      | Compile for [Electron](http://electron.atom.io/) renderer process, provide a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules. |
-| `electron-renderer` | Compile for [Electron](http://electron.atom.io/) for `renderer-process` |
+| `electron`      | Alias for `electron-main` |
+| `electron-main`      | Compile for [Electron](http://electron.atom.io/) for main process. |
+| `electron-renderer`      | Compile for [Electron](http://electron.atom.io/) for renderer process, providing a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules. |
 | `node` | Compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks) |
 |`node-webkit`|  Compile for usage in WebKit and uses JSONP for chunk loading. Allows importing of built-in Node.js modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental) |
 |`web`| Compile for usage in a browser-like environment **(default)** |
