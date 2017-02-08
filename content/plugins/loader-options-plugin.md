@@ -1,14 +1,14 @@
 ---
-title: LoaderOptionsPlugin
+title: loader-options-plugin
 contributors:
     - johnnyreilly
 ---
 
 ?> 需要 Review
 
-`LoaderOptionsPlugin` 和其他插件不同。它的用途是帮助人们从 webpack 1 迁移至 webpack 2。在 webpack 2 中对 `webpack.config.js` 的结构要求变得更加严格；不再开放扩展给其他的加载器/插件。webpack 2 推荐的使用方式是直接传递 `options` 给加载器/插件。换句话说，配置选项将**不是**全局/共享的。
+`loader-options-plugin` 和其他插件不同。它的用途是帮助人们从 webpack 1 迁移至 webpack 2。在 webpack 2 中对 `webpack.config.js` 的结构要求变得更加严格；不再开放扩展给其他的加载器/插件。webpack 2 推荐的使用方式是直接传递 `options` 给加载器/插件。换句话说，配置选项将**不是**全局/共享的。
 
-不过，在某个加载器升级为依靠直接传递给它的配置选项运行之前，可以使用 `LoaderOptionsPlugin` 来抹平差异。你可以通过这个插件配置全局/共享的加载器配置，使所有的加载器都能收到这些配置。
+不过，在某个加载器升级为依靠直接传递给它的配置选项运行之前，可以使用 `loader-options-plugin` 来抹平差异。你可以通过这个插件配置全局/共享的加载器配置，使所有的加载器都能收到这些配置。
 
 在将来这个插件可能会被移除。
 

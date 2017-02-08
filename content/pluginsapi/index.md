@@ -1,8 +1,6 @@
 ---
 title: 插件 API
 sort: 1
-contributors:
-  - jeffrygan
 ---
 
 webpack以插件的形式提供了灵活强大的自定义api功能。使用插件,我们可以为webpack添加功能。另外,webpack提供生命周期钩子以便插件注册。在每个生命周期点,webpack会运行所有注册的插件,并提供当前webpack编译状态信息。
@@ -47,7 +45,6 @@ MyExampleWebpackPlugin.prototype.apply = function(compiler) {
 插件可以按照注册事件不同进行分类。每个事件钩子决定它是如何应用插件注册表。
 
 - __同步__ Tapable实例应用插件使用
-- __synchronous__ The Tapable instance applies plugins using
 
 `applyPlugins(name: string, args: any...)`
 
@@ -62,21 +59,18 @@ MyExampleWebpackPlugin.prototype.apply = function(compiler) {
 
 这里的每一个插件都会被一个接一个按顺序的调用,其参数是上一个插件返回的值。因此这些插件必须要考虑执行顺序。
 它必须接受上一个插件执行后返回的参数。第一个插件接受的参数是 `init` 。这种模式通常用于和 `webpack` 模板相关的Tapable实例,比如 `ModuleTemplate`, `ChunkTemplate` 等。
-Here each of the plugins are called one after the other with the args from the return value of the previous plugin. The plugin must take into consider the order of its execution.
-It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. This pattern is used in the Tapable instances which are related to the `webpack` templates like `ModuleTemplate`, `ChunkTemplate` etc.
 
 - __异步__ 当所有插件都使用异步的方法
 
 `applyPluginsAsync(name: string, args: any..., callback: (err?: Error) -> void)`
 
 插件的处理函数调用时伴随所有args参数和一个包含 `(err?: Error) -> void` 签名的回调函数。这些处理函数按照注册顺序被调用。当所有处理函数都执行后 `callback` 会被调用。
-The plugin handler functions are called with all args and a callback function with the signature `(err?: Error) -> void`. The handler functions are called in order of registration.`callback` is called after all the handlers are called.
 这种模式通常用于像 `"emit"`, `"run"` 这样的事件。
-This is also a commonly used pattern for events like `"emit"`, `"run"`.
 
 - __异步 瀑布__ 这些插件将以瀑布形式被异步使用
 
 `applyPluginsAsyncWaterfall(name: string, init: any, callback: (err: Error, result: any) -> void)`
+
 这个插件的处理函数被调用时伴随一个当前值和一个包含 `(err: Error, nextValue: any) -> void.` 的函数。其中 `nextValue` 指定是下一个处理函数的当前值。第一个处理函数的当前值是 `init` 。当所有处理函数都应用后会调用callback方法,伴随最后的得到的值。如果有一个处理函数返回 `err` 值,会直接调用callback方法,伴随这个err值,并且其它处理函数不会再被调用。
 这种插件模式通常用于像 `"before-resolve"` 和 `"after-resolve"` 这样的事件。
 

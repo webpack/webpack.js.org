@@ -191,7 +191,7 @@ function root(contentCb) {
   };
 }
 
-function section(title, contentCb) {
+function section(title, contentCb, redirects = {}) {
   return {
     title: title,
     path: function() {
@@ -209,7 +209,7 @@ function section(title, contentCb) {
         return require('./components/page/page.jsx').default
       }
     },
-    redirects: {} // <from>: <to>
+    redirects: redirects // <from>: <to>
   };
 }
 

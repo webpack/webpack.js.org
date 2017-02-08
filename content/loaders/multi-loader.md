@@ -1,15 +1,15 @@
 ---
 title: multi-loader
-source: https://raw.githubusercontent.com/webpack-contrib/multi-loader/master/README.md
-edit: https://github.com/webpack-contrib/multi-loader/edit/master/README.md
+source: https://raw.githubusercontent.com/webpack/multi-loader/master/README.md
+edit: https://github.com/webpack/multi-loader/edit/master/README.md
 ---
 # multi-loader
 
-This loader requires a module multiple times, each time loaded with a different loader. Like in a multi entry point the exports of the last item are exported.
+这个loader多次需要一个模块，每次被加载一个不同的loader。像在多入口点中，导出最后一个loader的导出。
 
-A normal user probably don't need this loader, but it's useful in combination with other loaders.
+普通用户可能不需要这个loader，但它与其它loader结合使用还是很有用的。
 
-Example:
+例：
 
 ``` javascript
 var multi = require("multi-loader");
@@ -34,3 +34,7 @@ var multi = require("multi-loader");
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/loaders/multi-loader/

@@ -1,28 +1,28 @@
 ---
 title: react-proxy-loader
-source: https://raw.githubusercontent.com/webpack-contrib/react-proxy-loader/master/README.md
-edit: https://github.com/webpack-contrib/react-proxy-loader/edit/master/README.md
+source: https://raw.githubusercontent.com/webpack/react-proxy-loader/master/README.md
+edit: https://github.com/webpack/react-proxy-loader/edit/master/README.md
 ---
 # react-proxy-loader
 
-Wraps a react component in a proxy component to enable Code Splitting (loads a react component and its dependencies on demand).
+在代理组件中封装react组件以启用代码拆分（加载一个react组件及其依赖需求）
 
-## installation
+## 安装
 
 `npm install react-proxy-loader`
 
-## Usage
+## 使用
 
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
+[文档：使用loaders](http://webpack.github.io/docs/using-loaders.html)
 
 ``` js
 var Component = require("react-proxy-loader!./Component");
-// => returns the proxied component (It loads on demand.)
-// (webpack creates an additional chunk for this component and its dependencies)
+// => 返回代理组件（它按需加载。）
+// （webpack为此组件及其依赖项创建一个附加块）
 
 var ComponentProxyMixin = require("react-proxy-loader!./Component").Mixin;
-// => returns a mixin for the proxied component
-// (This allows you to setup rendering for the loading state for the proxy)
+// => 返回代理组件的mixin
+// （这允许您为prox的加载状态设置渲染）
 var ComponentProxy = React.createClass({
 	mixins: [ComponentProxyMixin],
 	renderUnavailable: function() {
@@ -31,11 +31,12 @@ var ComponentProxy = React.createClass({
 });
 ```
 
-The proxy is a react component. All properties are transferred to the wrapped component.
+代理是一个react组件。所有属性都将传输到包装组件。
 
 ### Configuration
+### 配置
 
-Instead of (or in addition to) inlining the loader call you can also specify the proxied components in your configuration:
+代替（或除了）内联加载器调用之外，还可以在配置中指定代理组件：
 
 ``` js
 module.exports = {
@@ -55,9 +56,9 @@ module.exports = {
 };
 ```
 
-### Chunk name
+### 块名称
 
-You can give the chunk a name with the `name` query parameter:
+您可以使用 `name` 查询参数为该块提供名称：
 
 ``` js
 var Component = require("react-proxy-loader?name=chunkName!./Component");
@@ -66,3 +67,7 @@ var Component = require("react-proxy-loader?name=chunkName!./Component");
 # License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/loaders/react-proxy-loader/
