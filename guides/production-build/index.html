@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/05cf28c93d116d781a31.css" rel="stylesheet">
+      <link href="/21c801bc4ccfd0638444.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -58,7 +58,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">]</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 </code></pre>
-<p>The <code>DefinePlugin</code> performs search-and-replace operations on the original source code. Any occurrence of <code>process.env.NODE_ENV</code> in the imported code is replaced by by <code>&quot;production&quot;</code>. Thus, checks like <code>if (process.env.NODE_ENV !== &apos;production&apos;) console.log(&apos;...&apos;)</code> are evaluated to <code>if (false) console.log(&apos;...&apos;)</code> and finally minified away using <code>UglifyJS</code>.</p>
+<p>The <code>DefinePlugin</code> performs search-and-replace operations on the original source code. Any occurrence of <code>process.env.NODE_ENV</code> in the imported code is replaced by <code>&quot;production&quot;</code>. Thus, checks like <code>if (process.env.NODE_ENV !== &apos;production&apos;) console.log(&apos;...&apos;)</code> are evaluated to <code>if (false) console.log(&apos;...&apos;)</code> and finally minified away using <code>UglifyJS</code>.</p>
 <blockquote class="tip"><div class="tip-content"> Technically, <code>NODE_ENV</code> is a system environment variable that Node.js exposes into running scripts. It is used by convention to determine development-vs-production behavior, by both server tools, build scripts, and client-side libraries. Contrary to expectations, <code>process.env.NODE_ENV</code> is not set to <code>&quot;production&quot;</code> <strong>within</strong> the build script <code>webpack.config.js</code>, see <a href="https://github.com/webpack/webpack/issues/2537">#2537</a>. Thus, conditionals like <code>process.env.NODE_ENV === &apos;production&apos; ? &apos;[name].[hash].bundle.js&apos; : &apos;[name].bundle.js&apos;</code> do not work as expected. See how to specify the <a href="/configuration/environment">environment in webpack configuration</a>. </div></blockquote><h2 class="header"><a class="anchor" href="#the-manual-way-configuring-webpack-for-multiple-environments" id="the-manual-way-configuring-webpack-for-multiple-environments"></a><span class="text">The manual way: Configuring webpack for multiple environments</span><a class="icon-link" href="#the-manual-way-configuring-webpack-for-multiple-environments"></a></h2>
 <p>When we do have multiple configurations in mind for different environments, the easiest way is to write separate js files for
 each environment. For example:</p>
