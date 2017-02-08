@@ -2,6 +2,7 @@
 title: Plugins
 contributors:
   - simon04
+  - gonzoyumo
 ---
 
 webpack has a rich plugin interface. Most of the features within webpack itself use this plugin interface. This makes webpack **flexible**.
@@ -14,6 +15,7 @@ webpack has a rich plugin interface. Most of the features within webpack itself 
 |[`CompressionWebpackPlugin`](/plugins/compression-webpack-plugin)|Prepare compressed versions of assets to serve them with Content-Encoding|
 |[`I18nWebpackPlugin`](/plugins/i18n-webpack-plugin)|Adds i18n support to your bundles|
 |[`HtmlWebpackPlugin`](/plugins/html-webpack-plugin)| Simplifies creation of HTML files (`index.html`) to serve your bundles|
+|[`NormalModuleReplacementPlugin`](/plugins/normal-module-replacement-plugin)|Replaces resource that matches a regexp|
 
 
 ![Awesome](../assets/awesome-badge.svg)
