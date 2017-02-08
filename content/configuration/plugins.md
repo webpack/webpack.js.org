@@ -12,7 +12,7 @@ contributors:
 
 `array`
 
-A list of webpack plugins. For example, when multiple bundles share some of the same dependencies, the `CommonsChunkPlugin` could be useful to extract those dependencies into a shared bundle to avoid duplication. This could be added like so:
+webpack 插件列表。例如，当多个 bundle 共享一些相同的依赖，`CommonsChunkPlugin` 有助于提取这些依赖到共享的 bundle 中，来避免重复打包。可以像这样添加：
 
 ```js
 plugins: [
@@ -22,15 +22,15 @@ plugins: [
 ]
 ```
 
-A more complex example, using multiple plugins, might look something like this:
+一个复杂示例，使用多个插件，可能看起来就像这样：
 ```js
-// importing plugins that do not come by default in webpack
+// 导入非 webpack 默认自带插件
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var DashboardPlugin = require('webpack-dashboard/plugin');
 
-// adding plugins to your configuration
+// 在配置中添加插件
 plugins: [
-  // build optimization plugins
+  // 构建优化插件
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
     filename: 'vendor-[hash].min.js',
@@ -47,11 +47,11 @@ plugins: [
     allChunks: true,
   }),
   new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
-  // compile time plugins
+  // 编译时(compile time)插件
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': '"production"',
   }),
-  // webpack-dev-server enhancement plugins
+  // webpack-dev-server 强化插件
   new DashboardPlugin(),
   new webpack.HotModuleReplacementPlugin(),
 ]
