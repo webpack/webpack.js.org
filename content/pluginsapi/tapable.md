@@ -27,14 +27,18 @@ contributors:
 不同的 `applyPlugins*` 方法对应以下使用情况:
 
 * 串行执行插件
+
 * 并行执行插件
+
 * 插件一个接一个的执行,并且每个插件接收上一个插件的返回值(瀑布)
+
 * 异步执行插件
-* 并行执行插件
+
 * 保护模式终止插件执行: 一旦某个插件返回 non-`undefined` ,会退出运行流程并返回 *这个插件的返回值*。这看起来像 `EventEmitter` 的 `once()`,但他们是完全不同的。
 
 ## 示例
 webpack中有个Tapable实例 [Compiler](./compiler), 它的作用是编译webpack的配置对象,并返回[Compilation](./compilation)实例。当Compilation实例运行时,它会创建所需的包。
+
 下面是一个使用 `Tapable` 的小例子。
 
 **node_modules/webpack/lib/Compiler.js**
