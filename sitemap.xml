@@ -2,9 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">    <url>
         <loc>https://webpack.js.org/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/analyze/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/api/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/analyze/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/branding/index.html</loc>
     </url>    <url>
@@ -22,9 +22,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/license/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/organization/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/organization/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/plugins/index.html</loc>
     </url>    <url>
