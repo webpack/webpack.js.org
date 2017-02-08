@@ -2,9 +2,10 @@
 title: Tree Shaking
 contributors:
   - simon04
+  - zacanger
 ---
 
-_Tree shaking_ is a term commonly used in the JavaScript context for dead-code elimination, or more precisely, life-code import. It relies on ES6 module [import](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/import)/[export](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/export) for the [static structure](http://exploringjs.com/es6/ch_modules.html#static-module-structure) of its module system. The name and concept have been popularized by the ES6 module bundler [rollup](https://github.com/rollup/rollup).
+_Tree shaking_ is a term commonly used in the JavaScript context for dead-code elimination, or more precisely, live-code import. It relies on ES6 module [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)/[export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) for the [static structure](http://exploringjs.com/es6/ch_modules.html#static-module-structure) of its module system. The name and concept have been popularized by the ES6 module bundler [rollup](https://github.com/rollup/rollup).
 
 webpack 2 comes with a built-in support for ES6 modules (alias *harmony modules*) as well as unused module export detection.
 
