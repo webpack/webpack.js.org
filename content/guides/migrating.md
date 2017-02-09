@@ -269,7 +269,7 @@ module: {
     {
       test: /.css$/,
 -      loader: ExtractTextPlugin.extract("style-loader", "css-loader", { publicPath: "/dist" })
-+      loader: ExtractTextPlugin.extract({
++      use: ExtractTextPlugin.extract({
 +        fallback: "style-loader",
 +        use: "css-loader",
 +        publicPath: "/dist"
