@@ -1,10 +1,7 @@
 'use strict';
 var marked = require('marked');
 
-module.exports = function(section) {
-  // alter marked renderer to add slashes to beginning so images point at root
-  // leanpub expects images without slash...
-  section = section ? '/' + section + '/' : '/';
+module.exports = function() {
 
   var renderer = new marked.Renderer();
 
