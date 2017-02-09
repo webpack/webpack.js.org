@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/7a4f15b7e9017f0db320.css" rel="stylesheet">
+      <link href="/44907db4cd56f15e1135.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -70,7 +70,7 @@ The new naming conventions are easier to understand and are a good reason to upg
 In webpack v1, loaders were commonly chained with <code>!</code>. This style is only supported using the legacy option <code>module.loaders</code>.</p>
 <pre><code class="lang-diff">  module: {
 <span class="token deleted">-   loaders: {</span>
-<span class="token inserted">+   rules: {</span>
+<span class="token inserted">+   rules: [{</span>
       test: /\.less$/,
 <span class="token deleted">-     loader: &quot;style-loader!css-loader!less-loader&quot;</span>
 <span class="token inserted">+     use: [</span>
@@ -78,7 +78,7 @@ In webpack v1, loaders were commonly chained with <code>!</code>. This style is 
 <span class="token inserted">+       &quot;css-loader&quot;,</span>
 <span class="token inserted">+       &quot;less-loader&quot;</span>
 <span class="token inserted">+     ]</span>
-    }
+    }]
   }
 </code></pre>
 <h2 class="header"><a class="anchor" href="#automatic-loader-module-name-extension-removed" id="automatic-loader-module-name-extension-removed"></a><span class="text">Automatic <code>-loader</code> module name extension removed</span><a class="icon-link" href="#automatic-loader-module-name-extension-removed"></a></h2>
@@ -202,13 +202,15 @@ This means that if you want to see uglifyjs warnings, you need to set <code>comp
 <h3 class="header"><a class="anchor" href="#extracttextplugin-extract" id="extracttextplugin-extract"></a><span class="text"><code>ExtractTextPlugin.extract</code></span><a class="icon-link" href="#extracttextplugin-extract"></a></h3>
 <pre><code class="lang-diff">module: {
   rules: [
-    test: /.css$/,
-<span class="token deleted">-    loader: ExtractTextPlugin.extract(&quot;style-loader&quot;, &quot;css-loader&quot;, { publicPath: &quot;/dist&quot; })</span>
-<span class="token inserted">+    loader: ExtractTextPlugin.extract({</span>
-<span class="token inserted">+      fallback: &quot;style-loader&quot;,</span>
-<span class="token inserted">+      use: &quot;css-loader&quot;,</span>
-<span class="token inserted">+      publicPath: &quot;/dist&quot;</span>
-<span class="token inserted">+    })</span>
+    {
+      test: /.css$/,
+<span class="token deleted">-      loader: ExtractTextPlugin.extract(&quot;style-loader&quot;, &quot;css-loader&quot;, { publicPath: &quot;/dist&quot; })</span>
+<span class="token inserted">+      use: ExtractTextPlugin.extract({</span>
+<span class="token inserted">+        fallback: &quot;style-loader&quot;,</span>
+<span class="token inserted">+        use: &quot;css-loader&quot;,</span>
+<span class="token inserted">+        publicPath: &quot;/dist&quot;</span>
+<span class="token inserted">+      })</span>
+    }
   ]
 }
 </code></pre>
