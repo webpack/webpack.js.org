@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/28a66ce2b39792665e65.css" rel="stylesheet">
+      <link href="/04943e51ad3a3d3778fa.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -381,7 +381,7 @@ PrintChunksPlugin<span class="token punctuation">.</span>prototype<span class="t
 <p>Any plugin should use <code>this.fileSystem</code> as fileSystem, as it&apos;s cached. It only has async named functions, but they may behave sync, if the user uses a sync file system implementation (i. e. in enhanced-require).</p>
 <p>To join paths any plugin should use <code>this.join</code>. It normalizes the paths. There is a <code>this.normalize</code> too.</p>
 <p>A bailing async forEach implementation is available on <code>this.forEachBail(array, iterator, callback)</code>.</p>
-<p>To pass the request to other resolving plugins, use the <code>this.doResolve(types: String|String[], request: Request, callback)</code> method. <code>types</code> are multiple possible request types that are tested in order of preference.</p>
+<p>To pass the request to other resolving plugins, use the <code>this.doResolve(types: String|String[], request: Request, callback)</code> or (<code>this.doResolve(types, request, message, callback)</code>) method. <code>types</code> are multiple possible request types that are tested in order of preference.</p>
 <pre><code class="lang-javascript"><span class="token keyword">interface</span> <span class="token class-name">Request</span> <span class="token punctuation">{</span>
   path<span class="token punctuation">:</span> String <span class="token comment" spellcheck="true">// The current directory of the request</span>
   request<span class="token punctuation">:</span> String <span class="token comment" spellcheck="true">// The current request string</span>
