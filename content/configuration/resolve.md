@@ -9,20 +9,20 @@ contributors:
   - sebastiandeutsch
 ---
 
-These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail.
-Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
+这些选项能设置模块如何被解析。webpack 提供合理的默认值，但是还是可能会修改一些解析的细节。
+关于 resolver 具体如何工作的更多解释说明，请查看[模块解析方式](/concepts/module-resolution)。
 
 ## `resolve`
 
 `object`
 
-Configure how modules are resolved. For example, when calling `import "lodash"` in ES2015, the `resolve` options can change where webpack goes to look for `"lodash"` (see [`modules`](#resolve-modules)).
+配置模块如何解析。例如，当在 ES2015 中调用 `import "lodash"`，`resolve` 选项能够对 webpack 查找 `"lodash"` 的方式去做修改（查看[`模块`](#resolve-modules)）。
 
 ## `resolve.alias`
 
 `object`
 
-Create aliases to `import` or `require` certain modules more easily. For example, to alias a bunch of commonly used `src/` folders:
+创建 `import` 或 `require` 的别名，来确保模块引入变得更简单。例如，一些位于 `src/` 文件夹下的常用模块：
 
 ```js
 alias: {
@@ -31,19 +31,19 @@ alias: {
 }
 ```
 
-Now, instead of using relative paths when importing like so:
+现在，替换「在导入时使用相对路径」这种方式，就像这样：
 
 ```js
 import Utility from '../../utilities/utility';
 ```
 
-you can use the alias:
+你可以这样使用别名：
 
 ```js
 import Utility from 'Utilities/utility';
 ```
 
-A trailing `$` can also be added to the given object's keys to signify an exact match:
+也可以在给定对象的键后的末尾添加 `$`，以表示精准匹配：
 
 ```js
 alias: {
@@ -51,16 +51,16 @@ alias: {
 }
 ```
 
-which would yield these results:
+这将产生以下结果：
 
 ```js
-import Test1 from 'xyz'; // Success, file.js is resolved and imported
-import Test2 from 'xyz/file.js'; // Error, /path/to/file.js/file.js is invalid
+import Test1 from 'xyz'; // 成功，file.js 被解析和导入。
+import Test2 from 'xyz/file.js'; // 错误，/path/to/file.js/file.js 是无效的
 ```
 
-The following table explains a lot more cases:
+下面的表格展示了许多情况：
 
-| `alias:` | `import "xyz"` | `import "xyz/file.js"` |
+| `别名：` | `import "xyz"` | `import "xyz/file.js"` |
 | -------- | ---------------- | -------------------------|
 | `{}` | `/abc/node_modules/xyz/index.js` | `/abc/node_modules/xyz/file.js` |
 | `{ xyz: "/abs/path/to/file.js" }` | `/abs/path/to/file.js` | error |
@@ -77,16 +77,16 @@ The following table explains a lot more cases:
 | `{ xyz: "xyz/dir" }` | `/abc/node_modules/xyz/dir/index.js` | `/abc/node_modules/xyz/dir/file.js` |
 | `{ xyz$: "xyz/dir" }` | `/abc/node_modules/xyz/dir/index.js` | `/abc/node_modules/xyz/file.js` |
 
-`index.js` may resolve to another file if defined in the `package.json`.
+如果在 `package.json` 中定义，`index.js` 可能会被解析为另一个文件。
 
-`/abc/node_modules` may resolve in `/node_modules` too.
+`/abc/node_modules` 也可能在 `/node_modules` 中解析。
 
 
 ## `resolve.aliasFields`
 
 `string`
 
-Specify a field, such as `browser`, to be parsed according to [this specification](https://github.com/defunctzombie/package-browser-field-spec). Default:
+指定一个字段，例如 `browser`，根据[此规范](https://github.com/defunctzombie/package-browser-field-spec)进行解析。默认：
 
 ```js
 aliasFields: ["browser"]
@@ -97,7 +97,7 @@ aliasFields: ["browser"]
 
 `array`
 
-The JSON files to use for descriptions. Default:
+用于描述的 JSON 文件。默认：
 
 ```js
 descriptionFiles: ["package.json"]
@@ -108,7 +108,7 @@ descriptionFiles: ["package.json"]
 
 `boolean`
 
-If `true`, it will not allow extension-less files. So by default `require('./foo')` works if `./foo` has a `.js` extension, but with this enabled only `require('./foo.js')` will work. Default:
+如果是 `true`，将不允许无扩展名(extension-less)文件。默认如果 `./foo` 有 `.js` 扩展，`require('./foo')` 可以正常运行。但如果启用此选项，只有 `require('./foo.js')` 能够正常工作。默认：
 
 ```js
 enforceExtension: false
@@ -119,7 +119,7 @@ enforceExtension: false
 
 `boolean`
 
-Whether to require to use an extension for modules (e.g. loaders). Default:
+对模块是否需要使用的扩展（例如 loader）。默认：
 
 ```js
 enforceModuleExtension: false
@@ -130,19 +130,19 @@ enforceModuleExtension: false
 
 `array`
 
-Automatically resolve certain extensions. This defaults to:
+自动解析确定的扩展。默认值为：
 
 ```js
 extensions: [".js", ".json"]
 ```
 
-which is what enables users to leave off the extension when importing:
+能够使用户在引入模块时不带扩展：
 
 ```js
 import File from '../path/to/file'
 ```
 
-W> Using this will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions. For modules that are imported with their extension, e.g. `import SomeFile from "./somefile.ext"`, to be properly resolved, a string containing "\*" must be included in the array.
+W> 使用此选项，会**覆盖默认数组**，这就意味着 webpack 将不再尝试使用默认扩展来解析模块。对于使用其扩展导入的模块，例如，`import SomeFile from "./somefile.ext"`，要想正确的解析，一个包含“\*”的字符串必须包含在数组中。
 
 
 ## `resolve.mainFields`
