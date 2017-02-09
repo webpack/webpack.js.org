@@ -1,5 +1,5 @@
 ---
-title: 有用的插件模式
+title: 有用的插件模式(Useful Plugin Patterns)
 sort: 2
 ---
 

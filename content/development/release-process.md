@@ -1,5 +1,5 @@
 ---
-title: webpack 合入，标签和发布流程
+title: webpack 合并、标记和发布流程(webpack merge, tag and release process)
 contributors:
   - d3viant0ne
   - sokra

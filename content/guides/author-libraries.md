@@ -5,11 +5,12 @@ contributors:
     - johnstew
     - simon04
 ---
+
 webpack是一个用来打包应用（application）和库（library）的代码的工具。如果你是一个JavaScript库的作者，并且想要将你的打包逻辑给流程化（streamline），那么这篇文档将会帮助到你。
 
 ## 创建一个库
 
-假设你正在写一个小的 library `webpack-numbers'，允许将数字1到5从数字转换为文本表示，反之亦然。实现使用ES6模块，可能看起来像这样：
+假设你正在写一个小的 library `webpack-numbers'，允许将数字1到5从数字转换为文本表示，反之亦然。实现使用 ES2015 模块，可能看起来像这样：
 
 __src/index.js__
 ```javascript
@@ -32,6 +33,7 @@ export function wordToNum(word) {
 
 ```javascript
 import * as webpackNumbers from 'webpack-numbers';
+
 ...
 webpackNumbers.wordToNum('Two') // 输出 2
 ...
@@ -39,6 +41,7 @@ webpackNumbers.wordToNum('Two') // 输出 2
 // 使用 CommonJS 模块引入
 
 var webpackNumbers = require('webpack-numbers');
+
 ...
 webpackNumbers.numToWord(3); // output is Three
 ...
@@ -58,6 +61,7 @@ webpackNumbers.numToWord(3); // output is Three
 </script>
 </html>
 ```
+
 完整的源代码和配置请参阅 [webpack-library-example](https://github.com/kalcifer/webpack-library-example)。
 
 ## 配置 webpack
@@ -90,28 +94,9 @@ module.exports = {
 
 以上代码是打包该库的基本配置。
 
-### 增加 Loaders
-
-我们还需要增加相关的 loader 来编译代码。这里需要一个 `json-loader` 来预编译我们的json文件。
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-    // ...
-    module: {
-        rules: [{
-            test: /.json$/,
-            use: 'json-loader'
-        }]
-    }
-};
-```
-
 ### 增加 `externals`
 
 现在，如果执行 `webpack`，你会发现输出了一个非常巨大的文件。进一步观察该文件，你会发现 lodash 和你的代码被一起打包了。
-
 然而对于你的库本身来说，并不需要打包 `lodash`。因此你可能会想将该外部库（external）的控制权交给你的库的用户。
 
 这一点可以通过配置 `externals` 来实现：
