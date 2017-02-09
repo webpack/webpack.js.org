@@ -68,6 +68,7 @@
   font-size: getFontSize(-2);
   text-transform: uppercase;
   color: getColor(dusty-grey);
+  @include fontantialias(false);
 
   &:not(:last-child) {
     margin-right: 1.5em;
