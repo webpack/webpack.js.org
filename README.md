@@ -16,6 +16,12 @@ If you want to fetch the documentation on additional loaders/plugins hosted in [
 
 For more information see the [contributors page](https://github.com/webpack/webpack.js.org/blob/master/CONTRIBUTING.md)
 
+## Translation Guide
+
+* Fork `translation` branch.
+* Translate documentation.
+* Regularly merge from `translation` branch to your own `translation` branch in order to get the updated documentation (especially plugin and loader documentation). Then you can compare the new and the old content.
+
 ## Content Progress
 
 Check out the [MVP Milestone](https://github.com/webpack/webpack.js.org/milestones) for the current status.
