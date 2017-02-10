@@ -10,7 +10,7 @@ webpack is a tool which can be used to bundle application code and also to bundl
 
 ## Author a Library
 
-Let's assume that you are writing a small library `webpack-numbers` allowing to convert numbers 1 to 5 from their numeric to a textual representation and vice-versa. The implementation makes use of ES6 modules, and might look like this:
+Let's assume that you are writing a small library `webpack-numbers` allowing to convert numbers 1 to 5 from their numeric to a textual representation and vice-versa. The implementation makes use of ES2015 modules, and might look like this:
 
 __src/index.js__
 ```javascript

@@ -1,5 +1,7 @@
 ---
 title: DefinePlugin
+contributurs:
+  - simon04
 ---
 
 ``` javascript
@@ -61,4 +63,23 @@ and then after a minification pass results in:
 
 ``` javascript
 console.log('Production log')
+```
+
+## Use Case: Feature Flags
+Enable/disable features in production/development build using [feature flags](https://en.wikipedia.org/wiki/Feature_toggle).
+
+```javascript
+new webpack.DefinePlugin({
+  'NICE_FEATURE': JSON.stringify(true),
+  'EXPERIMENTAL_FEATURE': JSON.stringify(false)
+})
+```
+
+## Use Case: Service URLs
+Use a different service URL in production/development builds:
+
+```javascript
+new webpack.DefinePlugin({
+  'SERVICE_URL': JSON.stringify("http://dev.example.com")
+})
 ```
