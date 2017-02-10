@@ -23,6 +23,7 @@ html {
 body {
   font: 400 getFontSize(0) $font-stack-body;
   color: getColor(elephant);
+  @include fontantialias(true);
 }
 
 a {
