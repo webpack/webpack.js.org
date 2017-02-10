@@ -9,6 +9,7 @@ contributors:
   - sricc
   - terinjokes
   - mattce
+  - kbariotis
 ---
 
 webpack is fed via a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
@@ -355,9 +356,17 @@ module.exports = {
   </details>
   // Don't follow/bundle these modules, but request them at runtime from the environment
 
-  [stats](stats): {
-    /* TODO */
+  <details><summary>[stats](/configuration/stats): "errors-only",</summary>
+  [stats](/configuration/stats): { //object
+    assets: true,
+    colors: true,
+    errors: true,
+    errorDetails: true,
+    hash: true,
+    // ...
   },
+  </details>
+  // lets you precisely control what bundle information gets displayed
 
   [devServer](/configuration/dev-server): {
     /* TODO */
