@@ -15,6 +15,8 @@ Have a look at [this page](/guides/installation)
 
 ?> The new CLI for webpack is under development. New features are being added such as the `--init` flag. [Check it out!](https://github.com/webpack/webpack-cli)
 
+?> The new CLI for webpack is under development. New features are being added such as the `--init` flag. [Check it out!](https://github.com/webpack/webpack-cli)
+
 ### Common Usage
 
 ```bash
