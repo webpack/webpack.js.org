@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/d8f53d34b32c990869a3.css" rel="stylesheet">
+      <link href="/bc8e719e64d7ea2f9491.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -109,13 +109,13 @@ url<span class="token punctuation">(</span>~module<span class="token punctuation
   <span class="token string">&quot;);&quot;</span><span class="token punctuation">;</span>
 </code></pre>
 <h3 class="header"><a class="anchor" href="#use-a-library-as-peerdependencies-when-they-wrap-it" id="use-a-library-as-peerdependencies-when-they-wrap-it"></a><span class="text">Use a library as <code>peerDependencies</code> when they wrap it</span><a class="icon-link" href="#use-a-library-as-peerdependencies-when-they-wrap-it"></a></h3>
-<p>using a peerDependency allows the application developer to specify the exact version in <code>package.json</code> if desired. The dependency should be relatively open to allow updating the library without needing to publish a new loader version.</p>
+<p>Using a peerDependency allows the application developer to specify the exact version in <code>package.json</code> if desired. The dependency should be relatively open to allow updating the library without needing to publish a new loader version.</p>
 <pre><code class="lang-javascript"><span class="token string">&quot;peerDependencies&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
   <span class="token string">&quot;library&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;^1.3.5&quot;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <h3 class="header"><a class="anchor" href="#programmable-objects-as-query-option" id="programmable-objects-as-query-option"></a><span class="text">Programmable objects as <code>query</code>-option</span><a class="icon-link" href="#programmable-objects-as-query-option"></a></h3>
-<p>there are situations where your loader requires programmable objects with functions which cannot stringified as <code>query</code>-string. The <code>less-loader</code>, for example, provides the possibility to specify <a href="https://github.com/webpack/less-loader#less-plugins">LESS-plugins</a>. In these cases, a loader is allowed to extend webpack&apos;s <code>options</code>-object to retrieve that specific option. In order to avoid name collisions, however, it is important that the option is namespaced under the loader&apos;s camelCased npm-name.</p>
+<p>There are situations where your loader requires programmable objects with functions which cannot stringified as <code>query</code>-string. The <code>less-loader</code>, for example, provides the possibility to specify <a href="https://github.com/webpack/less-loader#less-plugins">LESS-plugins</a>. In these cases, a loader is allowed to extend webpack&apos;s <code>options</code>-object to retrieve that specific option. In order to avoid name collisions, however, it is important that the option is namespaced under the loader&apos;s camelCased npm-name.</p>
 <p><strong>Example:</strong></p>
 <pre><code class="lang-javascript"><span class="token comment" spellcheck="true">// webpack.config.js</span>
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
