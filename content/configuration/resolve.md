@@ -149,22 +149,22 @@ W> 使用此选项，会**覆盖默认数组**，这就意味着 webpack 将不�
 
 `array`
 
-When importing from an npm package, e.g. `import * as D3 from "d3"`, this option will determine which fields in it's `package.json` are checked. The default values will vary based upon the [`target`](/concepts/targets) specified in your webpack configuration.
+当从 npm 包中导入模块时（例如，`import * as D3 from "d3"`），此选项将决定在 `package.json` 中使用哪个字段导入模块。根据 webpack 配置中指定的 [`target`](/concepts/targets) 不同，默认值也会有所不同。
 
-When the `target` property is set to `webworker`, `web`, or left unspecified:
+当 `target` 属性设置为 `webworker`, `web` 或者没有指定，默认值为：
 
 
 ```js
 mainFields: ["browser", "module", "main"]
 ```
 
-For any other target (including `node`):
+对于其他任意的 target（包括 `node`），默认值为：
 
 ```js
 mainFields: ["module", "main"]
 ```
 
-For example, the `package.json` of [D3](https://d3js.org/) contains these fields:
+例如，[D3](https://d3js.org/) 的 `package.json` 含有这些字段：
 
 ```js
 {
@@ -176,14 +176,14 @@ For example, the `package.json` of [D3](https://d3js.org/) contains these fields
 }
 ```
 
-This means that when we `import * as D3 from "d3"` this will really resolve to the file in the `browser` property. The `browser` property takes precedence here because it's the first item in `mainFields`. Meanwhile, a Node.js application bundled by webpack will resolve by default to the file in the `module` field.
+这意味着当我们 `import * as D3 from "d3"`，实际从 `browser` 属性解析文件。在这里 `browser` 属性是最优先选择的，因为它是 `mainFields` 的第一项。同时，由 webpack 打包的 Node.js 应用程序默认会从 `module` 字段中解析文件。
 
 
 ## `resolve.mainFiles`
 
 `array`
 
-The filename to be used while resolving directories. Default:
+解析目录时要使用的文件名。默认：
 
 ```js
 mainFiles: ["index"]
@@ -194,13 +194,13 @@ mainFiles: ["index"]
 
 `array`
 
-Tell webpack what directories should be searched when resolving modules.
+告诉 webpack 解析模块时应该搜索的目录。
 
-Absolute and relative paths can both be used, but be aware that they will behave a bit differently.
+绝对路径和相对路径都能使用，但是要知道它们之间有一点差异。
 
-A relative path will be scanned simarly to how Node scans for `node_modules`, by looking through the current directory as well as it's ancestors (i.e. `./node_modules`, `../node_modules`, and on).
+通过查看当前目录以及祖先路径（即 `./node_modules`, `../node_modules` 等等），相对路径将类似于 Node 查找 'node_modules' 的方式进行查找。
 
-With an absolute path, it will only search in the given directory.
+使用绝对路径，将只在给定目录中搜索。
 
 `resolve.modules` defaults to:
 
@@ -208,7 +208,7 @@ With an absolute path, it will only search in the given directory.
 modules: ["node_modules"]
 ```
 
-If you want to add a directory to search in that takes precedences over `node_modules/`:
+如果你想要添加一个目录到模块搜索目录，此目录优先于 `node_modules/` 搜索：
 
 ```js
 modules: [path.resolve(__dirname, "src"), "node_modules"]
@@ -219,26 +219,26 @@ modules: [path.resolve(__dirname, "src"), "node_modules"]
 
 `regex` `array` `boolean`
 
-Enable aggressive, but **unsafe**, caching of modules. Passing `true` will cache everything. Default:
+启用，会主动缓存模块，但并**不安全**。传递 `true` 将缓存一切。默认：
 
 ```js
 unsafeCache: true
 ```
 
-A regular expression, or an array of regular expressions, can be used to test file paths and only cache certain modules. For example, to only cache utilities:
+正则表达式，或正则表达式数组，可以用于匹配文件路径或只缓存某些模块。例如，只缓存 utilities 模块：
 
 ```js
 unsafeCache: /src\/utilities/
 ```
 
-W> Changes to cached paths may cause failure in rare cases.
+W> 修改缓存路径可能在极少数情况下导致失败。
 
 
 ## `resolveLoader`
 
 `object`
 
-This set of options is identical to the `resolve` property set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages. Default:
+这组选项与上面的 `resolve` 对象的属性集合相同，但仅用于解析 webpack 的 [loader](/concepts/loaders) 包。默认：
 
 ```js
 {
@@ -248,16 +248,16 @@ This set of options is identical to the `resolve` property set above, but is use
 }
 ```
 
-T> Note that you can use alias here and other features familiar from resolve. For example `{ txt: 'raw-loader' }` would shim `txt!templates/demo.txt` to use `raw-loader`.
+T> 注意，这里你可以使用别名，并且其他特性类似于 resolve 对象。例如，`{ txt: 'raw-loader' }` 会使用 `raw-loader` 去 shim(填充) `txt!templates/demo.txt`。
 
 
 ## `resolveLoader.moduleExtensions`
 
 `array`
 
-The extensions which are tried when resolving a module (e.g. loaders). By default this is an empty array.
+在解析模块（例如，loader）时尝试使用的扩展。默认是一个空数组。
 
-If you want to use loaders without the `-loader` suffix, you can use this:
+如果你想要不带 `-loader` 后缀使用 loader，你可以使用：
 
 ```js
 moduleExtensions: ['-loader']
@@ -266,7 +266,7 @@ moduleExtensions: ['-loader']
 
 ## `resolve.plugins`
 
-A list of additional resolve plugins which should be applied. It allows plugins such as [`DirectoryNamedWebpackPlugin`](https://www.npmjs.com/package/directory-named-webpack-plugin).
+应该使用的额外的解析插件列表。它允许插件，如 [`DirectoryNamedWebpackPlugin`](https://www.npmjs.com/package/directory-named-webpack-plugin)。
 
 ```js
 plugins: [new DirectoryNamedWebpackPlugin()]
@@ -277,7 +277,7 @@ plugins: [new DirectoryNamedWebpackPlugin()]
 
 `boolean`
 
-Whether to resolve symlinks to their symlinked location. Default:
+是否将符号链接(symlink)解析到它们的符号链接位置(symlink location)。默认：
 
 ```js
 symlinks: true
@@ -288,7 +288,7 @@ symlinks: true
 
 `function`
 
-A function which decides whether a request should be cached or not. An object is passed to the function with `path` and `request` properties. Default:
+决定请求是否应该被缓存的函数。函数传入一个带有 `path` 和 `request` 属性的对象。默认：
 
 ```js
 cachePredicate: function() { return true }
