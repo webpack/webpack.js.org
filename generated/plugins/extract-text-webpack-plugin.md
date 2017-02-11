@@ -11,8 +11,7 @@ npm install --save-dev extract-text-webpack-plugin
 
 ## 使用
 
-> :警告: 如果使用 针对 webpack 1 的版本, 请看 [the README in the webpack-1 branch](https://github.com/webpack/extract-text-webpack-plugin/blob/webpack-1/README.md).
-
+> :警告: 如果使用 针对 webpack 1 的版本, 请看 [分支 webpack-1 的文档](https://github.com/webpack/extract-text-webpack-plugin/blob/webpack-1/README.md).
 
 ```js
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -34,6 +33,7 @@ module.exports = {
   ]
 }
 ```
+
 它会将所有的 入口chunk (entry chunks) 中的 `require("style.css")` 移动到分开的 css 文件。因此，你的样式不再内联到 javascript 里面，但会放到一个单独的 css 包文件 (`styles.css`)当中。 如果你的样式文件大小较大，这会更快，因为样式文件会跟 javascript 包并行加载。
 
 |优点|缺点|
@@ -70,7 +70,7 @@ new ExtractTextPlugin(options: filename | object)
 ExtractTextPlugin.extract(options: loader | object)
 ```
 
-Creates an extracting loader from an existing loader. Supports loaders of type `{ loader: [name]-loader -> {String}, options: {} -> {Object} }`.
+从一个已存在的加载器 (`loader`) 中创建一个 提取 (`extracting`) 加载器。支持这些加载器类型： `{ loader: [name]-loader -> {String}, options: {} -> {Object} }`.
 
 |名称|类型|描述|
 |:--:|:--:|:----------|
