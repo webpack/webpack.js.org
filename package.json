@@ -31,7 +31,7 @@
     "fetch": "scripts/fetch.sh",
     "init:generated": "mkdirp ./generated/loaders && mkdirp ./generated/plugins ",
     "lint": "run-s lint:*",
-    "lint:links": "hyperlink -r --exclude https://opencollective.com/webpack/*/*/website build/index.html | tap-min",
+    "lint:links": "hyperlink -r --exclude https://opencollective.com/webpack/*/*/website build/index.html",
     "lint:js": "eslint . --ext .js --ext .jsx",
     "lint:md": "eslint . --ext .md",
     "lint:markdown": "markdownlint --config ./.markdownlintrc **/*.md *.md ./content/**/*.md",
