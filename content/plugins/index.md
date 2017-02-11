@@ -15,7 +15,7 @@ webpack 有一个富插件接口(rich plugin interface)。webpack 自身的多�
 |[`CompressionWebpackPlugin`](/plugins/compression-webpack-plugin)|预先准备的资源压缩版本，使用 Content-Encoding 提供访问服务|
 |[`I18nWebpackPlugin`](/plugins/i18n-webpack-plugin)|为 bundle 增加国际化支持|
 |[`HtmlWebpackPlugin`](/plugins/html-webpack-plugin)| 用于简化 HTML 文件（`index.html`）的创建，提供访问 bundle 的服务。|
-|[`NormalModuleReplacementPlugin`](/plugins/normal-module-replacement-plugin)|Replaces resource that matches a regexp|
+|[`NormalModuleReplacementPlugin`](/plugins/normal-module-replacement-plugin)|替换与正则表达式匹配的资源|
 
 
 ![Awesome](../assets/awesome-badge.svg)

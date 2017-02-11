@@ -15,15 +15,15 @@ contributors:
 * 对常用值使用常量或变量
 * 编写并执行函数来生成部分配置
 
-在合适的时机使用这些特性。
+请在合适的时机使用这些特性。
 
-**你不应该使用以下**。从技术上讲你可以使用，但是**并不推荐**：
+**你不应该使用以下**。从技术上讲你可以这么做，但是**并不推荐**：
 
-* 访问命令行工具(CLI)参数，当使用 webpack 命令行工具（使用自己的命令行工具，或使用 `--env`）
-* 导出不确定的值（调用 webpack 两次应该产生同样的输入文件）
-* 编写很长的配置文件（将配置拆分为多个文件）
+* 在使用 webpack 命令行接口(CLI)（应该编写自己的命令行接口(CLI)，或使用 `--env`）时，访问命令行接口(CLI)参数
+* 导出不确定的值（调用 webpack 两次应该产生同样的输出文件）
+* 编写很长的配置（应该将配置拆分为多个文件）
 
-接下来的例子展示了 webpack 配置对象如何表达和配置，因为_配置对象是代码_：
+接下来的例子展示了 webpack 配置对象(webpack configuration object)如何即具有表现力，又具有可配置性，这是因为_配置对象即是代码_：
 
 ## 最简单的配置
 
@@ -41,7 +41,7 @@ module.exports = {
 };
 ```
 
-## 多个目标
+## 多个 Target
 
 **webpack.config.js**
 
@@ -86,11 +86,11 @@ let targets = ['web', 'webworker', 'node', 'async-node', 'node-webkit', 'electro
 module.exports = targets;
 ```
 
-T> 作为这篇文档最重要的部分是，会有许多不同格式和风格的 webpack 配置。你和你的团队在理解和维护上能够保持一致才是关键。
+T> 作为这篇文档最重要的部分是，会有许多不同格式和风格的 webpack 配置。关键在于，你和你的团队要在理解和维护上保持一致。
 
 ## 使用 TypeScript
 
-在下面的例子我们使用 TypeScript 创建一个类(class)，这个类使用了 angular-cli 的[生成配置](https://github.com/angular/angular-cli/)。
+在下面的例子我们使用 TypeScript 创建一个类(class)，[配置](https://github.com/angular/angular-cli/)是通过 angular-cli 生成。
 
 **webpack.config.ts**
 
@@ -107,7 +107,7 @@ import {
 
 export class NgCliWebpackConfig {
   // TODO: When webpack2 types are finished let's replace all these any types
-  // so this is more maintainable in the future for devs
+  // 所以对于开发人员来说，将来这些配置是更加可维护的
   public config: any;
   private webpackDevConfigPartial: any;
   private webpackProdConfigPartial: any;
@@ -153,13 +153,13 @@ export class NgCliWebpackConfig {
 
 ## 使用 JSX
 
-在下面例子中，JSX（React JavaScript 标记语法）和 Babel 创建了一个 webpack 可以识别的 JSON 配置。（由[Jason Miller](https://twitter.com/_developit)提供）
+在下面例子中，使用 JSX（React JavaScript 标记语法）和 Babel 创建了一个 webpack 可以支持的 JSON 配置。（由 [Jason Miller](https://twitter.com/_developit) 提供）
 
 
 ```javascript
 import h from 'jsxobj';
 
-// 导入插件的例子
+// 导入插件的示例
 const CustomPlugin = config => ({
   ...config,
   name: 'custom-plugin'
