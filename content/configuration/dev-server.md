@@ -384,6 +384,21 @@ With `quiet` enabled, nothing except the initial startup information will be wri
 quiet: true
 ```
 
+## `devServer.setup`
+
+`function`
+
+Here you can access the Express app object and add your own custom middleware to it.
+For example, to define custom handlers for some paths:
+     
+```js
+setup(app){
+  app.get('/some/path', function(req, res) {
+    res.json({ custom: 'response' });
+  });
+}
+```
+
 
 ## `devServer.staticOptions`
 
