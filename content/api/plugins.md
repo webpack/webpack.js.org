@@ -564,7 +564,7 @@ compiler.parser.plugin("var rewire", function (expr) {
 
 还有一个可用的委托异步的 forEach 接口 `this.forEachBail(array, iterator, callback)`。
 
-要传递请求到其他解析插件，使用 `this.doResolve(types: String|String[], request: Request, callback)` 方法。`types` 根据优先级的识别会有多种请求类型的可能。
+要传递请求到其他解析插件，使用 `this.doResolve(types: String|String[], request: Request, callback)` 方法（或者`this.doResolve(types, request, message, callback)`方法）。`types` 根据优先级的识别会有多种请求类型的可能。
 
 ```javascript
 interface Request {
@@ -575,7 +575,7 @@ interface Request {
   directory: boolean // 请求是否指向一个目录
   file: boolean // 请求是否指向一个文件
   resolved: boolean // 请求是否已经被解析
-  // 在布尔值属性上，undefined 意味着 false 
+  // 在布尔值属性上，undefined 意味着 false
 }
 
 // 示例
