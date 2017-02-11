@@ -246,5 +246,3 @@ You will notice three major updates to our 'prod.js' file.
 * We have defined the 'process.env.NODE_ENV' to be 'prod' using the 'DefinePlugin'. Now across the application 'process.env.NODE_ENV' would have the value, 'prod', when we build our application for production environment. Likewise we can manage various variables of our choice, specific to environments this way.
 
 The choice of what is going to be common across all your environments is up to you, however. We have just demonstrated a few that could typically be common across environments when we build our application.
-
-You just saw, how powerful 'webpack-merge' is, that, it just saved us from a lot of code repetitions.

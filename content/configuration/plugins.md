@@ -36,7 +36,6 @@ plugins: [
     filename: 'vendor-[hash].min.js',
   }),
   new webpack.optimize.UglifyJsPlugin({
-    minimize: true,
     compress: {
       warnings: false,
       drop_console: false,

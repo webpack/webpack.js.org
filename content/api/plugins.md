@@ -560,7 +560,7 @@ To join paths any plugin should use `this.join`. It normalizes the paths. There 
 
 A bailing async forEach implementation is available on `this.forEachBail(array, iterator, callback)`.
 
-To pass the request to other resolving plugins, use the `this.doResolve(types: String|String[], request: Request, callback)` method. `types` are multiple possible request types that are tested in order of preference.
+To pass the request to other resolving plugins, use the `this.doResolve(types: String|String[], request: Request, callback)` or (`this.doResolve(types, request, message, callback)`) method. `types` are multiple possible request types that are tested in order of preference.
 
 ```javascript
 interface Request {

@@ -81,7 +81,7 @@ In webpack v1, loaders were commonly chained with `!`. This style is only suppor
 ``` diff
   module: {
 -   loaders: {
-+   rules: {
++   rules: [{
       test: /\.less$/,
 -     loader: "style-loader!css-loader!less-loader"
 +     use: [
@@ -89,7 +89,7 @@ In webpack v1, loaders were commonly chained with `!`. This style is only suppor
 +       "css-loader",
 +       "less-loader"
 +     ]
-    }
+    }]
   }
 ```
 
@@ -266,13 +266,15 @@ It's no longer necessary to specify it in configuration.
 ```diff
 module: {
   rules: [
-    test: /.css$/,
--    loader: ExtractTextPlugin.extract("style-loader", "css-loader", { publicPath: "/dist" })
-+    loader: ExtractTextPlugin.extract({
-+      fallback: "style-loader",
-+      use: "css-loader",
-+      publicPath: "/dist"
-+    })
+    {
+      test: /.css$/,
+-      loader: ExtractTextPlugin.extract("style-loader", "css-loader", { publicPath: "/dist" })
++      use: ExtractTextPlugin.extract({
++        fallback: "style-loader",
++        use: "css-loader",
++        publicPath: "/dist"
++      })
+    }
   ]
 }
 ```
