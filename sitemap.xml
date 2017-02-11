@@ -20,19 +20,19 @@
     </url>    <url>
         <loc>https://webpack.js.org/guides/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/license/index.html</loc>
+        <loc>https://webpack.js.org/loaders/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/organization/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/index.html</loc>
+        <loc>https://webpack.js.org/plugins/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/pluginsapi/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/plugins/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/vote/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/writers-guide/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/license/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/api/cli/index.html</loc>
     </url>    <url>
@@ -46,9 +46,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/concepts/dependency-graph/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/concepts/entry-points/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/concepts/hot-module-replacement/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts/entry-points/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/concepts/loaders/index.html</loc>
     </url>    <url>
@@ -56,9 +56,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/concepts/modules/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/concepts/plugins/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/concepts/output/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts/plugins/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/concepts/targets/index.html</loc>
     </url>    <url>
@@ -196,9 +196,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/loaders/null-loader/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/react-proxy-loader/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/raw-loader/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/loaders/react-proxy-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/script-loader/index.html</loc>
     </url>    <url>
@@ -206,31 +206,13 @@
     </url>    <url>
         <loc>https://webpack.js.org/loaders/style-loader/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/url-loader/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/transform-loader/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/loaders/url-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/val-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/worker-loader/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/pluginsapi/compilation/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/pluginsapi/compiler/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/pluginsapi/dependency/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/pluginsapi/examples/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/pluginsapi/module-factories/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/pluginsapi/parser/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/pluginsapi/resolver/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/pluginsapi/tapable/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/pluginsapi/template/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/plugins/banner-plugin/index.html</loc>
     </url>    <url>
@@ -261,6 +243,24 @@
         <loc>https://webpack.js.org/plugins/source-map-dev-tool-plugin/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/plugins/uglifyjs-webpack-plugin/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/pluginsapi/compilation/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/pluginsapi/compiler/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/pluginsapi/dependency/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/pluginsapi/examples/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/pluginsapi/module-factories/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/pluginsapi/parser/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/pluginsapi/resolver/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/pluginsapi/tapable/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/pluginsapi/template/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/vote/feedback/index.html</loc>
     </url>    <url>
