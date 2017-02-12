@@ -73,17 +73,17 @@ Customize the names used in each source map's `sources` array. This can be done 
 devtoolModuleFilenameTemplate: "webpack:///[resource-path]?[loaders]"
 ```
 
-The following substitutions are available in template strings:
+The following substitutions are available in template strings (via webpack's internal [`ModuleFilenameHelpers`](https://github.com/webpack/webpack/blob/master/lib/ModuleFilenameHelpers.js)):
 
-``` js
-[absolute-resource-path] // The absolute filename
-[all-loaders] // Automatic and explicit loaders and params up to the name of the first loader
-[hash] // The hash of the module identifier
-[id] // The module identifier
-[loaders] // Explicit loaders and params up to the name of the first loader
-[resource] // The path used to resolve the file and any query params used on the first loader
-[resource-path] // Same as above without the query params
-```
+| Template                 | Description |
+| ------------------------ | ----------- |
+| [absolute-resource-path] | The absolute filename |
+| [all-loaders]            | Automatic and explicit loaders and params up to the name of the first loader |
+| [hash]                   | The hash of the module identifier |
+| [id]                     | The module identifier |
+| [loaders]                | Explicit loaders and params up to the name of the first loader |
+| [resource]               | The path used to resolve the file and any query params used on the first loader |
+| [resource-path]          | The path used to resolve the file without any query params |
 
 When using a function, the same options are available camel-cased via the `info` parameter:
 
@@ -141,6 +141,22 @@ The default value is `"[name].js"`.
 Note this option is called filename but you are still allowed to something like `"js/[name]/bundle.js"` to create a folder structure.
 
 Note this options does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#output-chunkfilename) option is used. It also doesn't affect files created by loaders. For these files see loader options.
+
+The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
+
+| Template    | Description |
+| ----------- | ----------- |
+| [hash]      | The hash of the module identifier |
+| [chunkhash] | The hash of the chunk content |
+| [name]      | The module name |
+| [id]        | The module identifier |
+| [file]      | The module filename |
+| [filebase]  | The module [basename](https://nodejs.org/api/path.html#path_path_basename_path_ext) |
+| [query]     | The module query, i.e., the string following `?` in the filename |
+
+The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify `output.hashDigestLength` to configure the length globally.
+
+T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
 
 
 ## `output.hotUpdateChunkFilename`
