@@ -11,9 +11,9 @@ In this section, we will discuss how webpack splits code using `require.ensure()
 
 ## `require.ensure()`
 
-webpack statically parses for `require.ensure()` in the code while building and adds the modules here into a separate chunk. This new chunk is loaded on demand by webpack through jsonp.
+webpack statically parses for `require.ensure()` in the code while building. Any code within the callback function, including code that is `require()`d, will be added to a new chunk. This new chunk is written to an async bundle that is loaded on demand by webpack through jsonp.
 
-The syntax is as follows
+The syntax is as follows:
 
 ```javascript
 require.ensure(dependencies: String[], callback: function(require), chunkName: String)
@@ -23,14 +23,14 @@ require.ensure(dependencies: String[], callback: function(require), chunkName: S
 This is an array of strings where we can declare all the modules that need to be made available before all the code in the callback function can be executed.
 
 #### callback
-This is the callback function that webpack will execute once the dependencies are loaded. An implementation of the require object is sent as a parameter to this function. This is so that, we can further `require()` the dependencies and any other modules for execution.
+This is the callback function that webpack will execute once the dependencies are loaded. An implementation of the `require` function is sent as a parameter to this function. The function body can use this to further `require()` modules it needs for execution.
 
 #### chunkName
-The chunkName is the name given to the chunk created by this particular `require.ensure()`. By giving the same name at different split points of `require.ensure()`, we can make sure all the dependencies are collectively put in the same bundle.
+The `chunkName` is a name given to the chunk created by this particular `require.ensure()`. By passing the same `chunkName` to various `require.ensure()` calls, we can combine their code into a single chunk, resulting in only one bundle that the browser must load.
 
 ## Example
 
-Let us consider the following file structure
+Let us consider the following file structure:
 
 ```bash
 .
