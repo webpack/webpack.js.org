@@ -94,7 +94,8 @@ Send [environment](/configuration/environment) variable to be used in webpack co
 
 
 ```bash
-webpack --env=DEVELOPMENT
+webpack --env.production    # sets production to true
+webpack --env.platform=web  # sets platform to "web"
 ```
 
 **Print result of webpack as a JSON**
@@ -104,10 +105,12 @@ webpack --json
 webpack --json > stats.json
 ```
 
-In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option the output can be a JSON object.This response is accepted by webpack's [analyse tool](https://webpack.github.com/analyse), or chrisbateman's [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/), or th0r's [webpack-bundle-analyzer](https://github.com/th0r/webpack-bundle-analyzer).
+In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option the output can be a JSON object.
+This response is accepted by webpack's [analyse tool](https://webpack.github.com/analyse), or chrisbateman's [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/), or th0r's [webpack-bundle-analyzer](https://github.com/th0r/webpack-bundle-analyzer).
 The analyse tool will take in the JSON and provide all the details of the build in graphical form.
 
 *Further reads:*
+* [Analyzing Build Statistics](https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/)
 * [Three simple ways to inspect a Webpack bundle](https://medium.com/@joeclever/three-simple-ways-to-inspect-a-webpack-bundle-7f6a8fe7195d#.7d2i06mjx)
 * [Optimising your application bundle size with webpack](https://hackernoon.com/optimising-your-application-bundle-size-with-webpack-e85b00bab579#.5w5ko08pq)
 * [Analyzing & optimizing your Webpack bundle](https://medium.com/@ahmedelgabri/analyzing-optimizing-your-webpack-bundle-8590818af4df#.hce4vdjs9)
@@ -195,8 +198,8 @@ These options allow you to manipulate optimisations for a production build using
 
 | Parameter                 | Explanation                                            | Plugin used                          |
 |---------------------------|--------------------------------------------------------|--------------------------------------|
-| --optimize-max-chunks     | Try to keep the chunk count below a limit              | LimitChunkCountPlugin                |
-| --optimize-min-chunk-size | Try to keep the chunk size above a limit               | MinChunkSizePlugin                   |
+| --optimize-max-chunks     | Try to keep the chunk count below a limit              | [LimitChunkCountPlugin](/plugins/limit-chunk-count-plugin) |
+| --optimize-min-chunk-size | Try to keep the chunk size above a limit               | [MinChunkSizePlugin](/plugins/min-chunk-size-plugin) |
 | --optimize-minimize       | Minimize javascript and switches loaders to minimizing | [UglifyJsPlugin](/plugins/uglifyjs-webpack-plugin/) & [LoaderOptionsPlugin](/plugins/loader-options-plugin/) |
 
 ### Resolve Options
