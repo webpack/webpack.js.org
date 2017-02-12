@@ -278,7 +278,7 @@ module.exports = {
     // 如果为 true，请求必不包括扩展名
     // 如果为 false，请求可以包括扩展名
 
-    [moduleExtensions](/configuration/resolve#resolve-moduleextensions): ["-module"],
+    [moduleExtensions](/configuration/resolve#resolveloader-moduleextensions): ["-module"],
     [enforceModuleExtension](/configuration/resolve#resolve-enforcemoduleextension): false,
     // 类似 extensions/enforceExtension，但是用模块名替换文件
 

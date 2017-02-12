@@ -449,10 +449,13 @@ compilation.plugin('failed-module', function(module){
 分析器实例接收一个字符串和回调，当字符串能被匹配到时返回一个表达式。
 
 ```javascript
-compiler.parser.plugin("var rewire", function (expr) {
-    //如果你的原模块含有 'var rewire'
-    //现在你将得到一个表达式对象的处理函数
-    return true;
+compiler.plugin('compilation', function(compilation, data) {
+  data.normalModuleFactory.plugin('parser', function(parser, options) {
+    parser.plugin('call require', function(expr) {
+      // you now have a reference to the call expression
+      现在你可以获取到调用表达式(call expression)对象的引用
+    });
+  });
 });
 ```
 
