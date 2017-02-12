@@ -28,37 +28,44 @@ This is the callback function that webpack will execute once the dependencies ar
 #### chunkName
 The chunkName is the name given to the chunk created by this particular `require.ensure()`. By giving the same name at different split points of `require.ensure()`, we can make sure all the dependencies are collectively put in the same bundle.
 
-Let us consider the following project
+## Example
+
+Let us consider the following file structure
 
 ```bash
-\\ file structure
-    |
-    js --|
-    |    |-- entry.js
-    |    |-- a.js
-    |    |-- b.js
-    webpack.config.js
-    |
-    dist
+.
+├── dist
+├── js
+│   ├── a.js
+│   ├── b.js
+│   └── entry.js
+└── webpack.config.js
 ```
 
+**entry.js**
+
 ```javascript
-\\ entry.js
-
-require('a');
+require('./a');
 require.ensure([], function(require){
-    require('b');
+    require('./b');
 });
+```
 
-\\ a.js
+**a.js**
+
+```javascript
 console.log('***** I AM a *****');
+```
 
-\\ b.js
+**b.js**
+
+```javascript
 console.log('***** I AM b *****');
 ```
 
+**webpack.config.js**
+
 ```javascript
-\\ webpack.config.js
 var path = require('path');
 
 module.exports = function(env) {
@@ -78,6 +85,10 @@ On running webpack on this project, we find that webpack has created two new bun
 `b.js` is bundled in `0.bundle.js`.
 
 W> `require.ensure` relies on `Promises` internally. If you use `require.ensure` with older browsers, remember to shim `Promise.` [es6-promise polyfill](https://github.com/stefanpenner/es6-promise).
+
+**More examples**
+* https://github.com/webpack/webpack/tree/master/examples/code-splitting
+* https://github.com/webpack/webpack/tree/master/examples/named-chunks – illustrates the use of `chunkName`
 
 ## Gotchas for `require.ensure()`
 
