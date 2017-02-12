@@ -11,6 +11,7 @@ contributors:
   - frederikprijck
   - chrisVillanueva
   - bebraw
+  - howdy39
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -48,17 +49,18 @@ The new naming conventions are easier to understand and are a good reason to upg
       {
         test: /\.css$/,
 -       loaders: [
+-         "style-loader",
+-         "css-loader?modules=true"
 +       use: [
-          {
-            loader: "style-loader"
-          },
-          {
-            loader: "css-loader",
--           query: {
++         {
++           loader: "style-loader"
++         },
++         {
++           loader: "css-loader",
 +           options: {
-              modules: true
-            }
-          }
++             modules: true
++           }
++         }
         ]
       },
       {
