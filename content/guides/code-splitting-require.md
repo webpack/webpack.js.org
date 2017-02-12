@@ -9,6 +9,8 @@ contributors:
 
 In this section, we will discuss how webpack splits code using `require.ensure()`.
 
+W> `require.ensure` is specific to webpack, see [`import()`](/guides/code-splitting-import) for a proposal for ECMAScript.
+
 ## `require.ensure()`
 
 webpack statically parses for `require.ensure()` in the code while building and adds the modules here into a separate chunk. This new chunk is loaded on demand by webpack through jsonp.
