@@ -223,7 +223,7 @@ function handleTable(t) {
     for (let j = 0; j < row.length; j++) {
       cell += handleTableCell(this.inline.output(row[j]), {
         header: false,
-        headerTitle: this.inline.output(t.header[i]),
+        headerTitle: this.inline.output(t.header[j]),
         align: t.align[j]
       });
     }

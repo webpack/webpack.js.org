@@ -121,43 +121,94 @@
     }
   }
 
-  table {
-    display:block;
-    width:100%;
-    overflow:auto;
+  .table {
+    &-wrap {
+      display:block;
+      width:100%;
+      overflow:auto;
+    }
 
-    tr {
-      border-top: 1px solid #cccccc;
+    &-tr {
       background-color: white;
       margin: 0;
       padding: 0;
+      border-left: 1px solid #cccccc;
+      display: block;
 
-      &:nth-child(2n) { background-color: #f8f8f8; }
-
-      th {
-        font-weight: bold;
-        border: 1px solid #cccccc;
-        text-align: left;
-        margin: 0;
-        padding: 6px 13px;
+      @include break {
+        display: flex;
       }
 
-      td {
-        border: 1px solid #cccccc;
-        text-align: left;
-        margin: 0;
-        padding: 6px 13px;
+      &:nth-child(2n) {
+        background-color: #f8f8f8;
+      }
 
-        img {
-          max-width:none;
+      &:last-child {
+        border-bottom: 1px solid #cccccc;
+      }
+    }
+
+    &-th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      border-bottom: none;
+      text-align: left;
+      margin: 0;
+      padding: 6px 13px;
+    }
+
+    &-td {
+      border: 1px solid #cccccc;
+      text-align: left;
+      margin: 0;
+      padding: 6px 13px;
+
+      img {
+        max-width:none;
+      }
+
+      &-title {
+        display: block;
+        width: 40%;
+
+        @include break {
+          display: none;
+          width: auto;
         }
       }
 
-      th, td {
-        white-space: nowrap;
+      &-content {
+        display: block;
+        width: 60%;
 
-        > :first-child { margin-top: 0; }
-        > :last-child { margin-bottom: 0; }
+        @include break {
+          width: auto;
+        }
+      }
+    }
+
+    &-th,
+    &-td {
+      display: flex;
+      flex-basis: 100%;
+      align-self: stretch;
+      border-left: none;
+      border-bottom: none;
+
+      @include break {
+        flex-grow: 1;
+      }
+    }
+
+    &-header {
+      display: none;
+
+      .table-tr {
+        border-bottom: none;
+      }
+
+      @include break {
+        display: block;
       }
     }
   }
