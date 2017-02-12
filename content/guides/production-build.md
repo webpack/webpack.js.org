@@ -51,7 +51,7 @@ One of the good options to go is using `cheap-module-source-map` which simplifie
 
 ### Node environment variable
 
-Running `webpack -p` (or `--define process.env.NODE_ENV="production"`) invokes the [`DefinePlugin`](/plugins/define-plugin) in the following way:
+Running `webpack -p` (or `--define process.env.NODE_ENV="'production'"`) invokes the [`DefinePlugin`](/plugins/define-plugin) in the following way:
 
 ```js
 // webpack.config.js
@@ -222,7 +222,7 @@ module.exports = function(env) {
             }),
             new webpack.DefinePlugin({
                 'process.env': {
-                    'NODE_ENV': JSON.stringify('prod')
+                    'NODE_ENV': JSON.stringify('production')
                 }
             }),
             new webpack.optimize.UglifyJsPlugin({
@@ -243,6 +243,6 @@ module.exports = function(env) {
 You will notice three major updates to our 'prod.js' file.
 * 'webpack-merge' with the 'base.js'.
 * We have move 'output' property to 'base.js'. Just to stress on that point that our output property, here, is common across all our environments and that we refactored our 'prod.js' and moved it to our 'base.js', the common configuration file.
-* We have defined the 'process.env.NODE_ENV' to be 'prod' using the 'DefinePlugin'. Now across the application 'process.env.NODE_ENV' would have the value, 'prod', when we build our application for production environment. Likewise we can manage various variables of our choice, specific to environments this way.
+* We have defined the 'process.env.NODE_ENV' to be 'production' using the 'DefinePlugin'. Now across the application 'process.env.NODE_ENV' would have the value, 'production', when we build our application for production environment. Likewise we can manage various variables of our choice, specific to environments this way.
 
 The choice of what is going to be common across all your environments is up to you, however. We have just demonstrated a few that could typically be common across environments when we build our application.
