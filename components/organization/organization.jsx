@@ -7,7 +7,7 @@ import './organization-style';
 
 let Shield = props => (
   <img src={
-    `//img.shields.io/${props.content}.svg?label=${props.label}&style=flat-square&maxAge=3600` 
+    `https://img.shields.io/${props.content}.svg?label=${props.label}&style=flat-square&maxAge=3600` 
   } />
 );
 

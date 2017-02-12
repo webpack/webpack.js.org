@@ -143,7 +143,7 @@ return "var runtime = require(" +
 
 ### Use a library as `peerDependencies` when they wrap it
 
-using a peerDependency allows the application developer to specify the exact version in `package.json` if desired. The dependency should be relatively open to allow updating the library without needing to publish a new loader version.
+Using a peerDependency allows the application developer to specify the exact version in `package.json` if desired. The dependency should be relatively open to allow updating the library without needing to publish a new loader version.
 
 ``` javascript
 "peerDependencies": {
@@ -153,7 +153,7 @@ using a peerDependency allows the application developer to specify the exact ver
 
 ### Programmable objects as `query`-option
 
-there are situations where your loader requires programmable objects with functions which cannot stringified as `query`-string. The `less-loader`, for example, provides the possibility to specify [LESS-plugins](https://github.com/webpack/less-loader#less-plugins). In these cases, a loader is allowed to extend webpack's `options`-object to retrieve that specific option. In order to avoid name collisions, however, it is important that the option is namespaced under the loader's camelCased npm-name.
+There are situations where your loader requires programmable objects with functions which cannot stringified as `query`-string. The `less-loader`, for example, provides the possibility to specify [LESS-plugins](https://github.com/webpack/less-loader#less-plugins). In these cases, a loader is allowed to extend webpack's `options`-object to retrieve that specific option. In order to avoid name collisions, however, it is important that the option is namespaced under the loader's camelCased npm-name.
 
 **Example:**
 

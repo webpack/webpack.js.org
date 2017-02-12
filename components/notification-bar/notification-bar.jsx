@@ -10,7 +10,7 @@ export default class NotificationBar extends React.Component {
       <div className={ `notification-bar ${dismissedMod}` }>
         <Container className="notification-bar__inner">
           Version 2 was just released! Read the <a href="https://medium.com/webpack/webpack-2-and-beyond-40520af9067f#.ojp0x5ls1">announcement</a>&nbsp;
-          and <a href="https://www.npmjs.com/package/webpack">install it</a>&nbsp;
+          and <a href="/guides/installation">install it</a>&nbsp;
           today!
 
           <i 
