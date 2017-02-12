@@ -156,6 +156,8 @@ The following substitutions are available in template strings (via webpack's int
 
 The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify `output.hashDigestLength` to configure the length globally.
 
+T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
+
 
 ## `output.hotUpdateChunkFilename`
 
