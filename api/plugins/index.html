@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/bc8e719e64d7ea2f9491.css" rel="stylesheet">
+      <link href="/019b11e3dc00e8e7aff7.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -311,10 +311,12 @@ PrintChunksPlugin<span class="token punctuation">.</span>prototype<span class="t
 </code></pre>
 <h2 class="header"><a class="anchor" href="#the-parser-instance-compiler-parser-" id="the-parser-instance-compiler-parser-"></a><span class="text">The <code>Parser</code> instance (<code>compiler.parser</code>)</span><a class="icon-link" href="#the-parser-instance-compiler-parser-"></a></h2>
 <p>The parser instance takes a String and callback and will return an expression when there&apos;s a match.</p>
-<pre><code class="lang-javascript">compiler<span class="token punctuation">.</span>parser<span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">&quot;var rewire&quot;</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>expr<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//if you original module has &apos;var rewire&apos;</span>
-    <span class="token comment" spellcheck="true">//you now have a handle on the expresssion object</span>
-    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<pre><code class="lang-javascript">compiler<span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">&apos;compilation&apos;</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>compilation<span class="token punctuation">,</span> data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  data<span class="token punctuation">.</span>normalModuleFactory<span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">&apos;parser&apos;</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>parser<span class="token punctuation">,</span> options<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    parser<span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">&apos;call require&apos;</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>expr<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment" spellcheck="true">// you now have a reference to the call expression</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <h3 class="header"><a class="anchor" href="#program-ast-bailing" id="program-ast-bailing"></a><span class="text"><code>program(ast)</code> bailing</span><a class="icon-link" href="#program-ast-bailing"></a></h3>
