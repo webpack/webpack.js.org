@@ -95,6 +95,14 @@ module.exports = function() {
       var tokens = parseContent(content);
       tokens.links = [];
 
+      marked.Parser.prototype.tok = function () {
+        if(this.token.type === 'table') {
+          return handleTable.call(this, this.token);
+        } else {
+          return handleTok.call(this);
+        }
+      };
+
       return marked.parser(tokens, markedDefaults);
     },
 
@@ -194,6 +202,63 @@ function handleHTML(t) {
     return tokens;
 }
 
+function handleTable(t) {
+  let cell = '';
+  let header = '';
+  let body = '';
+
+  for (let i = 0; i < t.header.length; i++) {
+    cell += handleTableCell(this.inline.output(t.header[i]), {
+      header: true,
+      align: t.align[i]
+    });
+  }
+
+  header += handleTableRow(cell);
+
+  for (let i = 0; i < t.cells.length; i++) {
+    let row = t.cells[i];
+    cell = '';
+
+    for (let j = 0; j < row.length; j++) {
+      cell += handleTableCell(this.inline.output(row[j]), {
+        header: false,
+        headerTitle: this.inline.output(t.header[i]),
+        align: t.align[j]
+      });
+    }
+
+    body += handleTableRow(cell);
+  }
+
+  return `<div class="table-wrap">
+    <div class="table-header">
+        ${header}
+    </div>
+    <div class="table-body">
+        ${body}
+    </div>`;
+}
+
+function handleTableRow(content) {
+  return `<div class="table-tr">${content}</div>`;
+}
+
+function handleTableCell(content, flags) {
+  if(flags.header) {
+    return `<div class="table-th">${content}</div>`;
+  }
+
+  return `<div class="table-td">
+    <div class="table-td-title">
+        ${flags.headerTitle}
+    </div>
+    <div class="table-td-content">
+        ${content}
+    </div>
+  </div>`;
+}
+
 function parseCustomQuote(token, match, className) {
   if (token.type === 'paragraph') {
     var text = token.text;
@@ -220,6 +285,76 @@ function parseCustomQuote(token, match, className) {
           `<div class="tip-content"> ${text.slice(2).trim()} </div>` +
           '</blockquote>'
       };
+    }
+  }
+}
+
+// Code is copied from here (only table type was removed)
+// https://github.com/chjj/marked/blob/master/lib/marked.js#L975
+function handleTok() {
+  let body = '';
+
+  switch (this.token.type) {
+    case 'space': {
+      return '';
+    }
+    case 'hr': {
+      return this.renderer.hr();
+    }
+    case 'heading': {
+      return this.renderer.heading(
+        this.inline.output(this.token.text),
+        this.token.depth,
+        this.token.text);
+    }
+    case 'code': {
+      return this.renderer.code(this.token.text,
+        this.token.lang,
+        this.token.escaped);
+    }
+    case 'blockquote_start': {
+      while (this.next().type !== 'blockquote_end') {
+        body += this.tok();
+      }
+
+      return this.renderer.blockquote(body);
+    }
+    case 'list_start': {
+      let ordered = this.token.ordered;
+
+      while (this.next().type !== 'list_end') {
+        body += this.tok();
+      }
+
+      return this.renderer.list(body, ordered);
+    }
+    case 'list_item_start': {
+      while (this.next().type !== 'list_item_end') {
+        body += this.token.type === 'text'
+          ? this.parseText()
+          : this.tok();
+      }
+
+      return this.renderer.listitem(body);
+    }
+    case 'loose_item_start': {
+      while (this.next().type !== 'list_item_end') {
+        body += this.tok();
+      }
+
+      return this.renderer.listitem(body);
+    }
+    case 'html': {
+      let html = !this.token.pre && !this.options.pedantic
+        ? this.inline.output(this.token.text)
+        : this.token.text;
+      return this.renderer.html(html);
+    }
+    case 'paragraph': {
+      return this.renderer.paragraph(this.inline.output(this.token.text));
+    }
+    case 'text': {
+      return this.renderer.paragraph(this.parseText());
     }
   }
 }
