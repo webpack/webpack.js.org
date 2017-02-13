@@ -150,6 +150,9 @@ An advanced approach would be to have a base configuration file, put in all comm
 and then have environment specific files and simply use 'webpack-merge' to merge them. This would help to avoid code repetitions.
 For example, you could have all your base configurations like resolving your js, ts, png, jpeg, json and so on.. in a common base file as follows:
 
+NOTE: THIS EXAMPLE USES WEBPACK VERSION 1 NOT VERSION 2
+
+
 ** base.js **
 ```js
 module.exports = function() {
