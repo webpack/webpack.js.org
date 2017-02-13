@@ -29,7 +29,7 @@ determineDate();
 
 ## Usage with Babel
 
-If you want to use `import` with [Babel](http://babeljs.io/), you'll need to install/add the [dynamic-import](http://babeljs.io/docs/plugins/syntax-dynamic-import/) syntax plugin while it's still Stage 3 to get around the parser error. When the proposal is added to the spec this won't be necessary anymore.
+If you want to use `import` with [Babel](http://babeljs.io/), you'll need to install/add the [`syntax-dynamic-import`](http://babeljs.io/docs/plugins/syntax-dynamic-import/) plugin while it's still Stage 3 to get around the parser error. When the proposal is added to the spec this won't be necessary anymore.
 
 ```bash
 npm install --save-dev babel-core babel-loader babel-plugin-syntax-dynamic-import babel-preset-es2015
