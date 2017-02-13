@@ -135,6 +135,8 @@ require.ensure([], function(require) {
 The use of `System.import` in webpack [did not fit the proposed spec](https://github.com/webpack/webpack/issues/2163), so it was deprecated in [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) in favor of `import()`.
 
 ## Examples
+* https://github.com/webpack/webpack/tree/master/examples/harmony
+* https://github.com/webpack/webpack/tree/master/examples/code-splitting-harmony
 * https://github.com/webpack/webpack/tree/master/examples/code-splitting-native-import-context
 
 ## Weblinks
