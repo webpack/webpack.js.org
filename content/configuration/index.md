@@ -9,6 +9,7 @@ contributors:
   - sricc
   - terinjokes
   - mattce
+  - kbariotis
 ---
 
 webpack is fed via a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
@@ -22,7 +23,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 ``` js-with-links-with-details
 var path = require('path');
 
-{
+module.exports = {
   // click on the name of the option to get to the detailed documentation
   // click on the items with arrows to show more examples / advanced options
 
@@ -278,7 +279,7 @@ var path = require('path');
     // if true request must not include an extensions
     // if false request may already include an extension
 
-    [moduleExtensions](/configuration/resolve#resolve-moduleextensions): ["-module"],
+    [moduleExtensions](/configuration/resolve#resolveloader-moduleextensions): ["-module"],
     [enforceModuleExtension](/configuration/resolve#resolve-enforcemoduleextension): false,
     // like extensions/enforceExtension but for module names instead of files
 
@@ -355,9 +356,17 @@ var path = require('path');
   </details>
   // Don't follow/bundle these modules, but request them at runtime from the environment
 
-  [stats](stats): {
-    /* TODO */
+  <details><summary>[stats](/configuration/stats): "errors-only",</summary>
+  [stats](/configuration/stats): { //object
+    assets: true,
+    colors: true,
+    errors: true,
+    errorDetails: true,
+    hash: true,
+    // ...
   },
+  </details>
+  // lets you precisely control what bundle information gets displayed
 
   [devServer](/configuration/dev-server): {
     /* TODO */
