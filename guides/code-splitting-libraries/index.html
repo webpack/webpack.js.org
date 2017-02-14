@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/73e16b1b8f97854613dd.css" rel="stylesheet">
+      <link href="/13ba774e88f6fb323ccc.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -120,7 +120,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h2 class="header"><a class="anchor" href="#manifest-file" id="manifest-file"></a><span class="text">Manifest File</span><a class="icon-link" href="#manifest-file"></a></h2>
 <p>But, if we change application code and run <code>webpack</code> again, we see that the hash for the vendor file changes. Even though we achieved separate bundles for <code>vendor</code> and <code>main</code> bundles, we see that the <code>vendor</code> bundle changes when the application code changes.
 This means that we still don&apos;t reap the benefits of browser caching because the hash for vendor file changes on every build and the browser will have to reload the file.</p>
-<p>The issue here is that on every build, webpack generates some webpack runtime code, which helps webpack do it&apos;s job. When there is a single bundle, the runtime code resides in it. But when multiple bundles are generated, the runtime code is extracted into the common module, here the <code>vendor</code> file.</p>
+<p>The issue here is that on every build, webpack generates some webpack runtime code, which helps webpack do its job. When there is a single bundle, the runtime code resides in it. But when multiple bundles are generated, the runtime code is extracted into the common module, here the <code>vendor</code> file.</p>
 <p>To prevent this, we need extract out the runtime into a separate manifest file. Even though we are creating another bundle, the overhead is offset by the long term caching benefits that we obtain on the <code>vendor</code> file.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-javascript"><span class="token keyword">var</span> webpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;webpack&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
