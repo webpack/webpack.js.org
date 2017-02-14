@@ -77,14 +77,14 @@ export default class Sidebar extends Component {
     let { scrollY, innerHeight } = window;
     let { scrollHeight } = document.body;
     let { offsetHeight: sidebarHeight } = this._container;
-    let { offsetWidth: parentWidth, offsetHeight: parentHeight } = this._container.parentNode;
+    let { offsetWidth: parentWidth } = this._container.parentNode;
     let headerHeight = document.querySelector('header').offsetHeight;
     let footerHeight = document.querySelector('footer').offsetHeight;
     let distToBottom = scrollHeight - scrollY - innerHeight;
     let availableSpace = innerHeight + distToBottom - footerHeight;
     
     this.setState({ 
-      fixed: scrollY >= headerHeight && sidebarHeight < parentHeight,
+      fixed: scrollY >= headerHeight && sidebarHeight < innerHeight,
       extraHeight: sidebarHeight > availableSpace ? sidebarHeight - availableSpace : 0,
       maxWidth: parentWidth
     });
