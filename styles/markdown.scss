@@ -132,10 +132,13 @@
       background-color: white;
       margin: 0;
       padding: 0;
-      border-left: 1px solid #cccccc;
       display: block;
+      border: 1px solid #cccccc;
+      border-bottom: none;
 
       @include break {
+        border: none;
+        border-left: 1px solid #cccccc;
         display: flex;
       }
 
@@ -150,18 +153,17 @@
 
     &-th {
       font-weight: bold;
-      border: 1px solid #cccccc;
       border-bottom: none;
       text-align: left;
       margin: 0;
-      padding: 6px 13px;
+      padding: 6px 12px;
+      background: darken(#F4F6F6, 1%);
     }
 
     &-td {
-      border: 1px solid #cccccc;
       text-align: left;
       margin: 0;
-      padding: 6px 13px;
+      padding: 4px 12px;
 
       img {
         max-width:none;
@@ -192,10 +194,10 @@
       display: flex;
       flex-basis: 100%;
       align-self: stretch;
-      border-left: none;
-      border-bottom: none;
 
       @include break {
+        border-top: 1px solid #cccccc;
+        border-right: 1px solid #cccccc;
         flex-grow: 1;
       }
     }
