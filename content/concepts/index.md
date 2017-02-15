@@ -39,7 +39,7 @@ Once you've bundled all of your assets together, we still need to tell webpack *
 **webpack.config.js**
 
 ```javascript
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   entry: './path/to/my/entry/file.js',
@@ -73,7 +73,7 @@ At a high level, they have two purposes in your webpack config.
 **webpack.config.js**
 
 ```javascript
-var path = require('path');
+const path = require('path');
 
 const config = {
   entry: './path/to/my/entry/file.js',
