@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/59889541a0bf6506a54d.css" rel="stylesheet">
+      <link href="/177db6eeeb3d5cab0515.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -33,7 +33,7 @@
 <h2 class="header"><a class="anchor" href="#output" id="output"></a><span class="text">Output</span><a class="icon-link" href="#output"></a></h2>
 <p>Once you&apos;ve bundled all of your assets together, we still need to tell webpack <strong>where</strong> to bundle our application. The webpack <code>output</code> property describes to webpack <strong>how to treat bundled code</strong>.</p>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="lang-javascript"><span class="token keyword">var</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;path&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="lang-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;path&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token punctuation">:</span> <span class="token string">&apos;./path/to/my/entry/file.js&apos;</span><span class="token punctuation">,</span>
@@ -55,7 +55,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <li>Transform that file so that it can be added to your dependency graph (and eventually your bundle). (<code>use</code> property)</li>
 </ol>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="lang-javascript"><span class="token keyword">var</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;path&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="lang-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;path&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token punctuation">:</span> <span class="token string">&apos;./path/to/my/entry/file.js&apos;</span><span class="token punctuation">,</span>
