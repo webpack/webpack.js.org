@@ -6,17 +6,16 @@ export default class SidebarItem extends React.Component {
     super(props);
 
     this.state = {
-      open: false
+      open: this.isOpen(props)
     };
   }
 
   render() {
-    let { index, url, title, anchors = [], currentPage } = this.props;
+    let { index, url, title, anchors = [] } = this.props;
 
     let emptyMod = !anchors.length ? 'sidebar-item--empty' : '';
-    let active = `/${currentPage}` === url;
-    let openMod = (active || this.state.open) ? 'sidebar-item--open' : '';
-    let anchorUrl = (active) ? '#' : url + '#';
+    let openMod = (this.state.open) ? 'sidebar-item--open' : '';
+    let anchorUrl = url + '#';
 
     return (
       <div className={ `sidebar-item ${emptyMod} ${openMod}` }>
@@ -33,6 +32,16 @@ export default class SidebarItem extends React.Component {
         </ul>
       </div>
     );
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentPage == this.props.currentPage) return;
+
+    this.setState({ open: this.isOpen(nextProps) });
+  }
+
+  isOpen(props) {
+    return `/${props.currentPage}` === props.url;
   }
 
   toggle(e) {
