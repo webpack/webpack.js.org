@@ -9,7 +9,7 @@ contributors:
 
 Besides exporting a single config object, there are a few more ways that cover other needs as well.
 
-?> exporting a function and --env
+?> exporting a function and [--env](https://webpack.js.org/configuration/environment/)
 
 ## Returning a Promise
 
