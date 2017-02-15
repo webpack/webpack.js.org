@@ -217,7 +217,7 @@ Here is no need to change it.
 
 ## `output.jsonpFunction`
 
-`function`
+`string`
 
 Only used when [`target`](/configuration/target) is web, which uses JSONP for loading on-demand chunks.
 
