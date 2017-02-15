@@ -13,7 +13,7 @@ Besides exporting a single config object, there are a few more ways that cover o
 
 ## Returning a Promise
 
-Webpack will run the function exported by the configuration file and wait for a Promise to be returned. Handy when you need to asyncronously load configuration variables.
+webpack will run the function exported by the configuration file and wait for a Promise to be returned. Handy when you need to asyncronously load configuration variables.
 
 ```js
 const path = require('path');
