@@ -231,12 +231,14 @@ function handleTable(t) {
     body += handleTableRow(cell);
   }
 
-  return `<div class="table-wrap">
-    <div class="table-header">
-        ${header}
-    </div>
-    <div class="table-body">
-        ${body}
+  return `
+    <div class="table-wrap">
+      <div class="table-header">
+          ${header}
+      </div>
+      <div class="table-body">
+          ${body}
+      </div>
     </div>`;
 }
 
