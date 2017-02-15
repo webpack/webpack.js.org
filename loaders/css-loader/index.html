@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/177db6eeeb3d5cab0515.css" rel="stylesheet">
+      <link href="/a0ca9181c0031af169e5.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -58,58 +58,183 @@ and the <a href="https://github.com/webpack/url-loader">url-loader</a> which you
 <li><code>url(~module/image.png)</code> =&gt; <code>require(&apos;module/image.png&apos;)</code></li>
 </ul>
 <h2 class="header"><a class="anchor" href="#options" id="options"></a><span class="text">Options</span><a class="icon-link" href="#options"></a></h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Name</th>
-<th style="text-align:center">Default</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><strong><code>root</code></strong></td>
-<td style="text-align:center"><code>/</code></td>
-<td style="text-align:left">Path to resolve URLs, URLs starting with <code>/</code> will not be translated</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong><code>modules</code></strong></td>
-<td style="text-align:center"><code>false</code></td>
-<td style="text-align:left">Enable/Disable CSS Modules</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong><code>import</code></strong></td>
-<td style="text-align:center"><code>true</code></td>
-<td style="text-align:left">Enable/Disable @import handling</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong><code>url</code></strong></td>
-<td style="text-align:center"><code>true</code></td>
-<td style="text-align:left">Enable/Disable <code>url()</code> handling</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong><code>minimize</code></strong></td>
-<td style="text-align:center"><code>false</code></td>
-<td style="text-align:left">Enable/Disable minification</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong><code>sourceMap</code></strong></td>
-<td style="text-align:center"><code>false</code></td>
-<td style="text-align:left">Enable/Disable Sourcemaps</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong><code>camelCase</code></strong></td>
-<td style="text-align:center"><code>false</code></td>
-<td style="text-align:left">Export Classnames in CamelCase</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong><code>importLoaders</code></strong></td>
-<td style="text-align:center"><code>0</code></td>
-<td style="text-align:left">Number of loaders applied before CSS loader</td>
-</tr>
-</tbody>
-</table>
-<p>This webpack config can load CSS files, embed small png images as Data URLs and JPG images as files.</p>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th">Name</div><div class="table-th">Default</div><div class="table-th">Description</div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Name
+	    </div>
+	    <div class="table-td-content">
+	        <strong><code>root</code></strong>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default
+	    </div>
+	    <div class="table-td-content">
+	        <code>/</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Path to resolve URLs, URLs starting with <code>/</code> will not be translated
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Name
+	    </div>
+	    <div class="table-td-content">
+	        <strong><code>modules</code></strong>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default
+	    </div>
+	    <div class="table-td-content">
+	        <code>false</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Enable/Disable CSS Modules
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Name
+	    </div>
+	    <div class="table-td-content">
+	        <strong><code>import</code></strong>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default
+	    </div>
+	    <div class="table-td-content">
+	        <code>true</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Enable/Disable @import handling
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Name
+	    </div>
+	    <div class="table-td-content">
+	        <strong><code>url</code></strong>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default
+	    </div>
+	    <div class="table-td-content">
+	        <code>true</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Enable/Disable <code>url()</code> handling
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Name
+	    </div>
+	    <div class="table-td-content">
+	        <strong><code>minimize</code></strong>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default
+	    </div>
+	    <div class="table-td-content">
+	        <code>false</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Enable/Disable minification
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Name
+	    </div>
+	    <div class="table-td-content">
+	        <strong><code>sourceMap</code></strong>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default
+	    </div>
+	    <div class="table-td-content">
+	        <code>false</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Enable/Disable Sourcemaps
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Name
+	    </div>
+	    <div class="table-td-content">
+	        <strong><code>camelCase</code></strong>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default
+	    </div>
+	    <div class="table-td-content">
+	        <code>false</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Export Classnames in CamelCase
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Name
+	    </div>
+	    <div class="table-td-content">
+	        <strong><code>importLoaders</code></strong>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default
+	    </div>
+	    <div class="table-td-content">
+	        <code>0</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Number of loaders applied before CSS loader
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><p>This webpack config can load CSS files, embed small png images as Data URLs and JPG images as files.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token punctuation">:</span> <span class="token punctuation">{</span>

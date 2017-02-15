@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/177db6eeeb3d5cab0515.css" rel="stylesheet">
+      <link href="/a0ca9181c0031af169e5.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -46,88 +46,309 @@ Have a look at <a href="/concepts/module-resolution">Module Resolution</a> for m
 <span class="token keyword">import</span> Test2 <span class="token keyword">from</span> <span class="token string">&apos;xyz/file.js&apos;</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Error, /path/to/file.js/file.js is invalid</span>
 </code></pre>
 <p>The following table explains a lot more cases:</p>
-<table>
-<thead>
-<tr>
-<th><code>alias:</code></th>
-<th><code>import &quot;xyz&quot;</code></th>
-<th><code>import &quot;xyz/file.js&quot;</code></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>{}</code></td>
-<td><code>/abc/node_modules/xyz/index.js</code></td>
-<td><code>/abc/node_modules/xyz/file.js</code></td>
-</tr>
-<tr>
-<td><code>{ xyz: &quot;/abs/path/to/file.js&quot; }</code></td>
-<td><code>/abs/path/to/file.js</code></td>
-<td>error</td>
-</tr>
-<tr>
-<td><code>{ xyz$: &quot;/abs/path/to/file.js&quot; }</code></td>
-<td><code>/abs/path/to/file.js</code></td>
-<td><code>/abc/node_modules/xyz/file.js</code></td>
-</tr>
-<tr>
-<td><code>{ xyz: &quot;./dir/file.js&quot; }</code></td>
-<td><code>/abc/dir/file.js</code></td>
-<td>error</td>
-</tr>
-<tr>
-<td><code>{ xyz$: &quot;./dir/file.js&quot; }</code></td>
-<td><code>/abc/dir/file.js</code></td>
-<td><code>/abc/node_modules/xyz/file.js</code></td>
-</tr>
-<tr>
-<td><code>{ xyz: &quot;/some/dir&quot; }</code></td>
-<td><code>/some/dir/index.js</code></td>
-<td><code>/some/dir/file.js</code></td>
-</tr>
-<tr>
-<td><code>{ xyz$: &quot;/some/dir&quot; }</code></td>
-<td><code>/some/dir/index.js</code></td>
-<td><code>/abc/node_modules/xyz/file.js</code></td>
-</tr>
-<tr>
-<td><code>{ xyz: &quot;./dir&quot; }</code></td>
-<td><code>/abc/dir/index.js</code></td>
-<td><code>/abc/dir/file.js</code></td>
-</tr>
-<tr>
-<td><code>{ xyz: &quot;modu&quot; }</code></td>
-<td><code>/abc/node_modules/modu/index.js</code></td>
-<td><code>/abc/node_modules/modu/file.js</code></td>
-</tr>
-<tr>
-<td><code>{ xyz$: &quot;modu&quot; }</code></td>
-<td><code>/abc/node_modules/modu/index.js</code></td>
-<td><code>/abc/node_modules/xyz/file.js</code></td>
-</tr>
-<tr>
-<td><code>{ xyz: &quot;modu/some/file.js&quot; }</code></td>
-<td><code>/abc/node_modules/modu/some/file.js</code></td>
-<td>error</td>
-</tr>
-<tr>
-<td><code>{ xyz: &quot;modu/dir&quot; }</code></td>
-<td><code>/abc/node_modules/modu/dir/index.js</code></td>
-<td><code>/abc/node_modules/dir/file.js</code></td>
-</tr>
-<tr>
-<td><code>{ xyz: &quot;xyz/dir&quot; }</code></td>
-<td><code>/abc/node_modules/xyz/dir/index.js</code></td>
-<td><code>/abc/node_modules/xyz/dir/file.js</code></td>
-</tr>
-<tr>
-<td><code>{ xyz$: &quot;xyz/dir&quot; }</code></td>
-<td><code>/abc/node_modules/xyz/dir/index.js</code></td>
-<td><code>/abc/node_modules/xyz/file.js</code></td>
-</tr>
-</tbody>
-</table>
-<p><code>index.js</code> may resolve to another file if defined in the <code>package.json</code>.</p>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th"><code>alias:</code></div><div class="table-th"><code>import &quot;xyz&quot;</code></div><div class="table-th"><code>import &quot;xyz/file.js&quot;</code></div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>alias:</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>{}</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/node_modules/xyz/index.js</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz/file.js&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/node_modules/xyz/file.js</code>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>alias:</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>{ xyz: &quot;/abs/path/to/file.js&quot; }</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abs/path/to/file.js</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz/file.js&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        error
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>alias:</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>{ xyz$: &quot;/abs/path/to/file.js&quot; }</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abs/path/to/file.js</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz/file.js&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/node_modules/xyz/file.js</code>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>alias:</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>{ xyz: &quot;./dir/file.js&quot; }</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/dir/file.js</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz/file.js&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        error
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>alias:</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>{ xyz$: &quot;./dir/file.js&quot; }</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/dir/file.js</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz/file.js&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/node_modules/xyz/file.js</code>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>alias:</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>{ xyz: &quot;/some/dir&quot; }</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/some/dir/index.js</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz/file.js&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/some/dir/file.js</code>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>alias:</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>{ xyz$: &quot;/some/dir&quot; }</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/some/dir/index.js</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz/file.js&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/node_modules/xyz/file.js</code>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>alias:</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>{ xyz: &quot;./dir&quot; }</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/dir/index.js</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz/file.js&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/dir/file.js</code>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>alias:</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>{ xyz: &quot;modu&quot; }</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/node_modules/modu/index.js</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz/file.js&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/node_modules/modu/file.js</code>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>alias:</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>{ xyz$: &quot;modu&quot; }</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/node_modules/modu/index.js</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz/file.js&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/node_modules/xyz/file.js</code>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>alias:</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>{ xyz: &quot;modu/some/file.js&quot; }</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/node_modules/modu/some/file.js</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz/file.js&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        error
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>alias:</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>{ xyz: &quot;modu/dir&quot; }</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/node_modules/modu/dir/index.js</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz/file.js&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/node_modules/dir/file.js</code>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>alias:</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>{ xyz: &quot;xyz/dir&quot; }</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/node_modules/xyz/dir/index.js</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz/file.js&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/node_modules/xyz/dir/file.js</code>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>alias:</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>{ xyz$: &quot;xyz/dir&quot; }</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/node_modules/xyz/dir/index.js</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        <code>import &quot;xyz/file.js&quot;</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>/abc/node_modules/xyz/file.js</code>
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><p><code>index.js</code> may resolve to another file if defined in the <code>package.json</code>.</p>
 <p><code>/abc/node_modules</code> may resolve in <code>/node_modules</code> too.</p>
 <h2 class="header"><a class="anchor" href="#resolve-aliasfields" id="resolve-aliasfields"></a><span class="text"><code>resolve.aliasFields</code></span><a class="icon-link" href="#resolve-aliasfields"></a></h2>
 <p><code>string</code></p>

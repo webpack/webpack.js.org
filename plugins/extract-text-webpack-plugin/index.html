@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/177db6eeeb3d5cab0515.css" rel="stylesheet">
+      <link href="/a0ca9181c0031af169e5.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -44,76 +44,201 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span>
 </code></pre>
 <p>It moves every <code>require(&quot;style.css&quot;)</code> in entry chunks into a separate CSS file. So your styles are no longer inlined into the JS bundle, but separate in a CSS bundle file (<code>styles.css</code>). If your total stylesheet volume is big, it will be faster because the CSS bundle is loaded in parallel to the JS bundle.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Advantages</th>
-<th style="text-align:left">Caveats</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Fewer style tags (older IE has a limit)</td>
-<td style="text-align:left">Additional HTTP request</td>
-</tr>
-<tr>
-<td style="text-align:left">CSS SourceMap (with <code>devtool: &quot;source-map&quot;</code> and <code>extract-text-webpack-plugin?sourceMap</code>)</td>
-<td style="text-align:left">Longer compilation time</td>
-</tr>
-<tr>
-<td style="text-align:left">CSS requested in parallel</td>
-<td style="text-align:left">No runtime public path modification</td>
-</tr>
-<tr>
-<td style="text-align:left">CSS cached separate</td>
-<td style="text-align:left">No Hot Module Replacement</td>
-</tr>
-<tr>
-<td style="text-align:left">Faster runtime (less code and DOM operations)</td>
-<td style="text-align:left">...</td>
-</tr>
-</tbody>
-</table>
-<h2 class="header"><a class="anchor" href="#options" id="options"></a><span class="text">Options</span><a class="icon-link" href="#options"></a></h2>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th">Advantages</div><div class="table-th">Caveats</div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Advantages
+	    </div>
+	    <div class="table-td-content">
+	        Fewer style tags (older IE has a limit)
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Caveats
+	    </div>
+	    <div class="table-td-content">
+	        Additional HTTP request
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Advantages
+	    </div>
+	    <div class="table-td-content">
+	        CSS SourceMap (with <code>devtool: &quot;source-map&quot;</code> and <code>extract-text-webpack-plugin?sourceMap</code>)
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Caveats
+	    </div>
+	    <div class="table-td-content">
+	        Longer compilation time
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Advantages
+	    </div>
+	    <div class="table-td-content">
+	        CSS requested in parallel
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Caveats
+	    </div>
+	    <div class="table-td-content">
+	        No runtime public path modification
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Advantages
+	    </div>
+	    <div class="table-td-content">
+	        CSS cached separate
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Caveats
+	    </div>
+	    <div class="table-td-content">
+	        No Hot Module Replacement
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Advantages
+	    </div>
+	    <div class="table-td-content">
+	        Faster runtime (less code and DOM operations)
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Caveats
+	    </div>
+	    <div class="table-td-content">
+	        ...
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><h2 class="header"><a class="anchor" href="#options" id="options"></a><span class="text">Options</span><a class="icon-link" href="#options"></a></h2>
 <pre><code class="lang-js"><span class="token keyword">new</span> <span class="token class-name">ExtractTextPlugin</span><span class="token punctuation">(</span>options<span class="token punctuation">:</span> filename <span class="token operator">|</span> object<span class="token punctuation">)</span>
 </code></pre>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Name</th>
-<th style="text-align:center">Type</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><strong><code>id</code></strong></td>
-<td style="text-align:center"><code>{String}</code></td>
-<td style="text-align:left">Unique ident for this plugin instance. (For advanced usage only, by default automatically generated)</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong><code>filename</code></strong></td>
-<td style="text-align:center"><code>{String}</code></td>
-<td style="text-align:left">Name of the result file. May contain <code>[name]</code>, <code>[id]</code> and <code>[contenthash]</code></td>
-</tr>
-<tr>
-<td style="text-align:center"><strong><code>options.allChunks</code></strong></td>
-<td style="text-align:center"><code>{Boolean}</code></td>
-<td style="text-align:left">Extract from all additional chunks too (by default it extracts only from the initial chunk(s))</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong><code>options.disable</code></strong></td>
-<td style="text-align:center"><code>{Boolean}</code></td>
-<td style="text-align:left">Disables the plugin</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong><code>options.ignoreOrder</code></strong></td>
-<td style="text-align:center"><code>{Boolean}</code></td>
-<td style="text-align:left">Disables order check (useful for CSS Modules!), <code>false</code> by default</td>
-</tr>
-</tbody>
-</table>
-<ul>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th">Name</div><div class="table-th">Type</div><div class="table-th">Description</div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Name
+	    </div>
+	    <div class="table-td-content">
+	        <strong><code>id</code></strong>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        <code>{String}</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Unique ident for this plugin instance. (For advanced usage only, by default automatically generated)
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Name
+	    </div>
+	    <div class="table-td-content">
+	        <strong><code>filename</code></strong>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        <code>{String}</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Name of the result file. May contain <code>[name]</code>, <code>[id]</code> and <code>[contenthash]</code>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Name
+	    </div>
+	    <div class="table-td-content">
+	        <strong><code>options.allChunks</code></strong>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        <code>{Boolean}</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Extract from all additional chunks too (by default it extracts only from the initial chunk(s))
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Name
+	    </div>
+	    <div class="table-td-content">
+	        <strong><code>options.disable</code></strong>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        <code>{Boolean}</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Disables the plugin
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Name
+	    </div>
+	    <div class="table-td-content">
+	        <strong><code>options.ignoreOrder</code></strong>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        <code>{Boolean}</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Disables order check (useful for CSS Modules!), <code>false</code> by default
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><ul>
 <li><code>[name]</code> name of the chunk</li>
 <li><code>[id]</code> number of the chunk</li>
 <li><code>[contenthash]</code> hash of the content of the extracted file</li>
@@ -125,33 +250,78 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <pre><code class="lang-js">ExtractTextPlugin<span class="token punctuation">.</span><span class="token function">extract</span><span class="token punctuation">(</span>options<span class="token punctuation">:</span> loader <span class="token operator">|</span> object<span class="token punctuation">)</span>
 </code></pre>
 <p>Creates an extracting loader from an existing loader. Supports loaders of type <code>{ loader: [name]-loader -&gt; {String}, options: {} -&gt; {Object} }</code>.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Name</th>
-<th style="text-align:center">Type</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><strong><code>options.use</code></strong></td>
-<td style="text-align:center"><code>{String}</code>/<code>{Object}</code></td>
-<td style="text-align:left">Loader(s) that should be used for converting the resource to a CSS exporting module <em>(required)</em></td>
-</tr>
-<tr>
-<td style="text-align:center"><strong><code>options.fallback</code></strong></td>
-<td style="text-align:center"><code>{String}</code>/<code>{Object}</code></td>
-<td style="text-align:left">loader(e.g <code>&apos;style-loader&apos;</code>) that should be used when the CSS is not extracted (i.e. in an additional chunk when <code>allChunks: false</code>)</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong><code>options.publicPath</code></strong></td>
-<td style="text-align:center"><code>{String}</code></td>
-<td style="text-align:left">Override the <code>publicPath</code> setting for this loader</td>
-</tr>
-</tbody>
-</table>
-<h4 class="header"><a class="anchor" href="#multiple-instances" id="multiple-instances"></a><span class="text">Multiple Instances</span><a class="icon-link" href="#multiple-instances"></a></h4>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th">Name</div><div class="table-th">Type</div><div class="table-th">Description</div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Name
+	    </div>
+	    <div class="table-td-content">
+	        <strong><code>options.use</code></strong>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        <code>{String}</code>/<code>{Object}</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Loader(s) that should be used for converting the resource to a CSS exporting module <em>(required)</em>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Name
+	    </div>
+	    <div class="table-td-content">
+	        <strong><code>options.fallback</code></strong>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        <code>{String}</code>/<code>{Object}</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        loader(e.g <code>&apos;style-loader&apos;</code>) that should be used when the CSS is not extracted (i.e. in an additional chunk when <code>allChunks: false</code>)
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Name
+	    </div>
+	    <div class="table-td-content">
+	        <strong><code>options.publicPath</code></strong>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        <code>{String}</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Override the <code>publicPath</code> setting for this loader
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><h4 class="header"><a class="anchor" href="#multiple-instances" id="multiple-instances"></a><span class="text">Multiple Instances</span><a class="icon-link" href="#multiple-instances"></a></h4>
 <p>There is also an <code>extract</code> function on the instance. You should use this if you have more than one instance of  <code>ExtractTextPlugin</code>.</p>
 <pre><code class="lang-js"><span class="token keyword">const</span> ExtractTextPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;extract-text-webpack-plugin&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 

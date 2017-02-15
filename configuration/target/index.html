@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/177db6eeeb3d5cab0515.css" rel="stylesheet">
+      <link href="/a0ca9181c0031af169e5.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -21,53 +21,141 @@
 <h2 class="header"><a class="anchor" href="#target" id="target"></a><span class="text"><code>target</code></span><a class="icon-link" href="#target"></a></h2>
 <p><code>string</code></p>
 <p>Tells webpack which environment the application is targeting. The following values are supported via <a href="https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js"><code>WebpackOptionsApply</code></a>:</p>
-<table>
-<thead>
-<tr>
-<th><code>target</code></th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>async-node</code></td>
-<td>Compile for usage in a Node.js-like environment (uses <code>fs</code> and <code>vm</code> to load chunks asynchronously)</td>
-</tr>
-<tr>
-<td><del><code>atom</code></del></td>
-<td>Alias for <code>electron-main</code></td>
-</tr>
-<tr>
-<td><del><code>electron</code></del></td>
-<td>Alias for <code>electron-main</code></td>
-</tr>
-<tr>
-<td><code>electron-main</code></td>
-<td>Compile for <a href="http://electron.atom.io/">Electron</a> for main process.</td>
-</tr>
-<tr>
-<td><code>electron-renderer</code></td>
-<td>Compile for <a href="http://electron.atom.io/">Electron</a> for renderer process, providing a target using <code>JsonpTemplatePlugin</code>, <code>FunctionModulePlugin</code> for browser environments and <code>NodeTargetPlugin</code> and <code>ExternalsPlugin</code> for CommonJS and Electron built-in modules.</td>
-</tr>
-<tr>
-<td><code>node</code></td>
-<td>Compile for usage in a Node.js-like environment (uses Node.js <code>require</code> to load chunks)</td>
-</tr>
-<tr>
-<td><code>node-webkit</code></td>
-<td>Compile for usage in WebKit and uses JSONP for chunk loading. Allows importing of built-in Node.js modules and <a href="http://docs.nwjs.io/en/latest/"><code>nw.gui</code></a> (experimental)</td>
-</tr>
-<tr>
-<td><code>web</code></td>
-<td>Compile for usage in a browser-like environment <strong>(default)</strong></td>
-</tr>
-<tr>
-<td><code>webworker</code></td>
-<td>Compile as WebWorker</td>
-</tr>
-</tbody>
-</table>
-<p>For example, when the <code>target</code> is set to <code>&quot;electron&quot;</code>, webpack includes multiple electron specific variables. For more information on which templates and externals are used, you can refer to webpack&apos;s <a href="https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js#L70-L185">source code</a>.</p>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th"><code>target</code></div><div class="table-th">Description</div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>target</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>async-node</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Compile for usage in a Node.js-like environment (uses <code>fs</code> and <code>vm</code> to load chunks asynchronously)
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>target</code>
+	    </div>
+	    <div class="table-td-content">
+	        <del><code>atom</code></del>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Alias for <code>electron-main</code>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>target</code>
+	    </div>
+	    <div class="table-td-content">
+	        <del><code>electron</code></del>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Alias for <code>electron-main</code>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>target</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>electron-main</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Compile for <a href="http://electron.atom.io/">Electron</a> for main process.
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>target</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>electron-renderer</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Compile for <a href="http://electron.atom.io/">Electron</a> for renderer process, providing a target using <code>JsonpTemplatePlugin</code>, <code>FunctionModulePlugin</code> for browser environments and <code>NodeTargetPlugin</code> and <code>ExternalsPlugin</code> for CommonJS and Electron built-in modules.
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>target</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>node</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Compile for usage in a Node.js-like environment (uses Node.js <code>require</code> to load chunks)
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>target</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>node-webkit</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Compile for usage in WebKit and uses JSONP for chunk loading. Allows importing of built-in Node.js modules and <a href="http://docs.nwjs.io/en/latest/"><code>nw.gui</code></a> (experimental)
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>target</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>web</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Compile for usage in a browser-like environment <strong>(default)</strong>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        <code>target</code>
+	    </div>
+	    <div class="table-td-content">
+	        <code>webworker</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Compile as WebWorker
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><p>For example, when the <code>target</code> is set to <code>&quot;electron&quot;</code>, webpack includes multiple electron specific variables. For more information on which templates and externals are used, you can refer to webpack&apos;s <a href="https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js#L70-L185">source code</a>.</p>
 </div><hr style="display:block;"><h3 style="display:block;">Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/SpaceK33z"><img src="https://github.com/SpaceK33z.png?size=90"><span class="contributor__name"> SpaceK33z</span></a><a class="contributor" href="https://github.com/juangl"><img src="https://github.com/juangl.png?size=90"><span class="contributor__name"> juangl</span></a><a class="contributor" href="https://github.com/pastelsky"><img src="https://github.com/pastelsky.png?size=90"><span class="contributor__name"> pastelsky</span></a><a class="contributor" href="https://github.com/skipjack"><img src="https://github.com/skipjack.png?size=90"><span class="contributor__name"> skipjack</span></a><a class="contributor" href="https://github.com/sokra"><img src="https://github.com/sokra.png?size=90"><span class="contributor__name"> sokra</span></a></div></div><div class="interactive" id="components/gitter/gitter.jsx" data-props="{}"><span class="gitter"></span></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/guides/get-started" class="footer__link">Get Started</a><a href="/organization" class="footer__link">Organization</a><a href="/contribute" class="footer__link">Contribute</a><a href="/guides/why-webpack#comparison" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg"></a></section><section class="footer__right"><a href="/branding" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Support</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link">License</a><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" class="footer__license"><img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png"></a></section></div></footer><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
 
     

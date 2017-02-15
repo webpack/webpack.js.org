@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/177db6eeeb3d5cab0515.css" rel="stylesheet">
+      <link href="/a0ca9181c0031af169e5.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -31,37 +31,85 @@
 </code></pre>
 <p>This simply prepends <code>var $ = require(&quot;jquery&quot;);</code> to <code>example.js</code>.</p>
 <h3 class="header"><a class="anchor" href="#syntax" id="syntax"></a><span class="text">Syntax</span><a class="icon-link" href="#syntax"></a></h3>
-<table>
-<thead>
-<tr>
-<th>Query value</th>
-<th>Equals</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>angular</code></td>
-<td><code>var angular = require(&quot;angular&quot;);</code></td>
-</tr>
-<tr>
-<td><code>$=jquery</code></td>
-<td><code>var $ = require(&quot;jquery&quot;);</code></td>
-</tr>
-<tr>
-<td><code>define=&gt;false</code></td>
-<td><code>var define = false;</code></td>
-</tr>
-<tr>
-<td><code>config=&gt;{size:50}</code></td>
-<td><code>var config = {size:50};</code></td>
-</tr>
-<tr>
-<td><code>this=&gt;window</code></td>
-<td><code>(function () { ... }).call(window);</code></td>
-</tr>
-</tbody>
-</table>
-<h3 class="header"><a class="anchor" href="#multiple-values" id="multiple-values"></a><span class="text">Multiple values</span><a class="icon-link" href="#multiple-values"></a></h3>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th">Query value</div><div class="table-th">Equals</div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Query value
+	    </div>
+	    <div class="table-td-content">
+	        <code>angular</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Equals
+	    </div>
+	    <div class="table-td-content">
+	        <code>var angular = require(&quot;angular&quot;);</code>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Query value
+	    </div>
+	    <div class="table-td-content">
+	        <code>$=jquery</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Equals
+	    </div>
+	    <div class="table-td-content">
+	        <code>var $ = require(&quot;jquery&quot;);</code>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Query value
+	    </div>
+	    <div class="table-td-content">
+	        <code>define=&gt;false</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Equals
+	    </div>
+	    <div class="table-td-content">
+	        <code>var define = false;</code>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Query value
+	    </div>
+	    <div class="table-td-content">
+	        <code>config=&gt;{size:50}</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Equals
+	    </div>
+	    <div class="table-td-content">
+	        <code>var config = {size:50};</code>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Query value
+	    </div>
+	    <div class="table-td-content">
+	        <code>this=&gt;window</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Equals
+	    </div>
+	    <div class="table-td-content">
+	        <code>(function () { ... }).call(window);</code>
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><h3 class="header"><a class="anchor" href="#multiple-values" id="multiple-values"></a><span class="text">Multiple values</span><a class="icon-link" href="#multiple-values"></a></h3>
 <p>Multiple values are separated by comma <code>,</code>:</p>
 <pre><code class="lang-javascript"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;imports-loader?$=jquery,angular,config=&gt;{size:50}!./file.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>

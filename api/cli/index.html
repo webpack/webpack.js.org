@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/177db6eeeb3d5cab0515.css" rel="stylesheet">
+      <link href="/a0ca9181c0031af169e5.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -91,73 +91,267 @@ The analyse tool will take in the JSON and provide all the details of the build 
 </ul>
 <h3 class="header"><a class="anchor" href="#output-options" id="output-options"></a><span class="text">Output Options</span><a class="icon-link" href="#output-options"></a></h3>
 <p>This set of options allows you to manipulate certain <a href="/configuration/output">output</a> parameters of your build.</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Explanation</th>
-<th>Input type</th>
-<th>Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>--output-chunk-filename</td>
-<td>The output filename for additional chunks</td>
-<td>string</td>
-<td>filename with [id] instead of [name] or [id] prefixed</td>
-</tr>
-<tr>
-<td>--output-filename</td>
-<td>The output filename of the bundle</td>
-<td>string</td>
-<td>[name].js</td>
-</tr>
-<tr>
-<td>--output-jsonp-function</td>
-<td>The name of the JSONP function used for chunk loading</td>
-<td>string</td>
-<td>webpackJsonp</td>
-</tr>
-<tr>
-<td>--output-library</td>
-<td>Expose the exports of the entry point as library</td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td>--output-library-target</td>
-<td>The type for exposing the exports of the entry,point as library</td>
-<td>string</td>
-<td>var</td>
-</tr>
-<tr>
-<td>--output-path</td>
-<td>The output path for compilation assets</td>
-<td>string</td>
-<td>Current directory</td>
-</tr>
-<tr>
-<td>--output-pathinfo</td>
-<td>Include a comment with the request for every dependency</td>
-<td>boolean</td>
-<td>false</td>
-</tr>
-<tr>
-<td>--output-public-path</td>
-<td>The public path for the assets</td>
-<td>string</td>
-<td>/</td>
-</tr>
-<tr>
-<td>--output-source-map-filename</td>
-<td>The output filename for the SourceMap</td>
-<td>string</td>
-<td>[name].map or [outputFilename].map</td>
-</tr>
-</tbody>
-</table>
-<h4 class="header"><a class="anchor" href="#example-usage" id="example-usage"></a><span class="text">Example Usage</span><a class="icon-link" href="#example-usage"></a></h4>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th">Parameter</div><div class="table-th">Explanation</div><div class="table-th">Input type</div><div class="table-th">Default value</div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --output-chunk-filename
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        The output filename for additional chunks
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Input type
+	    </div>
+	    <div class="table-td-content">
+	        string
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default value
+	    </div>
+	    <div class="table-td-content">
+	        filename with [id] instead of [name] or [id] prefixed
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --output-filename
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        The output filename of the bundle
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Input type
+	    </div>
+	    <div class="table-td-content">
+	        string
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default value
+	    </div>
+	    <div class="table-td-content">
+	        [name].js
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --output-jsonp-function
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        The name of the JSONP function used for chunk loading
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Input type
+	    </div>
+	    <div class="table-td-content">
+	        string
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default value
+	    </div>
+	    <div class="table-td-content">
+	        webpackJsonp
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --output-library
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Expose the exports of the entry point as library
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Input type
+	    </div>
+	    <div class="table-td-content">
+	        string
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default value
+	    </div>
+	    <div class="table-td-content">
+	        
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --output-library-target
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        The type for exposing the exports of the entry,point as library
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Input type
+	    </div>
+	    <div class="table-td-content">
+	        string
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default value
+	    </div>
+	    <div class="table-td-content">
+	        var
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --output-path
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        The output path for compilation assets
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Input type
+	    </div>
+	    <div class="table-td-content">
+	        string
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default value
+	    </div>
+	    <div class="table-td-content">
+	        Current directory
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --output-pathinfo
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Include a comment with the request for every dependency
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Input type
+	    </div>
+	    <div class="table-td-content">
+	        boolean
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default value
+	    </div>
+	    <div class="table-td-content">
+	        false
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --output-public-path
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        The public path for the assets
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Input type
+	    </div>
+	    <div class="table-td-content">
+	        string
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default value
+	    </div>
+	    <div class="table-td-content">
+	        /
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --output-source-map-filename
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        The output filename for the SourceMap
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Input type
+	    </div>
+	    <div class="table-td-content">
+	        string
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default value
+	    </div>
+	    <div class="table-td-content">
+	        [name].map or [outputFilename].map
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><h4 class="header"><a class="anchor" href="#example-usage" id="example-usage"></a><span class="text">Example Usage</span><a class="icon-link" href="#example-usage"></a></h4>
 <pre><code class="lang-bash">webpack index<span class="token operator">=</span>./src/index.js index2<span class="token operator">=</span>./src/index2.js --output-path<span class="token operator">=</span><span class="token string">&apos;./dist&apos;</span> --output-filename<span class="token operator">=</span><span class="token string">&apos;[name][hash].bundle.js&apos;</span>
 
 <span class="token operator">|</span> Asset                                <span class="token operator">|</span> Size    <span class="token operator">|</span> Chunks      <span class="token operator">|</span> Chunk Names   <span class="token operator">|</span>
@@ -182,335 +376,1028 @@ The analyse tool will take in the JSON and provide all the details of the build 
 </code></pre>
 <h3 class="header"><a class="anchor" href="#debug-options" id="debug-options"></a><span class="text">Debug Options</span><a class="icon-link" href="#debug-options"></a></h3>
 <p>This set of options allows you to better debug the application containing assets compiled with webpack</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Explanation</th>
-<th>Input type</th>
-<th>Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>--debug</td>
-<td>Switch loaders to debug mode</td>
-<td>boolean</td>
-<td>false</td>
-</tr>
-<tr>
-<td>--devtool</td>
-<td>Define <a href="/configuration/devtool/">source map type</a> for the bundled resources</td>
-<td>string</td>
-<td>-</td>
-</tr>
-<tr>
-<td>--progress</td>
-<td>Print compilation progress in percentage</td>
-<td>boolean</td>
-<td>false</td>
-</tr>
-</tbody>
-</table>
-<h3 class="header"><a class="anchor" href="#module-options" id="module-options"></a><span class="text">Module Options</span><a class="icon-link" href="#module-options"></a></h3>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th">Parameter</div><div class="table-th">Explanation</div><div class="table-th">Input type</div><div class="table-th">Default value</div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --debug
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Switch loaders to debug mode
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Input type
+	    </div>
+	    <div class="table-td-content">
+	        boolean
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default value
+	    </div>
+	    <div class="table-td-content">
+	        false
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --devtool
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Define <a href="/configuration/devtool/">source map type</a> for the bundled resources
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Input type
+	    </div>
+	    <div class="table-td-content">
+	        string
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default value
+	    </div>
+	    <div class="table-td-content">
+	        -
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --progress
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Print compilation progress in percentage
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Input type
+	    </div>
+	    <div class="table-td-content">
+	        boolean
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default value
+	    </div>
+	    <div class="table-td-content">
+	        false
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><h3 class="header"><a class="anchor" href="#module-options" id="module-options"></a><span class="text">Module Options</span><a class="icon-link" href="#module-options"></a></h3>
 <p>These options allow you to bind <a href="/configuration/module/">modules</a> as allowed by webpack</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Explanation</th>
-<th>Usage</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>--module-bind</td>
-<td>Bind an extension to a loader</td>
-<td>--module-bind /.js$/=babel</td>
-</tr>
-<tr>
-<td>--module-bind-post</td>
-<td>Bind an extension to a post loader</td>
-<td></td>
-</tr>
-<tr>
-<td>--module-bind-pre</td>
-<td>Bind an extension to a pre loader</td>
-</tr>
-</tbody>
-</table>
-<h3 class="header"><a class="anchor" href="#watch-options" id="watch-options"></a><span class="text">Watch Options</span><a class="icon-link" href="#watch-options"></a></h3>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th">Parameter</div><div class="table-th">Explanation</div><div class="table-th">Usage</div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --module-bind
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Bind an extension to a loader
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Usage
+	    </div>
+	    <div class="table-td-content">
+	        --module-bind /.js$/=babel
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --module-bind-post
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Bind an extension to a post loader
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Usage
+	    </div>
+	    <div class="table-td-content">
+	        
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --module-bind-pre
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Bind an extension to a pre loader
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><h3 class="header"><a class="anchor" href="#watch-options" id="watch-options"></a><span class="text">Watch Options</span><a class="icon-link" href="#watch-options"></a></h3>
 <p>These options makes the build <a href="/configuration/watch/">watch</a> for changes in files of the dependency graph and perform the build again.</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Explanation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>--watch, -w</td>
-<td>Watch the filesystem for changes</td>
-</tr>
-<tr>
-<td>--save, -s</td>
-<td>Recompiles on save regardless of changes</td>
-</tr>
-<tr>
-<td>--watch-aggregate-timeout</td>
-<td>Timeout for gathering changes while watching</td>
-</tr>
-<tr>
-<td>--watch-poll</td>
-<td>The polling interval for watching (also enable polling)</td>
-</tr>
-<tr>
-<td>--watch-stdin, --stdin</td>
-<td>Exit the process when stdin is closed</td>
-</tr>
-</tbody>
-</table>
-<h3 class="header"><a class="anchor" href="#optimize-options" id="optimize-options"></a><span class="text">Optimize Options</span><a class="icon-link" href="#optimize-options"></a></h3>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th">Parameter</div><div class="table-th">Explanation</div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --watch, -w
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Watch the filesystem for changes
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --save, -s
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Recompiles on save regardless of changes
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --watch-aggregate-timeout
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Timeout for gathering changes while watching
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --watch-poll
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        The polling interval for watching (also enable polling)
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --watch-stdin, --stdin
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Exit the process when stdin is closed
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><h3 class="header"><a class="anchor" href="#optimize-options" id="optimize-options"></a><span class="text">Optimize Options</span><a class="icon-link" href="#optimize-options"></a></h3>
 <p>These options allow you to manipulate optimisations for a production build using webpack</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Explanation</th>
-<th>Plugin used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>--optimize-max-chunks</td>
-<td>Try to keep the chunk count below a limit</td>
-<td><a href="/plugins/limit-chunk-count-plugin">LimitChunkCountPlugin</a></td>
-</tr>
-<tr>
-<td>--optimize-min-chunk-size</td>
-<td>Try to keep the chunk size above a limit</td>
-<td><a href="/plugins/min-chunk-size-plugin">MinChunkSizePlugin</a></td>
-</tr>
-<tr>
-<td>--optimize-minimize</td>
-<td>Minimize javascript and switches loaders to minimizing</td>
-<td><a href="/plugins/uglifyjs-webpack-plugin/">UglifyJsPlugin</a> &amp; <a href="/plugins/loader-options-plugin/">LoaderOptionsPlugin</a></td>
-</tr>
-</tbody>
-</table>
-<h3 class="header"><a class="anchor" href="#resolve-options" id="resolve-options"></a><span class="text">Resolve Options</span><a class="icon-link" href="#resolve-options"></a></h3>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th">Parameter</div><div class="table-th">Explanation</div><div class="table-th">Plugin used</div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --optimize-max-chunks
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Try to keep the chunk count below a limit
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Plugin used
+	    </div>
+	    <div class="table-td-content">
+	        <a href="/plugins/limit-chunk-count-plugin">LimitChunkCountPlugin</a>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --optimize-min-chunk-size
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Try to keep the chunk size above a limit
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Plugin used
+	    </div>
+	    <div class="table-td-content">
+	        <a href="/plugins/min-chunk-size-plugin">MinChunkSizePlugin</a>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --optimize-minimize
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Minimize javascript and switches loaders to minimizing
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Plugin used
+	    </div>
+	    <div class="table-td-content">
+	        <a href="/plugins/uglifyjs-webpack-plugin/">UglifyJsPlugin</a> &amp; <a href="/plugins/loader-options-plugin/">LoaderOptionsPlugin</a>
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><h3 class="header"><a class="anchor" href="#resolve-options" id="resolve-options"></a><span class="text">Resolve Options</span><a class="icon-link" href="#resolve-options"></a></h3>
 <p>These allow you to configure the webpack <a href="/configuration/resolve/">resolver</a> with aliases and extensions.</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Explanation</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>--resolve-alias</td>
-<td>Setup a module alias for resolving</td>
-<td>--resolve-alias jquery-plugin=jquery.plugin</td>
-</tr>
-<tr>
-<td>--resolve-extensions</td>
-<td>Setup extensions that should be used to resolve,modules</td>
-<td>--resolve-extensions .es6 .js .ts</td>
-</tr>
-<tr>
-<td>--resolve-loader-alias</td>
-<td>Minimize javascript and switches loaders to minimizing</td>
-</tr>
-</tbody>
-</table>
-<h3 class="header"><a class="anchor" href="#stats-options" id="stats-options"></a><span class="text">Stats Options</span><a class="icon-link" href="#stats-options"></a></h3>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th">Parameter</div><div class="table-th">Explanation</div><div class="table-th">Example</div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --resolve-alias
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Setup a module alias for resolving
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Example
+	    </div>
+	    <div class="table-td-content">
+	        --resolve-alias jquery-plugin=jquery.plugin
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --resolve-extensions
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Setup extensions that should be used to resolve,modules
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Example
+	    </div>
+	    <div class="table-td-content">
+	        --resolve-extensions .es6 .js .ts
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --resolve-loader-alias
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Minimize javascript and switches loaders to minimizing
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><h3 class="header"><a class="anchor" href="#stats-options" id="stats-options"></a><span class="text">Stats Options</span><a class="icon-link" href="#stats-options"></a></h3>
 <p>These options allow webpack to display various <a href="/configuration/stats/">stats</a> and style them differently in the console output.</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Explanation</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>--color, --colors</td>
-<td>Enables/Disables colors on the console [default: (supports-color)]</td>
-<td>boolean</td>
-</tr>
-<tr>
-<td>--display-cached</td>
-<td>Display also cached modules in the output</td>
-<td>boolean</td>
-</tr>
-<tr>
-<td>--display-cached-assets</td>
-<td>Display also cached assets in the output</td>
-<td>boolean</td>
-</tr>
-<tr>
-<td>--display-chunks</td>
-<td>Display chunks in the output</td>
-<td>boolean</td>
-</tr>
-<tr>
-<td>--display-entrypoints</td>
-<td>Display entry points in the output</td>
-<td>boolean</td>
-</tr>
-<tr>
-<td>--display-error-details</td>
-<td>Display details about errors</td>
-<td>boolean</td>
-</tr>
-<tr>
-<td>--display-exclude</td>
-<td>Exclude modules in the output</td>
-<td>boolean</td>
-</tr>
-<tr>
-<td>--display-modules</td>
-<td>Display even excluded modules in the output</td>
-<td>boolean</td>
-</tr>
-<tr>
-<td>--display-origins</td>
-<td>Display origins of chunks in the output</td>
-<td>boolean</td>
-</tr>
-<tr>
-<td>--display-reasons</td>
-<td>Display reasons about module inclusion in the output</td>
-<td>boolean</td>
-</tr>
-<tr>
-<td>--display-used-exports</td>
-<td>Display information about used exports in modules (Tree Shaking)</td>
-<td>boolean</td>
-</tr>
-<tr>
-<td>--hide-modules</td>
-<td>Hides info about modules</td>
-<td>boolean</td>
-</tr>
-<tr>
-<td>--sort-assets-by</td>
-<td>Sorts the assets list by property in asset</td>
-<td>string</td>
-</tr>
-<tr>
-<td>--sort-chunks-by</td>
-<td>Sorts the chunks list by property in chunk</td>
-<td>string</td>
-</tr>
-<tr>
-<td>--sort-modules-by</td>
-<td>Sorts the modules list by property in module</td>
-<td>string</td>
-</tr>
-<tr>
-<td>--verbose, -v</td>
-<td>Show more details</td>
-<td>boolean</td>
-</tr>
-</tbody>
-</table>
-<h3 class="header"><a class="anchor" href="#advanced-options" id="advanced-options"></a><span class="text">Advanced Options</span><a class="icon-link" href="#advanced-options"></a></h3>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Explanation</th>
-<th>Usage</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>--bail</td>
-<td>Abort the compilation on first error</td>
-<td></td>
-</tr>
-<tr>
-<td>--cache</td>
-<td>Enable in memory caching [Enabled by default for watch]</td>
-<td>--cache=false</td>
-</tr>
-<tr>
-<td>--define</td>
-<td>Define any free var in the bundle, see <a href="/guides/shimming">shimming</a></td>
-<td>--define process.env.NODE_ENV=&apos;development&apos;</td>
-</tr>
-<tr>
-<td>--hot</td>
-<td>Enables <a href="/concepts/hot-module-replacement">Hot Module Replacement</a> [Uses HotModuleReplacementPlugin]</td>
-<td>--hot=true</td>
-</tr>
-<tr>
-<td>--labeled-modules</td>
-<td>Enables labeled modules [Uses LabeledModulesPlugin]</td>
-<td></td>
-</tr>
-<tr>
-<td>--plugin</td>
-<td>Load this <a href="/configuration/plugins/">plugin</a></td>
-<td></td>
-</tr>
-<tr>
-<td>--prefetch</td>
-<td>Prefetch the particular file</td>
-<td>--prefetch=./files.js</td>
-</tr>
-<tr>
-<td>--provide</td>
-<td>Provide these modules as free vars in all modules, see <a href="/guides/shimming">shimming</a></td>
-<td>--provide jQuery=jquery</td>
-</tr>
-<tr>
-<td>--records-input-path</td>
-<td>Path to the records file (reading)</td>
-<td></td>
-</tr>
-<tr>
-<td>--records-output-path</td>
-<td>Path to the records file (writing)</td>
-<td></td>
-</tr>
-<tr>
-<td>--records-path</td>
-<td>Path to the records file</td>
-<td></td>
-</tr>
-<tr>
-<td>--target</td>
-<td>The <a href="/configuration/target/">targeted</a> execution environment</td>
-<td>--target=&apos;node&apos;</td>
-</tr>
-</tbody>
-</table>
-<h3 class="header"><a class="anchor" href="#shortcuts" id="shortcuts"></a><span class="text">Shortcuts</span><a class="icon-link" href="#shortcuts"></a></h3>
-<table>
-<thead>
-<tr>
-<th>Shortcut</th>
-<th>Replaces</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-d</td>
-<td>--debug --devtool eval-cheap-module-source-map --output-pathinfo</td>
-</tr>
-<tr>
-<td>-p</td>
-<td>--optimize-minimize --define process.env.NODE_ENV=&quot;production&quot;, see <a href="/guides/production-build">building for production</a></td>
-</tr>
-</tbody>
-</table>
-<h3 class="header"><a class="anchor" href="#profiling" id="profiling"></a><span class="text">Profiling</span><a class="icon-link" href="#profiling"></a></h3>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th">Parameter</div><div class="table-th">Explanation</div><div class="table-th">Type</div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --color, --colors
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Enables/Disables colors on the console [default: (supports-color)]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        boolean
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --display-cached
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Display also cached modules in the output
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        boolean
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --display-cached-assets
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Display also cached assets in the output
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        boolean
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --display-chunks
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Display chunks in the output
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        boolean
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --display-entrypoints
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Display entry points in the output
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        boolean
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --display-error-details
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Display details about errors
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        boolean
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --display-exclude
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Exclude modules in the output
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        boolean
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --display-modules
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Display even excluded modules in the output
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        boolean
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --display-origins
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Display origins of chunks in the output
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        boolean
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --display-reasons
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Display reasons about module inclusion in the output
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        boolean
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --display-used-exports
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Display information about used exports in modules (Tree Shaking)
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        boolean
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --hide-modules
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Hides info about modules
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        boolean
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --sort-assets-by
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Sorts the assets list by property in asset
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        string
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --sort-chunks-by
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Sorts the chunks list by property in chunk
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        string
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --sort-modules-by
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Sorts the modules list by property in module
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        string
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --verbose, -v
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Show more details
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        boolean
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><h3 class="header"><a class="anchor" href="#advanced-options" id="advanced-options"></a><span class="text">Advanced Options</span><a class="icon-link" href="#advanced-options"></a></h3>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th">Parameter</div><div class="table-th">Explanation</div><div class="table-th">Usage</div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --bail
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Abort the compilation on first error
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Usage
+	    </div>
+	    <div class="table-td-content">
+	        
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --cache
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Enable in memory caching [Enabled by default for watch]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Usage
+	    </div>
+	    <div class="table-td-content">
+	        --cache=false
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --define
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Define any free var in the bundle, see <a href="/guides/shimming">shimming</a>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Usage
+	    </div>
+	    <div class="table-td-content">
+	        --define process.env.NODE_ENV=&apos;development&apos;
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --hot
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Enables <a href="/concepts/hot-module-replacement">Hot Module Replacement</a> [Uses HotModuleReplacementPlugin]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Usage
+	    </div>
+	    <div class="table-td-content">
+	        --hot=true
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --labeled-modules
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Enables labeled modules [Uses LabeledModulesPlugin]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Usage
+	    </div>
+	    <div class="table-td-content">
+	        
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --plugin
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Load this <a href="/configuration/plugins/">plugin</a>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Usage
+	    </div>
+	    <div class="table-td-content">
+	        
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --prefetch
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Prefetch the particular file
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Usage
+	    </div>
+	    <div class="table-td-content">
+	        --prefetch=./files.js
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --provide
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Provide these modules as free vars in all modules, see <a href="/guides/shimming">shimming</a>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Usage
+	    </div>
+	    <div class="table-td-content">
+	        --provide jQuery=jquery
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --records-input-path
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Path to the records file (reading)
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Usage
+	    </div>
+	    <div class="table-td-content">
+	        
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --records-output-path
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Path to the records file (writing)
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Usage
+	    </div>
+	    <div class="table-td-content">
+	        
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --records-path
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        Path to the records file
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Usage
+	    </div>
+	    <div class="table-td-content">
+	        
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Parameter
+	    </div>
+	    <div class="table-td-content">
+	        --target
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Explanation
+	    </div>
+	    <div class="table-td-content">
+	        The <a href="/configuration/target/">targeted</a> execution environment
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Usage
+	    </div>
+	    <div class="table-td-content">
+	        --target=&apos;node&apos;
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><h3 class="header"><a class="anchor" href="#shortcuts" id="shortcuts"></a><span class="text">Shortcuts</span><a class="icon-link" href="#shortcuts"></a></h3>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th">Shortcut</div><div class="table-th">Replaces</div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Shortcut
+	    </div>
+	    <div class="table-td-content">
+	        -d
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Replaces
+	    </div>
+	    <div class="table-td-content">
+	        --debug --devtool eval-cheap-module-source-map --output-pathinfo
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Shortcut
+	    </div>
+	    <div class="table-td-content">
+	        -p
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Replaces
+	    </div>
+	    <div class="table-td-content">
+	        --optimize-minimize --define process.env.NODE_ENV=&quot;production&quot;, see <a href="/guides/production-build">building for production</a>
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><h3 class="header"><a class="anchor" href="#profiling" id="profiling"></a><span class="text">Profiling</span><a class="icon-link" href="#profiling"></a></h3>
 <p>This option profiles the compilation and includes this information in the stats output. It gives you an in depth idea of which step in the compilation is taking how long. This can help you optimise your build in a more informed manner.</p>
 <pre><code class="lang-bash">webpack --profile
 

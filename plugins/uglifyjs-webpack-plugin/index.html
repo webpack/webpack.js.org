@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/177db6eeeb3d5cab0515.css" rel="stylesheet">
+      <link href="/a0ca9181c0031af169e5.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -52,79 +52,295 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>And, that&apos;s it!</p>
 <h2 class="header"><a class="anchor" href="#options" id="options"></a><span class="text">Options</span><a class="icon-link" href="#options"></a></h2>
 <p>This plugin supports UglifyJS features as discussed below:</p>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Type</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>compress</td>
-<td>boolean, object</td>
-<td>true</td>
-<td>See <a href="http://lisperator.net/uglifyjs/compress">UglifyJS documentation</a>.</td>
-</tr>
-<tr>
-<td>mangle</td>
-<td>boolean, object</td>
-<td>true</td>
-<td>See below.</td>
-</tr>
-<tr>
-<td>beautify</td>
-<td>boolean</td>
-<td>false</td>
-<td>Beautify output.</td>
-</tr>
-<tr>
-<td>output</td>
-<td>An object providing options for UglifyJS <a href="https://github.com/mishoo/UglifyJS2/blob/master/lib/output.js">OutputStream</a></td>
-<td></td>
-<td>Lower level access to UglifyJS output.</td>
-</tr>
-<tr>
-<td>comments</td>
-<td>boolean, RegExp, function(astNode, comment) -&gt; boolean</td>
-<td>Defaults to preserving comments containing <code>/*!</code>, <code>/**!</code>, <code>@preserve</code> or <code>@license</code>.</td>
-<td>Comment related configuration.</td>
-</tr>
-<tr>
-<td>extractComments</td>
-<td>boolean, RegExp, function (astNode, comment) -&gt; boolean, object</td>
-<td>false</td>
-<td>Whether comments shall be extracted to a separate file, see below.</td>
-</tr>
-<tr>
-<td>sourceMap</td>
-<td>boolean</td>
-<td>false</td>
-<td>Use SourceMaps to map error message locations to modules. This slows down the compilation.</td>
-</tr>
-<tr>
-<td>test</td>
-<td>RegExp, Array<regexp></regexp></td>
-<td><code>/.js($|\?)/i</code></td>
-<td>Test to match files against.</td>
-</tr>
-<tr>
-<td>include</td>
-<td>RegExp, Array<regexp></regexp></td>
-<td></td>
-<td>Test only <code>include</code> files.</td>
-</tr>
-<tr>
-<td>exclude</td>
-<td>RegExp, Array<regexp></regexp></td>
-<td></td>
-<td>Files to <code>exclude</code> from testing.</td>
-</tr>
-</tbody>
-</table>
-<h2 class="header"><a class="anchor" href="#mangling" id="mangling"></a><span class="text">Mangling</span><a class="icon-link" href="#mangling"></a></h2>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th">Property</div><div class="table-th">Type</div><div class="table-th">Default</div><div class="table-th">Description</div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Property
+	    </div>
+	    <div class="table-td-content">
+	        compress
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        boolean, object
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default
+	    </div>
+	    <div class="table-td-content">
+	        true
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        See <a href="http://lisperator.net/uglifyjs/compress">UglifyJS documentation</a>.
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Property
+	    </div>
+	    <div class="table-td-content">
+	        mangle
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        boolean, object
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default
+	    </div>
+	    <div class="table-td-content">
+	        true
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        See below.
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Property
+	    </div>
+	    <div class="table-td-content">
+	        beautify
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        boolean
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default
+	    </div>
+	    <div class="table-td-content">
+	        false
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Beautify output.
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Property
+	    </div>
+	    <div class="table-td-content">
+	        output
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        An object providing options for UglifyJS <a href="https://github.com/mishoo/UglifyJS2/blob/master/lib/output.js">OutputStream</a>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default
+	    </div>
+	    <div class="table-td-content">
+	        
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Lower level access to UglifyJS output.
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Property
+	    </div>
+	    <div class="table-td-content">
+	        comments
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        boolean, RegExp, function(astNode, comment) -&gt; boolean
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default
+	    </div>
+	    <div class="table-td-content">
+	        Defaults to preserving comments containing <code>/*!</code>, <code>/**!</code>, <code>@preserve</code> or <code>@license</code>.
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Comment related configuration.
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Property
+	    </div>
+	    <div class="table-td-content">
+	        extractComments
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        boolean, RegExp, function (astNode, comment) -&gt; boolean, object
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default
+	    </div>
+	    <div class="table-td-content">
+	        false
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Whether comments shall be extracted to a separate file, see below.
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Property
+	    </div>
+	    <div class="table-td-content">
+	        sourceMap
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        boolean
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default
+	    </div>
+	    <div class="table-td-content">
+	        false
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Use SourceMaps to map error message locations to modules. This slows down the compilation.
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Property
+	    </div>
+	    <div class="table-td-content">
+	        test
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        RegExp, Array<regexp>
+	    </regexp></div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default
+	    </div>
+	    <div class="table-td-content">
+	        <code>/.js($|\?)/i</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Test to match files against.
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Property
+	    </div>
+	    <div class="table-td-content">
+	        include
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        RegExp, Array<regexp>
+	    </regexp></div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default
+	    </div>
+	    <div class="table-td-content">
+	        
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Test only <code>include</code> files.
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Property
+	    </div>
+	    <div class="table-td-content">
+	        exclude
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        RegExp, Array<regexp>
+	    </regexp></div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Default
+	    </div>
+	    <div class="table-td-content">
+	        
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Files to <code>exclude</code> from testing.
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><h2 class="header"><a class="anchor" href="#mangling" id="mangling"></a><span class="text">Mangling</span><a class="icon-link" href="#mangling"></a></h2>
 <p><code>mangle.props (boolean|object)</code> - Passing <code>true</code> or an object enables and provides options for UglifyJS property mangling - see <a href="https://github.com/mishoo/UglifyJS2#mangleproperties-options">UglifyJS documentation</a> for mangleProperties for options.</p>
 <blockquote>
 <p>Note: the UglifyJS docs warn that <a href="https://github.com/mishoo/UglifyJS2#mangling-property-names---mangle-props">you will probably break your source if you use property mangling</a>, so if you aren&#x2019;t sure why you&#x2019;d need this feature, you most likely shouldn&#x2019;t be using it! You can tweak the behavior as below:</p>

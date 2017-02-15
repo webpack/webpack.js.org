@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/177db6eeeb3d5cab0515.css" rel="stylesheet">
+      <link href="/a0ca9181c0031af169e5.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -48,45 +48,113 @@
 <pre><code class="lang-js">devtoolModuleFilenameTemplate<span class="token punctuation">:</span> &quot;webpack<span class="token punctuation">:</span><span class="token operator">/</span><span class="token comment" spellcheck="true">//[resource-path]?[loaders]&quot;</span>
 </code></pre>
 <p>The following substitutions are available in template strings (via webpack&apos;s internal <a href="https://github.com/webpack/webpack/blob/master/lib/ModuleFilenameHelpers.js"><code>ModuleFilenameHelpers</code></a>):</p>
-<table>
-<thead>
-<tr>
-<th>Template</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>[absolute-resource-path]</td>
-<td>The absolute filename</td>
-</tr>
-<tr>
-<td>[all-loaders]</td>
-<td>Automatic and explicit loaders and params up to the name of the first loader</td>
-</tr>
-<tr>
-<td>[hash]</td>
-<td>The hash of the module identifier</td>
-</tr>
-<tr>
-<td>[id]</td>
-<td>The module identifier</td>
-</tr>
-<tr>
-<td>[loaders]</td>
-<td>Explicit loaders and params up to the name of the first loader</td>
-</tr>
-<tr>
-<td>[resource]</td>
-<td>The path used to resolve the file and any query params used on the first loader</td>
-</tr>
-<tr>
-<td>[resource-path]</td>
-<td>The path used to resolve the file without any query params</td>
-</tr>
-</tbody>
-</table>
-<p>When using a function, the same options are available camel-cased via the <code>info</code> parameter:</p>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th">Template</div><div class="table-th">Description</div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [absolute-resource-path]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The absolute filename
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [all-loaders]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Automatic and explicit loaders and params up to the name of the first loader
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [hash]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The hash of the module identifier
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [id]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The module identifier
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [loaders]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Explicit loaders and params up to the name of the first loader
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [resource]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The path used to resolve the file and any query params used on the first loader
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [resource-path]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The path used to resolve the file without any query params
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><p>When using a function, the same options are available camel-cased via the <code>info</code> parameter:</p>
 <pre><code class="lang-js">devtoolModuleFilenameTemplate<span class="token punctuation">:</span> info <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> `webpack<span class="token punctuation">:</span><span class="token operator">/</span><span class="token comment" spellcheck="true">//${info.resourcePath}?${info.loaders}`</span>
 <span class="token punctuation">}</span>
@@ -124,45 +192,113 @@
 <p>Note this option is called filename but you are still allowed to something like <code>&quot;js/[name]/bundle.js&quot;</code> to create a folder structure.</p>
 <p>Note this options does not affect output files for on-demand-loaded chunks. For these files the <a href="#output-chunkfilename"><code>output.chunkFilename</code></a> option is used. It also doesn&apos;t affect files created by loaders. For these files see loader options.</p>
 <p>The following substitutions are available in template strings (via webpack&apos;s internal <a href="https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js"><code>TemplatedPathPlugin</code></a>):</p>
-<table>
-<thead>
-<tr>
-<th>Template</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>[hash]</td>
-<td>The hash of the module identifier</td>
-</tr>
-<tr>
-<td>[chunkhash]</td>
-<td>The hash of the chunk content</td>
-</tr>
-<tr>
-<td>[name]</td>
-<td>The module name</td>
-</tr>
-<tr>
-<td>[id]</td>
-<td>The module identifier</td>
-</tr>
-<tr>
-<td>[file]</td>
-<td>The module filename</td>
-</tr>
-<tr>
-<td>[filebase]</td>
-<td>The module <a href="https://nodejs.org/api/path.html#path_path_basename_path_ext">basename</a></td>
-</tr>
-<tr>
-<td>[query]</td>
-<td>The module query, i.e., the string following <code>?</code> in the filename</td>
-</tr>
-</tbody>
-</table>
-<p>The lengths of <code>[hash]</code> and <code>[chunkhash]</code> can be specified using <code>[hash:16]</code> (defaults to 20). Alternatively, specify <a href="#output-hashdigestlength"><code>output.hashDigestLength</code></a> to configure the length globally.</p>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th">Template</div><div class="table-th">Description</div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [hash]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The hash of the module identifier
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [chunkhash]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The hash of the chunk content
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [name]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The module name
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [id]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The module identifier
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [file]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The module filename
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [filebase]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The module <a href="https://nodejs.org/api/path.html#path_path_basename_path_ext">basename</a>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [query]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The module query, i.e., the string following <code>?</code> in the filename
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><p>The lengths of <code>[hash]</code> and <code>[chunkhash]</code> can be specified using <code>[hash:16]</code> (defaults to 20). Alternatively, specify <a href="#output-hashdigestlength"><code>output.hashDigestLength</code></a> to configure the length globally.</p>
 <blockquote class="tip"><div class="tip-content"> When using the <a href="/plugins/extract-text-webpack-plugin"><code>ExtractTextWebpackPlugin</code></a>, use <code>[contenthash]</code> to obtain a hash of the extracted file (neither <code>[hash]</code> nor <code>[chunkhash]</code> work). </div></blockquote><h2 class="header"><a class="anchor" href="#output-hotupdatechunkfilename" id="output-hotupdatechunkfilename"></a><span class="text"><code>output.hotUpdateChunkFilename</code></span><a class="icon-link" href="#output-hotupdatechunkfilename"></a></h2>
 <p><code>string</code></p>
 <p>Customize the filenames of hot update chunks. See <a href="#output-filename"><code>output.filename</code></a> option for details on the possible values.</p>

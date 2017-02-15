@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/177db6eeeb3d5cab0515.css" rel="stylesheet">
+      <link href="/a0ca9181c0031af169e5.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -21,76 +21,295 @@
 <h2 class="header"><a class="anchor" href="#devtool" id="devtool"></a><span class="text"><code>devtool</code></span><a class="icon-link" href="#devtool"></a></h2>
 <p><code>string</code> <code>false</code></p>
 <p>Choose a style of <a href="http://blog.teamtreehouse.com/introduction-source-maps">source mapping</a> to enhance the debugging process. These values can affect build and rebuild speed dramatically.</p>
-<table>
-<thead>
-<tr>
-<th>devtool</th>
-<th>build</th>
-<th>rebuild</th>
-<th>production</th>
-<th>quality</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td> eval</td>
-<td>+++</td>
-<td>+++</td>
-<td>no</td>
-<td>generated code</td>
-</tr>
-<tr>
-<td> cheap-eval-source-map</td>
-<td>+</td>
-<td>++</td>
-<td>no</td>
-<td>transformed code (lines only)</td>
-</tr>
-<tr>
-<td> cheap-source-map</td>
-<td>+</td>
-<td>o</td>
-<td>yes</td>
-<td>transformed code (lines only)</td>
-</tr>
-<tr>
-<td> cheap-module-eval-source-map</td>
-<td>o</td>
-<td>++</td>
-<td>no</td>
-<td>original source (lines only)</td>
-</tr>
-<tr>
-<td> cheap-module-source-map</td>
-<td>o</td>
-<td>-</td>
-<td>yes</td>
-<td>original source (lines only)</td>
-</tr>
-<tr>
-<td> eval-source-map</td>
-<td>--</td>
-<td>+</td>
-<td>no</td>
-<td>original source</td>
-</tr>
-<tr>
-<td> source-map</td>
-<td>--</td>
-<td>--</td>
-<td>yes</td>
-<td>original source</td>
-</tr>
-<tr>
-<td> nosources-source-map</td>
-<td>--</td>
-<td>--</td>
-<td>yes</td>
-<td>without source content</td>
-</tr>
-</tbody>
-</table>
-<p>Some of these values are suited for development and some for production. For development you typically want fast Source Maps at the cost of bundle size, but for production you want separate Source Maps that are accurate.</p>
+
+	    <div class="table-wrap">
+	      <div class="table-header">
+	          <div class="table-tr"><div class="table-th">devtool</div><div class="table-th">build</div><div class="table-th">rebuild</div><div class="table-th">production</div><div class="table-th">quality</div></div>
+	      </div>
+	      <div class="table-body">
+	          <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        devtool
+	    </div>
+	    <div class="table-td-content">
+	         eval
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        build
+	    </div>
+	    <div class="table-td-content">
+	        +++
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        rebuild
+	    </div>
+	    <div class="table-td-content">
+	        +++
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        production
+	    </div>
+	    <div class="table-td-content">
+	        no
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        quality
+	    </div>
+	    <div class="table-td-content">
+	        generated code
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        devtool
+	    </div>
+	    <div class="table-td-content">
+	         cheap-eval-source-map
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        build
+	    </div>
+	    <div class="table-td-content">
+	        +
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        rebuild
+	    </div>
+	    <div class="table-td-content">
+	        ++
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        production
+	    </div>
+	    <div class="table-td-content">
+	        no
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        quality
+	    </div>
+	    <div class="table-td-content">
+	        transformed code (lines only)
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        devtool
+	    </div>
+	    <div class="table-td-content">
+	         cheap-source-map
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        build
+	    </div>
+	    <div class="table-td-content">
+	        +
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        rebuild
+	    </div>
+	    <div class="table-td-content">
+	        o
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        production
+	    </div>
+	    <div class="table-td-content">
+	        yes
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        quality
+	    </div>
+	    <div class="table-td-content">
+	        transformed code (lines only)
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        devtool
+	    </div>
+	    <div class="table-td-content">
+	         cheap-module-eval-source-map
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        build
+	    </div>
+	    <div class="table-td-content">
+	        o
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        rebuild
+	    </div>
+	    <div class="table-td-content">
+	        ++
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        production
+	    </div>
+	    <div class="table-td-content">
+	        no
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        quality
+	    </div>
+	    <div class="table-td-content">
+	        original source (lines only)
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        devtool
+	    </div>
+	    <div class="table-td-content">
+	         cheap-module-source-map
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        build
+	    </div>
+	    <div class="table-td-content">
+	        o
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        rebuild
+	    </div>
+	    <div class="table-td-content">
+	        -
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        production
+	    </div>
+	    <div class="table-td-content">
+	        yes
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        quality
+	    </div>
+	    <div class="table-td-content">
+	        original source (lines only)
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        devtool
+	    </div>
+	    <div class="table-td-content">
+	         eval-source-map
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        build
+	    </div>
+	    <div class="table-td-content">
+	        --
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        rebuild
+	    </div>
+	    <div class="table-td-content">
+	        +
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        production
+	    </div>
+	    <div class="table-td-content">
+	        no
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        quality
+	    </div>
+	    <div class="table-td-content">
+	        original source
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        devtool
+	    </div>
+	    <div class="table-td-content">
+	         source-map
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        build
+	    </div>
+	    <div class="table-td-content">
+	        --
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        rebuild
+	    </div>
+	    <div class="table-td-content">
+	        --
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        production
+	    </div>
+	    <div class="table-td-content">
+	        yes
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        quality
+	    </div>
+	    <div class="table-td-content">
+	        original source
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        devtool
+	    </div>
+	    <div class="table-td-content">
+	         nosources-source-map
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        build
+	    </div>
+	    <div class="table-td-content">
+	        --
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        rebuild
+	    </div>
+	    <div class="table-td-content">
+	        --
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        production
+	    </div>
+	    <div class="table-td-content">
+	        yes
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        quality
+	    </div>
+	    <div class="table-td-content">
+	        without source content
+	    </div>
+	  </div></div>
+	      </div>
+	    </div><p>Some of these values are suited for development and some for production. For development you typically want fast Source Maps at the cost of bundle size, but for production you want separate Source Maps that are accurate.</p>
 <blockquote class="warning"><div class="tip-content"> There are some issues with Source Maps in Chrome. <a href="https://github.com/webpack/webpack/issues/3165">We need your help!</a>. </div></blockquote><h3 class="header"><a class="anchor" href="#for-development" id="for-development"></a><span class="text">For development</span><a class="icon-link" href="#for-development"></a></h3>
 <p><code>eval</code> - Each module is executed with <code>eval()</code> and <code>//@ sourceURL</code>. This is pretty fast. The main disadvantage is that it doesn&apos;t display line numbers correctly since it gets mapped to transpiled code instead of the original code.</p>
 <p><code>inline-source-map</code> - A SourceMap is added as a DataUrl to the bundle.</p>
