@@ -89,6 +89,8 @@ module.exports = {
           false,
           /^\.\/.*\.md$/
         );
+      }, {
+        'external-configs': 'javascript-alternatives'
       }
     ),
 
