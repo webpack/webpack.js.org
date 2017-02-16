@@ -32,6 +32,3 @@ config =
   ]
 module.exports = config
 ```
-
-
-?> loader settings, e.g. `sassLoader`, `eslint` sections
