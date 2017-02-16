@@ -1,5 +1,5 @@
 ---
-title: Passing a Configuration
+title: Configuration Types
 sort: 2
 contributors:
   - sokra

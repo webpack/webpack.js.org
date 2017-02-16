@@ -90,7 +90,7 @@ webpack --config example.config.js
 
 **Specify build environment**
 
-Send [environment](/configuration/passing-a-config) variable to be used in webpack config file.
+Send [environment](/configuration/configuration-types) variable to be used in webpack config file.
 
 
 ```bash

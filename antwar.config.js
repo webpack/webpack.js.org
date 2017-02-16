@@ -102,6 +102,8 @@ module.exports = {
           false,
           /^\.\/.*\.md$/
         );
+      }, {
+        'passing-a-config': 'configuration-types'
       }
     ),
 

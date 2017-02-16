@@ -36,7 +36,7 @@ new webpack.NormalModuleReplacementPlugin(
 
 ## Advanced example
 
-Conditional build depending on an [specified environment](/configuration/passing-a-config).
+Conditional build depending on an [specified environment](/configuration/configuration-types).
 
 Say you want a configuration with specific values for different build targets.
 
