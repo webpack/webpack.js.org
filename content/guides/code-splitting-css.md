@@ -9,19 +9,19 @@ contributors:
   - shinxi
 ---
 
-To bundle CSS files with webpack, import CSS into your JavaScript code like [any other module](/concepts/modules), and use the `css-loader` (which outputs the CSS as JS module), and optionally apply the `ExtractTextWebpackPlugin` (which extracts the bundled CSS and outputs CSS files).
+为了用 webpack 对 CSS 文件进行打包，你可以像[其它模块](/concepts/modules)一样将 CSS 引入到你的 JavaScript 代码中，同时用 `css-loader` (像 JS 模块一样输出 CSS)，也可以选择使用 `ExtractTextWebpackPlugin` (将打好包的 CSS 提出出来并输出成 CSS 文件)。
 
-## Importing CSS
+## 引入 CSS
 
-Import the CSS file like a JavaScript module, for instance in `vendor.js`:
+像 JavaScript 模块一样引入 CSS 文件，例如在 `vendor.js` 中:
 
 ```javascript
 import 'bootstrap/dist/css/bootstrap.css';
 ```
 
-## Using `css-loader`
+## 使用 `css-loader`
 
-Configure the [`css-loader`](/loaders/css-loader) in `webpack.config.js` as follows:
+在 `webpack.config.js` 中，配置[`css-loader`](/loaders/css-loader)，例子如下:
 
 ```javascript
 module.exports = {
@@ -34,20 +34,20 @@ module.exports = {
 }
 ```
 
-As a result, the CSS is bundled along with your JavaScript.
+这样，CSS 会跟你的 JavaScript 打包在一起。
 
-This has the disadvantage that, you will not be able to utilize the browser's ability to load CSS asynchronously and parallel. Instead, your page will have to wait until your whole JavaScript bundle is loaded, to style itself.
+这里有一个缺点就是，你无法使用浏览器的能力，去异步且并行去加载 CSS。取而代之的是，你的页面需要等待整个 JavaScript 文件加载完，才能进行样式渲染。
 
-webpack can help with this problem by bundling the CSS separately using the `ExtractTextWebpackPlugin`.
+webpack 能够用 `ExtractTextWebpackPlugin` 帮助你将 CSS 单独打包，以解决以上问题。
 
-## Using `ExtractTextWebpackPlugin`
+## 使用 `ExtractTextWebpackPlugin`
 
-Install the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) plugin as follows
+安装 [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin)
 ```
 npm i --save-dev extract-text-webpack-plugin@beta
 ```
 
-To use this plugin, it needs to be added to the `webpack.config.js` file in two steps.
+为了使用这个插件，它需要通过2步被配置到 `webpack.config.js` 文件中。
 
 ```diff
 module.exports = {
@@ -66,4 +66,4 @@ module.exports = {
 }
 ```
 
-With above two steps, you can generate a new bundle specifically for all the CSS modules and add them as a separate tag in the `index.html`.
+通过以上两步，你可以将所有的 CSS 模块生成一个新的文件，同时你可以将它作为一个单独标签添加到 `index.html`中。
