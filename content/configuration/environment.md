@@ -8,7 +8,7 @@ Eventually you will find the need to disambiguate in your `webpack.config.js` be
 
 ## Using `--env`
 
-The webpack CLI support specifying build environment keys via `--cli` such as `--env.production` or `--env.platform=web`. To make use of those settings, change the configuration object into a function in `webpack.config.js`:
+The webpack CLI support specifying build environment keys via `--env` such as `--env.production` or `--env.platform=web`. To make use of those settings, change the configuration object into a function in `webpack.config.js`:
 
 ```diff
 -module.exports = {
