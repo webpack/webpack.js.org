@@ -90,7 +90,7 @@ module.exports = {
           /^\.\/.*\.md$/
         );
       }, {
-        'external-config': 'javascript-alternatives'
+        'external-configs': 'javascript-alternatives'
       }
     ),
 
