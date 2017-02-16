@@ -7,14 +7,14 @@ export default class Sidebar extends Component {
 
     this.state = {
       fixed: false,
-      extraHeight: null,
+      availableHeight: null,
       maxWidth: null
     };
   }
 
   render() {
     let { sectionName, pages, currentPage } = this.props;
-    let { fixed, extraHeight, maxWidth } = this.state;
+    let { fixed, availableHeight, maxWidth } = this.state;
     let isGuides = sectionName === 'guides';
 
     return (
@@ -23,9 +23,9 @@ export default class Sidebar extends Component {
         ref={ ref => this._container = ref }
         style={ fixed ? {
           position: 'fixed',
-          top: -extraHeight,
+          top: 0,
           width: maxWidth,
-          maxHeight: 'none'
+          maxHeight: availableHeight
         } : null }>
 
         <div className="sidebar__inner">
@@ -81,11 +81,10 @@ export default class Sidebar extends Component {
     let headerHeight = document.querySelector('header').offsetHeight;
     let footerHeight = document.querySelector('footer').offsetHeight;
     let distToBottom = scrollHeight - scrollY - innerHeight;
-    let availableSpace = innerHeight + distToBottom - footerHeight;
     
     this.setState({ 
       fixed: scrollY >= headerHeight && sidebarHeight < parentHeight,
-      extraHeight: sidebarHeight > availableSpace ? sidebarHeight - availableSpace : 0,
+      availableHeight: distToBottom > footerHeight ? innerHeight : innerHeight - footerHeight + distToBottom,
       maxWidth: parentWidth
     });
   }
