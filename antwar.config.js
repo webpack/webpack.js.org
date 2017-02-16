@@ -89,7 +89,8 @@ module.exports = {
           false,
           /^\.\/.*\.md$/
         );
-      }
+      },
+      redirects: {'external-config': 'javascript-alternatives'}
     ),
 
     api: section(
