@@ -1,5 +1,5 @@
 ---
-title: External Configurations
+title: Configuration with Javascript Alternatives
 sort: 3
 contributors:
   - sokra
