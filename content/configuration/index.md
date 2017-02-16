@@ -9,6 +9,7 @@ contributors:
   - sricc
   - terinjokes
   - mattce
+  - kbariotis
 ---
 
 webpack 是需要传入一个配置对象(configuration object)。取决于你如何使用 webpack，可以通过两种方式之一：终端或 Node.js。下面指定了所有可用的配置选项。
@@ -21,7 +22,7 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
 ``` js-with-links-with-details
 var path = require('path');
 
-{
+module.exports = {
   // 点击选项名称，获取文档详细
   // 点击带箭头的项目，展示「更多示例 / 高级选项」
 
@@ -277,7 +278,7 @@ var path = require('path');
     // 如果为 true，请求必不包括扩展名
     // 如果为 false，请求可以包括扩展名
 
-    [moduleExtensions](/configuration/resolve#resolve-moduleextensions): ["-module"],
+    [moduleExtensions](/configuration/resolve#resolveloader-moduleextensions): ["-module"],
     [enforceModuleExtension](/configuration/resolve#resolve-enforcemoduleextension): false,
     // 类似 extensions/enforceExtension，但是用模块名替换文件
 
@@ -354,9 +355,17 @@ var path = require('path');
   </details>
   // 不要遵循/打包这些模块，而是在运行时从环境中请求他们
 
-  [stats](stats): {
-    /* TODO */
+  <details><summary>[stats](/configuration/stats): "errors-only",</summary>
+  [stats](/configuration/stats): { //object
+    assets: true,
+    colors: true,
+    errors: true,
+    errorDetails: true,
+    hash: true,
+    // ...
   },
+  </details>
+  // 精确控制要显示的 bundle 信息
 
   [devServer](/configuration/dev-server): {
     /* TODO */

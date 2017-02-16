@@ -17,7 +17,7 @@ export default props => {
         id="components/splash-viz/splash-viz.jsx"
         component={ SplashViz } />
 
-      <div className="splash__section splash__section__dark">
+      <div className="splash__section splash__section--dark">
         <Container>
           <div dangerouslySetInnerHTML={{
             __html: page.content

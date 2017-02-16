@@ -13,7 +13,6 @@ npm install --save-dev extract-text-webpack-plugin
 
 > :警告: 如果使用 针对 webpack 1 的版本, 请看 [分支 webpack-1 的文档](https://github.com/webpack/extract-text-webpack-plugin/blob/webpack-1/README.md).
 
-
 ```js
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
@@ -34,6 +33,7 @@ module.exports = {
   ]
 }
 ```
+
 它会将所有的 入口chunk (entry chunks) 中的 `require("style.css")` 移动到分开的 css 文件。因此，你的样式不再内联到 javascript 里面，但会放到一个单独的 css 包文件 (`styles.css`)当中。 如果你的样式文件大小较大，这会更快，因为样式文件会跟 javascript 包并行加载。
 
 |优点|缺点|

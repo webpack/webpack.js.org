@@ -77,7 +77,7 @@ contributors:
 ``` diff
   module: {
 -   loaders: {
-+   rules: {
++   rules: [{
       test: /\.less$/,
 -     loader: "style-loader!css-loader!less-loader"
 +     use: [
@@ -85,7 +85,7 @@ contributors:
 +       "css-loader",
 +       "less-loader"
 +     ]
-    }
+    }]
   }
 ```
 
@@ -259,13 +259,15 @@ loaders 的压缩模式将在 webpack 3 或更高的版本中被取消。
 ```diff
 module: {
   rules: [
-    test: /.css$/,
--    loader: ExtractTextPlugin.extract("style-loader", "css-loader", { publicPath: "/dist" })
-+    loader: ExtractTextPlugin.extract({
-+      fallbackLoader: "style-loader",
-+      loader: "css-loader",
-+      publicPath: "/dist"
-+    })
+    {
+      test: /.css$/,
+-      loader: ExtractTextPlugin.extract("style-loader", "css-loader", { publicPath: "/dist" })
++      use: ExtractTextPlugin.extract({
++        fallback: "style-loader",
++        use: "css-loader",
++        publicPath: "/dist"
++      })
+    }
   ]
 }
 ```
