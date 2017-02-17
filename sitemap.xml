@@ -22,9 +22,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/license/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/organization/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/organization/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/plugins/index.html</loc>
     </url>    <url>
@@ -44,13 +44,13 @@
     </url>    <url>
         <loc>https://webpack.js.org/api/plugins/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/concepts/configuration/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/concepts/dependency-graph/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/concepts/entry-points/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/concepts/hot-module-replacement/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts/configuration/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/concepts/loaders/index.html</loc>
     </url>    <url>
@@ -98,9 +98,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/configuration/watch/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/development/how-to-write-a-loader/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/development/how-to-write-a-plugin/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/development/how-to-write-a-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/development/plugin-patterns/index.html</loc>
     </url>    <url>
@@ -150,17 +150,17 @@
     </url>    <url>
         <loc>https://webpack.js.org/guides/production-build/index.html</loc>
     </url>    <url>
+        <loc>https://webpack.js.org/guides/public-path/index.html</loc>
+    </url>    <url>
         <loc>https://webpack.js.org/guides/shimming/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/guides/task-test-runner/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/guides/webpack-and-typescript/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/guides/tree-shaking/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/guides/why-webpack/index.html</loc>
+        <loc>https://webpack.js.org/guides/webpack-and-typescript/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/guides/public-path/index.html</loc>
+        <loc>https://webpack.js.org/guides/why-webpack/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/babel-loader/index.html</loc>
     </url>    <url>

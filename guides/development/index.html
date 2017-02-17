@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/920c8e677a1a5266eeec.css" rel="stylesheet">
+      <link href="/e2a570b92b27d57b5d9d.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -43,11 +43,18 @@
 <pre><code class="lang-bash">webpack --progress --watch
 </code></pre>
 <p>Make a change in one of your files and hit save. You should see that it&apos;s recompiling.</p>
-<p>Watch mode makes no assumptions about a server, so you will need to provide your own. An easy server is <a href="https://github.com/tj/serve"><code>serve</code></a>. After installing (<code>npm i serve -g</code>), you can execute it in the directory where the outputted files are:</p>
-<pre><code class="lang-bash">serve
+<p>Watch mode makes no assumptions about a server, so you will need to provide your own. An easy server to use is <a href="https://github.com/zeit/serve"><code>serve</code></a>. After installing (<code>npm i --save-dev serve</code>), you can run it in the directory where the outputted files are:</p>
+<pre><code class="lang-bash"><span class="token variable"><span class="token variable">`</span>npm bin<span class="token variable">`</span></span>/serve
 </code></pre>
-<p>After each compilation, you will need to manually refresh your browser to see the changes.</p>
-<h3 class="header"><a class="anchor" href="#watch-mode-with-chrome-devtools-workspaces" id="watch-mode-with-chrome-devtools-workspaces"></a><span class="text">Watch Mode with Chrome DevTools Workspaces</span><a class="icon-link" href="#watch-mode-with-chrome-devtools-workspaces"></a></h3>
+<p>You may find it more convenient to run <code>serve</code> using npm scripts. You can do so by first creating a <code>start</code> script in <code>package.json</code> as follows:</p>
+<pre><code class="lang-json">...
+<span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token property">&quot;start&quot;</span><span class="token operator">:</span> <span class="token string">&quot;serve&quot;</span>
+<span class="token punctuation">}</span>
+...
+</code></pre>
+<p>You can then start the server by running <code>npm start</code> from within your project directory. After each compilation, you will need to manually refresh your browser to see the changes.</p>
+<blockquote class="tip"><div class="tip-content"> You may find the <code>--single</code> option useful for serving single page apps. </div></blockquote><h3 class="header"><a class="anchor" href="#watch-mode-with-chrome-devtools-workspaces" id="watch-mode-with-chrome-devtools-workspaces"></a><span class="text">Watch Mode with Chrome DevTools Workspaces</span><a class="icon-link" href="#watch-mode-with-chrome-devtools-workspaces"></a></h3>
 <p>If you set up Chrome to <a href="https://medium.com/@rafaelideleon/webpack-your-chrome-devtools-workspaces-cb9cca8d50da">persist changes when saving from the <em>Sources</em> panel</a>
 so you don&apos;t have to refresh the page, you will have to setup webpack to use</p>
 <pre><code class="lang-javascript">devtool<span class="token punctuation">:</span> <span class="token string">&quot;inline-source-map&quot;</span>
@@ -113,7 +120,7 @@ app<span class="token punctuation">.</span><span class="token function">listen</
 <li><a href="http://survivejs.com/webpack/developing-with-webpack/automatic-browser-refresh/">SurviveJS - Automatic Browser Refresh</a></li>
 <li><a href="https://medium.com/@rafaelideleon/webpack-your-chrome-devtools-workspaces-cb9cca8d50da">Webpack your Chrome DevTools Workspaces</a></li>
 </ul>
-</div><hr style="display:block;"><h3 style="display:block;">Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/SpaceK33z"><img src="https://github.com/SpaceK33z.png?size=90"><span class="contributor__name"> SpaceK33z</span></a><a class="contributor" href="https://github.com/rafde"><img src="https://github.com/rafde.png?size=90"><span class="contributor__name"> rafde</span></a></div></div><div class="interactive" id="components/gitter/gitter.jsx" data-props="{}"><span class="gitter"></span></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/guides/get-started" class="footer__link">Get Started</a><a href="/organization" class="footer__link">Organization</a><a href="/contribute" class="footer__link">Contribute</a><a href="/guides/why-webpack#comparison" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg"></a></section><section class="footer__right"><a href="/branding" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Support</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link">License</a><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" class="footer__license"><img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png"></a></section></div></footer><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
+</div><hr style="display:block;"><h3 style="display:block;">Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/SpaceK33z"><img src="https://github.com/SpaceK33z.png?size=90"><span class="contributor__name"> SpaceK33z</span></a><a class="contributor" href="https://github.com/fvgs"><img src="https://github.com/fvgs.png?size=90"><span class="contributor__name"> fvgs</span></a><a class="contributor" href="https://github.com/rafde"><img src="https://github.com/rafde.png?size=90"><span class="contributor__name"> rafde</span></a></div></div><div class="interactive" id="components/gitter/gitter.jsx" data-props="{}"><span class="gitter"></span></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/guides/get-started" class="footer__link">Get Started</a><a href="/organization" class="footer__link">Organization</a><a href="/contribute" class="footer__link">Contribute</a><a href="/guides/why-webpack#comparison" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg"></a></section><section class="footer__right"><a href="/branding" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Support</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link">License</a><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" class="footer__license"><img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png"></a></section></div></footer><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
 
     
       <script src="/a260c0b80a393818b3ffc1bccddbaffd.js"></script>
