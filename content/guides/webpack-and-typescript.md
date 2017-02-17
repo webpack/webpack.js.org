@@ -48,7 +48,7 @@ module.exports = {
  entry: './index.ts',
  output: {
    filename: 'bundle.js',
-   path: '.'
+   path: __dirname
  },
  module: {
    rules: [
@@ -104,7 +104,7 @@ module.exports = {
  entry: './index.ts',
  output: {
    filename: 'bundle.js',
-   path: '.'
+   path: __dirname
  },
  module: {
    rules: [
