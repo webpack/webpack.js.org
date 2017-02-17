@@ -47,8 +47,8 @@ A basic webpack with TypeScript config should look along these lines:
 module.exports = {
  entry: './index.ts',
  output: {
-   filename: '/bundle.js',
-   path: '/'
+   filename: 'bundle.js',
+   path: '.'
  },
  module: {
    rules: [
@@ -103,8 +103,8 @@ __webpack.config.js__
 module.exports = {
  entry: './index.ts',
  output: {
-   filename: '/bundle.js',
-   path: '/'
+   filename: 'bundle.js',
+   path: '.'
  },
  module: {
    rules: [
