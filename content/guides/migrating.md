@@ -72,7 +72,7 @@ contributors:
 
 ## 链式 loaders
 
-与 v1 版本相同，loaders 可以链式调用，上一个 loader 的输出被作为输入传给下一个 loader。使用 [rule.use](/configuration/module#rule-use) 配置项，`use` 可以设置为一个 loaders 的列表。在 v1 版本中，loaders 通常被用 `!` 连写。这一写法在新版中只在使用旧的 `module.loaders` 时有效。
+与 v1 版本相同，loaders 可以链式调用，上一个 loader 的输出被作为输入传给下一个 loader。使用 [rule.use](/configuration/module#rule-use) 配置项，`use` 可以设置为一个 loaders 的数组列表。在 v1 版本中，loaders 通常被用 `!` 连写。这一写法在新版中只在使用旧的 `module.loaders` 时有效。
 
 ``` diff
   module: {
@@ -91,7 +91,7 @@ contributors:
 
 ## 取消了在模块名中自动添加 `-loader`  后缀
 
-It is not possible anymore to omit the `-loader` extension when referencing loaders:
+现在在指定 loader 的时候不能再省略 -loader 后缀了:
 
 ``` diff
   module: {
@@ -135,7 +135,7 @@ It is not possible anymore to omit the `-loader` extension when referencing load
   }
 ```
 
-[我们决定这么做](https://github.com/webpack/webpack/issues/3363) 以消弭 webpack、 node.js 和 browserify 之间的环境差异。
+[我们决定这么做](https://github.com/webpack/webpack/issues/3363) 以消除 webpack、 node.js 和 browserify 之间的环境差异。
 
 ## loader 默认的 resolve 配置是相对于 context 的
 
@@ -322,7 +322,7 @@ module.exports = function(env) {
 
 详见 [CLI](/api/cli)。
 
-## `require.ensure` 以及 AMD `require` 的异步
+## `require.ensure` 以及 AMD `require` 将采用异步式调用
 
 现在这些函数总是异步的，而不是当 chunk 已经加载过的时候同步调用它们的 callback。
 
@@ -486,7 +486,7 @@ typeof fs.readFileSync === "function";
 typeof readFileSync === "function";
 ```
 
-It is important to note that you will want to tell Babel to not parse these module symbols so webpack can use them. You can do this by setting the following in your `.babelrc` or babel-loader options.
+值得注意的是，你需要让 Babel 不解析这些模块符号，从而让 webpack 可以使用它们。你可以通过设置如下配置到 .babelrc 或 babel-loader 来实现这一点。
 
 **.babelrc**
 
@@ -500,7 +500,7 @@ It is important to note that you will want to tell Babel to not parse these modu
 
 ## Hints
 
-不需要改变什么，不过也可以改变。
+不需要改变什么，但有机会改变。
 
 ### 模板字符串
 
