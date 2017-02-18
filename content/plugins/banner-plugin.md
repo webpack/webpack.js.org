@@ -10,15 +10,15 @@ new webpack.BannerPlugin(banner)
 new webpack.BannerPlugin(options)
 ```
 
-Adds a banner to the top of each generated chunk.
+为每个 chunk 文件头部添加 banner。
 
-## Options
+## 选项
 
 ```javascript
 {
-  banner: string, // the banner as string, it will be wrapped in a comment
-  raw: boolean, // if true, banner will not be wrapped in a comment
-  entryOnly: boolean, // if true, the banner will only be added to the entry chunks
+  banner: string, // 其值为字符串，将作为注释存在
+  raw: boolean, // 如果值为 true，将直出，不会被作为注释
+  entryOnly: boolean, // 如果值为 true，将只在入口 chunks 文件中添加
   test: string | RegExp | Array,
   include: string | RegExp | Array,
   exclude: string | RegExp | Array,

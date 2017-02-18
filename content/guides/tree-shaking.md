@@ -2,6 +2,7 @@
 title: Tree Shaking
 contributors:
   - simon04
+  - zacanger
 ---
 
 _Tree shaking_ 术语一般用来描述除去javascript上下文中无用的代码, 或者更准确的说是按需引用代码。它依赖于ES6模块 [static structure](http://exploringjs.com/es6/ch_modules.html#static-module-structure) 的 [import](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/import)/[export](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/export) .

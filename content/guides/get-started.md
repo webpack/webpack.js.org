@@ -127,11 +127,11 @@ T> 输出可能会稍有不同。如果构建成功，那么你就可以继续�
 在浏览器中打开 `webpack.config.js`，查看成功后 bundle 的结果。
 你应该看到带有以下文本的页面：'Hello webpack'。
 
-## Using ES6 modules with webpack
+## Using ES2015 modules with webpack
 
-Noticed the use of [ES6 module import](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/import) (alias ES2015, *harmony*) in `app/index.js`? Although `import`/`export` statements are not supported in browsers (yet), using them is fine since webpack will replace those instructions with an ES5 compatible wrapper code. Inspect `dist/bundle.js` to convince yourself.
+Noticed the use of [ES2015 module import](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/import) (alias ES2015, *harmony*) in `app/index.js`? Although `import`/`export` statements are not supported in browsers (yet), using them is fine since webpack will replace those instructions with an ES5 compatible wrapper code. Inspect `dist/bundle.js` to convince yourself.
 
-Note that webpack will not touch your code other than `import`/`export`. In case you are using other [ES6 features](http://es6-features.org/), make sure to use a transpiler such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/).
+Note that webpack will not touch your code other than `import`/`export`. In case you are using other [ES2015 features](http://es6-features.org/), make sure to use a transpiler such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/).
 
 ## 使用带有配置的 webpack
 

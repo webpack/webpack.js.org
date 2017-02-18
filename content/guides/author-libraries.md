@@ -10,7 +10,7 @@ webpack是一个用来打包应用（application）和库（library）的代码�
 
 ## 创建一个库
 
-假设你正在写一个小的 library `webpack-numbers'，允许将数字1到5从数字转换为文本表示，反之亦然。实现使用ES6模块，可能看起来像这样：
+假设你正在写一个小的 library `webpack-numbers'，允许将数字1到5从数字转换为文本表示，反之亦然。实现使用 ES2015 模块，可能看起来像这样：
 
 __src/index.js__
 ```javascript

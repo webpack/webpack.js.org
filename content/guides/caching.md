@@ -11,9 +11,11 @@ contributors:
 1. 使用`[chunkhash]`向每个文件添加一个依赖于内容的缓存杀手(cache-buster)。
 2. 将webpack mainfest提取到一个单独的文件中去。
 3. 对于一组依赖关系相同的资源，确保包含引导代码的入口起点模块(entry chunk)不会随时间改变它的哈希值。
+
     对于更优化的设置:
 4. 当需要在HTML中加载资源时，使用编译器统计信息(compiler stats)来获取文件名。
 5. 生成模块清单(chunk manifest)的JSON内容，并在页面资源加载之前内联进HTML中去。
+
 
 ## 问题
 
@@ -268,7 +270,7 @@ manifest.d41d8cd98f00b204e980.js    5.56 kB       2  [emitted]  manifest
 
 ## 内联Manifest
 
-要内联chunk manifest还是选择webpack runtime（以防止额外的HTTP请求），取决于你的服务器设置。这有一个很好的[演练Rails基础](http://clarkdave.net/2015/01/how-to-use-webpack-with-rails/#including-precompiled-assets-in-views)的项目。 对于在Node.js中的服务器端渲染，你可以使用 [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools)。
+要内联chunk manifest还是选择webpack runtime（以防止额外的HTTP请求），取决于你的服务器设置。这有一个很好的[演练Rails基础](https://brigade.engineering/setting-up-webpack-with-rails-c62aea149679)的项目。 对于在Node.js中的服务器端渲染，你可以使用 [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools)。
 
 T> 如果你的应用程序不依赖于任何服务器端渲染，通常只需为应用程序生成一个`index.html`文件即可。 为此，请使用如[`HtmlWebpackPlugin`](https://github.com/ampedandwired/html-webpack-plugin)加上[`ScriptExtHtmlWebpackPlugin`](https://github.com/numical/script-ext-html-webpack-plugin) 或者[`InlineManifestWebpackPlugin`](https://github.com/szrenwei/inline-manifest-webpack-plugin)的组合。这将会大大地简化设置。
 

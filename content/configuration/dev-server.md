@@ -38,7 +38,7 @@ content is served from dist/
 
 这将给出一些背景知识，就能知道服务器的访问位置，并且知道服务已启动。
 
-如果你通过 Node.js API 来使用 dev-server， `devServer` 中的选项将被忽略。将选项作为第二个参数传入： `new WebpackDevServer(compiler, {...})`。
+如果你通过 Node.js API 来使用 dev-server， `devServer` 中的选项将被忽略。将选项作为第二个参数传入： `new WebpackDevServer(compiler, {...})`。关于如何通过 Node.js API 使用 webpack-dev-server 的示例，请[查看此处](https://github.com/webpack/webpack-dev-server/blob/master/examples/node-api-simple/server.js)。
 
 
 ## `devServer.clientLogLevel`
@@ -382,6 +382,21 @@ T> `devServer.publicPath` 和 `output.publicPath` 一样被推荐。
 
 ```js
 quiet: true
+```
+
+## `devServer.setup`
+
+`function`
+
+Here you can access the Express app object and add your own custom middleware to it.
+For example, to define custom handlers for some paths:
+     
+```js
+setup(app){
+  app.get('/some/path', function(req, res) {
+    res.json({ custom: 'response' });
+  });
+}
 ```
 
 
