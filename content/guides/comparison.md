@@ -23,7 +23,7 @@ webpack 不仅仅作为模块打包器存在。如果你要在使用 webpack 或
 | 调试支持 | **SourceUrl, SourceMaps** | 不需要 | SourceMaps | **SourceUrl, SourceMaps** | **SourceUrl, SourceMaps** | SourceMaps |
 | 依赖 | 19MB / 127 个程序包 | 11MB / 118 个程序包 | **1.2MB / 1 个程序包** | 26MB / 131 个程序包 | ?MB / 3 个程序包 | |
 | ES2015 `import`/`export` | **yes** (webpack 2) | no | no | **yes** | **yes** | yes, 通过 [es6 模块转换器](https://github.com/gcollazo/es6-module-transpiler-brunch)
-| require (guided) 中的表达式 `require("./templates/" + template)` | **yes (all files matching included)** | no♦ | no | no | no | no |
+| require (guided) 中的表达式 `require("./templates/" + template)` | **yes (包括所有匹配的文件)** | no♦ | no | no | no | no |
 | require (free) 中的表达式 `require(moduleName)` | 手动配置 | no♦ | no | no | no | |
 | 生成单独包 | **yes** | yes♦ | yes | yes | yes | yes |
 | 间接的 require `var r = require; r("./file")` | **yes** | no♦ | no | no | no | |
@@ -38,8 +38,8 @@ webpack 不仅仅作为模块打包器存在。如果你要在使用 webpack 或
 | 预处理 | **loaders, [transforms](https://github.com/webpack/transform-loader)** | loaders | transforms | plugin translate | plugin transforms | compilers, optimizers |
 | 浏览器替换 | `web_modules`, `.web.js`, package.json field, alias config option | alias option | package.json field, alias option | package.json, alias option | no | |
 | 可 require 文件 | 文件系统 | **web** | 文件系统 | 通过插件 | 文件系统或通过插件 | 文件系统 |
-| 执行时开销 | **243B + 20B 每个模块 + 4B 每个依赖** | 14.7kB + 0B 每个模块 + (3B + X) 每个依赖 | 415B + 25B 每个模块 + (6B + 2X) 每个依赖 | 5.5kB for 自执行 bundle, 38kB 全部 loader 和 polyfill, 0 普通模块, 293B CJS, 139B ES2015 System.register before gzip | **none for ES2015 modules**（可能有其他格式） | |
-| 观察模式 | yes | 不需要 | yes | 开发不需要 | no | yes |
+| 执行时(runtime)开销 | **243B + 20B 每个模块 + 4B 每个依赖** | 14.7kB + 0B 每个模块 + (3B + X) 每个依赖 | 415B + 25B 每个模块 + (6B + 2X) 每个依赖 | 5.5kB for 自执行 bundle, 38kB 全部 loader 和 polyfill, 0 普通模块, 293B CJS, 139B ES2015 System.register before gzip | **none for ES2015 modules**（可能有其他格式） | |
+| 开发文件监听(watch)模式 | yes | 不需要 | yes | 开发不需要 | no | yes |
 
 ♦ 在生产模式（在开发模式中相反）
 
