@@ -10,9 +10,9 @@ contributors:
 
 1. 使用`[chunkhash]`向每个文件添加一个依赖于内容的缓存杀手(cache-buster)。
 2. 将webpack mainfest提取到一个单独的文件中去。
-3. 对于一组依赖关系相同的资源，确保包含引导代码的入口起点模块(entry chunk)不会随时间改变它的哈希值。
+3. 对于一组依赖关系相同的资源，确保包含引导代码的入口点块(entry point chunk)不会随时间的推移而更改它的哈希值。
 
-    对于更优化的设置:
+对于更优化的设置:
 4. 当需要在HTML中加载资源时，使用编译器统计信息(compiler stats)来获取文件名。
 5. 生成模块清单(chunk manifest)的JSON内容，并在页面资源加载之前内联进HTML中去。
 
@@ -147,7 +147,7 @@ module.exports = {
 }
 ```
 
-## 确定性的哈希值
+## 确定性的（Deterministic）哈希值
 
 为了最小化生成的文件大小，webpack使用标识符而不是模块名称。在编译期间，生成标识符并映射到块文件名，然后放入一个名为*chunk manifest*的JavaScript对象中。
 
