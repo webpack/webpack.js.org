@@ -14,16 +14,16 @@ W> 永远不要在生产环境中使用这些工具，永远不要。
 
 一些文本编辑器有“safe write”（安全写入）功能，并且默认启用。因此，保存文件后并不总是会导致 webpack 重新编译。
 
-每个编辑器都有不同的方式来禁用这一功能，以下是一些最常见的：
+每个编辑器都有不同的方式来禁用这一功能，以下是一些最常见编辑器的设置：
 
-* **Sublime Text 3** - 在用户设置（preference）中增加 `"atomic_save": false`。
-* **IntelliJ** - 在设置中查找 “safe write”并且禁用它。
-* **Vim** - 在设置中增加 `:set backupcopy=yes`。
+* **Sublime Text 3** - 在用户首选项（user preference）中增加 `"atomic_save": false`。
+* **IntelliJ** - 在首选项（preferences）中使用搜索查找到 “safe write”并且禁用它。
+* **Vim** - 在您的设置（settings）中增加 `:set backupcopy=yes`。
 * **WebStorm** - 在 Preferences > Appearance & Behavior > System Settings 中取消选中 `Use "safe write"`。
 
 ## Source Maps
 
-当 JavaScript 异常抛出时，你会想知道这个错误发生在哪个文件的哪一行。然而因为 webpack 将文件输出为一个或多个 bundle，所以追踪这一错误会很不方便。
+当 JavaScript 异常抛出时，你常会想知道这个错误发生在哪个文件的哪一行。然而因为 webpack 将文件输出为一个或多个 bundle，所以 追踪这一错误会很不方便。
 
 **Source maps** 试图解决这一问题。它有很多[不同的选项](/configuration/devtool) - 每一个都有自己的优缺点。首先，我们使用这一个：
 
@@ -33,13 +33,13 @@ devtool: "cheap-eval-source-map"
 
 ## 选择一个工具
 
-webpack 可以在 **watch mode**(监视模式)下使用。在这种模式下，webpack 将监视您的文件，并在更改时重新编译。  
+webpack 可以在 **watch mode**(监视模式)下使用。在这种模式下，webpack 将监视您的文件，并在被更改时重新编译。  
 **webpack-dev-server** 提供了一个易于部署的开发服务器，具有快速的实时重载（live reloading）功能。  
-如果你已经有一个开发服务器并且需要完全的灵活性，可以使用 **webpack-dev-middleware** 作为中间件。  
+如果你已经有一个开发服务器并且需要充分的灵活性，可以使用 **webpack-dev-middleware** 作为中间件。  
 
-webapck-dev-server 和 webpack-dev-middleware 使用内存编译，这意味着 bundle 不会被保存在硬盘上。这使得编译十分迅速，并导致你的文件系统更少麻烦。
+webapck-dev-server 和 webpack-dev-middleware 使用内存编译，这意味着 bundle 不会被保存在硬盘上。这使得编译十分迅速，并使得你的文件系统带来更少的麻烦。
 
-在大多数情况下**你会想要使用 webpack-dev-server**，因为这是最简单的开始的方式，并且提供了很多开箱即用的功能。
+在大多数情况下**你会想要使用 webpack-dev-server**，因为这是最简单的开始的方式，并且提供了很多out-of-the-box（开箱即用）的功能。
 
 ### webpack Watch Mode（监视模式）
 
@@ -53,31 +53,39 @@ webpack --progress --watch
 
 在你的文件中做一点更改并且保存。你应该会看到 webpack 正在重新编译。
 
-watch mode 对服务器没有预设，所以你需要自己提供一个。一个简易的服务器是 [`serve`](https://github.com/tj/serve)。安装之后（`npm i serve -g`），你可以在输出的文件目录下运行它：
+watch mode 对服务器没有预设，所以你需要给自己提供一个。一个简易的服务器是 [`serve`](https://github.com/tj/serve)。安装之后（`npm i --save-dev serve`），你可以在输出的文件目录下运行它：
 
 ```bash
-serve
+`npm bin`/serve
 ```
 
-在每一次编译后，你需要手动刷新你的浏览器来查看更改。
+您可能会发现使用npm scripts运行 `serve` 更方便。您可以这样做，首先在package.json中创建一个 `start` 脚本，如下所示：
 
-### Watch Mode with Chrome DevTools Workspaces
+```bash
+"scripts": {
+  "start": "serve"
+}
+```
 
-If you set up Chrome to [persist changes when saving from the _Sources_ panel](https://medium.com/@rafaelideleon/webpack-your-chrome-devtools-workspaces-cb9cca8d50da)
-so you don't have to refresh the page, you will have to setup webpack to use
+然后，您可以通过在项目目录中运行 `npm start` 来启动服务器。在每一次编译后，
+你需要手动刷新你的浏览器来查看更改。
+
+T> 您可能会发现 --single 选项对于提供单页应用服务非常有用。
+
+### 用Chrome DevTools工作区使用Watch Mode（监视模式）
+
+如果从[源面板保存时设置Chrome以保持更改](https://medium.com/@rafaelideleon/webpack-your-chrome-devtools-workspaces-cb9cca8d50da#.mmzbo7jkp)，则无需刷新页面，你将不得不设置 webpack 来使用
 
 ```javascript
 devtool: "inline-source-map"
 ```
 
-to continue editing and saving your changes from Chrome or source files.
+继续编辑和保存来自Chrome或源文件的更改。
 
-There are some _gotchas_ about using workspaces with watch:
+有关对监视使用工作区的一些 _gotchas_：
 
-- Large chunks (such as a common chunk that is over 1MB) that are rebuilt could cause the page to blank,
-which will force you to refresh the browser.
-- Smaller chunks will be faster to build than larger chunks since `inline-source-map` is slower
-due to having to base64 encode the original source code.
+- 重建的大块（Large chunks）（例如超过1MB的公共块）可能导致页面为空白，这将强制您刷新浏览器。
+- 较小的块将比较大的块构建得更快，因为 `inline-source-map` 必须对原始源代码进行base64编码而较慢。
 
 ### webpack-dev-server
 
@@ -105,9 +113,9 @@ T> 如果你的控制台说无法找到该命令，尝试运行 `node_modules/.b
 
 上述命令应该自动在浏览器中打开 `http://localhost:8080`。
 
-在你的文件中做一点更改并且保存。你应该可以在控制台中看到正在编译。完成之后，页面应该会刷新。如果控制台中什么都没发生，你可能需要调整下 [`watchOptions`](/configuration/dev-server#devserver-watchoptions-)。
+在你的文件中做一点更改并且保存。你应该可以在控制台中看到正在编译。编译完成之后，页面应该会刷新。如果控制台中什么都没发生，你可能需要调整下 [`watchOptions`](/configuration/dev-server#devserver-watchoptions-)。
 
-现在你有了实时重载功能，你甚至可以更进一步：Hot Module Replacement（热模块替换）。这是一个接口，使得可以替换模块**而不需要刷新页面**。查看如何[配置 HMR](/guides/hmr-react)。
+现在你有了实时重载功能，你甚至可以更进一步：Hot Module Replacement（热模块替换）。这是一个接口，使得你可以替换模块**而不需要刷新页面**。查看如何[配置 HMR](/guides/hmr-react)。
 
 默认情况下 webpack 会使用**inline mode**（内联模式）。这种模式在你的 bundle 中注入客户端（用来 live reloading 和展示构建错误）。Inline 模式下，你会在你的 DevTools 控制台中看到构建错误。
 
