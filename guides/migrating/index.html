@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/e2a570b92b27d57b5d9d.css" rel="stylesheet">
+      <link href="/1e5c9e4c7ca5f49d1669.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -288,7 +288,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span>
 </code></pre>
 <h2 class="header"><a class="anchor" href="#loaderoptionsplugin-context" id="loaderoptionsplugin-context"></a><span class="text"><code>LoaderOptionsPlugin</code> context</span><a class="icon-link" href="#loaderoptionsplugin-context"></a></h2>
-<p>Some loaders need context information and read them from the configuration. This need to be passed via loader options in long-term. See loader documentation for relevant options.</p>
+<p>Some loaders need context information and read them from the configuration. This needs to be passed via loader options in long-term. See loader documentation for relevant options.</p>
 <p>To keep compatibility with old loaders, this information can be passed via plugin:</p>
 <pre><code class="lang-diff">  plugins: [
 <span class="token inserted">+   new webpack.LoaderOptionsPlugin({</span>
@@ -299,7 +299,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   ]
 </code></pre>
 <h2 class="header"><a class="anchor" href="#debug" id="debug"></a><span class="text"><code>debug</code></span><a class="icon-link" href="#debug"></a></h2>
-<p>The <code>debug</code> option switched loaders to debug mode in webpack 1. This need to be passed via loader options in long-term. See loader documentation for relevant options.</p>
+<p>The <code>debug</code> option switched loaders to debug mode in webpack 1. This needs to be passed via loader options in long-term. See loader documentation for relevant options.</p>
 <p>The debug mode for loaders will be removed in webpack 3 or later.</p>
 <p>To keep compatibility with old loaders, loaders can be switched to debug mode via plugin:</p>
 <pre><code class="lang-diff"><span class="token deleted">- debug: true,</span>
