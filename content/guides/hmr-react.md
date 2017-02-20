@@ -211,7 +211,7 @@ export default App;
 ```
 
 ```css
-// ./src/components/App.css
+/* ./src/components/App.css */
 .app {
     text-size-adjust: none;
     font-family: helvetica, arial, sans-serif;
