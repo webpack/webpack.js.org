@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/a4276d52b1812b09ad9b.css" rel="stylesheet">
+      <link href="/57b566ac0fce5d15b8e4.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -122,7 +122,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </code></pre>
 <h2 class="header"><a class="anchor" href="#deterministic-hashes" id="deterministic-hashes"></a><span class="text">Deterministic hashes</span><a class="icon-link" href="#deterministic-hashes"></a></h2>
 <p>To minimize the size of generated files, webpack uses identifiers instead of module names. During compilation, identifiers are generated, mapped to chunk filenames and then put into a JavaScript object called <em>chunk manifest</em>.
-To generate identifiers that are preserved over builds, webpack supply the <code>NamedModulesPlugin</code> (recommended for development) and <code>HashedModuleIdsPlugin</code> (recommended for production).</p>
+To generate identifiers that are preserved over builds, webpack supplies the <code>NamedModulesPlugin</code> (recommended for development) and <code>HashedModuleIdsPlugin</code> (recommended for production).</p>
 <blockquote class="todo"><div class="tip-content"> When exist, link to <code>NamedModulesPlugin</code> and <code>HashedModuleIdsPlugin</code> docs pages </div></blockquote><blockquote class="todo"><div class="tip-content"> Describe how the option <code>recordsPath</code> option works </div></blockquote><p>The chunk manifest (along with bootstrapping/runtime code) is then placed into the entry chunk and it is crucial for webpack-packaged code to work.</p>
 <blockquote class="tip"><div class="tip-content"> Separate your vendor and application code with <a href="/plugins/commons-chunk-plugin">CommonsChunkPlugin</a> and create an explicit vendor chunk to prevent it from changing too often. When <code>CommonsChunkPlugin</code> is used, the runtime code is moved to the <em>last</em> common entry. </div></blockquote><p>The problem with this, is the same as before: Whenever we change any part of the code it will, even if the rest of its contents wasn&#x2019;t altered, update our entry chunk to include the new manifest. This in turn, will lead to a new hash and dismiss the long-term caching.</p>
 <p>To fix that, we should use <a href="https://github.com/diurnalist/chunk-manifest-webpack-plugin"><code>ChunkManifestWebpackPlugin</code></a>, which will extract the manifest to a separate JSON file. This replaces the chunk manifest with a variable in the webpack runtime. But we can do even better; we can extract the runtime into a separate entry by using <code>CommonsChunkPlugin</code>. Here is an updated <code>webpack.config.js</code> which will produce the manifest and runtime files in our build directory:</p>
