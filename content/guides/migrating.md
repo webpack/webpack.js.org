@@ -388,7 +388,7 @@ module.exports = {
 
 ## `LoaderOptionsPlugin` context
 
-Some loaders need context information and read them from the configuration. This need to be passed via loader options in long-term. See loader documentation for relevant options.
+Some loaders need context information and read them from the configuration. This needs to be passed via loader options in long-term. See loader documentation for relevant options.
 
 To keep compatibility with old loaders, this information can be passed via plugin:
 
@@ -404,7 +404,7 @@ To keep compatibility with old loaders, this information can be passed via plugi
 
 ## `debug`
 
-The `debug` option switched loaders to debug mode in webpack 1. This need to be passed via loader options in long-term. See loader documentation for relevant options.
+The `debug` option switched loaders to debug mode in webpack 1. This needs to be passed via loader options in long-term. See loader documentation for relevant options.
 
 The debug mode for loaders will be removed in webpack 3 or later.
 
