@@ -121,11 +121,23 @@
     }
   }
 
+  .scroll-table {
+    @include break {
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+  }
+
   .table {
     &-wrap {
-      display:block;
-      width:100%;
-      overflow:auto;
+      display: block;
+      width: 100%;
+
+      @include break {
+        display: table;
+        border-left: 1px solid #cccccc;
+        border-bottom: 1px solid #cccccc;
+      }
     }
 
     &-tr {
@@ -138,8 +150,7 @@
 
       @include break {
         border: none;
-        border-left: 1px solid #cccccc;
-        display: flex;
+        display: table-row;
       }
 
       &:nth-child(2n) {
@@ -182,9 +193,20 @@
       &-content {
         display: block;
         width: 60%;
+        padding-left: 10px;
+
+        code {
+          white-space: normal;
+          word-break: break-word;
+        }
 
         @include break {
           width: auto;
+
+          code {
+            word-break: normal;
+            white-space: nowrap;
+          }
         }
       }
     }
@@ -198,7 +220,7 @@
       @include break {
         border-top: 1px solid #cccccc;
         border-right: 1px solid #cccccc;
-        flex-grow: 1;
+        display: table-cell;
       }
     }
 
@@ -210,7 +232,13 @@
       }
 
       @include break {
-        display: block;
+        display: table-header-group;
+      }
+    }
+
+    &-body {
+      @include break {
+        display: table-row-group;
       }
     }
   }
