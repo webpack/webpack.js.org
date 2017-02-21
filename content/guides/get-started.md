@@ -10,8 +10,9 @@ contributors:
   - simon04
 ---
 
-webpack 是构建我们应用程序中 JavaScript 模块的工具。从使用 `webpack` [cli](/api/cli) 或 [api](/api/node) ，并按照[安装说明](/guides/installation)开始。
-webpack 简化快速构建应用程序依赖图表的流程，以正确的顺序打包他们。webpack 能够配置自定义优化代码，在生产环境构建时拆分 vendor/css/js 代码，运行开发服务实现页面无刷新、代码热重载，以及其他非常酷炫的特性。了解更多关于[为什么使用 wepback](/guides/why-webpack)。
+webpack 是一个用来构建我们应用程序中的 JavaScript 模块的工具。在按照 [安装说明](/guides/installation) 安装 webpack 后，我们可以从 [CLI](/api/cli) 或 [API](/api/node) 来开始使用 `webpack`。
+
+webpack 通过快速建立应用程序依赖图表并以正确的顺序打包它们来简化你的工作流。你能够针对你的代码来对 webpack 进行自定义的优化配置，比如为生产环境拆分 vendor/css/js 代码，通过运行开发服务器（development server）来实现无刷新热重载（hot-reload）等很多酷炫的特性。了解更多关于 [为什么使用 wepback](/guides/why-webpack)。
 
 ## 创建一个 bundle 文件
 
@@ -46,7 +47,7 @@ function component () {
 document.body.appendChild(component());
 ```
 
-要运行这段代码，通常需要有以下 HTML
+要运行这段代码，通常需要有以下 HTML ：
 
 __index.html__
 
@@ -62,21 +63,21 @@ __index.html__
 </html>
 ```
 
-在此示例中，`<script>` 标签之间存在隐含依赖关系。
+在此示例中，`<script>` 标签之间存在隐式依赖关系。
 
-在运行 `index.js` 之前，会依赖于页面中引入的 `lodash`。由于 `index.js` 并未显式声明需要引入 `lodash`；只是假定推测已经存在一个全局变量 `_`。
+运行 `index.js` 会依赖于页面中提前引入的 `lodash`。之所以说是隐式的是因为 `index.js` 并未显式声明需要引入 `lodash`，只是假定推测已经存在一个全局变量 `_`。
 
 使用这种方式去管理 JavaScript 项目会有一些问题：
-  - 如果依赖不存在，或者引入顺序错误，应用程序将功能异常。
-  - 如果引入依赖但是并没有使用，那样就会存在许多浏览器下载好却无用的代码。
+  - 如果依赖不存在，或者引入顺序错误，应用程序将无法正常运行。
+  - 如果依赖被引入但是并没有使用，那样就会存在许多浏览器不得不下载的无用代码。
 
-在 `index.js` 中打包 `lodash` 依赖，首先我们需要安装 `lodash`。
+要在 `index.js` 中打包 `lodash` 依赖，首先我们需要安装 `lodash`。
 
 ```
 npm install --save lodash
 ```
 
-然后 import lodash。
+然后引入（import）它。
 
 __app/index.js__
 
@@ -87,8 +88,7 @@ function component () {
   ...
 ```
 
-Also we will need to change the `index.html` to expect a single bundled js file.
-我们还要修改 `index.html`，来引入按照预期打包的单个 js 文件。
+当然我们还要修改 `index.html`，来引入打包好的单个 js 文件。
 
 ```diff
 <html>
@@ -103,11 +103,11 @@ Also we will need to change the `index.html` to expect a single bundled js file.
 </html>
 ```
 
-这里，`index.js` 显式要求引入的 `lodash` 必须存在，然后将它以 `_` 的别名绑定（不会造成全局范围变量名污染）。
+在这里，`index.js` 显式要求引入的 `lodash` 必须存在，然后将它以 `_` 的别名绑定（不会造成全局范围变量名污染）。
 
-通过展示出模块所需依赖，webpack 能够利用这些信息去构建依赖图表。然后 webpack 使用图表生成一个优化过的 bundle，脚本还将以正确的顺序执行。并且没有用到的依赖将不会被 bundle 引入。
+通过声明模块所需的依赖，webpack 能够利用这些信息去构建依赖图表，然后使用图表生成一个优化过的，会以正确代码顺序被运行的 bundle。并且没有用到的依赖将不会被 bundle 引入。
 
-现在在此文件夹下运行 `webpack`，其中 `index.js` 是输入文件，`bundle.js` 是输出文件，输出文件已打包此页面所需的所有代码。
+现在在此文件夹下带上以下参数运行 `webpack`，其中 `index.js` 是入口文件，`bundle.js` 是已打包所需的所有代码的输出文件。
 
 ```bash
 ./node_modules/.bin/webpack app/index.js dist/bundle.js
@@ -122,20 +122,20 @@ bundle.js  544 kB       0  [emitted]  [big]  main
    [2] (webpack)/buildin/module.js 517 bytes {0} [built]
    [3] ./app/index.js 278 bytes {0} [built]
 ```
-T> 输出可能会稍有不同。如果构建成功，那么你就可以继续。
+T>输出可能会稍有不同。如果构建成功，那么你就可以继续。
 
-在浏览器中打开 `webpack.config.js`，查看成功后 bundle 的结果。
-你应该看到带有以下文本的页面：'Hello webpack'。
+在浏览器中打开 `index.html`，查看使用构建好的 bundle 的结果。你应该能看到带有以下文本的页面：‘Hello webpack’。
 
-## Using ES6 modules with webpack
+## 在 webpack 中使用 ES2015 模块
 
-Noticed the use of [ES6 module import](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/import) (alias ES2015, *harmony*) in `app/index.js`? Although `import`/`export` statements are not supported in browsers (yet), using them is fine since webpack will replace those instructions with an ES5 compatible wrapper code. Inspect `dist/bundle.js` to convince yourself.
+你注意到在 `app/index.js` 中使用的 [ES2015 模块引用（module import）](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/import) 了吗？尽管 `import`/`export` 语句在浏览器中还未被支持，你也可以正常的使用，因为 webpack 会将其替换为 ES5 兼容的代码。你可以审查 `dist/bundle.js` 的代码来说服你自己放心使用。
 
-Note that webpack will not touch your code other than `import`/`export`. In case you are using other [ES6 features](http://es6-features.org/), make sure to use a transpiler such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/).
+
+注意 webpack 将不会更改你的 `import`/`export` 除外的代码。如果你在使用其它 [ES2015 特性](http://es6-features.org/)，确保你使用了一个像是 [Babel](https://babeljs.io/) 或 [Bublé](https://buble.surge.sh/guide/) 的转译器。
 
 ## 使用带有配置的 webpack
 
-对于更复杂的配置，我们可以使用配置文件，webpack 会引用它来打包代码。然后创建一个 `webpack.config.js` 文件，你可以使用以下配置表示上述 CLI 命令。
+对于更复杂的配置，我们可以使用一个配置文件，webpack 会参考它来打包代码。创建一个 `webpack.config.js` 文件后，你可以通过以下配置向 CLI 命令传达和前面一样的信息。
 
 __webpack.config.js__
 ```javascript
@@ -150,7 +150,7 @@ module.exports = {
 };
 ```
 
-此文件可以由接下来的 webpack 命令运行。
+此文件可以像下面这样被 webpack 运行。
 
 ```bash
 webpack --config webpack.config.js
@@ -168,11 +168,11 @@ bundle.js  544 kB       0  [emitted]  [big]  main
 
 T> 如果存在 `webpack.config.js`，`webpack` 命令将默认选择使用它。
 
-T> 如果使用上面"创建一个 bundle 文件"章节，已经成功创建过 `dist/bundle.js` 文件，请删除 `dist` 子目录，来验证通过 `webpack.config.js` 文件的设置，所输出内容是否符合预期。
+T> 如果在上面“创建一个 bundle 文件”章节，已经成功创建过 `dist/bundle.js` 文件，可以删除 `dist` 子目录来验证通过 `webpack.config.js` 的设置所输出的内容是否符合预期。
 
-配置文件可以更加灵活地使用 webpack。使用配置文件，我们可以对我们的 bundle 添加加载器规则、插件、解析选项，以及许多其他增强功能。
+通过配置文件可以最灵活地使用 webpack。我们可以通过配置文件来添加加载器规则、插件、解析选项以及许多其他增强功能。
 
-## 使用引入 npm 的 webpack
+## 配合 npm 使用
 
 考虑到用 CLI 这种方式来运行 webpack 不是特别方便，我们可以设置一个快捷方式。像这样调整 *package.json*：
 
@@ -186,13 +186,13 @@ T> 如果使用上面"创建一个 bundle 文件"章节，已经成功创建过 
 }
 ```
 
-现在你可以通过使用 `npm run build` 命令来实现与上面相同的效果。npm 通过命令选取脚本，并临时修补执行环境，使脚本可以在运行时包含 bin 命令。你可以看到很多项目都如此约定。
+现在你可以通过使用 `npm run build` 命令来实现与上面相同的效果。npm 通过命令选取脚本，并临时修补执行环境，使脚本可以在运行时包含 bin 命令。你可以在很多项目中看到这种使用习惯。
 
 T> 你可以通过向 `npm run build` 命令添加两个中横线，给 webpack 传递自定义参数，例如：`npm run build -- --colors`。
 
 ## 结论
 
-现在你已经一起学习了基本的构建过程，你应该深入 webpack [基本概念](/concepts)和[配置](/configuration)来更好地理解其设计。还要查看[指南](/guides)来学习如何处理常见问题。[API](/api) 章节可以深入底层功能。
+现在你已经一起学习了基本的构建过程，你可以深入 webpack [基本概念](/concepts) 和 [配置](/configuration) 来更好地理解其设计。也可以查看 [指南](/guides) 来学习如何处理常见问题。[API](/api) 章节则是对底层的功能进行深入。
 
 ***
 
