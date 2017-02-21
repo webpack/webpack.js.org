@@ -13,7 +13,7 @@ W> `require.ensure` is specific to webpack, see [`import()`](/guides/code-splitt
 
 ## `require.ensure()`
 
-webpack statically parses for `require.ensure()` in the code while building. Any code within the callback function, including code that is `require()`d, will be added to a new chunk. This new chunk is written to an async bundle that is loaded on demand by webpack through jsonp.
+webpack statically parses for `require.ensure()` in the code while building. Any module that is referenced as a dependency or  `require()`d within the callback function, will be added to a new chunk. This new chunk is written to an async bundle that is loaded on demand by webpack through jsonp.
 
 The syntax is as follows:
 
