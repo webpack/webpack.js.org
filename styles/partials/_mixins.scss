@@ -3,3 +3,14 @@
     @content;
   }
 }
+
+@mixin fontantialias ($on) {
+  @if $on == true {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @else {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+}

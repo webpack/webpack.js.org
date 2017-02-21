@@ -1,102 +1,106 @@
 ---
-title: extract-text-webpack-plugin
+title: ExtractTextWebpackPlugin
+source: https://raw.githubusercontent.com/webpack-contrib/extract-text-webpack-plugin/master/README.md
+edit: https://github.com/webpack-contrib/extract-text-webpack-plugin/edit/master/README.md
 ---
-
-# extract text plugin for webpack 2
-
-和 webpack 1 版本相比 API 已经发生改变。对于 webpack 1 版本，请查看 [webpack-1 分支的 README 文档](https://github.com/webpack/extract-text-webpack-plugin/blob/webpack-1/README.md)。
-
 ## 安装
 
-> 可以使用 [npm](https://nodejs.org/en/) 或者 [yarn](https://yarnpkg.com/) 来安装。
-
-```sh
+```bash
 npm install --save-dev extract-text-webpack-plugin
 ```
-or
-```sh
-yarn add --dev extract-text-webpack-plugin
-```
 
-## CSS 的用法示例
+## 使用
 
-``` javascript
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+> :警告: 如果使用 针对 webpack 1 的版本, 请看 [分支 webpack-1 的文档](https://github.com/webpack/extract-text-webpack-plugin/blob/webpack-1/README.md).
+
+```js
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 module.exports = {
-	module: {
-		loaders: [
-			{ test: /\.css$/, loader: ExtractTextPlugin.extract({
-				fallbackLoader: "style-loader",
-				loader: "css-loader"
-			}) }
-		]
-	},
-	plugins: [
-		new ExtractTextPlugin("styles.css")
-	]
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
+      }
+    ]
+  },
+  plugins: [
+    new ExtractTextPlugin("styles.css"),
+  ]
 }
 ```
 
-它会将每个「入口 chunk(entry chunks)」中的 `require("style.css")` 移动到分离的 css 输出文件中。所以，你的样式不再内联到 javascript 里面，而是分离到 css bundle(`styles.css`) 文件中。如果样式总量很大，加载就会变得很快，因为样式 bundle 会并行加载到 javascript bundle 中。
+它会将所有的 入口chunk (entry chunks) 中的 `require("style.css")` 移动到分开的 css 文件。因此，你的样式不再内联到 javascript 里面，但会放到一个单独的 css 包文件 (`styles.css`)当中。 如果你的样式文件大小较大，这会更快，因为样式文件会跟 javascript 包并行加载。
 
-优势：
+|优点|缺点|
+|:---------|:------|
+| 更少 style 标签 (旧版本的 IE 浏览器有限制) | 额外的 HTTP 请求 |
+| CSS SourceMap (使用 `devtool: "source-map"` 和 `css-loader?sourceMap` 配置) | 更长的编译时间 |
+| CSS 请求并行 | 没有运行时的公共路径修改 |
+| CSS 单独缓存 | 没有热替换 |
+| 更快的浏览器运行时 (更少代码和 DOM 的运行) | ... |
 
-* 更少的 style 标签（旧版本的 IE 浏览器对 style 标签数量有限制）
-* CSS SourceMap（使用 `devtool: "source-map"` 和 `css-loader?sourceMap` 配置）
-* CSS 请求并行
-* CSS 单独缓存
-* 更快的浏览器运行时(runtime)（减少代码和减少 DOM 操作）
+## 配置
 
-警告：
-
-* 额外的 HTTP 请求
-* 更长的编译时间
-* 更复杂的配置
-* 没有运行时(runtime)的公共路径修改
-* 没有模块热替换
-
-## API
-
-``` javascript
+```js
 new ExtractTextPlugin(options: filename | object)
 ```
 
-* `options.filename: string` _（必选）_ 生成文件的文件名。可能包含 `[name]`, `[id]` 和 `[contenthash]`
-  * `[name]` chunk 的名称
-  * `[id]` chunk 的数量 
-  * `[contenthash]` 提取文件内容的哈希值
-* `options.allChunks: boolean` 向所有额外的 chunk 中提取（默认情况下，只从初始chunk 提取）
-* `options.disable: boolean` 禁用插件
-* `options.id: string` 此插件实例的唯一 id。（仅限于高级用法，默认情况下自动生成）
+|名称|类型|描述|
+|:--:|:--:|:----------|
+|**`id`**|`{String}`|此插件实例的唯一id。 （仅限高级用途，默认情况下自动生成）|
+|**`filename`**|`{String}`|_(必填)_ 生成文件的文件名。会包含 `[name]`, `[id]` 和 `[contenthash]`|
+|**`options.allChunks`**|`{Boolean}`|向所有额外的 chunk 提取（默认只提取初始加载模块）|
+|**`options.disable`**|`{Boolean}`|禁用插件|
+|**`options.ignoreOrder`**|`{Boolean}`|禁用顺序检查 (对 CSS Modules 有用!), 默认 `false` |
 
-`ExtractTextPlugin` 为每个入口 chunk 生成一个输出文件，所以在使用多个入口时，你必须使用 `[name]`, `[id]` 或者 `[contenthash]`。
+* `[name]` chunk 的名称
+* `[id]` chunk 的数量
+* `[contenthash]` 提取文件根据内容生成的哈希
 
-``` javascript
+> :警告: `ExtractTextPlugin` 对 ** 每个入口 `chunk` ** 都生成对应的一个文件, 所以当你配置多个入口 `chunk` 的时候，你必须使用 `[name]`, `[id]` or `[contenthash]`.
+
+#### `#extract`
+
+```js
 ExtractTextPlugin.extract(options: loader | object)
 ```
 
-从已有的 loader 中创建一个用于提取的 loader，支持的 loader 如 `{ loader: string; query: object }` 这种类型。
+从一个已存在的加载器 (`loader`) 中创建一个 提取 (`extracting`) 加载器。支持这些加载器类型： `{ loader: [name]-loader -> {String}, options: {} -> {Object} }`.
 
-* `options.loader: string | object | loader[]` _(必选)_loader 用于将资源转换为 css 导出模块
-* `options.fallbackLoader: string | object | loader[]` loader 用于在 css 没有被提取时(例如，在 `allChunks: false` 时的额外的 chunk)
-* `options.publicPath: string` 重写 loader 的 `publicPath` 设置
+|名称|类型|描述|
+|:--:|:--:|:----------|
+|**`options.use`**|`{String}`/`{Object}`|_(必填)_, 加载器 (`Loader`), 被用于将资源转换成一个输出的 `CSS` 模块 |
+|**`options.fallback`**|`{String}`/`{Object}`| 加载器 (例如 `'style-loader'`), 应用于当 css 没有被提取(也就是一个额外的 chunk，当 `allChunks: false`)|
+|**`options.publicPath`**|`{String}`|对加载器的 `publicPath` 配置重写|
 
-在 extract 实例还有一个 extract 函数。如果有多个 `ExtractTextPlugin` 实例，你应该使用此方法。
 
-```javascript
-let ExtractTextPlugin = require('extract-text-webpack-plugin');
+#### 多个实例
 
-// 多个 extract 实例
-let extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
-let extractLESS = new ExtractTextPlugin('stylesheets/[name].less');
+这也是一个 提取 (`extract`) 函数的实例。如果你有多于一个 `ExtractTextPlugin` 插件 你应使用这种办法。
+
+```js
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+// 多个提取实例
+const extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
+const extractLESS = new ExtractTextPlugin('stylesheets/[name].less');
 
 module.exports = {
-  ...
   module: {
-    loaders: [
-      { test: /\.scss$/i, loader: extractCSS.extract(['css-loader','sass-loader']) },
-      { test: /\.less$/i, loader: extractLESS.extract(['css-loader','less-loader']) },
-      ...
+    use: [
+      {
+        test: /\.css$/,
+        use: extractCSS.extract([ 'css-loader', 'postcss-loader' ])
+      },
+      {
+        test: /\.html$/i,
+        use: extractLESS.extract([ 'css-loader', 'less-loader' ])
+      },
     ]
   },
   plugins: [
@@ -106,6 +110,35 @@ module.exports = {
 };
 ```
 
-## License
+## 维护者
 
-MIT (http://www.opensource.org/licenses/mit-license.php)
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="150 height="150" src="https://github.com/sokra.png?s=150">
+        <br>
+        <a href="https://github.com/sokra">Tobias Koppers</a>
+      </td>
+    <tr>
+  <tbody>
+</table>
+
+
+[npm]: https://img.shields.io/npm/v/extract-text-webpack-plugin.svg
+[npm-url]: https://npmjs.com/package/extract-text-webpack-plugin
+
+[node]: https://img.shields.io/node/v/extract-text-webpack-plugin.svg
+[node-url]: https://nodejs.org
+
+[deps]: https://david-dm.org/webpack-contrib/extract-text-webpack-plugin.svg
+[deps-url]: https://david-dm.org/webpack-contrib/extract-text-webpack-plugin
+
+[tests]: http://img.shields.io/travis/webpack-contrib/extract-text-webpack-plugin.svg
+[tests-url]: https://travis-ci.org/webpack-contrib/extract-text-webpack-plugin
+
+[cover]: https://coveralls.io/repos/github/webpack-contrib/extract-text-webpack-plugin/badge.svg
+[cover-url]: https://coveralls.io/github/webpack-contrib/extract-text-webpack-plugin
+
+[chat]: https://badges.gitter.im/webpack/webpack.svg
+[chat-url]: https://gitter.im/webpack/webpack

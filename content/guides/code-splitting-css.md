@@ -1,100 +1,69 @@
 ---
-title: 代码拆分 - CSS
+title: Code Splitting - CSS
 sort: 31
 contributors:
   - pksjce
   - jonwheeler
   - johnstew
+  - simon04
+  - shinxi
 ---
 
-如果你使用 `css-loader`，并且在 JavaScript 文件里导入了 CSS，webpack 会把 CSS 代码和 JavaScript 代码一块打包。
-这样做的坏处是，浏览器不能异步或并行加载你的 CSS 代码。也就是说，浏览器在加载整个 JavaScript 打包文件后，才能开始渲染 CSS。
-webpack 能很好地解决这个问题，通过使用 [extract-text-webpack-plugin](https://github.com/webpack/extract-text-webpack-plugin) 和 [`css-loader`](https://github.com/webpack/css-loader)，来把 CSS 打包文件分离开来。
+为了用 webpack 对 CSS 文件进行打包，你可以像[其它模块](/concepts/modules)一样将 CSS 引入到你的 JavaScript 代码中，同时用 `css-loader` (像 JS 模块一样输出 CSS)，也可以选择使用 `ExtractTextWebpackPlugin` (将打好包的 CSS 提出出来并输出成 CSS 文件)。
 
-## 使用 `css-loader`
+## 引入 CSS
 
-你可以使用 [`css-loader`](https://github.com/webpack/css-loader) 来向你的 JavaScript 代码导入 CSS [模块](/concept/modules)。
-`css-loader` 在 webpack 中的配置可以参考下面的代码：
+像 JavaScript 模块一样引入 CSS 文件，例如在 `vendor.js` 中:
 
 ```javascript
-//webpack.config.js
+import 'bootstrap/dist/css/bootstrap.css';
+```
 
-module.exports = function(env){
-    entry: '..',
-    ...
+## 使用 `css-loader`
+
+在 `webpack.config.js` 中，配置[`css-loader`](/loaders/css-loader)，例子如下:
+
+```javascript
+module.exports = {
     module: {
         rules: [{
             test: /\.css$/,
-            exclude: /node_modules/,
-            loader: 'css-loader'
+            use: 'css-loader'
         }]
     }
-    ...
 }
 ```
 
-## 使用 `extract-text-webpack-plugin` - ExtractTextPlugin
+这样，CSS 会跟你的 JavaScript 打包在一起。
 
-使用下面的命令来安装插件：
+这里有一个缺点就是，你无法使用浏览器的能力，去异步且并行去加载 CSS。取而代之的是，你的页面需要等待整个 JavaScript 文件加载完，才能进行样式渲染。
 
+webpack 能够用 `ExtractTextWebpackPlugin` 帮助你将 CSS 单独打包，以解决以上问题。
+
+## 使用 `ExtractTextWebpackPlugin`
+
+安装 [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin)
 ```
-npm i --save-dev extract-text-webpack-plugin
-```
-
-为了使用 `ExtractTextPlugin` 插件, 我们需要在 `webpack.config.js` 中的两个地方作出配置.
-
-### 在 loader 项中
-
-在之前使用 `css-loader` 例子中，我们再加上 `ExtractTextPlugin` 插件：
-
-```javascript
-...
-use: ExtractTextPlugin.extract({loader:'css-loader',options:{sourceMap:true}) //Can be used without sourcemaps too.
-...
+npm i --save-dev extract-text-webpack-plugin@beta
 ```
 
-### 在 plugins 项中
+为了使用这个插件，它需要通过2步被配置到 `webpack.config.js` 文件中。
 
-```javascript
-new ExtractTextPlugin({ filename: 'bundle.css', disable: false, allChunks: true })
-```
-
-通过上面的两步配置，我们生成了一个独立的 CSS 模块的打包文件，然后便可以在 `index.html` 中将它导入。
-关于 `ExtractTextPlugin` 插件 API 的更多信息，请参考[这里](https://github.com/webpack/extract-text-webpack-plugin#api)。
-
-下面是使用 `ExtractTextPlugin` 分割  CSS 的完整配置：
-
-```javascript
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var path = require('path');
-
-module.exports = function () {
-    return {
-        entry: './main.js',
-        output: {
-            path: path.resolve(__dirname, 'dist'),
-            filename: 'bundle.js'
-        },
-        module: {
-            rules: [{
-                test: /\.css$/,
-                exclude: /node_modules/,
-                use: ExtractTextPlugin.extract({
-                    loader: 'css-loader',
-                    options: {
-                      sourceMap: true
-                    }
-                })
-            }]
-        },
-        devtool: 'source-map',
-        plugins: [
-            new ExtractTextPlugin({ filename: 'bundle.css', disable: false, allChunks: true })
-        ]
-    }
+```diff
+module.exports = {
+    module: {
+         rules: [{
+             test: /\.css$/,
+-            use: 'css-loader'
++            use: ExtractTextPlugin.extract({
++                use: 'css-loader'
++            })
+         }]
+     },
++    plugins: [
++        new ExtractTextPlugin('styles.css'),
++    ]
 }
 ```
 
-***
-
-> 原文：https://webpack.js.org/guides/code-splitting-css/
+通过以上两步，你可以将所有的 CSS 模块生成一个新的文件，同时你可以将它作为一个单独标签添加到 `index.html`中。

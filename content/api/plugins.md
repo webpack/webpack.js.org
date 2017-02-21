@@ -449,10 +449,13 @@ compilation.plugin('failed-module', function(module){
 分析器实例接收一个字符串和回调，当字符串能被匹配到时返回一个表达式。
 
 ```javascript
-compiler.parser.plugin("var rewire", function (expr) {
-    //如果你的原模块含有 'var rewire'
-    //现在你将得到一个表达式对象的处理函数
-    return true;
+compiler.plugin('compilation', function(compilation, data) {
+  data.normalModuleFactory.plugin('parser', function(parser, options) {
+    parser.plugin('call require', function(expr) {
+      // you now have a reference to the call expression
+      现在你可以获取到调用表达式(call expression)对象的引用
+    });
+  });
 });
 ```
 
@@ -564,7 +567,7 @@ compiler.parser.plugin("var rewire", function (expr) {
 
 还有一个可用的委托异步的 forEach 接口 `this.forEachBail(array, iterator, callback)`。
 
-要传递请求到其他解析插件，使用 `this.doResolve(types: String|String[], request: Request, callback)` 方法。`types` 根据优先级的识别会有多种请求类型的可能。
+要传递请求到其他解析插件，使用 `this.doResolve(types: String|String[], request: Request, callback)` 方法（或者`this.doResolve(types, request, message, callback)`方法）。`types` 根据优先级的识别会有多种请求类型的可能。
 
 ```javascript
 interface Request {
@@ -575,7 +578,7 @@ interface Request {
   directory: boolean // 请求是否指向一个目录
   file: boolean // 请求是否指向一个文件
   resolved: boolean // 请求是否已经被解析
-  // 在布尔值属性上，undefined 意味着 false 
+  // 在布尔值属性上，undefined 意味着 false
 }
 
 // 示例
