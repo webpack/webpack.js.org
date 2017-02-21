@@ -150,7 +150,7 @@ This means that we still don't reap the benefits of browser caching because the 
 
 The issue here is that on every build, webpack generates some webpack runtime code, which helps webpack do its job. When there is a single bundle, the runtime code resides in it. But when multiple bundles are generated, the runtime code is extracted into the common module, here the `vendor` file.
 
-To prevent this, we need extract out the runtime into a separate manifest file. Even though we are creating another bundle, the overhead is offset by the long term caching benefits that we obtain on the `vendor` file.
+To prevent this, we need to extract out the runtime into a separate manifest file. Even though we are creating another bundle, the overhead is offset by the long term caching benefits that we obtain on the `vendor` file.
 
 __webpack.config.js__
 

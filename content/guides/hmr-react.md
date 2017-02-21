@@ -40,6 +40,8 @@ npm install --save react@15.3.0 react-dom@15.3.0
 
 Your `.babelrc` file should look like the following:
 
+__.babelrc__
+
 ```json
 {
   "presets": [
@@ -61,11 +63,13 @@ Your `.babelrc` file should look like the following:
 }
 ```
 
-### webpack Config
+### Using webpack with a config
 
 While there're many ways of setting up your webpack config - via API,
 via multiple or single config files, etc - here is the basic information
 you should have available.
+
+__webpack.config.js__
 
 ```js
 const { resolve } = require('path');
@@ -83,7 +87,6 @@ module.exports = {
     'webpack/hot/only-dev-server',
     // bundle the client for hot reloading
     // only- means to only hot reload for successful updates
-
 
     './index.js'
     // the entry point of our app
@@ -167,8 +170,9 @@ to better understand what modules are being updated when using HMR.
 
 In this guide, we're using the following files:
 
+__src/index.js__
+
 ```js
-// ./src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -196,8 +200,9 @@ if (module.hot) {
 }
 ```
 
+__src/components/App.js__
+
 ```js
-// ./src/components/App.js
 import React from 'react';
 import styles from './App.css';
 
@@ -210,8 +215,9 @@ const App = () => (
 export default App;
 ```
 
+__src/components/App.css__
+
 ```css
-// ./src/components/App.css
 .app {
     text-size-adjust: none;
     font-family: helvetica, arial, sans-serif;
@@ -240,9 +246,7 @@ The important thing to note in the code above is the `module` reference.
 
 So in this case, `module.hot.accept` will fire the `render` method whenever `src/components/App.js` or its dependencies are changed - which means the `render` method will also fire when the `App.css` is changed, since `App.css` is included in `App.js`.
 
-### index.html
-
-This needs to be placed inside of `dist` in your project root. webpack-dev-server will not run without it.
+__dist/index.html__
 
 ```html
 <!DOCTYPE html>
@@ -256,18 +260,24 @@ This needs to be placed inside of `dist` in your project root. webpack-dev-serve
   <script src="bundle.js"></script>
 </body>
 </html>
-
 ```
-### Package.json
+
+T> This needs to be placed inside of `dist` in your project root. `webpack-dev-server` will not run without it.
+
+### Using webpack with npm
 
 Finally, we need to start up `webpack-dev-server` to bundle our code and see HMR in action.
-We can use the following `package.json` entry:
+Adjust `package.json` like this:
+
+__package.json__
 
 ```json
 {
+  ...
   "scripts" : {
     "start" : "webpack-dev-server"
   }
+  ...
 }
 ```
 
