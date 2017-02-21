@@ -8,6 +8,7 @@ contributors:
   - chrisVillanueva
   - johnstew
   - simon04
+  - aaronang
 ---
 
 webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/guides/installation).
@@ -140,6 +141,7 @@ with the following config settings.
 __webpack.config.js__
 ```javascript
 var path = require('path');
+var webpack = require("webpack");
 
 module.exports = {
   entry: './app/index.js',
@@ -153,7 +155,7 @@ module.exports = {
 This file can be run by webpack as follows.
 
 ```bash
-webpack --config webpack.config.js
+./node_modules/.bin/webpack --config webpack.config.js
 
 Hash: ff6c1d39b26f89b3b7bb
 Version: webpack 2.2.0
