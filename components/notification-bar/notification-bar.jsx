@@ -1,10 +1,11 @@
 import React from 'react';
 import Container from '../container/container';
 
+const version = '0';
+
 export default class NotificationBar extends React.Component {
   render() {
-    let dismissed = this._dismissed;
-    let dismissedMod = dismissed ? 'notification-bar--dismissed' : '';
+    let dismissedMod = this._dismissed ? 'notification-bar--dismissed' : '';
 
     return (
       <div className={ `notification-bar ${dismissedMod}` }>
@@ -26,14 +27,24 @@ export default class NotificationBar extends React.Component {
     );
   }
 
+  /**
+   * Update the notification-dismissed state
+   * 
+   * @param {object} e - Click event
+   */
   _close(e) {
-    localStorage.setItem('notification-dismissed', true);
+    localStorage.setItem('notification-dismissed', version);
     this.forceUpdate();
   }
 
+  /**
+   * Determine whether or not the current message was dismissed
+   * 
+   * @return {boolean} - Whether or not the current message was dismissed
+   */
   get _dismissed() {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('notification-dismissed') === 'true';
+      return localStorage.getItem('notification-dismissed') === version;
 
     } else return false;
   }
