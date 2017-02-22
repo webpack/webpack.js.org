@@ -369,7 +369,13 @@ module.exports = {
   // lets you precisely control what bundle information gets displayed
 
   [devServer](/configuration/dev-server): {
-    /* TODO */
+    contentBase: path.join(__dirname, 'public'), // boolean | string | array, static file location...
+    compress: true,  // gzip
+    historyApiFallback: true, // true for index.html upon 404, object for multiple paths
+    hot: true,   // hot module replacement. Depends on HotModuleReplacementPlugin
+    https: false, //true for self-signed, object for cert authority
+    noInfo: true // only errors & warns on hot reload
+    // ...
   },
 
   [plugins](plugins): [
