@@ -67,7 +67,7 @@ webpack-dev-server 会在 bundle 中加上一段连接 WebSocket 的脚本，一
 
 ## 配合 nginx 的高级用法
 
-为了更好的模拟类生产环境（production-like environment），还可以用 nginx 来代理 webpack-dev-server。
+为了更好的模拟类生产环境(production-like environment)，还可以用 nginx 来代理 webpack-dev-server。
 
 在你的 nginx 配置文件中，加入下面代码：
 
