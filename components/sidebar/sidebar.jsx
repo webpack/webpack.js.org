@@ -21,12 +21,12 @@ export default class Sidebar extends Component {
       <nav 
         className="sidebar" 
         ref={ ref => this._container = ref }
-        style={ fixed ? {
-          position: 'fixed',
-          top: 0,
-          width: maxWidth,
+        style={{
+          position: fixed ? 'fixed' : null,
+          top: fixed ? 0 : null,
+          width: fixed ? maxWidth : null,
           maxHeight: availableHeight
-        } : null }>
+        }}>
 
         <div className="sidebar__inner">
           <h3 className="sidebar-item__version">Version 2.2</h3>
@@ -81,10 +81,14 @@ export default class Sidebar extends Component {
     let headerHeight = document.querySelector('header').offsetHeight;
     let footerHeight = document.querySelector('footer').offsetHeight;
     let distToBottom = scrollHeight - scrollY - innerHeight;
-    
+
+    // Calculate the space that the footer and header are actually occupying
+    let headerSpace = scrollY > headerHeight ? 0 : headerHeight - scrollY;
+    let footerSpace = distToBottom > footerHeight ? 0 : footerHeight - distToBottom;
+
     this.setState({ 
       fixed: scrollY >= headerHeight && sidebarHeight < parentHeight,
-      availableHeight: distToBottom > footerHeight ? innerHeight : innerHeight - footerHeight + distToBottom,
+      availableHeight: innerHeight - headerSpace - footerSpace,
       maxWidth: parentWidth
     });
   }
