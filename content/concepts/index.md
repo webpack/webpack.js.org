@@ -95,7 +95,7 @@ In the configuration above we have defined a `rules` property for a single modul
 
 > "Hey webpack compiler, when you come across a path that resolves to a '.js' or '.jsx' file inside of a `require()`/`import` statement, **use** the `babel-loader` to transform it before you add it to the bundle".
 
-W> It is important to remember when defining rules in your webpack config, you are defining them under `module.rules`, and not `rules`. But webpack will yell at you when doing this incorrectly.
+W> It is important to remember when defining rules in your webpack config, you are defining them under `module.rules`, and not `rules`. However webpack will yell at you when doing this incorrectly.
 
 There are more specific properties to define on loaders that we haven't yet covered.
 
