@@ -176,4 +176,6 @@ __package.json__
 }
 ```
 
+__Important Note:__ `module` will point to a module that has ES2015 module syntax but otherwise only syntax features that browser/node supports.
+
 Now you can [publish it as an npm package](https://docs.npmjs.com/getting-started/publishing-npm-packages) and find it at [unpkg.com](https://unpkg.com/#/) to distribute it to your users.

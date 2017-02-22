@@ -4,6 +4,7 @@ sort: 50
 contributors:
   - SpaceK33z
   - rafde
+  - fvgs
 ---
 
 On this page we'll explain how to get started with developing and how to choose one of three tools to develop. It is assumed you already have a webpack configuration file.
@@ -52,13 +53,25 @@ webpack --progress --watch
 
 Make a change in one of your files and hit save. You should see that it's recompiling.
 
-Watch mode makes no assumptions about a server, so you will need to provide your own. An easy server is [`serve`](https://github.com/tj/serve). After installing (`npm i serve -g`), you can execute it in the directory where the outputted files are:
+Watch mode makes no assumptions about a server, so you will need to provide your own. An easy server to use is [`serve`](https://github.com/zeit/serve). After installing (`npm i --save-dev serve`), you can run it in the directory where the outputted files are:
 
 ```bash
-serve
+`npm bin`/serve
 ```
 
-After each compilation, you will need to manually refresh your browser to see the changes.
+You may find it more convenient to run `serve` using npm scripts. You can do so by first creating a `start` script in `package.json` as follows:
+
+```json
+...
+"scripts": {
+  "start": "serve"
+}
+...
+```
+
+You can then start the server by running `npm start` from within your project directory. After each compilation, you will need to manually refresh your browser to see the changes.
+
+T> You may find the `--single` option useful for serving single page apps.
 
 ### Watch Mode with Chrome DevTools Workspaces
 
