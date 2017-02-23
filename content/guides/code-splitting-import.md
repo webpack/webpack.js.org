@@ -57,14 +57,16 @@ module.exports = {
     filename: 'dist.js',
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.js$/,
       exclude: /(node_modules)/,
-      loader: 'babel-loader',
-      query: {
-        presets: [['es2015', {modules: false}]],
-        plugins: ['syntax-dynamic-import']
-      }
+      use: [{
+        loader: 'babel-loader',
+        options: {
+          presets: [['es2015', {modules: false}]],
+          plugins: ['syntax-dynamic-import']
+        }
+      }]
     }]
   }
 };
@@ -100,19 +102,21 @@ module.exports = {
     filename: 'dist.js',
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.js$/,
       exclude: /(node_modules)/,
-      loader: 'babel-loader',
-      query: {
-        presets: [['es2015', {modules: false}]],
-        plugins: [
-          'syntax-dynamic-import',
-          'transform-async-to-generator',
-          'transform-regenerator',
-          'transform-runtime'
-        ]
-      }
+      use: [{
+        loader: 'babel-loader',
+        options: {
+          presets: [['es2015', {modules: false}]],
+          plugins: [
+            'syntax-dynamic-import',
+            'transform-async-to-generator',
+            'transform-regenerator',
+            'transform-runtime'
+          ]
+        }
+      }]
     }]
   }
 };
