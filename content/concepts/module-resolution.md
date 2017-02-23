@@ -16,7 +16,7 @@ require('path/to/module')
 ```
 
 The dependency module can be from the application code or a third party library. The resolver helps
-webpack finds the module code that needs to be included in the bundle for every such `require`/`import` statement.
+webpack find the module code that needs to be included in the bundle for every such `require`/`import` statement.
 webpack uses [enhanced-resolve](https://github.com/webpack/enhanced-resolve) to resolve file paths while bundling modules.
 
 ## Resolving rules in webpack
