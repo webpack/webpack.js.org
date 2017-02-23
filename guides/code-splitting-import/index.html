@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/9f3454e6b7fb05fcb94c.css" rel="stylesheet">
+      <link href="/c2869a128b7251dfcbcd.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -56,14 +56,16 @@ npm <span class="token function">install</span> --save moment
     filename<span class="token punctuation">:</span> <span class="token string">&apos;dist.js&apos;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    loaders<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
       test<span class="token punctuation">:</span> <span class="token regex">/\.js$/</span><span class="token punctuation">,</span>
       exclude<span class="token punctuation">:</span> <span class="token regex">/(node_modules)/</span><span class="token punctuation">,</span>
-      loader<span class="token punctuation">:</span> <span class="token string">&apos;babel-loader&apos;</span><span class="token punctuation">,</span>
-      query<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-        presets<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">&apos;es2015&apos;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>modules<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&apos;syntax-dynamic-import&apos;</span><span class="token punctuation">]</span>
-      <span class="token punctuation">}</span>
+      use<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+        loader<span class="token punctuation">:</span> <span class="token string">&apos;babel-loader&apos;</span><span class="token punctuation">,</span>
+        options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          presets<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">&apos;es2015&apos;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>modules<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+          plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&apos;syntax-dynamic-import&apos;</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">]</span>
     <span class="token punctuation">}</span><span class="token punctuation">]</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -92,19 +94,21 @@ npm <span class="token function">install</span> --save moment
     filename<span class="token punctuation">:</span> <span class="token string">&apos;dist.js&apos;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    loaders<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
       test<span class="token punctuation">:</span> <span class="token regex">/\.js$/</span><span class="token punctuation">,</span>
       exclude<span class="token punctuation">:</span> <span class="token regex">/(node_modules)/</span><span class="token punctuation">,</span>
-      loader<span class="token punctuation">:</span> <span class="token string">&apos;babel-loader&apos;</span><span class="token punctuation">,</span>
-      query<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-        presets<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">&apos;es2015&apos;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>modules<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
-          <span class="token string">&apos;syntax-dynamic-import&apos;</span><span class="token punctuation">,</span>
-          <span class="token string">&apos;transform-async-to-generator&apos;</span><span class="token punctuation">,</span>
-          <span class="token string">&apos;transform-regenerator&apos;</span><span class="token punctuation">,</span>
-          <span class="token string">&apos;transform-runtime&apos;</span>
-        <span class="token punctuation">]</span>
-      <span class="token punctuation">}</span>
+      use<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+        loader<span class="token punctuation">:</span> <span class="token string">&apos;babel-loader&apos;</span><span class="token punctuation">,</span>
+        options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          presets<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">&apos;es2015&apos;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>modules<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+          plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+            <span class="token string">&apos;syntax-dynamic-import&apos;</span><span class="token punctuation">,</span>
+            <span class="token string">&apos;transform-async-to-generator&apos;</span><span class="token punctuation">,</span>
+            <span class="token string">&apos;transform-regenerator&apos;</span><span class="token punctuation">,</span>
+            <span class="token string">&apos;transform-runtime&apos;</span>
+          <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">]</span>
     <span class="token punctuation">}</span><span class="token punctuation">]</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
