@@ -9,7 +9,7 @@ contributors:
 ## Basic Setup
 
 In order to get started with webpack and Typescript, first we must install webpack in our project.
-If you didn't do so already please check out [webpack Installation Guide](https://webpack.js.org/guides/installation/).
+If you didn't do so already please check out [webpack installation guide](/guides/installation/).
 
 To start using webpack with Typescript you need a couple of things:
 1. Install the Typescript compiler in your project.
@@ -135,7 +135,7 @@ To install it run:
 
 Once the loader is installed we need to tell webpack we want to run this loader before any other loaders by using the `enforce: 'pre'` configuration flag.
 Finally we need to enable source maps in webpack by specifying the `devtool` property.
-Currently we use the 'inline-source-map' setting, to read more about this setting and see other options check out the [devtool documentation](https://webpack.js.org/configuration/devtool/).
+Currently we use the 'inline-source-map' setting, to read more about this setting and see other options check out the [devtool documentation](/configuration/devtool/).
 
 
 
