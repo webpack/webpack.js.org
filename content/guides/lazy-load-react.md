@@ -9,7 +9,7 @@ contributors:
 
 ## 懒加载的组件
 
-我们来看一个父元素选择懒加载一些组件的例子。`importLazy` 只是一个简单的返回 `default` 属性的函数， 这是为了兼容 Babel/ES2015 。如果你不需要，你可以不使用它。`importLazy` 只是返回了目标模块里面任何被 导出为 `export default` 的部分。
+我们来看一个父元素选择懒加载一些组件的例子。`importLazy` 只是一个简单的返回 `default` 属性的函数，这是为了兼容 Babel/ES2015。如果你不需要，你可以去掉 `importLazy` 方法。`importLazy` 只是返回了目标模块里面任何被导出为 `export default` 的部分。
 
 ```jsx
 <LazilyLoad modules={{
