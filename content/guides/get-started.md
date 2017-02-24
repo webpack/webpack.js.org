@@ -141,7 +141,7 @@ with the following config settings.
 __webpack.config.js__
 ```javascript
 var path = require('path');
-var webpack = require("webpack");
+var webpack = require('webpack');
 
 module.exports = {
   entry: './app/index.js',
