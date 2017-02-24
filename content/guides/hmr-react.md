@@ -22,7 +22,7 @@ T> 如果你想了解别的配置方式，可以告诉我们，或者更好的�
 npm install --save-dev babel-core@6.13.2 babel-loader@6.2.4 babel-preset-es2015@6.13.2 babel-preset-react@6.11.1 babel-preset-stage-2@6.13.0 css-loader@0.23.1 postcss-loader@0.9.1 react-hot-loader@3.0.0-beta.6 style-loader@0.13.1 webpack@2.1.0-beta.25 webpack-dev-server@2.1.0-beta.0
 ```
 
-另外，你也需要安装 React：
+另外，为了能完成这个示例，你也需要安装：
 
 ```bash
 npm install --save react@15.3.0 react-dom@15.3.0
@@ -37,19 +37,19 @@ npm install --save react@15.3.0 react-dom@15.3.0
 {
   "presets": [
     ["es2015", {"modules": false}],
-    // webpack现在已经支持原生的import语句了, 并且将其运用在tree-shaking特性上
+    // webpack 现在已经支持原生的 import 语句了, 并且将其运用在 tree-shaking 特性上
 
     "stage-2",
-    // 规定JS运用的语言规范层级
-    // Stage 2 是 "草案", 4 是 "已完成", 0 is "稻草人(strawman)"。
+    // 指定要启用的语言规范级别
+    // Stage 2 代表“草案”，4 是“已完成”，0 是“稻草人(strawman)”。
     // 详情查看 https://tc39.github.io/process-document/
 
     "react"
-    // 转译React组件为JS代码
+    // 转译 React 组件为 JavaScript 代码
   ],
   "plugins": [
     "react-hot-loader/babel"
-    // 开启react代码的模块热替换（HMR）
+    // 开启 React 代码的模块热替换(HMR)
   ]
 }
 ```
@@ -65,19 +65,19 @@ const webpack = require('webpack');
 module.exports = {
   entry: [
     'react-hot-loader/patch',
-    // 开启react代码的模块热替换（HMR）
+    // 开启 React 代码的模块热替换(HMR)
 
     'webpack-dev-server/client?http://localhost:8080',
-    // 为webpack-dev-server的环境打包好运行代码
+    // 为 webpack-dev-server 的环境打包代码
     // 然后连接到指定服务器域名与端口
 
     'webpack/hot/only-dev-server',
-    // 为热替换（HMR）打包好运行代码
-    // only- 意味着只有成功更新运行代码才会执行热替换（HMR）
+    // 为热替换(HMR)打包好代码
+    // only- 意味着只有成功更新运行代码才会执行热替换(HMR)
 
 
     './index.js'
-    // 我们app的入口文件
+    // 我们 app 的入口文件
   ],
   output: {
     filename: 'bundle.js',
@@ -86,7 +86,7 @@ module.exports = {
     path: resolve(__dirname, 'dist'),
 
     publicPath: '/'
-    // 对于热替换（HMR）是必须的，让webpack知道在哪里载入热更新的模块（chunk）
+    // 对于热替换(HMR)是必须的，让 webpack 知道在哪里载入热更新的模块(chunk)
   },
 
   context: resolve(__dirname, 'src'),
@@ -95,13 +95,13 @@ module.exports = {
 
   devServer: {
     hot: true,
-    // 开启服务器的模块热替换（HMR）
+    // 开启服务器的模块热替换(HMR)
 
     contentBase: resolve(__dirname, 'dist'),
     // 输出文件的路径
 
     publicPath: '/'
-    // 和上文output的"publicPath"值保持一致
+    // 和上文 output 的“publicPath”值保持一致
   },
 
   module: {
@@ -126,15 +126,15 @@ module.exports = {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    // 开启全局的模块热替换（HMR）
+    // 开启全局的模块热替换(HMR)
 
     new webpack.NamedModulesPlugin(),
-    // 当模块热替换（HMR）时在浏览器控制台输出对用户更友好的模块名字信息
+    // 当模块热替换(HMR)时在浏览器控制台输出对用户更友好的模块名字信息
   ],
 };
 ```
 
-上面的内容涵盖了 webpack 配置的方方面面，并不是全部都和 HMR 相关。这个 webpack 开发服务器的[完整的文档](https://webpack.github.io/docs/webpack-dev-server.html)能够让你对它了解更多，这些在 webpack.js.org 上的[文章](https://doc.webpack-china.org/concepts/)也应该一读。
+上面的内容涵盖了 webpack 配置的方方面面，并不是全部都和 HMR 相关。通过阅读 [webpack-dev-server 配置](https://webpack.github.io/docs/webpack-dev-server.html) 和 [概念章节](https://doc.webpack-china.org/concepts/) 能够让你对它了解更多。
 
 这里有一个基本假设，便是你的 JavaScript 入口在 `./src/index.js`，还有，你在使用 CSS 模块。
 
@@ -157,7 +157,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { AppContainer } from 'react-hot-loader';
-// AppContainer is a necessary wrapper component for HMR
+// AppContainer 是一个 HMR 必须的包裹(wrapper)组件
 
 import App from './components/App';
 
@@ -215,18 +215,15 @@ export default App;
   ["es2015", {"modules": false}]
   ```
 
-  与我们在 [Babel 配置文件](#babel-config) 中所配置的是一样的。注意，不仅仅只有模块热替换的场景需要禁用Babel模块插件。如果你不将此插件禁用，你可能会遇到许多其他的问题(查看 [从webpack v1 迁移到 v2](/guides/migrating/#mixing-es2015-with-amd-and-commonjs) 和 [webpack-tree-shaking](http://www.2ality.com/2015/12/webpack-tree-shaking.html))。
+  与我们在 [Babel 配置文件](#babel-config) 中所配置的是一样的。注意，不仅仅只有模块热替换的场景需要禁用 Babel 模块插件。如果你不将此插件禁用，你可能会遇到许多其他的问题（查看 [从 webpack v1 迁移到 v2](/guides/migrating/#mixing-es2015-with-amd-and-commonjs) 和 [webpack-tree-shaking](http://www.2ality.com/2015/12/webpack-tree-shaking.html)）。
 
-4. 注意，如果你在webpack 2 配置文件中启用了 ES2015 模块，并且按照上文#3 的配置，修改了你的`.babelrc` 文件，你需要使用`require`命令，或者，创建两个`.babelrc`文件(查看问题 [这里](https://github.com/webpack/webpack.js.org/issues/154)):
+4. 注意，如果你在 webpack 2 配置文件中启用了 ES2015 模块，并且按照上文 #3 的配置，修改了你的 `.babelrc` 文件，你需要使用 `require` 命令，或者，创建两个 `.babelrc` 文件（[查看问题](https://github.com/webpack/webpack.js.org/issues/154)）：
   * 一个文件放置在项目的根目录，并且加上配置: `"presets": ["es2015"]`
-  * 另一个文件放置在webpack要构建代码的主目录。在这个例子里，放置的目录路径是`src/`
+  * 另一个文件放置在webpack要构建代码的主目录。在这个例子里，放置的目录路径是 `src/`
 
-所以，在这种情景下，当 `src/components/App.js` 或者它的依赖文件被更改了， `module.hot.accept` 将会触发 `render` 方法，这意味着，因为 `App.js` 里面包含了对 `App.css` 的引用, 所以 `render` 方法同样会在 `App.css` 被修改的时候触发，
+所以，在这种情景下，当 `src/components/App.js` 或者它的依赖文件被更改了，`module.hot.accept` 将会触发 `render` 方法，这意味着，因为 `App.js` 里面包含了对 `App.css` 的引用, 所以 `render` 方法同样会在 `App.css` 被修改的时候触发。
 
-### index.html
-
-这个文件需要放置在你的项目根路径下的 `dist`目录，不然 webpack-dev-server 将因为缺少这个文件而无法运行。
-
+### dist/index.html
 
 ```html
 <!DOCTYPE html>
@@ -242,9 +239,12 @@ export default App;
 </html>
 
 ```
-### Package.json
 
-最后，让我们启动 `webpack-dev-server` 来打包我们的代码，看看 HMR 的运行效果吧。我们可以使用下面的 `package.json` 进入：
+T> 这个文件需要放置在你的项目根路径下的 `dist` 目录，不然 webpack-dev-server 将因为缺少这个文件而无法运行。
+
+### 结合 npm 使用
+
+最后，让我们启动 `webpack-dev-server` 来打包我们的代码，看看 HMR 的运行效果吧。像下面这样调整 `package.json`：
 
 ```json
 {
