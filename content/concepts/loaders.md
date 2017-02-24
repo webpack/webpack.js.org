@@ -60,18 +60,17 @@ There are three ways to use loaders in your application:
 ### Via `webpack.config.js`
 
 [`module.rules`](https://webpack.js.org/configuration/module/#module-rules) allows you to specify several loaders within your webpack configuration.
-This is a concise way to display loaders, and helps to have clean code as
-well as you have a full overview of each respective loader.
+This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader.
 
-```js
+```js-with-links-with-details
   module: {
     rules: [
       {
         test: /\.css$/,
         use: [
-          { loader: 'style-loader'},
+          { loader: ['style-loader'](/loaders/style-loader)},
           {
-            loader: 'css-loader',
+            loader: ['css-loader'](/loaders/css-loader)},
             options: {
               modules: true
             }
