@@ -122,9 +122,9 @@ bundle.js  544 kB       0  [emitted]  [big]  main
    [2] (webpack)/buildin/module.js 517 bytes {0} [built]
    [3] ./app/index.js 278 bytes {0} [built]
 ```
-T>输出可能会稍有不同。如果构建成功，那么你就可以继续。
+T> 输出可能会稍有不同。如果构建成功，那么你就可以继续。
 
-在浏览器中打开 `index.html`，查看使用构建好的 bundle 的结果。你应该能看到带有以下文本的页面：‘Hello webpack’。
+在浏览器中打开 `index.html`，查看构建成功后的 bundle 的结果。你应该能看到带有以下文本的页面：‘Hello webpack’。
 
 ## 在 webpack 中使用 ES2015 模块
 
