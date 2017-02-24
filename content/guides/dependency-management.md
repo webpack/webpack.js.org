@@ -14,7 +14,7 @@ contributors:
 
 ## 带表达式的 require 语句
 
-如果你的 require 请求含有表达式(expressions)，会有一个上下文(context)被创建，因此在编译的时候并不知道**具体**的模块是哪一个。
+如果你的 request 含有表达式(expressions)，会创建一个上下文(context)，因为在编译时(compile time)并不清楚**具体**是哪一个模块被导入。
 
 示例:
 ```javascript
@@ -28,9 +28,9 @@ Directory: ./template
 Regular expression: /^.*\.ejs$/
 ```
 
-**上下文模块**
+**具有上下文的模块**
 
-一个被生成的上下文模块包含**所有这个目录下的模块**的引用，这些模块都能匹配请求生成的正则表达式，都能被 require 请求到。上下文模块还包含一个把请求转换成对应模块 id 的映射表(map)。
+（译者注：这里的 request 应该是指在 require() 语句中的表达式，如 "./template/" + name + ".ejs"）生成一个具有上下文的模块。它包含**目录下的所有模块**的引用(reference)，这些模块能够「通过从 request 匹配出来的正则表达式」所 require 进来。上下文模块包含一个 map 对象，会把 request 中所有模块转译成对应的模块 id。
 
 示例:
 ```javascript
@@ -40,9 +40,9 @@ Regular expression: /^.*\.ejs$/
     "./directory/folder.ejs": 44
 }
 ```
-上下文模块还包含一些运行时逻辑来访问这个映射表。
+上下文模块还包含一些运行时(runtime)逻辑来访问这个 map 对象。
 
-总之，动态 require 是允许的，但是会导致所有可能的模块都被打包。
+这意味着 webpack 能够支持动态 require，但会导致所有可能用到的模块都包含在 bundle 中。
 
 ## require.context
 
@@ -74,7 +74,7 @@ require.context("../", true, /\.stories\.js$/);
 导出的方法有 3 个属性： `resolve`, `keys`, `id`。
 
 - `resolve` 是一个函数，它返回请求被解析后得到的模块 id。
-- `keys` 也是一个函数，它返回一个数组，由所有可能被上下文模块处理的请求（译者注：参考下面第二段代码中的key）组成。
+- `keys` 也是一个函数，它返回一个数组，由所有可能被上下文模块处理的请求（译者注：参考下面第二段代码中的 key）组成。
 
   比如，如果想引入一个文件夹下面的所有文件，或者引入能匹配正则表达式的文件，你可以这样：
 
