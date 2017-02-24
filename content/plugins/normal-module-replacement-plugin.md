@@ -20,7 +20,7 @@ This can be useful for allowing different behaviour between builds.
 
 ## Basic example
 
-Replace a specific module when building for development environment ([read more](/configuration/environment)).
+Replace a specific module when building for a [development environment](/guides/production-build).
 
 
 Say you have a config file `some/path/config.development.module.js` and a special version for production in `some/path/config.production.module.js`
@@ -36,7 +36,7 @@ new webpack.NormalModuleReplacementPlugin(
 
 ## Advanced example
 
-Conditional build depending on an environment var ([read more](/configuration/environment)).
+Conditional build depending on an [specified environment](/configuration/configuration-types).
 
 Say you want a configuration with specific values for different build targets.
 

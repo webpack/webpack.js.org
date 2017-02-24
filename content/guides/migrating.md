@@ -11,6 +11,7 @@ contributors:
   - frederikprijck
   - chrisVillanueva
   - bebraw
+  - howdy39
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -48,17 +49,18 @@ The new naming conventions are easier to understand and are a good reason to upg
       {
         test: /\.css$/,
 -       loaders: [
+-         "style-loader",
+-         "css-loader?modules=true"
 +       use: [
-          {
-            loader: "style-loader"
-          },
-          {
-            loader: "css-loader",
--           query: {
++         {
++           loader: "style-loader"
++         },
++         {
++           loader: "css-loader",
 +           options: {
-              modules: true
-            }
-          }
++             modules: true
++           }
++         }
         ]
       },
       {
@@ -386,7 +388,7 @@ module.exports = {
 
 ## `LoaderOptionsPlugin` context
 
-Some loaders need context information and read them from the configuration. This need to be passed via loader options in long-term. See loader documentation for relevant options.
+Some loaders need context information and read them from the configuration. This needs to be passed via loader options in long-term. See loader documentation for relevant options.
 
 To keep compatibility with old loaders, this information can be passed via plugin:
 
@@ -402,7 +404,7 @@ To keep compatibility with old loaders, this information can be passed via plugi
 
 ## `debug`
 
-The `debug` option switched loaders to debug mode in webpack 1. This need to be passed via loader options in long-term. See loader documentation for relevant options.
+The `debug` option switched loaders to debug mode in webpack 1. This needs to be passed via loader options in long-term. See loader documentation for relevant options.
 
 The debug mode for loaders will be removed in webpack 3 or later.
 
@@ -419,7 +421,7 @@ To keep compatibility with old loaders, loaders can be switched to debug mode vi
 
 ## Code Splitting with ES2015
 
-In webpack v1, you could use `require.ensure` as a method to lazily-load chunks for your application:
+In webpack v1, you could use [`require.ensure`](/guides/code-splitting-require) as a method to lazily-load chunks for your application:
 
 ```javascript
 require.ensure([], function(require) {
@@ -427,10 +429,8 @@ require.ensure([], function(require) {
 });
 ```
 
-The ES2015 Loader spec defines `import()` as method to load ES2015 Modules dynamically on runtime.
-
+The ES2015 Loader spec defines [`import()`](/guides/code-splitting-import) as method to load ES2015 Modules dynamically on runtime.
 webpack treats `import()` as a split-point and puts the requested module in a separate chunk.
-
 `import()` takes the module name as argument and returns a Promise.
 
 ``` js
@@ -452,10 +452,6 @@ require.ensure([], function(require) {
   var foo = require("./module");
 }, "custom-chunk-name");
 ```
-
-(Note on the deprecated `System.import`: webpack's use of `System.import` didn't fit the proposed spec, so it was deprecated in [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) in favor of `import()`)
-
-If you want to use `import` with [Babel](http://babeljs.io/), you'll need to install/add the [dynamic-import](http://babeljs.io/docs/plugins/syntax-dynamic-import/) syntax plugin while it's still Stage 3 to get around the parser error. When the proposal is added to the spec this won't be necessary anymore.
 
 ## Dynamic expressions
 

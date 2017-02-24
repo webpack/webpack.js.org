@@ -41,7 +41,7 @@ export default props => {
       <Interactive
         id="components/notification-bar/notification-bar.jsx"
         component={ NotificationBar } />
-
+        
       <Interactive
         id="components/navigation/navigation.jsx"
         component={ Navigation }

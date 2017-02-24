@@ -137,7 +137,7 @@ export default LazilyLoad;
 ## Tips
 
 - By using the [bundle loader](https://github.com/webpack/bundle-loader) we can semantically name chunks to intelligently load groups of code.
-- Make sure if you are using the babel-preset-2015, to turn modules to false, this will allow webpack to handle modules.
+- Make sure if you are using the babel-preset-es2015, to turn modules to false, this will allow webpack to handle modules.
 
 ## Dependencies
 

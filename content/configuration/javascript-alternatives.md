@@ -1,5 +1,5 @@
 ---
-title: External Configurations
+title: Configuration with Javascript Alternatives
 sort: 3
 contributors:
   - sokra
@@ -32,6 +32,3 @@ config =
   ]
 module.exports = config
 ```
-
-
-?> loader settings, e.g. `sassLoader`, `eslint` sections

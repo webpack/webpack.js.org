@@ -73,17 +73,17 @@ Customize the names used in each source map's `sources` array. This can be done 
 devtoolModuleFilenameTemplate: "webpack:///[resource-path]?[loaders]"
 ```
 
-The following substitutions are available in template strings:
+The following substitutions are available in template strings (via webpack's internal [`ModuleFilenameHelpers`](https://github.com/webpack/webpack/blob/master/lib/ModuleFilenameHelpers.js)):
 
-``` js
-[absolute-resource-path] // The absolute filename
-[all-loaders] // Automatic and explicit loaders and params up to the name of the first loader
-[hash] // The hash of the module identifier
-[id] // The module identifier
-[loaders] // Explicit loaders and params up to the name of the first loader
-[resource] // The path used to resolve the file and any query params used on the first loader
-[resource-path] // Same as above without the query params
-```
+| Template                 | Description |
+| ------------------------ | ----------- |
+| [absolute-resource-path] | The absolute filename |
+| [all-loaders]            | Automatic and explicit loaders and params up to the name of the first loader |
+| [hash]                   | The hash of the module identifier |
+| [id]                     | The module identifier |
+| [loaders]                | Explicit loaders and params up to the name of the first loader |
+| [resource]               | The path used to resolve the file and any query params used on the first loader |
+| [resource-path]          | The path used to resolve the file without any query params |
 
 When using a function, the same options are available camel-cased via the `info` parameter:
 
@@ -95,6 +95,21 @@ devtoolModuleFilenameTemplate: info => {
 
 If multiple modules would result in the same name, [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolfallbackmodulefilenametemplate) is used instead for these modules.
 
+## `output.hashFunction`
+
+The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`(https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm)] are supported.
+
+## `output.hashDigest`
+
+The hashing algorithm to use, defaults to `'hex'`. All functions from Node.JS' [`hash.digest`(https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding_crypto_createhash_algorithm)] are supported.
+
+## `output.hashDigestLength`
+
+The prefix length of the hash digest to use, defaults to `20`.
+
+## `output.hashSalt`
+
+An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_input_encoding).
 
 ## `output.filename`
 
@@ -142,6 +157,22 @@ Note this option is called filename but you are still allowed to something like 
 
 Note this options does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#output-chunkfilename) option is used. It also doesn't affect files created by loaders. For these files see loader options.
 
+The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
+
+| Template    | Description |
+| ----------- | ----------- |
+| [hash]      | The hash of the module identifier |
+| [chunkhash] | The hash of the chunk content |
+| [name]      | The module name |
+| [id]        | The module identifier |
+| [file]      | The module filename |
+| [filebase]  | The module [basename](https://nodejs.org/api/path.html#path_path_basename_path_ext) |
+| [query]     | The module query, i.e., the string following `?` in the filename |
+
+The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#output-hashdigestlength) to configure the length globally.
+
+T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
+
 
 ## `output.hotUpdateChunkFilename`
 
@@ -186,7 +217,7 @@ Here is no need to change it.
 
 ## `output.jsonpFunction`
 
-`function`
+`string`
 
 Only used when [`target`](/configuration/target) is web, which uses JSONP for loading on-demand chunks.
 
