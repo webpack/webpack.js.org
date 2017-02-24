@@ -14,7 +14,7 @@ W> `require.ensure` 是 webpack 特有的, 查看 [`import()`](/guides/code-spli
 
 ## `require.ensure()`
 
-webpack 在编译时，会静态地解析代码中的 `require.ensure()`，在其中 callback 中的任何代码，包括被 `require` 的代码，将被分离到一个新的 chunk 当中。这个新的 chunk 会被生成为异步的 bundle，被 webpack 通过 `jsonp` 来按需加载。
+webpack 在构建时，会静态地解析代码中的 `require.ensure()`，在其中 callback 中的任何代码，包括被 `require()` 的代码，将被分离到一个新的 chunk 当中。这个新的 chunk 会被生成为异步的 bundle，由 webpack 通过 `jsonp` 来按需加载。
 
 语法如下：
 
@@ -26,7 +26,7 @@ require.ensure(dependencies: String[], callback: function(require), chunkName: S
 这是一个字符串数组，通过这个参数，在所有的回调函数的代码被执行前，我们可以将所有需要用到的模块进行声明。
 
 #### 回调函数(callback)
-当所有的依赖都加载完成后，webpack 会执行这个回调函数。`require` 函数的一个实现会作为一个参数传递给这个回调函数。我们可以在回调内部进一步 `require()` 需要的其它模块。
+当所有的依赖都加载完成后，webpack 会执行这个回调函数。实际上，回调函数将 `require` 函数作为一个参数传递。因此，我们可以在回调函数体(function body)内进一步 `require()` 在执行时所需要的那些模块。
 
 #### chunkName
 `chunkName` 是用来提供给特定的 `require.ensure()` 来作为创建的 chunk 的名称。通过向不同 `require.ensure()` 的调用提供相同的 `chunkName`，我们可以将代码合并到相同的 chunk 中，做到只产生一个 bundle 来让浏览器加载。
@@ -103,7 +103,7 @@ require.ensure(['./a.js'], function(require) {
 });
 ```
 
-上面代码中，`a.js` 和 `b.js` 都被打包到一起，而且从主 bundle 中拆分出来。但只有 `b.js` 的内容被执行。`a.js` 的内容仅仅是可被使用，但并没有被 执行。想要执行 `a.js`，我们必须以同步的方式引用它，如 `require('./a.js')`，来让它的代码被执行。
+上面代码中，`a.js` 和 `b.js` 都被打包到一起，而且从主 bundle 中拆分出来。但只有 `b.js` 的内容被执行。`a.js` 的内容仅仅是可被使用，但并没有被执行。想要执行 `a.js`，我们必须以同步的方式引用它，如 `require('./a.js')`，来让它的代码被执行。
 
 ***
 
