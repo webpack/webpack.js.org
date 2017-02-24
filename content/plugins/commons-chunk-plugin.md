@@ -159,7 +159,7 @@ This option is useful when you want to have fine-grained control over how the Co
 new webpack.optimize.CommonsChunkPlugin({
   name: "my-single-lib-chunk",
   filename: "my-single-lib-chunk.js",
-  minChunks: function(module, countOfHowManyTimesThisModuleIsUsedAcrossAllChunks) {
+  minChunks: function(module, count) {
     // If module has a path, and inside of the path exists the name "somelib",
     // and it is used in 3 separate chunks/entries, then break it out into
     // a separate chunk with chunk keyname "my-single-lib-chunk", and filename "my-single-lib-chunk.js"
