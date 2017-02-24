@@ -124,7 +124,7 @@ bundle.js  544 kB       0  [emitted]  [big]  main
 ```
 T> 输出可能会稍有不同。如果构建成功，那么你就可以继续。
 
-在浏览器中打开 `webpack.config.js`，查看成功后 bundle 的结果。
+在浏览器中打开 `index.html`，查看成功后 bundle 的结果。
 你应该看到带有以下文本的页面：'Hello webpack'。
 
 ## Using ES2015 modules with webpack
