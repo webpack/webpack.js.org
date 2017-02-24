@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/768bf6265297118455bb.css" rel="stylesheet">
+      <link href="/54713683f4d23bc3061a.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -52,16 +52,15 @@ npm <span class="token function">install</span> --save-dev ts-loader
 </ul>
 <h3 class="header"><a class="anchor" href="#via-webpack-config-js" id="via-webpack-config-js"></a><span class="text">Via <code>webpack.config.js</code></span><a class="icon-link" href="#via-webpack-config-js"></a></h3>
 <p><a href="https://webpack.js.org/configuration/module/#module-rules"><code>module.rules</code></a> allows you to specify several loaders within your webpack configuration.
-This is a concise way to display loaders, and helps to have clean code as
-well as you have a full overview of each respective loader.</p>
+This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader.</p>
 <pre><code class="lang-js">  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
         test<span class="token punctuation">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span>
         use<span class="token punctuation">:</span> <span class="token punctuation">[</span>
-          <span class="token punctuation">{</span> loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> loader<span class="token punctuation">:</span> <a class="code-link" href="/loaders/style-loader">&apos;style-loader&apos;</a><span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">{</span>
-            loader<span class="token punctuation">:</span> <span class="token string">&apos;css-loader&apos;</span><span class="token punctuation">,</span>
+            loader<span class="token punctuation">:</span> <a class="code-link" href="/loaders/css-loader">&apos;css-loader&apos;</a><span class="token punctuation">}</span><span class="token punctuation">,</span>
             options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
               modules<span class="token punctuation">:</span> <span class="token boolean">true</span>
             <span class="token punctuation">}</span>
