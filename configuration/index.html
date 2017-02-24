@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/fe9ca4ede52a169925d1.css" rel="stylesheet">
+      <link href="/768bf6265297118455bb.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -122,7 +122,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
         <a class="code-link" href="/configuration/module#rule-exclude">exclude</a><span class="token punctuation">:</span> <span class="token punctuation">[</span>
           path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;app/demo-files&quot;</span><span class="token punctuation">)</span>
-        <span class="token punctuation">]</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
         <span class="token comment" spellcheck="true">// these are matching conditions, each accepting a regular expression or string</span>
         <span class="token comment" spellcheck="true">// test and include have the same behavior, both must be matched</span>
         <span class="token comment" spellcheck="true">// exclude must not be matched (takes preferrence over test and include)</span>
@@ -164,16 +164,16 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         <span class="token punctuation">]</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
 
-      <span class="token punctuation">{</span> <a class="code-link" href="/configuration/module#rule-oneof">oneOf</a><span class="token punctuation">:</span> <span class="token punctuation">[</span> <span class="token comment" spellcheck="true">/* rules */</span> <span class="token punctuation">]</span> <span class="token punctuation">}</span>
+      <span class="token punctuation">{</span> <a class="code-link" href="/configuration/module#rule-oneof">oneOf</a><span class="token punctuation">:</span> <span class="token punctuation">[</span> <span class="token comment" spellcheck="true">/* rules */</span> <span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token comment" spellcheck="true">// only use one of these nested rules</span>
 
-      <span class="token punctuation">{</span> <a class="code-link" href="/configuration/module#rule-rules">rules</a><span class="token punctuation">:</span> <span class="token punctuation">[</span> <span class="token comment" spellcheck="true">/* rules */</span> <span class="token punctuation">]</span> <span class="token punctuation">}</span>
+      <span class="token punctuation">{</span> <a class="code-link" href="/configuration/module#rule-rules">rules</a><span class="token punctuation">:</span> <span class="token punctuation">[</span> <span class="token comment" spellcheck="true">/* rules */</span> <span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token comment" spellcheck="true">// use all of these nested rules (combine with conditions to be useful)</span>
 
-      <span class="token punctuation">{</span> <a class="code-link" href="/configuration/module#rule-resource">resource</a><span class="token punctuation">:</span> <span class="token punctuation">{</span> <a class="code-link" href="/configuration/module#condition">and</a><span class="token punctuation">:</span> <span class="token punctuation">[</span> <span class="token comment" spellcheck="true">/* conditions */</span> <span class="token punctuation">]</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span>
+      <span class="token punctuation">{</span> <a class="code-link" href="/configuration/module#rule-resource">resource</a><span class="token punctuation">:</span> <span class="token punctuation">{</span> <a class="code-link" href="/configuration/module#condition">and</a><span class="token punctuation">:</span> <span class="token punctuation">[</span> <span class="token comment" spellcheck="true">/* conditions */</span> <span class="token punctuation">]</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token comment" spellcheck="true">// matches only if all conditions are matched</span>
 
-      <span class="token punctuation">{</span> <a class="code-link" href="/configuration/module#rule-resource">resource</a><span class="token punctuation">:</span> <span class="token punctuation">{</span> <a class="code-link" href="/configuration/module#condition">or</a><span class="token punctuation">:</span> <span class="token punctuation">[</span> <span class="token comment" spellcheck="true">/* conditions */</span> <span class="token punctuation">]</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span>
+      <span class="token punctuation">{</span> <a class="code-link" href="/configuration/module#rule-resource">resource</a><span class="token punctuation">:</span> <span class="token punctuation">{</span> <a class="code-link" href="/configuration/module#condition">or</a><span class="token punctuation">:</span> <span class="token punctuation">[</span> <span class="token comment" spellcheck="true">/* conditions */</span> <span class="token punctuation">]</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">{</span> <a class="code-link" href="/configuration/module#rule-resource">resource</a><span class="token punctuation">:</span> <span class="token punctuation">[</span> <span class="token comment" spellcheck="true">/* conditions */</span> <span class="token punctuation">]</span> <span class="token punctuation">}</span>
       <span class="token comment" spellcheck="true">// matches if any condition is matched (default for arrays)</span>
 
