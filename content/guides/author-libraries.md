@@ -1,16 +1,15 @@
 ---
-title: Authoring Libraries
+title: 创建 Library 
 contributors:
     - pksjce
     - johnstew
     - simon04
 ---
+webpack 是一个用来打包应用程序(application)和 library 的代码的工具。如果你是一个 JavaScript library 的作者，并且想要流水线化(streamline)你的打包逻辑，那么这篇文档将会帮助到你。
 
-webpack是一个用来打包应用（application）和库（library）的代码的工具。如果你是一个JavaScript库的作者，并且想要将你的打包逻辑给流程化（streamline），那么这篇文档将会帮助到你。
+## 创建一个 library
 
-## 创建一个库
-
-假设你正在写一个小的 library `webpack-numbers'，允许将数字1到5从数字转换为文本表示，反之亦然。实现使用 ES2015 模块，可能看起来像这样：
+假设你正在写一个名为 `webpack-numbers` 的 library，可以将数字 1 到 5 转换为文本表示，或者反之可以将文本表示数字。它使用 ES6 模块实现，看起来像这样：
 
 __src/index.js__
 ```javascript
@@ -29,11 +28,10 @@ export function wordToNum(word) {
     }, -1);
 };
 ```
-该库的使用方式如下：
+该 library 的使用方式如下：
 
 ```javascript
 import * as webpackNumbers from 'webpack-numbers';
-
 ...
 webpackNumbers.wordToNum('Two') // 输出 2
 ...
@@ -41,14 +39,13 @@ webpackNumbers.wordToNum('Two') // 输出 2
 // 使用 CommonJS 模块引入
 
 var webpackNumbers = require('webpack-numbers');
-
 ...
-webpackNumbers.numToWord(3); // output is Three
+webpackNumbers.numToWord(3); // 输出 Three
 ...
 ```
 
 ```html
-// 使用 script 标签引入
+// 或者使用 script 标签引入
 
 <html>
 ...
@@ -61,17 +58,16 @@ webpackNumbers.numToWord(3); // output is Three
 </script>
 </html>
 ```
-
-完整的源代码和配置请参阅 [webpack-library-example](https://github.com/kalcifer/webpack-library-example)。
+完整的 library 配置和相关代码请参阅 [webpack library 示例](https://github.com/kalcifer/webpack-library-example)。
 
 ## 配置 webpack
 
-现在需要打包这个库，同时要完成以下要求：
-  - 不要打包 lodash，而是引用（require）用户加载好的lodash。
-  - 库的名字是 `webpack-numbers`，而其变量是 `webpackNumbers`。
-  - 库可以用两种方式来引入：`import webpackNumbers from 'webpack-numbers'` 或者 `require('webpack-numbers')`。
-  - 当库通过 `script` 标签引入的时候，可以通过全局变量 `webpackNumbers` 来使用。
-  - 库可以在 Node.js 中使用。
+现在需要打包这个 library，同时要完成以下要求：
+  - 不要打包 lodash，而是 require 用户加载好的 lodash。
+  - library 的名字是 `webpack-numbers`，其变量名是 `webpackNumbers`。
+  - library 可以用两种方式来引入：`import webpackNumbers from 'webpack-numbers'` 或者 `require('webpack-numbers')`。
+  - 当 library 通过 `script` 标签引入的时候，可以通过全局变量 `webpackNumbers` 来使用。
+  - library 可以在 Node.js 中使用。
 
 ### 增加 webpack
 
@@ -92,12 +88,11 @@ module.exports = {
 
 ```
 
-以上代码是打包该库的基本配置。
+以上代码是打包该 library 的基本配置。
 
 ### 增加 `externals`
 
-现在，如果执行 `webpack`，你会发现输出了一个非常巨大的文件。进一步观察该文件，你会发现 lodash 和你的代码被一起打包了。
-然而对于你的库本身来说，并不需要打包 `lodash`。因此你可能会想将该外部库（external）的控制权交给你的库的用户。
+现在，如果执行 `webpack`，你会发现输出了一个非常巨大的文件。进一步观察该文件，你会发现 lodash 和你的代码被一起打包了。然而对于你的 library 本身来说，并不需要打包 `lodash`。因此你可能会想将该外部扩展(external)的控制权交给你的用户。
 
 这一点可以通过配置 `externals` 来实现：
 
@@ -118,11 +113,11 @@ module.exports = {
 };
 ```
 
-这意味着你的库需要能够在用户的环境中获取一个名为 `lodash` 的依赖。
+这意味着你的 library 需要一个名为 `lodash` 的依赖，这个依赖在用户的环境中必须可用。
 
 ### 增加 `libraryTarget`
 
-为了让该库能够被广泛使用，你需要让它能够兼容不同的环境，例如 CommonJS，AMD，Node.js 或者作为一个全局变量。
+为了让此 library 能够被广泛使用，你需要让它兼容不同的环境，例如 CommonJS，AMD，Node.js 或者作为一个全局变量。
 
 为了让你的代码能够被重用，需要在 webpack 配置中增加一个 `library` 属性。
 
@@ -139,9 +134,9 @@ module.exports = {
 };
 ```
 
-这能让你的库被引入后，可以通过全局变量来使用。
+这能让你的 library 被引入后，可以通过全局变量来使用。
 
-为了让库可以兼容其他环境，还需要在配置中增加 `libraryTarget` 属性。
+为了让 library 可以兼容其他环境，还需要在配置中增加 `libraryTarget` 属性。
 
 __webpack.config.js__
 
@@ -157,13 +152,13 @@ module.exports = {
 };
 ```
 
-如果设置了 `library` 但没设置 `libraryTarget`， 则`libraryTarget` 默认为 `var`，详见 [config 文档](/configuration/output) 。
+如果设置了 `library` 但没设置 `libraryTarget`，则`libraryTarget` 默认为 `var`，详见[配置文档](/configuration/output)。
 
 ### 最终步骤
 
-[使用 webpack 打包你的生产代码](/guides/production-build).
+[使用 webpack 打包你的生产代码](/guides/production-build)。
 
-在 `package.json` 中指定主文件（main file）为你生成的文件的路径。
+在 `package.json` 中指定主文件(main file)为你生成的文件路径。
 
 __package.json__
 
@@ -171,12 +166,14 @@ __package.json__
 {
     ...
     "main": "dist/webpack-numbers.js",
-    "module": "src/index.js", // 增加标准的模块，参照： https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage
+    "module": "src/index.js", // 增加标准的模块，参照：https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage
     ...
 }
 ```
 
-现在你可以 [将其作为一个 npm 包来发布](https://docs.npmjs.com/getting-started/publishing-npm-packages) 并且在 [unpkg.com](https://unpkg.com/#/) 找到它并向你的用户分发。
+__重要提示：__ `module` 将指向一个含有 ES2015 模块语法的模块，但是只有在支持此语法功能的浏览器或 Node.js 版本中才可用。
+
+现在你可以[将其作为一个 npm 包来发布](https://docs.npmjs.com/getting-started/publishing-npm-packages)，并且在 [unpkg.com](https://unpkg.com/#/) 找到它并分发给你的用户。
 ***
 
 > 原文：https://webpack.js.org/guides/author-libraries/
