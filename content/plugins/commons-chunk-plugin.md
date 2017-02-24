@@ -153,7 +153,7 @@ The `module` property represents each module in the chunks you have provided via
 
 The `count` property represents how many chunks the `module` is used in.
 
-This option is useful when you want to have fine-grained control over how the CommonsChunk algorithm determins where modules should be moved to.
+This option is useful when you want to have fine-grained control over how the CommonsChunk algorithm determines where modules should be moved to.
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({
