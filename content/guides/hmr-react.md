@@ -7,7 +7,7 @@ contributors:
   - aiduryagin
 ---
 
-正如在 [概念](/concepts/hot-module-replacement) 章节提到的，模块热替换（HMR）的作用是，在应用运行时，无需刷新页面，便能替换、增加、删除必要的模块。
+正如在[概念](/concepts/hot-module-replacement)章节提到的，模块热替换(HMR)的作用是，在应用运行时，无需刷新页面，便能替换、增加、删除必要的模块。
 HMR 对于那些由单一状态树构成的应用非常有用。因为这些应用的组件是 "dumb" (相对于 "smart") 的，所以在组件的代码更改后，组件的状态依然能够正确反映应用的最新状态。
 
 下面的介绍是基于 Babel 和 React 的，但它们对于 HMR 并不是必需的。
@@ -41,7 +41,7 @@ npm install --save react@15.3.0 react-dom@15.3.0
 
     "stage-2",
     // 指定要启用的语言规范级别
-    // Stage 2 代表“草案”，4 是“已完成”，0 是“稻草人（strawman）”。
+    // Stage 2 代表“草案”，4 是“已完成”，0 是“稻草人(strawman)”。
     // 详情查看 https://tc39.github.io/process-document/
 
     "react"
@@ -49,7 +49,7 @@ npm install --save react@15.3.0 react-dom@15.3.0
   ],
   "plugins": [
     "react-hot-loader/babel"
-    // 开启 React 代码的模块热替换（HMR）
+    // 开启 React 代码的模块热替换(HMR)
   ]
 }
 ```
@@ -65,15 +65,15 @@ const webpack = require('webpack');
 module.exports = {
   entry: [
     'react-hot-loader/patch',
-    // 开启 React 代码的模块热替换（HMR）
+    // 开启 React 代码的模块热替换(HMR)
 
     'webpack-dev-server/client?http://localhost:8080',
     // 为 webpack-dev-server 的环境打包代码
     // 然后连接到指定服务器域名与端口
 
     'webpack/hot/only-dev-server',
-    // 为热替换（HMR）打包好代码
-    // only- 意味着只有成功更新运行代码才会执行热替换（HMR）
+    // 为热替换(HMR)打包好代码
+    // only- 意味着只有成功更新运行代码才会执行热替换(HMR)
 
 
     './index.js'
@@ -86,7 +86,7 @@ module.exports = {
     path: resolve(__dirname, 'dist'),
 
     publicPath: '/'
-    // 对于热替换（HMR）是必须的，让 webpack 知道在哪里载入热更新的模块（chunk）
+    // 对于热替换(HMR)是必须的，让 webpack 知道在哪里载入热更新的模块(chunk)
   },
 
   context: resolve(__dirname, 'src'),
@@ -95,7 +95,7 @@ module.exports = {
 
   devServer: {
     hot: true,
-    // 开启服务器的模块热替换（HMR）
+    // 开启服务器的模块热替换(HMR)
 
     contentBase: resolve(__dirname, 'dist'),
     // 输出文件的路径
@@ -126,15 +126,15 @@ module.exports = {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    // 开启全局的模块热替换（HMR）
+    // 开启全局的模块热替换(HMR)
 
     new webpack.NamedModulesPlugin(),
-    // 当模块热替换（HMR）时在浏览器控制台输出对用户更友好的模块名字信息
+    // 当模块热替换(HMR)时在浏览器控制台输出对用户更友好的模块名字信息
   ],
 };
 ```
 
-上面的内容涵盖了 webpack 配置的方方面面，并不是全部都和 HMR 相关。通过阅读 [webpack 开发服务器（webpack-dev-server）配置](https://webpack.github.io/docs/webpack-dev-server.html) 和 [概念章节](https://doc.webpack-china.org/concepts/) 能够让你对它了解更多。
+上面的内容涵盖了 webpack 配置的方方面面，并不是全部都和 HMR 相关。通过阅读 [webpack-dev-server 配置](https://webpack.github.io/docs/webpack-dev-server.html) 和 [概念章节](https://doc.webpack-china.org/concepts/) 能够让你对它了解更多。
 
 这里有一个基本假设，便是你的 JavaScript 入口在 `./src/index.js`，还有，你在使用 CSS 模块。
 
@@ -157,7 +157,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { AppContainer } from 'react-hot-loader';
-// AppContainer 是一个 HMR 必须的包裹（wrapper）组件
+// AppContainer 是一个 HMR 必须的包裹(wrapper)组件
 
 import App from './components/App';
 
@@ -215,7 +215,7 @@ export default App;
   ["es2015", {"modules": false}]
   ```
 
-  与我们在 [Babel 配置文件](#babel-config) 中所配置的是一样的。注意，不仅仅只有模块热替换的场景需要禁用 Babel 模块插件。如果你不将此插件禁用，你可能会遇到许多其他的问题（查看 [从webpack v1 迁移到 v2](/guides/migrating/#mixing-es2015-with-amd-and-commonjs) 和 [webpack-tree-shaking](http://www.2ality.com/2015/12/webpack-tree-shaking.html)）。
+  与我们在 [Babel 配置文件](#babel-config) 中所配置的是一样的。注意，不仅仅只有模块热替换的场景需要禁用 Babel 模块插件。如果你不将此插件禁用，你可能会遇到许多其他的问题（查看 [从 webpack v1 迁移到 v2](/guides/migrating/#mixing-es2015-with-amd-and-commonjs) 和 [webpack-tree-shaking](http://www.2ality.com/2015/12/webpack-tree-shaking.html)）。
 
 4. 注意，如果你在 webpack 2 配置文件中启用了 ES2015 模块，并且按照上文 #3 的配置，修改了你的 `.babelrc` 文件，你需要使用 `require` 命令，或者，创建两个 `.babelrc` 文件（[查看问题](https://github.com/webpack/webpack.js.org/issues/154)）：
   * 一个文件放置在项目的根目录，并且加上配置: `"presets": ["es2015"]`
