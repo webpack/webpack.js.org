@@ -259,6 +259,24 @@ With `noInfo` enabled, messages like the webpack bundle information that is show
 noInfo: true
 ```
 
+## `devServer.overlay`
+
+`boolean` `object`
+
+Shows a full-screen overlay in the browser when there are compiler errors or warnings. Disabled by default. If you want to show only compiler errors:
+
+```js
+overlay: true
+```
+
+If you want to show warnings as well as errors: 
+
+```js
+overlay: {
+  warnings: true,
+  errors: true
+}
+```
 
 ## `devServer.port` - CLI only
 

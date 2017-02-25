@@ -169,13 +169,13 @@ __package.json__
 
 ```javascript
 {
-    ...
     "main": "dist/webpack-numbers.js",
     "module": "src/index.js", // To add as standard module as per https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage
-    ...
 }
 ```
 
-__Important Note:__ `module` will point to a module that has ES2015 module syntax but otherwise only syntax features that browser/node supports.
+The key `main` refers to the [standard from `package.json`](https://docs.npmjs.com/files/package.json#main), and `module` to [a](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md) [proposal](https://github.com/rollup/rollup/wiki/pkg.module) to allow the JavaScript ecosystem upgrade to use ES2015 modules without breaking backwards compatibility.
+
+W> `module` will point to a module that has ES2015 module syntax but otherwise only syntax features that browser/node supports.
 
 Now you can [publish it as an npm package](https://docs.npmjs.com/getting-started/publishing-npm-packages) and find it at [unpkg.com](https://unpkg.com/#/) to distribute it to your users.
