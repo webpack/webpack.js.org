@@ -3,29 +3,29 @@ title: NormalModuleReplacementPlugin
 contributors:
   - gonzoyumo
 ---
-## Install
+## 安装
 
-The `NormalModuleReplacementPlugin` is a built-in webpack plugin.
+ `NormalModuleReplacementPlugin` 是webpack的一个内置插件.
 
 
-## Usage
+## 使用
 
 ``` javascript
 new webpack.NormalModuleReplacementPlugin(resourceRegExp, newResource)
 ```
 
-The `NormalModuleReplacementPlugin` allows you to replace resources that match `resourceRegExp` with `newResource`. If `newResource` is relative, it is resolved relative to the previous resource. If `newResource` is a function, it is expected to overwrite the request attribute of the supplied resource.
+`NormalModuleReplacementPlugin` 允许你用 `newResource` 替换与 `resourceRegExp` 匹配的资源。如果 `newResource` 是相对路径，它会相对于先前的资源被解析。如果 `newResource` 是函数，它将会覆盖之前被提供资源的请求。
 
-This can be useful for allowing different behaviour between builds.
+这对于允许在构建中的不同行为是有用的。
 
-## Basic example
+## 基本示例
 
-Replace a specific module when building for development environment ([read more](/configuration/environment)).
+在构建[开发环境](/guides/production-build)时替换特定的模块。
 
 
-Say you have a config file `some/path/config.development.module.js` and a special version for production in `some/path/config.production.module.js`
+假设你有一个配置文件 `some/path/config.development.module.js` 并且在生产环境有一个特殊的版本 `some/path/config.production.module.js`
 
-Just add the following plugin when building for production:
+只需在生产构建时添加以下插件：
 
 ``` javascript
 new webpack.NormalModuleReplacementPlugin(
@@ -34,11 +34,11 @@ new webpack.NormalModuleReplacementPlugin(
 );
 ```
 
-## Advanced example
+## 高级示例
 
-Conditional build depending on an environment var ([read more](/configuration/environment)).
+根据[指定环境](/configuration/configuration-types)的条件构建。
 
-Say you want a configuration with specific values for different build targets.
+假设你想要一个为了不同构建目标的特定值的配置。
 
 ``` javascript
 module.exports = function(env) {
@@ -54,7 +54,7 @@ module.exports = function(env) {
 }
 ```
 
-Create the two config files:
+创建两个配置文件：
 
 **app/config-VERSION_A.js:**
 ``` javascript
@@ -68,14 +68,14 @@ export default {
   title : 'I am version B'
 }
 ```
-Then import that config using the keyword you're looking for in the regexp:
+然后使用在正则中查找的关键字来引入配置：
 
 ``` javascript
 import config from 'app/config-APP_TARGET';
 console.log(config.title);
 ```
 
-And now you just get the right config imported depending on which target you're building for:
+根据你的构建目标，现在你引入了正确的配置。
 
 ``` shell
 webpack --env.APP_TARGET VERSION_A

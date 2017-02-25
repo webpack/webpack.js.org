@@ -87,6 +87,8 @@ module.exports = {
           false,
           /^\.\/.*\.md$/
         );
+      }, {
+        'external-configs': 'javascript-alternatives'
       }
     ),
 
@@ -98,6 +100,8 @@ module.exports = {
           false,
           /^\.\/.*\.md$/
         );
+      }, {
+        'passing-a-config': 'configuration-types'
       }
     ),
 

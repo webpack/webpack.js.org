@@ -73,17 +73,17 @@ devtoolLineToLine: { test: /\.js$/, include: 'src/utilities' }
 devtoolModuleFilenameTemplate: "webpack:///[resource-path]?[loaders]"
 ```
 
-模板字符串(template string)中做以下替换：
+模板字符串(template string)中做以下替换（通过 webpack 内部的 [`ModuleFilenameHelpers`](https://github.com/webpack/webpack/blob/master/lib/ModuleFilenameHelpers.js)）：
 
-``` js
-[absolute-resource-path] // 绝对路径文件名
-[all-loaders] // 自动和显式的 loader，并且参数取决于第一个 loader 名称
-[hash] // 模块标识符的 hash
-[id] // 模块标识符
-[loaders] // 显式的 loader，并且参数取决于第一个 loader 名称
-[resource] // 用于解析文件的路径和用于第一个 loader 的任意查询参数
-[resource-path] // 与上面没有查询参数的相同
-```
+| 模板                 | 描述 |
+| ------------------------ | ----------- |
+| [absolute-resource-path] | 绝对路径文件名 |
+| [all-loaders]            | 自动和显式的 loader，并且参数取决于第一个 loader 名称 |
+| [hash]                   | 模块标识符的 hash |
+| [id]                     | 模块标识符 |
+| [loaders]                | 显式的 loader，并且参数取决于第一个 loader 名称 |
+| [resource]               | 用于解析文件的路径和用于第一个 loader 的任意查询参数 |
+| [resource-path]          | 不带任何查询参数，用于解析文件的路径 |
 
 当使用一个函数，同样的选项要通过 `info` 参数并使用驼峰式(camel-cased)：
 
@@ -95,6 +95,21 @@ devtoolModuleFilenameTemplate: info => {
 
 如果多个模块产生相同的名称，使用 [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolfallbackmodulefilenametemplate) 来代替这些模块。
 
+## `output.hashFunction`
+
+The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`(https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm)] are supported.
+
+## `output.hashDigest`
+
+The hashing algorithm to use, defaults to `'hex'`. All functions from Node.JS' [`hash.digest`(https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding_crypto_createhash_algorithm)] are supported.
+
+## `output.hashDigestLength`
+
+The prefix length of the hash digest to use, defaults to `20`.
+
+## `output.hashSalt`
+
+An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_input_encoding).
 
 ## `output.filename`
 
@@ -142,6 +157,22 @@ filename: "[chunkhash].bundle.js"
 
 注意，此选项不会影响那些「按需加载 chunk」的输出文件。对于这些文件，请使用 [`output.chunkFilename`](#output-chunkfilename) 选项来控制输出。同样也不影响通过 loader 创建的文件，对于这些文件，请查看 loader 选项来输出控制。
 
+The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
+
+| Template    | Description |
+| ----------- | ----------- |
+| [hash]      | The hash of the module identifier |
+| [chunkhash] | The hash of the chunk content |
+| [name]      | The module name |
+| [id]        | The module identifier |
+| [file]      | The module filename |
+| [filebase]  | The module [basename](https://nodejs.org/api/path.html#path_path_basename_path_ext) |
+| [query]     | The module query, i.e., the string following `?` in the filename |
+
+The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#output-hashdigestlength) to configure the length globally.
+
+T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
+
 
 ## `output.hotUpdateChunkFilename`
 
@@ -186,7 +217,7 @@ hotUpdateMainFilename: "[hash].hot-update.json"
 
 ## `output.jsonpFunction`
 
-`function`
+`string`
 
 只在 [`target`](/configuration/target) 是 web 时使用，用于按需加载(load on-demand) chunk 的 JSONP 函数。
 

@@ -114,7 +114,7 @@ module.exports = function(env) {
 ## 隐式公共 vendor chunk
 
 你可以将 `CommonsChunkPlugin` 配置为只接受 vendor 库。
- 
+
  __webpack.config.js__
 
 ```javascript

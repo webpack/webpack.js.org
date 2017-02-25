@@ -40,7 +40,7 @@ loader 通过在 `require()` 语句中使用 `loadername!` 前缀来激活，或
 * [`style-loader`](/loaders/style-loader) 将模块的导出作为样式添加到 DOM 中
 * [`css-loader`](/loaders/css-loader) 解析 CSS 文件后，使用 import 加载，并且返回 CSS 代码
 * [`less-loader`](/loaders/less-loader) 加载和转译 LESS 文件
-* `sass-loader` 加载和转译 SASS/SCSS 文件
+* [`sass-loader`](/loaders/sass-loader) 加载和转译 SASS/SCSS 文件
 * `stylus-loader` 加载和转译 Stylus 文件
 * `postcss-loader` 使用 [PostCSS](http://postcss.org) 加载和转译 CSS/SSS 文件
 

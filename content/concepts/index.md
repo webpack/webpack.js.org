@@ -8,7 +8,7 @@ contributors:
   - johnstew
 ---
 
-*webpack* 是一个现代的 JavaScript 应用程序的_模块打包器(module bundler)_。它有着[难以置信的配置](/configuration)，然而，我们认为你必须在开始前先了解**四个核心概念**！
+*webpack* 是一个现代的 JavaScript 应用程序的_模块打包器(module bundler)_。它是[高度可配置的](/configuration)，然而，我们认为你必须在开始前先了解**四个核心概念**！
 
 作为您的 webpack 学习旅程的一部分，我们写这篇文档目的在于向你传递这些概念的**高度**概述，同时仍然提供特定概念的相关用例。
 
@@ -39,7 +39,7 @@ module.exports = {
 **webpack.config.js**
 
 ```javascript
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   entry: './path/to/my/entry/file.js',
@@ -59,9 +59,9 @@ T> 你可能看到项目**生成(emitted 或 emit)**贯穿我们整个文档和[
 [了解更多！](/concepts/output)
 
 
-## 加载器(Loader)
+## 加载器(Loaders)
 
-webpack 的目标是，让 **webpack** 聚焦于项目中的所有资源(asset)，而浏览器不需要关注考虑这些（这并不意味着资源(asset)都必须打包在一起）。webpack 把[每个文件(.css, .html, .scss, .jpg, etc.) 都作为模块](/concepts/modules)处理。而且 webpack **只理解 JavaScript**。
+webpack 的目标是，让 **webpack** 聚焦于项目中的所有资源(asset)，而浏览器不需要关注考虑这些（这并不意味着资源(asset)都必须打包在一起）。webpack 把[每个文件(.css, .html, .scss, .jpg, etc.) 都作为模块](/concepts/modules)处理。然而 webpack **只理解 JavaScript**。
 
 **webpack loader 会_将这些文件转换为模块_，而转换后的文件会被添加到依赖图表中。**
 
@@ -73,7 +73,7 @@ webpack 的目标是，让 **webpack** 聚焦于项目中的所有资源(asset)�
 **webpack.config.js**
 
 ```javascript
-var path = require('path');
+const path = require('path');
 
 const config = {
   entry: './path/to/my/entry/file.js',
@@ -95,7 +95,7 @@ module.exports = config;
 
 > “嘿，webpack compiler，当你碰到「在 `require()`/`import` 语句中被解析为 '.js' 或 '.jsx' 的路径」时，在你把它们添加并打包之前，要先**使用** `babel-loader` 去转换”。
 
-W> 重要的是要记得，在 webpack 配置中定义 loader 时，要定义在 `module.rules` 中，而不是 `rules`。在定义错时 webpack 会提出严重的警告。
+W> 重要的是要记得，在 webpack 配置中定义 loader 时，要定义在 `module.rules` 中，而不是 `rules`。在定义错时 webpack 会给出严重的警告。
 
 我们还有尚未提到的 loader，可以设定更多特定属性。
 
@@ -105,8 +105,7 @@ W> 重要的是要记得，在 webpack 配置中定义 loader 时，要定义在
 
 由于 loader 仅在每个文件的基础上执行转换，而 `插件(plugins)` 最常用于（但不限于）在打包模块的“compilation”和“chunk”生命周期执行操作和自定义功能[（查看更多）](/concepts/plugins)。webpack 的插件系统[极其强大和可定制化](/api/plugins)。
 
-由于你可以在一个配置多次使用插件用于不同的目的
-想要使用一个插件，你只需要 `require()` 它，然后把它添加到 `plugins` 数组中。多数插件可以通过选项(option)自定义。由于需要在一个配置中，多次使用一个插件，来针对不同的目的，因此你需要使用 `new` 来创建插件的实例，并且通过实例来调用插件。
+想要使用一个插件，你只需要 `require()` 它，然后把它添加到 `plugins` 数组中。多数插件可以通过选项(option)自定义。你也可以在一个配置文件中因为不同目的而多次使用同一个插件，你需要使用 `new` 创建实例来调用它。
 
 **webpack.config.js**
 
@@ -137,7 +136,7 @@ module.exports = config;
 
 webpack 提供许多开箱可用的插件！查阅我们的[插件列表](/plugins)展示更多信息。
 
-在 webpack 配置中使用插件是简单直接的，然而还是有很多用例值得我们深入讨论。
+在 webpack 配置中使用插件是简单直接的，然而也有很多值得我们进一步讨论的用例。
 
 [了解更多！](/concepts/plugins)
 
