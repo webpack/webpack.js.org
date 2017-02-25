@@ -26,6 +26,11 @@ export default class Gitter extends React.Component {
   }
 
   componentDidMount() {
+    setTimeout(
+      this._recalculate.bind(this),
+      250
+    );
+
     document.addEventListener(
       'scroll', 
       this._recalculate.bind(this)

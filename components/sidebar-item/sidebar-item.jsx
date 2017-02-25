@@ -6,7 +6,7 @@ export default class SidebarItem extends React.Component {
     super(props);
 
     this.state = {
-      open: false
+      open: this.isOpen(props)
     };
   }
 
@@ -14,9 +14,9 @@ export default class SidebarItem extends React.Component {
     let { index, url, title, anchors = [], currentPage } = this.props;
 
     let emptyMod = !anchors.length ? 'sidebar-item--empty' : '';
-    let active = `/${currentPage}` === url;
-    let openMod = (active || this.state.open) ? 'sidebar-item--open' : '';
-    let anchorUrl = (active) ? '#' : url + '#';
+    let openMod = (this.state.open) ? 'sidebar-item--open' : '';
+    let anchorUrl = url + '#';
+    let isCurrentPage = `/${currentPage}` === url;
 
     return (
       <div className={ `sidebar-item ${emptyMod} ${openMod}` }>
@@ -26,13 +26,23 @@ export default class SidebarItem extends React.Component {
           {
             anchors.map((anchor, j) => (
               <li className="sidebar-item__anchor" key={ `anchor-${index}-${j}` }>
-                <a href={ anchorUrl + anchor.id }>{ anchor.title}</a>
+                <a href={ isCurrentPage ? `#${anchor.id}` : anchorUrl + anchor.id }>{ anchor.title}</a>
               </li>
             ))
           }
         </ul>
       </div>
     );
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentPage == this.props.currentPage) return;
+
+    this.setState({ open: this.isOpen(nextProps) });
+  }
+
+  isOpen(props) {
+    return `/${props.currentPage}` === props.url;
   }
 
   toggle(e) {

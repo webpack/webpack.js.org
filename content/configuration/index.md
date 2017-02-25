@@ -136,7 +136,7 @@ module.exports = {
         ],
         [exclude](/configuration/module#rule-exclude): [
           path.resolve(__dirname, "app/demo-files")
-        ]
+        ],
         // these are matching conditions, each accepting a regular expression or string
         // test and include have the same behavior, both must be matched
         // exclude must not be matched (takes preferrence over test and include)
@@ -178,16 +178,16 @@ module.exports = {
         ]
       },
 
-      { [oneOf](/configuration/module#rule-oneof): [ /* rules */ ] }
+      { [oneOf](/configuration/module#rule-oneof): [ /* rules */ ] },
       // only use one of these nested rules
 
-      { [rules](/configuration/module#rule-rules): [ /* rules */ ] }
+      { [rules](/configuration/module#rule-rules): [ /* rules */ ] },
       // use all of these nested rules (combine with conditions to be useful)
 
-      { [resource](/configuration/module#rule-resource): { [and](/configuration/module#condition): [ /* conditions */ ] } }
+      { [resource](/configuration/module#rule-resource): { [and](/configuration/module#condition): [ /* conditions */ ] } },
       // matches only if all conditions are matched
 
-      { [resource](/configuration/module#rule-resource): { [or](/configuration/module#condition): [ /* conditions */ ] } }
+      { [resource](/configuration/module#rule-resource): { [or](/configuration/module#condition): [ /* conditions */ ] } },
       { [resource](/configuration/module#rule-resource): [ /* conditions */ ] }
       // matches if any condition is matched (default for arrays)
 

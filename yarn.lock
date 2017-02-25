@@ -3170,17 +3170,17 @@ https-proxy-agent@^1.0.0:
     debug "2"
     extend "3"
 
-hyperlink@^2.5.0:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/hyperlink/-/hyperlink-2.6.1.tgz#96a8a6c0962e835aec910d8134705240efff73f2"
+hyperlink@^2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/hyperlink/-/hyperlink-2.7.0.tgz#f838f7871e319cf0893b9a0f246eb1cb63d3d331"
   dependencies:
     assetgraph "^3.0.0-35"
     async "^2.1.2"
     lodash "^4.16.4"
     optimist "^0.6.1"
     request "^2.75.0"
-    tap-render "^0.1.7"
-    urltools "^0.2.1"
+    tap-render Munter/tap-render#0.1.7-patch1
+    urltools "^0.3.0"
 
 hyperquest@~1.2.0:
   version "1.2.0"
@@ -6365,9 +6365,9 @@ tap-parser@^0.7.0:
     minimist "^0.2.0"
     readable-stream "~1.1.11"
 
-tap-render@^0.1.7:
+"tap-render@github:munter/tap-render#0.1.7-patch1":
   version "0.1.7"
-  resolved "https://registry.yarnpkg.com/tap-render/-/tap-render-0.1.7.tgz#96a4c2420aa2bc6510c0297eed62aebda9e1bcf8"
+  resolved "https://codeload.github.com/munter/tap-render/tar.gz/35bf3ac21c4fd2776d8569d5e8a1ab62df1f6d4f"
   dependencies:
     jsonify "0.0.0"
     pause-stream "0.0.7"
@@ -6750,20 +6750,13 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
-urltools@0.3.1:
+urltools@0.3.1, urltools@^0.3.0:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/urltools/-/urltools-0.3.1.tgz#13b0d5b73e2ecf5fc03c8815574be9c4b550ff6d"
   dependencies:
     glob "^7.0.3"
     underscore "^1.8.3"
     urijs "^1.18.2"
-
-urltools@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/urltools/-/urltools-0.2.1.tgz#9905bdbbb55d829876cac8b8ac26dda868091977"
-  dependencies:
-    glob "^7.0.3"
-    underscore "^1.8.3"
 
 user-home@^2.0.0:
   version "2.0.0"
