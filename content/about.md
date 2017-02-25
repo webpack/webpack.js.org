@@ -2,6 +2,36 @@
 title: 参与翻译的全体成员
 contributors:
   - dear-lizhihua
+  - rqzheng2015
+  - lizhonghui
+  - lmymoonsky
+  - scq000
+  - zikeng
+  - starkwang
+  - billie66
+  - yuanlinssdut
+  - nick-nick
+  - superpig
+  - biqing
+  - lcxfs1991
+  - mc-zone
+  - neal1991
+  - xgz123
+  - huangtubiao
+  - zgayjjf
+  - panlinying
+  - lizhonghui
+  - tao1991123
+  - akira-cn
+  - dickeylth
+  - xgz123
+  - beiciye
+  - jeffrygan
+  - coco-hu
+  - lcxfs1991
+  - yubo
+  - dingyiming
+  - ellyliang
 ---
 
 特此致敬`参与翻译的全体成员`！
