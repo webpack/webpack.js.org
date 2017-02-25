@@ -105,8 +105,14 @@ On running webpack on this project, we find that webpack has created two new bun
 **bundle.js**
 
 ```javascript
+/******/ (function(modules) { // webpackBootstrap
 //webpack bootstrap code...
 
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "https://cdn.example.com/assets/";
+
+// webpack bootstrap code...
+/******/ })
 /******/ ([
 /* 0 */
 /* unknown exports provided */
@@ -140,6 +146,8 @@ __webpack_require__.e/* require.ensure */(0).then((function(require){
 /***/ })
 /******/ ]);
 ```
+
+T> We can see the specified **webpack public path** on `__webpack_require__.p` in the bootstrap code, it's corresponds to our `output.publicPath` configuration on above.
 
 `b.js` and `c.js` are bundled in `0.bundle.js`.
 
@@ -175,7 +183,7 @@ console.log('***** I AM c *****');
 ]);
 ```
 
-Now just add `bundle.js` in your HTML file and open it in your broswer, the `0.bundle.js` will be loaded on demand by webpack.
+Now just add `bundle.js` in your HTML file and open it in your broswer, the `0.bundle.js` will be loaded on demand (from `https://cdn.example.com/assets/0.bundle.js`) by webpack.
 
 W> `require.ensure` relies on `Promises` internally. If you use `require.ensure` with older browsers, remember to shim `Promise.` [es6-promise polyfill](https://github.com/stefanpenner/es6-promise).
 
