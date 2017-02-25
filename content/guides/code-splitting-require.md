@@ -147,7 +147,7 @@ __webpack_require__.e/* require.ensure */(0).then((function(require){
 /******/ ]);
 ```
 
-T> We can see the specified **webpack public path** on `__webpack_require__.p` in the bootstrap code, it's corresponds to our `output.publicPath` configuration on above.
+T> We can see the specified **webpack public path** on `__webpack_require__.p` in the bootstrap code, it corresponds to our `output.publicPath` configuration on above.
 
 `b.js` and `c.js` are bundled in `0.bundle.js`.
 
