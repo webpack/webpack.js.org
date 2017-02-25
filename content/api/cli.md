@@ -3,30 +3,39 @@ title: 命令行接口(CLI)
 sort: 2
 contributors:
     - ev1stensberg
+    - simon04
 ---
 
-Webpack 提供了命令行接口（CLI），以便对构建过程进行配置和交互。这对于制定早期原型、profiling、编写 npm scripts 或者一些个人自定义需求很有用。
+webpack 提供了命令行接口（CLI），以便对构建过程进行配置和交互。这对于制定早期原型、profiling、编写 npm scripts 或者一些个人自定义需求很有用。
 
-为了更合适且方便地使用配置，可以在 `webpack.config.js` 中对 Webpack 进行配置。CLI 中允许传入的任何参数在这个配置文件中也会有对应的参数。
+为了更合适且方便地使用配置，可以在 `webpack.config.js` 中对 webpack 进行配置。CLI 中允许传入的任何参数在这个配置文件中也会有对应的参数。
 
-## 安装
+如果你的 webpack 尚未开始配置，请查看[安装指南](/guides/installation)。
 
-参考[这页](/guides/installation)
+T> webpack 的新 CLI 正在开发中。正在添加新功能，例如 `--init` 参数。[查看详情！](https://github.com/webpack/webpack-cli)
 
-?> 新的 Wbpack CLI 正在开发中。例如 `--init` 参数这样的新特性正在加入中。[查看详情！](https://github.com/webpack/webpack-cli)
+## 使用配置文件的用法
+```sh
+webpack [--config webpack.config.js]
+```
 
-### 普通用法
+配置文件中的相关选项，请参阅[配置](/configuration)。
+See [configuration](/configuration) for the options in the configuration file.
 
-```bash
+## 不使用配置文件的用法
+```sh
 webpack <entry> [<entry>] <output>
 ```
 
-| 参数 | 对应的配置         | 说明                                                                                                                                                             |
-|-----------|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| entry     | entry                         | 文件名或者文件名的集合，作为项目构建的入口。如果使用 `=` 传入了多个键值对，则可以存在多个入口。 |
-| output    | output.path + output.filename | 生成打包文件的路径及文件名。 |
+**`<entry>`**
 
-#### 示例
+一个文件名或一组被命名的文件名，作为构建项目的入口起点。您可以传递多个入口（每个入口在启动时加载）。如果传递一个形式为 `<name> = <request>` 的键值对，则可以创建一个额外的入口起点。它将被映射到配置选项(configuration option)的 `entry` 属性。
+
+**`<output>`**
+
+要保存的 bundled 文件的路径和文件名。它将映射到配置选项 `output.path` 和 `output.filename`。
+
+**示例**
 
 假设你的项目结构像下面这样：
 
@@ -68,35 +77,48 @@ webpack index=./src/index.js entry2=./src/index2.js dist/bundle.js
 **列出命令行所有可用的配置选项**
 
 ```bash
-webpack --help , webpack -h
+webpack --help
+webpack -h
 ```
 
 **使用配置文件进行构建**
 
-指定其它的配置文件。配置文件默认为 `webpack.config.js`，如果你想使用其它配置文件，可以加入这个参数。
+指定其它的[配置](/configuration)文件。配置文件默认为 `webpack.config.js`，如果你想使用其它配置文件，可以加入这个参数。
 
 ```bash
 webpack --config example.config.js
 ```
 
-**传入 Webpack 配置文件中使用的环境变量**
+**指定构建环境**
+
+传入 webpack 配置文件中使用的[环境](/configuration/configuration-types)变量。
 
 ```bash
-webpack --env=DEVELOPMENT
+webpack --env.production    # 生产环境设置为 true
+webpack --env.platform=web  # 平台设置为 "web"
 ```
-**以 JSON 格式输出 Webpack 的运行结果**
 
-其它情况下，Webpack 会输出一系列的数据，包含着关于 bundle、chunk 和性能的详细信息。使用这个参数后，输出会变为一个 JSON 对象。这个对象可以用在[分析工具](https://webpack.github.com/analyse)中。分析工具会根据这个 JSON 对象在图表中绘制出构建过程的所有详细信息。
-
-?> (TODO: Link to webpack analyse article)
+**以 JSON 格式输出 webpack 的运行结果**
 
 ```bash
-webpack --json , webpack -j, webpack -j > stats.json
+webpack --json
+webpack --json > stats.json
 ```
+
+在其他每个情况下，webpack 会打印一组统计信息，用于显示 bundle, chunk 和用时等详细信息。使用此选项，输出可以是 JSON 对象。
+此输出文件(response)可被 webpack 的[分析工具](https://webpack.github.com/analyse)，或 chrisbateman 的 [webpack 可视化工具](https://chrisbateman.github.io/webpack-visualizer/)，或 th0r 的 [webpack bundle 分析工具](https://github.com/th0r/webpack-bundle-analyzer)接收后进行分析。
+分析工具将接收 JSON 并以图形形式提供构建的所有细节。
+
+*进一步阅读：*
+* [Analyzing Build Statistics](https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/)
+* [Three simple ways to inspect a webpack bundle](https://medium.com/@joeclever/three-simple-ways-to-inspect-a-webpack-bundle-7f6a8fe7195d#.7d2i06mjx)
+* [Optimising your application bundle size with webpack](https://hackernoon.com/optimising-your-application-bundle-size-with-webpack-e85b00bab579#.5w5ko08pq)
+* [Analyzing & optimizing your webpack bundle](https://medium.com/@ahmedelgabri/analyzing-optimizing-your-webpack-bundle-8590818af4df#.hce4vdjs9)
+* [Analysing and minimising the size of client side bundle with webpack and source-map-explorer](https://medium.com/@nimgrg/analysing-and-minimising-the-size-of-client-side-bundle-with-webpack-and-source-map-explorer-41096559beca#.c3t2srr8x)
 
 ### 输出配置
 
-通过以下这些配置，你可以调整构建流程的某些输出参数。
+通过以下这些配置，你可以调整构建流程的某些[输出](/configuration/output)参数。
 
 | 参数                          | 说明                                                             | 输入类型     | 默认值                                                 |
 |------------------------------|-----------------------------------------------------------------|------------|-------------------------------------------------------|
@@ -145,12 +167,12 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 | 参数  | 说明                                      | 输入类型 | 默认值 |
 |------------|--------------------------------------------------|------------|---------------|
 | --debug    | 把 loader 设置为 debug 模式                     | boolean    | false         |
-| --devtool  | 为打包好的资源定义 SourceMap 的类型 | string     | -             |
+| --devtool  | 为打包好的资源定义 [source map 的类型](/configuration/devtool/) | string     | -             |
 | --progress | 打印出编译进度的百分比值         | boolean    | false         |
 
 ### 模块配置
 
-这些配置可以用于绑定 Webpack 允许的模块。
+这些配置可以用于绑定 Webpack 允许的[模块](/configuration/module/)。
 
 | 参数                | 说明                      | 使用方法                      |
 |--------------------|---------------------------|-----------------------------|
@@ -160,7 +182,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 
 ### Watch 配置
 
-这些配置可以用于观察依赖文件的变化，一旦有变化，则可以重新执行构建流程。
+这些配置可以用于[观察](/configuration/watch/)依赖文件的变化，一旦有变化，则可以重新执行构建流程。
 
 | 参数                       | 说明                                                   |
 |---------------------------|--------------------------------------------------------|
@@ -174,15 +196,15 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 
 在生产环境的构建时，这些配置可以用于调整的一些性能相关的配置。
 
-| 参数                       | 说明                                              | 使用的插件                            |
-|---------------------------|--------------------------------------------------|--------------------------------------|
-| --optimize-max-chunks     | 限制 chunk 的数量                                  | LimitChunkCountPlugin                |
-| --optimize-min-chunk-size | 限制 chunk 的最小体积                               | MinChunkSizePlugin                   |
-| --optimize-minimize       | 压缩混淆 javascript，并且把 loader 设置为 minimizing | UglifyJsPlugin & LoaderOptionsPlugin |
+| 参数                 | 解释说明                                            | 使用的插件                          |
+|---------------------------|--------------------------------------------------------|--------------------------------------|
+| --optimize-max-chunks     | 限制 chunk 的数量              | [LimitChunkCountPlugin](/plugins/limit-chunk-count-plugin) |
+| --optimize-min-chunk-size | 限制 chunk 的最小体积               | [MinChunkSizePlugin](/plugins/min-chunk-size-plugin) |
+| --optimize-minimize       | 压缩混淆 javascript，并且把 loader 设置为 minimizing | [UglifyJsPlugin](/plugins/uglifyjs-webpack-plugin/) & [LoaderOptionsPlugin](/plugins/loader-options-plugin/) |
 
 ### Resolve 配置
 
-这些配置可以用于设置 Webpack 解析时使用的别名（alias）和扩展名（extension）。
+这些配置可以用于设置  webpack [resolver](/configuration/resolve/) 时使用的别名(alias)和扩展名(extension)。
 
 | 参数                    | 说明                                                    | 示例                                         |
 |------------------------|---------------------------------------------------------|---------------------------------------------|
@@ -192,7 +214,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 
 ### 统计数据配置
 
-以下选项用于配置 Webpack 在控制台输出的统计数据，以及这些数据的样式。
+以下选项用于配置 Webpack 在控制台输出的[统计数据](/configuration/stats/)，以及这些数据的样式。
 
 | 参数                     | 说明                                            | 类型    |
 |-------------------------|------------------------------------------------|---------|
@@ -215,27 +237,27 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 
 ### 高级配置
 
-| 参数                   | 说明                                          | 使用方法                                      |
-|-----------------------|-----------------------------------------------|---------------------------------------------|
-| --bail                | 一旦发生错误，立即终止                            |                                             |
-| --cache               | 开启缓存 [watch 时会默认打开]                    | --cache=false                               |
-| --define              | 定义打包文件中的全局变量                          | --define process.env.NODE_ENV='development' |
-| --hot                 | 开启模块热替换 [使用 HotModuleReplacementPlugin] | --hot=true                                  |
-| --labeled-modules     | 开启模块标签 [使用 LabeledModulesPlugin]         |                                             |
-| --plugin              | 加载某个插件                                    |                                             |
-| --prefetch            | 预加载某个文件                                  | --prefetch=./files.js                       |
-| --provide             | 以全局变量的形式提供某个模块                       | --provide jQuery=jquery                     |
-| --records-input-path  | 写记录的路径                                    |                                             |
-| --records-output-path | 读记录的路径                                    |                                             |
-| --records-path        | 记录的路径                                      |                                             |
-| --target              | 目标的执行环境                                  | --target='node'                              |
+| 参数             | 解释说明                                                      | 用法                                       |
+|-----------------------|------------------------------------------------------------------|---------------------------------------------|
+| --bail                | 一旦发生错误，立即终止                             |                                             |
+| --cache               | 开启缓存 [watch 时会默认打开]          | --cache=false                               |
+| --define              | 定义 bundle 中的任意自由变量，查看 [shimming](/guides/shimming) | --define process.env.NODE_ENV='development' |
+| --hot                 | 开启[模块热替换](/concepts/hot-module-replacement) [使用 HotModuleReplacementPlugin] | --hot=true                                  |
+| --labeled-modules     | Enables 开启模块标签 [使用 LabeledModulesPlugin]              |                                             |
+| --plugin              | 加载某个[插件](/configuration/plugins/)                      |                                             |
+| --prefetch            | 预加载某个文件                                     | --prefetch=./files.js                       |
+| --provide             | 在所有模块中将这些模块提供为自由变量，查看 [shimming](/guides/shimming) | --provide jQuery=jquery                     |
+| --records-input-path  | 记录文件的路径（读取）                               |                                             |
+| --records-output-path | 记录文件的路径（写入）                               |                                             |
+| --records-path        | 记录文件的路径                                      |                                             |
+| --target              | [目标](/configuration/target/)的执行环境     | --target='node'                             |
 
-### 缩写
+### 简写
 
-| 缩写      | 含义                                                                                      |
-|----------|-------------------------------------------------------------------------------------------|
-| -d       | --debug --devtool eval-cheap-module-source-map --output-pathinfo                          |
-| -p       | --optimize-minimize --define,process.env.NODE_ENV="production" --optimize-occurence-order |
+| 简写 | 含义                                                         |
+|----------|------------------------------------------------------------------|
+| -d       | --debug --devtool eval-cheap-module-source-map --output-pathinfo |
+| -p       | --optimize-minimize --define process.env.NODE_ENV="production", see [building for production](/guides/production-build)   |
 
 ### Profiling
 

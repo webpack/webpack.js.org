@@ -39,7 +39,7 @@ module.exports = {
 **webpack.config.js**
 
 ```javascript
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   entry: './path/to/my/entry/file.js',
@@ -73,7 +73,7 @@ webpack 的目标是，让 **webpack** 聚焦于项目中的所有资源(asset)�
 **webpack.config.js**
 
 ```javascript
-var path = require('path');
+const path = require('path');
 
 const config = {
   entry: './path/to/my/entry/file.js',

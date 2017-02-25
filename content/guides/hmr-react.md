@@ -33,6 +33,8 @@ npm install --save react@15.3.0 react-dom@15.3.0
 
 你的 `.babelrc` 配置文件或许会和下面的配置相差无几：
 
+__.babelrc__
+
 ```json
 {
   "presets": [
@@ -54,9 +56,11 @@ npm install --save react@15.3.0 react-dom@15.3.0
 }
 ```
 
-### Webpack 配置
+### 使用 webpack 并配置
 
 当然，有很多方法来设置你的 webpack ── 例如通过 API 配置，由单个或多个配置文件来配置，等等。下面是一个基本的配置，可以供你作为参考：
+
+__webpack.config.js__
 
 ```js
 const { resolve } = require('path');
@@ -151,8 +155,9 @@ module.exports = {
 
 下面是和上面配置相关的代码：
 
+__src/index.js__
+
 ```js
-// ./src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -180,8 +185,9 @@ if (module.hot) {
 }
 ```
 
+__src/components/App.js__
+
 ```js
-// ./src/components/App.js
 import React from 'react';
 import styles from './App.css';
 
@@ -194,8 +200,9 @@ const App = () => (
 export default App;
 ```
 
+__src/components/App.css__
+
 ```css
-// ./src/components/App.css
 .app {
     text-size-adjust: none;
     font-family: helvetica, arial, sans-serif;
@@ -223,7 +230,7 @@ export default App;
 
 所以，在这种情景下，当 `src/components/App.js` 或者它的依赖文件被更改了，`module.hot.accept` 将会触发 `render` 方法，这意味着，因为 `App.js` 里面包含了对 `App.css` 的引用, 所以 `render` 方法同样会在 `App.css` 被修改的时候触发。
 
-### dist/index.html
+__dist/index.html__
 
 ```html
 <!DOCTYPE html>
@@ -237,7 +244,6 @@ export default App;
   <script src="bundle.js"></script>
 </body>
 </html>
-
 ```
 
 T> 这个文件需要放置在你的项目根路径下的 `dist` 目录，不然 webpack-dev-server 将因为缺少这个文件而无法运行。
@@ -248,9 +254,11 @@ T> 这个文件需要放置在你的项目根路径下的 `dist` 目录，不然
 
 ```json
 {
+  ...
   "scripts" : {
     "start" : "webpack-dev-server"
   }
+  ...
 }
 ```
 

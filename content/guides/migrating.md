@@ -11,6 +11,7 @@ contributors:
   - frederikprijck
   - chrisVillanueva
   - bebraw
+  - howdy39
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -46,17 +47,18 @@ contributors:
       {
         test: /\.css$/,
 -       loaders: [
+-         "style-loader",
+-         "css-loader?modules=true"
 +       use: [
-          {
-            loader: "style-loader"
-          },
-          {
-            loader: "css-loader",
--           query: {
++         {
++           loader: "style-loader"
++         },
++         {
++           loader: "css-loader",
 +           options: {
-              modules: true
-            }
-          }
++             modules: true
++           }
++         }
         ]
       },
       {
@@ -412,7 +414,7 @@ loaders 的 debug 模式将在 webpack 3 或后续版本中取消。
 
 ## ES2015 的代码分割
 
-在 webpack v1 中，你能使用 `require.ensure` 作为方法来懒加载 chunks 到你的应用中：
+在 webpack v1 中，你能使用 [`require.ensure`](/guides/code-splitting-require) 作为方法来懒加载 chunks 到你的应用中：
 
 ```javascript
 require.ensure([], function(require) {
@@ -420,10 +422,9 @@ require.ensure([], function(require) {
 });
 ```
 
-ES2015 模块加载规范定义了 `import()` 方法来运行时动态地加载 ES2015 模块。
+ES2015 模块加载规范定义了 [`import()`](/guides/code-splitting-import) 方法来运行时动态地加载 ES2015 模块。
 
 webpack 将 `import()` 作为分割点并将被请求的模块放到一个单独的 chunk 中。
-
 `import()` 接收模块名作为参数，并返回一个 Promise。
 
 ``` js
@@ -445,10 +446,6 @@ require.ensure([], function(require) {
   var foo = require("./module");
 }, "custom-chunk-name");
 ```
-
-（注意废弃的 `System.import`：webpack 对 `System.import` 的使用不符合新提出的标准，所以它在 [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28)  版本中被废弃，转向支持 `import()`）
-
-由于这个建议还在 Stage 3，如果你想要同时使用 `import` 和 [Babel](http://babeljs.io/)，你需要安装/添加 [dynamic-import](http://babeljs.io/docs/plugins/syntax-dynamic-import/) 语法插件来绕过解析错误。当建议被添加到规范之后，就不再需要这个语法插件了。
 
 ## 动态表达式
 

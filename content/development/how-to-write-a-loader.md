@@ -64,25 +64,25 @@ require("any-template-language-loader!./xyz.atl");
 var html = anyTemplateLanguage.render("xyz");
 ```
 
-### 如果可能的话把它标志成可缓存的.
-
-大多数loaders是可以缓存的，因此它们应该把自身标志成可缓存的。
-
-只要在load中调用`cacheable`。
-
-```javascript
-// 利用cacheable定义loader
-module.exports = function(source) {
-  this.cacheable();
-  return source;
-};
-```
-
 ### 不要在运行和模块间保存状态
 
 loader应该和其它编译后的模块相互独立。（除了能够被loader处理的这些问题）
 
 loader应该和相同模块的之前汇编相互独立。
+
+### 使用 [loader-utils](https://github.com/webpack/loader-utils)
+
+为了使其他开发人员体验一致，您应该使用 loader-utils 来获取 loader 选项：
+
+```javascript
+const loaderUtils = require("loader-utils");
+
+module.exports = function(source) {
+    const options = loaderUtils.getOptions(this);
+};
+```
+
+还有其他通用函数，如 `interpolateName`。
 
 ### 标志依赖
 
@@ -92,7 +92,6 @@ loader应该和相同模块的之前汇编相互独立。
 // 在loader中添加header
 var path = require("path");
 module.exports = function(source) {
-  this.cacheable();
   var callback = this.async();
   var headerPath = path.resolve("header.js");
   this.addDependency(headerPath);
@@ -112,11 +111,11 @@ module.exports = function(source) {
 * 将它们转化成 `require`s。
 * 使用`this.resolve`函数来解析路径。
 
-例子1 `css-loader`：`css-loader` 将依赖转换成 `require`，通过使用引入其它样式表（也是通过`css-loader`来处理）来代替`@import`以及通过`require`其它的引用文件来代替`url(...)`。
+示例1 `css-loader`：`css-loader` 将依赖转换成 `require`，通过使用引入其它样式表（也是通过`css-loader`来处理）来代替`@import`以及通过`require`其它的引用文件来代替`url(...)`。
 
-例子2 `less-loader`：`less-loader` 不能够将`@import` 转换成 `require`，因为所有的less文件需要一起编译来跟踪变量和mixins。因此 `less-loader` 通过一个定制的路径解析逻辑来拓展less编译器。这个定制的逻辑使用`this.resolve`通过模块系统的配置（别名使用，定制的模块目录，等等）来解析文件。
+示例2 `less-loader`：`less-loader` 不能够将`@import` 转换成 `require`，因为所有的less文件需要一起编译来跟踪变量和mixins。因此 `less-loader` 通过一个定制的路径解析逻辑来拓展less编译器。这个定制的逻辑使用`this.resolve`通过模块系统的配置（别名使用，定制的模块目录，等等）来解析文件。
 
-如果语言只支持相对路径（比如在css中：`url(file)`总是表示`./file`），利用`~`约定来规定模块的引用。
+如果语言只支持相对路径（比如在 css 中：`url(file)` 总是表示 `./file`），利用`~`约定来规定模块的引用。
 
 ``` text
 url(file) -> require("./file")
@@ -125,11 +124,11 @@ url(~module) -> require("module")
 
 ### 提取共用代码
 
-不生成过多在每个loader中么个模块都会处理的共用代码。在loader中创建一个（运行期）文件并且创建对共用代码的`require`。
+不生成过多在每个 loader 中么个模块都会处理的共用代码。在 loader 中创建一个（运行期）文件并且创建对共用代码的 `require`。
 
 ## 不要嵌入绝对路径
 
-不要将绝对路径放入模块代码中。当项目根路径被移动的时，它们会破坏散列函数。在loader-utils中有[`stringifyRequest`](https://github.com/webpack/loader-utils#stringifyrequest)这个方法能够将绝对路径转成相对路径。
+不要将绝对路径放入模块代码中。当项目根路径被移动的时，它们会破坏散列函数。在 loader-utils 中有 [`stringifyRequest`](https://github.com/webpack/loader-utils#stringifyrequest) 这个方法能够将绝对路径转成相对路径。
 
 **例子**：
 
@@ -141,32 +140,14 @@ return "var runtime = require(" +
   ");";
 ```
 
-### 使用`peerDependencies` 来包装library
+### 使用 `peerDependencies` 来包裹 library
 
-用开发者能够在`package.json`里面规定具体的版本。依赖关系应该相对开放从而允许在不需要发布新的loader版本的时候更新library。
+例如，[sass-loader 指定 node-sass 作为对等依赖(peer dependency)](https://github.com/webpack-contrib/sass-loader/blob/master/package.json)：
 
 ``` javascript
 "peerDependencies": {
-  "library": "^1.3.5"
+  "node-sass": "^4.0.0"
 }
 ```
 
-### 将可编程对象当作`query`选项
-
-在某些情况下，你的loader需要可编程对象，其函数不能作为`query`字符串进行字符串化。例如，`less-loader` 提供了指定[LESS-plugins](https://github.com/webpack/less-loader#less-plugins)的可能性。在这些情况下，允许loader拓展webpack的`options`对象来检索特定选项。然而，为了避免名称冲突，重要的是该选项在loader的驼峰npm-name下的命名空间。
-
-**示例：**
-
-```javascript
-// webpack.config.js
-module.exports = {
-  ...
-  lessLoader: {
-    lessPlugins: [
-      new LessPluginCleanCSS({advanced: true})
-    ]
-  }
-};
-```
-
-loader还应该允许通过`query`来指定config-key（比如`lessLoader`）。 See [讨论](https://github.com/webpack/less-loader/pull/40) and [案例实现](https://github.com/webpack/less-loader/blob/39f742b4624fceae6d9cf266e9554d07a32a9c14/index.js#L49-51).
+使用对等依赖(peer dependency)允许应用程序开发人员在 `package.json` 中指定需要的确切版本。

@@ -50,7 +50,7 @@ module.exports = {
 
 ### Node环境变量
 
-运行 `webpack -p` (或者 `--define process.env.NODE_ENV="production"`) 会通过如下方式调用[`DefinePlugin`](/plugins/define-plugin) :
+运行 `webpack -p` (或者 `--define process.env.NODE_ENV="'production'"`) 会通过如下方式调用[`DefinePlugin`](/plugins/define-plugin) :
 
 ```js
 // webpack.config.js
@@ -68,7 +68,7 @@ module.exports = {
 
 `DefinePlugin` 在原始的源码中执行查找和替换操作. 在导入的代码中,任何出现 `process.env.NODE_ENV`的地方都会被替换为`"production"`. 因此, 形如`if (process.env.NODE_ENV !== 'production') console.log('...')` 的代码就会等价于 `if (false) console.log('...')` 并且最终通过`UglifyJS`等价替换掉.
 
-T> 从技术角度而言, `NODE_ENV`是一个Node.js暴露给运行脚本的系统环境变量。服务端的工具/构建脚本以及客户端库都可以方便的使用该环境变量确定自己的开发-生产行为。 然而与期望的相反, 构建脚本`webpack.config.js`中的`process.env.NODE_ENV` 并不会被设置为 `"production"` , 详情见[#2537](https://github.com/webpack/webpack/issues/2537). 因此, 条件判定,形如 `process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js'` 并不会按预想的起作用.
+T> 从技术角度而言, `NODE_ENV`是一个Node.js暴露给运行脚本的系统环境变量。服务端的工具/构建脚本以及客户端库都可以方便的使用该环境变量确定自己的开发-生产行为。 然而与期望的相反, 构建脚本`webpack.config.js`中的`process.env.NODE_ENV` 并不会被设置为 `"production"` , 详情见[#2537](https://github.com/webpack/webpack/issues/2537). 因此, 条件判定，形如 `process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js'` 并不会按预想的起作用。查看如何使用[环境变量](/guides/environment-variables)。
 
 ## 手动方式: 为多环境配置Webpack
 
@@ -135,15 +135,16 @@ function buildConfig(env) {
 
 module.exports = buildConfig(env);
 ```
-在package.json文件中我们使用webpack构建我们的应用，所需需要在package.json中添加以下命令:
+在 package.json 文件中我们使用 webpack 构建我们的应用，所需需要在 package.json 中添加以下命令:
 ```js
  "build:dev": "webpack --env=dev --progress --profile --colors",
  "build:dist": "webpack --env=prod --progress --profile --colors",
 ```
-可以看到,我们给把环境变量传递给了webpack.config.js文件. 在这里我们使用一个简单的switch-case载入正确的JS文件，来做到针对不同的环境进行构建.
 
-一个高阶的方式是编写一个基本配置文件,把所有公用的功能放在里面。再编写特定环境的文件,使用'webpack-merge'来合并他们.这样能够避免代码重复.
-你可以把所有的基本配置,如处理js, ts, png, jpeg, json等文件的配置放在公用的`base`文件中.代码样例如下:
+可以看到，我们给把环境变量传递给了 webpack.config.js 文件。在这里我们使用一个简单的 switch-case 载入正确的 JS 文件，来做到针对不同的环境进行构建。
+
+一个高阶的方式是编写一个基本配置文件，把所有公用的功能放在里面。再编写特定环境的文件,使用 'webpack-merge' 来合并他们.这样能够避免代码重复。
+你可以把所有的基本配置,如处理 js, ts, png, jpeg, json 等文件的配置放在公用的 `base` 文件中。代码样例如下：
 
 ** base.js **
 ```js
@@ -217,7 +218,7 @@ module.exports = function(env) {
             }),
             new webpack.DefinePlugin({
                 'process.env': {
-                    'NODE_ENV': JSON.stringify('prod')
+                    'NODE_ENV': JSON.stringify('production')
                 }
             }),
             new webpack.optimize.UglifyJsPlugin({
@@ -235,10 +236,10 @@ module.exports = function(env) {
     })
 }
 ```
-你会注意到'prod.js'文件三点主要的变化.
-* 使用'webpack-merge'合并'base.js'.
-* 我们把'output'属性挪到了'base.js'文件. 需要强调的是此处我们从`prod.js`抽取出来到`base.js`文件的'output'属性是公用的,贯穿所有的环境的,才把它抽取出来.
-* 我们使用'DefinePlugin'把'process.env.NODE_ENV'定义为'prod'. 当我们构建生产环境的应用时,整个应用中的'process.env.NODE_ENV'都会是这个值——'prod'. 像这样,我们可以管理我们选择指定的针对不同环境的不同变量.
+你会注意到'prod.js'文件三点主要的变化。
+* 使用'webpack-merge'合并'base.js'。
+* 我们把'output'属性挪到了'base.js'文件. 需要强调的是此处我们从`prod.js`抽取出来到`base.js`文件的'output'属性是公用的,贯穿所有的环境的,才把它抽取出来。
+* 我们使用'DefinePlugin'把'process.env.NODE_ENV'定义为production'. 当我们构建生产环境的应用时,整个应用中的'process.env.NODE_ENV'都会是这个值——production'. 像这样,我们可以管理我们选择指定的针对不同环境的不同变量。
 
 选择哪些配置是贯穿所有环境的取决于你.然而,当我们构建应用的时候,我们已经演示了一些典型的能所有环境通用的配置.
 你刚看到了,'webpack-merge'是如此的强大,它能够把我们从大量的代码重复中解救出来.

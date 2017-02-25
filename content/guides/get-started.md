@@ -8,6 +8,7 @@ contributors:
   - chrisVillanueva
   - johnstew
   - simon04
+  - aaronang
 ---
 
 webpack 是一个用来构建我们应用程序中的 JavaScript 模块的工具。在按照 [安装说明](/guides/installation) 安装 webpack 后，我们可以从 [CLI](/api/cli) 或 [API](/api/node) 来开始使用 `webpack`。
@@ -140,6 +141,7 @@ T> 输出可能会稍有不同。如果构建成功，那么你就可以继续�
 __webpack.config.js__
 ```javascript
 var path = require('path');
+var webpack = require("webpack");
 
 module.exports = {
   entry: './app/index.js',
@@ -153,7 +155,7 @@ module.exports = {
 此文件可以像下面这样被 webpack 运行。
 
 ```bash
-webpack --config webpack.config.js
+./node_modules/.bin/webpack --config webpack.config.js
 
 Hash: ff6c1d39b26f89b3b7bb
 Version: webpack 2.2.0

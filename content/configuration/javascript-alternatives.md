@@ -1,5 +1,5 @@
 ---
-title: 外部扩展配置(External Configurations)
+title: 使用替代 Javascript 的语言进行配置(Configuration with Javascript Alternatives)
 sort: 3
 contributors:
   - sokra
@@ -32,9 +32,6 @@ config =
   ]
 module.exports = config
 ```
-
-
-?> loader settings, e.g. `sassLoader`, `eslint` sections
 
 ***
 

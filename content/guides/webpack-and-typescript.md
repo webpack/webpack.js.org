@@ -47,8 +47,8 @@ __webpack.config.js__
 module.exports = {
  entry: './index.ts',
  output: {
-   filename: '/bundle.js',
-   path: '/'
+   filename: 'bundle.js',
+   path: __dirname
  },
  module: {
    rules: [
@@ -98,8 +98,8 @@ __webpack.config.js__
 module.exports = {
  entry: './index.ts',
  output: {
-   filename: '/bundle.js',
-   path: '/'
+   filename: 'bundle.js',
+   path: __dirname
  },
  module: {
    rules: [

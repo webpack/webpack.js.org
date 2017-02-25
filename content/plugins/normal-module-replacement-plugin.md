@@ -20,7 +20,7 @@ new webpack.NormalModuleReplacementPlugin(resourceRegExp, newResource)
 
 ## 基本示例
 
-在构建开发环境时替换特定的模块 （[阅读更多](/configuration/environment)）。
+在构建[开发环境](/guides/production-build)时替换特定的模块 。
 
 
 假设你有一个配置文件 `some/path/config.development.module.js` 并且在生产环境有一个特殊的版本 `some/path/config.production.module.js`
@@ -36,7 +36,7 @@ new webpack.NormalModuleReplacementPlugin(
 
 ## 高级示例
 
-根据不同环境变量构建（[阅读更多](/configuration/environment)）
+根据[指定环境](/configuration/configuration-types)的条件构建。
 
 假设你想要一个为了不同构建目标的特定值的配置。
 

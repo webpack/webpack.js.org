@@ -4,6 +4,7 @@ sort: 50
 contributors:
   - SpaceK33z
   - rafde
+  - fvgs
 ---
 
 在这一章节，我们将会解释如何开始开发并且如何从三种开发工具中进行选择。这里假设你已经有了一个 webpack 配置文件。
@@ -33,9 +34,9 @@ devtool: "cheap-eval-source-map"
 
 ## 选择一个工具
 
-webpack 可以在 **watch mode**(监视模式)下使用。在这种模式下，webpack 将监视您的文件，并在被更改时重新编译。  
-**webpack-dev-server** 提供了一个易于部署的开发服务器，具有快速的实时重载（live reloading）功能。  
-如果你已经有一个开发服务器并且需要充分的灵活性，可以使用 **webpack-dev-middleware** 作为中间件。  
+webpack 可以在 **watch mode**(监视模式)下使用。在这种模式下，webpack 将监视您的文件，并在被更改时重新编译。
+**webpack-dev-server** 提供了一个易于部署的开发服务器，具有快速的实时重载（live reloading）功能。
+如果你已经有一个开发服务器并且需要充分的灵活性，可以使用 **webpack-dev-middleware** 作为中间件。
 
 webapck-dev-server 和 webpack-dev-middleware 使用内存编译，这意味着 bundle 不会被保存在硬盘上。这使得编译十分迅速，并使得你的文件系统带来更少的麻烦。
 
@@ -43,7 +44,7 @@ webapck-dev-server 和 webpack-dev-middleware 使用内存编译，这意味着 
 
 ### webpack Watch Mode（监视模式）
 
-webpack 的 watch mode 会监视文件的更改。如果检测到任何的更改，它都会再次执行编译。 
+webpack 的 watch mode 会监视文件的更改。如果检测到任何的更改，它都会再次执行编译。
 
 我们也希望在编译时有一个好看的进度条。运行以下命令：
 
@@ -53,18 +54,20 @@ webpack --progress --watch
 
 在你的文件中做一点更改并且保存。你应该会看到 webpack 正在重新编译。
 
-watch mode 对服务器没有预设，所以你需要给自己提供一个。一个简易的服务器是 [`serve`](https://github.com/tj/serve)。安装之后（`npm i --save-dev serve`），你可以在输出的文件目录下运行它：
+观察模式对服务器没有作预设，所以你需要自己提供。使用 [`serve`](https://github.com/zeit/serve) 搭建一个简易的服务器。安装之后（`npm i --save-dev serve`），你可以在输出的文件目录下运行它：
 
 ```bash
 `npm bin`/serve
 ```
 
-您可能会发现使用npm scripts运行 `serve` 更方便。您可以这样做，首先在package.json中创建一个 `start` 脚本，如下所示：
+您可能会发现使用 npm scripts 运行 `serve` 更方便。您可以这样做，首先在package.json中创建一个 `start` 脚本，如下所示：
 
-```bash
+```json
+...
 "scripts": {
   "start": "serve"
 }
+...
 ```
 
 然后，您可以通过在项目目录中运行 `npm start` 来启动服务器。在每一次编译后，
@@ -72,9 +75,10 @@ watch mode 对服务器没有预设，所以你需要给自己提供一个。一
 
 T> 您可能会发现 --single 选项对于提供单页应用服务非常有用。
 
-### 用Chrome DevTools工作区使用Watch Mode（监视模式）
+### Chrome DevTools Workspaces 中的观察模式
 
-如果从[源面板保存时设置Chrome以保持更改](https://medium.com/@rafaelideleon/webpack-your-chrome-devtools-workspaces-cb9cca8d50da#.mmzbo7jkp)，则无需刷新页面，你将不得不设置 webpack 来使用
+如果从[_Sources_ 面板保存时设置 Chrome 以保持更改](https://medium.com/@rafaelideleon/webpack-your-chrome-devtools-workspaces-cb9cca8d50da#.mmzbo7jkp)
+则无需刷新页面，你将不得不设置 webpack 来使用
 
 ```javascript
 devtool: "inline-source-map"
@@ -109,7 +113,7 @@ npm install webpack-dev-server --save-dev
 webpack-dev-server --open
 ```
 
-T> 如果你的控制台说无法找到该命令，尝试运行 `node_modules/.bin/webpack-dev-server`。正常情况下你应该把该命令加在 `package.json` 中，例如：`"scripts": {"start": "webpack-dev-server"}`。 
+T> 如果你的控制台说无法找到该命令，尝试运行 `node_modules/.bin/webpack-dev-server`。正常情况下你应该把该命令加在 `package.json` 中，例如：`"scripts": {"start": "webpack-dev-server"}`。
 
 上述命令应该自动在浏览器中打开 `http://localhost:8080`。
 

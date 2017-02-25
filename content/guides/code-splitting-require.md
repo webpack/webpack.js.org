@@ -11,7 +11,6 @@ contributors:
 
 W> `require.ensure` 是 webpack 特有的, 查看 [`import()`](/guides/code-splitting-import) 了解关于此的一个 ECMAScript 提案。
 
-
 ## `require.ensure()`
 
 webpack 在构建时，会静态地解析代码中的 `require.ensure()`，在其中 callback 中的任何代码，包括被 `require()` 的代码，将被分离到一个新的 chunk 当中。这个新的 chunk 会被生成为异步的 bundle，由 webpack 通过 `jsonp` 来按需加载。
@@ -31,37 +30,44 @@ require.ensure(dependencies: String[], callback: function(require), chunkName: S
 #### chunkName
 `chunkName` 是用来提供给特定的 `require.ensure()` 来作为创建的 chunk 的名称。通过向不同 `require.ensure()` 的调用提供相同的 `chunkName`，我们可以将代码合并到相同的 chunk 中，做到只产生一个 bundle 来让浏览器加载。
 
-让我们来看以下的项目
+## 示例
+
+让我们考虑下面的文件结构：
 
 ```bash
-\\ file structure
-    |
-    js --|
-    |    |-- entry.js
-    |    |-- a.js
-    |    |-- b.js
-    webpack.config.js
-    |
-    dist
+.
+├── dist
+├── js
+│   ├── a.js
+│   ├── b.js
+│   └── entry.js
+└── webpack.config.js
 ```
 
+**entry.js**
+
 ```javascript
-\\ entry.js
-
-require('a');
+require('./a');
 require.ensure([], function(require){
-    require('b');
+    require('./b');
 });
+```
 
-\\ a.js
+**a.js**
+
+```javascript
 console.log('***** I AM a *****');
+```
 
-\\ b.js
+**b.js**
+
+```javascript
 console.log('***** I AM b *****');
 ```
 
+**webpack.config.js**
+
 ```javascript
-\\ webpack.config.js
 var path = require('path');
 
 module.exports = function(env) {
@@ -82,6 +88,10 @@ module.exports = function(env) {
 
 W> `require.ensure` 内部依赖于 `Promises`。 如果你在旧的浏览器中使用 `require.ensure` 请记得去 shim `Promise` [es6-promise polyfill](https://github.com/stefanpenner/es6-promise)。
 
+**更多示例**
+* https://github.com/webpack/webpack/tree/master/examples/code-splitting
+* https://github.com/webpack/webpack/tree/master/examples/named-chunks – illustrates the use of `chunkName`
+
 ## `require.ensure()` 的陷阱
 
 ### 空数组作为参数
@@ -89,7 +99,6 @@ W> `require.ensure` 内部依赖于 `Promises`。 如果你在旧的浏览器中
 ```javascript
 require.ensure([], function(require){
     require('./a.js');
-    
 });
 ```
 

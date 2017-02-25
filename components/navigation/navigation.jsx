@@ -17,6 +17,7 @@ let Sections = [
     title: '文档',
     url: 'configuration',
     children: [
+      { title: 'CLI', url: 'api/cli' },
       { title: 'API', url: 'api' },
       { title: '配置', url: 'configuration' },
       { title: 'LOADER', url: 'loaders' },
