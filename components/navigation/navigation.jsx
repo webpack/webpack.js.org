@@ -26,11 +26,15 @@ let Sections = [
     ]
   },
   {
+    title: '翻译人员',
+    url: 'about'
+  },
+  {
     title: '捐赠',
     url: '//opencollective.com/webpack'
   },
   {
-    title: 'Blog',
+    title: '博客',
     url: '//medium.com/webpack'
   }
 ];
