@@ -121,14 +121,12 @@
     }
   }
 
-  .scroll-table {
+  .table {
     @include break {
       overflow-x: auto;
       overflow-y: hidden;
     }
-  }
 
-  .table {
     &-wrap {
       display: block;
       width: 100%;

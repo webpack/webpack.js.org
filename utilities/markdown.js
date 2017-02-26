@@ -236,13 +236,15 @@ function handleTable(t) {
   }
 
   return `
-    <div class="table-wrap">
-      <div class="table-header">
-          ${header}
-      </div>
-      <div class="table-body">
-          ${body}
-      </div>
+    <div class="table">
+        <div class="table-wrap">
+          <div class="table-header">
+              ${header}
+          </div>
+          <div class="table-body">
+              ${body}
+          </div>
+        </div>
     </div>`;
 }
 

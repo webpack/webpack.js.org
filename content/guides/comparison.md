@@ -10,8 +10,6 @@ contributors:
 
 webpack is not the only module bundler out there. If you are choosing between using webpack or any of the bundlers below, here is a feature-by-feature comparison on how webpack fares against the current competition.
 
-<div class="scroll-table">
-
 | Feature | webpack/webpack | jrburke/requirejs | substack/node-browserify | jspm/jspm-cli | rollup/rollup | brunch/brunch |
 |---------|-----------------|-------------------|--------------------------|---------------|---------------|---------------|
 | Additional chunks are loaded on demand | **yes** | **yes** | no | [System.import](https://github.com/systemjs/systemjs/blob/master/docs/system-api.md#systemimportmodulename--normalizedparentname---promisemodule) | no | no |
@@ -43,7 +41,6 @@ webpack is not the only module bundler out there. If you are choosing between us
 | Runtime overhead | **243B + 20B per module + 4B per dependency** | 14.7kB + 0B per module + (3B + X) per dependency | 415B + 25B per module + (6B + 2X) per dependency | 5.5kB for self-executing bundles, 38kB for full loader and polyfill, 0 plain modules, 293B CJS, 139B ES2015 System.register before gzip | **none for ES2015 modules** (other formats may have) | |
 | Watch mode | yes | not required | yes | not needed in dev | no | yes |
 
-</div>
 
 ♦ in production mode (opposite in development mode)
 
