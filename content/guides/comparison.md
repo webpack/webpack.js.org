@@ -41,6 +41,7 @@ webpack is not the only module bundler out there. If you are choosing between us
 | Runtime overhead | **243B + 20B per module + 4B per dependency** | 14.7kB + 0B per module + (3B + X) per dependency | 415B + 25B per module + (6B + 2X) per dependency | 5.5kB for self-executing bundles, 38kB for full loader and polyfill, 0 plain modules, 293B CJS, 139B ES2015 System.register before gzip | **none for ES2015 modules** (other formats may have) | |
 | Watch mode | yes | not required | yes | not needed in dev | no | yes |
 
+
 ♦ in production mode (opposite in development mode)
 
 X is the length of the path string
