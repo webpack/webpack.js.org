@@ -35,7 +35,7 @@ let Sections = [
   },
   {
     title: '博客',
-    url: '//medium.com/webpack'
+    url: '//github.com/webpack-china/awesome-webpack-cn'
   }
 ];
 
