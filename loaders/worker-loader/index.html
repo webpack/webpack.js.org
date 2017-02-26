@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/a3594b592867a707ff4e.css" rel="stylesheet">
+      <link href="/c5b9cc5ad7561e1244ce.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -32,7 +32,14 @@ worker<span class="token punctuation">.</span>onmessage <span class="token opera
 worker<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">&quot;message&quot;</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>You can also inline the worker as a blob with the <code>inline</code> parameter:</p>
-<pre><code class="lang-javascript"><span class="token keyword">var</span> MyWorker <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;worker-loader?inline!./file.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="lang-javascript"><span class="token keyword">var</span> MyWorker <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;worker-loader?inline!./myWorker.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Inline mode will also create chunks for browsers without supporting of inline workers,
+to disable this behavior just set <code>fallback</code> parameter as <code>false</code>:</p>
+<pre><code class="lang-javascript"><span class="token keyword">var</span> MyWorker <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;worker-loader?inline&amp;fallback=false!./myWorker.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>To set custom name use the <code>name</code> parameter:</p>
+<pre><code class="lang-javascript"><span class="token keyword">var</span> MyWorker <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;worker-loader?name=[name].js!./myWorker.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>The worker file can import dependencies just like any other file:</p>
 <pre><code class="lang-javascript"><span class="token comment" spellcheck="true">// file.js</span>
@@ -73,6 +80,11 @@ _<span class="token punctuation">.</span><span class="token function">has</span>
         <img width="150" height="150" src="https://avatars3.githubusercontent.com/u/3408176?v=3&amp;s=150">
         <br>
         <a href="https://github.com/TheLarkInn">Sean Larkin</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150" src="https://avatars3.githubusercontent.com/u/5635476?v=3&amp;s=150">
+        <br>
+        <a href="https://github.com/TrySound">Bogdan Chadkin</a>
       </td>
     </tr>
   <tbody>
