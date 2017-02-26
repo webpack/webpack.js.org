@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/24107e6bb6f5e8046c76.css" rel="stylesheet">
+      <link href="/a59ec461ec6c918190e7.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -62,7 +62,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>On running <code>webpack</code> now, we see that two bundles have been created. If you inspect these though, you will find that the code for <code>moment</code> is present in both the files!</p>
+<p>On running <code>webpack</code> now, we see that two bundles have been created. If you inspect these though, you will find that the code for <code>moment</code> is present in both the files! The reason for that is <code>moment</code> is a dependency of the main application ( e.g. index.js ) and each entry point will bundle its own dependencies.</p>
 <p>It is for this reason, that we will need to use the <a href="/plugins/commons-chunk-plugin">CommonsChunkPlugin</a>.</p>
 <h2 class="header"><a class="anchor" href="#commonschunkplugin" id="commonschunkplugin"></a><span class="text"><code>CommonsChunkPlugin</code></span><a class="icon-link" href="#commonschunkplugin"></a></h2>
 <p>This is a pretty complex plugin. It fundamentally allows us to extract all the common modules from different bundles and add them to the common bundle. If a common bundle does not exist, then it creates a new one.</p>

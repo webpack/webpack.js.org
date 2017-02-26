@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/24107e6bb6f5e8046c76.css" rel="stylesheet">
+      <link href="/a59ec461ec6c918190e7.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -31,7 +31,7 @@
 <p>There are multiple ways to declare your <code>entry</code> property that are specific to your application&apos;s needs.</p>
 <p><a href="/concepts/entry-points">Learn more!</a></p>
 <h2 class="header"><a class="anchor" href="#output" id="output"></a><span class="text">Output</span><a class="icon-link" href="#output"></a></h2>
-<p>Once you&apos;ve bundled all of your assets together, we still need to tell webpack <strong>where</strong> to bundle our application. The webpack <code>output</code> property describes to webpack <strong>how to treat bundled code</strong>.</p>
+<p>Once you&apos;ve bundled all of your assets together, you still need to tell webpack <strong>where</strong> to bundle your application. The webpack <code>output</code> property tells webpack <strong>how to treat bundled code</strong>.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;path&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -43,7 +43,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 </code></pre>
-<p>In the example above, through the <code>output.filename</code> and <code>output.path</code> properties we are describing to webpack the name of our bundle, and where we want it to be emitted to.</p>
+<p>In the example above, we use the <code>output.filename</code> and the <code>output.path</code> properties to tell webpack the name of our bundle and where we want it to be emitted to. </p>
 <blockquote class="tip"><div class="tip-content"> You may see the term <strong>emitted</strong> or <strong>emit</strong> used throughout our documentation and <a href="/api/plugins">plugin API</a>. This is a fancy term for &quot;produced or discharged&quot;. </div></blockquote><p>The <code>output</code> property has <a href="/configuration/output">many more configurable features</a>, but let&apos;s spend some time understanding some of the most common use cases for the <code>output</code> property.</p>
 <p><a href="/concepts/output">Learn more!</a></p>
 <h2 class="header"><a class="anchor" href="#loaders" id="loaders"></a><span class="text">Loaders</span><a class="icon-link" href="#loaders"></a></h2>
@@ -72,7 +72,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> config<span class="token punctuation">;</span>
 </code></pre>
-<p>In the configuration above we have defined a <code>rules</code> property for a single module with two required properties: <code>test</code>, and <code>use</code>. This tells webpack&apos;s compiler the following:</p>
+<p>The configuration above has defined a <code>rules</code> property for a single module with two required properties: <code>test</code>, and <code>use</code>. This tells webpack&apos;s compiler the following:</p>
 <blockquote>
 <p>&quot;Hey webpack compiler, when you come across a path that resolves to a &apos;.js&apos; or &apos;.jsx&apos; file inside of a <code>require()</code>/<code>import</code> statement, <strong>use</strong> the <code>babel-loader</code> to transform it before you add it to the bundle&quot;.</p>
 </blockquote>
