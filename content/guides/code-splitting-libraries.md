@@ -75,7 +75,7 @@ module.exports = function(env) {
 }
 ```
 
-On running `webpack` now, we see that two bundles have been created. If you inspect these though, you will find that the code for `moment` is present in both the files!
+On running `webpack` now, we see that two bundles have been created. If you inspect these though, you will find that the code for `moment` is present in both the files! The reason for that is `moment` is a dependency of the main application ( e.g. index.js ) and each entry point will bundle its own dependencies.
 
 It is for this reason, that we will need to use the [CommonsChunkPlugin](/plugins/commons-chunk-plugin).
 
