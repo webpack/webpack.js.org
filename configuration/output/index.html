@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/c2bd613338645bdc744b.css" rel="stylesheet">
+      <link href="/ef78e1909cff444d9878.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -49,12 +49,13 @@
 </code></pre>
 <p>The following substitutions are available in template strings (via webpack&apos;s internal <a href="https://github.com/webpack/webpack/blob/master/lib/ModuleFilenameHelpers.js"><code>ModuleFilenameHelpers</code></a>):</p>
 
-	    <div class="table-wrap">
-	      <div class="table-header">
-	          <div class="table-tr"><div class="table-th">Template</div><div class="table-th">Description</div></div>
-	      </div>
-	      <div class="table-body">
-	          <div class="table-tr"><div class="table-td">
+	    <div class="table">
+	        <div class="table-wrap">
+	          <div class="table-header">
+	              <div class="table-tr"><div class="table-th">Template</div><div class="table-th">Description</div></div>
+	          </div>
+	          <div class="table-body">
+	              <div class="table-tr"><div class="table-td">
 	    <div class="table-td-title">
 	        Template
 	    </div>
@@ -153,7 +154,8 @@
 	        The path used to resolve the file without any query params
 	    </div>
 	  </div></div>
-	      </div>
+	          </div>
+	        </div>
 	    </div><p>When using a function, the same options are available camel-cased via the <code>info</code> parameter:</p>
 <pre><code class="lang-js">devtoolModuleFilenameTemplate<span class="token punctuation">:</span> info <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> `webpack<span class="token punctuation">:</span><span class="token operator">/</span><span class="token comment" spellcheck="true">//${info.resourcePath}?${info.loaders}`</span>
@@ -193,12 +195,13 @@
 <p>Note this options does not affect output files for on-demand-loaded chunks. For these files the <a href="#output-chunkfilename"><code>output.chunkFilename</code></a> option is used. It also doesn&apos;t affect files created by loaders. For these files see loader options.</p>
 <p>The following substitutions are available in template strings (via webpack&apos;s internal <a href="https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js"><code>TemplatedPathPlugin</code></a>):</p>
 
-	    <div class="table-wrap">
-	      <div class="table-header">
-	          <div class="table-tr"><div class="table-th">Template</div><div class="table-th">Description</div></div>
-	      </div>
-	      <div class="table-body">
-	          <div class="table-tr"><div class="table-td">
+	    <div class="table">
+	        <div class="table-wrap">
+	          <div class="table-header">
+	              <div class="table-tr"><div class="table-th">Template</div><div class="table-th">Description</div></div>
+	          </div>
+	          <div class="table-body">
+	              <div class="table-tr"><div class="table-td">
 	    <div class="table-td-title">
 	        Template
 	    </div>
@@ -297,7 +300,8 @@
 	        The module query, i.e., the string following <code>?</code> in the filename
 	    </div>
 	  </div></div>
-	      </div>
+	          </div>
+	        </div>
 	    </div><p>The lengths of <code>[hash]</code> and <code>[chunkhash]</code> can be specified using <code>[hash:16]</code> (defaults to 20). Alternatively, specify <a href="#output-hashdigestlength"><code>output.hashDigestLength</code></a> to configure the length globally.</p>
 <blockquote class="tip"><div class="tip-content"> When using the <a href="/plugins/extract-text-webpack-plugin"><code>ExtractTextWebpackPlugin</code></a>, use <code>[contenthash]</code> to obtain a hash of the extracted file (neither <code>[hash]</code> nor <code>[chunkhash]</code> work). </div></blockquote><h2 class="header"><a class="anchor" href="#output-hotupdatechunkfilename" id="output-hotupdatechunkfilename"></a><span class="text"><code>output.hotUpdateChunkFilename</code></span><a class="icon-link" href="#output-hotupdatechunkfilename"></a></h2>
 <p><code>string</code></p>

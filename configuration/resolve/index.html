@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/c2bd613338645bdc744b.css" rel="stylesheet">
+      <link href="/ef78e1909cff444d9878.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -47,12 +47,13 @@ Have a look at <a href="/concepts/module-resolution">Module Resolution</a> for m
 </code></pre>
 <p>The following table explains a lot more cases:</p>
 
-	    <div class="table-wrap">
-	      <div class="table-header">
-	          <div class="table-tr"><div class="table-th"><code>alias:</code></div><div class="table-th"><code>import &quot;xyz&quot;</code></div><div class="table-th"><code>import &quot;xyz/file.js&quot;</code></div></div>
-	      </div>
-	      <div class="table-body">
-	          <div class="table-tr"><div class="table-td">
+	    <div class="table">
+	        <div class="table-wrap">
+	          <div class="table-header">
+	              <div class="table-tr"><div class="table-th"><code>alias:</code></div><div class="table-th"><code>import &quot;xyz&quot;</code></div><div class="table-th"><code>import &quot;xyz/file.js&quot;</code></div></div>
+	          </div>
+	          <div class="table-body">
+	              <div class="table-tr"><div class="table-td">
 	    <div class="table-td-title">
 	        <code>alias:</code>
 	    </div>
@@ -347,7 +348,8 @@ Have a look at <a href="/concepts/module-resolution">Module Resolution</a> for m
 	        <code>/abc/node_modules/xyz/file.js</code>
 	    </div>
 	  </div></div>
-	      </div>
+	          </div>
+	        </div>
 	    </div><p><code>index.js</code> may resolve to another file if defined in the <code>package.json</code>.</p>
 <p><code>/abc/node_modules</code> may resolve in <code>/node_modules</code> too.</p>
 <h2 class="header"><a class="anchor" href="#resolve-aliasfields" id="resolve-aliasfields"></a><span class="text"><code>resolve.aliasFields</code></span><a class="icon-link" href="#resolve-aliasfields"></a></h2>

@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/c2bd613338645bdc744b.css" rel="stylesheet">
+      <link href="/ef78e1909cff444d9878.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -22,12 +22,13 @@
 <p><code>string</code> <code>false</code></p>
 <p>Choose a style of <a href="http://blog.teamtreehouse.com/introduction-source-maps">source mapping</a> to enhance the debugging process. These values can affect build and rebuild speed dramatically.</p>
 
-	    <div class="table-wrap">
-	      <div class="table-header">
-	          <div class="table-tr"><div class="table-th">devtool</div><div class="table-th">build</div><div class="table-th">rebuild</div><div class="table-th">production</div><div class="table-th">quality</div></div>
-	      </div>
-	      <div class="table-body">
-	          <div class="table-tr"><div class="table-td">
+	    <div class="table">
+	        <div class="table-wrap">
+	          <div class="table-header">
+	              <div class="table-tr"><div class="table-th">devtool</div><div class="table-th">build</div><div class="table-th">rebuild</div><div class="table-th">production</div><div class="table-th">quality</div></div>
+	          </div>
+	          <div class="table-body">
+	              <div class="table-tr"><div class="table-td">
 	    <div class="table-td-title">
 	        devtool
 	    </div>
@@ -308,7 +309,8 @@
 	        without source content
 	    </div>
 	  </div></div>
-	      </div>
+	          </div>
+	        </div>
 	    </div><p>Some of these values are suited for development and some for production. For development you typically want fast Source Maps at the cost of bundle size, but for production you want separate Source Maps that are accurate.</p>
 <blockquote class="warning"><div class="tip-content"> There are some issues with Source Maps in Chrome. <a href="https://github.com/webpack/webpack/issues/3165">We need your help!</a>. </div></blockquote><h3 class="header"><a class="anchor" href="#for-development" id="for-development"></a><span class="text">For development</span><a class="icon-link" href="#for-development"></a></h3>
 <p><code>eval</code> - Each module is executed with <code>eval()</code> and <code>//@ sourceURL</code>. This is pretty fast. The main disadvantage is that it doesn&apos;t display line numbers correctly since it gets mapped to transpiled code instead of the original code.</p>
