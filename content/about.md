@@ -43,4 +43,4 @@ contributors:
 真诚的向你们表示感谢！
 
 
-以下人员以 github 字母排序，如有遗漏请[告知我们]()。
+以下人员以 github 字母排序，如有遗漏请[告知我们](https://github.com/webpack-china/webpack.js.org/issues)。
