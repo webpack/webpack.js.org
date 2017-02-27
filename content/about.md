@@ -29,9 +29,11 @@ contributors:
   - jeffrygan
   - coco-hu
   - lcxfs1991
-  - yubo
+  - itchina110
   - dingyiming
   - ellyliang
+  - lgh06
+  - shisaq
 ---
 
 特此致敬`参与翻译的全体成员`！
