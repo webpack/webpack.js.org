@@ -27,7 +27,7 @@ export default function bar() {
 </div>
 </div>
 
-## 使用 webpack 打包。
+## 使用 webpack 打包
 
 <div class="homepage__wrap">
 <div class="homepage__left">
