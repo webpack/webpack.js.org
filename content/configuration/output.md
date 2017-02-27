@@ -413,7 +413,7 @@ Be aware that if `MyLibrary` isn't defined earlier your library will be set in g
 `libraryTarget: "jsonp"` - This will wrap the return value of your entry point into a jsonp wrapper.
  
  ```javascript
- MyLibrary( _entry_return_ );
+ MyLibrary(_entry_return_);
  ```
 
 The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
