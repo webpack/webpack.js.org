@@ -22,7 +22,7 @@ contributors:
 
 ### JS文件压缩
 
-webpack 自带了 `UglifyJsPlugin`，它运行 [UglifyJS](http://lisperator.net/uglifyjs/) 来压缩输出文件。此插件支持所有的 [UglifyJS 选项](https://github.com/mishoo/UglifyJS2#usage)。在命令行中指定 `--optimize-minimize`，会在 plugins 配置中添加：
+webpack 自带了 `UglifyJsPlugin`，它运行 [UglifyJS](http://lisperator.net/uglifyjs/) 来压缩输出文件。此插件支持所有的 [UglifyJS 选项](https://github.com/mishoo/UglifyJS2#usage)。在命令行中指定 `--optimize-minimize`，或在 plugins 配置中添加：
 
 
 ```js
