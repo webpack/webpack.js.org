@@ -1,6 +1,7 @@
 import React from 'react';
 import Interactive from 'antwar-interactive';
 import { GoogleAnalytics } from 'antwar-helpers';
+import NotificationBar from '../notification-bar/notification-bar';
 import Navigation from '../navigation/navigation';
 import Footer from '../footer/footer';
 import SidebarMobile from '../sidebar-mobile/sidebar-mobile';
@@ -10,6 +11,7 @@ import './site-style';
 import '../../styles';
 import '../../styles/icon.font.js';
 import '../container/container-style.scss';
+import '../notification-bar/notification-bar-style';
 import '../navigation/navigation-style';
 import '../navigation/search-style';
 import '../sidebar-mobile/sidebar-mobile-style';
@@ -36,6 +38,10 @@ export default props => {
 
   return (
     <div id="site" className="site">
+      <Interactive
+        id="components/notification-bar/notification-bar.jsx"
+        component={ NotificationBar } />
+        
       <Interactive
         id="components/navigation/navigation.jsx"
         component={ Navigation }

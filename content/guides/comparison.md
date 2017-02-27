@@ -1,25 +1,12 @@
 ---
-title: Why webpack?
+title: Comparison with other bundlers
 contributors:
   - pksjce
   - bebraw
   - chrisVillanueva
   - tashian
+  - simon04
 ---
-
-webpack is a module bundler, like Browserify or Brunch. It is not a task runner. Make, Grunt, or Gulp are task runners. But people get confused about the difference, so let's clear that up right away.
-
-Task runners handle automation of common development tasks such as linting, building, or testing your project. Compared to bundlers, task runners have a higher level focus.
-
-Bundlers help you get your JavaScript and stylesheets ready for deployment, transforming them into a format that's suitable for the browser. For example, JavaScript can be minified or split into chunks and loaded on-demand to improve performance. Bundling is one of the most important challenges in web development, and solving it well can remove a lot of pain from the process.
-
-webpack can work alongside task runners. You can still benefit from their higher level tooling while leaving the problem of bundling to webpack. [grunt-webpack](https://www.npmjs.com/package/grunt-webpack) and [gulp-webpack](https://www.npmjs.com/package/gulp-webpack) are good examples.
-
-T> Often webpack users use npm `scripts` as their task runner. This is a good starting point. Cross-platform support can become a problem, but there are several workarounds for that.
-
-T> Even though webpack core focuses on bundling, you can find a variety of extensions that allow you to use it in a task runner kind of way.
-
-## Comparison
 
 webpack is not the only module bundler out there. If you are choosing between using webpack or any of the bundlers below, here is a feature-by-feature comparison on how webpack fares against the current competition.
 
@@ -53,6 +40,7 @@ webpack is not the only module bundler out there. If you are choosing between us
 | Requirable files | file system | **web** | file system | through plugins | file system or through plugins | file system |
 | Runtime overhead | **243B + 20B per module + 4B per dependency** | 14.7kB + 0B per module + (3B + X) per dependency | 415B + 25B per module + (6B + 2X) per dependency | 5.5kB for self-executing bundles, 38kB for full loader and polyfill, 0 plain modules, 293B CJS, 139B ES2015 System.register before gzip | **none for ES2015 modules** (other formats may have) | |
 | Watch mode | yes | not required | yes | not needed in dev | no | yes |
+
 
 ♦ in production mode (opposite in development mode)
 

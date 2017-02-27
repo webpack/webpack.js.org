@@ -8,6 +8,7 @@ contributors:
   - chrisVillanueva
   - johnstew
   - simon04
+  - aaronang
 ---
 
 webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/guides/installation).
@@ -126,11 +127,11 @@ T> Output may vary. If the build is successful then you are good to go.
 Open `index.html` in your browser to see the result of a successful bundle.
 You should see a page with the following text: 'Hello webpack'.
 
-## Using ES6 modules with webpack
+## Using ES2015 modules with webpack
 
-Noticed the use of [ES6 module import](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/import) (alias ES2015, *harmony*) in `app/index.js`? Although `import`/`export` statements are not supported in browsers (yet), using them is fine since webpack will replace those instructions with an ES5 compatible wrapper code. Inspect `dist/bundle.js` to convince yourself.
+Noticed the use of [ES2015 module import](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/import) (alias ES2015, *harmony*) in `app/index.js`? Although `import`/`export` statements are not supported in browsers (yet), using them is fine since webpack will replace those instructions with an ES5 compatible wrapper code. Inspect `dist/bundle.js` to convince yourself.
 
-Note that webpack will not touch your code other than `import`/`export`. In case you are using other [ES6 features](http://es6-features.org/), make sure to use a transpiler such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/).
+Note that webpack will not touch your code other than `import`/`export`. In case you are using other [ES2015 features](http://es6-features.org/), make sure to use a transpiler such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/).
 
 ## Using webpack with a config
 
@@ -153,7 +154,7 @@ module.exports = {
 This file can be run by webpack as follows.
 
 ```bash
-webpack --config webpack.config.js
+./node_modules/.bin/webpack --config webpack.config.js
 
 Hash: ff6c1d39b26f89b3b7bb
 Version: webpack 2.2.0

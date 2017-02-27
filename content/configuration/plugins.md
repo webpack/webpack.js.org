@@ -4,9 +4,10 @@ sort: 8
 contributors:
   - sokra
   - skipjack
+  - yatharthk
 ---
 
-?> `plugins` customize the webpack build process in a variety of ways. This page discusses using existing plugins, however if you are interested in writing your own please visit Writing a Plugin.
+?> `plugins` customize the webpack build process in a variety of ways. This page discusses using existing plugins, however if you are interested in writing your own please visit [Writing a Plugin](/development/how-to-write-a-plugin/).
 
 ## `plugins`
 
@@ -23,5 +24,35 @@ plugins: [
 ```
 
 A more complex example, using multiple plugins, might look something like this:
+```js
+// importing plugins that do not come by default in webpack
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var DashboardPlugin = require('webpack-dashboard/plugin');
 
-?> Add a more detailed example
+// adding plugins to your configuration
+plugins: [
+  // build optimization plugins
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'vendor',
+    filename: 'vendor-[hash].min.js',
+  }),
+  new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: false,
+      drop_console: false,
+    }
+  }),
+  new ExtractTextPlugin({
+    filename: 'build.min.css',
+    allChunks: true,
+  }),
+  new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
+  // compile time plugins
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': '"production"',
+  }),
+  // webpack-dev-server enhancement plugins
+  new DashboardPlugin(),
+  new webpack.HotModuleReplacementPlugin(),
+]
+```

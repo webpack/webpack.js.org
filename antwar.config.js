@@ -65,6 +65,8 @@ module.exports = {
           true,
           /^\.\/.*\.md$/
         );
+      }, {
+        'why-webpack': '/guides/comparison'
       }
     ),
 
@@ -87,6 +89,8 @@ module.exports = {
           false,
           /^\.\/.*\.md$/
         );
+      }, {
+        'external-configs': 'javascript-alternatives'
       }
     ),
 
@@ -98,6 +102,8 @@ module.exports = {
           false,
           /^\.\/.*\.md$/
         );
+      }, {
+        'passing-a-config': 'configuration-types'
       }
     ),
 
@@ -191,7 +197,7 @@ function root(contentCb) {
   };
 }
 
-function section(title, contentCb) {
+function section(title, contentCb, redirects = {}) {
   return {
     title: title,
     path: function() {
@@ -209,7 +215,7 @@ function section(title, contentCb) {
         return require('./components/page/page.jsx').default
       }
     },
-    redirects: {} // <from>: <to>
+    redirects: redirects // <from>: <to>
   };
 }
 

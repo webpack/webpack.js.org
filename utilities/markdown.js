@@ -1,15 +1,12 @@
 'use strict';
 var marked = require('marked');
 
-module.exports = function(section) {
-  // alter marked renderer to add slashes to beginning so images point at root
-  // leanpub expects images without slash...
-  section = section ? '/' + section + '/' : '/';
+module.exports = function() {
 
   var renderer = new marked.Renderer();
 
   renderer.image = function(href, title, text) {
-    return '<img src="' + section + href + '" alt="' + text + '">';
+    return '<img src="' + href + '" alt="' + text + '">';
   };
 
   // patch ids (this.options.headerPrefix can be undefined!)
@@ -98,6 +95,14 @@ module.exports = function(section) {
       var tokens = parseContent(content);
       tokens.links = [];
 
+      marked.Parser.prototype.tok = function () {
+        if(this.token.type === 'table') {
+          return handleTable.call(this, this.token);
+        } else {
+          return handleTok.call(this);
+        }
+      };
+
       return marked.parser(tokens, markedDefaults);
     },
 
@@ -178,7 +183,11 @@ function handleHTML(t) {
 
     // if only one item in codeArray, then it's already parsed
     if(codeArray.length == 1) {
-      return t;
+      const htmlArray = codeArray[0].split(/\s*(<[^>]*>)/g).filter(v => (v !== '' && v !== '\n'));
+
+      if (htmlArray.length == 1) {
+        return t;
+      }
     }
 
     codeArray.forEach(item => {
@@ -195,6 +204,67 @@ function handleHTML(t) {
     });
 
     return tokens;
+}
+
+function handleTable(t) {
+  let cell = '';
+  let header = '';
+  let body = '';
+
+  for (let i = 0; i < t.header.length; i++) {
+    cell += handleTableCell(this.inline.output(t.header[i]), {
+      header: true,
+      align: t.align[i]
+    });
+  }
+
+  header += handleTableRow(cell);
+
+  for (let i = 0; i < t.cells.length; i++) {
+    let row = t.cells[i];
+    cell = '';
+
+    for (let j = 0; j < row.length; j++) {
+      cell += handleTableCell(this.inline.output(row[j]), {
+        header: false,
+        headerTitle: this.inline.output(t.header[j]),
+        align: t.align[j]
+      });
+    }
+
+    body += handleTableRow(cell);
+  }
+
+  return `
+    <div class="table">
+        <div class="table-wrap">
+          <div class="table-header">
+              ${header}
+          </div>
+          <div class="table-body">
+              ${body}
+          </div>
+        </div>
+    </div>`;
+}
+
+function handleTableRow(content) {
+  return `<div class="table-tr">${content}</div>`;
+}
+
+function handleTableCell(content, flags) {
+  if(flags.header) {
+    return `<div class="table-th">${content}</div>`;
+  }
+
+  return `<div class="table-td">
+    <div class="table-td-title">
+        ${flags.headerTitle}
+    </div>
+    <div class="table-td-content">
+        ${content}
+    </div>
+  </div>`;
 }
 
 function parseCustomQuote(token, match, className) {
@@ -223,6 +293,76 @@ function parseCustomQuote(token, match, className) {
           `<div class="tip-content"> ${text.slice(2).trim()} </div>` +
           '</blockquote>'
       };
+    }
+  }
+}
+
+// Code is copied from here (only table type was removed)
+// https://github.com/chjj/marked/blob/master/lib/marked.js#L975
+function handleTok() {
+  let body = '';
+
+  switch (this.token.type) {
+    case 'space': {
+      return '';
+    }
+    case 'hr': {
+      return this.renderer.hr();
+    }
+    case 'heading': {
+      return this.renderer.heading(
+        this.inline.output(this.token.text),
+        this.token.depth,
+        this.token.text);
+    }
+    case 'code': {
+      return this.renderer.code(this.token.text,
+        this.token.lang,
+        this.token.escaped);
+    }
+    case 'blockquote_start': {
+      while (this.next().type !== 'blockquote_end') {
+        body += this.tok();
+      }
+
+      return this.renderer.blockquote(body);
+    }
+    case 'list_start': {
+      let ordered = this.token.ordered;
+
+      while (this.next().type !== 'list_end') {
+        body += this.tok();
+      }
+
+      return this.renderer.list(body, ordered);
+    }
+    case 'list_item_start': {
+      while (this.next().type !== 'list_item_end') {
+        body += this.token.type === 'text'
+          ? this.parseText()
+          : this.tok();
+      }
+
+      return this.renderer.listitem(body);
+    }
+    case 'loose_item_start': {
+      while (this.next().type !== 'list_item_end') {
+        body += this.tok();
+      }
+
+      return this.renderer.listitem(body);
+    }
+    case 'html': {
+      let html = !this.token.pre && !this.options.pedantic
+        ? this.inline.output(this.token.text)
+        : this.token.text;
+      return this.renderer.html(html);
+    }
+    case 'paragraph': {
+      return this.renderer.paragraph(this.inline.output(this.token.text));
+    }
+    case 'text': {
+      return this.renderer.paragraph(this.parseText());
     }
   }
 }

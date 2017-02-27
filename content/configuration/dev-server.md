@@ -38,7 +38,7 @@ content is served from dist/
 
 that will give some background on where the server is located and what it's serving.
 
-If you're using dev-server through the Node.js API, the options in `devServer` will be ignored. Pass the options as a second parameter instead: `new WebpackDevServer(compiler, {...})`.
+If you're using dev-server through the Node.js API, the options in `devServer` will be ignored. Pass the options as a second parameter instead: `new WebpackDevServer(compiler, {...})`. [See here](https://github.com/webpack/webpack-dev-server/blob/master/examples/node-api-simple/server.js) for an example of how to use webpack-dev-server through the Node.js API.
 
 
 ## `devServer.clientLogLevel`
@@ -259,6 +259,24 @@ With `noInfo` enabled, messages like the webpack bundle information that is show
 noInfo: true
 ```
 
+## `devServer.overlay`
+
+`boolean` `object`
+
+Shows a full-screen overlay in the browser when there are compiler errors or warnings. Disabled by default. If you want to show only compiler errors:
+
+```js
+overlay: true
+```
+
+If you want to show warnings as well as errors: 
+
+```js
+overlay: {
+  warnings: true,
+  errors: true
+}
+```
 
 ## `devServer.port` - CLI only
 
@@ -382,6 +400,21 @@ With `quiet` enabled, nothing except the initial startup information will be wri
 
 ```js
 quiet: true
+```
+
+## `devServer.setup`
+
+`function`
+
+Here you can access the Express app object and add your own custom middleware to it.
+For example, to define custom handlers for some paths:
+     
+```js
+setup(app){
+  app.get('/some/path', function(req, res) {
+    res.json({ custom: 'response' });
+  });
+}
 ```
 
 

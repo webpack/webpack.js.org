@@ -51,7 +51,7 @@ One of the good options to go is using `cheap-module-source-map` which simplifie
 
 ### Node environment variable
 
-Running `webpack -p` (or `--define process.env.NODE_ENV="production"`) invokes the [`DefinePlugin`](/plugins/define-plugin) in the following way:
+Running `webpack -p` (or `--define process.env.NODE_ENV="'production'"`) invokes the [`DefinePlugin`](/plugins/define-plugin) in the following way:
 
 ```js
 // webpack.config.js
@@ -67,9 +67,9 @@ module.exports = {
 };
 ```
 
-The `DefinePlugin` performs search-and-replace operations on the original source code. Any occurrence of `process.env.NODE_ENV` in the imported code is replaced by by `"production"`. Thus, checks like `if (process.env.NODE_ENV !== 'production') console.log('...')` are evaluated to `if (false) console.log('...')` and finally minified away using `UglifyJS`.
+The `DefinePlugin` performs search-and-replace operations on the original source code. Any occurrence of `process.env.NODE_ENV` in the imported code is replaced by `"production"`. Thus, checks like `if (process.env.NODE_ENV !== 'production') console.log('...')` are evaluated to `if (false) console.log('...')` and finally minified away using `UglifyJS`.
 
-T> Technically, `NODE_ENV` is a system environment variable that Node.js exposes into running scripts. It is used by convention to determine development-vs-production behavior, by both server tools, build scripts, and client-side libraries. Contrary to expectations, `process.env.NODE_ENV` is not set to `"production"` __within__ the build script `webpack.config.js`, see [#2537](https://github.com/webpack/webpack/issues/2537). Thus, conditionals like `process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js'` do not work as expected.
+T> Technically, `NODE_ENV` is a system environment variable that Node.js exposes into running scripts. It is used by convention to determine development-vs-production behavior, by both server tools, build scripts, and client-side libraries. Contrary to expectations, `process.env.NODE_ENV` is not set to `"production"` __within__ the build script `webpack.config.js`, see [#2537](https://github.com/webpack/webpack/issues/2537). Thus, conditionals like `process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js'` do not work as expected. See how to use [environment variables](/guides/environment-variables).
 
 ## The manual way: Configuring webpack for multiple environments
 
@@ -222,7 +222,7 @@ module.exports = function(env) {
             }),
             new webpack.DefinePlugin({
                 'process.env': {
-                    'NODE_ENV': JSON.stringify('prod')
+                    'NODE_ENV': JSON.stringify('production')
                 }
             }),
             new webpack.optimize.UglifyJsPlugin({
@@ -243,8 +243,6 @@ module.exports = function(env) {
 You will notice three major updates to our 'prod.js' file.
 * 'webpack-merge' with the 'base.js'.
 * We have move 'output' property to 'base.js'. Just to stress on that point that our output property, here, is common across all our environments and that we refactored our 'prod.js' and moved it to our 'base.js', the common configuration file.
-* We have defined the 'process.env.NODE_ENV' to be 'prod' using the 'DefinePlugin'. Now across the application 'process.env.NODE_ENV' would have the value, 'prod', when we build our application for production environment. Likewise we can manage various variables of our choice, specific to environments this way.
+* We have defined the 'process.env.NODE_ENV' to be 'production' using the 'DefinePlugin'. Now across the application 'process.env.NODE_ENV' would have the value, 'production', when we build our application for production environment. Likewise we can manage various variables of our choice, specific to environments this way.
 
 The choice of what is going to be common across all your environments is up to you, however. We have just demonstrated a few that could typically be common across environments when we build our application.
-
-You just saw, how powerful 'webpack-merge' is, that, it just saved us from a lot of code repetitions.
