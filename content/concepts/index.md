@@ -34,7 +34,7 @@ There are multiple ways to declare your `entry` property that are specific to yo
 
 ## Output
 
-Once you've bundled all of your assets together, we still need to tell webpack **where** to bundle our application. The webpack `output` property describes to webpack **how to treat bundled code**.
+Once you've bundled all of your assets together, you still need to tell webpack **where** to bundle your application. The webpack `output` property tells webpack **how to treat bundled code**.
 
 **webpack.config.js**
 
@@ -50,7 +50,7 @@ module.exports = {
 };
 ```
 
-In the example above, through the `output.filename` and `output.path` properties we are describing to webpack the name of our bundle, and where we want it to be emitted to.
+In the example above, we use the `output.filename` and the `output.path` properties to tell webpack the name of our bundle and where we want it to be emitted to. 
 
 T> You may see the term **emitted** or **emit** used throughout our documentation and [plugin API](/api/plugins). This is a fancy term for "produced or discharged".
 
@@ -91,11 +91,11 @@ const config = {
 module.exports = config;
 ```
 
-In the configuration above we have defined a `rules` property for a single module with two required properties: `test`, and `use`. This tells webpack's compiler the following:
+The configuration above has defined a `rules` property for a single module with two required properties: `test`, and `use`. This tells webpack's compiler the following:
 
 > "Hey webpack compiler, when you come across a path that resolves to a '.js' or '.jsx' file inside of a `require()`/`import` statement, **use** the `babel-loader` to transform it before you add it to the bundle".
 
-W> It is important to remember when defining rules in your webpack config, you are defining them under `module.rules`, and not `rules`. But webpack will yell at you when doing this incorrectly.
+W> It is important to remember when defining rules in your webpack config, you are defining them under `module.rules`, and not `rules`. However webpack will yell at you when doing this incorrectly.
 
 There are more specific properties to define on loaders that we haven't yet covered.
 

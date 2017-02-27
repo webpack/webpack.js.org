@@ -183,7 +183,11 @@ function handleHTML(t) {
 
     // if only one item in codeArray, then it's already parsed
     if(codeArray.length == 1) {
-      return t;
+      const htmlArray = codeArray[0].split(/\s*(<[^>]*>)/g).filter(v => (v !== '' && v !== '\n'));
+
+      if (htmlArray.length == 1) {
+        return t;
+      }
     }
 
     codeArray.forEach(item => {
@@ -232,13 +236,15 @@ function handleTable(t) {
   }
 
   return `
-    <div class="table-wrap">
-      <div class="table-header">
-          ${header}
-      </div>
-      <div class="table-body">
-          ${body}
-      </div>
+    <div class="table">
+        <div class="table-wrap">
+          <div class="table-header">
+              ${header}
+          </div>
+          <div class="table-body">
+              ${body}
+          </div>
+        </div>
     </div>`;
 }
 

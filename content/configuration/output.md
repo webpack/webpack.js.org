@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - tomasAlabes
   - mattce
+  - irth
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -412,7 +413,7 @@ Be aware that if `MyLibrary` isn't defined earlier your library will be set in g
 `libraryTarget: "jsonp"` - This will wrap the return value of your entry point into a jsonp wrapper.
  
  ```javascript
- MyLibrary( _entry_return_ );
+ MyLibrary(_entry_return_);
  ```
 
 The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
@@ -524,6 +525,17 @@ sourcePrefix: "\t"
 Note by default an empty string is used. Using some kind of indention makes bundles look more pretty, but will cause issues with multi-line string.
 
 There is no need to change it.
+
+
+## `output.strictModuleExceptionHandling`
+
+`boolean`
+
+Tell webpack to remove a module from cache if it throws an exception when it is `require`d. 
+
+It defaults to `false` for performance reasons.
+
+When set to `false`, the module is not removed from cache, which results in the exception getting thrown only on the first `require` call (making it incompatible with node.js).
 
 
 ## `output.umdNamedDefine`
