@@ -1,5 +1,5 @@
 ---
-title: 代码拆分 - 库(Libraries)
+title: 代码分离 - Libraries
 sort: 32
 contributors:
   - pksjce

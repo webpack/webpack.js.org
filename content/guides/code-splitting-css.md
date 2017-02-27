@@ -1,5 +1,5 @@
 ---
-title: Code Splitting - CSS
+title: 代码分离 - CSS
 sort: 31
 contributors:
   - pksjce
@@ -67,3 +67,7 @@ module.exports = {
 ```
 
 通过以上两步，你可以将所有的 CSS 模块生成一个新的文件，同时你可以将它作为一个单独标签添加到 `index.html`中。
+
+***
+
+> 原文：https://webpack.js.org/guides/code-splitting-css/

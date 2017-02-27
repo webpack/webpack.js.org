@@ -7,7 +7,7 @@ contributors:
   - rouzbeh84
 ---
 
-在[模块化编程](https://en.wikipedia.org/wiki/Modular_programming)，开发者将程序分解成称为_模块_的离散功能块。
+在[模块化编程](https://en.wikipedia.org/wiki/Modular_programming)中，开发者将程序分解成离散功能块(discrete chunks of functionality)，并称之为_模块_。
 
 每个模块具有比完整程序更小的接触面，使得校验、调试、测试轻而易举。
 精心编写的_模块_提供了坚实的抽象和封装界限，使得应用程序中每个模块都具有一致的设计和明确的目的。
