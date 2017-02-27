@@ -75,7 +75,7 @@ module.exports = function(env) {
 }
 ```
 
-On running `webpack` now, we see that two bundles have been created. If you inspect these though, you will find that the code for `moment` is present in both the files!
+On running `webpack` now, we see that two bundles have been created. If you inspect these though, you will find that the code for `moment` is present in both the files! The reason for that is `moment` is a dependency of the main application ( e.g. index.js ) and each entry point will bundle its own dependencies.
 
 It is for this reason, that we will need to use the [CommonsChunkPlugin](/plugins/commons-chunk-plugin).
 
@@ -148,9 +148,9 @@ module.exports = function() {
 But, if we change application code and run `webpack` again, we see that the hash for the vendor file changes. Even though we achieved separate bundles for `vendor` and `main` bundles, we see that the `vendor` bundle changes when the application code changes.
 This means that we still don't reap the benefits of browser caching because the hash for vendor file changes on every build and the browser will have to reload the file.
 
-The issue here is that on every build, webpack generates some webpack runtime code, which helps webpack do it's job. When there is a single bundle, the runtime code resides in it. But when multiple bundles are generated, the runtime code is extracted into the common module, here the `vendor` file.
+The issue here is that on every build, webpack generates some webpack runtime code, which helps webpack do its job. When there is a single bundle, the runtime code resides in it. But when multiple bundles are generated, the runtime code is extracted into the common module, here the `vendor` file.
 
-To prevent this, we need extract out the runtime into a separate manifest file. Even though we are creating another bundle, the overhead is offset by the long term caching benefits that we obtain on the `vendor` file.
+To prevent this, we need to extract out the runtime into a separate manifest file. Even though we are creating another bundle, the overhead is offset by the long term caching benefits that we obtain on the `vendor` file.
 
 __webpack.config.js__
 

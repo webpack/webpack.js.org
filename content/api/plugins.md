@@ -445,10 +445,12 @@ An asset from a chunk was added to the compilation.
 The parser instance takes a String and callback and will return an expression when there's a match.
 
 ```javascript
-compiler.parser.plugin("var rewire", function (expr) {
-    //if you original module has 'var rewire'
-    //you now have a handle on the expresssion object
-    return true;
+compiler.plugin('compilation', function(compilation, data) {
+  data.normalModuleFactory.plugin('parser', function(parser, options) {
+    parser.plugin('call require', function(expr) {
+      // you now have a reference to the call expression
+    });
+  });
 });
 ```
 
@@ -560,7 +562,7 @@ To join paths any plugin should use `this.join`. It normalizes the paths. There 
 
 A bailing async forEach implementation is available on `this.forEachBail(array, iterator, callback)`.
 
-To pass the request to other resolving plugins, use the `this.doResolve(types: String|String[], request: Request, callback)` method. `types` are multiple possible request types that are tested in order of preference.
+To pass the request to other resolving plugins, use the `this.doResolve(types: String|String[], request: Request, callback)` or (`this.doResolve(types, request, message, callback)`) method. `types` are multiple possible request types that are tested in order of preference.
 
 ```javascript
 interface Request {

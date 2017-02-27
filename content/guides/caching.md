@@ -149,7 +149,7 @@ A sample output when using `WebpackManifestPlugin` in our config looks like:
 ## Deterministic hashes
 
 To minimize the size of generated files, webpack uses identifiers instead of module names. During compilation, identifiers are generated, mapped to chunk filenames and then put into a JavaScript object called *chunk manifest*.
-To generate identifiers that are preserved over builds, webpack supply the `NamedModulesPlugin` (recommended for development) and `HashedModuleIdsPlugin` (recommended for production).
+To generate identifiers that are preserved over builds, webpack supplies the `NamedModulesPlugin` (recommended for development) and `HashedModuleIdsPlugin` (recommended for production).
 
 ?> When exist, link to `NamedModulesPlugin` and `HashedModuleIdsPlugin` docs pages
 
@@ -266,7 +266,7 @@ Notice that **vendor chunk has the same filename**, and **so does the manifest**
 
 ## Manifest inlining
 
-Inlining the chunk manifest and webpack runtime (to prevent extra HTTP requests), depends on your server setup. There is a nice [walkthrough for Rails-based projects](http://clarkdave.net/2015/01/how-to-use-webpack-with-rails/#including-precompiled-assets-in-views). For server-side rendering in Node.js you can use [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools).
+Inlining the chunk manifest and webpack runtime (to prevent extra HTTP requests), depends on your server setup. There is a nice [walkthrough for Rails-based projects](https://brigade.engineering/setting-up-webpack-with-rails-c62aea149679). For server-side rendering in Node.js you can use [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools).
 
 T> If your application doesn’t rely on any server-side rendering, it’s often enough to generate a single `index.html` file for your application. To do so, use i.e. [`HtmlWebpackPlugin`](https://github.com/ampedandwired/html-webpack-plugin) in combination with [`ScriptExtHtmlWebpackPlugin`](https://github.com/numical/script-ext-html-webpack-plugin) or [`InlineManifestWebpackPlugin`](https://github.com/szrenwei/inline-manifest-webpack-plugin). It will simplify the setup dramatically.
 

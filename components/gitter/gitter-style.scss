@@ -1,0 +1,35 @@
+@import 'vars';
+@import 'mixins';
+@import 'functions';
+
+.gitter {
+  float: right;
+}
+
+.gitter__button {
+  position: fixed;
+  display: none;
+  padding: 1em;
+  bottom: 1.5em;
+  margin-left: -3.25em;
+  border-radius: 100%;
+  background: #59bcb7;
+  cursor: pointer;
+  transition: background 250ms;
+
+  &:hover {
+    background: darken(#59bcb7, 10%);
+  }
+
+  @include break {
+    display: block;
+  }
+}
+
+.gitter__icon { 
+  display: block;
+  font-size: 1.25em;
+  height: 1em;
+  overflow: hidden;
+  color: getColor(white); 
+}

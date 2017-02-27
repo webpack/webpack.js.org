@@ -1,4 +1,5 @@
 @import 'functions';
+@import 'mixins';
 
 code[class*="lang-"],
 pre[class*="lang-"] {
@@ -12,6 +13,7 @@ pre[class*="lang-"] {
   hyphens: none;
   //color: getColor(fiord);
   color: desaturate(getColor(malibu), 40%);
+  @include fontantialias(false);
 
   a {
     color: inherit;

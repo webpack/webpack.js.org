@@ -10,7 +10,7 @@ webpack is a tool which can be used to bundle application code and also to bundl
 
 ## Author a Library
 
-Let's assume that you are writing a small library `webpack-numbers` allowing to convert numbers 1 to 5 from their numeric to a textual representation and vice-versa. The implementation makes use of ES6 modules, and might look like this:
+Let's assume that you are writing a small library `webpack-numbers` allowing to convert numbers 1 to 5 from their numeric to a textual representation and vice-versa. The implementation makes use of ES2015 modules, and might look like this:
 
 __src/index.js__
 ```javascript
@@ -169,11 +169,13 @@ __package.json__
 
 ```javascript
 {
-    ...
     "main": "dist/webpack-numbers.js",
     "module": "src/index.js", // To add as standard module as per https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage
-    ...
 }
 ```
+
+The key `main` refers to the [standard from `package.json`](https://docs.npmjs.com/files/package.json#main), and `module` to [a](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md) [proposal](https://github.com/rollup/rollup/wiki/pkg.module) to allow the JavaScript ecosystem upgrade to use ES2015 modules without breaking backwards compatibility.
+
+W> `module` will point to a module that has ES2015 module syntax but otherwise only syntax features that browser/node supports.
 
 Now you can [publish it as an npm package](https://docs.npmjs.com/getting-started/publishing-npm-packages) and find it at [unpkg.com](https://unpkg.com/#/) to distribute it to your users.

@@ -64,25 +64,25 @@ require("any-template-language-loader!./xyz.atl");
 var html = anyTemplateLanguage.render("xyz");
 ```
 
-### Flag itself cacheable if possible
+### Do not keep state between runs and modules
 
-Most loaders are cacheable, so they should flag itself as cacheable.
+A loader should be independent of other modules compiled (except of these issued by the loader).
 
-Just call `cacheable` in the loader.
+A loader should be independent of previous compilations of the same module.
+
+### Use the [loader-utils](https://github.com/webpack/loader-utils)
+
+In order to make the experience consistent for other developers, you should use the loader-utils to get the loader options:
 
 ```javascript
-// Cacheable identity loader
+const loaderUtils = require("loader-utils");
+
 module.exports = function(source) {
-  this.cacheable();
-  return source;
+    const options = loaderUtils.getOptions(this);
 };
 ```
 
-### Do not keep state between runs and modules
-
-A loader should be independent of other modules compiled (expect of these issued by the loader).
-
-A loader should be independent of previous compilations of the same module.
+There are also other utility functions like `interpolateName`.
 
 ### Mark dependencies
 
@@ -92,7 +92,6 @@ If a loader uses external resources (i. e. by reading from filesystem), they **m
 // Loader adding a header
 var path = require("path");
 module.exports = function(source) {
-  this.cacheable();
   var callback = this.async();
   var headerPath = path.resolve("header.js");
   this.addDependency(headerPath);
@@ -143,30 +142,12 @@ return "var runtime = require(" +
 
 ### Use a library as `peerDependencies` when they wrap it
 
-using a peerDependency allows the application developer to specify the exact version in `package.json` if desired. The dependency should be relatively open to allow updating the library without needing to publish a new loader version.
+For instance, the [sass-loader specifies node-sass as peer dependency](https://github.com/webpack-contrib/sass-loader/blob/master/package.json):
 
 ``` javascript
 "peerDependencies": {
-  "library": "^1.3.5"
+  "node-sass": "^4.0.0"
 }
 ```
 
-### Programmable objects as `query`-option
-
-there are situations where your loader requires programmable objects with functions which cannot stringified as `query`-string. The `less-loader`, for example, provides the possibility to specify [LESS-plugins](https://github.com/webpack/less-loader#less-plugins). In these cases, a loader is allowed to extend webpack's `options`-object to retrieve that specific option. In order to avoid name collisions, however, it is important that the option is namespaced under the loader's camelCased npm-name.
-
-**Example:**
-
-```javascript
-// webpack.config.js
-module.exports = {
-  ...
-  lessLoader: {
-    lessPlugins: [
-      new LessPluginCleanCSS({advanced: true})
-    ]
-  }
-};
-```
-
-The loader should also allow to specify the config-key (e.g. `lessLoader`) via `query`. See [discussion](https://github.com/webpack/less-loader/pull/40) and [example implementation](https://github.com/webpack/less-loader/blob/39f742b4624fceae6d9cf266e9554d07a32a9c14/index.js#L49-51).
+Using a peer dependency allows the application developer to specify the exact version in the `package.json` if desired.
