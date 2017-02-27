@@ -70,7 +70,7 @@ This is a concise way to display loaders, and helps to maintain clean code. It a
         use: [
           { loader: ['style-loader'](/loaders/style-loader)},
           {
-            loader: ['css-loader'](/loaders/css-loader)},
+            loader: ['css-loader'](/loaders/css-loader),
             options: {
               modules: true
             }
