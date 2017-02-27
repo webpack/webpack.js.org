@@ -20,7 +20,6 @@ webpack [--config webpack.config.js]
 ```
 
 配置文件中的相关选项，请参阅[配置](/configuration)。
-See [configuration](/configuration) for the options in the configuration file.
 
 ## 不使用配置文件的用法
 ```sh

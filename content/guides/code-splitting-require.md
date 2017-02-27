@@ -1,5 +1,5 @@
 ---
-title: 代码拆分 - 使用 require.ensure
+title: 代码分离 - 使用 require.ensure
 sort: 33
 contributors:
   - pksjce
