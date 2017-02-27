@@ -59,19 +59,18 @@ module.exports = {
 
 ### 通过 `webpack.config.js`
 
-[`module.rules`](https://webpack.js.org/configuration/module/#module-rules) 允许你在 webpack 配置中指定几个 loader。
+[`module.rules`](/configuration/module/#module-rules) 允许你在 webpack 配置中指定几个 loader。
+这是展示 loader 的一种简明的方式，并且有助于使代码变得简洁。而且对每个相应的 loader 有一个完整的概述。
 
-这是展示 loader 的一种简明的方式，并且有助于简洁代码，以及对每个相应的 loader 有一个完整的概述。
-
-```js
+```js-with-links-with-details
   module: {
     rules: [
       {
         test: /\.css$/,
         use: [
-          { loader: 'style-loader'},
+          { loader: ['style-loader'](/loaders/style-loader)},
           {
-            loader: 'css-loader',
+            loader: ['css-loader'](/loaders/css-loader)},
             options: {
               modules: true
             }

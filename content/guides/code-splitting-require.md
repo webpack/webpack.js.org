@@ -13,7 +13,7 @@ W> `require.ensure` 是 webpack 特有的, 查看 [`import()`](/guides/code-spli
 
 ## `require.ensure()`
 
-webpack 在构建时，会静态地解析代码中的 `require.ensure()`，在其中 callback 中的任何代码，包括被 `require()` 的代码，将被分离到一个新的 chunk 当中。这个新的 chunk 会被生成为异步的 bundle，由 webpack 通过 `jsonp` 来按需加载。
+webpack 在构建时，会静态地解析代码中的 `require.ensure()`。在回调函数中，任何引用的依赖模块，或被 `require()` 的代码，都将被分离到一个新的 chunk 中。这个新的 chunk 会被生成为异步的 bundle，由 webpack 通过 `jsonp` 来按需加载。
 
 语法如下：
 
@@ -40,6 +40,7 @@ require.ensure(dependencies: String[], callback: function(require), chunkName: S
 ├── js
 │   ├── a.js
 │   ├── b.js
+│   ├── c.js
 │   └── entry.js
 └── webpack.config.js
 ```
@@ -48,8 +49,9 @@ require.ensure(dependencies: String[], callback: function(require), chunkName: S
 
 ```javascript
 require('./a');
-require.ensure([], function(require){
-    require('./b');
+require.ensure(['./b'], function(require){
+    require('./c');
+    console.log('done!');
 });
 ```
 
@@ -65,6 +67,12 @@ console.log('***** I AM a *****');
 console.log('***** I AM b *****');
 ```
 
+**c.js**
+
+```javascript
+console.log('***** I AM c *****');
+```
+
 **webpack.config.js**
 
 ```javascript
@@ -75,16 +83,107 @@ module.exports = function(env) {
         entry: './js/entry.js',
         output: {
             filename: 'bundle.js',
-            path: path.resolve(__dirname, 'dist')
+            path: path.resolve(__dirname, 'dist'),
+            publicPath: 'https://cdn.example.com/assets/',
+            // tell webpack where to load the on-demand bundles.
+
+            pathinfo: true,
+            // show comments in bundles, just to beautify the output of this example.
+            // should not be used for production.
         }
     }
 }
+
 ```
+
+T> `output.publicPath` is an important option when using code-splitting, it is used to tell webpack where to load your bundles on-demand, see the [configuration documentation](/configuration/output/#output-publicpath).
+
 通过执行这个项目的 webpack 构建，我们发现 webpack 创建了 2 个新的 bundle，`bundle.js` 和 `0.bundle.js`。
 
 `entry.js` 和 `a.js` 被打包进 `bundle.js`。
 
-`b.js` 被打包进 `0.bundle.js`。
+**bundle.js**
+
+```javascript
+/******/ (function(modules) { // webpackBootstrap
+//webpack bootstrap code...
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "https://cdn.example.com/assets/";
+
+// webpack bootstrap code...
+/******/ })
+/******/ ([
+/* 0 */
+/* unknown exports provided */
+/* all exports used */
+/*!*****************!*\
+  !*** ./js/a.js ***!
+  \*****************/
+/***/ (function(module, exports) {
+
+console.log('***** I AM a *****');
+
+
+/***/ }),
+/* 1 */,
+/* 2 */,
+/* 3 */
+/* unknown exports provided */
+/* all exports used */
+/*!*********************!*\
+  !*** ./js/entry.js ***!
+  \*********************/
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(/*! ./a */ 0);
+__webpack_require__.e/* require.ensure */(0).then((function(require){
+    __webpack_require__(/*! ./c */ 2);
+    console.log('done!');
+}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+
+
+/***/ })
+/******/ ]);
+```
+
+T> We can see the specified **webpack public path** on `__webpack_require__.p` in the bootstrap code, it corresponds to our `output.publicPath` configuration on above.
+
+`b.js` 和 `c.js` 被打包进 `0.bundle.js`。
+
+**0.bundle.js**
+```javascript
+webpackJsonp([0],[
+/* 0 */,
+/* 1 */
+/* unknown exports provided */
+/* all exports used */
+/*!*****************!*\
+  !*** ./js/b.js ***!
+  \*****************/
+/***/ (function(module, exports) {
+
+console.log('***** I AM b *****');
+
+
+/***/ }),
+/* 2 */
+/* unknown exports provided */
+/* all exports used */
+/*!*****************!*\
+  !*** ./js/c.js ***!
+  \*****************/
+/***/ (function(module, exports) {
+
+console.log('***** I AM c *****');
+
+
+
+/***/ })
+]);
+```
+
+Now just add `bundle.js` in your HTML file and open it in your broswer, the `0.bundle.js` will be loaded on demand (from `https://cdn.example.com/assets/0.bundle.js`) by webpack.
 
 W> `require.ensure` 内部依赖于 `Promises`。 如果你在旧的浏览器中使用 `require.ensure` 请记得去 shim `Promise` [es6-promise polyfill](https://github.com/stefanpenner/es6-promise)。
 
@@ -107,12 +206,12 @@ require.ensure([], function(require){
 ### 依赖作为参数
 
 ```javascript
-require.ensure(['./a.js'], function(require) {
-    require('./b.js');
+require.ensure(['./b.js'], function(require) {
+    require('./c.js');
 });
 ```
 
-上面代码中，`a.js` 和 `b.js` 都被打包到一起，而且从主 bundle 中拆分出来。但只有 `b.js` 的内容被执行。`a.js` 的内容仅仅是可被使用，但并没有被执行。想要执行 `a.js`，我们必须以同步的方式引用它，如 `require('./a.js')`，来让它的代码被执行。
+上面代码中，`b.js` 和 `c.js` 都被打包到一起，而且从主 bundle 中拆分出来。但只有 `c.js` 的内容被执行。`b.js` 的内容仅仅是可被使用，但并没有被执行。想要执行 `b.js`，我们必须以同步的方式引用它，如 `require('./b.js')`，来让它的代码被执行。
 
 ***
 

@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - tomasAlabes
   - mattce
+  - irth
 ---
 
  `output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
@@ -411,7 +412,7 @@ Be aware that if `MyLibrary` isn't defined earlier your library will be set in g
 `libraryTarget: "jsonp"` - This will wrap the return value of your entry point into a jsonp wrapper.
 
  ```javascript
- MyLibrary( _entry_return_ );
+ MyLibrary(_entry_return_);
  ```
 
 你的 library 的依赖将由 [`externals`](/configuration/externals/) 配置定义。
@@ -524,6 +525,17 @@ sourcePrefix: "\t"
 注意，默认情况下使用空字符串。使用一些缩进会看起来更美观，但是可能导致多行字符串中的问题。
 
 这里没有必要修改它。
+
+
+## `output.strictModuleExceptionHandling`
+
+`boolean`
+
+Tell webpack to remove a module from cache if it throws an exception when it is `require`d. 
+
+It defaults to `false` for performance reasons.
+
+When set to `false`, the module is not removed from cache, which results in the exception getting thrown only on the first `require` call (making it incompatible with node.js).
 
 
 ## `output.umdNamedDefine`

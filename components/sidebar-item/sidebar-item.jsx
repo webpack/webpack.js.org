@@ -11,11 +11,12 @@ export default class SidebarItem extends React.Component {
   }
 
   render() {
-    let { index, url, title, anchors = [] } = this.props;
+    let { index, url, title, anchors = [], currentPage } = this.props;
 
     let emptyMod = !anchors.length ? 'sidebar-item--empty' : '';
     let openMod = (this.state.open) ? 'sidebar-item--open' : '';
     let anchorUrl = url + '#';
+    let isCurrentPage = `/${currentPage}` === url;
 
     return (
       <div className={ `sidebar-item ${emptyMod} ${openMod}` }>
@@ -25,7 +26,7 @@ export default class SidebarItem extends React.Component {
           {
             anchors.map((anchor, j) => (
               <li className="sidebar-item__anchor" key={ `anchor-${index}-${j}` }>
-                <a href={ anchorUrl + anchor.id }>{ anchor.title}</a>
+                <a href={ isCurrentPage ? `#${anchor.id}` : anchorUrl + anchor.id }>{ anchor.title}</a>
               </li>
             ))
           }

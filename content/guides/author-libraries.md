@@ -5,6 +5,7 @@ contributors:
     - johnstew
     - simon04
 ---
+
 webpack 是一个用来打包应用程序(application)和 library 的代码的工具。如果你是一个 JavaScript library 的作者，并且想要流水线化(streamline)你的打包逻辑，那么这篇文档将会帮助到你。
 
 ## 创建一个 library
@@ -58,11 +59,12 @@ webpackNumbers.numToWord(3); // 输出 Three
 </script>
 </html>
 ```
+
 完整的 library 配置和相关代码请参阅 [webpack library 示例](https://github.com/kalcifer/webpack-library-example)。
 
 ## 配置 webpack
 
-现在需要打包这个 library，同时要完成以下要求：
+现在需要打包这个 library，同时要完成以下要求
   - 不要打包 lodash，而是 require 用户加载好的 lodash。
   - library 的名字是 `webpack-numbers`，其变量名是 `webpackNumbers`。
   - library 可以用两种方式来引入：`import webpackNumbers from 'webpack-numbers'` 或者 `require('webpack-numbers')`。
@@ -164,17 +166,14 @@ __package.json__
 
 ```javascript
 {
-    ...
     "main": "dist/webpack-numbers.js",
     "module": "src/index.js", // 增加标准的模块，参照：https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage
-    ...
 }
 ```
 
-__Important Note:__ `module` will point to a module that has ES2015 module syntax but otherwise only syntax features that browser/node supports.
+The key `main` refers to the [standard from `package.json`](https://docs.npmjs.com/files/package.json#main), and `module` to [a](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md) [proposal](https://github.com/rollup/rollup/wiki/pkg.module) to allow the JavaScript ecosystem upgrade to use ES2015 modules without breaking backwards compatibility.
 
-Now you can [publish it as an npm package](https://docs.npmjs.com/getting-started/publishing-npm-packages) and find it at [unpkg.com](https://unpkg.com/#/) to distribute it to your users.
-__重要提示：__ `module` 将指向一个含有 ES2015 模块语法的模块，但是只有在支持此语法功能的浏览器或 Node.js 版本中才可用。
+W> `module` 将指向一个含有 ES2015 模块语法的模块，但是只有在支持此语法功能的浏览器或 Node.js 版本中才可用。
 
 现在你可以[将其作为一个 npm 包来发布](https://docs.npmjs.com/getting-started/publishing-npm-packages)，并且在 [unpkg.com](https://unpkg.com/#/) 找到它并分发给你的用户。
 

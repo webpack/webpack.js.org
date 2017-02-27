@@ -158,11 +158,10 @@ new webpack.optimize.CommonsChunkPlugin({
 new webpack.optimize.CommonsChunkPlugin({
   name: "my-single-lib-chunk",
   filename: "my-single-lib-chunk.js",
-  minChunks: function(module, countOfHowManyTimesThisModuleIsUsedAcrossAllChunks) {
+  minChunks: function(module, count) {
     // 如果模块是一个路径，而且在路径中有 "somelib" 这个名字出现，
     // 而且它还被三个不同的 chunks/入口chunk 所使用，那请将它拆分到
-    // 另一个分开的 chunk 中，chunk 的 keyname 是 "my-single-lib-chunk"， 而文件名是
-    // "my-single-lib-chunk.js"
+    // 另一个分开的 chunk 中，chunk 的 keyname 是 "my-single-lib-chunk"，而文件名是 "my-single-lib-chunk.js"
     return module.resource && (/somelib/).test(module.resource) && count === 3;
   }
 });

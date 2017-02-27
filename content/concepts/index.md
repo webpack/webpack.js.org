@@ -34,7 +34,7 @@ module.exports = {
 
 ## 出口(Output)
 
-将所有的资源(assets)归拢在一起后，我们还需要告诉 webpack **在哪里**打包我们的应用程序。webpack 的 `output` 属性描述了**如何处理归拢在一起的代码**(bundled code)。
+将所有的资源(assets)归拢在一起后，还需要告诉 webpack **在哪里**打包应用程序。webpack 的 `output` 属性描述了**如何处理归拢在一起的代码**(bundled code)。
 
 **webpack.config.js**
 
@@ -50,7 +50,7 @@ module.exports = {
 };
 ```
 
-在上面例子中，我们正在通过 `output.filename` 和 `output.path` 属性来描述 webpack bundle 的名称，以及我们想要生成(emit)在哪里。
+在上面的例子中，我们通过 `output.filename` 和 `output.path` 属性，来告诉 webpack bundle 的名称，以及我们想要生成(emit)到哪里。
 
 T> 你可能看到项目**生成(emitted 或 emit)**贯穿我们整个文档和[插件 API](/api/plugins)。它是“生产(produced) 或 排放(discharged)”的特殊术语。
 
@@ -91,11 +91,11 @@ const config = {
 module.exports = config;
 ```
 
-以上配置中，我们对一个单独的 module 对象定义了 `rules` 属性，里面包含两个必须属性：`test` 和 `use`。这可以告诉 webpack compiler 如下：
+以上配置中，对一个单独的 module 对象定义了 `rules` 属性，里面包含两个必须属性：`test` 和 `use`。这可以告诉 webpack compiler 如下：
 
 > “嘿，webpack compiler，当你碰到「在 `require()`/`import` 语句中被解析为 '.js' 或 '.jsx' 的路径」时，在你把它们添加并打包之前，要先**使用** `babel-loader` 去转换”。
 
-W> 重要的是要记得，在 webpack 配置中定义 loader 时，要定义在 `module.rules` 中，而不是 `rules`。在定义错时 webpack 会给出严重的警告。
+W> 重要的是要记得，在 webpack 配置中定义 loader 时，要定义在 `module.rules` 中，而不是 `rules`。然而，在定义错误时 webpack 会给出严重的警告。
 
 我们还有尚未提到的 loader，可以设定更多特定属性。
 

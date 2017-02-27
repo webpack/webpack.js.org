@@ -141,7 +141,6 @@ T> 输出可能会稍有不同。如果构建成功，那么你就可以继续�
 __webpack.config.js__
 ```javascript
 var path = require('path');
-var webpack = require("webpack");
 
 module.exports = {
   entry: './app/index.js',

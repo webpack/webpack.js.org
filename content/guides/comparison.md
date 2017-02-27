@@ -41,6 +41,7 @@ webpack 不仅仅作为模块打包器存在。如果你要在使用 webpack 或
 | 执行时(runtime)开销 | **243B + 20B 每个模块 + 4B 每个依赖** | 14.7kB + 0B 每个模块 + (3B + X) 每个依赖 | 415B + 25B 每个模块 + (6B + 2X) 每个依赖 | 5.5kB for 自执行 bundle, 38kB 全部 loader 和 polyfill, 0 普通模块, 293B CJS, 139B ES2015 System.register before gzip | **none for ES2015 modules**（可能有其他格式） | |
 | 开发文件监听(watch)模式 | yes | 不需要 | yes | 开发不需要 | no | yes |
 
+
 ♦ 在生产模式（在开发模式中相反）
 
 X是路径字符串的长度

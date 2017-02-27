@@ -135,7 +135,7 @@ module.exports = {
         ],
         [exclude](/configuration/module#rule-exclude): [
           path.resolve(__dirname, "app/demo-files")
-        ]
+        ],
         // 这里是匹配条件，每个选项都接收一个正则表达式或字符串
         // test 和 include 具有相同的作用，都是必须匹配选项
         // exclude 是必不匹配选项（优先于 test 和 include）
@@ -177,16 +177,16 @@ module.exports = {
         ]
       },
 
-      { [oneOf](/configuration/module#rule-oneof): [ /* rules */ ] }
+      { [oneOf](/configuration/module#rule-oneof): [ /* rules */ ] },
       // 只使用这些嵌套规则之一
 
-      { [rules](/configuration/module#rule-rules): [ /* rules */ ] }
+      { [rules](/configuration/module#rule-rules): [ /* rules */ ] },
       // 使用所有这些嵌套规则（合并可用条件）
 
-      { [resource](/configuration/module#rule-resource): { [and](/configuration/module#condition): [ /* 条件 */ ] } }
+      { [resource](/configuration/module#rule-resource): { [and](/configuration/module#condition): [ /* 条件 */ ] } },
       // 仅当所有条件都匹配时才匹配
 
-      { [resource](/configuration/module#rule-resource): { [or](/configuration/module#condition): [ /* 条件 */ ] } }
+      { [resource](/configuration/module#rule-resource): { [or](/configuration/module#condition): [ /* 条件 */ ] } },
       { [resource](/configuration/module#rule-resource): [ /* 条件 */ ] }
       // 任意条件匹配时匹配（默认为数组）
 

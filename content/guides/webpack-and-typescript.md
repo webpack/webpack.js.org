@@ -18,8 +18,8 @@ contributors:
 
 你可以通过 npm 安装 TypeScript 编译器和 TypeScript loader，运行下面这个命令来安装：
  `npm install --save-dev typescript ts-loader`
- 
-__tsconfig.json__ 
+
+__tsconfig.json__
 
 tsconfig 配置文件可以从一个空白的文件逐一添加配置项，下面有一个基本的配置示例，用来把 TypeScript 代码编译成 es5 代码，同时支持 JSX。
 
@@ -64,7 +64,7 @@ module.exports = {
  },
 };
 ```
- 
+
 这个例子里我们指定了入口起点为当前目录的 __index.ts__ 文件，输出文件命名为 __bundle.js__，以及负责把 TypeScript 编译成 JavaScript的 TypeScript loader，同时也添加了 `resolve.extensions` 来告诉 webpack 在解析查找 TypeScript 模块时该检索哪些文件扩展名。
 
 ## TypeScript loaders
@@ -82,7 +82,7 @@ Awesome TypeScript loader 文档里已经很好的解释了 `awesome-typescript-
 ## 启用 source maps 功能
 
 为了启用 source maps 功能，首先必须配置 TypeScript 将 source maps 内联输出到编译好的 JavaScript 文件，可通过将 sourceMap 属性设置为 true 来实现。
- 
+
 __tsconfig.json__
 ```json
 {
@@ -130,11 +130,11 @@ module.exports = {
 
 这个 loader 安装完成后，我们想让这个 loader 比其他任何 loader 都要先运行，可以使用 `enforce: 'pre'` 这个配置项来标记。
 最后，我们需要通过指定 `devtool` 来启用 webpack 的 source maps 功能。
-当前我们使用的是 'inline-source-map' 这个属性值。想了解更多关于这个属性值的特性和其他属性值选项，可以查看 [devtool 文档](https://webpack.js.org/configuration/devtool/)。
+当前我们使用的是 'inline-source-map' 这个属性值。想了解更多关于这个属性值的特性和其他属性值选项，可以查看 [devtool 文档](/configuration/devtool/)。
 
- 
- 
- 
+
+
+
 
 ## 使用第三方库
 
@@ -167,6 +167,6 @@ declare module "*.svg" {
 这不仅适用于 svg，也适用于其他任何你想使用的自定义 loader，包括css，scss，json或是你希望加载到项目中的其他任何文件。
 
 ***
- 
+
 
 > 原文：https://webpack.js.org/guides/webpack-and-typescript/
