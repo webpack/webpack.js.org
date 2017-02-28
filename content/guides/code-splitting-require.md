@@ -13,7 +13,7 @@ W> `require.ensure` 是 webpack 特有的, 查看 [`import()`](/guides/code-spli
 
 ## `require.ensure()`
 
-webpack 在构建时，会静态地解析代码中的 `require.ensure()`。在回调函数中，任何引用的依赖模块，或被 `require()` 的代码，都将被分离到一个新的 chunk 中。这个新的 chunk 会被生成为异步的 bundle，由 webpack 通过 `jsonp` 来按需加载。
+webpack 在构建时，会静态地解析代码中的 `require.ensure()`。在其中任何被引用的依赖，或在回调函数中被 `require()` 的模块，都将被分离到一个新的 chunk 中。这个新的 chunk 会被生成为异步的 bundle，由 webpack 通过 `jsonp` 来按需加载。
 
 语法如下：
 
@@ -85,18 +85,18 @@ module.exports = function(env) {
             filename: 'bundle.js',
             path: path.resolve(__dirname, 'dist'),
             publicPath: 'https://cdn.example.com/assets/',
-            // tell webpack where to load the on-demand bundles.
-
+            // 告诉 webpack 到哪里加载你的 bundle。
+            
             pathinfo: true,
-            // show comments in bundles, just to beautify the output of this example.
-            // should not be used for production.
-        }
+            // 在 bundle 中显示一些路径注释，这是为了使这个例子直观一点。
+            // 不应该在生产环境中开启。
+        }
     }
 }
 
 ```
 
-T> `output.publicPath` is an important option when using code-splitting, it is used to tell webpack where to load your bundles on-demand, see the [configuration documentation](/configuration/output/#output-publicpath).
+T> 当你使用代码分离功能时，`output.publicPath` 是一个重要的配置项，它用来告诉 webpack 到哪里去加载你的 bundle。参考 [配置文档](/configuration/output/#output-publicpath)。
 
 通过执行这个项目的 webpack 构建，我们发现 webpack 创建了 2 个新的 bundle，`bundle.js` 和 `0.bundle.js`。
 
@@ -106,12 +106,12 @@ T> `output.publicPath` is an important option when using code-splitting, it is u
 
 ```javascript
 /******/ (function(modules) { // webpackBootstrap
-//webpack bootstrap code...
+//webpack 启动的初始化代码...
 
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "https://cdn.example.com/assets/";
 
-// webpack bootstrap code...
+// webpack 启动的初始化代码...
 /******/ })
 /******/ ([
 /* 0 */
@@ -147,7 +147,7 @@ __webpack_require__.e/* require.ensure */(0).then((function(require){
 /******/ ]);
 ```
 
-T> We can see the specified **webpack public path** on `__webpack_require__.p` in the bootstrap code, it corresponds to our `output.publicPath` configuration on above.
+T> 我们可以看到在生成的启动代码中使用 `__webpack_require__.p` 指定了 **webpack 的公共路径(webpack public path)**，这是根据我们上面的 `output.publicPath` 配置项生成的。
 
 `b.js` 和 `c.js` 被打包进 `0.bundle.js`。
 
@@ -183,7 +183,7 @@ console.log('***** I AM c *****');
 ]);
 ```
 
-Now just add `bundle.js` in your HTML file and open it in your broswer, the `0.bundle.js` will be loaded on demand (from `https://cdn.example.com/assets/0.bundle.js`) by webpack.
+现在把 `bundle.js` 放到你的页面中然后在浏览器中打开，`0.bundle.js` 将会被 webpack 按需加载（从 `https://cdn.example.com/assets/0.bundle.js` 这个地址）。
 
 W> `require.ensure` 内部依赖于 `Promises`。 如果你在旧的浏览器中使用 `require.ensure` 请记得去 shim `Promise` [es6-promise polyfill](https://github.com/stefanpenner/es6-promise)。
 
