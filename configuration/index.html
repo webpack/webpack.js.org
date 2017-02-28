@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/2547f5036cc9ee602d35.css" rel="stylesheet">
+      <link href="/d52c340abeb9d0306f0e.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -339,7 +339,16 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </details>  <span class="token comment" spellcheck="true">// lets you precisely control what bundle information gets displayed</span>
 
   <a class="code-link" href="/configuration/dev-server">devServer</a><span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">/* TODO */</span>
+    proxy<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// proxy URLs to backend development server</span>
+      <span class="token string">&apos;/api&apos;</span><span class="token punctuation">:</span> <span class="token string">&apos;http://localhost:3000&apos;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    contentBase<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&apos;public&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// boolean | string | array, static file location</span>
+    compress<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// enable gzip compression</span>
+    historyApiFallback<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// true for index.html upon 404, object for multiple paths</span>
+    hot<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// hot module replacement. Depends on HotModuleReplacementPlugin</span>
+    https<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// true for self-signed, object for cert authority</span>
+    noInfo<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// only errors &amp; warns on hot reload</span>
+    <span class="token comment" spellcheck="true">// ...</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 
   <a class="code-link" href="plugins">plugins</a><span class="token punctuation">:</span> <span class="token punctuation">[</span>
