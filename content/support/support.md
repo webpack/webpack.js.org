@@ -30,4 +30,15 @@ Developers can help by doing any of the following:
 (Add slides here regarding monetary value)
 
 ### How You Can Support Webpack As A Company
-**
+You can support Webpack as a company by:
+* Contributing developers that are not actively working on a project
+* Contributing computing power for improved CI and regression testing
+
+### I Can't Provide These Things, What Else Can I Do?
+You can encourage your developers to contribute to the ecosystem, open sourcing tools, loaders, and plugins for Webpack, and helping increase our CI/CD infrastructure.
+
+## VC, Government, Digital Agencies
+We want you to work with us, one the top NPM libraries to improve your product!
+
+### Sales Pitch
+(add slides here)
