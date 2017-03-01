@@ -2,6 +2,7 @@
 title: webpack & Typescript
 contributors:
   - morsdyce
+  - kkamali
 ---
 
 [TypeScript](https://www.typescriptlang.org) is a typed superset of JavaScript that compiles to plain JavaScript, in this guide we will learn how to integrate Typescript with webpack.
@@ -114,9 +115,8 @@ module.exports = {
        loader: "source-map-loader"
      },
      {
-       enforce: 'pre',
        test: /\.tsx?$/,
-       use: "source-map-loader"
+       use: “ts-loader”
      }
    ]
  },
