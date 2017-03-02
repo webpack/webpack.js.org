@@ -85,10 +85,10 @@ module.exports = function(env) {
             filename: 'bundle.js',
             path: path.resolve(__dirname, 'dist'),
             publicPath: 'https://cdn.example.com/assets/',
-            // 告诉 webpack 到哪里加载你的 bundle。
+            // 告诉 webpack 从哪里加载所需的 bundle。
             
             pathinfo: true,
-            // 在 bundle 中显示一些路径注释，这是为了使这个例子直观一点。
+            // 在 bundle 中显示一些路径注释信息，这只是为了美化此示例的输出。
             // 不应该在生产环境中开启。
         }
     }
@@ -96,7 +96,7 @@ module.exports = function(env) {
 
 ```
 
-T> 当你使用代码分离功能时，`output.publicPath` 是一个重要的配置项，它用来告诉 webpack 到哪里去加载你的 bundle。参考 [配置文档](/configuration/output/#output-publicpath)。
+T> 当你使用代码分离功能时，`output.publicPath` 是一个重要的配置项，它用来告诉 webpack 从哪里去加载所需的 bundle。查看[配置文档](/configuration/output/#output-publicpath)。
 
 通过执行这个项目的 webpack 构建，我们发现 webpack 创建了 2 个新的 bundle，`bundle.js` 和 `0.bundle.js`。
 
@@ -106,12 +106,12 @@ T> 当你使用代码分离功能时，`output.publicPath` 是一个重要的配
 
 ```javascript
 /******/ (function(modules) { // webpackBootstrap
-//webpack 启动的初始化代码...
+// webpack 的引导程序代码……
 
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "https://cdn.example.com/assets/";
 
-// webpack 启动的初始化代码...
+// webpack 的引导程序代码……
 /******/ })
 /******/ ([
 /* 0 */
@@ -147,7 +147,7 @@ __webpack_require__.e/* require.ensure */(0).then((function(require){
 /******/ ]);
 ```
 
-T> 我们可以看到在生成的启动代码中使用 `__webpack_require__.p` 指定了 **webpack 的公共路径(webpack public path)**，这是根据我们上面的 `output.publicPath` 配置项生成的。
+T> 我们可以看到在生成的引导程序代码中使用 `__webpack_require__.p` 指定了 **webpack 的公共路径(webpack public path)**，这是根据我们上面的 `output.publicPath` 配置项对应生成的。
 
 `b.js` 和 `c.js` 被打包进 `0.bundle.js`。
 
@@ -183,7 +183,7 @@ console.log('***** I AM c *****');
 ]);
 ```
 
-现在把 `bundle.js` 放到你的页面中然后在浏览器中打开，`0.bundle.js` 将会被 webpack 按需加载（从 `https://cdn.example.com/assets/0.bundle.js` 这个地址）。
+现在把 `bundle.js` 添加你的页面中，然后在浏览器中打开，`0.bundle.js` 将会被 webpack 按需加载（从 `https://cdn.example.com/assets/0.bundle.js` 访问）。
 
 W> `require.ensure` 内部依赖于 `Promises`。 如果你在旧的浏览器中使用 `require.ensure` 请记得去 shim `Promise` [es6-promise polyfill](https://github.com/stefanpenner/es6-promise)。
 
