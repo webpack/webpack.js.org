@@ -1,10 +1,9 @@
 ---
-title: Support Us
+title: Why Support webpack?
 contributors:
   - scottdj92
 ---
 
-# Why Support webpack?
 First and foremost, the people who contribute to webpack, do so for the love of open source, love for our users and ecosystem, and most importantly, pushing the web forward together. Because of our [Open Collective](http://opencollective.com/webpack) model for funding and transparency, we are able to funnel support and funds through contributors, dependent projects, and the contributor and core teams. But what is the return on the investment?
 
 ## Developers
@@ -18,7 +17,7 @@ Developers can help by doing any of the following:
 
 ### How Can I Ask My Employer To Use webpack?
 
-(add stuff here)
+You can ask your employer to improve your workflow by leveraging webpack: an all-in-one tool for fonts, images and image optimiziation, and json. webpack will attempt to bundle your code and assets the best it can for the smallest file size, which means a faster web site/app.
 
 ### Sales Pitch
 (Add slides here)
