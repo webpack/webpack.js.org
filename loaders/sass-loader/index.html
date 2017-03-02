@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/d52c340abeb9d0306f0e.css" rel="stylesheet">
+      <link href="/f79b344a0c85922d6c3a.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -111,13 +111,13 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         rules<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
             test<span class="token punctuation">:</span> <span class="token regex">/\.scss$/</span><span class="token punctuation">,</span>
             loader<span class="token punctuation">:</span> extractSass<span class="token punctuation">.</span><span class="token function">extract</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-                loader<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+                use<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
                     loader<span class="token punctuation">:</span> <span class="token string">&quot;css-loader&quot;</span>
                 <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
                     loader<span class="token punctuation">:</span> <span class="token string">&quot;sass-loader&quot;</span>
                 <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
                 <span class="token comment" spellcheck="true">// use style-loader in development</span>
-                fallbackLoader<span class="token punctuation">:</span> <span class="token string">&quot;style-loader&quot;</span>
+                fallback<span class="token punctuation">:</span> <span class="token string">&quot;style-loader&quot;</span>
             <span class="token punctuation">}</span><span class="token punctuation">)</span>
         <span class="token punctuation">}</span><span class="token punctuation">]</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>

@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/d52c340abeb9d0306f0e.css" rel="stylesheet">
+      <link href="/f79b344a0c85922d6c3a.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -78,7 +78,7 @@ This is a concise way to display loaders, and helps to maintain clean code. It a
 <p>Options can be passed with a query parameter, just like on the web (<code>?key=value&amp;foo=bar</code>). It&apos;s also possible to use a JSON object (<code>?{&quot;key&quot;:&quot;value&quot;,&quot;foo&quot;:&quot;bar&quot;}</code>).</p>
 <blockquote class="tip"><div class="tip-content"> Use <code>module.rules</code> whenever possible, as this will reduce boilerplate in your source code and allows you to debug or locate a loader faster if something goes south. </div></blockquote><h3 class="header"><a class="anchor" href="#via-cli" id="via-cli"></a><span class="text">Via CLI</span><a class="icon-link" href="#via-cli"></a></h3>
 <p>Optionally, you could also use loaders through the CLI:</p>
-<pre><code class="lang-sh">webpack --module-bind jade --module-bind <span class="token string">&apos;css=style!css&apos;</span>
+<pre><code class="lang-sh">webpack --module-bind jade-loader --module-bind <span class="token string">&apos;css=style-loader!css-loader&apos;</span>
 </code></pre>
 <p>This uses the <code>jade-loader</code> for <code>.jade</code> files, and the <a href="/loaders/style-loader"><code>style-loader</code></a> and <a href="/loaders/css-loader"><code>css-loader</code></a> for <code>.css</code> files.</p>
 <h2 class="header"><a class="anchor" href="#loader-features" id="loader-features"></a><span class="text">Loader Features</span><a class="icon-link" href="#loader-features"></a></h2>
