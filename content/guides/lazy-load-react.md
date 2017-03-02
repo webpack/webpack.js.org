@@ -83,8 +83,12 @@ class LazilyLoad extends React.Component {
   }
 
   componentDidUpdate(previous) {
-    if (this.props.modules === previous.modules) return null;
-    this.load();
+    const shouldLoad = !!Object.keys(this.props.modules).filter((key)=> {
+        return this.props.modules[key] !== previous.modules[key];
+    }).length;
+    if (shouldLoad) {
+        this.load();
+    }
   }
 
   componentWillUnmount() {
