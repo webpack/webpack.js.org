@@ -133,7 +133,7 @@ function buildConfig(env) {
   return require('./config/' + env + '.js')({ env: env })
 }
 
-module.exports = buildConfig(env);
+module.exports = buildConfig;
 ```
 在 package.json 文件中我们使用webpack构建我们的应用，所需需要在 package.json 中添加以下命令：
 ```js
