@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/97c2d35c353b903e2f73.css" rel="stylesheet">
+      <link href="/ae3a6f112a6ad8bf331c.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -39,8 +39,9 @@
 <h2 class="header"><a class="anchor" href="#using-extracttextwebpackplugin" id="using-extracttextwebpackplugin"></a><span class="text">Using <code>ExtractTextWebpackPlugin</code></span><a class="icon-link" href="#using-extracttextwebpackplugin"></a></h2>
 <p>Install the <a href="/plugins/extract-text-webpack-plugin"><code>ExtractTextWebpackPlugin</code></a> plugin as follows</p>
 <pre><code>npm i --save-dev extract-text-webpack-plugin
-</code></pre><p>To use this plugin, it needs to be added to the <code>webpack.config.js</code> file in two steps.</p>
-<pre><code class="lang-diff">module.exports = {
+</code></pre><p>To use this plugin, it needs to be added to the <code>webpack.config.js</code> file in three steps.</p>
+<pre><code class="lang-diff"><span class="token inserted">+var ExtractTextPlugin = require(&apos;extract-text-webpack-plugin&apos;);</span>
+module.exports = {
     module: {
          rules: [{
              test: /\.css$/,
