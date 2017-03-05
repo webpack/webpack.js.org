@@ -256,7 +256,7 @@
 		"repo": "webpack/i18n-webpack-plugin",
 		"npm": "i18n-webpack-plugin",
 		"description": "Embed localization into your bundle.",
-		"maintainer": "EcutDavid"
+		"maintainer": ""
 	},
 	{
 		"repo": "webpack/json5-loader",
