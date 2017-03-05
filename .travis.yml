@@ -8,7 +8,6 @@ node_js:
 script:
   - bash ./scripts/deploy.sh
 sudo: required
-cache: yarn
 install:
   - npm i yarn -g
   - yarn
