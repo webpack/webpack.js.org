@@ -30,7 +30,7 @@ export default props => {
         url
       }))
     }));
-  
+
   // Rename the root section ("webpack" => "Other") and push it to the end
   let rootIndex = sections.findIndex(section => section.title === 'webpack');
   let rootSection = sections.splice(rootIndex, 1)[0];
@@ -42,7 +42,7 @@ export default props => {
       <Interactive
         id="src/components/NotificationBar/NotificationBar.jsx"
         component={ NotificationBar } />
-        
+
       <Interactive
         id="src/components/Navigation/Navigation.jsx"
         component={ Navigation }
