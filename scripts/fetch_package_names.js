@@ -44,7 +44,7 @@ function fetchPackageNames(options, cb) {
       return cb(err);
     }
 
-    return cb(null, d.filter(function(o) {
+    return cb(null, d.data.filter(function(o) {
       return o.name.endsWith(options.suffix);
     }));
   });

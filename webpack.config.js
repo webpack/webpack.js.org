@@ -1,7 +1,7 @@
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var Autoprefixer = require('autoprefixer');
+var autoprefixer = require('autoprefixer');
 var merge = require('webpack-merge');
 var webpack = require('webpack');
 
@@ -13,66 +13,59 @@ var stylePaths = [
 
 const commonConfig = {
   resolve: {
-    extensions: ['', '.js', '.jsx', '.scss']
+    extensions: ['.js', '.jsx', '.scss']
+  },
+  resolveLoader: {
+    alias: {
+      'page-loader': path.resolve(cwd, 'loaders/page-loader')
+    }
   },
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.jsx?$/,
-        loaders: ['babel-loader', 'eslint-loader'],
+        test: /\.(js|jsx)$/,
+        use: 'babel-loader',
         include: [
           path.join(__dirname, 'components')
         ]
       },
       {
         test: /\.woff2?$/,
-        loaders: ['url-loader?prefix=font/&limit=10000&mimetype=application/font-woff']
+        use: {
+          loader: 'file-loader',
+          options: {
+            prefix: 'font/'
+          }
+        }
       },
       {
-        test: /\.jpg$/,
-        loaders: ['file-loader']
-      },
-      {
-        test: /\.png$/,
-        loaders: ['file-loader']
-      },
-      {
-        test: /\.svg$/,
-        loaders: ['file-loader']
+        test: /\.(jpg|png|svg)$/,
+        use: 'file-loader'
       },
       {
         test: /\.html$/,
-        loaders: ['raw-loader']
-      },
-      {
-        test: /\.json$/,
-        loaders: ['json-loader']
+        use: 'raw-loader'
       }
     ]
-  },
-  eslint: {
-    fix: true,
-    configFile: require.resolve('./.eslintrc')
-  },
-  postcss: function() {
-    return [ Autoprefixer ];
-  },
-  sassLoader: {
-    includePaths: [ path.join('./styles/partials') ]
   },
   plugins: [
     new CopyWebpackPlugin([{
       from: './assets',
       to: './assets'
-    }])
+    }]),
+    new webpack.LoaderOptionsPlugin({
+      eslint: {
+        configFile: require.resolve('./.eslintrc')
+      }
+    })
   ]
 };
 
 const interactiveConfig = {
   resolve: {
     alias: {
-      react: 'preact-compat',
-      'react-dom': 'preact-compat'
+      react: 'preact-compat/dist/preact-compat.min.js',
+      'react-dom': 'preact-compat/dist/preact-compat.min.js'
     }
   },
   plugins: [
@@ -86,19 +79,31 @@ const interactiveConfig = {
 
 const developmentConfig = {
   module: {
-    loaders: [
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        use: 'eslint-loader',
+        include: [
+          path.join(__dirname, 'components')
+        ]
+      },
       {
         test: /\.font.js$/,
-        loaders: ['style-loader', 'css-loader', 'fontgen-loader']
+        use: ['style-loader', 'css-loader', 'fontgen-loader']
       },
       {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader'],
         include: stylePaths
       },
       {
         test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+        use: [
+          'style-loader',
+          'css-loader',
+          postcssLoader(),
+          sassLoader()
+        ],
         include: stylePaths
       }
     ]
@@ -106,43 +111,83 @@ const developmentConfig = {
 };
 
 const buildConfig = {
-  plugins: [
-    new ExtractTextPlugin('[chunkhash].css', {
-      allChunks: true
-    })
-  ],
   module: {
-    loaders: [
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        use: 'eslint-loader',
+        include: [
+          path.join(__dirname, 'components')
+        ]
+      },
       {
         test: /\.font.js$/,
-        loader: ExtractTextPlugin.extract(
-          'style-loader',
-          'css-loader!fontgen-loader?embed'
-        )
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            {
+              loader: 'fontgen-loader',
+              options: {
+                embed: true
+              }
+            }
+          ]
+        })
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract(
-          'style-loader',
-          'css-loader'
-        ),
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader'
+        }),
         include: stylePaths
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract(
-          'style-loader',
-          'css-loader!postcss-loader!sass-loader'
-        ),
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            postcssLoader(),
+            sassLoader()
+          ]
+        }),
         include: stylePaths
       }
     ]
-  }
+  },
+  plugins: [
+    new ExtractTextPlugin({
+      filename: '[chunkhash].css',
+      allChunks: true
+    })
+  ]
 };
+
+function postcssLoader() {
+  return {
+    loader: 'postcss-loader',
+    options: {
+      plugins: () => ([
+        require('autoprefixer'),
+      ]),
+    }
+  };
+}
+
+function sassLoader() {
+  return {
+    loader: 'sass-loader',
+    options: {
+      includePaths: [ path.join('./styles/partials') ]
+    }
+  };
+}
 
 module.exports = function(env) {
   switch(env) {
-    case 'start':
+    case 'develop':
       return merge(
         commonConfig,
         developmentConfig
