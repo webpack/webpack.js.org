@@ -185,10 +185,10 @@ module.exports = function() {
                 use: ['to-string-loader', 'css-loader']
             }, {
                 test: /\.(jpg|png|gif)$/,
-                loader: 'file-loader'
+                use: 'file-loader'
             }, {
                 test: /\.(woff|woff2|eot|ttf|svg)$/,
-                loader: 'url-loader?limit=100000'
+                use: 'url-loader?limit=100000'
             }],
         },
         plugins: [
