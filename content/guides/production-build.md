@@ -9,6 +9,7 @@ contributors:
   - kisnows
   - chrisVillanueva
   - swapnilmishra
+  - bring2dip
 ---
 
 This page explains how to generate production builds with webpack.
