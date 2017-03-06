@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/5f2ae1e3ec95c3372e41.css" rel="stylesheet">
+      <link href="/5fafe049fa332286866c.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -39,7 +39,7 @@
 <p><strong>Example:</strong> When we <code>import &quot;./style.css&quot;</code> from <code>app.js</code>, the resource is <code>/path/to/style.css</code> and the issuer is <code>/path/to/app.js</code>.</p>
 <p>In a Rule the properties <a href="#rule-test"><code>test</code></a>, <a href="#rule-include"><code>include</code></a>, <a href="#rule-exclude"><code>exclude</code></a> and <a href="#rule-resource"><code>resource</code></a> are matched with the resource and the property <a href="#rule-issuer"><code>issuer</code></a> is matched with the issuer.</p>
 <p>When using multiple conditions, all conditions must match.</p>
-<h3 class="header"><a class="anchor" href="#rule-results" id="rule-results"></a><span class="text">Rule results</span><a class="icon-link" href="#rule-results"></a></h3>
+<blockquote class="warning"><div class="tip-content"> Be careful! The resource is the <em>resolved</em> path of the file, which means symlinked resources are the real path <em>not</em> the symlink location. This is good to remember when using tools that symlink packages (like <code>npm link</code>), common conditions like <code>/node_modules/</code> may inadvertently miss symlinked files. </div></blockquote><h3 class="header"><a class="anchor" href="#rule-results" id="rule-results"></a><span class="text">Rule results</span><a class="icon-link" href="#rule-results"></a></h3>
 <p>Rule results are used only when the Rule condition matches.</p>
 <p>There are two output values of a Rule:</p>
 <ol>
