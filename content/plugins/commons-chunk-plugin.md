@@ -212,3 +212,9 @@ Since the `vendor` and `manifest` chunk use a different definition for `minChunk
   }),
 ]
 ```
+
+## Examples
+
+* https://github.com/webpack/webpack/tree/master/examples/common-chunk-and-vendor-chunk
+* https://github.com/webpack/webpack/tree/master/examples/multiple-commons-chunks
+* https://github.com/webpack/webpack/tree/master/examples/multiple-entry-points-commons-chunk-css-bundle
