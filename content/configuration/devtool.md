@@ -26,6 +26,8 @@ Choose a style of [source mapping](http://blog.teamtreehouse.com/introduction-so
  source-map                   | --    | --      | yes        | original source
  nosources-source-map         | --    | --      | yes        | without source content
 
+T> `+` means faster, `-` slower and `o` about the same time
+
 Some of these values are suited for development and some for production. For development you typically want fast Source Maps at the cost of bundle size, but for production you want separate Source Maps that are accurate.
 
 W> There are some issues with Source Maps in Chrome. [We need your help!](https://github.com/webpack/webpack/issues/3165).
