@@ -44,6 +44,8 @@ In a Rule the properties [`test`](#rule-test), [`include`](#rule-include), [`exc
 
 When using multiple conditions, all conditions must match.
 
+W> Be careful! The reource is the _resolved_ path of the file, which means symlinked resources are the real path _not_ the symlink location. This is good to remember when using tools that symlink packages (like `npm link`), common conditions like `/node_modules/` may inadvertantly miss symlinked files.
+
 ### Rule results
 
 Rule results are used only when the Rule condition matches.
