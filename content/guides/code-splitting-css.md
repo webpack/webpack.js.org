@@ -44,12 +44,13 @@ webpack can help with this problem by bundling the CSS separately using the `Ext
 
 Install the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) plugin as follows
 ```
-npm i --save-dev extract-text-webpack-plugin@beta
+npm i --save-dev extract-text-webpack-plugin
 ```
 
-To use this plugin, it needs to be added to the `webpack.config.js` file in two steps.
+To use this plugin, it needs to be added to the `webpack.config.js` file in three steps.
 
 ```diff
++var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
     module: {
          rules: [{

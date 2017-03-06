@@ -100,7 +100,7 @@ T> Use `module.rules` whenever possible, as this will reduce boilerplate in your
 Optionally, you could also use loaders through the CLI:
 
 ```sh
-webpack --module-bind jade --module-bind 'css=style!css'
+webpack --module-bind jade-loader --module-bind 'css=style-loader!css-loader'
 ```
 
 This uses the `jade-loader` for `.jade` files, and the [`style-loader`](/loaders/style-loader) and [`css-loader`](/loaders/css-loader) for `.css` files.
