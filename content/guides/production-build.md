@@ -188,9 +188,11 @@ module.exports = function() {
                 use: 'file-loader'
             }, {
                 test: /\.(woff|woff2|eot|ttf|svg)$/,
-                use: 'url-loader',
-                options: {
-                  limit: 100000
+                use: {
+                  loader: 'url-loader',
+                  options: {
+                    limit: 100000
+                  }
                 }
             }],
         },
