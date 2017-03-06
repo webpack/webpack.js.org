@@ -9,6 +9,7 @@ contributors:
   - kisnows
   - chrisVillanueva
   - swapnilmishra
+  - bring2dip
 ---
 
 This page explains how to generate production builds with webpack.
@@ -167,27 +168,32 @@ module.exports = function() {
             sourceMapFilename: '[name].map'
         },
         resolve: {
-            extensions: ['', '.ts', '.js', '.json'],
+            extensions: ['.ts', '.js', '.json'],
             modules: [path.join(__dirname, 'src'), 'node_modules']
 
         },
         module: {
-            loaders: [{
+            rules: [{
                 test: /\.ts$/,
-                loaders: [
+                use: [
                     'awesome-typescript-loader',
                     'angular2-template-loader'
                 ],
                 exclude: [/\.(spec|e2e)\.ts$/]
             }, {
                 test: /\.css$/,
-                loaders: ['to-string-loader', 'css-loader']
+                use: ['to-string-loader', 'css-loader']
             }, {
                 test: /\.(jpg|png|gif)$/,
-                loader: 'file-loader'
+                use: 'file-loader'
             }, {
                 test: /\.(woff|woff2|eot|ttf|svg)$/,
-                loader: 'url-loader?limit=100000'
+                use: {
+                  loader: 'url-loader',
+                  options: {
+                    limit: 100000
+                  }
+                }
             }],
         },
         plugins: [
