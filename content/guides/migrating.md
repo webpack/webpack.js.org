@@ -250,7 +250,7 @@ loaders 的压缩模式将在 webpack 3 或更高的版本中被取消。
 
 ## `ExtractTextWebpackPlugin` - 大改变
 
-[ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) 1.0.0 不能在 webpack v2 下工作。 你需要明确地安装 ExtractTextPlugin v2。
+[ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) 需要使用版本2，才能在 webpack 2 下正常运行。
 
 `npm install --save-dev extract-text-webpack-plugin@beta`
 

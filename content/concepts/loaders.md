@@ -70,7 +70,7 @@ module.exports = {
         use: [
           { loader: ['style-loader'](/loaders/style-loader)},
           {
-            loader: ['css-loader'](/loaders/css-loader)},
+            loader: ['css-loader'](/loaders/css-loader),
             options: {
               modules: true
             }
@@ -100,7 +100,7 @@ T> 尽可能使用 `module.rules`，因为这样可以在源码中减少引用�
 可选项，你也可以通过 CLI 使用 loader：
 
 ```sh
-webpack --module-bind jade --module-bind 'css=style!css'
+webpack --module-bind jade-loader --module-bind 'css=style-loader!css-loader'
 ```
 
 这会对 `.jade` 文件使用 `jade-loader`，对 `.css` 文件使用 [`style-loader`](/loaders/style-loader) 和 [`css-loader`](/loaders/css-loader)。

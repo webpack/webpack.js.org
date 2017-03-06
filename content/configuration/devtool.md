@@ -26,6 +26,8 @@ contributors:
  source-map                   | --    | --      | yes        | 原始源码
  nosources-source-map         | --    | --      | yes        | 无源码内容
 
+T> `+` 表示较快，`-` 表示较慢，`o` 表示时间相同
+
 其中一些值适用于开发环境，一些适用于生产环境。对于开发环境，通常希望更快速的 Source Map，需要添加到 bundle 中以增加体积为代价，但是对于生产环境，则希望更精准的 Source Map，需要从 bundle 中分离并独立存在。
 
 W> Chrome 中的 Source Map 有一些问题。[我们需要你的帮助！](https://github.com/webpack/webpack/issues/3165)。

@@ -175,7 +175,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 
 | 参数                | 说明                      | 使用方法                      |
 |--------------------|---------------------------|-----------------------------|
-| --module-bind      | 为 loader 绑定一个扩展      | --module-bind /\.js$/=babel |
+| --module-bind      | 为 loader 绑定一个扩展      | --module-bind /\.js$/=babel-loader |
 | --module-bind-post | 为 post loader 绑定一个扩展 |                             |
 | --module-bind-pre  | 为 pre loader 绑定一个扩展  |                             |
 
