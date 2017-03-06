@@ -28,9 +28,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/plugins/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/pluginsapi/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/vote/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/pluginsapi/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/writers-guide/index.html</loc>
     </url>    <url>
@@ -216,11 +216,13 @@
     </url>    <url>
         <loc>https://webpack.js.org/loaders/transform-loader/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/url-loader/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/val-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/worker-loader/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/loaders/yaml-frontmatter-loader/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/loaders/url-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/plugins/babili-webpack-plugin/index.html</loc>
     </url>    <url>
@@ -258,6 +260,10 @@
     </url>    <url>
         <loc>https://webpack.js.org/plugins/uglifyjs-webpack-plugin/index.html</loc>
     </url>    <url>
+        <loc>https://webpack.js.org/vote/feedback/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/vote/moneyDistribution/index.html</loc>
+    </url>    <url>
         <loc>https://webpack.js.org/pluginsapi/compilation/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/pluginsapi/compiler/index.html</loc>
@@ -275,8 +281,4 @@
         <loc>https://webpack.js.org/pluginsapi/tapable/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/pluginsapi/template/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/vote/feedback/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/vote/moneyDistribution/index.html</loc>
     </url></urlset>
