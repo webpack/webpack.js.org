@@ -24,8 +24,8 @@ Contributing to webpack is not contributing to an exclusive club. You as a devel
 
 ## CTO's, VPs, Owners
 
-### You Can Help Too!
-(Add slides here regarding monetary value/dev time/tooling)
+<!-- ### You Can Help Too!
+(Add slides here regarding monetary value/dev time/tooling) -->
 
 webpack is an all-in-one tool for bundling your code. It can handle fonts, images, svgs, and more with the help of plugins. Having all of your assets be handled by one tool is immensely helpful, as you or your team can spend less time making sure a machine with many moving parts is working correctly and more time building your product.
 
@@ -38,7 +38,7 @@ You can support webpack as a company by:
 You can encourage your developers to contribute to the ecosystem, open sourcing tools, loaders, and plugins for webpack, and helping increase our CI/CD infrastructure.
 
 ## VC, Government, Digital Agencies
-We want you to work with us, one the top NPM libraries to improve your product!
+We want you to work with us, one the top NPM libraries, to improve your product!
 
-### Sales Pitch
-(add slides here)
+<!-- ### Sales Pitch
+(add slides here) -->
