@@ -191,22 +191,7 @@ Now just add `bundle.js` in your HTML file and open it in your broswer, the `0.b
 
 ## Promise polyfill
 
-W> `require.ensure` relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally.
-
-If you use `require.ensure` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
-
-In an entry point of your application:
-```javascript
-require('es6-promise').polyfill();
-// or
-require('es6-promise/auto');
-// or
-var Promise = require('promise-polyfill');
-if (!window.Promise) {
-  window.Promise = Promise;
-}
-// or ...
-```
+W> `require.ensure` relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. See [this section](/guides/code-splitting-import#promise-polyfill) for possible polyfills.
 
 ## Gotchas for `require.ensure()`
 
