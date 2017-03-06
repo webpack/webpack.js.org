@@ -19,13 +19,15 @@ Developers can help by doing any of the following:
 
 You can ask your employer to improve your workflow by leveraging webpack: an all-in-one tool for fonts, images and image optimiziation, and json. webpack will attempt to bundle your code and assets the best it can for the smallest file size, which means a faster web site/app.
 
-### Sales Pitch
-(Add slides here)
+### Your Contributions Are Important To Us
+Contributing to webpack is not contributing to an exclusive club. You as a developer are contributing to the overall health of downstream projects. Hundreds, maybe more, projects depend on webpack and contributing will make the ecosystem better for all users.
 
 ## CTO's, VPs, Owners
 
-### Sales Pitch
-(Add slides here regarding monetary value)
+### You Can Help Too!
+(Add slides here regarding monetary value/dev time/tooling)
+
+webpack is an all-in-one tool for bundling your code. It can handle fonts, images, svgs, and more with the help of plugins. Having all of your assets be handled by one tool is immensely helpful, as you can spend less time making sure a machine with many moving parts is working correctly and more time building your product.
 
 ### How You Can Support webpack As A Company
 You can support webpack as a company by:
