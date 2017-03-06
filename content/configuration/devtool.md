@@ -5,6 +5,7 @@ contributors:
   - sokra
   - skipjack
   - SpaceK33z
+  - lricoy
 ---
 
 This option controls if and how Source Maps are generated.
