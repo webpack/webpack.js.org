@@ -27,6 +27,26 @@ function determineDate() {
 determineDate();
 ```
 
+## Promise polyfill
+
+W> `import()` relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally.
+
+If you use `import()` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
+
+In an entry point of your application:
+```javascript
+import Es6Promise from 'es6-promise';
+Es6Promise.polyfill();
+// or
+import 'es6-promise/auto';
+// or
+import Promise from 'promise-polyfill';
+if (!window.Promise) {
+  window.Promise = Promise;
+}
+// or ...
+```
+
 ## Usage with Babel
 
 If you want to use `import` with [Babel](http://babeljs.io/), you'll need to install/add the [`syntax-dynamic-import`](http://babeljs.io/docs/plugins/syntax-dynamic-import/) plugin while it's still Stage 3 to get around the parser error. When the proposal is added to the spec this won't be necessary anymore.
