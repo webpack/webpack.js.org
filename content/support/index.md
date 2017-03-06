@@ -4,7 +4,7 @@ contributors:
   - scottdj92
 ---
 
-First and foremost, the people who contribute to webpack, do so for the love of open source, love for our users and ecosystem, and most importantly, pushing the web forward together. Because of our [Open Collective](http://opencollective.com/webpack) model for funding and transparency, we are able to funnel support and funds through contributors, dependent projects, and the contributor and core teams. But what is the return on the investment?
+First, the people who contribute to webpack, do so for the love of open source, love for our users and ecosystem, and most importantly, pushing the web forward together. Because of our [Open Collective](http://opencollective.com/webpack) model for funding and transparency, we are able to funnel support and funds through contributors, dependent projects, and the contributor and core teams. But what is the return on the investment?
 
 ## Developers
 The biggest core feature that we want to give you is enjoyment of using webpack. Developers like you can help by contributing to rich and vibrant documentation, issuing pull requests to help us cover niche use cases, and to help sustain what you love about webpack.
