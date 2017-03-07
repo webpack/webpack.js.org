@@ -152,6 +152,17 @@ module.exports = {
       }
     ),
 
+    support: section(
+      'Support',
+      function() {
+        return require.context(
+          'json-loader!yaml-frontmatter-loader!./content/support',
+          false,
+          /^\.\/.*\.md$/
+        );
+      }
+    ),
+
     vote: {
       path() {
         return require('./components/vote/list.jsx').default
