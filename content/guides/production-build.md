@@ -1,13 +1,15 @@
 ---
 title: 生产环境构建
-sort: 13
+sort: 40
 contributors:
   - henriquea
   - rajagopal4890
   - markerikson
   - simon04
   - kisnows
-  - muchen
+  - chrisVillanueva
+  - swapnilmishra
+  - bring2dip
 ---
 
 该页面说明了如何通过`webpack`生成生产环境所用的文件。
@@ -149,43 +151,50 @@ module.exports = buildConfig;
 ** base.js **
 ```js
 module.exports = function() {
-  return {
-    entry: {
-      'polyfills': './src/polyfills.ts',
-      'vendor': './src/vendor.ts',
-      'main': './src/main.ts'
-    },
-    output: {
-      path: path.join(__dirname, '/../dist/assets'),
-      filename: '[name].bundle.js',
-      publicPath: publicPath,
-      sourceMapFilename: '[name].map'
-    },
-    resolve: {
-      extensions: ['', '.ts', '.js', '.json'],
-      modules: [path.join(__dirname, 'src'), 'node_modules']
-    },
-    module: {
-      loaders: [{
-        test: /\.ts$/,
-        loaders: [
-          'awesome-typescript-loader',
-          'angular2-template-loader'
-        ],
-        exclude: [/\.(spec|e2e)\.ts$/]
-      }, {
-        test: /\.css$/,
-        loaders: ['to-string-loader', 'css-loader']
-      }, {
-        test: /\.(jpg|png|gif)$/,
-        loader: 'file-loader'
-      }, {
-        test: /\.(woff|woff2|eot|ttf|svg)$/,
-        loader: 'url-loader?limit=100000'
-      }],
-    },
-    plugins: [
-      new ForkCheckerPlugin(),
+    return {
+        entry: {
+            'polyfills': './src/polyfills.ts',
+            'vendor': './src/vendor.ts',
+            'main': './src/main.ts'
+
+        },
+        output: {
+            path: path.join(__dirname, '/../dist/assets'),
+            filename: '[name].bundle.js',
+            publicPath: publicPath,
+            sourceMapFilename: '[name].map'
+        },
+        resolve: {
+            extensions: ['.ts', '.js', '.json'],
+            modules: [path.join(__dirname, 'src'), 'node_modules']
+
+        },
+        module: {
+            rules: [{
+                test: /\.ts$/,
+                use: [
+                    'awesome-typescript-loader',
+                    'angular2-template-loader'
+                ],
+                exclude: [/\.(spec|e2e)\.ts$/]
+            }, {
+                test: /\.css$/,
+                use: ['to-string-loader', 'css-loader']
+            }, {
+                test: /\.(jpg|png|gif)$/,
+                use: 'file-loader'
+            }, {
+                test: /\.(woff|woff2|eot|ttf|svg)$/,
+                use: {
+                  loader: 'url-loader',
+                  options: {
+                    limit: 100000
+                  }
+                }
+            }],
+        },
+        plugins: [
+            new ForkCheckerPlugin(),
 
       new webpack.optimize.CommonsChunkPlugin({
         name: ['polyfills', 'vendor'].reverse()

@@ -5,6 +5,7 @@ contributors:
   - sokra
   - skipjack
   - SpaceK33z
+  - lricoy
 ---
 
 此选项控制是否生成，以及如何生成 Source Map。

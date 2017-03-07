@@ -185,11 +185,13 @@ console.log('***** I AM c *****');
 
 现在把 `bundle.js` 添加你的页面中，然后在浏览器中打开，`0.bundle.js` 将会被 webpack 按需加载（从 `https://cdn.example.com/assets/0.bundle.js` 访问）。
 
-W> `require.ensure` 内部依赖于 `Promises`。 如果你在旧的浏览器中使用 `require.ensure` 请记得去 shim `Promise` [es6-promise polyfill](https://github.com/stefanpenner/es6-promise)。
-
 **更多示例**
 * https://github.com/webpack/webpack/tree/master/examples/code-splitting
 * https://github.com/webpack/webpack/tree/master/examples/named-chunks – illustrates the use of `chunkName`
+
+## Promise polyfill
+
+W> `require.ensure` 内部依赖于 [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)。可能的 polyfill 请查看[此章节](/guides/code-splitting-import#promise-polyfill)。
 
 ## `require.ensure()` 的陷阱
 
