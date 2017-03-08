@@ -26,6 +26,7 @@ function determineDate() {
 
 determineDate();
 ```
+T> Keep in mind that `import([path])` path cannot be fully dynamic. Rather either completely static or partially static.
 
 ## Promise polyfill
 
