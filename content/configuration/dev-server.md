@@ -350,6 +350,13 @@ proxy: {
 ```
 
 
+## `devServer.progress` - CLI only
+
+`boolean`
+
+Output running progress to console.
+
+
 ## `devServer.public` - CLI only
 
 `string`
