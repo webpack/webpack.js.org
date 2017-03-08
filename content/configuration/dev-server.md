@@ -478,3 +478,8 @@ watchOptions: {
 If this is too heavy on the file system, you can change this to an integer to set the interval in milliseconds.
 
 See [WatchOptions](/configuration/watch) for more options.
+
+
+## `devServer.progress` - CLI only
+
+Output running progress to console.
