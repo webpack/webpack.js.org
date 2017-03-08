@@ -349,6 +349,13 @@ proxy: {
 }
 ```
 
+## `devServer.progress` - CLI only
+
+`boolean`
+
+Output running progress to console.
+
+
 
 ## `devServer.public` - CLI only
 
@@ -480,6 +487,3 @@ If this is too heavy on the file system, you can change this to an integer to se
 See [WatchOptions](/configuration/watch) for more options.
 
 
-## `devServer.progress` - CLI only
-
-Output running progress to console.
