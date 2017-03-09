@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/b8a7a1963fdfd634cfb8.css" rel="stylesheet">
+      <link href="/7f22ea15680f97181add.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -34,7 +34,7 @@
 
 <span class="token function">determineDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<h2 class="header"><a class="anchor" href="#promise-polyfill" id="promise-polyfill"></a><span class="text">Promise polyfill</span><a class="icon-link" href="#promise-polyfill"></a></h2>
+<blockquote class="tip"><div class="tip-content"> Keep in mind that <code>import()</code> path cannot be fully dynamic (e.g., <code>import(Math.random())</code>). Rather either completely static (e.g., <code>import(&apos;./locale/de.json&apos;)</code>) or partially static (e.g., <code>import(&apos;./locale/&apos; + language + &apos;.json&apos;)</code>). </div></blockquote><h2 class="header"><a class="anchor" href="#promise-polyfill" id="promise-polyfill"></a><span class="text">Promise polyfill</span><a class="icon-link" href="#promise-polyfill"></a></h2>
 <blockquote class="warning"><div class="tip-content"> <code>import()</code> relies on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise"><code>Promise</code></a> internally. </div></blockquote><p>If you use <code>import()</code> with older browsers, remember to shim <code>Promise</code> using a polyfill such as <a href="https://github.com/stefanpenner/es6-promise">es6-promise</a> or <a href="https://github.com/taylorhakes/promise-polyfill">promise-polyfill</a>.</p>
 <p>In an entry point of your application:</p>
 <pre><code class="lang-javascript"><span class="token keyword">import</span> Es6Promise <span class="token keyword">from</span> <span class="token string">&apos;es6-promise&apos;</span><span class="token punctuation">;</span>
