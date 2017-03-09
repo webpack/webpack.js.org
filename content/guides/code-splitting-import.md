@@ -26,7 +26,7 @@ function determineDate() {
 
 determineDate();
 ```
-T> Keep in mind that `import([path])` path cannot be fully dynamic. Rather either completely static or partially static.
+T> Keep in mind that import() path cannot be fully dynamic (e.g., import(Math.random())). Rather either completely static (e.g., import('./locale/de.json')) or partially static (e.g., import('./locale/' + language + '.json')).
 
 ## Promise polyfill
 
