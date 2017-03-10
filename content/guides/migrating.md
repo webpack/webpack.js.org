@@ -77,9 +77,9 @@ The new naming conventions are easier to understand and are a good reason to upg
 
 ## Chaining loaders
 
-Like in webpack v1, loaders can be chained to pass results from loader to loader. Using the [rule.use](/configuration/module#rule-use)
+Like in webpack 1, loaders can be chained to pass results from loader to loader. Using the [rule.use](/configuration/module#rule-use)
  configuration option, `use` can be set to an array of loaders.
-In webpack v1, loaders were commonly chained with `!`. This style is only supported using the legacy option `module.loaders`.
+In webpack 1, loaders were commonly chained with `!`. This style is only supported using the legacy option `module.loaders`.
 
 ``` diff
   module: {
@@ -148,8 +148,8 @@ file with the [`json-loader`](https://github.com/webpack/json-loader).
 
 ## Loaders in configuration resolve relative to context
 
-In webpack v1 configured loaders resolve relative to the matched file.
-Since webpack v2 configured loaders resolve relative to the `context` option.
+In webpack 1 configured loaders resolve relative to the matched file.
+Since webpack 2 configured loaders resolve relative to the `context` option.
 
 This solves some problems with duplicate modules caused by loaders when using `npm link` or referencing modules outside of the `context`.
 
@@ -219,7 +219,7 @@ This means that if you want to see uglifyjs warnings, you need to set `compress.
 
 `UglifyJsPlugin` no longer switches loaders into minimize mode. The `minimize: true` setting needs to be passed via loader options in the long-term. See loader documentation for relevant options.
 
-The minimize mode for loaders will be removed in webpack v3 or later.
+The minimize mode for loaders will be removed in webpack 3 or later.
 
 To keep compatibility with old loaders, loaders can be switched to minimize mode via plugin:
 
@@ -258,7 +258,7 @@ It's no longer necessary to specify it in the configuration.
 
 ## `ExtractTextWebpackPlugin` - breaking change
 
-[ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) requires version 2 to work with webpack v2.
+[ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) requires version 2 to work with webpack 2.
 
 `npm install --save-dev extract-text-webpack-plugin`
 
@@ -340,7 +340,7 @@ These functions are now always asynchronous instead of calling their callback sy
 
 ## Loader configuration is through `options`
 
-You can *no longer* configure a loader with a custom property in the `webpack.config.js`. It must be done through the `options`. The following configuration with the `ts` property is no longer valid with webpack v2:
+You can *no longer* configure a loader with a custom property in the `webpack.config.js`. It must be done through the `options`. The following configuration with the `ts` property is no longer valid with webpack 2:
 
 ```js
 module.exports = {
@@ -351,7 +351,7 @@ module.exports = {
       loader: 'ts-loader'
     }]
   },
-  // does not work with webpack v2
+  // does not work with webpack 2
   ts: { transpileOnly: false }
 }
 ```
@@ -405,9 +405,9 @@ To keep compatibility with old loaders, this information can be passed via plugi
 
 ## `debug`
 
-The `debug` option switched loaders to debug mode in webpack v1. This needs to be passed via loader options in long-term. See loader documentation for relevant options.
+The `debug` option switched loaders to debug mode in webpack 1. This needs to be passed via loader options in long-term. See loader documentation for relevant options.
 
-The debug mode for loaders will be removed in webpack v3 or later.
+The debug mode for loaders will be removed in webpack 3 or later.
 
 To keep compatibility with old loaders, loaders can be switched to debug mode via a plugin:
 
@@ -422,7 +422,7 @@ To keep compatibility with old loaders, loaders can be switched to debug mode vi
 
 ## Code Splitting with ES2015
 
-In webpack v1, you could use [`require.ensure`](/guides/code-splitting-require) as a method to lazily-load chunks for your application:
+In webpack 1, you could use [`require.ensure`](/guides/code-splitting-require) as a method to lazily-load chunks for your application:
 
 ```javascript
 require.ensure([], function(require) {
@@ -589,8 +589,8 @@ Loaders are now cacheable by default. Loaders must opt-out if they are not cache
 
 ### Complex options
 
-webpack v1 only supports `JSON.stringify`-able options for loaders.
-webpack v2 now supports any JS object as loader options.
+webpack 1 only supports `JSON.stringify`-able options for loaders.
+webpack 2 now supports any JS object as loader options.
 
 Using complex options comes with one restriction. You may need to have a `ident` for the option object to make it referenceable by other loaders.
 
