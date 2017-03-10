@@ -5,6 +5,7 @@ contributors:
   - sokra
   - skipjack
   - jouni-kantola
+  - jhnns
 ---
 
 这些选项决定了如何处理项目中的[不同类型的模块](/concepts/modules)。
@@ -158,11 +159,13 @@ parser: {
 
 [`条件`](#condition)会匹配 resource。在 [`Rule` 条件](#rule-conditions) 中查看详细。
 
+## `Rule.resourceQuery`
+
+A [`Condition`](#condition) matched with the resource query. The condition matches against a string that starts with a question mark (`"?exampleQuery"`). See details in [`Rule` conditions](#rule-conditions).
 
 ## `Rule.rules`
 
 [`规则`](#rule)数组，当规则匹配时使用。
-
 
 ## `Rule.test`
 

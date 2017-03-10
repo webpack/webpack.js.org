@@ -169,6 +169,55 @@ new webpack.optimize.CommonsChunkPlugin({
 
 正如上面看到的，这个例子允许你只将其中一个库移到一个分开的文件当中，当而仅当函数中的所有条件都被满足了。
 
+This concept may be used to obtain implicit common vendor chunks:
+
+```javascript
+new webpack.optimize.CommonsChunkPlugin({
+  name: "vendor",
+  minChunks: function (module) {
+    // this assumes your vendor imports exist in the node_modules directory
+    return module.context && module.context.indexOf("node_modules") !== -1;
+  }
+})
+```
+
+## Manifest file
+
+To extract the webpack bootstrap logic into a separate file, use the `CommonsChunkPlugin` on a `name` which is not defined as `entry`. Commonly the name `manifest` is used. See the [code splitting libraries guide](/guides/code-splitting-libraries/#manifest-file) for details.
+
+```javascript
+new webpack.optimize.CommonsChunkPlugin({
+  name: "manifest",
+  minChunks: Infinity
+})
+
+```
+
+## Combining implicit common vendor chunks and manifest file
+
+Since the `vendor` and `manifest` chunk use a different definition for `minChunks`, you need to invoke the plugin twice:
+
+```javascript
+[
+  new webpack.optimize.CommonsChunkPlugin({
+    name: "vendor",
+    minChunks: function(module){
+      return module.context && module.context.indexOf("node_modules") !== -1;
+    }
+  }),
+  new webpack.optimize.CommonsChunkPlugin({
+    name: "manifest",
+    minChunks: Infinity
+  }),
+]
+```
+
+## Examples
+
+* https://github.com/webpack/webpack/tree/master/examples/common-chunk-and-vendor-chunk
+* https://github.com/webpack/webpack/tree/master/examples/multiple-commons-chunks
+* https://github.com/webpack/webpack/tree/master/examples/multiple-entry-points-commons-chunk-css-bundle
+
 ***
 
 > 原文：https://webpack.js.org/plugins/commons-chunk-plugin/

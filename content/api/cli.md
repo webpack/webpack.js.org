@@ -232,7 +232,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 | --sort-assets-by        | 对 assets 列表以某种属性排序S                      | string  |
 | --sort-chunks-by        | 对 chunks 列表以某种属性排序                       | string  |
 | --sort-modules-by       | 对模块列表以某种属性排序                            | string  |
-| --verbose, -v           | 显示更多信息                                      | boolean |
+| --verbose               | 显示更多信息                                      | boolean |
 
 ### 高级配置
 
