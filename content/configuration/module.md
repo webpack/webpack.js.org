@@ -5,6 +5,7 @@ contributors:
   - sokra
   - skipjack
   - jouni-kantola
+  - jhnns
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -158,11 +159,13 @@ parser: {
 
 A [`Condition`](#condition) matched with the resource. See details in [`Rule` conditions](#rule-conditions).
 
+## `Rule.resourceQuery`
+
+A [`Condition`](#condition) matched with the resource query. The condition matches against a string that starts with a question mark (`"?exampleQuery"`). See details in [`Rule` conditions](#rule-conditions).
 
 ## `Rule.rules`
 
 An array of [`Rules`](#rule) that is also used when the Rule matches.
-
 
 ## `Rule.test`
 
