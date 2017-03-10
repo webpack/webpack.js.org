@@ -12,6 +12,7 @@ contributors:
   - chrisVillanueva
   - bebraw
   - howdy39
+  - selbekk
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -34,7 +35,7 @@ This option no longer requires passing an empty string. This behavior was moved 
 
 ## `resolve.*`
 
-More stuff was changed here. Not listed in detail as it's not commonly used. See [resolving](/configuration/resolve) for details.
+Several APIs were changed here. Not listed in detail as it's not commonly used. See [resolving](/configuration/resolve) for details.
 
 ## `module.loaders` is now `module.rules`
 
@@ -76,9 +77,9 @@ The new naming conventions are easier to understand and are a good reason to upg
 
 ## Chaining loaders
 
-Like in webpack v1, loaders can be chained to pass results from loader to loader. Using the [rule.use](/configuration/module#rule-use)
- configuration option, `use` can be set to a list of loaders.
-In webpack v1, loaders were commonly chained with `!`. This style is only supported using the legacy option `module.loaders`.
+Like in webpack 1, loaders can be chained to pass results from loader to loader. Using the [rule.use](/configuration/module#rule-use)
+ configuration option, `use` can be set to an array of loaders.
+In webpack 1, loaders were commonly chained with `!`. This style is only supported using the legacy option `module.loaders`.
 
 ``` diff
   module: {
@@ -216,7 +217,7 @@ This means that if you want to see uglifyjs warnings, you need to set `compress.
 
 ## `UglifyJsPlugin` minimize loaders
 
-`UglifyJsPlugin` no longer switches loaders into minimize mode. The `minimize: true` setting needs to be passed via loader options in long-term. See loader documentation for relevant options.
+`UglifyJsPlugin` no longer switches loaders into minimize mode. The `minimize: true` setting needs to be passed via loader options in the long-term. See loader documentation for relevant options.
 
 The minimize mode for loaders will be removed in webpack 3 or later.
 
@@ -236,7 +237,7 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
 
 ## `BannerPlugin` - breaking change
 
-`BannerPlugin` no longer accept two parameters but rather only a single options object.
+`BannerPlugin` no longer accepts two parameters, but a single options object.
 
 ``` diff
   plugins: [
@@ -247,7 +248,7 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
 
 ## `OccurrenceOrderPlugin` is now on by default
 
-It's no longer necessary to specify it in configuration.
+It's no longer necessary to specify it in the configuration.
 
 ``` diff
   plugins: [
@@ -261,7 +262,7 @@ It's no longer necessary to specify it in configuration.
 
 `npm install --save-dev extract-text-webpack-plugin`
 
- The configuration changes for this plugin are mainly syntactical.
+The configuration changes for this plugin are mainly syntactical.
 
 ### `ExtractTextPlugin.extract`
 
@@ -296,9 +297,9 @@ plugins: [
 
 ## Full dynamic requires now fail by default
 
-A dependency with only an expression (i. e. `require(expr)`) will now create an empty context instead of an context of the complete directory.
+A dependency with only an expression (i. e. `require(expr)`) will now create an empty context instead of the context of the complete directory.
 
-Best refactor this code as it won't work with ES2015 Modules. If this is not possible you can use the `ContextReplacementPlugin` to hint the compiler to the correct resolving.
+Code like this should be refactored as it won't work with ES2015 modules. If this is not possible you can use the `ContextReplacementPlugin` to hint the compiler towards the correct resolving.
 
 ?> Link to an article about dynamic dependencies.
 
@@ -317,7 +318,7 @@ module.exports = config;
 
 You may notice that this is no longer allowed. The CLI is more strict now.
 
-Instead there is an interface for passing arguments to the configuration. This should be used instead. Future tool may rely on this.
+Instead there is an interface for passing arguments to the configuration. This should be used instead. Future tools may rely on this.
 
 `webpack --env.customStuff`
 
@@ -331,11 +332,11 @@ module.exports = function(env) {
 
 See [CLI](/api/cli).
 
-## `require.ensure` and AMD `require` is asynchronous
+## `require.ensure` and AMD `require` are asynchronous
 
-These functions are now always asynchronous instead of calling their callback sync if the chunk is already loaded.
+These functions are now always asynchronous instead of calling their callback synchronously if the chunk is already loaded.
 
-**nb `require.ensure` now depends upon native `Promise`s. If using `require.ensure` in an environment that lacks them then you will need a polyfill. **
+**`require.ensure` now depends upon native `Promise`s. If using `require.ensure` in an environment that lacks them then you will need a polyfill. **
 
 ## Loader configuration is through `options`
 
@@ -388,7 +389,7 @@ module.exports = {
 
 ## `LoaderOptionsPlugin` context
 
-Some loaders need context information and read them from the configuration. This needs to be passed via loader options in long-term. See loader documentation for relevant options.
+Some loaders need context information and read them from the configuration. This needs to be passed via loader options in the long-term. See loader documentation for relevant options.
 
 To keep compatibility with old loaders, this information can be passed via plugin:
 
@@ -408,7 +409,7 @@ The `debug` option switched loaders to debug mode in webpack 1. This needs to be
 
 The debug mode for loaders will be removed in webpack 3 or later.
 
-To keep compatibility with old loaders, loaders can be switched to debug mode via plugin:
+To keep compatibility with old loaders, loaders can be switched to debug mode via a plugin:
 
 ``` diff
 - debug: true,
@@ -421,7 +422,7 @@ To keep compatibility with old loaders, loaders can be switched to debug mode vi
 
 ## Code Splitting with ES2015
 
-In webpack v1, you could use [`require.ensure`](/guides/code-splitting-require) as a method to lazily-load chunks for your application:
+In webpack 1, you could use [`require.ensure`](/guides/code-splitting-require) as a method to lazily-load chunks for your application:
 
 ```javascript
 require.ensure([], function(require) {
@@ -443,7 +444,7 @@ function onClick() {
 }
 ```
 
-Good news: Failure to load a chunk can be handled now because they are `Promise` based.
+Good news: Failure to load a chunk can now be handled because they are `Promise` based.
 
 Caveat: `require.ensure` allows for easy chunk naming with the optional third argument, but `import` API doesn't offer that capability yet. If you want to keep that functionality, you can continue using `require.ensure`.
 
@@ -588,7 +589,7 @@ Loaders are now cacheable by default. Loaders must opt-out if they are not cache
 
 ### Complex options
 
-webpack 1 only support `JSON.stringify`-able options for loaders.
+webpack 1 only supports `JSON.stringify`-able options for loaders.
 webpack 2 now supports any JS object as loader options.
 
 Using complex options comes with one restriction. You may need to have a `ident` for the option object to make it referenceable by other loaders.
