@@ -3,6 +3,8 @@ title: Loader API
 sort: 4
 contributors:
     - TheLarkInn
+    - jhnns
+
 ---
 
 Loaders allow you to preprocess files as you `require()` or “load” them. Loaders are kind of like “tasks” in other build tools,
@@ -30,6 +32,15 @@ module.exports = function(content) {
 };
 ```
 
+**sync-loader-with-multiple-results.js**
+
+```javascript
+module.exports = function(content) {
+    this.callback(null, someSyncOperation(content), sourceMaps, ast);
+    return; // always return undefined when calling callback()
+};
+```
+
 ### Async Loader
 
 **async-loader.js**
@@ -45,7 +56,7 @@ module.exports = function(content) {
 };
 ```
 
-T> It’s recommended to give an asynchronous loader a fall-back to synchronous mode. This isn’t required for webpack, but allows the loader to run  synchronously using [enhanced-require](https://github.com/webpack/enhanced-resolve).
+T> Loaders were originally designed to work in synchronous loader pipelines, like Node.js (using [enhanced-require](https://github.com/webpack/enhanced-require)), *and* asynchronous pipelines, like in webpack. However, since expensive synchronous computations are a bad idea in a single-threaded environment like Node.js, we advise to make your loader asynchronously if possible. Synchronous loaders are ok if the amount of computation is trivial.
 
 ### "Raw" Loader
 
@@ -93,33 +104,60 @@ In `/abc/file.js`:
 require("./loader1?xyz!loader2!./resource?rrr");
 ```
 
-### `version`
+### `this.version`
 
 **Loader API version.** Currently `2`. This is useful for providing backwards compatibility. Using the version you can specify custom logic or fallbacks for breaking changes.  
 
-### `context`
+### `this.context`
 
 **The directory of the module.** Can be used as context for resolving other stuff.
 
 In the example: `/abc` because `resource.js` is in this directory
 
-### `request`
+### `this.request`
 
 The resolved request string.
 
 In the example: `"/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr"`
 
-### `query`
+### `this.query`
 
-A string. The query of the request for the current loader.
+1. In case the loader was configured with an [`options`](/configuration/module/#useentry) object, this will be a reference to the object.
+2. If the loader has no `options`, but was invoked with a query string, this will be a string starting with `?`.
 
-In the example: in loader1: `"?xyz"`, in loader2: `""`
+Use the [`getOptions` method from the `loader-utils`](https://github.com/webpack/loader-utils#getoptions) to extract the given loader options.
 
-### `data`
+### `this.callback`
+
+A function that can be called synchronously or asynchronously in order to return multiple results. The expected arguments are:
+
+```typescript
+this.callback(
+    err: Error | null,
+    content: string | Buffer,
+    sourceMap?: SourceMap,
+    abstractSyntaxTree?: AST
+);
+```
+
+1. The first argument must be an `Error` or `null`
+2. The second argument a `string` or a [`Buffer`](https://nodejs.org/api/buffer.html).
+3. Optional: The third argument must be a source map that is parsable by [this module](https://github.com/mozilla/source-map).
+4. Optional: `AST` can be an Abstract Syntax Tree of the given language, like [`ESTree`](https://github.com/estree/estree). This value is ignored by webpack itself, but useful to speed up the build time if you want to share common ASTs between loaders.
+
+In case this function is called, you should return undefined to avoid ambigious loader results.
+
+### `this.async`
+
+A function than returns either `callback` or a falsy value depending whether asynchronous loader results are supported by the loader pipeline or not.
+
+### `this.data`
 
 A data object shared between the pitch and the normal phase.
 
-### `cacheable`
+### `this.cacheable`
+
+A function that sets the cacheable flag:
 
 ```typescript
 cacheable(flag = true: boolean)
@@ -129,13 +167,13 @@ By default, loader results are cacheable. Call this method passing `false` to ma
 
 A cacheable loader must have a deterministic result, when inputs and dependencies haven't changed. This means the loader shouldn't have other dependencies than specified with `this.addDependency`. Most loaders are deterministic and cacheable.
 
-### `loaders`
+### `this.loaders`
+
+An array of all the loaders. It is writeable in the pitch phase.
 
 ```typescript
 loaders = [{request: string, path: string, query: string, module: function}]
 ```
-
-An array of all the loaders. It is writeable in the pitch phase.
 
 In the example:
 
@@ -154,31 +192,31 @@ In the example:
 ]
 ```
 
-### `loaderIndex`
+### `this.loaderIndex`
 
 The index in the loaders array of the current loader.
 
 In the example: in loader1: `0`, in loader2: `1`
 
-### `resource`
+### `this.resource`
 
 The resource part of the request, including query.
 
 In the example: `"/abc/resource.js?rrr"`
 
-### `resourcePath`
+### `this.resourcePath`
 
 The resource file.
 
 In the example: `"/abc/resource.js"`
 
-### `resourceQuery`
+### `this.resourceQuery`
 
 The query of the resource.
 
 In the example: `"?rrr"`
 
-### `emitWarning`
+### `this.emitWarning`
 
 ```typescript
 emitWarning(message: string)
@@ -186,7 +224,7 @@ emitWarning(message: string)
 
 Emit a warning.
 
-### `emitError`
+### `this.emitError`
 
 ```typescript
 emitError(message: string)
@@ -194,7 +232,7 @@ emitError(message: string)
 
 Emit an error.
 
-### `exec`
+### `this.exec`
 
 ```typescript
 exec(code: string, filename: string)
@@ -204,7 +242,7 @@ Execute some code fragment like a module.
 
 T> Don't use `require(this.resourcePath)`, use this function to make loaders chainable!
 
-### `resolve`
+### `this.resolve`
 
 ```typescript
 resolve(context: string, request: string, callback: function(err, result: string))
@@ -212,7 +250,7 @@ resolve(context: string, request: string, callback: function(err, result: string
 
 Resolve a request like a require expression.
 
-### `resolveSync`
+### `this.resolveSync`
 
 ```typescript
 resolveSync(context: string, request: string) -> string
@@ -220,7 +258,7 @@ resolveSync(context: string, request: string) -> string
 
 Resolve a request like a require expression.
 
-### `addDependency`
+### `this.addDependency`
 
 ```typescript
 addDependency(file: string)
@@ -229,7 +267,7 @@ dependency(file: string) // shortcut
 
 Adds a file as dependency of the loader result in order to make them watchable. For example, [`html-loader`](https://github.com/webpack/html-loader) uses this technique as it finds `src` and `src-set` attributes. Then, it sets the url's for those attributes as dependencies of the html file that is parsed.  
 
-### `addContextDependency`
+### `this.addContextDependency`
 
 ```typescript
 addContextDependency(directory: string)
@@ -237,7 +275,7 @@ addContextDependency(directory: string)
 
 Add a directory as dependency of the loader result.
 
-### `clearDependencies`
+### `this.clearDependencies`
 
 ```typescript
 clearDependencies()
@@ -245,66 +283,30 @@ clearDependencies()
 
 Remove all dependencies of the loader result. Even initial dependencies and these of other loaders. Consider using `pitch`.
 
-### `value`
-
-Pass values to the next loader. If you know what your result exports if executed as module, set this value here (as a only element array).
-
-### `inputValue`
-
-Passed from the last loader. If you would execute the input argument as module, consider reading this variable for a shortcut (for performance).
-
-### `options`
-
-The options passed to the Compiler.
-
-### `debug`
-
-A boolean flag. It is set when in debug mode.
-
-### `minimize`
-
-Should the result be minimized.
-
-### `sourceMap`
-
-Should a SourceMap be generated.
-
-### `target`
+### `this.target`
 
 Target of compilation. Passed from configuration options.
 
 Example values: `"web"`, `"node"`
 
-### `webpack`
+### `this.webpack`
 
 This boolean is set to true when this is compiled by webpack.
 
 T> Loaders were originally designed to also work as Babel transforms. Therefore if you write a loader that works for both, you can use this property to know if there is access to additional loaderContext and webpack features.
 
-### `emitFile`
+### `this.emitFile`
 
 ```typescript
-emitFile(name: string, content: Buffer|String, sourceMap: {...})
+emitFile(name: string, content: Buffer|string, sourceMap: {...})
 ```
 
 Emit a file. This is webpack-specific.
 
-### `fs`
+### `this.fs`
 
 Access to the `compilation`'s `inputFileSystem` property.
 
-### `_compilation`
-
-Hacky access to the Compilation object of webpack.
-
-### `_compiler`
-
-Hacky access to the Compiler object of webpack.
-
-### `_module`
-
-Hacky access to the Module object being loaded.
-
 ### Custom `loaderContext` Properties
 
-Custom properties can be added to the `loaderContext` by either specifying values on the `loader` proprty on your webpack [configuration](/configuration), or by creating a [custom plugin](/api/plugins) that hooks into the `normal-module-loader` event which gives you access to the `loaderContext` to modify or extend.
+Custom properties can be added to the `loaderContext` by either specifying values on the `loader` property on your webpack [configuration](/configuration), or by creating a [custom plugin](/api/plugins) that hooks into the `normal-module-loader` event which gives you access to the `loaderContext` to modify or extend.
