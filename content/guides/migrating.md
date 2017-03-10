@@ -535,7 +535,7 @@ module: {
   rules: [
     {
       resource: /filename/, // matches "/path/filename.js"
-      resourceQuery: /querystring/, // matches "/filename.js?querystring"
+      resourceQuery: /^\?querystring$/, // matches "?querystring"
       issuer: /filename/, // matches "/path/something.js" if requested from "/path/filename.js"
     }
   ]
@@ -558,7 +558,7 @@ module: {
 
 ## Loader 变化
 
-仅与 loader 作者有关的改变。
+以下改变仅影响 loader 的开发者。
 
 ### Cacheable
 

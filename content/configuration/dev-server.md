@@ -350,7 +350,14 @@ proxy: {
 ```
 
 
-## `devServer.public` - 只用在命令行工具(CLI)
+## `devServer.progress` - 只用于命令行工具(CLI)
+
+`boolean`
+
+将运行进度输出到控制台。
+
+
+## `devServer.public` - 只用于命令行工具(CLI)
 
 `string`
 
