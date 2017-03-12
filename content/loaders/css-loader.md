@@ -11,6 +11,8 @@ npm install --save-dev css-loader
 
 ## 用法
 
+The `css-loader` interprets `@import` and `url()` like `requires`.
+
 通过 webpack 配置，CLI或内联使用 loader。
 
 ### 通过 webpack 配置 (推荐)
@@ -29,7 +31,7 @@ module.exports = {
 }
 ```
 
-**在你的程序中**
+**在应用程序中**
 ```js
 import css from 'file.css';
 ```
@@ -40,14 +42,14 @@ import css from 'file.css';
 webpack --module-bind 'css=style-loader!css-loader'
 ```
 
-**在你的程序中**
+**在应用程序中**
 ```js
 import css from 'file.css';
 ```
 
 ### 内联
 
-**在你的程序中**
+**在应用程序中**
 ```js
 import css from 'style-loader!css-loader!./file.css';
 ```
@@ -76,6 +78,7 @@ import css from 'style-loader!css-loader!./file.css';
 |**`camelCase`**|`false`| 导出以驼峰化命名的类名|
 |**`importLoaders`**|`0`| 在 css-loader 前应用的 loader 的数|
 
+The following webpack config can load CSS files, embed small PNG/JPG/GIF/SVG images as well as fonts as [Data URLs](https://tools.ietf.org/html/rfc2397) and copy larger files to the output directory.
 此 webpack 配置可以加载 CSS 文件，嵌入小的 png 图像数据的 url 和 JPG 图像文件。
 
 **webpack.config.js**
@@ -88,12 +91,11 @@ module.exports = {
         use: [ 'style-loader', 'css-loader' ]
       },
       {
-        test: /\.png$/,
-        use: { loader: 'url-loader', options: { limit: 100000 } },
-      },
-      {
-        test: /\.jpg$/,
-        use: [ 'file-loader' ]
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000
+        }
       }
     ]
   }
@@ -219,7 +221,7 @@ exports.locals = {
 
 这将默认启用本地作用于 CSS。（您可以使用`:global(...)` 或 `:global`选择器或/和规则将其关闭。）
 
-### 组合 CSS 
+### 组合 CSS
 
 当声明一个本地类名时，你可以从另一个本地类名组合成一个本地类。
 
@@ -308,6 +310,33 @@ exports.locals = {
 }
 ```
 
+### toString
+
+You can also use the css-loader results directly as string, such as in Angular's component style.
+
+**webpack.config.js**
+
+```js
+{
+   test: /\.css$/,
+   use: [
+     {
+       loaders: ['to-string-loader', 'css-loader']
+     }
+   ]
+}
+```
+
+or
+
+```js
+const cssText = require('./test.css').toString();
+
+console.log(cssText);
+```
+
+If there are SourceMaps, they will also be included in the result string.
+
 ### ImportLoaders
 
 应用于 `@import` 资源的 loaders 的查询参数 `importLoaders` 允许配置。
@@ -361,6 +390,15 @@ exports.locals = {
 
 默认情况下，导出 JSON 键值对形式的类名。如果想要 camelize 类名(在 JS 中应用)，通过设置 css-loader 的查询参数 camelCase 即可实现。
 
+#### Possible Options
+
+|Option|Description|
+|:----:|:--------|
+|**`true`**|Class names will be camelized|
+|**`'dashes'`**|Only dashes in class names will be camelized|
+|**`'only'`** |Class names will be camelized, the original class name will be removed from the locals|
+|**`'dashesOnly'`**|Dashes in class names will be camelized, the original class name will be removed from the locals|
+
 **webpack.config.js**
 ```js
 {
@@ -390,11 +428,30 @@ import { className } from 'file.css';
   <tbody>
     <tr>
       <td align="center">
-        <img width="150" height="150" src="https://github.com/sokra.png?s=150">
-        <br>
-        <a href="https://github.com/sokra">Tobias Koppers</a>
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
       </td>
-    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
+      </td>
+    </tr>
   <tbody>
 </table>
 
@@ -405,14 +462,14 @@ import { className } from 'file.css';
 [node]: https://img.shields.io/node/v/css-loader.svg
 [node-url]: https://nodejs.org
 
-[deps]: https://david-dm.org/webpack/css-loader.svg
-[deps-url]: https://david-dm.org/webpack/css-loader
+[deps]: https://david-dm.org/webpack-contrib/css-loader.svg
+[deps-url]: https://david-dm.org/webpack-contrib/css-loader
 
-[tests]: http://img.shields.io/travis/webpack/css-loader.svg
-[tests-url]: https://travis-ci.org/webpack/css-loader
+[tests]: http://img.shields.io/travis/webpack-contrib/css-loader.svg
+[tests-url]: https://travis-ci.org/webpack-contrib/css-loader
 
-[cover]: https://coveralls.io/repos/github/webpack/css-loader/badge.svg
-[cover-url]: https://coveralls.io/github/webpack/css-loader
+[cover]: https://codecov.io/gh/webpack-contrib/css-loader/branch/master/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack-contrib/css-loader
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack

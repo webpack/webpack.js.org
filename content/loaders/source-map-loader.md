@@ -1,17 +1,20 @@
 ---
 title: source-map-loader
-source: https://raw.githubusercontent.com/webpack/source-map-loader/master/README.md
-edit: https://github.com/webpack/source-map-loader/edit/master/README.md
+source: https://raw.githubusercontent.com/webpack-contrib/source-map-loader/master/README.md
+edit: https://github.com/webpack-contrib/source-map-loader/edit/master/README.md
 ---
-# webpack的source map loader
+## Install
 
-为原文件提取SourceMaps作为 `sourceMappingURL` 的注释。
+```bash
+npm i -D source-map-loader
+```
 
-## 使用
+## 用法
 
-[文档：使用loaders](https://webpack.js.org/concepts/#loaders)
+[文档：使用 loader](https://webpack.js.org/concepts/#loaders)
 
-### webpack配置示例
+
+### webpack 配置示例
 
 ``` javascript
 module.exports = {
@@ -27,11 +30,50 @@ module.exports = {
 };
 ```
 
-这将从所有文件中提取所有SourceMaps。这不是那么的性能，所以你可能只想应用加载器到相关的文件。
+将从所有 js 文件（包括 node_modules）中提取 SourceMap。性能并不是很高，因此您可能只希望将 loader 应用到相关文件。
 
-## License
+## 维护人员
 
-MIT (http://www.opensource.org/licenses/mit-license.php)
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
+      </td>
+    </tr>
+  <tbody>
+</table>
+
+
+[npm]: https://img.shields.io/npm/v/source-map-loader.svg
+[npm-url]: https://npmjs.com/package/source-map-loader
+
+[deps]: https://david-dm.org/webpack-contrib/source-map-loader.svg
+[deps-url]: https://david-dm.org/webpack-contrib/source-map-loader
+
+[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
+[chat-url]: https://gitter.im/webpack/webpack
 
 ***
 

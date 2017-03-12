@@ -3,17 +3,7 @@ title: UglifyjsWebpackPlugin
 source: https://raw.githubusercontent.com/webpack-contrib/uglifyjs-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/uglifyjs-webpack-plugin/edit/master/README.md
 ---
-[![build status](https://secure.travis-ci.org/webpack-contrib/uglifyjs-webpack-plugin.svg)](http://travis-ci.org/webpack-contrib/uglifyjs-webpack-plugin) [![bitHound Score](https://www.bithound.io/github/webpack-contrib/uglifyjs-webpack-plugin/badges/score.svg)](https://www.bithound.io/github/webpack-contrib/uglifyjs-webpack-plugin) [![codecov](https://codecov.io/gh/webpack-contrib/uglifyjs-webpack-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/webpack-contrib/uglifyjs-webpack-plugin)
-
-# UglifyJS Webpack Plugin
-
-这个插件使用 [UglifyJS](https://github.com/mishoo/UglifyJS2) 去压缩你的JavaScript代码。除了它从 webpack 中解耦之外，它和 webpack 核心插件 (`webpack.optimize.UglifyJSPlugin`) 是同一个插件。这允许你控制你正在使用的 UglifyJS 的版本。
-
-> 注意，webpack 在 `webpack.optimize.UglifyJsPlugin` 下包含相同的插件。对于那些想控制 UglifyJS 版本的开发者来说，这是一个独立的版本。除了这种情况下的安装说明，文档是有效的。
-
-## 使用
-
-首先，安装这个插件:
+## Install
 
 ```bash
 yarn add uglifyjs-webpack-plugin --dev
@@ -39,7 +29,7 @@ yarn add git://github.com/mishoo/UglifyJS2#harmony --dev
 yarn add uglify-js --dev
 ```
 
-然后配置如下:
+## 用法
 
 ```javascript
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
@@ -54,8 +44,6 @@ module.exports = {
 };
 ```
 
-就是这样了!
-
 ## 选项
 
 这个插件支持 UglifyJS 的功能，如下所述:
@@ -67,6 +55,7 @@ module.exports = {
 | beautify | boolean | false | 美化输出。 |
 | output | 一个提供 UglifyJS [OutputStream](https://github.com/mishoo/UglifyJS2/blob/master/lib/output.js) 选项的对象 | | 更底层地访问 UglifyJS 输出。 |
 | comments | boolean, RegExp, function(astNode, comment) -> boolean | 默认保存包含 `/*!`, `/**!`, `@preserve` or `@license` 的注释 | 注释相关的配置 |
+| extractComments | boolean, RegExp, function (astNode, comment) -> boolean, object | false | Whether comments shall be extracted to a separate file, see below. |
 | sourceMap | boolean | false | 使用 SourceMaps 将错误信息的位置映射到模块。这会减慢编译的速度。 |
 | test | RegExp, Array<RegExp> | <code>/\.js($&#124;\?)/i</code> | 测试匹配的文件 |
 | include | RegExp, Array<RegExp> | | 只测试包含的文件。 |
@@ -87,6 +76,67 @@ new UglifyJsPlugin({
 })
 ```
 
-## License
+## Extracting Comments
 
-MIT.
+The `extractComments` option can be
+- `true`: All comments that normally would be preserved by the `comments` option will be moved to a separate file. If the original file is named `foo.js`, then the comments will be stored to `foo.js.LICENSE`
+- regular expression (given as `RegExp` or `string`) or a `function (astNode, comment) -> boolean`:
+  All comments that match the given expression (resp. are evaluated to `true` by the function) will be extracted to the separate file. The `comments` option specifies whether the comment will be preserved, i.e. it is possible to preserve some comments (e.g. annotations) while extracting others or even preserving comments that have been extracted.
+- an `object` consisting of the following keys, all optional:
+  - `condition`: regular expression or function (see previous point)
+  - `filename`: The file where the extracted comments will be stored. Can be either a `string` or `function (string) -> string` which will be given the original filename. Default is to append the suffix `.LICENSE` to the original filename.
+  - `banner`: The banner text that points to the extracted file and will be added on top of the original file. will be added to the original file. Can be `false` (no banner), a `string`, or a `function (string) -> string` that will be called with the filename where extracted comments have been stored. Will be wrapped into comment.
+Default: `/*! For license information please see foo.js.LICENSE */`
+
+
+## Maintainers
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
+      </td>
+    </tr>
+  <tbody>
+</table>
+
+
+[npm]: https://img.shields.io/npm/v/uglifyjs-webpack-plugin.svg
+[npm-url]: https://npmjs.com/package/uglifyjs-webpack-plugin
+
+[deps]: https://david-dm.org/webpack-contrib/uglifyjs-webpack-plugin.svg
+[deps-url]: https://david-dm.org/webpack-contrib/uglifyjs-webpack-plugin
+
+[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
+[chat-url]: https://gitter.im/webpack/webpack
+
+[test]: https://secure.travis-ci.org/webpack-contrib/uglifyjs-webpack-plugin.svg
+[test-url]: http://travis-ci.org/webpack-contrib/uglifyjs-webpack-plugin
+
+[cover]: https://codecov.io/gh/webpack-contrib/uglifyjs-webpack-plugin/branch/master/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack-contrib/uglifyjs-webpack-plugin
+
+[quality]: https://www.bithound.io/github/webpack-contrib/uglifyjs-webpack-plugin/badges/score.svg
+[quality-url]: https://www.bithound.io/github/webpack-contrib/uglifyjs-webpack-plugin

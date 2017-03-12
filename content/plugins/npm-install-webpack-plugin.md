@@ -3,50 +3,15 @@ title: NpmInstallWebpackPlugin
 source: https://raw.githubusercontent.com/webpack-contrib/npm-install-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/npm-install-webpack-plugin/edit/master/README.md
 ---
-# npm-install-webpack-plugin
+## Install
 
-> 用Webpack**自动安装&保存依赖**来加快开发速度。
->
-> [![npm-install-webpack-plugin mp4](https://cloud.githubusercontent.com/assets/15182/12540538/6a4e8f1a-c2d0-11e5-97ee-4ddaf6892645.gif)](https://dl.dropboxusercontent.com/u/55764/npm-install-webpack-plugin.mp4)
-
-## 特性
-
-- [x] 适用于Webpack`^v1.12.0`和`^2.1.0-beta.0`。
-- [x] 自动安装`.babelrc`文件里边的插件&预设。
-- [x] 支持ES5&ES6模块。（如：`require`, `import`）
-- [x] 支持带有命名空间的包（Namespaced packages）。（如：`@cycle/dom`）
-- [x] 支持名称用点分隔的包（Dot-delimited packages）。（如：`lodash.capitalize`）
-- [x] 支持CSS的引入。（如：`@import "~bootstrap"`）
-- [x] 支持Webpack加载器（loaders）。（如：`babel-loader`, `file-loader`等等）
-- [x] 支持内联Webpack加载器（loaders）。（如：`require("bundle?lazy!./App"`）
-- [x] 自动安装缺少的`peerDependencies`。（如：`@cycle/core`会自动安装`rx@*`）
-- [x] 支持Webpack`resolve.alias`&`resolve.root`的配置。（如：`require("react")`可以别名成`react-lite`）
-
-[![travis build](https://img.shields.io/travis/ericclemmons/npm-install-webpack-plugin.svg)](https://travis-ci.org/ericclemmons/npm-install-webpack-plugin)
-[![Coverage Status](https://coveralls.io/repos/ericclemmons/npm-install-webpack-plugin/badge.svg?branch=master&service=github)](https://coveralls.io/github/ericclemmons/npm-install-webpack-plugin?branch=master)
-[![version](https://img.shields.io/npm/v/npm-install-webpack-plugin.svg)](http://npm.im/npm-install-webpack-plugin)
-[![downloads](https://img.shields.io/npm/dm/npm-install-webpack-plugin.svg)](http://npm-stat.com/charts.html?package=npm-install-webpack-plugin)
-[![MIT License](https://img.shields.io/npm/l/npm-install-webpack-plugin.svg)](http://opensource.org/licenses/MIT)
-
-- - -
-
-### 为什么?
-
-只是为了安装一个不知道什么时候需要用到的依赖而<kbd>Ctrl-C</kbd>去中断构建脚本&服务，非常坑。
-
-相反，如果使用`require`或者`import`正常引入，构建脚本和服务在运行的时候，`npm install`就会**自动安装&保存缺少的依赖**。
-
-
-### 安装
-
-```shell
+```bash
 $ npm install --save-dev npm-install-webpack-plugin
 ```
 
+## 用法
 
-### 使用
-
-在`webpack.config.js`文件中写入：
+在 `webpack.config.js` 中：
 
 ```js
 plugins: [
@@ -54,14 +19,14 @@ plugins: [
 ],
 ```
 
-**相当于**:
+**相当于**：
 
 ```js
 plugins: [
   new NpmInstallPlugin({
-    // 使用--save或者--save-dev
+    // 使用 --save 或者 --save-dev
     dev: false,
-    // 安装缺少的peerDependencies
+    // 安装缺少的 peerDependencies
     peerDependencies: true,
     // 减少控制台日志记录的数量
     quiet: false,
@@ -69,7 +34,7 @@ plugins: [
 ],
 ```
 
-可以提供一个`Function`来动态设置`dev`：
+可以提供一个 `Function` 来动态设置 `dev`：
 
 ```js
 plugins: [
@@ -85,7 +50,64 @@ plugins: [
 ],
 ```
 
+## Demo
 
-### License
+[![npm-install-webpack-plugin mp4](https://cloud.githubusercontent.com/assets/15182/12540538/6a4e8f1a-c2d0-11e5-97ee-4ddaf6892645.gif)](https://dl.dropboxusercontent.com/u/55764/npm-install-webpack-plugin.mp4)
 
-> MIT License 2016 © Eric Clemmons
+## Features
+
+- [x] Works with both Webpack `^v1.12.0` and `^2.1.0-beta.0`.
+- [x] Auto-installs `.babelrc` plugins & presets.
+- [x] Supports both ES5 & ES6 Modules.
+  (e.g. `require`, `import`)
+- [x] Supports Namespaced packages.
+  (e.g. `@cycle/dom`)
+- [x] Supports Dot-delimited packages.
+  (e.g. `lodash.capitalize`)
+- [x] Supports CSS imports.
+  (e.g. `@import "~bootstrap"`)
+- [x] Supports Webpack loaders.
+  (e.g. `babel-loader`, `file-loader`, etc.)
+- [x] Supports inline Webpack loaders.
+  (e.g. `require("bundle?lazy!./App"`)
+- [x] Auto-installs missing `peerDependencies`.
+  (e.g. `@cycle/core` will automatically install `rx@*`)
+- [x] Supports Webpack's `resolve.alias` & `resolve.root` configuration.
+  (e.g. `require("react")` can alias to `react-lite`)
+
+## Maintainers
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/15182?v=3&s=150">
+        </br>
+        <a href="https://github.com/ericclemmons">Eric Clemmons</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/226692?v=3&s=150">
+        </br>
+        <a href="https://github.com/insin">Jonny Buchanan</a>
+      </td>
+    </tr>
+  <tbody>
+</table>
+
+
+[npm]: https://img.shields.io/npm/v/npm-install-webpack-plugin.svg
+[npm-url]: https://npmjs.com/package/npm-install-webpack-plugin
+
+[deps]: https://david-dm.org/webpack-contrib/npm-install-webpack-plugin.svg
+[deps-url]: https://david-dm.org/webpack-contrib/npm-install-webpack-plugin
+
+[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
+[chat-url]: https://gitter.im/webpack/webpack
+
+[test]: https://travis-ci.org/webpack-contrib/npm-install-webpack-plugin.svg?branch=master
+[test-url]: https://travis-ci.org/webpack-contrib/npm-install-webpack-plugin
+
+[cover]: https://codecov.io/gh/webpack-contrib/npm-install-webpack-plugin/branch/master/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack-contrib/npm-install-webpack-plugin

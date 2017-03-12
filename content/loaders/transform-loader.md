@@ -3,13 +3,15 @@ title: transform-loader
 source: https://raw.githubusercontent.com/webpack-contrib/transform-loader/master/README.md
 edit: https://github.com/webpack-contrib/transform-loader/edit/master/README.md
 ---
-# transform loader for webpack
+## Install
 
-通过 webpack 加载器的方式来使用 browserify 的转换模块。
+```bash
+npm i transform-loader --save
+```
 
 ## 用法
 
-[文档：使用加载器](http://webpack.github.io/docs/using-loaders.html)
+[文档：使用 loader](http://webpack.github.io/docs/using-loaders.html)
 
 通过查询参数来传递模块名。
 
@@ -20,7 +22,7 @@ var x = require("!transform-loader/cacheable?brfs!./file.js"); // 可缓存版�
 
 如果你传递了一个数字，将得到 `this.options.transforms[number]` 中的函数。
 
-### webpack 2 配置示例
+### webpack 2.x 配置示例
 
 ``` javascript
 module.exports = {
@@ -30,7 +32,7 @@ module.exports = {
         loader: "transform-loader?brfs",
         enforce: "post"
       },
-			{
+      {
         test: /\.coffee$/,
         loader: "transform-loader/cacheable?coffeeify"
       },
@@ -58,7 +60,7 @@ module.exports = {
 };
 ```
 
-### webpack 1 配置示例
+### webpack 1.x 配置示例
 
 ``` javascript
 module.exports = {
@@ -91,7 +93,7 @@ module.exports = {
 };
 ```
 
-### 典型例子 brfs
+## 典型 brfs 示例
 
 假如你有下面这样的 Node 源码：
 
@@ -118,9 +120,48 @@ module.exports = {
 
 加载器将应用到所有 JS 文件，这样在执行 watch 任务时将导致性能提醒。因此你也许需要使用带缓存的版本 `transform-loader/cacheable?brfs` 。
 
-## License
+## 维护人员
 
-MIT (http://www.opensource.org/licenses/mit-license.php)
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
+      </td>
+    </tr>
+  <tbody>
+</table>
+
+
+[npm]: https://img.shields.io/npm/v/transform-loader.svg
+[npm-url]: https://npmjs.com/package/transform-loader
+
+[deps]: https://david-dm.org/webpack-contrib/transform-loader.svg
+[deps-url]: https://david-dm.org/webpack-contrib/transform-loader
+
+[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
+[chat-url]: https://gitter.im/webpack/webpack
 
 ***
 

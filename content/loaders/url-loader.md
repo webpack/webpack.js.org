@@ -34,31 +34,39 @@ require("url-loader?prefix=img/!./file.png");
 
 不要犹豫发起 pull request。任何贡献都是赞赏的。在开发时你可以通过 `npm test` 进行用例测试。
 
-## 维护者
+## 维护人员
 
 <table>
   <tbody>
     <tr>
       <td align="center">
-        <img width="150 height="150"
-        src="https://avatars.githubusercontent.com/sokra?v=3">
-        <br />
-        <a href="https://github.com/">Tobias Koppers</a>
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
       </td>
       <td align="center">
-        <img width="150 height="150"
-        src="https://avatars.githubusercontent.com/SpaceK33z?v=3">
-        <br />
-        <a href="https://github.com/">Kees Kluskens</a>
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
       </td>
-    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
+      </td>
+    </tr>
   <tbody>
 </table>
 
-
-## LICENSE
-
-#### [MIT](./LICENSE)
 
 [npm]: https://img.shields.io/npm/v/url-loader.svg
 [npm-url]: https://npmjs.com/package/url-loader

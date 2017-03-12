@@ -1,28 +1,26 @@
 ---
 title: react-proxy-loader
-source: https://raw.githubusercontent.com/webpack/react-proxy-loader/master/README.md
-edit: https://github.com/webpack/react-proxy-loader/edit/master/README.md
+source: https://raw.githubusercontent.com/webpack-contrib/react-proxy-loader/master/README.md
+edit: https://github.com/webpack-contrib/react-proxy-loader/edit/master/README.md
 ---
-# react-proxy-loader
-
-在代理组件中封装react组件以启用代码拆分（加载一个react组件及其依赖需求）
-
 ## 安装
 
-`npm install react-proxy-loader`
+```bash
+npm install react-proxy-loader`
+```
 
-## 使用
+## 用法
 
-[文档：使用loaders](http://webpack.github.io/docs/using-loaders.html)
+[文档：使用 loader](http://webpack.github.io/docs/using-loaders.html)
 
 ``` js
 var Component = require("react-proxy-loader!./Component");
 // => 返回代理组件（它按需加载。）
-// （webpack为此组件及其依赖项创建一个附加块）
+// （webpack 为此组件及其依赖项创建一个额外的 chunk）
 
 var ComponentProxyMixin = require("react-proxy-loader!./Component").Mixin;
-// => 返回代理组件的mixin
-// （这允许您为prox的加载状态设置渲染）
+// => 返回代理组件的 mixin
+// （这允许您为 proxy 的加载状态设置渲染）
 var ComponentProxy = React.createClass({
 	mixins: [ComponentProxyMixin],
 	renderUnavailable: function() {
@@ -33,8 +31,7 @@ var ComponentProxy = React.createClass({
 
 代理是一个react组件。所有属性都将传输到包装组件。
 
-### Configuration
-### 配置
+## 配置
 
 代替（或除了）内联加载器调用之外，还可以在配置中指定代理组件：
 
@@ -56,17 +53,56 @@ module.exports = {
 };
 ```
 
-### 块名称
+### Chunk 名称
 
-您可以使用 `name` 查询参数为该块提供名称：
+您可以使用 `name` 查询参数为该 chunk 提供名称：
 
 ``` js
 var Component = require("react-proxy-loader?name=chunkName!./Component");
 ```
 
-# License
+## 维护人员
 
-MIT (http://www.opensource.org/licenses/mit-license.php)
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
+      </td>
+    </tr>
+  <tbody>
+</table>
+
+
+[npm]: https://img.shields.io/npm/v/react-proxy-loader.svg
+[npm-url]: https://npmjs.com/package/react-proxy-loader
+
+[deps]: https://david-dm.org/webpack-contrib/react-proxy-loader.svg
+[deps-url]: https://david-dm.org/webpack-contrib/react-proxy-loader
+
+[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
+[chat-url]: https://gitter.im/webpack/webpack
 
 ***
 

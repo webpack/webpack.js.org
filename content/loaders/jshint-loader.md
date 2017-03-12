@@ -1,9 +1,13 @@
 ---
 title: jshint-loader
-source: https://raw.githubusercontent.com/webpack/jshint-loader/master/README.md
-edit: https://github.com/webpack/jshint-loader/edit/master/README.md
+source: https://raw.githubusercontent.com/webpack-contrib/jshint-loader/master/README.md
+edit: https://github.com/webpack-contrib/jshint-loader/edit/master/README.md
 ---
-#webpack的jshint loader
+## Install
+
+```bash
+npm i jshint-loader --save
+```
 
 ## 用法
 在你的webpack配置里启用jshint loader
@@ -39,9 +43,11 @@ module.exports = {
 }
 ```
 
-### 自定义报告函数
-在默认情况下，`jshint-loader`会提供一个默认的报告方法。  
-然而，如果你想自定义报告函数，你可以在`jshint`配置下 key 为`report`下的配置项里传入自定义的函数（参考上文的用法）  
+## 自定义报告函数
+在默认情况下，`jshint-loader`会提供一个默认的报告方法。
+
+然而，如果你想自定义报告函数，你可以在`jshint`配置下 key 为`report`下的配置项里传入自定义的函数。（参考上文的*用法*）
+
 然后，jshint将会生成与以下示例结构一致的错误/警告信息（数组）给报告函数。
 ```js
 [
@@ -61,8 +67,8 @@ module.exports = {
 // 更多的错误/警告
 ]
 ```
-报告函数会将loader的上下文信息保存在`this`后执行。你可以使用`this.emitWarning(...)`或者`this.emitError(...)`方法,手动触发信息的报告。请参考[关于loader上下文的webpack文档](http://webpack.github.io/docs/loaders.html#loader-context).  
-####**注意:** `jshint reporters` 是与  `jshint-loader` **不兼容**的!  
+报告函数会将loader的上下文信息保存在`this`后执行。你可以使用`this.emitWarning(...)`或者`this.emitError(...)`方法,手动触发信息的报告。请参考[关于loader上下文的webpack文档](http://webpack.github.io/docs/loaders.html#loader-context).
+####**注意:** `jshint reporters` 是与  `jshint-loader` **不兼容**的!
 这是因为reporter的输入来源，只能从一个文件，而不能同时从多个文件读取。在这种方式下的错误报告，是与jshint的[传统 reporters ](http://www.jshint.com/docs/reporters/) 不一样的，因为loader插件（例如 jshint-loader）是会在每一个源文件上执行的，因此它们的报告函数也会分别对应每一个源文件上执行。
 webpack控制台输出的格式大致如下：
 ```js
@@ -73,10 +79,53 @@ WARNING in ./path/to/file.js
 
 ...
 ```
+`
 
-## License
+## Maintainers
 
-MIT (http://www.opensource.org/licenses/mit-license.php)
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
+      </td>
+    </tr>
+  <tbody>
+</table>
+
+
+[npm]: https://img.shields.io/npm/v/jshint-loader.svg
+[npm-url]: https://npmjs.com/package/jshint-loader
+
+[deps]: https://david-dm.org/webpack-contrib/jshint-loader.svg
+[deps-url]: https://david-dm.org/webpack-contrib/jshint-loader
+
+[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
+[chat-url]: https://gitter.im/webpack/webpack
+
+[test]: http://img.shields.io/travis/webpack-contrib/jshint-loader.svg
+[test-url]: https://travis-ci.org/webpack-contrib/jshint-loader
 
 ***
 

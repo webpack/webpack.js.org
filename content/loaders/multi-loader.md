@@ -1,15 +1,15 @@
 ---
 title: multi-loader
-source: https://raw.githubusercontent.com/webpack/multi-loader/master/README.md
-edit: https://github.com/webpack/multi-loader/edit/master/README.md
+source: https://raw.githubusercontent.com/webpack-contrib/multi-loader/master/README.md
+edit: https://github.com/webpack-contrib/multi-loader/edit/master/README.md
 ---
-# multi-loader
+## Install
 
-这个loader多次需要一个模块，每次被加载一个不同的loader。像在多入口点中，导出最后一个loader的导出。
+```bash
+npm i multi-loader --save
+```
 
-普通用户可能不需要这个loader，但它与其它loader结合使用还是很有用的。
-
-例：
+## Usage
 
 ``` javascript
 var multi = require("multi-loader");
@@ -31,9 +31,48 @@ var multi = require("multi-loader");
 }
 ```
 
-## License
+## 维护人员
 
-MIT (http://www.opensource.org/licenses/mit-license.php)
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
+      </td>
+    </tr>
+  <tbody>
+</table>
+
+
+[npm]: https://img.shields.io/npm/v/multi-loader.svg
+[npm-url]: https://npmjs.com/package/multi-loader
+
+[deps]: https://david-dm.org/webpack-contrib/multi-loader.svg
+[deps-url]: https://david-dm.org/webpack-contrib/multi-loader
+
+[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
+[chat-url]: https://gitter.im/webpack/webpack
 
 ***
 

@@ -1,15 +1,19 @@
 ---
 title: worker-loader
-source: https://raw.githubusercontent.com/webpack/worker-loader/master/README.md
-edit: https://github.com/webpack/worker-loader/edit/master/README.md
+source: https://raw.githubusercontent.com/webpack-contrib/worker-loader/master/README.md
+edit: https://github.com/webpack-contrib/worker-loader/edit/master/README.md
 ---
-# webpack的worker loader
+## 安装
 
-## 使用
+```bash
+npm i -D worker-loader
+```
 
-[文档：使用loaders](http://webpack.github.io/docs/using-loaders.html)
+## 用法
 
-导入worker文件：
+[文档：使用 loader](http://webpack.github.io/docs/using-loaders.html)
+
+导入 worker 文件：
 
 ``` javascript
 // main.js
@@ -24,7 +28,20 @@ worker.addEventListener("message", function(event) {...});
 您还可以使用inline参数将worker作为blob内联：
 
 ``` javascript
-var MyWorker = require("worker-loader?inline!./file.js");
+var MyWorker = require("worker-loader?inline!./myWorker.js");
+```
+
+Inline mode will also create chunks for browsers without supporting of inline workers,
+to disable this behavior just set `fallback` parameter as `false`:
+
+``` javascript
+var MyWorker = require("worker-loader?inline&fallback=false!./myWorker.js");
+```
+
+To set custom name use the `name` parameter:
+
+``` javascript
+var MyWorker = require("worker-loader?name=[name].js!./myWorker.js");
 ```
 
 
@@ -50,9 +67,57 @@ let o = {foo: 'foo'}
 _.has(o, 'foo') // true
 ```
 
-## License
+## 维护人员
 
-MIT (http://www.opensource.org/licenses/mit-license.php)
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/5635476?v=3&s=150">
+        </br>
+        <a href="https://github.com/TrySound">Bogdan Chadkin</a>
+      </td>
+    </tr>
+  <tbody>
+</table>
+
+
+[npm]: https://img.shields.io/npm/v/worker-loader.svg
+[npm-url]: https://npmjs.com/package/worker-loader
+
+[deps]: https://david-dm.org/webpack-contrib/worker-loader.svg
+[deps-url]: https://david-dm.org/webpack-contrib/worker-loader
+
+[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
+[chat-url]: https://gitter.im/webpack/webpack
+
+[test]: http://img.shields.io/travis/webpack-contrib/worker-loader.svg
+[test-url]: https://travis-ci.org/webpack-contrib/worker-loader
 
 ***
 

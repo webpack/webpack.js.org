@@ -1,46 +1,94 @@
 ---
 title: mocha-loader
-source: https://raw.githubusercontent.com/webpack/mocha-loader/master/README.md
-edit: https://github.com/webpack/mocha-loader/edit/master/README.md
+source: https://raw.githubusercontent.com/webpack-contrib/mocha-loader/master/README.md
+edit: https://github.com/webpack-contrib/mocha-loader/edit/master/README.md
 ---
-# webpack的mocha-loader
+## 安装
+
+```bash
+npm install --save-dev mocha-loader
+```
+
 ## 用法
 
-### 命令行
+### 配置（推荐）
 
-*提示*: 当需要在命令行输入"！"时， 你需要在其前面插入 `\` 将其转义。
-
-``` text
-webpack-dev-server 'mocha!./my-client-tests.js' --options webpackOptions.js
-```
-
-``` text
-enhanced-require 'mocha!./my-server-tests.js'
-```
-### 配置
-#### webpack.config.js
-
+**webpack.config.js**
 ```js
 
 module.exports = {
-    entry: './entry-file.js',
-    output: {
-        path: __dirname,
-        filename: 'bundle.js'
-    }
+  entry: './entry.js',
+  output: {
+    path: __dirname,
+    filename: 'bundle.js'
+  }
 }
 ```
 
-#### entry-file.js
 ```js
-/*与其他loader配合需要的额外配置 (polyfills, ...)*/
-const context = require.context(/*目录*/'mocha-loader!./tests', /*循环*/true, /*符合条件的文件*//_test.js$/);
-context.keys().forEach(context);
+import test from './test'
 ```
 
-## License
+### 命令行接口(CLI)
 
-MIT (http://www.opensource.org/licenses/mit-license.php)
+```bash
+webpack --module-bind 'mocha-loader!./test'
+```
+
+```js
+import test from './test'
+```
+
+### Require
+
+```js
+import test from 'mocha-loader!./test'
+```
+
+## 选项
+
+## 维护人员
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
+      </td>
+    </tr>
+  <tbody>
+</table>
+
+
+[npm]: https://img.shields.io/npm/v/mocha-loader.svg
+[npm-url]: https://npmjs.com/package/mocha-loader
+
+[deps]: https://david-dm.org/webpack/mocha-loader.svg
+[deps-url]: https://david-dm.org/webpack/mocha-loader
+
+[chat]: https://badges.gitter.im/webpack/webpack.svg
+[chat-url]: https://gitter.im/webpack/webpack
 
 ***
 
