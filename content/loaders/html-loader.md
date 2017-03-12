@@ -24,9 +24,9 @@ With this configuration:
 ```js
 {
   module: {
-    loaders: [
-      { test: /\.jpg$/, loader: "file-loader" },
-      { test: /\.png$/, loader: "url-loader?mimetype=image/png" }
+    rules: [
+      { test: /\.jpg$/, use: [ "file-loader" ] },
+      { test: /\.png$/, use: [ "url-loader?mimetype=image/png" ] }
     ]
   },
   output: {
@@ -74,16 +74,50 @@ minimized by running `webpack --optimize-minimize`
       data-src=data:image/png;base64,...>'
 ```
 
-or specify the `minimize` query in your `webpack.conf.js`
+or specify the `minimize` property in the rule's options in your `webpack.conf.js`
 
 ```js
 module: {
-  loaders: [{
+  rules: [{
     test: /\.html$/,
-    loader: 'html',
-    query: {
-      minimize: true
-    }
+    use: [ {
+      loader: 'html-loader',
+      options: {
+        minimize: true
+      }
+    }],
+  }]
+}
+```
+
+The enabled rules for minimizing by default are the following ones:
+ - removeComments
+ - removeCommentsFromCDATA
+ - removeCDATASectionsFromCDATA
+ - collapseWhitespace
+ - conservativeCollapse
+ - removeAttributeQuotes
+ - useShortDoctype
+ - keepClosingSlash
+ - minifyJS
+ - minifyCSS
+ - removeScriptTypeAttributes
+ - removeStyleTypeAttributes
+ 
+ The rules can be disabled using the following options in your `webpack.conf.js`
+
+```js
+module: {
+  rules: [{
+    test: /\.html$/,
+    use: [ {
+      loader: 'html-loader',
+      options: {
+        minimize: true,
+        removeComments: false,
+        collapseWhitespace: false
+      }
+    }],
   }]
 }
 ```
@@ -161,10 +195,10 @@ var path = require('path')
 module.exports = {
   ...
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.html$/,
-        loader: "html-loader"
+        use: [ "html-loader" ]
       }
     ]
   },
@@ -182,10 +216,10 @@ If you need to define two different loader configs, you can also change the conf
 module.exports = {
   ...
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.html$/,
-        loader: "html-loader?config=otherHtmlLoaderConfig"
+        use: [ "html-loader?config=otherHtmlLoaderConfig" ]
       }
     ]
   },
@@ -213,7 +247,7 @@ will write the _.html_ file for you. Example:
 ```js
 {
   test: /\.html$/,
-  loader: 'file-loader?name=[path][name].[ext]!extract-loader!html-loader'
+  use: [ 'file-loader?name=[path][name].[ext]!extract-loader!html-loader' ]
 }
 ```
 
@@ -274,31 +308,6 @@ will write the _.html_ file for you. Example:
   </tbody>
 </table>
 
-## LICENSE
-
-> MIT
-
-> http://www.opensource.org/licenses/mit-license.php
-
-> Copyright (c) 2016 Tobias Koppers @sokra
-
-> Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-> The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
 
 [npm]: https://img.shields.io/npm/v/html-loader.svg
 [npm-url]: https://npmjs.com/package/html-loader

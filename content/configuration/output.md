@@ -98,11 +98,11 @@ If multiple modules would result in the same name, [`output.devtoolFallbackModul
 
 ## `output.hashFunction`
 
-The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`(https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm)] are supported.
+The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm) are supported.
 
 ## `output.hashDigest`
 
-The hashing algorithm to use, defaults to `'hex'`. All functions from Node.JS' [`hash.digest`(https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding_crypto_createhash_algorithm)] are supported.
+The hashing algorithm to use, defaults to `'hex'`. All functions from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported.
 
 ## `output.hashDigestLength`
 
@@ -413,7 +413,7 @@ Be aware that if `MyLibrary` isn't defined earlier your library will be set in g
 `libraryTarget: "jsonp"` - This will wrap the return value of your entry point into a jsonp wrapper.
  
  ```javascript
- MyLibrary( _entry_return_ );
+ MyLibrary(_entry_return_);
  ```
 
 The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.

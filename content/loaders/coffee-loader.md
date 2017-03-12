@@ -3,33 +3,137 @@ title: coffee-loader
 source: https://raw.githubusercontent.com/webpack-contrib/coffee-loader/master/README.md
 edit: https://github.com/webpack-contrib/coffee-loader/edit/master/README.md
 ---
-# coffee-script loader for webpack
+## Install
+
+```bash
+npm install --save-dev coffee-loader
+```
 
 ## Usage
 
-``` javascript
-var exportsOfFile = require("coffee-loader!./file.coffee");
-// => return exports of executed and compiled file.coffee
 
-var exportsOfFile2 = require("coffee-loader?literate!./file.litcoffee");
-// can also compile literate files.
+```js
+import coffee from 'coffee-loader!./file.coffee';
 ```
 
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
+### Configuration (recommended)
 
-### Recommended configuration
 
-``` javascript
-{
-	module: {
-		loaders: [
-			{ test: /\.coffee$/, loader: "coffee-loader" },
-			{ test: /\.(coffee\.md|litcoffee)$/, loader: "coffee-loader?literate" }
-		]
-	}
+```js
+import coffee from 'file.coffee';
+```
+
+**webpack.config.js**
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.coffee$/,
+        use: [ 'coffee-loader' ]
+      }
+    ]
+  }
 }
 ```
 
-## License
+## Options
 
-MIT (http://www.opensource.org/licenses/mit-license.php)
+|Name|Default|Description|
+|:--:|:-----:|:----------|
+|**`literate`**|`false`|Enable CoffeeScript in Markdown (Code Blocks) e.g `file.coffee.md`|
+|**`sourceMap`**|`false`|Enable/Disable Sourcemaps|
+
+### [Literate](http://coffeescript.org/#literate)
+
+**webpack.config.js**
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.coffee.md$/,
+        use: [
+          {
+            loader: 'coffee-loader',
+            options: { literate: true }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### Sourcemaps
+
+**webpack.config.js**
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.coffee$/,
+        use: [
+          {
+            loader: 'coffee-loader',
+            options: { sourceMap: true }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+## Maintainer
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
+      </td>
+    </tr>
+  <tbody>
+</table>
+
+
+[npm]: https://img.shields.io/npm/v/coffee-loader.svg
+[npm-url]: https://npmjs.com/package/coffee-loader
+
+[node]: https://img.shields.io/node/v/coffee-loader.svg
+[node-url]: https://nodejs.org
+
+[deps]: https://david-dm.org/webpack/coffee-loader.svg
+[deps-url]: https://david-dm.org/webpack/coffee-loader
+
+[tests]: http://img.shields.io/travis/webpack/coffee-loader.svg
+[tests-url]: https://travis-ci.org/webpack/coffee-loader
+
+[cover]: https://coveralls.io/repos/github/webpack/coffee-loader/badge.svg
+[cover-url]: https://coveralls.io/github/webpack/coffee-loader
+
+[chat]: https://badges.gitter.im/webpack/webpack.svg
+[chat-url]: https://gitter.im/webpack/webpack

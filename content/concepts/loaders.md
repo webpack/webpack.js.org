@@ -70,7 +70,7 @@ This is a concise way to display loaders, and helps to maintain clean code. It a
         use: [
           { loader: ['style-loader'](/loaders/style-loader)},
           {
-            loader: ['css-loader'](/loaders/css-loader)},
+            loader: ['css-loader'](/loaders/css-loader),
             options: {
               modules: true
             }
@@ -100,7 +100,7 @@ T> Use `module.rules` whenever possible, as this will reduce boilerplate in your
 Optionally, you could also use loaders through the CLI:
 
 ```sh
-webpack --module-bind jade --module-bind 'css=style!css'
+webpack --module-bind jade-loader --module-bind 'css=style-loader!css-loader'
 ```
 
 This uses the `jade-loader` for `.jade` files, and the [`style-loader`](/loaders/style-loader) and [`css-loader`](/loaders/css-loader) for `.css` files.
