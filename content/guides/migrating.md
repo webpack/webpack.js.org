@@ -560,7 +560,7 @@ module: {
 
 ## Loader 变化
 
-仅与 loader 作者有关的改变。
+以下改变仅影响 loader 的开发者。
 
 ### Cacheable
 
