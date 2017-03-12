@@ -229,7 +229,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 | --display-reasons       | 在输出中显示引入模块的原因                          | boolean |
 | --display-used-exports  | 显示模块中被使用的接口（Tree Shaking）              | boolean |
 | --hide-modules          | 隐藏关于模块的信息                                 | boolean |
-| --sort-assets-by        | 对 assets 列表以某种属性排序S                      | string  |
+| --sort-assets-by        | 对 assets 列表以某种属性排序                      | string  |
 | --sort-chunks-by        | 对 chunks 列表以某种属性排序                       | string  |
 | --sort-modules-by       | 对模块列表以某种属性排序                            | string  |
 | --verbose               | 显示更多信息                                      | boolean |

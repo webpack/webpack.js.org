@@ -38,7 +38,7 @@ let Sections = [
     url: '//github.com/webpack-china/awesome-webpack-cn'
   },
   {
-      title: 'Support',
+      title: '支持',
       url: 'support'
   }
 ];
