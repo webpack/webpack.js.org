@@ -24,7 +24,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 * [`script-loader`](/loaders/script-loader) Executes a JavaScript file once in global context (like in script tag), requires are not parsed
 * [`babel-loader`](/loaders/babel-loader) Loads ES2015+ code and transpiles to ES5 using [Babel](https://babeljs.io/)
 * `traceur-loader` Loads ES2015+ code and transpiles to ES5 using [Traceur](https://github.com/google/traceur-compiler#readme)
-* `typescript-loader` Loads [TypeScript](https://www.typescriptlang.org/) like JavaScript
+* [`ts-loader`](https://github.com/TypeStrong/ts-loader) or [`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader) Loads [TypeScript](https://www.typescriptlang.org/) 2.0+ like JavaScript
 * [`coffee-loader`](/loaders/coffee-loader) Loads [CoffeeScript](http://coffeescript.org/) like JavaScript
 
 ## Templating
