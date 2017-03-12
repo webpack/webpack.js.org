@@ -3,6 +3,7 @@ title: Tree Shaking
 contributors:
   - simon04
   - zacanger
+  - alexjoverm
 ---
 
 _Tree shaking_ is a term commonly used in the JavaScript context for dead-code elimination, or more precisely, live-code import. It relies on ES2015 module [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)/[export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) for the [static structure](http://exploringjs.com/es6/ch_modules.html#static-module-structure) of its module system. The name and concept have been popularized by the ES2015 module bundler [rollup](https://github.com/rollup/rollup).
@@ -75,5 +76,6 @@ function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});va
 
 ## Weblinks
 
+* [Tree shaking with Webpack 2, TypeScript and Babel](https://alexjoverm.github.io/2017/03/06/Tree-shaking-with-Webpack-2-TypeScript-and-Babel/)
 * [Tree-shaking with webpack 2 and Babel 6](http://www.2ality.com/2015/12/webpack-tree-shaking.html)
 * [Webpack 2 Tree Shaking Configuration](https://medium.com/modus-create-front-end-development/webpack-2-tree-shaking-configuration-9f1de90f3233#.15tuaw71x)

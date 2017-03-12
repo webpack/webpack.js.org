@@ -26,6 +26,27 @@ function determineDate() {
 
 determineDate();
 ```
+T> Keep in mind that `import()` path cannot be fully dynamic (e.g., `import(Math.random())`). Rather either completely static (e.g., `import('./locale/de.json')`) or partially static (e.g., `import('./locale/' + language + '.json')`).
+
+## Promise polyfill
+
+W> `import()` relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally.
+
+If you use `import()` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
+
+In an entry point of your application:
+```javascript
+import Es6Promise from 'es6-promise';
+Es6Promise.polyfill();
+// or
+import 'es6-promise/auto';
+// or
+import Promise from 'promise-polyfill';
+if (!window.Promise) {
+  window.Promise = Promise;
+}
+// or ...
+```
 
 ## Usage with Babel
 

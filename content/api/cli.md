@@ -176,7 +176,7 @@ These options allow you to bind [modules](/configuration/module/) as allowed by 
 
 | Parameter          | Explanation                        | Usage                       |
 |--------------------|------------------------------------|-----------------------------|
-| --module-bind      | Bind an extension to a loader      | --module-bind /\.js$/=babel |
+| --module-bind      | Bind an extension to a loader      | --module-bind /\.js$/=babel-loader |
 | --module-bind-post | Bind an extension to a post loader |                             |
 | --module-bind-pre  | Bind an extension to a pre loader  |                             |
 
@@ -233,7 +233,7 @@ These options allow webpack to display various [stats](/configuration/stats/) an
 | --sort-assets-by        | Sorts the assets list by property in asset                         | string  |
 | --sort-chunks-by        | Sorts the chunks list by property in chunk                         | string  |
 | --sort-modules-by       | Sorts the modules list by property in module                       | string  |
-| --verbose, -v           | Show more details                                                  | boolean |
+| --verbose               | Show more details                                                  | boolean |
 
 ### Advanced Options
 

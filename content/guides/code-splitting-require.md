@@ -185,11 +185,13 @@ console.log('***** I AM c *****');
 
 Now just add `bundle.js` in your HTML file and open it in your broswer, the `0.bundle.js` will be loaded on demand (from `https://cdn.example.com/assets/0.bundle.js`) by webpack.
 
-W> `require.ensure` relies on `Promises` internally. If you use `require.ensure` with older browsers, remember to shim `Promise.` [es6-promise polyfill](https://github.com/stefanpenner/es6-promise).
-
 **More examples**
 * https://github.com/webpack/webpack/tree/master/examples/code-splitting
 * https://github.com/webpack/webpack/tree/master/examples/named-chunks – illustrates the use of `chunkName`
+
+## Promise polyfill
+
+W> `require.ensure` relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. See [this section](/guides/code-splitting-import#promise-polyfill) for possible polyfills.
 
 ## Gotchas for `require.ensure()`
 

@@ -5,6 +5,7 @@ contributors:
   - sokra
   - skipjack
   - jouni-kantola
+  - jhnns
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -43,6 +44,8 @@ There are two input values for the conditions:
 In a Rule the properties [`test`](#rule-test), [`include`](#rule-include), [`exclude`](#rule-exclude) and [`resource`](#rule-resource) are matched with the resource and the property [`issuer`](#rule-issuer) is matched with the issuer.
 
 When using multiple conditions, all conditions must match.
+
+W> Be careful! The resource is the _resolved_ path of the file, which means symlinked resources are the real path _not_ the symlink location. This is good to remember when using tools that symlink packages (like `npm link`), common conditions like `/node_modules/` may inadvertently miss symlinked files.
 
 ### Rule results
 
@@ -156,11 +159,13 @@ parser: {
 
 A [`Condition`](#condition) matched with the resource. See details in [`Rule` conditions](#rule-conditions).
 
+## `Rule.resourceQuery`
+
+A [`Condition`](#condition) matched with the resource query. The condition matches against a string that starts with a question mark (`"?exampleQuery"`). See details in [`Rule` conditions](#rule-conditions).
 
 ## `Rule.rules`
 
 An array of [`Rules`](#rule) that is also used when the Rule matches.
-
 
 ## `Rule.test`
 
