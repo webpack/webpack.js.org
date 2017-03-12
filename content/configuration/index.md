@@ -21,7 +21,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 ## Options
 
 ``` js-with-links-with-details
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   // click on the name of the option to get to the detailed documentation
