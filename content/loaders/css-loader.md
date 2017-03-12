@@ -11,6 +11,8 @@ npm install --save-dev css-loader
 
 ## Usage
 
+The `css-loader` interprets `@import` and `url()` like `requires`.
+
 Use the loader either via your webpack config, CLI or inline.
 
 ### Via webpack config (recommended)
@@ -76,7 +78,7 @@ To be compatible with existing css files (if not in CSS Module mode):
 |**`camelCase`**|`false`|Export Classnames in CamelCase|
 |**`importLoaders`**|`0`|Number of loaders applied before CSS loader|
 
-This webpack config can load CSS files, embed small png images as Data URLs and JPG images as files.
+The following webpack config can load CSS files, embed small PNG/JPG/GIF/SVG images as well as fonts as [Data URLs](https://tools.ietf.org/html/rfc2397) and copy larger files to the output directory.
 
 **webpack.config.js**
 ```js
@@ -88,12 +90,11 @@ module.exports = {
         use: [ 'style-loader', 'css-loader' ]
       },
       {
-        test: /\.png$/,
-        use: { loader: 'url-loader', options: { limit: 100000 } },
-      },
-      {
-        test: /\.jpg$/,
-        use: [ 'file-loader' ]
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000
+        }
       }
     ]
   }
@@ -307,6 +308,33 @@ They are not enabled by default because they expose a runtime overhead and incre
 }
 ```
 
+### toString
+
+You can also use the css-loader results directly as string, such as in Angular's component style. 
+
+**webpack.config.js**
+
+```js
+{
+   test: /\.css$/,
+   use: [
+     {
+       loaders: ['to-string-loader', 'css-loader']
+     }
+   ]
+}
+```
+
+or
+
+```js
+const cssText = require('./test.css').toString();
+
+console.log(cssText);
+```
+
+If there are SourceMaps, they will also be included in the result string.
+
 ### ImportLoaders
 
 The query parameter `importLoaders` allow to configure which loaders should be applied to `@import`ed resources.
@@ -358,6 +386,15 @@ You can also disable or enforce minification with the `minimize` query parameter
 
 By default, the exported JSON keys mirror the class names. If you want to camelize class names (useful in JS), pass the query parameter `camelCase` to css-loader.
 
+#### Possible Options
+
+|Option|Description|
+|:----:|:--------|
+|**`true`**|Class names will be camelized|
+|**`'dashes'`**|Only dashes in class names will be camelized|
+|**`'only'`** |Class names will be camelized, the original class name will be removed from the locals|
+|**`'dashesOnly'`**|Dashes in class names will be camelized, the original class name will be removed from the locals|
+
 **webpack.config.js**
 ```js
 {
@@ -381,17 +418,36 @@ By default, the exported JSON keys mirror the class names. If you want to cameli
 import { className } from 'file.css';
 ```
 
-## Maintainer
+## Maintainers
 
 <table>
   <tbody>
     <tr>
       <td align="center">
-        <img width="150" height="150" src="https://github.com/sokra.png?s=150">
-        <br>
-        <a href="https://github.com/sokra">Tobias Koppers</a>
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
       </td>
-    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
+      </td>
+    </tr>
   <tbody>
 </table>
 
@@ -402,14 +458,14 @@ import { className } from 'file.css';
 [node]: https://img.shields.io/node/v/css-loader.svg
 [node-url]: https://nodejs.org
 
-[deps]: https://david-dm.org/webpack/css-loader.svg
-[deps-url]: https://david-dm.org/webpack/css-loader
+[deps]: https://david-dm.org/webpack-contrib/css-loader.svg
+[deps-url]: https://david-dm.org/webpack-contrib/css-loader
 
-[tests]: http://img.shields.io/travis/webpack/css-loader.svg
-[tests-url]: https://travis-ci.org/webpack/css-loader
+[tests]: http://img.shields.io/travis/webpack-contrib/css-loader.svg
+[tests-url]: https://travis-ci.org/webpack-contrib/css-loader
 
-[cover]: https://coveralls.io/repos/github/webpack/css-loader/badge.svg
-[cover-url]: https://coveralls.io/github/webpack/css-loader
+[cover]: https://codecov.io/gh/webpack-contrib/css-loader/branch/master/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack-contrib/css-loader
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack

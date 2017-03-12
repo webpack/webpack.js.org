@@ -6,7 +6,10 @@ edit: https://github.com/webpack-contrib/extract-text-webpack-plugin/edit/master
 ## Install
 
 ```bash
+# for webpack 2
 npm install --save-dev extract-text-webpack-plugin
+# for webpack 1
+npm install --save-dev extract-text-webpack-plugin@1.0.1
 ```
 
 ## Usage
@@ -34,7 +37,7 @@ module.exports = {
 }
 ```
 
-It moves every `require("style.css")` in entry chunks into a separate CSS file. So your styles are no longer inlined into the JS bundle, but separate in a CSS bundle file (`styles.css`). If your total stylesheet volume is big, it will be faster because the CSS bundle is loaded in parallel to the JS bundle.
+It moves all the `require("style.css")`s in entry chunks into a separate single CSS file. So your styles are no longer inlined into the JS bundle, but separate in a CSS bundle file (`styles.css`). If your total stylesheet volume is big, it will be faster because the CSS bundle is loaded in parallel to the JS bundle.
 
 |Advantages|Caveats|
 |:---------|:------|
@@ -53,10 +56,10 @@ new ExtractTextPlugin(options: filename | object)
 |Name|Type|Description|
 |:--:|:--:|:----------|
 |**`id`**|`{String}`|Unique ident for this plugin instance. (For advanced usage only, by default automatically generated)|
-|**`filename`**|`{String}`|Name of the result file. May contain `[name]`, `[id]` and `[contenthash]`|
-|**`options.allChunks`**|`{Boolean}`|Extract from all additional chunks too (by default it extracts only from the initial chunk(s))|
-|**`options.disable`**|`{Boolean}`|Disables the plugin|
-|**`options.ignoreOrder`**|`{Boolean}`|Disables order check (useful for CSS Modules!), `false` by default|
+|**`filename`**|`{String|Function}`|Name of the result file. May contain `[name]`, `[id]` and `[contenthash]`|
+|**`allChunks`**|`{Boolean}`|Extract from all additional chunks too (by default it extracts only from the initial chunk(s))|
+|**`disable`**|`{Boolean}`|Disables the plugin|
+|**`ignoreOrder`**|`{Boolean}`|Disables order check (useful for CSS Modules!), `false` by default|
 
 * `[name]` name of the chunk
 * `[id]` number of the chunk
@@ -74,8 +77,8 @@ Creates an extracting loader from an existing loader. Supports loaders of type `
 
 |Name|Type|Description|
 |:--:|:--:|:----------|
-|**`options.use`**|`{String}`/`{Object}`|Loader(s) that should be used for converting the resource to a CSS exporting module _(required)_|
-|**`options.fallback`**|`{String}`/`{Object}`|loader(e.g `'style-loader'`) that should be used when the CSS is not extracted (i.e. in an additional chunk when `allChunks: false`)|
+|**`options.use`**|`{String}`/`{Array}`/`{Object}`|Loader(s) that should be used for converting the resource to a CSS exporting module _(required)_|
+|**`options.fallback`**|`{String}`/`{Array}`/`{Object}`|loader(e.g `'style-loader'`) that should be used when the CSS is not extracted (i.e. in an additional chunk when `allChunks: false`)|
 |**`options.publicPath`**|`{String}`|Override the `publicPath` setting for this loader|
 
 
@@ -87,18 +90,18 @@ There is also an `extract` function on the instance. You should use this if you 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // Create multiple instances
-const extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
-const extractLESS = new ExtractTextPlugin('stylesheets/[name].less');
+const extractCSS = new ExtractTextPlugin('stylesheets/[name]-one.css');
+const extractLESS = new ExtractTextPlugin('stylesheets/[name]-two.css');
 
 module.exports = {
   module: {
-    use: [
+    rules: [
       {
         test: /\.css$/,
         use: extractCSS.extract([ 'css-loader', 'postcss-loader' ])
       },
       {
-        test: /\.html$/i,
+        test: /\.less$/i,
         use: extractLESS.extract([ 'css-loader', 'less-loader' ])
       },
     ]
@@ -110,17 +113,85 @@ module.exports = {
 };
 ```
 
-## Maintainer
+### Extracting Sass or LESS
+
+The configuration is the same, switch out `sass-loader` for `less-loader` when necessary.
+
+```js
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          //resolve-url-loader may be chained before sass-loader if necessary
+          use: ['css-loader', 'sass-loader']
+        })
+      }
+    ]
+  },
+  plugins: [
+    new ExtractTextPlugin('style.css')
+    //if you want to pass in options, you can do so:
+    //new ExtractTextPlugin({
+    //  filename: 'style.css'
+    //})
+  ]
+}
+```
+
+### Modify filename
+
+`filename` parameter could be `Function`. It passes `getPath` to process the format like `css/[name].css` and returns the real file name, `css/js/a.css`. You can replace `css/js` with `css` then you will get the new path `css/a.css`.
+
+
+```js
+entry: {
+  'js/a': "./a"
+},
+plugins: [
+  new ExtractTextPlugin({
+    filename:  (getPath) => {
+      return getPath('css/[name].css').replace('css/js', 'css');
+    },
+    allChunks: true
+  })
+]
+```
+
+## Maintainers
 
 <table>
   <tbody>
     <tr>
       <td align="center">
-        <img width="150 height="150" src="https://github.com/sokra.png?s=150">
-        <br>
-        <a href="https://github.com/sokra">Tobias Koppers</a>
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
       </td>
-    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
+      </td>
+    </tr>
   <tbody>
 </table>
 
