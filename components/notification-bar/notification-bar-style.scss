@@ -1,0 +1,52 @@
+@import 'functions';
+@import 'mixins';
+
+.notification-bar {
+  color: getColor(white);
+  background: getColor(emperor);
+
+  p:not(:last-child) {
+    padding-bottom: 1em;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  a {
+    color: getColor(malibu);
+
+    &:hover {
+      color: darken(getColor(malibu), 25%);
+    }
+  }
+
+  &--dismissed {
+    display: none;
+  }
+}
+
+.notification-bar__inner {
+  position: relative;
+  padding: 0.5em 1em;
+
+  @include break {
+    padding: 0.5em 1.5em;
+  }
+}
+
+.notification-bar__close {
+  position: absolute;
+  top: 10px;
+  right: 1em;
+  cursor: pointer;
+  transition: color 250ms;
+
+  &:hover {
+    color: getColor(malibu);
+  }
+
+  @include break {
+    right: 1.5em;
+  }
+}

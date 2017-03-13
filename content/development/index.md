@@ -1,5 +1,5 @@
 ---
-title: Development
+title: 开发(Development)
 ---
 
-These guides cover what you need to know in order to develop webpack. WIP!
+这些指南涵盖了开发 webpack 所需要了解的内容。内容还在制作中！

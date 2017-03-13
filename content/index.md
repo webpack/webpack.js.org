@@ -27,7 +27,7 @@ export default function bar() {
 </div>
 </div>
 
-## 使用 webpack 打包。
+## 使用 webpack 打包
 
 <div class="homepage__wrap">
 <div class="homepage__left">
@@ -65,4 +65,4 @@ module.exports = {
 </div>
 
 ## 让一切变得简单
-## 立即[开始](/get-started)
+## 立即[开始](/guides/get-started)

@@ -1,6 +1,6 @@
 ---
 title: 从 v1 迁移到 v2
-sort: 19
+sort: 20
 contributors:
   - sokra
   - jhnns
@@ -11,6 +11,8 @@ contributors:
   - frederikprijck
   - chrisVillanueva
   - bebraw
+  - howdy39
+  - selbekk
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -33,7 +35,7 @@ contributors:
 
 ## `resolve.*`
 
-还有更多的变化，由于不常用，不在这里详细列出。详见 [resolving](/configuration/resolve)。
+这里更改了几个 API。由于不常用，不在这里详细列出。详见 [resolving](/configuration/resolve)。
 
 ## `module.loaders` 改成了 `module.rules`
 
@@ -46,17 +48,18 @@ contributors:
       {
         test: /\.css$/,
 -       loaders: [
+-         "style-loader",
+-         "css-loader?modules=true"
 +       use: [
-          {
-            loader: "style-loader"
-          },
-          {
-            loader: "css-loader",
--           query: {
++         {
++           loader: "style-loader"
++         },
++         {
++           loader: "css-loader",
 +           options: {
-              modules: true
-            }
-          }
++             modules: true
++           }
++         }
         ]
       },
       {
@@ -70,14 +73,15 @@ contributors:
   }
 ```
 
-## 链式 loaders
+## 链式 loader
 
-与 v1 版本相同，loaders 可以链式调用，上一个 loader 的输出被作为输入传给下一个 loader。使用 [rule.use](/configuration/module#rule-use) 配置项，`use` 可以设置为一个 loaders 的列表。在 v1 版本中，loaders 通常被用 `!` 连写。这一写法在新版中只在使用旧的 `module.loaders` 时有效。
+就像在 webpack 1 中，loader 可以链式调用，上一个 loader 的输出被作为输入传给下一个 loader。使用 [rule.use](/configuration/module#rule-use) 配置项，`use` 可以设置为一个 loader 数组。
+在 webpack 1 中，loader 通常被用 `!` 连写。这一写法在新版中只在使用旧的 `module.loaders` 时有效。
 
 ``` diff
   module: {
 -   loaders: {
-+   rules: {
++   rules: [{
       test: /\.less$/,
 -     loader: "style-loader!css-loader!less-loader"
 +     use: [
@@ -85,13 +89,13 @@ contributors:
 +       "css-loader",
 +       "less-loader"
 +     ]
-    }
+    }]
   }
 ```
 
 ## 取消了在模块名中自动添加 `-loader`  后缀
 
-It is not possible anymore to omit the `-loader` extension when referencing loaders:
+现在在指定 loader 的时候不能再省略 -loader 后缀了:
 
 ``` diff
   module: {
@@ -122,7 +126,7 @@ It is not possible anymore to omit the `-loader` extension when referencing load
 
 ## `json-loader` 不再需要手动添加
 
-如果没有为 JSON 文件配置 loader，webpack 将自动尝试通过 加载 [json-loader](https://github.com/webpack/json-loader) JSON 文件。
+如果没有为 JSON 文件配置 loader，webpack 将自动尝试通过 加载 [`json-loader`](https://github.com/webpack/json-loader) JSON 文件。
 
 ``` diff
   module: {
@@ -135,7 +139,7 @@ It is not possible anymore to omit the `-loader` extension when referencing load
   }
 ```
 
-[我们决定这么做](https://github.com/webpack/webpack/issues/3363) 以消弭 webpack、 node.js 和 browserify 之间的环境差异。
+[我们决定这么做](https://github.com/webpack/webpack/issues/3363) 以消除 webpack、 node.js 和 browserify 之间的环境差异。
 
 ## loader 默认的 resolve 配置是相对于 context 的
 
@@ -227,7 +231,7 @@ loaders 的压缩模式将在 webpack 3 或更高的版本中被取消。
 
 ## `BannerPlugin` - 破坏性改动
 
-`BannerPlugin` 不在接受两个参数而是只接受单独的 options 对象。
+`BannerPlugin` 不再接受两个参数，而是只接受单独的 options 对象。
 
 ``` diff
   plugins: [
@@ -248,7 +252,7 @@ loaders 的压缩模式将在 webpack 3 或更高的版本中被取消。
 
 ## `ExtractTextWebpackPlugin` - 大改变
 
-[ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) 1.0.0 不能在 webpack v2 下工作。 你需要明确地安装 ExtractTextPlugin v2。
+[ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) 需要使用版本2，才能在 webpack 2 下正常运行。
 
 `npm install --save-dev extract-text-webpack-plugin@beta`
 
@@ -259,13 +263,15 @@ loaders 的压缩模式将在 webpack 3 或更高的版本中被取消。
 ```diff
 module: {
   rules: [
-    test: /.css$/,
--    loader: ExtractTextPlugin.extract("style-loader", "css-loader", { publicPath: "/dist" })
-+    loader: ExtractTextPlugin.extract({
-+      fallbackLoader: "style-loader",
-+      loader: "css-loader",
-+      publicPath: "/dist"
-+    })
+    {
+      test: /.css$/,
+-      loader: ExtractTextPlugin.extract("style-loader", "css-loader", { publicPath: "/dist" })
++      use: ExtractTextPlugin.extract({
++        fallback: "style-loader",
++        use: "css-loader",
++        publicPath: "/dist"
++      })
+    }
   ]
 }
 ```
@@ -287,7 +293,7 @@ plugins: [
 
 只有一个表达式的依赖（例如 `require(expr)`）将创建一个空的 context 而不是一个完整目录的 context。
 
-如果有上面那样的代码，最好把它重构了，因为在 ES2015 模块下它不可以用。如果你确定不会有 ES2015 模块，你可以使用 `ContextReplacementPlugin` 来提示编译器进行正确的处理。
+这样的代码应该进行重构，因为它不能与 ES2015 模块一起使用。如果你确定不会有 ES2015 模块，你可以使用 `ContextReplacementPlugin` 来提示编译器(compiler)进行正确的解析。
 
 ?> 此处欠一篇关于动态依赖的文章。
 
@@ -320,11 +326,11 @@ module.exports = function(env) {
 
 详见 [CLI](/api/cli)。
 
-## `require.ensure` 以及 AMD `require` 的异步
+## `require.ensure` 以及 AMD `require` 将采用异步式调用
 
 现在这些函数总是异步的，而不是当 chunk 已经加载过的时候同步调用它们的 callback。
 
-**注意 `require.ensure` 现在依赖于原生的 `Promise`。如果在不支持 Promise 的环境里使用 `require.ensure`，你需要添加 polyfill。**
+**`require.ensure` 现在依赖于原生的 `Promise`。如果在不支持 Promise 的环境里使用 `require.ensure`，你需要添加 polyfill。**
 
 ## 通过 `options` 配置 loader
 
@@ -410,7 +416,7 @@ loaders 的 debug 模式将在 webpack 3 或后续版本中取消。
 
 ## ES2015 的代码分割
 
-在 webpack v1 中，你能使用 `require.ensure` 作为方法来懒加载 chunks 到你的应用中：
+在 webpack 1 中，你能使用 [`require.ensure`](/guides/code-splitting-require) 作为方法来懒加载 chunks 到你的应用中：
 
 ```javascript
 require.ensure([], function(require) {
@@ -418,10 +424,9 @@ require.ensure([], function(require) {
 });
 ```
 
-ES2015 模块加载规范定义了 `import()` 方法来运行时动态地加载 ES2015 模块。
+ES2015 模块加载规范定义了 [`import()`](/guides/code-splitting-import) 方法来运行时动态地加载 ES2015 模块。
 
 webpack 将 `import()` 作为分割点并将被请求的模块放到一个单独的 chunk 中。
-
 `import()` 接收模块名作为参数，并返回一个 Promise。
 
 ``` js
@@ -434,7 +439,7 @@ function onClick() {
 }
 ```
 
-好消息是：如果加载 chunk 失败，我们可以进行处理，因为现在它基于 `Promise`。
+好消息是：如果加载 chunk 失败，我们现在可以进行处理，因为现在它基于 `Promise`。
 
 警告：`require.ensure` 允许用可选的第三个参数为 chunk 简单命名，但是 `import` API 还未提供这个能力。如果你想要保留这个功能，你可以继续使用 `require.ensure`。
 
@@ -443,10 +448,6 @@ require.ensure([], function(require) {
   var foo = require("./module");
 }, "custom-chunk-name");
 ```
-
-（注意废弃的 `System.import`：webpack 对 `System.import` 的使用不符合新提出的标准，所以它在 [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28)  版本中被废弃，转向支持 `import()`）
-
-由于这个建议还在 Stage 3，如果你想要同时使用 `import` 和 [Babel](http://babeljs.io/)，你需要安装/添加 [dynamic-import](http://babeljs.io/docs/plugins/syntax-dynamic-import/) 语法插件来绕过解析错误。当建议被添加到规范之后，就不再需要这个语法插件了。
 
 ## 动态表达式
 
@@ -484,7 +485,7 @@ typeof fs.readFileSync === "function";
 typeof readFileSync === "function";
 ```
 
-It is important to note that you will want to tell Babel to not parse these module symbols so webpack can use them. You can do this by setting the following in your `.babelrc` or babel-loader options.
+值得注意的是，你需要让 Babel 不解析这些模块符号，从而让 webpack 可以使用它们。你可以通过设置如下配置到 .babelrc 或 babel-loader 来实现这一点。
 
 **.babelrc**
 
@@ -498,7 +499,7 @@ It is important to note that you will want to tell Babel to not parse these modu
 
 ## Hints
 
-不需要改变什么，不过也可以改变。
+不需要改变什么，但有机会改变。
 
 ### 模板字符串
 
@@ -536,7 +537,7 @@ module: {
   rules: [
     {
       resource: /filename/, // matches "/path/filename.js"
-      resourceQuery: /querystring/, // matches "/filename.js?querystring"
+      resourceQuery: /^\?querystring$/, // matches "?querystring"
       issuer: /filename/, // matches "/path/something.js" if requested from "/path/filename.js"
     }
   ]
@@ -559,7 +560,7 @@ module: {
 
 ## Loader 变化
 
-仅与 loader 作者有关的改变。
+以下改变仅影响 loader 的开发者。
 
 ### Cacheable
 
@@ -583,7 +584,8 @@ Loaders 现在默认可被缓存。Loaders 如果不想被缓存，需要选择�
 
 ### 复合 options
 
-webpack 1 只支持能够 `JSON.stringify` 的对象作为配置项。webpack 2 现在支持任意 JS 对象作为 loader 配置项。
+webpack 1 只支持能够 `JSON.stringify` 的对象作为配置项。
+webpack 2 现在支持任意 JS 对象作为 loader 配置项。
 
 使用复合 options 只有一个附加条件。你需要在 options 对象上添加一个 `ident`，让它能够被其他 loader 引用。
 
@@ -602,7 +604,7 @@ options 对象上有了 `ident` ，内联的 loader 就可以引用这个 option
 }
 ```
 
-这种内联风格在常规的代码里一般用不着，但是在 loader 生成的代码里比较常见。比如，style-loader 生成一个模块，通过 `require` 加载其余的请求（它们输出 CSS）。
+这种内联风格在常规的代码里一般用不着，但是在 loader 生成的代码里比较常见。比如，`style-loader` 生成一个模块，通过 `require` 加载其余的请求（它们输出 CSS）。
 
 ``` js
 // style-loader generated code (simplified)

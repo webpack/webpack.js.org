@@ -7,51 +7,26 @@ export default class Sidebar extends Component {
 
     this.state = {
       fixed: false,
-      top: 0
+      availableHeight: null,
+      maxWidth: null
     };
-  }
-
-  componentDidMount() {
-    document.addEventListener('scroll', this._recalculate.bind(this));
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('scroll', this._recalculate.bind(this));
-  }
-
-  /**
-   * Re-calculate fixed state and position
-   *
-   */
-  _recalculate() {
-    let { scrollY, innerHeight } = window;
-    let { scrollHeight } = document.body;
-    let { offsetHeight } = this._container;
-    let distToBottom = scrollHeight - scrollY - innerHeight;
-    let headerHeight = document.querySelector('header').offsetHeight;
-    let footerHeight = document.querySelector('footer').offsetHeight;
-    let allowedHeight = distToBottom < footerHeight ? innerHeight - (footerHeight - distToBottom) : offsetHeight;
-    let extraHeight = offsetHeight > allowedHeight ? offsetHeight - allowedHeight : 0;
-    let fixed = scrollY >= headerHeight;
-
-    this.setState({
-      fixed,
-      top: scrollY - headerHeight - extraHeight
-    });
   }
 
   render() {
     let { sectionName, pages, currentPage } = this.props;
-    let { fixed, top, allowedHeight } = this.state;
+    let { fixed, availableHeight, maxWidth } = this.state;
     let isGuides = sectionName === 'guides';
 
     return (
       <nav
         className="sidebar"
         ref={ ref => this._container = ref }
-        style={ fixed ? {
-          top: top
-        } : null }>
+        style={{
+          position: fixed ? 'fixed' : null,
+          top: fixed ? 0 : null,
+          width: fixed ? maxWidth : null,
+          maxHeight: availableHeight
+        }}>
 
         <div className="sidebar__inner">
           <h3 className="sidebar-item__version">Version 2.2</h3>
@@ -62,11 +37,6 @@ export default class Sidebar extends Component {
             currentPage= { currentPage }
           />
 
-          { isGuides ? (
-            <SidebarItem
-              url={ `/get-started` }
-              title="起步" />
-          ) : null }
           {
             pages.map(({ url, title, anchors }, i) =>
               <SidebarItem
@@ -83,5 +53,43 @@ export default class Sidebar extends Component {
 
       </nav>
     );
+  }
+
+  componentDidMount() {
+    document.addEventListener(
+      'scroll',
+      this._recalculate.bind(this)
+    );
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener(
+      'scroll',
+      this._recalculate.bind(this)
+    );
+  }
+
+  /**
+   * Re-calculate fixed state and position
+   *
+   */
+  _recalculate() {
+    let { scrollY, innerHeight } = window;
+    let { scrollHeight } = document.body;
+    let { offsetHeight: sidebarHeight } = this._container;
+    let { offsetWidth: parentWidth, offsetHeight: parentHeight } = this._container.parentNode;
+    let headerHeight = document.querySelector('header').offsetHeight;
+    let footerHeight = document.querySelector('footer').offsetHeight;
+    let distToBottom = scrollHeight - scrollY - innerHeight;
+
+    // Calculate the space that the footer and header are actually occupying
+    let headerSpace = scrollY > headerHeight ? 0 : headerHeight - scrollY;
+    let footerSpace = distToBottom > footerHeight ? 0 : footerHeight - distToBottom;
+
+    this.setState({ 
+      fixed: scrollY >= headerHeight && sidebarHeight < parentHeight,
+      availableHeight: innerHeight - headerSpace - footerSpace,
+      maxWidth: parentWidth
+    });
   }
 }

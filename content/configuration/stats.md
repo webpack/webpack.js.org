@@ -10,7 +10,7 @@ contributors:
 
 T> 对于 webpack-dev-server ，这个属性要放在 `devServer` 对象里。
 
-W> This option does not have any effect when using the Node.js API.
+W> 在使用 Node.js API 后，此选项无效。
 
 ## `stats`
 
@@ -52,6 +52,8 @@ stats: {
   chunksSort: "field",
   // 用于缩短请求的上下文目录
   context: "../src/",
+  // `webpack --colors` 等同于
+  colors: true,
   // 增加错误信息
   errors: true,
   // 增加错误的详细信息（就像解析日志一样）

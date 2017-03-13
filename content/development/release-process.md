@@ -1,65 +1,26 @@
 ---
-title: webpack merge, tag and release process
+title: webpack 合并、标记和发布流程(webpack merge, tag and release process)
 contributors:
   - d3viant0ne
+  - sokra
 ---
 
-webpack uses standard Automatic versioning and CHANGELOG management, using GitHub's new squash button and
-the [recommended workflow](https://github.com/conventional-changelog/conventional-changelog-cli#recommended-workflow) for `conventional-changelog`.
+## Pull 请求到 `master`
 
-## Pull requests into `master`
+ 当你提交到你的 `master` 分支上时，选择 _Create Merge-Commit_ 选项。
 
-1. When you land commits on your `master` branch, select the _Squash and Merge_ option.
-2. Add a title and body that follows the [conventional-changelog-standard conventions](https://github.com/bcoe/conventional-changelog-standard/blob/master/convention.md).
-3. Land It!
-
-## Cut a standard release
+## 创建一个发布
 
 ```sh
-# npm run script
-npm run release
-# or global bin
-standard-version
+npm version patch && git push --follow-tags && npm publish
+npm version minor && git push --follow-tags && npm publish
+npm version major && git push --follow-tags && npm publish
 ```
 
-_This will increment the package version based on commit history from the last tag, update the changelog accordingly, commits the changes & cuts a **local tag**_
+_这样将递增包版本号，提交变更，然后创建一个**本地标签**，并推送到 github 和 npm package。_
 
-### When satisfied with the local tag, push it up to master.
+之后就可以到 github 的发布页面上为新的标签编写 Changelog。
 
-```sh
-# commandline
-git push --follow-tags origin master
-```
+***
 
-## Cut a pre-release
-
-Use the flag `--prerelease` to generate pre-releases:
-
-_Example: Given the last version of the package is `1.0.0`, and your code to be committed has `semver: patch` level changes..._
-
-```bash
-# npm run script ( name === alpha, beta, rc )
-npm run release -- --prerelease <name>
-```
-
-_this will tag the version `1.0.1-alpha.0`_
-
-## Cut a target release version imperatively like `npm version`
-
-To forgo the automated version bump use `--release-as` with the argument `major`, `minor` or `patch`:
-
-Suppose the last version of your code is `1.0.0`, you've only landed `fix:` commits, but
-you would like your next release to be a `minor`. Simply do:
-
-```bash
-# npm run script
-npm run release -- --release-as minor
-```
-
-_you will get version `1.1.0` rather than the auto generated version `1.0.1`._
-
-> **NOTE:** you can combine `--release-as` and `--prerelease` to generate a release. This is useful when publishing experimental feature(s).
-
-## Signing commits and tags
-
-If you have your GPG key set up, add the `--sign` or `-s` flag to your `standard-version` command.
+> 原文：https://webpack.js.org/development/release-process/

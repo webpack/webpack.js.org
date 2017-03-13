@@ -5,7 +5,8 @@ import {
   getSelf as devGetSelf,
   getList as devGetList,
   createItem as devCreateItem,
-  vote as devVote
+  vote as devVote,
+  configItem as devConfigItem
 } from "./api.dev";
 
 const API_URL = "https://oswils44oj.execute-api.us-east-1.amazonaws.com/production/";
@@ -14,6 +15,14 @@ const PRODUCTION_HOST = "webpack.js.org";
 
 // You can test the production mode with a host entry,
 // or by setting PRODUCTION_HOST to "localhost:3000" and stealing localStorage.voteAppToken from the production side.
+
+function checkResult(result) {
+  if(!result)
+    throw new Error("No result received");
+  if(result.errorMessage)
+    throw new Error(result.errorMessage);
+  return result;
+}
 
 export function isLoginActive() {
   if(window.location.host !== PRODUCTION_HOST)
@@ -59,7 +68,9 @@ function login(code, state) {
       code,
       state
     })
-  }).then((res) => res.json()).then(result => {
+  }).then((res) => res.json()).then(checkResult).then(result => {
+    if(!result.token)
+      throw new Error("No token received from API");
     return result.token;
   });
 }
@@ -69,7 +80,7 @@ export function getSelf(token) {
     return devGetSelf(token);
   return fetch(API_URL + "/self?token=" + token, {
     mode: "cors"
-  }).then((res) => res.json());
+  }).then((res) => res.json()).then(checkResult);
 }
 
 export function getList(token, name) {
@@ -77,7 +88,7 @@ export function getList(token, name) {
     return devGetList(token, name);
   return fetch(API_URL + "/list/" + name + (token ? "?token=" + token : ""), {
     mode: "cors"
-  }).then((res) => res.json());
+  }).then((res) => res.json()).then(checkResult);
 }
 
 export function createItem(token, list, title, description) {
@@ -92,7 +103,7 @@ export function createItem(token, list, title, description) {
       description
     }),
     method: "POST"
-  }).then((res) => res.json());
+  }).then((res) => res.json()).then(checkResult);
 }
 
 export function vote(token, itemId, voteName, value) {
@@ -106,7 +117,23 @@ export function vote(token, itemId, voteName, value) {
       count: value
     }),
     method: "POST"
-  }).then((res) => res.json()).then(result => {
+  }).then((res) => res.json()).then(checkResult).then(result => {
+    return true;
+  });
+}
+
+export function configItem(token, itemId, config) {
+  if(window.location.host !== PRODUCTION_HOST)
+    return devConfigItem(token, itemId, config);
+  return fetch(API_URL + "/config/" + itemId + "?token=" + token, {
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      config: config
+    }),
+    method: "POST"
+  }).then((res) => res.json()).then(checkResult).then(result => {
     return true;
   });
 }

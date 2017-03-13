@@ -10,7 +10,7 @@ contributors:
 
 `object`
 
-Customize the NodeJS environment using polyfills or mocks:
+使用 polyfill 或 mock 来自定义 NodeJS 环境：
 
 ```js
 node: {

@@ -153,7 +153,7 @@ export default class VoteApp extends React.Component {
     if(!this.isBrowserSupported())
       return <div>Your browser is not supported.</div>;
 
-    let { selfInfo, listInfo, isVoting, isFetchingList, isFetchingSelf, isCreating, isLoginActive } = this.state;
+    let { selfInfo, listInfo, isVoting, isFetchingList, isFetchingSelf, isCreating, isLoginActive, editItem, editItemTitle, editItemDescription } = this.state;
 
     let { voteAppToken } = localStorage;
 
@@ -174,9 +174,11 @@ export default class VoteApp extends React.Component {
         });
       }
     });
-    listInfo && console.log(listInfo);
     return (
       <div className="vote-app">
+        <div className="vote-app__title">
+          Vote
+        </div>
         <div className="vote-app__influence">
           <div className="vote-app__top">
             <div className="vote-app__influence">
@@ -209,7 +211,7 @@ export default class VoteApp extends React.Component {
                     let minimum = voteSettings.minimum || 0;
                     let value = (userVote && userVote.votes) ? userVote.votes: 0;
                     if(currencyInfo && currencyInfo.remaining + value < maximum) maximum = currencyInfo.remaining + value;
-                    return <div className="vote-app__item-button">
+                    return <div key={voteSettings.name} className="vote-app__item-button">
                       <VoteButton
                         className={"vote-app__vote-" + voteSettings.name}
                         value={vote.votes}
@@ -217,7 +219,7 @@ export default class VoteApp extends React.Component {
                         maxUp={userVote ? maximum - value : 0}
                         maxDown={userVote ? value - minimum : 0}
                         color={this.getColor(voteSettings.name)}
-                        isLoggedIn = {!!voteAppToken}
+                        canVote = {!!voteAppToken && !item.locked}
                         onVote={(diffValue) => {
                           this.vote(item.id, voteSettings.name, diffValue, voteSettings.currency, voteSettings.score);
                         }}
@@ -225,10 +227,87 @@ export default class VoteApp extends React.Component {
                     </div>;
                   })}
                 </div>
-                <div className="vote-app__item-content">
+                { editItem !== item.id && <div className="vote-app__item-content">
                   <span className="vote-app__item-title">{item.title}</span>
                   <span>{item.description}</span>
-                </div>
+                  { listInfo.isAdmin && <div>
+                    <button onClick={() => {
+                      this.setState({
+                        isCreating: true
+                      });
+                      api.configItem(voteAppToken, item.id, { locked: true }).then(() => {
+                        this.setState({
+                          isCreating: false
+                        });
+                        this.updateList();
+                      });
+                    }}>Lock</button>
+                    <button onClick={() => {
+                      this.setState({
+                        isCreating: true
+                      });
+                      api.configItem(voteAppToken, item.id, { locked: false }).then(() => {
+                        this.setState({
+                          isCreating: false
+                        });
+                        this.updateList();
+                      });
+                    }}>Unlock</button>
+                    <button onClick={() => {
+                      this.setState({
+                        isCreating: true
+                      });
+                      api.configItem(voteAppToken, item.id, { archived: true }).then(() => {
+                        this.setState({
+                          isCreating: false
+                        });
+                        this.updateList();
+                      });
+                    }}>Archive</button>
+                    <button onClick={() => {
+                      this.setState({
+                        isCreating: true
+                      });
+                      api.configItem(voteAppToken, item.id, { archived: false }).then(() => {
+                        this.setState({
+                          isCreating: false
+                        });
+                        this.updateList();
+                      });
+                    }}>Unarchive</button>
+                    <button onClick={() => {
+                      this.setState({
+                        isCreating: true,
+                        editItem: item.id,
+                        editItemTitle: item.title,
+                        editItemDescription: item.description
+                      });
+                    }}>Edit</button>
+                  </div> }
+                </div> }
+                { editItem === item.id && <div className="vote-app__item-content">
+                  <div className="vote-app__item-title">
+                    <input className="vote-app__item-edit-title" type="text" value={editItemTitle} onChange={e => this.setState({ editItemTitle: e.target.value })} />
+                  </div>
+                  <div>
+                    <textarea className="vote-app__item-edit-description" value={editItemDescription} onChange={e => this.setState({ editItemDescription: e.target.value })} />
+                  </div>
+                  <div><button onClick={() => {
+                    this.setState({
+                      editItem: null,
+                      isCreating: true
+                    });
+                    api.configItem(voteAppToken, item.id, {
+                      description: editItemDescription,
+                      title: editItemTitle
+                    }).then(() => {
+                      this.setState({
+                        isCreating: false
+                      });
+                      this.updateList();
+                    });
+                  }}>Done Editing</button></div>
+                </div> }
               </div>
             </li>)}
             { listInfo.isAdmin && <li className="vote-app__admin">
@@ -270,7 +349,7 @@ export default class VoteApp extends React.Component {
         return <div className="vote-app__self-info">Loading user info...</div>;
       }
       return <div className="vote-app__login-button"><button onClick={() => {
-        api.startLogin(window.location + "");   
+        api.startLogin(window.location + "");
       }}>Login with Github <img src={GithubMark}/> </button></div>;
     } else {
       return <div className="vote-app__self-info">
@@ -281,7 +360,7 @@ export default class VoteApp extends React.Component {
         { listInfo && <ul className="vote-app__currency-list">
           { selfInfo.currencies
             .filter(currency => listInfo.possibleVotes.some(voteSettings => voteSettings.currency === currency.name))
-            .map(currency => <li className={"vote-app__currency-" + currency.name} title={`${currency.description}\nYou used ${currency.used} of a total of ${currency.value} ${currency.displayName}.`}>
+            .map(currency => <li key={currency.name} className={"vote-app__currency-" + currency.name} title={`${currency.description}\nYou used ${currency.used} of a total of ${currency.value} ${currency.displayName}.`}>
             {currency.remaining} {currency.displayName}
           </li>) }
         </ul> }

@@ -5,6 +5,7 @@ contributors:
   - sokra
   - skipjack
   - jouni-kantola
+  - jhnns
 ---
 
 这些选项决定了如何处理项目中的[不同类型的模块](/concepts/modules)。
@@ -13,7 +14,7 @@ contributors:
 
 `RegExp | [RegExp]`
 
-防止 webpack 解析那些任何与给定正则表达式相匹配的文件。忽略的文件**不应该被** `import`, `require`, `define`  或者任何其他导入机制调用。忽略大型库文件(library)可以提高构建性能。
+防止 webpack 解析那些任何与给定正则表达式相匹配的文件。忽略的文件**不应该被** `import`, `require`, `define`  或者任何其他导入机制调用。忽略大型的 library 可以提高构建性能。
 
 ```js
 noParse: /jquery|lodash/
@@ -23,7 +24,7 @@ noParse: /jquery|lodash/
 
 `array`
 
-创建模块时，匹配请求的[规则](#rule)数组。这些规则能够修改模块的创建方式。这些规则能够对模块(module)应用加载器(loader)，或者修改解析器(parser)。
+创建模块时，匹配请求的[规则](#rule)数组。这些规则能够修改模块的创建方式。这些规则能够对模块(module)应用 loader，或者修改解析器(parser)。
 
 
 ## Rule
@@ -43,6 +44,8 @@ noParse: /jquery|lodash/
 在规则中，属性 [`test`](#rule-test), [`include`](#rule-include), [`exclude`](#rule-exclude) 和 [`resource`](#rule-resource) 对 resource 匹配，并且属性 [`issuer`](#rule-issuer) 对 issuer 匹配。
 
 当使用多个条件时，所有条件都匹配。
+
+W> 小心！resource 是文件的_解析_路径，这意味着符号链接的资源是真正的路径，_而不是_符号链接位置。在使用工具来符号链接包的时候（如 `npm link`）比较好记，像 `/node_modules/` 等常见条件可能会不小心错过符号链接的文件。
 
 ### Rule 结果
 
@@ -140,7 +143,7 @@ parser: {
   amd: false, // 禁用 AMD
   commonjs: false, // 禁用 CommonJS
   system: false, // 禁用 SystemJS
-  harmony: false, // 禁用 ES6 Harmony import/export
+  harmony: false, // 禁用 ES2015 Harmony import/export
   requireInclude: false, // 禁用 require.include
   requireEnsure: false, // 禁用 require.ensure
   requireContext: false, // 禁用 require.context
@@ -156,11 +159,13 @@ parser: {
 
 [`条件`](#condition)会匹配 resource。在 [`Rule` 条件](#rule-conditions) 中查看详细。
 
+## `Rule.resourceQuery`
+
+A [`Condition`](#condition) matched with the resource query. The condition matches against a string that starts with a question mark (`"?exampleQuery"`). See details in [`Rule` conditions](#rule-conditions).
 
 ## `Rule.rules`
 
 [`规则`](#rule)数组，当规则匹配时使用。
-
 
 ## `Rule.test`
 

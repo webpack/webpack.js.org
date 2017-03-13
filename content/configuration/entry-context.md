@@ -19,7 +19,7 @@ entry 对象是用于 webpack 查找启动并构建 bundle。其上下文是入�
 context: path.resolve(__dirname, "app")
 ```
 
-默认使用当前目录，但是推荐在配置中传递一个值。这使得你的配置独立于 CWD。（译者注：这个？[CWD](https://nodejs.org/docs/latest/api/process.html#process_process_cwd)）
+默认使用当前目录，但是推荐在配置中传递一个值。这使得你的配置独立于 CWD(current working directory)。
 
 ---
 

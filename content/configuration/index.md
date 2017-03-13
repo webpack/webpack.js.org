@@ -8,9 +8,11 @@ contributors:
   - bondz
   - sricc
   - terinjokes
+  - mattce
+  - kbariotis
 ---
 
-webpack 是需要传入一个配置对象。取决于你如何使用 webpack，可以通过两种方式之一：终端或 Node.js。下面指定了所有可用的配置选项。
+webpack 是需要传入一个配置对象(configuration object)。取决于你如何使用 webpack，可以通过两种方式之一：终端或 Node.js。下面指定了所有可用的配置选项。
 
 T> 刚接触 webpack？请查看我们提供的指南，从 webpack 一些[核心概念](/concepts)开始学习吧！
 T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs.org/api/path.html)，并在它前面加上 [__dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname)这个全局变量。可以防止不同操作系统之间的文件路径问题，并且可以使相对路径按照预期工作。更多「POSIX 和 Windows」的相关信息请查看[此章节](https://nodejs.org/api/path.html#path_windows_vs_posix)。
@@ -20,7 +22,7 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
 ``` js-with-links-with-details
 var path = require('path');
 
-{
+module.exports = {
   // 点击选项名称，获取文档详细
   // 点击带箭头的项目，展示「更多示例 / 高级选项」
 
@@ -56,14 +58,18 @@ var path = require('path');
     [library](/configuration/output#output-library): "MyLibrary", // string,
     // 导出库(exported library)的名称
 
-    <details><summary>[libraryTarget](/configuration/output#output-librarytarget): "umd", // 枚举</summary>
-    [libraryTarget](/configuration/output#output-librarytarget): "umd-module", // 包裹在 UMD 中的 ES2015 模块
-    [libraryTarget](/configuration/output#output-librarytarget): "commonjs-module", // 包裹在 CommonJS 中的 ES2015 模块
-    [libraryTarget](/configuration/output#output-librarytarget): "commonjs2", // 使用 module.exports 导出
-    [libraryTarget](/configuration/output#output-librarytarget): "commonjs", // 作为 exports 的属性导出
-    [libraryTarget](/configuration/output#output-librarytarget): "amd", // 使用 AMD 定义方法来定义
-    [libraryTarget](/configuration/output#output-librarytarget): "this", // 在 this 上设置属性
-    [libraryTarget](/configuration/output#output-librarytarget): "var", // 变量定义于根作用域下
+    <details><summary>[libraryTarget](/configuration/output#output-librarytarget): "umd", // 通用模块定义</summary>
+        [libraryTarget](/configuration/output#output-librarytarget): "umd2", // 通用模块定义
+        [libraryTarget](/configuration/output#output-librarytarget): "commonjs2", // exported with module.exports
+        [libraryTarget](/configuration/output#output-librarytarget): "commonjs-module", // 使用 module.exports 导出
+        [libraryTarget](/configuration/output#output-librarytarget): "commonjs", // 作为 exports 的属性导出
+        [libraryTarget](/configuration/output#output-librarytarget): "amd", // 使用 AMD 定义方法来定义
+        [libraryTarget](/configuration/output#output-librarytarget): "this", // 在 this 上设置属性
+        [libraryTarget](/configuration/output#output-librarytarget): "var", // 变量定义于根作用域下
+        [libraryTarget](/configuration/output#output-librarytarget): "assign", // 盲分配(blind assignment)
+        [libraryTarget](/configuration/output#output-librarytarget): "window", // 在 window 对象上设置属性
+        [libraryTarget](/configuration/output#output-librarytarget): "global", // property set to global object
+        [libraryTarget](/configuration/output#output-librarytarget): "jsonp", // jsonp wrapper
     </details>
     // 导出库(exported library)的类型
 
@@ -129,7 +135,7 @@ var path = require('path');
         ],
         [exclude](/configuration/module#rule-exclude): [
           path.resolve(__dirname, "app/demo-files")
-        ]
+        ],
         // 这里是匹配条件，每个选项都接收一个正则表达式或字符串
         // test 和 include 具有相同的作用，都是必须匹配选项
         // exclude 是必不匹配选项（优先于 test 和 include）
@@ -171,16 +177,16 @@ var path = require('path');
         ]
       },
 
-      { [oneOf](/configuration/module#rule-oneof): [ /* rules */ ] }
+      { [oneOf](/configuration/module#rule-oneof): [ /* rules */ ] },
       // 只使用这些嵌套规则之一
 
-      { [rules](/configuration/module#rule-rules): [ /* rules */ ] }
+      { [rules](/configuration/module#rule-rules): [ /* rules */ ] },
       // 使用所有这些嵌套规则（合并可用条件）
 
-      { [resource](/configuration/module#rule-resource): { [and](/configuration/module#condition): [ /* 条件 */ ] } }
+      { [resource](/configuration/module#rule-resource): { [and](/configuration/module#condition): [ /* 条件 */ ] } },
       // 仅当所有条件都匹配时才匹配
 
-      { [resource](/configuration/module#rule-resource): { [or](/configuration/module#condition): [ /* 条件 */ ] } }
+      { [resource](/configuration/module#rule-resource): { [or](/configuration/module#condition): [ /* 条件 */ ] } },
       { [resource](/configuration/module#rule-resource): [ /* 条件 */ ] }
       // 任意条件匹配时匹配（默认为数组）
 
@@ -239,13 +245,13 @@ var path = require('path');
     <details><summary>/* 可供选择的别名语法（点击展示） */</summary>
     [alias](/configuration/resolve#resolve-alias): [
       {
-        **name**: "module",
+        name: "module",
         // 旧的请求
 
-        **alias**: "new-module",
+        alias: "new-module",
         // 新的请求
 
-        **onlyModule**: true
+        onlyModule: true
         // 如果为 true，只有 "module" 是别名
         // 如果为 false，"module/inner/path" 也是别名
       }
@@ -272,7 +278,7 @@ var path = require('path');
     // 如果为 true，请求必不包括扩展名
     // 如果为 false，请求可以包括扩展名
 
-    [moduleExtensions](/configuration/resolve#resolve-moduleextensions): ["-module"],
+    [moduleExtensions](/configuration/resolve#resolveloader-moduleextensions): ["-module"],
     [enforceModuleExtension](/configuration/resolve#resolve-enforcemoduleextension): false,
     // 类似 extensions/enforceExtension，但是用模块名替换文件
 
@@ -349,12 +355,29 @@ var path = require('path');
   </details>
   // 不要遵循/打包这些模块，而是在运行时从环境中请求他们
 
-  [stats](stats): {
-    /* TODO */
+  <details><summary>[stats](/configuration/stats): "errors-only",</summary>
+  [stats](/configuration/stats): { //object
+    assets: true,
+    colors: true,
+    errors: true,
+    errorDetails: true,
+    hash: true,
+    // ...
   },
+  </details>
+  // 精确控制要显示的 bundle 信息
 
   [devServer](/configuration/dev-server): {
-    /* TODO */
+    proxy: { // proxy URLs to backend development server
+      '/api': 'http://localhost:3000'
+    },
+    contentBase: path.join(__dirname, 'public'), // boolean | string | array, static file location
+    compress: true, // enable gzip compression
+    historyApiFallback: true, // true for index.html upon 404, object for multiple paths
+    hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
+    https: false, // true for self-signed, object for cert authority
+    noInfo: true, // only errors & warns on hot reload
+    // ...
   },
 
   [plugins](plugins): [

@@ -5,6 +5,8 @@ contributors:
   - sokra
   - skipjack
   - tomasAlabes
+  - mattce
+  - irth
 ---
 
  `output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
@@ -72,17 +74,17 @@ devtoolLineToLine: { test: /\.js$/, include: 'src/utilities' }
 devtoolModuleFilenameTemplate: "webpack:///[resource-path]?[loaders]"
 ```
 
-模板字符串(template string)中做以下替换：
+模板字符串(template string)中做以下替换（通过 webpack 内部的 [`ModuleFilenameHelpers`](https://github.com/webpack/webpack/blob/master/lib/ModuleFilenameHelpers.js)）：
 
-``` js
-[absolute-resource-path] // 绝对路径文件名
-[all-loaders] // 自动和显式的 loader，并且参数取决于第一个 loader 名称
-[hash] // 模块标识符的 hash
-[id] // 模块标识符
-[loaders] // 显式的 loader，并且参数取决于第一个 loader 名称
-[resource] // 用于解析文件的路径和用于第一个 loader 的任意查询参数
-[resource-path] // 与上面没有查询参数的相同
-```
+| 模板                 | 描述 |
+| ------------------------ | ----------- |
+| [absolute-resource-path] | 绝对路径文件名 |
+| [all-loaders]            | 自动和显式的 loader，并且参数取决于第一个 loader 名称 |
+| [hash]                   | 模块标识符的 hash |
+| [id]                     | 模块标识符 |
+| [loaders]                | 显式的 loader，并且参数取决于第一个 loader 名称 |
+| [resource]               | 用于解析文件的路径和用于第一个 loader 的任意查询参数 |
+| [resource-path]          | 不带任何查询参数，用于解析文件的路径 |
 
 当使用一个函数，同样的选项要通过 `info` 参数并使用驼峰式(camel-cased)：
 
@@ -94,6 +96,21 @@ devtoolModuleFilenameTemplate: info => {
 
 如果多个模块产生相同的名称，使用 [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolfallbackmodulefilenametemplate) 来代替这些模块。
 
+## `output.hashFunction`
+
+The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm) are supported.
+
+## `output.hashDigest`
+
+The hashing algorithm to use, defaults to `'hex'`. All functions from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported.
+
+## `output.hashDigestLength`
+
+The prefix length of the hash digest to use, defaults to `20`.
+
+## `output.hashSalt`
+
+An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_input_encoding).
 
 ## `output.filename`
 
@@ -141,6 +158,22 @@ filename: "[chunkhash].bundle.js"
 
 注意，此选项不会影响那些「按需加载 chunk」的输出文件。对于这些文件，请使用 [`output.chunkFilename`](#output-chunkfilename) 选项来控制输出。同样也不影响通过 loader 创建的文件，对于这些文件，请查看 loader 选项来输出控制。
 
+The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
+
+| Template    | Description |
+| ----------- | ----------- |
+| [hash]      | The hash of the module identifier |
+| [chunkhash] | The hash of the chunk content |
+| [name]      | The module name |
+| [id]        | The module identifier |
+| [file]      | The module filename |
+| [filebase]  | The module [basename](https://nodejs.org/api/path.html#path_path_basename_path_ext) |
+| [query]     | The module query, i.e., the string following `?` in the filename |
+
+The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#output-hashdigestlength) to configure the length globally.
+
+T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
+
 
 ## `output.hotUpdateChunkFilename`
 
@@ -185,7 +218,7 @@ hotUpdateMainFilename: "[hash].hot-update.json"
 
 ## `output.jsonpFunction`
 
-`function`
+`string`
 
 只在 [`target`](/configuration/target) 是 web 时使用，用于按需加载(load on-demand) chunk 的 JSONP 函数。
 
@@ -248,6 +281,26 @@ this["MyLibrary"] = _entry_return_;
 this.MyLibrary.doSomething();
 MyLibrary.doSomething(); //如果 this 是 window
 ```
+
+
+`libraryTarget: "window"` - When your library is loaded, **the return value of your entry point** will be part `window` object.
+
+ ```javascript
+ window["MyLibrary"] = _entry_return_;
+
+//your users will use your library like:
+window.MyLibrary.doSomething();
+ ```
+
+
+`libraryTarget: "global"` - When your library is loaded, **the return value of your entry point** will be part `global` object.
+
+ ```javascript
+ global["MyLibrary"] = _entry_return_;
+
+//your users will use your library like:
+global.MyLibrary.doSomething();
+ ```
 
 
 `libraryTarget: "commonjs"` - 当 library 加载完成，**入口起点的返回值**将分配于 exports 对象上。这个名称也意味着模块用于 CommonJS 环境：
@@ -320,7 +373,7 @@ require(["MyLibrary"], function(MyLibrary){
 `libraryTarget: "umd"` - 这是一种可以将你的 library 能够在所有的模块定义下都可运行的方式（并且导出的完全不是模块）。
 它将在 CommonJS, AMD 环境下运行，或将模块导出到 global 下的变量。你可以查看 [UMD 仓库](https://github.com/umdjs/umd) 来了解更多相关信息。
 
-在这个例子中，你需要另一个属性来命名你的模块：
+在这个例子中，你需要 `library` 属性来命名你的模块：
 
 ```javascript
 output: {
@@ -346,6 +399,21 @@ output: {
 ```
 
 模块验证 library。
+
+
+`libraryTarget: "assign"` - Here webpack will blindly generate an implied global.
+
+ ```javascript
+ MyLibrary = _entry_return_;
+ ```
+Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
+
+
+`libraryTarget: "jsonp"` - This will wrap the return value of your entry point into a jsonp wrapper.
+
+ ```javascript
+ MyLibrary(_entry_return_);
+ ```
 
 你的 library 的依赖将由 [`externals`](/configuration/externals/) 配置定义。
 
@@ -457,6 +525,17 @@ sourcePrefix: "\t"
 注意，默认情况下使用空字符串。使用一些缩进会看起来更美观，但是可能导致多行字符串中的问题。
 
 这里没有必要修改它。
+
+
+## `output.strictModuleExceptionHandling`
+
+`boolean`
+
+Tell webpack to remove a module from cache if it throws an exception when it is `require`d. 
+
+It defaults to `false` for performance reasons.
+
+When set to `false`, the module is not removed from cache, which results in the exception getting thrown only on the first `require` call (making it incompatible with node.js).
 
 
 ## `output.umdNamedDefine`

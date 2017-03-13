@@ -1,6 +1,6 @@
 ---
 title: 管理依赖
-sort: 6
+sort: 60
 contributors:
   - ndelangen
   - chrisVillanueva
@@ -12,27 +12,27 @@ contributors:
 
 > amd
 
-## require with expression
+## 带表达式的 require 语句
 
-A context is created if your request contains expressions, so the **exact** module is not known on compile time.
+如果你的 request 含有表达式(expressions)，会创建一个上下文(context)，因为在编译时(compile time)并不清楚**具体**是哪一个模块被导入。
 
-Example:
+示例:
 ```javascript
 require("./template/" + name + ".ejs");
 ```
 
-webpack parses the `require()` call and extracts some information:
+webpack 解析 `require()` 的调用，提取出来如下这些信息：
 
 ```
 Directory: ./template
 Regular expression: /^.*\.ejs$/
 ```
 
-**context module**
+**具有上下文的模块**
 
-A context module is generated. It contains references to **all modules in that directory** that can be required with a request matching the regular expression. The context module contains a map which translates requests to module ids.
+（译者注：这里的 request 应该是指在 require() 语句中的表达式，如 "./template/" + name + ".ejs"）生成一个具有上下文的模块。它包含**目录下的所有模块**的引用(reference)，这些模块能够「通过从 request 匹配出来的正则表达式」所 require 进来。上下文模块包含一个 map 对象，会把 request 中所有模块转译成对应的模块 id。
 
-Example:
+示例:
 ```javascript
 {
     "./table.ejs": 42,
@@ -40,45 +40,43 @@ Example:
     "./directory/folder.ejs": 44
 }
 ```
-The context module also contains some runtime logic to access the map.
+上下文模块还包含一些运行时(runtime)逻辑来访问这个 map 对象。
 
-This means dynamic requires are supported but will cause all possible modules to be included in the bundle.
+这意味着 webpack 能够支持动态 require，但会导致所有可能用到的模块都包含在 bundle 中。
 
-## `require.context`
+## require.context
 
-You can create your own context with the `require.context()` function.
-It allows you to pass in a directory to search, a flag indicating whether subdirectories should be searched
-too, and a regular expression to match files against.
+你还可以使用 `require.context()` 方法来创建自己的（模块）上下文。你可以给这个方法传 3 个参数：要搜索的文件夹目录，是否还应该搜索它的子目录， 以及一个匹配文件的正则表达式。
 
-webpack parses for `require.context()` in the code while building.
+webpack 会在构建的时候解析代码中的 `require.context()` 。
 
-The syntax is as follows:
+语法如下：
 
 ```javascript
 require.context(directory, useSubdirectories = false, regExp = /^\.\//)
 ```
 
-Examples:
+示例:
 
 ```javascript
 require.context("./test", false, /\.test\.js$/);
-// a context with files from the test directory that can be required with a request endings with `.test.js`.
+// （创建了）一个包含了 test 文件夹（不包含子目录）下面的、所有文件名以 `.test.js` 结尾的、能被 require 请求到的文件的上下文。
 ```
 
 ```javascript
 require.context("../", true, /\.stories\.js$/);
-// a context with all files in the parent folder and descending folders ending with `.stories.js`.
+// （创建了）一个包含了父级文件夹（包含子目录）下面，所有文件名以 `.stories.js` 结尾的文件的上下文。
 ```
 
-### context module API
-A context module exports a (require) function that takes one argument: the request.
+### 上下文模块 API
+一个上下文模块导出一个（require）函数，这个函数可以接收一个参数：request 函数。
 
-The exported function has 3 properties: `resolve`, `keys`, `id`.
+导出的方法有 3 个属性： `resolve`, `keys`, `id`。
 
-- `resolve` is a function and returns the module id of the parsed request.
-- `keys` is a function that returns an array of all possible requests that the context module can handle.
+- `resolve` 是一个函数，它返回请求被解析后得到的模块 id。
+- `keys` 也是一个函数，它返回一个数组，由所有可能被上下文模块处理的请求（译者注：参考下面第二段代码中的 key）组成。
 
-  This can be useful if you want to require all files in a directory or matching a pattern, Example:
+  比如，如果想引入一个文件夹下面的所有文件，或者引入能匹配正则表达式的文件，你可以这样：
 
   ```javascript
   function importAll (r) {
@@ -93,9 +91,9 @@ The exported function has 3 properties: `resolve`, `keys`, `id`.
     r.keys().forEach(key => cache[key] = r(key));
   }
   importAll(require.context('../components/', true, /\.js$/));
-  // At build-time cache will be populated with all required modules.
+  // 在构建时，所有被 require 的模块都会被存到（上面代码中的）cache 里面。
   ```
-- `id` is the module id of the context module. This may be useful for `module.hot.accept`.
+- `id` 是上下文模块里面所包含的模块 id. 它可能在你使用 `module.hot.accept` 的时候被用到。
 
 ***
 

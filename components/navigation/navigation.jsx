@@ -17,6 +17,7 @@ let Sections = [
     title: '文档',
     url: 'configuration',
     children: [
+      { title: 'CLI', url: 'api/cli' },
       { title: 'API', url: 'api' },
       { title: '配置', url: 'configuration' },
       { title: 'LOADER', url: 'loaders' },
@@ -25,12 +26,20 @@ let Sections = [
     ]
   },
   {
+    title: '翻译人员',
+    url: 'about'
+  },
+  {
     title: '捐赠',
     url: '//opencollective.com/webpack'
   },
   {
-    title: 'Blog',
-    url: '//medium.com/webpack'
+    title: '博客',
+    url: '//github.com/webpack-china/awesome-webpack-cn'
+  },
+  {
+      title: '支持',
+      url: 'support'
   }
 ];
 
@@ -81,6 +90,20 @@ export default class Navigation extends React.Component {
               className="navigation__search-icon icon-cross"
               onClick={ this._toggleSearch.bind(this) } />
           </div>
+
+          <Link
+            className="navigation__icon"
+            title="GitHub Repository"
+            to="//github.com/webpack/webpack">
+            <i className="sidecar__icon icon-github" />
+          </Link>
+
+          <Link
+            className="navigation__icon"
+            title="See Questions on Stack Overflow"
+            to="//stackoverflow.com/questions/tagged/webpack">
+            <i className="sidecar__icon icon-stack-overflow" />
+          </Link>
         </Container>
 
         {

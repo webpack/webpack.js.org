@@ -1,11 +1,11 @@
 ---
-title: html-webpack-plugin
+title: HtmlWebpackPlugin
 contributors:
   - ampedandwired
   - simon04
 ---
 
-The [html-webpack-plugin](https://github.com/ampedandwired/html-webpack-plugin) simplifies creation of HTML files to serve your
+The [`HtmlWebpackPlugin`](https://github.com/ampedandwired/html-webpack-plugin) simplifies creation of HTML files to serve your
 webpack bundles. This is especially useful for webpack bundles that include
 a hash in the filename which changes every compilation. You can either let the plugin generate an HTML file for you, supply
 your own template using [lodash templates](https://lodash.com/docs#template), or use your own [loader](/loaders).

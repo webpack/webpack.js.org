@@ -1,5 +1,7 @@
 ---
-title: define-plugin
+title: DefinePlugin
+contributurs:
+  - simon04
 ---
 
 ``` javascript
@@ -7,7 +9,7 @@ new webpack.DefinePlugin(definitions)
 ```
 
 允许你创建一个在编译时可以配置的全局常量。这可能会对开发模式和发布模式的构建允许不同的行为非常有用。比如,你可能会用一个全局的常量来决定 log 在开发模式触发而不是发布模式。这仅仅是 `DefinePlugin` 提供的便利的一个场景。
- 
+
 
 **示例:**
 
@@ -62,6 +64,25 @@ if (true) {
 
 ``` javascript
 console.log('Production log')
+```
+
+## Use Case: Feature Flags
+Enable/disable features in production/development build using [feature flags](https://en.wikipedia.org/wiki/Feature_toggle).
+
+```javascript
+new webpack.DefinePlugin({
+  'NICE_FEATURE': JSON.stringify(true),
+  'EXPERIMENTAL_FEATURE': JSON.stringify(false)
+})
+```
+
+## Use Case: Service URLs
+Use a different service URL in production/development builds:
+
+```javascript
+new webpack.DefinePlugin({
+  'SERVICE_URL': JSON.stringify("http://dev.example.com")
+})
 ```
 
 ***

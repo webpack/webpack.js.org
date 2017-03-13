@@ -74,9 +74,8 @@
     padding:1.5em;
   }
 
-  &:hover,
-  &--active {
-    color: getColor(white);
+  &:hover {
+    color: getColor(malibu);
   }
 
   &--active {
@@ -86,6 +85,10 @@
 
 .navigation__search {
   display:none;
+}
+
+.navigation__icon {
+  display: none;
 }
 
 @include break {
@@ -130,13 +133,23 @@
       }
 
       &:hover {
-        color:getColor(white);
+        color:getColor(malibu);
       }
     }
 
     &-input:focus,
     &-icon:focus {
       outline:none;
+    }
+  }
+
+  .navigation__icon {
+    display: block;
+    margin-left: 1em;
+    color: getColor(white);
+
+    &:hover {
+      color: getColor(malibu);
     }
   }
 }
@@ -168,26 +181,30 @@
 }
 
 .navigation__bottom {
-  display:none;
+  display: none;
   background: lighten(getColor(elephant), 5%);
 
   @include break {
-    display:block;
+    display: block;
   }
 }
 
 .navigation__child {
   font-size: getFontSize(-1);
-  margin:0.5em 1em 0.6em;
-  color:getColor(alto);
+  margin: 0.5em 1em 0.6em;
+  color: getColor(alto);
   text-transform: uppercase;
 
   &:first-of-type {
     margin-left: 0;
   }
 
-  &:hover,
+  &:hover {
+    color: getColor(malibu);
+  }
+
   &--active {
-    color:getColor(white);
+    color: getColor(white);
+    font-weight: 600;
   }
 }

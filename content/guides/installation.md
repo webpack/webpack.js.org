@@ -1,23 +1,17 @@
 ---
 title: 安装
-sort: 1
 contributors:
   - pksjce
+  - bebraw
+  - simon04
+sort: 10
 ---
 
 ### 前提条件
 
-这个文档默认你已经安装了 `node` 和 `npm`。 
+在开始前，先要确认你已经安装 [Node.js](https://nodejs.org/en/) 的最新版本。使用 Node.js 最新的 LTS 版本，是理想的起步。使用旧版本，你可能遇到各种问题，因为它们可能缺少 webpack 功能或缺少相关 package 包。
 
-### 全局安装
-
-``` bash
-npm install webpack -g
-```
-
-现在 `webpack` 便全局可用了。
-
-但是我们不推荐你全局安装。全局安装锁定了你的 webpack 版本，这将阻碍你在不同的项目中使用不同的 webpack 版本。下一节会谈到如何在项目本地安装 webpack。
+下一节会谈到如何在项目本地安装 webpack。
 
 ### 本地安装
 
@@ -27,7 +21,7 @@ npm install webpack --save-dev
 npm install webpack@<version> --save-dev
 ```
 
-如果你在项目中使用了 npm，npm 首先会在你的本地模块中寻找 webpack。这是一个实用的个小技巧。
+如果你在项目中使用了 npm 执行脚本 (script)，npm 首先会在你的本地模块中寻找 webpack。这是一个实用的个小技巧。
 
 ```json
 "scripts": {
@@ -38,6 +32,18 @@ npm install webpack@<version> --save-dev
 上面是 npm 的标准配置，也是我们推荐的实践。
 
 T> 当你在本地安装 webpack 后，你能够在 `node_modules/.bin/webpack` 找到它的二进制程序。
+
+
+### 全局安装
+
+W> 注意，不推荐全局安装 webpack。这会锁定 webpack 到指定版本，并且在使用不同的 webpack 版本的项目中可能会导致构建失败。
+
+``` bash
+npm install webpack -g
+```
+
+`webpack` 命令现在可以全局执行了。
+
 
 ### 体验最新版本
 

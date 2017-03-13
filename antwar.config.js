@@ -7,6 +7,7 @@ var highlight = require('./utilities/highlight');
 module.exports = {
   template: {
     title: 'webpack',
+    description: 'webpack 是一个模块打包器。它的主要目标是将 JavaScript 文件打包在一起，打包后的文件用于在浏览器中使用，但它也能够胜任转换(transform)、打包(bundle)或包裹(package)任何资源(resource or asset)。',
     file: path.join(__dirname, 'template.ejs')
   },
   output: 'build',
@@ -38,16 +39,13 @@ module.exports = {
       }
     ),
 
-    'get-started': section(
-      '起步',
-      function() {
-        return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/get-started',
-          false,
-          /^\.\/.*\.md$/
-        )
+    'get-started': {
+      redirects: {
+        '': '/guides/get-started',
+        'install-webpack': '/guides/installation',
+        'why-webpack': '/guides/why-webpack',
       }
-    ),
+    },
 
     concepts: section(
       '概念',
@@ -68,6 +66,8 @@ module.exports = {
           true,
           /^\.\/.*\.md$/
         );
+      }, {
+        'why-webpack': '/guides/comparison'
       }
     ),
 
@@ -90,6 +90,8 @@ module.exports = {
           false,
           /^\.\/.*\.md$/
         );
+      }, {
+        'external-configs': 'javascript-alternatives'
       }
     ),
 
@@ -101,6 +103,8 @@ module.exports = {
           false,
           /^\.\/.*\.md$/
         );
+      }, {
+        'passing-a-config': 'configuration-types'
       }
     ),
 
@@ -149,6 +153,17 @@ module.exports = {
       }
     ),
 
+    support: section(
+      'Support',
+      function() {
+        return require.context(
+          'json-loader!yaml-frontmatter-loader!./content/support',
+          false,
+          /^\.\/.*\.md$/
+        );
+      }
+    ),
+
     vote: {
       path() {
         return require('./components/vote/list.jsx').default
@@ -194,7 +209,7 @@ function root(contentCb) {
   };
 }
 
-function section(title, contentCb) {
+function section(title, contentCb, redirects = {}) {
   return {
     title: title,
     path: function() {
@@ -212,7 +227,7 @@ function section(title, contentCb) {
         return require('./components/page/page.jsx').default
       }
     },
-    redirects: {} // <from>: <to>
+    redirects: redirects // <from>: <to>
   };
 }
 
