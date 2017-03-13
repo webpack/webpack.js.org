@@ -13,6 +13,7 @@ contributors:
   - bebraw
   - howdy39
   - selbekk
+  - ndelangen
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -83,7 +84,7 @@ In webpack 1, loaders were commonly chained with `!`. This style is only support
 
 ``` diff
   module: {
--   loaders: {
+-   loaders: [{
 +   rules: [{
       test: /\.less$/,
 -     loader: "style-loader!css-loader!less-loader"
