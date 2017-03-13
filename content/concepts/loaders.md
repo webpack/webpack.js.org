@@ -121,7 +121,7 @@ functions (loaders). Users now have more flexibility to include fine-grained log
 
 ## Resolving Loaders
 
-Loaders follow the standard [module resolution](/concepts/module-resolution/). In most cases you will be loaders from the [module path](/concepts/module-resolution/#module-paths) (think `npm install`, `node_modules`).
+Loaders follow the standard [module resolution](/concepts/module-resolution/). In most cases it will be loaders from the [module path](/concepts/module-resolution/#module-paths) (think `npm install`, `node_modules`).
 
 [How to write a loader?](/development/how-to-write-a-loader) A loader module is expected to export a function and to be written in Node.js compatible JavaScript. In the common case you manage loaders with npm, but you can also have loaders as files in your app.
 
