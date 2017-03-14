@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/1fcfc9a20fac837714c1.css" rel="stylesheet">
+      <link href="/e5bedc9e1ab6dea4fe1d.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -49,7 +49,7 @@ plugins<span class="token punctuation">:</span> <span class="token punctuation">
     filename<span class="token punctuation">:</span> <span class="token string">&apos;build.min.css&apos;</span><span class="token punctuation">,</span>
     allChunks<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-  <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>IgnorePlugin</span><span class="token punctuation">(</span><span class="token regex">/^\.\/locale$/</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token operator">/</span>moment$<span class="token operator">/</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>IgnorePlugin</span><span class="token punctuation">(</span><span class="token regex">/^\.\/locale$/</span><span class="token punctuation">,</span> <span class="token regex">/moment$/</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// compile time plugins</span>
   <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>DefinePlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
     <span class="token string">&apos;process.env.NODE_ENV&apos;</span><span class="token punctuation">:</span> <span class="token string">&apos;&quot;production&quot;&apos;</span><span class="token punctuation">,</span>
