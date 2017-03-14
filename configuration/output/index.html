@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/db3e61c8ccd403fc8ce0.css" rel="stylesheet">
+      <link href="/e2bdf7d3d0a73adb3d83.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -37,7 +37,7 @@
 <p>See <a href="#output-devtoolmodulefilenametemplate"><code>output.devtoolModuleFilenameTemplate</code></a>.</p>
 <h2 class="header"><a class="anchor" href="#output-devtoollinetoline" id="output-devtoollinetoline"></a><span class="text"><code>output.devtoolLineToLine</code></span><a class="icon-link" href="#output-devtoollinetoline"></a></h2>
 <p><code>boolean | object</code></p>
-<p>(Deprecated: Not really used, not really usable, write an issue if you have a other opinion)</p>
+<p>(Deprecated: Not really used, not really usable, write an issue if you have a different opinion)</p>
 <p>Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines.</p>
 <p>Pass a boolean to enable or disable this feature for all modules (defaults to <code>false</code>). An object with <code>test</code>, <code>include</code>, <code>exclude</code> is also allowed. For example, to enable this feature for all javascript files within a certain directory:</p>
 <pre><code class="lang-js">devtoolLineToLine<span class="token punctuation">:</span> <span class="token punctuation">{</span> test<span class="token punctuation">:</span> <span class="token regex">/\.js$/</span><span class="token punctuation">,</span> include<span class="token punctuation">:</span> <span class="token string">&apos;src/utilities&apos;</span> <span class="token punctuation">}</span>
@@ -494,13 +494,13 @@ publicPath<span class="token punctuation">:</span> <span class="token string">&q
 <p><code>string</code></p>
 <p>This option is only used when <a href="/configuration/devtool"><code>devtool</code></a> uses a SourceMap option which writes an output file.</p>
 <p>Configure how source maps are named. By default <code>&quot;[file].map&quot;</code> is used.</p>
-<p>Technically the <code>[name]</code>, <code>[id]</code>, <code>[hash]</code> and <code>[chunkhash]</code> <a href="#output-filename">placeholders</a> can be used, if generating a SourceMap for chunks. In addition to that the <code>[file]</code> placeholder is replaced with the filename of the original file. It&apos;s recommended to only use the <code>[file]</code> placeholder, as the other placeholders won&apos;t work when generating SourceMaps for non-chunk files. Best leave the default.</p>
+<p>Technically, the <code>[name]</code>, <code>[id]</code>, <code>[hash]</code> and <code>[chunkhash]</code> <a href="#output-filename">placeholders</a> can be used, if generating a SourceMap for chunks. In addition to that, the <code>[file]</code> placeholder is replaced with the filename of the original file. It&apos;s recommended to only use the <code>[file]</code> placeholder, as the other placeholders won&apos;t work when generating SourceMaps for non-chunk files. Best leave the default.</p>
 <h2 class="header"><a class="anchor" href="#output-sourceprefix" id="output-sourceprefix"></a><span class="text"><code>output.sourcePrefix</code></span><a class="icon-link" href="#output-sourceprefix"></a></h2>
 <p><code>string</code></p>
 <p>Change the prefix for each line in the output bundles.</p>
 <pre><code class="lang-js">sourcePrefix<span class="token punctuation">:</span> <span class="token string">&quot;\t&quot;</span>
 </code></pre>
-<p>Note by default an empty string is used. Using some kind of indention makes bundles look more pretty, but will cause issues with multi-line string.</p>
+<p>Note by default an empty string is used. Using some kind of indentation makes bundles look more pretty, but will cause issues with multi-line strings.</p>
 <p>There is no need to change it.</p>
 <h2 class="header"><a class="anchor" href="#output-strictmoduleexceptionhandling" id="output-strictmoduleexceptionhandling"></a><span class="text"><code>output.strictModuleExceptionHandling</code></span><a class="icon-link" href="#output-strictmoduleexceptionhandling"></a></h2>
 <p><code>boolean</code></p>

@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/db3e61c8ccd403fc8ce0.css" rel="stylesheet">
+      <link href="/e2bdf7d3d0a73adb3d83.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -39,8 +39,8 @@ worker<span class="token punctuation">.</span><span class="token function">addEv
 to disable this behavior just set <code>fallback</code> parameter as <code>false</code>:</p>
 <pre><code class="lang-javascript"><span class="token keyword">var</span> MyWorker <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;worker-loader?inline&amp;fallback=false!./myWorker.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<p>To set custom name use the <code>name</code> parameter:</p>
-<pre><code class="lang-javascript"><span class="token keyword">var</span> MyWorker <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;worker-loader?name=[name].js!./myWorker.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p>To set a custom name for the output script, use the <code>name</code> parameter. The name may contain the string <code>[hash]</code>, which will be replaced with a content-dependent hash for caching purposes. For example:</p>
+<pre><code class="lang-javascript"><span class="token keyword">var</span> MyWorker <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;worker-loader?name=outputWorkerName.[hash].js!./myWorker.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>The worker file can import dependencies just like any other file:</p>
 <pre><code class="lang-javascript"><span class="token comment" spellcheck="true">// file.js</span>
