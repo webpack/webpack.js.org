@@ -82,6 +82,17 @@ module.exports = {
       }
     ),
 
+    'development/contrib': section(
+      'Contrib Development',
+      function() {
+        return require.context(
+          'json-loader!yaml-frontmatter-loader!./content/development/contrib',
+          true,
+          /^\.\/.*\.md$/
+        );
+      }
+    ),
+
     configuration: section(
       'Configuration',
       function() {
