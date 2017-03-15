@@ -6,7 +6,10 @@ edit: https://github.com/webpack-contrib/extract-text-webpack-plugin/edit/master
 ## 安装
 
 ```bash
+# for webpack 2
 npm install --save-dev extract-text-webpack-plugin
+# for webpack 1
+npm install --save-dev extract-text-webpack-plugin@1.0.1
 ```
 
 ## 使用
@@ -34,7 +37,7 @@ module.exports = {
 }
 ```
 
-它会将所有的 入口chunk (entry chunks) 中的 `require("style.css")` 移动到分开的 css 文件。因此，你的样式不再内联到 javascript 里面，但会放到一个单独的 css 包文件 (`styles.css`)当中。 如果你的样式文件大小较大，这会更快，因为样式文件会跟 javascript 包并行加载。
+它会将所有的「入口 chunk(entry chunks)」中的 `require("style.css")` 移动到独立分离的 css 文件。因此，你的样式不再内联到 javascript 里面，但会放到一个单独的 css 包文件 (`styles.css`)当中。 如果你的样式文件大小较大，这会更快，因为样式文件会跟 javascript 包并行加载。
 
 |优点|缺点|
 |:---------|:------|
@@ -52,11 +55,11 @@ new ExtractTextPlugin(options: filename | object)
 
 |名称|类型|描述|
 |:--:|:--:|:----------|
-|**`id`**|`{String}`|此插件实例的唯一id。 （仅限高级用途，默认情况下自动生成）|
-|**`filename`**|`{String}`|_(必填)_ 生成文件的文件名。会包含 `[name]`, `[id]` 和 `[contenthash]`|
-|**`options.allChunks`**|`{Boolean}`|向所有额外的 chunk 提取（默认只提取初始加载模块）|
-|**`options.disable`**|`{Boolean}`|禁用插件|
-|**`options.ignoreOrder`**|`{Boolean}`|禁用顺序检查 (对 CSS Modules 有用!), 默认 `false` |
+|**`id`**|`{String}`|此插件实例的唯一id。（仅限高级用途，默认情况下自动生成）|
+|**`filename`**|`{String|Function}`|生成文件的文件名。可能包含 `[name]`, `[id]` and `[contenthash]`|
+|**`allChunks`**|`{Boolean}`|向所有额外的 chunk 提取（默认只提取初始加载模块）|
+|**`disable`**|`{Boolean}`|禁用插件|
+|**`ignoreOrder`**|`{Boolean}`|禁用顺序检查 (对 CSS Modules 有用!), 默认 `false`|
 
 * `[name]` chunk 的名称
 * `[id]` chunk 的数量
@@ -74,8 +77,8 @@ ExtractTextPlugin.extract(options: loader | object)
 
 |名称|类型|描述|
 |:--:|:--:|:----------|
-|**`options.use`**|`{String}`/`{Object}`|_(必填)_, 加载器 (`Loader`), 被用于将资源转换成一个输出的 `CSS` 模块 |
-|**`options.fallback`**|`{String}`/`{Object}`| 加载器 (例如 `'style-loader'`), 应用于当 css 没有被提取(也就是一个额外的 chunk，当 `allChunks: false`)|
+|**`options.use`**|`{String}`/`{Array}`/`{Object}`|_(必填)_, 加载器 (`Loader`), 被用于将资源转换成一个输出的 `CSS` 模块 |
+|**`options.fallback`**|`{String}`/`{Array}`/`{Object}`| 加载器 (例如 `'style-loader'`), 应用于当 css 没有被提取(也就是一个额外的 chunk，当 `allChunks: false`)|
 |**`options.publicPath`**|`{String}`|对加载器的 `publicPath` 配置重写|
 
 
@@ -87,18 +90,18 @@ ExtractTextPlugin.extract(options: loader | object)
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // 多个提取实例
-const extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
-const extractLESS = new ExtractTextPlugin('stylesheets/[name].less');
+const extractCSS = new ExtractTextPlugin('stylesheets/[name]-one.css');
+const extractLESS = new ExtractTextPlugin('stylesheets/[name]-two.css');
 
 module.exports = {
   module: {
-    use: [
+    rules: [
       {
         test: /\.css$/,
         use: extractCSS.extract([ 'css-loader', 'postcss-loader' ])
       },
       {
-        test: /\.html$/i,
+        test: /\.less$/i,
         use: extractLESS.extract([ 'css-loader', 'less-loader' ])
       },
     ]
@@ -110,17 +113,85 @@ module.exports = {
 };
 ```
 
+### Extracting Sass or LESS
+
+The configuration is the same, switch out `sass-loader` for `less-loader` when necessary.
+
+```js
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          //resolve-url-loader may be chained before sass-loader if necessary
+          use: ['css-loader', 'sass-loader']
+        })
+      }
+    ]
+  },
+  plugins: [
+    new ExtractTextPlugin('style.css')
+    //if you want to pass in options, you can do so:
+    //new ExtractTextPlugin({
+    //  filename: 'style.css'
+    //})
+  ]
+}
+```
+
+### Modify filename
+
+`filename` parameter could be `Function`. It passes `getPath` to process the format like `css/[name].css` and returns the real file name, `css/js/a.css`. You can replace `css/js` with `css` then you will get the new path `css/a.css`.
+
+
+```js
+entry: {
+  'js/a': "./a"
+},
+plugins: [
+  new ExtractTextPlugin({
+    filename:  (getPath) => {
+      return getPath('css/[name].css').replace('css/js', 'css');
+    },
+    allChunks: true
+  })
+]
+```
+
 ## 维护者
 
 <table>
   <tbody>
     <tr>
       <td align="center">
-        <img width="150 height="150" src="https://github.com/sokra.png?s=150">
-        <br>
-        <a href="https://github.com/sokra">Tobias Koppers</a>
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
       </td>
-    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
+      </td>
+    </tr>
   <tbody>
 </table>
 
