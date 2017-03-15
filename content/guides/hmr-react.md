@@ -242,7 +242,7 @@ The important thing to note in the code above is the `module` reference.
   
   If you are using `babel-preset-env` make sure to disable modules as well:
   ```
-  ["es2015", {"modules": false}]
+  ["env", {"modules": false}]
   ```
 
 4. Note that if you're using ES2015 modules in your webpack 2 configuration file, and you change your `.babelrc` file in #3 above, you either need to use `require` or create two `.babelrc` files (issue [here](https://github.com/webpack/webpack.js.org/issues/154)):
