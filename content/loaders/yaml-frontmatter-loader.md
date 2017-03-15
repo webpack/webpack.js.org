@@ -24,3 +24,7 @@ var json = require("json!yaml-frontmatter-loader!./file.md");
 ## 许可证
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
+
+***
+
+> 原文：https://webpack.js.org/loaders/yaml-frontmatter-loader/
