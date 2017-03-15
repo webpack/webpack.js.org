@@ -3,14 +3,12 @@ title: sass-loader
 source: https://raw.githubusercontent.com/webpack-contrib/sass-loader/master/README.md
 edit: https://github.com/webpack-contrib/sass-loader/edit/master/README.md
 ---
-## Install
+## 安装
 
 ```bash
 npm install sass-loader node-sass webpack --save-dev
 ```
-
-The sass-loader requires [node-sass](https://github.com/sass/node-sass) and [webpack](https://github.comwebpack)
-as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies). Thus you are able to control the versions accurately.
+sass-loader的[`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies)有[node-sass](https://github.com/sass/node-sass) 和 [webpack](https://github.comwebpack)，因此能够精确控制它们的版本。
 
 ## Examples
 
@@ -217,3 +215,5 @@ If you want to prepend Sass code before the actual entry file, you can set the `
 
 [chat]: https://badges.gitter.im/webpack-contrib/webpack.svg
 [chat-url]: https://gitter.im/webpack-contrib/webpack
+
+> 原文：https://webpack.js.org/***/
