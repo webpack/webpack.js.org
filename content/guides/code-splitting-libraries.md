@@ -7,6 +7,7 @@ contributors:
   - johnstew
   - rafde
   - bartushek
+  - shaunwallace
 ---
 
 A typical application uses third party libraries for framework/functionality needs. Particular versions of these libraries are used and code here does not change often. However, the application code changes frequently.
