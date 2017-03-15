@@ -1,5 +1,5 @@
 ---
-title: Configuration Types
+title: 多种配置类型
 sort: 2
 contributors:
   - sokra
@@ -8,13 +8,13 @@ contributors:
   - simon04
 ---
 
-Besides exporting a single config object, there are a few more ways that cover other needs as well.
+除了导出单个配置对象，还有一些方式满足其他需求。
 
-## Exporting a function to use `--env`
+## 导出一个函数，并使用 `--env`
 
-Eventually you will find the need to disambiguate in your `webpack.config.js` between [development](/guides/development) and [production builds](/guides/production-build). You have (at least) two options:
+最终，你会发现需要在[开发](/guides/development)和[生产构建](/guides/production-build)之间，消除 `webpack.config.js` 的差异。（至少）有两种选项：
 
-Instead of exporting a configuration object, you may return a function which accepts an environment as argument. When running webpack, you may specify build environment keys via `--env`, such as `--env.production` or `--env.platform=web`.
+作为导出一个配置对象的替代，你可以返回一个函数，此函数接受 environment 作为参数。当运行 webpack 时，你可以通过 `--env` 指定构建环境的键，例如 `--env.production` 或者 `--env.platform=web`。
 
 ```diff
 -module.exports = {
@@ -22,16 +22,16 @@ Instead of exporting a configuration object, you may return a function which acc
 +  return {
     plugins: [
       new webpack.optimize.UglifyJsPlugin({
-+        compress: env.production // compress only in production build
++        compress: env.production // 只在生产环境构建时压缩
       })
     ]
 +  };
 };
 ```
 
-## Exporting a Promise
+## 导出一个 Promise
 
-webpack will run the function exported by the configuration file and wait for a Promise to be returned. Handy when you need to asynchronously load configuration variables.
+webpack 将运行由配置文件导出的函数，并且等待 Promise 返回。便于需要异步地加载所需的配置变量。
 
 ```js
 module.exports = () => {
@@ -46,8 +46,8 @@ module.exports = () => {
 }
 ```
 
-## Exporting multiple configurations
-Instead of exporting a single configuration object/function, you may export multiple configurations. When running webpack, all configurations are built. For instance, this is useful for [bundling a library](/guides/author-libraries) for multiple [targets](/configuration/output#output-librarytarget) such as AMD and CommonJS:
+## 导出多个配置对象
+作为导出一个配置对象/配置函数的替代，你可能需要导出多个配置对象。当运行 webpack 时，所有的配置对象都会构建。例如，导出多个配置对象，对于针对多个[构建目标](/configuration/output#output-librarytarget)（例如 AMD 和 CommonJS）[打包一个 library](/guides/author-libraries) 非常有用。
 
 ```js
 module.exports = [{

@@ -1,5 +1,5 @@
 ---
-title: Improving Build Performance
+title: 改善构建性能
 ---
 
 ?> incremental builds
@@ -21,3 +21,7 @@ title: Improving Build Performance
 [Development Tools](/guides/development/#choosing-a-tool)
 
 > see also [resolving](/concepts/module-resolution/#resolving-rules-in-webpack)
+
+***
+
+> 原文：https://webpack.js.org/guides/build-performance/

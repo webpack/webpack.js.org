@@ -1,25 +1,11 @@
-[![build status](https://secure.travis-ci.org/webpack/webpack.js.org.svg)](http://travis-ci.org/webpack/webpack.js.org)
+# webpack 中文文档
 
-# webpack.js.org
+> https://doc.webpack-china.org webpack 中文文档
+> https://webpack-china.org webpack 中文社区
 
-Guides, documentation, and all things webpack.
+- [webpack 2 校对+审校任务认领说明 - 入口目录](https://github.com/webpack-china/webpack.js.org/issues/169)
 
-## Contributing
+- [webpack 2 翻译任务认领说明 - 入口目录](https://github.com/webpack-china/webpack.js.org/issues/17)
 
-To develop, please pull the project, `cd` into the directory and run:
+- Thanks
 
-- `npm install` to pull all dependencies.
-- `npm run build` to create a production version of the site.
-- `npm start` to develop on a local webpack-dev-server (should be [here](http://localhost:3000/)).
-
-If you want to fetch the documentation on additional loaders/plugins hosted in [separate repositories](https://github.com/webpack), run `npm run fetch`.
-
-For more information see the [contributors page](https://github.com/webpack/webpack.js.org/blob/master/CONTRIBUTING.md)
-
-## Content Progress
-
-Check out the [MVP Milestone](https://github.com/webpack/webpack.js.org/milestones) for the current status.
-
-## License
-
-The content is available under [Creative Commons BY 4.0](https://creativecommons.org/licenses/by/4.0/) license.

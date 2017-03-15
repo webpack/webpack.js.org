@@ -16,3 +16,7 @@ sort: 8
 ## Event Hooks
 
 ## Examples
+
+***
+
+> 原文：https://webpack.js.org/pluginsapi/template/

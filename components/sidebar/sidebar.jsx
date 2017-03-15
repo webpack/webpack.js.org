@@ -18,8 +18,8 @@ export default class Sidebar extends Component {
     let isGuides = sectionName === 'guides';
 
     return (
-      <nav 
-        className="sidebar" 
+      <nav
+        className="sidebar"
         ref={ ref => this._container = ref }
         style={{
           position: fixed ? 'fixed' : null,
@@ -33,7 +33,7 @@ export default class Sidebar extends Component {
 
           <SidebarItem
             url={ `/${sectionName}` }
-            title="Introduction"
+            title="介绍"
             currentPage= { currentPage }
           />
 
@@ -50,28 +50,28 @@ export default class Sidebar extends Component {
             )
           }
         </div>
-        
+
       </nav>
     );
   }
 
   componentDidMount() {
     document.addEventListener(
-      'scroll', 
+      'scroll',
       this._recalculate.bind(this)
     );
   }
 
   componentWillUnmount() {
     document.removeEventListener(
-      'scroll', 
+      'scroll',
       this._recalculate.bind(this)
     );
   }
 
   /**
    * Re-calculate fixed state and position
-   * 
+   *
    */
   _recalculate() {
     let { scrollY, innerHeight } = window;

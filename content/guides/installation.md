@@ -1,5 +1,5 @@
 ---
-title: Installation
+title: 安装
 contributors:
   - pksjce
   - bebraw
@@ -7,13 +7,13 @@ contributors:
 sort: 10
 ---
 
-### Pre-requisites
+### 前提条件
 
-Before getting started, make sure you have a fresh version of [Node.js](https://nodejs.org/en/) installed. The current LTS is an ideal starting point. You may run into a variety of issues with the older versions as they may be missing functionality webpack or related packages might need.
+在开始前，先要确认你已经安装 [Node.js](https://nodejs.org/en/) 的最新版本。使用 Node.js 最新的 LTS 版本，是理想的起步。使用旧版本，你可能遇到各种问题，因为它们可能缺少 webpack 功能或缺少相关 package 包。
 
-The next section tells you how to install webpack locally in a project.
+下一节会谈到如何在项目本地安装 webpack。
 
-### Local Installation
+### 本地安装
 
 ``` bash
 npm install webpack --save-dev
@@ -21,7 +21,7 @@ npm install webpack --save-dev
 npm install webpack@<version> --save-dev
 ```
 
-If you are using npm scripts in your project, npm will try to look for webpack installation in your local modules for which this installation technique is useful.
+如果你在项目中使用了 npm 执行脚本 (script)，npm 首先会在你的本地模块中寻找 webpack。这是一个实用的个小技巧。
 
 ```json
 "scripts": {
@@ -29,26 +29,30 @@ If you are using npm scripts in your project, npm will try to look for webpack i
 }
 ```
 
-This is standard and recommended practice.
+上面是 npm 的标准配置，也是我们推荐的实践。
 
-T> To run the local installation of webpack you can access its bin version as `node_modules/.bin/webpack`
+T> 当你在本地安装 webpack 后，你能够在 `node_modules/.bin/webpack` 找到它的二进制程序。
 
 
-### Global Installation
+### 全局安装
 
-W> Note that a global webpack installation is not a recommended practice. This locks you down to a specific version of webpack and might fail in projects that use a different version.
+W> 注意，不推荐全局安装 webpack。这会锁定 webpack 到指定版本，并且在使用不同的 webpack 版本的项目中可能会导致构建失败。
 
 ``` bash
 npm install webpack -g
 ```
 
-The `webpack` command is now available globally.
+`webpack` 命令现在可以全局执行了。
 
 
-### Bleeding Edge
+### 体验最新版本
 
-If you are enthusiastic about using the latest that webpack has to offer (beware - may be unstable), you can install directly from the webpack repository using
+如果你热衷于使用最新版本的 webpack（注意了，这可是不稳定的版本），你可以直接从 webpack 的仓库中安装：
 
 ``` bash
 npm install webpack/webpack#<tagname/branchname>
 ```
+
+***
+
+> 原文：https://webpack.js.org/guides/installation/

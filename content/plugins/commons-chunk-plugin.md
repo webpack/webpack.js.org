@@ -9,80 +9,79 @@ contributors:
 ```javascript
 new webpack.optimize.CommonsChunkPlugin(options)
 ```
-The `CommonsChunkPlugin` is an opt-in feature that creates a separate file (known as a chunk), consisting of common modules shared between multiple entry points. By separating common modules from bundles, the resulting chunked file can be loaded once initially, and stored in cache for later use. This results in pagespeed optimizations as the browser can quickly serve the shared code from cache, rather than being forced to load a larger bundle whenever a new page is visited.
+`CommonsChunkPlugin` 插件，是一个可选的用于建立一个独立文件(又称作 chunk)的功能，这个文件包括多个入口 `chunk` 的公共模块。通过将公共模块拆出来，最终合成的文件能够在最开始的时候加载一次，便存起来到缓存中供后续使用。这个带来速度上的提升，因为浏览器会迅速将公共的代码从缓存中取出来，而不是每次访问一个新页面时，再去加载一个更大的文件。
 
-## Options
+## 配置
 
 ```javascript
 {
   name: string, // or
   names: string[],
-  // The chunk name of the commons chunk. An existing chunk can be selected by passing a name of an existing chunk.
-  // If an array of strings is passed this is equal to invoking the plugin multiple times for each chunk name.
-  // If omitted and `options.async` or `options.children` is set all chunks are used,
-  // otherwise `options.filename` is used as chunk name.
+  // 这是 common chunk 的名称。已经存在的 chunk 可以通过传入一个已存在的 chunk 名称而被选择。
+  // 如果一个字符串数组被传入，这相当于插件针对每个 chunk 名被多次调用
+  // 如果该选项被忽略，同时 `options.async` 或者 `options.children` 被设置，所有的 chunk 都会被使用，否则 `options.filename` 会用于作为 chunk 名。
 
   filename: string,
-  // The filename template for the commons chunk. Can contain the same placeholder as `output.filename`.
-  // If omitted the original filename is not modified (usually `output.filename` or `output.chunkFilename`).
+  // common chunk 的文件名模板。可以包含与 `output.filename` 相同的占位符。
+  // 如果被忽略，原本的文件名不会被修改(通常是 `output.filename` 或者 `output.chunkFilename`)
 
   minChunks: number|Infinity|function(module, count) -> boolean,
-  // The minimum number of chunks which need to contain a module before it's moved into the commons chunk.
-  // The number must be greater than or equal 2 and lower than or equal to the number of chunks.
-  // Passing `Infinity` just creates the commons chunk, but moves no modules into it.
-  // By providing a `function` you can add custom logic. (Defaults to the number of chunks)
+  // 在传入  公共chunk(commons chunk) 之前所需要包含的最少数量的 chunks 。
+  // 数量必须大于等于2，或者少于等于 chunks的数量
+  // 传入 `Infinity` 会马上生成 公共chunk，但里面没有模块。
+  // 你可以传入一个 `function` ，以添加定制的逻辑（默认是 chunk 的数量）
 
   chunks: string[],
-  // Select the source chunks by chunk names. The chunk must be a child of the commons chunk.
-  // If omitted all entry chunks are selected.
+  // 通过 chunk name 去选择 chunks 的来源。chunk 必须是  公共chunk 的子模块。
+  // 如果被忽略，所有的，所有的 入口chunk (entry chunk) 都会被选择。
+
 
   children: boolean,
-  // If `true` all children of the commons chunk are selected
+  // 如果设置为 `true`，所有  公共chunk 的子模块都会被选择
 
   async: boolean|string,
-  // If `true` a new async commons chunk is created as child of `options.name` and sibling of `options.chunks`.
-  // It is loaded in parallel with `options.chunks`. It is possible to change the name of the output file
-  // by providing the desired string instead of `true`.
+  // 如果设置为 `true`，一个异步的  公共chunk 会作为 `options.name` 的子模块，和 `options.chunks` 的兄弟模块被创建。
+  // 它会与 `options.chunks` 并行被加载。可以通过提供想要的字符串，而不是 `true` 来对输出的文件进行更换名称。
 
   minSize: number,
-  // Minimum size of all common module before a commons chunk is created.
+  // 在 公共chunk 被创建立之前，所有 公共模块 (common module) 的最少大小。
 }
 ```
 
-T> The deprecated webpack 1 constructor `new webpack.optimize.CommonsChunkPlugin(options, filenameTemplate, selectedChunks, minChunks)` is no longer supported. Use a corresponding options object instead.
+T> webpack1 构造函数 `new webpack.optimize.CommonsChunkPlugin(options, filenameTemplate, selectedChunks, minChunks)` 不再被支持。请使用相应的选项对象。
 
-## Examples
+## 例子
 
-### Commons chunk for entries
+### 公共chunk 用于 入口chunk (entry chunk)
 
-Generate an extra chunk, which contains common modules shared between entry points.
+生成一个额外的 chunk 包含入口chunk 的公共模块。
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({
   name: "commons",
-  // (the commons chunk name)
+  // ( 公共chunk(commnons chunk) 的名称)
 
   filename: "commons.js",
-  // (the filename of the commons chunk)
+  // ( 公共chunk 的文件名)
 
   // minChunks: 3,
-  // (Modules must be shared between 3 entries)
+  // (模块必须被3个 入口chunk 共享)
 
   // chunks: ["pageA", "pageB"],
-  // (Only use these entries)
+  // (只使用这些 入口chunk)
 })
 ```
 
-You must load the generated chunk before the entry point:
+你必须在 入口chunk 之前加载生成的这个 公共chunk:
 
 ```html
 <script src="commons.js" charset="utf-8"></script>
 <script src="entry.bundle.js" charset="utf-8"></script>
 ```
 
-### Explicit vendor chunk
+### 明确第三方库 chunk
 
-Split your code into vendor and application.
+将你的代码拆分成公共代码和应用代码。
 
 ```javascript
 entry: {
@@ -93,11 +92,10 @@ new webpack.optimize.CommonsChunkPlugin({
   name: "vendor",
 
   // filename: "vendor.js"
-  // (Give the chunk a different name)
+  // (给 chunk 一个不同的名字)
 
   minChunks: Infinity,
-  // (with more entries, this ensures that no other module
-  //  goes into the vendor chunk)
+  // 随着 入口chunk 越来越多，这个配置保证没其它的模块会打包进 公共chunk
 })
 ```
 
@@ -106,69 +104,70 @@ new webpack.optimize.CommonsChunkPlugin({
 <script src="app.js" charset="utf-8"></script>
 ```
 
-Hint: In combination with long term caching you may need to use the [`ChunkManifestWebpackPlugin`](https://github.com/diurnalist/chunk-manifest-webpack-plugin) to avoid that the vendor chunk changes. You should also use records to ensure stable module ids.
+提示：结合长期缓存，你可能需要使用这个[插件](https://github.com/diurnalist/chunk-manifest-webpack-plugin)去避免 公共chunk 改变。 你也需要使用 `records` 去保持稳定的模块 id。
 
-###  Move common modules into the parent chunk
+###  将公共模块打包进父 chunk
 
-With Code Splitting multiple child chunks of a chunk can have common modules. You can move these common modules into the parent (This reduces overall size, but has a negative effect on the initial load time. It can be useful if it is expected that a user need to download many sibling chunks).
+使用代码拆分功能，一个 chunk 的多个子 chunk 会有公共的模块。你可以将这些公共模块移入父 chunk (这个会减少总体的大小，但会对首次加载时间产生不良影响。如果预期用户需要下载许多兄弟 chunks，那这将非常有用)。
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({
   // names: ["app", "subPageA"]
-  // (choose the chunks, or omit for all chunks)
+  // (选择 chunks，或者忽略该项设置以选择全部 chunks)
 
   children: true,
-  // (select all children of chosen chunks)
+  // (选择所有被选 chunks 的子 chunks)
 
   // minChunks: 3,
-  // (3 children must share the module before it's moved)
+  // (在提取之前需要至少三个子 chunk 共享这个模块)
 })
 ```
 
-### Extra async commons chunk
+### 额外的异步 公共chunk
 
-Similar to the above one, but instead of moving common modules into the parent (which increases initial load time) a new async-loaded additional commons chunk is used. This is automatically downloaded in parallel when the additional chunk is downloaded.
+与上面的类似，但是并非将公共模块移动到父 chunk（增加初始加载时间），而是使用新的异步加载的额外公共chunk。当下载额外的 chunk 时，它将自动并行下载。
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({
   // names: ["app", "subPageA"]
-  // (choose the chunks, or omit for all chunks)
+ // (选择 chunks，或者忽略该项设置以选择全部 chunks)
 
   children: true,
-  // (use all children of the chunk)
+  // (选择所有被选 chunks 的子 chunks)
 
   async: true,
-  // (create an async commons chunk)
+  // (创建一个异步 公共chunk)
 
   // minChunks: 3,
-  // (3 children must share the module before it's separated)
+  // (在提取之前需要至少三个子 chunk 共享这个模块)
 })
 ```
 
-### Passing the `minChunks` property a function
+### 给 `minChunks` 配置传入函数
 
-You also have the ability to pass the `minChunks` property a function. This function is called by the `CommonsChunkPlugin` and calls the function with `module` and `count` arguments.
+你也可以给 `minChunks` 传入一个函数。这个函数会被 `CommonsChunkPlugin` 插件回调，并且调用函数时会传入 `module` 和 `count` 参数。
 
-The `module` property represents each module in the chunks you have provided via the `names` property.
+`module` 参数代表每个 chunks 里的模块，这些 chunks是你通过 `name` 参数传入的。
 
-The `count` property represents how many chunks the `module` is used in.
+`count` 参数表示 `module` 被使用的 chunk 数量。
 
-This option is useful when you want to have fine-grained control over how the CommonsChunk algorithm determines where modules should be moved to.
+当你想要对 `CommonsChunk` 如何决定模块被打包到哪里的算法有更为细致的控制， 这个配置就会非常有用。
+
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({
   name: "my-single-lib-chunk",
   filename: "my-single-lib-chunk.js",
   minChunks: function(module, count) {
-    // If module has a path, and inside of the path exists the name "somelib",
-    // and it is used in 3 separate chunks/entries, then break it out into
-    // a separate chunk with chunk keyname "my-single-lib-chunk", and filename "my-single-lib-chunk.js"
+    // 如果模块是一个路径，而且在路径中有 "somelib" 这个名字出现，
+    // 而且它还被三个不同的 chunks/入口chunk 所使用，那请将它拆分到
+    // 另一个分开的 chunk 中，chunk 的 keyname 是 "my-single-lib-chunk"，而文件名是 "my-single-lib-chunk.js"
     return module.resource && (/somelib/).test(module.resource) && count === 3;
   }
 });
 ```
 
-As seen above, this example allows you to move only one lib to a separate file if and only if all conditions are met inside the function.
+正如上面看到的，这个例子允许你只将其中一个库移到一个分开的文件当中，当而仅当函数中的所有条件都被满足了。
 
 This concept may be used to obtain implicit common vendor chunks:
 
@@ -218,3 +217,7 @@ Since the `vendor` and `manifest` chunk use a different definition for `minChunk
 * https://github.com/webpack/webpack/tree/master/examples/common-chunk-and-vendor-chunk
 * https://github.com/webpack/webpack/tree/master/examples/multiple-commons-chunks
 * https://github.com/webpack/webpack/tree/master/examples/multiple-entry-points-commons-chunk-css-bundle
+
+***
+
+> 原文：https://webpack.js.org/plugins/commons-chunk-plugin/

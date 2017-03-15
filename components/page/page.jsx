@@ -10,7 +10,7 @@ import '../gitter/gitter-style';
 import { trimEnd } from 'lodash';
 
 export default ({ section, page }) => {
-  let edit = page.edit || `https://github.com/webpack/webpack.js.org/edit/master/content/${trimEnd(page.url, '/')}${page.type === 'index' ? '/index' : ''}.md`;
+  let edit = page.edit || `https://github.com/webpack-china/webpack.js.org/edit/cn/content/${trimEnd(page.url, '/')}${page.type === 'index' ? '/index' : ''}.md`;
 
   return (
     <Container className="page">
@@ -30,7 +30,7 @@ export default ({ section, page }) => {
         <h1>{ page.title }</h1>
 
         <a className="page__edit" href={ edit }>
-          Edit this Page
+          编辑此页
           &nbsp;&nbsp;
           <i className="icon-edit" />
         </a>
@@ -38,7 +38,7 @@ export default ({ section, page }) => {
         <div dangerouslySetInnerHTML={{ __html: page.content }} />
 
         <hr style={{ display: page.contributors.length ? 'block' : 'none' }} />
-        <h3 style={{ display: page.contributors.length ? 'block' : 'none' }}>Contributors</h3>
+        <h3 style={{ display: page.contributors.length ? 'block' : 'none' }}>贡献者</h3>
         <Contributors contributors={ page.contributors } />
 
         <Interactive

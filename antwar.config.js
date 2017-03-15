@@ -7,7 +7,7 @@ var highlight = require('./utilities/highlight');
 module.exports = {
   template: {
     title: 'webpack',
-    description: 'webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.',
+    description: 'webpack 是一个模块打包器。它的主要目标是将 JavaScript 文件打包在一起，打包后的文件用于在浏览器中使用，但它也能够胜任转换(transform)、打包(bundle)或包裹(package)任何资源(resource or asset)。',
     file: path.join(__dirname, 'template.ejs')
   },
   output: 'build',
@@ -48,7 +48,7 @@ module.exports = {
     },
 
     concepts: section(
-      'Concepts',
+      '概念',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/concepts',
@@ -59,7 +59,7 @@ module.exports = {
     ),
 
     guides: section(
-      'Guides',
+      '指南',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/guides',
@@ -72,7 +72,7 @@ module.exports = {
     ),
 
     development: section(
-      'Development',
+      '开发',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/development',
@@ -83,7 +83,7 @@ module.exports = {
     ),
 
     configuration: section(
-      'Configuration',
+      '配置',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/configuration',
@@ -257,6 +257,8 @@ function combineContexts(context1, context2) {
     }
   }
   webpackContext.keys = () => {
+    "use strict";
+
     let keys1 = context1.keys();
     let keys2 = context2.keys();
     return _.chain(keys1).concat(keys2).sortBy().uniq().value();

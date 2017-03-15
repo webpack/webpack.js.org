@@ -1,5 +1,5 @@
 ---
-title: Output
+title: 输出(Output)
 sort: 5
 contributors:
   - sokra
@@ -9,53 +9,53 @@ contributors:
   - irth
 ---
 
-The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
+ `output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
 
 
 ## `output.chunkFilename`
 
 `string`
 
-This option determines the name of on-demand loaded chunk files. See [`output.filename`](#output-filename) option for details on the possible values.
+此选项决定了按需加载(on-demand loaded)的 chunk 文件的名称。有关可取的值的详细信息，请查看 [`output.filename`](#output-filename) 选项。
 
-Note that these filenames need to be generated at runtime to send the requests for chunks. Because of this, placeholders like `[name]` and `[chunkhash]` need to add a mapping from chunk id to placeholder value to the output bundle with the webpack runtime. This increases the size and may invalidate the bundle when placeholder value for any chunk changes.
+注意，这些文件名需要在 runtime 根据 chunk 发送的请求去生成。因此，需要在 webpack runtime 输出 bundle 值时，将 chunk id 的值对应映射到占位符(如 `[name]` 和 `[chunkhash]`)。这会增加文件大小，并且在任何 chunk 的占位符值修改后，都会使 bundle 失效。
 
-By default `[id].js` is used or a value inferred from [`output.filename`](#output-filename) (`[name]` is replaced with `[id]` or `[id].` is prepended).
+默认使用 `[id].js` 或从 [`output.filename`](#output-filename) 中推断出的值（`[name]` 会被预先替换为 `[id]` 或 `[id].`）。
 
 
 ## `output.crossOriginLoading`
 
 `boolean` `string`
 
-Only used when [`target`](/configuration/target) is web, which uses JSONP for loading on-demand chunks, by adding script tags.
+只用于 [`target`](/configuration/target) 是 web，使用了通过 script 标签的 JSONP 来按需加载 chunk。
 
-Enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) loading of chunks. The following values are accepted...
+启用 [cross-origin 属性](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) 加载 chunk。以下是可接收的值……
 
-`crossOriginLoading: false` - Disable cross-origin loading (default)
+`crossOriginLoading: false` - 禁用跨域加载（默认）
 
-`crossOriginLoading: "anonymous"` - Enable cross-origin loading **without credentials**
+`crossOriginLoading: "anonymous"` - **不带凭据(credential)**启用跨域加载
 
-`crossOriginLoading: "use-credentials"` - Enable cross-origin loading **with credentials**
+`crossOriginLoading: "use-credentials"` - **带凭据(credential)**启用跨域加载 **with credentials**
 
 
 ## `output.devtoolFallbackModuleFilenameTemplate`
 
 `string | function(info)`
 
-A fallback used when the template string or function above yields duplicates.
+当上面的模板字符串或函数产生重复时使用的备用内容。
 
-See [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametemplate).
+查看 [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametemplate)。
 
 
 ## `output.devtoolLineToLine`
 
 `boolean | object`
 
-(Deprecated: Not really used, not really usable, write an issue if you have a other opinion)
+(弃用：无用，不可用，如果你有其他意见请写 issue 给我们)
 
-Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines.
+对所有或某些模块启用「行到行映射(line to line mapping)」。这将生成基本的源映射(source map)，即生成资源(generated source)的每一行，映射到原始资源(original source)的同一行。这是一个性能优化点，并且应该只需要输入行(input line)和生成行(generated line)相匹配时才使用。
 
-Pass a boolean to enable or disable this feature for all modules (defaults to `false`). An object with `test`, `include`, `exclude` is also allowed. For example, to enable this feature for all javascript files within a certain directory:
+传入 boolean 值，对所有模块启用或禁用此功能（默认 `false`）。对象可有 `test`, `include`, `exclude` 三种属性。例如，对某个特定目录中所有 javascript 文件启用此功能：
 
 ``` js
 devtoolLineToLine: { test: /\.js$/, include: 'src/utilities' }
@@ -66,27 +66,27 @@ devtoolLineToLine: { test: /\.js$/, include: 'src/utilities' }
 
 `string | function(info)`
 
-This option is only used when [`devtool`](/configuration/devtool) uses an options which requires module names.
+此选项仅在 「[`devtool`](/configuration/devtool) 使用了需要模块名称的选项」时使用。
 
-Customize the names used in each source map's `sources` array. This can be done by passing a template string or function. For example, when using `devtool: 'eval'`, this is the default:
+自定义每个 source map 的 `sources` 数组中使用的名称。可以通过传递模板字符串(template string)或者函数来完成。例如，当使用 `devtool: 'eval'`，默认值是：
 
 ``` js
 devtoolModuleFilenameTemplate: "webpack:///[resource-path]?[loaders]"
 ```
 
-The following substitutions are available in template strings (via webpack's internal [`ModuleFilenameHelpers`](https://github.com/webpack/webpack/blob/master/lib/ModuleFilenameHelpers.js)):
+模板字符串(template string)中做以下替换（通过 webpack 内部的 [`ModuleFilenameHelpers`](https://github.com/webpack/webpack/blob/master/lib/ModuleFilenameHelpers.js)）：
 
-| Template                 | Description |
+| 模板                 | 描述 |
 | ------------------------ | ----------- |
-| [absolute-resource-path] | The absolute filename |
-| [all-loaders]            | Automatic and explicit loaders and params up to the name of the first loader |
-| [hash]                   | The hash of the module identifier |
-| [id]                     | The module identifier |
-| [loaders]                | Explicit loaders and params up to the name of the first loader |
-| [resource]               | The path used to resolve the file and any query params used on the first loader |
-| [resource-path]          | The path used to resolve the file without any query params |
+| [absolute-resource-path] | 绝对路径文件名 |
+| [all-loaders]            | 自动和显式的 loader，并且参数取决于第一个 loader 名称 |
+| [hash]                   | 模块标识符的 hash |
+| [id]                     | 模块标识符 |
+| [loaders]                | 显式的 loader，并且参数取决于第一个 loader 名称 |
+| [resource]               | 用于解析文件的路径和用于第一个 loader 的任意查询参数 |
+| [resource-path]          | 不带任何查询参数，用于解析文件的路径 |
 
-When using a function, the same options are available camel-cased via the `info` parameter:
+当使用一个函数，同样的选项要通过 `info` 参数并使用驼峰式(camel-cased)：
 
 ``` js
 devtoolModuleFilenameTemplate: info => {
@@ -94,7 +94,7 @@ devtoolModuleFilenameTemplate: info => {
 }
 ```
 
-If multiple modules would result in the same name, [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolfallbackmodulefilenametemplate) is used instead for these modules.
+如果多个模块产生相同的名称，使用 [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolfallbackmodulefilenametemplate) 来代替这些模块。
 
 ## `output.hashFunction`
 
@@ -116,47 +116,47 @@ An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.
 
 `string`
 
-This option determines the name of each output bundle. The bundle is written to the directory specified by the [`output.path`](#output-path) option.
+此选项决定了每个输出 bundle 的名称。这些 bundle 将写入到 [`output.path`](#output-path) 选项指定的目录下。
 
-For a single [`entry`](/configuration/entry-context#entry) point, this can be a static name.
+对于单个[`入口`](/configuration/entry-context#entry)起点，filename 会是一个静态名称。
 
 ``` js
 filename: "bundle.js"
 ```
 
-However, when creating multiple bundles via more than one entry point, code splitting, or various plugins, you should use one of the following substitutions to give each bundle a unique name...
+然而，当通过多个入口起点(entry point)、代码拆分(code splitting)或各种插件(plugin)创建多个 bundle，应该使用以下一种替换方式，来赋予每个 bundle 一个唯一的名称……
 
-Using entry name:
+使用入口名称：
 
 ``` js
 filename: "[name].bundle.js"
 ```
 
-Using internal chunk id:
+使用内部 chunk id
 
 ``` js
 filename: "[id].bundle.js"
 ```
 
-Using the unique hash generated for every build:
+使用每次构建过程中，唯一的 hash 生成
 
 ``` js
 filename: "[name].[hash].bundle.js"
 ```
 
-Using hashes based on each chunks' content:
+使用基于每个 chunk 内容的 hash：
 
 ``` js
 filename: "[chunkhash].bundle.js"
 ```
 
-Make sure the read the [Caching guide](/guides/caching) for details. There are more steps involved than just setting this option.
+请确保已阅读过[指南 - 缓存](/guides/caching)的详细信息。这里涉及更多步骤，不仅仅是设置此选项。
 
-The default value is `"[name].js"`.
+默认值是 `"[name].js"`。
 
-Note this option is called filename but you are still allowed to something like `"js/[name]/bundle.js"` to create a folder structure.
+注意此选项被称为文件名，但是你还是可以创建像 `"js/[name]/bundle.js"` 这样的文件夹结构。
 
-Note this options does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#output-chunkfilename) option is used. It also doesn't affect files created by loaders. For these files see loader options.
+注意，此选项不会影响那些「按需加载 chunk」的输出文件。对于这些文件，请使用 [`output.chunkFilename`](#output-chunkfilename) 选项来控制输出。同样也不影响通过 loader 创建的文件，对于这些文件，请查看 loader 选项来输出控制。
 
 The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
 
@@ -179,112 +179,112 @@ T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plu
 
 `string`
 
-Customize the filenames of hot update chunks. See [`output.filename`](#output-filename) option for details on the possible values.
+自定义热更新 chunk 的文件名。可选的值的详细信息，请查看 [`output.filename`](#output-filename) 选项。
 
-The only placeholders allowed here are `[id]` and `[hash]`, the default being:
+占位符只能是 `[id]` 和 `[hash]`，默认值是：
 
 ``` js
 hotUpdateChunkFilename: "[id].[hash].hot-update.js"
 ```
 
-Here is no need to change it.
+这里没有必要修改它。
 
 
 ## `output.hotUpdateFunction`
 
 `function`
 
-Only used when [`target`](/configuration/target) is web, which uses JSONP for loading hot updates.
+只在 [`target`](/configuration/target) 是 web 时使用，用于加载热更新(hot update)的 JSONP 函数。
 
-A JSONP function used to asynchronously load hot-update chunks.
+JSONP 函数用于异步加载(async load)热更新(hot-update) chunk。
 
-For details see [`output.jsonpFunction`](#output-jsonpfunction).
+详细请查看 [`output.jsonpFunction`](#output-jsonpfunction)。
 
 
 ## `output.hotUpdateMainFilename`
 
 `string`
 
-Customize the main hot update filename. See [`output.filename`](#output-filename) option for details on the possible values.
+自定义热更新的主文件名(main filename)。可选的值的详细信息，请查看 [`output.filename`](#output-filename) 选项
 
-`[hash]` is the only available placeholder, the default being:
+占位符只能是 `[hash]`，默认值是：
 
 ``` js
 hotUpdateMainFilename: "[hash].hot-update.json"
 ```
 
-Here is no need to change it.
+这里没有必要修改它。
 
 
 ## `output.jsonpFunction`
 
 `string`
 
-Only used when [`target`](/configuration/target) is web, which uses JSONP for loading on-demand chunks.
+只在 [`target`](/configuration/target) 是 web 时使用，用于按需加载(load on-demand) chunk 的 JSONP 函数。
 
-A JSONP function name used to asynchronously load chunks or join multiple initial chunks (CommonsChunkPlugin, AggressiveSplittingPlugin).
+JSONP 函数用于异步加载(async load) chunk，或者拼接多个初始 chunk(CommonsChunkPlugin, AggressiveSplittingPlugin)。
 
-This needs to be changed if multiple webpack runtimes (from different compilation) are used on the same webpage.
+如果在同一网页中使用了多个（来自不同编译过程(compilation)的）webpack runtime，则需要修改此选项。
 
-If using the [`output.library`](#output-library) option, the library name is automatically appended.
+如果使用了 [`output.library`](#output-library) 选项，library 名称时自动追加的。
 
 
 ## `output.library`
 
 `string`
 
-Read the [library guide](/guides/author-libraries) for details.
+有关详细信息，请阅读[指南 - library](/guides/author-libraries)。
 
-Use `library`, and `libraryTarget` below, when writing a JavaScript library that should export values, which can be used by other code depending on it. Pass a string with the name of the library:
+在编写一个导出值的 JavaScript library 时，可以使用下面的 `library` 和 `libraryTarget`，导出值可以作为其他代码的依赖。传入 library 名称的字符串。
 
 ``` js
 library: "MyLibrary"
 ```
 
-The name is used depending on the value of the [`output.libraryTarget`](#output-librarytarget) options.
+library 名称取决于 [`output.libraryTarget`](#output-librarytarget) 选项的值。
 
-Note that `output.libraryTarget` defaults to `var`. This means if only `output.library` is used it is exported as variable declaration (when used as script tag it's available in the global scope after execution).
+注意，`output.libraryTarget` 的默认值是 var。这意味着，如果使用 `output.libraryTarget` 的默认值，`output.library` 会将值作为变量声明导出（当使用 script 标签时，其执行后在全局作用域可用）。
 
 
 ## `output.libraryTarget`
 
 `string`
 
-> Default: `"var"`
+> 默认值： `"var"`
 
-Read the [library guide](/guides/author-libraries) for details.
+有关详细信息，请阅读[指南 - library](/guides/author-libraries)。
 
-Configure how the library will be exposed. Any one of the following options can be used.
+配置如何暴露 library。可以使用下面的选项中的任意一个。
 
-> To give your library a name, set the `output.library` config to it (the examples assume `library: "MyLibrary"`)
+> 设置 `output.library` 来配置 library 的名称。（例子假设 `library: "MyLibrary"`）
 
-The following options are supported:
+支持以下选项：
 
 
-`libraryTarget: "var"` - (default) When your library is loaded, the **return value of your entry point** will be assigned to a variable:
+`libraryTarget: "var"` - （默认值）当 library 加载完成，**入口起点的返回值**将被分配给一个变量：
 
 ```javascript
 var MyLibrary = _entry_return_;
 
-// your users will use your library like:
+// 使用者将会这样调用你的 library：
 MyLibrary.doSomething();
 ```
-(Not specifying a `output.library` will cancel this var configuration)
+（不指定 `output.library` 将取消这个 var 配置）
 
 
-`libraryTarget: "this"` - When your library is loaded, the **return value of your entry point** will be assigned to this, the meaning of `this` is up to you:
+`libraryTarget: "this"` - 当 library 加载完成，**入口起点的返回值**将分配给 this，`this` 的含义取决于你：
 
 ```javascript
 this["MyLibrary"] = _entry_return_;
 
-// your users will use your library like:
+// 使用者将会这样调用你的 library：
 this.MyLibrary.doSomething();
-MyLibrary.doSomething(); //if this is window
+MyLibrary.doSomething(); //如果 this 是 window
 ```
 
 
 `libraryTarget: "window"` - When your library is loaded, **the return value of your entry point** will be part `window` object.
- 
+
  ```javascript
  window["MyLibrary"] = _entry_return_;
 
@@ -294,7 +294,7 @@ window.MyLibrary.doSomething();
 
 
 `libraryTarget: "global"` - When your library is loaded, **the return value of your entry point** will be part `global` object.
- 
+
  ```javascript
  global["MyLibrary"] = _entry_return_;
 
@@ -303,7 +303,7 @@ global.MyLibrary.doSomething();
  ```
 
 
-`libraryTarget: "commonjs"` - When your library is loaded, **the return value of your entry point** will be part of the exports object. As the name implies, this is used in CommonJS environments:
+`libraryTarget: "commonjs"` - 当 library 加载完成，**入口起点的返回值**将分配于 exports 对象上。这个名称也意味着模块用于 CommonJS 环境：
 
 ```javascript
 exports["MyLibrary"] = _entry_return_;
@@ -312,38 +312,37 @@ exports["MyLibrary"] = _entry_return_;
 require("MyLibrary").doSomething();
 ```
 
-
-`libraryTarget: "commonjs2"` - When your library is loaded, **the return value of your entry point** will be part of the exports object. As the name implies, this is used in CommonJS environments:
+`libraryTarget: "commonjs2"` - 当 library 加载完成，**入口起点的返回值**将分配于 exports 对象上。这个名称也意味着模块用于 CommonJS 环境：
 
 ```javascript
 module.exports = _entry_return_;
 
-//your users will use your library like:
+// 使用者将会这样调用你的 library：
 require("MyLibrary").doSomething();
 ```
 
-_Wondering the difference between CommonJS and CommonJS2? Check [this](https://github.com/webpack/webpack/issues/1114) out (they are pretty much the same)._
+_想要弄清楚 CommonJS 和 CommonJS2 之间的区别？查看[这里](https://github.com/webpack/webpack/issues/1114)（它们之间非常相似）。_
 
 
-`libraryTarget: "commonjs-module"` - Expose it using the `module.exports` object (`output.library` is ignored), `__esModule` is defined (it's threaded as ES2015 Module in interop mode)
+`libraryTarget: "commonjs-module"` - 使用 `module.exports` 对象暴露（忽略 `output.library`），`__esModule` 被定义（__esModule 为交互模式下的 ES2015 模块与 CommonJS 模块之间，起到穿针引线的作用）
 
 
-`libraryTarget: "amd"` - In this case webpack will make your library an AMD module.
+`libraryTarget: "amd"` - webpack 将你的 library 转为 AMD 模块。
 
-But there is a very important pre-requisite, your entry chunk must be defined with the define property, if not, webpack will create the AMD module, but without dependencies. 
-The output will be something like this:
+但是在这里有个很重要必备前提，入口 trunk 必须使用 define 属性定义，如果不是，webpack 将创建无依赖的 AMD 模块。
+输出结果就像这样：
 
 ```javascript
 define([], function() {
-	//what this module returns is what your entry chunk returns
+	//这个模块会返回你的入口 chunk 所返回的
 });
 ```
-But if you download this script, first you may get a error: `define is not defined`, it’s ok! 
-If you are distributing your library with AMD, then your users need to use RequireJS to load it. 
+但是如果你下载完这个 script，首先你可能收到一个错误：`define is not defined`，就是这样！
+如果你使用 AMD 来发布你的 library，那么使用者需要使用 RequireJS 来加载它。
 
-Now that you have RequireJS loaded, you can load your library.
+现在你已经加载过 RequireJS，你就能够加载 library。
 
-But, `require([ _what?_ ])`? 
+但是，`require([ _什么？_ ])`？
 
 `output.library`!
 
@@ -354,27 +353,27 @@ output: {
 }
 ```
 
-So your module will be like:
+所以你的模块看起来像这样：
 
 ```javascript
 define("MyLibrary", [], function() {
-	//what this module returns is what your entry chunk returns
+	//这个模块会返回你的入口 chunk 所返回的
 });
 ```
 
-And you can use it like this:
+你能够像这样来调用它：
 
 ```javascript
-// And then your users will be able to do:
+// 然后，用户可以这样做：
 require(["MyLibrary"], function(MyLibrary){
 	MyLibrary.doSomething();
 });
 ```
 
-`libraryTarget: "umd"` - This is a way for your library to work with all the module definitions (and where aren't modules at all). 
-It will work with CommonJS, AMD and as global variable. You can check the [UMD Repository](https://github.com/umdjs/umd) to know more about it. 
+`libraryTarget: "umd"` - 这是一种可以将你的 library 能够在所有的模块定义下都可运行的方式（并且导出的完全不是模块）。
+它将在 CommonJS, AMD 环境下运行，或将模块导出到 global 下的变量。你可以查看 [UMD 仓库](https://github.com/umdjs/umd) 来了解更多相关信息。
 
-In this case, you need the `library` property to name your module:
+在这个例子中，你需要 `library` 属性来命名你的模块：
 
 ```javascript
 output: {
@@ -383,7 +382,7 @@ output: {
 }
 ```
 
-And finally the output is:
+最终输出如下：
 ```javascript
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -395,15 +394,15 @@ And finally the output is:
 	else
 		root["MyLibrary"] = factory();
 })(this, function() {
-	//what this module returns is what your entry chunk returns
+	//这个模块会返回你的入口 chunk 所返回的
 });
 ```
 
-Module proof library.
+模块验证 library。
 
 
 `libraryTarget: "assign"` - Here webpack will blindly generate an implied global.
- 
+
  ```javascript
  MyLibrary = _entry_return_;
  ```
@@ -411,93 +410,93 @@ Be aware that if `MyLibrary` isn't defined earlier your library will be set in g
 
 
 `libraryTarget: "jsonp"` - This will wrap the return value of your entry point into a jsonp wrapper.
- 
+
  ```javascript
  MyLibrary(_entry_return_);
  ```
 
-The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
+你的 library 的依赖将由 [`externals`](/configuration/externals/) 配置定义。
 
 
 ## `output.path`
 
 `string`
 
-The output directory as an **absolute** path.
+output 目录对应一个**绝对路径**。
 
 ```js
 path: path.resolve(__dirname, 'dist/assets')
 ```
 
-Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching) for details.
+注意，`[hash]` 在参数中被替换为编译过程(compilation)的 hash。详细信息请查看[指南 - 缓存](/guides/caching)。
 
 
 ## `output.pathinfo`
 
 `boolean`
 
-Tell webpack to include comments in bundles with information about the contained modules. This option defaults to `false` and **should not** be used in production, but it's very useful in development when reading the generated code.
+告诉 webpack 在 bundle 中引入「所包含模块信息」的相关注释。此选项默认值是 `false`，并且**不应该**用于生产环境(production)，但是对阅读开发环境(development)中的生成代码(generated code)极其有用。
 
 ``` js
 pathinfo: true
 ```
 
-Note it also adds some info about tree shaking to the generated bundle.
+注意，这些注释也会被添加至经过 tree shaking 后生成的 bundle 中。
 
 
 ## `output.publicPath`
 
 `string`
 
-This is an important option when using on-demand-loading or loading external resources like images, files, etc. If an incorrect value is specified you'll receive 404 errors while loading these resources.
+对于按需加载(on-demand-load)或加载外部资源(external resources)（如图片、文件等）来说，output.publicPath 是很重要的选项。如果指定了一个错误的值，则在加载这些资源时会收到 404 错误。
 
-This option specifies the **public URL** of the output directory when referenced in a browser. A relative URL is resolved relative to the HTML page (or `<base>` tag). Server-relative URLs, protocol-relative URLs or absolute URLs are also possible and sometimes required, i. e. when hosting assets on a CDN.
+此选项指定在浏览器中所引用的「此输出目录对应的**公开 URL**」。相对 URL(relative URL) 会被相对于 HTML 页面（或 `<base>` 标签）解析。相对于服务的 URL(Server-relative URL)，相对于协议的 URL(protocol-relative URL) 或绝对 URL(absolute URL) 也可是可能用到的，或者有时必须用到，例如：当将资源托管到 CDN 时。
 
-The value of the option is prefixed to every URL created by the runtime or loaders. Because of this **the value of this option ends with `/`** in most cases.
+该选项的值是以 runtime(运行时) 或 loader(加载器载入时) 所创建的每个 URL 为前缀。因此，在多数情况下，**此选项的值都会以`/`结束**。
 
-The default value is an empty string `""`.
+默认值是一个空字符串 `""`。
 
-Simple rule: The URL of your [`output.path`](#output-path) from the view of the HTML page.
+简单规则如下：[`output.path`](#output-path) 中的 URL 以 HTML 页面为基准。
 
 ```js
 path: path.resolve(__dirname, "public/assets"),
 publicPath: "https://cdn.example.com/assets/"
 ```
 
-For this configuration:
+对于这个配置：
 
 ```js
 publicPath: "/assets/",
 chunkFilename: "[id].chunk.js"
 ```
 
-A request to a chunk will look like `/assets/4.chunk.js`.
+对于一个 chunk 请求，看起来像这样 `/assets/4.chunk.js`。
 
-A loader outputting HTML might emit something like this:
+对于一个输出 HTML 的 loader 可能会像这样输出：
 
 ```html
 <link href="/assets/spinner.gif" />
 ```
 
-or when loading an image in CSS:
+或者在加载 CSS 的一个图片时：
 
 ```css
 background-image: url(/assets/spinner.gif);
 ```
 
-The webpack-dev-server also takes a hint from `publicPath`, using it to determine where to serve the output files from.
+webpack-dev-server 也会默认从 `publicPath` 为基准，使用它来决定在哪个目录下启用服务，来访问 webpack 输出的文件。
 
-Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching) for details.
+注意，参数中的 `[hash]` 将会被替换为编译过程(compilation) 的 hash。详细信息请查看[指南 - 缓存](/guides/caching)。
 
-Examples:
+示例：
 
 ``` js
-publicPath: "https://cdn.example.com/assets/", // CDN (always HTTPS)
-publicPath: "//cdn.example.com/assets/", // CDN (same protocol)
-publicPath: "/assets/", // server-relative
-publicPath: "assets/", // relative to HTML page
-publicPath: "../assets/", // relative to HTML page
-publicPath: "", // relative to HTML page (same directory)
+publicPath: "https://cdn.example.com/assets/", // CDN（总是 HTTPS 协议）
+publicPath: "//cdn.example.com/assets/", // CDN (协议相同)
+publicPath: "/assets/", // 相对于服务(server-relative)
+publicPath: "assets/", // 相对于 HTML 页面
+publicPath: "../assets/", // 相对于 HTML 页面
+publicPath: "", // 相对于 HTML 页面（目录相同）
 ```
 
 
@@ -505,26 +504,27 @@ publicPath: "", // relative to HTML page (same directory)
 
 `string`
 
-This option is only used when [`devtool`](/configuration/devtool) uses a SourceMap option which writes an output file.
+ 此选项会向硬盘写入一个输出文件，只在 [`devtool`](/configuration/devtool) 启用了 SourceMap 选项时才使用。
 
-Configure how source maps are named. By default `"[file].map"` is used.
 
-Technically the `[name]`, `[id]`, `[hash]` and `[chunkhash]` [placeholders](#output-filename) can be used, if generating a SourceMap for chunks. In addition to that the `[file]` placeholder is replaced with the filename of the original file. It's recommended to only use the `[file]` placeholder, as the other placeholders won't work when generating SourceMaps for non-chunk files. Best leave the default.
+配置 source map 的命名方式。默认使用 `"[file].map"`。
+
+技术上看，对于 chunk 生成的 SourceMap，可以使用 `[name]`, `[id]`, `[hash]` 和 `[chunkhash]` [占位符(placeholder)](#output-filename)。除了替换这些占位符，`[file]` 占位符还可以被替换为原始文件(original file)的文件名。建议只使用 `[file]` 占位符，因为其他占位符在非 chunk 文件生成的 SourceMap 时不起作用。最好保持默认。
 
 
 ## `output.sourcePrefix`
 
 `string`
 
-Change the prefix for each line in the output bundles.
+修改输出 bundle 中每行的前缀。
 
 ``` js
 sourcePrefix: "\t"
 ```
 
-Note by default an empty string is used. Using some kind of indention makes bundles look more pretty, but will cause issues with multi-line string.
+注意，默认情况下使用空字符串。使用一些缩进会看起来更美观，但是可能导致多行字符串中的问题。
 
-There is no need to change it.
+这里没有必要修改它。
 
 
 ## `output.strictModuleExceptionHandling`
@@ -542,10 +542,14 @@ When set to `false`, the module is not removed from cache, which results in the 
 
 `boolean`
 
-When using `libraryTarget: "umd"`, setting:
+当使用了 `libraryTarget: "umd"`，设置：
 
 ``` js
 umdNamedDefine: true
 ```
 
-will name the AMD module of the UMD build. Otherwise an anonymous `define` is used.
+会对 UMD 的构建过程中的 AMD 模块进行命名。否则就使用匿名的 `define`。
+
+***
+
+> 原文：https://webpack.js.org/configuration/output/

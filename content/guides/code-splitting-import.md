@@ -1,5 +1,5 @@
 ---
-title: Code Splitting - Using import()
+title: 代码分离 - 使用 import()
 sort: 33
 contributors:
   - simon04
@@ -166,3 +166,7 @@ The use of `System.import` in webpack [did not fit the proposed spec](https://gi
 
 ## Weblinks
 * [Lazy Loading ES2015 Modules in the Browser](https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser)
+
+***
+
+> 原文：https://webpack.js.org/guides/environment-variables/

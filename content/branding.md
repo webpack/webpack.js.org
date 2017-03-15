@@ -88,3 +88,7 @@ In addition, you can grab the following file types directly from these links:
 ## License
 
 The logo and the brand name are **not MIT licensed**. Please check [our LICENSE](https://github.com/webpack/media/blob/master/LICENSE) for usage guidelines.
+
+***
+
+> 原文：https://webpack.js.org/branding/

@@ -23,3 +23,7 @@ new webpack.SourceMapDevToolPlugin(options)
 ## Examples
 
 ?> TODO
+
+***
+
+> 原文：https://webpack.js.org/plugins/source-map-dev-tool-plugin/

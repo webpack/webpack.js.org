@@ -1,31 +1,31 @@
 ---
-title: Configuration
+title: 配置(Configuration)
 sort: 6
 contributors:
 - TheLarkInn
 ---
 
-You may have noticed that few webpack configurations look exactly alike. This is because **webpack's configuration file is a JavaScript file that exports an object.** This object is then processed by webpack based upon its defined properties.
+你可能已经注意到，很少有 webpack 配置看起来很完全相同。这是因为 **webpack 的配置文件是 JavaScript 文件导出的一个对象。**此对象，由 webpack 根据对象定义的属性进行解析。
 
-Because it's a standard Node.js CommonJS module, you **can do the following**:
+因为 webpack 配置是标准的 Node.js CommonJS 模块，你可以**如下**：
 
-* import other files via `require(...)`
-* use utilities on npm via `require(...)`
-* use JavaScript control flow expressions i. e. the `?:` operator
-* use constants or variables for often used values
-* write and execute functions to generate a part of the configuration
+* 通过 `require(...)` 导入其他文件
+* 通过 `require(...)` 使用 npm 的工具函数
+* 使用 JavaScript 控制流表达式，例如 `?:` 操作符
+* 对常用值使用常量或变量
+* 编写并执行函数来生成部分配置
 
-Use these features when appropriate.
+请在合适的时机使用这些特性。
 
-**You should NOT use the following things**. Technically you could use them, but it's **not recommended**:
+**你不应该使用以下**。从技术上讲你可以这么做，但是**并不推荐**：
 
-* Access CLI arguments, when using the webpack CLI (instead write your own CLI, or use `--env`)
-* Export non-deterministic values (calling webpack twice should result in the same output files)
-* Write long configurations (instead split the configuration into multiple files)
+* 在使用 webpack 命令行接口(CLI)（应该编写自己的命令行接口(CLI)，或使用 `--env`）时，访问命令行接口(CLI)参数
+* 导出不确定的值（调用 webpack 两次应该产生同样的输出文件）
+* 编写很长的配置（应该将配置拆分为多个文件）
 
-The following examples below describe how webpack's configuration object can be both expressive and configurable because _it is code_:
+接下来的例子展示了 webpack 配置对象(webpack configuration object)如何即具有表现力，又具有可配置性，这是因为_配置对象即是代码_：
 
-## The Simplest Configuration
+## 最简单的配置
 
 **webpack.config.js**
 
@@ -41,7 +41,7 @@ module.exports = {
 };
 ```
 
-## Multiple Targets
+## 多个 Target
 
 **webpack.config.js**
 
@@ -86,11 +86,11 @@ let targets = ['web', 'webworker', 'node', 'async-node', 'node-webkit', 'electro
 module.exports = targets;
 ```
 
-T> The most important part to take away from this document is that there are many different ways to format and style your webpack configuration. The key is to stick with something consistent that you and your team can understand and maintain.
+T> 作为这篇文档最重要的部分是，会有许多不同格式和风格的 webpack 配置。关键在于，你和你的团队要在理解和维护上保持一致。
 
-## Using TypeScript
+## 使用 TypeScript
 
-In the example below we use TypeScript to create a class which the angular-cli uses to [generate configs](https://github.com/angular/angular-cli/).
+在下面的例子我们使用 TypeScript 创建一个类(class)，[配置](https://github.com/angular/angular-cli/)是通过 angular-cli 生成。
 
 **webpack.config.ts**
 
@@ -107,7 +107,7 @@ import {
 
 export class NgCliWebpackConfig {
   // TODO: When webpack2 types are finished let's replace all these any types
-  // so this is more maintainable in the future for devs
+  // 所以对于开发人员来说，将来这些配置是更加可维护的
   public config: any;
   private webpackDevConfigPartial: any;
   private webpackProdConfigPartial: any;
@@ -151,14 +151,15 @@ export class NgCliWebpackConfig {
 }
 ```
 
-## Using JSX
+## 使用 JSX
 
-In the example below JSX (React JavaScript Markup) and Babel are used to create a JSON Configuration that webpack can understand. (Courtesy of [Jason Miller](https://twitter.com/_developit))
+在下面例子中，使用 JSX（React JavaScript 标记语法）和 Babel 创建了一个 webpack 可以支持的 JSON 配置。（由 [Jason Miller](https://twitter.com/_developit) 提供）
+
 
 ```javascript
 import h from 'jsxobj';
 
-// example of an imported plugin
+// 导入插件的示例
 const CustomPlugin = config => ({
   ...config,
   name: 'custom-plugin'
@@ -183,3 +184,7 @@ export default (
   </webpack>
 );
 ```
+
+***
+
+> 原文：https://webpack.js.org/concepts/configuration/

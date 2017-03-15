@@ -1,5 +1,5 @@
 ---
-title: Writer's Guide
+title: 作者指引
 ---
 
 ## Process
@@ -92,3 +92,7 @@ W> This is a warning.
 **Syntax: ?\>**
 
 ?> This is a todo.
+
+***
+
+> 原文：https://webpack.js.org/writers-guide/

@@ -1,19 +1,19 @@
 ---
-title: Plugin API
+title: 插件 API(Plugin API)
 sort: 4
 ---
 
-For a high-level introduction to writing plugins, start with [How to write a plugin](/development/how-to-write-a-plugin).
+关于编写插件的高阶介绍，可以从阅读 [如何编写插件](/development/how-to-write-a-plugin) 开始。
 
-Many objects in webpack extend the Tapable class, which exposes a `plugin` method. And with the `plugin` method, plugins can inject custom build steps. You will see `compiler.plugin` and `compilation.plugin` used a lot. Essentially, each one of these plugin calls binds a callback to fire at specific steps throughout the build process.
+很多 webpack 中的对象都继承了 Tapable 类，暴露了一个 `plugin` 方法。插件可以使用 `plugin` 方法注入自定义的构建步骤。你可以看到 `compiler.plugin` 和 `compilation.plugin` 被频繁使用。基本上，每个插件的调用都在构建流程中绑定了回调来触发特定的步骤。
 
-A plugin is installed once as webpack starts up. webpack installs a plugin by calling its `apply` method, and passes a reference to the webpack `compiler` object. You may then call `compiler.plugin` to access asset compilations and their individual build steps. An example would look like this:
+每个插件会在 webpack 启动时被安装一次，webpack 通过调用插件的 `apply` 方法来安装它们，并且传递一个 webpack `compiler` 对象的引用。然后你可以调用 `compiler.plugin` 来访问资源的编译和它们独立的构建步骤。下面就是一个示例：
 
 ```javascript
 // MyPlugin.js
 
 function MyPlugin(options) {
-  // Configure your plugin with options...
+  // 根据 options 配置你的插件
 }
 
 MyPlugin.prototype.apply = function(compiler) {
@@ -46,46 +46,48 @@ Then in `webpack.config.js`
     ]
 ```
 
-## Plugin Interfaces
+## 插件接口
 
-There are two types of plugin interfaces.
+插件接口有下面两种不同区别：
 
-* Timing based
-  * sync (default): As seen above. Use return.
-  * async: Last parameter is a callback. Signature: function(err, result)
-  * parallel: The handlers are invoked parallel (async).
+* 基于时间：
+  * 同步（默认）：就像上面看到的，使用 return 。
+  * 异步：最后的参数是一个回调。规范为：function(err, result)
+  * 并行：处理函数（handlers）被并行地调用（异步地）。
 
-* Return value
-  * not bailing (default): No return value.
-  * bailing: The handlers are invoked in order until one handler returns something.
-  * parallel bailing: The handlers are invoked in parallel (async). The first returned value (by order) is significant.
-  * waterfall: Each handler gets the result value of the last handler as an argument.
+* 返回值:
+  * 没有委托（bailing）（默认）：没有返回值。
+  * 委托：处理函数被按顺序地调用，直到某一个处理函数有返回任何值。
+  * 并行委托：处理函数被并行地调用（异步地）。产生的第一个返回值（按顺序地）最后会被使用。
+  * 瀑布流：每个处理函数取得并使用上一个处理函数的结果作为参数。
 
-## The `Compiler` instance
+（译注：这里的*处理函数*指插件通过 `plugin` 方法注册的函数）
 
-Plugins need to have the apply method on their prototype chain (or bound to) in order to have access to the compiler instance.
+## `Compiler` 实例
+
+插件需要有 apply 方法（在原型链或绑定原型）来访问 compiler 实例。
 
 **MyPlugin.js**
 
 ```javascript
 function MyPlugin() {};
 MyPlugin.prototype.apply = function (compiler) {
-    //now you have access to all the compiler instance methods
+    //现在你可以访问所有的 compiler 实例方法
 }
 module.exports = MyPlugin;
 ```
 
-Something like this should also work
+下面这样也可以：
 
 **MyFunction.js**
 
 ```javascript
 function apply(options, compiler) {
-    //now you have access to the compiler instance
-    //and options
+    //现在你可以访问所有的 compiler 实例方法
+    //和配置
 }
 
-//this little trick makes it easier to pass and check options to the plugin
+//这里的小技巧可以简单的向插件传递和检查配置项
 module.exports = function(options) {
     if (options instanceof Array) {
         options = {
@@ -104,21 +106,22 @@ module.exports = function(options) {
 
 ```
 
-### `run(compiler: Compiler)` async
+### `run(compiler: Compiler)` 异步
 
-The `run` method of the Compiler is used to start a compilation. This is not called in watch mode.
+编译器的 `run` 方法用来开始一个 compilation。在跟踪模式（watch mode）将不会被调用。
 
-### `watch-run(watching: Watching)` async
+### `watch-run(watching: Watching)` 异步
 
+编译器的 `watch` 方法用来开始一个 watching compilation。在普通模式将不会被调用。
 The `watch` method of the Compiler is used to start a watching compilation. This is not called in normal mode.
 
 ### `compilation(c: Compilation, params: Object)`
 
-A `Compilation` is created. A plugin can use this to obtain a reference to the `Compilation` object. The `params` object contains useful references.
+一个 `Compilation` 被创建了。插件可以使用它来得到 `Compilation` 的引用。`params` 对象包含一些有用的引用。
 
 ### `normal-module-factory(nmf: NormalModuleFactory)`
 
-A `NormalModuleFactory` is created. A plugin can use this to obtain a reference to the `NormalModuleFactory` object.
+一个 `NormalModuleFactory` 被创建了。插件可以使用它来得到 `NormalModuleFactory` 对象的引用。
 
 ```javascript
 compiler.plugin("normal-module-factory", function(nmf) {
@@ -130,103 +133,104 @@ compiler.plugin("normal-module-factory", function(nmf) {
 
 ### `context-module-factory(cmf: ContextModuleFactory)`
 
-A `ContextModuleFactory` is created. A plugin can use this to obtain a reference to the `ContextModuleFactory` object.
+一个 `ContextModuleFactory` 被创建了。插件可以使用它来得到 `ContextModuleFactory` 对象的引用。
 
 ### `compile(params)`
 
-The Compiler starts compiling. This is used in normal and watch mode. Plugins can use this point to modify the `params` object (i. e. to decorate the factories).
+编译器开始编译。在普通模式和跟踪模式都能使用。插件可以在这个时间点来修改 `params` 对象（比如修饰工厂函数）。
 
 ```javascript
 compiler.plugin("compile", function(params) {
-    //you are now in the "compile" phase
+    //你现在处于 "compile" 阶段
 });
 ```
 
-### `make(c: Compilation)` parallel
+### `make(c: Compilation)` 并行
 
-Plugins can use this point to add entries to the compilation or prefetch modules. They can do this by calling `addEntry(context, entry, name, callback)` or `prefetch(context, dependency, callback)` on the Compilation.
+插件可以在这个时间点，通过 Compilation 的 `addEntry(context, entry, name, callback)` 和 `prefetch(context, dependency, callback)` 方法，向编译添加入口（entries）或者预拉取模块。
 
-### `after-compile(c: Compilation)` async
+### `after-compile(c: Compilation)` 异步
 
-The compile process is finished and the modules are sealed. The next step is to emit the generated stuff. Here modules can use the results in some cool ways.
+编译过程已经结束，模块已经被封闭（sealed）。下一步是发起输出（emit）生成资源。在这里可以通过一些炫酷的方法使用模块的结果。
 
-The handlers are not copied to child compilers.
+处理函数将不会被复制到子编译器中。
 
-### `emit(c: Compilation)` async
+### `emit(c: Compilation)` 异步
 
-The Compiler begins with emitting the generated assets. Here plugins have the last chance to add assets to the `c.assets` array.
+编译器开始输出生成资源。这里是插件向 `c.assets` 数组添加生成资源的最后机会。
 
-### `after-emit(c: Compilation)` async
+### `after-emit(c: Compilation)` 异步
 
-The Compiler has emitted all assets.
+编译器已经输出所有生成资源。
 
 ### `done(stats: Stats)`
 
-All is done.
+所有任务已经完成。
 
 ### `failed(err: Error)`
 
-The Compiler is in watch mode and a compilation has failed hard.
+编译器处在跟踪模式并且一个编译已经失败。
 
 ### `invalid()`
 
-The Compiler is in watch mode and a file change is detected. The compilation will be begin shortly (`options.watchDelay`).
+编译器处在跟踪模式并且一个文件变化被检测到，编译短暂延迟后马上开始（`options.watchDelay`）。
 
 ### `after-plugins()`
 
-All plugins extracted from the options object are added to the compiler.
+所有从配置对象中提取的插件已经被加到编译器上。
 
 ### `after-resolvers()`
 
-All plugins extracted from the options object are added to the resolvers.
+所有从配置对象中提取的插件已经被加到解析器上。
 
-## The `Compilation` instance
+## `Compilation` 实例
 
-The Compilation instance extends from the compiler. I.e. compiler.compilation  It is the literal compilation of all the objects in the require graph. This object has access to all the modules and their dependencies (most of which are circular references). In the compilation phase, modules are loaded, sealed, optimized, chunked, hashed and restored, etc. This would be the main lifecycle of any operations of the compilation.
+编译实例继承于编译器。例如，compiler.compilation 是对所有 require 图表中对象的字面上的编译。这个对象可以访问所有的模块和它们的依赖（大部分是循环依赖）。在编译阶段，模块被加载，封闭，优化，分块，哈希和重建等等。这将是编译中任何操作主要的生命周期。
 
 ```javascript
 compiler.plugin("compilation", function(compilation) {
-    //the main compilation instance
-    //all subsequent methods are derived from compilation.plugin
+    //主要的编译实例
+    //随后所有的方法都从 compilation.plugin 上得来
 });
 ```
 
 ### `normal-module-loader`
 
-The normal module loader, is the function that actually loads all the modules in the module graph (one-by-one).
+普通模块加载器，真实地一个一个加载模块图表中所有的模块的函数。
+is the function that actually loads all the modules in the module graph (one-by-one).
 
 ```javascript
 compilation.plugin('normal-module-loader', function(loaderContext, module) {
-    //this is where all the modules are loaded
-    //one by one, no dependencies are created yet
+    //这里是所以模块被加载的地方
+    //一个接一个，此时还没有依赖被创建
 });
 ```
 
 ### `seal`
 
-The sealing of the compilation has started.
+编译的封闭已经开始。
 
 ```javascript
 compilation.plugin('seal', function() {
-    //you are not accepting any more modules
-    //no arguments
+    //你已经不能再接收到任何模块
+    //没有参数
 });
 ```
 
 ### `optimize`
 
-Optimize the compilation.
+优化编译。
 
 ```javascript
 compilation.plugin('optimize', function() {
-    //webpack is begining the optimization phase
-    // no arguments
+    //webpack 已经进入优化阶段
+    //没有参数
 });
 ```
 
-### `optimize-tree(chunks, modules)` async
+### `optimize-tree(chunks, modules)` 异步
 
-Async optimization of the tree.
+树的异步优化。
 
 ```javascript
 compilation.plugin('optimize-tree', function(chunks, modules) {
@@ -236,30 +240,29 @@ compilation.plugin('optimize-tree', function(chunks, modules) {
 
 ### `optimize-modules(modules: Module[])`
 
-Optimize the modules.
+模块的优化。
 
 ```javascript
 compilation.plugin('optimize-modules', function(modules) {
-    //handle to the modules array during tree optimization
+    //树优化期间处理模块数组
 });
 ```
 
 ### `after-optimize-modules(modules: Module[])`
 
-Optimizing the modules has finished.
+模块优化已经结束。
 
 ### `optimize-chunks(chunks: Chunk[])`
 
-Optimize the chunks.
+块的优化。
 
 ```javascript
-//optimize chunks may be run several times in a compilation
+//块的优化在编译中可能运行很长时间
 
 compilation.plugin('optimize-chunks', function(chunks) {
-    //unless you specified multiple entries in your config
-    //there's only one chunk at this point
+    //这里一般只有一个块，除非你在配置中指定了多个入口
     chunks.forEach(function (chunk) {
-        //chunks have circular references to their modules
+        //块含有模块的循环引用
         chunk.modules.forEach(function (module){
             //module.loaders, module.rawRequest, module.dependencies, etc.
         });
@@ -269,75 +272,76 @@ compilation.plugin('optimize-chunks', function(chunks) {
 
 ### `after-optimize-chunks(chunks: Chunk[])`
 
-Optimizing the chunks has finished.
+块的优化已经结束。
 
 ### `revive-modules(modules: Module[], records)`
 
-Restore module info from records.
+从记录中重建模块信息。
 
 ### `optimize-module-order(modules: Module[])`
 
-Sort the modules in order of importance. The first is the most important module. It will get the smallest id.
+按模块重要性重新排序，第一个模块是最重要的模块，将得到最小的 id。
 
 ### `optimize-module-ids(modules: Module[])`
 
-Optimize the module ids.
+优化模块的 id。
 
 ### `after-optimize-module-ids(modules: Module[])`
 
-Optimizing the module ids has finished.
+模块 id 优化已经结束。
 
 ### `record-modules(modules: Module[], records)`
 
-Store module info to the records.
+存储模块信息到记录。
 
 ### `revive-chunks(chunks: Chunk[], records)`
 
+从记录中重建块信息。
 Restore chunk info from records.
 
 ### `optimize-chunk-order(chunks: Chunk[])`
 
-Sort the chunks in order of importance. The first is the most important chunk. It will get the smallest id.
+按块重要性重新排序，第一个块是最重要的模块，将得到最小的 id。
 
 ### `optimize-chunk-ids(chunks: Chunk[])`
 
-Optimize the chunk ids.
+优化块的 id。
 
 ### `after-optimize-chunk-ids(chunks: Chunk[])`
 
-Optimizing the chunk ids has finished.
+块 id 优化已经结束。
 
 ### `record-chunks(chunks: Chunk[], records)`
 
-Store chunk info to the records.
+存储块信息到记录。
 
 ### `before-hash`
 
-Before the compilation is hashed.
+编译开始哈希前。
 
 ### `after-hash`
 
-After the compilation is hashed.
+编译哈希后。
 
 ### `before-chunk-assets`
 
-Before creating the chunk assets.
+创建块生成资源前。
 
 ### `additional-chunk-assets(chunks: Chunk[])`
 
-Create additional assets for the chunks.
+为块创建附加的生成资源。
 
 ### `record(compilation, records)`
 
-Store info about the compilation to the records
+存储编译信息到记录。
 
-### `optimize-chunk-assets(chunks: Chunk[])` async
+### `optimize-chunk-assets(chunks: Chunk[])` 异步
 
-Optimize the assets for the chunks.
+优化块的生成资源。
 
-The assets are stored in `this.assets`, but not all of them are chunk assets. A `Chunk` has a property `files` which points to all files created by this chunk. The additional chunk assets are stored in `this.additionalChunkAssets`.
+生成资源被存储在 `this.assets`，但是它们并不都是块的生成资源。一个 `Chunk` 有一个 `files` 属性指出这个块创建的所有文件。附加的生成资源被存储在 `this.additionalChunkAssets` 中。
 
-Here's an example that simply adds a banner to each chunk.
+这是一个为每个块添加 banner 的例子。
 
 ```javascript
 compilation.plugin("optimize-chunk-assets", function(chunks, callback) {
@@ -352,7 +356,7 @@ compilation.plugin("optimize-chunk-assets", function(chunks, callback) {
 
 ### `after-optimize-chunk-assets(chunks: Chunk[])`
 
-The chunk assets have been optimized. Here's an example plugin from [@boopathi](https://github.com/boopathi) that outputs exactly what went into each chunk.
+块生成资源已经被优化。这里是一个来自 [@boopathi](https://github.com/boopathi) 的示例插件，详细的输出每个块里有什么。
 
 ```javascript
 var PrintChunksPlugin = function() {};
@@ -373,19 +377,19 @@ PrintChunksPlugin.prototype.apply = function(compiler) {
 };
 ```
 
-### `optimize-assets(assets: Object{name: Source})` async
+### `optimize-assets(assets: Object{name: Source})` 异步
 
-Optimize all assets.
+优化所有生成资源。
 
-The assets are stored in `this.assets`.
+生成资源被存放在 `this.assets`.
 
 ### `after-optimize-assets(assets: Object{name: Source})`
 
-The assets has been optimized.
+生成资源优化已经结束。
 
 ### `build-module(module)`
 
-Before a module build has started.
+一个模块构建开始前。
 
 ```javascript
 compilation.plugin('build-module', function(module){
@@ -396,7 +400,7 @@ compilation.plugin('build-module', function(module){
 
 ### `succeed-module(module)`
 
-A module has been built successfully.
+一个模块已经被成功构建。
 
 ```javascript
 compilation.plugin('succeed-module', function(module){
@@ -407,7 +411,7 @@ compilation.plugin('succeed-module', function(module){
 
 ### `failed-module(module)`
 
-The module build has failed.
+一个模块构建失败。
 
 ```javascript
 compilation.plugin('failed-module', function(module){
@@ -418,13 +422,13 @@ compilation.plugin('failed-module', function(module){
 
 ### `module-asset(module, filename)`
 
-An asset from a module was added to the compilation.
+一个模块中的一个生成资源被加到编译中。
 
 ### `chunk-asset(chunk, filename)`
 
-An asset from a chunk was added to the compilation.
+一个块中的一个生成资源被加到编译中。
 
-## The `MainTemplate` instance
+## `MainTemplate` 实例
 
 ### `startup(source, module, hash)`
 ```javascript
@@ -440,150 +444,151 @@ An asset from a chunk was added to the compilation.
     });
 ```
 
-## The `Parser` instance (`compiler.parser`)
+## `Parser` 实例 (`compiler.parser`)
 
-The parser instance takes a String and callback and will return an expression when there's a match.
+分析器实例接收一个字符串和回调，当字符串能被匹配到时返回一个表达式。
 
 ```javascript
 compiler.plugin('compilation', function(compilation, data) {
   data.normalModuleFactory.plugin('parser', function(parser, options) {
     parser.plugin('call require', function(expr) {
       // you now have a reference to the call expression
+      现在你可以获取到调用表达式(call expression)对象的引用
     });
   });
 });
 ```
 
-### `program(ast)` bailing
+### `program(ast)` 委托
 
-General purpose plugin interface for the AST of a code fragment.
+获取代码片段的 AST 的通用插件接口。
 
-### `statement(statement: Statement)` bailing
+### `statement(statement: Statement)` 委托
 
-General purpose plugin interface for the statements of the code fragment.
+获取代码片段的语句的通用插件接口。
 
-### `call <identifier>(expr: Expression)` bailing
+### `call <identifier>(expr: Expression)` 委托
 
 `abc(1)` => `call abc`
 
 `a.b.c(1)` => `call a.b.c`
 
-### `expression <identifier>(expr: Expression)` bailing
+### `expression <identifier>(expr: Expression)` 委托
 
 `abc` => `expression abc`
 
 `a.b.c` => `expression a.b.c`
 
-### `expression ?:(expr: Expression)` bailing
+### `expression ?:(expr: Expression)` 委托
 
 `(abc ? 1 : 2)` => `expression ?!`
 
-Return a boolean value to omit parsing of the wrong path.
+返回一个布尔值来忽略错误路径的分析。
 
-### `typeof <identifier>(expr: Expression)` bailing
+### `typeof <identifier>(expr: Expression)` 委托
 
 `typeof a.b.c` => `typeof a.b.c`
 
-### `statement if(statement: Statement)` bailing
+### `statement if(statement: Statement)` 委托
 
 `if(abc) {}` => `statement if`
 
-Return a boolean value to omit parsing of the wrong path.
+返回一个布尔值来忽略错误路径的分析。
 
-### `label <labelname>(statement: Statement)` bailing
+### `label <labelname>(statement: Statement)` 委托
 
 `xyz: abc` => `label xyz`
 
-### `var <name>(statement: Statement)` bailing
+### `var <name>(statement: Statement)` 委托
 
 `var abc, def` => `var abc` + `var def`
 
-Return `false` to not add the variable to the known definitions.
+返回 `false` 对已知的定义不加入变量。
 
-### `evaluate <expression type>(expr: Expression)` bailing
+### `evaluate <expression type>(expr: Expression)` 委托
 
-Evaluate an expression.
+计算一个表达式。
 
-### `evaluate typeof <identifier>(expr: Expression)` bailing
+### `evaluate typeof <identifier>(expr: Expression)` 委托
 
-Evaluate the type of an identifier.
+计算一个标识符的类型。
 
-### `evaluate Identifier <identifier>(expr: Expression)` bailing
+### `evaluate Identifier <identifier>(expr: Expression)` 委托
 
-Evaluate a identifier that is a free var.
+计算一个标识符是否是未定义的。
 
-### `evaluate defined Identifier <identifier>(expr: Expression)` bailing
+### `evaluate defined Identifier <identifier>(expr: Expression)` 委托
 
-Evaluate a identifier that is a defined var.
+计算一个标识符是否是已定义的。
 
-### `evaluate CallExpression .<property>(expr: Expression)` bailing
+### `evaluate CallExpression .<property>(expr: Expression)` 委托
 
-Evaluate a call to a member function of a successfully evaluated expression.
+计算一个成员函数的调用是否是一个成功的表达式。
 
-# The `NormalModuleFactory`
+# `NormalModuleFactory`
 
-### `before-resolve(data)` async waterfall
+### `before-resolve(data)` 异步 瀑布流
 
-Before the factory starts resolving. The `data` object has these properties:
+工厂函数开始解析前。 `data` 对象含有这些属性：
 
-* `context` The absolute path of the directory for resolving.
-* `request` The request of the expression.
+* `context` 解析目录的绝对路径。
+* `request` 表达式的请求。
 
-Plugins are allowed to modify the object or to pass a new similar object to the callback.
+插件可以修改这个对象或者传递一个新的对象给回调。
 
-### `after-resolve(data)` async waterfall
+### `after-resolve(data)` 异步 瀑布流
 
-After the factory has resolved the request. The `data` object has these properties:
+工厂函数解析后。 `data` 对象含有这些属性：
 
-* `request` The resolved request. It acts as an identifier for the NormalModule.
-* `userRequest` The request the user entered. It's resolved, but does not contain pre or post loaders.
-* `rawRequest` The unresolved request.
-* `loaders` A array of resolved loaders. This is passed to the NormalModule and they will be executed.
-* `resource` The resource. It will be loaded by the NormalModule.
-* `parser` The parser that will be used by the NormalModule.
+* `request` 解析请求。这充当了 NormalModule 的标识符。
+* `userRequest` 用户输入的请求。已被解析，但是不包含预加载器或 post 加载器。
+* `rawRequest` 未解析的请求。
+* `loaders` 解析出的加载器的数组。将传递给 NormalModule 并被执行。
+* `resource` 原始资源。将被 NormalModule 读取。
+* `parser` 将被 NormalModule 使用的分析器。
 
-# The `ContextModuleFactory`
+# `ContextModuleFactory`
 
-### `before-resolve(data)` async waterfall
+### `before-resolve(data)` 异步 瀑布流
 
-### `after-resolve(data)` async waterfall
+### `after-resolve(data)` 异步 瀑布流
 
-### `alternatives(options: Array)` async waterfall
+### `alternatives(options: Array)` 异步 瀑布流
 
-## Resolvers
+## 解析器
 
-* `compiler.resolvers.normal` Resolver for a normal module
-* `compiler.resolvers.context` Resolver for a context module
-* `compiler.resolvers.loader` Resolver for a loader
+* `compiler.resolvers.normal` 普通模块的解析器
+* `compiler.resolvers.context` 上下文模块的解析器
+* `compiler.resolvers.loader` 加载器的解析器
 
-Any plugin should use `this.fileSystem` as fileSystem, as it's cached. It only has async named functions, but they may behave sync, if the user uses a sync file system implementation (i. e. in enhanced-require).
+任何插件都应该使用 `this.fileSystem` 作为文件系统，因为它具有缓存。它只有异步名称函数，但是如果用户使用同步的文件系统接口，它可以变为同步的表现（比如 enhanced-require）。
 
-To join paths any plugin should use `this.join`. It normalizes the paths. There is a `this.normalize` too.
+拼接路径时应该使用 `this.join`。它标准化（normalizes）了路径。这里也有一个 `this.normalizes` 方法。
 
-A bailing async forEach implementation is available on `this.forEachBail(array, iterator, callback)`.
+还有一个可用的委托异步的 forEach 接口 `this.forEachBail(array, iterator, callback)`。
 
-To pass the request to other resolving plugins, use the `this.doResolve(types: String|String[], request: Request, callback)` or (`this.doResolve(types, request, message, callback)`) method. `types` are multiple possible request types that are tested in order of preference.
+要传递请求到其他解析插件，使用 `this.doResolve(types: String|String[], request: Request, callback)` 方法（或者`this.doResolve(types, request, message, callback)`方法）。`types` 根据优先级的识别会有多种请求类型的可能。
 
 ```javascript
 interface Request {
-  path: String // The current directory of the request
-  request: String // The current request string
-  query: String // The query string of the request, if any
-  module: boolean // The request begins with a module
-  directory: boolean // The request points to a directory
-  file: boolean // The request points to a file
-  resolved: boolean // The request is resolved/done
-  // undefined means false for boolean fields
+  path: String // 请求的当前路径
+  request: String // 当前的请求字符串
+  query: String // 当前请求的查询字符串，如果有
+  module: boolean // 请求是否以模块开始
+  directory: boolean // 请求是否指向一个目录
+  file: boolean // 请求是否指向一个文件
+  resolved: boolean // 请求是否已经被解析
+  // 在布尔值属性上，undefined 意味着 false
 }
 
-// Examples
-// from /home/user/project/file.js: require("../test?charset=ascii")
+// 示例
+// 在 /home/user/project/file.js 文件中：require("../test?charset=ascii")
 {
   path: "/home/user/project",
   request: "../test",
   query: "?charset=ascii"
 }
-// from /home/user/project/file.js: require("test/test/")
+// 在 /home/user/project/file.js 文件中：require("test/test/")
 {
   path: "/home/user/project",
   request: "test/test/",
@@ -594,36 +599,40 @@ interface Request {
 
 ### `resolve(context: String, request: String)`
 
-Before the resolving process starts.
+解析流程开始前。
 
 ### `resolve-step(types: String[], request: Request)`
 
-Before a single step in the resolving process starts.
+解析流程中一个单独的步骤开始前。
 
-### `module(request: Request)` async waterfall
+### `module(request: Request)` 异步 瀑布流
 
-A module request is found and should be resolved.
+一个模块请求被找到并且要被解析。
 
-### `directory(request: Request)` async waterfall
+### `directory(request: Request)` 异步 瀑布流
 
-A directory request is found and should be resolved.
+一个目录请求被找到并且要被解析。
 
-### `file(request: Request)` async waterfall
+### `file(request: Request)` 异步 瀑布流
 
-A file request is found and should be resolved.
+一个文件请求被找到并且要被解析。
 
-### The plugins may offer more extensions points
+### 插件也许可以提供更多扩展点
 
-Here is a list what the default plugins in webpack offer. They are all `(request: Request)` async waterfall.
+这里是一个 webpack 提供的默认插件列表。它们都有 `(request: Request)`（是异步和瀑布流的）。
 
-The process for normal modules and contexts is `module -> module-module -> directory -> file`.
+普通模块的流程和上下文是 `module -> module-module -> directory -> file`。
 
-The process for loaders is `module -> module-loader-module -> module-module -> directory -> file`.
+加载器的流程是 `module -> module-loader-module -> module-module -> directory -> file`。
 
 ### `module-module`
 
-A module should be looked up in a specified directory. `path` contains the directory.
+一个模块应该被在一个特定的目录下被找到。`path` 包含了这个目录。
 
-### `module-loader-module` (only for loaders)
+### `module-loader-module`（仅加载器）
 
-Used before module templates are applied to the module name. The process continues with `module-module`.
+在模块模板被应用到模块名之前使用。流程将从 `module-module` 继续。
+
+***
+
+> 原文：https://webpack.js.org/api/plugins/
