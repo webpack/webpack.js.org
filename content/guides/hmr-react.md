@@ -239,6 +239,11 @@ The important thing to note in the code above is the `module` reference.
   ```
 
   like what we did in [Babel Config](#babel-config). Note that disabling Babel's module plugin is not only necessary for HMR. If you don't disable it you'll run into many other issues (see [Migrating from v1 to v2](/guides/migrating/#mixing-es2015-with-amd-and-commonjs) and [webpack-tree-shaking](http://www.2ality.com/2015/12/webpack-tree-shaking.html)).
+  
+  If you are using `babel-preset-env` make sure to disable modules as well:
+  ```
+  ["es2015", {"modules": false}]
+  ```
 
 4. Note that if you're using ES2015 modules in your webpack 2 configuration file, and you change your `.babelrc` file in #3 above, you either need to use `require` or create two `.babelrc` files (issue [here](https://github.com/webpack/webpack.js.org/issues/154)):
   * One in the project root directory with `"presets": ["es2015"]`
