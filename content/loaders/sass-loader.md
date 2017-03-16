@@ -10,8 +10,8 @@ npm install sass-loader node-sass webpack --save-dev
 ```
 [node-sass](https://github.com/sass/node-sass) 和 [webpack](https://github.comwebpack)是sass-loader的[`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies)，因此能够精确控制它们的版本。
 
-## 例子
-[style-loader](https://github.com/webpack-contrib/style-loader)，[css-loader](https://github.com/webpack-contrib/css-loader)，sass-loader链式调用，可以将所有的样式应用于DOM元素。
+## 示例
+[style-loader](https://github.com/webpack-contrib/style-loader)，[css-loader](https://github.com/webpack-contrib/css-loader)，sass-loader链式调用，可以将样式都应用于DOM元素。
 
 ```js
 // webpack.config.js
@@ -55,10 +55,10 @@ module.exports = {
 };
 ```
 
-Sass的更多参数见[node-sass](https://github.com/andrew/node-sass)。
+Sass的更多选项见[node-sass](https://github.com/andrew/node-sass)。
 
 ### 生产环境
-通常，生产环境下比较推荐的做法是使用[ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin)，将样式表抽离成独立文件。这样，样式表将不依赖于JS：
+通常，生产环境下比较推荐的做法是使用[ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin)将样式表抽离成单独文件。这样，样式表将不再依赖于JS：
 
 ```js
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -93,22 +93,21 @@ module.exports = {
 ## 使用
 
 ### 导入
-webpack提供一种高级的机制来解析(？)文件，（sass-loader就使用了这种机制）。sass-loader使用node-sass的自定义导入特性（？），将所有的query传递给解析器。因此你可以导入node_modules里面的sass模块。只要你在它们前面加上`~`，告诉webpack它不是一个相对路径。
-webpack provides an [advanced mechanism to resolve files](http://webpack.github.io/docs/resolving.html). The sass-loader uses node-sass' custom importer feature to pass all queries to the webpack resolving engine. Thus you can import your Sass modules from `node_modules`. Just prepend them with a `~` to tell webpack that this is not a relative import:
+webpack提供一种[高级的机制](http://webpack.github.io/docs/resolving.html)来解析(resolve？)文件。sass-loader使用node-sass的custom importer特性，将所有的query传递给解析器(?resolving engine)。只要它们前面加上`~`，告诉webpack它不是一个相对路径，这样就可以导入node_modules目录里面的sass模块：
 
 ```css
 @import "~bootstrap/css/bootstrap";
 ```
-注意：必须以`~`开头，因为`~/`会解析成home目录。webpack需要区分`bootstrap`和`~bootstrap`。因为webpack没有特殊语法来区分是否是相对路径，`@import "file"`就等同于`@import "./file"`；
+注意：必须以`~`开头（而不是`~/`，因为`~/`会解析成home目录)。webpack需要区分`bootstrap`和`~bootstrap`。因为webpack没有特殊语法来区分是否是相对路径，`@import "file"`就等同于`@import "./file"`；
 
 ### `url(...)`的问题
 
-因为Sass/[libsass](https://github.com/sass/libsass)并没有提供[url rewriting](https://github.com/sass/libsass/issues/532)，所有的链接资源都与output（？）相关。
+由于Sass/[libsass](https://github.com/sass/libsass)并没有提供[url rewriting](https://github.com/sass/libsass/issues/532)的功能，所以所有的链接资源都是相对于输出文件(output)。
 - 如果生成的css没有传递给css-loader，它相对于网站的根目录。
-- 如果生成的csss是传递给css-loader，它相对于入口文件（比如:`main.scss`）。
+- 如果生成的css传递给了css-loader，则它相对于入口文件（比如:`main.scss`）。
 
 第二种情况可能会带来一些问题。正常情况下我们期望相对路径是相对于`.scss`，如同在`.css`文件一样。幸运的是，有2个方法可以解决这个问题：
-- 用[resolve-url-loader](https://github.com/bholloway/resolve-url-loader)重写省略的url路径，将它设置于`sass-loader`之后(loader数组中)。
+- 将[resolve-url-loader](https://github.com/bholloway/resolve-url-loader)设置于`sass-loader`之后(loader数组中)，就可以重写省略的url路径。
 - 库的作者一般都会提供变量用来设置资源路径，如[bootstrap-sass](https://github.com/twbs/bootstrap-sass)可以通过`$icon-font-path`来设置。见[this working bootstrap example](https://github.com/webpack-contrib/sass-loader/tree/master/test/bootstrapSass)。
 
 ### 提取样式表
@@ -141,12 +140,11 @@ module.exports = {
     }
 };
 ```
-如果你要再Chrome中编辑原始的Sass文件，可以阅读这篇文章[there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). [test/sourceMap](https://github.com/webpack-contrib/sass-loader/tree/master/test)是一个运行的示例。
+如果你要在Chrome中编辑原始的Sass文件，建议阅读[there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). 实际示例见[test/sourceMap](https://github.com/webpack-contrib/sass-loader/tree/master/test)。
 
 ### 环境变量
 
-If you want to prepend Sass code before the actual entry file, you can set the `data` option. In this case, the sass-loader will not override the `data` option but just append the entry's content. This is especially useful when some of your Sass variables depend on the environment:
-如果你要将Sass代码放在实际的入口文件之前，可以设置`data`选项。这时sass-loader不会覆盖`data`选项，只会将它在入口文件的内容之前。当sass变量依赖于环境时，这一点尤其有用。
+如果你要将Sass代码放在实际的入口文件之前，可以设置`data`选项。这时sass-loader不会覆盖`data`选项，只会将它拼接在入口文件的内容之前。当sass变量依赖于环境时，这一点尤其有用。
 ```javascript
 {
     loader: "sass-loader",
@@ -204,4 +202,4 @@ If you want to prepend Sass code before the actual entry file, you can set the `
 [chat]: https://badges.gitter.im/webpack-contrib/webpack.svg
 [chat-url]: https://gitter.im/webpack-contrib/webpack
 
-> 原文：https://webpack.js.org/***/
+> 原文：https://webpack.js.org/loaders/sass-loader/
