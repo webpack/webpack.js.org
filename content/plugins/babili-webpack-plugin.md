@@ -36,7 +36,6 @@ module.exports = {
 + `sourceMap`: Default: uses [webpackConfig.devtool](https://webpack.github.io/docs/configuration.html#devtool). Set this to override that.
 + `babel`: Pass in a custom babel-core instead. `require("babel-core")`
 + `babili`: Pass in a custom babili preset instead - `require("babel-preset-babili")`.
-``
 
 ## Why
 
