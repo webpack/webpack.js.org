@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/b2376e862cb2c199b2db.css" rel="stylesheet">
+      <link href="/fbcb21ebeeda58009d00.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -210,7 +210,7 @@ to better understand what modules are being updated when using HMR.</p>
 <pre><code><span class="token punctuation">[</span><span class="token string">&quot;es2015&quot;</span>, <span class="token punctuation">{</span><span class="token string">&quot;modules&quot;</span><span class="token keyword">:</span> false<span class="token punctuation">}</span><span class="token punctuation">]</span>
 </code></pre><p>like what we did in <a href="#babel-config">Babel Config</a>. Note that disabling Babel&apos;s module plugin is not only necessary for HMR. If you don&apos;t disable it you&apos;ll run into many other issues (see <a href="/guides/migrating/#mixing-es2015-with-amd-and-commonjs">Migrating from v1 to v2</a> and <a href="http://www.2ality.com/2015/12/webpack-tree-shaking.html">webpack-tree-shaking</a>).</p>
 <p>If you are using <code>babel-preset-env</code> make sure to disable modules as well:</p>
-<pre><code><span class="token punctuation">[</span><span class="token string">&quot;es2015&quot;</span>, <span class="token punctuation">{</span><span class="token string">&quot;modules&quot;</span><span class="token keyword">:</span> false<span class="token punctuation">}</span><span class="token punctuation">]</span>
+<pre><code><span class="token punctuation">[</span><span class="token string">&quot;env&quot;</span>, <span class="token punctuation">{</span><span class="token string">&quot;modules&quot;</span><span class="token keyword">:</span> false<span class="token punctuation">}</span><span class="token punctuation">]</span>
 </code></pre></li>
 <li><p>Note that if you&apos;re using ES2015 modules in your webpack 2 configuration file, and you change your <code>.babelrc</code> file in #3 above, you either need to use <code>require</code> or create two <code>.babelrc</code> files (issue <a href="https://github.com/webpack/webpack.js.org/issues/154">here</a>):</p>
 <ul>
