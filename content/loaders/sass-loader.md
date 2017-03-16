@@ -3,18 +3,15 @@ title: sass-loader
 source: https://raw.githubusercontent.com/webpack-contrib/sass-loader/master/README.md
 edit: https://github.com/webpack-contrib/sass-loader/edit/master/README.md
 ---
-## Install
+## 安装
 
 ```bash
 npm install sass-loader node-sass webpack --save-dev
 ```
+sass-loader的[`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies)有[node-sass](https://github.com/sass/node-sass) 和 [webpack](https://github.comwebpack)，因此能够精确控制它们的版本。
 
-The sass-loader requires [node-sass](https://github.com/sass/node-sass) and [webpack](https://github.comwebpack)
-as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies). Thus you are able to control the versions accurately.
-
-## Examples
-
-Chain the sass-loader with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM.
+## 例子
+将sass-loader与[css-loader](https://github.com/webpack-contrib/css-loader)和[style-loader](https://github.com/webpack-contrib/style-loader)连接起来使用，可以将所有的样式应用于DOM元素。
 
 ```js
 // webpack.config.js
@@ -24,18 +21,17 @@ module.exports = {
         rules: [{
             test: /\.scss$/,
             use: [{
-                loader: "style-loader" // creates style nodes from JS strings
+                loader: "style-loader" // 从JS字符串生成样式节点
             }, {
-                loader: "css-loader" // translates CSS into CommonJS
+                loader: "css-loader" // 将CSS转化成CommonJS
             }, {
-                loader: "sass-loader" // compiles Sass to CSS
+                loader: "sass-loader" // 将Sass编译成CSS
             }]
         }]
     }
 };
 ```
-
-You can also pass options directly to [node-sass](https://github.com/andrew/node-sass) by specifying an `options` property like this:
+也可以通过指定`options`参数，向[node-sass](https://github.com/andrew/node-sass)传递选项参数。比如：
 
 ```js
 // webpack.config.js
@@ -59,11 +55,10 @@ module.exports = {
 };
 ```
 
-See [node-sass](https://github.com/andrew/node-sass) for all available Sass options.
+Sass的更多参数见[node-sass](https://github.com/andrew/node-sass)。
 
-### In production
-
-Usually, it's recommended to extract the style sheets into a dedicated file in production using the [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin). This way your styles are not dependent on JavaScript:
+### 生产环境
+通常，生产环境下比较推荐的做法是使用[ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin)，将样式表抽离成独立文件。这样，样式表将不依赖于JS：
 
 ```js
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -95,7 +90,7 @@ module.exports = {
 };
 ```
 
-## Usage
+## 使用
 
 ### Imports
 
@@ -217,3 +212,5 @@ If you want to prepend Sass code before the actual entry file, you can set the `
 
 [chat]: https://badges.gitter.im/webpack-contrib/webpack.svg
 [chat-url]: https://gitter.im/webpack-contrib/webpack
+
+> 原文：https://webpack.js.org/***/
