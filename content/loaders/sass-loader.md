@@ -8,10 +8,10 @@ edit: https://github.com/webpack-contrib/sass-loader/edit/master/README.md
 ```bash
 npm install sass-loader node-sass webpack --save-dev
 ```
-sass-loader的[`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies)有[node-sass](https://github.com/sass/node-sass) 和 [webpack](https://github.comwebpack)，因此能够精确控制它们的版本。
+[node-sass](https://github.com/sass/node-sass) 和 [webpack](https://github.comwebpack)是sass-loader的[`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies)，因此能够精确控制它们的版本。
 
 ## 例子
-sass-loader与[css-loader](https://github.com/webpack-contrib/css-loader)和[style-loader](https://github.com/webpack-contrib/style-loader)链式调用，可以将所有的样式应用于DOM元素。
+[style-loader](https://github.com/webpack-contrib/style-loader)，[css-loader](https://github.com/webpack-contrib/css-loader)，sass-loader链式调用，可以将所有的样式应用于DOM元素。
 
 ```js
 // webpack.config.js
