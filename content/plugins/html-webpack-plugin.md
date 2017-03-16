@@ -5,16 +5,21 @@ contributors:
   - simon04
 ---
 
- [`HtmlWebpackPlugin`](https://github.com/ampedandwired/html-webpack-plugin)简化了HTML文件的创建，以便为您的webpack包提供服务。 这对于在文件名中包含每次会随着变异会发生变化的哈希的webpack bundle尤其有用。 您可以让插件为您生成一个HTML文件，使用[lodash模板](https://lodash.com/docs#template)提供您自己的模板，或使用您自己的[loader](/loaders)。
+The [`HtmlWebpackPlugin`](https://github.com/ampedandwired/html-webpack-plugin) simplifies creation of HTML files to serve your
+webpack bundles. This is especially useful for webpack bundles that include
+a hash in the filename which changes every compilation. You can either let the plugin generate an HTML file for you, supply
+your own template using [lodash templates](https://lodash.com/docs#template), or use your own [loader](/loaders).
 
-## 安装
+## Installation
 ```
 $ npm install html-webpack-plugin --save-dev
 ```
 
-## 基本用法
+## Basic Usage
 
-该插件将为您生成一个HTML5文件，其中包括使用`script`标签的body中的所有webpack包。 只需添加插件到您的webpack配置如下：
+The plugin will generate an HTML5 file for you that includes all your webpack
+bundles in the body using `script` tags. Just add the plugin to your webpack
+config as follows:
 
 ```javascript
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -28,8 +33,7 @@ var webpackConfig = {
 };
 ```
 
-这将会产生一个包含以下内容的文件 `dist/index.html`：
-
+This will generate a file `dist/index.html` containing the following:
 ```html
 <!DOCTYPE html>
 <html>
@@ -43,15 +47,20 @@ var webpackConfig = {
 </html>
 ```
 
-如果您有多多个webpack入口点，他们都会在生成的HTML文件中的`script`标签内。
+If you have multiple webpack entry points, they will all be included with `script`
+tags in the generated HTML.
 
-如果你有任何CSS assets 在webpack的输出中（例如，利用[ExtractTextPlugin](/plugins/extract-text-webpack-plugin)提取CSS），那么这些将被包含在HTML head中的`<link>`标签内。
+If you have any CSS assets in webpack's output (for example, CSS extracted
+with the [ExtractTextPlugin](/plugins/extract-text-webpack-plugin))
+then these will be included with `<link>` tags in the HTML head.
 
-## 配置
+## Configuration
 
-获取所有的配置选项，请浏览[插件文档](https://github.com/ampedandwired/html-webpack-plugin#configuration)。
+For all configuration options, please see the
+[plugin documentation](https://github.com/ampedandwired/html-webpack-plugin#configuration).
 
 
-## 第三方插件
+## Third party addons
 
-这个插件支持第三方插件。详细列表参阅[文档](https://github.com/ampedandwired/html-webpack-plugin#third-party-addons)。
+The plugin supports addons. For a list see the
+[documentation](https://github.com/ampedandwired/html-webpack-plugin#third-party-addons).
