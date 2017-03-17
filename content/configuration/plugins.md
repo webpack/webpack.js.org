@@ -46,7 +46,7 @@ plugins: [
     filename: 'build.min.css',
     allChunks: true,
   }),
-  new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
+  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   // 编译时(compile time)插件
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': '"production"',

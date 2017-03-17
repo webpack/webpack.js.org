@@ -1,14 +1,15 @@
 ---
 title: DefinePlugin
-contributurs:
+contributors:
   - simon04
+  - rouzbeh84
 ---
 
 ``` javascript
 new webpack.DefinePlugin(definitions)
 ```
 
-允许你创建一个在编译时可以配置的全局常量。这可能会对开发模式和发布模式的构建允许不同的行为非常有用。比如,你可能会用一个全局的常量来决定 log 在开发模式触发而不是发布模式。这仅仅是 `DefinePlugin` 提供的便利的一个场景。
+ `DefinePlugin` 允许创建一个在**编译**时可以配置的全局常量。这可能会对开发模式和发布模式的构建允许不同的行为非常有用。如果在开发构建中，而不在发布构建中执行日志记录，则可以使用全局常量来决定是否记录日志。这就是 `DefinePlugin` 的用处，设置它，就可以忘记开发和发布构建的规则。
 
 
 **示例:**
@@ -28,7 +29,7 @@ console.log("Running App version " + VERSION);
 if(!BROWSER_SUPPORTS_HTML5) require("html5shiv");
 ```
 
-T> 注意，因为这个插件直接做的文本替换,给定的值必须包含字符串本身内的实际引号。通常，有两种方式来达到这个效果，使用 `'"production"'`, 或者使用 `JSON.stringify('production')`。
+T> 注意，因为这个插件直接执行文本替换，给定的值必须包含字符串本身内的**实际引号**。通常，有两种方式来达到这个效果，使用 `'"production"'`, 或者使用 `JSON.stringify('production')`。
 
 每个传进 `DefinePlugin` 的键值都是一个标志符或者多个用 `.` 连接起来的标志符。
 
@@ -48,7 +49,8 @@ if (!PRODUCTION) {
 if (PRODUCTION) {
   console.log('Production log')
 }
-`````
+```
+
 通过没有使用压缩的 webpack 的结果:
 
 ``` javascript
@@ -67,6 +69,7 @@ console.log('Production log')
 ```
 
 ## Use Case: Feature Flags
+
 Enable/disable features in production/development build using [feature flags](https://en.wikipedia.org/wiki/Feature_toggle).
 
 ```javascript
@@ -77,6 +80,7 @@ new webpack.DefinePlugin({
 ```
 
 ## Use Case: Service URLs
+
 Use a different service URL in production/development builds:
 
 ```javascript

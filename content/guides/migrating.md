@@ -13,6 +13,7 @@ contributors:
   - bebraw
   - howdy39
   - selbekk
+  - ndelangen
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -80,7 +81,7 @@ contributors:
 
 ``` diff
   module: {
--   loaders: {
+-   loaders: [{
 +   rules: [{
       test: /\.less$/,
 -     loader: "style-loader!css-loader!less-loader"

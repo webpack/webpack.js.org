@@ -1,7 +1,7 @@
 ---
 title: Tapable
 sort: 1
-contributors: 
+contributors:
   - thelarkinn
   - pksjce
   - e-cloud
@@ -58,7 +58,7 @@ Compiler.prototype = Object.create(Tapable.prototype);
 ```javascript
 function CustomPlugin() {}
 CustomPlugin.prototype.apply = function(compiler) {
-    compiler.plugin('emit', pluginFunction);    
+    compiler.plugin('emit', pluginFunction);
 }
 ```
 

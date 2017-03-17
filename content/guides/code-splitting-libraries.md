@@ -7,6 +7,7 @@ contributors:
   - johnstew
   - rafde
   - bartushek
+  - shaunwallace
 ---
 
 一个典型的应用程序会使用第三方框架、工具库。这些库一般使用特定的版本并且其代码不经常改变。然而，应用本身的代码会频繁改变。
@@ -41,7 +42,7 @@ module.exports = function(env) {
     return {
         entry: './index.js',
         output: {
-            filename: '[chunkhash].[name].js',
+            filename: '[name].[chunkhash].js',
             path: path.resolve(__dirname, 'dist')
         }
     }
@@ -68,7 +69,7 @@ module.exports = function(env) {
             vendor: 'moment'
         },
         output: {
-            filename: '[chunkhash].[name].js',
+            filename: '[name].[chunkhash].js',
             path: path.resolve(__dirname, 'dist')
         }
     }
@@ -98,7 +99,7 @@ module.exports = function(env) {
             vendor: 'moment'
         },
         output: {
-            filename: '[chunkhash].[name].js',
+            filename: '[name].[chunkhash].js',
             path: path.resolve(__dirname, 'dist')
         },
         plugins: [
@@ -127,7 +128,7 @@ module.exports = function() {
             main: './index.js'
         },
         output: {
-            filename: '[chunkhash].[name].js',
+            filename: '[name].[chunkhash].js',
             path: path.resolve(__dirname, 'dist')
         },
         plugins: [
@@ -165,7 +166,7 @@ module.exports = function(env) {
             vendor: 'moment'
         },
         output: {
-            filename: '[chunkhash].[name].js',
+            filename: '[name].[chunkhash].js',
             path: path.resolve(__dirname, 'dist')
         },
         plugins: [

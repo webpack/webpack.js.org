@@ -5,7 +5,35 @@ sort: 2
 
 插件向第三方开发者提供了 webpack 引擎中完整的能力。使用阶段式的构建回调，开发者可以引入它们自己的行为到 webpack 构建流程中。创建插件比创建加载器更加高级，因为你将需要理解一些 webpack 底层的内部特性来做相应的勾子，所以做好阅读一些源码的准备！
 
-## 编译器（Compiler）和编译（Compilation）
+## Creating a Plugin
+
+A plugin for `webpack` consists of
+
+  - A named JavaScript function.
+  - Defines `apply` method in it's prototype.
+  - Specifies webpack's event hook to attach itself.
+  - Manipulates webpack internal instance specific data.
+  - Invokes webpack provided callback after functionality is complete.
+
+```javascript
+// A named JavaScript function.
+function MyExampleWebpackPlugin() {
+
+};
+
+// Defines `apply` method in it's prototype.
+MyExampleWebpackPlugin.prototype.apply = function(compiler) {
+  // Specifies webpack's event hook to attach itself.
+  compiler.plugin('webpacksEventHook', function(compilation /* Manipulates webpack internal instance specific data. */, callback) {
+    console.log("This is an example plugin!!!");
+
+    // Invokes webpack provided callback after functionality is complete.
+    callback();
+  });
+};
+```
+
+## 编译器(Compiler)和编译(Compilation)
 
 在插件开发中最重要的两个资源就是 `compiler` 和 `compilation` 对象。理解它们的角色是扩展 webpack 引擎重要的第一步。
 
@@ -131,6 +159,50 @@ FileListPlugin.prototype.apply = function(compiler) {
 
 module.exports = FileListPlugin;
 ```
+
+## Different Plugin Shapes
+
+A plugin can be classified into types based on the event it is registered to. Every event hook decides how it is going to apply the plugins in its registry.
+
+- __synchronous__ The Tapable instance applies plugins using
+
+`applyPlugins(name: string, args: any...)`
+
+`applyPluginsBailResult(name: string, args: any...)`
+
+This means that each of the plugin callbacks will be invoked one after the other with the specific `args`.
+This is the simplest format for a plugin. Many useful events like `"compile"`, `"this-compilation"` expect plugins to have synchronous execution.
+
+- __waterfall__ Plugins applied using
+
+`applyPluginsWaterfall(name: string, init: any, args: any...)`
+
+Here each of the plugins are called one after the other with the args from the return value of the previous plugin. The plugin must take into consider the order of its execution.
+It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. This pattern is used in the Tapable instances which are related to the `webpack` templates like `ModuleTemplate`, `ChunkTemplate` etc.
+
+- __asynchronous__ When all the plugins are applied asynchronously using
+
+`applyPluginsAsync(name: string, args: any..., callback: (err?: Error) -> void)`
+
+The plugin handler functions are called with all args and a callback function with the signature `(err?: Error) -> void`. The handler functions are called in order of registration.`callback` is called after all the handlers are called.
+This is also a commonly used pattern for events like `"emit"`, `"run"`.
+
+- __async waterfall__ The plugins will be applied asynchronously in the waterfall manner.
+
+`applyPluginsAsyncWaterfall(name: string, init: any, callback: (err: Error, result: any) -> void)`
+
+The plugin handler functions are called with the current value and a callback function with the signature `(err: Error, nextValue: any) -> void.` When called `nextValue` is the current value for the next handler. The current value for the first handler is `init`. After all handlers are applied, callback is called with the last value. If any handler passes a value for `err`, the callback is called with this error and no more handlers are called.
+This plugin pattern is expected for events like `"before-resolve"` and `"after-resolve"`.
+
+- __async series__ It is the same as asynchronous but if any of the plugins registered fails, then no more plugins are called.
+
+`applyPluginsAsyncSeries(name: string, args: any..., callback: (err: Error, result: any) -> void)`
+
+-__parallel__ -
+
+`applyPluginsParallel(name: string, args: any..., callback: (err?: Error) -> void)`
+
+`applyPluginsParallelBailResult(name: string, args: any..., callback: (err: Error, result: any) -> void)`
 
 ***
 

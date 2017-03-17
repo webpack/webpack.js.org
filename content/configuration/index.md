@@ -20,7 +20,7 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
 ## 选项
 
 ``` js-with-links-with-details
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   // 点击选项名称，获取文档详细
