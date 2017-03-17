@@ -25,7 +25,7 @@ By default the current directory is used, but it's recommended to pass a value i
 
 ## `entry`
 
-`string | [string] | object { <key>: string | [string] }`
+`string | [string] | object { <key>: string | [string] } | function: () => string`
 
 The point or points to enter the application. At this point the application starts executing. If an array is passed all items will be executed.
 
@@ -39,6 +39,18 @@ entry: {
   about: "./about.js",
   contact: "./contact.js"
 }
+```
+
+Dynamically entry.
+
+```js
+entry: () => './demo'
+```
+
+or
+
+```js
+entry: () => new Promise((resolve) => resolve('./demo'))
 ```
 
 When combining with the [`output.library`](/configuration/output#output-library) option: If an array is passed only the last item is exported.
