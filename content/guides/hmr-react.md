@@ -224,6 +224,11 @@ __src/components/App.css__
 
   与我们在 [Babel 配置文件](#babel-config) 中所配置的是一样的。注意，不仅仅只有模块热替换的场景需要禁用 Babel 模块插件。如果你不将此插件禁用，你可能会遇到许多其他的问题（查看 [从 webpack v1 迁移到 v2](/guides/migrating/#mixing-es2015-with-amd-and-commonjs) 和 [webpack-tree-shaking](http://www.2ality.com/2015/12/webpack-tree-shaking.html)）。
 
+  如果你使用了 `babel-preset-env`，确保禁用模块：
+  ```
+  ["env", {"modules": false}]
+  ```
+
 4. 注意，如果你在 webpack 2 配置文件中启用了 ES2015 模块，并且按照上文 #3 的配置，修改了你的 `.babelrc` 文件，你需要使用 `require` 命令，或者，创建两个 `.babelrc` 文件（[查看问题](https://github.com/webpack/webpack.js.org/issues/154)）：
   * 一个文件放置在项目的根目录，并且加上配置: `"presets": ["es2015"]`
   * 另一个文件放置在webpack要构建代码的主目录。在这个例子里，放置的目录路径是 `src/`

@@ -51,7 +51,7 @@ contributors:
 
 `boolean | object`
 
-(弃用：无用，不可用，如果你有其他意见请写 issue 给我们)
+(弃用：无用，不可用，如果你有不同意见请写 issue 给我们)
 
 对所有或某些模块启用「行到行映射(line to line mapping)」。这将生成基本的源映射(source map)，即生成资源(generated source)的每一行，映射到原始资源(original source)的同一行。这是一个性能优化点，并且应该只需要输入行(input line)和生成行(generated line)相匹配时才使用。
 
@@ -505,7 +505,6 @@ publicPath: "", // 相对于 HTML 页面（目录相同）
 `string`
 
  此选项会向硬盘写入一个输出文件，只在 [`devtool`](/configuration/devtool) 启用了 SourceMap 选项时才使用。
-
 
 配置 source map 的命名方式。默认使用 `"[file].map"`。
 

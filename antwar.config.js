@@ -108,16 +108,24 @@ module.exports = {
       }
     ),
 
-    pluginsapi: section(
-      'Plugins API',
+    'api/plugins': section(
+      'API',
       function() {
         return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/pluginsapi',
+          'json-loader!yaml-frontmatter-loader!./content/api/plugins',
           false,
           /^\.\/.*\.md$/
         );
       }
     ),
+
+    pluginsapi: {
+      redirects: {
+        '': '/api/plugins',
+        'compiler': '/api/plugins/compiler',
+        'template': '/api/plugins/template'
+      }
+    },
 
     loaders: section(
       'Loaders',
