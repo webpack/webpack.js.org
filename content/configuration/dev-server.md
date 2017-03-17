@@ -132,7 +132,7 @@ headers: {
 
 `boolean` `object`
 
-When using the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History), the `index.html` page will likely have be served in place of any `404` responses. Enable this by passing:
+When using the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History), the `index.html` page will likely have to be served in place of any `404` responses. Enable this by passing:
 
 ```js
 historyApiFallback: true
