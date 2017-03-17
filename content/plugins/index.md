@@ -19,6 +19,7 @@ webpack has a rich plugin interface. Most of the features within webpack itself 
 |[`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin)|Extracts Text (CSS) from your bundles into a separate file (app.bundle.css)|
 |[`HtmlWebpackPlugin`](/plugins/html-webpack-plugin)| Simplifies creation of HTML files (`index.html`) to serve your bundles|
 |[`I18nWebpackPlugin`](/plugins/i18n-webpack-plugin)|Adds i18n support to your bundles|
+|[`LimitChunkCountPlugin`](/plugins/limit-chunk-count-plugin)| Set min/max limits for chunking to fine tune and control chunking|
 |[`NormalModuleReplacementPlugin`](/plugins/normal-module-replacement-plugin)|Replaces resource that matches a regexp|
 
 ![Awesome](../assets/awesome-badge.svg)
