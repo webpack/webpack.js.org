@@ -10,7 +10,7 @@ contributors:
 
 webpack-dev-server can be used to quickly develop an application. See the ["How to Develop?"](/guides/development) to get started.
 
-This page describes the options that effect the behavior of webpack-dev-server (short: dev-server).
+This page describes the options that affect the behavior of webpack-dev-server (short: dev-server).
 
 T> Options that are compatible with [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) have 🔑 next to them.
 
