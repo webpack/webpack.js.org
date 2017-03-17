@@ -21,7 +21,7 @@ npm install webpack --save-dev
 npm install webpack@<version> --save-dev
 ```
 
-如果你在项目中使用了 npm 执行脚本 (script)，npm 首先会在你的本地模块中寻找 webpack。这是一个实用的个小技巧。
+如果你在项目中使用了 npm scripts，npm 首先会在你的本地模块中寻找 webpack。这是一个实用的个小技巧。
 
 ```json
 "scripts": {
@@ -31,7 +31,7 @@ npm install webpack@<version> --save-dev
 
 上面是 npm 的标准配置，也是我们推荐的实践。
 
-T> 当你在本地安装 webpack 后，你能够在 `node_modules/.bin/webpack` 找到它的二进制程序。
+T> 当你在本地安装 webpack 后，你能够从 `node_modules/.bin/webpack` 访问它的 bin 版本。
 
 
 ### 全局安装
