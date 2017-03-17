@@ -1,15 +1,15 @@
 ---
 title: Tapable
 sort: 1
-contributors: 
+contributors:
   - thelarkinn
   - pksjce
   - e-cloud
 ---
 
-[Tapable](https://github.com/webpack/tapable) is small library that allows you to add and apply plugins to a javascript module. 
-It can be inherited or mixed in to other modules. It is similar to NodeJS's `EventEmitter` class, focusing on custom event emission and manipulation. 
-However, in addition to this, `Tapable` allows you to have access to the "emittee" or "producer" of the event through callbacks arguments.  
+[Tapable](https://github.com/webpack/tapable) is small library that allows you to add and apply plugins to a javascript module.
+It can be inherited or mixed in to other modules. It is similar to NodeJS's `EventEmitter` class, focusing on custom event emission and manipulation.
+However, in addition to this, `Tapable` allows you to have access to the "emittee" or "producer" of the event through callbacks arguments.
 
 `Tapable` has four groups of member functions:
 
@@ -58,7 +58,7 @@ Now to write a plugin on the compiler,
 ```javascript
 function CustomPlugin() {}
 CustomPlugin.prototype.apply = function(compiler) {
-    compiler.plugin('emit', pluginFunction);    
+    compiler.plugin('emit', pluginFunction);
 }
 ```
 

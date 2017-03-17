@@ -51,7 +51,7 @@ See [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametempla
 
 `boolean | object`
 
-(Deprecated: Not really used, not really usable, write an issue if you have a other opinion)
+(Deprecated: Not really used, not really usable, write an issue if you have a different opinion)
 
 Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines.
 
@@ -509,7 +509,7 @@ This option is only used when [`devtool`](/configuration/devtool) uses a SourceM
 
 Configure how source maps are named. By default `"[file].map"` is used.
 
-Technically the `[name]`, `[id]`, `[hash]` and `[chunkhash]` [placeholders](#output-filename) can be used, if generating a SourceMap for chunks. In addition to that the `[file]` placeholder is replaced with the filename of the original file. It's recommended to only use the `[file]` placeholder, as the other placeholders won't work when generating SourceMaps for non-chunk files. Best leave the default.
+Technically, the `[name]`, `[id]`, `[hash]` and `[chunkhash]` [placeholders](#output-filename) can be used, if generating a SourceMap for chunks. In addition to that, the `[file]` placeholder is replaced with the filename of the original file. It's recommended to only use the `[file]` placeholder, as the other placeholders won't work when generating SourceMaps for non-chunk files. Best leave the default.
 
 
 ## `output.sourcePrefix`
@@ -522,7 +522,7 @@ Change the prefix for each line in the output bundles.
 sourcePrefix: "\t"
 ```
 
-Note by default an empty string is used. Using some kind of indention makes bundles look more pretty, but will cause issues with multi-line string.
+Note by default an empty string is used. Using some kind of indentation makes bundles look more pretty, but will cause issues with multi-line strings.
 
 There is no need to change it.
 

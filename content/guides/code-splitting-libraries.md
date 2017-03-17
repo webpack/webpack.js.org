@@ -7,6 +7,7 @@ contributors:
   - johnstew
   - rafde
   - bartushek
+  - shaunwallace
 ---
 
 A typical application uses third party libraries for framework/functionality needs. Particular versions of these libraries are used and code here does not change often. However, the application code changes frequently.
@@ -41,7 +42,7 @@ module.exports = function(env) {
     return {
         entry: './index.js',
         output: {
-            filename: '[chunkhash].[name].js',
+            filename: '[name].[chunkhash].js',
             path: path.resolve(__dirname, 'dist')
         }
     }
@@ -68,7 +69,7 @@ module.exports = function(env) {
             vendor: 'moment'
         },
         output: {
-            filename: '[chunkhash].[name].js',
+            filename: '[name].[chunkhash].js',
             path: path.resolve(__dirname, 'dist')
         }
     }
@@ -98,7 +99,7 @@ module.exports = function(env) {
             vendor: 'moment'
         },
         output: {
-            filename: '[chunkhash].[name].js',
+            filename: '[name].[chunkhash].js',
             path: path.resolve(__dirname, 'dist')
         },
         plugins: [
@@ -127,7 +128,7 @@ module.exports = function() {
             main: './index.js'
         },
         output: {
-            filename: '[chunkhash].[name].js',
+            filename: '[name].[chunkhash].js',
             path: path.resolve(__dirname, 'dist')
         },
         plugins: [
@@ -165,7 +166,7 @@ module.exports = function(env) {
             vendor: 'moment'
         },
         output: {
-            filename: '[chunkhash].[name].js',
+            filename: '[name].[chunkhash].js',
             path: path.resolve(__dirname, 'dist')
         },
         plugins: [
