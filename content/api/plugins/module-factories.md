@@ -32,3 +32,7 @@ After the factory has resolved the request. The `data` object has these properti
 ### `after-resolve(data)` async waterfall
 
 ### `alternatives(options: Array)` async waterfall
+
+***
+
+> 原文：https://webpack.js.org/api/plugins/module-factories/

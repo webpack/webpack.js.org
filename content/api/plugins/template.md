@@ -34,3 +34,7 @@ TODO
 ## FunctionModuleTemplate
 
 TODO
+
+***
+
+> 原文：https://webpack.js.org/api/plugins/template/

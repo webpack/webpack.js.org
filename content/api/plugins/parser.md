@@ -78,3 +78,7 @@ Evaluate a identifier that is a defined var.
 ## `evaluate CallExpression .<property>(expr: Expression)` bailing
 
 Evaluate a call to a member function of a successfully evaluated expression.
+
+***
+
+> 原文：https://webpack.js.org/api/plugins/parser/

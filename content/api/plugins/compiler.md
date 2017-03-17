@@ -119,4 +119,4 @@ webpack([config1, config2], (err, stats) => {
 
 ***
 
-> 原文：https://webpack.js.org/pluginsapi/compiler/
+> 原文：https://webpack.js.org/api/plugins/compiler/

@@ -240,3 +240,7 @@ An asset from a module was added to the compilation.
 ## `chunk-asset(chunk, filename)`
 
 An asset from a chunk was added to the compilation.
+
+***
+
+> 原文：https://webpack.js.org/api/plugins/compilation/

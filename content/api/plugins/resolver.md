@@ -78,3 +78,7 @@ A module should be looked up in a specified directory. `path` contains the direc
 ## `module-loader-module` (only for loaders)
 
 Used before module templates are applied to the module name. The process continues with `module-module`.
+
+***
+
+> 原文：https://webpack.js.org/api/plugins/resolver/

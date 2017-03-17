@@ -7,4 +7,4 @@ sort: 7
 
 ***
 
-> 原文：https://webpack.js.org/pluginsapi/dependency/
+> 原文：https://webpack.js.org/api/plugins/dependency/

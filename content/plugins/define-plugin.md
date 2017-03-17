@@ -68,9 +68,9 @@ if (true) {
 console.log('Production log')
 ```
 
-## Use Case: Feature Flags
+## 用例：功能标记(Feature Flags)
 
-Enable/disable features in production/development build using [feature flags](https://en.wikipedia.org/wiki/Feature_toggle).
+使用[功能标记](https://en.wikipedia.org/wiki/Feature_toggle)来「启用/禁用」「生产/开发」构建中的功能。
 
 ```javascript
 new webpack.DefinePlugin({
@@ -79,9 +79,9 @@ new webpack.DefinePlugin({
 })
 ```
 
-## Use Case: Service URLs
+## 用例：服务 URL(Service URLs)
 
-Use a different service URL in production/development builds:
+在「生产/开发」构建中使用不同的服务 URL(Service URLs)：
 
 ```javascript
 new webpack.DefinePlugin({
