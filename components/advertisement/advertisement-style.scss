@@ -1,0 +1,22 @@
+@import 'functions';
+
+.advertisement {
+  position: fixed;
+  display: flex;
+  width: 250px;
+  height: calc(100vh - 150px);
+  margin-top: 1.5em;
+  margin-left: calc(-250px - 1.5em);
+  padding: 0 1.5em;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  border-right: 1px solid getColor(concrete);
+  overflow: hidden;
+  transition: background-color 250ms;
+
+  &:hover {
+    background-color: getColor(concrete);
+  }
+}
