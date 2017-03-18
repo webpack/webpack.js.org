@@ -89,7 +89,7 @@ export default class Sidebar extends Component {
     let { scrollHeight } = document.body;
     let { offsetHeight: sidebarHeight } = this._container;
     let { offsetWidth: parentWidth, offsetHeight: parentHeight } = this._container.parentNode;
-    let headerHeight = document.querySelector('header').offsetHeight;
+    let headerHeight = document.querySelector('header').offsetHeight + document.querySelector('.notification-bar').offsetHeight;
     let footerHeight = document.querySelector('footer').offsetHeight;
     let distToBottom = scrollHeight - scrollY - innerHeight;
 
