@@ -91,16 +91,16 @@ function component () {
 We also need to change `index.html` to expect a single bundled js file.
 
 ```diff
-<html>
-  <head>
-    <title>webpack 2 demo</title>
--   <script src="https://unpkg.com/lodash@4.16.6"></script>
-  </head>
-  <body>
--   <script src="app/index.js"></script>
-+   <script src="dist/bundle.js"></script>
-  </body>
-</html>
+ <html>
+   <head>
+     <title>webpack 2 demo</title>
+-    <script src="https://unpkg.com/lodash@4.16.6"></script>
+   </head>
+   <body>
+-    <script src="app/index.js"></script>
++    <script src="dist/bundle.js"></script>
+   </body>
+ </html>
 ```
 
 Here, `index.js` explicitly requires `lodash` to be present, and binds it as `_` (no global scope pollution).
