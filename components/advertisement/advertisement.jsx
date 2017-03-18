@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from '../link/link';
-import './advertisement-style';
 
 // Imports for Ad Content
 import AGLogo from '../../assets/ag-grid-logo.png';
