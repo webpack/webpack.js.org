@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/c6ab55f1b943f00efe8f.css" rel="stylesheet">
+      <link href="/b9c2a223eff471bd9698.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -72,16 +72,16 @@ function component () {
   ...
 </code></pre>
 <p>We also need to change <code>index.html</code> to expect a single bundled js file.</p>
-<pre><code class="lang-diff"><span class="token deleted">&lt;html&gt;</span>
-  &lt;head&gt;
-    &lt;title&gt;webpack 2 demo&lt;/title&gt;
-<span class="token deleted">-   &lt;script src=&quot;https://unpkg.com/lodash@4.16.6&quot;&gt;&lt;/script&gt;</span>
-  &lt;/head&gt;
-  &lt;body&gt;
-<span class="token deleted">-   &lt;script src=&quot;app/index.js&quot;&gt;&lt;/script&gt;</span>
-<span class="token inserted">+   &lt;script src=&quot;dist/bundle.js&quot;&gt;&lt;/script&gt;</span>
-  &lt;/body&gt;
-<span class="token deleted">&lt;/html&gt;</span>
+<pre><code class="lang-diff"> &lt;html&gt;
+   &lt;head&gt;
+     &lt;title&gt;webpack 2 demo&lt;/title&gt;
+<span class="token deleted">-    &lt;script src=&quot;https://unpkg.com/lodash@4.16.6&quot;&gt;&lt;/script&gt;</span>
+   &lt;/head&gt;
+   &lt;body&gt;
+<span class="token deleted">-    &lt;script src=&quot;app/index.js&quot;&gt;&lt;/script&gt;</span>
+<span class="token inserted">+    &lt;script src=&quot;dist/bundle.js&quot;&gt;&lt;/script&gt;</span>
+   &lt;/body&gt;
+ &lt;/html&gt;
 </code></pre>
 <p>Here, <code>index.js</code> explicitly requires <code>lodash</code> to be present, and binds it as <code>_</code> (no global scope pollution).</p>
 <p>By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order. Also unused dependencies will not be included in the bundle.</p>
