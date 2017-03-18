@@ -110,7 +110,7 @@ Hint: In combination with long term caching you may need to use the [`ChunkManif
 
 ###  Move common modules into the parent chunk
 
-With Code Splitting multiple child chunks of a chunk can have common modules. You can move these common modules into the parent (This reduces overall size, but has a negative effect on the initial load time. It can be useful if it is expected that a user need to download many sibling chunks).
+With [Code Splitting](/guides/code-splitting) multiple child chunks of an entry chunk can have common dependencies. To prevent duplication these can be moved into the parent. This reduces overall size, but does have a negative effect on the initial load time. If it is expected that users will need to download many sibling chunks, i.e. children of the entry chunk, then this should improve load time overall.
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({
