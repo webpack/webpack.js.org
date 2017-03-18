@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SidebarItem from '../sidebar-item/sidebar-item';
+import Advertisement from '../advertisement/advertisement';
 
 export default class Sidebar extends Component {
   constructor(props) {
@@ -8,13 +9,14 @@ export default class Sidebar extends Component {
     this.state = {
       fixed: false,
       availableHeight: null,
-      maxWidth: null
+      maxWidth: null,
+      adDistance: null
     };
   }
 
   render() {
     let { sectionName, pages, currentPage } = this.props;
-    let { fixed, availableHeight, maxWidth } = this.state;
+    let { fixed, availableHeight, maxWidth, adDistance } = this.state;
     let isGuides = sectionName === 'guides';
 
     return (
@@ -27,6 +29,10 @@ export default class Sidebar extends Component {
           width: fixed ? maxWidth : null,
           maxHeight: availableHeight
         }}>
+
+        <Advertisement
+          distanceFromTop={ adDistance }
+          height={ availableHeight } />
 
         <div className="sidebar__inner">
           <h3 className="sidebar-item__version">Version 2.2</h3>
@@ -56,6 +62,11 @@ export default class Sidebar extends Component {
   }
 
   componentDidMount() {
+    setTimeout(
+      this._recalculate.bind(this),
+      250
+    );
+    
     document.addEventListener(
       'scroll', 
       this._recalculate.bind(this)
@@ -89,7 +100,8 @@ export default class Sidebar extends Component {
     this.setState({ 
       fixed: scrollY >= headerHeight && sidebarHeight < parentHeight,
       availableHeight: innerHeight - headerSpace - footerSpace,
-      maxWidth: parentWidth
+      maxWidth: parentWidth,
+      adDistance: scrollY < headerHeight ? headerHeight - scrollY : 0
     });
   }
 }
