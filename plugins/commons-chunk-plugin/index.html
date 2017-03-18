@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/16eb2b9683432efae81f.css" rel="stylesheet">
+      <link href="/891aea37cfeaa5e51ba1.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -99,7 +99,7 @@
 </code></pre>
 <p>Hint: In combination with long term caching you may need to use the <a href="https://github.com/diurnalist/chunk-manifest-webpack-plugin"><code>ChunkManifestWebpackPlugin</code></a> to avoid that the vendor chunk changes. You should also use records to ensure stable module ids.</p>
 <h3 class="header"><a class="anchor" href="#move-common-modules-into-the-parent-chunk" id="move-common-modules-into-the-parent-chunk"></a><span class="text">Move common modules into the parent chunk</span><a class="icon-link" href="#move-common-modules-into-the-parent-chunk"></a></h3>
-<p>With Code Splitting multiple child chunks of a chunk can have common modules. You can move these common modules into the parent (This reduces overall size, but has a negative effect on the initial load time. It can be useful if it is expected that a user need to download many sibling chunks).</p>
+<p>With <a href="/guides/code-splitting">Code Splitting</a> multiple child chunks of an entry chunk can have common dependencies. To prevent duplication these can be moved into the parent. This reduces overall size, but does have a negative effect on the initial load time. If it is expected that users will need to download many sibling chunks, i.e. children of the entry chunk, then this should improve load time overall.</p>
 <pre><code class="lang-javascript"><span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>optimize<span class="token punctuation">.</span>CommonsChunkPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// names: [&quot;app&quot;, &quot;subPageA&quot;]</span>
   <span class="token comment" spellcheck="true">// (choose the chunks, or omit for all chunks)</span>
