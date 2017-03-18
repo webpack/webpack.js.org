@@ -14,7 +14,6 @@ webpack has a rich plugin interface. Most of the features within webpack itself 
 |[`ComponentWebpackPlugin`](/plugins/component-webpack-plugin)|Use components with webpack|
 |[`CompressionWebpackPlugin`](/plugins/compression-webpack-plugin)|Prepare compressed versions of assets to serve them with Content-Encoding|
 |[`DefinePlugin`](/plugins/define-plugin)|Allows global constants configured at compile time, useful for allowing different behavior between dev/release builds|
-|[`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin)|Extracts Text (CSS) from your bundles into a separate file (app.bundle.css)|
 |[`EnvironmentPlugin`](/plugins/environment-plugin)|Shorthand for using the [`DefinePlugin`](./define-plugin) on `process.env` keys.|
 |[`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin)|Extracts Text (CSS) from your bundles into a separate file (app.bundle.css)|
 |[`HtmlWebpackPlugin`](/plugins/html-webpack-plugin)| Simplifies creation of HTML files (`index.html`) to serve your bundles|
