@@ -9,6 +9,7 @@ contributors:
   - johnstew
   - simon04
   - aaronang
+  - jecoopr
 ---
 
 webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/guides/installation).
@@ -47,7 +48,7 @@ function component () {
 document.body.appendChild(component());
 ```
 
-To run this piece of code, one usually has the below HTML
+To run this piece of code, create an `index.html` file in the project's root.
 
 __index.html__
 
