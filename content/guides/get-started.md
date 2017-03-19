@@ -48,7 +48,7 @@ function component () {
 document.body.appendChild(component());
 ```
 
-To run this piece of code, one usually has the below HTML
+To run this piece of code, create an `index.html` file in the project's root.
 
 __index.html__
 
@@ -59,7 +59,7 @@ __index.html__
     <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
-    <script src="../app/index.js"></script>
+    <script src="app/index.js"></script>
   </body>
 </html>
 ```
@@ -98,8 +98,8 @@ We also need to change `index.html` to expect a single bundled js file.
 -   <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
--   <script src="../app/index.js"></script>
-+   <script src="../dist/bundle.js"></script>
+-   <script src="app/index.js"></script>
++   <script src="dist/bundle.js"></script>
   </body>
 </html>
 ```
