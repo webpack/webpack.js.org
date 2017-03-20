@@ -6,7 +6,7 @@ import Gitter from '../gitter/gitter';
 import Contributors from '../contributors/contributors';
 import './page-style';
 import '../sidebar/sidebar-style';
-import '../advertisement/advertisement-style';
+import '../sponsors/sponsors-style';
 import '../gitter/gitter-style';
 import { trimEnd } from 'lodash';
 

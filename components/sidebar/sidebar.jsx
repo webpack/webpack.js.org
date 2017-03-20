@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SidebarItem from '../sidebar-item/sidebar-item';
-import Advertisement from '../advertisement/advertisement';
+import Sponsors from '../sponsors/sponsors';
 
 export default class Sidebar extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ export default class Sidebar extends Component {
           maxHeight: availableHeight
         }}>
 
-        <Advertisement
+        <Sponsors
           distanceFromTop={ adDistance }
           height={ availableHeight } />
 

@@ -8,7 +8,7 @@ import WebpackIcon from '../../assets/icon-square-small.svg';
 export default ({ distanceFromTop, height }) => {
   return (
     <Link 
-      className="advertisement"
+      className="sponsors"
       to="https://www.ag-grid.com/?utm_source=webpack&utm_medium=banner&utm_campaign=sponsorship"
       style={{
         top: distanceFromTop,
