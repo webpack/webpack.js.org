@@ -228,4 +228,4 @@ Webpack 将尝试读取 `babel` 包而不是 `babel-loader`。
   }
 ```
 
-## [证书(License)](http://couto.mit-license.org/)
+## [License](http://couto.mit-license.org/)
