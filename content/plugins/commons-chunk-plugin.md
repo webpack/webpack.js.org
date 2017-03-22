@@ -108,7 +108,7 @@ new webpack.optimize.CommonsChunkPlugin({
 
 ###  将公共模块打包进父 chunk
 
-使用代码拆分功能，一个 chunk 的多个子 chunk 会有公共的模块。你可以将这些公共模块移入父 chunk (这个会减少总体的大小，但会对首次加载时间产生不良影响。如果预期用户需要下载许多兄弟 chunks，那这将非常有用)。
+使用[代码拆分](/guides/code-splitting)功能，一个 chunk 的多个子 chunk 会有公共的依赖。为了防止重复，可以将这些公共模块移入父 chunk。这会减少总体的大小，但会对首次加载时间产生不良影响。如果预期到用户需要下载许多兄弟 chunks（例如，入口 trunk 的子 chunk），那这对改善加载时间将非常有用。
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({

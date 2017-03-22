@@ -12,7 +12,7 @@ export default (props) => {
         <section className="footer__left">
           <Link className="footer__link" to="/guides/get-started">起步</Link>
           <Link className="footer__link" to="/organization">组织</Link>
-          <Link className="footer__link" to="/contribute">贡献</Link>
+          <Link className="footer__link" to="/contribute">支持</Link>
           <Link className="footer__link" to="/guides/why-webpack#comparison">比较</Link>
         </section>
 
@@ -24,7 +24,7 @@ export default (props) => {
 
         <section className="footer__right">
           <Link className="footer__link" to="/branding">品牌</Link>
-          <Link className="footer__link" to="//gitter.im/webpack/webpack">支持</Link>
+          <Link className="footer__link" to="//gitter.im/webpack/webpack">Gitter</Link>
           <Link className="footer__link" to="https://github.com/webpack/webpack/releases">更新日志</Link>
           <Link className="footer__link" to="/license">遵循协议</Link>
           <Link className="footer__link">粤ICP备17008907号</Link>

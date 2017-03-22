@@ -132,7 +132,7 @@ headers: {
 
 `boolean` `object`
 
-当使用[HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History)，任意的 `404` 响应可以提供为 `index.html` 页面。通过传入以下启用：
+当使用 [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History) 时，任意的 `404` 响应都可能需要被替代为 `index.html`。通过传入以下启用：
 
 ```js
 historyApiFallback: true

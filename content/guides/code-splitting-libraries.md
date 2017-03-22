@@ -180,6 +180,40 @@ module.exports = function(env) {
 
 使用上面的 webpack 配置，我们看到生成了三个bundle：`vendor`、`main`和`manifest`。
 
+使用我们迄今为止所学到的知识，我们也可以通过一个隐含的通用 vendor chunk 实现相同的结果。
+
+ __webpack.config.js__
+
+```javascript
+var webpack = require('webpack');
+var path = require('path');
+
+module.exports = function() {
+    return {
+        entry: {
+            main: './index.js' //Notice that we do not have an explicit vendor entry here
+        },
+        output: {
+            filename: '[name].[chunkhash].js',
+            path: path.resolve(__dirname, 'dist')
+        },
+        plugins: [
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor',
+                minChunks: function (module) {
+                   // this assumes your vendor imports exist in the node_modules directory
+                   return module.context && module.context.indexOf('node_modules') !== -1;
+                }
+            }),
+            //CommonChunksPlugin will now extract all the common modules from vendor and main bundles
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'manifest' //But since there are no more common modules between them we end up with just the runtime code included in the manifest file
+            })
+        ]
+    };
+}
+```
+
 T> 注意，长效的 bundle 缓存是通过“基于内容的 hash 策略”来实现的（content-based hashing）。查阅更多关于[缓存](/guides/caching/)。
 
 ***

@@ -132,7 +132,7 @@ module.exports = function (env) {
 在我们的webpack.config.js中加入如下的代码片段：
 ```js
 function buildConfig(env) {
-  return require('./config/' + env + '.js')({ env: env })
+  return require('./config/' + env + '.js')(env)
 }
 
 module.exports = buildConfig;
