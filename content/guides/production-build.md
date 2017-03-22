@@ -133,7 +133,7 @@ module.exports = function (env) {
 Have the following snippet in your webpack.config.js:
 ```js
 function buildConfig(env) {
-  return require('./config/' + env + '.js')({ env: env })
+  return require('./config/' + env + '.js')(env)
 }
 
 module.exports = buildConfig;
