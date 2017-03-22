@@ -41,7 +41,10 @@ entry: {
 }
 ```
 
-Dynamically entry.
+### Naming
+If a string or array of strings is passed, the chunk is named `main`. If an object is passed, each key is the name of a chunk, and the value describes the entrypoint for the chunk.
+
+### Dynamic entry
 
 ```js
 entry: () => './demo'

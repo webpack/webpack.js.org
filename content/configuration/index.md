@@ -287,7 +287,7 @@ module.exports = {
     [unsafeCache](/configuration/resolve#resolve-unsafecache): {},
     // enables caching for resolved requests
     // this is unsafe as folder structure may change
-    // but preformance improvement is really big
+    // but performance improvement is really big
 
     [cachePredicate](/configuration/resolve#resolve-cachepredicate): (path, request) => true,
     // predicate function which selects requests for caching
