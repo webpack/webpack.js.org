@@ -213,17 +213,17 @@ use: [
 * 条件数组：至少一个匹配条件。
 * 对象：匹配所有属性。每个属性都有一个定义行为。
 
-`{ test: Condition }`：匹配条件。约定了提供一个正则或正则数组，但不是强制的。
+`{ test: Condition }`：匹配特定条件。一般是提供一个正则表达式或正则表达式的数组，但这不是强制的。
 
-`{ include: Condition }`：匹配条件。约定了提供一个字符串或字符串数组，但不是强制的。
+`{ include: Condition }`：匹配特定条件。一般是提供一个字符串或者字符串数组，但这不是强制的。
 
-`{ exclude: Condition }`：不能匹配条件。约定了提供一个字符串或字符串数组，但不是强制的。
+`{ exclude: Condition }`：排除特定条件。一般是提供一个字符串或字符串数组，但这不是强制的。
 
-`{ and: [Condition] }`：匹配所有条件
+`{ and: [Condition] }`：必须匹配数组中的所有条件
 
-`{ or: [Condition] }`：匹配任何条件
+`{ or: [Condition] }`：匹配数组中任何一个条件
 
-`{ not: Condition }`：不能匹配条件
+`{ not: Condition }`：必须排除这个条件
 
 **Example:**
 
