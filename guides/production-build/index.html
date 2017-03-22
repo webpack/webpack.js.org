@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/009eb3bb139b7cc5e025.css" rel="stylesheet">
+      <link href="/f7bb3c9f6c903050b20e.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -115,7 +115,7 @@ each environment. For example:</p>
 </code></pre>
 <p>Have the following snippet in your webpack.config.js:</p>
 <pre><code class="lang-js"><span class="token keyword">function</span> <span class="token function">buildConfig</span><span class="token punctuation">(</span>env<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;./config/&apos;</span> <span class="token operator">+</span> env <span class="token operator">+</span> <span class="token string">&apos;.js&apos;</span><span class="token punctuation">)</span><span class="token punctuation">(</span>env<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;./config/&apos;</span> <span class="token operator">+</span> env <span class="token operator">+</span> <span class="token string">&apos;.js&apos;</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">{</span> env<span class="token punctuation">:</span> env <span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> buildConfig<span class="token punctuation">;</span>
