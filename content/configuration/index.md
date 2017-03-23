@@ -188,7 +188,7 @@ module.exports = {
       // matches only if all conditions are matched
 
       { [resource](/configuration/module#rule-resource): { [or](/configuration/module#condition): [ /* conditions */ ] } },
-      { [resource](/configuration/module#rule-resource): [ /* conditions */ ] }
+      { [resource](/configuration/module#rule-resource): [ /* conditions */ ] },
       // matches if any condition is matched (default for arrays)
 
       { [resource](/configuration/module#rule-resource): { [not](/configuration/module#condition): /* condition */ } }
