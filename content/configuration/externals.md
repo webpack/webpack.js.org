@@ -57,9 +57,11 @@ Your bundle which has external dependencies can be used in various module contex
 
 `externals` accepts various syntax and interprets them in different manners.
 
+
 ### string
 
 `jQuery` in the externals indicates that your bundle will need `jQuery` variable in the global form.
+
 
 ### array
 
@@ -70,6 +72,7 @@ externals: {
 ```
 
 `subtract: ['./math', 'subtract']` converts to a parent child construct, where `./math` is the parent module and your bundle only requires the subset under `subtract` variable.
+
 
 ### object
 
@@ -91,6 +94,7 @@ externals : {
 
 This syntax is used to describe all the possible ways that an external library can be available. `lodash` here is available as `lodash` under AMD and CommonJS module systems but available as `_` in a global variable form.
 
+
 ### function
 
 It might be useful to define your own function to control the behavior of what you want to externalize from webpack. [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals), for example, excludes all modules from the node_modules and provides some options to, for example, whitelist packages.
@@ -109,6 +113,7 @@ externals: [
 ```
 
 The `'commonjs ' + request` defines the type of module that needs to be externalized.
+
 
 ### regex
 

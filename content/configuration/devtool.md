@@ -62,5 +62,4 @@ T> See [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilena
 # References
 
 - [Enabling Sourcemaps](http://survivejs.com/webpack/developing-with-webpack/enabling-sourcemaps/)
-- [webpack devtool source map](http://cheng.logdown.com/posts/2016/03/25/679045
-)
+- [webpack devtool source map](http://cheng.logdown.com/posts/2016/03/25/679045)
