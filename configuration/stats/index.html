@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/ff8d84527483da867cfc.css" rel="stylesheet">
+      <link href="/12bc43a8e7540c9fce29.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -147,6 +147,8 @@
   assetsSort<span class="token punctuation">:</span> <span class="token string">&quot;field&quot;</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// Add information about cached (not built) modules</span>
   cached<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// Show cached assets (setting this to `false` only shows emitted files)</span>
+  cachedAssets<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// Add children information</span>
   children<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// Add chunk information (setting this to `false` allows for a less verbose output)</span>
@@ -161,16 +163,28 @@
   context<span class="token punctuation">:</span> <span class="token string">&quot;../src/&quot;</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// `webpack --colors` equivalent</span>
   colors<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// Display the distance from the entry point for each module</span>
+  depth<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// Display the entry points with the corresponding bundles</span>
+  entrypoints<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// Add errors</span>
   errors<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// Add details to errors (like resolving log)</span>
   errorDetails<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// Exclude modules which match one of the given strings or regular expressions</span>
+  exclude<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// Add the hash of the compilation</span>
   hash<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// Set the maximum number of modules to be shown</span>
+  maxModules<span class="token punctuation">:</span> <span class="token number">15</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// Add built modules information</span>
   modules<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// Sort the modules by a field</span>
   modulesSort<span class="token punctuation">:</span> <span class="token string">&quot;field&quot;</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// Show performance hint when file size exceeds `performance.maxAssetSize`</span>
+  performance<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// Show the exports of the modules</span>
+  providedExports<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// Add public path information</span>
   publicPath<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// Add information about the reasons why modules are included</span>
@@ -179,13 +193,15 @@
   source<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// Add timing information</span>
   timings<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// Show which exports of a module are used</span>
+  usedExports<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// Add webpack version information</span>
   version<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// Add warnings</span>
   warnings<span class="token punctuation">:</span> <span class="token boolean">true</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 </code></pre>
-</div><hr style="display:block;"><h3 style="display:block;">Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/SpaceK33z"><img src="https://github.com/SpaceK33z.png?size=90"><span class="contributor__name"> SpaceK33z</span></a><a class="contributor" href="https://github.com/sallar"><img src="https://github.com/sallar.png?size=90"><span class="contributor__name"> sallar</span></a></div></div><div class="interactive" id="components/gitter/gitter.jsx" data-props="{}"><span class="gitter"></span></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/guides/get-started" class="footer__link">Get Started</a><a href="/organization" class="footer__link">Organization</a><a href="/support" class="footer__link">Support</a><a href="/guides/why-webpack#comparison" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg"></a></section><section class="footer__right"><a href="/branding" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Gitter</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link">License</a><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" class="footer__license"><img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png"></a></section></div></footer><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
+</div><hr style="display:block;"><h3 style="display:block;">Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/SpaceK33z"><img src="https://github.com/SpaceK33z.png?size=90"><span class="contributor__name"> SpaceK33z</span></a><a class="contributor" href="https://github.com/jungomi"><img src="https://github.com/jungomi.png?size=90"><span class="contributor__name"> jungomi</span></a><a class="contributor" href="https://github.com/sallar"><img src="https://github.com/sallar.png?size=90"><span class="contributor__name"> sallar</span></a></div></div><div class="interactive" id="components/gitter/gitter.jsx" data-props="{}"><span class="gitter"></span></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/guides/get-started" class="footer__link">Get Started</a><a href="/organization" class="footer__link">Organization</a><a href="/support" class="footer__link">Support</a><a href="/guides/why-webpack#comparison" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg"></a></section><section class="footer__right"><a href="/branding" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Gitter</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link">License</a><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" class="footer__license"><img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png"></a></section></div></footer><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
 
     
       <script src="/c9507ff7de0c5f68b3088161466dfaf4.js"></script>

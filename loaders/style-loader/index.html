@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/ff8d84527483da867cfc.css" rel="stylesheet">
+      <link href="/12bc43a8e7540c9fce29.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -56,9 +56,14 @@ style<span class="token punctuation">.</span><span class="token function">unuse<
 <h4 class="header"><a class="anchor" href="#attrs" id="attrs"></a><span class="text"><code>attrs</code></span><a class="icon-link" href="#attrs"></a></h4>
 <p>If defined, style-loader will attach given attributes with their values on <code>&lt;style&gt;</code> / <code>&lt;link&gt;</code> element.
 Usage:</p>
-<pre><code class="lang-javascript"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;style-loader?{attrs:{id: &quot;style-tag-id&quot;}}!style.scss&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="lang-javascript"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;style-loader?{attrs:{id: &quot;style-tag-id&quot;}}!style.css&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">// will create style tag &lt;style id=&quot;style-tag-id&quot;&gt;</span>
+</code></pre>
+<p>Usage in <code>url</code> mode:</p>
+<pre><code class="lang-javascript"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;style-loader/url?{attrs:{prop: &quot;value&quot;}}!file-loader!style.css&apos;</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// will create link tag &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;[path]/style.css&quot; prop=&quot;value&quot;&gt;</span>
 </code></pre>
 <h3 class="header"><a class="anchor" href="#recommended-configuration" id="recommended-configuration"></a><span class="text">Recommended configuration</span><a class="icon-link" href="#recommended-configuration"></a></h3>
 <p>By convention the reference-counted API should be bound to <code>.useable.css</code> and the simple API to <code>.css</code> (similar to other file types, i.e. <code>.useable.less</code> and <code>.less</code>).</p>
