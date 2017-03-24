@@ -7,7 +7,11 @@ contributors:
   - terinjokes
 ---
 
-?> These are all the other options that might not need an entire page. Either we need to create new pages for them, move them to an existing page, or keep an **Other Options** section like this and replace this TODO with a short description/lead-in paragraph.
+
+These are the remaining configuration options supported by webpack.
+
+W> Help Wanted: This page is still a work in progress. If you are familiar with any of the options for which the description or examples are incomplete, please create an issue and submit a PR at the [docs repo](https://github.com/webpack/webpack.js.org)!
+
 
 ## `amd`
 
