@@ -7,7 +7,11 @@ contributors:
   - terinjokes
 ---
 
-?> These are all the other options that might not need an entire page. Either we need to create new pages for them, move them to an existing page, or keep an **Other Options** section like this and replace this TODO with a short description/lead-in paragraph.
+
+These are the remaining configuration options supported by webpack.
+
+W> Help Wanted: This page is still a work in progress. If you are familiar with any of the options for which the description or examples are incomplete, please create an issue and submit a PR at the [docs repo](https://github.com/webpack/webpack.js.org)!
+
 
 ## `amd`
 
@@ -22,6 +26,7 @@ amd: {
 ```
 
 Certain popular modules written for AMD, most notably jQuery versions 1.7.0 to 1.9.1, will only register as an AMD module if the loader indicates it has taken [special allowances](https://github.com/amdjs/amdjs-api/wiki/jQuery-and-AMD) for multiple versions being included on a page.
+
 The allowances were the ability to restrict registrations to a specific version or to support different sandboxes with different defined modules.
 
 This option allows you to set the key your module looks for to a truthy value.
