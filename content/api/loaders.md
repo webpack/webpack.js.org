@@ -7,18 +7,13 @@ contributors:
 
 ---
 
-Loaders allow you to preprocess files as you `require()` or “load” them. Loaders are kind of like “tasks” in other build tools,
-and provide a powerful way to handle front-end build steps. Loaders can transform files from a different language (like CoffeeScript to JavaScript), or inline images as data URLs. Loaders even allow you to do things like `require()` css files right in your JavaScript!
-
-To tell webpack to transform a module with a loader, you can specify the loader in the webpack [configuration](/configuration) file (preferred) or in the module request, such as in a `require()` call.
-
-?> When /concepts/loaders merges, we should link to the many usages of loaders found there (require vs configuration) from this page.
+Loaders are transformations that are applied on the source code of a module. They are functions (running in Node.js) that take the source of a resource file as the parameter and return the new source.
 
 ## How to write a loader
 
-A loader is just a JavaScript module that exports a function. The compiler calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by the compiler with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters. The first loader is passed one argument: the content of the resource file. The compiler expects a result from the last loader. The result should be a `String` or a `Buffer` (which is converted to a string), representing the JavaScript source code of the module. An optional SourceMap result (as JSON object) may also be passed.
+A loader is just a JavaScript module that exports a function. The [loader runner](https://github.com/webpack/loader-runner) calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by webpack and the [loader runner](https://github.com/webpack/loader-runner) with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters. The first loader is passed one argument: the content of the resource file. The compiler expects a result from the last loader. The result should be a `String` or a `Buffer` (which is converted to a string), representing the JavaScript source code of the module. An optional SourceMap result (as JSON object) may also be passed.
 
-A single result can be returned in **sync mode**. For multiple results the `this.callback()` must be called. In **async mode** `this.async()` must be called. It returns `this.callback()` if **async mode** is allowed. Then the loader must return `undefined` and call the callback.
+A single result can be returned in **sync mode**. For multiple results the `this.callback()` must be called. In **async mode** `this.async()` must be called to indicate that the [loader runner](https://github.com/webpack/loader-runner) should wait for an asynchronous result. It returns `this.callback()`. Then the loader must return `undefined` and call that callback.
 
 ## Examples
 
@@ -48,10 +43,21 @@ module.exports = function(content) {
 ```javascript
 module.exports = function(content) {
     var callback = this.async();
-    if(!callback) return someSyncOperation(content);
     someAsyncOperation(content, function(err, result) {
         if(err) return callback(err);
         callback(null, result);
+    });
+};
+```
+
+**async-loader-with-multiple-results.js**
+
+```javascript
+module.exports = function(content) {
+    var callback = this.async();
+    someAsyncOperation(content, function(err, result, sourceMaps, ast) {
+        if(err) return callback(err);
+        callback(null, result, sourceMaps, ast);
     });
 };
 ```
@@ -60,7 +66,7 @@ T> Loaders were originally designed to work in synchronous loader pipelines, lik
 
 ### "Raw" Loader
 
-By default, the resource file is treated as utf-8 string and passed as String to the loader. By setting raw to true the loader is passed the raw `Buffer`. Every loader is allowed to deliver its result as `String` or as `Buffer`. The compiler converts them between loaders.
+By default, the resource file is converted to a UTF-8 string and passed to the loader. By setting the `raw` flag, the loader will receive the raw `Buffer`. Every loader is allowed to deliver its result as `String` or as `Buffer`. The compiler converts them between loaders.
 
 **raw-loader.js**
 
@@ -76,7 +82,7 @@ module.exports.raw = true;
 
 ### Pitching Loader
 
-The order of chained loaders are **always** called from right to left. But, in some cases, loaders do not care about the results of the previous loader or the resource. They only care for **metadata**. The `pitch` method on the loaders is called from **left to right** before the loaders are called (from right to left).
+Loaders are **always** called from right to left. But, in some cases, loaders do not care about the results of the previous loader or the resource. They only care for **metadata**. The `pitch` method on the loaders is called from **left to right** before the loaders are called (from right to left).
 
 If a loader delivers a result in the `pitch` method the process turns around and skips the remaining loaders, continuing with the calls to the more left loaders. `data` can be passed between pitch and normal call.
 
@@ -125,7 +131,7 @@ In the example: `"/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/re
 1. In case the loader was configured with an [`options`](/configuration/module/#useentry) object, this will be a reference to the object.
 2. If the loader has no `options`, but was invoked with a query string, this will be a string starting with `?`.
 
-Use the [`getOptions` method from the `loader-utils`](https://github.com/webpack/loader-utils#getoptions) to extract the given loader options.
+T> Use the [`getOptions` method from the `loader-utils`](https://github.com/webpack/loader-utils#getoptions) to extract the given loader options.
 
 ### `this.callback`
 
@@ -149,7 +155,7 @@ In case this function is called, you should return undefined to avoid ambigious 
 
 ### `this.async`
 
-A function than returns either `callback` or a falsy value depending whether asynchronous loader results are supported by the loader pipeline or not.
+Tells the [loader-runner](https://github.com/webpack/loader-runner) that the loader intends to call back asynchronously. Returns `this.callback`.
 
 ### `this.data`
 
@@ -163,9 +169,9 @@ A function that sets the cacheable flag:
 cacheable(flag = true: boolean)
 ```
 
-By default, loader results are cacheable. Call this method passing `false` to make the loader's result not cacheable.
+By default, loader results are flagged as cacheable. Call this method passing `false` to make the loader's result not cacheable.
 
-A cacheable loader must have a deterministic result, when inputs and dependencies haven't changed. This means the loader shouldn't have other dependencies than specified with `this.addDependency`. Most loaders are deterministic and cacheable.
+A cacheable loader must have a deterministic result, when inputs and dependencies haven't changed. This means the loader shouldn't have other dependencies than specified with `this.addDependency`.
 
 ### `this.loaders`
 
@@ -216,6 +222,22 @@ The query of the resource.
 
 In the example: `"?rrr"`
 
+### `this.target`
+
+Target of compilation. Passed from configuration options.
+
+Example values: `"web"`, `"node"`
+
+### `this.webpack`
+
+This boolean is set to true when this is compiled by webpack.
+
+T> Loaders were originally designed to also work as Babel transforms. Therefore if you write a loader that works for both, you can use this property to know if there is access to additional loaderContext and webpack features.
+
+### `this.sourceMap`
+
+Should a source map be generated. Since generating source maps can be an expensive task, you should check if source maps are actually requested.
+
 ### `this.emitWarning`
 
 ```typescript
@@ -232,28 +254,18 @@ emitError(message: string)
 
 Emit an error.
 
-### `this.exec`
+### `this.loadModule`
 
 ```typescript
-exec(code: string, filename: string)
+loadModule(request: string, callback: function(err, source, sourceMap, module))
 ```
 
-Execute some code fragment like a module.
-
-T> Don't use `require(this.resourcePath)`, use this function to make loaders chainable!
+Resolves the given request to a module, applies all configured loaders and calls back with the generated source, the sourceMap and the module instance (usually an instance of [`NormalModule`](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js)). Use this function if you need to know the source code of another module to generate the result.
 
 ### `this.resolve`
 
 ```typescript
 resolve(context: string, request: string, callback: function(err, result: string))
-```
-
-Resolve a request like a require expression.
-
-### `this.resolveSync`
-
-```typescript
-resolveSync(context: string, request: string) -> string
 ```
 
 Resolve a request like a require expression.
@@ -283,18 +295,6 @@ clearDependencies()
 
 Remove all dependencies of the loader result. Even initial dependencies and these of other loaders. Consider using `pitch`.
 
-### `this.target`
-
-Target of compilation. Passed from configuration options.
-
-Example values: `"web"`, `"node"`
-
-### `this.webpack`
-
-This boolean is set to true when this is compiled by webpack.
-
-T> Loaders were originally designed to also work as Babel transforms. Therefore if you write a loader that works for both, you can use this property to know if there is access to additional loaderContext and webpack features.
-
 ### `this.emitFile`
 
 ```typescript
@@ -307,6 +307,54 @@ Emit a file. This is webpack-specific.
 
 Access to the `compilation`'s `inputFileSystem` property.
 
-### Custom `loaderContext` Properties
+## Deprecated context properties
 
-Custom properties can be added to the `loaderContext` by either specifying values on the `loader` property on your webpack [configuration](/configuration), or by creating a [custom plugin](/api/plugins) that hooks into the `normal-module-loader` event which gives you access to the `loaderContext` to modify or extend.
+W> The usage of these properties is highly discouraged since we are planing to remove them from the context. They are still listed here for documentation purposes.
+
+### `this.exec`
+
+```typescript
+exec(code: string, filename: string)
+```
+
+Execute some code fragment like a module.
+
+### `this.resolveSync`
+
+```typescript
+resolveSync(context: string, request: string) -> string
+```
+
+Resolve a request like a require expression.
+
+### `this.value`
+
+Pass values to the next loader. If you know what your result exports if executed as module, set this value here (as a only element array).
+
+### `this.inputValue`
+
+Passed from the last loader. If you would execute the input argument as module, consider reading this variable for a shortcut (for performance).
+
+### `this.options`
+
+The options passed to the Compiler.
+
+### `this.debug`
+
+A boolean flag. It is set when in debug mode.
+
+### `this.minimize`
+
+Should the result be minimized.
+
+### `this._compilation`
+
+Hacky access to the Compilation object of webpack.
+
+### `this._compiler`
+
+Hacky access to the Compiler object of webpack.
+
+### `this._module`
+
+Hacky access to the Module object being loaded.
