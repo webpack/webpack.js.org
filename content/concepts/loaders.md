@@ -8,9 +8,10 @@ contributors:
   - gangachris
   - TheLarkInn
   - simon04
+  - jhnns
 ---
 
-Loaders are transformations that are applied on a resource file of your application. They are functions (running in Node.js) that take the source of a resource file as the parameter and return the new source.
+Loaders are transformations that are applied on the source code of a module. They allow you to preprocess files as you `require()` or “load” them. Thus, loaders are kind of like “tasks” in other build tools, and provide a powerful way to handle front-end build steps. Loaders can transform files from a different language (like TypeScript) to JavaScript, or inline images as data URLs. Loaders even allow you to do things like `require()` CSS files right in your JavaScript!
 
 ## Example
 
