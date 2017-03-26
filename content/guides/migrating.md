@@ -249,6 +249,7 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
 
 ## `OccurrenceOrderPlugin` is now on by default
 
+`OccurenceOrderPlugin` has been renamed to `OccurrenceOrderPlugin`.  
 It's no longer necessary to specify it in the configuration.
 
 ``` diff
