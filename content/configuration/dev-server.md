@@ -182,7 +182,7 @@ Enable webpack's Hot Module Replacement feature:
 hot: true
 ```
 
-?> Add various other steps needed for this to work. (From my experience, and the current docs it looks like other steps are needed here - not like in the cmd line where it's just a flag)
+T> Note that you must also include a `new webpack.HotModuleReplacementPlugin()` to fully enable HMR. See the [HMR concepts page](/concepts/hot-module-replacement) for more information.
 
 
 ## `devServer.hotOnly` - CLI only
