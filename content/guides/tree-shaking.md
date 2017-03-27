@@ -76,6 +76,6 @@ function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});va
 
 ## Weblinks
 
-* [Tree shaking with Webpack 2, TypeScript and Babel](https://alexjoverm.github.io/2017/03/06/Tree-shaking-with-Webpack-2-TypeScript-and-Babel/)
+* [Tree shaking with webpack 2, TypeScript and Babel](https://alexjoverm.github.io/2017/03/06/Tree-shaking-with-webpack-2-TypeScript-and-Babel/)
 * [Tree-shaking with webpack 2 and Babel 6](http://www.2ality.com/2015/12/webpack-tree-shaking.html)
-* [Webpack 2 Tree Shaking Configuration](https://medium.com/modus-create-front-end-development/webpack-2-tree-shaking-configuration-9f1de90f3233#.15tuaw71x)
+* [webpack 2 Tree Shaking Configuration](https://medium.com/modus-create-front-end-development/webpack-2-tree-shaking-configuration-9f1de90f3233#.15tuaw71x)
