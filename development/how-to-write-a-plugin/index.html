@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/68f27305c5897ad346ac.css" rel="stylesheet">
+      <link href="/aafb14fac21938cb399a.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -58,7 +58,7 @@ MyExampleWebpackPlugin<span class="token punctuation">.</span>prototype<span cla
 <li><a href="https://github.com/webpack/webpack/blob/master/lib/Compilation.js">Compilation Source</a></li>
 </ul>
 <h2 class="header"><a class="anchor" href="#basic-plugin-architecture" id="basic-plugin-architecture"></a><span class="text">Basic plugin architecture</span><a class="icon-link" href="#basic-plugin-architecture"></a></h2>
-<p>Plugins are instantiated objects with an <code>apply</code> method on their prototype. This <code>apply</code> method is called once by the Webpack compiler while installing the plugin. The <code>apply</code> method is given a reference to the underlying Webpack compiler, which grants access to compiler callbacks. A simple plugin is structured as follows:</p>
+<p>Plugins are instantiated objects with an <code>apply</code> method on their prototype. This <code>apply</code> method is called once by the webpack compiler while installing the plugin. The <code>apply</code> method is given a reference to the underlying webpack compiler, which grants access to compiler callbacks. A simple plugin is structured as follows:</p>
 <pre><code class="lang-javascript"><span class="token keyword">function</span> <span class="token function">HelloWorldPlugin</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// Setup the plugin instance with options...</span>
 <span class="token punctuation">}</span>
