@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/8e12fc10bf91e70bbd96.css" rel="stylesheet">
+      <link href="/2a1c5e1c61a56d38de88.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -192,8 +192,12 @@ This means that if you want to see uglifyjs warnings, you need to set <code>comp
   ]
 </code></pre>
 <h2 class="header"><a class="anchor" href="#occurrenceorderplugin-is-now-on-by-default" id="occurrenceorderplugin-is-now-on-by-default"></a><span class="text"><code>OccurrenceOrderPlugin</code> is now on by default</span><a class="icon-link" href="#occurrenceorderplugin-is-now-on-by-default"></a></h2>
-<p>It&apos;s no longer necessary to specify it in the configuration.</p>
+<p>The <code>OccurrenceOrderPlugin</code> is now enabled by default and has been renamed (<code>OccurenceOrderPlugin</code> in webpack 1).
+Thus make sure to remove the plugin from your configuration:</p>
 <pre><code class="lang-diff">  plugins: [
+    // webpack 1
+<span class="token deleted">-   new webpack.optimize.OccurenceOrderPlugin()</span>
+    // webpack 2
 <span class="token deleted">-   new webpack.optimize.OccurrenceOrderPlugin()</span>
   ]
 </code></pre>
