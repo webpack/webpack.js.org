@@ -26,9 +26,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/plugins/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/pluginsapi/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/support/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/pluginsapi/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/vote/index.html</loc>
     </url>    <url>
@@ -76,9 +76,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/configuration/externals/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/configuration/javascript-alternatives/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/configuration/module/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/configuration/javascript-alternatives/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/node/index.html</loc>
     </url>    <url>
@@ -132,9 +132,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/guides/dependency-management/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/guides/development/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/guides/development-vagrant/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/guides/development/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/guides/environment-variables/index.html</loc>
     </url>    <url>
@@ -162,9 +162,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/guides/why-webpack/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/babel-loader/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/bundle-loader/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/loaders/babel-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/coffee-loader/index.html</loc>
     </url>    <url>
@@ -232,9 +232,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/loaders/yaml-frontmatter-loader/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/plugins/babili-webpack-plugin/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/plugins/banner-plugin/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/plugins/babili-webpack-plugin/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/plugins/commons-chunk-plugin/index.html</loc>
     </url>    <url>
@@ -270,9 +270,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/pluginsapi/compiler/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/pluginsapi/template/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/vote/feedback/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/pluginsapi/template/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/vote/moneyDistribution/index.html</loc>
     </url>    <url>
