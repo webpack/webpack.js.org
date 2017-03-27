@@ -111,9 +111,9 @@ The analyse tool will take in the JSON and provide all the details of the build 
 
 *Further reads:*
 * [Analyzing Build Statistics](https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/)
-* [Three simple ways to inspect a Webpack bundle](https://medium.com/@joeclever/three-simple-ways-to-inspect-a-webpack-bundle-7f6a8fe7195d#.7d2i06mjx)
+* [Three simple ways to inspect a webpack bundle](https://medium.com/@joeclever/three-simple-ways-to-inspect-a-webpack-bundle-7f6a8fe7195d#.7d2i06mjx)
 * [Optimising your application bundle size with webpack](https://hackernoon.com/optimising-your-application-bundle-size-with-webpack-e85b00bab579#.5w5ko08pq)
-* [Analyzing & optimizing your Webpack bundle](https://medium.com/@ahmedelgabri/analyzing-optimizing-your-webpack-bundle-8590818af4df#.hce4vdjs9)
+* [Analyzing & optimizing your webpack bundle](https://medium.com/@ahmedelgabri/analyzing-optimizing-your-webpack-bundle-8590818af4df#.hce4vdjs9)
 * [Analysing and minimising the size of client side bundle with webpack and source-map-explorer](https://medium.com/@nimgrg/analysing-and-minimising-the-size-of-client-side-bundle-with-webpack-and-source-map-explorer-41096559beca#.c3t2srr8x)
 
 ### Output Options
