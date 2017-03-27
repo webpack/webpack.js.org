@@ -249,11 +249,14 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
 
 ## `OccurrenceOrderPlugin` is now on by default
 
-`OccurenceOrderPlugin` has been renamed to `OccurrenceOrderPlugin`.  
-It's no longer necessary to specify it in the configuration.
+The `OccurrenceOrderPlugin` is now enabled by default and has been renamed (`OccurenceOrderPlugin` in webpack 1).
+Thus make sure to remove the plugin from your configuration:
 
 ``` diff
   plugins: [
+    // webpack 1
+-   new webpack.optimize.OccurenceOrderPlugin()
+    // webpack 2
 -   new webpack.optimize.OccurrenceOrderPlugin()
   ]
 ```
