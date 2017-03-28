@@ -50,8 +50,11 @@ If your project structure is as follows -
 
 ```bash
 webpack src/index.js dist/bundle.js
-	This will bundle your source code with entry as `index.js` and the output bundle file will have a path of `dist` and the filename will be `bundle.js`
+```
 
+This will bundle your source code with entry as `index.js` and the output bundle file will have a path of `dist` and the filename will be `bundle.js`
+
+```bash
 	| Asset     | Size    | Chunks      | Chunk Names |
 	|-----------|---------|-------------|-------------|
 	| bundle.js | 1.54 kB | 0 [emitted] | index       |
@@ -61,8 +64,11 @@ webpack src/index.js dist/bundle.js
 
 ```bash
 webpack index=./src/index.js entry2=./src/index2.js dist/bundle.js
-	This will form the bundle with both the files as separate entry points.
+```
 
+This will form the bundle with both the files as separate entry points.
+
+```bash
 	| Asset     | Size    | Chunks        | Chunk Names   |
 	|-----------|---------|---------------|---------------|
 	| bundle.js | 1.55 kB | 0,1 [emitted] | index, entry2 |
