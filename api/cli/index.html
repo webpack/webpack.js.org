@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/2a9eb6d4b4b5daf47664.css" rel="stylesheet">
+      <link href="/cd118aef2eb284939b42.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -43,18 +43,18 @@
     &#x2514;&#x2500;&#x2500; others.js
 </code></pre>
 <pre><code class="lang-bash">webpack src/index.js dist/bundle.js
-    This will bundle your <span class="token function">source</span> code with entry as <span class="token variable"><span class="token variable">`</span>index.js<span class="token variable">`</span></span> and the output bundle <span class="token function">file</span> will have a path of <span class="token variable"><span class="token variable">`</span>dist<span class="token variable">`</span></span> and the filename will be <span class="token variable"><span class="token variable">`</span>bundle.js<span class="token variable">`</span></span>
-
-    <span class="token operator">|</span> Asset     <span class="token operator">|</span> Size    <span class="token operator">|</span> Chunks      <span class="token operator">|</span> Chunk Names <span class="token operator">|</span>
+</code></pre>
+<p>This will bundle your source code with entry as <code>index.js</code> and the output bundle file will have a path of <code>dist</code> and the filename will be <code>bundle.js</code></p>
+<pre><code class="lang-bash">    <span class="token operator">|</span> Asset     <span class="token operator">|</span> Size    <span class="token operator">|</span> Chunks      <span class="token operator">|</span> Chunk Names <span class="token operator">|</span>
     <span class="token operator">|</span>-----------<span class="token operator">|</span>---------<span class="token operator">|</span>-------------<span class="token operator">|</span>-------------<span class="token operator">|</span>
     <span class="token operator">|</span> bundle.js <span class="token operator">|</span> 1.54 kB <span class="token operator">|</span> 0 <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span> <span class="token operator">|</span> index       <span class="token operator">|</span>
     <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./src/index.js 51 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
     <span class="token punctuation">[</span>1<span class="token punctuation">]</span> ./src/others.js 29 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
 </code></pre>
 <pre><code class="lang-bash">webpack index<span class="token operator">=</span>./src/index.js entry2<span class="token operator">=</span>./src/index2.js dist/bundle.js
-    This will form the bundle with both the files as separate entry points.
-
-    <span class="token operator">|</span> Asset     <span class="token operator">|</span> Size    <span class="token operator">|</span> Chunks        <span class="token operator">|</span> Chunk Names   <span class="token operator">|</span>
+</code></pre>
+<p>This will form the bundle with both the files as separate entry points.</p>
+<pre><code class="lang-bash">    <span class="token operator">|</span> Asset     <span class="token operator">|</span> Size    <span class="token operator">|</span> Chunks        <span class="token operator">|</span> Chunk Names   <span class="token operator">|</span>
     <span class="token operator">|</span>-----------<span class="token operator">|</span>---------<span class="token operator">|</span>---------------<span class="token operator">|</span>---------------<span class="token operator">|</span>
     <span class="token operator">|</span> bundle.js <span class="token operator">|</span> 1.55 kB <span class="token operator">|</span> 0,1 <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span> <span class="token operator">|</span> index, entry2 <span class="token operator">|</span>
     <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./src/index.js 51 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>

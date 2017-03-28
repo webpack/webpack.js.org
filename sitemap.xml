@@ -138,9 +138,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/guides/hmr-react/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/guides/lazy-load-react/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/guides/installation/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/guides/lazy-load-react/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/guides/migrating/index.html</loc>
     </url>    <url>
@@ -158,9 +158,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/guides/why-webpack/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/get-started/why-webpack/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/get-started/install-webpack/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/get-started/why-webpack/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/babel-loader/index.html</loc>
     </url>    <url>
@@ -232,9 +232,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/loaders/yaml-frontmatter-loader/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/plugins/banner-plugin/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/plugins/babili-webpack-plugin/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/plugins/banner-plugin/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/plugins/commons-chunk-plugin/index.html</loc>
     </url>    <url>
@@ -252,9 +252,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/plugins/i18n-webpack-plugin/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/plugins/loader-options-plugin/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/plugins/limit-chunk-count-plugin/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/plugins/loader-options-plugin/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/plugins/min-chunk-size-plugin/index.html</loc>
     </url>    <url>
