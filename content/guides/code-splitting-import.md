@@ -146,7 +146,7 @@ module.exports = {
 
 好消息：载入chunk失败时，我们可以处理抛出的错误了，因为它们是基于`Promise`的。
 
-坏消息：`require.ensure`允许通过赋值第三个参数(可选)，来简单地给chunk命名，但是`import` API 并没有提供这样的能力。如果你希望保持这个特性，你可以继续使用`require.ensure`。
+坏消息：`require.ensure`允许通过赋值第三个参数（可选），来简单地给chunk命名，但是`import` API 并没有提供这样的能力。如果你希望保持这个特性，你可以继续使用`require.ensure`。
 
 ```javascript
 require.ensure([], function(require) {
