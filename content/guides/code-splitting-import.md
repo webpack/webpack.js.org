@@ -5,14 +5,13 @@ contributors:
   - simon04
 ---
 
-## Dynamic import
+## 动态引入
 
-Currently, a "function-like" `import()` module loading [syntax proposal](https://github.com/tc39/proposal-dynamic-import) is on the way into ECMAScript.
+目前，ECMAScript正在引入一种“函数式”的`import()`[语法提议](https://github.com/tc39/proposal-dynamic-import)。
 
-The [ES2015 Loader spec](https://whatwg.github.io/loader/) defines `import()` as method to load ES2015 modules dynamically on runtime.
+[ES2015 加载规范](https://whatwg.github.io/loader/)定义了`import()`作为一种在运行时动态载入ES2015模块的方法。
 
-webpack treats `import()` as a split-point and puts the requested module in a separate chunk.
-`import()` takes the module name as argument and returns a `Promise`: `import(name) -> Promise`
+webpack把`import()`作为一个分离点并把引入的模块作为一个单独的chunk，`import()`将模块名字作为参数并返回一个`Promoise`对象，即`import(name) -> Promise`
 
 **index.js**
 ```javascript
@@ -26,15 +25,15 @@ function determineDate() {
 
 determineDate();
 ```
-T> Keep in mind that `import()` path cannot be fully dynamic (e.g., `import(Math.random())`). Rather either completely static (e.g., `import('./locale/de.json')`) or partially static (e.g., `import('./locale/' + language + '.json')`).
+T> 记住`import()`路径不可以是完全动态的（比如`import(Math.random())`）。只可以是完全静态（比如`import('./locale/de.json')`）或者是部分静态的（比如`import('./locale/' + language + '.json')`）。
 
-## Promise polyfill
+## 配合Promise polyfill
 
-W> `import()` relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally.
+W> `import()` 的内部依赖于 [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)。
 
-If you use `import()` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
+如果你想在老版本的浏览器上使用`import()`，请记得使用polyfill，比如[es6-promise](https://github.com/stefanpenner/es6-promise) 或者 [promise-polyfill](https://github.com/taylorhakes/promise-polyfill)。
 
-In an entry point of your application:
+在应用的入口:
 ```javascript
 import Es6Promise from 'es6-promise';
 Es6Promise.polyfill();
@@ -48,9 +47,9 @@ if (!window.Promise) {
 // or ...
 ```
 
-## Usage with Babel
+## 配合Babel
 
-If you want to use `import` with [Babel](http://babeljs.io/), you'll need to install/add the [`syntax-dynamic-import`](http://babeljs.io/docs/plugins/syntax-dynamic-import/) plugin while it's still Stage 3 to get around the parser error. When the proposal is added to the spec this won't be necessary anymore.
+如果你想通过[Babel](http://babeljs.io/)来使用`import`，你需要安装/添加[`syntax-dynamic-import`](http://babeljs.io/docs/plugins/syntax-dynamic-import/)插件，因为这是属于Stage 3的特性。当这个提议加入规范后就不需要加这个插件了。
 
 ```bash
 npm install --save-dev babel-core babel-loader babel-plugin-syntax-dynamic-import babel-preset-es2015
@@ -93,13 +92,13 @@ module.exports = {
 };
 ```
 
-Not using the `syntax-dynamic-import` plugin will fail the build with
-* `Module build failed: SyntaxError: 'import' and 'export' may only appear at the top level`, or
+如果没有使用`syntax-dynamic-import`插件，构建会失败并显示
+* `Module build failed: SyntaxError: 'import' and 'export' may only appear at the top level`, 或者
 * `Module build failed: SyntaxError: Unexpected token, expected {`
 
-## Usage with Babel and `async`/`await`
+## 通过Babel使用`async`/`await`
 
-To use ES2017 [`async`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)/[`await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) with `import()`:
+通过 ES2017特性 [`async`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)/[`await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) 来使用 `import()`:
 
 ```bash
 npm install --save-dev babel-plugin-transform-async-to-generator babel-plugin-transform-regenerator babel-plugin-transform-runtime
@@ -143,11 +142,11 @@ module.exports = {
 };
 ```
 
-## `import` supersedes `require.ensure`?
+## `import` 取代了 `require.ensure`?
 
-Good news: Failure to load a chunk can be handled now because they are `Promise` based.
+好消息：载入chunk失败时，我们可以处理抛出的错误了，因为它们是基于`Promise`的。
 
-Caveat: `require.ensure` allows for easy chunk naming with the optional third argument, but `import` API doesn't offer that capability yet. If you want to keep that functionality, you can continue using `require.ensure`.
+坏消息：`require.ensure`允许通过赋值第三个参数（可选），来简单地给chunk命名，但是`import` API 并没有提供这样的能力。如果你希望保持这个特性，你可以继续使用`require.ensure`。
 
 ```javascript
 require.ensure([], function(require) {
@@ -155,18 +154,19 @@ require.ensure([], function(require) {
 }, "custom-chunk-name");
 ```
 
-## `System.import` is deprecated
+## `System.import` 已经过时了
 
-The use of `System.import` in webpack [did not fit the proposed spec](https://github.com/webpack/webpack/issues/2163), so it was deprecated in [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) in favor of `import()`.
+`System.import`在webpack里的使用[并不符合规范](https://github.com/webpack/webpack/issues/2163)，所以它在[v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28)已过时并被`import()`取代。
 
-## Examples
+## 示例
 * https://github.com/webpack/webpack/tree/master/examples/harmony
 * https://github.com/webpack/webpack/tree/master/examples/code-splitting-harmony
 * https://github.com/webpack/webpack/tree/master/examples/code-splitting-native-import-context
 
-## Weblinks
+## 网络链接
 * [Lazy Loading ES2015 Modules in the Browser](https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser)
 
 ***
 
-> 原文：https://webpack.js.org/guides/environment-variables/
+> 原文：https://webpack.js.org/guides/code-splitting-import/
+

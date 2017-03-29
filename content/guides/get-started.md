@@ -9,10 +9,10 @@ contributors:
   - johnstew
   - simon04
   - aaronang
+  - jecoopr
 ---
 
 webpack 是一个用来构建我们应用程序中的 JavaScript 模块的工具。在按照[安装说明](/guides/installation)安装 webpack 后，我们可以从 [CLI](/api/cli) 或 [API](/api/node) 来开始使用 `webpack`。
-
 webpack 通过快速建立应用程序依赖图表并以正确的顺序打包它们来简化你的工作流。你能够针对你的代码来对 webpack 进行自定义的优化配置，比如为生产环境拆分 vendor/css/js 代码，通过运行「开发中 server(development server)」来实现无刷新热重载(hot-reload)等很多酷炫的特性。了解更多关于[为什么使用 wepback](/guides/why-webpack)。
 
 ## 创建一个 bundle 文件
@@ -48,7 +48,7 @@ function component () {
 document.body.appendChild(component());
 ```
 
-要运行这段代码，通常需要有以下 HTML ：
+要运行这段代码，在项目根目录下创建 `index.html` 文件。
 
 __index.html__
 
@@ -92,16 +92,16 @@ function component () {
 当然我们还要修改 `index.html`，来引入打包好的单个 js 文件。
 
 ```diff
-<html>
-  <head>
-    <title>webpack 2 demo</title>
--   <script src="https://unpkg.com/lodash@4.16.6"></script>
-  </head>
-  <body>
--   <script src="app/index.js"></script>
-+   <script src="dist/bundle.js"></script>
-  </body>
-</html>
+ <html>
+   <head>
+     <title>webpack 2 demo</title>
+-    <script src="https://unpkg.com/lodash@4.16.6"></script>
+   </head>
+   <body>
+-    <script src="app/index.js"></script>
++    <script src="dist/bundle.js"></script>
+   </body>
+ </html>
 ```
 
 在这里，`index.js` 显式要求引入的 `lodash` 必须存在，然后将它以 `_` 的别名绑定（不会造成全局范围变量名污染）。
@@ -130,7 +130,6 @@ T> 输出可能会稍有不同。如果构建成功，那么你就可以继续�
 ## 在 webpack 中使用 ES2015 模块
 
 你注意到在 `app/index.js` 中使用的 [ES2015 模块的 import](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/import) 了吗？尽管 `import`/`export` 语句在浏览器中还未被支持，你也可以正常的使用，因为 webpack 会将其替换为 ES5 兼容的代码。你可以检查 `dist/bundle.js` 的代码来说服自己放心使用。
-
 
 注意 webpack 将不会更改你的 `import`/`export` 除外的代码。如果你在使用其它 [ES2015 特性](http://es6-features.org/)，请确保你使用了一个像是 [Babel](https://babeljs.io/) 或 [Bublé](https://buble.surge.sh/guide/) 的转译器。
 

@@ -3,51 +3,51 @@ title: Compilation
 sort: 3
 ---
 
-The Compilation instance extends from the compiler i.e. `compiler.compilation`. It is the literal compilation of all the objects in the require graph. This object has access to all the modules and their dependencies (most of which are circular references). In the compilation phase, modules are loaded, sealed, optimized, chunked, hashed and restored, etc. This would be the main lifecycle of any operations of the compilation.
+Compilation 实例继承于 compiler。例如，compiler.compilation 是对所有 require 图表中对象的字面上的编译。这个对象可以访问所有的模块和它们的依赖（大部分是循环依赖）。在编译阶段，模块被加载，封闭，优化，分块，哈希和重建等等。这将是编译中任何操作主要的生命周期。
 
 ```javascript
 compiler.plugin("compilation", function(compilation) {
-    //the main compilation instance
-    //all subsequent methods are derived from compilation.plugin
+    //主要的编译实例
+    //随后所有的方法都从 compilation.plugin 上得来
 });
 ```
 
 ## `normal-module-loader`
 
-The normal module loader, is the function that actually loads all the modules in the module graph (one-by-one).
+普通模块加载器，真实地一个一个加载模块图表中所有的模块的函数。
 
 ```javascript
 compilation.plugin('normal-module-loader', function(loaderContext, module) {
-    //this is where all the modules are loaded
-    //one by one, no dependencies are created yet
+    //这里是所以模块被加载的地方
+    //一个接一个，此时还没有依赖被创建
 });
 ```
 
 ## `seal`
 
-The sealing of the compilation has started.
+编译的封闭已经开始。
 
 ```javascript
 compilation.plugin('seal', function() {
-    //you are not accepting any more modules
-    //no arguments
+    //你已经不能再接收到任何模块
+    //没有参数
 });
 ```
 
 ## `optimize`
 
-Optimize the compilation.
+优化编译。
 
 ```javascript
 compilation.plugin('optimize', function() {
-    //webpack is begining the optimization phase
-    // no arguments
+    //webpack 已经进入优化阶段
+    //没有参数
 });
 ```
 
-## `optimize-tree(chunks, modules)` async
+## `optimize-tree(chunks, modules)` 异步
 
-Async optimization of the tree.
+树的异步优化。
 
 ```javascript
 compilation.plugin('optimize-tree', function(chunks, modules) {
@@ -56,31 +56,30 @@ compilation.plugin('optimize-tree', function(chunks, modules) {
 ```
 
 #### `optimize-modules(modules: Module[])`
-Optimize the modules.
+模块的优化。
 ```javascript
 compilation.plugin('optimize-modules', function(modules) {
-    //handle to the modules array during tree optimization
+    //树优化期间处理模块数组
 });
 ```
 
 ## `after-optimize-modules(modules: Module[])`
 
-Optimizing the modules has finished.
+模块优化已经结束。
 
 ## `optimize-chunks(chunks: Chunk[])`
 
-Optimize the chunks.
+块的优化。
 
 ```javascript
-//optimize chunks may be run several times in a compilation
+//这里一般只有一个块，除非你在配置中指定了多个入口
 
 compilation.plugin('optimize-chunks', function(chunks) {
-    //unless you specified multiple entries in your config
-    //there's only one chunk at this point
+    //这里一般只有一个块，除非你在配置中指定了多个入口
     chunks.forEach(function (chunk) {
-        //chunks have circular references to their modules
+        //块含有模块的循环引用
         chunk.modules.forEach(function (module){
-            //module.loaders, module.rawRequest, module.dependencies, etc.
+            //module.loaders, module.rawRequest, module.dependencies 等。
         });
     });
 });
@@ -88,75 +87,75 @@ compilation.plugin('optimize-chunks', function(chunks) {
 
 ## `after-optimize-chunks(chunks: Chunk[])`
 
-Optimizing the chunks has finished.
+块的优化已经结束。
 
 ## `revive-modules(modules: Module[], records)`
 
-Restore module info from records.
+从记录中重建模块信息。
 
 ## `optimize-module-order(modules: Module[])`
 
-Sort the modules in order of importance. The first is the most important module. It will get the smallest id.
+按模块重要性重新排序，第一个模块是最重要的模块，将得到最小的 id。
 
 ## `optimize-module-ids(modules: Module[])`
 
-Optimize the module ids.
+优化模块的 id。
 
 ## `after-optimize-module-ids(modules: Module[])`
 
-Optimizing the module ids has finished.
+模块 id 优化已经结束。
 
 ## `record-modules(modules: Module[], records)`
 
-Store module info to the records.
+存储模块信息到记录。
 
 ## `revive-chunks(chunks: Chunk[], records)`
 
-Restore chunk info from records.
+从记录中重建 chunk 的信息。
 
 ## `optimize-chunk-order(chunks: Chunk[])`
 
-Sort the chunks in order of importance. The first is the most important chunk. It will get the smallest id.
+按块重要性重新排序，第一个 chunk 是最重要的模块，将得到最小的 id。
 
 ## `optimize-chunk-ids(chunks: Chunk[])`
 
-Optimize the chunk ids.
+优化 chunk 的 id。
 
 ## `after-optimize-chunk-ids(chunks: Chunk[])`
 
-Optimizing the chunk ids has finished.
+chunk id 优化已经结束。
 
 ## `record-chunks(chunks: Chunk[], records)`
 
-Store chunk info to the records.
+存储块信息到记录。
 
 ## `before-hash`
 
-Before the compilation is hashed.
+编译开始哈希前。
 
 ## `after-hash`
 
-After the compilation is hashed.
+编译哈希后。
 
 ## `before-chunk-assets`
 
-Before creating the chunk assets.
+创建 chunk 生成资源前。
 
 ## `additional-chunk-assets(chunks: Chunk[])`
 
-Create additional assets for the chunks.
+为 chunk 创建附加的生成资源。
 
 ## `record(compilation, records)`
 
-Store info about the compilation to the records
+存储编译信息到记录。
 
 ## `optimize-chunk-assets(chunks: Chunk[])` async
 
-Optimize the assets for the chunks.
+优化 chunk 的生成资源。
 
-The assets are stored in `this.assets`, but not all of them are chunk assets. A `Chunk` has a property `files` which points to all files created by this chunk. The additional chunk assets are stored in `this.additionalChunkAssets`.
+生成资源被存储在 `this.assets`，但是它们并不都是块的生成资源。一个 `Chunk` 有一个 `files` 属性指出这个块创建的所有文件。附加的生成资源被存储在 `this.additionalChunkAssets` 中。
 
-Here's an example that simply adds a banner to each chunk.
+这是一个为每个 chunk 添加 banner 的例子。
 
 ```javascript
 compilation.plugin("optimize-chunk-assets", function(chunks, callback) {
@@ -171,7 +170,7 @@ compilation.plugin("optimize-chunk-assets", function(chunks, callback) {
 
 ## `after-optimize-chunk-assets(chunks: Chunk[])`
 
-The chunk assets have been optimized. Here's an example plugin from [@boopathi](https://github.com/boopathi) that outputs exactly what went into each chunk.
+块生成资源已经被优化。这里是一个来自 [@boopathi](https://github.com/boopathi) 的示例插件，详细的输出每个块里有什么。
 
 ```javascript
 var PrintChunksPlugin = function() {};
@@ -194,17 +193,17 @@ PrintChunksPlugin.prototype.apply = function(compiler) {
 
 ## `optimize-assets(assets: Object{name: Source})` async
 
-Optimize all assets.
+优化所有生成资源。
 
-The assets are stored in `this.assets`.
+生成资源被存放在 `this.assets`。
 
 ## `after-optimize-assets(assets: Object{name: Source})`
 
-The assets has been optimized.
+生成资源优化已经结束。
 
 ## `build-module(module)`
 
-Before a module build has started.
+一个模块构建开始前。
 
 ```javascript
 compilation.plugin('build-module', function(module){
@@ -215,7 +214,7 @@ compilation.plugin('build-module', function(module){
 
 ## `succeed-module(module)`
 
-A module has been built successfully.
+一个模块已经被成功构建。
 ```javascript
 compilation.plugin('succeed-module', function(module){
     console.log('succeed module');
@@ -225,7 +224,7 @@ compilation.plugin('succeed-module', function(module){
 
 ## `failed-module(module)`
 
-The module build has failed.
+一个模块构建失败。
 ```javascript
 compilation.plugin('failed-module', function(module){
     console.log('failed module');
@@ -235,11 +234,11 @@ compilation.plugin('failed-module', function(module){
 
 ## `module-asset(module, filename)`
 
-An asset from a module was added to the compilation.
+一个模块中的一个生成资源被加到编译中。
 
 ## `chunk-asset(chunk, filename)`
 
-An asset from a chunk was added to the compilation.
+一个 chunk 中的一个生成资源被加到编译中。
 
 ***
 

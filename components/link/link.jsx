@@ -6,7 +6,7 @@ if (__DEV__) {
   RRouter = require('react-router');
 }
 
-const Link = ({ to, ...props }) => {
+export default ({ to, ...props }) => {
   if (startsWith(to, 'http') || startsWith(to, '//')) {
     return <a href={to} target="_blank" {...props} />;
   }
@@ -17,5 +17,3 @@ const Link = ({ to, ...props }) => {
 
   return <a href={to} {...props} />;
 };
-
-export default Link;

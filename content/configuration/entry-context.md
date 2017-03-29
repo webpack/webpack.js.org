@@ -25,7 +25,7 @@ context: path.resolve(__dirname, "app")
 
 ## `entry`
 
-`string | [string] | object { <key>: string | [string] } | function: () => string`
+`string | [string] | object { <key>: string | [string] } | (function: () => string | [string] | object { <key>: string | [string] })`
 
 起点或是应用程序的起点入口。从这个起点开始，应用程序启动执行。如果传递一个数组，那么数组的每一项都会执行。
 
@@ -41,7 +41,10 @@ entry: {
 }
 ```
 
-动态入口。
+### 命名
+如果传入一个字符串或字符串数组，chunk 会被命名为 `main`。如果传入一个对象，则每个键(key)会是 chunk 的名称，该值描述了 chunk 的入口起点。
+
+### 动态入口
 
 ```js
 entry: () => './demo'
@@ -50,7 +53,7 @@ entry: () => './demo'
 或
 
 ```js
-entry: () => new Promise((resolve) => resolve('./demo'))
+entry: () => new Promise((resolve) => resolve(['./demo', './demo2']))
 ```
 
 当结合 [`output.library`](/configuration/output#output-library) 选项时：如果传入数组，则只导出最后一项。
