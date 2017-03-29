@@ -18,7 +18,7 @@ contributors:
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
 
-上述配置项被一个单独的配置项 `resolve.modules` 取代。详见 [resolving](/configuration/resolve)。
+这些选项被一个单独的选项 `resolve.modules` 取代。更多用法请查看 [解析](/configuration/resolve)。
 
 ``` diff
   resolve: {
@@ -32,15 +32,15 @@ contributors:
 
 ## `resolve.extensions`
 
-此配置项不再需要传一个空字符串。此行为被迁移到 `resolve.enforceExtension`。详见 [resolving](/configuration/resolve)。
+此选项不再需要传一个空字符串。此行为被迁移到 `resolve.enforceExtension`。更多用法请查看[解析](/configuration/resolve)。
 
 ## `resolve.*`
 
-这里更改了几个 API。由于不常用，不在这里详细列出。详见 [resolving](/configuration/resolve)。
+这里更改了几个 API。由于不常用，不在这里详细列出。更多用法请查看[解析](/configuration/resolve)。
 
-## `module.loaders` 改成了 `module.rules`
+## `module.loaders` 改为 `module.rules`
 
-旧的 loader 配置被更强大的 rules 系统取代，后者允许配置 loader 以及其他更多项。为了兼容旧版，`module.loaders` 语法被保留，旧的属性名依然可以被解析。新的命名约定更易于理解并且是升级配置使用 `module.rules` 的好理由。
+旧的 loader 配置被更强大的 rules 系统取代，后者允许配置 loader 以及其他更多选项。为了兼容旧版，`module.loaders` 语法仍然有效，旧的属性名依然可以被解析。新的命名约定更易于理解，并且是升级配置使用 `module.rules` 的好理由。
 
 ``` diff
   module: {
@@ -76,8 +76,8 @@ contributors:
 
 ## 链式 loader
 
-就像在 webpack 1 中，loader 可以链式调用，上一个 loader 的输出被作为输入传给下一个 loader。使用 [rule.use](/configuration/module#rule-use) 配置项，`use` 可以设置为一个 loader 数组。
-在 webpack 1 中，loader 通常被用 `!` 连写。这一写法在新版中只在使用旧的 `module.loaders` 时有效。
+就像在 webpack 1 中，loader 可以链式调用，上一个 loader 的输出被作为输入传给下一个 loader。使用 [rule.use](/configuration/module#rule-use) 配置选项，`use` 可以设置为一个 loader 数组。
+在 webpack 1 中，loader 通常被用 `!` 连写。这一写法在 webpack 2 中只在使用旧的选项 `module.loaders` 时才有效。
 
 ``` diff
   module: {
@@ -94,9 +94,9 @@ contributors:
   }
 ```
 
-## 取消了在模块名中自动添加 `-loader`  后缀
+## 取消「在模块名中自动添加 `-loader` 后缀」
 
-现在在指定 loader 的时候不能再省略 -loader 后缀了:
+在引用 loader 时，不能再省略 `-loader` 后缀了:
 
 ``` diff
   module: {
@@ -115,7 +115,7 @@ contributors:
   }
 ```
 
-你仍然可以启用这一旧行为，方法是通过配置 `resolveLoader.moduleExtensions` 项，但是我们不推荐这么做。
+你仍然可以通过配置 `resolveLoader.moduleExtensions` 配置选项，启用这一旧有行为，但是我们不推荐这么做。
 
 ``` diff
 + resolveLoader: {
@@ -123,11 +123,11 @@ contributors:
 + }
 ```
 
-了解这一改变背后的原因，请参阅 [#2986](https://github.com/webpack/webpack/issues/2986)。
+了解这一改变背后的原因，请查看 [#2986](https://github.com/webpack/webpack/issues/2986)。
 
 ## `json-loader` 不再需要手动添加
 
-如果没有为 JSON 文件配置 loader，webpack 将自动尝试通过 加载 [`json-loader`](https://github.com/webpack/json-loader) JSON 文件。
+如果没有为 JSON 文件配置 loader，webpack 将自动尝试通过 [`json-loader`](https://github.com/webpack/json-loader) 加载 JSON 文件。
 
 ``` diff
   module: {
@@ -140,11 +140,11 @@ contributors:
   }
 ```
 
-[我们决定这么做](https://github.com/webpack/webpack/issues/3363) 以消除 webpack、 node.js 和 browserify 之间的环境差异。
+[我们决定这么做](https://github.com/webpack/webpack/issues/3363)是为了消除 webpack、 node.js 和 browserify 之间的环境差异。
 
 ## loader 默认的 resolve 配置是相对于 context 的
 
-在 webpack 1 中，loader 默认配置下 resolve 相对于被匹配的文件。而在 webpack 2 中默认配置的 resolve 相对于 `context` 配置项。
+在 webpack 1 中，loader 默认配置下 resolve 相对于被匹配的文件。而在 webpack 2 中默认配置的 resolve 相对于 `context` 选项。
 
 这解决了一些问题，比如使用 `npm link` 或引用 `context` 之外的模块时导致重复载入。
 
@@ -182,7 +182,7 @@ contributors:
 
 ## `UglifyJsPlugin` sourceMap
 
-`UglifyJsPlugin` 的 `sourceMap` 配置项现在默认为 `false` 而不是 `true`。
+`UglifyJsPlugin` 的 `sourceMap` 选项现在默认为 `false` 而不是 `true`。
 这意味着如果你在压缩代码时启用了 source map，或者想要让 uglifyjs 的警告能够对应到正确的代码行，你需要将 `UglifyJsPlugin` 的 `sourceMap` 设为 `true`。
 
 ``` diff
@@ -196,7 +196,7 @@ contributors:
 
 ## `UglifyJsPlugin` warnings
 
-`UglifyJsPlugin` 的 `compress.warnings` 配置项现在默认为 `false` 而不是 `true`。
+`UglifyJsPlugin` 的 `compress.warnings` 选项现在默认为 `false` 而不是 `true`。
 这意味着如果你想要看到 uglifyjs 的警告信息，你需要将 `compress.warnings` 设为 `true`。
 
 ``` diff
@@ -212,7 +212,7 @@ contributors:
 
 ## `UglifyJsPlugin` 压缩 loaders
 
-`UglifyJsPlugin` 不再压缩 loaders。在未来很长一段时间里，需要通过设置 `minimize:true` 来压缩 loaders。参考 loader 文档里的相关配置项。
+`UglifyJsPlugin` 不再压缩 loaders。在未来很长一段时间里，需要通过设置 `minimize:true` 来压缩 loaders。参考 loader 文档里的相关选项。
 
 loaders 的压缩模式将在 webpack 3 或更高的版本中被取消。
 
@@ -404,7 +404,7 @@ module.exports = {
 
 ## `debug`
 
-在 webpack 1 中 `debug` 配置项切换 loaders 到 debug 模式。在未来很长一段时间里，这将需要通过 loader 配置项传递。详见 loader 文档的相关选项。
+在 webpack 1 中 `debug` 选项切换 loaders 到 debug 模式。在未来很长一段时间里，这将需要通过 loader 选项传递。详见 loader 文档的相关选项。
 
 loaders 的 debug 模式将在 webpack 3 或后续版本中取消。
 
@@ -589,8 +589,8 @@ Loaders 现在默认可被缓存。Loaders 如果不想被缓存，需要选择�
 
 ### 复合 options
 
-webpack 1 只支持能够 `JSON.stringify` 的对象作为配置项。
-webpack 2 现在支持任意 JS 对象作为 loader 配置项。
+webpack 1 只支持能够 `JSON.stringify` 的对象作为选项。
+webpack 2 现在支持任意 JS 对象作为 loader 选项。
 
 使用复合 options 只有一个附加条件。你需要在 options 对象上添加一个 `ident`，让它能够被其他 loader 引用。
 
