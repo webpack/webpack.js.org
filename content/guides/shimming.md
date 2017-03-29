@@ -41,6 +41,20 @@ module.exports = {
 };
 ```
 
+This plugin is also capable of providing only a certain export of a module by configuring it with an array path using this format:  `[module, child, ...children?]`
+The following configuration will correctly import function `__assign` from TypeScript's `tslib` package, and provide it wherever it's invoked.
+
+```javascript
+module.exports = {
+  plugins: [
+    new webpack.ProvidePlugin({
+      __assign: ['tslib', '__assign'],
+      __extends: ['tslib', '__extends'],
+    })
+  ]
+};
+```
+
 ## `imports-loader`
 
 [`imports-loader`](/loaders/imports-loader/)  在引用了之前遗留模块的代码中，插入必需的全局变量。

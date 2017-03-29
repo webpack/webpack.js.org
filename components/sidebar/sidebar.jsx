@@ -35,13 +35,12 @@ export default class Sidebar extends Component {
           height={ availableHeight } />
 
         <div className="sidebar__inner">
-          <h3 className="sidebar-item__version">Version 2.2</h3>
+          <img src="https://img.shields.io/badge/webpack-v2.2.1-blue.svg" />
 
           <SidebarItem
             url={ `/${sectionName}` }
             title="介绍"
-            currentPage= { currentPage }
-          />
+            currentPage= { currentPage } />
 
           {
             pages.map(({ url, title, anchors }, i) =>

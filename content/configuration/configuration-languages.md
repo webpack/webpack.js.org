@@ -1,6 +1,6 @@
 ---
-title: 使用替代 Javascript 的语言进行配置(Configuration with Javascript Alternatives)
-sort: 3
+title: 使用不同语言进行配置(Configuration Languages)
+sort: 2
 contributors:
   - sokra
   - skipjack

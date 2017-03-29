@@ -50,8 +50,11 @@ webpack <entry> [<entry>] <output>
 
 ```bash
 webpack src/index.js dist/bundle.js
-	打包代码，入口为 `index.js`，输出文件夹路径为 `dist`，文件名为 `bundle.js`
+```
 
+打包源码，入口为 `index.js`，并且输出文件的路径为 `dist`，文件名为 `bundle.js`
+
+```bash
 	| Asset     | Size    | Chunks      | Chunk Names |
 	|-----------|---------|-------------|-------------|
 	| bundle.js | 1.54 kB | 0 [emitted] | index       |
@@ -61,8 +64,11 @@ webpack src/index.js dist/bundle.js
 
 ```bash
 webpack index=./src/index.js entry2=./src/index2.js dist/bundle.js
-	以多个入口的方式打包文件
+```
 
+以多个入口的方式打包文件
+
+```bash
 	| Asset     | Size    | Chunks        | Chunk Names   |
 	|-----------|---------|---------------|---------------|
 	| bundle.js | 1.55 kB | 0,1 [emitted] | index, entry2 |

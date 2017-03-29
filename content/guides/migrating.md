@@ -243,10 +243,14 @@ loaders 的压缩模式将在 webpack 3 或更高的版本中被取消。
 
 ## `OccurrenceOrderPlugin` 被默认加载
 
-我们不再需要在配置里指定它：
+ `OccurrenceOrderPlugin` 现在默认启用，并已重命名（在 webpack 1 中为 `OccurenceOrderPlugin`）。
+因此，请确保从您的配置中删除该插件：
 
 ``` diff
   plugins: [
+    // webpack 1
+-   new webpack.optimize.OccurenceOrderPlugin()
+    // webpack 2
 -   new webpack.optimize.OccurrenceOrderPlugin()
   ]
 ```

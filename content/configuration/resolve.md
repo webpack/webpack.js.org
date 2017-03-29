@@ -242,9 +242,9 @@ W> 修改缓存路径可能在极少数情况下导致失败。
 
 ```js
 {
-    modules: ["web_loaders", "web_modules", "node_loaders", "node_modules"],
-    extensions: [".webpack-loader.js", ".web-loader.js", ".loader.js", ".js"],
-    packageMains: ["webpackLoader", "webLoader", "loader", "main"]
+    modules: ["node_modules"],
+    extensions: [".js", ".json"],
+    mainFields: ["loader", "main"]
 }
 ```
 

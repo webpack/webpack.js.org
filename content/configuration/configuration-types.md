@@ -1,6 +1,6 @@
 ---
 title: 多种配置类型
-sort: 2
+sort: 3
 contributors:
   - sokra
   - skipjack
