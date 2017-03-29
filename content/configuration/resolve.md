@@ -242,9 +242,9 @@ This set of options is identical to the `resolve` property set above, but is use
 
 ```js
 {
-    modules: ["web_loaders", "web_modules", "node_loaders", "node_modules"],
-    extensions: [".webpack-loader.js", ".web-loader.js", ".loader.js", ".js"],
-    packageMains: ["webpackLoader", "webLoader", "loader", "main"]
+    modules: ["node_modules"],
+    extensions: [".js", ".json"],
+    mainFields: ["loader", "main"]
 }
 ```
 

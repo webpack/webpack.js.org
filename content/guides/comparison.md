@@ -39,7 +39,7 @@ webpack is not the only module bundler out there. If you are choosing between us
 | Replacement for browser | `web_modules`, `.web.js`, package.json field, alias config option | alias option | package.json field, alias option | package.json, alias option | no | |
 | Requirable files | file system | **web** | file system | through plugins | file system or through plugins | file system |
 | Runtime overhead | **243B + 20B per module + 4B per dependency** | 14.7kB + 0B per module + (3B + X) per dependency | 415B + 25B per module + (6B + 2X) per dependency | 5.5kB for self-executing bundles, 38kB for full loader and polyfill, 0 plain modules, 293B CJS, 139B ES2015 System.register before gzip | **none for ES2015 modules** (other formats may have) | |
-| Watch mode | yes | not required | yes | not needed in dev | no | yes |
+| Watch mode | yes | not required | [watchify](https://github.com/substack/watchify) | not needed in dev | [rollup-watch](https://github.com/rollup/rollup-watch) | yes |
 
 
 ♦ in production mode (opposite in development mode)
