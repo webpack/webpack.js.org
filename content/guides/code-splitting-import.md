@@ -31,9 +31,9 @@ T> 记住`import()`路径不可以是完全动态的（比如`import(Math.random
 
 W> `import()` 的内部依赖于 [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)。
 
-如果你想在老版本的浏览器上使用`import()`，请记得使用polyfill比如[es6-promise](https://github.com/stefanpenner/es6-promise) 或者 [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
+如果你想在老版本的浏览器上使用`import()`，请记得使用polyfill，比如[es6-promise](https://github.com/stefanpenner/es6-promise) 或者 [promise-polyfill](https://github.com/taylorhakes/promise-polyfill)。
 
-在应用的进入点:
+在应用的入口:
 ```javascript
 import Es6Promise from 'es6-promise';
 Es6Promise.polyfill();
@@ -144,9 +144,9 @@ module.exports = {
 
 ## `import` 取代了 `require.ensure`?
 
-好消息：载入chunk失败时，我们可以处理抛出的错误了，因为它们是基于`Promise`的
+好消息：载入chunk失败时，我们可以处理抛出的错误了，因为它们是基于`Promise`的。
 
-坏消息：`require.ensure`允许通过赋值第三个参数来简单地给chunk命名，但是`import` API 并没有提供这样的能力。如果你希望保持这个特性，你可以继续使用`require.ensure`。
+坏消息：`require.ensure`允许通过赋值第三个参数（可选），来简单地给chunk命名，但是`import` API 并没有提供这样的能力。如果你希望保持这个特性，你可以继续使用`require.ensure`。
 
 ```javascript
 require.ensure([], function(require) {
