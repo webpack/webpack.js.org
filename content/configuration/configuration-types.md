@@ -1,6 +1,6 @@
 ---
 title: Configuration Types
-sort: 2
+sort: 3
 contributors:
   - sokra
   - skipjack
