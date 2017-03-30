@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/466abff1220d53899832.css" rel="stylesheet">
+      <link href="/fc0695a9cc5423ce5eee.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -25,7 +25,7 @@
 <p>Simply add configuration object to <code>module.loaders</code> like this.</p>
 <pre><code class="lang-javascript">    <span class="token punctuation">{</span>
         test<span class="token punctuation">:</span> <span class="token regex">/\.svg$/</span><span class="token punctuation">,</span>
-        loader<span class="token punctuation">:</span> <span class="token string">&apos;svg-inline&apos;</span>
+        loader<span class="token punctuation">:</span> <span class="token string">&apos;svg-inline-loader&apos;</span>
     <span class="token punctuation">}</span>
 </code></pre>
 <p>warning: You should configure this loader only once via <code>module.loaders</code> or <code>require(&apos;!...&apos;)</code>. See <a href="https://github.com/webpack-contrib/svg-inline-loader/issues/15">#15</a> for detail.</p>
@@ -56,19 +56,19 @@
 <p>default: <code>idPrefix: false</code></p>
 <h2 class="header"><a class="anchor" href="#example-usage" id="example-usage"></a><span class="text">Example Usage</span><a class="icon-link" href="#example-usage"></a></h2>
 <pre><code class="lang-js"><span class="token comment" spellcheck="true">// Using default hashed prefix (__[hash:base64:7]__)</span>
-<span class="token keyword">var</span> logoTwo <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;svg-inline?classPrefix!./logo_two.svg&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> logoTwo <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;svg-inline-loader?classPrefix!./logo_two.svg&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">// Using custom string</span>
-<span class="token keyword">var</span> logoOne <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;svg-inline?classPrefix=my-prefix-!./logo_one.svg&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> logoOne <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;svg-inline-loader?classPrefix=my-prefix-!./logo_one.svg&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">// Using custom string and hash</span>
-<span class="token keyword">var</span> logoThree <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;svg-inline?classPrefix=__prefix-[sha512:hash:hex:5]__!./logo_three.svg&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> logoThree <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;svg-inline-loader?classPrefix=__prefix-[sha512:hash:hex:5]__!./logo_three.svg&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>See <a href="https://github.com/webpack/loader-utils#interpolatename">loader-utils</a> for hash options.</p>
 <p>Preferred usage is via a <code>module.loaders</code>:</p>
 <pre><code class="lang-js">    <span class="token punctuation">{</span>
         test<span class="token punctuation">:</span> <span class="token regex">/\.svg$/</span><span class="token punctuation">,</span>
-        loader<span class="token punctuation">:</span> <span class="token string">&apos;svg-inline?classPrefix&apos;</span>
+        loader<span class="token punctuation">:</span> <span class="token string">&apos;svg-inline-loader?classPrefix&apos;</span>
     <span class="token punctuation">}</span>
 </code></pre>
 <h2 class="header"><a class="anchor" href="#maintainers" id="maintainers"></a><span class="text">Maintainers</span><a class="icon-link" href="#maintainers"></a></h2>
