@@ -28,10 +28,10 @@ npm install --save-dev babel-core babel-loader style-loader css-loader postcss-l
   babel-preset-es2015 babel-preset-react webpack-dev-server webpack
 ```
 
-In addition you'll need to install React, ReactDOM and `react-hot-loader`. Make sure to use the v3-beta of this package
+In addition you'll need to install React, ReactDOM and `react-hot-loader` (make sure to use the `next` release of this package)
 
 ```bash
-npm install --save react react-dom react-hot-loader@3.0.0-beta.6
+npm install --save react react-dom react-hot-loader@next
 ```
 
 
