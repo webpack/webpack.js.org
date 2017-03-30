@@ -5,6 +5,7 @@ contributors:
   - jhnns
   - sararubin
   - aiduryagin
+  - AlexanderTserkovniy
 ---
 
 As explained in detail on the [concept page](/concepts/hot-module-replacement), Hot Module Replacement (HMR) exchanges, adds, or removes modules while an application is running without a page reload.
@@ -309,3 +310,24 @@ dev-server.js:27 [HMR] App is up to date.
 
 Note that HMR specifies the paths of the updated modules.
 That's because we're using `NamedModulesPlugin`.
+
+### Production
+
+Minimal steps in order to get rid of HMR on production. As webpack sets `NODE_ENV` for working files only, we need to specify it before webpack for production is invoked.
+
+Add in `package.json` next script:
+```json
+"scripts": {
+  "build": "NODE_ENV=production webpack -p"
+}
+```
+
+Add in webpack config next code:
+```js
+if (process.env.NODE_ENV === 'production') {
+  module.exports.plugins = []; // remove Hot Module Replacement from plugins
+  module.exports.entry = resolve(__dirname, 'index.js'); // remove Hot Module Replacement from entry
+}
+```
+
+Enjoy empty from errors console.
