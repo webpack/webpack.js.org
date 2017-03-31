@@ -36,7 +36,7 @@ module.exports = {
 
 As a result, the CSS is bundled along with your JavaScript.
 
-This has the disadvantage that, you will not be able to utilize the browser's ability to load CSS asynchronously and parallel. Instead, your page will have to wait until your whole JavaScript bundle is loaded, to style itself.
+This has the disadvantage that you will not be able to utilize the browser's ability to load CSS asynchronously and parallel. Instead, your page will have to wait until your whole JavaScript bundle is loaded, to style itself.
 
 webpack can help with this problem by bundling the CSS separately using the `ExtractTextWebpackPlugin`.
 

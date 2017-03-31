@@ -1,6 +1,6 @@
 ---
-title: Configuration with Javascript Alternatives
-sort: 3
+title: Configuration Languages
+sort: 2
 contributors:
   - sokra
   - skipjack

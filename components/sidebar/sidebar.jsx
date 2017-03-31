@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SidebarItem from '../sidebar-item/sidebar-item';
+import Sponsors from '../sponsors/sponsors';
 
 export default class Sidebar extends Component {
   constructor(props) {
@@ -8,13 +9,14 @@ export default class Sidebar extends Component {
     this.state = {
       fixed: false,
       availableHeight: null,
-      maxWidth: null
+      maxWidth: null,
+      adDistance: null
     };
   }
 
   render() {
     let { sectionName, pages, currentPage } = this.props;
-    let { fixed, availableHeight, maxWidth } = this.state;
+    let { fixed, availableHeight, maxWidth, adDistance } = this.state;
     let isGuides = sectionName === 'guides';
 
     return (
@@ -28,14 +30,17 @@ export default class Sidebar extends Component {
           maxHeight: availableHeight
         }}>
 
+        <Sponsors
+          distanceFromTop={ adDistance }
+          height={ availableHeight } />
+
         <div className="sidebar__inner">
-          <h3 className="sidebar-item__version">Version 2.2</h3>
+          <img src="https://img.shields.io/badge/webpack-v2.2.1-blue.svg" />
 
           <SidebarItem
             url={ `/${sectionName}` }
             title="Introduction"
-            currentPage= { currentPage }
-          />
+            currentPage= { currentPage } />
 
           {
             pages.map(({ url, title, anchors }, i) =>
@@ -56,6 +61,11 @@ export default class Sidebar extends Component {
   }
 
   componentDidMount() {
+    setTimeout(
+      this._recalculate.bind(this),
+      250
+    );
+    
     document.addEventListener(
       'scroll', 
       this._recalculate.bind(this)
@@ -78,7 +88,7 @@ export default class Sidebar extends Component {
     let { scrollHeight } = document.body;
     let { offsetHeight: sidebarHeight } = this._container;
     let { offsetWidth: parentWidth, offsetHeight: parentHeight } = this._container.parentNode;
-    let headerHeight = document.querySelector('header').offsetHeight;
+    let headerHeight = document.querySelector('header').offsetHeight + document.querySelector('.notification-bar').offsetHeight;
     let footerHeight = document.querySelector('footer').offsetHeight;
     let distToBottom = scrollHeight - scrollY - innerHeight;
 
@@ -89,7 +99,8 @@ export default class Sidebar extends Component {
     this.setState({ 
       fixed: scrollY >= headerHeight && sidebarHeight < parentHeight,
       availableHeight: innerHeight - headerSpace - footerSpace,
-      maxWidth: parentWidth
+      maxWidth: parentWidth,
+      adDistance: scrollY < headerHeight ? headerHeight - scrollY : 0
     });
   }
 }
