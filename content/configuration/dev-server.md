@@ -10,7 +10,7 @@ contributors:
 
 webpack-dev-server can be used to quickly develop an application. See the ["How to Develop?"](/guides/development) to get started.
 
-This page describes the options that effect the behavior of webpack-dev-server (short: dev-server).
+This page describes the options that affect the behavior of webpack-dev-server (short: dev-server).
 
 T> Options that are compatible with [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) have 🔑 next to them.
 
@@ -132,7 +132,7 @@ headers: {
 
 `boolean` `object`
 
-When using the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History), the `index.html` page will likely have be served in place of any `404` responses. Enable this by passing:
+When using the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History), the `index.html` page will likely have to be served in place of any `404` responses. Enable this by passing:
 
 ```js
 historyApiFallback: true
@@ -182,7 +182,7 @@ Enable webpack's Hot Module Replacement feature:
 hot: true
 ```
 
-?> Add various other steps needed for this to work. (From my experience, and the current docs it looks like other steps are needed here - not like in the cmd line where it's just a flag)
+T> Note that you must also include a `new webpack.HotModuleReplacementPlugin()` to fully enable HMR. See the [HMR concepts page](/concepts/hot-module-replacement) for more information.
 
 
 ## `devServer.hotOnly` - CLI only

@@ -5,40 +5,39 @@ contributors:
   - jhnns
   - sararubin
   - aiduryagin
+  - rohannair
 ---
 
-As explained in detail on the [concept page](/concepts/hot-module-replacement), Hot Module Replacement (HMR) exchanges, adds, or removes modules while an application is running without a page reload.
-HMR is particularly useful in applications using a single state tree,
+As explained in detail on the [concept page](/concepts/hot-module-replacement), Hot Module Replacement (HMR) exchanges, adds, or removes modules while an application is running, without a page reload.
+HMR is particularly useful in applications using a single state tree
 since components are "dumb" and will reflect the latest application state, even
 after their source is changed and they are replaced.
 
-The approach described below uses Babel and
-React, but these tools are not necessary for HMR to work.
+The approach described below specifically uses Babel and React, but HMR can be done in a variety of other ways, using other tools.
 
-T> If you'd like to see examples of other approaches, please request them or better yet, [open up a PR with an addition](https://github.com/webpack/webpack.js.org).
+T> If you'd like to see examples of other approaches please request them, or better yet [open up a PR with an addition](https://github.com/webpack/webpack.js.org).
 
 ## Project Config
 
-This guide will be demonstrating the use of HMR with Babel,
-React, and PostCSS (using CSS Modules).
-To follow along, please add the following dependencies to your `package.json`:
+This guide will be demonstrating HMR using Babel on a React app, with PostCSS (using CSS Modules).
 
-To use HMR, you'll need the following dependencies:
+First, install the following dev dependencies:
 
 ```bash
-npm install --save-dev babel-core@6.13.2 babel-loader@6.2.4 babel-preset-es2015@6.13.2 babel-preset-react@6.11.1 babel-preset-stage-2@6.13.0 css-loader@0.23.1 postcss-loader@0.9.1 react-hot-loader@3.0.0-beta.6 style-loader@0.13.1 webpack@2.1.0-beta.25 webpack-dev-server@2.1.0-beta.0
+npm install --save-dev babel-core babel-loader style-loader css-loader postcss-loader /
+  babel-preset-es2015 babel-preset-react webpack-dev-server webpack
 ```
 
-In addition, for the purposes of this walkthrough, you'll need:
+In addition you'll need to install React, ReactDOM and `react-hot-loader` (make sure to use the `next` release of this package)
 
 ```bash
-npm install --save react@15.3.0 react-dom@15.3.0
+npm install --save react react-dom react-hot-loader@next
 ```
 
 
 ### Babel Config
 
-Your `.babelrc` file should look like the following:
+Create a `.babelrc` with the following options:
 
 __.babelrc__
 
@@ -47,11 +46,6 @@ __.babelrc__
   "presets": [
     ["es2015", {"modules": false}],
     // webpack understands the native import syntax, and uses it for tree shaking
-
-    "stage-2",
-    // Specifies what level of language features to activate.
-    // Stage 2 is "draft", 4 is finished, 0 is strawman.
-    // See https://tc39.github.io/process-document/
 
     "react"
     // Transpile React components to JavaScript
@@ -63,11 +57,27 @@ __.babelrc__
 }
 ```
 
-### Using webpack with a config
+We need to use ES2015 modules to make HMR work properly. To do this, set the `module` option to false in our es2015 preset. We can do something similar using `babel-preset-env`:
 
-While there're many ways of setting up your webpack config - via API,
-via multiple or single config files, etc - here is the basic information
-you should have available.
+```json
+["env", {"modules": false}]
+```
+
+Setting Babel's module plugin to false helps fix many issues (see [Migrating from v1 to v2](/guides/migrating/#mixing-es2015-with-amd-and-commonjs) and [webpack-tree-shaking](http://www.2ality.com/2015/12/webpack-tree-shaking.html)).
+
+Note: Node.js doesn't support ES2015 modules yet and using ES2015 modules in your webpack 2 configuration file will cause an [issue](https://github.com/webpack/webpack.js.org/issues/154).
+
+To work around this you will need two `.babelrc` file to transpile the configuration and app code separately: 
+1. in the project root directory with `"presets": ["es2015"]`
+2. in the source directory for app code
+
+### Webpack configuration
+
+For this example, we will use a single webpack config file, with the following assumptions:
+* all app source code lives inside the `<root>/src` folder
+* the entry point to the app is at `/src/index.js`
+
+T> Please review the [webpack-dev-server options](/configuration/dev-server) and the [concept pages](/concepts) to familiarize yourself with the concepts below
 
 __webpack.config.js__
 
@@ -76,6 +86,8 @@ const { resolve } = require('path');
 const webpack = require('webpack');
 
 module.exports = {
+  context: resolve(__dirname, 'src'),
+
   entry: [
     'react-hot-loader/patch',
     // activate HMR for React
@@ -101,8 +113,6 @@ module.exports = {
     // necessary for HMR to know where to load the hot update chunks
   },
 
-  context: resolve(__dirname, 'src'),
-
   devtool: 'inline-source-map',
 
   devServer: {
@@ -119,19 +129,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        use: [
-          'babel-loader',
-        ],
+        test: /\.jsx?$/,
+        use: [ 'babel-loader', ],
         exclude: /node_modules/
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader?modules',
-          'postcss-loader',
-        ],
+        use: [ 'style-loader', 'css-loader?modules', 'postcss-loader', ],
       },
     ],
   },
@@ -146,29 +150,10 @@ module.exports = {
 };
 ```
 
-There's a lot going on above, and not all of it is related to HMR.
-You may benefit from reading the
-[webpack-dev-server options](/configuration/dev-server) and the [concept pages](/concepts).
 
-The basic assumption here is that your JavaScript entry is located at `./src/index.js`
-and that you're using CSS Modules for your styling.
+### App code
 
-Please see the comments inline that explain each portion of the config. The main
-areas to look are the `devServer` key and the `entry` key. The `HotModuleReplacementPlugin` is
-also necessary to include in the `plugins` array.
-
-There are two modules included here for the purposes of this guide:
-
-- The `react-hot-loader` addition to the entry, as noted above, is necessary to enable
-HMR with React components.
-
-- The `NamedModulesPlugin` is a useful addition
-to better understand what modules are being updated when using HMR.
-
-
-### Code
-
-In this guide, we're using the following files:
+Let's set up our React app:
 
 __src/index.js__
 
@@ -219,32 +204,20 @@ __src/components/App.css__
 
 ```css
 .app {
-    text-size-adjust: none;
-    font-family: helvetica, arial, sans-serif;
-    line-height: 200%;
-    padding: 6px 20px 30px;
+  text-size-adjust: none;
+  font-family: helvetica, arial, sans-serif;
+  line-height: 200%;
+  padding: 6px 20px 30px;
 }
 ```
 
-The important thing to note in the code above is the `module` reference.
+Important to note:
 
-1. webpack will expose `module.hot` to our code since we set `devServer: { hot: true }`;
+1. Setting set `devServer: { hot: true }` causes webpack will expose the `module.hot` API to our code
 
-2. Thus we can use the `module.hot` hook to enable HMR for specific resources (Here's `App.js`). The most important API here is `module.hot.accept`, which specifies how to handle changes to specific dependencies.
+2. We use the `module.hot` hook to enable HMR for specific resources (`App.js` in this example). The most important property here is `module.hot.accept`, which specifies how to handle changes to specific dependencies.
 
-3. Note that because webpack 2 has built-in support for ES2015 modules, you won't need to re-require your root component in `module.hot.accept`. To make this work, you need to change the Babel ES2015 preset in `.babelrc` to be:
-
-  ```
-  ["es2015", {"modules": false}]
-  ```
-
-  like what we did in [Babel Config](#babel-config). Note that disabling Babel's module plugin is not only necessary for HMR. If you don't disable it you'll run into many other issues (see [Migrating from v1 to v2](/guides/migrating/#mixing-es2015-with-amd-and-commonjs) and [webpack-tree-shaking](http://www.2ality.com/2015/12/webpack-tree-shaking.html)).
-
-4. Note that if you're using ES2015 modules in your webpack 2 configuration file, and you change your `.babelrc` file in #3 above, you either need to use `require` or create two `.babelrc` files (issue [here](https://github.com/webpack/webpack.js.org/issues/154)):
-  * One in the project root directory with `"presets": ["es2015"]`
-  * One in the home directory for webpack to build. For this example, in `src/`.
-
-So in this case, `module.hot.accept` will fire the `render` method whenever `src/components/App.js` or its dependencies are changed - which means the `render` method will also fire when the `App.css` is changed, since `App.css` is included in `App.js`.
+3. Whenever `src/components/App.js` or its dependencies are changed `module.hot.accept` will fire the `render` method. The `render` method will even fire when `App.css` is changed because it is included in `App.js`.
 
 __dist/index.html__
 
@@ -262,12 +235,11 @@ __dist/index.html__
 </html>
 ```
 
-T> This needs to be placed inside of `dist` in your project root. `webpack-dev-server` will not run without it.
+We need to put the index.html file in our `dist` folder because `webpack-dev-server` will not run without it.
 
-### Using webpack with npm
+### Putting it all together
 
-Finally, we need to start up `webpack-dev-server` to bundle our code and see HMR in action.
-Adjust `package.json` like this:
+Finally, lets add a start task to `package.json`, that calls the `webpack-dev-server` binary.
 
 __package.json__
 
@@ -281,17 +253,14 @@ __package.json__
 }
 ```
 
-Run `npm start`, open up your browser to `http://localhost:8080`,
-and you should see the following entries printed in your console.log:
-
+When we run `npm start`, it will launch the webpack dev server, causing our code to be transpiled by Babel, and bundled. Open a browser to `http://localhost:8080`, and check the JS console for logs similar to:
 ```bash
 dev-server.js:49[HMR] Waiting for update signal from WDS…
 only-dev-server.js:74[HMR] Waiting for update signal from WDS…
 client?c7c8:24 [WDS] Hot Module Replacement enabled.
 ```
 
-Go ahead and edit and save your `App.js` file.
-You should see something like the following in your console.log:
+When you edit and save your `App.js` file, you should see something like the following in the console, and the App should update with changes.
 
 ```bash
 [WDS] App updated. Recompiling…
@@ -302,5 +271,4 @@ log-apply-result.js:22 [HMR]  - ./components/App.js
 dev-server.js:27 [HMR] App is up to date.
 ```
 
-Note that HMR specifies the paths of the updated modules.
-That's because we're using `NamedModulesPlugin`.
+Note that HMR specifies the paths of the updated modules because we're using `NamedModulesPlugin`.

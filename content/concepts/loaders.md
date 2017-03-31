@@ -8,9 +8,10 @@ contributors:
   - gangachris
   - TheLarkInn
   - simon04
+  - jhnns
 ---
 
-Loaders are transformations that are applied on a resource file of your application. They are functions (running in Node.js) that take the source of a resource file as the parameter and return the new source.
+Loaders are transformations that are applied on the source code of a module. They allow you to preprocess files as you `require()` or “load” them. Thus, loaders are kind of like “tasks” in other build tools, and provide a powerful way to handle front-end build steps. Loaders can transform files from a different language (like TypeScript) to JavaScript, or inline images as data URLs. Loaders even allow you to do things like `require()` CSS files right in your JavaScript!
 
 ## Example
 
@@ -121,7 +122,7 @@ functions (loaders). Users now have more flexibility to include fine-grained log
 
 ## Resolving Loaders
 
-Loaders follow the standard [module resolution](/concepts/module-resolution/). In most cases you will be loaders from the [module path](/concepts/module-resolution/#module-paths) (think `npm install`, `node_modules`).
+Loaders follow the standard [module resolution](/concepts/module-resolution/). In most cases it will be loaders from the [module path](/concepts/module-resolution/#module-paths) (think `npm install`, `node_modules`).
 
 [How to write a loader?](/development/how-to-write-a-loader) A loader module is expected to export a function and to be written in Node.js compatible JavaScript. In the common case you manage loaders with npm, but you can also have loaders as files in your app.
 

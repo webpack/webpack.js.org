@@ -21,7 +21,7 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 ## Options
 
 ``` js-with-links-with-details
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   // click on the name of the option to get to the detailed documentation
@@ -188,7 +188,7 @@ module.exports = {
       // matches only if all conditions are matched
 
       { [resource](/configuration/module#rule-resource): { [or](/configuration/module#condition): [ /* conditions */ ] } },
-      { [resource](/configuration/module#rule-resource): [ /* conditions */ ] }
+      { [resource](/configuration/module#rule-resource): [ /* conditions */ ] },
       // matches if any condition is matched (default for arrays)
 
       { [resource](/configuration/module#rule-resource): { [not](/configuration/module#condition): /* condition */ } }
@@ -287,7 +287,7 @@ module.exports = {
     [unsafeCache](/configuration/resolve#resolve-unsafecache): {},
     // enables caching for resolved requests
     // this is unsafe as folder structure may change
-    // but preformance improvement is really big
+    // but performance improvement is really big
 
     [cachePredicate](/configuration/resolve#resolve-cachepredicate): (path, request) => true,
     // predicate function which selects requests for caching
