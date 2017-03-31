@@ -3,6 +3,7 @@ title: Code Splitting - Using import()
 sort: 33
 contributors:
   - simon04
+  - levy9527
 ---
 
 ## Dynamic import
