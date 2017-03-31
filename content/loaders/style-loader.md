@@ -56,7 +56,10 @@ Note: Behavior is undefined when `unuse`/`unref` is called more often than `use`
 
 #### `insertAt`
 
-By default, the style-loader appends `<style>` elements to the end of the `<head>` tag of the page. This will cause CSS created by the loader to take priority over CSS already present in the document head. To insert style elements at the beginning of the head, set this query parameter to 'top', e.g. `require('../style.css?insertAt=top')`.
+By default, the style-loader appends `<style>` elements to the end of the style target, which is the `<head>` tag of the page unless specified by `insertInto`. This will cause CSS created by the loader to take priority over CSS already present in the target. To insert style elements at the beginning of the target, set this query parameter to 'top', e.g. `require('../style.css?insertAt=top')`.
+
+#### `insertInto`
+By default, the style-loader inserts the `<style>` elements into the `<head>` tag of the page. If you want the tags to be inserted somewhere else, e.g. into a [ShadowRoot](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot), you can specify a CSS selector for that element here, e.g. `require('../style.css?insertInto=#host::shadow>#root')`.
 
 #### `singleton`
 
@@ -71,9 +74,15 @@ If convertToAbsoluteUrls and sourceMaps are both enabled, relative urls will be 
 If defined, style-loader will attach given attributes with their values on `<style>` / `<link>` element.
 Usage:
 ```javascript
-require('style-loader?{attrs:{id: "style-tag-id"}}!style.scss');
+require('style-loader?{attrs:{id: "style-tag-id"}}!style.css');
 
 // will create style tag <style id="style-tag-id">
+```
+Usage in `url` mode:
+```javascript
+require('style-loader/url?{attrs:{prop: "value"}}!file-loader!style.css')
+
+// will create link tag <link rel="stylesheet" type="text/css" href="[path]/style.css" prop="value">
 ```
 
 ### Recommended configuration

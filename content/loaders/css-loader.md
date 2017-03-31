@@ -77,6 +77,7 @@ To be compatible with existing css files (if not in CSS Module mode):
 |**`sourceMap`**|`false`|Enable/Disable Sourcemaps|
 |**`camelCase`**|`false`|Export Classnames in CamelCase|
 |**`importLoaders`**|`0`|Number of loaders applied before CSS loader|
+|**`alias`**|`{}`|Create aliases to import certain modules more easily|
 
 The following webpack config can load CSS files, embed small PNG/JPG/GIF/SVG images as well as fonts as [Data URLs](https://tools.ietf.org/html/rfc2397) and copy larger files to the output directory.
 
@@ -310,7 +311,7 @@ They are not enabled by default because they expose a runtime overhead and incre
 
 ### toString
 
-You can also use the css-loader results directly as string, such as in Angular's component style. 
+You can also use the css-loader results directly as string, such as in Angular's component style.
 
 **webpack.config.js**
 
@@ -392,8 +393,8 @@ By default, the exported JSON keys mirror the class names. If you want to cameli
 |:----:|:--------|
 |**`true`**|Class names will be camelized|
 |**`'dashes'`**|Only dashes in class names will be camelized|
-|**`'only'`** |Class names will be camelized, the original class name will be removed from the locals|
-|**`'dashesOnly'`**|Dashes in class names will be camelized, the original class name will be removed from the locals|
+|**`'only'`** |Introduced in `0.27.1`. Class names will be camelized, the original class name will be removed from the locals|
+|**`'dashesOnly'`**|Introduced in `0.27.1`. Dashes in class names will be camelized, the original class name will be removed from the locals|
 
 **webpack.config.js**
 ```js
@@ -417,6 +418,44 @@ By default, the exported JSON keys mirror the class names. If you want to cameli
 ```js
 import { className } from 'file.css';
 ```
+
+### Alias
+
+Rewrite your urls with alias, this is useful when it's hard to change url paths of your input files, for example, when you're using some css / sass files in another package (bootstrap, ratchet, font-awesome, etc.).
+
+#### Possible Options
+
+css-loader's `alias` follows the same syntax as webpack's `resolve.alias`, you can see the details at: https://webpack.js.org/configuration/resolve/#resolve-alias
+
+**webpack.config.js**
+```js
+{
+  test: /\.scss$/,
+  use: [{
+    loader: "style-loader"
+  }, {
+    loader: "css-loader",
+    options: {
+      alias: {
+        "../fonts/bootstrap": "bootstrap-sass/assets/fonts/bootstrap"
+      }
+    }
+  }, {
+    loader: "sass-loader",
+    options: {
+      includePaths: [
+        path.resolve("./node_modules/bootstrap-sass/assets/stylesheets")
+      ]
+    }
+  }]
+}
+```
+
+```scss
+@charset "UTF-8";
+@import "bootstrap";
+```
+Check out this [working bootstrap example](https://github.com/bbtfr/webpack2-bootstrap-sass-sample).
 
 ## Maintainers
 

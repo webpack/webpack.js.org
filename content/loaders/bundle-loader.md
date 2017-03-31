@@ -36,12 +36,37 @@ load(function(file) {
 
 });
 ```
+### `name` query parameter
 
-You may set name for bundle (`name` query parameter). See [documentation](https://github.com/webpack/loader-utils#interpolatename).
+You may set name for a bundle using the `name` query parameter. 
+See [documentation](https://github.com/webpack/loader-utils#interpolatename).
 
-``` javascript
+**Note** chunks created by the loader will be named according to the 
+[`output.chunkFilename`](https://webpack.js.org/configuration/output/#output-chunkfilename) rule, which defaults to `[id].[name]`.
+Here `[name]` corresponds to the chunk name set in the `name` query parameter. 
+
+#### Example:
+
+``` js
 require("bundle-loader?lazy&name=my-chunk!./file.js");
+require("bundle-loader?lazy&name=[name]!./file.js");
 ```
+And the WebPack configuration:
+``` js
+module.exports = {
+   entry: { ... },
+   output : {
+      path : ...,
+      filename : '[name].js',
+      chunkFilename : '[name]-[id].js', // or whatever other format you want.
+   },
+}
+```
+
+Normal chunks will show up using the `filename` rule above, and be named according to their chunkname. 
+Chunks from `bundle-loader`, however will load using the `chunkFilename` rule, so the example files will produce `my-chunk-1.js` and `file-2.js` respectively.
+
+You can also use `chunkFilename` to add hash values to the filename, since putting `[hash]` in the bundle query parameter does not work correctly. 
 
 ## Maintainers
 

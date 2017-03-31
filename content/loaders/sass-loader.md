@@ -9,7 +9,7 @@ edit: https://github.com/webpack-contrib/sass-loader/edit/master/README.md
 npm install sass-loader node-sass webpack --save-dev
 ```
 
-The sass-loader requires [node-sass](https://github.com/sass/node-sass) and [webpack](https://github.comwebpack)
+The sass-loader requires [node-sass](https://github.com/sass/node-sass) and [webpack](https://github.com/webpack)
 as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies). Thus you are able to control the versions accurately.
 
 ## Examples
@@ -215,5 +215,5 @@ If you want to prepend Sass code before the actual entry file, you can set the `
 [cover]: https://coveralls.io/repos/github/webpack-contrib/sass-loader/badge.svg
 [cover-url]: https://coveralls.io/github/webpack-contrib/sass-loader
 
-[chat]: https://badges.gitter.im/webpack-contrib/webpack.svg
-[chat-url]: https://gitter.im/webpack-contrib/webpack
+[chat]: https://badges.gitter.im/webpack/webpack.svg
+[chat-url]: https://gitter.im/webpack/webpack
