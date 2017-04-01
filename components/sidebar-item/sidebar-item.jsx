@@ -1,4 +1,5 @@
 import React from 'react';
+import { uniqueId } from 'lodash';
 import Link from '../link/link';
 
 const block = 'sidebar-item';
@@ -36,7 +37,7 @@ export default class SidebarItem extends React.Component {
               anchors.map(anchor => (
                 <li 
                   className={ `${block}__anchor` } 
-                  key={ `anchor-${title}-${anchor.id}` }>
+                  key={ `anchor-${title}-${uniqueId()}` }>
                   <a href={ this._generateAnchorURL(anchor) }>
                     { anchor.title }
                   </a>

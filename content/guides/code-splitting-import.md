@@ -3,6 +3,7 @@ title: 代码分离 - 使用 import()
 sort: 33
 contributors:
   - simon04
+  - levy9527
 ---
 
 ## 动态引入

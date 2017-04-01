@@ -1,8 +1,9 @@
 @import 'functions';
+@import 'mixins';
 
 .sponsors {
   position: fixed;
-  display: flex;
+  display: none;
   width: 250px;
   margin-top: 1.5em;
   margin-left: calc(-250px - 1.5em);
@@ -17,5 +18,9 @@
 
   &:hover {
     background-color: getColor(concrete);
+  }
+
+  @include break(xlarge) {
+    display: flex;
   }
 }
