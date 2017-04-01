@@ -58,7 +58,7 @@ import Test1 from 'xyz'; // Success, file.js is resolved and imported
 import Test2 from 'xyz/file.js'; // Error, /path/to/file.js/file.js is invalid
 ```
 
-The following table explains a lot more cases:
+The following table explains other cases:
 
 | `alias:` | `import "xyz"` | `import "xyz/file.js"` |
 | -------- | ---------------- | -------------------------|
