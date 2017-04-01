@@ -35,10 +35,20 @@ You can configure a custom filename template for your file using the query param
 
 By default, the path and name you specify will output the file in that same directory and will also use that same URL path to access the file.
 
-You can specify custom output and public paths by using the `outputPath` and `publicPath` query name parameters:
+You can specify custom output and public paths by using the `outputPath`, `publicPath` and `useRelativePath` query name parameters:
 
 ```
 use: "file-loader?name=[name].[ext]&publicPath=assets/foo/&outputPath=app/images/"
+```
+
+`useRelativePath` should be `true` if you wish to generate relative URL to the each file context
+```javascript
+{
+ loader: 'file-loader',
+ query: {
+  useRelativePath: process.env.NODE_ENV === "production"
+ }
+}
 ```
 
 #### Filename template placeholders

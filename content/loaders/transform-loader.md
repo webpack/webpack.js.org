@@ -30,33 +30,56 @@ module.exports = {
     rules: [
       {
         loader: "transform-loader?brfs",
-        enforce: "post"
+        enforce: "post",
+        options: {
+          transforms: [
+              function (/*file*/) {
+                  return through((buffer) => {
+                      return this.queue(
+                          buffer.split('')
+                              .map((chunk) => String.fromCharCode(127-chunk.charCodeAt(0))))
+                              .join('')
+                  }, () => this.queue(null))
+              }
+          ]
+        }
       },
+
       {
         test: /\.coffee$/,
-        loader: "transform-loader/cacheable?coffeeify"
+        loader: "transform-loader/cacheable?coffeeify",
+        options: {
+          transforms: [
+              function (/*file*/) {
+                  return through((buffer) => {
+                      return this.queue(
+                          buffer.split('')
+                              .map((chunk) => String.fromCharCode(127-chunk.charCodeAt(0))))
+                              .join('')
+                  }, () => this.queue(null))
+              }
+          ]
+        }
       },
+
       {
         test: /\.weirdjs$/,
-        loader: "transform-loader?0"
+        loader: "transform-loader?0",
+        options: {
+          transforms: [
+              function (/*file*/) {
+                  return through((buffer) => {
+                      return this.queue(
+                          buffer.split('')
+                              .map((chunk) => String.fromCharCode(127-chunk.charCodeAt(0))))
+                              .join('')
+                  }, () => this.queue(null))
+              }
+          ]
+        }
       }
     ]
-  },
-  plugins: [
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        transforms: [
-          function(file) {
-            return through(function(buf) {
-              this.queue(buf.split("").map(function(s) {
-                return String.fromCharCode(127-s.charCodeAt(0));
-              }).join(""));
-            }, function() { this.queue(null); });
-          }
-        ]
-      }
-    })
-  ]
+  }
 };
 ```
 

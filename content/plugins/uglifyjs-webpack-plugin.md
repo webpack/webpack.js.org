@@ -5,11 +5,13 @@ edit: https://github.com/webpack-contrib/uglifyjs-webpack-plugin/edit/master/REA
 ---
 ## Install
 
+With [Yarn](https://yarnpkg.com):
+
 ```bash
 yarn add uglifyjs-webpack-plugin --dev
 ```
 
-..or if you insist on using npm instead of the more advanced [Yarn](https://yarnpkg.com):
+With npm:
 
 ```bash
 npm install uglifyjs-webpack-plugin --save-dev

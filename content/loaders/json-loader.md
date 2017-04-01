@@ -48,11 +48,27 @@ import json from 'file.json';
 import json from 'json-loader!file.json';
 ```
 
+
+
+### Options
+
+#### `stringify`
+
+By default, the json-loader will output the json object, set this query parameter to 'true' can output the json object as a string, e.g. `require('json-loader?stringify!../index.json')`.
+
+
+
+
 ## Maintainer
 
 <table>
   <tbody>
     <tr>
+      <td align="center">
+        <img width="150" height="150" src="https://avatars.githubusercontent.com/sokra?v=3">
+        </br>
+        <a href="https://github.com/sokra">Tobias Koppers</a>
+      </td>
       <td align="center">
         <img width="150" height="150"
         src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
@@ -80,6 +96,7 @@ import json from 'json-loader!file.json';
     </tr>
   <tbody>
 </table>
+
 
 [npm]: https://img.shields.io/npm/v/json-loader.svg
 [npm-url]: https://npmjs.com/package/json-loader

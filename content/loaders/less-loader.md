@@ -58,6 +58,8 @@ module.exports = {
 };
 ```
 
+Unfortunately, Less doesn't map all options 1-by-1 to camelCase. When in doubt, [check their executable and search for the dash-case option](https://github.com/less/less.js/blob/3.x/bin/lessc).
+
 ### In production
 
 Usually, it's recommended to extract the style sheets into a dedicated file in production using the [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin). This way your styles are not dependent on JavaScript:
@@ -96,19 +98,70 @@ module.exports = {
 
 ### Imports
 
-webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/configuration/resolve/). The less-loader applies a Less plugin that passes all queries to the webpack resolving engine. Thus you can import your less-modules from `node_modules`. Just prepend them with a `~` which tells webpack to look-up the [`modules`](https://webpack.js.org/configuration/resolve/#resolve-modules).
+Starting with less-loader 4, you can now choose between Less' builtin resolver and webpack's resolver. By default, webpack's resolver is used.
+
+#### webpack resolver
+
+webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/configuration/resolve/). The less-loader applies a Less plugin that passes all queries to the webpack resolver. Thus you can import your Less modules from `node_modules`. Just prepend them with a `~` which tells webpack to look up the [`modules`](https://webpack.js.org/configuration/resolve/#resolve-modules).
 
 ```css
 @import "~bootstrap/less/bootstrap";
 ```
 
-It's important to only prepend it with `~`, because `~/` resolves to the home-directory. webpack needs to distinguish between `bootstrap` and `~bootstrap` because css- and less-files have no special syntax for importing relative files. Writing `@import "file"` is the same as `@import "./file";`
+It's important to only prepend it with `~`, because `~/` resolves to the home-directory. webpack needs to distinguish between `bootstrap` and `~bootstrap`, because CSS and Less files have no special syntax for importing relative files. Writing `@import "file"` is the same as `@import "./file";`
 
-Also please note that for [CSS modules](https://github.com/css-modules/css-modules), relative file paths do not work as expected. Please see [this issue for the explanation](https://github.com/webpack-contrib/less-loader/issues/109#issuecomment-253797335).
+##### Non-Less imports
+
+Using webpack's resolver, you can import any file type. You just need a loader that exports valid Less code. Often, you will also want to set the `issuer` condition to ensure that this rule is only applied on imports originating from Less files:
+
+```js
+// webpack.config.js
+module.exports = {
+    ...
+    module: {
+        rules: [{
+            test: /\.js$/,
+            issuer: /\.less$/,
+            use: [{
+                loader: "js-to-less-loader"
+            }]
+        }]
+    }
+};
+```
+
+#### Less resolver
+
+If you specify the `paths` option, the less-loader will not use webpack's resolver. Modules, that can't be resolved in the local folder, will be searched in the given `paths`. This is Less' default behavior. `paths` should be an array with absolute paths:
+
+```js
+// webpack.config.js
+module.exports = {
+    ...
+    module: {
+        rules: [{
+            test: /\.less$/,
+            use: [{
+                loader: "style-loader"
+            }, {
+                loader: "css-loader"
+            }, {
+                loader: "less-loader", options: {
+                    paths: [
+                        path.resolve(__dirname, "node_modules")
+                    ]
+                }
+            }]
+        }]
+    }
+};
+```
+
+In this case, all webpack features like importing non-Less files or aliasing won't work of course.
 
 ### Plugins
 
-In order to use [plugins](http://lesscss.org/usage/#plugins), simply set the `lessPlugins` option like this:
+In order to use [plugins](http://lesscss.org/usage/#plugins), simply set the `plugins` option like this:
 
 ```js
 // webpack.config.js
@@ -118,7 +171,7 @@ module.exports = {
     ...
             {
                 loader: "less-loader", options: {
-                    lessPlugins: [
+                    plugins: [
                         new CleanCSSPlugin({ advanced: true })
                     ]
                 }
@@ -143,7 +196,6 @@ To enable CSS source maps, you'll need to pass the `sourceMap` option to the les
 ```javascript
 module.exports = {
     ...
-    devtool: "source-map", // any "source-map"-like devtool is possible
     module: {
         rules: [{
             test: /\.less$/,
@@ -163,7 +215,13 @@ module.exports = {
 };
 ```
 
+Also checkout the [sourceMaps example](/examples/sourceMaps).
+
 If you want to edit the original Less files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). The blog post is about Sass but it also works for Less.
+
+### CSS modules gotcha
+
+There is a known problem with Less and [CSS modules](https://github.com/css-modules/css-modules) regarding relative file paths in `url(...)` statements. [See this issue for an explanation](https://github.com/webpack-contrib/less-loader/issues/109#issuecomment-253797335).
 
 ## Maintainer
 
