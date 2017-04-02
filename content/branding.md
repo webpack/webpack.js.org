@@ -72,19 +72,19 @@ We use the beautiful [Geomanist Medium](http://geomanist.com/) font from the ext
 
 The following colors are used throughout the site in various combinations and on our fancy clothing line launched with the help of [Open Collective](http://opencollective.com) and [Threadless](https://medium.com/u/840563ee2a56) over at the [official webpack store](https://webpack.threadless.com/collections/the-final-release-collection/)!
 
-| Color Name | HEX Code | RGB Code | Sample |
-|--- |--- |--- |---
-| Malibu: | HEX `#8dd6f9` | `rgb: 141, 214, 249` <td style="background-color: #8dd6f9; height: 25px; width: 250px; margin: 0; padding: 0;"></td>
-| Denim: | HEX `#1d78c1` | `rgb: 29, 120, 193` <td style="background-color: #1d78c1; height: 25px; width: 250px; margin: 0; padding: 0;"></td>
-| Fiord: | HEX `#465E69` | `rgb: 70, 94, 105` <td style="background-color: #465E69; height: 25px; width: 250px; margin: 0; padding: 0;"></td>
-| Outer Space: | HEX `#2B3A42` | `rgb: 43, 58, 66` <td style="background-color: #2B3A42; height: 25px; width: 250px; margin: 0; padding: 0;"></td>
-| Emperor: | HEX `#535353` | `rgb: 83, 83, 83` <td style="background-color: #535353; height: 25px; width: 250px; margin: 0; padding: 0;"></td>
-| Mine Shaft: | HEX `#333333` | `rgb: 51, 51, 51` <td style="background-color: #333333; height: 25px; width: 250px; margin: 0; padding: 0;"></td>
-| Alto: | HEX `#dedede` | `rgb: 222, 222, 222` <td style="background-color: #dedede; height: 25px; width: 250px; margin: 0; padding: 0;"></td>
-| Dusty Gray: | HEX `#999999` | `rgb: 153, 153, 153` <td style="background-color: #999999; height: 25px; width: 250px; margin: 0; padding: 0;"></td>
-| Dove Gray: | HEX `#666666` | `rgb: 102, 102, 102` <td style="background-color: #666666; height: 25px; width: 250px; margin: 0; padding: 0;"></td>
-| White: | HEX `#ffffff` | `rgb: 255, 255, 255` <td style="background-color: #ffffff; height: 25px; width: 250px; margin: 0; padding: 0;"></td>
-| Concrete: | HEX `#f2f2f2` | `rgb: 242, 242, 242` <td style="background-color: #f2f2f2; height: 25px; width: 250px; margin: 0; padding: 0;"></td>
+| Color Name    | HEX Code      | RGB Code              | Sample 
+|---------------|---------------|-----------------------|-------------------------------
+| Malibu:       | HEX `#8dd6f9` | `rgb: 141, 214, 249`  | <div style="background-color: #8dd6f9;">&nbsp;</div>
+| Denim:        | HEX `#1d78c1` | `rgb: 29, 120, 193`   | <div style="background-color: #1d78c1;">&nbsp;</div>
+| Fiord:        | HEX `#465E69` | `rgb: 70, 94, 105`    | <div style="background-color: #465E69;">&nbsp;</div>
+| Outer Space:  | HEX `#2B3A42` | `rgb: 43, 58, 66`     | <div style="background-color: #2B3A42;">&nbsp;</div>
+| White:        | HEX `#ffffff` | `rgb: 255, 255, 255`  | <div style="background-color: #ffffff;">&nbsp;</div>
+| Concrete:     | HEX `#f2f2f2` | `rgb: 242, 242, 242`  | <div style="background-color: #f2f2f2;">&nbsp;</div>
+| Alto:         | HEX `#dedede` | `rgb: 222, 222, 222`  | <div style="background-color: #dedede;">&nbsp;</div>
+| Dusty Gray:   | HEX `#999999` | `rgb: 153, 153, 153`  | <div style="background-color: #999999;">&nbsp;</div>
+| Dove Gray:    | HEX `#666666` | `rgb: 102, 102, 102`  | <div style="background-color: #666666;">&nbsp;</div>
+| Emperor:      | HEX `#535353` | `rgb: 83, 83, 83`     | <div style="background-color: #535353;">&nbsp;</div>
+| Mine Shaft:   | HEX `#333333` | `rgb: 51, 51, 51`     | <div style="background-color: #333333;">&nbsp;</div>
 
 In addition, you can grab the following file types directly from these links:
 
