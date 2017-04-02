@@ -8,11 +8,14 @@ contributors:
 
 Here you can find **webpack** project brand guidelines, assets, and license. See our official [media repository](https://github.com/webpack/media) for more information and to find the [license](https://github.com/webpack/media/blob/master/LICENSE) that governs this work. Click any of the images to download them.
 
+
 ## [Jump to All Original Media Files](https://github.com/webpack/media)
+
 
 ## The webpack Name
 
 webpack should **always** be written in lower-case letters, even at the beginning of a sentence.
+
 
 ## Logo
 
@@ -33,6 +36,7 @@ For dark backgrounds, you can use the negative version of the logo:
 [svg](https://github.com/webpack/media/blob/master/logo/logo-on-dark-bg.svg) | [png](https://github.com/webpack/media/blob/master/logo/logo-on-dark-bg.png) | [jpg](https://github.com/webpack/media/blob/master/logo/logo-on-dark-bg.jpg)
 
 T> Please use the **icon + text** whenever possible.
+
 
 ## Icon only
 
@@ -58,9 +62,11 @@ T> For those of you following our guidelines and have gotten this far, we've mad
 
 <img src="/assets/icon-square-small-slack.png" width="50" alt="icon square small example">
 
+
 ## Font
 
 We use the beautiful [Geomanist Medium](http://geomanist.com/) font from the extremely talented folks at the [Atipo Foundry](http://atipofoundry.com/) who provide the entire font family at a 'pay what you want' model.
+
 
 ## Color Palette
 
@@ -84,6 +90,7 @@ In addition, you can grab the following file types directly from these links:
 
 [psd](https://raw.githubusercontent.com/webpack/media/master/design/webpack-palette.psd) | [png](https://raw.githubusercontent.com/webpack/media/master/design/webpack-palette.png)
  | [ai](https://raw.githubusercontent.com/webpack/media/master/design/webpack-palette.ai) | [svg](https://raw.githubusercontent.com/webpack/media/master/design/webpack-palette.svg)
+
 
 ## License
 
