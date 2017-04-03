@@ -18,7 +18,7 @@ module.exports = {
 		new CompressionPlugin({
 			asset: "[path].gz[query]",
 			algorithm: "gzip",
-			test: /\.js$|\.html$/,
+			test: /\.(js|html)$/,
 			threshold: 10240,
 			minRatio: 0.8
 		})
@@ -33,6 +33,7 @@ module.exports = {
 * `test`： 所有匹配该正则的资源都会被处理。默认值是全部资源。
 * `threshold`： 只有大小大于该值的资源会被处理。单位是 bytes。默认值是 `0`。
 * `minRatio`： 只有压缩率小于这个值的资源才会被处理。默认值是 `0.8`。
+* `deleteOriginalAssets`: Whether to delete the original assets or not. Defaults to `false`.
 
 Zopfli 的参数选项 (详情请查看 [node-zopfli](https://github.com/pierreinglebert/node-zopfli#options) 文档)：
 * verbose: Default: false,

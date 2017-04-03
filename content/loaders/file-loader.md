@@ -33,10 +33,20 @@ var url = require("file-loader?emitFile=false!./file.png");
 
 默认情况下，会按照你指定的路径和文件名输出文件，且使用相同的 URL 路径来访问文件。
 
-你可以使用 `outputPath` 和 `publicPath` 查询名称参数来指定自定义的输出路径和发布目录。
+你可以使用 `outputPath`, `publicPath` 和 `publicPath` 查询名称参数，来指定自定义的输出路径和发布目录。
 
 ```
 use: "file-loader?name=[name].[ext]&publicPath=assets/foo/&outputPath=app/images/"
+```
+
+`useRelativePath` should be `true` if you wish to generate relative URL to the each file context
+```javascript
+{
+ loader: 'file-loader',
+ query: {
+  useRelativePath: process.env.NODE_ENV === "production"
+ }
+}
 ```
 
 #### 文件名模板占位符
@@ -64,7 +74,7 @@ require("file-loader?name=[hash]!./flash.txt");
 
 require("file-loader?name=[sha512:hash:base64:7].[ext]!./image.png");
 // => gdyb21L.png
-// 使用 sha512 哈希值替代 md5 并且使用 base64 的 7 个字符
+// 使用 sha512 哈希值替代 md5 并且使用 7 个字符 的 base64
 
 require("file-loader?name=img-[sha512:hash:base64:7].[ext]!./image.jpg");
 // => img-VqzT5ZC.jpg
