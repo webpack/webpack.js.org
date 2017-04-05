@@ -13,16 +13,16 @@ npm i exports-loader --save
 
 ``` javascript
 require("exports-loader?file,parse=helpers.parse!./file.js");
-//  将添加下面的代码:
+// 向文件源码添加如下代码：
 //  exports["file"] = file;
 //  exports["parse"] = helpers.parse;
 
 require("exports-loader?file!./file.js");
-//  将添加下面的代码:
+// 向文件源码添加如下代码：
 //  module.exports = file;
 ```
 
-[文档: 使用加载器](http://webpack.github.io/docs/using-loaders.html)
+[文档: 使用 loader](http://webpack.github.io/docs/using-loaders.html)
 
 ## Maintainers
 

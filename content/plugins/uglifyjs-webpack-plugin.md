@@ -3,13 +3,15 @@ title: UglifyjsWebpackPlugin
 source: https://raw.githubusercontent.com/webpack-contrib/uglifyjs-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/uglifyjs-webpack-plugin/edit/master/README.md
 ---
-## Install
+## 安装
+
+使用 [Yarn](https://yarnpkg.com):
 
 ```bash
 yarn add uglifyjs-webpack-plugin --dev
 ```
 
-..或者你坚持使用npm，而不是更先进的 [Yarn](https://yarnpkg.com):
+使用 npm:
 
 ```bash
 npm install uglifyjs-webpack-plugin --save-dev
@@ -89,7 +91,7 @@ The `extractComments` option can be
 Default: `/*! For license information please see foo.js.LICENSE */`
 
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>

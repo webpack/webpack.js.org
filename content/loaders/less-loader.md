@@ -58,6 +58,8 @@ module.exports = {
 };
 ```
 
+Unfortunately, Less doesn't map all options 1-by-1 to camelCase. When in doubt, [check their executable and search for the dash-case option](https://github.com/less/less.js/blob/3.x/bin/lessc).
+
 ### In production
 
 Usually, it's recommended to extract the style sheets into a dedicated file in production using the [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin). This way your styles are not dependent on JavaScript:
@@ -96,21 +98,70 @@ module.exports = {
 
 ### Imports
 
-webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/configuration/resolve/). The less-loader applies a Less plugin that passes all queries to the webpack resolving engine. Thus you can import your less-modules from `node_modules`. Just prepend them with a `~` which tells webpack to look-up the [`modules`](https://webpack.js.org/configuration/resolve/#resolve-modules).
-webpack 提供了一种[解析文件的高级机制](https://webpack.js.org/configuration/resolve/)。less-loader 应用一个 Less 插件，并且将所有查询参数传递给 webpack 解析引擎。所以，你可以从 `node_modules` 导入你的 less 模块。只要加一个 `~` 前缀，告诉 webpack 去查询[`模块`](https://webpack.js.org/configuration/resolve/#resolve-modules)。
+Starting with less-loader 4, you can now choose between Less' builtin resolver and webpack's resolver. By default, webpack's resolver is used.
+
+#### webpack resolver
+
+webpack 提供了一种[解析文件的高级机制](https://webpack.js.org/configuration/resolve/)。less-loader 应用一个 Less 插件，并且将所有查询参数传递给 webpack resolver。所以，你可以从 `node_modules` 导入你的 less 模块。只要加一个 `~` 前缀，告诉 webpack 去查询[`模块`](https://webpack.js.org/configuration/resolve/#resolve-modules)。
 
 ```css
 @import "~bootstrap/less/bootstrap";
 ```
 
-重要的是只使用 `~` 前缀，因为 `~/` 会解析为主目录。webpack 需要区分`bootstrap`和`〜bootstrap`，因为 css- 和 less- 文件没有用于导入相对文件的特殊语法。`@import "file"` 与 `@import "./file";` 写法相同
+重要的是只使用 `~` 前缀，因为 `~/` 会解析为主目录。webpack 需要区分`bootstrap`和`〜bootstrap`，因为 CSS 和 Less 文件没有用于导入相对文件的特殊语法。`@import "file"` 与 `@import "./file";` 写法相同
 
-还请注意，对于 [CSS 模块](https://github.com/css-modules/css-modules)，相对文件路径不会生效。请参阅[此 issue 的解释](https://github.com/webpack/less-loader/issues/109#issuecomment-253797335)。
+##### Non-Less imports
+
+使用 webpack resolver，您可以引入任何文件类型。您只需要一个导出有效的 Less 代码的 loader。通常，您还需要设置 `issuer` 条件，以确保此规则仅适用于 Less 文件的导入：
+
+```js
+// webpack.config.js
+module.exports = {
+    ...
+    module: {
+        rules: [{
+            test: /\.js$/,
+            issuer: /\.less$/,
+            use: [{
+                loader: "js-to-less-loader"
+            }]
+        }]
+    }
+};
+```
+
+#### Less resolver
+
+If you specify the `paths` option, the less-loader will not use webpack's resolver. Modules, that can't be resolved in the local folder, will be searched in the given `paths`. This is Less' default behavior. `paths` should be an array with absolute paths:
+
+```js
+// webpack.config.js
+module.exports = {
+    ...
+    module: {
+        rules: [{
+            test: /\.less$/,
+            use: [{
+                loader: "style-loader"
+            }, {
+                loader: "css-loader"
+            }, {
+                loader: "less-loader", options: {
+                    paths: [
+                        path.resolve(__dirname, "node_modules")
+                    ]
+                }
+            }]
+        }]
+    }
+};
+```
+
+In this case, all webpack features like importing non-Less files or aliasing won't work of course.
 
 ### 插件
 
-In order to use [plugins](http://lesscss.org/usage/#plugins), simply set the `lessPlugins` option like this:
-为了使用[插件](http://lesscss.org/usage/#plugins)，只需像下面这样简单设置 `lessPlugins` 选项：
+为了使用[插件](http://lesscss.org/usage/#plugins)，只需像下面这样简单设置 `plugins` 选项：
 
 ```js
 // webpack.config.js
@@ -120,7 +171,7 @@ module.exports = {
     ...
             {
                 loader: "less-loader", options: {
-                    lessPlugins: [
+                    plugins: [
                         new CleanCSSPlugin({ advanced: true })
                     ]
                 }
@@ -145,7 +196,6 @@ There are two possibilities to extract a style sheet from the bundle:
 ```javascript
 module.exports = {
     ...
-    devtool: "source-map", // any "source-map"-like devtool is possible
     module: {
         rules: [{
             test: /\.less$/,
@@ -165,7 +215,13 @@ module.exports = {
 };
 ```
 
+Also checkout the [sourceMaps example](/examples/sourceMaps).
+
 如果您要编辑 Chrome 中的原始 Less 文件，[这里有一个很好的博客文章](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0)。此博客文章是关于 Sass 的，但它也适用于 Less。
+
+### CSS modules gotcha
+
+There is a known problem with Less and [CSS modules](https://github.com/css-modules/css-modules) regarding relative file paths in `url(...)` statements. [See this issue for an explanation](https://github.com/webpack-contrib/less-loader/issues/109#issuecomment-253797335).
 
 ## 维护人员
 

@@ -38,10 +38,10 @@ to disable this behavior just set `fallback` parameter as `false`:
 var MyWorker = require("worker-loader?inline&fallback=false!./myWorker.js");
 ```
 
-To set custom name use the `name` parameter:
+To set a custom name for the output script, use the `name` parameter. The name may contain the string `[hash]`, which will be replaced with a content-dependent hash for caching purposes. For example:
 
 ``` javascript
-var MyWorker = require("worker-loader?name=[name].js!./myWorker.js");
+var MyWorker = require("worker-loader?name=outputWorkerName.[hash].js!./myWorker.js");
 ```
 
 

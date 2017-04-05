@@ -10,16 +10,22 @@ npm i jshint-loader --save
 ```
 
 ## 用法
-在你的webpack配置里启用jshint loader
+
+在 webpack 配置中启用 jshint loader：
 
 ``` javascript
 module.exports = {
 	module: {
-		preLoaders: [
+		rules: [
 			{
-				test: /\.js$/, // 对.js文件进行处理
-				exclude: /node_modules/, // 排除掉node_modules文件夹下的所有文件
-				loader: "jshint-loader"
+				test: /\.js$/, // 涵盖 .js 文件
+				enforce: "pre", // 预先加载好 jshint loader
+				exclude: /node_modules/, // 排除掉 node_modules 文件夹下的所有文件
+				use: [
+					{
+						loader: "jshint-loader"
+					}
+				]
 			}
 		]
 	},
