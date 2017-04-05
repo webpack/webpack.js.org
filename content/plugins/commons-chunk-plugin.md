@@ -194,9 +194,9 @@ specific modules from being included in the vendor chunk (such as stylesheets yo
 new webpack.optimize.CommonsChunkPlugin({
   name: "vendor",
   minChunks: function (module) {
+    // This prevents stylesheet resources with the .css or .scss extension
+    // from being moved from their original chunk to the vendor chunk
     if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
-      // This prevents stylesheet resources with the .css or .scss extension
-      // from being moved from their original chunk to the vendor chunk
       return false;
     }
     return module.context && module.context.indexOf("node_modules") !== -1;
