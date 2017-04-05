@@ -187,6 +187,23 @@ new webpack.optimize.CommonsChunkPlugin({
 })
 ```
 
+To add further control to an implicit common vendor chunk, you can additional logic before the `node_modules` context check to prevent
+specific modules from being included in the vendor chunk (such as stylesheets you want to keep in a separate file):
+
+```javascript
+new webpack.optimize.CommonsChunkPlugin({
+  name: "vendor",
+  minChunks: function (module) {
+    if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
+      // This prevents stylesheet resources with the .css or .scss extension
+      // from being moved from their original chunk to the vendor chunk
+      return false;
+    }
+    return module.context && module.context.indexOf("node_modules") !== -1;
+  }
+})
+```
+
 ## Manifest file
 
 To extract the webpack bootstrap logic into a separate file, use the `CommonsChunkPlugin` on a `name` which is not defined as `entry`. Commonly the name `manifest` is used. See the [code splitting libraries guide](/guides/code-splitting-libraries/#manifest-file) for details.
