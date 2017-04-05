@@ -11,19 +11,19 @@ sort: 2
 
   - 一个JavaScript命名函数。
   - 在它的原型上定义一个`apply`方法。
-  - 指定挂载的webapack事件钩子。
+  - 指定挂载的webpack事件钩子。
   - 处理webpack内部实例的特定数据。
   - 功能完成后调用webpack提供的回调。
 
 ```javascript
-// 命名函数
+// 命名函数
 function MyExampleWebpackPlugin() {
 
 };
 
 // 在它的原型上定义一个`apply`方法。
 MyExampleWebpackPlugin.prototype.apply = function(compiler) {
-  // 指定挂载的webapack事件钩子。
+  // 指定挂载的webpack事件钩子。
   compiler.plugin('webpacksEventHook', function(compilation /* 处理webpack内部实例的特定数据。*/, callback) {
     console.log("This is an example plugin!!!");
 
@@ -162,9 +162,9 @@ module.exports = FileListPlugin;
 
 ## 不同类型的插件
 
-wepack插件可以按照它所注册的事件分成不同的类型。每一个事件钩子决定了如何使用注册的插件。
+webpack插件可以按照它所注册的事件分成不同的类型。每一个事件钩子决定了如何使用注册的插件。
 
-- __同步__ The Tapable instance applies plugins using
+- __同步__ The Tapable instance applies plugins using
 
 `applyPlugins(name: string, args: any...)`
 
