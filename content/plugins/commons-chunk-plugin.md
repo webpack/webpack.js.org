@@ -153,8 +153,8 @@ You also have the ability to pass the `minChunks` property a function. This func
 The `module` argument represents each module in the chunks you have provided via the `name`/`names` property.
 `module` has the shape of a [NormalModule](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js#L57), which has two particularly useful properties for this use case:
 
-- `resource`: The name of the file being processed. For example: `'/my_project/node_modules/example-dependency/index.js'`
-- `context`: The directory that stores the file. For example: `'/my_project/node_modules/example-dependency'`
+- `module.context`: The directory that stores the file. For example: `'/my_project/node_modules/example-dependency'`
+- `module.resource`: The name of the file being processed. For example: `'/my_project/node_modules/example-dependency/index.js'`
 
 The `count` argument represents how many chunks the `module` is used in.
 
