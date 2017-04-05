@@ -4,6 +4,7 @@ contributors:
   - bebraw
   - simon04
   - christopher4lis
+  - kevinzwhuang
 ---
 
 ```javascript
@@ -149,9 +150,13 @@ new webpack.optimize.CommonsChunkPlugin({
 
 You also have the ability to pass the `minChunks` property a function. This function is called by the `CommonsChunkPlugin` and calls the function with `module` and `count` arguments.
 
-The `module` property represents each module in the chunks you have provided via the `names` property.
+The `module` argument represents each module in the chunks you have provided via the `name`/`names` property.
+`module` has the shape of a [NormalModule](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js#L57), which has two particularly useful properties for this use case:
 
-The `count` property represents how many chunks the `module` is used in.
+- `resource`: The name of the file being processed.
+- `context`: The directory that stores the file.
+
+The `count` argument represents how many chunks the `module` is used in.
 
 This option is useful when you want to have fine-grained control over how the CommonsChunk algorithm determines where modules should be moved to.
 
