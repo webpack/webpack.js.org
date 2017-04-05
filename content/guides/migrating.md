@@ -137,7 +137,7 @@ file with the [`json-loader`](https://github.com/webpack/json-loader).
   module: {
     rules: [
 -     {
--       test: /\.json/,
+-       test: /\.json$/,
 -       loader: "json-loader"
 -     }
     ]
@@ -146,6 +146,25 @@ file with the [`json-loader`](https://github.com/webpack/json-loader).
 
 [We decided to do this](https://github.com/webpack/webpack/issues/3363) in order to iron out environment differences
   between webpack, node.js and browserify.
+
+### Bad `.jsx` test may load the JSON file
+
+When `json-loader` has not been configured, bad `.jsx` test may load the JSON file as a javascript module. The JSON file must be filtered out by the test rule for `.jsx`.
+
+``` diff
+  module: {
+    rules: [
+       {
+-         test: /\.jsx?/, // This passes .jsx, .js, and .json!
++         test: /\.jsx$/, // This only passes .jsx.
+          loader: "babel-loader",
+          options: {
+            // ...
+          }
+       }
+    ]
+  }
+```
 
 ## Loaders in configuration resolve relative to context
 
