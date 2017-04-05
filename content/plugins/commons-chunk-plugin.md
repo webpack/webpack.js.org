@@ -188,7 +188,7 @@ new webpack.optimize.CommonsChunkPlugin({
 ```
 
 To add further control to an implicit common vendor chunk, you can additional logic before the `node_modules` context check to prevent
-specific modules from being included in the vendor chunk (such as stylesheets you want to keep in a separate file):
+specific modules from being included in the vendor chunk (such as stylesheets you want to keep in the original chunk):
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({
