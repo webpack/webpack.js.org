@@ -64,8 +64,7 @@ The example above will create a `lib.js` and `lib.node.js` file in your `dist` f
 
 As seen from the options above there are multiple different deployment _targets_ that you can choose from. Below is a list of examples, and resources that you can refer to.
 
-### Bundle Output Comparison
-
-  **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**: A great resource for testing and viewing different webpack _targets_. Also great for bug reporting.
+*  **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**: A great resource for testing and viewing different webpack _targets_. Also great for bug reporting.
+* **[Build to both electron.js and browser targets using webpack](https://medium.com/@ad_harmonium/build-to-both-electron-js-and-browser-targets-using-webpack-59266bdb76a)**: An example of a build process using multiple deployment targets with electron and web.
 
 ?> Need to find up to date examples of these webpack targets being used in live code or boilerplates.
