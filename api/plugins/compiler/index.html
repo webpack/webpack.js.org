@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/571ac220b25070056646.css" rel="stylesheet">
+      <link href="/7ed2cb9a4926c7227f23.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -62,7 +62,7 @@ The working of a Compiler can be condensed into the following highlights</p>
 <li>Usually there is one master instance of Compiler. Child compilers can be created for delegating specific tasks.</li>
 <li>A lot of the complexity in creating a compiler goes into populating all the relevant options for it.</li>
 <li><code>webpack</code> has <a href="https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js"><code>WebpackOptionsDefaulter</code></a> and <a href="https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js"><code>WebpackOptionsApply</code></a> specifically designed to provide the <code>Compiler</code> with all the intial data it requires.</li>
-<li>The <code>Compiler</code> is just ultimately just a function which performs bare minimum functionality to keep a lifecycle running. It delegates all the loading/bundling/writing work to various plugins.</li>
+<li>The <code>Compiler</code> is ultimately just a function which performs bare minimum functionality to keep a lifecycle running. It delegates all the loading/bundling/writing work to various plugins.</li>
 <li><code>new LogPlugin(args).apply(compiler)</code> registers the plugin to any particular hook event in the <code>Compiler</code>&apos;s lifecycle.</li>
 <li>The <code>Compiler</code> exposes a <code>run</code> method which kickstarts all compilation work for <code>webpack</code>. When that is done, it should call the passed in <code>callback</code> function. All the tail end work of logging stats and errors are done in this callback function.</li>
 </ul>
