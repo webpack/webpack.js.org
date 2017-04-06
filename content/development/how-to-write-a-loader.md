@@ -15,7 +15,7 @@ loader是导出`function`的节点模块。
 
 这个loader的callback应该回传一个或者两个值。第一个值的结果是 string 或 buffer 类型的 JavaScript 代码。第二个可选的值是JavaScript对象的SourceMap。
 
-在复杂的情况下，当多个loaders被串联使用时，只有最后一个loader能够获取资源文件并且只有第一个loader预期返回一个或者两个值（JavaScript和SourceMap）。其它任何loader返回的值会传到之前的loader中。
+在复杂的情况下，当多个loaders被串联调用时，只有最后一个loader能够获取资源文件并且只有第一个loader预期返回一个或者两个值（JavaScript和SourceMap）。其它任何loader返回的值会传到之前的loader中。
 
 ## 例子
 
@@ -38,7 +38,7 @@ module.exports = function(source, map) {
 （按照优先级排序，第一个具有最高的优先级）
 
 * Loaders应该只做一个任务
-* Loaders能够被串联使用。为每一步创建loaders，而不是在一个loader中做所有事情。
+* Loaders能够被串联调用。为每一步创建loaders，而不是在一个loader中做所有事情。
 
 这也意味着不必须的话它们不应该转换成JavaScript。
 
