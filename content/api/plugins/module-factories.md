@@ -7,23 +7,23 @@ sort: 5
 
 ### `before-resolve(data)` async waterfall
 
-Before the factory starts resolving. The `data` object has these properties:
+工厂开始解析之前。`data` 对象具有以下属性：
 
-* `context` The absolute path of the directory for resolving.
-* `request` The request of the expression.
+* `context` 解析目录的绝对路径。
+* `request` request 的表达式。
 
-Plugins are allowed to modify the object or to pass a new similar object to the callback.
+插件被允许修改对象或将新的类似对象传递给回调。
 
 ### `after-resolve(data)` async waterfall
 
-After the factory has resolved the request. The `data` object has these properties:
+工厂解析 request 之后。`data` 对象具有以下属性：
 
-* `request` The resolved request. It acts as an identifier for the NormalModule.
-* `userRequest` The request the user entered. It's resolved, but does not contain pre or post loaders.
-* `rawRequest` The unresolved request.
-* `loaders` A array of resolved loaders. This is passed to the NormalModule and they will be executed.
-* `resource` The resource. It will be loaded by the NormalModule.
-* `parser` The parser that will be used by the NormalModule.
+* `request` 已解析的 request。它将作为 NormalModule 的标识符。
+* `userRequest` 用户输入的 request。 它已经被解析，但不包含前置或后置的 loaders。
+* `rawRequest` 未解析的 request。
+* `loaders` 被解析的 loaders 数组，将会被传递给 NormalModule 并执行。
+* `resource` 资源。将会被 NormalModule 加载。
+* `parser` 被 NormalModule 使用的解析器。
 
 ## `ContextModuleFactory`
 
