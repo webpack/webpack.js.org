@@ -34,7 +34,7 @@ The different `applyPlugins*` methods cover the following use cases:
 
 * Plugins can run asynchronously
 
-* Quit runing plugins on bail: that is once one plugin returns non-`undefined`, jump out of the run flow and return *the return of that plugin*. This sounds like `once()` of `EventEmitter` but is totally different.
+* Quit running plugins on bail: that is, once one plugin returns non-`undefined`, jump out of the run flow and return *the return of that plugin*. This sounds like `once()` of `EventEmitter` but is totally different.
 
 ## Example
 One of webpack's **Tapable instances**, [Compiler](./compiler), is responsible for compiling the webpack configuration object and returning a [Compilation](./compilation) instance. When the Compilation instance runs, it creates the required bundles.
