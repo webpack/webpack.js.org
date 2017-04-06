@@ -25,6 +25,8 @@
     flex: 1 1 auto;
     font-weight: 600;
     color: getColor(dove-grey);
+    max-width: 90%;
+    @include control-overflow;
   }
 
   &__anchors {
