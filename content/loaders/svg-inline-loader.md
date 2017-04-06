@@ -16,7 +16,7 @@ npm install svg-inline-loader --save-dev
 ```javascript
     {
         test: /\.svg$/,
-        loader: 'svg-inline'
+        loader: 'svg-inline-loader'
     }
 ```
 
@@ -75,13 +75,13 @@ npm install svg-inline-loader --save-dev
 
 ```js
 // 使用默认 hashed prefix (__[hash:base64:7]__)
-var logoTwo = require('svg-inline?classPrefix!./logo_two.svg');
+var logoTwo = require('svg-inline-loader?classPrefix!./logo_two.svg');
 
 // 使用自定义字符串
-var logoOne = require('svg-inline?classPrefix=my-prefix-!./logo_one.svg');
+var logoOne = require('svg-inline-loader?classPrefix=my-prefix-!./logo_one.svg');
 
 // 使用自定义字符串和hash
-var logoThree = require('svg-inline?classPrefix=__prefix-[sha512:hash:hex:5]__!./logo_three.svg');
+var logoThree = require('svg-inline-loader?classPrefix=__prefix-[sha512:hash:hex:5]__!./logo_three.svg');
 ```
 hash 操作请参照 [loader-utils](https://github.com/webpack/loader-utils#interpolatename)。
 
@@ -89,7 +89,7 @@ hash 操作请参照 [loader-utils](https://github.com/webpack/loader-utils#inte
 ```js
     {
         test: /\.svg$/,
-        loader: 'svg-inline?classPrefix'
+        loader: 'svg-inline-loader?classPrefix'
     }
 ```
 

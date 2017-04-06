@@ -77,9 +77,9 @@ import css from 'style-loader!css-loader!./file.css';
 |**`sourceMap`**|`false`| 启用/禁用 Sourcemaps|
 |**`camelCase`**|`false`| 导出以驼峰化命名的类名|
 |**`importLoaders`**|`0`| 在 css-loader 前应用的 loader 的数|
+|**`alias`**|`{}`|Create aliases to import certain modules more easily|
 
-The following webpack config can load CSS files, embed small PNG/JPG/GIF/SVG images as well as fonts as [Data URLs](https://tools.ietf.org/html/rfc2397) and copy larger files to the output directory.
-此 webpack 配置可以加载 CSS 文件，嵌入小的 png 图像数据的 url 和 JPG 图像文件。
+下面的 webpack 配置可以加载 CSS 文件，将较小的 PNG/JPG/GIF/SVG 图片文件像字体那样，转为 [Data URLs](https://tools.ietf.org/html/rfc2397) 嵌入到 CSS 文件中，并将较大的文件复制到输出目录。
 
 **webpack.config.js**
 ```js
@@ -213,7 +213,6 @@ exports.locals = {
 ```
 
 注意: 对于使用extract-text-webpack-plugin预呈现，你应该在 **在预渲染 bundle 中** 使用css-loader / locals而不是style-loader！css-loader。它不嵌入CSS，但只导出标识符映射。
-
 
 ### [CSS 模块](https://github.com/css-modules/css-modules)
 
@@ -359,8 +358,9 @@ If there are SourceMaps, they will also be included in the result string.
 }
 ```
 
-
 当模块系统 (即 webpack) 支持通过源的 loader 匹配时，这可能在将来会改变。
+
+### Minification
 
 ### 最小化
 
@@ -369,7 +369,6 @@ If there are SourceMaps, they will also be included in the result string.
 某种情况下，压缩 css 是具有破坏性的，所以可以提供一些可选项。cssnano 被用来进行压缩，并且它具有一个[可配置项列表](http://cssnano.co/options/).
 
 也可以通过设置 查询参数`minimize` 的禁用或者启用来进行压缩。
-
 
 **webpack.config.js**
 ```js
@@ -396,8 +395,8 @@ If there are SourceMaps, they will also be included in the result string.
 |:----:|:--------|
 |**`true`**|Class names will be camelized|
 |**`'dashes'`**|Only dashes in class names will be camelized|
-|**`'only'`** |Class names will be camelized, the original class name will be removed from the locals|
-|**`'dashesOnly'`**|Dashes in class names will be camelized, the original class name will be removed from the locals|
+|**`'only'`** |Introduced in `0.27.1`. Class names will be camelized, the original class name will be removed from the locals|
+|**`'dashesOnly'`**|Introduced in `0.27.1`. Dashes in class names will be camelized, the original class name will be removed from the locals|
 
 **webpack.config.js**
 ```js
@@ -421,6 +420,44 @@ If there are SourceMaps, they will also be included in the result string.
 ```js
 import { className } from 'file.css';
 ```
+
+### Alias
+
+Rewrite your urls with alias, this is useful when it's hard to change url paths of your input files, for example, when you're using some css / sass files in another package (bootstrap, ratchet, font-awesome, etc.).
+
+#### Possible Options
+
+css-loader's `alias` follows the same syntax as webpack's `resolve.alias`, you can see the details at: https://webpack.js.org/configuration/resolve/#resolve-alias
+
+**webpack.config.js**
+```js
+{
+  test: /\.scss$/,
+  use: [{
+    loader: "style-loader"
+  }, {
+    loader: "css-loader",
+    options: {
+      alias: {
+        "../fonts/bootstrap": "bootstrap-sass/assets/fonts/bootstrap"
+      }
+    }
+  }, {
+    loader: "sass-loader",
+    options: {
+      includePaths: [
+        path.resolve("./node_modules/bootstrap-sass/assets/stylesheets")
+      ]
+    }
+  }]
+}
+```
+
+```scss
+@charset "UTF-8";
+@import "bootstrap";
+```
+Check out this [working bootstrap example](https://github.com/bbtfr/webpack2-bootstrap-sass-sample).
 
 ## 维护人员
 

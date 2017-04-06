@@ -1,7 +1,7 @@
 ---
 title: bundle-loader
-source: https://raw.githubusercontent.com/webpack/bundle-loader/master/README.md
-edit: https://github.com/webpack/bundle-loader/edit/master/README.md
+source: https://raw.githubusercontent.com/webpack-contrib/bundle-loader/master/README.md
+edit: https://github.com/webpack-contrib/bundle-loader/edit/master/README.md
 ---
 ## 安装
 
@@ -36,12 +36,37 @@ load(function(file) {
 
 });
 ```
+### `name` query parameter
 
-你可能会给 bundle 设名称(`name` 查询参数)。请查看[documentation](https://github.com/webpack/loader-utils#interpolatename).
+你可能会使用 `name` 查询参数给 bundle 设置名称。
+请查看[文档](https://github.com/webpack/loader-utils#interpolatename).
 
-``` javascript
+**Note** chunks created by the loader will be named according to the
+[`output.chunkFilename`](https://webpack.js.org/configuration/output/#output-chunkfilename) rule, which defaults to `[id].[name]`.
+Here `[name]` corresponds to the chunk name set in the `name` query parameter.
+
+#### Example:
+
+``` js
 require("bundle-loader?lazy&name=my-chunk!./file.js");
+require("bundle-loader?lazy&name=[name]!./file.js");
 ```
+And the webpack configuration:
+``` js
+module.exports = {
+   entry: { ... },
+   output : {
+      path : ...,
+      filename : '[name].js',
+      chunkFilename : '[name]-[id].js', // or whatever other format you want.
+   },
+}
+```
+
+Normal chunks will show up using the `filename` rule above, and be named according to their chunkname.
+Chunks from `bundle-loader`, however will load using the `chunkFilename` rule, so the example files will produce `my-chunk-1.js` and `file-2.js` respectively.
+
+You can also use `chunkFilename` to add hash values to the filename, since putting `[hash]` in the bundle query parameter does not work correctly.
 
 ## Maintainers
 

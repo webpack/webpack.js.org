@@ -4,7 +4,7 @@ contributors:
   - morsdyce
 ---
 
-[TypeScript](https://www.typescriptlang.org) 是具有类型系统的 JavaScript 的超集，通过编译转化为普通 JavaScript 代码。这篇指南里我们将会学习 webpack 是如何跟 TypeScript 进行结合。
+[TypeScript](https://www.typescriptlang.org) 是 JavaScript 的超集，为其增加了类型系统，可以编译为普通的 JavaScript 代码。这篇指南里我们将会学习 webpack 是如何跟 TypeScript 进行结合。
 
 ## 基础构建
 
@@ -13,7 +13,7 @@ contributors:
 要能在 webpack 里使用 TypeScript，你需要准备好下面这些事情：
 1. 在项目里安装 TypeScript 编译器；
 2. 选择一个 TypeScript loader 安装（这个示例里使用的是 ts-loader）;
-3. 创建 __tsconfig.json__ 文件，这是 TypeScript 编辑器的配置文件；
+3. 创建 __tsconfig.json__ 文件，这是 TypeScript 编译器的配置文件；
 4. 创建 __webpack.config.js__ 文件，这是 webpack 的配置文件。
 
 你可以通过 npm 安装 TypeScript 编译器和 TypeScript loader，运行下面这个命令来安装：
