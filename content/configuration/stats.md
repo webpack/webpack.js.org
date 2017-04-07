@@ -93,5 +93,9 @@ stats: {
   version: true,
   // Add warnings
   warnings: true
+  // filter warnings to be shown.
+  // can be a String, Regexp, a function getting the warning and returning a boolean
+  // or an Array of a combination of the above. First match wins.
+  warningsFilter: "filter" | /filter/ | ["filter", /filter/] | (warning) => ... return true|false
 };
 ```
