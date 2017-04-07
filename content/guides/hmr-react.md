@@ -6,6 +6,7 @@ contributors:
   - sararubin
   - aiduryagin
   - rohannair
+  - joshsantos
 ---
 
 As explained in detail on the [concept page](/concepts/hot-module-replacement), Hot Module Replacement (HMR) exchanges, adds, or removes modules while an application is running, without a page reload.
