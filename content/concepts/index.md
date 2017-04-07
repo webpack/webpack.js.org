@@ -8,9 +8,9 @@ contributors:
   - johnstew
 ---
 
-*webpack* is a _module bundler_ for modern JavaScript applications. It is [incredibly configurable](/configuration), however, there are **Four Core Concepts** we feel you should understand before you get started!
+*webpack* is a _module bundler_ for modern JavaScript applications. It is [incredibly configurable](/configuration), but to get started you only need to understand **Four Core Concepts**: entry, output, loaders, and plugins.
 
-As part of your webpack learning journey, we wrote this document aimed to give you a **high-level** overview of these concepts, while still providing links to concept specific use-cases.
+This document is intended to give a **high-level** overview of these concepts, while providing links to detailed concept specific use-cases.
 
 ## Entry
 
