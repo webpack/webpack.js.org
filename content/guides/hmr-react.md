@@ -24,8 +24,7 @@ This guide will be demonstrating HMR using Babel on a React app, with PostCSS (u
 First, install the following dev dependencies:
 
 ```bash
-npm install --save-dev babel-core babel-loader style-loader css-loader postcss-loader /
-  babel-preset-es2015 babel-preset-react webpack-dev-server webpack
+npm install --save-dev babel-core babel-loader style-loader css-loader postcss-loader babel-preset-es2015 babel-preset-react webpack-dev-server webpack
 ```
 
 In addition you'll need to install React, ReactDOM and `react-hot-loader` (make sure to use the `next` release of this package)
