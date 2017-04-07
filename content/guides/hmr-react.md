@@ -6,6 +6,7 @@ contributors:
   - sararubin
   - aiduryagin
   - rohannair
+  - joshsantos
 ---
 
 As explained in detail on the [concept page](/concepts/hot-module-replacement), Hot Module Replacement (HMR) exchanges, adds, or removes modules while an application is running, without a page reload.
@@ -24,8 +25,9 @@ This guide will be demonstrating HMR using Babel on a React app, with PostCSS (u
 First, install the following dev dependencies:
 
 ```bash
-npm install --save-dev babel-core babel-loader style-loader css-loader postcss-loader /
-  babel-preset-es2015 babel-preset-react webpack-dev-server webpack
+npm install --save-dev webpack webpack-dev-server
+npm install --save-dev babel-core babel-loader babel-preset-es2015 babel-preset-react
+npm install --save-dev style-loader css-loader postcss-loader
 ```
 
 In addition you'll need to install React, ReactDOM and `react-hot-loader` (make sure to use the `next` release of this package)
