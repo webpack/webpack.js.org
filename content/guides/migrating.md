@@ -255,7 +255,7 @@ Thus make sure to remove the plugin from your configuration:
 ``` diff
   plugins: [
     // webpack 1
--   new webpack.optimize.OccurenceOrderPlugin()
++   new webpack.optimize.OccurrenceOrderPlugin()
     // webpack 2
 -   new webpack.optimize.OccurrenceOrderPlugin()
   ]
