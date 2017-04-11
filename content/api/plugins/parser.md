@@ -3,23 +3,23 @@ title: Parser
 sort: 8
 ---
 
-The parser instance takes a String and callback and will return an expression when there's a match.
+解析器实例接收一个字符串以及回调函数，并在匹配时返回一个表达式。
 
 ```javascript
 compiler.parser.plugin("var rewire", function (expr) {
-    //if you original module has 'var rewire'
-    //you now have a handle on the expresssion object
+    //如果原始模块包含 "var rewire"
+    //将得到一个表达式对象的句柄
     return true;
 });
 ```
 
 ## `program(ast)` bailing
 
-General purpose plugin interface for the AST of a code fragment.
+代码片段中 AST 的通用插件接口。
 
 ## `statement(statement: Statement)` bailing
 
-General purpose plugin interface for the statements of the code fragment.
+代码片段中 statements 的通用插件接口。
 
 ## `call <identifier>(expr: Expression)` bailing
 
@@ -37,7 +37,7 @@ General purpose plugin interface for the statements of the code fragment.
 
 `(abc ? 1 : 2)` => `expression ?!`
 
-Return a boolean value to omit parsing of the wrong path.
+返回一个布尔值以省略对错误路径的解析。
 
 ## `typeof <identifier>(expr: Expression)` bailing
 
@@ -47,7 +47,7 @@ Return a boolean value to omit parsing of the wrong path.
 
 `if(abc) {}` => `statement if`
 
-Return a boolean value to omit parsing of the wrong path.
+返回一个布尔值以省略对错误路径的解析。
 
 ## `label <labelname>(statement: Statement)` bailing
 
@@ -57,27 +57,27 @@ Return a boolean value to omit parsing of the wrong path.
 
 `var abc, def` => `var abc` + `var def`
 
-Return `false` to not add the variable to the known definitions.
+返回 `false`，变量不会添加到已知的定义中。
 
 ## `evaluate <expression type>(expr: Expression)` bailing
 
-Evaluate an expression.
+鉴定一个表达式。
 
 ## `evaluate typeof <identifier>(expr: Expression)` bailing
 
-Evaluate the type of an identifier.
+鉴定标识符的类型。
 
 ## `evaluate Identifier <identifier>(expr: Expression)` bailing
 
-Evaluate a identifier that is a free var.
+鉴定一个自由变量的标识符。
 
 ## `evaluate defined Identifier <identifier>(expr: Expression)` bailing
 
-Evaluate a identifier that is a defined var.
+鉴定一个已定义变量的标识符。
 
 ## `evaluate CallExpression .<property>(expr: Expression)` bailing
 
-Evaluate a call to a member function of a successfully evaluated expression.
+鉴定对成功鉴定的表达式的成员函数的调用。
 
 ***
 
