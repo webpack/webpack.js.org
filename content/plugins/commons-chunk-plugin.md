@@ -23,7 +23,7 @@ The `CommonsChunkPlugin` is an opt-in feature that creates a separate file (know
   // otherwise `options.filename` is used as chunk name.
 
   filename: string,
-  // The filename template for the commons chunk. Can contain the same placeholder as `output.filename`.
+  // The filename template for the commons chunk. Can contain the same placeholders as `output.filename`.
   // If omitted the original filename is not modified (usually `output.filename` or `output.chunkFilename`).
 
   minChunks: number|Infinity|function(module, count) -> boolean,
