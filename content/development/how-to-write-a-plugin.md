@@ -5,29 +5,29 @@ sort: 2
 
 插件向第三方开发者提供了 webpack 引擎中完整的能力。使用阶段式的构建回调，开发者可以引入它们自己的行为到 webpack 构建流程中。创建插件比创建加载器更加高级，因为你将需要理解一些 webpack 底层的内部特性来做相应的勾子，所以做好阅读一些源码的准备！
 
-## Creating a Plugin
+## 创建插件
 
-A plugin for `webpack` consists of
+`webpack`插件的组成：
 
-  - A named JavaScript function.
-  - Defines `apply` method in it's prototype.
-  - Specifies webpack's event hook to attach itself.
-  - Manipulates webpack internal instance specific data.
-  - Invokes webpack provided callback after functionality is complete.
+  - 一个JavaScript命名函数。
+  - 在它的原型上定义一个`apply`方法。
+  - 指定挂载的webpack事件钩子。
+  - 处理webpack内部实例的特定数据。
+  - 功能完成后调用webpack提供的回调。
 
 ```javascript
-// A named JavaScript function.
+// 命名函数
 function MyExampleWebpackPlugin() {
 
 };
 
-// Defines `apply` method in it's prototype.
+// 在它的原型上定义一个`apply`方法。
 MyExampleWebpackPlugin.prototype.apply = function(compiler) {
-  // Specifies webpack's event hook to attach itself.
-  compiler.plugin('webpacksEventHook', function(compilation /* Manipulates webpack internal instance specific data. */, callback) {
+  // 指定挂载的webpack事件钩子。
+  compiler.plugin('webpacksEventHook', function(compilation /* 处理webpack内部实例的特定数据。*/, callback) {
     console.log("This is an example plugin!!!");
 
-    // Invokes webpack provided callback after functionality is complete.
+    // 功能完成后调用webpack提供的回调。
     callback();
   });
 };
@@ -160,11 +160,11 @@ FileListPlugin.prototype.apply = function(compiler) {
 module.exports = FileListPlugin;
 ```
 
-## Different Plugin Shapes
+## 不同类型的插件
 
-A plugin can be classified into types based on the event it is registered to. Every event hook decides how it is going to apply the plugins in its registry.
+webpack插件可以按照它所注册的事件分成不同的类型。每一个事件钩子决定了如何使用注册的插件。
 
-- __synchronous__ The Tapable instance applies plugins using
+- __同步__ The Tapable instance applies plugins using
 
 `applyPlugins(name: string, args: any...)`
 
