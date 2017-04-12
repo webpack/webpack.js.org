@@ -6,6 +6,8 @@ contributors:
   - sararubin
   - aiduryagin
   - rohannair
+  - joshsantos
+  - drpicox
 ---
 
 正如在[概念](/concepts/hot-module-replacement)章节提到的，模块热替换(HMR)的作用是，在应用运行时，无需刷新页面，便能替换、增加、删除必要的模块。
@@ -17,13 +19,14 @@ T> 如果你想查看其他配置方式的示例，可以告诉我们，或者�
 
 ## 项目配置
 
-本指南将演示在 React 应用程序中使用 Babel 和 PostCSS（使用 CSS 模块）如何配置 HMR。
+本指南将展示使用了 HMR 的 Babel 的 React 应用程序和 CSS 模块。
 
 首先，安装如下开发依赖：
 
 ```bash
-npm install --save-dev babel-core babel-loader style-loader css-loader postcss-loader /
-  babel-preset-es2015 babel-preset-react webpack-dev-server webpack
+npm install --save-dev webpack webpack-dev-server
+npm install --save-dev babel-core babel-loader babel-preset-es2015 babel-preset-react
+npm install --save-dev style-loader css-loader
 ```
 
 其次，你需要安装 React, ReactDOM 和 `react-hot-loader`（确保使用这个包的 `next` 版本）
@@ -134,7 +137,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [ 'style-loader', 'css-loader?modules', 'postcss-loader', ],
+        use: [ 'style-loader', 'css-loader?modules', ],
       },
     ],
   },

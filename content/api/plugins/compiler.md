@@ -52,7 +52,7 @@ Compiler 的作用可以浓缩为以下几个亮点：
  - 通常有一个 Compiler 的主实例。可以创建子 compiler 来委派特定任务。
  - 创建一个 compiler 的复杂性很大程度来自于为其填充各种相关的选项。
  - `webpack` 具有 [`WebpackOptionsDefaulter`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js) 和 [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js) 专门设计为其提供所有它需要的初始数据。
- - `Compiler` 精简成只有一个函数，执行最基本的功能来保持生命周期运行。它将所有加载/捆绑/写入工作委派给各种插件。
+ - `Compiler` 根本上是一个执行最基本的功能以保持生命周期运行的函数。它将所有加载/打包/写入(loading/bundling/writing)工作委派给各种插件。
  - `new LogPlugin(args).apply(compiler)` 将插件注册到 `Compiler` 的生命周期中任何一个特定的挂钩事件。
  - `Compiler` 暴露了一个 `run` 方法，它启动 `webpack` 的所有编译工作。当执行完时，它会执行传入的 `回调` 函数，日志记录、统计和错误处理等收尾工作都是在这个回调函数中完成。
 

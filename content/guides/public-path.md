@@ -3,6 +3,7 @@ title: Public Path
 contributors:
   - rafaelrinaldi
   - chrisVillanueva
+  - gonzoyumo
 ---
 
 webpack 提供一个非常有用的配置，该配置能帮助你为项目中的所有资源指定一个基础路径。它被称为`公共路径(publicPath)`。
@@ -50,6 +51,15 @@ __webpack_public_path__ = process.env.ASSET_PATH;
 
 一切设置完成。因为我们已经在我们的配置项中使用了`DefinePlugin`，`process.env.ASSET_PATH`
 就已经被定义了，所以让我们能够安心地使用它了。
+
+**WARNING:** Be aware that if you use ES6 module imports in your entry file the `__webpack_public_path__` assignment will be done after the imports. In such cases, you'll have to move the public path assignment to its own dedicated module and then import it on top of your entry.js:
+**警告：**请注意，如果您在入口文件中使用 ES6 模块导入，则在导入后对 `__webpack_public_path__` 进行赋值。在这种情况下，您必须将公共路径(public path)赋值移至自己的专属模块，然后将其导入到您的 entry.js 之上：
+
+```js
+// entry.js
+import './public-path';
+import './app';
+```
 
 ***
 

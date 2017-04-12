@@ -14,7 +14,7 @@ contributors:
 
 开发者能够通过以下任何一种方式帮助我们：
 
-*   提交您认为[作者指引](./writers-guide)中合适或缺少的文档更新
+*   提交您认为[作者指引](/writers-guide)中合适或缺少的文档更新
 *   通过这里为您提供的便捷[开发指南](/development/index)，来为 [webpack](https://github.com/webpack/webpack) 提供技术贡献
 *   捐助也是受欢迎的 [Open Collective](https://opencollective.com/webpack)
 *   赞助 webpack

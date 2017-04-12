@@ -34,7 +34,7 @@ contributors:
 
 * 异步执行插件
 
-* 保护模式终止插件执行: 一旦某个插件返回 non-`undefined` ,会退出运行流程并返回 *这个插件的返回值*。这看起来像 `EventEmitter` 的 `once()`,但他们是完全不同的。
+* 保护模式终止插件执行: 一旦某个插件返回 non-`undefined`，会退出运行流程并返回 *这个插件的返回值*。这看起来像 `EventEmitter` 的 `once()`，但他们是完全不同的。
 
 ## 示例
 webpack中有个Tapable实例 [Compiler](./compiler), 它的作用是编译webpack的配置对象,并返回[Compilation](./compilation)实例。当Compilation实例运行时,它会创建所需的包。
