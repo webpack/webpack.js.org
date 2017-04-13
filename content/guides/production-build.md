@@ -10,6 +10,7 @@ contributors:
   - chrisVillanueva
   - swapnilmishra
   - bring2dip
+  - redian
 ---
 
 该页面说明了如何通过`webpack`生成生产环境所用的文件。
@@ -143,7 +144,8 @@ module.exports = buildConfig;
  "build:dist": "webpack --env=prod --progress --profile --colors",
 ```
 
-可以看到，我们给把环境变量传递给了 webpack.config.js 文件。在这里我们使用一个简单的 switch-case 载入正确的 JS 文件，来做到针对不同的环境进行构建。
+可以看到，我们把环境变量传递给了 webpack.config.js 文件。
+然后，环境变量被传递给 `buildConfig` 方法，该方法只是为了加载构建后的正确 js 文件。
 
 一个高阶的方式是编写一个基本配置文件，把所有公用的功能放在里面。再编写特定环境的文件,使用 'webpack-merge' 来合并他们.这样能够避免代码重复。
 你可以把所有的基本配置，如处理 js、ts、png、jpeg、json 等文件的配置放在公用的 `base` 文件中，代码样例如下：
