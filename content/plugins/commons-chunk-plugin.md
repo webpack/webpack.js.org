@@ -187,7 +187,7 @@ new webpack.optimize.CommonsChunkPlugin({
 })
 ```
 
-In order to obtain a single CSS file containing your application and vendor CSS, use the following `minChunks` function together with [`ExtractTextPlugin`](plugins/extract-text-webpack-plugin/):
+In order to obtain a single CSS file containing your application and vendor CSS, use the following `minChunks` function together with [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin/):
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({
