@@ -174,6 +174,28 @@ module.exports = {
 };
 ```
 
+## `import` imports the entire module namespace
+
+Consider the following two examples:
+
+```js
+// Example 1: top-level import
+import * as Component from './component';
+// Example 2: Code-splitting with import()
+import('./component').then(Component => /* ... */);
+```
+
+`Component` in both of those cases resolves to the same thing, meaning in the case of using `import()` with ES2015 modules you have to explicity access default and named exports:
+
+```js
+async function main() {
+  // Destructuring example
+  const { default: Component } = await import('./component');
+  // Inline example
+  render((await import('./component')).default);
+}
+```
+
 
 ### `System.import` is deprecated
 
