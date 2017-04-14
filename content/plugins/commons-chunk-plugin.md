@@ -151,7 +151,7 @@ new webpack.optimize.CommonsChunkPlugin({
 You also have the ability to pass the `minChunks` property a function. This function is called by the `CommonsChunkPlugin` and calls the function with `module` and `count` arguments.
 
 The `module` argument represents each module in the chunks you have provided via the `name`/`names` property.
-`module` has the shape of a [NormalModule](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js#L57), which has two particularly useful properties for this use case:
+`module` has the shape of a [NormalModule](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js), which has two particularly useful properties for this use case:
 
 - `module.context`: The directory that stores the file. For example: `'/my_project/node_modules/example-dependency'`
 - `module.resource`: The name of the file being processed. For example: `'/my_project/node_modules/example-dependency/index.js'`
