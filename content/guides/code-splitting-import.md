@@ -6,6 +6,10 @@ contributors:
   - levy9527
 ---
 
+This guide documents how to split your bundle into chunks which can be downloaded asynchronously at a later time. For instance, this allows to serve a minimal bootstrap bundle first and to asynchronously additional features later.
+
+webpack supports two similar techniques to achieve this goal: using `import()` (preferred, ECMAScript proposal) and `require.ensure()` (legacy, webpack specific). 
+
 ## Dynamic import
 
 Currently, a "function-like" `import()` module loading [syntax proposal](https://github.com/tc39/proposal-dynamic-import) is on the way into ECMAScript.
