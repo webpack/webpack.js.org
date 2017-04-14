@@ -283,7 +283,7 @@ Example for an `expr` dynamic dependency: `require(expr)`.
 
 Example for an `wrapped` dynamic dependency: `require("./templates/" + expr)`.
 
-Here are the available options with their defaults:
+Here are the available options with their [defaults](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js):
 
 ```js
 module: {
@@ -298,6 +298,7 @@ module: {
   wrappedContextCritical: false
   wrappedContextRecursive: true,
   wrappedContextRegExp: /.*/,
+  strictExportPresence: false // since webpack 2.3.0
 }
 ```
 
@@ -308,3 +309,4 @@ A few use cases:
 * Warn for dynamic dependencies: `wrappedContextCritical: true`.
 * `require(expr)` should include the whole directory: `exprContextRegExp: /^\.\//`
 * `require("./templates/" + expr)` should not include subdirectories by default: `wrappedContextRecursive: false`
+* `strictExportPresence` makes missing exports an error instead of warning
