@@ -187,8 +187,7 @@ new webpack.optimize.CommonsChunkPlugin({
 })
 ```
 
-To add further control to an implicit common vendor chunk, you can additional logic before the `node_modules` context check to prevent
-specific modules from being included in the vendor chunk (such as stylesheets you want to keep in the original chunk):
+In order to obtain a single CSS file containing your application and vendor CSS, use the following `minChunks` function together with [`ExtractTextPlugin`](plugins/extract-text-webpack-plugin/):
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({
