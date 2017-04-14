@@ -21,171 +21,62 @@ The syntax is as follows:
 require.ensure(dependencies: String[], callback: function(require), chunkName: String)
 ```
 
-#### dependencies
-This is an array of strings where we can declare all the modules that need to be made available before all the code in the callback function can be executed.
-
-#### callback
-This is the callback function that webpack will execute once the dependencies are loaded. An implementation of the `require` function is sent as a parameter to this function. The function body can use this to further `require()` modules it needs for execution.
-
-#### chunkName
-The `chunkName` is a name given to the chunk created by this particular `require.ensure()`. By passing the same `chunkName` to various `require.ensure()` calls, we can combine their code into a single chunk, resulting in only one bundle that the browser must load.
+* `dependencies` is an array of strings where we can declare all the modules that need to be made available before all the code in the callback function can be executed.
+* `callback` is a function that webpack will execute once the dependencies are loaded. An implementation of the `require` function is sent as a parameter to this function. The function body can use this to further `require()` modules it needs for execution.
+* `chunkName` is a name given to the chunk created by this particular `require.ensure()`. By passing the same `chunkName` to various `require.ensure()` calls, we can combine their code into a single chunk, resulting in only one bundle that the browser must load.
 
 ## Example
 
-Let us consider the following file structure:
+Let's reconsider the dynamic import of `moment` from the `import()` section and rewrite it using `require.ensure()`:
 
-```bash
-.
-├── dist
-├── js
-│   ├── a.js
-│   ├── b.js
-│   ├── c.js
-│   └── entry.js
-└── webpack.config.js
-```
-
-**entry.js**
-
+**index.js**
 ```javascript
-require('./a');
-require.ensure(['./b'], function(require){
-    require('./c');
-    console.log('done!');
-});
-```
-
-**a.js**
-
-```javascript
-console.log('***** I AM a *****');
-```
-
-**b.js**
-
-```javascript
-console.log('***** I AM b *****');
-```
-
-**c.js**
-
-```javascript
-console.log('***** I AM c *****');
-```
-
-**webpack.config.js**
-
-```javascript
-var path = require('path');
-
-module.exports = function(env) {
-    return {
-        entry: './js/entry.js',
-        output: {
-            filename: 'bundle.js',
-            path: path.resolve(__dirname, 'dist'),
-            publicPath: 'https://cdn.example.com/assets/',
-            // tell webpack where to load the on-demand bundles. 
-
-            pathinfo: true,
-            // show comments in bundles, just to beautify the output of this example.
-            // should not be used for production.
-        }
-    }
+function determineDate() {
+  require.ensure([], function(require) {
+    var moment = require('moment');
+    console.log(moment().format());
+  });
 }
 
+determineDate();
 ```
 
-T> `output.publicPath` is an important option when using code-splitting, it is used to tell webpack where to load your bundles on-demand, see the [configuration documentation](/configuration/output/#output-publicpath).
-
-On running webpack on this project, we find that webpack has created two new bundles, `bundle.js` and `0.bundle.js`.
-
-`entry.js` and `a.js` are bundled in `bundle.js`.
+Running `webpack index.js bundle.js` generates two files, `bundle.js` and `0.bundle.js`:
 
 **bundle.js**
-
-```javascript
-/******/ (function(modules) { // webpackBootstrap
-//webpack bootstrap code...
-
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "https://cdn.example.com/assets/";
-
-// webpack bootstrap code...
-/******/ })
-/******/ ([
-/* 0 */
-/* unknown exports provided */
-/* all exports used */
-/*!*****************!*\
-  !*** ./js/a.js ***!
-  \*****************/
-/***/ (function(module, exports) {
-
-console.log('***** I AM a *****');
-
-
-/***/ }),
-/* 1 */,
-/* 2 */,
-/* 3 */
-/* unknown exports provided */
-/* all exports used */
-/*!*********************!*\
-  !*** ./js/entry.js ***!
-  \*********************/
+```js
+// webpack code ...
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./a */ 0);
-__webpack_require__.e/* require.ensure */(0).then((function(require){
-    __webpack_require__(/*! ./c */ 2);
-    console.log('done!');
-}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+function determineDate() {
+  __webpack_require__.e/* require.ensure */(0).then((function(require) {
+    var moment = __webpack_require__(0);
+    console.log(moment().format());
+  }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+}
 
-
-/***/ })
-/******/ ]);
+determineDate();
+// webpack code ...
 ```
 
-T> We can see the specified **webpack public path** on `__webpack_require__.p` in the bootstrap code, it corresponds to our `output.publicPath` configuration on above.
+**0.bundle.js*
+```js
+webpackJsonp([0],[(function(module, exports, __webpack_require__) {
+/* WEBPACK VAR INJECTION */(function(module) {
 
-`b.js` and `c.js` are bundled in `0.bundle.js`.
+//! moment.js
 
-**0.bundle.js**
-```javascript
-webpackJsonp([0],[
-/* 0 */,
-/* 1 */
-/* unknown exports provided */
-/* all exports used */
-/*!*****************!*\
-  !*** ./js/b.js ***!
-  \*****************/
-/***/ (function(module, exports) {
-
-console.log('***** I AM b *****');
-
-
-/***/ }),
-/* 2 */
-/* unknown exports provided */
-/* all exports used */
-/*!*****************!*\
-  !*** ./js/c.js ***!
-  \*****************/
-/***/ (function(module, exports) {
-
-console.log('***** I AM c *****');
-
-
-
-/***/ })
-]);
+})]);
 ```
 
-Now just add `bundle.js` in your HTML file and open it in your broswer, the `0.bundle.js` will be loaded on demand (from `https://cdn.example.com/assets/0.bundle.js`) by webpack.
+When you add `bundle.js` in your HTML file and open it in your browser, the `0.bundle.js` will be loaded asynchronously by webpack.
 
-**More examples**
+## publicPath
+
+`output.publicPath` is an important option when using code-splitting, it is used to tell webpack where to load your bundles on-demand, see the [configuration documentation](/configuration/output/#output-publicpath).
+
+## Examples
+
 * https://github.com/webpack/webpack/tree/master/examples/code-splitting
 * https://github.com/webpack/webpack/tree/master/examples/named-chunks – illustrates the use of `chunkName`
 
