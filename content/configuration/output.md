@@ -531,11 +531,33 @@ There is no need to change it.
 
 `boolean`
 
-Tell webpack to remove a module from cache if it throws an exception when it is `require`d. 
+Tell webpack to remove a module from the module instance cache (`require.cache`) if it throws an exception when it is `require`d.
 
 It defaults to `false` for performance reasons.
 
 When set to `false`, the module is not removed from cache, which results in the exception getting thrown only on the first `require` call (making it incompatible with node.js).
+
+For instance, consider `module.js`:
+
+``` js
+throw new Error("error");
+```
+
+With `strictModuleExceptionHandling` set to `false`, only the first `require` throws an exception:
+
+``` js
+// with strictModuleExceptionHandling = false
+require("module") // <- throws
+require("module") // <- doesn't throw
+```
+
+Instead, with `strictModuleExceptionHandling` set to `true`, all `require`s of this module throw an exception:
+
+``` js
+// with strictModuleExceptionHandling = true
+require("module") // <- throws
+require("module") // <- also throw
+```
 
 
 ## `output.umdNamedDefine`
