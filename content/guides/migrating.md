@@ -563,9 +563,9 @@ module: {
 
 `-p` 能够定义 `process.env.NODE_ENV` 为 `"production"`。
 
-## Loader 变化
+## Loader 变更
 
-以下改变仅影响 loader 的开发者。
+以下变更仅影响 loader 的开发者。
 
 ### Cacheable
 
@@ -589,8 +589,8 @@ Loaders 现在默认可被缓存。Loaders 如果不想被缓存，需要选择�
 
 ### 复合 options
 
-webpack 1 只支持能够 `JSON.stringify` 的对象作为选项。
-webpack 2 现在支持任意 JS 对象作为 loader 选项。
+webpack 1 只支持能够「可 `JSON.stringify`的对象」作为 loader 的 options。
+webpack 2 现在支持任意 JS 对象作为 loader 的 options。
 
 使用复合 options 只有一个附加条件。你需要在 options 对象上添加一个 `ident`，让它能够被其他 loader 引用。
 
