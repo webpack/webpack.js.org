@@ -40,6 +40,7 @@ openssl aes-256-cbc -K $encrypted_7562052d3e34_key -iv $encrypted_7562052d3e34_i
 chmod 600 scripts/deploy_key.pub
 eval `ssh-agent -s`
 ssh-add scripts/deploy_key.pub
+chmod -R 777 node_modules/gh-pages/
 
 # Now that we're all set up, we can deploy
 npm run deploy
