@@ -429,7 +429,7 @@ require.ensure([], function(require) {
 });
 ```
 
-ES2015 模块加载规范定义了 [`import()`](/guides/code-splitting-import) 方法来运行时(runtime)动态地加载 ES2015 模块。
+ES2015 模块加载规范定义了 [`import()`](/guides/code-splitting-import) 方法，可以在运行时(runtime)动态地加载 ES2015 模块。
 
 webpack 将 `import()` 作为分割点(split-point)并将所要请求的模块(requested module)放置到一个单独的 chunk 中。
 `import()` 接收模块名作为参数，并返回一个 Promise。
