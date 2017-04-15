@@ -131,11 +131,11 @@ T> 输出可能会稍有不同。如果构建成功，那么你就可以继续�
 
 你注意到在 `app/index.js` 中使用的 [ES2015 模块的 import](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/import) 了吗？尽管 `import`/`export` 语句在浏览器中还未被支持，你也可以正常的使用，因为 webpack 会将其替换为 ES5 兼容的代码。你可以检查 `dist/bundle.js` 的代码来说服自己放心使用。
 
-注意 webpack 将不会更改你的 `import`/`export` 除外的代码。如果你在使用其它 [ES2015 特性](http://es6-features.org/)，请确保你使用了一个像是 [Babel](https://babeljs.io/) 或 [Bublé](https://buble.surge.sh/guide/) 的转译器。
+注意，webpack 不会更改你的代码中除 `import`/`export` 以外的部分。如果你在使用其它 [ES2015 特性](http://es6-features.org/)，请确保你使用了一个像是 [Babel](https://babeljs.io/) 或 [Bublé](https://buble.surge.sh/guide/) 的转译器。
 
 ## 使用带有配置的 webpack
 
-对于更复杂的配置，我们可以使用一个配置文件，webpack 会参考它来打包代码。创建一个 `webpack.config.js` 文件后，你可以通过以下配置向 CLI 命令传达和前面一样的信息。
+对于更复杂的配置，我们可以使用一个配置文件，webpack 会按照它来打包代码。创建一个 `webpack.config.js` 文件后，你可以使用如下的配置设置来表示上述 CLI 命令。
 
 __webpack.config.js__
 ```javascript
@@ -150,7 +150,7 @@ module.exports = {
 };
 ```
 
-此文件可以像下面这样被 webpack 运行。
+此文件可以像下面这样被 webpack 执行。
 
 ```bash
 ./node_modules/.bin/webpack --config webpack.config.js
@@ -170,7 +170,7 @@ T> 如果存在 `webpack.config.js`，`webpack` 命令将默认选择使用它�
 
 T> 如果在上面“创建一个 bundle 文件”章节，已经成功创建过 `dist/bundle.js` 文件，可以删除 `dist` 子目录来验证通过 `webpack.config.js` 的设置所输出的内容是否符合预期。
 
-通过配置文件可以最灵活地使用 webpack。我们可以通过配置文件来添加加载器规则、插件、解析选项以及许多其他增强功能。
+通过配置文件可以最灵活地使用 webpack。我们可以通过向配置文件添加 loader 规则(loader rules)、插件(plugins)、解析选项(resolve options)以及许多其他增强功能，来进行打包。
 
 ## 配合 npm 使用
 
@@ -186,13 +186,13 @@ T> 如果在上面“创建一个 bundle 文件”章节，已经成功创建过
 }
 ```
 
-现在你可以通过使用 `npm run build` 命令来实现与上面相同的效果。npm 通过命令选取脚本，并临时修补执行环境，使脚本可以在运行时包含 bin 命令。你可以在很多项目中看到这种使用习惯。
+现在你可以通过使用 `npm run build` 命令来实现与上面相同的效果。npm 通过命令选取脚本，并临时扩充执行环境，使脚本可以在运行时包含 bin 命令。你可以在很多项目中看到这种使用习惯。
 
 T> 你可以通过向 `npm run build` 命令添加两个中横线，给 webpack 传递自定义参数，例如：`npm run build -- --colors`。
 
 ## 结论
 
-现在你已经一起学习了基本的构建过程，你可以深入 webpack [基本概念](/concepts) 和 [配置](/configuration) 来更好地理解其设计。也可以查看 [指南](/guides) 来学习如何处理常见问题。[API](/api) 章节则是对底层的功能进行深入。
+现在你已经一起学习了基本的构建过程，你可以深入 webpack [基本概念](/concepts)和[配置](/configuration)来更好地理解其设计。也可以查看[指南](/guides)来学习如何处理常见问题。[API](/api) 章节则是对底层的功能进行深入。
 
 ***
 
