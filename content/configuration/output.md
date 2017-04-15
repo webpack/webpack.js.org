@@ -96,21 +96,26 @@ devtoolModuleFilenameTemplate: info => {
 
 If multiple modules would result in the same name, [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolfallbackmodulefilenametemplate) is used instead for these modules.
 
+
 ## `output.hashFunction`
 
 The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm) are supported.
+
 
 ## `output.hashDigest`
 
 The hashing algorithm to use, defaults to `'hex'`. All functions from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported.
 
+
 ## `output.hashDigestLength`
 
 The prefix length of the hash digest to use, defaults to `20`.
 
+
 ## `output.hashSalt`
 
 An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_input_encoding).
+
 
 ## `output.filename`
 
@@ -269,7 +274,8 @@ var MyLibrary = _entry_return_;
 // your users will use your library like:
 MyLibrary.doSomething();
 ```
-(Not specifying a `output.library` will cancel this var configuration)
+
+W> Not specifying a `output.library` will cancel this `"var"` configuration.
 
 
 `libraryTarget: "this"` - When your library is loaded, the **return value of your entry point** will be assigned to this, the meaning of `this` is up to you:
@@ -338,8 +344,8 @@ define([], function() {
 	//what this module returns is what your entry chunk returns
 });
 ```
-But if you download this script, first you may get a error: `define is not defined`, it’s ok! 
-If you are distributing your library with AMD, then your users need to use RequireJS to load it. 
+
+But if you download this script, you may get an error: `define is not defined`, it’s ok! If you are distributing your library with AMD, then your users need to use RequireJS to load it. 
 
 Now that you have RequireJS loaded, you can load your library.
 
@@ -384,6 +390,7 @@ output: {
 ```
 
 And finally the output is:
+
 ```javascript
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')

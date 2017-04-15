@@ -13,18 +13,19 @@ Hot Module Replacement (HMR) exchanges, adds, or removes
 page reload. This allows you to speed up development time by updating
 individual modules when they are changed without refreshing the page.
 
-## How Does It Work?
+
+## How It Works
 
 ### From The App View
 
 1. The app code asks the HMR runtime to check for updates.
-2. The HMR runtime downloads the updates (asynchronously) and tells the app
-code that an update is available.
+2. The HMR runtime downloads the updates (asynchronously) and tells the app code that an update is available.
 3. The app code then asks the HMR runtime to apply the updates.
 4. The HMR runtime applies the update (synchronously).
 
 You can set up HMR so that this process happens automatically, or you can
 choose to require user interaction for updates to occur.
+
 
 ### From The Compiler (webpack) View
 
@@ -45,6 +46,7 @@ between these builds. It typically stores these IDs in memory (for example, when
 using [webpack-dev-server](/configuration/dev-server/)), but it's also possible to
 store them in a JSON file.
 
+
 ### From The Module View
 
 HMR is an opt-in feature that only affects modules containing HMR code. One example
@@ -58,6 +60,7 @@ HMR code in every module. If a module has no HMR handlers, the update bubbles up
 means that a single handler can handle an update to a complete module tree. If a single
 module in this tree is updated, the complete module tree is reloaded (only reloaded,
 not transferred).
+
 
 ### From The HMR Runtime View (Technical)
 
@@ -82,7 +85,8 @@ Afterwards, all invalid modules are disposed (via the dispose handler) and unloa
 The current hash is then updated and all "accept" handlers are called. The runtime
 switches back to the `idle` state and everything continues as normal.
 
-## What can I do with it?
+
+## What It Can Be Used For
 
 You can use it in development as a LiveReload replacement.
 [webpack-dev-server](/configuration/dev-server/) supports a

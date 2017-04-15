@@ -1,7 +1,8 @@
 ---
 title: webpack
 ---
-## Write your code.
+
+## Write your code
 
 <div class="homepage__wrap">
 <div class="homepage__left">
@@ -27,7 +28,8 @@ export default function bar() {
 </div>
 </div>
 
-## Bundle with webpack.
+
+## Bundle with webpack
 
 <div class="homepage__wrap">
 <div class="homepage__left">
@@ -64,5 +66,6 @@ Then run `webpack` on the command-line to create `bundle.js`.
 </div>
 </div>
 
-## It's that simple.
+## It's that simple
+
 ## [Get Started](/guides/get-started)

@@ -9,6 +9,7 @@ contributors:
 
 The entry object is where webpack looks to start building the bundle. The context is an absolute string to the directory that contains the entry files.
 
+
 ## `context`
 
 `string`
@@ -22,6 +23,7 @@ context: path.resolve(__dirname, "app")
 By default the current directory is used, but it's recommended to pass a value in your configuration. This makes your configuration independent from CWD (current working directory).
 
 ---
+
 
 ## `entry`
 
@@ -41,8 +43,11 @@ entry: {
 }
 ```
 
+
 ### Naming
+
 If a string or array of strings is passed, the chunk is named `main`. If an object is passed, each key is the name of a chunk, and the value describes the entrypoint for the chunk.
+
 
 ### Dynamic entry
 

@@ -11,6 +11,7 @@ The `plugins` option is used to customize the webpack build process in a variety
 
 T> Note: This page only discusses using plugins, however if you are interested in writing your own please visit [Writing a Plugin](/development/how-to-write-a-plugin/).
 
+
 ## `plugins`
 
 `array`
@@ -26,6 +27,7 @@ plugins: [
 ```
 
 A more complex example, using multiple plugins, might look something like this:
+
 ```js
 var webpack = require('webpack')
 // importing plugins that do not come by default in webpack
