@@ -1,12 +1,19 @@
 ---
-title: Code Splitting - Using import()
+title: Code Splitting - Async
 sort: 33
 contributors:
   - simon04
   - levy9527
+  - pksjce
+  - rahulcs
+  - johnstew
 ---
 
-## Dynamic import
+This guide documents how to split your bundle into chunks which can be downloaded asynchronously at a later time. For instance, this allows to serve a minimal bootstrap bundle first and to asynchronously additional features later.
+
+webpack supports two similar techniques to achieve this goal: using `import()` (preferred, ECMAScript proposal) and `require.ensure()` (legacy, webpack specific). 
+
+## Dynamic import: `import()`
 
 Currently, a "function-like" `import()` module loading [syntax proposal](https://github.com/tc39/proposal-dynamic-import) is on the way into ECMAScript.
 
@@ -29,7 +36,7 @@ determineDate();
 ```
 T> Keep in mind that `import()` path cannot be fully dynamic (e.g., `import(Math.random())`). Rather either completely static (e.g., `import('./locale/de.json')`) or partially static (e.g., `import('./locale/' + language + '.json')`).
 
-## Promise polyfill
+### Promise polyfill
 
 W> `import()` relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally.
 
@@ -49,7 +56,7 @@ if (!window.Promise) {
 // or ...
 ```
 
-## Usage with Babel
+### Usage with Babel
 
 If you want to use `import` with [Babel](http://babeljs.io/), you'll need to install/add the [`syntax-dynamic-import`](http://babeljs.io/docs/plugins/syntax-dynamic-import/) plugin while it's still Stage 3 to get around the parser error. When the proposal is added to the spec this won't be necessary anymore.
 
@@ -98,7 +105,7 @@ Not using the `syntax-dynamic-import` plugin will fail the build with
 * `Module build failed: SyntaxError: 'import' and 'export' may only appear at the top level`, or
 * `Module build failed: SyntaxError: Unexpected token, expected {`
 
-## Usage with Babel and `async`/`await`
+### Usage with Babel and `async`/`await`
 
 To use ES2017 [`async`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)/[`await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) with `import()`:
 
@@ -144,7 +151,7 @@ module.exports = {
 };
 ```
 
-## `import` supersedes `require.ensure`?
+### `import` supersedes `require.ensure`?
 
 Good news: Failure to load a chunk can be handled now because they are `Promise` based.
 
@@ -156,14 +163,103 @@ require.ensure([], function(require) {
 }, "custom-chunk-name");
 ```
 
-## `System.import` is deprecated
+### `System.import` is deprecated
 
 The use of `System.import` in webpack [did not fit the proposed spec](https://github.com/webpack/webpack/issues/2163), so it was deprecated in [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) in favor of `import()`.
 
+## `require.ensure()`
+
+W> `require.ensure()` is specific to webpack and superseded by `import()`. 
+
+webpack statically parses for `require.ensure()` in the code while building. Any module that is referenced as a dependency or `require()`d within the callback function, will be added to a new chunk. This new chunk is written to an async bundle that is loaded on demand by webpack through jsonp.
+
+The syntax is as follows:
+
+```javascript
+require.ensure(dependencies: String[], callback: function(require), chunkName: String)
+```
+
+* `dependencies` is an array of strings where we can declare all the modules that need to be made available before all the code in the callback function can be executed.
+* `callback` is a function that webpack will execute once the dependencies are loaded. An implementation of the `require` function is sent as a parameter to this function. The function body can use this to further `require()` modules it needs for execution.
+* `chunkName` is a name given to the chunk created by this particular `require.ensure()`. By passing the same `chunkName` to various `require.ensure()` calls, we can combine their code into a single chunk, resulting in only one bundle that the browser must load.
+
+Let's reconsider the dynamic import of `moment` from the `import()` section and rewrite it using `require.ensure()`:
+
+**index.js**
+```javascript
+function determineDate() {
+  require.ensure([], function(require) {
+    var moment = require('moment');
+    console.log(moment().format());
+  });
+}
+
+determineDate();
+```
+
+Running `webpack index.js bundle.js` generates two files, `bundle.js` and `0.bundle.js`:
+
+**bundle.js**
+```js
+// webpack code ...
+/***/ (function(module, exports, __webpack_require__) {
+
+function determineDate() {
+  __webpack_require__.e/* require.ensure */(0).then((function(require) {
+    var moment = __webpack_require__(0);
+    console.log(moment().format());
+  }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+}
+
+determineDate();
+// webpack code ...
+```
+
+**0.bundle.js*
+```js
+webpackJsonp([0],[(function(module, exports, __webpack_require__) {
+/* WEBPACK VAR INJECTION */(function(module) {
+
+//! moment.js
+
+})]);
+```
+
+When you add `bundle.js` in your HTML file and open it in your browser, the `0.bundle.js` will be loaded asynchronously by webpack.
+
+### publicPath
+
+`output.publicPath` is an important option when using code-splitting, it is used to tell webpack where to load your bundles on-demand, see the [configuration documentation](/configuration/output/#output-publicpath).
+
+### Empty Array as Parameter
+
+```javascript
+require.ensure([], function(require){
+    require('./a.js');
+});
+```
+
+The above code ensures that a split point is created and `a.js` is bundled separately by webpack.
+
+### Dependencies as Parameter
+
+```javascript
+require.ensure(['./b.js'], function(require) {
+    require('./c.js');
+});
+```
+
+In the above code, `b.js` and `c.js` are bundled together and split from the main bundle. But only the contents of `c.js` are executed. The contents of `b.js` are only made available and not executed.
+To execute `b.js`, we will have to require it in a sync manner like `require('./b.js')` for the JavaScript to get executed.
+
 ## Examples
-* https://github.com/webpack/webpack/tree/master/examples/harmony
-* https://github.com/webpack/webpack/tree/master/examples/code-splitting-harmony
-* https://github.com/webpack/webpack/tree/master/examples/code-splitting-native-import-context
+* `import()`
+* * https://github.com/webpack/webpack/tree/master/examples/harmony
+* * https://github.com/webpack/webpack/tree/master/examples/code-splitting-harmony
+* * https://github.com/webpack/webpack/tree/master/examples/code-splitting-native-import-context
+* `require.ensure()`
+* * https://github.com/webpack/webpack/tree/master/examples/code-splitting
+* * https://github.com/webpack/webpack/tree/master/examples/named-chunks – illustrates the use of `chunkName`
 
 ## Weblinks
 * [Lazy Loading ES2015 Modules in the Browser](https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser)

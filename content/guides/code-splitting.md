@@ -34,5 +34,4 @@ While resource splitting of the previous kind requires the user to specify the s
 
 This can be used for more granular chunking of code, for example, per our application routes or as per predicted user behaviour. This allows the user to load non-essential assets on demand.
 
-* [Code Splitting - Using `import()`](/guides/code-splitting-import) – proposal for ECMAScript
-* [Code Splitting - Using `require.ensure`](/guides/code-splitting-require) – CommonJS way
+Learn [how to split on demand](/guides/code-splitting-async) using `import()` or `require.ensure()`.
