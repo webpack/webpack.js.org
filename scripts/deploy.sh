@@ -37,7 +37,7 @@ git remote set-url origin "${SSH_REPO}"
 #ENCRYPTED_KEY=${!ENCRYPTED_KEY_VAR}
 #ENCRYPTED_IV=${!ENCRYPTED_IV_VAR}
 # openssl aes-256-cbc -K $ENCRYPTED_KEY -iv $ENCRYPTED_IV -in scripts/deploy_key.enc -out scripts/deploy_key -d
-openssl aes-256-cbc -K $encrypted_7562052d3e34_key -iv $encrypted_7562052d3e34_iv -in scripts/id_rsa.pub.enc -out ~\/.ssh/id_rsa.pub -d
+openssl aes-256-cbc -K $encrypted_7562052d3e34_key -iv $encrypted_7562052d3e34_iv -in scripts/id_rsa.pub.enc -out scripts/id_rsa.pub -d
 chmod 600 scripts/id_rsa.pub
 eval `ssh-agent -s`
 ssh-add scripts/id_rsa.pub
