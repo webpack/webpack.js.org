@@ -18,7 +18,7 @@ contributors:
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
 
-这些选项被一个单独的选项 `resolve.modules` 取代。更多用法请查看 [解析](/configuration/resolve)。
+这些选项被一个单独的选项 `resolve.modules` 取代。更多用法请查看[解析](/configuration/resolve)。
 
 ``` diff
   resolve: {
@@ -65,7 +65,7 @@ contributors:
       },
       {
         test: /\.jsx$/,
-        loader: "babel-loader", // Do not use "use" here
+        loader: "babel-loader", // 这里不再使用 "use"
         options: {
           // ...
         }
@@ -142,13 +142,13 @@ contributors:
 
 [我们决定这么做](https://github.com/webpack/webpack/issues/3363)是为了消除 webpack、 node.js 和 browserify 之间的环境差异。
 
-## loader 默认的 resolve 配置是相对于 context 的
+## 配置中的 loader 默认相对于 context 进行解析
 
-在 webpack 1 中，loader 默认配置下 resolve 相对于被匹配的文件。而在 webpack 2 中默认配置的 resolve 相对于 `context` 选项。
+在 webpack 1 中，默认配置下 loader 解析相对于被匹配的文件。而在 webpack 2 中，默认配置下 loader 解析相对于 `context` 选项。
 
-这解决了一些问题，比如使用 `npm link` 或引用 `context` 之外的模块时导致重复载入。
+这解决了「在使用 `npm link` 或引用 `context` 上下文目录之外的模块时，loader 所导致的模块重复载入」的问题。
 
-你可以不再需要使用一些变通方案了：
+你可以移除掉那些为解决此问题的 hack 方案了：
 
 ``` diff
   module: {
@@ -165,7 +165,7 @@ contributors:
   }
 ```
 
-## 取消了 `module.preLoaders` 以及 `module.postLoaders`
+## 移除 `module.preLoaders` 和 `module.postLoaders`
 
 ``` diff
   module: {
@@ -214,7 +214,7 @@ contributors:
 
 `UglifyJsPlugin` 不再压缩 loaders。在未来很长一段时间里，需要通过设置 `minimize:true` 来压缩 loaders。参考 loader 文档里的相关选项。
 
-loaders 的压缩模式将在 webpack 3 或更高的版本中被取消。
+loaders 的压缩模式将在 webpack 3 或后续版本中取消。
 
 为了兼容旧的 loaders，loaders 可以通过插件来切换到压缩模式：
 
@@ -226,7 +226,7 @@ loaders 的压缩模式将在 webpack 3 或更高的版本中被取消。
   ]
 ```
 
-## `DedupePlugin` 被移除
+## 移除 `DedupePlugin`
 
 不再需要 `webpack.optimize.DedupePlugin`。请从配置中移除。
 
@@ -241,7 +241,7 @@ loaders 的压缩模式将在 webpack 3 或更高的版本中被取消。
   ]
 ```
 
-## `OccurrenceOrderPlugin` 被默认加载
+## 默认加载 `OccurrenceOrderPlugin`
 
  `OccurrenceOrderPlugin` 现在默认启用，并已重命名（在 webpack 1 中为 `OccurenceOrderPlugin`）。
 因此，请确保从您的配置中删除该插件：
@@ -255,9 +255,9 @@ loaders 的压缩模式将在 webpack 3 或更高的版本中被取消。
   ]
 ```
 
-## `ExtractTextWebpackPlugin` - 大改变
+## `ExtractTextWebpackPlugin` - 破坏性改动
 
-[ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) 需要使用版本2，才能在 webpack 2 下正常运行。
+[ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) 需要使用版本 2，才能在 webpack 2 下正常运行。
 
 `npm install --save-dev extract-text-webpack-plugin@beta`
 
@@ -294,11 +294,11 @@ plugins: [
 ]
 ```
 
-## 全动态 requires 现在默认会失败
+## 全动态 require 现在默认会失败
 
 只有一个表达式的依赖（例如 `require(expr)`）将创建一个空的 context 而不是一个完整目录的 context。
 
-这样的代码应该进行重构，因为它不能与 ES2015 模块一起使用。如果你确定不会有 ES2015 模块，你可以使用 `ContextReplacementPlugin` 来提示编译器(compiler)进行正确的解析。
+这样的代码应该进行重构，因为它不能与 ES2015 模块一起使用。如果你确定不会有 ES2015 模块，你可以使用 `ContextReplacementPlugin` 来指示 compiler 进行正确的解析。
 
 ?> 此处欠一篇关于动态依赖的文章。
 
@@ -317,7 +317,7 @@ module.exports = config;
 
 你将会发现新版中不再允许这么做。CLI 现在更加严格了。
 
-替代地，现在提供了一个接口来传递参数给配置。我们应该采用这种新方式，在未来许多工具将可能依赖它。
+替代地，现在提供了一个接口来传递参数给配置。我们应该采用这种新方式，在未来许多工具将可能依赖于此。
 
 `webpack --env.customStuff`
 
@@ -333,7 +333,7 @@ module.exports = function(env) {
 
 ## `require.ensure` 以及 AMD `require` 将采用异步式调用
 
-现在这些函数总是异步的，而不是当 chunk 已经加载过的时候同步调用它们的 callback。
+现在这些函数总是异步的，而不是当 chunk 已经加载完成的时候同步调用它们的回调函数(callback)。
 
 **`require.ensure` 现在依赖于原生的 `Promise`。如果在不支持 Promise 的环境里使用 `require.ensure`，你需要添加 polyfill。**
 
@@ -350,7 +350,7 @@ module.exports = {
       loader: 'ts-loader'
     }]
   },
-  // does not work with webpack 2
+  // 在 webpack 2 中无效
   ts: { transpileOnly: false }
 }
 ```
@@ -404,11 +404,11 @@ module.exports = {
 
 ## `debug`
 
-在 webpack 1 中 `debug` 选项切换 loaders 到 debug 模式。在未来很长一段时间里，这将需要通过 loader 选项传递。详见 loader 文档的相关选项。
+在 webpack 1 中 `debug` 选项可以将 loader 切换到调试模式(debug mode)。在未来很长一段时间里，这将需要通过 loader 选项传递。详见 loader 文档的相关选项。
 
-loaders 的 debug 模式将在 webpack 3 或后续版本中取消。
+loaders 的调试模式将在 webpack 3 或后续版本中取消。
 
-为了保持对旧 loaders 的兼容，loader 可以通过插件来切换到 debug 模式：
+为了保持对旧 loaders 的兼容，loader 可以通过插件来切换到调试模式：
 
 ``` diff
 - debug: true,
@@ -421,7 +421,7 @@ loaders 的 debug 模式将在 webpack 3 或后续版本中取消。
 
 ## ES2015 的代码分割
 
-在 webpack 1 中，你能使用 [`require.ensure`](/guides/code-splitting-require) 作为方法来懒加载 chunks 到你的应用中：
+在 webpack 1 中，可以使用 [`require.ensure`](/guides/code-splitting-require) 作为实现应用程序的懒加载 chunks 的一种方法：
 
 ```javascript
 require.ensure([], function(require) {
@@ -429,9 +429,9 @@ require.ensure([], function(require) {
 });
 ```
 
-ES2015 模块加载规范定义了 [`import()`](/guides/code-splitting-import) 方法来运行时动态地加载 ES2015 模块。
+ES2015 模块加载规范定义了 [`import()`](/guides/code-splitting-import) 方法来运行时(runtime)动态地加载 ES2015 模块。
 
-webpack 将 `import()` 作为分割点并将被请求的模块放到一个单独的 chunk 中。
+webpack 将 `import()` 作为分割点(split-point)并将所要请求的模块(requested module)放置到一个单独的 chunk 中。
 `import()` 接收模块名作为参数，并返回一个 Promise。
 
 ``` js
@@ -444,7 +444,7 @@ function onClick() {
 }
 ```
 
-好消息是：如果加载 chunk 失败，我们现在可以进行处理，因为现在它基于 `Promise`。
+好消息是：如果加载 chunk 加载失败，我们现在可以进行处理，因为现在它基于 `Promise`。
 
 警告：`require.ensure` 允许用可选的第三个参数为 chunk 简单命名，但是 `import` API 还未提供这个能力。如果你想要保留这个功能，你可以继续使用 `require.ensure`。
 
@@ -473,7 +473,7 @@ function route(path, query) {
 你可以自由混合使用三种模块类型（甚至在同一个文件中）。在这个情况中 webpack 的行为和 babel 以及 node-eps 一致：
 
 ```javascript
-// CommonJS consuming ES2015 Module
+// CommonJS 调用 ES2015 模块
 var book = require("./book");
 
 book.currentPage;
@@ -482,9 +482,9 @@ book.default === "This is a book";
 ```
 
 ```javascript
-// ES2015 Module consuming CommonJS
-import fs from "fs"; // module.exports map to default
-import { readFileSync } from "fs"; // named exports are read from returned object+
+// ES2015 模块调用 CommonJS
+import fs from "fs"; // module.exports 映射到 default
+import { readFileSync } from "fs"; // 从返回对象(returned object+)中读取命名的导出方法(named exports)
 
 typeof fs.readFileSync === "function";
 typeof readFileSync === "function";
@@ -541,9 +541,9 @@ webpack 现在支持对 loader 进行更多方式的匹配。
 module: {
   rules: [
     {
-      resource: /filename/, // matches "/path/filename.js"
-      resourceQuery: /^\?querystring$/, // matches "?querystring"
-      issuer: /filename/, // matches "/path/something.js" if requested from "/path/filename.js"
+      resource: /filename/, // 匹配 "/path/filename.js"
+      resourceQuery: /^\?querystring$/, // 匹配 "?querystring"
+      issuer: /filename/, // 如果请求 "/path/filename.js" 则匹配 "/path/something.js"
     }
   ]
 }
@@ -572,7 +572,7 @@ module: {
 Loaders 现在默认可被缓存。Loaders 如果不想被缓存，需要选择不被缓存。
 
 ``` diff
-  // Cacheable loader
+  // 缓存 loader
   module.exports = function(source) {
 -   this.cacheable();
     return source;
@@ -580,7 +580,7 @@ Loaders 现在默认可被缓存。Loaders 如果不想被缓存，需要选择�
 ```
 
 ``` diff
-  // Not cacheable loader
+  // 不缓存 loader
   module.exports = function(source) {
 +   this.cacheable(false);
     return source;
@@ -612,7 +612,7 @@ options 对象上有了 `ident` ，内联的 loader 就可以引用这个 option
 这种内联风格在常规的代码里一般用不着，但是在 loader 生成的代码里比较常见。比如，`style-loader` 生成一个模块，通过 `require` 加载其余的请求（它们输出 CSS）。
 
 ``` js
-// style-loader generated code (simplified)
+// style-loader 生成的代码（简化过的）
 var addStyle = require("./add-style");
 var css = require("-!css-loader?{"modules":true}!postcss-loader??postcss-ident");
 
