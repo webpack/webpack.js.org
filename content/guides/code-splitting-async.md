@@ -34,7 +34,11 @@ function determineDate() {
 
 determineDate();
 ```
-T> Keep in mind that `import()` path cannot be fully dynamic (e.g., `import(Math.random())`). Rather either completely static (e.g., `import('./locale/de.json')`) or partially static (e.g., `import('./locale/' + language + '.json')`).
+
+Note that fully dynamic statements, such as `import(foo)`, __will fail__ because webpack requires at least some file location information. This is because `foo` could potentially be any path to any file in your system or project. The `import()` must contain at least some information about where the module is located, so bundling can be limited to a specific directory or set of files.
+
+For example, ``import(`./locale/${language}.json`)`` will cause every `.json` file in the `./locale` directory to be bundled into the split-point. At run time, when the variable `language` has been computed, any file like `english.json` or `german.json` will be available for consumption. So keep in mind that when using `import()`, the path must contain some path information or be completely static (as is `'moment'` in the example above).
+
 
 ### Promise polyfill
 
@@ -261,5 +265,7 @@ To execute `b.js`, we will have to require it in a sync manner like `require('./
 * * https://github.com/webpack/webpack/tree/master/examples/code-splitting
 * * https://github.com/webpack/webpack/tree/master/examples/named-chunks – illustrates the use of `chunkName`
 
+
 ## Weblinks
+
 * [Lazy Loading ES2015 Modules in the Browser](https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser)
