@@ -20,7 +20,9 @@ For more information see the [contributors page](https://github.com/webpack/webp
 
 * Fork `translation` branch.
 * Translate documentation.
+* If you have permission to access `translation` branch, run `npm run fetch` to update `loaders` and `plugins` documentation regularly.
 * Regularly merge from `translation` branch to your own `translation` branch in order to get the updated documentation (especially plugin and loader documentation). Then you can compare the new and the old content.
+* Use [travis-ci](https://travis-ci.org) and github webhook to deploy the documentation automatically. Please refer to this article, [Deploy using Travis-CI and Github Webhook](https://medium.com/@lcxfs1991/deploy-using-travis-ci-and-github-webhook-eba67b3ab6ac)
 
 ## Content Progress
 

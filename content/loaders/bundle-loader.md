@@ -24,6 +24,11 @@ waitForChunk(function(file) {
 	// var file = require("./file.js");
 });
 // wraps the require in a require.ensure block
+
+// Multiple callbacks can be added. They will be executed in the order of addition. 
+waitForChunk(callbackTwo);
+waitForChunk(callbackThree);
+// If a callback is added after dependencies were loaded, it will be called immediately.
 ```
 
 The file is requested when you require the bundle loader. If you want it to request it lazy, use:

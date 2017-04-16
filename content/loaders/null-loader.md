@@ -9,6 +9,25 @@ edit: https://github.com/webpack-contrib/null-loader/edit/master/README.md
 npm i null-loader --save
 ```
 
+## Examples
+
+One use for this loader is to silence modules imported by a dependency. Say, for example, your project relies on an ES6 library that imports a polyfill you don't need, so removing it will cause no loss in functionality. Test for the path to the polyfill and it won't be included in your bundle:
+
+```js
+const path = require('path');
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: path.resolve(__dirname, 'node_modules/library/polyfill.js'),
+        use: 'null-loader'
+      }
+    ]
+  }
+}
+```
+
 ## Maintainers
 
 <table>
