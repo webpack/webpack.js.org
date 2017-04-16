@@ -6,6 +6,7 @@ contributors:
   - beiciye
   - billie66
   - biqing
+  - chen-Aaron
   - coco-hu
   - dickeylth
   - dingyiming
