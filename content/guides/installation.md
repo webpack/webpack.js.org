@@ -21,7 +21,7 @@ npm install webpack --save-dev
 npm install webpack@<version> --save-dev
 ```
 
-如果你在项目中使用了 npm scripts，npm 首先会在你的本地模块中寻找 webpack。这是一个实用的个小技巧。
+如果你在项目中使用了 npm scripts，npm 首先会在本地模块中寻找 webpack。这是一个实用的小技巧。
 
 ```json
 "scripts": {
