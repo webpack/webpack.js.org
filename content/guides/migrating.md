@@ -444,7 +444,7 @@ function onClick() {
 }
 ```
 
-好消息是：如果加载 chunk 加载失败，我们现在可以进行处理，因为现在它基于 `Promise`。
+好消息是：如果加载 chunk 失败，我们现在可以进行处理，因为现在它基于 `Promise`。
 
 警告：`require.ensure` 允许用可选的第三个参数为 chunk 简单命名，但是 `import` API 还未提供这个能力。如果你想要保留这个功能，你可以继续使用 `require.ensure`。
 
@@ -594,7 +594,7 @@ webpack 2 现在支持任意 JS 对象作为 loader 的 options。
 
 使用复合 options 只有一个附加条件。你需要在 options 对象上添加一个 `ident`，让它能够被其他 loader 引用。
 
-options 对象上有了 `ident` ，内联的 loader 就可以引用这个 options 对象。下面是个例子：
+options 对象上有了 `ident`，内联的 loader 就可以引用这个 options 对象。下面是个例子：
 
 `require("some-loader??by-ident!resource")`
 
