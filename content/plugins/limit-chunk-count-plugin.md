@@ -1,7 +1,7 @@
 ---
 title: LimitChunkCountPlugin
 contributors:
-  - chen-Aaron
+  - rouzbeh84
 ---
 
 当你在写代码的时候，你可能已经按需求添加了分割的代码块。当你写完代码的时候，你可能会注意到因为你的代码包含了太多太小的chunk产生了巨大的网络请求数。幸运的是， webpack 可以通过合并的方式获取你的 chunk。 webpack 提供了两个选项:
