@@ -9,10 +9,10 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]
     echo "Skipping deploy; just doing a build and linting links/prose/js."
     # skip fetching loaders/plugins in cn version
     # npm run fetch
-    #npm run build
-    #npm run lint:js
-    #npm run lint:prose
-    #npm run lint:links
+    npm run build
+    npm run lint:js
+    npm run lint:prose
+    npm run lint:links
     exit 0
 fi
 
@@ -24,7 +24,7 @@ SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
 # npm run fetch
 
 # Run our build
-# npm run build
+npm run build
 
 # Set some git options
 git config --global user.name "Travis CI"
