@@ -9,10 +9,10 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]
     echo "Skipping deploy; just doing a build and linting links/prose/js."
     # skip fetching loaders/plugins in cn version
     # npm run fetch
-    npm run build
-    npm run lint:js
-    npm run lint:prose
-    npm run lint:links
+    #npm run build
+    #npm run lint:js
+    #npm run lint:prose
+    #npm run lint:links
     exit 0
 fi
 
@@ -36,7 +36,7 @@ git remote set-url origin "${SSH_REPO}"
 #ENCRYPTED_IV_VAR="encrypted_${ENCRYPTION_LABEL}_iv"
 #ENCRYPTED_KEY=${!ENCRYPTED_KEY_VAR}
 #ENCRYPTED_IV=${!ENCRYPTED_IV_VAR}
-openssl aes-256-cbc -K $encrypted_7562052d3e34_key -iv $encrypted_7562052d3e34_iv -in scripts/deploy_key.pub.enc -out scripts/deploy_key.pub -d
+openssl aes-256-cbc -K $encrypted_7562052d3e34_key -iv $encrypted_7562052d3e34_iv -in scripts/deploy_key.enc -out scripts/deploy_key -d
 chmod 600 scripts/deploy_key.pub
 eval `ssh-agent -s`
 ssh-add scripts/deploy_key.pub
