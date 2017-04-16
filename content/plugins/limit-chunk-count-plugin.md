@@ -17,8 +17,7 @@ Single-Page-App 是 webpack 设计的初衷和优化的对象。
 
 你或许把你的 app 分割成了多块 chunks ，通过router的方式加载。The entry chunk 只包含 router 和 libraries ，不会包含实际内容。当你的用户通过导航浏览你的 app 的时候他可以很好的工作，但是页面初始化的时候需要两次加载:第一次是router，第二次是实际的页面内容。
 
-如果你是通过 HTML5 的History API 在 URl 上来映射实际的页面内容
-，你的服务器能知道那块内容是被客户端所请求的。为了减少加载次数你可以在响应中加入 chunk ：通过添加script标签这是可以办到的。浏览器会同时载入 chunk 。
+如果你是通过 HTML5 的History API 在 URl 上来映射实际的页面内容，你的服务器能知道那块内容是被客户端所请求的。为了减少加载次数你可以在响应中加入 chunk ：通过添加script标签这是可以办到的。浏览器会同时载入 chunk 。
 
 ``` html
 <script src="entry-chunk.js" type="text/javascript" charset="utf-8"></script>
