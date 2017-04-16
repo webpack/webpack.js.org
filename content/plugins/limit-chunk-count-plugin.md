@@ -7,12 +7,9 @@ contributors:
 当你在写代码的时候，你可能已经按需求添加了分割的代码块。当你写完代码的时候，你可能会注意到因为你的代码包含了太多太小的chunk产生了巨大的网络请求数。幸运的是， webpack 可以通过合并的方式获取你的 chunk。 webpack 提供了两个选项:
 
 - 限制最大的 chunk 数量 `--optimize-max-chunks 15` 或者在 config 中添加 `new webpack.optimize.LimitChunkCountPlugin({maxChunks: 15})`
-
 - 限制最小的 chunk 数量 `--optimize-min-chunk-size 10000` 或者在 config 中添加 `new webpack.optimize.MinChunkSizePlugin({minChunkSize: 10000})`
 
-
 webpack 会合并chunks(会优先合并重复的模块).由于不会合并到 entry chunk，所以不会影响页面初始化加载时间。
-
 
 ## Single-Page-App
 
