@@ -73,7 +73,7 @@ function fetchPackageFiles(options, finalCb) {
 
         if (body && file === 'README.md') {
           body = body
-            .replace(/^[^]*?<h2[^>]*>/m, '## ') // drop everything up to first <h2>
+            .replace(/^[^]*?<\/h1>/m, '') // drop everything up to first </h1>
             .replace(/<h2[^>]*>/g, '## ') // replace any <h2> with ##
             .replace(/<\/h2>/g, ''); // drop </h2>
         }
