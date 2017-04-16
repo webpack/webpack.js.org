@@ -1,7 +1,6 @@
 branches:
   only:
-    - master
-    - develop
+    - cn
 language: node_js
 node_js:
   - "6"
