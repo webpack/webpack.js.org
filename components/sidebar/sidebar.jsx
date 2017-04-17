@@ -35,7 +35,7 @@ export default class Sidebar extends Component {
           height={ availableHeight } />
 
         <div className="sidebar__inner">
-          <img src="https://img.shields.io/badge/webpack-v2.2.1-blue.svg" />
+          <img src="https://img.shields.io/badge/webpack-v2.3.3-blue.svg" />
 
           <SidebarItem
             url={ `/${sectionName}` }

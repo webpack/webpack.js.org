@@ -3,6 +3,7 @@ title: Public Path
 contributors:
   - rafaelrinaldi
   - chrisVillanueva
+  - gonzoyumo
 ---
 
 webpack has a highly useful configuration that let you specify the base path for
@@ -55,3 +56,11 @@ __webpack_public_path__ = process.env.ASSET_PATH;
 That's all you need. Since we're already using the `DefinePlugin` on our
 configuration, `process.env.ASSET_PATH` will always be defined so we can safely
 do that.
+
+**WARNING:** Be aware that if you use ES6 module imports in your entry file the `__webpack_public_path__` assignment will be done after the imports. In such cases, you'll have to move the public path assignment to its own dedicated module and then import it on top of your entry.js:
+
+```js
+// entry.js
+import './public-path';
+import './app';
+```

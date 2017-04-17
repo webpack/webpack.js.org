@@ -24,6 +24,11 @@ waitForChunk(function(file) {
 	// var file = require("./file.js");
 });
 // wraps the require in a require.ensure block
+
+// Multiple callbacks can be added. They will be executed in the order of addition. 
+waitForChunk(callbackTwo);
+waitForChunk(callbackThree);
+// If a callback is added after dependencies were loaded, it will be called immediately.
 ```
 
 The file is requested when you require the bundle loader. If you want it to request it lazy, use:
@@ -51,7 +56,7 @@ Here `[name]` corresponds to the chunk name set in the `name` query parameter.
 require("bundle-loader?lazy&name=my-chunk!./file.js");
 require("bundle-loader?lazy&name=[name]!./file.js");
 ```
-And the WebPack configuration:
+And the webpack configuration:
 ``` js
 module.exports = {
    entry: { ... },

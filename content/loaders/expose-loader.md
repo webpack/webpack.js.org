@@ -20,13 +20,13 @@ require("expose-loader?libraryName!./file.js");
 // In web browsers, window.libraryName is then available.
 ```
 
-This line works to expose React to the web browser to enable the Chrome React devtools:
+For example, let's say you want to expose jQuery as a global called `$`:
 
 ```
-require("expose-loader?React!react");
+require("expose-loader?$!jquery");
 ```
 
-Thus, `window.React` is then available to the Chrome React devtools extension.
+Thus, `window.$` is then available in the browser console.
 
 Alternately, you can set this in your config file:
 
@@ -34,7 +34,7 @@ webpack v1 usage
 ```
 module: {
   loaders: [
-    { test: require.resolve("react"), loader: "expose-loader?React" }
+    { test: require.resolve("jquery"), loader: "expose-loader?$" }
   ]
 }
 ```
@@ -42,15 +42,17 @@ webpack v2 usage
 ```
 module: {
   rules: [{
-          test: require.resolve('react'),
+          test: require.resolve('jquery'),
           use: [{
               loader: 'expose-loader',
-              options: 'React'
+              options: '$'
           }]
       }]
 }
 ```
-Also for multiple expose you can use `!` in loader string:
+
+Let's say you also want to expose it as `window.jQuery` in addition to `window.$`.
+For multiple expose you can use `!` in loader string:
 
 webpack v1 usage
 ```
