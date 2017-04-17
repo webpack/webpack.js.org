@@ -7,23 +7,23 @@ contributors:
   - oneforwonder
 ---
 
-These options configure whether to polyfill or mock certain [Node.js globals](https://nodejs.org/docs/latest/api/globals.html) and modules. This allows code originally written for the Node.js environment to run in other environments like the browser. This feature is provided by webpack's internal [`NodeStuffPlugin`](https://github.com/webpack/webpack/blob/master/lib/NodeStuffPlugin.js).
+这些选项可以配置是否 polyfill 或 mock 某些 [Node.js 全局变量](https://nodejs.org/docs/latest/api/globals.html)和模块。这可以使最初为 Node.js 环境编写的代码，在其他环境（如浏览器）中运行。此功能由 webpack 内部的 [`NodeStuffPlugin`](https://github.com/webpack/webpack/blob/master/lib/NodeStuffPlugin.js) 提供。
 
 ## `node`
 
 `object`
 
-This is an object where
-- each key is the name of a Node.js global or module
-- each value is one of the following
-  - `true`: Provide a polyfill.
-  - `"mock"`: Provide a mock that implements the expected interface but has little or no fuctionality.
-  - `"empty"`: Provide an empty object.
-  - `false`: Provide nothing. Code that expects this object to be defined may crash.
+是一个对象，并且满足
+- 每个 key 都是 Node.js 全局变量或模块的名称
+- 每个 value 是以下其中之一
+  - `true`：提供 polyfill。
+  - `"mock"`：提供 mock 实现预期接口，但功能很少或没有。
+  - `"empty"`：提供空对象。
+  - `false`：什么都不提供。代码中预期的此对象，可能会因为未定义而导致崩溃。
 
-Note: not all properties support all of these values. See the sections below.
+注意：不是所有属性都支持这些 value。支持情况请查看接下来的章节。
 
-The defaults:
+默认值：
 
 ```js
 node: {
@@ -41,76 +41,76 @@ node: {
 
 `boolean | "mock"`
 
-Default: `false`
+默认值：`false`
 
-The browser provides a `console` object with a very similar interface to the Node.js `console`, so a polyfill is generally not needed.
+浏览器提供一个 `console` 对象，具有非常类似 Node.js `console` 的接口，所以通常不需要 polyfill。
 
 
 ## `node.process`
 
 `boolean | "mock"`
 
-Default: `true`
+默认值：`true`
 
 
 ## `node.global`
 
 `boolean`
 
-Default: `true`
+默认值：`true`
 
-See [the source](https://github.com/webpack/webpack/blob/master/buildin/global.js) for the exact behavior of this object.
+关于此对象的准确行为，请查看[源码](https://github.com/webpack/webpack/blob/master/buildin/global.js)。
 
 
 ## `node.__filename`
 
 `boolean | "mock"`
 
-Default: `true`
+默认值：`true`
 
-Options:
+选项：
 
-- `true`: The filename of the **input** file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
-- `false`: The regular Node.js `__filename` behavior. The filename of the **output** file when run in a Node.js environment.
-- `"mock"`: The fixed value `"index.js"`.
+- `true`: **输入**文件的文件名，是相对于 [`context` 选项](https://webpack.js.org/configuration/entry-context/#context)。
+- `false`: 常规的 Node.js `__filename` 行为。在 Node.js 环境中运行时，**输出**文件的文件名。
+- `"mock"`: value 填充为 `"index.js"`.
 
 
 ## `node.__dirname`
 
 `boolean | "mock"`
 
-Default: `true`
+默认值：`true`
 
-Options:
+选项：
 
-- `true`: The dirname of the **input** file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
-- `false`: The regular Node.js `__dirname` behavior. The dirname of the **output** file when run in a Node.js environment.
-- `"mock"`: The fixed value `"/"`.
+- `true`: **输入**文件的目录名，是相对于 [`context` 选项](https://webpack.js.org/configuration/entry-context/#context)。
+- `false`: 常规的 Node.js `__dirname` 行为。在 Node.js 环境中运行时，**输出**文件的目录名。
+- `"mock"`: value 填充为 `"/"`。
 
 
 ## `node.Buffer`
 
 `boolean | "mock"`
 
-Default: `true`
+默认值：`true`
 
 
 ## `node.setImmediate`
 
 `boolean | "mock" | "empty"`
 
-Default: `true`
+默认值：`true`
 
 
-## Other node core libraries
+## 其他 Node.js 核心库(Node.js core libraries)
 
 `boolean | "mock" | "empty"`
 
-Many other Node.js core libraries can be configured as well. See the list of [Node.js core libraries and their polyfills](https://github.com/webpack/node-libs-browser).
+还可以配置许多其他 Node.js 核心库。查看 [Node.js 核心库和它们的 polyfill](https://github.com/webpack/node-libs-browser)
 
-By default, Webpack will polyfill each library if there is a known polyfill or do nothing if there is not one.
+默认情况下，如果有一个明显的 polyfill，webpack 会对每个 library 进行 polyfill，如果没有，则 webpack 不会执行任何操作。
 
-Example:
+示例：
 
 ```js
 node: {
