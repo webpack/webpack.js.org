@@ -33,7 +33,7 @@ module.exports = {
 
 + `test`: JS file extension regex. Default: `/\.js($|\?)/i`
 + `comments`: Preserve Comments. Default: `/@preserve|@licen(s|c)e/`. falsy value to remove all comments. Accepts function, object with property test (regex), and values.
-+ `sourceMap`: Default: uses [webpackConfig.devtool](https://webpack.github.io/docs/configuration.html#devtool). Set this to override that.
++ `sourceMap`: Default: uses [webpackConfig.devtool](https://webpack.js.org/configuration/devtool/). Set this to override that.
 + `babel`: Pass in a custom babel-core instead. `require("babel-core")`
 + `babili`: Pass in a custom babili preset instead - `require("babel-preset-babili")`.
 ``

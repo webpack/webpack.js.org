@@ -9,9 +9,15 @@ edit: https://github.com/webpack-contrib/worker-loader/edit/master/README.md
 npm i -D worker-loader
 ```
 
+or
+
+```bash
+yarn add worker-loader --dev
+```
+
 ## Usage
 
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
+[Documentation: Using loaders](https://webpack.js.org/concepts/loaders/)
 
 Import the worker file:
 
@@ -37,7 +43,8 @@ to disable this behavior just set `fallback` parameter as `false`:
 var MyWorker = require("worker-loader?inline&fallback=false!./myWorker.js");
 ```
 
-To set a custom name for the output script, use the `name` parameter. The name may contain the string `[hash]`, which will be replaced with a content-dependent hash for caching purposes. For example:
+To set a custom name for the output script, use the `name` parameter. The name may contain the string `[hash]`,
+which will be replaced with a content-dependent hash for caching purposes. For example:
 
 ``` javascript
 var MyWorker = require("worker-loader?name=outputWorkerName.[hash].js!./myWorker.js");
@@ -72,33 +79,24 @@ _.has(o, 'foo') // true
   <tbody>
     <tr>
       <td align="center">
-        <img width="150" height="150"
-        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
-        </br>
-        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
+        <a href="https://github.com/sokra">
+          <img width="150" height="150" src="https://github.com/sokra.png?s=150">
+        </a>
+        <br />
+        <a href="https://github.com/sokra">Tobias Koppers</a>
       </td>
       <td align="center">
-        <img width="150" height="150"
-        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
-        </br>
+        <a href="https://github.com/d3viant0ne">
+          <img width="150" height="150" src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </a>
+        <br />
         <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
       </td>
       <td align="center">
-        <img width="150" height="150"
-        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
-        </br>
-        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
-      </td>
-      <td align="center">
-        <img width="150" height="150"
-        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
-        </br>
-        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
-      </td>
-      <td align="center">
-        <img width="150" height="150"
-        src="https://avatars3.githubusercontent.com/u/5635476?v=3&s=150">
-        </br>
+        <a href="https://github.com/TrySound">
+          <img width="150" height="150" src="https://avatars3.githubusercontent.com/u/5635476?v=3&s=150">
+        </a>
+        <br />
         <a href="https://github.com/TrySound">Bogdan Chadkin</a>
       </td>
     </tr>

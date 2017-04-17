@@ -29,6 +29,7 @@ module.exports = {
 Arguments:
 
 * `asset`: The target asset name. `[file]` is replaced with the original asset. `[path]` is replaced with the path of the original asset and `[query]` with the query. Defaults to `"[path].gz[query]"`.
+* `filename`: A `function(asset)` which receives the asset name (after processing `asset` option) and returns the new asset name. Defaults to `false`.
 * `algorithm`: Can be a `function(buf, callback)` or a string. For a string the algorithm is taken from `zlib` (or zopfli for `zopfli`). Defaults to `"gzip"`.
 * `test`: All assets matching this RegExp are processed. Defaults to every asset.
 * `threshold`: Only assets bigger than this size are processed. In bytes. Defaults to `0`.
@@ -77,11 +78,11 @@ Option Arguments for Zopfli (see [node-zopfli](https://github.com/pierreingleber
 </table>
 
 
-[npm]: https://img.shields.io/npm/v/webpack-loader-seed.svg
-[npm-url]: https://npmjs.com/package/webpack-loader-seed
+[npm]: https://img.shields.io/npm/v/compression-webpack-plugin.svg
+[npm-url]: https://npmjs.com/package/compression-webpack-plugin
 
-[deps]: https://david-dm.org/webpack-contrib/webpack-loader-seed.svg
-[deps-url]: https://david-dm.org/webpack-contrib/webpack-loader-seed
+[deps]: https://david-dm.org/webpack-contrib/compression-webpack-plugin.svg
+[deps-url]: https://david-dm.org/webpack-contrib/compression-webpack-plugin
 
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
