@@ -38,7 +38,8 @@
     "lint:social": "alex ./**/*.md",
     "lint:prose": "cp .proselintrc ~/ && proselint content",
     "test": "npm run lint ",
-    "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml"
+    "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml",
+    "release": "standard-version"
   },
   "devDependencies": {
     "alex": "^3.1.0",
@@ -87,6 +88,7 @@
     "request": "^2.75.0",
     "sass-loader": "^4.0.2",
     "sitemap-static": "^0.3.1",
+    "standard-version": "^4.0.0",
     "style-loader": "^0.13.1",
     "tap-min": "^1.1.0",
     "tap-parser": "^5.3.3",
