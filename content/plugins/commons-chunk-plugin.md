@@ -4,6 +4,7 @@ contributors:
   - bebraw
   - simon04
   - christopher4lis
+  - kevinzwhuang
 ---
 
 ```javascript
@@ -147,7 +148,11 @@ new webpack.optimize.CommonsChunkPlugin({
 
 你也可以给 `minChunks` 传入一个函数。这个函数会被 `CommonsChunkPlugin` 插件回调，并且调用函数时会传入 `module` 和 `count` 参数。
 
-`module` 参数代表每个 chunks 里的模块，这些 chunks是你通过 `name` 参数传入的。
+`module` 参数代表每个 chunks 里的模块，这些 chunks 是你通过 `name`/`names` 参数传入的。
+`module` has the shape of a [NormalModule](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js), which has two particularly useful properties for this use case:
+
+- `module.context`: The directory that stores the file. For example: `'/my_project/node_modules/example-dependency'`
+- `module.resource`: The name of the file being processed. For example: `'/my_project/node_modules/example-dependency/index.js'`
 
 `count` 参数表示 `module` 被使用的 chunk 数量。
 
@@ -176,6 +181,22 @@ new webpack.optimize.CommonsChunkPlugin({
   name: "vendor",
   minChunks: function (module) {
     // this assumes your vendor imports exist in the node_modules directory
+    return module.context && module.context.indexOf("node_modules") !== -1;
+  }
+})
+```
+
+In order to obtain a single CSS file containing your application and vendor CSS, use the following `minChunks` function together with [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin/):
+
+```javascript
+new webpack.optimize.CommonsChunkPlugin({
+  name: "vendor",
+  minChunks: function (module) {
+    // This prevents stylesheet resources with the .css or .scss extension
+    // from being moved from their original chunk to the vendor chunk
+    if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
+      return false;
+    }
     return module.context && module.context.indexOf("node_modules") !== -1;
   }
 })

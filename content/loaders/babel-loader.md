@@ -38,13 +38,15 @@ __注意：__ 如果你正在从 babel 5 升级到 babel 6，请参考 [这篇�
 
   ```javascript
 module: {
-  loaders: [
+  rules: [
     {
       test: /\.js$/,
       exclude: /(node_modules|bower_components)/,
-      loader: 'babel-loader',
-      query: {
-        presets: ['env']
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['env']
+        }
       }
     }
   ]
@@ -59,7 +61,7 @@ module: {
 
   ```javascript
 module: {
-  loaders: [
+  rules: [
     {
       test: /\.js$/,
       exclude: /(node_modules|bower_components)/,
@@ -73,13 +75,15 @@ module: {
 
   ```javascript
 module: {
-  loaders: [
+  rules: [
     {
       test: /\.js$/,
       exclude: /(node_modules|bower_components)/,
-      loader: 'babel-loader',
-      query: {
-        presets: ['env']
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['env']
+        }
       }
     }
   ]

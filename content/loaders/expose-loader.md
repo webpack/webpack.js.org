@@ -19,13 +19,13 @@ require("expose-loader?libraryName!./file.js");
 // 在浏览器中，就将可以使用 window.libraryName 。
 ```
 
-下面这行代码暴露 React 到浏览器全局，用来开启 Chrome React devtools ：
+例如，假设你要将 jQuery 暴露至全局并称为 `$`：
 
 ```
-require("expose-loader?React!react");
+require("expose-loader?$!jquery");
 ```
 
-然后，`window.React` 就可以被 Chrome React devtools 扩展使用。
+然后，`window.$` 就可以在浏览器控制台中使用。
 
 或者，你可以通过配置文件来设置：
 
@@ -33,7 +33,7 @@ webpack v1 usage
 ```
 module: {
   loaders: [
-    { test: require.resolve("react"), loader: "expose-loader?React" }
+    { test: require.resolve("jquery"), loader: "expose-loader?$" }
   ]
 }
 ```
@@ -41,15 +41,17 @@ webpack v2 usage
 ```
 module: {
   rules: [{
-          test: require.resolve('react'),
+          test: require.resolve('jquery'),
           use: [{
               loader: 'expose-loader',
-              options: 'React'
+              options: '$'
           }]
       }]
 }
 ```
-如果要重复暴露到多个变量，可以在加载器字符串中使用 `!` ：
+
+除了暴露为 `window. $` 之外，假设你还想把它暴露为 `window.jQuery`。
+对于多个暴露，您可以在 loader 字符串中使用 `!`：
 
 webpack v1 usage
 ```

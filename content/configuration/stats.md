@@ -93,6 +93,10 @@ stats: {
   version: true,
   // 增加提示
   warnings: true
+  // Filter warnings to be shown (since webpack 2.4.0),
+  // can be a String, Regexp, a function getting the warning and returning a boolean
+  // or an Array of a combination of the above. First match wins.
+  warningsFilter: "filter" | /filter/ | ["filter", /filter/] | (warning) => ... return true|false
 };
 ```
 
