@@ -13,6 +13,7 @@ This guide documents how to split your bundle into chunks which can be downloade
 
 webpack supports two similar techniques to achieve this goal: using `import()` (preferred, ECMAScript proposal) and `require.ensure()` (legacy, webpack specific). 
 
+
 ## Dynamic import: `import()`
 
 Currently, a "function-like" `import()` module loading [syntax proposal](https://github.com/tc39/proposal-dynamic-import) is on the way into ECMAScript.
@@ -22,7 +23,8 @@ The [ES2015 Loader spec](https://whatwg.github.io/loader/) defines `import()` as
 webpack treats `import()` as a split-point and puts the requested module in a separate chunk.
 `import()` takes the module name as argument and returns a `Promise`: `import(name) -> Promise`
 
-**index.js**
+__index.js__
+
 ```javascript
 function determineDate() {
   import('moment').then(function(moment) {
@@ -47,6 +49,7 @@ W> `import()` relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web
 If you use `import()` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
 In an entry point of your application:
+
 ```javascript
 import Es6Promise from 'es6-promise';
 Es6Promise.polyfill();
@@ -60,6 +63,7 @@ if (!window.Promise) {
 // or ...
 ```
 
+
 ### Usage with Babel
 
 If you want to use `import` with [Babel](http://babeljs.io/), you'll need to install/add the [`syntax-dynamic-import`](http://babeljs.io/docs/plugins/syntax-dynamic-import/) plugin while it's still Stage 3 to get around the parser error. When the proposal is added to the spec this won't be necessary anymore.
@@ -70,7 +74,8 @@ npm install --save-dev babel-core babel-loader babel-plugin-syntax-dynamic-impor
 npm install --save moment
 ```
 
-**index-es2015.js**
+__index-es2015.js__
+
 ```javascript
 function determineDate() {
   import('moment')
@@ -82,7 +87,8 @@ function determineDate() {
 determineDate();
 ```
 
-**webpack.config.js**
+__webpack.config.js__
+
 ```javascript
 module.exports = {
   entry: './index-es2015.js',
@@ -105,9 +111,11 @@ module.exports = {
 };
 ```
 
-Not using the `syntax-dynamic-import` plugin will fail the build with
+Not using the `syntax-dynamic-import` plugin will fail the build with:
+
 * `Module build failed: SyntaxError: 'import' and 'export' may only appear at the top level`, or
 * `Module build failed: SyntaxError: Unexpected token, expected {`
+
 
 ### Usage with Babel and `async`/`await`
 
@@ -117,7 +125,8 @@ To use ES2017 [`async`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/
 npm install --save-dev babel-plugin-transform-async-to-generator babel-plugin-transform-regenerator babel-plugin-transform-runtime
 ```
 
-**index-es2017.js**
+__index-es2017.js__
+
 ```javascript
 async function determineDate() {
   const moment = await import('moment');
@@ -127,7 +136,8 @@ async function determineDate() {
 determineDate().then(str => console.log(str));
 ```
 
-**webpack.config.js**
+__webpack.config.js__
+
 ```javascript
 module.exports = {
   entry: './index-es2017.js',
@@ -155,6 +165,7 @@ module.exports = {
 };
 ```
 
+
 ### `import` supersedes `require.ensure`?
 
 Good news: Failure to load a chunk can be handled now because they are `Promise` based.
@@ -167,9 +178,11 @@ require.ensure([], function(require) {
 }, "custom-chunk-name");
 ```
 
+
 ### `System.import` is deprecated
 
 The use of `System.import` in webpack [did not fit the proposed spec](https://github.com/webpack/webpack/issues/2163), so it was deprecated in [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) in favor of `import()`.
+
 
 ## `require.ensure()`
 
@@ -189,7 +202,8 @@ require.ensure(dependencies: String[], callback: function(require), chunkName: S
 
 Let's reconsider the dynamic import of `moment` from the `import()` section and rewrite it using `require.ensure()`:
 
-**index.js**
+__index.js__
+
 ```javascript
 function determineDate() {
   require.ensure([], function(require) {
@@ -203,7 +217,8 @@ determineDate();
 
 Running `webpack index.js bundle.js` generates two files, `bundle.js` and `0.bundle.js`:
 
-**bundle.js**
+__bundle.js__
+
 ```js
 // webpack code ...
 /***/ (function(module, exports, __webpack_require__) {
@@ -219,7 +234,8 @@ determineDate();
 // webpack code ...
 ```
 
-**0.bundle.js*
+__0.bundle.js__
+
 ```js
 webpackJsonp([0],[(function(module, exports, __webpack_require__) {
 /* WEBPACK VAR INJECTION */(function(module) {
@@ -231,9 +247,11 @@ webpackJsonp([0],[(function(module, exports, __webpack_require__) {
 
 When you add `bundle.js` in your HTML file and open it in your browser, the `0.bundle.js` will be loaded asynchronously by webpack.
 
+
 ### publicPath
 
 `output.publicPath` is an important option when using code-splitting, it is used to tell webpack where to load your bundles on-demand, see the [configuration documentation](/configuration/output/#output-publicpath).
+
 
 ### Empty Array as Parameter
 
@@ -244,6 +262,7 @@ require.ensure([], function(require){
 ```
 
 The above code ensures that a split point is created and `a.js` is bundled separately by webpack.
+
 
 ### Dependencies as Parameter
 
@@ -256,7 +275,9 @@ require.ensure(['./b.js'], function(require) {
 In the above code, `b.js` and `c.js` are bundled together and split from the main bundle. But only the contents of `c.js` are executed. The contents of `b.js` are only made available and not executed.
 To execute `b.js`, we will have to require it in a sync manner like `require('./b.js')` for the JavaScript to get executed.
 
+
 ## Examples
+
 * `import()`
 * * https://github.com/webpack/webpack/tree/master/examples/harmony
 * * https://github.com/webpack/webpack/tree/master/examples/code-splitting-harmony

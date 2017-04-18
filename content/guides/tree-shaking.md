@@ -10,9 +10,11 @@ _Tree shaking_ is a term commonly used in the JavaScript context for dead-code e
 
 webpack 2 comes with a built-in support for ES2015 modules (alias *harmony modules*) as well as unused module export detection.
 
+
 ## Example
 
 Consider a **maths.js** library file exporting two functions, `square` and `cube`:
+
 ```javascript
 // This function isn't used anywhere
 export function square(x) {
@@ -26,6 +28,7 @@ export function cube(x) {
 ```
 
 In our **main.js** we are selectively importing `cube`:
+
 ```javascript
 import {cube} from './maths.js';
 console.log(cube(5)); // 125
@@ -73,6 +76,7 @@ function(e,t,n){"use strict";function r(e){return e*e*e}t.a=r}
 /* ... */
 function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(0);console.log(n.i(r.a)(5))}
 ```
+
 
 ## Weblinks
 

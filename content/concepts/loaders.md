@@ -17,7 +17,7 @@ Loaders are transformations that are applied on the source code of a module. The
 
 For example, you can use loaders to tell webpack to load a CSS file or to convert TypeScript to JavaScript. Firstly, install the corresponding loaders:
 
-```
+``` bash
 npm install --save-dev css-loader
 npm install --save-dev ts-loader
 ```
