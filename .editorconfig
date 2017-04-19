@@ -11,6 +11,6 @@ indent_style = space
 indent_size = 2
 
 # Format Config
-[{package.json,.alexrc,babelrc,.eslintignore,.eslintrc,.markdownlintrc,.proselintrc}]
+[{package.json,.alexrc,babelrc,.eslintignore,.eslintrc,.markdownlint.json,.proselintrc}]
 indent_style = space
 indent_size = 2

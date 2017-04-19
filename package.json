@@ -33,7 +33,7 @@
     "lint": "run-s lint:*",
     "lint:links": "hyperlink -r --exclude https://opencollective.com/webpack/*/*/website build/index.html | ./scripts/check-links.js --skip 10",
     "lint:js": "eslint . --ext .js --ext .jsx",
-    "lint:markdown": "markdownlint --config ./.markdownlintrc *.md ./content/**/*.md",
+    "lint:markdown": "markdownlint --config ./.markdownlint.json *.md ./content/**/*.md",
     "lint:social": "alex ./**/*.md",
     "lint:prose": "cp .proselintrc ~/ && proselint content",
     "test": "npm run lint",
