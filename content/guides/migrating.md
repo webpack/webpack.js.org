@@ -474,14 +474,6 @@ function onClick() {
 
 Good news: Failure to load a chunk can now be handled because they are `Promise` based.
 
-Caveat: `require.ensure` allows for easy chunk naming with the optional third argument, but `import` API doesn't offer that capability yet. If you want to keep that functionality, you can continue using `require.ensure`.
-
-```javascript
-require.ensure([], function(require) {
-  var foo = require("./module");
-}, "custom-chunk-name");
-```
-
 
 ## Dynamic expressions
 

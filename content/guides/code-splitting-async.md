@@ -64,6 +64,15 @@ if (!window.Promise) {
 ```
 
 
+### Chunk names
+
+Since webpack 2.4.0, chunk names for dynamic imports can be specified using a "magic comment".
+
+```javascript
+import(/* webpackChunkName: "my-chunk-name" */ 'module');
+```
+
+
 ### Usage with Babel
 
 If you want to use `import` with [Babel](http://babeljs.io/), you'll need to install/add the [`syntax-dynamic-import`](http://babeljs.io/docs/plugins/syntax-dynamic-import/) plugin while it's still Stage 3 to get around the parser error. When the proposal is added to the spec this won't be necessary anymore.
@@ -166,19 +175,6 @@ module.exports = {
 ```
 
 
-### `import` supersedes `require.ensure`?
-
-Good news: Failure to load a chunk can be handled now because they are `Promise` based.
-
-Caveat: `require.ensure` allows for easy chunk naming with the optional third argument, but `import` API doesn't offer that capability yet. If you want to keep that functionality, you can continue using `require.ensure`.
-
-```javascript
-require.ensure([], function(require) {
-  var foo = require("./module");
-}, "custom-chunk-name");
-```
-
-
 ### `System.import` is deprecated
 
 The use of `System.import` in webpack [did not fit the proposed spec](https://github.com/webpack/webpack/issues/2163), so it was deprecated in [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) in favor of `import()`.
@@ -193,12 +189,13 @@ webpack statically parses for `require.ensure()` in the code while building. Any
 The syntax is as follows:
 
 ```javascript
-require.ensure(dependencies: String[], callback: function(require), chunkName: String)
+require.ensure(dependencies: String[], callback: function(require), errorCallback: function(error), chunkName: String)
 ```
 
 * `dependencies` is an array of strings where we can declare all the modules that need to be made available before all the code in the callback function can be executed.
 * `callback` is a function that webpack will execute once the dependencies are loaded. An implementation of the `require` function is sent as a parameter to this function. The function body can use this to further `require()` modules it needs for execution.
-* `chunkName` is a name given to the chunk created by this particular `require.ensure()`. By passing the same `chunkName` to various `require.ensure()` calls, we can combine their code into a single chunk, resulting in only one bundle that the browser must load.
+* optional: `errorCallback` is a function that is executed when webpack fails to load the dependencies.
+* optional: `chunkName` is a name given to the chunk created by this particular `require.ensure()`. By passing the same `chunkName` to various `require.ensure()` calls, we can combine their code into a single chunk, resulting in only one bundle that the browser must load.
 
 Let's reconsider the dynamic import of `moment` from the `import()` section and rewrite it using `require.ensure()`:
 
@@ -251,6 +248,30 @@ When you add `bundle.js` in your HTML file and open it in your browser, the `0.b
 ### publicPath
 
 `output.publicPath` is an important option when using code-splitting, it is used to tell webpack where to load your bundles on-demand, see the [configuration documentation](/configuration/output/#output-publicpath).
+
+
+### Chunk name
+
+```javascript
+require.ensure([], function(require) {
+  var foo = require('./module');
+}, 'custom-chunk-name');
+```
+
+Use the last argument to `require.ensure()` in order to specify the name of the chunk.
+
+
+### Error callback
+
+Since webpack 2.4.0, an error callback can be as third argument to `require.ensure()`. This allows to address errors which occur when dynamically loading the chunk:
+
+```javascript
+require.ensure([], function(require) {
+    var foo = require('./module');
+}, function(err) {
+    console.error('We failed to load chunk: ' + err);
+}, 'custom-chunk-name');
+```
 
 
 ### Empty Array as Parameter
