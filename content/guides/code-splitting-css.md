@@ -23,7 +23,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 ## Using `css-loader`
 
-Configure the [`css-loader`](/loaders/css-loader) in `webpack.config.js` as follows:
+Install the [`css-loader`](/loaders/css-loader) loader:
+
+``` bash
+npm i --save-dev css-loader
+```
+
+Configure it in `webpack.config.js` as follows:
 
 ```javascript
 module.exports = {
