@@ -9,6 +9,6 @@ script:
   - bash ./scripts/deploy.sh
 sudo: required
 install:
-  - npm i yarn -g
+  - npm install --global yarn
   - yarn
   - sudo pip install proselint
