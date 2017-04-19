@@ -57,7 +57,7 @@ webpack --progress --watch
 
 Make a change in one of your files and hit save. You should see that it's recompiling.
 
-Watch mode makes no assumptions about a server, so you will need to provide your own. An easy server to use is [`serve`](https://github.com/zeit/serve). After installing (`npm i --save-dev serve`), you can run it in the directory where the outputted files are:
+Watch mode makes no assumptions about a server, so you will need to provide your own. An easy server to use is [`serve`](https://github.com/zeit/serve). After installing (`npm install --save-dev serve`), you can run it in the directory where the outputted files are:
 
 ```bash
 `npm bin`/serve
@@ -108,7 +108,7 @@ To prepare, make sure you have a `index.html` file that points to your bundle. A
 Start with installing `webpack-dev-server` from npm:
 
 ```bash
-npm install webpack-dev-server --save-dev
+npm install --save-dev webpack-dev-server
 ```
 
 When it's done installing, you should be able to use `webpack-dev-server` like this:
@@ -141,7 +141,7 @@ W> This is intended for advanced users. webpack-dev-server is much easier to use
 Start with installing the dependencies from npm:
 
 ```bash
-npm install express webpack-dev-middleware --save-dev
+npm install --save-dev express webpack-dev-middleware
 ```
 
 After installing, you can use the middleware like this:

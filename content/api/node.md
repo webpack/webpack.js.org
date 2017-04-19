@@ -16,7 +16,7 @@ The Node.js API is useful in scenarios in which you need to customize the build 
 To start using webpack Node.js API, first install webpack if you haven’t yet:
 
 ``` bash
-npm install webpack --save-dev
+npm install --save-dev webpack
 ```
 
 Then require the webpack module in your Node.js script:

@@ -21,7 +21,7 @@ end
 Next, install webpack and webpack-dev-server in your project;
 
 ```bash
-npm install webpack webpack-dev-server --save-dev
+npm install --save-dev webpack webpack-dev-server
 ```
 
 Make sure to have a `webpack.config.js` file. If you haven't already, use this as a minimal example to get started:
