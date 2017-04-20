@@ -110,7 +110,7 @@ This a reference guide to all the event hooks exposed by the `Compiler`.
 | __`emit`__                 | Before writing emitted assets to output dir | `compilation` | async      |
 | __`after-emit`__           | After writing emitted assets to output dir | `compilation` | async      |
 | __`done`__                 | Completion of compile               | `stats`              | sync       |
-| __`fail`__                 | Failure of compile                  | `error`              | sync       |
+| __`failed`__               | Failure of compile                  | `error`              | sync       |
 | __`invalid`__              | After invalidating a watch compile  | `fileName`, `changeTime` | sync       |
 
 ## Examples

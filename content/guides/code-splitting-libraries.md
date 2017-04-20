@@ -20,15 +20,17 @@ Let's consider a sample application that uses [momentjs](https://www.npmjs.com/p
 
 Install `moment` as follows in your application directory.
 
-`npm install --save moment`
+``` bash
+npm install --save moment
+```
 
 The index file will require `moment` as a dependency and log the current date as follows
 
 __index.js__
+
 ```javascript
 var moment = require('moment');
 console.log(moment().format());
-
 ```
 
 We can bundle the application with webpack using the following config
@@ -53,13 +55,14 @@ On running `webpack` in your application, if you inspect the resulting bundle, y
 
 This is not ideal for the application. If the code in `index.js` changes, then the whole bundle is rebuilt. The browser will have to load a new copy of the new bundle even though most of it hasn't changed at all.
 
+
 ## Multiple Entries
 
 Let's try to mitigate this by adding a separate entry point for `moment` and name it `vendor`
 
 __webpack.config.js__
 
-```javascript
+``` javascript
 var path = require('path');
 
 module.exports = function(env) {
@@ -79,6 +82,7 @@ module.exports = function(env) {
 On running `webpack` now, we see that two bundles have been created. If you inspect these though, you will find that the code for `moment` is present in both the files! The reason for that is `moment` is a dependency of the main application (e.g. index.js) and each entry point will bundle its own dependencies.
 
 It is for this reason, that we will need to use the [CommonsChunkPlugin](/plugins/commons-chunk-plugin).
+
 
 ## `CommonsChunkPlugin`
 
@@ -110,13 +114,15 @@ module.exports = function(env) {
     }
 }
 ```
+
 Now run `webpack` on your application. Bundle inspection shows that `moment` code is present only in the vendor bundle.
+
 
 ## Implicit Common Vendor Chunk
 
 You can configure a `CommonsChunkPlugin` instance to only accept vendor libraries.
 
- __webpack.config.js__
+__webpack.config.js__
 
 ```javascript
 var webpack = require('webpack');
@@ -143,6 +149,7 @@ module.exports = function() {
     };
 }
 ```
+
 
 ## Manifest File
 
@@ -182,8 +189,8 @@ With the above webpack config, we see three bundles being generated. `vendor`, `
 
 Using what we have learned so far, we could also achieve the same result with an implicit common vendor chunk.
 
- __webpack.config.js__
- 
+__webpack.config.js__
+
 ```javascript
 var webpack = require('webpack');
 var path = require('path');

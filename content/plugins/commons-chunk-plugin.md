@@ -4,12 +4,15 @@ contributors:
   - bebraw
   - simon04
   - christopher4lis
+  - kevinzwhuang
 ---
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin(options)
 ```
+
 The `CommonsChunkPlugin` is an opt-in feature that creates a separate file (known as a chunk), consisting of common modules shared between multiple entry points. By separating common modules from bundles, the resulting chunked file can be loaded once initially, and stored in cache for later use. This results in pagespeed optimizations as the browser can quickly serve the shared code from cache, rather than being forced to load a larger bundle whenever a new page is visited.
+
 
 ## Options
 
@@ -23,7 +26,7 @@ The `CommonsChunkPlugin` is an opt-in feature that creates a separate file (know
   // otherwise `options.filename` is used as chunk name.
 
   filename: string,
-  // The filename template for the commons chunk. Can contain the same placeholder as `output.filename`.
+  // The filename template for the commons chunk. Can contain the same placeholders as `output.filename`.
   // If omitted the original filename is not modified (usually `output.filename` or `output.chunkFilename`).
 
   minChunks: number|Infinity|function(module, count) -> boolean,
@@ -50,6 +53,7 @@ The `CommonsChunkPlugin` is an opt-in feature that creates a separate file (know
 ```
 
 T> The deprecated webpack 1 constructor `new webpack.optimize.CommonsChunkPlugin(options, filenameTemplate, selectedChunks, minChunks)` is no longer supported. Use a corresponding options object instead.
+
 
 ## Examples
 
@@ -80,6 +84,7 @@ You must load the generated chunk before the entry point:
 <script src="entry.bundle.js" charset="utf-8"></script>
 ```
 
+
 ### Explicit vendor chunk
 
 Split your code into vendor and application.
@@ -108,7 +113,8 @@ new webpack.optimize.CommonsChunkPlugin({
 
 Hint: In combination with long term caching you may need to use the [`ChunkManifestWebpackPlugin`](https://github.com/diurnalist/chunk-manifest-webpack-plugin) to avoid that the vendor chunk changes. You should also use records to ensure stable module ids.
 
-###  Move common modules into the parent chunk
+
+### Move common modules into the parent chunk
 
 With [Code Splitting](/guides/code-splitting) multiple child chunks of an entry chunk can have common dependencies. To prevent duplication these can be moved into the parent. This reduces overall size, but does have a negative effect on the initial load time. If it is expected that users will need to download many sibling chunks, i.e. children of the entry chunk, then this should improve load time overall.
 
@@ -124,6 +130,7 @@ new webpack.optimize.CommonsChunkPlugin({
   // (3 children must share the module before it's moved)
 })
 ```
+
 
 ### Extra async commons chunk
 
@@ -145,13 +152,18 @@ new webpack.optimize.CommonsChunkPlugin({
 })
 ```
 
+
 ### Passing the `minChunks` property a function
 
 You also have the ability to pass the `minChunks` property a function. This function is called by the `CommonsChunkPlugin` and calls the function with `module` and `count` arguments.
 
-The `module` property represents each module in the chunks you have provided via the `names` property.
+The `module` argument represents each module in the chunks you have provided via the `name`/`names` property.
+`module` has the shape of a [NormalModule](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js), which has two particularly useful properties for this use case:
 
-The `count` property represents how many chunks the `module` is used in.
+- `module.context`: The directory that stores the file. For example: `'/my_project/node_modules/example-dependency'`
+- `module.resource`: The name of the file being processed. For example: `'/my_project/node_modules/example-dependency/index.js'`
+
+The `count` argument represents how many chunks the `module` is used in.
 
 This option is useful when you want to have fine-grained control over how the CommonsChunk algorithm determines where modules should be moved to.
 
@@ -177,6 +189,22 @@ new webpack.optimize.CommonsChunkPlugin({
   name: "vendor",
   minChunks: function (module) {
     // this assumes your vendor imports exist in the node_modules directory
+    return module.context && module.context.indexOf("node_modules") !== -1;
+  }
+})
+```
+
+In order to obtain a single CSS file containing your application and vendor CSS, use the following `minChunks` function together with [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin/):
+
+```javascript
+new webpack.optimize.CommonsChunkPlugin({
+  name: "vendor",
+  minChunks: function (module) {
+    // This prevents stylesheet resources with the .css or .scss extension
+    // from being moved from their original chunk to the vendor chunk
+    if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
+      return false;
+    }
     return module.context && module.context.indexOf("node_modules") !== -1;
   }
 })
@@ -213,8 +241,8 @@ Since the `vendor` and `manifest` chunk use a different definition for `minChunk
 ]
 ```
 
-## Examples
+## More Examples
 
-* https://github.com/webpack/webpack/tree/master/examples/common-chunk-and-vendor-chunk
-* https://github.com/webpack/webpack/tree/master/examples/multiple-commons-chunks
-* https://github.com/webpack/webpack/tree/master/examples/multiple-entry-points-commons-chunk-css-bundle
+- [Common and Vendor Chunks](https://github.com/webpack/webpack/tree/master/examples/common-chunk-and-vendor-chunk)
+- [Multiple Common Chunks](https://github.com/webpack/webpack/tree/master/examples/multiple-commons-chunks)
+- [Multiple Entry Points with Commons Chunk](https://github.com/webpack/webpack/tree/master/examples/multiple-entry-points-commons-chunk-css-bundle)

@@ -2,8 +2,8 @@
 title: Command Line Interface (CLI)
 sort: 2
 contributors:
-    - ev1stensberg
-    - simon04
+  - ev1stensberg
+  - simon04
 ---
 
 webpack provides a Command Line Interface (CLI) to configure and interact with your build. This is mostly useful in case of early prototyping, profiling, writing npm scripts or personal customization of the build.
@@ -14,14 +14,18 @@ Have a look at the [installation guide](/guides/installation) unless you have we
 
 T> The new CLI for webpack is under development. New features are being added such as the `--init` flag. [Check it out!](https://github.com/webpack/webpack-cli)
 
+
 ## Usage with config file
+
 ```sh
 webpack [--config webpack.config.js]
 ```
 
 See [configuration](/configuration) for the options in the configuration file.
 
+
 ## Usage without config file
+
 ```sh
 webpack <entry> [<entry>] <output>
 ```
@@ -77,6 +81,7 @@ This will form the bundle with both the files as separate entry points.
 	[1] ./src/others.js 29 bytes {0} {1} [built]
 ```
 
+
 ### Common Options
 
 **List all of the options available on the cli**
@@ -115,12 +120,14 @@ In every other case, webpack prints out a set of stats showing bundle, chunk and
 This response is accepted by webpack's [analyse tool](https://webpack.github.com/analyse), or chrisbateman's [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/), or th0r's [webpack-bundle-analyzer](https://github.com/th0r/webpack-bundle-analyzer).
 The analyse tool will take in the JSON and provide all the details of the build in graphical form.
 
-*Further reads:*
+*Further reading:*
+
 * [Analyzing Build Statistics](https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/)
 * [Three simple ways to inspect a webpack bundle](https://medium.com/@joeclever/three-simple-ways-to-inspect-a-webpack-bundle-7f6a8fe7195d#.7d2i06mjx)
 * [Optimising your application bundle size with webpack](https://hackernoon.com/optimising-your-application-bundle-size-with-webpack-e85b00bab579#.5w5ko08pq)
 * [Analyzing & optimizing your webpack bundle](https://medium.com/@ahmedelgabri/analyzing-optimizing-your-webpack-bundle-8590818af4df#.hce4vdjs9)
 * [Analysing and minimising the size of client side bundle with webpack and source-map-explorer](https://medium.com/@nimgrg/analysing-and-minimising-the-size-of-client-side-bundle-with-webpack-and-source-map-explorer-41096559beca#.c3t2srr8x)
+
 
 ### Output Options
 
@@ -137,6 +144,7 @@ This set of options allows you to manipulate certain [output](/configuration/out
 | --output-pathinfo            | Include a comment with the request for every dependency         | boolean    | false                                                 |
 | --output-public-path         | The public path for the assets                                  | string     | /                                                     |
 | --output-source-map-filename | The output filename for the SourceMap                           | string     | [name].map or [outputFilename].map                    |
+
 
 #### Example Usage
 
@@ -166,6 +174,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 	[2] ./src/index2.js 54 bytes {0} [built]
 ```
 
+
 ### Debug Options
 
 This set of options allows you to better debug the application containing assets compiled with webpack
@@ -176,6 +185,7 @@ This set of options allows you to better debug the application containing assets
 | --devtool  | Define [source map type](/configuration/devtool/) for the bundled resources | string     | -             |
 | --progress | Print compilation progress in percentage         | boolean    | false         |
 
+
 ### Module Options
 
 These options allow you to bind [modules](/configuration/module/) as allowed by webpack
@@ -185,6 +195,7 @@ These options allow you to bind [modules](/configuration/module/) as allowed by 
 | --module-bind      | Bind an extension to a loader      | --module-bind js=babel-loader |
 | --module-bind-post | Bind an extension to a post loader |                             |
 | --module-bind-pre  | Bind an extension to a pre loader  |                             |
+
 
 ### Watch Options
 
@@ -198,6 +209,7 @@ These options makes the build [watch](/configuration/watch/) for changes in file
 | --watch-poll              | The polling interval for watching (also enable polling) |
 | --watch-stdin, --stdin    | Exit the process when stdin is closed                   |
 
+
 ### Optimize Options
 
 These options allow you to manipulate optimisations for a production build using webpack
@@ -208,6 +220,7 @@ These options allow you to manipulate optimisations for a production build using
 | --optimize-min-chunk-size | Try to keep the chunk size above a limit               | [MinChunkSizePlugin](/plugins/min-chunk-size-plugin) |
 | --optimize-minimize       | Minimize javascript and switches loaders to minimizing | [UglifyJsPlugin](/plugins/uglifyjs-webpack-plugin/) & [LoaderOptionsPlugin](/plugins/loader-options-plugin/) |
 
+
 ### Resolve Options
 
 These allow you to configure the webpack [resolver](/configuration/resolve/) with aliases and extensions.
@@ -217,6 +230,7 @@ These allow you to configure the webpack [resolver](/configuration/resolve/) wit
 | --resolve-alias        | Setup a module alias for resolving                      | --resolve-alias jquery-plugin=jquery.plugin |
 | --resolve-extensions   | Setup extensions that should be used to resolve,modules | --resolve-extensions .es6 .js .ts           |
 | --resolve-loader-alias | Minimize javascript and switches loaders to minimizing  |                                             |
+
 
 ### Stats Options
 
@@ -241,6 +255,7 @@ These options allow webpack to display various [stats](/configuration/stats/) an
 | --sort-modules-by       | Sorts the modules list by property in module                       | string  |
 | --verbose               | Show more details                                                  | boolean |
 
+
 ### Advanced Options
 
 | Parameter             | Explanation                                                      | Usage                                       |
@@ -264,6 +279,7 @@ These options allow webpack to display various [stats](/configuration/stats/) an
 |----------|------------------------------------------------------------------|
 | -d       | --debug --devtool eval-cheap-module-source-map --output-pathinfo |
 | -p       | --optimize-minimize --define process.env.NODE_ENV="production", see [building for production](/guides/production-build)   |
+
 
 ### Profiling
 
