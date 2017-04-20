@@ -10,7 +10,9 @@ contributors:
 ```javascript
 new webpack.optimize.CommonsChunkPlugin(options)
 ```
+
 `CommonsChunkPlugin` 插件，是一个可选的用于建立一个独立文件(又称作 chunk)的功能，这个文件包括多个入口 `chunk` 的公共模块。通过将公共模块拆出来，最终合成的文件能够在最开始的时候加载一次，便存起来到缓存中供后续使用。这个带来速度上的提升，因为浏览器会迅速将公共的代码从缓存中取出来，而不是每次访问一个新页面时，再去加载一个更大的文件。
+
 
 ## 配置
 
@@ -51,6 +53,7 @@ new webpack.optimize.CommonsChunkPlugin(options)
 
 T> webpack1 构造函数 `new webpack.optimize.CommonsChunkPlugin(options, filenameTemplate, selectedChunks, minChunks)` 不再被支持。请使用相应的选项对象。
 
+
 ## 例子
 
 ### 公共chunk 用于 入口chunk (entry chunk)
@@ -80,6 +83,7 @@ new webpack.optimize.CommonsChunkPlugin({
 <script src="entry.bundle.js" charset="utf-8"></script>
 ```
 
+
 ### 明确第三方库 chunk
 
 将你的代码拆分成公共代码和应用代码。
@@ -107,6 +111,7 @@ new webpack.optimize.CommonsChunkPlugin({
 
 提示：结合长期缓存，你可能需要使用这个[插件](https://github.com/diurnalist/chunk-manifest-webpack-plugin)去避免 公共chunk 改变。 你也需要使用 `records` 去保持稳定的模块 id。
 
+
 ###  将公共模块打包进父 chunk
 
 使用[代码拆分](/guides/code-splitting)功能，一个 chunk 的多个子 chunk 会有公共的依赖。为了防止重复，可以将这些公共模块移入父 chunk。这会减少总体的大小，但会对首次加载时间产生不良影响。如果预期到用户需要下载许多兄弟 chunks（例如，入口 trunk 的子 chunk），那这对改善加载时间将非常有用。
@@ -123,6 +128,7 @@ new webpack.optimize.CommonsChunkPlugin({
   // (在提取之前需要至少三个子 chunk 共享这个模块)
 })
 ```
+
 
 ### 额外的异步 公共chunk
 
@@ -143,6 +149,7 @@ new webpack.optimize.CommonsChunkPlugin({
   // (在提取之前需要至少三个子 chunk 共享这个模块)
 })
 ```
+
 
 ### 给 `minChunks` 配置传入函数
 
@@ -233,11 +240,11 @@ Since the `vendor` and `manifest` chunk use a different definition for `minChunk
 ]
 ```
 
-## Examples
+## More Examples
 
-* https://github.com/webpack/webpack/tree/master/examples/common-chunk-and-vendor-chunk
-* https://github.com/webpack/webpack/tree/master/examples/multiple-commons-chunks
-* https://github.com/webpack/webpack/tree/master/examples/multiple-entry-points-commons-chunk-css-bundle
+- [Common and Vendor Chunks](https://github.com/webpack/webpack/tree/master/examples/common-chunk-and-vendor-chunk)
+- [Multiple Common Chunks](https://github.com/webpack/webpack/tree/master/examples/multiple-commons-chunks)
+- [Multiple Entry Points with Commons Chunk](https://github.com/webpack/webpack/tree/master/examples/multiple-entry-points-commons-chunk-css-bundle)
 
 ***
 

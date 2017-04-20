@@ -7,6 +7,7 @@ contributors:
 
 一个组件可以通过使用一些高阶函数来懒加载它的依赖，无需通过它的父元素，同时，一个父元素可以使用一个接受函数和一系列模块的组件来懒加载它的子元素，无需通过它的子元素，或者混合使用这两种方式。
 
+
 ## 懒加载的组件
 
 我们来看一个父元素选择懒加载一些组件的例子。`importLazy` 只是一个简单的返回 `default` 属性的函数，这是为了兼容 Babel/ES2015。如果你不需要，你可以去掉 `importLazy` 方法。`importLazy` 只是返回了目标模块里面任何被导出为 `export default` 的部分。
@@ -26,6 +27,7 @@ contributors:
 )}
 </LazilyLoad>
 ```
+
 
 ## 高阶组件方式
 
@@ -59,6 +61,7 @@ export LazilyLoadFactory(Highlight, {
 ```
 
 请注意，Highlight 组件的父元素不知道它有一个依赖会被懒惰加，这是怎么实现的？ 或者如果所有 todo 里面都没有代码，我们就永远不需要加载 highlight.js 了吗？
+
 
 ## 代码
 
@@ -137,14 +140,18 @@ export const importLazy = (promise) => (
 
 export default LazilyLoad;
 ```
+
+
 ## 贴士
 
 -  通过利用 [bundle loader](https://github.com/webpack/bundle-loader)，我们可以语义化的命名 chunk 来智能的加载代码块。
 - 如果你正在使用 babel-preset-es2015，请确保将参数 modules 设置为 false，以允许 webpack 处理相应的模块。
 
+
 ## 依赖
 
 - ES2015 + JSX
+
 
 ## 参考
 

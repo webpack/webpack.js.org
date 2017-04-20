@@ -12,9 +12,10 @@ contributors:
 2. 将 webpack mainfest 提取到一个单独的文件中去。
 3. 对于一组依赖关系相同的资源，确保包含引导代码的入口起点(entry point) chunk 不会随时间的推移而更改它的哈希值。
 
-对于更优化的设置:
-4. 当需要在 HTML 中加载资源时，使用 compiler 统计信息(stats)来获取文件名。
-5. 生成 chunk 清单(manifest)的 JSON 内容，并在页面资源加载之前内联进HTML中去。
+对于更优化的设置：
+
+1. 当需要在 HTML 中加载资源时，使用 compiler 统计信息(stats)来获取文件名。
+2. 生成 chunk 清单(manifest)的 JSON 内容，并在页面资源加载之前内联进HTML中去。
 
 
 ## 问题
@@ -31,7 +32,6 @@ application.css?build=1
 ```
 
 使用 webpack 就更简单了。通过包含输出[占位符](/concepts/output/#options)，每次webpack构建时都会生成一个唯一的哈希值用来构成文件名。
-
 以下这个配置示例会生成两个在文件名中带有哈希值的文件（每个都有一个入口起点）：
 
 ```js
@@ -65,6 +65,7 @@ vendor.2a6c1fee4b5b0d2c9285.js  2.58 kB       0  [emitted]  vendor
 
 但是这里的问题是，在*任何文件更新*之后构建就会更新所有文件名，然后客户端就不得不重新下载所有代码。 那么我们如何保证客户端始终获得最新版本的资源，而又不需要重新下载所有的资源呢？
 
+
 ## 为每个文件生成唯一的哈希值
 
 如果文件内容在两次构建之间没有变化，就生成相同的文件名的话会怎么样？例如，当依赖没有更新，只有应用代码更新的时候，就没有必要去重新下载一个公共库(vendor)文件。
@@ -96,6 +97,7 @@ vendor.50cfb8f89ce2262e5325.js  2.58 kB       0  [emitted]  vendor
 ```
 
 T> 不要在开发环境下使用 [chunkhash]，因为这会增加编译时间。将开发和生产模式的配置分开，并在开发模式中使用 [name].js 的文件名， 在生产模式中使用 [name].[chunkhash].js 文件名。
+
 
 ## 从 webpack 编译统计中获取文件名
 
@@ -147,15 +149,15 @@ module.exports = {
 }
 ```
 
+
 ## 确定性的(Deterministic)哈希值
 
 为了最小化生成的文件大小，webpack 使用标识符而不是模块名称。在编译期间，生成标识符并映射到块文件名，然后放入一个名为 *chunk manifest* 的 JavaScript 对象中。
-
 为了生成保存在构建中的标识符，webpack 提供了 `NamedModulesPlugin`（推荐用于开发模式）和 `HashedModuleIdsPlugin`（推荐用于生产模式）这两个插件。
 
-?> TODO: 如果存在, 链接到`NamedModulesPlugin`和`HashedModuleIdsPlugin`文档页
+?> When exist, link to `NamedModulesPlugin` and `HashedModuleIdsPlugin` docs pages
 
-?> TODO: 描述`recordsPath`选项如何工作
+?> Describe how the option `recordsPath` option works
 
 然后将 chunk manifest（与引导/运行时代码一起）放入 entry chunk，这对 webpack 打包的代码工作是至关重要的。
 
@@ -237,11 +239,9 @@ module.exports = {
 };
 ```
 
-T> 如果你正在使用 [webpack-html-plugin](https://github.com/ampedandwired/html-webpack-plugin)，你可以使用 [inline-manifest-webpack-plugin](https://github.com/szrenwei/inline-manifest-webpack-plugin)去做这个。
-
 使用这个配置，vendor chunk 就不会更改哈希值，除非你修改了它的代码或者依赖。下面是两次构建的输出，在运行期间修改了 `moduleB.js`：
 
-```bash
+``` bash
 > node_modules/.bin/webpack
 
 Hash: f0ae5bf7c6a1fd3b2127
@@ -253,7 +253,8 @@ Time: 102ms
              chunk-manifest.json   73 bytes          [emitted]
 manifest.d41d8cd98f00b204e980.js    5.56 kB       2  [emitted]  manifest
 ```
-```bash
+
+``` bash
 > node_modules/.bin/webpack
 
 Hash: b5fb8e138b039ab515f3
@@ -268,11 +269,13 @@ manifest.d41d8cd98f00b204e980.js    5.56 kB       2  [emitted]  manifest
 
 注意，**vendor chunk具有相同的文件名**，manifest 也是一样的，因为我们已经提取了 manifest chunk！
 
+
 ## 内联 Manifest
 
 要内联 chunk manifest 还是选择 webpack runtime（以防止额外的HTTP请求），取决于你的服务器设置。这有一个很好的[演练 Rails 基础](https://brigade.engineering/setting-up-webpack-with-rails-c62aea149679)的项目。 对于在 Node.js 中的服务器端渲染，你可以使用 [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools)。
 
 T> 如果你的应用程序不依赖于任何服务器端渲染，通常只需为应用程序生成一个 `index.html` 文件即可。 为此，请使用如 [`HtmlWebpackPlugin`](https://github.com/ampedandwired/html-webpack-plugin)加上 [`ScriptExtHtmlWebpackPlugin`](https://github.com/numical/script-ext-html-webpack-plugin) 或者 [`InlineManifestWebpackPlugin`](https://github.com/szrenwei/inline-manifest-webpack-plugin) 的组合。这将会大大地简化设置。
+
 
 ## 参考
 

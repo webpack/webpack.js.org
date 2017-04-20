@@ -48,10 +48,10 @@ $('.my-element').animate(...);
 
 具有外部依赖(external dependency)的 bundle 可以在各种模块上下文(module context)中使用，例如 [CommonJS, AMD, 全局变量和 ES2015 模块](/concepts/modules)。外部 library 可能是以下任何一种形式：
 
-  * __global__ - 外部 library 能够作为全局变量使用。用户可以通过在 script 标签中引入来实现。这是 externals 的默认设置。
-  * __commonjs__ - 用户(consumer)应用程序可能使用 CommonJS 模块系统，因此外部 library 应该使用 CommonJS 模块系统，并且应该是一个 CommonJS 模块。
-  * __commonjs2__ - 类似上面几行，但导出的是 `module.exports.default`。
-  * __amd__ - 类似上面几行，但使用 AMD 模块系统。
+* __global__ - 外部 library 能够作为全局变量使用。用户可以通过在 script 标签中引入来实现。这是 externals 的默认设置。
+* __commonjs__ - 用户(consumer)应用程序可能使用 CommonJS 模块系统，因此外部 library 应该使用 CommonJS 模块系统，并且应该是一个 CommonJS 模块。
+* __commonjs2__ - 类似上面几行，但导出的是 `module.exports.default`。
+* __amd__ - 类似上面几行，但使用 AMD 模块系统。
 
 `externals` 接受各种语法，并且按照不同方式去解释他们。
 

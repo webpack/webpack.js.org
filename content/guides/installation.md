@@ -16,9 +16,9 @@ sort: 10
 ### 本地安装
 
 ``` bash
-npm install webpack --save-dev
+npm install --save-dev webpack
 
-npm install webpack@<version> --save-dev
+npm install --save-dev webpack@<version>
 ```
 
 如果你在项目中使用了 npm scripts，npm 首先会在本地模块中寻找 webpack。这是一个实用的小技巧。
@@ -39,7 +39,7 @@ T> 当你在本地安装 webpack 后，你能够从 `node_modules/.bin/webpack` 
 W> 注意，不推荐全局安装 webpack。这会锁定 webpack 到指定版本，并且在使用不同的 webpack 版本的项目中可能会导致构建失败。
 
 ``` bash
-npm install webpack -g
+npm install --global webpack
 ```
 
 `webpack` 命令现在可以全局执行了。

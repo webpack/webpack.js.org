@@ -3,6 +3,7 @@ title: NormalModuleReplacementPlugin
 contributors:
   - gonzoyumo
 ---
+
 ## 安装
 
  `NormalModuleReplacementPlugin` 是webpack的一个内置插件.
@@ -18,10 +19,10 @@ new webpack.NormalModuleReplacementPlugin(resourceRegExp, newResource)
 
 这对于允许在构建中的不同行为是有用的。
 
+
 ## 基本示例
 
 在构建[开发环境](/guides/production-build)时替换特定的模块。
-
 
 假设你有一个配置文件 `some/path/config.development.module.js` 并且在生产环境有一个特殊的版本 `some/path/config.production.module.js`
 
@@ -33,6 +34,7 @@ new webpack.NormalModuleReplacementPlugin(
   './config.production.js'
 );
 ```
+
 
 ## 高级示例
 
@@ -56,18 +58,22 @@ module.exports = function(env) {
 
 创建两个配置文件：
 
-**app/config-VERSION_A.js:**
+__app/config-VERSION_A.js__
+
 ``` javascript
 export default {
   title : 'I am version A'
 }
 ```
-**app/config-VERSION_B.js:**
+
+__app/config-VERSION_B.js__
+
 ``` javascript
 export default {
   title : 'I am version B'
 }
 ```
+
 然后使用在正则中查找的关键字来引入配置：
 
 ``` javascript
@@ -83,5 +89,8 @@ webpack --env.APP_TARGET VERSION_A
 
 webpack --env.APP_TARGET VERSION_B
 => 'I am version B'
-
 ```
+
+***
+
+> 原文：https://webpack.js.org/plugins/normal-module-replacement-plugin/
