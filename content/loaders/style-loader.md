@@ -9,9 +9,7 @@ edit: https://github.com/webpack-contrib/style-loader/edit/master/README.md
 npm install style-loader --save-dev
 ```
 
-## Usage
-
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
+## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
 
 ### Simple API
 

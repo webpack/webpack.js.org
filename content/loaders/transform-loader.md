@@ -9,9 +9,7 @@ edit: https://github.com/webpack-contrib/transform-loader/edit/master/README.md
 npm i transform-loader --save
 ```
 
-## Usage
-
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
+## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
 
 Pass the module name as query parameter.
 

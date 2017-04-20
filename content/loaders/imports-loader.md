@@ -9,7 +9,7 @@ edit: https://github.com/webpack-contrib/imports-loader/edit/master/README.md
 npm install imports-loader
 ```
 
-## Usage
+## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
 
 Given you have this file `example.js`
 
@@ -62,8 +62,6 @@ module.exports = {
     }
 };
 ```
-
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
 
 ## Typical Use Cases
 

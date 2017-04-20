@@ -9,9 +9,7 @@ edit: https://github.com/webpack-contrib/react-proxy-loader/edit/master/README.m
 npm install react-proxy-loader`
 ```
 
-## Usage
-
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
+## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
 
 ``` js
 var Component = require("react-proxy-loader!./Component");

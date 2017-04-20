@@ -9,7 +9,7 @@ edit: https://github.com/webpack-contrib/expose-loader/edit/master/README.md
 npm i expose-loader --save
 ```
 
-## Usage
+## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
 
 **Note**: Modules must be `require()`'d within in your bundle, or they will not
 be exposed.
@@ -84,8 +84,6 @@ absolute path to the module ("/.../app/node_modules/react/react.js"). So the
 expose only applies to the react module. And it's only exposed when used in the
 bundle.
 
-
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
 
 ## Maintainers
 
