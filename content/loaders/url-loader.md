@@ -9,9 +9,7 @@ edit: https://github.com/webpack-contrib/url-loader/edit/master/README.md
 npm install --save-dev url-loader
 ```
 
-## Usage
-
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
+## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
 
 The `url` loader works like the `file` loader, but can return a Data Url if the file is smaller than a byte limit.
 

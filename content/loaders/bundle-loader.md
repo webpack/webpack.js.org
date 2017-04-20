@@ -9,9 +9,7 @@ edit: https://github.com/webpack-contrib/bundle-loader/edit/master/README.md
 npm i bundle-loader --save
 ```
 
-## Usage
-
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
+## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
 
 ``` javascript
 // The chunk is requested, when you require the bundle
