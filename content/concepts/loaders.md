@@ -17,7 +17,7 @@ loader 用于对模块的源代码进行转换。loader 可以使你在 `require
 
 例如，你可以使用 loader 告诉 webpack 加载 CSS 文件，或者将 TypeScript 转为 JavaScript。首先，安装相对应的 loader：
 
-```
+``` bash
 npm install --save-dev css-loader
 npm install --save-dev ts-loader
 ```

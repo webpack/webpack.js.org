@@ -11,9 +11,12 @@ loader 用于对模块的源代码进行转换。它们是（运行在 Node.js �
 
 ## 如何写一个 Loader
 
-所谓 loader 只是导出为一个函数的 JavaScript 模块。[loader runner](https://github.com/webpack/loader-runner) 会调用这个函数，然后把上一个 loader 产生的结果或者资源文件(resource file)传入进去。函数的 `this` 上下文将由 webpack 填充，并且 [loader runner](https://github.com/webpack/loader-runner) 带有一些有用方法，可以使 loader 改变为异步调用方式，或者获取 query 参数。第一个 loader 传入的参数只有一个：资源文件(resource file)的内容。compiler 会接收上一个 loader 产生的处理结果。这些处理结果应该是一些 `String` 或者 `Buffer`（被转换为一个 string），呈现为模块的 JavaScript 源码。另外还可以传递一个可选的 SourceMap 结果（即 JSON 对象）。
+所谓 loader 只是导出为一个函数的 JavaScript 模块。[loader runner](https://github.com/webpack/loader-runner) 会调用这个函数，然后把上一个 loader 产生的结果或者资源文件(resource file)传入进去。函数的 `this` 上下文将由 webpack 填充，并且 [loader runner](https://github.com/webpack/loader-runner) 带有一些有用方法，可以使 loader 改变为异步调用方式，或者获取 query 参数。
+
+第一个 loader 传入的参数只有一个：资源文件(resource file)的内容。compiler 会接收上一个 loader 产生的处理结果。这些处理结果应该是一些 `String` 或者 `Buffer`（被转换为一个 string），呈现为模块的 JavaScript 源码。另外还可以传递一个可选的 SourceMap 结果（即 JSON 对象）。
 
 如果是单个处理结果，可以在**同步模式**中直接返回。如果有多个处理结果，则需要调用 `this.callback()`。在**异步模式**中，必须调用 `this.async()`，来指示 [loader runner](https://github.com/webpack/loader-runner) 等待异步结果，如果异步模式被允许，那么它会返回 `this.callback()`，随后 Loader 必须返回 `undefined` 并且调用回调函数。
+
 
 ## 示例
 
@@ -35,6 +38,7 @@ module.exports = function(content) {
     return; // always return undefined when calling callback()
 };
 ```
+
 
 ### 异步 Loader
 
@@ -64,6 +68,7 @@ module.exports = function(content) {
 
 T> loader 最初被设计为：在同步 loader 管道(synchronous loader pipeline)中运行，就像 Node.js（使用 [enhanced-require](https://github.com/webpack/enhanced-require)），以及在异步管道，就像在 webpack 中。然而，由于耗性能的同步计算，在像 Node.js 这样的单线程环境并非是好的方案，我们建议尽可能地使您的 loader 异步。如果计算量很小，同步 loader 也是可以的。
 
+
 ### "Raw" Loader
 
 默认情况下，资源文件会被转化为 UTF-8 字符串，然后传给 loader。通过设置 `raw`，loader 可以接收原始的 `Buffer`。每一个 loader 都可以用 `String` 或者 `Buffer` 的形式传递它的处理结果。Complier 将会把它们在 loader 之间相互转换。
@@ -79,6 +84,7 @@ module.exports = function(content) {
 };
 module.exports.raw = true;
 ```
+
 
 ### Pitching Loader
 
@@ -99,19 +105,23 @@ module.exports.pitch = function(remainingRequest, precedingRequest, data) {
 };
 ```
 
+
 ## The loader context
 
 Loader context 表示 Loader 给 `this` 中添加的一些可用的方法或者属性
 
-下面的例子中，假定我们在 `/abc/file.js` 中这样请求加载别的模块：
+下面的例子中，假定我们这样请求加载别的模块：
+在 `/abc/file.js` 中：
 
 ```javascript
 require("./loader1?xyz!loader2!./resource?rrr");
 ```
 
+
 ### `this.version`
 
 **Loader API 的版本号。**目前是 `2`。这对于向后兼容性有一些用处。通过这个版本号你可以指定特定的逻辑，或者对一些不兼容的改版做降级处理。
+
 
 ### `this.context`
 
@@ -119,11 +129,13 @@ require("./loader1?xyz!loader2!./resource?rrr");
 
 在我们的例子中：这个属性为 `/abc`，因为 `resource.js` 在这个目录中
 
+
 ### `this.request`
 
 被解析出来的请求字符串。
 
 在我们的例子中：`"/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr"`
+
 
 ### `this.query`
 
@@ -131,6 +143,7 @@ require("./loader1?xyz!loader2!./resource?rrr");
 2. If the loader has no `options`, but was invoked with a query string, this will be a string starting with `?`.
 
 T> Use the [`getOptions` method from the `loader-utils`](https://github.com/webpack/loader-utils#getoptions) to extract the given loader options.
+
 
 ### `this.callback`
 
@@ -152,13 +165,16 @@ this.callback(
 
 In case this function is called, you should return undefined to avoid ambigious loader results.
 
+
 ### `this.async`
 
 Tells the [loader-runner](https://github.com/webpack/loader-runner) that the loader intends to call back asynchronously. Returns `this.callback`.
 
+
 ### `this.data`
 
 在 pitch 阶段和正常阶段之间共享的数据对象。
+
 
 ### `this.cacheable`
 
@@ -171,6 +187,7 @@ cacheable(flag = true: boolean)
 默认情况下，loader 的处理结果会被标记可缓存。调用这个方法然后传入 `false`，可以关闭 loader 的缓存。
 
 一个可缓存的 Loader 要求在输入和相关依赖没有变化时，绝对产生一个确定性的固定处理结果。这意味着 Loader 除了 `this.addDependency` 里指定的以外，不应该有其它任何外部依赖。
+
 
 ### `this.loaders`
 
@@ -197,11 +214,13 @@ loaders = [{request: string, path: string, query: string, module: function}]
 ]
 ```
 
+
 ### `this.loaderIndex`
 
 当前 Loader 在 Loader 数组中的索引数。
 
 在我们的示例中：loader1：`0`，loader2：`1`
+
 
 ### `this.resource`
 
@@ -209,11 +228,13 @@ loaders = [{request: string, path: string, query: string, module: function}]
 
 在我们的示例中：`"/abc/resource.js?rrr"`
 
+
 ### `this.resourcePath`
 
 资源文件的路径。
 
 在我们的示例中：`"/abc/resource.js"`
+
 
 ### `this.resourceQuery`
 
@@ -221,11 +242,13 @@ loaders = [{request: string, path: string, query: string, module: function}]
 
 在我们的示例中：`"?rrr"`
 
+
 ### `this.target`
 
 编译的目标。从配置选项中传递过来的。
 
 示例：`"web"`, `"node"`
+
 
 ### `this.webpack`
 
@@ -233,9 +256,11 @@ loaders = [{request: string, path: string, query: string, module: function}]
 
 T> Loader 最初被设计为像 Babel 那样做转换工作。如果你编写了一个 Loader 可以同时兼容二者，那么可以使用这个属性表明是否存在可用的 loaderContext 和 Webpack 的特性。
 
+
 ### `this.sourceMap`
 
 Should a source map be generated. Since generating source maps can be an expensive task, you should check if source maps are actually requested.
+
 
 ### `this.emitWarning`
 
@@ -245,6 +270,7 @@ emitWarning(message: string)
 
 触发一个警告。
 
+
 ### `this.emitError`
 
 ```typescript
@@ -252,6 +278,7 @@ emitError(message: string)
 ```
 
 触发一个错误。
+
 
 ### `this.loadModule`
 
@@ -261,6 +288,7 @@ loadModule(request: string, callback: function(err, source, sourceMap, module))
 
 Resolves the given request to a module, applies all configured loaders and calls back with the generated source, the sourceMap and the module instance (usually an instance of [`NormalModule`](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js)). Use this function if you need to know the source code of another module to generate the result.
 
+
 ### `this.resolve`
 
 ```typescript
@@ -268,6 +296,7 @@ resolve(context: string, request: string, callback: function(err, result: string
 ```
 
 以解析 require 表达式的方式解析一个请求。
+
 
 ### `this.addDependency`
 
@@ -278,6 +307,7 @@ dependency(file: string) // shortcut
 
 加入一个文件，这个文件将作为 Loader 的依赖（即它的变化会影响 Loader 的处理结果），使它们的任何变化可以被监听到。例如，[html-loader](https://github.com/webpack/html-loader) 就使用了这个技巧。当它发现 `src` 和 `src-set` 属性时，就会把这些属性上的 url 加入到被解析的 html 文件的依赖中。
 
+
 ### `this.addContextDependency`
 
 ```typescript
@@ -285,6 +315,7 @@ addContextDependency(directory: string)
 ```
 
 把文件夹作为 Loader 的依赖加入。
+
 
 ### `this.clearDependencies`
 
@@ -294,6 +325,7 @@ clearDependencies()
 
 移除 Loader 所有的依赖。甚至自己和其它 Loader 的初始依赖。考虑使用 `pitch`。
 
+
 ### `this.emitFile`
 
 ```typescript
@@ -302,13 +334,16 @@ emitFile(name: string, content: Buffer|string, sourceMap: {...})
 
 产生一个文件。这是 webpack 独有的（原文：This is webpack-specific）。
 
+
 ### `this.fs`
 
 用于访问 `compilation` 的 `inputFileSystem` 属性。
 
+
 ## Deprecated context properties
 
 W> The usage of these properties is highly discouraged since we are planing to remove them from the context. They are still listed here for documentation purposes.
+
 
 ### `this.exec`
 
@@ -318,6 +353,7 @@ exec(code: string, filename: string)
 
 以模块的方式执行一些代码片段。
 
+
 ### `this.resolveSync`
 
 ```typescript
@@ -326,33 +362,41 @@ resolveSync(context: string, request: string) -> string
 
 以解析 require 表达式的方式解析一个 request。
 
+
 ### `this.value`
 
 向下一个 Loader 传值。如果你知道了作为模块执行后的结果，请在这里赋值（以单元素数组的形式）。
+
 
 ### `this.inputValue`
 
 从上一个 Loader 那里传递过来的值。如果你会以模块的方式处理输入参数，建议预先读入这个变量。（为了性能因素）
 
+
 ### `this.options`
 
 options 的值将会传递给 Complier
+
 
 ### `this.debug`
 
 一个布尔值，当处于 debug 模式时为真。
 
+
 ### `this.minimize`
 
 决定处理结果是否应该被压缩。
+
 
 ### `this._compilation`
 
 一种 hack 写法。用于访问 Webpack 的 Compilation 对象。
 
+
 ### `this._compiler`
 
 一种 hack 写法。用于访问 Webpack 的 Compiler 对象。
+
 
 ### `this._module`
 

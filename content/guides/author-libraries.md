@@ -8,11 +8,13 @@ contributors:
 
 webpack 是一个用来打包应用程序(application)和 library 的代码的工具。如果你是一个 JavaScript library 的作者，并且想要流水线化(streamline)你的打包逻辑，那么这篇文档将会帮助到你。
 
+
 ## 创建一个 library
 
 假设你正在写一个名为 `webpack-numbers` 的 library，可以将数字 1 到 5 转换为文本表示，或者反之可以将文本表示数字。它使用 ES6 模块实现，看起来像这样：
 
 __src/index.js__
+
 ```javascript
 import _ from 'lodash';
 import numRef from './ref.json';
@@ -29,10 +31,12 @@ export function wordToNum(word) {
     }, -1);
 };
 ```
+
 该 library 的使用方式如下：
 
 ```javascript
 import * as webpackNumbers from 'webpack-numbers';
+
 ...
 webpackNumbers.wordToNum('Two') // 输出 2
 ...
@@ -40,6 +44,7 @@ webpackNumbers.wordToNum('Two') // 输出 2
 // 使用 CommonJS 模块引入
 
 var webpackNumbers = require('webpack-numbers');
+
 ...
 webpackNumbers.numToWord(3); // 输出 Three
 ...
@@ -62,14 +67,17 @@ webpackNumbers.numToWord(3); // 输出 Three
 
 完整的 library 配置和相关代码请参阅 [webpack library 示例](https://github.com/kalcifer/webpack-library-example)。
 
+
 ## 配置 webpack
 
 现在需要打包这个 library，同时要完成以下要求
+
   - 不要打包 lodash，而是 require 用户加载好的 lodash。
   - library 的名字是 `webpack-numbers`，其变量名是 `webpackNumbers`。
   - library 可以用两种方式来引入：`import webpackNumbers from 'webpack-numbers'` 或者 `require('webpack-numbers')`。
   - 当 library 通过 `script` 标签引入的时候，可以通过全局变量 `webpackNumbers` 来使用。
   - library 可以在 Node.js 中使用。
+
 
 ### 增加 webpack
 
@@ -91,6 +99,7 @@ module.exports = {
 ```
 
 以上代码是打包该 library 的基本配置。
+
 
 ### 增加 `externals`
 
@@ -116,6 +125,7 @@ module.exports = {
 ```
 
 这意味着你的 library 需要一个名为 `lodash` 的依赖，这个依赖在用户的环境中必须可用。
+
 
 ### 增加 `libraryTarget`
 
@@ -155,6 +165,7 @@ module.exports = {
 ```
 
 如果设置了 `library` 但没设置 `libraryTarget`，则`libraryTarget` 默认为 `var`，详见[配置文档](/configuration/output)。
+
 
 ### 最终步骤
 

@@ -83,4 +83,10 @@
       transform: rotate(90deg);
     }
   }
+
+  &--disabled {
+    .sidebar-item__toggle {
+      color: #AAA;
+    }
+  }
 }

@@ -1,98 +1,74 @@
 ---
-title: 插件(Plugins)
-sort: 5
+title: 构建目标(Targets)
+sort: 10
 contributors:
   - TheLarkInn
-  - jhnns
   - rouzbeh84
   - johnstew
 ---
 
-插件是 wepback 的[支柱](https://github.com/webpack/tapable)功能。在你使用 webpack 配置时，webpack 自身也构建于**同样的插件系统**上！
+因为服务器和浏览器代码都可以用 JavaScript 编写，所以 webpack 提供了多种_构建目标(target)_，你可以在你的 webpack [配置](/configuration)中设置。
 
-插件目的在于解决 [loader](/concepts/loaders) 无法实现的**其他事**。
-
-## 剖析
-
-webpack **插件**是一个具有 [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 属性的 JavaScript 对象。 `apply` 属性会被 webpack compiler 调用，并且 compiler 对象可在**整个** compilation 生命周期访问。
-
-
-**ConsoleLogOnBuildWebpackPlugin.js**
-
-```javascript
-function ConsoleLogOnBuildWebpackPlugin() {
-
-};
-
-ConsoleLogOnBuildWebpackPlugin.prototype.apply = function(compiler) {
-  compiler.plugin('run', function(compiler, callback) {
-    console.log("webpack 构建过程开始！！！");
-
-    callback();
-  });
-};
-```
-
-T> 作为一个聪明的 JavaScript 开发者，你可能还记得 `Function.prototype.apply` 方法。通过这个方法你可以把任意函数作为插件传递（`this` 将指向 `compiler`）。你可以在配置中使用这样的方式来内联自定义插件。
+W> webpack 的 `target` 属性不要和 `output.libraryTarget` 属性混淆。有关 `output` 属性的更多信息，请查看[我们的指南](/concepts/output)。
 
 ## 用法
 
-由于 **plugin** 可以携带参数/选项，你必须在 wepback 配置中，向 `plugins` 属性传入 `new` 实例。
-
-根据你如何使用 webpack，这里有多种方式使用插件。
-
-### 配置
+要设置 `target` 属性，只需要在你的 webpack 配置中设置 target 的值。
 
 **webpack.config.js**
 
 ```javascript
-const HtmlWebpackPlugin = require('html-webpack-plugin'); //通过 npm 安装
-const webpack = require('webpack'); //访问内置的插件
-const path = require('path');
-
-const config = {
-  entry: './path/to/my/entry/file.js',
-  output: {
-    filename: 'my-first-webpack.bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.(js|jsx)$/,
-        loader: 'babel-loader'
-      }
-    ]
-  },
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin(),
-    new HtmlWebpackPlugin({template: './src/index.html'})
-  ]
+module.exports = {
+  target: 'node'
 };
-
-module.exports = config;
 ```
 
-### Node API
+在上面例子中，使用 `node` webpack 会编译为用于「类 Node.js」环境（使用 Node.js 的 `require` ，而不是使用任意内置模块（如 `fs` 或 `path`）来加载 chunk）。
 
-?> Even when using the Node API, users should pass plugins via the `plugins` property in the configuration. Using `compiler.apply` should not be the recommended way.
+每个_target_都有各种部署(deployment)/环境(environment)特定的附加项，以支持满足其需求。查看[target 的可用值](/configuration/target)。
 
-**some-node-script.js**
+?>Further expansion for other popular target values
+
+## 多个 Target
+
+尽管 webpack 不支持向 `target` 传入多个字符串，你可以通过打包两份分离的配置来创建同构的库：
+
+**webpack.config.js**
 
 ```javascript
-  const webpack = require('webpack'); //运行时(runtime)访问 webpack
-  const configuration = require('./webpack.config.js');
+var path = require('path');
+var serverConfig = {
+  target: 'node',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'lib.node.js'
+  }
+  //…
+};
 
-  let compiler = webpack(configuration);
-  compiler.apply(new webpack.ProgressPlugin());
+var clientConfig = {
+  target: 'web', // <=== 默认是 'web'，可省略
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'lib.js'
+  }
+  //…
+};
 
-  compiler.run(function(err, stats) {
-    // ...
-  });
+module.exports = [ serverConfig, clientConfig ];
 ```
 
-T> 你知道吗：以上看到的示例和 [webpack 自身运行时(runtime)](https://github.com/webpack/webpack/blob/e7087ffeda7fa37dfe2ca70b5593c6e899629a2c/bin/webpack.js#L290-L292) 极其类似。[wepback 源码](https://github.com/webpack/webpack)中隐藏有大量使用示例，你可以用在自己的配置和脚本中。
+上面的例子将在你的 `dist` 文件夹下创建 `lib.js` 和 `lib.node.js` 文件。
+
+## 资源
+
+从上面的选项可以看出有多个不同的部署_目标_可供选择。下面是一个示例列表，以及你可以参考的资源。
+
+* **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**：有关「测试和查看」不同的 webpack _target_ 的大量资源。也有大量 bug 报告。
+* **[使用 webpack 构建 electron.js 和浏览器 target](https://medium.com/@ad_harmonium/build-to-both-electron-js-and-browser-targets-using-webpack-59266bdb76a)**：
+
+?> Need to find up to date examples of these webpack targets being used in live code or boilerplates.
 
 ***
 
-> 原文：https://webpack.js.org/concepts/plugins/
+> 原文：https://webpack.js.org/concepts/targets/

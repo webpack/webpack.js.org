@@ -9,11 +9,11 @@ sort: 2
 
 `webpack`插件的组成：
 
-  - 一个JavaScript命名函数。
-  - 在它的原型上定义一个`apply`方法。
-  - 指定挂载的webpack事件钩子。
-  - 处理webpack内部实例的特定数据。
-  - 功能完成后调用webpack提供的回调。
+- 一个JavaScript命名函数。
+- 在它的原型上定义一个`apply`方法。
+- 指定挂载的webpack事件钩子。
+- 处理webpack内部实例的特定数据。
+- 功能完成后调用webpack提供的回调。
 
 ```javascript
 // 命名函数
@@ -21,7 +21,7 @@ function MyExampleWebpackPlugin() {
 
 };
 
-// 在它的原型上定义一个`apply`方法。
+// 在它的 prototype 上定义一个 `apply` 方法。
 MyExampleWebpackPlugin.prototype.apply = function(compiler) {
   // 指定挂载的webpack事件钩子。
   compiler.plugin('webpacksEventHook', function(compilation /* 处理webpack内部实例的特定数据。*/, callback) {

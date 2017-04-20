@@ -30,17 +30,22 @@ contributors:
   }
 ```
 
+
 ## `resolve.extensions`
 
 此选项不再需要传一个空字符串。此行为被迁移到 `resolve.enforceExtension`。更多用法请查看[解析](/configuration/resolve)。
+
 
 ## `resolve.*`
 
 这里更改了几个 API。由于不常用，不在这里详细列出。更多用法请查看[解析](/configuration/resolve)。
 
+
 ## `module.loaders` 改为 `module.rules`
 
-旧的 loader 配置被更强大的 rules 系统取代，后者允许配置 loader 以及其他更多选项。为了兼容旧版，`module.loaders` 语法仍然有效，旧的属性名依然可以被解析。新的命名约定更易于理解，并且是升级配置使用 `module.rules` 的好理由。
+旧的 loader 配置被更强大的 rules 系统取代，后者允许配置 loader 以及其他更多选项。
+为了兼容旧版，`module.loaders` 语法仍然有效，旧的属性名依然可以被解析。
+新的命名约定更易于理解，并且是升级配置使用 `module.rules` 的好理由。
 
 ``` diff
   module: {
@@ -74,6 +79,7 @@ contributors:
   }
 ```
 
+
 ## 链式 loader
 
 就像在 webpack 1 中，loader 可以链式调用，上一个 loader 的输出被作为输入传给下一个 loader。使用 [rule.use](/configuration/module#rule-use) 配置选项，`use` 可以设置为一个 loader 数组。
@@ -93,6 +99,7 @@ contributors:
     }]
   }
 ```
+
 
 ## 取消「在模块名中自动添加 `-loader` 后缀」
 
@@ -125,6 +132,7 @@ contributors:
 
 了解这一改变背后的原因，请查看 [#2986](https://github.com/webpack/webpack/issues/2986)。
 
+
 ## `json-loader` 不再需要手动添加
 
 如果没有为 JSON 文件配置 loader，webpack 将自动尝试通过 [`json-loader`](https://github.com/webpack/json-loader) 加载 JSON 文件。
@@ -141,6 +149,7 @@ contributors:
 ```
 
 [我们决定这么做](https://github.com/webpack/webpack/issues/3363)是为了消除 webpack、 node.js 和 browserify 之间的环境差异。
+
 
 ## 配置中的 loader 默认相对于 context 进行解析
 
@@ -165,6 +174,7 @@ contributors:
   }
 ```
 
+
 ## 移除 `module.preLoaders` 和 `module.postLoaders`
 
 ``` diff
@@ -180,6 +190,7 @@ contributors:
   }
 ```
 
+
 ## `UglifyJsPlugin` sourceMap
 
 `UglifyJsPlugin` 的 `sourceMap` 选项现在默认为 `false` 而不是 `true`。
@@ -193,6 +204,7 @@ contributors:
     })
   ]
 ```
+
 
 ## `UglifyJsPlugin` warnings
 
@@ -210,6 +222,7 @@ contributors:
   ]
 ```
 
+
 ## `UglifyJsPlugin` 压缩 loaders
 
 `UglifyJsPlugin` 不再压缩 loaders。在未来很长一段时间里，需要通过设置 `minimize:true` 来压缩 loaders。参考 loader 文档里的相关选项。
@@ -226,9 +239,11 @@ loaders 的压缩模式将在 webpack 3 或后续版本中取消。
   ]
 ```
 
+
 ## 移除 `DedupePlugin`
 
 不再需要 `webpack.optimize.DedupePlugin`。请从配置中移除。
+
 
 ## `BannerPlugin` - 破坏性改动
 
@@ -240,6 +255,7 @@ loaders 的压缩模式将在 webpack 3 或后续版本中取消。
 +    new webpack.BannerPlugin({banner: 'Banner', raw: true, entryOnly: true});
   ]
 ```
+
 
 ## 默认加载 `OccurrenceOrderPlugin`
 
@@ -255,11 +271,12 @@ loaders 的压缩模式将在 webpack 3 或后续版本中取消。
   ]
 ```
 
+
 ## `ExtractTextWebpackPlugin` - 破坏性改动
 
 [ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) 需要使用版本 2，才能在 webpack 2 下正常运行。
 
-`npm install --save-dev extract-text-webpack-plugin@beta`
+`npm install --save-dev extract-text-webpack-plugin`
 
 这一插件的配置变化主要体现在语法上。
 
@@ -281,6 +298,7 @@ module: {
 }
 ```
 
+
 ### `new ExtractTextPlugin({options})`
 
 ```diff
@@ -294,13 +312,14 @@ plugins: [
 ]
 ```
 
+
 ## 全动态 require 现在默认会失败
 
 只有一个表达式的依赖（例如 `require(expr)`）将创建一个空的 context 而不是一个完整目录的 context。
 
 这样的代码应该进行重构，因为它不能与 ES2015 模块一起使用。如果你确定不会有 ES2015 模块，你可以使用 `ContextReplacementPlugin` 来指示 compiler 进行正确的解析。
 
-?> 此处欠一篇关于动态依赖的文章。
+?> Link to an article about dynamic dependencies.
 
 ### 在 CLI 和配置中使用自定义参数
 
@@ -331,11 +350,13 @@ module.exports = function(env) {
 
 详见 [CLI](/api/cli)。
 
+
 ## `require.ensure` 以及 AMD `require` 将采用异步式调用
 
 现在这些函数总是异步的，而不是当 chunk 已经加载完成的时候同步调用它们的回调函数(callback)。
 
 **`require.ensure` 现在依赖于原生的 `Promise`。如果在不支持 Promise 的环境里使用 `require.ensure`，你需要添加 polyfill。**
+
 
 ## 通过 `options` 配置 loader
 
@@ -354,6 +375,7 @@ module.exports = {
   ts: { transpileOnly: false }
 }
 ```
+
 
 ### 什么是 `options`?
 
@@ -386,6 +408,7 @@ module.exports = {
 }
 ```
 
+
 ## `LoaderOptionsPlugin` context
 
 有的 loader 需要从配置中读取一些 context 信息。在未来很长一段时间里，这将需要通过 loader options 传入。详见 loader 文档的相关选项。
@@ -401,6 +424,7 @@ module.exports = {
 +   })
   ]
 ```
+
 
 ## `debug`
 
@@ -419,6 +443,7 @@ loaders 的调试模式将在 webpack 3 或后续版本中取消。
   ]
 ```
 
+
 ## ES2015 的代码分割
 
 在 webpack 1 中，可以使用 [`require.ensure`](/guides/code-splitting-async/#require-ensure-)作为实现应用程序的懒加载 chunks 的一种方法：
@@ -430,7 +455,6 @@ require.ensure([], function(require) {
 ```
 
 ES2015 模块加载规范定义了 [`import()`](/guides/code-splitting-async) 方法，可以在运行时(runtime)动态地加载 ES2015 模块。
-
 webpack 将 `import()` 作为分割点(split-point)并将所要请求的模块(requested module)放置到一个单独的 chunk 中。
 `import()` 接收模块名作为参数，并返回一个 Promise。
 
@@ -446,13 +470,6 @@ function onClick() {
 
 好消息是：如果加载 chunk 失败，我们现在可以进行处理，因为现在它基于 `Promise`。
 
-警告：`require.ensure` 允许用可选的第三个参数为 chunk 简单命名，但是 `import` API 还未提供这个能力。如果你想要保留这个功能，你可以继续使用 `require.ensure`。
-
-```javascript
-require.ensure([], function(require) {
-  var foo = require("./module");
-}, "custom-chunk-name");
-```
 
 ## 动态表达式
 
@@ -467,6 +484,7 @@ function route(path, query) {
 }
 // 上面代码为每个可能的路由创建独立的 chunk
 ```
+
 
 ## 混合使用 ES2015、AMD 和 CommonJS
 
@@ -502,6 +520,7 @@ typeof readFileSync === "function";
 }
 ```
 
+
 ## Hints
 
 不需要改变什么，但有机会改变。
@@ -514,6 +533,7 @@ webpack 现在支持表达式中的模板字符串了。这意味着你可以在
 - require("./templates/" + name);
 + require(`./templates/${name}`);
 ```
+
 
 ### 配置中使用 Promise
 
@@ -533,6 +553,7 @@ module.exports = function() {
 };
 ```
 
+
 ### 高级 loader 匹配
 
 webpack 现在支持对 loader 进行更多方式的匹配。
@@ -549,6 +570,7 @@ module: {
 }
 ```
 
+
 ### 更多的 CLI 参数项
 
 你可以使用一些新的 CLI 参数项：
@@ -563,9 +585,11 @@ module: {
 
 `-p` 能够定义 `process.env.NODE_ENV` 为 `"production"`。
 
+
 ## Loader 变更
 
 以下变更仅影响 loader 的开发者。
+
 
 ### Cacheable
 
@@ -586,6 +610,7 @@ Loaders 现在默认可被缓存。Loaders 如果不想被缓存，需要选择�
     return source;
   }
 ```
+
 
 ### 复合 options
 
@@ -609,7 +634,8 @@ options 对象上有了 `ident`，内联的 loader 就可以引用这个 options
 }
 ```
 
-这种内联风格在常规的代码里一般用不着，但是在 loader 生成的代码里比较常见。比如，`style-loader` 生成一个模块，通过 `require` 加载其余的请求（它们输出 CSS）。
+这种内联风格在常规的代码里一般用不着，但是在 loader 生成的代码里比较常见。
+例如，`style-loader` 生成一个模块，通过 `require` 加载其余的请求（它们输出 CSS）。
 
 ``` js
 // style-loader 生成的代码（简化过的）
