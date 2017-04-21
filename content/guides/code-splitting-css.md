@@ -7,6 +7,7 @@ contributors:
   - johnstew
   - simon04
   - shinxi
+  - tomtasche
 ---
 
 To bundle CSS files with webpack, import CSS into your JavaScript code like [any other module](/concepts/modules), and use the `css-loader` (which outputs the CSS as JS module), and optionally apply the `ExtractTextWebpackPlugin` (which extracts the bundled CSS and outputs CSS files).
@@ -21,12 +22,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 ```
 
 
-## Using `css-loader`
+## Using `css-loader` and `style-loader`
 
-Install the [`css-loader`](/loaders/css-loader) loader:
+Install the [`css-loader`](/loaders/css-loader) and [`style-loader`](/loaders/style-loader) loaders:
 
 ``` bash
-npm install --save-dev css-loader
+npm install --save-dev css-loader style-loader
 ```
 
 Configure it in `webpack.config.js` as follows:
@@ -36,13 +37,13 @@ module.exports = {
     module: {
         rules: [{
             test: /\.css$/,
-            use: 'css-loader'
+            use: [ 'style-loader', 'css-loader' ]
         }]
     }
 }
 ```
 
-As a result, the CSS is bundled along with your JavaScript.
+As a result, the CSS is bundled along with your JavaScript and applied to the page after it loaded.
 
 This has the disadvantage that you will not be able to utilize the browser's ability to load CSS asynchronously and parallel. Instead, your page will have to wait until your whole JavaScript bundle is loaded, to style itself.
 
@@ -65,7 +66,7 @@ module.exports = {
     module: {
          rules: [{
              test: /\.css$/,
--            use: 'css-loader'
+-            use: [ 'style-loader', 'css-loader' ]
 +            use: ExtractTextPlugin.extract({
 +                use: 'css-loader'
 +            })
