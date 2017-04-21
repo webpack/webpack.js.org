@@ -12,6 +12,7 @@ contributors:
 
 插件目的在于解决 [loader](/concepts/loaders) 无法实现的**其他事**。
 
+
 ## 剖析
 
 webpack **插件**是一个具有 [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 属性的 JavaScript 对象。 `apply` 属性会被 webpack compiler 调用，并且 compiler 对象可在**整个** compilation 生命周期访问。
@@ -35,11 +36,13 @@ ConsoleLogOnBuildWebpackPlugin.prototype.apply = function(compiler) {
 
 T> 作为一个聪明的 JavaScript 开发者，你可能还记得 `Function.prototype.apply` 方法。通过这个方法你可以把任意函数作为插件传递（`this` 将指向 `compiler`）。你可以在配置中使用这样的方式来内联自定义插件。
 
+
 ## 用法
 
 由于 **plugin** 可以携带参数/选项，你必须在 wepback 配置中，向 `plugins` 属性传入 `new` 实例。
 
 根据你如何使用 webpack，这里有多种方式使用插件。
+
 
 ### 配置
 
@@ -72,6 +75,7 @@ const config = {
 
 module.exports = config;
 ```
+
 
 ### Node API
 

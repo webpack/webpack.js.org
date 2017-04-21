@@ -2,8 +2,8 @@
 title: 命令行接口(CLI)
 sort: 2
 contributors:
-    - ev1stensberg
-    - simon04
+  - ev1stensberg
+  - simon04
 ---
 
 webpack 提供了命令行接口（CLI），以便对构建过程进行配置和交互。这对于制定早期原型、profiling、编写 npm scripts 或者一些个人自定义需求很有用。
@@ -14,14 +14,18 @@ webpack 提供了命令行接口（CLI），以便对构建过程进行配置和
 
 T> webpack 的新 CLI 正在开发中。正在添加新功能，例如 `--init` 参数。[查看详情！](https://github.com/webpack/webpack-cli)
 
+
 ## 使用配置文件的用法
+
 ```sh
 webpack [--config webpack.config.js]
 ```
 
 配置文件中的相关选项，请参阅[配置](/configuration)。
 
+
 ## 不使用配置文件的用法
+
 ```sh
 webpack <entry> [<entry>] <output>
 ```
@@ -77,6 +81,7 @@ webpack index=./src/index.js entry2=./src/index2.js dist/bundle.js
 	[1] ./src/others.js 29 bytes {0} {1} [built]
 ```
 
+
 ### 常用配置
 
 **列出命令行所有可用的配置选项**
@@ -98,6 +103,7 @@ webpack --config example.config.js
 
 传入 webpack 配置文件中使用的[环境](/configuration/configuration-types)变量。
 
+
 ```bash
 webpack --env.production    # 生产环境设置为 true
 webpack --env.platform=web  # 平台设置为 "web"
@@ -115,11 +121,13 @@ webpack --json > stats.json
 分析工具将接收 JSON 并以图形形式提供构建的所有细节。
 
 *进一步阅读：*
+
 * [Analyzing Build Statistics](https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/)
 * [Three simple ways to inspect a webpack bundle](https://medium.com/@joeclever/three-simple-ways-to-inspect-a-webpack-bundle-7f6a8fe7195d#.7d2i06mjx)
 * [Optimising your application bundle size with webpack](https://hackernoon.com/optimising-your-application-bundle-size-with-webpack-e85b00bab579#.5w5ko08pq)
 * [Analyzing & optimizing your webpack bundle](https://medium.com/@ahmedelgabri/analyzing-optimizing-your-webpack-bundle-8590818af4df#.hce4vdjs9)
 * [Analysing and minimising the size of client side bundle with webpack and source-map-explorer](https://medium.com/@nimgrg/analysing-and-minimising-the-size-of-client-side-bundle-with-webpack-and-source-map-explorer-41096559beca#.c3t2srr8x)
+
 
 ### 输出配置
 
@@ -136,6 +144,7 @@ webpack --json > stats.json
 | --output-pathinfo            | 加入一些依赖信息的注解         | boolean    | false                                                 |
 | --output-public-path         | 输出文件时使用的公共路径                                  | string     | /                                                     |
 | --output-source-map-filename | 生成的 SourceMap 的文件名                           | string     | [name].map or [outputFilename].map                    |
+
 
 #### 示例用法
 
@@ -165,6 +174,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 	[2] ./src/index2.js 54 bytes {0} [built]
 ```
 
+
 ### Debug 配置
 
 以下这些配置可以帮助你在 Webpack 编译过程中更好地 debug。
@@ -175,6 +185,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 | --devtool  | 为打包好的资源定义 [source map 的类型](/configuration/devtool/) | string     | -             |
 | --progress | 打印出编译进度的百分比值         | boolean    | false         |
 
+
 ### 模块配置
 
 这些配置可以用于绑定 Webpack 允许的[模块](/configuration/module/)。
@@ -184,6 +195,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 | --module-bind      | 为 loader 绑定一个扩展      | --module-bind js=babel-loader |
 | --module-bind-post | 为 post loader 绑定一个扩展 |                             |
 | --module-bind-pre  | 为 pre loader 绑定一个扩展  |                             |
+
 
 ### Watch 配置
 
@@ -197,6 +209,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 | --watch-poll              | 轮询观察文件变化的时间间隔（同时会打开轮询机制）               |
 | --watch-stdin, --stdin    | 当 stdin 关闭时，退出进程                                 |
 
+
 ### 性能优化配置
 
 在生产环境的构建时，这些配置可以用于调整的一些性能相关的配置。
@@ -207,6 +220,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 | --optimize-min-chunk-size | 限制 chunk 的最小体积               | [MinChunkSizePlugin](/plugins/min-chunk-size-plugin) |
 | --optimize-minimize       | 压缩混淆 javascript，并且把 loader 设置为 minimizing | [UglifyJsPlugin](/plugins/uglifyjs-webpack-plugin/) & [LoaderOptionsPlugin](/plugins/loader-options-plugin/) |
 
+
 ### Resolve 配置
 
 这些配置可以用于设置  webpack [resolver](/configuration/resolve/) 时使用的别名(alias)和扩展名(extension)。
@@ -216,6 +230,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 | --resolve-alias        | 指定模块的别名                                            | --resolve-alias jquery-plugin=jquery.plugin |
 | --resolve-extensions   | 指定需要被处理的文件的扩展名                                 | --resolve-extensions .es6 .js .ts           |
 | --resolve-loader-alias | Minimize javascript and switches loaders to minimizing  |                                             |
+
 
 ### 统计数据配置
 
@@ -240,6 +255,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 | --sort-modules-by       | 对模块列表以某种属性排序                            | string  |
 | --verbose               | 显示更多信息                                      | boolean |
 
+
 ### 高级配置
 
 | 参数             | 解释说明                                                      | 用法                                       |
@@ -263,6 +279,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 |----------|------------------------------------------------------------------|
 | -d       | --debug --devtool eval-cheap-module-source-map --output-pathinfo |
 | -p       | --optimize-minimize --define process.env.NODE_ENV="production", see [building for production](/guides/production-build)   |
+
 
 ### Profiling
 

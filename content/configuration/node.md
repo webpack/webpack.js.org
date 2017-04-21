@@ -9,11 +9,13 @@ contributors:
 
 这些选项可以配置是否 polyfill 或 mock 某些 [Node.js 全局变量](https://nodejs.org/docs/latest/api/globals.html)和模块。这可以使最初为 Node.js 环境编写的代码，在其他环境（如浏览器）中运行。此功能由 webpack 内部的 [`NodeStuffPlugin`](https://github.com/webpack/webpack/blob/master/lib/NodeStuffPlugin.js) 提供。
 
+
 ## `node`
 
 `object`
 
-是一个对象，并且满足
+是一个对象，并且满足……
+
 - 每个 key 都是 Node.js 全局变量或模块的名称
 - 每个 value 是以下其中之一
   - `true`：提供 polyfill。
@@ -36,6 +38,7 @@ node: {
   setImmediate: true
 }
 ```
+
 
 ## `node.console`
 

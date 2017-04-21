@@ -9,6 +9,7 @@ contributors:
 
 entry 对象是用于 webpack 查找启动并构建 bundle。其上下文是入口文件所处的目录的绝对路径的字符串。
 
+
 ## `context`
 
 `string`
@@ -22,6 +23,7 @@ context: path.resolve(__dirname, "app")
 默认使用当前目录，但是推荐在配置中传递一个值。这使得你的配置独立于 CWD(current working directory - 当前执行路径)。
 
 ---
+
 
 ## `entry`
 
@@ -41,8 +43,11 @@ entry: {
 }
 ```
 
+
 ### 命名
+
 如果传入一个字符串或字符串数组，chunk 会被命名为 `main`。如果传入一个对象，则每个键(key)会是 chunk 的名称，该值描述了 chunk 的入口起点。
+
 
 ### 动态入口
 
