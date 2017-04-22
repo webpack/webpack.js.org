@@ -24,7 +24,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 ## Using `css-loader` and `style-loader`
 
-Install the [`css-loader`](/loaders/css-loader) and [`style-loader`](/loaders/style-loader) loaders:
+Install the [`css-loader`](/loaders/css-loader) and [`style-loader`](/loaders/style-loader):
 
 ``` bash
 npm install --save-dev css-loader style-loader
@@ -43,7 +43,7 @@ module.exports = {
 }
 ```
 
-As a result, the CSS is bundled along with your JavaScript and applied to the page after it loaded.
+As a result, the CSS is bundled along with your JavaScript and applied to the page via a `<style>`-tag injection after the initial load.
 
 This has the disadvantage that you will not be able to utilize the browser's ability to load CSS asynchronously and parallel. Instead, your page will have to wait until your whole JavaScript bundle is loaded, to style itself.
 
