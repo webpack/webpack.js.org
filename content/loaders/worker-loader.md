@@ -15,9 +15,7 @@ or
 yarn add worker-loader --dev
 ```
 
-## 用法
-
-[文档：使用 loader](https://webpack.js.org/concepts/loaders/)
+## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
 导入 worker 文件：
 

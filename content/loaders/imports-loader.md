@@ -9,7 +9,7 @@ edit: https://github.com/webpack-contrib/imports-loader/edit/master/README.md
 npm install imports-loader
 ```
 
-## 用法
+## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
 假设你有 `example.js` 这个文件
 
@@ -62,8 +62,6 @@ module.exports = {
     }
 };
 ```
-
-[文档：使用 loader](http://webpack.github.io/docs/using-loaders.html)
 
 ## 典型的使用场景
 
