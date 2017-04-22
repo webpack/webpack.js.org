@@ -3,6 +3,7 @@ title: NormalModuleReplacementPlugin
 contributors:
   - gonzoyumo
 ---
+
 ## Install
 
 The `NormalModuleReplacementPlugin` is a built-in webpack plugin.
@@ -18,10 +19,10 @@ The `NormalModuleReplacementPlugin` allows you to replace resources that match `
 
 This can be useful for allowing different behaviour between builds.
 
+
 ## Basic example
 
 Replace a specific module when building for a [development environment](/guides/production-build).
-
 
 Say you have a config file `some/path/config.development.module.js` and a special version for production in `some/path/config.production.module.js`
 
@@ -33,6 +34,7 @@ new webpack.NormalModuleReplacementPlugin(
   './config.production.js'
 );
 ```
+
 
 ## Advanced example
 
@@ -56,18 +58,22 @@ module.exports = function(env) {
 
 Create the two config files:
 
-**app/config-VERSION_A.js:**
+__app/config-VERSION_A.js__
+
 ``` javascript
 export default {
   title : 'I am version A'
 }
 ```
-**app/config-VERSION_B.js:**
+
+__app/config-VERSION_B.js__
+
 ``` javascript
 export default {
   title : 'I am version B'
 }
 ```
+
 Then import that config using the keyword you're looking for in the regexp:
 
 ``` javascript
@@ -83,5 +89,4 @@ webpack --env.APP_TARGET VERSION_A
 
 webpack --env.APP_TARGET VERSION_B
 => 'I am version B'
-
 ```

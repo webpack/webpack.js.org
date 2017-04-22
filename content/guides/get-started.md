@@ -15,6 +15,7 @@ contributors:
 webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/guides/installation).
 webpack simplifies your workflow by quickly constructing a dependency graph of your application and bundling them in the right order. webpack can be configured to customise optimisations to your code, to split vendor/css/js code for production, run a development server that hot-reloads your code without page refresh and many such cool features. Learn more about [why you should use webpack](/guides/why-webpack).
 
+
 ## Creating a bundle
 
 Create a demo directory to try out webpack. [Install webpack](/guides/installation).
@@ -69,12 +70,13 @@ In this example, there are implicit dependencies between the `<script>` tags.
 `index.js` depends on `lodash` being included in the page before it runs. It is implicit because `index.js` never declared a need for `lodash`; it just assumes that a global variable `_` exists.
 
 There are problems with managing JavaScript projects this way:
-  - If a dependency is missing, or is included in the wrong order, the application will not function at all.
-  - If a dependency is included but is not used, then there is a lot of unnecessary code that the browser has to download.
+
+- If a dependency is missing, or is included in the wrong order, the application will not function at all.
+- If a dependency is included but is not used, then there is a lot of unnecessary code that the browser has to download.
 
 To bundle the `lodash` dependency with `index.js`, we need to first install `lodash`
 
-```
+```bash
 npm install --save lodash
 ```
 
@@ -123,10 +125,12 @@ bundle.js  544 kB       0  [emitted]  [big]  main
    [2] (webpack)/buildin/module.js 517 bytes {0} [built]
    [3] ./app/index.js 278 bytes {0} [built]
 ```
+
 T> Output may vary. If the build is successful then you are good to go.
 
 Open `index.html` in your browser to see the result of a successful bundle.
 You should see a page with the following text: 'Hello webpack'.
+
 
 ## Using ES2015 modules with webpack
 
@@ -134,12 +138,14 @@ Noticed the use of [ES2015 module import](https://developer.mozilla.org//en-US/d
 
 Note that webpack will not touch your code other than `import`/`export`. In case you are using other [ES2015 features](http://es6-features.org/), make sure to use a transpiler such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/).
 
+
 ## Using webpack with a config
 
 For a more complex configuration, we can use a configuration file that webpack can reference to bundle your code. After you create a `webpack.config.js` file, you can represent the CLI command above
 with the following config settings.
 
 __webpack.config.js__
+
 ```javascript
 var path = require('path');
 
@@ -174,6 +180,7 @@ T> If you created a successful `dist/bundle.js` file using the 'Creating a bundl
 
 The config file allows for all the flexibility in using webpack. We can add loader rules, plugins, resolve options and many other enhancements to our bundles using this configuration file.
 
+
 ## Using webpack with npm
 
 Given it's not particularly fun to run webpack from the CLI this way, we can set up a little shortcut. Adjust *package.json* like this:
@@ -191,6 +198,7 @@ Given it's not particularly fun to run webpack from the CLI this way, we can set
 You can now achieve the same as above by using `npm run build` command. npm picks up the scripts through it and patches the environment temporarily so that it contains the bin commands. You will see this convention in a lot of projects out there.
 
 T> You can pass custom parameters to webpack by adding two dashes to the `npm run build` command, e.g. `npm run build -- --colors`.
+
 
 ## Conclusion
 

@@ -9,8 +9,6 @@ contributors:
 
 Options affecting the output of the compilation. `output` options tell webpack how to write the compiled files to disk. Note, that while there can be multiple `entry` points, only one `output` configuration is specified.
 
-If you use any hashing (`[hash]` or `[chunkhash]`), make sure to have a consistent ordering of modules. Use the `OccurrenceOrderPlugin` or `recordsPath`.
-
 ## Usage
 
 The minimum requirements for the `output` property in your webpack config is to set its value to an object including the following two things :
@@ -58,7 +56,7 @@ Possible values are:
 
 `"anonymous"` - Cross-origin loading is enabled. When using `anonymous` no credentials will be sent with the request.
 
-`"use-credentials"` - Cross-origin loading is enabled and credentials will be send with the request.
+`"use-credentials"` - Cross-origin loading is enabled and credentials will be sent with the request.
 
 For more information on cross-origin loading see [MDN](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin)
 

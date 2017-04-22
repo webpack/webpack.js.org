@@ -19,6 +19,7 @@ The approach described below specifically uses Babel and React, but HMR can be d
 
 T> If you'd like to see examples of other approaches please request them, or better yet [open up a PR with an addition](https://github.com/webpack/webpack.js.org).
 
+
 ## Project Config
 
 This guide will be demonstrating HMR using Babel on a React app, and CSS Modules.
@@ -70,13 +71,16 @@ Setting Babel's module plugin to false helps fix many issues (see [Migrating fro
 
 Note: Node.js doesn't support ES2015 modules yet and using ES2015 modules in your webpack 2 configuration file will cause an [issue](https://github.com/webpack/webpack.js.org/issues/154).
 
-To work around this you will need two `.babelrc` file to transpile the configuration and app code separately: 
+To work around this you will need two `.babelrc` file to transpile the configuration and app code separately:
+
 1. in the project root directory with `"presets": ["es2015"]`
 2. in the source directory for app code
 
-### Webpack configuration
+
+### webpack configuration
 
 For this example, we will use a single webpack config file, with the following assumptions:
+
 * all app source code lives inside the `<root>/src` folder
 * the entry point to the app is at `/src/index.js`
 
@@ -240,6 +244,7 @@ __dist/index.html__
 
 We need to put the index.html file in our `dist` folder because `webpack-dev-server` will not run without it.
 
+
 ### Putting it all together
 
 Finally, lets add a start task to `package.json`, that calls the `webpack-dev-server` binary.
@@ -257,6 +262,7 @@ __package.json__
 ```
 
 When we run `npm start`, it will launch the webpack dev server, causing our code to be transpiled by Babel, and bundled. Open a browser to `http://localhost:8080`, and check the JS console for logs similar to:
+
 ```bash
 dev-server.js:49[HMR] Waiting for update signal from WDS…
 only-dev-server.js:74[HMR] Waiting for update signal from WDS…

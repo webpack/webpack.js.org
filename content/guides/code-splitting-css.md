@@ -11,6 +11,7 @@ contributors:
 
 To bundle CSS files with webpack, import CSS into your JavaScript code like [any other module](/concepts/modules), and use the `css-loader` (which outputs the CSS as JS module), and optionally apply the `ExtractTextWebpackPlugin` (which extracts the bundled CSS and outputs CSS files).
 
+
 ## Importing CSS
 
 Import the CSS file like a JavaScript module, for instance in `vendor.js`:
@@ -19,9 +20,16 @@ Import the CSS file like a JavaScript module, for instance in `vendor.js`:
 import 'bootstrap/dist/css/bootstrap.css';
 ```
 
+
 ## Using `css-loader`
 
-Configure the [`css-loader`](/loaders/css-loader) in `webpack.config.js` as follows:
+Install the [`css-loader`](/loaders/css-loader) loader:
+
+``` bash
+npm install --save-dev css-loader
+```
+
+Configure it in `webpack.config.js` as follows:
 
 ```javascript
 module.exports = {
@@ -40,11 +48,13 @@ This has the disadvantage that you will not be able to utilize the browser's abi
 
 webpack can help with this problem by bundling the CSS separately using the `ExtractTextWebpackPlugin`.
 
+
 ## Using `ExtractTextWebpackPlugin`
 
 Install the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) plugin as follows
-```
-npm i --save-dev extract-text-webpack-plugin
+
+``` bash
+npm install --save-dev extract-text-webpack-plugin
 ```
 
 To use this plugin, it needs to be added to the `webpack.config.js` file in three steps.

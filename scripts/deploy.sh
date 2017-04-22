@@ -9,9 +9,7 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]
     echo "Skipping deploy; just doing a build and linting links/prose/js."
     npm run fetch
     npm run build
-    npm run lint:js
-    npm run lint:prose
-    npm run lint:links
+    npm test
     exit 0
 fi
 
