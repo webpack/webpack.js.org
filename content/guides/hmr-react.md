@@ -159,6 +159,7 @@ module.exports = {
 Important to note:
 
 If you have a `query` section for the `babel-loader` in your `rules`, remember to turn off the `modules` tranformation as well, otherwise HMR won't work.
+
 ```js
 loader: "babel-loader",
 query: {
@@ -168,6 +169,7 @@ query: {
     ]
 }
 ```
+
 A better solution is to remove the `query` part here, manage all you babel configuration in `.babelrc`.
 
 ### App code
