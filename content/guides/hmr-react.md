@@ -156,6 +156,7 @@ module.exports = {
   ],
 };
 ```
+
 Important to note:
 
 If you have a `query` section for the `babel-loader` in your `rules`, remember to turn off the `modules` tranformation as well, otherwise HMR won't work.
