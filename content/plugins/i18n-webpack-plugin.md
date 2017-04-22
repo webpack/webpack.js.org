@@ -11,7 +11,6 @@ npm i -D i18n-webpack-plugin
 
 ## 用法
 
-This plugin creates bundles with translations baked in. So you can serve the translated bundle to your clients.
 此插件会创建包含译文的 bundle。所以您可以将翻译后的 bundle 提供给客户端。
 
 参考 [webpack/webpack/examples/i18n](https://github.com/webpack/webpack/tree/master/examples/i18n)。
