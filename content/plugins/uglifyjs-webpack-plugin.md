@@ -3,6 +3,12 @@ title: UglifyjsWebpackPlugin
 source: https://raw.githubusercontent.com/webpack-contrib/uglifyjs-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/uglifyjs-webpack-plugin/edit/master/README.md
 ---
+
+```bash
+<p>This plugin uses <a href="https://github.com/mishoo/UglifyJS2">UglifyJS</a> to minify your JavaScript.<p>
+```
+>注意在`webpack.optimize.UglifyJsPlugin`下也存在相同的插件。对于那些想控制UglifyJS版本的开发者来说，每一个UglifyJS都是相对独立的版本。在这种情况下每个从结构中分离的文件都是有效的。
+
 ## 安装
 
 使用 [Yarn](https://yarnpkg.com):
@@ -54,14 +60,16 @@ module.exports = {
 | --- | --- | --- | --- |
 | compress | boolean, object | true | 见 [UglifyJS 文档](http://lisperator.net/uglifyjs/compress)。 |
 | mangle | boolean, object | true | 见下节. |
-| beautify | boolean | false | 美化输出。 |
+| beautify | boolean | false | 优化输出。 |
 | output | 一个提供 UglifyJS [OutputStream](https://github.com/mishoo/UglifyJS2/blob/master/lib/output.js) 选项的对象 | | 更底层地访问 UglifyJS 输出。 |
 | comments | boolean, RegExp, function(astNode, comment) -> boolean | 默认保存包含 `/*!`, `/**!`, `@preserve` or `@license` 的注释 | 注释相关的配置 |
-| extractComments | boolean, RegExp, function (astNode, comment) -> boolean, object | false | Whether comments shall be extracted to a separate file, see below. |
-| sourceMap | boolean | false | 使用 SourceMaps 将错误信息的位置映射到模块。这会减慢编译的速度。 |
+| extractComments | boolean, RegExp, function (astNode, comment) -> boolean, object | false | 是否将注释文件单独提取，见下节 |
+| sourceMap | boolean | false | 使用 SourceMaps 将错误信息的位置映射到模块。这会减慢编译的速度。**十分重要!**过于简易的配置会使sourceMap失效 |
 | test | RegExp, Array<RegExp> | <code>/\.js($&#124;\?)/i</code> | 测试匹配的文件 |
-| include | RegExp, Array<RegExp> | | 只测试包含的文件。 |
-| exclude | RegExp, Array<RegExp> | | 要从测试中排除的文件。 |
+| include | RegExp, Array<RegExp> | | 只测试`包含`的文件。 |
+| exclude | RegExp, Array<RegExp> | | 只测试被`排除`的文件。 |
+| extractComments | boolean, RegExp, object | | 提取注释来分离文件（见[详情](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a)，自 webpack 2.3.0 ） |
+| warningsFilter | function(source) -> boolean | | 允许过滤 uglify 警告（从 webpack 2.3.0）。 |
 
 ## Mangling
 
@@ -80,15 +88,15 @@ new UglifyJsPlugin({
 
 ## Extracting Comments
 
-The `extractComments` option can be
-- `true`: All comments that normally would be preserved by the `comments` option will be moved to a separate file. If the original file is named `foo.js`, then the comments will be stored to `foo.js.LICENSE`
-- regular expression (given as `RegExp` or `string`) or a `function (astNode, comment) -> boolean`:
-  All comments that match the given expression (resp. are evaluated to `true` by the function) will be extracted to the separate file. The `comments` option specifies whether the comment will be preserved, i.e. it is possible to preserve some comments (e.g. annotations) while extracting others or even preserving comments that have been extracted.
-- an `object` consisting of the following keys, all optional:
-  - `condition`: regular expression or function (see previous point)
-  - `filename`: The file where the extracted comments will be stored. Can be either a `string` or `function (string) -> string` which will be given the original filename. Default is to append the suffix `.LICENSE` to the original filename.
-  - `banner`: The banner text that points to the extracted file and will be added on top of the original file. will be added to the original file. Can be `false` (no banner), a `string`, or a `function (string) -> string` that will be called with the filename where extracted comments have been stored. Will be wrapped into comment.
-Default: `/*! For license information please see foo.js.LICENSE */`
+`extractComments` 选项可以是：
+- `true`: 所有在`comments`选项中保存的注释都会被移到单独的文件。如果源文件是 `foo.js` ,那注释将被存储为 `foo.js.LICENSE` 。
+
+- 通常表达式（ 如：`RegExp`或者`string` ）或者 `function (astNode, comment) -> boolean`：所有匹配所给定的表达式（ 等于返回`true`的函数 ）会被提取为分离文件。`comments`选项指定注释是否被储存， i.e。可以在存储一些注释当在提取其他注释即使是存储已经被被提取。
+- `object`存在下面的值，所有的选项：
+  - `condition`: 通常表达式或者相应函数（见上文）
+  - `filename`: 提取注释的文件会被存储。`字符`或者是返回字符的函数`function (string) -> string`，作为原文件名。默认加上文件后缀名`.LICENSE`。
+  - `banner`: Banner 文本会在原文件的头部指出被提取的文件。会在源文件加入该信息。可以是`false`(表示没有banner)，`string`，或者`function (string) -> string`会在提取已经被存储注释的时候被调用。注释会被覆盖。
+默认: `/*! For license information please see foo.js.LICENSE */`
 
 
 ## 维护人员

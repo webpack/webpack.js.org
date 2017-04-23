@@ -6,9 +6,9 @@ contributors:
     - simon04
 ---
 
-webpack 提供了命令行接口（CLI），以便对构建过程进行配置和交互。这对于制定早期原型、profiling、编写 npm scripts 或者一些个人自定义需求很有用。
+webpack 提供了命令行接口（CLI），以便对构建过程进行配置和交互。这对于制定早期原型、轮廓、编写 npm 脚本 或者一些个人自定义需求很有用。
 
-为了更合适且方便地使用配置，可以在 `webpack.config.js` 中对 webpack 进行配置。CLI 中允许传入的任何参数在这个配置文件中也会有对应的参数。
+为了更合适且方便地使用配置，可以在 `webpack.config.js` 中对 webpack 进行配置。CLI 中传入的任何参数会在配置文件中映射为对应的参数。
 
 如果你的 webpack 尚未开始配置，请查看[安装指南](/guides/installation)。
 
