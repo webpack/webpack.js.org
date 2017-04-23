@@ -12,6 +12,7 @@ contributors:
 
 They also serve the purpose of doing **anything else** that a [loader](/concepts/loaders) cannot do.
 
+
 ## Anatomy
 
 A webpack **plugin** is a JavaScript object that has an [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) property. This `apply` property is called by the webpack compiler, giving access to the **entire** compilation lifecycle.
@@ -34,11 +35,13 @@ ConsoleLogOnBuildWebpackPlugin.prototype.apply = function(compiler) {
 
 T> As a clever JavaScript developer you may remember the `Function.prototype.apply` method. Because of this method you can pass any function as plugin (`this` will point to the `compiler`). You can use this style to inline custom plugins in your configuration.
 
+
 ## Usage
 
 Since **plugins** can take arguments/options, you must pass a `new` instance to the `plugins` property in your webpack configuration.
 
 Depending on how you are using webpack, there are multiple ways to use plugins.
+
 
 ### Configuration
 
@@ -71,6 +74,7 @@ const config = {
 
 module.exports = config;
 ```
+
 
 ### Node API
 

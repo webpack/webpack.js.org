@@ -30,13 +30,16 @@ These options were replaced by a single option `resolve.modules`. See [resolving
   }
 ```
 
+
 ## `resolve.extensions`
 
 This option no longer requires passing an empty string. This behavior was moved to `resolve.enforceExtension`. See [resolving](/configuration/resolve) for more usage.
 
+
 ## `resolve.*`
 
 Several APIs were changed here. Not listed in detail as it's not commonly used. See [resolving](/configuration/resolve) for details.
+
 
 ## `module.loaders` is now `module.rules`
 
@@ -76,6 +79,7 @@ The new naming conventions are easier to understand and are a good reason to upg
   }
 ```
 
+
 ## Chaining loaders
 
 Like in webpack 1, loaders can be chained to pass results from loader to loader. Using the [rule.use](/configuration/module#rule-use)
@@ -96,6 +100,7 @@ In webpack 1, loaders were commonly chained with `!`. This style is only support
     }]
   }
 ```
+
 
 ## Automatic `-loader` module name extension removed
 
@@ -128,6 +133,7 @@ You can still opt-in to the old behavior with the `resolveLoader.moduleExtension
 
 See [#2986](https://github.com/webpack/webpack/issues/2986) for the reason behind this change.
 
+
 ## `json-loader` is not required anymore
 
 When no loader has been configured for a JSON file, webpack will automatically try to load the JSON
@@ -146,6 +152,7 @@ file with the [`json-loader`](https://github.com/webpack/json-loader).
 
 [We decided to do this](https://github.com/webpack/webpack/issues/3363) in order to iron out environment differences
   between webpack, node.js and browserify.
+
 
 ## Loaders in configuration resolve relative to context
 
@@ -171,6 +178,7 @@ You may remove some hacks to work around this:
   }
 ```
 
+
 ## `module.preLoaders` and `module.postLoaders` was removed
 
 ``` diff
@@ -186,6 +194,7 @@ You may remove some hacks to work around this:
   }
 ```
 
+
 ## `UglifyJsPlugin` sourceMap
 
 The `sourceMap` option of the `UglifyJsPlugin` now defaults to `false` instead of `true`.
@@ -199,6 +208,7 @@ This means that if you are using source maps for minimized code or want correct 
     })
   ]
 ```
+
 
 ## `UglifyJsPlugin` warnings
 
@@ -216,6 +226,7 @@ This means that if you want to see uglifyjs warnings, you need to set `compress.
   ]
 ```
 
+
 ## `UglifyJsPlugin` minimize loaders
 
 `UglifyJsPlugin` no longer switches loaders into minimize mode. The `minimize: true` setting needs to be passed via loader options in the long-term. See loader documentation for relevant options.
@@ -232,9 +243,11 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
   ]
 ```
 
+
 ## `DedupePlugin` has been removed
 
 `webpack.optimize.DedupePlugin` isn't needed anymore. Remove it from your configuration.
+
 
 ## `BannerPlugin` - breaking change
 
@@ -246,6 +259,7 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
 +    new webpack.BannerPlugin({banner: 'Banner', raw: true, entryOnly: true});
   ]
 ```
+
 
 ## `OccurrenceOrderPlugin` is now on by default
 
@@ -260,6 +274,7 @@ Thus make sure to remove the plugin from your configuration:
 -   new webpack.optimize.OccurrenceOrderPlugin()
   ]
 ```
+
 
 ## `ExtractTextWebpackPlugin` - breaking change
 
@@ -287,6 +302,7 @@ module: {
 }
 ```
 
+
 ### `new ExtractTextPlugin({options})`
 
 ```diff
@@ -299,6 +315,7 @@ plugins: [
 +  })
 ]
 ```
+
 
 ## Full dynamic requires now fail by default
 
@@ -337,11 +354,13 @@ module.exports = function(env) {
 
 See [CLI](/api/cli).
 
+
 ## `require.ensure` and AMD `require` are asynchronous
 
 These functions are now always asynchronous instead of calling their callback synchronously if the chunk is already loaded.
 
 **`require.ensure` now depends upon native `Promise`s. If using `require.ensure` in an environment that lacks them then you will need a polyfill. **
+
 
 ## Loader configuration is through `options`
 
@@ -360,6 +379,7 @@ module.exports = {
   ts: { transpileOnly: false }
 }
 ```
+
 
 ### What are `options`?
 
@@ -392,6 +412,7 @@ module.exports = {
 }
 ```
 
+
 ## `LoaderOptionsPlugin` context
 
 Some loaders need context information and read them from the configuration. This needs to be passed via loader options in the long-term. See loader documentation for relevant options.
@@ -407,6 +428,7 @@ To keep compatibility with old loaders, this information can be passed via plugi
 +   })
   ]
 ```
+
 
 ## `debug`
 
@@ -424,6 +446,7 @@ To keep compatibility with old loaders, loaders can be switched to debug mode vi
 +   })
   ]
 ```
+
 
 ## Code Splitting with ES2015
 
@@ -451,13 +474,6 @@ function onClick() {
 
 Good news: Failure to load a chunk can now be handled because they are `Promise` based.
 
-Caveat: `require.ensure` allows for easy chunk naming with the optional third argument, but `import` API doesn't offer that capability yet. If you want to keep that functionality, you can continue using `require.ensure`.
-
-```javascript
-require.ensure([], function(require) {
-  var foo = require("./module");
-}, "custom-chunk-name");
-```
 
 ## Dynamic expressions
 
@@ -472,6 +488,7 @@ function route(path, query) {
 }
 // This creates a separate chunk for each possible route
 ```
+
 
 ## Mixing ES2015 with AMD and CommonJS
 
@@ -507,6 +524,7 @@ It is important to note that you will want to tell Babel to not parse these modu
 }
 ```
 
+
 ## Hints
 
 No need to change something, but opportunities
@@ -519,6 +537,7 @@ webpack now supports template strings in expressions. This means you can start u
 - require("./templates/" + name);
 + require(`./templates/${name}`);
 ```
+
 
 ### Configuration Promise
 
@@ -538,6 +557,7 @@ module.exports = function() {
 };
 ```
 
+
 ### Advanced loader matching
 
 webpack now supports more things to match on for loaders.
@@ -554,6 +574,7 @@ module: {
 }
 ```
 
+
 ### More CLI options
 
 There are some new CLI options for you to use:
@@ -568,9 +589,11 @@ There are some new CLI options for you to use:
 
 `-p` also defines `process.env.NODE_ENV` to `"production"` now.
 
+
 ## Loader changes
 
 Changes only relevant for loader authors.
+
 
 ### Cacheable
 
@@ -591,6 +614,7 @@ Loaders are now cacheable by default. Loaders must opt-out if they are not cache
     return source;
   }
 ```
+
 
 ### Complex options
 

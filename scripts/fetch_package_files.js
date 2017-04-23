@@ -73,7 +73,9 @@ function fetchPackageFiles(options, finalCb) {
 
         if (body && file === 'README.md') {
           body = body
-            .replace(/^[^]*?<h2[^>]*>/m, '## ') // drop everything up to first <h2>
+            .replace(/^[^]*?<\/h1>/m, '') // drop everything up to first </h1>
+            .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-loader\/?)([)"])/g, '/loaders/$2/$3') // modify loader links
+            .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-plugin\/?)([)"])/g, '/plugins/$2/$3') // modify plugin links
             .replace(/<h2[^>]*>/g, '## ') // replace any <h2> with ##
             .replace(/<\/h2>/g, ''); // drop </h2>
         }

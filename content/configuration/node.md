@@ -9,19 +9,21 @@ contributors:
 
 These options configure whether to polyfill or mock certain [Node.js globals](https://nodejs.org/docs/latest/api/globals.html) and modules. This allows code originally written for the Node.js environment to run in other environments like the browser. This feature is provided by webpack's internal [`NodeStuffPlugin`](https://github.com/webpack/webpack/blob/master/lib/NodeStuffPlugin.js).
 
+
 ## `node`
 
 `object`
 
-This is an object where
+This is an object where...
+
 - each key is the name of a Node.js global or module
 - each value is one of the following
-  - `true`: Provide a polyfill.
-  - `"mock"`: Provide a mock that implements the expected interface but has little or no fuctionality.
-  - `"empty"`: Provide an empty object.
-  - `false`: Provide nothing. Code that expects this object to be defined may crash.
+- `true`: Provide a polyfill.
+- `"mock"`: Provide a mock that implements the expected interface but has little or no fuctionality.
+- `"empty"`: Provide an empty object.
+- `false`: Provide nothing. Code that expects this object to be defined may crash.
 
-Note: not all properties support all of these values. See the sections below.
+W> Note that not all properties support all of these values. See the sections below for more information.
 
 The defaults:
 
@@ -36,6 +38,7 @@ node: {
   setImmediate: true
 }
 ```
+
 
 ## `node.console`
 

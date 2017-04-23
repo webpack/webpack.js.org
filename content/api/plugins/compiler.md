@@ -51,7 +51,7 @@ Most user facing plugins are first registered on the `Compiler`.
 The working of a Compiler can be condensed into the following highlights
  - Usually there is one master instance of Compiler. Child compilers can be created for delegating specific tasks.
  - A lot of the complexity in creating a compiler goes into populating all the relevant options for it.
- - `webpack` has [`WebpackOptionsDefaulter`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js) and [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js) specifically designed to provide the `Compiler` with all the intial data it requires.
+ - `webpack` has [`WebpackOptionsDefaulter`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js) and [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js) specifically designed to provide the `Compiler` with all the initial data it requires.
  - The `Compiler` is ultimately just a function which performs bare minimum functionality to keep a lifecycle running. It delegates all the loading/bundling/writing work to various plugins.
  - `new LogPlugin(args).apply(compiler)` registers the plugin to any particular hook event in the `Compiler`'s lifecycle.
  - The `Compiler` exposes a `run` method which kickstarts all compilation work for `webpack`. When that is done, it should call the passed in `callback` function. All the tail end work of logging stats and errors are done in this callback function.
@@ -110,7 +110,7 @@ This a reference guide to all the event hooks exposed by the `Compiler`.
 | __`emit`__                 | Before writing emitted assets to output dir | `compilation` | async      |
 | __`after-emit`__           | After writing emitted assets to output dir | `compilation` | async      |
 | __`done`__                 | Completion of compile               | `stats`              | sync       |
-| __`fail`__                 | Failure of compile                  | `error`              | sync       |
+| __`failed`__               | Failure of compile                  | `error`              | sync       |
 | __`invalid`__              | After invalidating a watch compile  | `fileName`, `changeTime` | sync       |
 
 ## Examples
