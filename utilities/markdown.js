@@ -150,7 +150,7 @@ function parseAnchor(string) {
   return {
     title: clean,
     id: clean.replace(/[^\w]+/g, '-').toLowerCase()
-  }
+  };
 }
 
 function handleHTMLSplit(tokens, htmlArray, merging) {
