@@ -90,7 +90,6 @@ new UglifyJsPlugin({
 
 `extractComments` 选项可以是：
 - `true`: 所有在`comments`选项中保存的注释都会被移到单独的文件。如果源文件是 `foo.js` ,那注释将被存储为 `foo.js.LICENSE` 。
-
 - 通常表达式（ 如：`RegExp`或者`string` ）或者 `function (astNode, comment) -> boolean`：所有匹配所给定的表达式（ 等于返回`true`的函数 ）会被提取为分离文件。`comments`选项指定注释是否被储存， i.e。可以在存储一些注释当在提取其他注释即使是存储已经被被提取。
 - `object`存在下面的值，所有的选项：
   - `condition`: 通常表达式或者相应函数（见上文）
