@@ -9,9 +9,7 @@ edit: https://github.com/webpack-contrib/bundle-loader/edit/master/README.md
 npm i bundle-loader --save
 ```
 
-## Usage
-
-[文档: 使用加载器](http://webpack.github.io/docs/using-loaders.html)
+## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
 ``` javascript
 // 当你引用 bundle 的时候，chunk 会被浏览器加载。

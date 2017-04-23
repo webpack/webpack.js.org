@@ -9,7 +9,7 @@ edit: https://github.com/webpack-contrib/exports-loader/edit/master/README.md
 npm i exports-loader --save
 ```
 
-##  用法
+## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
 ``` javascript
 require("exports-loader?file,parse=helpers.parse!./file.js");
@@ -22,9 +22,7 @@ require("exports-loader?file!./file.js");
 //  module.exports = file;
 ```
 
-[文档: 使用 loader](http://webpack.github.io/docs/using-loaders.html)
-
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>

@@ -9,7 +9,7 @@ edit: https://github.com/webpack-contrib/expose-loader/edit/master/README.md
 npm i expose-loader --save
 ```
 
-## Usage
+## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
 ** 注意**: 模块必须在你的 bundle 中被 `require()` 过，否则他们将不会被暴露。
 
@@ -79,9 +79,8 @@ module: {
 
 `require.resolve` 是一个 node.js 调用（与 webpack 处理中的 `require.resolve` 无关 —— 可以阅读 node.js 文档）。`require.resolve` 用来得到模块对应的绝对路径（"/.../app/node_modules/react/react.js"），所以这里只会对 React 进行暴露。并且只在 bundle 中用到它时进行暴露。
 
-[文档：使用 loader](http://webpack.github.io/docs/using-loaders.html)
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
