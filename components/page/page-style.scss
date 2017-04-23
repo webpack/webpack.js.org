@@ -1,4 +1,3 @@
-@import 'vars';
 @import 'mixins';
 @import 'functions';
 
@@ -28,20 +27,5 @@
   @media break {
     flex: 3;
     padding: 1.5em;
-  }
-}
-
-.page__edit {
-  display: none;
-
-  @include break {
-    position: absolute;
-    display: block;
-    top: 1.5em;
-    right: 1.5em;
-    font-size: getFontSize(-1);
-    text-transform: uppercase;
-
-    i { font-size:0.8em; }
   }
 }

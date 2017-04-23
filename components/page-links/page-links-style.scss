@@ -1,0 +1,25 @@
+@import 'mixins';
+@import 'functions';
+
+.page-links {
+  position: absolute;
+  display: none;
+  top: 1.5em;
+  right: 1.5em;
+  font-size: getFontSize(-1);
+  font-weight: 600;
+  text-transform: uppercase;
+
+  &__gap {
+    margin: 0 1em;
+  }
+
+  // &__icon {
+  //   font-size: 0.85em;
+  //   margin-left: 0.5em;
+  // }
+
+  @include break {
+    display: block;
+  }
+}
