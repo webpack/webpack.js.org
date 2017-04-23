@@ -1,0 +1,40 @@
+
+.dropdown {
+	position: relative;
+	color: #fff;
+	cursor: pointer;
+}
+
+.dropdown-arrow {
+	&:before {
+		display: inline-block;
+		margin-left: 5px;
+		content: "\25be";
+	}
+}
+
+.dropdown-list {
+	display: none;
+	position: absolute;
+	width: 100%;
+	top: 40px;
+  left: 0;
+  right: 0;
+  margin: auto;
+	background-color: #2B3A42;
+	z-index: 1;
+	text-align: center;
+
+	ul li {
+		list-style: none;
+		color: #fff;
+
+		a:link, a:visited, a:hover {
+			color: #fff;
+		}
+	}
+}
+
+.dropdown-list-show {
+	display: inline-block;
+}
