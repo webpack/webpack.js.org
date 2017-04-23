@@ -1,6 +1,6 @@
 ---
 title: 多种配置类型
-sort: 2
+sort: 3
 contributors:
   - sokra
   - skipjack
@@ -10,7 +10,8 @@ contributors:
 
 除了导出单个配置对象，还有一些方式满足其他需求。
 
-## 导出一个函数，并使用 `--env`
+
+## 使用 `--env`导出一个函数
 
 最终，你会发现需要在[开发](/guides/development)和[生产构建](/guides/production-build)之间，消除 `webpack.config.js` 的差异。（至少）有两种选项：
 
@@ -29,6 +30,7 @@ contributors:
 };
 ```
 
+
 ## 导出一个 Promise
 
 webpack 将运行由配置文件导出的函数，并且等待 Promise 返回。便于需要异步地加载所需的配置变量。
@@ -45,6 +47,7 @@ module.exports = () => {
   })
 }
 ```
+
 
 ## 导出多个配置对象
 作为导出一个配置对象/配置函数的替代，你可能需要导出多个配置对象。当运行 webpack 时，所有的配置对象都会构建。例如，导出多个配置对象，对于针对多个[构建目标](/configuration/output#output-librarytarget)（例如 AMD 和 CommonJS）[打包一个 library](/guides/author-libraries) 非常有用。

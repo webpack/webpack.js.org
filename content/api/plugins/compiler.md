@@ -52,7 +52,7 @@ Compiler 的作用可以浓缩为以下几个亮点：
  - 通常有一个 Compiler 的主实例。可以创建子 compiler 来委派特定任务。
  - 创建一个 compiler 的复杂性很大程度来自于为其填充各种相关的选项。
  - `webpack` 具有 [`WebpackOptionsDefaulter`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js) 和 [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js) 专门设计为其提供所有它需要的初始数据。
- - `Compiler` 精简成只有一个函数，执行最基本的功能来保持生命周期运行。它将所有加载/捆绑/写入工作委派给各种插件。
+ - `Compiler` 根本上是一个执行最基本的功能以保持生命周期运行的函数。它将所有加载/打包/写入(loading/bundling/writing)工作委派给各种插件。
  - `new LogPlugin(args).apply(compiler)` 将插件注册到 `Compiler` 的生命周期中任何一个特定的挂钩事件。
  - `Compiler` 暴露了一个 `run` 方法，它启动 `webpack` 的所有编译工作。当执行完时，它会执行传入的 `回调` 函数，日志记录、统计和错误处理等收尾工作都是在这个回调函数中完成。
 
@@ -89,34 +89,34 @@ webpack([config1, config2], (err, stats) => {
 
 | 事件名称                     | 原因                 | 参数                  | 类型       |
 |----------------------------|----------------------------|----------------------|------------|
-| __`entry-option`__         |                  -         |           -          | bailResult |
-| __`after-plugins`__        | 设置插件的初始配置后           | `compiler`           | 同步        |
-| __`after-resolvers`__      | 设置解析器后                 | `compiler`            | 同步       |
-| __`environment`__          |                  -         |           -          | 同步        |
-| __`after-environment`__    | 环境配置完成                 |           -           | 同步       |
-| __`before-run`__           | `compiler.run()` 开始       | `compiler`           | 异步        |
-| __`run`__                  | 读取记录之前                 | `compiler`            | 异步       |
-| __`watch-run`__            | 监视后开始编译之前             | `compiler`           | 异步        |
-| __`normal-module-factory`__ | 创建 `NormalModuleFactory` 后 | `normalModuleFactory`| 同步     |
-| __`context-module-factory`__ | 创建 `ContextModuleFactory` 后 | `contextModuleFactory`| 同步   |
-| __`before-compile`__       | 编译参数创建完成              | `compilationParams`   | 同步        |
-| __`compile`__              | 创建新编译之前                | `compilationParams`  | 同步        |
-| __`this-compilation`__     | 发射 `compilation` 事件之前  | `compilation`         | 同步        |
-| __`compilation`__          | 编译创建完成                 | `compilation`         | 同步        |
-| __`make`__                 |                            | `compilation`         | 平行       |
-| __`after-compile`__        |                            | `compilation`         | 异步        |
-| __`should-emit`__          | 此时可以返回 true/false      | `compilation`         | bailResult |
-| __`need-additional-pass`__ |                            |           -           | bailResult |
-| __`emit`__                 | 写发射信息（assets）到输出路径之前 | `compilation`       | 异步        |
-| __`after-emit`__           | 写发射信息（assets）到输出路径之后 | `compilation`       | 异步        |
-| __`done`__                 | 完成编译                    | `stats`                | 同步        |
-| __`fail`__                 | 编译失败                    | `error`                | 同步        |
-| __`invalid`__              | 一个监控的编译变无效后         | `fileName`, `changeTime` |  同步     |
+| __`entry-option`__         |                  -                  |           -          | bailResult |
+| __`after-plugins`__        | 设置插件的初始配置后 | `compiler`       | 同步       |
+| __`after-resolvers`__      | 设置解析器后      | `compiler`           | 同步       |
+| __`environment`__          |                  -                  |           -          | 同步       |
+| __`after-environment`__    | 环境配置完成          |           -          | 同步       |
+| __`before-run`__           | `compiler.run()` 开始             | `compiler`           | 异步      |
+| __`run`__                  | 读取记录之前              | `compiler`           | 异步      |
+| __`watch-run`__            | 监视后开始编译之前 | `compiler`           | 异步      |
+| __`normal-module-factory`__ | 创建 `NormalModuleFactory` 后 | `normalModuleFactory`| 同步      |
+| __`context-module-factory`__ | 创建 `ContextModuleFactory` 后 | `contextModuleFactory`| 同步      |
+| __`before-compile`__       | 编译参数创建完成      | `compilationParams`  | 同步       |
+| __`compile`__              | 创建新编译之前     | `compilationParams`  | 同步       |
+| __`this-compilation`__     | 发射 `compilation` 事件之前 | `compilation`        | 同步       |
+| __`compilation`__          | 编译创建完成      | `compilation`        | 同步       |
+| __`make`__                 |                                     | `compilation`        | 平行   |
+| __`after-compile`__        |                                     | `compilation`        | 异步      |
+| __`should-emit`__          | 此时可以返回 true/false  | `compilation`        | bailResult |
+| __`need-additional-pass`__ |                                     |           -          | bailResult |
+| __`emit`__                 | 写发射信息（assets）到输出路径之前 | `compilation` | 异步      |
+| __`after-emit`__           | 写发射信息（assets）到输出路径之后 | `compilation` | 异步      |
+| __`done`__                 | 完成编译               | `stats`              | 同步       |
+| __`failed`__               | 编译失败                  | `error`              | 同步       |
+| __`invalid`__              | 一个监控的编译变无效后  | `fileName`, `changeTime` | 同步       |
 
-## 例子
+## 示例
 
-?> 添加以上某些事件的用法示例
+?> Adds examples of usage for some of the above events
 
 ***
 
-> 原文：https://webpack.js.org/pluginsapi/compiler/
+> 原文：https://webpack.js.org/api/plugins/compiler/

@@ -10,9 +10,11 @@ _Tree shaking_ 是一个术语，通常用来描述移除 JavaScript 上下文�
 
 webpack 2 原生支持ES6模块 (别名 *harmony modules*) ，并能检测出未使用的模块输出。
 
+
 ## 示例
 
-举一个 **maths.js** 库例子，它输出两个方法 `square` 和 `cube`。
+举一个 **maths.js** 库例子，它输出两个方法 `square` 和 `cube`：
+
 ```javascript
 // 这个函数没有被其他地方引用过
 export function square(x) {
@@ -25,7 +27,8 @@ export function cube(x) {
 }
 ```
 
-在 **main.js** 中我们只引用 `cube` 方法:
+在 **main.js** 中我们只引用 `cube` 方法：
+
 ```javascript
 import {cube} from './maths.js';
 console.log(cube(5)); // 125
@@ -74,8 +77,9 @@ function(e,t,n){"use strict";function r(e){return e*e*e}t.a=r}
 function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(0);console.log(n.i(r.a)(5))}
 ```
 
-## 网页链接
 
-* [Tree shaking with Webpack 2, TypeScript and Babel](https://alexjoverm.github.io/2017/03/06/Tree-shaking-with-Webpack-2-TypeScript-and-Babel/)
+## 参考链接
+
+* [Tree shaking with webpack 2, TypeScript and Babel](https://alexjoverm.github.io/2017/03/06/Tree-shaking-with-webpack-2-TypeScript-and-Babel/)
 * [Tree-shaking with webpack 2 and Babel 6](http://www.2ality.com/2015/12/webpack-tree-shaking.html)
-* [Webpack 2 Tree Shaking Configuration](https://medium.com/modus-create-front-end-development/webpack-2-tree-shaking-configuration-9f1de90f3233#.15tuaw71x)
+* [webpack 2 Tree Shaking Configuration](https://medium.com/modus-create-front-end-development/webpack-2-tree-shaking-configuration-9f1de90f3233#.15tuaw71x)

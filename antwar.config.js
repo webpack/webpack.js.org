@@ -67,6 +67,8 @@ module.exports = {
           /^\.\/.*\.md$/
         );
       }, {
+        'code-splitting-import': '/guides/code-splitting-async',
+        'code-splitting-require': '/guides/code-splitting-async/#require-ensure-',
         'why-webpack': '/guides/comparison'
       }
     ),
@@ -108,16 +110,24 @@ module.exports = {
       }
     ),
 
-    pluginsapi: section(
-      'Plugins API',
+    'api/plugins': section(
+      'API',
       function() {
         return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/pluginsapi',
+          'json-loader!yaml-frontmatter-loader!./content/api/plugins',
           false,
           /^\.\/.*\.md$/
         );
       }
     ),
+
+    pluginsapi: {
+      redirects: {
+        '': '/api/plugins',
+        'compiler': '/api/plugins/compiler',
+        'template': '/api/plugins/template'
+      }
+    },
 
     loaders: section(
       'Loaders',

@@ -136,7 +136,14 @@ export default class Navigation extends React.Component {
 
   componentDidMount() {
     if (typeof window !== 'undefined') {
-      window.docsearch({
+      let docsearch = () => {};
+
+      // XXX: hack around docsearch
+      if (window.docsearch) {
+        docsearch = window.docsearch.default || window.docsearch;
+      }
+
+      docsearch({
         apiKey: 'fac401d1a5f68bc41f01fb6261661490',
         indexName: 'webpack-js-org',
         inputSelector: '.navigation__search-input'

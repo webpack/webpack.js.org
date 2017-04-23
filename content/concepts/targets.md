@@ -64,9 +64,8 @@ module.exports = [ serverConfig, clientConfig ];
 
 从上面的选项可以看出有多个不同的部署_目标_可供选择。下面是一个示例列表，以及你可以参考的资源。
 
-### 打包输出比较
-
-  **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**：大量有关「测试和查看不同的 webpack _target_」的资源。也有大量 bug 报告。
+* **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**：有关「测试和查看」不同的 webpack _target_ 的大量资源。也有大量 bug 报告。
+* **[使用 webpack 构建 electron.js 和浏览器 target](https://medium.com/@ad_harmonium/build-to-both-electron-js-and-browser-targets-using-webpack-59266bdb76a)**：
 
 ?> Need to find up to date examples of these webpack targets being used in live code or boilerplates.
 

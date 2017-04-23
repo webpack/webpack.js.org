@@ -51,7 +51,7 @@ contributors:
 
 `boolean | object`
 
-(弃用：无用，不可用，如果你有其他意见请写 issue 给我们)
+(弃用：无用，不可用，如果你有不同意见请写 issue 给我们)
 
 对所有或某些模块启用「行到行映射(line to line mapping)」。这将生成基本的源映射(source map)，即生成资源(generated source)的每一行，映射到原始资源(original source)的同一行。这是一个性能优化点，并且应该只需要输入行(input line)和生成行(generated line)相匹配时才使用。
 
@@ -96,21 +96,26 @@ devtoolModuleFilenameTemplate: info => {
 
 如果多个模块产生相同的名称，使用 [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolfallbackmodulefilenametemplate) 来代替这些模块。
 
+
 ## `output.hashFunction`
 
 The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm) are supported.
+
 
 ## `output.hashDigest`
 
 The hashing algorithm to use, defaults to `'hex'`. All functions from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported.
 
+
 ## `output.hashDigestLength`
 
 The prefix length of the hash digest to use, defaults to `20`.
 
+
 ## `output.hashSalt`
 
 An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_input_encoding).
+
 
 ## `output.filename`
 
@@ -269,7 +274,8 @@ var MyLibrary = _entry_return_;
 // 使用者将会这样调用你的 library：
 MyLibrary.doSomething();
 ```
-（不指定 `output.library` 将取消这个 var 配置）
+
+W> （不指定 `output.library` 将取消这个 `"var"` 配置）
 
 
 `libraryTarget: "this"` - 当 library 加载完成，**入口起点的返回值**将分配给 this，`this` 的含义取决于你：
@@ -312,6 +318,7 @@ exports["MyLibrary"] = _entry_return_;
 require("MyLibrary").doSomething();
 ```
 
+
 `libraryTarget: "commonjs2"` - 当 library 加载完成，**入口起点的返回值**将分配于 exports 对象上。这个名称也意味着模块用于 CommonJS 环境：
 
 ```javascript
@@ -337,8 +344,8 @@ define([], function() {
 	//这个模块会返回你的入口 chunk 所返回的
 });
 ```
-但是如果你下载完这个 script，首先你可能收到一个错误：`define is not defined`，就是这样！
-如果你使用 AMD 来发布你的 library，那么使用者需要使用 RequireJS 来加载它。
+
+但是如果你下载完这个 script，首先你可能收到一个错误：`define is not defined`，就是这样！如果你使用 AMD 来发布你的 library，那么使用者需要使用 RequireJS 来加载它。
 
 现在你已经加载过 RequireJS，你就能够加载 library。
 
@@ -383,6 +390,7 @@ output: {
 ```
 
 最终输出如下：
+
 ```javascript
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -506,7 +514,6 @@ publicPath: "", // 相对于 HTML 页面（目录相同）
 
  此选项会向硬盘写入一个输出文件，只在 [`devtool`](/configuration/devtool) 启用了 SourceMap 选项时才使用。
 
-
 配置 source map 的命名方式。默认使用 `"[file].map"`。
 
 技术上看，对于 chunk 生成的 SourceMap，可以使用 `[name]`, `[id]`, `[hash]` 和 `[chunkhash]` [占位符(placeholder)](#output-filename)。除了替换这些占位符，`[file]` 占位符还可以被替换为原始文件(original file)的文件名。建议只使用 `[file]` 占位符，因为其他占位符在非 chunk 文件生成的 SourceMap 时不起作用。最好保持默认。
@@ -531,11 +538,33 @@ sourcePrefix: "\t"
 
 `boolean`
 
-Tell webpack to remove a module from cache if it throws an exception when it is `require`d. 
+Tell webpack to remove a module from the module instance cache (`require.cache`) if it throws an exception when it is `require`d.
 
 It defaults to `false` for performance reasons.
 
 When set to `false`, the module is not removed from cache, which results in the exception getting thrown only on the first `require` call (making it incompatible with node.js).
+
+For instance, consider `module.js`:
+
+``` js
+throw new Error("error");
+```
+
+With `strictModuleExceptionHandling` set to `false`, only the first `require` throws an exception:
+
+``` js
+// with strictModuleExceptionHandling = false
+require("module") // <- throws
+require("module") // <- doesn't throw
+```
+
+Instead, with `strictModuleExceptionHandling` set to `true`, all `require`s of this module throw an exception:
+
+``` js
+// with strictModuleExceptionHandling = true
+require("module") // <- throws
+require("module") // <- also throw
+```
 
 
 ## `output.umdNamedDefine`

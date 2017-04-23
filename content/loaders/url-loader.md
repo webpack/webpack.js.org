@@ -9,9 +9,7 @@ edit: https://github.com/webpack-contrib/url-loader/edit/master/README.md
 npm install --save-dev url-loader
 ```
 
-## 用法
-
-[文档：使用加载器](http://webpack.github.io/docs/using-loaders.html)
+## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
 `url` 加载器的功能类似 `file` 加载器，但是在文件大小低于指定的限制时（单位 bytes）可以返回一个 Data Url。
 

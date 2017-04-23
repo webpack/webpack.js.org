@@ -58,7 +58,7 @@ import Test1 from 'xyz'; // 成功，file.js 被解析和导入。
 import Test2 from 'xyz/file.js'; // 错误，/path/to/file.js/file.js 是无效的
 ```
 
-下面的表格展示了许多情况：
+下面的表格展示了一些其他情况：
 
 | `别名：` | `import "xyz"` | `import "xyz/file.js"` |
 | -------- | ---------------- | -------------------------|
@@ -242,9 +242,9 @@ W> 修改缓存路径可能在极少数情况下导致失败。
 
 ```js
 {
-    modules: ["web_loaders", "web_modules", "node_loaders", "node_modules"],
-    extensions: [".webpack-loader.js", ".web-loader.js", ".loader.js", ".js"],
-    packageMains: ["webpackLoader", "webLoader", "loader", "main"]
+    modules: ["node_modules"],
+    extensions: [".js", ".json"],
+    mainFields: ["loader", "main"]
 }
 ```
 

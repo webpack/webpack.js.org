@@ -4,6 +4,7 @@ sort: 15
 contributors:
   - SpaceK33z
   - sallar
+  - jungomi
 ---
 
 `stats` 选项能让你准确地控制显示哪些包的信息。如果你希望得到部分包的信息（而不是一股脑全部输出），而不想使用 `quiet` 或者 `noInfo` 模式的时候，这个选项是一个很好的折衷办法。
@@ -40,6 +41,8 @@ stats: {
   assetsSort: "field",
   // 增加缓存了的（但没构建）模块的信息
   cached: true,
+  // Show cached assets (setting this to `false` only shows emitted files)
+  cachedAssets: true,
   // 增加子级的信息
   children: true,
   // 增加包信息（设置为 `false` 能允许较少的冗长输出）
@@ -54,17 +57,29 @@ stats: {
   context: "../src/",
   // `webpack --colors` 等同于
   colors: true,
+  // Display the distance from the entry point for each module
+  depth: false,
+  // Display the entry points with the corresponding bundles
+  entrypoints: false,
   // 增加错误信息
   errors: true,
   // 增加错误的详细信息（就像解析日志一样）
   errorDetails: true,
+  // Exclude modules which match one of the given strings or regular expressions
+  exclude: [],
   // 增加编译的哈希值
   hash: true,
+  // Set the maximum number of modules to be shown
+  maxModules: 15,
   // 增加内置的模块信息
   modules: true,
   // 对模块按指定的项进行排序
   modulesSort: "field",
-  // 增加 publicPath 的信息
+  // Show performance hint when file size exceeds `performance.maxAssetSize`
+  performance: true,
+  // Show the exports of the modules
+  providedExports: false,
+  // 增加 public path 的信息
   publicPath: true,
   // 增加模块被引入的原因
   reasons: true,
@@ -72,10 +87,16 @@ stats: {
   source: true,
   // 增加时间信息
   timings: true,
+  // Show which exports of a module are used
+  usedExports: false,
   // 增加 webpack 版本信息
   version: true,
   // 增加提示
   warnings: true
+  // Filter warnings to be shown (since webpack 2.4.0),
+  // can be a String, Regexp, a function getting the warning and returning a boolean
+  // or an Array of a combination of the above. First match wins.
+  warningsFilter: "filter" | /filter/ | ["filter", /filter/] | (warning) => ... return true|false
 };
 ```
 

@@ -9,9 +9,7 @@ edit: https://github.com/webpack-contrib/style-loader/edit/master/README.md
 npm install style-loader --save-dev
 ```
 
-## 用法
-
-[文档：使用 loader](http://webpack.github.io/docs/using-loaders.html)
+## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
 ### 简洁的 API
 ``` javascript
@@ -53,7 +51,10 @@ style.unuse(); // = style.unref();
 
 #### `insertAt`
 
-默认情况下，样式加载器将`<style>`元素附加到页面的`<head>`标记的末尾。这将导致由加载器创建的CSS优先于文档头中已经存在的CSS。要在头部的开头插入样式元素，请将此查询参数设置为“top”，例如。`require('../style.css?insertAt=top')`.
+默认情况下，style-loader 将 `<style>' 元素附加到样式目标(target)的末尾，除非由 `insertInto` 指定，否则样式目标是指页面的 `<head>` 标签。这将导致由 loader 创建的 CSS 优先于目标(target)中已经存在的CSS。要在目标(target)的开始处插入样式元素，请将此查询参数设置为 'top'，例如，`require('../style.css?insertAt=top')`。
+
+#### `insertInto`
+By default, the style-loader inserts the `<style>` elements into the `<head>` tag of the page. If you want the tags to be inserted somewhere else, e.g. into a [ShadowRoot](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot), you can specify a CSS selector for that element here, e.g. `require('../style.css?insertInto=#host::shadow>#root')`.
 
 #### `singleton`
 
@@ -68,16 +69,22 @@ If convertToAbsoluteUrls and sourceMaps are both enabled, relative urls will be 
 If defined, style-loader will attach given attributes with their values on `<style>` / `<link>` element.
 Usage:
 ```javascript
-require('style-loader?{attrs:{id: "style-tag-id"}}!style.scss');
+require('style-loader?{attrs:{id: "style-tag-id"}}!style.css');
 
 // will create style tag <style id="style-tag-id">
+```
+Usage in `url` mode:
+```javascript
+require('style-loader/url?{attrs:{prop: "value"}}!file-loader!style.css')
+
+// will create link tag <link rel="stylesheet" type="text/css" href="[path]/style.css" prop="value">
 ```
 
 ### 推荐配置
 
 按照惯例，引用计数的API应绑定到.useable.css，而简单的API绑定到.css（其他文件类型也类似，即.useable.less和.less）
 
-所以推荐的webpack配置是
+所以推荐的 webpack 配置是
 ``` javascript
 {
   module: {

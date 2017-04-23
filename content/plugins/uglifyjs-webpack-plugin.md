@@ -3,13 +3,15 @@ title: UglifyjsWebpackPlugin
 source: https://raw.githubusercontent.com/webpack-contrib/uglifyjs-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/uglifyjs-webpack-plugin/edit/master/README.md
 ---
-## Install
+## 安装
+
+使用 [Yarn](https://yarnpkg.com):
 
 ```bash
 yarn add uglifyjs-webpack-plugin --dev
 ```
 
-..或者你坚持使用npm，而不是更先进的 [Yarn](https://yarnpkg.com):
+使用 npm:
 
 ```bash
 npm install uglifyjs-webpack-plugin --save-dev
@@ -56,10 +58,12 @@ module.exports = {
 | output | 一个提供 UglifyJS [OutputStream](https://github.com/mishoo/UglifyJS2/blob/master/lib/output.js) 选项的对象 | | 更底层地访问 UglifyJS 输出。 |
 | comments | boolean, RegExp, function(astNode, comment) -> boolean | 默认保存包含 `/*!`, `/**!`, `@preserve` or `@license` 的注释 | 注释相关的配置 |
 | extractComments | boolean, RegExp, function (astNode, comment) -> boolean, object | false | Whether comments shall be extracted to a separate file, see below. |
-| sourceMap | boolean | false | 使用 SourceMaps 将错误信息的位置映射到模块。这会减慢编译的速度。 |
+| sourceMap | boolean | false | 使用 SourceMaps 将错误信息的位置映射到模块。这会减慢编译的速度。 **Important!** `cheap` source map options don't work with the plugin! |
 | test | RegExp, Array<RegExp> | <code>/\.js($&#124;\?)/i</code> | 测试匹配的文件 |
 | include | RegExp, Array<RegExp> | | 只测试包含的文件。 |
 | exclude | RegExp, Array<RegExp> | | 要从测试中排除的文件。 |
+| extractComments | boolean, RegExp, object | | Extract comments to separate file (see [details](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a), since webpack 2.3.0) |
+| warningsFilter | function(source) -> boolean | | Allow to filter uglify warnings (since webpack 2.3.0) |
 
 ## Mangling
 
@@ -89,7 +93,7 @@ The `extractComments` option can be
 Default: `/*! For license information please see foo.js.LICENSE */`
 
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>

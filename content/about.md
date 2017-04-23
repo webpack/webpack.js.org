@@ -1,39 +1,42 @@
 ---
 title: 参与翻译的全体成员
 contributors:
+  - akira-cn
+  - Aladdin-ADD
+  - beiciye
+  - billie66
+  - biqing
+  - chen-Aaron
+  - coco-hu
+  - dickeylth
+  - dingyiming
   - dear-lizhihua
-  - rqzheng2015
+  - ellyliang
+  - huangtubiao
+  - itchina110
+  - JayceZhang9602
+  - jeffrygan
+  - lcxfs1991
+  - LeoEatle
+  - lgh06
   - lizhonghui
   - lmymoonsky
-  - scq000
-  - zikeng
-  - starkwang
-  - billie66
-  - yuanlinssdut
-  - nick-nick
-  - superpig
-  - biqing
-  - lcxfs1991
   - mc-zone
   - neal1991
-  - xgz123
-  - huangtubiao
-  - zgayjjf
+  - nick-nick
   - panlinying
-  - lizhonghui
-  - tao1991123
-  - akira-cn
-  - dickeylth
-  - xgz123
-  - beiciye
-  - jeffrygan
-  - coco-hu
-  - lcxfs1991
-  - itchina110
-  - dingyiming
-  - ellyliang
-  - lgh06
+  - rqzheng2015
+  - scq000
+  - ShiHaoLin
   - shisaq
+  - starkwang
+  - superpig
+  - tao1991123
+  - xgz123
+  - xie-qianyue
+  - yuanlinssdut
+  - zgayjjf
+  - zikeng
 ---
 
 特此致敬`参与翻译的全体成员`！

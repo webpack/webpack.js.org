@@ -7,7 +7,10 @@ contributors:
   - yatharthk
 ---
 
-?> `plugins` customize the webpack build process in a variety of ways. This page discusses using existing plugins, however if you are interested in writing your own please visit [Writing a Plugin](/development/how-to-write-a-plugin/).
+The `plugins` option is used to customize the webpack build process in a variety of ways. webpack comes with a variety built-in plugins available under `webpack.[plugin-name]`. See [this page](/plugins) for a list of plugins and documentation but note that there are a lot more out in the community.
+
+T> Note: This page only discusses using plugins, however if you are interested in writing your own please visit [Writing a Plugin](/development/how-to-write-a-plugin/).
+
 
 ## `plugins`
 
@@ -24,7 +27,9 @@ plugins: [
 ```
 
 一个复杂示例，使用多个插件，可能看起来就像这样：
+
 ```js
+var webpack = require('webpack')
 // 导入非 webpack 默认自带插件
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var DashboardPlugin = require('webpack-dashboard/plugin');
@@ -46,7 +51,7 @@ plugins: [
     filename: 'build.min.css',
     allChunks: true,
   }),
-  new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
+  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   // 编译时(compile time)插件
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': '"production"',

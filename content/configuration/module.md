@@ -10,6 +10,7 @@ contributors:
 
 这些选项决定了如何处理项目中的[不同类型的模块](/concepts/modules)。
 
+
 ## `module.noParse`
 
 `RegExp | [RegExp]`
@@ -19,6 +20,7 @@ contributors:
 ```js
 noParse: /jquery|lodash/
 ```
+
 
 ## `module.rules`
 
@@ -30,6 +32,7 @@ noParse: /jquery|lodash/
 ## Rule
 
 每个规则可以分为三部分 - 条件(condition)，结果(result)和嵌套规则(nested rule)。
+
 
 ### Rule 条件
 
@@ -47,6 +50,7 @@ noParse: /jquery|lodash/
 
 W> 小心！resource 是文件的_解析_路径，这意味着符号链接的资源是真正的路径，_而不是_符号链接位置。在使用工具来符号链接包的时候（如 `npm link`）比较好记，像 `/node_modules/` 等常见条件可能会不小心错过符号链接的文件。
 
+
 ### Rule 结果
 
 规则结果只在规则条件匹配时使用。
@@ -54,7 +58,6 @@ W> 小心！resource 是文件的_解析_路径，这意味着符号链接的资
 规则有两种输入值：
 
 1. 应用的 loader：应用在 resource 上的 loader 数组。
-
 2. Parser 选项：用于为模块创建解析器的选项对象。
 
 这些属性会影响 loader：[`loader`](#rule-loader), [`options`](#rule-options-rule-query), [`use`](#rule-use)。
@@ -71,6 +74,7 @@ W> 小心！resource 是文件的_解析_路径，这意味着符号链接的资
 可以使用属性 [`rules`](#rule-rules) 和 [`oneOf`](#rule-oneof) 指定嵌套规则。
 
 这些规则用于在规则条件(rule condition)匹配时进行取值。
+
 
 ## `Rule.enforce`
 
@@ -159,13 +163,16 @@ parser: {
 
 [`条件`](#condition)会匹配 resource。在 [`Rule` 条件](#rule-conditions) 中查看详细。
 
+
 ## `Rule.resourceQuery`
 
 A [`Condition`](#condition) matched with the resource query. The condition matches against a string that starts with a question mark (`"?exampleQuery"`). See details in [`Rule` conditions](#rule-conditions).
 
+
 ## `Rule.rules`
 
 [`规则`](#rule)数组，当规则匹配时使用。
+
 
 ## `Rule.test`
 
@@ -213,17 +220,17 @@ use: [
 * 条件数组：至少一个匹配条件。
 * 对象：匹配所有属性。每个属性都有一个定义行为。
 
-`{ test: Condition }`：匹配条件。约定了提供一个正则或正则数组，但不是强制的。
+`{ test: Condition }`：匹配特定条件。一般是提供一个正则表达式或正则表达式的数组，但这不是强制的。
 
-`{ include: Condition }`：匹配条件。约定了提供一个字符串或字符串数组，但不是强制的。
+`{ include: Condition }`：匹配特定条件。一般是提供一个字符串或者字符串数组，但这不是强制的。
 
-`{ exclude: Condition }`：不能匹配条件。约定了提供一个字符串或字符串数组，但不是强制的。
+`{ exclude: Condition }`：排除特定条件。一般是提供一个字符串或字符串数组，但这不是强制的。
 
-`{ and: [Condition] }`：匹配所有条件
+`{ and: [Condition] }`：必须匹配数组中的所有条件
 
-`{ or: [Condition] }`：匹配任何条件
+`{ or: [Condition] }`：匹配数组中任何一个条件
 
-`{ not: Condition }`：不能匹配条件
+`{ not: Condition }`：必须排除这个条件
 
 **Example:**
 
@@ -259,7 +266,9 @@ use: [
 }
 ```
 
-注意，webpack 需要生成资源和所有 loader 的独立模块标识，包括选项。它尝试对选项对象使用 `JSON.stringify`。这在 99.9% 的情况下是可以的，但是如果将相同的 loader 应用于相同资源的不同选项，并且选项具有一些带字符的值，则可能不是唯一的。如果选项对象不被字符化（例如循环 JSON），它也会中断。因此，你可以在选项对象使用 `ident` 属性，作为唯一标识符。
+注意，webpack 需要生成资源和所有 loader 的独立模块标识，包括选项。它尝试对选项对象使用 `JSON.stringify`。这在 99.9% 的情况下是可以的，但是如果将相同的 loader 应用于相同资源的不同选项，并且选项具有一些带字符的值，则可能不是唯一的。
+
+如果选项对象不被字符化（例如循环 JSON），它也会中断。因此，你可以在选项对象使用 `ident` 属性，作为唯一标识符。
 
 
 ## 模块上下文
@@ -274,7 +283,7 @@ use: [
 
 例如，`包裹的(wrapped)` 动态依赖：`require("./templates/" + expr)`。
 
-以下是其默认值的可用选项
+以下是其[默认值](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js)的可用选项
 
 ```js
 module: {
@@ -289,6 +298,7 @@ module: {
   wrappedContextCritical: false
   wrappedContextRecursive: true,
   wrappedContextRegExp: /.*/,
+  strictExportPresence: false // since webpack 2.3.0
 }
 ```
 
@@ -299,6 +309,7 @@ module: {
 * 动态依赖的警告：`wrappedContextCritical: true`。
 * `require(expr)` 应该包含整个目录：`exprContextRegExp: /^\.\//`
 * `require("./templates/" + expr)` 不应该包含默认子目录：`wrappedContextRecursive: false`
+* `strictExportPresence` makes missing exports an error instead of warning
 
 ***
 

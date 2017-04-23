@@ -1,7 +1,7 @@
 ---
 title: bundle-loader
-source: https://raw.githubusercontent.com/webpack/bundle-loader/master/README.md
-edit: https://github.com/webpack/bundle-loader/edit/master/README.md
+source: https://raw.githubusercontent.com/webpack-contrib/bundle-loader/master/README.md
+edit: https://github.com/webpack-contrib/bundle-loader/edit/master/README.md
 ---
 ## 安装
 
@@ -9,9 +9,7 @@ edit: https://github.com/webpack/bundle-loader/edit/master/README.md
 npm i bundle-loader --save
 ```
 
-## Usage
-
-[文档: 使用加载器](http://webpack.github.io/docs/using-loaders.html)
+## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
 ``` javascript
 // 当你引用 bundle 的时候，chunk 会被浏览器加载。
@@ -24,6 +22,11 @@ waitForChunk(function(file) {
 	// var file = require("./file.js");
 });
 // 将 require 包裹在 require.ensure 的代码块中
+
+// Multiple callbacks can be added. They will be executed in the order of addition.
+waitForChunk(callbackTwo);
+waitForChunk(callbackThree);
+// If a callback is added after dependencies were loaded, it will be called immediately.
 ```
 
 当你引用 bundle 的时候，chunk 会被浏览器加载。如果你想它懒加载，请用：
@@ -36,12 +39,37 @@ load(function(file) {
 
 });
 ```
+### `name` query parameter
 
-你可能会给 bundle 设名称(`name` 查询参数)。请查看[documentation](https://github.com/webpack/loader-utils#interpolatename).
+你可能会使用 `name` 查询参数给 bundle 设置名称。
+请查看[文档](https://github.com/webpack/loader-utils#interpolatename).
 
-``` javascript
+**Note** chunks created by the loader will be named according to the
+[`output.chunkFilename`](https://webpack.js.org/configuration/output/#output-chunkfilename) rule, which defaults to `[id].[name]`.
+Here `[name]` corresponds to the chunk name set in the `name` query parameter.
+
+#### Example:
+
+``` js
 require("bundle-loader?lazy&name=my-chunk!./file.js");
+require("bundle-loader?lazy&name=[name]!./file.js");
 ```
+And the webpack configuration:
+``` js
+module.exports = {
+   entry: { ... },
+   output : {
+      path : ...,
+      filename : '[name].js',
+      chunkFilename : '[name]-[id].js', // or whatever other format you want.
+   },
+}
+```
+
+Normal chunks will show up using the `filename` rule above, and be named according to their chunkname.
+Chunks from `bundle-loader`, however will load using the `chunkFilename` rule, so the example files will produce `my-chunk-1.js` and `file-2.js` respectively.
+
+You can also use `chunkFilename` to add hash values to the filename, since putting `[hash]` in the bundle query parameter does not work correctly.
 
 ## Maintainers
 

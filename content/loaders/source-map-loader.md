@@ -30,7 +30,11 @@ module.exports = {
 };
 ```
 
-将从所有 js 文件（包括 node_modules）中提取 SourceMap。性能并不是很高，因此您可能只希望将 loader 应用到相关文件。
+`source-map-loader` extracts existing source maps from all JavaScript entries. This includes both inline source maps as well as those linked via URL. All source map data is passed to webpack for processing as per a chosen [source map style](https://webpack.js.org/configuration/devtool/) specified by the `devtool` option in [webpack.config.js](https://webpack.js.org/configuration/).
+
+This loader is especially useful when using 3rd-party libraries having their own source maps. If not extracted and processed into the souce map of the webpack bundle, browsers may misinterpret source map data. `source-map-loader` allows webpack to maintain source map data continuity across libraries so ease of debugging is preserved.
+
+`source-map-loader` will extract from any JavaScript file, including those in the `node_modules` directory. Be mindful in setting [include](https://webpack.js.org/configuration/module/#rule-include) and [exclude](https://webpack.js.org/configuration/module/#rule-exclude) rule conditions to maximize bundling performance.
 
 ## 维护人员
 
