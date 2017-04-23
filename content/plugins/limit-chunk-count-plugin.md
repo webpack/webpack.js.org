@@ -15,9 +15,9 @@ webpack 接受这两个参数来合并 chunk（优先合并含有重复的模块
 
 单页面应用程序(SPA)是 web 应用程序的一种类型，webpack 旨在为其设计和优化。
 
-你或许把应用程序拆分成多个 chunks，通过切换路由(router)的方式加载。入口 chunk 仅包含路由和 library，不会包含实际内容。当你的用户通过导航浏览你的应用程序的时候他可以很好的工作，但是页面初始化的时候需要两次加载：第一次是 router，第二次是实际的页面内容。
+你或许把应用程序拆分成多个 chunks，通过切换路由(router)的方式加载。入口 chunk 仅包含路由和 library，不会包含实际内容。当你的用户通过导航浏览你的应用程序的时候他可以很好的工作，但在初始化页面加载时，需要两次 HTTP 往返(round trips)：一次 HTTP 请求用于获取 router，另一次 HTTP 请求用于根据 router 获取当前页面内容。
 
-如果你是通过 HTML5 的 History API 在 URl 上来映射实际的页面内容，你的服务器能知道那块内容是被客户端所请求的。为了减少加载次数你可以在响应中加入 chunk：通过添加 script 标签这是可以办到的。浏览器会同时载入 chunk。
+如果你是使用了 HTML5 的 History API，通过 URL 来反映当前实际的页面内容，你的服务器就能知道，哪块是被客户端代码所请求的页面内容。为了节省「HTTP 往返次数(round trips)」你可以在 HTTP 响应(response)中加入「内容 chunk(content chunk)」：通过添加 script 标签这是可以办到的。浏览器会同时载入 chunk。
 
 ``` html
 <script src="entry-chunk.js" type="text/javascript" charset="utf-8"></script>
