@@ -2,14 +2,13 @@
 var marked = require('marked');
 
 module.exports = function() {
-
   var renderer = new marked.Renderer();
 
   renderer.image = function(href, title, text) {
-    return '<img src="' + href + '" alt="' + text + '">';
+    return `<img src="${href}" alt="${text}">`;
   };
 
-  // patch ids (this.options.headerPrefix can be undefined!)
+  // Patch IDs (this.options.headerPrefix can be undefined!)
   renderer.heading = function(text, level, raw) {
     var id = raw.toLowerCase().replace(/`/g, '').replace(/[^\w]+/g, '-');
 
@@ -289,9 +288,11 @@ function parseCustomQuote(token, match, className) {
 
       return {
         type: 'html',
-        text: `<blockquote class="${className}">` +
+        text: (
+          `<blockquote class="${className}">` +
           `<div class="tip-content"> ${text.slice(2).trim()} </div>` +
           '</blockquote>'
+        )
       };
     }
   }
