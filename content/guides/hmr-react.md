@@ -157,21 +157,7 @@ module.exports = {
 };
 ```
 
-Important to note:
-
-If you have a `query` section for the `babel-loader` in your `rules`, remember to turn off the `modules` tranformation as well, otherwise HMR won't work.
-
-```js
-loader: "babel-loader",
-query: {
-    presets: [
-        ["env",{"modules":false}], 
-        "react"
-    ]
-}
-```
-
-A better solution is to remove the `query` part here, manage all you babel configuration in `.babelrc`.
+W> If you are using the `options` key for your babel configuration, make sure you turn babel's `modules` feature off as mentioned in the [config section](https://webpack.js.org/guides/hmr-react/#babel-config).
 
 ### App code
 
