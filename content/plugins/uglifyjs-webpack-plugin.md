@@ -62,7 +62,6 @@ module.exports = {
 | mangle | boolean, object | true | 见下节. |
 | beautify | boolean | false | 优化输出。 |
 | output | 一个提供 UglifyJS [OutputStream](https://github.com/mishoo/UglifyJS2/blob/master/lib/output.js) 选项的对象 | | 更底层地访问 UglifyJS 输出。 |
-| comments | boolean, RegExp, function(astNode, comment) -> boolean | 默认保存包含 `/*!`, `/**!`, `@preserve` or `@license` 的注释 | 注释相关的配置 |
 | extractComments | boolean, RegExp, function (astNode, comment) -> boolean, object | false | 是否将注释文件单独提取，见下节 |
 | sourceMap | boolean | false | 使用 SourceMaps 将错误信息的位置映射到模块。这会减慢编译的速度。**十分重要!**过于简易的配置会使sourceMap失效 |
 | test | RegExp, Array<RegExp> | <code>/\.js($&#124;\?)/i</code> | 测试匹配的文件 |
@@ -70,7 +69,7 @@ module.exports = {
 | exclude | RegExp, Array<RegExp> | | 只测试被`排除`的文件。 |
 | extractComments | boolean, RegExp, object | | 提取注释来分离文件（见[详情](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a)，自 webpack 2.3.0 ） |
 | warningsFilter | function(source) -> boolean | | 允许过滤 uglify 警告（从 webpack 2.3.0）。 |
-
+ 
 ## Mangling
 
 `mangle.props (boolean|object)` - 传递 true 或者一个对象可以启用并提供 UglifyJS mangling 属性选项 - 参考有关 mangleProperties 选项的 [UglifyJS 文档](https://github.com/mishoo/UglifyJS2#mangleproperties-options)。
