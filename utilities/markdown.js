@@ -10,13 +10,16 @@ module.exports = function() {
 
   // Patch IDs (this.options.headerPrefix can be undefined!)
   renderer.heading = function(text, level, raw) {
-    var id = raw.toLowerCase().replace(/`/g, '').replace(/[^\w]+/g, '-');
+    var parsed = parseAnchor(raw);
+    var id = parsed.id;
 
-    return `<h${level} class="header">` +
+    return (
+      `<h${level} class="header">` +
       `<a class="anchor" href="#${id}" id="${id}"></a>` +
       `<span class="text">${text}</span>` +
       `<a class="icon-link" href="#${id}"></a>` +
-      `</h${level}>\n`;
+      `</h${level}>\n`
+    );
   };
 
   var codeTemplate = renderer.code;
@@ -109,10 +112,7 @@ module.exports = function() {
     getAnchors: function(content) {
       return marked.lexer(content)
         .filter(chunk => chunk.type === 'heading')
-        .map(chunk => ({
-          title: chunk.text.replace(/`/g, ''),
-          id: chunk.text.toLowerCase().replace(/`/g, '').replace(/[^\w]+/g, '-')
-        }));
+        .map(chunk => parseAnchor(chunk.text));
     }
   };
 };
@@ -141,6 +141,16 @@ function parseContent(data) {
   });
 
   return tokens;
+}
+
+function parseAnchor(string) {
+  var stripped = string.replace(/\[(.+)\]\(.+\)/gi, '$1');
+  var clean = stripped.replace(/`/g, '');
+
+  return {
+    title: clean,
+    id: clean.replace(/[^\w]+/g, '-').toLowerCase()
+  }
 }
 
 function handleHTMLSplit(tokens, htmlArray, merging) {
