@@ -21,7 +21,7 @@ end
 接下来便是在项目中安装 webpack 和 webpack-dev-server。
 
 ```bash
-npm install webpack webpack-dev-server --save-dev
+npm install --save-dev webpack webpack-dev-server
 ```
 
 确保已经设好配置文件 `webpack.config.js`。如果没有的话，下面的示例代码可以作为入门的简单配置：

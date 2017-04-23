@@ -9,7 +9,7 @@ edit: https://github.com/webpack-contrib/expose-loader/edit/master/README.md
 npm i expose-loader --save
 ```
 
-## Usage
+## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
 ** 注意**: 模块必须在你的 bundle 中被 `require()` 过，否则他们将不会被暴露。
 
@@ -19,13 +19,13 @@ require("expose-loader?libraryName!./file.js");
 // 在浏览器中，就将可以使用 window.libraryName 。
 ```
 
-下面这行代码暴露 React 到浏览器全局，用来开启 Chrome React devtools ：
+例如，假设你要将 jQuery 暴露至全局并称为 `$`：
 
 ```
-require("expose-loader?React!react");
+require("expose-loader?$!jquery");
 ```
 
-然后，`window.React` 就可以被 Chrome React devtools 扩展使用。
+然后，`window.$` 就可以在浏览器控制台中使用。
 
 或者，你可以通过配置文件来设置：
 
@@ -33,7 +33,7 @@ webpack v1 usage
 ```
 module: {
   loaders: [
-    { test: require.resolve("react"), loader: "expose-loader?React" }
+    { test: require.resolve("jquery"), loader: "expose-loader?$" }
   ]
 }
 ```
@@ -41,15 +41,17 @@ webpack v2 usage
 ```
 module: {
   rules: [{
-          test: require.resolve('react'),
+          test: require.resolve('jquery'),
           use: [{
               loader: 'expose-loader',
-              options: 'React'
+              options: '$'
           }]
       }]
 }
 ```
-如果要重复暴露到多个变量，可以在加载器字符串中使用 `!` ：
+
+除了暴露为 `window. $` 之外，假设你还想把它暴露为 `window.jQuery`。
+对于多个暴露，您可以在 loader 字符串中使用 `!`：
 
 webpack v1 usage
 ```
@@ -77,9 +79,8 @@ module: {
 
 `require.resolve` 是一个 node.js 调用（与 webpack 处理中的 `require.resolve` 无关 —— 可以阅读 node.js 文档）。`require.resolve` 用来得到模块对应的绝对路径（"/.../app/node_modules/react/react.js"），所以这里只会对 React 进行暴露。并且只在 bundle 中用到它时进行暴露。
 
-[文档：使用 loader](http://webpack.github.io/docs/using-loaders.html)
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>

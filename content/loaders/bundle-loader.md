@@ -9,9 +9,7 @@ edit: https://github.com/webpack-contrib/bundle-loader/edit/master/README.md
 npm i bundle-loader --save
 ```
 
-## Usage
-
-[文档: 使用加载器](http://webpack.github.io/docs/using-loaders.html)
+## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
 ``` javascript
 // 当你引用 bundle 的时候，chunk 会被浏览器加载。
@@ -24,6 +22,11 @@ waitForChunk(function(file) {
 	// var file = require("./file.js");
 });
 // 将 require 包裹在 require.ensure 的代码块中
+
+// Multiple callbacks can be added. They will be executed in the order of addition.
+waitForChunk(callbackTwo);
+waitForChunk(callbackThree);
+// If a callback is added after dependencies were loaded, it will be called immediately.
 ```
 
 当你引用 bundle 的时候，chunk 会被浏览器加载。如果你想它懒加载，请用：

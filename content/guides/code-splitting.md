@@ -34,8 +34,7 @@ contributors:
 
 这可以用于更细粒度的代码块，例如，根据我们的应用程序路由，或根据用户行为预测。这可以使用户按照实际需要加载非必要资源。
 
-* [代码分离 - 使用 `import()`](/guides/code-splitting-import) – ECMAScript 提案
-* [代码分离 - 使用 `require.ensure`](/guides/code-splitting-require) – CommonJS 方式
+Learn [how to split on demand](/guides/code-splitting-async) using `import()` or `require.ensure()`.
 
 ***
 

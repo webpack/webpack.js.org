@@ -56,7 +56,7 @@ new ExtractTextPlugin(options: filename | object)
 |名称|类型|描述|
 |:--:|:--:|:----------|
 |**`id`**|`{String}`|此插件实例的唯一id。（仅限高级用途，默认情况下自动生成）|
-|**`filename`**|`{String|Function}`|生成文件的文件名。可能包含 `[name]`, `[id]` and `[contenthash]`|
+|**`filename`**|`{String\|Function}`|生成文件的文件名。可能包含 `[name]`, `[id]` and `[contenthash]`|
 |**`allChunks`**|`{Boolean}`|向所有额外的 chunk 提取（默认只提取初始加载模块）|
 |**`disable`**|`{Boolean}`|禁用插件|
 |**`ignoreOrder`**|`{Boolean}`|禁用顺序检查 (对 CSS Modules 有用!), 默认 `false`|
@@ -162,7 +162,7 @@ plugins: [
 ]
 ```
 
-## 维护者
+## 维护人员
 
 <table>
   <tbody>

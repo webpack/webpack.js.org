@@ -11,6 +11,7 @@ contributors:
 
 为了用 webpack 对 CSS 文件进行打包，你可以像[其它模块](/concepts/modules)一样将 CSS 引入到你的 JavaScript 代码中，同时用 `css-loader` (像 JS 模块一样输出 CSS)，也可以选择使用 `ExtractTextWebpackPlugin` (将打好包的 CSS 提出出来并输出成 CSS 文件)。
 
+
 ## 引入 CSS
 
 像 JavaScript 模块一样引入 CSS 文件，例如在 `vendor.js` 中:
@@ -19,9 +20,16 @@ contributors:
 import 'bootstrap/dist/css/bootstrap.css';
 ```
 
+
 ## 使用 `css-loader`
 
-在 `webpack.config.js` 中，配置[`css-loader`](/loaders/css-loader)，例子如下:
+安装 [`css-loader`](/loaders/css-loader)：
+
+``` bash
+npm install --save-dev css-loader
+```
+
+在 `webpack.config.js` 中配置如下：
 
 ```javascript
 module.exports = {
@@ -40,11 +48,13 @@ module.exports = {
 
 webpack 能够用 `ExtractTextWebpackPlugin` 帮助你将 CSS 单独打包，以解决以上问题。
 
+
 ## 使用 `ExtractTextWebpackPlugin`
 
-安装 [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin)
-```
-npm i --save-dev extract-text-webpack-plugin
+安装 [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) 如下
+
+``` bash
+npm install --save-dev extract-text-webpack-plugin
 ```
 
 为了使用这个插件，它需要通过三步被配置到 `webpack.config.js` 文件中。

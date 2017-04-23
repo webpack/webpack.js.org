@@ -192,8 +192,9 @@ exports.locals = {
 }
 ```
 
-您还可以指定自定义 `getLocalIdent` 函数的绝对路径，以根据不同的模式生成类名。注意这需要 `webpack >= v2.x.` 因为能够传递函数。示例：
+您还可以指定自定义 `getLocalIdent` 函数的绝对路径，以根据不同的模式生成类名。注意这需要 `webpack >= 2.2.1`（`options` 对象支持传入函数）。示例：
 
+**webpack.config.js**
 ```js
 {
   test: /\.css$/,

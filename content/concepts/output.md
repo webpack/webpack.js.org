@@ -9,8 +9,6 @@ contributors:
 
 此选项影响 compilation 对象的输出。`output` 选项控制 webpack 如何向硬盘写入编译文件。注意，即使可以存在多个`入口`起点，但只指定一个`输出`配置。
 
-如果你用了哈希（`[hash]` 或 `[chunkhash]`），请确保模块具有一致的顺序。可以使用 `OccurrenceOrderPlugin` 或 `recordsPath`。
-
 ## 用法(Usage)
 
 在 webpack 中配置 `output` 属性的最低要求是，将它的值设置为一个对象，包括以下两点：

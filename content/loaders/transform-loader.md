@@ -9,9 +9,7 @@ edit: https://github.com/webpack-contrib/transform-loader/edit/master/README.md
 npm i transform-loader --save
 ```
 
-## 用法
-
-[文档：使用 loader](http://webpack.github.io/docs/using-loaders.html)
+## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
 通过查询参数来传递模块名。
 
