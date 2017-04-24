@@ -21,15 +21,15 @@ export default class SidebarItem extends React.Component {
     return (
       <div className={ `${block} ${openMod} ${disabledMod}` }>
         { anchors.length > 0 ? (
-          <i 
-            className={ `${block}__toggle icon-chevron-right` } 
+          <i
+            className={ `${block}__toggle icon-chevron-right` }
             onClick={ this._toggle.bind(this) } />
-        ) : <i
-            className={ `${block}__toggle icon-vertical-bar` } />
-        }
+        ) : (
+          <i className={ `${block}__toggle icon-vertical-bar` } />
+        )}
 
-        <Link 
-          className={ `${block}__title` } 
+        <Link
+          className={ `${block}__title` }
           to={ this.props.url }>
           { title }
         </Link>
@@ -55,15 +55,15 @@ export default class SidebarItem extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if ( nextProps.currentPage !== this.props.currentPage ) {
-      this.setState({ 
-        open: this._isOpen(nextProps) 
+      this.setState({
+        open: this._isOpen(nextProps)
       });
     }
   }
 
   /**
    * Checks whether the item should be expanded
-   * 
+   *
    * @param {object} props - The current props
    */
   _isOpen(props) {
@@ -72,7 +72,7 @@ export default class SidebarItem extends React.Component {
 
   /**
    * Toggles the open state (expanded/collapsed)
-   * 
+   *
    * @param {object} e - Click event
    */
   _toggle(e) {
@@ -89,7 +89,7 @@ export default class SidebarItem extends React.Component {
 
   /**
    * Generate the url for the given [anchor] depending on the current page
-   * 
+   *
    * @return {object} anchor - The anchor object containing its id
    */
   _generateAnchorURL(anchor) {
