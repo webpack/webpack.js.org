@@ -42,7 +42,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 * `markdown-loader` Compiles Markdown to HTML
 * `posthtml-loader` Loads and transforms a HTML file using [PostHTML](https://github.com/posthtml/posthtml)
 * `handlebars-loader` Compiles Handlebars to HTML
-* [`markup-inline-loader`](https://github.com/asnowwolf/markup-inline-loader) Inline SVG/MathML files to HTML. It’s very useful when applying icon font or applying CSS animation to SVG.
+* [`markup-inline-loader`](https://github.com/asnowwolf/markup-inline-loader) Inline SVG/MathML files to HTML. It’s useful when applying icon font or applying CSS animation to SVG.
 
 ## Styling
 
