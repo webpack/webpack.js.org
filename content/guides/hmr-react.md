@@ -157,6 +157,7 @@ module.exports = {
 };
 ```
 
+W> If you are using the `options` key for your babel configuration, make sure you turn babel's `modules` feature off as mentioned in the [config section](https://webpack.js.org/guides/hmr-react/#babel-config).
 
 ### App code
 
