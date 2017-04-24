@@ -144,7 +144,7 @@ function parseContent(data) {
 }
 
 function parseAnchor(string) {
-  var stripped = string.replace(/\[(.+)\]\(.+\)/gi, '$1');
+  var stripped = string.replace(/\[(.+)\]\(.+\)/gi, '$1').replace(/(<([^>]+)>)/ig, '');
   var clean = stripped.replace(/`/g, '');
 
   return {
