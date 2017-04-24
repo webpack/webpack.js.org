@@ -4,6 +4,7 @@ sort: 60
 contributors:
   - ndelangen
   - chrisVillanueva
+  - sokra
 ---
 
 > es6 modules
@@ -74,6 +75,8 @@ require.context("./test", false, /\.test\.js$/);
 require.context("../", true, /\.stories\.js$/);
 // a context with all files in the parent folder and descending folders ending with `.stories.js`.
 ```
+
+Note: The arguments to `require.context` must be literals!
 
 
 ### context module API
