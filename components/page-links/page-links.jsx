@@ -23,6 +23,7 @@ export default ({
 
       <a className="page-links__link" href={ editLink }>
         Edit Document
+        <i className="page-links__icon icon-edit" />
       </a>
     </div>
   );

@@ -14,10 +14,15 @@
     margin: 0 1em;
   }
 
-  // &__icon {
-  //   font-size: 0.85em;
-  //   margin-left: 0.5em;
-  // }
+  &__link {
+    display: inline-flex;
+  }
+
+  &__icon {
+    align-self: center;
+    font-size: 0.9em;
+    margin-left: 0.5em;
+  }
 
   @include break {
     display: block;
