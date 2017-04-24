@@ -155,9 +155,10 @@ function parseAnchor(string) {
 
 function handleHTMLSplit(tokens, htmlArray, merging) {
   const htmlItem =  htmlArray[0];
-  htmlArray = htmlArray.slice(1);
   const tickSplit = htmlItem.split('`');
   const tickLength = tickSplit.length;
+
+  htmlArray = htmlArray.slice(1);
 
   // detect start of the inline code
   if(merging.length === 0 && tickLength%2 === 0) {
