@@ -42,7 +42,7 @@ export default props => {
       <Interactive
         id="components/notification-bar/notification-bar.jsx"
         component={ NotificationBar } />
-        
+
       <Interactive
         id="components/navigation/navigation.jsx"
         component={ Navigation }
@@ -55,6 +55,7 @@ export default props => {
         sections={ sections } />
 
       { props.children }
+
       <Footer />
 
       <GoogleAnalytics analyticsId="UA-46921629-2" />
