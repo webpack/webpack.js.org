@@ -622,4 +622,17 @@ __webpack v1__ only supports `JSON.stringify`-able options for loaders.
 
 __webpack v2__ now supports any JS object as loader options.
 
-W> Before [v2.2.1](https://github.com/webpack/webpack/releases/tag/v2.2.1) (i.e. from v2.0.0 through v2.2.0), using complex options required using `ident` for the `options` object to allow its reference from other loaders. This was removed in v2.2.1 and thus current migrations do not require any use of the `ident` key.
+Before [v2.2.1](https://github.com/webpack/webpack/releases/tag/v2.2.1) (i.e. from v2.0.0 through v2.2.0), using complex options required using `ident` for the `options` object to allow its reference from other loaders. __This was removed in v2.2.1__ and thus current migrations do not require any use of the `ident` key.
+
+```diff
+{
+  test: /\.ext/
+  use: {
+    loader: '...',
+    options: {
+-     ident: 'id',
+      fn: () => require('./foo.js')
+    }
+  }
+}
+```
