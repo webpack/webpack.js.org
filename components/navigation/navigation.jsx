@@ -18,27 +18,26 @@ let Sections = [
   },
   {
     title: 'Documentation',
-    url: 'configuration',
+    url: 'documentation/configuration',
     children: [
-      { title: 'CLI', url: 'api/cli' },
-      { title: 'API', url: 'api' },
-      { title: 'Configuration', url: 'configuration' },
-      { title: 'Loaders', url: 'loaders' },
-      { title: 'Plugins', url: 'plugins' },
-      { title: 'Development', url: 'development' }
+      { title: 'API', url: 'documentation/api' },
+      { title: 'Configuration', url: 'documentation/configuration' },
+      { title: 'Loaders', url: 'documentation/loaders' },
+      { title: 'Plugins', url: 'documentation/plugins' },
+      { title: 'Development', url: 'documentation/development' }
     ]
   },
   {
-    title: 'Donate',
-    url: '//opencollective.com/webpack'
+    title: 'Support',
+    url: 'support'
   },
   {
     title: 'Blog',
     url: '//medium.com/webpack'
   },
   {
-    title: 'Support',
-    url: 'support'
+    title: 'Donate',
+    url: '//opencollective.com/webpack'
   }
 ];
 
