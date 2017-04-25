@@ -8,7 +8,9 @@ contributors:
   - johnstew
 ---
 
-*webpack* is a _module bundler_ for modern JavaScript applications. It is [incredibly configurable](/configuration), but to get started you only need to understand **Four Core Concepts**: entry, output, loaders, and plugins.
+*webpack* is a _module bundler_ for modern JavaScript applications. When webpack processes your application, it recursively builds a _dependency graph_ that includes every module your application needs, then packages all of those modules into a small number of _bundles_ - often, just one - to be loaded by the browser.
+
+It is [incredibly configurable](/configuration), but to get started you only need to understand **Four Core Concepts**: entry, output, loaders, and plugins.
 
 This document is intended to give a **high-level** overview of these concepts, while providing links to detailed concept specific use-cases.
 
