@@ -4,6 +4,7 @@ sort: 60
 contributors:
   - ndelangen
   - chrisVillanueva
+  - sokra
 ---
 
 > es6 modules
@@ -52,6 +53,7 @@ This means dynamic requires are supported but will cause all possible modules to
 ## `require.context`
 
 You can create your own context with the `require.context()` function.
+
 It allows you to pass in a directory to search, a flag indicating whether subdirectories should be searched
 too, and a regular expression to match files against.
 
@@ -74,6 +76,8 @@ require.context("./test", false, /\.test\.js$/);
 require.context("../", true, /\.stories\.js$/);
 // a context with all files in the parent folder and descending folders ending with `.stories.js`.
 ```
+
+W> The arguments passed to `require.context` must be literals!
 
 
 ### context module API
