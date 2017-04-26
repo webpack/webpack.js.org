@@ -178,7 +178,7 @@ this.callback(
 
 ### `this.cacheable`
 
-一个可是设置是否可以缓存的标志：
+可设置是否可缓存标志的一个函数：
 
 ```typescript
 cacheable(flag = true: boolean)
@@ -286,7 +286,7 @@ emitError(message: string)
 loadModule(request: string, callback: function(err, source, sourceMap, module))
 ```
 
-对于一个模块解析给定的请求，应用所有配置的loader并且利用生成的source，即sourceMap和模块实例（通常是f[`NormalModule`](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js)的一个实例），来进行回调。如果你需要知道其他模块的源代码来生成结果的话，你可以使用这个函数。
+对于将给定的 request 解析到一个模块，应用所有配置的loader并且利用生成的source，即sourceMap和模块实例（通常是f[`NormalModule`](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js)的一个实例），来进行回调。如果你需要知道其他模块的源代码来生成结果的话，你可以使用这个函数。
 
 
 ### `this.resolve`
