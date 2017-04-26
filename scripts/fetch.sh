@@ -22,3 +22,4 @@ cp -rf ./content/plugins/ ./generated/plugins
 ./scripts/fetch_package_names.js "webpack-contrib" "-webpack-plugin" | ./scripts/fetch_package_files.js "README.md" "./generated/plugins"
 
 ./scripts/fetch_package_names.js "babel" "babel-loader" | ./scripts/fetch_package_files.js "README.md" "./generated/loaders"
+./scripts/fetch_package_names.js "peerigon" "extract-loader" | ./scripts/fetch_package_files.js "README.md" "./generated/loaders"
