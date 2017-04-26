@@ -14,6 +14,8 @@ contributors:
   - howdy39
   - selbekk
   - ndelangen
+  - michael-ciniawsky
+  - rouzbeh84
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -621,32 +623,4 @@ Loaders are now cacheable by default. Loaders must opt-out if they are not cache
 webpack 1 only supports `JSON.stringify`-able options for loaders.
 webpack 2 now supports any JS object as loader options.
 
-Using complex options comes with one restriction. You may need to have a `ident` for the option object to make it referenceable by other loaders.
-
-Having an `ident` on the options object means to be able to reference this options object in inline loaders. Here is an example:
-
-`require("some-loader??by-ident!resource")`
-
-``` js
-{
-  test: /.../,
-  loader: "...",
-  options: {
-    ident: "by-ident",
-    magic: () => return Math.random()
-  }
-}
-```
-
-This inline style should not be used by regular code, but it's often used by loader generated code.
-I. e. the `style-loader` generates a module that `require`s the remaining request (which exports the CSS).
-
-``` js
-// style-loader generated code (simplified)
-var addStyle = require("./add-style");
-var css = require("-!css-loader?{"modules":true}!postcss-loader??postcss-ident");
-
-addStyle(css);
-```
-
-So if you use complex options tell your users about the `ident`.
+T> The `ident` (Complex Options) is obsolete since webpack >= v2.2.1 and gets automatically added internally by webpack
