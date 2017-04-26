@@ -28,7 +28,7 @@ webpack 接受这两个参数来合并 chunk（优先合并含有重复的模块
 
 ## 多页面应用程序(Multi-Page-App)
 
-当你编译一个（真正的）多页面应用程序，想要在页面间分享共同的代码。事实上在 webpack 上非常容易：编译多个 entry 点：
+当你编译一个（真正的）多页面应用程序，想要在页面间共享通用的代码。事实上使用 webpack 会相当容易实现：编译多个 entry 点：
 
 `webpack p1=./page1 p2=./page2 p3=./page3 [name].entry-chunk.js`
 
@@ -45,9 +45,9 @@ module.exports = {
 }
 ```
 
-这会生成多个入口 chunk：`p1.entry.chunk.js`, `p2.entry.chunk.js` 和 `p3.entry.chunk.js` 。但是其余的 chunks 可以通过它们共享。
+这会生成多个入口 chunk：`p1.entry.chunk.js`, `p2.entry.chunk.js` 和 `p3.entry.chunk.js` 。但是其余的 chunks 可以在它们之间共享。
 
-如果你的 chunks 有共同的模块，这里有些很酷的插件来完成。[`CommonsChunkPlugin`](./commons-chunk-plugin)识别共同的模块并且把他们放入一个共同的 chunk 里。你需要在你的页面上添加两个 script 标签，一个共同 chunk 和一个入口 chunk。
+如果你的入口 chunks 之间具有通用的模块，这里有些很酷的插件来完成。[`CommonsChunkPlugin`](./commons-chunk-plugin)识别通用的模块并且把它们放入一个公共的 chunk 里。你需要在你的页面上添加两个 script 标签，一个公共 chunk 和一个入口 chunk。
 
 ``` javascript
 var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
