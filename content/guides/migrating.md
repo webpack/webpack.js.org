@@ -14,6 +14,8 @@ contributors:
   - howdy39
   - selbekk
   - ndelangen
+  - michael-ciniawsky
+  - rouzbeh84
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
