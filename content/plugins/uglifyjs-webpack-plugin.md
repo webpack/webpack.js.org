@@ -59,8 +59,8 @@ module.exports = {
 | 属性 | 类型 | 默认值 | 描述 |
 | --- | --- | --- | --- |
 | compress | boolean, object | true | 见 [UglifyJS 文档](http://lisperator.net/uglifyjs/compress)。 |
-| mangle | boolean, object | true | 见下节. |
-| beautify | boolean | false | 优化输出。 |
+| mangle | boolean, object | true | 见下节。 |
+| beautify | boolean | false | 美化输出。 |
 | output | 一个提供 UglifyJS [OutputStream](https://github.com/mishoo/UglifyJS2/blob/master/lib/output.js) 选项的对象 | | 更底层地访问 UglifyJS 输出。 |
 | comments | boolean, RegExp, function(astNode, comment) -> boolean | 默认保留注释（包括 `/*!`, `/**!`, `@preserve` or `@license`）。 | 注释相关的配置 |
 | extractComments | boolean, RegExp, function (astNode, comment) -> boolean, object | false | 是否将注释提取到单独的文件，见下节。 |
