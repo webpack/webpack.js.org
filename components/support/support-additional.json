@@ -1,0 +1,18 @@
+[
+  {
+    "id": 20000,
+    "name": "MoonMail",
+    "username": "moonmail",
+    "tier": "sponsor",
+    "avatar": "https://static.moonmail.io/moonmail-logo.svg",
+    "website": "https://moonmail.io/?utm_source=webpack.js.org"
+  },
+  {
+    "index": 20001,
+    "name": "MONEI",
+    "username": "monei",
+    "tier": "sponsor",
+    "avatar": "https://static.monei.net/monei-logo.svg",
+    "website": "https://monei.net/?utm_source=webpack.js.org"
+  }
+]
