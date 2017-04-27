@@ -85,6 +85,8 @@ stats: {
   reasons: true,
   // Add the source code of modules
   source: true,
+  // Show dependencies and origin of warnings/errors
+  stackTrace: true,
   // Add timing information
   timings: true,
   // Show which exports of a module are used
