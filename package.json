@@ -50,6 +50,7 @@
     "babel-core": "^6.10.4",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.16.0",
     "babel-preset-env": "^0.0.8",
     "babel-preset-react": "^6.11.1",
@@ -99,6 +100,7 @@
   "dependencies": {
     "preact": "^6.2.1",
     "preact-compat": "3.11.0",
+    "prop-types": "^15.5.8",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-router": "^2.8.1",
