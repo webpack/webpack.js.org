@@ -97,26 +97,6 @@ devtoolModuleFilenameTemplate: info => {
 If multiple modules would result in the same name, [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolfallbackmodulefilenametemplate) is used instead for these modules.
 
 
-## `output.hashFunction`
-
-The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm) are supported.
-
-
-## `output.hashDigest`
-
-The hashing algorithm to use, defaults to `'hex'`. All functions from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported.
-
-
-## `output.hashDigestLength`
-
-The prefix length of the hash digest to use, defaults to `20`.
-
-
-## `output.hashSalt`
-
-An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_input_encoding).
-
-
 ## `output.filename`
 
 `string`
@@ -178,6 +158,26 @@ The following substitutions are available in template strings (via webpack's int
 The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#output-hashdigestlength) to configure the length globally.
 
 T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
+
+
+## `output.hashFunction`
+
+The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm) are supported.
+
+
+## `output.hashDigest`
+
+The hashing algorithm to use, defaults to `'hex'`. All functions from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported.
+
+
+## `output.hashDigestLength`
+
+The prefix length of the hash digest to use, defaults to `20`.
+
+
+## `output.hashSalt`
+
+An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_input_encoding).
 
 
 ## `output.hotUpdateChunkFilename`
