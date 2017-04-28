@@ -3,9 +3,18 @@
 	position: relative;
 	color: #fff;
 	cursor: pointer;
+
+}
+
+.dropdown-language {
+	width: 20px;
+	height: 20px;
+	vertical-align: middle;
 }
 
 .dropdown-arrow {
+	vertical-align: middle;
+	
 	&:before {
 		display: inline-block;
 		margin-left: 5px;
@@ -17,10 +26,10 @@
 	display: none;
 	position: absolute;
 	width: 100%;
-	top: 40px;
-  left: 0;
-  right: 0;
-  margin: auto;
+	top: 45px;
+	left: -13px;
+	right: 0;
+	margin: auto;
 	background-color: #2B3A42;
 	z-index: 1;
 	text-align: center;
@@ -31,6 +40,12 @@
 
 		a:link, a:visited, a:hover {
 			color: #fff;
+		}
+
+		img {
+			width: 20px;
+			height: 20px;
+			// margin: 2px 0;
 		}
 	}
 }

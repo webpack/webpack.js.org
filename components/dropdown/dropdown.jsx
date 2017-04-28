@@ -1,12 +1,12 @@
 import React from 'react';
-import './dropdown-style';
 
 export default class Dropdown extends React.Component {
 
 	constructor(props, context) {
     super(props, context);
     this.state = {
-			isLanguageShow: false
+		isLanguageShow: false,
+		defaultLanguage: 'english',
     };
 	}
 
@@ -33,14 +33,18 @@ export default class Dropdown extends React.Component {
 					});
 				}}
 			>
-				{section.title}
-        <i className="dropdown-arrow"></i>
-        <div className={`dropdown-list ${activeList}`}>
+				<img className="dropdown-language" src={require("../../assets/language/" + this.state.defaultLanguage + ".png")}/>
+				<i className="dropdown-arrow"></i>
+				<div className={`dropdown-list ${activeList}`}>
 					<ul>
 						{
 							section.children.map((language) => {
 								return (
-									<li key={language.title}><a href={language.url}>{language.title}</a></li>
+									<li key={language.title}>
+										<a href={language.url}>
+											<img src={require("../../assets/language/" + language.title + ".png")}/>
+										</a>
+									</li>
 								);
 							})
 						}

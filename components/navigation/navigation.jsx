@@ -41,8 +41,8 @@ let Sections = [
   {
       title: 'Language',
       children: [
-        { title: 'English', url: 'https://webpack.js.org/' },
-        { title: '中文', url: 'https://doc.webpack-china.org/' }
+        { title: 'english', url: 'https://webpack.js.org/' },
+        { title: 'chinese', url: 'https://doc.webpack-china.org/' }
       ]
   }
 ];
