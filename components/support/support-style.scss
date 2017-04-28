@@ -28,4 +28,8 @@
       color:getColor(white);
     }
   }
+  &__missing {
+    display: flex;
+    align-items: center;
+  }
 }
