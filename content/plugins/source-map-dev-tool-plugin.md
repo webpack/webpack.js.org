@@ -5,7 +5,7 @@ contributors:
     - simon04
 ---
 
-Adds source maps for assets.
+This plugin enables a more fine grained control of [source maps added via the `devtool` option](/configuration/devtool/).
 
 ```javascript
 new webpack.SourceMapDevToolPlugin(options)
