@@ -212,15 +212,15 @@ This means that if you are using source maps for minimized code or want correct 
 
 ## `UglifyJsPlugin` warnings
 
-The `compress.warnings` option of the `UglifyJsPlugin` now defaults to `false` instead of `true`.
-This means that if you want to see uglifyjs warnings, you need to set `compress.warnings` to `true`.
+The `compress.warnings` option of the `UglifyJsPlugin` defaults to `true`.
+This means that if you want to hide uglifyjs warnings, you need to set `compress.warnings` to `false`.
 
 ``` diff
   devtool: "source-map",
   plugins: [
     new UglifyJsPlugin({
 +     compress: {
-+       warnings: true
++       warnings: false
 +     }
     })
   ]
