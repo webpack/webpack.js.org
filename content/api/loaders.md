@@ -139,8 +139,8 @@ require("./loader1?xyz!loader2!./resource?rrr");
 
 ### `this.query`
 
-1. 如果这个loader配置了 [`options`](/configuration/module/#useentry)对象的话，这将会是对于这个对象的引用。
-2. 如果loaders中没有 [`options`](/configuration/module/#useentry)，但是却被query字符串调用的话，这就会是一个以`?`开头的字符串。
+1. 如果这个loader配置了 [`options`](/configuration/module/#useentry)对象的话，`this.query`就是这个option对象的引用。
+2. 如果loaders中没有 [`options`](/configuration/module/#useentry)，以query字符串作为参数调用时，`this.query`就是一个以`?`开头的字符串。
 
 T> 使用`loader-utils`中的[`getOptions`方法](https://github.com/webpack/loader-utils#getoptions)来提取给定loader中的option。
 
@@ -342,7 +342,7 @@ emitFile(name: string, content: Buffer|string, sourceMap: {...})
 
 ## Deprecated context properties
 
-W> 这些属性强烈不建议使用，因为我们打算对它们进行移除。它们仍然列在此处用于文档目的。
+W> 强烈建议不要使用这些属性，因为我们打算移除它们。它们仍然列在此处用于文档目的。
 
 
 ### `this.exec`
