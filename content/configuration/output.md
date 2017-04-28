@@ -160,11 +160,6 @@ The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (de
 T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
 
 
-## `output.hashFunction`
-
-The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm) are supported.
-
-
 ## `output.hashDigest`
 
 The hashing algorithm to use, defaults to `'hex'`. All functions from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported.
@@ -173,6 +168,11 @@ The hashing algorithm to use, defaults to `'hex'`. All functions from Node.JS' [
 ## `output.hashDigestLength`
 
 The prefix length of the hash digest to use, defaults to `20`.
+
+
+## `output.hashFunction`
+
+The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm) are supported.
 
 
 ## `output.hashSalt`
