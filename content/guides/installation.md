@@ -15,6 +15,8 @@ The next section tells you how to install webpack locally in a project.
 
 ### Local Installation
 
+The latest webpack release is: [![GitHub release](https://img.shields.io/github/release/webpack/webpack.svg?style=flat-square)](https://github.com/webpack/webpack/releases)
+
 ``` bash
 npm install --save-dev webpack
 
