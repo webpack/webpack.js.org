@@ -18,6 +18,8 @@ Use the [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin.md) for a
 
 Choose a style of [source mapping](http://blog.teamtreehouse.com/introduction-source-maps) to enhance the debugging process. These values can affect build and rebuild speed dramatically.
 
+T> The webpack repository contains an [example showing the effect of all `devtool` variants](https://github.com/webpack/webpack/tree/master/examples/source-map). Those examples will likely help you to understand the differences.
+
  devtool                      | build | rebuild | production | quality
 ------------------------------|-------|---------|------------|--------------------------
  eval                         | +++   | +++     | no         | generated code
