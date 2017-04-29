@@ -2,6 +2,7 @@ import React from 'react';
 import Link from '../link/link';
 import Container from '../container/container';
 import Logo from '../logo/logo';
+import Dropdown from '../dropdown/dropdown';
 
 // TODO: Maybe by updating the routing scheme later on we can avoid hardcoding this?
 let Sections = [
@@ -36,6 +37,13 @@ let Sections = [
   {
       title: 'Support',
       url: 'support'
+  },
+  {
+      title: 'Language',
+      children: [
+        { title: 'english', url: 'https://webpack.js.org/' },
+        { title: 'chinese', url: 'https://doc.webpack-china.org/' }
+      ]
   }
 ];
 
@@ -61,14 +69,27 @@ export default class Navigation extends React.Component {
                 let active = this._isActive(section);
                 let activeMod = active ? 'navigation__link--active' : '';
 
-                return (
-                  <Link
-                    key={ `navigation__link-${section.title}` }
-                    className={ `navigation__link ${activeMod}` }
-                    to={ `/${section.url}` }>
-                    { section.title }
-                  </Link>
-                );
+                if (section.title === 'Language') {
+                  return (
+                    <Dropdown
+                      key={ `navigation__link-${section.title}` }
+                      section={section}
+                      activeMod={activeMod}
+                      className={ `navigation__link ${activeMod}` }
+                    >
+                    </Dropdown>
+                  );
+                }
+                else {
+                  return (
+                    <Link
+                      key={ `navigation__link-${section.title}` }
+                      className={ `navigation__link ${activeMod}` }
+                      to={ `/${section.url}` }>
+                      { section.title }
+                    </Link>
+                  );
+                }
               })
             }
           </nav>
