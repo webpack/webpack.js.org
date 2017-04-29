@@ -1,5 +1,5 @@
 ---
-title: How to write a plugin?
+title: Writing a Plugin
 sort: 2
 ---
 

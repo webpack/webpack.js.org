@@ -1,13 +1,17 @@
 ---
-title: webpack merge, tag and release process
+title: Webpack Release Process
 contributors:
   - d3viant0ne
   - sokra
 ---
 
+The release process for deploying webpack is actually quite simple. Read through the following steps, so you have a clear understanding of how it's done.
+
+
 ## Pull requests into `master`
 
 When you land commits on your `master` branch, select the _Create Merge-Commit_ option.
+
 
 ## Cut a release
 
