@@ -1,0 +1,33 @@
+[
+  {
+    "title": "Concepts",
+    "url": "concepts"
+  },
+  {
+    "title": "Guides",
+    "url": "guides"
+  },
+  {
+    "title": "Documentation",
+    "url": "documentation/configuration",
+    "children": [
+      { "title": "API", "url": "documentation/api" },
+      { "title": "Configuration", "url": "documentation/configuration" },
+      { "title": "Loaders", "url": "documentation/loaders" },
+      { "title": "Plugins", "url": "documentation/plugins" },
+      { "title": "Development", "url": "documentation/development" }
+    ]
+  },
+  {
+    "title": "Support",
+    "url": "support"
+  },
+  {
+    "title": "Blog",
+    "url": "//medium.com/webpack"
+  },
+  {
+    "title": "Donate",
+    "url": "//opencollective.com/webpack"
+  }
+]
