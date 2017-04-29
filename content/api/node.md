@@ -132,12 +132,10 @@ T> It’s not allowed to watch or run again before the existing watcher has been
 
 ### Invalidate `Watching`
 
-Manually invalidate the current compiling round, but don’t stop watching.
+Using `watching.invalidate`, you can manually invalidate the current compiling round, without stopping the watch process:
 
 ``` js
-watching.invalidate(() => {
-  console.warn("Invalidated.");
-});
+watching.invalidate();
 ```
 
 ## Stats Object
