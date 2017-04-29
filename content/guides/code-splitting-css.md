@@ -24,7 +24,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 ## Using `css-loader` and `style-loader`
 
-Install the [`css-loader`](/loaders/css-loader) and [`style-loader`](/loaders/style-loader):
+Install the [`css-loader`](/documentation/loaders/css-loader) and [`style-loader`](/documentation/loaders/style-loader):
 
 ``` bash
 npm install --save-dev css-loader style-loader

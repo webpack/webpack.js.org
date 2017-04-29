@@ -62,7 +62,7 @@ module.exports = {
 
 ## `imports-loader`
 
-[`imports-loader`](/loaders/imports-loader/) inserts necessary globals into the required legacy module.
+[`imports-loader`](/documentation/loaders/imports-loader/) inserts necessary globals into the required legacy module.
 For example, Some legacy modules rely on `this` being the `window` object. This becomes a problem when the module is executed in a CommonJS context where `this` equals `module.exports`. In this case you can override `this` using the `imports-loader`.
 
 __webpack.config.js__
@@ -117,7 +117,7 @@ module.exports = {
 
 ## `script-loader`
 
-The [`script-loader`](/loaders/script-loader/) evaluates code in the global context, just like you would add the code into a `script` tag. In this mode, every normal library should work. `require`, `module`, etc. are undefined.
+The [`script-loader`](/documentation/loaders/script-loader/) evaluates code in the global context, just like you would add the code into a `script` tag. In this mode, every normal library should work. `require`, `module`, etc. are undefined.
 
 W> The file is added as string to the bundle. It is not minimized by `webpack`, so use a minimized version. There is also no dev tool support for libraries added by this loader.
 
