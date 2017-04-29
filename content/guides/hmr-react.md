@@ -10,6 +10,8 @@ contributors:
   - drpicox
 ---
 
+W> The __Hot Module Replacement__ functionality is not intended for use in production. You should only use it in your development configuration/environment, please see the [building for production guide](/guides/production-build) for more information.
+
 As explained in detail on the [concept page](/concepts/hot-module-replacement), Hot Module Replacement (HMR) exchanges, adds, or removes modules while an application is running, without a page reload.
 HMR is particularly useful in applications using a single state tree
 since components are "dumb" and will reflect the latest application state, even
