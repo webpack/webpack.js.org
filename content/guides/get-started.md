@@ -202,4 +202,4 @@ T> You can pass custom parameters to webpack by adding two dashes to the `npm ru
 
 ## Conclusion
 
-Now that you have a basic build together, you should dig into the [basic concepts](/concepts) and [configuration](/configuration) of webpack to better understand its design. Also check out the [guides](/guides) to learn how to approach common problems. The [API](/api) section digs into the lower level features.
+Now that you have a basic build together, you should dig into the [basic concepts](/concepts) and [configuration](/documentation/configuration) of webpack to better understand its design. Also check out the [guides](/guides) to learn how to approach common problems. The [API](/api) section digs into the lower level features.

@@ -27,7 +27,7 @@ By default `[id].js` is used or a value inferred from [`output.filename`](#outpu
 
 `boolean` `string`
 
-Only used when [`target`](/configuration/target) is web, which uses JSONP for loading on-demand chunks, by adding script tags.
+Only used when [`target`](/documentation/configuration/target) is web, which uses JSONP for loading on-demand chunks, by adding script tags.
 
 Enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) loading of chunks. The following values are accepted...
 
@@ -66,7 +66,7 @@ devtoolLineToLine: { test: /\.js$/, include: 'src/utilities' }
 
 `string | function(info)`
 
-This option is only used when [`devtool`](/configuration/devtool) uses an options which requires module names.
+This option is only used when [`devtool`](/documentation/configuration/devtool) uses an options which requires module names.
 
 Customize the names used in each source map's `sources` array. This can be done by passing a template string or function. For example, when using `devtool: 'eval'`, this is the default:
 
@@ -103,7 +103,7 @@ If multiple modules would result in the same name, [`output.devtoolFallbackModul
 
 This option determines the name of each output bundle. The bundle is written to the directory specified by the [`output.path`](#output-path) option.
 
-For a single [`entry`](/configuration/entry-context#entry) point, this can be a static name.
+For a single [`entry`](/documentation/configuration/entry-context#entry) point, this can be a static name.
 
 ``` js
 filename: "bundle.js"
@@ -199,7 +199,7 @@ Here is no need to change it.
 
 `function`
 
-Only used when [`target`](/configuration/target) is web, which uses JSONP for loading hot updates.
+Only used when [`target`](/documentation/configuration/target) is web, which uses JSONP for loading hot updates.
 
 A JSONP function used to asynchronously load hot-update chunks.
 
@@ -225,7 +225,7 @@ Here is no need to change it.
 
 `string`
 
-Only used when [`target`](/configuration/target) is web, which uses JSONP for loading on-demand chunks.
+Only used when [`target`](/documentation/configuration/target) is web, which uses JSONP for loading on-demand chunks.
 
 A JSONP function name used to asynchronously load chunks or join multiple initial chunks (CommonsChunkPlugin, AggressiveSplittingPlugin).
 
@@ -423,7 +423,7 @@ Be aware that if `MyLibrary` isn't defined earlier your library will be set in g
  MyLibrary(_entry_return_);
  ```
 
-The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
+The dependencies for your library will be defined by the [`externals`](/documentation/configuration/externals/) config.
 
 
 ## `output.path`
@@ -523,7 +523,7 @@ See [this discussion](https://github.com/webpack/webpack/issues/2776#issuecommen
 
 `string`
 
-This option is only used when [`devtool`](/configuration/devtool) uses a SourceMap option which writes an output file.
+This option is only used when [`devtool`](/documentation/configuration/devtool) uses a SourceMap option which writes an output file.
 
 Configure how source maps are named. By default `"[file].map"` is used.
 

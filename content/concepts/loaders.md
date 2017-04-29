@@ -37,14 +37,14 @@ module.exports = {
 };
 ```
 
-Note that according to the [configuration options](/configuration#options), the following specifications define the identical loader usage:
+Note that according to the [configuration options](/documentation/configuration#options), the following specifications define the identical loader usage:
 
 ```js-with-links-with-details
-{test: /\.css$/, [loader](/configuration/module#rule-loader): 'css-loader'}
+{test: /\.css$/, [loader](/documentation/configuration/module#rule-loader): 'css-loader'}
 // or equivalently
-{test: /\.css$/, [use](/configuration/module#rule-use): 'css-loader'}
+{test: /\.css$/, [use](/documentation/configuration/module#rule-use): 'css-loader'}
 // or equivalently
-{test: /\.css$/, [use](/configuration/module#rule-use): {
+{test: /\.css$/, [use](/documentation/configuration/module#rule-use): {
   loader: 'css-loader',
   options: {}
 }}
@@ -60,7 +60,7 @@ There are three ways to use loaders in your application:
 
 ### Via `webpack.config.js`
 
-[`module.rules`](/configuration/module/#module-rules) allows you to specify several loaders within your webpack configuration.
+[`module.rules`](/documentation/configuration/module/#module-rules) allows you to specify several loaders within your webpack configuration.
 This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader.
 
 ```js-with-links-with-details
@@ -128,4 +128,4 @@ Loaders follow the standard [module resolution](/concepts/module-resolution/). I
 
 By convention, loaders are usually named as `XXX-loader`, where `XXX` is the context name. For example, `json-loader`.
 
-The loader name convention and precedence search order is defined by [`resolveLoader.moduleTemplates`](/configuration/resolve#resolveloader) within the webpack configuration API.
+The loader name convention and precedence search order is defined by [`resolveLoader.moduleTemplates`](/documentation/configuration/resolve#resolveloader) within the webpack configuration API.

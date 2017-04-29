@@ -21,7 +21,7 @@ T> The new CLI for webpack is under development. New features are being added su
 webpack [--config webpack.config.js]
 ```
 
-See [configuration](/configuration) for the options in the configuration file.
+See [configuration](/documentation/configuration) for the options in the configuration file.
 
 
 ## Usage without config file
@@ -93,7 +93,7 @@ webpack -h
 
 **Build source using a config file**
 
-Specifies a different [configuration](/configuration) file to pick up. Use this if you want to specify something different than `webpack.config.js`, which is the default.
+Specifies a different [configuration](/documentation/configuration) file to pick up. Use this if you want to specify something different than `webpack.config.js`, which is the default.
 
 ```bash
 webpack --config example.config.js
@@ -101,7 +101,7 @@ webpack --config example.config.js
 
 **Specify build environment**
 
-Send [environment](/configuration/configuration-types) variable to be used in webpack config file.
+Send [environment](/documentation/configuration/configuration-types) variable to be used in webpack config file.
 
 
 ```bash
@@ -131,7 +131,7 @@ The analyse tool will take in the JSON and provide all the details of the build 
 
 ### Output Options
 
-This set of options allows you to manipulate certain [output](/configuration/output) parameters of your build.
+This set of options allows you to manipulate certain [output](/documentation/configuration/output) parameters of your build.
 
 | Parameter                    | Explanation                                                     | Input type | Default value                                         |
 |------------------------------|-----------------------------------------------------------------|------------|-------------------------------------------------------|
@@ -182,13 +182,13 @@ This set of options allows you to better debug the application containing assets
 | Parameter  | Explanation                                      | Input type | Default value |
 |------------|--------------------------------------------------|------------|---------------|
 | --debug    | Switch loaders to debug mode                     | boolean    | false         |
-| --devtool  | Define [source map type](/configuration/devtool/) for the bundled resources | string     | -             |
+| --devtool  | Define [source map type](/documentation/configuration/devtool/) for the bundled resources | string     | -             |
 | --progress | Print compilation progress in percentage         | boolean    | false         |
 
 
 ### Module Options
 
-These options allow you to bind [modules](/configuration/module/) as allowed by webpack
+These options allow you to bind [modules](/documentation/configuration/module/) as allowed by webpack
 
 | Parameter          | Explanation                        | Usage                       |
 |--------------------|------------------------------------|-----------------------------|
@@ -199,7 +199,7 @@ These options allow you to bind [modules](/configuration/module/) as allowed by 
 
 ### Watch Options
 
-These options makes the build [watch](/configuration/watch/) for changes in files of the dependency graph and perform the build again.
+These options makes the build [watch](/documentation/configuration/watch/) for changes in files of the dependency graph and perform the build again.
 
 | Parameter                 | Explanation                                             |
 |---------------------------|---------------------------------------------------------|
@@ -223,7 +223,7 @@ These options allow you to manipulate optimisations for a production build using
 
 ### Resolve Options
 
-These allow you to configure the webpack [resolver](/configuration/resolve/) with aliases and extensions.
+These allow you to configure the webpack [resolver](/documentation/configuration/resolve/) with aliases and extensions.
 
 | Parameter              | Explanation                                             | Example                                     |
 |------------------------|---------------------------------------------------------|---------------------------------------------|
@@ -234,7 +234,7 @@ These allow you to configure the webpack [resolver](/configuration/resolve/) wit
 
 ### Stats Options
 
-These options allow webpack to display various [stats](/configuration/stats/) and style them differently in the console output.
+These options allow webpack to display various [stats](/documentation/configuration/stats/) and style them differently in the console output.
 
 | Parameter               | Explanation                                                        | Type    |
 |-------------------------|--------------------------------------------------------------------|---------|
@@ -265,13 +265,13 @@ These options allow webpack to display various [stats](/configuration/stats/) an
 | --define              | Define any free var in the bundle, see [shimming](/guides/shimming) | --define process.env.NODE_ENV='development' |
 | --hot                 | Enables [Hot Module Replacement](/concepts/hot-module-replacement) [Uses HotModuleReplacementPlugin] | --hot=true                                  |
 | --labeled-modules     | Enables labeled modules [Uses LabeledModulesPlugin]              |                                             |
-| --plugin              | Load this [plugin](/configuration/plugins/)                      |                                             |
+| --plugin              | Load this [plugin](/documentation/configuration/plugins/)                      |                                             |
 | --prefetch            | Prefetch the particular file                                     | --prefetch=./files.js                       |
 | --provide             | Provide these modules as free vars in all modules, see [shimming](/guides/shimming) | --provide jQuery=jquery                     |
 | --records-input-path  | Path to the records file (reading)                               |                                             |
 | --records-output-path | Path to the records file (writing)                               |                                             |
 | --records-path        | Path to the records file                                         |                                             |
-| --target              | The [targeted](/configuration/target/) execution environment     | --target='node'                             |
+| --target              | The [targeted](/documentation/configuration/target/) execution environment     | --target='node'                             |
 
 ### Shortcuts
 

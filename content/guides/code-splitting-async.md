@@ -250,7 +250,7 @@ When you add `bundle.js` in your HTML file and open it in your browser, the `0.b
 
 ### publicPath
 
-`output.publicPath` is an important option when using code-splitting, it is used to tell webpack where to load your bundles on-demand, see the [configuration documentation](/configuration/output/#output-publicpath).
+`output.publicPath` is an important option when using code-splitting, it is used to tell webpack where to load your bundles on-demand, see the [configuration documentation](/documentation/configuration/output/#output-publicpath).
 
 
 ### Chunk name

@@ -59,7 +59,7 @@ W> There are some issues with Source Maps in Chrome. [We need your help!](https:
 
 `nosources-source-map` - A SourceMap is created without the `sourcesContent` in it. It can be used to map stack traces on the client without exposing all of the source code.
 
-T> See [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilename) to customize the filenames of generated Source Maps.
+T> See [`output.sourceMapFilename`](/documentation/configuration/output#output-sourcemapfilename) to customize the filenames of generated Source Maps.
 
 ?> This page needs more information to make it easier for users to choose a good option.
 

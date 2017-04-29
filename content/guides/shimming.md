@@ -142,7 +142,7 @@ eval("GLOBAL_CONFIG = {};");
 
 ## `noParse` option
 
-When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module as [`noParse`](/configuration/module/#module-noparse). Then `webpack` will just include the module without parsing it, which can be used to improve the build time.
+When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module as [`noParse`](/documentation/configuration/module/#module-noparse). Then `webpack` will just include the module without parsing it, which can be used to improve the build time.
 
 W> Any feature requiring the AST, like the `ProvidePlugin`, will not work.
 

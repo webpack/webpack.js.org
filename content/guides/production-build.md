@@ -44,14 +44,14 @@ module.exports = {
 };
 ```
 
-Thus, depending on the [devtool options](/configuration/devtool), Source Maps are generated.
+Thus, depending on the [devtool options](/documentation/configuration/devtool), Source Maps are generated.
 
 
 ### Source Maps
 
 We encourage you to have source maps enabled in production, as they are useful for debugging as well as running benchmark tests. webpack can generate inline source maps within bundles or as separate files.
 
-In your configuration, use the `devtool` object to set the Source Map type. We currently support seven types of source maps. You can find more information about them in our [configuration](/configuration/devtool) documentation page (`cheap-module-source-map` is one of the simpler options, using a single mapping per line).
+In your configuration, use the `devtool` object to set the Source Map type. We currently support seven types of source maps. You can find more information about them in our [configuration](/documentation/configuration/devtool) documentation page.
 
 
 ### Node Environment Variable
