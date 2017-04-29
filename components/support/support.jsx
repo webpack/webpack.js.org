@@ -13,14 +13,13 @@ export default class Support extends React.Component {
   //   ]).isRequired
   // };
 
-  state = {
-    supporters: [],
-    error: false
-  }
-
   render() {
     let { number, type } = this.props;
-    let { supporters } = this.state;
+    let supporters = require(`./support-${type}.json`);
+
+    if (type === 'sponsors') {
+      supporters.push(...Additional);
+    }
 
     return (
       <div className="support">
@@ -28,6 +27,7 @@ export default class Support extends React.Component {
           supporters.slice(0, number).map((supporter, index) => (
             <a key={ supporter.id }
                className="support__item"
+               title={ supporter.username }
                target="_blank"
                href={ supporter.website || `https://opencollective.com/${supporter.username}` }>
               <img
@@ -46,14 +46,5 @@ export default class Support extends React.Component {
         </div>
       </div>
     );
-  }
-
-  componentWillMount() {
-    let { type } = this.props;
-
-    fetch(`https://opencollective.com/webpack/${type}.json`)
-      .then(response => response.json())
-      .then(json => this.setState({ supporters: json.concat(Additional) }))
-      .catch(error => this.setState({ error: true }));
   }
 }
