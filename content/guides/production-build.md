@@ -21,8 +21,8 @@ The following article describes the best practices and tools to use when using w
 
 Running `webpack -p` (or equivalently `webpack --optimize-minimize --define process.env.NODE_ENV="'production'"`). This performs the following steps:
 
-- Minification using `UglifyJsPlugin`
-- Runs the `LoaderOptionsPlugin` (see its [documentation](/plugins/loader-options-plugin))
+- Minification using [`UglifyJsPlugin`](/documentation/plugins/uglifyjs-webpack-plugin)
+- Runs the [`LoaderOptionsPlugin`](/documentation/plugins/loader-options-plugin)
 - Sets the NodeJS environment variable triggering certain packages to compile differently
 
 
@@ -56,7 +56,7 @@ In your configuration, use the `devtool` object to set the Source Map type. We c
 
 ### Node Environment Variable
 
-Running `webpack -p` (or `--define process.env.NODE_ENV="'production'"`) invokes the [`DefinePlugin`](/plugins/define-plugin) in the following way:
+Running `webpack -p` (or `--define process.env.NODE_ENV="'production'"`) invokes the [`DefinePlugin`](/documentation/plugins/define-plugin) in the following way:
 
 ```js
 // webpack.config.js

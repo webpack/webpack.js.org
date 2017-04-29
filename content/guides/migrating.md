@@ -577,7 +577,7 @@ module: {
 
 There are some new CLI options for you to use:
 
-`--define process.env.NODE_ENV="production"` See [`DefinePlugin`](/plugins/define-plugin/).
+`--define process.env.NODE_ENV="production"` See [`DefinePlugin`](/documentation/plugins/define-plugin/).
 
 `--display-depth` displays the distance to the entry point for each module.
 

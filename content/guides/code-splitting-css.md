@@ -52,7 +52,7 @@ webpack can help with this problem by bundling the CSS separately using the `Ext
 
 ## Using `ExtractTextWebpackPlugin`
 
-Install the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) plugin as follows
+Install the [`ExtractTextWebpackPlugin`](/documentation/plugins/extract-text-webpack-plugin) plugin as follows
 
 ``` bash
 npm install --save-dev extract-text-webpack-plugin

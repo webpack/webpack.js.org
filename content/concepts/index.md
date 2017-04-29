@@ -136,7 +136,7 @@ const config = {
 module.exports = config;
 ```
 
-There are many plugins that webpack provides out of the box! Check out our [list of plugins](/plugins) for more information.
+There are many plugins that webpack provides out of the box! Check out our [list of plugins](/documentation/plugins) for more information.
 
 Using plugins in your webpack config is straight-forward, however there are many use-cases that are worth discussing further.
 

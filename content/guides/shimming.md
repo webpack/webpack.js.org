@@ -30,7 +30,7 @@ module.exports = {
 
 ## `ProvidePlugin`
 
-The [`ProvidePlugin`](/plugins/provide-plugin) makes a module available as a variable in every other module required by `webpack`. The module is required only if you use the variable.
+The [`ProvidePlugin`](/documentation/plugins/provide-plugin) makes a module available as a variable in every other module required by `webpack`. The module is required only if you use the variable.
 Most legacy modules rely on the presence of specific globals, like jQuery plugins do on `$` or `jQuery`. In this scenario, you can configure webpack to prepend `var $ = require(“jquery”)` every time it encounters the global `$` identifier.
 
 ```javascript
@@ -96,7 +96,7 @@ module.exports = {
 
 ## `exports-loader`
 
-Let's say a library creates a global variable that it expects its consumers to use; In this case, we can use [`exports-loader`](/loaders/exports-loader/), to export that global variable in CommonJS format. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
+Let's say a library creates a global variable that it expects its consumers to use; In this case, we can use [`exports-loader`](/documentation/loaders/exports-loader/), to export that global variable in CommonJS format. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
 
 __webpack.config.js__
 
