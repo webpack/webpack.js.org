@@ -44,7 +44,7 @@ new webpack.ProvidePlugin({
 })
 ```
 
-### Use Lodash
+### Use map from Lodash
 
 ```javascript
 new webpack.ProvidePlugin({
