@@ -83,7 +83,7 @@ if ('false') { // <-- 'false' from DEBUG is taken
 
 The third-party [`DotenvPlugin`](https://github.com/mrsteele/dotenv-webpack) (`dotenv-webpack`) allows you to expose (a subset of) [dotenv variables](https://www.npmjs.com/package/dotenv):
 
-```conf
+```
 // .env
 DB_HOST=127.0.0.1
 DB_PASS=foobar
