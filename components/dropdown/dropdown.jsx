@@ -1,48 +1,34 @@
 import React from 'react';
 
 export default class Dropdown extends React.Component {
-
-	constructor(props, context) {
-    super(props, context);
-    this.state = {
-		isLanguageShow: false,
-		defaultLanguage: 'english',
-    };
-	}
+	state = {
+		active: false
+  };
 
 	render() {
-
-		let {
-			section,
-			activeMod
-		} = this.props;
-
-		let activeList = (this.state.isLanguageShow) ? "dropdown-list-show" : "";
+		let { className = '', items = [] } = this.props;
+		let activeMod = this.state.active ? "dropdown__list--active" : "";
 
 		return (
 			<div
-				className={ `navigation__link ${activeMod} dropdown` }
-				onMouseOver={() => {
-					this.setState({
-						isLanguageShow: true
-					});
-				}}
-				onMouseLeave={() => {
-					this.setState({
-						isLanguageShow: false
-					});
-				}}
-			>
-				<img className="dropdown-language" src={require("../../assets/language/" + this.state.defaultLanguage + ".png")}/>
-				<i className="dropdown-arrow"></i>
-				<div className={`dropdown-list ${activeList}`}>
+				className={ `dropdown ${className}` }
+				onMouseOver={ this._toggle.bind(this, true) }
+				onMouseLeave={ this._toggle.bind(this, false) }>
+				<img
+          className="dropdown__language"
+          src={ items[0].image } />
+
+				<i className="dropdown__arrow" />
+
+				<div className={ `dropdown__list ${activeMod}` }>
 					<ul>
 						{
-							section.children.map((language) => {
+							items.map(item => {
 								return (
-									<li key={language.title}>
-										<a href={language.url}>
-											<img src={require("../../assets/language/" + language.title + ".png")}/>
+									<li key={ item.title }>
+										<a href={ item.url }>
+                      <span>{ item.title }</span>
+											<img src={ item.image } />
 										</a>
 									</li>
 								);
@@ -54,4 +40,14 @@ export default class Dropdown extends React.Component {
 		);
 	}
 
+  /**
+   * Toggle visibility of dropdown items
+   *
+   * @param {bool} state - Whether to display or hide the items
+   */
+  _toggle(state = false) {
+    this.setState({
+      active: state
+    });
+  }
 }
