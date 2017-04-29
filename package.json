@@ -98,6 +98,7 @@
     "yaml-frontmatter-loader": "0.0.3"
   },
   "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
     "preact": "^6.2.1",
     "preact-compat": "3.11.0",
     "prop-types": "^15.5.8",

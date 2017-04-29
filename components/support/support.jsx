@@ -1,17 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Additional from './support-additional.json';
-import 'whatwg-fetch';
+import 'isomorphic-fetch';
 import './support-style';
 
 export default class Support extends React.Component {
-  static propTypes = {
-    number: PropTypes.number.isRequired,
-    type: PropTypes.oneOf([
-      'sponsors',
-      'backers'
-    ]).isRequired
-  };
+  // static propTypes = {
+  //   number: PropTypes.number.isRequired,
+  //   type: PropTypes.oneOf([
+  //     'sponsors',
+  //     'backers'
+  //   ]).isRequired
+  // };
 
   state = {
     supporters: [],
@@ -25,11 +25,11 @@ export default class Support extends React.Component {
     return (
       <div className="support">
         {
-          supporters.slice(0, number).map((supporter, i) => (
+          supporters.slice(0, number).map((supporter, index) => (
             <a key={ supporter.id }
                className="support__item"
                target="_blank"
-               href={ supporter.website }>
+               href={ supporter.website || `https://opencollective.com/${supporter.username}` }>
               <img
                 className={ `support__${type}-avatar` }
                 src={ supporter.avatar }
@@ -48,7 +48,7 @@ export default class Support extends React.Component {
     );
   }
 
-  componentDidMount() {
+  componentWillMount() {
     let { type } = this.props;
 
     fetch(`https://opencollective.com/webpack/${type}.json`)
