@@ -60,7 +60,7 @@ webpack([
 });
 ```
 
-T> webpack will **not** run the multiple configurations in parallel. Each configuration is only processed after the previous one has finished processing. To have webpack process them in parallel, you can use a third-party solution like [parallel-webpack](https://www.npmjs.com/package/parallel-webpack). 
+T> webpack will **not** run the multiple configurations in parallel. Each configuration is only processed after the previous one has finished processing. To have webpack process them in parallel, you can use a third-party solution like [parallel-webpack](https://www.npmjs.com/package/parallel-webpack).
 
 
 ## Compiler Instance
@@ -276,4 +276,4 @@ compiler.run((err, stats) => {
 });
 ```
 
-T> The output file system you provide needs to be compatible with Node’s own [`fs`](https://nodejs.org/api/fs.html) module interface. 
+T> The output file system you provide needs to be compatible with Node’s own [`fs`](https://nodejs.org/api/fs.html) module interface.
