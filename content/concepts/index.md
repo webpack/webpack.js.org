@@ -54,7 +54,7 @@ module.exports = {
 
 In the example above, we use the `output.filename` and the `output.path` properties to tell webpack the name of our bundle and where we want it to be emitted to.
 
-T> You may see the term **emitted** or **emit** used throughout our documentation and [plugin API](/api/plugins). This is a fancy term for "produced or discharged".
+T> You may see the term **emitted** or **emit** used throughout our documentation and [plugin API](/documentation/api/plugins). This is a fancy term for "produced or discharged".
 
 The `output` property has [many more configurable features](/documentation/configuration/output), but let's spend some time understanding some of the most common use cases for the `output` property.
 
@@ -105,7 +105,7 @@ There are more specific properties to define on loaders that we haven't yet cove
 
 ## Plugins
 
-Since Loaders only execute transforms on a per-file basis, `plugins` are most commonly used (but not limited to) performing actions and custom functionality on "compilations" or "chunks" of your bundled modules [(and so much more)](/concepts/plugins). The webpack Plugin system is [extremely powerful and customizable](/api/plugins).
+Since Loaders only execute transforms on a per-file basis, `plugins` are most commonly used (but not limited to) performing actions and custom functionality on "compilations" or "chunks" of your bundled modules [(and so much more)](/concepts/plugins). The webpack Plugin system is [extremely powerful and customizable](/documentation/api/plugins).
 
 In order to use a plugin, you just need to `require()` it and add it to the `plugins` array. Most plugins are customizable via options. Since you can use a plugin multiple times in a config for different purposes, you need to create an instance of it by calling it with `new`.
 

@@ -65,7 +65,7 @@ T> webpack will **not** run the multiple configurations in parallel. Each config
 
 ## Compiler Instance
 
-If you don’t pass the `webpack` runner function a callback, it will return a webpack `Compiler` instance. This instance can be used to manually trigger the webpack runner or have it build and watch for changes. Much like the [CLI](/api/cli/) Api. The `Compiler` instance provides the following methods:
+If you don’t pass the `webpack` runner function a callback, it will return a webpack `Compiler` instance. This instance can be used to manually trigger the webpack runner or have it build and watch for changes. Much like the [CLI](/documentation/api/cli/) Api. The `Compiler` instance provides the following methods:
 
 * `.run(callback)`
 * `.watch(watchOptions, handler)`
@@ -147,7 +147,7 @@ The `stats` object that is passed as a second argument of the [`webpack()`](#web
 * Module and Chunk information
 * and much more...
 
-The [webpack CLI](/api/cli) uses this information to display a nicely formatted output in your console.
+The [webpack CLI](/documentation/api/cli) uses this information to display a nicely formatted output in your console.
 
 This object exposes these methods:
 
@@ -184,9 +184,9 @@ All available options and presets are described in [Stats documentation](/docume
 
 ### `stats.toString(options)`
 
-Returns a formatted string of the compilation information (similar to [CLI](/api/cli) output).
+Returns a formatted string of the compilation information (similar to [CLI](/documentation/api/cli) output).
 
-Options are the same as [`stats.toJson(options)`](/api/node#stats-tojson-options-) with one addition:
+Options are the same as [`stats.toJson(options)`](/documentation/api/node#stats-tojson-options-) with one addition:
 
 ``` js
 stats.toString({
