@@ -182,7 +182,7 @@ The use of `System.import` in webpack [did not fit the proposed spec](https://gi
 
 ## `require.ensure()`
 
-W> `require.ensure()` is specific to webpack and superseded by `import()`. 
+W> `require.ensure()` is specific to webpack and superseded by `import()`.
 
 webpack statically parses for `require.ensure()` in the code while building. Any module that is referenced as a dependency or `require()`d within the callback function, will be added to a new chunk. This new chunk is written to an async bundle that is loaded on demand by webpack through jsonp.
 
@@ -194,6 +194,9 @@ require.ensure(dependencies: String[], callback: function(require), errorCallbac
 
 * `dependencies` is an array of strings where we can declare all the modules that need to be made available before all the code in the callback function can be executed.
 * `callback` is a function that webpack will execute once the dependencies are loaded. An implementation of the `require` function is sent as a parameter to this function. The function body can use this to further `require()` modules it needs for execution.
+
+W> Although the implementation of `require` is passed as an argument to the callback function, using an arbitrary name e.g. `require.ensure([], function (request) { request('someModule'); })` isn't handled by webpack's static parser. Use `require` instead: `require.ensure([], function (require) { require('someModule'); })`
+
 * optional: `errorCallback` is a function that is executed when webpack fails to load the dependencies.
 * optional: `chunkName` is a name given to the chunk created by this particular `require.ensure()`. By passing the same `chunkName` to various `require.ensure()` calls, we can combine their code into a single chunk, resulting in only one bundle that the browser must load.
 
