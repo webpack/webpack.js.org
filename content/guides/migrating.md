@@ -156,8 +156,7 @@ file with the [`json-loader`](https://github.com/webpack/json-loader).
 
 ## Loaders in configuration resolve relative to context
 
-In webpack 1 configured loaders resolve relative to the matched file.
-Since webpack 2 configured loaders resolve relative to the `context` option.
+In __webpack 1__, configured loaders resolve relative to the matched file. However, in __webpack 2__, configured loaders resolve relative to the `context` option.
 
 This solves some problems with duplicate modules caused by loaders when using `npm link` or referencing modules outside of the `context`.
 
@@ -179,7 +178,7 @@ You may remove some hacks to work around this:
 ```
 
 
-## `module.preLoaders` and `module.postLoaders` was removed
+## `module.preLoaders` and `module.postLoaders` were removed:
 
 ``` diff
   module: {
@@ -197,8 +196,7 @@ You may remove some hacks to work around this:
 
 ## `UglifyJsPlugin` sourceMap
 
-The `sourceMap` option of the `UglifyJsPlugin` now defaults to `false` instead of `true`.
-This means that if you are using source maps for minimized code or want correct line numbers for uglifyjs warnings, you need to set `sourceMap: true` for `UglifyJsPlugin`.
+The `sourceMap` option of the `UglifyJsPlugin` now defaults to `false` instead of `true`. This means that if you are using source maps for minimized code or want correct line numbers for uglifyjs warnings, you need to set `sourceMap: true` for `UglifyJsPlugin`.
 
 ``` diff
   devtool: "source-map",
