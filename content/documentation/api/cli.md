@@ -59,11 +59,11 @@ webpack src/index.js dist/bundle.js
 This will bundle your source code with entry as `index.js` and the output bundle file will have a path of `dist` and the filename will be `bundle.js`
 
 ```bash
-	| Asset     | Size    | Chunks      | Chunk Names |
-	|-----------|---------|-------------|-------------|
-	| bundle.js | 1.54 kB | 0 [emitted] | index       |
-	[0] ./src/index.js 51 bytes {0} [built]
-	[1] ./src/others.js 29 bytes {0} [built]
+    | Asset     | Size    | Chunks      | Chunk Names |
+    |-----------|---------|-------------|-------------|
+    | bundle.js | 1.54 kB | 0 [emitted] | index       |
+    [0] ./src/index.js 51 bytes {0} [built]
+    [1] ./src/others.js 29 bytes {0} [built]
 ```
 
 ```bash
@@ -73,12 +73,12 @@ webpack index=./src/index.js entry2=./src/index2.js dist/bundle.js
 This will form the bundle with both the files as separate entry points.
 
 ```bash
-	| Asset     | Size    | Chunks        | Chunk Names   |
-	|-----------|---------|---------------|---------------|
-	| bundle.js | 1.55 kB | 0,1 [emitted] | index, entry2 |
-	[0] ./src/index.js 51 bytes {0} [built]
-	[0] ./src/index2.js 54 bytes {1} [built]
-	[1] ./src/others.js 29 bytes {0} {1} [built]
+    | Asset     | Size    | Chunks        | Chunk Names   |
+    |-----------|---------|---------------|---------------|
+    | bundle.js | 1.55 kB | 0,1 [emitted] | index, entry2 |
+    [0] ./src/index.js 51 bytes {0} [built]
+    [0] ./src/index2.js 54 bytes {1} [built]
+    [1] ./src/others.js 29 bytes {0} {1} [built]
 ```
 
 
@@ -155,9 +155,9 @@ webpack index=./src/index.js index2=./src/index2.js --output-path='./dist' --out
 |--------------------------------------|---------|-------------|---------------|
 | index2740fdca26e9348bedbec.bundle.js |  2.6 kB | 0 [emitted] | index2        |
 | index740fdca26e9348bedbec.bundle.js  | 2.59 kB | 1 [emitted] | index         |
-	[0] ./src/others.js 29 bytes {0} {1} [built]
-	[1] ./src/index.js 51 bytes {1} [built]
-	[2] ./src/index2.js 54 bytes {0} [built]
+    [0] ./src/others.js 29 bytes {0} {1} [built]
+    [1] ./src/index.js 51 bytes {1} [built]
+    [2] ./src/index2.js 54 bytes {0} [built]
 ```
 
 ```bash
@@ -169,9 +169,9 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 |  index740fdca26e9348bedbec.bundle.js | 2.74 kB | 1 [emitted] | index         |
 |                        index2123.map | 2.95 kB | 0 [emitted] | index2        |
 |                         index123.map | 2.95 kB | 1 [emitted] | index         |
-	[0] ./src/others.js 29 bytes {0} {1} [built]
-	[1] ./src/index.js 51 bytes {1} [built]
-	[2] ./src/index2.js 54 bytes {0} [built]
+    [0] ./src/others.js 29 bytes {0} {1} [built]
+    [1] ./src/index.js 51 bytes {1} [built]
+    [2] ./src/index2.js 54 bytes {0} [built]
 ```
 
 
@@ -216,9 +216,9 @@ These options allow you to manipulate optimisations for a production build using
 
 | Parameter                 | Explanation                                            | Plugin used                          |
 |---------------------------|--------------------------------------------------------|--------------------------------------|
-| --optimize-max-chunks     | Try to keep the chunk count below a limit              | [LimitChunkCountPlugin](/plugins/limit-chunk-count-plugin) |
-| --optimize-min-chunk-size | Try to keep the chunk size above a limit               | [MinChunkSizePlugin](/plugins/min-chunk-size-plugin) |
-| --optimize-minimize       | Minimize javascript and switches loaders to minimizing | [UglifyJsPlugin](/plugins/uglifyjs-webpack-plugin/) & [LoaderOptionsPlugin](/plugins/loader-options-plugin/) |
+| --optimize-max-chunks     | Try to keep the chunk count below a limit              | [LimitChunkCountPlugin](/documentation/plugins/limit-chunk-count-plugin) |
+| --optimize-min-chunk-size | Try to keep the chunk size above a limit               | [MinChunkSizePlugin](/documentation/plugins/min-chunk-size-plugin) |
+| --optimize-minimize       | Minimize javascript and switches loaders to minimizing | [UglifyJsPlugin](/documentation/plugins/uglifyjs-webpack-plugin/) & [LoaderOptionsPlugin](/documentation/plugins/loader-options-plugin/) |
 
 
 ### Resolve Options
