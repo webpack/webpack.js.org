@@ -230,7 +230,7 @@ Conditions can be one of these:
 
 `{ or: [Condition] }`: Any Condition must match.
 
-`{ not: Condition }`: The Condition must NOT match.
+`{ not: [Condition] }`: All Conditions must NOT match.
 
 **Example:**
 
