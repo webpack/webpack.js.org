@@ -81,8 +81,8 @@ W> `DllReferencePlugin` and `DllPlugin` are used in _separate_ webpack configs.
 // webpack.vendor.config.js
 new webpack.DllPlugin({
   context: __dirname,
-  path: path.join(__dirname, "manifest.json"),
   name: "[name]_[hash]"
+  path: path.join(__dirname, "manifest.json"),
 })
 ```
 
@@ -90,27 +90,15 @@ new webpack.DllPlugin({
 // webpack.app.config.js
 new webpack.DllReferencePlugin({
   context: __dirname,
-  scope: "xyz",
   manifest: require("./manifest.json"),
   name: "./my-dll.js",
+  scope: "xyz",
   sourceType: "commonsjs2"
 })
 ```
 
 
 ## **Examples**
-
-### [vendor and app][examples-dll-app-and-vendor]
-
-_A config for vendor, and another config for app (most common use case.) Built scripts are used in example HTML file. Demonstrates library, multiple configs, minimal example._
-
-T> Single `DllPlugin` with a single `DllReferencePlugin`.
-
-### [sourceType and dependencies][examples-dll-source-type-and-dependencies]
-
-_Uses `libraryTarget` + `sourceType` `"commonjs2"` to create a vendor bundle, and a dependency bundle, on nodejs._
-
-T> Single `DllPlugin`, with multiple `DllReferencePlugins`.
 
 ### [vendor][examples-dll-vendor] and [user][examples-dll-user]
 
@@ -141,8 +129,6 @@ T> Multiple `DllPlugins` and multiple `DllReferencePlugins`.
 [examples-examples]: https://github.com/webpack/webpack/tree/master/examples
 [examples-dll-vendor]: https://github.com/webpack/webpack/tree/master/examples/dll
 [examples-dll-user]: https://github.com/webpack/webpack/tree/master/examples/dll-user
-[examples-dll-app-and-vendor]: https://github.com/webpack/webpack/tree/master/examples/dll-app-and-vendor
-[examples-dll-source-type-and-dependencies]: https://github.com/webpack/webpack/tree/master/examples/dll-source-type-and-dependencies/README.md
 [examples-explicit-vendor-chunk]: https://github.com/webpack/webpack/tree/master/examples/explicit-vendor-chunk/README.md
 
 [src-DllReferencePlugin]: https://github.com/webpack/tree/master/lib/DllReferencePlugin.js
