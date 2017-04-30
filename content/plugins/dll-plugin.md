@@ -81,8 +81,8 @@ W> `DllReferencePlugin` and `DllPlugin` are used in _separate_ webpack configs.
 // webpack.vendor.config.js
 new webpack.DllPlugin({
   context: __dirname,
-  path: path.join(__dirname, "manifest.json"),
   name: "[name]_[hash]"
+  path: path.join(__dirname, "manifest.json"),
 })
 ```
 
@@ -90,9 +90,9 @@ new webpack.DllPlugin({
 // webpack.app.config.js
 new webpack.DllReferencePlugin({
   context: __dirname,
-  scope: "xyz",
   manifest: require("./manifest.json"),
   name: "./my-dll.js",
+  scope: "xyz",
   sourceType: "commonsjs2"
 })
 ```
