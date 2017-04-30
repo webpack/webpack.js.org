@@ -72,7 +72,7 @@ T> [See an example use of mapped mode][examples-dll-source-type-and-dependencies
 
 
 
-# Usage
+## Usage
 
 W> `DllReferencePlugin` and `DllPlugin` are used in _separate_ webpack configs.
 
@@ -108,22 +108,25 @@ T> Multiple `DllPlugins` and multiple `DllReferencePlugins`.
 
 
 ### related
-- [code splitting example][examples-explicit-vendor-chunk]
+
+* [code splitting example][examples-explicit-vendor-chunk]
 
 
 
 ## More
 
-#### Source
-- [DllPlugin source][src-DllPlugin]
-- [DllReferencePlugin source][src-DllReferencePlugin]
-- [DllModuleFactory source][src-DllModuleFactory]
-- [ManifestPlugin source][src-ManifestPlugin]
+### Source
 
-#### Tests
-- [DllPlugin creation test][tests-DllPlugin-0]
-- [DllPlugin without scope test][tests-DllPlugin-2]
-- [DllReferencePlugin use Dll test][tests-DllPlugin-1]
+* [DllPlugin source][src-DllPlugin]
+* [DllReferencePlugin source][src-DllReferencePlugin]
+* [DllModuleFactory source][src-DllModuleFactory]
+* [ManifestPlugin source][src-ManifestPlugin]
+
+### Tests
+
+* [DllPlugin creation test][tests-DllPlugin-0]
+* [DllPlugin without scope test][tests-DllPlugin-2]
+* [DllReferencePlugin use Dll test][tests-DllPlugin-1]
 
 
 [examples-examples]: https://github.com/webpack/webpack/tree/master/examples
