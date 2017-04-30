@@ -19,9 +19,9 @@ The `DllPlugin` and `DllReferencePlugin` provide means to split bundles in a way
 
 ## `DllPlugin`
 
-* `path`: **absolute path** to the manifest json file (output)
-* `name`: name of the exposed dll function ([TemplatePaths][src-TemplatedPathPlugin]: `[hash]` & `[name]` )
 * `context` (optional): context of requests in the manifest file (defaults to the webpack context.)
+* `name`: name of the exposed dll function ([TemplatePaths][src-TemplatedPathPlugin]: `[hash]` & `[name]` )
+* `path`: **absolute path** to the manifest json file (output)
 
 ```javascript
 new webpack.DllPlugin(options)
@@ -38,11 +38,11 @@ Combine this plugin with `output.library` option to expose (aka, put into the gl
 ### `DllReferencePlugin`
 
 * `context`: (**absolute path**) context of requests in the manifest (or content property)
-* `scope` (optional): prefix which is used for accessing the content of the dll
+* `content` (optional): the mappings from request to module id (defaults to `manifest.content`)
 * `manifest` (object): an object containing `content` and `name`
 * `name` (optional): the name where the dll is exposed (defaults to `manifest.name`) (see also `externals`)
+* `scope` (optional): prefix which is used for accessing the content of the dll
 * `sourceType` (optional): how the dll is exposed ([libraryTarget][docs-libraryTarget])
-* `content` (optional): the mappings from request to module id (defaults to `manifest.content`)
 
 ```javascript
 new webpack.DllReferencePlugin(options)
@@ -74,7 +74,7 @@ T> [See an example use of mapped mode][examples-dll-source-type-and-dependencies
 
 # Usage
 
-W> DllReferencePlugin and DllPlugin are used in _separate_ webpack configs.
+W> `DllReferencePlugin` and `DllPlugin` are used in _separate_ webpack configs.
 
 
 ```javascript
@@ -104,19 +104,19 @@ new webpack.DllReferencePlugin({
 
 _A config for vendor, and another config for app (most common use case.) Built scripts are used in example HTML file. Demonstrates library, multiple configs, minimal example._
 
-T> Single DllPlugin with a single DllReferencePlugin.
+T> Single `DllPlugin` with a single `DllReferencePlugin`.
 
 ### [sourceType and dependencies][examples-dll-source-type-and-dependencies]
 
 _Uses `libraryTarget` + `sourceType` `"commonjs2"` to create a vendor bundle, and a dependency bundle, on nodejs._
 
-T> Single DllPlugin, with multiple DllReferencePlugins.
+T> Single `DllPlugin`, with multiple `DllReferencePlugins`.
 
 ### [vendor][examples-dll-vendor] and [user][examples-dll-user]
 
 _Two separate example folders. Demonstrates scope, and context._
 
-T> Multiple DllPlugins and multiple DllReferencePlugins.
+T> Multiple `DllPlugins` and multiple `DllReferencePlugins`.
 
 
 ### related
