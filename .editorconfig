@@ -5,6 +5,10 @@ root = true
 [*.{js}]
 charset = utf-8
 
+[*]
+trim_trailing_whitespace = true
+insert_final_newline = true
+
 # 4 space indentation
 [*.{md,js,jsx,scss,hbs}]
 indent_style = space

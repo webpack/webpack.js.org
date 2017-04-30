@@ -156,8 +156,7 @@ file with the [`json-loader`](https://github.com/webpack/json-loader).
 
 ## Loaders in configuration resolve relative to context
 
-In webpack 1 configured loaders resolve relative to the matched file.
-Since webpack 2 configured loaders resolve relative to the `context` option.
+In __webpack 1__, configured loaders resolve relative to the matched file. However, in __webpack 2__, configured loaders resolve relative to the `context` option.
 
 This solves some problems with duplicate modules caused by loaders when using `npm link` or referencing modules outside of the `context`.
 
@@ -179,7 +178,7 @@ You may remove some hacks to work around this:
 ```
 
 
-## `module.preLoaders` and `module.postLoaders` was removed
+## `module.preLoaders` and `module.postLoaders` were removed:
 
 ``` diff
   module: {
@@ -197,8 +196,7 @@ You may remove some hacks to work around this:
 
 ## `UglifyJsPlugin` sourceMap
 
-The `sourceMap` option of the `UglifyJsPlugin` now defaults to `false` instead of `true`.
-This means that if you are using source maps for minimized code or want correct line numbers for uglifyjs warnings, you need to set `sourceMap: true` for `UglifyJsPlugin`.
+The `sourceMap` option of the `UglifyJsPlugin` now defaults to `false` instead of `true`. This means that if you are using source maps for minimized code or want correct line numbers for uglifyjs warnings, you need to set `sourceMap: true` for `UglifyJsPlugin`.
 
 ``` diff
   devtool: "source-map",
@@ -618,35 +616,21 @@ Loaders are now cacheable by default. Loaders must opt-out if they are not cache
 
 ### Complex options
 
-webpack 1 only supports `JSON.stringify`-able options for loaders.
-webpack 2 now supports any JS object as loader options.
+__webpack v1__ only supports `JSON.stringify`-able options for loaders.
 
-Using complex options comes with one restriction. You may need to have a `ident` for the option object to make it referenceable by other loaders.
+__webpack v2__ now supports any JS object as loader options.
 
-Having an `ident` on the options object means to be able to reference this options object in inline loaders. Here is an example:
+Before [v2.2.1](https://github.com/webpack/webpack/releases/tag/v2.2.1) (i.e. from v2.0.0 through v2.2.0), using complex options required using `ident` for the `options` object to allow its reference from other loaders. __This was removed in v2.2.1__ and thus current migrations do not require any use of the `ident` key.
 
-`require("some-loader??by-ident!resource")`
-
-``` js
+```diff
 {
-  test: /.../,
-  loader: "...",
-  options: {
-    ident: "by-ident",
-    magic: () => return Math.random()
+  test: /\.ext/
+  use: {
+    loader: '...',
+    options: {
+-     ident: 'id',
+      fn: () => require('./foo.js')
+    }
   }
 }
 ```
-
-This inline style should not be used by regular code, but it's often used by loader generated code.
-I. e. the `style-loader` generates a module that `require`s the remaining request (which exports the CSS).
-
-``` js
-// style-loader generated code (simplified)
-var addStyle = require("./add-style");
-var css = require("-!css-loader?{"modules":true}!postcss-loader??postcss-ident");
-
-addStyle(css);
-```
-
-So if you use complex options tell your users about the `ident`.

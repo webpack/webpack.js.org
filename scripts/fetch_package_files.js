@@ -73,7 +73,9 @@ function fetchPackageFiles(options, finalCb) {
 
         if (body && file === 'README.md') {
           body = body
-            .replace(/^[^]*?<h2[^>]*>/m, '## ') // drop everything up to first <h2>
+            .replace(/^[^]*?<\/h1>/m, '') // drop everything up to first </h1>
+            .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-loader\/?)([)"])/g, '/loaders/$2/$3') // modify loader links
+            .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-plugin\/?)([)"])/g, '/plugins/$2/$3') // modify plugin links
             .replace(/<h2[^>]*>/g, '## ') // replace any <h2> with ##
             .replace(/<\/h2>/g, ''); // drop </h2>
         }
@@ -85,12 +87,14 @@ function fetchPackageFiles(options, finalCb) {
           title = title.replace(/I18N/, 'I18n');
         }
 
-        // TODO: push this type of to a script of its own to keep this generic
+        // TODO: push this type of stuff to a script of its own to keep this standard
         let headmatter = yamlHeadmatter({
           title: title,
           source: url,
           edit: [pkg.html_url, 'edit', branch, file].join('/'),
+          repo: pkg.html_url
         });
+
         return async.parallel(
           [
             fs.writeFile.bind(null,

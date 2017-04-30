@@ -17,6 +17,7 @@ import '../navigation/search-style';
 import '../sidebar-mobile/sidebar-mobile-style';
 import '../sidebar-item/sidebar-item-style';
 import '../logo/logo-style';
+import '../dropdown/dropdown-style.scss';
 
 export default props => {
   // Retrieve section data
@@ -29,7 +30,7 @@ export default props => {
         url
       }))
     }));
-
+  
   // Rename the root section ("webpack" => "Other") and push it to the end
   let rootIndex = sections.findIndex(section => section.title === 'webpack');
   let rootSection = sections.splice(rootIndex, 1)[0];

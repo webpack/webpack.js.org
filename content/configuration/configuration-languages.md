@@ -7,7 +7,7 @@ contributors:
   - tarang9211
 ---
 
-webpack lets you define you configuration files in any language. The list of supported file extensions can be found at the [node-interpret](https://github.com/js-cli/js-interpret) package. webpack with the help of [node-interpret](https://github.com/js-cli/js-interpret) will run your configuration through the language of your choice.
+webpack lets you define your configuration files in any language. The list of supported file extensions can be found at the [node-interpret](https://github.com/js-cli/js-interpret) package. webpack with the help of [node-interpret](https://github.com/js-cli/js-interpret) will run your configuration through the language of your choice.
 
 For example if you use **coffeescript**, your file would be as follows:
 

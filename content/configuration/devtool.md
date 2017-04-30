@@ -8,13 +8,17 @@ contributors:
   - lricoy
 ---
 
-This option controls if and how Source Maps are generated.
+This option controls if and how source maps are generated.
+
+Use the [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin.md) for a more fine grained configuration. See the [`source-map-loader`](/loaders/source-map-loader/) to deal with existing source maps.
 
 ## `devtool`
 
 `string` `false`
 
 Choose a style of [source mapping](http://blog.teamtreehouse.com/introduction-source-maps) to enhance the debugging process. These values can affect build and rebuild speed dramatically.
+
+T> The webpack repository contains an [example showing the effect of all `devtool` variants](https://github.com/webpack/webpack/tree/master/examples/source-map). Those examples will likely help you to understand the differences.
 
  devtool                      | build | rebuild | production | quality
 ------------------------------|-------|---------|------------|--------------------------
