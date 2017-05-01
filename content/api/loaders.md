@@ -35,7 +35,7 @@ module.exports = function(content) {
 ```javascript
 module.exports = function(content) {
     this.callback(null, someSyncOperation(content), sourceMaps, ast);
-    return; // always return undefined when calling callback()
+    return; // 当调用callback()时总是返回undefined
 };
 ```
 
@@ -139,15 +139,15 @@ require("./loader1?xyz!loader2!./resource?rrr");
 
 ### `this.query`
 
-1. In case the loader was configured with an [`options`](/configuration/module/#useentry) object, this will be a reference to the object.
-2. If the loader has no `options`, but was invoked with a query string, this will be a string starting with `?`.
+1. 如果这个loader配置了 [`options`](/configuration/module/#useentry)对象的话，`this.query`就是这个option对象的引用。
+2. 如果loaders中没有 [`options`](/configuration/module/#useentry)，以query字符串作为参数调用时，`this.query`就是一个以`?`开头的字符串。
 
-T> Use the [`getOptions` method from the `loader-utils`](https://github.com/webpack/loader-utils#getoptions) to extract the given loader options.
+T> 使用`loader-utils`中的[`getOptions`方法](https://github.com/webpack/loader-utils#getoptions)来提取给定loader中的option。
 
 
 ### `this.callback`
 
-A function that can be called synchronously or asynchronously in order to return multiple results. The expected arguments are:
+一个可以同步或者异步调用的可以返回多个结果的函数。预期的参数是：
 
 ```typescript
 this.callback(
@@ -158,17 +158,17 @@ this.callback(
 );
 ```
 
-1. The first argument must be an `Error` or `null`
-2. The second argument a `string` or a [`Buffer`](https://nodejs.org/api/buffer.html).
-3. Optional: The third argument must be a source map that is parsable by [this module](https://github.com/mozilla/source-map).
-4. Optional: `AST` can be an Abstract Syntax Tree of the given language, like [`ESTree`](https://github.com/estree/estree). This value is ignored by webpack itself, but useful to speed up the build time if you want to share common ASTs between loaders.
+1. 第一个参数必须是`Error`或者`null`
+2. 第二个参数是一个`string`或者 [`Buffer`](https://nodejs.org/api/buffer.html)。
+3. 可选的：第三个参数必须是一个可以被[这个模块](https://github.com/mozilla/source-map)解析的source map。
+4. 可选的：`AST`可以是给定语言的抽象语法树，比如[`ESTree`](https://github.com/estree/estree)。这个值会被webpack自身忽略掉，但是如果你想在多个loader之间共用AST的时候对于加速构建非常有用。
 
-In case this function is called, you should return undefined to avoid ambigious loader results.
+如果这个函数被调用的话，你应该返回undefined从而避免含糊的loader结果。
 
 
 ### `this.async`
 
-Tells the [loader-runner](https://github.com/webpack/loader-runner) that the loader intends to call back asynchronously. Returns `this.callback`.
+告诉 [loader-runner](https://github.com/webpack/loader-runner) 这个loader将会异步地回调。返回`this.callback`。
 
 
 ### `this.data`
@@ -178,7 +178,7 @@ Tells the [loader-runner](https://github.com/webpack/loader-runner) that the loa
 
 ### `this.cacheable`
 
-A function that sets the cacheable flag:
+可设置是否可缓存标志的一个函数：
 
 ```typescript
 cacheable(flag = true: boolean)
@@ -259,7 +259,7 @@ T> Loader 最初被设计为像 Babel 那样做转换工作。如果你编写了
 
 ### `this.sourceMap`
 
-Should a source map be generated. Since generating source maps can be an expensive task, you should check if source maps are actually requested.
+应该生成一个source map。因为生成source map可能是一个耗费资源的任务，你应该确认是否这些source map确实被请求。
 
 
 ### `this.emitWarning`
@@ -286,7 +286,7 @@ emitError(message: string)
 loadModule(request: string, callback: function(err, source, sourceMap, module))
 ```
 
-Resolves the given request to a module, applies all configured loaders and calls back with the generated source, the sourceMap and the module instance (usually an instance of [`NormalModule`](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js)). Use this function if you need to know the source code of another module to generate the result.
+对于将给定的 request 解析到一个模块，应用所有配置的loader并且利用生成的source，即sourceMap和模块实例（通常是f[`NormalModule`](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js)的一个实例），来进行回调。如果你需要知道其他模块的源代码来生成结果的话，你可以使用这个函数。
 
 
 ### `this.resolve`
@@ -302,7 +302,7 @@ resolve(context: string, request: string, callback: function(err, result: string
 
 ```typescript
 addDependency(file: string)
-dependency(file: string) // shortcut
+dependency(file: string) // 简写
 ```
 
 加入一个文件，这个文件将作为 Loader 的依赖（即它的变化会影响 Loader 的处理结果），使它们的任何变化可以被监听到。例如，[html-loader](https://github.com/webpack/html-loader) 就使用了这个技巧。当它发现 `src` 和 `src-set` 属性时，就会把这些属性上的 url 加入到被解析的 html 文件的依赖中。
@@ -342,7 +342,7 @@ emitFile(name: string, content: Buffer|string, sourceMap: {...})
 
 ## Deprecated context properties
 
-W> The usage of these properties is highly discouraged since we are planing to remove them from the context. They are still listed here for documentation purposes.
+W> 强烈建议不要使用这些属性，因为我们打算移除它们。它们仍然列在此处用于文档目的。
 
 
 ### `this.exec`
