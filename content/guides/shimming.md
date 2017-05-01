@@ -27,6 +27,7 @@ module.exports = {
 };
 ```
 
+
 ## `ProvidePlugin`
 
 The [`ProvidePlugin`](/plugins/provide-plugin) makes a module available as a variable in every other module required by `webpack`. The module is required only if you use the variable.
@@ -43,7 +44,7 @@ module.exports = {
 };
 ```
 
-This plugin is also capable of providing only a certain export of a module by configuring it with an array path using this format: `[module, child, ...children?]`. 
+This plugin is also capable of providing only a certain export of a module by configuring it with an array path using this format: `[module, child, ...children?]`.
 
 The following configuration will correctly import function `__assign` from TypeScript's `tslib` package, and provide it wherever it's invoked.
 
@@ -91,6 +92,7 @@ module.exports = {
   }
 };
 ```
+
 
 ## `exports-loader`
 
@@ -151,3 +153,8 @@ module.exports = {
   }
 };
 ```
+
+
+## Node Built-Ins
+
+Node built-ins, like `process`, can be polyfilled right directly from your configuration file without the use of any special loaders or plugins. See the [node configuration page](/configuration/node) for more information and examples.
