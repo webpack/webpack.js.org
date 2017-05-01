@@ -1,7 +1,6 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import Additional from './support-additional.json';
-import 'isomorphic-fetch';
 import './support-style';
 
 export default class Support extends React.Component {
