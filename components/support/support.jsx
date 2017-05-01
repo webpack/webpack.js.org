@@ -1,17 +1,8 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import Additional from './support-additional.json';
 import './support-style';
 
 export default class Support extends React.Component {
-  // static propTypes = {
-  //   number: PropTypes.number.isRequired,
-  //   type: PropTypes.oneOf([
-  //     'sponsors',
-  //     'backers'
-  //   ]).isRequired
-  // };
-
   render() {
     let { number, type } = this.props;
     let supporters = require(`./support-${type}.json`);
@@ -24,7 +15,7 @@ export default class Support extends React.Component {
       <div className="support">
         {
           supporters.slice(0, number).map((supporter, index) => (
-            <a key={ supporter.id }
+            <a key={ supporter.id || index }
                className="support__item"
                title={ supporter.username }
                target="_blank"
