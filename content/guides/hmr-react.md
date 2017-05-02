@@ -190,7 +190,8 @@ render(App);
 // Hot Module Replacement API
 if (module.hot) {
   module.hot.accept('./components/App', () => {
-    render(App)
+    const updatedApp = require('./components/App').default;
+    render(updatedApp)
   });
 }
 ```
