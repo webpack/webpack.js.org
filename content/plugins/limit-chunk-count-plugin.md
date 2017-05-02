@@ -4,31 +4,31 @@ contributors:
   - rouzbeh84
 ---
 
-While writing your code, you may have already added many code split points to load stuff on demand. After compiling you might notice that there are too many chunks that are too small - creating larger HTTP overhead. Luckily, webpack can post-process your chunks by merging them. You can provide two options as _objects_:
+当你在编写代码时，你可能已经添加了许多代码块分离点(code split points)来实现按需加载(load stuff on demand)。在编译完之后，你可能会注意到现在有许多很小的 chunk - 这产生了大量 HTTP 请求开销。幸运的是，webpack 可以后处理你的 chunk，并通过合并的方式减少请求。webpack 提供了两个_对象_选项：
 
-- Limit the maximum chunk count inline with `--optimize-max-chunks 15` or in your config as `new webpack.optimize.LimitChunkCountPlugin({maxChunks: 15})`
-- Limit the minimum chunk size inline with `--optimize-min-chunk-size 10000` or in your config as `new webpack.optimize.MinChunkSizePlugin({minChunkSize: 10000})`
+- 通过 `--optimize-max-chunks 15` 这种内联方式(inline)，来限制最大 chunk 数量，或者在配置文件中添加 `new webpack.optimize.LimitChunkCountPlugin({maxChunks: 15})`
+- 通过 `--optimize-min-chunk-size 10000` 这种内联方式(inline)，来限制最小 chunk 数量，或者在配置文件中添加 `new webpack.optimize.MinChunkSizePlugin({minChunkSize: 10000})`
 
-webpack will take care of it by merging chunks (it will prefer merging chunk that have duplicate modules). Nothing will be merged into the entry chunk, so as not to impact initial page loading time.
+webpack 接受这两个参数来合并 chunk（优先合并含有重复的模块的 chunk）。由于不会合并到入口 chunk(entry chunk)，所以不会影响页面初始化加载时间。
 
-## Single-Page-App
+## 单页面应用程序(Single-Page-App)
 
-A Single-Page-App is the type of web app webpack is designed and optimized for.
+单页面应用程序(SPA)是 web 应用程序的一种类型，webpack 旨在为其设计和优化。
 
-You may have split the app into multiple chunks, which are loaded at your router. The entry chunk only contains the router and some libraries, but no content. This works great while your user is navigating through your app, but for initial page load you need 2 round trips: One for the router and one for the current content page.
+你或许把应用程序拆分成多个 chunks，通过切换路由(router)的方式加载。入口 chunk 仅包含路由和 library，不会包含实际内容。当你的用户通过导航浏览你的应用程序的时候他可以很好的工作，但在初始化页面加载时，需要两次 HTTP 往返(round trips)：一次 HTTP 请求用于获取 router，另一次 HTTP 请求用于根据 router 获取当前页面内容。
 
-If you use the HTML5 History API to reflect the current content page in the URL, your server can know which content page will be requested by the client code. To save round trips to the server you can include the content chunk in the response: This is possible by just adding it as script tag. The browser will load both chunks parallel.
+如果你是使用了 HTML5 的 History API，通过 URL 来反映当前实际的页面内容，你的服务器就能知道，哪块是被客户端代码所请求的页面内容。为了节省「HTTP 往返次数(round trips)」你可以在 HTTP 响应(response)中加入「内容 chunk(content chunk)」：通过添加 script 标签这是可以办到的。浏览器会同时载入 chunk。
 
 ``` html
 <script src="entry-chunk.js" type="text/javascript" charset="utf-8"></script>
 <script src="3.chunk.js" type="text/javascript" charset="utf-8"></script>
 ```
 
-You can extract the chunk filename from the stats. ([stats-webpack-plugin](https://www.npmjs.com/package/stats-webpack-plugin) could be used for exports the build stats)
+你可以从 stats 提取 chunk 文件。（[stats-webpack-plugin](https://www.npmjs.com/package/stats-webpack-plugin)可以从 build stats 输出）
 
-## Multi-Page-App
+## 多页面应用程序(Multi-Page-App)
 
-When you compile a (real) multi page app, you want to share common code between the pages. In fact this is really easy with webpack: Just compile with multiple entry points:
+当你编译一个（真正的）多页面应用程序，想要在页面间共享通用的代码。事实上使用 webpack 会相当容易实现：编译多个 entry 点：
 
 `webpack p1=./page1 p2=./page2 p3=./page3 [name].entry-chunk.js`
 
@@ -45,9 +45,9 @@ module.exports = {
 }
 ```
 
-This will generate multiple entry chunks: `p1.entry.chunk.js`, `p2.entry.chunk.js` and `p3.entry.chunk.js`. But additional chunks can be shared by them.
+这会生成多个入口 chunk：`p1.entry.chunk.js`, `p2.entry.chunk.js` 和 `p3.entry.chunk.js` 。但是其余的 chunks 可以在它们之间共享。
 
-If your entry chunks have some modules in common, there is a cool plugin for this. The [`CommonsChunkPlugin`](./commons-chunk-plugin) identifies common modules and put them into a commons chunk. You need to add two script tags to your page, one for the commons chunk and one for the entry chunk.
+如果你的入口 chunks 之间具有通用的模块，这里有些很酷的插件来完成。[`CommonsChunkPlugin`](./commons-chunk-plugin)识别通用的模块并且把它们放入一个公共的 chunk 里。你需要在你的页面上添加两个 script 标签，一个公共 chunk 和一个入口 chunk。
 
 ``` javascript
 var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
@@ -66,9 +66,9 @@ module.exports = {
 }
 ```
 
-This will generate multiple entry chunks: `p1.entry.chunk.js`, `p2.entry.chunk.js` and `p3.entry.chunk.js`, plus one `commons.chunk.js`. First load `commons.chunk.js` and then one of the `xx.entry.chunk.js`.
+这会生成多个入口 chunk：`p1.entry.chunk.js`, `p2.entry.chunk.js` 和 `p3.entry.chunk.js`, 加上一个 `commons.chunk.js`。首先载入 `commons.chunk.js`，然后是 `xx.entry.chunk.js`。
 
-You can generate multiple commons chunks, by selecting the entry chunks. And you can nest commons chunks.
+你可以生成多个公用的 chunk，通过选择入口 chunk 来实现。并且你可以聚集这些共用 chunk。
 
 ``` javascript
 var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
@@ -96,7 +96,7 @@ module.exports = {
 // admin-page2.html: commons.js, admin-commons.js, ap2.js
 ```
 
-Advanced hint: You can run code inside the commons chunk:
+高级提示: 你可以在你的共用 chunk 里运行下面的代码
 
 ``` javascript
 var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
