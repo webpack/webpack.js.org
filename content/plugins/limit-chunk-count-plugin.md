@@ -47,7 +47,7 @@ module.exports = {
 
 This will generate multiple entry chunks: `p1.entry.chunk.js`, `p2.entry.chunk.js` and `p3.entry.chunk.js`. But additional chunks can be shared by them.
 
-If your entry chunks have some modules in common, there is a cool plugin for this. The [`CommonsChunkPlugin`](./commons-chunk-plugin) identifies common modules and put them into a commons chunk. You need to add two script tags to your page, one for the commons chunk and one for the entry chunk.
+If your entry chunks have some modules in common, there is a cool plugin for this. The [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) identifies common modules and put them into a commons chunk. You need to add two script tags to your page, one for the commons chunk and one for the entry chunk.
 
 ``` javascript
 var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
