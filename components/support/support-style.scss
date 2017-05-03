@@ -4,32 +4,52 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding:10px 5px;
+  padding: 1em 0.5em;
 
   &__item {
-    margin:0 5px;
+    position: relative;
+    margin: 0 5px 5px 5px;
+  }
+
+  &__sponsors-avatar {
+    height: 64px;
+  }
+
+  &__backers-avatar {
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    border: 2px solid white;
+    overflow: hidden;
+  }
+
+  &__outline {
+    position: absolute;
+    top: 0;
+    margin: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% - 2px);
+    border-radius: 50%;
+    border: 2px solid rgb(112, 202, 10);
   }
 
   &__bottom {
-    flex:0 0 100%;
-    margin-top:10px;
+    flex: 0 0 100%;
+    margin-top: 1em;
   }
 
   &__button {
-    display:inline-block;
-    padding:0.4em 1em;
-    border:2px solid getColor(denim);
-    color:getColor(denim);
-    border-radius:1.25em;
-    transition:all 250ms;
+    display: inline-block;
+    padding: 0.4em 1em;
+    text-transform: uppercase;
+    color: getColor(denim);
+    border: 1px solid getColor(denim);
+    border-radius: 1.25em;
+    transition: all 250ms;
 
     &:hover {
-      background:getColor(denim);
-      color:getColor(white);
+      background: getColor(denim);
+      color: getColor(white);
     }
-  }
-  &__missing {
-    display: flex;
-    align-items: center;
   }
 }

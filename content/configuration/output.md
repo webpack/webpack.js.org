@@ -396,7 +396,7 @@ And finally the output is:
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("MyLibrary", [], factory);
+		define([], factory);
 	else if(typeof exports === 'object')
 		exports["MyLibrary"] = factory();
 	else
