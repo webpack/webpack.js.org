@@ -5,6 +5,7 @@ contributors:
   - sokra
   - opiepj
   - simon04
+  - skipjack
 ---
 
 ## Introduction
@@ -30,16 +31,14 @@ new webpack.DllPlugin(options)
 Creates a `manifest.json` which is written to the given `path`. It contains mappings from require and import requests, to module ids. It is used by the [DllReferencePlugin](#DllReferencePlugin).
 
 
-W> Keep the `name` consistent with `output.library`.
-
-Combine this plugin with `output.library` option to expose (aka, put into the global scope) the dll function.
+Combine this plugin with [`output.library`][docs-library] option to expose (aka, put into the global scope) the dll function.
 
 
 ### `DllReferencePlugin`
 
 * `context`: (**absolute path**) context of requests in the manifest (or content property)
-* `content` (optional): the mappings from request to module id (defaults to `manifest.content`)
 * `manifest` (object): an object containing `content` and `name`
+* `content` (optional): the mappings from request to module id (defaults to `manifest.content`)
 * `name` (optional): the name where the dll is exposed (defaults to `manifest.name`) (see also `externals`)
 * `scope` (optional): prefix which is used for accessing the content of the dll
 * `sourceType` (optional): how the dll is exposed ([libraryTarget][docs-libraryTarget])
@@ -50,6 +49,7 @@ new webpack.DllReferencePlugin(options)
 
 References a dll manifest file to map dependency names to module ids, then requires them as needed using the internal `__webpack_require__` function.
 
+W> Keep the `name` consistent with `output.library`.
 
 ### Modes
 
@@ -68,17 +68,13 @@ The content of the dll is mapped to the current directory. If a required file ma
 
 Because this happens after resolving every file in the dll bundle, the same paths must be available for the consumer of the dll bundle. i.e. if the dll contains `lodash` and the file `abc`, `require("lodash")` and `require("./abc")` will be used from the dll, rather than building them into the main bundle.
 
-T> [See an example use of mapped mode][examples-dll-source-type-and-dependencies]
-
-
 
 ## Usage
 
 W> `DllReferencePlugin` and `DllPlugin` are used in _separate_ webpack configs.
 
-
+**webpack.vendor.config.js**
 ```javascript
-// webpack.vendor.config.js
 new webpack.DllPlugin({
   context: __dirname,
   name: "[name]_[hash]"
@@ -86,8 +82,8 @@ new webpack.DllPlugin({
 })
 ```
 
+**webpack.app.config.js**
 ```javascript
-// webpack.app.config.js
 new webpack.DllReferencePlugin({
   context: __dirname,
   manifest: require("./manifest.json"),
@@ -113,7 +109,7 @@ T> Multiple `DllPlugins` and multiple `DllReferencePlugins`.
 
 
 
-## More
+## References
 
 ### Source
 
@@ -145,4 +141,6 @@ T> Multiple `DllPlugins` and multiple `DllReferencePlugins`.
 [tests-DllPlugin-1]: https://github.com/webpack/webpack/tree/master/test/configCases/dll-plugin
 [tests-DllPlugin-2]: https://github.com/webpack/webpack/tree/master/test/configCases/dll-plugin/2-use-dll-without-scope/webpack.config.js
 
-[docs-libraryTarget]: https://webpack.js.org/configuration/output/#output-librarytarget
+[docs-externals]: /configuration/externals/
+[docs-library]: /concepts/output/#output-library
+[docs-libraryTarget]: /configuration/output/#output-librarytarget
