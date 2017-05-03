@@ -11,7 +11,7 @@ contributors:
 
 This guide documents how to split your bundle into chunks which can be downloaded asynchronously at a later time. For instance, this allows to serve a minimal bootstrap bundle first and to asynchronously additional features later.
 
-webpack supports two similar techniques to achieve this goal: using `import()` (preferred, ECMAScript proposal) and `require.ensure()` (legacy, webpack specific). 
+webpack supports two similar techniques to achieve this goal: using `import()` (preferred, ECMAScript proposal) and `require.ensure()` (legacy, webpack specific).
 
 
 ## Dynamic import: `import()`
@@ -174,9 +174,10 @@ module.exports = {
 };
 ```
 
-## `import` imports the entire module namespace
 
-Consider the following two examples:
+### `import()` imports the entire module namespace
+
+Note that the promise is [resolved with the module namespace](https://github.com/tc39/proposal-dynamic-import#proposed-solution). Consider the following two examples:
 
 ```js
 // Example 1: top-level import
@@ -185,7 +186,7 @@ import * as Component from './component';
 import('./component').then(Component => /* ... */);
 ```
 
-`Component` in both of those cases resolves to the same thing, meaning in the case of using `import()` with ES2015 modules you have to explicity access default and named exports:
+`Component` in both of those cases resolves to the same thing, meaning in the case of using `import()` with ES2015 modules you have to explicitly access default and named exports:
 
 ```js
 async function main() {
