@@ -127,6 +127,8 @@ module.exports = {
 
 This means that your library expects a dependency named `lodash` to be available in the consumer's environment.
 
+If your libary targets UMD, it's important to add all of the above mentioned ways of loading the external (`commonjs`, `commonjs2`, `amd` and `root`) as leaving one out will cause strange errors for a consumer trying to load your library in that environment.
+
 
 ### Add `libraryTarget`
 

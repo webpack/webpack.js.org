@@ -3,13 +3,18 @@ title: ProvidePlugin
 contributors:
   - sokra
   - simon04
+  - re-fort
 ---
 
 ```javascript
 new webpack.ProvidePlugin({identifier1: 'module1', /* ... */})
+// or
+new webpack.ProvidePlugin({identifier1: ['module1', 'property1'], /* ... */})
 ```
 
-Automatically loads modules. Whenever the `identifier` is encountered as free variable in a module, the `module` is loaded automatically and the `identifier` is filled with the exports of the loaded `module`.
+Automatically loads modules. Whenever the `identifier` is encountered as free variable in a module, the `module` is loaded automatically and the `identifier` is filled with the exports of the loaded `module` (of `property` in order to support named exports).
+
+W> For importing the default export of an ES2015 module, you have to specify the default property of module.
 
 ## Typical use-cases
 
@@ -36,5 +41,21 @@ Angular looks for `window.jQuery` in order to determine whether jQuery is presen
 ```javascript
 new webpack.ProvidePlugin({
   'window.jQuery': 'jquery'
+})
+```
+
+### Use map from Lodash
+
+```javascript
+new webpack.ProvidePlugin({
+  _map: ['lodash', 'map']
+})
+```
+
+### Use Vue.js
+
+```javascript
+new webpack.ProvidePlugin({
+  Vue: ['vue/dist/vue.esm.js', 'default']
 })
 ```

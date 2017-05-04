@@ -87,12 +87,14 @@ function fetchPackageFiles(options, finalCb) {
           title = title.replace(/I18N/, 'I18n');
         }
 
-        // TODO: push this type of to a script of its own to keep this generic
+        // TODO: push this type of stuff to a script of its own to keep this standard
         let headmatter = yamlHeadmatter({
           title: title,
           source: url,
           edit: [pkg.html_url, 'edit', branch, file].join('/'),
+          repo: pkg.html_url
         });
+
         return async.parallel(
           [
             fs.writeFile.bind(null,
