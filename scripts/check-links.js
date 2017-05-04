@@ -38,7 +38,8 @@ function checkLinks(args) {
 }
 
 function formatFailures(failures) {
-  return failures.map(function(failure) {
-    return failure.name + '\n' + failure.diag.actual + ' at ' + failure.diag.at;
+  return failures.map(failure => {
+    let { diag = {} } = failure;
+    return failure.name + '\n' + diag.actual + ' at ' + diag.at;
   }).join('\n\n');
 }
