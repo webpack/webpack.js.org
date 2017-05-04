@@ -122,7 +122,7 @@ T> `filename` has no effect when used without **lazy mode**.
 
 `object`
 
-Adds headers to all requests:
+Adds headers to all responses:
 
 ```js
 headers: {
