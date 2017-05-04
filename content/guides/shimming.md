@@ -27,9 +27,10 @@ module.exports = {
 };
 ```
 
+
 ## `ProvidePlugin`
 
-The [`ProvidePlugin`](/plugins/provide-plugin) 可以将模块作为一个变量，被 `webpack` 在其他每个模块中引用。只有你需要使用此变量的时候，这个模块才会被 require 进来。
+[`ProvidePlugin`](/plugins/provide-plugin) 可以将模块作为一个变量，被 `webpack` 在其他每个模块中引用。只有你需要使用此变量的时候，这个模块才会被 require 进来。
 多数之前遗留的模块，会依赖于已存在的某些特定全局变量，比如 jQuery 插件中的 `$` 或者 `jQuery`。在这种场景，你可以在每次遇到全局标识符 `$` 的时候，在 webpack 中预先设置 `var $ = require(“jquery”)`。
 
 ```javascript
@@ -43,9 +44,9 @@ module.exports = {
 };
 ```
 
-This plugin is also capable of providing only a certain export of a module by configuring it with an array path using this format: `[module, child, ...children?]`.
+此插件还能够通过使用以下格式，通过配置一个路径数组，提供导出某个模块：`[module, child, ...children?]`。
 
-The following configuration will correctly import function `__assign` from TypeScript's `tslib` package, and provide it wherever it's invoked.
+以下配置将正确从 TypeScript 的 `tslib` package 包中导入函数 `__assign`，并将其提供给调用之处。
 
 ```javascript
 module.exports = {
@@ -61,7 +62,7 @@ module.exports = {
 
 ## `imports-loader`
 
-[`imports-loader`](/loaders/imports-loader/)  在引用了之前遗留模块的代码中，插入必需的全局变量。
+[`imports-loader`](/loaders/imports-loader/)  在引用了之前的遗留模块中，插入必需的全局变量。
 例如，某些遗留模块依赖于 `this` 作为 `window` 对象，而在 CommonJS 上下文中执行的 `this` 等同于 `module.exports`。在这种情况下，你可以使用 `imports-loader` 来替换重写 `this`。
 
 __webpack.config.js__
@@ -91,6 +92,7 @@ module.exports = {
   }
 };
 ```
+
 
 ## `exports-loader`
 
@@ -151,6 +153,11 @@ module.exports = {
   }
 };
 ```
+
+
+## Node 内置
+
+Node 内置（如 `process`），可以直接从配置文件(configuration file)进行正确的 polyfill，而无需使用任何专门的 loader 或插件。有关更多信息和示例，请查看[node 配置页面](/configuration/node)。
 
 ***
 

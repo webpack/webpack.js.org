@@ -10,6 +10,8 @@ contributors:
   - drpicox
 ---
 
+W> The __Hot Module Replacement__ functionality is not intended for use in production. You should only use it in your development configuration/environment, please see the [building for production guide](/guides/production-build) for more information.
+
 正如在[概念](/concepts/hot-module-replacement)章节提到的，模块热替换(HMR)的作用是，在应用运行时，无需刷新页面，便能替换、增加、删除必要的模块。
 HMR 对于那些由单一状态树构成的应用非常有用。因为这些应用的组件是 "dumb" (相对于 "smart") 的，所以在组件的代码更改后，组件的状态依然能够正确反映应用的最新状态。
 
@@ -157,6 +159,8 @@ module.exports = {
 };
 ```
 
+W> If you are using the `options` key for your babel configuration, make sure you turn babel's `modules` feature off as mentioned in the [config section](https://webpack.js.org/guides/hmr-react/#babel-config).
+W> 如果你在 babel 配置中使用 `options` 键，请确保按照[配置章节](https://webpack.js.org/guides/hmr-react/#babel-config)中提到的方式去关闭 babel 的`模块`功能。。
 
 ### 应用程序代码
 

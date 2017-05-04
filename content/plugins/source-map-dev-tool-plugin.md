@@ -2,27 +2,37 @@
 title: SourceMapDevToolPlugin
 contributors:
     - johnnyreilly
+    - simon04
 ---
 
-?> Review this content
-
-Adds SourceMaps for assets.
+该插件可以对[通过 `devtool` 选项添加的 source map] 进行更细粒度的控制(fine grained control)。
 
 ```javascript
 new webpack.SourceMapDevToolPlugin(options)
 ```
 
-* `options.test` / `options.include` / `options.exclude` (`string|RegExp|Array`): Used to determine which assets should be processed. Each one can be a `RegExp` (asset filename is matched), a `string` (asset filename need to start with this string) or an `Array` of those (any of them need to be matched). `test` defaults to `.js` files if omitted.
-* `options.filename` (`string`): defines the output filename of the SourceMap. If no value is provided the SourceMap is inlined.
-* `options.append` (`string`): is appended to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the SourceMap file. `false` disables the appending.
-* `options.moduleFilenameTemplate` / `options.fallbackModuleFilenameTemplate` (`string`): see `output.devtoolModuleFilenameTemplate`.
-* `options.module` (`boolean`):  (defaults to `true`) When `false` loaders do not generate SourceMaps and the transformed code is used as source instead.
-* `options.columns` (`boolean`):  (defaults to `true`) When `false` column mappings in SourceMaps are ignored and a faster SourceMap implementation is used.
-* `options.lineToLine` (`{test: string|RegExp|Array, include: string|RegExp|Array, exclude: string|RegExp|Array}` matched modules uses simple (faster) line to line source mappings.
+* `options.test` / `options.include` / `options.exclude` (`string|RegExp|Array`)：用于决定应该处理哪个资源。其中每个都可以是一个`正则表达式`（匹配资源文件名），或一个`字符串`（资源文件名需要以此字符串开头），或一个`数组`（必须匹配数组中的每一项）。如果省略不设置，`test` 默认是 `.js` 文件。
+* `options.filename` (`string`)：定义 SourceMap 的输出文件名。如果没有提供值，则 source map 是内联的。
+* `options.append` (`string`): 追加到原始资源。通常以 `#sourceMappingURL` 注释。`[url]` 替换为 source map 文件的 URL。`false` 禁止追加。
+* `options.moduleFilenameTemplate` / `options.fallbackModuleFilenameTemplate` (`string`)：查看 [`output.devtoolModuleFilenameTemplate`](/configuration/output/#output-devtoolmodulefilenametemplate)。
+* `options.module` (`boolean`):  (defaults to `true`) 为 `false` 时， loader 不再生成 source map，并且转换过的代码被用作源码。
+* `options.columns` (`boolean`):  (defaults to `true`) 为 `false` 时，source map 中的列映射(column mapping)被忽略，并且使用更快速的 source map 实现。
+* `options.lineToLine` (`{test: string|RegExp|Array, include: string|RegExp|Array, exclude: string|RegExp|Array}`) 匹配的模块使用简单（快速）的行到行(line to line) source map。
 
-## Examples
+## 示例
 
-?> TODO
+### vendor 文件没有 Source Map
+
+```javascript
+new webpack.SourceMapDevToolPlugin({
+  filename: '[name].js.map',
+  exclude: ['vendor.js']
+})
+```
+
+## 参考链接
+
+* https://survivejs.com/webpack/building/source-maps/#-sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin-
 
 ***
 

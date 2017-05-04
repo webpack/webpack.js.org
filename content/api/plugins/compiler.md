@@ -99,7 +99,7 @@ webpack([config1, config2], (err, stats) => {
 | __`watch-run`__            | 监视后开始编译之前 | `compiler`           | 异步      |
 | __`normal-module-factory`__ | 创建 `NormalModuleFactory` 后 | `normalModuleFactory`| 同步      |
 | __`context-module-factory`__ | 创建 `ContextModuleFactory` 后 | `contextModuleFactory`| 同步      |
-| __`before-compile`__       | 编译参数创建完成      | `compilationParams`  | 同步       |
+| __`before-compile`__       | 编译参数创建完成      | `compilationParams`  | 异步      |
 | __`compile`__              | 创建新编译之前     | `compilationParams`  | 同步       |
 | __`this-compilation`__     | 发射 `compilation` 事件之前 | `compilation`        | 同步       |
 | __`compilation`__          | 编译创建完成      | `compilation`        | 同步       |

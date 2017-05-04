@@ -230,9 +230,9 @@ use: [
 
 `{ or: [Condition] }`：匹配数组中任何一个条件
 
-`{ not: Condition }`：必须排除这个条件
+`{ not: [Condition] }`：必须排除这个条件
 
-**Example:**
+**示例:**
 
 ``` js
 {

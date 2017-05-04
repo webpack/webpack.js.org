@@ -2,5 +2,7 @@ node_modules
 npm-debug.log
 build
 generated
+components/support/support-backers.json
+components/support/support-sponsors.json
 .antwar
 .idea

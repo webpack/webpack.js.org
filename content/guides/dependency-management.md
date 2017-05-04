@@ -4,6 +4,7 @@ sort: 60
 contributors:
   - ndelangen
   - chrisVillanueva
+  - sokra
 ---
 
 > es6 modules
@@ -51,7 +52,9 @@ Regular expression: /^.*\.ejs$/
 
 ## `require.context`
 
-你还可以使用 `require.context()` 方法来创建自己的（模块）上下文。你可以给这个方法传 3 个参数：要搜索的文件夹目录，是否还应该搜索它的子目录， 以及一个匹配文件的正则表达式。
+你还可以使用 `require.context()` 方法来创建自己的（模块）上下文。
+
+你可以给这个方法传 3 个参数：要搜索的文件夹目录，是否还应该搜索它的子目录，以及一个匹配文件的正则表达式。
 
 webpack 会在构建的时候解析代码中的 `require.context()` 。
 
@@ -72,6 +75,8 @@ require.context("./test", false, /\.test\.js$/);
 require.context("../", true, /\.stories\.js$/);
 // （创建了）一个包含了父级文件夹（包含子目录）下面，所有文件名以 `.stories.js` 结尾的文件的上下文。
 ```
+
+W> 传递给 `require.context` 的参数必须是字面量(literal)！
 
 
 ### 上下文模块 API

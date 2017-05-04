@@ -126,6 +126,8 @@ module.exports = {
 
 这意味着你的 library 需要一个名为 `lodash` 的依赖，这个依赖在用户的环境中必须可用。
 
+If your libary targets UMD, it's important to add all of the above mentioned ways of loading the external (`commonjs`, `commonjs2`, `amd` and `root`) as leaving one out will cause strange errors for a consumer trying to load your library in that environment.
+
 
 ### 增加 `libraryTarget`
 
