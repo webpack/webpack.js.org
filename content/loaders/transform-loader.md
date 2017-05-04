@@ -20,7 +20,7 @@ var x = require("!transform-loader/cacheable?brfs!./file.js"); // cacheable vers
 
 If you pass a number instead it will take the function from `this.options.transforms[number]`.
 
-## Webpack 2.x Config Example
+## webpack 2 config example
 
 ``` javascript
 module.exports = {
@@ -81,7 +81,7 @@ module.exports = {
 };
 ```
 
-## Webpack 1.x Config Example
+## webpack 1 config example
 
 ``` javascript
 module.exports = {

@@ -61,6 +61,23 @@ console.log(css); // {String}
 
 If there are SourceMaps, they will also be included in the result string.
 
+If, for one reason or another, you need to extract CSS as a
+plain string resource (i.e. not wrapped in a JS module) you
+might want to check out the [extract-loader](https://github.com/peerigon/extract-loader).
+It's useful when you, for instance, need to post process the CSS as a string.
+
+**webpack.config.js**
+```js
+{
+   test: /\.css$/,
+   use: [
+     'handlebars-loader', // handlebars loader expects raw resource string
+     'extract-loader',
+     'css-loader'
+   ]
+}
+```
+
 ## Options
 
 |Name|Type|Default|Description|
@@ -157,7 +174,7 @@ To disable `@import` resolving by `css-loader` set the option to `false`
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 ```
 
-> :waning: Use with caution, since this disables resolving for **all** `@import`s
+> _⚠️ Use with caution, since this disables resolving for **all** `@import`s, including css modules `composes: xxx from 'path/to/file.css'` feature._
 
 ### [`modules`](https://github.com/css-modules/css-modules)
 
@@ -378,22 +395,22 @@ import { className } from 'file.css';
 
 ### `importLoaders`
 
-The query parameter `importLoaders` allow to configure which loaders should be applied to `@import`ed resources.
-
-`importLoaders`: That many loaders after the css-loader are used to import resources.
+The query parameter `importLoaders` allows to configure how many loaders before `css-loader` should be applied to `@import`ed resources.
 
 **webpack.config.js**
 ```js
 {
   test: /\.css$/,
   use: [
+    'style-loader',
     {
       loader: 'css-loader',
       options: {
-        importLoaders: 1
+        importLoaders: 1 // 0 => no loaders (default); 1 => postcss-loader; 2 => postcss-loader, sass-loader
       }
     },
-    'postcss-loader'
+    'postcss-loader',
+    'sass-loader'
   ]
 }
 ```

@@ -58,6 +58,12 @@ var _ = require('lodash')
 var o = {foo: 'foo'}
 
 _.has(o, 'foo') // true
+
+// Post data to parent thread
+self.postMessage({foo: 'foo'}) 
+
+// Respond to message from parent thread
+self.addEventListener('message', function(event){ console.log(event); });  
 ```
 
 You can even use ES6 modules if you have the babel-loader configured:
@@ -69,6 +75,12 @@ import _ from 'lodash'
 let o = {foo: 'foo'}
 
 _.has(o, 'foo') // true
+
+// Post data to parent thread
+self.postMessage({foo: 'foo'}) 
+
+// Respond to message from parent thread
+self.addEventListener('message', (event) => { console.log(event); });
 ```
 
 ## Maintainers

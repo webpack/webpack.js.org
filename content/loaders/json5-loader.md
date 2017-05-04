@@ -13,7 +13,7 @@ $ npm install --save-dev json5-loader
 
 You can use the loader either
  * by configuring the `json5-loader` in the `module.loaders` object of the webpack configuration, or
- * by directly using the `json5!` prefix to the require statement.
+ * by directly using the `json5-loader!` prefix to the require statement.
 
 Suppose we have the following `json5` file
 ```js
@@ -67,13 +67,13 @@ Don't forget to polyfill require if you want to use it in Node.js. See the webpa
   <tbody>
     <tr>
       <td align="center">
-        <img width="150 height="150"
+        <img width="150" height="150"
         src="https://avatars.githubusercontent.com/sokra?v=3">
         <br />
         <a href="https://github.com/sokra">Tobias Koppers</a>
       </td>
       <td align="center">
-        <img width="150 height="150"
+        <img width="150" height="150"
         src="https://avatars.githubusercontent.com/gdi2290?v=3">
         <br />
         <a href="https://github.com/gdi2290">PatrickJS</a>
@@ -109,25 +109,25 @@ Don't forget to polyfill require if you want to use it in Node.js. See the webpa
         <br />
         <a href="https://github.com/stevelacy">Steve Lacy</a>
       </td>
-    <tr>
-  <tbody>
+    </tr>
+  </tbody>
 </table>
 
 ## LICENSE
 
 MIT
 
-[npm]: https://img.shields.io/npm/v/json-loader.svg
-[npm-url]: https://npmjs.com/package/json-loader
+[npm]: https://img.shields.io/npm/v/json5-loader.svg
+[npm-url]: https://npmjs.com/package/json5-loader
 
-[deps]: https://david-dm.org/webpack/json-loader.svg
-[deps-url]: https://david-dm.org/webpack/json-loader
+[deps]: https://david-dm.org/webpack-contrib/json5-loader.svg
+[deps-url]: https://david-dm.org/webpack-contrib/json5-loader
 
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
 
-[test]: http://img.shields.io/travis/webpack/json-loader.svg
-[test-url]: https://travis-ci.org/webpack/json-loader
+[test]: http://img.shields.io/travis/webpack-contrib/json5-loader.svg
+[test-url]: https://travis-ci.org/webpack-contrib/json5-loader
 
-[cover]: https://coveralls.io/repos/github/webpack/json-loader/badge.svg?branch=master
-[cover-url]: https://coveralls.io/github/webpack/json-loader?branch=master
+[cover]: https://codecov.io/gh/webpack-contrib/json5-loader/branch/master/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack-contrib/json5-loader
