@@ -11,15 +11,15 @@ npm install --save-dev url-loader
 
 ## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
 
-The `url` loader works like the `file` loader, but can return a Data Url if the file is smaller than a byte limit.
+The `url-loader` works like the [`file-loader`](https://github.com/webpack-contrib/file-loader), but can return a [data URL](https://tools.ietf.org/html/rfc2397) if the file is smaller than a byte limit.
 
-The limit can be specified with a query parameter. (Defaults to no limit)
+The limit can be specified with a query parameter (defaults to no limit).
 
-If the file is greater than the limit (in bytes) the [`file-loader`](https://github.com/webpack/file-loader) is used and all query parameters are passed to it.
+If the file is greater than the limit (in bytes) the `file-loader` is used and all query parameters are passed to it.
 
 ``` javascript
 require("url-loader?limit=10000!./file.png");
-// => DataUrl if "file.png" is smaller than 10kb
+// => data URL if "file.png" is smaller than 10kb
 
 require("url-loader?mimetype=image/png!./file.png");
 // => Specify mimetype for the file (Otherwise it's inferred from extension.)

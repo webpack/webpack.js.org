@@ -60,7 +60,6 @@ plugins: [
   <tbody>
 </table>
 
-
 [npm]: https://img.shields.io/npm/v/i18n-webpack-plugin.svg
 [npm-url]: https://npmjs.com/package/i18n-webpack-plugin
 
@@ -69,3 +68,9 @@ plugins: [
 
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+[test]: http://img.shields.io/travis/webpack-contrib/i18n-webpack-plugin.svg
+[test-url]: https://travis-ci.org/webpack-contrib/i18n-webpack-plugin
+
+[cover]: https://codecov.io/gh/webpack-contrib/i18n-webpack-plugin/branch/master/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack-contrib/i18n-webpack-plugin

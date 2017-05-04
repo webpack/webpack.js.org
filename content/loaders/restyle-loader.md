@@ -11,8 +11,6 @@ npm install --save-dev restyle-loader
 
 ## Usage
 
-### Lorem
-
 [Documentation: Using loaders](https://webpack.js.org/loaders/)
 
 ## Examples

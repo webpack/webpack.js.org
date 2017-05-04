@@ -53,10 +53,10 @@ As always, you should rather configure this in your `webpack.config.js`:
 module.exports = {
     ...
     module: {
-        loaders: [
+        rules: [
             {
                 test: require.resolve("some-module"),
-                loader: "imports-loader?this=>window"
+                use: "imports-loader?this=>window"
             }
         ]
     }

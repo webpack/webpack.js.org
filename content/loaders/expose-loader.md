@@ -78,9 +78,10 @@ module: {
 }
 ```
 
-The `require.resolve` is a node.js call (unrelated to `require.resolve` in webpack
-processing -- check the node.js docs instead). `require.resolve` gives you the
-absolute path to the module ("/.../app/node_modules/react/react.js"). So the
+The [`require.resolve`](https://nodejs.org/api/all.html#globals_require_resolve)
+is a Node.js call (unrelated to `require.resolve` in webpack
+processing). `require.resolve` gives you the
+absolute path to the module (`"/.../app/node_modules/react/react.js"`). So the
 expose only applies to the react module. And it's only exposed when used in the
 bundle.
 
