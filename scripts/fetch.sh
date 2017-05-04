@@ -11,3 +11,6 @@ set -e # Exit with nonzero exit code if anything fails
 
 rm -rf ./content/loaders/*.json
 rm -rf ./content/plugins/*.json
+
+# Fetch sponsors and backers from opencollective
+./scripts/fetch_supporters.js
