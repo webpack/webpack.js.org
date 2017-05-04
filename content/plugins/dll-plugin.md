@@ -74,6 +74,7 @@ Because this happens after resolving every file in the dll bundle, the same path
 W> `DllReferencePlugin` and `DllPlugin` are used in _separate_ webpack configs.
 
 **webpack.vendor.config.js**
+
 ```javascript
 new webpack.DllPlugin({
   context: __dirname,
@@ -83,6 +84,7 @@ new webpack.DllPlugin({
 ```
 
 **webpack.app.config.js**
+
 ```javascript
 new webpack.DllReferencePlugin({
   context: __dirname,
