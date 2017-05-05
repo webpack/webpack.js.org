@@ -1,7 +1,6 @@
 branches:
   only:
-    - master
-    - develop
+    - ko
 language: node_js
 node_js:
   - "6"
