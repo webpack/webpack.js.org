@@ -17,7 +17,6 @@ The `DllPlugin` and `DllReferencePlugin` provide means to split bundles in a way
 [DllReferencePlugin](#DllReferencePlugin) is used in the primary webpack config, it references the dll-only-bundle(s) to require pre-built dependencies.
 
 
-
 ## `DllPlugin`
 
 * `context` (optional): context of requests in the manifest file (defaults to the webpack context.)
@@ -29,7 +28,6 @@ new webpack.DllPlugin(options)
 ```
 
 Creates a `manifest.json` which is written to the given `path`. It contains mappings from require and import requests, to module ids. It is used by the [DllReferencePlugin](#DllReferencePlugin).
-
 
 Combine this plugin with [`output.library`][docs-library] option to expose (aka, put into the global scope) the dll function.
 
@@ -51,18 +49,18 @@ References a dll manifest file to map dependency names to module ids, then requi
 
 W> Keep the `name` consistent with `output.library`.
 
+
 ### Modes
 
-Can be used in two different modes:
+This plugin can be used in two different modes, _scoped_ and _mapped_.
 
-#### **Scoped mode**
+#### Scoped Mode
 
 The content of the dll is accessible under a module prefix. i.e. with `scope = "xyz"` a file `abc` in the dll can be access via `require("xyz/abc")`.
 
 T> [See an example use of scope][examples-dll-user]
 
-
-#### **Mapped mode**
+#### Mapped Mode
 
 The content of the dll is mapped to the current directory. If a required file matches a file in the dll (after resolving), then the file from the dll is used instead.
 
@@ -96,19 +94,18 @@ new webpack.DllReferencePlugin({
 ```
 
 
-## **Examples**
+## Examples
 
 ### [vendor][examples-dll-vendor] and [user][examples-dll-user]
 
-_Two separate example folders. Demonstrates scope, and context._
+_Two separate example folders. Demonstrates scope and context._
 
 T> Multiple `DllPlugins` and multiple `DllReferencePlugins`.
 
 
-### related
+### Related
 
 * [code splitting example][examples-explicit-vendor-chunk]
-
 
 
 ## References
