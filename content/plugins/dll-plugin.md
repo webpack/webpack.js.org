@@ -39,7 +39,7 @@ Combine this plugin with [`output.library`](/configuration/output/#output-librar
 * `content` (optional): the mappings from request to module id (defaults to `manifest.content`)
 * `name` (optional): the name where the dll is exposed (defaults to `manifest.name`) (see also [`externals`](/configuration/externals/))
 * `scope` (optional): prefix which is used for accessing the content of the dll
-* `sourceType` (optional): how the dll is exposed ([libraryTarget](/configuration/output/#output-library))
+* `sourceType` (optional): how the dll is exposed ([libraryTarget](/configuration/output/#output-librarytarget))
 
 ```javascript
 new webpack.DllReferencePlugin(options)
