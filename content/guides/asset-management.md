@@ -5,7 +5,7 @@ contributors:
   - michael-ciniawsky
 ---
 
-So you are all set up with webpack -- you're transforming and linting your JavaScript modules, generating your html file with the [html-webpack-plugin](), and even loading some css through your JavaScript modules with the [css-loader](). But wait, your site requires a whole bunch of other assets like images (e.g. `.png`, `.jpg`, `.svg`), fonts (e.g. `.woff`, `.woff2`, `.eot`), and data (e.g. `.json`, `.xml`, `.csv`)!
+So you're all set up with webpack -- transforming and linting your JavaScript modules, generating an html file with the [`HTMLWebpackPlugin`](/plugins/html-webpack-plugin), and even loading some css through your JavaScript modules with the [css-loader](/loaders/css-loader). But wait, your site requires a whole bunch of other assets like images (e.g. `.png`, `.jpg`, `.svg`), fonts (e.g. `.woff`, `.woff2`, `.eot`), and data (e.g. `.json`, `.xml`, `.csv`)!
 
 Prior to webpack, front-end developers would use tools like grunt and gulp to process these "web assets" and move them from their `/src` folder into their `/dist` or `/build` directory. The same idea was used for JavaScript modules, but, as you likely already know, tools like webpack will now "enter" your application and __dynamically bundle__ all dependencies (creating what's known as a [dependency graph](/concepts/dependency-graph)). This is great because every module now _explicitly states its dependencies_ and we'll avoid bundling modules that aren't in use.
 
@@ -14,10 +14,10 @@ One of the coolest webpack features is that you can also _include any other type
 
 ## Loading CSS
 
-In order to `import` a CSS file from within a JavaScript module, you simply need to install and add the [css-loader]() to your [`module` configuration](/configuration/module)...
+In order to `import` a CSS file from within a JavaScript module, you simply need to install and add the [style-loader](/loaders/style-loader) and [css-loader](/loaders/css-loader) to your [`module` configuration](/configuration/module)...
 
 ``` bash
-npm install --save-dev css-loader
+npm install --save-dev style-loader css-loader
 ```
 
 __webpack.config.js__
@@ -29,7 +29,10 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: 'css-loader'
+        use: [
+          'css-loader',
+          'style-loader'
+        ]
       }
     ]
   },
@@ -39,12 +42,39 @@ module.exports = {
 
 This enables you to `import './style.css'` into the file that depends on that styling. Now, when that module is run, a `<style>` tag with the stringified css will be inserted into the `<head>` of your html file.
 
-T> Note that you can also [split your CSS](/guides/code-splitting-css) for better load times in production. On top of that, loaders exist for pretty much any flavor of CSS you can think of -- [postcss](), [scss](), and [less]() to name a few.
+T> Note that you can also [split your CSS](/guides/code-splitting-css) for better load times in production. On top of that, loaders exist for pretty much any flavor of CSS you can think of -- [postcss](https://github.com/postcss/postcss-loader), [sass](/loaders/sass-loader), and [less](/loaders/less-loader) to name a few.
 
 
 ## Loading Images
 
-...
+So now we're pulling in our CSS, but what about our backgrounds and icons? Using the [file-loader](/loaders/file-loader) we can easily incorporate those in our system as well:
+
+``` bash
+npm install --save-dev file-loader
+```
+
+__webpack.config.js__
+
+``` js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          'file-loader'
+        ]
+      }
+    ]
+  },
+  //...
+}
+```
+
+Now, when you `import Image from './my-image.png'`, that image will be processed and added to your `output` directory _and_ the `Image` variable will contain the final url of that image after processing. When using the [css-loader](/loaders/css-loader), as shown above, a similar process will occur for `url('./my-image.png')` within your CSS. The loader will recognize this is a local file, and replace the `'./my-image.png'` path with the final path to the image in your `output` directory. The [html-loader](/loaders/html-loader) handles `<img src="./my-image.png" />` in the same manner.
+
+T> The next step is minifying and optimizing your images. Check out the [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) and [url-loader](/loaders/url-loader) for more on how you can enhance your image loading process.
 
 
 ## Loading Fonts
@@ -55,3 +85,22 @@ T> Note that you can also [split your CSS](/guides/code-splitting-css) for bette
 ## Loading Data
 
 ...
+
+
+## Global Assets
+
+The coolest part of everything mentioned above, is that loading things this way allows you to group modules and assets together in a more intuitive way. Instead of relying on a global `/assets` directory that contains everything, you can group assets with the code that uses them:
+
+``` diff
+- |- /assets
++ |– /components
++ |  |– /my-component
++ |  |  |– index.jsx
++ |  |  |– index.css
++ |  |  |– icon.svg
++ |  |  |– img.png
+```
+
+This setup makes your code a lot more portable as everything that is closely coupled now lives together. Let's say you want to use `/my-component` in another project, simply copy or move it into the `/components` directory over there. As long as you've installed any _external dependencies_ and your _configuration has the same loaders_ defined, you should be good to go.
+
+However, let's say you're locked into your old ways or you have some assets that are shared between multiple components (views, templates, modules, etc.). It's still possible to store these assets in a base directory and even use [aliasing](/configuration/resolve#resolve-alias) to make them easier to `import`.
