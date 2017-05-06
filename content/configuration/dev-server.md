@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - spacek33z
   - charlespwd
+  - ingver
 ---
 
 webpack-dev-server can be used to quickly develop an application. See the ["How to Develop?"](/guides/development) to get started.
@@ -170,8 +171,8 @@ For more options and information, see the [connect-history-api-fallback](https:/
 
 Specify a host to use. By default this is `localhost`. If you want your server to be accessible externally, specify it like this:
 
-```js
-host: "0.0.0.0"
+```bash
+webpack-dev-server --host "0.0.0.0"
 ```
 
 
@@ -194,8 +195,8 @@ T> Note that you must also include a `new webpack.HotModuleReplacementPlugin()` 
 
 Enables Hot Module Replacement (see [`devServer.hot`](#devserver-hot)) without page refresh as fallback in case of build failures.
 
-```js
-hotOnly: true
+```bash
+webpack-dev-server --hot-only
 ```
 
 
@@ -230,8 +231,8 @@ Toggle between the dev-server's two different modes. By default the application 
 
 It is also possible to use **iframe mode**, which uses an `<iframe>` under a notification bar with messages about the build. To switch to **iframe mode**:
 
-```js
-inline: false
+```bash
+webpack-dev-server --inline
 ```
 
 T> Inline mode is recommended when using Hot Module Replacement.
@@ -272,7 +273,7 @@ Shows a full-screen overlay in the browser when there are compiler errors or war
 overlay: true
 ```
 
-If you want to show warnings as well as errors: 
+If you want to show warnings as well as errors:
 
 ```js
 overlay: {
@@ -281,7 +282,7 @@ overlay: {
 }
 ```
 
-## `devServer.port` - CLI only
+## `devServer.port`
 
 `number`
 
@@ -289,6 +290,10 @@ Specify a port number to listen for requests on:
 
 ```js
 port: 8080
+```
+
+```bash
+webpack-dev-server --port 8080
 ```
 
 
@@ -359,6 +364,10 @@ proxy: {
 
 Output running progress to console.
 
+```bash
+webpack-dev-server --progress
+```
+
 
 ## `devServer.public` - CLI only
 
@@ -368,8 +377,8 @@ When using *inline mode* and you're proxying dev-server, the inline client scrip
 
 For example, the dev-server is proxied by nginx, and available on `myapp.test`:
 
-```js
-public: "myapp.test:80"
+```bash
+webpack-dev-server --public "myapp.test:80"
 ```
 
 
