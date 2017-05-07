@@ -159,7 +159,7 @@ __webpack.config.js__
 
 ```js
 module.exports = function(env) {
-  return require('./webpack.${env}.js')
+  return require(`./webpack.${env}.js`)
 }
 ```
 

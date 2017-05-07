@@ -10,6 +10,8 @@ contributors:
   - drpicox
 ---
 
+W> The __Hot Module Replacement__ functionality is not intended for use in production. You should only use it in your development configuration/environment, please see the [building for production guide](/guides/production-build) for more information.
+
 As explained in detail on the [concept page](/concepts/hot-module-replacement), Hot Module Replacement (HMR) exchanges, adds, or removes modules while an application is running, without a page reload.
 HMR is particularly useful in applications using a single state tree
 since components are "dumb" and will reflect the latest application state, even
@@ -71,7 +73,7 @@ Setting Babel's module plugin to false helps fix many issues (see [Migrating fro
 
 Note: Node.js doesn't support ES2015 modules yet and using ES2015 modules in your webpack 2 configuration file will cause an [issue](https://github.com/webpack/webpack.js.org/issues/154).
 
-To work around this you will need two `.babelrc` file to transpile the configuration and app code separately:
+To work around this you will need two `.babelrc` files to transpile the configuration and app code separately:
 
 1. in the project root directory with `"presets": ["es2015"]`
 2. in the source directory for app code

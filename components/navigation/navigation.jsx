@@ -2,6 +2,9 @@ import React from 'react';
 import Link from '../link/link';
 import Container from '../container/container';
 import Logo from '../logo/logo';
+import Dropdown from '../dropdown/dropdown';
+import USFlag from '../../assets/language/english.png';
+import ChineseFlag from '../../assets/language/chinese.png';
 
 // TODO: Maybe by updating the routing scheme later on we can avoid hardcoding this?
 let Sections = [
@@ -34,8 +37,8 @@ let Sections = [
     url: '//medium.com/webpack'
   },
   {
-      title: 'Support',
-      url: 'support'
+    title: 'Support',
+    url: 'support'
   }
 ];
 
@@ -100,6 +103,13 @@ export default class Navigation extends React.Component {
             to="//stackoverflow.com/questions/tagged/webpack">
             <i className="sidecar__icon icon-stack-overflow" />
           </Link>
+
+          <Dropdown
+            className="navigation__languages"
+            items={[
+              { title: 'English', url: 'https://webpack.js.org/', image: USFlag },
+              { title: 'Chinese', url: 'https://doc.webpack-china.org/', image: ChineseFlag }
+            ]} />
         </Container>
 
         {

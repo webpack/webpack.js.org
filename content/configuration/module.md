@@ -38,7 +38,7 @@ A Rule can be separated into three parts — Conditions, Results and nested Rule
 
 There are two input values for the conditions:
 
-1. The resource: An absolute path to the file requested. It's already resolved according the [`resolve` rules](/configuration/resolve).
+1. The resource: An absolute path to the file requested. It's already resolved according to the [`resolve` rules](/configuration/resolve).
 
 2. The issuer: An absolute path to the file of the module which requested the resource. It's the location of the import.
 
@@ -64,9 +64,9 @@ These properties affect the loaders: [`loader`](#rule-loader), [`options`](#rule
 
 For compatibility also these properties: [`query`](#rule-options-rule-query), [`loaders`](#rule-loaders).
 
-The [`enforce`](#rule-enforce) property affect the loader category. Whether it's an normal, pre- or post- loader.
+The [`enforce`](#rule-enforce) property affects the loader category. Whether it's a normal, pre- or post- loader.
 
-The [`parser`](#rule-parser) property affect the parser options.
+The [`parser`](#rule-parser) property affects the parser options.
 
 
 ## Nested rules
@@ -217,20 +217,20 @@ Conditions can be one of these:
 * A string: To match the input must start with the provided string. I. e. an absolute directory path, or absolute path to the file.
 * A RegExp: It's tested with the input.
 * A function: It's called with the input and must return a truthy value to match.
-* An array of Conditions: At least one of the Condition must match.
+* An array of Conditions: At least one of the Conditions must match.
 * A object: All properties must match. Each property has a defined behavior.
 
-`{ test: Condition }`: The Condition must match. The convention is the provide a RegExp or array of RegExps here, but it's not enforced.
+`{ test: Condition }`: The Condition must match. The convention is to provide a RegExp or array of RegExps here, but it's not enforced.
 
-`{ include: Condition }`: The Condition must match. The convention is the provide a string or array of strings here, but it's not enforced.
+`{ include: Condition }`: The Condition must match. The convention is to provide a string or array of strings here, but it's not enforced.
 
-`{ exclude: Condition }`: The Condition must NOT match. The convention is the provide a string or array of strings here, but it's not enforced.
+`{ exclude: Condition }`: The Condition must NOT match. The convention is to provide a string or array of strings here, but it's not enforced.
 
 `{ and: [Condition] }`: All Conditions must match.
 
 `{ or: [Condition] }`: Any Condition must match.
 
-`{ not: Condition }`: The Condition must NOT match.
+`{ not: [Condition] }`: All Conditions must NOT match.
 
 **Example:**
 

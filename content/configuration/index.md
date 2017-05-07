@@ -313,7 +313,7 @@ module.exports = {
   },
 
   <details><summary>[devtool](/configuration/devtool): "source-map", // enum </summary>
-  [devtool](/configuration/devtool): "inline-source-map", // inlines SourceMap into orginal file
+  [devtool](/configuration/devtool): "inline-source-map", // inlines SourceMap into original file
   [devtool](/configuration/devtool): "eval-source-map", // inlines SourceMap per module
   [devtool](/configuration/devtool): "hidden-source-map", // SourceMap without reference in original file
   [devtool](/configuration/devtool): "cheap-source-map", // cheap-variant of SourceMap without module mappings

@@ -32,10 +32,10 @@ export default props => {
           <p>Through contributions, donations, and sponsorship, you allow webpack to thrive. Your donations directly support office hours, continued enhancements, and most importantly, great documentation and learning material!</p>
 
           <h2>Sponsors</h2>
-          <Support number={ 40 } type="sponsor" />
+          <Support number={ 50 } type="sponsors" />
 
           <h2>Backers</h2>
-          <Support number={ 130 } type="backer" />
+          <Support number={ 130 } type="backers" />
         </Container>
       </div>
     </div>

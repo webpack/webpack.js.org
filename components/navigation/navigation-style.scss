@@ -152,6 +152,11 @@
       color: getColor(malibu);
     }
   }
+
+  .navigation__languages {
+    margin-left: 1em;
+    margin-top: -4px;
+  }
 }
 
 @include break {
