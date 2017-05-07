@@ -1,5 +1,5 @@
 ---
-title: Output Management
+title: Managing Built Files
 contributors:
   - skipjack
 ---
