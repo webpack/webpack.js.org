@@ -1,6 +1,6 @@
 {
   "name": "webpack.js.org",
-  "version": "0.0.0",
+  "version": "0.1.2",
   "private": true,
   "description": "The main site for all things webpack.",
   "homepage": "https://github.com/webpack/webpack.js.org",
@@ -31,7 +31,7 @@
     "fetch": "scripts/fetch.sh",
     "init:generated": "mkdirp ./generated/loaders && mkdirp ./generated/plugins ",
     "lint": "run-s lint:*",
-    "lint:links": "hyperlink -r --exclude https://opencollective.com/webpack/*/*/website build/index.html | ./scripts/check-links.js --skip 10",
+    "lint:links": "hyperlink -r build/index.html | ./scripts/check-links.js --skip 10",
     "lint:js": "eslint . --ext .js --ext .jsx",
     "lint:markdown": "markdownlint --config ./.markdownlint.json *.md ./content/**/*.md",
     "lint:social": "alex ./**/*.md",
@@ -50,6 +50,7 @@
     "babel-core": "^6.10.4",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.16.0",
     "babel-preset-env": "^0.0.8",
     "babel-preset-react": "^6.11.1",
@@ -97,10 +98,9 @@
     "yaml-frontmatter-loader": "0.0.3"
   },
   "dependencies": {
-    "d3": "^4.2.7",
-    "filesize": "^3.3.0",
     "preact": "^6.2.1",
     "preact-compat": "3.11.0",
+    "prop-types": "^15.5.8",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-router": "^2.8.1",

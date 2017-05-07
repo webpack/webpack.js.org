@@ -2,17 +2,15 @@ import React from 'react';
 import Interactive from 'antwar-interactive';
 import Container from '../container/container';
 import Sidebar from '../sidebar/sidebar';
+import PageLinks from '../page-links/page-links';
 import Gitter from '../gitter/gitter';
 import Contributors from '../contributors/contributors';
 import './page-style';
 import '../sidebar/sidebar-style';
 import '../sponsors/sponsors-style';
 import '../gitter/gitter-style';
-import { trimEnd } from 'lodash';
 
 export default ({ section, page }) => {
-  let edit = page.edit || `https://github.com/webpack-china/webpack.js.org/edit/cn/content/${trimEnd(page.url, '/')}${page.type === 'index' ? '/index' : ''}.md`;
-
   return (
     <Container className="page">
       <Interactive
@@ -24,23 +22,26 @@ export default ({ section, page }) => {
           title: page.title,
           anchors: page.anchors
         })) }
-        currentPage={ page.url.replace("/index", "") }
-      />
+        currentPage={ page.url.replace('/index', '') } />
 
       <section className="page__content">
         <h1>{ page.title }</h1>
 
-        <a className="page__edit" href={ edit }>
-          编辑此页
-          &nbsp;&nbsp;
-          <i className="icon-edit" />
-        </a>
+        <PageLinks
+          page={ page }
+          section={ section.name } />
 
-        <div dangerouslySetInnerHTML={{ __html: page.content }} />
+        <div dangerouslySetInnerHTML={{
+          __html: page.content
+        }} />
 
-        <hr style={{ display: page.contributors.length ? 'block' : 'none' }} />
-        <h3 style={{ display: page.contributors.length ? 'block' : 'none' }}>贡献者</h3>
-        <Contributors contributors={ page.contributors } />
+        { page.contributors.length > 0 ? (
+          <div>
+            <hr />
+            <h3>贡献人员</h3>
+            <Contributors contributors={ page.contributors } />
+          </div>
+        ) : null }
 
         <Interactive
           id="components/gitter/gitter.jsx"

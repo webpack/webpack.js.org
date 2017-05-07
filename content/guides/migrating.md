@@ -153,7 +153,7 @@ contributors:
 
 ## 配置中的 loader 默认相对于 context 进行解析
 
-在 webpack 1 中，默认配置下 loader 解析相对于被匹配的文件。而在 webpack 2 中，默认配置下 loader 解析相对于 `context` 选项。
+在 __webpack 1__ 中，默认配置下 loader 解析相对于被匹配的文件。然而，在 __webpack 2__ 中，默认配置下 loader 解析相对于 `context` 选项。
 
 这解决了「在使用 `npm link` 或引用 `context` 上下文目录之外的模块时，loader 所导致的模块重复载入」的问题。
 
@@ -193,8 +193,7 @@ contributors:
 
 ## `UglifyJsPlugin` sourceMap
 
-`UglifyJsPlugin` 的 `sourceMap` 选项现在默认为 `false` 而不是 `true`。
-这意味着如果你在压缩代码时启用了 source map，或者想要让 uglifyjs 的警告能够对应到正确的代码行，你需要将 `UglifyJsPlugin` 的 `sourceMap` 设为 `true`。
+`UglifyJsPlugin` 的 `sourceMap` 选项现在默认为 `false` 而不是 `true`。这意味着如果你在压缩代码时启用了 source map，或者想要让 uglifyjs 的警告能够对应到正确的代码行，你需要将 `UglifyJsPlugin` 的 `sourceMap` 设为 `true`。
 
 ``` diff
   devtool: "source-map",
@@ -614,38 +613,24 @@ Loaders 现在默认可被缓存。Loaders 如果不想被缓存，需要选择�
 
 ### 复合 options
 
-webpack 1 只支持能够「可 `JSON.stringify`的对象」作为 loader 的 options。
-webpack 2 现在支持任意 JS 对象作为 loader 的 options。
+__webpack v1__ 只支持能够「可 `JSON.stringify`的对象」作为 loader 的 options。
 
-使用复合 options 只有一个附加条件。你需要在 options 对象上添加一个 `ident`，让它能够被其他 loader 引用。
+__webpack v2__ now supports any JS object as loader options.
 
-options 对象上有了 `ident`，内联的 loader 就可以引用这个 options 对象。下面是个例子：
+[v2.2.1](https://github.com/webpack/webpack/releases/tag/v2.2.1)之前（即从 v2.0.0 到 v2.2.0），使用复合 options，需要在 `options` 对象上添加 `ident`，允许它能够被其他 loader 引用。__这在 v2.2.1__ 中被删除，因此目前的迁移不再需要使用 `ident` 键。
 
-`require("some-loader??by-ident!resource")`
-
-``` js
+```diff
 {
-  test: /.../,
-  loader: "...",
-  options: {
-    ident: "by-ident",
-    magic: () => return Math.random()
+  test: /\.ext/
+  use: {
+    loader: '...',
+    options: {
+-     ident: 'id',
+      fn: () => require('./foo.js')
+    }
   }
 }
 ```
-
-这种内联风格在常规的代码里一般用不着，但是在 loader 生成的代码里比较常见。
-例如，`style-loader` 生成一个模块，通过 `require` 加载其余的请求（它们输出 CSS）。
-
-``` js
-// style-loader 生成的代码（简化过的）
-var addStyle = require("./add-style");
-var css = require("-!css-loader?{"modules":true}!postcss-loader??postcss-ident");
-
-addStyle(css);
-```
-
-所以如果你使用复合 options，告诉你的用户你使用的 `ident`。
 
 ***
 

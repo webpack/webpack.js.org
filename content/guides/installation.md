@@ -15,6 +15,8 @@ sort: 10
 
 ### 本地安装
 
+The latest webpack release is: [![GitHub release](https://img.shields.io/github/release/webpack/webpack.svg?style=flat-square)](https://github.com/webpack/webpack/releases)
+
 ``` bash
 npm install --save-dev webpack
 

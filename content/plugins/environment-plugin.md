@@ -80,3 +80,21 @@ if ('false') { // <-- DEBUG 的 'false' 被带过来了
   console.log('Debugging output');
 }
 ```
+
+## `DotenvPlugin`
+
+The third-party [`DotenvPlugin`](https://github.com/mrsteele/dotenv-webpack) (`dotenv-webpack`) allows you to expose (a subset of) [dotenv variables](https://www.npmjs.com/package/dotenv):
+
+``` bash
+// .env
+DB_HOST=127.0.0.1
+DB_PASS=foobar
+S3_API=mysecretkey
+```
+
+```javascript
+ new Dotenv({
+  path: './.env', // Path to .env file (this is the default)
+  safe: true // load .env.example (defaults to "false" which does not use dotenv-safe)
+})
+```

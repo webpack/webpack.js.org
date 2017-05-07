@@ -149,6 +149,27 @@ chunk id 优化已经结束。
 
 存储编译信息到记录。
 
+## `additional-assets` async
+
+Create additional assets for the compilation
+
+Here's an example that downloads an image.
+
+```javascript
+compiler.plugin('compilation', function(compilation) {
+  compilation.plugin('additional-assets', function(callback) {
+    download('https://img.shields.io/npm/v/webpack.svg', function(resp) {
+      if(resp.status === 200) {
+        compilation.assets['webpack-version.svg'] = toAsset(resp);
+        callback();
+      } else {
+        callback(new Error('[webpack-example-plugin] Unable to download the image'));
+      }
+    })
+  });
+});
+```
+
 ## `optimize-chunk-assets(chunks: Chunk[])` async
 
 优化 chunk 的生成资源。

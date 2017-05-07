@@ -8,7 +8,9 @@ contributors:
   - johnstew
 ---
 
-*webpack* 是一个现代的 JavaScript 应用程序的_模块打包器(module bundler)_。它是[高度可配置的](/configuration)，但是，在开始前你需要先理解**四个核心概念**：入口(entry)、输出(output)、loader、插件(plugins)。
+*webpack* 是一个现代的 JavaScript 应用程序的_模块打包器(module bundler)_。当 webpack 处理应用程序时，它会递归地构建一个_依赖关系图表(dependency graph)_，其中包含应用程序需要的每个模块，然后将所有这些模块打包成少量的 _bundle_ - 通常只有一个，由浏览器加载。
+
+它是[高度可配置的](/configuration)，但是，在开始前你需要先理解**四个核心概念**：入口(entry)、输出(output)、loader、插件(plugins)。
 
 本文档旨在给出这些概念的**高度**概述，同时提供详尽的特定概念的相关用例。
 

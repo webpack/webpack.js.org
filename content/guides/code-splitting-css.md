@@ -7,6 +7,7 @@ contributors:
   - johnstew
   - simon04
   - shinxi
+  - tomtasche
 ---
 
 为了用 webpack 对 CSS 文件进行打包，你可以像[其它模块](/concepts/modules)一样将 CSS 引入到你的 JavaScript 代码中，同时用 `css-loader` (像 JS 模块一样输出 CSS)，也可以选择使用 `ExtractTextWebpackPlugin` (将打好包的 CSS 提出出来并输出成 CSS 文件)。
@@ -21,12 +22,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 ```
 
 
-## 使用 `css-loader`
+## 使用 `css-loader` 和 `style-loader`
 
-安装 [`css-loader`](/loaders/css-loader)：
+安装 [`css-loader`](/loaders/css-loader) 和 [`style-loader`](/loaders/style-loader)：
 
 ``` bash
-npm install --save-dev css-loader
+npm install --save-dev css-loader style-loader
 ```
 
 在 `webpack.config.js` 中配置如下：
@@ -36,13 +37,13 @@ module.exports = {
     module: {
         rules: [{
             test: /\.css$/,
-            use: 'css-loader'
+            use: [ 'style-loader', 'css-loader' ]
         }]
     }
 }
 ```
 
-这样，CSS 会跟你的 JavaScript 打包在一起。
+这样，CSS 会跟你的 JavaScript 打包在一起，并且在初始加载后，通过一个 `<style>` 标签注入样式，然后作用于页面。
 
 这里有一个缺点就是，你无法使用浏览器的能力，去异步且并行去加载 CSS。取而代之的是，你的页面需要等待整个 JavaScript 文件加载完，才能进行样式渲染。
 
@@ -65,7 +66,7 @@ module.exports = {
     module: {
          rules: [{
              test: /\.css$/,
--            use: 'css-loader'
+-            use: [ 'style-loader', 'css-loader' ]
 +            use: ExtractTextPlugin.extract({
 +                use: 'css-loader'
 +            })
