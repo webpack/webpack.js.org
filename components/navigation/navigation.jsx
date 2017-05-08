@@ -7,9 +7,9 @@ import USFlag from '../../assets/language/english.png';
 import ChineseFlag from '../../assets/language/chinese.png';
 
 // TODO: Maybe by updating the routing scheme later on we can avoid hardcoding this?
-import Links from './navigation-links';
+import Links from './navigation-links.json';
 
-// TODO: Move back to using state once we can handle algolia on our own
+// TODO: Migrate to react-banner
 export default class Navigation extends React.Component {
   render() {
     let { pageUrl = '' } = this.props;
