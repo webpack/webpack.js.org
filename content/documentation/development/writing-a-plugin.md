@@ -1,5 +1,5 @@
 ---
-title: How to write a plugin?
+title: Writing a Plugin
 sort: 2
 ---
 
@@ -100,7 +100,7 @@ HelloCompilationPlugin.prototype.apply = function(compiler) {
 module.exports = HelloCompilationPlugin;
 ```
 
-For more information on what callbacks are available on the `compiler`, `compilation`, and other important objects, see the [plugins](/api/plugins/) doc.
+For more information on what callbacks are available on the `compiler`, `compilation`, and other important objects, see the [plugins](/documentation/api/plugins/) doc.
 
 ## Async compilation plugins
 

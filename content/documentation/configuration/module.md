@@ -38,7 +38,7 @@ A Rule can be separated into three parts — Conditions, Results and nested Rule
 
 There are two input values for the conditions:
 
-1. The resource: An absolute path to the file requested. It's already resolved according to the [`resolve` rules](/configuration/resolve).
+1. The resource: An absolute path to the file requested. It's already resolved according to the [`resolve` rules](/documentation/configuration/resolve).
 
 2. The issuer: An absolute path to the file of the module which requested the resource. It's the location of the import.
 
@@ -71,7 +71,7 @@ The [`parser`](#rule-parser) property affects the parser options.
 
 ## Nested rules
 
-Nested rules can be specified under the properties [`rules`](#rule-rules) and [`oneOf`](#rule-oneof). 
+Nested rules can be specified under the properties [`rules`](#rule-rules) and [`oneOf`](#rule-oneof).
 
 These rules are evaluated when the Rule condition matches.
 
@@ -154,7 +154,7 @@ parser: {
   browserify: false, // disable special handling of Browserify bundles
   requireJs: false, // disable requirejs.*
   node: false, // disable __dirname, __filename, module, require.extensions, require.main, etc.
-  node: {...} // reconfigure [node](/configuration/node) layer on module level
+  node: {...} // reconfigure [node](/documentation/configuration/node) layer on module level
 }
 ```
 
@@ -249,7 +249,7 @@ Conditions can be one of these:
 
 `object`
 
-It must have a `loader` property being a string. It is resolved relative to the configuration [`context`](/configuration/entry-context#context) with the loader resolving options ([resolveLoader](/configuration/resolve#resolveloader)).
+It must have a `loader` property being a string. It is resolved relative to the configuration [`context`](/documentation/configuration/entry-context#context) with the loader resolving options ([resolveLoader](/documentation/configuration/resolve#resolveloader)).
 
 It can have a `options` property being a string or object. This value is passed to the loader, which should interpret it as loader options.
 
@@ -266,7 +266,7 @@ For compatibility a `query` property is also possible, which is an alias for the
 }
 ```
 
-Note that webpack needs to generate a unique module identifier from the resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9% of cases, but may be not unique if you apply the same loaders with different options to the resource and the options have some stringified values. 
+Note that webpack needs to generate a unique module identifier from the resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9% of cases, but may be not unique if you apply the same loaders with different options to the resource and the options have some stringified values.
 
 It also breaks if the options object cannot be stringified (i.e. circular JSON). Because of this you can have a `ident` property in the options object which is used as unique identifier.
 

@@ -13,6 +13,7 @@ module.exports = {
   output: 'build',
   title: 'webpack',
   keywords: ['webpack', 'javascript', 'web development', 'programming'],
+
   pageTitle: function(config, pageTitle) {
     var siteName = config.name;
 
@@ -22,12 +23,15 @@ module.exports = {
 
     return siteName + ' - ' + pageTitle;
   },
+
   plugins: [
     prevnextPlugin()
   ],
+
   layout: function() {
     return require('./components/site/site.jsx').default
   },
+
   paths: {
     '/': root(
       function() {
@@ -38,14 +42,6 @@ module.exports = {
         );
       }
     ),
-
-    'get-started': {
-      redirects: {
-        '': '/guides/get-started',
-        'install-webpack': '/guides/installation',
-        'why-webpack': '/guides/why-webpack',
-      }
-    },
 
     concepts: section(
       'Concepts',
@@ -73,35 +69,22 @@ module.exports = {
       }
     ),
 
-    development: section(
-      'Development',
+    documentation: section(
+      'Documentation',
       function() {
         return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/development',
-          true,
-          /^\.\/.*\.md$/
-        );
-      }
-    ),
-
-    configuration: section(
-      'Configuration',
-      function() {
-        return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/configuration',
+          'json-loader!yaml-frontmatter-loader!./content/documentation',
           false,
           /^\.\/.*\.md$/
         );
-      }, {
-        'external-configs': 'javascript-alternatives'
       }
     ),
 
-    api: section(
+    'documentation/api': section(
       'API',
       function() {
         return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/api',
+          'json-loader!yaml-frontmatter-loader!./content/documentation/api',
           false,
           /^\.\/.*\.md$/
         );
@@ -110,30 +93,37 @@ module.exports = {
       }
     ),
 
-    'api/plugins': section(
-      'API',
+    // This would be better as a nested (third level) directory
+    // Consider fixing somehow and moving to redirects?
+    'documentation/api/plugins': section(
+      'API | Plugins',
       function() {
         return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/api/plugins',
+          'json-loader!yaml-frontmatter-loader!./content/documentation/api/plugins',
           false,
           /^\.\/.*\.md$/
         );
       }
     ),
 
-    pluginsapi: {
-      redirects: {
-        '': '/api/plugins',
-        'compiler': '/api/plugins/compiler',
-        'template': '/api/plugins/template'
+    'documentation/configuration': section(
+      'Configuration',
+      function() {
+        return require.context(
+          'json-loader!yaml-frontmatter-loader!./content/documentation/configuration',
+          false,
+          /^\.\/.*\.md$/
+        );
+      }, {
+        'external-configs': 'javascript-alternatives'
       }
-    },
+    ),
 
-    loaders: section(
+    'documentation/loaders': section(
       'Loaders',
       function() {
         const content = require.context(
-          'json-loader!yaml-frontmatter-loader!./content/loaders',
+          'json-loader!yaml-frontmatter-loader!./content/documentation/loaders',
           false,
           /^\.\/.*\.md$/
         );
@@ -146,11 +136,11 @@ module.exports = {
       }
     ),
 
-    plugins: section(
+    'documentation/plugins': section(
       'Plugins',
       function() {
         const content = require.context(
-          'json-loader!yaml-frontmatter-loader!./content/plugins',
+          'json-loader!yaml-frontmatter-loader!./content/documentation/plugins',
           false,
           /^\.\/.*\.md$/
         );
@@ -160,6 +150,18 @@ module.exports = {
           /^\.\/.*\.md$/
         );
         return combineContexts(content, generated);
+      }
+    ),
+
+    // Maybe move to support/development?
+    'documentation/development': section(
+      'Development',
+      function() {
+        return require.context(
+          'json-loader!yaml-frontmatter-loader!./content/documentation/development',
+          true,
+          /^\.\/.*\.md$/
+        );
       }
     ),
 
@@ -180,23 +182,30 @@ module.exports = {
       }
     },
 
-    'vote/feedback': {
-      path() {
-        return require('./components/vote/list.jsx').default
-      }
-    },
-
-    'vote/moneyDistribution': {
-      path() {
-        return require('./components/vote/list.jsx').default
-      }
-    },
-
     organization: {
       path() {
         return require('./components/organization/organization.jsx').default
       }
-    }
+    },
+
+
+    // Redirects: Everything below is just redirects from old sections
+
+    'get-started': {
+      redirects: {
+        '': '/guides/get-started',
+        'install-webpack': '/guides/installation',
+        'why-webpack': '/guides/why-webpack',
+      }
+    },
+
+    pluginsapi: {
+      redirects: {
+        '': '/api/plugins',
+        'compiler': '/api/plugins/compiler',
+        'template': '/api/plugins/template'
+      }
+    },
   }
 };
 

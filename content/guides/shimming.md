@@ -30,7 +30,7 @@ module.exports = {
 
 ## `ProvidePlugin`
 
-The [`ProvidePlugin`](/plugins/provide-plugin) makes a module available as a variable in every other module required by `webpack`. The module is required only if you use the variable.
+The [`ProvidePlugin`](/documentation/plugins/provide-plugin) makes a module available as a variable in every other module required by `webpack`. The module is required only if you use the variable.
 Most legacy modules rely on the presence of specific globals, like jQuery plugins do on `$` or `jQuery`. In this scenario, you can configure webpack to prepend `var $ = require(“jquery”)` every time it encounters the global `$` identifier.
 
 ```javascript
@@ -62,7 +62,7 @@ module.exports = {
 
 ## `imports-loader`
 
-[`imports-loader`](/loaders/imports-loader/) inserts necessary globals into the required legacy module.
+[`imports-loader`](/documentation/loaders/imports-loader/) inserts necessary globals into the required legacy module.
 For example, Some legacy modules rely on `this` being the `window` object. This becomes a problem when the module is executed in a CommonJS context where `this` equals `module.exports`. In this case you can override `this` using the `imports-loader`.
 
 __webpack.config.js__
@@ -96,7 +96,7 @@ module.exports = {
 
 ## `exports-loader`
 
-Let's say a library creates a global variable that it expects its consumers to use; In this case, we can use [`exports-loader`](/loaders/exports-loader/), to export that global variable in CommonJS format. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
+Let's say a library creates a global variable that it expects its consumers to use; In this case, we can use [`exports-loader`](/documentation/loaders/exports-loader/), to export that global variable in CommonJS format. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
 
 __webpack.config.js__
 
@@ -117,7 +117,7 @@ module.exports = {
 
 ## `script-loader`
 
-The [`script-loader`](/loaders/script-loader/) evaluates code in the global context, just like you would add the code into a `script` tag. In this mode, every normal library should work. `require`, `module`, etc. are undefined.
+The [`script-loader`](/documentation/loaders/script-loader/) evaluates code in the global context, just like you would add the code into a `script` tag. In this mode, every normal library should work. `require`, `module`, etc. are undefined.
 
 W> The file is added as string to the bundle. It is not minimized by `webpack`, so use a minimized version. There is also no dev tool support for libraries added by this loader.
 
@@ -142,7 +142,7 @@ eval("GLOBAL_CONFIG = {};");
 
 ## `noParse` option
 
-When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module as [`noParse`](/configuration/module/#module-noparse). Then `webpack` will just include the module without parsing it, which can be used to improve the build time.
+When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module as [`noParse`](/documentation/configuration/module/#module-noparse). Then `webpack` will just include the module without parsing it, which can be used to improve the build time.
 
 W> Any feature requiring the AST, like the `ProvidePlugin`, will not work.
 

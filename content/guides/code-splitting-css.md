@@ -24,7 +24,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 ## Using `css-loader` and `style-loader`
 
-Install the [`css-loader`](/loaders/css-loader) and [`style-loader`](/loaders/style-loader):
+Install the [`css-loader`](/documentation/loaders/css-loader) and [`style-loader`](/documentation/loaders/style-loader):
 
 ``` bash
 npm install --save-dev css-loader style-loader
@@ -52,7 +52,7 @@ webpack can help with this problem by bundling the CSS separately using the `Ext
 
 ## Using `ExtractTextWebpackPlugin`
 
-Install the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) plugin as follows
+Install the [`ExtractTextWebpackPlugin`](/documentation/plugins/extract-text-webpack-plugin) plugin as follows
 
 ``` bash
 npm install --save-dev extract-text-webpack-plugin

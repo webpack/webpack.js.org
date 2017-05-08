@@ -51,7 +51,7 @@ module.exports = () => {
 
 ## Exporting multiple configurations
 
-Instead of exporting a single configuration object/function, you may export multiple configurations. When running webpack, all configurations are built. For instance, this is useful for [bundling a library](/guides/author-libraries) for multiple [targets](/configuration/output#output-librarytarget) such as AMD and CommonJS:
+Instead of exporting a single configuration object/function, you may export multiple configurations. When running webpack, all configurations are built. For instance, this is useful for [bundling a library](/guides/author-libraries) for multiple [targets](/documentation/configuration/output#output-librarytarget) such as AMD and CommonJS:
 
 ```js
 module.exports = [{

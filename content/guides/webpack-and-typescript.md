@@ -143,7 +143,7 @@ npm install --save-dev source-map-loader
 
 Once the loader is installed we need to tell webpack we want to run this loader before any other loaders by using the `enforce: 'pre'` configuration flag.
 Finally we need to enable source maps in webpack by specifying the `devtool` property.
-Currently we use the 'inline-source-map' setting, to read more about this setting and see other options check out the [devtool documentation](/configuration/devtool/).
+Currently we use the 'inline-source-map' setting, to read more about this setting and see other options check out the [devtool documentation](/documentation/configuration/devtool/).
 
 
 ## Using 3rd Party Libraries

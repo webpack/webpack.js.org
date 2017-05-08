@@ -7,9 +7,9 @@ contributors:
   - yatharthk
 ---
 
-The `plugins` option is used to customize the webpack build process in a variety of ways. webpack comes with a variety built-in plugins available under `webpack.[plugin-name]`. See [this page](/plugins) for a list of plugins and documentation but note that there are a lot more out in the community.
+The `plugins` option is used to customize the webpack build process in a variety of ways. webpack comes with a variety built-in plugins available under `webpack.[plugin-name]`. See [this page](/documentation/plugins) for a list of plugins and documentation but note that there are a lot more out in the community.
 
-T> Note: This page only discusses using plugins, however if you are interested in writing your own please visit [Writing a Plugin](/development/how-to-write-a-plugin/).
+T> Note: This page only discusses using plugins, however if you are interested in writing your own please visit [Writing a Plugin](/documentation/development/how-to-write-a-plugin/).
 
 
 ## `plugins`

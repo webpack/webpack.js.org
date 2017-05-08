@@ -22,7 +22,7 @@ npm install --save-dev css-loader
 npm install --save-dev ts-loader
 ```
 
-Secondly, configure in your `webpack.config.js` that for every `.css` file the [`css-loader`](/loaders/css-loader) should be used and analogously for `.ts` files and the `ts-loader`:
+Secondly, configure in your `webpack.config.js` that for every `.css` file the [`css-loader`](/documentation/loaders/css-loader) should be used and analogously for `.ts` files and the `ts-loader`:
 
 **webpack.config.js**
 
@@ -30,21 +30,21 @@ Secondly, configure in your `webpack.config.js` that for every `.css` file the [
 module.exports = {
   module: {
     rules: [
-      {test: /\.css$/, use: ['css-loader'](/loaders/css-loader)},
+      {test: /\.css$/, use: ['css-loader'](/documentation/loaders/css-loader)},
       {test: /\.ts$/, use: ['ts-loader'](https://github.com/TypeStrong/ts-loader)}
     ]
   }
 };
 ```
 
-Note that according to the [configuration options](/configuration#options), the following specifications define the identical loader usage:
+Note that according to the [configuration options](/documentation/configuration#options), the following specifications define the identical loader usage:
 
 ```js-with-links-with-details
-{test: /\.css$/, [loader](/configuration/module#rule-loader): 'css-loader'}
+{test: /\.css$/, [loader](/documentation/configuration/module#rule-loader): 'css-loader'}
 // or equivalently
-{test: /\.css$/, [use](/configuration/module#rule-use): 'css-loader'}
+{test: /\.css$/, [use](/documentation/configuration/module#rule-use): 'css-loader'}
 // or equivalently
-{test: /\.css$/, [use](/configuration/module#rule-use): {
+{test: /\.css$/, [use](/documentation/configuration/module#rule-use): {
   loader: 'css-loader',
   options: {}
 }}
@@ -60,7 +60,7 @@ There are three ways to use loaders in your application:
 
 ### Via `webpack.config.js`
 
-[`module.rules`](/configuration/module/#module-rules) allows you to specify several loaders within your webpack configuration.
+[`module.rules`](/documentation/configuration/module/#module-rules) allows you to specify several loaders within your webpack configuration.
 This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader.
 
 ```js-with-links-with-details
@@ -69,9 +69,9 @@ This is a concise way to display loaders, and helps to maintain clean code. It a
       {
         test: /\.css$/,
         use: [
-          { loader: ['style-loader'](/loaders/style-loader)},
+          { loader: ['style-loader'](/documentation/loaders/style-loader)},
           {
-            loader: ['css-loader'](/loaders/css-loader),
+            loader: ['css-loader'](/documentation/loaders/css-loader),
             options: {
               modules: true
             }
@@ -104,7 +104,7 @@ Optionally, you could also use loaders through the CLI:
 webpack --module-bind jade-loader --module-bind 'css=style-loader!css-loader'
 ```
 
-This uses the `jade-loader` for `.jade` files, and the [`style-loader`](/loaders/style-loader) and [`css-loader`](/loaders/css-loader) for `.css` files.
+This uses the `jade-loader` for `.jade` files, and the [`style-loader`](/documentation/loaders/style-loader) and [`css-loader`](/documentation/loaders/css-loader) for `.css` files.
 
 ## Loader Features
 
@@ -118,14 +118,14 @@ This uses the `jade-loader` for `.jade` files, and the [`style-loader`](/loaders
 * Loaders can emit additional arbitrary files.
 
 Loaders allow more power in the JavaScript ecosystem through preprocessing
-functions (loaders). Users now have more flexibility to include fine-grained logic such as compression, packaging, language translations and [more](/loaders).
+functions (loaders). Users now have more flexibility to include fine-grained logic such as compression, packaging, language translations and [more](/documentation/loaders).
 
 ## Resolving Loaders
 
 Loaders follow the standard [module resolution](/concepts/module-resolution/). In most cases it will be loaders from the [module path](/concepts/module-resolution/#module-paths) (think `npm install`, `node_modules`).
 
-[How to write a loader?](/development/how-to-write-a-loader) A loader module is expected to export a function and to be written in Node.js compatible JavaScript. In the common case you manage loaders with npm, but you can also have loaders as files in your app.
+[How to write a loader?](/documentation/development/how-to-write-a-loader) A loader module is expected to export a function and to be written in Node.js compatible JavaScript. In the common case you manage loaders with npm, but you can also have loaders as files in your app.
 
 By convention, loaders are usually named as `XXX-loader`, where `XXX` is the context name. For example, `json-loader`.
 
-The loader name convention and precedence search order is defined by [`resolveLoader.moduleTemplates`](/configuration/resolve#resolveloader) within the webpack configuration API.
+The loader name convention and precedence search order is defined by [`resolveLoader.moduleTemplates`](/documentation/configuration/resolve#resolveloader) within the webpack configuration API.

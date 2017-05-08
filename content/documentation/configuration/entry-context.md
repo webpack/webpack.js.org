@@ -61,4 +61,4 @@ or
 entry: () => new Promise((resolve) => resolve(['./demo', './demo2']))
 ```
 
-When combining with the [`output.library`](/configuration/output#output-library) option: If an array is passed only the last item is exported.
+When combining with the [`output.library`](/documentation/configuration/output#output-library) option: If an array is passed only the last item is exported.

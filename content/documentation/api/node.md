@@ -8,7 +8,7 @@ contributors:
 
 webpack provides a Node.js API which can be used directly in Node.js runtime.
 
-The Node.js API is useful in scenarios in which you need to customize the build or development process since all the reporting and error handling must be done manually and webpack only does the compiling part. For this reason the [`stats`](/configuration/stats) configuration options will not have any effect in the `webpack()` call.
+The Node.js API is useful in scenarios in which you need to customize the build or development process since all the reporting and error handling must be done manually and webpack only does the compiling part. For this reason the [`stats`](/documentation/configuration/stats) configuration options will not have any effect in the `webpack()` call.
 
 
 ## Installation
@@ -31,13 +31,13 @@ import webpack from "webpack";
 
 ## `webpack()`
 
-The imported `webpack` function is fed a webpack [Configuration Object](/configuration/) and runs the webpack compiler if a callback function is provided:
+The imported `webpack` function is fed a webpack [Configuration Object](/documentation/configuration/) and runs the webpack compiler if a callback function is provided:
 
 ``` js-with-links
 const webpack = require("webpack");
 
 webpack({
-  // [Configuration Object](/configuration/)
+  // [Configuration Object](/documentation/configuration/)
 }, (err, [stats](#stats-object)) => {
   if (err || stats.hasErrors()) {
     // [Handle errors here](#error-handling)
@@ -65,7 +65,7 @@ T> webpack will **not** run the multiple configurations in parallel. Each config
 
 ## Compiler Instance
 
-If you don’t pass the `webpack` runner function a callback, it will return a webpack `Compiler` instance. This instance can be used to manually trigger the webpack runner or have it build and watch for changes. Much like the [CLI](/api/cli/) Api. The `Compiler` instance provides the following methods:
+If you don’t pass the `webpack` runner function a callback, it will return a webpack `Compiler` instance. This instance can be used to manually trigger the webpack runner or have it build and watch for changes. Much like the [CLI](/documentation/api/cli/) Api. The `Compiler` instance provides the following methods:
 
 * `.run(callback)`
 * `.watch(watchOptions, handler)`
@@ -79,7 +79,7 @@ Calling the `run` method on the `Compiler` instance is much like the quick run m
 const webpack = require("webpack");
 
 const compiler = webpack({
-  // [Configuration Object](/configuration/)
+  // [Configuration Object](/documentation/configuration/)
 });
 
 compiler.run((err, [stats](#stats-object)) => {
@@ -100,11 +100,11 @@ watch(watchOptions, callback)
 const webpack = require("webpack");
 
 const compiler = webpack({
-  // [Configuration Object](/configuration/)
+  // [Configuration Object](/documentation/configuration/)
 });
 
 const watching = compiler.watch({
-  <details><summary>/* [watchOptions](/configuration/watch/#watchoptions) */</summary>
+  <details><summary>/* [watchOptions](/documentation/configuration/watch/#watchoptions) */</summary>
   aggregateTimeout: 300,
   poll: undefined
   </details>
@@ -114,7 +114,7 @@ const watching = compiler.watch({
 });
 ```
 
-`Watching` options are [covered in detail here](/configuration/watch/#watchoptions).
+`Watching` options are [covered in detail here](/documentation/configuration/watch/#watchoptions).
 
 
 ### Close `Watching`
@@ -147,7 +147,7 @@ The `stats` object that is passed as a second argument of the [`webpack()`](#web
 * Module and Chunk information
 * and much more...
 
-The [webpack CLI](/api/cli) uses this information to display a nicely formatted output in your console.
+The [webpack CLI](/documentation/api/cli) uses this information to display a nicely formatted output in your console.
 
 This object exposes these methods:
 
@@ -167,7 +167,7 @@ Can be used to check if there were warnings while compiling. Returns `true` or `
 Returns compilation information as a JSON object. `options` can be either a string (a preset) or an object for more granular control:
 
 ``` js-with-links
-stats.toJson("minimal"); // [more options: "verbose", etc](/configuration/stats).
+stats.toJson("minimal"); // [more options: "verbose", etc](/documentation/configuration/stats).
 ```
 
 ``` js
@@ -177,16 +177,16 @@ stats.toJson({
 });
 ```
 
-All available options and presets are described in [Stats documentation](/configuration/stats)
+All available options and presets are described in [Stats documentation](/documentation/configuration/stats)
 
 > Here’s [an example of this function’s output](https://github.com/webpack/analyse/blob/master/app/pages/upload/example.json)
 
 
 ### `stats.toString(options)`
 
-Returns a formatted string of the compilation information (similar to [CLI](/api/cli) output).
+Returns a formatted string of the compilation information (similar to [CLI](/documentation/api/cli) output).
 
-Options are the same as [`stats.toJson(options)`](/api/node#stats-tojson-options-) with one addition:
+Options are the same as [`stats.toJson(options)`](/documentation/api/node#stats-tojson-options-) with one addition:
 
 ``` js
 stats.toString({
@@ -202,7 +202,7 @@ Here’s an example of `stats.toString()` usage:
 const webpack = require("webpack");
 
 webpack({
-  // [Configuration Object](/configuration/)
+  // [Configuration Object](/documentation/configuration/)
 }, (err, stats) => {
   if (err) {
     console.error(err);
@@ -231,7 +231,7 @@ Here’s an example that does all that:
 const webpack = require("webpack");
 
 webpack({
-  // [Configuration Object](/configuration/)
+  // [Configuration Object](/documentation/configuration/)
 }, (err, stats) => {
   if (err) {
     console.error(err.stack || err);

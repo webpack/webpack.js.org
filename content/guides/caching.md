@@ -161,7 +161,7 @@ To generate identifiers that are preserved over builds, webpack supplies the `Na
 
 The chunk manifest (along with bootstrapping/runtime code) is then placed into the entry chunk and it is crucial for webpack-packaged code to work.
 
-T> Separate your vendor and application code with [CommonsChunkPlugin](/plugins/commons-chunk-plugin) and create an explicit vendor chunk to prevent it from changing too often. When `CommonsChunkPlugin` is used, the runtime code is moved to the *last* common entry.
+T> Separate your vendor and application code with [CommonsChunkPlugin](/documentation/plugins/commons-chunk-plugin) and create an explicit vendor chunk to prevent it from changing too often. When `CommonsChunkPlugin` is used, the runtime code is moved to the *last* common entry.
 
 The problem with this, is the same as before: Whenever we change any part of the code it will, even if the rest of its contents wasn’t altered, update our entry chunk to include the new manifest. This in turn, will lead to a new hash and dismiss the long-term caching.
 

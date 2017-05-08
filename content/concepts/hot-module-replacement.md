@@ -43,7 +43,7 @@ Each update chunk contains code for all updated modules in the respective chunk
 
 The compiler makes sure that module IDs and chunk IDs are consistent
 between these builds. It typically stores these IDs in memory (for example, when
-using [webpack-dev-server](/configuration/dev-server/)), but it's also possible to
+using [webpack-dev-server](/documentation/configuration/dev-server/)), but it's also possible to
 store them in a JSON file.
 
 
@@ -89,7 +89,7 @@ switches back to the `idle` state and everything continues as normal.
 ## What It Can Be Used For
 
 You can use it in development as a LiveReload replacement.
-[webpack-dev-server](/configuration/dev-server/) supports a
+[webpack-dev-server](/documentation/configuration/dev-server/) supports a
 hot mode in which it tries to update with HMR before trying to reload the whole page. See how
 to implement [HMR with React](/guides/hmr-react) as an example.
 

@@ -28,7 +28,7 @@ Each editor has a different way of disabling this. For the most common ones:
 
 When a JavaScript exception occurs, you'll often want to know what file and line is generating this error. Since webpack outputs files into one or more bundles, it can be inconvenient to trace the file.
 
-**Source maps** intend to fix this problem. There are a lot of [different options](/configuration/devtool) - each with their own advantages and disadvantages. To get started, we'll use this one:
+**Source maps** intend to fix this problem. There are a lot of [different options](/documentation/configuration/devtool) - each with their own advantages and disadvantages. To get started, we'll use this one:
 
 ```js
 devtool: "cheap-eval-source-map"
@@ -121,13 +121,13 @@ T> If your console says it can't find the command, try running `node_modules/.bi
 
 The command above should automatically open your browser on `http://localhost:8080`.
 
-Make a change in one of your files and hit save. You should see that the console is recompiling. After that's done, the page should be refreshed. If nothing happens in the console, you may need to fiddle with [`watchOptions`](/configuration/dev-server#devserver-watchoptions-).
+Make a change in one of your files and hit save. You should see that the console is recompiling. After that's done, the page should be refreshed. If nothing happens in the console, you may need to fiddle with [`watchOptions`](/documentation/configuration/dev-server#devserver-watchoptions-).
 
 Now you have live reloading working, you can take it even a step further: Hot Module Replacement. This is an interface that makes it possible to swap modules **without a page refresh**. Find out how to [configure HMR](/guides/hmr-react).
 
 By default **inline mode** is used. This mode injects the client - needed for live reloading and showing build errors - in your bundle. With inline mode you will get build errors and warnings in your DevTools console.
 
-webpack-dev-server can do many more things such as proxying requests to your backend server. For more configuration options, see the [**devServer documentation**](/configuration/dev-server).
+webpack-dev-server can do many more things such as proxying requests to your backend server. For more configuration options, see the [**devServer documentation**](/documentation/configuration/dev-server).
 
 
 ### webpack-dev-middleware
@@ -177,7 +177,7 @@ app.use(webpackDevMiddleware(compiler, {
 }));
 ```
 
-There are many more options you can use. For all configuration options, see the [**devServer documentation**](/configuration/dev-server).
+There are many more options you can use. For all configuration options, see the [**devServer documentation**](/documentation/configuration/dev-server).
 
 
 ## References

@@ -3,7 +3,7 @@ title: Plugin API
 sort: 1
 ---
 
-T> For a high-level introduction to writing plugins, start with [How to write a plugin](/development/how-to-write-a-plugin).
+T> For a high-level introduction to writing plugins, start with [How to write a plugin](/documentation/development/how-to-write-a-plugin).
 
 webpack provides flexible and powerful customization api in the form of plugins. Using plugins, we can plug functionality into webpack. Additionally, webpack provides lifecycle hooks into which plugins can be registered. At each of these lifecycle points, webpack will run all of the registered plugins and provide them with the current state of the webpack compilation.
 

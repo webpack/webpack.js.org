@@ -86,7 +86,7 @@ For this example, we will use a single webpack config file, with the following a
 * all app source code lives inside the `<root>/src` folder
 * the entry point to the app is at `/src/index.js`
 
-T> Please review the [webpack-dev-server options](/configuration/dev-server) and the [concept pages](/concepts) to familiarize yourself with the concepts below
+T> Please review the [webpack-dev-server options](/documentation/configuration/dev-server) and the [concept pages](/concepts) to familiarize yourself with the concepts below
 
 __webpack.config.js__
 

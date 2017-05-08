@@ -18,7 +18,7 @@ contributors:
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
 
-These options were replaced by a single option `resolve.modules`. See [resolving](/configuration/resolve) for more usage.
+These options were replaced by a single option `resolve.modules`. See [resolving](/documentation/configuration/resolve) for more usage.
 
 ``` diff
   resolve: {
@@ -33,12 +33,12 @@ These options were replaced by a single option `resolve.modules`. See [resolving
 
 ## `resolve.extensions`
 
-This option no longer requires passing an empty string. This behavior was moved to `resolve.enforceExtension`. See [resolving](/configuration/resolve) for more usage.
+This option no longer requires passing an empty string. This behavior was moved to `resolve.enforceExtension`. See [resolving](/documentation/configuration/resolve) for more usage.
 
 
 ## `resolve.*`
 
-Several APIs were changed here. Not listed in detail as it's not commonly used. See [resolving](/configuration/resolve) for details.
+Several APIs were changed here. Not listed in detail as it's not commonly used. See [resolving](/documentation/configuration/resolve) for details.
 
 
 ## `module.loaders` is now `module.rules`
@@ -82,7 +82,7 @@ The new naming conventions are easier to understand and are a good reason to upg
 
 ## Chaining loaders
 
-Like in webpack 1, loaders can be chained to pass results from loader to loader. Using the [rule.use](/configuration/module#rule-use)
+Like in webpack 1, loaders can be chained to pass results from loader to loader. Using the [rule.use](/documentation/configuration/module#rule-use)
  configuration option, `use` can be set to an array of loaders.
 In webpack 1, loaders were commonly chained with `!`. This style is only supported using the legacy option `module.loaders`.
 
@@ -350,7 +350,7 @@ module.exports = function(env) {
 };
 ```
 
-See [CLI](/api/cli).
+See [CLI](/documentation/api/cli).
 
 
 ## `require.ensure` and AMD `require` are asynchronous
@@ -577,7 +577,7 @@ module: {
 
 There are some new CLI options for you to use:
 
-`--define process.env.NODE_ENV="production"` See [`DefinePlugin`](/plugins/define-plugin/).
+`--define process.env.NODE_ENV="production"` See [`DefinePlugin`](/documentation/plugins/define-plugin/).
 
 `--display-depth` displays the distance to the entry point for each module.
 

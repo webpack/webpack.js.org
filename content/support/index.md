@@ -17,7 +17,7 @@ The biggest core feature that we want to give you is enjoyment of using webpack.
 Anybody can help by doing any of the following:
 
 *   Submit documentation corrections/enhancements to [webpack.js.org](https://github.com/webpack/webpack.js.org) (read the [Writer's guide](/writers-guide) beforehand)
-*   Contribute code to [webpack](https://github.com/webpack/webpack) (see this handy [Development guide](/development/) made for you)
+*   Contribute code to [webpack](https://github.com/webpack/webpack) (see this handy [Development guide](/documentation/development/) made for you)
 *   [Donate](https://opencollective.com/webpack/donate) to our [open collective](https://opencollective.com/webpack)
 *   [Sponsor webpack](https://opencollective.com/webpack#support)
 *   Ask your employer to use webpack in projects

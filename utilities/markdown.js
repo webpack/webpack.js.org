@@ -109,7 +109,7 @@ module.exports = function() {
     },
 
     // Note that this should correspond with renderer.heading
-    getAnchors: function(content) {
+    getAnchors: function(content = '') {
       return marked.lexer(content)
         .filter(chunk => chunk.type === 'heading')
         .map(chunk => parseAnchor(chunk.text));

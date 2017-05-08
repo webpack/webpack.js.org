@@ -12,7 +12,7 @@ contributors:
   - jecoopr
 ---
 
-webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/guides/installation).
+webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/documentation/api/cli) or [api](/documentation/api/node), follow the [Installation instructions](/guides/installation).
 webpack simplifies your workflow by quickly constructing a dependency graph of your application and bundling them in the right order. webpack can be configured to customise optimisations to your code, to split vendor/css/js code for production, run a development server that hot-reloads your code without page refresh and many such cool features. Learn more about [why you should use webpack](/guides/why-webpack).
 
 
@@ -202,4 +202,4 @@ T> You can pass custom parameters to webpack by adding two dashes to the `npm ru
 
 ## Conclusion
 
-Now that you have a basic build together, you should dig into the [basic concepts](/concepts) and [configuration](/configuration) of webpack to better understand its design. Also check out the [guides](/guides) to learn how to approach common problems. The [API](/api) section digs into the lower level features.
+Now that you have a basic build together, you should dig into the [basic concepts](/concepts) and [configuration](/documentation/configuration) of webpack to better understand its design. Also check out the [guides](/guides) to learn how to approach common problems. The [API](/documentation/api) section digs into the lower level features.
