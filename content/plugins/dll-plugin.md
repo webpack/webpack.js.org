@@ -6,6 +6,8 @@ contributors:
   - opiepj
   - simon04
   - skipjack
+related:
+  - code splitting example | https://github.com/webpack/webpack/tree/master/examples/explicit-vendor-chunk/README.md
 ---
 
 ## Introduction
@@ -101,11 +103,6 @@ new webpack.DllReferencePlugin({
 _Two separate example folders. Demonstrates scope and context._
 
 T> Multiple `DllPlugins` and multiple `DllReferencePlugins`.
-
-
-### Related
-
-* [code splitting example](https://github.com/webpack/webpack/tree/master/examples/explicit-vendor-chunk/README.md)
 
 
 ## References
