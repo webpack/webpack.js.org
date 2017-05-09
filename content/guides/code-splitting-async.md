@@ -7,11 +7,13 @@ contributors:
   - pksjce
   - rahulcs
   - johnstew
+related:
+  - Lazy Loading ES2015 Modules in the Browser | https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser
 ---
 
 This guide documents how to split your bundle into chunks which can be downloaded asynchronously at a later time. For instance, this allows to serve a minimal bootstrap bundle first and to asynchronously additional features later.
 
-webpack supports two similar techniques to achieve this goal: using `import()` (preferred, ECMAScript proposal) and `require.ensure()` (legacy, webpack specific). 
+webpack supports two similar techniques to achieve this goal: using `import()` (preferred, ECMAScript proposal) and `require.ensure()` (legacy, webpack specific).
 
 
 ## Dynamic import: `import()`
@@ -309,8 +311,3 @@ To execute `b.js`, we will have to require it in a sync manner like `require('./
 * `require.ensure()`
 * * https://github.com/webpack/webpack/tree/master/examples/code-splitting
 * * https://github.com/webpack/webpack/tree/master/examples/named-chunks – illustrates the use of `chunkName`
-
-
-## Weblinks
-
-* [Lazy Loading ES2015 Modules in the Browser](https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser)
