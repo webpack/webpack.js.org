@@ -215,7 +215,7 @@ module.exports = {
 };
 ```
 
-Also checkout the [sourceMaps example](/examples/sourceMaps).
+Also checkout the [sourceMaps example](https://github.com/webpack-contrib/less-loader/tree/master/examples/sourceMaps).
 
 If you want to edit the original Less files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). The blog post is about Sass but it also works for Less.
 
