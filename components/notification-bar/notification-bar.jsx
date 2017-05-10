@@ -14,9 +14,7 @@ export default class NotificationBar extends React.Component {
             Sponsor webpack and get apparel at the same time! Visit <a href="https://webpack.threadless.com">the official webpack shop!</a>&nbsp; All proceeds go to webpack's <a href="https://opencollective.com/webpack">Open Collective page!</a>
           </p>
           <p>
-            Version 2 was just released! Read the <a href="https://medium.com/webpack/webpack-2-and-beyond-40520af9067f#.ojp0x5ls1">announcement</a>&nbsp;
-            and <a href="/guides/installation">install it</a>&nbsp;
-            today! &nbsp; Buy the brand-new webpack stickers at <a href="http://www.unixstickers.com/tag/webpack">Unixstickers!</a>
+            Buy the brand-new webpack stickers at <a href="http://www.unixstickers.com/tag/webpack">Unixstickers!</a>
 
             <i
               className="notification-bar__close icon-cross"
