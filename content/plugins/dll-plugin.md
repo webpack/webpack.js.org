@@ -7,7 +7,8 @@ contributors:
   - simon04
   - skipjack
 related:
-  - code splitting example | https://github.com/webpack/webpack/tree/master/examples/explicit-vendor-chunk/README.md
+  - title: Code Splitting Example
+    url: https://github.com/webpack/webpack/tree/master/examples/explicit-vendor-chunk/README.md
 ---
 
 ## Introduction
