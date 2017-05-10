@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from '../container/container';
 
-const version = '0';
+const version = '1';
 
 export default class NotificationBar extends React.Component {
   render() {
