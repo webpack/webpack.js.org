@@ -50,8 +50,8 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 * [`css-loader`](/loaders/css-loader) Loads CSS file with resolved imports and returns CSS code
 * [`less-loader`](/loaders/less-loader) Loads and compiles a LESS file
 * [`sass-loader`](/loaders/sass-loader) Loads and compiles a SASS/SCSS file
+* [`postcss-loader`](/loaders/postcss-loader) Loads and transforms a CSS/SSS file using [PostCSS](http://postcss.org)
 * `stylus-loader` Loads and compiles a Stylus file
-* `postcss-loader` Loads and transforms a CSS/SSS file using [PostCSS](http://postcss.org)
 
 
 ## Linting && Testing
