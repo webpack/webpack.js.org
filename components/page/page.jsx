@@ -40,24 +40,13 @@ export default ({ section, page }) => (
           <h3>Further Reading</h3>
           <ul>
             {
-              page.related.map((string, index) => {
-                let link = string.split(' | ');
-
-                if ( link.length !== 2 ) {
-                  throw new Error(
-                    `Invalid related link: ${string}\r\n` +
-                    `Use this format: link title | http://example.com`
-                  );
-                }
-
-                return (
-                  <li key={ index }>
-                    <a href={ link[1] }>
-                      { link[0] }
-                    </a>
-                  </li>
-                );
-              })
+              page.related.map((link, index) => (
+                <li key={ index }>
+                  <a href={ link.url }>
+                    { link.title }
+                  </a>
+                </li>
+              ))
             }
           </ul>
         </div>

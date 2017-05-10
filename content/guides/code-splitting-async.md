@@ -8,7 +8,8 @@ contributors:
   - rahulcs
   - johnstew
 related:
-  - Lazy Loading ES2015 Modules in the Browser | https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser
+  - title: Lazy Loading ES2015 Modules in the Browser
+    url: https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser
 ---
 
 This guide documents how to split your bundle into chunks which can be downloaded asynchronously at a later time. For instance, this allows to serve a minimal bootstrap bundle first and to asynchronously additional features later.
