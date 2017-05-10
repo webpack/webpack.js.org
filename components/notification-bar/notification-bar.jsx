@@ -16,9 +16,9 @@ export default class NotificationBar extends React.Component {
           <p>
             Version 2 was just released! Read the <a href="https://medium.com/webpack/webpack-2-and-beyond-40520af9067f#.ojp0x5ls1">announcement</a>&nbsp;
             and <a href="/guides/installation">install it</a>&nbsp;
-            today!
+            today! &nbsp; Buy the brand-new webpack stickers at <a href="http://www.unixstickers.com/tag/webpack">Unixstickers!</a>
 
-            <i 
+            <i
               className="notification-bar__close icon-cross"
               onClick={ this._close.bind(this) } />
           </p>
@@ -29,7 +29,7 @@ export default class NotificationBar extends React.Component {
 
   /**
    * Update the notification-dismissed state
-   * 
+   *
    * @param {object} e - Click event
    */
   _close(e) {
@@ -39,7 +39,7 @@ export default class NotificationBar extends React.Component {
 
   /**
    * Determine whether or not the current message was dismissed
-   * 
+   *
    * @return {boolean} - Whether or not the current message was dismissed
    */
   get _dismissed() {
