@@ -9,6 +9,8 @@ edit: https://github.com/webpack-contrib/json-loader/edit/master/README.md
 npm install --save-dev json-loader
 ```
 
+⚠️ **Note: Since webpack v2, importing of JSON files will work by default. You might still want to use this if you use a custom file extension.** 
+
 ## Usage
 
 
@@ -48,17 +50,6 @@ import json from 'file.json';
 import json from 'json-loader!file.json';
 ```
 
-
-
-### Options
-
-#### `stringify`
-
-By default, the json-loader will output the json object, set this query parameter to 'true' can output the json object as a string, e.g. `require('json-loader?stringify!../index.json')`.
-
-
-
-
 ## Maintainer
 
 <table>
@@ -96,7 +87,6 @@ By default, the json-loader will output the json object, set this query paramete
     </tr>
   <tbody>
 </table>
-
 
 [npm]: https://img.shields.io/npm/v/json-loader.svg
 [npm-url]: https://npmjs.com/package/json-loader
