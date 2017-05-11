@@ -91,3 +91,7 @@ require("gzip-loader!./file.js.gz");
 
 [cover]: https://codecov.io/gh/webpack-contrib/gzip-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/gzip-loader
+
+***
+
+> 原文：https://webpack.js.org/loaders/gzip-loader/

@@ -140,3 +140,7 @@ hash 操作请参照 [loader-utils](https://github.com/webpack/loader-utils#inte
 
 [cover]: https://codecov.io/gh/webpack-contrib/svg-inline-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/svg-inline-loader
+
+***
+
+> 原文：https://webpack.js.org/loaders/svg-inline-loader/

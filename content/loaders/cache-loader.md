@@ -81,3 +81,7 @@ use: [
 
 [cover]: https://codecov.io/gh/webpack-contrib/cache-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/cache-loader
+
+***
+
+> 原文：https://webpack.js.org/loaders/cache-loader/

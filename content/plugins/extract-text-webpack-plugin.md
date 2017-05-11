@@ -216,4 +216,4 @@ plugins: [
 
 ***
 
-> 原文：https://webpack.js.org/loaders/expose-loader/
+> 原文：https://webpack.js.org/plugins/extract-text-webpack-plugin/
