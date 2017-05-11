@@ -4,6 +4,7 @@ contributors:
     - pksjce
     - johnstew
     - simon04
+    - 5angel
 ---
 
 webpack is a tool which can be used to bundle application code and also to bundle library code. If you are the author of a JavaScript library and are looking to streamline your bundle strategy then this document will help you.
@@ -129,6 +130,42 @@ This means that your library expects a dependency named `lodash` to be available
 
 If your libary targets UMD, it's important to add all of the above mentioned ways of loading the external (`commonjs`, `commonjs2`, `amd` and `root`) as leaving one out will cause strange errors for a consumer trying to load your library in that environment.
 
+If you only plan on using your library as a dependency in another webpack bundle, you may specify externals as an array.
+
+```javascript
+module.exports = {
+    ...
+    externals: [
+      'react',
+      'react-dom'
+    ]
+    ...
+};
+```
+
+Please note: for bundles that use several files from a package like this
+
+```javascript
+import A from 'library/A';
+import B from 'library/B';
+...
+```
+
+you wont be able to exclude them from bundle by specifying `library` in the externals.
+
+You'll either need to exclude them one by one or by using a regular expression.
+
+```javascript
+module.exports = {
+    ...
+    externals: [
+      'library/A',
+      'library/B',
+      /^library\/.+$/ // everything that starts with "library/"
+    ]
+    ...
+};
+```
 
 ### Add `libraryTarget`
 
