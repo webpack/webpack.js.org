@@ -11,15 +11,15 @@ npm install --save-dev url-loader
 
 ## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
-`url` 加载器的功能类似 `file` 加载器，但是在文件大小低于指定的限制时（单位 bytes）可以返回一个 Data Url。
+`url-loader` 功能类似于 [`file-loader`](https://github.com/webpack-contrib/file-loader)，但是在文件大小（单位 byte）低于指定的限制时，可以返回一个 [data URL](https://tools.ietf.org/html/rfc2397)。
 
-大小限制可以通过传递查询参数来指定。（默认为无限制）
+可以通过传递查询参数(query parameter)来指定限制（默认为不限制）。
 
-如果文件大小大于限制，将转为使用 [`file-loader`](https://github.com/webpack/file-loader)，所有的查询参数也会透传过去。
+如果文件大小超过限制（的 byte），将转为使用 `file-loader`，所有的查询参数也会透传过去。
 
 ``` javascript
 require("url-loader?limit=10000!./file.png");
-// => 如果 "file.png" 大小小于 10kb 将返回 DataUrl
+// => 如果 "file.png" 大小低于 10kb 将返回 data URL
 
 require("url-loader?mimetype=image/png!./file.png");
 // => 指定文件的 mimetype（否则会用文件后缀推测）

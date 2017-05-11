@@ -3,7 +3,7 @@ title: expose-loader
 source: https://raw.githubusercontent.com/webpack-contrib/expose-loader/master/README.md
 edit: https://github.com/webpack-contrib/expose-loader/edit/master/README.md
 ---
-## Install
+## 安装
 
 ```bash
 npm i expose-loader --save
@@ -11,12 +11,12 @@ npm i expose-loader --save
 
 ## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
-** 注意**: 模块必须在你的 bundle 中被 `require()` 过，否则他们将不会被暴露。
+**注意**: 模块必须在你的 bundle 中被 `require()` 过，否则他们将不会被暴露。
 
 ``` javascript
 require("expose-loader?libraryName!./file.js");
 // 通过属性名 "libraryName" 暴露 file.js 的 exports 到全局上下文。
-// 在浏览器中，就将可以使用 window.libraryName 。
+// 在浏览器中，就将可以使用 window.libraryName 访问。
 ```
 
 例如，假设你要将 jQuery 暴露至全局并称为 `$`：
@@ -29,7 +29,7 @@ require("expose-loader?$!jquery");
 
 或者，你可以通过配置文件来设置：
 
-webpack v1 usage
+webpack v1 用法
 ```
 module: {
   loaders: [
@@ -37,23 +37,23 @@ module: {
   ]
 }
 ```
-webpack v2 usage
+webpack v2 用法
 ```
 module: {
   rules: [{
-          test: require.resolve('jquery'),
-          use: [{
-              loader: 'expose-loader',
-              options: '$'
-          }]
-      }]
+    test: require.resolve('jquery'),
+    use: [{
+      loader: 'expose-loader',
+      options: '$'
+    }]
+  }]
 }
 ```
 
 除了暴露为 `window. $` 之外，假设你还想把它暴露为 `window.jQuery`。
 对于多个暴露，您可以在 loader 字符串中使用 `!`：
 
-webpack v1 usage
+webpack v1 用法
 ```
 module: {
   loaders: [
@@ -61,7 +61,7 @@ module: {
   ]
 }
 ```
-webpack v2 usage
+webpack v2 用法
 ```
 module: {
   rules: [{
@@ -77,7 +77,7 @@ module: {
 }
 ```
 
-`require.resolve` 是一个 node.js 调用（与 webpack 处理中的 `require.resolve` 无关 —— 可以阅读 node.js 文档）。`require.resolve` 用来得到模块对应的绝对路径（"/.../app/node_modules/react/react.js"），所以这里只会对 React 进行暴露。并且只在 bundle 中用到它时进行暴露。
+[`require.resolve`](https://nodejs.org/api/all.html#globals_require_resolve) 是一个 node.js 调用（与 webpack 处理流程中的 `require.resolve` 无关）。`require.resolve` 用来获取模块的绝对路径（`"/.../app/node_modules/react/react.js"`）。所以这里的暴露只会作用于 React 模块。并且只在 bundle 中使用到它时，才进行暴露。
 
 
 ## 维护人员

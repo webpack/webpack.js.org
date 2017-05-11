@@ -53,10 +53,10 @@ require("imports-loader?$=jquery,angular,config=>{size:50}!./file.js");
 module.exports = {
     ...
     module: {
-        loaders: [
+        rules: [
             {
                 test: require.resolve("some-module"),
-                loader: "imports-loader?this=>window"
+                use: "imports-loader?this=>window"
             }
         ]
     }

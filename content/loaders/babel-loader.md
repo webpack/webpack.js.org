@@ -3,40 +3,30 @@ title: babel-loader
 source: https://raw.githubusercontent.com/babel/babel-loader/master/README.md
 edit: https://github.com/babel/babel-loader/edit/master/README.md
 ---
-# babel-loader
-[![NPM Status](https://img.shields.io/npm/v/babel-loader.svg?style=flat)](https://www.npmjs.com/package/babel-loader)
-[![Build Status](https://travis-ci.org/babel/babel-loader.svg?branch=master)](https://travis-ci.org/babel/babel-loader)
-[![Build Status](https://ci.appveyor.com/api/projects/status/vgtpr2i5bykgyuqo/branch/master?svg=true)](https://ci.appveyor.com/project/danez/babel-loader/branch/master)
-[![codecov](https://codecov.io/gh/babel/babel-loader/branch/master/graph/badge.svg)](https://codecov.io/gh/babel/babel-loader)
-  > Babel 是一个用来支持编写下一代 JavaScript 的编译器。
-
-这个包允许我们使用 [Babel](https://github.com/babel/babel) 和 [webpack](https://github.com/webpack/webpack) 来转译 JavaScript 文件。
-
-  __注意：__对于输出结果的 issues 应该提交到 babel [issue tracker](https://github.com/babel/babel/issues)。
-
 ## 安装
 
-```bash
-npm install babel-loader babel-core babel-preset-env webpack --save-dev
-```
-
-或者使用 yarn
+> webpack 1.x | babel-loader <= 6.x
+>
+> webpack 2.x | babel-loader >= 7.x （推荐）（^6.2.10 也可以运行，但会有不赞成的警告(deprecation warnings)）
 
 ```bash
 yarn add babel-loader babel-core babel-preset-env webpack --dev
 ```
 
-__注意：__ [npm](https://npmjs.com) 从 npm@3 版本开始废除了 [隐含依赖自动安装 (auto-installing of peerDependencies)](https://github.com/npm/npm/issues/6565)，所以需要的隐含依赖 (peer dependencies) 例如 babel-core 和 webpack 必须被显式的在你的 `package.json` 中列出。
- 
-__注意：__ 如果你正在从 babel 5 升级到 babel 6，请参考 [这篇指南](https://medium.com/@malyw/how-to-update-babel-5-x-6-x-d828c230ec53#.yqxukuzdk)。
+我们推荐您使用 yarn，但还是可以使用 npm：
+We recommend using yarn, but you can also still use npm:
+
+```bash
+npm install --save-dev babel-loader babel-core babel-preset-env webpack
+```
 
 ## 用法
 
-[文档：使用加载器](http://webpack.github.io/docs/using-loaders.html)
+[文档：使用 loader](https://webpack.js.org/loaders/)
 
-在你的 webpack 配置对象中，你需要添加 babel-loader 到 module 的 loaders 列表中，像下面这样：
+在 webpack 配置对象中，需要添加 babel-loader 到 module 的 loaders 列表中，像下面这样：
 
-  ```javascript
+```javascript
 module: {
   rules: [
     {
@@ -51,29 +41,16 @@ module: {
     }
   ]
 }
-  ```
+```
 
 ### 选项
 
-参考 `babel` [选项(options)](http://babeljs.io/docs/usage/options/).
+参考 `babel` [选项](https://babeljs.io/docs/usage/api/#options)。
 
-你可以通过写一个 [查询字符串(query string)](https://github.com/webpack/loader-utils) 来给加载器传递选项:
 
-  ```javascript
-module: {
-  rules: [
-    {
-      test: /\.js$/,
-      exclude: /(node_modules|bower_components)/,
-      loader: 'babel-loader?presets[]=env'
-    }
-  ]
-}
-  ```
+你可以使用 [options 属性](https://webpack.js.org/configuration/module/#rule-options-rule-query) 来给 loader 传递选项：
 
-或者通过使用 [查询属性(query property)](https://webpack.github.io/docs/using-loaders.html#query-parameters)：
-
-  ```javascript
+```javascript
 module: {
   rules: [
     {
@@ -82,79 +59,61 @@ module: {
       use: {
         loader: 'babel-loader',
         options: {
-          presets: ['env']
+          presets: ['env'],
+          plugins: [require('babel-plugin-transform-object-rest-spread')]
         }
       }
     }
   ]
 }
-  ```
+```
 
-或者使用全局选项：
-  
-> 注意这种方式只能在 webpack 1 中使用，webpack 2 中不再支持。
+此 loader 也支持下面这些 loader 特定(loader-specific)的选项：
 
-  ```javascript
-module: {
-  loaders: [
-    {
-      test: /\.js$/,
-      exclude: /(node_modules|bower_components)/,
-      loader: 'babel-loader'
-    }
-  ]
-},
-babel: {
-  presets: ['es2015']
-}
-  ```
+* `cacheDirectory`：默认值为 `false`。当有设置时，指定的目录将用来缓存 loader 的执行结果。之后的 webpack 构建，将会尝试读取缓存，来避免在每次执行时，可能产生的、高性能消耗的 Babel 重新编译过程(recompilation process)。如果设置了一个空值 (`loader: 'babel-loader?cacheDirectory'`) 或者 `true` (`loader: babel-loader?cacheDirectory=true`)，loader 将使用默认的缓存目录 `node_modules/.cache/babel-loader`，如果在任何根目录下都没有找到 `node_modules` 目录，将会降级回退到操作系统默认的临时文件目录。
 
-这个加载器也支持下面这些特定的选项：
+* `cacheIdentifier`：默认是一个由 babel-core 版本号，babel-loader 版本号，.babelrc 文件内容（存在的情况下），环境变量 `BABEL_ENV` 的值（没有时降级到 `NODE_ENV`）组成的字符串。可以设置为一个自定义的值，在 identifier 改变后，强制缓存失效。
 
-* `cacheDirectory`：默认值为 `false`。当有设置时，指定的目录将用来缓存加载器的执行结果，之后的构建将尝试读取缓存来避免在每次执行时 Babel 可能产生的重新编译流程。如果设置了一个空值 (`loader: 'babel-loader?cacheDirectory'`) 或者 `true` (`loader: babel-loader?cacheDirectory=true`)，加载器将使用默认的缓存目录 `node_modules/.cache/babel-loader`，如果根目录下找不到 `node_modules` 目录，将会降级到操作系统默认的临时文件目录。
+* `forceEnv`：默认将解析 BABEL_ENV 然后是 NODE_ENV。允许你在 loader 级别上覆盖 BABEL_ENV/NODE_ENV。对有不同 babel 配置的，客户端和服务端同构应用非常有用。
 
-* `cacheIdentifier`：默认是一个由 babel-core 版本号，babel-loader 版本号，.babelrc 文件内容 (存在的情况下)，环境变量 `BABEL_ENV` 的值 (没有时降级到 `NODE_ENV`) 组成的字符串。它可以被设置为一个自定义的值，通过值的改变可以强制丢弃缓存。
-
-
-* `babelrc`：默认值为 `true`。当设置为 `false` 时，将忽略 `.babelrc` 文件 (`extends` 选项的引用除外)。
-
-
-* `forceEnv`：默认将解析 BABEL_ENV 然后是 NODE_ENV。允许你在加载器的级别上覆盖 BABEL_ENV/NODE_ENV。对在前端和服务端有不同 babel 配置的同构应用非常有用。
-
-__注意：__`sourceMap` 选项是被忽略的。取而代之的是当你的 webpack (通过 `devtool` 配置选项)配置了 sourceMap 时将会自动被开启。
+__注意：__`sourceMap` 选项是被忽略的。当 webpack 配置了 sourceMap 时（通过 `devtool` 配置选项），将会自动生成 sourceMap。
 
 ## 疑难解答
 
 ### babel-loader 很慢！
 
-确保转译尽可能少的文件。你可能在使用 `/\.js$/` 来匹配，这样也许会去转译 `node_modules` 目录或者其他不需要的源代码。
+确保转译尽可能少的文件。你可能使用 `/\.js$/` 来匹配，这样也许会去转译 `node_modules` 目录或者其他不需要的源代码。
 
 要排除 `node_modules`，参考文档中的 `loaders` 配置的 `exclude` 选项。
 
-你也可以通过使用 `cacheDirectory` 选项将 babel-loader 提速至少两倍。这将缓存转译的结果到文件系统中。
+你也可以通过使用 `cacheDirectory` 选项，将 babel-loader 提速至少两倍。
+这会将转译的结果缓存到文件系统中。
 
 ### babel 在每个文件都插入了辅助代码，使代码体积过大！
 
-babel 对一些公共方法使用非常少量的辅助代码，比如 `_extend`。默认情况下它们将被加到需要的每个文件中。
+babel 对一些公共方法使用了非常小的辅助代码，比如 `_extend`。
+默认情况下会被添加到每一个需要它的文件中
 
-你可以引入 babel runtime 作为一个独立模块取而代之，来避免重复插入。
+你可以引入 babel runtime 作为一个独立模块，来避免重复引入。
 
-下面的配置禁用了 babel 自动对单文件的 runtime 注入，而是引入 `babel-plugin-transform-runtime` 并且使所有辅助代码从这里引用。
+下面的配置禁用了 babel 自动对每个文件的 runtime 注入，而是引入 `babel-plugin-transform-runtime` 并且使所有辅助代码从这里引用。
 
-更多信息请参考 [文档](http://babeljs.io/docs/plugins/transform-runtime/)。
+更多信息请参考[文档](http://babeljs.io/docs/plugins/transform-runtime/)。
 
 **注意：** 你必须执行 `npm install babel-plugin-transform-runtime --save-dev` 来把它包含到你的项目中，也要使用 `npm install babel-runtime --save` 把 `babel-runtime` 安装为一个依赖。
 
 ```javascript
-loaders: [
+rules: [
   // 'transform-runtime' 插件告诉 babel 要引用 runtime 来代替注入。
   {
     test: /\.js$/,
     exclude: /(node_modules|bower_components)/,
-    loader: 'babel-loader',
-    query: {
-      presets: ['env'],
-      plugins: ['transform-runtime']
+    use: {
+      loader: 'babel-loader',
+      options: {
+        presets: ['env'],
+        plugins: ['transform-runtime']
+      }
     }
   }
 ]
@@ -233,3 +192,7 @@ Webpack 将尝试读取 `babel` 包而不是 `babel-loader`。
 ```
 
 ## [License](http://couto.mit-license.org/)
+
+***
+
+> 原文：https://webpack.js.org/loaders/babel-loader/

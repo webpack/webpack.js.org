@@ -11,7 +11,7 @@ npm install --save-dev restyle-loader
 
 ## 用法
 
-[文档：使用 loaders](https://webpack.js.org/loaders/)
+[文档：使用 loader](https://webpack.js.org/loaders/)
 
 ## 示例
 
@@ -33,7 +33,7 @@ npm install --save-dev restyle-loader
   ]
 }
 ```
-需要 hash 来启用热模块替换(Hot Module Replacement)
+hash 需要启用热模块替换(Hot Module Replacement)
 
 **bundle.js**
 
@@ -53,7 +53,7 @@ require("./index.css");
 </head>
 <!-- ... -->
 ```
-Loader 运行后就变成
+loader 运行后就变成
 ```html
 <!-- ... -->
 <head>
@@ -63,7 +63,7 @@ Loader 运行后就变成
 ```
 
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>

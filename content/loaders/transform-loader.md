@@ -11,7 +11,7 @@ npm i transform-loader --save
 
 ## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
-通过查询参数来传递模块名。
+通过查询参数(query parameter)来传递模块名。
 
 ``` javascript
 var x = require("!transform-loader?brfs!./file.js");
@@ -20,7 +20,7 @@ var x = require("!transform-loader/cacheable?brfs!./file.js"); // 可缓存版�
 
 如果你传递了一个数字，将得到 `this.options.transforms[number]` 中的函数。
 
-### webpack 2.x 配置示例
+### webpack 2 配置示例
 
 ``` javascript
 module.exports = {
@@ -81,7 +81,7 @@ module.exports = {
 };
 ```
 
-### webpack 1.x 配置示例
+### webpack 1 配置示例
 
 ``` javascript
 module.exports = {
@@ -122,7 +122,7 @@ module.exports = {
 var test = require('fs').readFileSync('./test.txt', 'utf8');
 ```
 
-在 `npm install transform-loader brfs --save` 之后，像下面这样添加加载器到你的配置中：
+在 `npm install transform-loader brfs --save` 之后，添加如下 loader 到你的配置中：
 
 ```js
 module.exports = {
@@ -139,7 +139,7 @@ module.exports = {
 }
 ```
 
-加载器将应用到所有 JS 文件，这样在执行 watch 任务时将导致性能提醒。因此你也许需要使用带缓存的版本 `transform-loader/cacheable?brfs` 。
+loader 将应用到所有 JS 文件，这样在执行 watch 任务时将导致性能提醒。因此你也许需要使用带缓存的版本 `transform-loader/cacheable?brfs`。
 
 ## 维护人员
 

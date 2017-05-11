@@ -215,7 +215,7 @@ module.exports = {
 };
 ```
 
-Also checkout the [sourceMaps example](/examples/sourceMaps).
+Also checkout the [sourceMaps example](https://github.com/webpack-contrib/less-loader/tree/master/examples/sourceMaps).
 
 如果您要编辑 Chrome 中的原始 Less 文件，[这里有一个很好的博客文章](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0)。此博客文章是关于 Sass 的，但它也适用于 Less。
 
