@@ -14,7 +14,6 @@ yarn add babel-loader babel-core babel-preset-env webpack --dev
 ```
 
 我们推荐您使用 yarn，但还是可以使用 npm：
-We recommend using yarn, but you can also still use npm:
 
 ```bash
 npm install --save-dev babel-loader babel-core babel-preset-env webpack
