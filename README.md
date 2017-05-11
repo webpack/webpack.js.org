@@ -2,7 +2,7 @@
 
 [![Travis](https://img.shields.io/travis/webpack-china/webpack.js.org.svg)](https://travis-ci.org/webpack-china/webpack.js.org)
 
-> https://doc.webpack-china.org webpack 中文文档
+> https://doc.webpack-china.org webpack 中文文档  
 > https://webpack-china.org webpack 中文社区
 
 
