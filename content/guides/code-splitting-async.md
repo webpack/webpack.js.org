@@ -1,5 +1,5 @@
 ---
-title: Code Splitting - Async
+title: 代码分离 - 异步
 sort: 33
 contributors:
   - simon04
@@ -9,19 +9,19 @@ contributors:
   - johnstew
 ---
 
-This guide documents how to split your bundle into chunks which can be downloaded asynchronously at a later time. For instance, this allows to serve a minimal bootstrap bundle first and to asynchronously additional features later.
+本指南介绍了如何将您的 bundle 拆分成可以在之后异步下载的 chunk。例如，这允许首先提供最低限度的引导 bundle，并在稍后再异步地添加其他功能。
 
-webpack supports two similar techniques to achieve this goal: using `import()` (preferred, ECMAScript proposal) and `require.ensure()` (legacy, webpack specific). 
+webpack 支持两种相似的技术实现此目的：使用 `import()` (推荐，ECMAScript 提案) 和 `require.ensure()` (遗留，webpack 特定)。
 
 
-## Dynamic import: `import()`
+## 动态引入：`import()`
 
-Currently, a "function-like" `import()` module loading [syntax proposal](https://github.com/tc39/proposal-dynamic-import) is on the way into ECMAScript.
+目前，ECMAScript 正在引入一种"类函数式(function-like)"的 `import()` 模块加载[语法提案](https://github.com/tc39/proposal-dynamic-import)。
 
-The [ES2015 Loader spec](https://whatwg.github.io/loader/) defines `import()` as method to load ES2015 modules dynamically on runtime.
+[ES2015 loader 规范](https://whatwg.github.io/loader/)定义了 `import()` 作为一种在运行时(runtime)动态载入 ES2015 模块的方法。
 
-webpack treats `import()` as a split-point and puts the requested module in a separate chunk.
-`import()` takes the module name as argument and returns a `Promise`: `import(name) -> Promise`
+webpack 把 `import()` 作为一个分离点(split-point)，并把引入的模块作为一个单独的 chunk。
+`import()` 将模块名字作为参数并返回一个 `Promoise` 对象，即 `import(name) -> Promise`
 
 __index.js__
 
@@ -37,45 +37,45 @@ function determineDate() {
 determineDate();
 ```
 
-Note that fully dynamic statements, such as `import(foo)`, __will fail__ because webpack requires at least some file location information. This is because `foo` could potentially be any path to any file in your system or project. The `import()` must contain at least some information about where the module is located, so bundling can be limited to a specific directory or set of files.
+注意，由于 webpack 至少需要感知到文件的位置信息，因此类似 `import(foo)` 的完全动态语句__会导致失败__。这是因为 `foo` 可以是系统或项目中的任意路径下任意文件。`import()` 至少应感知的信息是模块所处的位置，所以打包将限制在特定目录或一组文件中。
 
-For example, ``import(`./locale/${language}.json`)`` will cause every `.json` file in the `./locale` directory to be bundled into the split-point. At run time, when the variable `language` has been computed, any file like `english.json` or `german.json` will be available for consumption. So keep in mind that when using `import()`, the path must contain some path information or be completely static (as is `'moment'` in the example above).
+例如，``import(`./locale/${language}.json`)`` 将会使 `./locale` 目录下的每个 `.json` 都打包到分离点(split-point)中。在运行时(runtime)，当计算出变量 `language` 时，任何像 `english.json` 或 `german.json` 这样的文件都可以供使用。所以请牢记，在使用 `import()` 时，该路径必须包含路径信息或完整的静态路径（就像上面例子中的 `'moment'` 一样）。
 
 
 ### Promise polyfill
 
-W> `import()` relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally.
+W> `import()` 在内部依赖于 [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)。
 
-If you use `import()` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
+如果你想在老版本浏览器使用 `import()`，请记得使用 polyfill（例如 [es6-promise](https://github.com/stefanpenner/es6-promise) 或 [promise-polyfill](https://github.com/taylorhakes/promise-polyfill)）来 shim `Promise`。
 
-In an entry point of your application:
+在应用程序入口起点处配置：
 
 ```javascript
 import Es6Promise from 'es6-promise';
 Es6Promise.polyfill();
-// or
+// 或
 import 'es6-promise/auto';
-// or
+// 或
 import Promise from 'promise-polyfill';
 if (!window.Promise) {
   window.Promise = Promise;
 }
-// or ...
+// 或 ...
 ```
 
 
-### Chunk names
+### Chunk 名称
 
-Since webpack 2.4.0, chunk names for dynamic imports can be specified using a "magic comment".
+从 webpack 2.4.0 开始，动态导入的 chunk 名称能够指定使用"魔力注释"。
 
 ```javascript
 import(/* webpackChunkName: "my-chunk-name" */ 'module');
 ```
 
 
-### Usage with Babel
+### 配合 Babel 使用
 
-If you want to use `import` with [Babel](http://babeljs.io/), you'll need to install/add the [`syntax-dynamic-import`](http://babeljs.io/docs/plugins/syntax-dynamic-import/) plugin while it's still Stage 3 to get around the parser error. When the proposal is added to the spec this won't be necessary anymore.
+如果你想要在 [Babel](http://babeljs.io/) 中使用 `import`，但是由于 import() 还是属于 Stage 3 的特性，所以你需要安装/添加 [`syntax-dynamic-import`](http://babeljs.io/docs/plugins/syntax-dynamic-import/) 插件来避免 parser 报错。在草案正式成为规范后，就不再需要这个插件了。
 
 ```bash
 npm install --save-dev babel-core babel-loader babel-plugin-syntax-dynamic-import babel-preset-es2015
@@ -120,15 +120,15 @@ module.exports = {
 };
 ```
 
-Not using the `syntax-dynamic-import` plugin will fail the build with:
+没有使用 `syntax-dynamic-import` 插件会导致构建失败，并提示：
 
-* `Module build failed: SyntaxError: 'import' and 'export' may only appear at the top level`, or
-* `Module build failed: SyntaxError: Unexpected token, expected {`
+* `Module build failed(模块构建失败): SyntaxError: 'import' and 'export' may only appear at the top level('import' 和 'export' 只能出现在顶层)`，或提示
+* `Module build failed(模块构建失败): SyntaxError: Unexpected token, expected {`
 
 
-### Usage with Babel and `async`/`await`
+### 使用 Babel 和 `async`/`await`
 
-To use ES2017 [`async`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)/[`await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) with `import()`:
+对 `import()` 使用 ES2017 的 [`async`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)/[`await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)：
 
 ```bash
 npm install --save-dev babel-plugin-transform-async-to-generator babel-plugin-transform-regenerator babel-plugin-transform-runtime
@@ -175,32 +175,32 @@ module.exports = {
 ```
 
 
-### `System.import` is deprecated
+### `System.import` 已废弃
 
-The use of `System.import` in webpack [did not fit the proposed spec](https://github.com/webpack/webpack/issues/2163), so it was deprecated in [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) in favor of `import()`.
+在 webpack 中使用 `System.import` [不符合提案规范](https://github.com/webpack/webpack/issues/2163)，因此已经于 [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) 废弃，建议使用 `import()` 替代。
 
 
 ## `require.ensure()`
 
-W> `require.ensure()` is specific to webpack and superseded by `import()`.
+W> `require.ensure()` 特定于 webpack，可被替代为 `import()`。
 
-webpack statically parses for `require.ensure()` in the code while building. Any module that is referenced as a dependency or `require()`d within the callback function, will be added to a new chunk. This new chunk is written to an async bundle that is loaded on demand by webpack through jsonp.
+webpack 在构建时，会静态解析(statically parse)代码中的 `require.ensure()`。在其中任何被引用的依赖模块，或在回调函数中被 `require()` 的模块，都将被分离到一个新的 chunk 中。这个新的 chunk 会被生成为异步的 bundle，由 webpack 通过 jsonp 来按需加载。
 
-The syntax is as follows:
+语法如下：
 
 ```javascript
 require.ensure(dependencies: String[], callback: function(require), errorCallback: function(error), chunkName: String)
 ```
 
-* `dependencies` is an array of strings where we can declare all the modules that need to be made available before all the code in the callback function can be executed.
-* `callback` is a function that webpack will execute once the dependencies are loaded. An implementation of the `require` function is sent as a parameter to this function. The function body can use this to further `require()` modules it needs for execution.
+* `dependencies` 是一个字符串数组，我们可以在其中声明所有用到的模块，这些模块需要在回调函数的所有代码被执行前，就已经可用。
+* `callback` 是一个函数，当所有的依赖都加载完成后，webpack 会立刻执行此回调函数。具体实现上，`require` 函数将作为一个参数传递给此回调函数。因此，我们可以在回调函数体(function body)内进一步使用 `require()` 来引入执行时所需要的那些模块。
 
-W> Although the implementation of `require` is passed as an argument to the callback function, using an arbitrary name e.g. `require.ensure([], function (request) { request('someModule'); })` isn't handled by webpack's static parser. Use `require` instead: `require.ensure([], function (require) { require('someModule'); })`
+W> 虽然在具体实现上，`require` 会作为参数传递给回调函数，但是使用一个非 require 的任意名称（比如 `require.ensure([], function (request) { request('someModule'); })`）将不会由 webpack 的静态解析器(static parser)处理。所以请使用 `require` 而不是 `require.ensure([], function (require) { require('someModule'); })`
 
-* optional: `errorCallback` is a function that is executed when webpack fails to load the dependencies.
-* optional: `chunkName` is a name given to the chunk created by this particular `require.ensure()`. By passing the same `chunkName` to various `require.ensure()` calls, we can combine their code into a single chunk, resulting in only one bundle that the browser must load.
+* 可选的：`errorCallback` 是一个函数，用于在 webpack 加载依赖失败时执行。
+* 可选的：`chunkName` 是专用于设定通过 `require.ensure()` 创建的 chunk 的名称。通过向多个 `require.ensure()` 传递相同的 `chunkName`，我们可以将它们的代码组合成一个单独的 chunk，只生成一个浏览器必须加载的 bundle。
 
-Let's reconsider the dynamic import of `moment` from the `import()` section and rewrite it using `require.ensure()`:
+让我们重新考虑从 `import()` 动态导入 `moment`，并且使用 `require.ensure()` 重写此实现：
 
 __index.js__
 
@@ -215,12 +215,12 @@ function determineDate() {
 determineDate();
 ```
 
-Running `webpack index.js bundle.js` generates two files, `bundle.js` and `0.bundle.js`:
+运行 `webpack index.js bundle.js` 会生成两个文件，`bundle.js` 和 `0.bundle.js`：
 
 __bundle.js__
 
 ```js
-// webpack code ...
+// webpack 代码 ...
 /***/ (function(module, exports, __webpack_require__) {
 
 function determineDate() {
@@ -231,7 +231,7 @@ function determineDate() {
 }
 
 determineDate();
-// webpack code ...
+// webpack 代码 ...
 ```
 
 __0.bundle.js__
@@ -245,15 +245,15 @@ webpackJsonp([0],[(function(module, exports, __webpack_require__) {
 })]);
 ```
 
-When you add `bundle.js` in your HTML file and open it in your browser, the `0.bundle.js` will be loaded asynchronously by webpack.
+当你在 HTML 文件中添加 `bundle.js`，然后打开浏览器，`0.bundle.js` 将通过 webpack 异步加载。
 
 
 ### publicPath
 
-`output.publicPath` is an important option when using code-splitting, it is used to tell webpack where to load your bundles on-demand, see the [configuration documentation](/configuration/output/#output-publicpath).
+在使用代码分离时，`output.publicPath` 是一个重要选项，用于告知 webpack 从哪里按需加载 bundle，查看[配置文档](/configuration/output/#output-publicpath)。
 
 
-### Chunk name
+### Chunk 名称
 
 ```javascript
 require.ensure([], function(require) {
@@ -261,12 +261,12 @@ require.ensure([], function(require) {
 }, 'custom-chunk-name');
 ```
 
-Use the last argument to `require.ensure()` in order to specify the name of the chunk.
+可以向 `require.ensure()` 的最后一个参数传入要指定 chunk 名称。
 
 
-### Error callback
+### Error 回调函数
 
-Since webpack 2.4.0, an error callback can be as third argument to `require.ensure()`. This allows to address errors which occur when dynamically loading the chunk:
+从 webpack 2.4.0 开始，error 回调函数能够作为 `require.ensure()` 的第三个参数。这可以处理在动态加载 chunk 时发生的错误：
 
 ```javascript
 require.ensure([], function(require) {
@@ -277,7 +277,7 @@ require.ensure([], function(require) {
 ```
 
 
-### Empty Array as Parameter
+### 空数组作为参数
 
 ```javascript
 require.ensure([], function(require){
@@ -285,10 +285,10 @@ require.ensure([], function(require){
 });
 ```
 
-The above code ensures that a split point is created and `a.js` is bundled separately by webpack.
+以上代码可以确保创建分离点，并且 `a.js` 将会通过 webpack 单独打包。
 
 
-### Dependencies as Parameter
+### 依赖作为参数
 
 ```javascript
 require.ensure(['./b.js'], function(require) {
@@ -296,11 +296,11 @@ require.ensure(['./b.js'], function(require) {
 });
 ```
 
-In the above code, `b.js` and `c.js` are bundled together and split from the main bundle. But only the contents of `c.js` are executed. The contents of `b.js` are only made available and not executed.
-To execute `b.js`, we will have to require it in a sync manner like `require('./b.js')` for the JavaScript to get executed.
+以上代码中，`b.js` 和 `c.js` 打包在一起，并从主 bundle 中拆分。但是只有`c.js`的内容被执行。 `b.js`的内容只供可用，但不执行。
+想要执行 `b.js`，我们必须以同步方式引用它，如 `require('./b.js')`，来让它的代码被执行。
 
 
-## Examples
+## 示例
 
 * `import()`
 * * https://github.com/webpack/webpack/tree/master/examples/harmony
@@ -308,9 +308,13 @@ To execute `b.js`, we will have to require it in a sync manner like `require('./
 * * https://github.com/webpack/webpack/tree/master/examples/code-splitting-native-import-context
 * `require.ensure()`
 * * https://github.com/webpack/webpack/tree/master/examples/code-splitting
-* * https://github.com/webpack/webpack/tree/master/examples/named-chunks – illustrates the use of `chunkName`
+* * https://github.com/webpack/webpack/tree/master/examples/named-chunks – 阐明 `chunkName` 的用法
 
 
-## Weblinks
+## 链接
 
 * [Lazy Loading ES2015 Modules in the Browser](https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser)
+
+***
+
+> 原文：https://webpack.js.org/guides/code-splitting-async/
