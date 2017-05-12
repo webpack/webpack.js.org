@@ -98,7 +98,7 @@ module.exports = function() {
       tokens.links = [];
 
       marked.Parser.prototype.tok = function () {
-        if(this.token.type === 'table') {
+        if (this.token.type === 'table') {
           return handleTable.call(this, this.token);
         } else {
           return handleTok.call(this);
@@ -233,6 +233,23 @@ function handleTable(t) {
   for (let i = 0; i < t.cells.length; i++) {
     let row = t.cells[i];
     cell = '';
+
+
+    // Fix escaped '|' characters
+    // See https://github.com/chjj/marked/issues/595
+    let erroneous = row.map(item => item.endsWith('\\') ? item : null).filter(item => item)
+
+    if ( erroneous.length > 0 ) {
+      erroneous.forEach(string => {
+        let errorIndex = row.findIndex(item => item === string)
+        let nextIndex = errorIndex + 1
+        let value = row[errorIndex]
+
+        row[errorIndex] = `${value.slice(0, -1)}|${row[nextIndex]}`
+        row.splice(nextIndex, 1)
+      })
+    }
+
 
     for (let j = 0; j < row.length; j++) {
       cell += handleTableCell(this.inline.output(row[j]), {
