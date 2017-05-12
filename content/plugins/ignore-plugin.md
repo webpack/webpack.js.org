@@ -8,16 +8,16 @@ contributors:
 new webpack.IgnorePlugin(requestRegExp, [contextRegExp])
 ```
 
-Don't generate modules for requests matching the provided RegExp.
+不打包路径满足给定正则表达式的资源。
 
-* `requestRegExp` A RegExp to test the request against.
-* `contextRegExp` (optional) A RegExp to test the context (directory) against.
+* `requestRegExp` 测试资源请求路径的正则式。
+* `contextRegExp` (可选) 测试资源上下文(目录)的正则式。
 
-## Typical use-cases
+## 典型用例
 
-### Ignore moment locales
+### 忽略 moment 的本地化内容
 
-As of [moment](https://momentjs.com/) 2.18, all locales are bundled together with the core library (see [this GitHub issue](https://github.com/moment/moment/issues/2373)). You can use the `IgnorePlugin` to stop any locale being bundled with moment:
+[moment](https://momentjs.com/) 2.18 会将所有本地化内容和核心功能一起打包(见 [该 GitHub issue](https://github.com/moment/moment/issues/2373))。你可使用 `IgnorePlugin` 在打包时忽略本地化内容:
 
 ```js
 new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
