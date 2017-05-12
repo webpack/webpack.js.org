@@ -61,7 +61,7 @@ T> 你可能看到项目**生成(emitted 或 emit)**贯穿我们整个文档和[
 [了解更多！](/concepts/output)
 
 
-## 加载器(Loaders)
+## Loader
 
 webpack 的目标是，让 **webpack** 聚焦于项目中的所有资源(asset)，而浏览器不需要关注考虑这些（这并不意味着资源(asset)都必须打包在一起）。webpack 把[每个文件(.css, .html, .scss, .jpg, etc.) 都作为模块](/concepts/modules)处理。然而 webpack **只理解 JavaScript**。
 

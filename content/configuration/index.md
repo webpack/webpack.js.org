@@ -127,7 +127,7 @@ module.exports = {
     // 关于模块配置
 
     [rules](/configuration/module#module-rules): [
-      // 模块规则（配置加载器、解析器等选项）
+      // 模块规则（配置 loader、解析器等选项）
 
       {
         [test](/configuration/module#rule-test): /\.jsx?$/,
@@ -219,7 +219,7 @@ module.exports = {
 
   [resolve](/configuration/resolve): {
     // 解析模块请求的选项
-    // （不适用于对加载器(loader)解析）
+    // （不适用于对 loader 解析）
 
     [modules](/configuration/resolve#resolve-modules): [
       "node_modules",

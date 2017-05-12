@@ -11,7 +11,7 @@ npm install --save-dev raw-loader
 
 ## 用法
 
-通过 webpack 配置、命令行或者内联使用加载器。
+通过 webpack 配置、命令行或者内联使用 loader。
 
 ### 通过 webpack 配置（推荐）
 

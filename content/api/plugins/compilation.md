@@ -14,7 +14,7 @@ compiler.plugin("compilation", function(compilation) {
 
 ## `normal-module-loader`
 
-普通模块加载器，真实地一个一个加载模块图表中所有的模块的函数。
+普通模块 loader，真实地一个一个加载模块图表中所有的模块的函数。
 
 ```javascript
 compilation.plugin('normal-module-loader', function(loaderContext, module) {

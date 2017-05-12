@@ -168,7 +168,7 @@ require('./app');
 
 (原文：The node API for `babel` has been moved to `babel-core`.)
 
-如果你收到这个信息，这说明你有一个已经安装的 `babel` 包，并且在 webpack 配置中使用它来作为加载器的简写 (这样的方式在 webpack 2.x 版本中将不再被支持)。
+如果你收到这个信息，这说明你有一个已经安装的 `babel` 包，并且在 webpack 配置中使用它来作为 loader 的简写 (这样的方式在 webpack 2.x 版本中将不再被支持)。
 
 ```js
   {
@@ -181,7 +181,7 @@ Webpack 将尝试读取 `babel` 包而不是 `babel-loader`。
 
 要修复这个问题，你需要删除 `babel` npm 包，因为它在 babel v6 中已经被废除。(安装 `babel-cli` 或者 `babel-core` 来替代它)。
 
-如果你的依赖中有对 `babel` 包的依赖使你无法删除它，可以在 webpack 配置中使用完整的加载器名称来解决：
+如果你的依赖中有对 `babel` 包的依赖使你无法删除它，可以在 webpack 配置中使用完整的 loader 名称来解决：
 
 ```js
   {

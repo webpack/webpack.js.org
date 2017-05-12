@@ -13,7 +13,7 @@ npm install --save-dev node-loader
 
 在 [enhanced-require](https://github.com/webpack/enhanced-require) 中执行 [node add-ons](https://nodejs.org/dist/latest/docs/api/addons.html)
 
-通过 webpack 配置、命令行或者内联使用加载器。
+通过 webpack 配置、命令行或者内联使用 loader。
 
 ### 通过 webpack 配置（推荐）
 
