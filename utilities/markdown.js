@@ -237,7 +237,7 @@ function handleTable(t) {
 
     // Fix escaped '|' characters
     // See https://github.com/chjj/marked/issues/595
-    let erroneous = row.map(item => item.endsWith('\\') ? item : null).filter(item => item !== null)
+    let erroneous = row.map(item => item.endsWith('\\') ? item : null).filter(item => item)
 
     if ( erroneous.length > 0 ) {
       erroneous.forEach(string => {
