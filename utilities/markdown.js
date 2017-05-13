@@ -237,17 +237,17 @@ function handleTable(t) {
 
     // Fix escaped '|' characters
     // See https://github.com/chjj/marked/issues/595
-    let erroneous = row.map(item => item.endsWith('\\') ? item : null).filter(item => item)
+    let erroneous = row.map(item => item.endsWith('\\') ? item : null).filter(item => item);
 
     if ( erroneous.length > 0 ) {
       erroneous.forEach(string => {
-        let errorIndex = row.findIndex(item => item === string)
-        let nextIndex = errorIndex + 1
-        let value = row[errorIndex]
+        let errorIndex = row.findIndex(item => item === string);
+        let nextIndex = errorIndex + 1;
+        let value = row[errorIndex];
 
-        row[errorIndex] = `${value.slice(0, -1)}|${row[nextIndex]}`
-        row.splice(nextIndex, 1)
-      })
+        row[errorIndex] = `${value.slice(0, -1)}|${row[nextIndex]}`;
+        row.splice(nextIndex, 1);
+      });
     }
 
 
