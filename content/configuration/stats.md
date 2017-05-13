@@ -75,6 +75,8 @@ stats: {
   modules: true,
   // Sort the modules by a field
   modulesSort: "field",
+  // Show dependencies and origin of warnings/errors (since webpack 2.5.0)
+  moduleTrace: true,
   // Show performance hint when file size exceeds `performance.maxAssetSize`
   performance: true,
   // Show the exports of the modules
