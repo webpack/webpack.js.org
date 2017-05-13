@@ -4,6 +4,17 @@ sort: 2
 contributors:
   - ev1stensberg
   - simon04
+related:
+  - title: Analyzing Build Statistics
+    url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
+  - title: Three simple ways to inspect a webpack bundle
+    url: https://medium.com/@joeclever/three-simple-ways-to-inspect-a-webpack-bundle-7f6a8fe7195d#.7d2i06mjx
+  - title: Optimising your application bundle size with webpack
+    url: https://hackernoon.com/optimising-your-application-bundle-size-with-webpack-e85b00bab579#.5w5ko08pq
+  - title: Analyzing & optimizing your webpack bundle
+    url: https://medium.com/@ahmedelgabri/analyzing-optimizing-your-webpack-bundle-8590818af4df#.hce4vdjs9
+  - title: Analysing and minimising the size of client side bundle with webpack and source-map-explorer
+    url: https://medium.com/@nimgrg/analysing-and-minimising-the-size-of-client-side-bundle-with-webpack-and-source-map-explorer-41096559beca#.c3t2srr8x
 ---
 
 webpack provides a Command Line Interface (CLI) to configure and interact with your build. This is mostly useful in case of early prototyping, profiling, writing npm scripts or personal customization of the build.
@@ -116,17 +127,7 @@ webpack --json
 webpack --json > stats.json
 ```
 
-In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option the output can be a JSON object.
-This response is accepted by webpack's [analyse tool](https://webpack.github.com/analyse), or chrisbateman's [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/), or th0r's [webpack-bundle-analyzer](https://github.com/th0r/webpack-bundle-analyzer).
-The analyse tool will take in the JSON and provide all the details of the build in graphical form.
-
-*Further reading:*
-
-* [Analyzing Build Statistics](https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/)
-* [Three simple ways to inspect a webpack bundle](https://medium.com/@joeclever/three-simple-ways-to-inspect-a-webpack-bundle-7f6a8fe7195d#.7d2i06mjx)
-* [Optimising your application bundle size with webpack](https://hackernoon.com/optimising-your-application-bundle-size-with-webpack-e85b00bab579#.5w5ko08pq)
-* [Analyzing & optimizing your webpack bundle](https://medium.com/@ahmedelgabri/analyzing-optimizing-your-webpack-bundle-8590818af4df#.hce4vdjs9)
-* [Analysing and minimising the size of client side bundle with webpack and source-map-explorer](https://medium.com/@nimgrg/analysing-and-minimising-the-size-of-client-side-bundle-with-webpack-and-source-map-explorer-41096559beca#.c3t2srr8x)
+In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option the output can be a JSON object. This response is accepted by webpack's [analyse tool](https://webpack.github.com/analyse), or chrisbateman's [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/), or th0r's [webpack-bundle-analyzer](https://github.com/th0r/webpack-bundle-analyzer). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
 
 
 ### Output Options

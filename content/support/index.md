@@ -2,6 +2,7 @@
 title: Why Support webpack?
 contributors:
   - scottdj92
+  - harrynewsome
 ---
 
 First, the people who contribute to webpack, do so for the love of open source, love for our users and ecosystem, and most importantly, pushing the web forward together. Because of our [Open Collective](http://opencollective.com/webpack) model for funding and transparency, we are able to funnel support and funds through contributors, dependent projects, and the contributor and core teams. But what is the return on the investment?
@@ -56,7 +57,7 @@ You can encourage your developers to contribute to the ecosystem, open sourcing 
 
 ## VC, Government, Digital Agencies
 
-We want you to work with us, one the top NPM libraries, to improve your product!
+We want you to work with us, one of the top NPM libraries, to improve your product!
 
 <!-- 
 ### Sales Pitch
