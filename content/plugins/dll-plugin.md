@@ -15,9 +15,9 @@ related:
 
 The `DllPlugin` and `DllReferencePlugin` provide means to split bundles in a way that can drastically improve build time performance.
 
-[DllPlugin](#DllPlugin) is used in a separate webpack config exclusively to create a dll-only-bundle. It creates a `manifest.json` file, which is used by the [DllReferencePlugin](#DllReferencePlugin) to map dependencies.
+[`DllPlugin`](/plugins/dll-plugin#dllplugin) is used in a separate webpack config exclusively to create a dll-only-bundle. It creates a `manifest.json` file, which is used by the [`DllReferencePlugin`](/plugins/dll-plugin#dllreferenceplugin) to map dependencies.
 
-[DllReferencePlugin](#DllReferencePlugin) is used in the primary webpack config, it references the dll-only-bundle(s) to require pre-built dependencies.
+`DllReferencePlugin` is used in the primary webpack config, it references the dll-only-bundle(s) to require pre-built dependencies.
 
 
 ## `DllPlugin`
@@ -30,7 +30,7 @@ The `DllPlugin` and `DllReferencePlugin` provide means to split bundles in a way
 new webpack.DllPlugin(options)
 ```
 
-Creates a `manifest.json` which is written to the given `path`. It contains mappings from require and import requests, to module ids. It is used by the [DllReferencePlugin](#DllReferencePlugin).
+Creates a `manifest.json` which is written to the given `path`. It contains mappings from require and import requests, to module ids. It is used by the `DllReferencePlugin`.
 
 Combine this plugin with [`output.library`](/configuration/output/#output-library) option to expose (aka, put into the global scope) the dll function.
 
@@ -111,7 +111,7 @@ T> Multiple `DllPlugins` and multiple `DllReferencePlugins`.
 ### Source
 
 * [DllPlugin source](https://github.com/webpack/webpack/tree/master/lib/DllPlugin.js)
-* [DllReferencePlugin source](https://github.com/webpack/tree/master/lib/DllReferencePlugin.js)
+* [DllReferencePlugin source](https://github.com/webpack/webpack/tree/master/lib/DllReferencePlugin.js)
 * [DllEntryPlugin source](https://github.com/webpack/webpack/blob/master/lib/DllEntryPlugin.js)
 * [DllModuleFactory source](https://github.com/webpack/webpack/blob/master/lib/DllModuleFactory.js)
 * [ManifestPlugin source](https://github.com/webpack/webpack/blob/master/lib/LibManifestPlugin.js)
