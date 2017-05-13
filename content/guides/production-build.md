@@ -12,6 +12,7 @@ contributors:
   - bring2dip
   - redian
   - skipjack
+  - xgqfrms
 ---
 
 The following article describes the best practices and tools to use when using webpack to build a production version of a site or application.
@@ -19,7 +20,7 @@ The following article describes the best practices and tools to use when using w
 
 ## The Automatic Way
 
-Running `webpack -p` (or equivalently `webpack --optimize-minimize --define process.env.NODE_ENV="'production'"`). This performs the following steps:
+Running `webpack -p` (or equivalently `webpack --optimize-minimize --define process.env.NODE_ENV="production"`). This performs the following steps:
 
 - Minification using `UglifyJsPlugin`
 - Runs the `LoaderOptionsPlugin` (see its [documentation](/plugins/loader-options-plugin))
