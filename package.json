@@ -31,7 +31,7 @@
     "fetch": "scripts/fetch.sh",
     "init:generated": "mkdirp ./generated/loaders && mkdirp ./generated/plugins ",
     "lint": "run-s lint:*",
-    "lint:links": "hyperlink -r build/index.html | ./scripts/check-links.js",
+    "lint:links": "node --max-old-space-size=5000 ./node_modules/.bin/hyperlink -r build/index.html | ./scripts/check-links.js",
     "lint:js": "eslint . --ext .js --ext .jsx",
     "lint:markdown": "markdownlint --config ./.markdownlint.json *.md ./content/**/*.md",
     "lint:social": "alex ./**/*.md",
