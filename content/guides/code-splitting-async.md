@@ -195,7 +195,7 @@ require.ensure(dependencies: String[], callback: function(require), errorCallbac
 * `dependencies` 是一个字符串数组，我们可以在其中声明所有用到的模块，这些模块需要在回调函数的所有代码被执行前，就已经可用。
 * `callback` 是一个函数，当所有的依赖都加载完成后，webpack 会立刻执行此回调函数。具体实现上，`require` 函数将作为一个参数传递给此回调函数。因此，我们可以在回调函数体(function body)内进一步使用 `require()` 来引入执行时所需要的那些模块。
 
-W> 虽然在具体实现上，`require` 会作为参数传递给回调函数，但是使用一个非 require 的任意名称（比如 `require.ensure([], function (request) { request('someModule'); })`）将不会由 webpack 的静态解析器(static parser)处理。所以请使用 `require` 而不是 `require.ensure([], function (require) { require('someModule'); })`
+W> 虽然在具体实现上，`require` 会作为参数传递给回调函数，但是使用一个非 require 的任意名称（比如 `require.ensure([], function (request) { request('someModule'); })`）将不会由 webpack 的静态解析器(static parser)处理。所以请使用 `require` 以及 `require.ensure([], function (require) { require('someModule'); })`
 
 * 可选的：`errorCallback` 是一个函数，用于在 webpack 加载依赖失败时执行。
 * 可选的：`chunkName` 是专用于设定通过 `require.ensure()` 创建的 chunk 的名称。通过向多个 `require.ensure()` 传递相同的 `chunkName`，我们可以将它们的代码组合成一个单独的 chunk，只生成一个浏览器必须加载的 bundle。
