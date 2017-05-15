@@ -101,3 +101,7 @@ The loader supports all options supported by [istanbul-lib-instrument](https://g
 
 ### License
 MIT
+
+***
+
+> 原文：https://webpack.js.org/loaders/istanbul-instrumenter-loader/

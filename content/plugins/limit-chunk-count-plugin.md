@@ -10,3 +10,7 @@ contributors:
 - 通过 `--optimize-min-chunk-size 10000` 这种内联方式(inline)，来限制最小 chunk 数量，或者在配置文件中添加 `new webpack.optimize.MinChunkSizePlugin({minChunkSize: 10000})`
 
 webpack 接受这两个参数来合并 chunk（优先合并含有重复的模块的 chunk）。由于不会合并到入口 chunk(entry chunk)，所以不会影响页面初始化加载时间。
+
+***
+
+> 原文：https://webpack.js.org/plugins/limit-chunk-count-plugin/

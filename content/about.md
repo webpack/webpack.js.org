@@ -14,8 +14,8 @@ contributors:
   - ellyliang
   - huangtubiao
   - itchina110
+  - jason-ivy
   - JayceZhang9602
-  - jeffrygan
   - lcxfs1991
   - LeoEatle
   - lgh06

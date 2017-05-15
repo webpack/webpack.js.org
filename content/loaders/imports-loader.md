@@ -27,7 +27,7 @@ require("imports-loader?$=jquery!./example.js");
 
 ### 语法
 
-加载器查询值 | 含义
+loader 查询值 | 含义
 ------------|-------
 `angular` | `var angular = require("angular");`
 `$=jquery` | `var $ = require("jquery");`
@@ -53,10 +53,10 @@ require("imports-loader?$=jquery,angular,config=>{size:50}!./file.js");
 module.exports = {
     ...
     module: {
-        loaders: [
+        rules: [
             {
                 test: require.resolve("some-module"),
-                loader: "imports-loader?this=>window"
+                use: "imports-loader?this=>window"
             }
         ]
     }

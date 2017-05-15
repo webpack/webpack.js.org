@@ -45,7 +45,7 @@ after(function() {
 
 参考示例 [the-big-test](https://github.com/webpack/the-big-test)。
 
-这是一个独立的加载器，你不必一定把它和 mocha loader 结合一起使用。如果你想 cover 一个普通的项目，也可以直接使用它。`reportHtml` 方法会把输出内容添加到 body 中。
+这是一个独立的 loader，你不必一定把它和 mocha loader 结合一起使用。如果你想 cover 一个普通的项目，也可以直接使用它。`reportHtml` 方法会把输出内容添加到 body 中。
 
 
 ## License

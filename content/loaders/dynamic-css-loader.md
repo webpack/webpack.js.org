@@ -24,6 +24,7 @@ npm install --save-dev dynamic-css-loader
     use: [ ... ],
     fallback: [
       'dynamic-css-loader',
+      'file-loader',
       'extract-loader',
     ],
   }),
@@ -39,7 +40,7 @@ npm install --save-dev dynamic-css-loader
 **bundle.js**
 
 ```js
-require("dynamic-css-loader!./file.EXT");
+require("dynamic-css-loader!file-loader!./file.ext");
 
 // Bundle code here...
 ```
@@ -106,3 +107,7 @@ https://api.github.com/users/MAINTAINER
 
 [cover]: https://codecov.io/gh/webpack-contrib/dynamic-css-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/dynamic-css-loader
+
+***
+
+> 原文：https://webpack.js.org/loaders/dynamic-css-loader/

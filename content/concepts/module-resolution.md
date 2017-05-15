@@ -68,7 +68,7 @@ import "module/lib/file";
 webpack 根据构建目标(build target)为这些选项提供了合理的[默认](/configuration/resolve)配置。
 
 
-## 解析加载器(Resolving Loaders)
+## 解析 Loader(Resolving Loaders)
 
 Loader 解析遵循与文件解析器指定的规则相同的规则。但是 [`resolveLoader`](/configuration/resolve/#resolveloader) 配置选项可以用来为 Loader 提供独立的解析规则。
 

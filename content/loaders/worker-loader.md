@@ -29,28 +29,25 @@ worker.onmessage = function(event) {...};
 worker.addEventListener("message", function(event) {...});
 ```
 
-您还可以使用inline参数将worker作为blob内联：
-
+您还可以使用 `inline` 参数将 worker 作为 blob 内联：
 ``` javascript
 var MyWorker = require("worker-loader?inline!./myWorker.js");
 ```
 
-Inline mode will also create chunks for browsers without supporting of inline workers,
-to disable this behavior just set `fallback` parameter as `false`:
+内联模式将额外为浏览器创建 chunk，但不支持内联 worker，要禁用此行为，只需将 `fallback` 参数设置为 `false`：
 
 ``` javascript
 var MyWorker = require("worker-loader?inline&fallback=false!./myWorker.js");
 ```
 
-To set a custom name for the output script, use the `name` parameter. The name may contain the string `[hash]`,
-which will be replaced with a content-dependent hash for caching purposes. For example:
+要设置输出脚本(output script)的自定义名称，请使用 `name` 参数。该名称可能包含 `[hash]` 字符串，`[hash]` 将被替换为，用于缓存目的(caching purpose)、与文件内容相关(content-dependent) hash。例如：
 
 ``` javascript
 var MyWorker = require("worker-loader?name=outputWorkerName.[hash].js!./myWorker.js");
 ```
 
 
-worker文件可以像任何其他文件一样导入依赖关系：
+worker 文件可以像任何其他文件一样导入依赖：
 
 ``` javascript
 // file.js
@@ -59,9 +56,15 @@ var _ = require('lodash')
 var o = {foo: 'foo'}
 
 _.has(o, 'foo') // true
+
+// 将数据发送到父线程(parent thread)
+self.postMessage({foo: 'foo'})
+
+// 响应来自父线程(parent thread)的消息
+self.addEventListener('message', function(event){ console.log(event); });
 ```
 
-如果你配置了babel-loader，你甚至可以使用ES6模块：
+如果你配置了 babel-loader，你甚至可以使用 ES6 模块：
 
 ``` javascript
 // file.js
@@ -70,6 +73,12 @@ import _ from 'lodash'
 let o = {foo: 'foo'}
 
 _.has(o, 'foo') // true
+
+// 将数据发送到父线程(parent thread)
+self.postMessage({foo: 'foo'})
+
+// 响应来自父线程(parent thread)的消息
+self.addEventListener('message', (event) => { console.log(event); });
 ```
 
 ## 维护人员

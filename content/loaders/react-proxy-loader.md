@@ -31,7 +31,7 @@ var ComponentProxy = React.createClass({
 
 ## 配置
 
-代替（或除了）内联加载器调用之外，还可以在配置中指定代理组件：
+代替（或除了）内联 loader 调用之外，还可以在配置中指定代理组件：
 
 ``` js
 module.exports = {

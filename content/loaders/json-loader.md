@@ -9,6 +9,8 @@ edit: https://github.com/webpack-contrib/json-loader/edit/master/README.md
 npm install --save-dev json-loader
 ```
 
+⚠️ **注意：由于 webpack v2 默认支持导入 JSON 文件。如果您使用自定义文件扩展名，您可能仍然需要使用此 loader。**
+
 ## 用法
 
 
@@ -48,17 +50,6 @@ import json from 'file.json';
 import json from 'json-loader!file.json';
 ```
 
-
-
-### Options
-
-#### `stringify`
-
-By default, the json-loader will output the json object, set this query parameter to 'true' can output the json object as a string, e.g. `require('json-loader?stringify!../index.json')`.
-
-
-
-
 ## 维护人员
 
 <table>
@@ -96,7 +87,6 @@ By default, the json-loader will output the json object, set this query paramete
     </tr>
   <tbody>
 </table>
-
 
 [npm]: https://img.shields.io/npm/v/json-loader.svg
 [npm-url]: https://npmjs.com/package/json-loader
