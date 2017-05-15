@@ -507,7 +507,7 @@ publicPath: "../assets/", // 相对于 HTML 页面
 publicPath: "", // 相对于 HTML 页面（目录相同）
 ```
 
-In cases where the `publicPath` of output files can't be known at compile time, it can be left blank and set dynamically at runtime in the entry file using the [free variable](http://stackoverflow.com/questions/12934929/what-are-free-variables) `__webpack_public_path__`.
+在编译时(compile time)无法知道输出文件的 `publicPath` 的情况下，可以留空，然后在入口文件(entry file)处使用[自由变量(free variable)](http://stackoverflow.com/questions/12934929/what-are-free-variables) `__webpack_public_path__`，以便在运行时(runtime)进行动态设置。
 
 ```javascript
  __webpack_public_path__ = myRuntimePublicPath
