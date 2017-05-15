@@ -9,7 +9,7 @@ contributors:
   - irth
 ---
 
- `output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
+`output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
 
 
 ## `output.chunkFilename`
@@ -143,41 +143,41 @@ filename: "[chunkhash].bundle.js"
 
 注意，此选项不会影响那些「按需加载 chunk」的输出文件。对于这些文件，请使用 [`output.chunkFilename`](#output-chunkfilename) 选项来控制输出。同样也不影响通过 loader 创建的文件，对于这些文件，请查看 loader 选项来输出控制。
 
-The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
+可以使用以下替换模板字符串（通过 webpack 内部的[`TemplatedPathPlugin`][`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)）：
 
 | Template    | Description |
 | ----------- | ----------- |
-| [hash]      | The hash of the module identifier |
-| [chunkhash] | The hash of the chunk content |
-| [name]      | The module name |
-| [id]        | The module identifier |
-| [file]      | The module filename |
-| [filebase]  | The module [basename](https://nodejs.org/api/path.html#path_path_basename_path_ext) |
-| [query]     | The module query, i.e., the string following `?` in the filename |
+| [hash]      | 模块标识符(module identifier)的 hash |
+| [chunkhash] | chunk 内容的 hash |
+| [name]      | 模块名称 |
+| [id]        | 模块标识符(module identifier) |
+| [file]      | 模块文件名称 |
+| [filebase]  | 模块 [basename](https://nodejs.org/api/path.html#path_path_basename_path_ext) |
+| [query]     | 模块的 query，例如，文件名 `?` 后面的字符串 |
 
-The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#output-hashdigestlength) to configure the length globally.
+`[hash]` 和 `[chunkhash]` 的长度可以使用 `[hash:16]`（默认为20）来指定。或者，通过指定[`output.hashDigestLength`](#output-hashdigestlength) 在全局配置长度。
 
-T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
+T> 在使用 [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) 时，可以用 `[contenthash]` 来获取提取文件的 hash（既不是 `[hash]` 也不是 `[chunkhash]`）。
 
 
 ## `output.hashDigest`
 
-The hashing algorithm to use, defaults to `'hex'`. All functions from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported.
+使用散列算法，默认为 `'hex'`。支持 Node.JS [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) 的所有函数。
 
 
 ## `output.hashDigestLength`
 
-The prefix length of the hash digest to use, defaults to `20`.
+散列摘要的前缀长度，默认为 `20`。
 
 
 ## `output.hashFunction`
 
-The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm) are supported.
+散列算法，默认为 `'md5'`。支持 Node.JS [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm) 的所有功能。
 
 
 ## `output.hashSalt`
 
-An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_input_encoding).
+一个可选的加盐值，通过 Node.JS [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_input_encoding) 来更新哈希。
 
 
 ## `output.hotUpdateChunkFilename`
@@ -266,7 +266,7 @@ library 名称取决于 [`output.libraryTarget`](#output-librarytarget) 选项�
 支持以下选项：
 
 
-`libraryTarget: "var"` - （默认值）当 library 加载完成，**入口起点的返回值**将被分配给一个变量：
+`libraryTarget: "var"` - （默认值）当 library 加载完成，**入口起点的返回值**将分配给一个变量：
 
 ```javascript
 var MyLibrary = _entry_return_;
@@ -289,37 +289,37 @@ MyLibrary.doSomething(); //如果 this 是 window
 ```
 
 
-`libraryTarget: "window"` - When your library is loaded, **the return value of your entry point** will be part `window` object.
+`libraryTarget: "window"` - 当 library 加载完成，**入口起点的返回值**将分配给 `window` 对象。
 
  ```javascript
  window["MyLibrary"] = _entry_return_;
 
-//your users will use your library like:
+// 使用者将会这样调用你的 library：
 window.MyLibrary.doSomething();
  ```
 
 
-`libraryTarget: "global"` - When your library is loaded, **the return value of your entry point** will be part `global` object.
+`libraryTarget: "global"` - 当 library 加载完成，**入口起点的返回值**将分配给 `global` 对象。
 
  ```javascript
  global["MyLibrary"] = _entry_return_;
 
-//your users will use your library like:
+// 使用者将会这样调用你的 library：
 global.MyLibrary.doSomething();
  ```
 
 
-`libraryTarget: "commonjs"` - 当 library 加载完成，**入口起点的返回值**将分配于 exports 对象上。这个名称也意味着模块用于 CommonJS 环境：
+`libraryTarget: "commonjs"` - 当 library 加载完成，**入口起点的返回值**将分配给 exports 对象。这个名称也意味着模块用于 CommonJS 环境：
 
 ```javascript
 exports["MyLibrary"] = _entry_return_;
 
-//your users will use your library like:
+// 使用者将会这样调用你的 library：
 require("MyLibrary").doSomething();
 ```
 
 
-`libraryTarget: "commonjs2"` - 当 library 加载完成，**入口起点的返回值**将分配于 exports 对象上。这个名称也意味着模块用于 CommonJS 环境：
+`libraryTarget: "commonjs2"` - 当 library 加载完成，**入口起点的返回值**将分配给 exports 对象。这个名称也意味着模块用于 CommonJS 环境：
 
 ```javascript
 module.exports = _entry_return_;
@@ -336,7 +336,7 @@ _想要弄清楚 CommonJS 和 CommonJS2 之间的区别？查看[这里](https:/
 
 `libraryTarget: "amd"` - webpack 将你的 library 转为 AMD 模块。
 
-但是在这里有个很重要必备前提，入口 trunk 必须使用 define 属性定义，如果不是，webpack 将创建无依赖的 AMD 模块。
+但是在这里有个很重要必备前提，入口 chunk 必须使用 define 属性定义，如果不是，webpack 将创建无依赖的 AMD 模块。
 输出结果就像这样：
 
 ```javascript
@@ -409,19 +409,19 @@ output: {
 模块验证 library。
 
 
-`libraryTarget: "assign"` - Here webpack will blindly generate an implied global.
+`libraryTarget: "assign"` - 这里 webpack 会轻率地产生隐含的全局变量。
 
- ```javascript
- MyLibrary = _entry_return_;
- ```
-Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
+```javascript
+MyLibrary = _entry_return_;
+```
+请注意，如果前面没有定义 `MyLibrary`，则 library 将被设置在全局范围内。
 
 
-`libraryTarget: "jsonp"` - This will wrap the return value of your entry point into a jsonp wrapper.
+`libraryTarget: "jsonp"` - 这将把入口起点的返回值，包裹到一个 jsonp 包装容器中
 
- ```javascript
- MyLibrary(_entry_return_);
- ```
+```javascript
+MyLibrary(_entry_return_);
+```
 
 你的 library 的依赖将由 [`externals`](/configuration/externals/) 配置定义。
 
@@ -512,10 +512,10 @@ publicPath: "", // 相对于 HTML 页面（目录相同）
 ```javascript
  __webpack_public_path__ = myRuntimePublicPath
 
-// rest of your application entry
+// 应用程序入口的其他部分
 ```
 
-See [this discussion](https://github.com/webpack/webpack/issues/2776#issuecomment-233208623) for more information on `__webpack_public_path__`.
+有关 `__webpack_public_path__` 的更多信息，请查看[此讨论](https://github.com/webpack/webpack/issues/2776#issuecomment-233208623)。
 
 
 ## `output.sourceMapFilename`
@@ -548,32 +548,32 @@ sourcePrefix: "\t"
 
 `boolean`
 
-Tell webpack to remove a module from the module instance cache (`require.cache`) if it throws an exception when it is `require`d.
+如果一个模块是在 `require` 时抛出异常，告诉 webpack 从模块实例缓存(`require.cache`)中删除这个模块。
 
-It defaults to `false` for performance reasons.
+出于性能原因，默认为 `false`。
 
-When set to `false`, the module is not removed from cache, which results in the exception getting thrown only on the first `require` call (making it incompatible with node.js).
+当设置为 `false` 时，该模块不会从缓存中删除，这将造成仅在第一次 `require` 调用时抛出异常（会导致与 node.js 不兼容）。
 
-For instance, consider `module.js`:
+例如，设想一下 `module.js`：
 
 ``` js
 throw new Error("error");
 ```
 
-With `strictModuleExceptionHandling` set to `false`, only the first `require` throws an exception:
+将 `strictModuleExceptionHandling` 设置为 `false`，只有第一个 `require` 抛出异常：
 
 ``` js
 // with strictModuleExceptionHandling = false
-require("module") // <- throws
-require("module") // <- doesn't throw
+require("module") // <- 抛出
+require("module") // <- 不抛出
 ```
 
-Instead, with `strictModuleExceptionHandling` set to `true`, all `require`s of this module throw an exception:
+相反，将 `strictModuleExceptionHandling` 设置为 `true`，这个模块所有的 `require` 都抛出异常：
 
 ``` js
 // with strictModuleExceptionHandling = true
-require("module") // <- throws
-require("module") // <- also throw
+require("module") // <- 抛出
+require("module") // <- 仍然抛出
 ```
 
 
