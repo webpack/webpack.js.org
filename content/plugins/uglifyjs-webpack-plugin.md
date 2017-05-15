@@ -3,12 +3,6 @@ title: UglifyjsWebpackPlugin
 source: https://raw.githubusercontent.com/webpack-contrib/uglifyjs-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/uglifyjs-webpack-plugin/edit/master/README.md
 ---
-
-```bash
-<p>This plugin uses <a href="https://github.com/mishoo/UglifyJS2">UglifyJS</a> to minify your JavaScript.<p>
-```
->注意在`webpack.optimize.UglifyJsPlugin`下也存在相同的插件。对于那些想控制UglifyJS版本的开发者来说，每一个UglifyJS都是相对独立的版本。在这种情况下每个从结构中分离的文件都是有效的。
-
 ## 安装
 
 使用 [Yarn](https://yarnpkg.com):
@@ -23,7 +17,7 @@ yarn add uglifyjs-webpack-plugin --dev
 npm install uglifyjs-webpack-plugin --save-dev
 ```
 
-**十分重要!** 这个插件这个插件依赖 uglify-js，所以为了使用这个插件，也要安装 uglify-js。然而，目前 (2017/1/25) 可用的 uglify-js npm 包，不支持压缩 ES6 代码。为了支持 ES6，必须提供一个具有压缩 ES6 能力的版本，又称之为 _harmony_ 版本。
+**十分重要!** 这个插件这个插件依赖 uglify-js，所以为了使用这个插件，也要安装 uglify-js；然而，目前 (2017/1/25) 可用的 uglify-js npm 包，不支持压缩 ES6 代码。为了支持 ES6，必须提供一个具有压缩 ES6 能力的版本，又称之为 _harmony_ 版本。
 
 如果你的压缩目标是 ES6:
 

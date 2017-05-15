@@ -15,7 +15,7 @@ npm install --save-dev css-loader
 
 引用资源的合适 loader 是 [file-loader](https://github.com/webpack/file-loader) 和 [url-loader](https://github.com/webpack/url-loader)，您应该在配置中指定（查看[如下设置](https://github.com/michael-ciniawsky/css-loader#assets)）。
 
-**file.css**
+**file.js**
 ```js
 import css from 'file.css';
 ```
@@ -457,7 +457,7 @@ module.exports = {
         test: /\.css$/,
         use: env === 'production'
           ? ExtractTextPlugin.extract({
-              fallback: 'style-loader'
+              fallback: 'style-loader',
               use: [ 'css-loader' ]
           })
           : [ 'style-loader', 'css-loader' ]
