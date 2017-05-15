@@ -116,6 +116,8 @@ const watching = compiler.watch({
 
 `Watching` options are [covered in detail here](/configuration/watch/#watchoptions).
 
+W> Filesystem inaccuracies may trigger multiple builds for a single change. So, in the example above, the `console.log` statement may fire multiple times for a single modification. Users should expect this behavior and may check `stats.hash` to see if the file hash has actually changed.
+
 
 ### Close `Watching`
 
@@ -137,6 +139,7 @@ Using `watching.invalidate`, you can manually invalidate the current compiling r
 ``` js
 watching.invalidate();
 ```
+
 
 ## Stats Object
 

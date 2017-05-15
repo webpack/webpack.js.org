@@ -42,7 +42,7 @@ module.exports = {
 
 This enables you to `import './style.css'` into the file that depends on that styling. Now, when that module is run, a `<style>` tag with the stringified css will be inserted into the `<head>` of your html file.
 
-T> Note that you can also [split your CSS](/guides/code-splitting-css) for better load times in production. On top of that, loaders exist for pretty much any flavor of CSS you can think of -- [postcss](https://github.com/postcss/postcss-loader), [sass](/loaders/sass-loader), and [less](/loaders/less-loader) to name a few.
+T> Note that you can also [split your CSS](/guides/code-splitting-css) for better load times in production. On top of that, loaders exist for pretty much any flavor of CSS you can think of -- [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader), and [less](/loaders/less-loader) to name a few.
 
 
 ## Loading Images

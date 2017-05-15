@@ -290,7 +290,7 @@ MyLibrary.doSomething(); //if this is window
 
 
 `libraryTarget: "window"` - When your library is loaded, **the return value of your entry point** will be part `window` object.
- 
+
  ```javascript
  window["MyLibrary"] = _entry_return_;
 
@@ -300,7 +300,7 @@ window.MyLibrary.doSomething();
 
 
 `libraryTarget: "global"` - When your library is loaded, **the return value of your entry point** will be part `global` object.
- 
+
  ```javascript
  global["MyLibrary"] = _entry_return_;
 
@@ -336,7 +336,7 @@ _Wondering the difference between CommonJS and CommonJS2? Check [this](https://g
 
 `libraryTarget: "amd"` - In this case webpack will make your library an AMD module.
 
-But there is a very important pre-requisite, your entry chunk must be defined with the define property, if not, webpack will create the AMD module, but without dependencies. 
+But there is a very important pre-requisite, your entry chunk must be defined with the define property, if not, webpack will create the AMD module, but without dependencies.
 The output will be something like this:
 
 ```javascript
@@ -345,11 +345,11 @@ define([], function() {
 });
 ```
 
-But if you download this script, you may get an error: `define is not defined`, it’s ok! If you are distributing your library with AMD, then your users need to use RequireJS to load it. 
+But if you download this script, you may get an error: `define is not defined`, it’s ok! If you are distributing your library with AMD, then your users need to use RequireJS to load it.
 
 Now that you have RequireJS loaded, you can load your library.
 
-But, `require([ _what?_ ])`? 
+But, `require([ _what?_ ])`?
 
 `output.library`!
 
@@ -377,8 +377,8 @@ require(["MyLibrary"], function(MyLibrary){
 });
 ```
 
-`libraryTarget: "umd"` - This is a way for your library to work with all the module definitions (and where aren't modules at all). 
-It will work with CommonJS, AMD and as global variable. You can check the [UMD Repository](https://github.com/umdjs/umd) to know more about it. 
+`libraryTarget: "umd"` - This is a way for your library to work with all the module definitions (and where aren't modules at all).
+It will work with CommonJS, AMD and as global variable. You can check the [UMD Repository](https://github.com/umdjs/umd) to know more about it.
 
 In this case, you need the `library` property to name your module:
 
@@ -410,7 +410,7 @@ Module proof library.
 
 
 `libraryTarget: "assign"` - Here webpack will blindly generate an implied global.
- 
+
  ```javascript
  MyLibrary = _entry_return_;
  ```
@@ -418,7 +418,7 @@ Be aware that if `MyLibrary` isn't defined earlier your library will be set in g
 
 
 `libraryTarget: "jsonp"` - This will wrap the return value of your entry point into a jsonp wrapper.
- 
+
  ```javascript
  MyLibrary(_entry_return_);
  ```
@@ -507,9 +507,8 @@ publicPath: "../assets/", // relative to HTML page
 publicPath: "", // relative to HTML page (same directory)
 ```
 
-In cases where the `publicPath` of output files can't be known at compile time, it can be left blank and set dynamically at runtime in the entry file using the [free variable](http://stackoverflow.com/questions/12934929/what-are-free-variables) `__webpack_public_path__`. 
+In cases where the `publicPath` of output files can't be known at compile time, it can be left blank and set dynamically at runtime in the entry file using the [free variable](http://stackoverflow.com/questions/12934929/what-are-free-variables) `__webpack_public_path__`.
 
-E.g.:
 ```javascript
  __webpack_public_path__ = myRuntimePublicPath
 

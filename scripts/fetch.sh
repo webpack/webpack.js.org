@@ -10,6 +10,7 @@ cp -rf ./content/plugins/ ./generated/plugins
 # Fetch webpack-contrib (and various other) loader repositories
 ./scripts/fetch_package_names.js "webpack-contrib" "-loader" | ./scripts/fetch_package_files.js "README.md" "./generated/loaders"
 ./scripts/fetch_package_names.js "babel" "babel-loader" | ./scripts/fetch_package_files.js "README.md" "./generated/loaders"
+./scripts/fetch_package_names.js "postcss" "postcss-loader" | ./scripts/fetch_package_files.js "README.md" "./generated/loaders"
 ./scripts/fetch_package_names.js "peerigon" "extract-loader" | ./scripts/fetch_package_files.js "README.md" "./generated/loaders"
 
 # Fetch webpack-contrib (and various other) plugin repositories

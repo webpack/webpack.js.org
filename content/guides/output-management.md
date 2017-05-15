@@ -65,7 +65,7 @@ T> Check out the [`HTMLWebpackTemplate`](https://github.com/jaketrent/html-webpa
 
 ## Multiple HTML Files
 
-To generate multiple HTML files, say for a multi-page web application, you can utilize the [`MultipageWebpackPlugin`](https://github.com/mutualofomaha/multipage-webpack-plugin). This plugin is very similar to the `html-webpack-plugin`, in fact it uses that plugin under the hood, however it can be used to generate an HTML file per entry point.
+To generate multiple HTML files, say for a multi-page web application, you can utilize the [`MultipageWebpackPlugin`](https://github.com/mutualofomaha/multipage-webpack-plugin). This plugin is similar to the `html-webpack-plugin`, in fact it uses that plugin under the hood, however it can be used to generate an HTML file per entry point.
 
 
 ## The Manifest
