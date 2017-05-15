@@ -3,19 +3,19 @@ title: cache-loader
 source: https://raw.githubusercontent.com/webpack-contrib/cache-loader/master/README.md
 edit: https://github.com/webpack-contrib/cache-loader/edit/master/README.md
 ---
-## Install
+## 安装
 
 ```bash
 npm install --save-dev cache-loader
 ```
 
-## Usage
+## 用法
 
-Add this loader in front of other (expensive) loaders to cache the result on disk.
+在一些开销较大的加载器之前添加此加载器，以将结果缓存到磁盘里。
 
-Note that there is an overhead for saving the reading and saving the cache file, so only use this loader to cache expensive loaders.
+请注意，保存和读取这些缓存文件会有一些时间开销，所以请只对开销较大的加载器使用此加载器。
 
-## Examples
+## 示例
 
 **webpack.config.js**
 
@@ -36,7 +36,7 @@ module.exports = {
 }
 ```
 
-**with options**
+**使用配置选项**
 
 ```js
 use: [
@@ -51,7 +51,7 @@ use: [
 ]
 ```
 
-## Maintainers
+## 维护者
 
 <table>
   <tbody>
