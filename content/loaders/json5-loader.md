@@ -11,9 +11,9 @@ $ npm install --save-dev json5-loader
 
 ## 用法
 
-你可以通过以下用法使用这个加载器
+你可以通过以下用法使用这个 loader
  * 在 webpack 配置里的 `module.loaders` 对象中配置 `json5-loader`；
- * 直接在 require 语句中使用 `json5!` 前缀。
+ * 直接在 require 语句中使用 `json5-loader!` 前缀。
 
 假设我们有下面这个 `json5` 文件
 ```js
@@ -24,7 +24,7 @@ $ npm install --save-dev json5-loader
 }
 ```
 
-#### 预先配置加载器的用法
+#### 预先配置 loader 的用法
 
 ```js
 // webpack.config.js
@@ -51,29 +51,29 @@ var appConfig = require('./appData.json5')
 
 console.log(appConfig.env) // 'production'
 ```
-#### require 语句使用加载器前缀的用法
+#### require 语句使用 loader 前缀的用法
 ```js
 var appConfig = require("json5-loader!./appData.json5")
-// 返回的是解析好的对象
+// 返回的是 json 解析过的对象
 
 console.log(appConfig.env) // 'production'
 ```
 
-如果需要在 Node.js 中使用，不要忘记兼容（polyfill）require。更多参考 webpack 文档。
+如果需要在 Node.js 中使用，不要忘记兼容(polyfill) require。更多参考 webpack 文档。
 
-## 维护者
+## 维护人员
 
 <table>
   <tbody>
     <tr>
       <td align="center">
-        <img width="150 height="150"
+        <img width="150" height="150"
         src="https://avatars.githubusercontent.com/sokra?v=3">
         <br />
         <a href="https://github.com/sokra">Tobias Koppers</a>
       </td>
       <td align="center">
-        <img width="150 height="150"
+        <img width="150" height="150"
         src="https://avatars.githubusercontent.com/gdi2290?v=3">
         <br />
         <a href="https://github.com/gdi2290">PatrickJS</a>
@@ -109,28 +109,28 @@ console.log(appConfig.env) // 'production'
         <br />
         <a href="https://github.com/stevelacy">Steve Lacy</a>
       </td>
-    <tr>
-  <tbody>
+    </tr>
+  </tbody>
 </table>
 
 ## LICENSE
 
 MIT
 
-[npm]: https://img.shields.io/npm/v/json-loader.svg
-[npm-url]: https://npmjs.com/package/json-loader
+[npm]: https://img.shields.io/npm/v/json5-loader.svg
+[npm-url]: https://npmjs.com/package/json5-loader
 
-[deps]: https://david-dm.org/webpack/json-loader.svg
-[deps-url]: https://david-dm.org/webpack/json-loader
+[deps]: https://david-dm.org/webpack-contrib/json5-loader.svg
+[deps-url]: https://david-dm.org/webpack-contrib/json5-loader
 
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
 
-[test]: http://img.shields.io/travis/webpack/json-loader.svg
-[test-url]: https://travis-ci.org/webpack/json-loader
+[test]: http://img.shields.io/travis/webpack-contrib/json5-loader.svg
+[test-url]: https://travis-ci.org/webpack-contrib/json5-loader
 
-[cover]: https://coveralls.io/repos/github/webpack/json-loader/badge.svg?branch=master
-[cover-url]: https://coveralls.io/github/webpack/json-loader?branch=master
+[cover]: https://codecov.io/gh/webpack-contrib/json5-loader/branch/master/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack-contrib/json5-loader
 
 ***
 

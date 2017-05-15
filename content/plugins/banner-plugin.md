@@ -24,3 +24,7 @@ new webpack.BannerPlugin(options)
   exclude: string | RegExp | Array,
 }
 ```
+
+***
+
+> 原文：https://webpack.js.org/plugins/banner-plugin/

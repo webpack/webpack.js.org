@@ -1,5 +1,5 @@
 ---
-title: 加载器 API(Loader API)
+title: Loader API
 sort: 4
 contributors:
     - TheLarkInn

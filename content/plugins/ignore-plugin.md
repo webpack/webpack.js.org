@@ -22,3 +22,7 @@ As of [moment](https://momentjs.com/) 2.18, all locales are bundled together wit
 ```js
 new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
 ```
+
+***
+
+> 原文：https://webpack.js.org/plugins/ignore-plugin/
