@@ -22,7 +22,8 @@ function checkLinks(args) {
   var name = null;
 
   tap.on('complete', function(res) {
-    const failures = res.failures;
+    const failures = res.failures.filter(failure => !failure.diag || !failure.diag.at ||
+        !failure.diag.at.match(/class="(support__item|support__backers-avatar|support__sponsors-avatar)"/));
 
     if (failures.length > 0) {
       console.log(formatFailures(failures));

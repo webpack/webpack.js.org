@@ -42,7 +42,6 @@ loader 通过在 `require()` 语句中使用 `loadername!` 前缀来激活，或
 * `markdown-loader` 将 Markdown 转译为 HTML
 * `posthtml-loader` 使用 [PostHTML](https://github.com/posthtml/posthtml) 加载并转换 HTML 文件
 * `handlebars-loader` 将 Handlebars 转移为 HTML
-* [`markup-inline-loader`](https://github.com/asnowwolf/markup-inline-loader) Inline SVG/MathML files to HTML. It’s useful when applying icon font or applying CSS animation to SVG.
 * [`markup-inline-loader`](https://github.com/asnowwolf/markup-inline-loader) 将内联的 SVG/MathML 文件转换为 HTML。在应用于图标字体，或将 CSS 动画应用于 SVG 时非常有用。
 
 ## 样式
@@ -51,8 +50,8 @@ loader 通过在 `require()` 语句中使用 `loadername!` 前缀来激活，或
 * [`css-loader`](/loaders/css-loader) 解析 CSS 文件后，使用 import 加载，并且返回 CSS 代码
 * [`less-loader`](/loaders/less-loader) 加载和转译 LESS 文件
 * [`sass-loader`](/loaders/sass-loader) 加载和转译 SASS/SCSS 文件
+* [`postcss-loader`](/loaders/postcss-loader) 使用 [PostCSS](http://postcss.org) 加载和转译 CSS/SSS 文件
 * `stylus-loader` 加载和转译 Stylus 文件
-* `postcss-loader` 使用 [PostCSS](http://postcss.org) 加载和转译 CSS/SSS 文件
 
 
 ## 清理和测试(Linting && Testing)

@@ -7,6 +7,9 @@ contributors:
   - pksjce
   - rahulcs
   - johnstew
+related:
+  - title: Lazy Loading ES2015 Modules in the Browser
+    url: https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser
 ---
 
 本指南介绍了如何将您的 bundle 拆分成可以在之后异步下载的 chunk。例如，这允许首先提供最低限度的引导 bundle，并在稍后再异步地添加其他功能。
@@ -175,6 +178,32 @@ module.exports = {
 ```
 
 
+### `import()` imports the entire module namespace
+### `import()` 导入整个模块命名空间
+
+Note that the promise is [resolved with the module namespace](https://github.com/tc39/proposal-dynamic-import#proposed-solution). Consider the following two examples:
+请注意，该 promise [使用模块命名空间解析](https://github.com/tc39/proposal-dynamic-import#proposed-solution)。考虑以下两个示例：
+
+```js
+// 示例 1: top-level import
+import * as Component from './component';
+// 示例 2: Code-splitting with import()
+import('./component').then(Component => /* ... */);
+```
+
+`Component` in both of those cases resolves to the same thing, meaning in the case of using `import()` with ES2015 modules you have to explicitly access default and named exports:
+这两种情况下，`Component` 解决了同样的事情，那就是在使用带有 ES2015 模块的 `import()` 时，您必须显式地访问默认导出和命名导出：
+
+```js
+async function main() {
+  // 解构赋值用法示例
+  const { default: Component } = await import('./component');
+  // 行内用法示例
+  render((await import('./component')).default);
+}
+```
+
+
 ### `System.import` 已废弃
 
 在 webpack 中使用 `System.import` [不符合提案规范](https://github.com/webpack/webpack/issues/2163)，因此已经于 [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) 废弃，建议使用 `import()` 替代。
@@ -309,11 +338,6 @@ require.ensure(['./b.js'], function(require) {
 * `require.ensure()`
 * * https://github.com/webpack/webpack/tree/master/examples/code-splitting
 * * https://github.com/webpack/webpack/tree/master/examples/named-chunks – 阐明 `chunkName` 的用法
-
-
-## 链接
-
-* [Lazy Loading ES2015 Modules in the Browser](https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser)
 
 ***
 

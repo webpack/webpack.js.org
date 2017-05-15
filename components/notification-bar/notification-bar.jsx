@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from '../container/container';
 
-const version = '0';
+const version = '1';
 
 export default class NotificationBar extends React.Component {
   render() {
@@ -14,8 +14,7 @@ export default class NotificationBar extends React.Component {
             赞助 webpack，同时获取官方衣服！访问 <a href="https://webpack.threadless.com">webpack 官方商店！</a>&nbsp; 查看所有收益请转到 webpack 的 <a href="https://opencollective.com/webpack">Open Collective 页面！</a>
           </p>
           <p>
-            webpack 2 已经发布！阅读<a href="https://medium.com/webpack/webpack-2-and-beyond-40520af9067f#.ojp0x5ls1">公告</a>&nbsp;并且现在就<a href="/guides/installation">安装它</a>&nbsp;！
-
+            在 <a href="http://www.unixstickers.com/tag/webpack">Unixstickers!</a> 上购买全新的 webpack 贴纸
             <i
               className="notification-bar__close icon-cross"
               onClick={ this._close.bind(this) } />

@@ -116,6 +116,8 @@ const watching = compiler.watch({
 
 `Watching` 配置选项的[细节可以在这里查阅](/configuration/watch/#watchoptions)。
 
+W> 文件系统不正确的问题，可能会对单次修改触发多次构建。因此，在上面的示例中，一次修改可能会多次触发 `console.log` 语句。用户应该预知此行为，并且可能需要检查 `stats.hash` 来查看文件哈希是否确实变更。
+
 
 ### 关闭 `Watching`(Close `Watching`)
 
@@ -137,6 +139,7 @@ T> 不允许在当前监听器已经关闭或失效前再次监听或执行。
 ``` js
 watching.invalidate();
 ```
+
 
 ## Stats 对象(Stats Object)
 

@@ -4,6 +4,13 @@ contributors:
   - simon04
   - zacanger
   - alexjoverm
+related:
+  - title: Tree shaking with webpack 2, TypeScript and Babel
+    url: https://alexjoverm.github.io/2017/03/06/Tree-shaking-with-Webpack-2-TypeScript-and-Babel/
+  - title: Tree-shaking with webpack 2 and Babel 6
+    url: http://www.2ality.com/2015/12/webpack-tree-shaking.html
+  - title: webpack 2 Tree Shaking Configuration
+    url: https://medium.com/modus-create-front-end-development/webpack-2-tree-shaking-configuration-9f1de90f3233#.15tuaw71x
 ---
 
 _Tree shaking_ 是一个术语，通常用来描述移除 JavaScript 上下文中无用代码这个过程，或者更准确的说是按需引用代码，它依赖于 ES2015 模块系统中 [import](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/import)/[export](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/export) 的[静态结构特性](http://exploringjs.com/es6/ch_modules.html#static-module-structure)。这个术语和概念实际上是兴起于 ES2015 模块打包工具 [rollup](https://github.com/rollup/rollup)。
@@ -77,9 +84,6 @@ function(e,t,n){"use strict";function r(e){return e*e*e}t.a=r}
 function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(0);console.log(n.i(r.a)(5))}
 ```
 
+***
 
-## 参考链接
-
-* [Tree shaking with webpack 2, TypeScript and Babel](https://alexjoverm.github.io/2017/03/06/Tree-shaking-with-webpack-2-TypeScript-and-Babel/)
-* [Tree-shaking with webpack 2 and Babel 6](http://www.2ality.com/2015/12/webpack-tree-shaking.html)
-* [webpack 2 Tree Shaking Configuration](https://medium.com/modus-create-front-end-development/webpack-2-tree-shaking-configuration-9f1de90f3233#.15tuaw71x)
+> 原文：https://webpack.js.org/guides/tree-shaking/

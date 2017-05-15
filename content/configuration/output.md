@@ -507,6 +507,16 @@ publicPath: "../assets/", // 相对于 HTML 页面
 publicPath: "", // 相对于 HTML 页面（目录相同）
 ```
 
+In cases where the `publicPath` of output files can't be known at compile time, it can be left blank and set dynamically at runtime in the entry file using the [free variable](http://stackoverflow.com/questions/12934929/what-are-free-variables) `__webpack_public_path__`.
+
+```javascript
+ __webpack_public_path__ = myRuntimePublicPath
+
+// rest of your application entry
+```
+
+See [this discussion](https://github.com/webpack/webpack/issues/2776#issuecomment-233208623) for more information on `__webpack_public_path__`.
+
 
 ## `output.sourceMapFilename`
 

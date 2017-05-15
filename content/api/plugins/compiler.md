@@ -9,7 +9,7 @@ webpack 的 `Compiler` 模块是创建一个传入 webpack CLI、 `webpack` api 
 
 webpack 通过实例化 compiler，再调用它的 `run` 方法来使用它，下面是一个关于如何使用 `Compiler` 的简单例子。事实上， 这和 webpack 本身如何使用 compiler 已经很接近了。
 
-[__compiler-example__](https://github.com/pksjce/webpack-internal-examples/blob/master/compiler-example.js)
+[__compiler-example__](https://github.com/pksjce/webpack-internal-examples/tree/master/compiler-example)
 
 ```javascript
 // 可以从webpack包中导入

@@ -2,6 +2,7 @@
 title: 为什么支持 webpack？
 contributors:
   - scottdj92
+  - harrynewsome
 ---
 
 首先，对 webpack 有贡献的人，这样做是因为热爱开源，热爱我们的用户和生态系统，最重要的是，一起推动 web 向前发展。由于我们的 [Open Collective](http://opencollective.com/webpack) 资金模式和透明的运作方式，我们能够通过贡献者、依赖项目，以及贡献者和核心团队来提供支持和资金。但付出投资后，回报的结果如何？
@@ -55,6 +56,7 @@ webpack 是一个用于打包代码的一体化工具。在插件的帮助下，
 
 
 ## 风险投资(VC), 政府(Government), 数字营销公司(Digital Agencies)
+
 我们希望您与我们合作，一个顶级的 NPM 库，以改善您的产品！
 
 <!--
