@@ -46,7 +46,6 @@ yarn add --dev istanbul-instrumenter-loader
 
 为生成所有组件（包括你没写测试的那些）的代码覆盖率报告，你需要 require 所有**业务**和**测试**的代码。相关内容在 [karma-webpack 其他用法](https://github.com/webpack/karma-webpack#alternative-usage)中有涉及。
 
-
 #### test/index.js
 
 ```js
