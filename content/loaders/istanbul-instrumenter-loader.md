@@ -61,7 +61,7 @@ const componentsContext = require.context('../src/components/', true, /index\.js
 componentsContext.keys().forEach(componentsContext);
 ```
 
-以下为 Karma 的唯一入口文件。
+以下为 Karma 的唯一入口起点文件。
 
 #### karma.conf.js
 
@@ -98,7 +98,6 @@ config.set({
 ```
 
 #### 配置选项
-
 此 loader 支持 [istanbul-lib-instrument](https://github.com/istanbuljs/istanbul-lib-instrument/blob/master/api.md#instrumenter) 的所有配置选项。
 
 ### License

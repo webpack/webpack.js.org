@@ -11,9 +11,9 @@ npm install --save-dev cache-loader
 
 ## 用法
 
-在一些开销较大的加载器之前添加此加载器，以将结果缓存到磁盘里。
+在一些性能开销较大的 loader 之前添加此 loader，以将结果缓存到磁盘里。
 
-请注意，保存和读取这些缓存文件会有一些时间开销，所以请只对开销较大的加载器使用此加载器。
+请注意，保存和读取这些缓存文件会有一些时间开销，所以请只对性能开销较大的 loader 使用此 loader。
 
 ## 示例
 
@@ -43,7 +43,7 @@ use: [
   {
     loader: "cache-loader",
     options: {
-      // provide a cache directory where cache items should be stored
+      // 指定缓存文件存放的目录
       cacheDirectory: path.resolve(".cache")
     }
   },
@@ -51,7 +51,7 @@ use: [
 ]
 ```
 
-## 维护者
+## 维护人员
 
 <table>
   <tbody>
