@@ -1,5 +1,5 @@
 ---
-title: Module API
+title: Module API - Methods
 sort: 3
 contributors:
   - skipjack
@@ -7,9 +7,65 @@ contributors:
 related:
   - title: CommonJS Wikipedia
     url: https://en.wikipedia.org/wiki/CommonJS
+  - title: Asynchronous Module Definition
+    url: https://en.wikipedia.org/wiki/Asynchronous_module_definition
 ---
 
-This is section covers all methods and variables available in code compiled with webpack. When using webpack to bundle your application, you have a can pick from a variety of module syntax styles including [ES6](https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015), [CommonJS](https://en.wikipedia.org/wiki/CommonJS), and [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition). You'll also have access to certain data from the compilation process through `module` and other variables.
+This is section covers all methods available in code compiled with webpack. When using webpack to bundle your application, you have a can pick from a variety of module syntax styles including [ES6](https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015), [CommonJS](https://en.wikipedia.org/wiki/CommonJS), and [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition).
+
+
+## ES6 (Recommended)
+
+Version 2 of webpack supports ES6 module syntax natively, meaning you can use `import` and `export` without a tool like babel to handle this for you. Keep in mind that you will still probably need babel for other ES6+ features. The following methods are supported by webpack:
+
+
+### `import`
+
+Statically `import` the `export`s of another module.
+
+``` javascript
+import MyModule from './my-module.js';
+import { NamedExport } from './other-module.js';
+```
+
+W> The keyword here is __statically__. Normal `import` statement cannot be used dynamically within other logic or contain variables. See the [spec](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) for more information and `import()` below for dynamic usage.
+
+
+### `export`
+
+Export anything as a `default` or named export.
+
+``` javascript
+// Named exports
+export var Count = 5;
+export function Multiply(a, b) {
+  return a * b;
+}
+
+// Default export
+export default {
+  // Some data...
+}
+```
+
+
+### `import()`
+
+Dynamically load modules.
+
+``` javascript
+if ( module.hot ) {
+  let loadLodash = import('lodash');
+
+  loadLodash()
+    .then(_ => {
+      // Do something with lodash (a.k.a '_')...
+    })
+}
+```
+
+The compiler treats this as a split point and will split everything from `lodash` into a separate bundle that will be loaded as soon as the `loadLodash` function is called. See the [async code splitting guide](/guides/code-splitting-async) for more information.
+
 
 
 ## CommonJS
@@ -24,8 +80,6 @@ require(dependency: String)
 ```
 
 Synchronously retrieve the exports from another module. The compiler will ensure that the dependency is available in the output bundle.
-
-Example:
 
 ``` javascript
 var $ = require("jquery");
@@ -145,7 +199,7 @@ define({
 W> This CANNOT be used in an async function.
 
 
-### `require`
+### `require` (amd-version)
 
 ``` javascript
 require(dependencies: String[], [callback: function(...)])
@@ -175,7 +229,7 @@ Export the given `value`. The label can occur before a function declaration or a
 ``` javascript
 export: var answer = 42;
 export: function method(value) {
-  // Do something
+  // Do something...
 };
 ```
 
@@ -238,13 +292,9 @@ require.ensure(['a', 'c'], function(require) { /* ... */ });
 
 This will result in following output:
 
-* entry chunk
-  - file.js
-  - a
-* anonymous chunk
-  - b
-* anonymous chunk
-  - c
+- entry chunk: `file.js` and `a`
+- anonymous chunk: `b`
+- anonymous chunk: `c`
 
 Without `require.include('a')` it would be duplicated in both anonymous chunks.
 
@@ -261,139 +311,3 @@ if(require.cache[require.resolveWeak('module')]) {
   // Do something when module was loaded before...
 }
 ```
-
-
-
-## Module Variables
-
-?> ...
-
-
-### `module.loaded` (NodeJS)
-
-This is `false` if the module is currently executing, and `true` if the sync execution has finished.
-
-
-### `module.hot` (webpack-specific)
-
-Indicates whether or not Hot Module Replacement is enabled. See [Hot Module Replacement](/concepts/hot-module-replacement).
-
-
-### `module.id` (CommonJS)
-
-The ID of the current module.
-
-``` javascript
-// in file.js
-module.id === require.resolve("./file.js")
-```
-
-
-### `module.exports` (CommonJS)
-
-Defines the value that will be returned when a consumer makes a `require` call to the module (defaults to a new object).
-
-``` javascript
-module.exports = function doSomething() {
-  // Do something...
-};
-```
-
-W> This CANNOT be used in an asynchronous function.
-
-
-### `exports` (CommonJS)
-
-This variable is equal ot default value of `module.exports` (i.e. an object). If `module.exports` gets overwritten, `exports` will no longer be exported.
-
-``` javascript
-exports.someValue = 42;
-exports.anObject = {
-    x: 123
-};
-exports.aFunction = function doSomething() {
-    // Do something
-};
-```
-
-
-### `global` (NodeJS)
-
-See [node.js global](http://nodejs.org/api/globals.html#globals_global).
-
-
-### `process` (NodeJS)
-
-See [node.js process](http://nodejs.org/api/process.html).
-
-
-### `__dirname` (NodeJS)
-
-Depending on the config option `node.__dirname`:
-
-* `false`: Not defined
-* `mock`: equal "/"
-* `true`: [node.js __dirname](http://nodejs.org/api/globals.html#globals_dirname)
-
-If used inside a expression that is parsed by the Parser, the config option is treated as `true`.
-
-
-### `__filename` (NodeJS)
-
-Depending on the config option `node.__filename`:
-
-* `false`: Not defined
-* `mock`: equal "/index.js"
-* `true`: [node.js __filename](http://nodejs.org/api/globals.html#globals_filename)
-
-If used inside a expression that is parsed by the Parser, the config option is treated as `true`.
-
-
-### `__resourceQuery` (webpack-specific)
-
-The resource query of the current module.
-
-Example:
-
-``` javascript
-// Inside "file.js?test":
-__resourceQuery === "?test"
-```
-
-
-### `__webpack_public_path__` (webpack-specific)
-
-Equals the config options `output.publicPath`.
-
-
-### `__webpack_require__` (webpack-specific)
-
-The raw require function. This expression isn't parsed by the Parser for dependencies.
-
-
-### `__webpack_chunk_load__` (webpack-specific)
-
-The internal chunk loading function. Takes two arguments:
-
-* `chunkId` The id for the chunk to load.
-* `callback(require)` A callback function called once the chunk is loaded.
-
-
-### `__webpack_modules__` (webpack-specific)
-
-Access to the internal object of all modules.
-
-
-### `__webpack_hash__` (webpack-specific)
-
-This variable is only available with the [`HotModuleReplacementPlugin`]() or the [`ExtendedAPIPlugin`](). It provides access to the hash of the compilation.
-
-
-### `__non_webpack_require__` (webpack-specific)
-
-Generates a `require` function that is not parsed by webpack. Can be used to do cool stuff with a global require function if available.
-
-
-### `DEBUG`  (webpack-specific)
-
-Equals the config option `debug`.
