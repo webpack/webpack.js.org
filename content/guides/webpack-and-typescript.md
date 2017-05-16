@@ -145,6 +145,73 @@ Once the loader is installed we need to tell webpack we want to run this loader 
 Finally we need to enable source maps in webpack by specifying the `devtool` property.
 Currently we use the 'inline-source-map' setting, to read more about this setting and see other options check out the [devtool documentation](/configuration/devtool/).
 
+## Enabling Tree-shaking
+
+[Tree-shaking](/guides/tree-shaking/) support in Webpack relies on ES2015 modules. In order to enable it, we need to tell Typescript to compile `.ts` and `.tsx` files to ES2015 (or ES6). If you are using Babel in a way that preserves ES2015 modules and transpiles everything else.
+
+### Prerequisites
+
+```
+> npm install babel-core babel-loader babel-preset-env
+```
+
+`babel-preset-env` automatically choses required babel plugins based on configuration. `babel-loader` will take in code produced by TypeScript, and transpile it down to JavaScript version that Webpack can process.
+
+### Setup Typescript
+
+You can reuse yor existing `tsconfig.json`. The only lines you need to change/add is `target` and `module`:
+
+`tsconfig.json`
+
+```
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    ...the rest of compiler options
+  }
+  ... the rest of configuration
+}
+```
+
+### Setup Babel
+
+Create a file named `.babelrc` in your project root (where you keep your `webpack.config.js` and `tsconfig.json`) with the following setup:
+
+```
+{
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false
+      }
+    ]
+  ]
+}
+```
+By setting `modules` to `false` we tell Babel _not_ to convert ES2015 modules (`import/export`) to CommonJS modules. Refer to [babel's docs](https://babeljs.io) for additional configuration options.
+
+### Setup webpack
+
+Everything else in your webpack configuration remains the same. The only thing you need to add/change is `babel-loader` for your `.ts`/`.tsx` files:
+
+```
+module.exports = {
+ ... other options
+ module: {
+   rules: [
+     {
+       test: /\.tsx?$/,
+       use: ['babel-loader', 'ts-loader']
+       exclude: /node_modules/,
+     },
+   ]
+ }
+};
+```
+
+In this case we're using `ts-loader`. Note the order of loaders. They are applied [from right to left](/configuration/module/#rule-use).
 
 ## Using 3rd Party Libraries
 
@@ -182,3 +249,4 @@ Here we declare a new module for svg by specifying any import that ends in __.sv
 If we wanted to be more explicit about this being a url we could define the type as string.
 
 This applies not only to svg but any custom loader you may want to use which includes css, scss, json or any other file you may wish to load in your project.
+
