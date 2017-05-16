@@ -3,14 +3,14 @@ title: istanbul-instrumenter-loader
 source: https://raw.githubusercontent.com/webpack-contrib/istanbul-instrumenter-loader/master/README.md
 edit: https://github.com/webpack-contrib/istanbul-instrumenter-loader/edit/master/README.md
 ---
-## Istanbul instrumenter loader for [webpack](https://webpack.js.org/)
+## [webpack](https://webpack.js.org/) 的 Istanbul instrumenter loader
 
 [![npm](http://img.shields.io/npm/v/istanbul-instrumenter-loader.svg?style=flat-square)](https://www.npmjs.org/package/istanbul-instrumenter-loader)
 [![deps](http://img.shields.io/david/deepsweet/istanbul-instrumenter-loader.svg?style=flat-square)](https://david-dm.org/deepsweet/istanbul-instrumenter-loader#info=dependencies)
 
-Instrument JS files with [istanbul-lib-instrument](https://github.com/istanbuljs/istanbul-lib-instrument) for subsequent code coverage reporting.
+通过 [istanbul-lib-instrument](https://github.com/istanbuljs/istanbul-lib-instrument) 监测 JS 文件，以便生成代码覆盖率报告。
 
-### Install
+### 安装
 
 ```sh
 npm install --save-dev istanbul-instrumenter-loader
@@ -18,17 +18,17 @@ npm install --save-dev istanbul-instrumenter-loader
 yarn add --dev istanbul-instrumenter-loader
 ```
 
-### Setup
+### 配置
 
-#### References
+#### 参考
 
 * [Loaders](https://webpack.js.org/concepts/loaders/)
 * [karma-webpack](https://github.com/webpack/karma-webpack)
 * [karma-coverage-istanbul-reporter](https://github.com/mattlewis92/karma-coverage-istanbul-reporter)
 
-#### Project structure
+#### 项目结构
 
-Let's say you have the following:
+假设你的项目结构如下：
 
 ```
 ├── src/
@@ -44,23 +44,23 @@ Let's say you have the following:
                 └── index.js
 ```
 
-To create a code coverage report for all components (even for those for which you have no tests yet) you have to require all the 1) sources and 2) tests. Something like it's described in ["alternative usage" of karma-webpack](https://github.com/webpack/karma-webpack#alternative-usage):
+为生成所有组件（包括你没写测试的那些）的代码覆盖率报告，你需要 require 所有**业务**和**测试**的代码。相关内容在 [karma-webpack 其他用法](https://github.com/webpack/karma-webpack#alternative-usage)中有涉及。
 
 #### test/index.js
 
 ```js
-// require all `project/test/src/components/**/index.js`
+// require 所有 `project/test/src/components/**/index.js`
 const testsContext = require.context('./src/components/', true, /index\.js$/);
 
 testsContext.keys().forEach(testsContext);
 
-// require all `project/src/components/**/index.js`
+// require 所有 `project/src/components/**/index.js`
 const componentsContext = require.context('../src/components/', true, /index\.js$/);
 
 componentsContext.keys().forEach(componentsContext);
 ```
 
-This file will be the only entry point for Karma.
+以下为 Karma 的唯一入口起点文件。
 
 #### karma.conf.js
 
@@ -77,7 +77,7 @@ config.set({
         …
         module: {
             rules: [
-                // instrument only testing sources with Istanbul
+                // 用 Istanbul 只监测业务代码
                 {
                     test: /\.js$/,
                     include: path.resolve('src/components/'),
@@ -96,8 +96,8 @@ config.set({
 });
 ```
 
-#### Options
-The loader supports all options supported by [istanbul-lib-instrument](https://github.com/istanbuljs/istanbul-lib-instrument/blob/master/api.md#instrumenter).
+#### 配置选项
+此 loader 支持 [istanbul-lib-instrument](https://github.com/istanbuljs/istanbul-lib-instrument/blob/master/api.md#instrumenter) 的所有配置选项。
 
 ### License
 MIT
