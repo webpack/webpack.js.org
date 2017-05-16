@@ -147,7 +147,7 @@ Currently we use the 'inline-source-map' setting, to read more about this settin
 
 ## Enabling Tree-shaking
 
-[Tree-shaking](/guides/tree-shaking/) support in Webpack relies on ES2015 modules. In order to enable it, we need to tell Typescript to compile `.ts` and `.tsx` files to ES2015 (or ES6). If you are using Babel in a way that preserves ES2015 modules and transpiles everything else.
+[Tree-shaking](/guides/tree-shaking/) support in Webpack relies on ES2015 modules. In order to enable it, we need to tell Typescript to compile `.ts` and `.tsx` files to ES2015 (or ES6, see [--lib](http://www.typescriptlang.org/docs/handbook/compiler-options.html) compiler option). We will then use [Babel](https://babeljs.io) in a way that preserves ES2015 modules and transpiles everything else.
 
 ### Prerequisites
 
