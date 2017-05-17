@@ -124,8 +124,4 @@ functions (loaders). Users now have more flexibility to include fine-grained log
 
 Loaders follow the standard [module resolution](/concepts/module-resolution/). In most cases it will be loaders from the [module path](/concepts/module-resolution/#module-paths) (think `npm install`, `node_modules`).
 
-[How to write a loader?](/development/how-to-write-a-loader) A loader module is expected to export a function and to be written in Node.js compatible JavaScript. In the common case you manage loaders with npm, but you can also have loaders as files in your app.
-
-By convention, loaders are usually named as `XXX-loader`, where `XXX` is the context name. For example, `json-loader`.
-
-The loader name convention and precedence search order is defined by [`resolveLoader.moduleTemplates`](/configuration/resolve#resolveloader) within the webpack configuration API.
+A loader module is expected to export a function and be written in NodeJS compatible JavaScript. In the common case you manage loaders with npm, but you can also have loaders as files in your app. By convention, loaders are usually named `xxx-loader` (e.g. `json-loader`). See ["How to Write a Loader?"](/development/how-to-write-a-loader) for more information.
