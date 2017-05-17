@@ -15,16 +15,19 @@ If you didn't do so already please check out [webpack installation guide](/guide
 To start using webpack with Typescript you need a couple of things:
 
 1. Install the Typescript compiler in your project.
-2. Install a Typescript loader (in this case we're using ts-loader).
-3. Create a __tsconfig.json__ file to contain our TypeScript compilation configuration.
+2. Install a Typescript loader (in this case we're using `ts-loader`).
+3. Create a __tsconfig.json__ file for our TypeScript configuration.
 4. Create __webpack.config.js__ to contain our webpack configuration.
 
 You can install the TypeScript compiler and the TypeScript loader from npm by running:
- `npm install --save-dev typescript ts-loader`
+
+ ``` bash
+ npm install --save-dev typescript ts-loader
+ ```
 
 __tsconfig.json__
 
-The tsconfig file can start as an empty configuration file, here you can see an example of a basic configuration for TypeScript to compile to es5 as well as providing support for JSX.
+The `tsconfig` file can start out empty, however here you can see an example of a basic configuration to compile TypeScript to ES5 allow JSX.
 
 ```json
 {
@@ -40,11 +43,9 @@ The tsconfig file can start as an empty configuration file, here you can see an 
 }
 ```
 
-You can read more about tsconfig.json configuration options at the [TypeScript documentation website](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)
+You can read more about the configuration options on the [TypeScript website](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html). Now let's set up a simple webpack configuration for TypeScript:
 
 __webpack.config.js__
-
-A basic webpack with TypeScript config should look along these lines:
 
 ```js
 module.exports = {
@@ -78,18 +79,12 @@ Currently there are 2 loaders for TypeScript available:
 * [`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader)
 * [`ts-loader`](https://github.com/TypeStrong/ts-loader)
 
-Awesome TypeScript loader has created a wonderful explanation of the
-difference between `awesome-typescript-loader` and `ts-loader`.
-
-You can read more about it [here](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader).
-
-In this guide we will be using `ts-loader` as currently it is easier enabling additional webpack features such as importing non code assets into your project.
+Awesome TypeScript loader has created a [wonderful explanation](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader) of the difference between `awesome-typescript-loader` and `ts-loader`. In this guide we will be using `ts-loader` as currently it is easier enabling additional webpack features such as importing non code assets into your project.
 
 
 ## Enabling source maps
 
-In order to enable source maps we first must configure TypeScript to output inline source maps to our compiled JavaScript files.
-This is done by setting the sourceMap property to true.
+In order to enable source maps we first must configure TypeScript to output inline source maps to our compiled JavaScript files. This is done by setting the `sourceMap` property to true.
 
 __tsconfig.json__
 
@@ -99,9 +94,7 @@ __tsconfig.json__
 }
 ```
 
-Once TypeScript is configured to output source maps we need to tell webpack
-to extract these source maps and pass them to the browser, this way we will get the source file
-exactly as we see it in our code editor.
+Once TypeScript is configured to output source maps, we need to tell webpack to extract these source maps and pass them to the browser in order to view the source file exactly as it appears in our code editor.
 
 __webpack.config.js__
 
@@ -145,9 +138,11 @@ Once the loader is installed we need to tell webpack we want to run this loader 
 Finally we need to enable source maps in webpack by specifying the `devtool` property.
 Currently we use the 'inline-source-map' setting, to read more about this setting and see other options check out the [devtool documentation](/configuration/devtool/).
 
+
 ## Enabling Tree-shaking
 
-[Tree-shaking](/guides/tree-shaking/) support in Webpack relies on ES2015 modules. In order to enable it, we need to tell Typescript to compile `.ts` and `.tsx` files to ES2015 (or ES6, see [--lib](http://www.typescriptlang.org/docs/handbook/compiler-options.html) compiler option). We will then use [Babel](https://babeljs.io) in a way that preserves ES2015 modules and transpiles everything else.
+[Tree-shaking](/guides/tree-shaking/) support in webpack relies on ES2015 module syntax (`import` and `export`). In order to enable it, we need to tell Typescript to compile `.ts` and `.tsx` files to ES2015 (or ES6, see [--lib](http://www.typescriptlang.org/docs/handbook/compiler-options.html) compiler option). We will then use [Babel](https://babeljs.io) in a way that preserves ES2015 modules and transpiles everything else.
+
 
 ### Prerequisites
 
@@ -155,24 +150,26 @@ Currently we use the 'inline-source-map' setting, to read more about this settin
 > npm install babel-core babel-loader babel-preset-env
 ```
 
-`babel-preset-env` automatically choses required babel plugins based on configuration. `babel-loader` will take in code produced by TypeScript, and transpile it down to JavaScript version that Webpack can process.
+`babel-preset-env` automatically determines the necessary babel plugins based on our configuration. `babel-loader` will take in code produced by TypeScript, and transpile it down to JavaScript that webpack can process.
+
 
 ### Setup Typescript
 
-You can reuse yor existing `tsconfig.json`. The only lines you need to change/add is `target` and `module`:
+You can reuse your existing `tsconfig.json`. The only lines you need to change/add is `target` and `module`:
 
-`tsconfig.json`
+__tsconfig.json__
 
 ```
 {
   "compilerOptions": {
     "target": "es6",
     "module": "es6",
-    ...the rest of compiler options
-  }
-  ... the rest of configuration
+    // any other compiler options...
+  },
+  // any other configuration...
 }
 ```
+
 
 ### Setup Babel
 
@@ -190,11 +187,13 @@ Create a file named `.babelrc` in your project root (where you keep your `webpac
   ]
 }
 ```
-By setting `modules` to `false` we tell Babel _not_ to convert ES2015 modules (`import/export`) to CommonJS modules. Refer to [babel's docs](https://babeljs.io) for additional configuration options.
+
+By setting `modules` to `false` we tell Babel _not_ to convert ES2015 modules to CommonJS modules. Refer to [babel's documentation](https://babeljs.io) for additional configuration options.
+
 
 ### Setup webpack
 
-Everything else in your webpack configuration remains the same. The only thing you need to add/change is `babel-loader` for your `.ts`/`.tsx` files:
+Everything else in your webpack configuration remains the same. The only thing you need to add/change is `babel-loader` for your `.ts` and `.tsx` files:
 
 ```
 module.exports = {
@@ -203,9 +202,9 @@ module.exports = {
    rules: [
      {
        test: /\.tsx?$/,
-       use: ['babel-loader', 'ts-loader']
        exclude: /node_modules/,
-     },
+       use: [ 'babel-loader', 'ts-loader' ]
+     }
    ]
  }
 };
@@ -213,40 +212,27 @@ module.exports = {
 
 In this case we're using `ts-loader`. Note the order of loaders. They are applied [from right to left](/configuration/module/#rule-use).
 
+
 ## Using 3rd Party Libraries
 
-When installing 3rd party libraries from npm, it is important to remember
-to install the typing definition for that library.
-
-You can install 3rd party library definitions from the @types repository.
-
-For example if we want to install lodash we can run the following command to get the typings for it:
+When installing 3rd party libraries from npm, it is important to remember to install the typing definition for that library. You can install 3rd party library definitions from the @types repository. For example, if we want to install lodash we can run the following command to get the typings for it:
 
 ``` bash
 npm install --save-dev @types/lodash
 ```
 
-For more information see [this blog post](https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/)
+For more information see [this blog post](https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/).
 
 
 ## Importing non code assets
 
-To use non code assets with TypeScript, we need to tell TypeScript how to defer the type for these imports.
+To use non code assets with TypeScript, we need to tell TypeScript how to defer the type for these imports. To do this we need to create a __custom.d.ts__ file. This file signifies custom definitions for TypeScript in our project. For example, for `.svg` images, we'll need to provide a definition for these imports in our __custom.d.ts__ file:
 
-To do this we need to create a __custom.d.ts__ file.
-This file signifies custom definitions for TypeScript in our project.
-
-In our __custom.d.ts__ file we need to provide a definition for svg imports, to do this we need to put the following content in this file:
-
-```typescript
+``` typescript
 declare module "*.svg" {
   const content: any;
   export default content;
 }
 ```
 
-Here we declare a new module for svg by specifying any import that ends in __.svg__ and define the type for this module as any.
-If we wanted to be more explicit about this being a url we could define the type as string.
-
-This applies not only to svg but any custom loader you may want to use which includes css, scss, json or any other file you may wish to load in your project.
-
+Here we declare a new module for `*.svg` by specifying any import that ends in `.svg` and defining the type for this module as `any`. If we wanted to be more explicit about this being a url we could define the type as string. This concept applies not only to our `.svg` example but any custom loader you may want to use including `.css`, `.scss`, `.json` or any other file you may wish to load in your project.
