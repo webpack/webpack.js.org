@@ -17,6 +17,7 @@ contributors:
   - itchina110
   - jason-ivy
   - JayceZhang9602
+  - kagawagao
   - lcxfs1991
   - LeoEatle
   - lgh06
