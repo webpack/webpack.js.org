@@ -7,6 +7,9 @@ contributors:
   - pksjce
   - rahulcs
   - johnstew
+related:
+  - title: Lazy Loading ES2015 Modules in the Browser
+    url: https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser
 ---
 
 本指南介绍了如何将您的 bundle 拆分成可以在之后异步下载的 chunk。例如，这允许首先提供最低限度的引导 bundle，并在稍后再异步地添加其他功能。
@@ -175,6 +178,32 @@ module.exports = {
 ```
 
 
+### `import()` imports the entire module namespace
+### `import()` 导入整个模块命名空间
+
+Note that the promise is [resolved with the module namespace](https://github.com/tc39/proposal-dynamic-import#proposed-solution). Consider the following two examples:
+请注意，该 promise [使用模块命名空间解析](https://github.com/tc39/proposal-dynamic-import#proposed-solution)。考虑以下两个示例：
+
+```js
+// 示例 1: top-level import
+import * as Component from './component';
+// 示例 2: Code-splitting with import()
+import('./component').then(Component => /* ... */);
+```
+
+`Component` in both of those cases resolves to the same thing, meaning in the case of using `import()` with ES2015 modules you have to explicitly access default and named exports:
+这两种情况下，`Component` 解决了同样的事情，那就是在使用带有 ES2015 模块的 `import()` 时，您必须显式地访问默认导出和命名导出：
+
+```js
+async function main() {
+  // 解构赋值用法示例
+  const { default: Component } = await import('./component');
+  // 行内用法示例
+  render((await import('./component')).default);
+}
+```
+
+
 ### `System.import` 已废弃
 
 在 webpack 中使用 `System.import` [不符合提案规范](https://github.com/webpack/webpack/issues/2163)，因此已经于 [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) 废弃，建议使用 `import()` 替代。
@@ -195,7 +224,7 @@ require.ensure(dependencies: String[], callback: function(require), errorCallbac
 * `dependencies` 是一个字符串数组，我们可以在其中声明所有用到的模块，这些模块需要在回调函数的所有代码被执行前，就已经可用。
 * `callback` 是一个函数，当所有的依赖都加载完成后，webpack 会立刻执行此回调函数。具体实现上，`require` 函数将作为一个参数传递给此回调函数。因此，我们可以在回调函数体(function body)内进一步使用 `require()` 来引入执行时所需要的那些模块。
 
-W> 虽然在具体实现上，`require` 会作为参数传递给回调函数，但是使用一个非 require 的任意名称（比如 `require.ensure([], function (request) { request('someModule'); })`）将不会由 webpack 的静态解析器(static parser)处理。所以请使用 `require` 而不是 `require.ensure([], function (require) { require('someModule'); })`
+W> 虽然在具体实现上，`require` 会作为参数传递给回调函数，但是使用一个非 require 的任意名称（比如 `require.ensure([], function (request) { request('someModule'); })`）将不会由 webpack 的静态解析器(static parser)处理。所以请使用 `require` 以及 `require.ensure([], function (require) { require('someModule'); })`
 
 * 可选的：`errorCallback` 是一个函数，用于在 webpack 加载依赖失败时执行。
 * 可选的：`chunkName` 是专用于设定通过 `require.ensure()` 创建的 chunk 的名称。通过向多个 `require.ensure()` 传递相同的 `chunkName`，我们可以将它们的代码组合成一个单独的 chunk，只生成一个浏览器必须加载的 bundle。
@@ -309,11 +338,6 @@ require.ensure(['./b.js'], function(require) {
 * `require.ensure()`
 * * https://github.com/webpack/webpack/tree/master/examples/code-splitting
 * * https://github.com/webpack/webpack/tree/master/examples/named-chunks – 阐明 `chunkName` 的用法
-
-
-## 链接
-
-* [Lazy Loading ES2015 Modules in the Browser](https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser)
 
 ***
 

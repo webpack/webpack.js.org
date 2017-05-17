@@ -4,6 +4,7 @@ contributors:
   - simon04
   - gonzoyumo
   - rouzbeh84
+  - aretecode
 ---
 
 webpack 有一个富插件接口(rich plugin interface)。webpack 自身的多数功能都使用这个插件接口。这个插件接口使 webpack 变得**极其灵活**。
@@ -15,6 +16,7 @@ webpack 有一个富插件接口(rich plugin interface)。webpack 自身的多�
 |[`CompressionWebpackPlugin`](/plugins/compression-webpack-plugin)|预先准备的资源压缩版本，使用 Content-Encoding 提供访问服务|
 |[`DefinePlugin`](/plugins/define-plugin)|允许在编译时(compile time)配置的全局常量，用于允许「开发/发布」构建之间的不同行为|
 |[`EnvironmentPlugin`](/plugins/environment-plugin)|在 `process.env` 键上使用 [`DefinePlugin`](./define-plugin) 的简写。|
+|[`DllPlugin`](/plugins/dll-plugin)|提供分离打包的方式，可以极大提高构建时间性能。|
 |[`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin)|从 bundle 中提取文本（CSS）到分离的文件（app.bundle.css）|
 |[`HtmlWebpackPlugin`](/plugins/html-webpack-plugin)| 用于简化 HTML 文件（`index.html`）的创建，提供访问 bundle 的服务。|
 |[`I18nWebpackPlugin`](/plugins/i18n-webpack-plugin)|为 bundle 增加国际化支持|

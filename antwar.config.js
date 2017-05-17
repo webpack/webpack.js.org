@@ -254,6 +254,9 @@ function processPage() {
     },
     contributors: function(o) {
       return Array.isArray(o.file.contributors) && o.file.contributors.length && o.file.contributors.slice().sort();
+    },
+    related: function(o) {
+      return Array.isArray(o.file.related) ? o.file.related : []
     }
   };
 }
