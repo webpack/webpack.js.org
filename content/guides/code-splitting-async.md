@@ -125,8 +125,13 @@ module.exports = {
 
 Not using the `syntax-dynamic-import` plugin will fail the build with:
 
-* `Module build failed: SyntaxError: 'import' and 'export' may only appear at the top level`, or
-* `Module build failed: SyntaxError: Unexpected token, expected {`
+```
+Module build failed: SyntaxError: 'import' and 'export' may only appear at the top level
+```
+or
+```
+Module build failed: SyntaxError: Unexpected token, expected {
+```
 
 
 ### Usage with Babel and `async`/`await`
