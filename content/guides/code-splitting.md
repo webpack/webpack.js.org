@@ -13,7 +13,7 @@ There are mainly two kinds of code splitting that can be accomplished with webpa
 
 ## Resource splitting for caching and parallel loads
 
-### Vendor code-splitting
+### Vendor Code Splitting
 
 A typical application can depend on many third party libraries for framework/functionality needs. Unlike application code, code present in these libraries does not change often.
 
@@ -28,7 +28,7 @@ This enhances cacheability of your styles and allows the browser to load the sty
 
 Learn [how to split CSS](/guides/code-splitting-css) using the `ExtractTextWebpackPlugin`.
 
-## On demand code-splitting
+## On demand Code Splitting
 
 While resource splitting of the previous kind requires the user to specify the split points upfront in the configuration, one can also create dynamic split points in the application code.
 

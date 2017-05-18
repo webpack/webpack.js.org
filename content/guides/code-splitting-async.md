@@ -185,7 +185,7 @@ Note that the promise is [resolved with the module namespace](https://github.com
 ```js
 // Example 1: top-level import
 import * as Component from './component';
-// Example 2: Code-splitting with import()
+// Example 2: Code Splitting with import()
 import('./component').then(Component => /* ... */);
 ```
 
@@ -276,7 +276,7 @@ When you add `bundle.js` in your HTML file and open it in your browser, the `0.b
 
 ### publicPath
 
-`output.publicPath` is an important option when using code-splitting, it is used to tell webpack where to load your bundles on-demand, see the [configuration documentation](/configuration/output/#output-publicpath).
+`output.publicPath` is an important option when using Code Splitting, it is used to tell webpack where to load your bundles on-demand, see the [configuration documentation](/configuration/output/#output-publicpath).
 
 
 ### Chunk name
