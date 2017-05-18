@@ -98,7 +98,7 @@ Once TypeScript is configured to output source maps, we need to tell webpack to 
 
 __webpack.config.js__
 
-```js
+``` js
 module.exports = {
  entry: './index.ts',
  output: {
@@ -146,7 +146,7 @@ Currently we use the 'inline-source-map' setting, to read more about this settin
 
 ### Prerequisites
 
-```
+``` bash
 > npm install babel-core babel-loader babel-preset-env
 ```
 
@@ -159,7 +159,7 @@ You can reuse your existing `tsconfig.json`. The only lines you need to change/a
 
 __tsconfig.json__
 
-```
+``` json
 {
   "compilerOptions": {
     "target": "es6",
@@ -175,7 +175,7 @@ __tsconfig.json__
 
 Create a file named `.babelrc` in your project root (where you keep your `webpack.config.js` and `tsconfig.json`) with the following setup:
 
-```
+``` json
 {
   "presets": [
     [
@@ -195,7 +195,7 @@ By setting `modules` to `false` we tell Babel _not_ to convert ES2015 modules to
 
 Everything else in your webpack configuration remains the same. The only thing you need to add/change is `babel-loader` for your `.ts` and `.tsx` files:
 
-```
+``` js
 module.exports = {
  ... other options
  module: {
