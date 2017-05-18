@@ -125,11 +125,11 @@ module.exports = {
 
 Not using the `syntax-dynamic-import` plugin will fail the build with:
 
-```
+```javascript
 Module build failed: SyntaxError: 'import' and 'export' may only appear at the top level
 ```
 or
-```
+```javascript
 Module build failed: SyntaxError: Unexpected token, expected {
 ```
 
