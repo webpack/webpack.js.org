@@ -13,7 +13,7 @@ There are mainly two kinds of code splitting that can be accomplished with webpa
 
 ## Resource splitting for caching and parallel loads
 
-### Vendor code splitting
+### Vendor code-splitting
 
 A typical application can depend on many third party libraries for framework/functionality needs. Unlike application code, code present in these libraries does not change often.
 
