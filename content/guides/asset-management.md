@@ -135,7 +135,7 @@ module.exports = {
         use: 'csv-loader'
       },
       {
-        test: /\.xml$,
+        test: /\.xml$/,
         use: 'xml-loader',
       }
     ]
