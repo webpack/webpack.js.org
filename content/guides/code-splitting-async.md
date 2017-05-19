@@ -75,6 +75,32 @@ Since webpack 2.4.0, chunk names for dynamic imports can be specified using a "m
 import(/* webpackChunkName: "my-chunk-name" */ 'module');
 ```
 
+Since webpack 2.6.0, the placeholders `[index]`, `[request]` are supported. The following example will generate files like `i18n/namespace-i18n-bundle-en_json`:
+
+```javascript
+import(/* webpackChunkName: "i18n/[request]" */ `i18n/${namespace}-i18n-bundle-${language}.json`).then(...)
+```
+
+### Import mode
+
+Since webpack 2.6.0, different modes for resolving dynamic imports can be specified.
+
+```javascript
+import(/* webpackMode: "lazy" */ `i18n/${namespace}-i18n-bundle-${language}.json`).then(...)
+```
+
+The following modes are supported:
+
+* `"lazy"`: The default behavior. Lazy generates a chunk per request. So everything is lazy loaded.
+* `"lazy-once"`: Only available for imports with expression. Generates a single chunk for all possible requests. So the first request causes a network request for all modules, all following requests are already fulfilled.
+* `"eager"`: Eager generates no chunk. All files are included in the current chunk. No network request is required to load the files. It still returns a Promise but it's already resolved. In contrast to a static import, it skips evaluating until the request is made.
+
+You can combine both options (`webpackChunkName` and `webpackMode`). It's parsed a JSON5 object without curly brackets:
+
+```javascript
+import(/* webpackMode: "lazy-once", webpackChunkName: "all-i18n-data" */ `i18n/${namespace}-i18n-bundle-${language}.json`).then(...)
+```
+
 
 ### Usage with Babel
 
