@@ -5,6 +5,7 @@ import Sidebar from '../sidebar/sidebar';
 import PageLinks from '../page-links/page-links';
 import Gitter from '../gitter/gitter';
 import Contributors from '../contributors/contributors';
+import Sponsors from '../sponsors/sponsors';
 import './page-style';
 import '../sidebar/sidebar-style';
 import '../sponsors/sponsors-style';
@@ -12,6 +13,9 @@ import '../gitter/gitter-style';
 
 export default ({ section, page }) => (
   <Container className="page">
+
+    <Sponsors />
+
     <Interactive
       id="components/sidebar/sidebar.jsx"
       component={ Sidebar }
