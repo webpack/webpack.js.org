@@ -15,16 +15,19 @@ contributors:
 要能在 webpack 里使用 TypeScript，你需要准备好下面这些事情：
 
 1. 在项目里安装 TypeScript 编译器；
-2. 选择一个 TypeScript loader 安装（这个示例里使用的是 ts-loader）;
+2. 选择一个 TypeScript loader 安装（这个示例里使用的是 `ts-loader`）;
 3. 创建 __tsconfig.json__ 文件，这是 TypeScript 编译器的配置文件；
 4. 创建 __webpack.config.js__ 文件，这是 webpack 的配置文件。
 
 你可以通过 npm 安装 TypeScript 编译器和 TypeScript loader，运行下面这个命令来安装：
- `npm install --save-dev typescript ts-loader`
+
+ ``` bash
+ npm install --save-dev typescript ts-loader
+ ```
 
 __tsconfig.json__
 
-tsconfig 配置文件可以从一个空白的文件逐一添加配置项，下面有一个基本的配置示例，用来把 TypeScript 代码编译成 es5 代码，同时支持 JSX。
+`tsconfig` 文件可以初始为空，但是在这里可以看到一个基本配置的示例，用来将 TypeScript 代码编译成 ES5 代码，同时支持 JSX。
 
 ```json
 {
@@ -40,11 +43,9 @@ tsconfig 配置文件可以从一个空白的文件逐一添加配置项，下�
 }
 ```
 
-可以查看 [TypeScript 官方文档](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)了解更多关于 tsconfig.json 的配置选项。
+可以查看 [TypeScript 官方文档](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)了解更多关于 tsconfig.json 的配置选项。现在让我们简单地在 webpack 配置中设置 TypeScript。
 
 __webpack.config.js__
-
-使用 TypeScript 编写的 webpack 基本配置大概是这样：
 
 ```js
 module.exports = {
@@ -78,16 +79,12 @@ module.exports = {
 * [`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader)
 * [`ts-loader`](https://github.com/TypeStrong/ts-loader)
 
-Awesome TypeScript loader 文档里已经很好的解释了 `awesome-typescript-loader` 和 `ts-loader` 的区别。
-
-可以阅读 [这篇文章](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader) 了解更多。
-
-在本指南中，我们将使用 `ts-loader`，因为它更简便地启用额外的 webpack 功能，例如将非代码资源导入到项目中。
+Awesome TypeScript loader 文档对 `awesome-typescript-loader` 和 `ts-loader` 之间的区别，做了[精彩的解释](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader)。在本指南中，我们将使用 `ts-loader`，因为它更简便地启用额外的 webpack 功能，例如将非代码资源(non code asset)导入到项目中。
 
 
 ## 启用 source maps 功能
 
-为了启用 source maps 功能，首先必须配置 TypeScript 将 source maps 内联输出到编译好的 JavaScript 文件，可通过将 sourceMap 属性设置为 true 来实现。
+为了启用 source maps 功能，首先必须配置 TypeScript 将 source maps 内联输出到编译好的 JavaScript 文件，可通过将 `sourceMap` 属性设置为 true 来实现。
 
 __tsconfig.json__
 
@@ -97,12 +94,11 @@ __tsconfig.json__
 }
 ```
 
-当开启了 TypeScript 的 source maps 输出特性后，我们需要告诉 webpack
-来提取这些 source maps 并发送给浏览器，这样我们在浏览器看到的源码文件，就跟在代码编辑器中看到的一样。
+当开启了 TypeScript 的 source maps 输出特性后，我们需要告诉 webpack 来提取这些 source maps 并将其发送给浏览器，以便完全能够在浏览器中，查看到代码编辑器中的源码。
 
 __webpack.config.js__
 
-```js
+``` js
 module.exports = {
  entry: './index.ts',
  output: {
@@ -143,41 +139,104 @@ npm install --save-dev source-map-loader
 当前我们使用的是 'inline-source-map' 这个属性值。想了解更多关于这个属性值的特性和其他属性值选项，可以查看 [devtool 文档](/configuration/devtool/)。
 
 
+## Enabling Tree-shaking
+
+[Tree-shaking](/guides/tree-shaking/) support in webpack relies on ES2015 module syntax (`import` and `export`). In order to enable it, we need to tell Typescript to compile `.ts` and `.tsx` files to ES2015 (or ES6, see [--lib](http://www.typescriptlang.org/docs/handbook/compiler-options.html) compiler option). We will then use [Babel](https://babeljs.io) in a way that preserves ES2015 modules and transpiles everything else.
+
+
+### Prerequisites
+
+``` bash
+> npm install babel-core babel-loader babel-preset-env
+```
+
+`babel-preset-env` automatically determines the necessary babel plugins based on our configuration. `babel-loader` will take in code produced by TypeScript, and transpile it down to JavaScript that webpack can process.
+
+
+### Setup Typescript
+
+You can reuse your existing `tsconfig.json`. The only lines you need to change/add is `target` and `module`:
+
+__tsconfig.json__
+
+``` json
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    // any other compiler options...
+  },
+  // any other configuration...
+}
+```
+
+
+### Setup Babel
+
+Create a file named `.babelrc` in your project root (where you keep your `webpack.config.js` and `tsconfig.json`) with the following setup:
+
+``` json
+{
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false
+      }
+    ]
+  ]
+}
+```
+
+By setting `modules` to `false` we tell Babel _not_ to convert ES2015 modules to CommonJS modules. Refer to [babel's documentation](https://babeljs.io) for additional configuration options.
+
+
+### Setup webpack
+
+Everything else in your webpack configuration remains the same. The only thing you need to add/change is `babel-loader` for your `.ts` and `.tsx` files:
+
+``` js
+module.exports = {
+ ... other options
+ module: {
+   rules: [
+     {
+       test: /\.tsx?$/,
+       exclude: /node_modules/,
+       use: [ 'babel-loader', 'ts-loader' ]
+     }
+   ]
+ }
+};
+```
+
+In this case we're using `ts-loader`. Note the order of loaders. They are applied [from right to left](/configuration/module/#rule-use).
+
+
 ## 使用第三方库
 
-当从 npm安装第三方库时，记住一定要同时安装这个库的类型声明文件。
-
-你可以从 @types 仓库找到并安装这些第三方库的类型声明文件。
-
-举个例子，如果想安装 lodash 这个库的类型声明文件，我们可以运行下面的命令：
+当从 npm 安装第三方库时，记住一定要同时安装这个库的类型声明文件。你可以从 @types 仓库找到并安装这些第三方库的类型声明文件。举个例子，如果想安装 lodash 这个库的类型声明文件，我们可以运行下面的命令：
 
 ``` bash
 npm install --save-dev @types/lodash
 ```
 
-想了解更多，可以查看[这篇文章](https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/)
+想了解更多，可以查看[这篇文章](https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/)。
 
 
 ## 导入非代码资源
 
-要在 TypeScript 里使用非代码资源，我们需要告诉 TypeScript 如何兼容这些导入类型。
+要在 TypeScript 里使用非代码资源，我们需要告诉 TypeScript 如何兼容这些导入类型。那么首先，我们需要在项目里创建 __custom.d.ts__ 文件，这个文件用来编写自定义的类型声明。例如，我们要想兼容 `.svg` 图片资源导入，就需要在 __custom.d.ts__ 文件里添加以下内容：
 
-那么首先，我们需要在项目里创建 __custom.d.ts__ 文件，这个文件用来编写自定义的类型声明。
-
-我们要想兼容 svg 类型的资源导入，就需要在 __custom.d.ts__ 文件里添加以下内容：
-
-```typescript
+``` typescript
 declare module "*.svg" {
   const content: any;
   export default content;
 }
 ```
 
-上面代码为 svg 声明了一个新模块，使得 TypeScript 能够识别到 以 __.svg__ 结尾的资源导入，同时定义了这个模块的类型为任意类型（any）。如果我们想指定更加明确模块类型，假如可以判断出这是一个 url，那么我们可以将类型定义为字符串。
-
-这不仅适用于 svg，也适用于其他任何你想使用的自定义 loader，包括css，scss，json或是你希望加载到项目中的其他任何文件。
+上面代码为 `*.svg` 声明了一个新模块，使得 TypeScript 能够识别到 以  `.svg` 结尾的资源导入，同时定义了这个模块的类型为`任意类型(any)`。如果我们想指定更加明确模块类型，假如可以判断出这是一个 url，那么我们可以将类型定义为字符串。这不仅适用于 `.svg`，也适用于其他任何你想使用的自定义 loader，包括 `.css`，`.scss`，`.json` 或是你希望加载到项目中的其他任何文件。
 
 ***
-
 
 > 原文：https://webpack.js.org/guides/webpack-and-typescript/

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import SidebarItem from '../sidebar-item/sidebar-item';
-import Sponsors from '../sponsors/sponsors';
 
 export default class Sidebar extends Component {
   constructor(props) {
@@ -9,14 +8,13 @@ export default class Sidebar extends Component {
     this.state = {
       fixed: false,
       availableHeight: null,
-      maxWidth: null,
-      adDistance: null
+      maxWidth: null
     };
   }
 
   render() {
     let { sectionName, pages, currentPage } = this.props;
-    let { fixed, availableHeight, maxWidth, adDistance } = this.state;
+    let { fixed, availableHeight, maxWidth } = this.state;
     let isGuides = sectionName === 'guides';
 
     return (
@@ -29,10 +27,6 @@ export default class Sidebar extends Component {
           width: fixed ? maxWidth : null,
           maxHeight: availableHeight
         }}>
-
-        <Sponsors
-          distanceFromTop={ adDistance }
-          height={ availableHeight } />
 
         <div className="sidebar__inner">
           <a href="https://github.com/webpack/webpack/releases">
@@ -67,7 +61,7 @@ export default class Sidebar extends Component {
       this._recalculate.bind(this),
       250
     );
-    
+
     document.addEventListener(
       'scroll',
       this._recalculate.bind(this)
@@ -98,11 +92,10 @@ export default class Sidebar extends Component {
     let headerSpace = scrollY > headerHeight ? 0 : headerHeight - scrollY;
     let footerSpace = distToBottom > footerHeight ? 0 : footerHeight - distToBottom;
 
-    this.setState({ 
+    this.setState({
       fixed: scrollY >= headerHeight && sidebarHeight < parentHeight,
       availableHeight: innerHeight - headerSpace - footerSpace,
-      maxWidth: parentWidth,
-      adDistance: scrollY < headerHeight ? headerHeight - scrollY : 0
+      maxWidth: parentWidth
     });
   }
 }

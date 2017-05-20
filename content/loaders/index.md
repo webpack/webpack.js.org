@@ -40,6 +40,7 @@ loader 通过在 `require()` 语句中使用 `loadername!` 前缀来激活，或
 * `pug-loader` 加载 Pug 模板并返回一个函数
 * `jade-loader` 加载 Jade 模板并返回一个函数
 * `markdown-loader` 将 Markdown 转译为 HTML
+* [`react-markdown-loader`](https://github.com/javiercf/react-markdown-loader) 使用 markdown-parse parser(解析器) 将 Markdown 编译为 React 组件
 * `posthtml-loader` 使用 [PostHTML](https://github.com/posthtml/posthtml) 加载并转换 HTML 文件
 * `handlebars-loader` 将 Handlebars 转移为 HTML
 * [`markup-inline-loader`](https://github.com/asnowwolf/markup-inline-loader) 将内联的 SVG/MathML 文件转换为 HTML。在应用于图标字体，或将 CSS 动画应用于 SVG 时非常有用。

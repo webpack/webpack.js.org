@@ -12,10 +12,12 @@ contributors:
   - dingyiming
   - dear-lizhihua
   - ellyliang
+  - hikerpig
   - huangtubiao
   - itchina110
   - jason-ivy
   - JayceZhang9602
+  - kagawagao
   - lcxfs1991
   - LeoEatle
   - lgh06
@@ -36,6 +38,7 @@ contributors:
   - xie-qianyue
   - yuanlinssdut
   - zgayjjf
+  - zhuangdanyang
   - zikeng
 ---
 

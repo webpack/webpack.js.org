@@ -12,7 +12,7 @@ related:
     url: https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser
 ---
 
-本指南介绍了如何将您的 bundle 拆分成可以在之后异步下载的 chunk。例如，这允许首先提供最低限度的引导 bundle，并在稍后再异步地添加其他功能。
+本指南介绍了如何将您的 bundle 拆分成可以在之后异步下载的 chunk。例如，这允许首先提供最低限度的引导 bundle，并在稍后再异步地加载其他功能。
 
 webpack 支持两种相似的技术实现此目的：使用 `import()` (推荐，ECMAScript 提案) 和 `require.ensure()` (遗留，webpack 特定)。
 

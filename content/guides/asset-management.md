@@ -1,20 +1,20 @@
 ---
-title: Asset Management
+title: 管理资源(Asset Management)
 contributors:
   - skipjack
   - michael-ciniawsky
 ---
 
-So you're all set up with webpack -- transforming and linting your JavaScript modules, generating an html file with the [`HTMLWebpackPlugin`](/plugins/html-webpack-plugin), and even loading some css through your JavaScript modules with the [css-loader](/loaders/css-loader). But wait, your site requires a whole bunch of other assets like images (e.g. `.png`, `.jpg`, `.svg`), fonts (e.g. `.woff`, `.woff2`, `.eot`), and data (e.g. `.json`, `.xml`, `.csv`)!
+现在 webpack 的配置都已经设置好了 -- 转换和 lint 您的 JavaScript 模块，使用 [`HTMLWebpackPlugin`](/plugins/html-webpack-plugin) 生成一个 html 文件，甚至可以使用 [css-loader](/loaders/css-loader) 来通过 JavaScript 模块加载 CSS。但请稍待片刻，您的网站需要一大堆其他资源，如图片（例如 `.png`, `.jpg`, `.svg`）、字体（例如 `.woff`, `.woff2`, `.eot`）和数据（例如 `.json`, `.xml`, `.csv`）！
 
-Prior to webpack, front-end developers would use tools like grunt and gulp to process these "web assets" and move them from their `/src` folder into their `/dist` or `/build` directory. The same idea was used for JavaScript modules, but, as you likely already know, tools like webpack will now "enter" your application and __dynamically bundle__ all dependencies (creating what's known as a [dependency graph](/concepts/dependency-graph)). This is great because every module now _explicitly states its dependencies_ and we'll avoid bundling modules that aren't in use.
+在 webpack 出现之前，前端开发人员会使用 grunt 和 gulp 等工具来处理这些 "web 资源"，并将它们从 `/src` 文件夹移动到 `/dist` 或 `/build` 目录中。同样方式也被用于 JavaScript 模块，但是，您可能已经知道，像 webpack 这样的工具现在将从"入口(enter)"开始，访问你的应用程序，并__动态打包(dynamically bundle)__所有依赖项（创建所谓的[依赖图表(dependency graph)](/concepts/dependency-graph)）。这是极好的创举，因为现在每个模块都可以_明确表述它自身的依赖，我们将避免打包未使用的模块。
 
-One of the coolest webpack features is that you can also _include any other type of file_, besides JavaScript, for which there is a loader. This means that the same benefits listed above for JavaScript (e.g. explicit dependencies) can be applied to everything used in building a website or web app. Let's start with CSS, as you may already be familiar with that setup...
+webpack 最出色的功能之一就是，除了 JavaScript，还可以通过 loader _引入任何其他类型的文件_。也就是说，以上列出的那些 JavaScript 的优点（例如显式依赖），同样可以用来构建网站或 web 应用程序中的所有非 JavaScript 内容。让我们从 CSS 开始起步，或许你可能已经熟悉了这个设置过程...
 
 
-## Loading CSS
+## 加载 CSS
 
-In order to `import` a CSS file from within a JavaScript module, you simply need to install and add the [style-loader](/loaders/style-loader) and [css-loader](/loaders/css-loader) to your [`module` configuration](/configuration/module)...
+为了从 JavaScript 模块中`导入`一个 CSS 文件，您只需要在 [`module` 配置中](/configuration/module) 安装并添加 [style-loader](/loaders/style-loader) 和 [css-loader](/loaders/css-loader)……
 
 ``` bash
 npm install --save-dev style-loader css-loader
@@ -40,14 +40,14 @@ module.exports = {
 }
 ```
 
-This enables you to `import './style.css'` into the file that depends on that styling. Now, when that module is run, a `<style>` tag with the stringified css will be inserted into the `<head>` of your html file.
+这使您可以在依赖于此样式的文件中 `import './style.css'`。现在，当该模块运行时，含有 CSS 字符串的 `<style>` 标签，将被插入到 html 文件的 `<head>` 中。
 
-T> Note that you can also [split your CSS](/guides/code-splitting-css) for better load times in production. On top of that, loaders exist for pretty much any flavor of CSS you can think of -- [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader), and [less](/loaders/less-loader) to name a few.
+T> 请注意，您也可以进行 [CSS 分离](/guides/code-splitting-css)，以便在生产环境中节省加载时间。最重要的是，现有的 loader 可以支持任何你可以想到的 CSS 处理器风格 - [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader) 和 [less](/loaders/less-loader) 等。
 
 
-## Loading Images
+## 加载图片
 
-So now we're pulling in our CSS, but what about our backgrounds and icons? Using the [file-loader](/loaders/file-loader) we can easily incorporate those in our system as well:
+假想，现在我们正在下载 CSS，但是我们的背景和图标如何处理呢？使用 [file-loader](/loaders/file-loader)，我们可以轻松地将这些内容混合到 CSS 中：
 
 ``` bash
 npm install --save-dev file-loader
@@ -72,14 +72,14 @@ module.exports = {
 }
 ```
 
-Now, when you `import Image from './my-image.png'`, that image will be processed and added to your `output` directory _and_ the `Image` variable will contain the final url of that image after processing. When using the [css-loader](/loaders/css-loader), as shown above, a similar process will occur for `url('./my-image.png')` within your CSS. The loader will recognize this is a local file, and replace the `'./my-image.png'` path with the final path to the image in your `output` directory. The [html-loader](/loaders/html-loader) handles `<img src="./my-image.png" />` in the same manner.
+现在，当你运行 `import Image from './my-image.png'` 时，该图片会被处理，以及添加到`输出`目录中，_并且_ `Image` 变量将在处理后，包含该图片的完整 url。使用 [css-loader](/loaders/css-loader) 时，在遇到 CSS 中的 `url('./my-image.png')` 也会进行与以上相同的处理过程。loader 将会识别这是一个本地文件，并将 `'./my-image.png'` 路径替换为 `output` 目录中图片的最终路径。[html-loader](/loaders/html-loader) 也会以同样的方式去处理 `<img src="./my-image.png" />`。
 
-T> The next step is minifying and optimizing your images. Check out the [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) and [url-loader](/loaders/url-loader) for more on how you can enhance your image loading process.
+T> 下一步是缩小和优化您的图像。关于更多如何增强您的图像加载过程，请查看 [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) 和 [url-loader](/loaders/url-loader)。
 
 
-## Loading Fonts
+## 加载字体
 
-So what about other assets like fonts? The file and url loaders will take any file you load through them and output it to your build directory. This means we can use them for any kind of file, including fonts:
+那么，像字体这样的其他资源如何处理呢？file-loader 和 url-loader 可以接收任何文件并加载，然后将其输出到构建目录。这就是说，我们可以将它们用于任何类型的文件，包括字体：
 
 __webpack.config.js__
 
@@ -100,7 +100,7 @@ module.exports = {
 }
 ```
 
-With this in place you can define a font like so...
+一切就绪后，你可以这样定义一个字体……
 
 ``` css
 @font-face {
@@ -112,12 +112,12 @@ With this in place you can define a font like so...
 }
 ```
 
-and the relative paths (e.g. `'./font.woff2'`) will be replaced with the final path/filename in your build directory.
+然后，相对路径，会被替换为构建目录中的完整路径/文件名。
 
 
-## Loading Data
+## 加载数据
 
-Another useful asset that can be loaded is data, like JSON files, CSVs, TSVs, and XML. Support for JSON is actually built-in, similar to NodeJS, meaning `import Data from './data.json'` will work by default. To import CSVs, TSVs, and XML you could use the [csv-loader](https://github.com/theplatapi/csv-loader) and [xml-loader](https://github.com/gisikw/xml-loader). Let's handle loading all three:
+此外，可以加载的有用资源还有数据，如 JSON 文件，CSV、TSV 和 XML。类似于 NodeJS，JSON 支持实际上是内置的，也就是说 `import Data from './data.json'` 默认将正常运行。要导入 CSV、TSV 和 XML，您可以使用 [csv-loader](https://github.com/theplatapi/csv-loader) 和 [xml-loader](https://github.com/gisikw/xml-loader)。让我们处理这三类文件：
 
 ``` bash
 npm install --save-dev csv-loader xml-loader
@@ -135,7 +135,7 @@ module.exports = {
         use: 'csv-loader'
       },
       {
-        test: /\.xml$,
+        test: /\.xml$/,
         use: 'xml-loader',
       }
     ]
@@ -144,7 +144,7 @@ module.exports = {
 }
 ```
 
-Now you can `import` any one of those four types of data (JSON, CSV, TSV, XML) and the `Data` variable you import it to will contain parsed JSON for easy consumption:
+现在，您可以 `import` 这四种类型的数据(JSON, CSV, TSV, XML)中的任何一种，以及所导入的 `Data` 变量将包含可直接使用的已解析 JSON：
 
 ``` js
 import Data from './data.csv'
@@ -154,12 +154,12 @@ Data.forEach((row, index) => {
 })
 ```
 
-T> This can be especially helpful when implementing some sort of data visualization using a tool like [d3](https://github.com/d3). Instead of making an ajax request and parsing the data at runtime you can load it into your module during the build process so that the parsed data is ready to go as soon as the module hits the browser.
+T> 在使用 [d3](https://github.com/d3) 等工具实现某些数据可视化，预加载数据会非常有用。我们可以不用再发送 ajax 请求，然后于运行时解析数据，而是在构建过程中将其提前载入并打包到模块中，以便浏览器加载模块后，可以立即从模块中解析数据。
 
 
-## Global Assets
+## 全局资源
 
-The coolest part of everything mentioned above, is that loading assets this way allows you to group modules and assets together in a more intuitive way. Instead of relying on a global `/assets` directory that contains everything, you can group assets with the code that uses them:
+上述所有内容中最出色之处是，以这种方式加载资源，您可以以更直观的方式将模块和资源组合在一起。无需依赖于含有全部资源的 `/assets` 目录，而是将资源与代码组合在一起：
 
 ``` diff
 - |- /assets
@@ -171,11 +171,11 @@ The coolest part of everything mentioned above, is that loading assets this way 
 + |  |  |– img.png
 ```
 
-This setup makes your code a lot more portable as everything that is closely coupled now lives together. Let's say you want to use `/my-component` in another project, simply copy or move it into the `/components` directory over there. As long as you've installed any _external dependencies_ and your _configuration has the same loaders_ defined, you should be good to go.
+这种配置方式会使您的代码更具备可移植，因为现有的统一放置的方式会造成所有资源紧密耦合在一起。假如你想在另一个项目中使用  `/my-component`，只需将其复制或移动到 `/components` 目录下。只要你已经安装了任何_扩展依赖(external dependencies)_，并且你的_已经在配置中定义过相同的 loader_，那么项目应该能够良好运行。
 
-However, let's say you're locked into your old ways or you have some assets that are shared between multiple components (views, templates, modules, etc.). It's still possible to store these assets in a base directory and even use [aliasing](/configuration/resolve#resolve-alias) to make them easier to `import`.
+但是，假如您无法使用新的开发方式，只能被固定于旧有开发方式，或者您有一些在多个组件（视图、模板、模块等）之间共享的资源。你仍然可以将这些资源存储在公共目录(base directory)中，甚至配合使用 [alias](/configuration/resolve#resolve-alias) 来使它们更方便 `import 导入`。
 
 
-## Further Reading
+## 延伸阅读
 
 - [Loading Fonts](https://survivejs.com/webpack/loading/fonts/) on SurviveJS

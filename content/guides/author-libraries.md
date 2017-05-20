@@ -4,6 +4,7 @@ contributors:
     - pksjce
     - johnstew
     - simon04
+    - 5angel
 ---
 
 webpack 是一个用来打包应用程序(application)和 library 的代码的工具。如果你是一个 JavaScript library 的作者，并且想要流水线化(streamline)你的打包逻辑，那么这篇文档将会帮助到你。
@@ -126,8 +127,44 @@ module.exports = {
 
 这意味着你的 library 需要一个名为 `lodash` 的依赖，这个依赖在用户的环境中必须可用。
 
-If your libary targets UMD, it's important to add all of the above mentioned ways of loading the external (`commonjs`, `commonjs2`, `amd` and `root`) as leaving one out will cause strange errors for a consumer trying to load your library in that environment.
+If your library targets UMD, it's important to add all of the above mentioned ways of loading the external (`commonjs`, `commonjs2`, `amd` and `root`) as leaving one out will cause strange errors for a consumer trying to load your library in that environment.
 
+If you only plan on using your library as a dependency in another webpack bundle, you may specify externals as an array.
+
+```javascript
+module.exports = {
+    ...
+    externals: [
+      'react',
+      'react-dom'
+    ]
+    ...
+};
+```
+
+Please note: for bundles that use several files from a package like this
+
+```javascript
+import A from 'library/A';
+import B from 'library/B';
+...
+```
+
+you wont be able to exclude them from bundle by specifying `library` in the externals.
+
+You'll either need to exclude them one by one or by using a regular expression.
+
+```javascript
+module.exports = {
+    ...
+    externals: [
+      'library/A',
+      'library/B',
+      /^library\/.+$/ // everything that starts with "library/"
+    ]
+    ...
+};
+```
 
 ### 增加 `libraryTarget`
 
