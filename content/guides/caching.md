@@ -233,7 +233,8 @@ module.exports = {
     new WebpackChunkHash(),
     new ChunkManifestPlugin({
       filename: "chunk-manifest.json",
-      manifestVariable: "webpackManifest"
+      manifestVariable: "webpackManifest",
+      inlineManifest: true
     })
   ]
 };
