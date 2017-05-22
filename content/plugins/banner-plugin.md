@@ -8,13 +8,14 @@ related:
 
 ---
 
+Adds a banner to the top of each generated chunk.
+
 ``` javascript
 new webpack.BannerPlugin(banner)
 // or
 new webpack.BannerPlugin(options)
 ```
 
-Adds a banner to the top of each generated chunk.
 
 ## Options
 
@@ -28,6 +29,7 @@ Adds a banner to the top of each generated chunk.
   exclude: string | RegExp | Array,
 }
 ```
+
 
 ## Placeholders
 
