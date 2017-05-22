@@ -247,7 +247,7 @@ __webpack.prod.js__
 
 ```js
 const Merge = require('webpack-merge');
-const CommonConfig = require('./base.js');
+const CommonConfig = require('./webpack.common.js');
 
 module.exports = function(env) {
   return Merge(CommonConfig, {
