@@ -13,12 +13,12 @@ contributors:
 ---
 
 webpack 是一个用来构建我们应用程序中的 JavaScript 模块的工具。在按照[安装说明](/guides/installation)安装 webpack 后，我们可以从 [CLI](/api/cli) 或 [API](/api/node) 来开始使用 `webpack`。
-webpack 通过快速建立应用程序依赖图表并以正确的顺序打包它们来简化你的工作流。你能够针对你的代码来对 webpack 进行自定义的优化配置，比如为生产环境拆分 vendor/css/js 代码，通过运行「开发中 server(development server)」来实现无刷新热重载(hot-reload)等很多酷炫的特性。了解更多关于[为什么使用 wepback](/guides/why-webpack)。
+webpack 通过快速建立应用程序依赖图表并以正确的顺序打包它们来简化你的工作流。你能够针对你的代码来对 webpack 进行自定义的优化配置，比如为生产环境拆分 vendor/css/js 代码，通过运行「开发中 server(development server)」来实现无刷新热重载(hot-reload)等很多酷炫的特性。了解更多关于[为什么使用 webpack](/guides/why-webpack)。
 
 
 ## 创建一个 bundle 文件
 
-创建一个示例目录来尝试 wepback。[安装 webpack](/guides/installation)。
+创建一个示例目录来尝试 webpack。[安装 webpack](/guides/installation)。
 
 ```bash
 mkdir webpack-demo && cd webpack-demo
