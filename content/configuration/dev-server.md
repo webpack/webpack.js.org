@@ -43,9 +43,8 @@ If you're using dev-server through the Node.js API, the options in `devServer` w
 
 W> Be aware that when [exporting multiple configurations](/configuration/configuration-types/#exporting-multiple-configurations) only the `devServer` options for the first configuration will be taken into account and used for all the configurations in the array.
 
-### Troubleshooting
-
 T> If you're having trouble, navigating to the `/webpack-dev-server` route will show where files are served. For example, `http://localhost:9000/webpack-dev-server`.
+
 
 ## `devServer.clientLogLevel`
 
