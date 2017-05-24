@@ -19,6 +19,7 @@ webpack 有一个富插件接口(rich plugin interface)。webpack 自身的多�
 |[`DllPlugin`](/plugins/dll-plugin)|提供分离打包的方式，可以极大提高构建时间性能。|
 |[`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin)|从 bundle 中提取文本（CSS）到分离的文件（app.bundle.css）|
 |[`HtmlWebpackPlugin`](/plugins/html-webpack-plugin)| 用于简化 HTML 文件（`index.html`）的创建，提供访问 bundle 的服务。|
+|[`IgnorePlugin`](/plugins/ignore-plugin)| 从 bundle 中排除某些模块|
 |[`I18nWebpackPlugin`](/plugins/i18n-webpack-plugin)|为 bundle 增加国际化支持|
 |[`LimitChunkCountPlugin`](/plugins/limit-chunk-count-plugin)| 设置 chunk 的最小/最大限制，以微调和控制 chunk|
 |[`NormalModuleReplacementPlugin`](/plugins/normal-module-replacement-plugin)|替换与正则表达式匹配的资源|

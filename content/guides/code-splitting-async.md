@@ -183,9 +183,9 @@ module.exports = {
 请注意，该 promise [使用模块命名空间解析](https://github.com/tc39/proposal-dynamic-import#proposed-solution)。考虑以下两个示例：
 
 ```js
-// 示例 1: top-level import
+// 示例 1: 最顶层 import
 import * as Component from './component';
-// 示例 2: Code-splitting with import()
+// 示例 2: 使用 import() 进行代码分离
 import('./component').then(Component => /* ... */);
 ```
 
