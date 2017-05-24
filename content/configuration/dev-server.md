@@ -43,6 +43,8 @@ content is served from dist/
 
 W> Be aware that when [exporting multiple configurations](/configuration/configuration-types/#exporting-multiple-configurations) only the `devServer` options for the first configuration will be taken into account and used for all the configurations in the array.
 
+T> If you're having trouble, navigating to the `/webpack-dev-server` route will show where files are served. For example, `http://localhost:9000/webpack-dev-server`.
+
 
 ## `devServer.clientLogLevel`
 
@@ -272,7 +274,7 @@ Shows a full-screen overlay in the browser when there are compiler errors or war
 overlay: true
 ```
 
-If you want to show warnings as well as errors: 
+If you want to show warnings as well as errors:
 
 ```js
 overlay: {

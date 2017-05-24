@@ -1,5 +1,5 @@
 ---
-title: Managing Built Files
+title: 管理构建文件
 contributors:
   - skipjack
 ---

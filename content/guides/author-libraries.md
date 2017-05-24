@@ -125,11 +125,11 @@ module.exports = {
 };
 ```
 
-这意味着你的 library 需要一个名为 `lodash` 的依赖，这个依赖在用户的环境中必须可用。
+这意味着你的 library 需要一个名为 `lodash` 的依赖，这个依赖在用户的环境中必须存在且可用。
 
-If your library targets UMD, it's important to add all of the above mentioned ways of loading the external (`commonjs`, `commonjs2`, `amd` and `root`) as leaving one out will cause strange errors for a consumer trying to load your library in that environment.
+如果您的 library 的构建目标(target)是 UMD，重要的事是，在所有上述提到的加载外部扩展方式(`commonjs`, `commonjs2`, `amd` 和 `root`)中添加此 library 后，会因为用户试图在该环境中加载 library ，而造成一个奇怪的错误。
 
-If you only plan on using your library as a dependency in another webpack bundle, you may specify externals as an array.
+如果你计划只是将 library 用作另一个 webpack bundle 中的依赖模块，则可以将外部扩展(external)指定为数组。
 
 ```javascript
 module.exports = {
@@ -142,7 +142,7 @@ module.exports = {
 };
 ```
 
-Please note: for bundles that use several files from a package like this
+请注意：对于如下，bundle 使用了一个包(package)中的多个文件
 
 ```javascript
 import A from 'library/A';
@@ -150,9 +150,9 @@ import B from 'library/B';
 ...
 ```
 
-you wont be able to exclude them from bundle by specifying `library` in the externals.
+你无法通过在 externals 中指定 `library` 目录的方式，将它们从 bundle 中排除。
 
-You'll either need to exclude them one by one or by using a regular expression.
+您将需要逐个排除它们，或使用正则表达式排除。
 
 ```javascript
 module.exports = {
@@ -221,11 +221,11 @@ __package.json__
 }
 ```
 
-The key `main` refers to the [standard from `package.json`](https://docs.npmjs.com/files/package.json#main), and `module` to [a](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md) [proposal](https://github.com/rollup/rollup/wiki/pkg.module) to allow the JavaScript ecosystem upgrade to use ES2015 modules without breaking backwards compatibility.
+键(key) `main` 是指 [`package.json` 标准](https://docs.npmjs.com/files/package.json#main)，以及`module` 是[一个](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md)[提案](https://github.com/rollup/rollup/wiki/pkg.module)，此提案允许 JavaScript 生态系统升级使用 ES2015 模块，而不会破坏向后兼容性。
 
 W> `module` 将指向一个含有 ES2015 模块语法的模块，但是只有在支持此语法功能的浏览器或 Node.js 版本中才可用。
 
-现在你可以[将其作为一个 npm 包来发布](https://docs.npmjs.com/getting-started/publishing-npm-packages)，并且在 [unpkg.com](https://unpkg.com/#/) 找到它并分发给你的用户。
+现在你可以[将其发布为一个 npm 包](https://docs.npmjs.com/getting-started/publishing-npm-packages)，并且在 [unpkg.com](https://unpkg.com/#/) 找到它并分发给你的用户。
 
 ***
 
