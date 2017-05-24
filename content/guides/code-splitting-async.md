@@ -178,10 +178,8 @@ module.exports = {
 ```
 
 
-### `import()` imports the entire module namespace
 ### `import()` 导入整个模块命名空间
 
-Note that the promise is [resolved with the module namespace](https://github.com/tc39/proposal-dynamic-import#proposed-solution). Consider the following two examples:
 请注意，该 promise [使用模块命名空间解析](https://github.com/tc39/proposal-dynamic-import#proposed-solution)。考虑以下两个示例：
 
 ```js
@@ -191,7 +189,6 @@ import * as Component from './component';
 import('./component').then(Component => /* ... */);
 ```
 
-`Component` in both of those cases resolves to the same thing, meaning in the case of using `import()` with ES2015 modules you have to explicitly access default and named exports:
 这两种情况下，`Component` 解决了同样的事情，那就是在使用带有 ES2015 模块的 `import()` 时，您必须显式地访问默认导出和命名导出：
 
 ```js
