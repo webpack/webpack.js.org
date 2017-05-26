@@ -75,10 +75,14 @@ Since webpack 2.4.0, chunk names for dynamic imports can be specified using a "m
 import(/* webpackChunkName: "my-chunk-name" */ 'module');
 ```
 
-Since webpack 2.6.0, the placeholders `[index]`, `[request]` are supported. The following example will generate files like `i18n/namespace-i18n-bundle-en_json`:
+Since webpack 2.6.0, the placeholders `[index]`, `[request]` are supported:
 
 ```javascript
+// will generate files like `i18n/namespace-i18n-bundle-en_json`
 import(/* webpackChunkName: "i18n/[request]" */ `i18n/${namespace}-i18n-bundle-${language}.json`).then(...)
+
+// will generate files `i18n-0`, `i18n-1`, …
+import(/* webpackChunkName: "i18n-[index]" */ `i18n/${namespace}-i18n-bundle-${language}.json`).then(...)
 ```
 
 ### Import mode
