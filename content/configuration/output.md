@@ -23,6 +23,13 @@ Note that these filenames need to be generated at runtime to send the requests f
 By default `[id].js` is used or a value inferred from [`output.filename`](#output-filename) (`[name]` is replaced with `[id]` or `[id].` is prepended).
 
 
+## `output.chunkLoadTimeout`
+
+`integer`
+
+Number of milliseconds before chunk request expires, defaults to 120 000. This option is supported since webpack 2.6.0.
+
+
 ## `output.crossOriginLoading`
 
 `boolean` `string`
