@@ -1,4 +1,10 @@
-# Glossary
+---
+title: Glossary
+contributors:
+  - rouzbeh84
+  - bebraw
+  - skipjack
+---
 
 ## A
 
@@ -56,7 +62,7 @@
 
 ## O
 
-- [**Output**](/concepts/output): Option(s) specifying where to the output of the compiled files to disk. 
+- [**Output**](/concepts/output): Option(s) specifying where to the output of the compiled files to disk.
   > _Note, that while there can be multiple entry points, only one output configuration is specified._
 
 
@@ -81,7 +87,7 @@
 
 ## V
 
-- [**Vendor Entry Point**](/concepts/entry-points/#separate-app-and-vendor-entries): Create dependency graphs starting at both `app.js` and `vendors.js`. These graphs are completely separate and independent of each other to allow leverage of `CommonsChunkPlugin` and extract any vendor references from your app bundle into your vendor bundle. Helps achieve a common pattern in webpack known as [long-term vendor-caching](/guides/caching/). 
+- [**Vendor Entry Point**](/concepts/entry-points/#separate-app-and-vendor-entries): Create dependency graphs starting at both `app.js` and `vendors.js`. These graphs are completely separate and independent of each other to allow leverage of `CommonsChunkPlugin` and extract any vendor references from your app bundle into your vendor bundle. Helps achieve a common pattern in webpack known as [long-term vendor-caching](/guides/caching/).
 
 ## W
 
