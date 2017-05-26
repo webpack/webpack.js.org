@@ -40,7 +40,7 @@ contributors:
 
 ## H
 
-- [**Hot Module Replacement aka (HMR)**](/concepts/hot-module-replacement): A process that exchanges, adds, or removes  `modules` while an application is running without a full page reload.
+- [**Hot Module Replacement (HMR)**](/concepts/hot-module-replacement): A process that exchanges, adds, or removes  `modules` while an application is running without a full page reload.
 
 
 ## I
@@ -53,10 +53,12 @@ contributors:
 
 - [**Loaders**](/concepts/loaders): Transformations that are applied on the source code of a module. They allow you to pre-process files as you `require()` or "load" them. Similar to a 'task-runner'.
 
+
 ## M
 
 - [**Module**](/concepts/modules): Discrete chunks of functionality that provide a smaller surface area than a full program. Well-written modules provide solid abstractions and encapsulation boundaries which make up a coherent design and clear purpose.
 - [**Module Resolution**](/concepts/module-resolution/): A module can be required as a dependency from another module and a resolver is a library which helps in locating a module by its absolute path.. Modules are searched for inside all directories specified in `resolve.modules`.
+
 
 ## N
 
@@ -89,9 +91,11 @@ contributors:
 
 - [**Vendor Entry Point**](/concepts/entry-points/#separate-app-and-vendor-entries): Create dependency graphs starting at both `app.js` and `vendors.js`. These graphs are completely separate and independent of each other to allow leverage of `CommonsChunkPlugin` and extract any vendor references from your app bundle into your vendor bundle. Helps achieve a common pattern in webpack known as [long-term vendor-caching](/guides/caching/).
 
+
 ## W
 
 - [**webpack**](/): A highly configurable [module](/concepts/modules) bundler for modern JavaScript applications
+
 
 ## X
 
