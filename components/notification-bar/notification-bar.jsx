@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from '../container/container';
+import testLocalStorage from '../../utilities/test-local-storage';
 
 const version = '1';
 
@@ -41,7 +42,7 @@ export default class NotificationBar extends React.Component {
    * @return {boolean} - Whether or not the current message was dismissed
    */
   get _dismissed() {
-    if (typeof window !== 'undefined') {
+    if (testLocalStorage()) {
       return localStorage.getItem('notification-dismissed') === version;
 
     } else return false;
