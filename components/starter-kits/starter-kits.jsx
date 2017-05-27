@@ -23,6 +23,16 @@ export default props => (
       <code>generator/starterProjectUrls.js</code>.
     </p>
 
+    <blockquote className="warning">
+      <div className="tip-content">
+        Boilerplates should be used as <b>Proof of Concepts</b> to help you learn&nbsp;
+        different webpack techniques for various frameworks. Make sure you understand&nbsp;
+        what's going on in them and avoid copy and paste coding. Also note that none&nbsp;
+        of these are officially supported by webpack. If you run into an issue, please&nbsp;
+        report that to the maintainer(s) of the repository.
+      </div>
+    </blockquote>
+
     <div className="table">
       <div className="table-wrap">
         <div className="table-header">
