@@ -15,9 +15,7 @@ module.exports = {
   plugins: [
     prevnextPlugin()
   ],
-  layout: function() {
-    return require('./components/site/site.jsx').default
-  },
+  layout: () => require('./components/site/site.jsx').default,
   paths: {
     '/': {
       content: () => (
