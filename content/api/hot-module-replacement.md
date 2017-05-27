@@ -11,7 +11,7 @@ contributors:
   - skipjack
 related:
   - title: Concepts - Hot Module Replacement
-    url: TODO
+    url: /concepts/hot-module-replacement
 ---
 
 Hot Module Replacement (or HMR) is one of the most useful features offered by webpack. It allows modules of all kinds to be updated at runtime without the need for a full refresh. This allows you to maintain application state in development and shave countless time in your workflow. This page focuses on __implementation__ while the [concepts page](/concepts/hot-module-replacement) gives more details on how it works and why it's useful.
@@ -111,7 +111,7 @@ class MyClass {
 
 Even if the underlying module containing this class is patched with new code, any existing instances of the class still have the old `log` method. Meaning if we changed what that method does, it wouldn't be reflected in those old instances unless we re-instantiate them somehow using `module.hot.accept`.
 
-This is just one example, but there are many others that can easily trip people up. Luckily, there are a lot of loaders out there to help you out. Let's start with stylesheets...
+This is just one example, but there are many others that can easily trip people up. Luckily, there are a lot of loaders out there, some mentioned below, that will make using this process much easier.
 
 
 ## HMR with Stylesheets
