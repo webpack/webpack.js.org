@@ -12,17 +12,6 @@ module.exports = {
   output: 'build',
   title: 'webpack',
   keywords: ['webpack', 'javascript', 'web development', 'programming'],
-
-  // XXXXX: restore
-  pageTitle: function(config, pageTitle) {
-    var siteName = config.name;
-
-    if (pageTitle === 'index') {
-      return siteName;
-    }
-
-    return siteName + ' - ' + pageTitle;
-  },
   plugins: [
     prevnextPlugin()
   ],
