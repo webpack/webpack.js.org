@@ -58,8 +58,8 @@ export default props => (
               <div className="table-td">
                 <div className="table-td-title">Tags</div>
                 <div className="table-td-content">
-                  { kit.tags.map(tag => (
-                    <span className="starter-kits__tag">{ tag }</span>
+                  { kit.tags.map((tag, i) => (
+                    <span key={ i } className="starter-kits__tag">{ tag }</span>
                   )) }
                 </div>
               </div>
