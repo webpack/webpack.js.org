@@ -47,7 +47,11 @@ export default props => (
               </div>
               <div className="table-td">
                 <div className="table-td-title">Tags</div>
-                <div className="table-td-content">{ kit.tags.join(' | ') }</div>
+                <div className="table-td-content">
+                  { kit.tags.map(tag => (
+                    <span className="starter-kits__tag">{ tag }</span>
+                  )) }
+                </div>
               </div>
             </div>
           ))}
