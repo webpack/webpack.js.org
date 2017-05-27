@@ -19,9 +19,13 @@ import '../SidebarItem/SidebarItem.scss';
 import '../Logo/Logo.scss';
 import '../Dropdown/Dropdown.scss';
 
-export default props => {
+const SiteBody = ({
+  children,
+  section,
+  location: { pathname }
+}) => {
   // Retrieve section data
-  let sections = props.children.props.section.all()
+  let sections = section.all()
     .map(({ title, url, pages }) => ({
       title,
       url,
@@ -31,6 +35,7 @@ export default props => {
       }))
     }));
 
+  // XXX: Is this needed anymore?
   // Rename the root section ("webpack" => "Other") and push it to the end
   let rootIndex = sections.findIndex(section => section.title === 'webpack');
   let rootSection = sections.splice(rootIndex, 1)[0];
@@ -47,17 +52,20 @@ export default props => {
         id="src/components/Navigation/Navigation.jsx"
         component={ Navigation }
         sections={ sections }
-        pageUrl={ props.children.props.page.url } />
+        pageUrl={ pathname } />
 
       <Interactive
         id="src/components/SidebarMobile/SidebarMobile.jsx"
         component={ SidebarMobile }
         sections={ sections } />
 
-      { props.children }
+      { children }
+
       <Footer />
 
       <GoogleAnalytics analyticsId="UA-46921629-2" />
     </div>
   );
 };
+
+export default SiteBody;

@@ -25,6 +25,7 @@
   },
   "scripts": {
     "start": "npm run init:generated && npm run fetch && node ./antwar.bootstrap.js develop",
+    "start-only": "node ./antwar.bootstrap.js develop",
     "build": "npm run init:generated && npm run fetch && rm -rf build/ && node ./antwar.bootstrap.js build && npm run sitemap && echo webpack.js.org > build/CNAME",
     "build-test": "npm run build && http-server build/",
     "deploy": "gh-pages -d build",
