@@ -10,7 +10,7 @@ request('https://opencollective.com/webpack/sponsors.json?requireActive=false', 
     if (err) {
       console.error('Failed to write sponsors file: ', err);
 
-    } else console.log('Fetched 1 file: support-sponsors.json')
+    } else console.log('Fetched 1 file: support-sponsors.json');
   });
 });
 
@@ -22,6 +22,6 @@ request('https://opencollective.com/webpack/backers.json?requireActive=false', (
     if (err) {
       console.error('Failed to write backers file: ', err);
 
-    } else console.log('Fetched 1 file: support-backers.json')
+    } else console.log('Fetched 1 file: support-backers.json');
   });
 });

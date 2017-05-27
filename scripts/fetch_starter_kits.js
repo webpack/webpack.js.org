@@ -9,5 +9,5 @@ fs.writeFile('./components/starter-kits/starter-kits-data.json', body, err => {
   if (err) {
     console.error('Failed to write starter kits file: ', err);
 
-  } else console.log('Fetched 1 file: starter-kits-data.json')
+  } else console.log('Fetched 1 file: starter-kits-data.json');
 });
