@@ -7,7 +7,8 @@ export default ({
   page = {}
 }) => {
   let baseURL = 'https://github.com/webpack/webpack.js.org/edit/master/content';
-  let editLink = page.edit || `${baseURL}/${TrimEnd(page.url, '/')}${page.type === 'index' ? '/index' : ''}.md`;
+  let indexPath = page.type === 'index' ? '/index' : '';
+  let editLink = page.edit || baseURL + TrimEnd(page.url, '/') + indexPath + '.md';
 
   return (
     <div className="page-links">
