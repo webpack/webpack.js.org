@@ -140,13 +140,14 @@
     &-tr {
       background-color: white;
       margin: 0;
-      padding: 0;
+      padding: 0.25em 0;
       display: block;
       border: 1px solid #cccccc;
       border-bottom: none;
 
       @include break {
         border: none;
+        padding: 0;
         display: table-row;
       }
 
