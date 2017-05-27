@@ -6,6 +6,9 @@ contributors:
   - skipjack
 ---
 
+This index lists common terms used throughout the webpack ecosystem.
+
+
 ## A
 
 - [**Asset**](/guides/asset-management/): This a general term for the images, fonts, media, and any other kind of files that are typically used in websites and other applications. These typically end up as individual files within the [output](/glossary#o) but can also be inlined via things like the [style-loader](/loaders/style-loader) or [url-loader](/loaders/url-loader).
