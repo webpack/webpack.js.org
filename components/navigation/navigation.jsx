@@ -123,7 +123,7 @@ export default class Navigation extends React.Component {
                         <Link
                           key={ `navigation__child-${child.title}` }
                           className={ `navigation__child ${activeMod}` }
-                          to={ `/${child.url}` }>
+                          to={ `/${child.url}/` }>
                           { child.title }
                         </Link>
                       );
