@@ -24,7 +24,13 @@ const commonConfig = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        use: 'babel-loader',
+        use: [
+          'babel-loader',
+          {
+            loader: 'eslint-loader',
+            options: { fix: true }
+          }
+        ],
         include: [
           path.join(__dirname, 'components')
         ]
@@ -52,12 +58,7 @@ const commonConfig = {
     new CopyWebpackPlugin([{
       from: './assets',
       to: './assets'
-    }]),
-    new webpack.LoaderOptionsPlugin({
-      eslint: {
-        configFile: require.resolve('./.eslintrc')
-      }
-    })
+    }])
   ]
 };
 
@@ -80,13 +81,6 @@ const interactiveConfig = {
 const developmentConfig = {
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        use: 'eslint-loader',
-        include: [
-          path.join(__dirname, 'components')
-        ]
-      },
       {
         test: /\.font.js$/,
         use: ['style-loader', 'css-loader', 'fontgen-loader']
@@ -113,13 +107,6 @@ const developmentConfig = {
 const buildConfig = {
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        use: 'eslint-loader',
-        include: [
-          path.join(__dirname, 'components')
-        ]
-      },
       {
         test: /\.font.js$/,
         loader: ExtractTextPlugin.extract({
