@@ -70,9 +70,9 @@ To generate multiple HTML files, say for a multi-page web application, you can u
 
 ## The Manifest
 
-Let's step back for a second now and ask a more high-level question -- how do these plugins know what files are being spit out? The answer is in the manifest webpack keeps to track how all your modules map to the output bundles. If you're interested in managing webpack's [output](/configuration/output) in other ways, the manifest would be a good place to start. It can be extracted into a json file for easy consumption using the [`WebpackManifestPlugin`](https://github.com/danethurber/webpack-manifest-plugin) or [`ChunkManifestPlugin`](https://github.com/soundcloud/chunk-manifest-webpack-plugin).
+Let's step back for a second now and ask a more high-level question -- how do these plugins know what files are being spit out? The answer is in the manifest webpack keeps to track how all your modules map to the output bundles. If you're interested in managing webpack's [output](/configuration/output) in other ways, the manifest would be a good place to start.
 
-Using the `ChunkManifestPlugin`, you would simply specify what to name it, what variable to expose it under, and whether or not to inline it via the `html-webpack-plugin`:
+This data can be extracted into a json file for easy consumption using the [`WebpackManifestPlugin`](https://github.com/danethurber/webpack-manifest-plugin) or [`ChunkManifestPlugin`](https://github.com/soundcloud/chunk-manifest-webpack-plugin). Using the `ChunkManifestPlugin`, you would specify what to name it, what variable to expose it under, and whether or not to inline it via the `html-webpack-plugin`:
 
 ``` js
 new ChunkManifestPlugin({
