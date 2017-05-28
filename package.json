@@ -42,8 +42,8 @@
   },
   "devDependencies": {
     "alex": "^4.1.0",
-    "antwar": "^0.14.0",
-    "antwar-helpers": "^0.13.0",
+    "antwar": "^0.15.4",
+    "antwar-helpers": "^0.15.0",
     "antwar-interactive": "^0.13.0",
     "antwar-prevnext-plugin": "^0.13.0",
     "async": "^2.4.1",
@@ -106,7 +106,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router": "^4.1.1",
-    "tool-list": "^0.9.1",
+    "tool-list": "^0.9.2",
     "whatwg-fetch": "^2.0.3"
   }
 }
