@@ -1,6 +1,5 @@
 const path = require('path');
 const _ = require('lodash');
-const prevnextPlugin = require('antwar-prevnext-plugin');
 const combineContexts = require('./utilities/combine-contexts');
 
 module.exports = {
@@ -13,9 +12,6 @@ module.exports = {
   output: 'build',
   title: 'webpack',
   keywords: ['webpack', 'javascript', 'web development', 'programming'],
-  plugins: [
-    prevnextPlugin()
-  ],
   layout: () => require('./components/site/site.jsx').default,
   paths: {
     '/': {

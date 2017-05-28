@@ -45,7 +45,6 @@
     "antwar": "^0.15.4",
     "antwar-helpers": "^0.15.0",
     "antwar-interactive": "^0.13.0",
-    "antwar-prevnext-plugin": "^0.13.0",
     "async": "^2.4.1",
     "autoprefixer": "^7.1.1",
     "babel-core": "^6.24.1",
