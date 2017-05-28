@@ -91,8 +91,8 @@ module.exports = {
         }
       }
     },
-    vote: () => require('./src/components/vote/list.jsx').default,
-    organization: () => require('./src/components/organization/organization.jsx').default,
-    'guides/starter-kits': () => require('./src/components/starter-kits/starter-kits.jsx').default
+    vote: () => require('./components/vote/list.jsx').default,
+    organization: () => require('./components/organization/organization.jsx').default,
+    'guides/starter-kits': () => require('./components/starter-kits/starter-kits.jsx').default
   }
 };
