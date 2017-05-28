@@ -32,7 +32,15 @@ const Page = ({ page, section }) => {
         id="components/sidebar/sidebar.jsx"
         component={ Sidebar }
         sectionName={ section.name }
-        pages={ section.pages().map(page => ({ url, title, anchors })) }
+        pages={ section.pages().map(({
+          file: {
+            attributes: {
+              anchors,
+              title
+            }
+          },
+          url
+        }) => ({ url, title, anchors })) }
         currentPage={ url } />
 
       <section className="page__content">
