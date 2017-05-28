@@ -19,7 +19,7 @@ import '../sidebar-item/sidebar-item-style';
 import '../logo/logo-style';
 import '../dropdown/dropdown-style.scss';
 
-const SiteBody = ({
+const Site = ({
   children,
   section,
   location: { pathname }
@@ -46,7 +46,7 @@ const SiteBody = ({
     <div id="site" className="site">
       <Interactive
         id="components/notification-bar/notification-bar.jsx"
-        component={NotificationBar} />
+        component={ NotificationBar } />
 
       <Interactive
         id="components/navigation/navigation.jsx"
@@ -59,7 +59,8 @@ const SiteBody = ({
         component={ SidebarMobile }
         sections={ sections } />
 
-      {children}
+      { children }
+
       <Footer />
 
       <GoogleAnalytics analyticsId="UA-46921629-2" />
@@ -67,4 +68,4 @@ const SiteBody = ({
   );
 };
 
-export default SiteBody;
+export default Site;
