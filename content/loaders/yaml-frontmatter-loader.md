@@ -23,27 +23,27 @@ module.exports = {
     rules: [
       {
          test: /\.md$/,
-         use: [ 'json-loader', 'yaml-fontmatter-loader' ]
+         use: [ 'json-loader', 'yaml-frontmatter-loader' ]
       }
     ]
   }
 }
 ```
 
-[npm]: https://img.shields.io/npm/v/yaml-fontmatter-loader.svg
-[npm-url]: https://npmjs.com/package/yaml-fontmatter-loader
+[npm]: https://img.shields.io/npm/v/yaml-frontmatter-loader.svg
+[npm-url]: https://npmjs.com/package/yaml-frontmatter-loader
 
-[node]: https://img.shields.io/node/v/yaml-fontmatter-loader.svg
+[node]: https://img.shields.io/node/v/yaml-frontmatter-loader.svg
 [node-url]: https://nodejs.org
 
-[deps]: https://david-dm.org/webpack-contrib/yaml-fontmatter-loader.svg
-[deps-url]: https://david-dm.org/webpack-contrib/yaml-fontmatter-loader
+[deps]: https://david-dm.org/webpack-contrib/yaml-frontmatter-loader.svg
+[deps-url]: https://david-dm.org/webpack-contrib/yaml-frontmatter-loader
 
-[tests]: http://img.shields.io/travis/webpack-contrib/yaml-fontmatter-loader.svg
-[tests-url]: https://travis-ci.org/webpack-contrib/yaml-fontmatter-loader
+[tests]: http://img.shields.io/travis/webpack-contrib/yaml-frontmatter-loader.svg
+[tests-url]: https://travis-ci.org/webpack-contrib/yaml-frontmatter-loader
 
-[cover]: https://codecov.io/gh/webpack-contrib/yaml-fontmatter-loader/branch/master/graph/badge.svg
-[cover-url]: https://codecov.io/gh/webpack-contrib/yaml-fontmatter-loader
+[cover]: https://codecov.io/gh/webpack-contrib/yaml-frontmatter-loader/branch/master/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack-contrib/yaml-frontmatter-loader
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
