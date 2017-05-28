@@ -92,8 +92,6 @@ module.exports = {
       }
     },
     vote: () => require('./components/vote/list.jsx').default,
-    'vote/feedback': () => require('./components/vote/list.jsx').default,
-    'vote/moneyDistribution': () => require('./components/vote/list.jsx').default,
     organization: () => require('./components/organization/organization.jsx').default,
     'guides/starter-kits': () => require('./components/starter-kits/starter-kits.jsx').default
   }
