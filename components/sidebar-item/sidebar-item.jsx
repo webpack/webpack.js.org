@@ -5,13 +5,9 @@ import Link from '../link/link';
 const block = 'sidebar-item';
 
 export default class SidebarItem extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      open: this._isOpen(props)
-    };
-  }
+  state = {
+    open: this._isOpen(this.props)
+  };
 
   render() {
     let { title, anchors = [] } = this.props;

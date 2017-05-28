@@ -1,21 +1,17 @@
 import React from 'react';
 
 export default class Gitter extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      offset: 0
-    };
-  }
+  state = {
+    offset: 0
+  };
 
   render() {
     let { offset } = this.state;
 
     return (
       <span className="gitter">
-        <div 
-          className="gitter__button js-gitter-toggle-chat-button" 
+        <div
+          className="gitter__button js-gitter-toggle-chat-button"
           style={{
             marginBottom: offset
           }}>
@@ -32,14 +28,14 @@ export default class Gitter extends React.Component {
     );
 
     document.addEventListener(
-      'scroll', 
+      'scroll',
       this._recalculate.bind(this)
     );
   }
 
   componentWillUnmount() {
     document.removeEventListener(
-      'scroll', 
+      'scroll',
       this._recalculate.bind(this)
     );
   }

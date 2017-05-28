@@ -2,59 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class TextRotater extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
-    this.calculateContentHeight = this.calculateContentHeight.bind(this);
+  static defaultProps = {
+    delay: 0,
+    repeatDelay: 3000
+  };
 
-    this.state = {
-      currentIndex: 0,
-      contentHeight: 0,
-    };
-  }
+  static propTypes = {
+    children: PropTypes.arrayOf(PropTypes.node),
+    delay: PropTypes.number,
+    repeatDelay: PropTypes.number,
+    // Needed to prevent jump when
+    // rotating between texts of different widths
+    maxWidth: PropTypes.number
+  };
 
-  componentDidMount() {
-    const { delay } = this.props;
-
-    setTimeout(() => {
-      this.calculateContentHeight();
-    }, 50);
-
-    setTimeout(() => {
-      if (this.textRotatorWrap) {
-        this.textRotatorWrap.classList.add('text-rotater--slide-up');
-      }
-    }, delay);
-
-    window.addEventListener('resize', this.calculateContentHeight);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.calculateContentHeight);
-  }
-
-  calculateContentHeight() {
-    this.setState({
-      contentHeight: this.content.clientHeight,
-    });
-  }
-
-  handleTransitionEnd() {
-    const { children, repeatDelay } = this.props;
-
-    if (this.textRotatorWrap) {
-      this.textRotatorWrap.classList.remove('text-rotater--slide-up');
-
-      this.setState({
-        currentIndex: (this.state.currentIndex + 1) % React.Children.count(children),
-      }, () => {
-        setTimeout(() => {
-          if (this.textRotatorWrap) {
-            this.textRotatorWrap.classList.add('text-rotater--slide-up');
-          }
-        }, repeatDelay);
-      });
-    }
+  state = {
+    currentIndex: 0,
+    contentHeight: 0
   }
 
   render() {
@@ -79,7 +43,7 @@ export default class TextRotater extends React.PureComponent {
         <div
           className="text-rotater__wrap"
           ref={ trw => (this.textRotatorWrap = trw) }
-          onTransitionEnd={ this.handleTransitionEnd }
+          onTransitionEnd={ this._handleTransitionEnd }
           style={ { height: contentHeight, width: maxWidth } }>
           { currentChild }
           { nextChild }
@@ -87,18 +51,54 @@ export default class TextRotater extends React.PureComponent {
       </div>
     );
   }
+
+  componentDidMount() {
+    const { delay } = this.props;
+
+    setTimeout(() => {
+      this._calculateContentHeight();
+    }, 50);
+
+    setTimeout(() => {
+      if (this.textRotatorWrap) {
+        this.textRotatorWrap.classList.add('text-rotater--slide-up');
+      }
+    }, delay);
+
+    window.addEventListener(
+      'resize',
+      this._calculateContentHeight
+    );
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener(
+      'resize',
+      this._calculateContentHeight
+    );
+  }
+
+  _calculateContentHeight = () => {
+    this.setState({
+      contentHeight: this.content.clientHeight,
+    });
+  }
+
+  _handleTransitionEnd = () => {
+    const { children, repeatDelay } = this.props;
+
+    if (this.textRotatorWrap) {
+      this.textRotatorWrap.classList.remove('text-rotater--slide-up');
+
+      this.setState({
+        currentIndex: (this.state.currentIndex + 1) % React.Children.count(children),
+      }, () => {
+        setTimeout(() => {
+          if (this.textRotatorWrap) {
+            this.textRotatorWrap.classList.add('text-rotater--slide-up');
+          }
+        }, repeatDelay);
+      });
+    }
+  }
 }
-
-TextRotater.defaultProps = {
-  delay: 0,
-  repeatDelay: 3000,
-};
-
-TextRotater.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.node),
-  delay: PropTypes.number,
-  repeatDelay: PropTypes.number,
-  // Needed to prevent jump when
-  // rotating between texts of different widths
-  maxWidth: PropTypes.number,
-};

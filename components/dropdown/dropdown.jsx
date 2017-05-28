@@ -2,7 +2,7 @@ import React from 'react';
 import LanguageIcon from '../../assets/language-icon.svg';
 
 export default class Dropdown extends React.Component {
-	state = {
+  state = {
 		active: false
   };
 

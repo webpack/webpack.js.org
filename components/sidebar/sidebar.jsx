@@ -2,20 +2,15 @@ import React, { Component } from 'react';
 import SidebarItem from '../sidebar-item/sidebar-item';
 
 export default class Sidebar extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      fixed: false,
-      availableHeight: null,
-      maxWidth: null
-    };
-  }
+  state = {
+    fixed: false,
+    availableHeight: null,
+    maxWidth: null
+  };
 
   render() {
     let { sectionName, pages, currentPage } = this.props;
     let { fixed, availableHeight, maxWidth } = this.state;
-    let isGuides = sectionName === 'guides';
 
     return (
       <nav
