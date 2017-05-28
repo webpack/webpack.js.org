@@ -158,7 +158,7 @@ function postcssLoader() {
     options: {
       plugins: () => ([
         require('autoprefixer'),
-      ]),
+      ])
     }
   };
 }
@@ -179,11 +179,13 @@ module.exports = function(env) {
         commonConfig,
         developmentConfig
       );
+
     case 'interactive':
       return merge(
         commonConfig,
         interactiveConfig
       );
+
     case 'build':
     case 'lint:links':
       return merge(
