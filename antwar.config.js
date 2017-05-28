@@ -12,7 +12,7 @@ module.exports = {
   output: 'build',
   title: 'webpack',
   keywords: ['webpack', 'javascript', 'web development', 'programming'],
-  layout: () => require('./components/site/site.jsx').default,
+  layout: () => require('./src/components/site/site.jsx').default,
   paths: {
     '/': {
       content: () => (
@@ -22,8 +22,8 @@ module.exports = {
           /^\.\/.*\.md$/
         )
       ),
-      index: () => require('./components/splash/splash.jsx').default,
-      layout: () => require('./components/page/page.jsx').default,
+      index: () => require('./src/components/splash/splash.jsx').default,
+      layout: () => require('./src/components/page/page.jsx').default,
       paths: {
         'get-started': {
           redirects: {
@@ -91,14 +91,8 @@ module.exports = {
         }
       }
     },
-    vote: {
-      index: () => require('./components/vote/list.jsx').default
-    },
-    organization: {
-      index: () => require('./components/organization/organization.jsx').default
-    },
-    'guides/starter-kits': {
-      index: () => require('./components/starter-kits/starter-kits.jsx').default
-    }
+    vote: () => require('./src/components/vote/list.jsx').default,
+    organization: () => require('./src/components/organization/organization.jsx').default,
+    'guides/starter-kits': () => require('./src/components/starter-kits/starter-kits.jsx').default
   }
 };
