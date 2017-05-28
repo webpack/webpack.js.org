@@ -1,6 +1,7 @@
 const path = require('path');
 const _ = require('lodash');
 const prevnextPlugin = require('antwar-prevnext-plugin');
+const combineContexts = require('./utilities/combine-contexts');
 
 module.exports = {
   maximumWorkers: process.env.TRAVIS && 1, // Faster on Travis
@@ -111,19 +112,3 @@ module.exports = {
     }
   }
 };
-
-function combineContexts(context1, context2) {
-  function webpackContext(req) {
-    try {
-      return context1(req);
-    } catch (e) {
-      return context2(req);
-    }
-  }
-  webpackContext.keys = () => {
-    let keys1 = context1.keys();
-    let keys2 = context2.keys();
-    return _.chain(keys1).concat(keys2).sortBy().uniq().value();
-  };
-  return webpackContext;
-}
