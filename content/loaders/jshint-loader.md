@@ -81,7 +81,7 @@ with the following structure:
 The reporter function will be excuted with the loader context as `this`. You may emit messages using `this.emitWarning(...)` or `this.emitError(...)`. See [webpack docs on loader context](https://webpack.js.org/api/loaders/#the-loader-context).
 
 **Note:** jshint reporters are **not compatible** with jshint-loader!
-This is due to the fact that reporter input is only processed from one file; not multiple files. Error reporting in this manner differs from [tranditional reporters](http://www.jshint.com/docs/reporters/) for jshint
+This is due to the fact that reporter input is only processed from one file; not multiple files. Error reporting in this manner differs from [traditional reporters](http://www.jshint.com/docs/reporters/) for jshint
 since the loader plugin (i.e. jshint-loader) is executed for each source file; and thus the reporter is executed for each file.
 
 The output in webpack CLI will usually be:
