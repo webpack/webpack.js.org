@@ -29,7 +29,7 @@ export default class Sidebar extends Component {
           </a>
 
           <SidebarItem
-            url={ `${sectionName}` }
+            url={ `/${sectionName}/` }
             title="Introduction"
             currentPage= { currentPage } />
 
