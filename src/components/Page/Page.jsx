@@ -22,7 +22,7 @@ const Page = ({ page, section }) => {
       },
       body
     },
-    url,
+    url
   } = page;
 
   return (
