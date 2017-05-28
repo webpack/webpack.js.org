@@ -11,15 +11,17 @@ var stylePaths = [
   path.join(cwd, 'components')
 ];
 
-const commonConfig = {
+const commonConfig = env => ({
   resolve: {
     extensions: ['.js', '.jsx', '.scss']
   },
+
   resolveLoader: {
     alias: {
       'page-loader': path.resolve(cwd, 'loaders/page-loader')
     }
   },
+
   module: {
     rules: [
       {
@@ -34,6 +36,44 @@ const commonConfig = {
         include: [
           path.join(__dirname, 'components')
         ]
+      },
+      {
+        test: /\.font.js$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            {
+              loader: 'fontgen-loader',
+              options: { embed: true }
+            }
+          ]
+        })
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader'
+        }),
+        include: stylePaths
+      },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            'postcss-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                includePaths: [ path.join('./styles/partials') ]
+              }
+            }
+          ]
+        }),
+        include: stylePaths
       },
       {
         test: /\.woff2?$/,
@@ -54,13 +94,20 @@ const commonConfig = {
       }
     ]
   },
+
   plugins: [
     new CopyWebpackPlugin([{
       from: './assets',
       to: './assets'
-    }])
+    }]),
+
+    new ExtractTextPlugin({
+      filename: '[chunkhash].css',
+      allChunks: true,
+      disable: env === 'develop'
+    })
   ]
-};
+});
 
 const interactiveConfig = {
   resolve: {
@@ -78,119 +125,16 @@ const interactiveConfig = {
   ]
 };
 
-const developmentConfig = {
-  module: {
-    rules: [
-      {
-        test: /\.font.js$/,
-        use: ['style-loader', 'css-loader', 'fontgen-loader']
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-        include: stylePaths
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          postcssLoader(),
-          sassLoader()
-        ],
-        include: stylePaths
-      }
-    ]
-  }
-};
-
-const buildConfig = {
-  module: {
-    rules: [
-      {
-        test: /\.font.js$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            'css-loader',
-            {
-              loader: 'fontgen-loader',
-              options: {
-                embed: true
-              }
-            }
-          ]
-        })
-      },
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader'
-        }),
-        include: stylePaths
-      },
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            'css-loader',
-            postcssLoader(),
-            sassLoader()
-          ]
-        }),
-        include: stylePaths
-      }
-    ]
-  },
-  plugins: [
-    new ExtractTextPlugin({
-      filename: '[chunkhash].css',
-      allChunks: true
-    })
-  ]
-};
-
-function postcssLoader() {
-  return {
-    loader: 'postcss-loader',
-    options: {
-      plugins: () => ([
-        require('autoprefixer'),
-      ])
-    }
-  };
-}
-
-function sassLoader() {
-  return {
-    loader: 'sass-loader',
-    options: {
-      includePaths: [ path.join('./styles/partials') ]
-    }
-  };
-}
-
 module.exports = function(env) {
   switch(env) {
     case 'develop':
-      return merge(
-        commonConfig,
-        developmentConfig
-      );
+    case 'build':
+      return commonConfig(env);
 
     case 'interactive':
       return merge(
-        commonConfig,
+        commonConfig(env),
         interactiveConfig
-      );
-
-    case 'build':
-    case 'lint:links':
-      return merge(
-        commonConfig,
-        buildConfig
       );
   }
 };
