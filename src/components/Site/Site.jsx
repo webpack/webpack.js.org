@@ -19,7 +19,7 @@ import '../SidebarItem/SidebarItem.scss';
 import '../Logo/Logo.scss';
 import '../Dropdown/Dropdown.scss';
 
-const SiteBody = ({
+const Site = ({
   children,
   section,
   location: { pathname }
@@ -68,4 +68,4 @@ const SiteBody = ({
   );
 };
 
-export default SiteBody;
+export default Site;
