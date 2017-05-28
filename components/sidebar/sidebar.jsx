@@ -34,7 +34,7 @@ export default class Sidebar extends Component {
           </a>
 
           <SidebarItem
-            url={ `/${sectionName}` }
+            url={ `${sectionName}` }
             title="Introduction"
             currentPage= { currentPage } />
 
@@ -43,7 +43,7 @@ export default class Sidebar extends Component {
               <SidebarItem
                 key={ `sidebar-item-${i}` }
                 index={i}
-                url={ `/${url}` }
+                url={ `${url}` }
                 title={ title }
                 anchors={ anchors }
                 currentPage= { currentPage }
