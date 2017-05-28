@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class TextRotater extends React.PureComponent {
   constructor(props) {
@@ -43,7 +44,7 @@ export default class TextRotater extends React.PureComponent {
 
     if (this.textRotatorWrap) {
       this.textRotatorWrap.classList.remove('text-rotater--slide-up');
-      
+
       this.setState({
         currentIndex: (this.state.currentIndex + 1) % React.Children.count(children),
       }, () => {
@@ -62,7 +63,7 @@ export default class TextRotater extends React.PureComponent {
     const childrenCount = React.Children.count(children);
 
     const currentChild = React.cloneElement(
-      children[currentIndex], { 
+      children[currentIndex], {
         ref: c => (this.content = c)
       }
     );

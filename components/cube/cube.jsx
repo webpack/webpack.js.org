@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class Cube extends React.Component {
   constructor(props) {
@@ -175,8 +176,8 @@ export default class Cube extends React.Component {
         } : {};
 
       return (
-        <section 
-          key={ i } 
+        <section
+          key={ i }
           className="cube__face"
           style={{
             transform: `${rotation} translateZ(${ this.props.depth / 2 }px)`,
