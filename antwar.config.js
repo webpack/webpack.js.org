@@ -91,20 +91,10 @@ module.exports = {
         }
       }
     },
-    vote: {
-      index: () => require('./components/vote/list.jsx').default
-    },
-    'vote/feedback': {
-      index: () => require('./components/vote/list.jsx').default
-    },
-    'vote/moneyDistribution': {
-      index: () => require('./components/vote/list.jsx').default
-    },
-    organization: {
-      index: () => require('./components/organization/organization.jsx').default
-    },
-    'guides/starter-kits': {
-      index: () => require('./components/starter-kits/starter-kits.jsx').default
-    }
+    vote: () => require('./components/vote/list.jsx').default,
+    'vote/feedback': () => require('./components/vote/list.jsx').default,
+    'vote/moneyDistribution': () => require('./components/vote/list.jsx').default,
+    organization: () => require('./components/organization/organization.jsx').default,
+    'guides/starter-kits': () => require('./components/starter-kits/starter-kits.jsx').default
   }
 };

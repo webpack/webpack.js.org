@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "alex": "^4.1.0",
-    "antwar": "^0.15.4",
+    "antwar": "^0.15.5",
     "antwar-helpers": "^0.15.0",
     "antwar-interactive": "^0.13.0",
     "async": "^2.4.1",

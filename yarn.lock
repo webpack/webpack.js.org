@@ -142,13 +142,9 @@ antwar-interactive@^0.13.0:
     classnames "^2.2.5"
     prop-types "^15.5.8"
 
-antwar-prevnext-plugin@^0.13.0:
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/antwar-prevnext-plugin/-/antwar-prevnext-plugin-0.13.0.tgz#096434560b66b2226579e986fb460a4d230c554e"
-
-antwar@^0.15.4:
-  version "0.15.4"
-  resolved "https://registry.yarnpkg.com/antwar/-/antwar-0.15.4.tgz#f6b794500b88c61d44d610e038892815ce545c23"
+antwar@^0.15.5:
+  version "0.15.5"
+  resolved "https://registry.yarnpkg.com/antwar/-/antwar-0.15.5.tgz#e4fb165d7140d0c0bcdfa44997ab3ffda2b11d2a"
   dependencies:
     async "^2.4.0"
     chalk "^1.1.3"
