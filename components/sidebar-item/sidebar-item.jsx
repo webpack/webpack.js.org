@@ -64,7 +64,7 @@ export default class SidebarItem extends React.Component {
    * @param {object} props - The current props
    */
   _isOpen(props) {
-    return `/${props.currentPage}` === props.url;
+    return RegExp(`${props.currentPage}/?$`).test(props.url);
   }
 
   /**
