@@ -5,12 +5,6 @@ let initialTouchPosition = {};
 let lastTouchPosition = {};
 
 export default class SidebarMobile extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this._handleBodyClick = this._handleBodyClick.bind(this);
-  }
-
   render() {
     return (
       <nav
@@ -66,6 +60,7 @@ export default class SidebarMobile extends React.Component {
     return this.props.sections.map(section => {
       let active = pathname === section.url || pathname.includes(`/${section.url}`),
           absoluteUrl = `/${section.url}`;
+
       return (
         <div
           className={ `sidebar-mobile__section ${active ? 'sidebar-mobile__section--active' : ''}` }
@@ -118,7 +113,7 @@ export default class SidebarMobile extends React.Component {
    *
    * @param {object} e - Native click event
    */
-  _handleBodyClick(e) {
+  _handleBodyClick = e => {
     if (
       !e.target.classList.contains('icon-menu') &&
       !this.container.contains(e.target)
