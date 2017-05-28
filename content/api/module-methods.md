@@ -55,12 +55,9 @@ Dynamically load modules.
 
 ``` javascript
 if ( module.hot ) {
-  let loadLodash = import('lodash');
-
-  loadLodash()
-    .then(_ => {
-      // Do something with lodash (a.k.a '_')...
-    })
+  import('lodash').then(_ => {
+    // Do something with lodash (a.k.a '_')...
+  })
 }
 ```
 
