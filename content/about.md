@@ -12,6 +12,7 @@ contributors:
   - dingyiming
   - dear-lizhihua
   - ellyliang
+  - hijiangtao
   - hikerpig
   - huangtubiao
   - itchina110
