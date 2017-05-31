@@ -8,6 +8,7 @@ contributors:
   - rafde
   - bartushek
   - shaunwallace
+  - TheDutchCoder
 ---
 
 A typical application uses third party libraries for framework/functionality needs. Particular versions of these libraries are used and code here does not change often. However, the application code changes frequently.
@@ -24,7 +25,7 @@ Install `moment` as follows in your application directory.
 npm install --save moment
 ```
 
-The index file will require `moment` as a dependency and log the current date as follows
+The `app/index.js` file will require `moment` as a dependency and log the current date as follows
 
 __index.js__
 
@@ -40,20 +41,18 @@ __webpack.config.js__
 ```javascript
 var path = require('path');
 
-module.exports = function(env) {
-    return {
-        entry: './index.js',
-        output: {
-            filename: '[name].[chunkhash].js',
-            path: path.resolve(__dirname, 'dist')
-        }
+module.exports = {
+    entry: './app/index.js',
+    output: {
+        filename: '[name].[chunkhash].js',
+        path: path.resolve(__dirname, 'dist')
     }
 }
 ```
 
-On running `webpack` in your application, if you inspect the resulting bundle, you will see that `moment` and `index.js` have been bundled in `bundle.js`.
+On running `webpack` (e.g. [through npm](https://webpack.js.org/guides/get-started/#using-webpack-with-npm)), if you open the resulting output file (`main.[hashcode].js`) and search for `moment`, you will see that both `moment` and `index.js` have been bundled in `main.[hashcode].js`.
 
-This is not ideal for the application. If the code in `index.js` changes, then the whole bundle is rebuilt. The browser will have to load a new copy of the new bundle even though most of it hasn't changed at all.
+This is not ideal for the application. If the code in `index.js` changes, then the whole bundle is rebuilt. The browser will have to load the new bundle even though most of it (like `moment`) hasn't changed at all.
 
 
 ## Multiple Entries
@@ -79,14 +78,14 @@ module.exports = function(env) {
 }
 ```
 
-On running `webpack` now, we see that two bundles have been created. If you inspect these though, you will find that the code for `moment` is present in both the files! The reason for that is `moment` is a dependency of the main application (e.g. index.js) and each entry point will bundle its own dependencies.
+On running `webpack` now, we see that two bundles have been created with roughly the same size. If you inspect these bundles though, you will find that the code for `moment` is present in both these files! The reason for that is `moment` is a dependency of the main application (in this case you required ` moment` in your `index.js`) and each entry point will bundle its own dependencies.
 
-It is for this reason, that we will need to use the [CommonsChunkPlugin](/plugins/commons-chunk-plugin).
+Ideally we want `moment` to be split out of our bundle into its own bundle. To do that we will need to use the [CommonsChunkPlugin](/plugins/commons-chunk-plugin).
 
 
 ## `CommonsChunkPlugin`
 
-This is a pretty complex plugin. It fundamentally allows us to extract all the common modules from different bundles and add them to the common bundle. If a common bundle does not exist, then it creates a new one.
+This is a pretty complex plugin that's built into webpack, so you don't need to install it separately. It fundamentally allows us to extract all the common modules from different bundles and add them to the common bundle. If a common bundle does not exist, then it creates a new one.
 
 We can modify our webpack config file to use the `CommonsChunkPlugin` as follows
 
@@ -100,7 +99,7 @@ module.exports = function(env) {
     return {
         entry: {
             main: './index.js',
-            vendor: 'moment'
+            vendor: 'moment' // This tells webpack to find all the instances where 'moment' is required, and put it into a 'vendor' bundle
         },
         output: {
             filename: '[name].[chunkhash].js',
@@ -115,7 +114,7 @@ module.exports = function(env) {
 }
 ```
 
-Now run `webpack` on your application. Bundle inspection shows that `moment` code is present only in the vendor bundle.
+Now run `webpack` on your application. You'll see that the `main.[hashcode].js` has become much smaller! Bundle inspection shows that `moment` code is present only in the vendor bundle has been taken out of the `main` bundle.
 
 
 ## Implicit Common Vendor Chunk
@@ -153,7 +152,7 @@ module.exports = function() {
 
 ## Manifest File
 
-But, if we change application code and run `webpack` again, we see that the hash for the vendor file changes. Even though we achieved separate bundles for `vendor` and `main` bundles, we see that the `vendor` bundle changes when the application code changes.
+But, if we change application code and run `webpack` again, we see that the hash for the vendor file changes. Even though we achieved separate bundles for `vendor` and `main`, we see that the `vendor` bundle changes when the application code changes.
 This means that we still don't reap the benefits of browser caching because the hash for vendor file changes on every build and the browser will have to reload the file.
 
 The issue here is that on every build, webpack generates some webpack runtime code, which helps webpack do its job. When there is a single bundle, the runtime code resides in it. But when multiple bundles are generated, the runtime code is extracted into the common module, here the `vendor` file.
@@ -185,7 +184,7 @@ module.exports = function(env) {
 };
 ```
 
-With the above webpack config, we see three bundles being generated. `vendor`, `main` and `manifest` bundles. 
+With the above webpack config, we see three hashed bundles being generated: `vendor`, `main` and `manifest`.
 
 Using what we have learned so far, we could also achieve the same result with an implicit common vendor chunk.
 
