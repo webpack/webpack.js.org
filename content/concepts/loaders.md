@@ -41,9 +41,9 @@ module.exports = {
 
 ```js-with-links-with-details
 {test: /\.css$/, [loader](/configuration/module#rule-loader): 'css-loader'}
-// or equivalently
+// 等同于
 {test: /\.css$/, [use](/configuration/module#rule-use): 'css-loader'}
-// or equivalently
+// 等同于
 {test: /\.css$/, [use](/configuration/module#rule-use): {
   loader: 'css-loader',
   options: {}
@@ -52,7 +52,7 @@ module.exports = {
 
 ## 配置
 
-在你的应用程序中，有三种方式使用 loader：
+在你的应用程序中，有三种使用 loader 的方式：
 
 * 通过配置
 * 在 `require` 语句中显示使用
