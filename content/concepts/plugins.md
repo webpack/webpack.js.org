@@ -79,7 +79,7 @@ module.exports = config;
 
 ### Node API
 
-?> 即使在使用 Node API 时，用户也应该通过配置中的 `plugins` 属性来传递插件，不建议使用 `compiler.apply` 实现相同功能。
+?> Even when using the Node API, users should pass plugins via the `plugins` property in the configuration. Using `compiler.apply` should not be the recommended way.
 
 **some-node-script.js**
 
