@@ -80,7 +80,7 @@ const config = {
 
 **为什么？**此设置允许你使用 `CommonsChunkPlugin` 从「应用程序 bundle」中提取 vendor 引用(vendor reference) 到 vendor bundle，并把 vendor 引用的部分替换为 `__webpack_require__()` 调用。如果应用程序 bundle 中没有 vendor 代码，那么你可以在 webpack 中实现被称为[长效缓存](/guides/caching)的通用模式。
 
-?> Consider removing this scenario in favor of the DllPlugin, which provides a better vendor-splitting.
+?> 考虑删除此场景会有利于 DllPlugin 的执行，这样可以更好地将公共库分离。
 
 
 ### 多个页面应用程序

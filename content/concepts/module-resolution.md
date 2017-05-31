@@ -10,7 +10,7 @@ resolver 是一个库(library)，用于帮助找到模块的绝对路径。一�
 
 ```js
 import foo from 'path/to/module'
-// or
+// 或者
 require('path/to/module')
 ```
 
