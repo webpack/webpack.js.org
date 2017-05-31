@@ -37,7 +37,8 @@ npm install --save-dev style-loader css-loader
 In addition you'll need to install React, ReactDOM and `react-hot-loader` (make sure to use the `next` release of this package)
 
 ```bash
-npm install --save react react-dom react-hot-loader@next
+npm install --save react react-dom 
+npm install --save-dev react-hot-loader@next
 ```
 
 
