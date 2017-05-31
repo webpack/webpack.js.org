@@ -1,167 +1,136 @@
 ---
 title: Hot Module Replacement
 contributors:
-  - jmreidy
-  - jhnns
-  - sararubin
-  - aiduryagin
-  - rohannair
-  - joshsantos
-  - drpicox
+  - sokra
   - skipjack
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
+  - title: Guides - Hot Module Replacement
+    url: /guides/hot-module-replacement
 ---
 
-Hot Module Replacement (or HMR) is one of the most useful features offered by webpack. It allows modules of all kinds to be updated at runtime without the need for a full refresh. This allows you to maintain application state in development and shave countless time in your workflow. This page focuses on __implementation__ while the [concepts page](/concepts/hot-module-replacement) gives more details on how it works and why it's useful.
-
-W> __HMR__ is not intended for use in production, meaning it should only be used in development. See the [building for production guide](/guides/production-build) for more information.
-
-
-## Enabling HMR
-
-Enabling this feature is actually fairly simple. Let's take a look at how to set it up with [webpack-dev-server]()...
+If [Hot Module Replacement](/concepts/hot-module-replacement) has been enabled via the [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin), it's interface will be exposed under the [`module.hot` property](/api/module-variables#module-hot-webpack-specific-). Typically, users will check to see if the interface is accessible, then begin working with it. As an example, here's how you might `accept` an updated module:
 
 ``` js
-const path = require('path');
-const webpack = require('webpack');
-
-module.exports = {
-  entry: './index.js',
-
-  plugins: [
-    new webpack.HotModuleReplacementPlugin() // Enable HMR
-  ],
-
-  output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
-  },
-
-  devServer: {
-    hot: true, // Tell the dev-server we're using HMR
-    contentBase: resolve(__dirname, 'dist'),
-    publicPath: '/'
-  }
-};
-```
-
-Not too bad, huh? Let's test it out using `module.hot.accept`...
-
-__index.js__
-
-``` js
-import Lib from './library';
-
 if (module.hot) {
-  module.hot.accept('./library', function() {
-    console.log('Accepting the updated library module!');
-    Library.log();
+  module.hot.accept('./library.js', function() {
+    // Do something with the updated library module...
   })
 }
 ```
 
-__library.js__
+The following methods are supported...
+
+
+### `accept`
+
+Accept updates for the given `dependencies` and fire a `callback` to react to those updates.
 
 ``` js
-export default {
-  log() {
-    // Change this after the server is started to test
-    console.log('Initial log...')
-  }
-}
-```
-
-Start changing the `console.log` statement in `library.js`, to `'Second log...'` for example, and you should see the following output in the browser console...
-
-``` diff
-[HMR] Waiting for update signal from WDS...
-main.js:9998 Initial log...
-main.js:9468 [WDS] Hot Module Replacement enabled.
-+ 2main.js:9468 [WDS] App updated. Recompiling...
-+ main.js:9468 [WDS] App hot update...
-+ main.js:9912 [HMR] Checking for updates on the server...
-+ main.js:9982 Accepting the updated library module!
-+ 0.1bafc70….hot-update.js:11 Second log...
-+ main.js:9955 [HMR] Updated modules:
-+ main.js:9957 [HMR]  - ./src/library.js
-+ main.js:9894 [HMR] App is up to date.
+module.hot.accept(
+  dependencies, // Either a string or an array of strings
+  callback // Function to fire when the dependencies are updated
+)
 ```
 
 
-## Gotchas
+### `decline`
 
-Hot Module Replacement can be tricky. For example, let's say I have the following class:
+Reject updates for the given `dependencies` forcing the update to fail with a `'decline'` code.
 
 ``` js
-class MyClass {
-  constructor() {
-    super()
-
-    this._options = {}
-  }
-
-  log(text) {
-    console.log('Logging some text: ', text)
-  }
-}
+module.hot.decline(
+  dependencies // Either a string or an array of strings
+)
 ```
 
-Even if the underlying module containing this class is patched with new code, any existing instances of the class still have the old `log` method. Meaning if we changed what that method does, it wouldn't be reflected in those old instances unless we re-instantiate them somehow using `module.hot.accept`.
 
-This is just one example, but there are many others that can easily trip people up. Luckily, there are a lot of loaders out there, some mentioned below, that will make using this process much easier.
+### `dispose` (or `addDisposeHandler`)
 
-
-## HMR with Stylesheets
-
-Hot Module Replacement with CSS is actually fairly straightforward with the help of the `style-loader`. This loader uses `module.hot.accept` behind the scenes to patch `<style>` tags when CSS dependencies are updated. So, with the following webpack configuration...
+Add a handler which is executed when the current module code is replaced. This should be used to destroy any persistent resource you have claimed or created. If you want to transfer state to the updated module, add it to given `data` parameter. This object will be available at `module.hot.data` after the update.
 
 ``` js
-module.exports = {
-  // ...
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
-      }
-    ]
-  },
-  // ...
-}
+module.hot.dispose(data => {
+  // Clean up and pass data to the updated module...
+})
 ```
 
-hot loading stylesheets is a breeze...
 
-__index.js__
+### `removeDisposeHandler`
+
+Remove the callback added via `dispose` or `addDisposeHandler`.
 
 ``` js
-import Lib from './library';
-import './styles.css';
-
-// ...
+module.hot.removeDisposeHandler(callback)
 ```
 
-__styles.css__
 
-``` css
-body {
-  background: blue;
-}
+### `status`
+
+Retrieve the current status of the hot module replacement process.
+
+``` js
+module.hot.status() // Will return one of the following strings...
 ```
 
-Change the style on `body` to `background: red;` and you should immediately see the page's background color change without a full refresh.
+| Status      | Description                                                                            |
+| ----------- | -------------------------------------------------------------------------------------- |
+| idle        | The process is waiting for a call to `check` (see below)                               |
+| check       | The process is checking for updates                                                    |
+| watch       | The process is in watch mode and will be automatically notified about changes          |
+| watch-delay | Delaying for a specified time after the initial change to allow for any other updates  |
+| prepare     | The process is getting ready for the update (e.g. downloading the updated module)      |
+| ready       | The update is prepared and available                                                   |
+| dispose     | The process is calling the `dispose` handlers on the modules that will be replaced     |
+| apply       | The process is calling the `accept` handlers and re-executing self-accepted modules    |
+| abort       | An update was aborted, but the system is still in it's previous state                  |
+| fail        | An update has thrown an exception and the system's state has been compromised          |
 
 
-## Other Code and Frameworks
+### `check`
 
-There are many other loaders out in the community to make HMR interact smoothly with a variety of frameworks and libraries...
+Test all loaded modules for updates and, if updates exist, `apply` them.
 
-- [React Hot Loader](https://github.com/gaearon/react-hot-loader): Tweak react components in real time.
-- [Vue Loader](https://github.com/vuejs/vue-loader): This loader supports HMR for vue components out of the box.
-- [Elm Hot Loader](https://github.com/fluxxu/elm-hot-loader): Supports HMR for the Elm programming language.
+``` js
+module.hot.check(autoApply, (error, outdatedModules) => {
+  // Catch errors and outdated modules...
+})
+```
 
-T> If you know of any other loaders or plugins that help with or enhance Hot Module Replacement please submit a pull request to add to this list!
+The `autoApply` parameter can either be a boolean or `options` to pass to the `apply` method when called.
 
+
+### `apply`
+
+Continue the update process (as long as `module.hot.status() === 'ready').
+
+``` js
+module.hot.apply(options, (error, outdatedModules) => {
+  // Catch errors and outdated modules...
+})
+```
+
+The optional `options` object can include the following properties:
+
+- `ignoreUnaccepted` (boolean): Continue the update process even if some modules are not accepted.
+
+
+### `addStatusHandler`
+
+Register a function to listen for changes in `status`.
+
+``` js
+module.hot.addStatusHandler(status => {
+  // React to the current status...
+})
+```
+
+
+### `removeStatusHandler`
+
+Remove a registered status handler.
+
+``` js
+module.hot.removeStatusHandler(callback)
+```
