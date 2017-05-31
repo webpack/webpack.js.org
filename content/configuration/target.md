@@ -13,9 +13,9 @@ webpack can compile for multiple environments or _targets_. To understand what a
 
 ## `target`
 
-`string`
+`string | function(compiler)`
 
-Tells webpack which environment the application is targeting. The following values are supported via [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js):
+Tells webpack which environment the application is targeting. If it's a `function`, then it will be called with the compiler as a parameter. If it's a `string`, then the following values are supported via [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js):
 
 | `target`      | Description            |
 | ------------- |------------------------|
