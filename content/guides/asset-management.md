@@ -72,14 +72,14 @@ module.exports = {
 }
 ```
 
-现在，当你运行 `import Image from './my-image.png'` 时，该图片会被处理，以及添加到`输出`目录中，_并且_ `Image` 变量将在处理后，包含该图片的完整 url。使用 [css-loader](/loaders/css-loader) 时，在遇到 CSS 中的 `url('./my-image.png')` 也会进行与以上相同的处理过程。loader 将会识别这是一个本地文件，并将 `'./my-image.png'` 路径替换为 `output` 目录中图片的最终路径。[html-loader](/loaders/html-loader) 也会以同样的方式去处理 `<img src="./my-image.png" />`。
+现在，当你运行 `import Image from './my-image.png'` 时，该图片会被处理，以及添加到`输出`目录中，_并且_ `Image` 变量将在处理后，包含该图片的完整 url。使用 [css-loader](/loaders/css-loader) 时，遇到 CSS 中的 `url('./my-image.png')` 也会进行与以上相同的处理过程。loader 将会识别这是一个本地文件，并将 `'./my-image.png'` 路径替换为 `output` 目录中图片的最终路径。[html-loader](/loaders/html-loader) 也会以同样的方式去处理 `<img src="./my-image.png" />`。
 
 T> 下一步是缩小和优化您的图像。关于更多如何增强您的图像加载过程，请查看 [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) 和 [url-loader](/loaders/url-loader)。
 
 
 ## 加载字体
 
-那么，像字体这样的其他资源如何处理呢？file-loader 和 url-loader 可以接收任何文件并加载，然后将其输出到构建目录。这就是说，我们可以将它们用于任何类型的文件，包括字体：
+那么，像字体这样的其他资源如何处理呢？file-loader 和 url-loader 可以接收并加载任何文件，然后将其输出到构建目录。这就是说，我们可以将它们用于任何类型的文件，包括字体：
 
 __webpack.config.js__
 
@@ -144,7 +144,7 @@ module.exports = {
 }
 ```
 
-现在，您可以 `import` 这四种类型的数据(JSON, CSV, TSV, XML)中的任何一种，以及所导入的 `Data` 变量将包含可直接使用的已解析 JSON：
+现在，您可以 `import` 这四种类型的数据(JSON, CSV, TSV, XML)中的任何一种，所导入的 `Data` 变量将包含可直接使用的已解析 JSON：
 
 ``` js
 import Data from './data.csv'
@@ -154,7 +154,7 @@ Data.forEach((row, index) => {
 })
 ```
 
-T> 在使用 [d3](https://github.com/d3) 等工具实现某些数据可视化，预加载数据会非常有用。我们可以不用再发送 ajax 请求，然后于运行时解析数据，而是在构建过程中将其提前载入并打包到模块中，以便浏览器加载模块后，可以立即从模块中解析数据。
+T> 在使用 [d3](https://github.com/d3) 等工具来实现某些数据可视化时，预加载数据会非常有用。我们可以不用再发送 ajax 请求，然后于运行时解析数据，而是在构建过程中将其提前载入并打包到模块中，以便浏览器加载模块后，可以立即从模块中解析数据。
 
 
 ## 全局资源
@@ -171,7 +171,7 @@ T> 在使用 [d3](https://github.com/d3) 等工具实现某些数据可视化，
 + |  |  |– img.png
 ```
 
-这种配置方式会使您的代码更具备可移植，因为现有的统一放置的方式会造成所有资源紧密耦合在一起。假如你想在另一个项目中使用  `/my-component`，只需将其复制或移动到 `/components` 目录下。只要你已经安装了任何_扩展依赖(external dependencies)_，并且你的_已经在配置中定义过相同的 loader_，那么项目应该能够良好运行。
+这种配置方式会使您的代码更具备可移植性，因为现有的统一放置的方式会造成所有资源紧密耦合在一起。假如你想在另一个项目中使用  `/my-component`，只需将其复制或移动到 `/components` 目录下。只要你已经安装了任何_扩展依赖(external dependencies)_，并且你_已经在配置中定义过相同的 loader_，那么项目应该能够良好运行。
 
 但是，假如您无法使用新的开发方式，只能被固定于旧有开发方式，或者您有一些在多个组件（视图、模板、模块等）之间共享的资源。你仍然可以将这些资源存储在公共目录(base directory)中，甚至配合使用 [alias](/configuration/resolve#resolve-alias) 来使它们更方便 `import 导入`。
 
