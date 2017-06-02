@@ -17,7 +17,7 @@ To start using webpack with Typescript you need a couple of things:
 1. Install the Typescript compiler in your project.
 2. Install a Typescript loader (in this case we're using ts-loader).
 3. Create a __tsconfig.json__ file to contain our TypeScript compilation configuration.
-3. Create __webpack.config.js__ to contain our webpack configuration.
+4. Create __webpack.config.js__ to contain our webpack configuration.
 
 You can install the TypeScript compiler and loader by running:
 
