@@ -9,21 +9,27 @@ contributors:
   - kisnows
   - chrisVillanueva
   - swapnilmishra
+  - bring2dip
+  - redian
+  - skipjack
+  - xgqfrms
 ---
 
-This page explains how to generate production builds with webpack.
+The following article describes the best practices and tools to use when using webpack to build a production version of a site or application.
 
-## The automatic way
 
-Running `webpack -p` (or equivalently `webpack --optimize-minimize --define process.env.NODE_ENV="'production'"`). This performs the following steps:
+## The Automatic Way
+
+Running `webpack -p` (or equivalently `webpack --optimize-minimize --define process.env.NODE_ENV="production"`). This performs the following steps:
 
 - Minification using `UglifyJsPlugin`
-- Runs the `LoaderOptionsPlugin`, see its [documentation](/plugins/loader-options-plugin)
-- Sets the Node environment variable
+- Runs the `LoaderOptionsPlugin` (see its [documentation](/plugins/loader-options-plugin))
+- Sets the NodeJS environment variable triggering certain packages to compile differently
+
 
 ### Minification
 
-webpack comes with `UglifyJsPlugin`, which runs [UglifyJS](http://lisperator.net/uglifyjs/) in order to minimize the output. The plugin supports all of [UglifyJS options](https://github.com/mishoo/UglifyJS2#usage). Specifying `--optimize-minimize` on the command line, the following plugin configuration is added:
+webpack comes with `UglifyJsPlugin`, which runs [UglifyJS](http://lisperator.net/uglifyjs/) in order to minimize the output. The plugin supports all of the [UglifyJS options](https://github.com/mishoo/UglifyJS2#usage). Specifying `--optimize-minimize` on the command line, the following plugin configuration is added:
 
 ```js
 // webpack.config.js
@@ -41,15 +47,15 @@ module.exports = {
 
 Thus, depending on the [devtool options](/configuration/devtool), Source Maps are generated.
 
+
 ### Source Maps
 
-We encourage you to have Source Maps enabled in production. They are useful for debugging and to run benchmark tests. webpack can generate inline Source Maps included in the bundles or separated files.
+We encourage you to have source maps enabled in production, as they are useful for debugging as well as running benchmark tests. webpack can generate inline source maps within bundles or as separate files.
 
-In your configuration, use the `devtool` object to set the Source Map type. We currently support seven types of Source Maps. You can find more information about them in our [configuration](/configuration/devtool) documentation page.
+In your configuration, use the `devtool` object to set the Source Map type. We currently support seven types of source maps. You can find more information about them in our [configuration](/configuration/devtool) documentation page (`cheap-module-source-map` is one of the simpler options, using a single mapping per line).
 
-One of the good options to go is using `cheap-module-source-map` which simplifies the Source Maps to a single mapping per line.
 
-### Node environment variable
+### Node Environment Variable
 
 Running `webpack -p` (or `--define process.env.NODE_ENV="'production'"`) invokes the [`DefinePlugin`](/plugins/define-plugin) in the following way:
 
@@ -69,180 +75,213 @@ module.exports = {
 
 The `DefinePlugin` performs search-and-replace operations on the original source code. Any occurrence of `process.env.NODE_ENV` in the imported code is replaced by `"production"`. Thus, checks like `if (process.env.NODE_ENV !== 'production') console.log('...')` are evaluated to `if (false) console.log('...')` and finally minified away using `UglifyJS`.
 
-T> Technically, `NODE_ENV` is a system environment variable that Node.js exposes into running scripts. It is used by convention to determine development-vs-production behavior, by both server tools, build scripts, and client-side libraries. Contrary to expectations, `process.env.NODE_ENV` is not set to `"production"` __within__ the build script `webpack.config.js`, see [#2537](https://github.com/webpack/webpack/issues/2537). Thus, conditionals like `process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js'` do not work as expected. See how to use [environment variables](/guides/environment-variables).
+T> Technically, `NODE_ENV` is a system environment variable that Node.js exposes into running scripts. It is used by convention to determine development-vs-production behavior by server tools, build scripts, and client-side libraries. Contrary to expectations, `process.env.NODE_ENV` is not set to `"production"` __within__ the build script `webpack.config.js`, see [#2537](https://github.com/webpack/webpack/issues/2537). Thus, conditionals like `process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js'` do not work as expected. See how to use [environment variables](/guides/environment-variables).
 
-## The manual way: Configuring webpack for multiple environments
 
-When we do have multiple configurations in mind for different environments, the easiest way is to write separate js files for
-each environment. For example:
+## The Manual Way
 
-** dev.js **
+When we do have multiple configurations in mind for different environments, the easiest approach is to write separate webpack configurations for each environment.
+
+
+### Simple Approach
+
+The simplest way to do this is just to define two fully independent configuration files, like so:
+
+__webpack.dev.js__
+
 ```js
-module.exports = function (env) {
-  return {
-    devtool: 'cheap-module-source-map',
-    output: {
-        path: path.join(__dirname, '/../dist/assets'),
-        filename: '[name].bundle.js',
-        publicPath: publicPath,
-        sourceMapFilename: '[name].map'
-    },
-    devServer: {
-        port: 7777,
-        host: 'localhost',
-        historyApiFallback: true,
-        noInfo: false,
-        stats: 'minimal',
-        publicPath: publicPath
-    }
+module.exports = {
+  devtool: 'cheap-module-source-map',
+
+  output: {
+    path: path.join(__dirname, '/../dist/assets'),
+    filename: '[name].bundle.js',
+    publicPath: publicPath,
+    sourceMapFilename: '[name].map'
+  },
+
+  devServer: {
+    port: 7777,
+    host: 'localhost',
+    historyApiFallback: true,
+    noInfo: false,
+    stats: 'minimal',
+    publicPath: publicPath
   }
 }
 ```
 
-** prod.js **
+__webpack.prod.js__
+
 ```js
-module.exports = function (env) {
-  return {
-    output: {
-        path: path.join(__dirname, '/../dist/assets'),
-        filename: '[name].bundle.js',
-        publicPath: publicPath,
-        sourceMapFilename: '[name].map'
-    },
-    plugins: [
-        new webpack.LoaderOptionsPlugin({
-            minimize: true,
-            debug: false
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            beautify: false,
-            mangle: {
-                screw_ie8: true,
-                keep_fnames: true
-            },
-            compress: {
-                screw_ie8: true
-            },
-            comments: false
-        })
+module.exports = {
+  output: {
+    path: path.join(__dirname, '/../dist/assets'),
+    filename: '[name].bundle.js',
+    publicPath: publicPath,
+    sourceMapFilename: '[name].map'
+  },
+
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      beautify: false,
+      mangle: {
+        screw_ie8: true,
+        keep_fnames: true
+      },
+      compress: {
+        screw_ie8: true
+      },
+      comments: false
+    })
+  ]
+}
+```
+
+Then, by tweaking the `scripts` in your `package.json`, like so:
+
+__package.json__
+
+```js
+"scripts": {
+  ...
+  "build:dev": "webpack --env=dev --progress --profile --colors",
+  "build:dist": "webpack --env=prod --progress --profile --colors"
+}
+```
+
+you can now toggle between the two configurations by turning our base configuration into a function and accepting the `env` parameter (set via `--env`):
+
+__webpack.config.js__
+
+```js
+module.exports = function(env) {
+  return require(`./webpack.${env}.js`)
+}
+```
+
+See the CLI's [common options section](/api/cli#common-options) for more details on how to use the `env` flag.
+
+
+### Advanced Approach
+
+A more complex approach would be to have a base configuration file, containing the configuration common to both environments, and then merge that with environment specific configurations. This would yield the full configuration for each environment and prevent repetition for the common bits.
+
+The tool used to perform this "merge" is simply called [webpack-merge](https://github.com/survivejs/webpack-merge) and provides a variety of merging options, though we are only going to use the simplest version of it below.
+
+We'll start by adding our base configuration:
+
+__webpack.common.js__
+
+```js
+module.exports = {
+  entry: {
+    'polyfills': './src/polyfills.ts',
+    'vendor': './src/vendor.ts',
+    'main': './src/main.ts'
+  },
+
+  output: {
+    path: path.join(__dirname, '/../dist/assets'),
+    filename: '[name].bundle.js',
+    publicPath: publicPath,
+    sourceMapFilename: '[name].map'
+  },
+
+  resolve: {
+    extensions: ['.ts', '.js', '.json'],
+    modules: [path.join(__dirname, 'src'), 'node_modules']
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        exclude: [/\.(spec|e2e)\.ts$/],
+        use: [
+          'awesome-typescript-loader',
+          'angular2-template-loader'
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: ['to-string-loader', 'css-loader']
+      },
+      {
+        test: /\.(jpg|png|gif)$/,
+        use: 'file-loader'
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|svg)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 100000
+          }
+        }
+      }
     ]
-  }
+  },
+
+  plugins: [
+    new ForkCheckerPlugin(),
+
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ['polyfills', 'vendor'].reverse()
+    }),
+
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      chunksSortMode: 'dependency'
+    })
+  ]
 }
 ```
-Have the following snippet in your webpack.config.js:
+
+And then merge this common configuration with an environment specific configuration file using `webpack-merge`. Let's look at an example where we merge our production file:
+
+__webpack.prod.js__
+
 ```js
-function buildConfig(env) {
-  return require('./config/' + env + '.js')({ env: env })
-}
-
-module.exports = buildConfig;
-```
-And from our package.json, where we build our application using webpack, the command goes like this:
-```js
- "build:dev": "webpack --env=dev --progress --profile --colors",
- "build:dist": "webpack --env=prod --progress --profile --colors",
-```
-
-You could see that we passed the environment variable to our webpack.config.js file. From there we used a simple
-switch-case to build for the environment we passed by simply loading the right js file.
-
-An advanced approach would be to have a base configuration file, put in all common functionalities,
-and then have environment specific files and simply use 'webpack-merge' to merge them. This would help to avoid code repetitions.
-For example, you could have all your base configurations like resolving your js, ts, png, jpeg, json and so on.. in a common base file as follows:
-
-** base.js **
-```js
-module.exports = function() {
-    return {
-        entry: {
-            'polyfills': './src/polyfills.ts',
-            'vendor': './src/vendor.ts',
-            'main': './src/main.ts'
-
-        },
-        output: {
-            path: path.join(__dirname, '/../dist/assets'),
-            filename: '[name].bundle.js',
-            publicPath: publicPath,
-            sourceMapFilename: '[name].map'
-        },
-        resolve: {
-            extensions: ['', '.ts', '.js', '.json'],
-            modules: [path.join(__dirname, 'src'), 'node_modules']
-
-        },
-        module: {
-            loaders: [{
-                test: /\.ts$/,
-                loaders: [
-                    'awesome-typescript-loader',
-                    'angular2-template-loader'
-                ],
-                exclude: [/\.(spec|e2e)\.ts$/]
-            }, {
-                test: /\.css$/,
-                loaders: ['to-string-loader', 'css-loader']
-            }, {
-                test: /\.(jpg|png|gif)$/,
-                loader: 'file-loader'
-            }, {
-                test: /\.(woff|woff2|eot|ttf|svg)$/,
-                loader: 'url-loader?limit=100000'
-            }],
-        },
-        plugins: [
-            new ForkCheckerPlugin(),
-
-            new webpack.optimize.CommonsChunkPlugin({
-                name: ['polyfills', 'vendor'].reverse()
-            }),
-            new HtmlWebpackPlugin({
-                template: 'src/index.html',
-                chunksSortMode: 'dependency'
-            })
-        ],
-    };
-}
-```
-And then merge this base config with an environment specific configuration file using 'webpack-merge'.
-Let us look at an example where we merge our prod file, mentioned above, with this base config file using 'webpack-merge':
-
-** prod.js (updated) **
-```js
-const webpackMerge = require('webpack-merge');
-
-const commonConfig = require('./base.js');
+const Merge = require('webpack-merge');
+const CommonConfig = require('./webpack.common.js');
 
 module.exports = function(env) {
-    return webpackMerge(commonConfig(), {
-        plugins: [
-            new webpack.LoaderOptionsPlugin({
-                minimize: true,
-                debug: false
-            }),
-            new webpack.DefinePlugin({
-                'process.env': {
-                    'NODE_ENV': JSON.stringify('production')
-                }
-            }),
-            new webpack.optimize.UglifyJsPlugin({
-                beautify: false,
-                mangle: {
-                    screw_ie8: true,
-                    keep_fnames: true
-                },
-                compress: {
-                    screw_ie8: true
-                },
-                comments: false
-            })
-        ]
-    })
+  return Merge(CommonConfig, {
+    plugins: [
+      new webpack.LoaderOptionsPlugin({
+        minimize: true,
+        debug: false
+      }),
+      new webpack.DefinePlugin({
+        'process.env': {
+          'NODE_ENV': JSON.stringify('production')
+        }
+      }),
+      new webpack.optimize.UglifyJsPlugin({
+        beautify: false,
+        mangle: {
+          screw_ie8: true,
+          keep_fnames: true
+        },
+        compress: {
+          screw_ie8: true
+        },
+        comments: false
+      })
+    ]
+  })
 }
 ```
-You will notice three major updates to our 'prod.js' file.
-* 'webpack-merge' with the 'base.js'.
-* We have move 'output' property to 'base.js'. Just to stress on that point that our output property, here, is common across all our environments and that we refactored our 'prod.js' and moved it to our 'base.js', the common configuration file.
-* We have defined the 'process.env.NODE_ENV' to be 'production' using the 'DefinePlugin'. Now across the application 'process.env.NODE_ENV' would have the value, 'production', when we build our application for production environment. Likewise we can manage various variables of our choice, specific to environments this way.
 
-The choice of what is going to be common across all your environments is up to you, however. We have just demonstrated a few that could typically be common across environments when we build our application.
+You will notice three major updates to our 'webpack.prod.js' file:
+
+- Use `webpack-merge` to combine it with the 'webpack.common.js'.
+- We moved the `output` property to `webpack.common.js` as it is common to all environments.
+- We defined `'process.env.NODE_ENV'` as `'production'` using the `DefinePlugin` only in `webpack.prod.js`.
+
+The example above only demonstrates a few typical configuration options used in each (or both) environments. Now that you know how to split up configurations, the choice of what options go where is up to you.

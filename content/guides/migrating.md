@@ -12,6 +12,8 @@ contributors:
   - chrisVillanueva
   - bebraw
   - howdy39
+  - selbekk
+  - ndelangen
 ---
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -28,13 +30,16 @@ These options were replaced by a single option `resolve.modules`. See [resolving
   }
 ```
 
+
 ## `resolve.extensions`
 
 This option no longer requires passing an empty string. This behavior was moved to `resolve.enforceExtension`. See [resolving](/configuration/resolve) for more usage.
 
+
 ## `resolve.*`
 
-More stuff was changed here. Not listed in detail as it's not commonly used. See [resolving](/configuration/resolve) for details.
+Several APIs were changed here. Not listed in detail as it's not commonly used. See [resolving](/configuration/resolve) for details.
+
 
 ## `module.loaders` is now `module.rules`
 
@@ -74,15 +79,16 @@ The new naming conventions are easier to understand and are a good reason to upg
   }
 ```
 
+
 ## Chaining loaders
 
-Like in webpack v1, loaders can be chained to pass results from loader to loader. Using the [rule.use](/configuration/module#rule-use)
- configuration option, `use` can be set to a list of loaders.
-In webpack v1, loaders were commonly chained with `!`. This style is only supported using the legacy option `module.loaders`.
+Like in webpack 1, loaders can be chained to pass results from loader to loader. Using the [rule.use](/configuration/module#rule-use)
+ configuration option, `use` can be set to an array of loaders.
+In webpack 1, loaders were commonly chained with `!`. This style is only supported using the legacy option `module.loaders`.
 
 ``` diff
   module: {
--   loaders: {
+-   loaders: [{
 +   rules: [{
       test: /\.less$/,
 -     loader: "style-loader!css-loader!less-loader"
@@ -94,6 +100,7 @@ In webpack v1, loaders were commonly chained with `!`. This style is only suppor
     }]
   }
 ```
+
 
 ## Automatic `-loader` module name extension removed
 
@@ -126,6 +133,7 @@ You can still opt-in to the old behavior with the `resolveLoader.moduleExtension
 
 See [#2986](https://github.com/webpack/webpack/issues/2986) for the reason behind this change.
 
+
 ## `json-loader` is not required anymore
 
 When no loader has been configured for a JSON file, webpack will automatically try to load the JSON
@@ -145,10 +153,10 @@ file with the [`json-loader`](https://github.com/webpack/json-loader).
 [We decided to do this](https://github.com/webpack/webpack/issues/3363) in order to iron out environment differences
   between webpack, node.js and browserify.
 
+
 ## Loaders in configuration resolve relative to context
 
-In webpack 1 configured loaders resolve relative to the matched file.
-Since webpack 2 configured loaders resolve relative to the `context` option.
+In __webpack 1__, configured loaders resolve relative to the matched file. However, in __webpack 2__, configured loaders resolve relative to the `context` option.
 
 This solves some problems with duplicate modules caused by loaders when using `npm link` or referencing modules outside of the `context`.
 
@@ -169,7 +177,8 @@ You may remove some hacks to work around this:
   }
 ```
 
-## `module.preLoaders` and `module.postLoaders` was removed
+
+## `module.preLoaders` and `module.postLoaders` were removed:
 
 ``` diff
   module: {
@@ -184,10 +193,10 @@ You may remove some hacks to work around this:
   }
 ```
 
+
 ## `UglifyJsPlugin` sourceMap
 
-The `sourceMap` option of the `UglifyJsPlugin` now defaults to `false` instead of `true`.
-This means that if you are using source maps for minimized code or want correct line numbers for uglifyjs warnings, you need to set `sourceMap: true` for `UglifyJsPlugin`.
+The `sourceMap` option of the `UglifyJsPlugin` now defaults to `false` instead of `true`. This means that if you are using source maps for minimized code or want correct line numbers for uglifyjs warnings, you need to set `sourceMap: true` for `UglifyJsPlugin`.
 
 ``` diff
   devtool: "source-map",
@@ -197,6 +206,7 @@ This means that if you are using source maps for minimized code or want correct 
     })
   ]
 ```
+
 
 ## `UglifyJsPlugin` warnings
 
@@ -214,9 +224,10 @@ This means that if you want to see uglifyjs warnings, you need to set `compress.
   ]
 ```
 
+
 ## `UglifyJsPlugin` minimize loaders
 
-`UglifyJsPlugin` no longer switches loaders into minimize mode. The `minimize: true` setting needs to be passed via loader options in long-term. See loader documentation for relevant options.
+`UglifyJsPlugin` no longer switches loaders into minimize mode. The `minimize: true` setting needs to be passed via loader options in the long-term. See loader documentation for relevant options.
 
 The minimize mode for loaders will be removed in webpack 3 or later.
 
@@ -230,13 +241,15 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
   ]
 ```
 
+
 ## `DedupePlugin` has been removed
 
 `webpack.optimize.DedupePlugin` isn't needed anymore. Remove it from your configuration.
 
+
 ## `BannerPlugin` - breaking change
 
-`BannerPlugin` no longer accept two parameters but rather only a single options object.
+`BannerPlugin` no longer accepts two parameters, but a single options object.
 
 ``` diff
   plugins: [
@@ -245,23 +258,29 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
   ]
 ```
 
+
 ## `OccurrenceOrderPlugin` is now on by default
 
-It's no longer necessary to specify it in configuration.
+The `OccurrenceOrderPlugin` is now enabled by default and has been renamed (`OccurenceOrderPlugin` in webpack 1).
+Thus make sure to remove the plugin from your configuration:
 
 ``` diff
   plugins: [
+    // webpack 1
+-   new webpack.optimize.OccurenceOrderPlugin()
+    // webpack 2
 -   new webpack.optimize.OccurrenceOrderPlugin()
   ]
 ```
 
+
 ## `ExtractTextWebpackPlugin` - breaking change
 
-[ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) 1.0.0 does not work with webpack v2. You will need to install ExtractTextPlugin v2 explicitly.
+[ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) requires version 2 to work with webpack 2.
 
-`npm install --save-dev extract-text-webpack-plugin@beta`
+`npm install --save-dev extract-text-webpack-plugin`
 
- The configuration changes for this plugin are mainly syntactical.
+The configuration changes for this plugin are mainly syntactical.
 
 ### `ExtractTextPlugin.extract`
 
@@ -281,6 +300,7 @@ module: {
 }
 ```
 
+
 ### `new ExtractTextPlugin({options})`
 
 ```diff
@@ -294,11 +314,12 @@ plugins: [
 ]
 ```
 
+
 ## Full dynamic requires now fail by default
 
-A dependency with only an expression (i. e. `require(expr)`) will now create an empty context instead of an context of the complete directory.
+A dependency with only an expression (i. e. `require(expr)`) will now create an empty context instead of the context of the complete directory.
 
-Best refactor this code as it won't work with ES2015 Modules. If this is not possible you can use the `ContextReplacementPlugin` to hint the compiler to the correct resolving.
+Code like this should be refactored as it won't work with ES2015 modules. If this is not possible you can use the `ContextReplacementPlugin` to hint the compiler towards the correct resolving.
 
 ?> Link to an article about dynamic dependencies.
 
@@ -317,7 +338,7 @@ module.exports = config;
 
 You may notice that this is no longer allowed. The CLI is more strict now.
 
-Instead there is an interface for passing arguments to the configuration. This should be used instead. Future tool may rely on this.
+Instead there is an interface for passing arguments to the configuration. This should be used instead. Future tools may rely on this.
 
 `webpack --env.customStuff`
 
@@ -331,11 +352,13 @@ module.exports = function(env) {
 
 See [CLI](/api/cli).
 
-## `require.ensure` and AMD `require` is asynchronous
 
-These functions are now always asynchronous instead of calling their callback sync if the chunk is already loaded.
+## `require.ensure` and AMD `require` are asynchronous
 
-**nb `require.ensure` now depends upon native `Promise`s. If using `require.ensure` in an environment that lacks them then you will need a polyfill. **
+These functions are now always asynchronous instead of calling their callback synchronously if the chunk is already loaded.
+
+**`require.ensure` now depends upon native `Promise`s. If using `require.ensure` in an environment that lacks them then you will need a polyfill. **
+
 
 ## Loader configuration is through `options`
 
@@ -354,6 +377,7 @@ module.exports = {
   ts: { transpileOnly: false }
 }
 ```
+
 
 ### What are `options`?
 
@@ -386,9 +410,10 @@ module.exports = {
 }
 ```
 
+
 ## `LoaderOptionsPlugin` context
 
-Some loaders need context information and read them from the configuration. This needs to be passed via loader options in long-term. See loader documentation for relevant options.
+Some loaders need context information and read them from the configuration. This needs to be passed via loader options in the long-term. See loader documentation for relevant options.
 
 To keep compatibility with old loaders, this information can be passed via plugin:
 
@@ -402,13 +427,14 @@ To keep compatibility with old loaders, this information can be passed via plugi
   ]
 ```
 
+
 ## `debug`
 
 The `debug` option switched loaders to debug mode in webpack 1. This needs to be passed via loader options in long-term. See loader documentation for relevant options.
 
 The debug mode for loaders will be removed in webpack 3 or later.
 
-To keep compatibility with old loaders, loaders can be switched to debug mode via plugin:
+To keep compatibility with old loaders, loaders can be switched to debug mode via a plugin:
 
 ``` diff
 - debug: true,
@@ -419,9 +445,10 @@ To keep compatibility with old loaders, loaders can be switched to debug mode vi
   ]
 ```
 
+
 ## Code Splitting with ES2015
 
-In webpack v1, you could use [`require.ensure`](/guides/code-splitting-require) as a method to lazily-load chunks for your application:
+In webpack 1, you could use [`require.ensure()`](/guides/code-splitting-async/#require-ensure-) as a method to lazily-load chunks for your application:
 
 ```javascript
 require.ensure([], function(require) {
@@ -429,7 +456,7 @@ require.ensure([], function(require) {
 });
 ```
 
-The ES2015 Loader spec defines [`import()`](/guides/code-splitting-import) as method to load ES2015 Modules dynamically on runtime.
+The ES2015 Loader spec defines [`import()`](/guides/code-splitting-async) as method to load ES2015 Modules dynamically on runtime.
 webpack treats `import()` as a split-point and puts the requested module in a separate chunk.
 `import()` takes the module name as argument and returns a Promise.
 
@@ -443,15 +470,8 @@ function onClick() {
 }
 ```
 
-Good news: Failure to load a chunk can be handled now because they are `Promise` based.
+Good news: Failure to load a chunk can now be handled because they are `Promise` based.
 
-Caveat: `require.ensure` allows for easy chunk naming with the optional third argument, but `import` API doesn't offer that capability yet. If you want to keep that functionality, you can continue using `require.ensure`.
-
-```javascript
-require.ensure([], function(require) {
-  var foo = require("./module");
-}, "custom-chunk-name");
-```
 
 ## Dynamic expressions
 
@@ -466,6 +486,7 @@ function route(path, query) {
 }
 // This creates a separate chunk for each possible route
 ```
+
 
 ## Mixing ES2015 with AMD and CommonJS
 
@@ -501,6 +522,7 @@ It is important to note that you will want to tell Babel to not parse these modu
 }
 ```
 
+
 ## Hints
 
 No need to change something, but opportunities
@@ -513,6 +535,7 @@ webpack now supports template strings in expressions. This means you can start u
 - require("./templates/" + name);
 + require(`./templates/${name}`);
 ```
+
 
 ### Configuration Promise
 
@@ -532,6 +555,7 @@ module.exports = function() {
 };
 ```
 
+
 ### Advanced loader matching
 
 webpack now supports more things to match on for loaders.
@@ -541,12 +565,13 @@ module: {
   rules: [
     {
       resource: /filename/, // matches "/path/filename.js"
-      resourceQuery: /querystring/, // matches "/filename.js?querystring"
+      resourceQuery: /^\?querystring$/, // matches "?querystring"
       issuer: /filename/, // matches "/path/something.js" if requested from "/path/filename.js"
     }
   ]
 }
 ```
+
 
 ### More CLI options
 
@@ -562,9 +587,11 @@ There are some new CLI options for you to use:
 
 `-p` also defines `process.env.NODE_ENV` to `"production"` now.
 
+
 ## Loader changes
 
 Changes only relevant for loader authors.
+
 
 ### Cacheable
 
@@ -586,37 +613,24 @@ Loaders are now cacheable by default. Loaders must opt-out if they are not cache
   }
 ```
 
+
 ### Complex options
 
-webpack 1 only support `JSON.stringify`-able options for loaders.
-webpack 2 now supports any JS object as loader options.
+__webpack v1__ only supports `JSON.stringify`-able options for loaders.
 
-Using complex options comes with one restriction. You may need to have a `ident` for the option object to make it referenceable by other loaders.
+__webpack v2__ now supports any JS object as loader options.
 
-Having an `ident` on the options object means to be able to reference this options object in inline loaders. Here is an example:
+Before [v2.2.1](https://github.com/webpack/webpack/releases/tag/v2.2.1) (i.e. from v2.0.0 through v2.2.0), using complex options required using `ident` for the `options` object to allow its reference from other loaders. __This was removed in v2.2.1__ and thus current migrations do not require any use of the `ident` key.
 
-`require("some-loader??by-ident!resource")`
-
-``` js
+```diff
 {
-  test: /.../,
-  loader: "...",
-  options: {
-    ident: "by-ident",
-    magic: () => return Math.random()
+  test: /\.ext/
+  use: {
+    loader: '...',
+    options: {
+-     ident: 'id',
+      fn: () => require('./foo.js')
+    }
   }
 }
 ```
-
-This inline style should not be used by regular code, but it's often used by loader generated code.
-I. e. the `style-loader` generates a module that `require`s the remaining request (which exports the CSS).
-
-``` js
-// style-loader generated code (simplified)
-var addStyle = require("./add-style");
-var css = require("-!css-loader?{"modules":true}!postcss-loader??postcss-ident");
-
-addStyle(css);
-```
-
-So if you use complex options tell your users about the `ident`.

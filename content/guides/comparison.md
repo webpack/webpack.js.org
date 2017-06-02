@@ -13,7 +13,7 @@ webpack is not the only module bundler out there. If you are choosing between us
 | Feature | webpack/webpack | jrburke/requirejs | substack/node-browserify | jspm/jspm-cli | rollup/rollup | brunch/brunch |
 |---------|-----------------|-------------------|--------------------------|---------------|---------------|---------------|
 | Additional chunks are loaded on demand | **yes** | **yes** | no | [System.import](https://github.com/systemjs/systemjs/blob/master/docs/system-api.md#systemimportmodulename--normalizedparentname---promisemodule) | no | no |
-| AMD `define` | **yes** | **yes** | [deamdify](https://github.com/jaredhanson/deamdify) | yes | [rollup-plugin-amd](https://github.com/brunch/uglify-js-brunch) | yes |
+| AMD `define` | **yes** | **yes** | [deamdify](https://github.com/jaredhanson/deamdify) | yes | [rollup-plugin-amd](https://github.com/piuccio/rollup-plugin-amd) | yes |
 | AMD `require` | **yes** | **yes** | no | yes | no | yes |
 | AMD `require` loads on demand | **yes** | with manual configuration | no | yes | no | no |
 | CommonJS `exports` | **yes** | only wrapping in `define` | **yes** | yes | [commonjs-plugin](https://github.com/rollup/rollup-plugin-commonjs) | yes |
@@ -39,7 +39,7 @@ webpack is not the only module bundler out there. If you are choosing between us
 | Replacement for browser | `web_modules`, `.web.js`, package.json field, alias config option | alias option | package.json field, alias option | package.json, alias option | no | |
 | Requirable files | file system | **web** | file system | through plugins | file system or through plugins | file system |
 | Runtime overhead | **243B + 20B per module + 4B per dependency** | 14.7kB + 0B per module + (3B + X) per dependency | 415B + 25B per module + (6B + 2X) per dependency | 5.5kB for self-executing bundles, 38kB for full loader and polyfill, 0 plain modules, 293B CJS, 139B ES2015 System.register before gzip | **none for ES2015 modules** (other formats may have) | |
-| Watch mode | yes | not required | yes | not needed in dev | no | yes |
+| Watch mode | yes | not required | [watchify](https://github.com/substack/watchify) | not needed in dev | [rollup-watch](https://github.com/rollup/rollup-watch) | yes |
 
 
 ♦ in production mode (opposite in development mode)

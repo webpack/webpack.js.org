@@ -1,16 +1,29 @@
 ---
 title: DefinePlugin
-contributurs:
+contributors:
   - simon04
+  - rouzbeh84
 ---
 
+The `DefinePlugin` allows you to create global constants which can be configured at **compile** time. This can be useful for allowing different behavior between development builds and release builds. If you perform logging in your development build but not in the release build you might use a global constant to determine whether logging takes place. That's where `DefinePlugin` shines, set it and forget it rules for development and release builds.
+
 ``` javascript
-new webpack.DefinePlugin(definitions)
+new webpack.DefinePlugin({
+  // Definitions...
+})
 ```
 
-The `DefinePlugin` allows you to create global constants which can be configured at **compile** time. This can be useful for allowing different behaviour between development builds and release builds. For example, you might use a global constant to determine whether logging takes place; perhaps you perform logging in your development build but not in the release build. That's the sort of scenario the `DefinePlugin` facilitates.
 
-**Example:**
+## Usage
+
+Each key passed into `DefinePlugin` is an identifier or multiple identifiers joined with `.`.
+
+* If the value is a string it will be used as a code fragment.
+* If the value isn't a string, it will be stringified (including functions).
+* If the value is an object all keys are defined the same way.
+* If you prefix `typeof` to the key, it's only defined for typeof calls.
+
+The values will be inlined into the code allowing a minification pass to remove the redundant conditional.
 
 ``` javascript
 new webpack.DefinePlugin({
@@ -27,27 +40,20 @@ console.log("Running App version " + VERSION);
 if(!BROWSER_SUPPORTS_HTML5) require("html5shiv");
 ```
 
-T> Note that because the plugin does a direct text replacement, the value given to it must include actual quotes inside of the string itself. Typically, this is done either with alternate quotes, such as `'"production"'`, or by using `JSON.stringify('production')`.
+T> Note that because the plugin does a direct text replacement, the value given to it must include **actual quotes** inside of the string itself. Typically, this is done either with either alternate quotes, such as `'"production"'`, or by using `JSON.stringify('production')`.
 
-Each key passed into `DefinePlugin` is an identifier or multiple identifiers joined with `.`.
-
-* If the value is a string it will be used as a code fragment.
-* If the value isn't a string, it will be stringified (including functions).
-* If the value is an object all keys are defined the same way.
-* If you prefix `typeof` to the key, it's only defined for typeof calls.
-
-The values will be inlined into the code which allows a minification pass to remove the redundant conditional.
-
-**Example:**
+__index.js__
 
 ``` javascript
 if (!PRODUCTION) {
   console.log('Debug info')
 }
+
 if (PRODUCTION) {
   console.log('Production log')
 }
-`````
+```
+
 After passing through webpack with no minification results in:
 
 ``` javascript
@@ -65,7 +71,9 @@ and then after a minification pass results in:
 console.log('Production log')
 ```
 
-## Use Case: Feature Flags
+
+## Feature Flags
+
 Enable/disable features in production/development build using [feature flags](https://en.wikipedia.org/wiki/Feature_toggle).
 
 ```javascript
@@ -75,7 +83,9 @@ new webpack.DefinePlugin({
 })
 ```
 
-## Use Case: Service URLs
+
+## Service URLs
+
 Use a different service URL in production/development builds:
 
 ```javascript

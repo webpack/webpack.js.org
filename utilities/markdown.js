@@ -2,22 +2,24 @@
 var marked = require('marked');
 
 module.exports = function() {
-
   var renderer = new marked.Renderer();
 
   renderer.image = function(href, title, text) {
-    return '<img src="' + href + '" alt="' + text + '">';
+    return `<img src="${href}" alt="${text}">`;
   };
 
-  // patch ids (this.options.headerPrefix can be undefined!)
+  // Patch IDs (this.options.headerPrefix can be undefined!)
   renderer.heading = function(text, level, raw) {
-    var id = raw.toLowerCase().replace(/`/g, '').replace(/[^\w]+/g, '-');
+    var parsed = parseAnchor(raw);
+    var id = parsed.id;
 
-    return `<h${level} class="header">` +
+    return (
+      `<h${level} class="header">` +
       `<a class="anchor" href="#${id}" id="${id}"></a>` +
       `<span class="text">${text}</span>` +
       `<a class="icon-link" href="#${id}"></a>` +
-      `</h${level}>\n`;
+      `</h${level}>\n`
+    );
   };
 
   var codeTemplate = renderer.code;
@@ -96,7 +98,7 @@ module.exports = function() {
       tokens.links = [];
 
       marked.Parser.prototype.tok = function () {
-        if(this.token.type === 'table') {
+        if (this.token.type === 'table') {
           return handleTable.call(this, this.token);
         } else {
           return handleTok.call(this);
@@ -110,10 +112,7 @@ module.exports = function() {
     getAnchors: function(content) {
       return marked.lexer(content)
         .filter(chunk => chunk.type === 'heading')
-        .map(chunk => ({
-          title: chunk.text.replace(/`/g, ''),
-          id: chunk.text.toLowerCase().replace(/`/g, '').replace(/[^\w]+/g, '-')
-        }));
+        .map(chunk => parseAnchor(chunk.text));
     }
   };
 };
@@ -144,11 +143,22 @@ function parseContent(data) {
   return tokens;
 }
 
+function parseAnchor(string) {
+  var stripped = string.replace(/\[(.+)\]\(.+\)/gi, '$1').replace(/(<([^>]+)>)/ig, '');
+  var clean = stripped.replace(/`/g, '');
+
+  return {
+    title: clean,
+    id: clean.replace(/[^\w]+/g, '-').toLowerCase()
+  };
+}
+
 function handleHTMLSplit(tokens, htmlArray, merging) {
   const htmlItem =  htmlArray[0];
-  htmlArray = htmlArray.slice(1);
   const tickSplit = htmlItem.split('`');
   const tickLength = tickSplit.length;
+
+  htmlArray = htmlArray.slice(1);
 
   // detect start of the inline code
   if(merging.length === 0 && tickLength%2 === 0) {
@@ -224,6 +234,23 @@ function handleTable(t) {
     let row = t.cells[i];
     cell = '';
 
+
+    // Fix escaped '|' characters
+    // See https://github.com/chjj/marked/issues/595
+    let erroneous = row.map(item => item.endsWith('\\') ? item : null).filter(item => item);
+
+    if ( erroneous.length > 0 ) {
+      erroneous.forEach(string => {
+        let errorIndex = row.findIndex(item => item === string);
+        let nextIndex = errorIndex + 1;
+        let value = row[errorIndex];
+
+        row[errorIndex] = `${value.slice(0, -1)}|${row[nextIndex]}`;
+        row.splice(nextIndex, 1);
+      });
+    }
+
+
     for (let j = 0; j < row.length; j++) {
       cell += handleTableCell(this.inline.output(row[j]), {
         header: false,
@@ -272,26 +299,13 @@ function parseCustomQuote(token, match, className) {
     var text = token.text;
 
     if (text.indexOf(match) === 0) {
-      // var icon;
-
-      // TODO: Update icons and styling
-      // switch(className) {
-      //   case 'tip':
-      //     icon = 'icon-info';
-      //     break;
-      //   case 'warning':
-      //     icon = 'icon-warning';
-      //     break;
-      //   default:
-      //     icon = 'icon-chevron-right';
-      //     break;
-      // }
-
       return {
         type: 'html',
-        text: `<blockquote class="${className}">` +
+        text: (
+          `<blockquote class="${className}">` +
           `<div class="tip-content"> ${text.slice(2).trim()} </div>` +
           '</blockquote>'
+        )
       };
     }
   }

@@ -1,6 +1,6 @@
 ---
 title: Configuration Types
-sort: 2
+sort: 3
 contributors:
   - sokra
   - skipjack
@@ -9,6 +9,7 @@ contributors:
 ---
 
 Besides exporting a single config object, there are a few more ways that cover other needs as well.
+
 
 ## Exporting a function to use `--env`
 
@@ -29,6 +30,7 @@ Instead of exporting a configuration object, you may return a function which acc
 };
 ```
 
+
 ## Exporting a Promise
 
 webpack will run the function exported by the configuration file and wait for a Promise to be returned. Handy when you need to asynchronously load configuration variables.
@@ -46,7 +48,9 @@ module.exports = () => {
 }
 ```
 
+
 ## Exporting multiple configurations
+
 Instead of exporting a single configuration object/function, you may export multiple configurations. When running webpack, all configurations are built. For instance, this is useful for [bundling a library](/guides/author-libraries) for multiple [targets](/configuration/output#output-librarytarget) such as AMD and CommonJS:
 
 ```js

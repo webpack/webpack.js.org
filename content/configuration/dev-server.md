@@ -10,9 +10,10 @@ contributors:
 
 webpack-dev-server can be used to quickly develop an application. See the ["How to Develop?"](/guides/development) to get started.
 
-This page describes the options that effect the behavior of webpack-dev-server (short: dev-server).
+This page describes the options that affect the behavior of webpack-dev-server (short: dev-server).
 
 T> Options that are compatible with [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) have 🔑 next to them.
+
 
 ## `devServer`
 
@@ -39,6 +40,10 @@ content is served from dist/
 that will give some background on where the server is located and what it's serving.
 
 If you're using dev-server through the Node.js API, the options in `devServer` will be ignored. Pass the options as a second parameter instead: `new WebpackDevServer(compiler, {...})`. [See here](https://github.com/webpack/webpack-dev-server/blob/master/examples/node-api-simple/server.js) for an example of how to use webpack-dev-server through the Node.js API.
+
+W> Be aware that when [exporting multiple configurations](/configuration/configuration-types/#exporting-multiple-configurations) only the `devServer` options for the first configuration will be taken into account and used for all the configurations in the array.
+
+T> If you're having trouble, navigating to the `/webpack-dev-server` route will show where files are served. For example, `http://localhost:9000/webpack-dev-server`.
 
 
 ## `devServer.clientLogLevel`
@@ -119,7 +124,7 @@ T> `filename` has no effect when used without **lazy mode**.
 
 `object`
 
-Adds headers to all requests:
+Adds headers to all responses:
 
 ```js
 headers: {
@@ -132,7 +137,7 @@ headers: {
 
 `boolean` `object`
 
-When using the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History), the `index.html` page will likely have be served in place of any `404` responses. Enable this by passing:
+When using the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History), the `index.html` page will likely have to be served in place of any `404` responses. Enable this by passing:
 
 ```js
 historyApiFallback: true
@@ -182,7 +187,7 @@ Enable webpack's Hot Module Replacement feature:
 hot: true
 ```
 
-?> Add various other steps needed for this to work. (From my experience, and the current docs it looks like other steps are needed here - not like in the cmd line where it's just a flag)
+T> Note that you must also include a `new webpack.HotModuleReplacementPlugin()` to fully enable HMR. See the [HMR concepts page](/concepts/hot-module-replacement) for more information.
 
 
 ## `devServer.hotOnly` - CLI only
@@ -269,7 +274,7 @@ Shows a full-screen overlay in the browser when there are compiler errors or war
 overlay: true
 ```
 
-If you want to show warnings as well as errors: 
+If you want to show warnings as well as errors:
 
 ```js
 overlay: {
@@ -350,6 +355,13 @@ proxy: {
 ```
 
 
+## `devServer.progress` - CLI only
+
+`boolean`
+
+Output running progress to console.
+
+
 ## `devServer.public` - CLI only
 
 `string`
@@ -408,7 +420,7 @@ quiet: true
 
 Here you can access the Express app object and add your own custom middleware to it.
 For example, to define custom handlers for some paths:
-     
+
 ```js
 setup(app){
   app.get('/some/path', function(req, res) {

@@ -28,7 +28,8 @@ The site will update itself as you make changes.
 * webpack should always be written in lower-case letters. Even at the beginning of a sentence. ([source](https://github.com/webpack/media#name))
 * loaders are enclosed in backticks and [kebab-cased](https://en.wikipedia.org/w/index.php?title=Kebab_case): `css-loader`, `ts-loader`, …
 * plugins are enclosed in backticks and [camel-cased](https://en.wikipedia.org/wiki/Camel_case): `BannerPlugin`, `NpmInstallWebpackPlugin`, …
-* Use ES5; ES2015, ES2016, … to refer to the ECMAScript standards
+* Use "webpack 2" to refer to a specific webpack version (~~"webpack v2"~~)
+* Use ES5; ES2015, ES2016, … to refer to the ECMAScript standards (~~ES6~~, ~~ES7~~)
 
 ## Formatting
 

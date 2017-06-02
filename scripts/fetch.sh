@@ -7,16 +7,17 @@ cp -rf ./content/loaders/ ./generated/loaders
 mkdir -p ./generated/plugins
 cp -rf ./content/plugins/ ./generated/plugins
 
-# Fetches github.com/webpack/*-loader repositories
-./scripts/fetch_package_names.js "webpack" "-loader" | ./scripts/fetch_package_files.js "README.md" "./generated/loaders"
-
-# Fetches github.com/webpack/*-webpack-plugin repositories
-./scripts/fetch_package_names.js "webpack" "-webpack-plugin" | ./scripts/fetch_package_files.js "README.md" "./generated/plugins"
-
-# Fetches github.com/webpack-contrib/*-loader repositories
+# Fetch webpack-contrib (and various other) loader repositories
 ./scripts/fetch_package_names.js "webpack-contrib" "-loader" | ./scripts/fetch_package_files.js "README.md" "./generated/loaders"
+./scripts/fetch_package_names.js "babel" "babel-loader" | ./scripts/fetch_package_files.js "README.md" "./generated/loaders"
+./scripts/fetch_package_names.js "postcss" "postcss-loader" | ./scripts/fetch_package_files.js "README.md" "./generated/loaders"
+./scripts/fetch_package_names.js "peerigon" "extract-loader" | ./scripts/fetch_package_files.js "README.md" "./generated/loaders"
 
-# Fetches github.com/webpack-contrib/*-webpack-plugin repositories
+# Fetch webpack-contrib (and various other) plugin repositories
 ./scripts/fetch_package_names.js "webpack-contrib" "-webpack-plugin" | ./scripts/fetch_package_files.js "README.md" "./generated/plugins"
 
-./scripts/fetch_package_names.js "babel" "babel-loader" | ./scripts/fetch_package_files.js "README.md" "./generated/loaders"
+# Fetch sponsors and backers from opencollective
+./scripts/fetch_supporters.js
+
+# Fetch starter kits
+./scripts/fetch_starter_kits.js

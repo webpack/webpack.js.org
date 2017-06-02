@@ -15,10 +15,12 @@ The next section tells you how to install webpack locally in a project.
 
 ### Local Installation
 
-``` bash
-npm install webpack --save-dev
+The latest webpack release is: [![GitHub release](https://img.shields.io/github/release/webpack/webpack.svg?style=flat-square)](https://github.com/webpack/webpack/releases)
 
-npm install webpack@<version> --save-dev
+``` bash
+npm install --save-dev webpack
+
+npm install --save-dev webpack@<version>
 ```
 
 If you are using npm scripts in your project, npm will try to look for webpack installation in your local modules for which this installation technique is useful.
@@ -39,7 +41,7 @@ T> To run the local installation of webpack you can access its bin version as `n
 W> Note that a global webpack installation is not a recommended practice. This locks you down to a specific version of webpack and might fail in projects that use a different version.
 
 ``` bash
-npm install webpack -g
+npm install --global webpack
 ```
 
 The `webpack` command is now available globally.

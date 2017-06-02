@@ -23,6 +23,13 @@ Note that these filenames need to be generated at runtime to send the requests f
 By default `[id].js` is used or a value inferred from [`output.filename`](#output-filename) (`[name]` is replaced with `[id]` or `[id].` is prepended).
 
 
+## `output.chunkLoadTimeout`
+
+`integer`
+
+Number of milliseconds before chunk request expires, defaults to 120 000. This option is supported since webpack 2.6.0.
+
+
 ## `output.crossOriginLoading`
 
 `boolean` `string`
@@ -51,7 +58,7 @@ See [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametempla
 
 `boolean | object`
 
-(Deprecated: Not really used, not really usable, write an issue if you have a other opinion)
+(Deprecated: Not really used, not really usable, write an issue if you have a different opinion)
 
 Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines.
 
@@ -96,21 +103,6 @@ devtoolModuleFilenameTemplate: info => {
 
 If multiple modules would result in the same name, [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolfallbackmodulefilenametemplate) is used instead for these modules.
 
-## `output.hashFunction`
-
-The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`(https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm)] are supported.
-
-## `output.hashDigest`
-
-The hashing algorithm to use, defaults to `'hex'`. All functions from Node.JS' [`hash.digest`(https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding_crypto_createhash_algorithm)] are supported.
-
-## `output.hashDigestLength`
-
-The prefix length of the hash digest to use, defaults to `20`.
-
-## `output.hashSalt`
-
-An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_input_encoding).
 
 ## `output.filename`
 
@@ -173,6 +165,26 @@ The following substitutions are available in template strings (via webpack's int
 The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#output-hashdigestlength) to configure the length globally.
 
 T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
+
+
+## `output.hashDigest`
+
+The hashing algorithm to use, defaults to `'hex'`. All functions from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported.
+
+
+## `output.hashDigestLength`
+
+The prefix length of the hash digest to use, defaults to `20`.
+
+
+## `output.hashFunction`
+
+The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm) are supported.
+
+
+## `output.hashSalt`
+
+An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_input_encoding).
 
 
 ## `output.hotUpdateChunkFilename`
@@ -269,7 +281,8 @@ var MyLibrary = _entry_return_;
 // your users will use your library like:
 MyLibrary.doSomething();
 ```
-(Not specifying a `output.library` will cancel this var configuration)
+
+W> Not specifying a `output.library` will cancel this `"var"` configuration.
 
 
 `libraryTarget: "this"` - When your library is loaded, the **return value of your entry point** will be assigned to this, the meaning of `this` is up to you:
@@ -284,7 +297,7 @@ MyLibrary.doSomething(); //if this is window
 
 
 `libraryTarget: "window"` - When your library is loaded, **the return value of your entry point** will be part `window` object.
- 
+
  ```javascript
  window["MyLibrary"] = _entry_return_;
 
@@ -294,7 +307,7 @@ window.MyLibrary.doSomething();
 
 
 `libraryTarget: "global"` - When your library is loaded, **the return value of your entry point** will be part `global` object.
- 
+
  ```javascript
  global["MyLibrary"] = _entry_return_;
 
@@ -330,7 +343,7 @@ _Wondering the difference between CommonJS and CommonJS2? Check [this](https://g
 
 `libraryTarget: "amd"` - In this case webpack will make your library an AMD module.
 
-But there is a very important pre-requisite, your entry chunk must be defined with the define property, if not, webpack will create the AMD module, but without dependencies. 
+But there is a very important pre-requisite, your entry chunk must be defined with the define property, if not, webpack will create the AMD module, but without dependencies.
 The output will be something like this:
 
 ```javascript
@@ -338,12 +351,12 @@ define([], function() {
 	//what this module returns is what your entry chunk returns
 });
 ```
-But if you download this script, first you may get a error: `define is not defined`, it’s ok! 
-If you are distributing your library with AMD, then your users need to use RequireJS to load it. 
+
+But if you download this script, you may get an error: `define is not defined`, it’s ok! If you are distributing your library with AMD, then your users need to use RequireJS to load it.
 
 Now that you have RequireJS loaded, you can load your library.
 
-But, `require([ _what?_ ])`? 
+But, `require([ _what?_ ])`?
 
 `output.library`!
 
@@ -371,8 +384,8 @@ require(["MyLibrary"], function(MyLibrary){
 });
 ```
 
-`libraryTarget: "umd"` - This is a way for your library to work with all the module definitions (and where aren't modules at all). 
-It will work with CommonJS, AMD and as global variable. You can check the [UMD Repository](https://github.com/umdjs/umd) to know more about it. 
+`libraryTarget: "umd"` - This is a way for your library to work with all the module definitions (and where aren't modules at all).
+It will work with CommonJS, AMD and as global variable. You can check the [UMD Repository](https://github.com/umdjs/umd) to know more about it.
 
 In this case, you need the `library` property to name your module:
 
@@ -384,12 +397,13 @@ output: {
 ```
 
 And finally the output is:
+
 ```javascript
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("MyLibrary", [], factory);
+		define([], factory);
 	else if(typeof exports === 'object')
 		exports["MyLibrary"] = factory();
 	else
@@ -403,7 +417,7 @@ Module proof library.
 
 
 `libraryTarget: "assign"` - Here webpack will blindly generate an implied global.
- 
+
  ```javascript
  MyLibrary = _entry_return_;
  ```
@@ -411,7 +425,7 @@ Be aware that if `MyLibrary` isn't defined earlier your library will be set in g
 
 
 `libraryTarget: "jsonp"` - This will wrap the return value of your entry point into a jsonp wrapper.
- 
+
  ```javascript
  MyLibrary(_entry_return_);
  ```
@@ -500,6 +514,16 @@ publicPath: "../assets/", // relative to HTML page
 publicPath: "", // relative to HTML page (same directory)
 ```
 
+In cases where the `publicPath` of output files can't be known at compile time, it can be left blank and set dynamically at runtime in the entry file using the [free variable](http://stackoverflow.com/questions/12934929/what-are-free-variables) `__webpack_public_path__`.
+
+```javascript
+ __webpack_public_path__ = myRuntimePublicPath
+
+// rest of your application entry
+```
+
+See [this discussion](https://github.com/webpack/webpack/issues/2776#issuecomment-233208623) for more information on `__webpack_public_path__`.
+
 
 ## `output.sourceMapFilename`
 
@@ -509,7 +533,7 @@ This option is only used when [`devtool`](/configuration/devtool) uses a SourceM
 
 Configure how source maps are named. By default `"[file].map"` is used.
 
-Technically the `[name]`, `[id]`, `[hash]` and `[chunkhash]` [placeholders](#output-filename) can be used, if generating a SourceMap for chunks. In addition to that the `[file]` placeholder is replaced with the filename of the original file. It's recommended to only use the `[file]` placeholder, as the other placeholders won't work when generating SourceMaps for non-chunk files. Best leave the default.
+Technically, the `[name]`, `[id]`, `[hash]` and `[chunkhash]` [placeholders](#output-filename) can be used, if generating a SourceMap for chunks. In addition to that, the `[file]` placeholder is replaced with the filename of the original file. It's recommended to only use the `[file]` placeholder, as the other placeholders won't work when generating SourceMaps for non-chunk files. Best leave the default.
 
 
 ## `output.sourcePrefix`
@@ -522,7 +546,7 @@ Change the prefix for each line in the output bundles.
 sourcePrefix: "\t"
 ```
 
-Note by default an empty string is used. Using some kind of indention makes bundles look more pretty, but will cause issues with multi-line string.
+Note by default an empty string is used. Using some kind of indentation makes bundles look more pretty, but will cause issues with multi-line strings.
 
 There is no need to change it.
 
@@ -531,11 +555,33 @@ There is no need to change it.
 
 `boolean`
 
-Tell webpack to remove a module from cache if it throws an exception when it is `require`d. 
+Tell webpack to remove a module from the module instance cache (`require.cache`) if it throws an exception when it is `require`d.
 
 It defaults to `false` for performance reasons.
 
 When set to `false`, the module is not removed from cache, which results in the exception getting thrown only on the first `require` call (making it incompatible with node.js).
+
+For instance, consider `module.js`:
+
+``` js
+throw new Error("error");
+```
+
+With `strictModuleExceptionHandling` set to `false`, only the first `require` throws an exception:
+
+``` js
+// with strictModuleExceptionHandling = false
+require("module") // <- throws
+require("module") // <- doesn't throw
+```
+
+Instead, with `strictModuleExceptionHandling` set to `true`, all `require`s of this module throw an exception:
+
+``` js
+// with strictModuleExceptionHandling = true
+require("module") // <- throws
+require("module") // <- also throw
+```
 
 
 ## `output.umdNamedDefine`

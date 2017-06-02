@@ -58,7 +58,7 @@ import Test1 from 'xyz'; // Success, file.js is resolved and imported
 import Test2 from 'xyz/file.js'; // Error, /path/to/file.js/file.js is invalid
 ```
 
-The following table explains a lot more cases:
+The following table explains other cases:
 
 | `alias:` | `import "xyz"` | `import "xyz/file.js"` |
 | -------- | ---------------- | -------------------------|
@@ -198,7 +198,7 @@ Tell webpack what directories should be searched when resolving modules.
 
 Absolute and relative paths can both be used, but be aware that they will behave a bit differently.
 
-A relative path will be scanned simarly to how Node scans for `node_modules`, by looking through the current directory as well as it's ancestors (i.e. `./node_modules`, `../node_modules`, and on).
+A relative path will be scanned similarly to how Node scans for `node_modules`, by looking through the current directory as well as it's ancestors (i.e. `./node_modules`, `../node_modules`, and on).
 
 With an absolute path, it will only search in the given directory.
 
@@ -242,9 +242,9 @@ This set of options is identical to the `resolve` property set above, but is use
 
 ```js
 {
-    modules: ["web_loaders", "web_modules", "node_loaders", "node_modules"],
-    extensions: [".webpack-loader.js", ".web-loader.js", ".loader.js", ".js"],
-    packageMains: ["webpackLoader", "webLoader", "loader", "main"]
+    modules: ["node_modules"],
+    extensions: [".js", ".json"],
+    mainFields: ["loader", "main"]
 }
 ```
 

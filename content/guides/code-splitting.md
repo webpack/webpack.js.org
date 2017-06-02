@@ -11,9 +11,12 @@ Code splitting is one of the most compelling features of webpack. It allows you 
 
 There are mainly two kinds of code splitting that can be accomplished with webpack:
 
-## Resource splitting for caching and parallel loads
 
-### Vendor code splitting
+## Resource Splitting
+
+Vendor and CSS code splitting methods help with both caching and parallel loading.
+
+### Vendor Code Splitting
 
 A typical application can depend on many third party libraries for framework/functionality needs. Unlike application code, code present in these libraries does not change often.
 
@@ -21,18 +24,18 @@ If we keep code from these libraries in its own bundle, separate from the applic
 
 For this to work, the `[hash]` portion in the vendor filename must remain constant, regardless of application code changes. Learn [how to split vendor/library](/guides/code-splitting-libraries) code using the `CommonsChunkPlugin`.
 
-### CSS splitting
+### CSS Splitting
 
 You might also want to split your styles into a separate bundle, independent from application logic.
 This enhances cacheability of your styles and allows the browser to load the styles in-parallel with your application code, thus preventing a FOUC ([flash of unstyled content](https://en.wikipedia.org/wiki/Flash_of_unstyled_content)).
 
 Learn [how to split CSS](/guides/code-splitting-css) using the `ExtractTextWebpackPlugin`.
 
-## On demand code-splitting
+
+## On Demand Code Splitting
 
 While resource splitting of the previous kind requires the user to specify the split points upfront in the configuration, one can also create dynamic split points in the application code.
 
 This can be used for more granular chunking of code, for example, per our application routes or as per predicted user behaviour. This allows the user to load non-essential assets on demand.
 
-* [Code Splitting - Using `import()`](/guides/code-splitting-import) – proposal for ECMAScript
-* [Code Splitting - Using `require.ensure`](/guides/code-splitting-require) – CommonJS way
+Learn [how to split on demand](/guides/code-splitting-async) using `import()` or `require.ensure()`.

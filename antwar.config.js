@@ -7,6 +7,7 @@ var highlight = require('./utilities/highlight');
 module.exports = {
   template: {
     title: 'webpack',
+    description: 'webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.',
     file: path.join(__dirname, 'template.ejs')
   },
   output: 'build',
@@ -66,9 +67,18 @@ module.exports = {
           /^\.\/.*\.md$/
         );
       }, {
+        'code-splitting-import': '/guides/code-splitting-async',
+        'code-splitting-require': '/guides/code-splitting-async/#require-ensure-',
         'why-webpack': '/guides/comparison'
       }
     ),
+
+    'guides/starter-kits': {
+      title: 'Starter Kits',
+      path() {
+        return require('./components/starter-kits/starter-kits.jsx').default;
+      }
+    },
 
     development: section(
       'Development',
@@ -107,16 +117,24 @@ module.exports = {
       }
     ),
 
-    pluginsapi: section(
-      'Plugins API',
+    'api/plugins': section(
+      'API',
       function() {
         return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/pluginsapi',
+          'json-loader!yaml-frontmatter-loader!./content/api/plugins',
           false,
           /^\.\/.*\.md$/
         );
       }
     ),
+
+    pluginsapi: {
+      redirects: {
+        '': '/api/plugins',
+        'compiler': '/api/plugins/compiler',
+        'template': '/api/plugins/template'
+      }
+    },
 
     loaders: section(
       'Loaders',
@@ -149,6 +167,17 @@ module.exports = {
           /^\.\/.*\.md$/
         );
         return combineContexts(content, generated);
+      }
+    ),
+
+    support: section(
+      'Support',
+      function() {
+        return require.context(
+          'json-loader!yaml-frontmatter-loader!./content/support',
+          false,
+          /^\.\/.*\.md$/
+        );
       }
     ),
 
@@ -232,6 +261,9 @@ function processPage() {
     },
     contributors: function(o) {
       return Array.isArray(o.file.contributors) && o.file.contributors.length && o.file.contributors.slice().sort();
+    },
+    related: function(o) {
+      return Array.isArray(o.file.related) ? o.file.related : []
     }
   };
 }

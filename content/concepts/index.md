@@ -8,9 +8,11 @@ contributors:
   - johnstew
 ---
 
-*webpack* is a _module bundler_ for modern JavaScript applications. It is [incredibly configurable](/configuration), however, there are **Four Core Concepts** we feel you should understand before you get started!
+*webpack* is a _module bundler_ for modern JavaScript applications. When webpack processes your application, it recursively builds a _dependency graph_ that includes every module your application needs, then packages all of those modules into a small number of _bundles_ - often only one - to be loaded by the browser.
 
-As part of your webpack learning journey, we wrote this document aimed to give you a **high-level** overview of these concepts, while still providing links to concept specific use-cases.
+It is [incredibly configurable](/configuration), but to get started you only need to understand **Four Core Concepts**: entry, output, loaders, and plugins.
+
+This document is intended to give a **high-level** overview of these concepts, while providing links to detailed concept specific use-cases.
 
 ## Entry
 
@@ -91,11 +93,11 @@ const config = {
 module.exports = config;
 ```
 
-The configuration above has defined a `rules` property for a single module with two required properties: `test`, and `use`. This tells webpack's compiler the following:
+The configuration above has defined a `rules` property for a single module with two required properties: `test` and `use`. This tells webpack's compiler the following:
 
 > "Hey webpack compiler, when you come across a path that resolves to a '.js' or '.jsx' file inside of a `require()`/`import` statement, **use** the `babel-loader` to transform it before you add it to the bundle".
 
-W> It is important to remember when defining rules in your webpack config, you are defining them under `module.rules`, and not `rules`. However webpack will yell at you when doing this incorrectly.
+W> It is important to remember when defining rules in your webpack config, you are defining them under `module.rules` and not `rules`. However webpack will yell at you when doing this incorrectly.
 
 There are more specific properties to define on loaders that we haven't yet covered.
 

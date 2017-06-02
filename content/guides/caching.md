@@ -12,9 +12,10 @@ To enable long-term caching of static resources produced by webpack:
 2. Extract the webpack manifest into a separate file.
 3. Ensure that the entry point chunk containing the bootstrapping code doesn’t change hash over time for the same set of dependencies.
 
-    For even more optimized setup:
-4. Use compiler stats to get the file names when requiring resources in HTML.
-5. Generate the chunk manifest JSON and inline it into the HTML page before loading resources.
+For an even more optimized setup:
+
+1. Use compiler stats to get the file names when requiring resources in HTML.
+2. Generate the chunk manifest JSON and inline it into the HTML page before loading resources.
 
 
 ## The problem
@@ -64,6 +65,7 @@ vendor.2a6c1fee4b5b0d2c9285.js  2.58 kB       0  [emitted]  vendor
 
 But the problem here is, builds after *any file update* will update all filenames and clients will have to re-download all application code. So how can we guarantee that clients always get the latest versions of assets without re-downloading all of them?
 
+
 ## Generating unique hashes for each file
 
 What if we could produce the same filename, if the contents of the file did not change between builds? For example, it would be unnecessary to re-download a vendor file, when no dependencies have been updated, only application code.
@@ -95,6 +97,7 @@ vendor.50cfb8f89ce2262e5325.js  2.58 kB       0  [emitted]  vendor
 ```
 
 T> Don’t use [chunkhash] in development since this will increase compilation time. Separate development and production configs and use [name].js for development and [name].[chunkhash].js in production.
+
 
 ## Get filenames from webpack compilation stats
 
@@ -145,6 +148,7 @@ A sample output when using `WebpackManifestPlugin` in our config looks like:
   "vendor.js": "vendor.c2330c22cd2decb5da5a.js"
 }
 ```
+
 
 ## Deterministic hashes
 
@@ -229,7 +233,8 @@ module.exports = {
     new WebpackChunkHash(),
     new ChunkManifestPlugin({
       filename: "chunk-manifest.json",
-      manifestVariable: "webpackManifest"
+      manifestVariable: "webpackManifest",
+      inlineManifest: true
     })
   ]
 };
@@ -237,7 +242,7 @@ module.exports = {
 
 Using this config the vendor chunk should not be changing its hash, unless you update its code or dependencies. Here is a sample output for 2 runs with `moduleB.js` being changed between the runs:
 
-```bash
+``` bash
 > node_modules/.bin/webpack
 
 Hash: f0ae5bf7c6a1fd3b2127
@@ -249,7 +254,8 @@ Time: 102ms
              chunk-manifest.json   73 bytes          [emitted]
 manifest.d41d8cd98f00b204e980.js    5.56 kB       2  [emitted]  manifest
 ```
-```bash
+
+``` bash
 > node_modules/.bin/webpack
 
 Hash: b5fb8e138b039ab515f3
@@ -264,11 +270,13 @@ manifest.d41d8cd98f00b204e980.js    5.56 kB       2  [emitted]  manifest
 
 Notice that **vendor chunk has the same filename**, and **so does the manifest** since we’ve extracted the manifest chunk!
 
+
 ## Manifest inlining
 
 Inlining the chunk manifest and webpack runtime (to prevent extra HTTP requests), depends on your server setup. There is a nice [walkthrough for Rails-based projects](https://brigade.engineering/setting-up-webpack-with-rails-c62aea149679). For server-side rendering in Node.js you can use [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools).
 
 T> If your application doesn’t rely on any server-side rendering, it’s often enough to generate a single `index.html` file for your application. To do so, use i.e. [`HtmlWebpackPlugin`](https://github.com/ampedandwired/html-webpack-plugin) in combination with [`ScriptExtHtmlWebpackPlugin`](https://github.com/numical/script-ext-html-webpack-plugin) or [`InlineManifestWebpackPlugin`](https://github.com/szrenwei/inline-manifest-webpack-plugin). It will simplify the setup dramatically.
+
 
 ## References
 

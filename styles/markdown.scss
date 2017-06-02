@@ -21,7 +21,11 @@
     margin:1.5em 0 0.25em;
     color:getColor(fiord);
 
-    &:first-child { margin-top:0; }
+    &:first-child {
+      margin-top: 0;
+      line-height: 1;
+    }
+
     tt, code { font-size: 90%; color: inherit }
   }
 
@@ -98,24 +102,19 @@
     &.tip {
       background-color: #DCF2FD;
       color: #618ca0;
-      .tip-content::before {
-        content: 'ℹ';
-        font-style: normal;
-      }
     }
+
     &.warning {
       background-color: #fbedb7;
       color: #8c8466;
-      .tip-content::before {
-        content: '⚠';
-        font-style: normal;
-      }
     }
+
     &.todo {
       background-color: #fbddcd;
       color: #907a6e;
+
       .tip-content::before {
-        content: '[TODO]';
+        content: '[TODO]: ';
         font-style: normal;
       }
     }
@@ -141,13 +140,14 @@
     &-tr {
       background-color: white;
       margin: 0;
-      padding: 0;
+      padding: 0.25em 0;
       display: block;
       border: 1px solid #cccccc;
       border-bottom: none;
 
       @include break {
         border: none;
+        padding: 0;
         display: table-row;
       }
 
@@ -191,7 +191,6 @@
       &-content {
         display: block;
         width: 60%;
-        padding-left: 10px;
 
         code {
           white-space: normal;

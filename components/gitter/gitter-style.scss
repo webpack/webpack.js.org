@@ -15,6 +15,7 @@
   border-radius: 100%;
   background: #59bcb7;
   cursor: pointer;
+  will-change: transform;
   transition: background 250ms;
 
   &:hover {
@@ -26,10 +27,10 @@
   }
 }
 
-.gitter__icon { 
+.gitter__icon {
   display: block;
   font-size: 1.25em;
   height: 1em;
   overflow: hidden;
-  color: getColor(white); 
+  color: getColor(white);
 }

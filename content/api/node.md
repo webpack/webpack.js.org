@@ -10,12 +10,13 @@ webpack provides a Node.js API which can be used directly in Node.js runtime.
 
 The Node.js API is useful in scenarios in which you need to customize the build or development process since all the reporting and error handling must be done manually and webpack only does the compiling part. For this reason the [`stats`](/configuration/stats) configuration options will not have any effect in the `webpack()` call.
 
+
 ## Installation
 
 To start using webpack Node.js API, first install webpack if you haven’t yet:
 
-```
-npm install webpack --save-dev
+``` bash
+npm install --save-dev webpack
 ```
 
 Then require the webpack module in your Node.js script:
@@ -26,6 +27,7 @@ const webpack = require("webpack");
 // Or if you prefer ES2015:
 import webpack from "webpack";
 ```
+
 
 ## `webpack()`
 
@@ -57,7 +59,9 @@ webpack([
   // ...
 });
 ```
-T> webpack will **not** run the multiple configurations in parallel. Each configuration is only processed after the previous one has finished processing. To have webpack process them in parallel, you can use a third-party solution like [parallel-webpack](https://www.npmjs.com/package/parallel-webpack). 
+
+T> webpack will **not** run the multiple configurations in parallel. Each configuration is only processed after the previous one has finished processing. To have webpack process them in parallel, you can use a third-party solution like [parallel-webpack](https://www.npmjs.com/package/parallel-webpack).
+
 
 ## Compiler Instance
 
@@ -65,6 +69,7 @@ If you don’t pass the `webpack` runner function a callback, it will return a w
 
 * `.run(callback)`
 * `.watch(watchOptions, handler)`
+
 
 ## Run
 
@@ -81,6 +86,7 @@ compiler.run((err, [stats](#stats-object)) => {
   // ...
 });
 ```
+
 
 ## Watching
 
@@ -110,6 +116,9 @@ const watching = compiler.watch({
 
 `Watching` options are [covered in detail here](/configuration/watch/#watchoptions).
 
+W> Filesystem inaccuracies may trigger multiple builds for a single change. So, in the example above, the `console.log` statement may fire multiple times for a single modification. Users should expect this behavior and may check `stats.hash` to see if the file hash has actually changed.
+
+
 ### Close `Watching`
 
 The `watch` method returns a `Watching` instance that exposes `.close(callback)` method. Calling this method will end watching:
@@ -122,36 +131,39 @@ watching.close(() => {
 
 T> It’s not allowed to watch or run again before the existing watcher has been closed or invalidated.
 
+
 ### Invalidate `Watching`
 
-Manually invalidate the current compiling round, but don’t stop watching.
+Using `watching.invalidate`, you can manually invalidate the current compiling round, without stopping the watch process:
 
 ``` js
-watching.invalidate(() => {
-  console.warn("Invalidated.");
-});
+watching.invalidate();
 ```
+
 
 ## Stats Object
 
 The `stats` object that is passed as a second argument of the [`webpack()`](#webpack-) callback, is a good source of information about the code compilation process. It includes:
 
-- Errors and Warnings (if any)
-- Timings
-- Module and Chunk information
-- etc.
+* Errors and Warnings (if any)
+* Timings
+* Module and Chunk information
+* and much more...
 
 The [webpack CLI](/api/cli) uses this information to display a nicely formatted output in your console.
 
 This object exposes these methods:
 
+
 ### `stats.hasErrors()`
 
 Can be used to check if there were errors while compiling. Returns `true` or `false`.
 
+
 ### `stats.hasWarnings()`
 
 Can be used to check if there were warnings while compiling. Returns `true` or `false`.
+
 
 ### `stats.toJson(options)`
 
@@ -160,6 +172,7 @@ Returns compilation information as a JSON object. `options` can be either a stri
 ``` js-with-links
 stats.toJson("minimal"); // [more options: "verbose", etc](/configuration/stats).
 ```
+
 ``` js
 stats.toJson({
   assets: false,
@@ -170,6 +183,7 @@ stats.toJson({
 All available options and presets are described in [Stats documentation](/configuration/stats)
 
 > Here’s [an example of this function’s output](https://github.com/webpack/analyse/blob/master/app/pages/upload/example.json)
+
 
 ### `stats.toString(options)`
 
@@ -205,13 +219,14 @@ webpack({
 });
 ```
 
+
 ## Error Handling
 
 For a good error handling, you need to account for these three types of errors:
 
-- Fatal webpack errors (wrong configuration, etc)
-- Compilation errors (missing modules, syntax errors, etc)
-- Compilation warnings
+* Fatal webpack errors (wrong configuration, etc)
+* Compilation errors (missing modules, syntax errors, etc)
+* Compilation warnings
 
 Here’s an example that does all that:
 
@@ -243,6 +258,7 @@ webpack({
 });
 ```
 
+
 ## Compiling to Memory
 
 webpack writes the output to the specified files on disk. If you want webpack to output them to a different kind of file system (memory, webDAV, etc), you can set the `outputFileSystem` option on the compiler:
@@ -261,4 +277,4 @@ compiler.run((err, stats) => {
 });
 ```
 
-T> The output file system you provide needs to be compatible with Node’s own [`fs`](https://nodejs.org/api/fs.html) module interface. 
+T> The output file system you provide needs to be compatible with Node’s own [`fs`](https://nodejs.org/api/fs.html) module interface.

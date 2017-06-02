@@ -7,6 +7,7 @@ contributors:
 
 A component can lazily load dependencies without its consumer knowing using higher order functions, or a consumer can lazily load its children without its children knowing using a component that takes a function and collection of modules, or some combination of both.
 
+
 ## LazilyLoad Component
 
 Let's have a look at a consumer choosing to lazily load some components. The `importLazy` is simply a function that returns the `default` property, this is for Babel/ES2015 interoperability. If you don't need that you can omit the `importLazy` helper. The `importLazy` function simply returns whatever was exported as `export default` in the target module.
@@ -26,6 +27,7 @@ Let's have a look at a consumer choosing to lazily load some components. The `im
 )}
 </LazilyLoad>
 ```
+
 
 ## Higher Order Component
 
@@ -83,8 +85,12 @@ class LazilyLoad extends React.Component {
   }
 
   componentDidUpdate(previous) {
-    if (this.props.modules === previous.modules) return null;
-    this.load();
+    const shouldLoad = !!Object.keys(this.props.modules).filter((key)=> {
+        return this.props.modules[key] !== previous.modules[key];
+    }).length;
+    if (shouldLoad) {
+        this.load();
+    }
   }
 
   componentWillUnmount() {
@@ -134,14 +140,18 @@ export const importLazy = (promise) => (
 
 export default LazilyLoad;
 ```
+
+
 ## Tips
 
 - By using the [bundle loader](https://github.com/webpack/bundle-loader) we can semantically name chunks to intelligently load groups of code.
 - Make sure if you are using the babel-preset-es2015, to turn modules to false, this will allow webpack to handle modules.
 
+
 ## Dependencies
 
 - ES2015 + JSX
+
 
 ## References
 

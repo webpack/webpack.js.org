@@ -1,6 +1,13 @@
 ---
 title: MinChunkSizePlugin
 contributors:
+sort: 1
 ---
 
-Try to keep the chunk size above a limit.
+Keep chunk size above the specified limit by merging chunks that are smaller than the `minChunkSize`.
+
+``` js
+new webpack.optimize.MinChunkSizePlugin({
+  minChunkSize: 10000 // Minimum number of characters
+})
+```

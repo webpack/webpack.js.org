@@ -5,9 +5,11 @@ contributors:
   - sokra
   - skipjack
   - jouni-kantola
+  - jhnns
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
+
 
 ## `module.noParse`
 
@@ -18,6 +20,7 @@ Prevent webpack from parsing any files matching the given regular expression(s).
 ```js
 noParse: /jquery|lodash/
 ```
+
 
 ## `module.rules`
 
@@ -30,11 +33,12 @@ An array of [Rules](#rule) which are matched to requests when modules are create
 
 A Rule can be separated into three parts — Conditions, Results and nested Rules.
 
+
 ### Rule conditions
 
 There are two input values for the conditions:
 
-1. The resource: An absolute path to the file requested. It's already resolved according the [`resolve` rules](/configuration/resolve).
+1. The resource: An absolute path to the file requested. It's already resolved according to the [`resolve` rules](/configuration/resolve).
 
 2. The issuer: An absolute path to the file of the module which requested the resource. It's the location of the import.
 
@@ -44,6 +48,9 @@ In a Rule the properties [`test`](#rule-test), [`include`](#rule-include), [`exc
 
 When using multiple conditions, all conditions must match.
 
+W> Be careful! The resource is the _resolved_ path of the file, which means symlinked resources are the real path _not_ the symlink location. This is good to remember when using tools that symlink packages (like `npm link`), common conditions like `/node_modules/` may inadvertently miss symlinked files.
+
+
 ### Rule results
 
 Rule results are used only when the Rule condition matches.
@@ -51,16 +58,15 @@ Rule results are used only when the Rule condition matches.
 There are two output values of a Rule:
 
 1. Applied loaders: An array of loaders applied to the resource.
-
 2. Parser options: An options object which should be used to create the parser for this module.
 
 These properties affect the loaders: [`loader`](#rule-loader), [`options`](#rule-options-rule-query), [`use`](#rule-use).
 
 For compatibility also these properties: [`query`](#rule-options-rule-query), [`loaders`](#rule-loaders).
 
-The [`enforce`](#rule-enforce) property affect the loader category. Whether it's an normal, pre- or post- loader.
+The [`enforce`](#rule-enforce) property affects the loader category. Whether it's a normal, pre- or post- loader.
 
-The [`parser`](#rule-parser) property affect the parser options.
+The [`parser`](#rule-parser) property affects the parser options.
 
 
 ## Nested rules
@@ -68,6 +74,7 @@ The [`parser`](#rule-parser) property affect the parser options.
 Nested rules can be specified under the properties [`rules`](#rule-rules) and [`oneOf`](#rule-oneof). 
 
 These rules are evaluated when the Rule condition matches.
+
 
 ## `Rule.enforce`
 
@@ -157,6 +164,11 @@ parser: {
 A [`Condition`](#condition) matched with the resource. See details in [`Rule` conditions](#rule-conditions).
 
 
+## `Rule.resourceQuery`
+
+A [`Condition`](#condition) matched with the resource query. The condition matches against a string that starts with a question mark (`"?exampleQuery"`). See details in [`Rule` conditions](#rule-conditions).
+
+
 ## `Rule.rules`
 
 An array of [`Rules`](#rule) that is also used when the Rule matches.
@@ -205,20 +217,20 @@ Conditions can be one of these:
 * A string: To match the input must start with the provided string. I. e. an absolute directory path, or absolute path to the file.
 * A RegExp: It's tested with the input.
 * A function: It's called with the input and must return a truthy value to match.
-* An array of Conditions: At least one of the Condition must match.
+* An array of Conditions: At least one of the Conditions must match.
 * A object: All properties must match. Each property has a defined behavior.
 
-`{ test: Condition }`: The Condition must match. The convention is the provide a RegExp or array of RegExps here, but it's not enforced.
+`{ test: Condition }`: The Condition must match. The convention is to provide a RegExp or array of RegExps here, but it's not enforced.
 
-`{ include: Condition }`: The Condition must match. The convention is the provide a string or array of strings here, but it's not enforced.
+`{ include: Condition }`: The Condition must match. The convention is to provide a string or array of strings here, but it's not enforced.
 
-`{ exclude: Condition }`: The Condition must NOT match. The convention is the provide a string or array of strings here, but it's not enforced.
+`{ exclude: Condition }`: The Condition must NOT match. The convention is to provide a string or array of strings here, but it's not enforced.
 
 `{ and: [Condition] }`: All Conditions must match.
 
 `{ or: [Condition] }`: Any Condition must match.
 
-`{ not: Condition }`: The Condition must NOT match.
+`{ not: [Condition] }`: All Conditions must NOT match.
 
 **Example:**
 
@@ -254,7 +266,9 @@ For compatibility a `query` property is also possible, which is an alias for the
 }
 ```
 
-Note that webpack need to generate an unique module identifier from resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9%, but may be not unique if you apply the same loaders with different options to the same resource and the options have some stringified values. It also breaks if the options object cannot be stringified (i. e. circular JSON). Because of this you can have a `ident` property in the options object which is used as unique identifier.
+Note that webpack needs to generate a unique module identifier from the resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9% of cases, but may be not unique if you apply the same loaders with different options to the resource and the options have some stringified values. 
+
+It also breaks if the options object cannot be stringified (i.e. circular JSON). Because of this you can have a `ident` property in the options object which is used as unique identifier.
 
 
 ## Module Contexts
@@ -269,7 +283,7 @@ Example for an `expr` dynamic dependency: `require(expr)`.
 
 Example for an `wrapped` dynamic dependency: `require("./templates/" + expr)`.
 
-Here are the available options with their defaults:
+Here are the available options with their [defaults](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js):
 
 ```js
 module: {
@@ -284,6 +298,7 @@ module: {
   wrappedContextCritical: false
   wrappedContextRecursive: true,
   wrappedContextRegExp: /.*/,
+  strictExportPresence: false // since webpack 2.3.0
 }
 ```
 
@@ -294,4 +309,4 @@ A few use cases:
 * Warn for dynamic dependencies: `wrappedContextCritical: true`.
 * `require(expr)` should include the whole directory: `exprContextRegExp: /^\.\//`
 * `require("./templates/" + expr)` should not include subdirectories by default: `wrappedContextRecursive: false`
-
+* `strictExportPresence` makes missing exports an error instead of warning
