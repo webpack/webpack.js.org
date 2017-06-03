@@ -152,15 +152,15 @@ Note this options does not affect output files for on-demand-loaded chunks. For 
 
 The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
 
-| Template    | Description |
-| ----------- | ----------- |
-| [hash]      | The hash of the module identifier |
-| [chunkhash] | The hash of the chunk content |
-| [name]      | The module name |
-| [id]        | The module identifier |
-| [file]      | The module filename |
+| Template    | Description                                                                         |
+| ----------- | ----------------------------------------------------------------------------------- |
+| [hash]      | The hash of the module identifier                                                   |
+| [chunkhash] | The hash of the chunk content                                                       |
+| [name]      | The module name                                                                     |
+| [id]        | The module identifier                                                               |
+| [file]      | The module filename                                                                 |
 | [filebase]  | The module [basename](https://nodejs.org/api/path.html#path_path_basename_path_ext) |
-| [query]     | The module query, i.e., the string following `?` in the filename |
+| [query]     | The module query, i.e., the string following `?` in the filename                    |
 
 The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#output-hashdigestlength) to configure the length globally.
 

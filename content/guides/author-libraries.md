@@ -1,10 +1,10 @@
 ---
 title: Authoring Libraries
 contributors:
-    - pksjce
-    - johnstew
-    - simon04
-    - 5angel
+  - pksjce
+  - johnstew
+  - simon04
+  - 5angel
 ---
 
 webpack is a tool which can be used to bundle application code and also to bundle library code. If you are the author of a JavaScript library and are looking to streamline your bundle strategy then this document will help you.
@@ -186,8 +186,7 @@ module.exports = {
 };
 ```
 
-This makes your library bundle to be available as a global variable when imported.
-To make the library compatible with other environments, add `libraryTarget` property to the config.
+This makes your library bundle to be available as a global variable when imported. To make the library compatible with other environments, add `libraryTarget` property to the config.
 
 __webpack.config.js__
 
