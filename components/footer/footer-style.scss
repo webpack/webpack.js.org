@@ -78,3 +78,13 @@
     color: getColor(mine-shaft);
   }
 }
+
+.footer__license {
+  display: inline-block;
+  height: 25px;
+
+  img {
+    width: auto;
+    height: 100%;
+  }
+}
