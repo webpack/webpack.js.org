@@ -335,10 +335,7 @@ module.exports = _entry_return_;
 require("MyLibrary").doSomething();
 ```
 
-_Wondering the difference between CommonJS and CommonJS2? Check [this](https://github.com/webpack/webpack/issues/1114) out (they are pretty much the same)._
-
-
-`libraryTarget: "commonjs-module"` - Expose it using the `module.exports` object (`output.library` is ignored), `__esModule` is defined (it's threaded as ES2015 Module in interop mode)
+T> Wondering the difference between CommonJS and CommonJS2? Check [this](https://github.com/webpack/webpack/issues/1114) out (they are pretty much the same).
 
 
 `libraryTarget: "amd"` - In this case webpack will make your library an AMD module.
