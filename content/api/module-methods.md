@@ -63,7 +63,7 @@ if ( module.hot ) {
 }
 ```
 
-The compiler treats this as a split point and will split everything from `lodash` into a separate bundle that will be loaded as soon as the `loadLodash` function is called. See the [async code splitting guide](/guides/code-splitting-async) for more information.
+The compiler treats this as a split point and will split everything from `lodash` into a separate bundle. This returns a promise that will resolve to the module once the bundle has been loaded. See the [async code splitting guide](/guides/code-splitting-async) for more information.
 
 
 
