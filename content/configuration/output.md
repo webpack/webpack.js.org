@@ -245,8 +245,6 @@ If using the [`output.library`](#output-library) option, the library name is aut
 
 `string`
 
-Read the [library guide](/guides/author-libraries) for details.
-
 Use `library`, and `libraryTarget` below, when writing a JavaScript library that should export values, which can be used by other code depending on it. Pass a string with the name of the library:
 
 ``` js
@@ -257,6 +255,8 @@ The name is used depending on the value of the [`output.libraryTarget`](#output-
 
 Note that `output.libraryTarget` defaults to `var`. This means if only `output.library` is used it is exported as variable declaration (when used as script tag it's available in the global scope after execution).
 
+T> Read the [authoring libraries guide](/guides/author-libraries) guide for more information on `output.library` as well as `ouput.libraryTarget`.
+
 
 ## `output.libraryTarget`
 
@@ -264,14 +264,9 @@ Note that `output.libraryTarget` defaults to `var`. This means if only `output.l
 
 > Default: `"var"`
 
-Read the [library guide](/guides/author-libraries) for details.
-
 Configure how the library will be exposed. Any one of the following options can be used.
 
-> To give your library a name, set the `output.library` config to it (the examples assume `library: "MyLibrary"`)
-
 The following options are supported:
-
 
 `libraryTarget: "var"` - (default) When your library is loaded, the **return value of your entry point** will be assigned to a variable:
 
@@ -340,22 +335,17 @@ T> Wondering the difference between CommonJS and CommonJS2? Check [this](https:/
 
 `libraryTarget: "amd"` - In this case webpack will make your library an AMD module.
 
-But there is a very important pre-requisite, your entry chunk must be defined with the define property, if not, webpack will create the AMD module, but without dependencies.
-The output will be something like this:
+Note that your entry chunk must be defined with the `define` property, if not, webpack will create the AMD module, but without dependencies. The output will be something like this:
 
 ```javascript
 define([], function() {
-	//what this module returns is what your entry chunk returns
+	// This module returns is what your entry chunk returns
 });
 ```
 
-But if you download this script, you may get an error: `define is not defined`, it’s ok! If you are distributing your library with AMD, then your users need to use RequireJS to load it.
+If you download this script, you may get an error: `define is not defined`, it’s ok! If you are distributing your library with AMD, then your users need to use RequireJS to load it. Once you have RequireJS loaded, you can load your library.
 
-Now that you have RequireJS loaded, you can load your library.
-
-But, `require([ _what?_ ])`?
-
-`output.library`!
+So, with the following configuration...
 
 ```javascript
 output: {
@@ -364,25 +354,16 @@ output: {
 }
 ```
 
-So your module will be like:
+users will be able to call your library like so:
 
 ```javascript
-define("MyLibrary", [], function() {
-	//what this module returns is what your entry chunk returns
+require(['MyLibrary'], function(MyLibrary) {
+	// Do something with the library...
 });
 ```
 
-And you can use it like this:
 
-```javascript
-// And then your users will be able to do:
-require(["MyLibrary"], function(MyLibrary){
-	MyLibrary.doSomething();
-});
-```
-
-`libraryTarget: "umd"` - This is a way for your library to work with all the module definitions (and where aren't modules at all).
-It will work with CommonJS, AMD and as global variable. You can check the [UMD Repository](https://github.com/umdjs/umd) to know more about it.
+`libraryTarget: "umd"` - This is a way for your library to work with all the module definitions (and where aren't modules at all). It will work with CommonJS, AMD and as global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
 
 In this case, you need the `library` property to name your module:
 
