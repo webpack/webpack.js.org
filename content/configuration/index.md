@@ -62,7 +62,6 @@ module.exports = {
     <details><summary>[libraryTarget](/configuration/output#output-librarytarget): "umd", // universal module definition</summary>
         [libraryTarget](/configuration/output#output-librarytarget): "umd2", // universal module definition
         [libraryTarget](/configuration/output#output-librarytarget): "commonjs2", // exported with module.exports
-        [libraryTarget](/configuration/output#output-librarytarget): "commonjs-module", // exports with module.exports
         [libraryTarget](/configuration/output#output-librarytarget): "commonjs", // exported as properties to exports
         [libraryTarget](/configuration/output#output-librarytarget): "amd", // defined with AMD defined method
         [libraryTarget](/configuration/output#output-librarytarget): "this", // property set on this
