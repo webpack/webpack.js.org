@@ -94,7 +94,7 @@ W> Using it asynchronously may not have the expected effect.
 require.resolve(dependency: String)
 ```
 
-Synchronously retrieve a module's ID. The compiler will ensure that the dependency is available in the output bundle. See [`module.id`](/api/module#module.id-commonjs) below.
+Synchronously retrieve a module's ID. The compiler will ensure that the dependency is available in the output bundle. See [`module.id`](/api/module-variables#module-id-commonjs-) for more information.
 
 ``` javascript
 var id = require.resolve("dependency");
