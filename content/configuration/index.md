@@ -305,7 +305,7 @@ module.exports = {
     </details>
     [maxAssetSize](/configuration/performance#performance-maxassetsize): 200000, // int (in bytes),
     [maxEntrypointSize](/configuration/performance#performance-maxentrypointsize): 400000, // int (in bytes)
-    [assetFilter](/configuration/performance#performance-assetfilter): function(assetFilename) { 
+    [assetFilter](/configuration/performance#performance-assetfilter): function(assetFilename) {
       // Function predicate that provides asset filenames
       return assetFilename.endsWith('.css') || assetFilename.endsWith('.js');
     }
@@ -317,7 +317,7 @@ module.exports = {
   [devtool](/configuration/devtool): "hidden-source-map", // SourceMap without reference in original file
   [devtool](/configuration/devtool): "cheap-source-map", // cheap-variant of SourceMap without module mappings
   [devtool](/configuration/devtool): "cheap-module-source-map", // cheap-variant of SourceMap with module mappings
-  [devtool](/configuration/devtool): "eval", // no SourceMap, but named modules. Fastest at the expense of detail. 
+  [devtool](/configuration/devtool): "eval", // no SourceMap, but named modules. Fastest at the expense of detail.
   </details>
   // enhance debugging by adding meta info for the browser devtools
   // source-map most detailed at the expense of build speed.
@@ -384,8 +384,8 @@ module.exports = {
     // ...
   ],
   // list of additional plugins
-  
-  
+
+
   <details><summary>/* Advanced configuration (click to show) */</summary>
 
   [resolveLoader](/configuration/resolve#resolveloader): { /* same as resolve */ }
@@ -393,10 +393,10 @@ module.exports = {
 
   [profile](other-options#profile): true, // boolean
   // capture timing information
-  
+
   [bail](other-options#bail): true, //boolean
   // fail out on the first error instead of tolerating it.
-  
+
   [cache](other-options#cache): false, // boolean
   // disable/enable caching
 
