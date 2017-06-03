@@ -14,14 +14,14 @@ These options configure whether to polyfill or mock certain [Node.js globals](ht
 
 `object`
 
-This is an object where each property is the name of a NodeJS global or module and each value may be one of the following...
+This is an object where each property is the name of a Node global or module and each value may be one of the following...
 
 - `true`: Provide a polyfill.
 - `"mock"`: Provide a mock that implements the expected interface but has little or no fuctionality.
 - `"empty"`: Provide an empty object.
 - `false`: Provide nothing. Code that expects this object to be defined may crash.
 
-W> Not every NodeJS global supports all four options. The compiler will throw an error for property-value combinations that aren't supported (e.g. `process: 'empty'`). See the sections below for more details.
+W> Not every Node global supports all four options. The compiler will throw an error for property-value combinations that aren't supported (e.g. `process: 'empty'`). See the sections below for more details.
 
 These are the defaults:
 
