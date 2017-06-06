@@ -1,56 +1,62 @@
 ---
 title: Installation
+sort: 1
 contributors:
   - pksjce
   - bebraw
   - simon04
-sort: 10
 ---
 
-### Pre-requisites
+This guide goes through the various methods used to install webpack.
 
-Before getting started, make sure you have a fresh version of [Node.js](https://nodejs.org/en/) installed. The current LTS is an ideal starting point. You may run into a variety of issues with the older versions as they may be missing functionality webpack or related packages might need.
 
-The next section tells you how to install webpack locally in a project.
+## Pre-requisites
 
-### Local Installation
+Before we begin, make sure you have a fresh version of [Node.js](https://nodejs.org/en/) installed. The current LTS is an ideal starting point. You may run into a variety of issues with the older versions as they may be missing functionality webpack and/or its related packages require.
 
-The latest webpack release is: [![GitHub release](https://img.shields.io/github/release/webpack/webpack.svg?style=flat-square)](https://github.com/webpack/webpack/releases)
+
+## Local Installation
+
+The latest webpack release is:
+
+[![GitHub release](https://img.shields.io/github/release/webpack/webpack.svg?style=flat-square)](https://github.com/webpack/webpack/releases)
+
+To install the latest release or a specific version, run one of the following commands:
 
 ``` bash
 npm install --save-dev webpack
-
 npm install --save-dev webpack@<version>
 ```
 
-If you are using npm scripts in your project, npm will try to look for webpack installation in your local modules for which this installation technique is useful.
+Installing locally is what we recommend for most projects. This makes it easier to upgrade projects individually when breaking changes are introduced. Typically webpack is run via one or more [NPM scripts]() which will look for a webpack installation in your local `node_modules` directory:
 
 ```json
 "scripts": {
-	"start": "webpack --config mywebpack.config.js"
+	"start": "webpack --config webpack.config.js"
 }
 ```
 
-This is standard and recommended practice.
-
-T> To run the local installation of webpack you can access its bin version as `node_modules/.bin/webpack`
+T> To run the local installation of webpack you can access its bin version as `node_modules/.bin/webpack`.
 
 
-### Global Installation
+## Global Installation
 
-W> Note that a global webpack installation is not a recommended practice. This locks you down to a specific version of webpack and might fail in projects that use a different version.
+The following NPM installation will make `webpack` available globally:
 
 ``` bash
 npm install --global webpack
 ```
 
-The `webpack` command is now available globally.
+W> Note that this is __not a recommended practice__. Installing globally locks you down to a specific version of webpack and could fail in projects that use a different version.
 
 
-### Bleeding Edge
+## Bleeding Edge
 
-If you are enthusiastic about using the latest that webpack has to offer (beware - may be unstable), you can install directly from the webpack repository using
+If you are enthusiastic about using the latest that webpack has to offer, you can install beta versions or even directly from the webpack repository using the following commands:
 
 ``` bash
+npm install webpack@beta
 npm install webpack/webpack#<tagname/branchname>
 ```
+
+W> Take caution when installing these bleeding edge releases! They may still contain bugs and therefore should not be used in production.
