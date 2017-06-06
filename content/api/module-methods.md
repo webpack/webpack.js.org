@@ -63,7 +63,7 @@ if ( module.hot ) {
 }
 ```
 
-The compiler treats this as a split point and will split everything from `lodash` into a separate bundle that will be loaded as soon as the `loadLodash` function is called. See the [async code splitting guide](/guides/code-splitting-async) for more information.
+The compiler treats this as a split point and will split everything from `lodash` into a separate bundle. This returns a promise that will resolve to the module once the bundle has been loaded. See the [async code splitting guide](/guides/code-splitting-async) for more information.
 
 
 
@@ -94,7 +94,7 @@ W> Using it asynchronously may not have the expected effect.
 require.resolve(dependency: String)
 ```
 
-Synchronously retrieve a module's ID. The compiler will ensure that the dependency is available in the output bundle. See [`module.id`](/api/module#module.id-commonjs) below.
+Synchronously retrieve a module's ID. The compiler will ensure that the dependency is available in the output bundle. See [`module.id`](/api/module-variables#module-id-commonjs-) for more information.
 
 ``` javascript
 var id = require.resolve("dependency");
