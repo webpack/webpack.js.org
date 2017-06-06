@@ -9,7 +9,7 @@ contributors:
   - skipjack
 ---
 
-Hot Module Replacement (HMR) exchanges, adds, or removes [modules](/concepts/modules/) while an application is running, without a full reload. This can speed up significantly speed up development in a few ways:
+Hot Module Replacement (HMR) exchanges, adds, or removes [modules](/concepts/modules/) while an application is running, without a full reload. This can significantly speed up development in a few ways:
 
 - Retain application state which is lost during a full reload.
 - Save valuable development time by only updating what's changed.
