@@ -1,10 +1,10 @@
 ---
 title: Authoring Libraries
 contributors:
-    - pksjce
-    - johnstew
-    - simon04
-    - 5angel
+  - pksjce
+  - johnstew
+  - simon04
+  - 5angel
 ---
 
 webpack is a tool which can be used to bundle application code and also to bundle library code. If you are the author of a JavaScript library and are looking to streamline your bundle strategy then this document will help you.
@@ -186,8 +186,7 @@ module.exports = {
 };
 ```
 
-This makes your library bundle to be available as a global variable when imported.
-To make the library compatible with other environments, add `libraryTarget` property to the config.
+This makes your library bundle to be available as a global variable when imported. To make the library compatible with other environments, add `libraryTarget` property to the config.
 
 __webpack.config.js__
 
@@ -197,13 +196,13 @@ module.exports = {
     output: {
         ...
         library: 'webpackNumbers',
-        libraryTarget: 'umd' // Possible value - amd, commonjs, commonjs2, commonjs-module, this, var
+        libraryTarget: 'umd'
     }
     ...
 };
 ```
 
-If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [config reference](/configuration/output).
+If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output). See [`output.libraryTarget`](/configuration/output#output-librarytarget) there for a detailed list of all available options.
 
 
 ### Final Steps

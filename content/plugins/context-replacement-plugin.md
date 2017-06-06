@@ -2,6 +2,9 @@
 title: ContextReplacementPlugin
 contributors:
   - simon04
+related:
+  - title: Issue #2783 - ContextReplacementPlugin Description
+  - url: https://github.com/webpack/webpack/issues/2783#issuecomment-234137265
 ---
 
 *Context* refers to a [require with an expression](/guides/dependency-management/#require-with-expression) such as `require('./locale/' + name + '.json')`. When encountering such an expression, webpack infers the directory (`'./locale/'`) and a regular expression (`/^.*\.json$/`). Since the `name` is not known at compile time, webpack includes every file as module in the bundle.
@@ -20,7 +23,7 @@ new webpack.ContextReplacementPlugin(
 )
 ```
 
-If the resource (directory) matches `resourceRegExp`, the plugin replaces the default resource, recursive flag or generated regular expression with `newContentResource`, `newContentRecursive` or `newContextRegExp` respectively. If `newContentResource` is relative, it is resolved relative to the previous resource. 
+If the resource (directory) matches `resourceRegExp`, the plugin replaces the default resource, recursive flag or generated regular expression with `newContentResource`, `newContentRecursive` or `newContextRegExp` respectively. If `newContentResource` is relative, it is resolved relative to the previous resource.
 
 **Example**
 
@@ -74,8 +77,3 @@ new ContextReplacementPlugin(/selector/, './folder', {
   /* runtime-request: compile-time request */
 })
 ```
-
-
-## References
-
-* https://github.com/webpack/webpack/issues/2783#issuecomment-234137265
