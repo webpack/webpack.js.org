@@ -4,23 +4,19 @@ contributors:
   - gonzoyumo
 ---
 
-## Install
-
-The `NormalModuleReplacementPlugin` is a built-in webpack plugin.
-
-
-## Usage
-
-``` javascript
-new webpack.NormalModuleReplacementPlugin(resourceRegExp, newResource)
-```
-
 The `NormalModuleReplacementPlugin` allows you to replace resources that match `resourceRegExp` with `newResource`. If `newResource` is relative, it is resolved relative to the previous resource. If `newResource` is a function, it is expected to overwrite the request attribute of the supplied resource.
 
 This can be useful for allowing different behaviour between builds.
 
+``` js
+new webpack.NormalModuleReplacementPlugin(
+  resourceRegExp,
+  newResource
+)
+```
 
-## Basic example
+
+## Basic Example
 
 Replace a specific module when building for a [development environment](/guides/production-build).
 
@@ -36,7 +32,7 @@ new webpack.NormalModuleReplacementPlugin(
 ```
 
 
-## Advanced example
+## Advanced Example
 
 Conditional build depending on an [specified environment](/configuration/configuration-types).
 
@@ -52,7 +48,7 @@ module.exports = function(env) {
       })
     ]
   }
-  
+
 }
 ```
 

@@ -299,21 +299,6 @@ function parseCustomQuote(token, match, className) {
     var text = token.text;
 
     if (text.indexOf(match) === 0) {
-      // var icon;
-
-      // TODO: Update icons and styling
-      // switch(className) {
-      //   case 'tip':
-      //     icon = 'icon-info';
-      //     break;
-      //   case 'warning':
-      //     icon = 'icon-warning';
-      //     break;
-      //   default:
-      //     icon = 'icon-chevron-right';
-      //     break;
-      // }
-
       return {
         type: 'html',
         text: (
