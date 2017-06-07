@@ -29,6 +29,7 @@ Now we'll create the following directory structure and contents:
 
 ``` diff
 webpack-demo
+|- package.json
 + |- index.html
 + |- /src
 +   |- index.js
@@ -80,6 +81,7 @@ First we'll tweak our directory structure slightly, separating the "source" code
 
 ``` diff
 webpack-demo
+|- package.json
 + |- dist
 +   |- index.html
 - |- index.html
@@ -136,7 +138,7 @@ bundle.js  544 kB       0  [emitted]  [big]  main
    [0] ./~/lodash/lodash.js 540 kB {0} [built]
    [1] (webpack)/buildin/global.js 509 bytes {0} [built]
    [2] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [3] ./app/index.js 278 bytes {0} [built]
+   [3] ./src/index.js 278 bytes {0} [built]
 ```
 
 T> Output may vary. If the build is successful then you are good to go.
@@ -153,7 +155,16 @@ Note that webpack will not alter any code other than `import` and `export` state
 
 ## Using a Configuration
 
-For a more complex setup, we can use a configuration file that webpack can reference to bundle your code. After you create a `webpack.config.js` file, you can represent the CLI command above with the following config settings.
+For a more complex setup, we can use a webpack [configuration file](/concepts/configuration). Let's add this file and represent the CLI command used above with some basic configuration:
+
+``` diff
+|- package.json
++ |- webpack.config.js
+|- dist
+  |- index.html
+|- /src
+  |- index.js
+```
 
 __webpack.config.js__
 
@@ -161,7 +172,7 @@ __webpack.config.js__
 var path = require('path');
 
 module.exports = {
-  entry: './app/index.js',
+  entry: './src/index.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
@@ -169,7 +180,7 @@ module.exports = {
 };
 ```
 
-This file can be run by webpack as follows.
+Now, let's run the build again but instead using our new configuration:
 
 ```bash
 ./node_modules/.bin/webpack --config webpack.config.js
@@ -182,19 +193,17 @@ bundle.js  544 kB       0  [emitted]  [big]  main
    [0] ./~/lodash/lodash.js 540 kB {0} [built]
    [1] (webpack)/buildin/global.js 509 bytes {0} [built]
    [2] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [3] ./app/index.js 278 bytes {0} [built]
+   [3] ./src/index.js 278 bytes {0} [built]
 ```
 
-T> If a `webpack.config.js` is present, `webpack` command picks it up by default.
+T> If a `webpack.config.js` is present, `webpack` command picks it up by default. We use the `--config` option here only to show that you can pass a config of any name. This will come in useful for more complex configurations that need to be split into multiple files.
 
-T> If you created a successful `dist/bundle.js` file using the 'Creating a bundle' section, delete the `dist` subdirectory to validate output from your `webpack.config.js` file settings.
-
-The config file allows for all the flexibility in using webpack. We can add loader rules, plugins, resolve options and many other enhancements to our bundles using this configuration file.
+A configuration file allows far more flexibility than simple CLI usage. We can specify loader rules, plugins, resolve options and many other enhancements this way. See the [configuration documentation](/configuration) to learn more.
 
 
-## Using webpack with npm
+## NPM Scripts
 
-Given it's not particularly fun to run webpack from the CLI this way, we can set up a little shortcut. Adjust *package.json* like this:
+Given it's not particularly fun to run a local copy of webpack from the CLI, we can set up a little shortcut. Let's adjust our _package.json_ by adding an [NPM script]():
 
 ```json
 {
@@ -206,11 +215,21 @@ Given it's not particularly fun to run webpack from the CLI this way, we can set
 }
 ```
 
-You can now achieve the same as above by using `npm run build` command. npm picks up the scripts through it and patches the environment temporarily so that it contains the bin commands. You will see this convention in a lot of projects out there.
+
+Now the `npm run build` command can be used in place of the longer commands we used earlier. Also note that within `scripts` we can reference local `node_modules` by name instead writing out the entire path. This convention is the standard in most npm-based projects.
 
 T> You can pass custom parameters to webpack by adding two dashes to the `npm run build` command, e.g. `npm run build -- --colors`.
 
 
 ## Conclusion
 
-Now that you have a basic build together, you should dig into the [basic concepts](/concepts) and [configuration](/configuration) of webpack to better understand its design. Also check out the [guides](/guides) to learn how to approach common problems. The [API](/api) section digs into the lower level features.
+Now that you have a basic build together, you should dig into the [basic concepts](/concepts) and [configuration](/configuration) to better understand webpack's design. The [API](/api) section digs into the various interfaces webpack offers. Or, if you'd prefer learning by example, select the next guide from the list and continue building out this little demo we've been working on -- which, if you've been paying attention, should now look like this:
+
+``` diff
+|- package.json
+|- webpack.config.js
+|- dist
+  |- index.html
+|- /src
+  |- index.js
+```
