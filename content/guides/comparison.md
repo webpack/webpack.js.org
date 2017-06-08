@@ -1,6 +1,6 @@
 ---
 title: Bundler Comparison
-sort: 20
+sort: 25
 contributors:
   - pksjce
   - bebraw

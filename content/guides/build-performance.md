@@ -1,6 +1,6 @@
 ---
 title: Build Performance
-sort: 20
+sort: 25
 ---
 
 ?> incremental builds

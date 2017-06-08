@@ -1,6 +1,6 @@
 ---
 title: Code Splitting
-sort: 30
+sort: 14
 contributors:
   - pksjce
   - pastelsky

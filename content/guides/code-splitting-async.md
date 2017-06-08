@@ -1,6 +1,6 @@
 ---
 title: Code Splitting - Async
-sort: 33
+sort: 17
 contributors:
   - simon04
   - levy9527

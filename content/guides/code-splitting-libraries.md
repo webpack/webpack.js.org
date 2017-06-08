@@ -1,6 +1,6 @@
 ---
 title: Code Splitting - Libraries
-sort: 32
+sort: 16
 contributors:
   - pksjce
   - chrisVillanueva
@@ -186,7 +186,7 @@ module.exports = function(env) {
 };
 ```
 
-With the above webpack config, we see three bundles being generated. `vendor`, `main` and `manifest` bundles. 
+With the above webpack config, we see three bundles being generated. `vendor`, `main` and `manifest` bundles.
 
 Using what we have learned so far, we could also achieve the same result with an implicit common vendor chunk.
 
@@ -214,7 +214,7 @@ module.exports = function() {
                 }
             }),
             //CommonChunksPlugin will now extract all the common modules from vendor and main bundles
-            new webpack.optimize.CommonsChunkPlugin({ 
+            new webpack.optimize.CommonsChunkPlugin({
                 name: 'manifest' //But since there are no more common modules between them we end up with just the runtime code included in the manifest file
             })
         ]

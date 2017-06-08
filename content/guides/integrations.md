@@ -1,6 +1,6 @@
 ---
 title: Integrations
-sort: 20
+sort: 25
 contributors:
   - pksjce
   - bebraw

@@ -1,6 +1,6 @@
 ---
 title: Code Splitting - CSS
-sort: 31
+sort: 15
 contributors:
   - pksjce
   - jonwheeler

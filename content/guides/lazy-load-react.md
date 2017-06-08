@@ -1,6 +1,6 @@
 ---
 title: Lazy Loading - React
-sort: 20
+sort: 13
 contributors:
   - iammerrick
   - chrisVillanueva
