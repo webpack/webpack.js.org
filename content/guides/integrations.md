@@ -1,5 +1,6 @@
 ---
-title: Integration with task/test runners
+title: Integrations
+sort: 20
 contributors:
   - pksjce
   - bebraw

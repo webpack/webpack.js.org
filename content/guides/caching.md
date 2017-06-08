@@ -1,9 +1,12 @@
 ---
 title: Caching
-sort: 41
+sort: 9
 contributors:
   - okonet
   - jouni-kantola
+related:
+  - title: Predictable Long Term Caching
+    url: https://medium.com/webpack/predictable-long-term-caching-with-webpack-d3eee1d3fa31
 ---
 
 To enable long-term caching of static resources produced by webpack:

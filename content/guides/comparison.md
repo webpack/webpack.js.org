@@ -1,5 +1,6 @@
 ---
-title: Comparison with other bundlers
+title: Bundler Comparison
+sort: 20
 contributors:
   - pksjce
   - bebraw

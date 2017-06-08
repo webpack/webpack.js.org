@@ -1,6 +1,6 @@
 ---
-title: Building for Production
-sort: 40
+title: Production
+sort: 7
 contributors:
   - henriquea
   - rajagopal4890
