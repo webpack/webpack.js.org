@@ -106,7 +106,7 @@ contentBase: false
 `string`
 
 在**惰性模式**中，此选项可减少编译。
-默认在**惰性模式**，每个请求结果都会产生全新的编译。使用 `filename`，可以只在某个文件时被请求时编译。
+默认在**惰性模式**，每个请求结果都会产生全新的编译。使用 `filename`，可以只在某个文件被请求时编译。
 
 如果 `output.filename` 设置为 `bundle.js` ，`filename` 使用如下：
 
