@@ -55,7 +55,7 @@ Not too bad, huh? Let's test it out using `module.hot.accept`...
 __index.js__
 
 ``` js
-import Lib from './library';
+import Library from './library';
 
 if (module.hot) {
   module.hot.accept('./library', function() {
