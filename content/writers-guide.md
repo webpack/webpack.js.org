@@ -10,10 +10,11 @@ title: Writer's Guide
 
 ## Article Structure
 
-1. Brief introduction - a paragraph or two so you get the basic idea. Tell what you are going to tell.
-2. Main content - tell what you promised to tell.
-3. Conclusion - tell what you told and recap the main points.
-4. References - link to related articles and external resources so people can read and learn more about the topic.
+1. Brief introduction - a paragraph or two so you get the basic idea about - the what and why. 
+2. Structure description for the "Main Content" - the how - how you will tell it in a brief paragraph (e.g. a new plugin or a webpack concept)
+3. Main content - tell what you promised to tell.
+4. Conclusion - tell what you told and recap the main points.
+5. References - link to related articles and external resources so people can read and learn more about the topic.
 
 ## Running the Site
 
