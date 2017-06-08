@@ -26,7 +26,7 @@ W> __HMR__ is not intended for use in production, meaning it should only be used
 Enabling this feature is actually fairly simple. Let's take a look at how to set it up with [webpack-dev-server](https://github.com/webpack/webpack-dev-server)...
 
 ``` js
-const { resolve } = require('path');
+const resolve = require('path');
 const webpack = require('webpack');
 
 module.exports = {
@@ -38,13 +38,13 @@ module.exports = {
 
   output: {
     filename: 'main.js',
-    path: resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   },
 
   devServer: {
     hot: true, // Tell the dev-server we're using HMR
-    contentBase: resolve(__dirname, 'dist'),
+    contentBase: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   }
 };
