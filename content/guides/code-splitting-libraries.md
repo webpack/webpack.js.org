@@ -14,7 +14,7 @@ A typical application uses third party libraries for framework/functionality nee
 
 Bundling application code with third party code would be inefficient. This is because the browser can cache asset files based on the cache header and files can be cached without needing to call the cdn again if its contents don't change. To take advantage of this, we want to keep the hash of the vendor files constant regardless of application code changes.
 
-We can do this only when we separate the bundles for vendor and application code.
+We can do this only when we separate the bundles for vendor and application code. We walk you through with an example file that uses one of the popular dependencies. We show how the typical bundling process happens as we bundle our code with and without a helpful plugin -- `CommonsChunkPlugin` -- that we introduce in the walk-through.
 
 Let's consider a sample application that uses [momentjs](https://www.npmjs.com/package/moment), a commonly used time formatting library.
 
@@ -86,7 +86,7 @@ It is for this reason, that we will need to use the [CommonsChunkPlugin](/plugin
 
 ## `CommonsChunkPlugin`
 
-This is a pretty complex plugin. It fundamentally allows us to extract all the common modules from different bundles and add them to the common bundle. If a common bundle does not exist, then it creates a new one.
+This is a pretty complex plugin. It fundamentally allows us to extract all the common modules from different bundles and adds them to a "common" bundle. If a common bundle does not exist, then it creates a new one.
 
 We can modify our webpack config file to use the `CommonsChunkPlugin` as follows
 
