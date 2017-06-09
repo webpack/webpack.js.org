@@ -6,7 +6,7 @@ edit: https://github.com/webpack-contrib/react-proxy-loader/edit/master/README.m
 ## Install
 
 ```bash
-npm install react-proxy-loader`
+npm install react-proxy-loader
 ```
 
 ## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
