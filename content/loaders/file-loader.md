@@ -101,24 +101,30 @@ Don't hesitate to create a pull request. Every contribution is appreciated. In d
     <tr>
       <td align="center">
         <img width="150" height="150"
-        src="https://avatars.githubusercontent.com/sokra?v=3">
-        <br />
-        <a href="https://github.com/">Tobias Koppers</a>
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
       </td>
       <td align="center">
         <img width="150" height="150"
-        src="https://avatars.githubusercontent.com/SpaceK33z?v=3">
-        <br />
-        <a href="https://github.com/">Kees Kluskens</a>
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
       </td>
       <td align="center">
         <img width="150" height="150"
-        src="https://avatars.githubusercontent.com/mobitar?v=3">
-        <br />
-        <a href="https://github.com/">Mo Bitar</a>
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
       </td>
     </tr>
-  </tbody>
+  <tbody>
 </table>
 
 
@@ -129,17 +135,14 @@ MIT
 [npm]: https://img.shields.io/npm/v/file-loader.svg
 [npm-url]: https://npmjs.com/package/file-loader
 
-[node]: https://img.shields.io/node/v/file-loader.svg
-[node-url]: https://nodejs.org
-
 [deps]: https://david-dm.org/webpack-contrib/file-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/file-loader
 
 [tests]: http://img.shields.io/travis/webpack-contrib/file-loader.svg
 [tests-url]: https://travis-ci.org/webpack-contrib/file-loader
 
-[cover]: https://coveralls.io/repos/github/webpack-contrib/file-loader/badge.svg
-[cover-url]: https://coveralls.io/github/webpack-contrib/file-loader
+[cover]: https://codecov.io/gh/webpack-contrib/file-loader/branch/master/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack-contrib/file-loader
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
