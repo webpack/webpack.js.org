@@ -76,7 +76,7 @@ console.log(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__maths_js__["a" /*
 /***/ })
 ```
 
-When running a [production build](/guides/production-build), `node_modules/.bin/webpack --optimize-minimize main.js dist.min.js`, only the minimized version of `cube` but not `square` remains in the build:
+When running a [production build](/guides/production), `node_modules/.bin/webpack --optimize-minimize main.js dist.min.js`, only the minimized version of `cube` but not `square` remains in the build:
 
 ```javascript
 /* ... */
