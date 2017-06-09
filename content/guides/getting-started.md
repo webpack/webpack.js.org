@@ -17,7 +17,7 @@ As you may already know, webpack is used to compile JavaScript modules. Once [in
 
 ## Basic Setup
 
-First let's create a directory, initialize NPM, and [install webpack locally](/guides/installation#local-installation):
+First let's create a directory, initialize npm, and [install webpack locally](/guides/installation#local-installation):
 
 ``` bash
 mkdir webpack-demo && cd webpack-demo
@@ -41,7 +41,7 @@ __src/index.js__
 function component () {
   var element = document.createElement('div');
 
-  /* lodash is required for the next line to work */
+  // Lodash, currently included via a script, is required for this line to work
   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
   return element;
@@ -72,12 +72,12 @@ There are problems with managing JavaScript projects this way:
 - If a dependency is missing, or included in the wrong order, the application will not function properly.
 - If a dependency is included but not used, the browser will be forced to download unnecessary code.
 
-Let's try using webpack to manage these scripts instead...
+Let's use webpack to manage these scripts instead...
 
 
 ## Creating a Bundle
 
-First we'll tweak our directory structure slightly, separating the "source" code we write and edit (`/src`) from our "distribution" code (`/dist`) which is actually shipped to the browser:
+First we'll tweak our directory structure slightly, separating the "source" code (`/src`) from our "distribution" code (`/dist`). The  "source" code is the what we'll write and edit. The "distribution" code is the minimized and optimized `output` of our build process that will eventually be loaded in the browser:
 
 ``` diff
 webpack-demo
@@ -95,7 +95,7 @@ To bundle the `lodash` dependency with `index.js`, we'll need to install the lib
 npm install --save lodash
 ```
 
-and then import it from our script...
+and then import it in our script...
 
 __src/index.js__
 
@@ -106,7 +106,7 @@ function component () {
 // ...
 ```
 
-We also need to change our update our `<script>` tags to point to the unified bundle:
+Now, since we'll be bundling our scripts, we have to update our `index.html` file. Let's remove the lodash `<script>`, as we now `import` it, and modify the other `<script>` tag to load the bundle, instead of the raw `/src` file:
 
 __dist/index.html__
 
@@ -148,14 +148,14 @@ Open `index.html` in your browser and, if everything went right, you should see 
 
 ## ES2015 Modules
 
-Notice the use of [ES2015 module `import`](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/import) (alias ES2015, *harmony*) in `src/index.js`? Although `import`/`export` statements are not supported in browsers (yet), webpack supports them and will replace those instructions with ES5 compatible wrapper code in the output. Inspect `dist/bundle.js` if you need to assure yourself.
+Although `import` and `export` statements are not supported in most browsers (yet), webpack does support them. Behind the scenes, webpack actually "transpiles" the code so that older browsers can also run it. If you inspect `dist/bundle.js`, you might be able to see how webpack does this, it's quite ingenious!
 
-Note that webpack will not alter any code other than `import` and `export` statements. In case you are using other [ES2015 features](http://es6-features.org/), make sure to use a transpiler such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/). See our [Module API](/api/module-methods) documentation for information on the various module syntaxes supported by webpack.
+Note that webpack will not alter any code other than `import` and `export` statements. If you are using other [ES2015 features](http://es6-features.org/), make sure to use a transpiler such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/). See our [Module API](/api/module-methods) documentation for information on the various module syntaxes supported by webpack.
 
 
 ## Using a Configuration
 
-For a more complex setup, we can use a webpack [configuration file](/concepts/configuration). Let's add this file and represent the CLI command used above with some basic configuration:
+Most projects will need a more complex setup, which is why webpack supports a [configuration file](/concepts/configuration). This is much more efficient than having to type in a lot of commands in the terminal, so let's create one to replace the CLI options used above:
 
 ``` diff
 |- package.json
@@ -203,7 +203,7 @@ A configuration file allows far more flexibility than simple CLI usage. We can s
 
 ## NPM Scripts
 
-Given it's not particularly fun to run a local copy of webpack from the CLI, we can set up a little shortcut. Let's adjust our _package.json_ by adding an [NPM script]():
+Given it's not particularly fun to run a local copy of webpack from the CLI, we can set up a little shortcut. Let's adjust our _package.json_ by adding an [npm script](https://docs.npmjs.com/misc/scripts):
 
 ```json
 {
@@ -215,15 +215,14 @@ Given it's not particularly fun to run a local copy of webpack from the CLI, we 
 }
 ```
 
+Now the `npm run build` command can be used in place of the longer commands we used earlier. Note that within `scripts` we can reference locally installed npm packages by name instead of writing out the entire path. This convention is the standard in most npm-based projects and allows us to directly call `webpack`, instead of `node_modules/webpack/bin/webpack.js`
 
-Now the `npm run build` command can be used in place of the longer commands we used earlier. Also note that within `scripts` we can reference local `node_modules` by name instead writing out the entire path. This convention is the standard in most npm-based projects.
-
-T> You can pass custom parameters to webpack by adding two dashes to the `npm run build` command, e.g. `npm run build -- --colors`.
+T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --colors`.
 
 
 ## Conclusion
 
-Now that you have a basic build together, you should dig into the [basic concepts](/concepts) and [configuration](/configuration) to better understand webpack's design. The [API](/api) section digs into the various interfaces webpack offers. Or, if you'd prefer learning by example, select the next guide from the list and continue building out this little demo we've been working on -- which, if you've been paying attention, should now look like this:
+Now that you have a basic build together, you should dig into the [basic concepts](/concepts) and [configuration](/configuration) to better understand webpack's design. The [API](/api) section digs into the various interfaces webpack offers. Or, if you'd prefer learning by example, select the next guide from the list and continue building out this little demo we've been working on which, if you've been paying attention, should now look like this:
 
 ``` diff
 |- package.json

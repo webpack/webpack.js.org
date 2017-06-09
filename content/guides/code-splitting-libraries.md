@@ -186,7 +186,7 @@ module.exports = function(env) {
 };
 ```
 
-With the above webpack config, we see three bundles being generated. `vendor`, `main` and `manifest` bundles.
+With the above webpack config, we see three bundles being generated: `vendor`, `main` and `manifest`.
 
 Using what we have learned so far, we could also achieve the same result with an implicit common vendor chunk.
 
