@@ -1,29 +1,37 @@
 ---
 title: LoaderOptionsPlugin
 contributors:
-    - johnnyreilly
+  - johnnyreilly
+  - skipjack
 ---
 
-?> Review this content
+The `LoaderOptionsPlugin` is unlike other plugins in that it is built for migration from webpack version 1 to version 2. In webpack v2, the schema for a `webpack.config.js` became stricter; no longer open for extension by other loaders and plugins. The intention is that you pass `options` directly to loaders and plugins (i.e. `options` are __not__ global or shared).
 
-The `LoaderOptionsPlugin` is unlike other plugins.  It exists to help people move from webpack 1 to webpack 2.  With webpack 2 the schema for a `webpack.config.js` became stricter; no longer open for extension by other loaders / plugins.  With webpack 2 the intention is that you pass `options` directly to loaders / plugins. i.e. options are **not** global / shared.
+However, until a loader has been updated to depend upon options being passed directly to them, the `LoaderOptionsPlugin` exists to bridge the gap. You can configure global loader options with this plugin and all loaders will receive these options.
 
-However, until a loader has been updated to depend upon options being passed directly to them, the `LoaderOptionsPlugin` exists to bridge the gap.  You can configure global / shared loader options with this plugin and all loaders will receive these options.
-
-In the future this plugin may be removed.
-
-```javascript
-new webpack.LoaderOptionsPlugin(options)
+``` js
+new webpack.LoaderOptionsPlugin({
+  // Options...
+})
 ```
+
+W> This plugin will be removed in the future as it only exists for migration.
+
+
+## Options
+
+This plugin supports the following options:
 
 * `options.debug` (`boolean`): Whether loaders should be in `debug` mode or not. `debug` will be removed as of webpack 3.
 * `options.minimize` (`boolean`): Where loaders can be switched to minimize mode.
-* `options.options` (`object`): A configuration object that can be used to configure older loaders - this will take the same schema a `webpack.config.js`
+* `options.options` (`object`): A configuration object that can be used to configure older loaders - this will take the same schema a `webpack.config.js`.
+* `options.options.context` (`string`): The context that can be used to configure older loaders.
+* any other options allowed in a `webpack.config.js`....
 
-* `options.options.context` (`string`): The context that can be used to configure older loaders
-* other options as in a `webpack.config.js`....
 
-## Examples
+## Usage
+
+Here's an example of how this plugin might be used:
 
 ```javascript
 new webpack.LoaderOptionsPlugin({

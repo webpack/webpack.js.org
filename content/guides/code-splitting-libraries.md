@@ -154,9 +154,10 @@ module.exports = function() {
 ## Manifest File
 
 But, if we change application code and run `webpack` again, we see that the hash for the vendor file changes. Even though we achieved separate bundles for `vendor` and `main` bundles, we see that the `vendor` bundle changes when the application code changes.
+
 This means that we still don't reap the benefits of browser caching because the hash for vendor file changes on every build and the browser will have to reload the file.
 
-The issue here is that on every build, webpack generates some webpack runtime code, which helps webpack do its job. When there is a single bundle, the runtime code resides in it. But when multiple bundles are generated, the runtime code is extracted into the common module, here the `vendor` file.
+The issue here is that on every build, webpack generates some webpack runtime code, which helps webpack do its job. When there is a single bundle, the runtime code resides in it. But when multiple bundles are generated, the runtime code is extracted into the common module -- the `vendor` file in this example.
 
 To prevent this, we need to extract out the runtime into a separate manifest file. Even though we are creating another bundle, the overhead is offset by the long term caching benefits that we obtain on the `vendor` file.
 
