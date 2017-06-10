@@ -10,7 +10,7 @@ resolver 是一个库(library)，用于帮助找到模块的绝对路径。一�
 
 ```js
 import foo from 'path/to/module'
-// or
+// 或者
 require('path/to/module')
 ```
 
@@ -62,8 +62,8 @@ import "module/lib/file";
 如果路径指向一个文件夹，则采取以下步骤找到具有正确扩展名的正确文件：
 
 * 如果文件夹中包含 `package.json` 文件，则按照顺序查找 [`resolve.mainFields`](/configuration/resolve/#resolve-mainfields) 配置选项中指定的字段。并且 `package.json` 中的第一个这样的字段确定文件路径。
-* If there is no `package.json` or if the main fields do not return a valid path, file names specified in the [`resolve.mainFiles`](/configuration/resolve/#resolve-mainfiles) configuration option are looked for in order, to see if a matching filename exists in the imported/required directory .
-* The file extension is then resolved in a similar way using the `resolve.extensions` option.
+* 如果 `package.json` 文件不存在或者 `package.json` 文件中的 main 字段没有返回一个有效路径，则按照顺序查找 [`resolve.mainFiles`](/configuration/resolve/#resolve-mainfiles) 配置选项中指定的文件名，看是否能在 import/require 目录下匹配到一个存在的文件名。
+* 文件扩展名通过 `resolve.extensions` 选项采用类似的方法进行解析。
 
 webpack 根据构建目标(build target)为这些选项提供了合理的[默认](/configuration/resolve)配置。
 

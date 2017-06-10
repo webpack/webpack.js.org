@@ -48,7 +48,7 @@ module.exports = config;
 
 ### `output.crossOriginLoading`
 
-此选项启用跨域加载(cross-origin loading) chunk。
+此选项可以启用跨域加载(cross-origin loading) chunk。
 
 可选的值有：
 
