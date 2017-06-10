@@ -279,7 +279,7 @@ These options allow webpack to display various [stats](/configuration/stats/) an
 | Shortcut | Replaces                                                         |
 |----------|------------------------------------------------------------------|
 | -d       | --debug --devtool eval-cheap-module-source-map --output-pathinfo |
-| -p       | --optimize-minimize --define process.env.NODE_ENV="production", see [building for production](/guides/production-build)   |
+| -p       | --optimize-minimize --define process.env.NODE_ENV="production", see [building for production](/guides/production) |
 
 
 ### Profiling

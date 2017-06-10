@@ -10,7 +10,7 @@ export default (props) => {
     <footer className="footer">
       <Container className="footer__inner">
         <section className="footer__left">
-          <Link className="footer__link" to="/guides/get-started">Get Started</Link>
+          <Link className="footer__link" to="/guides/getting-started">Get Started</Link>
           <Link className="footer__link" to="/organization">Organization</Link>
           <Link className="footer__link" to="/support">Support</Link>
           <Link className="footer__link" to="/guides/why-webpack#comparison">Comparison</Link>
