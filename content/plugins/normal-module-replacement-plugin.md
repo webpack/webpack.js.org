@@ -4,23 +4,19 @@ contributors:
   - gonzoyumo
 ---
 
-## 安装
-
- `NormalModuleReplacementPlugin` 是webpack的一个内置插件.
-
-
-## 使用
-
-``` javascript
-new webpack.NormalModuleReplacementPlugin(resourceRegExp, newResource)
-```
-
 `NormalModuleReplacementPlugin` 允许你用 `newResource` 替换与 `resourceRegExp` 匹配的资源。如果 `newResource` 是相对路径，它会相对于先前的资源被解析。如果 `newResource` 是函数，它将会覆盖之前被提供资源的请求。
 
 这对于允许在构建中的不同行为是有用的。
 
+``` js
+new webpack.NormalModuleReplacementPlugin(
+  resourceRegExp,
+  newResource
+)
+```
 
-## 基本示例
+
+## Basic Example
 
 在构建[开发环境](/guides/production-build)时替换特定的模块。
 

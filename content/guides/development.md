@@ -123,7 +123,7 @@ T> 如果你的控制台说无法找到该命令，尝试运行 `node_modules/.b
 
 在你的文件中做一点更改并且保存。你应该可以在控制台中看到正在编译。编译完成之后，页面应该会刷新。如果控制台中什么都没发生，你可能需要调整下 [`watchOptions`](/configuration/dev-server#devserver-watchoptions-)。
 
-现在你有了实时重载功能，你甚至可以更进一步：Hot Module Replacement（热模块替换）。这是一个接口，使得你可以替换模块**而不需要刷新页面**。查看如何[配置 HMR](/guides/hmr-react)。
+现在你有了实时重载功能，你甚至可以更进一步：Hot Module Replacement（热模块替换）。这是一个接口，使得你可以替换模块**而不需要刷新页面**。了解更多查看如何[模块热替换指南(Hot Module Replacement](/guides/hot-module-replacement)。
 
 默认情况下 webpack 会使用**inline mode**（内联模式）。这种模式在你的 bundle 中注入客户端（用来 live reloading 和展示构建错误）。Inline 模式下，你会在你的 DevTools 控制台中看到构建错误。
 

@@ -21,7 +21,7 @@ This is `false` if the module is currently executing, and `true` if the sync exe
 
 ### `module.hot` (webpack-specific)
 
-Indicates whether or not Hot Module Replacement is enabled. See [Hot Module Replacement](/concepts/hot-module-replacement).
+Indicates whether or not [Hot Module Replacement](/concepts/hot-module-replacement) is enabled and provides an interface to the process. See the [HMR API page](/api/hot-module-replacement) for details.
 
 
 ### `module.id` (CommonJS)

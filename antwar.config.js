@@ -73,6 +73,13 @@ module.exports = {
       }
     ),
 
+    'guides/starter-kits': {
+      title: 'Starter Kits',
+      path() {
+        return require('./components/starter-kits/starter-kits.jsx').default;
+      }
+    },
+
     development: section(
       '开发',
       function() {

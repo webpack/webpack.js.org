@@ -154,9 +154,10 @@ module.exports = function() {
 ## Manifest 文件
 
 但是，如果我们改变应用的代码并且再次运行 `webpack`，可以看到 vendor 文件的 hash 改变了。即使我们把 `vendor` 和 `main` 的 bundle 分开了，也会发现 `vendor` bundle 会随着应用代码改变。
+
 这意味着我们还是无法从浏览器缓存机制中受益，因为 vendor 的 hash 在每次构建中都会改变，浏览器也必须重新加载文件。
 
-这里的问题在于，每次构建时，webpack 生成了一些 webpack runtime 代码，用来帮助 webpack 完成其工作。当只有一个 bundle 的时候，runtime 代码驻留在其中。但是当生成多个 bundle 的时候，运行时代码被提取到了公共模块中，在这里就是 `vendor` 文件。
+这里的问题在于，每次构建时，webpack 生成了一些 webpack runtime 代码，用来帮助 webpack 完成其工作。当只有一个 bundle 的时候，runtime 代码驻留在其中。但是当生成多个 bundle 的时候，运行时代码被提取到了公共模块中 -- 在此示例中就是指 `vendor` 文件。
 
 为了防止这种情况，我们需要将运行时代码提取到一个单独的 manifest 文件中。尽管我们又创建了另一个 bundle，其开销也被我们在 `vendor` 文件的长期缓存中获得的好处所抵消。
 

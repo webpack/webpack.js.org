@@ -85,7 +85,7 @@ const config = {
   },
   module: {
     rules: [
-      {test: /\.(js|jsx)$/, use: 'babel-loader'}
+      {test: /\.txt$/, use: 'raw-loader'}
     ]
   }
 };
@@ -95,7 +95,7 @@ module.exports = config;
 
 以上配置中，对一个单独的 module 对象定义了 `rules` 属性，里面包含两个必须属性：`test` 和 `use`。这可以告诉 webpack compiler 如下：
 
-> “嘿，webpack compiler，当你碰到「在 `require()`/`import` 语句中被解析为 '.js' 或 '.jsx' 的路径」时，在你把它们添加并打包之前，要先**使用** `babel-loader` 去转换”。
+> “嘿，webpack compiler，当你碰到「在 `require()`/`import` 语句中被解析为 '.txt' 的路径」时，在你把它们添加并打包之前，要先**使用** `raw-loader` 去转换”。
 
 W> 重要的是要记得，在 webpack 配置中定义 loader 时，要定义在 `module.rules` 中，而不是 `rules`。然而，在定义错误时 webpack 会给出严重的警告。
 
@@ -124,7 +124,7 @@ const config = {
   },
   module: {
     rules: [
-      {test: /\.(js|jsx)$/, use: 'babel-loader'}
+      {test: /\.txt$/, use: 'raw-loader'}
     ]
   },
   plugins: [

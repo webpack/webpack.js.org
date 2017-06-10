@@ -11,16 +11,12 @@ related:
     url: https://github.com/webpack/webpack/tree/master/examples/explicit-vendor-chunk/README.md
 ---
 
-## Introduction
-
 The `DllPlugin` and `DllReferencePlugin` provide means to split bundles in a way that can drastically improve build time performance.
-
-[`DllPlugin`](/plugins/dll-plugin#dllplugin) is used in a separate webpack config exclusively to create a dll-only-bundle. It creates a `manifest.json` file, which is used by the [`DllReferencePlugin`](/plugins/dll-plugin#dllreferenceplugin) to map dependencies.
-
-`DllReferencePlugin` is used in the primary webpack config, it references the dll-only-bundle(s) to require pre-built dependencies.
 
 
 ## `DllPlugin`
+
+This plugin is used in a separate webpack config exclusively to create a dll-only-bundle. It creates a `manifest.json` file, which is used by the [`DllReferencePlugin`](/plugins/dll-plugin#dllreferenceplugin) to map dependencies.
 
 * `context` (optional): context of requests in the manifest file (defaults to the webpack context.)
 * `name`: name of the exposed dll function ([TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js): `[hash]` & `[name]` )
@@ -35,7 +31,9 @@ Creates a `manifest.json` which is written to the given `path`. It contains mapp
 Combine this plugin with [`output.library`](/configuration/output/#output-library) option to expose (aka, put into the global scope) the dll function.
 
 
-### `DllReferencePlugin`
+## `DllReferencePlugin`
+
+This plugin is used in the primary webpack config, it references the dll-only-bundle(s) to require pre-built dependencies.
 
 * `context`: (**absolute path**) context of requests in the manifest (or content property)
 * `manifest` (object): an object containing `content` and `name`

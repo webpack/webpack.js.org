@@ -12,6 +12,7 @@ contributors:
   - bring2dip
   - redian
   - skipjack
+  - xgqfrms
 ---
 
 以下文章描述了最佳实践，和在使用 webpack 构建生产环境中的站点或应用程序时，所使用的工具。
@@ -19,7 +20,7 @@ contributors:
 
 ## 自动方式
 
-运行`webpack -p` (也可以运行 `webpack --optimize-minimize --define process.env.NODE_ENV="'production'"`，他们是等效的)。它会执行如下步骤：
+运行`webpack -p` (也可以运行 `webpack --optimize-minimize --define process.env.NODE_ENV="production"`，他们是等效的)。它会执行如下步骤：
 
 - 使用 `UglifyJsPlugin` 进行 JS 文件压缩
 - 运行`LoaderOptionsPlugin`，查看其[文档](/plugins/loader-options-plugin)

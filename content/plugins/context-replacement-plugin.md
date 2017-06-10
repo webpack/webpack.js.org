@@ -2,6 +2,9 @@
 title: ContextReplacementPlugin
 contributors:
   - simon04
+related:
+  - title: Issue #2783 - ContextReplacementPlugin Description
+  - url: https://github.com/webpack/webpack/issues/2783#issuecomment-234137265
 ---
 
 *上下文(Context)* 与一个[带表达式的 require 语句](/guides/dependency-management/#require-with-expression) 相关，例如 `require('./locale/' + name + '.json')`。遇见此类表达式时，webpack 查找目录 (`'./locale/'`) 下符合正则表达式 (`/^.*\.json$/`)的文件。由于 `name` 在编译时(compile time)还是未知的，webpack 会将每个文件都作为模块引入到 bundle 中。
@@ -74,11 +77,6 @@ new ContextReplacementPlugin(/selector/, './folder', {
   /* runtime-request: compile-time request */
 })
 ```
-
-
-## 参考
-
-* https://github.com/webpack/webpack/issues/2783#issuecomment-234137265
 
 ***
 
