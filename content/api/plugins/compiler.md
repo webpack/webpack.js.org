@@ -1,6 +1,8 @@
 ---
 title: Compiler
 sort: 2
+contributors:
+  - rishantagarwal
 ---
 
 The `Compiler` module of webpack is the main engine that creates a compilation instance with all the options passed through webpack CLI or `webpack` api or webpack configuration file.
