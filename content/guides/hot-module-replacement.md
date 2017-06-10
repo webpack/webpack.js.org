@@ -9,6 +9,7 @@ contributors:
   - joshsantos
   - drpicox
   - skipjack
+  - christopher4lis
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -150,6 +151,30 @@ body {
 
 Change the style on `body` to `background: red;` and you should immediately see the page's background color change without a full refresh.
 
+## HMR with External Stylesheets
+
+HMR does not work right out of the box when using in tandem with the extract-text-webpack-plugin. As a result, a bit of extra code has to be added to your entry point to get things working:
+
+```if (module.hot) {
+  const hotEmitter = require("webpack/hot/emitter");
+  const DEAD_CSS_TIMEOUT = 2000;
+
+  hotEmitter.on("webpackHotUpdate", function(currentHash) {
+    document.querySelectorAll("link[href][rel=stylesheet]").forEach((link) => {
+      const nextStyleHref = link.href.replace(/(\?\d+)?$/, `?${Date.now()}`);
+      const newLink = link.cloneNode();
+      newLink.href = nextStyleHref;
+
+      link.parentNode.appendChild(newLink);
+      setTimeout(() => {
+        link.parentNode.removeChild(link);
+      }, DEAD_CSS_TIMEOUT);
+    });
+  })
+}
+```
+
+This code will add stylesheet links to your file automatically and remove old ones after 2 seconds have passed, updating your file without a full page refresh.
 
 ## Other Code and Frameworks
 
