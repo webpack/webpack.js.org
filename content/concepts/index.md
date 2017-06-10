@@ -85,7 +85,7 @@ const config = {
   },
   module: {
     rules: [
-      {test: /\.(js|jsx)$/, use: 'babel-loader'}
+      {test: /\.txt$/, use: 'raw-loader'}
     ]
   }
 };
@@ -95,7 +95,7 @@ module.exports = config;
 
 The configuration above has defined a `rules` property for a single module with two required properties: `test` and `use`. This tells webpack's compiler the following:
 
-> "Hey webpack compiler, when you come across a path that resolves to a '.js' or '.jsx' file inside of a `require()`/`import` statement, **use** the `babel-loader` to transform it before you add it to the bundle".
+> "Hey webpack compiler, when you come across a path that resolves to a '.txt' file inside of a `require()`/`import` statement, **use** the `raw-loader` to transform it before you add it to the bundle".
 
 W> It is important to remember when defining rules in your webpack config, you are defining them under `module.rules` and not `rules`. However webpack will yell at you when doing this incorrectly.
 
@@ -124,7 +124,7 @@ const config = {
   },
   module: {
     rules: [
-      {test: /\.(js|jsx)$/, use: 'babel-loader'}
+      {test: /\.txt$/, use: 'raw-loader'}
     ]
   },
   plugins: [
