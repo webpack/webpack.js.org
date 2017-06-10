@@ -56,10 +56,12 @@ The working of a Compiler can be condensed into the following highlights
  - `new LogPlugin(args).apply(compiler)` registers the plugin to any particular hook event in the `Compiler`'s lifecycle.
  - The `Compiler` exposes a `run` method which kickstarts all compilation work for `webpack`. When that is done, it should call the passed in `callback` function. All the tail end work of logging stats and errors are done in this callback function.
 
+
 ## Watching
 
 However, the `Compiler` supports two flavors of execution. One on watch mode and one on a normal single run.
 While it essentially performs the same functionality while watching, there are some additions to the lifecycle events. This allows `webpack` to have Watch specific plugins.
+
 
 ## MultiCompiler
 
@@ -82,6 +84,7 @@ webpack([config1, config2], (err, stats) => {
   process.stdout.write(stats.toString() + "\n");
 })
 ```
+
 
 ## Event Hooks
 
@@ -113,6 +116,17 @@ This a reference guide to all the event hooks exposed by the `Compiler`.
 | __`failed`__               | Failure of compile                  | `error`              | sync       |
 | __`invalid`__              | After invalidating a watch compile  | `fileName`, `changeTime` | sync       |
 
+
 ## Examples
 
-?> Adds examples of usage for some of the above events
+Here's an example of an asynchronous `emit` event handler:
+
+```javascript
+compiler.plugin("emit", function(compilation, callback) {
+    // Do something async...
+    setTimeout(function() {
+      console.log("Done with async work...");
+      callback();
+    }, 1000);
+});
+```
