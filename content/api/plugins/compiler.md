@@ -115,7 +115,7 @@ This a reference guide to all the event hooks exposed by the `Compiler`.
 
 ## Examples
 
-Example of an `emit` event which asynchronusly calls the `callback` function
+Example of an `emit` event which async call to the `callback` function
 
 __`emit`__ event
 
