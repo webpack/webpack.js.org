@@ -19,7 +19,8 @@ T> New to webpack? Check out our guide to some of webpack's [core concepts](/con
 T> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html) and prefix it with the [__dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) global. This prevents file path issues between operating systems and allows relative paths to work as expected. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more info on POSIX vs. Windows paths.
 
 ## Options
-
+ In the code below, click on the name of the option to get to the detailed documentation.
+ Also, you cam click on the items with arrows to show more examples / advanced options.
 ``` js-with-links-with-details
 const path = require('path');
 
