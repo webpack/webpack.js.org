@@ -1,5 +1,5 @@
 ---
-title: Hot Module Replacement
+title: 模块热替换(Hot Module Replacement)
 contributors:
   - jmreidy
   - jhnns
@@ -10,20 +10,20 @@ contributors:
   - drpicox
   - skipjack
 related:
-  - title: Concepts - Hot Module Replacement
+  - title: 概念 - 模块热替换(Hot Module Replacement)
     url: /concepts/hot-module-replacement
-  - title: API - Hot Module Replacement
+  - title: API - 模块热替换(Hot Module Replacement)
     url: /api/hot-module-replacement
 ---
 
-Hot Module Replacement (or HMR) is one of the most useful features offered by webpack. It allows all kinds of modules to be updated at runtime without the need for a full refresh. This page focuses on __implementation__ while the [concepts page](/concepts/hot-module-replacement) gives more details on how it works and why it's useful.
+模块热替换(Hot Module Replacement 或 HMR)是 webpack 提供的最有用的功能之一。它允许在运行时更新各种模块，而无需进行完全刷新。本页面重点介绍__实现__，而[概念页面](/concepts/hot-module-replacement)提供了更多关于它的工作原理以及为什么它有用的细节。
 
-W> __HMR__ is not intended for use in production, meaning it should only be used in development. See the [building for production guide](/guides/production-build) for more information.
+W> __HMR__ 不适用于生产环境，这意味着它应当只在开发环境使用。更多详细信息，请查看[生产环境构建指南](/guides/production-build)。
 
 
-## Enabling HMR
+## 启用 HMR
 
-Enabling this feature is actually fairly simple. Let's take a look at how to set it up with [webpack-dev-server](https://github.com/webpack/webpack-dev-server)...
+启用此功能实际上相当简单。我们来看看如何使用 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 来设置 HMR……
 
 ``` js
 const path = require('path');
@@ -33,7 +33,7 @@ module.exports = {
   entry: './index.js',
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin() // Enable HMR
+    new webpack.HotModuleReplacementPlugin() // 启用 HMR
   ],
 
   output: {
@@ -43,14 +43,14 @@ module.exports = {
   },
 
   devServer: {
-    hot: true, // Tell the dev-server we're using HMR
+    hot: true, // 告诉 dev-server 我们在使用 HMR
     contentBase: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   }
 };
 ```
 
-Not too bad, huh? Let's test it out using `module.hot.accept`...
+不是太坏，嗯？我们使用 `module.hot.accept` 来测试一下……
 
 __index.js__
 
@@ -70,13 +70,13 @@ __library.js__
 ``` js
 export default {
   log() {
-    // Change this after the server is started to test
+    // 在服务器启动后进行修改以进行测试
     console.log('Initial log...')
   }
 }
 ```
 
-Start changing the `console.log` statement in `library.js`, to `'Second log...'` for example, and you should see the following output in the browser console...
+开始将 `library.js` 中的 `console.log` 语句，改为 `Second log...'`，你应该在浏览器控制台中看到如下输出：
 
 ``` diff
 [HMR] Waiting for update signal from WDS...
@@ -93,9 +93,9 @@ main.js:9468 [WDS] Hot Module Replacement enabled.
 ```
 
 
-## Gotchas
+## 问题
 
-Hot Module Replacement can be tricky. For example, let's say I have the following class:
+热模块更换可能很难掌握。例如，假设我有以下 class 类：
 
 ``` js
 class Logger {
@@ -105,14 +105,14 @@ class Logger {
 }
 ```
 
-Even if the underlying module containing this class is patched with new code, any existing instances of the class still have the old `log` method. Meaning if we changed what that method does, it wouldn't be reflected in those old instances unless we re-instantiate them somehow using `module.hot.accept`.
+即使包含此 class 类的底层模块已使用新代码进行修补(patch)，任何现有的类实例仍然具有旧的 `log` 方法。也就是说，如果我们修改这个方法内部，那么旧的实例就不会被反映出来，除非我们以使用 `module.hot.accept` 的方式重新实例化它们。
 
-This is just one example, but there are many others that can easily trip people up. Luckily, there are a lot of loaders out there, some mentioned below, that will make using this process much easier.
+这只是一个例子，但还有很多其他人可以轻松地让人犯错的地方。幸运的是，有很多 loader 在，一些会在下面提到，这将使这个使用过程变得更容易。
 
 
-## HMR with Stylesheets
+## HMR 修改样式表
 
-Hot Module Replacement with CSS is actually fairly straightforward with the help of the `style-loader`. This loader uses `module.hot.accept` behind the scenes to patch `<style>` tags when CSS dependencies are updated. So, with the following webpack configuration...
+在 `style-loader` 的帮助下，模块热替换(Hot Module Replacement)修改 CSS 实际上相当简单。当更新 CSS 依赖模块时，此 loader 在后台使用 `module.hot.accept` 来修补(patch) `<style>` 标签。所以，可以使用以下 webpack 配置...
 
 ``` js
 module.exports = {
@@ -129,7 +129,7 @@ module.exports = {
 }
 ```
 
-hot loading stylesheets is a breeze...
+热加载样式表轻而易举……
 
 __index.js__
 
@@ -148,16 +148,20 @@ body {
 }
 ```
 
-Change the style on `body` to `background: red;` and you should immediately see the page's background color change without a full refresh.
+将 `body` 上的样式修改为 `background: red;`，您应该可以立即看到页面的背景颜色随之更改，而无需完全刷新。
 
 
-## Other Code and Frameworks
+## 其他代码和框架
 
-There are many other loaders and examples out in the community to make HMR interact smoothly with a variety of frameworks and libraries...
+社区还有许多其他 loader 和示例，可以使 HMR 与各种框架和库(library)平滑地进行交互……
 
-- [React Hot Loader](https://github.com/gaearon/react-hot-loader): Tweak react components in real time.
-- [Vue Loader](https://github.com/vuejs/vue-loader): This loader supports HMR for vue components out of the box.
-- [Elm Hot Loader](https://github.com/fluxxu/elm-hot-loader): Supports HMR for the Elm programming language.
-- [Redux HMR](https://survivejs.com/webpack/appendices/hmr-with-react/#configuring-hmr-with-redux): No loader or plugin necessary! A simple change
+- [React Hot Loader](https://github.com/gaearon/react-hot-loader)：实时调整 react 组件。
+- [Vue Loader](https://github.com/vuejs/vue-loader)：此 loader 支持用于 vue 组件的 HMR，提供开箱即用体验。
+- [Elm Hot Loader](https://github.com/fluxxu/elm-hot-loader)：支持用于 Elm 程序语言的 HMR。
+- [Redux HMR](https://survivejs.com/webpack/appendices/hmr-with-react/#configuring-hmr-with-redux)：没无需 loader 或插件！一个简单的变化
 
-T> If you know of any other loaders or plugins that help with or enhance Hot Module Replacement please submit a pull request to add to this list!
+T> 如果你知道任何其他 loader 或插件，能够有助于或增强模块热替换(Hot Module Replacement)，请提交一个 pull request 以添加到此列表中！
+
+***
+
+> 原文：https://webpack.js.org/guides/hot-module-replacement/
