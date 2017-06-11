@@ -1,65 +1,65 @@
 ---
-title: Hot Module Replacement
+title: 模块热替换(Hot Module Replacement)
 contributors:
   - sokra
   - skipjack
 related:
-  - title: Concepts - Hot Module Replacement
+  - title: 概念 - 模块热替换(Hot Module Replacement)
     url: /concepts/hot-module-replacement
-  - title: Guides - Hot Module Replacement
+  - title: 指南 - 模块热替换(Hot Module Replacement)
     url: /guides/hot-module-replacement
 ---
 
-If [Hot Module Replacement](/concepts/hot-module-replacement) has been enabled via the [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin), it's interface will be exposed under the [`module.hot` property](/api/module-variables#module-hot-webpack-specific-). Typically, users will check to see if the interface is accessible, then begin working with it. As an example, here's how you might `accept` an updated module:
+如果已经通过 [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin) 启用了[模块热替换(Hot Module Replacement)](/concepts/hot-module-replacement)，则它的接口将被暴露在 [`module.hot` 属性](/api/module-variables#module-hot-webpack-specific-)下面。通常，用户将检查界面是否可访问，然后再开始使用它。举个例子，你可以这样 `accept` 一个更新的模块：
 
 ``` js
 if (module.hot) {
   module.hot.accept('./library.js', function() {
-    // Do something with the updated library module...
+    // 使用更新过的 library 模块执行某些操作...
   })
 }
 ```
 
-The following methods are supported...
+支持以下方法……
 
 
 ### `accept`
 
-Accept updates for the given `dependencies` and fire a `callback` to react to those updates.
+接受(accept)给定`依赖模块`的更新，并触发一个 `回调函数` 来对这些更新做出响应。
 
 ``` js
 module.hot.accept(
-  dependencies, // Either a string or an array of strings
-  callback // Function to fire when the dependencies are updated
+  dependencies, // 可以是一个字符串或字符串数组
+  callback // 用于在模块更新后触发的函数
 )
 ```
 
 
 ### `decline`
 
-Reject updates for the given `dependencies` forcing the update to fail with a `'decline'` code.
+拒绝给定`依赖模块`的更新，使用 `'decline'` 方法强制更新失败。
 
 ``` js
 module.hot.decline(
-  dependencies // Either a string or an array of strings
+  dependencies // 可以是一个字符串或字符串数组
 )
 ```
 
 
-### `dispose` (or `addDisposeHandler`)
+### `dispose`（或 `addDisposeHandler`）
 
-Add a handler which is executed when the current module code is replaced. This should be used to destroy any persistent resource you have claimed or created. If you want to transfer state to the updated module, add it to given `data` parameter. This object will be available at `module.hot.data` after the update.
+添加一个处理函数，在当前模块代码被替换时执行。此函数应该用于销毁你声明或创建的任何持久资源。如果要将状态传入到更新过的模块，请添加给定 `data` 参数。更新后，此对象在更新之后可通过 `module.hot.data` 调用。
 
 ``` js
 module.hot.dispose(data => {
-  // Clean up and pass data to the updated module...
+  // 清理并将 data 传递到更新后的模块……
 })
 ```
 
 
 ### `removeDisposeHandler`
 
-Remove the callback added via `dispose` or `addDisposeHandler`.
+删除由 `dispose` 或 `addDisposeHandler` 添加的回调函数。
 
 ``` js
 module.hot.removeDisposeHandler(callback)
@@ -68,69 +68,73 @@ module.hot.removeDisposeHandler(callback)
 
 ### `status`
 
-Retrieve the current status of the hot module replacement process.
+取得模块热替换进程的当前状态。
 
 ``` js
-module.hot.status() // Will return one of the following strings...
+module.hot.status() // 返回以下字符串之一……
 ```
 
 | Status      | Description                                                                            |
 | ----------- | -------------------------------------------------------------------------------------- |
-| idle        | The process is waiting for a call to `check` (see below)                               |
-| check       | The process is checking for updates                                                    |
-| watch       | The process is in watch mode and will be automatically notified about changes          |
-| watch-delay | Delaying for a specified time after the initial change to allow for any other updates  |
-| prepare     | The process is getting ready for the update (e.g. downloading the updated module)      |
-| ready       | The update is prepared and available                                                   |
-| dispose     | The process is calling the `dispose` handlers on the modules that will be replaced     |
-| apply       | The process is calling the `accept` handlers and re-executing self-accepted modules    |
-| abort       | An update was aborted, but the system is still in it's previous state                  |
-| fail        | An update has thrown an exception and the system's state has been compromised          |
+| idle        | 该进程正在等待调用 `check`（见下文） |
+| check       | 该进程正在检查以更新 |
+| watch       | 该进程处于观察模式，并将自动通知有关更改 |
+| watch-delay | 在初始更改后，延迟指定时间，再应用任何更新 |
+| prepare     | 该进程正在准备更新（例如，下载好更新的模块） |
+| ready       | 此更新已准备并可用 |
+| dispose     | 该进程正在调用将被替换模块的 `dispose` 处理函数 |
+| apply       | 该进程正在调用 `accept` 处理函数，并重新执行自我接受(self-accepted)的模块 |
+| abort       | 更新已中止，但系统仍处于以前的状态 |
+| fail        | 更新已抛出异常，系统状态已经损坏 |
 
 
 ### `check`
 
-Test all loaded modules for updates and, if updates exist, `apply` them.
+测试所有加载的模块以进行更新，如果有更新，则应用它们。
 
 ``` js
 module.hot.check(autoApply, (error, outdatedModules) => {
-  // Catch errors and outdated modules...
+  // 捕获错误和超时的模块……
 })
 ```
 
-The `autoApply` parameter can either be a boolean or `options` to pass to the `apply` method when called.
+`autoApply` 参数可以是布尔值，也可以是 `options`，当被调用时可以传递给 `apply` 方法。
 
 
 ### `apply`
 
-Continue the update process (as long as `module.hot.status() === 'ready').
+继续更新进程（只要 `module.hot.status() === 'ready'）。
 
 ``` js
 module.hot.apply(options, (error, outdatedModules) => {
-  // Catch errors and outdated modules...
+  // 捕获错误和超时的模块……
 })
 ```
 
-The optional `options` object can include the following properties:
+可选的 `options` 对象可以是以下属性：
 
-- `ignoreUnaccepted` (boolean): Continue the update process even if some modules are not accepted.
+- `ignoreUnaccepted` (boolean)：即使某些模块不被接受(not accepted)，继续更新进程。
 
 
 ### `addStatusHandler`
 
-Register a function to listen for changes in `status`.
+注册一个函数来监听 `status`的变化。
 
 ``` js
 module.hot.addStatusHandler(status => {
-  // React to the current status...
+  // 响应当前状态……
 })
 ```
 
 
 ### `removeStatusHandler`
 
-Remove a registered status handler.
+移除一个注册的状态处理函数。
 
 ``` js
 module.hot.removeStatusHandler(callback)
 ```
+
+***
+
+> 原文：https://webpack.js.org/api/hot-module-replacement/
