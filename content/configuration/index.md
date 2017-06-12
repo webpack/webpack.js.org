@@ -19,14 +19,13 @@ T> New to webpack? Check out our guide to some of webpack's [core concepts](/con
 T> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html) and prefix it with the [__dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) global. This prevents file path issues between operating systems and allows relative paths to work as expected. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more info on POSIX vs. Windows paths.
 
 ## Options
- In the code below, click on the name of the option to get to the detailed documentation.
- Also, you cam click on the items with arrows to show more examples / advanced options.
+
+Click on the name of each option in the configuration code below to jump to the detailed documentation. Also note that the items with arrows can be expanded to show more examples and, in some cases, more advanced configuration.
+
 ``` js-with-links-with-details
 const path = require('path');
 
 module.exports = {
-  // click on the name of the option to get to the detailed documentation
-  // click on the items with arrows to show more examples / advanced options
 
   <details><summary>[entry](/configuration/entry-context#entry): "./app/entry", // string | object | array</summary>
   [entry](/configuration/entry-context#entry): ["./app/entry1", "./app/entry2"],
