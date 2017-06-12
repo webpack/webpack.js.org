@@ -12,24 +12,24 @@ import './starter-kits-style';
 
 export default props => (
   <Container className="starter-kits page__content">
-    <h1>Starter Kits</h1>
+    <h1>起步配套工具</h1>
 
     <p>
-      The following table contains a curated list of starter kits that can&nbsp;
-      be used as a jumping off point for webpack-based projects. To add a new&nbsp;
-      kit to the list please visit&nbsp;
-      <Link to="https://github.com/ahfarmer/tool-list">this repository</Link>&nbsp;
-      and submit a PR against this file:&nbsp;
+      下面表格包含一个起步配套工具的辅助列表，
+      可以作为基于 webpack 的项目的起点。
+      要向列表添加新的配套工具请访问
+      <Link to="https://github.com/ahfarmer/tool-list">仓库</Link>
+      以及提交一个 PR 来修改这个文件
       <code>generator/starterProjectUrls.js</code>.
     </p>
 
     <blockquote className="warning">
       <div className="tip-content">
-        Boilerplates should be used as <b>Proof of Concepts</b> to help you learn&nbsp;
-        different webpack techniques for various frameworks. Make sure you understand&nbsp;
-        what's going on in them and avoid copy and paste coding. Also note that none&nbsp;
-        of these are officially supported by webpack. If you run into an issue, please&nbsp;
-        report that to the maintainer(s) of the repository.
+        模板应该是用于<b>验证概念</b>，
+        以帮助你学习各种框架的 webpack 不同技术。
+        确保你了解他们在做什么，并避免复制和粘贴制造重复代码。
+        另外还请注意，这些都不是由 webpack 官方支持的。
+        如果遇到问题，请向仓库的维护人员报告。
       </div>
     </blockquote>
 
@@ -37,9 +37,9 @@ export default props => (
       <div className="table-wrap">
         <div className="table-header">
           <div className="table-tr">
-            <div className="table-th">Project Name</div>
-            <div className="table-th">Maintainer</div>
-            <div className="table-th">Tags</div>
+            <div className="table-th">项目名称</div>
+            <div className="table-th">维护人员</div>
+            <div className="table-th">标签</div>
           </div>
         </div>
         <div className="table-body">
