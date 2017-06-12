@@ -208,7 +208,7 @@ If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var
 
 ### Final Steps
 
-[Tweak your production build using webpack](/guides/production-build).
+[Tweak your production build using webpack](/guides/production).
 
 Add the path to your generated bundle as the package's main file in `package.json`
 
