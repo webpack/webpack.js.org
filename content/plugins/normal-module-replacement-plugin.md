@@ -18,7 +18,7 @@ new webpack.NormalModuleReplacementPlugin(
 
 ## Basic Example
 
-Replace a specific module when building for a [development environment](/guides/production-build).
+Replace a specific module when building for a [development environment](/guides/production).
 
 Say you have a config file `some/path/config.development.module.js` and a special version for production in `some/path/config.production.module.js`
 

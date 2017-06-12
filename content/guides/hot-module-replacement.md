@@ -1,5 +1,6 @@
 ---
 title: Hot Module Replacement
+sort: 6
 contributors:
   - jmreidy
   - jhnns
@@ -18,7 +19,7 @@ related:
 
 Hot Module Replacement (or HMR) is one of the most useful features offered by webpack. It allows all kinds of modules to be updated at runtime without the need for a full refresh. This page focuses on __implementation__ while the [concepts page](/concepts/hot-module-replacement) gives more details on how it works and why it's useful.
 
-W> __HMR__ is not intended for use in production, meaning it should only be used in development. See the [building for production guide](/guides/production-build) for more information.
+W> __HMR__ is not intended for use in production, meaning it should only be used in development. See the [building for production guide](/guides/production) for more information.
 
 
 ## Enabling HMR
