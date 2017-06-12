@@ -22,6 +22,7 @@ Each editor has a different way of disabling this. For the most common ones:
 * **IntelliJ** - use search in the preferences to find "safe write" and disable it.
 * **Vim** - add `:set backupcopy=yes` in your settings.
 * **WebStorm** - uncheck `Use "safe write"` in Preferences > Appearance & Behavior > System Settings
+* **VsCode** - uncheck ` "Auto Save"` in File > Auto Save
 
 
 ## Source Maps
