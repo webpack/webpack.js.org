@@ -17,6 +17,14 @@ webpack can compile for multiple environments or _targets_. To understand what a
 
 Tells webpack which environment the application is targeting. If it's a `function`, then it will be called with the compiler as a parameter. If it's a `string`, then the following values are supported via [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js):
 
+You can set it to a function if none of the predefined targets below meet your needs. For example, if you don't want any of the plugins they applied, then you can do:
+
+```js
+const options = {
+  target: () => undefined
+};
+```
+
 | `target`      | Description            |
 | ------------- |------------------------|
 | `async-node`| Compile for usage in a Node.js-like environment (uses `fs` and `vm` to load chunks asynchronously)    |
