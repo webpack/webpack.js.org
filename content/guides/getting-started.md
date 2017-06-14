@@ -59,7 +59,7 @@ __index.html__
     <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
-    <script src="/src/index.js"></script>
+    <script src="src/index.js"></script>
   </body>
 </html>
 ```
@@ -83,8 +83,8 @@ First we'll tweak our directory structure slightly, separating the "source" code
 webpack-demo
 |- package.json
 + |- dist
-+   |- index.html
-- |- index.html
++   |- bundle.js
+|- index.html
 |- /src
   |- index.js
 ```
