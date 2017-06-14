@@ -3,6 +3,7 @@ title: Loaders
 sort: 1
 contributors:
   - simon04
+  - bajras
 ---
 
 webpack enables use of [loaders](/concepts/loaders) to preprocess files. This allows you to bundle any static resource way beyond JavaScript. You can easily write your own loaders using Node.js.
@@ -58,7 +59,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 ## Linting && Testing
 
 * [`mocha-loader`](/loaders/mocha-loader) Tests with [mocha](https://mochajs.org/) (Browser/NodeJS)
-* `eslint-loader` PreLoader for linting code using [ESLint](http://eslint.org/)
+* [`eslint-loader`](/https://github.com/MoOx/eslint-loader) PreLoader for linting code using [ESLint](http://eslint.org/)
 * [`jshint-loader`](/loaders/jshint-loader) PreLoader for linting code using [JSHint](http://jshint.com/about/)
 * `jscs-loader` PreLoader for code style checking using [JSCS](http://jscs.info/)
 * [`coverjs-loader`](/loaders/coverjs-loader) PreLoader to determine the testing coverage using [CoverJS](https://github.com/arian/CoverJS)
