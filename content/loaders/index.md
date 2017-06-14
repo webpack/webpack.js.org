@@ -59,7 +59,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 ## Linting && Testing
 
 * [`mocha-loader`](/loaders/mocha-loader) Tests with [mocha](https://mochajs.org/) (Browser/NodeJS)
-* [`eslint-loader`](/https://github.com/MoOx/eslint-loader) PreLoader for linting code using [ESLint](http://eslint.org/)
+* [`eslint-loader`](https://github.com/MoOx/eslint-loader) PreLoader for linting code using [ESLint](http://eslint.org/)
 * [`jshint-loader`](/loaders/jshint-loader) PreLoader for linting code using [JSHint](http://jshint.com/about/)
 * `jscs-loader` PreLoader for code style checking using [JSCS](http://jscs.info/)
 * [`coverjs-loader`](/loaders/coverjs-loader) PreLoader to determine the testing coverage using [CoverJS](https://github.com/arian/CoverJS)
