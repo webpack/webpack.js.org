@@ -26,7 +26,6 @@ Click on the name of each option in the configuration code below to jump to the 
 const path = require('path');
 
 module.exports = {
-
   <details><summary>[entry](/configuration/entry-context#entry): "./app/entry", // string | object | array</summary>
   [entry](/configuration/entry-context#entry): ["./app/entry1", "./app/entry2"],
   [entry](/configuration/entry-context#entry): {
