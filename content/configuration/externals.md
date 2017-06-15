@@ -38,7 +38,7 @@ externals: {
 }
 ```
 
-This leaves any dependant modules unchanged, i.e. the code shown below will still work:
+This leaves any dependent modules unchanged, i.e. the code shown below will still work:
 
 ```javascript
 import $ from 'jquery';
