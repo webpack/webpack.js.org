@@ -84,7 +84,8 @@ webpack-demo
 |- package.json
 + |- dist
 +   |- bundle.js
-|- index.html
++   |- index.html
+- |- index.html
 |- /src
   |- index.js
 ```
