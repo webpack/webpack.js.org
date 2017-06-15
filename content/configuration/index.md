@@ -20,13 +20,12 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 
 ## Options
 
+Click on the name of each option in the configuration code below to jump to the detailed documentation. Also note that the items with arrows can be expanded to show more examples and, in some cases, more advanced configuration.
+
 ``` js-with-links-with-details
 const path = require('path');
 
 module.exports = {
-  // click on the name of the option to get to the detailed documentation
-  // click on the items with arrows to show more examples / advanced options
-
   <details><summary>[entry](/configuration/entry-context#entry): "./app/entry", // string | object | array</summary>
   [entry](/configuration/entry-context#entry): ["./app/entry1", "./app/entry2"],
   [entry](/configuration/entry-context#entry): {
