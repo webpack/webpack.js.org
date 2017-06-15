@@ -1,5 +1,6 @@
 ---
 title: Typescript
+sort: 18
 contributors:
   - morsdyce
   - kkamali
@@ -21,7 +22,7 @@ To start using webpack with Typescript you need a couple of things:
 
 You can install the TypeScript compiler and loader by running:
 
- ``` bash 
+ ``` bash
  npm install --save-dev typescript ts-loader
  ```
 
@@ -96,7 +97,7 @@ Now we need to tell webpack to extract these source maps and into our final bund
 __webpack.config.js__
 
 ```js
-module.exports = { 
+module.exports = {
  devtool: 'inline-source-map',
  // Remaining configuration...
 };
