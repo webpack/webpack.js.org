@@ -1,7 +1,7 @@
 ---
 title: webpack
 ---
-## Write your code.
+## 編寫程式碼
 
 <div class="homepage__wrap">
 <div class="homepage__left">
@@ -27,7 +27,7 @@ export default function bar() {
 </div>
 </div>
 
-## Bundle with webpack.
+## 使用 Webpack 包裝
 
 <div class="homepage__wrap">
 <div class="homepage__left">
@@ -64,5 +64,5 @@ Then run `webpack` on the command-line to create `bundle.js`.
 </div>
 </div>
 
-## It's that simple.
-## [Get Started](/guides/get-started)
+## 這就是這麼簡單
+## [開始使用](/guides/get-started)

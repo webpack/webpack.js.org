@@ -1,5 +1,5 @@
 ---
-title: Getting Started
+title: 開始使用
 sort: 0
 contributors:
   - bebraw
@@ -12,7 +12,7 @@ contributors:
   - jecoopr
 ---
 
-webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/guides/installation).
+webpack 是一個在你的應用程式中建構 JavaScript 模組的工具。按照[安裝指示](/guides/installation)後，可以從 [cli](/api/cli) 或 [api](/api/node) 來開始使用 `webpack`。
 webpack simplifies your workflow by quickly constructing a dependency graph of your application and bundling them in the right order. webpack can be configured to customise optimisations to your code, to split vendor/css/js code for production, run a development server that hot-reloads your code without page refresh and many such cool features. Learn more about [why you should use webpack](/guides/why-webpack).
 
 ## Creating a bundle

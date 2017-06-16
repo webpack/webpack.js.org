@@ -6,15 +6,15 @@ import Logo from '../logo/logo';
 // TODO: Maybe by updating the routing scheme later on we can avoid hardcoding this?
 let Sections = [
   {
-    title: 'Concepts',
+    title: '概念',
     url: 'concepts'
   },
   {
-    title: 'Guides',
+    title: '指南',
     url: 'guides'
   },
   {
-    title: 'Documentation',
+    title: '文件',
     url: 'configuration',
     children: [
       { title: 'CLI', url: 'api/cli' },
@@ -26,15 +26,15 @@ let Sections = [
     ]
   },
   {
-    title: 'Donate',
+    title: '捐款',
     url: '//opencollective.com/webpack'
   },
   {
-    title: 'Blog',
+    title: '部落格',
     url: '//medium.com/webpack'
   },
   {
-      title: 'Support',
+      title: '支援',
       url: 'support'
   }
 ];
@@ -77,7 +77,7 @@ export default class Navigation extends React.Component {
             <input
               type="text"
               className="navigation__search-input"
-              placeholder="Search documentation…"
+              placeholder="搜尋文件…"
               onBlur={ this._toggleSearch.bind(this) } />
             <button
               className="navigation__search-icon icon-magnifying-glass"

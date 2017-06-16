@@ -27,14 +27,14 @@ export default props => {
 
       <div className="splash__section">
         <Container>
-          <h1>Support the Team</h1>
+          <h1>支援團隊</h1>
 
-          <p>Through contributions, donations, and sponsorship, you allow webpack to thrive. Your donations directly support office hours, continued enhancements, and most importantly, great documentation and learning material!</p>
+          <p>通過您的貢獻、捐款或者贊助，webpack 將獲得繁榮發展。你的捐助直接用於支持我們付出工作、持續改進，最加重要的是有助於我們提供優秀的文件和資料！</p>
 
-          <h2>Sponsors</h2>
+          <h2>贊助商</h2>
           <Support number={ 40 } type="sponsor" />
 
-          <h2>Backers</h2>
+          <h2>支持者</h2>
           <Support number={ 130 } type="backer" />
         </Container>
       </div>
