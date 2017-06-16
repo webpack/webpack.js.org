@@ -42,7 +42,7 @@ module.exports = {
 
     'get-started': {
       redirects: {
-        '': '/guides/get-started',
+        '': '/guides/getting-started',
         'install-webpack': '/guides/installation',
         'why-webpack': '/guides/why-webpack',
       }

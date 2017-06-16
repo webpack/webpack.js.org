@@ -1,5 +1,6 @@
 ---
 title: 管理资源(Asset Management)
+sort: 3
 contributors:
   - skipjack
   - michael-ciniawsky

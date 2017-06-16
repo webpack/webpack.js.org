@@ -10,7 +10,7 @@ export default (props) => {
     <footer className="footer">
       <Container className="footer__inner">
         <section className="footer__left">
-          <Link className="footer__link" to="/guides/get-started">起步</Link>
+          <Link className="footer__link" to="/guides/getting-started">起步</Link>
           <Link className="footer__link" to="/organization">组织</Link>
           <Link className="footer__link" to="/contribute">支持</Link>
           <Link className="footer__link" to="/guides/why-webpack#comparison">比较</Link>

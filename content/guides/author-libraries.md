@@ -1,5 +1,6 @@
 ---
 title: 创建 Library
+sort: 12
 contributors:
   - pksjce
   - johnstew
@@ -207,7 +208,7 @@ module.exports = {
 
 ### 最终步骤
 
-[使用 webpack 打包你的生产代码](/guides/production-build)。
+[使用 webpack 打包你的生产代码](/guides/production)。
 
 在 `package.json` 中指定主文件(main file)为你生成的文件路径。
 

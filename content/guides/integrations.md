@@ -1,5 +1,6 @@
 ---
-title: 与任务/测试运行器集成(Integration with task/test runners)
+title: 集成(Integrations)
+sort: 25
 contributors:
   - pksjce
   - bebraw

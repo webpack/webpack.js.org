@@ -1,5 +1,6 @@
 ---
 title: 管理构建文件
+sort: 4
 contributors:
   - skipjack
 ---

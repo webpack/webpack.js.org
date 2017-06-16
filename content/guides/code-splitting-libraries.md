@@ -1,6 +1,6 @@
 ---
 title: 代码分离 - Libraries
-sort: 32
+sort: 16
 contributors:
   - pksjce
   - chrisVillanueva
@@ -186,7 +186,7 @@ module.exports = function(env) {
 };
 ```
 
-使用上面的 webpack 配置，我们看到生成了三个bundle：`vendor`、`main`和`manifest`。
+使用上面的 webpack 配置，我们看到生成了三个 bundle：`vendor`、`main`和 `manifest`。
 
 使用我们迄今为止所学到的知识，我们也可以通过一个隐含的通用 vendor chunk 实现相同的结果。
 

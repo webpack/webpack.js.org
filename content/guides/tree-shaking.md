@@ -1,5 +1,6 @@
 ---
 title: Tree Shaking
+sort: 8
 contributors:
   - simon04
   - zacanger
@@ -75,7 +76,7 @@ console.log(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__maths_js__["a" /*
 /***/ })
 ```
 
-当执行一次[生产环境构建](/guides/production-build) `node_modules/.bin/webpack --optimize-minimize main.js dist.min.js` 后，打包出来的代码只包含 `cube` 方法，并没有 `square` 方法：
+当执行一次[生产环境构建](/guides/production) `node_modules/.bin/webpack --optimize-minimize main.js dist.min.js` 后，打包出来的代码只包含 `cube` 方法，并没有 `square` 方法：
 
 ```javascript
 /* ... */
