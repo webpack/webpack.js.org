@@ -22,7 +22,7 @@ npm install uglifyjs-webpack-plugin --save-dev
 If your minification target is ES6:
 
 ```bash
-yarn add git://github.com/mishoo/UglifyJS2#harmony --dev
+yarn add git://github.com/mishoo/UglifyJS2#harmony-v2.8.22 --dev
 ```
 
 If your minification target is ES5:
