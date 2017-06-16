@@ -1,5 +1,6 @@
 ---
-title: Improving Build Performance
+title: Build Performance
+sort: 25
 ---
 
 ?> incremental builds
