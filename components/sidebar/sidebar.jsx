@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import SidebarItem from '../sidebar-item/sidebar-item';
+import testPassiveListeners from '../../utilities/test-passive-listeners';
+
+const supportsPassive = testPassiveListeners() !== false;
 
 export default class Sidebar extends Component {
   constructor(props) {
@@ -65,7 +68,7 @@ export default class Sidebar extends Component {
     document.addEventListener(
       'scroll',
       this._recalculate.bind(this),
-      { passive: true }
+      supportsPassive ? { passive: true } : false
     );
   }
 

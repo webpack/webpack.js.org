@@ -1,4 +1,7 @@
 import React from 'react';
+import testPassiveListeners from '../../utilities/test-passive-listeners';
+
+const supportsPassive = testPassiveListeners() !== false;
 
 export default class Gitter extends React.Component {
   constructor(props) {
@@ -14,8 +17,8 @@ export default class Gitter extends React.Component {
 
     return (
       <span className="gitter">
-        <div 
-          className="gitter__button js-gitter-toggle-chat-button" 
+        <div
+          className="gitter__button js-gitter-toggle-chat-button"
           style={{
             marginBottom: offset
           }}>
@@ -34,7 +37,7 @@ export default class Gitter extends React.Component {
     document.addEventListener(
       'scroll',
       this._recalculate.bind(this),
-      { passive: true }
+      supportsPassive ? { passive: true } : false
     );
   }
 
