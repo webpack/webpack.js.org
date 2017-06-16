@@ -64,7 +64,8 @@ export default class Sidebar extends Component {
 
     document.addEventListener(
       'scroll',
-      this._recalculate.bind(this)
+      this._recalculate.bind(this),
+      { passive: true }
     );
   }
 
