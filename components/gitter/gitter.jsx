@@ -32,14 +32,15 @@ export default class Gitter extends React.Component {
     );
 
     document.addEventListener(
-      'scroll', 
-      this._recalculate.bind(this)
+      'scroll',
+      this._recalculate.bind(this),
+      { passive: true }
     );
   }
 
   componentWillUnmount() {
     document.removeEventListener(
-      'scroll', 
+      'scroll',
       this._recalculate.bind(this)
     );
   }
