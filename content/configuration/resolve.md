@@ -56,8 +56,8 @@ alias: {
 which would yield these results:
 
 ```js
-import Test1 from 'xyz'; // Success, file.js is resolved and imported
-import Test2 from 'xyz/file.js'; // Error, /path/to/file.js/file.js is invalid
+import Test1 from 'xyz'; // Exact match, so path/to/file.js is resolved and imported
+import Test2 from 'xyz/file.js'; // Not an exact match, normal resolution takes place
 ```
 
 The following table explains other cases:
