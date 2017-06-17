@@ -12,13 +12,15 @@ contributors:
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail.
 Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
 
+
 ## `resolve`
 
 `object`
 
 Configure how modules are resolved. For example, when calling `import "lodash"` in ES2015, the `resolve` options can change where webpack goes to look for `"lodash"` (see [`modules`](#resolve-modules)).
 
-## `resolve.alias`
+
+### `resolve.alias`
 
 `object`
 
@@ -60,29 +62,29 @@ import Test2 from 'xyz/file.js'; // Error, /path/to/file.js/file.js is invalid
 
 The following table explains other cases:
 
-| `alias:` | `import "xyz"` | `import "xyz/file.js"` |
-| -------- | ---------------- | -------------------------|
-| `{}` | `/abc/node_modules/xyz/index.js` | `/abc/node_modules/xyz/file.js` |
-| `{ xyz: "/abs/path/to/file.js" }` | `/abs/path/to/file.js` | error |
-| `{ xyz$: "/abs/path/to/file.js" }` | `/abs/path/to/file.js` | `/abc/node_modules/xyz/file.js` |
-| `{ xyz: "./dir/file.js" }` | `/abc/dir/file.js` | error |
-| `{ xyz$: "./dir/file.js" }` | `/abc/dir/file.js` | `/abc/node_modules/xyz/file.js` |
-| `{ xyz: "/some/dir" }` | `/some/dir/index.js` | `/some/dir/file.js` |
-| `{ xyz$: "/some/dir" }` | `/some/dir/index.js` | `/abc/node_modules/xyz/file.js` |
-| `{ xyz: "./dir" }` | `/abc/dir/index.js` | `/abc/dir/file.js` |
-| `{ xyz: "modu" }` | `/abc/node_modules/modu/index.js` | `/abc/node_modules/modu/file.js` |
-| `{ xyz$: "modu" }` | `/abc/node_modules/modu/index.js` | `/abc/node_modules/xyz/file.js` |
-| `{ xyz: "modu/some/file.js" }` | `/abc/node_modules/modu/some/file.js` | error |
-| `{ xyz: "modu/dir" }` | `/abc/node_modules/modu/dir/index.js` | `/abc/node_modules/dir/file.js` |
-| `{ xyz: "xyz/dir" }` | `/abc/node_modules/xyz/dir/index.js` | `/abc/node_modules/xyz/dir/file.js` |
-| `{ xyz$: "xyz/dir" }` | `/abc/node_modules/xyz/dir/index.js` | `/abc/node_modules/xyz/file.js` |
+| `alias:`                            | `import "xyz"`                        | `import "xyz/file.js"`              |
+| ----------------------------------- | ------------------------------------- | ----------------------------------- |
+| `{}`                                | `/abc/node_modules/xyz/index.js`      | `/abc/node_modules/xyz/file.js`     |
+| `{ xyz: "/abs/path/to/file.js" }`   | `/abs/path/to/file.js`                | error                               |
+| `{ xyz$: "/abs/path/to/file.js" }`  | `/abs/path/to/file.js`                | `/abc/node_modules/xyz/file.js`     |
+| `{ xyz: "./dir/file.js" }`          | `/abc/dir/file.js`                    | error                               |
+| `{ xyz$: "./dir/file.js" }`         | `/abc/dir/file.js`                    | `/abc/node_modules/xyz/file.js`     |
+| `{ xyz: "/some/dir" }`              | `/some/dir/index.js`                  | `/some/dir/file.js`                 |
+| `{ xyz$: "/some/dir" }`             | `/some/dir/index.js`                  | `/abc/node_modules/xyz/file.js`     |
+| `{ xyz: "./dir" }`                  | `/abc/dir/index.js`                   | `/abc/dir/file.js`                  |
+| `{ xyz: "modu" }`                   | `/abc/node_modules/modu/index.js`     | `/abc/node_modules/modu/file.js`    |
+| `{ xyz$: "modu" }`                  | `/abc/node_modules/modu/index.js`     | `/abc/node_modules/xyz/file.js`     |
+| `{ xyz: "modu/some/file.js" }`      | `/abc/node_modules/modu/some/file.js` | error                               |
+| `{ xyz: "modu/dir" }`               | `/abc/node_modules/modu/dir/index.js` | `/abc/node_modules/dir/file.js`     |
+| `{ xyz: "xyz/dir" }`                | `/abc/node_modules/xyz/dir/index.js`  | `/abc/node_modules/xyz/dir/file.js` |
+| `{ xyz$: "xyz/dir" }`               | `/abc/node_modules/xyz/dir/index.js`  | `/abc/node_modules/xyz/file.js`     |
 
 `index.js` may resolve to another file if defined in the `package.json`.
 
 `/abc/node_modules` may resolve in `/node_modules` too.
 
 
-## `resolve.aliasFields`
+### `resolve.aliasFields`
 
 `string`
 
@@ -93,7 +95,7 @@ aliasFields: ["browser"]
 ```
 
 
-## `resolve.descriptionFiles`
+### `resolve.descriptionFiles`
 
 `array`
 
@@ -104,7 +106,7 @@ descriptionFiles: ["package.json"]
 ```
 
 
-## `resolve.enforceExtension`
+### `resolve.enforceExtension`
 
 `boolean`
 
@@ -115,7 +117,7 @@ enforceExtension: false
 ```
 
 
-## `resolve.enforceModuleExtension`
+### `resolve.enforceModuleExtension`
 
 `boolean`
 
@@ -126,7 +128,7 @@ enforceModuleExtension: false
 ```
 
 
-## `resolve.extensions`
+### `resolve.extensions`
 
 `array`
 
@@ -145,7 +147,7 @@ import File from '../path/to/file'
 W> Using this will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions. For modules that are imported with their extension, e.g. `import SomeFile from "./somefile.ext"`, to be properly resolved, a string containing "\*" must be included in the array.
 
 
-## `resolve.mainFields`
+### `resolve.mainFields`
 
 `array`
 
@@ -179,7 +181,7 @@ For example, the `package.json` of [D3](https://d3js.org/) contains these fields
 This means that when we `import * as D3 from "d3"` this will really resolve to the file in the `browser` property. The `browser` property takes precedence here because it's the first item in `mainFields`. Meanwhile, a Node.js application bundled by webpack will resolve by default to the file in the `module` field.
 
 
-## `resolve.mainFiles`
+### `resolve.mainFiles`
 
 `array`
 
@@ -190,7 +192,7 @@ mainFiles: ["index"]
 ```
 
 
-## `resolve.modules`
+### `resolve.modules`
 
 `array`
 
@@ -215,7 +217,7 @@ modules: [path.resolve(__dirname, "src"), "node_modules"]
 ```
 
 
-## `resolve.unsafeCache`
+### `resolve.unsafeCache`
 
 `regex` `array` `boolean`
 
@@ -232,36 +234,6 @@ unsafeCache: /src\/utilities/
 ```
 
 W> Changes to cached paths may cause failure in rare cases.
-
-
-## `resolveLoader`
-
-`object`
-
-This set of options is identical to the `resolve` property set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages. Default:
-
-```js
-{
-    modules: ["node_modules"],
-    extensions: [".js", ".json"],
-    mainFields: ["loader", "main"]
-}
-```
-
-T> Note that you can use alias here and other features familiar from resolve. For example `{ txt: 'raw-loader' }` would shim `txt!templates/demo.txt` to use `raw-loader`.
-
-
-## `resolveLoader.moduleExtensions`
-
-`array`
-
-The extensions which are tried when resolving a module (e.g. loaders). By default this is an empty array.
-
-If you want to use loaders without the `-loader` suffix, you can use this:
-
-```js
-moduleExtensions: ['-loader']
-```
 
 
 ## `resolve.plugins`
@@ -292,4 +264,34 @@ A function which decides whether a request should be cached or not. An object is
 
 ```js
 cachePredicate: function() { return true }
+```
+
+
+## `resolveLoader`
+
+`object`
+
+This set of options is identical to the `resolve` property set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages. Default:
+
+```js
+{
+    modules: ["node_modules"],
+    extensions: [".js", ".json"],
+    mainFields: ["loader", "main"]
+}
+```
+
+T> Note that you can use alias here and other features familiar from resolve. For example `{ txt: 'raw-loader' }` would shim `txt!templates/demo.txt` to use `raw-loader`.
+
+
+### `resolveLoader.moduleExtensions`
+
+`array`
+
+The extensions which are tried when resolving a module (e.g. loaders). By default this is an empty array.
+
+If you want to use loaders without the `-loader` suffix, you can use this:
+
+```js
+moduleExtensions: ['-loader']
 ```
