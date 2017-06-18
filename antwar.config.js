@@ -69,7 +69,8 @@ module.exports = {
       }, {
         'code-splitting-import': '/guides/code-splitting-async',
         'code-splitting-require': '/guides/code-splitting-async/#require-ensure-',
-        'why-webpack': '/guides/comparison'
+        'why-webpack': '/guides/comparison',
+        'production-build': '/guides/production'
       }
     ),
 
