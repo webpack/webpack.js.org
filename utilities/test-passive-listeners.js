@@ -6,10 +6,10 @@
  */
 module.exports = function() {
   const test = "passiveListenersTest";
-  let supportsPassive = false;
+  var supportsPassive = false;
   try {
     const opts = Object.defineProperty({}, 'passive', {
-      get() {
+      get: function() {
         supportsPassive = true;
       }
     });
