@@ -1,4 +1,5 @@
 import React from 'react';
+import LanguageIcon from '../../assets/language-icon.svg';
 
 export default class Dropdown extends React.Component {
 	state = {
@@ -16,8 +17,8 @@ export default class Dropdown extends React.Component {
 				onMouseLeave={ this._toggle.bind(this, false) }>
 				<img
           className="dropdown__language"
-          src={ items[0].image } />
-
+          src={ LanguageIcon } />
+        <span>{ items[0].title }</span>
 				<i className="dropdown__arrow" />
 
 				<div className={ `dropdown__list ${activeMod}` }>
@@ -28,7 +29,6 @@ export default class Dropdown extends React.Component {
 									<li key={ item.title }>
 										<a href={ item.url }>
                       <span>{ item.title }</span>
-											<img src={ item.image } />
 										</a>
 									</li>
 								);
