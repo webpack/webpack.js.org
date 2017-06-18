@@ -5,7 +5,7 @@
  * @return {undefined|bool} Returns false on error.
  */
 module.exports = function() {
-  const test = "passiveListenersTest";
+  const test = 'passiveListenersTest';
   var supportsPassive = false;
   try {
     const opts = Object.defineProperty({}, 'passive', {
