@@ -83,7 +83,6 @@ First we'll tweak our directory structure slightly, separating the "source" code
 webpack-demo
 |- package.json
 + |- dist
-+   |- bundle.js
 +   |- index.html
 - |- index.html
 |- /src
@@ -218,18 +217,38 @@ Given it's not particularly fun to run a local copy of webpack from the CLI, we 
 
 Now the `npm run build` command can be used in place of the longer commands we used earlier. Note that within `scripts` we can reference locally installed npm packages by name instead of writing out the entire path. This convention is the standard in most npm-based projects and allows us to directly call `webpack`, instead of `node_modules/webpack/bin/webpack.js`
 
+Now run the following command and see if your script alias works:
+```bash
+npm run build
+
+
+Hash: ff6c1d39b26f89b3b7bb
+Version: webpack 2.2.0
+Time: 390ms
+    Asset    Size  Chunks                    Chunk Names
+bundle.js  544 kB       0  [emitted]  [big]  main
+   [0] ./~/lodash/lodash.js 540 kB {0} [built]
+   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
+   [3] ./src/index.js 278 bytes {0} [built]
+```
+
 T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --colors`.
 
 
 ## Conclusion
 
-Now that you have a basic build together, you should dig into the [basic concepts](/concepts) and [configuration](/configuration) to better understand webpack's design. The [API](/api) section digs into the various interfaces webpack offers. Or, if you'd prefer learning by example, select the next guide from the list and continue building out this little demo we've been working on which, if you've been paying attention, should now look like this:
+Now that you have a basic build together, you should dig into the [basic concepts](/concepts) and [configuration](/configuration) to better understand webpack's design. The [API](/api) section digs into the various interfaces webpack offers. Or, if you'd prefer learning by example, select the next guide from the list and continue building out this little demo we've been working on which should now look similar to this:
 
 ``` diff
 |- package.json
 |- webpack.config.js
 |- dist
+  |- bundle.js
   |- index.html
 |- /src
   |- index.js
+|- /node_modules
 ```
+
+T> If you're using npm 5, you'll probably also see a `package-lock.json` file in your diretory.
