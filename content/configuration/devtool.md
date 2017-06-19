@@ -26,18 +26,18 @@ Choose a style of [source mapping](http://blog.teamtreehouse.com/introduction-so
 
 T> The webpack repository contains an [example showing the effect of all `devtool` variants](https://github.com/webpack/webpack/tree/master/examples/source-map). Those examples will likely help you to understand the differences.
 
-devtool                      | build | rebuild | production | quality
------------------------------|-------|---------|------------|------------------------------
-eval                         | +++   | +++     | no         | generated code
-inline-source-map            | ++    | ++      | no         | generated code
-cheap-eval-source-map        | +     | ++      | no         | transformed code (lines only)
-cheap-source-map             | +     | o       | yes        | transformed code (lines only)
-cheap-module-eval-source-map | o     | ++      | no         | original source (lines only)
-cheap-module-source-map      | o     | -       | yes        | original source (lines only)
-eval-source-map              | --    | +       | no         | original source
-source-map                   | --    | --      | yes        | original source
-hidden-source-map            | --    | --      | yes        | original source
-nosources-source-map         | --    | --      | yes        | without source content
+devtool                       | build | rebuild | production | quality
+----------------------------- | ----- | ------- | ---------- | -----------------------------
+eval                          | +++   | +++     | no         | generated code
+cheap-eval-source-map         | +     | ++      | no         | transformed code (lines only)
+cheap-source-map              | +     | o       | yes        | transformed code (lines only)
+cheap-module-eval-source-map  | o     | ++      | no         | original source (lines only)
+cheap-module-source-map       | o     | -       | yes        | original source (lines only)
+eval-source-map               | --    | +       | no         | original source
+source-map                    | --    | --      | yes        | original source
+inline-source-map             | --    | --      | no         | original source
+hidden-source-map             | --    | --      | yes        | original source
+nosources-source-map          | --    | --      | yes        | without source content
 
 T> `+` means faster, `-` slower and `o` about the same time
 
