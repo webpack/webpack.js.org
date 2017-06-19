@@ -9,12 +9,10 @@
 .dropdown__language {
   width: 20px;
   height: 20px;
-  margin-right: 0.25em;
   vertical-align: middle;
 }
 
 .dropdown__arrow {
-  margin-left: 5px;
 
   &:before {
     content: "\25be";
@@ -25,19 +23,16 @@
   display: none;
   position: absolute;
   top: 100%;
-  left: 0;
+  right: 0;
   margin: auto;
   background-color: #2B3A42;
   z-index: 1;
-  width: 100px;
 
   ul {
-    width: 100px;
     padding-top: 0.25em;
   }
 
   ul li {
-    width: 100%;
     padding: 0.25em 0.5em;
     list-style: none;
     color: #fff;

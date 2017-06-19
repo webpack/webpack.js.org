@@ -18,7 +18,8 @@ export default class Dropdown extends React.Component {
 				<img
           className="dropdown__language"
           src={ LanguageIcon } />
-        <span>{ items[0].title }</span>
+        {/* Commented out until media breakpoints are in place
+        <span>{ items[0].title }</span> */}
 				<i className="dropdown__arrow" />
 
 				<div className={ `dropdown__list ${activeMod}` }>
