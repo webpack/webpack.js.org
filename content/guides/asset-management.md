@@ -80,7 +80,7 @@ __src/index.js__
 
 ```dif
 import _ from 'lodash';
-+ import './style.css'
++ import './style.css';
 
 function component () {
   var element = document.createElement('div');
@@ -199,8 +199,8 @@ __src/index.js__
 
 ```diff
 import _ from 'lodash';
-import './style.css'
-+ import Icon from './icon.png'
+import './style.css';
++ import Icon from './icon.png';
 
 function component () {
   var element = document.createElement('div');
@@ -460,9 +460,9 @@ __src/index.js__
 
 ```diff
 import _ from 'lodash';
-import './style.css'
-import Icon from './icon.png'
-+ import MyData from './data.xml'
+import './style.css';
+import Icon from './icon.png';
++ import MyData from './data.xml';
 
 function component () {
   var element = document.createElement('div');
@@ -583,9 +583,9 @@ __src/index.js__
 
 ```diff
 - import _ from 'lodash';
-- import './style.css'
-- import Icon from './icon.png'
-- import MyData from './data.xml'
+- import './style.css';
+- import Icon from './icon.png';
+- import MyData from './data.xml';
 -
 function component () {
   var element = document.createElement('div');
@@ -601,7 +601,7 @@ function component () {
 -  element.appendChild(myIcon);
 -
 -  console.log(MyData);
-+  element.innerHTML = 'Hello webpack'
++  element.innerHTML = 'Hello webpack';
 
   return element;
 }
