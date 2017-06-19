@@ -582,11 +582,11 @@ module.exports = {
 __src/index.js__
 
 ```diff
-import _ from 'lodash';
-import './style.css'
-import Icon from './icon.png'
-import MyData from './data.xml'
-
+- import _ from 'lodash';
+- import './style.css'
+- import Icon from './icon.png'
+- import MyData from './data.xml'
+-
 function component () {
   var element = document.createElement('div');
 -
