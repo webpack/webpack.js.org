@@ -58,9 +58,9 @@ The following options are ideal for development:
 
 `eval-source-map` - Each module is executed with `eval()` and a SourceMap is added as a DataUrl to the `eval()`. Initially it is slow, but it provides fast rebuild speed and yields real files. Line numbers are correctly mapped since it gets mapped to the original code.
 
-`cheap-eval-source-map` - Similar to `eval-source-map`, each module is executed with `eval()` and a Source Map is added as a Data URL.
+`cheap-eval-source-map` - Similar to `eval-source-map`, each module is executed with `eval()`. However, with this option the Source Map is passed as a Data URL to the `eval()` call. It is "cheap" because it doesn't have column mappings, it only maps line numbers.
 
-`cheap-module-eval-source-map` - Like `eval-source-map`, each module is executed with `eval()` and a Source Map is added as a Data URL. It is "cheap" because it doesn't have column mappings, it only maps line numbers.
+`cheap-module-eval-source-map` - Similar to `cheap-eval-source-map`, however in this case this case loaders are able to process the mapping for better results.
 
 
 ### Production
