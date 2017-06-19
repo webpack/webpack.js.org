@@ -9,9 +9,27 @@ contributors:
 
 If you've been following the guides fromt he start, you will now have a small project that shows "Hello webpack", but it would be nice to make it a little more complex by adding a couple of different assets and see how webpack handles these.
 
-Prior to webpack, front-end developers would use tools like grunt and gulp to process these assets and move them from their `/src` folder into their `/dist` or `/build` directory. The same idea was used for JavaScript modules, but tools like webpack will __dynamically bundle__ all dependencies (creating what's known as a [dependency graph](/concepts/dependency-graph)). This is great because every module now _explicitly states its dependencies_ and we'll avoid bundling modules that aren't in use. Even better: assets that are never used, will also never get processed and put in the `dist` folder, great for saving some bytes of data in your distribution!
+Prior to webpack, front-end developers would use tools like grunt and gulp to process these assets and move them from their `/src` folder into their `/dist` or `/build` directory. The same idea was used for JavaScript modules, but tools like webpack will __dynamically bundle__ all dependencies (creating what's known as a [dependency graph](/concepts/dependency-graph)). This is great because every module now _explicitly states its dependencies_ and we'll avoid bundling modules that aren't in use.
 
 One of the coolest webpack features is that you can also _include any other type of file_, besides JavaScript, for which there is a loader. This means that the same benefits listed above for JavaScript (e.g. explicit dependencies) can be applied to everything used in building a website or web app. Let's start with CSS, as you may already be familiar with that setup.
+
+## Setup
+
+Let's make a minor change to our project before we get started:
+
+__dist/index.html__
+
+``` diff
+<html>
+  <head>
+-    <title>Getting Started</title>
++    <title>Asset Management</title>
+  </head>
+  <body>
+    <script src="./bundle.js"></script>
+  </body>
+</html>
+```
 
 
 ## Loading CSS
@@ -26,7 +44,7 @@ Now open your `weback.config.js` file that we created earlier and adjust it so t
 
 __webpack.config.js__
 
-```diff
+``` diff
 var path = require('path');
 
 module.exports = {
@@ -55,7 +73,9 @@ This enables you to `import './style.css'` into the file that depends on that st
 
 Let's try it out by adding a new `style.css` file to our project and import it in our `index.js`:
 
-```diff
+__project__
+
+``` diff
  |- package.json
  |- webpack.config.js
  |- dist
@@ -70,7 +90,7 @@ Let's try it out by adding a new `style.css` file to our project and import it i
 
 __src/style.css__
 
-```css
+``` css
 .hello {
   color: red;
 }
@@ -78,7 +98,7 @@ __src/style.css__
 
 __src/index.js__
 
-```dif
+``` diff
 import _ from 'lodash';
 + import './style.css';
 
@@ -97,7 +117,7 @@ document.body.appendChild(component());
 
 Now run your build command:
 
-```bash
+``` bash
 npm run build
 
 Hash: 9a3abfc96300ef87880f
@@ -118,10 +138,10 @@ bundle.js  560 kB       0  [emitted]  [big]  main
 
 Open up `index.html` in your browser again and you should see that `Hello webpack` is now styled in red. If you want to see what webpack did, inspect the page (don't view the page source, as it won't show you the result) and look at the page's head tags. It should contain our style block that we imported in `index.js`:
 
-```html
+``` html
 <html>
   <head>
-    <title>webpack 2 demo</title>
+    <title>Asset Management</title>
     <style type="text/css">
     .hello {
       color: red;
@@ -148,7 +168,7 @@ npm install --save-dev file-loader
 
 __webpack.config.js__
 
-```diff
+``` diff
 var path = require('path');
 
 module.exports = {
@@ -182,7 +202,9 @@ Now, when you `import someImage from './my-image.png'`, that image will be proce
 
 Let's add an image to our project and see how this works, you can use any image you like:
 
-```diff
+__project__
+
+``` diff
  |- package.json
  |- webpack.config.js
  |- dist
@@ -197,7 +219,7 @@ Let's add an image to our project and see how this works, you can use any image 
 
 __src/index.js__
 
-```diff
+``` diff
 import _ from 'lodash';
 import './style.css';
 + import Icon from './icon.png';
@@ -223,7 +245,7 @@ document.body.appendChild(component());
 
 __src/style.css__
 
-```diff
+``` diff
 .hello {
   color: red;
 +   background: url('./icon.png');
@@ -232,7 +254,7 @@ __src/style.css__
 
 Let's create a new build and open up the index.html file again:
 
-```bash
+``` bash
 npm run build
 
 Hash: 854865050ea3c1c7f237
@@ -264,7 +286,7 @@ So what about other assets like fonts? The file and url loaders will take any fi
 
 __webpack.config.js__
 
-```diff
+``` diff
 var path = require('path');
 
 module.exports = {
@@ -302,7 +324,10 @@ module.exports = {
 
 Add some font files to your project:
 
-```diff
+__project__
+
+
+``` diff
  |- package.json
  |- webpack.config.js
  |- dist
@@ -321,7 +346,7 @@ With the loader configured and the fonts in place, you can use the fonts in `@fo
 
 __src/style.css__
 
-```diff
+``` diff
 + @font-face {
 +   font-family: 'MyFont';
 +   src:  url('./MyFont.woff2') format('woff2'),
@@ -340,7 +365,7 @@ __src/style.css__
 
 Now run a new build and let's see if webpack handled our fonts:
 
-```bash
+``` bash
 npm run build
 
 Hash: b4aef94169088c79ed1c
@@ -376,7 +401,7 @@ npm install --save-dev csv-loader xml-loader
 
 __webpack.config.js__
 
-```diff
+``` diff
 var path = require('path');
 
 module.exports = {
@@ -426,7 +451,9 @@ module.exports = {
 
 Add some data files to your project:
 
-```diff
+__project__
+
+``` diff
  |- package.json
  |- webpack.config.js
  |- dist
@@ -444,7 +471,7 @@ Add some data files to your project:
 
 __src/data.xml__
 
-```xml
+``` xml
 <?xml version="1.0" encoding="UTF-8"?>
 <note>
   <to>Mary</to>
@@ -458,7 +485,7 @@ Now you can `import` any one of those four types of data (JSON, CSV, TSV, XML) a
 
 __src/index.js__
 
-```diff
+``` diff
 import _ from 'lodash';
 import './style.css';
 import Icon from './icon.png';
@@ -513,7 +540,9 @@ However, let's say you're locked into your old ways or you have some assets that
 
 For the next guides we won't be using all the different assets we've used in this guide, so let's do some cleanup so we're prepared for the next piece of the guides [Output Management](https://webpack.js.org/guides/output-management/):
 
-```diff
+__project__
+
+``` diff
  |- package.json
  |- webpack.config.js
  |- dist
@@ -531,7 +560,7 @@ For the next guides we won't be using all the different assets we've used in thi
 
 __webpack.config.js__
 
-```diff
+``` diff
 var path = require('path');
 
 module.exports = {
@@ -581,7 +610,7 @@ module.exports = {
 
 __src/index.js__
 
-```diff
+``` diff
 - import _ from 'lodash';
 - import './style.css';
 - import Icon from './icon.png';
@@ -611,6 +640,7 @@ document.body.appendChild(component());
 
 
 ## Next guide
+
 Let's move on to [Output Management](https://webpack.js.org/guides/output-management/)
 
 
