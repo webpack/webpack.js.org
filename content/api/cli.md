@@ -255,6 +255,7 @@ These options allow webpack to display various [stats](/configuration/stats/) an
 | --sort-chunks-by        | Sorts the chunks list by property in chunk                         | string  |
 | --sort-modules-by       | Sorts the modules list by property in module                       | string  |
 | --verbose               | Show more details                                                  | boolean |
+| --display-optimization-bailout | Scope hoisting fallback trigger | boolean |
 
 
 ### Advanced Options
