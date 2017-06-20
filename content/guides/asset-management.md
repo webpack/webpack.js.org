@@ -100,7 +100,7 @@ __src/index.js__
   import _ from 'lodash';
 + import './style.css';
 
-  function component () {
+  function component() {
     var element = document.createElement('div');
 
     // Lodash, now imported by this script
@@ -205,7 +205,7 @@ __src/index.js__
   import './style.css';
 + import Icon from './icon.png';
 
-  function component () {
+  function component() {
     var element = document.createElement('div');
 
     // Lodash, now imported by this script
@@ -473,7 +473,7 @@ __src/index.js__
   import Icon from './icon.png';
 + import Data from './data.xml';
 
-  function component () {
+  function component() {
     var element = document.createElement('div');
 
     // Lodash, now imported by this script
@@ -598,7 +598,7 @@ __src/index.js__
 - import Icon from './icon.png';
 - import MyData from './data.xml';
 -
-  function component () {
+  function component() {
     var element = document.createElement('div');
 -
 -   // Lodash, now imported by this script
