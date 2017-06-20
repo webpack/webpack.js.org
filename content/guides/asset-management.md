@@ -7,7 +7,7 @@ contributors:
   - TheDutchCoder
 ---
 
-If you've been following the guides fromt he start, you will now have a small project that shows "Hello webpack", but it would be nice to make it a little more complex by adding a couple of different assets and see how webpack handles these.
+If you've been following the guides from the start, you will now have a small project that shows "Hello webpack". Now let's try to incorporate some other assets, like images, to see how they can be handled.
 
 Prior to webpack, front-end developers would use tools like grunt and gulp to process these assets and move them from their `/src` folder into their `/dist` or `/build` directory. The same idea was used for JavaScript modules, but tools like webpack will __dynamically bundle__ all dependencies (creating what's known as a [dependency graph](/concepts/dependency-graph)). This is great because every module now _explicitly states its dependencies_ and we'll avoid bundling modules that aren't in use.
 
@@ -20,15 +20,15 @@ Let's make a minor change to our project before we get started:
 __dist/index.html__
 
 ``` diff
-<html>
-  <head>
+  <html>
+    <head>
 -    <title>Getting Started</title>
 +    <title>Asset Management</title>
-  </head>
-  <body>
-    <script src="./bundle.js"></script>
-  </body>
-</html>
+    </head>
+    <body>
+      <script src="./bundle.js"></script>
+    </body>
+  </html>
 ```
 
 
@@ -40,31 +40,29 @@ In order to `import` a CSS file from within a JavaScript module, you need to ins
 npm install --save-dev style-loader css-loader
 ```
 
-Now open your `weback.config.js` file that we created earlier and adjust it so that we can tell webpack to also handle our CSS files.
-
 __webpack.config.js__
 
 ``` diff
-var path = require('path');
+  var path = require('path');
 
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  },
-+ module: {
-+   rules: [
-+     {
-+       test: /\.css$/,
-+       use: [
-+         'style-loader',
-+         'css-loader'
-+       ]
-+     }
-+   ]
-+ }
-};
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    },
++   module: {
++     rules: [
++       {
++         test: /\.css$/,
++         use: [
++           'style-loader',
++           'css-loader'
++         ]
++       }
++     ]
++   }
+  };
 ```
 
 T> webpack uses a regular expression to determine which files it should look for and serve to a specific loader. In this case any file that ends with `.css` will be served to the `style-loader` and the `css-loader`.
@@ -76,16 +74,16 @@ Let's try it out by adding a new `style.css` file to our project and import it i
 __project__
 
 ``` diff
- |- package.json
- |- webpack.config.js
- |- dist
-   |- bundle.js
-   |- index.html
- |- /src
-+  |- style.css
-   |- index.js
- |- /node_modules
-
+  webpack-demo
+  |- package.json
+  |- webpack.config.js
+  |- /dist
+    |- bundle.js
+    |- index.html
+  |- /src
++   |- style.css
+    |- index.js
+  |- /node_modules
 ```
 
 __src/style.css__
@@ -99,20 +97,20 @@ __src/style.css__
 __src/index.js__
 
 ``` diff
-import _ from 'lodash';
+  import _ from 'lodash';
 + import './style.css';
 
-function component () {
-  var element = document.createElement('div');
+  function component () {
+    var element = document.createElement('div');
 
-  // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    // Lodash, now imported by this script
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +   element.classList.add('hello');
 
-  return element;
-}
+    return element;
+  }
 
-document.body.appendChild(component());
+  document.body.appendChild(component());
 ```
 
 Now run your build command:
@@ -136,24 +134,7 @@ bundle.js  560 kB       0  [emitted]  [big]  main
    [8] ./src/index.js 351 bytes {0} [built]
 ```
 
-Open up `index.html` in your browser again and you should see that `Hello webpack` is now styled in red. If you want to see what webpack did, inspect the page (don't view the page source, as it won't show you the result) and look at the page's head tags. It should contain our style block that we imported in `index.js`:
-
-``` html
-<html>
-  <head>
-    <title>Asset Management</title>
-    <style type="text/css">
-    .hello {
-      color: red;
-    }
-    </style>
-  </head>
-  <body>
-    <script src="./bundle.js"></script>
-    <div class="hello">Hello webpack</div>
-  </body>
-</html>
-```
+Open up `index.html` in your browser again and you should see that `Hello webpack` is now styled in red. To see what webpack did, inspect the page (don't view the page source, as it won't show you the result) and look at the page's head tags. It should contain our style block that we imported in `index.js`.
 
 T> Note that you can also [split your CSS](/guides/code-splitting-css) for better load times in production. On top of that, loaders exist for pretty much any flavor of CSS you can think of -- [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader), and [less](/loaders/less-loader) to name a few.
 
@@ -169,67 +150,67 @@ npm install --save-dev file-loader
 __webpack.config.js__
 
 ``` diff
-var path = require('path');
+  var path = require('path');
 
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
-      }
-+      {
-+        test: /\.(png|svg|jpg|gif)$/,
-+        use: [
-+          'file-loader'
-+        ]
-+      }
-    ]
-  }
-};
-
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    },
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: [
+            'style-loader',
+            'css-loader'
+          ]
+        },
++       {
++         test: /\.(png|svg|jpg|gif)$/,
++         use: [
++           'file-loader'
++         ]
++       }
+      ]
+    }
+  };
 ```
 
-Now, when you `import someImage from './my-image.png'`, that image will be processed and added to your `output` directory _and_ the `someImage` variable will contain the final url of that image after processing. When using the [css-loader](/loaders/css-loader), as shown above, a similar process will occur for `url('./my-image.png')` within your CSS. The loader will recognize this is a local file, and replace the `'./my-image.png'` path with the final path to the image in your `output` directory. The [html-loader](/loaders/html-loader) handles `<img src="./my-image.png" />` in the same manner.
+Now, when you `import MyImage from './my-image.png'`, that image will be processed and added to your `output` directory _and_ the `MyImage` variable will contain the final url of that image after processing. When using the [css-loader](/loaders/css-loader), as shown above, a similar process will occur for `url('./my-image.png')` within your CSS. The loader will recognize this is a local file, and replace the `'./my-image.png'` path with the final path to the image in your `output` directory. The [html-loader](/loaders/html-loader) handles `<img src="./my-image.png" />` in the same manner.
 
 Let's add an image to our project and see how this works, you can use any image you like:
 
 __project__
 
 ``` diff
- |- package.json
- |- webpack.config.js
- |- dist
-   |- bundle.js
-   |- index.html
- |- /src
+  webpack-demo
+  |- package.json
+  |- webpack.config.js
+  |- /dist
+    |- bundle.js
+    |- index.html
+  |- /src
 +   |- icon.png
-   |- style.css
-   |- index.js
- |- /node_modules
+    |- style.css
+    |- index.js
+  |- /node_modules
 ```
 
 __src/index.js__
 
 ``` diff
-import _ from 'lodash';
-import './style.css';
+  import _ from 'lodash';
+  import './style.css';
 + import Icon from './icon.png';
 
-function component () {
-  var element = document.createElement('div');
+  function component () {
+    var element = document.createElement('div');
 
-  // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  element.classList.add('hello');
+    // Lodash, now imported by this script
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    element.classList.add('hello');
 
 +   // Add the image to our existing div.
 +   var myIcon = new Image();
@@ -237,19 +218,19 @@ function component () {
 +
 +   element.appendChild(myIcon);
 
-  return element;
-}
+    return element;
+  }
 
-document.body.appendChild(component());
+  document.body.appendChild(component());
 ```
 
 __src/style.css__
 
 ``` diff
-.hello {
-  color: red;
+  .hello {
+    color: red;
 +   background: url('./icon.png');
-}
+  }
 ```
 
 Let's create a new build and open up the index.html file again:
@@ -275,50 +256,50 @@ Time: 895ms
    [9] ./src/index.js 503 bytes {0} [built]
 ```
 
-If all went well, you should now see your icon as a repeating background, as well as an `img` element behind our `Hello webpack` text. If you inspect this element, you'll see that actual filename has changed to something like `5c999da72346a995e7e2718865d019c8.png`. This means webpack found our file in the `src` folder and processed it!
+If all went well, you should now see your icon as a repeating background, as well as an `img` element behind our `Hello webpack` text. If you inspect this element, you'll see that the actual filename has changed to something like `5c999da72346a995e7e2718865d019c8.png`. This means webpack found our file in the `src` folder and processed it!
 
 T> A logical next step from here is minifying and optimizing your images. Check out the [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) and [url-loader](/loaders/url-loader) for more on how you can enhance your image loading process.
 
 
 ## Loading Fonts
 
-So what about other assets like fonts? The file and url loaders will take any file you load through them and output it to your build directory. This means we can use them for any kind of file, including fonts. Let's adjust our `webpack.config.js` file to instruct it to handle font files:
+So what about other assets like fonts? The file and url loaders will take any file you load through them and output it to your build directory. This means we can use them for any kind of file, including fonts. Let's update our `webpack.config.js` to handle font files:
 
 __webpack.config.js__
 
 ``` diff
-var path = require('path');
+  var path = require('path');
 
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          'file-loader'
-        ]
-      },
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    },
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: [
+            'style-loader',
+            'css-loader'
+          ]
+        },
+        {
+          test: /\.(png|svg|jpg|gif)$/,
+          use: [
+            'file-loader'
+          ]
+        },
 +       {
 +         test: /\.(woff|woff2|eot|ttf|otf)$/,
 +         use: [
 +           'file-loader'
 +         ]
 +       }
-    ]
-  }
-};
+      ]
+    }
+  };
 
 ```
 
@@ -328,39 +309,39 @@ __project__
 
 
 ``` diff
- |- package.json
- |- webpack.config.js
- |- dist
-   |- bundle.js
-   |- index.html
- |- /src
-+   |- MyFont.woff
-+   |- MyFont.woff2
-   |- icon.png
-   |- style.css
-   |- index.js
- |- /node_modules
+  webpack-demo
+  |- package.json
+  |- webpack.config.js
+  |- /dist
+    |- bundle.js
+    |- index.html
+  |- /src
++   |- my-font.woff
++   |- my-font.woff2
+    |- icon.png
+    |- style.css
+    |- index.js
+  |- /node_modules
 ```
 
-With the loader configured and the fonts in place, you can use the fonts in `@font-face` declarations like you're used to. webpack will automatically serve these files to the loader, just like it did with the images:
+With the loader configured and fonts in place, you can use incorporate them via an `@font-face` declaration. The local `url(...)` directive will be picked up by webpack just as it was with the image:
 
 __src/style.css__
 
 ``` diff
 + @font-face {
 +   font-family: 'MyFont';
-+   src:  url('./MyFont.woff2') format('woff2'),
-+         url('./MyFont.woff') format('woff');
++   src:  url('./my-font.woff2') format('woff2'),
++         url('./my-font.woff') format('woff');
 +   font-weight: 600;
 +   font-style: normal;
-}
+  }
 
-.hello {
-  color: red;
+  .hello {
+    color: red;
 +   font-family: 'MyFont';
-  background: url('./icon.png');
-}
-
+    background: url('./icon.png');
+  }
 ```
 
 Now run a new build and let's see if webpack handled our fonts:
@@ -393,7 +374,7 @@ Open up `index.html` again and see if our `Hello webpack` text has changed to th
 
 ## Loading Data
 
-Another useful asset that can be loaded is data, like JSON files, CSVs, TSVs, and XML. Support for JSON is actually built-in, similar to NodeJS, meaning `import MyData from './data.json'` will work by default. To import CSVs, TSVs, and XML you could use the [csv-loader](https://github.com/theplatapi/csv-loader) and [xml-loader](https://github.com/gisikw/xml-loader). Let's handle loading all three:
+Another useful asset that can be loaded is data, like JSON files, CSVs, TSVs, and XML. Support for JSON is actually built-in, similar to NodeJS, meaning `import Data from './data.json'` will work by default. To import CSVs, TSVs, and XML you could use the [csv-loader](https://github.com/theplatapi/csv-loader) and [xml-loader](https://github.com/gisikw/xml-loader). Let's handle loading all three:
 
 ``` bash
 npm install --save-dev csv-loader xml-loader
@@ -402,35 +383,35 @@ npm install --save-dev csv-loader xml-loader
 __webpack.config.js__
 
 ``` diff
-var path = require('path');
+  var path = require('path');
 
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          'file-loader'
-        ]
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: [
-          'file-loader'
-        ]
-      },
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    },
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: [
+            'style-loader',
+            'css-loader'
+          ]
+        },
+        {
+          test: /\.(png|svg|jpg|gif)$/,
+          use: [
+            'file-loader'
+          ]
+        },
+        {
+          test: /\.(woff|woff2|eot|ttf|otf)$/,
+          use: [
+            'file-loader'
+          ]
+        },
 +       {
 +         test: /\.(csv|tsv)$/,
 +         use: [
@@ -443,9 +424,9 @@ module.exports = {
 +           'xml-loader'
 +         ]
 +       }
-    ]
-  }
-};
+      ]
+    }
+  };
 
 ```
 
@@ -454,19 +435,20 @@ Add some data files to your project:
 __project__
 
 ``` diff
- |- package.json
- |- webpack.config.js
- |- dist
-   |- bundle.js
-   |- index.html
- |- /src
+  webpack-demo
+  |- package.json
+  |- webpack.config.js
+  |- /dist
+    |- bundle.js
+    |- index.html
+  |- /src
 +   |- data.xml 
-   |- MyFont.woff
-   |- MyFont.woff2
-   |- icon.png
-   |- style.css
-   |- index.js
- |- /node_modules
+    |- my-font.woff
+    |- my-font.woff2
+    |- icon.png
+    |- style.css
+    |- index.js
+  |- /node_modules
 ```
 
 __src/data.xml__
@@ -486,30 +468,30 @@ Now you can `import` any one of those four types of data (JSON, CSV, TSV, XML) a
 __src/index.js__
 
 ``` diff
-import _ from 'lodash';
-import './style.css';
-import Icon from './icon.png';
-+ import MyData from './data.xml';
+  import _ from 'lodash';
+  import './style.css';
+  import Icon from './icon.png';
++ import Data from './data.xml';
 
-function component () {
-  var element = document.createElement('div');
+  function component () {
+    var element = document.createElement('div');
 
-  // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  element.classList.add('hello');
+    // Lodash, now imported by this script
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    element.classList.add('hello');
 
-  // Add the image to our existing div.
-  var myIcon = new Image();
-  myIcon.src = Icon;
+    // Add the image to our existing div.
+    var myIcon = new Image();
+    myIcon.src = Icon;
 
-  element.appendChild(myIcon);
+    element.appendChild(myIcon);
 
-+   console.log(MyData);
++   console.log(Data);
 
-  return element;
-}
+    return element;
+  }
 
-document.body.appendChild(component());
+  document.body.appendChild(component());
 ```
 
 When you open `index.html` and look at your console in your developer tools, you should be able to see your imported data being logged to the console!
@@ -543,69 +525,69 @@ For the next guides we won't be using all the different assets we've used in thi
 __project__
 
 ``` diff
- |- package.json
- |- webpack.config.js
- |- dist
-   |- bundle.js
-   |- index.html
- |- /src
+  webpack-demo
+  |- package.json
+  |- webpack.config.js
+  |- /dist
+    |- bundle.js
+    |- index.html
+  |- /src
 -   |- data.xml 
--   |- MyFont.woff
--   |- MyFont.woff2
+-   |- my-font.woff
+-   |- my-font.woff2
 -   |- icon.png
 -   |- style.css
-   |- index.js
- |- /node_modules
+    |- index.js
+  |- /node_modules
 ```
 
 __webpack.config.js__
 
 ``` diff
-var path = require('path');
+  var path = require('path');
 
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  },
--  module: {
--    rules: [
--      {
--        test: /\.css$/,
--        use: [
--          'style-loader',
--          'css-loader'
--        ]
--      },
--      {
--        test: /\.(png|svg|jpg|gif)$/,
--        use: [
--          'file-loader'
--        ]
--      },
--      {
--        test: /\.(woff|woff2|eot|ttf|otf)$/,
--        use: [
--          'file-loader'
--        ]
--      },
--      {
--        test: /\.(csv|tsv)$/,
--        use: [
--          'csv-loader'
--        ]
--      },
--      {
--        test: /\.xml$/,
--        use: [
--          'xml-loader'
--        ]
--      }
--    ]
--  }
-};
-
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    },
+-   module: {
+-     rules: [
+-       {
+-         test: /\.css$/,
+-         use: [
+-           'style-loader',
+-           'css-loader'
+-         ]
+-       },
+-       {
+-         test: /\.(png|svg|jpg|gif)$/,
+-         use: [
+-           'file-loader'
+-         ]
+-       },
+-       {
+-         test: /\.(woff|woff2|eot|ttf|otf)$/,
+-         use: [
+-           'file-loader'
+-         ]
+-       },
+-       {
+-         test: /\.(csv|tsv)$/,
+-         use: [
+-           'csv-loader'
+-         ]
+-       },
+-       {
+-         test: /\.xml$/,
+-         use: [
+-           'xml-loader'
+-         ]
+-       }
+-     ]
+-   }
+  };
 ```
 
 __src/index.js__
@@ -616,26 +598,26 @@ __src/index.js__
 - import Icon from './icon.png';
 - import MyData from './data.xml';
 -
-function component () {
-  var element = document.createElement('div');
+  function component () {
+    var element = document.createElement('div');
 -
--  // Lodash, currently included via a script, is required for this line to work
--  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
--  element.classList.add('hello');
+-   // Lodash, now imported by this script
+-   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+-   element.classList.add('hello');
 -
--  // Add the image to our existing div.
--  var myIcon = new Image();
--  myIcon.src = Icon;
+-   // Add the image to our existing div.
+-   var myIcon = new Image();
+-   myIcon.src = Icon;
 -
--  element.appendChild(myIcon);
+-   element.appendChild(myIcon);
 -
--  console.log(MyData);
-+  element.innerHTML = 'Hello webpack';
+-   console.log(MyData);
++   element.innerHTML = 'Hello webpack';
 
-  return element;
-}
+    return element;
+  }
 
-document.body.appendChild(component());
+  document.body.appendChild(component());
 ```
 
 
