@@ -18,7 +18,7 @@ Because it's a standard Node.js CommonJS module, you **can do the following**:
 
 Use these features when appropriate.
 
-**You should NOT use the following things**. Technically you could use them, but it's **not recommended**:
+While they are technically feasible, **the following practices should be avoided**:
 
 * Access CLI arguments, when using the webpack CLI (instead write your own CLI, or [use `--env`](/configuration/configuration-types/))
 * Export non-deterministic values (calling webpack twice should result in the same output files)
