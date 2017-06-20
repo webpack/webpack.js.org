@@ -616,11 +616,11 @@ Loaders are now cacheable by default. Loaders must opt-out if they are not cache
 
 ### Complex options
 
-__webpack v1__ only supports `JSON.stringify`-able options for loaders.
+__webpack 1__ only supports `JSON.stringify`-able options for loaders.
 
-__webpack v2__ now supports any JS object as loader options.
+__webpack 2__ now supports any JS object as loader options.
 
-Before [v2.2.1](https://github.com/webpack/webpack/releases/tag/v2.2.1) (i.e. from v2.0.0 through v2.2.0), using complex options required using `ident` for the `options` object to allow its reference from other loaders. __This was removed in v2.2.1__ and thus current migrations do not require any use of the `ident` key.
+Before webpack [2.2.1](https://github.com/webpack/webpack/releases/tag/v2.2.1) (i.e. from 2.0.0 through 2.2.0), using complex options required using `ident` for the `options` object to allow its reference from other loaders. __This was removed in 2.2.1__ and thus current migrations do not require any use of the `ident` key.
 
 ```diff
 {
