@@ -13,7 +13,7 @@ export default (props) => {
           <Link className="footer__link" to="/guides/getting-started">Get Started</Link>
           <Link className="footer__link" to="/organization">Organization</Link>
           <Link className="footer__link" to="/support">Support</Link>
-          <Link className="footer__link" to="/guides/why-webpack#comparison">Comparison</Link>
+          <Link className="footer__link" to="/guides/comparison">Comparison</Link>
         </section>
 
         <section className="footer__middle">

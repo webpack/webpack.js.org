@@ -1,5 +1,5 @@
 ---
-title: Bundler Comparison
+title: Comparison
 sort: 25
 contributors:
   - pksjce
@@ -7,6 +7,11 @@ contributors:
   - chrisVillanueva
   - tashian
   - simon04
+related:
+  - title: JSPM vs. Webpack
+    url: https://ilikekillnerds.com/2015/07/jspm-vs-webpack/
+  - title: Webpack vs. Browserify vs. SystemJS
+    url: https://engineering.velocityapp.com/webpack-vs-browersify-vs-systemjs-for-spas-95b349a41fa0
 ---
 
 webpack is not the only module bundler out there. If you are choosing between using webpack or any of the bundlers below, here is a feature-by-feature comparison on how webpack fares against the current competition.
@@ -46,3 +51,10 @@ webpack is not the only module bundler out there. If you are choosing between us
 ♦ in production mode (opposite in development mode)
 
 X is the length of the path string
+
+
+## Bundling vs. Loading
+
+It's important to note some key differences between _loading_ and _bundling_ modules. A tool like [SystemJS](https://github.com/systemjs/systemjs), which can be found under the hood of [JSPM](http://jspm.io/), is used to load and transpile modules at runtime in the browser. This differs significantly from webpack, where modules are transpiled (through "loaders") and bundled before hitting the browser.
+
+Each method has it's pros and cons. Loading and transpiling modules at runtime can add a lot of overhead for larger sites and applications comprised of many modules. For this reason, SystemJS makes more sense for smaller projects where fewer modules are required. However, this may change as load times decrease and [HTTP/2](https://http2.github.io/) gains support.
