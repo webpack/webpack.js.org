@@ -221,7 +221,7 @@ output: {
 
 ### `output.sourceMapFilename`
 
-The filename of the SourceMaps for the JavaScript files. They are inside the `output.path` directory.
+Source Map filenames for JavaScript modules.
 
 * `[file]` is replaced by the filename of the JavaScript file.
 * `[id]` is replaced by the id of the chunk.
