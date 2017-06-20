@@ -5,6 +5,14 @@
   color: getColor(white);
   background: getColor(emperor);
 
+  p:not(:last-child) {
+    padding-bottom: 1em;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
   a {
     color: getColor(malibu);
 

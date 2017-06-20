@@ -9,184 +9,254 @@ edit: https://github.com/webpack-contrib/less-loader/edit/master/README.md
 npm install --save-dev less-loader less
 ```
 
-## 用法
+The less-loader requires [less](https://github.com/less/less.js) as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies). Thus you are able to control the versions accurately.
 
-一起使用[`less-loader`](https://github.com/webpack/less-loader)、[css-loader](https://github.com/webpack/css-loader)和[style-loader](https://github.com/webpack/style-loader)，添加对 webpack 的 LESS 支持。
+## 示例
 
-通过 webpack 配置、命令行或者内联方式使用这个 loader。
-
-### 通过 webpack 配置（推荐）
-
-**webpack.config.js**
+将 [css-loader](https://github.com/webpack-contrib/css-loader)、[style-loader](https://github.com/webpack-contrib/style) 和 less-loader 链式调用，可以把所有样式立即应用于 DOM。
 
 ```js
+// webpack.config.js
 module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.less$/,
-        use: [
-          'style-loader',
-          { loader: 'css-loader', options: { importLoaders: 1 } },
-          'less-loader'
-        ]
-      }
-    ]
-  }
-}
-```
-
-**在你的项目中**
-
-```js
-import css from 'file.less';
-```
-
-### 命令行方式（CLI）
-
-```bash
-webpack --module-bind 'less=style-loader!css-loader!less-loader'
-```
-**在你的项目中**
-
-```js
-import css from 'file.less';
-```
-### 内联方式
-
-**在你的项目中**
-
-```js
-import css from 'style-loader!css-loader!less-loader!./file.less';
-```
-
-## 选项
-
-通过 loader 的选项或者查询参数，你可以将任何 LESS 特定的选项传递给 less-loader。
-
-有关所有可用选项，请参阅[LESS 文档](http://lesscss.org/usage/#command-line-usage-options)。LESS 把 dash-case 为 camelCase。采用值的某些选项（比如 `lessc --modify-var="a=b"` ），最好使用[JSON 语法](http://webpack.github.io/docs/using-loaders.html#query-parameters)处理。
-
-```js
-{
-  test: /\.less$/,
-  use: [
-    'style-loader',
-    { loader: 'css-loader', options: { importLoaders: 1 } },
-    { loader: 'less-loader', options: { strictMath: true, noIeCompat: true } }
-	]
-}
-```
-
-### 插件
-
-为了使用[插件](http://lesscss.org/usage/#plugins)，只需在你的 `webpack.config.js` 文件中，简单地设置 `options.lessPlugins` 选项既可。
-
-```js
-const CleanCSSPlugin = require('less-plugin-clean-css');
-
-{
-  test: /\.less$/,
-  use: [
-    'style-loader',
-    { loader: 'css-loader', options: { importLoaders: 1 } },
-    {
-      loader: 'less-loader',
-      options: { lessPlugins: [ new CleanCSSPlugin({ advanced: true }) ] }
+    ...
+    module: {
+        rules: [{
+            test: /\.less$/,
+            use: [{
+                loader: "style-loader" // creates style nodes from JS strings
+            }, {
+                loader: "css-loader" // translates CSS into CommonJS
+            }, {
+                loader: "less-loader" // compiles Less to CSS
+            }]
+        }]
     }
-}
+};
 ```
+
+You can pass any Less specific options to the less-loader via [loader options](https://webpack.js.org/configuration/module/#rule-options-rule-query). See the [Less documentation](http://lesscss.org/usage/#command-line-usage-options) for all available options in dash-case. Since we're passing these options to Less programmatically, you need to pass them in camelCase here:
+
+```js
+// webpack.config.js
+module.exports = {
+    ...
+    module: {
+        rules: [{
+            test: /\.less$/,
+            use: [{
+                loader: "style-loader"
+            }, {
+                loader: "css-loader"
+            }, {
+                loader: "less-loader", options: {
+                    strictMath: true,
+                    noIeCompat: true
+                }
+            }]
+        }]
+    }
+};
+```
+
+Unfortunately, Less doesn't map all options 1-by-1 to camelCase. When in doubt, [check their executable and search for the dash-case option](https://github.com/less/less.js/blob/3.x/bin/lessc).
+
+### In production
+
+Usually, it's recommended to extract the style sheets into a dedicated file in production using the [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin). This way your styles are not dependent on JavaScript:
+
+```js
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+const extractLess = new ExtractTextPlugin({
+    filename: "[name].[contenthash].css",
+    disable: process.env.NODE_ENV === "development"
+});
+
+module.exports = {
+    ...
+    module: {
+        rules: [{
+            test: /\.less$/,
+            use: extractLess.extract({
+                use: [{
+                    loader: "css-loader"
+                }, {
+                    loader: "less-loader"
+                }],
+                // use style-loader in development
+                fallback: "style-loader"
+            })
+        }]
+    },
+    plugins: [
+        extractLess
+    ]
+};
+```
+
+## Usage
+
 ### Imports
 
-webpack 提供了一种[高级的机制解析文件](https://webpack.js.org/configuration/resolve/)。less-loader 根除 less `fileLoader`，并且将所有的查询参数传递给 webpack 解析引擎。所以，你可以从 `node_modules` 导入你的 less 模块。只要加一个 `~` 前缀，告诉 webpack 去查询[`模块`](https://webpack.js.org/configuration/resolve/#resolve-modules)。
+Starting with less-loader 4, you can now choose between Less' builtin resolver and webpack's resolver. By default, webpack's resolver is used.
+
+#### webpack resolver
+
+webpack 提供了一种[解析文件的高级机制](https://webpack.js.org/configuration/resolve/)。less-loader 应用一个 Less 插件，并且将所有查询参数传递给 webpack resolver。所以，你可以从 `node_modules` 导入你的 less 模块。只要加一个 `~` 前缀，告诉 webpack 去查询[`模块`](https://webpack.js.org/configuration/resolve/#resolve-modules)。
 
 ```css
 @import "~bootstrap/less/bootstrap";
 ```
 
-只要加前缀 `~` 十分必要，因为 `~/` 解析为主目录。webpack 需要区分 `bootstrap` 和 `~bootstrap` ，因为 css 和 less 文件对于导入相对路径的文件没有特殊语法。所以写 `@import "file"` 和 `@import "./file";` 是一样的效果。
+重要的是只使用 `~` 前缀，因为 `~/` 会解析为主目录。webpack 需要区分`bootstrap`和`〜bootstrap`，因为 CSS 和 Less 文件没有用于导入相对文件的特殊语法。`@import "file"` 与 `@import "./file";` 写法相同
 
-还要注意，对于[CSS 模块](https://github.com/css-modules/css-modules)，相对文件路径不会生效。请参阅[此issue的解释](https://github.com/webpack/less-loader/issues/109#issuecomment-253797335)。
+##### Non-Less imports
 
-### Sourcemaps
-
-因为浏览器的限制，只有结合[extract-text-webpack-plugin](https://github.com/webpack/extract-text-webpack-plugin)才能使用 suorcemaps。使用这个插件，从生成的JS bundle 中提取 css 代码到一个单独的文件（这样可以提高性能，因为 JS 和 CSS 并行加载）。
-
-**webpack.config.js**
+使用 webpack resolver，您可以引入任何文件类型。您只需要一个导出有效的 Less 代码的 loader。通常，您还需要设置 `issuer` 条件，以确保此规则仅适用于 Less 文件的导入：
 
 ```js
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+// webpack.config.js
 module.exports = {
-  // 必须是 'source-map' 或者 'inline-source-map'
-  devtool: 'source-map',
-  module: {
-    rules: [
-      {
-        test: /\.less$/,
-        use: ExtractTextPlugin.extract(
-          fallbackLoader: 'style-loader',
-          loaders: [
-            // 通过 loader 参数激活 source maps
-            {
-              loader: 'css-loader',
-              options: { sourceMap: true, importLoaders: 1 }
-            },
-            {
-              loader: 'less-loader',
-              options: { sourceMap: true }
-            }
-          ]
-        )
-      }
-    ]
-  },
-  plugins: [
-    // 提取 CSS 到单独的文件中
-    new ExtractTextPlugin('app.bundle.css')
-  ]
-}
+    ...
+    module: {
+        rules: [{
+            test: /\.js$/,
+            issuer: /\.less$/,
+            use: [{
+                loader: "js-to-less-loader"
+            }]
+        }]
+    }
+};
 ```
 
-如果你想在Chrome浏览器中查看原始的LESS文件，甚至编辑它。[有一篇很好的博客文章](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0)。查看[test/sourceMap](https://github.com/webpack/less-loader/tree/master/test)目录，获取运行例子。要确保使用HTTP服务器提供内容。
+#### Less resolver
 
-## 贡献
+If you specify the `paths` option, the less-loader will not use webpack's resolver. Modules, that can't be resolved in the local folder, will be searched in the given `paths`. This is Less' default behavior. `paths` should be an array with absolute paths:
 
-不要犹豫啦，创建一个PR。每一份奉献都是值得欣赏的。在开发中，你可以通过运行 `npm test` 启动测试。
+```js
+// webpack.config.js
+module.exports = {
+    ...
+    module: {
+        rules: [{
+            test: /\.less$/,
+            use: [{
+                loader: "style-loader"
+            }, {
+                loader: "css-loader"
+            }, {
+                loader: "less-loader", options: {
+                    paths: [
+                        path.resolve(__dirname, "node_modules")
+                    ]
+                }
+            }]
+        }]
+    }
+};
+```
 
-测试基本上只是比较生成的 css 文件和位于 `test/css` 目录下的引用 css 文件。通过运行 `node test/helpers/generateCss.js <less-file-without-less-extension>`，你可以轻松地生成引用 css 文件。它将 less 文件传递给 less，并且把输出写入到 `test/css` 文件夹下。
+In this case, all webpack features like importing non-Less files or aliasing won't work of course.
 
-## 维护者
+### 插件
+
+为了使用[插件](http://lesscss.org/usage/#plugins)，只需像下面这样简单设置 `plugins` 选项：
+
+```js
+// webpack.config.js
+const CleanCSSPlugin = require("less-plugin-clean-css");
+
+module.exports = {
+    ...
+            {
+                loader: "less-loader", options: {
+                    plugins: [
+                        new CleanCSSPlugin({ advanced: true })
+                    ]
+                }
+            }]
+    ...
+};
+```
+
+### Extracting style sheets
+
+Bundling CSS with webpack has some nice advantages like referencing images and fonts with hashed urls or [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/) in development. In production, on the other hand, it's not a good idea to apply your style sheets depending on JS execution. Rendering may be delayed or even a [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content) might be visible. Thus it's often still better to have them as separate files in your final production build.
+
+There are two possibilities to extract a style sheet from the bundle:
+
+- [extract-loader](https://github.com/peerigon/extract-loader) (simpler, but specialized on the css-loader's output)
+- [extract-text-webpack-plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) (more complex, but works in all use-cases)
+
+### Source maps
+
+要启用 CSS 的 source map，你需要将 `sourceMap` 选项传递给 *less-loader* 和 *css-loader*。所以你的 `webpack.config.js' 应该是这样：
+
+```javascript
+module.exports = {
+    ...
+    module: {
+        rules: [{
+            test: /\.less$/,
+            use: [{
+                loader: "style-loader"
+            }, {
+                loader: "css-loader", options: {
+                    sourceMap: true
+                }
+            }, {
+                loader: "less-loader", options: {
+                    sourceMap: true
+                }
+            }]
+        }]
+    }
+};
+```
+
+Also checkout the [sourceMaps example](https://github.com/webpack-contrib/less-loader/tree/master/examples/sourceMaps).
+
+如果您要编辑 Chrome 中的原始 Less 文件，[这里有一个很好的博客文章](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0)。此博客文章是关于 Sass 的，但它也适用于 Less。
+
+### CSS modules gotcha
+
+There is a known problem with Less and [CSS modules](https://github.com/css-modules/css-modules) regarding relative file paths in `url(...)` statements. [See this issue for an explanation](https://github.com/webpack-contrib/less-loader/issues/109#issuecomment-253797335).
+
+## 维护人员
 
 <table>
-  <tbody>
     <tr>
       <td align="center">
-        <img width="150 height="150" src="https://github.com/jhnns.png?s=150">
+        <a href="https://github.com/jhnns"><img width="150" height="150" src="https://github.com/jhnns.png?s=150"></a>
         <br>
         <a href="https://github.com/jhnns">Johannes Ewald</a>
       </td>
     <tr>
-  <tbody>
 </table>
 
 
 [npm]: https://img.shields.io/npm/v/less-loader.svg
+[npm-stats]: https://img.shields.io/npm/dm/less-loader.svg
 [npm-url]: https://npmjs.com/package/less-loader
 
 [node]: https://img.shields.io/node/v/less-loader.svg
 [node-url]: https://nodejs.org
 
-[deps]: https://david-dm.org/webpack/less-loader.svg
-[deps-url]: https://david-dm.org/webpack/less-loader
+[deps]: https://david-dm.org/webpack-contrib/less-loader.svg
+[deps-url]: https://david-dm.org/webpack-contrib/less-loader
 
-[tests]: http://img.shields.io/travis/webpack/less-loader.svg
-[tests-url]: https://travis-ci.org/webpack/less-loader
+[travis]: http://img.shields.io/travis/webpack-contrib/less-loader.svg
+[travis-url]: https://travis-ci.org/webpack-contrib/less-loader
 
-[cover]: https://coveralls.io/repos/github/webpack/less-loader/badge.svg
-[cover-url]: https://coveralls.io/github/webpack/less-loader
+[appveyor-url]: https://ci.appveyor.com/project/jhnns/less-loader/branch/master
+[appveyor]: https://ci.appveyor.com/api/projects/status/github/webpack-contrib/less-loader?svg=true
 
-[chat]: https://badges.gitter.im/webpack/webpack.svg
-[chat-url]: https://gitter.im/webpack/webpack
+[coverage]: https://img.shields.io/codecov/c/github/webpack-contrib/less-loader.svg
+[coverage-url]: https://codecov.io/gh/webpack-contrib/less-loader
+
+[chat]: https://badges.gitter.im/webpack-contrib/webpack.svg
+[chat-url]: https://gitter.im/webpack-contrib/webpack
 
 ***
 

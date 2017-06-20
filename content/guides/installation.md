@@ -15,13 +15,15 @@ sort: 10
 
 ### 本地安装
 
-``` bash
-npm install webpack --save-dev
+The latest webpack release is: [![GitHub release](https://img.shields.io/github/release/webpack/webpack.svg?style=flat-square)](https://github.com/webpack/webpack/releases)
 
-npm install webpack@<version> --save-dev
+``` bash
+npm install --save-dev webpack
+
+npm install --save-dev webpack@<version>
 ```
 
-如果你在项目中使用了 npm 执行脚本 (script)，npm 首先会在你的本地模块中寻找 webpack。这是一个实用的个小技巧。
+如果你在项目中使用了 npm scripts，npm 首先会在本地模块中寻找 webpack。这是一个实用的小技巧。
 
 ```json
 "scripts": {
@@ -31,7 +33,7 @@ npm install webpack@<version> --save-dev
 
 上面是 npm 的标准配置，也是我们推荐的实践。
 
-T> 当你在本地安装 webpack 后，你能够在 `node_modules/.bin/webpack` 找到它的二进制程序。
+T> 当你在本地安装 webpack 后，你能够从 `node_modules/.bin/webpack` 访问它的 bin 版本。
 
 
 ### 全局安装
@@ -39,7 +41,7 @@ T> 当你在本地安装 webpack 后，你能够在 `node_modules/.bin/webpack` 
 W> 注意，不推荐全局安装 webpack。这会锁定 webpack 到指定版本，并且在使用不同的 webpack 版本的项目中可能会导致构建失败。
 
 ``` bash
-npm install webpack -g
+npm install --global webpack
 ```
 
 `webpack` 命令现在可以全局执行了。

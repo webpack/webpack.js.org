@@ -3,38 +3,57 @@ title: expose-loader
 source: https://raw.githubusercontent.com/webpack-contrib/expose-loader/master/README.md
 edit: https://github.com/webpack-contrib/expose-loader/edit/master/README.md
 ---
-# expose loader for webpack
+## 安装
 
-expose loader 用来把模块暴露到全局变量。这个功对调试或者支持依赖其他全局库的库时很有用。
+```bash
+npm i expose-loader --save
+```
 
-** 注意**: 模块必须在你的 bundle 中被 `require()` 过，否则他们将不会被暴露。
+## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
-##  用法
+**注意**: 模块必须在你的 bundle 中被 `require()` 过，否则他们将不会被暴露。
 
 ``` javascript
 require("expose-loader?libraryName!./file.js");
 // 通过属性名 "libraryName" 暴露 file.js 的 exports 到全局上下文。
-// 在浏览器中，就将可以使用 window.libraryName 。
+// 在浏览器中，就将可以使用 window.libraryName 访问。
 ```
 
-下面这行代码暴露 React 到浏览器全局，用来开启 Chrome React devtools ：
+例如，假设你要将 jQuery 暴露至全局并称为 `$`：
 
 ```
-require("expose-loader?React!react");
+require("expose-loader?$!jquery");
 ```
 
-然后，`window.React` 就可以被 Chrome React devtools 扩展使用。
+然后，`window.$` 就可以在浏览器控制台中使用。
 
 或者，你可以通过配置文件来设置：
 
+webpack v1 用法
 ```
 module: {
   loaders: [
-    { test: require.resolve("react"), loader: "expose-loader?React" }
+    { test: require.resolve("jquery"), loader: "expose-loader?$" }
   ]
 }
 ```
-如果要重复暴露到多个变量，可以在加载器字符串中使用 `!` ：
+webpack v2 用法
+```
+module: {
+  rules: [{
+    test: require.resolve('jquery'),
+    use: [{
+      loader: 'expose-loader',
+      options: '$'
+    }]
+  }]
+}
+```
+
+除了暴露为 `window. $` 之外，假设你还想把它暴露为 `window.jQuery`。
+对于多个暴露，您可以在 loader 字符串中使用 `!`：
+
+webpack v1 用法
 ```
 module: {
   loaders: [
@@ -42,14 +61,67 @@ module: {
   ]
 }
 ```
+webpack v2 用法
+```
+module: {
+  rules: [{
+          test: require.resolve('jquery'),
+          use: [{
+              loader: 'expose-loader',
+              options: 'jQuery'
+          },{
+              loader: 'expose-loader',
+              options: '$'
+          }]
+      }]
+}
+```
 
-`require.resolve` 是一个 node.js 调用（与 webpack 处理中的 `require.resolve` 无关 —— 可以阅读 node.js 文档）。`require.resolve` 用来得到模块对应的绝对路径（"/.../app/node_modules/react/react.js"），所以这里只会对 React 进行暴露。并且只在 bundle 中用到它时进行暴露。
+[`require.resolve`](https://nodejs.org/api/all.html#globals_require_resolve) 是一个 node.js 调用（与 webpack 处理流程中的 `require.resolve` 无关）。`require.resolve` 用来获取模块的绝对路径（`"/.../app/node_modules/react/react.js"`）。所以这里的暴露只会作用于 React 模块。并且只在 bundle 中使用到它时，才进行暴露。
 
-[文档：使用加载器](http://webpack.github.io/docs/using-loaders.html)
 
-## License
+## 维护人员
 
-MIT (http://www.opensource.org/licenses/mit-license.php)
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
+      </td>
+    </tr>
+  <tbody>
+</table>
+
+
+[npm]: https://img.shields.io/npm/v/expose-loader.svg
+[npm-url]: https://npmjs.com/package/expose-loader
+
+[deps]: https://david-dm.org/webpack-contrib/expose-loader.svg
+[deps-url]: https://david-dm.org/webpack-contrib/expose-loader
+
+[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
+[chat-url]: https://gitter.im/webpack/webpack
 
 ***
 

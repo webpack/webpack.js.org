@@ -1,5 +1,5 @@
 ---
-title: 加载器(Loaders)
+title: Loader
 sort: 4
 contributors:
   - manekinekko
@@ -8,15 +8,16 @@ contributors:
   - gangachris
   - TheLarkInn
   - simon04
+  - jhnns
 ---
 
-loader 是对应用程序中资源文件进行转换。它们是（运行在 Node.js 中的）函数，可以将资源文件作为参数的来源，然后返回新的资源文件。
+loader 用于对模块的源代码进行转换。loader 可以使你在 `require()` 或"加载"模块时预处理文件。因此，loader 类似于其他构建工具中“任务(task)”，并提供了处理前端构建步骤的强大方法。loader 可以将文件从不同的语言（如 TypeScript）转换为 JavaScript，或将内联图像转换为 data URL。loader 甚至允许你在 JavaScript 中 `require（）` CSS文件！
 
 ## 示例
 
 例如，你可以使用 loader 告诉 webpack 加载 CSS 文件，或者将 TypeScript 转为 JavaScript。首先，安装相对应的 loader：
 
-```
+``` bash
 npm install --save-dev css-loader
 npm install --save-dev ts-loader
 ```
@@ -40,9 +41,9 @@ module.exports = {
 
 ```js-with-links-with-details
 {test: /\.css$/, [loader](/configuration/module#rule-loader): 'css-loader'}
-// or equivalently
+// 等同于
 {test: /\.css$/, [use](/configuration/module#rule-use): 'css-loader'}
-// or equivalently
+// 等同于
 {test: /\.css$/, [use](/configuration/module#rule-use): {
   loader: 'css-loader',
   options: {}
@@ -51,7 +52,7 @@ module.exports = {
 
 ## 配置
 
-在你的应用程序中，有三种方式使用 loader：
+在你的应用程序中，有三种使用 loader 的方式：
 
 * 通过配置
 * 在 `require` 语句中显示使用
@@ -59,19 +60,18 @@ module.exports = {
 
 ### 通过 `webpack.config.js`
 
-[`module.rules`](https://webpack.js.org/configuration/module/#module-rules) 允许你在 webpack 配置中指定几个 loader。
+[`module.rules`](/configuration/module/#module-rules) 允许你在 webpack 配置中指定几个 loader。
+这是展示 loader 的一种简明的方式，并且有助于使代码变得简洁。而且对每个相应的 loader 有一个完整的概述。
 
-这是展示 loader 的一种简明的方式，并且有助于简洁代码，以及对每个相应的 loader 有一个完整的概述。
-
-```js
+```js-with-links-with-details
   module: {
     rules: [
       {
         test: /\.css$/,
         use: [
-          { loader: 'style-loader'},
+          { loader: ['style-loader'](/loaders/style-loader)},
           {
-            loader: 'css-loader',
+            loader: ['css-loader'](/loaders/css-loader),
             options: {
               modules: true
             }
@@ -101,7 +101,7 @@ T> 尽可能使用 `module.rules`，因为这样可以在源码中减少引用�
 可选项，你也可以通过 CLI 使用 loader：
 
 ```sh
-webpack --module-bind jade --module-bind 'css=style!css'
+webpack --module-bind jade-loader --module-bind 'css=style-loader!css-loader'
 ```
 
 这会对 `.jade` 文件使用 `jade-loader`，对 `.css` 文件使用 [`style-loader`](/loaders/style-loader) 和 [`css-loader`](/loaders/css-loader)。
@@ -123,11 +123,7 @@ loader 通过（loader）预处理函数，为 JavaScript 生态系统提供了�
 
 loader 遵循标准的[模块解析](/concepts/module-resolution/)。多数情况下，loader 将从[模块路径](/concepts/module-resolution/#module-paths)（通常将模块路径认为是 `npm install`, `node_modules`）解析。
 
-[如何编写模块？](/development/how-to-write-a-loader)loader 模块需要导出为一个函数，并且使用 Node.js 兼容的 JavaScript 编写。在通常情况下，你会使用 npm 来管理 loader，但是你也可以将 loader 模块作为应用程序中的文件。
-
-按照约定，loader 通常被命名为 `XXX-loader`，其中 `XXX` 是上下文的名称，例如 `json-loader`。
-
-loader 的名称约定和优先搜索顺序，由 webpack 配置 API 中的  [`resolveLoader.moduleTemplates`](/configuration/resolve#resolveloader) 定义。
+loader 模块需要导出为一个函数，并且使用 Node.js 兼容的 JavaScript 编写。在通常情况下，你可以使用 npm 来管理 loader，但是你也可以将 loader 模块作为应用程序中的文件。按照约定，loader 通常被命名为 `xxx-loader`（例如 `json-loader`）。有关详细信息，请查看[如何编写模块？](/development/how-to-write-a-loader)。
 
 ***
 

@@ -1,17 +1,20 @@
 ---
 title: source-map-loader
-source: https://raw.githubusercontent.com/webpack/source-map-loader/master/README.md
-edit: https://github.com/webpack/source-map-loader/edit/master/README.md
+source: https://raw.githubusercontent.com/webpack-contrib/source-map-loader/master/README.md
+edit: https://github.com/webpack-contrib/source-map-loader/edit/master/README.md
 ---
-# webpack的source map loader
+## Install
 
-为原文件提取SourceMaps作为 `sourceMappingURL` 的注释。
+```bash
+npm i -D source-map-loader
+```
 
-## 使用
+## 用法
 
-[文档：使用loaders](https://webpack.js.org/concepts/#loaders)
+[文档：使用 loader](https://webpack.js.org/concepts/#loaders)
 
-### webpack配置示例
+
+### webpack 配置示例
 
 ``` javascript
 module.exports = {
@@ -27,11 +30,54 @@ module.exports = {
 };
 ```
 
-这将从所有文件中提取所有SourceMaps。这不是那么的性能，所以你可能只想应用加载器到相关的文件。
+`source-map-loader` extracts existing source maps from all JavaScript entries. This includes both inline source maps as well as those linked via URL. All source map data is passed to webpack for processing as per a chosen [source map style](https://webpack.js.org/configuration/devtool/) specified by the `devtool` option in [webpack.config.js](https://webpack.js.org/configuration/).
 
-## License
+This loader is especially useful when using 3rd-party libraries having their own source maps. If not extracted and processed into the souce map of the webpack bundle, browsers may misinterpret source map data. `source-map-loader` allows webpack to maintain source map data continuity across libraries so ease of debugging is preserved.
 
-MIT (http://www.opensource.org/licenses/mit-license.php)
+`source-map-loader` will extract from any JavaScript file, including those in the `node_modules` directory. Be mindful in setting [include](https://webpack.js.org/configuration/module/#rule-include) and [exclude](https://webpack.js.org/configuration/module/#rule-exclude) rule conditions to maximize bundling performance.
+
+## 维护人员
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
+      </td>
+    </tr>
+  <tbody>
+</table>
+
+
+[npm]: https://img.shields.io/npm/v/source-map-loader.svg
+[npm-url]: https://npmjs.com/package/source-map-loader
+
+[deps]: https://david-dm.org/webpack-contrib/source-map-loader.svg
+[deps-url]: https://david-dm.org/webpack-contrib/source-map-loader
+
+[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
+[chat-url]: https://gitter.im/webpack/webpack
 
 ***
 

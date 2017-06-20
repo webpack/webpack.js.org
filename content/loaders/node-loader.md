@@ -11,9 +11,9 @@ npm install --save-dev node-loader
 
 ## 用法
 
-在 [enhanced-require](https://github.com/webpack/enhanced-require) 中执行 [node add-ons](https://nodejs.org/dist/latest/docs/api/addons.html) 
+在 [enhanced-require](https://github.com/webpack/enhanced-require) 中执行 [node add-ons](https://nodejs.org/dist/latest/docs/api/addons.html)
 
-通过 webpack 配置、命令行或者内联使用加载器。
+通过 webpack 配置、命令行或者内联使用 loader。
 
 ### 通过 webpack 配置（推荐）
 
@@ -54,18 +54,37 @@ import node from 'file.node';
 import node from 'node-loader!./file.node';
 ```
 
-## 维护者
+## 维护人员
 
 <table>
   <tbody>
     <tr>
       <td align="center">
-        <img width="150" height="150" src="https://github.com/sokra.png?s=150">
-        <br>
-        <a href="https://github.com/sokra">Tobias Koppers</a>
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
       </td>
     </tr>
-  </tbody>
+  <tbody>
 </table>
 
 
@@ -77,12 +96,6 @@ import node from 'node-loader!./file.node';
 
 [deps]: https://david-dm.org/webpack/node-loader.svg
 [deps-url]: https://david-dm.org/webpack/node-loader
-
-[tests]: http://img.shields.io/travis/webpack/node-loader.svg
-[tests-url]: https://travis-ci.org/webpack/node-loader
-
-[cover]: https://coveralls.io/repos/github/webpack/node-loader/badge.svg
-[cover-url]: https://coveralls.io/github/webpack/node-loader
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack

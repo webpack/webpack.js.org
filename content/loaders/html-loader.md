@@ -24,9 +24,9 @@ npm i -D html-loader
 ```js
 {
   module: {
-    loaders: [
-      { test: /\.jpg$/, loader: "file-loader" },
-      { test: /\.png$/, loader: "url-loader?mimetype=image/png" }
+    rules: [
+      { test: /\.jpg$/, use: [ "file-loader" ] },
+      { test: /\.png$/, use: [ "url-loader?mimetype=image/png" ] }
     ]
   },
   output: {
@@ -74,16 +74,50 @@ require("html-loader?-attrs!./file.html");
       data-src=data:image/png;base64,...>'
 ```
 
-或者在 `webpack.conf.js` 中指定 `minimize` 查询参数
+或者在 `webpack.conf.js` 的 rule 选项中指定 `minimize` 属性
 
 ```js
 module: {
-  loaders: [{
+  rules: [{
     test: /\.html$/,
-    loader: 'html',
-    query: {
-      minimize: true
-    }
+    use: [ {
+      loader: 'html-loader',
+      options: {
+        minimize: true
+      }
+    }],
+  }]
+}
+```
+
+The enabled rules for minimizing by default are the following ones:
+ - removeComments
+ - removeCommentsFromCDATA
+ - removeCDATASectionsFromCDATA
+ - collapseWhitespace
+ - conservativeCollapse
+ - removeAttributeQuotes
+ - useShortDoctype
+ - keepClosingSlash
+ - minifyJS
+ - minifyCSS
+ - removeScriptTypeAttributes
+ - removeStyleTypeAttributes
+
+ The rules can be disabled using the following options in your `webpack.conf.js`
+
+```js
+module: {
+  rules: [{
+    test: /\.html$/,
+    use: [ {
+      loader: 'html-loader',
+      options: {
+        minimize: true,
+        removeComments: false,
+        collapseWhitespace: false
+      }
+    }],
   }]
 }
 ```
@@ -159,10 +193,10 @@ var path = require('path')
 module.exports = {
   ...
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.html$/,
-        loader: "html-loader"
+        use: [ "html-loader" ]
       }
     ]
   },
@@ -180,10 +214,10 @@ module.exports = {
 module.exports = {
   ...
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.html$/,
-        loader: "html-loader?config=otherHtmlLoaderConfig"
+        use: [ "html-loader?config=otherHtmlLoaderConfig" ]
       }
     ]
   },
@@ -206,7 +240,7 @@ html-loader 将解析 URL，并请求图片和你所期望的一切资源。extr
 ```js
 {
   test: /\.html$/,
-  loader: 'file-loader?name=[path][name].[ext]!extract-loader!html-loader'
+  use: [ 'file-loader?name=[path][name].[ext]!extract-loader!html-loader' ]
 }
 ```
 
@@ -218,72 +252,55 @@ html-loader 将解析 URL，并请求图片和你所期望的一切资源。extr
       <td align="center">
         <img width="150 height="150"
         src="https://avatars.githubusercontent.com/u/18315?v=3">
+        </br>
         <a href="https://github.com/hemanth">Hemanth</a>
       </td>
       <td align="center">
-        <img width="150 height="150"
+        <img width="150" height="150"
         src="https://avatars.githubusercontent.com/u/8420490?v=3">
+        </br>
         <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
       </td>
       <td align="center">
         <img width="150" height="150" src="https://avatars.githubusercontent.com/u/5419992?v=3">
+        </br>
         <a href="https://github.com/michael-ciniawsky">Michael Ciniawsky</a>
       </td>
       <td align="center">
         <img width="150" height="150"
         src="https://avatars.githubusercontent.com/u/6542274?v=3">
+        </br>
         <a href="https://github.com/imvetri">Imvetri</a>
       </td>
-    <tr>
+    </tr>
     <tr>
       <td align="center">
         <img width="150" height="150"
         src="https://avatars.githubusercontent.com/u/1520965?v=3">
+        </br>
         <a href="https://github.com/andreicek">Andrei Crnković</a>
       </td>
       <td align="center">
         <img width="150" height="150"
         src="https://avatars.githubusercontent.com/u/3367801?v=3">
+        </br>
         <a href="https://github.com/abouthiroppy">Yuta Hiroto</a>
       </td>
       <td align="center">
         <img width="150" height="150" src="https://avatars.githubusercontent.com/u/80044?v=3">
+        </br>
         <a href="https://github.com/petrunov">Vesselin Petrunov</a>
       </td>
       <td align="center">
         <img width="150" height="150"
         src="https://avatars.githubusercontent.com/u/973543?v=3">
+        </br>
         <a href="https://github.com/gajus">Gajus Kuizinas</a>
       </td>
-    <tr>
-  <tbody>
+    </tr>
+  </tbody>
 </table>
 
-## LICENSE
-
-> MIT
-
-> http://www.opensource.org/licenses/mit-license.php
-
-> Copyright (c) 2016 Tobias Koppers @sokra
-
-> Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-> The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
 
 [npm]: https://img.shields.io/npm/v/html-loader.svg
 [npm-url]: https://npmjs.com/package/html-loader

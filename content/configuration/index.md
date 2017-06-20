@@ -15,12 +15,13 @@ contributors:
 webpack 是需要传入一个配置对象(configuration object)。取决于你如何使用 webpack，可以通过两种方式之一：终端或 Node.js。下面指定了所有可用的配置选项。
 
 T> 刚接触 webpack？请查看我们提供的指南，从 webpack 一些[核心概念](/concepts)开始学习吧！
+
 T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs.org/api/path.html)，并在它前面加上 [__dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname)这个全局变量。可以防止不同操作系统之间的文件路径问题，并且可以使相对路径按照预期工作。更多「POSIX 和 Windows」的相关信息请查看[此章节](https://nodejs.org/api/path.html#path_windows_vs_posix)。
 
 ## 选项
 
 ``` js-with-links-with-details
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   // 点击选项名称，获取文档详细
@@ -126,7 +127,7 @@ module.exports = {
     // 关于模块配置
 
     [rules](/configuration/module#module-rules): [
-      // 模块规则（配置加载器、解析器等选项）
+      // 模块规则（配置 loader、解析器等选项）
 
       {
         [test](/configuration/module#rule-test): /\.jsx?$/,
@@ -135,7 +136,7 @@ module.exports = {
         ],
         [exclude](/configuration/module#rule-exclude): [
           path.resolve(__dirname, "app/demo-files")
-        ]
+        ],
         // 这里是匹配条件，每个选项都接收一个正则表达式或字符串
         // test 和 include 具有相同的作用，都是必须匹配选项
         // exclude 是必不匹配选项（优先于 test 和 include）
@@ -177,17 +178,17 @@ module.exports = {
         ]
       },
 
-      { [oneOf](/configuration/module#rule-oneof): [ /* rules */ ] }
+      { [oneOf](/configuration/module#rule-oneof): [ /* rules */ ] },
       // 只使用这些嵌套规则之一
 
-      { [rules](/configuration/module#rule-rules): [ /* rules */ ] }
+      { [rules](/configuration/module#rule-rules): [ /* rules */ ] },
       // 使用所有这些嵌套规则（合并可用条件）
 
-      { [resource](/configuration/module#rule-resource): { [and](/configuration/module#condition): [ /* 条件 */ ] } }
+      { [resource](/configuration/module#rule-resource): { [and](/configuration/module#condition): [ /* 条件 */ ] } },
       // 仅当所有条件都匹配时才匹配
 
-      { [resource](/configuration/module#rule-resource): { [or](/configuration/module#condition): [ /* 条件 */ ] } }
-      { [resource](/configuration/module#rule-resource): [ /* 条件 */ ] }
+      { [resource](/configuration/module#rule-resource): { [or](/configuration/module#condition): [ /* 条件 */ ] } },
+      { [resource](/configuration/module#rule-resource): [ /* 条件 */ ] },
       // 任意条件匹配时匹配（默认为数组）
 
       { [resource](/configuration/module#rule-resource): { [not](/configuration/module#condition): /* 条件 */ } }
@@ -218,7 +219,7 @@ module.exports = {
 
   [resolve](/configuration/resolve): {
     // 解析模块请求的选项
-    // （不适用于对加载器(loader)解析）
+    // （不适用于对 loader 解析）
 
     [modules](/configuration/resolve#resolve-modules): [
       "node_modules",
@@ -368,7 +369,16 @@ module.exports = {
   // 精确控制要显示的 bundle 信息
 
   [devServer](/configuration/dev-server): {
-    /* TODO */
+    proxy: { // proxy URLs to backend development server
+      '/api': 'http://localhost:3000'
+    },
+    contentBase: path.join(__dirname, 'public'), // boolean | string | array, static file location
+    compress: true, // enable gzip compression
+    historyApiFallback: true, // true for index.html upon 404, object for multiple paths
+    hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
+    https: false, // true for self-signed, object for cert authority
+    noInfo: true, // only errors & warns on hot reload
+    // ...
   },
 
   [plugins](plugins): [

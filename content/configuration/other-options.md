@@ -7,7 +7,11 @@ contributors:
   - terinjokes
 ---
 
-?> These are all the other options that might not need an entire page. Either we need to create new pages for them, move them to an existing page, or keep an **Other Options** section like this and replace this TODO with a short description/lead-in paragraph.
+
+These are the remaining configuration options supported by webpack.
+
+W> Help Wanted: This page is still a work in progress. If you are familiar with any of the options for which the description or examples are incomplete, please create an issue and submit a PR at the [docs repo](https://github.com/webpack/webpack.js.org)!
+
 
 ## `amd`
 
@@ -22,6 +26,7 @@ amd: {
 ```
 
 某些流行的模块是按照 AMD 规范编写的，最引人瞩目的 jQuery 版本在 1.7.0 到 1.9.1，如果 loader 提示它对页面包含的多个版本采取了[特殊许可](https://github.com/amdjs/amdjs-api/wiki/jQuery-and-AMD)时，才会注册为 AMD 模块。
+
 许可权限是具有「限制指定版本注册」或「支持有不同定义模块的不同沙盒」的能力。
 
 此选项允许将模块查找的键(key)设置为真值(truthy value)。

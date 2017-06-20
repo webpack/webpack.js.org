@@ -2,22 +2,24 @@
 var marked = require('marked');
 
 module.exports = function() {
-
   var renderer = new marked.Renderer();
 
   renderer.image = function(href, title, text) {
-    return '<img src="' + href + '" alt="' + text + '">';
+    return `<img src="${href}" alt="${text}">`;
   };
 
-  // patch ids (this.options.headerPrefix can be undefined!)
+  // Patch IDs (this.options.headerPrefix can be undefined!)
   renderer.heading = function(text, level, raw) {
-    var id = raw.toLowerCase().replace(/`/g, '').replace(/[^\w]+/g, '-');
+    var parsed = parseAnchor(raw);
+    var id = parsed.id;
 
-    return `<h${level} class="header">` +
+    return (
+      `<h${level} class="header">` +
       `<a class="anchor" href="#${id}" id="${id}"></a>` +
       `<span class="text">${text}</span>` +
       `<a class="icon-link" href="#${id}"></a>` +
-      `</h${level}>\n`;
+      `</h${level}>\n`
+    );
   };
 
   var codeTemplate = renderer.code;
@@ -95,6 +97,14 @@ module.exports = function() {
       var tokens = parseContent(content);
       tokens.links = [];
 
+      marked.Parser.prototype.tok = function () {
+        if (this.token.type === 'table') {
+          return handleTable.call(this, this.token);
+        } else {
+          return handleTok.call(this);
+        }
+      };
+
       return marked.parser(tokens, markedDefaults);
     },
 
@@ -102,10 +112,7 @@ module.exports = function() {
     getAnchors: function(content) {
       return marked.lexer(content)
         .filter(chunk => chunk.type === 'heading')
-        .map(chunk => ({
-          title: chunk.text.replace(/`/g, ''),
-          id: chunk.text.toLowerCase().replace(/`/g, '').replace(/[^\w]+/g, '-')
-        }));
+        .map(chunk => parseAnchor(chunk.text));
     }
   };
 };
@@ -136,11 +143,22 @@ function parseContent(data) {
   return tokens;
 }
 
+function parseAnchor(string) {
+  var stripped = string.replace(/\[(.+)\]\(.+\)/gi, '$1').replace(/(<([^>]+)>)/ig, '');
+  var clean = stripped.replace(/`/g, '');
+
+  return {
+    title: clean,
+    id: clean.replace(/[^\w]+/g, '-').toLowerCase()
+  };
+}
+
 function handleHTMLSplit(tokens, htmlArray, merging) {
   const htmlItem =  htmlArray[0];
-  htmlArray = htmlArray.slice(1);
   const tickSplit = htmlItem.split('`');
   const tickLength = tickSplit.length;
+
+  htmlArray = htmlArray.slice(1);
 
   // detect start of the inline code
   if(merging.length === 0 && tickLength%2 === 0) {
@@ -175,7 +193,11 @@ function handleHTML(t) {
 
     // if only one item in codeArray, then it's already parsed
     if(codeArray.length == 1) {
-      return t;
+      const htmlArray = codeArray[0].split(/\s*(<[^>]*>)/g).filter(v => (v !== '' && v !== '\n'));
+
+      if (htmlArray.length == 1) {
+        return t;
+      }
     }
 
     codeArray.forEach(item => {
@@ -192,6 +214,84 @@ function handleHTML(t) {
     });
 
     return tokens;
+}
+
+function handleTable(t) {
+  let cell = '';
+  let header = '';
+  let body = '';
+
+  for (let i = 0; i < t.header.length; i++) {
+    cell += handleTableCell(this.inline.output(t.header[i]), {
+      header: true,
+      align: t.align[i]
+    });
+  }
+
+  header += handleTableRow(cell);
+
+  for (let i = 0; i < t.cells.length; i++) {
+    let row = t.cells[i];
+    cell = '';
+
+
+    // Fix escaped '|' characters
+    // See https://github.com/chjj/marked/issues/595
+    let erroneous = row.map(item => item.endsWith('\\') ? item : null).filter(item => item);
+
+    if ( erroneous.length > 0 ) {
+      erroneous.forEach(string => {
+        let errorIndex = row.findIndex(item => item === string);
+        let nextIndex = errorIndex + 1;
+        let value = row[errorIndex];
+
+        row[errorIndex] = `${value.slice(0, -1)}|${row[nextIndex]}`;
+        row.splice(nextIndex, 1);
+      });
+    }
+
+
+    for (let j = 0; j < row.length; j++) {
+      cell += handleTableCell(this.inline.output(row[j]), {
+        header: false,
+        headerTitle: this.inline.output(t.header[j]),
+        align: t.align[j]
+      });
+    }
+
+    body += handleTableRow(cell);
+  }
+
+  return `
+    <div class="table">
+        <div class="table-wrap">
+          <div class="table-header">
+              ${header}
+          </div>
+          <div class="table-body">
+              ${body}
+          </div>
+        </div>
+    </div>`;
+}
+
+function handleTableRow(content) {
+  return `<div class="table-tr">${content}</div>`;
+}
+
+function handleTableCell(content, flags) {
+  if(flags.header) {
+    return `<div class="table-th">${content}</div>`;
+  }
+
+  return `<div class="table-td">
+    <div class="table-td-title">
+        ${flags.headerTitle}
+    </div>
+    <div class="table-td-content">
+        ${content}
+    </div>
+  </div>`;
 }
 
 function parseCustomQuote(token, match, className) {
@@ -216,10 +316,82 @@ function parseCustomQuote(token, match, className) {
 
       return {
         type: 'html',
-        text: `<blockquote class="${className}">` +
+        text: (
+          `<blockquote class="${className}">` +
           `<div class="tip-content"> ${text.slice(2).trim()} </div>` +
           '</blockquote>'
+        )
       };
+    }
+  }
+}
+
+// Code is copied from here (only table type was removed)
+// https://github.com/chjj/marked/blob/master/lib/marked.js#L975
+function handleTok() {
+  let body = '';
+
+  switch (this.token.type) {
+    case 'space': {
+      return '';
+    }
+    case 'hr': {
+      return this.renderer.hr();
+    }
+    case 'heading': {
+      return this.renderer.heading(
+        this.inline.output(this.token.text),
+        this.token.depth,
+        this.token.text);
+    }
+    case 'code': {
+      return this.renderer.code(this.token.text,
+        this.token.lang,
+        this.token.escaped);
+    }
+    case 'blockquote_start': {
+      while (this.next().type !== 'blockquote_end') {
+        body += this.tok();
+      }
+
+      return this.renderer.blockquote(body);
+    }
+    case 'list_start': {
+      let ordered = this.token.ordered;
+
+      while (this.next().type !== 'list_end') {
+        body += this.tok();
+      }
+
+      return this.renderer.list(body, ordered);
+    }
+    case 'list_item_start': {
+      while (this.next().type !== 'list_item_end') {
+        body += this.token.type === 'text'
+          ? this.parseText()
+          : this.tok();
+      }
+
+      return this.renderer.listitem(body);
+    }
+    case 'loose_item_start': {
+      while (this.next().type !== 'list_item_end') {
+        body += this.tok();
+      }
+
+      return this.renderer.listitem(body);
+    }
+    case 'html': {
+      let html = !this.token.pre && !this.options.pedantic
+        ? this.inline.output(this.token.text)
+        : this.token.text;
+      return this.renderer.html(html);
+    }
+    case 'paragraph': {
+      return this.renderer.paragraph(this.inline.output(this.token.text));
+    }
+    case 'text': {
+      return this.renderer.paragraph(this.parseText());
     }
   }
 }

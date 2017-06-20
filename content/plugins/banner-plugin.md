@@ -2,7 +2,13 @@
 title: BannerPlugin
 contributors:
   - simon04
+related:
+  - title: banner-plugin-hashing test
+    url: https://github.com/webpack/webpack/blob/master/test/configCases/plugins/banner-plugin-hashing/webpack.config.js
+
 ---
+
+为每个 chunk 文件头部添加 banner。
 
 ``` javascript
 new webpack.BannerPlugin(banner)
@@ -10,7 +16,6 @@ new webpack.BannerPlugin(banner)
 new webpack.BannerPlugin(options)
 ```
 
-为每个 chunk 文件头部添加 banner。
 
 ## 选项
 
@@ -24,3 +29,18 @@ new webpack.BannerPlugin(options)
   exclude: string | RegExp | Array,
 }
 ```
+
+
+## 占位符(Placeholders)
+
+从 webpack 2.5.0 开始，会对 `banner` 字符串中的占位符取值：
+
+```javascript
+new webpack.BannerPlugin({
+  banner: "hash:[hash], chunkhash:[chunkhash], name:[name], filebase:[filebase], query:[query], file:[file]"
+})
+```
+
+***
+
+> 原文：https://webpack.js.org/plugins/banner-plugin/

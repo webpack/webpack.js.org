@@ -1,15 +1,13 @@
 branches:
   only:
-    - master
-    - develop
+    - cn
 language: node_js
 node_js:
   - "6"
 script:
   - bash ./scripts/deploy.sh
 sudo: required
-cache: yarn
 install:
-  - npm i yarn -g
+  - npm install --global yarn
   - yarn
   - sudo pip install proselint

@@ -1,0 +1,313 @@
+---
+title: Module API - Methods
+sort: 3
+contributors:
+  - skipjack
+  - sokra
+related:
+  - title: CommonJS Wikipedia
+    url: https://en.wikipedia.org/wiki/CommonJS
+  - title: Asynchronous Module Definition
+    url: https://en.wikipedia.org/wiki/Asynchronous_module_definition
+---
+
+This section covers all methods available in code compiled with webpack. When using webpack to bundle your application, you can pick from a variety of module syntax styles including [ES6](https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015), [CommonJS](https://en.wikipedia.org/wiki/CommonJS), and [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition).
+
+
+## ES6 (Recommended)
+
+Version 2 of webpack supports ES6 module syntax natively, meaning you can use `import` and `export` without a tool like babel to handle this for you. Keep in mind that you will still probably need babel for other ES6+ features. The following methods are supported by webpack:
+
+
+### `import`
+
+Statically `import` the `export`s of another module.
+
+``` javascript
+import MyModule from './my-module.js';
+import { NamedExport } from './other-module.js';
+```
+
+W> The keyword here is __statically__. Normal `import` statement cannot be used dynamically within other logic or contain variables. See the [spec](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) for more information and `import()` below for dynamic usage.
+
+
+### `export`
+
+Export anything as a `default` or named export.
+
+``` javascript
+// Named exports
+export var Count = 5;
+export function Multiply(a, b) {
+  return a * b;
+}
+
+// Default export
+export default {
+  // Some data...
+}
+```
+
+
+### `import()`
+
+Dynamically load modules.
+
+``` javascript
+if ( module.hot ) {
+  let loadLodash = import('lodash');
+
+  loadLodash()
+    .then(_ => {
+      // Do something with lodash (a.k.a '_')...
+    })
+}
+```
+
+The compiler treats this as a split point and will split everything from `lodash` into a separate bundle that will be loaded as soon as the `loadLodash` function is called. See the [async code splitting guide](/guides/code-splitting-async) for more information.
+
+
+
+## CommonJS
+
+The goal of CommonJS is to specify an ecosystem for JavaScript outside the browser. The following CommonJS methods are supported by webpack:
+
+
+### `require`
+
+``` javascript
+require(dependency: String)
+```
+
+Synchronously retrieve the exports from another module. The compiler will ensure that the dependency is available in the output bundle.
+
+``` javascript
+var $ = require("jquery");
+var myModule = require("my-module");
+```
+
+W> Using it asynchronously may not have the expected effect.
+
+
+### `require.resolve`
+
+``` javascript
+require.resolve(dependency: String)
+```
+
+Synchronously retrieve a module's ID. The compiler will ensure that the dependency is available in the output bundle. See [`module.id`](/api/module#module.id-commonjs) below.
+
+``` javascript
+var id = require.resolve("dependency");
+typeof id === "number";
+id === 0 // if dependency is the entry point
+id > 0 // elsewise
+```
+
+W> Module ID is a number in webpack (in contrast to NodeJS where it is a string -- the filename).
+
+
+### `require.cache`
+
+Multiple requires to the same module result in only one module execution and only one export. Therefore a cache in the runtime exists. Removing values from this cache cause new module execution and a new export.
+
+W> This is only needed in rare cases for compatibility!
+
+``` javascript
+var d1 = require("dependency");
+require("dependency") === d1
+delete require.cache[require.resolve("dependency")];
+require("dependency") !== d1
+```
+
+``` javascript
+// in file.js
+require.cache[module.id] === module
+require("./file.js") === module.exports
+delete require.cache[module.id];
+require.cache[module.id] === undefined
+require("./file.js") !== module.exports // in theory; in praxis this causes a stack overflow
+require.cache[module.id] !== module
+```
+
+
+### `require.ensure`
+
+``` javascript
+require.ensure(dependencies: String[], callback: function([require]), [chunkName: String])
+```
+
+Split out the given `dependencies` to a separate bundle that that will be loaded asynchronously. When using CommonJS module syntax, this is the only way to dynamically load dependencies. Meaning, this code can be run within execution, only loading the `dependencies` if a certain conditions are met. See the [Asynchronous Code Splitting guide](/guides/code-splitting-async) for more details.
+
+``` javascript
+var a = require('normal-dep');
+
+if ( /* Some Condition */ ) {
+  require.ensure(["b"], function(require) {
+    var c = require("c");
+
+    // Do something special...
+  });
+}
+```
+
+
+
+## AMD
+
+Asynchronous Module Definition (AMD) is a JavaScript specification that defines an interface for writing and loading modules. The following AMD methods are supported by webpack:
+
+
+### `define` (with factory)
+
+``` javascript
+define([name: String], [dependencies: String[]], factoryMethod: function(...))
+```
+
+If `dependencies` are provided, `factoryMethod` will be called with the exports of each dependency (in the same order). If `dependencies` are not provided, `factoryMethod` is called with `require`, `exports` and `module` (for compatibility!). If this function returns a value, this value is exported by the module. The compiler ensures that each dependency is available.
+
+W> Note that webpack ignores the `name` argument.
+
+``` javascript
+define(['jquery', 'my-module'], function($, myModule) {
+  // Do something with $ and myModule...
+
+  // Export a function
+  return function doSomething() {
+    // ...
+  };
+});
+```
+
+W> This CANNOT be used in an asynchronous function.
+
+
+### `define` (with value)
+
+``` javascript
+define(value: !Function)
+```
+
+This will simply export the provided `value`. The `value` here can be anything except a function.
+
+``` javascript
+define({
+  answer: 42
+});
+```
+
+W> This CANNOT be used in an async function.
+
+
+### `require` (amd-version)
+
+``` javascript
+require(dependencies: String[], [callback: function(...)])
+```
+
+Similar to `require.ensure`, this will split the given `dependencies` into a separate bundle that will be loaded asynchronously. The `callback` will be called with the exports of each dependency in the `dependencies` array.
+
+``` javascript
+require(['b'], function(b) {
+  var c = require("c");
+});
+```
+
+W> There is no option to provide a chunk name.
+
+
+
+## Labeled Modules
+
+The internal `LabeledModulesPlugin` enables you to use the following methods for exporting and requiring within your modules:
+
+
+### `export` label
+
+Export the given `value`. The label can occur before a function declaration or a variable declaration. The function name or variable name is the identifier under which the value is exported.
+
+``` javascript
+export: var answer = 42;
+export: function method(value) {
+  // Do something...
+};
+```
+
+W> Using it in an async function may not have the expected effect.
+
+
+### `require` label
+
+Make all exports from the dependency available in the current scope. The `require` label can occur before a string. The dependency must export values with the `export` label. CommonJS or AMD modules cannot be consumed.
+
+__some-dependency.js__
+
+``` javascript
+export: var answer = 42;
+export: function method(value) {
+  // Do something...
+};
+```
+
+``` javascript
+require: 'some-dependency';
+console.log(answer);
+method(...);
+```
+
+
+
+## Webpack
+
+Aside from the module syntaxes described above, webpack also allows a few custom, webpack-specific methods:
+
+
+### `require.context`
+
+``` javascript
+require.context(directory:String, includeSubdirs:Boolean /* optional, default true */, filter:RegExp /* optional */)
+```
+
+Specify a whole group of dependencies using a path to the `directory`, an option to `includeSubdirs`, and a `filter` for more fine grained control of the mdoules included. These can then be easily `resolve`d later on.
+
+```javascript
+var context = require.context('components', true, /\.html$/);
+var componentA = context.resolve('componentA');
+```
+
+
+### `require.include`
+
+``` javascript
+require.include(dependency: String)
+```
+
+Include a `dependency` without executing it. This can be used for optimizing the position of a module in the output chunks.
+
+``` javascript
+require.include('a');
+require.ensure(['a', 'b'], function(require) { /* ... */ });
+require.ensure(['a', 'c'], function(require) { /* ... */ });
+```
+
+This will result in following output:
+
+- entry chunk: `file.js` and `a`
+- anonymous chunk: `b`
+- anonymous chunk: `c`
+
+Without `require.include('a')` it would be duplicated in both anonymous chunks.
+
+
+### `require.resolveWeak`
+
+Similar to `require.resolve`, but this won't pull the `module` into the bundle. It's what is considered a "weak" dependency.
+
+``` javascript
+if(__webpack_modules__[require.resolveWeak('module')]) {
+  // Do something when module is available...
+}
+if(require.cache[require.resolveWeak('module')]) {
+  // Do something when module was loaded before...
+}
+```

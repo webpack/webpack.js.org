@@ -2,6 +2,9 @@ import React from 'react';
 import Link from '../link/link';
 import Container from '../container/container';
 import Logo from '../logo/logo';
+import Dropdown from '../dropdown/dropdown';
+import USFlag from '../../assets/language/english.png';
+import ChineseFlag from '../../assets/language/chinese.png';
 
 // TODO: Maybe by updating the routing scheme later on we can avoid hardcoding this?
 let Sections = [
@@ -17,6 +20,7 @@ let Sections = [
     title: '文档',
     url: 'configuration',
     children: [
+      { title: 'CLI', url: 'api/cli' },
       { title: 'API', url: 'api' },
       { title: '配置', url: 'configuration' },
       { title: 'LOADER', url: 'loaders' },
@@ -25,12 +29,20 @@ let Sections = [
     ]
   },
   {
+    title: '翻译人员',
+    url: 'about'
+  },
+  {
     title: '捐赠',
     url: '//opencollective.com/webpack'
   },
   {
-    title: 'Blog',
-    url: '//medium.com/webpack'
+    title: '博客',
+    url: '//github.com/webpack-china/awesome-webpack-cn'
+  },
+  {
+    title: '支持',
+    url: 'support'
   }
 ];
 
@@ -82,19 +94,26 @@ export default class Navigation extends React.Component {
               onClick={ this._toggleSearch.bind(this) } />
           </div>
 
-          <Link 
-            className="navigation__icon" 
+          <Link
+            className="navigation__icon"
             title="GitHub Repository"
             to="//github.com/webpack/webpack">
             <i className="sidecar__icon icon-github" />
           </Link>
 
-          <Link 
-            className="navigation__icon" 
+          <Link
+            className="navigation__icon"
             title="See Questions on Stack Overflow"
             to="//stackoverflow.com/questions/tagged/webpack">
             <i className="sidecar__icon icon-stack-overflow" />
           </Link>
+
+          <Dropdown
+            className="navigation__languages"
+            items={[
+              { title: '中文', url: 'https://doc.webpack-china.org/', image: ChineseFlag },
+              { title: 'English', url: 'https://webpack.js.org/', image: USFlag }
+            ]} />
         </Container>
 
         {
@@ -127,7 +146,14 @@ export default class Navigation extends React.Component {
 
   componentDidMount() {
     if (typeof window !== 'undefined') {
-      window.docsearch({
+      let docsearch = () => {};
+
+      // XXX: hack around docsearch
+      if (window.docsearch) {
+        docsearch = window.docsearch.default || window.docsearch;
+      }
+
+      docsearch({
         apiKey: 'fac401d1a5f68bc41f01fb6261661490',
         indexName: 'webpack-js-org',
         inputSelector: '.navigation__search-input'

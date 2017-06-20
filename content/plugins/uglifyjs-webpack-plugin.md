@@ -3,29 +3,21 @@ title: UglifyjsWebpackPlugin
 source: https://raw.githubusercontent.com/webpack-contrib/uglifyjs-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/uglifyjs-webpack-plugin/edit/master/README.md
 ---
-[![build status](https://secure.travis-ci.org/webpack-contrib/uglifyjs-webpack-plugin.svg)](http://travis-ci.org/webpack-contrib/uglifyjs-webpack-plugin) [![bitHound Score](https://www.bithound.io/github/webpack-contrib/uglifyjs-webpack-plugin/badges/score.svg)](https://www.bithound.io/github/webpack-contrib/uglifyjs-webpack-plugin) [![codecov](https://codecov.io/gh/webpack-contrib/uglifyjs-webpack-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/webpack-contrib/uglifyjs-webpack-plugin)
+## 安装
 
-# UglifyJS Webpack Plugin
-
-这个插件使用 [UglifyJS](https://github.com/mishoo/UglifyJS2) 去压缩你的JavaScript代码。除了它从 webpack 中解耦之外，它和 webpack 核心插件 (`webpack.optimize.UglifyJSPlugin`) 是同一个插件。这允许你控制你正在使用的 UglifyJS 的版本。
-
-> 注意，webpack 在 `webpack.optimize.UglifyJsPlugin` 下包含相同的插件。对于那些想控制 UglifyJS 版本的开发者来说，这是一个独立的版本。除了这种情况下的安装说明，文档是有效的。
-
-## 使用
-
-首先，安装这个插件:
+使用 [Yarn](https://yarnpkg.com):
 
 ```bash
 yarn add uglifyjs-webpack-plugin --dev
 ```
 
-..或者你坚持使用npm，而不是更先进的 [Yarn](https://yarnpkg.com):
+使用 npm:
 
 ```bash
 npm install uglifyjs-webpack-plugin --save-dev
 ```
 
-**十分重要!** 这个插件这个插件依赖 uglify-js，所以为了使用这个插件，也要安装 uglify-js。然而，目前 (2017/1/25) 可用的 uglify-js npm 包，不支持压缩 ES6 代码。为了支持 ES6，必须提供一个具有压缩 ES6 能力的版本，又称之为 _harmony_ 版本。
+**十分重要!** 这个插件这个插件依赖 uglify-js，所以为了使用这个插件，也要安装 uglify-js；然而，目前 (2017/1/25) 可用的 uglify-js npm 包，不支持压缩 ES6 代码。为了支持 ES6，必须提供一个具有压缩 ES6 能力的版本，又称之为 _harmony_ 版本。
 
 如果你的压缩目标是 ES6:
 
@@ -39,7 +31,7 @@ yarn add git://github.com/mishoo/UglifyJS2#harmony --dev
 yarn add uglify-js --dev
 ```
 
-然后配置如下:
+## 用法
 
 ```javascript
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
@@ -54,8 +46,6 @@ module.exports = {
 };
 ```
 
-就是这样了!
-
 ## 选项
 
 这个插件支持 UglifyJS 的功能，如下所述:
@@ -63,14 +53,17 @@ module.exports = {
 | 属性 | 类型 | 默认值 | 描述 |
 | --- | --- | --- | --- |
 | compress | boolean, object | true | 见 [UglifyJS 文档](http://lisperator.net/uglifyjs/compress)。 |
-| mangle | boolean, object | true | 见下节. |
+| mangle | boolean, object | true | 见下节。 |
 | beautify | boolean | false | 美化输出。 |
 | output | 一个提供 UglifyJS [OutputStream](https://github.com/mishoo/UglifyJS2/blob/master/lib/output.js) 选项的对象 | | 更底层地访问 UglifyJS 输出。 |
-| comments | boolean, RegExp, function(astNode, comment) -> boolean | 默认保存包含 `/*!`, `/**!`, `@preserve` or `@license` 的注释 | 注释相关的配置 |
-| sourceMap | boolean | false | 使用 SourceMaps 将错误信息的位置映射到模块。这会减慢编译的速度。 |
+| comments | boolean, RegExp, function(astNode, comment) -> boolean | 默认保留注释（包括 `/*!`, `/**!`, `@preserve` or `@license`）。 | 注释相关的配置 |
+| extractComments | boolean, RegExp, function (astNode, comment) -> boolean, object | false | 是否将注释提取到单独的文件，见下节。 |
+| sourceMap | boolean | false | 使用 SourceMaps 将错误信息的位置映射到模块。这会减慢编译的速度。**重要！** `cheap` 类 source map 选项无法和插件一同运行！ |
 | test | RegExp, Array<RegExp> | <code>/\.js($&#124;\?)/i</code> | 测试匹配的文件 |
-| include | RegExp, Array<RegExp> | | 只测试包含的文件。 |
-| exclude | RegExp, Array<RegExp> | | 要从测试中排除的文件。 |
+| include | RegExp, Array<RegExp> | | 只测试`包含`的文件。 |
+| exclude | RegExp, Array<RegExp> | | 只测试被`排除`的文件。 |
+| extractComments | boolean, RegExp, object | | 将注释提取到单独的文件（查看[详情](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a)，从 webpack 2.3.0 开始） |
+| warningsFilter | function(source) -> boolean | | 允许过滤 uglify 警告（从 webpack 2.3.0 开始）。 |
 
 ## Mangling
 
@@ -87,6 +80,71 @@ new UglifyJsPlugin({
 })
 ```
 
-## License
+## 提取注释
 
-MIT.
+`extractComments` 选项可以是：
+- `true`: 所有在`comments`选项中保存的注释都会被移到单独的文件。如果源文件是 `foo.js` ,那注释将被存储为 `foo.js.LICENSE` 。
+- 通常表达式（ 如：`RegExp`或者`string` ）或者 `function (astNode, comment) -> boolean`：
+所有匹配所给定的表达式（ 等于返回`true`的函数 ）会被提取为分离文件。`comments`选项指定注释是否被储存， i.e。可以在存储一些注释当在提取其他注释即使是存储已经被被提取。
+- `object`存在下面的值，所有的选项：
+  - `condition`: 通常表达式或者相应函数（见上文）
+  - `filename`: 提取注释的文件会被存储。`字符`或者是返回字符的函数`function (string) -> string`，作为原文件名。默认加上文件后缀名`.LICENSE`。
+  - `banner`: Banner 文本会在原文件的头部指出被提取的文件。会在源文件加入该信息。可以是`false`(表示没有banner)，`string`，或者`function (string) -> string`会在提取已经被存储注释的时候被调用。注释会被覆盖。
+默认: `/*! For license information please see foo.js.LICENSE */`
+
+
+## 维护人员
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
+      </td>
+    </tr>
+  <tbody>
+</table>
+
+
+[npm]: https://img.shields.io/npm/v/uglifyjs-webpack-plugin.svg
+[npm-url]: https://npmjs.com/package/uglifyjs-webpack-plugin
+
+[deps]: https://david-dm.org/webpack-contrib/uglifyjs-webpack-plugin.svg
+[deps-url]: https://david-dm.org/webpack-contrib/uglifyjs-webpack-plugin
+
+[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
+[chat-url]: https://gitter.im/webpack/webpack
+
+[test]: https://secure.travis-ci.org/webpack-contrib/uglifyjs-webpack-plugin.svg
+[test-url]: http://travis-ci.org/webpack-contrib/uglifyjs-webpack-plugin
+
+[cover]: https://codecov.io/gh/webpack-contrib/uglifyjs-webpack-plugin/branch/master/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack-contrib/uglifyjs-webpack-plugin
+
+[quality]: https://www.bithound.io/github/webpack-contrib/uglifyjs-webpack-plugin/badges/score.svg
+[quality-url]: https://www.bithound.io/github/webpack-contrib/uglifyjs-webpack-plugin
+
+***
+
+> 原文：https://webpack.js.org/plugins/uglifyjs-webpack-plugin/

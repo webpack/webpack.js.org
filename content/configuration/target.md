@@ -15,11 +15,12 @@ webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 t
 
 `string`
 
-告诉 webpack 这个程序的目标环境是什么。支持以下值：
+告诉 webpack 这个程序的目标环境是什么。通过 [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js) 可以支持以下值：
 
 | `target`      | 描述            |
 | ------------- |------------------------|
 | `async-node`| 编译为类 Node.js 环境可用（使用 fs 和 vm 异步加载分块）    |
+| ~~`atom`~~      | `electron-main` 的别名 |
 | `electron`      | `electron-main` 的别名 |
 | `electron-main`      | 编译为 [Electron](http://electron.atom.io/) 渲染进程，使用 `JsonpTemplatePlugin`, `FunctionModulePlugin` 来为浏览器环境提供目标，使用 `NodeTargetPlugin` 和 `ExternalsPlugin` 为 CommonJS 和 Electron 内置模块提供目标。 |
 | `node` | 编译为类 Node.js 环境可用（使用 Node.js `require` 加载 chunk） |

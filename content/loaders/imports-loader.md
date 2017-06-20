@@ -3,19 +3,13 @@ title: imports-loader
 source: https://raw.githubusercontent.com/webpack-contrib/imports-loader/master/README.md
 edit: https://github.com/webpack-contrib/imports-loader/edit/master/README.md
 ---
-# imports loader for webpack
+## Install
 
-imports loader 允许你依赖特定的全局变量来使用模块。
-
-这对一些依赖全局变量的第三方模块（例如 `window` 下的 `$` 或者 `this`）很有用。imports loader 会添加必要的 `require('whatever')` 调用，让这些模块可以在 webpack 中使用。
-
-##  安装
-
-```
+```bash
 npm install imports-loader
 ```
 
-## 用法
+## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
 假设你有 `example.js` 这个文件
 
@@ -33,7 +27,7 @@ require("imports-loader?$=jquery!./example.js");
 
 ### 语法
 
-加载器查询值 | 含义
+loader 查询值 | 含义
 ------------|-------
 `angular` | `var angular = require("angular");`
 `$=jquery` | `var $ = require("jquery");`
@@ -59,17 +53,15 @@ require("imports-loader?$=jquery,angular,config=>{size:50}!./file.js");
 module.exports = {
     ...
     module: {
-        loaders: [
+        rules: [
             {
                 test: require.resolve("some-module"),
-                loader: "imports-loader?this=>window"
+                use: "imports-loader?this=>window"
             }
         ]
     }
 };
 ```
-
-[文档：使用加载器](http://webpack.github.io/docs/using-loaders.html)
 
 ## 典型的使用场景
 
@@ -85,7 +77,7 @@ module.exports = {
 
 有很多模块在使用 CommonJS 前会进行 `define` 函数的检查。自从 webpack 两种格式都可以使用后，在这种场景下默认使用了 AMD 可能会造成某些问题（如果接口的实现比较古怪）。
 
-你可以像下面这样轻松的禁用 AMD 
+你可以像下面这样轻松的禁用 AMD
 
 ```javascript
 imports-loader?define=>false
@@ -93,9 +85,51 @@ imports-loader?define=>false
 
 关于兼容性问题的更多提示，可以参考官方的文档 [Shimming Modules](http://webpack.github.io/docs/shimming-modules.html)。
 
-## License
+## Maintainers
 
-MIT (http://www.opensource.org/licenses/mit-license.php)
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
+        </br>
+        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
+        </br>
+        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
+        </br>
+        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
+      </td>
+      <td align="center">
+        <img width="150" height="150"
+        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
+        </br>
+        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
+      </td>
+    </tr>
+  <tbody>
+</table>
+
+
+[npm]: https://img.shields.io/npm/v/imports-loader.svg
+[npm-url]: https://npmjs.com/package/imports-loader
+
+[deps]: https://david-dm.org/webpack-contrib/imports-loader.svg
+[deps-url]: https://david-dm.org/webpack-contrib/imports-loader
+
+[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
+[chat-url]: https://gitter.im/webpack/webpack
+
+[test]: http://img.shields.io/travis/webpack-contrib/imports-loader.svg
+[test-url]: https://travis-ci.org/webpack-contrib/imports-loader
 
 ***
 

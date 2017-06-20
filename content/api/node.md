@@ -10,12 +10,13 @@ webpack 提供了 Node.js API，可以在 Node.js 运行时下直接使用。
 
 当你需要自定义构建或开发流程时，Node.js API 非常有用，因为此时所有的报告和错误处理都必须自行实现，webpack 仅仅负责编译的部分。所以 [`stats`](/configuration/stats) 配置选项不会在 `webpack()` 调用中生效。
 
+
 ## 安装(Installation)
 
 开始使用 webpack 的 Node.js API 之前，首先你需要安装 webpack：
 
-```
-npm install webpack --save-dev
+``` bash
+npm install --save-dev webpack
 ```
 
 然后在 Node.js 脚本中 `require` webpack 模块：
@@ -26,6 +27,7 @@ const webpack = require("webpack");
 // 或者如果你喜欢 ES2015:
 import webpack from "webpack";
 ```
+
 
 ## `webpack()`
 
@@ -57,7 +59,9 @@ webpack([
   // ...
 });
 ```
+
 T> webpack **不**会并行执行多个配置。每个配置只会在前一个处理结束后才会开始处理。如果你需要 webpack 并行执行它们，你可以使用像 [parallel-webpack](https://www.npmjs.com/package/parallel-webpack) 这样的第三方解决方案。
+
 
 ## Compiler 实例(Compiler Instance)
 
@@ -65,6 +69,7 @@ T> webpack **不**会并行执行多个配置。每个配置只会在前一个�
 
 * `.run(callback)`
 * `.watch(watchOptions, handler)`
+
 
 ## 执行(Run)
 
@@ -81,6 +86,7 @@ compiler.run((err, [stats](#stats-object)) => {
   // ...
 });
 ```
+
 
 ## 监听(Watching)
 
@@ -110,6 +116,9 @@ const watching = compiler.watch({
 
 `Watching` 配置选项的[细节可以在这里查阅](/configuration/watch/#watchoptions)。
 
+W> 文件系统不正确的问题，可能会对单次修改触发多次构建。因此，在上面的示例中，一次修改可能会多次触发 `console.log` 语句。用户应该预知此行为，并且可能需要检查 `stats.hash` 来查看文件哈希是否确实变更。
+
+
 ### 关闭 `Watching`(Close `Watching`)
 
 `watch` 方法返回一个 `Watching` 实例，它会暴露一个 `.close(callback)` 方法。调用该方法将会结束监听：
@@ -122,36 +131,39 @@ watching.close(() => {
 
 T> 不允许在当前监听器已经关闭或失效前再次监听或执行。
 
+
 ### 作废 `Watching`(Invalidate `Watching`)
 
-手动将当前的编译阶段废弃，但不停止监听。
+使用 `watching.invalidate`，您可以手动使当前编译循环(compiling round)无效，而不会停止监视进程：
 
 ``` js
-watching.invalidate(() => {
-  console.warn("Invalidated.");
-});
+watching.invalidate();
 ```
+
 
 ## Stats 对象(Stats Object)
 
 `stats` 对象会被作为 [`webpack()`](#webpack-) 回调函数的第二个参数传入，可以通过它获取到代码编译过程中的有用信息，包括：
 
-- 错误和警告（如有）
-- 计时
-- 模块和 chunk 信息
-- 其他信息
+* 错误和警告（如有）
+* 计时
+* 模块和 chunk 信息
+* 其他信息
 
 [webpack CLI](/api/cli) 正是基于这些信息在控制台展示友好的格式输出。
 
 该对象暴露了以下方法：
 
+
 ### `stats.hasErrors()`
 
 可以用来检查编译期是否有错误，返回 `true` 或 `false`。
 
+
 ### `stats.hasWarnings()`
 
 可以用来检查编译期是否有警告，返回 `true` 或 `false`。
+
 
 ### `stats.toJson(options)`
 
@@ -160,6 +172,7 @@ watching.invalidate(() => {
 ``` js-with-links
 stats.toJson("minimal"); // [更多选项如: "verbose" 等](/configuration/stats).
 ```
+
 ``` js
 stats.toJson({
   assets: false,
@@ -170,6 +183,7 @@ stats.toJson({
 所有可用的配置选项和预设值记录在 [Stats 文档](/configuration/stats)。
 
 > 这里有 [该函数输出的示例](https://github.com/webpack/analyse/blob/master/app/pages/upload/example.json)
+
 
 ### `stats.toString(options)`
 
@@ -205,13 +219,14 @@ webpack({
 });
 ```
 
+
 ## 错误处理(Error Handling)
 
 完备的错误处理中需要考虑以下三种类型的错误：
 
-- 致命的 wepback 错误（配置出错等）
-- 编译错误（缺失的模块，语法错误等）
-- 编译警告
+* 致命的 wepback 错误（配置出错等）
+* 编译错误（缺失的模块，语法错误等）
+* 编译警告
 
 下面是一个覆盖这些场景的示例：
 
@@ -242,6 +257,7 @@ webpack({
   // 记录结果...
 });
 ```
+
 
 ## 编译到内存中(Compiling to Memory)
 

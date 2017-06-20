@@ -174,7 +174,6 @@ export default class VoteApp extends React.Component {
         });
       }
     });
-    listInfo && console.log(listInfo);
     return (
       <div className="vote-app">
         <div className="vote-app__title">
@@ -212,7 +211,7 @@ export default class VoteApp extends React.Component {
                     let minimum = voteSettings.minimum || 0;
                     let value = (userVote && userVote.votes) ? userVote.votes: 0;
                     if(currencyInfo && currencyInfo.remaining + value < maximum) maximum = currencyInfo.remaining + value;
-                    return <div className="vote-app__item-button">
+                    return <div key={voteSettings.name} className="vote-app__item-button">
                       <VoteButton
                         className={"vote-app__vote-" + voteSettings.name}
                         value={vote.votes}
@@ -361,7 +360,7 @@ export default class VoteApp extends React.Component {
         { listInfo && <ul className="vote-app__currency-list">
           { selfInfo.currencies
             .filter(currency => listInfo.possibleVotes.some(voteSettings => voteSettings.currency === currency.name))
-            .map(currency => <li className={"vote-app__currency-" + currency.name} title={`${currency.description}\nYou used ${currency.used} of a total of ${currency.value} ${currency.displayName}.`}>
+            .map(currency => <li key={currency.name} className={"vote-app__currency-" + currency.name} title={`${currency.description}\nYou used ${currency.used} of a total of ${currency.value} ${currency.displayName}.`}>
             {currency.remaining} {currency.displayName}
           </li>) }
         </ul> }

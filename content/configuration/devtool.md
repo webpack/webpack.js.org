@@ -5,15 +5,20 @@ contributors:
   - sokra
   - skipjack
   - SpaceK33z
+  - lricoy
 ---
 
-此选项控制是否生成，以及如何生成 Source Map。
+此选项控制是否生成，以及如何生成 source map。
+
+使用 [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin) 进行更细节的配置。请查看 [`source-map-loader`](/loaders/source-map-loader) 来处理现有的 source map。
 
 ## `devtool`
 
 `string` `false`
 
 选择一种 [source map](http://blog.teamtreehouse.com/introduction-source-maps) 来增强调试过程。注意，以下选项能够可能会很明显地影响构建(build)和重构建(rebuild)的速度。
+
+T> webpack 仓库包含一个[展示所有不同 `devtool` 的效果的示例](https://github.com/webpack/webpack/tree/master/examples/source-map)。这些例子可能会有助于您了解差异。
 
  devtool                      | 构建 | 重构建 | 生产环境 | 特性
 ------------------------------|-------|---------|------------|--------------------------
@@ -25,6 +30,8 @@ contributors:
  eval-source-map              | --    | +       | no         | 原始源码
  source-map                   | --    | --      | yes        | 原始源码
  nosources-source-map         | --    | --      | yes        | 无源码内容
+
+T> `+` 表示较快，`-` 表示较慢，`o` 表示时间相同
 
 其中一些值适用于开发环境，一些适用于生产环境。对于开发环境，通常希望更快速的 Source Map，需要添加到 bundle 中以增加体积为代价，但是对于生产环境，则希望更精准的 Source Map，需要从 bundle 中分离并独立存在。
 
