@@ -252,7 +252,7 @@ These options allow webpack to display various [stats](/configuration/stats/) an
 | --display-modules              | Display even excluded modules in the output                        | boolean |
 | --display-optimization-bailout | Scope hoisting fallback trigger (since webpack 3.0.0)              | boolean |
 | --display-origins              | Display origins of chunks in the output                            | boolean |
-| --display-provided-exports     | Display information about exports provided from modules   | boolean |
+| --display-provided-exports     | Display information about exports provided from modules            | boolean |
 | --display-reasons              | Display reasons about module inclusion in the output               | boolean |
 | --display-used-exports         | Display information about used exports in modules (Tree Shaking)   | boolean |
 | --hide-modules                 | Hides info about modules                                           | boolean |
