@@ -17,7 +17,7 @@ These options configure whether to polyfill or mock certain [Node.js globals](ht
 This is an object where each property is the name of a Node global or module and each value may be one of the following...
 
 - `true`: Provide a polyfill.
-- `"mock"`: Provide a mock that implements the expected interface but has little or no fuctionality.
+- `"mock"`: Provide a mock that implements the expected interface but has little or no functionality.
 - `"empty"`: Provide an empty object.
 - `false`: Provide nothing. Code that expects this object to be defined may crash.
 
@@ -36,6 +36,8 @@ node: {
   setImmediate: true
 }
 ```
+
+Since webpack 3.0.0, the `node` option may be set to `false` to turn off the `NodeSourcePlugin` completely.
 
 
 ## `node.console`
