@@ -2,7 +2,8 @@ import React from 'react';
 import Link from '../link/link';
 import Container from '../container/container';
 import Icon from '../../assets/icon-square-small.svg';
-import CCBY from '../../assets/cc-by.png';
+import CC from '../../assets/cc.svg';
+import BY from '../../assets/by.svg';
 import './footer-style';
 
 export default (props) => {
@@ -30,7 +31,10 @@ export default (props) => {
           <Link className="footer__link footer__license" to="/license">
             <img
               alt="Creative Commons License"
-              src={ CCBY } />
+              src={ CC } />
+            <img
+              alt="Creative Commons License"
+              src={ BY } />
           </Link>
         </section>
       </Container>
