@@ -237,25 +237,25 @@ These allow you to configure the webpack [resolver](/configuration/resolve/) wit
 
 These options allow webpack to display various [stats](/configuration/stats/) and style them differently in the console output.
 
-| Parameter               | Explanation                                                        | Type    |
-|-------------------------|--------------------------------------------------------------------|---------|
-| --color, --colors       | Enables/Disables colors on the console [default: (supports-color)] | boolean |
-| --display-cached        | Display also cached modules in the output                          | boolean |
-| --display-cached-assets | Display also cached assets in the output                           | boolean |
-| --display-chunks        | Display chunks in the output                                       | boolean |
-| --display-entrypoints   | Display entry points in the output                                 | boolean |
-| --display-error-details | Display details about errors                                       | boolean |
-| --display-exclude       | Exclude modules in the output                                      | boolean |
-| --display-modules       | Display even excluded modules in the output                        | boolean |
-| --display-origins       | Display origins of chunks in the output                            | boolean |
-| --display-reasons       | Display reasons about module inclusion in the output               | boolean |
-| --display-used-exports  | Display information about used exports in modules (Tree Shaking)   | boolean |
-| --hide-modules          | Hides info about modules                                           | boolean |
-| --sort-assets-by        | Sorts the assets list by property in asset                         | string  |
-| --sort-chunks-by        | Sorts the chunks list by property in chunk                         | string  |
-| --sort-modules-by       | Sorts the modules list by property in module                       | string  |
-| --verbose               | Show more details                                                  | boolean |
-| --display-optimization-bailout | Scope hoisting fallback trigger | boolean |
+| Parameter                      | Explanation                                                        | Type    |
+|--------------------------------|--------------------------------------------------------------------|---------|
+| --color, --colors              | Enables/Disables colors on the console [default: (supports-color)] | boolean |
+| --display-cached               | Display also cached modules in the output                          | boolean |
+| --display-cached-assets        | Display also cached assets in the output                           | boolean |
+| --display-chunks               | Display chunks in the output                                       | boolean |
+| --display-entrypoints          | Display entry points in the output                                 | boolean |
+| --display-error-details        | Display details about errors                                       | boolean |
+| --display-exclude              | Exclude modules in the output                                      | boolean |
+| --display-modules              | Display even excluded modules in the output                        | boolean |
+| --display-origins              | Display origins of chunks in the output                            | boolean |
+| --display-reasons              | Display reasons about module inclusion in the output               | boolean |
+| --display-used-exports         | Display information about used exports in modules (Tree Shaking)   | boolean |
+| --hide-modules                 | Hides info about modules                                           | boolean |
+| --sort-assets-by               | Sorts the assets list by property in asset                         | string  |
+| --sort-chunks-by               | Sorts the chunks list by property in chunk                         | string  |
+| --sort-modules-by              | Sorts the modules list by property in module                       | string  |
+| --verbose                      | Show more details                                                  | boolean |
+| --display-optimization-bailout | Scope hoisting fallback trigger                                    | boolean |
 
 
 ### Advanced Options
