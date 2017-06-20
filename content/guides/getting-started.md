@@ -31,8 +31,8 @@ Now we'll create the following directory structure and contents:
 __project__
 
 ``` diff
-webpack-demo
-|- package.json
+  webpack-demo
+  |- package.json
 + |- index.html
 + |- /src
 +   |- index.js
@@ -75,23 +75,23 @@ There are problems with managing JavaScript projects this way:
 - If a dependency is missing, or included in the wrong order, the application will not function properly.
 - If a dependency is included but not used, the browser will be forced to download unnecessary code.
 
-Let's use webpack to manage these scripts instead...
+Let's use webpack to manage these scripts instead.
 
 
 ## Creating a Bundle
 
-First we'll tweak our directory structure slightly, separating the "source" code (`/src`) from our "distribution" code (`/dist`). The  "source" code is the what we'll write and edit. The "distribution" code is the minimized and optimized `output` of our build process that will eventually be loaded in the browser:
+First we'll tweak our directory structure slightly, separating the "source" code (`/src`) from our "distribution" code (`/dist`). The  "source" code is the code that we'll write and edit. The "distribution" code is the minimized and optimized `output` of our build process that will eventually be loaded in the browser:
 
 __project__
 
 ``` diff
-webpack-demo
-|- package.json
+  webpack-demo
+  |- package.json
 + |- /dist
 +   |- index.html
 - |- index.html
-|- /src
-  |- index.js
+  |- /src
+    |- index.js
 ```
 
 To bundle the `lodash` dependency with `index.js`, we'll need to install the library locally...
@@ -107,17 +107,17 @@ __src/index.js__
 ``` diff
 + import _ from 'lodash';
 +
-function component () {
-  var element = document.createElement('div');
+  function component () {
+    var element = document.createElement('div');
   
 -   // Lodash, currently included via a script, is required for this line to work
 +   // Lodash, now imported by this script
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
-  return element;
-}
+    return element;
+  }
 
-document.body.appendChild(component());
+  document.body.appendChild(component());
 ```
 
 Now, since we'll be bundling our scripts, we have to update our `index.html` file. Let's remove the lodash `<script>`, as we now `import` it, and modify the other `<script>` tag to load the bundle, instead of the raw `/src` file:
@@ -125,16 +125,16 @@ Now, since we'll be bundling our scripts, we have to update our `index.html` fil
 __dist/index.html__
 
 ``` diff
- <html>
-  <head>
-    <title>Getting Started</title>
--   <script src="https://unpkg.com/lodash@4.16.6"></script>
-  </head>
-  <body>
--   <script src="./src/index.js"></script>
-+   <script src="bundle.js"></script>
-  </body>
- </html>
+  <html>
+   <head>
+     <title>Getting Started</title>
+-    <script src="https://unpkg.com/lodash@4.16.6"></script>
+   </head>
+   <body>
+-    <script src="./src/index.js"></script>
++    <script src="bundle.js"></script>
+   </body>
+  </html>
 ```
 
 In this setup, `index.js` explicitly requires `lodash` to be present, and binds it as `_` (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.
@@ -174,12 +174,13 @@ Most projects will need a more complex setup, which is why webpack supports a [c
 __project__
 
 ``` diff
-|- package.json
+  webpack-demo
+  |- package.json
 + |- webpack.config.js
-|- /dist
-  |- index.html
-|- /src
-  |- index.js
+  |- /dist
+    |- index.html
+  |- /src
+    |- index.js
 ```
 
 __webpack.config.js__
@@ -212,7 +213,7 @@ bundle.js  544 kB       0  [emitted]  [big]  main
    [3] ./src/index.js 278 bytes {0} [built]
 ```
 
-T> If a `webpack.config.js` is present, `webpack` command picks it up by default. We use the `--config` option here only to show that you can pass a config of any name. This will come in useful for more complex configurations that need to be split into multiple files.
+T> If a `webpack.config.js` is present, the `webpack` command picks it up by default. We use the `--config` option here only to show that you can pass a config of any name. This will come in useful for more complex configurations that need to be split into multiple files.
 
 A configuration file allows far more flexibility than simple CLI usage. We can specify loader rules, plugins, resolve options and many other enhancements this way. See the [configuration documentation](/configuration) to learn more.
 
@@ -240,7 +241,6 @@ Now run the following command and see if your script alias works:
 ``` bash
 npm run build
 
-
 Hash: ff6c1d39b26f89b3b7bb
 Version: webpack 2.2.0
 Time: 390ms
@@ -257,11 +257,12 @@ T> Custom parameters can be passed to webpack by adding two dashes between the `
 
 ## Conclusion
 
-Now that you have a basic build together, you should dig into the [basic concepts](/concepts) and [configuration](/configuration) to better understand webpack's design. The [API](/api) section digs into the various interfaces webpack offers. Or, if you'd prefer learning by example, select the next guide from the list and continue building out this little demo we've been working on which should now look similar to this:
+Now that you have a basic build together, you should dig into the [basic concepts](/concepts) and [configuration](/configuration) to better understand webpack's design. The [API](/api) section digs into the various interfaces webpack offers. Or, if you'd prefer to learn by example, select the next guide from the list and continue building out this little demo we've been working on which should now look similar to this:
 
 __project__
 
 ``` diff
+webpack-demo
 |- package.json
 |- webpack.config.js
 |- /dist
@@ -272,4 +273,4 @@ __project__
 |- /node_modules
 ```
 
-T> If you're using npm 5, you'll probably also see a `package-lock.json` file in your diretory.
+T> If you're using npm 5, you'll probably also see a `package-lock.json` file in your directory.
