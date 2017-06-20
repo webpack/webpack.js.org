@@ -240,15 +240,19 @@ These options allow webpack to display various [stats](/configuration/stats/) an
 | Parameter                      | Explanation                                                        | Type    |
 |--------------------------------|--------------------------------------------------------------------|---------|
 | --color, --colors              | Enables/Disables colors on the console [default: (supports-color)] | boolean |
+| --display                      | Select [display preset](/configuration/stats) (verbose, detailed, normal, minimal, errors-only, none; since webpack 3.0.0) | string |
 | --display-cached               | Display also cached modules in the output                          | boolean |
 | --display-cached-assets        | Display also cached assets in the output                           | boolean |
 | --display-chunks               | Display chunks in the output                                       | boolean |
+| --display-depth                | Display distance from entry point for each module                  | boolean |
 | --display-entrypoints          | Display entry points in the output                                 | boolean |
 | --display-error-details        | Display details about errors                                       | boolean |
 | --display-exclude              | Exclude modules in the output                                      | boolean |
+| --display-max-modules          | Sets the maximum number of visible modules in output               | number  |
 | --display-modules              | Display even excluded modules in the output                        | boolean |
 | --display-optimization-bailout | Scope hoisting fallback trigger (since webpack 3.0.0)              | boolean |
 | --display-origins              | Display origins of chunks in the output                            | boolean |
+| --display-provided-exports     | Display information about exports provided from modules   | boolean |
 | --display-reasons              | Display reasons about module inclusion in the output               | boolean |
 | --display-used-exports         | Display information about used exports in modules (Tree Shaking)   | boolean |
 | --hide-modules                 | Hides info about modules                                           | boolean |
