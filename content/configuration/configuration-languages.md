@@ -12,7 +12,7 @@ webpack accepts configuration files written in multiple programming and data lan
 For example, to use [CoffeeScript](http://coffeescript.org/), you would first install the necessary dependencies:
 
 ``` bash
-npm i --save-dev coffee-script
+npm install --save-dev coffee-script
 ```
 
 and then proceed to write your configuration:

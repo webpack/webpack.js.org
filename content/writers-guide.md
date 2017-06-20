@@ -17,7 +17,7 @@ title: Writer's Guide
 
 ## Running the Site
 
-1. `npm i`
+1. `npm install`
 2. `npm start`
 3. `open http://localhost:3000`
 
