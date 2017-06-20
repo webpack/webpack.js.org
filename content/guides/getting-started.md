@@ -87,7 +87,7 @@ __project__
 ``` diff
 webpack-demo
 |- package.json
-+ |- dist
++ |- /dist
 +   |- index.html
 - |- index.html
 |- /src
@@ -176,7 +176,7 @@ __project__
 ``` diff
 |- package.json
 + |- webpack.config.js
-|- dist
+|- /dist
   |- index.html
 |- /src
   |- index.js
@@ -236,6 +236,7 @@ __package.json__
 Now the `npm run build` command can be used in place of the longer commands we used earlier. Note that within `scripts` we can reference locally installed npm packages by name instead of writing out the entire path. This convention is the standard in most npm-based projects and allows us to directly call `webpack`, instead of `node_modules/webpack/bin/webpack.js`
 
 Now run the following command and see if your script alias works:
+
 ``` bash
 npm run build
 
@@ -263,7 +264,7 @@ __project__
 ``` diff
 |- package.json
 |- webpack.config.js
-|- dist
+|- /dist
   |- bundle.js
   |- index.html
 |- /src
