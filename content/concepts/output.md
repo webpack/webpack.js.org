@@ -223,11 +223,10 @@ output: {
 
 The filename of the SourceMaps for the JavaScript files. They are inside the `output.path` directory.
 
-`[file]` is replaced by the filename of the JavaScript file.
-
-`[id]` is replaced by the id of the chunk.
-
-`[hash]` is replaced by the hash of the compilation.
+* `[file]` is replaced by the filename of the JavaScript file.
+* `[id]` is replaced by the id of the chunk.
+* `[hash]` is replaced by the hash of the compilation.
+* `[contenthash]` is replaced by the hash of the extracted file (since webpack 3.0.0).
 
 > Default: `"[file].map"`
 
