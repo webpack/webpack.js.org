@@ -41,7 +41,7 @@ __project__
 __src/index.js__
 
 ``` javascript
-function component () {
+function component() {
   var element = document.createElement('div');
 
   // Lodash, currently included via a script, is required for this line to work
@@ -107,7 +107,7 @@ __src/index.js__
 ``` diff
 + import _ from 'lodash';
 +
-  function component () {
+  function component() {
     var element = document.createElement('div');
   
 -   // Lodash, currently included via a script, is required for this line to work
