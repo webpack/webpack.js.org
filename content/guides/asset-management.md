@@ -463,7 +463,7 @@ __src/data.xml__
 </note>
 ```
 
-Now you can `import` any one of those four types of data (JSON, CSV, TSV, XML) and the `MyData` variable you import it to will contain parsed JSON for easy consumption:
+Now you can `import` any one of those four types of data (JSON, CSV, TSV, XML) and the `Data` variable you import it to will contain parsed JSON for easy consumption:
 
 __src/index.js__
 
@@ -596,7 +596,7 @@ __src/index.js__
 - import _ from 'lodash';
 - import './style.css';
 - import Icon from './icon.png';
-- import MyData from './data.xml';
+- import Data from './data.xml';
 -
   function component() {
     var element = document.createElement('div');
@@ -611,7 +611,7 @@ __src/index.js__
 -
 -   element.appendChild(myIcon);
 -
--   console.log(MyData);
+-   console.log(Data);
 +   element.innerHTML = 'Hello webpack';
 
     return element;
