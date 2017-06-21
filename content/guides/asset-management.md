@@ -369,7 +369,7 @@ Time: 775ms
   [10] ./src/index.js 503 bytes {0} [built]
 ```
 
-Open up `index.html` again and see if our `Hello webpack` text has changed to the new font. If all is well, you should see the changes. Awesome! This is really starting to come together now, isn't it?
+Open up `index.html` again and see if our `Hello webpack` text has changed to the new font. If all is well, you should see the changes.
 
 
 ## Loading Data
@@ -427,7 +427,6 @@ __webpack.config.js__
       ]
     }
   };
-
 ```
 
 Add some data files to your project:
