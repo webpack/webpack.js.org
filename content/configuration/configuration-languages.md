@@ -5,11 +5,42 @@ contributors:
   - sokra
   - skipjack
   - tarang9211
+  - simon04
 ---
 
 webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found at the [node-interpret](https://github.com/js-cli/js-interpret) package. Using [node-interpret](https://github.com/js-cli/js-interpret), webpack can handle many different types of configuration files.
 
-For example, to use [CoffeeScript](http://coffeescript.org/), you would first install the necessary dependencies:
+## TypeScript
+
+To write the webpack configuration in [TypeScript](http://www.typescriptlang.org/), you would first install the necessary dependencies:
+
+``` bash
+npm install --save-dev typescript ts-node @types/node @types/webpack
+```
+
+and then proceed to write your configuration:
+
+__webpack.config.ts__
+
+```typescript
+import * as webpack from 'webpack';
+import * as path from 'path';
+declare var __dirname;
+
+const config: webpack.Configuration = {
+  entry: './foo.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'foo.bundle.js'
+  }
+};
+
+export default config;
+```
+
+## CoffeeScript
+
+Similarly, to use [CoffeeScript](http://coffeescript.org/), you would first install the necessary dependencies:
 
 ``` bash
 npm install --save-dev coffee-script
@@ -23,6 +54,7 @@ __webpack.config.coffee__
 HtmlWebpackPlugin = require('html-webpack-plugin')
 webpack = require('webpack')
 path = require('path')
+
 config =
   entry: './path/to/my/entry/file.js'
   output:
@@ -36,5 +68,39 @@ config =
     new (webpack.optimize.UglifyJsPlugin)
     new HtmlWebpackPlugin(template: './src/index.html')
   ]
+
 module.exports = config
+```
+
+## JSX
+
+In the example below JSX (React JavaScript Markup) and Babel are used to create a JSON Configuration that webpack can understand. (Courtesy of [Jason Miller](https://twitter.com/_developit/status/769583291666169862))
+
+```javascript
+import h from 'jsxobj';
+
+// example of an imported plugin
+const CustomPlugin = config => ({
+  ...config,
+  name: 'custom-plugin'
+});
+
+export default (
+  <webpack target="web" watch>
+    <entry path="src/index.js" />
+    <resolve>
+      <alias {...{
+        react: 'preact-compat',
+        'react-dom': 'preact-compat'
+      }} />
+    </resolve>
+    <plugins>
+      <uglify-js opts={{
+        compression: true,
+        mangle: false
+      }} />
+      <CustomPlugin foo="bar" />
+    </plugins>
+  </webpack>
+);
 ```
