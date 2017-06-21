@@ -300,7 +300,6 @@ __webpack.config.js__
       ]
     }
   };
-
 ```
 
 Add some font files to your project:
