@@ -1,7 +1,9 @@
 import React from 'react';
 import Container from '../container/container';
+import testLocalStorage from '../../utilities/test-local-storage';
 
 const version = '1';
+const localStorageIsEnabled = testLocalStorage() !== false;
 
 export default class NotificationBar extends React.Component {
   render() {
@@ -15,9 +17,12 @@ export default class NotificationBar extends React.Component {
           </p>
           <p>
             在 <a href="http://www.unixstickers.com/tag/webpack">Unixstickers!</a> 上购买全新的 webpack 贴纸
-            <i
-              className="notification-bar__close icon-cross"
-              onClick={ this._close.bind(this) } />
+            {localStorageIsEnabled ?
+              <i
+                className="notification-bar__close icon-cross"
+                onClick={ this._close.bind(this) } /> :
+              null
+            }
           </p>
         </Container>
       </div>
@@ -30,7 +35,9 @@ export default class NotificationBar extends React.Component {
    * @param {object} e - Click event
    */
   _close(e) {
-    localStorage.setItem('notification-dismissed', version);
+    if (localStorageIsEnabled) {
+      localStorage.setItem('notification-dismissed', version);
+    }
     this.forceUpdate();
   }
 
@@ -40,7 +47,7 @@ export default class NotificationBar extends React.Component {
    * @return {boolean} - Whether or not the current message was dismissed
    */
   get _dismissed() {
-    if (typeof window !== 'undefined') {
+    if (localStorageIsEnabled) {
       return localStorage.getItem('notification-dismissed') === version;
 
     } else return false;

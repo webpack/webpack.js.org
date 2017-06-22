@@ -1,6 +1,6 @@
 ---
 title: 开发 - Vagrant
-sort: 51
+sort: 19
 contributors:
   - SpaceK33z
   - chrisVillanueva

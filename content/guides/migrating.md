@@ -1,6 +1,6 @@
 ---
 title: 从 v1 迁移到 v2
-sort: 20
+sort: 23
 contributors:
   - sokra
   - jhnns

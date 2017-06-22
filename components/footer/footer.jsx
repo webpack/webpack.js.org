@@ -1,8 +1,8 @@
 import React from 'react';
-import CC from '../cc/cc';
 import Link from '../link/link';
 import Container from '../container/container';
 import Icon from '../../assets/icon-square-small.svg';
+import CCBY from '../../assets/cc-by.png';
 import './footer-style';
 
 export default (props) => {
@@ -10,7 +10,7 @@ export default (props) => {
     <footer className="footer">
       <Container className="footer__inner">
         <section className="footer__left">
-          <Link className="footer__link" to="/guides/get-started">起步</Link>
+          <Link className="footer__link" to="/guides/getting-started">起步</Link>
           <Link className="footer__link" to="/organization">组织</Link>
           <Link className="footer__link" to="/contribute">支持</Link>
           <Link className="footer__link" to="/guides/why-webpack#comparison">比较</Link>
@@ -23,12 +23,17 @@ export default (props) => {
         </section>
 
         <section className="footer__right">
+          <Link className="footer__link" to="/glossary">概念术语</Link>
           <Link className="footer__link" to="/branding">品牌</Link>
           <Link className="footer__link" to="//gitter.im/webpack/webpack">Gitter</Link>
           <Link className="footer__link" to="https://github.com/webpack/webpack/releases">更新日志</Link>
           <Link className="footer__link" to="/license">遵循协议</Link>
           <Link className="footer__link">粤ICP备17008907号</Link>
-          <CC />
+          <Link className="footer__link footer__license" to="/license">
+            <img
+              alt="Creative Commons License"
+              src={ CCBY } />
+          </Link>
         </section>
       </Container>
     </footer>

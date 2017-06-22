@@ -279,7 +279,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 | 简写 | 含义                                                         |
 |----------|------------------------------------------------------------------|
 | -d       | --debug --devtool eval-cheap-module-source-map --output-pathinfo |
-| -p       | --optimize-minimize --define process.env.NODE_ENV="production", see [building for production](/guides/production-build)   |
+| -p       | --optimize-minimize --define process.env.NODE_ENV="production", see [building for production](/guides/production) |
 
 
 ### Profiling

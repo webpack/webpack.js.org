@@ -40,7 +40,7 @@
 
 If you want to fetch the documentation on additional loaders/plugins hosted in [separate repositories](https://github.com/webpack), run `npm run fetch`. The script will help you download those documentations and put them under `content/loaders` or `content/plugins` folder.
 
-For more information see the [contributors page](https://github.com/webpack/webpack.js.org/blob/master/CONTRIBUTING.md)
+For more information see the [contributors page](https://github.com/webpack/webpack.js.org/blob/master/.github/CONTRIBUTING.md)
 
 ## Translation Guide
 

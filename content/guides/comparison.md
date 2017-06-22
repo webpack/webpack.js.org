@@ -1,5 +1,6 @@
 ---
-title: 对比其他打包器
+title: 打包器对比
+sort: 25
 contributors:
   - pksjce
   - bebraw

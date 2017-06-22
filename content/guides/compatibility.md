@@ -1,5 +1,6 @@
 ---
 title: 处理兼容
+sort: 25
 ---
 
 ?> require.main

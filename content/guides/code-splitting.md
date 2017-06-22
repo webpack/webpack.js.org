@@ -1,6 +1,6 @@
 ---
 title: 代码分离
-sort: 30
+sort: 14
 contributors:
   - pksjce
   - pastelsky
@@ -26,9 +26,11 @@ contributors:
 
 ### 分离 CSS(CSS Splitting)
 
-你可能也想将你的样式代码分离到单独的 bundle 中，以此使其独立于应用程序逻辑。这加强了样式的可缓存性，并且使得浏览器能够并行加载应用程序代码中的样式文件，避免 FOUC 问题 ([无样式内容造成的闪烁](https://en.wikipedia.org/wiki/Flash_of_unstyled_content))。
+你可能也想将你的样式代码分离到单独的 bundle 中，以此使其独立于应用程序逻辑。
+这加强了样式的可缓存性，并且使得浏览器能够并行加载应用程序代码中的样式文件，避免 FOUC 问题 ([无样式内容造成的闪烁](https://en.wikipedia.org/wiki/Flash_of_unstyled_content))。
 
 学习如何使用 `ExtractTextWebpackPlugin` [分离 CSS](/guides/code-splitting-css)。
+
 
 ## 代码按需分离(On Demand Code Splitting)
 
