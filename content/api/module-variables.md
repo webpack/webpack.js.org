@@ -4,6 +4,7 @@ sort: 3
 contributors:
   - skipjack
   - sokra
+  - ahmehri
 related:
   - title: CommonJS
     url: https://en.wikipedia.org/wiki/CommonJS
