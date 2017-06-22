@@ -1,59 +1,65 @@
 ---
 title: 安装
+sort: 1
 contributors:
   - pksjce
   - bebraw
   - simon04
-sort: 10
 ---
+
+本指南介绍了安装 webpack 的各种方法。
+
 
 ### 前提条件
 
-在开始前，先要确认你已经安装 [Node.js](https://nodejs.org/en/) 的最新版本。使用 Node.js 最新的 LTS 版本，是理想的起步。使用旧版本，你可能遇到各种问题，因为它们可能缺少 webpack 功能或缺少相关 package 包。
+在开始之前，请确保安装了 [Node.js](https://nodejs.org/en/) 的最新版本。使用 Node.js 最新的长期支持版本(LTS - Long Term Support)，是理想的起步。使用旧版本，你可能遇到各种问题，因为它们可能缺少 webpack 功能以及/或者缺少相关 package 包。
 
-下一节会谈到如何在项目本地安装 webpack。
 
 ### 本地安装
 
-The latest webpack release is: [![GitHub release](https://img.shields.io/github/release/webpack/webpack.svg?style=flat-square)](https://github.com/webpack/webpack/releases)
+最新的webpack版本是：
+
+[![GitHub release](https://img.shields.io/github/release/webpack/webpack.svg?style=flat-square)](https://github.com/webpack/webpack/releases)
+
+要安装最新版本或特定版本，请运行以下命令之一：
 
 ``` bash
 npm install --save-dev webpack
-
 npm install --save-dev webpack@<version>
 ```
 
-如果你在项目中使用了 npm scripts，npm 首先会在本地模块中寻找 webpack。这是一个实用的小技巧。
+对于大多数项目，我们建议本地安装。这可以使我们在引入破坏式变更(breaking change)的依赖时，更容易分别升级项目。通常，webpack 通过运行一个或多个 [npm scripts](https://docs.npmjs.com/misc/scripts)，会在本地 `node_modules` 目录中查找安装的 webpack：
 
 ```json
 "scripts": {
-	"start": "webpack --config mywebpack.config.js"
+	"start": "webpack --config webpack.config.js"
 }
 ```
-
-上面是 npm 的标准配置，也是我们推荐的实践。
 
 T> 当你在本地安装 webpack 后，你能够从 `node_modules/.bin/webpack` 访问它的 bin 版本。
 
 
 ### 全局安装
 
-W> 注意，不推荐全局安装 webpack。这会锁定 webpack 到指定版本，并且在使用不同的 webpack 版本的项目中可能会导致构建失败。
+以下的 NPM 安装方式，将使 `webpack` 在全局环境下可用：
 
 ``` bash
 npm install --global webpack
 ```
 
-`webpack` 命令现在可以全局执行了。
+W> 不推荐全局安装 webpack。这会将您项目中的 webpack 锁定到指定版本，并且在使用不同的 webpack 版本的项目中，可能会导致构建失败。
 
 
-### 体验最新版本
+## 最新体验版本
 
-如果你热衷于使用最新版本的 webpack（注意了，这可是不稳定的版本），你可以直接从 webpack 的仓库中安装：
+如果你热衷于使用最新版本的 webpack，你可以使用以下命令，直接从 webpack 的仓库中安装：
 
 ``` bash
+npm install webpack@beta
 npm install webpack/webpack#<tagname/branchname>
 ```
+
+安装这些最新体验版本时要小心！它们可能仍然包含 bug，因此不应该用于生产环境。
 
 ***
 

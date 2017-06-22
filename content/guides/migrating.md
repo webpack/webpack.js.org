@@ -1,6 +1,6 @@
 ---
 title: 从 v1 迁移到 v2
-sort: 20
+sort: 23
 contributors:
   - sokra
   - jhnns
@@ -82,7 +82,8 @@ contributors:
 
 ## 链式 loader
 
-就像在 webpack 1 中，loader 可以链式调用，上一个 loader 的输出被作为输入传给下一个 loader。使用 [rule.use](/configuration/module#rule-use) 配置选项，`use` 可以设置为一个 loader 数组。
+就像在 webpack 1 中，loader 可以链式调用，上一个 loader 的输出被作为输入传给下一个 loader。
+使用 [rule.use](/configuration/module#rule-use) 配置选项，`use` 可以设置为一个 loader 数组。
 在 webpack 1 中，loader 通常被用 `!` 连写。这一写法在 webpack 2 中只在使用旧的选项 `module.loaders` 时才有效。
 
 ``` diff
@@ -613,11 +614,11 @@ Loaders 现在默认可被缓存。Loaders 如果不想被缓存，需要选择�
 
 ### 复合 options
 
-__webpack v1__ 只支持能够「可 `JSON.stringify`的对象」作为 loader 的 options。
+__webpack 1__ 只支持能够「可 `JSON.stringify`的对象」作为 loader 的 options。
 
-__webpack v2__ now supports any JS object as loader options.
+__webpack 2__ 现在支持任意 JS 对象作为 loader 的 options.
 
-[v2.2.1](https://github.com/webpack/webpack/releases/tag/v2.2.1)之前（即从 v2.0.0 到 v2.2.0），使用复合 options，需要在 `options` 对象上添加 `ident`，允许它能够被其他 loader 引用。__这在 v2.2.1__ 中被删除，因此目前的迁移不再需要使用 `ident` 键。
+webpack [2.2.1](https://github.com/webpack/webpack/releases/tag/v2.2.1)之前（即从 2.0.0 到 2.2.0），使用复合 options，需要在 `options` 对象上添加 `ident`，允许它能够被其他 loader 引用。__这在 2.2.1__ 中被删除，因此目前的迁移不再需要使用 `ident` 键。
 
 ```diff
 {

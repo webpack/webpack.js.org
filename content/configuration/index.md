@@ -20,13 +20,12 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
 
 ## 选项
 
+点击下面配置代码中每个选项的名称，跳转到详细的文档。还要注意，带有箭头的项目可以展开，以显示更多示例，在某些情况下可以看到高级配置。
+
 ``` js-with-links-with-details
 const path = require('path');
 
 module.exports = {
-  // 点击选项名称，获取文档详细
-  // 点击带箭头的项目，展示「更多示例 / 高级选项」
-
   <details><summary>[entry](/configuration/entry-context#entry): "./app/entry", // string | object | array</summary>
   [entry](/configuration/entry-context#entry): ["./app/entry1", "./app/entry2"],
   [entry](/configuration/entry-context#entry): {

@@ -1,6 +1,6 @@
 ---
 title: 生产环境构建
-sort: 40
+sort: 7
 contributors:
   - henriquea
   - rajagopal4890
@@ -251,32 +251,30 @@ __webpack.prod.js__
 const Merge = require('webpack-merge');
 const CommonConfig = require('./webpack.common.js');
 
-module.exports = function(env) {
-  return Merge(CommonConfig, {
-    plugins: [
-      new webpack.LoaderOptionsPlugin({
-        minimize: true,
-        debug: false
-      }),
-      new webpack.DefinePlugin({
-        'process.env': {
-          'NODE_ENV': JSON.stringify('production')
-        }
-      }),
-      new webpack.optimize.UglifyJsPlugin({
-        beautify: false,
-        mangle: {
-          screw_ie8: true,
-          keep_fnames: true
-        },
-        compress: {
-          screw_ie8: true
-        },
-        comments: false
-      })
-    ]
-  })
-}
+module.exports = Merge(CommonConfig, {
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      beautify: false,
+      mangle: {
+        screw_ie8: true,
+        keep_fnames: true
+      },
+      compress: {
+        screw_ie8: true
+      },
+      comments: false
+    })
+  ]
+})
 ```
 
 你将会注意到 'webpack.prod.js' 文件的三点主要变化：

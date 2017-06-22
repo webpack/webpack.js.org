@@ -221,13 +221,12 @@ output: {
 
 ### `output.sourceMapFilename`
 
-JavaScript 文件的 SourceMap 的文件名。它们在 `output.path` 目录中。
+JavaScript 模块的 Source Map 文件名。
 
-`[file]` 被 JavaScript 文件的文件名替换。
-
-`[id]` 被 chunk 的 id 替换。
-
-`[hash]` 被 compilation 生命周期的 hash 替换。
+* `[file]` 被 JavaScript 文件的文件名替换。
+* `[id]` 被 chunk 的 id 替换。
+* `[hash]` 被 compilation 生命周期的 hash 替换。
+* `[contenthash]` 被提取文件的 hash 替换（从 webpack 3.0.0 开始）。
 
 > 默认值：`"[file].map"`
 

@@ -13,7 +13,6 @@
 }
 
 .dropdown__arrow {
-  margin-left: 5px;
 
   &:before {
     content: "\25be";
@@ -24,19 +23,17 @@
   display: none;
   position: absolute;
   top: 100%;
-  right: 100%;
   right: 0;
   margin: auto;
   background-color: #2B3A42;
   z-index: 1;
-  text-align: center;
 
   ul {
     padding-top: 0.25em;
   }
 
   ul li {
-    padding: 0.25em 0.5em 0 0.5em;
+    padding: 0.25em 0.5em;
     list-style: none;
     color: #fff;
     transition: all 250ms;
@@ -51,12 +48,7 @@
 
     span {
       vertical-align: top;
-      margin-right: 0.5em;
-    }
-
-    img {
-      width: 20px;
-      height: 20px;
+      text-align: left;
     }
   }
 }

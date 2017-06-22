@@ -2,7 +2,8 @@ import React from 'react';
 import Link from '../link/link';
 import Container from '../container/container';
 import Icon from '../../assets/icon-square-small.svg';
-import CCBY from '../../assets/cc-by.png';
+import CC from '../../assets/cc.svg';
+import BY from '../../assets/by.svg';
 import './footer-style';
 
 export default (props) => {
@@ -10,7 +11,7 @@ export default (props) => {
     <footer className="footer">
       <Container className="footer__inner">
         <section className="footer__left">
-          <Link className="footer__link" to="/guides/get-started">起步</Link>
+          <Link className="footer__link" to="/guides/getting-started">起步</Link>
           <Link className="footer__link" to="/organization">组织</Link>
           <Link className="footer__link" to="/contribute">支持</Link>
           <Link className="footer__link" to="/guides/why-webpack#comparison">比较</Link>
@@ -32,7 +33,10 @@ export default (props) => {
           <Link className="footer__link footer__license" to="/license">
             <img
               alt="Creative Commons License"
-              src={ CCBY } />
+              src={ CC } />
+            <img
+              alt="Creative Commons License"
+              src={ BY } />
           </Link>
         </section>
       </Container>

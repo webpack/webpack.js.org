@@ -1,5 +1,5 @@
 ---
-title: 起步
+title: Getting Started
 sort: 0
 contributors:
   - bebraw
@@ -12,13 +12,13 @@ contributors:
   - jecoopr
 ---
 
-webpack 是一个用来构建我们应用程序中的 JavaScript 模块的工具。在按照[安装说明](/guides/installation)安装 webpack 后，我们可以从 [CLI](/api/cli) 或 [API](/api/node) 来开始使用 `webpack`。
-webpack 通过快速建立应用程序依赖图表并以正确的顺序打包它们来简化你的工作流。你能够针对你的代码来对 webpack 进行自定义的优化配置，比如为生产环境拆分 vendor/css/js 代码，通过运行「开发中 server(development server)」来实现无刷新热重载(hot-reload)等很多酷炫的特性。了解更多关于[为什么使用 webpack](/guides/why-webpack)。
+webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/guides/installation).
+webpack simplifies your workflow by quickly constructing a dependency graph of your application and bundling them in the right order. webpack can be configured to customise optimisations to your code, to split vendor/css/js code for production, run a development server that hot-reloads your code without page refresh and many such cool features. Learn more about [why you should use webpack](/guides/why-webpack).
 
 
-## 创建一个 bundle 文件
+## Creating a bundle
 
-创建一个示例目录来尝试 webpack。[安装 webpack](/guides/installation)。
+Create a demo directory to try out webpack. [Install webpack](/guides/installation).
 
 ```bash
 mkdir webpack-demo && cd webpack-demo
@@ -27,12 +27,12 @@ npm install --save-dev webpack
 ```
 
 ```bash
-./node_modules/.bin/webpack --help # 显示有效的 CLI 命令列表
-.\node_modules\.bin\webpack --help # windows 用户请使用此路径
-webpack --help # 如果你在全局安装了 webpack
+./node_modules/.bin/webpack --help # Shows a list of valid cli commands
+.\node_modules\.bin\webpack --help # For windows users
+webpack --help # If you installed webpack globally
 ```
 
-现在在 `app` 子目录下创建一个 `index.js` 文件。
+Now create a subdirectory `app` with an `index.js` file.
 
 __app/index.js__
 
@@ -40,7 +40,7 @@ __app/index.js__
 function component () {
   var element = document.createElement('div');
 
-  /* 需要引入 lodash，下一行才能正常工作 */
+  /* lodash is required for the next line to work */
   element.innerHTML = _.join(['Hello','webpack'], ' ');
 
   return element;
@@ -49,7 +49,7 @@ function component () {
 document.body.appendChild(component());
 ```
 
-要运行这段代码，在项目根目录下创建 `index.html` 文件。
+To run this piece of code, create an `index.html` file in the project's root.
 
 __index.html__
 
@@ -65,22 +65,22 @@ __index.html__
 </html>
 ```
 
-在此示例中，`<script>` 标签之间存在隐式依赖关系。
+In this example, there are implicit dependencies between the `<script>` tags.
 
-运行 `index.js` 会依赖于页面中提前引入的 `lodash`。之所以说是隐式的是因为 `index.js` 并未显式声明需要引入 `lodash`，只是假定推测已经存在一个全局变量 `_`。
+`index.js` depends on `lodash` being included in the page before it runs. It is implicit because `index.js` never declared a need for `lodash`; it just assumes that a global variable `_` exists.
 
-使用这种方式去管理 JavaScript 项目会有一些问题：
+There are problems with managing JavaScript projects this way:
 
-- 如果依赖不存在，或者引入顺序错误，应用程序将无法正常运行。
-- 如果依赖被引入但是并没有使用，那样就会存在许多浏览器不得不下载的无用代码。
+- If a dependency is missing, or is included in the wrong order, the application will not function at all.
+- If a dependency is included but is not used, then there is a lot of unnecessary code that the browser has to download.
 
-要在 `index.js` 中打包 `lodash` 依赖，首先我们需要安装 `lodash`。
+To bundle the `lodash` dependency with `index.js`, we need to first install `lodash`
 
 ```bash
 npm install --save lodash
 ```
 
-然后 import 它。
+and then import it.
 
 __app/index.js__
 
@@ -91,7 +91,7 @@ function component () {
   ...
 ```
 
-当然我们还要修改 `index.html`，来引入打包好的单个 js 文件。
+We also need to change `index.html` to expect a single bundled js file.
 
 ```diff
  <html>
@@ -106,11 +106,11 @@ function component () {
  </html>
 ```
 
-在这里，`index.js` 显式要求引入的 `lodash` 必须存在，然后将它以 `_` 的别名绑定（不会造成全局范围变量名污染）。
+Here, `index.js` explicitly requires `lodash` to be present, and binds it as `_` (no global scope pollution).
 
-通过声明模块所需的依赖，webpack 能够利用这些信息去构建依赖图表，然后使用图表生成一个优化过的，会以正确代码顺序被运行的 bundle。并且没有用到的依赖将不会被 bundle 引入。
+By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order. Also unused dependencies will not be included in the bundle.
 
-现在在此文件夹下带上以下参数运行 `webpack`，其中 `index.js` 是入口文件，`bundle.js` 是已打包所需的所有代码的输出文件。
+Now run `webpack` on this folder with `index.js` as the entry file and `bundle.js` as the output file in which all code required for the page is bundled.
 
 ```bash
 ./node_modules/.bin/webpack app/index.js dist/bundle.js
@@ -126,21 +126,23 @@ bundle.js  544 kB       0  [emitted]  [big]  main
    [3] ./app/index.js 278 bytes {0} [built]
 ```
 
-T> 输出可能会稍有不同。如果构建成功，那么你就可以继续。
+T> Output may vary. If the build is successful then you are good to go.
 
-在浏览器中打开 `index.html`，查看构建成功后的 bundle 的结果。你应该能看到带有以下文本的页面：'Hello webpack'。
-
-
-## 在 webpack 中使用 ES2015 模块
-
-你注意到在 `app/index.js` 中使用的 [ES2015 模块的 import](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/import) 了吗？尽管 `import`/`export` 语句在浏览器中还未被支持，你也可以正常的使用，因为 webpack 会将其替换为 ES5 兼容的代码。你可以检查 `dist/bundle.js` 的代码来说服自己放心使用。
-
-注意，webpack 不会更改你的代码中除 `import`/`export` 以外的部分。如果你在使用其它 [ES2015 特性](http://es6-features.org/)，请确保你使用了一个像是 [Babel](https://babeljs.io/) 或 [Bublé](https://buble.surge.sh/guide/) 的转译器。
+Open `index.html` in your browser to see the result of a successful bundle.
+You should see a page with the following text: 'Hello webpack'.
 
 
-## 使用带有配置的 webpack
+## Using ES2015 modules with webpack
 
-对于更复杂的配置，我们可以使用一个配置文件，webpack 会按照它来打包代码。创建一个 `webpack.config.js` 文件后，你可以使用如下的配置设置来表示上述 CLI 命令。
+Noticed the use of [ES2015 module import](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/import) (alias ES2015, *harmony*) in `app/index.js`? Although `import`/`export` statements are not supported in browsers (yet), using them is fine since webpack will replace those instructions with an ES5 compatible wrapper code. Inspect `dist/bundle.js` to convince yourself.
+
+Note that webpack will not touch your code other than `import`/`export`. In case you are using other [ES2015 features](http://es6-features.org/), make sure to use a transpiler such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/).
+
+
+## Using webpack with a config
+
+For a more complex configuration, we can use a configuration file that webpack can reference to bundle your code. After you create a `webpack.config.js` file, you can represent the CLI command above
+with the following config settings.
 
 __webpack.config.js__
 
@@ -156,7 +158,7 @@ module.exports = {
 };
 ```
 
-此文件可以像下面这样被 webpack 执行。
+This file can be run by webpack as follows.
 
 ```bash
 ./node_modules/.bin/webpack --config webpack.config.js
@@ -172,16 +174,16 @@ bundle.js  544 kB       0  [emitted]  [big]  main
    [3] ./app/index.js 278 bytes {0} [built]
 ```
 
-T> 如果存在 `webpack.config.js`，`webpack` 命令将默认选择使用它。
+T> If a `webpack.config.js` is present, `webpack` command picks it up by default.
 
-T> 如果在上面“创建一个 bundle 文件”章节，已经成功创建过 `dist/bundle.js` 文件，可以删除 `dist` 子目录来验证通过 `webpack.config.js` 的设置所输出的内容是否符合预期。
+T> If you created a successful `dist/bundle.js` file using the 'Creating a bundle' section, delete the `dist` subdirectory to validate output from your `webpack.config.js` file settings.
 
-通过配置文件可以最灵活地使用 webpack。我们可以通过向配置文件添加 loader 规则(loader rules)、插件(plugins)、解析选项(resolve options)以及许多其他增强功能，来进行打包。
+The config file allows for all the flexibility in using webpack. We can add loader rules, plugins, resolve options and many other enhancements to our bundles using this configuration file.
 
 
-## 配合 npm 使用
+## Using webpack with npm
 
-考虑到用 CLI 这种方式来运行 webpack 不是特别方便，我们可以设置一个快捷方式。像这样调整 *package.json*：
+Given it's not particularly fun to run webpack from the CLI this way, we can set up a little shortcut. Adjust *package.json* like this:
 
 ```json
 {
@@ -193,15 +195,11 @@ T> 如果在上面“创建一个 bundle 文件”章节，已经成功创建过
 }
 ```
 
-现在你可以通过使用 `npm run build` 命令来实现与上面相同的效果。npm 通过命令选取脚本，并临时扩充执行环境，使脚本可以在运行时包含 bin 命令。你可以在很多项目中看到这种使用习惯。
+You can now achieve the same as above by using `npm run build` command. npm picks up the scripts through it and patches the environment temporarily so that it contains the bin commands. You will see this convention in a lot of projects out there.
 
-T> 你可以通过向 `npm run build` 命令添加两个中横线，给 webpack 传递自定义参数，例如：`npm run build -- --colors`。
+T> You can pass custom parameters to webpack by adding two dashes to the `npm run build` command, e.g. `npm run build -- --colors`.
 
 
-## 结论
+## Conclusion
 
-现在你已经一起学习了基本的构建过程，你可以深入 webpack [基本概念](/concepts)和[配置](/configuration)来更好地理解其设计。也可以查看[指南](/guides)来学习如何处理常见问题。[API](/api) 章节则是对底层的功能进行深入。
-
-***
-
-> 原文：https://webpack.js.org/get-started/
+Now that you have a basic build together, you should dig into the [basic concepts](/concepts) and [configuration](/configuration) of webpack to better understand its design. Also check out the [guides](/guides) to learn how to approach common problems. The [API](/api) section digs into the lower level features.

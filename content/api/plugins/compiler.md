@@ -1,6 +1,8 @@
 ---
 title: 编译器(Compiler)
 sort: 2
+contributors:
+  - rishantagarwal
 ---
 
 webpack 的 `Compiler` 模块是创建一个传入 webpack CLI、 `webpack` api 或 webpack 配置文件等选项的编译实例的主引擎。
@@ -56,10 +58,12 @@ Compiler 的作用可以浓缩为以下几个亮点：
  - `new LogPlugin(args).apply(compiler)` 将插件注册到 `Compiler` 的生命周期中任何一个特定的挂钩事件。
  - `Compiler` 暴露了一个 `run` 方法，它启动 `webpack` 的所有编译工作。当执行完时，它会执行传入的 `回调` 函数，日志记录、统计和错误处理等收尾工作都是在这个回调函数中完成。
 
+
 ## 监视(Watching)
 
 事实上， `Compiler` 支持两种类型的执行风格， 一个是监视模式（watch mode）一个是普通的单次运行（normal single run）。
 虽然在监视的过程中，它本质上执行了相同的功能，但是它还对生命周期事件做了一些补充。这使得 `webpack` 能够具有监视模式的特殊插件。
+
 
 
 ## MultiCompiler
@@ -83,7 +87,8 @@ webpack([config1, config2], (err, stats) => {
 })
 ```
 
-## 事件钩子
+
+## 事件钩子函数
 
 这是 `Compiler` 暴露的所有事件钩子的参考指南
 
@@ -113,9 +118,20 @@ webpack([config1, config2], (err, stats) => {
 | __`failed`__               | 编译失败                  | `error`              | 同步       |
 | __`invalid`__              | 一个监控的编译变无效后  | `fileName`, `changeTime` | 同步       |
 
+
 ## 示例
 
-?> Adds examples of usage for some of the above events
+这是一个异步 `emit` 事件处理程序的例子：
+
+```javascript
+compiler.plugin("emit", function(compilation, callback) {
+    // 执行一些异步……
+    setTimeout(function() {
+      console.log("Done with async work...");
+      callback();
+    }, 1000);
+});
+```
 
 ***
 

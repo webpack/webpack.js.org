@@ -18,7 +18,7 @@ new webpack.NormalModuleReplacementPlugin(
 
 ## Basic Example
 
-在构建[开发环境](/guides/production-build)时替换特定的模块。
+在构建[开发环境](/guides/production)时替换特定的模块。
 
 假设你有一个配置文件 `some/path/config.development.module.js` 并且在生产环境有一个特殊的版本 `some/path/config.production.module.js`
 

@@ -11,9 +11,9 @@ contributors:
 除了导出单个配置对象，还有一些方式满足其他需求。
 
 
-## 使用 `--env`导出一个函数
+## 使用 `--env` 导出一个函数
 
-最终，你会发现需要在[开发](/guides/development)和[生产构建](/guides/production-build)之间，消除 `webpack.config.js` 的差异。（至少）有两种选项：
+最终，你会发现需要在[开发](/guides/development)和[生产构建](/guides/production)之间，消除 `webpack.config.js` 的差异。（至少）有两种选项：
 
 作为导出一个配置对象的替代，你可以返回一个函数，此函数接受 environment 作为参数。当运行 webpack 时，你可以通过 `--env` 指定构建环境的键，例如 `--env.production` 或者 `--env.platform=web`。
 
@@ -50,6 +50,7 @@ module.exports = () => {
 
 
 ## 导出多个配置对象
+
 作为导出一个配置对象/配置函数的替代，你可能需要导出多个配置对象。当运行 webpack 时，所有的配置对象都会构建。例如，导出多个配置对象，对于针对多个[构建目标](/configuration/output#output-librarytarget)（例如 AMD 和 CommonJS）[打包一个 library](/guides/author-libraries) 非常有用。
 
 ```js
@@ -67,3 +68,7 @@ module.exports = [{
   entry: './app.js',
 }]
 ```
+
+***
+
+> 原文：https://webpack.js.org/configuration/configuration-types/

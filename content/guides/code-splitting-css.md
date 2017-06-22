@@ -1,6 +1,6 @@
 ---
 title: 代码分离 - CSS
-sort: 31
+sort: 15
 contributors:
   - pksjce
   - jonwheeler

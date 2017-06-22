@@ -68,4 +68,4 @@ module.exports = {
 
 ## 让一切变得简单
 
-## 立即[开始](/guides/get-started)
+## 立即[开始](/guides/getting-started)
