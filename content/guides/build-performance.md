@@ -1,5 +1,6 @@
 ---
 title: 改善构建性能
+sort: 25
 ---
 
 ?> incremental builds

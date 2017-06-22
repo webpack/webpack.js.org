@@ -277,7 +277,7 @@ compiler.run((err, stats) => {
 });
 ```
 
-T> 你指定的输出文件系统需要兼容 Node 自身的 [`fs`](https://nodejs.org/api/fs.html) 模块接口。
+T> 你指定的输出文件系统需要兼容 Node 自身的 [`fs`](https://nodejs.org/api/fs.html) 模块接口，接口需要提供 `mkdirp` 和 `join` 工具方法。
 
 ***
 

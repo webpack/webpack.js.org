@@ -23,6 +23,13 @@ contributors:
 默认使用 `[id].js` 或从 [`output.filename`](#output-filename) 中推断出的值（`[name]` 会被预先替换为 `[id]` 或 `[id].`）。
 
 
+## `output.chunkLoadTimeout`
+
+`integer`
+
+Number of milliseconds before chunk request expires, defaults to 120 000. This option is supported since webpack 2.6.0.
+
+
 ## `output.crossOriginLoading`
 
 `boolean` `string`
@@ -238,9 +245,7 @@ JSONP 函数用于异步加载(async load) chunk，或者拼接多个初始 chun
 
 `string`
 
-有关详细信息，请阅读[指南 - library](/guides/author-libraries)。
-
-在编写一个导出值的 JavaScript library 时，可以使用下面的 `library` 和 `libraryTarget`，导出值可以作为其他代码的依赖。传入 library 名称的字符串。
+在编写一个导出值的 JavaScript library 时，可以使用下面的 `library` 和 `libraryTarget`，导出值可以作为其他代码的依赖。传入 library 名称的字符串：
 
 ``` js
 library: "MyLibrary"
@@ -250,6 +255,8 @@ library 名称取决于 [`output.libraryTarget`](#output-librarytarget) 选项�
 
 注意，`output.libraryTarget` 的默认值是 var。这意味着，如果使用 `output.libraryTarget` 的默认值，`output.library` 会将值作为变量声明导出（当使用 script 标签时，其执行后在全局作用域可用）。
 
+有关 `output.library` 以及 `ouput.libraryTarget` 详细信息，请查看[创建 library 指南](/guides/author-libraries)。
+
 
 ## `output.libraryTarget`
 
@@ -257,14 +264,9 @@ library 名称取决于 [`output.libraryTarget`](#output-librarytarget) 选项�
 
 > 默认值： `"var"`
 
-有关详细信息，请阅读[指南 - library](/guides/author-libraries)。
-
 配置如何暴露 library。可以使用下面的选项中的任意一个。
 
-> 设置 `output.library` 来配置 library 的名称。（例子假设 `library: "MyLibrary"`）
-
 支持以下选项：
-
 
 `libraryTarget: "var"` - （默认值）当 library 加载完成，**入口起点的返回值**将分配给一个变量：
 
@@ -328,30 +330,22 @@ module.exports = _entry_return_;
 require("MyLibrary").doSomething();
 ```
 
-_想要弄清楚 CommonJS 和 CommonJS2 之间的区别？查看[这里](https://github.com/webpack/webpack/issues/1114)（它们之间非常相似）。_
-
-
-`libraryTarget: "commonjs-module"` - 使用 `module.exports` 对象暴露（忽略 `output.library`），`__esModule` 被定义（__esModule 为交互模式下的 ES2015 模块与 CommonJS 模块之间，起到穿针引线的作用）
+T> 想要弄清楚 CommonJS 和 CommonJS2 之间的区别？查看[这里](https://github.com/webpack/webpack/issues/1114)（它们之间非常相似）。
 
 
 `libraryTarget: "amd"` - webpack 将你的 library 转为 AMD 模块。
 
-但是在这里有个很重要必备前提，入口 chunk 必须使用 define 属性定义，如果不是，webpack 将创建无依赖的 AMD 模块。
-输出结果就像这样：
+注意，入口 chunk 必须使用 `define` 属性定义，如果不是，webpack 将创建无依赖的 AMD 模块。输出结果就像这样：
 
 ```javascript
 define([], function() {
-	//这个模块会返回你的入口 chunk 所返回的
+	// 这个模块会返回你的入口 chunk 所返回的
 });
 ```
 
-但是如果你下载完这个 script，首先你可能收到一个错误：`define is not defined`，就是这样！如果你使用 AMD 来发布你的 library，那么使用者需要使用 RequireJS 来加载它。
+如果你下载完这个 script，首先你可能收到一个错误：`define is not defined`，就是这样！如果你使用 AMD 来发布你的 library，那么使用者需要使用 RequireJS 来加载它。只要你已经加载过 RequireJS，你就能够加载 library。
 
-现在你已经加载过 RequireJS，你就能够加载 library。
-
-但是，`require([ _什么？_ ])`？
-
-`output.library`!
+所以，使用以下配置……
 
 ```javascript
 output: {
@@ -360,25 +354,17 @@ output: {
 }
 ```
 
-所以你的模块看起来像这样：
+用户会像这样调用你的 library：
 
 ```javascript
-define("MyLibrary", [], function() {
-	//这个模块会返回你的入口 chunk 所返回的
+require(['MyLibrary'], function(MyLibrary) {
+	// 使用 library 做一些事……
 });
 ```
 
-你能够像这样来调用它：
-
-```javascript
-// 然后，用户可以这样做：
-require(["MyLibrary"], function(MyLibrary){
-	MyLibrary.doSomething();
-});
-```
 
 `libraryTarget: "umd"` - 这是一种可以将你的 library 能够在所有的模块定义下都可运行的方式（并且导出的完全不是模块）。
-它将在 CommonJS, AMD 环境下运行，或将模块导出到 global 下的变量。你可以查看 [UMD 仓库](https://github.com/umdjs/umd) 来了解更多相关信息。
+它将在 CommonJS, AMD 环境下运行，或将模块导出到 global 下的变量。了解更多请查看 [UMD 仓库](https://github.com/umdjs/umd)。
 
 在这个例子中，你需要 `library` 属性来命名你的模块：
 

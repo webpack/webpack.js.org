@@ -13,7 +13,7 @@ contributors:
 
 ## 使用 `--env`导出一个函数
 
-最终，你会发现需要在[开发](/guides/development)和[生产构建](/guides/production-build)之间，消除 `webpack.config.js` 的差异。（至少）有两种选项：
+最终，你会发现需要在[开发](/guides/development)和[生产构建](/guides/production)之间，消除 `webpack.config.js` 的差异。（至少）有两种选项：
 
 作为导出一个配置对象的替代，你可以返回一个函数，此函数接受 environment 作为参数。当运行 webpack 时，你可以通过 `--env` 指定构建环境的键，例如 `--env.production` 或者 `--env.platform=web`。
 

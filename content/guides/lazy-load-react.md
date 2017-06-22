@@ -1,5 +1,6 @@
 ---
 title: 懒加载 - React
+sort: 13
 contributors:
   - iammerrick
   - chrisVillanueva

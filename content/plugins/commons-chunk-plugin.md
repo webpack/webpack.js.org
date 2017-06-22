@@ -7,11 +7,11 @@ contributors:
   - kevinzwhuang
 ---
 
+`CommonsChunkPlugin` 插件，是一个可选的用于建立一个独立文件(又称作 chunk)的功能，这个文件包括多个入口 `chunk` 的公共模块。通过将公共模块拆出来，最终合成的文件能够在最开始的时候加载一次，便存起来到缓存中供后续使用。这个带来速度上的提升，因为浏览器会迅速将公共的代码从缓存中取出来，而不是每次访问一个新页面时，再去加载一个更大的文件。
+
 ```javascript
 new webpack.optimize.CommonsChunkPlugin(options)
 ```
-
-`CommonsChunkPlugin` 插件，是一个可选的用于建立一个独立文件(又称作 chunk)的功能，这个文件包括多个入口 `chunk` 的公共模块。通过将公共模块拆出来，最终合成的文件能够在最开始的时候加载一次，便存起来到缓存中供后续使用。这个带来速度上的提升，因为浏览器会迅速将公共的代码从缓存中取出来，而不是每次访问一个新页面时，再去加载一个更大的文件。
 
 
 ## 配置
@@ -44,7 +44,8 @@ new webpack.optimize.CommonsChunkPlugin(options)
 
   async: boolean|string,
   // 如果设置为 `true`，一个异步的  公共chunk 会作为 `options.name` 的子模块，和 `options.chunks` 的兄弟模块被创建。
-  // 它会与 `options.chunks` 并行被加载。可以通过提供想要的字符串，而不是 `true` 来对输出的文件进行更换名称。
+  // 它会与 `options.chunks` 并行被加载。可以通过提供想要的字符串，
+  // 而不是 `true` 来对输出的文件进行更换名称。
 
   minSize: number,
   // 在 公共chunk 被创建立之前，所有 公共模块 (common module) 的最少大小。
@@ -100,7 +101,8 @@ new webpack.optimize.CommonsChunkPlugin({
   // (给 chunk 一个不同的名字)
 
   minChunks: Infinity,
-  // 随着 入口chunk 越来越多，这个配置保证没其它的模块会打包进 公共chunk
+  // 随着 entrie chunk 越来越多，
+  // 这个配置保证没其它的模块会打包进 vendor chunk
 })
 ```
 
@@ -164,7 +166,6 @@ new webpack.optimize.CommonsChunkPlugin({
 `count` 参数表示 `module` 被使用的 chunk 数量。
 
 当你想要对 `CommonsChunk` 如何决定模块被打包到哪里的算法有更为细致的控制， 这个配置就会非常有用。
-
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({

@@ -10,3 +10,6 @@ cp -rf ./content/plugins/ ./generated/plugins
 
 # Fetch sponsors and backers from opencollective
 ./scripts/fetch_supporters.js
+
+# Fetch starter kits
+./scripts/fetch_starter_kits.js

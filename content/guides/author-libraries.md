@@ -1,10 +1,11 @@
 ---
 title: 创建 Library
+sort: 12
 contributors:
-    - pksjce
-    - johnstew
-    - simon04
-    - 5angel
+  - pksjce
+  - johnstew
+  - simon04
+  - 5angel
 ---
 
 webpack 是一个用来打包应用程序(application)和 library 的代码的工具。如果你是一个 JavaScript library 的作者，并且想要流水线化(streamline)你的打包逻辑，那么这篇文档将会帮助到你。
@@ -104,7 +105,8 @@ module.exports = {
 
 ### 增加 `externals`
 
-现在，如果执行 `webpack`，你会发现输出了一个非常巨大的文件。进一步观察该文件，你会发现 lodash 和你的代码被一起打包了。然而对于你的 library 本身来说，并不需要打包 `lodash`。因此你可能会想将该外部扩展(external)的控制权交给你的用户。
+现在，如果执行 `webpack`，你会发现输出了一个非常巨大的文件。进一步观察该文件，你会发现 lodash 和你的代码被一起打包了。
+然而对于你的 library 本身来说，并不需要打包 `lodash`。因此你可能会想将该外部扩展(external)的控制权交给你的用户。
 
 这一点可以通过配置 `externals` 来实现：
 
@@ -185,9 +187,7 @@ module.exports = {
 };
 ```
 
-这能让你的 library 被引入后，可以通过全局变量来使用。
-
-为了让 library 可以兼容其他环境，还需要在配置中增加 `libraryTarget` 属性。
+这能让你的 library 被引入后，可以通过全局变量来使用。为了让 library 可以兼容其他环境，还需要在配置中增加 `libraryTarget` 属性。
 
 __webpack.config.js__
 
@@ -197,18 +197,18 @@ module.exports = {
     output: {
         ...
         library: 'webpackNumbers',
-        libraryTarget: 'umd' // 其他可取值 - amd, commonjs, commonjs2, commonjs-module, this, var
+        libraryTarget: 'umd'
     }
     ...
 };
 ```
 
-如果设置了 `library` 但没设置 `libraryTarget`，则`libraryTarget` 默认为 `var`，详见[配置文档](/configuration/output)。
+如果设置了 `library` 但没设置 `libraryTarget`，则 `libraryTarget` 默认为 `var`，详细说明请查看[output 配置文档](/configuration/output)。查看 [`output.libraryTarget`](/configuration/output#output-librarytarget)，以获取所有可用选项的详细列表。
 
 
 ### 最终步骤
 
-[使用 webpack 打包你的生产代码](/guides/production-build)。
+[使用 webpack 打包你的生产代码](/guides/production)。
 
 在 `package.json` 中指定主文件(main file)为你生成的文件路径。
 

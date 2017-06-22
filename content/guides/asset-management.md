@@ -1,5 +1,6 @@
 ---
 title: 管理资源(Asset Management)
+sort: 3
 contributors:
   - skipjack
   - michael-ciniawsky
@@ -30,8 +31,8 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'css-loader',
-          'style-loader'
+          'style-loader',
+          'css-loader'
         ]
       }
     ]
