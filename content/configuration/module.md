@@ -15,10 +15,17 @@ These options determine how the [different types of modules](/concepts/modules) 
 
 `RegExp | [RegExp]`
 
+`RegExp | [RegExp] | function` (since webpack 3.0.0)
+
 Prevent webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries.
 
 ```js
 noParse: /jquery|lodash/
+
+// since webpack 3.0.0
+noParse: function(content) {
+  return /jquery|lodash/.test(content);
+}
 ```
 
 

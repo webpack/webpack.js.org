@@ -258,6 +258,13 @@ Note that `output.libraryTarget` defaults to `var`. This means if only `output.l
 T> Read the [authoring libraries guide](/guides/author-libraries) guide for more information on `output.library` as well as `ouput.libraryTarget`.
 
 
+## `output.libraryExport`
+
+`string` or `string[]` (since webpack 3.0.0)
+
+Allows to select an export for the library.
+
+
 ## `output.libraryTarget`
 
 `string`
