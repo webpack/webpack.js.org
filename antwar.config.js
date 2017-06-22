@@ -5,6 +5,7 @@ var markdown = require('./utilities/markdown');
 var highlight = require('./utilities/highlight');
 
 module.exports = {
+  port: 5000,
   template: {
     title: 'webpack',
     description: 'webpack 是一个模块打包器。它的主要目标是将 JavaScript 文件打包在一起，打包后的文件用于在浏览器中使用，但它也能够胜任转换(transform)、打包(bundle)或包裹(package)任何资源(resource or asset)。',
@@ -75,7 +76,7 @@ module.exports = {
     ),
 
     'guides/starter-kits': {
-      title: 'Starter Kits',
+      title: '起步配套工具',
       path() {
         return require('./components/starter-kits/starter-kits.jsx').default;
       }
@@ -172,7 +173,7 @@ module.exports = {
     ),
 
     support: section(
-      'Support',
+      '支持',
       function() {
         return require.context(
           'json-loader!yaml-frontmatter-loader!./content/support',

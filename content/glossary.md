@@ -1,5 +1,5 @@
 ---
-title: Glossary
+title: 概念术语
 contributors:
   - rouzbeh84
   - bebraw

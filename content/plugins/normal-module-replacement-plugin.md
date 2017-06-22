@@ -16,7 +16,7 @@ new webpack.NormalModuleReplacementPlugin(
 ```
 
 
-## Basic Example
+## 基本示例
 
 在构建[开发环境](/guides/production)时替换特定的模块。
 

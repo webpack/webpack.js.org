@@ -121,7 +121,7 @@ webpack([config1, config2], (err, stats) => {
 
 ## 示例
 
-这是一个异步 `emit` 事件处理程序的例子：
+这是关于异步的 `emit` 事件处理函数的一个示例：
 
 ```javascript
 compiler.plugin("emit", function(compilation, callback) {

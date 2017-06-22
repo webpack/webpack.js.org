@@ -25,7 +25,7 @@ new webpack.optimize.LimitChunkCountPlugin({
 
 ``` js
 new webpack.optimize.LimitChunkCountPlugin({
-  maxChunks: 5, // Must be greater than or equal to one
+  maxChunks: 5, // 必须大于或等于 1
   minChunkSize: 1000
 })
 ```

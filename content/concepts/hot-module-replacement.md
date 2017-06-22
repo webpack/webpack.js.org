@@ -50,12 +50,12 @@ HMR 是可选功能，只会影响包含 HMR 代码的模块。举个例子，�
 
 类似的，当在一个模块中实现了 HMR 接口，你可以描述出当模块被更新后发生了什么。然而在多数情况下，不需要强制在每个模块中写入 HMR 代码。如果一个模块没有 HMR 处理函数，更新就会冒泡。这意味着一个简单的处理函数能够对整个模块树(complete module tree)进行更新。如果在这个模块树中，一个单独的模块被更新，那么整组依赖模块都会被重新加载。
 
-See the [HMR API page](/api/hot-module-replacement) for details on the `module.hot` interface.
+有关 `module.hot` 接口的详细信息，请查看 [HMR API 页面](/api/hot-module-replacement)。
 
 
 ### 在 HMR Runtime 中
 
-Here things get a bit more technical... if you're not interested in the internals, feel free to jump to the [HMR API page](/api/hot-module-replacement) or [HMR guide](/guides/hot-module-replacement).
+这些事情比较有技术性……如果你对其内部不感兴趣，可以随时跳到 [HMR API 页面](/api/hot-module-replacement)或 [HMR 指南](/guides/hot-module-replacement)。
 
 对于模块系统的 runtime，附加的代码被发送到 `parents` 和 `children` 跟踪模块。在管理方面，runtime 支持两个方法 `check` 和 `apply`。
 
