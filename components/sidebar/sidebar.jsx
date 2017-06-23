@@ -6,10 +6,6 @@ const supportsPassive = testPassiveListeners() !== false;
 
 let effectiveHeaderHeight;
 let footerHeight;
-if (typeof window !== 'undefined') {
-    effectiveHeaderHeight = document.querySelector('header').offsetHeight + document.querySelector('.notification-bar').offsetHeight;
-    footerHeight = document.querySelector('footer').offsetHeight;
-}
 
 export default class Sidebar extends Component {
   constructor(props) {
@@ -96,6 +92,10 @@ export default class Sidebar extends Component {
     let { offsetHeight: sidebarHeight } = this._container;
     let { offsetWidth: parentWidth, offsetHeight: parentHeight } = this._container.parentNode;
     let distToBottom = scrollHeight - scrollY - innerHeight;
+    if (!effectiveHeaderHeight || !footerHeight) {
+      effectiveHeaderHeight = document.querySelector('header').offsetHeight + document.querySelector('.notification-bar').offsetHeight;
+      footerHeight = document.querySelector('footer').offsetHeight;
+    }
 
     // Calculate the space that the footer and header are actually occupying
     let headerSpace = scrollY > effectiveHeaderHeight ? 0 : effectiveHeaderHeight - scrollY;

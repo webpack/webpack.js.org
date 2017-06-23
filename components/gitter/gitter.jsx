@@ -4,9 +4,6 @@ import testPassiveListeners from '../../utilities/test-passive-listeners';
 const supportsPassive = testPassiveListeners() !== false;
 
 let footerHeight;
-if (typeof window !== 'undefined') {
-    footerHeight = document.querySelector('footer').offsetHeight;
-}
 
 export default class Gitter extends React.Component {
   constructor(props) {
@@ -57,6 +54,9 @@ export default class Gitter extends React.Component {
     let { scrollY, innerHeight } = window;
     let { scrollHeight } = document.body;
     let distToBottom = scrollHeight - scrollY - innerHeight;
+    if (!footerHeight) {
+      footerHeight = document.querySelector('footer').innerHeight;
+    }
 
     this.setState({
       offset: distToBottom < footerHeight ? footerHeight - distToBottom : 0
