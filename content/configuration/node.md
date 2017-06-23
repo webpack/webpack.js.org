@@ -37,6 +37,8 @@ node: {
 }
 ```
 
+从 webpack 3.0.0 开始，`node` 选项可能会被设置为 `false` 以完全关闭 `NodeSourcePlugin`。
+
 
 ## `node.console`
 

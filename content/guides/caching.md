@@ -5,7 +5,7 @@ contributors:
   - okonet
   - jouni-kantola
 related:
-  - title: Predictable Long Term Caching
+  - title: 可预测的长效缓存
     url: https://medium.com/webpack/predictable-long-term-caching-with-webpack-d3eee1d3fa31
 ---
 

@@ -258,6 +258,13 @@ library 名称取决于 [`output.libraryTarget`](#output-librarytarget) 选项�
 有关 `output.library` 以及 `ouput.libraryTarget` 详细信息，请查看[创建 library 指南](/guides/author-libraries)。
 
 
+## `output.libraryExport`
+
+`string` or `string[]` (since webpack 3.0.0)
+
+Allows to select an export for the library.
+
+
 ## `output.libraryTarget`
 
 `string`

@@ -88,7 +88,7 @@ webpack([config1, config2], (err, stats) => {
 ```
 
 
-## 事件钩子
+## 事件钩子函数
 
 这是 `Compiler` 暴露的所有事件钩子的参考指南
 
@@ -127,7 +127,7 @@ webpack([config1, config2], (err, stats) => {
 compiler.plugin("emit", function(compilation, callback) {
     // 执行一些异步……
     setTimeout(function() {
-      console.log("异步执行完成");
+      console.log("Done with async work...");
       callback();
     }, 1000);
 });
