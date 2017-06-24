@@ -111,4 +111,4 @@ Here are some other useful plugins and loaders provide by the community for spli
 
 ## Next Steps
 
-...
+See [Lazy Loading](/guides/lazy-loading) for a more concrete example of how `import()` can be used in a real application and [Caching](/guides/caching) to learn how to split code more effectively.
