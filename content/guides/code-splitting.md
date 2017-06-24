@@ -5,37 +5,110 @@ contributors:
   - pksjce
   - pastelsky
   - simon04
+  - jonwheeler
+  - johnstew
+  - shinxi
+  - tomtasche
+  - levy9527
+  - rahulcs
+  - chrisVillanueva
+  - rafde
+  - bartushek
+  - shaunwallace
+  - skipjack
+  - jakearchibald
+  - TheDutchCoder
 ---
 
-Code splitting is one of the most compelling features of webpack. It allows you to split your code into various bundles which you can then load on demand — like when a user navigates to a matching route, or on an event from the user. This allows for smaller bundles, and allows you to control resource load prioritization, which if used correctly, can have a major impact on your application load time.
+Code splitting is one of the most compelling features of webpack. This feature allows you to split your code into various bundles which can then be loaded on demand or in parallel. It can be used to achieve smaller bundles and control resource load prioritization which, if used correctly, can have a major impact on load time.
 
-There are mainly two kinds of code splitting that can be accomplished with webpack:
+There are three general approaches to code splitting available:
 
-
-## Resource Splitting
-
-Vendor and CSS code splitting methods help with both caching and parallel loading.
-
-### Vendor Code Splitting
-
-A typical application can depend on many third party libraries for framework/functionality needs. Unlike application code, code present in these libraries does not change often.
-
-If we keep code from these libraries in its own bundle, separate from the application code, we can leverage the browser's caching mechanism to cache these files for longer durations on the end user's machine.
-
-For this to work, the `[hash]` portion in the vendor filename must remain constant, regardless of application code changes. Learn [how to split vendor/library](/guides/code-splitting-libraries) code using the `CommonsChunkPlugin`.
-
-### CSS Splitting
-
-You might also want to split your styles into a separate bundle, independent from application logic.
-This enhances cacheability of your styles and allows the browser to load the styles in-parallel with your application code, thus preventing a FOUC ([flash of unstyled content](https://en.wikipedia.org/wiki/Flash_of_unstyled_content)).
-
-Learn [how to split CSS](/guides/code-splitting-css) using the `ExtractTextWebpackPlugin`.
+- Entry Points: Manually split code using [`entry`](/configuration/entry-context) configuration.
+- Plugins & Loaders: Certain plugins and loaders can be used to split code in a variety of different ways.
+- Dynamic Imports: This method allows splitting code via inline function calls within modules.
 
 
-## On Demand Code Splitting
+## Entry Points
 
-While resource splitting of the previous kind requires the user to specify the split points upfront in the configuration, one can also create dynamic split points in the application code.
+This is by far the easiest, and most intuitive, way to split code. However, it is more manual and has a some pitfalls we will go over. Let's take a look at how we might split the core libraries and frameworks an application uses from the actual source code:
 
-This can be used for more granular chunking of code, for example, per our application routes or as per predicted user behaviour. This allows the user to load non-essential assets on demand.
+__webpack.config.js__
 
-Learn [how to split on demand](/guides/code-splitting-async) using `import()` or `require.ensure()`.
+``` js
+const path = require('path');
+
+module.exports = {
+  entry: {
+    index: './src/index.js',
+    vendor: [
+      'lodash'
+    ]
+  },
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  }
+};
+```
+
+This will yield the following build result:
+
+?> Add bash example of webpack output
+
+As mentioned there are some pitfalls to this approach:
+
+- If there are any duplicated modules between entry chunks they will be included in both bundles.
+- It isn't as flexible and can't be used to dynamically split code with the core application logic.
+
+The first of these two points is definitely an issue for our example, as `moment` is also imported within `./src/index.js` and will thus be duplicated in the output. See the `CommonChunkPlugin` example below for a solution to this problem.
+
+
+## Plugins & Loaders
+
+There are multiple plugins and loaders in webpack's ecosystem that can help with splitting and managing split code. The most widely utilized of these is the [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin), a fairly advanced tool that allows us to extract common dependencies into an existing entry chunk or an entirely new chunk. Let's use this to de-duplicate the `moment` dependency from the previous example:
+
+__webpack.config.js__
+
+``` js
+const path = require('path');
+const webpack = require('webpack');
+
+module.exports = {
+  entry: {
+    index: './src/index.js',
+    vendor: [
+      'lodash'
+    ]
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor' // Specify the common bundle's name.
+    })
+  ],
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  }
+};
+```
+
+This will yield the following build result (notice how our `index.bundle.js` has shrunk in size):
+
+?> Add bash example of webpack output
+
+Here are some other useful plugins and loaders provide by the community for splitting code:
+
+- [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin): Useful for splitting CSS out from the main application.
+- [`bundle-loader`](/loaders/bundle-loader): Used to split code and lazy load the resulting bundles.
+- [`promise-loader`](https://github.com/gaearon/promise-loader): Similar to the `bundle-loader` but uses promises.
+
+
+## Dynamic Imports
+
+...
+
+
+## Next Steps
+
+...
