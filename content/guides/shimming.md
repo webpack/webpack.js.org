@@ -1,6 +1,6 @@
 ---
 title: Shimming
-sort: 10
+sort: 13
 contributors:
   - pksjce
   - jhnns
