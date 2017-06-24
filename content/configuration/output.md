@@ -7,6 +7,7 @@ contributors:
   - tomasAlabes
   - mattce
   - irth
+  - fvgs
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -142,11 +143,9 @@ Using hashes based on each chunks' content:
 filename: "[chunkhash].bundle.js"
 ```
 
-Make sure the read the [Caching guide](/guides/caching) for details. There are more steps involved than just setting this option.
+Make sure to read the [Caching guide](/guides/caching) for details. There are more steps involved than just setting this option.
 
-The default value is `"[name].js"`.
-
-Note this option is called filename but you are still allowed to something like `"js/[name]/bundle.js"` to create a folder structure.
+Note this option is called filename but you are still allowed to use something like `"js/[name]/bundle.js"` to create a folder structure.
 
 Note this options does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#output-chunkfilename) option is used. It also doesn't affect files created by loaders. For these files see loader options.
 
