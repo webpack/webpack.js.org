@@ -97,7 +97,7 @@ new webpack.DllReferencePlugin({
 
 ## Examples
 
-### [vendor](https://github.com/webpack/webpack/tree/master/examples/dll) and [user](https://github.com/webpack/webpack/tree/master/examples/dll-user)
+[Vendor](https://github.com/webpack/webpack/tree/master/examples/dll) and [User](https://github.com/webpack/webpack/tree/master/examples/dll-user)
 
 _Two separate example folders. Demonstrates scope and context._
 
