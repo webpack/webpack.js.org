@@ -112,14 +112,13 @@ Here, instead of statically importing lodash, we'll use dynamic importing to sep
 
 __src/index.js__
 
-```javascript
+``` diff
 - import _ from 'lodash';
 -
 - function component() {
 + function getComponent() {
 -   var element = document.createElement('div');
 -
--   // Lodash, currently included via a script, is required for this line to work
 -   // Lodash, now imported by this script
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +   return import(/* webpackChunkName: "lodash" */ 'lodash').then(module => {
@@ -146,7 +145,7 @@ If you've enabled [`async` functions](https://developer.mozilla.org/en-US/docs/W
 
 __src/index.js__
 
-```javascript
+``` diff
   async function getComponent() {
 -   return import(/* webpackChunkName: "lodash" */ 'lodash').then(module => {
 -     var element = document.createElement('div');
