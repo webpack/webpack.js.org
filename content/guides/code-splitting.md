@@ -108,42 +108,66 @@ Here are some other useful plugins and loaders provide by the community for spli
 
 Two similar techniques are supported by webpack when it comes to dynamic code splitting. The first and more preferable approach is use to the [`import()` syntax](/api/module-methods#import-) that conforms to the [ECMAScript proposal](https://github.com/tc39/proposal-dynamic-import) for dynamic imports. The legacy, webpack-specific approach is to use [`require.ensure`](/api/module-methods#require-ensure). Let's try using the first of these two approaches...
 
-...
-
-?> Update the following example to match with _Getting Started_
+Here, instead of statically importing lodash, we'll use dynamic importing to separate it into a separate chunk:
 
 __src/index.js__
 
 ```javascript
-function determineDate() {
-  import('moment').then(function(moment) {
-    console.log(moment().format());
-  }).catch(function(err) {
-    console.log('Failed to load moment', err);
-  });
-}
+- import _ from 'lodash';
+-
+- function component() {
++ function getComponent() {
+-   var element = document.createElement('div');
+-
+-   // Lodash, currently included via a script, is required for this line to work
+-   // Lodash, now imported by this script
+-   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
++   return import(/* webpackChunkName: "lodash" */ 'lodash').then(module => {
++     var element = document.createElement('div');
++
++     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
++
++     return element;
++
++   }).catch(error => 'An error occurred while loading the component');
+  }
 
-determineDate();
+- document.body.appendChild(component());
++ getComponent().then(component => {
++   document.body.appendChild(component);
++ })
 ```
 
-?> Note `async`/`await`... from code-splitting-async:
+Now, when we run webpack, we should see lodash separated out to a separate bundle:
 
-> To use ES2017 [`async`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)/[`await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) with `import()`:
->
-> ```bash
-> npm install --save-dev babel-plugin-transform-async-to-generator babel-plugin-transform-regenerator babel-plugin-transform-runtime babel-plugin-syntax-async-functions
-> ```
->
-> __index-es2017.js__
->
-> ```javascript
-> async function determineDate() {
->   const moment = await import('moment');
->   return moment().format('LLLL');
-> }
->
-> determineDate().then(str => console.log(str));
-> ```
+?> Add bash example of webpack output
+
+If you've enabled [`async` functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) via a pre-processor like babel, note that you can simplify the code as `import()` statements just return promises:
+
+__src/index.js__
+
+```javascript
+  async function getComponent() {
+-   return import(/* webpackChunkName: "lodash" */ 'lodash').then(module => {
+-     var element = document.createElement('div');
+-
+-     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+-
+-     return element;
+-
+-   }).catch(error => 'An error occurred while loading the component');
++   var element = document.createElement('div');
++   const _ = await import(/* webpackChunkName: "lodash" */ 'lodash');
++
++   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
++
++   return element;
+  }
+
+  getComponent().then(component => {
+    document.body.appendChild(component);
+  });
+```
 
 
 ## Next Steps
