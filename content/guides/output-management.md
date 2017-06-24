@@ -5,7 +5,7 @@ contributors:
   - skipjack
 ---
 
-Managing webpack's [output](/configuration/output) and including it in your HTML files may not seem tough at first, but once you start [using hashes in filenames](/guides/caching) and outputting [multiple bundles](/guides/code-splitting-libraries), things can start to get a bit hairy. However, there's no need to fear as a few plugins exist that will make this process much easier to manage.
+Managing webpack's [output](/configuration/output) and including it in your HTML files may not seem tough at first, but once you start [using hashes in filenames](/guides/caching) and outputting [multiple bundles](/guides/code-splitting), things can start to get a bit hairy. However, there's no need to fear as a few plugins exist that will make this process much easier to manage.
 
 First let's take a look at where you might stand without these plugins:
 
