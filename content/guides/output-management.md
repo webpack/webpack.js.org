@@ -27,7 +27,7 @@ __index.html__
 </html>
 ```
 
-Here we've loaded a favicon, our stylesheet (extracted with the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin)), any libraries (split into [a separate bundle](/guides/code-splitting-libraries)), and finally our main bundle (`app.bundle.js`). This is ok, but what happens if we change our entry point names? What if we decide to take advantage of [better caching practices](/guides/caching)?
+Here we've loaded a favicon, our stylesheet (extracted with the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin)), any libraries (split into [a separate bundle](/guides/code-splitting)), and finally our main bundle (`app.bundle.js`). This is ok, but what happens if we change our entry point names? What if we decide to take advantage of [better caching practices](/guides/caching)?
 
 
 ## Auto-Generated HTML
