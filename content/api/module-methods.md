@@ -161,23 +161,34 @@ require.cache[module.id] !== module
 
 ### `require.ensure`
 
+W> `require.ensure()` is specific to webpack and superseded by `import()`.
+
 ``` javascript
-require.ensure(dependencies: String[], callback: function([require]), [chunkName: String])
+require.ensure(dependencies: String[], callback: function(require), errorCallback: function(error), chunkName: String)
 ```
 
-Split out the given `dependencies` to a separate bundle that that will be loaded asynchronously. When using CommonJS module syntax, this is the only way to dynamically load dependencies. Meaning, this code can be run within execution, only loading the `dependencies` if a certain conditions are met. See the [Asynchronous Code Splitting guide](/guides/code-splitting-async) for more details.
+Split out the given `dependencies` to a separate bundle that that will be loaded asynchronously. When using CommonJS module syntax, this is the only way to dynamically load dependencies. Meaning, this code can be run within execution, only loading the `dependencies` if certain conditions are met.
 
 ``` javascript
 var a = require('normal-dep');
 
-if ( /* Some Condition */ ) {
-  require.ensure(["b"], function(require) {
-    var c = require("c");
+if ( module.hot ) {
+  require.ensure(['b'], function(require) {
+    var c = require('c');
 
     // Do something special...
   });
 }
 ```
+
+The following parameters are supported in the order specified above:
+
+- `dependencies`: An array of strings declaring all modules required for the code in the `callback` to execute.
+- `callback`: A function that webpack will execute once the dependencies are loaded. An implementation of the `require` function is sent as a parameter to this function. The function body can use this to further `require()` modules it needs for execution.
+- `errorCallback`: A function that is executed when webpack fails to load the dependencies.
+- `chunkName`: A name given to the chunk created by this particular `require.ensure()`. By passing the same `chunkName` to various `require.ensure()` calls, we can combine their code into a single chunk, resulting in only one bundle that the browser must load.
+
+W> Although the implementation of `require` is passed as an argument to the `callback` function, using an arbitrary name e.g. `require.ensure([], function(request) { request('someModule'); })` isn't handled by webpack's static parser. Use `require` instead, e.g. `require.ensure([], function(require) { require('someModule'); })`.
 
 
 
