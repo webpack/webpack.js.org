@@ -5,6 +5,9 @@ contributors:
   - iammerrick
   - chrisVillanueva
   - skipjack
+related:
+  - title: Lazy Loading ES2015 Modules in the Browser
+    url: https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser
 ---
 
 T> This guide is a small follow-up to [Code Splitting](/guides/code-splitting). If you have not yet read through that guide, please do so now.

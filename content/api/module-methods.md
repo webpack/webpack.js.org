@@ -53,7 +53,11 @@ export default {
 
 ### `import()`
 
-Dynamically load modules.
+`import('path/to/module') -> Promise`
+
+Dynamically load modules. Calls to `import()` are treated as split points, meaning the requested module and it's children are split out into a separate chunk.
+
+T> The [ES2015 Loader spec](https://whatwg.github.io/loader/) defines `import()` as method to load ES2015 modules dynamically on runtime.
 
 ``` javascript
 if ( module.hot ) {
@@ -63,8 +67,33 @@ if ( module.hot ) {
 }
 ```
 
-The compiler treats this as a split point and will split everything from `lodash` into a separate bundle. This returns a promise that will resolve to the module once the bundle has been loaded. See the [async code splitting guide](/guides/code-splitting-async) for more information.
+W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use `import()` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill). See [Shimming](/guides/shimming) for more information.
 
+One problem with direct spec-based usage is that we have no control over the split chunk's name or other properties. Luckily webpack allows some special parameters via comments so as to not break the spec:
+
+``` js
+import(
+  /* webpackChunkName: "my-chunk-name" */
+  /* webpackMode: "lazy" */
+  'module'
+);
+```
+
+`webpackChunkName`: A name for the new chunk. Since webpack 2.6.0, the placeholders `[index]` and `[request]` are supported within the given string to an incremented number or the actual resolved filename respectively.
+
+`webpackMode`: Since webpack 2.6.0, different modes for resolving dynamic imports can be specified. The following options are supported:
+
+- `"lazy"` (default): Generates a chunk per request, meaning everything is lazy loaded.
+- `"lazy-once"`: Generates a single chunk for all possible requests. The first call initiates a network request for all modules, and any following requests are already fulfilled. This is only available for when importing an expression.
+- `"eager"`: Generates no chunk. All modules are included in the current chunk and no additional network requests are made. A `Promise` is still returned but is already resolved. In contrast to a static import, the module isn't executed until the request is made.
+
+T> Note that both options can be combined like so `/* webpackMode: "lazy-once", webpackChunkName: "all-i18n-data" */`. This is parsed as a JSON5 object without curly brackets.
+
+W> Fully dynamic statements, such as `import(foo)`, __will fail__ because webpack requires at least some file location information. This is because `foo` could potentially be any path to any file in your system or project. The `import()` must contain at least some information about where the module is located, so bundling can be limited to a specific directory or set of files.
+
+W> The entire module namespace is included. For example, ``import(`./locale/${language}.json`)`` will cause every `.json` file in the `./locale` directory to be bundled into the new chunk. At run time, when the variable `language` has been computed, any file like `english.json` or `german.json` will be available for consumption.
+
+W> The use of `System.import` in webpack [did not fit the proposed spec](https://github.com/webpack/webpack/issues/2163), so it was deprecated in webpack [2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) in favor of `import()`.
 
 
 ## CommonJS

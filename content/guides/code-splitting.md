@@ -106,7 +106,44 @@ Here are some other useful plugins and loaders provide by the community for spli
 
 ## Dynamic Imports
 
+Two similar techniques are supported by webpack when it comes to dynamic code splitting. The first and more preferable approach is use to the [`import()` syntax](/api/module-methods#import-) that conforms to the [ECMAScript proposal](https://github.com/tc39/proposal-dynamic-import) for dynamic imports. The legacy, webpack-specific approach is to use [`require.ensure`](/api/module-methods#require-ensure). Let's try using the first of these two approaches...
+
 ...
+
+?> Update the following example to match with _Getting Started_
+
+__src/index.js__
+
+```javascript
+function determineDate() {
+  import('moment').then(function(moment) {
+    console.log(moment().format());
+  }).catch(function(err) {
+    console.log('Failed to load moment', err);
+  });
+}
+
+determineDate();
+```
+
+?> Note `async`/`await`... from code-splitting-async:
+
+> To use ES2017 [`async`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)/[`await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) with `import()`:
+>
+> ```bash
+> npm install --save-dev babel-plugin-transform-async-to-generator babel-plugin-transform-regenerator babel-plugin-transform-runtime babel-plugin-syntax-async-functions
+> ```
+>
+> __index-es2017.js__
+>
+> ```javascript
+> async function determineDate() {
+>   const moment = await import('moment');
+>   return moment().format('LLLL');
+> }
+>
+> determineDate().then(str => console.log(str));
+> ```
 
 
 ## Next Steps
