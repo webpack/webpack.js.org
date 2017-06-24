@@ -59,6 +59,8 @@ __src/index.js__
   document.body.appendChild(component());
 ```
 
+W> Note that when using `import()` on ES6 modules you must reference the `.default` property as it's the actual `module` object that will be returned when the promise is resolved.
+
 Now let's run webpack and check out our new lazy-loading functionality:
 
 ?> Add bash example of webpack output
