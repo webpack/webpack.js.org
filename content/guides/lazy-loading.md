@@ -17,11 +17,55 @@ Lazy, or "on demand", loading is a great way to optimize your site or applicatio
 
 ## Example
 
-...
+Let's take the example from [Code Splitting](/guides/code-splitting#dynamic-imports) and tweak it a bit to demonstrate this concept even more. The code there does cause a separate chunk, `lodash.bundle.js`, to be generated and technically "lazy-loads" it as soon as the script is run. The trouble is that no user interaction is required to load the bundle -- meaning that every time the page is loaded, the request will fire. This doesn't help us too much, and actually may impact performance negatively.
+
+Let's try something different. We'll add an interaction to log some text to the console when the user clicks a button. However, we'll wait to load that code until the actual interaction occurs for the first time. To do this we'll go back and extend the original example from [Getting Started](/guides/getting-started) and leave the `lodash` in the main chunk.
+
+__src/print.js__
+
+``` js
+console.log('The print.js module has loaded! See the network tab in dev tools...');
+
+export default () => {
+  console.log('Button Clicked: Here\'s "some text"!');
+}
+```
+
+__src/index.js__
+
+``` diff
+  import _ from 'lodash';
+
+  function component() {
+    var element = document.createElement('div');
++   var button = document.createElement('button');
++   var break = document.createElement('br');
+
+-   // Lodash, now imported by this script
++   button.innerHTML = 'Click me and look at the console!';
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
++   element.appendChild(break);
++   element.appendChild(button);
++
++   button.onclick = e => import(/* webpackChunkName: "console" */ './console').then(module => {
++     var print = module.default;
++
++     print();
++   })
+
+    return element;
+  }
+
+  document.body.appendChild(component());
+```
+
+Now let's run webpack and check out our new lazy-loading functionality:
+
+?> Add bash example of webpack output
 
 
 ## Frameworks
 
-Many frameworks and libraries have their own recommendations of how this should be accomplished within their methodologies. Here are a few examples:
+Many frameworks and libraries have their own recommendations on how this should be accomplished within their methodologies. Here are a few examples:
 
 - React: [Code Splitting and Lazy Loading](https://reacttraining.com/react-router/web/guides/code-splitting)
