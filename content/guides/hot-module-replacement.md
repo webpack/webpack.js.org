@@ -159,6 +159,6 @@ There are many other loaders and examples out in the community to make HMR inter
 - [React Hot Loader](https://github.com/gaearon/react-hot-loader): Tweak react components in real time.
 - [Vue Loader](https://github.com/vuejs/vue-loader): This loader supports HMR for vue components out of the box.
 - [Elm Hot Loader](https://github.com/fluxxu/elm-hot-loader): Supports HMR for the Elm programming language.
-- [Redux HMR](https://survivejs.com/webpack/appendices/hmr-with-react/#configuring-hmr-with-redux): No loader or plugin necessary! A simple change
+- [Redux HMR](https://survivejs.com/webpack/appendices/hmr-with-react/#configuring-hmr-with-redux): No loader or plugin necessary! A simple change to your main store file is all that's required.
 
 T> If you know of any other loaders or plugins that help with or enhance Hot Module Replacement please submit a pull request to add to this list!
