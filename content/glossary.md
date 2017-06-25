@@ -22,8 +22,8 @@ This index lists common terms used throughout the webpack ecosystem.
 
 ## C
 
+- **Chunk**: This webpack-specific term is used internally to manage the bundling process. Bundles are composed out of chunks, of which there are several types (e.g. entry and child). Typically, _chunks_ directly correspond with the output _bundles_ however, there are some configurations that don't yield a one-to-one relationship.
 - [**Code Splitting**](/guides/code-splitting/): Refers to dividing your code into various bundles/chunks which you can then load on demand instead of loading a single bundle containing everything.
-- **Chunk**: This webpack-specific term is used internally to manage the bundling process. Bundles are composed out of chunks, of which there are several types (e.g. entry and child).
 - [**Configuration**](/concepts/configuration/): webpack config file is a plain old JavaScript file that exports an object. This object is then processed by webpack based upon its defined properties.
 
 
