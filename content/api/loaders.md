@@ -139,10 +139,10 @@ In the example: `"/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/re
 
 ### `this.query`
 
-1. In case the loader was configured with an [`options`](/configuration/module/#useentry) object, this will be a reference to the object.
+1. If the loader was configured with an [`options`](/configuration/module/#useentry) object, this will point to that object.
 2. If the loader has no `options`, but was invoked with a query string, this will be a string starting with `?`.
 
-T> Use the [`getOptions` method from the `loader-utils`](https://github.com/webpack/loader-utils#getoptions) to extract the given loader options.
+W> This property is deprecated as `options` is replacing `query`. Use the [`getOptions` method from the `loader-utils`](https://github.com/webpack/loader-utils#getoptions) to extract the given loader options.
 
 
 ### `this.callback`

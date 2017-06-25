@@ -41,7 +41,7 @@ An array of [Rules](#rule) which are matched to requests when modules are create
 A Rule can be separated into three parts — Conditions, Results and nested Rules.
 
 
-### Rule conditions
+### Rule Conditions
 
 There are two input values for the conditions:
 
@@ -124,9 +124,9 @@ A [`Condition`](#condition) matched with the issuer. See details in [`Rule` cond
 
 ## `Rule.loaders`
 
-`Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#rule-use) for details.
+W> This option is __deprecated__ in favor of `Rule.use`.
 
-It exists for compatibility reasons. Use `Rule.use` instead.
+`Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#rule-use) for details.
 
 
 ## `Rule.oneOf`
@@ -134,11 +134,11 @@ It exists for compatibility reasons. Use `Rule.use` instead.
 An array of [`Rules`](#rule) from which only the first matching Rule is used when the Rule matches.
 
 
-## `Rule.options / Rule.query`
+## `Rule.options` / `Rule.query`
 
 `Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.options`](#useentry) for details.
 
-`Rule.query` only exists for compatibility reasons. Use `Rule.options` instead.
+W> `Rule.query` is deprecated in favor of `Rule.options` and `UseEntry.options`.
 
 
 ## `Rule.parser`
@@ -196,9 +196,7 @@ Loaders can be chained by passing multiple loaders, which will be applied from r
 
 ```javascript
 use: [
-  {
-    loader: 'style-loader'
-  },
+  'style-loader',
   {
     loader: 'css-loader',
     options: {
