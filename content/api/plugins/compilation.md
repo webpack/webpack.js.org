@@ -75,12 +75,12 @@ Optimize the chunks.
 //optimize chunks may be run several times in a compilation
 
 compilation.plugin('optimize-chunks', function(chunks) {
-    //unless you specified multiple entries in your config
-    //there's only one chunk at this point
+    // Unless you've specified multiple entries in your config
+    // there's only one chunk at this point
     chunks.forEach(function (chunk) {
-        //chunks have circular references to their modules
+        // Chunks have circular references to their modules
         chunk.modules.forEach(function (module){
-            //module.loaders, module.rawRequest, module.dependencies, etc.
+            // module.loaders, module.rawRequest, module.dependencies, etc.
         });
     });
 });

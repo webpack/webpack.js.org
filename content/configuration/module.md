@@ -78,7 +78,7 @@ The [`parser`](#rule-parser) property affects the parser options.
 
 ## Nested rules
 
-Nested rules can be specified under the properties [`rules`](#rule-rules) and [`oneOf`](#rule-oneof). 
+Nested rules can be specified under the properties [`rules`](#rule-rules) and [`oneOf`](#rule-oneof).
 
 These rules are evaluated when the Rule condition matches.
 
@@ -273,14 +273,14 @@ For compatibility a `query` property is also possible, which is an alias for the
 }
 ```
 
-Note that webpack needs to generate a unique module identifier from the resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9% of cases, but may be not unique if you apply the same loaders with different options to the resource and the options have some stringified values. 
+Note that webpack needs to generate a unique module identifier from the resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9% of cases, but may be not unique if you apply the same loaders with different options to the resource and the options have some stringified values.
 
 It also breaks if the options object cannot be stringified (i.e. circular JSON). Because of this you can have a `ident` property in the options object which is used as unique identifier.
 
 
 ## Module Contexts
 
-(Deprecated)
+> Avoid using these options as they are __deprecated__ and will soon be removed.
 
 These options describe the default settings for the context created when a dynamic dependency is encountered.
 
@@ -309,7 +309,7 @@ module: {
 }
 ```
 
-Note: You can use the `ContextReplacementPlugin` to modify these values for individual dependencies. This also removes the warning.
+T> You can use the `ContextReplacementPlugin` to modify these values for individual dependencies. This also removes the warning.
 
 A few use cases:
 
