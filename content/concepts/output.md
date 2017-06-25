@@ -7,7 +7,7 @@ contributors:
   - rouzbeh84
 ---
 
-Options affecting the output of the compilation. `output` options tell webpack how to write the compiled files to disk. Note that, while there can be multiple `entry` points, only one `output` configuration is specified.
+Configuring the `output` configuration options tell webpack how to write the compiled files to disk. Note that, while there can be multiple `entry` points, only one `output` configuration is specified.
 
 
 ## Usage
@@ -35,7 +35,7 @@ This configuration would output a single `bundle.js` file into the `/home/proj/p
 
 ## Multiple Entry Points
 
-If your configuration creates more than a single "chunk" (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use [substitutions](/config/output#output-filename) to ensure that each file has a unique name.
+If your configuration creates more than a single "chunk" (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use [substitutions](/configuration/output#output-filename) to ensure that each file has a unique name.
 
 ```javascript
 {
