@@ -15,15 +15,12 @@ webpack can compile for multiple environments or _targets_. To understand what a
 
 `string | function(compiler)`
 
-Tells webpack which environment the application is targeting. If it's a `function`, then it will be called with the compiler as a parameter. If it's a `string`, then the following values are supported via [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js):
+Tells webpack which environment the application is targeting. The value can be a string or a function.
 
-You can set it to a function if none of the predefined targets below meet your needs. For example, if you don't want any of the plugins they applied, then you can do:
+### `string`
 
-```js
-const options = {
-  target: () => undefined
-};
-```
+If it's a `string`, then the following values are supported via [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js):
+
 
 | `target`      | Description            |
 | ------------- |------------------------|
@@ -38,3 +35,31 @@ const options = {
 |`webworker`| Compile as WebWorker |
 
 For example, when the `target` is set to `"electron"`, webpack includes multiple electron specific variables. For more information on which templates and externals are used, you can refer to webpack's [source code](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js#L70-L185).
+
+
+### `function`
+
+If it's a `function`, then it will be called with the compiler as a parameter. You can set it to a function if none of the predefined targets above meet your needs.
+
+For example, if you don't want any of the plugins they applied, then you can do:
+
+```js
+const options = {
+  target: () => undefined
+};
+```
+
+Or you can apply specific plugins you want:
+
+```js
+const webpack = require("webpack");
+
+const options = {
+  target: (compiler) => {
+    compiler.apply(
+      new webpack.JsonpTemplatePlugin(options.output),
+      new webpack.LoaderTargetPlugin("web")
+    );
+  }
+};
+```
