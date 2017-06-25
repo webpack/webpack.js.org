@@ -34,8 +34,7 @@ application.js?build=1
 application.css?build=1
 ```
 
-It is even easier to do with webpack. Each webpack build generates a unique hash which can be used to compose a filename, by including output [placeholders](/concepts/output/#options).
-The following example config will generate 2 files (1 per entry) with hashes in filenames:
+It is even easier to do with webpack. Each webpack build generates a unique hash which can be used to compose a filename, by including output [substitutions](/configuration/output#output-filename). The following example config will generate 2 files (1 per entry) with hashes in filenames:
 
 ```js
 // webpack.config.js
