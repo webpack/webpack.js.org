@@ -6,21 +6,21 @@ contributors:
   - kkamali
 ---
 
-[TypeScript](https://www.typescriptlang.org) is a typed superset of JavaScript that compiles to plain JavaScript. In this guide we will learn how to integrate Typescript with webpack.
+[TypeScript](https://www.typescriptlang.org) 是 JavaScript 的超集，为其增加了类型系统，可以编译为普通的 JavaScript 代码。这篇指南里我们将会学习 webpack 是如何跟 TypeScript 进行集成。
 
 
-## Basic Setup
+## 基础安装
 
-In order to get started with webpack and Typescript, first we must [install webpack](/guides/installation/) in our project.
+在开始使用 webpack 和 Typescript 之前，首先，我们必须在项目中[安装 webpack](/guides/installation/)。
 
-To start using webpack with Typescript you need a couple of things:
+要想要 webpack 里集成 TypeScript，您需要预先准备如下：
 
-1. Install the Typescript compiler in your project.
-2. Install a Typescript loader (in this case we're using ts-loader).
-3. Create a __tsconfig.json__ file to contain our TypeScript compilation configuration.
-4. Create __webpack.config.js__ to contain our webpack configuration.
+1. 在项目里安装 TypeScript 编译器。
+2. 安装一个 Typescript loader（这个示例里使用的是 `ts-loader`）。
+3. 创建 __tsconfig.json__ 文件，这是 TypeScript 的编译配置。
+4. 创建 __webpack.config.js__ 文件，这是 webpack 的配置。
 
-You can install the TypeScript compiler and loader by running:
+可以通过运行下面这个命令，来安装 TypeScript 编译器和 loader：
 
  ``` bash
  npm install --save-dev typescript ts-loader
@@ -28,7 +28,7 @@ You can install the TypeScript compiler and loader by running:
 
 __tsconfig.json__
 
-Let's set up a simple configuration to support JSX and compile TypeScript down to ES5...
+这里我们设置一个基本的配置，来支持 JSX，并将 TypeScript 编译到 ES5……
 
 ``` json
 {
@@ -44,11 +44,11 @@ Let's set up a simple configuration to support JSX and compile TypeScript down t
 }
 ```
 
-See [TypeScript's documentation](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) to learn more about `tsconfig.json` configuration options.
+查看 [TypeScript 官方文档](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)了解更多关于 `tsconfig.json` 的配置选项。
 
 __webpack.config.js__
 
-Now let's configure webpack to handle TypeScript:
+现在让我们在 webpack 配置中处理 TypeScript：
 
 ```js
 module.exports = {
@@ -69,7 +69,7 @@ module.exports = {
 };
 ```
 
-This will direct webpack to _enter_ through `./index.ts`, _load_ all `.ts` and `.tsx` files through the `ts-loader`, and _output_ a `bundle.js` file in our current directory.
+这会直接将 webpack 的入口起点指定为 `./index.ts`，然后通过 `ts-loader` _加载_所有的 `.ts` 和 `.tsx` 文件，并且在当前目录_输出_一个 `bundle.js` 文件。
 
 
 ## Loaders
