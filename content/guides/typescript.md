@@ -72,38 +72,38 @@ module.exports = {
 这会直接将 webpack 的入口起点指定为 `./index.ts`，然后通过 `ts-loader` _加载_所有的 `.ts` 和 `.tsx` 文件，并且在当前目录_输出_一个 `bundle.js` 文件。
 
 
-## Loaders
+## Loader
 
-The following loaders for TypeScript:
+以下是可用的 TypeScript loader：
 
 - [`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader)
 - [`ts-loader`](https://github.com/TypeStrong/ts-loader)
 
-Awesome TypeScript Loader has created a [wonderful explanation](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader) of the difference between `awesome-typescript-loader` and `ts-loader`.
+关于 `awesome-typescript-loader` 和 `ts-loader` 的区别，Awesome TypeScript Loader 作了[精彩的解释](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader)。
 
-We chose to use `ts-loader` in this guide as it makes enabling additional webpack features, such as importing other web assets, a bit easier.
+在本指南中，我们选择使用 `ts-loader`，因为它能够很方便地启用额外的 webpack 功能，例如将其他 web 资源导入到项目中。
 
 
-## Source Maps
+## Source Map
 
-To enable source maps, we must configure TypeScript to output inline source maps to our compiled JavaScript files. The following line must be added to our `tsconfig.json`:
+要启用 source map，我们必须配置 TypeScript，以将内联的 source map 输出到编译过的 JavaScript 文件。必须在 `tsconfig.json` 中添加下面这行：
 
 ``` json
 "sourceMap": true
 ```
 
-Now we need to tell webpack to extract these source maps and into our final bundle:
+现在，我们需要告诉 webpack 提取这些 source map，并内联到最终的 bundle 中。
 
 __webpack.config.js__
 
 ```js
 module.exports = {
  devtool: 'inline-source-map',
- // Remaining configuration...
+ // 剩余配置……
 };
 ```
 
-See the [devtool documentation](/configuration/devtool/) for more information.
+更多信息请查看 [devtool 文档](/configuration/devtool/)。
 
 
 ## Using 3rd Party Libraries
@@ -133,3 +133,7 @@ declare module "*.svg" {
 ```
 
 Here we declare a new module for SVGs by specifying any import that ends in `.svg` and defining the module's `content` as `any`. We could be more explicit about it being a url by defining the type as string. The same concept applies to other assets including CSS, SCSS, JSON and more.
+
+***
+
+> 原文：https://webpack.js.org/guides/typescript/
