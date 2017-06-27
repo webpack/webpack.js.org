@@ -69,7 +69,7 @@ if ( module.hot ) {
 
 W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use `import()` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill). See [Shimming](/guides/shimming) for more information.
 
-One problem with direct spec-based usage is that we have no control over the split chunk's name or other properties. Luckily webpack allows some special parameters via comments so as to not break the spec:
+The spec for `import` doesn't allow control over the chunk's name or other properties as "chunks" are only a concept within webpack. Luckily webpack allows some special parameters via comments so as to not break the spec:
 
 ``` js
 import(

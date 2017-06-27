@@ -54,19 +54,31 @@ module.exports = {
 
 This will yield the following build result:
 
-?> Add bash example of webpack output
+``` bash
+Hash: d1e4eab63dc6ba09c930
+Version: webpack 2.6.1
+Time: 531ms
+           Asset    Size  Chunks                    Chunk Names
+vendor.bundle.js  544 kB       0  [emitted]  [big]  vendor
+ index.bundle.js  544 kB       1  [emitted]  [big]  index
+   [0] ./~/lodash/lodash.js 540 kB {0} {1} [built]
+   [1] (webpack)/buildin/global.js 509 bytes {0} {1} [built]
+   [2] (webpack)/buildin/module.js 517 bytes {0} {1} [built]
+   [3] ./src/index.js 216 bytes {1} [built]
+   [4] multi lodash 28 bytes {0} [built]
+```
 
 As mentioned there are some pitfalls to this approach:
 
 - If there are any duplicated modules between entry chunks they will be included in both bundles.
 - It isn't as flexible and can't be used to dynamically split code with the core application logic.
 
-The first of these two points is definitely an issue for our example, as `moment` is also imported within `./src/index.js` and will thus be duplicated in the output. See the `CommonChunkPlugin` example below for a solution to this problem.
+The first of these two points is definitely an issue for our example, as `lodash` is also imported within `./src/index.js` and will thus be duplicated in the output. See the `CommonChunkPlugin` example below for a solution to this problem.
 
 
 ## Plugins & Loaders
 
-There are multiple plugins and loaders in webpack's ecosystem that can help with splitting and managing split code. The most widely utilized of these is the [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin), a fairly advanced tool that allows us to extract common dependencies into an existing entry chunk or an entirely new chunk. Let's use this to de-duplicate the `moment` dependency from the previous example:
+There are multiple plugins and loaders in webpack's ecosystem that can help with splitting and managing split code. The most widely utilized of these is the [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin), a fairly advanced tool that allows us to extract common dependencies into an existing entry chunk or an entirely new chunk. Let's use this to de-duplicate the `lodash` dependency from the previous example:
 
 __webpack.config.js__
 
@@ -93,9 +105,21 @@ module.exports = {
 };
 ```
 
-This will yield the following build result (notice how our `index.bundle.js` has shrunk in size):
+With the `CommonsChunkPlugin` in place, we should now see the duplicate dependency removed from our `index.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. Let's do an `npm run build` to see if it worked:
 
-?> Add bash example of webpack output
+``` bash
+Hash: 5f3b08906b5e7d8d0799
+Version: webpack 2.6.1
+Time: 527ms
+           Asset       Size  Chunks                    Chunk Names
+ index.bundle.js  542 bytes       0  [emitted]         index
+vendor.bundle.js     547 kB       1  [emitted]  [big]  vendor
+   [0] ./~/lodash/lodash.js 540 kB {1} [built]
+   [1] (webpack)/buildin/global.js 509 bytes {1} [built]
+   [2] (webpack)/buildin/module.js 517 bytes {1} [built]
+   [3] ./src/index.js 401 bytes {0} [built]
+   [4] multi lodash 28 bytes {1} [built]
+```
 
 Here are some other useful plugins and loaders provide by the community for splitting code:
 
@@ -146,7 +170,8 @@ If you've enabled [`async` functions](https://developer.mozilla.org/en-US/docs/W
 __src/index.js__
 
 ``` diff
-  async function getComponent() {
+- function getComponent() {
++ async function getComponent() {
 -   return import(/* webpackChunkName: "lodash" */ 'lodash').then(module => {
 -     var element = document.createElement('div');
 -

@@ -39,15 +39,15 @@ __src/index.js__
   function component() {
     var element = document.createElement('div');
 +   var button = document.createElement('button');
-+   var break = document.createElement('br');
++   var br = document.createElement('br');
 
 -   // Lodash, now imported by this script
 +   button.innerHTML = 'Click me and look at the console!';
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-+   element.appendChild(break);
++   element.appendChild(br);
 +   element.appendChild(button);
 +
-+   button.onclick = e => import(/* webpackChunkName: "console" */ './console').then(module => {
++   button.onclick = e => import(/* webpackChunkName: "print" */ './print').then(module => {
 +     var print = module.default;
 +
 +     print();
