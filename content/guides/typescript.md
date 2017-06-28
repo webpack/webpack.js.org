@@ -106,22 +106,22 @@ module.exports = {
 更多信息请查看 [devtool 文档](/configuration/devtool/)。
 
 
-## Using 3rd Party Libraries
+## 使用第三方库
 
-When installing 3rd party libraries from npm, it is important to remember to install the typing definition for that library. These definitions can be found in the [@types package](https://github.com/DefinitelyTyped/DefinitelyTyped).
+当从 npm 安装第三方库时，一定要牢记同时安装这个库的类型声明文件。你可以从 [@types 仓库](https://github.com/DefinitelyTyped/DefinitelyTyped)找到并安装这些第三方库的类型声明文件。
 
-For example if we want to install lodash we can run the following command to get the typings for it:
+举个例子，如果想安装 lodash 这个库的类型声明文件，我们可以运行下面的命令：
 
 ``` bash
 npm install --save-dev @types/lodash
 ```
 
-For more information see [this blog post](https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/).
+想了解更多，可以查看[这篇文章](https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/)。
 
 
-## Importing Other Assets
+## 导入其他资源
 
-To use non code assets with TypeScript, we need to defer the type for these imports. This requires a `custom.d.ts` file which signifies custom definitions for TypeScript in our project. Let's set up a declaration for `.svg` files:
+要在 TypeScript 里使用非代码资源，我们需要告诉 TypeScript 如何兼容这些导入类型。那么首先，我们需要在项目里创建 `custom.d.ts` 文件，这个文件用来编写自定义的类型声明。让我们将 `.svg` 文件进行声明设置：
 
 __custom.d.ts__
 
@@ -132,7 +132,7 @@ declare module "*.svg" {
 }
 ```
 
-Here we declare a new module for SVGs by specifying any import that ends in `.svg` and defining the module's `content` as `any`. We could be more explicit about it being a url by defining the type as string. The same concept applies to other assets including CSS, SCSS, JSON and more.
+这里，我们通过指定任何以 `.svg` 结尾的导入，并将模块的 `content` 定义为 `any`，将 SVG 声明一个新的模块。我们可以通过将类型定义为字符串，来更加显式地将它声明为一个 url。同样的理念适用于其他资源，包括 CSS, SCSS, JSON 等。
 
 ***
 
