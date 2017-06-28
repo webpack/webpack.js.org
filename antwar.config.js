@@ -5,8 +5,6 @@ const combineContexts = require('./utilities/combine-contexts');
 module.exports = {
   maximumWorkers: process.env.TRAVIS && 1, // Faster on Travis
   template: {
-    title: 'webpack',
-    description: 'webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.',
     file: path.join(__dirname, 'template.ejs')
   },
   output: 'build',
@@ -22,7 +20,14 @@ module.exports = {
           /^\.\/.*\.md$/
         )
       ),
-      index: () => require('./components/splash/splash.jsx').default,
+      index: () => {
+        const index = require('./components/splash/splash.jsx').default;
+
+        index.title = 'webpack';
+        index.description = 'webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.';
+
+        return index;
+      },
       layout: () => require('./components/page/page.jsx').default,
       paths: {
         'get-started': {
@@ -91,8 +96,26 @@ module.exports = {
         }
       }
     },
-    vote: () => require('./components/vote/list.jsx').default,
-    organization: () => require('./components/organization/organization.jsx').default,
-    'guides/starter-kits': () => require('./components/starter-kits/starter-kits.jsx').default
+    vote: () => {
+      const page = require('./components/vote/list.jsx').default;
+
+      page.title = 'Vote';
+
+      return page;
+    },
+    organization: () => {
+      const page = require('./components/organization/organization.jsx').default;
+
+      page.title = 'Organization';
+
+      return page;
+    },
+    'guides/starter-kits': () => {
+      const page = require('./components/starter-kits/starter-kits.jsx').default;
+
+      page.title = 'Starter kits';
+
+      return page;
+    }
   }
 };
