@@ -37,6 +37,7 @@ In comes the [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin) to save the day
 __webpack.config.js__
 
 ``` js
+var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -46,7 +47,7 @@ module.exports = {
   },
 
   output: {
-    path: 'dist',
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.js'
   },
 
