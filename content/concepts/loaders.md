@@ -11,57 +11,47 @@ contributors:
   - jhnns
 ---
 
-Loaders are transformations that are applied on the source code of a module. They allow you to preprocess files as you `require()` or “load” them. Thus, loaders are kind of like “tasks” in other build tools, and provide a powerful way to handle front-end build steps. Loaders can transform files from a different language (like TypeScript) to JavaScript, or inline images as data URLs. Loaders even allow you to do things like `require()` CSS files right in your JavaScript!
+Loaders are transformations that are applied on the source code of a module. They allow you to pre-process files as you `import` or “load” them. Thus, loaders are kind of like “tasks” in other build tools, and provide a powerful way to handle front-end build steps. Loaders can transform files from a different language (like TypeScript) to JavaScript, or inline images as data URLs. Loaders even allow you to do things like `import` CSS files directly from your JavaScript modules!
+
 
 ## Example
 
-For example, you can use loaders to tell webpack to load a CSS file or to convert TypeScript to JavaScript. Firstly, install the corresponding loaders:
+For example, you can use loaders to tell webpack to load a CSS file or to convert TypeScript to JavaScript. To do this, you would start by installing the loaders you need:
 
 ``` bash
 npm install --save-dev css-loader
 npm install --save-dev ts-loader
 ```
 
-Secondly, configure in your `webpack.config.js` that for every `.css` file the [`css-loader`](/loaders/css-loader) should be used and analogously for `.ts` files and the `ts-loader`:
+And then instruct webpack to use the [`css-loader`](/loaders/css-loader) for every `.css` file the and the ['ts-loader'](https://github.com/TypeStrong/ts-loader) for all `.ts` files:
 
 **webpack.config.js**
 
-```js-with-links-with-details
+``` js
 module.exports = {
   module: {
     rules: [
-      {test: /\.css$/, use: ['css-loader'](/loaders/css-loader)},
-      {test: /\.ts$/, use: ['ts-loader'](https://github.com/TypeStrong/ts-loader)}
+      { test: /\.css$/, use: 'css-loader' },
+      { test: /\.ts$/, use: 'ts-loader' }
     ]
   }
 };
 ```
 
-Note that according to the [configuration options](/configuration#options), the following specifications define the identical loader usage:
 
-```js-with-links-with-details
-{test: /\.css$/, [loader](/configuration/module#rule-loader): 'css-loader'}
-// or equivalently
-{test: /\.css$/, [use](/configuration/module#rule-use): 'css-loader'}
-// or equivalently
-{test: /\.css$/, [use](/configuration/module#rule-use): {
-  loader: 'css-loader',
-  options: {}
-}}
-```
-
-## Configuration
+## Using Loaders
 
 There are three ways to use loaders in your application:
 
-* via configuration
-* explicit in the `require` statement
-* via CLI
+* Configuration (recommended): Specify them in your __webpack.config.js__ file.
+* Inline: Specify them explicitly in each `import` statement.
+* CLI: Specify them within a shell command.
 
-### Via `webpack.config.js`
+
+### Configuration
 
 [`module.rules`](/configuration/module/#module-rules) allows you to specify several loaders within your webpack configuration.
-This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader.
+This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader:
 
 ```js-with-links-with-details
   module: {
@@ -69,7 +59,7 @@ This is a concise way to display loaders, and helps to maintain clean code. It a
       {
         test: /\.css$/,
         use: [
-          { loader: ['style-loader'](/loaders/style-loader)},
+          { loader: ['style-loader'](/loaders/style-loader) },
           {
             loader: ['css-loader'](/loaders/css-loader),
             options: {
@@ -82,29 +72,32 @@ This is a concise way to display loaders, and helps to maintain clean code. It a
   }
 ```
 
-### Via `require`
 
-It's possible to specify the loaders in the `require` statement (or `define`, `require.ensure`, etc.). Separate loaders from the resource with `!`. Each part is resolved relative to the current directory.
+### Inline
+
+It's possible to specify loaders in an `import` statement, or any [equivalent "importing" method](/api/module-methods). Separate loaders from the resource with `!`. Each part is resolved relative to the current directory.
 
 ```js
-require('style-loader!css-loader?modules!./styles.css');
+import Styles from 'style-loader!css-loader?modules!./styles.css';
 ```
 
 It's possible to overwrite any loaders in the configuration by prefixing the entire rule with `!`.
 
-Options can be passed with a query parameter, just like on the web (`?key=value&foo=bar`). It's also possible to use a JSON object (`?{"key":"value","foo":"bar"}`).
+Options can be passed with a query parameter, e.g. `?key=value&foo=bar`, or a JSON object, e.g. `?{"key":"value","foo":"bar"}`.
 
-T> Use `module.rules` whenever possible, as this will reduce boilerplate in your source code and allows you to debug or locate a loader faster if something goes south.
+T> Use `module.rules` whenever possible, as this will reduce boilerplate in your source code and allow you to debug or locate a loader faster if something goes south.
 
-### Via CLI
 
-Optionally, you could also use loaders through the CLI:
+### CLI
+
+You can also use loaders through the CLI:
 
 ```sh
 webpack --module-bind jade-loader --module-bind 'css=style-loader!css-loader'
 ```
 
 This uses the `jade-loader` for `.jade` files, and the [`style-loader`](/loaders/style-loader) and [`css-loader`](/loaders/css-loader) for `.css` files.
+
 
 ## Loader Features
 
@@ -120,8 +113,9 @@ This uses the `jade-loader` for `.jade` files, and the [`style-loader`](/loaders
 Loaders allow more power in the JavaScript ecosystem through preprocessing
 functions (loaders). Users now have more flexibility to include fine-grained logic such as compression, packaging, language translations and [more](/loaders).
 
+
 ## Resolving Loaders
 
 Loaders follow the standard [module resolution](/concepts/module-resolution/). In most cases it will be loaders from the [module path](/concepts/module-resolution/#module-paths) (think `npm install`, `node_modules`).
 
-A loader module is expected to export a function and be written in NodeJS compatible JavaScript. In the common case you manage loaders with npm, but you can also have loaders as files in your app. By convention, loaders are usually named `xxx-loader` (e.g. `json-loader`). See ["How to Write a Loader?"](/development/how-to-write-a-loader) for more information.
+A loader module is expected to export a function and be written in Node.js compatible JavaScript. They are most commonly managed with npm, but you can also have custom loaders as files within your application. By convention, loaders are usually named `xxx-loader` (e.g. `json-loader`). See ["How to Write a Loader?"](/development/how-to-write-a-loader) for more information.

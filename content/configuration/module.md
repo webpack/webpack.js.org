@@ -41,7 +41,7 @@ An array of [Rules](#rule) which are matched to requests when modules are create
 A Rule can be separated into three parts — Conditions, Results and nested Rules.
 
 
-### Rule conditions
+### Rule Conditions
 
 There are two input values for the conditions:
 
@@ -78,7 +78,7 @@ The [`parser`](#rule-parser) property affects the parser options.
 
 ## Nested rules
 
-Nested rules can be specified under the properties [`rules`](#rule-rules) and [`oneOf`](#rule-oneof). 
+Nested rules can be specified under the properties [`rules`](#rule-rules) and [`oneOf`](#rule-oneof).
 
 These rules are evaluated when the Rule condition matches.
 
@@ -124,9 +124,9 @@ A [`Condition`](#condition) matched with the issuer. See details in [`Rule` cond
 
 ## `Rule.loaders`
 
-`Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#rule-use) for details.
+W> This option is __deprecated__ in favor of `Rule.use`.
 
-It exists for compatibility reasons. Use `Rule.use` instead.
+`Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#rule-use) for details.
 
 
 ## `Rule.oneOf`
@@ -134,11 +134,11 @@ It exists for compatibility reasons. Use `Rule.use` instead.
 An array of [`Rules`](#rule) from which only the first matching Rule is used when the Rule matches.
 
 
-## `Rule.options / Rule.query`
+## `Rule.options` / `Rule.query`
 
 `Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.options`](#useentry) for details.
 
-`Rule.query` only exists for compatibility reasons. Use `Rule.options` instead.
+W> `Rule.query` is deprecated in favor of `Rule.options` and `UseEntry.options`.
 
 
 ## `Rule.parser`
@@ -196,9 +196,7 @@ Loaders can be chained by passing multiple loaders, which will be applied from r
 
 ```javascript
 use: [
-  {
-    loader: 'style-loader'
-  },
+  'style-loader',
   {
     loader: 'css-loader',
     options: {
@@ -273,14 +271,14 @@ For compatibility a `query` property is also possible, which is an alias for the
 }
 ```
 
-Note that webpack needs to generate a unique module identifier from the resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9% of cases, but may be not unique if you apply the same loaders with different options to the resource and the options have some stringified values. 
+Note that webpack needs to generate a unique module identifier from the resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9% of cases, but may be not unique if you apply the same loaders with different options to the resource and the options have some stringified values.
 
 It also breaks if the options object cannot be stringified (i.e. circular JSON). Because of this you can have a `ident` property in the options object which is used as unique identifier.
 
 
 ## Module Contexts
 
-(Deprecated)
+> Avoid using these options as they are __deprecated__ and will soon be removed.
 
 These options describe the default settings for the context created when a dynamic dependency is encountered.
 
@@ -309,7 +307,7 @@ module: {
 }
 ```
 
-Note: You can use the `ContextReplacementPlugin` to modify these values for individual dependencies. This also removes the warning.
+T> You can use the `ContextReplacementPlugin` to modify these values for individual dependencies. This also removes the warning.
 
 A few use cases:
 

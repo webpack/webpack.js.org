@@ -11,7 +11,7 @@ Loaders are transformations that are applied on the source code of a module. The
 
 ## How to write a loader
 
-A loader is just a JavaScript module that exports a function. The [loader runner](https://github.com/webpack/loader-runner) calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by webpack and the [loader runner](https://github.com/webpack/loader-runner) with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters. 
+A loader is just a JavaScript module that exports a function. The [loader runner](https://github.com/webpack/loader-runner) calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by webpack and the [loader runner](https://github.com/webpack/loader-runner) with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters.
 
 The first loader is passed one argument: the content of the resource file. The compiler expects a result from the last loader. The result should be a `String` or a `Buffer` (which is converted to a string), representing the JavaScript source code of the module. An optional SourceMap result (as JSON object) may also be passed.
 
@@ -120,7 +120,7 @@ require("./loader1?xyz!loader2!./resource?rrr");
 
 ### `this.version`
 
-**Loader API version.** Currently `2`. This is useful for providing backwards compatibility. Using the version you can specify custom logic or fallbacks for breaking changes.  
+**Loader API version.** Currently `2`. This is useful for providing backwards compatibility. Using the version you can specify custom logic or fallbacks for breaking changes.
 
 
 ### `this.context`
@@ -139,10 +139,10 @@ In the example: `"/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/re
 
 ### `this.query`
 
-1. In case the loader was configured with an [`options`](/configuration/module/#useentry) object, this will be a reference to the object.
+1. If the loader was configured with an [`options`](/configuration/module/#useentry) object, this will point to that object.
 2. If the loader has no `options`, but was invoked with a query string, this will be a string starting with `?`.
 
-T> Use the [`getOptions` method from the `loader-utils`](https://github.com/webpack/loader-utils#getoptions) to extract the given loader options.
+W> This property is deprecated as `options` is replacing `query`. Use the [`getOptions` method from the `loader-utils`](https://github.com/webpack/loader-utils#getoptions) to extract the given loader options.
 
 
 ### `this.callback`
@@ -201,15 +201,17 @@ In the example:
 
 ```javascript
 [
-  { request: "/abc/loader1.js?xyz",
-	path: "/abc/loader1.js",
-	query: "?xyz",
-	module: [Function]
+  {
+    request: "/abc/loader1.js?xyz",
+    path: "/abc/loader1.js",
+    query: "?xyz",
+    module: [Function]
   },
-  { request: "/abc/node_modules/loader2/index.js",
-	path: "/abc/node_modules/loader2/index.js",
-	query: "",
-	module: [Function]
+  {
+    request: "/abc/node_modules/loader2/index.js",
+    path: "/abc/node_modules/loader2/index.js",
+    query: "",
+    module: [Function]
   }
 ]
 ```
@@ -305,7 +307,7 @@ addDependency(file: string)
 dependency(file: string) // shortcut
 ```
 
-Adds a file as dependency of the loader result in order to make them watchable. For example, [`html-loader`](https://github.com/webpack/html-loader) uses this technique as it finds `src` and `src-set` attributes. Then, it sets the url's for those attributes as dependencies of the html file that is parsed.  
+Adds a file as dependency of the loader result in order to make them watchable. For example, [`html-loader`](https://github.com/webpack/html-loader) uses this technique as it finds `src` and `src-set` attributes. Then, it sets the url's for those attributes as dependencies of the html file that is parsed.
 
 
 ### `this.addContextDependency`

@@ -17,7 +17,7 @@ The top-level `output` key contains set of options instructing webpack on how an
 
 `string`
 
-This option determines the name of on-demand loaded chunk files. See [`output.filename`](#output-filename) option for details on the possible values.
+This option determines the name of non-entry chunk files. See [`output.filename`](#output-filename) option for details on the possible values.
 
 Note that these filenames need to be generated at runtime to send the requests for chunks. Because of this, placeholders like `[name]` and `[chunkhash]` need to add a mapping from chunk id to placeholder value to the output bundle with the webpack runtime. This increases the size and may invalidate the bundle when placeholder value for any chunk changes.
 
@@ -59,7 +59,7 @@ See [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametempla
 
 `boolean | object`
 
-(Deprecated: Not really used, not really usable, write an issue if you have a different opinion)
+> Avoid using this option as it is __deprecated__ and will soon be removed.
 
 Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines.
 
@@ -345,7 +345,7 @@ Note that your entry chunk must be defined with the `define` property, if not, w
 
 ```javascript
 define([], function() {
-	// This module returns is what your entry chunk returns
+  // This module returns is what your entry chunk returns
 });
 ```
 
@@ -355,8 +355,8 @@ So, with the following configuration...
 
 ```javascript
 output: {
-	library: "MyLibrary",
-	libraryTarget: "amd"
+  library: "MyLibrary",
+  libraryTarget: "amd"
 }
 ```
 
@@ -364,7 +364,7 @@ users will be able to call your library like so:
 
 ```javascript
 require(['MyLibrary'], function(MyLibrary) {
-	// Do something with the library...
+  // Do something with the library...
 });
 ```
 
@@ -375,8 +375,8 @@ In this case, you need the `library` property to name your module:
 
 ```javascript
 output: {
-	library: "MyLibrary",
-	libraryTarget: "umd"
+  library: "MyLibrary",
+  libraryTarget: "umd"
 }
 ```
 
@@ -384,16 +384,16 @@ And finally the output is:
 
 ```javascript
 (function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["MyLibrary"] = factory();
-	else
-		root["MyLibrary"] = factory();
+  if(typeof exports === 'object' && typeof module === 'object')
+    module.exports = factory();
+  else if(typeof define === 'function' && define.amd)
+    define([], factory);
+  else if(typeof exports === 'object')
+    exports["MyLibrary"] = factory();
+  else
+    root["MyLibrary"] = factory();
 })(this, function() {
-	//what this module returns is what your entry chunk returns
+  //what this module returns is what your entry chunk returns
 });
 ```
 
