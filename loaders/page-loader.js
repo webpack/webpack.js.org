@@ -11,6 +11,7 @@ module.exports = function (source) {
   result.attributes.anchors = markdown().getAnchors(result.body);
   result.attributes.contributors = (result.attributes.contributors || []).sort();
   result.attributes.related = Array.isArray(result.attributes.related) ? result.attributes.related : [];
+  result.title = result.attributes.title || 'webpack';
   result.body = markdown().process(result.body, highlight);
 
   delete result.frontmatter;
