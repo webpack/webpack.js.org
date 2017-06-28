@@ -188,7 +188,7 @@ __src/index.js__
 + })
 ```
 
-Now, when we run webpack, we should see lodash separated out to a separate bundle:
+Note the use of `webpackChunkName` in the comment. This will cause our separate bundle to be named `lodash.bundle.js` instead of just `[id].bundle.js`. For more information on `webpackChunkName` and the other available options, see the [`import()` documentation](/api/module-methods#import-). Let's run webpack to see lodash separated out to a separate bundle:
 
 ?> Add bash example of webpack output
 
