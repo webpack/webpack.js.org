@@ -20,13 +20,15 @@ contributors:
   - TheDutchCoder
 ---
 
+T> This guide extends the examples provided in [Getting Started](/guides/getting-started) and [Managing Built Files](/guides/output-management). Please make sure you are at least familiar with the examples provided in them.
+
 Code splitting is one of the most compelling features of webpack. This feature allows you to split your code into various bundles which can then be loaded on demand or in parallel. It can be used to achieve smaller bundles and control resource load prioritization which, if used correctly, can have a major impact on load time.
 
 There are three general approaches to code splitting available:
 
 - Entry Points: Manually split code using [`entry`](/configuration/entry-context) configuration.
-- Plugins & Loaders: Certain plugins and loaders can be used to split code in a variety of different ways.
-- Dynamic Imports: This method allows splitting code via inline function calls within modules.
+- Prevent Duplication: Use the [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) to dedupe and split chunks.
+- Dynamic Imports: Split code via inline function calls within modules.
 
 
 ## Entry Points
@@ -76,33 +78,33 @@ As mentioned there are some pitfalls to this approach:
 The first of these two points is definitely an issue for our example, as `lodash` is also imported within `./src/index.js` and will thus be duplicated in the output. See the `CommonChunkPlugin` example below for a solution to this problem.
 
 
-## Plugins & Loaders
+## Prevent Duplication
 
-There are multiple plugins and loaders in webpack's ecosystem that can help with splitting and managing split code. The most widely utilized of these is the [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin), a fairly advanced tool that allows us to extract common dependencies into an existing entry chunk or an entirely new chunk. Let's use this to de-duplicate the `lodash` dependency from the previous example:
+The [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) allows us to extract common dependencies into an existing entry chunk or an entirely new chunk. Let's use this to de-duplicate the `lodash` dependency from the previous example:
 
 __webpack.config.js__
 
-``` js
-const path = require('path');
-const webpack = require('webpack');
+``` diff
+  const path = require('path');
++ const webpack = require('webpack');
 
-module.exports = {
-  entry: {
-    index: './src/index.js',
-    vendor: [
-      'lodash'
-    ]
-  },
-  plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor' // Specify the common bundle's name.
-    })
-  ],
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  }
-};
+  module.exports = {
+    entry: {
+      index: './src/index.js',
+      vendor: [
+        'lodash'
+      ]
+    },
++   plugins: [
++     new webpack.optimize.CommonsChunkPlugin({
++       name: 'vendor' // Specify the common bundle's name.
++     })
++   ],
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
 ```
 
 With the `CommonsChunkPlugin` in place, we should now see the duplicate dependency removed from our `index.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. Let's do an `npm run build` to see if it worked:
@@ -132,7 +134,35 @@ Here are some other useful plugins and loaders provide by the community for spli
 
 Two similar techniques are supported by webpack when it comes to dynamic code splitting. The first and more preferable approach is use to the [`import()` syntax](/api/module-methods#import-) that conforms to the [ECMAScript proposal](https://github.com/tc39/proposal-dynamic-import) for dynamic imports. The legacy, webpack-specific approach is to use [`require.ensure`](/api/module-methods#require-ensure). Let's try using the first of these two approaches...
 
-Here, instead of statically importing lodash, we'll use dynamic importing to separate it into a separate chunk:
+Before we start, let's remove the `entry` and `CommonsChunkPlugin` from our config as they won't be needed for this next demonstration:
+
+__webpack.config.js__
+
+``` diff
+  const path = require('path');
+- const webpack = require('webpack');
+
+  module.exports = {
+    entry: {
++     index: './src/index.js'
+-     index: './src/index.js',
+-     vendor: [
+-       'lodash'
+-     ]
+    },
+-   plugins: [
+-     new webpack.optimize.CommonsChunkPlugin({
+-       name: 'vendor' // Specify the common bundle's name.
+-     })
+-   ],
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
+```
+
+Now, instead of statically importing lodash, we'll use dynamic importing to separate a chunk:
 
 __src/index.js__
 
