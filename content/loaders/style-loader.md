@@ -285,7 +285,7 @@ You can also insert the styles into a [ShadowRoot](https://developer.mozilla.org
 {
   loader: 'style-loader'
   options: {
-    insertAt: '#host::shadow>#root'
+    insertInto: '#host::shadow>#root'
   }
 }
 ```
