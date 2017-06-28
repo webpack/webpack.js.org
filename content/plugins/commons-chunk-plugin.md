@@ -138,8 +138,11 @@ Similar to the above one, but instead of moving common modules into the parent (
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({
-  // names: ["app", "subPageA"]
-  // (choose the chunks, or omit for all chunks)
+  name: "app",
+  // or
+  names: ["app", "subPageA"]
+  // the name or list of names must match the name or names
+  // of the entry points that create the async chunks
 
   children: true,
   // (use all children of the chunk)
@@ -147,7 +150,7 @@ new webpack.optimize.CommonsChunkPlugin({
   async: true,
   // (create an async commons chunk)
 
-  // minChunks: 3,
+  minChunks: 3,
   // (3 children must share the module before it's separated)
 })
 ```
