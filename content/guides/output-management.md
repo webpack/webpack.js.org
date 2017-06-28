@@ -63,7 +63,7 @@ vendor.bundle.js   544 kB       0  [emitted]  [big]  vendor
    [4] multi lodash 28 bytes {0} [built]
 ```
 
-We can see that webpack generates our `vendor.bundle.js` and `app.bundle.js` files, which we also specified in our `index.html` file. But what would happen if we changed the name of one of our entry points? The generated bundles would be renamed on a build, but our `index.html` file would still reference the old names. Let's fix that with the [`HtmlWebpackPlugin`]((/plugins/html-webpack-plugin).
+We can see that webpack generates our `vendor.bundle.js` and `app.bundle.js` files, which we also specified in our `index.html` file. But what would happen if we changed the name of one of our entry points? The generated bundles would be renamed on a build, but our `index.html` file would still reference the old names. Let's fix that with the [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin).
 
 
 ## Setting up HtmlWebpackPlugin ##
