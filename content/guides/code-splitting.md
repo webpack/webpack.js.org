@@ -33,7 +33,32 @@ There are three general approaches to code splitting available:
 
 ## Entry Points
 
-This is by far the easiest, and most intuitive, way to split code. However, it is more manual and has a some pitfalls we will go over. Let's take a look at how we might split the core libraries and frameworks an application uses from the actual source code:
+This is by far the easiest, and most intuitive, way to split code. However, it is more manual and has a some pitfalls we will go over. Let's take a look at how we might split another module from the main bundle:
+
+__project__
+
+``` diff
+webpack-demo
+|- package.json
+|- webpack.config.js
+|- /dist
+  |- bundle.js
+  |- index.html
+|- /src
+  |- index.js
++ |- another-module.js
+|- /node_modules
+```
+
+__another-module.js__
+
+``` js
+import _ from 'lodash';
+
+console.log(
+  _.join(['Another', 'module', 'loaded!'], ' ')
+);
+```
 
 __webpack.config.js__
 
@@ -43,9 +68,7 @@ const path = require('path');
 module.exports = {
   entry: {
     index: './src/index.js',
-    vendor: [
-      'lodash'
-    ]
+    another: './src/another-module.js'
   },
   output: {
     filename: '[name].bundle.js',
@@ -56,26 +79,14 @@ module.exports = {
 
 This will yield the following build result:
 
-``` bash
-Hash: d1e4eab63dc6ba09c930
-Version: webpack 2.6.1
-Time: 531ms
-           Asset    Size  Chunks                    Chunk Names
-vendor.bundle.js  544 kB       0  [emitted]  [big]  vendor
- index.bundle.js  544 kB       1  [emitted]  [big]  index
-   [0] ./~/lodash/lodash.js 540 kB {0} {1} [built]
-   [1] (webpack)/buildin/global.js 509 bytes {0} {1} [built]
-   [2] (webpack)/buildin/module.js 517 bytes {0} {1} [built]
-   [3] ./src/index.js 216 bytes {1} [built]
-   [4] multi lodash 28 bytes {0} [built]
-```
+?> Update the bash output
 
 As mentioned there are some pitfalls to this approach:
 
 - If there are any duplicated modules between entry chunks they will be included in both bundles.
 - It isn't as flexible and can't be used to dynamically split code with the core application logic.
 
-The first of these two points is definitely an issue for our example, as `lodash` is also imported within `./src/index.js` and will thus be duplicated in the output. See the `CommonChunkPlugin` example below for a solution to this problem.
+The first of these two points is definitely an issue for our example, as `lodash` is also imported within `./src/index.js` and will thus be duplicated in both bundles. See the `CommonsChunkPlugin` example below for a solution to this problem.
 
 
 ## Prevent Duplication
@@ -91,13 +102,11 @@ __webpack.config.js__
   module.exports = {
     entry: {
       index: './src/index.js',
-      vendor: [
-        'lodash'
-      ]
+      another: './src/another-module.js'
     },
 +   plugins: [
 +     new webpack.optimize.CommonsChunkPlugin({
-+       name: 'vendor' // Specify the common bundle's name.
++       name: 'common' // Specify the common bundle's name.
 +     })
 +   ],
     output: {
@@ -109,19 +118,7 @@ __webpack.config.js__
 
 With the `CommonsChunkPlugin` in place, we should now see the duplicate dependency removed from our `index.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. Let's do an `npm run build` to see if it worked:
 
-``` bash
-Hash: 5f3b08906b5e7d8d0799
-Version: webpack 2.6.1
-Time: 527ms
-           Asset       Size  Chunks                    Chunk Names
- index.bundle.js  542 bytes       0  [emitted]         index
-vendor.bundle.js     547 kB       1  [emitted]  [big]  vendor
-   [0] ./~/lodash/lodash.js 540 kB {1} [built]
-   [1] (webpack)/buildin/global.js 509 bytes {1} [built]
-   [2] (webpack)/buildin/module.js 517 bytes {1} [built]
-   [3] ./src/index.js 401 bytes {0} [built]
-   [4] multi lodash 28 bytes {1} [built]
-```
+?> Update bash output.
 
 Here are some other useful plugins and loaders provide by the community for splitting code:
 
