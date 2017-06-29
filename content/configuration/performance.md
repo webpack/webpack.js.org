@@ -17,7 +17,7 @@ Configure how performance hints are shown. For example if you have an asset that
 
 ## `performance.hints`
 
-`boolean | "error" | "warning"`
+`false | "error" | "warning"`
 
 Turns hints on/off. In addition, tells webpack to throw either an error or a warning when hints are found. This property is set to `"warning"` by default.
 
