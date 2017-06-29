@@ -42,8 +42,6 @@ webpack-demo
 |- package.json
 |- webpack.config.js
 |- /dist
-  |- bundle.js
-  |- index.html
 |- /src
   |- index.js
 + |- another-module.js
@@ -73,7 +71,12 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Code Splitting'
+    })
+  ]
 };
 ```
 
@@ -116,11 +119,15 @@ __webpack.config.js__
       index: './src/index.js',
       another: './src/another-module.js'
     },
-+   plugins: [
+    plugins: [
+      new HtmlWebpackPlugin({
+        title: 'Code Splitting'
+-     })
++     }),
 +     new webpack.optimize.CommonsChunkPlugin({
 +       name: 'common' // Specify the common bundle's name.
 +     })
-+   ],
+    ],
     output: {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist')
@@ -170,11 +177,15 @@ __webpack.config.js__
 -     index: './src/index.js',
 -     another: './src/another-module.js'
     },
--   plugins: [
+    plugins: [
+      new HtmlWebpackPlugin({
+        title: 'Code Splitting'
+-     }),
++     })
 -     new webpack.optimize.CommonsChunkPlugin({
 -       name: 'common' // Specify the common bundle's name.
 -     })
--   ],
+    ],
     output: {
       filename: '[name].bundle.js',
 +     chunkFilename: '[name].bundle.js',
