@@ -42,7 +42,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: './index.js',
+    app: './src/index.js',
     vendor: [ 'react', 'react-dom' ]
   },
 
