@@ -62,6 +62,7 @@ __webpack.config.js__
 
 ``` js
 const path = require('path');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -73,7 +74,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   plugins: [
-    new HtmlWebpackPlugin({
+    new HTMLWebpackPlugin({
       title: 'Code Splitting'
     })
   ]
@@ -113,6 +114,7 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
 + const webpack = require('webpack');
+  const HTMLWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
     entry: {
@@ -120,7 +122,7 @@ __webpack.config.js__
       another: './src/another-module.js'
     },
     plugins: [
-      new HtmlWebpackPlugin({
+      new HTMLWebpackPlugin({
         title: 'Code Splitting'
 -     })
 +     }),
@@ -170,6 +172,7 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
 - const webpack = require('webpack');
+  const HTMLWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
     entry: {
@@ -178,7 +181,7 @@ __webpack.config.js__
 -     another: './src/another-module.js'
     },
     plugins: [
-      new HtmlWebpackPlugin({
+      new HTMLWebpackPlugin({
         title: 'Code Splitting'
 -     }),
 +     })
@@ -192,6 +195,21 @@ __webpack.config.js__
       path: path.resolve(__dirname, 'dist')
     }
   };
+```
+
+We'll also update our project to remove the now unused files:
+
+__project__
+
+``` diff
+webpack-demo
+|- package.json
+|- webpack.config.js
+|- /dist
+|- /src
+  |- index.js
+- |- another-module.js
+|- /node_modules
 ```
 
 Now, instead of statically importing lodash, we'll use dynamic importing to separate a chunk:
