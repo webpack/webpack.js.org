@@ -10,6 +10,7 @@ contributors:
 
 webpack 接受以多种编程和数据语言编写的配置文件。支持的文件扩展名列表，可以在 [node-interpret](https://github.com/js-cli/js-interpret) 包中找到。使用 [node-interpret](https://github.com/js-cli/js-interpret)，webpack 可以处理许多不同类型的配置文件。
 
+
 ## TypeScript
 
 To write the webpack configuration in [TypeScript](http://www.typescriptlang.org/), you would first install the necessary dependencies:
@@ -37,6 +38,7 @@ const config: webpack.Configuration = {
 
 export default config;
 ```
+
 
 ## CoffeeScript
 
@@ -72,12 +74,31 @@ config =
 module.exports = config
 ```
 
-## JSX
 
-In the example below JSX (React JavaScript Markup) and Babel are used to create a JSON Configuration that webpack can understand. (Courtesy of [Jason Miller](https://twitter.com/_developit/status/769583291666169862))
+## Babel and JSX
 
-```javascript
-import h from 'jsxobj';
+In the example below JSX (React JavaScript Markup) and Babel are used to create a JSON Configuration that webpack can understand.
+
+> Courtesy of [Jason Miller](https://twitter.com/_developit/status/769583291666169862)
+
+First install the necessary dependencies:
+
+``` js
+npm install --save-dev babel-register jsxobj babel-preset-es2015
+```
+
+__.babelrc__
+
+``` json
+{
+  "presets": [ "es2015" ]
+}
+```
+
+__webpack.config.babel.js__
+
+``` js
+import jsxobj from 'jsxobj';
 
 // example of an imported plugin
 const CustomPlugin = config => ({
@@ -104,6 +125,8 @@ export default (
   </webpack>
 );
 ```
+
+W> If you are using babel elsewhere and have `modules` set to `false`, you will have to either maintain two separate `.babelrc` files or use `const jsxobj = require('jsxobj');` and `module.exports` instead of the new `import` and `export` syntax. This is because while Node does support many new ES6 features, they don't yet support ES6 module syntax.
 
 ***
 

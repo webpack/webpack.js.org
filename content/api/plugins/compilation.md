@@ -75,11 +75,12 @@ compilation.plugin('optimize-modules', function(modules) {
 //这里一般只有一个块，除非你在配置中指定了多个入口
 
 compilation.plugin('optimize-chunks', function(chunks) {
-    //这里一般只有一个块，除非你在配置中指定了多个入口
+    // 这里一般只有一个块，
+    // 除非你在配置中指定了多个入口
     chunks.forEach(function (chunk) {
-        //块含有模块的循环引用
+        // chunk 含有模块的循环引用
         chunk.modules.forEach(function (module){
-            //module.loaders, module.rawRequest, module.dependencies 等。
+            // module.loaders, module.rawRequest, module.dependencies 等。
         });
     });
 });

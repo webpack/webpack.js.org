@@ -3,9 +3,9 @@ title: Resolver
 sort: 5
 ---
 
-* `compiler.resolvers.normal` Resolver for a normal module
-* `compiler.resolvers.context` Resolver for a context module
-* `compiler.resolvers.loader` Resolver for a loader
+* `compiler.resolvers.normal`: Resolver for a normal module
+* `compiler.resolvers.context`: Resolver for a context module
+* `compiler.resolvers.loader`: Resolver for a loader
 
 Any plugin should use `this.fileSystem` as fileSystem, as it's cached. It only has async named functions, but they may behave sync, if the user uses a sync file system implementation (i. e. in enhanced-require).
 
@@ -43,25 +43,31 @@ interface Request {
 }
 ```
 
+
 ## `resolve(context: String, request: String)`
 
 Before the resolving process starts.
+
 
 ## `resolve-step(types: String[], request: Request)`
 
 Before a single step in the resolving process starts.
 
+
 ## `module(request: Request)` async waterfall
 
 A module request is found and should be resolved.
+
 
 ## `directory(request: Request)` async waterfall
 
 A directory request is found and should be resolved.
 
+
 ## `file(request: Request)` async waterfall
 
 A file request is found and should be resolved.
+
 
 ## The plugins may offer more extensions points
 
@@ -71,9 +77,11 @@ The process for normal modules and contexts is `module -> module-module -> direc
 
 The process for loaders is `module -> module-loader-module -> module-module -> directory -> file`.
 
+
 ## `module-module`
 
 A module should be looked up in a specified directory. `path` contains the directory.
+
 
 ## `module-loader-module` (only for loaders)
 
