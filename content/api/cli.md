@@ -289,10 +289,26 @@ These options allow webpack to display various [stats](/configuration/stats/) an
 
 ### Profiling
 
-This option profiles the compilation and includes this information in the stats output. It gives you an in depth idea of which step in the compilation is taking how long. This can help you optimise your build in a more informed manner.
+The `--profile` option captures timing information for each step of the compilation and includes this in the output.
 
 ```bash
 webpack --profile
+
+⋮
+[0] ./src/index.js 90 bytes {0} [built]
+    factory:22ms building:16ms = 38ms
+```
+
+For each module, the following details are included in the output as applicable:
+
+* `factory`: time to collect module metadata (e.g. resolving the filename)
+* `building`: time to build the module (e.g. loaders and parsing)
+* `dependencies`: time to identify and connect the module’s dependencies
+
+Paired with `--progress`, `--profile` gives you an in depth idea of which step in the compilation is taking how long. This can help you optimise your build in a more informed manner.
+
+```bash
+webpack --progress --profile
 
 30ms building modules
 1ms sealing
@@ -319,4 +335,5 @@ webpack --profile
 26ms chunk asset optimization
 1ms asset optimization
 6ms emitting
+⋮
 ```
