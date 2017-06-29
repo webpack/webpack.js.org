@@ -3,7 +3,7 @@ title: Parser
 sort: 8
 ---
 
-解析器实例接收一个字符串以及回调函数，并在匹配时返回一个表达式。
+parser 实例对象接收一个字符串以及回调函数，并在匹配时返回一个表达式。
 
 ```javascript
 compiler.parser.plugin("var rewire", function (expr) {
@@ -37,7 +37,7 @@ compiler.parser.plugin("var rewire", function (expr) {
 
 `(abc ? 1 : 2)` => `expression ?!`
 
-返回一个布尔值以省略对错误路径的解析。
+返回一个布尔值以忽略对错误路径的解析。
 
 ## `typeof <identifier>(expr: Expression)` bailing
 
@@ -61,23 +61,23 @@ compiler.parser.plugin("var rewire", function (expr) {
 
 ## `evaluate <expression type>(expr: Expression)` bailing
 
-鉴定一个表达式。
+对表达式求值。
 
 ## `evaluate typeof <identifier>(expr: Expression)` bailing
 
-鉴定标识符的类型。
+对标识符的类型求值。
 
 ## `evaluate Identifier <identifier>(expr: Expression)` bailing
 
-鉴定一个自由变量的标识符。
+对一个自由变量的标识符求值。
 
 ## `evaluate defined Identifier <identifier>(expr: Expression)` bailing
 
-鉴定一个已定义变量的标识符。
+对一个已定义变量的标识符求值。
 
 ## `evaluate CallExpression .<property>(expr: Expression)` bailing
 
-鉴定对成功鉴定的表达式的成员函数的调用。
+对成功鉴定的表达式的成员函数的调用求值。
 
 ***
 
