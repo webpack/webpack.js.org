@@ -139,10 +139,10 @@ require("./loader1?xyz!loader2!./resource?rrr");
 
 ### `this.query`
 
-1. 如果这个loader配置了 [`options`](/configuration/module/#useentry)对象的话，`this.query`就是这个option对象的引用。
-2. 如果loaders中没有 [`options`](/configuration/module/#useentry)，以query字符串作为参数调用时，`this.query`就是一个以`?`开头的字符串。
+1. 如果这个 loader 配置了 [`options`](/configuration/module/#useentry) 对象的话，`this.query` 就指向这个 option 对象。
+2. 如果 loader 中没有 `options`，以query 字符串作为参数调用时，`this.query` 就是一个以 `?` 开头的字符串。
 
-T> 使用`loader-utils`中的[`getOptions`方法](https://github.com/webpack/loader-utils#getoptions)来提取给定loader中的option。
+W> `options` 已取代 `query`，所以此属性废弃。使用`loader-utils`中的 [`getOptions` 方法](https://github.com/webpack/loader-utils#getoptions)来提取给定 loader 中的 option。
 
 
 ### `this.callback`
@@ -201,15 +201,17 @@ loaders = [{request: string, path: string, query: string, module: function}]
 
 ```javascript
 [
-  { request: "/abc/loader1.js?xyz",
-	path: "/abc/loader1.js",
-	query: "?xyz",
-	module: [Function]
+  {
+    request: "/abc/loader1.js?xyz",
+    path: "/abc/loader1.js",
+    query: "?xyz",
+    module: [Function]
   },
-  { request: "/abc/node_modules/loader2/index.js",
-	path: "/abc/node_modules/loader2/index.js",
-	query: "",
-	module: [Function]
+  {
+    request: "/abc/node_modules/loader2/index.js",
+    path: "/abc/node_modules/loader2/index.js",
+    query: "",
+    module: [Function]
   }
 ]
 ```

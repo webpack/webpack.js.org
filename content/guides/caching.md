@@ -34,7 +34,7 @@ application.js?build=1
 application.css?build=1
 ```
 
-使用 webpack 就更简单了。通过包含输出[占位符](/concepts/output/#options)，每次webpack构建时都会生成一个唯一的哈希值用来构成文件名。
+使用 webpack 就更简单了。通过包含输出[占位符(substitutions)](/configuration/output#output-filename)，每次webpack构建时都会生成一个唯一的哈希值用来构成文件名。
 以下这个配置示例会生成两个在文件名中带有哈希值的文件（每个都有一个入口起点）：
 
 ```js
