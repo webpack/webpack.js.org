@@ -1,5 +1,5 @@
 ---
-title: Getting Started
+title: 起步
 sort: 2
 contributors:
   - bebraw
