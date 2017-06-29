@@ -5,7 +5,7 @@ contributors:
   - skipjack
 ---
 
-Managing webpack's [output](/configuration/output) and including it in your HTML files may not seem tough at first, but once you start [using hashes in filenames](/guides/caching) and outputting [multiple bundles](/guides/code-splitting-libraries), things can start to get a bit hairy. However, there's no need to fear as a few plugins exist that will make this process much easier to manage.
+Managing webpack's [output](/configuration/output) and including it in your HTML files may not seem tough at first, but once you start [using hashes in filenames](/guides/caching) and outputting [multiple bundles](/guides/code-splitting), things can start to get a bit hairy. However, there's no need to fear as a few plugins exist that will make this process much easier to manage.
 
 First let's take a look at where you might stand without these plugins:
 
@@ -27,7 +27,7 @@ __index.html__
 </html>
 ```
 
-Here we've loaded a favicon, our stylesheet (extracted with the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin)), any libraries (split into [a separate bundle](/guides/code-splitting-libraries)), and finally our main bundle (`app.bundle.js`). This is ok, but what happens if we change our entry point names? What if we decide to take advantage of [better caching practices](/guides/caching)?
+Here we've loaded a favicon, our stylesheet (extracted with the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin)), any libraries (split into [a separate bundle](/guides/code-splitting)), and finally our main bundle (`app.bundle.js`). This is ok, but what happens if we change our entry point names? What if we decide to take advantage of [better caching practices](/guides/caching)?
 
 
 ## Auto-Generated HTML
