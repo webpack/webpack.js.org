@@ -79,14 +79,26 @@ module.exports = {
 
 This will yield the following build result:
 
-?> Update the bash output
+``` bash
+Hash: 309402710a14167f42a8
+Version: webpack 2.6.1
+Time: 570ms
+            Asset    Size  Chunks                    Chunk Names
+  index.bundle.js  544 kB       0  [emitted]  [big]  index
+another.bundle.js  544 kB       1  [emitted]  [big]  another
+   [0] ./~/lodash/lodash.js 540 kB {0} {1} [built]
+   [1] (webpack)/buildin/global.js 509 bytes {0} {1} [built]
+   [2] (webpack)/buildin/module.js 517 bytes {0} {1} [built]
+   [3] ./src/another-module.js 87 bytes {1} [built]
+   [4] ./src/index.js 216 bytes {0} [built]
+```
 
 As mentioned there are some pitfalls to this approach:
 
 - If there are any duplicated modules between entry chunks they will be included in both bundles.
 - It isn't as flexible and can't be used to dynamically split code with the core application logic.
 
-The first of these two points is definitely an issue for our example, as `lodash` is also imported within `./src/index.js` and will thus be duplicated in both bundles. See the `CommonsChunkPlugin` example below for a solution to this problem.
+The first of these two points is definitely an issue for our example, as `lodash` is also imported within `./src/index.js` and will thus be duplicated in both bundles. Let's remove this duplication by using the `CommonsChunkPlugin`.
 
 
 ## Prevent Duplication
@@ -118,7 +130,20 @@ __webpack.config.js__
 
 With the `CommonsChunkPlugin` in place, we should now see the duplicate dependency removed from our `index.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. Let's do an `npm run build` to see if it worked:
 
-?> Update bash output.
+``` bash
+Hash: 70a59f8d46ff12575481
+Version: webpack 2.6.1
+Time: 510ms
+            Asset       Size  Chunks                    Chunk Names
+  index.bundle.js  665 bytes       0  [emitted]         index
+another.bundle.js  537 bytes       1  [emitted]         another
+ common.bundle.js     547 kB       2  [emitted]  [big]  common
+   [0] ./~/lodash/lodash.js 540 kB {2} [built]
+   [1] (webpack)/buildin/global.js 509 bytes {2} [built]
+   [2] (webpack)/buildin/module.js 517 bytes {2} [built]
+   [3] ./src/another-module.js 87 bytes {1} [built]
+   [4] ./src/index.js 216 bytes {0} [built]
+```
 
 Here are some other useful plugins and loaders provide by the community for splitting code:
 
@@ -131,7 +156,7 @@ Here are some other useful plugins and loaders provide by the community for spli
 
 Two similar techniques are supported by webpack when it comes to dynamic code splitting. The first and more preferable approach is use to the [`import()` syntax](/api/module-methods#import-) that conforms to the [ECMAScript proposal](https://github.com/tc39/proposal-dynamic-import) for dynamic imports. The legacy, webpack-specific approach is to use [`require.ensure`](/api/module-methods#require-ensure). Let's try using the first of these two approaches...
 
-Before we start, let's remove the `entry` and `CommonsChunkPlugin` from our config as they won't be needed for this next demonstration:
+Before we start, let's remove the extra `entry` and `CommonsChunkPlugin` from our config as they won't be needed for this next demonstration:
 
 __webpack.config.js__
 
@@ -143,17 +168,16 @@ __webpack.config.js__
     entry: {
 +     index: './src/index.js'
 -     index: './src/index.js',
--     vendor: [
--       'lodash'
--     ]
+-     another: './src/another-module.js'
     },
 -   plugins: [
 -     new webpack.optimize.CommonsChunkPlugin({
--       name: 'vendor' // Specify the common bundle's name.
+-       name: 'common' // Specify the common bundle's name.
 -     })
 -   ],
     output: {
       filename: '[name].bundle.js',
++     chunkFilename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist')
     }
   };
@@ -190,7 +214,18 @@ __src/index.js__
 
 Note the use of `webpackChunkName` in the comment. This will cause our separate bundle to be named `lodash.bundle.js` instead of just `[id].bundle.js`. For more information on `webpackChunkName` and the other available options, see the [`import()` documentation](/api/module-methods#import-). Let's run webpack to see lodash separated out to a separate bundle:
 
-?> Add bash example of webpack output
+``` bash
+Hash: a27e5bf1dd73c675d5c9
+Version: webpack 2.6.1
+Time: 544ms
+           Asset     Size  Chunks                    Chunk Names
+lodash.bundle.js   541 kB       0  [emitted]  [big]  lodash
+ index.bundle.js  6.35 kB       1  [emitted]         index
+   [0] ./~/lodash/lodash.js 540 kB {0} [built]
+   [1] ./src/index.js 377 bytes {1} [built]
+   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+```
 
 If you've enabled [`async` functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) via a pre-processor like babel, note that you can simplify the code as `import()` statements just return promises:
 
