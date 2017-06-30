@@ -5,6 +5,7 @@ contributors:
   - SpaceK33z
   - rafde
   - fvgs
+  - TheDutchCoder
 ---
 
 On this page we'll explain how to get started with developing and how to choose one of three tools to develop. It is assumed you already have a webpack configuration file.
