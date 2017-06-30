@@ -6,7 +6,11 @@ contributors:
   - TheDutchCoder
 ---
 
+>T This guide extends on code examples found in the [`Asset Management`](/guides/asset-management) guide.
+
 So far we've manually included all our assets in our `index.html` file, but as your application grows and once you start [using hashes in filenames](/guides/caching) and outputting [multiple bundles](/guides/code-splitting-libraries), it will be difficult to keep managing your `index.html` file manually. However, there's no need to fear as a few plugins exist that will make this process much easier to manage.
+
+## Preparation ##
 
 First, let's adjust our project a little bit:
 
@@ -122,7 +126,7 @@ If you open `index.html` in your code editor, you'll see that the `HtmlWebpackPl
 In most cases you probably want to provide a certain template to the `HtmlWebpackPlugin`, so that you can still have your own `index.html` file, but have webpack automatically add generated files.
 
 
-## Adding a template ##
+## Adding a template to HtmlWebpackPlugin ##
 
 Let's add a template that `HtmlWebpackPlugin` can use, but we keep it in our `src` directory instead.
 
@@ -211,6 +215,48 @@ Open `index.html` in your code editor again. This time you will see that the `Ht
 This is great, because now we don't have to manually adjust our `index.html` file anymore, webpack takes care of that. As an added bonus, we now keep the `index.ejs` template in our `src` directory, so our `dist` directory only contains generated files.
 
 T> Check out the [`HtmlWebpackTemplate`](https://github.com/ampedandwired/html-webpack-plugin#configuration) page for more advanced options, including outputting multiple HTML files.
+
+
+## Cleaning up the `/dist`folder ##
+
+As you might have noticed over the past guides and code example, our `/dist` folder has become quite cluttered. Webpack will generate the files and put them in the `/dist` folder for you, but it doesn't keep track of which files are actually in use by your project.
+
+In general it's good practice to clean the `/dist` folder before each build, so that only used files will be generated. Let's take care of that.
+
+A popular plugin to manage this is the [`clean-webpack-plugin`](https://www.npmjs.com/package/clean-webpack-plugin) so let's install and configure it.
+
+``` bash
+npm install clean-webpack-plugin --save-dev
+```
+
+__webpack.config.js__
+``` diff
+  const path = require('path');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+  module.exports = {
+    entry: {
+      app: './src/index.js',
+      vendor: ['lodash']
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        title: 'Output Management',
+        filename: 'index.html',
+        template: 'src/index.html'
+-     })
++     }),
+      new CleanWebpackPlugin(['dist'])
+    ],
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
+```
+
+Now run an `npm run build` and inspect the `/dist` folder. If everything went well you should now only see the files generated from the build and no more old files!
 
 
 ## Conclusion ##
