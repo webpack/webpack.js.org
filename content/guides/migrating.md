@@ -448,7 +448,7 @@ To keep compatibility with old loaders, loaders can be switched to debug mode vi
 
 ## Code Splitting with ES2015
 
-In webpack 1, you could use [`require.ensure()`](/guides/code-splitting-async/#require-ensure-) as a method to lazily-load chunks for your application:
+In webpack 1, you could use [`require.ensure()`](/api/module-methods#require-ensure) as a method to lazily-load chunks for your application:
 
 ```javascript
 require.ensure([], function(require) {
@@ -456,9 +456,7 @@ require.ensure([], function(require) {
 });
 ```
 
-The ES2015 Loader spec defines [`import()`](/guides/code-splitting-async) as method to load ES2015 Modules dynamically on runtime.
-webpack treats `import()` as a split-point and puts the requested module in a separate chunk.
-`import()` takes the module name as argument and returns a Promise.
+The ES2015 Loader spec defines [`import()`](/api/module-methods#import-) as method to load ES2015 Modules dynamically on runtime. webpack treats `import()` as a split-point and puts the requested module in a separate chunk. `import()` takes the module name as argument and returns a Promise.
 
 ``` js
 function onClick() {
