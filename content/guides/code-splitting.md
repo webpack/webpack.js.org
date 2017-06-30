@@ -225,7 +225,7 @@ __src/index.js__
 -
 -   // Lodash, now imported by this script
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-+   return import(/* webpackChunkName: "lodash" */ 'lodash').then(module => {
++   return import(/* webpackChunkName: "lodash" */ 'lodash').then(_ => {
 +     var element = document.createElement('div');
 +
 +     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
