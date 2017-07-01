@@ -69,15 +69,15 @@ module.exports = {
     index: './src/index.js',
     another: './src/another-module.js'
   },
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  },
   plugins: [
     new HTMLWebpackPlugin({
       title: 'Code Splitting'
     })
-  ]
+  ],
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  }
 };
 ```
 
