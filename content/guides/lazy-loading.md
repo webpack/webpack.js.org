@@ -67,7 +67,7 @@ __src/index.js__
 +     var print = module.default;
 +
 +     print();
-+   })
++   });
 
     return element;
   }
