@@ -148,11 +148,12 @@ The `stats` object that is passed as a second argument of the [`webpack()`](#web
 * Errors and Warnings (if any)
 * Timings
 * Module and Chunk information
-* and much more...
 
 The [webpack CLI](/api/cli) uses this information to display a nicely formatted output in your console.
 
-This object exposes these methods:
+T> When using the [`MultiCompiler`](/api/plugins/compiler#multicompiler), a `MultiStats` instance is returned that fulfills the same interface as `stats`, i.e. the methods described below.
+
+This `stats` object exposes the following methods:
 
 
 ### `stats.hasErrors()`
