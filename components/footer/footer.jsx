@@ -11,10 +11,10 @@ export default (props) => {
     <footer className="footer">
       <Container className="footer__inner">
         <section className="footer__left">
-          <Link className="footer__link" to="/guides/getting-started">Get Started</Link>
+          <Link className="footer__link" to="/guides/getting-started">Getting Started</Link>
           <Link className="footer__link" to="/organization">Organization</Link>
           <Link className="footer__link" to="/support">Support</Link>
-          <Link className="footer__link" to="/guides/comparison">Comparison</Link>
+          <Link className="footer__link" to="/comparison">Comparison</Link>
         </section>
 
         <section className="footer__middle">
