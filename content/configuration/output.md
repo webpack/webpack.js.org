@@ -13,6 +13,54 @@ contributors:
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
 
 
+## `output.auxiliaryComment`
+
+`string` `object`
+
+When used in tandem with [`output.library`](#output-library) and [`output.libraryTarget`](#output-librarytarget), this option allows users to insert comments within the export wrapper. To insert the same comment for each `libraryTarget` type, simply set `auxiliaryComment` to a string:
+
+``` js
+output: {
+  library: "someLibName",
+  libraryTarget: "umd",
+  filename: "someLibName.js",
+  auxiliaryComment: "Test Comment"
+}
+```
+
+which will yield the following:
+
+``` js
+(function webpackUniversalModuleDefinition(root, factory) {
+  // Test Comment
+  if(typeof exports === 'object' && typeof module === 'object')
+    module.exports = factory(require("lodash"));
+  // Test Comment
+  else if(typeof define === 'function' && define.amd)
+    define(["lodash"], factory);
+  // Test Comment
+  else if(typeof exports === 'object')
+    exports["someLibName"] = factory(require("lodash"));
+  // Test Comment
+  else
+    root["someLibName"] = factory(root["_"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {
+  // ...
+});
+```
+
+For fine-grained control over each `libraryTarget` comment, pass an object:
+
+``` js
+auxiliaryComment: {
+  root: "Root Comment",
+  commonjs: "CommonJS Comment",
+  commonjs2: "CommonJS2 Comment",
+  amd: "AMD Comment"
+}
+```
+
+
 ## `output.chunkFilename`
 
 `string`
