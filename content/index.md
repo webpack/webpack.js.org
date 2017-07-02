@@ -68,4 +68,4 @@ Then run `webpack` on the command-line to create `bundle.js`.
 
 ## It's that simple
 
-## [Get Started](/guides/get-started)
+## [Get Started](/guides/getting-started)

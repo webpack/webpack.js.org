@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - spacek33z
   - charlespwd
+  - orteth01
 ---
 
 webpack-dev-server can be used to quickly develop an application. See the ["How to Develop?"](/guides/development) to get started.
@@ -44,6 +45,34 @@ If you're using dev-server through the Node.js API, the options in `devServer` w
 W> Be aware that when [exporting multiple configurations](/configuration/configuration-types/#exporting-multiple-configurations) only the `devServer` options for the first configuration will be taken into account and used for all the configurations in the array.
 
 T> If you're having trouble, navigating to the `/webpack-dev-server` route will show where files are served. For example, `http://localhost:9000/webpack-dev-server`.
+
+
+## `devServer.allowedHosts`
+
+`array`
+
+This option allows you to specify a whitelist of hosts that are allowed to access the dev server.
+
+```js
+allowedHosts: [
+    'host.com',
+    'subdomain.host.com',
+    'subdomain2.host.com',
+    'host2.com'
+]
+```
+
+Mimicking django's `ALLOWED_HOSTS`, a value beginning with `.` can be used as a subdomain wildcard. `.host.com` will match `host.com`, `www.host.com`, and any other subdomain of `host.com`.
+
+```js
+// this achieves the same effect as the first example
+// with the bonus of not having to update your config
+// if new subdomains need to access the dev server
+allowedHosts: [
+    '.host.com',
+    'host2.com'
+]
+```
 
 
 ## `devServer.clientLogLevel`

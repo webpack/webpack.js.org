@@ -1,6 +1,6 @@
 ---
-title: Building for Production
-sort: 40
+title: Production
+sort: 7
 contributors:
   - henriquea
   - rajagopal4890
@@ -20,7 +20,7 @@ The following article describes the best practices and tools to use when using w
 
 ## The Automatic Way
 
-Running `webpack -p` (or equivalently `webpack --optimize-minimize --define process.env.NODE_ENV="production"`). This performs the following steps:
+Running `webpack -p` (or equivalently `webpack --optimize-minimize --define process.env.NODE_ENV="'production'"`). This performs the following steps:
 
 - Minification using `UglifyJsPlugin`
 - Runs the `LoaderOptionsPlugin` (see its [documentation](/plugins/loader-options-plugin))
@@ -250,32 +250,30 @@ __webpack.prod.js__
 const Merge = require('webpack-merge');
 const CommonConfig = require('./webpack.common.js');
 
-module.exports = function(env) {
-  return Merge(CommonConfig, {
-    plugins: [
-      new webpack.LoaderOptionsPlugin({
-        minimize: true,
-        debug: false
-      }),
-      new webpack.DefinePlugin({
-        'process.env': {
-          'NODE_ENV': JSON.stringify('production')
-        }
-      }),
-      new webpack.optimize.UglifyJsPlugin({
-        beautify: false,
-        mangle: {
-          screw_ie8: true,
-          keep_fnames: true
-        },
-        compress: {
-          screw_ie8: true
-        },
-        comments: false
-      })
-    ]
-  })
-}
+module.exports = Merge(CommonConfig, {
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      beautify: false,
+      mangle: {
+        screw_ie8: true,
+        keep_fnames: true
+      },
+      compress: {
+        screw_ie8: true
+      },
+      comments: false
+    })
+  ]
+})
 ```
 
 You will notice three major updates to our 'webpack.prod.js' file:

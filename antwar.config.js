@@ -41,7 +41,7 @@ module.exports = {
 
     'get-started': {
       redirects: {
-        '': '/guides/get-started',
+        '': '/guides/getting-started',
         'install-webpack': '/guides/installation',
         'why-webpack': '/guides/why-webpack',
       }
@@ -69,7 +69,8 @@ module.exports = {
       }, {
         'code-splitting-import': '/guides/code-splitting-async',
         'code-splitting-require': '/guides/code-splitting-async/#require-ensure-',
-        'why-webpack': '/guides/comparison'
+        'why-webpack': '/guides/comparison',
+        'production-build': '/guides/production'
       }
     ),
 

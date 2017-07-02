@@ -237,24 +237,29 @@ These allow you to configure the webpack [resolver](/configuration/resolve/) wit
 
 These options allow webpack to display various [stats](/configuration/stats/) and style them differently in the console output.
 
-| Parameter               | Explanation                                                        | Type    |
-|-------------------------|--------------------------------------------------------------------|---------|
-| --color, --colors       | Enables/Disables colors on the console [default: (supports-color)] | boolean |
-| --display-cached        | Display also cached modules in the output                          | boolean |
-| --display-cached-assets | Display also cached assets in the output                           | boolean |
-| --display-chunks        | Display chunks in the output                                       | boolean |
-| --display-entrypoints   | Display entry points in the output                                 | boolean |
-| --display-error-details | Display details about errors                                       | boolean |
-| --display-exclude       | Exclude modules in the output                                      | boolean |
-| --display-modules       | Display even excluded modules in the output                        | boolean |
-| --display-origins       | Display origins of chunks in the output                            | boolean |
-| --display-reasons       | Display reasons about module inclusion in the output               | boolean |
-| --display-used-exports  | Display information about used exports in modules (Tree Shaking)   | boolean |
-| --hide-modules          | Hides info about modules                                           | boolean |
-| --sort-assets-by        | Sorts the assets list by property in asset                         | string  |
-| --sort-chunks-by        | Sorts the chunks list by property in chunk                         | string  |
-| --sort-modules-by       | Sorts the modules list by property in module                       | string  |
-| --verbose               | Show more details                                                  | boolean |
+| Parameter                      | Explanation                                                        | Type    |
+|--------------------------------|--------------------------------------------------------------------|---------|
+| --color, --colors              | Enables/Disables colors on the console [default: (supports-color)] | boolean |
+| --display                      | Select [display preset](/configuration/stats) (verbose, detailed, normal, minimal, errors-only, none; since webpack 3.0.0) | string |
+| --display-cached               | Display also cached modules in the output                          | boolean |
+| --display-cached-assets        | Display also cached assets in the output                           | boolean |
+| --display-chunks               | Display chunks in the output                                       | boolean |
+| --display-depth                | Display distance from entry point for each module                  | boolean |
+| --display-entrypoints          | Display entry points in the output                                 | boolean |
+| --display-error-details        | Display details about errors                                       | boolean |
+| --display-exclude              | Exclude modules in the output                                      | boolean |
+| --display-max-modules          | Sets the maximum number of visible modules in output               | number  |
+| --display-modules              | Display even excluded modules in the output                        | boolean |
+| --display-optimization-bailout | Scope hoisting fallback trigger (since webpack 3.0.0)              | boolean |
+| --display-origins              | Display origins of chunks in the output                            | boolean |
+| --display-provided-exports     | Display information about exports provided from modules            | boolean |
+| --display-reasons              | Display reasons about module inclusion in the output               | boolean |
+| --display-used-exports         | Display information about used exports in modules (Tree Shaking)   | boolean |
+| --hide-modules                 | Hides info about modules                                           | boolean |
+| --sort-assets-by               | Sorts the assets list by property in asset                         | string  |
+| --sort-chunks-by               | Sorts the chunks list by property in chunk                         | string  |
+| --sort-modules-by              | Sorts the modules list by property in module                       | string  |
+| --verbose                      | Show more details                                                  | boolean |
 
 
 ### Advanced Options
@@ -279,15 +284,31 @@ These options allow webpack to display various [stats](/configuration/stats/) an
 | Shortcut | Replaces                                                         |
 |----------|------------------------------------------------------------------|
 | -d       | --debug --devtool eval-cheap-module-source-map --output-pathinfo |
-| -p       | --optimize-minimize --define process.env.NODE_ENV="production", see [building for production](/guides/production-build)   |
+| -p       | --optimize-minimize --define process.env.NODE_ENV="production", see [building for production](/guides/production) |
 
 
 ### Profiling
 
-This option profiles the compilation and includes this information in the stats output. It gives you an in depth idea of which step in the compilation is taking how long. This can help you optimise your build in a more informed manner.
+The `--profile` option captures timing information for each step of the compilation and includes this in the output.
 
 ```bash
 webpack --profile
+
+⋮
+[0] ./src/index.js 90 bytes {0} [built]
+    factory:22ms building:16ms = 38ms
+```
+
+For each module, the following details are included in the output as applicable:
+
+* `factory`: time to collect module metadata (e.g. resolving the filename)
+* `building`: time to build the module (e.g. loaders and parsing)
+* `dependencies`: time to identify and connect the module’s dependencies
+
+Paired with `--progress`, `--profile` gives you an in depth idea of which step in the compilation is taking how long. This can help you optimise your build in a more informed manner.
+
+```bash
+webpack --progress --profile
 
 30ms building modules
 1ms sealing
@@ -314,4 +335,5 @@ webpack --profile
 26ms chunk asset optimization
 1ms asset optimization
 6ms emitting
+⋮
 ```

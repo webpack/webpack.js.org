@@ -1,6 +1,6 @@
 ---
 title: Migrating from v1 to v2
-sort: 20
+sort: 23
 contributors:
   - sokra
   - jhnns
@@ -448,7 +448,7 @@ To keep compatibility with old loaders, loaders can be switched to debug mode vi
 
 ## Code Splitting with ES2015
 
-In webpack 1, you could use [`require.ensure()`](/guides/code-splitting-async/#require-ensure-) as a method to lazily-load chunks for your application:
+In webpack 1, you could use [`require.ensure()`](/api/module-methods#require-ensure) as a method to lazily-load chunks for your application:
 
 ```javascript
 require.ensure([], function(require) {
@@ -456,9 +456,7 @@ require.ensure([], function(require) {
 });
 ```
 
-The ES2015 Loader spec defines [`import()`](/guides/code-splitting-async) as method to load ES2015 Modules dynamically on runtime.
-webpack treats `import()` as a split-point and puts the requested module in a separate chunk.
-`import()` takes the module name as argument and returns a Promise.
+The ES2015 Loader spec defines [`import()`](/api/module-methods#import-) as method to load ES2015 Modules dynamically on runtime. webpack treats `import()` as a split-point and puts the requested module in a separate chunk. `import()` takes the module name as argument and returns a Promise.
 
 ``` js
 function onClick() {
@@ -616,11 +614,11 @@ Loaders are now cacheable by default. Loaders must opt-out if they are not cache
 
 ### Complex options
 
-__webpack v1__ only supports `JSON.stringify`-able options for loaders.
+__webpack 1__ only supports `JSON.stringify`-able options for loaders.
 
-__webpack v2__ now supports any JS object as loader options.
+__webpack 2__ now supports any JS object as loader options.
 
-Before [v2.2.1](https://github.com/webpack/webpack/releases/tag/v2.2.1) (i.e. from v2.0.0 through v2.2.0), using complex options required using `ident` for the `options` object to allow its reference from other loaders. __This was removed in v2.2.1__ and thus current migrations do not require any use of the `ident` key.
+Before webpack [2.2.1](https://github.com/webpack/webpack/releases/tag/v2.2.1) (i.e. from 2.0.0 through 2.2.0), using complex options required using `ident` for the `options` object to allow its reference from other loaders. __This was removed in 2.2.1__ and thus current migrations do not require any use of the `ident` key.
 
 ```diff
 {

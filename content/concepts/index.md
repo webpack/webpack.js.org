@@ -14,6 +14,7 @@ It is [incredibly configurable](/configuration), but to get started you only nee
 
 This document is intended to give a **high-level** overview of these concepts, while providing links to detailed concept specific use-cases.
 
+
 ## Entry
 
 webpack creates a graph of all of your application's dependencies. The starting point of this graph is known as an _entry point_. The _entry point_ tells webpack _where to start_ and follows the graph of dependencies to know _what to bundle_. You can think of your application's _entry point_ as the **contextual root** or **the first file to kick off your app**.
@@ -34,6 +35,7 @@ There are multiple ways to declare your `entry` property that are specific to yo
 
 [Learn more!](/concepts/entry-points)
 
+
 ## Output
 
 Once you've bundled all of your assets together, you still need to tell webpack **where** to bundle your application. The webpack `output` property tells webpack **how to treat bundled code**.
@@ -52,7 +54,7 @@ module.exports = {
 };
 ```
 
-In the example above, we use the `output.filename` and the `output.path` properties to tell webpack the name of our bundle and where we want it to be emitted to. 
+In the example above, we use the `output.filename` and the `output.path` properties to tell webpack the name of our bundle and where we want it to be emitted to.
 
 T> You may see the term **emitted** or **emit** used throughout our documentation and [plugin API](/api/plugins). This is a fancy term for "produced or discharged".
 
@@ -63,7 +65,7 @@ The `output` property has [many more configurable features](/configuration/outpu
 
 ## Loaders
 
-The goal is to have all of the assets in your project to be **webpack's** concern and not the browser's. (This doesn't mean that they all have to be bundled together). webpack treats [every file (.css, .html, .scss, .jpg, etc.) as a module](/concepts/modules). However, webpack **only understands JavaScript**.
+The goal is to have all of the assets in your project be **webpack's** concern and not the browser's. (This doesn't mean that they all have to be bundled together). webpack treats [every file (.css, .html, .scss, .jpg, etc.) as a module](/concepts/modules). However, webpack **only understands JavaScript**.
 
 **Loaders in webpack _transform these files into modules_ as they are added to your dependency graph.**
 
@@ -85,7 +87,7 @@ const config = {
   },
   module: {
     rules: [
-      {test: /\.(js|jsx)$/, use: 'babel-loader'}
+      { test: /\.txt$/, use: 'raw-loader' }
     ]
   }
 };
@@ -95,13 +97,14 @@ module.exports = config;
 
 The configuration above has defined a `rules` property for a single module with two required properties: `test` and `use`. This tells webpack's compiler the following:
 
-> "Hey webpack compiler, when you come across a path that resolves to a '.js' or '.jsx' file inside of a `require()`/`import` statement, **use** the `babel-loader` to transform it before you add it to the bundle".
+> "Hey webpack compiler, when you come across a path that resolves to a '.txt' file inside of a `require()`/`import` statement, **use** the `raw-loader` to transform it before you add it to the bundle".
 
 W> It is important to remember when defining rules in your webpack config, you are defining them under `module.rules` and not `rules`. However webpack will yell at you when doing this incorrectly.
 
 There are more specific properties to define on loaders that we haven't yet covered.
 
 [Learn more!](/concepts/loaders)
+
 
 ## Plugins
 
@@ -124,7 +127,7 @@ const config = {
   },
   module: {
     rules: [
-      {test: /\.(js|jsx)$/, use: 'babel-loader'}
+      { test: /\.txt$/, use: 'raw-loader' }
     ]
   },
   plugins: [

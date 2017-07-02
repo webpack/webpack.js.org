@@ -38,7 +38,7 @@ externals: {
 }
 ```
 
-This leaves any dependant modules unchanged, i.e. the code shown below will still work:
+This leaves any dependent modules unchanged, i.e. the code shown below will still work:
 
 ```javascript
 import $ from 'jquery';
@@ -88,9 +88,17 @@ externals : {
     root: "_" // indicates global variable
   }
 }
+
+// or
+
+externals : {
+  subtract : {
+    root: ["math", "subtract"]
+  }
+}
 ```
 
-This syntax is used to describe all the possible ways that an external library can be available. `lodash` here is available as `lodash` under AMD and CommonJS module systems but available as `_` in a global variable form.
+This syntax is used to describe all the possible ways that an external library can be available. `lodash` here is available as `lodash` under AMD and CommonJS module systems but available as `_` in a global variable form. `subtract` here is available via the property `subtract` under the global `math` object (e.g. `window['math']['subtract']`).
 
 
 ### function
