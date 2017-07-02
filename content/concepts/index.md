@@ -14,6 +14,7 @@ contributors:
 
 本文档旨在给出这些概念的**高度**概述，同时提供具体概念的详尽相关用例。
 
+
 ## 入口(Entry)
 
 webpack 创建应用程序所有依赖的关系图(dependency graph)。图的起点被称之为_入口起点(entry point)_。_入口起点_告诉 webpack _从哪里开始_，并遵循着依赖关系图知道_要打包什么_。可以将应用程序的_入口起点_认为是**根上下文(contextual root)** 或 **app 第一个启动文件**。
@@ -33,6 +34,7 @@ module.exports = {
 根据不同应用程序的需要，声明 `entry` 属性有多种方式。
 
 [了解更多！](/concepts/entry-points)
+
 
 ## 出口(Output)
 
@@ -85,7 +87,7 @@ const config = {
   },
   module: {
     rules: [
-      {test: /\.txt$/, use: 'raw-loader'}
+      { test: /\.txt$/, use: 'raw-loader' }
     ]
   }
 };
@@ -102,6 +104,7 @@ W> 重要的是要记得，在 webpack 配置中定义 loader 时，要定义在
 loader 还有更多我们尚未提到的具体配置属性。
 
 [了解更多！](/concepts/loaders)
+
 
 ## 插件(Plugins)
 
@@ -124,7 +127,7 @@ const config = {
   },
   module: {
     rules: [
-      {test: /\.txt$/, use: 'raw-loader'}
+      { test: /\.txt$/, use: 'raw-loader' }
     ]
   },
   plugins: [

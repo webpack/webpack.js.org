@@ -1,5 +1,5 @@
 ---
-title: 管理构建文件
+title: 管理输出
 sort: 4
 contributors:
   - skipjack

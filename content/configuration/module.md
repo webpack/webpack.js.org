@@ -15,10 +15,17 @@ contributors:
 
 `RegExp | [RegExp]`
 
+`RegExp | [RegExp] | function`（从 webpack 3.0.0 开始）
+
 防止 webpack 解析那些任何与给定正则表达式相匹配的文件。忽略的文件中**不应该含有** `import`, `require`, `define` 的调用，或任何其他导入机制。忽略大型的 library 可以提高构建性能。
 
 ```js
 noParse: /jquery|lodash/
+
+// 从 webpack 3.0.0 开始
+noParse: function(content) {
+  return /jquery|lodash/.test(content);
+}
 ```
 
 
@@ -117,9 +124,9 @@ W> 小心！resource 是文件的_解析_路径，这意味着符号链接的资
 
 ## `Rule.loaders`
 
-`Rule.loaders` 是 `Rule.use` 的别名。详细请查看 [`Rule.use`](#rule-use)。
+W> 由于需要支持 `Rule.use`，此选项__已废弃__。
 
-由于兼容性原因而存在。请使用 `Rule.use` 代替。
+`Rule.loaders` 是 `Rule.use` 的别名。详细请查看 [`Rule.use`](#rule-use)。
 
 
 ## `Rule.oneOf`
@@ -131,7 +138,7 @@ W> 小心！resource 是文件的_解析_路径，这意味着符号链接的资
 
 `Rule.options` 和 `Rule.query` 是 `Rule.use: [ { options } ]` 的简写。详细请查看 [`Rule.use`](#rule-use) 和 [`UseEntry.options`](#useentry)。
 
-`Rule.query` 仅由于兼容性原因而存在。请使用 `Rule.options` 代替。
+W> 由于需要支持 `Rule.options` 和 `UseEntry.options`，`Rule.use`，`Rule.query` 已废弃。
 
 
 ## `Rule.parser`
@@ -189,9 +196,7 @@ Loaders can be chained by passing multiple loaders, which will be applied from r
 
 ```javascript
 use: [
-  {
-    loader: 'style-loader'
-  },
+  'style-loader',
   {
     loader: 'css-loader',
     options: {
@@ -273,7 +278,8 @@ use: [
 
 ## 模块上下文
 
-（废弃）
+> Avoid using these options as they are __deprecated__ and will soon be removed.
+> 避免使用这些选项，因为它们__已废弃__，并将很快删除。
 
 这些选项描述了当遇到动态依赖时，创建上下文的默认设置。
 
@@ -302,7 +308,7 @@ module: {
 }
 ```
 
-注意：你可以使用 `ContextReplacementPlugin` 来修改这些单个依赖的值。这也会删除警告。
+T> 你可以使用 `ContextReplacementPlugin` 来修改这些单个依赖的值。这也会删除警告。
 
 几个用例：
 

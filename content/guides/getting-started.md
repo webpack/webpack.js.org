@@ -10,6 +10,7 @@ contributors:
   - simon04
   - aaronang
   - jecoopr
+  - TheDutchCoder
 ---
 
 你可能已经知道，webpack 用于编译 JavaScript 模块。一旦完成[安装](/guides/installation)，你就可以通过 webpack 的 [CLI](/api/cli) 或 [API](/api/node) 与其配合交互。如果你还不熟悉 webpack，请阅读[核心概念](/concepts)和[打包器对比](/guides/comparison)，了解为什么你要使用 webpack，而不是社区中的其他工具。
@@ -27,9 +28,11 @@ npm install --save-dev webpack
 
 现在我们将创建以下目录结构和内容：
 
+__project__
+
 ``` diff
-webpack-demo
-|- package.json
+  webpack-demo
+  |- package.json
 + |- index.html
 + |- /src
 +   |- index.js
@@ -37,8 +40,8 @@ webpack-demo
 
 __src/index.js__
 
-```javascript
-function component () {
+``` javascript
+function component() {
   var element = document.createElement('div');
 
   // Lodash（目前通过一个 script 脚本引入）对于执行这一行是必需的
@@ -52,10 +55,10 @@ document.body.appendChild(component());
 
 __index.html__
 
-```html
+``` html
 <html>
   <head>
-    <title>webpack 2 demo</title>
+    <title>Getting Started</title>
     <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
@@ -72,27 +75,28 @@ __index.html__
 - 如果依赖不存在，或者引入顺序错误，应用程序将无法正常运行。
 - 如果依赖被引入但是并没有使用，浏览器将被迫下载无用代码。
 
-让我们使用 webpack 来管理这些脚本……
+让我们使用 webpack 来管理这些脚本。
 
 
 ## 创建一个 bundle 文件
 
-首先，我们稍微调整下目录结构，将“源”代码(`/src`)从我们的“分发”代码(`/dist`)中分离出来。“源”代码是用于书写和编辑代码的目录。 “分发”代码是构建过程产生的代码最小化和优化后的“输出”目录，最终将在浏览器中加载：
+首先，我们稍微调整下目录结构，将“源”代码(`/src`)从我们的“分发”代码(`/dist`)中分离出来。“源”代码是用于书写和编辑的代码。“分发”代码是构建过程产生的代码最小化和优化后的“输出”目录，最终将在浏览器中加载：
+
+__project__
 
 ``` diff
-webpack-demo
-|- package.json
-+ |- dist
-+   |- bundle.js
+  webpack-demo
+  |- package.json
++ |- /dist
 +   |- index.html
 - |- index.html
-|- /src
-  |- index.js
+  |- /src
+    |- index.js
 ```
 
 要在 `index.js` 中打包 `lodash` 依赖，我们需要在本地安装 library。
 
-```bash
+``` bash
 npm install --save lodash
 ```
 
@@ -100,35 +104,44 @@ npm install --save lodash
 
 __src/index.js__
 
-```diff
+``` diff
 + import _ from 'lodash';
++
+  function component() {
+    var element = document.createElement('div');
 
-function component () {
-// ...
+-   // Lodash, currently included via a script, is required for this line to work
++   // Lodash, now imported by this script
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+
+    return element;
+  }
+
+  document.body.appendChild(component());
 ```
 
 现在，由于通过打包来合成脚本，我们必须更新 `index.html` 文件。因为现在是通过 `import` 引入 lodash，所以将 lodash `<script>` 删除，然后修改另一个 `<script>` 标签来加载 bundle，而不是原始的 `/src` 文件：
 
 __dist/index.html__
 
-```diff
- <html>
-  <head>
-    <title>webpack 2 demo</title>
--   <script src="https://unpkg.com/lodash@4.16.6"></script>
-  </head>
-  <body>
--   <script src="./src/index.js"></script>
-+   <script src="./bundle.js"></script>
-  </body>
- </html>
+``` diff
+  <html>
+   <head>
+     <title>Getting Started</title>
+-    <script src="https://unpkg.com/lodash@4.16.6"></script>
+   </head>
+   <body>
+-    <script src="./src/index.js"></script>
++    <script src="bundle.js"></script>
+   </body>
+  </html>
 ```
 
 在这个设置中，`index.js` 显式要求引入的 `lodash` 必须存在，然后将它绑定为 `_`（没有全局作用域污染）。通过声明模块所需的依赖，webpack 能够利用这些信息去构建依赖图表，然后使用图表生成一个优化过的，会以正确顺序执行的 bundle。
 
 可以这样说，执行 `webpack`，会将我们的脚本作为[入口起点](/concepts/entry-points)，然后[输出](/concepts/output)为 `bundle.js`
 
-```bash
+``` bash
 ./node_modules/.bin/webpack src/index.js dist/bundle.js
 
 Hash: ff6c1d39b26f89b3b7bb
@@ -142,7 +155,7 @@ bundle.js  544 kB       0  [emitted]  [big]  main
    [3] ./src/index.js 278 bytes {0} [built]
 ```
 
-T> 输出可能会稍有不同。只要构建成功，那么你就可以继续。
+T> 输出可能会稍有不同，但是只要构建成功，那么你就可以继续。
 
 在浏览器中打开 `index.html`，如果一切访问都正常，你应该能看到以下文本：'Hello webpack'。
 
@@ -158,18 +171,21 @@ T> 输出可能会稍有不同。只要构建成功，那么你就可以继续�
 
 大多数项目会需要很复杂的设置，这就是为什么 webpack 要支持[配置文件](/concepts/configuration)。这比在终端(terminal)中输入大量命令要高效的多，所以让我们创建一个取代以上使用 CLI 选项方式的配置文件：
 
+__project__
+
 ``` diff
-|- package.json
+  webpack-demo
+  |- package.json
 + |- webpack.config.js
-|- dist
-  |- index.html
-|- /src
-  |- index.js
+  |- /dist
+    |- index.html
+  |- /src
+    |- index.js
 ```
 
 __webpack.config.js__
 
-```javascript
+``` javascript
 var path = require('path');
 
 module.exports = {
@@ -183,7 +199,7 @@ module.exports = {
 
 现在，让我们再次执行构建，通过使用我们的新配置：
 
-```bash
+``` bash
 ./node_modules/.bin/webpack --config webpack.config.js
 
 Hash: ff6c1d39b26f89b3b7bb
@@ -206,7 +222,9 @@ T> 如果 `webpack.config.js` 存在，则 `webpack` 命令将默认选择使用
 
 考虑到用 CLI 这种方式来运行本地的 webpack 不是特别方便，我们可以设置一个快捷方式。在 *package.json* 添加一个 [npm 脚本(npm script)](https://docs.npmjs.com/misc/scripts)：
 
-```json
+__package.json__
+
+``` json
 {
   ...
   "scripts": {
@@ -218,21 +236,42 @@ T> 如果 `webpack.config.js` 存在，则 `webpack` 命令将默认选择使用
 
 现在，可以使用 `npm run build` 命令，来替代我们之前用到的较长命令。注意，使用 npm 的 `scripts`，我们可以通过模块名，来引用本地安装的 npm 包，而不是写出完整路径。这是大多数基于 npm 的项目遵循的标准，允许我们直接调用 `webpack`，而不是去调用 `node_modules/webpack/bin/webpack.js`。
 
+现在运行以下命令，然后看看你的脚本别名是否正常运行：
+
+``` bash
+npm run build
+
+Hash: ff6c1d39b26f89b3b7bb
+Version: webpack 2.2.0
+Time: 390ms
+    Asset    Size  Chunks                    Chunk Names
+bundle.js  544 kB       0  [emitted]  [big]  main
+   [0] ./~/lodash/lodash.js 540 kB {0} [built]
+   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
+   [3] ./src/index.js 278 bytes {0} [built]
+```
+
 T> 通过向 `npm run build` 命令和你的参数之间添加两个中横线，可以将自定义参数传递给 webpack，例如：`npm run build -- --colors`。
 
 
 ## 结论
 
-现在，你已经实现了一个基本的构建过程，你应该深入了解[基本概念](/concepts)和[配置](/configuration)来更好地解 webpack 的设计。[API](/api) 章节深入介绍 webpack 提供的各种接口。或者，如果您希望通过示例学习，请在导航列表中选择指南章节。然后，请继续回到上面我们通过努力构建出细小示例，如果你一直紧跟下来，那现在应该如下所示：
+现在，你已经实现了一个基本的构建过程，你应该深入了解[基本概念](/concepts)和[配置](/configuration)来更好地解 webpack 的设计。[API](/api) 章节深入介绍 webpack 提供的各种接口。或者，如果您希望通过示例学习，请在导航列表中选择指南章节。然后，请继续回到上面我们通过努力构建出细小示例，如果你一直紧跟下来，那现在应该和如下类似：
 
 ``` diff
+webpack-demo
 |- package.json
 |- webpack.config.js
-|- dist
+|- /dist
+  |- bundle.js
   |- index.html
 |- /src
   |- index.js
+|- /node_modules
 ```
+
+T> 如果你使用的是 npm 5，你可能还会在目录中看到一个 `package-lock.json` 文件。
 
 ***
 

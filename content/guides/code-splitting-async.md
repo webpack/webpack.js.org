@@ -241,7 +241,7 @@ async function main() {
 
 ### `System.import` 已废弃
 
-在 webpack 中使用 `System.import` [不符合提案规范](https://github.com/webpack/webpack/issues/2163)，因此已经于 [v2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) 废弃，建议使用 `import()` 替代。
+在 webpack 中使用 `System.import` [不符合提案规范](https://github.com/webpack/webpack/issues/2163)，因此已经于 webpack [2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) 废弃，建议使用 `import()` 替代。
 
 
 ## `require.ensure()`

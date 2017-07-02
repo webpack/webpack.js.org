@@ -12,13 +12,15 @@ contributors:
 这些选项能设置模块如何被解析。webpack 提供合理的默认值，但是还是可能会修改一些解析的细节。
 关于 resolver 具体如何工作的更多解释说明，请查看[模块解析方式](/concepts/module-resolution)。
 
+
 ## `resolve`
 
 `object`
 
 配置模块如何解析。例如，当在 ES2015 中调用 `import "lodash"`，`resolve` 选项能够对 webpack 查找 `"lodash"` 的方式去做修改（查看[`模块`](#resolve-modules)）。
 
-## `resolve.alias`
+
+### `resolve.alias`
 
 `object`
 
@@ -54,8 +56,8 @@ alias: {
 这将产生以下结果：
 
 ```js
-import Test1 from 'xyz'; // 成功，file.js 被解析和导入。
-import Test2 from 'xyz/file.js'; // 错误，/path/to/file.js/file.js 是无效的
+import Test1 from 'xyz'; // 精确匹配，所以 path/to/file.js 被解析和导入
+import Test2 from 'xyz/file.js'; // 精确匹配，触发普通解析
 ```
 
 下面的表格展示了一些其他情况：
@@ -82,7 +84,7 @@ import Test2 from 'xyz/file.js'; // 错误，/path/to/file.js/file.js 是无效�
 `/abc/node_modules` 也可能在 `/node_modules` 中解析。
 
 
-## `resolve.aliasFields`
+### `resolve.aliasFields`
 
 `string`
 
@@ -93,7 +95,7 @@ aliasFields: ["browser"]
 ```
 
 
-## `resolve.descriptionFiles`
+### `resolve.descriptionFiles`
 
 `array`
 
@@ -104,7 +106,7 @@ descriptionFiles: ["package.json"]
 ```
 
 
-## `resolve.enforceExtension`
+### `resolve.enforceExtension`
 
 `boolean`
 
@@ -115,7 +117,7 @@ enforceExtension: false
 ```
 
 
-## `resolve.enforceModuleExtension`
+### `resolve.enforceModuleExtension`
 
 `boolean`
 
@@ -126,7 +128,7 @@ enforceModuleExtension: false
 ```
 
 
-## `resolve.extensions`
+### `resolve.extensions`
 
 `array`
 
@@ -145,7 +147,7 @@ import File from '../path/to/file'
 W> 使用此选项，会**覆盖默认数组**，这就意味着 webpack 将不再尝试使用默认扩展来解析模块。对于使用其扩展导入的模块，例如，`import SomeFile from "./somefile.ext"`，要想正确的解析，一个包含“\*”的字符串必须包含在数组中。
 
 
-## `resolve.mainFields`
+### `resolve.mainFields`
 
 `array`
 
@@ -179,7 +181,7 @@ mainFields: ["module", "main"]
 这意味着当我们 `import * as D3 from "d3"`，实际从 `browser` 属性解析文件。在这里 `browser` 属性是最优先选择的，因为它是 `mainFields` 的第一项。同时，由 webpack 打包的 Node.js 应用程序默认会从 `module` 字段中解析文件。
 
 
-## `resolve.mainFiles`
+### `resolve.mainFiles`
 
 `array`
 
@@ -190,7 +192,7 @@ mainFiles: ["index"]
 ```
 
 
-## `resolve.modules`
+### `resolve.modules`
 
 `array`
 
@@ -215,7 +217,7 @@ modules: [path.resolve(__dirname, "src"), "node_modules"]
 ```
 
 
-## `resolve.unsafeCache`
+### `resolve.unsafeCache`
 
 `regex` `array` `boolean`
 
@@ -232,36 +234,6 @@ unsafeCache: /src\/utilities/
 ```
 
 W> 修改缓存路径可能在极少数情况下导致失败。
-
-
-## `resolveLoader`
-
-`object`
-
-这组选项与上面的 `resolve` 对象的属性集合相同，但仅用于解析 webpack 的 [loader](/concepts/loaders) 包。默认：
-
-```js
-{
-    modules: ["node_modules"],
-    extensions: [".js", ".json"],
-    mainFields: ["loader", "main"]
-}
-```
-
-T> 注意，这里你可以使用别名，并且其他特性类似于 resolve 对象。例如，`{ txt: 'raw-loader' }` 会使用 `raw-loader` 去 shim(填充) `txt!templates/demo.txt`。
-
-
-## `resolveLoader.moduleExtensions`
-
-`array`
-
-在解析模块（例如，loader）时尝试使用的扩展。默认是一个空数组。
-
-如果你想要不带 `-loader` 后缀使用 loader，你可以使用：
-
-```js
-moduleExtensions: ['-loader']
-```
 
 
 ## `resolve.plugins`
@@ -292,6 +264,36 @@ symlinks: true
 
 ```js
 cachePredicate: function() { return true }
+```
+
+
+## `resolveLoader`
+
+`object`
+
+这组选项与上面的 `resolve` 对象的属性集合相同，但仅用于解析 webpack 的 [loader](/concepts/loaders) 包。默认：
+
+```js
+{
+    modules: ["node_modules"],
+    extensions: [".js", ".json"],
+    mainFields: ["loader", "main"]
+}
+```
+
+T> 注意，这里你可以使用别名，并且其他特性类似于 resolve 对象。例如，`{ txt: 'raw-loader' }` 会使用 `raw-loader` 去 shim(填充) `txt!templates/demo.txt`。
+
+
+## `resolveLoader.moduleExtensions`
+
+`array`
+
+在解析模块（例如，loader）时尝试使用的扩展。默认是一个空数组。
+
+如果你想要不带 `-loader` 后缀使用 loader，你可以使用：
+
+```js
+moduleExtensions: ['-loader']
 ```
 
 ***

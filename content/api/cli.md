@@ -237,24 +237,29 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 
 以下选项用于配置 Webpack 在控制台输出的[统计数据](/configuration/stats/)，以及这些数据的样式。
 
-| 参数                     | 说明                                            | 类型    |
-|-------------------------|------------------------------------------------|---------|
-| --color, --colors       | 开启/关闭控制台的颜色 [默认值: (supports-color)]    | boolean |
-| --display-cached        | 在输出中显示缓存的模块                             | boolean |
-| --display-cached-assets | 在输出中显示缓存的 assets                         | boolean |
-| --display-chunks        | 在输出中显示 chunks                              | boolean |
-| --display-entrypoints   | 在输出中显示入口文件                               | boolean |
-| --display-error-details | 显示详细的错误信息                                 | boolean |
-| --display-exclude       | 在输出中显示被排除的文件                            | boolean |
-| --display-modules       | 在输出中显示所有模块，包括被排除的模块                | boolean |
-| --display-origins       | 在输出中显示最初的 chunk                           | boolean |
-| --display-reasons       | 在输出中显示引入模块的原因                          | boolean |
-| --display-used-exports  | 显示模块中被使用的接口（Tree Shaking）              | boolean |
-| --hide-modules          | 隐藏关于模块的信息                                 | boolean |
-| --sort-assets-by        | 对 assets 列表以某种属性排序                      | string  |
-| --sort-chunks-by        | 对 chunks 列表以某种属性排序                       | string  |
-| --sort-modules-by       | 对模块列表以某种属性排序                            | string  |
-| --verbose               | 显示更多信息                                      | boolean |
+| 参数 | 说明 | 类型 |
+|--------------------------------|------------------------------------------------|---------|
+| --color, --colors | 开启/关闭控制台的颜色 [默认值: (supports-color)] | boolean |
+| --display                      | 选择[显示预设](/configuration/stats)(verbose - 繁琐, detailed - 细节, normal - 正常, minimal - 最小, errors-only - 仅错误, none - 无; 从 webpack 3.0.0 开始) | string |
+| --display-cached | 在输出中显示缓存的模块 | boolean |
+| --display-cached-assets | 在输出中显示缓存的 assets | boolean |
+| --display-chunks | 在输出中显示 chunks | boolean |
+| --display-depth | 显示从入口起点到每个模块的距离 | boolean |
+| --display-entrypoints   | 在输出中显示入口文件 | boolean |
+| --display-error-details | 显示详细的错误信息 | boolean |
+| --display-exclude       | 在输出中显示被排除的文件 | boolean |
+| --display-max-modules          | 设置输出中可见模块的最大数量 | number  |
+| --display-modules | 在输出中显示所有模块，包括被排除的模块                | boolean |
+| --display-optimization-bailout | 作用域提升回退触发器(Scope hoisting fallback trigger)（从 webpack 3.0.0 开始） | boolean |
+| --display-origins | 在输出中显示最初的 chunk | boolean |
+| --display-provided-exports     | 显示有关从模块导出的信息 | boolean |
+| --display-reasons | 显示模块包含在输出中的原因 | boolean |
+| --display-used-exports | 显示模块中被使用的接口（Tree Shaking） | boolean |
+| --hide-modules | 隐藏关于模块的信息 | boolean |
+| --sort-assets-by | 对 assets 列表以某种属性排序 | string  |
+| --sort-chunks-by | 对 chunks 列表以某种属性排序 | string |
+| --sort-modules-by | 对模块列表以某种属性排序 | string  |
+| --verbose | 显示更多信息 | boolean |
 
 
 ### 高级配置

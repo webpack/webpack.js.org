@@ -7,6 +7,7 @@ contributors:
   - tomasAlabes
   - mattce
   - irth
+  - fvgs
 ---
 
 `output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
@@ -16,7 +17,7 @@ contributors:
 
 `string`
 
-此选项决定了按需加载(on-demand loaded)的 chunk 文件的名称。有关可取的值的详细信息，请查看 [`output.filename`](#output-filename) 选项。
+此选项决定了非入口(non-entry) chunk 文件的名称。有关可取的值的详细信息，请查看 [`output.filename`](#output-filename) 选项。
 
 注意，这些文件名需要在 runtime 根据 chunk 发送的请求去生成。因此，需要在 webpack runtime 输出 bundle 值时，将 chunk id 的值对应映射到占位符(如 `[name]` 和 `[chunkhash]`)。这会增加文件大小，并且在任何 chunk 的占位符值修改后，都会使 bundle 失效。
 
@@ -58,7 +59,7 @@ Number of milliseconds before chunk request expires, defaults to 120 000. This
 
 `boolean | object`
 
-(弃用：无用，不可用，如果你有不同意见请写 issue 给我们)
+> 避免使用此选项，因为它们已废弃，并将很快删除。 it is __deprecated__ and will soon be removed.
 
 对所有或某些模块启用「行到行映射(line to line mapping)」。这将生成基本的源映射(source map)，即生成资源(generated source)的每一行，映射到原始资源(original source)的同一行。这是一个性能优化点，并且应该只需要输入行(input line)和生成行(generated line)相匹配时才使用。
 
@@ -144,9 +145,7 @@ filename: "[chunkhash].bundle.js"
 
 请确保已阅读过[指南 - 缓存](/guides/caching)的详细信息。这里涉及更多步骤，不仅仅是设置此选项。
 
-默认值是 `"[name].js"`。
-
-注意此选项被称为文件名，但是你还是可以创建像 `"js/[name]/bundle.js"` 这样的文件夹结构。
+注意此选项被称为文件名，但是你还是可以使用像 `"js/[name]/bundle.js"` 这样的文件夹结构。
 
 注意，此选项不会影响那些「按需加载 chunk」的输出文件。对于这些文件，请使用 [`output.chunkFilename`](#output-chunkfilename) 选项来控制输出。同样也不影响通过 loader 创建的文件，对于这些文件，请查看 loader 选项来输出控制。
 
@@ -258,6 +257,13 @@ library 名称取决于 [`output.libraryTarget`](#output-librarytarget) 选项�
 有关 `output.library` 以及 `ouput.libraryTarget` 详细信息，请查看[创建 library 指南](/guides/author-libraries)。
 
 
+## `output.libraryExport`
+
+`string` or `string[]` (since webpack 3.0.0)
+
+Allows to select an export for the library.
+
+
 ## `output.libraryTarget`
 
 `string`
@@ -339,7 +345,7 @@ T> 想要弄清楚 CommonJS 和 CommonJS2 之间的区别？查看[这里](https
 
 ```javascript
 define([], function() {
-	// 这个模块会返回你的入口 chunk 所返回的
+  // 这个模块会返回你的入口 chunk 所返回的
 });
 ```
 
@@ -349,8 +355,8 @@ define([], function() {
 
 ```javascript
 output: {
-	library: "MyLibrary",
-	libraryTarget: "amd"
+  library: "MyLibrary",
+  libraryTarget: "amd"
 }
 ```
 
@@ -358,20 +364,19 @@ output: {
 
 ```javascript
 require(['MyLibrary'], function(MyLibrary) {
-	// 使用 library 做一些事……
+  // 使用 library 做一些事……
 });
 ```
 
 
-`libraryTarget: "umd"` - 这是一种可以将你的 library 能够在所有的模块定义下都可运行的方式（并且导出的完全不是模块）。
-它将在 CommonJS, AMD 环境下运行，或将模块导出到 global 下的变量。了解更多请查看 [UMD 仓库](https://github.com/umdjs/umd)。
+`libraryTarget: "umd"` - 这是一种可以将你的 library 能够在所有的模块定义下都可运行的方式（并且导出的完全不是模块）。它将在 CommonJS, AMD 环境下运行，或将模块导出到 global 下的变量。了解更多请查看 [UMD 仓库](https://github.com/umdjs/umd)。
 
 在这个例子中，你需要 `library` 属性来命名你的模块：
 
 ```javascript
 output: {
-	library: "MyLibrary",
-	libraryTarget: "umd"
+  library: "MyLibrary",
+  libraryTarget: "umd"
 }
 ```
 
@@ -379,16 +384,16 @@ output: {
 
 ```javascript
 (function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["MyLibrary"] = factory();
-	else
-		root["MyLibrary"] = factory();
+  if(typeof exports === 'object' && typeof module === 'object')
+    module.exports = factory();
+  else if(typeof define === 'function' && define.amd)
+    define([], factory);
+  else if(typeof exports === 'object')
+    exports["MyLibrary"] = factory();
+  else
+    root["MyLibrary"] = factory();
 })(this, function() {
-	//这个模块会返回你的入口 chunk 所返回的
+  //这个模块会返回你的入口 chunk 所返回的
 });
 ```
 

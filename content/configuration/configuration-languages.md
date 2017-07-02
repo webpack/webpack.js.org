@@ -5,18 +5,58 @@ contributors:
   - sokra
   - skipjack
   - tarang9211
+  - simon04
 ---
 
-webpack 允许使用任意语言定义配置文件。文件扩展支持列表 [node-interpret](https://github.com/js-cli/js-interpret) 包中找到。webpack 将通过你选择的语言运行你的配置。
+webpack 接受以多种编程和数据语言编写的配置文件。支持的文件扩展名列表，可以在 [node-interpret](https://github.com/js-cli/js-interpret) 包中找到。使用 [node-interpret](https://github.com/js-cli/js-interpret)，webpack 可以处理许多不同类型的配置文件。
 
-例如，如果你使用 **coffeescript**，你的文件将如下所示：
 
-**webpack.config.coffee**
+## TypeScript
+
+To write the webpack configuration in [TypeScript](http://www.typescriptlang.org/), you would first install the necessary dependencies:
+
+``` bash
+npm install --save-dev typescript ts-node @types/node @types/webpack
+```
+
+and then proceed to write your configuration:
+
+__webpack.config.ts__
+
+```typescript
+import * as webpack from 'webpack';
+import * as path from 'path';
+declare var __dirname;
+
+const config: webpack.Configuration = {
+  entry: './foo.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'foo.bundle.js'
+  }
+};
+
+export default config;
+```
+
+
+## CoffeeScript
+
+Similarly, to use [CoffeeScript](http://coffeescript.org/), you would first install the necessary dependencies:
+
+``` bash
+npm install --save-dev coffee-script
+```
+
+and then proceed to write your configuration:
+
+__webpack.config.coffee__
 
 ```javascript
 HtmlWebpackPlugin = require('html-webpack-plugin')
 webpack = require('webpack')
 path = require('path')
+
 config =
   entry: './path/to/my/entry/file.js'
   output:
@@ -30,8 +70,63 @@ config =
     new (webpack.optimize.UglifyJsPlugin)
     new HtmlWebpackPlugin(template: './src/index.html')
   ]
+
 module.exports = config
 ```
+
+
+## Babel and JSX
+
+In the example below JSX (React JavaScript Markup) and Babel are used to create a JSON Configuration that webpack can understand.
+
+> Courtesy of [Jason Miller](https://twitter.com/_developit/status/769583291666169862)
+
+First install the necessary dependencies:
+
+``` js
+npm install --save-dev babel-register jsxobj babel-preset-es2015
+```
+
+__.babelrc__
+
+``` json
+{
+  "presets": [ "es2015" ]
+}
+```
+
+__webpack.config.babel.js__
+
+``` js
+import jsxobj from 'jsxobj';
+
+// example of an imported plugin
+const CustomPlugin = config => ({
+  ...config,
+  name: 'custom-plugin'
+});
+
+export default (
+  <webpack target="web" watch>
+    <entry path="src/index.js" />
+    <resolve>
+      <alias {...{
+        react: 'preact-compat',
+        'react-dom': 'preact-compat'
+      }} />
+    </resolve>
+    <plugins>
+      <uglify-js opts={{
+        compression: true,
+        mangle: false
+      }} />
+      <CustomPlugin foo="bar" />
+    </plugins>
+  </webpack>
+);
+```
+
+W> If you are using babel elsewhere and have `modules` set to `false`, you will have to either maintain two separate `.babelrc` files or use `const jsxobj = require('jsxobj');` and `module.exports` instead of the new `import` and `export` syntax. This is because while Node does support many new ES6 features, they don't yet support ES6 module syntax.
 
 ***
 

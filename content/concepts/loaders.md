@@ -11,57 +11,48 @@ contributors:
   - jhnns
 ---
 
-loader 用于对模块的源代码进行转换。loader 可以使你在 `require()` 或"加载"模块时预处理文件。因此，loader 类似于其他构建工具中“任务(task)”，并提供了处理前端构建步骤的强大方法。loader 可以将文件从不同的语言（如 TypeScript）转换为 JavaScript，或将内联图像转换为 data URL。loader 甚至允许你在 JavaScript 中 `require（）` CSS文件！
+loader 用于对模块的源代码进行转换。loader 可以使你在 `import` 或"加载"模块时预处理文件。因此，loader 类似于其他构建工具中“任务(task)”，并提供了处理前端构建步骤的强大方法。loader 可以将文件从不同的语言（如 TypeScript）转换为 JavaScript，或将内联图像转换为 data URL。loader 甚至允许你直接在 JavaScript 模块中 `import` CSS文件！
 
 ## 示例
 
 例如，你可以使用 loader 告诉 webpack 加载 CSS 文件，或者将 TypeScript 转为 JavaScript。首先，安装相对应的 loader：
+为此，首先安装相对应的 loader：
 
 ``` bash
 npm install --save-dev css-loader
 npm install --save-dev ts-loader
 ```
 
-其次，配置 `webpack.config.js`，对每个 `.css` 文件使用 [`css-loader`](/loaders/css-loader)，然后类似地，对每个 `.ts` 文件使用 `ts-loader`：
+然后指示 webpack 对每个 `.css` 使用 [`css-loader`](/loaders/css-loader)，以及对所有 `.ts` 文件使用 ['ts-loader'](https://github.com/TypeStrong/ts-loader)：
 
 **webpack.config.js**
 
-```js-with-links-with-details
+``` js
 module.exports = {
   module: {
     rules: [
-      {test: /\.css$/, use: ['css-loader'](/loaders/css-loader)},
-      {test: /\.ts$/, use: ['ts-loader'](https://github.com/TypeStrong/ts-loader)}
+      { test: /\.css$/, use: 'css-loader' },
+      { test: /\.ts$/, use: 'ts-loader' }
     ]
   }
 };
 ```
 
-注意，根据[配置选项](/configuration#options)，下面的规范定义了同等的 loader 用法：
 
-```js-with-links-with-details
-{test: /\.css$/, [loader](/configuration/module#rule-loader): 'css-loader'}
-// 等同于
-{test: /\.css$/, [use](/configuration/module#rule-use): 'css-loader'}
-// 等同于
-{test: /\.css$/, [use](/configuration/module#rule-use): {
-  loader: 'css-loader',
-  options: {}
-}}
-```
-
-## 配置
+## 使用 Loader
 
 在你的应用程序中，有三种使用 loader 的方式：
 
-* 通过配置
-* 在 `require` 语句中显示使用
-* 通过 CLI
+* Configuration (recommended): Specify them in your __webpack.config.js__ file.
+* 配置（推荐）：在 __webpack.config.js__ 文件中指定 loader。
+* 内联：在每个 `import` 语句中显式指定 loader。
+* CLI：在 shell 命令中指定它们。
 
-### 通过 `webpack.config.js`
+
+### Configuration
 
 [`module.rules`](/configuration/module/#module-rules) 允许你在 webpack 配置中指定几个 loader。
-这是展示 loader 的一种简明的方式，并且有助于使代码变得简洁。而且对每个相应的 loader 有一个完整的概述。
+这是展示 loader 的一种简明的方式，并且有助于使代码变得简洁。而且对每个相应的 loader 有一个完整的概述：
 
 ```js-with-links-with-details
   module: {
@@ -69,7 +60,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          { loader: ['style-loader'](/loaders/style-loader)},
+          { loader: ['style-loader'](/loaders/style-loader) },
           {
             loader: ['css-loader'](/loaders/css-loader),
             options: {
@@ -82,29 +73,32 @@ module.exports = {
   }
 ```
 
-### 通过 `require`
 
-可以在 `require` 语句（或 `define`, `require.ensure`, 等语句）中指定 loader。使用 `!` 将资源中的 loader 分开。分开的每个部分都相对于当前目录解析。
+### 内联
+
+可以在 `import` 语句或任何[等同于 "import" 的方式](/api/module-methods)中指定 loader。使用 `!` 将资源中的 loader 分开。分开的每个部分都相对于当前目录解析。
 
 ```js
-require('style-loader!css-loader?modules!./styles.css');
+import Styles from 'style-loader!css-loader?modules!./styles.css';
 ```
 
 通过前置所有规则及使用 `!`，可以对应覆盖到配置中的任意 loader。
 
-选项可以传递查询参数，就像在 web 中那样（`?key=value&foo=bar`）。也可以使用 JSON 对象（`?{"key":"value","foo":"bar"}`）。
+选项可以传递查询参数，例如 `?key=value&foo=bar`，或者一个 JSON 对象，例如 `?{"key":"value","foo":"bar"}`。
 
 T> 尽可能使用 `module.rules`，因为这样可以在源码中减少引用，并且可以更快调试和定位 loader，避免代码越来越糟。
 
-### 通过 CLI
 
-可选项，你也可以通过 CLI 使用 loader：
+### CLI
+
+你也可以通过 CLI 使用 loader：
 
 ```sh
 webpack --module-bind jade-loader --module-bind 'css=style-loader!css-loader'
 ```
 
 这会对 `.jade` 文件使用 `jade-loader`，对 `.css` 文件使用 [`style-loader`](/loaders/style-loader) 和 [`css-loader`](/loaders/css-loader)。
+
 
 ## Loader 特性
 
@@ -119,11 +113,12 @@ webpack --module-bind jade-loader --module-bind 'css=style-loader!css-loader'
 
 loader 通过（loader）预处理函数，为 JavaScript 生态系统提供了更多有力功能。用户现在可以更加灵活的引入细粒度逻辑，例如压缩(compression)、打包(package)、语言翻译(language translation)和[其他更多](/loaders)。
 
+
 ## 解析 Loader
 
 loader 遵循标准的[模块解析](/concepts/module-resolution/)。多数情况下，loader 将从[模块路径](/concepts/module-resolution/#module-paths)（通常将模块路径认为是 `npm install`, `node_modules`）解析。
 
-loader 模块需要导出为一个函数，并且使用 Node.js 兼容的 JavaScript 编写。在通常情况下，你可以使用 npm 来管理 loader，但是你也可以将 loader 模块作为应用程序中的文件。按照约定，loader 通常被命名为 `xxx-loader`（例如 `json-loader`）。有关详细信息，请查看[如何编写模块？](/development/how-to-write-a-loader)。
+loader 模块需要导出为一个函数，并且使用 Node.js 兼容的 JavaScript 编写。通常使用 npm 进行管理，但是也可以将自定义 loader 作为应用程序中的文件。按照约定，loader 通常被命名为 `xxx-loader`（例如 `json-loader`）。有关详细信息，请查看[如何编写模块？](/development/how-to-write-a-loader)。
 
 ***
 

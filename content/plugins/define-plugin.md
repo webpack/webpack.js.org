@@ -83,6 +83,8 @@ new webpack.DefinePlugin({
 })
 ```
 
+W> When defining values for `process` prefer `'process.env.NODE_ENV': JSON.stringify('production')` over `process: { env: { NODE_ENV: JSON.stringify('production') } }`. Using the latter will overwrite the `process` object which can break compatibility with some modules that expect other values on the process object to be defined.
+
 
 ## 服务 URL(Service URLs)
 

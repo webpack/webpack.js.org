@@ -29,6 +29,7 @@ stats: "errors-only"
 | `"minimal"`     | *none*  | 只在发生错误 或是 新的编译时输出 |
 | `"none"`        | `false` | 没有输出 |
 | `"normal"`      | `true`  | 标准输出 |
+| `"detailed"`    | *none*  | 详细输出（从 webpack 3.0.0 开始） |
 | `"verbose"`     | *none*  | 全部输出 |
 
 对于更加精细的控制，这些选项可以准确地列出你想要的信息。请注意，此对象中的所有选项都是可选的。
