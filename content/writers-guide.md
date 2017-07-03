@@ -16,7 +16,7 @@ The following sections contain all you need to know about editing and formatting
 
 Each article contains a small section at the top written in [YAML Frontmatter]():
 
-``` md
+``` yaml
 ---
 title: My Article
 sort: 3
@@ -35,12 +35,12 @@ Let's break these down:
 - `contributors`: A list of GitHub usernames who have contributed to this article.
 - `related`: Any related reading or useful examples.
 
-Note that `related` will generate a __Further Reading__ section at the bottom of the page and `contributors` will yield a __Contributors__ section below it. If you edit an article and would like recognition, please feel free to add your GitHub username to the `contributors` list.
+Note that `related` will generate a __Further Reading__ section at the bottom of the page and `contributors` will yield a __Contributors__ section below it. If you edit an article and would like recognition, don't hesitate to add your GitHub username to the `contributors` list.
 
 
 ## Article Structure
 
-1. Brief Introduction - a paragraph or two so you get the basic idea about the what and why. 
+1. Brief Introduction - a paragraph or two so you get the basic idea about the what and why.
 2. Outline Remaining Content – how the content will be presented.
 3. Main Content - tell what you promised to tell.
 4. Conclusion - tell what you told and recap the main points.
