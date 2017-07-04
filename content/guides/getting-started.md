@@ -257,8 +257,7 @@ T> Custom parameters can be passed to webpack by adding two dashes between the `
 
 ## Conclusion
 
-Now that you have a basic build together you should move on to the next guide [`Asset Management`](/guides/asset-management) to learn about how to manage assets like images and fonts with webpack. By now, your project should look like this:
-
+Now that you have a basic build together you should move on to the next guide [`Asset Management`](/guides/asset-management) to learn how to manage assets like images and fonts with webpack. At this point, your project should look like this:
 
 __project__
 
