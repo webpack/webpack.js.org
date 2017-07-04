@@ -148,11 +148,12 @@ The `stats` object that is passed as a second argument of the [`webpack()`](#web
 * Errors and Warnings (if any)
 * Timings
 * Module and Chunk information
-* and much more...
 
 The [webpack CLI](/api/cli) uses this information to display a nicely formatted output in your console.
 
-This object exposes these methods:
+T> When using the [`MultiCompiler`](/api/plugins/compiler#multicompiler), a `MultiStats` instance is returned that fulfills the same interface as `stats`, i.e. the methods described below.
+
+This `stats` object exposes the following methods:
 
 
 ### `stats.hasErrors()`
@@ -259,9 +260,9 @@ webpack({
 ```
 
 
-## Compiling to Memory
+## Custom File Systems
 
-webpack writes the output to the specified files on disk. If you want webpack to output them to a different kind of file system (memory, webDAV, etc), you can set the `outputFileSystem` option on the compiler:
+By default, webpack reads files and writes files to disk using a normal file system. However, it is possible to change the input or output behavior using a different kind of file system (memory, webDAV, etc). To accomplish this, one can change the `inputFileSystem` or `outputFileSystem`. For example, you can replace the default `outputFileSystem` with [`memory-fs`](https://github.com/webpack/memory-fs) to write files to memory instead of to disk:
 
 ``` js
 const MemoryFS = require("memory-fs");
@@ -277,4 +278,6 @@ compiler.run((err, stats) => {
 });
 ```
 
-T> The output file system you provide needs to be compatible with Node’s own [`fs`](https://nodejs.org/api/fs.html) module interface, which requires the `mkdirp` and `join` helper methods.
+Note that this is what [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware), used by [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and many other packages, uses to mysteriously hide your files but continue serving them up to the browser!
+
+T> The output file system you provide needs to be compatible with Node’s own [`fs`](https://nodejs.org/api/fs.html) interface, which requires the `mkdirp` and `join` helper methods.
