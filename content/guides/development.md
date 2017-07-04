@@ -8,9 +8,9 @@ contributors:
   - TheDutchCoder
 ---
 
-On this page we'll explain how to get started with developing and how to choose one of three tools to develop. It is assumed you already have a webpack configuration file.
+If you've been following the guides, you should have a solid understanding of some of webpack's basics. Before we continue, let's look into setting up a development environment to make our lives a little easier.
 
-W> Never use any of these tools in production. Ever.
+W> The tools in this guide are meant for development **only**, do not ever use them in production!
 
 
 ## Adjusting Your Text Editor
