@@ -149,7 +149,7 @@ Version: webpack 2.2.0
 Time: 385ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  [emitted]  [big]  main
-   [0] ./~/lodash/lodash.js 540 kB {0} [built]
+   [0] ./src/index.js 219 bytes {0} [built]
    [1] (webpack)/buildin/global.js 509 bytes {0} [built]
    [2] (webpack)/buildin/module.js 517 bytes {0} [built]
    [3] ./src/index.js 278 bytes {0} [built]
@@ -207,7 +207,7 @@ Version: webpack 2.2.0
 Time: 390ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  [emitted]  [big]  main
-   [0] ./~/lodash/lodash.js 540 kB {0} [built]
+   [0] ./src/index.js 219 bytes {0} [built]
    [1] (webpack)/buildin/global.js 509 bytes {0} [built]
    [2] (webpack)/buildin/module.js 517 bytes {0} [built]
    [3] ./src/index.js 278 bytes {0} [built]
@@ -246,7 +246,7 @@ Version: webpack 2.2.0
 Time: 390ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  [emitted]  [big]  main
-   [0] ./~/lodash/lodash.js 540 kB {0} [built]
+   [0] ./src/index.js 219 bytes {0} [built]
    [1] (webpack)/buildin/global.js 509 bytes {0} [built]
    [2] (webpack)/buildin/module.js 517 bytes {0} [built]
    [3] ./src/index.js 278 bytes {0} [built]
