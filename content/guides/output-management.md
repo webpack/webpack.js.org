@@ -14,6 +14,56 @@ So far we've manually included all our assets in our `index.html` file, but as y
 
 First, let's adjust our project a little bit:
 
+__project__
+
+``` diff
+  webpack-demo
+  |- package.json
+  |- webpack.config.js
+  |- /dist
+  |- /src
+    |- index.js
++   |- print.js
+  |- /node_modules
+```
+
+Let's add some logic to our `src/print.js` file:
+
+__src/print.js__
+
+``` js
+export default function printMe() {
+  console.log('I get called from print.js!');
+}
+```
+
+And use that function in our `src/index.js` file:
+
+__src/index.js__
+
+``` diff
+  import _ from 'lodash';
++ import printMe from './print.js';
+
+  function component() {
+    var element = document.createElement('div');
++   var btn = document.createElement('button');
+
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+
++   btn.innerHTML = 'Click me and check the console!';
++   btn.onclick = printMe;
++
++   element.appendChild(btn);
+
+    return element;
+  }
+
+  document.body.appendChild(component());
+```
+
+Let's also update our `dist/index.html` file, in preparation for webpack to split out entries:
+
 __dist/index.html__
 
 ``` diff
@@ -21,7 +71,7 @@ __dist/index.html__
     <head>
 -     <title>Asset Management</title>
 +     <title>Output Management</title>
-+     <script src="./vendor.bundle.js"></script>
++     <script src="./print.bundle.js"></script>
     </head>
     <body>
 -     <script src="./bundle.js"></script>
@@ -30,7 +80,7 @@ __dist/index.html__
   </html>
 ```
 
-Now adjust the config. We'll be adding a vendor entry point as an example and we'll change the output as well, so that it will dynamically generate bundle names, based on the entry point names:
+Now adjust the config. We'll be adding our `src/print.js` as a new entry point (`print`) and we'll change the output as well, so that it will dynamically generate bundle names, based on the entry point names:
 
 __webpack.config.js__
 
@@ -41,7 +91,7 @@ __webpack.config.js__
     entry: {
 -     index: './src/index.js',
 +     app: './src/index.js',
-+     vendor: ['lodash']
++     print: './src/print.js'
     },
     output: {
 -     filename: 'bundle.js',
@@ -51,41 +101,25 @@ __webpack.config.js__
   };
 ```
 
-Now remove the lodash import from your main script:
-
-__src/index.js__
-
-``` diff
-- import _ from 'lodash';
--
-  function component() {
-    var element = document.createElement('div');
-
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-
-    return element;
-  }
-
-  document.body.appendChild(component());
-```
-
 Let's run `npm run build` and see what this generates:
 
 ``` bash
-Hash: 5f3b0265b87c603b4a0f
-Version: webpack 2.6.1
-Time: 539ms
-           Asset     Size  Chunks                    Chunk Names
-vendor.bundle.js   544 kB       0  [emitted]  [big]  vendor
-   app.bundle.js  2.81 kB       1  [emitted]         app
-   [0] ./~/lodash/lodash.js 540 kB {0} [built]
-   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [3] ./src/index.js 172 bytes {1} [built]
-   [4] multi lodash 28 bytes {0} [built]
+Hash: aa305b0f3373c63c9051
+Version: webpack 3.0.0
+Time: 536ms
+          Asset     Size  Chunks                    Chunk Names
+  app.bundle.js   545 kB    0, 1  [emitted]  [big]  app
+print.bundle.js  2.74 kB       1  [emitted]         print
+   [0] ./src/print.js 84 bytes {0} {1} [built]
+   [1] ./src/index.js 403 bytes {0} [built]
+   [3] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [4] (webpack)/buildin/module.js 517 bytes {0} [built]
+    + 1 hidden module
 ```
 
-We can see that webpack generates our `vendor.bundle.js` and `app.bundle.js` files, which we also specified in our `index.html` file. But what would happen if we changed the name of one of our entry points? The generated bundles would be renamed on a build, but our `index.html` file would still reference the old names. Let's fix that with the [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin).
+We can see that webpack generates our `print.bundle.js` and `app.bundle.js` files, which we also specified in our `index.html` file. if you open `index.html` in your browser, you can see what happens when you click the button.
+
+But what would happen if we changed the name of one of our entry points, or even added a new one? The generated bundles would be renamed on a build, but our `index.html` file would still reference the old names. Let's fix that with the [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin).
 
 
 ## Setting up HtmlWebpackPlugin
@@ -161,6 +195,7 @@ npm install clean-webpack-plugin --save-dev
 ```
 
 __webpack.config.js__
+
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
