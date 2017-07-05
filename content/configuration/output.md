@@ -8,6 +8,7 @@ contributors:
   - mattce
   - irth
   - fvgs
+  - dhurlburtusa
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -216,7 +217,7 @@ T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plu
 
 ## `output.hashDigest`
 
-The hashing algorithm to use, defaults to `'hex'`. All functions from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported.
+The encoding to use when generating the hash, defaults to `'hex'`. All encodings from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported.
 
 
 ## `output.hashDigestLength`
