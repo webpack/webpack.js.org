@@ -129,8 +129,6 @@ module.exports = {
 
 这意味着你的 library 需要一个名为 `lodash` 的依赖，这个依赖在用户的环境中必须存在且可用。
 
-如果您的 library 的构建目标(target)是 UMD，重要的事是，在所有上述提到的加载外部扩展方式(`commonjs`, `commonjs2`, `amd` 和 `root`)中添加此 library 后，会因为用户试图在该环境中加载 library ，而造成一个奇怪的错误。
-
 如果你计划只是将 library 用作另一个 webpack bundle 中的依赖模块，则可以将外部扩展(external)指定为数组。
 
 ```javascript

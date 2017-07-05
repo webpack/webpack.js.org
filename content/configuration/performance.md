@@ -17,7 +17,7 @@ contributors:
 
 ## `performance.hints`
 
-`boolean | "error" | "warning"`
+`false | "error" | "warning"`
 
 打开/关闭提示。此外，当找到提示时，告诉 webpack 抛出一个错误或警告。此属性默认设置为 `"warning"`。
 

@@ -5,7 +5,7 @@
   "description": "The main site for all things webpack.",
   "homepage": "https://github.com/webpack/webpack.js.org",
   "author": "Greg Venech",
-  "license": "CC BY",
+  "license": "CC BY 4.0",
   "main": "n/a",
   "keywords": [
     "webpack",

@@ -136,7 +136,7 @@ bundle.js  560 kB       0  [emitted]  [big]  main
 
 再次在浏览器中打开 `index.html`，你应该看到 `Hello webpack` 现在的样式是红色。要查看 webpack 做了什么，请检查页面（不要查看页面源代码，因为它不会显示结果），并查看页面的 head 标签。它应该包含我们在 `index.js` 中导入的 style 块元素。
 
-T> 请注意，你也可以进行 [CSS 分离](/guides/code-splitting-css)，以便在生产环境中节省加载时间。最重要的是，现有的 loader 可以支持任何你可以想到的 CSS 处理器风格 - [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader) 和 [less](/loaders/less-loader) 等。
+T> 请注意，你也可以进行 [CSS 分离](/plugins/extract-text-webpack-plugin)，以便在生产环境中节省加载时间。最重要的是，现有的 loader 可以支持任何你可以想到的 CSS 处理器风格 - [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader) 和 [less](/loaders/less-loader) 等。
 
 
 ## 加载图片
@@ -610,7 +610,7 @@ __src/index.js__
 -   element.appendChild(myIcon);
 -
 -   console.log(Data);
-+   element.innerHTML = 'Hello webpack';
++   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
     return element;
   }

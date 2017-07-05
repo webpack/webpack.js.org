@@ -289,10 +289,26 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 
 ### Profiling
 
-这个选项会记录编译的性能数据，并且输出。它会告诉你编译过程中哪些步骤耗时最长，这对于优化构建的性能很有帮助。
+`--profile` 选项捕获编译时每个步骤的时间信息，并且将这些信息包含在输出中。
 
 ```bash
 webpack --profile
+
+⋮
+[0] ./src/index.js 90 bytes {0} [built]
+    factory:22ms building:16ms = 38ms
+```
+
+For each module, the following details are included in the output as applicable:
+
+* `factory`: time to collect module metadata (e.g. resolving the filename)
+* `building`: time to build the module (e.g. loaders and parsing)
+* `dependencies`: time to identify and connect the module’s dependencies
+
+Paired with `--progress`, `--profile` gives you an in depth idea of which step in the compilation is taking how long. This can help you optimise your build in a more informed manner.
+
+```bash
+webpack --progress --profile
 
 30ms building modules
 1ms sealing
@@ -319,6 +335,7 @@ webpack --profile
 26ms chunk asset optimization
 1ms asset optimization
 6ms emitting
+⋮
 ```
 
 ***

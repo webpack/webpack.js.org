@@ -446,7 +446,7 @@ loaders 的调试模式将在 webpack 3 或后续版本中取消。
 
 ## ES2015 的代码分割
 
-在 webpack 1 中，可以使用 [`require.ensure`](/guides/code-splitting-async/#require-ensure-)作为实现应用程序的懒加载 chunks 的一种方法：
+在 webpack 1 中，可以使用 [`require.ensure`](/api/module-methods#require-ensure)作为实现应用程序的懒加载 chunks 的一种方法：
 
 ```javascript
 require.ensure([], function(require) {
@@ -454,9 +454,7 @@ require.ensure([], function(require) {
 });
 ```
 
-ES2015 模块加载规范定义了 [`import()`](/guides/code-splitting-async) 方法，可以在运行时(runtime)动态地加载 ES2015 模块。
-webpack 将 `import()` 作为分割点(split-point)并将所要请求的模块(requested module)放置到一个单独的 chunk 中。
-`import()` 接收模块名作为参数，并返回一个 Promise。
+ES2015 模块加载规范定义了 [`import()`](/api/module-methods#import-) 方法，可以在运行时(runtime)动态地加载 ES2015 模块。webpack 将 `import()` 作为分割点(split-point)并将所要请求的模块(requested module)放置到一个单独的 chunk 中。`import()` 接收模块名作为参数，并返回一个 Promise。
 
 ``` js
 function onClick() {

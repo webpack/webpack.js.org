@@ -212,14 +212,13 @@ new webpack.optimize.CommonsChunkPlugin({
 
 ## Manifest file
 
-To extract the webpack bootstrap logic into a separate file, use the `CommonsChunkPlugin` on a `name` which is not defined as `entry`. Commonly the name `manifest` is used. See the [code splitting libraries guide](/guides/code-splitting-libraries/#manifest-file) for details.
+To extract the webpack bootstrap logic into a separate file, use the `CommonsChunkPlugin` on a `name` which is not defined as `entry`. Commonly the name `manifest` is used. See the [caching guide](/guides/caching) for details.
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({
   name: "manifest",
   minChunks: Infinity
 })
-
 ```
 
 ## Combining implicit common vendor chunks and manifest file
