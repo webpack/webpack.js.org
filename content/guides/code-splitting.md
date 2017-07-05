@@ -165,6 +165,8 @@ Here are some other useful plugins and loaders provide by the community for spli
 
 Two similar techniques are supported by webpack when it comes to dynamic code splitting. The first and more preferable approach is use to the [`import()` syntax](/api/module-methods#import-) that conforms to the [ECMAScript proposal](https://github.com/tc39/proposal-dynamic-import) for dynamic imports. The legacy, webpack-specific approach is to use [`require.ensure`](/api/module-methods#require-ensure). Let's try using the first of these two approaches...
 
+T> Webpack uses Promises to asynchronously load chunks. If you want to support browsers that don't have Promises like Internet Explorer, you'll need to polyfill Promises *before* loading your bundled code. 
+
 Before we start, let's remove the extra `entry` and `CommonsChunkPlugin` from our config as they won't be needed for this next demonstration:
 
 __webpack.config.js__
@@ -283,7 +285,6 @@ __src/index.js__
     document.body.appendChild(component);
   });
 ```
-
 
 ## Next Steps
 
