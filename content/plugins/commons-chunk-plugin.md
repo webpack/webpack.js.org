@@ -5,6 +5,7 @@ contributors:
   - simon04
   - christopher4lis
   - kevinzwhuang
+  - jdbevan
 ---
 
 The `CommonsChunkPlugin` is an opt-in feature that creates a separate file (known as a chunk), consisting of common modules shared between multiple entry points. By separating common modules from bundles, the resulting chunked file can be loaded once initially, and stored in cache for later use. This results in pagespeed optimizations as the browser can quickly serve the shared code from cache, rather than being forced to load a larger bundle whenever a new page is visited.
@@ -22,12 +23,15 @@ new webpack.optimize.CommonsChunkPlugin(options)
   names: string[],
   // The chunk name of the commons chunk. An existing chunk can be selected by passing a name of an existing chunk.
   // If an array of strings is passed this is equal to invoking the plugin multiple times for each chunk name.
-  // If omitted and `options.async` or `options.children` is set all chunks are used,
-  // otherwise `options.filename` is used as chunk name.
+  // If omitted and `options.async` or `options.children` is set all chunks are used, otherwise `options.filename`
+  // is used as chunk name.
+  // When using `options.async` to create common chunks from other async chunks you must specify an entry-point
+  // chunk name here instead of omitting the `option.name`.
 
   filename: string,
   // The filename template for the commons chunk. Can contain the same placeholders as `output.filename`.
   // If omitted the original filename is not modified (usually `output.filename` or `output.chunkFilename`).
+  // This option is not permitted if you're using `options.async` as well, see below for more details.
 
   minChunks: number|Infinity|function(module, count) -> boolean,
   // The minimum number of chunks which need to contain a module before it's moved into the commons chunk.
@@ -44,8 +48,9 @@ new webpack.optimize.CommonsChunkPlugin(options)
 
   async: boolean|string,
   // If `true` a new async commons chunk is created as child of `options.name` and sibling of `options.chunks`.
-  // It is loaded in parallel with `options.chunks`. It is possible to change the name of the output file
-  // by providing the desired string instead of `true`.
+  // It is loaded in parallel with `options.chunks`.
+  // Instead of using `option.filename`, it is possible to change the name of the output file by providing
+  // the desired string here instead of `true`.
 
   minSize: number,
   // Minimum size of all common module before a commons chunk is created.
