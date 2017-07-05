@@ -8,6 +8,8 @@ edit: https://github.com/babel/babel-loader/edit/master/README.md
 > webpack 1.x | babel-loader <= 6.x
 >
 > webpack 2.x | babel-loader >= 7.x (recommended) (^6.2.10 will also work, but with deprecation warnings)
+>
+> webpack 3.x | babel-loader >= 7.1
 
 ```bash
 yarn add babel-loader babel-core babel-preset-env webpack --dev
