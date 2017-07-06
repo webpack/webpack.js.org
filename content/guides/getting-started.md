@@ -252,7 +252,7 @@ bundle.js  544 kB       0  [emitted]  [big]  main
    [3] ./src/index.js 278 bytes {0} [built]
 ```
 
-T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --colors`.
+T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build --colors`.
 
 
 ## Conclusion
