@@ -67,7 +67,6 @@ T> 你可能看到项目**生成(emitted 或 emit)**贯穿我们整个文档和[
 
 webpack 的目标是，让 **webpack** 聚焦于项目中的所有资源(asset)，而浏览器不需要关注考虑这些（这并不意味着所有资源(asset)都必须打包在一起）。webpack 把[每个文件(.css, .html, .scss, .jpg, etc.) 都作为模块](/concepts/modules)处理。然而 webpack **只理解 JavaScript**。
 
-**webpack loader 会将已被添加到依赖图中的文件，_转换为模块_。 **
 **webpack loader 在文件被添加到依赖图中时，_其转换为模块_。**
 
 在更高层面，webpack 的配置有两个目标。
