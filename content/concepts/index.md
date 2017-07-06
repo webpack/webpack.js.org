@@ -17,7 +17,7 @@ contributors:
 
 ## 入口(Entry)
 
-webpack 创建应用程序所有依赖的关系图(dependency graph)。图的起点被称之为_入口起点(entry point)_。_入口起点_告诉 webpack _从哪里开始_，并遵循着依赖关系图知道_要打包什么_。可以将应用程序的_入口起点_认为是**根上下文(contextual root)** 或 **app 第一个启动文件**。
+webpack 创建应用程序所有依赖的关系图(dependency graph)。图的起点被称之为_入口起点(entry point)_。_入口起点_告诉 webpack _从哪里开始_，并根据依赖关系图确定_需要打包的内容_。可以将应用程序的_入口起点_认为是**根上下文(contextual root)** 或 **app 第一个启动文件**。
 
 在 webpack 中，我们使用 [webpack 配置对象(webpack configuration object)](/configuration) 中的 `entry` 属性来定义_入口_。
 
@@ -68,6 +68,7 @@ T> 你可能看到项目**生成(emitted 或 emit)**贯穿我们整个文档和[
 webpack 的目标是，让 **webpack** 聚焦于项目中的所有资源(asset)，而浏览器不需要关注考虑这些（这并不意味着所有资源(asset)都必须打包在一起）。webpack 把[每个文件(.css, .html, .scss, .jpg, etc.) 都作为模块](/concepts/modules)处理。然而 webpack **只理解 JavaScript**。
 
 **webpack loader 会将已被添加到依赖图中的文件，_转换为模块_。 **
+**webpack loader 在文件被添加到依赖图中时，_其转换为模块_。**
 
 在更高层面，webpack 的配置有两个目标。
 
