@@ -111,7 +111,7 @@ new webpack.optimize.CommonsChunkPlugin({
 <script src="app.js" charset="utf-8"></script>
 ```
 
-Hint: In combination with long term caching you may need to use the [`ChunkManifestWebpackPlugin`](https://github.com/diurnalist/chunk-manifest-webpack-plugin) to avoid that the vendor chunk changes. You should also use records to ensure stable module ids.
+Hint: In combination with long term caching you may need to use the [`ChunkManifestWebpackPlugin`](https://github.com/diurnalist/chunk-manifest-webpack-plugin) to avoid that the vendor chunk changes. You should also use records to ensure stable module ids. ( e.g. using `NamedModulesPlugin` or `HashedModuleIdsPlugin` ).
 
 
 ### Move common modules into the parent chunk
