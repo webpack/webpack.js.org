@@ -49,7 +49,7 @@ module.exports = MyPlugin;
 
 - `chunk.files`: 一个存放了块生成的输出文件的文件名的数组。你也许需要从 `compilation.assets` 中访问这些资源内容。
 
-### 监控跟踪图表（watch graph）
+### 监控跟踪图（watch graph）
 
 当运行 webpack 中间件时，每次编译包含了一个 `fileDependencies` 数组（哪些文件被跟踪了）和一个 `fileTimestamps` 哈希来映射被跟踪的文件路径和相应的时间戳。这可以用来检测在编译中哪些文件已经发生变化了，非常有用。
 
@@ -74,13 +74,13 @@ MyPlugin.prototype.apply = function(compiler) {
 module.exports = MyPlugin;
 ```
 
-你也可以补充新的文件路径到跟踪图表里，来接收在编译中这些文件变化时的回调触发。简单地 push 有效的文件路径到 `compilation.fileDependencies` 数组就可以把它们加入跟踪。
+你也可以补充新的文件路径到跟踪图(graph)里，来接收在编译中这些文件变化时的回调触发。简单地 push 有效的文件路径到 `compilation.fileDependencies` 数组就可以把它们加入跟踪。
 
 注意：`fileDependencies` 数组在每次编译中会被重新建立，所以你的插件必须在每次编译时向当时所属的数组 push 来保证它们能被跟踪到。
 
 ## 变化的块
 
-和跟踪图表类似，通过追踪哈希来监控一次编译中的块（或者模块，就这里而言）的变化同样简单。
+和跟踪图类似，通过追踪哈希来监控一次编译中的块（或者模块，就这里而言）的变化同样简单。
 
 ```javascript
 function MyPlugin() {
