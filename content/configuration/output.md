@@ -293,6 +293,8 @@ If using the [`output.library`](#output-library) option, the library name is aut
 
 `string`
 
+`string` or `object` (since webpack 3.1.0; for `libraryTarget: "umd"`)
+
 Use `library`, and `libraryTarget` below, when writing a JavaScript library that should export values, which can be used by other code depending on it. Pass a string with the name of the library:
 
 ``` js
@@ -303,8 +305,7 @@ The name is used depending on the value of the [`output.libraryTarget`](#output-
 
 Note that `output.libraryTarget` defaults to `var`. This means if only `output.library` is used it is exported as variable declaration (when used as script tag it's available in the global scope after execution).
 
-T> Read the [authoring libraries guide](/guides/author-libraries) guide for more information on `output.library` as well as `ouput.libraryTarget`.
-
+T> Read the [authoring libraries guide](/guides/author-libraries) guide for more information on `output.library` as well as `output.libraryTarget`.
 
 ## `output.libraryExport`
 
@@ -445,6 +446,20 @@ And finally the output is:
   //what this module returns is what your entry chunk returns
 });
 ```
+
+Since webpack 3.1.0, you may specify an object for `library` for differing names per targets:
+
+```javascript
+output: {
+  library: {
+    root: "MyLibrary",
+    amd: "my-library",
+    commonjs: "my-common-library"
+  },
+  libraryTarget: "umd"
+}
+```
+
 
 Module proof library.
 
