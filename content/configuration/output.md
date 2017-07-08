@@ -17,7 +17,7 @@ contributors:
 
 `string` `object`
 
-When used in tandem with [`output.library`](#output-library) and [`output.libraryTarget`](#output-librarytarget), this option allows users to insert comments within the export wrapper. To insert the same comment for each `libraryTarget` type, simply set `auxiliaryComment` to a string:
+在和 [`output.library`](#output-library) 和 [`output.libraryTarget`](#output-librarytarget) 一起使用时，此选项允许用户向导出容器(export wrapper)中插入注释。要为 `libraryTarget` 每种类型都插入相同的注释，只需将 `auxiliaryComment` 设置为一个字符串：
 
 ``` js
 output: {
@@ -28,7 +28,7 @@ output: {
 }
 ```
 
-which will yield the following:
+将会生成如下：
 
 ``` js
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -49,7 +49,7 @@ which will yield the following:
 });
 ```
 
-For fine-grained control over each `libraryTarget` comment, pass an object:
+对于 `libraryTarget` 每种类型的注释进行更细粒度地控制，请传入一个对象：
 
 ``` js
 auxiliaryComment: {
@@ -76,7 +76,7 @@ auxiliaryComment: {
 
 `integer`
 
-Number of milliseconds before chunk request expires, defaults to 120 000. This option is supported since webpack 2.6.0.
+chunk 请求到期之前的毫秒数，默认为 120 000。从 webpack 2.6.0 开始支持此选项。
 
 
 ## `output.crossOriginLoading`
