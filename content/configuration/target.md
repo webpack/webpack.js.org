@@ -9,13 +9,13 @@ contributors:
   - pastelsky
 ---
 
-webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `target` 的详细信息，请阅读[target 的概念页面](/concepts/targets)。
+webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `target` 的详细信息，请阅读 [target 概念页面](/concepts/targets)。
 
 ## `target`
 
 `string | function(compiler)`
 
-告知 webpack 来为目标(target)指定一个环境。
+告知 webpack 为目标(target)指定一个环境。
 
 
 ### `string`
@@ -39,9 +39,9 @@ webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `
 
 ### `function`
 
-If a function is passed, then it will be called with the compiler as a parameter. Set it to a function if none of the predefined targets from the list above meet your needs.
+如果传入一个函数，此函数调用时会传入一个 compiler 作为参数。如果以上列表中没有一个预定义的目标(target)符合你的要求，请将其设置为一个函数。
 
-For example, if you don't want any of the plugins they applied:
+例如，如果你不需要使用以上任何插件：
 
 ```js
 const options = {
@@ -49,7 +49,7 @@ const options = {
 };
 ```
 
-Or you can apply specific plugins you want:
+或者可以使用你想要指定的插件
 
 ```js
 const webpack = require("webpack");
