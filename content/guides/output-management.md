@@ -230,7 +230,7 @@ You might be wondering how webpack and its plugins seem to "know" what files are
 
 The manifest data can be extracted into a json file for easy consumption using the [`WebpackManifestPlugin`](https://github.com/danethurber/webpack-manifest-plugin).
 
-Were won't go through a full example of how to use this plugin within your projects, but you can read up on the [`manifest concepts`](/concepts/manifest) and the [`Caching`](/guides/caching) guide to find out how this ties into long term caching.
+We won't go through a full example of how to use this plugin within your projects, but you can read up on [the concept page](/concepts/manifest) and the [caching guide](/guides/caching) to find out how this ties into long term caching.
 
 
 ## Conclusion
