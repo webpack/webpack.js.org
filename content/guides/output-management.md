@@ -1,9 +1,10 @@
 ---
 title: Output Management
-sort: 4
+sort: 5
 contributors:
   - skipjack
   - TheDutchCoder
+  - Hangeer
 ---
 
 >T This guide extends on code examples found in the [`Asset Management`](/guides/asset-management) guide.
@@ -199,7 +200,7 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
++ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
   module.exports = {
     entry: {
@@ -210,8 +211,8 @@ __webpack.config.js__
 +     new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
         title: 'Output Management',
-        filename: 'index.html',
-        template: 'src/index.html'
++       filename: 'index.html',
++       template: 'src/index.html'
       })
     ],
     output: {
@@ -219,6 +220,20 @@ __webpack.config.js__
       path: path.resolve(__dirname, 'dist')
     }
   };
+```
+
+__src/index.html__
+
+``` html
+<html>
+  <head>
+    <title>Output Management</title>
+    <script src="./print.bundle.js"></script>
+  </head>
+  <body>
+    <script src="./app.bundle.js"></script>
+  </body>
+</html>
 ```
 
 Now run an `npm run build` and inspect the `/dist` folder. If everything went well you should now only see the files generated from the build and no more old files!
