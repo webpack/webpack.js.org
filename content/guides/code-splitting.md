@@ -161,7 +161,8 @@ Here are some other useful plugins and loaders provide by the community for spli
 - [`bundle-loader`](/loaders/bundle-loader): Used to split code and lazy load the resulting bundles.
 - [`promise-loader`](https://github.com/gaearon/promise-loader): Similar to the `bundle-loader` but uses promises.
 
-T> This is also very commonly used to split chunks between vendor and application code that can have common dependencies using [Explicit Vendor Chunks](/plugins/commons-chunk-plugin/#explicit-vendor-chunk)
+T> The [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) is also used to split vendor modules from core application code using [explicit vendor chunks](/plugins/commons-chunk-plugin/#explicit-vendor-chunk).
+
 
 ## Dynamic Imports
 
