@@ -307,6 +307,7 @@ Note that `output.libraryTarget` defaults to `var`. This means if only `output.l
 
 T> Read the [authoring libraries guide](/guides/author-libraries) guide for more information on `output.library` as well as `output.libraryTarget`.
 
+
 ## `output.libraryExport`
 
 `string` or `string[]` (since webpack 3.0.0)
@@ -418,7 +419,6 @@ require(['MyLibrary'], function(MyLibrary) {
 });
 ```
 
-
 `libraryTarget: "umd"` - This is a way for your library to work with all the module definitions (and where aren't modules at all). It will work with CommonJS, AMD and as global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
 
 In this case, you need the `library` property to name your module:
@@ -460,23 +460,22 @@ output: {
 }
 ```
 
-
 Module proof library.
 
 
 `libraryTarget: "assign"` - Here webpack will blindly generate an implied global.
 
- ```javascript
- MyLibrary = _entry_return_;
- ```
-Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
+``` javascript
+MyLibrary = _entry_return_;
+```
 
+Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
 
 `libraryTarget: "jsonp"` - This will wrap the return value of your entry point into a jsonp wrapper.
 
- ```javascript
- MyLibrary(_entry_return_);
- ```
+``` javascript
+MyLibrary(_entry_return_);
+```
 
 The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
 
