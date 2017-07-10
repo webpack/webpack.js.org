@@ -1,5 +1,5 @@
 ---
-title: 管理资源(Asset Management)
+title: 管理资源
 sort: 3
 contributors:
   - skipjack

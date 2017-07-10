@@ -5,9 +5,9 @@ contributors:
   - skipjack
 ---
 
-Managing webpack's [output](/configuration/output) and including it in your HTML files may not seem tough at first, but once you start [using hashes in filenames](/guides/caching) and outputting [multiple bundles](/guides/code-splitting), things can start to get a bit hairy. However, there's no need to fear as a few plugins exist that will make this process much easier to manage.
+最初，管理 webpack 的[输出](/configuration/output)并在 HTML 文件中引入这些输出文件，可能看起来并不困难，然而一旦开始对[文件名使用哈希(hash)](/guides/caching)]并输出[多个 bundle](/guides/code-splitting)，一切就开始变得毫无头绪。然而，没有必要担心，因为通过一些插件，会使这个过程更容易操控。
 
-First let's take a look at where you might stand without these plugins:
+首先，让我们来看没有使用这些插件时的初始情况：
 
 __index.html__
 
@@ -27,7 +27,7 @@ __index.html__
 </html>
 ```
 
-Here we've loaded a favicon, our stylesheet (extracted with the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin)), any libraries (split into [a separate bundle](/guides/code-splitting)), and finally our main bundle (`app.bundle.js`). This is ok, but what happens if we change our entry point names? What if we decide to take advantage of [better caching practices](/guides/caching)?
+在这里，我们加载了一个 favicon，以及我们的样式表（通过使用 [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin)提取），以及任何 library（分离到[一个单独的 bundle](/guides/code-splitting)），最后，还有我们的主要 bundle(main bundle)（即 `app.bundle.js`）。一切都是可以正常运行的，但是如果我们修改入口起点的名称，会发生​​什么？如果我们决定充分利用[更优的缓存实践](/guides/caching)，会发生​​什么？
 
 
 ## Auto-Generated HTML
