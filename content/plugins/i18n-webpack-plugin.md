@@ -25,7 +25,7 @@ plugins: [
 ```
  - `optionsObj.functionName`: the default value is `__`, you can change it to other function name.
  - `optionsObj.failOnMissing`: the default value is `false`, which will show a warning message, if the mapping text cannot be found. If set to `true`, the message will be an error message.
- - `optionsObj.hideMessage`: the default value is `false`, which will show the warning/error message. If set to `true`, the message will be hide.
+ - `optionsObj.hideMessage`: the default value is `false`, which will show the warning/error message. If set to `true`, the message will be hidden.
 
 ## Maintainers
 
