@@ -221,20 +221,6 @@ __webpack.config.js__
   };
 ```
 
-__src/index.html__
-
-``` html
-<html>
-  <head>
-    <title>Output Management</title>
-    <script src="./print.bundle.js"></script>
-  </head>
-  <body>
-    <script src="./app.bundle.js"></script>
-  </body>
-</html>
-```
-
 Now run an `npm run build` and inspect the `/dist` folder. If everything went well you should now only see the files generated from the build and no more old files!
 
 
