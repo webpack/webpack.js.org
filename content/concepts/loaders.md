@@ -23,7 +23,7 @@ npm install --save-dev css-loader
 npm install --save-dev ts-loader
 ```
 
-And then instruct webpack to use the [`css-loader`](/loaders/css-loader) for every `.css` file the and the ['ts-loader'](https://github.com/TypeStrong/ts-loader) for all `.ts` files:
+And then instruct webpack to use the [`css-loader`](/loaders/css-loader) for every `.css` file and the [`ts-loader`](https://github.com/TypeStrong/ts-loader) for all `.ts` files:
 
 **webpack.config.js**
 

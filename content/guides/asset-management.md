@@ -610,7 +610,7 @@ __src/index.js__
 -   element.appendChild(myIcon);
 -
 -   console.log(Data);
-+   element.innerHTML = 'Hello webpack';
++   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
     return element;
   }

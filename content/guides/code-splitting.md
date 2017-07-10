@@ -18,6 +18,7 @@ contributors:
   - skipjack
   - jakearchibald
   - TheDutchCoder
+  - rouzbeh84
 ---
 
 T> This guide extends the examples provided in [Getting Started](/guides/getting-started) and [Managing Built Files](/guides/output-management). Please make sure you are at least familiar with the examples provided in them.
@@ -69,15 +70,15 @@ module.exports = {
     index: './src/index.js',
     another: './src/another-module.js'
   },
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  },
   plugins: [
     new HTMLWebpackPlugin({
       title: 'Code Splitting'
     })
-  ]
+  ],
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  }
 };
 ```
 
@@ -137,7 +138,7 @@ __webpack.config.js__
   };
 ```
 
-With the `CommonsChunkPlugin` in place, we should now see the duplicate dependency removed from our `index.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. Let's do an `npm run build` to see if it worked:
+With the [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) in place, we should now see the duplicate dependency removed from our `index.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. Let's do an `npm run build` to see if it worked:
 
 ``` bash
 Hash: 70a59f8d46ff12575481
@@ -160,12 +161,14 @@ Here are some other useful plugins and loaders provide by the community for spli
 - [`bundle-loader`](/loaders/bundle-loader): Used to split code and lazy load the resulting bundles.
 - [`promise-loader`](https://github.com/gaearon/promise-loader): Similar to the `bundle-loader` but uses promises.
 
+T> The [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) is also used to split vendor modules from core application code using [explicit vendor chunks](/plugins/commons-chunk-plugin/#explicit-vendor-chunk).
+
 
 ## Dynamic Imports
 
 Two similar techniques are supported by webpack when it comes to dynamic code splitting. The first and more preferable approach is use to the [`import()` syntax](/api/module-methods#import-) that conforms to the [ECMAScript proposal](https://github.com/tc39/proposal-dynamic-import) for dynamic imports. The legacy, webpack-specific approach is to use [`require.ensure`](/api/module-methods#require-ensure). Let's try using the first of these two approaches...
 
-Before we start, let's remove the extra `entry` and `CommonsChunkPlugin` from our config as they won't be needed for this next demonstration:
+Before we start, let's remove the extra [`entry`](/concepts/entry-points/) and [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) from our config as they won't be needed for this next demonstration:
 
 __webpack.config.js__
 
@@ -212,7 +215,7 @@ webpack-demo
 |- /node_modules
 ```
 
-Now, instead of statically importing lodash, we'll use dynamic importing to separate a chunk:
+Now, instead of statically importing `lodash`, we'll use dynamic importing to separate a chunk:
 
 __src/index.js__
 
@@ -225,7 +228,7 @@ __src/index.js__
 -
 -   // Lodash, now imported by this script
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-+   return import(/* webpackChunkName: "lodash" */ 'lodash').then(module => {
++   return import(/* webpackChunkName: "lodash" */ 'lodash').then(_ => {
 +     var element = document.createElement('div');
 +
 +     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -241,7 +244,7 @@ __src/index.js__
 + })
 ```
 
-Note the use of `webpackChunkName` in the comment. This will cause our separate bundle to be named `lodash.bundle.js` instead of just `[id].bundle.js`. For more information on `webpackChunkName` and the other available options, see the [`import()` documentation](/api/module-methods#import-). Let's run webpack to see lodash separated out to a separate bundle:
+Note the use of `webpackChunkName` in the comment. This will cause our separate bundle to be named `lodash.bundle.js` instead of just `[id].bundle.js`. For more information on `webpackChunkName` and the other available options, see the [`import()` documentation](/api/module-methods#import-). Let's run webpack to see `lodash` separated out to a separate bundle:
 
 ``` bash
 Hash: a27e5bf1dd73c675d5c9
