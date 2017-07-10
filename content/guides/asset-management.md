@@ -516,9 +516,9 @@ T> 在使用 [d3](https://github.com/d3) 等工具来实现某些数据可视化
 但是，假如你无法使用新的开发方式，只能被固定于旧有开发方式，或者你有一些在多个组件（视图、模板、模块等）之间共享的资源。你仍然可以将这些资源存储在公共目录(base directory)中，甚至配合使用 [alias](/configuration/resolve#resolve-alias) 来使它们更方便 `import 导入`。
 
 
-## Wrapping up
+## 回退处理
 
-For the next guides we won't be using all the different assets we've used in this guide, so let's do some cleanup so we're prepared for the next piece of the guides [Output Management](https://webpack.js.org/guides/output-management/):
+对于接下来的指南，我们无需使用本指南中所有用到的资源，因此我们会进行一些清理工作，以便为下一部分指南中的[管理输出章节](https://webpack.js.org/guides/output-management/)做好准备：
 
 __project__
 
@@ -599,11 +599,11 @@ __src/index.js__
   function component() {
     var element = document.createElement('div');
 -
--   // Lodash, now imported by this script
+-   // Lodash，现在通过 script 标签导入
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 -   element.classList.add('hello');
 -
--   // Add the image to our existing div.
+-   // 将图像添加到我们已有的 div 中。
 -   var myIcon = new Image();
 -   myIcon.src = Icon;
 -
@@ -619,9 +619,9 @@ __src/index.js__
 ```
 
 
-## Next guide
+## 下一章节指南
 
-Let's move on to [Output Management](https://webpack.js.org/guides/output-management/)
+让我们继续移步到[管理输出](https://webpack.js.org/guides/output-management/)
 
 
 ## 延伸阅读
