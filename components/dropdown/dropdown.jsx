@@ -17,7 +17,7 @@ export default class Dropdown extends React.Component {
 				onMouseOver={ this._toggle.bind(this, true) }
 				onMouseLeave={ this._toggle.bind(this, false) }>
 				<img
-				className="dropdown__language"
+				  className="dropdown__language"
 					alt="select language"
 					src={ LanguageIcon } />
         {/* Commented out until media breakpoints are in place
