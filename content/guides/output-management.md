@@ -1,10 +1,9 @@
 ---
 title: Output Management
-sort: 5
+sort: 4
 contributors:
   - skipjack
   - TheDutchCoder
-  - Hangeer
 ---
 
 >T This guide extends on code examples found in the [`Asset Management`](/guides/asset-management) guide.
