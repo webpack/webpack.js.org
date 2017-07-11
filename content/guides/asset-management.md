@@ -591,6 +591,7 @@ __webpack.config.js__
 __src/index.js__
 
 ``` diff
+import _ from 'lodash';
 - import './style.css';
 - import Icon from './icon.png';
 - import Data from './data.xml';
