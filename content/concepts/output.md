@@ -14,7 +14,7 @@ contributors:
 在 webpack 中配置 `output` 属性的最低要求是，将它的值设置为一个对象，包括以下两点：
 
 - `filename` 用于输出文件的文件名。
-- 输出目录的 `path` 推荐使用绝对路径。
+- 目标输出目录 `path` 的绝对路径。
 
 **webpack.config.js**
 
@@ -29,7 +29,7 @@ const config = {
 module.exports = config;
 ```
 
-此配置将一个 `bundle.js` 文件输出到 `/home/proj/public/assets` 目录中。
+此配置将一个单独的 `bundle.js` 文件输出到 `/home/proj/public/assets` 目录中。
 
 
 ## 多个入口起点
@@ -71,7 +71,7 @@ output: {
 ```javascript
 __webpack_public_path__ = myRuntimePublicPath
 
-// 其他的应用程序入口
+// 剩余的应用程序入口
 ```
 
 ***
