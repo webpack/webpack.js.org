@@ -1,10 +1,10 @@
 ---
-title: Named-modules-plugin
+title: NamedModulesPlugin
 contributors:
   - shaodahong
 ---
 
-The relative path of the module is displayed when [HMR](../guides/hot-module-replacement), Suggest for use in development.
+The relative path of the module is displayed when [HMR](../guides/hot-module-replacement). Suggest for use in development.
 
 ``` js
 new webpack.NamedModulesPlugin()
