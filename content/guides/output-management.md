@@ -6,7 +6,7 @@ contributors:
   - TheDutchCoder
 ---
 
->T This guide extends on code examples found in the [`Asset Management`](/guides/asset-management) guide.
+T> This guide extends on code examples found in the [`Asset Management`](/guides/asset-management) guide.
 
 So far we've manually included all our assets in our `index.html` file, but as your application grows and once you start [using hashes in filenames](/guides/caching) and outputting [multiple bundles](/guides/code-splitting), it will be difficult to keep managing your `index.html` file manually. However, there's no need to fear as a few plugins exist that will make this process much easier to manage.
 
