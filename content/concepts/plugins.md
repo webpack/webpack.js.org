@@ -15,7 +15,7 @@ contributors:
 
 ## 剖析
 
-webpack **插件**是一个具有 [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 属性的 JavaScript 对象。 `apply` 属性会被 webpack compiler 调用，并且 compiler 对象可在**整个**  编译生命周期访问。
+webpack **插件**是一个具有 [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 属性的 JavaScript 对象。`apply` 属性会被 webpack compiler 调用，并且 compiler 对象可在**整个**编译生命周期访问。
 
 
 **ConsoleLogOnBuildWebpackPlugin.js**
