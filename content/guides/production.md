@@ -287,4 +287,4 @@ module.exports = Merge(CommonConfig, {
 
 ***
 
-> 原文：https://webpack.js.org/guides/production-build/
+> 原文：https://webpack.js.org/guides/production/

@@ -151,3 +151,7 @@ return "var runtime = require(" +
 ```
 
 使用对等依赖(peer dependency)允许应用程序开发人员在 `package.json` 中指定需要的确切版本。
+
+***
+
+> 原文：https://webpack.js.org/development/how-to-write-a-loader/

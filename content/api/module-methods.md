@@ -350,3 +350,7 @@ if(require.cache[require.resolveWeak('module')]) {
   // Do something when module was loaded before...
 }
 ```
+
+***
+
+> 原文：https://webpack.js.org/api/module-methods/

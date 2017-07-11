@@ -130,4 +130,4 @@ W> If you are using babel elsewhere and have `modules` set to `false`, you will 
 
 ***
 
-> 原文：https://webpack.js.org/configuration/external-configs/
+> 原文：https://webpack.js.org/configuration/configuration-languages/

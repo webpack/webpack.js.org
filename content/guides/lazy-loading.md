@@ -107,3 +107,7 @@ Child html-webpack-plugin for "index.html":
 Many frameworks and libraries have their own recommendations on how this should be accomplished within their methodologies. Here are a few examples:
 
 - React: [Code Splitting and Lazy Loading](https://reacttraining.com/react-router/web/guides/code-splitting)
+
+***
+
+> 原文：https://webpack.js.org/guides/lazy-loading/

@@ -1,5 +1,5 @@
 ---
-title: Typescript
+title: TypeScript
 sort: 18
 contributors:
   - morsdyce
