@@ -48,6 +48,8 @@ Note that `related` will generate a __Further Reading__ section at the bottom of
 
 ## Running the Site
 
+W> Node 6 is required to run the site locally, make sure you have the right version by running `node -v` in the command line.
+
 1. `npm install`
 2. `npm start`
 3. `open http://localhost:3000`
