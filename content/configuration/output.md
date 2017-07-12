@@ -8,6 +8,7 @@ contributors:
   - mattce
   - irth
   - fvgs
+  - dhurlburtusa
 ---
 
 `output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
@@ -216,7 +217,7 @@ T> 在使用 [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) 
 
 ## `output.hashDigest`
 
-使用散列算法，默认为 `'hex'`。支持 Node.JS [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) 的所有函数。
+在生成 hash 时使用的编码方式，默认为 `'hex'`。支持 Node.js [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) 的所有编码。
 
 
 ## `output.hashDigestLength`

@@ -18,7 +18,7 @@ export default class NotificationBar extends React.Component {
           <p>
             在 <a href="http://www.unixstickers.com/tag/webpack">Unixstickers!</a> 上购买全新的 webpack 贴纸
             {localStorageIsEnabled ?
-              <i
+              <button
                 className="notification-bar__close icon-cross"
                 onClick={ this._close.bind(this) } /> :
               null
