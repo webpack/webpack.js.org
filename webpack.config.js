@@ -4,7 +4,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var Autoprefixer = require('autoprefixer');
 var merge = require('webpack-merge');
 var webpack = require('webpack');
- environment = process.env.npm_lifecycle_event;
+var environment = process.env.npm_lifecycle_event;
 
 var cwd = process.cwd();
 var stylePaths = [
