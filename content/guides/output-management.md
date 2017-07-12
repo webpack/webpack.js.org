@@ -1,5 +1,5 @@
 ---
-title: Output Management
+title: 管理输出
 sort: 4
 contributors:
   - skipjack
