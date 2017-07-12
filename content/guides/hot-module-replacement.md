@@ -113,7 +113,7 @@ This is just one example, but there are many others that can easily trip people 
 
 ## HMR with Stylesheets
 
-Hot Module Replacement with CSS is actually fairly straightforward with the help of the `style-loader`. This loader uses `module.hot.accept` behind the scenes to patch `<style>` tags when CSS dependencies are updated. So, with the following webpack configuration...
+We take the help of the `style-loader` to achieve Hot Module Replacement with CSS. This loader uses `module.hot.accept` behind the scenes to patch `<style>` tags when CSS dependencies are updated. So, with the following webpack configuration...
 
 ``` js
 module.exports = {
