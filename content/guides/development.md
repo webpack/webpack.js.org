@@ -8,34 +8,40 @@ contributors:
   - TheDutchCoder
 ---
 
-T> This guide uses examples from the [`Webpack Guides Code Examples`](https://github.com/TheDutchCoder/webpack-guides-code-examples) repo.
+T> This guide extends on code examples found in the [`Output Management`](/guides/output-management) guide.
 
 If you've been following the guides, you should have a solid understanding of some of the webpack basics. Before we continue, let's look into setting up a development environment to make our lives a little easier.
 
-W> The tools in this guide are meant for development **only**, do not ever use them in production!
+W> The tools in this guide are __only meant for development__, please __avoid__ using them in production!!
 
 
 ## Using Source Maps
 
-When webpack creates bundles from your code, it can become difficult to track down errors and warnings in your JavaScript. For example, if you bundle three source files (`a.js`, `b.js`, and `c.js`) into one bundle (`bundle.js`) and one of the source files contains an error, you will see the error in your console coming from `bundle.js` which isn't always very helpful (you want to know which source file the error came from).
+When webpack bundles your source code, it can become difficult to track down errors and warnings to their original location. For example, if you bundle three source files (`a.js`, `b.js`, and `c.js`) into one bundle (`bundle.js`) and one of the source files contains an error, the stack trace will simply point to `bundle.js`. This isn't always very helpful as you probably want to know exactly which source file the error came from.
 
-In order to make it easier to track down errors and warnings, JavaScript offers Source Maps, which maps your compiled code back to your original source code. So if an error originates from `b.js`, the Source Map will tell you exactly that.
+In order to make it easier to track down errors and warnings, JavaScript offers Source Maps, which maps your compiled code back to your original source code. If an error originates from `b.js`, the Source Map will tell you exactly that.
 
 There are a lot of [different options](/configuration/devtool) available when it comes to Source Maps, be sure to check them out so you can configure them to your needs.
 
-For this guide, let's use the `inline-source-map` option, which is good for illustrative purposes(but don't use it in production):
+For this guide, let's use the `inline-source-map` option, which is good for illustrative purposes (though not for production):
 
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
     entry: {
       app: './src/index.js',
       print: './src/print.js'
     },
-    devtool: 'cheap-eval-source-map',
++   devtool: 'inline-source-map',
+    plugins: [
+      new HtmlWebpackPlugin({
+        title: 'Development'
+      })
+    ],
     output: {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist')
@@ -75,14 +81,14 @@ Child html-webpack-plugin for "index.html":
         + 2 hidden modules
 ```
 
- Now open the resulting `index.html` file in your browser. Click the button and look in your console where the error is displayed. The error should say something like this:
+Now open the resulting `index.html` file in your browser. Click the button and look in your console where the error is displayed. The error should say something like this:
 
  ```
  Uncaught ReferenceError: cosnole is not defined
     at HTMLButtonElement.printMe (print.js:2)
  ```
 
- We can see that the error also contains a reference to the file (`print.js`) and line number (2) where the error occurred. This is great, because now we know exactly where to look to fix the issue.
+We can see that the error also contains a reference to the file (`print.js`) and line number (2) where the error occurred. This is great, because now we know exactly where to look to fix the issue.
 
 
 ## Choosing a Development Tool
@@ -100,9 +106,9 @@ There are a couple of different options available in webpack that help you autom
 In most cases, you probably would want to use `webpack-dev-server`, but let's explore all of the above options.
 
 
-### Using Webpack Watch Mode
+### Using Watch Mode
 
-Webpack's Watch Mode allows you to watch a set of files for changing. Webpack will then automatically recompile your code for you, so you don't have to do this manually.
+You can instruct webpack to "watch" all files within your dependency graph for changes. If one of these files is updated, the code will be recompiled so you don't have to run the full build manually.
 
 Let's add an npm script that will start webpack's Watch Mode:
 
@@ -110,13 +116,13 @@ __package.json__
 
 ``` diff
   {
-    "name": "asset-management",
+    "name": "development",
     "version": "1.0.0",
     "description": "",
     "main": "webpack.config.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-+     "watch": "webpack --progress --watch",
++     "watch": "webpack --watch",
       "build": "webpack"
     },
     "keywords": [],
@@ -134,9 +140,9 @@ __package.json__
   }
 ```
 
-Now you can run `npm run watch` from the command line and you will see that webpack compiles your code, but it doesn't exit to the command line (this is because the script is still watching your files).
+You can now run `npm run watch` from the command line to see that webpack compiles your code, but doesn't exit to the command line. This is because the script is still watching your files.
 
-Let's make some changes to our code (let's remove the error we introduced):
+Now, with webpack watching your files, let's remove the error we introduced earlier:
 
 __src/print.js__
 
@@ -147,9 +153,9 @@ __src/print.js__
   }
 ```
 
-Now save your file and watch your command line, you should see webpack automatically recompile your code (but only the affected files)!
+Now save your file and keep an eye on the terminal window. You should see webpack automatically recompile the changed module!
 
-The only downside is that you have te refresh your browser in order to see the changes. It would be much nicer if that would happen automatically as well, so let's take care of that.
+The only downside is that you have to refresh your browser in order to see the changes. It would be much nicer if that would happen automatically as well, so let's try `webpack-dev-server` which will do exactly that.
 
 
 ### Using webpack-dev-server
@@ -189,7 +195,7 @@ __webpack.config.js__
   };
 ```
 
-This tells the dev server to serve our files from the `dist` folder (where our files get generated) and serve them on `localhost:8080`.
+This tells `webpack-dev-server` to serve the files from the `dist` directory on `localhost:8080`.
 
 Let's add a script to easily run the dev server as well:
 
@@ -204,7 +210,7 @@ __package.json__
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "watch": "webpack --progress --watch",
-+     "server": "webpack-dev-server --open"
++     "start": "webpack-dev-server --open"
       "build": "webpack"
     },
     "keywords": [],
@@ -222,16 +228,16 @@ __package.json__
   }
 ```
 
-Now we can run `npm run server` from the command line and we will see our browser automatically loading up a new page (usually `localhost:8080`). If you now change any of the source files and save them, the web server will automatically reload after the code has been compiled. Give it a try!
+Now we can run `npm start` from the command line and we will see our browser automatically loading up our page. If you now change any of the source files and save them, the web server will automatically reload after the code has been compiled. Give it a try!
 
 The `webpack-dev-server` comes with many configurable options. Head over to the [`documentation`](/configuration/dev-server) to learn more.
 
-T> Now that your server is working, you might want to give [`Hot Module Replacement`](/guides/hot-module-replacement) a try. It's a logical next step!
+T> Now that your server is working, you might want to give [`Hot Module Replacement`](/guides/hot-module-replacement) a try!
 
 
 ### Using webpack-dev-middleware
 
-W> This section is currently not working out of the box.
+?> This section is currently not working out of the box.
 
 
 ## Adjusting Your Text Editor
@@ -246,6 +252,6 @@ To disable this feature in some common editors, see the list below:
  * **WebStorm** - uncheck Use `"safe write"` in `Preferences > Appearance & Behavior > System Settings`.
 
 
- ## Conclusion
+## Conclusion
 
- Now that you've learned how to automatically compile your code whenever you save a file, and how to run a simple development server, you can check out the next guide that covers [`Hot Module Replacement`](/guides/hot-module-replacement).
+Now that you've learned how to automatically compile your and run a simple development server, you can check out the next guide, which will cover [`Hot Module Replacement`](/guides/hot-module-replacement).
