@@ -4,7 +4,6 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var Autoprefixer = require('autoprefixer');
 var merge = require('webpack-merge');
 var webpack = require('webpack');
-var environment = process.env.npm_lifecycle_event;
 
 var cwd = process.cwd();
 var stylePaths = [
@@ -141,7 +140,7 @@ const buildConfig = {
   }
 };
 
-module.exports = environment ? function(env) {
+module.exports = function(env) {
   switch(env) {
     case 'start':
       return merge(
@@ -160,4 +159,4 @@ module.exports = environment ? function(env) {
         buildConfig
       );
   }
-} : {};
+};

@@ -4,7 +4,7 @@ contributors:
   - shaodahong
 ---
 
-The relative path of the module is displayed when [HMR](../guides/hot-module-replacement). Suggest for use in development.
+This plugin will cause the relative path of the module is to be displayed when [HMR](/guides/hot-module-replacement) is enabled. Suggested for use in development.
 
 ``` js
 new webpack.NamedModulesPlugin()
