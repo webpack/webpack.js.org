@@ -1,6 +1,6 @@
 ---
 title: 缓存
-sort: 9
+sort: 11
 contributors:
   - okonet
   - jouni-kantola

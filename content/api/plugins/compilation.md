@@ -3,7 +3,7 @@ title: Compilation
 sort: 3
 ---
 
-Compilation 实例继承于 compiler。例如，compiler.compilation 是对所有 require 图表中对象的字面上的编译。这个对象可以访问所有的模块和它们的依赖（大部分是循环依赖）。在编译阶段，模块被加载，封闭，优化，分块，哈希和重建等等。这将是编译中任何操作主要的生命周期。
+Compilation 实例继承于 compiler。例如，compiler.compilation 是对所有 require 图(graph)中对象的字面上的编译。这个对象可以访问所有的模块和它们的依赖（大部分是循环依赖）。在编译阶段，模块被加载，封闭，优化，分块，哈希和重建等等。这将是编译中任何操作主要的生命周期。
 
 ```javascript
 compiler.plugin("compilation", function(compilation) {
@@ -14,7 +14,7 @@ compiler.plugin("compilation", function(compilation) {
 
 ## `normal-module-loader`
 
-普通模块 loader，真实地一个一个加载模块图表中所有的模块的函数。
+普通模块 loader，真实地一个一个加载模块图(graph)中所有的模块的函数。
 
 ```javascript
 compilation.plugin('normal-module-loader', function(loaderContext, module) {

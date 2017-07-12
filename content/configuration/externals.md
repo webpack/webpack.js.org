@@ -88,9 +88,17 @@ externals : {
     root: "_" // indicates global variable
   }
 }
+
+// or
+
+externals : {
+  subtract : {
+    root: ["math", "subtract"]
+  }
+}
 ```
 
-此语法用于描述所有外部 library 可用的访问方式。这里 `lodash` 这个外部 library 可以在 AMD 和 CommonJS 模块系统中通过 `lodash` 访问，但在全局变量形式下用 `_` 访问。
+此语法用于描述所有外部 library 可用的访问方式。这里 `lodash` 这个外部 library 可以在 AMD 和 CommonJS 模块系统中通过 `lodash` 访问，但在全局变量形式下用 `_` 访问。`subtract` 可以通过全局 `math` 对象下的属性 `subtract` 访问（例如 `window['math']['subtract']`）。
 
 
 ### function

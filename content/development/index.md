@@ -10,3 +10,7 @@ contributors:
 *   [插件模式](./plugin-patterns)
 *   [如何编写一个插件？](./how-to-write-a-plugin)
 *   [如何编写一个 loader？](./how-to-write-a-loader)
+
+***
+
+> 原文：https://webpack.js.org/development/

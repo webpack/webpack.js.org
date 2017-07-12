@@ -12,12 +12,14 @@ export default class Dropdown extends React.Component {
 
 		return (
 			<div
+				tabIndex="0"
 				className={ `dropdown ${className}` }
 				onMouseOver={ this._toggle.bind(this, true) }
 				onMouseLeave={ this._toggle.bind(this, false) }>
 				<img
-          className="dropdown__language"
-          src={ LanguageIcon } />
+					className="dropdown__language"
+					alt="select language"
+					src={ LanguageIcon } />
         {/* Commented out until media breakpoints are in place
         <span>{ items[0].title }</span> */}
 				<i className="dropdown__arrow" />

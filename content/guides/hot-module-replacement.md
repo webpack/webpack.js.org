@@ -1,5 +1,5 @@
 ---
-title: 模块热替换(Hot Module Replacement)
+title: 模块热替换
 sort: 6
 contributors:
   - jmreidy

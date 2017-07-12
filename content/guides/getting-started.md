@@ -1,5 +1,5 @@
 ---
-title: Getting Started
+title: 起步
 sort: 2
 contributors:
   - bebraw
@@ -13,7 +13,7 @@ contributors:
   - TheDutchCoder
 ---
 
-你可能已经知道，webpack 用于编译 JavaScript 模块。一旦完成[安装](/guides/installation)，你就可以通过 webpack 的 [CLI](/api/cli) 或 [API](/api/node) 与其配合交互。如果你还不熟悉 webpack，请阅读[核心概念](/concepts)和[打包器对比](/guides/comparison)，了解为什么你要使用 webpack，而不是社区中的其他工具。
+你可能已经知道，webpack 用于编译 JavaScript 模块。一旦完成[安装](/guides/installation)，你就可以通过 webpack 的 [CLI](/api/cli) 或 [API](/api/node) 与其配合交互。如果你还不熟悉 webpack，请阅读[核心概念](/concepts)和[打包器对比](/comparison)，了解为什么你要使用 webpack，而不是社区中的其他工具。
 
 
 ## 基本安装
@@ -137,7 +137,7 @@ __dist/index.html__
   </html>
 ```
 
-在这个设置中，`index.js` 显式要求引入的 `lodash` 必须存在，然后将它绑定为 `_`（没有全局作用域污染）。通过声明模块所需的依赖，webpack 能够利用这些信息去构建依赖图表，然后使用图表生成一个优化过的，会以正确顺序执行的 bundle。
+在这个设置中，`index.js` 显式要求引入的 `lodash` 必须存在，然后将它绑定为 `_`（没有全局作用域污染）。通过声明模块所需的依赖，webpack 能够利用这些信息去构建依赖图，然后使用图生成一个优化过的，会以正确顺序执行的 bundle。
 
 可以这样说，执行 `webpack`，会将我们的脚本作为[入口起点](/concepts/entry-points)，然后[输出](/concepts/output)为 `bundle.js`
 
@@ -257,7 +257,9 @@ T> 通过向 `npm run build` 命令和你的参数之间添加两个中横线，
 
 ## 结论
 
-现在，你已经实现了一个基本的构建过程，你应该深入了解[基本概念](/concepts)和[配置](/configuration)来更好地解 webpack 的设计。[API](/api) 章节深入介绍 webpack 提供的各种接口。或者，如果您希望通过示例学习，请在导航列表中选择指南章节。然后，请继续回到上面我们通过努力构建出细小示例，如果你一直紧跟下来，那现在应该和如下类似：
+现在，你已经实现了一个基本的构建过程，你应该移至下一章节的 [`Asset Management`](/guides/asset-management) 指南，以了解如何通过 webpack 来管理资源，例如图片、字体。此刻你的项目应该和如下类似：
+
+__project__
 
 ``` diff
 webpack-demo

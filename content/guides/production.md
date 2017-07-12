@@ -20,7 +20,7 @@ contributors:
 
 ## 自动方式
 
-运行`webpack -p` (也可以运行 `webpack --optimize-minimize --define process.env.NODE_ENV="production"`，他们是等效的)。它会执行如下步骤：
+运行`webpack -p` (也可以运行 `webpack --optimize-minimize --define process.env.NODE_ENV="'production'"`，他们是等效的)。它会执行如下步骤：
 
 - 使用 `UglifyJsPlugin` 进行 JS 文件压缩
 - 运行`LoaderOptionsPlugin`，查看其[文档](/plugins/loader-options-plugin)
@@ -287,4 +287,4 @@ module.exports = Merge(CommonConfig, {
 
 ***
 
-> 原文：https://webpack.js.org/guides/production-build/
+> 原文：https://webpack.js.org/guides/production/

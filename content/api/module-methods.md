@@ -53,7 +53,11 @@ export default {
 
 ### `import()`
 
-Dynamically load modules.
+`import('path/to/module') -> Promise`
+
+Dynamically load modules. Calls to `import()` are treated as split points, meaning the requested module and it's children are split out into a separate chunk.
+
+T> The [ES2015 Loader spec](https://whatwg.github.io/loader/) defines `import()` as method to load ES2015 modules dynamically on runtime.
 
 ``` javascript
 if ( module.hot ) {
@@ -63,8 +67,33 @@ if ( module.hot ) {
 }
 ```
 
-The compiler treats this as a split point and will split everything from `lodash` into a separate bundle. This returns a promise that will resolve to the module once the bundle has been loaded. See the [async code splitting guide](/guides/code-splitting-async) for more information.
+W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use `import()` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill). See [Shimming](/guides/shimming) for more information.
 
+The spec for `import` doesn't allow control over the chunk's name or other properties as "chunks" are only a concept within webpack. Luckily webpack allows some special parameters via comments so as to not break the spec:
+
+``` js
+import(
+  /* webpackChunkName: "my-chunk-name" */
+  /* webpackMode: "lazy" */
+  'module'
+);
+```
+
+`webpackChunkName`: A name for the new chunk. Since webpack 2.6.0, the placeholders `[index]` and `[request]` are supported within the given string to an incremented number or the actual resolved filename respectively.
+
+`webpackMode`: Since webpack 2.6.0, different modes for resolving dynamic imports can be specified. The following options are supported:
+
+- `"lazy"` (default): Generates a lazy-loadable chunk for each `import()`ed module.
+- `"lazy-once"`: Generates a single lazy-loadable chunk that can satisfy all calls to `import()`. The chunk will be fetched on the first call to `import()`, and subsequent calls to `import()` will use the same network response. Note that this only makes sense in the case of a partially dynamic statement, e.g. ``import(`./locales/${language}.json`)``, where there are multiple module paths that could potentially be requested.
+- `"eager"`: Generates no extra chunk. All modules are included in the current chunk and no additional network requests are made. A `Promise` is still returned but is already resolved. In contrast to a static import, the module isn't executed until the call to `import()` is made.
+
+T> Note that both options can be combined like so `/* webpackMode: "lazy-once", webpackChunkName: "all-i18n-data" */`. This is parsed as a JSON5 object without curly brackets.
+
+W> Fully dynamic statements, such as `import(foo)`, __will fail__ because webpack requires at least some file location information. This is because `foo` could potentially be any path to any file in your system or project. The `import()` must contain at least some information about where the module is located, so bundling can be limited to a specific directory or set of files.
+
+W> Every module that could potentially be requested on an `import()` call is included. For example, ``import(`./locale/${language}.json`)`` will cause every `.json` file in the `./locale` directory to be bundled into the new chunk. At run time, when the variable `language` has been computed, any file like `english.json` or `german.json` will be available for consumption.
+
+W> The use of `System.import` in webpack [did not fit the proposed spec](https://github.com/webpack/webpack/issues/2163), so it was deprecated in webpack [2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) in favor of `import()`.
 
 
 ## CommonJS
@@ -132,23 +161,34 @@ require.cache[module.id] !== module
 
 ### `require.ensure`
 
+W> `require.ensure()` is specific to webpack and superseded by `import()`.
+
 ``` javascript
-require.ensure(dependencies: String[], callback: function([require]), [chunkName: String])
+require.ensure(dependencies: String[], callback: function(require), errorCallback: function(error), chunkName: String)
 ```
 
-Split out the given `dependencies` to a separate bundle that that will be loaded asynchronously. When using CommonJS module syntax, this is the only way to dynamically load dependencies. Meaning, this code can be run within execution, only loading the `dependencies` if a certain conditions are met. See the [Asynchronous Code Splitting guide](/guides/code-splitting-async) for more details.
+Split out the given `dependencies` to a separate bundle that that will be loaded asynchronously. When using CommonJS module syntax, this is the only way to dynamically load dependencies. Meaning, this code can be run within execution, only loading the `dependencies` if certain conditions are met.
 
 ``` javascript
 var a = require('normal-dep');
 
-if ( /* Some Condition */ ) {
-  require.ensure(["b"], function(require) {
-    var c = require("c");
+if ( module.hot ) {
+  require.ensure(['b'], function(require) {
+    var c = require('c');
 
     // Do something special...
   });
 }
 ```
+
+The following parameters are supported in the order specified above:
+
+- `dependencies`: An array of strings declaring all modules required for the code in the `callback` to execute.
+- `callback`: A function that webpack will execute once the dependencies are loaded. An implementation of the `require` function is sent as a parameter to this function. The function body can use this to further `require()` modules it needs for execution.
+- `errorCallback`: A function that is executed when webpack fails to load the dependencies.
+- `chunkName`: A name given to the chunk created by this particular `require.ensure()`. By passing the same `chunkName` to various `require.ensure()` calls, we can combine their code into a single chunk, resulting in only one bundle that the browser must load.
+
+W> Although the implementation of `require` is passed as an argument to the `callback` function, using an arbitrary name e.g. `require.ensure([], function(request) { request('someModule'); })` isn't handled by webpack's static parser. Use `require` instead, e.g. `require.ensure([], function(require) { require('someModule'); })`.
 
 
 
@@ -310,3 +350,7 @@ if(require.cache[require.resolveWeak('module')]) {
   // Do something when module was loaded before...
 }
 ```
+
+***
+
+> 原文：https://webpack.js.org/api/module-methods/

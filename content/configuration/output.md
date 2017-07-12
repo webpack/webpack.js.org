@@ -8,9 +8,58 @@ contributors:
   - mattce
   - irth
   - fvgs
+  - dhurlburtusa
 ---
 
 `output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
+
+
+## `output.auxiliaryComment`
+
+`string` `object`
+
+在和 [`output.library`](#output-library) 和 [`output.libraryTarget`](#output-librarytarget) 一起使用时，此选项允许用户向导出容器(export wrapper)中插入注释。要为 `libraryTarget` 每种类型都插入相同的注释，只需将 `auxiliaryComment` 设置为一个字符串：
+
+``` js
+output: {
+  library: "someLibName",
+  libraryTarget: "umd",
+  filename: "someLibName.js",
+  auxiliaryComment: "Test Comment"
+}
+```
+
+将会生成如下：
+
+``` js
+(function webpackUniversalModuleDefinition(root, factory) {
+  // Test Comment
+  if(typeof exports === 'object' && typeof module === 'object')
+    module.exports = factory(require("lodash"));
+  // Test Comment
+  else if(typeof define === 'function' && define.amd)
+    define(["lodash"], factory);
+  // Test Comment
+  else if(typeof exports === 'object')
+    exports["someLibName"] = factory(require("lodash"));
+  // Test Comment
+  else
+    root["someLibName"] = factory(root["_"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {
+  // ...
+});
+```
+
+对于 `libraryTarget` 每种类型的注释进行更细粒度地控制，请传入一个对象：
+
+``` js
+auxiliaryComment: {
+  root: "Root Comment",
+  commonjs: "CommonJS Comment",
+  commonjs2: "CommonJS2 Comment",
+  amd: "AMD Comment"
+}
+```
 
 
 ## `output.chunkFilename`
@@ -28,7 +77,7 @@ contributors:
 
 `integer`
 
-Number of milliseconds before chunk request expires, defaults to 120 000. This option is supported since webpack 2.6.0.
+chunk 请求到期之前的毫秒数，默认为 120 000。从 webpack 2.6.0 开始支持此选项。
 
 
 ## `output.crossOriginLoading`
@@ -168,7 +217,7 @@ T> 在使用 [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) 
 
 ## `output.hashDigest`
 
-使用散列算法，默认为 `'hex'`。支持 Node.JS [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) 的所有函数。
+在生成 hash 时使用的编码方式，默认为 `'hex'`。支持 Node.js [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) 的所有编码。
 
 
 ## `output.hashDigestLength`

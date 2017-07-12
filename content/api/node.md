@@ -148,11 +148,12 @@ watching.invalidate();
 * 错误和警告（如有）
 * 计时
 * 模块和 chunk 信息
-* 其他信息
 
 [webpack CLI](/api/cli) 正是基于这些信息在控制台展示友好的格式输出。
 
-该对象暴露了以下方法：
+T> When using the [`MultiCompiler`](/api/plugins/compiler#multicompiler), a `MultiStats` instance is returned that fulfills the same interface as `stats`, i.e. the methods described below.
+
+此 `stats` 对象暴露了以下方法：
 
 
 ### `stats.hasErrors()`
@@ -259,9 +260,9 @@ webpack({
 ```
 
 
-## 编译到内存中(Compiling to Memory)
+## 自定义文件系统(Custom File Systems)
 
-webpack 默认将输出写入到磁盘上指定的文件中。如果你希望 webpack 将它们写入到其他类型的文件系统中（比如内存、webDAV 等），你可以在 compiler 上设置 `outputFileSystem` 选项：
+默认情况下，webpack 使用普通文件系统来读取文件并将文件写入磁盘。但是，还可以使用不同类型的文件系统（内存(memory), webDAV 等）来更改输入或输出行为。为了实现这一点，可以改变 `inputFileSystem` 或 `outputFileSystem`。例如，可以使用 [`memory-fs`](https://github.com/webpack/memory-fs) 替换默认的 `outputFileSystem`，以将文件写入到内存中，而不是写入到磁盘：
 
 ``` js
 const MemoryFS = require("memory-fs");
@@ -276,6 +277,8 @@ compiler.run((err, stats) => {
   const content = fs.readFileSync("...");
 });
 ```
+
+注意，这是 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)，使用 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 和许多其他 package 包，用于隐藏难以理解的底层文件，但是仍然可以继续为浏览器提供服务！
 
 T> 你指定的输出文件系统需要兼容 Node 自身的 [`fs`](https://nodejs.org/api/fs.html) 模块接口，接口需要提供 `mkdirp` 和 `join` 工具方法。
 

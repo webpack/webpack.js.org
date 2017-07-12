@@ -145,3 +145,7 @@ Generates a `require` function that is not parsed by webpack. Can be used to do 
 ### `DEBUG`  (webpack-specific)
 
 Equals the config option `debug`.
+
+***
+
+> 原文：https://webpack.js.org/api/module-variables/

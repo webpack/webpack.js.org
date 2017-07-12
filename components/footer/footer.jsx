@@ -19,7 +19,7 @@ export default (props) => {
 
         <section className="footer__middle">
           <Link to="/" className="footer__icon">
-            <img src={ Icon } />
+            <img src={ Icon } alt="webpack icon"/>
           </Link>
         </section>
 
