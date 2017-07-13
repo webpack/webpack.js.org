@@ -6,7 +6,7 @@ contributors:
   - TheDutchCoder
 ---
 
->T This guide extends on code examples found in the [`Asset Management`](/guides/asset-management) guide.
+T> This guide extends on code examples found in the [`Asset Management`](/guides/asset-management) guide.
 
 So far we've manually included all our assets in our `index.html` file, but as your application grows and once you start [using hashes in filenames](/guides/caching) and outputting [multiple bundles](/guides/code-splitting), it will be difficult to keep managing your `index.html` file manually. However, there's no need to fear as a few plugins exist that will make this process much easier to manage.
 
@@ -226,7 +226,7 @@ Now run an `npm run build` and inspect the `/dist` folder. If everything went we
 
 ## The Manifest
 
-You might be wondering how webpack and its plugins seem to "know" what files are being generated. The answer is in the manifest that webpack keeps to track how all the modules map to the output bundles. If you're interested in managing webpack's [`ouput`](/configuration/output) in other ways, the manifest would be a good place to start.
+You might be wondering how webpack and its plugins seem to "know" what files are being generated. The answer is in the manifest that webpack keeps to track how all the modules map to the output bundles. If you're interested in managing webpack's [`output`](/configuration/output) in other ways, the manifest would be a good place to start.
 
 The manifest data can be extracted into a json file for easy consumption using the [`WebpackManifestPlugin`](https://github.com/danethurber/webpack-manifest-plugin).
 
