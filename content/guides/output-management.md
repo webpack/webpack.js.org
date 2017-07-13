@@ -226,7 +226,7 @@ Now run an `npm run build` and inspect the `/dist` folder. If everything went we
 
 ## The Manifest
 
-You might be wondering how webpack and its plugins seem to "know" what files are being generated. The answer is in the manifest that webpack keeps to track how all the modules map to the output bundles. If you're interested in managing webpack's [`ouput`](/configuration/output) in other ways, the manifest would be a good place to start.
+You might be wondering how webpack and its plugins seem to "know" what files are being generated. The answer is in the manifest that webpack keeps to track how all the modules map to the output bundles. If you're interested in managing webpack's [`output`](/configuration/output) in other ways, the manifest would be a good place to start.
 
 The manifest data can be extracted into a json file for easy consumption using the [`WebpackManifestPlugin`](https://github.com/danethurber/webpack-manifest-plugin).
 
