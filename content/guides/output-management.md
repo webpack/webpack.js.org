@@ -3,85 +3,236 @@ title: Output Management
 sort: 4
 contributors:
   - skipjack
+  - TheDutchCoder
 ---
 
-Managing webpack's [output](/configuration/output) and including it in your HTML files may not seem tough at first, but once you start [using hashes in filenames](/guides/caching) and outputting [multiple bundles](/guides/code-splitting), things can start to get a bit hairy. However, there's no need to fear as a few plugins exist that will make this process much easier to manage.
+T> This guide extends on code examples found in the [`Asset Management`](/guides/asset-management) guide.
 
-First let's take a look at where you might stand without these plugins:
+So far we've manually included all our assets in our `index.html` file, but as your application grows and once you start [using hashes in filenames](/guides/caching) and outputting [multiple bundles](/guides/code-splitting), it will be difficult to keep managing your `index.html` file manually. However, there's no need to fear as a few plugins exist that will make this process much easier to manage.
 
-__index.html__
+## Preparation
 
-``` html
-<!doctype html>
+First, let's adjust our project a little bit:
 
-<html>
-  <head>
-    <title>Output Management</title>
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/styles.min.css" />
-    <script src="/vendor.bundle.js"></script>
-  </head>
-  <body>
-    <script src="/app.bundle.js"></script>
-  </body>
-</html>
+__project__
+
+``` diff
+  webpack-demo
+  |- package.json
+  |- webpack.config.js
+  |- /dist
+  |- /src
+    |- index.js
++   |- print.js
+  |- /node_modules
 ```
 
-Here we've loaded a favicon, our stylesheet (extracted with the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin)), any libraries (split into [a separate bundle](/guides/code-splitting)), and finally our main bundle (`app.bundle.js`). This is ok, but what happens if we change our entry point names? What if we decide to take advantage of [better caching practices](/guides/caching)?
+Let's add some logic to our `src/print.js` file:
 
+__src/print.js__
 
-## Auto-Generated HTML
+``` js
+export default function printMe() {
+  console.log('I get called from print.js!');
+}
+```
 
-In comes the [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin) to save the day. Using this plugin, you can stop hard-coding the output filenames into a manually-managed file and, instead, sit back as webpack auto-generates an `index.html` file for you. Let's take a look at what you'll need to add to your configuration:
+And use that function in our `src/index.js` file:
+
+__src/index.js__
+
+``` diff
+  import _ from 'lodash';
++ import printMe from './print.js';
+
+  function component() {
+    var element = document.createElement('div');
++   var btn = document.createElement('button');
+
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+
++   btn.innerHTML = 'Click me and check the console!';
++   btn.onclick = printMe;
++
++   element.appendChild(btn);
+
+    return element;
+  }
+
+  document.body.appendChild(component());
+```
+
+Let's also update our `dist/index.html` file, in preparation for webpack to split out entries:
+
+__dist/index.html__
+
+``` diff
+  <html>
+    <head>
+-     <title>Asset Management</title>
++     <title>Output Management</title>
++     <script src="./print.bundle.js"></script>
+    </head>
+    <body>
+-     <script src="./bundle.js"></script>
++     <script src="./app.bundle.js"></script>
+    </body>
+  </html>
+```
+
+Now adjust the config. We'll be adding our `src/print.js` as a new entry point (`print`) and we'll change the output as well, so that it will dynamically generate bundle names, based on the entry point names:
 
 __webpack.config.js__
 
-``` js
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+``` diff
+  const path = require('path');
 
-module.exports = {
-  entry: {
-    app: './src/index.js',
-    vendor: [ 'react', 'react-dom' ]
-  },
-
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].bundle.js'
-  },
-
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Output Management',
-      favicon: './favicon.ico'
-    })
-  ]
-};
+  module.exports = {
+    entry: {
+-     index: './src/index.js',
++     app: './src/index.js',
++     print: './src/print.js'
+    },
+    output: {
+-     filename: 'bundle.js',
++     filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
 ```
 
-This setup will generate the same HTML shown in the example above, excluding the extracted CSS. The plugin allows for many settings including extending your own template, minifying the output, and changing the script injection site. See [its documentation](/plugins/html-webpack-plugin) for more details.
+Let's run `npm run build` and see what this generates:
 
-T> Check out the [`HTMLWebpackTemplate`](https://github.com/jaketrent/html-webpack-template) extension for even more options including easy insertion of an `appMountId`, `meta` tags, and a `baseHref`.
+``` bash
+Hash: aa305b0f3373c63c9051
+Version: webpack 3.0.0
+Time: 536ms
+          Asset     Size  Chunks                    Chunk Names
+  app.bundle.js   545 kB    0, 1  [emitted]  [big]  app
+print.bundle.js  2.74 kB       1  [emitted]         print
+   [0] ./src/print.js 84 bytes {0} {1} [built]
+   [1] ./src/index.js 403 bytes {0} [built]
+   [3] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [4] (webpack)/buildin/module.js 517 bytes {0} [built]
+    + 1 hidden module
+```
+
+We can see that webpack generates our `print.bundle.js` and `app.bundle.js` files, which we also specified in our `index.html` file. if you open `index.html` in your browser, you can see what happens when you click the button.
+
+But what would happen if we changed the name of one of our entry points, or even added a new one? The generated bundles would be renamed on a build, but our `index.html` file would still reference the old names. Let's fix that with the [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin).
 
 
-## Multiple HTML Files
+## Setting up HtmlWebpackPlugin
 
-To generate multiple HTML files, say for a multi-page web application, you can utilize the [`MultipageWebpackPlugin`](https://github.com/mutualofomaha/multipage-webpack-plugin). This plugin is similar to the `html-webpack-plugin`, in fact it uses that plugin under the hood, however it can be used to generate an HTML file per entry point.
+First install the plugin and adjust the `webpack.config.js` file:
+
+``` bash
+npm install --save-dev html-webpack-plugin
+```
+
+__webpack.config.js__
+
+``` diff
+  const path = require('path');
++ const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+  module.exports = {
+    entry: {
+      app: './src/index.js',
+      vendor: ['lodash']
+    },
++   plugins: [
++     new HtmlWebpackPlugin({
++       title: 'Output Management'
++     })
++   ],
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
+```
+
+Before we do a build, you should know that the `HtmlWebpackPlugin` by default will generate its own `index.html` file, even though we already have one in the `dist/` folder. This means that it will replace our `index.html` file with a newly generated one. Let's see what happens when we do an `npm run build`:
+
+``` bash
+Hash: 81f82697c19b5f49aebd
+Version: webpack 2.6.1
+Time: 854ms
+           Asset       Size  Chunks                    Chunk Names
+vendor.bundle.js     544 kB       0  [emitted]  [big]  vendor
+   app.bundle.js    2.81 kB       1  [emitted]         app
+      index.html  249 bytes          [emitted]
+   [0] ./~/lodash/lodash.js 540 kB {0} [built]
+   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
+   [3] ./src/index.js 172 bytes {1} [built]
+   [4] multi lodash 28 bytes {0} [built]
+Child html-webpack-plugin for "index.html":
+       [0] ./~/lodash/lodash.js 540 kB {0} [built]
+       [1] ./~/html-webpack-plugin/lib/loader.js!./~/html-webpack-plugin/default_index.ejs 538 bytes {0} [built]
+       [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+       [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+```
+
+If you open `index.html` in your code editor, you'll see that the `HtmlWebpackPlugin` has created an entirely new file for you and that all the bundles are automatically added.
+
+If you want to learn more about all the features and options that the `HtmlWebpackPlugin` provides, then you should read up on it on the [`HtmlWebpackPlugin`](https://github.com/jantimon/html-webpack-plugin) repo.
+
+You can also take a look at [`html-webpack-template`](https://github.com/jaketrent/html-webpack-template) which provides a couple of extra features in addition to the default template.
+
+
+## Cleaning up the `/dist` folder
+
+As you might have noticed over the past guides and code example, our `/dist` folder has become quite cluttered. Webpack will generate the files and put them in the `/dist` folder for you, but it doesn't keep track of which files are actually in use by your project.
+
+In general it's good practice to clean the `/dist` folder before each build, so that only used files will be generated. Let's take care of that.
+
+A popular plugin to manage this is the [`clean-webpack-plugin`](https://www.npmjs.com/package/clean-webpack-plugin) so let's install and configure it.
+
+``` bash
+npm install clean-webpack-plugin --save-dev
+```
+
+__webpack.config.js__
+
+``` diff
+  const path = require('path');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+  module.exports = {
+    entry: {
+      app: './src/index.js',
+      vendor: ['lodash']
+    },
+    plugins: [
++     new CleanWebpackPlugin(['dist']),
+      new HtmlWebpackPlugin({
+        title: 'Output Management',
+        filename: 'index.html',
+        template: 'src/index.html'
+      })
+    ],
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
+```
+
+Now run an `npm run build` and inspect the `/dist` folder. If everything went well you should now only see the files generated from the build and no more old files!
 
 
 ## The Manifest
 
-Let's step back for a second now and ask a more high-level question -- how do these plugins know what files are being spit out? The answer is in the manifest webpack keeps to track how all your modules map to the output bundles. If you're interested in managing webpack's [output](/configuration/output) in other ways, the manifest would be a good place to start.
+You might be wondering how webpack and its plugins seem to "know" what files are being generated. The answer is in the manifest that webpack keeps to track how all the modules map to the output bundles. If you're interested in managing webpack's [`output`](/configuration/output) in other ways, the manifest would be a good place to start.
 
-This data can be extracted into a json file for easy consumption using the [`WebpackManifestPlugin`](https://github.com/danethurber/webpack-manifest-plugin) or [`ChunkManifestPlugin`](https://github.com/soundcloud/chunk-manifest-webpack-plugin). Using the `ChunkManifestPlugin`, you would specify what to name it, what variable to expose it under, and whether or not to inline it via the `html-webpack-plugin`:
+The manifest data can be extracted into a json file for easy consumption using the [`WebpackManifestPlugin`](https://github.com/danethurber/webpack-manifest-plugin).
 
-``` js
-new ChunkManifestPlugin({
-  filename: 'manifest.json',
-  manifestVariable: 'webpackManifest',
-  inlineManifest: false
-})
-```
+We won't go through a full example of how to use this plugin within your projects, but you can read up on [the concept page](/concepts/manifest) and the [caching guide](/guides/caching) to find out how this ties into long term caching.
 
-See [the concepts page](/concepts/manifest) for more background information and the [caching guide](/guides/caching) guide to find out how this ties into long term caching.
+
+## Conclusion
+
+Now that you've learned about dynamically adding bundles to your HTML, let's dive into the next guide: [`Development`](/guides/development). If you want to dive into more advanced topics, we would recommend heading over to the [`Code Splitting`](/guides/code-splitting) guide.

@@ -95,6 +95,13 @@ aliasFields: ["browser"]
 ```
 
 
+### `resolve.cacheWithContext`
+
+`boolean` (since webpack 3.1.0)
+
+If unsafe cache is enabled, includes `request.context` in the cache key. This option is taken into account by the [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve/) module. Since webpack 3.1.0 context in resolve caching is ignored when resolve or resolveLoader plugins are provided. This addresses a performance regression.
+
+
 ### `resolve.descriptionFiles`
 
 `array`
