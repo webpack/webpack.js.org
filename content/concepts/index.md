@@ -70,7 +70,7 @@ webpack 的目标是，让 **webpack** 聚焦于项目中的所有资源(asset)�
 
 **webpack loader 在文件被添加到依赖图中时，_其转换为模块_。**
 
-在更高层面，在 webpack 的配置中 **loaders** 有两个目标。
+在更高层面，在 webpack 的配置中 **loader** 有两个目标。
 
 1. 识别出(identify)应该被对应的 loader 进行转换(transform)的那些文件。(`test` 属性)
 2. 转换这些文件，从而使其能够被添加到依赖图中（并且最终添加到 bundle 中）(`use` 属性)
