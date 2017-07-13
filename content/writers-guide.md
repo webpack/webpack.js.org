@@ -46,17 +46,6 @@ Note that `related` will generate a __Further Reading__ section at the bottom of
 4. Conclusion - tell what you told and recap the main points.
 
 
-## Running the Site
-
-W> Node 6 (or higher) is required to run the site locally, make sure you have the right version by running `node -v` in the command line.
-
-1. `npm install`
-2. `npm start`
-3. `open http://localhost:3000`
-
-The site will update itself as you make changes.
-
-
 ## Typesetting
 
 * webpack should always be written in lower-case letters. Even at the beginning of a sentence. ([source](https://github.com/webpack/media#name))
