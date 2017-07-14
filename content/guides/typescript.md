@@ -1,22 +1,22 @@
 ---
-title: Typescript
+title: TypeScript
 sort: 18
 contributors:
   - morsdyce
   - kkamali
 ---
 
-[TypeScript](https://www.typescriptlang.org) is a typed superset of JavaScript that compiles to plain JavaScript. In this guide we will learn how to integrate Typescript with webpack.
+[TypeScript](https://www.typescriptlang.org) is a typed superset of JavaScript that compiles to plain JavaScript. In this guide we will learn how to integrate TypeScript with webpack.
 
 
 ## Basic Setup
 
-In order to get started with webpack and Typescript, first we must [install webpack](/guides/installation/) in our project.
+In order to get started with webpack and TypeScript, first we must [install webpack](/guides/installation/) in our project.
 
-To start using webpack with Typescript you need a couple of things:
+To start using webpack with TypeScript you need a couple of things:
 
-1. Install the Typescript compiler in your project.
-2. Install a Typescript loader (in this case we're using ts-loader).
+1. Install the TypeScript compiler in your project.
+2. Install a TypeScript loader (in this case we're using ts-loader).
 3. Create a __tsconfig.json__ file to contain our TypeScript compilation configuration.
 4. Create __webpack.config.js__ to contain our webpack configuration.
 
