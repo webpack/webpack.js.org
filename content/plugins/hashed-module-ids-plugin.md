@@ -12,14 +12,20 @@ new webpack.HashedModuleIdsPlugin({
 })
 ```
 
-## Optinos
+
+## Options
+
 This plugin supports the following options:
+
 - `hashFunction`: The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm) are supported.
 - `hashDigest`: The encoding to use when generating the hash, defaults to `'base64'`. All encodings from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported.
 - `hashDigestLength`: The prefix length of the hash digest to use, defaults to `4`.
 
+
 ## Usage
+
 Here's an example of how this plugin might be used:
+
 ``` js
 new webpack.HashedModuleIdsPlugin({
   hashFunction: 'sha256',
