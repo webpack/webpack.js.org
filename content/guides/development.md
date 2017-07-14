@@ -83,7 +83,7 @@ Child html-webpack-plugin for "index.html":
 
 Now open the resulting `index.html` file in your browser. Click the button and look in your console where the error is displayed. The error should say something like this:
 
- ```
+ ``` bash
  Uncaught ReferenceError: cosnole is not defined
     at HTMLButtonElement.printMe (print.js:2)
  ```
@@ -246,10 +246,10 @@ When using automatic compilation of your code, you could run into issues when sa
 
 To disable this feature in some common editors, see the list below:
 
- * **Sublime Text 3** - Add `atomic_save: "false"` to your user preferences.
- * **IntelliJ** - use search in the preferences to find "safe write" and disable it.
- * **Vim** - add `:set backupcopy=yes` to your settings.
- * **WebStorm** - uncheck Use `"safe write"` in `Preferences > Appearance & Behavior > System Settings`.
+* **Sublime Text 3** - Add `atomic_save: "false"` to your user preferences.
+* **IntelliJ** - use search in the preferences to find "safe write" and disable it.
+* **Vim** - add `:set backupcopy=yes` to your settings.
+* **WebStorm** - uncheck Use `"safe write"` in `Preferences > Appearance & Behavior > System Settings`.
 
 
 ## Conclusion
