@@ -293,6 +293,8 @@ JSONP 函数用于异步加载(async load) chunk，或者拼接多个初始 chun
 
 `string`
 
+`string` 或 `object`（从 webpack 3.1.0 开始；用于 `libraryTarget: "umd"`）
+
 在编写一个导出值的 JavaScript library 时，可以使用下面的 `library` 和 `libraryTarget`，导出值可以作为其他代码的依赖。传入 library 名称的字符串：
 
 ``` js
@@ -303,7 +305,7 @@ library 名称取决于 [`output.libraryTarget`](#output-librarytarget) 选项�
 
 注意，`output.libraryTarget` 的默认值是 var。这意味着，如果使用 `output.libraryTarget` 的默认值，`output.library` 会将值作为变量声明导出（当使用 script 标签时，其执行后在全局作用域可用）。
 
-有关 `output.library` 以及 `ouput.libraryTarget` 详细信息，请查看[创建 library 指南](/guides/author-libraries)。
+有关 `output.library` 以及 `output.libraryTarget` 详细信息，请查看[创建 library 指南](/guides/author-libraries)。
 
 
 ## `output.libraryExport`
@@ -417,7 +419,6 @@ require(['MyLibrary'], function(MyLibrary) {
 });
 ```
 
-
 `libraryTarget: "umd"` - 这是一种可以将你的 library 能够在所有的模块定义下都可运行的方式（并且导出的完全不是模块）。它将在 CommonJS, AMD 环境下运行，或将模块导出到 global 下的变量。了解更多请查看 [UMD 仓库](https://github.com/umdjs/umd)。
 
 在这个例子中，你需要 `library` 属性来命名你的模块：
@@ -446,20 +447,33 @@ output: {
 });
 ```
 
+从 webpack 3.1.0 开始，你可以将 `library` 指定为一个对象，用于对每个 target 起不同的名称：
+
+```javascript
+output: {
+  library: {
+    root: "MyLibrary",
+    amd: "my-library",
+    commonjs: "my-common-library"
+  },
+  libraryTarget: "umd"
+}
+```
+
 模块验证 library。
 
 
 `libraryTarget: "assign"` - 这里 webpack 会轻率地产生隐含的全局变量。
 
-```javascript
+``` javascript
 MyLibrary = _entry_return_;
 ```
-请注意，如果前面没有定义 `MyLibrary`，则 library 将被设置在全局范围内。
 
+请注意，如果前面没有定义 `MyLibrary`，则 library 将被设置在全局范围内。
 
 `libraryTarget: "jsonp"` - 这将把入口起点的返回值，包裹到一个 jsonp 包装容器中
 
-```javascript
+``` javascript
 MyLibrary(_entry_return_);
 ```
 

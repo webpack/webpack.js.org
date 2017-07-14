@@ -113,7 +113,7 @@ class Logger {
 
 ## HMR 修改样式表
 
-在 `style-loader` 的帮助下，模块热替换(Hot Module Replacement)修改 CSS 实际上相当简单。当更新 CSS 依赖模块时，此 loader 在后台使用 `module.hot.accept` 来修补(patch) `<style>` 标签。所以，可以使用以下 webpack 配置...
+我们可以使用 `style-loader` 来实现 CSS 的模块热替换(Hot Module Replacement)。当更新 CSS 依赖模块时，此 loader 在后台使用 `module.hot.accept` 来修补(patch) `<style>` 标签。所以，可以使用以下 webpack 配置...
 
 ``` js
 module.exports = {

@@ -156,9 +156,7 @@ module.exports = {
 ## 确定性的(Deterministic)哈希值
 
 为了最小化生成的文件大小，webpack 使用标识符而不是模块名称。在编译期间，生成标识符并映射到块文件名，然后放入一个名为 *chunk manifest* 的 JavaScript 对象中。
-为了生成保存在构建中的标识符，webpack 提供了 `NamedModulesPlugin`（推荐用于开发模式）和 `HashedModuleIdsPlugin`（推荐用于生产模式）这两个插件。
-
-?> When exist, link to `NamedModulesPlugin` and `HashedModuleIdsPlugin` docs pages
+为了生成保存在构建中的标识符，webpack 提供了 [`NamedModulesPlugin`](/plugins/named-modules-plugin)（推荐用于开发模式）和 [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin)（推荐用于生产模式）这两个插件。
 
 ?> Describe how the option `recordsPath` option works
 

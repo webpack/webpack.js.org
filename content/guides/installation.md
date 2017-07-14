@@ -19,7 +19,7 @@ contributors:
 
 最新的webpack版本是：
 
-[![GitHub release](https://img.shields.io/github/release/webpack/webpack.svg?style=flat-square)](https://github.com/webpack/webpack/releases)
+[![GitHub release](https://img.shields.io/npm/v/webpack.svg?label=webpack&style=flat-square&maxAge=3600)](https://github.com/webpack/webpack/releases)
 
 要安装最新版本或特定版本，请运行以下命令之一：
 
