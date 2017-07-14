@@ -2,14 +2,9 @@ import React from 'react';
 import Container from '../container/container';
 import Contributors from '../contributors/contributors';
 import Link from '../link/link';
+import Shield from '../shield/shield';
 import Items from './projects.json';
 import './organization-style';
-
-let Shield = props => (
-  <img src={
-    `https://img.shields.io/${props.content}.svg?label=${props.label}&style=flat-square&maxAge=3600` 
-  } />
-);
 
 export default props => {
   return (
@@ -32,29 +27,29 @@ export default props => {
               <Shield content={ `npm/dm/${org.npm}`} label="npm" />
               &nbsp;
               <Shield content={ `github/stars/${org.repo}` } label="&#10029;" />
-              
+
               <h6>Activity</h6>
-              <Shield 
+              <Shield
                 content={ `github/commits-since/${org.repo}/${encodeURIComponent("master@{6 months ago}")}` }
                 label="6m" />
               &nbsp;
-              <Shield 
+              <Shield
                 content={ `github/commits-since/${org.repo}/${encodeURIComponent("master@{3 months ago}")}` }
                 label="3m" />
               &nbsp;
-              <Shield 
+              <Shield
                 content={ `github/commits-since/${org.repo}/${encodeURIComponent("master@{1 month ago}")}` }
                 label="1m" />
               &nbsp;
-              <Shield 
+              <Shield
                 content={ `github/commits-since/${org.repo}/${encodeURIComponent("master@{1 week ago}")}` }
                 label="1w" />
-              
+
               <h6>Issues and PRs</h6>
               <Shield content={ `github/issues-raw/${org.repo}` } label="issues" />
               &nbsp;
               <Shield content={ `github/issues-pr-raw/${org.repo}` } label="prs" />
-              
+
               <h6>Maintainers</h6>
               {
                 (() => {
@@ -64,7 +59,7 @@ export default props => {
                   } else return <Link to="https://github.com/webpack/webpack/issues/2734">Maintainer needed...</Link>;
                 })()
               }
-              
+
             </div>
           ))
         }
