@@ -19,7 +19,7 @@ Before we begin, make sure you have a fresh version of [Node.js](https://nodejs.
 
 The latest webpack release is:
 
-[![GitHub release](https://img.shields.io/github/release/webpack/webpack.svg?style=flat-square)](https://github.com/webpack/webpack/releases)
+[![GitHub release](https://img.shields.io/npm/v/webpack.svg?label=webpack&style=flat-square&maxAge=3600)](https://github.com/webpack/webpack/releases)
 
 To install the latest release or a specific version, run one of the following commands:
 
