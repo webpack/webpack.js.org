@@ -14,7 +14,7 @@ The following sections contain all you need to know about editing and formatting
 
 ## YAML Frontmatter
 
-Each article contains a small section at the top written in [YAML Frontmatter]():
+Each article contains a small section at the top written in [YAML Frontmatter](https://jekyllrb.com/docs/frontmatter/):
 
 ``` yaml
 ---
