@@ -3,6 +3,6 @@ import Logo from '../../assets/site-logo.svg';
 
 export default () => {
   return (
-    <img className="logo" src={ Logo } />
+    <img className="logo" src={ Logo } alt="webpack logo" />
   );
 };
