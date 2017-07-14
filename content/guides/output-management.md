@@ -209,9 +209,7 @@ __webpack.config.js__
     plugins: [
 +     new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
-        title: 'Output Management',
-+       filename: 'index.html',
-+       template: 'src/index.html'
+        title: 'Output Management'
       })
     ],
     output: {
