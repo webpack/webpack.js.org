@@ -111,12 +111,12 @@ new webpack.optimize.CommonsChunkPlugin({
 <script src="app.js" charset="utf-8"></script>
 ```
 
-Hint: In combination with long term caching you may need to use the [`ChunkManifestWebpackPlugin`](https://github.com/diurnalist/chunk-manifest-webpack-plugin) to avoid that the vendor chunk changes. You should also use records to ensure stable module ids.
+T> In combination with long term caching you may need to use the [`ChunkManifestWebpackPlugin`](https://github.com/diurnalist/chunk-manifest-webpack-plugin) to avoid the vendor chunk changes. You should also use records to ensure stable module ids, e.g. using [`NamedModulesPlugin`](/plugins/named-modules-plugin) or [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin).
 
 
 ### Move common modules into the parent chunk
 
-With [Code Splitting](/guides/code-splitting) multiple child chunks of an entry chunk can have common dependencies. To prevent duplication these can be moved into the parent. This reduces overall size, but does have a negative effect on the initial load time. If it is expected that users will need to download many sibling chunks, i.e. children of the entry chunk, then this should improve load time overall.
+With [Code Splitting](/guides/code-splitting), multiple child chunks of an entry chunk can have common dependencies. To prevent duplication these can be moved into the parent. This reduces overall size, but does have a negative effect on the initial load time. If it is expected that users will need to download many sibling chunks, i.e. children of the entry chunk, then this should improve load time overall.
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({

@@ -155,9 +155,7 @@ A sample output when using `WebpackManifestPlugin` in our config looks like:
 ## Deterministic hashes
 
 To minimize the size of generated files, webpack uses identifiers instead of module names. During compilation, identifiers are generated, mapped to chunk filenames and then put into a JavaScript object called *chunk manifest*.
-To generate identifiers that are preserved over builds, webpack supplies the `NamedModulesPlugin` (recommended for development) and `HashedModuleIdsPlugin` (recommended for production).
-
-?> When exist, link to `NamedModulesPlugin` and `HashedModuleIdsPlugin` docs pages
+To generate identifiers that are preserved over builds, webpack supplies the [`NamedModulesPlugin`](/plugins/named-modules-plugin) (recommended for development) and [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin) (recommended for production).
 
 ?> Describe how the option `recordsPath` option works
 
