@@ -15,13 +15,13 @@ If you've been following the guides, you should have a solid understanding of so
 W> The tools in this guide are __only meant for development__, please __avoid__ using them in production!!
 
 
-## Using Source Maps
+## Using source maps
 
-When webpack bundles your source code, it can become difficult to track down errors and warnings to their original location. For example, if you bundle three source files (`a.js`, `b.js`, and `c.js`) into one bundle (`bundle.js`) and one of the source files contains an error, the stack trace will simply point to `bundle.js`. This isn't always very helpful as you probably want to know exactly which source file the error came from.
+When webpack bundles your source code, it can become difficult to track down errors and warnings to their original location. For example, if you bundle three source files (`a.js`, `b.js`, and `c.js`) into one bundle (`bundle.js`) and one of the source files contains an error, the stack trace will simply point to `bundle.js`. This isn't always helpful as you probably want to know exactly which source file the error came from.
 
-In order to make it easier to track down errors and warnings, JavaScript offers Source Maps, which maps your compiled code back to your original source code. If an error originates from `b.js`, the Source Map will tell you exactly that.
+In order to make it easier to track down errors and warnings, JavaScript offers [`source maps`](http://blog.teamtreehouse.com/introduction-source-maps), which maps your compiled code back to your original source code. If an error originates from `b.js`, the Source Map will tell you exactly that.
 
-There are a lot of [different options](/configuration/devtool) available when it comes to Source Maps, be sure to check them out so you can configure them to your needs.
+There are a lot of [different options](/configuration/devtool) available when it comes to source maps, be sure to check them out so you can configure them to your needs.
 
 For this guide, let's use the `inline-source-map` option, which is good for illustrative purposes (though not for production):
 
@@ -101,7 +101,7 @@ There are a couple of different options available in webpack that help you autom
 
  1. webpack's Watch Mode
  2. webpack-dev-server
- 3. webpack-dev-middlware
+ 3. webpack-dev-middleware
 
 In most cases, you probably would want to use `webpack-dev-server`, but let's explore all of the above options.
 
@@ -153,7 +153,7 @@ __src/print.js__
   }
 ```
 
-Now save your file and keep an eye on the terminal window. You should see webpack automatically recompile the changed module!
+Now save your file and check the terminal window. You should see webpack automatically recompile the changed module!
 
 The only downside is that you have to refresh your browser in order to see the changes. It would be much nicer if that would happen automatically as well, so let's try `webpack-dev-server` which will do exactly that.
 
@@ -230,14 +230,14 @@ __package.json__
 
 Now we can run `npm start` from the command line and we will see our browser automatically loading up our page. If you now change any of the source files and save them, the web server will automatically reload after the code has been compiled. Give it a try!
 
-The `webpack-dev-server` comes with many configurable options. Head over to the [`documentation`](/configuration/dev-server) to learn more.
+The `webpack-dev-server` comes with many configurable options. Head over to the [documentation](/configuration/dev-server) to learn more.
 
-T> Now that your server is working, you might want to give [`Hot Module Replacement`](/guides/hot-module-replacement) a try!
+T> Now that your server is working, you might want to give [Hot Module Replacement](/guides/hot-module-replacement) a try!
 
 
 ### Using webpack-dev-middleware
 
-?> This section is currently not working out of the box.
+?> Familiar with `webpack-dev-middleware`? We need your help! Please submit a PR to fill in the missing instructions and example here. Make sure to keep it simple as this guide is intended for beginners.
 
 
 ## Adjusting Your Text Editor
@@ -254,4 +254,4 @@ To disable this feature in some common editors, see the list below:
 
 ## Conclusion
 
-Now that you've learned how to automatically compile your and run a simple development server, you can check out the next guide, which will cover [`Hot Module Replacement`](/guides/hot-module-replacement).
+Now that you've learned how to automatically compile your and run a simple development server, you can check out the next guide, which will cover [Hot Module Replacement](/guides/hot-module-replacement).
