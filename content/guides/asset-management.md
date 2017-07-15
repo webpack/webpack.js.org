@@ -591,7 +591,7 @@ __webpack.config.js__
 __src/index.js__
 
 ``` diff
-- import _ from 'lodash';
+  import _ from 'lodash';
 - import './style.css';
 - import Icon from './icon.png';
 - import Data from './data.xml';
@@ -600,7 +600,7 @@ __src/index.js__
     var element = document.createElement('div');
 -
 -   // Lodash, now imported by this script
--   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 -   element.classList.add('hello');
 -
 -   // Add the image to our existing div.
@@ -610,7 +610,6 @@ __src/index.js__
 -   element.appendChild(myIcon);
 -
 -   console.log(Data);
-+   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
     return element;
   }
