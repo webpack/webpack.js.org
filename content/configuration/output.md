@@ -310,7 +310,46 @@ T> Read the [authoring libraries guide](/guides/author-libraries) guide for more
 
 `string` or `string[]` (since webpack 3.0.0)
 
-Allows to select an export for the library.
+> Default: `_entry_return_`
+
+Configure which module or modules will be exposed via the `libraryTarget`.
+
+The examples below demonstrate the effect of this config when using `libraryTarget: "var"`, but any target may be used.
+
+The following configurations are supported:
+
+`libraryExport: "default"` - The **default export of your entry point** will be assigned to the library target:
+
+```javascript
+// if your entry has a default export of `MyDefaultModule`
+var MyDefaultModule = _entry_return_.default;
+
+// your users will use your library like:
+MyDefaultModule.doSomething();
+```
+
+`libraryExport: "MyModule"` - The **specified module** will be assigned to the library target:
+
+```javascript
+// if your entry exports a module `MyModule`
+var MyModule = _entry_return_.MyModule;
+
+// your users will use your library like:
+MyModule.doSomething();
+```
+
+`libraryExport: ["MyModule", "MySecondModule"]` - **Each specified module** will be **independently** assigned to the library target:
+
+```javascript
+// if your entry exports modules `MyModule` and `MySecondModule`
+var MyModule = _entry_return_.MyModule;
+var MySecondModule = _entry_return_.MySecondModule;
+
+MyModule.doSomething();
+MySecondModule.doSomethingElse();
+```
+
+
 
 
 ## `output.libraryTarget`
