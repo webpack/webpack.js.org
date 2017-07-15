@@ -24,7 +24,7 @@ W> __HMR__ is not intended for use in production, meaning it should only be used
 
 ## Enabling HMR
 
-Enabling this feature is actually fairly simple. Let's take a look at how to set it up with [webpack-dev-server](https://github.com/webpack/webpack-dev-server)...
+This feature is great for productivity. Let's take a look at how to set it up with [webpack-dev-server](https://github.com/webpack/webpack-dev-server)...
 
 ``` js
 const path = require('path');
@@ -113,7 +113,7 @@ This is just one example, but there are many others that can easily trip people 
 
 ## HMR with Stylesheets
 
-Hot Module Replacement with CSS is actually fairly straightforward with the help of the `style-loader`. This loader uses `module.hot.accept` behind the scenes to patch `<style>` tags when CSS dependencies are updated. So, with the following webpack configuration...
+We can use the `style-loader` to achieve Hot Module Replacement with CSS. This loader uses `module.hot.accept` behind the scenes to patch `<style>` tags when CSS dependencies are updated. So, with the following webpack configuration...
 
 ``` js
 module.exports = {
