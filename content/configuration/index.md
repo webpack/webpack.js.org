@@ -424,7 +424,7 @@ module.exports = {
     [__filename](node#node-__filename): "mock", // boolean | "mock"
     [__dirname](node#node-__dirname): "mock", // boolean | "mock"
     [Buffer](node#node-buffer): true, // boolean | "mock"
-    [setImmediate](node#node-): true // boolean | "mock" | "empty"
+    [setImmediate](node#node-setimmediate): true // boolean | "mock" | "empty"
   },
 
   [recordsPath](other-options#recordspath): path.resolve(__dirname, "build/records.json"),
