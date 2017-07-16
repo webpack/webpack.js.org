@@ -29,6 +29,7 @@ new webpack.optimize.AggressiveSplittingPlugin(options)
 }
 ```
 
+
 ## Examples
 
 [http2-aggressive-splitting](https://github.com/webpack/webpack/tree/master/examples/http2-aggressive-splitting)
