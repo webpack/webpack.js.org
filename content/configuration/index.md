@@ -10,6 +10,7 @@ contributors:
   - terinjokes
   - mattce
   - kbariotis
+  - sterlingvix
 ---
 
 webpack is fed via a configuration object. It is passed in one of two ways depending on how you are using webpack: through the terminal or via Node.js. All the available configuration options are specified below.
@@ -414,7 +415,16 @@ module.exports = {
   },
 
   [node](node): {
-    /* TODO */
+    // Polyfills and mocks to run Node.js-
+    // environment code in non-Node environments.
+    
+    [console](node#node-console): false, // boolean | "mock"
+    [global](node#node-global): true, // boolean | "mock"
+    [process](node#node-process): true, // boolean
+    [__filename](node#node-__filename): "mock", // boolean | "mock"
+    [__dirname](node#node-__dirname): "mock", // boolean | "mock"
+    [Buffer](node#node-buffer): true, // boolean | "mock"
+    [setImmediate](node#node-): true // boolean | "mock" | "empty"
   },
 
   [recordsPath](other-options#recordspath): path.resolve(__dirname, "build/records.json"),
