@@ -10,6 +10,7 @@ contributors:
   - joshsantos
   - drpicox
   - skipjack
+  - sbaidon
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
