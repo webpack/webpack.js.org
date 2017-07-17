@@ -22,7 +22,7 @@ related:
 
 T> This examples in this guide stem from [getting started](/guides/getting-started), [output management](/guides/output-management) and [code splitting](/guides/code-splitting).
 
-So we're using webpack to bundle our modular application, deploying our `/dist` directory to the server, and clients, typically browsers, are hitting that server to grab the site and its assets. The last step can be time consuming, which is why browsers use a technique called [caching](). This allows sites to load faster with less unnecessary network traffic, however it can also cause headaches when you need new code to be picked up.
+So we're using webpack to bundle our modular application, deploying our `/dist` directory to the server, and clients, typically browsers, are hitting that server to grab the site and its assets. The last step can be time consuming, which is why browsers use a technique called [caching](https://en.wikipedia.org/wiki/Cache_(computing)). This allows sites to load faster with less unnecessary network traffic, however it can also cause headaches when you need new code to be picked up.
 
 This guide focuses on the configuration changes needed to ensure that your `output` files are cached when appropriate, but re-requested when changed.
 
@@ -241,13 +241,13 @@ runtime.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         runtime
     + 1 hidden module
 ```
 
-... we can see that all three have. This is because the [`module.id`]() of each is incremental by default, so...
+... we can see that all three have. This is because the [`module.id`](/api/module-variables#module-id-commonjs-) of each is incremental by default, so...
 
 - The `main` bundle changed because of it's new content.
 - The `vendor` bundle changed because it's `module.id` was changed.
 - And, the `runtime` bundle changed because it now contains a reference to a new module.
 
-The first and last are expected -- it's the `vendor` hash we want to fix. Luckily, there are two plugins that can help us out with this dilemma. First, the [`NamedModulesPlugin`]() which the path to the module rather than a numerical ID. While this plugin is useful during development for easier to read output, it does take a bit longer to run. The second option is the `HashedModuleIdsPlugin`, which is what we'll use as these examples are more targeted toward production builds:
+The first and last are expected -- it's the `vendor` hash we want to fix. Luckily, there are two plugins that can help us out with this dilemma. First, the [`NamedModulesPlugin`](/plugins/named-modules-plugin) which the path to the module rather than a numerical ID. While this plugin is useful during development for easier to read output, it does take a bit longer to run. The second option is the `HashedModuleIdsPlugin`, which is what we'll use as these examples are more targeted toward production builds:
 
 __webpack.config.js__
 
