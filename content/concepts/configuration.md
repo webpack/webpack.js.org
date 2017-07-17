@@ -6,9 +6,9 @@ contributors:
 - simon04
 ---
 
-你可能已经注意到，很少有 webpack 配置看起来很完全相同。这是因为 **webpack 的配置文件是 JavaScript 文件导出的一个对象。**此对象，由 webpack 根据对象定义的属性进行解析。
+你可能已经注意到，很少有 webpack 配置看起来很完全相同。这是因为 **webpack 的配置文件，是导出一个对象的 JavaScript 文件。**此对象，由 webpack 根据对象定义的属性进行解析。
 
-因为 webpack 配置是标准的 Node.js CommonJS 模块，你可以使用**如下特性**：
+因为 webpack 配置是标准的 Node.js CommonJS 模块，你**可以做到以下事情**：
 
 * 通过 `require(...)` 导入其他文件
 * 通过 `require(...)` 使用 npm 的工具函数
@@ -18,7 +18,7 @@ contributors:
 
 请在合适的时机使用这些特性。
 
-虽然技术上可行，但应避免以下做法**：
+虽然技术上可行，**但应避免以下做法**：
 
 * 在使用 webpack 命令行接口(CLI)（应该编写自己的命令行接口(CLI)，或[使用 `--env`](/configuration/configuration-types/)）时，访问命令行接口(CLI)参数
 * 导出不确定的值（调用 webpack 两次应该产生同样的输出文件）
@@ -48,7 +48,7 @@ module.exports = {
 
 查看：[导出多个配置](/configuration/configuration-types/#exporting-multiple-configurations)
 
-## 使用不同的配置语言
+## 使用其他配置语言
 
 webpack 接受以多种编程和数据语言编写的配置文件。
 
