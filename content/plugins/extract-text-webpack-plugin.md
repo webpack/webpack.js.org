@@ -6,8 +6,10 @@ edit: https://github.com/webpack-contrib/extract-text-webpack-plugin/edit/master
 ## Install
 
 ```bash
-# for webpack 2
+# for webpack 3
 npm install --save-dev extract-text-webpack-plugin
+# for webpack 2
+npm install --save-dev extract-text-webpack-plugin@2.1.2
 # for webpack 1
 npm install --save-dev extract-text-webpack-plugin@1.0.1
 ```
@@ -64,6 +66,10 @@ new ExtractTextPlugin(options: filename | object)
 * `[name]` name of the chunk
 * `[id]` number of the chunk
 * `[contenthash]` hash of the content of the extracted file
+* `[<hashType>:contenthash:<digestType>:<length>]` optionally you can configure
+  * other `hashType`s, e.g. `sha1`, `md5`, `sha256`, `sha512`
+  * other `digestType`s, e.g. `hex`, `base26`, `base32`, `base36`, `base49`, `base52`, `base58`, `base62`, `base64`
+  * and `length`, the length of the hash in chars
 
 > :warning: `ExtractTextPlugin` generates a file **per entry**, so you must use `[name]`, `[id]` or `[contenthash]` when using multiple entries.
 

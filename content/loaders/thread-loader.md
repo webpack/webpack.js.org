@@ -50,6 +50,7 @@ module.exports = {
 use: [
   {
     loader: "thread-loader",
+    // loaders with equal options will share worker pools
     options: {
       // the number of spawned workers, defaults to number of cpus
       workers: 2,
@@ -69,11 +70,36 @@ use: [
       // number of jobs the poll distributes to the workers
       // defaults to 200
       // decrease of less efficient but more fair distribution
-      poolParallelJobs: 50
+      poolParallelJobs: 50,
+
+      // name of the pool
+      // can be used to create different pools with elsewise identical options
+      name: "my-pool"
     }
   },
   "expensive-loader"
 ]
+```
+
+**prewarming**
+
+To prevent the high delay when booting workers it possible to warmup the worker pool.
+
+This boots the max number of workers in the pool and loads specified modules into the node.js module cache.
+
+``` js
+const threadLoader = require('thread-loader');
+
+threadLoader.warmup({
+  // pool options, like passed to loader options
+  // must match loader options to boot the correct pool
+}, [
+  // modules to load
+  // can be any module, i. e.
+  'babel-loader',
+  'babel-preset-es2015',
+  'sass-loader',
+]);
 ```
 
 

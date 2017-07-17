@@ -107,7 +107,7 @@ The loader supports all options supported by `istanbul-lib-instrument`
 |**`debug`**|`{Boolean}`|`false`|Turn on debugging mode|
 |**`compact`**|`{Boolean}`|`true`|Generate compact code|
 |**`autoWrap`**|`{Boolean}`|`false`|Set to `true` to allow return statements outside of functions|
-|**`esModules`**|`{Boolean}`|`true`|Set to `true` to instrument ES2015 Modules|
+|**`esModules`**|`{Boolean}`|`false`|Set to `true` to instrument ES2015 Modules|
 |**`coverageVariable`**|`{String}`|`__coverage__`|Name of global coverage variable|
 |**`preserveComments`**|`{Boolean}`|`false`|Preserve comments in `output`|
 |**`produceSourceMap`**|`{Boolean}`|`false`|Set to `true` to produce a source map for the instrumented code|
