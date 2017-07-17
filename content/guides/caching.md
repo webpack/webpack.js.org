@@ -48,7 +48,9 @@ webpack-demo
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
     entry: './src/index.js',
@@ -85,7 +87,10 @@ As we learned in [code splitting](/guides/code-splitting), the [`CommonsChunkPlu
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
++ const webpack = require('webpack');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
     entry: './src/index.js',
@@ -128,6 +133,9 @@ __webpack.config.js__
 
 ``` diff
   var path = require('path');
+  const webpack = require('webpack');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
 -   entry: './src/index.js',
@@ -136,7 +144,7 @@ __webpack.config.js__
 +     vendor: [
 +       'lodash'
 +     ]
-+   }
++   },
     plugins: [
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
@@ -247,10 +255,107 @@ runtime.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         runtime
 - The `vendor` bundle changed because it's `module.id` was changed.
 - And, the `runtime` bundle changed because it now contains a reference to a new module.
 
-The first and last are expected -- it's the `vendor` hash we want to fix. Luckily, there are two plugins that can help us out with this dilemma. First, the [`NamedModulesPlugin`](/plugins/named-modules-plugin) which the path to the module rather than a numerical ID. While this plugin is useful during development for easier to read output, it does take a bit longer to run. The second option is the `HashedModuleIdsPlugin`, which is what we'll use as these examples are more targeted toward production builds:
+The first and last are expected -- it's the `vendor` hash we want to fix. Luckily, there are two plugins that can help us out with this dilemma. First, the [`NamedModulesPlugin`](/plugins/named-modules-plugin) which the path to the module rather than a numerical ID. While this plugin is useful during development for easier to read output, it does take a bit longer to run. The second option is the [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin), which is what we'll use as these examples are more targeted toward production builds:
 
 __webpack.config.js__
 
 ``` diff
+  const path = require('path');
+  const webpack = require('webpack');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+  module.exports = {
+    entry: {
+      main: './src/index.js',
+      vendor: [
+        'lodash'
+      ]
+    },
+    plugins: [
+      new CleanWebpackPlugin(['dist']),
+      new HtmlWebpackPlugin({
+        title: 'Caching'
+      }),
++     new webpack.HashedModuleIdsPlugin(),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor'
+      }),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'runtime'
+      })
+    ],
+    output: {
+      filename: '[name].[contenthash].js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
 ```
+
+Now, despite any new local dependencies, our `vendor` hash should stay consistent between builds:
+
+``` bash
+Hash: 1f49b42afb9a5acfbaff
+Version: webpack 3.3.0
+Time: 1372ms
+                          Asset       Size  Chunks                    Chunk Names
+ vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]  [big]  vendor
+   main.d103ac311788fcb7e329.js    1.22 kB       1  [emitted]         main
+runtime.d2a6dc1ccece13f5a164.js    5.85 kB       2  [emitted]         runtime
+                     index.html  352 bytes          [emitted]
+[3Di9] ./src/print.js 62 bytes {1} [built]
+[3IRH] (webpack)/buildin/module.js 517 bytes {0} [built]
+[DuR2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [0] multi lodash 28 bytes {0} [built]
+[lVK7] ./src/index.js 421 bytes {1} [built]
+    + 1 hidden module
+```
+
+And let's modify our `src/index.js` to temporarily remove that extra dependency:
+
+__src/index.js__
+
+``` diff
+  import _ from 'lodash';
+- import Print from './print';
++ // import Print from './print';
+
+  function component() {
+    var element = document.createElement('div');
+
+    // Lodash, currently included via a script, is required for this line to work
+    // Lodash, now imported by this script
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+-   element.onClick = Print.bind(null, 'Hello webpack!');
++   // element.onClick = Print.bind(null, 'Hello webpack!');
+
+    return element;
+  }
+
+  document.body.appendChild(component());
+```
+
+And finally run our build again:
+
+``` bash
+Hash: 37e1358f135c0b992f72
+Version: webpack 3.3.0
+Time: 1557ms
+                          Asset       Size  Chunks                    Chunk Names
+ vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]  [big]  vendor
+   main.fc7f38e648da79db2aba.js  891 bytes       1  [emitted]         main
+runtime.bb5820632fb66c3fb357.js    5.85 kB       2  [emitted]         runtime
+                     index.html  352 bytes          [emitted]
+[3IRH] (webpack)/buildin/module.js 517 bytes {0} [built]
+[DuR2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [0] multi lodash 28 bytes {0} [built]
+[lVK7] ./src/index.js 427 bytes {1} [built]
+    + 1 hidden module
+```
+
+We can see that both builds yielded `eed6dcc3b30cfa138aaa` in the `vendor` bundle's filename.
+
+
+## Conclusion
+
+Caching gets messy. Plain and simple. However the walk-through above should give you a running start to deploying consistent, cache-able assets. See the _Further Reading_ section below to learn more.
