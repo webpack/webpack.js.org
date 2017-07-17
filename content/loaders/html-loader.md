@@ -15,6 +15,20 @@ By default every local `<img src="image.png">` is required (`require('./image.pn
 
 You can specify which tag-attribute combination should be processed by this loader via the query parameter `attrs`. Pass an array or a space-separated list of `<tag>:<attribute>` combinations. (Default: `attrs=img:src`)
 
+If you use `<custom-elements>`, and lots of them make use of a `custom-src` attribute, you don't have to specify each combination `<tag>:<attribute>`: just specify an empty tag like `attrs=:custom-src` and it will match every element.
+
+```js
+{
+  test: /\.(html)$/,
+  use: {
+    loader: 'html-loader',
+    options: {
+      attrs: [':data-src']
+    }
+  }
+}
+```
+
 To completely disable tag-attribute processing (for instance, if you're handling image loading on the client side) you can pass in `attrs=false`.
 
 ## Examples
