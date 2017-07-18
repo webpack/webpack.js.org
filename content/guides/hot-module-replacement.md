@@ -56,6 +56,7 @@ This feature is great for productivity. All we need to do is update our [webpack
   }
 };
 ```
+
 You can also use the CLI to modify the [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration with the following command: `webpack-dev-server --hotOnly`.
 
 Now let's update the `index.js` file so that when a change inside `print.js` is detected we tell webpack to accept the updated module.
@@ -89,6 +90,7 @@ function component() {
 
 document.body.appendChild(component());
 ```
+
 Start changing the `console.log` statement in `print.js`, and you should see the following output in the browser console.
 
 __print.js__
@@ -114,6 +116,7 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 + main.js:4330 [HMR]  - 20
 + main.js:4330 [HMR] Consider using the NamedModulesPlugin for module names.
 ```
+
 ## Gotchas
 
 Hot Module Replacement can be tricky. To show this, let's go back to our working example. If you go ahead and click the button on the example page, you will realize the console is printing the old `printMe` function.
@@ -147,12 +150,13 @@ function component() {
   btn.onclick = printMe;  // onclick event is bind to the original printMe function
 
   element.appendChild(btn);
-  
+
   return element;
 }
 
 document.body.appendChild(element);
 ```
+
 This is just one example, but there are many others that can easily trip people up. Luckily, there are a lot of loaders out there, some mentioned below, that will make using this process much easier.
 
 ## HMR with Stylesheets
@@ -217,7 +221,6 @@ body {
 ```
 
 Change the style on `body` to `background: red;` and you should immediately see the page's background color change without a full refresh.
-
 
 ## Other Code and Frameworks
 
