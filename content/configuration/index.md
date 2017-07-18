@@ -45,7 +45,7 @@ module.exports = {
 
     <details><summary>[filename](/configuration/output#output-filename): "bundle.js", // string</summary>
     [filename](/configuration/output#output-filename): "[name].js", // for multiple entry points
-    [filename](/configuration/output#output-filename): "[chunkhash].js", // for [long term caching](/guides/caching)
+    [filename](/configuration/output#output-filename): "[hash].js", // for [long term caching](/guides/caching)
     </details>
     // the filename template for entry chunks
 
