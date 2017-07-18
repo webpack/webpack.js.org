@@ -1,8 +1,11 @@
 ---
 title: Environment Variables
-sort: 13
+sort: 16
 contributors:
   - simon04
+related:
+  - title: The Fine Art of the webpack 2 Config
+    url: https://blog.flennik.com/the-fine-art-of-the-webpack-2-config-dc4d19d7f172#.297u8iuz1
 ---
 
 To disambiguate in your `webpack.config.js` between [development](/guides/development) and [production builds](/guides/production), you may use environment variables.
@@ -32,8 +35,3 @@ Use the [`cross-env`](https://www.npmjs.com/package/cross-env) package to cross-
   }
 }
 ```
-
-
-## References
-
-* https://blog.flennik.com/the-fine-art-of-the-webpack-2-config-dc4d19d7f172#.297u8iuz1

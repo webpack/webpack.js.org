@@ -293,6 +293,8 @@ If using the [`output.library`](#output-library) option, the library name is aut
 
 `string`
 
+`string` or `object` (since webpack 3.1.0; for `libraryTarget: "umd"`)
+
 Use `library`, and `libraryTarget` below, when writing a JavaScript library that should export values, which can be used by other code depending on it. Pass a string with the name of the library:
 
 ``` js
@@ -303,7 +305,7 @@ The name is used depending on the value of the [`output.libraryTarget`](#output-
 
 Note that `output.libraryTarget` defaults to `var`. This means if only `output.library` is used it is exported as variable declaration (when used as script tag it's available in the global scope after execution).
 
-T> Read the [authoring libraries guide](/guides/author-libraries) guide for more information on `output.library` as well as `ouput.libraryTarget`.
+T> Read the [authoring libraries guide](/guides/author-libraries) guide for more information on `output.library` as well as `output.libraryTarget`.
 
 
 ## `output.libraryExport`
@@ -417,7 +419,6 @@ require(['MyLibrary'], function(MyLibrary) {
 });
 ```
 
-
 `libraryTarget: "umd"` - This is a way for your library to work with all the module definitions (and where aren't modules at all). It will work with CommonJS, AMD and as global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
 
 In this case, you need the `library` property to name your module:
@@ -446,22 +447,35 @@ And finally the output is:
 });
 ```
 
+Since webpack 3.1.0, you may specify an object for `library` for differing names per targets:
+
+```javascript
+output: {
+  library: {
+    root: "MyLibrary",
+    amd: "my-library",
+    commonjs: "my-common-library"
+  },
+  libraryTarget: "umd"
+}
+```
+
 Module proof library.
 
 
 `libraryTarget: "assign"` - Here webpack will blindly generate an implied global.
 
- ```javascript
- MyLibrary = _entry_return_;
- ```
-Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
+``` javascript
+MyLibrary = _entry_return_;
+```
 
+Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
 
 `libraryTarget: "jsonp"` - This will wrap the return value of your entry point into a jsonp wrapper.
 
- ```javascript
- MyLibrary(_entry_return_);
- ```
+``` javascript
+MyLibrary(_entry_return_);
+```
 
 The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
 

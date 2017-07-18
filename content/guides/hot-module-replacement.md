@@ -11,6 +11,7 @@ contributors:
   - drpicox
   - skipjack
   - sbaidon
+  - gdi2290
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -26,7 +27,7 @@ W> __HMR__ is not intended for use in production, meaning it should only be used
 
 ## Enabling HMR
 
-Enabling this feature is actually fairly simple. All we need to do is update our [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration, and use webpack's built in HMR plugin.
+This feature is great for productivity. All we need to do is update our [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration, and use webpack's built in HMR plugin.
 
 ``` diff
   const path = require('path');
@@ -146,7 +147,7 @@ function component() {
   btn.onclick = printMe;  // onclick event is bind to the original printMe function
 
   element.appendChild(btn);
-
+  
   return element;
 }
 
@@ -226,5 +227,6 @@ There are many other loaders and examples out in the community to make HMR inter
 - [Vue Loader](https://github.com/vuejs/vue-loader): This loader supports HMR for vue components out of the box.
 - [Elm Hot Loader](https://github.com/fluxxu/elm-hot-loader): Supports HMR for the Elm programming language.
 - [Redux HMR](https://survivejs.com/webpack/appendices/hmr-with-react/#configuring-hmr-with-redux): No loader or plugin necessary! A simple change to your main store file is all that's required.
+- [Angular HMR](https://github.com/AngularClass/angular-hmr): No loader necessary! A simple change to your main NgModule file is all that's required to have full control over the HMR APIs.
 
 T> If you know of any other loaders or plugins that help with or enhance Hot Module Replacement please submit a pull request to add to this list!
