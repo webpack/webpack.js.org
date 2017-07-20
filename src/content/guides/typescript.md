@@ -87,7 +87,7 @@ We will use `ts-loader` in this guide as it makes enabling additional webpack fe
 
 ## Source Maps
 
-To learn more about Source Maps, see the [development guide](/guides/development.md).
+To learn more about source maps, see the [development guide](/guides/development).
 
 To enable source maps, we must configure TypeScript to output inline source maps to our compiled JavaScript files. The following line must be added to our `tsconfig.json`:
 
@@ -101,8 +101,8 @@ __webpack.config.js__
 
 ```js
 module.exports = {
- devtool: 'inline-source-map',
- // Remaining configuration...
+  devtool: 'inline-source-map',
+  // Remaining configuration...
 };
 ```
 
@@ -142,4 +142,4 @@ Here we declare a new module for SVGs by specifying any import that ends in `.sv
 
 [`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader)
 
-Awesome TypeScript Loader has created a [wonderful explanation](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader) of the difference between `awesome-typescript-loader` and `ts-loader`. The configuration for `awesome-typescript-loader` is more complex than `ts-loader`.
+Awesome TypeScript Loader has a [wonderful explanation](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader) of the difference between it and the `ts-loader`. The one downside is that setting up the `awesome-typescript-loader` is a bit more complex than configuring the `ts-loader`.
