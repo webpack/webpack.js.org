@@ -20,16 +20,16 @@ related:
     url: https://github.com/webpack/webpack.js.org/issues/652
 ---
 
-T> This examples in this guide stem from [getting started](/guides/getting-started), [output management](/guides/output-management) and [code splitting](/guides/code-splitting).
+T> The examples in this guide stem from [getting started](/guides/getting-started), [output management](/guides/output-management) and [code splitting](/guides/code-splitting).
 
-So we're using webpack to bundle our modular application, deploying our `/dist` directory to the server, and clients, typically browsers, are hitting that server to grab the site and its assets. The last step can be time consuming, which is why browsers use a technique called [caching](http://searchstorage.techtarget.com/definition/cache). This allows sites to load faster with less unnecessary network traffic, however it can also cause headaches when you need new code to be picked up.
+So we're using webpack to bundle our modular application which yields a deployable `/dist` directory. Once the contents of `/dist` have been deployed to a server, clients (typically browsers) will hit that server to grab the site and its assets. The last step can be time consuming, which is why browsers use a technique called [caching](http://searchstorage.techtarget.com/definition/cache). This allows sites to load faster with less unnecessary network traffic, however it can also cause headaches when you need new code to be picked up.
 
 This guide focuses on the configuration changes needed to ensure that your `output` files are cached when appropriate, but re-requested when changed.
 
 
 ## Output Filenames
 
-A simple way to ensure the browser picks up changed files is by using `output.filename` [substitutions](/configuration/output#output-filename). The `[hash]` substitution can be used to include a build-specific hash in the filename, however it's even better to use the `[chunkhash]` subsitution which include a bundle-specific hash in the filename.
+A simple way to ensure the browser picks up changed files is by using `output.filename` [substitutions](/configuration/output#output-filename). The `[hash]` substitution can be used to include a build-specific hash in the filename, however it's even better to use the `[chunkhash]` subsitution which includes a chunk-specific hash in the filename.
 
 Let's get our project set up using the example from [getting started](/guides/getting-started) with the `plugins` from [output management](/guides/output-management), so we don't have to deal with maintaining our `index.html` file manually:
 
@@ -219,7 +219,6 @@ __src/index.js__
   function component() {
     var element = document.createElement('div');
 
-    // Lodash, currently included via a script, is required for this line to work
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +   element.onClick = Print.bind(null, 'Hello webpack!');
@@ -251,11 +250,11 @@ runtime.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         runtime
 
 ... we can see that all three have. This is because the [`module.id`](/api/module-variables#module-id-commonjs-) of each is incremental by default, so...
 
-- The `main` bundle changed because of it's new content.
-- The `vendor` bundle changed because it's `module.id` was changed.
+- The `main` bundle changed because of its new content.
+- The `vendor` bundle changed because its `module.id` was changed.
 - And, the `runtime` bundle changed because it now contains a reference to a new module.
 
-The first and last are expected -- it's the `vendor` hash we want to fix. Luckily, there are two plugins that can help us out with this dilemma. First, the [`NamedModulesPlugin`](/plugins/named-modules-plugin) which the path to the module rather than a numerical ID. While this plugin is useful during development for easier to read output, it does take a bit longer to run. The second option is the [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin), which is what we'll use as these examples are more targeted toward production builds:
+The first and last are expected -- it's the `vendor` hash we want to fix. Luckily, there are two plugins that can help us out with this dilemma. The first is the [`NamedModulesPlugin`](/plugins/named-modules-plugin), which will use the path to the module rather than a numerical ID. While this plugin is useful during development for easier to read output, it does take a bit longer to run. The second option is the [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin), which is what we'll use as these examples are more targeted toward production builds:
 
 __webpack.config.js__
 
@@ -323,7 +322,6 @@ __src/index.js__
   function component() {
     var element = document.createElement('div');
 
-    // Lodash, currently included via a script, is required for this line to work
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 -   element.onClick = Print.bind(null, 'Hello webpack!');
@@ -358,4 +356,4 @@ We can see that both builds yielded `eed6dcc3b30cfa138aaa` in the `vendor` bundl
 
 ## Conclusion
 
-Caching gets messy. Plain and simple. However the walk-through above should give you a running start to deploying consistent, cache-able assets. See the _Further Reading_ section below to learn more.
+Caching gets messy. Plain and simple. However the walk-through above should give you a running start to deploying consistent, cachable assets. See the _Further Reading_ section below to learn more.
