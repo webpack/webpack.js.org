@@ -24,7 +24,7 @@ T> The examples in this guide stem from [getting started](/guides/getting-starte
 
 So we're using webpack to bundle our modular application which yields a deployable `/dist` directory. Once the contents of `/dist` have been deployed to a server, clients (typically browsers) will hit that server to grab the site and its assets. The last step can be time consuming, which is why browsers use a technique called [caching](http://searchstorage.techtarget.com/definition/cache). This allows sites to load faster with less unnecessary network traffic, however it can also cause headaches when you need new code to be picked up.
 
-This guide focuses on the configuration changes needed to ensure that your `output` files are cached when appropriate, but re-requested when changed.
+This guide focuses on the configuration needed to ensure files produced by webpack compilation can remain cached unless their contents has changed.
 
 
 ## Output Filenames
@@ -73,7 +73,7 @@ Running our build script, `npm run build`, with this configuration should produc
 
 ?> Add bash output
 
-Now our bundle's name should change to reflect its content, meaning if `src/index.js` is changed, the filename should change. However, if we run another build, we'll see that this is not the case:
+As you can see the bundle's name now reflects its content (via the hash). If we run another build without making any changes, we'd expect that filename to stay the same. However, upon running it, we'll see that this is not the case:
 
 ?> Add bash output
 
@@ -111,7 +111,7 @@ __webpack.config.js__
   };
 ```
 
-Now let's run a build to see if it worked:
+Let's run another build to see the extracted `runtime` bundle:
 
 ``` bash
 Hash: 80552632979856ddab34
@@ -127,7 +127,7 @@ runtime.719796322be98041fff2.js    5.82 kB       1  [emitted]         runtime
     + 1 hidden module
 ```
 
-Another thing we may want to extract is our core third-party libraries, in our case `lodash`, as they are less likely to change than our source code. This step will allow clients to request even less from the server to stay up to date. Let's do this using a combination of a new `entry` point along with another `CommonsChunkPlugin` instance:
+It's also good practice to extract third-party libraries, such as `lodash` or `react`, to a separate `vendor` chunk as they are less likely to change than our local source code. This step will allow clients to request even less from the server to stay up to date. This can be done by using a combination of a new `entry` point along with another `CommonsChunkPlugin` instance:
 
 __webpack.config.js__
 
@@ -164,7 +164,7 @@ __webpack.config.js__
   };
 ```
 
-W> Note that order matters here. The `'vendor'` instance must be included prior to the `'runtime'` instance.
+W> Note that order matters here. The `'vendor'` instance of the `CommonsChunkPlugin` must be included prior to the `'runtime'` instance.
 
 Let's run another build to see our new `vendor` bundle:
 
@@ -248,13 +248,13 @@ runtime.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         runtime
     + 1 hidden module
 ```
 
-... we can see that all three have. This is because the [`module.id`](/api/module-variables#module-id-commonjs-) of each is incremental by default, so...
+... we can see that all three have. This is because each [`module.id`](/api/module-variables#module-id-commonjs-) is incremented based on resolving order by default. Meaning when the order of resolving is changed, the IDs will be changed as well. So, to recap:
 
 - The `main` bundle changed because of its new content.
 - The `vendor` bundle changed because its `module.id` was changed.
 - And, the `runtime` bundle changed because it now contains a reference to a new module.
 
-The first and last are expected -- it's the `vendor` hash we want to fix. Luckily, there are two plugins that can help us out with this dilemma. The first is the [`NamedModulesPlugin`](/plugins/named-modules-plugin), which will use the path to the module rather than a numerical ID. While this plugin is useful during development for easier to read output, it does take a bit longer to run. The second option is the [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin), which is what we'll use as these examples are more targeted toward production builds:
+The first and last are expected -- it's the `vendor` hash we want to fix. Luckily, there are two plugins we can use to resolve this issue. The first is the [`NamedModulesPlugin`](/plugins/named-modules-plugin), which will use the path to the module rather than a numerical identifier. While this plugin is useful during development for more readable output, it does take a bit longer to run. The second option is the [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin), which is recommended for production builds:
 
 __webpack.config.js__
 
