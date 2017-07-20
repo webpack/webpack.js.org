@@ -22,7 +22,7 @@ related:
 
 T> This examples in this guide stem from [getting started](/guides/getting-started), [output management](/guides/output-management) and [code splitting](/guides/code-splitting).
 
-So we're using webpack to bundle our modular application, deploying our `/dist` directory to the server, and clients, typically browsers, are hitting that server to grab the site and its assets. The last step can be time consuming, which is why browsers use a technique called [caching](https://en.wikipedia.org/wiki/Cache_(computing)). This allows sites to load faster with less unnecessary network traffic, however it can also cause headaches when you need new code to be picked up.
+So we're using webpack to bundle our modular application, deploying our `/dist` directory to the server, and clients, typically browsers, are hitting that server to grab the site and its assets. The last step can be time consuming, which is why browsers use a technique called [caching](http://searchstorage.techtarget.com/definition/cache). This allows sites to load faster with less unnecessary network traffic, however it can also cause headaches when you need new code to be picked up.
 
 This guide focuses on the configuration changes needed to ensure that your `output` files are cached when appropriate, but re-requested when changed.
 
