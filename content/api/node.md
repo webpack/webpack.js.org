@@ -146,7 +146,7 @@ watching.invalidate();
 `stats` 对象会被作为 [`webpack()`](#webpack-) 回调函数的第二个参数传入，可以通过它获取到代码编译过程中的有用信息，包括：
 
 * 错误和警告（如果有的话）
-* 计时
+* 计时信息
 * Module 和 Chunk 信息
 
 [webpack CLI](/api/cli) 正是基于这些信息在控制台展示友好的格式输出。
