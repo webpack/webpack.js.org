@@ -139,7 +139,7 @@ __webpack.config.js__
   module.exports = {
     entry: {
       app: './src/index.js',
-      vendor: ['lodash']
+      print: './src/print.js'
     },
 +   plugins: [
 +     new HtmlWebpackPlugin({
@@ -204,7 +204,7 @@ __webpack.config.js__
   module.exports = {
     entry: {
       app: './src/index.js',
-      vendor: ['lodash']
+      print: './src/print.js'
     },
     plugins: [
 +     new CleanWebpackPlugin(['dist']),
