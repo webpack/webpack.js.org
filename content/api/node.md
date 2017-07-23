@@ -19,7 +19,7 @@ webpack 提供了 Node.js API，可以在 Node.js 运行时下直接使用。
 npm install --save-dev webpack
 ```
 
-然后在 Node.js 脚本中 `require` webpack 模块：
+然后在 Node.js 脚本中 `require` webpack module：
 
 ``` js
 const webpack = require("webpack");
@@ -65,7 +65,7 @@ T> webpack **不**会并行执行多个配置。每个配置只会在前一个�
 
 ## Compiler 实例(Compiler Instance)
 
-如果你不传入回调函数到 `webpack` 执行函数中，就会得到一个 webpack `Compiler` 实例。你可以通过它手动触发 webpack 执行器，或者是让它执行构建并监听变更。和 [CLI](/api/cli/) API 很类似。`Compiler` 实例提供了以下方法：
+如果你不向 `webpack` 执行函数传入回调函数，就会得到一个 webpack `Compiler` 实例。你可以通过它手动触发 webpack 执行器，或者是让它执行构建并监听变更。和 [CLI](/api/cli/) API 很类似。`Compiler` 实例提供了以下方法：
 
 * `.run(callback)`
 * `.watch(watchOptions, handler)`
@@ -145,15 +145,15 @@ watching.invalidate();
 
 `stats` 对象会被作为 [`webpack()`](#webpack-) 回调函数的第二个参数传入，可以通过它获取到代码编译过程中的有用信息，包括：
 
-* 错误和警告（如有）
-* 计时
-* 模块和 chunk 信息
+* 错误和警告（如果有的话）
+* 计时信息
+* module 和 chunk 信息
 
 [webpack CLI](/api/cli) 正是基于这些信息在控制台展示友好的格式输出。
 
 T> When using the [`MultiCompiler`](/api/plugins/compiler#multicompiler), a `MultiStats` instance is returned that fulfills the same interface as `stats`, i.e. the methods described below.
 
-此 `stats` 对象暴露了以下方法：
+`stats` 对象暴露了以下方法：
 
 
 ### `stats.hasErrors()`
@@ -181,9 +181,9 @@ stats.toJson({
 });
 ```
 
-所有可用的配置选项和预设值记录在 [Stats 文档](/configuration/stats)。
+所有可用的配置选项和预设值都可查询 [Stats 文档](/configuration/stats)。
 
-> 这里有 [该函数输出的示例](https://github.com/webpack/analyse/blob/master/app/pages/upload/example.json)
+> 这里有[一个该函数输出的示例](https://github.com/webpack/analyse/blob/master/app/pages/upload/example.json)
 
 
 ### `stats.toString(options)`
@@ -226,7 +226,7 @@ webpack({
 完备的错误处理中需要考虑以下三种类型的错误：
 
 * 致命的 wepback 错误（配置出错等）
-* 编译错误（缺失的模块，语法错误等）
+* 编译错误（缺失的 module，语法错误等）
 * 编译警告
 
 下面是一个覆盖这些场景的示例：
@@ -278,7 +278,7 @@ compiler.run((err, stats) => {
 });
 ```
 
-注意，这是 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)，使用 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 和许多其他 package 包，用于隐藏难以理解的底层文件，但是仍然可以继续为浏览器提供服务！
+值得一提的是， 被 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 及众多其他包依赖的 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) 就是通过这种方式，将你的文件神秘地隐藏起来，但却仍然可以用它们为浏览器提供服务！
 
 T> 你指定的输出文件系统需要兼容 Node 自身的 [`fs`](https://nodejs.org/api/fs.html) 模块接口，接口需要提供 `mkdirp` 和 `join` 工具方法。
 
