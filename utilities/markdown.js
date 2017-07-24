@@ -245,8 +245,10 @@ function handleTable(t) {
         let nextIndex = errorIndex + 1;
         let value = row[errorIndex];
 
-        row[errorIndex] = `${value.slice(0, -1)}|${row[nextIndex]}`;
-        row.splice(nextIndex, 1);
+        if (value) {
+          row[errorIndex] = `${value.slice(0, -1)}|${row[nextIndex]}`;
+          row.splice(nextIndex, 1);
+        }
       });
     }
 
