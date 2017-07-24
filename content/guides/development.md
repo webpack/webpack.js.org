@@ -1,5 +1,5 @@
 ---
-title: 开发(Development)
+title: 开发
 sort: 5
 contributors:
   - SpaceK33z

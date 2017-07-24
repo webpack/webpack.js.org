@@ -8,7 +8,7 @@ contributors:
   - eko3alpha
 ---
 
-webpack has a rich plugin interface. Most of the features within webpack itself use this plugin interface. This makes webpack **flexible**.
+webpack 有着丰富的插件接口(rich plugin interface)。webpack 自身的多数功能都使用这个插件接口。这个插件接口使 webpack 变得**极其灵活**。
 
 Name                                                     | Description
 -------------------------------------------------------- | -----------
