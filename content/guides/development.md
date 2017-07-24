@@ -38,6 +38,7 @@ __webpack.config.js__
     },
 +   devtool: 'inline-source-map',
     plugins: [
+      new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
         title: 'Development'
       })
@@ -184,6 +185,7 @@ __webpack.config.js__
 +     contentBase: './dist'
 +   },
     plugins: [
+      new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
         title: 'Development'
       })
@@ -203,7 +205,7 @@ __package.json__
 
 ``` diff
   {
-    "name": "asset-management",
+    "name": "development",
     "version": "1.0.0",
     "description": "",
     "main": "webpack.config.js",
