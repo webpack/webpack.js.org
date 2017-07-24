@@ -277,14 +277,16 @@ module.exports = function (css) {
 ```
 
 ### `insertInto`
-默认情况下，样式加载器将 `<style>` 元素插入到页面的 `<head>` 标签中。如果您希望将此 style 标签插入其他位置，例如，在 [ShadowRoot](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot) 中，您可以指定该元素的 CSS 选择器，如下
+默认情况下，样式加载器将 `<style>` 元素插入到页面的 `<head>` 标签中。
+如果要将标签插入到其他位置，可以在这里为该元素指定 CSS 选择器。如果你想要插入到 [IFrame](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement) 中，请确保你具有足够的访问权限，样式将被注入到内容文档的 head 中。
+你还可以将样式插入到 [ShadowRoot](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot) 中，如下
 
 **webpack.config.js**
 ```js
 {
   loader: 'style-loader'
   options: {
-    insertAt: '#host::shadow>#root'
+    insertInto: '#host::shadow>#root'
   }
 }
 ```

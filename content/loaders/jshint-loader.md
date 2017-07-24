@@ -3,7 +3,7 @@ title: jshint-loader
 source: https://raw.githubusercontent.com/webpack-contrib/jshint-loader/master/README.md
 edit: https://github.com/webpack-contrib/jshint-loader/edit/master/README.md
 ---
-## Install
+## 安装
 
 ```bash
 npm i jshint-loader --save
@@ -35,9 +35,11 @@ module.exports = {
 		// 查询jslint配置项，请参考 http://www.jshint.com/docs/options/
 		// 例如
 		camelcase: true,
-		//jslint的错误信息在默认情况下会显示为warning（警告）类信息
-		//将emitErrors参数设置为true可使错误显示为error（错误）类信息
+
+		//jslint 的错误信息在默认情况下会显示为 warning（警告）类信息
+		//将 emitErrors 参数设置为true可使错误显示为error（错误）类信息
 		emitErrors: false,
+
     //jshint默认情况下不会打断webpack编译
     //如果你想在jshint出现错误时，立刻停止编译
     //请设置failOnHint参数为true
@@ -50,11 +52,13 @@ module.exports = {
 ```
 
 ## 自定义报告函数
+
 在默认情况下，`jshint-loader`会提供一个默认的报告方法。
 
 然而，如果你想自定义报告函数，你可以在`jshint`配置下 key 为`report`下的配置项里传入自定义的函数。（参考上文的*用法*）
 
-然后，jshint将会生成与以下示例结构一致的错误/警告信息（数组）给报告函数。
+然后，jshint 将会生成与以下示例结构一致的
+错误/警告信息（数组）给报告函数。
 ```js
 [
 {
@@ -73,9 +77,13 @@ module.exports = {
 // 更多的错误/警告
 ]
 ```
-报告函数会将loader的上下文信息保存在`this`后执行。你可以使用`this.emitWarning(...)`或者`this.emitError(...)`方法,手动触发信息的报告。请参考[关于loader上下文的webpack文档](https://webpack.js.org/api/loaders/#the-loader-context).
-####**注意:** `jshint reporters` 是与  `jshint-loader` **不兼容**的!
-这是因为reporter的输入来源，只能从一个文件，而不能同时从多个文件读取。在这种方式下的错误报告，是与jshint的[传统 reporters ](http://www.jshint.com/docs/reporters/) 不一样的，因为loader插件（例如 jshint-loader）是会在每一个源文件上执行的，因此它们的报告函数也会分别对应每一个源文件上执行。
+
+报告函数会将 loader 的上下文信息保存在 `this` 后执行。你可以使用 `this.emitWarning(...)` 或者 `this.emitError(...)` 方法，手动触发信息的报告。请参考[关于 loader 上下文的 webpack 文档](https://webpack.js.org/api/loaders/#the-loader-context).
+
+####**注意：**`jshint reporters` 是与 `jshint-loader` **不兼容**的！
+这是因为 reporter 的输入来源，只能从一个文件，而不能同时从多个文件读取。在这种方式下的错误报告，是与 jshint 的[传统 reporters](http://www.jshint.com/docs/reporters/)  不一样的，
+因为 loader 插件（例如 jshint-loader）是会在每一个源文件上执行的，因此它们的报告函数也会分别对应每一个源文件上执行。
+
 webpack控制台输出的格式大致如下：
 ```js
 ...
@@ -87,7 +95,7 @@ WARNING in ./path/to/file.js
 ```
 `
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>

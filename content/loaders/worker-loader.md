@@ -81,6 +81,24 @@ self.postMessage({foo: 'foo'})
 self.addEventListener('message', (event) => { console.log(event); });
 ```
 
+### Integrating with TypeScript
+
+To integrate with TypeScript, you will need to define a custom module for the exports of your worker. You will also need to cast the new worker as the `Worker` type:
+
+**typings/custom.d.ts**
+```
+declare module "worker-loader!*" {
+  const content: any;
+  export = content;
+}
+```
+
+**App.ts**
+```
+import * as MyWorker from "worker-loader!../../worker";
+const worker: Worker = new MyWorker();
+```
+
 ## 维护人员
 
 <table>

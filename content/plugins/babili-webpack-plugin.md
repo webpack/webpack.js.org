@@ -34,6 +34,7 @@ module.exports = {
 + `test`: JS文件拓展名正则表达式。 默认： `/\.js($|\?)/i`
 + `comments`: 保留注释。 默认： `/@preserve|@licen(s|c)e/`。使用假值来移除所有的注释。接收函数，具有test（正则）属性的对象，以及值这几种类型。
 + `sourceMap`: 默认：使用 [webpackConfig.devtool](https://webpack.js.org/configuration/devtool/)。通过这个设置来重写。
++ `parserOpts`: 配置具有特殊 parser 选项的 babel。
 + `babel`: 通过自定义babel-core代替。 `require("babel-core")`
 + `babili`: 通过自定义babili preset来代替。 `require("babel-preset-babili")`.
 

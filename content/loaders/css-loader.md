@@ -87,6 +87,7 @@ console.log(css); // {String}
 |**`sourceMap`**|`{Boolean}`|`false`|启用/禁用 Sourcemap|
 |**`camelCase`**|`{Boolean\|String}`|`false`|以驼峰化式命名导出类名|
 |**`importLoaders`**|`{Number}`|`0`|在 css-loader 前应用的 loader 的数量|
+|**`localIdentName`**|`{String}`|`[hash:base64]`|配置生成的标识符(ident)|
 
 ### `root`
 
@@ -325,7 +326,7 @@ exports.locals = {
 
 默认情况下，如果模块系统指定，css-loader 将压缩 css。
 
-在某些情况下，压缩对于 css 来说是破坏性的，所以如果需要设置，可以向 minifier 提供自己的选项。 cssnano 用于压缩，可以在这里找到其[选项列表](http://cssnano.co/options/)。
+在某些情况下，压缩对于 css 来说是破坏性的，所以如果需要设置，可以向基于 cssnano 的 minifier(cssnano-based minifier) 提供自己的选项。更多可用信息请查看 [cssnano 文档](http://cssnano.co/guides/)。
 
 还可以使用 `minimize` 查询参数，来禁用或强制压缩。
 
