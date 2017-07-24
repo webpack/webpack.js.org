@@ -296,7 +296,7 @@ Once you start splitting your code, it can be useful to analyze the output to ch
 
 - [webpack chart](https://alexkuz.github.io/webpack-chart/)
 - [webpack visualizer](https://chrisbateman.github.io/webpack-visualizer/)
-- [`webpack-bundle-analyzer`](https://github.com/th0r/webpack-bundle-analyzer)
+- [webpack-bundle-analyzer](https://github.com/th0r/webpack-bundle-analyzer)
 
 
 ## Next Steps
