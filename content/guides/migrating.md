@@ -1,6 +1,6 @@
 ---
 title: 从 v1 迁移到 v2
-sort: 23
+sort: 15
 contributors:
   - sokra
   - jhnns
@@ -15,6 +15,11 @@ contributors:
   - selbekk
   - ndelangen
 ---
+
+The following sections describe the major changes from webpack 1 to 2.
+
+T> Note that there were far fewer changes between 2 and 3, so that migration shouldn't be too bad. If you are running into issues, please see [the changelog](https://github.com/webpack/webpack/releases) for details.
+
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
 

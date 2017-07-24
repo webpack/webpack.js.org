@@ -290,6 +290,15 @@ __src/index.js__
 ```
 
 
+## Bundle Analysis
+
+Once you start splitting your code, it can be useful to analyze the output to check where modules have ended up. The [official analyze tool](https://github.com/webpack/analyse) is a good place to start. There are some other community-supported options out there as well:
+
+- [webpack chart](https://alexkuz.github.io/webpack-chart/)
+- [webpack visualizer](https://chrisbateman.github.io/webpack-visualizer/)
+- [`webpack-bundle-analyzer`](https://github.com/th0r/webpack-bundle-analyzer)
+
+
 ## Next Steps
 
 See [Lazy Loading](/guides/lazy-loading) for a more concrete example of how `import()` can be used in a real application and [Caching](/guides/caching) to learn how to split code more effectively.

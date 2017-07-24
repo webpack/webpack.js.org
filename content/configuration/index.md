@@ -10,6 +10,7 @@ contributors:
   - terinjokes
   - mattce
   - kbariotis
+  - sterlingvix
 ---
 
 webpack 是需要传入一个配置对象(configuration object)。取决于你如何使用 webpack，可以通过两种方式之一：终端或 Node.js。下面指定了所有可用的配置选项。
@@ -415,7 +416,16 @@ module.exports = {
   },
 
   [node](node): {
-    /* TODO */
+    // Polyfills and mocks to run Node.js-
+    // environment code in non-Node environments.
+    
+    [console](node#node-console): false, // boolean | "mock"
+    [global](node#node-global): true, // boolean | "mock"
+    [process](node#node-process): true, // boolean
+    [__filename](node#node-__filename): "mock", // boolean | "mock"
+    [__dirname](node#node-__dirname): "mock", // boolean | "mock"
+    [Buffer](node#node-buffer): true, // boolean | "mock"
+    [setImmediate](node#node-setimmediate): true // boolean | "mock" | "empty"
   },
 
   [recordsPath](other-options#recordspath): path.resolve(__dirname, "build/records.json"),

@@ -10,6 +10,7 @@ contributors:
   - joshsantos
   - drpicox
   - skipjack
+  - gdi2290
 related:
   - title: 概念 - 模块热替换(Hot Module Replacement)
     url: /concepts/hot-module-replacement
@@ -160,6 +161,7 @@ body {
 - [Vue Loader](https://github.com/vuejs/vue-loader)：此 loader 支持用于 vue 组件的 HMR，提供开箱即用体验。
 - [Elm Hot Loader](https://github.com/fluxxu/elm-hot-loader)：支持用于 Elm 程序语言的 HMR。
 - [Redux HMR](https://survivejs.com/webpack/appendices/hmr-with-react/#configuring-hmr-with-redux)：无需 loader 或插件！只需对 main store 文件进行简单的修改。
+- [Angular HMR](https://github.com/AngularClass/angular-hmr)：No loader necessary! A simple change to your main NgModule file is all that's required to have full control over the HMR APIs.没有必要使用 loader！只需对主要的 NgModule 文件进行简单的修改，由 HMR API 完全控制。
 
 T> 如果你知道任何其他 loader 或插件，能够有助于或增强模块热替换(Hot Module Replacement)，请提交一个 pull request 以添加到此列表中！
 
