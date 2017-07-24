@@ -4,284 +4,356 @@ sort: 11
 contributors:
   - okonet
   - jouni-kantola
+  - skipjack
 related:
   - title: Predictable Long Term Caching
     url: https://medium.com/webpack/predictable-long-term-caching-with-webpack-d3eee1d3fa31
+  - title: Long Term Caching of Static Assets
+    url: https://medium.com/@okonetchnikov/long-term-caching-of-static-assets-with-webpack-1ecb139adb95#.vtwnssps4
+  - title: Webpack & Caching
+    url: https://gist.github.com/sokra/ff1b0290282bfa2c037bdb6dcca1a7aa
+  - title: Advanced Webpack Presentation
+    url: https://presentations.survivejs.com/advanced-webpack/
+  - title: Issue 1315
+    url: https://github.com/webpack/webpack/issues/1315
+  - title: Issue 652
+    url: https://github.com/webpack/webpack.js.org/issues/652
 ---
 
-To enable long-term caching of static resources produced by webpack:
+T> The examples in this guide stem from [getting started](/guides/getting-started), [output management](/guides/output-management) and [code splitting](/guides/code-splitting).
 
-1. Use `[chunkhash]` to add a content-dependent cache-buster to each file.
-2. Extract the webpack manifest into a separate file.
-3. Ensure that the entry point chunk containing the bootstrapping code doesn’t change hash over time for the same set of dependencies.
+So we're using webpack to bundle our modular application which yields a deployable `/dist` directory. Once the contents of `/dist` have been deployed to a server, clients (typically browsers) will hit that server to grab the site and its assets. The last step can be time consuming, which is why browsers use a technique called [caching](http://searchstorage.techtarget.com/definition/cache). This allows sites to load faster with less unnecessary network traffic, however it can also cause headaches when you need new code to be picked up.
 
-For an even more optimized setup:
-
-1. Use compiler stats to get the file names when requiring resources in HTML.
-2. Generate the chunk manifest JSON and inline it into the HTML page before loading resources.
+This guide focuses on the configuration needed to ensure files produced by webpack compilation can remain cached unless their contents has changed.
 
 
-## The problem
+## Output Filenames
 
-Each time something needs to be updated in our code, it has to be re-deployed on the server and then re-downloaded by all clients. This is clearly inefficient since fetching resources over the network can be slow. This is why browsers cache static resources.
+A simple way to ensure the browser picks up changed files is by using `output.filename` [substitutions](/configuration/output#output-filename). The `[hash]` substitution can be used to include a build-specific hash in the filename, however it's even better to use the `[chunkhash]` subsitution which includes a chunk-specific hash in the filename.
 
-The way it works has a pitfall: If we don’t change filenames of our resources when deploying a new version, the browser might think it hasn’t been updated and client will get a cached version of it.
+Let's get our project set up using the example from [getting started](/guides/getting-started) with the `plugins` from [output management](/guides/output-management), so we don't have to deal with maintaining our `index.html` file manually:
 
-A simple way to tell the browser to download a newer version is to alter the asset’s file name. In a pre-webpack era we used to add a build number to the filenames as a parameter and then increment it:
+__project__
 
-```bash
-application.js?build=1
-application.css?build=1
+``` diff
+webpack-demo
+|- package.json
+|- webpack.config.js
+|- /dist
+|- /src
+  |- index.js
+|- /node_modules
 ```
 
-It is even easier to do with webpack. Each webpack build generates a unique hash which can be used to compose a filename, by including output [substitutions](/configuration/output#output-filename). The following example config will generate 2 files (1 per entry) with hashes in filenames:
+__webpack.config.js__
 
-```js
-// webpack.config.js
-const path = require("path");
+``` diff
+  const path = require('path');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
-  entry: {
-    vendor: "./src/vendor.js",
-    main: "./src/index.js"
-  },
-  output: {
-    path: path.join(__dirname, "build"),
-    filename: "[name].[hash].js"
-  }
-};
-```
-
-Running webpack with this config will produce the following output:
-
-```bash
-Hash: 2a6c1fee4b5b0d2c9285
-Version: webpack 2.2.0
-Time: 62ms
-                         Asset     Size  Chunks             Chunk Names
-vendor.2a6c1fee4b5b0d2c9285.js  2.58 kB       0  [emitted]  vendor
-  main.2a6c1fee4b5b0d2c9285.js  2.57 kB       1  [emitted]  main
-   [0] ./src/index.js 63 bytes {1} [built]
-   [1] ./src/vendor.js 63 bytes {0} [built]
-```
-
-But the problem here is, builds after *any file update* will update all filenames and clients will have to re-download all application code. So how can we guarantee that clients always get the latest versions of assets without re-downloading all of them?
-
-
-## Generating unique hashes for each file
-
-What if we could produce the same filename, if the contents of the file did not change between builds? For example, it would be unnecessary to re-download a vendor file, when no dependencies have been updated, only application code.
-
-webpack allows you to generate hashes depending on file contents, by replacing the placeholder `[hash]` with `[chunkhash]`. Here is the updated config:
-
-```diff
-module.exports = {
-  /*...*/
-  output: {
-    /*...*/
--   filename: "[name].[hash].js"
-+   filename: "[name].[chunkhash].js"
-  }
-};
-```
-
-This config will also create 2 files, but in this case, each file will get its own unique hash.
-
-```bash
-Hash: cfba4af36e2b11ef15db
-Version: webpack 2.2.0
-Time: 66ms
-                         Asset     Size  Chunks             Chunk Names
-vendor.50cfb8f89ce2262e5325.js  2.58 kB       0  [emitted]  vendor
-  main.70b594fe8b07bcedaa98.js  2.57 kB       1  [emitted]  main
-   [0] ./src/index.js 63 bytes {1} [built]
-   [1] ./src/vendor.js 63 bytes {0} [built]
-```
-
-T> Don’t use [chunkhash] in development since this will increase compilation time. Separate development and production configs and use [name].js for development and [name].[chunkhash].js in production.
-
-
-## Get filenames from webpack compilation stats
-
-When working in development mode, you just reference JavaScript files by entry point name in your HTML.
-
-```html
-<script src="vendor.js"></script>
-<script src="main.js"></script>
-```
-
-Although, each time we build for production, we’ll get different file names. Something, that looks like this:
-
-```html
-<script src="vendor.50cfb8f89ce2262e5325.js"></script>
-<script src="main.70b594fe8b07bcedaa98.js"></script>
-```
-
-In order to reference a correct file in the HTML, we’ll need information about our build. This can be extracted from webpack compilation stats by using this plugin:
-
-```js
-// webpack.config.js
-const path = require("path");
-
-module.exports = {
-  /*...*/
-  plugins: [
-    function() {
-      this.plugin("done", function(stats) {
-        require("fs").writeFileSync(
-          path.join(__dirname, "build", "stats.json"),
-          JSON.stringify(stats.toJson()));
-      });
+  module.exports = {
+    entry: './src/index.js',
+    plugins: [
+      new CleanWebpackPlugin(['dist']),
+      new HtmlWebpackPlugin({
+-       title: 'Output Management'
++       title: 'Caching'
+      })
+    ],
+    output: {
+-     filename: 'bundle.js',
++     filename: '[name].[chunkhash].js',
+      path: path.resolve(__dirname, 'dist')
     }
-  ]
-};
+  };
 ```
 
-Alternatively, just use one of these plugins to export JSON files:
+Running our build script, `npm run build`, with this configuration should produce the following output:
 
-* https://www.npmjs.com/package/webpack-manifest-plugin
-* https://www.npmjs.com/package/assets-webpack-plugin
+?> Add bash output
 
-A sample output when using `WebpackManifestPlugin` in our config looks like:
+As you can see the bundle's name now reflects its content (via the hash). If we run another build without making any changes, we'd expect that filename to stay the same. However, upon running it, we'll see that this is not the case:
 
-```json
-{
-  "main.js": "main.155567618f4367cd1cb8.js",
-  "vendor.js": "vendor.c2330c22cd2decb5da5a.js"
-}
+?> Add bash output
+
+This is because webpack includes certain boilerplate, specifically the runtime and manifest, in the entry chunk.
+
+
+## Extracting Boilerplate
+
+As we learned in [code splitting](/guides/code-splitting), the [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) can be used to split modules out into separate bundles. A lesser-known feature of the `CommonsChunkPlugin` is extracting webpack's boilerplate and manifest which can change with every build. By specifying a name not mentioned in the `entry` configuration, the plugin will automatically extract what we want into a separate bundle:
+
+__webpack.config.js__
+
+``` diff
+  const path = require('path');
++ const webpack = require('webpack');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+  module.exports = {
+    entry: './src/index.js',
+    plugins: [
+      new CleanWebpackPlugin(['dist']),
+      new HtmlWebpackPlugin({
+        title: 'Caching'
+-     })
++     }),
++     new webpack.optimize.CommonsChunkPlugin({
++       name: 'runtime'
++     })
+    ],
+    output: {
+      filename: '[name].[contenthash].js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
 ```
 
-
-## Deterministic hashes
-
-To minimize the size of generated files, webpack uses identifiers instead of module names. During compilation, identifiers are generated, mapped to chunk filenames and then put into a JavaScript object called *chunk manifest*.
-To generate identifiers that are preserved over builds, webpack supplies the [`NamedModulesPlugin`](/plugins/named-modules-plugin) (recommended for development) and [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin) (recommended for production).
-
-?> Describe how the option `recordsPath` option works
-
-The chunk manifest (along with bootstrapping/runtime code) is then placed into the entry chunk and it is crucial for webpack-packaged code to work.
-
-T> Separate your vendor and application code with [CommonsChunkPlugin](/plugins/commons-chunk-plugin) and create an explicit vendor chunk to prevent it from changing too often. When `CommonsChunkPlugin` is used, the runtime code is moved to the *last* common entry.
-
-The problem with this, is the same as before: Whenever we change any part of the code it will, even if the rest of its contents wasn’t altered, update our entry chunk to include the new manifest. This in turn, will lead to a new hash and dismiss the long-term caching.
-
-To fix that, we should use [`ChunkManifestWebpackPlugin`](https://github.com/diurnalist/chunk-manifest-webpack-plugin), which will extract the manifest to a separate JSON file. This replaces the chunk manifest with a variable in the webpack runtime. But we can do even better; we can extract the runtime into a separate entry by using `CommonsChunkPlugin`. Here is an updated `webpack.config.js` which will produce the manifest and runtime files in our build directory:
-
-```js
-// webpack.config.js
-var ChunkManifestPlugin = require("chunk-manifest-webpack-plugin");
-
-module.exports = {
-  /*...*/
-  plugins: [
-    /*...*/
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ["vendor", "manifest"], // vendor libs + extracted manifest
-      minChunks: Infinity,
-    }),
-    /*...*/
-    new ChunkManifestPlugin({
-      filename: "chunk-manifest.json",
-      manifestVariable: "webpackManifest"
-    })
-  ]
-};
-```
-
-As we removed the manifest from the entry chunk, now it’s our responsibility to provide webpack with it. The `manifestVariable` option in the example above is the name of the global variable where webpack will look for the manifest JSON. This *should be defined before we require our bundle in HTML*. This is achieved by inlining the contents of the JSON in HTML. Our HTML head section should look like this:
-
-```html
-<html>
-  <head>
-    <script>
-    //<![CDATA[
-    window.webpackManifest = {"0":"main.5f020f80c23aa50ebedf.js","1":"vendor.81adc64d405c8b218485.js"}
-    //]]>
-    </script>
-  </head>
-  <body>
-  </body>
-</html>
-```
-
-At the end of the day, the hashes for the files should be based on the file content. For this use [webpack-chunk-hash](https://github.com/alexindigo/webpack-chunk-hash) or [webpack-md5-hash](https://github.com/erm0l0v/webpack-md5-hash).
-
-So the final `webpack.config.js` should look like this:
-
-```js
-var path = require("path");
-var webpack = require("webpack");
-var ChunkManifestPlugin = require("chunk-manifest-webpack-plugin");
-var WebpackChunkHash = require("webpack-chunk-hash");
-
-module.exports = {
-  entry: {
-    vendor: "./src/vendor.js", // vendor reference file(s)
-    main: "./src/index.js" // application code
-  },
-  output: {
-    path: path.join(__dirname, "build"),
-    filename: "[name].[chunkhash].js",
-    chunkFilename: "[name].[chunkhash].js"
-  },
-  plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ["vendor", "manifest"], // vendor libs + extracted manifest
-      minChunks: Infinity,
-    }),
-    new webpack.HashedModuleIdsPlugin(),
-    new WebpackChunkHash(),
-    new ChunkManifestPlugin({
-      filename: "chunk-manifest.json",
-      manifestVariable: "webpackManifest",
-      inlineManifest: true
-    })
-  ]
-};
-```
-
-Using this config the vendor chunk should not be changing its hash, unless you update its code or dependencies. Here is a sample output for 2 runs with `moduleB.js` being changed between the runs:
+Let's run another build to see the extracted `runtime` bundle:
 
 ``` bash
-> node_modules/.bin/webpack
-
-Hash: f0ae5bf7c6a1fd3b2127
-Version: webpack 2.2.0
-Time: 102ms
-                           Asset       Size  Chunks             Chunk Names
-    main.9ebe4bf7d99ffc17e75f.js  509 bytes    0, 2  [emitted]  main
-  vendor.81adc64d405c8b218485.js  159 bytes    1, 2  [emitted]  vendor
-             chunk-manifest.json   73 bytes          [emitted]
-manifest.d41d8cd98f00b204e980.js    5.56 kB       2  [emitted]  manifest
+Hash: 80552632979856ddab34
+Version: webpack 3.3.0
+Time: 1512ms
+                          Asset       Size  Chunks                    Chunk Names
+   main.5ec8e954e32d66dee1aa.js     542 kB       0  [emitted]  [big]  main
+runtime.719796322be98041fff2.js    5.82 kB       1  [emitted]         runtime
+                     index.html  275 bytes          [emitted]
+   [0] ./src/index.js 336 bytes {0} [built]
+   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+    + 1 hidden module
 ```
+
+It's also good practice to extract third-party libraries, such as `lodash` or `react`, to a separate `vendor` chunk as they are less likely to change than our local source code. This step will allow clients to request even less from the server to stay up to date. This can be done by using a combination of a new `entry` point along with another `CommonsChunkPlugin` instance:
+
+__webpack.config.js__
+
+``` diff
+  var path = require('path');
+  const webpack = require('webpack');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+  module.exports = {
+-   entry: './src/index.js',
++   entry: {
++     main: './src/index.js',
++     vendor: [
++       'lodash'
++     ]
++   },
+    plugins: [
+      new CleanWebpackPlugin(['dist']),
+      new HtmlWebpackPlugin({
+        title: 'Caching'
+      }),
++     new webpack.optimize.CommonsChunkPlugin({
++       name: 'vendor'
++     }),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'runtime'
+      })
+    ],
+    output: {
+      filename: '[name].[contenthash].js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
+```
+
+W> Note that order matters here. The `'vendor'` instance of the `CommonsChunkPlugin` must be included prior to the `'runtime'` instance.
+
+Let's run another build to see our new `vendor` bundle:
 
 ``` bash
-> node_modules/.bin/webpack
-
-Hash: b5fb8e138b039ab515f3
-Version: webpack 2.2.0
-Time: 87ms
-                           Asset       Size  Chunks             Chunk Names
-    main.5f020f80c23aa50ebedf.js  521 bytes    0, 2  [emitted]  main
-  vendor.81adc64d405c8b218485.js  159 bytes    1, 2  [emitted]  vendor
-             chunk-manifest.json   73 bytes          [emitted]
-manifest.d41d8cd98f00b204e980.js    5.56 kB       2  [emitted]  manifest
+Hash: 69eb92ebf8935413280d
+Version: webpack 3.3.0
+Time: 1502ms
+                          Asset       Size  Chunks                    Chunk Names
+ vendor.8196d409d2f988123318.js     541 kB       0  [emitted]  [big]  vendor
+   main.0ac0ae2d4a11214ccd19.js  791 bytes       1  [emitted]         main
+runtime.004a1114de8bcf026622.js    5.85 kB       2  [emitted]         runtime
+                     index.html  352 bytes          [emitted]
+   [1] ./src/index.js 336 bytes {1} [built]
+   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+   [4] multi lodash 28 bytes {0} [built]
+    + 1 hidden module
 ```
 
-Notice that **vendor chunk has the same filename**, and **so does the manifest** since we’ve extracted the manifest chunk!
+
+## Module Identifiers
+
+Let's add another module, `print.js`, to our project:
+
+__project__
+
+``` diff
+webpack-demo
+|- package.json
+|- webpack.config.js
+|- /dist
+|- /src
+  |- index.js
++ |- print.js
+|- /node_modules
+```
+
+__print.js__
+
+``` diff
++ export default function print(text) {
++   console.log(text);
++ };
+```
+
+__src/index.js__
+
+``` diff
+  import _ from 'lodash';
++ import Print from './print';
+
+  function component() {
+    var element = document.createElement('div');
+
+    // Lodash, now imported by this script
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
++   element.onClick = Print.bind(null, 'Hello webpack!');
+
+    return element;
+  }
+
+  document.body.appendChild(component());
+```
+
+Running another build, we would expect only our `main` bundle's hash to change, however...
+
+``` bash
+Hash: d38a06644fdbb898d795
+Version: webpack 3.3.0
+Time: 1445ms
+                          Asset       Size  Chunks                    Chunk Names
+ vendor.a7561fb0e9a071baadb9.js     541 kB       0  [emitted]  [big]  vendor
+   main.b746e3eb72875af2caa9.js    1.22 kB       1  [emitted]         main
+runtime.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         runtime
+                     index.html  352 bytes          [emitted]
+   [1] ./src/index.js 421 bytes {1} [built]
+   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+   [4] ./src/print.js 62 bytes {1} [built]
+   [5] multi lodash 28 bytes {0} [built]
+    + 1 hidden module
+```
+
+... we can see that all three have. This is because each [`module.id`](/api/module-variables#module-id-commonjs-) is incremented based on resolving order by default. Meaning when the order of resolving is changed, the IDs will be changed as well. So, to recap:
+
+- The `main` bundle changed because of its new content.
+- The `vendor` bundle changed because its `module.id` was changed.
+- And, the `runtime` bundle changed because it now contains a reference to a new module.
+
+The first and last are expected -- it's the `vendor` hash we want to fix. Luckily, there are two plugins we can use to resolve this issue. The first is the [`NamedModulesPlugin`](/plugins/named-modules-plugin), which will use the path to the module rather than a numerical identifier. While this plugin is useful during development for more readable output, it does take a bit longer to run. The second option is the [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin), which is recommended for production builds:
+
+__webpack.config.js__
+
+``` diff
+  const path = require('path');
+  const webpack = require('webpack');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+  module.exports = {
+    entry: {
+      main: './src/index.js',
+      vendor: [
+        'lodash'
+      ]
+    },
+    plugins: [
+      new CleanWebpackPlugin(['dist']),
+      new HtmlWebpackPlugin({
+        title: 'Caching'
+      }),
++     new webpack.HashedModuleIdsPlugin(),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor'
+      }),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'runtime'
+      })
+    ],
+    output: {
+      filename: '[name].[contenthash].js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
+```
+
+Now, despite any new local dependencies, our `vendor` hash should stay consistent between builds:
+
+``` bash
+Hash: 1f49b42afb9a5acfbaff
+Version: webpack 3.3.0
+Time: 1372ms
+                          Asset       Size  Chunks                    Chunk Names
+ vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]  [big]  vendor
+   main.d103ac311788fcb7e329.js    1.22 kB       1  [emitted]         main
+runtime.d2a6dc1ccece13f5a164.js    5.85 kB       2  [emitted]         runtime
+                     index.html  352 bytes          [emitted]
+[3Di9] ./src/print.js 62 bytes {1} [built]
+[3IRH] (webpack)/buildin/module.js 517 bytes {0} [built]
+[DuR2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [0] multi lodash 28 bytes {0} [built]
+[lVK7] ./src/index.js 421 bytes {1} [built]
+    + 1 hidden module
+```
+
+And let's modify our `src/index.js` to temporarily remove that extra dependency:
+
+__src/index.js__
+
+``` diff
+  import _ from 'lodash';
+- import Print from './print';
++ // import Print from './print';
+
+  function component() {
+    var element = document.createElement('div');
+
+    // Lodash, now imported by this script
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+-   element.onClick = Print.bind(null, 'Hello webpack!');
++   // element.onClick = Print.bind(null, 'Hello webpack!');
+
+    return element;
+  }
+
+  document.body.appendChild(component());
+```
+
+And finally run our build again:
+
+``` bash
+Hash: 37e1358f135c0b992f72
+Version: webpack 3.3.0
+Time: 1557ms
+                          Asset       Size  Chunks                    Chunk Names
+ vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]  [big]  vendor
+   main.fc7f38e648da79db2aba.js  891 bytes       1  [emitted]         main
+runtime.bb5820632fb66c3fb357.js    5.85 kB       2  [emitted]         runtime
+                     index.html  352 bytes          [emitted]
+[3IRH] (webpack)/buildin/module.js 517 bytes {0} [built]
+[DuR2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [0] multi lodash 28 bytes {0} [built]
+[lVK7] ./src/index.js 427 bytes {1} [built]
+    + 1 hidden module
+```
+
+We can see that both builds yielded `eed6dcc3b30cfa138aaa` in the `vendor` bundle's filename.
 
 
-## Manifest inlining
+## Conclusion
 
-Inlining the chunk manifest and webpack runtime (to prevent extra HTTP requests), depends on your server setup. There is a nice [walkthrough for Rails-based projects](https://brigade.engineering/setting-up-webpack-with-rails-c62aea149679). For server-side rendering in Node.js you can use [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools).
-
-T> If your application doesn’t rely on any server-side rendering, it’s often enough to generate a single `index.html` file for your application. To do so, use i.e. [`HtmlWebpackPlugin`](https://github.com/ampedandwired/html-webpack-plugin) in combination with [`ScriptExtHtmlWebpackPlugin`](https://github.com/numical/script-ext-html-webpack-plugin) or [`InlineManifestWebpackPlugin`](https://github.com/szrenwei/inline-manifest-webpack-plugin). It will simplify the setup dramatically.
-
-
-## References
-
-* https://medium.com/@okonetchnikov/long-term-caching-of-static-assets-with-webpack-1ecb139adb95#.vtwnssps4
-* https://gist.github.com/sokra/ff1b0290282bfa2c037bdb6dcca1a7aa
-* https://github.com/webpack/webpack/issues/1315
-* https://github.com/webpack/webpack.js.org/issues/652
-* https://presentations.survivejs.com/advanced-webpack/
+Caching gets messy. Plain and simple. However the walk-through above should give you a running start to deploying consistent, cachable assets. See the _Further Reading_ section below to learn more.
