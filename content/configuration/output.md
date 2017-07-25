@@ -342,18 +342,14 @@ var MyModule = _entry_return_.MyModule;
 MyModule.doSomething();
 ```
 
-`libraryExport: ["MyModule", "MySecondModule"]` - **Each specified module** will be **independently** assigned to the library target:
+`libraryExport: ["MyModule", "MySubModule"]` - The array is interpreted as a **path to a module** to be assigned to the library target:
 
 ```javascript
-// if your entry exports modules `MyModule` and `MySecondModule`
-var MyModule = _entry_return_.MyModule;
-var MySecondModule = _entry_return_.MySecondModule;
+// if your entry exports `MyModule` which in turn exports `MySubModule`
+var MySubModule = _entry_return_.MyModule.MySubModule;
 
-MyModule.doSomething();
-MySecondModule.doSomethingElse();
+MySubModule.doSomething();
 ```
-
-
 
 
 ## `output.libraryTarget`
