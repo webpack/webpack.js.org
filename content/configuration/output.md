@@ -316,6 +316,8 @@ T> Read the [authoring libraries guide](/guides/author-libraries) guide for more
 
 Configure which module or modules will be exposed via the `libraryTarget`.
 
+The default value `_entry_return_` is the namespace or default module returned by your entry file.
+
 The examples below demonstrate the effect of this config when using `libraryTarget: "var"`, but any target may be used.
 
 The following configurations are supported:
