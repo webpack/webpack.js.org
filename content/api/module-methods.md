@@ -360,4 +360,5 @@ if(require.cache[require.resolveWeak('module')]) {
 const page = 'Foo';
 __webpack_modules__[require.resolveWeak(`./page/${page}`)]
 ```
+
 T> `require.resolveWeak` is the foundation of universal rendering, as used in packages such as [react-universal-component](https://github.com/faceyspacey/react-universal-component). It allows code to render synchronously on the server and on initial page-loads on the client when chunks are manually served, without moving modules to the parent chunk. It's used in conjunction with `import()` which takes over when user navigation triggers additional imports for chunks not initially served.
