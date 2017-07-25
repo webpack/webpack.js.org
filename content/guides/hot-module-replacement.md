@@ -10,6 +10,7 @@ contributors:
   - joshsantos
   - drpicox
   - skipjack
+  - gdi2290
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -24,7 +25,7 @@ W> __HMR__ is not intended for use in production, meaning it should only be used
 
 ## Enabling HMR
 
-Enabling this feature is actually fairly simple. Let's take a look at how to set it up with [webpack-dev-server](https://github.com/webpack/webpack-dev-server)...
+This feature is great for productivity. Let's take a look at how to set it up with [webpack-dev-server](https://github.com/webpack/webpack-dev-server)...
 
 ``` js
 const path = require('path');
@@ -113,7 +114,7 @@ This is just one example, but there are many others that can easily trip people 
 
 ## HMR with Stylesheets
 
-Hot Module Replacement with CSS is actually fairly straightforward with the help of the `style-loader`. This loader uses `module.hot.accept` behind the scenes to patch `<style>` tags when CSS dependencies are updated. So, with the following webpack configuration...
+We can use the `style-loader` to achieve Hot Module Replacement with CSS. This loader uses `module.hot.accept` behind the scenes to patch `<style>` tags when CSS dependencies are updated. So, with the following webpack configuration...
 
 ``` js
 module.exports = {
@@ -160,5 +161,6 @@ There are many other loaders and examples out in the community to make HMR inter
 - [Vue Loader](https://github.com/vuejs/vue-loader): This loader supports HMR for vue components out of the box.
 - [Elm Hot Loader](https://github.com/fluxxu/elm-hot-loader): Supports HMR for the Elm programming language.
 - [Redux HMR](https://survivejs.com/webpack/appendices/hmr-with-react/#configuring-hmr-with-redux): No loader or plugin necessary! A simple change to your main store file is all that's required.
+- [Angular HMR](https://github.com/AngularClass/angular-hmr): No loader necessary! A simple change to your main NgModule file is all that's required to have full control over the HMR APIs.
 
 T> If you know of any other loaders or plugins that help with or enhance Hot Module Replacement please submit a pull request to add to this list!

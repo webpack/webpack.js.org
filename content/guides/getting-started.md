@@ -234,7 +234,7 @@ __package.json__
 }
 ```
 
-Now the `npm run build` command can be used in place of the longer commands we used earlier. Note that within `scripts` we can reference locally installed npm packages by name instead of writing out the entire path. This convention is the standard in most npm-based projects and allows us to directly call `webpack`, instead of `node_modules/webpack/bin/webpack.js`
+Now the `npm run build` command can be used in place of the longer commands we used earlier. Note that within `scripts` we can reference locally installed npm packages by name instead of writing out the entire path. This convention is the standard in most npm-based projects and allows us to directly call `webpack`, instead of `./node_modules/.bin/webpack`
 
 Now run the following command and see if your script alias works:
 
@@ -257,7 +257,7 @@ T> Custom parameters can be passed to webpack by adding two dashes between the `
 
 ## Conclusion
 
-Now that you have a basic build together, you should dig into the [basic concepts](/concepts) and [configuration](/configuration) to better understand webpack's design. The [API](/api) section digs into the various interfaces webpack offers. Or, if you'd prefer to learn by example, select the next guide from the list and continue building out this little demo we've been working on which should now look similar to this:
+Now that you have a basic build together you should move on to the next guide [`Asset Management`](/guides/asset-management) to learn how to manage assets like images and fonts with webpack. At this point, your project should look like this:
 
 __project__
 
@@ -274,3 +274,5 @@ webpack-demo
 ```
 
 T> If you're using npm 5, you'll probably also see a `package-lock.json` file in your directory.
+
+If you want to learn more about webpack's design, you can check out the [basic concepts](/concepts) and [configuration](/configuration) pages. Furthermore, the [API](/api) section digs into the various interfaces webpack offers.

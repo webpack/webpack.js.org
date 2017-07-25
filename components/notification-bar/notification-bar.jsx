@@ -18,7 +18,7 @@ export default class NotificationBar extends React.Component {
           <p>
             Buy the brand-new webpack stickers at <a href="http://www.unixstickers.com/tag/webpack">Unixstickers!</a>
             {localStorageIsEnabled ?
-              <i
+              <button
                 className="notification-bar__close icon-cross"
                 onClick={ this._close.bind(this) } /> :
               null
