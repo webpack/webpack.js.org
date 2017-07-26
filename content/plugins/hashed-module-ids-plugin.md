@@ -4,27 +4,27 @@ contributors:
   - shaodahong
 ---
 
-This plugin will cause hashes to be based on the relative path of the module, generating a four character string as the module id. Suggested for use in production.
+该插件会根据模块的相对路径生成一个四位数的hash作为模块id, 建议用于生产环境。
 
 ``` js
 new webpack.HashedModuleIdsPlugin({
-  // Options...
+  // 参数...
 })
 ```
 
 
-## Options
+## 参数
 
-This plugin supports the following options:
+该插件支持以下参数：
 
-- `hashFunction`: The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm) are supported.
-- `hashDigest`: The encoding to use when generating the hash, defaults to `'base64'`. All encodings from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported.
-- `hashDigestLength`: The prefix length of the hash digest to use, defaults to `4`.
+- `hashFunction`: 散列算法，默认为 'md5'。支持 Node.JS [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm) 的所有功能。
+- `hashDigest`: 在生成 hash 时使用的编码方式，默认为 'base64'。支持 Node.js [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) 的所有编码。
+- `hashDigestLength`: 散列摘要的前缀长度，默认为 4。
 
 
-## Usage
+## 用法
 
-Here's an example of how this plugin might be used:
+下面是使用该插件的例子：
 
 ``` js
 new webpack.HashedModuleIdsPlugin({
