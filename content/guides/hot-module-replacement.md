@@ -11,6 +11,7 @@ contributors:
   - drpicox
   - skipjack
   - gdi2290
+  - evolve2k
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -29,13 +30,13 @@ This feature is great for productivity. Let's take a look at how to set it up wi
 
 ``` js
 const path = require('path');
-const webpack = require('webpack');
++ const webpack = require('webpack');
 
 module.exports = {
   entry: './index.js',
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin() // Enable HMR
+    + new webpack.HotModuleReplacementPlugin() // Enable HMR
   ],
 
   output: {
@@ -45,9 +46,9 @@ module.exports = {
   },
 
   devServer: {
-    hot: true, // Tell the dev-server we're using HMR
+    + hot: true, // Tell the dev-server we're using HMR
     contentBase: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
+    + publicPath: '/'
   }
 };
 ```
