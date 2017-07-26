@@ -1,5 +1,5 @@
 ---
-title: 多种配置类型
+title: 多种配置类型(Configuration Types)
 sort: 3
 contributors:
   - sokra

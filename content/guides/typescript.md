@@ -1,6 +1,6 @@
 ---
 title: TypeScript
-sort: 18
+sort: 14
 contributors:
   - morsdyce
   - kkamali
@@ -11,7 +11,7 @@ contributors:
 
 ## 基础安装
 
-在开始使用 webpack 和 Typescript 之前，首先，我们必须在项目中[安装 webpack](/guides/installation/)。
+在开始使用 webpack 和 TypeScript 之前，首先，我们必须在项目中[安装 webpack](/guides/installation/)。
 
 要想要 webpack 里集成 TypeScript，您需要预先准备如下：
 

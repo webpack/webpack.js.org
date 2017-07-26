@@ -55,7 +55,7 @@ X是路径字符串的长度
 
 ## 打包 vs. 加载
 
-注意_加载_和_打包_模块之间的一些关键区别很重要。可以在 [JSPM](http://jspm.io/) 引擎下找到像 [SystemJS](https://github.com/systemjs/systemjs) 的工具，用于在浏览器通过运行时(runtime)来加载和转译模块。这和 webpack 有着显著不同，在加载到浏览器之前，模块就已经被转译（通过 "loaders"）并打包在一起。
+注意_加载_和_打包_模块之间的一些关键区别很重要。可以在 [JSPM](https://github.com/jspm/jspm-cli) 引擎下找到像 [SystemJS](https://github.com/systemjs/systemjs) 的工具，用于在浏览器通过运行时(runtime)来加载和转译模块。这和 webpack 有着显著不同，在加载到浏览器之前，模块就已经被转译（通过 "loaders"）并打包在一起。
 
 每种方法都有其优势和劣势。运行时(runtime)加载和转译模块，为大型网站增加了大量开销，并且应用程序会由许多模块组成。因此，SystemJS 对于需要少量模块的小型项目更有意义。但是，随着 [HTTP/2](https://http2.github.io/) 改善文件从服务器到客户端的传输速度，这可能会发生一些变化。请注意，HTTP/2 不会修改_转译_模块的任何内容，在客户端下载完成后，还是需要很长时间去进行转译。
 

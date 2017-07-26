@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Shield from '../shield/shield';
 import SidebarItem from '../sidebar-item/sidebar-item';
 
 export default class Sidebar extends Component {
@@ -30,7 +31,7 @@ export default class Sidebar extends Component {
 
         <div className="sidebar__inner">
           <a href="https://github.com/webpack/webpack/releases">
-            <img src="https://img.shields.io/github/release/webpack/webpack.svg?style=flat-square" alt="GitHub release" />
+            <Shield content="npm/v/webpack" label="webpack" />
           </a>
 
           <SidebarItem

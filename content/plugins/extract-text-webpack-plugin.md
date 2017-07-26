@@ -6,8 +6,10 @@ edit: https://github.com/webpack-contrib/extract-text-webpack-plugin/edit/master
 ## 安装
 
 ```bash
-# 对于 webpack 2
+# 对于 webpack 3
 npm install --save-dev extract-text-webpack-plugin
+# 对于 webpack 2
+npm install --save-dev extract-text-webpack-plugin@2.1.2
 # 对于 webpack 1
 npm install --save-dev extract-text-webpack-plugin@1.0.1
 ```
@@ -64,6 +66,10 @@ new ExtractTextPlugin(options: filename | object)
 * `[name]` chunk 的名称
 * `[id]` chunk 的数量
 * `[contenthash]` 根据提取文件的内容生成的 hash
+* `[<hashType>:contenthash:<digestType>:<length>]` optionally you can configure
+  * other `hashType`s, e.g. `sha1`, `md5`, `sha256`, `sha512`
+  * other `digestType`s, e.g. `hex`, `base26`, `base32`, `base36`, `base49`, `base52`, `base58`, `base62`, `base64`
+  * and `length`, the length of the hash in chars
 
 > :警告: `ExtractTextPlugin` 对 ** 每个入口 chunk** 都生成一个对应的文件，所以当你配置多个入口 chunk 的时候，你必须使用 `[name]`, `[id]` 或 `[contenthash]`，
 

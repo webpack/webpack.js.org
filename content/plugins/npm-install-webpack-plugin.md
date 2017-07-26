@@ -30,6 +30,8 @@ plugins: [
     peerDependencies: true,
     // 减少控制台日志记录的数量
     quiet: false,
+    // npm command used inside company, yarn is not supported yet
+    npm: 'tnpm'
   });
 ],
 ```

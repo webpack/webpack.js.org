@@ -234,7 +234,7 @@ __package.json__
 }
 ```
 
-现在，可以使用 `npm run build` 命令，来替代我们之前用到的较长命令。注意，使用 npm 的 `scripts`，我们可以通过模块名，来引用本地安装的 npm 包，而不是写出完整路径。这是大多数基于 npm 的项目遵循的标准，允许我们直接调用 `webpack`，而不是去调用 `node_modules/webpack/bin/webpack.js`。
+现在，可以使用 `npm run build` 命令，来替代我们之前用到的较长命令。注意，使用 npm 的 `scripts`，我们可以通过模块名，来引用本地安装的 npm 包，而不是写出完整路径。这是大多数基于 npm 的项目遵循的标准，允许我们直接调用 `webpack`，而不是去调用 `./node_modules/.bin/webpack`。
 
 现在运行以下命令，然后看看你的脚本别名是否正常运行：
 

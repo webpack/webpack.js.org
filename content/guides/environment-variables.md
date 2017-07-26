@@ -1,8 +1,11 @@
 ---
 title: 使用环境变量
-sort: 13
+sort: 16
 contributors:
   - simon04
+related:
+  - title: The Fine Art of the webpack 2 Config
+    url: https://blog.flennik.com/the-fine-art-of-the-webpack-2-config-dc4d19d7f172#.297u8iuz1
 ---
 
 要在[开发](/guides/development)和[生产构建](/guides/production)之间，消除 `webpack.config.js` 的差异。你可能需要环境变量。

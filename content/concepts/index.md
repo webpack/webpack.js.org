@@ -66,11 +66,11 @@ T> 你可能看到项目**生成(emitted 或 emit)**贯穿我们整个文档和[
 
 ## Loader
 
-webpack 的目标是，让 **webpack** 聚焦于项目中的所有资源(asset)，而浏览器不需要关注考虑这些（明确的说，这并不意味着所有资源(asset)都必须打包在一起）。webpack 把[每个文件(.css, .html, .scss, .jpg, etc.) 都作为模块](/concepts/modules)处理。然而 webpack **只理解 JavaScript**。
+webpack 的目标是，让 **webpack** 聚焦于项目中的所有资源(asset)，而浏览器不需要关注考虑这些（明确的说，这并不意味着所有资源(asset)都必须打包在一起）。webpack 把[每个文件(.css, .html, .scss, .jpg, etc.) 都作为模块](/concepts/modules)处理。然而 webpack 自身**只理解 JavaScript**。
 
 **webpack loader 在文件被添加到依赖图中时，_其转换为模块_。**
 
-在更高层面，在 webpack 的配置中 **loaders** 有两个目标。
+在更高层面，在 webpack 的配置中 **loader** 有两个目标。
 
 1. 识别出(identify)应该被对应的 loader 进行转换(transform)的那些文件。(`test` 属性)
 2. 转换这些文件，从而使其能够被添加到依赖图中（并且最终添加到 bundle 中）(`use` 属性)

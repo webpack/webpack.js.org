@@ -168,6 +168,8 @@ T> The [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) is also used to spl
 
 Two similar techniques are supported by webpack when it comes to dynamic code splitting. The first and more preferable approach is use to the [`import()` syntax](/api/module-methods#import-) that conforms to the [ECMAScript proposal](https://github.com/tc39/proposal-dynamic-import) for dynamic imports. The legacy, webpack-specific approach is to use [`require.ensure`](/api/module-methods#require-ensure). Let's try using the first of these two approaches...
 
+W> `import()` calls use [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). If you want to support older browsers that lack `Promise` support (e.g. Internet Explorer), you'll need to include a `Promise` polyfill _before_ your primary bundles.
+
 Before we start, let's remove the extra [`entry`](/concepts/entry-points/) and [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) from our config as they won't be needed for this next demonstration:
 
 __webpack.config.js__
@@ -286,6 +288,15 @@ __src/index.js__
     document.body.appendChild(component);
   });
 ```
+
+
+## Bundle Analysis
+
+Once you start splitting your code, it can be useful to analyze the output to check where modules have ended up. The [official analyze tool](https://github.com/webpack/analyse) is a good place to start. There are some other community-supported options out there as well:
+
+- [webpack chart](https://alexkuz.github.io/webpack-chart/)
+- [webpack visualizer](https://chrisbateman.github.io/webpack-visualizer/)
+- [`webpack-bundle-analyzer`](https://github.com/th0r/webpack-bundle-analyzer)
 
 
 ## Next Steps

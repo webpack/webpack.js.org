@@ -14,7 +14,7 @@ The following sections contain all you need to know about editing and formatting
 
 ## YAML Frontmatter
 
-Each article contains a small section at the top written in [YAML Frontmatter]():
+Each article contains a small section at the top written in [YAML Frontmatter](https://jekyllrb.com/docs/frontmatter/):
 
 ``` yaml
 ---
@@ -44,15 +44,6 @@ Note that `related` will generate a __Further Reading__ section at the bottom of
 2. Outline Remaining Content – how the content will be presented.
 3. Main Content - tell what you promised to tell.
 4. Conclusion - tell what you told and recap the main points.
-
-
-## Running the Site
-
-1. `npm install`
-2. `npm start`
-3. `open http://localhost:3000`
-
-The site will update itself as you make changes.
 
 
 ## Typesetting
