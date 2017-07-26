@@ -54,7 +54,7 @@ __webpack.config.js__
 +     new webpack.HotModuleReplacementPlugin()
     ],
     output: {
-      filename: 'bundle.js',
+      filename: '[name].build.js',
       path: path.resolve(__dirname, 'dist')
     }
   };
@@ -213,7 +213,7 @@ __webpack.config.js__
       new webpack.HotModuleReplacementPlugin()
     ],
     output: {
-      filename: 'bundle.js',
+      filename: '[name].build.js',
       path: path.resolve(__dirname, 'dist')
     }
   };
