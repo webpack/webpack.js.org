@@ -62,7 +62,7 @@ __webpack.config.js__
 
 You can also use the CLI to modify the [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration with the following command: `webpack-dev-server --hotOnly`.
 
-To get it up and running let's do `npm start` from the command line.
+To get it up and running let's run `npm start` from the command line.
 
 Now let's update the `index.js` file so that when a change inside `print.js` is detected we tell webpack to accept the updated module.
 
@@ -129,7 +129,7 @@ Hot Module Replacement can be tricky. To show this, let's go back to our working
 
 This is happening because the button's `onclick` event handler is still bound to the original `printMe` function.
 
-To make this work with HMR we need to update that binding to the new `printMe` function using `module.hot.accept`
+To make this work with HMR we need to update that binding to the new `printMe` function using `module.hot.accept`:
 
 __print.js__
 
@@ -173,7 +173,11 @@ This is just one example, but there are many others that can easily trip people 
 
 Hot Module Replacement with CSS is actually fairly straightforward with the help of the `style-loader`. This loader uses `module.hot.accept` behind the scenes to patch `<style>` tags when CSS dependencies are updated.
 
-First let's install both loaders with the following command: `npm install --save-dev style-loader css-loader`
+First let's install both loaders with the following command: 
+
+```bash
+npm install --save-dev style-loader css-loader
+```
 
 Now let's update the configuration file to make use of the loader.
 
@@ -235,7 +239,7 @@ __styles.css__
 
 ``` css
 body {
-  background: red;
+  background: blue;
 }
 ```
 
@@ -278,10 +282,10 @@ Change the style on `body` to `background: red;` and you should immediately see 
 __styles.css__
 
 ``` diff
-body {
--  background: blue;
-+  background: red;
-}
+  body {
+-   background: blue;
++   background: red;
+  }
 ```
 
 
