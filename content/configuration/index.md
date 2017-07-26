@@ -163,7 +163,7 @@ module.exports = {
       },
 
       {
-        [test](/configuration/module#rule-test): "\.html$",
+        [test](/configuration/module#rule-test): /\.html$/,
 
         [use](/configuration/module#rule-use): [
           // apply multiple loaders and options
