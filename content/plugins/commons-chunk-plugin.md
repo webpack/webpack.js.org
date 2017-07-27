@@ -22,6 +22,8 @@ new webpack.optimize.CommonsChunkPlugin(options)
   names: string[],
   // The chunk name of the commons chunk. An existing chunk can be selected by passing a name of an existing chunk.
   // If an array of strings is passed this is equal to invoking the plugin multiple times for each chunk name.
+  // If specified in async mode, name or names will denote the sources for the async chunk. For example, if async is set,
+  // and name is set to X, then only async imports inside of X will be considered for the created chunk.
   // If omitted and `options.async` or `options.children` is set all chunks are used,
   // otherwise `options.filename` is used as chunk name.
 
@@ -38,6 +40,9 @@ new webpack.optimize.CommonsChunkPlugin(options)
   chunks: string[],
   // Select the source chunks by chunk names. The chunk must be a child of the commons chunk.
   // If omitted all entry chunks are selected.
+  // In async mode, chunks will denote which async imports are considered. For example, if name is set to X,
+  // and chunks is set to ['a', 'b', 'c'] then only chunks a, b, and c inside of X will be considered for the 
+  // created chunk
 
   children: boolean,
   // If `true` all children of the commons chunk are selected
