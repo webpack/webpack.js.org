@@ -54,7 +54,7 @@ __webpack.config.js__
 +     new webpack.HotModuleReplacementPlugin()
     ],
     output: {
-      filename: 'bundle.js',
+      filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist')
     }
   };
@@ -213,7 +213,7 @@ __webpack.config.js__
       new webpack.HotModuleReplacementPlugin()
     ],
     output: {
-      filename: 'bundle.js',
+      filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist')
     }
   };
@@ -246,6 +246,7 @@ body {
 __index.js__
 
 ``` diff
+  import _ from 'lodash';
   import printMe from './print.js';
 + import './styles.css';
 
