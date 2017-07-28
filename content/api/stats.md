@@ -149,7 +149,7 @@ What good would these statistics be without some description of the compiled app
 }
 ```
 
-Every module also contains a list of `reasons` objects describing why that module was included in the dependency graph. Each "reason" is very similar to the `origins` objects seen above in the [chunk objects](#chunk-objects) section:
+Every module also contains a list of `reasons` objects describing why that module was included in the dependency graph. Each "reason" is similar to the `origins` seen above in the [chunk objects](#chunk-objects) section:
 
 ``` js-with-links
 {
