@@ -23,7 +23,7 @@ The top-level structure of the output JSON file is fairly straightforward but th
   "version": "1.4.13", // Version of webpack used for the compilation
   "hash": "11593e3b3ac85436984a", // Compilation specific hash
   "time": 2469, // Compilation time in milliseconds
-  "filteredModules": 0, // A count of excluded modules when [`exclude`](/configuration/stats/#stats) is passed to the [`toJSON`](/api/node/#stats-tojson-options-) method
+  "filteredModules": 0, // A count of excluded modules when [`exclude`](/configuration/stats/#stats) is passed to the [`toJson`](/api/node/#stats-tojson-options-) method
   "assetsByChunkName": {
     // Chunk name to emitted asset(s) mapping
     "main": "web.js?h=11593e3b3ac85436984a",
@@ -174,3 +174,5 @@ Critical dependencies:
 2:114-121 This seem to be a pre-built javascript file. Even while this is possible, it's not recommended. Try to require to orginal source to get better results.
  @ ../cases/parsing/browserify/index.js 2:114-121
 ```
+
+W> Note that the stack traces are removed when `errorDetails: false` is passed to the `toJson` method. The `errorDetails` option is set to `true` by default.
