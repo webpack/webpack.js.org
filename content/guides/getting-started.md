@@ -11,6 +11,7 @@ contributors:
   - aaronang
   - jecoopr
   - TheDutchCoder
+  - sudarsangp
 ---
 
 As you may already know, webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interface with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
@@ -160,11 +161,13 @@ T> Your output may vary a bit, but if the build is successful then you are good 
 Open `index.html` in your browser and, if everything went right, you should see the following text: 'Hello webpack'.
 
 
-## ES2015 Modules
+## Modules
 
-Although `import` and `export` statements are not supported in most browsers (yet), webpack does support them. Behind the scenes, webpack actually "transpiles" the code so that older browsers can also run it. If you inspect `dist/bundle.js`, you might be able to see how webpack does this, it's quite ingenious!
+The [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) statements have been standardized in [ES2015](https://babeljs.io/learn-es2015/). Although they are not supported in most browsers yet, webpack does support them out of the box.
 
-Note that webpack will not alter any code other than `import` and `export` statements. If you are using other [ES2015 features](http://es6-features.org/), make sure to use a transpiler such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/). See our [Module API](/api/module-methods) documentation for information on the various module syntaxes supported by webpack.
+Behind the scenes, webpack actually "transpiles" the code so that older browsers can also run it. If you inspect `dist/bundle.js`, you might be able to see how webpack does this, it's quite ingenious! Besides `import` and `export`, webpack supports various other module syntaxes as well, see [Module API](/api/module-methods) for more information.
+
+Note that webpack will not alter any code other than `import` and `export` statements. If you are using other [ES2015 features](http://es6-features.org/), make sure to [use a transpiler](/loaders/#transpiling) such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/) via webpack's [loader system](/concepts/loaders/).
 
 
 ## Using a Configuration
@@ -186,7 +189,7 @@ __project__
 __webpack.config.js__
 
 ``` javascript
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   entry: './src/index.js',
@@ -234,7 +237,7 @@ __package.json__
 }
 ```
 
-Now the `npm run build` command can be used in place of the longer commands we used earlier. Note that within `scripts` we can reference locally installed npm packages by name instead of writing out the entire path. This convention is the standard in most npm-based projects and allows us to directly call `webpack`, instead of `node_modules/webpack/bin/webpack.js`
+Now the `npm run build` command can be used in place of the longer commands we used earlier. Note that within `scripts` we can reference locally installed npm packages by name instead of writing out the entire path. This convention is the standard in most npm-based projects and allows us to directly call `webpack`, instead of `./node_modules/.bin/webpack`
 
 Now run the following command and see if your script alias works:
 
