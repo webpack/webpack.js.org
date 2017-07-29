@@ -58,7 +58,7 @@ T> 请查看 [`output.sourceMapFilename`](/configuration/output#output-sourcemap
 
 `eval-source-map` - 每个模块使用 `eval()` 执行，并且 SourceMap 转换为 DataUrl 后添加到 `eval()` 中。初始化 SourceMap 时比较慢，但是会在重构建时提供很快的速度，并且生成实际的文件。行数能够正确映射，因为会映射到原始代码中。
 
-和 `eval-source-map` 类似，每个模块都使用 `eval()` 执行。然而，使用此选项，Source Map 将传递给 `eval()` 作为 Data URL 调用。它是“低性能开销”的，因为它没有映射到列，只映射到行数。
+`cheap-eval-source-map` - 和 `eval-source-map` 类似，每个模块都使用 `eval()` 执行。然而，使用此选项，Source Map 将传递给 `eval()` 作为 Data URL 调用。它是“低性能开销”的，因为它没有映射到列，只映射到行数。
 
 `cheap-module-eval-source-map` - 和 `cheap-eval-source-map` 类似，然而，在这种情况下，loader 能够处理映射以获得更好的结果。
 
