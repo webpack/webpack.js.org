@@ -49,6 +49,8 @@ See [TypeScript's documentation](https://www.typescriptlang.org/docs/handbook/ts
 
 __webpack.config.js__
 
+To learn more about webpack configuration, see the [configuration concepts](/concepts/configuration/).
+
 Now let's configure webpack to handle TypeScript:
 
 ```js
@@ -85,7 +87,7 @@ We will use `ts-loader` in this guide as it makes enabling additional webpack fe
 
 ## Source Maps
 
-To learn more about Source Maps, see the [development guide](/guides/development.md)
+To learn more about Source Maps, see the [development guide](/guides/development.md).
 
 To enable source maps, we must configure TypeScript to output inline source maps to our compiled JavaScript files. The following line must be added to our `tsconfig.json`:
 
@@ -135,9 +137,9 @@ declare module "*.svg" {
 
 Here we declare a new module for SVGs by specifying any import that ends in `.svg` and defining the module's `content` as `any`. We could be more explicit about it being a url by defining the type as string. The same concept applies to other assets including CSS, SCSS, JSON and more.
 
+
 ## Performance Loader
 
 [`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader)
 
-Awesome TypeScript Loader has created a [wonderful explanation](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader) of the difference between `awesome-typescript-loader` and `ts-loader`. The
-configuration for `awesome-typescript-loader` is more complex than `ts-loader`.
+Awesome TypeScript Loader has created a [wonderful explanation](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader) of the difference between `awesome-typescript-loader` and `ts-loader`. The configuration for `awesome-typescript-loader` is more complex than `ts-loader`.
