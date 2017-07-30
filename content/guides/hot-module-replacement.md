@@ -147,7 +147,7 @@ __print.js__
     })
   }
 
-  let element = component();
++  let element = component();
 
   function component() {
     var element = document.createElement('div');
@@ -163,7 +163,8 @@ __print.js__
     return element;
   }
 
-  document.body.appendChild(element);
+-  document.body.appendChild(component());
++  document.body.appendChild(element);
 ```
 
 This is just one example, but there are many others that can easily trip people up. Luckily, there are a lot of loaders out there (some of which are mentioned below) that will make hot module replacement much easier.
@@ -173,7 +174,7 @@ This is just one example, but there are many others that can easily trip people 
 
 Hot Module Replacement with CSS is actually fairly straightforward with the help of the `style-loader`. This loader uses `module.hot.accept` behind the scenes to patch `<style>` tags when CSS dependencies are updated.
 
-First let's install both loaders with the following command: 
+First let's install both loaders with the following command:
 
 ```bash
 npm install --save-dev style-loader css-loader
