@@ -4,6 +4,7 @@ sort: 14
 contributors:
   - morsdyce
   - kkamali
+  - mtrivera
 ---
 
 [TypeScript](https://www.typescriptlang.org) is a typed superset of JavaScript that compiles to plain JavaScript. In this guide we will learn how to integrate TypeScript with webpack.
@@ -16,7 +17,7 @@ In order to get started with webpack and TypeScript, first we must [install webp
 To start using webpack with TypeScript you need a couple of things:
 
 1. Install the TypeScript compiler in your project.
-2. Install a TypeScript loader (in this case we're using ts-loader).
+2. Install a TypeScript loader (in this case we're using `ts-loader`).
 3. Create a __tsconfig.json__ file to contain our TypeScript compilation configuration.
 4. Create __webpack.config.js__ to contain our webpack configuration.
 
@@ -48,6 +49,8 @@ See [TypeScript's documentation](https://www.typescriptlang.org/docs/handbook/ts
 
 __webpack.config.js__
 
+To learn more about webpack configuration, see the [configuration concepts](/concepts/configuration/).
+
 Now let's configure webpack to handle TypeScript:
 
 ```js
@@ -75,19 +78,16 @@ module.exports = {
 This will direct webpack to _enter_ through `./index.ts`, _load_ all `.ts` and `.tsx` files through the `ts-loader`, and _output_ a `bundle.js` file in our current directory.
 
 
-## Loaders
+## Loader
 
-The following loaders for TypeScript:
+[`ts-loader`](https://github.com/TypeStrong/ts-loader)
 
-- [`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader)
-- [`ts-loader`](https://github.com/TypeStrong/ts-loader)
-
-Awesome TypeScript Loader has created a [wonderful explanation](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader) of the difference between `awesome-typescript-loader` and `ts-loader`.
-
-We chose to use `ts-loader` in this guide as it makes enabling additional webpack features, such as importing other web assets, a bit easier.
+We will use `ts-loader` in this guide as it makes enabling additional webpack features, such as importing other web assets, a bit easier.
 
 
 ## Source Maps
+
+To learn more about Source Maps, see the [development guide](/guides/development.md).
 
 To enable source maps, we must configure TypeScript to output inline source maps to our compiled JavaScript files. The following line must be added to our `tsconfig.json`:
 
@@ -109,9 +109,9 @@ module.exports = {
 See the [devtool documentation](/configuration/devtool/) for more information.
 
 
-## Using 3rd Party Libraries
+## Using Third Party Libraries
 
-When installing 3rd party libraries from npm, it is important to remember to install the typing definition for that library. These definitions can be found in the [@types package](https://github.com/DefinitelyTyped/DefinitelyTyped).
+When installing third party libraries from npm, it is important to remember to install the typing definition for that library. These definitions can be found at [TypeSearch](http://microsoft.github.io/TypeSearch/).
 
 For example if we want to install lodash we can run the following command to get the typings for it:
 
@@ -124,7 +124,7 @@ For more information see [this blog post](https://blogs.msdn.microsoft.com/types
 
 ## Importing Other Assets
 
-To use non code assets with TypeScript, we need to defer the type for these imports. This requires a `custom.d.ts` file which signifies custom definitions for TypeScript in our project. Let's set up a declaration for `.svg` files:
+To use non-code assets with TypeScript, we need to defer the type for these imports. This requires a `custom.d.ts` file which signifies custom definitions for TypeScript in our project. Let's set up a declaration for `.svg` files:
 
 __custom.d.ts__
 
@@ -136,3 +136,10 @@ declare module "*.svg" {
 ```
 
 Here we declare a new module for SVGs by specifying any import that ends in `.svg` and defining the module's `content` as `any`. We could be more explicit about it being a url by defining the type as string. The same concept applies to other assets including CSS, SCSS, JSON and more.
+
+
+## Performance Loader
+
+[`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader)
+
+Awesome TypeScript Loader has created a [wonderful explanation](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader) of the difference between `awesome-typescript-loader` and `ts-loader`. The configuration for `awesome-typescript-loader` is more complex than `ts-loader`.
