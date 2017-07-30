@@ -164,6 +164,7 @@ module.exports = {
       },
 
       {
+        [test](/configuration/module#rule-test): /\.html$/,
         [test](/configuration/module#rule-test): "\.html$"
 
         [use](/configuration/module#rule-use): [
@@ -418,7 +419,7 @@ module.exports = {
   [node](node): {
     // Polyfills and mocks to run Node.js-
     // environment code in non-Node environments.
-    
+
     [console](node#node-console): false, // boolean | "mock"
     [global](node#node-global): true, // boolean | "mock"
     [process](node#node-process): true, // boolean
