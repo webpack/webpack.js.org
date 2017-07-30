@@ -124,7 +124,7 @@ The function will be called with the loader [`options`](https://webpack.js.org/c
 
 Property | Type | Description
 :--------|:-----|:-----------
-`code`   | `string|Buffer` | **Required**. The code that is passed to the next loader or to webpack.
+`code`   | `string\|Buffer` | **Required**. The code that is passed to the next loader or to webpack.
 `sourceMap` | [`SourceMap`](https://docs.google.com/document/d/1U1RGAehQwRypUTovF1KRlpiOFze0b-_2gc6fAH0KY0k/edit) | **Optional**. Will be passed to the next loader or to webpack.
 `ast` | `any` | **Optional**. An [Abstract Syntax Tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) that will be passed to the next loader. Useful to speed up the build time if the next loader uses the same AST.
 `dependencies` | `Array<string>` | **Default: `[]`**. An array of absolute, native paths to file dependencies that need to be watched for changes.
