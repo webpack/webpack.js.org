@@ -161,6 +161,11 @@ To disable `contentBase`:
 contentBase: false
 ```
 
+Usage via the CLI
+```
+webpack-dev-server --content-base /path/to/content/dir
+```
+
 
 ## `devServer.filename` 🔑
 
