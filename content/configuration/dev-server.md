@@ -525,6 +525,11 @@ With `quiet` enabled, nothing except the initial startup information will be wri
 quiet: true
 ```
 
+Usage via the CLI
+```
+webpack-dev-server --quiet
+```
+
 ## `devServer.setup`
 
 `function`
