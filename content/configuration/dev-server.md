@@ -296,6 +296,11 @@ When `lazy` is enabled, the dev-server will only compile the bundle when it gets
 lazy: true
 ```
 
+Usage via the CLI
+```
+webpack-dev-server --lazy
+```
+
 T> `watchOptions` will have no effect when used with **lazy mode**.
 
 T> If you use the CLI, make sure **inline mode** is disabled.
