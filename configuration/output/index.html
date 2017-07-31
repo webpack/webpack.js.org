@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Output</title>
+    <meta name="description" content="webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#2B3A42">
+    <link rel="shortcut icon" href="/assets/favicon.ico">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:200,400,400i,500" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+    
+      <link href="/bca43175235e0cf6fb31.css" rel="stylesheet">
+    
+
+    <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+  </head>
+  <body>
+    <div id="site" class="site"><div class="interactive" id="components/notification-bar/notification-bar.jsx" data-props="{}"><div class="notification-bar "></div></div><div class="interactive" id="components/navigation/navigation.jsx" data-props="{&quot;sections&quot;:[{&quot;url&quot;:&quot;get-started&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;Concepts&quot;,&quot;url&quot;:&quot;concepts&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Entry Points&quot;,&quot;url&quot;:&quot;concepts/entry-points&quot;},{&quot;title&quot;:&quot;Output&quot;,&quot;url&quot;:&quot;concepts/output&quot;},{&quot;title&quot;:&quot;Loaders&quot;,&quot;url&quot;:&quot;concepts/loaders&quot;},{&quot;title&quot;:&quot;Plugins&quot;,&quot;url&quot;:&quot;concepts/plugins&quot;},{&quot;title&quot;:&quot;Configuration&quot;,&quot;url&quot;:&quot;concepts/configuration&quot;},{&quot;title&quot;:&quot;Modules&quot;,&quot;url&quot;:&quot;concepts/modules&quot;},{&quot;title&quot;:&quot;Module Resolution&quot;,&quot;url&quot;:&quot;concepts/module-resolution&quot;},{&quot;title&quot;:&quot;Dependency Graph&quot;,&quot;url&quot;:&quot;concepts/dependency-graph&quot;},{&quot;title&quot;:&quot;The Manifest&quot;,&quot;url&quot;:&quot;concepts/manifest&quot;},{&quot;title&quot;:&quot;Targets&quot;,&quot;url&quot;:&quot;concepts/targets&quot;},{&quot;title&quot;:&quot;Hot Module Replacement&quot;,&quot;url&quot;:&quot;concepts/hot-module-replacement&quot;}]},{&quot;title&quot;:&quot;Guides&quot;,&quot;url&quot;:&quot;guides&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Installation&quot;,&quot;url&quot;:&quot;guides/installation&quot;},{&quot;title&quot;:&quot;Getting Started&quot;,&quot;url&quot;:&quot;guides/getting-started&quot;},{&quot;title&quot;:&quot;Asset Management&quot;,&quot;url&quot;:&quot;guides/asset-management&quot;},{&quot;title&quot;:&quot;Output Management&quot;,&quot;url&quot;:&quot;guides/output-management&quot;},{&quot;title&quot;:&quot;Development&quot;,&quot;url&quot;:&quot;guides/development&quot;},{&quot;title&quot;:&quot;Hot Module Replacement&quot;,&quot;url&quot;:&quot;guides/hot-module-replacement&quot;},{&quot;title&quot;:&quot;Production&quot;,&quot;url&quot;:&quot;guides/production&quot;},{&quot;title&quot;:&quot;Tree Shaking&quot;,&quot;url&quot;:&quot;guides/tree-shaking&quot;},{&quot;title&quot;:&quot;Code Splitting&quot;,&quot;url&quot;:&quot;guides/code-splitting&quot;},{&quot;title&quot;:&quot;Lazy Loading&quot;,&quot;url&quot;:&quot;guides/lazy-loading&quot;},{&quot;title&quot;:&quot;Caching&quot;,&quot;url&quot;:&quot;guides/caching&quot;},{&quot;title&quot;:&quot;Authoring Libraries&quot;,&quot;url&quot;:&quot;guides/author-libraries&quot;},{&quot;title&quot;:&quot;Shimming&quot;,&quot;url&quot;:&quot;guides/shimming&quot;},{&quot;title&quot;:&quot;TypeScript&quot;,&quot;url&quot;:&quot;guides/typescript&quot;},{&quot;title&quot;:&quot;Migrating from v1 to v2&quot;,&quot;url&quot;:&quot;guides/migrating&quot;},{&quot;title&quot;:&quot;Environment Variables&quot;,&quot;url&quot;:&quot;guides/environment-variables&quot;},{&quot;title&quot;:&quot;Development - Vagrant&quot;,&quot;url&quot;:&quot;guides/development-vagrant&quot;},{&quot;title&quot;:&quot;Dependency Management&quot;,&quot;url&quot;:&quot;guides/dependency-management&quot;},{&quot;title&quot;:&quot;Public Path&quot;,&quot;url&quot;:&quot;guides/public-path&quot;},{&quot;title&quot;:&quot;Integrations&quot;,&quot;url&quot;:&quot;guides/integrations&quot;}]},{&quot;title&quot;:&quot;Starter Kits&quot;,&quot;url&quot;:&quot;guides/starter-kits&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;Development&quot;,&quot;url&quot;:&quot;development&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;How to write a plugin?&quot;,&quot;url&quot;:&quot;development/how-to-write-a-plugin&quot;},{&quot;title&quot;:&quot;Useful Plugin Patterns&quot;,&quot;url&quot;:&quot;development/plugin-patterns&quot;},{&quot;title&quot;:&quot;How to write a loader?&quot;,&quot;url&quot;:&quot;development/how-to-write-a-loader&quot;},{&quot;title&quot;:&quot;webpack merge, tag and release process&quot;,&quot;url&quot;:&quot;development/release-process&quot;}]},{&quot;title&quot;:&quot;Configuration&quot;,&quot;url&quot;:&quot;configuration&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Configuration Languages&quot;,&quot;url&quot;:&quot;configuration/configuration-languages&quot;},{&quot;title&quot;:&quot;Configuration Types&quot;,&quot;url&quot;:&quot;configuration/configuration-types&quot;},{&quot;title&quot;:&quot;Entry and Context&quot;,&quot;url&quot;:&quot;configuration/entry-context&quot;},{&quot;title&quot;:&quot;Output&quot;,&quot;url&quot;:&quot;configuration/output&quot;},{&quot;title&quot;:&quot;Module&quot;,&quot;url&quot;:&quot;configuration/module&quot;},{&quot;title&quot;:&quot;Resolve&quot;,&quot;url&quot;:&quot;configuration/resolve&quot;},{&quot;title&quot;:&quot;Plugins&quot;,&quot;url&quot;:&quot;configuration/plugins&quot;},{&quot;title&quot;:&quot;DevServer&quot;,&quot;url&quot;:&quot;configuration/dev-server&quot;},{&quot;title&quot;:&quot;Devtool&quot;,&quot;url&quot;:&quot;configuration/devtool&quot;},{&quot;title&quot;:&quot;Target&quot;,&quot;url&quot;:&quot;configuration/target&quot;},{&quot;title&quot;:&quot;Watch and WatchOptions&quot;,&quot;url&quot;:&quot;configuration/watch&quot;},{&quot;title&quot;:&quot;Externals&quot;,&quot;url&quot;:&quot;configuration/externals&quot;},{&quot;title&quot;:&quot;Node&quot;,&quot;url&quot;:&quot;configuration/node&quot;},{&quot;title&quot;:&quot;Performance&quot;,&quot;url&quot;:&quot;configuration/performance&quot;},{&quot;title&quot;:&quot;Stats&quot;,&quot;url&quot;:&quot;configuration/stats&quot;},{&quot;title&quot;:&quot;Other Options&quot;,&quot;url&quot;:&quot;configuration/other-options&quot;}]},{&quot;title&quot;:&quot;API&quot;,&quot;url&quot;:&quot;api&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Stats JSON&quot;,&quot;url&quot;:&quot;api/stats&quot;},{&quot;title&quot;:&quot;Command Line Interface (CLI)&quot;,&quot;url&quot;:&quot;api/cli&quot;},{&quot;title&quot;:&quot;Module API - Methods&quot;,&quot;url&quot;:&quot;api/module-methods&quot;},{&quot;title&quot;:&quot;Module API - Variables&quot;,&quot;url&quot;:&quot;api/module-variables&quot;},{&quot;title&quot;:&quot;Node.js API&quot;,&quot;url&quot;:&quot;api/node&quot;},{&quot;title&quot;:&quot;Loader API&quot;,&quot;url&quot;:&quot;api/loaders&quot;},{&quot;title&quot;:&quot;Hot Module Replacement&quot;,&quot;url&quot;:&quot;api/hot-module-replacement&quot;}]},{&quot;title&quot;:&quot;API&quot;,&quot;url&quot;:&quot;api/plugins&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Tapable&quot;,&quot;url&quot;:&quot;api/plugins/tapable&quot;},{&quot;title&quot;:&quot;Compiler&quot;,&quot;url&quot;:&quot;api/plugins/compiler&quot;},{&quot;title&quot;:&quot;Compilation&quot;,&quot;url&quot;:&quot;api/plugins/compilation&quot;},{&quot;title&quot;:&quot;Context/Normal Module Factories&quot;,&quot;url&quot;:&quot;api/plugins/module-factories&quot;},{&quot;title&quot;:&quot;Resolver&quot;,&quot;url&quot;:&quot;api/plugins/resolver&quot;},{&quot;title&quot;:&quot;Dependency&quot;,&quot;url&quot;:&quot;api/plugins/dependency&quot;},{&quot;title&quot;:&quot;Parser&quot;,&quot;url&quot;:&quot;api/plugins/parser&quot;},{&quot;title&quot;:&quot;Templates&quot;,&quot;url&quot;:&quot;api/plugins/template&quot;}]},{&quot;url&quot;:&quot;pluginsapi&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;Loaders&quot;,&quot;url&quot;:&quot;loaders&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;babel-loader&quot;,&quot;url&quot;:&quot;loaders/babel-loader&quot;},{&quot;title&quot;:&quot;bundle-loader&quot;,&quot;url&quot;:&quot;loaders/bundle-loader&quot;},{&quot;title&quot;:&quot;cache-loader&quot;,&quot;url&quot;:&quot;loaders/cache-loader&quot;},{&quot;title&quot;:&quot;coffee-loader&quot;,&quot;url&quot;:&quot;loaders/coffee-loader&quot;},{&quot;title&quot;:&quot;coffee-redux-loader&quot;,&quot;url&quot;:&quot;loaders/coffee-redux-loader&quot;},{&quot;title&quot;:&quot;coverjs-loader&quot;,&quot;url&quot;:&quot;loaders/coverjs-loader&quot;},{&quot;title&quot;:&quot;css-loader&quot;,&quot;url&quot;:&quot;loaders/css-loader&quot;},{&quot;title&quot;:&quot;exports-loader&quot;,&quot;url&quot;:&quot;loaders/exports-loader&quot;},{&quot;title&quot;:&quot;expose-loader&quot;,&quot;url&quot;:&quot;loaders/expose-loader&quot;},{&quot;title&quot;:&quot;extract-loader&quot;,&quot;url&quot;:&quot;loaders/extract-loader&quot;},{&quot;title&quot;:&quot;file-loader&quot;,&quot;url&quot;:&quot;loaders/file-loader&quot;},{&quot;title&quot;:&quot;gzip-loader&quot;,&quot;url&quot;:&quot;loaders/gzip-loader&quot;},{&quot;title&quot;:&quot;html-loader&quot;,&quot;url&quot;:&quot;loaders/html-loader&quot;},{&quot;title&quot;:&quot;i18n-loader&quot;,&quot;url&quot;:&quot;loaders/i18n-loader&quot;},{&quot;title&quot;:&quot;imports-loader&quot;,&quot;url&quot;:&quot;loaders/imports-loader&quot;},{&quot;title&quot;:&quot;istanbul-instrumenter-loader&quot;,&quot;url&quot;:&quot;loaders/istanbul-instrumenter-loader&quot;},{&quot;title&quot;:&quot;jshint-loader&quot;,&quot;url&quot;:&quot;loaders/jshint-loader&quot;},{&quot;title&quot;:&quot;json-loader&quot;,&quot;url&quot;:&quot;loaders/json-loader&quot;},{&quot;title&quot;:&quot;json5-loader&quot;,&quot;url&quot;:&quot;loaders/json5-loader&quot;},{&quot;title&quot;:&quot;less-loader&quot;,&quot;url&quot;:&quot;loaders/less-loader&quot;},{&quot;title&quot;:&quot;mocha-loader&quot;,&quot;url&quot;:&quot;loaders/mocha-loader&quot;},{&quot;title&quot;:&quot;multi-loader&quot;,&quot;url&quot;:&quot;loaders/multi-loader&quot;},{&quot;title&quot;:&quot;node-loader&quot;,&quot;url&quot;:&quot;loaders/node-loader&quot;},{&quot;title&quot;:&quot;null-loader&quot;,&quot;url&quot;:&quot;loaders/null-loader&quot;},{&quot;title&quot;:&quot;polymer-webpack-loader&quot;,&quot;url&quot;:&quot;loaders/polymer-webpack-loader&quot;},{&quot;title&quot;:&quot;postcss-loader&quot;,&quot;url&quot;:&quot;loaders/postcss-loader&quot;},{&quot;title&quot;:&quot;raw-loader&quot;,&quot;url&quot;:&quot;loaders/raw-loader&quot;},{&quot;title&quot;:&quot;react-proxy-loader&quot;,&quot;url&quot;:&quot;loaders/react-proxy-loader&quot;},{&quot;title&quot;:&quot;restyle-loader&quot;,&quot;url&quot;:&quot;loaders/restyle-loader&quot;},{&quot;title&quot;:&quot;sass-loader&quot;,&quot;url&quot;:&quot;loaders/sass-loader&quot;},{&quot;title&quot;:&quot;script-loader&quot;,&quot;url&quot;:&quot;loaders/script-loader&quot;},{&quot;title&quot;:&quot;source-map-loader&quot;,&quot;url&quot;:&quot;loaders/source-map-loader&quot;},{&quot;title&quot;:&quot;style-loader&quot;,&quot;url&quot;:&quot;loaders/style-loader&quot;},{&quot;title&quot;:&quot;svg-inline-loader&quot;,&quot;url&quot;:&quot;loaders/svg-inline-loader&quot;},{&quot;title&quot;:&quot;thread-loader&quot;,&quot;url&quot;:&quot;loaders/thread-loader&quot;},{&quot;title&quot;:&quot;transform-loader&quot;,&quot;url&quot;:&quot;loaders/transform-loader&quot;},{&quot;title&quot;:&quot;url-loader&quot;,&quot;url&quot;:&quot;loaders/url-loader&quot;},{&quot;title&quot;:&quot;val-loader&quot;,&quot;url&quot;:&quot;loaders/val-loader&quot;},{&quot;title&quot;:&quot;worker-loader&quot;,&quot;url&quot;:&quot;loaders/worker-loader&quot;},{&quot;title&quot;:&quot;yaml-frontmatter-loader&quot;,&quot;url&quot;:&quot;loaders/yaml-frontmatter-loader&quot;}]},{&quot;title&quot;:&quot;Plugins&quot;,&quot;url&quot;:&quot;plugins&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;MinChunkSizePlugin&quot;,&quot;url&quot;:&quot;plugins/min-chunk-size-plugin&quot;},{&quot;title&quot;:&quot;AggressiveSplittingPlugin&quot;,&quot;url&quot;:&quot;plugins/aggressive-splitting-plugin&quot;},{&quot;title&quot;:&quot;BabiliWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/babili-webpack-plugin&quot;},{&quot;title&quot;:&quot;BannerPlugin&quot;,&quot;url&quot;:&quot;plugins/banner-plugin&quot;},{&quot;title&quot;:&quot;CommonsChunkPlugin&quot;,&quot;url&quot;:&quot;plugins/commons-chunk-plugin&quot;},{&quot;title&quot;:&quot;ComponentWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/component-webpack-plugin&quot;},{&quot;title&quot;:&quot;CompressionWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/compression-webpack-plugin&quot;},{&quot;title&quot;:&quot;ContextReplacementPlugin&quot;,&quot;url&quot;:&quot;plugins/context-replacement-plugin&quot;},{&quot;title&quot;:&quot;DefinePlugin&quot;,&quot;url&quot;:&quot;plugins/define-plugin&quot;},{&quot;title&quot;:&quot;DllPlugin&quot;,&quot;url&quot;:&quot;plugins/dll-plugin&quot;},{&quot;title&quot;:&quot;EnvironmentPlugin&quot;,&quot;url&quot;:&quot;plugins/environment-plugin&quot;},{&quot;title&quot;:&quot;ExtractTextWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/extract-text-webpack-plugin&quot;},{&quot;title&quot;:&quot;HashedModuleIdsPlugin&quot;,&quot;url&quot;:&quot;plugins/hashed-module-ids-plugin&quot;},{&quot;title&quot;:&quot;HotModuleReplacementPlugin&quot;,&quot;url&quot;:&quot;plugins/hot-module-replacement-plugin&quot;},{&quot;title&quot;:&quot;HtmlWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/html-webpack-plugin&quot;},{&quot;title&quot;:&quot;I18nWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/i18n-webpack-plugin&quot;},{&quot;title&quot;:&quot;IgnorePlugin&quot;,&quot;url&quot;:&quot;plugins/ignore-plugin&quot;},{&quot;title&quot;:&quot;LimitChunkCountPlugin&quot;,&quot;url&quot;:&quot;plugins/limit-chunk-count-plugin&quot;},{&quot;title&quot;:&quot;LoaderOptionsPlugin&quot;,&quot;url&quot;:&quot;plugins/loader-options-plugin&quot;},{&quot;title&quot;:&quot;NamedModulesPlugin&quot;,&quot;url&quot;:&quot;plugins/named-modules-plugin&quot;},{&quot;title&quot;:&quot;NoEmitOnErrorsPlugin&quot;,&quot;url&quot;:&quot;plugins/no-emit-on-errors-plugin&quot;},{&quot;title&quot;:&quot;NormalModuleReplacementPlugin&quot;,&quot;url&quot;:&quot;plugins/normal-module-replacement-plugin&quot;},{&quot;title&quot;:&quot;NpmInstallWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/npm-install-webpack-plugin&quot;},{&quot;title&quot;:&quot;PrefetchPlugin&quot;,&quot;url&quot;:&quot;plugins/prefetch-plugin&quot;},{&quot;title&quot;:&quot;ProvidePlugin&quot;,&quot;url&quot;:&quot;plugins/provide-plugin&quot;},{&quot;title&quot;:&quot;SourceMapDevToolPlugin&quot;,&quot;url&quot;:&quot;plugins/source-map-dev-tool-plugin&quot;},{&quot;title&quot;:&quot;UglifyjsWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/uglifyjs-webpack-plugin&quot;},{&quot;title&quot;:&quot;WatchIgnorePlugin&quot;,&quot;url&quot;:&quot;plugins/watch-ignore-plugin&quot;},{&quot;title&quot;:&quot;ZopfliWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/zopfli-webpack-plugin&quot;}]},{&quot;title&quot;:&quot;Support&quot;,&quot;url&quot;:&quot;support&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;vote&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;vote/feedback&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;vote/moneyDistribution&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;organization&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;Other&quot;,&quot;url&quot;:&quot;/&quot;,&quot;pages&quot;:[]}],&quot;pageUrl&quot;:&quot;configuration/output&quot;}"><header class="navigation"></header></div><div class="interactive" id="components/sidebar-mobile/sidebar-mobile.jsx" data-props="{&quot;sections&quot;:[{&quot;url&quot;:&quot;get-started&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;Concepts&quot;,&quot;url&quot;:&quot;concepts&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Entry Points&quot;,&quot;url&quot;:&quot;concepts/entry-points&quot;},{&quot;title&quot;:&quot;Output&quot;,&quot;url&quot;:&quot;concepts/output&quot;},{&quot;title&quot;:&quot;Loaders&quot;,&quot;url&quot;:&quot;concepts/loaders&quot;},{&quot;title&quot;:&quot;Plugins&quot;,&quot;url&quot;:&quot;concepts/plugins&quot;},{&quot;title&quot;:&quot;Configuration&quot;,&quot;url&quot;:&quot;concepts/configuration&quot;},{&quot;title&quot;:&quot;Modules&quot;,&quot;url&quot;:&quot;concepts/modules&quot;},{&quot;title&quot;:&quot;Module Resolution&quot;,&quot;url&quot;:&quot;concepts/module-resolution&quot;},{&quot;title&quot;:&quot;Dependency Graph&quot;,&quot;url&quot;:&quot;concepts/dependency-graph&quot;},{&quot;title&quot;:&quot;The Manifest&quot;,&quot;url&quot;:&quot;concepts/manifest&quot;},{&quot;title&quot;:&quot;Targets&quot;,&quot;url&quot;:&quot;concepts/targets&quot;},{&quot;title&quot;:&quot;Hot Module Replacement&quot;,&quot;url&quot;:&quot;concepts/hot-module-replacement&quot;}]},{&quot;title&quot;:&quot;Guides&quot;,&quot;url&quot;:&quot;guides&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Installation&quot;,&quot;url&quot;:&quot;guides/installation&quot;},{&quot;title&quot;:&quot;Getting Started&quot;,&quot;url&quot;:&quot;guides/getting-started&quot;},{&quot;title&quot;:&quot;Asset Management&quot;,&quot;url&quot;:&quot;guides/asset-management&quot;},{&quot;title&quot;:&quot;Output Management&quot;,&quot;url&quot;:&quot;guides/output-management&quot;},{&quot;title&quot;:&quot;Development&quot;,&quot;url&quot;:&quot;guides/development&quot;},{&quot;title&quot;:&quot;Hot Module Replacement&quot;,&quot;url&quot;:&quot;guides/hot-module-replacement&quot;},{&quot;title&quot;:&quot;Production&quot;,&quot;url&quot;:&quot;guides/production&quot;},{&quot;title&quot;:&quot;Tree Shaking&quot;,&quot;url&quot;:&quot;guides/tree-shaking&quot;},{&quot;title&quot;:&quot;Code Splitting&quot;,&quot;url&quot;:&quot;guides/code-splitting&quot;},{&quot;title&quot;:&quot;Lazy Loading&quot;,&quot;url&quot;:&quot;guides/lazy-loading&quot;},{&quot;title&quot;:&quot;Caching&quot;,&quot;url&quot;:&quot;guides/caching&quot;},{&quot;title&quot;:&quot;Authoring Libraries&quot;,&quot;url&quot;:&quot;guides/author-libraries&quot;},{&quot;title&quot;:&quot;Shimming&quot;,&quot;url&quot;:&quot;guides/shimming&quot;},{&quot;title&quot;:&quot;TypeScript&quot;,&quot;url&quot;:&quot;guides/typescript&quot;},{&quot;title&quot;:&quot;Migrating from v1 to v2&quot;,&quot;url&quot;:&quot;guides/migrating&quot;},{&quot;title&quot;:&quot;Environment Variables&quot;,&quot;url&quot;:&quot;guides/environment-variables&quot;},{&quot;title&quot;:&quot;Development - Vagrant&quot;,&quot;url&quot;:&quot;guides/development-vagrant&quot;},{&quot;title&quot;:&quot;Dependency Management&quot;,&quot;url&quot;:&quot;guides/dependency-management&quot;},{&quot;title&quot;:&quot;Public Path&quot;,&quot;url&quot;:&quot;guides/public-path&quot;},{&quot;title&quot;:&quot;Integrations&quot;,&quot;url&quot;:&quot;guides/integrations&quot;}]},{&quot;title&quot;:&quot;Starter Kits&quot;,&quot;url&quot;:&quot;guides/starter-kits&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;Development&quot;,&quot;url&quot;:&quot;development&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;How to write a plugin?&quot;,&quot;url&quot;:&quot;development/how-to-write-a-plugin&quot;},{&quot;title&quot;:&quot;Useful Plugin Patterns&quot;,&quot;url&quot;:&quot;development/plugin-patterns&quot;},{&quot;title&quot;:&quot;How to write a loader?&quot;,&quot;url&quot;:&quot;development/how-to-write-a-loader&quot;},{&quot;title&quot;:&quot;webpack merge, tag and release process&quot;,&quot;url&quot;:&quot;development/release-process&quot;}]},{&quot;title&quot;:&quot;Configuration&quot;,&quot;url&quot;:&quot;configuration&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Configuration Languages&quot;,&quot;url&quot;:&quot;configuration/configuration-languages&quot;},{&quot;title&quot;:&quot;Configuration Types&quot;,&quot;url&quot;:&quot;configuration/configuration-types&quot;},{&quot;title&quot;:&quot;Entry and Context&quot;,&quot;url&quot;:&quot;configuration/entry-context&quot;},{&quot;title&quot;:&quot;Output&quot;,&quot;url&quot;:&quot;configuration/output&quot;},{&quot;title&quot;:&quot;Module&quot;,&quot;url&quot;:&quot;configuration/module&quot;},{&quot;title&quot;:&quot;Resolve&quot;,&quot;url&quot;:&quot;configuration/resolve&quot;},{&quot;title&quot;:&quot;Plugins&quot;,&quot;url&quot;:&quot;configuration/plugins&quot;},{&quot;title&quot;:&quot;DevServer&quot;,&quot;url&quot;:&quot;configuration/dev-server&quot;},{&quot;title&quot;:&quot;Devtool&quot;,&quot;url&quot;:&quot;configuration/devtool&quot;},{&quot;title&quot;:&quot;Target&quot;,&quot;url&quot;:&quot;configuration/target&quot;},{&quot;title&quot;:&quot;Watch and WatchOptions&quot;,&quot;url&quot;:&quot;configuration/watch&quot;},{&quot;title&quot;:&quot;Externals&quot;,&quot;url&quot;:&quot;configuration/externals&quot;},{&quot;title&quot;:&quot;Node&quot;,&quot;url&quot;:&quot;configuration/node&quot;},{&quot;title&quot;:&quot;Performance&quot;,&quot;url&quot;:&quot;configuration/performance&quot;},{&quot;title&quot;:&quot;Stats&quot;,&quot;url&quot;:&quot;configuration/stats&quot;},{&quot;title&quot;:&quot;Other Options&quot;,&quot;url&quot;:&quot;configuration/other-options&quot;}]},{&quot;title&quot;:&quot;API&quot;,&quot;url&quot;:&quot;api&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Stats JSON&quot;,&quot;url&quot;:&quot;api/stats&quot;},{&quot;title&quot;:&quot;Command Line Interface (CLI)&quot;,&quot;url&quot;:&quot;api/cli&quot;},{&quot;title&quot;:&quot;Module API - Methods&quot;,&quot;url&quot;:&quot;api/module-methods&quot;},{&quot;title&quot;:&quot;Module API - Variables&quot;,&quot;url&quot;:&quot;api/module-variables&quot;},{&quot;title&quot;:&quot;Node.js API&quot;,&quot;url&quot;:&quot;api/node&quot;},{&quot;title&quot;:&quot;Loader API&quot;,&quot;url&quot;:&quot;api/loaders&quot;},{&quot;title&quot;:&quot;Hot Module Replacement&quot;,&quot;url&quot;:&quot;api/hot-module-replacement&quot;}]},{&quot;title&quot;:&quot;API&quot;,&quot;url&quot;:&quot;api/plugins&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Tapable&quot;,&quot;url&quot;:&quot;api/plugins/tapable&quot;},{&quot;title&quot;:&quot;Compiler&quot;,&quot;url&quot;:&quot;api/plugins/compiler&quot;},{&quot;title&quot;:&quot;Compilation&quot;,&quot;url&quot;:&quot;api/plugins/compilation&quot;},{&quot;title&quot;:&quot;Context/Normal Module Factories&quot;,&quot;url&quot;:&quot;api/plugins/module-factories&quot;},{&quot;title&quot;:&quot;Resolver&quot;,&quot;url&quot;:&quot;api/plugins/resolver&quot;},{&quot;title&quot;:&quot;Dependency&quot;,&quot;url&quot;:&quot;api/plugins/dependency&quot;},{&quot;title&quot;:&quot;Parser&quot;,&quot;url&quot;:&quot;api/plugins/parser&quot;},{&quot;title&quot;:&quot;Templates&quot;,&quot;url&quot;:&quot;api/plugins/template&quot;}]},{&quot;url&quot;:&quot;pluginsapi&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;Loaders&quot;,&quot;url&quot;:&quot;loaders&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;babel-loader&quot;,&quot;url&quot;:&quot;loaders/babel-loader&quot;},{&quot;title&quot;:&quot;bundle-loader&quot;,&quot;url&quot;:&quot;loaders/bundle-loader&quot;},{&quot;title&quot;:&quot;cache-loader&quot;,&quot;url&quot;:&quot;loaders/cache-loader&quot;},{&quot;title&quot;:&quot;coffee-loader&quot;,&quot;url&quot;:&quot;loaders/coffee-loader&quot;},{&quot;title&quot;:&quot;coffee-redux-loader&quot;,&quot;url&quot;:&quot;loaders/coffee-redux-loader&quot;},{&quot;title&quot;:&quot;coverjs-loader&quot;,&quot;url&quot;:&quot;loaders/coverjs-loader&quot;},{&quot;title&quot;:&quot;css-loader&quot;,&quot;url&quot;:&quot;loaders/css-loader&quot;},{&quot;title&quot;:&quot;exports-loader&quot;,&quot;url&quot;:&quot;loaders/exports-loader&quot;},{&quot;title&quot;:&quot;expose-loader&quot;,&quot;url&quot;:&quot;loaders/expose-loader&quot;},{&quot;title&quot;:&quot;extract-loader&quot;,&quot;url&quot;:&quot;loaders/extract-loader&quot;},{&quot;title&quot;:&quot;file-loader&quot;,&quot;url&quot;:&quot;loaders/file-loader&quot;},{&quot;title&quot;:&quot;gzip-loader&quot;,&quot;url&quot;:&quot;loaders/gzip-loader&quot;},{&quot;title&quot;:&quot;html-loader&quot;,&quot;url&quot;:&quot;loaders/html-loader&quot;},{&quot;title&quot;:&quot;i18n-loader&quot;,&quot;url&quot;:&quot;loaders/i18n-loader&quot;},{&quot;title&quot;:&quot;imports-loader&quot;,&quot;url&quot;:&quot;loaders/imports-loader&quot;},{&quot;title&quot;:&quot;istanbul-instrumenter-loader&quot;,&quot;url&quot;:&quot;loaders/istanbul-instrumenter-loader&quot;},{&quot;title&quot;:&quot;jshint-loader&quot;,&quot;url&quot;:&quot;loaders/jshint-loader&quot;},{&quot;title&quot;:&quot;json-loader&quot;,&quot;url&quot;:&quot;loaders/json-loader&quot;},{&quot;title&quot;:&quot;json5-loader&quot;,&quot;url&quot;:&quot;loaders/json5-loader&quot;},{&quot;title&quot;:&quot;less-loader&quot;,&quot;url&quot;:&quot;loaders/less-loader&quot;},{&quot;title&quot;:&quot;mocha-loader&quot;,&quot;url&quot;:&quot;loaders/mocha-loader&quot;},{&quot;title&quot;:&quot;multi-loader&quot;,&quot;url&quot;:&quot;loaders/multi-loader&quot;},{&quot;title&quot;:&quot;node-loader&quot;,&quot;url&quot;:&quot;loaders/node-loader&quot;},{&quot;title&quot;:&quot;null-loader&quot;,&quot;url&quot;:&quot;loaders/null-loader&quot;},{&quot;title&quot;:&quot;polymer-webpack-loader&quot;,&quot;url&quot;:&quot;loaders/polymer-webpack-loader&quot;},{&quot;title&quot;:&quot;postcss-loader&quot;,&quot;url&quot;:&quot;loaders/postcss-loader&quot;},{&quot;title&quot;:&quot;raw-loader&quot;,&quot;url&quot;:&quot;loaders/raw-loader&quot;},{&quot;title&quot;:&quot;react-proxy-loader&quot;,&quot;url&quot;:&quot;loaders/react-proxy-loader&quot;},{&quot;title&quot;:&quot;restyle-loader&quot;,&quot;url&quot;:&quot;loaders/restyle-loader&quot;},{&quot;title&quot;:&quot;sass-loader&quot;,&quot;url&quot;:&quot;loaders/sass-loader&quot;},{&quot;title&quot;:&quot;script-loader&quot;,&quot;url&quot;:&quot;loaders/script-loader&quot;},{&quot;title&quot;:&quot;source-map-loader&quot;,&quot;url&quot;:&quot;loaders/source-map-loader&quot;},{&quot;title&quot;:&quot;style-loader&quot;,&quot;url&quot;:&quot;loaders/style-loader&quot;},{&quot;title&quot;:&quot;svg-inline-loader&quot;,&quot;url&quot;:&quot;loaders/svg-inline-loader&quot;},{&quot;title&quot;:&quot;thread-loader&quot;,&quot;url&quot;:&quot;loaders/thread-loader&quot;},{&quot;title&quot;:&quot;transform-loader&quot;,&quot;url&quot;:&quot;loaders/transform-loader&quot;},{&quot;title&quot;:&quot;url-loader&quot;,&quot;url&quot;:&quot;loaders/url-loader&quot;},{&quot;title&quot;:&quot;val-loader&quot;,&quot;url&quot;:&quot;loaders/val-loader&quot;},{&quot;title&quot;:&quot;worker-loader&quot;,&quot;url&quot;:&quot;loaders/worker-loader&quot;},{&quot;title&quot;:&quot;yaml-frontmatter-loader&quot;,&quot;url&quot;:&quot;loaders/yaml-frontmatter-loader&quot;}]},{&quot;title&quot;:&quot;Plugins&quot;,&quot;url&quot;:&quot;plugins&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;MinChunkSizePlugin&quot;,&quot;url&quot;:&quot;plugins/min-chunk-size-plugin&quot;},{&quot;title&quot;:&quot;AggressiveSplittingPlugin&quot;,&quot;url&quot;:&quot;plugins/aggressive-splitting-plugin&quot;},{&quot;title&quot;:&quot;BabiliWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/babili-webpack-plugin&quot;},{&quot;title&quot;:&quot;BannerPlugin&quot;,&quot;url&quot;:&quot;plugins/banner-plugin&quot;},{&quot;title&quot;:&quot;CommonsChunkPlugin&quot;,&quot;url&quot;:&quot;plugins/commons-chunk-plugin&quot;},{&quot;title&quot;:&quot;ComponentWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/component-webpack-plugin&quot;},{&quot;title&quot;:&quot;CompressionWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/compression-webpack-plugin&quot;},{&quot;title&quot;:&quot;ContextReplacementPlugin&quot;,&quot;url&quot;:&quot;plugins/context-replacement-plugin&quot;},{&quot;title&quot;:&quot;DefinePlugin&quot;,&quot;url&quot;:&quot;plugins/define-plugin&quot;},{&quot;title&quot;:&quot;DllPlugin&quot;,&quot;url&quot;:&quot;plugins/dll-plugin&quot;},{&quot;title&quot;:&quot;EnvironmentPlugin&quot;,&quot;url&quot;:&quot;plugins/environment-plugin&quot;},{&quot;title&quot;:&quot;ExtractTextWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/extract-text-webpack-plugin&quot;},{&quot;title&quot;:&quot;HashedModuleIdsPlugin&quot;,&quot;url&quot;:&quot;plugins/hashed-module-ids-plugin&quot;},{&quot;title&quot;:&quot;HotModuleReplacementPlugin&quot;,&quot;url&quot;:&quot;plugins/hot-module-replacement-plugin&quot;},{&quot;title&quot;:&quot;HtmlWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/html-webpack-plugin&quot;},{&quot;title&quot;:&quot;I18nWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/i18n-webpack-plugin&quot;},{&quot;title&quot;:&quot;IgnorePlugin&quot;,&quot;url&quot;:&quot;plugins/ignore-plugin&quot;},{&quot;title&quot;:&quot;LimitChunkCountPlugin&quot;,&quot;url&quot;:&quot;plugins/limit-chunk-count-plugin&quot;},{&quot;title&quot;:&quot;LoaderOptionsPlugin&quot;,&quot;url&quot;:&quot;plugins/loader-options-plugin&quot;},{&quot;title&quot;:&quot;NamedModulesPlugin&quot;,&quot;url&quot;:&quot;plugins/named-modules-plugin&quot;},{&quot;title&quot;:&quot;NoEmitOnErrorsPlugin&quot;,&quot;url&quot;:&quot;plugins/no-emit-on-errors-plugin&quot;},{&quot;title&quot;:&quot;NormalModuleReplacementPlugin&quot;,&quot;url&quot;:&quot;plugins/normal-module-replacement-plugin&quot;},{&quot;title&quot;:&quot;NpmInstallWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/npm-install-webpack-plugin&quot;},{&quot;title&quot;:&quot;PrefetchPlugin&quot;,&quot;url&quot;:&quot;plugins/prefetch-plugin&quot;},{&quot;title&quot;:&quot;ProvidePlugin&quot;,&quot;url&quot;:&quot;plugins/provide-plugin&quot;},{&quot;title&quot;:&quot;SourceMapDevToolPlugin&quot;,&quot;url&quot;:&quot;plugins/source-map-dev-tool-plugin&quot;},{&quot;title&quot;:&quot;UglifyjsWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/uglifyjs-webpack-plugin&quot;},{&quot;title&quot;:&quot;WatchIgnorePlugin&quot;,&quot;url&quot;:&quot;plugins/watch-ignore-plugin&quot;},{&quot;title&quot;:&quot;ZopfliWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/zopfli-webpack-plugin&quot;}]},{&quot;title&quot;:&quot;Support&quot;,&quot;url&quot;:&quot;support&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;vote&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;vote/feedback&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;vote/moneyDistribution&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;organization&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;Other&quot;,&quot;url&quot;:&quot;/&quot;,&quot;pages&quot;:[]}]}"><nav class="sidebar-mobile"></nav></div><div class="container page"><a href="https://www.ag-grid.com/?utm_source=webpack&amp;utm_medium=banner&amp;utm_campaign=sponsorship" target="_blank" class="sponsors"><img src="/bf176a25b4f8227fea804854c98dc5e2.png"><img src="/6bc5d8cf78d442a984e70195db059b69.svg" style="width:100px;"><div style="margin-top:1em;font-size:2em;text-align:center;color:#535353;">ag-grid is proud to partner with webpack</div></a><div class="interactive" id="components/sidebar/sidebar.jsx" data-props="{&quot;sectionName&quot;:&quot;configuration&quot;,&quot;pages&quot;:[{&quot;url&quot;:&quot;configuration/configuration-languages&quot;,&quot;title&quot;:&quot;Configuration Languages&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;TypeScript&quot;,&quot;id&quot;:&quot;typescript&quot;},{&quot;title&quot;:&quot;CoffeeScript&quot;,&quot;id&quot;:&quot;coffeescript&quot;},{&quot;title&quot;:&quot;Babel and JSX&quot;,&quot;id&quot;:&quot;babel-and-jsx&quot;}]},{&quot;url&quot;:&quot;configuration/configuration-types&quot;,&quot;title&quot;:&quot;Configuration Types&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;Exporting a function to use --env&quot;,&quot;id&quot;:&quot;exporting-a-function-to-use-env&quot;},{&quot;title&quot;:&quot;Exporting a Promise&quot;,&quot;id&quot;:&quot;exporting-a-promise&quot;},{&quot;title&quot;:&quot;Exporting multiple configurations&quot;,&quot;id&quot;:&quot;exporting-multiple-configurations&quot;}]},{&quot;url&quot;:&quot;configuration/entry-context&quot;,&quot;title&quot;:&quot;Entry and Context&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;context&quot;,&quot;id&quot;:&quot;context&quot;},{&quot;title&quot;:&quot;entry&quot;,&quot;id&quot;:&quot;entry&quot;},{&quot;title&quot;:&quot;Naming&quot;,&quot;id&quot;:&quot;naming&quot;},{&quot;title&quot;:&quot;Dynamic entry&quot;,&quot;id&quot;:&quot;dynamic-entry&quot;}]},{&quot;url&quot;:&quot;configuration/output&quot;,&quot;title&quot;:&quot;Output&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;output.auxiliaryComment&quot;,&quot;id&quot;:&quot;output-auxiliarycomment&quot;},{&quot;title&quot;:&quot;output.chunkFilename&quot;,&quot;id&quot;:&quot;output-chunkfilename&quot;},{&quot;title&quot;:&quot;output.chunkLoadTimeout&quot;,&quot;id&quot;:&quot;output-chunkloadtimeout&quot;},{&quot;title&quot;:&quot;output.crossOriginLoading&quot;,&quot;id&quot;:&quot;output-crossoriginloading&quot;},{&quot;title&quot;:&quot;output.devtoolFallbackModuleFilenameTemplate&quot;,&quot;id&quot;:&quot;output-devtoolfallbackmodulefilenametemplate&quot;},{&quot;title&quot;:&quot;output.devtoolLineToLine&quot;,&quot;id&quot;:&quot;output-devtoollinetoline&quot;},{&quot;title&quot;:&quot;output.devtoolModuleFilenameTemplate&quot;,&quot;id&quot;:&quot;output-devtoolmodulefilenametemplate&quot;},{&quot;title&quot;:&quot;output.filename&quot;,&quot;id&quot;:&quot;output-filename&quot;},{&quot;title&quot;:&quot;output.hashDigest&quot;,&quot;id&quot;:&quot;output-hashdigest&quot;},{&quot;title&quot;:&quot;output.hashDigestLength&quot;,&quot;id&quot;:&quot;output-hashdigestlength&quot;},{&quot;title&quot;:&quot;output.hashFunction&quot;,&quot;id&quot;:&quot;output-hashfunction&quot;},{&quot;title&quot;:&quot;output.hashSalt&quot;,&quot;id&quot;:&quot;output-hashsalt&quot;},{&quot;title&quot;:&quot;output.hotUpdateChunkFilename&quot;,&quot;id&quot;:&quot;output-hotupdatechunkfilename&quot;},{&quot;title&quot;:&quot;output.hotUpdateFunction&quot;,&quot;id&quot;:&quot;output-hotupdatefunction&quot;},{&quot;title&quot;:&quot;output.hotUpdateMainFilename&quot;,&quot;id&quot;:&quot;output-hotupdatemainfilename&quot;},{&quot;title&quot;:&quot;output.jsonpFunction&quot;,&quot;id&quot;:&quot;output-jsonpfunction&quot;},{&quot;title&quot;:&quot;output.library&quot;,&quot;id&quot;:&quot;output-library&quot;},{&quot;title&quot;:&quot;output.libraryExport&quot;,&quot;id&quot;:&quot;output-libraryexport&quot;},{&quot;title&quot;:&quot;output.libraryTarget&quot;,&quot;id&quot;:&quot;output-librarytarget&quot;},{&quot;title&quot;:&quot;output.path&quot;,&quot;id&quot;:&quot;output-path&quot;},{&quot;title&quot;:&quot;output.pathinfo&quot;,&quot;id&quot;:&quot;output-pathinfo&quot;},{&quot;title&quot;:&quot;output.publicPath&quot;,&quot;id&quot;:&quot;output-publicpath&quot;},{&quot;title&quot;:&quot;output.sourceMapFilename&quot;,&quot;id&quot;:&quot;output-sourcemapfilename&quot;},{&quot;title&quot;:&quot;output.sourcePrefix&quot;,&quot;id&quot;:&quot;output-sourceprefix&quot;},{&quot;title&quot;:&quot;output.strictModuleExceptionHandling&quot;,&quot;id&quot;:&quot;output-strictmoduleexceptionhandling&quot;},{&quot;title&quot;:&quot;output.umdNamedDefine&quot;,&quot;id&quot;:&quot;output-umdnameddefine&quot;}]},{&quot;url&quot;:&quot;configuration/module&quot;,&quot;title&quot;:&quot;Module&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;module.noParse&quot;,&quot;id&quot;:&quot;module-noparse&quot;},{&quot;title&quot;:&quot;module.rules&quot;,&quot;id&quot;:&quot;module-rules&quot;},{&quot;title&quot;:&quot;Rule&quot;,&quot;id&quot;:&quot;rule&quot;},{&quot;title&quot;:&quot;Rule Conditions&quot;,&quot;id&quot;:&quot;rule-conditions&quot;},{&quot;title&quot;:&quot;Rule results&quot;,&quot;id&quot;:&quot;rule-results&quot;},{&quot;title&quot;:&quot;Nested rules&quot;,&quot;id&quot;:&quot;nested-rules&quot;},{&quot;title&quot;:&quot;Rule.enforce&quot;,&quot;id&quot;:&quot;rule-enforce&quot;},{&quot;title&quot;:&quot;Rule.exclude&quot;,&quot;id&quot;:&quot;rule-exclude&quot;},{&quot;title&quot;:&quot;Rule.include&quot;,&quot;id&quot;:&quot;rule-include&quot;},{&quot;title&quot;:&quot;Rule.issuer&quot;,&quot;id&quot;:&quot;rule-issuer&quot;},{&quot;title&quot;:&quot;Rule.loader&quot;,&quot;id&quot;:&quot;rule-loader&quot;},{&quot;title&quot;:&quot;Rule.loaders&quot;,&quot;id&quot;:&quot;rule-loaders&quot;},{&quot;title&quot;:&quot;Rule.oneOf&quot;,&quot;id&quot;:&quot;rule-oneof&quot;},{&quot;title&quot;:&quot;Rule.options / Rule.query&quot;,&quot;id&quot;:&quot;rule-options-rule-query&quot;},{&quot;title&quot;:&quot;Rule.parser&quot;,&quot;id&quot;:&quot;rule-parser&quot;},{&quot;title&quot;:&quot;Rule.resource&quot;,&quot;id&quot;:&quot;rule-resource&quot;},{&quot;title&quot;:&quot;Rule.resourceQuery&quot;,&quot;id&quot;:&quot;rule-resourcequery&quot;},{&quot;title&quot;:&quot;Rule.rules&quot;,&quot;id&quot;:&quot;rule-rules&quot;},{&quot;title&quot;:&quot;Rule.test&quot;,&quot;id&quot;:&quot;rule-test&quot;},{&quot;title&quot;:&quot;Rule.use&quot;,&quot;id&quot;:&quot;rule-use&quot;},{&quot;title&quot;:&quot;Condition&quot;,&quot;id&quot;:&quot;condition&quot;},{&quot;title&quot;:&quot;UseEntry&quot;,&quot;id&quot;:&quot;useentry&quot;},{&quot;title&quot;:&quot;Module Contexts&quot;,&quot;id&quot;:&quot;module-contexts&quot;}]},{&quot;url&quot;:&quot;configuration/resolve&quot;,&quot;title&quot;:&quot;Resolve&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;resolve&quot;,&quot;id&quot;:&quot;resolve&quot;},{&quot;title&quot;:&quot;resolve.alias&quot;,&quot;id&quot;:&quot;resolve-alias&quot;},{&quot;title&quot;:&quot;resolve.aliasFields&quot;,&quot;id&quot;:&quot;resolve-aliasfields&quot;},{&quot;title&quot;:&quot;resolve.cacheWithContext&quot;,&quot;id&quot;:&quot;resolve-cachewithcontext&quot;},{&quot;title&quot;:&quot;resolve.descriptionFiles&quot;,&quot;id&quot;:&quot;resolve-descriptionfiles&quot;},{&quot;title&quot;:&quot;resolve.enforceExtension&quot;,&quot;id&quot;:&quot;resolve-enforceextension&quot;},{&quot;title&quot;:&quot;resolve.enforceModuleExtension&quot;,&quot;id&quot;:&quot;resolve-enforcemoduleextension&quot;},{&quot;title&quot;:&quot;resolve.extensions&quot;,&quot;id&quot;:&quot;resolve-extensions&quot;},{&quot;title&quot;:&quot;resolve.mainFields&quot;,&quot;id&quot;:&quot;resolve-mainfields&quot;},{&quot;title&quot;:&quot;resolve.mainFiles&quot;,&quot;id&quot;:&quot;resolve-mainfiles&quot;},{&quot;title&quot;:&quot;resolve.modules&quot;,&quot;id&quot;:&quot;resolve-modules&quot;},{&quot;title&quot;:&quot;resolve.unsafeCache&quot;,&quot;id&quot;:&quot;resolve-unsafecache&quot;},{&quot;title&quot;:&quot;resolve.plugins&quot;,&quot;id&quot;:&quot;resolve-plugins&quot;},{&quot;title&quot;:&quot;resolve.symlinks&quot;,&quot;id&quot;:&quot;resolve-symlinks&quot;},{&quot;title&quot;:&quot;resolve.cachePredicate&quot;,&quot;id&quot;:&quot;resolve-cachepredicate&quot;},{&quot;title&quot;:&quot;resolveLoader&quot;,&quot;id&quot;:&quot;resolveloader&quot;},{&quot;title&quot;:&quot;resolveLoader.moduleExtensions&quot;,&quot;id&quot;:&quot;resolveloader-moduleextensions&quot;}]},{&quot;url&quot;:&quot;configuration/plugins&quot;,&quot;title&quot;:&quot;Plugins&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;plugins&quot;,&quot;id&quot;:&quot;plugins&quot;}]},{&quot;url&quot;:&quot;configuration/dev-server&quot;,&quot;title&quot;:&quot;DevServer&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;devServer&quot;,&quot;id&quot;:&quot;devserver&quot;},{&quot;title&quot;:&quot;devServer.allowedHosts&quot;,&quot;id&quot;:&quot;devserver-allowedhosts&quot;},{&quot;title&quot;:&quot;devServer.clientLogLevel&quot;,&quot;id&quot;:&quot;devserver-clientloglevel&quot;},{&quot;title&quot;:&quot;devServer.compress&quot;,&quot;id&quot;:&quot;devserver-compress&quot;},{&quot;title&quot;:&quot;devServer.contentBase&quot;,&quot;id&quot;:&quot;devserver-contentbase&quot;},{&quot;title&quot;:&quot;devServer.filename &#x1F511;&quot;,&quot;id&quot;:&quot;devserver-filename-&quot;},{&quot;title&quot;:&quot;devServer.headers &#x1F511;&quot;,&quot;id&quot;:&quot;devserver-headers-&quot;},{&quot;title&quot;:&quot;devServer.historyApiFallback&quot;,&quot;id&quot;:&quot;devserver-historyapifallback&quot;},{&quot;title&quot;:&quot;devServer.host - CLI only&quot;,&quot;id&quot;:&quot;devserver-host-cli-only&quot;},{&quot;title&quot;:&quot;devServer.hot&quot;,&quot;id&quot;:&quot;devserver-hot&quot;},{&quot;title&quot;:&quot;devServer.hotOnly - CLI only&quot;,&quot;id&quot;:&quot;devserver-hotonly-cli-only&quot;},{&quot;title&quot;:&quot;devServer.https&quot;,&quot;id&quot;:&quot;devserver-https&quot;},{&quot;title&quot;:&quot;devServer.inline - CLI only&quot;,&quot;id&quot;:&quot;devserver-inline-cli-only&quot;},{&quot;title&quot;:&quot;devServer.lazy &#x1F511;&quot;,&quot;id&quot;:&quot;devserver-lazy-&quot;},{&quot;title&quot;:&quot;devServer.noInfo &#x1F511;&quot;,&quot;id&quot;:&quot;devserver-noinfo-&quot;},{&quot;title&quot;:&quot;devServer.overlay&quot;,&quot;id&quot;:&quot;devserver-overlay&quot;},{&quot;title&quot;:&quot;devServer.port - CLI only&quot;,&quot;id&quot;:&quot;devserver-port-cli-only&quot;},{&quot;title&quot;:&quot;devServer.proxy&quot;,&quot;id&quot;:&quot;devserver-proxy&quot;},{&quot;title&quot;:&quot;devServer.progress - CLI only&quot;,&quot;id&quot;:&quot;devserver-progress-cli-only&quot;},{&quot;title&quot;:&quot;devServer.public - CLI only&quot;,&quot;id&quot;:&quot;devserver-public-cli-only&quot;},{&quot;title&quot;:&quot;devServer.publicPath &#x1F511;&quot;,&quot;id&quot;:&quot;devserver-publicpath-&quot;},{&quot;title&quot;:&quot;devServer.quiet &#x1F511;&quot;,&quot;id&quot;:&quot;devserver-quiet-&quot;},{&quot;title&quot;:&quot;devServer.setup&quot;,&quot;id&quot;:&quot;devserver-setup&quot;},{&quot;title&quot;:&quot;devServer.staticOptions&quot;,&quot;id&quot;:&quot;devserver-staticoptions&quot;},{&quot;title&quot;:&quot;devServer.stats &#x1F511;&quot;,&quot;id&quot;:&quot;devserver-stats-&quot;},{&quot;title&quot;:&quot;devServer.watchContentBase&quot;,&quot;id&quot;:&quot;devserver-watchcontentbase&quot;},{&quot;title&quot;:&quot;devServer.watchOptions &#x1F511;&quot;,&quot;id&quot;:&quot;devserver-watchoptions-&quot;}]},{&quot;url&quot;:&quot;configuration/devtool&quot;,&quot;title&quot;:&quot;Devtool&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;devtool&quot;,&quot;id&quot;:&quot;devtool&quot;},{&quot;title&quot;:&quot;Development&quot;,&quot;id&quot;:&quot;development&quot;},{&quot;title&quot;:&quot;Production&quot;,&quot;id&quot;:&quot;production&quot;}]},{&quot;url&quot;:&quot;configuration/target&quot;,&quot;title&quot;:&quot;Target&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;target&quot;,&quot;id&quot;:&quot;target&quot;},{&quot;title&quot;:&quot;string&quot;,&quot;id&quot;:&quot;string&quot;},{&quot;title&quot;:&quot;function&quot;,&quot;id&quot;:&quot;function&quot;}]},{&quot;url&quot;:&quot;configuration/watch&quot;,&quot;title&quot;:&quot;Watch and WatchOptions&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;watch&quot;,&quot;id&quot;:&quot;watch&quot;},{&quot;title&quot;:&quot;watchOptions&quot;,&quot;id&quot;:&quot;watchoptions&quot;},{&quot;title&quot;:&quot;watchOptions.aggregateTimeout&quot;,&quot;id&quot;:&quot;watchoptions-aggregatetimeout&quot;},{&quot;title&quot;:&quot;watchOptions.ignored&quot;,&quot;id&quot;:&quot;watchoptions-ignored&quot;},{&quot;title&quot;:&quot;watchOptions.poll&quot;,&quot;id&quot;:&quot;watchoptions-poll&quot;}]},{&quot;url&quot;:&quot;configuration/externals&quot;,&quot;title&quot;:&quot;Externals&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;externals&quot;,&quot;id&quot;:&quot;externals&quot;},{&quot;title&quot;:&quot;string&quot;,&quot;id&quot;:&quot;string&quot;},{&quot;title&quot;:&quot;array&quot;,&quot;id&quot;:&quot;array&quot;},{&quot;title&quot;:&quot;object&quot;,&quot;id&quot;:&quot;object&quot;},{&quot;title&quot;:&quot;function&quot;,&quot;id&quot;:&quot;function&quot;},{&quot;title&quot;:&quot;regex&quot;,&quot;id&quot;:&quot;regex&quot;}]},{&quot;url&quot;:&quot;configuration/node&quot;,&quot;title&quot;:&quot;Node&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;node&quot;,&quot;id&quot;:&quot;node&quot;},{&quot;title&quot;:&quot;node.console&quot;,&quot;id&quot;:&quot;node-console&quot;},{&quot;title&quot;:&quot;node.process&quot;,&quot;id&quot;:&quot;node-process&quot;},{&quot;title&quot;:&quot;node.global&quot;,&quot;id&quot;:&quot;node-global&quot;},{&quot;title&quot;:&quot;node.__filename&quot;,&quot;id&quot;:&quot;node-__filename&quot;},{&quot;title&quot;:&quot;node.__dirname&quot;,&quot;id&quot;:&quot;node-__dirname&quot;},{&quot;title&quot;:&quot;node.Buffer&quot;,&quot;id&quot;:&quot;node-buffer&quot;},{&quot;title&quot;:&quot;node.setImmediate&quot;,&quot;id&quot;:&quot;node-setimmediate&quot;},{&quot;title&quot;:&quot;Other node core libraries&quot;,&quot;id&quot;:&quot;other-node-core-libraries&quot;}]},{&quot;url&quot;:&quot;configuration/performance&quot;,&quot;title&quot;:&quot;Performance&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;performance&quot;,&quot;id&quot;:&quot;performance&quot;},{&quot;title&quot;:&quot;performance.hints&quot;,&quot;id&quot;:&quot;performance-hints&quot;},{&quot;title&quot;:&quot;performance.maxEntrypointSize&quot;,&quot;id&quot;:&quot;performance-maxentrypointsize&quot;},{&quot;title&quot;:&quot;performance.maxAssetSize&quot;,&quot;id&quot;:&quot;performance-maxassetsize&quot;},{&quot;title&quot;:&quot;performance.assetFilter&quot;,&quot;id&quot;:&quot;performance-assetfilter&quot;}]},{&quot;url&quot;:&quot;configuration/stats&quot;,&quot;title&quot;:&quot;Stats&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;stats&quot;,&quot;id&quot;:&quot;stats&quot;}]},{&quot;url&quot;:&quot;configuration/other-options&quot;,&quot;title&quot;:&quot;Other Options&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;amd&quot;,&quot;id&quot;:&quot;amd&quot;},{&quot;title&quot;:&quot;bail&quot;,&quot;id&quot;:&quot;bail&quot;},{&quot;title&quot;:&quot;cache&quot;,&quot;id&quot;:&quot;cache&quot;},{&quot;title&quot;:&quot;loader&quot;,&quot;id&quot;:&quot;loader&quot;},{&quot;title&quot;:&quot;profile&quot;,&quot;id&quot;:&quot;profile&quot;},{&quot;title&quot;:&quot;recordsPath&quot;,&quot;id&quot;:&quot;recordspath&quot;},{&quot;title&quot;:&quot;recordsInputPath&quot;,&quot;id&quot;:&quot;recordsinputpath&quot;},{&quot;title&quot;:&quot;recordsOutputPath&quot;,&quot;id&quot;:&quot;recordsoutputpath&quot;}]}],&quot;currentPage&quot;:&quot;configuration/output&quot;}"><nav class="sidebar"></nav></div><section class="page__content"><h1>Output</h1><div class="page-links"><a class="page-links__link" href="https://github.com/webpack/webpack.js.org/edit/master/content/configuration/output.md">Edit Document<i class="page-links__icon icon-edit"></i></a></div><div><p>The top-level <code>output</code> key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.</p>
+<h2 class="header"><a class="anchor" href="#output-auxiliarycomment" id="output-auxiliarycomment"></a><span class="text"><code>output.auxiliaryComment</code></span><a class="icon-link" href="#output-auxiliarycomment"></a></h2>
+<p><code>string</code> <code>object</code></p>
+<p>When used in tandem with <a href="#output-library"><code>output.library</code></a> and <a href="#output-librarytarget"><code>output.libraryTarget</code></a>, this option allows users to insert comments within the export wrapper. To insert the same comment for each <code>libraryTarget</code> type, simply set <code>auxiliaryComment</code> to a string:</p>
+<pre><code class="lang-js">output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  library<span class="token punctuation">:</span> <span class="token string">&quot;someLibName&quot;</span><span class="token punctuation">,</span>
+  libraryTarget<span class="token punctuation">:</span> <span class="token string">&quot;umd&quot;</span><span class="token punctuation">,</span>
+  filename<span class="token punctuation">:</span> <span class="token string">&quot;someLibName.js&quot;</span><span class="token punctuation">,</span>
+  auxiliaryComment<span class="token punctuation">:</span> <span class="token string">&quot;Test Comment&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>which will yield the following:</p>
+<pre><code class="lang-js"><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">webpackUniversalModuleDefinition</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> factory<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// Test Comment</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> exports <span class="token operator">===</span> <span class="token string">&apos;object&apos;</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">typeof</span> module <span class="token operator">===</span> <span class="token string">&apos;object&apos;</span><span class="token punctuation">)</span>
+    module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token function">factory</span><span class="token punctuation">(</span><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;lodash&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// Test Comment</span>
+  <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> define <span class="token operator">===</span> <span class="token string">&apos;function&apos;</span> <span class="token operator">&amp;&amp;</span> define<span class="token punctuation">.</span>amd<span class="token punctuation">)</span>
+    <span class="token function">define</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">&quot;lodash&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span> factory<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// Test Comment</span>
+  <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> exports <span class="token operator">===</span> <span class="token string">&apos;object&apos;</span><span class="token punctuation">)</span>
+    exports<span class="token punctuation">[</span><span class="token string">&quot;someLibName&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">factory</span><span class="token punctuation">(</span><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;lodash&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// Test Comment</span>
+  <span class="token keyword">else</span>
+    root<span class="token punctuation">[</span><span class="token string">&quot;someLibName&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">factory</span><span class="token punctuation">(</span>root<span class="token punctuation">[</span><span class="token string">&quot;_&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>__WEBPACK_EXTERNAL_MODULE_1__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// ...</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>For fine-grained control over each <code>libraryTarget</code> comment, pass an object:</p>
+<pre><code class="lang-js">auxiliaryComment<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  root<span class="token punctuation">:</span> <span class="token string">&quot;Root Comment&quot;</span><span class="token punctuation">,</span>
+  commonjs<span class="token punctuation">:</span> <span class="token string">&quot;CommonJS Comment&quot;</span><span class="token punctuation">,</span>
+  commonjs2<span class="token punctuation">:</span> <span class="token string">&quot;CommonJS2 Comment&quot;</span><span class="token punctuation">,</span>
+  amd<span class="token punctuation">:</span> <span class="token string">&quot;AMD Comment&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 class="header"><a class="anchor" href="#output-chunkfilename" id="output-chunkfilename"></a><span class="text"><code>output.chunkFilename</code></span><a class="icon-link" href="#output-chunkfilename"></a></h2>
+<p><code>string</code></p>
+<p>This option determines the name of non-entry chunk files. See <a href="#output-filename"><code>output.filename</code></a> option for details on the possible values.</p>
+<p>Note that these filenames need to be generated at runtime to send the requests for chunks. Because of this, placeholders like <code>[name]</code> and <code>[chunkhash]</code> need to add a mapping from chunk id to placeholder value to the output bundle with the webpack runtime. This increases the size and may invalidate the bundle when placeholder value for any chunk changes.</p>
+<p>By default <code>[id].js</code> is used or a value inferred from <a href="#output-filename"><code>output.filename</code></a> (<code>[name]</code> is replaced with <code>[id]</code> or <code>[id].</code> is prepended).</p>
+<h2 class="header"><a class="anchor" href="#output-chunkloadtimeout" id="output-chunkloadtimeout"></a><span class="text"><code>output.chunkLoadTimeout</code></span><a class="icon-link" href="#output-chunkloadtimeout"></a></h2>
+<p><code>integer</code></p>
+<p>Number of milliseconds before chunk request expires, defaults to 120&#x2009;000. This option is supported since webpack 2.6.0.</p>
+<h2 class="header"><a class="anchor" href="#output-crossoriginloading" id="output-crossoriginloading"></a><span class="text"><code>output.crossOriginLoading</code></span><a class="icon-link" href="#output-crossoriginloading"></a></h2>
+<p><code>boolean</code> <code>string</code></p>
+<p>Only used when <a href="/configuration/target"><code>target</code></a> is web, which uses JSONP for loading on-demand chunks, by adding script tags.</p>
+<p>Enable <a href="https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin">cross-origin</a> loading of chunks. The following values are accepted...</p>
+<p><code>crossOriginLoading: false</code> - Disable cross-origin loading (default)</p>
+<p><code>crossOriginLoading: &quot;anonymous&quot;</code> - Enable cross-origin loading <strong>without credentials</strong></p>
+<p><code>crossOriginLoading: &quot;use-credentials&quot;</code> - Enable cross-origin loading <strong>with credentials</strong></p>
+<h2 class="header"><a class="anchor" href="#output-devtoolfallbackmodulefilenametemplate" id="output-devtoolfallbackmodulefilenametemplate"></a><span class="text"><code>output.devtoolFallbackModuleFilenameTemplate</code></span><a class="icon-link" href="#output-devtoolfallbackmodulefilenametemplate"></a></h2>
+<p><code>string | function(info)</code></p>
+<p>A fallback used when the template string or function above yields duplicates.</p>
+<p>See <a href="#output-devtoolmodulefilenametemplate"><code>output.devtoolModuleFilenameTemplate</code></a>.</p>
+<h2 class="header"><a class="anchor" href="#output-devtoollinetoline" id="output-devtoollinetoline"></a><span class="text"><code>output.devtoolLineToLine</code></span><a class="icon-link" href="#output-devtoollinetoline"></a></h2>
+<p><code>boolean | object</code></p>
+<blockquote>
+<p>Avoid using this option as it is <strong>deprecated</strong> and will soon be removed.</p>
+</blockquote>
+<p>Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines.</p>
+<p>Pass a boolean to enable or disable this feature for all modules (defaults to <code>false</code>). An object with <code>test</code>, <code>include</code>, <code>exclude</code> is also allowed. For example, to enable this feature for all javascript files within a certain directory:</p>
+<pre><code class="lang-js">devtoolLineToLine<span class="token punctuation">:</span> <span class="token punctuation">{</span> test<span class="token punctuation">:</span> <span class="token regex">/\.js$/</span><span class="token punctuation">,</span> include<span class="token punctuation">:</span> <span class="token string">&apos;src/utilities&apos;</span> <span class="token punctuation">}</span>
+</code></pre>
+<h2 class="header"><a class="anchor" href="#output-devtoolmodulefilenametemplate" id="output-devtoolmodulefilenametemplate"></a><span class="text"><code>output.devtoolModuleFilenameTemplate</code></span><a class="icon-link" href="#output-devtoolmodulefilenametemplate"></a></h2>
+<p><code>string | function(info)</code></p>
+<p>This option is only used when <a href="/configuration/devtool"><code>devtool</code></a> uses an options which requires module names.</p>
+<p>Customize the names used in each source map&apos;s <code>sources</code> array. This can be done by passing a template string or function. For example, when using <code>devtool: &apos;eval&apos;</code>, this is the default:</p>
+<pre><code class="lang-js">devtoolModuleFilenameTemplate<span class="token punctuation">:</span> &quot;webpack<span class="token punctuation">:</span><span class="token operator">/</span><span class="token comment" spellcheck="true">//[resource-path]?[loaders]&quot;</span>
+</code></pre>
+<p>The following substitutions are available in template strings (via webpack&apos;s internal <a href="https://github.com/webpack/webpack/blob/master/lib/ModuleFilenameHelpers.js"><code>ModuleFilenameHelpers</code></a>):</p>
+
+	    <div class="table">
+	        <div class="table-wrap">
+	          <div class="table-header">
+	              <div class="table-tr"><div class="table-th">Template</div><div class="table-th">Description</div></div>
+	          </div>
+	          <div class="table-body">
+	              <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [absolute-resource-path]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The absolute filename
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [all-loaders]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Automatic and explicit loaders and params up to the name of the first loader
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [hash]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The hash of the module identifier
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [id]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The module identifier
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [loaders]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        Explicit loaders and params up to the name of the first loader
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [resource]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The path used to resolve the file and any query params used on the first loader
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [resource-path]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The path used to resolve the file without any query params
+	    </div>
+	  </div></div>
+	          </div>
+	        </div>
+	    </div><p>When using a function, the same options are available camel-cased via the <code>info</code> parameter:</p>
+<pre><code class="lang-js">devtoolModuleFilenameTemplate<span class="token punctuation">:</span> info <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> `webpack<span class="token punctuation">:</span><span class="token operator">/</span><span class="token comment" spellcheck="true">//${info.resourcePath}?${info.loaders}`</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>If multiple modules would result in the same name, <a href="#output-devtoolfallbackmodulefilenametemplate"><code>output.devtoolFallbackModuleFilenameTemplate</code></a> is used instead for these modules.</p>
+<h2 class="header"><a class="anchor" href="#output-filename" id="output-filename"></a><span class="text"><code>output.filename</code></span><a class="icon-link" href="#output-filename"></a></h2>
+<p><code>string</code></p>
+<p>This option determines the name of each output bundle. The bundle is written to the directory specified by the <a href="#output-path"><code>output.path</code></a> option.</p>
+<p>For a single <a href="/configuration/entry-context#entry"><code>entry</code></a> point, this can be a static name.</p>
+<pre><code class="lang-js">filename<span class="token punctuation">:</span> <span class="token string">&quot;bundle.js&quot;</span>
+</code></pre>
+<p>However, when creating multiple bundles via more than one entry point, code splitting, or various plugins, you should use one of the following substitutions to give each bundle a unique name...</p>
+<p>Using entry name:</p>
+<pre><code class="lang-js">filename<span class="token punctuation">:</span> <span class="token string">&quot;[name].bundle.js&quot;</span>
+</code></pre>
+<p>Using internal chunk id:</p>
+<pre><code class="lang-js">filename<span class="token punctuation">:</span> <span class="token string">&quot;[id].bundle.js&quot;</span>
+</code></pre>
+<p>Using the unique hash generated for every build:</p>
+<pre><code class="lang-js">filename<span class="token punctuation">:</span> <span class="token string">&quot;[name].[hash].bundle.js&quot;</span>
+</code></pre>
+<p>Using hashes based on each chunks&apos; content:</p>
+<pre><code class="lang-js">filename<span class="token punctuation">:</span> <span class="token string">&quot;[chunkhash].bundle.js&quot;</span>
+</code></pre>
+<p>Make sure to read the <a href="/guides/caching">Caching guide</a> for details. There are more steps involved than just setting this option.</p>
+<p>Note this option is called filename but you are still allowed to use something like <code>&quot;js/[name]/bundle.js&quot;</code> to create a folder structure.</p>
+<p>Note this options does not affect output files for on-demand-loaded chunks. For these files the <a href="#output-chunkfilename"><code>output.chunkFilename</code></a> option is used. It also doesn&apos;t affect files created by loaders. For these files see loader options.</p>
+<p>The following substitutions are available in template strings (via webpack&apos;s internal <a href="https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js"><code>TemplatedPathPlugin</code></a>):</p>
+
+	    <div class="table">
+	        <div class="table-wrap">
+	          <div class="table-header">
+	              <div class="table-tr"><div class="table-th">Template</div><div class="table-th">Description</div></div>
+	          </div>
+	          <div class="table-body">
+	              <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [hash]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The hash of the module identifier
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [chunkhash]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The hash of the chunk content
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [name]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The module name
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [id]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The module identifier
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [file]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The module filename
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [filebase]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The module <a href="https://nodejs.org/api/path.html#path_path_basename_path_ext">basename</a>
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [query]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The module query, i.e., the string following <code>?</code> in the filename
+	    </div>
+	  </div></div>
+	          </div>
+	        </div>
+	    </div><p>The lengths of <code>[hash]</code> and <code>[chunkhash]</code> can be specified using <code>[hash:16]</code> (defaults to 20). Alternatively, specify <a href="#output-hashdigestlength"><code>output.hashDigestLength</code></a> to configure the length globally.</p>
+<blockquote class="tip"><div class="tip-content"> When using the <a href="/plugins/extract-text-webpack-plugin"><code>ExtractTextWebpackPlugin</code></a>, use <code>[contenthash]</code> to obtain a hash of the extracted file (neither <code>[hash]</code> nor <code>[chunkhash]</code> work). </div></blockquote><h2 class="header"><a class="anchor" href="#output-hashdigest" id="output-hashdigest"></a><span class="text"><code>output.hashDigest</code></span><a class="icon-link" href="#output-hashdigest"></a></h2>
+<p>The encoding to use when generating the hash, defaults to <code>&apos;hex&apos;</code>. All encodings from Node.JS&apos; <a href="https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding"><code>hash.digest</code></a> are supported.</p>
+<h2 class="header"><a class="anchor" href="#output-hashdigestlength" id="output-hashdigestlength"></a><span class="text"><code>output.hashDigestLength</code></span><a class="icon-link" href="#output-hashdigestlength"></a></h2>
+<p>The prefix length of the hash digest to use, defaults to <code>20</code>.</p>
+<h2 class="header"><a class="anchor" href="#output-hashfunction" id="output-hashfunction"></a><span class="text"><code>output.hashFunction</code></span><a class="icon-link" href="#output-hashfunction"></a></h2>
+<p>The hashing algorithm to use, defaults to <code>&apos;md5&apos;</code>. All functions from Node.JS&apos; <a href="https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm"><code>crypto.createHash</code></a> are supported.</p>
+<h2 class="header"><a class="anchor" href="#output-hashsalt" id="output-hashsalt"></a><span class="text"><code>output.hashSalt</code></span><a class="icon-link" href="#output-hashsalt"></a></h2>
+<p>An optional salt to update the hash via Node.JS&apos; <a href="https://nodejs.org/api/crypto.html#crypto_hash_update_data_input_encoding"><code>hash.update</code></a>.</p>
+<h2 class="header"><a class="anchor" href="#output-hotupdatechunkfilename" id="output-hotupdatechunkfilename"></a><span class="text"><code>output.hotUpdateChunkFilename</code></span><a class="icon-link" href="#output-hotupdatechunkfilename"></a></h2>
+<p><code>string</code></p>
+<p>Customize the filenames of hot update chunks. See <a href="#output-filename"><code>output.filename</code></a> option for details on the possible values.</p>
+<p>The only placeholders allowed here are <code>[id]</code> and <code>[hash]</code>, the default being:</p>
+<pre><code class="lang-js">hotUpdateChunkFilename<span class="token punctuation">:</span> <span class="token string">&quot;[id].[hash].hot-update.js&quot;</span>
+</code></pre>
+<p>Here is no need to change it.</p>
+<h2 class="header"><a class="anchor" href="#output-hotupdatefunction" id="output-hotupdatefunction"></a><span class="text"><code>output.hotUpdateFunction</code></span><a class="icon-link" href="#output-hotupdatefunction"></a></h2>
+<p><code>function</code></p>
+<p>Only used when <a href="/configuration/target"><code>target</code></a> is web, which uses JSONP for loading hot updates.</p>
+<p>A JSONP function used to asynchronously load hot-update chunks.</p>
+<p>For details see <a href="#output-jsonpfunction"><code>output.jsonpFunction</code></a>.</p>
+<h2 class="header"><a class="anchor" href="#output-hotupdatemainfilename" id="output-hotupdatemainfilename"></a><span class="text"><code>output.hotUpdateMainFilename</code></span><a class="icon-link" href="#output-hotupdatemainfilename"></a></h2>
+<p><code>string</code></p>
+<p>Customize the main hot update filename. See <a href="#output-filename"><code>output.filename</code></a> option for details on the possible values.</p>
+<p><code>[hash]</code> is the only available placeholder, the default being:</p>
+<pre><code class="lang-js">hotUpdateMainFilename<span class="token punctuation">:</span> <span class="token string">&quot;[hash].hot-update.json&quot;</span>
+</code></pre>
+<p>Here is no need to change it.</p>
+<h2 class="header"><a class="anchor" href="#output-jsonpfunction" id="output-jsonpfunction"></a><span class="text"><code>output.jsonpFunction</code></span><a class="icon-link" href="#output-jsonpfunction"></a></h2>
+<p><code>string</code></p>
+<p>Only used when <a href="/configuration/target"><code>target</code></a> is web, which uses JSONP for loading on-demand chunks.</p>
+<p>A JSONP function name used to asynchronously load chunks or join multiple initial chunks (CommonsChunkPlugin, AggressiveSplittingPlugin).</p>
+<p>This needs to be changed if multiple webpack runtimes (from different compilation) are used on the same webpage.</p>
+<p>If using the <a href="#output-library"><code>output.library</code></a> option, the library name is automatically appended.</p>
+<h2 class="header"><a class="anchor" href="#output-library" id="output-library"></a><span class="text"><code>output.library</code></span><a class="icon-link" href="#output-library"></a></h2>
+<p><code>string</code></p>
+<p><code>string</code> or <code>object</code> (since webpack 3.1.0; for <code>libraryTarget: &quot;umd&quot;</code>)</p>
+<p>Use <code>library</code>, and <code>libraryTarget</code> below, when writing a JavaScript library that should export values, which can be used by other code depending on it. Pass a string with the name of the library:</p>
+<pre><code class="lang-js">library<span class="token punctuation">:</span> <span class="token string">&quot;MyLibrary&quot;</span>
+</code></pre>
+<p>The name is used depending on the value of the <a href="#output-librarytarget"><code>output.libraryTarget</code></a> options.</p>
+<p>Note that <code>output.libraryTarget</code> defaults to <code>var</code>. This means if only <code>output.library</code> is used it is exported as variable declaration (when used as script tag it&apos;s available in the global scope after execution).</p>
+<blockquote class="tip"><div class="tip-content"> Read the <a href="/guides/author-libraries">authoring libraries guide</a> guide for more information on <code>output.library</code> as well as <code>output.libraryTarget</code>. </div></blockquote><h2 class="header"><a class="anchor" href="#output-libraryexport" id="output-libraryexport"></a><span class="text"><code>output.libraryExport</code></span><a class="icon-link" href="#output-libraryexport"></a></h2>
+<p><code>string</code> or <code>string[]</code> (since webpack 3.0.0)</p>
+<blockquote>
+<p>Default: <code>_entry_return_</code></p>
+</blockquote>
+<p>Configure which module or modules will be exposed via the <code>libraryTarget</code>.</p>
+<p>The default value <code>_entry_return_</code> is the namespace or default module returned by your entry file.</p>
+<p>The examples below demonstrate the effect of this config when using <code>libraryTarget: &quot;var&quot;</code>, but any target may be used.</p>
+<p>The following configurations are supported:</p>
+<p><code>libraryExport: &quot;default&quot;</code> - The <strong>default export of your entry point</strong> will be assigned to the library target:</p>
+<pre><code class="lang-javascript"><span class="token comment" spellcheck="true">// if your entry has a default export of `MyDefaultModule`</span>
+<span class="token keyword">var</span> MyDefaultModule <span class="token operator">=</span> _entry_return_<span class="token punctuation">.</span><span class="token keyword">default</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// your users will use your library like:</span>
+MyDefaultModule<span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><code>libraryExport: &quot;MyModule&quot;</code> - The <strong>specified module</strong> will be assigned to the library target:</p>
+<pre><code class="lang-javascript"><span class="token comment" spellcheck="true">// if your entry exports a module `MyModule`</span>
+<span class="token keyword">var</span> MyModule <span class="token operator">=</span> _entry_return_<span class="token punctuation">.</span>MyModule<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// your users will use your library like:</span>
+MyModule<span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><code>libraryExport: [&quot;MyModule&quot;, &quot;MySubModule&quot;]</code> - The array is interpreted as a <strong>path to a module</strong> to be assigned to the library target:</p>
+<pre><code class="lang-javascript"><span class="token comment" spellcheck="true">// if your entry exports `MyModule` which in turn exports `MySubModule`</span>
+<span class="token keyword">var</span> MySubModule <span class="token operator">=</span> _entry_return_<span class="token punctuation">.</span>MyModule<span class="token punctuation">.</span>MySubModule<span class="token punctuation">;</span>
+
+MySubModule<span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 class="header"><a class="anchor" href="#output-librarytarget" id="output-librarytarget"></a><span class="text"><code>output.libraryTarget</code></span><a class="icon-link" href="#output-librarytarget"></a></h2>
+<p><code>string</code></p>
+<blockquote>
+<p>Default: <code>&quot;var&quot;</code></p>
+</blockquote>
+<p>Configure how the library will be exposed. Any one of the following options can be used.</p>
+<p>The following options are supported:</p>
+<p><code>libraryTarget: &quot;var&quot;</code> - (default) When your library is loaded, the <strong>return value of your entry point</strong> will be assigned to a variable:</p>
+<pre><code class="lang-javascript"><span class="token keyword">var</span> MyLibrary <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// your users will use your library like:</span>
+MyLibrary<span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote class="warning"><div class="tip-content"> Not specifying a <code>output.library</code> will cancel this <code>&quot;var&quot;</code> configuration. </div></blockquote><p><code>libraryTarget: &quot;this&quot;</code> - When your library is loaded, the <strong>return value of your entry point</strong> will be assigned to this, the meaning of <code>this</code> is up to you:</p>
+<pre><code class="lang-javascript"><span class="token keyword">this</span><span class="token punctuation">[</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// your users will use your library like:</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>MyLibrary<span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+MyLibrary<span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//if this is window</span>
+</code></pre>
+<p><code>libraryTarget: &quot;window&quot;</code> - When your library is loaded, <strong>the return value of your entry point</strong> will be part <code>window</code> object.</p>
+<pre><code class="lang-javascript"> window<span class="token punctuation">[</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//your users will use your library like:</span>
+window<span class="token punctuation">.</span>MyLibrary<span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><code>libraryTarget: &quot;global&quot;</code> - When your library is loaded, <strong>the return value of your entry point</strong> will be part <code>global</code> object.</p>
+<pre><code class="lang-javascript"> global<span class="token punctuation">[</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//your users will use your library like:</span>
+global<span class="token punctuation">.</span>MyLibrary<span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><code>libraryTarget: &quot;commonjs&quot;</code> - When your library is loaded, <strong>the return value of your entry point</strong> will be part of the exports object. As the name implies, this is used in CommonJS environments:</p>
+<pre><code class="lang-javascript">exports<span class="token punctuation">[</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//your users will use your library like:</span>
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><code>libraryTarget: &quot;commonjs2&quot;</code> - When your library is loaded, <strong>the return value of your entry point</strong> will be part of the exports object. As the name implies, this is used in CommonJS environments:</p>
+<pre><code class="lang-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//your users will use your library like:</span>
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote class="tip"><div class="tip-content"> Wondering the difference between CommonJS and CommonJS2? Check <a href="https://github.com/webpack/webpack/issues/1114">this</a> out (they are pretty much the same). </div></blockquote><p><code>libraryTarget: &quot;amd&quot;</code> - In this case webpack will make your library an AMD module.</p>
+<p>Note that your entry chunk must be defined with the <code>define</code> property, if not, webpack will create the AMD module, but without dependencies. The output will be something like this:</p>
+<pre><code class="lang-javascript"><span class="token function">define</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// This module returns is what your entry chunk returns</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>If you download this script, you may get an error: <code>define is not defined</code>, it&#x2019;s ok! If you are distributing your library with AMD, then your users need to use RequireJS to load it. Once you have RequireJS loaded, you can load your library.</p>
+<p>So, with the following configuration...</p>
+<pre><code class="lang-javascript">output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  library<span class="token punctuation">:</span> <span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">,</span>
+  libraryTarget<span class="token punctuation">:</span> <span class="token string">&quot;amd&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>users will be able to call your library like so:</p>
+<pre><code class="lang-javascript"><span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">&apos;MyLibrary&apos;</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>MyLibrary<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// Do something with the library...</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><code>libraryTarget: &quot;umd&quot;</code> - This is a way for your library to work with all the module definitions (and where aren&apos;t modules at all). It will work with CommonJS, AMD and as global variable. Take a look at the <a href="https://github.com/umdjs/umd">UMD Repository</a> to learn more.</p>
+<p>In this case, you need the <code>library</code> property to name your module:</p>
+<pre><code class="lang-javascript">output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  library<span class="token punctuation">:</span> <span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">,</span>
+  libraryTarget<span class="token punctuation">:</span> <span class="token string">&quot;umd&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>And finally the output is:</p>
+<pre><code class="lang-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">webpackUniversalModuleDefinition</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> factory<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> exports <span class="token operator">===</span> <span class="token string">&apos;object&apos;</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">typeof</span> module <span class="token operator">===</span> <span class="token string">&apos;object&apos;</span><span class="token punctuation">)</span>
+    module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token function">factory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> define <span class="token operator">===</span> <span class="token string">&apos;function&apos;</span> <span class="token operator">&amp;&amp;</span> define<span class="token punctuation">.</span>amd<span class="token punctuation">)</span>
+    <span class="token function">define</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> factory<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> exports <span class="token operator">===</span> <span class="token string">&apos;object&apos;</span><span class="token punctuation">)</span>
+    exports<span class="token punctuation">[</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">factory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">else</span>
+    root<span class="token punctuation">[</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">factory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">//what this module returns is what your entry chunk returns</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Since webpack 3.1.0, you may specify an object for <code>library</code> for differing names per targets:</p>
+<pre><code class="lang-javascript">output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  library<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    root<span class="token punctuation">:</span> <span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">,</span>
+    amd<span class="token punctuation">:</span> <span class="token string">&quot;my-library&quot;</span><span class="token punctuation">,</span>
+    commonjs<span class="token punctuation">:</span> <span class="token string">&quot;my-common-library&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  libraryTarget<span class="token punctuation">:</span> <span class="token string">&quot;umd&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Module proof library.</p>
+<p><code>libraryTarget: &quot;assign&quot;</code> - Here webpack will blindly generate an implied global.</p>
+<pre><code class="lang-javascript">MyLibrary <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
+</code></pre>
+<p>Be aware that if <code>MyLibrary</code> isn&apos;t defined earlier your library will be set in global scope.</p>
+<p><code>libraryTarget: &quot;jsonp&quot;</code> - This will wrap the return value of your entry point into a jsonp wrapper.</p>
+<pre><code class="lang-javascript"><span class="token function">MyLibrary</span><span class="token punctuation">(</span>_entry_return_<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>The dependencies for your library will be defined by the <a href="/configuration/externals/"><code>externals</code></a> config.</p>
+<h2 class="header"><a class="anchor" href="#output-path" id="output-path"></a><span class="text"><code>output.path</code></span><a class="icon-link" href="#output-path"></a></h2>
+<p><code>string</code></p>
+<p>The output directory as an <strong>absolute</strong> path.</p>
+<pre><code class="lang-js">path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&apos;dist/assets&apos;</span><span class="token punctuation">)</span>
+</code></pre>
+<p>Note that <code>[hash]</code> in this parameter will be replaced with an hash of the compilation. See the <a href="/guides/caching">Caching guide</a> for details.</p>
+<h2 class="header"><a class="anchor" href="#output-pathinfo" id="output-pathinfo"></a><span class="text"><code>output.pathinfo</code></span><a class="icon-link" href="#output-pathinfo"></a></h2>
+<p><code>boolean</code></p>
+<p>Tell webpack to include comments in bundles with information about the contained modules. This option defaults to <code>false</code> and <strong>should not</strong> be used in production, but it&apos;s very useful in development when reading the generated code.</p>
+<pre><code class="lang-js">pathinfo<span class="token punctuation">:</span> <span class="token boolean">true</span>
+</code></pre>
+<p>Note it also adds some info about tree shaking to the generated bundle.</p>
+<h2 class="header"><a class="anchor" href="#output-publicpath" id="output-publicpath"></a><span class="text"><code>output.publicPath</code></span><a class="icon-link" href="#output-publicpath"></a></h2>
+<p><code>string</code></p>
+<p>This is an important option when using on-demand-loading or loading external resources like images, files, etc. If an incorrect value is specified you&apos;ll receive 404 errors while loading these resources.</p>
+<p>This option specifies the <strong>public URL</strong> of the output directory when referenced in a browser. A relative URL is resolved relative to the HTML page (or <code>&lt;base&gt;</code> tag). Server-relative URLs, protocol-relative URLs or absolute URLs are also possible and sometimes required, i. e. when hosting assets on a CDN.</p>
+<p>The value of the option is prefixed to every URL created by the runtime or loaders. Because of this <strong>the value of this option ends with <code>/</code></strong> in most cases.</p>
+<p>The default value is an empty string <code>&quot;&quot;</code>.</p>
+<p>Simple rule: The URL of your <a href="#output-path"><code>output.path</code></a> from the view of the HTML page.</p>
+<pre><code class="lang-js">path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;public/assets&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+publicPath<span class="token punctuation">:</span> <span class="token string">&quot;https://cdn.example.com/assets/&quot;</span>
+</code></pre>
+<p>For this configuration:</p>
+<pre><code class="lang-js">publicPath<span class="token punctuation">:</span> <span class="token string">&quot;/assets/&quot;</span><span class="token punctuation">,</span>
+chunkFilename<span class="token punctuation">:</span> <span class="token string">&quot;[id].chunk.js&quot;</span>
+</code></pre>
+<p>A request to a chunk will look like <code>/assets/4.chunk.js</code>.</p>
+<p>A loader outputting HTML might emit something like this:</p>
+<pre><code class="lang-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>/assets/spinner.gif<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+</code></pre>
+<p>or when loading an image in CSS:</p>
+<pre><code class="lang-css"><span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url">url(/assets/spinner.gif)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>The webpack-dev-server also takes a hint from <code>publicPath</code>, using it to determine where to serve the output files from.</p>
+<p>Note that <code>[hash]</code> in this parameter will be replaced with an hash of the compilation. See the <a href="/guides/caching">Caching guide</a> for details.</p>
+<p>Examples:</p>
+<pre><code class="lang-js">publicPath<span class="token punctuation">:</span> <span class="token string">&quot;https://cdn.example.com/assets/&quot;</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// CDN (always HTTPS)</span>
+publicPath<span class="token punctuation">:</span> &quot;<span class="token comment" spellcheck="true">//cdn.example.com/assets/&quot;, // CDN (same protocol)</span>
+publicPath<span class="token punctuation">:</span> <span class="token string">&quot;/assets/&quot;</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// server-relative</span>
+publicPath<span class="token punctuation">:</span> <span class="token string">&quot;assets/&quot;</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// relative to HTML page</span>
+publicPath<span class="token punctuation">:</span> <span class="token string">&quot;../assets/&quot;</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// relative to HTML page</span>
+publicPath<span class="token punctuation">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// relative to HTML page (same directory)</span>
+</code></pre>
+<p>In cases where the <code>publicPath</code> of output files can&apos;t be known at compile time, it can be left blank and set dynamically at runtime in the entry file using the <a href="http://stackoverflow.com/questions/12934929/what-are-free-variables">free variable</a> <code>__webpack_public_path__</code>.</p>
+<pre><code class="lang-javascript"> __webpack_public_path__ <span class="token operator">=</span> myRuntimePublicPath
+
+<span class="token comment" spellcheck="true">// rest of your application entry</span>
+</code></pre>
+<p>See <a href="https://github.com/webpack/webpack/issues/2776#issuecomment-233208623">this discussion</a> for more information on <code>__webpack_public_path__</code>.</p>
+<h2 class="header"><a class="anchor" href="#output-sourcemapfilename" id="output-sourcemapfilename"></a><span class="text"><code>output.sourceMapFilename</code></span><a class="icon-link" href="#output-sourcemapfilename"></a></h2>
+<p><code>string</code></p>
+<p>This option is only used when <a href="/configuration/devtool"><code>devtool</code></a> uses a SourceMap option which writes an output file.</p>
+<p>Configure how source maps are named. By default <code>&quot;[file].map&quot;</code> is used.</p>
+<p>Technically, the <code>[name]</code>, <code>[id]</code>, <code>[hash]</code> and <code>[chunkhash]</code> <a href="#output-filename">placeholders</a> can be used, if generating a SourceMap for chunks. In addition to that, the <code>[file]</code> placeholder is replaced with the filename of the original file. It&apos;s recommended to only use the <code>[file]</code> placeholder, as the other placeholders won&apos;t work when generating SourceMaps for non-chunk files. Best leave the default.</p>
+<h2 class="header"><a class="anchor" href="#output-sourceprefix" id="output-sourceprefix"></a><span class="text"><code>output.sourcePrefix</code></span><a class="icon-link" href="#output-sourceprefix"></a></h2>
+<p><code>string</code></p>
+<p>Change the prefix for each line in the output bundles.</p>
+<pre><code class="lang-js">sourcePrefix<span class="token punctuation">:</span> <span class="token string">&quot;\t&quot;</span>
+</code></pre>
+<p>Note by default an empty string is used. Using some kind of indentation makes bundles look more pretty, but will cause issues with multi-line strings.</p>
+<p>There is no need to change it.</p>
+<h2 class="header"><a class="anchor" href="#output-strictmoduleexceptionhandling" id="output-strictmoduleexceptionhandling"></a><span class="text"><code>output.strictModuleExceptionHandling</code></span><a class="icon-link" href="#output-strictmoduleexceptionhandling"></a></h2>
+<p><code>boolean</code></p>
+<p>Tell webpack to remove a module from the module instance cache (<code>require.cache</code>) if it throws an exception when it is <code>require</code>d.</p>
+<p>It defaults to <code>false</code> for performance reasons.</p>
+<p>When set to <code>false</code>, the module is not removed from cache, which results in the exception getting thrown only on the first <code>require</code> call (making it incompatible with node.js).</p>
+<p>For instance, consider <code>module.js</code>:</p>
+<pre><code class="lang-js"><span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">&quot;error&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>With <code>strictModuleExceptionHandling</code> set to <code>false</code>, only the first <code>require</code> throws an exception:</p>
+<pre><code class="lang-js"><span class="token comment" spellcheck="true">// with strictModuleExceptionHandling = false</span>
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;module&quot;</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// &lt;- throws</span>
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;module&quot;</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// &lt;- doesn&apos;t throw</span>
+</code></pre>
+<p>Instead, with <code>strictModuleExceptionHandling</code> set to <code>true</code>, all <code>require</code>s of this module throw an exception:</p>
+<pre><code class="lang-js"><span class="token comment" spellcheck="true">// with strictModuleExceptionHandling = true</span>
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;module&quot;</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// &lt;- throws</span>
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;module&quot;</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// &lt;- also throw</span>
+</code></pre>
+<h2 class="header"><a class="anchor" href="#output-umdnameddefine" id="output-umdnameddefine"></a><span class="text"><code>output.umdNamedDefine</code></span><a class="icon-link" href="#output-umdnameddefine"></a></h2>
+<p><code>boolean</code></p>
+<p>When using <code>libraryTarget: &quot;umd&quot;</code>, setting:</p>
+<pre><code class="lang-js">umdNamedDefine<span class="token punctuation">:</span> <span class="token boolean">true</span>
+</code></pre>
+<p>will name the AMD module of the UMD build. Otherwise an anonymous <code>define</code> is used.</p>
+</div><div><hr><h3>Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/dhurlburtusa"><img src="https://github.com/dhurlburtusa.png?size=90"><span class="contributor__name"> dhurlburtusa</span></a><a class="contributor" href="https://github.com/fvgs"><img src="https://github.com/fvgs.png?size=90"><span class="contributor__name"> fvgs</span></a><a class="contributor" href="https://github.com/irth"><img src="https://github.com/irth.png?size=90"><span class="contributor__name"> irth</span></a><a class="contributor" href="https://github.com/mattce"><img src="https://github.com/mattce.png?size=90"><span class="contributor__name"> mattce</span></a><a class="contributor" href="https://github.com/skipjack"><img src="https://github.com/skipjack.png?size=90"><span class="contributor__name"> skipjack</span></a><a class="contributor" href="https://github.com/sokra"><img src="https://github.com/sokra.png?size=90"><span class="contributor__name"> sokra</span></a><a class="contributor" href="https://github.com/tomasAlabes"><img src="https://github.com/tomasAlabes.png?size=90"><span class="contributor__name"> tomasAlabes</span></a></div></div></div><div class="interactive" id="components/gitter/gitter.jsx" data-props="{}"><span class="gitter"></span></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/guides/getting-started" class="footer__link">Getting Started</a><a href="/organization" class="footer__link">Organization</a><a href="/support" class="footer__link">Support</a><a href="/comparison" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg" alt="webpack icon"></a></section><section class="footer__right"><a href="/glossary" class="footer__link">Glossary</a><a href="/branding" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Gitter</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link footer__license"><img alt="Creative Commons License" src="/c983c925f14c5a308465ce5f912be111.svg"><img alt="Creative Commons License" src="/c440e4e11ad72daf1899ca0616ddd8b8.svg"></a></section></div></footer><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
+
+    
+      <script src="/37159d03236048f6a0be588b7ffd091a.js"></script>
+    
+
+    <script>
+      ((window.gitter = {}).chat = {}).options = {
+        room: 'webpack/webpack',
+        activationElement: false
+      };
+    </script>
+
+    <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+  </body>
+</html>

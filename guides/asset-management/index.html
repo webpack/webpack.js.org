@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Asset Management</title>
+    <meta name="description" content="webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#2B3A42">
+    <link rel="shortcut icon" href="/assets/favicon.ico">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:200,400,400i,500" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+    
+      <link href="/bca43175235e0cf6fb31.css" rel="stylesheet">
+    
+
+    <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+  </head>
+  <body>
+    <div id="site" class="site"><div class="interactive" id="components/notification-bar/notification-bar.jsx" data-props="{}"><div class="notification-bar "></div></div><div class="interactive" id="components/navigation/navigation.jsx" data-props="{&quot;sections&quot;:[{&quot;url&quot;:&quot;get-started&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;Concepts&quot;,&quot;url&quot;:&quot;concepts&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Entry Points&quot;,&quot;url&quot;:&quot;concepts/entry-points&quot;},{&quot;title&quot;:&quot;Output&quot;,&quot;url&quot;:&quot;concepts/output&quot;},{&quot;title&quot;:&quot;Loaders&quot;,&quot;url&quot;:&quot;concepts/loaders&quot;},{&quot;title&quot;:&quot;Plugins&quot;,&quot;url&quot;:&quot;concepts/plugins&quot;},{&quot;title&quot;:&quot;Configuration&quot;,&quot;url&quot;:&quot;concepts/configuration&quot;},{&quot;title&quot;:&quot;Modules&quot;,&quot;url&quot;:&quot;concepts/modules&quot;},{&quot;title&quot;:&quot;Module Resolution&quot;,&quot;url&quot;:&quot;concepts/module-resolution&quot;},{&quot;title&quot;:&quot;Dependency Graph&quot;,&quot;url&quot;:&quot;concepts/dependency-graph&quot;},{&quot;title&quot;:&quot;The Manifest&quot;,&quot;url&quot;:&quot;concepts/manifest&quot;},{&quot;title&quot;:&quot;Targets&quot;,&quot;url&quot;:&quot;concepts/targets&quot;},{&quot;title&quot;:&quot;Hot Module Replacement&quot;,&quot;url&quot;:&quot;concepts/hot-module-replacement&quot;}]},{&quot;title&quot;:&quot;Guides&quot;,&quot;url&quot;:&quot;guides&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Installation&quot;,&quot;url&quot;:&quot;guides/installation&quot;},{&quot;title&quot;:&quot;Getting Started&quot;,&quot;url&quot;:&quot;guides/getting-started&quot;},{&quot;title&quot;:&quot;Asset Management&quot;,&quot;url&quot;:&quot;guides/asset-management&quot;},{&quot;title&quot;:&quot;Output Management&quot;,&quot;url&quot;:&quot;guides/output-management&quot;},{&quot;title&quot;:&quot;Development&quot;,&quot;url&quot;:&quot;guides/development&quot;},{&quot;title&quot;:&quot;Hot Module Replacement&quot;,&quot;url&quot;:&quot;guides/hot-module-replacement&quot;},{&quot;title&quot;:&quot;Production&quot;,&quot;url&quot;:&quot;guides/production&quot;},{&quot;title&quot;:&quot;Tree Shaking&quot;,&quot;url&quot;:&quot;guides/tree-shaking&quot;},{&quot;title&quot;:&quot;Code Splitting&quot;,&quot;url&quot;:&quot;guides/code-splitting&quot;},{&quot;title&quot;:&quot;Lazy Loading&quot;,&quot;url&quot;:&quot;guides/lazy-loading&quot;},{&quot;title&quot;:&quot;Caching&quot;,&quot;url&quot;:&quot;guides/caching&quot;},{&quot;title&quot;:&quot;Authoring Libraries&quot;,&quot;url&quot;:&quot;guides/author-libraries&quot;},{&quot;title&quot;:&quot;Shimming&quot;,&quot;url&quot;:&quot;guides/shimming&quot;},{&quot;title&quot;:&quot;TypeScript&quot;,&quot;url&quot;:&quot;guides/typescript&quot;},{&quot;title&quot;:&quot;Migrating from v1 to v2&quot;,&quot;url&quot;:&quot;guides/migrating&quot;},{&quot;title&quot;:&quot;Environment Variables&quot;,&quot;url&quot;:&quot;guides/environment-variables&quot;},{&quot;title&quot;:&quot;Development - Vagrant&quot;,&quot;url&quot;:&quot;guides/development-vagrant&quot;},{&quot;title&quot;:&quot;Dependency Management&quot;,&quot;url&quot;:&quot;guides/dependency-management&quot;},{&quot;title&quot;:&quot;Public Path&quot;,&quot;url&quot;:&quot;guides/public-path&quot;},{&quot;title&quot;:&quot;Integrations&quot;,&quot;url&quot;:&quot;guides/integrations&quot;}]},{&quot;title&quot;:&quot;Starter Kits&quot;,&quot;url&quot;:&quot;guides/starter-kits&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;Development&quot;,&quot;url&quot;:&quot;development&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;How to write a plugin?&quot;,&quot;url&quot;:&quot;development/how-to-write-a-plugin&quot;},{&quot;title&quot;:&quot;Useful Plugin Patterns&quot;,&quot;url&quot;:&quot;development/plugin-patterns&quot;},{&quot;title&quot;:&quot;How to write a loader?&quot;,&quot;url&quot;:&quot;development/how-to-write-a-loader&quot;},{&quot;title&quot;:&quot;webpack merge, tag and release process&quot;,&quot;url&quot;:&quot;development/release-process&quot;}]},{&quot;title&quot;:&quot;Configuration&quot;,&quot;url&quot;:&quot;configuration&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Configuration Languages&quot;,&quot;url&quot;:&quot;configuration/configuration-languages&quot;},{&quot;title&quot;:&quot;Configuration Types&quot;,&quot;url&quot;:&quot;configuration/configuration-types&quot;},{&quot;title&quot;:&quot;Entry and Context&quot;,&quot;url&quot;:&quot;configuration/entry-context&quot;},{&quot;title&quot;:&quot;Output&quot;,&quot;url&quot;:&quot;configuration/output&quot;},{&quot;title&quot;:&quot;Module&quot;,&quot;url&quot;:&quot;configuration/module&quot;},{&quot;title&quot;:&quot;Resolve&quot;,&quot;url&quot;:&quot;configuration/resolve&quot;},{&quot;title&quot;:&quot;Plugins&quot;,&quot;url&quot;:&quot;configuration/plugins&quot;},{&quot;title&quot;:&quot;DevServer&quot;,&quot;url&quot;:&quot;configuration/dev-server&quot;},{&quot;title&quot;:&quot;Devtool&quot;,&quot;url&quot;:&quot;configuration/devtool&quot;},{&quot;title&quot;:&quot;Target&quot;,&quot;url&quot;:&quot;configuration/target&quot;},{&quot;title&quot;:&quot;Watch and WatchOptions&quot;,&quot;url&quot;:&quot;configuration/watch&quot;},{&quot;title&quot;:&quot;Externals&quot;,&quot;url&quot;:&quot;configuration/externals&quot;},{&quot;title&quot;:&quot;Node&quot;,&quot;url&quot;:&quot;configuration/node&quot;},{&quot;title&quot;:&quot;Performance&quot;,&quot;url&quot;:&quot;configuration/performance&quot;},{&quot;title&quot;:&quot;Stats&quot;,&quot;url&quot;:&quot;configuration/stats&quot;},{&quot;title&quot;:&quot;Other Options&quot;,&quot;url&quot;:&quot;configuration/other-options&quot;}]},{&quot;title&quot;:&quot;API&quot;,&quot;url&quot;:&quot;api&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Stats JSON&quot;,&quot;url&quot;:&quot;api/stats&quot;},{&quot;title&quot;:&quot;Command Line Interface (CLI)&quot;,&quot;url&quot;:&quot;api/cli&quot;},{&quot;title&quot;:&quot;Module API - Methods&quot;,&quot;url&quot;:&quot;api/module-methods&quot;},{&quot;title&quot;:&quot;Module API - Variables&quot;,&quot;url&quot;:&quot;api/module-variables&quot;},{&quot;title&quot;:&quot;Node.js API&quot;,&quot;url&quot;:&quot;api/node&quot;},{&quot;title&quot;:&quot;Loader API&quot;,&quot;url&quot;:&quot;api/loaders&quot;},{&quot;title&quot;:&quot;Hot Module Replacement&quot;,&quot;url&quot;:&quot;api/hot-module-replacement&quot;}]},{&quot;title&quot;:&quot;API&quot;,&quot;url&quot;:&quot;api/plugins&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Tapable&quot;,&quot;url&quot;:&quot;api/plugins/tapable&quot;},{&quot;title&quot;:&quot;Compiler&quot;,&quot;url&quot;:&quot;api/plugins/compiler&quot;},{&quot;title&quot;:&quot;Compilation&quot;,&quot;url&quot;:&quot;api/plugins/compilation&quot;},{&quot;title&quot;:&quot;Context/Normal Module Factories&quot;,&quot;url&quot;:&quot;api/plugins/module-factories&quot;},{&quot;title&quot;:&quot;Resolver&quot;,&quot;url&quot;:&quot;api/plugins/resolver&quot;},{&quot;title&quot;:&quot;Dependency&quot;,&quot;url&quot;:&quot;api/plugins/dependency&quot;},{&quot;title&quot;:&quot;Parser&quot;,&quot;url&quot;:&quot;api/plugins/parser&quot;},{&quot;title&quot;:&quot;Templates&quot;,&quot;url&quot;:&quot;api/plugins/template&quot;}]},{&quot;url&quot;:&quot;pluginsapi&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;Loaders&quot;,&quot;url&quot;:&quot;loaders&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;babel-loader&quot;,&quot;url&quot;:&quot;loaders/babel-loader&quot;},{&quot;title&quot;:&quot;bundle-loader&quot;,&quot;url&quot;:&quot;loaders/bundle-loader&quot;},{&quot;title&quot;:&quot;cache-loader&quot;,&quot;url&quot;:&quot;loaders/cache-loader&quot;},{&quot;title&quot;:&quot;coffee-loader&quot;,&quot;url&quot;:&quot;loaders/coffee-loader&quot;},{&quot;title&quot;:&quot;coffee-redux-loader&quot;,&quot;url&quot;:&quot;loaders/coffee-redux-loader&quot;},{&quot;title&quot;:&quot;coverjs-loader&quot;,&quot;url&quot;:&quot;loaders/coverjs-loader&quot;},{&quot;title&quot;:&quot;css-loader&quot;,&quot;url&quot;:&quot;loaders/css-loader&quot;},{&quot;title&quot;:&quot;exports-loader&quot;,&quot;url&quot;:&quot;loaders/exports-loader&quot;},{&quot;title&quot;:&quot;expose-loader&quot;,&quot;url&quot;:&quot;loaders/expose-loader&quot;},{&quot;title&quot;:&quot;extract-loader&quot;,&quot;url&quot;:&quot;loaders/extract-loader&quot;},{&quot;title&quot;:&quot;file-loader&quot;,&quot;url&quot;:&quot;loaders/file-loader&quot;},{&quot;title&quot;:&quot;gzip-loader&quot;,&quot;url&quot;:&quot;loaders/gzip-loader&quot;},{&quot;title&quot;:&quot;html-loader&quot;,&quot;url&quot;:&quot;loaders/html-loader&quot;},{&quot;title&quot;:&quot;i18n-loader&quot;,&quot;url&quot;:&quot;loaders/i18n-loader&quot;},{&quot;title&quot;:&quot;imports-loader&quot;,&quot;url&quot;:&quot;loaders/imports-loader&quot;},{&quot;title&quot;:&quot;istanbul-instrumenter-loader&quot;,&quot;url&quot;:&quot;loaders/istanbul-instrumenter-loader&quot;},{&quot;title&quot;:&quot;jshint-loader&quot;,&quot;url&quot;:&quot;loaders/jshint-loader&quot;},{&quot;title&quot;:&quot;json-loader&quot;,&quot;url&quot;:&quot;loaders/json-loader&quot;},{&quot;title&quot;:&quot;json5-loader&quot;,&quot;url&quot;:&quot;loaders/json5-loader&quot;},{&quot;title&quot;:&quot;less-loader&quot;,&quot;url&quot;:&quot;loaders/less-loader&quot;},{&quot;title&quot;:&quot;mocha-loader&quot;,&quot;url&quot;:&quot;loaders/mocha-loader&quot;},{&quot;title&quot;:&quot;multi-loader&quot;,&quot;url&quot;:&quot;loaders/multi-loader&quot;},{&quot;title&quot;:&quot;node-loader&quot;,&quot;url&quot;:&quot;loaders/node-loader&quot;},{&quot;title&quot;:&quot;null-loader&quot;,&quot;url&quot;:&quot;loaders/null-loader&quot;},{&quot;title&quot;:&quot;polymer-webpack-loader&quot;,&quot;url&quot;:&quot;loaders/polymer-webpack-loader&quot;},{&quot;title&quot;:&quot;postcss-loader&quot;,&quot;url&quot;:&quot;loaders/postcss-loader&quot;},{&quot;title&quot;:&quot;raw-loader&quot;,&quot;url&quot;:&quot;loaders/raw-loader&quot;},{&quot;title&quot;:&quot;react-proxy-loader&quot;,&quot;url&quot;:&quot;loaders/react-proxy-loader&quot;},{&quot;title&quot;:&quot;restyle-loader&quot;,&quot;url&quot;:&quot;loaders/restyle-loader&quot;},{&quot;title&quot;:&quot;sass-loader&quot;,&quot;url&quot;:&quot;loaders/sass-loader&quot;},{&quot;title&quot;:&quot;script-loader&quot;,&quot;url&quot;:&quot;loaders/script-loader&quot;},{&quot;title&quot;:&quot;source-map-loader&quot;,&quot;url&quot;:&quot;loaders/source-map-loader&quot;},{&quot;title&quot;:&quot;style-loader&quot;,&quot;url&quot;:&quot;loaders/style-loader&quot;},{&quot;title&quot;:&quot;svg-inline-loader&quot;,&quot;url&quot;:&quot;loaders/svg-inline-loader&quot;},{&quot;title&quot;:&quot;thread-loader&quot;,&quot;url&quot;:&quot;loaders/thread-loader&quot;},{&quot;title&quot;:&quot;transform-loader&quot;,&quot;url&quot;:&quot;loaders/transform-loader&quot;},{&quot;title&quot;:&quot;url-loader&quot;,&quot;url&quot;:&quot;loaders/url-loader&quot;},{&quot;title&quot;:&quot;val-loader&quot;,&quot;url&quot;:&quot;loaders/val-loader&quot;},{&quot;title&quot;:&quot;worker-loader&quot;,&quot;url&quot;:&quot;loaders/worker-loader&quot;},{&quot;title&quot;:&quot;yaml-frontmatter-loader&quot;,&quot;url&quot;:&quot;loaders/yaml-frontmatter-loader&quot;}]},{&quot;title&quot;:&quot;Plugins&quot;,&quot;url&quot;:&quot;plugins&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;MinChunkSizePlugin&quot;,&quot;url&quot;:&quot;plugins/min-chunk-size-plugin&quot;},{&quot;title&quot;:&quot;AggressiveSplittingPlugin&quot;,&quot;url&quot;:&quot;plugins/aggressive-splitting-plugin&quot;},{&quot;title&quot;:&quot;BabiliWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/babili-webpack-plugin&quot;},{&quot;title&quot;:&quot;BannerPlugin&quot;,&quot;url&quot;:&quot;plugins/banner-plugin&quot;},{&quot;title&quot;:&quot;CommonsChunkPlugin&quot;,&quot;url&quot;:&quot;plugins/commons-chunk-plugin&quot;},{&quot;title&quot;:&quot;ComponentWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/component-webpack-plugin&quot;},{&quot;title&quot;:&quot;CompressionWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/compression-webpack-plugin&quot;},{&quot;title&quot;:&quot;ContextReplacementPlugin&quot;,&quot;url&quot;:&quot;plugins/context-replacement-plugin&quot;},{&quot;title&quot;:&quot;DefinePlugin&quot;,&quot;url&quot;:&quot;plugins/define-plugin&quot;},{&quot;title&quot;:&quot;DllPlugin&quot;,&quot;url&quot;:&quot;plugins/dll-plugin&quot;},{&quot;title&quot;:&quot;EnvironmentPlugin&quot;,&quot;url&quot;:&quot;plugins/environment-plugin&quot;},{&quot;title&quot;:&quot;ExtractTextWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/extract-text-webpack-plugin&quot;},{&quot;title&quot;:&quot;HashedModuleIdsPlugin&quot;,&quot;url&quot;:&quot;plugins/hashed-module-ids-plugin&quot;},{&quot;title&quot;:&quot;HotModuleReplacementPlugin&quot;,&quot;url&quot;:&quot;plugins/hot-module-replacement-plugin&quot;},{&quot;title&quot;:&quot;HtmlWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/html-webpack-plugin&quot;},{&quot;title&quot;:&quot;I18nWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/i18n-webpack-plugin&quot;},{&quot;title&quot;:&quot;IgnorePlugin&quot;,&quot;url&quot;:&quot;plugins/ignore-plugin&quot;},{&quot;title&quot;:&quot;LimitChunkCountPlugin&quot;,&quot;url&quot;:&quot;plugins/limit-chunk-count-plugin&quot;},{&quot;title&quot;:&quot;LoaderOptionsPlugin&quot;,&quot;url&quot;:&quot;plugins/loader-options-plugin&quot;},{&quot;title&quot;:&quot;NamedModulesPlugin&quot;,&quot;url&quot;:&quot;plugins/named-modules-plugin&quot;},{&quot;title&quot;:&quot;NoEmitOnErrorsPlugin&quot;,&quot;url&quot;:&quot;plugins/no-emit-on-errors-plugin&quot;},{&quot;title&quot;:&quot;NormalModuleReplacementPlugin&quot;,&quot;url&quot;:&quot;plugins/normal-module-replacement-plugin&quot;},{&quot;title&quot;:&quot;NpmInstallWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/npm-install-webpack-plugin&quot;},{&quot;title&quot;:&quot;PrefetchPlugin&quot;,&quot;url&quot;:&quot;plugins/prefetch-plugin&quot;},{&quot;title&quot;:&quot;ProvidePlugin&quot;,&quot;url&quot;:&quot;plugins/provide-plugin&quot;},{&quot;title&quot;:&quot;SourceMapDevToolPlugin&quot;,&quot;url&quot;:&quot;plugins/source-map-dev-tool-plugin&quot;},{&quot;title&quot;:&quot;UglifyjsWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/uglifyjs-webpack-plugin&quot;},{&quot;title&quot;:&quot;WatchIgnorePlugin&quot;,&quot;url&quot;:&quot;plugins/watch-ignore-plugin&quot;},{&quot;title&quot;:&quot;ZopfliWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/zopfli-webpack-plugin&quot;}]},{&quot;title&quot;:&quot;Support&quot;,&quot;url&quot;:&quot;support&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;vote&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;vote/feedback&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;vote/moneyDistribution&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;organization&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;Other&quot;,&quot;url&quot;:&quot;/&quot;,&quot;pages&quot;:[]}],&quot;pageUrl&quot;:&quot;guides/asset-management&quot;}"><header class="navigation"></header></div><div class="interactive" id="components/sidebar-mobile/sidebar-mobile.jsx" data-props="{&quot;sections&quot;:[{&quot;url&quot;:&quot;get-started&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;Concepts&quot;,&quot;url&quot;:&quot;concepts&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Entry Points&quot;,&quot;url&quot;:&quot;concepts/entry-points&quot;},{&quot;title&quot;:&quot;Output&quot;,&quot;url&quot;:&quot;concepts/output&quot;},{&quot;title&quot;:&quot;Loaders&quot;,&quot;url&quot;:&quot;concepts/loaders&quot;},{&quot;title&quot;:&quot;Plugins&quot;,&quot;url&quot;:&quot;concepts/plugins&quot;},{&quot;title&quot;:&quot;Configuration&quot;,&quot;url&quot;:&quot;concepts/configuration&quot;},{&quot;title&quot;:&quot;Modules&quot;,&quot;url&quot;:&quot;concepts/modules&quot;},{&quot;title&quot;:&quot;Module Resolution&quot;,&quot;url&quot;:&quot;concepts/module-resolution&quot;},{&quot;title&quot;:&quot;Dependency Graph&quot;,&quot;url&quot;:&quot;concepts/dependency-graph&quot;},{&quot;title&quot;:&quot;The Manifest&quot;,&quot;url&quot;:&quot;concepts/manifest&quot;},{&quot;title&quot;:&quot;Targets&quot;,&quot;url&quot;:&quot;concepts/targets&quot;},{&quot;title&quot;:&quot;Hot Module Replacement&quot;,&quot;url&quot;:&quot;concepts/hot-module-replacement&quot;}]},{&quot;title&quot;:&quot;Guides&quot;,&quot;url&quot;:&quot;guides&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Installation&quot;,&quot;url&quot;:&quot;guides/installation&quot;},{&quot;title&quot;:&quot;Getting Started&quot;,&quot;url&quot;:&quot;guides/getting-started&quot;},{&quot;title&quot;:&quot;Asset Management&quot;,&quot;url&quot;:&quot;guides/asset-management&quot;},{&quot;title&quot;:&quot;Output Management&quot;,&quot;url&quot;:&quot;guides/output-management&quot;},{&quot;title&quot;:&quot;Development&quot;,&quot;url&quot;:&quot;guides/development&quot;},{&quot;title&quot;:&quot;Hot Module Replacement&quot;,&quot;url&quot;:&quot;guides/hot-module-replacement&quot;},{&quot;title&quot;:&quot;Production&quot;,&quot;url&quot;:&quot;guides/production&quot;},{&quot;title&quot;:&quot;Tree Shaking&quot;,&quot;url&quot;:&quot;guides/tree-shaking&quot;},{&quot;title&quot;:&quot;Code Splitting&quot;,&quot;url&quot;:&quot;guides/code-splitting&quot;},{&quot;title&quot;:&quot;Lazy Loading&quot;,&quot;url&quot;:&quot;guides/lazy-loading&quot;},{&quot;title&quot;:&quot;Caching&quot;,&quot;url&quot;:&quot;guides/caching&quot;},{&quot;title&quot;:&quot;Authoring Libraries&quot;,&quot;url&quot;:&quot;guides/author-libraries&quot;},{&quot;title&quot;:&quot;Shimming&quot;,&quot;url&quot;:&quot;guides/shimming&quot;},{&quot;title&quot;:&quot;TypeScript&quot;,&quot;url&quot;:&quot;guides/typescript&quot;},{&quot;title&quot;:&quot;Migrating from v1 to v2&quot;,&quot;url&quot;:&quot;guides/migrating&quot;},{&quot;title&quot;:&quot;Environment Variables&quot;,&quot;url&quot;:&quot;guides/environment-variables&quot;},{&quot;title&quot;:&quot;Development - Vagrant&quot;,&quot;url&quot;:&quot;guides/development-vagrant&quot;},{&quot;title&quot;:&quot;Dependency Management&quot;,&quot;url&quot;:&quot;guides/dependency-management&quot;},{&quot;title&quot;:&quot;Public Path&quot;,&quot;url&quot;:&quot;guides/public-path&quot;},{&quot;title&quot;:&quot;Integrations&quot;,&quot;url&quot;:&quot;guides/integrations&quot;}]},{&quot;title&quot;:&quot;Starter Kits&quot;,&quot;url&quot;:&quot;guides/starter-kits&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;Development&quot;,&quot;url&quot;:&quot;development&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;How to write a plugin?&quot;,&quot;url&quot;:&quot;development/how-to-write-a-plugin&quot;},{&quot;title&quot;:&quot;Useful Plugin Patterns&quot;,&quot;url&quot;:&quot;development/plugin-patterns&quot;},{&quot;title&quot;:&quot;How to write a loader?&quot;,&quot;url&quot;:&quot;development/how-to-write-a-loader&quot;},{&quot;title&quot;:&quot;webpack merge, tag and release process&quot;,&quot;url&quot;:&quot;development/release-process&quot;}]},{&quot;title&quot;:&quot;Configuration&quot;,&quot;url&quot;:&quot;configuration&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Configuration Languages&quot;,&quot;url&quot;:&quot;configuration/configuration-languages&quot;},{&quot;title&quot;:&quot;Configuration Types&quot;,&quot;url&quot;:&quot;configuration/configuration-types&quot;},{&quot;title&quot;:&quot;Entry and Context&quot;,&quot;url&quot;:&quot;configuration/entry-context&quot;},{&quot;title&quot;:&quot;Output&quot;,&quot;url&quot;:&quot;configuration/output&quot;},{&quot;title&quot;:&quot;Module&quot;,&quot;url&quot;:&quot;configuration/module&quot;},{&quot;title&quot;:&quot;Resolve&quot;,&quot;url&quot;:&quot;configuration/resolve&quot;},{&quot;title&quot;:&quot;Plugins&quot;,&quot;url&quot;:&quot;configuration/plugins&quot;},{&quot;title&quot;:&quot;DevServer&quot;,&quot;url&quot;:&quot;configuration/dev-server&quot;},{&quot;title&quot;:&quot;Devtool&quot;,&quot;url&quot;:&quot;configuration/devtool&quot;},{&quot;title&quot;:&quot;Target&quot;,&quot;url&quot;:&quot;configuration/target&quot;},{&quot;title&quot;:&quot;Watch and WatchOptions&quot;,&quot;url&quot;:&quot;configuration/watch&quot;},{&quot;title&quot;:&quot;Externals&quot;,&quot;url&quot;:&quot;configuration/externals&quot;},{&quot;title&quot;:&quot;Node&quot;,&quot;url&quot;:&quot;configuration/node&quot;},{&quot;title&quot;:&quot;Performance&quot;,&quot;url&quot;:&quot;configuration/performance&quot;},{&quot;title&quot;:&quot;Stats&quot;,&quot;url&quot;:&quot;configuration/stats&quot;},{&quot;title&quot;:&quot;Other Options&quot;,&quot;url&quot;:&quot;configuration/other-options&quot;}]},{&quot;title&quot;:&quot;API&quot;,&quot;url&quot;:&quot;api&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Stats JSON&quot;,&quot;url&quot;:&quot;api/stats&quot;},{&quot;title&quot;:&quot;Command Line Interface (CLI)&quot;,&quot;url&quot;:&quot;api/cli&quot;},{&quot;title&quot;:&quot;Module API - Methods&quot;,&quot;url&quot;:&quot;api/module-methods&quot;},{&quot;title&quot;:&quot;Module API - Variables&quot;,&quot;url&quot;:&quot;api/module-variables&quot;},{&quot;title&quot;:&quot;Node.js API&quot;,&quot;url&quot;:&quot;api/node&quot;},{&quot;title&quot;:&quot;Loader API&quot;,&quot;url&quot;:&quot;api/loaders&quot;},{&quot;title&quot;:&quot;Hot Module Replacement&quot;,&quot;url&quot;:&quot;api/hot-module-replacement&quot;}]},{&quot;title&quot;:&quot;API&quot;,&quot;url&quot;:&quot;api/plugins&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;Tapable&quot;,&quot;url&quot;:&quot;api/plugins/tapable&quot;},{&quot;title&quot;:&quot;Compiler&quot;,&quot;url&quot;:&quot;api/plugins/compiler&quot;},{&quot;title&quot;:&quot;Compilation&quot;,&quot;url&quot;:&quot;api/plugins/compilation&quot;},{&quot;title&quot;:&quot;Context/Normal Module Factories&quot;,&quot;url&quot;:&quot;api/plugins/module-factories&quot;},{&quot;title&quot;:&quot;Resolver&quot;,&quot;url&quot;:&quot;api/plugins/resolver&quot;},{&quot;title&quot;:&quot;Dependency&quot;,&quot;url&quot;:&quot;api/plugins/dependency&quot;},{&quot;title&quot;:&quot;Parser&quot;,&quot;url&quot;:&quot;api/plugins/parser&quot;},{&quot;title&quot;:&quot;Templates&quot;,&quot;url&quot;:&quot;api/plugins/template&quot;}]},{&quot;url&quot;:&quot;pluginsapi&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;Loaders&quot;,&quot;url&quot;:&quot;loaders&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;babel-loader&quot;,&quot;url&quot;:&quot;loaders/babel-loader&quot;},{&quot;title&quot;:&quot;bundle-loader&quot;,&quot;url&quot;:&quot;loaders/bundle-loader&quot;},{&quot;title&quot;:&quot;cache-loader&quot;,&quot;url&quot;:&quot;loaders/cache-loader&quot;},{&quot;title&quot;:&quot;coffee-loader&quot;,&quot;url&quot;:&quot;loaders/coffee-loader&quot;},{&quot;title&quot;:&quot;coffee-redux-loader&quot;,&quot;url&quot;:&quot;loaders/coffee-redux-loader&quot;},{&quot;title&quot;:&quot;coverjs-loader&quot;,&quot;url&quot;:&quot;loaders/coverjs-loader&quot;},{&quot;title&quot;:&quot;css-loader&quot;,&quot;url&quot;:&quot;loaders/css-loader&quot;},{&quot;title&quot;:&quot;exports-loader&quot;,&quot;url&quot;:&quot;loaders/exports-loader&quot;},{&quot;title&quot;:&quot;expose-loader&quot;,&quot;url&quot;:&quot;loaders/expose-loader&quot;},{&quot;title&quot;:&quot;extract-loader&quot;,&quot;url&quot;:&quot;loaders/extract-loader&quot;},{&quot;title&quot;:&quot;file-loader&quot;,&quot;url&quot;:&quot;loaders/file-loader&quot;},{&quot;title&quot;:&quot;gzip-loader&quot;,&quot;url&quot;:&quot;loaders/gzip-loader&quot;},{&quot;title&quot;:&quot;html-loader&quot;,&quot;url&quot;:&quot;loaders/html-loader&quot;},{&quot;title&quot;:&quot;i18n-loader&quot;,&quot;url&quot;:&quot;loaders/i18n-loader&quot;},{&quot;title&quot;:&quot;imports-loader&quot;,&quot;url&quot;:&quot;loaders/imports-loader&quot;},{&quot;title&quot;:&quot;istanbul-instrumenter-loader&quot;,&quot;url&quot;:&quot;loaders/istanbul-instrumenter-loader&quot;},{&quot;title&quot;:&quot;jshint-loader&quot;,&quot;url&quot;:&quot;loaders/jshint-loader&quot;},{&quot;title&quot;:&quot;json-loader&quot;,&quot;url&quot;:&quot;loaders/json-loader&quot;},{&quot;title&quot;:&quot;json5-loader&quot;,&quot;url&quot;:&quot;loaders/json5-loader&quot;},{&quot;title&quot;:&quot;less-loader&quot;,&quot;url&quot;:&quot;loaders/less-loader&quot;},{&quot;title&quot;:&quot;mocha-loader&quot;,&quot;url&quot;:&quot;loaders/mocha-loader&quot;},{&quot;title&quot;:&quot;multi-loader&quot;,&quot;url&quot;:&quot;loaders/multi-loader&quot;},{&quot;title&quot;:&quot;node-loader&quot;,&quot;url&quot;:&quot;loaders/node-loader&quot;},{&quot;title&quot;:&quot;null-loader&quot;,&quot;url&quot;:&quot;loaders/null-loader&quot;},{&quot;title&quot;:&quot;polymer-webpack-loader&quot;,&quot;url&quot;:&quot;loaders/polymer-webpack-loader&quot;},{&quot;title&quot;:&quot;postcss-loader&quot;,&quot;url&quot;:&quot;loaders/postcss-loader&quot;},{&quot;title&quot;:&quot;raw-loader&quot;,&quot;url&quot;:&quot;loaders/raw-loader&quot;},{&quot;title&quot;:&quot;react-proxy-loader&quot;,&quot;url&quot;:&quot;loaders/react-proxy-loader&quot;},{&quot;title&quot;:&quot;restyle-loader&quot;,&quot;url&quot;:&quot;loaders/restyle-loader&quot;},{&quot;title&quot;:&quot;sass-loader&quot;,&quot;url&quot;:&quot;loaders/sass-loader&quot;},{&quot;title&quot;:&quot;script-loader&quot;,&quot;url&quot;:&quot;loaders/script-loader&quot;},{&quot;title&quot;:&quot;source-map-loader&quot;,&quot;url&quot;:&quot;loaders/source-map-loader&quot;},{&quot;title&quot;:&quot;style-loader&quot;,&quot;url&quot;:&quot;loaders/style-loader&quot;},{&quot;title&quot;:&quot;svg-inline-loader&quot;,&quot;url&quot;:&quot;loaders/svg-inline-loader&quot;},{&quot;title&quot;:&quot;thread-loader&quot;,&quot;url&quot;:&quot;loaders/thread-loader&quot;},{&quot;title&quot;:&quot;transform-loader&quot;,&quot;url&quot;:&quot;loaders/transform-loader&quot;},{&quot;title&quot;:&quot;url-loader&quot;,&quot;url&quot;:&quot;loaders/url-loader&quot;},{&quot;title&quot;:&quot;val-loader&quot;,&quot;url&quot;:&quot;loaders/val-loader&quot;},{&quot;title&quot;:&quot;worker-loader&quot;,&quot;url&quot;:&quot;loaders/worker-loader&quot;},{&quot;title&quot;:&quot;yaml-frontmatter-loader&quot;,&quot;url&quot;:&quot;loaders/yaml-frontmatter-loader&quot;}]},{&quot;title&quot;:&quot;Plugins&quot;,&quot;url&quot;:&quot;plugins&quot;,&quot;pages&quot;:[{&quot;title&quot;:&quot;MinChunkSizePlugin&quot;,&quot;url&quot;:&quot;plugins/min-chunk-size-plugin&quot;},{&quot;title&quot;:&quot;AggressiveSplittingPlugin&quot;,&quot;url&quot;:&quot;plugins/aggressive-splitting-plugin&quot;},{&quot;title&quot;:&quot;BabiliWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/babili-webpack-plugin&quot;},{&quot;title&quot;:&quot;BannerPlugin&quot;,&quot;url&quot;:&quot;plugins/banner-plugin&quot;},{&quot;title&quot;:&quot;CommonsChunkPlugin&quot;,&quot;url&quot;:&quot;plugins/commons-chunk-plugin&quot;},{&quot;title&quot;:&quot;ComponentWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/component-webpack-plugin&quot;},{&quot;title&quot;:&quot;CompressionWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/compression-webpack-plugin&quot;},{&quot;title&quot;:&quot;ContextReplacementPlugin&quot;,&quot;url&quot;:&quot;plugins/context-replacement-plugin&quot;},{&quot;title&quot;:&quot;DefinePlugin&quot;,&quot;url&quot;:&quot;plugins/define-plugin&quot;},{&quot;title&quot;:&quot;DllPlugin&quot;,&quot;url&quot;:&quot;plugins/dll-plugin&quot;},{&quot;title&quot;:&quot;EnvironmentPlugin&quot;,&quot;url&quot;:&quot;plugins/environment-plugin&quot;},{&quot;title&quot;:&quot;ExtractTextWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/extract-text-webpack-plugin&quot;},{&quot;title&quot;:&quot;HashedModuleIdsPlugin&quot;,&quot;url&quot;:&quot;plugins/hashed-module-ids-plugin&quot;},{&quot;title&quot;:&quot;HotModuleReplacementPlugin&quot;,&quot;url&quot;:&quot;plugins/hot-module-replacement-plugin&quot;},{&quot;title&quot;:&quot;HtmlWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/html-webpack-plugin&quot;},{&quot;title&quot;:&quot;I18nWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/i18n-webpack-plugin&quot;},{&quot;title&quot;:&quot;IgnorePlugin&quot;,&quot;url&quot;:&quot;plugins/ignore-plugin&quot;},{&quot;title&quot;:&quot;LimitChunkCountPlugin&quot;,&quot;url&quot;:&quot;plugins/limit-chunk-count-plugin&quot;},{&quot;title&quot;:&quot;LoaderOptionsPlugin&quot;,&quot;url&quot;:&quot;plugins/loader-options-plugin&quot;},{&quot;title&quot;:&quot;NamedModulesPlugin&quot;,&quot;url&quot;:&quot;plugins/named-modules-plugin&quot;},{&quot;title&quot;:&quot;NoEmitOnErrorsPlugin&quot;,&quot;url&quot;:&quot;plugins/no-emit-on-errors-plugin&quot;},{&quot;title&quot;:&quot;NormalModuleReplacementPlugin&quot;,&quot;url&quot;:&quot;plugins/normal-module-replacement-plugin&quot;},{&quot;title&quot;:&quot;NpmInstallWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/npm-install-webpack-plugin&quot;},{&quot;title&quot;:&quot;PrefetchPlugin&quot;,&quot;url&quot;:&quot;plugins/prefetch-plugin&quot;},{&quot;title&quot;:&quot;ProvidePlugin&quot;,&quot;url&quot;:&quot;plugins/provide-plugin&quot;},{&quot;title&quot;:&quot;SourceMapDevToolPlugin&quot;,&quot;url&quot;:&quot;plugins/source-map-dev-tool-plugin&quot;},{&quot;title&quot;:&quot;UglifyjsWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/uglifyjs-webpack-plugin&quot;},{&quot;title&quot;:&quot;WatchIgnorePlugin&quot;,&quot;url&quot;:&quot;plugins/watch-ignore-plugin&quot;},{&quot;title&quot;:&quot;ZopfliWebpackPlugin&quot;,&quot;url&quot;:&quot;plugins/zopfli-webpack-plugin&quot;}]},{&quot;title&quot;:&quot;Support&quot;,&quot;url&quot;:&quot;support&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;vote&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;vote/feedback&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;vote/moneyDistribution&quot;,&quot;pages&quot;:[]},{&quot;url&quot;:&quot;organization&quot;,&quot;pages&quot;:[]},{&quot;title&quot;:&quot;Other&quot;,&quot;url&quot;:&quot;/&quot;,&quot;pages&quot;:[]}]}"><nav class="sidebar-mobile"></nav></div><div class="container page"><a href="https://www.ag-grid.com/?utm_source=webpack&amp;utm_medium=banner&amp;utm_campaign=sponsorship" target="_blank" class="sponsors"><img src="/bf176a25b4f8227fea804854c98dc5e2.png"><img src="/6bc5d8cf78d442a984e70195db059b69.svg" style="width:100px;"><div style="margin-top:1em;font-size:2em;text-align:center;color:#535353;">ag-grid is proud to partner with webpack</div></a><div class="interactive" id="components/sidebar/sidebar.jsx" data-props="{&quot;sectionName&quot;:&quot;guides&quot;,&quot;pages&quot;:[{&quot;url&quot;:&quot;guides/installation&quot;,&quot;title&quot;:&quot;Installation&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;Pre-requisites&quot;,&quot;id&quot;:&quot;pre-requisites&quot;},{&quot;title&quot;:&quot;Local Installation&quot;,&quot;id&quot;:&quot;local-installation&quot;},{&quot;title&quot;:&quot;Global Installation&quot;,&quot;id&quot;:&quot;global-installation&quot;},{&quot;title&quot;:&quot;Bleeding Edge&quot;,&quot;id&quot;:&quot;bleeding-edge&quot;}]},{&quot;url&quot;:&quot;guides/getting-started&quot;,&quot;title&quot;:&quot;Getting Started&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;Basic Setup&quot;,&quot;id&quot;:&quot;basic-setup&quot;},{&quot;title&quot;:&quot;Creating a Bundle&quot;,&quot;id&quot;:&quot;creating-a-bundle&quot;},{&quot;title&quot;:&quot;Modules&quot;,&quot;id&quot;:&quot;modules&quot;},{&quot;title&quot;:&quot;Using a Configuration&quot;,&quot;id&quot;:&quot;using-a-configuration&quot;},{&quot;title&quot;:&quot;NPM Scripts&quot;,&quot;id&quot;:&quot;npm-scripts&quot;},{&quot;title&quot;:&quot;Conclusion&quot;,&quot;id&quot;:&quot;conclusion&quot;}]},{&quot;url&quot;:&quot;guides/asset-management&quot;,&quot;title&quot;:&quot;Asset Management&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;Setup&quot;,&quot;id&quot;:&quot;setup&quot;},{&quot;title&quot;:&quot;Loading CSS&quot;,&quot;id&quot;:&quot;loading-css&quot;},{&quot;title&quot;:&quot;Loading Images&quot;,&quot;id&quot;:&quot;loading-images&quot;},{&quot;title&quot;:&quot;Loading Fonts&quot;,&quot;id&quot;:&quot;loading-fonts&quot;},{&quot;title&quot;:&quot;Loading Data&quot;,&quot;id&quot;:&quot;loading-data&quot;},{&quot;title&quot;:&quot;Global Assets&quot;,&quot;id&quot;:&quot;global-assets&quot;},{&quot;title&quot;:&quot;Wrapping up&quot;,&quot;id&quot;:&quot;wrapping-up&quot;},{&quot;title&quot;:&quot;Next guide&quot;,&quot;id&quot;:&quot;next-guide&quot;},{&quot;title&quot;:&quot;Further Reading&quot;,&quot;id&quot;:&quot;further-reading&quot;}]},{&quot;url&quot;:&quot;guides/output-management&quot;,&quot;title&quot;:&quot;Output Management&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;Preparation&quot;,&quot;id&quot;:&quot;preparation&quot;},{&quot;title&quot;:&quot;Setting up HtmlWebpackPlugin&quot;,&quot;id&quot;:&quot;setting-up-htmlwebpackplugin&quot;},{&quot;title&quot;:&quot;Cleaning up the /dist folder&quot;,&quot;id&quot;:&quot;cleaning-up-the-dist-folder&quot;},{&quot;title&quot;:&quot;The Manifest&quot;,&quot;id&quot;:&quot;the-manifest&quot;},{&quot;title&quot;:&quot;Conclusion&quot;,&quot;id&quot;:&quot;conclusion&quot;}]},{&quot;url&quot;:&quot;guides/development&quot;,&quot;title&quot;:&quot;Development&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;Using source maps&quot;,&quot;id&quot;:&quot;using-source-maps&quot;},{&quot;title&quot;:&quot;Choosing a Development Tool&quot;,&quot;id&quot;:&quot;choosing-a-development-tool&quot;},{&quot;title&quot;:&quot;Using Watch Mode&quot;,&quot;id&quot;:&quot;using-watch-mode&quot;},{&quot;title&quot;:&quot;Using webpack-dev-server&quot;,&quot;id&quot;:&quot;using-webpack-dev-server&quot;},{&quot;title&quot;:&quot;Using webpack-dev-middleware&quot;,&quot;id&quot;:&quot;using-webpack-dev-middleware&quot;},{&quot;title&quot;:&quot;Adjusting Your Text Editor&quot;,&quot;id&quot;:&quot;adjusting-your-text-editor&quot;},{&quot;title&quot;:&quot;Conclusion&quot;,&quot;id&quot;:&quot;conclusion&quot;}]},{&quot;url&quot;:&quot;guides/hot-module-replacement&quot;,&quot;title&quot;:&quot;Hot Module Replacement&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;Enabling HMR&quot;,&quot;id&quot;:&quot;enabling-hmr&quot;},{&quot;title&quot;:&quot;Gotchas&quot;,&quot;id&quot;:&quot;gotchas&quot;},{&quot;title&quot;:&quot;HMR with Stylesheets&quot;,&quot;id&quot;:&quot;hmr-with-stylesheets&quot;},{&quot;title&quot;:&quot;Other Code and Frameworks&quot;,&quot;id&quot;:&quot;other-code-and-frameworks&quot;}]},{&quot;url&quot;:&quot;guides/production&quot;,&quot;title&quot;:&quot;Production&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;The Automatic Way&quot;,&quot;id&quot;:&quot;the-automatic-way&quot;},{&quot;title&quot;:&quot;Minification&quot;,&quot;id&quot;:&quot;minification&quot;},{&quot;title&quot;:&quot;Source Maps&quot;,&quot;id&quot;:&quot;source-maps&quot;},{&quot;title&quot;:&quot;Node Environment Variable&quot;,&quot;id&quot;:&quot;node-environment-variable&quot;},{&quot;title&quot;:&quot;The Manual Way&quot;,&quot;id&quot;:&quot;the-manual-way&quot;},{&quot;title&quot;:&quot;Simple Approach&quot;,&quot;id&quot;:&quot;simple-approach&quot;},{&quot;title&quot;:&quot;Advanced Approach&quot;,&quot;id&quot;:&quot;advanced-approach&quot;}]},{&quot;url&quot;:&quot;guides/tree-shaking&quot;,&quot;title&quot;:&quot;Tree Shaking&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;Example&quot;,&quot;id&quot;:&quot;example&quot;}]},{&quot;url&quot;:&quot;guides/code-splitting&quot;,&quot;title&quot;:&quot;Code Splitting&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;Entry Points&quot;,&quot;id&quot;:&quot;entry-points&quot;},{&quot;title&quot;:&quot;Prevent Duplication&quot;,&quot;id&quot;:&quot;prevent-duplication&quot;},{&quot;title&quot;:&quot;Dynamic Imports&quot;,&quot;id&quot;:&quot;dynamic-imports&quot;},{&quot;title&quot;:&quot;Bundle Analysis&quot;,&quot;id&quot;:&quot;bundle-analysis&quot;},{&quot;title&quot;:&quot;Next Steps&quot;,&quot;id&quot;:&quot;next-steps&quot;}]},{&quot;url&quot;:&quot;guides/lazy-loading&quot;,&quot;title&quot;:&quot;Lazy Loading&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;Example&quot;,&quot;id&quot;:&quot;example&quot;},{&quot;title&quot;:&quot;Frameworks&quot;,&quot;id&quot;:&quot;frameworks&quot;}]},{&quot;url&quot;:&quot;guides/caching&quot;,&quot;title&quot;:&quot;Caching&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;Output Filenames&quot;,&quot;id&quot;:&quot;output-filenames&quot;},{&quot;title&quot;:&quot;Extracting Boilerplate&quot;,&quot;id&quot;:&quot;extracting-boilerplate&quot;},{&quot;title&quot;:&quot;Module Identifiers&quot;,&quot;id&quot;:&quot;module-identifiers&quot;},{&quot;title&quot;:&quot;Conclusion&quot;,&quot;id&quot;:&quot;conclusion&quot;}]},{&quot;url&quot;:&quot;guides/author-libraries&quot;,&quot;title&quot;:&quot;Authoring Libraries&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;Author a Library&quot;,&quot;id&quot;:&quot;author-a-library&quot;},{&quot;title&quot;:&quot;Configure webpack&quot;,&quot;id&quot;:&quot;configure-webpack&quot;},{&quot;title&quot;:&quot;Add webpack&quot;,&quot;id&quot;:&quot;add-webpack&quot;},{&quot;title&quot;:&quot;Add externals&quot;,&quot;id&quot;:&quot;add-externals&quot;},{&quot;title&quot;:&quot;Add libraryTarget&quot;,&quot;id&quot;:&quot;add-librarytarget&quot;},{&quot;title&quot;:&quot;Final Steps&quot;,&quot;id&quot;:&quot;final-steps&quot;}]},{&quot;url&quot;:&quot;guides/shimming&quot;,&quot;title&quot;:&quot;Shimming&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;Prefer unminified CommonJS/AMD files over bundled dist versions.&quot;,&quot;id&quot;:&quot;prefer-unminified-commonjs-amd-files-over-bundled-dist-versions-&quot;},{&quot;title&quot;:&quot;ProvidePlugin&quot;,&quot;id&quot;:&quot;provideplugin&quot;},{&quot;title&quot;:&quot;imports-loader&quot;,&quot;id&quot;:&quot;imports-loader&quot;},{&quot;title&quot;:&quot;exports-loader&quot;,&quot;id&quot;:&quot;exports-loader&quot;},{&quot;title&quot;:&quot;script-loader&quot;,&quot;id&quot;:&quot;script-loader&quot;},{&quot;title&quot;:&quot;noParse option&quot;,&quot;id&quot;:&quot;noparse-option&quot;},{&quot;title&quot;:&quot;Node Built-Ins&quot;,&quot;id&quot;:&quot;node-built-ins&quot;}]},{&quot;url&quot;:&quot;guides/typescript&quot;,&quot;title&quot;:&quot;TypeScript&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;Basic Setup&quot;,&quot;id&quot;:&quot;basic-setup&quot;},{&quot;title&quot;:&quot;Loader&quot;,&quot;id&quot;:&quot;loader&quot;},{&quot;title&quot;:&quot;Source Maps&quot;,&quot;id&quot;:&quot;source-maps&quot;},{&quot;title&quot;:&quot;Using Third Party Libraries&quot;,&quot;id&quot;:&quot;using-third-party-libraries&quot;},{&quot;title&quot;:&quot;Importing Other Assets&quot;,&quot;id&quot;:&quot;importing-other-assets&quot;},{&quot;title&quot;:&quot;Performance Loader&quot;,&quot;id&quot;:&quot;performance-loader&quot;}]},{&quot;url&quot;:&quot;guides/migrating&quot;,&quot;title&quot;:&quot;Migrating from v1 to v2&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;resolve.root, resolve.fallback, resolve.modulesDirectories&quot;,&quot;id&quot;:&quot;resolve-root-resolve-fallback-resolve-modulesdirectories&quot;},{&quot;title&quot;:&quot;resolve.extensions&quot;,&quot;id&quot;:&quot;resolve-extensions&quot;},{&quot;title&quot;:&quot;resolve.*&quot;,&quot;id&quot;:&quot;resolve-&quot;},{&quot;title&quot;:&quot;module.loaders is now module.rules&quot;,&quot;id&quot;:&quot;module-loaders-is-now-module-rules&quot;},{&quot;title&quot;:&quot;Chaining loaders&quot;,&quot;id&quot;:&quot;chaining-loaders&quot;},{&quot;title&quot;:&quot;Automatic -loader module name extension removed&quot;,&quot;id&quot;:&quot;automatic-loader-module-name-extension-removed&quot;},{&quot;title&quot;:&quot;json-loader is not required anymore&quot;,&quot;id&quot;:&quot;json-loader-is-not-required-anymore&quot;},{&quot;title&quot;:&quot;Loaders in configuration resolve relative to context&quot;,&quot;id&quot;:&quot;loaders-in-configuration-resolve-relative-to-context&quot;},{&quot;title&quot;:&quot;module.preLoaders and module.postLoaders were removed:&quot;,&quot;id&quot;:&quot;module-preloaders-and-module-postloaders-were-removed-&quot;},{&quot;title&quot;:&quot;UglifyJsPlugin sourceMap&quot;,&quot;id&quot;:&quot;uglifyjsplugin-sourcemap&quot;},{&quot;title&quot;:&quot;UglifyJsPlugin warnings&quot;,&quot;id&quot;:&quot;uglifyjsplugin-warnings&quot;},{&quot;title&quot;:&quot;UglifyJsPlugin minimize loaders&quot;,&quot;id&quot;:&quot;uglifyjsplugin-minimize-loaders&quot;},{&quot;title&quot;:&quot;DedupePlugin has been removed&quot;,&quot;id&quot;:&quot;dedupeplugin-has-been-removed&quot;},{&quot;title&quot;:&quot;BannerPlugin - breaking change&quot;,&quot;id&quot;:&quot;bannerplugin-breaking-change&quot;},{&quot;title&quot;:&quot;OccurrenceOrderPlugin is now on by default&quot;,&quot;id&quot;:&quot;occurrenceorderplugin-is-now-on-by-default&quot;},{&quot;title&quot;:&quot;ExtractTextWebpackPlugin - breaking change&quot;,&quot;id&quot;:&quot;extracttextwebpackplugin-breaking-change&quot;},{&quot;title&quot;:&quot;ExtractTextPlugin.extract&quot;,&quot;id&quot;:&quot;extracttextplugin-extract&quot;},{&quot;title&quot;:&quot;new ExtractTextPlugin({options})&quot;,&quot;id&quot;:&quot;new-extracttextplugin-options-&quot;},{&quot;title&quot;:&quot;Full dynamic requires now fail by default&quot;,&quot;id&quot;:&quot;full-dynamic-requires-now-fail-by-default&quot;},{&quot;title&quot;:&quot;Using custom arguments in CLI and configuration&quot;,&quot;id&quot;:&quot;using-custom-arguments-in-cli-and-configuration&quot;},{&quot;title&quot;:&quot;require.ensure and AMD require are asynchronous&quot;,&quot;id&quot;:&quot;require-ensure-and-amd-require-are-asynchronous&quot;},{&quot;title&quot;:&quot;Loader configuration is through options&quot;,&quot;id&quot;:&quot;loader-configuration-is-through-options&quot;},{&quot;title&quot;:&quot;What are options?&quot;,&quot;id&quot;:&quot;what-are-options-&quot;},{&quot;title&quot;:&quot;LoaderOptionsPlugin context&quot;,&quot;id&quot;:&quot;loaderoptionsplugin-context&quot;},{&quot;title&quot;:&quot;debug&quot;,&quot;id&quot;:&quot;debug&quot;},{&quot;title&quot;:&quot;Code Splitting with ES2015&quot;,&quot;id&quot;:&quot;code-splitting-with-es2015&quot;},{&quot;title&quot;:&quot;Dynamic expressions&quot;,&quot;id&quot;:&quot;dynamic-expressions&quot;},{&quot;title&quot;:&quot;Mixing ES2015 with AMD and CommonJS&quot;,&quot;id&quot;:&quot;mixing-es2015-with-amd-and-commonjs&quot;},{&quot;title&quot;:&quot;Hints&quot;,&quot;id&quot;:&quot;hints&quot;},{&quot;title&quot;:&quot;Template strings&quot;,&quot;id&quot;:&quot;template-strings&quot;},{&quot;title&quot;:&quot;Configuration Promise&quot;,&quot;id&quot;:&quot;configuration-promise&quot;},{&quot;title&quot;:&quot;Advanced loader matching&quot;,&quot;id&quot;:&quot;advanced-loader-matching&quot;},{&quot;title&quot;:&quot;More CLI options&quot;,&quot;id&quot;:&quot;more-cli-options&quot;},{&quot;title&quot;:&quot;Loader changes&quot;,&quot;id&quot;:&quot;loader-changes&quot;},{&quot;title&quot;:&quot;Cacheable&quot;,&quot;id&quot;:&quot;cacheable&quot;},{&quot;title&quot;:&quot;Complex options&quot;,&quot;id&quot;:&quot;complex-options&quot;}]},{&quot;url&quot;:&quot;guides/environment-variables&quot;,&quot;title&quot;:&quot;Environment Variables&quot;,&quot;anchors&quot;:[]},{&quot;url&quot;:&quot;guides/development-vagrant&quot;,&quot;title&quot;:&quot;Development - Vagrant&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;Configuring the Project&quot;,&quot;id&quot;:&quot;configuring-the-project&quot;},{&quot;title&quot;:&quot;Running the Server&quot;,&quot;id&quot;:&quot;running-the-server&quot;},{&quot;title&quot;:&quot;Advanced Usage with nginx&quot;,&quot;id&quot;:&quot;advanced-usage-with-nginx&quot;},{&quot;title&quot;:&quot;Conclusion&quot;,&quot;id&quot;:&quot;conclusion&quot;}]},{&quot;url&quot;:&quot;guides/dependency-management&quot;,&quot;title&quot;:&quot;Dependency Management&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;require with expression&quot;,&quot;id&quot;:&quot;require-with-expression&quot;},{&quot;title&quot;:&quot;require.context&quot;,&quot;id&quot;:&quot;require-context&quot;},{&quot;title&quot;:&quot;context module API&quot;,&quot;id&quot;:&quot;context-module-api&quot;}]},{&quot;url&quot;:&quot;guides/public-path&quot;,&quot;title&quot;:&quot;Public Path&quot;,&quot;anchors&quot;:[{&quot;title&quot;:&quot;Use cases&quot;,&quot;id&quot;:&quot;use-cases&quot;},{&quot;title&quot;:&quot;Set value on build time&quot;,&quot;id&quot;:&quot;set-value-on-build-time&quot;},{&quot;title&quot;:&quot;Set value on the fly&quot;,&quot;id&quot;:&quot;set-value-on-the-fly&quot;}]},{&quot;url&quot;:&quot;guides/integrations&quot;,&quot;title&quot;:&quot;Integrations&quot;,&quot;anchors&quot;:[]}],&quot;currentPage&quot;:&quot;guides/asset-management&quot;}"><nav class="sidebar"></nav></div><section class="page__content"><h1>Asset Management</h1><div class="page-links"><a class="page-links__link" href="https://github.com/webpack/webpack.js.org/edit/master/content/guides/asset-management.md">Edit Document<i class="page-links__icon icon-edit"></i></a></div><div><p>If you&apos;ve been following the guides from the start, you will now have a small project that shows &quot;Hello webpack&quot;. Now let&apos;s try to incorporate some other assets, like images, to see how they can be handled.</p>
+<p>Prior to webpack, front-end developers would use tools like grunt and gulp to process these assets and move them from their <code>/src</code> folder into their <code>/dist</code> or <code>/build</code> directory. The same idea was used for JavaScript modules, but tools like webpack will <strong>dynamically bundle</strong> all dependencies (creating what&apos;s known as a <a href="/concepts/dependency-graph">dependency graph</a>). This is great because every module now <em>explicitly states its dependencies</em> and we&apos;ll avoid bundling modules that aren&apos;t in use.</p>
+<p>One of the coolest webpack features is that you can also <em>include any other type of file</em>, besides JavaScript, for which there is a loader. This means that the same benefits listed above for JavaScript (e.g. explicit dependencies) can be applied to everything used in building a website or web app. Let&apos;s start with CSS, as you may already be familiar with that setup.</p>
+<h2 class="header"><a class="anchor" href="#setup" id="setup"></a><span class="text">Setup</span><a class="icon-link" href="#setup"></a></h2>
+<p>Let&apos;s make a minor change to our project before we get started:</p>
+<p><strong>dist/index.html</strong></p>
+<pre><code class="lang-diff">  &lt;html&gt;
+    &lt;head&gt;
+<span class="token deleted">-    &lt;title&gt;Getting Started&lt;/title&gt;</span>
+<span class="token inserted">+    &lt;title&gt;Asset Management&lt;/title&gt;</span>
+    &lt;/head&gt;
+    &lt;body&gt;
+      &lt;script src=&quot;./bundle.js&quot;&gt;&lt;/script&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;
+</code></pre>
+<h2 class="header"><a class="anchor" href="#loading-css" id="loading-css"></a><span class="text">Loading CSS</span><a class="icon-link" href="#loading-css"></a></h2>
+<p>In order to <code>import</code> a CSS file from within a JavaScript module, you need to install and add the <a href="/loaders/style-loader">style-loader</a> and <a href="/loaders/css-loader">css-loader</a> to your <a href="/configuration/module"><code>module</code> configuration</a>:</p>
+<pre><code class="lang-bash">npm <span class="token function">install</span> --save-dev style-loader css-loader
+</code></pre>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="lang-diff">  const path = require(&apos;path&apos;);
+
+  module.exports = {
+    entry: &apos;./src/index.js&apos;,
+    output: {
+      filename: &apos;bundle.js&apos;,
+      path: path.resolve(__dirname, &apos;dist&apos;)
+    },
+<span class="token inserted">+   module: {</span>
+<span class="token inserted">+     rules: [</span>
+<span class="token inserted">+       {</span>
+<span class="token inserted">+         test: /\.css$/,</span>
+<span class="token inserted">+         use: [</span>
+<span class="token inserted">+           &apos;style-loader&apos;,</span>
+<span class="token inserted">+           &apos;css-loader&apos;</span>
+<span class="token inserted">+         ]</span>
+<span class="token inserted">+       }</span>
+<span class="token inserted">+     ]</span>
+<span class="token inserted">+   }</span>
+  };
+</code></pre>
+<blockquote class="tip"><div class="tip-content"> webpack uses a regular expression to determine which files it should look for and serve to a specific loader. In this case any file that ends with <code>.css</code> will be served to the <code>style-loader</code> and the <code>css-loader</code>. </div></blockquote><p>This enables you to <code>import &apos;./style.css&apos;</code> into the file that depends on that styling. Now, when that module is run, a <code>&lt;style&gt;</code> tag with the stringified css will be inserted into the <code>&lt;head&gt;</code> of your html file.</p>
+<p>Let&apos;s try it out by adding a new <code>style.css</code> file to our project and import it in our <code>index.js</code>:</p>
+<p><strong>project</strong></p>
+<pre><code class="lang-diff">  webpack-demo
+  |- package.json
+  |- webpack.config.js
+  |- /dist
+    |- bundle.js
+    |- index.html
+  |- /src
+<span class="token inserted">+   |- style.css</span>
+    |- index.js
+  |- /node_modules
+</code></pre>
+<p><strong>src/style.css</strong></p>
+<pre><code class="lang-css"><span class="token selector"><span class="token class">.hello</span> </span><span class="token punctuation">{</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>src/index.js</strong></p>
+<pre><code class="lang-diff">  import _ from &apos;lodash&apos;;
+<span class="token inserted">+ import &apos;./style.css&apos;;</span>
+
+  function component() {
+    var element = document.createElement(&apos;div&apos;);
+
+    // Lodash, now imported by this script
+    element.innerHTML = _.join([&apos;Hello&apos;, &apos;webpack&apos;], &apos; &apos;);
+<span class="token inserted">+   element.classList.add(&apos;hello&apos;);</span>
+
+    return element;
+  }
+
+  document.body.appendChild(component());
+</code></pre>
+<p>Now run your build command:</p>
+<pre><code class="lang-bash">npm run build
+
+Hash: 9a3abfc96300ef87880f
+Version: webpack 2.6.1
+Time: 834ms
+    Asset    Size  Chunks                    Chunk Names
+bundle.js  560 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  main
+   <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./~/lodash/lodash.js 540 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>1<span class="token punctuation">]</span> ./src/style.css 1 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>2<span class="token punctuation">]</span> ./~/css-loader<span class="token operator">!</span>./src/style.css 191 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>3<span class="token punctuation">]</span> ./~/css-loader/lib/css-base.js 2.26 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>4<span class="token punctuation">]</span> ./~/style-loader/lib/addStyles.js 8.7 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>5<span class="token punctuation">]</span> ./~/style-loader/lib/urls.js 3.01 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>6<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 509 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>7<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>8<span class="token punctuation">]</span> ./src/index.js 351 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+</code></pre>
+<p>Open up <code>index.html</code> in your browser again and you should see that <code>Hello webpack</code> is now styled in red. To see what webpack did, inspect the page (don&apos;t view the page source, as it won&apos;t show you the result) and look at the page&apos;s head tags. It should contain our style block that we imported in <code>index.js</code>.</p>
+<blockquote class="tip"><div class="tip-content"> Note that you can also <a href="/plugins/extract-text-webpack-plugin">split your CSS</a> for better load times in production. On top of that, loaders exist for pretty much any flavor of CSS you can think of -- <a href="/loaders/postcss-loader">postcss</a>, <a href="/loaders/sass-loader">sass</a>, and <a href="/loaders/less-loader">less</a> to name a few. </div></blockquote><h2 class="header"><a class="anchor" href="#loading-images" id="loading-images"></a><span class="text">Loading Images</span><a class="icon-link" href="#loading-images"></a></h2>
+<p>So now we&apos;re pulling in our CSS, but what about our images like backgrounds and icons? Using the <a href="/loaders/file-loader">file-loader</a> we can easily incorporate those in our system as well:</p>
+<pre><code class="lang-bash">npm <span class="token function">install</span> --save-dev file-loader
+</code></pre>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="lang-diff">  const path = require(&apos;path&apos;);
+
+  module.exports = {
+    entry: &apos;./src/index.js&apos;,
+    output: {
+      filename: &apos;bundle.js&apos;,
+      path: path.resolve(__dirname, &apos;dist&apos;)
+    },
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: [
+            &apos;style-loader&apos;,
+            &apos;css-loader&apos;
+          ]
+        },
+<span class="token inserted">+       {</span>
+<span class="token inserted">+         test: /\.(png|svg|jpg|gif)$/,</span>
+<span class="token inserted">+         use: [</span>
+<span class="token inserted">+           &apos;file-loader&apos;</span>
+<span class="token inserted">+         ]</span>
+<span class="token inserted">+       }</span>
+      ]
+    }
+  };
+</code></pre>
+<p>Now, when you <code>import MyImage from &apos;./my-image.png&apos;</code>, that image will be processed and added to your <code>output</code> directory <em>and</em> the <code>MyImage</code> variable will contain the final url of that image after processing. When using the <a href="/loaders/css-loader">css-loader</a>, as shown above, a similar process will occur for <code>url(&apos;./my-image.png&apos;)</code> within your CSS. The loader will recognize this is a local file, and replace the <code>&apos;./my-image.png&apos;</code> path with the final path to the image in your <code>output</code> directory. The <a href="/loaders/html-loader">html-loader</a> handles <code>&lt;img src=&quot;./my-image.png&quot; /&gt;</code> in the same manner.</p>
+<p>Let&apos;s add an image to our project and see how this works, you can use any image you like:</p>
+<p><strong>project</strong></p>
+<pre><code class="lang-diff">  webpack-demo
+  |- package.json
+  |- webpack.config.js
+  |- /dist
+    |- bundle.js
+    |- index.html
+  |- /src
+<span class="token inserted">+   |- icon.png</span>
+    |- style.css
+    |- index.js
+  |- /node_modules
+</code></pre>
+<p><strong>src/index.js</strong></p>
+<pre><code class="lang-diff">  import _ from &apos;lodash&apos;;
+  import &apos;./style.css&apos;;
+<span class="token inserted">+ import Icon from &apos;./icon.png&apos;;</span>
+
+  function component() {
+    var element = document.createElement(&apos;div&apos;);
+
+    // Lodash, now imported by this script
+    element.innerHTML = _.join([&apos;Hello&apos;, &apos;webpack&apos;], &apos; &apos;);
+    element.classList.add(&apos;hello&apos;);
+
+<span class="token inserted">+   // Add the image to our existing div.</span>
+<span class="token inserted">+   var myIcon = new Image();</span>
+<span class="token inserted">+   myIcon.src = Icon;</span>
++
+<span class="token inserted">+   element.appendChild(myIcon);</span>
+
+    return element;
+  }
+
+  document.body.appendChild(component());
+</code></pre>
+<p><strong>src/style.css</strong></p>
+<pre><code class="lang-diff">  .hello {
+    color: red;
+<span class="token inserted">+   background: url(&apos;./icon.png&apos;);</span>
+  }
+</code></pre>
+<p>Let&apos;s create a new build and open up the index.html file again:</p>
+<pre><code class="lang-bash">npm run build
+
+Hash: 854865050ea3c1c7f237
+Version: webpack 2.6.1
+Time: 895ms
+                               Asset     Size  Chunks                    Chunk Names
+5c999da72346a995e7e2718865d019c8.png  11.3 kB          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
+                           bundle.js   561 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  main
+   <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./src/icon.png 82 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>1<span class="token punctuation">]</span> ./~/lodash/lodash.js 540 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>2<span class="token punctuation">]</span> ./src/style.css 1 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>3<span class="token punctuation">]</span> ./~/css-loader<span class="token operator">!</span>./src/style.css 242 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>4<span class="token punctuation">]</span> ./~/css-loader/lib/css-base.js 2.26 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>5<span class="token punctuation">]</span> ./~/style-loader/lib/addStyles.js 8.7 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>6<span class="token punctuation">]</span> ./~/style-loader/lib/urls.js 3.01 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>7<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 509 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>8<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>9<span class="token punctuation">]</span> ./src/index.js 503 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+</code></pre>
+<p>If all went well, you should now see your icon as a repeating background, as well as an <code>img</code> element behind our <code>Hello webpack</code> text. If you inspect this element, you&apos;ll see that the actual filename has changed to something like <code>5c999da72346a995e7e2718865d019c8.png</code>. This means webpack found our file in the <code>src</code> folder and processed it!</p>
+<blockquote class="tip"><div class="tip-content"> A logical next step from here is minifying and optimizing your images. Check out the <a href="https://github.com/tcoopman/image-webpack-loader">image-webpack-loader</a> and <a href="/loaders/url-loader">url-loader</a> for more on how you can enhance your image loading process. </div></blockquote><h2 class="header"><a class="anchor" href="#loading-fonts" id="loading-fonts"></a><span class="text">Loading Fonts</span><a class="icon-link" href="#loading-fonts"></a></h2>
+<p>So what about other assets like fonts? The file and url loaders will take any file you load through them and output it to your build directory. This means we can use them for any kind of file, including fonts. Let&apos;s update our <code>webpack.config.js</code> to handle font files:</p>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="lang-diff">  const path = require(&apos;path&apos;);
+
+  module.exports = {
+    entry: &apos;./src/index.js&apos;,
+    output: {
+      filename: &apos;bundle.js&apos;,
+      path: path.resolve(__dirname, &apos;dist&apos;)
+    },
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: [
+            &apos;style-loader&apos;,
+            &apos;css-loader&apos;
+          ]
+        },
+        {
+          test: /\.(png|svg|jpg|gif)$/,
+          use: [
+            &apos;file-loader&apos;
+          ]
+        },
+<span class="token inserted">+       {</span>
+<span class="token inserted">+         test: /\.(woff|woff2|eot|ttf|otf)$/,</span>
+<span class="token inserted">+         use: [</span>
+<span class="token inserted">+           &apos;file-loader&apos;</span>
+<span class="token inserted">+         ]</span>
+<span class="token inserted">+       }</span>
+      ]
+    }
+  };
+</code></pre>
+<p>Add some font files to your project:</p>
+<p><strong>project</strong></p>
+<pre><code class="lang-diff">  webpack-demo
+  |- package.json
+  |- webpack.config.js
+  |- /dist
+    |- bundle.js
+    |- index.html
+  |- /src
+<span class="token inserted">+   |- my-font.woff</span>
+<span class="token inserted">+   |- my-font.woff2</span>
+    |- icon.png
+    |- style.css
+    |- index.js
+  |- /node_modules
+</code></pre>
+<p>With the loader configured and fonts in place, you can use incorporate them via an <code>@font-face</code> declaration. The local <code>url(...)</code> directive will be picked up by webpack just as it was with the image:</p>
+<p><strong>src/style.css</strong></p>
+<pre><code class="lang-diff"><span class="token inserted">+ @font-face {</span>
+<span class="token inserted">+   font-family: &apos;MyFont&apos;;</span>
+<span class="token inserted">+   src:  url(&apos;./my-font.woff2&apos;) format(&apos;woff2&apos;),</span>
+<span class="token inserted">+         url(&apos;./my-font.woff&apos;) format(&apos;woff&apos;);</span>
+<span class="token inserted">+   font-weight: 600;</span>
+<span class="token inserted">+   font-style: normal;</span>
+  }
+
+  .hello {
+    color: red;
+<span class="token inserted">+   font-family: &apos;MyFont&apos;;</span>
+    background: url(&apos;./icon.png&apos;);
+  }
+</code></pre>
+<p>Now run a new build and let&apos;s see if webpack handled our fonts:</p>
+<pre><code class="lang-bash">npm run build
+
+Hash: b4aef94169088c79ed1c
+Version: webpack 2.6.1
+Time: 775ms
+                                Asset     Size  Chunks                    Chunk Names
+ 5c999da72346a995e7e2718865d019c8.png  11.3 kB          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
+11aebbbd407bcc3ab1e914ca0238d24d.woff   221 kB          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
+                            bundle.js   561 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  main
+   <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./src/icon.png 82 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>1<span class="token punctuation">]</span> ./~/lodash/lodash.js 540 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>2<span class="token punctuation">]</span> ./src/style.css 1 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>3<span class="token punctuation">]</span> ./~/css-loader<span class="token operator">!</span>./src/style.css 420 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>4<span class="token punctuation">]</span> ./~/css-loader/lib/css-base.js 2.26 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>5<span class="token punctuation">]</span> ./src/MyFont.woff 83 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>6<span class="token punctuation">]</span> ./~/style-loader/lib/addStyles.js 8.7 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>7<span class="token punctuation">]</span> ./~/style-loader/lib/urls.js 3.01 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>8<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 509 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>9<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+  <span class="token punctuation">[</span>10<span class="token punctuation">]</span> ./src/index.js 503 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+</code></pre>
+<p>Open up <code>index.html</code> again and see if our <code>Hello webpack</code> text has changed to the new font. If all is well, you should see the changes.</p>
+<h2 class="header"><a class="anchor" href="#loading-data" id="loading-data"></a><span class="text">Loading Data</span><a class="icon-link" href="#loading-data"></a></h2>
+<p>Another useful asset that can be loaded is data, like JSON files, CSVs, TSVs, and XML. Support for JSON is actually built-in, similar to NodeJS, meaning <code>import Data from &apos;./data.json&apos;</code> will work by default. To import CSVs, TSVs, and XML you could use the <a href="https://github.com/theplatapi/csv-loader">csv-loader</a> and <a href="https://github.com/gisikw/xml-loader">xml-loader</a>. Let&apos;s handle loading all three:</p>
+<pre><code class="lang-bash">npm <span class="token function">install</span> --save-dev csv-loader xml-loader
+</code></pre>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="lang-diff">  const path = require(&apos;path&apos;);
+
+  module.exports = {
+    entry: &apos;./src/index.js&apos;,
+    output: {
+      filename: &apos;bundle.js&apos;,
+      path: path.resolve(__dirname, &apos;dist&apos;)
+    },
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: [
+            &apos;style-loader&apos;,
+            &apos;css-loader&apos;
+          ]
+        },
+        {
+          test: /\.(png|svg|jpg|gif)$/,
+          use: [
+            &apos;file-loader&apos;
+          ]
+        },
+        {
+          test: /\.(woff|woff2|eot|ttf|otf)$/,
+          use: [
+            &apos;file-loader&apos;
+          ]
+        },
+<span class="token inserted">+       {</span>
+<span class="token inserted">+         test: /\.(csv|tsv)$/,</span>
+<span class="token inserted">+         use: [</span>
+<span class="token inserted">+           &apos;csv-loader&apos;</span>
+<span class="token inserted">+         ]</span>
+<span class="token inserted">+       },</span>
+<span class="token inserted">+       {</span>
+<span class="token inserted">+         test: /\.xml$/,</span>
+<span class="token inserted">+         use: [</span>
+<span class="token inserted">+           &apos;xml-loader&apos;</span>
+<span class="token inserted">+         ]</span>
+<span class="token inserted">+       }</span>
+      ]
+    }
+  };
+</code></pre>
+<p>Add some data files to your project:</p>
+<p><strong>project</strong></p>
+<pre><code class="lang-diff">  webpack-demo
+  |- package.json
+  |- webpack.config.js
+  |- /dist
+    |- bundle.js
+    |- index.html
+  |- /src
+<span class="token inserted">+   |- data.xml</span>
+    |- my-font.woff
+    |- my-font.woff2
+    |- icon.png
+    |- style.css
+    |- index.js
+  |- /node_modules
+</code></pre>
+<p><strong>src/data.xml</strong></p>
+<pre><code class="lang-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>note</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>to</span><span class="token punctuation">&gt;</span></span>Mary<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>to</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>from</span><span class="token punctuation">&gt;</span></span>John<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>from</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>heading</span><span class="token punctuation">&gt;</span></span>Reminder<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>heading</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>Call Cindy on Tuesday<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>note</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<p>Now you can <code>import</code> any one of those four types of data (JSON, CSV, TSV, XML) and the <code>Data</code> variable you import it to will contain parsed JSON for easy consumption:</p>
+<p><strong>src/index.js</strong></p>
+<pre><code class="lang-diff">  import _ from &apos;lodash&apos;;
+  import &apos;./style.css&apos;;
+  import Icon from &apos;./icon.png&apos;;
+<span class="token inserted">+ import Data from &apos;./data.xml&apos;;</span>
+
+  function component() {
+    var element = document.createElement(&apos;div&apos;);
+
+    // Lodash, now imported by this script
+    element.innerHTML = _.join([&apos;Hello&apos;, &apos;webpack&apos;], &apos; &apos;);
+    element.classList.add(&apos;hello&apos;);
+
+    // Add the image to our existing div.
+    var myIcon = new Image();
+    myIcon.src = Icon;
+
+    element.appendChild(myIcon);
+
+<span class="token inserted">+   console.log(Data);</span>
+
+    return element;
+  }
+
+  document.body.appendChild(component());
+</code></pre>
+<p>When you open <code>index.html</code> and look at your console in your developer tools, you should be able to see your imported data being logged to the console!</p>
+<blockquote class="tip"><div class="tip-content"> This can be especially helpful when implementing some sort of data visualization using a tool like <a href="https://github.com/d3">d3</a>. Instead of making an ajax request and parsing the data at runtime you can load it into your module during the build process so that the parsed data is ready to go as soon as the module hits the browser. </div></blockquote><h2 class="header"><a class="anchor" href="#global-assets" id="global-assets"></a><span class="text">Global Assets</span><a class="icon-link" href="#global-assets"></a></h2>
+<p>The coolest part of everything mentioned above, is that loading assets this way allows you to group modules and assets together in a more intuitive way. Instead of relying on a global <code>/assets</code> directory that contains everything, you can group assets with the code that uses them. For example, a structure like this can be very useful:</p>
+<pre><code class="lang-diff"><span class="token deleted">- |- /assets</span>
+<span class="token inserted">+ |&#x2013; /components</span>
+<span class="token inserted">+ |  |&#x2013; /my-component</span>
+<span class="token inserted">+ |  |  |&#x2013; index.jsx</span>
+<span class="token inserted">+ |  |  |&#x2013; index.css</span>
+<span class="token inserted">+ |  |  |&#x2013; icon.svg</span>
+<span class="token inserted">+ |  |  |&#x2013; img.png</span>
+</code></pre>
+<p>This setup makes your code a lot more portable as everything that is closely coupled now lives together. Let&apos;s say you want to use <code>/my-component</code> in another project, simply copy or move it into the <code>/components</code> directory over there. As long as you&apos;ve installed any <em>external dependencies</em> and your <em>configuration has the same loaders</em> defined, you should be good to go.</p>
+<p>However, let&apos;s say you&apos;re locked into your old ways or you have some assets that are shared between multiple components (views, templates, modules, etc.). It&apos;s still possible to store these assets in a base directory and even use <a href="/configuration/resolve#resolve-alias">aliasing</a> to make them easier to <code>import</code>.</p>
+<h2 class="header"><a class="anchor" href="#wrapping-up" id="wrapping-up"></a><span class="text">Wrapping up</span><a class="icon-link" href="#wrapping-up"></a></h2>
+<p>For the next guides we won&apos;t be using all the different assets we&apos;ve used in this guide, so let&apos;s do some cleanup so we&apos;re prepared for the next piece of the guides <a href="https://webpack.js.org/guides/output-management/">Output Management</a>:</p>
+<p><strong>project</strong></p>
+<pre><code class="lang-diff">  webpack-demo
+  |- package.json
+  |- webpack.config.js
+  |- /dist
+    |- bundle.js
+    |- index.html
+  |- /src
+<span class="token deleted">-   |- data.xml</span>
+<span class="token deleted">-   |- my-font.woff</span>
+<span class="token deleted">-   |- my-font.woff2</span>
+<span class="token deleted">-   |- icon.png</span>
+<span class="token deleted">-   |- style.css</span>
+    |- index.js
+  |- /node_modules
+</code></pre>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="lang-diff">  const path = require(&apos;path&apos;);
+
+  module.exports = {
+    entry: &apos;./src/index.js&apos;,
+    output: {
+      filename: &apos;bundle.js&apos;,
+      path: path.resolve(__dirname, &apos;dist&apos;)
+    },
+<span class="token deleted">-   module: {</span>
+<span class="token deleted">-     rules: [</span>
+<span class="token deleted">-       {</span>
+<span class="token deleted">-         test: /\.css$/,</span>
+<span class="token deleted">-         use: [</span>
+<span class="token deleted">-           &apos;style-loader&apos;,</span>
+<span class="token deleted">-           &apos;css-loader&apos;</span>
+<span class="token deleted">-         ]</span>
+<span class="token deleted">-       },</span>
+<span class="token deleted">-       {</span>
+<span class="token deleted">-         test: /\.(png|svg|jpg|gif)$/,</span>
+<span class="token deleted">-         use: [</span>
+<span class="token deleted">-           &apos;file-loader&apos;</span>
+<span class="token deleted">-         ]</span>
+<span class="token deleted">-       },</span>
+<span class="token deleted">-       {</span>
+<span class="token deleted">-         test: /\.(woff|woff2|eot|ttf|otf)$/,</span>
+<span class="token deleted">-         use: [</span>
+<span class="token deleted">-           &apos;file-loader&apos;</span>
+<span class="token deleted">-         ]</span>
+<span class="token deleted">-       },</span>
+<span class="token deleted">-       {</span>
+<span class="token deleted">-         test: /\.(csv|tsv)$/,</span>
+<span class="token deleted">-         use: [</span>
+<span class="token deleted">-           &apos;csv-loader&apos;</span>
+<span class="token deleted">-         ]</span>
+<span class="token deleted">-       },</span>
+<span class="token deleted">-       {</span>
+<span class="token deleted">-         test: /\.xml$/,</span>
+<span class="token deleted">-         use: [</span>
+<span class="token deleted">-           &apos;xml-loader&apos;</span>
+<span class="token deleted">-         ]</span>
+<span class="token deleted">-       }</span>
+<span class="token deleted">-     ]</span>
+<span class="token deleted">-   }</span>
+  };
+</code></pre>
+<p><strong>src/index.js</strong></p>
+<pre><code class="lang-diff">  import _ from &apos;lodash&apos;;
+<span class="token deleted">- import &apos;./style.css&apos;;</span>
+<span class="token deleted">- import Icon from &apos;./icon.png&apos;;</span>
+<span class="token deleted">- import Data from &apos;./data.xml&apos;;</span>
+-
+  function component() {
+    var element = document.createElement(&apos;div&apos;);
+-
+<span class="token deleted">-   // Lodash, now imported by this script</span>
+    element.innerHTML = _.join([&apos;Hello&apos;, &apos;webpack&apos;], &apos; &apos;);
+<span class="token deleted">-   element.classList.add(&apos;hello&apos;);</span>
+-
+<span class="token deleted">-   // Add the image to our existing div.</span>
+<span class="token deleted">-   var myIcon = new Image();</span>
+<span class="token deleted">-   myIcon.src = Icon;</span>
+-
+<span class="token deleted">-   element.appendChild(myIcon);</span>
+-
+<span class="token deleted">-   console.log(Data);</span>
+
+    return element;
+  }
+
+  document.body.appendChild(component());
+</code></pre>
+<h2 class="header"><a class="anchor" href="#next-guide" id="next-guide"></a><span class="text">Next guide</span><a class="icon-link" href="#next-guide"></a></h2>
+<p>Let&apos;s move on to <a href="https://webpack.js.org/guides/output-management/">Output Management</a></p>
+<h2 class="header"><a class="anchor" href="#further-reading" id="further-reading"></a><span class="text">Further Reading</span><a class="icon-link" href="#further-reading"></a></h2>
+<ul>
+<li><a href="https://survivejs.com/webpack/loading/fonts/">Loading Fonts</a> on SurviveJS</li>
+</ul>
+</div><div><hr><h3>Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/TheDutchCoder"><img src="https://github.com/TheDutchCoder.png?size=90"><span class="contributor__name"> TheDutchCoder</span></a><a class="contributor" href="https://github.com/michael-ciniawsky"><img src="https://github.com/michael-ciniawsky.png?size=90"><span class="contributor__name"> michael-ciniawsky</span></a><a class="contributor" href="https://github.com/skipjack"><img src="https://github.com/skipjack.png?size=90"><span class="contributor__name"> skipjack</span></a><a class="contributor" href="https://github.com/sudarsangp"><img src="https://github.com/sudarsangp.png?size=90"><span class="contributor__name"> sudarsangp</span></a></div></div></div><div class="interactive" id="components/gitter/gitter.jsx" data-props="{}"><span class="gitter"></span></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/guides/getting-started" class="footer__link">Getting Started</a><a href="/organization" class="footer__link">Organization</a><a href="/support" class="footer__link">Support</a><a href="/comparison" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg" alt="webpack icon"></a></section><section class="footer__right"><a href="/glossary" class="footer__link">Glossary</a><a href="/branding" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Gitter</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link footer__license"><img alt="Creative Commons License" src="/c983c925f14c5a308465ce5f912be111.svg"><img alt="Creative Commons License" src="/c440e4e11ad72daf1899ca0616ddd8b8.svg"></a></section></div></footer><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
+
+    
+      <script src="/503b3a5c0d06cc6be55a67e438deeccc.js"></script>
+    
+
+    <script>
+      ((window.gitter = {}).chat = {}).options = {
+        room: 'webpack/webpack',
+        activationElement: false
+      };
+    </script>
+
+    <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+  </body>
+</html>
