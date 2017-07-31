@@ -288,6 +288,16 @@ https: {
 
 This object is passed straight to Node.js HTTPS module, so see the [HTTPS documentation](https://nodejs.org/api/https.html) for more information.
 
+Usage via the CLI
+```
+webpack-dev-server --https
+```
+
+To pass your own certificate via the CLI use the following options
+```
+webpack-dev-server --https --key /path/to/server.key --cert /path/to/server.crt --cacert /path/to/ca.pem
+```
+
 ## `devServer.info` - CLI only
 
 `boolean`
