@@ -105,6 +105,11 @@ You can prevent all these messages from showing, by using this option:
 clientLogLevel: "none"
 ```
 
+Usage via the CLI
+```
+webpack-dev-server --client-log-level none
+```
+
 Possible values are `none`, `error`, `warning` or `info` (default).
 
 Note that the console will *always* show bundle errors and warnings. This option only effects the message before it.
