@@ -406,6 +406,21 @@ overlay: {
 }
 ```
 
+## `devServer.pfx`
+
+`string`
+
+Path to a SSL pfx file.
+
+```js
+pfx: '/path/to/file.pfx'
+```
+
+Usage via the CLI
+```
+webpack-dev-server --pfx /path/to/file.pfx
+```
+
 ## `devServer.port` - CLI only
 
 `number`
