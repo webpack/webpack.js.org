@@ -170,6 +170,20 @@ Usage via the CLI
 webpack-dev-server --content-base /path/to/content/dir
 ```
 
+## `devServer.disableHostCheck`
+
+`boolean`
+
+When set to true this option bypasses host checking. THIS IS NOT RECOMMENDED as apps that do not check the host are vulnerable to DNS rebinding attacks.
+
+```js
+disableHostCheck: true
+```
+
+Usage via the CLI
+```
+webpack-dev-server --disable-host-check
+```
 
 ## `devServer.filename` 🔑
 
