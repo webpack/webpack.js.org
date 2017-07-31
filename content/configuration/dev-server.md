@@ -340,6 +340,21 @@ Usage via the CLI
 webpack-dev-server --open
 ```
 
+## `devServer.openPage`
+
+`string`
+
+Specify a page to navigate to when opening the browser.
+
+```js
+openPage: '/different/page'
+```
+
+Usage via the CLI
+```
+webpack-dev-server --open-page "/different/page"
+```
+
 ## `devServer.overlay`
 
 `boolean` `object`
