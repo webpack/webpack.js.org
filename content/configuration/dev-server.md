@@ -255,7 +255,7 @@ webpack-dev-server --history-api-fallback
 For more options and information, see the [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) documentation.
 
 
-## `devServer.host` - CLI only
+## `devServer.host`
 
 `string`
 
@@ -263,6 +263,11 @@ Specify a host to use. By default this is `localhost`. If you want your server t
 
 ```js
 host: "0.0.0.0"
+```
+
+Usage via the CLI
+```
+webpack-dev-server --host 0.0.0.0
 ```
 
 
