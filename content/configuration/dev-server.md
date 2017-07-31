@@ -621,6 +621,21 @@ setup(app){
 }
 ```
 
+## `devServer.socket`
+
+`string`
+
+The Unix socket to listen to (instead of a host).
+
+```js
+socket: 'socket'
+```
+
+Usage via the CLI
+```
+webpack-dev-server --socket socket
+```
+
 
 ## `devServer.staticOptions`
 
