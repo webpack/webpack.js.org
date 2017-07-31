@@ -523,6 +523,15 @@ For more information, see the [**stats documentation**](/configuration/stats).
 
 T> This option has no effect when used with `quiet` or `noInfo`.
 
+## `devServer.stdin` - CLI only
+
+`boolean`
+
+This option closes the server when stdin ends.
+
+```
+webpack-dev-server --stdin
+```
 
 ## `devServer.watchContentBase`
 
