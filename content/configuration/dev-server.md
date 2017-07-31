@@ -661,6 +661,10 @@ watchContentBase: true
 
 It is disabled by default.
 
+Usage via the CLI
+```
+webpack-dev-server --watch-content-base
+```
 
 ## `devServer.watchOptions` 🔑
 
