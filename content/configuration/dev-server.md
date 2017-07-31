@@ -417,6 +417,9 @@ proxy: {
 `boolean`
 
 Output running progress to console.
+```
+webpack-dev-server --progress
+```
 
 
 ## `devServer.public` - CLI only
