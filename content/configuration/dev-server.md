@@ -229,6 +229,11 @@ historyApiFallback: {
 }
 ```
 
+Usage via the CLI
+```
+webpack-dev-server --history-api-fallback
+```
+
 For more options and information, see the [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) documentation.
 
 
