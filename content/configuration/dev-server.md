@@ -80,6 +80,19 @@ To use this option with the CLI pass the `--allowed-hosts` option a comma-delimi
 webpack-dev-server --entry /entry/file --output-path /output/path --allowed-hosts .host.com,host2.com
 ```
 
+## `devServer.bonjour`
+
+This option broadcasts the server via ZeroConf networking on start
+
+```js
+bonjour: true
+```
+
+Usage via the CLI
+```
+webpack-dev-server --bonjour
+```
+
 ## `devServer.clientLogLevel`
 
 `string`
