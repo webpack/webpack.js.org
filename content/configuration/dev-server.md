@@ -548,6 +548,21 @@ This option closes the server when stdin ends.
 webpack-dev-server --stdin
 ```
 
+## `devServer.useLocalIp`
+
+`boolean`
+
+This option lets the browser open with your local IP.
+
+```js
+useLocalIp: true
+```
+
+Usage via the CLI
+```
+webpack-dev-server --useLocalIp
+```
+
 ## `devServer.watchContentBase`
 
 `boolean`
