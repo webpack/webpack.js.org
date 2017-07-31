@@ -237,7 +237,7 @@ hot: true
 T> Note that you must also include a `new webpack.HotModuleReplacementPlugin()` to fully enable HMR. See the [HMR concepts page](/concepts/hot-module-replacement) for more information.
 
 
-## `devServer.hotOnly` - CLI only
+## `devServer.hotOnly`
 
 `boolean`
 
@@ -247,6 +247,10 @@ Enables Hot Module Replacement (see [`devServer.hot`](#devserver-hot)) without p
 hotOnly: true
 ```
 
+Usage via the CLI
+```
+webpack-dev-server --hot-only
+```
 
 ## `devServer.https`
 
