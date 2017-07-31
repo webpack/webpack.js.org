@@ -28,9 +28,7 @@ W> __HMR__ is not intended for use in production, meaning it should only be used
 
 ## Enabling HMR
 
-This feature is great for productivity. All we need to do is update our [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration, and use webpack's built in HMR plugin.
-
-W> You cannot update the entry point for a chunk. It will not be accepted.
+This feature is great for productivity. All we need to do is update our [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration, and use webpack's built in HMR plugin. We'll also remove the entry point for `print.js` as it will now be consumed by the `index.js` module.
 
 __webpack.config.js__
 
@@ -97,7 +95,6 @@ __index.js__
 +     printMe();
 +   })
 + }
-
 ```
 
 Start changing the `console.log` statement in `print.js`, and you should see the following output in the browser console.
@@ -156,7 +153,7 @@ __index.js__
   }
 
 - document.body.appendChild(component());
-+ let element = component(); //Store the element to re-render on print.js changes
++ let element = component(); // Store the element to re-render on print.js changes
 + document.body.appendChild(element);
 
   if (module.hot) {
@@ -168,7 +165,6 @@ __index.js__
 +     document.body.appendChild(element);
     })
   }
-
 ```
 
 This is just one example, but there are many others that can easily trip people up. Luckily, there are a lot of loaders out there (some of which are mentioned below) that will make hot module replacement much easier.
