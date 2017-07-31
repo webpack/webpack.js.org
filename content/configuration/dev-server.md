@@ -134,6 +134,10 @@ Enable [gzip compression](https://betterexplained.com/articles/how-to-optimize-y
 compress: true
 ```
 
+Usage via the CLI
+```
+webpack-dev-server --compress
+```
 
 ## `devServer.contentBase`
 
