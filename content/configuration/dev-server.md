@@ -76,9 +76,10 @@ allowedHosts: [
 
 To use this option with the CLI pass the `--allowed-hosts` option a comma-delimited string.
 
-```
+```bash
 webpack-dev-server --entry /entry/file --output-path /output/path --allowed-hosts .host.com,host2.com
 ```
+
 
 ## `devServer.bonjour`
 
@@ -89,9 +90,11 @@ bonjour: true
 ```
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --bonjour
 ```
+
 
 ## `devServer.clientLogLevel`
 
@@ -106,7 +109,8 @@ clientLogLevel: "none"
 ```
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --client-log-level none
 ```
 
@@ -114,12 +118,14 @@ Possible values are `none`, `error`, `warning` or `info` (default).
 
 Note that the console will *always* show bundle errors and warnings. This option only effects the message before it.
 
+
 ## `devServer.color` - CLI only
 
 `boolean`
 
 Enables/Disables colors on the console.
-```
+
+```bash
 webpack-dev-server --color
 ```
 
@@ -135,9 +141,11 @@ compress: true
 ```
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --compress
 ```
+
 
 ## `devServer.contentBase`
 
@@ -166,9 +174,11 @@ contentBase: false
 ```
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --content-base /path/to/content/dir
 ```
+
 
 ## `devServer.disableHostCheck`
 
@@ -181,9 +191,11 @@ disableHostCheck: true
 ```
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --disable-host-check
 ```
+
 
 ## `devServer.filename` 🔑
 
@@ -248,7 +260,8 @@ historyApiFallback: {
 ```
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --history-api-fallback
 ```
 
@@ -266,7 +279,8 @@ host: "0.0.0.0"
 ```
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --host 0.0.0.0
 ```
 
@@ -295,9 +309,11 @@ hotOnly: true
 ```
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --hot-only
 ```
+
 
 ## `devServer.https`
 
@@ -322,23 +338,28 @@ https: {
 This object is passed straight to Node.js HTTPS module, so see the [HTTPS documentation](https://nodejs.org/api/https.html) for more information.
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --https
 ```
 
 To pass your own certificate via the CLI use the following options
-```
+
+```bash
 webpack-dev-server --https --key /path/to/server.key --cert /path/to/server.crt --cacert /path/to/ca.pem
 ```
+
 
 ## `devServer.info` - CLI only
 
 `boolean`
 
 Output cli information. It is enabled by default.
-```
+
+```bash
 webpack-dev-server --info=false
 ```
+
 
 ## `devServer.inline` - CLI only
 
@@ -353,7 +374,8 @@ inline: false
 ```
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --inline=false
 ```
 
@@ -371,7 +393,8 @@ lazy: true
 ```
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --lazy
 ```
 
@@ -390,6 +413,7 @@ With `noInfo` enabled, messages like the webpack bundle information that is show
 noInfo: true
 ```
 
+
 ## `devServer.open`
 
 `boolean`
@@ -401,9 +425,11 @@ open: true
 ```
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --open
 ```
+
 
 ## `devServer.openPage`
 
@@ -416,9 +442,11 @@ openPage: '/different/page'
 ```
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --open-page "/different/page"
 ```
+
 
 ## `devServer.overlay`
 
@@ -439,6 +467,7 @@ overlay: {
 }
 ```
 
+
 ## `devServer.pfx`
 
 `string`
@@ -450,23 +479,28 @@ pfx: '/path/to/file.pfx'
 ```
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --pfx /path/to/file.pfx
 ```
+
 
 ## `devServer.pfxPassphrase`
 
 `string`
 
 The passphrase to a SSL PFX file.
+
 ```js
 pfxPassphrase: 'passphrase'
 ```
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --pfx-passphrase passphrase
 ```
+
 
 ## `devServer.port`
 
@@ -479,9 +513,11 @@ port: 8080
 ```
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --port 8080
 ```
+
 
 ## `devServer.proxy`
 
@@ -549,7 +585,8 @@ proxy: {
 `boolean`
 
 Output running progress to console.
-```
+
+```bash
 webpack-dev-server --progress
 ```
 
@@ -567,7 +604,8 @@ public: "myapp.test:80"
 ```
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --public myapp.test:80
 ```
 
@@ -612,9 +650,11 @@ quiet: true
 ```
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --quiet
 ```
+
 
 ## `devServer.setup`
 
@@ -631,6 +671,7 @@ setup(app){
 }
 ```
 
+
 ## `devServer.socket`
 
 `string`
@@ -642,7 +683,8 @@ socket: 'socket'
 ```
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --socket socket
 ```
 
@@ -676,15 +718,17 @@ For more information, see the [**stats documentation**](/configuration/stats).
 
 T> This option has no effect when used with `quiet` or `noInfo`.
 
+
 ## `devServer.stdin` - CLI only
 
 `boolean`
 
 This option closes the server when stdin ends.
 
-```
+```bash
 webpack-dev-server --stdin
 ```
+
 
 ## `devServer.useLocalIp`
 
@@ -697,9 +741,11 @@ useLocalIp: true
 ```
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --useLocalIp
 ```
+
 
 ## `devServer.watchContentBase`
 
@@ -714,9 +760,11 @@ watchContentBase: true
 It is disabled by default.
 
 Usage via the CLI
-```
+
+```bash
 webpack-dev-server --watch-content-base
 ```
+
 
 ## `devServer.watchOptions` 🔑
 
