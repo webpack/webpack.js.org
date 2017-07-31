@@ -449,7 +449,7 @@ Usage via the CLI
 webpack-dev-server --pfx-passphrase passphrase
 ```
 
-## `devServer.port` - CLI only
+## `devServer.port`
 
 `number`
 
@@ -459,6 +459,10 @@ Specify a port number to listen for requests on:
 port: 8080
 ```
 
+Usage via the CLI
+```
+webpack-dev-server --port 8080
+```
 
 ## `devServer.proxy`
 
