@@ -325,6 +325,21 @@ With `noInfo` enabled, messages like the webpack bundle information that is show
 noInfo: true
 ```
 
+## `devServer.open`
+
+`boolean`
+
+When `open` is enabled, the dev server will open the browser.
+
+```js
+open: true
+```
+
+Usage via the CLI
+```
+webpack-dev-server --open
+```
+
 ## `devServer.overlay`
 
 `boolean` `object`
