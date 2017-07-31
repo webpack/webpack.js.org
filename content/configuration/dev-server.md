@@ -283,6 +283,14 @@ https: {
 
 This object is passed straight to Node.js HTTPS module, so see the [HTTPS documentation](https://nodejs.org/api/https.html) for more information.
 
+## `devServer.info` - CLI only
+
+`boolean`
+
+Output cli information. It is enabled by default.
+```
+webpack-dev-server --info=false
+```
 
 ## `devServer.inline` - CLI only
 
