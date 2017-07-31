@@ -421,6 +421,20 @@ Usage via the CLI
 webpack-dev-server --pfx /path/to/file.pfx
 ```
 
+## `devServer.pfxPassphrase`
+
+`string`
+
+The passphrase to a SSL PFX file.
+```js
+pfxPassphrase: 'passphrase'
+```
+
+Usage via the CLI
+```
+webpack-dev-server --pfx-passphrase passphrase
+```
+
 ## `devServer.port` - CLI only
 
 `number`
