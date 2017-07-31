@@ -283,6 +283,11 @@ It is also possible to use **iframe mode**, which uses an `<iframe>` under a not
 inline: false
 ```
 
+Usage via the CLI
+```
+webpack-dev-server --inline=false
+```
+
 T> Inline mode is recommended when using Hot Module Replacement.
 
 
