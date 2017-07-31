@@ -549,7 +549,7 @@ webpack-dev-server --progress
 ```
 
 
-## `devServer.public` - CLI only
+## `devServer.public`
 
 `string`
 
@@ -559,6 +559,11 @@ For example, the dev-server is proxied by nginx, and available on `myapp.test`:
 
 ```js
 public: "myapp.test:80"
+```
+
+Usage via the CLI
+```
+webpack-dev-server --public myapp.test:80
 ```
 
 
