@@ -133,6 +133,22 @@ W> This option is __deprecated__ in favor of `Rule.use`.
 
 An array of [`Rules`](#rule) from which only the first matching Rule is used when the Rule matches.
 
+```javascript
+{
+  test: /.css$/,
+
+  oneOf: [
+    {
+      resourceQuery: /inline/, // foo.css?inline
+      use: 'url-loader',
+    },
+    {
+      resourceQuery: /external/, // foo.css?external
+      use: 'file-loader',
+    },
+  ],
+}
+```
 
 ## `Rule.options` / `Rule.query`
 
@@ -175,6 +191,13 @@ A [`Condition`](#condition) matched with the resource. See details in [`Rule` co
 
 A [`Condition`](#condition) matched with the resource query. The condition matches against a string that starts with a question mark (`"?exampleQuery"`). See details in [`Rule` conditions](#rule-conditions).
 
+```javascript
+{
+  test: /.css$/,
+  resourceQuery: /inline/, // foo.css?inline
+  use: 'url-loader',
+}
+```
 
 ## `Rule.rules`
 
