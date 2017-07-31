@@ -30,6 +30,8 @@ W> __HMR__ is not intended for use in production, meaning it should only be used
 
 This feature is great for productivity. All we need to do is update our [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration, and use webpack's built in HMR plugin.
 
+W> You cannot update the entry point for a chunk. It will not be accepted.
+
 __webpack.config.js__
 
 ``` diff
@@ -39,8 +41,9 @@ __webpack.config.js__
 
   module.exports = {
     entry: {
-      app: './src/index.js',
-      print: './src/print.js'
+-      app: './src/index.js',
+-      print: './src/print.js'
++      app: './src/index.js'
     },
     devtool: 'inline-source-map',
     devServer: {
@@ -72,13 +75,6 @@ __index.js__
   import _ from 'lodash';
   import printMe from './print.js';
 
-+ if (module.hot) {
-+   module.hot.accept('./print.js', function() {
-+     console.log('Accepting the updated printMe module!');
-+     printMe();
-+   })
-+ }
-
   function component() {
     var element = document.createElement('div');
     var btn = document.createElement('button');
@@ -94,6 +90,14 @@ __index.js__
   }
 
   document.body.appendChild(component());
++
++ if (module.hot) {
++   module.hot.accept('./print.js', function() {
++     console.log('Accepting the updated printMe module!');
++     printMe();
++   })
++ }
+
 ```
 
 Start changing the `console.log` statement in `print.js`, and you should see the following output in the browser console.
@@ -131,23 +135,11 @@ This is happening because the button's `onclick` event handler is still bound to
 
 To make this work with HMR we need to update that binding to the new `printMe` function using `module.hot.accept`:
 
-__print.js__
+__index.js__
 
 ``` diff
   import _ from 'lodash';
   import printMe from './print.js';
-
-  if (module.hot) {
-    module.hot.accept('./print.js', function() {
-      console.log('Accepting the updated printMe module!');
--     printMe();
-+     document.body.removeChild(element);
-+     element = component(); // Re-render the "component" to update the click handler
-+     document.body.appendChild(element);
-    })
-  }
-
-+  let element = component();
 
   function component() {
     var element = document.createElement('div');
@@ -163,8 +155,20 @@ __print.js__
     return element;
   }
 
--  document.body.appendChild(component());
-+  document.body.appendChild(element);
+- document.body.appendChild(component());
++ let element = component(); //Store the element to re-render on print.js changes
++ document.body.appendChild(element);
+
+  if (module.hot) {
+    module.hot.accept('./print.js', function() {
+      console.log('Accepting the updated printMe module!');
+-     printMe();
++     document.body.removeChild(element);
++     element = component(); // Re-render the "component" to update the click handler
++     document.body.appendChild(element);
+    })
+  }
+
 ```
 
 This is just one example, but there are many others that can easily trip people up. Luckily, there are a lot of loaders out there (some of which are mentioned below) that will make hot module replacement much easier.
@@ -191,8 +195,7 @@ __webpack.config.js__
 
   module.exports = {
     entry: {
-      app: './src/index.js',
-      print: './src/print.js'
+      app: './src/index.js'
     },
     devtool: 'inline-source-map',
     devServer: {
@@ -251,17 +254,6 @@ __index.js__
   import printMe from './print.js';
 + import './styles.css';
 
-  if (module.hot) {
-    module.hot.accept('./print.js', function() {
-      console.log('Accepting the updated printMe module!');
-      document.body.removeChild(element);
-      element = component(); // Re-render the "component" to update the click handler
-      document.body.appendChild(element);
-    })
-  }
-
-  let element = component();
-
   function component() {
     var element = document.createElement('div');
     var btn = document.createElement('button');
@@ -276,7 +268,18 @@ __index.js__
     return element;
   }
 
+  let element = component();
   document.body.appendChild(element);
+
+  if (module.hot) {
+    module.hot.accept('./print.js', function() {
+      console.log('Accepting the updated printMe module!');
+     document.body.removeChild(element);
+     element = component(); // Re-render the "component" to update the click handler
+     document.body.appendChild(element);
+    })
+  }
+
 ```
 
 Change the style on `body` to `background: red;` and you should immediately see the page's background color change without a full refresh.
