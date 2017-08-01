@@ -103,7 +103,7 @@ __src/index.js__
   function component() {
     var element = document.createElement('div');
 
-    // Lodash, now imported by this script
+    // lodash 是由当前 script 脚本 import 导入进来的
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +   element.classList.add('hello');
 

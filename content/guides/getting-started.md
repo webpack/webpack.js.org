@@ -160,11 +160,13 @@ T> 输出可能会稍有不同，但是只要构建成功，那么你就可以�
 在浏览器中打开 `index.html`，如果一切访问都正常，你应该能看到以下文本：'Hello webpack'。
 
 
-## ES2015 模块
+## 模块
 
-虽然在大多数浏览器中都不支持 `import` 和 `export` 语句，但是 webpack 却能够提供支持。事实上，webpack 在幕后会将代码“转译”，以便旧有浏览器可以执行。如果你检查 `dist/bundle.js`，你可以看到 webpack 具体如何实现，这是独创精巧的设计！
+[ES2015](https://babeljs.io/learn-es2015/) 中的 [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 和 [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) 语句已经被标准化。虽然大多数浏览器还无法支持它们，但是 webpack 却能够提供开箱即用般的支持。
 
-注意，webpack 不会更改代码中除 `import` 和 `export` 语句以外的部分。如果你在使用其它 [ES2015 特性](http://es6-features.org/)，请确保你使用了一个像是 [Babel](https://babeljs.io/) 或 [Bublé](https://buble.surge.sh/guide/) 的转译器。关于 webpack 支持的多种模块语法，查看[模块 API](/api/module-methods) 文档
+事实上，webpack 在幕后会将代码“转译”，以便旧有浏览器可以执行。如果你检查 `dist/bundle.js`，你可以看到 webpack 具体如何实现，这是独创精巧的设计！除了 `import` 和 `export`，webpack 还能够很好地支持多种其他模块语法，更多信息请查看[模块 API](/api/module-methods)。
+
+注意，webpack 不会更改代码中除 `import` 和 `export` 语句以外的部分。如果你在使用其它 [ES2015 特性](http://es6-features.org/)，请确保你是通过 webpack 的 [loader 系统](/concepts/loaders/)，使用了一个像是 [Babel](https://babeljs.io/) 或 [Bublé](https://buble.surge.sh/guide/) 的[转译器](/loaders/#transpiling)。
 
 
 ## 使用一个配置文件
