@@ -84,3 +84,5 @@ function(e,t,n){"use strict";function r(e){return e*e*e}t.a=r}
 /* ... */
 function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(0);console.log(n.i(r.a)(5))}
 ```
+
+T> Note, using the `--optimize-minimize` flag is NOT required for tree shaking to occur. Tree shaking will occur when using a production configuration. This can also be configured directly in a `webpack.config.js` file. Read [production build](/guides/production) for an in-depth guide on how to create a production config file.
