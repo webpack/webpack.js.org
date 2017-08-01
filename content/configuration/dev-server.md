@@ -361,7 +361,7 @@ webpack-dev-server --info=false
 ```
 
 
-## `devServer.inline` - CLI only
+## `devServer.inline`
 
 `boolean`
 
