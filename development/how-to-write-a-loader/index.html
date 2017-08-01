@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/b4ad0345c6f0ef59fde6.css" rel="stylesheet">
+      <link href="/586f718a79645494a5fb.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -22,7 +22,7 @@
 <p>This function is called when a resource should be transformed by this loader.</p>
 <p>In the simple case, when only a single loader is applied to the resource, the loader is called with one parameter: the content of the resource file as string.</p>
 <p>The loader can access the <a href="/api/loaders/">loader API</a> on the <code>this</code> context in the function.</p>
-<p>A sync loader that only wants to give a one value can simply <code>return</code> it. In every other case the loader can give back any number of values with the <code>this.callback(err, values...)</code> function. Errors are passed to the <code>this.callback</code> function or thrown in a sync loader.</p>
+<p>A sync loader that only wants to give one value can simply <code>return</code> it. In every other case the loader can give back any number of values with the <code>this.callback(err, values...)</code> function. Errors are passed to the <code>this.callback</code> function or thrown in a sync loader.</p>
 <p>The loader is expected to give back one or two values. The first value is a resulting JavaScript code as string or buffer. The second optional value is a SourceMap as JavaScript object.</p>
 <p>In the complex case, when multiple loaders are chained, only the last loader gets the resource file and only the first loader is expected to give back one or two values (JavaScript and SourceMap). Values that any other loader give back are passed to the previous loader.</p>
 <h2 class="header"><a class="anchor" href="#examples" id="examples"></a><span class="text">Examples</span><a class="icon-link" href="#examples"></a></h2>
