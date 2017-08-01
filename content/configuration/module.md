@@ -136,17 +136,16 @@ An array of [`Rules`](#rule) from which only the first matching Rule is used whe
 ```javascript
 {
   test: /.css$/,
-
   oneOf: [
     {
       resourceQuery: /inline/, // foo.css?inline
-      use: 'url-loader',
+      use: 'url-loader'
     },
     {
       resourceQuery: /external/, // foo.css?external
-      use: 'file-loader',
-    },
-  ],
+      use: 'file-loader'
+    }
+  ] 
 }
 ```
 
@@ -195,7 +194,7 @@ A [`Condition`](#condition) matched with the resource query. The condition match
 {
   test: /.css$/,
   resourceQuery: /inline/, // foo.css?inline
-  use: 'url-loader',
+  use: 'url-loader'
 }
 ```
 
