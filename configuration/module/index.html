@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/8cebbb5f35d1eb3dfe28.css" rel="stylesheet">
+      <link href="/b4ad0345c6f0ef59fde6.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -81,6 +81,20 @@ noParse<span class="token punctuation">:</span> <span class="token keyword">func
 <blockquote class="warning"><div class="tip-content"> This option is <strong>deprecated</strong> in favor of <code>Rule.use</code>. </div></blockquote><p><code>Rule.loaders</code> is an alias to <code>Rule.use</code>. See <a href="#rule-use"><code>Rule.use</code></a> for details.</p>
 <h2 class="header"><a class="anchor" href="#rule-oneof" id="rule-oneof"></a><span class="text"><code>Rule.oneOf</code></span><a class="icon-link" href="#rule-oneof"></a></h2>
 <p>An array of <a href="#rule"><code>Rules</code></a> from which only the first matching Rule is used when the Rule matches.</p>
+<pre><code class="lang-javascript"><span class="token punctuation">{</span>
+  test<span class="token punctuation">:</span> <span class="token regex">/.css$/</span><span class="token punctuation">,</span>
+  oneOf<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      resourceQuery<span class="token punctuation">:</span> <span class="token regex">/inline/</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// foo.css?inline</span>
+      use<span class="token punctuation">:</span> <span class="token string">&apos;url-loader&apos;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      resourceQuery<span class="token punctuation">:</span> <span class="token regex">/external/</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// foo.css?external</span>
+      use<span class="token punctuation">:</span> <span class="token string">&apos;file-loader&apos;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span> 
+<span class="token punctuation">}</span>
+</code></pre>
 <h2 class="header"><a class="anchor" href="#rule-options-rule-query" id="rule-options-rule-query"></a><span class="text"><code>Rule.options</code> / <code>Rule.query</code></span><a class="icon-link" href="#rule-options-rule-query"></a></h2>
 <p><code>Rule.options</code> and <code>Rule.query</code> are shortcuts to <code>Rule.use: [ { options } ]</code>. See <a href="#rule-use"><code>Rule.use</code></a> and <a href="#useentry"><code>UseEntry.options</code></a> for details.</p>
 <blockquote class="warning"><div class="tip-content"> <code>Rule.query</code> is deprecated in favor of <code>Rule.options</code> and <code>UseEntry.options</code>. </div></blockquote><h2 class="header"><a class="anchor" href="#rule-parser" id="rule-parser"></a><span class="text"><code>Rule.parser</code></span><a class="icon-link" href="#rule-parser"></a></h2>
@@ -105,6 +119,12 @@ noParse<span class="token punctuation">:</span> <span class="token keyword">func
 <p>A <a href="#condition"><code>Condition</code></a> matched with the resource. See details in <a href="#rule-conditions"><code>Rule</code> conditions</a>.</p>
 <h2 class="header"><a class="anchor" href="#rule-resourcequery" id="rule-resourcequery"></a><span class="text"><code>Rule.resourceQuery</code></span><a class="icon-link" href="#rule-resourcequery"></a></h2>
 <p>A <a href="#condition"><code>Condition</code></a> matched with the resource query. The condition matches against a string that starts with a question mark (<code>&quot;?exampleQuery&quot;</code>). See details in <a href="#rule-conditions"><code>Rule</code> conditions</a>.</p>
+<pre><code class="lang-javascript"><span class="token punctuation">{</span>
+  test<span class="token punctuation">:</span> <span class="token regex">/.css$/</span><span class="token punctuation">,</span>
+  resourceQuery<span class="token punctuation">:</span> <span class="token regex">/inline/</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// foo.css?inline</span>
+  use<span class="token punctuation">:</span> <span class="token string">&apos;url-loader&apos;</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <h2 class="header"><a class="anchor" href="#rule-rules" id="rule-rules"></a><span class="text"><code>Rule.rules</code></span><a class="icon-link" href="#rule-rules"></a></h2>
 <p>An array of <a href="#rule"><code>Rules</code></a> that is also used when the Rule matches.</p>
 <h2 class="header"><a class="anchor" href="#rule-test" id="rule-test"></a><span class="text"><code>Rule.test</code></span><a class="icon-link" href="#rule-test"></a></h2>
