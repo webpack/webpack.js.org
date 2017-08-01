@@ -66,8 +66,19 @@ stats: {
   errors: true,
   // Add details to errors (like resolving log)
   errorDetails: true,
-  // Exclude modules which match one of the given strings or regular expressions
-  exclude: [],
+  // Exclude assets from being displayed in stats
+  // This can be done with a String, a RegExp, a Function getting the assets name
+  // and returning a boolean or an Array of the above.
+  excludeAssets: "filter" | /filter/ | (assetName) => ... return true|false |
+    ["filter"] | [/filter/] | [(assetName) => ... return true|false],
+  // Exclude modules from being displayed in stats
+  // This can be done with a String, a RegExp, a Function getting the modules source
+  // and returning a boolean or an Array of the above.
+  excludeModules: "filter" | /filter/ | (moduleSource) => ... return true|false |
+    ["filter"] | [/filter/] | [(moduleSource) => ... return true|false],
+  // See excludeModules
+  exclude: "filter" | /filter/ | (moduleSource) => ... return true|false |
+    ["filter"] | [/filter/] | [(moduleSource) => ... return true|false],
   // Add the hash of the compilation
   hash: true,
   // Set the maximum number of modules to be shown
