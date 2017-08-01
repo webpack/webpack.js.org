@@ -35,7 +35,7 @@ There are three general approaches to code splitting available:
 
 ## Entry Points
 
-This is by far the easiest, and most intuitive, way to split code. However, it is more manual and has a some pitfalls we will go over. Let's take a look at how we might split another module from the main bundle:
+This is by far the easiest, and most intuitive, way to split code. However, it is more manual and has some pitfalls we will go over. Let's take a look at how we might split another module from the main bundle:
 
 __project__
 
