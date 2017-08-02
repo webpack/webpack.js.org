@@ -27,7 +27,7 @@ function checkLinks(args) {
         !failure.diag ||
         !failure.diag.at ||
         !failure.diag.at.match(/class="support__[^"]*"/)
-      )
+      );
     });
 
     if (failures.length > 0) {
