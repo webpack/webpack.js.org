@@ -411,7 +411,7 @@ __src/server.js__
     publicPath: config.output.publicPath,
     stats: { colors: true }
   }));
-  
+
 + // Tell express to use the webpack-hot-middleware.
 + app.use(webpackHotMiddleware(compiler, {
 +     log: console.log
@@ -534,7 +534,7 @@ This means that even though HMR is working, it can't update this file automatica
 + }
 ```
 
-This will tell HMR to reload the server whenever an incoming change is detected. You can also use this pattern inside individual modules. If you like to know more about how this works, we recommend you read the [Hot Module Replacement](guides/hot-module-replacement/) guide.
+This will tell HMR to reload the server whenever an incoming change is detected. You can also use this pattern inside individual modules. If you like to know more about how this works, we recommend you read the [Hot Module Replacement](/guides/hot-module-replacement/) guide.
 
 
 ## Adjusting Your Text Editor
