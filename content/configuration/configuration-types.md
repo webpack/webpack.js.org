@@ -11,21 +11,25 @@ contributors:
 Besides exporting a single config object, there are a few more ways that cover other needs as well.
 
 
-## Exporting a function to use `--env`
+## Exporting a Function
 
 Eventually you will find the need to disambiguate in your `webpack.config.js` between [development](/guides/development) and [production builds](/guides/production). You have (at least) two options:
 
-Instead of exporting a configuration object, you may return a function which accepts an environment as argument. When running webpack, you may specify build environment keys via `--env`, such as `--env.production` or `--env.platform=web`.
+One option is to export a function from your webpack config instead of exporting an object. The function will be invoked with two arguments:
+
+* An environment as the first parameter. See the [environment options CLI documentation](/api/cli#environment-options) for syntax examples.
+* An options map (`argv`) as the second parameter. This describes the options passed to webpack, with keys such as [`output-filename`](/api/cli/#output-options) and [`optimize-minimize`](/api/cli/#optimize-options).
 
 ```diff
 -module.exports = {
-+module.exports = function(env) {
++module.exports = function(env, argv) {
 +  return {
-    plugins: [
-      new webpack.optimize.UglifyJsPlugin({
-+        compress: env.production // compress only in production build
-      })
-    ]
++    devtool: env.production ? 'source-maps' : 'eval',
+     plugins: [
+       new webpack.optimize.UglifyJsPlugin({
++        compress: argv['optimize-minimize'] // only if -p or --optimize-minimize were passed
+       })
+     ]
 +  };
 };
 ```
