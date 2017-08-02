@@ -6,6 +6,7 @@ contributors:
   - rafde
   - fvgs
   - TheDutchCoder
+  - navarroaxel
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
@@ -240,8 +241,105 @@ T> Now that your server is working, you might want to give [Hot Module Replaceme
 
 ### Using webpack-dev-middleware
 
-?> Familiar with `webpack-dev-middleware`? We need your help! Please submit a PR to fill in the missing instructions and example here. Make sure to keep it simple as this guide is intended for beginners.
+The `webpack-dev-middleware` provides a way to serve your assets from your express server. The first step is install the webpack and his middleware:
 
+``` bash
+npm install --save-dev webpack webpack-dev-middleware
+```
+
+You need to add a webpack middleware to your express app:
+
+__server.js__
+
+```diff
+  const express = require('express');
++ const webpack = require('webpack');
++ const webpackMiddleware = require('webpack-dev-middleware');
++ const config = require('./webpack.config');
+
++ const compiler = webpack(config);
+
+const app = express();
+
+// ...all your middlewares here.
+
++ app.use(webpackMiddleware(compiler, {
++   publicPath: config.output.publicPath,
++ }));
+
+app.list(3000);
+```
+
+You webpack's config should add some output attributes:
+
+``` diff
+  module.exports = {
+    entry: {
+      app: [
+        './src/index.js'
+      ]
+    },
+    devtool: 'inline-source-map',
+    output: {
+      filename: '[name].bundle.js',
++      // no real path is required, just pass "/" but it will work with other paths too.
++      path: '/',
++      publicPath: '/assets/'
+    }
+  };
+```
+
+You can activate the hot reload if you add the [`webpack-hot-middleware`](https://github.com/glenjamin/webpack-hot-middleware):
+
+``` bash
+npm install --save-dev webpack-hot-middleware
+```
+
+__server.js__
+
+```diff
+const express = require('express');
+const webpack = require('webpack');
+const webpackMiddleware = require('webpack-dev-middleware');
++const webpackHotMiddleware = require('webpack-hot-middleware');
+const config = require('./webpack.config');
+
+const compiler = webpack(config);
+
+const app = express();
+
+// all your middlewares here...
+
+app.use(webpackMiddleware(compiler, {
+  publicPath: config.output.publicPath,
+}));
+
++app.use(webpackHotMiddleware(compiler));
+
+app.list(3000);
+```
+You need to change you webpack's config to active the hot reload:
+
+``` diff
+  module.exports = {
+    entry: {
+      app: [
++       'webpack-hot-middleware/client?reload=true',
+        './src/index.js'
+      ]
+    },
+    devtool: 'inline-source-map',
+    plugins: [
++     new webpack.HotModuleReplacementPlugin(),
++     new webpack.NoErrorsPlugin()
+    ],
+    output: {
+      filename: '[name].bundle.js',
+      path: path.join(__dirname, 'public/assets'),
+      publicPath: '/assets/'
+    }
+  };
+```
 
 ## Adjusting Your Text Editor
 
