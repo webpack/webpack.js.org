@@ -283,7 +283,7 @@ This will tell the middleware to serve our files on `http://localhost:3000/app`,
 
 __project__
 
-```
+``` bash
   webpack-demo
   |- package.json
   |- webpack.config.js
