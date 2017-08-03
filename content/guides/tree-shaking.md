@@ -84,3 +84,5 @@ function(e,t,n){"use strict";function r(e){return e*e*e}t.a=r}
 /* ... */
 function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(0);console.log(n.i(r.a)(5))}
 ```
+
+T> Note that the `--optimize-minimize` flag enables tree shaking by including the `UglifyJsPlugin` behind the scenes. Alternatively, the `UglifyJsPlugin` can be included manually in the `plugins` section of your configuration file. The plugin, combined with webpack's resolving of `import` and `export` statements, is what makes tree shaking possible. See the [production build](/guides/production) guide for more information.
