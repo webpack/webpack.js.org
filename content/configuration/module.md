@@ -133,6 +133,21 @@ W> 由于需要支持 `Rule.use`，此选项__已废弃__。
 
 [`规则`](#rule)数组，当规则匹配时，只使用第一个匹配规则。
 
+```javascript
+{
+  test: /.css$/,
+  oneOf: [
+    {
+      resourceQuery: /inline/, // foo.css?inline
+      use: 'url-loader'
+    },
+    {
+      resourceQuery: /external/, // foo.css?external
+      use: 'file-loader'
+    }
+  ] 
+}
+```
 
 ## `Rule.options / Rule.query`
 
@@ -175,6 +190,13 @@ parser: {
 
 A [`Condition`](#condition) matched with the resource query. The condition matches against a string that starts with a question mark (`"?exampleQuery"`). See details in [`Rule` conditions](#rule-conditions).
 
+```javascript
+{
+  test: /.css$/,
+  resourceQuery: /inline/, // foo.css?inline
+  use: 'url-loader'
+}
+```
 
 ## `Rule.rules`
 

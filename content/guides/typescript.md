@@ -4,6 +4,7 @@ sort: 14
 contributors:
   - morsdyce
   - kkamali
+  - mtrivera
 ---
 
 [TypeScript](https://www.typescriptlang.org) 是 JavaScript 的超集，为其增加了类型系统，可以编译为普通的 JavaScript 代码。这篇指南里我们将会学习 webpack 是如何跟 TypeScript 进行集成。
@@ -48,6 +49,8 @@ __tsconfig.json__
 
 __webpack.config.js__
 
+To learn more about webpack configuration, see the [configuration concepts](/concepts/configuration/).
+
 现在让我们在 webpack 配置中处理 TypeScript：
 
 ```js
@@ -77,17 +80,14 @@ module.exports = {
 
 ## Loader
 
-以下是可用的 TypeScript loader：
+[`ts-loader`](https://github.com/TypeStrong/ts-loader)
 
-- [`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader)
-- [`ts-loader`](https://github.com/TypeStrong/ts-loader)
-
-关于 `awesome-typescript-loader` 和 `ts-loader` 的区别，Awesome TypeScript Loader 作了[精彩的解释](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader)。
-
-在本指南中，我们选择使用 `ts-loader`，因为它能够很方便地启用额外的 webpack 功能，例如将其他 web 资源导入到项目中。
+在本指南中，我们将使用 `ts-loader`，因为它能够很方便地启用额外的 webpack 功能，例如将其他 web 资源导入到项目中。
 
 
 ## Source Map
+
+To learn more about Source Maps, see the [development guide](/guides/development.md).
 
 要启用 source map，我们必须配置 TypeScript，以将内联的 source map 输出到编译过的 JavaScript 文件。必须在 `tsconfig.json` 中添加下面这行：
 
@@ -111,7 +111,7 @@ module.exports = {
 
 ## 使用第三方库
 
-当从 npm 安装第三方库时，一定要牢记同时安装这个库的类型声明文件。你可以从 [@types 仓库](https://github.com/DefinitelyTyped/DefinitelyTyped)找到并安装这些第三方库的类型声明文件。
+当从 npm 安装第三方库时，一定要牢记同时安装这个库的类型声明文件。你可以从 [TypeSearch](http://microsoft.github.io/TypeSearch/) 中找到并安装这些第三方库的类型声明文件。
 
 举个例子，如果想安装 lodash 这个库的类型声明文件，我们可以运行下面的命令：
 
@@ -136,6 +136,13 @@ declare module "*.svg" {
 ```
 
 这里，我们通过指定任何以 `.svg` 结尾的导入，并将模块的 `content` 定义为 `any`，将 SVG 声明一个新的模块。我们可以通过将类型定义为字符串，来更加显式地将它声明为一个 url。同样的理念适用于其他资源，包括 CSS, SCSS, JSON 等。
+
+
+## Performance Loader
+
+[`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader)
+
+Awesome TypeScript Loader has created a [wonderful explanation](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader) of the difference between `awesome-typescript-loader` and `ts-loader`. The configuration for `awesome-typescript-loader` is more complex than `ts-loader`.
 
 ***
 
