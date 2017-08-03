@@ -26,7 +26,8 @@ function checkLinks(args) {
       return (
         !failure.diag ||
         !failure.diag.at ||
-        !failure.diag.at.match(/class="support__[^"]*"/)
+        !failure.diag.at.match(/class="support__[^"]*"/) ||
+        !failure.diag.at.match(/src="https:\/\/img\.shields\.io[^"]*"/)
       );
     });
 
