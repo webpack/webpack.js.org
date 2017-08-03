@@ -91,13 +91,13 @@ Specifies the category of the loader. No value means normal loader.
 
 There is also an additional category "inlined loader" which are loaders applied inline of the import/require.
 
-All loaders are sorted in the order `post, inline, normal, pre` and used in this order.
+All loaders are sorted in the order `pre, normal, inline, post` and used in this order.
 
 All normal loaders can be omitted (overridden) by prefixing `!` in the request.
 
-All normal and pre loaders can be omitted (overridden) by prefixing `-!` in the request.
+All normal and post loaders can be omitted (overridden) by prefixing `-!` in the request.
 
-All normal, post and pre loaders can be omitted (overridden) by prefixing `!!` in the request.
+All normal, pre and post loaders can be omitted (overridden) by prefixing `!!` in the request.
 
 Inline loaders and `!` prefixes should not be used as they are non-standard. They may be use by loader generated code.
 
