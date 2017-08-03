@@ -8,29 +8,40 @@
 
   &__item {
     position: relative;
-    margin: 0 5px 5px 5px;
+    margin: 0 2px 2px 2px;
   }
 
   &__sponsors-avatar {
-    height: 64px;
+    &-bronze, &-normal {
+      height: 32px;
+    }
+    &-silver {
+      height: 64px;
+    }
+    &-gold {
+      height: 96px;
+    }
+    &-platinum {
+      height: 128px;
+    }
   }
 
-  &__backers-avatar {
-    width: 62px;
-    height: 62px;
+  &__backers-avatar-normal {
+    width: 31px;
+    height: 31px;
     border-radius: 50%;
-    border: 2px solid white;
+    border: 1px solid white;
     overflow: hidden;
   }
 
   &__outline {
     position: absolute;
     top: 0;
-    margin: -2px;
-    width: calc(100% + 4px);
-    height: calc(100% - 2px);
+    margin: -1px;
+    width: calc(100% + 2px);
+    height: calc(100% - 4px);
     border-radius: 50%;
-    border: 2px solid rgb(112, 202, 10);
+    border: 1px solid rgb(112, 202, 10);
   }
 
   &__bottom {

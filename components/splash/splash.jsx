@@ -31,11 +31,21 @@ export default props => {
 
           <p>Through contributions, donations, and sponsorship, you allow webpack to thrive. Your donations directly support office hours, continued enhancements, and most importantly, great documentation and learning material!</p>
 
-          <h2>Sponsors</h2>
-          <Support number={ 100 } type="sponsors" />
+          <h2>Platinum Sponsors</h2>
+          <Support type="sponsors" rank="platinum" />
+
+          <h2>Gold Sponsors</h2>
+          <Support type="sponsors" rank="gold" />
+
+          <h2>Silver Sponsors</h2>
+          <Support type="sponsors" rank="silver" />
+
+          <h2>Bronze Sponsors</h2>
+          <Support type="sponsors" rank="bronze" />
 
           <h2>Backers</h2>
-          <Support number={ 130 } type="backers" />
+          <Support type="backers" />
+
         </Container>
       </div>
     </div>
