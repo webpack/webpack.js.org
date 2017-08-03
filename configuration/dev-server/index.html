@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/c3d0753b3eaa8a780f89.css" rel="stylesheet">
+      <link href="/aa85f6c6b0aa29e6b74d.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -310,6 +310,12 @@ filename<span class="token punctuation">:</span> <span class="token string">&quo
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
+</code></pre>
+<p>If you want to proxy multiple, specific paths to the same target, you can use an array of one or more objects with a <code>context</code> property:</p>
+<pre><code class="lang-js">proxy<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+  context<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;/auth&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;/api&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  target<span class="token punctuation">:</span> <span class="token string">&quot;http://localhost:3000&quot;</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">]</span>
 </code></pre>
 <h2 class="header"><a class="anchor" href="#devserver-progress-cli-only" id="devserver-progress-cli-only"></a><span class="text"><code>devServer.progress</code> - CLI only</span><a class="icon-link" href="#devserver-progress-cli-only"></a></h2>
 <p><code>boolean</code></p>
