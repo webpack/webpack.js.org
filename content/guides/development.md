@@ -272,14 +272,13 @@ __webpack.config.js__
     ],
     output: {
       filename: '[name].bundle.js',
--     path: path.resolve(__dirname, 'dist')
-+     path: '/',
-+     publicPath: 'http://localhost:3000/app'
+      path: path.resolve(__dirname, 'dist'),
++     publicPath: 'http://localhost/'
     }
   };
 ```
 
-This will tell the middleware to serve our files on `http://localhost:3000/app`, but before we can actually see the files, we need to setup `express` and make sure it's running.
+This will tell the middleware to serve our files on `http://localhost:3000` (the port number we'll specify later), but before we can actually see the files, we need to setup `express` and make sure it's running.
 
 __project__
 
@@ -312,6 +311,7 @@ app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath
 }));
 
+// Serve the files on port 3000.
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });
@@ -378,7 +378,7 @@ Child html-webpack-plugin for "index.html":
 webpack: Compiled successfully.
 ```
 
-Now fire up your browser and go to `http://localhost:3000/app`, you should see your webpack app running and functioning!
+Now fire up your browser and go to `http://localhost:3000`, you should see your webpack app running and functioning!
 
 T> If you took the route of using `webpack-dev-middleware` instead of `webpack-dev-server`, please use the [`webpack-hot-middleware`](https://github.com/glenjamin/webpack-hot-middleware) package to enable HMR on your custom server or application.
 
