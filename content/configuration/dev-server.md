@@ -579,6 +579,14 @@ proxy: {
 }
 ```
 
+If you want to proxy multiple, specific paths to the same target, you can use an array of one or more objects with a `context` property:
+
+```js
+proxy: [{
+  context: ["/auth", "/api"],
+  target: "http://localhost:3000",
+}]
+```
 
 ## `devServer.progress` - CLI only
 
