@@ -5,6 +5,7 @@ contributors:
   - skipjack
   - michael-ciniawsky
   - TheDutchCoder
+  - sudarsangp
 ---
 
 If you've been following the guides from the start, you will now have a small project that shows "Hello webpack". Now let's try to incorporate some other assets, like images, to see how they can be handled.
@@ -43,7 +44,7 @@ npm install --save-dev style-loader css-loader
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
 
   module.exports = {
     entry: './src/index.js',
@@ -150,7 +151,7 @@ npm install --save-dev file-loader
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
 
   module.exports = {
     entry: './src/index.js',
@@ -268,7 +269,7 @@ So what about other assets like fonts? The file and url loaders will take any fi
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
 
   module.exports = {
     entry: './src/index.js',
@@ -382,7 +383,7 @@ npm install --save-dev csv-loader xml-loader
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
 
   module.exports = {
     entry: './src/index.js',
@@ -542,7 +543,7 @@ __project__
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
 
   module.exports = {
     entry: './src/index.js',

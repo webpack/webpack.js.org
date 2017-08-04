@@ -74,6 +74,27 @@ allowedHosts: [
 ]
 ```
 
+To use this option with the CLI pass the `--allowed-hosts` option a comma-delimited string.
+
+```bash
+webpack-dev-server --entry /entry/file --output-path /output/path --allowed-hosts .host.com,host2.com
+```
+
+
+## `devServer.bonjour`
+
+This option broadcasts the server via ZeroConf networking on start
+
+```js
+bonjour: true
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --bonjour
+```
+
 
 ## `devServer.clientLogLevel`
 
@@ -87,9 +108,26 @@ You can prevent all these messages from showing, by using this option:
 clientLogLevel: "none"
 ```
 
+Usage via the CLI
+
+```bash
+webpack-dev-server --client-log-level none
+```
+
 Possible values are `none`, `error`, `warning` or `info` (default).
 
 Note that the console will *always* show bundle errors and warnings. This option only effects the message before it.
+
+
+## `devServer.color` - CLI only
+
+`boolean`
+
+Enables/Disables colors on the console.
+
+```bash
+webpack-dev-server --color
+```
 
 
 ## `devServer.compress`
@@ -100,6 +138,12 @@ Enable [gzip compression](https://betterexplained.com/articles/how-to-optimize-y
 
 ```js
 compress: true
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --compress
 ```
 
 
@@ -127,6 +171,29 @@ To disable `contentBase`:
 
 ```js
 contentBase: false
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --content-base /path/to/content/dir
+```
+
+
+## `devServer.disableHostCheck`
+
+`boolean`
+
+When set to true this option bypasses host checking. THIS IS NOT RECOMMENDED as apps that do not check the host are vulnerable to DNS rebinding attacks.
+
+```js
+disableHostCheck: true
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --disable-host-check
 ```
 
 
@@ -192,10 +259,16 @@ historyApiFallback: {
 }
 ```
 
+Usage via the CLI
+
+```bash
+webpack-dev-server --history-api-fallback
+```
+
 For more options and information, see the [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) documentation.
 
 
-## `devServer.host` - CLI only
+## `devServer.host`
 
 `string`
 
@@ -203,6 +276,12 @@ Specify a host to use. By default this is `localhost`. If you want your server t
 
 ```js
 host: "0.0.0.0"
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --host 0.0.0.0
 ```
 
 
@@ -219,7 +298,7 @@ hot: true
 T> Note that you must also include a `new webpack.HotModuleReplacementPlugin()` to fully enable HMR. See the [HMR concepts page](/concepts/hot-module-replacement) for more information.
 
 
-## `devServer.hotOnly` - CLI only
+## `devServer.hotOnly`
 
 `boolean`
 
@@ -227,6 +306,12 @@ Enables Hot Module Replacement (see [`devServer.hot`](#devserver-hot)) without p
 
 ```js
 hotOnly: true
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --hot-only
 ```
 
 
@@ -252,8 +337,31 @@ https: {
 
 This object is passed straight to Node.js HTTPS module, so see the [HTTPS documentation](https://nodejs.org/api/https.html) for more information.
 
+Usage via the CLI
 
-## `devServer.inline` - CLI only
+```bash
+webpack-dev-server --https
+```
+
+To pass your own certificate via the CLI use the following options
+
+```bash
+webpack-dev-server --https --key /path/to/server.key --cert /path/to/server.crt --cacert /path/to/ca.pem
+```
+
+
+## `devServer.info` - CLI only
+
+`boolean`
+
+Output cli information. It is enabled by default.
+
+```bash
+webpack-dev-server --info=false
+```
+
+
+## `devServer.inline`
 
 `boolean`
 
@@ -263,6 +371,12 @@ It is also possible to use **iframe mode**, which uses an `<iframe>` under a not
 
 ```js
 inline: false
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --inline=false
 ```
 
 T> Inline mode is recommended when using Hot Module Replacement.
@@ -276,6 +390,12 @@ When `lazy` is enabled, the dev-server will only compile the bundle when it gets
 
 ```js
 lazy: true
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --lazy
 ```
 
 T> `watchOptions` will have no effect when used with **lazy mode**.
@@ -292,6 +412,41 @@ With `noInfo` enabled, messages like the webpack bundle information that is show
 ```js
 noInfo: true
 ```
+
+
+## `devServer.open`
+
+`boolean`
+
+When `open` is enabled, the dev server will open the browser.
+
+```js
+open: true
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --open
+```
+
+
+## `devServer.openPage`
+
+`string`
+
+Specify a page to navigate to when opening the browser.
+
+```js
+openPage: '/different/page'
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --open-page "/different/page"
+```
+
 
 ## `devServer.overlay`
 
@@ -312,7 +467,42 @@ overlay: {
 }
 ```
 
-## `devServer.port` - CLI only
+
+## `devServer.pfx`
+
+`string`
+
+Path to a SSL pfx file.
+
+```js
+pfx: '/path/to/file.pfx'
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --pfx /path/to/file.pfx
+```
+
+
+## `devServer.pfxPassphrase`
+
+`string`
+
+The passphrase to a SSL PFX file.
+
+```js
+pfxPassphrase: 'passphrase'
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --pfx-passphrase passphrase
+```
+
+
+## `devServer.port`
 
 `number`
 
@@ -320,6 +510,12 @@ Specify a port number to listen for requests on:
 
 ```js
 port: 8080
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --port 8080
 ```
 
 
@@ -383,6 +579,14 @@ proxy: {
 }
 ```
 
+If you want to proxy multiple, specific paths to the same target, you can use an array of one or more objects with a `context` property:
+
+```js
+proxy: [{
+  context: ["/auth", "/api"],
+  target: "http://localhost:3000",
+}]
+```
 
 ## `devServer.progress` - CLI only
 
@@ -390,8 +594,12 @@ proxy: {
 
 Output running progress to console.
 
+```bash
+webpack-dev-server --progress
+```
 
-## `devServer.public` - CLI only
+
+## `devServer.public`
 
 `string`
 
@@ -401,6 +609,12 @@ For example, the dev-server is proxied by nginx, and available on `myapp.test`:
 
 ```js
 public: "myapp.test:80"
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --public myapp.test:80
 ```
 
 
@@ -443,6 +657,13 @@ With `quiet` enabled, nothing except the initial startup information will be wri
 quiet: true
 ```
 
+Usage via the CLI
+
+```bash
+webpack-dev-server --quiet
+```
+
+
 ## `devServer.setup`
 
 `function`
@@ -456,6 +677,23 @@ setup(app){
     res.json({ custom: 'response' });
   });
 }
+```
+
+
+## `devServer.socket`
+
+`string`
+
+The Unix socket to listen to (instead of a host).
+
+```js
+socket: 'socket'
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --socket socket
 ```
 
 
@@ -489,6 +727,34 @@ For more information, see the [**stats documentation**](/configuration/stats).
 T> This option has no effect when used with `quiet` or `noInfo`.
 
 
+## `devServer.stdin` - CLI only
+
+`boolean`
+
+This option closes the server when stdin ends.
+
+```bash
+webpack-dev-server --stdin
+```
+
+
+## `devServer.useLocalIp`
+
+`boolean`
+
+This option lets the browser open with your local IP.
+
+```js
+useLocalIp: true
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --useLocalIp
+```
+
+
 ## `devServer.watchContentBase`
 
 `boolean`
@@ -500,6 +766,12 @@ watchContentBase: true
 ```
 
 It is disabled by default.
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --watch-content-base
+```
 
 
 ## `devServer.watchOptions` 🔑

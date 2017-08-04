@@ -11,7 +11,7 @@ In the simple case, when only a single loader is applied to the resource, the lo
 
 The loader can access the [loader API](/api/loaders/) on the `this` context in the function.
 
-A sync loader that only wants to give a one value can simply `return` it. In every other case the loader can give back any number of values with the `this.callback(err, values...)` function. Errors are passed to the `this.callback` function or thrown in a sync loader.
+A sync loader that only wants to give one value can simply `return` it. In every other case the loader can give back any number of values with the `this.callback(err, values...)` function. Errors are passed to the `this.callback` function or thrown in a sync loader.
 
 The loader is expected to give back one or two values. The first value is a resulting JavaScript code as string or buffer. The second optional value is a SourceMap as JavaScript object.
 
