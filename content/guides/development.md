@@ -240,7 +240,7 @@ T> Now that your server is working, you might want to give [Hot Module Replaceme
 
 ### Using webpack-dev-middleware
 
-`webpack-dev-middleware` is a wrapper that will emit files processed by webpack to a server. It's actually used in the `webpack-dev-server` itself, but if you want to use it with a different configuration (e.g. with `express`), you can use the middleqware.
+`webpack-dev-middleware` is a wrapper that will emit files processed by webpack to a server. This is used in `webpack-dev-server` internally, however it's available as a separate package to allow more custom setups if desired. We'll take a look at an example that combines webpack-dev-middleware with an express server.
 
 Let's install `express` and `webpack-dev-middleware` so we can get started:
 
@@ -253,8 +253,8 @@ Now we need to make some adjustments to our webpack configuration file in order 
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
-  const htmlWebpackPlugin = require('html-webpack-plugin');
+  const path = require('path');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
   const CleanWebpackPlugin = require('clean-webpack-plugin');
 
   module.exports = {
@@ -265,7 +265,7 @@ __webpack.config.js__
     devtool: 'inline-source-map',
     plugins: [
       new CleanWebpackPlugin(['dist']),
-      new htmlWebpackPlugin({
+      new HtmlWebpackPlugin({
         title: 'Output Management'
       }),
       new webpack.HotModuleReplacementPlugin()
@@ -287,15 +287,15 @@ __project__
   webpack-demo
   |- package.json
   |- webpack.config.js
++ |- server.js
   |- /dist
   |- /src
     |- index.js
     |- print.js
-+   |- server.js
   |- /node_modules
 ```
 
-__src/server.js__
+__server.js__
 
 ``` js
 const express = require('express');
@@ -331,8 +331,8 @@ __package.json__
       "test": "echo \"Error: no test specified\" && exit 1",
       "watch": "webpack --progress --watch",
       "start": "webpack-dev-server --open",
-+     "server": "node src/server.js",
-      "build": "webpack"
++     "server": "node server.js",
+      "build": "webpack"
     },
     "keywords": [],
     "author": "",
@@ -380,161 +380,9 @@ webpack: Compiled successfully.
 
 Now fire up your browser and go to `http://localhost:3000/app`, you should see your webpack app running and functioning!
 
+T> If you took the route of using `webpack-dev-middleware` instead of `webpack-dev-server`, please use the [`webpack-hot-middleware`](https://github.com/glenjamin/webpack-hot-middleware) package to enable HMR on your custom server or application.
 
-#### Adding Hot Module Replacement
-
-Running the `webpack-dev-middleware` is great, but it would be even better if we could use Hot Module Replacement (HMR) with it as well, so we don't have to refresh our browser.
-
-Luckily we can add that in without too much effort, so let's install `webpack-hot-middleware` to perform that task for us:
-
-``` bash
-npm install --save-dev webpack-hot-middleware
-```
-
-Now we need to tell out express app to use the HMR middleware:
-
-__src/server.js__
-
-``` diff
-  const express = require('express');
-  const webpack = require('webpack');
-  const webpackDevMiddleware = require('webpack-dev-middleware');
-+ const webpackHotMiddleware = require('webpack-hot-middleware');
-
-  const app = express();
-  const config = require('../webpack.config.js');
-  const compiler = webpack(config);
-
-  // Tell express to use the webpack-dev-middleware and use the webpack.config.js
-  // configuration file as a base.
-  app.use(webpackDevMiddleware(compiler, {
-    publicPath: config.output.publicPath,
-    stats: { colors: true }
-  }));
-
-+ // Tell express to use the webpack-hot-middleware.
-+ app.use(webpackHotMiddleware(compiler, {
-+     log: console.log
-+ }));
-+
-  app.listen(3000, function () {
-    console.log('Example app listening on port 3000!');
-  });
-```
-
-We also need to adjust the `webpack.config.js` file a little:
-
-__webpack.config.js__
-
-``` diff
-  var path = require('path');
-+ var webpack = require('webpack');
-  const htmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
-
-  module.exports = {
--   entry: {
--     app: './src/index.js',
--     print: './src/print.js'
--   },
-+   entry: [
-+     'webpack/hot/dev-server',
-+     'webpack-hot-middleware/client',
-+     './src/index.js'
-+   ],
-    devtool: 'inline-source-map',
-    plugins: [
-      new CleanWebpackPlugin(['dist']),
-      new htmlWebpackPlugin({
-        title: 'Output Management'
-      }),
-+     new webpack.HotModuleReplacementPlugin()
-    ],
-    output: {
--     filename: '[name].bundle.js',
-+     filename: 'bundle.js',
-      path: '/',
-      publicPath: 'http://localhost:3000/app'
-    }
-  };
-```
-
-As you can see, our entry points have changed a bit and we're instructing webpack to use the hot middleware as an entry point as well.
-
-Now start the server again (or restart it if it was still running) and open your browser and the developer console, you should see messages like these:
-
-``` bash
-[HMR] Waiting for update signal from WDS...
-[HMR] connected
-```
-
-Great, this means HMR is working and listening for changes, so let's change one of our files to see if it works:
-
-__src/index.js__
-
-``` diff
-  import _ from 'lodash';
-  import printMe from './print.js';
-
-  function component() {
-    var element = document.createElement('div');
-    var btn = document.createElement('button');
-
--   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-+   element.innerHTML = _.join(['Hello', 'webpackers'], ' ');
-
-    btn.innerHTML = 'Click me and check the console!';
-    btn.onclick = printMe;
-
-    element.appendChild(btn);
-
-    return element;
-  }
-
-  document.body.appendChild(component());
-```
-
-In your console, you should see that webpack has been triggered and changed some of our files, so that works. Now look at your browser's developer console.
-
-Uh-oh! It looks like there's a warning, something like this:
-
-``` bash
-[HMR] The following modules couldn't be hot updated: (Full reload needed)
-```
-
-This means that even though HMR is working, it can't update this file automatically. Luckily we can fix that by instructing our `server.js` file to update on a hot reload:
-
-``` diff
-  const express = require('express');
-  const webpack = require('webpack');
-  const webpackDevMiddleware = require('webpack-dev-middleware');
-  const webpackHotMiddleware = require('webpack-hot-middleware');
-
-  const app = express();
-  const config = require('../webpack.config.js');
-  const compiler = webpack(config);
-
-  // Tell express to use the webpack-dev-middleware and use the webpack.config.js
-  // configuration file as a base.
-  app.use(webpackDevMiddleware(compiler, {
-    publicPath: config.output.publicPath,
-    stats: { colors: true }
-  }));
-
-  app.use(webpackHotMiddleware(compiler, {
-      log: console.log
-  }));
-
-  app.listen(3000, function () {
-    console.log('Example app listening on port 3000!');
-  });
-
-+ if (module.hot) {
-+   module.hot.accept();
-+ }
-```
-
-This will tell HMR to reload the server whenever an incoming change is detected. You can also use this pattern inside individual modules. If you like to know more about how this works, we recommend you read the [Hot Module Replacement](/guides/hot-module-replacement/) guide.
+T> If you like to know more about how Hot Module Replacement works, we recommend you read the [Hot Module Replacement](/guides/hot-module-replacement/) guide.
 
 
 ## Adjusting Your Text Editor
