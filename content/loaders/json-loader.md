@@ -9,45 +9,34 @@ edit: https://github.com/webpack-contrib/json-loader/edit/master/README.md
 npm install --save-dev json-loader
 ```
 
-⚠️ **注意：由于 webpack v2 默认支持导入 JSON 文件。如果您使用自定义文件扩展名，您可能仍然需要使用此 loader。**
+> ⚠️ **注意：由于 `webpack >= v2.0.0` 默认支持导入 JSON 文件。如果您使用自定义文件扩展名，您可能仍然需要使用此 loader。See the [v1.0.0 -> v2.0.0 Migration Guide](https://webpack.js.org/guides/migrating/#json-loader-is-not-required-anymore) for more information**
 
 ## 用法
 
+### `Inline`
 
-### 通过配置（推荐）
+```js
+const json = require('json-loader!./file.json');
+```
+
+### `通过配置`（推荐）
+
+```js
+const json = require('./file.json');
+```
 
 **webpack.config.js**
 ```js
 module.exports = {
   module: {
-    rules: [
+    loaders: [
       {
         test: /\.json$/,
-        use: 'json-loader'
+        loader: 'json-loader'
       }
     ]
   }
 }
-```
-
-```js
-import json from 'file.json';
-```
-
-### 通过命令行（CLI）
-
-```bash
-webpack --module-bind 'json=json-loader'
-```
-
-```js
-import json from 'file.json';
-```
-
-### 内联使用
-
-```js
-import json from 'json-loader!file.json';
 ```
 
 ## 维护人员
@@ -60,33 +49,10 @@ import json from 'json-loader!file.json';
         </br>
         <a href="https://github.com/sokra">Tobias Koppers</a>
       </td>
-      <td align="center">
-        <img width="150" height="150"
-        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
-        </br>
-        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
-      </td>
-      <td align="center">
-        <img width="150" height="150"
-        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
-        </br>
-        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
-      </td>
-      <td align="center">
-        <img width="150" height="150"
-        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
-        </br>
-        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
-      </td>
-      <td align="center">
-        <img width="150" height="150"
-        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
-        </br>
-        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
-      </td>
     </tr>
-  <tbody>
+  </tbody>
 </table>
+
 
 [npm]: https://img.shields.io/npm/v/json-loader.svg
 [npm-url]: https://npmjs.com/package/json-loader
@@ -96,6 +62,12 @@ import json from 'json-loader!file.json';
 
 [deps]: https://david-dm.org/webpack/json-loader.svg
 [deps-url]: https://david-dm.org/webpack/json-loader
+
+[tests]: http://img.shields.io/travis/webpack/json-loader.svg
+[tests-url]: https://travis-ci.org/webpack/json-loader
+
+[cover]: https://coveralls.io/repos/github/webpack/json-loader/badge.svg
+[cover-url]: https://coveralls.io/github/webpack/json-loader
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
