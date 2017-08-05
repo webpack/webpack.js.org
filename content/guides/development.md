@@ -213,7 +213,7 @@ __package.json__
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "watch": "webpack --progress --watch",
-+     "start": "webpack-dev-server --open"
++     "start": "webpack-dev-server --open",
       "build": "webpack"
     },
     "keywords": [],
