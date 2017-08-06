@@ -96,7 +96,7 @@ contributors:
   - SpaceK33z
 ---
 
-Some documenation...
+Some documentation...
 ```
 
 This will add your name and GitHub profile photo to the document in production. It's a
@@ -105,7 +105,7 @@ great way to own the awesome work that you do and we encourage you to do this in
 
 ## Thank You
 
-webpack is insanely feature rich and documentation is a huge time sink. We greatly appreciate
+webpack is a feature rich, low level tool and documentation is a huge time sink. We appreciate
 any time spent fixing typos or clarifying sections in the documentation.
 
 
