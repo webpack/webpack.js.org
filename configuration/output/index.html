@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/d4bf71bdc17ed6843047.css" rel="stylesheet">
+      <link href="/48c24d20764bb7423a74.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -295,34 +295,6 @@
 	        Template
 	    </div>
 	    <div class="table-td-content">
-	        [file]
-	    </div>
-	  </div><div class="table-td">
-	    <div class="table-td-title">
-	        Description
-	    </div>
-	    <div class="table-td-content">
-	        The module filename
-	    </div>
-	  </div></div><div class="table-tr"><div class="table-td">
-	    <div class="table-td-title">
-	        Template
-	    </div>
-	    <div class="table-td-content">
-	        [filebase]
-	    </div>
-	  </div><div class="table-td">
-	    <div class="table-td-title">
-	        Description
-	    </div>
-	    <div class="table-td-content">
-	        The module <a href="https://nodejs.org/api/path.html#path_path_basename_path_ext">basename</a>
-	    </div>
-	  </div></div><div class="table-tr"><div class="table-td">
-	    <div class="table-td-title">
-	        Template
-	    </div>
-	    <div class="table-td-content">
 	        [query]
 	    </div>
 	  </div><div class="table-td">
@@ -561,8 +533,46 @@ publicPath<span class="token punctuation">:</span> <span class="token string">&q
 <p><code>string</code></p>
 <p>This option is only used when <a href="/configuration/devtool"><code>devtool</code></a> uses a SourceMap option which writes an output file.</p>
 <p>Configure how source maps are named. By default <code>&quot;[file].map&quot;</code> is used.</p>
-<p>Technically, the <code>[name]</code>, <code>[id]</code>, <code>[hash]</code> and <code>[chunkhash]</code> <a href="#output-filename">placeholders</a> can be used, if generating a SourceMap for chunks. In addition to that, the <code>[file]</code> placeholder is replaced with the filename of the original file. It&apos;s recommended to only use the <code>[file]</code> placeholder, as the other placeholders won&apos;t work when generating SourceMaps for non-chunk files. Best leave the default.</p>
-<h2 class="header"><a class="anchor" href="#output-sourceprefix" id="output-sourceprefix"></a><span class="text"><code>output.sourcePrefix</code></span><a class="icon-link" href="#output-sourceprefix"></a></h2>
+<p>The <code>[name]</code>, <code>[id]</code>, <code>[hash]</code> and <code>[chunkhash]</code> substitions from <a href="#output-filename">#output-filename</a> can be used. In addition to those, you can use substitutions listed below. The <code>[file]</code> placeholder is replaced with the filename of the original file. We recommend <strong>only using the <code>[file]</code> placeholder</strong>, as the other placeholders won&apos;t work when generating SourceMaps for non-chunk files.</p>
+
+	    <div class="table">
+	        <div class="table-wrap">
+	          <div class="table-header">
+	              <div class="table-tr"><div class="table-th">Template</div><div class="table-th">Description</div></div>
+	          </div>
+	          <div class="table-body">
+	              <div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [file]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The module filename
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Template
+	    </div>
+	    <div class="table-td-content">
+	        [filebase]
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Description
+	    </div>
+	    <div class="table-td-content">
+	        The module <a href="https://nodejs.org/api/path.html#path_path_basename_path_ext">basename</a>
+	    </div>
+	  </div></div>
+	          </div>
+	        </div>
+	    </div><h2 class="header"><a class="anchor" href="#output-sourceprefix" id="output-sourceprefix"></a><span class="text"><code>output.sourcePrefix</code></span><a class="icon-link" href="#output-sourceprefix"></a></h2>
 <p><code>string</code></p>
 <p>Change the prefix for each line in the output bundles.</p>
 <pre><code class="lang-js">sourcePrefix<span class="token punctuation">:</span> <span class="token string">&quot;\t&quot;</span>
