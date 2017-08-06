@@ -52,7 +52,7 @@ module.exports = function(source, map) {
 * apply-loader：采取一个导出模块函数并且通过应用查询参数来返回原结果。
 * html-loader：采取HTML并且通过导出字符串来导出模块。
 
-### 产生标准化模块
+### 生成标准模块
 
 Loader生成的模块应遵循与常规模块相同的设计原则。
 
