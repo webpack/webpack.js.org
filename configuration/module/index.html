@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/8b392ef05866c9bece3e.css" rel="stylesheet">
+      <link href="/03c85df17974de2b23a0.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -99,7 +99,12 @@ noParse<span class="token punctuation">:</span> <span class="token keyword">func
 <p><code>Rule.options</code> and <code>Rule.query</code> are shortcuts to <code>Rule.use: [ { options } ]</code>. See <a href="#rule-use"><code>Rule.use</code></a> and <a href="#useentry"><code>UseEntry.options</code></a> for details.</p>
 <blockquote class="warning"><div class="tip-content"> <code>Rule.query</code> is deprecated in favor of <code>Rule.options</code> and <code>UseEntry.options</code>. </div></blockquote><h2 class="header"><a class="anchor" href="#rule-parser" id="rule-parser"></a><span class="text"><code>Rule.parser</code></span><a class="icon-link" href="#rule-parser"></a></h2>
 <p>An object with parser options. All applied parser options are merged.</p>
-<p>For each different parser options object a new parser is created and plugins can apply plugins depending on the parser options. Many of the default plugins apply their parser plugins only if a property in the parser options is not set or true.</p>
+<p>Parsers may inspect these options and disable or reconfigure themselves accordingly. Most of the default plugins interpret the values as follows:</p>
+<ul>
+<li>Setting the option to <code>false</code> disables the parser.</li>
+<li>Setting the option to <code>true</code> or leaving it <code>undefined</code> enables the parser.</li>
+</ul>
+<p>However, parser plugins may accept more than just a boolean. For example, the internal <code>NodeStuffPlugin</code> can accept an object instead of <code>true</code> to add additional options for a particular Rule.</p>
 <p><strong>Examples</strong> (parser options by the default plugins):</p>
 <pre><code class="lang-js">parser<span class="token punctuation">:</span> <span class="token punctuation">{</span>
   amd<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// disable AMD</span>
