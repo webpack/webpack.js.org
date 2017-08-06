@@ -3,7 +3,7 @@ title: 如何编写一个 loader？(How to write a loader?)
 sort: 3
 ---
 
-loader 是导出 `function` 的节点模块。
+loader 是导出为 `function` 的 node 模块。
 
 当资源应该由此 loader 转换时，调用此函数。
 
@@ -15,7 +15,7 @@ loader 是导出 `function` 的节点模块。
 
 这个 loader 的 callback 应该回传一个或者两个值。第一个值的结果是 string 或 buffer 类型的 JavaScript 代码。第二个可选的值是 JavaScript 对象的 SourceMap。
 
-在复杂的情况下，当多个 loaders 被串联调用时，只有最后一个 loader 能够获取资源文件并且只有第一个 loader 预期返回一个或者两个值（JavaScript和SourceMap）。其它任何 loader 返回的值会传到之前的 loader 中。
+在复杂的情况下，当多个 loaders 被串联调用时，只有最后一个 loader 能够获取资源文件并且只有第一个 loader 预期返回一个或者两个值（JavaScript 和 SourceMap）。其它任何 loader 返回的值会传到之前的 loader 中。
 
 ## 例子
 
@@ -27,7 +27,7 @@ module.exports = function(source) {
 ```
 
 ``` javascript
-// 支持 SourceMap的loader
+// 支持 SourceMap 的 loader
 module.exports = function(source, map) {
   this.callback(null, source, map);
 };
@@ -37,8 +37,8 @@ module.exports = function(source, map) {
 
 （按照优先级排序，第一个具有最高的优先级）
 
-* Loaders 应该只做一个任务
-* Loaders 能够被串联调用。为每一步创建 loaders，而不是在一个 loader 中做所有事情。
+* loaders 应该只做一个任务
+* loaders 能够被串联调用。为每一步创建 loaders，而不是在一个 loader 中做所有事情。
 
 这也意味着不必须的话它们不应该转换成 JavaScript。
 
@@ -50,11 +50,11 @@ module.exports = function(source, map) {
 
 * jade-loader：将模板转化为模块，这个模块导出一个函数。
 * apply-loader：采取一个导出模块函数并且通过应用查询参数来返回原结果。
-* html-loader：采取HTML并且通过导出字符串来导出模块。
+* html-loader：采取 HTML 并且通过导出字符串来导出模块。
 
 ### 生成标准模块
 
-Loader生成的模块应遵循与常规模块相同的设计原则。
+Loader 生成的模块应遵循与常规模块相同的设计原则。
 
 例子：这是一个不好的设计：（非标准化的，全局状态，...）
 
@@ -66,7 +66,7 @@ var html = anyTemplateLanguage.render("xyz");
 
 ### 不要在运行和模块间保存状态
 
-loader 应该和其它编译后的模块相互独立。（除非这个loader 自身能够处理这些问题）
+loader 应该和其它编译后的模块相互独立。（除非这个 loader 自身能够处理这些问题）
 
 loader 应该和相同模块的之前汇编相互独立。
 
@@ -104,7 +104,7 @@ module.exports = function(source) {
 
 ### 解析依赖关系
 
-在很多语言中存在某些机制来规定依赖，比如在css里面使用 `@import`以及`url(...)`。这些依赖可以通过模块系统来解析。
+在很多语言中存在某些机制来规定依赖，比如在 css 里面使用 `@import` 以及 `url(...)`。这些依赖可以通过模块系统来解析。
 
 存在两个选项：
 
@@ -113,9 +113,9 @@ module.exports = function(source) {
 
 示例1 `css-loader`：`css-loader` 将 `@import` 替换为 `require`（也是通过 `css-loader` 来处理）, `url(...)` 替换为 `@import`，这样就把所有的依赖转化为了 `require` 的形式。
 
-示例2 `less-loader`：`less-loader` 不能够将`@import` 转换成 `require`，因为所有的 less 文件需要一起编译来跟踪变量和 mixins。因此 `less-loader` 通过一个定制的路径解析逻辑来拓展 less 编译器。这个定制的逻辑使用 `this.resolve` 通过模块系统的配置（别名使用，自定义模块目录，等等）来解析文件。
+示例2 `less-loader`：`less-loader` 不能够将 `@import` 转换成 `require`，因为所有的 less 文件需要一起编译来跟踪变量和 mixins。因此 `less-loader` 通过一个定制的路径解析逻辑来拓展 less 编译器。这个定制的逻辑使用 `this.resolve` 通过模块系统的配置（别名使用，自定义模块目录，等等）来解析文件。
 
-如果语言只支持相对路径（比如在 css 中：`url(file)` 总是表示 `./file`），利用`~`约定来规定模块的引用。
+如果语言只支持相对路径（比如在 css 中：`url(file)` 总是表示 `./file`），利用 `~` 约定来规定模块的引用。
 
 ``` text
 url(file) -> require("./file")
