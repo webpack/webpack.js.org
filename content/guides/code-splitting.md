@@ -20,6 +20,7 @@ contributors:
   - TheDutchCoder
   - rouzbeh84
   - shaodahong
+  - sudarsangp
 ---
 
 T> This guide extends the examples provided in [Getting Started](/guides/getting-started) and [Managing Built Files](/guides/output-management). Please make sure you are at least familiar with the examples provided in them.
@@ -203,7 +204,7 @@ __webpack.config.js__
   };
 ```
 
-We'll also update our project to remove the now unused files:
+Note the use of `chunkFilename`, which determines the name of non-entry chunk files. For more information on `chunkFilename`, see [output documentation](/configuration/output/#output-chunkfilename). We'll also update our project to remove the now unused files:
 
 __project__
 
