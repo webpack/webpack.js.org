@@ -5,9 +5,12 @@ contributors:
   - sokra
   - skipjack
   - oneforwonder
+  - Rob--W
 ---
 
-这些选项可以配置是否 polyfill 或 mock 某些 [Node.js 全局变量](https://nodejs.org/docs/latest/api/globals.html)和模块。这可以使最初为 Node.js 环境编写的代码，在其他环境（如浏览器）中运行。此功能由 webpack 内部的 [`NodeStuffPlugin`](https://github.com/webpack/webpack/blob/master/lib/NodeStuffPlugin.js) 提供。
+这些选项可以配置是否 polyfill 或 mock 某些 [Node.js 全局变量](https://nodejs.org/docs/latest/api/globals.html)和模块。这可以使最初为 Node.js 环境编写的代码，在其他环境（如浏览器）中运行。
+
+此功能由 webpack 内部的 [`NodeStuffPlugin`](https://github.com/webpack/webpack/blob/master/lib/NodeStuffPlugin.js) 插件提供。如果 target 是 "web"（默认）或 "webworker"，那么 [`NodeSourcePlugin`](https://github.com/webpack/webpack/blob/master/lib/node/NodeSourcePlugin.js) 插件也会被激活。
 
 
 ## `node`
@@ -19,7 +22,7 @@ contributors:
 - `true`：提供 polyfill。
 - `"mock"`：提供 mock 实现预期接口，但功能很少或没有。
 - `"empty"`：提供空对象。
-- `false`：什么都不提供。代码中预期的此对象，可能会因为未定义而导致崩溃。
+- `false`: 什么都不提供。预期获取此对象的代码，可能会因为获取不到此对象，触发 `ReferenceError` 而崩溃。尝试使用 `require('modulename')` 导入模块的代码，可能会触发 `Cannot find module "modulename"` 错误。
 
 W> 注意，不是每个 Node 全局变量都支持所有选项。对于不支持的键值组合(property-value combination)，compiler 会抛出错误。更多细节请查看接下来的章节。
 
@@ -34,10 +37,12 @@ node: {
   __dirname: "mock",
   Buffer: true,
   setImmediate: true
+
+  // 更多选项，请查看“其他 Node.js 核心库”
 }
 ```
 
-从 webpack 3.0.0 开始，`node` 选项可能会被设置为 `false` 以完全关闭 `NodeSourcePlugin`。
+从 webpack 3.0.0 开始，`node` 选项可能被设置为 `false`，以完全关闭 `NodeSourcePlugin` 和 `NodeSourcePlugin` 插件。
 
 
 ## `node.console`
@@ -109,9 +114,13 @@ node: {
 
 `boolean | "mock" | "empty"`
 
-还可以配置许多其他 Node.js 核心库。查看 [Node.js 核心库和它们的 polyfill](https://github.com/webpack/node-libs-browser)
+W> 只有当 target 是未指定、"web" 或 "webworker" 这三种情况时，此选项才会被激活（通过 `NodeSourcePlugin`）。
 
-默认情况下，如果有一个明显的 polyfill，webpack 会对每个 library 进行 polyfill，如果没有，则 webpack 不会执行任何操作。
+当 `NodeSourcePlugin` 插件启用时，则会使用 [`node-libs-browser`](https://github.com/webpack/node-libs-browser) 来对 Node.js 核心库 polyfill。请查看 [Node.js 核心库及其 polyfills](https://github.com/webpack/node-libs-browser#readme) 列表。
+
+默认情况下，如果有一个已知的 polyfill，webpack 会对每个 library 进行 polyfill，如果没有，则 webpack 不会执行任何操作。在后一种情况下，如果模块名称配置为 `false` 值，webpack 表现为不会执行任何操作。
+
+T> 为了导入内置的模块，使用 [`__non_webpack_require__`](/api/module-variables/#__non_webpack_require__-webpack-specific-)，例如，使用 `__non_webpack_require__('modulename')` 而不是 `require('modulename')`。
 
 示例：
 

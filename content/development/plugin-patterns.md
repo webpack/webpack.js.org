@@ -40,13 +40,9 @@ module.exports = MyPlugin;
 ```
 
 - `compilation.modules`: 一个存放编译中涉及的模块（构建时的输入）的数组。每个模块处理了你源码库中的一个原始文件的构建。
-
 - `module.fileDependencies`: 一个存放模块中包含的源文件路径的数组。它包含了 JavaScript 源文件自身（例如：`index.js`），和所有被请求（required）的依赖资源文件（样式表，图像等等）。想要知道哪些源文件属于这个模块时，检查这些依赖是有帮助的。
-
 - `compilation.chunks`: 一个存放编译中涉及的块（构建后的输出）的数组。每个块处理了一个最终输出资源的组合。
-
 - `chunk.modules`: 一个存放块中包含的模块的数组。为了扩展，你也许需要查阅每个模块的依赖来得知哪些源文件注入到了块中。
-
 - `chunk.files`: 一个存放了块生成的输出文件的文件名的数组。你也许需要从 `compilation.assets` 中访问这些资源内容。
 
 ### 监控跟踪图（watch graph）
@@ -74,9 +70,7 @@ MyPlugin.prototype.apply = function(compiler) {
 module.exports = MyPlugin;
 ```
 
-你也可以补充新的文件路径到跟踪图(graph)里，来接收在编译中这些文件变化时的回调触发。简单地 push 有效的文件路径到 `compilation.fileDependencies` 数组就可以把它们加入跟踪。
-
-注意：`fileDependencies` 数组在每次编译中会被重新建立，所以你的插件必须在每次编译时向当时所属的数组 push 来保证它们能被跟踪到。
+你也可以补充新的文件路径到跟踪图(graph)里，来接收在编译中这些文件变化时的回调触发。简单地 push 有效的文件路径到 `compilation.fileDependencies` 数组就可以把它们加入跟踪。注意：`fileDependencies` 数组在每次编译中会被重新建立，所以你的插件必须在每次编译时向当时所属的数组 push 来保证它们能被跟踪到。
 
 ## 变化的块
 
