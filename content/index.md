@@ -6,25 +6,22 @@ title: webpack
 
 <div class="homepage__wrap">
 <div class="homepage__left">
-
-**app.js**
+__app.js__
 
 ```js
 import bar from './bar';
 
 bar();
 ```
-
-</div><div class="homepage__right">
-
-**bar.js**
+</div>
+<div class="homepage__right">
+__bar.js__
 
 ```js
 export default function bar() {
   //
 }
 ```
-
 </div>
 </div>
 
@@ -33,8 +30,7 @@ export default function bar() {
 
 <div class="homepage__wrap">
 <div class="homepage__left">
-
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -44,10 +40,9 @@ module.exports = {
   }
 }
 ```
-
-</div><div class="homepage__right">
-
-**page.html**
+</div>
+<div class="homepage__right">
+__page.html__
 
 ```html
 <html>
@@ -62,7 +57,6 @@ module.exports = {
 ```
 
 Then run `webpack` on the command-line to create `bundle.js`.
-
 </div>
 </div>
 
