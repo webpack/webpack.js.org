@@ -5,6 +5,7 @@ contributors:
   - simon04
   - christopher4lis
   - kevinzwhuang
+  - jdbevan
 ---
 
 `CommonsChunkPlugin` 插件，是一个可选的用于建立一个独立文件(又称作 chunk)的功能，这个文件包括多个入口 `chunk` 的公共模块。通过将公共模块拆出来，最终合成的文件能够在最开始的时候加载一次，便存起来到缓存中供后续使用。这个带来速度上的提升，因为浏览器会迅速将公共的代码从缓存中取出来，而不是每次访问一个新页面时，再去加载一个更大的文件。
@@ -22,11 +23,15 @@ new webpack.optimize.CommonsChunkPlugin(options)
   names: string[],
   // 这是 common chunk 的名称。已经存在的 chunk 可以通过传入一个已存在的 chunk 名称而被选择。
   // 如果一个字符串数组被传入，这相当于插件针对每个 chunk 名被多次调用
-  // 如果该选项被忽略，同时 `options.async` 或者 `options.children` 被设置，所有的 chunk 都会被使用，否则 `options.filename` 会用于作为 chunk 名。
+  // 如果该选项被忽略，同时 `options.async` 或者 `options.children` 被设置，所有的 chunk 都会被使用，
+  // 否则 `options.filename` 会用于作为 chunk 名。
+  // When using `options.async` to create common chunks from other async chunks you must specify an entry-point
+  // chunk name here instead of omitting the `option.name`.
 
   filename: string,
   // common chunk 的文件名模板。可以包含与 `output.filename` 相同的占位符。
-  // 如果被忽略，原本的文件名不会被修改(通常是 `output.filename` 或者 `output.chunkFilename`)
+  // 如果被忽略，原本的文件名不会被修改(通常是 `output.filename` 或者 `output.chunkFilename`)。
+  // This option is not permitted if you're using `options.async` as well, see below for more details.
 
   minChunks: number|Infinity|function(module, count) -> boolean,
   // 在传入  公共chunk(commons chunk) 之前所需要包含的最少数量的 chunks 。
@@ -44,8 +49,9 @@ new webpack.optimize.CommonsChunkPlugin(options)
 
   async: boolean|string,
   // 如果设置为 `true`，一个异步的  公共chunk 会作为 `options.name` 的子模块，和 `options.chunks` 的兄弟模块被创建。
-  // 它会与 `options.chunks` 并行被加载。可以通过提供想要的字符串，
-  // 而不是 `true` 来对输出的文件进行更换名称。
+  // 它会与 `options.chunks` 并行被加载。
+  // Instead of using `option.filename`, it is possible to change the name of the output file by providing
+  // the desired string here instead of `true`.
 
   minSize: number,
   // 在 公共chunk 被创建立之前，所有 公共模块 (common module) 的最少大小。
@@ -138,8 +144,11 @@ new webpack.optimize.CommonsChunkPlugin({
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({
-  // names: ["app", "subPageA"]
- // (选择 chunks，或者忽略该项设置以选择全部 chunks)
+  name: "app",
+  // or
+  names: ["app", "subPageA"]
+  // the name or list of names must match the name or names
+  // of the entry points that create the async chunks
 
   children: true,
   // (选择所有被选 chunks 的子 chunks)
@@ -147,7 +156,7 @@ new webpack.optimize.CommonsChunkPlugin({
   async: true,
   // (创建一个异步 公共chunk)
 
-  // minChunks: 3,
+  minChunks: 3,
   // (在提取之前需要至少三个子 chunk 共享这个模块)
 })
 ```

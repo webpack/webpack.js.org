@@ -35,7 +35,7 @@ T> 本指南扩展了[起步](/guides/getting-started)和[管理构建文件](/g
 
 ## Entry Points
 
-This is by far the easiest, and most intuitive, way to split code. However, it is more manual and has a some pitfalls we will go over. Let's take a look at how we might split another module from the main bundle:
+This is by far the easiest, and most intuitive, way to split code. However, it is more manual and has some pitfalls we will go over. Let's take a look at how we might split another module from the main bundle:
 
 __project__
 

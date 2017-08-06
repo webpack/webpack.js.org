@@ -5,6 +5,7 @@ contributors:
   - SpaceK33z
   - sallar
   - jungomi
+  - ldrick
 ---
 
 `stats` 选项能让你准确地控制显示哪些包的信息。如果你希望得到部分包的信息（而不是一股脑全部输出），而不想使用 `quiet` 或者 `noInfo` 模式的时候，这个选项是一个很好的折衷办法。
@@ -66,8 +67,19 @@ stats: {
   errors: true,
   // 增加错误的详细信息（就像解析日志一样）
   errorDetails: true,
-  // Exclude modules which match one of the given strings or regular expressions
-  exclude: [],
+  // Exclude assets from being displayed in stats
+  // This can be done with a String, a RegExp, a Function getting the assets name
+  // and returning a boolean or an Array of the above.
+  excludeAssets: "filter" | /filter/ | (assetName) => ... return true|false |
+    ["filter"] | [/filter/] | [(assetName) => ... return true|false],
+  // Exclude modules from being displayed in stats
+  // This can be done with a String, a RegExp, a Function getting the modules source
+  // and returning a boolean or an Array of the above.
+  excludeModules: "filter" | /filter/ | (moduleSource) => ... return true|false |
+    ["filter"] | [/filter/] | [(moduleSource) => ... return true|false],
+  // See excludeModules
+  exclude: "filter" | /filter/ | (moduleSource) => ... return true|false |
+    ["filter"] | [/filter/] | [(moduleSource) => ... return true|false],
   // 增加编译的哈希值
   hash: true,
   // Set the maximum number of modules to be shown

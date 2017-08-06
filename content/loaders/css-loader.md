@@ -13,7 +13,7 @@ npm install --save-dev css-loader
 
 `css-loader` 解释(interpret) `@import` 和 `url()` ，会 `import/require()` 后再解析(resolve)它们。
 
-引用资源的合适 loader 是 [file-loader](https://github.com/webpack/file-loader) 和 [url-loader](https://github.com/webpack/url-loader)，您应该在配置中指定（查看[如下设置](https://github.com/michael-ciniawsky/css-loader#assets)）。
+引用资源的合适 loader 是 [file-loader](https://github.com/webpack/file-loader) 和 [url-loader](https://github.com/webpack/url-loader)，您应该在配置中指定（查看[如下设置](https://github.com/webpack-contrib/css-loader#assets)）。
 
 **file.js**
 ```js

@@ -4,6 +4,7 @@ sort: 4
 contributors:
   - skipjack
   - TheDutchCoder
+  - sudarsangp
 ---
 
 T> 本指南继续延伸[`管理资源`](/guides/asset-management)指南中的代码示例。
@@ -160,7 +161,7 @@ Hash: 81f82697c19b5f49aebd
 Version: webpack 2.6.1
 Time: 854ms
            Asset       Size  Chunks                    Chunk Names
-vendor.bundle.js     544 kB       0  [emitted]  [big]  vendor
+ print.bundle.js     544 kB       0  [emitted]  [big]  print
    app.bundle.js    2.81 kB       1  [emitted]         app
       index.html  249 bytes          [emitted]
    [0] ./~/lodash/lodash.js 540 kB {0} [built]

@@ -74,6 +74,27 @@ allowedHosts: [
 ]
 ```
 
+To use this option with the CLI pass the `--allowed-hosts` option a comma-delimited string.
+
+```bash
+webpack-dev-server --entry /entry/file --output-path /output/path --allowed-hosts .host.com,host2.com
+```
+
+
+## `devServer.bonjour`
+
+This option broadcasts the server via ZeroConf networking on start
+
+```js
+bonjour: true
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --bonjour
+```
+
 
 ## `devServer.clientLogLevel`
 
@@ -87,9 +108,26 @@ allowedHosts: [
 clientLogLevel: "none"
 ```
 
+Usage via the CLI
+
+```bash
+webpack-dev-server --client-log-level none
+```
+
 可能的值有 `none`, `error`, `warning` 或者 `info`（默认值）。
 
 注意，控制台将*始终*显示 bundle 的错误和警告。这个选项只影响它之前的消息。
+
+
+## `devServer.color` - CLI only
+
+`boolean`
+
+Enables/Disables colors on the console.
+
+```bash
+webpack-dev-server --color
+```
 
 
 ## `devServer.compress`
@@ -100,6 +138,12 @@ clientLogLevel: "none"
 
 ```js
 compress: true
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --compress
 ```
 
 
@@ -127,6 +171,29 @@ contentBase: [path.join(__dirname, "public"), path.join(__dirname, "assets")]
 
 ```js
 contentBase: false
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --content-base /path/to/content/dir
+```
+
+
+## `devServer.disableHostCheck`
+
+`boolean`
+
+When set to true this option bypasses host checking. THIS IS NOT RECOMMENDED as apps that do not check the host are vulnerable to DNS rebinding attacks.
+
+```js
+disableHostCheck: true
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --disable-host-check
 ```
 
 
@@ -192,10 +259,16 @@ historyApiFallback: {
 }
 ```
 
+Usage via the CLI
+
+```bash
+webpack-dev-server --history-api-fallback
+```
+
 更多选项和信息，查看 [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) 文档。
 
 
-## `devServer.host` - 只用在命令行工具(CLI)
+## `devServer.host`
 
 `string`
 
@@ -203,6 +276,12 @@ historyApiFallback: {
 
 ```js
 host: "0.0.0.0"
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --host 0.0.0.0
 ```
 
 
@@ -219,7 +298,7 @@ hot: true
 T> Note that you must also include a `new webpack.HotModuleReplacementPlugin()` to fully enable HMR. See the [HMR concepts page](/concepts/hot-module-replacement) for more information.
 
 
-## `devServer.hotOnly` - CLI only
+## `devServer.hotOnly`
 
 `boolean`
 
@@ -227,6 +306,12 @@ Enables Hot Module Replacement (see [`devServer.hot`](#devserver-hot)) without p
 
 ```js
 hotOnly: true
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --hot-only
 ```
 
 
@@ -252,8 +337,31 @@ https: {
 
 此对象直接传递到 Node.js HTTPS 模块，所以更多信息请查看 [HTTPS 文档](https://nodejs.org/api/https.html)。
 
+Usage via the CLI
 
-## `devServer.inline` - 只用在命令行工具(CLI)
+```bash
+webpack-dev-server --https
+```
+
+To pass your own certificate via the CLI use the following options
+
+```bash
+webpack-dev-server --https --key /path/to/server.key --cert /path/to/server.crt --cacert /path/to/ca.pem
+```
+
+
+## `devServer.info` - CLI only
+
+`boolean`
+
+Output cli information. It is enabled by default.
+
+```bash
+webpack-dev-server --info=false
+```
+
+
+## `devServer.inline`
 
 `boolean`
 
@@ -263,6 +371,12 @@ https: {
 
 ```js
 inline: false
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --inline=false
 ```
 
 T> 当使用模块热替换时，建议使用内联模式(inline mode)。
@@ -276,6 +390,12 @@ T> 当使用模块热替换时，建议使用内联模式(inline mode)。
 
 ```js
 lazy: true
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --lazy
 ```
 
 T> `watchOptions` 在使用**惰性模式**时无效。
@@ -292,6 +412,41 @@ T> 如果使用命令行工具(CLI)，请确保**内联模式(inline mode)**被�
 ```js
 noInfo: true
 ```
+
+
+## `devServer.open`
+
+`boolean`
+
+When `open` is enabled, the dev server will open the browser.
+
+```js
+open: true
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --open
+```
+
+
+## `devServer.openPage`
+
+`string`
+
+Specify a page to navigate to when opening the browser.
+
+```js
+openPage: '/different/page'
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --open-page "/different/page"
+```
+
 
 ## `devServer.overlay`
 
@@ -312,7 +467,42 @@ overlay: {
 }
 ```
 
-## `devServer.port` - 只用在命令行工具(CLI)
+
+## `devServer.pfx`
+
+`string`
+
+Path to a SSL pfx file.
+
+```js
+pfx: '/path/to/file.pfx'
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --pfx /path/to/file.pfx
+```
+
+
+## `devServer.pfxPassphrase`
+
+`string`
+
+The passphrase to a SSL PFX file.
+
+```js
+pfxPassphrase: 'passphrase'
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --pfx-passphrase passphrase
+```
+
+
+## `devServer.port`
 
 `number`
 
@@ -320,6 +510,12 @@ overlay: {
 
 ```js
 port: 8080
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --port 8080
 ```
 
 
@@ -383,6 +579,14 @@ proxy: {
 }
 ```
 
+If you want to proxy multiple, specific paths to the same target, you can use an array of one or more objects with a `context` property:
+
+```js
+proxy: [{
+  context: ["/auth", "/api"],
+  target: "http://localhost:3000",
+}]
+```
 
 ## `devServer.progress` - 只用于命令行工具(CLI)
 
@@ -390,8 +594,12 @@ proxy: {
 
 将运行进度输出到控制台。
 
+```bash
+webpack-dev-server --progress
+```
 
-## `devServer.public` - 只用于命令行工具(CLI)
+
+## `devServer.public`
 
 `string`
 
@@ -401,6 +609,12 @@ proxy: {
 
 ```js
 public: "myapp.test:80"
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --public myapp.test:80
 ```
 
 
@@ -443,6 +657,13 @@ T> `devServer.publicPath` 和 `output.publicPath` 一样被推荐。
 quiet: true
 ```
 
+Usage via the CLI
+
+```bash
+webpack-dev-server --quiet
+```
+
+
 ## `devServer.setup`
 
 `function`
@@ -459,9 +680,26 @@ setup(app){
 ```
 
 
+## `devServer.socket`
+
+`string`
+
+The Unix socket to listen to (instead of a host).
+
+```js
+socket: 'socket'
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --socket socket
+```
+
+
 ## `devServer.staticOptions`
 
-可以从 `contentBase` 提供的静态文件来配置高级选项。可用的选项请查看 [Express 文档](http://expressjs.com/en/4x/api.html#express.static)。一个例子：
+It is possible to configure advanced options for serving static files from `contentBase`. See the [Express documentation](http://expressjs.com/en/4x/api.html#express.static) for the possible options. An example:
 
 ```js
 staticOptions: {
@@ -469,37 +707,71 @@ staticOptions: {
 }
 ```
 
-T> 只在 `contentBase` 是一个`字符串`时有效。
+T> This only works when using `contentBase` as a `string`.
 
 
 ## `devServer.stats` 🔑
 
 `string` `object`
 
-此选项允许你精确控制 bundle 信息展示。这可以是一个很好的中间层，如果你想要只展示某些 bundle 信息，但不是所有的信息。
+This option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you want some bundle information, but not all of it.
 
-只展示 bunlde 中的错误：
+To show only errors in your bundle:
 
 ```js
 stats: "errors-only"
 ```
 
-更多信息，请查看 [**stats 文档**](/configuration/stats)。
+For more information, see the [**stats documentation**](/configuration/stats).
 
-T> 使用 `quiet` 或 `noInfo` 时，此选项无效。
+T> This option has no effect when used with `quiet` or `noInfo`.
+
+
+## `devServer.stdin` - CLI only
+
+`boolean`
+
+This option closes the server when stdin ends.
+
+```bash
+webpack-dev-server --stdin
+```
+
+
+## `devServer.useLocalIp`
+
+`boolean`
+
+This option lets the browser open with your local IP.
+
+```js
+useLocalIp: true
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --useLocalIp
+```
 
 
 ## `devServer.watchContentBase`
 
 `boolean`
 
-告诉服务器监视那些通过 `devServer.contentBase` 选项提供的文件。文件改动将触发整个页面重新加载。
+Tell the server to watch the files served by the `devServer.contentBase` option. File changes will trigger a full page reload.
 
 ```js
 watchContentBase: true
 ```
 
-默认被禁用。
+It is disabled by default.
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --watch-content-base
+```
 
 
 ## `devServer.watchOptions` 🔑
