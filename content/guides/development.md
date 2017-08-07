@@ -380,8 +380,6 @@ webpack: Compiled successfully.
 
 Now fire up your browser and go to `http://localhost:3000`, you should see your webpack app running and functioning!
 
-T> If you took the route of using `webpack-dev-middleware` instead of `webpack-dev-server`, please use the [`webpack-hot-middleware`](https://github.com/glenjamin/webpack-hot-middleware) package to enable HMR on your custom server or application.
-
 T> If you like to know more about how Hot Module Replacement works, we recommend you read the [Hot Module Replacement](/guides/hot-module-replacement/) guide.
 
 
