@@ -160,7 +160,12 @@ W> `Rule.query` is deprecated in favor of `Rule.options` and `UseEntry.options`.
 
 An object with parser options. All applied parser options are merged.
 
-For each different parser options object a new parser is created and plugins can apply plugins depending on the parser options. Many of the default plugins apply their parser plugins only if a property in the parser options is not set or true.
+Parsers may inspect these options and disable or reconfigure themselves accordingly. Most of the default plugins interpret the values as follows:
+
+* Setting the option to `false` disables the parser.
+* Setting the option to `true` or leaving it `undefined` enables the parser.
+
+However, parser plugins may accept more than just a boolean. For example, the internal `NodeStuffPlugin` can accept an object instead of `true` to add additional options for a particular Rule.
 
 **Examples** (parser options by the default plugins):
 

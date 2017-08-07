@@ -3,8 +3,8 @@ title: ContextReplacementPlugin
 contributors:
   - simon04
 related:
-  - title: Issue #2783 - ContextReplacementPlugin Description
-  - url: https://github.com/webpack/webpack/issues/2783#issuecomment-234137265
+  - title: Issue 2783 - ContextReplacementPlugin Description
+    url: https://github.com/webpack/webpack/issues/2783#issuecomment-234137265
 ---
 
 *Context* refers to a [require with an expression](/guides/dependency-management/#require-with-expression) such as `require('./locale/' + name + '.json')`. When encountering such an expression, webpack infers the directory (`'./locale/'`) and a regular expression (`/^.*\.json$/`). Since the `name` is not known at compile time, webpack includes every file as module in the bundle.
