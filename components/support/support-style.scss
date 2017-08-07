@@ -4,7 +4,18 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 1em 0.5em;
+  padding: 0 0.5em 1em;
+
+  &__description {
+    flex: 0 0 100%;
+    margin-bottom: 1em;
+  }
+
+  &__rank {
+    text-transform: capitalize;
+
+    &:after { content: ' '; }
+  }
 
   &__item {
     position: relative;
