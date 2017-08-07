@@ -51,7 +51,7 @@ export default class Support extends React.Component {
           { type === 'sponsors' ? (
             <p>
               <b className="support__rank">{ rank } sponsors</b>
-              <span>are those who have pledged { minimum ? `$${minimum}` : '' } { maximum ? `to $${maximum}` : 'or more' } to webpack.</span>
+              <span>are those who have pledged { minimum ? `$${minimum}` : 'up' } { maximum ? `to $${maximum}` : 'or more' } to webpack.</span>
             </p>
           ) : (
             <p>
