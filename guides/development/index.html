@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/55ef730aa3bacf08048f.css" rel="stylesheet">
+      <link href="/e68f1ff8a8d9ac198193.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -165,7 +165,7 @@ Child html-webpack-plugin <span class="token keyword">for</span> <span class="to
     &quot;scripts&quot;: {
       &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
       &quot;watch&quot;: &quot;webpack --progress --watch&quot;,
-<span class="token inserted">+     &quot;start&quot;: &quot;webpack-dev-server --open&quot;</span>
+<span class="token inserted">+     &quot;start&quot;: &quot;webpack-dev-server --open&quot;,</span>
       &quot;build&quot;: &quot;webpack&quot;
     },
     &quot;keywords&quot;: [],
@@ -185,7 +185,124 @@ Child html-webpack-plugin <span class="token keyword">for</span> <span class="to
 <p>Now we can run <code>npm start</code> from the command line and we will see our browser automatically loading up our page. If you now change any of the source files and save them, the web server will automatically reload after the code has been compiled. Give it a try!</p>
 <p>The <code>webpack-dev-server</code> comes with many configurable options. Head over to the <a href="/configuration/dev-server">documentation</a> to learn more.</p>
 <blockquote class="tip"><div class="tip-content"> Now that your server is working, you might want to give <a href="/guides/hot-module-replacement">Hot Module Replacement</a> a try! </div></blockquote><h3 class="header"><a class="anchor" href="#using-webpack-dev-middleware" id="using-webpack-dev-middleware"></a><span class="text">Using webpack-dev-middleware</span><a class="icon-link" href="#using-webpack-dev-middleware"></a></h3>
-<blockquote class="todo"><div class="tip-content"> Familiar with <code>webpack-dev-middleware</code>? We need your help! Please submit a PR to fill in the missing instructions and example here. Make sure to keep it simple as this guide is intended for beginners. </div></blockquote><h2 class="header"><a class="anchor" href="#adjusting-your-text-editor" id="adjusting-your-text-editor"></a><span class="text">Adjusting Your Text Editor</span><a class="icon-link" href="#adjusting-your-text-editor"></a></h2>
+<p><code>webpack-dev-middleware</code> is a wrapper that will emit files processed by webpack to a server. This is used in <code>webpack-dev-server</code> internally, however it&apos;s available as a separate package to allow more custom setups if desired. We&apos;ll take a look at an example that combines webpack-dev-middleware with an express server.</p>
+<p>Let&apos;s install <code>express</code> and <code>webpack-dev-middleware</code> so we can get started:</p>
+<pre><code class="lang-bash">npm <span class="token function">install</span> --save-dev express webpack-dev-middleware
+</code></pre>
+<p>Now we need to make some adjustments to our webpack configuration file in order to make sure the middleware will function correctly:</p>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="lang-diff">  const path = require(&apos;path&apos;);
+  const HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);
+  const CleanWebpackPlugin = require(&apos;clean-webpack-plugin&apos;);
+
+  module.exports = {
+    entry: {
+      app: &apos;./src/index.js&apos;,
+      print: &apos;./src/print.js&apos;
+    },
+    devtool: &apos;inline-source-map&apos;,
+    plugins: [
+      new CleanWebpackPlugin([&apos;dist&apos;]),
+      new HtmlWebpackPlugin({
+        title: &apos;Output Management&apos;
+      }),
+      new webpack.HotModuleReplacementPlugin()
+    ],
+    output: {
+      filename: &apos;[name].bundle.js&apos;,
+      path: path.resolve(__dirname, &apos;dist&apos;),
+<span class="token inserted">+     publicPath: &apos;/&apos;</span>
+    }
+  };
+</code></pre>
+<p>The <code>publicPath</code> will be used within our server script as well in order to make sure files are served correctly on <code>http://localhost:3000</code>, the port number we&apos;ll specify later. The next step is setting up our custom <code>express</code> server:</p>
+<p><strong>project</strong></p>
+<pre><code class="lang-bash">  webpack-demo
+  <span class="token operator">|</span>- package.json
+  <span class="token operator">|</span>- webpack.config.js
++ <span class="token operator">|</span>- server.js
+  <span class="token operator">|</span>- /dist
+  <span class="token operator">|</span>- /src
+    <span class="token operator">|</span>- index.js
+    <span class="token operator">|</span>- print.js
+  <span class="token operator">|</span>- /node_modules
+</code></pre>
+<p><strong>server.js</strong></p>
+<pre><code class="lang-js"><span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;express&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> webpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;webpack&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> webpackDevMiddleware <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;webpack-dev-middleware&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;../webpack.config.js&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> compiler <span class="token operator">=</span> <span class="token function">webpack</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Tell express to use the webpack-dev-middleware and use the webpack.config.js</span>
+<span class="token comment" spellcheck="true">// configuration file as a base.</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token function">webpackDevMiddleware</span><span class="token punctuation">(</span>compiler<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  publicPath<span class="token punctuation">:</span> config<span class="token punctuation">.</span>output<span class="token punctuation">.</span>publicPath
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Serve the files on port 3000.</span>
+app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&apos;Example app listening on port 3000!\n&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Now add an npm script to make it a little easier to run the server:</p>
+<p><strong>package.json</strong></p>
+<pre><code class="lang-json">  <span class="token punctuation">{</span>
+    <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;development&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;version&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1.0.0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;description&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;main&quot;</span><span class="token operator">:</span> <span class="token string">&quot;webpack.config.js&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;test&quot;</span><span class="token operator">:</span> <span class="token string">&quot;echo \&quot;</span>Error<span class="token operator">:</span> no test specified\<span class="token string">&quot; &amp;&amp; exit 1&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;watch&quot;</span><span class="token operator">:</span> <span class="token string">&quot;webpack --progress --watch&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;start&quot;</span><span class="token operator">:</span> <span class="token string">&quot;webpack-dev-server --open&quot;</span><span class="token punctuation">,</span>
++     <span class="token property">&quot;server&quot;</span><span class="token operator">:</span> <span class="token string">&quot;node server.js&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;build&quot;</span><span class="token operator">:</span> <span class="token string">&quot;webpack&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;keywords&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;author&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;license&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ISC&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;devDependencies&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;css-loader&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^0.28.4&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;csv-loader&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^2.1.1&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;express&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^4.15.3&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;file-loader&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^0.11.2&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;html-webpack-plugin&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^2.29.0&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;style-loader&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^0.18.2&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;webpack&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^3.0.0&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;webpack-dev-middleware&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^1.12.0&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;xml-loader&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^1.2.1&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+</code></pre>
+<p>Now in your terminal run <code>run npm server</code>, it should give you an output similar to this:</p>
+<pre><code class="lang-bash">Example app listening on port 3000<span class="token operator">!</span>
+webpack built 27b137af6d9d8668c373 <span class="token keyword">in</span> 1198ms
+Hash: 27b137af6d9d8668c373
+Version: webpack 3.0.0
+Time: 1198ms
+          Asset       Size  Chunks                    Chunk Names
+  app.bundle.js    1.44 MB    0, 1  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  app
+print.bundle.js    6.57 kB       1  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         print
+     index.html  306 bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./src/print.js 116 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">{</span>1<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>1<span class="token punctuation">]</span> ./src/index.js 403 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>2<span class="token punctuation">]</span> ./node_modules/lodash/lodash.js 540 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>3<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 509 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>4<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+Child html-webpack-plugin <span class="token keyword">for</span> <span class="token string">&quot;index.html&quot;</span><span class="token keyword">:</span>
+         Asset    Size  Chunks  Chunk Names
+    index.html  544 kB       0
+       <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./node_modules/html-webpack-plugin/lib/loader.js<span class="token operator">!</span>./node_modules/html-webpack-plugin/default_index.ejs 538 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+       <span class="token punctuation">[</span>1<span class="token punctuation">]</span> ./node_modules/lodash/lodash.js 540 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+       <span class="token punctuation">[</span>2<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 509 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+       <span class="token punctuation">[</span>3<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+webpack: Compiled successfully.
+</code></pre>
+<p>Now fire up your browser and go to <code>http://localhost:3000</code>, you should see your webpack app running and functioning!</p>
+<blockquote class="tip"><div class="tip-content"> If you like to know more about how Hot Module Replacement works, we recommend you read the <a href="/guides/hot-module-replacement/">Hot Module Replacement</a> guide. </div></blockquote><h2 class="header"><a class="anchor" href="#adjusting-your-text-editor" id="adjusting-your-text-editor"></a><span class="text">Adjusting Your Text Editor</span><a class="icon-link" href="#adjusting-your-text-editor"></a></h2>
 <p>When using automatic compilation of your code, you could run into issues when saving your files. Some editors have a &quot;safe write&quot; feature that can potentially interfere with recompilation.</p>
 <p>To disable this feature in some common editors, see the list below:</p>
 <ul>
