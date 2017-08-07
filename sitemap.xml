@@ -24,9 +24,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/license/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/organization/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/loaders/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/plugins/index.html</loc>
     </url>    <url>
@@ -154,13 +154,13 @@
     </url>    <url>
         <loc>https://webpack.js.org/guides/hot-module-replacement/index.html</loc>
     </url>    <url>
+        <loc>https://webpack.js.org/guides/installation/index.html</loc>
+    </url>    <url>
         <loc>https://webpack.js.org/guides/integrations/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/guides/lazy-loading/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/guides/migrating/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/guides/installation/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/guides/output-management/index.html</loc>
     </url>    <url>
@@ -210,11 +210,11 @@
     </url>    <url>
         <loc>https://webpack.js.org/loaders/imports-loader/index.html</loc>
     </url>    <url>
+        <loc>https://webpack.js.org/loaders/istanbul-instrumenter-loader/index.html</loc>
+    </url>    <url>
         <loc>https://webpack.js.org/loaders/jshint-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/json-loader/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/loaders/istanbul-instrumenter-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/json5-loader/index.html</loc>
     </url>    <url>
@@ -268,9 +268,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/plugins/commons-chunk-plugin/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/plugins/compression-webpack-plugin/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/plugins/component-webpack-plugin/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/plugins/compression-webpack-plugin/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/plugins/context-replacement-plugin/index.html</loc>
     </url>    <url>
