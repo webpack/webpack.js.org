@@ -278,7 +278,7 @@ __webpack.config.js__
   };
 ```
 
-This will tell the middleware to serve our files on `http://localhost:3000` (the port number we'll specify later), but before we can actually see the files, we need to setup `express` and make sure it's running.
+The `publicPath` will be used within our server script as well in order to make sure files are served correctly on `http://localhost:3000`, the port number we'll specify later. The next step is setting up our custom `express` server:
 
 __project__
 
