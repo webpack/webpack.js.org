@@ -90,7 +90,7 @@ Child html-webpack-plugin for "index.html":
         + 2 hidden modules
 ```
 
-As you can see the bundle's name now reflects its content (via the hash). If we run another build without making any changes, we'd expect that filename to stay the same. However, if you were to run it again, we may find that this is not the case:
+As you can see the bundle's name now reflects its content (via the hash). If we run another build without making any changes, we'd expect that filename to stay the same. However, if we were to run it again, we may find that this is not the case:
 
 ``` bash
 Hash: f7a289a94c5e4cd1e566
