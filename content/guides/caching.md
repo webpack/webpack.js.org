@@ -5,6 +5,7 @@ contributors:
   - okonet
   - jouni-kantola
   - skipjack
+  - dannycjones
 related:
   - title: Predictable Long Term Caching
     url: https://medium.com/webpack/predictable-long-term-caching-with-webpack-d3eee1d3fa31
