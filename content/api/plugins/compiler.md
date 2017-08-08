@@ -60,7 +60,7 @@ The `Compiler` is what we call a `Tapable` instance. By this, we mean that it mi
 
 ## Watching
 
-The `Compiler` supports "watch mode" which monitors the file system and recompiles as files change. When in watch mode, the compiler will emit the additional events ["watch-run" and "invalid"](#event-hooks).
+The `Compiler` supports "watch mode" which monitors the file system and recompiles as files change. When in watch mode, the compiler will emit the additional events ["watch-run", "watch-close", and "invalid"](#event-hooks).
 
 For more details about watch mode, see the [Node.js API documentation](/api/node/#watching) or the [CLI watch options](/api/cli/#watch-options).
 
@@ -117,6 +117,7 @@ __`after-emit`__              | After emitting assets to output dir     | `compi
 __`done`__                    | Completion of compile                   | `stats`                   | sync
 __`failed`__                  | Failure of compile                      | `error`                   | sync
 __`invalid`__                 | After invalidating a watch compile      | `fileName`, `changeTime`  | sync
+__`watch-close`__             | After stopping a watch compile          | -                         | sync
 
 
 ## Usage
