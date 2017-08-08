@@ -90,9 +90,25 @@ Child html-webpack-plugin for "index.html":
         + 2 hidden modules
 ```
 
-As you can see the bundle's name now reflects its content (via the hash). If we run another build without making any changes, we'd expect that filename to stay the same. However, upon running it, we'll see that this is not the case:
+As you can see the bundle's name now reflects its content (via the hash). If we run another build without making any changes, we'd expect that filename to stay the same. However, if you were to run it again, we may find that this is not the case:
 
-?> Add bash output
+``` bash
+Hash: f7a289a94c5e4cd1e566
+Version: webpack 3.5.1
+Time: 835ms
+                       Asset       Size  Chunks                    Chunk Names
+main.205199ab45963f6a62ec.js     544 kB       0  [emitted]  [big]  main
+                  index.html  197 bytes          [emitted]
+   [0] ./src/index.js 216 bytes {0} [built]
+   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+    + 1 hidden module
+Child html-webpack-plugin for "index.html":
+     1 asset
+       [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+       [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+        + 2 hidden modules
+```
 
 This is because webpack includes certain boilerplate, specifically the runtime and manifest, in the entry chunk.
 
