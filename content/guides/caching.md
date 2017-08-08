@@ -96,6 +96,7 @@ As you can see the bundle's name now reflects its content (via the hash). If we 
 
 This is because webpack includes certain boilerplate, specifically the runtime and manifest, in the entry chunk.
 
+W> Output may differ depending on your current webpack version. Newer versions may not have all the same issues with hashing as some older versions, but we still recommend the following steps to be safe.
 
 ## Extracting Boilerplate
 
