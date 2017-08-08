@@ -5,6 +5,7 @@ contributors:
   - okonet
   - jouni-kantola
   - skipjack
+  - dannycjones
 related:
   - title: Predictable Long Term Caching
     url: https://medium.com/webpack/predictable-long-term-caching-with-webpack-d3eee1d3fa31
@@ -71,14 +72,47 @@ __webpack.config.js__
 
 Running our build script, `npm run build`, with this configuration should produce the following output:
 
-?> Add bash output
+``` bash
+Hash: f7a289a94c5e4cd1e566
+Version: webpack 3.5.1
+Time: 835ms
+                       Asset       Size  Chunks                    Chunk Names
+main.7e2c49a622975ebd9b7e.js     544 kB       0  [emitted]  [big]  main
+                  index.html  197 bytes          [emitted]
+   [0] ./src/index.js 216 bytes {0} [built]
+   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+    + 1 hidden module
+Child html-webpack-plugin for "index.html":
+     1 asset
+       [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+       [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+        + 2 hidden modules
+```
 
-As you can see the bundle's name now reflects its content (via the hash). If we run another build without making any changes, we'd expect that filename to stay the same. However, upon running it, we'll see that this is not the case:
+As you can see the bundle's name now reflects its content (via the hash). If we run another build without making any changes, we'd expect that filename to stay the same. However, if we were to run it again, we may find that this is not the case:
 
-?> Add bash output
+``` bash
+Hash: f7a289a94c5e4cd1e566
+Version: webpack 3.5.1
+Time: 835ms
+                       Asset       Size  Chunks                    Chunk Names
+main.205199ab45963f6a62ec.js     544 kB       0  [emitted]  [big]  main
+                  index.html  197 bytes          [emitted]
+   [0] ./src/index.js 216 bytes {0} [built]
+   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+    + 1 hidden module
+Child html-webpack-plugin for "index.html":
+     1 asset
+       [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+       [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+        + 2 hidden modules
+```
 
 This is because webpack includes certain boilerplate, specifically the runtime and manifest, in the entry chunk.
 
+W> Output may differ depending on your current webpack version. Newer versions may not have all the same issues with hashing as some older versions, but we still recommend the following steps to be safe.
 
 ## Extracting Boilerplate
 
