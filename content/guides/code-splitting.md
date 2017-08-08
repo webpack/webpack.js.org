@@ -23,7 +23,7 @@ contributors:
   - sudarsangp
 ---
 
-T> This guide extends the examples provided in [Getting Started](/guides/getting-started) and [Managing Built Files](/guides/output-management). Please make sure you are at least familiar with the examples provided in them.
+T> This guide extends the examples provided in [Getting Started](/guides/getting-started) and [Output Management](/guides/output-management). Please make sure you are at least familiar with the examples provided in them.
 
 Code splitting is one of the most compelling features of webpack. This feature allows you to split your code into various bundles which can then be loaded on demand or in parallel. It can be used to achieve smaller bundles and control resource load prioritization which, if used correctly, can have a major impact on load time.
 
