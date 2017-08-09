@@ -5,7 +5,6 @@ contributors:
 related:
   - title: banner-plugin-hashing test
     url: https://github.com/webpack/webpack/blob/master/test/configCases/plugins/banner-plugin-hashing/webpack.config.js
-
 ---
 
 Adds a banner to the top of each generated chunk.
