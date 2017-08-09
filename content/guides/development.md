@@ -351,7 +351,7 @@ __package.json__
   }
 ```
 
-Now in your terminal run `run npm server`, it should give you an output similar to this:
+Now in your terminal run `npm run server`, it should give you an output similar to this:
 
 ``` bash
 Example app listening on port 3000!
