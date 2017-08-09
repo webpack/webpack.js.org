@@ -282,7 +282,7 @@ The `publicPath` will be used within our server script as well in order to make 
 
 __project__
 
-``` bash
+``` diff
   webpack-demo
   |- package.json
   |- webpack.config.js
@@ -321,7 +321,7 @@ Now add an npm script to make it a little easier to run the server:
 
 __package.json__
 
-``` json
+``` diff
   {
     "name": "development",
     "version": "1.0.0",
