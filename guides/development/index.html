@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/e4f1fb6d4f27507868d9.css" rel="stylesheet">
+      <link href="/93a046199787fdfe896a.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -217,15 +217,15 @@ Child html-webpack-plugin <span class="token keyword">for</span> <span class="to
 </code></pre>
 <p>The <code>publicPath</code> will be used within our server script as well in order to make sure files are served correctly on <code>http://localhost:3000</code>, the port number we&apos;ll specify later. The next step is setting up our custom <code>express</code> server:</p>
 <p><strong>project</strong></p>
-<pre><code class="lang-bash">  webpack-demo
-  <span class="token operator">|</span>- package.json
-  <span class="token operator">|</span>- webpack.config.js
-+ <span class="token operator">|</span>- server.js
-  <span class="token operator">|</span>- /dist
-  <span class="token operator">|</span>- /src
-    <span class="token operator">|</span>- index.js
-    <span class="token operator">|</span>- print.js
-  <span class="token operator">|</span>- /node_modules
+<pre><code class="lang-diff">  webpack-demo
+  |- package.json
+  |- webpack.config.js
+<span class="token inserted">+ |- server.js</span>
+  |- /dist
+  |- /src
+    |- index.js
+    |- print.js
+  |- /node_modules
 </code></pre>
 <p><strong>server.js</strong></p>
 <pre><code class="lang-js"><span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;express&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -249,33 +249,33 @@ app<span class="token punctuation">.</span><span class="token function">listen</
 </code></pre>
 <p>Now add an npm script to make it a little easier to run the server:</p>
 <p><strong>package.json</strong></p>
-<pre><code class="lang-json">  <span class="token punctuation">{</span>
-    <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;development&quot;</span><span class="token punctuation">,</span>
-    <span class="token property">&quot;version&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1.0.0&quot;</span><span class="token punctuation">,</span>
-    <span class="token property">&quot;description&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
-    <span class="token property">&quot;main&quot;</span><span class="token operator">:</span> <span class="token string">&quot;webpack.config.js&quot;</span><span class="token punctuation">,</span>
-    <span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token property">&quot;test&quot;</span><span class="token operator">:</span> <span class="token string">&quot;echo \&quot;</span>Error<span class="token operator">:</span> no test specified\<span class="token string">&quot; &amp;&amp; exit 1&quot;</span><span class="token punctuation">,</span>
-      <span class="token property">&quot;watch&quot;</span><span class="token operator">:</span> <span class="token string">&quot;webpack --progress --watch&quot;</span><span class="token punctuation">,</span>
-      <span class="token property">&quot;start&quot;</span><span class="token operator">:</span> <span class="token string">&quot;webpack-dev-server --open&quot;</span><span class="token punctuation">,</span>
-+     <span class="token property">&quot;server&quot;</span><span class="token operator">:</span> <span class="token string">&quot;node server.js&quot;</span><span class="token punctuation">,</span>
-      <span class="token property">&quot;build&quot;</span><span class="token operator">:</span> <span class="token string">&quot;webpack&quot;</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token property">&quot;keywords&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token property">&quot;author&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
-    <span class="token property">&quot;license&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ISC&quot;</span><span class="token punctuation">,</span>
-    <span class="token property">&quot;devDependencies&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token property">&quot;css-loader&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^0.28.4&quot;</span><span class="token punctuation">,</span>
-      <span class="token property">&quot;csv-loader&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^2.1.1&quot;</span><span class="token punctuation">,</span>
-      <span class="token property">&quot;express&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^4.15.3&quot;</span><span class="token punctuation">,</span>
-      <span class="token property">&quot;file-loader&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^0.11.2&quot;</span><span class="token punctuation">,</span>
-      <span class="token property">&quot;html-webpack-plugin&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^2.29.0&quot;</span><span class="token punctuation">,</span>
-      <span class="token property">&quot;style-loader&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^0.18.2&quot;</span><span class="token punctuation">,</span>
-      <span class="token property">&quot;webpack&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^3.0.0&quot;</span><span class="token punctuation">,</span>
-      <span class="token property">&quot;webpack-dev-middleware&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^1.12.0&quot;</span><span class="token punctuation">,</span>
-      <span class="token property">&quot;xml-loader&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^1.2.1&quot;</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
+<pre><code class="lang-diff">  {
+    &quot;name&quot;: &quot;development&quot;,
+    &quot;version&quot;: &quot;1.0.0&quot;,
+    &quot;description&quot;: &quot;&quot;,
+    &quot;main&quot;: &quot;webpack.config.js&quot;,
+    &quot;scripts&quot;: {
+      &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+      &quot;watch&quot;: &quot;webpack --progress --watch&quot;,
+      &quot;start&quot;: &quot;webpack-dev-server --open&quot;,
+<span class="token inserted">+     &quot;server&quot;: &quot;node server.js&quot;,</span>
+      &quot;build&quot;: &quot;webpack&quot;
+    },
+    &quot;keywords&quot;: [],
+    &quot;author&quot;: &quot;&quot;,
+    &quot;license&quot;: &quot;ISC&quot;,
+    &quot;devDependencies&quot;: {
+      &quot;css-loader&quot;: &quot;^0.28.4&quot;,
+      &quot;csv-loader&quot;: &quot;^2.1.1&quot;,
+      &quot;express&quot;: &quot;^4.15.3&quot;,
+      &quot;file-loader&quot;: &quot;^0.11.2&quot;,
+      &quot;html-webpack-plugin&quot;: &quot;^2.29.0&quot;,
+      &quot;style-loader&quot;: &quot;^0.18.2&quot;,
+      &quot;webpack&quot;: &quot;^3.0.0&quot;,
+      &quot;webpack-dev-middleware&quot;: &quot;^1.12.0&quot;,
+      &quot;xml-loader&quot;: &quot;^1.2.1&quot;
+    }
+  }
 </code></pre>
 <p>Now in your terminal run <code>npm run server</code>, it should give you an output similar to this:</p>
 <pre><code class="lang-bash">Example app listening on port 3000<span class="token operator">!</span>
