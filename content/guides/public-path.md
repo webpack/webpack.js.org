@@ -13,7 +13,7 @@ all the assets on your application. It's called `publicPath`.
 ## Use cases
 
 There are a few use cases on real applications where this feature becomes
-especially neat.
+especially neat. All static asset files (images, etc) linked into your build will be referenced from this location. This includes imported [code splitting](/guides/code-splitting/) chunks.
 
 ### Set value on build time
 
