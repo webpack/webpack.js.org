@@ -23,12 +23,10 @@ function checkLinks(args) {
 
   tap.on('complete', function(res) {
     const failures = res.failures.filter(failure => {
-      return (
-        !failure.diag ||
-        !failure.diag.at ||
-        !failure.diag.at.match(/class="support__[^"]*"/) ||
-        !failure.diag.at.match(/src="https:\/\/img\.shields\.io[^"]*"/)
-      );
+      return failure.diag && failure.diag.at ? !(
+        /class="support__[^"]*"/.test(failure.diag.at) ||
+        /src="https:\/\/img\.shields\.io[^"]*"/.test(failure.diag.at)
+      ) : false;
     });
 
     if (failures.length > 0) {
