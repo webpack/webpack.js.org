@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/98c15f778742a80a998f.css" rel="stylesheet">
+      <link href="/dec20aa55a8fa9413a70.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -65,7 +65,8 @@ compiler<span class="token punctuation">.</span><span class="token function">run
 <li>The <code>Compiler</code> exposes a <code>run</code> method which kickstarts all compilation work for <code>webpack</code>. When that is done, it should call the passed in <code>callback</code> function. All the tail end work of logging stats and errors are done in this callback function.</li>
 </ul>
 <h2 class="header"><a class="anchor" href="#watching" id="watching"></a><span class="text">Watching</span><a class="icon-link" href="#watching"></a></h2>
-<p>The <code>Compiler</code> supports two flavors of execution. One on watch mode and one on a normal single run. While it essentially performs the same functionality while watching, there are some additions to the lifecycle events. This allows <code>webpack</code> to have Watch specific plugins.</p>
+<p>The <code>Compiler</code> supports &quot;watch mode&quot; which monitors the file system and recompiles as files change. When in watch mode, the compiler will emit the additional events <a href="#event-hooks">&quot;watch-run&quot;, &quot;watch-close&quot;, and &quot;invalid&quot;</a>. This is typically used in <a href="/guides/development">development</a>, usually under the hood of tools like <code>webpack-dev-server</code>, so that the developer doesn&apos;t need to re-compile manually every time.</p>
+<p>For more details about watch mode, see the <a href="/api/node/#watching">Node.js API documentation</a> or the <a href="/api/cli/#watch-options">CLI watch options</a>.</p>
 <h2 class="header"><a class="anchor" href="#multicompiler" id="multicompiler"></a><span class="text">MultiCompiler</span><a class="icon-link" href="#multicompiler"></a></h2>
 <p>This module, MultiCompiler, allows webpack to run multiple configurations in separate compiler.
 If the <code>options</code> parameter in the webpack&apos;s NodeJS api is an array of options, webpack applies separate compilers and calls the <code>callback</code> method at the end of each compiler execution.</p>
@@ -729,6 +730,34 @@ If the <code>options</code> parameter in the webpack&apos;s NodeJS api is an arr
 	    </div>
 	    <div class="table-td-content">
 	        <code>fileName</code>, <code>changeTime</code>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Type
+	    </div>
+	    <div class="table-td-content">
+	        sync
+	    </div>
+	  </div></div><div class="table-tr"><div class="table-td">
+	    <div class="table-td-title">
+	        Event name
+	    </div>
+	    <div class="table-td-content">
+	        <strong><code>watch-close</code></strong>
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Reason
+	    </div>
+	    <div class="table-td-content">
+	        After stopping a watch compile
+	    </div>
+	  </div><div class="table-td">
+	    <div class="table-td-title">
+	        Params
+	    </div>
+	    <div class="table-td-content">
+	        -
 	    </div>
 	  </div><div class="table-td">
 	    <div class="table-td-title">
