@@ -110,18 +110,18 @@ In some setups watching falls back to polling mode. With many watched files this
 
 The following utilities improve performance by compiling and serving assets in memory rather than writing to disk:
 
-* `webpack-dev-server`
-* `webpack-hot-middleware`
-* `webpack-dev-middleware`
+- `webpack-dev-server`
+- `webpack-hot-middleware`
+- `webpack-dev-middleware`
 
 
 ### Devtool
 
 Be aware of the performance differences of the different `devtool` settings.
 
-* `"eval"` has the best performance, but doesn't assist you for transpilied code.
-* The `cheap-source-map` variants are more performant, if you can live with the slightly worse mapping quality.
-* Use a `eval-source-map` variant for incremental builds.
+- `"eval"` has the best performance, but doesn't assist you for transpilied code.
+- The `cheap-source-map` variants are more performant, if you can live with the slightly worse mapping quality.
+- Use a `eval-source-map` variant for incremental builds.
 
 => In most cases `eval-cheap-module-source-map` is the best option.
 
@@ -130,12 +130,12 @@ Be aware of the performance differences of the different `devtool` settings.
 
 Certain utilities, plugins and loader only make sense when building for production. For example, it usually doesn't make sense to minify and mangle your code with the `UglifyJsPlugin` while in development. These tools should typically be excluded in development:
 
-* `UglifyJsPlugin`
-* `ExtractTextPlugin`
-* `[hash]`/`[chunkhash]`
-* `AggressiveSplittingPlugin`
-* `AggressiveMergingPlugin`
-* `ModuleConcatenationPlugin`
+- `UglifyJsPlugin`
+- `ExtractTextPlugin`
+- `[hash]`/`[chunkhash]`
+- `AggressiveSplittingPlugin`
+- `AggressiveMergingPlugin`
+- `ModuleConcatenationPlugin`
 
 
 ### Minimal Entry Chunk
@@ -165,8 +165,8 @@ W> __Don't sacrifice the quality of your application for small performance gains
 
 When using multiple compilations the following tools can help:
 
-* [`parallel-webpack`](https://github.com/trivago/parallel-webpack): It allows to do compilation in a worker pool.
-* `cache-loader`: The cache can be shared between multiple compilations.
+- [`parallel-webpack`](https://github.com/trivago/parallel-webpack): It allows to do compilation in a worker pool.
+- `cache-loader`: The cache can be shared between multiple compilations.
 
 
 ### Source Maps
