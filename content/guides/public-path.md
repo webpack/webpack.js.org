@@ -7,27 +7,23 @@ contributors:
   - gonzoyumo
 ---
 
-webpack has a highly useful configuration that let you specify the base path for
-all the assets on your application. It's called `publicPath`.
+The `publicPath` configuration option can be quite useful in a variety of scenarios. It allows you to specify the base path for all the assets within your application.
 
-## Use cases
 
-There are a few use cases on real applications where this feature becomes
-especially neat. All static asset files (images, etc) linked into your build will be referenced from this location. This includes imported [code splitting](/guides/code-splitting/) chunks.
+## Use Cases
 
-### Set value on build time
+There are a few use cases in real applications where this feature becomes especially neat. Essentially, every file emitted to your `output.path` directory will be referenced from the `output.publicPath` location. This includes child chunks (created via [code splitting](/guides/code-splitting/)) and any other assets (e.g. images, fonts, etc.) that are a part of your dependency graph.
 
-For development mode what we usually have is an `assets/` folder that lives on
-the same level of our index page. This is fine but let's say you want to host
-all these static assets on a CDN on your production environment?
+### Environment Based
 
-To approach this problem you can easily use a good old environment variable.
-Let's say we have a variable `ASSET_PATH`:
+In development for example, we might have an `assets/` folder that lives on the same level of our index page. This is fine, but what if we wanted to host all these static assets on a CDN in production?
 
-```js
+To approach this problem you can easily use a good old environment variable. Let's say we have a variable `ASSET_PATH`:
+
+``` js
 import webpack from 'webpack';
 
-// Whatever comes as an environment variable, otherwise use root
+// Try the environment variable, otherwise use root
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 
 export default {
@@ -44,11 +40,9 @@ export default {
 };
 ```
 
-### Set value on the fly
+### On The Fly
 
-Another possible use case is to set the public path on the fly. webpack exposes
-a global variable that let's you do that, it's called `__webpack_public_path__`.
-So in your application entry point, you can simply do this:
+Another possible use case is to set the `publicPath` on the fly. webpack exposes a global variable called `__webpack_public_path__` that allows you to do that. So, in your application's entry point, you can simply do this:
 
 ```js
 __webpack_public_path__ = process.env.ASSET_PATH;
@@ -58,7 +52,7 @@ That's all you need. Since we're already using the `DefinePlugin` on our
 configuration, `process.env.ASSET_PATH` will always be defined so we can safely
 do that.
 
-**WARNING:** Be aware that if you use ES6 module imports in your entry file the `__webpack_public_path__` assignment will be done after the imports. In such cases, you'll have to move the public path assignment to its own dedicated module and then import it on top of your entry.js:
+W> Be aware that if you use ES6 module imports in your entry file the `__webpack_public_path__` assignment will be done after the imports. In such cases, you'll have to move the public path assignment to its own dedicated module and then import it on top of your entry.js:
 
 ```js
 // entry.js
