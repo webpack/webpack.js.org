@@ -200,14 +200,12 @@ filename: "[chunkhash].bundle.js"
 
 可以使用以下替换模板字符串（通过 webpack 内部的[`TemplatedPathPlugin`][`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)）：
 
-| Template    | Description |
-| ----------- | ----------- |
+| 模板 | 描述 |
+| ----------- | ----------------------------------------------------------------------------------- |
 | [hash]      | 模块标识符(module identifier)的 hash |
 | [chunkhash] | chunk 内容的 hash |
 | [name]      | 模块名称 |
 | [id]        | 模块标识符(module identifier) |
-| [file]      | 模块文件名称 |
-| [filebase]  | 模块 [basename](https://nodejs.org/api/path.html#path_path_basename_path_ext) |
 | [query]     | 模块的 query，例如，文件名 `?` 后面的字符串 |
 
 `[hash]` 和 `[chunkhash]` 的长度可以使用 `[hash:16]`（默认为20）来指定。或者，通过指定[`output.hashDigestLength`](#output-hashdigestlength) 在全局配置长度。
@@ -617,7 +615,12 @@ publicPath: "", // 相对于 HTML 页面（目录相同）
 
 配置 source map 的命名方式。默认使用 `"[file].map"`。
 
-技术上看，对于 chunk 生成的 SourceMap，可以使用 `[name]`, `[id]`, `[hash]` 和 `[chunkhash]` [占位符(placeholder)](#output-filename)。除了替换这些占位符，`[file]` 占位符还可以被替换为原始文件(original file)的文件名。建议只使用 `[file]` 占位符，因为其他占位符在非 chunk 文件生成的 SourceMap 时不起作用。最好保持默认。
+可以使用 [#output-filename](#output-filename) 中的 `[name]`, `[id]`, `[hash]` 和 `[chunkhash]` 替换符号。除此之外，还可以使用以下替换符号。`[file]` 占位符会被替换为原始文件的文件名。我们建议__只使用 `[file]` 占位符__，因为其他占位符在非 chunk 文件(non-chunk files)生成的 SourceMap 时不起作用。
+
+| 模板 | 描述 |
+| -------------------------- | ----------------------------------------------------------------------------------- |
+| [file] | 模块文件名称 |
+| [filebase] | 模块 [basename](https://nodejs.org/api/path.html#path_path_basename_path_ext) |
 
 
 ## `output.sourcePrefix`

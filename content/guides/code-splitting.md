@@ -20,6 +20,7 @@ contributors:
   - TheDutchCoder
   - rouzbeh84
   - shaodahong
+  - sudarsangp
 ---
 
 T> 本指南扩展了[起步](/guides/getting-started)和[管理构建文件](/guides/output-management)中提供的示例。请确保您至少已熟悉其中提供的示例。
@@ -203,7 +204,7 @@ __webpack.config.js__
   };
 ```
 
-We'll also update our project to remove the now unused files:
+Note the use of `chunkFilename`, which determines the name of non-entry chunk files. For more information on `chunkFilename`, see [output documentation](/configuration/output/#output-chunkfilename). We'll also update our project to remove the now unused files:
 
 __project__
 
