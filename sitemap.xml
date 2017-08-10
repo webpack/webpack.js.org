@@ -8,11 +8,11 @@
     </url>    <url>
         <loc>https://webpack.js.org/branding/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/comparison/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/concepts/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/configuration/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/comparison/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/development/index.html</loc>
     </url>    <url>
@@ -42,9 +42,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/api/hot-module-replacement/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/api/loaders/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/api/module-methods/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/api/loaders/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/api/module-variables/index.html</loc>
     </url>    <url>
@@ -154,13 +154,13 @@
     </url>    <url>
         <loc>https://webpack.js.org/guides/hot-module-replacement/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/guides/installation/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/guides/integrations/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/guides/lazy-loading/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/guides/migrating/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/guides/installation/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/guides/output-management/index.html</loc>
     </url>    <url>
