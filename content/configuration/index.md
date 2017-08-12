@@ -390,6 +390,9 @@ module.exports = {
 
   [resolveLoader](/configuration/resolve#resolveloader): { /* same as resolve */ }
   // separate resolve options for loaders
+  
+  [parallelism](other-options#parallelism): 1, // number
+  // limit the number of parallel processed modules
 
   [profile](other-options#profile): true, // boolean
   // capture timing information
