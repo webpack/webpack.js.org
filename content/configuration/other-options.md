@@ -84,6 +84,13 @@ Expose custom values into the loader context.
 ?> Add an example...
 
 
+## `parallelism`
+
+`number`
+
+Limit the number of parallel processed modules. Can be used to fine tune performance or to get more reliable profiling results.
+
+
 ## `profile`
 
 `boolean`
@@ -91,6 +98,8 @@ Expose custom values into the loader context.
 Capture a "profile" of the application, including statistics and hints, which can then be dissected using the [Analyze](https://webpack.github.io/analyse/) tool.
 
 T> Use the [StatsPlugin](https://www.npmjs.com/package/stats-webpack-plugin) for more control over the generated profile.
+
+T> Combine with `parallelism: 1` for better results.
 
 
 ## `recordsPath`
