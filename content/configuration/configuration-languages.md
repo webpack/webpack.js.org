@@ -13,13 +13,13 @@ webpack 接受以多种编程和数据语言编写的配置文件。支持的文
 
 ## TypeScript
 
-To write the webpack configuration in [TypeScript](http://www.typescriptlang.org/), you would first install the necessary dependencies:
+为了用 [TypeScript](http://www.typescriptlang.org/) 书写 webpack 的配置文件，必须先安装相关依赖：
 
 ``` bash
 npm install --save-dev typescript ts-node @types/node @types/webpack
 ```
 
-and then proceed to write your configuration:
+之后就可以使用 typescript 书写 webpack 的配置文件了：
 
 __webpack.config.ts__
 
@@ -42,13 +42,13 @@ export default config;
 
 ## CoffeeScript
 
-Similarly, to use [CoffeeScript](http://coffeescript.org/), you would first install the necessary dependencies:
+类似的，为了使用 [CoffeeScript](http://coffeescript.org/) 来书写配置文件, 同样需要安装相关的依赖：
 
 ``` bash
 npm install --save-dev coffee-script
 ```
 
-and then proceed to write your configuration:
+之后就可以使用 Coffeecript 书写配置文件了：
 
 __webpack.config.coffee__
 
@@ -77,11 +77,11 @@ module.exports = config
 
 ## Babel and JSX
 
-In the example below JSX (React JavaScript Markup) and Babel are used to create a JSON Configuration that webpack can understand.
+在以下的例子中，使用了 JSX ( React 形式的 javascript ) 以及 Babel 来创建 JSON 形式的 webpack 配置文件：
 
-> Courtesy of [Jason Miller](https://twitter.com/_developit/status/769583291666169862)
+> 感谢 [Jason Miller](https://twitter.com/_developit/status/769583291666169862)
 
-First install the necessary dependencies:
+首先安装依赖：
 
 ``` js
 npm install --save-dev babel-register jsxobj babel-preset-es2015
@@ -126,7 +126,7 @@ export default (
 );
 ```
 
-W> If you are using babel elsewhere and have `modules` set to `false`, you will have to either maintain two separate `.babelrc` files or use `const jsxobj = require('jsxobj');` and `module.exports` instead of the new `import` and `export` syntax. This is because while Node does support many new ES6 features, they don't yet support ES6 module syntax.
+W> 如果你在其他地方也使用了 babel 并且把`模块(modules)`设置为了 `fales` ，那么你要么同时维护两份单独的 `.babelrc` 文件，要么使用 `conts jsxobj = requrie('jsxojb');` 并且使用 `moduel.exports` 而不是新版本的 `import` 和 `export` 语法。这是因为尽管 node.js 已经支持了不少 ES6 的新语法， 可是 node.js 还是不支持 ES6 的 import 和 export 。
 
 ***
 
