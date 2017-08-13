@@ -19,7 +19,7 @@ webpack 接受以多种编程和数据语言编写的配置文件。支持的文
 npm install --save-dev typescript ts-node @types/node @types/webpack
 ```
 
-之后就可以使用 typescript 书写 webpack 的配置文件了：
+之后就可以使用 TypeScript 书写 webpack 的配置文件了：
 
 __webpack.config.ts__
 
@@ -77,7 +77,7 @@ module.exports = config
 
 ## Babel and JSX
 
-在以下的例子中，使用了 JSX ( React 形式的 javascript ) 以及 Babel 来创建 JSON 形式的 webpack 配置文件：
+在以下的例子中，使用了 JSX（React 形式的 javascript）以及 Babel 来创建 JSON 形式的 webpack 配置文件：
 
 > 感谢 [Jason Miller](https://twitter.com/_developit/status/769583291666169862)
 
@@ -126,7 +126,7 @@ export default (
 );
 ```
 
-W> 如果你在其他地方也使用了 babel 并且把`模块(modules)`设置为了 `fales` ，那么你要么同时维护两份单独的 `.babelrc` 文件，要么使用 `conts jsxobj = requrie('jsxojb');` 并且使用 `moduel.exports` 而不是新版本的 `import` 和 `export` 语法。这是因为尽管 node.js 已经支持了不少 ES6 的新语法， 可是 node.js 还是不支持 ES6 的 import 和 export 。
+W> 如果你在其他地方也使用了 babel 并且把`模块(modules)`设置为了 `false`，那么你要么同时维护两份单独的 `.babelrc` 文件，要么使用 `conts jsxobj = requrie('jsxojb');` 并且使用 `moduel.exports` 而不是新版本的 `import` 和 `export` 语法。这是因为尽管 Node.js 已经支持了许多 ES6 的新特性，然而还无法支持 ES6 模块语法。
 
 ***
 
