@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/e77d0bc91230c3cbe376.css" rel="stylesheet">
+      <link href="/956ac0d1152a549e13bb.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -34,7 +34,7 @@
 <p>This plugin is used in the primary webpack config, it references the dll-only-bundle(s) to require pre-built dependencies.</p>
 <ul>
 <li><code>context</code>: (<strong>absolute path</strong>) context of requests in the manifest (or content property)</li>
-<li><code>manifest</code> (object): an object containing <code>content</code> and <code>name</code></li>
+<li><code>manifest</code> : an object containing <code>content</code> and <code>name</code> or a string to the absolute path of the JSON manifest to be loaded upon compilation</li>
 <li><code>content</code> (optional): the mappings from request to module id (defaults to <code>manifest.content</code>)</li>
 <li><code>name</code> (optional): the name where the dll is exposed (defaults to <code>manifest.name</code>) (see also <a href="/configuration/externals/"><code>externals</code></a>)</li>
 <li><code>scope</code> (optional): prefix which is used for accessing the content of the dll</li>
