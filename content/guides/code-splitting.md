@@ -84,7 +84,7 @@ module.exports = {
 };
 ```
 
-This will yield the following build result:
+这将生成以下构建结果：
 
 ``` bash
 Hash: 309402710a14167f42a8
@@ -100,10 +100,10 @@ another.bundle.js  544 kB       1  [emitted]  [big]  another
    [4] ./src/index.js 216 bytes {0} [built]
 ```
 
-As mentioned there are some pitfalls to this approach:
+正如前面提到的，这种方法存在一些缺陷：
 
-- If there are any duplicated modules between entry chunks they will be included in both bundles.
-- It isn't as flexible and can't be used to dynamically split code with the core application logic.
+- 如果entry块之间，有任何重复的模块调用，那么重复的模块都将被包含到entry块中的文件中。
+- 而且它不是那么的灵活，不能使用核心应用程序逻辑来动态的拆分代码。
 
 The first of these two points is definitely an issue for our example, as `lodash` is also imported within `./src/index.js` and will thus be duplicated in both bundles. Let's remove this duplication by using the `CommonsChunkPlugin`.
 
