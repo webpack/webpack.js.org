@@ -7,4 +7,4 @@ _describe your changes..._
 
 
 [1]: https://cla.js.foundation/webpack/webpack.js.org
-[2]: https://webpack.js.org/content/writers-guide/
+[2]: https://webpack.js.org/writers-guide/
