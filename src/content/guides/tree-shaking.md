@@ -1,6 +1,6 @@
 ---
 title: Tree Shaking
-sort: 8
+sort: 7
 contributors:
   - simon04
   - zacanger
@@ -53,6 +53,8 @@ export function cube(x) {
 ```
 
 With that in place, let's update our entry script to utilize this one of these new methods:
+
+__src/index.js__
 
 ``` diff
   import _ from 'lodash';
