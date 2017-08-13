@@ -19,7 +19,7 @@ Loaders running in a worker pool are limited. Examples:
 * Loaders cannot use custom loader API (i. e. by plugins).
 * Loaders cannot access the webpack options.
 
-Each worker is separate node.js process, which has an overhead of ~600ms. There is also an overhead of inter-process communication.
+Each worker is a separate node.js process, which has an overhead of ~600ms. There is also an overhead of inter-process communication.
 
 Use this loader only for expensive operations!
 

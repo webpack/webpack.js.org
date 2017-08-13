@@ -48,7 +48,7 @@ style.className === "z849f98ca812"
 
 ### `Url`
 
-It's also possible to add a URL `<link href="path/to/file.css" rel="stylesheet">` instead of a inlining the CSS `{String}` with `<style></style>` tag.
+It's also possible to add a URL `<link href="path/to/file.css" rel="stylesheet">` instead of inlining the CSS `{String}` with `<style></style>` tag.
 
 ```js
 import url from 'file.css'
@@ -131,7 +131,7 @@ Styles are not added on `import/require()`, but instead on call to `use`/`ref`. 
 |**`insertAt`**|`{String}`|`bottom`|Inserts `<style></style>` at the given position|
 |**`insertInto`**|`{String}`|`<head>`|Inserts `<style></style>` into the given position|
 |**`sourceMap`**|`{Boolean}`|`false`|Enable/Disable Sourcemaps|
-|**`convertToAbsoluteUrls`**|`{Boolean}`|`false`|Coverts relative URLs to absolute urls, when source maps are enabled|
+|**`convertToAbsoluteUrls`**|`{Boolean}`|`false`|Converts relative URLs to absolute urls, when source maps are enabled|
 
 ### `base`
 
