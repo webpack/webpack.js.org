@@ -36,7 +36,7 @@ Combine this plugin with [`output.library`](/configuration/output/#output-librar
 This plugin is used in the primary webpack config, it references the dll-only-bundle(s) to require pre-built dependencies.
 
 * `context`: (**absolute path**) context of requests in the manifest (or content property)
-* `manifest` (object): an object containing `content` and `name`
+* `manifest` : an object containing `content` and `name` or a string to the absolute path of the JSON manifest to be loaded upon compilation
 * `content` (optional): the mappings from request to module id (defaults to `manifest.content`)
 * `name` (optional): the name where the dll is exposed (defaults to `manifest.name`) (see also [`externals`](/configuration/externals/))
 * `scope` (optional): prefix which is used for accessing the content of the dll
