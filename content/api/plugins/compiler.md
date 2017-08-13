@@ -60,7 +60,9 @@ The `Compiler` is what we call a `Tapable` instance. By this, we mean that it mi
 
 ## Watching
 
-The `Compiler` supports two flavors of execution. One on watch mode and one on a normal single run. While it essentially performs the same functionality while watching, there are some additions to the lifecycle events. This allows `webpack` to have Watch specific plugins.
+The `Compiler` supports "watch mode" which monitors the file system and recompiles as files change. When in watch mode, the compiler will emit the additional events ["watch-run", "watch-close", and "invalid"](#event-hooks). This is typically used in [development](/guides/development), usually under the hood of tools like `webpack-dev-server`, so that the developer doesn't need to re-compile manually every time.
+
+For more details about watch mode, see the [Node.js API documentation](/api/node/#watching) or the [CLI watch options](/api/cli/#watch-options).
 
 
 ## MultiCompiler
@@ -115,6 +117,7 @@ __`after-emit`__              | After emitting assets to output dir     | `compi
 __`done`__                    | Completion of compile                   | `stats`                   | sync
 __`failed`__                  | Failure of compile                      | `error`                   | sync
 __`invalid`__                 | After invalidating a watch compile      | `fileName`, `changeTime`  | sync
+__`watch-close`__             | After stopping a watch compile          | -                         | sync
 
 
 ## Usage

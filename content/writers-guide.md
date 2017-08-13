@@ -48,18 +48,18 @@ Note that `related` will generate a __Further Reading__ section at the bottom of
 
 ## Typesetting
 
-* webpack should always be written in lower-case letters. Even at the beginning of a sentence. ([source](https://github.com/webpack/media#name))
-* loaders are enclosed in backticks and [kebab-cased](https://en.wikipedia.org/w/index.php?title=Kebab_case): `css-loader`, `ts-loader`, …
-* plugins are enclosed in backticks and [camel-cased](https://en.wikipedia.org/wiki/Camel_case): `BannerPlugin`, `NpmInstallWebpackPlugin`, …
-* Use "webpack 2" to refer to a specific webpack version (~~"webpack v2"~~)
-* Use ES5; ES2015, ES2016, … to refer to the ECMAScript standards (~~ES6~~, ~~ES7~~)
+- webpack should always be written in lower-case letters. Even at the beginning of a sentence. ([source](https://github.com/webpack/media#name))
+- loaders are enclosed in backticks and [kebab-cased](https://en.wikipedia.org/w/index.php?title=Kebab_case): `css-loader`, `ts-loader`, …
+- plugins are enclosed in backticks and [camel-cased](https://en.wikipedia.org/wiki/Camel_case): `BannerPlugin`, `NpmInstallWebpackPlugin`, …
+- Use "webpack 2" to refer to a specific webpack version (~~"webpack v2"~~)
+- Use ES5; ES2015, ES2016, … to refer to the ECMAScript standards (~~ES6~~, ~~ES7~~)
 
 
 ## Formatting
 
 ### Code
 
-**Syntax: \`\`\`javascript … \`\`\`**
+__Syntax: \`\`\`javascript … \`\`\`__
 
 ```javascript
 function foo () {
@@ -71,19 +71,19 @@ foo();
 
 ### Lists
 
-* Boo
-* Foo
-* Zoo
+- Boo
+- Foo
+- Zoo
 
 Lists should be ordered alphabetically.
 
 ### Tables
 
-| Parameter  | Explanation                                      | Input type | Default value |
-|------------|--------------------------------------------------|------------|---------------|
-| --debug    | Switch loaders to debug mode                     | boolean    | false         |
-| --devtool  | Define source map type for the bundled resources | string     | -             |
-| --progress | Print compilation progress in percentage         | boolean    | false         |
+Parameter   | Explanation                                      | Input Type | Default Value
+----------- | ------------------------------------------------ | ---------- |--------------
+--debug     | Switch loaders to debug mode                     | boolean    | false
+--devtool   | Define source map type for the bundled resources | string     | -
+--progress  | Print compilation progress in percentage         | boolean    | false
 
 Same goes for tables.
 

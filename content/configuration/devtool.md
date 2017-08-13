@@ -60,7 +60,7 @@ The following options are ideal for development:
 
 `cheap-eval-source-map` - Similar to `eval-source-map`, each module is executed with `eval()`. However, with this option the Source Map is passed as a Data URL to the `eval()` call. It is "cheap" because it doesn't have column mappings, it only maps line numbers.
 
-`cheap-module-eval-source-map` - Similar to `cheap-eval-source-map`, however in this case this case loaders are able to process the mapping for better results.
+`cheap-module-eval-source-map` - Similar to `cheap-eval-source-map`, however, in this case loaders are able to process the mapping for better results.
 
 
 ### Production
