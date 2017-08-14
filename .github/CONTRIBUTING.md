@@ -26,6 +26,7 @@ will do this automatically. This step pulls in documentation for loaders/plugins
 in separate repositories such as the ones found in the [webpack-contrib][4] organization.
 See the `package.json` for the full list of `scripts`.
 
+> Note that a __Python version between v2.5.0 and 3.0.0__ is required for the proselint dependency.
 > Note that __Node 6.9.x__ or above is required for the build process to run properly.
 
 
