@@ -56,9 +56,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/api/stats/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/concepts/dependency-graph/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/concepts/configuration/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/concepts/dependency-graph/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/concepts/entry-points/index.html</loc>
     </url>    <url>
@@ -250,9 +250,9 @@
     </url>    <url>
         <loc>https://webpack.js.org/loaders/svg-inline-loader/index.html</loc>
     </url>    <url>
-        <loc>https://webpack.js.org/loaders/transform-loader/index.html</loc>
-    </url>    <url>
         <loc>https://webpack.js.org/loaders/thread-loader/index.html</loc>
+    </url>    <url>
+        <loc>https://webpack.js.org/loaders/transform-loader/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/loaders/url-loader/index.html</loc>
     </url>    <url>
@@ -336,6 +336,8 @@
     </url>    <url>
         <loc>https://webpack.js.org/api/plugins/dependency/index.html</loc>
     </url>    <url>
+        <loc>https://webpack.js.org/api/plugins/module-factories/index.html</loc>
+    </url>    <url>
         <loc>https://webpack.js.org/api/plugins/parser/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/api/plugins/resolver/index.html</loc>
@@ -343,6 +345,4 @@
         <loc>https://webpack.js.org/api/plugins/tapable/index.html</loc>
     </url>    <url>
         <loc>https://webpack.js.org/api/plugins/template/index.html</loc>
-    </url>    <url>
-        <loc>https://webpack.js.org/api/plugins/module-factories/index.html</loc>
     </url></urlset>
