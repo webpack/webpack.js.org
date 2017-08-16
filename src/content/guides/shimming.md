@@ -163,9 +163,9 @@ Node built-ins, like `process`, can be polyfilled right directly from your confi
 
 ## Loading polyfills on demand
 
-It's really common in web projects to include polyfills in the main bundle. This is not recommended since we are penalizing users using modern browsers, they will have to download a bigger file unnecessarely.
+It's really common in web projects to include polyfills in the main bundle. This is not recommended since we are penalizing modern browsers users, since they will have to download a bigger file unnecessarely.
 
-The simplest way to mitigate this is to add a separate entry point in your webpack config file including the polyfills you need.
+The simplest way to mitigate this is by adding a separate entry point in your webpack config file including the polyfills your project needs.
 
 ```javascript
 // webpack.config.js
@@ -181,7 +181,7 @@ module.exports = {
 };
 ```
 
-An alternative is to creative a new entry file and manually import the packages.
+An alternative is to create a new entry file and manually import these packages.
 
 ```javascript
 // src/polyfills.js
@@ -200,7 +200,7 @@ module.exports = {
 };
 ```
 
-In your html file you need to conditionally load the `polyfills.js` before your bundle. How you make this decision depends on the technologies and browsers you need to support.
+In your html file you need to conditionally load the `polyfills.js` file before your bundle. How you make this decision depends on the technologies and browsers you need to support.
 
 ```html
 <script>
@@ -229,7 +229,7 @@ T> Any script added dynamically like in the example above will run as soon as it
 
 ### Smaller babel polyfill
 
-`babel-preset-env` uses [https://github.com/ai/browserslist](browserlist) to transpile only what is not supported in your browsers matrix. This preset comes with the `useBuiltIns` option _(false by default)_ which converts your global `babel-polyfill` import to a more granular feature by feature import like:
+`babel-preset-env` uses [browserslist](https://github.com/ai/browserlist) to transpile only what is not supported in your browsers matrix. This preset comes with the `useBuiltIns` option _(false by default)_ which converts your global `babel-polyfill` import to a more granular feature by feature import pattern like:
 
 ```javascript
 import "core-js/modules/es7.string.pad-start";
@@ -238,3 +238,7 @@ import "core-js/modules/web.timers";
 import "core-js/modules/web.immediate";
 import "core-js/modules/web.dom.iterable";
 ```
+
+### References
+* [Reward modern browser users script](https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665)
+* [`useBuiltIns` in `babel-preset-env`](https://github.com/babel/babel-preset-env#usebuiltins)
