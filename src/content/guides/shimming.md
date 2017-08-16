@@ -224,7 +224,7 @@ In your html file you need to conditionally load the `polyfills.js` before your 
 </script>
 ```
 
-Any script added dynamically like in the example above will run as soon as it's parsed, but we need our polyfill to run before our bundle. This is why we are setting `async` to `false` for each script.
+T> Any script added dynamically like in the example above will run as soon as it's parsed, but we need our polyfill to run before our bundle. This is why we are setting `async` to `false` for each script.
 
 
 ### Smaller babel polyfill
