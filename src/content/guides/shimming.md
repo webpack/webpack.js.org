@@ -5,6 +5,7 @@ contributors:
   - pksjce
   - jhnns
   - simon04
+  - jeremenichelli
 ---
 
 `webpack` as a module bundler can understand modules written as ES2015 modules, CommonJS or AMD. But many times, while using third party libraries, we see that they expect dependencies which are global, AKA `$` for `jquery`. They might also be creating global variables which need to be exported. Here we will see different ways to help webpack understand these __broken modules__.
@@ -158,3 +159,82 @@ module.exports = {
 ## Node Built-Ins
 
 Node built-ins, like `process`, can be polyfilled right directly from your configuration file without the use of any special loaders or plugins. See the [node configuration page](/configuration/node) for more information and examples.
+
+
+## Loading polyfills on demand
+
+It's really common in web projects to include polyfills in the main bundle. This is not recommended since we are penalizing users using modern browsers, they will have to download a bigger file unnecessarely.
+
+The simplest way to mitigate this is to add a separate entry point in your webpack config file including the polyfills you need.
+
+```javascript
+// webpack.config.js
+module.exports = {
+  entry: {
+    polyfills: [
+      'babel-polyfill',
+      'whatwg-fetch'
+    ],
+    main: './src/index.js'
+  }
+  // ... rest of your webpack config
+};
+```
+
+An alternative is to creative a new entry file and manually import the packages.
+
+```javascript
+// src/polyfills.js
+import 'babel-polyfill';
+import 'whatwg-fetch';
+```
+
+```javascript
+// webpack.config.js
+module.exports = {
+  entry: {
+    polyfills: './src/polyfills.js',
+    main: './src/index.js'
+  }
+  // rest of your webpack config
+};
+```
+
+In your html file you need to conditionally load the `polyfills.js` before your bundle. How you make this decision depends on the technologies and browsers you need to support.
+
+```html
+<script>
+  var modernBrowser = (
+    'fetch' in window &&
+    'assign' in Object
+  );
+
+  var scripts = [ '/main.js' ];
+
+  if (!modernBrowser) {
+    scripts.unshift('/polyfills.js');
+  }
+
+  scripts.map(function(src) {
+    var scriptElement = document.createElement('script');
+    scriptElement.async = false;
+    scriptElement.src = src;
+    document.head.appendChild(scriptElement);
+  });
+</script>
+```
+
+Any script added dynamically like in the example above will run as soon as it's parsed, but we need our polyfill to run before our bundle. This is why we are setting `async` to `false` for each script.
+
+
+### Smaller babel polyfill
+
+`babel-preset-env` uses [https://github.com/ai/browserslist](browserlist) to transpile only what is not supported in your browsers matrix. This preset comes with the `useBuiltIns` option _(false by default)_ which converts your global `babel-polyfill` import to a more granular feature by feature import like:
+
+```javascript
+import "core-js/modules/es7.string.pad-start";
+import "core-js/modules/es7.string.pad-end";
+import "core-js/modules/web.timers";
+import "core-js/modules/web.immediate";
+import "core-js/modules/web.dom.iterable";
+```
