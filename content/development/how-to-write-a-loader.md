@@ -1,5 +1,7 @@
 ---
 title: How to write a loader?
+contributors:
+  - asulaiman
 sort: 3
 ---
 
