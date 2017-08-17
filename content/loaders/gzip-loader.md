@@ -3,13 +3,13 @@ title: gzip-loader
 source: https://raw.githubusercontent.com/webpack-contrib/gzip-loader/master/README.md
 edit: https://github.com/webpack-contrib/gzip-loader/edit/master/README.md
 ---
-## Install
+## 安装
 
 ```bash
 npm install --save-dev gzip-loader
 ```
 
-## Usage
+## 用法
 
 **webpack.config.js**
 
@@ -33,7 +33,7 @@ module.exports = {
 require("gzip-loader!./file.js.gz");
 ```
 
-## Maintainers
+## 运维人员
 
 <table>
   <tbody>
