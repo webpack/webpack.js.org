@@ -22,7 +22,8 @@ In the complex case, when multiple loaders are chained, only the last loader get
 In other words the loading order for chained loaders goes from right to left or bottom to top. 
 For example: lets say you have two loaders that go by the name of `fooLoader` and `barLoader`. You would like to execute `fooLoader` and then pass the result of the transformation from `fooLoader` finally to `barLoader`. 
 
-You would add the following in your config file (assuming that both loaders are already defined): 
+You would add the following in your config file (assuming that both loaders are already defined):
+
 ``` javascript
 module: {
          rules: [{
@@ -31,7 +32,9 @@ module: {
                 ]
          }
 ```
+
 Note that webpack currently only searches in your node modules folder for loaders. If these loaders are defined outside your node modules folder you would need to use the `resolveLoader` property to get webpack to include your loaders. For example lets say you have your custom loaders included in a folder called `loaders`. You would have to add the following to your config file: 
+
 ``` javascript
 resolveLoader: {
 modules: ['node_modules', path_resolve[__dirname, 'loaders']
