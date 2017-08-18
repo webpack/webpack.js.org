@@ -37,7 +37,7 @@ Note that webpack currently only searches in your node modules folder for loader
 
 ``` javascript
 resolveLoader: {
-modules: ['node_modules', path_resolve[__dirname, 'loaders']
+modules: ['node_modules', path_resolve(__dirname, 'loaders')
 }
 ```
 
