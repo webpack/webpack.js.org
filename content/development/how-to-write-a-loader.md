@@ -28,7 +28,7 @@ You would add the following in your config file (assuming that both loaders are 
 module: {
          rules: [{
                   test: /\.js/,
-                  use: [{ loader: 'barLoader' }, { loader: 'fooLoader' }
+                  use: [{ loader: 'barLoader' }, { loader: 'fooLoader' }]
                 ]
          }
 ```
