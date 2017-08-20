@@ -8,12 +8,36 @@ contributors:
   - 5angel
 ---
 
-webpack is a tool which can be used to bundle application code and also to bundle library code. If you are the author of a JavaScript library and are looking to streamline your bundle strategy then this document will help you.
+webpack is a tool which can be used to bundle application code and also to bundle library code. If you are the author of a JavaScript library and are looking to streamline your bundle strategy then this document will help you with the differents webpack configurations to expose your libraries as you think convenient.
 
 
-## Author a Library
+## Authoring a Library
 
-Let's assume that you are writing a small library `webpack-numbers` allowing to convert numbers 1 to 5 from their numeric to a textual representation and vice-versa. The implementation makes use of ES2015 modules, and might look like this:
+Let's assume that you are writing a small library ,`webpack-numbers`, allowing to convert numbers 1 to 5 from their numeric representation to the textual one and vice-versa, e.g.: 2 to 'two'. 
+The implementation makes use of ES2015 modules, and might look like this:
+
+__src/ref.json__
+```javascript
+[{
+    "num": 1,
+    "word": "One"
+}, {
+    "num": 2,
+    "word": "Two"
+}, {
+    "num": 3,
+    "word": "Three"
+}, {
+    "num": 4,
+    "word": "Four"
+}, {
+    "num": 5,
+    "word": "Five"
+}, {
+    "num": 0,
+    "word": "Zero"
+}]
+```
 
 __src/index.js__
 
@@ -34,38 +58,43 @@ export function wordToNum(word) {
 };
 ```
 
-The usage spec for the library will be as follows.
+The usage specification for the library use will be as follows:
 
 ```javascript
-import * as webpackNumbers from 'webpack-numbers';
-
+import * as webpackNumbers from 'webpack-numbers';//ES2015 module import
+var webpackNumbers = require('webpack-numbers');// CommonJS module require
 ...
-webpackNumbers.wordToNum('Two') // output is 2
+webpackNumbers.wordToNum('Two') //ES2015 and CommonJS module use
 ...
+//AMD module require
+require(['webpackNumbers'], function ( webpackNumbers) {
+    ...
+    webpackNumbers.wordToNum('Two')//AMD module use
+    ...
+});
 
-// CommonJS modules
-
-var webpackNumbers = require('webpack-numbers');
-
-...
-webpackNumbers.numToWord(3); // output is Three
-...
 ```
-
+The consumer also can use the library loading it with the script tag:
 ```html
-// Or as a script tag
 
 <html>
 ...
 <script src="https://unpkg.com/webpack-numbers"></script>
 <script>
     ...
-    /* webpackNumbers is available as a global variable */
-    webpackNumbers.wordToNum('Five') //output is 5
+    /* Global variable */
+    webpackNumbers.wordToNum('Five') 
+    /* Property in the window object */
+    window.webpackNumbers.wordToNum('Five') 
+    //
     ...
 </script>
 </html>
 ```
+The configurations also can expose the library in the next ways:
+- Property in the global object, for node.
+- Property in the this object.
+
 
 For full library configuration and code please refer to [webpack-library-example](https://github.com/kalcifer/webpack-library-example)
 
