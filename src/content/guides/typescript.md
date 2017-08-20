@@ -7,25 +7,36 @@ contributors:
   - mtrivera
 ---
 
+T> This guide stems from the [*Getting Started*](/guides/getting-started/) guide.
+
 [TypeScript](https://www.typescriptlang.org) is a typed superset of JavaScript that compiles to plain JavaScript. In this guide we will learn how to integrate TypeScript with webpack.
 
 
 ## Basic Setup
 
-In order to get started with webpack and TypeScript, first we must [install webpack](/guides/installation/) in our project.
-
-To start using webpack with TypeScript you need a couple of things:
-
-1. Install the TypeScript compiler in your project.
-2. Install a TypeScript loader (in this case we're using `ts-loader`).
-3. Create a __tsconfig.json__ file to contain our TypeScript compilation configuration.
-4. Create __webpack.config.js__ to contain our webpack configuration.
-
-You can install the TypeScript compiler and loader by running:
+First install the TypeScript compiler and loader by running:
 
  ``` bash
  npm install --save-dev typescript ts-loader
  ```
+
+Now we'll modify the directory structure & the configuration files:
+
+__project__git stat
+
+``` diff
+webpack-demo
+|- package.json
++ |- tsconfig.json
+|- webpack.config.js
+|- /dist
+  |- bundle.js
+  |- index.html
+|- /src
+  |- index.js
++ |- index.ts
+|- /node_modules
+```
 
 __tsconfig.json__
 
@@ -54,6 +65,8 @@ To learn more about webpack configuration, see the [configuration concepts](/con
 Now let's configure webpack to handle TypeScript:
 
 ```js
+const path = require('path');
+
 module.exports = {
  entry: './index.ts',
  module: {
@@ -70,12 +83,12 @@ module.exports = {
  },
  output: {
    filename: 'bundle.js',
-   path: __dirname
+   path: path.resolve(__dirname, 'dist');
  }
 };
 ```
 
-This will direct webpack to _enter_ through `./index.ts`, _load_ all `.ts` and `.tsx` files through the `ts-loader`, and _output_ a `bundle.js` file in our current directory.
+This will direct webpackgit sdt to _enter_ through `./index.ts`, _load_ all `.ts` and `.tsx` files through the `ts-loader`, and _output_ a `bundle.js` file in our current directory.
 
 
 ## Loader
@@ -138,8 +151,13 @@ declare module "*.svg" {
 Here we declare a new module for SVGs by specifying any import that ends in `.svg` and defining the module's `content` as `any`. We could be more explicit about it being a url by defining the type as string. The same concept applies to other assets including CSS, SCSS, JSON and more.
 
 
-## Performance Loader
+## Build Performance
 
-[`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader)
+W> This may degrade build performance.
 
-Awesome TypeScript Loader has a [wonderful explanation](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader) of the difference between it and the `ts-loader`. The one downside is that setting up the `awesome-typescript-loader` is a bit more complex than configuring the `ts-loader`.
+See the [Build Performance](guides/build-performance/) guide on build tooling.
+
+
+## Conclusion
+
+Now that you've learned to use TypeScript with webpack to manage your JavaScript code, you can check out the next guide, which covers [Migrating from v1 to v2](guides/migrating/).
