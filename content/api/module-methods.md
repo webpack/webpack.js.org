@@ -126,13 +126,6 @@ require.resolve(dependency: String)
 
 Synchronously retrieve a module's ID. The compiler will ensure that the dependency is available in the output bundle. See [`module.id`](/api/module-variables#module-id-commonjs-) for more information.
 
-``` javascript
-var id = require.resolve("dependency");
-typeof id === "number";
-id === 0 // if dependency is the entry point
-id > 0 // elsewise
-```
-
 W> Module ID is a number in webpack (in contrast to NodeJS where it is a string -- the filename).
 
 
