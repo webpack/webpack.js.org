@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/b8bb2d02fc590930ffb8.css" rel="stylesheet">
+      <link href="/6071a500ea9d8fc226ad.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -76,11 +76,6 @@
 <pre><code class="lang-javascript">require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>dependency<span class="token punctuation">:</span> String<span class="token punctuation">)</span>
 </code></pre>
 <p>Synchronously retrieve a module&apos;s ID. The compiler will ensure that the dependency is available in the output bundle. See <a href="/api/module-variables#module-id-commonjs-"><code>module.id</code></a> for more information.</p>
-<pre><code class="lang-javascript"><span class="token keyword">var</span> id <span class="token operator">=</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;dependency&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">typeof</span> id <span class="token operator">===</span> <span class="token string">&quot;number&quot;</span><span class="token punctuation">;</span>
-id <span class="token operator">===</span> <span class="token number">0</span> <span class="token comment" spellcheck="true">// if dependency is the entry point</span>
-id <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token comment" spellcheck="true">// elsewise</span>
-</code></pre>
 <blockquote class="warning"><div class="tip-content"> Module ID is a number in webpack (in contrast to NodeJS where it is a string -- the filename). </div></blockquote><h3 class="header"><a class="anchor" href="#require-cache" id="require-cache"></a><span class="text"><code>require.cache</code></span><a class="icon-link" href="#require-cache"></a></h3>
 <p>Multiple requires to the same module result in only one module execution and only one export. Therefore a cache in the runtime exists. Removing values from this cache cause new module execution and a new export.</p>
 <blockquote class="warning"><div class="tip-content"> This is only needed in rare cases for compatibility! </div></blockquote><pre><code class="lang-javascript"><span class="token keyword">var</span> d1 <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;dependency&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
