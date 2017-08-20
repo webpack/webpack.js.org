@@ -28,6 +28,8 @@ See the `package.json` for the full list of `scripts`.
 
 > Note that __Node 6.9.x__ or above is required for the build process to run properly.
 
+> Note that a __Python version between v2.5.0 and 3.0.0__ is required for the [proselint][12] dependency.
+
 
 ## Contributor License Agreement
 
@@ -120,3 +122,4 @@ any time spent fixing typos or clarifying sections in the documentation.
 [9]: https://help.github.com/articles/proposing-changes-to-your-work-with-pull-requests/
 [10]: http://conventionalcommits.org/
 [11]: https://github.com/conventional-changelog/standard-version
+[12]: https://github.com/amperser/proselint
