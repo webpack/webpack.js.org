@@ -110,16 +110,6 @@ Specifies a different [configuration](/configuration) file to pick up. Use this 
 webpack --config example.config.js
 ```
 
-**Specify build environment**
-
-Send [environment](/configuration/configuration-types) variable to be used in webpack config file.
-
-
-```bash
-webpack --env.production    # sets production to true
-webpack --env.platform=web  # sets platform to "web"
-```
-
 **Print result of webpack as a JSON**
 
 ```bash
@@ -129,6 +119,25 @@ webpack --json > stats.json
 
 In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option the output can be a JSON object. This response is accepted by webpack's [analyse tool](https://webpack.github.com/analyse), or chrisbateman's [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/), or th0r's [webpack-bundle-analyzer](https://github.com/th0r/webpack-bundle-analyzer). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
 
+### Environment Options
+
+When the webpack configuration [exports a function](/configuration/configuration-types#exporting-a-function), an "environment" may be passed to it.
+
+```bash
+webpack --env.production    # sets env.production == true
+webpack --env.platform=web  # sets env.platform == "web"
+```
+
+The `--env` argument accepts various syntaxes:
+
+| Invocation                    | Resulting environment       |
+|-------------------------------|-----------------------------|
+| webpack --env prod            | `"prod"`                    |
+| webpack --env.prod            | `{ prod: true }`            |
+| webpack --env.prod=1          | `{ prod: 1 }`               |
+| webpack --env.prod=foo        | `{ prod: "foo" }`           |
+| webpack --env.prod --env.min  | `{ prod: true, min: true }` |
+| webpack --env.prod --env min  | `[{ prod: true }, "min"]`   |
 
 ### Output Options
 

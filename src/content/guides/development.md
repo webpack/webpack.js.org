@@ -213,7 +213,7 @@ __package.json__
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "watch": "webpack --progress --watch",
-+     "start": "webpack-dev-server --open"
++     "start": "webpack-dev-server --open",
       "build": "webpack"
     },
     "keywords": [],
@@ -240,7 +240,147 @@ T> Now that your server is working, you might want to give [Hot Module Replaceme
 
 ### Using webpack-dev-middleware
 
-?> Familiar with `webpack-dev-middleware`? We need your help! Please submit a PR to fill in the missing instructions and example here. Make sure to keep it simple as this guide is intended for beginners.
+`webpack-dev-middleware` is a wrapper that will emit files processed by webpack to a server. This is used in `webpack-dev-server` internally, however it's available as a separate package to allow more custom setups if desired. We'll take a look at an example that combines webpack-dev-middleware with an express server.
+
+Let's install `express` and `webpack-dev-middleware` so we can get started:
+
+``` bash
+npm install --save-dev express webpack-dev-middleware
+```
+
+Now we need to make some adjustments to our webpack configuration file in order to make sure the middleware will function correctly:
+
+__webpack.config.js__
+
+``` diff
+  const path = require('path');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+  module.exports = {
+    entry: {
+      app: './src/index.js',
+      print: './src/print.js'
+    },
+    devtool: 'inline-source-map',
+    plugins: [
+      new CleanWebpackPlugin(['dist']),
+      new HtmlWebpackPlugin({
+        title: 'Output Management'
+      }),
+      new webpack.HotModuleReplacementPlugin()
+    ],
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist'),
++     publicPath: '/'
+    }
+  };
+```
+
+The `publicPath` will be used within our server script as well in order to make sure files are served correctly on `http://localhost:3000`, the port number we'll specify later. The next step is setting up our custom `express` server:
+
+__project__
+
+``` diff
+  webpack-demo
+  |- package.json
+  |- webpack.config.js
++ |- server.js
+  |- /dist
+  |- /src
+    |- index.js
+    |- print.js
+  |- /node_modules
+```
+
+__server.js__
+
+``` js
+const express = require('express');
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+
+const app = express();
+const config = require('./webpack.config.js');
+const compiler = webpack(config);
+
+// Tell express to use the webpack-dev-middleware and use the webpack.config.js
+// configuration file as a base.
+app.use(webpackDevMiddleware(compiler, {
+  publicPath: config.output.publicPath
+}));
+
+// Serve the files on port 3000.
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!\n');
+});
+```
+
+Now add an npm script to make it a little easier to run the server:
+
+__package.json__
+
+``` diff
+  {
+    "name": "development",
+    "version": "1.0.0",
+    "description": "",
+    "main": "webpack.config.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "watch": "webpack --progress --watch",
+      "start": "webpack-dev-server --open",
++     "server": "node server.js",
+      "build": "webpack"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "css-loader": "^0.28.4",
+      "csv-loader": "^2.1.1",
+      "express": "^4.15.3",
+      "file-loader": "^0.11.2",
+      "html-webpack-plugin": "^2.29.0",
+      "style-loader": "^0.18.2",
+      "webpack": "^3.0.0",
+      "webpack-dev-middleware": "^1.12.0",
+      "xml-loader": "^1.2.1"
+    }
+  }
+```
+
+Now in your terminal run `npm run server`, it should give you an output similar to this:
+
+``` bash
+Example app listening on port 3000!
+webpack built 27b137af6d9d8668c373 in 1198ms
+Hash: 27b137af6d9d8668c373
+Version: webpack 3.0.0
+Time: 1198ms
+          Asset       Size  Chunks                    Chunk Names
+  app.bundle.js    1.44 MB    0, 1  [emitted]  [big]  app
+print.bundle.js    6.57 kB       1  [emitted]         print
+     index.html  306 bytes          [emitted]
+   [0] ./src/print.js 116 bytes {0} {1} [built]
+   [1] ./src/index.js 403 bytes {0} [built]
+   [2] ./node_modules/lodash/lodash.js 540 kB {0} [built]
+   [3] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [4] (webpack)/buildin/module.js 517 bytes {0} [built]
+Child html-webpack-plugin for "index.html":
+         Asset    Size  Chunks  Chunk Names
+    index.html  544 kB       0
+       [0] ./node_modules/html-webpack-plugin/lib/loader.js!./node_modules/html-webpack-plugin/default_index.ejs 538 bytes {0} [built]
+       [1] ./node_modules/lodash/lodash.js 540 kB {0} [built]
+       [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+       [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+webpack: Compiled successfully.
+```
+
+Now fire up your browser and go to `http://localhost:3000`, you should see your webpack app running and functioning!
+
+T> If you like to know more about how Hot Module Replacement works, we recommend you read the [Hot Module Replacement](/guides/hot-module-replacement/) guide.
 
 
 ## Adjusting Your Text Editor

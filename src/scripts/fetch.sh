@@ -8,16 +8,16 @@ mkdir -p ./generated/plugins
 cp -rf ./src/content/plugins/ ./generated/plugins
 
 # Fetch webpack-contrib (and various other) loader repositories
-./src/scripts/fetch_package_names.js "webpack-contrib" "-loader" | ./src/scripts/fetch_package_files.js "README.md" "./generated/loaders"
-./src/scripts/fetch_package_names.js "babel" "babel-loader" | ./src/scripts/fetch_package_files.js "README.md" "./generated/loaders"
-./src/scripts/fetch_package_names.js "postcss" "postcss-loader" | ./src/scripts/fetch_package_files.js "README.md" "./generated/loaders"
-./src/scripts/fetch_package_names.js "peerigon" "extract-loader" | ./src/scripts/fetch_package_files.js "README.md" "./generated/loaders"
+node ./src/scripts/fetch_package_names.js "webpack-contrib" "-loader" | node ./src/scripts/fetch_package_files.js "README.md" "./generated/loaders"
+node ./src/scripts/fetch_package_names.js "babel" "babel-loader" | node ./src/scripts/fetch_package_files.js "README.md" "./generated/loaders"
+node ./src/scripts/fetch_package_names.js "postcss" "postcss-loader" | node ./src/scripts/fetch_package_files.js "README.md" "./generated/loaders"
+node ./src/scripts/fetch_package_names.js "peerigon" "extract-loader" | node ./src/scripts/fetch_package_files.js "README.md" "./generated/loaders"
 
 # Fetch webpack-contrib (and various other) plugin repositories
-./src/scripts/fetch_package_names.js "webpack-contrib" "-webpack-plugin" | ./src/scripts/fetch_package_files.js "README.md" "./generated/plugins"
+node ./src/scripts/fetch_package_names.js "webpack-contrib" "-webpack-plugin" | node ./src/scripts/fetch_package_files.js "README.md" "./generated/plugins"
 
 # Fetch sponsors and backers from opencollective
-./src/scripts/fetch_supporters.js
+node ./src/scripts/fetch_supporters.js
 
 # Fetch starter kits
-./src/scripts/fetch_starter_kits.js
+node ./src/scripts/fetch_starter_kits.js

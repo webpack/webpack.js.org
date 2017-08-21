@@ -116,8 +116,6 @@ webpack-dev-server --client-log-level none
 
 Possible values are `none`, `error`, `warning` or `info` (default).
 
-Note that the console will *always* show bundle errors and warnings. This option only effects the message before it.
-
 
 ## `devServer.color` - CLI only
 
@@ -295,7 +293,7 @@ Enable webpack's Hot Module Replacement feature:
 hot: true
 ```
 
-T> Note that you must also include a `new webpack.HotModuleReplacementPlugin()` to fully enable HMR. See the [HMR concepts page](/concepts/hot-module-replacement) for more information.
+T> Note that `webpack.HotModuleReplacementPlugin` is required to fully enable HMR. If `webpack` or `webpack-dev-server` are launched with the `--hot` option, this plugin will be added automatically, so you may not need to add this to your `webpack.config.js`. See the [HMR concepts page](/concepts/hot-module-replacement) for more information.
 
 
 ## `devServer.hotOnly`

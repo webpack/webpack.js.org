@@ -6,7 +6,7 @@ request('https://opencollective.com/webpack/sponsors.json?requireActive=false', 
   if (err) {
     console.error('Failed to fetch sponsors: ', err);
 
-  } fs.writeFile('./src/components/support/support-sponsors.json', body, err => {
+  } fs.writeFile('./src/components/Support/support-sponsors.json', body, err => {
     if (err) {
       console.error('Failed to write sponsors file: ', err);
 
@@ -18,7 +18,7 @@ request('https://opencollective.com/webpack/backers.json?requireActive=false', (
   if (err) {
     console.error('Failed to fetch backers: ', err);
 
-  } fs.writeFile('./src/components/support/support-backers.json', body, err => {
+  } fs.writeFile('./src/components/Support/support-backers.json', body, err => {
     if (err) {
       console.error('Failed to write backers file: ', err);
 

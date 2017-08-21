@@ -47,6 +47,19 @@ export default class Support extends React.Component {
 
     return (
       <div className="support">
+        <div className="support__description">
+          { type === 'sponsors' ? (
+            <p>
+              <b className="support__rank">{ rank } sponsors</b>
+              <span>are those who have pledged { minimum ? `$${minimum}` : 'up' } { maximum ? `to $${maximum}` : 'or more' } to webpack.</span>
+            </p>
+          ) : (
+            <p>
+              The following <b>Backers</b> are individuals who have contributed various amounts of money in order to help support webpack. Every little bit helps, and we appreciate even the smallest contributions.
+            </p>
+          )}
+        </div>
+
         {
           supporters.map((supporter, index) => (
             <a key={ supporter.id || supporter.username || index }

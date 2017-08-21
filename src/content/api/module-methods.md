@@ -86,6 +86,7 @@ import(
 - `"lazy"` (default): Generates a lazy-loadable chunk for each `import()`ed module.
 - `"lazy-once"`: Generates a single lazy-loadable chunk that can satisfy all calls to `import()`. The chunk will be fetched on the first call to `import()`, and subsequent calls to `import()` will use the same network response. Note that this only makes sense in the case of a partially dynamic statement, e.g. ``import(`./locales/${language}.json`)``, where there are multiple module paths that could potentially be requested.
 - `"eager"`: Generates no extra chunk. All modules are included in the current chunk and no additional network requests are made. A `Promise` is still returned but is already resolved. In contrast to a static import, the module isn't executed until the call to `import()` is made.
+- `"weak"`: Tries to load the module if the module function has already been loaded in some other way (i. e. another chunk imported it or a script containing the module was loaded). A `Promise` is still returned but, only successfully resolves if the chunks are already on the client. If the module is not available, the `Promise` is rejected. A network request will never be performed. This is useful for universal rendering when required chunks are always manually served in initial requests (embedded within the page), but not in cases where app navigation will trigger an import not initially served.
 
 T> Note that both options can be combined like so `/* webpackMode: "lazy-once", webpackChunkName: "all-i18n-data" */`. This is parsed as a JSON5 object without curly brackets.
 
@@ -124,13 +125,6 @@ require.resolve(dependency: String)
 ```
 
 Synchronously retrieve a module's ID. The compiler will ensure that the dependency is available in the output bundle. See [`module.id`](/api/module-variables#module-id-commonjs-) for more information.
-
-``` javascript
-var id = require.resolve("dependency");
-typeof id === "number";
-id === 0 // if dependency is the entry point
-id > 0 // elsewise
-```
 
 W> Module ID is a number in webpack (in contrast to NodeJS where it is a string -- the filename).
 
@@ -353,4 +347,11 @@ if(__webpack_modules__[require.resolveWeak('module')]) {
 if(require.cache[require.resolveWeak('module')]) {
   // Do something when module was loaded before...
 }
+
+// You can perform dynamic resolves ("context") 
+// just as with other require/import methods.
+const page = 'Foo';
+__webpack_modules__[require.resolveWeak(`./page/${page}`)]
 ```
+
+T> `require.resolveWeak` is the foundation of *universal rendering* (SSR + Code Splitting), as used in packages such as [react-universal-component](https://github.com/faceyspacey/react-universal-component). It allows code to render synchronously on both the server and initial page-loads on the client. It requires that chunks are manually served or somehow available. It's able to require modules without indicating they should be bundled into a chunk. It's used in conjunction with `import()` which takes over when user navigation triggers additional imports.
