@@ -6,6 +6,7 @@ contributors:
   - johnstew
   - simon04
   - 5angel
+  - marioacc
 ---
 
 webpack is a tool which can be used to bundle application code and also to bundle library code. If you are the author of a JavaScript library and are looking to streamline your bundle strategy then this document will help you with the differents webpack configurations to expose your libraries as you think convenient.
@@ -14,7 +15,24 @@ webpack is a tool which can be used to bundle application code and also to bundl
 ## Authoring a Library
 
 Let's assume that you are writing a small library ,`webpack-numbers`, allowing to convert numbers 1 to 5 from their numeric representation to the textual one and vice-versa, e.g.: 2 to 'two'. 
-The implementation makes use of ES2015 modules, and might look like this:
+The basic project structure may look like this.
+
+__project__
+
+``` diff
++  |webpack.config.js
++  |- package.json
++  |- /src
++    |- index.js
++    |- ref.json
+```
+
+Initialize npm, install webpack and lodash
+``` bash
+
+npm init -y
+npm install --save-dev webpack lodash
+```
 
 __src/ref.json__
 ```javascript
@@ -101,18 +119,23 @@ For full library configuration and code please refer to [webpack-library-example
 
 ## Configure webpack
 
-Now the agenda is to bundle this library
+Now the agenda is to bundle this library achieving the next goals:
 
-- Without bundling `lodash` but requiring it to be loaded by the consumer.
-- Name of the library is `webpack-numbers` and the variable is `webpackNumbers`.
-- Library can be imported as `import webpackNumbers from 'webpack-numbers'` or `require('webpack-numbers')`.
-- Library can be accessed through global variable `webpackNumbers` when included through `script` tag.
-- Library can be accessed inside Node.js.
+- Without bundling `lodash`, but requiring it to be loaded by the consumer using `externals`.
+- Setting the library name as `webpack-numbers`.
+- Exposing the library as a variable called `webpackNumbers`.
+- Being able to access the library inside Node.js.s
+
+Also, the consumer will be able to access` the library the `next ways:
+- ES2015 module. i.e. `import webpackNumbers from 'webpack-numbers'`.
+- CommonJS module. i.e. `require('webpack-numbers')`.
+- Global variable when included through `script` tag.
+
 
 
 ### Add webpack
 
-Add basic webpack configuration.
+Add this basic webpack configuration to bundle the library.
 
 __webpack.config.js__
 
@@ -129,7 +152,6 @@ module.exports = {
 
 ```
 
-This adds basic configuration to bundle the library.
 
 
 ### Add `externals`
@@ -137,7 +159,7 @@ This adds basic configuration to bundle the library.
 Now, if you run `webpack`, you will find that a largish bundle file is created. If you inspect the file, you will find that lodash has been bundled along with your code.
 It would be unnecessary for your library to bundle a library like `lodash`. Hence you would want to give up control of this external library to the consumer of your library.
 
-This can be done using the `externals` configuration as
+This can be done using the `externals` configuration as:
 
 __webpack.config.js__
 
@@ -158,7 +180,7 @@ module.exports = {
 
 This means that your library expects a dependency named `lodash` to be available in the consumer's environment.
 
-If you only plan on using your library as a dependency in another webpack bundle, you may specify externals as an array.
+However, if you only plan on using your library as a dependency in another webpack bundle, you may specify externals as an array.
 
 ```javascript
 module.exports = {
@@ -171,7 +193,7 @@ module.exports = {
 };
 ```
 
-Please note: for bundles that use several files from a package like this
+Please note: for bundles that use several files from a package like this:
 
 ```javascript
 import A from 'library/A';
@@ -195,11 +217,27 @@ module.exports = {
 };
 ```
 
+W>At the moment of webpack 3.5.5, using the next configuration is not working properly as stated in the [issue 4824](https://github.com/webpack/webpack/issues/4824):
+```javascript
+module.exports = {
+    ...
+    output: {
+        ...
+        
+        libraryTarget: {
+            root:'_'
+        }
+    }
+    ...
+};
+```
+
+
 ### Add `libraryTarget`
 
-For widespread use of the library, we would like it to be compatible in different environments, i. e. CommonJS, AMD, Node.js and as a global variable.
+For widespread use of the library, we would like it to be compatible in different environments, i.e. CommonJS, AMD, Node.js and as a global variable.
 
-To make your library available for reuse, add `library` property in webpack configuration.
+To make your library available for reuse, add `library` property inside `output` in webpack configuration.
 
 __webpack.config.js__
 
@@ -214,7 +252,7 @@ module.exports = {
 };
 ```
 
-This makes your library bundle to be available as a global variable when imported. To make the library compatible with other environments, add `libraryTarget` property to the config.
+This makes your library bundle to be available as a global variable named `webpackNumbers` when imported. To make the library compatible with other environments, add `libraryTarget` property to the config. This will add the differents options about how the library can be exposed.
 
 __webpack.config.js__
 
@@ -224,13 +262,19 @@ module.exports = {
     output: {
         ...
         library: 'webpackNumbers',
-        libraryTarget: 'umd'
+        libraryTarget: 'umd',
     }
     ...
 };
 ```
+You can expose the library in the next ways:
+- Variable: as a global variable. Available in the `script` tag. i.e. `libraryTarget:'var'`.
+- This: available trough the this object. i.e. `libraryTarget:'this'`.
+- Window: available trough the `window` object, in the browser. i.e. `libraryTarget:'window'`.
+- UMD: available after AMD or CommonJS `require`. i.e. `libraryTarget:'umd'`
 
-If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output). See [`output.libraryTarget`](/configuration/output#output-librarytarget) there for a detailed list of all available options.
+If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output). 
+See [`output.libraryTarget`](/configuration/output#output-librarytarget) there for a detailed list of all available options.
 
 
 ### Final Steps
