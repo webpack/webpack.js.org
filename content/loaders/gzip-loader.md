@@ -33,7 +33,7 @@ module.exports = {
 require("gzip-loader!./file.js.gz");
 ```
 
-## 运维人员
+## 维护者
 
 <table>
   <tbody>
