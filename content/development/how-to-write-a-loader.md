@@ -1,8 +1,8 @@
 ---
 title: How to write a loader?
+sort: 3
 contributors:
   - asulaiman
-sort: 3
 ---
 
 A loader is a node module exporting a `function`.
@@ -19,27 +19,32 @@ The loader is expected to give back one or two values. The first value is a resu
 
 In the complex case, when multiple loaders are chained, only the last loader gets the resource file and only the first loader is expected to give back one or two values (JavaScript and SourceMap). Values that any other loader give back are passed to the previous loader.
 
-In other words the loading order for chained loaders goes from right to left or bottom to top. 
-For example: lets say you have two loaders that go by the name of `fooLoader` and `barLoader`. You would like to execute `fooLoader` and then pass the result of the transformation from `fooLoader` finally to `barLoader`. 
+In other words, chained loaders are executed in reverse order -- either right to left or bottom to top depending on the format of your array. Lets say you have two loaders that go by the name of `foo-loader` and `bar-loader`. You would like to execute `foo-loader` and then pass the result of the transformation from `foo-loader` finally to `bar-loader`. 
 
 You would add the following in your config file (assuming that both loaders are already defined):
 
 ``` javascript
 module: {
-         rules: [{
-                  test: /\.js/,
-                  use: [{ loader: 'barLoader' }, { loader: 'fooLoader' }]
-                ]
-         }
+  rules: [
+    {
+      test: /\.js/,
+      use: [
+        'bar-loader',
+        'foo-loader'
+      ]
+    }
+  ]
+}
 ```
 
 Note that webpack currently only searches in your node modules folder for loaders. If these loaders are defined outside your node modules folder you would need to use the `resolveLoader` property to get webpack to include your loaders. For example lets say you have your custom loaders included in a folder called `loaders`. You would have to add the following to your config file: 
 
 ``` javascript
 resolveLoader: {
-modules: ['node_modules', path_resolve(__dirname, 'loaders')
+  modules: ['node_modules', path_resolve(__dirname, 'loaders')
 }
 ```
+
 
 ## Examples
 
