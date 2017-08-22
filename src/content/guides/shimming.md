@@ -6,6 +6,11 @@ contributors:
   - jhnns
   - simon04
   - jeremenichelli
+related:
+  - title: Reward modern browser users script
+    url: https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665
+  - title: useBuiltIns in babel-preset-env
+    url: https://github.com/babel/babel-preset-env#usebuiltins
 ---
 
 `webpack` as a module bundler can understand modules written as ES2015 modules, CommonJS or AMD. But many times, while using third party libraries, we see that they expect dependencies which are global, AKA `$` for `jquery`. They might also be creating global variables which need to be exported. Here we will see different ways to help webpack understand these __broken modules__.
@@ -163,7 +168,7 @@ Node built-ins, like `process`, can be polyfilled right directly from your confi
 
 ## Loading polyfills on demand
 
-It's really common in web projects to include polyfills in the main bundle. This is not recommended since we are penalizing modern browsers users, since they will have to download a bigger file unnecessarely.
+It's really common in web projects to include polyfills in the main bundle. This is not recommended because we are penalizing modern browsers users since they will download a bigger file **unnecessarely**.
 
 The simplest way to mitigate this is by adding a separate entry point in your webpack config file including the polyfills your project needs.
 
@@ -229,7 +234,7 @@ T> Any script added dynamically like in the example above will run as soon as it
 
 ### Smaller babel polyfill
 
-`babel-preset-env` uses [browserslist](https://github.com/ai/browserlist) to transpile only what is not supported in your browsers matrix. This preset comes with the `useBuiltIns` option _(false by default)_ which converts your global `babel-polyfill` import to a more granular feature by feature import pattern like:
+`babel-preset-env` uses [browserslist](https://github.com/ai/browserslist) to transpile only what is not supported in your browsers matrix. This preset comes with the `useBuiltIns` option _(false by default)_ which converts your global `babel-polyfill` import to a more granular feature by feature import pattern like:
 
 ```javascript
 import "core-js/modules/es7.string.pad-start";
@@ -238,7 +243,3 @@ import "core-js/modules/web.timers";
 import "core-js/modules/web.immediate";
 import "core-js/modules/web.dom.iterable";
 ```
-
-### References
-* [Reward modern browser users script](https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665)
-* [`useBuiltIns` in `babel-preset-env`](https://github.com/babel/babel-preset-env#usebuiltins)
