@@ -74,7 +74,7 @@ See [the source](https://github.com/webpack/webpack/blob/master/buildin/global.j
 
 `boolean | "mock"`
 
-Default: `true`
+Default: `"mock"`
 
 Options:
 
@@ -87,7 +87,7 @@ Options:
 
 `boolean | "mock"`
 
-Default: `true`
+Default: `"mock"`
 
 Options:
 
