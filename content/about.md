@@ -13,6 +13,7 @@ contributors:
   - dear-lizhihua
   - ellyliang
   - fa93hws
+  - guyunxiang
   - hijiangtao
   - hikerpig
   - huangtubiao
