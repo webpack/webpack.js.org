@@ -19,7 +19,7 @@ related:
     url: /api/hot-module-replacement
 ---
 
-T> This guide extends on code examples found in the [Development](/guides/development) guide.
+T> 本指南示例代码延用[开发](/guides/development)指南的示例代码。
 
 模块热替换(Hot Module Replacement 或 HMR)是 webpack 提供的最有用的功能之一。它允许在运行时更新各种模块，而无需进行完全刷新。本页面重点介绍__实现__，而[概念页面](/concepts/hot-module-replacement)提供了更多关于它的工作原理以及为什么它有用的细节。
 
@@ -28,7 +28,7 @@ W> __HMR__ 不适用于生产环境，这意味着它应当只在开发环境使
 
 ## 启用 HMR
 
-启用此功能实际上相当简单。All we need to do is update our [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration, and use webpack's built in HMR plugin. We'll also remove the entry point for `print.js` as it will now be consumed by the `index.js` module.
+启用此功能实际上相当简单。而我们要做的，就是更新 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 的配置，和使用 webpack 内置的 HMR 插件。我们还要删除掉 `print.js` 的入口起点，因为它现在正被 `index.js` 模式使用。
 
 __webpack.config.js__
 
@@ -61,11 +61,11 @@ __webpack.config.js__
   };
 ```
 
-You can also use the CLI to modify the [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration with the following command: `webpack-dev-server --hotOnly`.
+你也可以通过命令来修改 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 的配置：`webpack-dev-server --hotOnly`。
 
-To get it up and running let's run `npm start` from the command line.
+接下来我们在命令行中运行 `npm start` 查看运行结果。
 
-Now let's update the `index.js` file so that when a change inside `print.js` is detected we tell webpack to accept the updated module.
+现在，我们来修改 `index.js` 文件，以便当 `print.js` 内部发生变更时可以告诉 webpack 接受更新的模块。
 
 __index.js__
 
@@ -97,7 +97,7 @@ __index.js__
 + }
 ```
 
-Start changing the `console.log` statement in `print.js`, and you should see the following output in the browser console.
+更改 `print.js` 中 `console.log` 的输出内容，你将会在浏览器中看到如下的输出。
 
 __print.js__
 
@@ -126,11 +126,11 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 
 ## 问题
 
-Hot Module Replacement can be tricky. To show this, let's go back to our working example. If you go ahead and click the button on the example page, you will realize the console is printing the old `printMe` function.
+模块热替换可能比较难掌握。为了说明这一点，我们回到刚才的示例中。如果你继续点击示例页面上的按钮，你会发现控制台仍在打印这旧的 `printMe` 功能。
 
-This is happening because the button's `onclick` event handler is still bound to the original `printMe` function.
+这是因为按钮的 `onclick` 事件仍然绑定在旧的 `printMe` 函数上。
 
-To make this work with HMR we need to update that binding to the new `printMe` function using `module.hot.accept`:
+为了让它与 HRM 正常工作，我们需要使用 `module.hot.accept` 更新绑定到新的 `printMe` 函数上：
 
 __index.js__
 
@@ -145,7 +145,7 @@ __index.js__
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
     btn.innerHTML = 'Click me and check the console!';
-    btn.onclick = printMe;  // onclick event is bind to the original printMe function
+    btn.onclick = printMe;  // onclick 事件绑定原始的 printMe 函数上
 
     element.appendChild(btn);
 
@@ -153,7 +153,7 @@ __index.js__
   }
 
 - document.body.appendChild(component());
-+ let element = component(); // Store the element to re-render on print.js changes
++ let element = component(); // 当 print.js 改变导致页面重新渲染时，重新获取渲染的元素
 + document.body.appendChild(element);
 
   if (module.hot) {
@@ -161,26 +161,26 @@ __index.js__
       console.log('Accepting the updated printMe module!');
 -     printMe();
 +     document.body.removeChild(element);
-+     element = component(); // Re-render the "component" to update the click handler
++     element = component(); // 重新渲染页面后，component 更新 click 事件处理
 +     document.body.appendChild(element);
     })
   }
 ```
 
-这只是一个例子，但还有很多其他人可以轻松地让人犯错的地方。幸运的是，存在很多 loader（其中一些在下面提到），使得模块热替换的过程变得更容易。
+这只是一个例子，但还有很多其他地方可以轻松地让人犯错。幸运的是，存在很多 loader（其中一些在下面提到），使得模块热替换的过程变得更容易。
 
 
 ## HMR 修改样式表
 
 借助于 `style-loader` 的帮助，CSS 的模块热替换实际上是相当简单的。当更新 CSS 依赖模块时，此 loader 在后台使用 `module.hot.accept` 来修补(patch) `<style>` 标签。
 
-First let's install both loaders with the following command:
+所以，可以使用以下命令安装两个 loader ：
 
 ```bash
 npm install --save-dev style-loader css-loader
 ```
 
-Now let's update the configuration file to make use of the loader.
+接下来我们来更新 webpack 的配置，让这两个 loader 生效。
 
 __webpack.config.js__
 

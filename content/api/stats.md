@@ -1,31 +1,31 @@
 ---
-title: Stats JSON
+title: 包含统计数据的 JSON 文件(Stats JSON)
 sort: 1
 contributors:
   - skipjack
 ---
 
-When compiling source code with webpack, users can generate a JSON file containing statistics about modules. These statistics can be used to analyze an application's dependency graph as well as to optimize compilation speed. The file is typically generated with the following CLI command:
+通过 webpack 编译源文件时，用户可以生成包含有关于模块的统计数据的 JSON 文件。这些统计数据不仅可以帮助开发者来分析应用的依赖图表，还可以优化编译的速度。这个 JSON 文件可以通过以下的命令来生成:
 
 ``` bash
 webpack --profile --json > compilation-stats.json
 ```
 
-The `--json > compilation-stats.json` flag indicates to webpack that it should emit the `compilation-stats.json` containing the dependency graph and various other build information. Typically, the `--profile` flag is also added so that a `profile` section is added to each [`modules` object](#module-objects) containing module-specific compilation stats.
+这个标识是告诉 webpack `compilation-stats.json` 要包含依赖的图表以及各种其他的编译信息。一般来说，也会把 `--profile` 一起加入，这样每一个包含自身编译数据的[`模块`对象(`modules` object)](#modules-object) 都会添加 `profile` 。
 
 
-## Structure
+## 结构 (Structure)
 
-The top-level structure of the output JSON file is fairly straightforward but there are a few nested data structures as well. Each nested structure has a dedicated section below to make this document more consumable. Note that you can click links within the top-level structure below to jump to relevant sections and documentation:
+最外层的输出 JSON 文件比较容易理解，但是其中还是有一小部分嵌套的数据不是那么容易理解。不过放心，这其中的每一部分都在后面有更详细的解释，并且注释中还附带有超链接可以直接跳入相应的章节。
 
 ``` js-with-links
 {
-  "version": "1.4.13", // Version of webpack used for the compilation
-  "hash": "11593e3b3ac85436984a", // Compilation specific hash
-  "time": 2469, // Compilation time in milliseconds
-  "filteredModules": 0, // A count of excluded modules when [`exclude`](/configuration/stats/#stats) is passed to the [`toJson`](/api/node/#stats-tojson-options-) method
+  "version": "1.4.13", // 用来编译的 webpack 的版本
+  "hash": "11593e3b3ac85436984a", // 编译使用的 hash
+  "time": 2469, // 编译耗时 (ms)
+  "filteredModules": 0, // 当 [`exclude`](/configuration/stats/#stats)传入[`toJson`](/api/node/#stats-tojson-options-) 函数时，统计被无视的模块的数量
   "assetsByChunkName": {
-    // Chunk name to emitted asset(s) mapping
+    // 用作映射的 chunk 的名称
     "main": "web.js?h=11593e3b3ac85436984a",
     "named-chunk": "named-chunk.web.js",
     "other-chunk": [
@@ -34,139 +34,139 @@ The top-level structure of the output JSON file is fairly straightforward but th
     ]
   },
   "assets": [
-    // A list of [asset objects](#asset-objects)
+    // [asset 对象 (asset objects)](#asset-objects) 的数组
   ],
   "chunks": [
-    // A list of [chunk objects](#chunk-objects)
+    // [chunk 对象 (chunk objects)](#chunk-objects) 的数组
   ],
   "modules": [
-    // A list of [module objects](#module-objects)
+    // [模块对象 (module objects)](#module-objects) 的数组
   ],
   "errors": [
-    // A list of [error strings](#errors-and-warnings)
+    // [错误字符串 (error string)](#errors-and-warnings) 的数组
   ],
   "warnings": [
-    // A list of [warning strings](#errors-and-warnings)
+    // [警告字符串 (warning string)](#errors-and-warnings) 的数组
   ]
 }
 ```
 
 
-### Asset Objects
+### Asset对象 (Asset Objects)
 
-Each `assets` object represents an `output` file emitted from the compilation. They all follow the a similar structure:
+每一个 `assets` 对象都表示一个编译出的 `output` 文件。 `assets` 都会有一个共同的结构:
 
 ``` js
 {
-  "chunkNames": [], // The chunks this asset contains
-  "chunks": [ 10, 6 ], // The chunk IDs this asset contains
-  "emitted": true, // Indicates whether or not the asset made it to the `output` directory
-  "name": "10.web.js", // The `output` filename
-  "size": 1058 // The size of the file in bytes
+  "chunkNames": [], // 这个 asset 包含的 chunk
+  "chunks": [ 10, 6 ], // 这个 asset 包含的 chunk 的 id
+  "emitted": true, // 表示这个 asset 是否会让它输出到 output 目录
+  "name": "10.web.js", // 输出的文件名
+  "size": 1058 // 文件的大小
 }
 ```
 
 
-### Chunk Objects
+### Chunk对象 (Chunk Objects)
 
-Each `chunks` object represents a group of modules known as a [chunk](/glossary#chunk). Each object follows the following structure:
+每一个 `chunks` 表示一组称为 [chunk](/glossary#chunk) 的模块。每一个对象都满足以下的结构。
 
 ``` js-with-links
 {
-  "entry": true, // Indicates whether or not the chunk contains the webpack runtime
+  "entry": true, // 表示这个 chunk 是否包含 webpack 的运行时
   "files": [
-    // An array of filename strings that contain this chunk
+    // 一个包含这个 chunk 的文件名的数组
   ],
-  "filteredModules": 0, // See the description in the [top-level structure](#structure) above
-  "id": 0, // The ID of this chunk
-  "initial": true, // Indicates whether this chunk is loaded on initial page load or [on demand](/guides/lazy-loading)
+  "filteredModules": 0, // 见上文的 [结构](#Structure)
+  "id": 0, // 这个 chunk 的id
+  "initial": true, // 表示这个 chunk 是开始就要加载还是 [懒加载(lazy-loading)](/guides/lazy-loading)
   "modules": [
-    // A list of [module objects](#modules-objects)
-    "web.js?h=11593e3b3ac85436984a"
+    // [模块对象 (module objects)](#module-objects)的数组
+    "web.js?h=11593e3b3ac85436984a"
   ],
   "names": [
-    // An list of chunk names contained within this chunk
+    // 包含在这个 chunk 内的 chunk 的名字的数组
   ],
   "origins": [
-    // See the description below...
+    // 下文详述
   ],
-  "parents": [], // Parent chunk IDs
-  "rendered": true, // Indicates whether or not the chunk went through Code Generation
-  "size": 188057 // Chunk size in bytes
+  "parents": [], // 父 chunk 的 ids
+  "rendered": true, // 表示这个 chunk 是否会参与进编译
+  "size": 188057 // chunk 的大小(byte)
 }
 ```
 
-The `chunks` object will also contain a list of `origins` describing how the given chunk originated. Each `origins` object follows the following schema:
+`chunks` 对象还会包含一个 `来源 (origins)` ，来表示每一个 chunk 是从哪里来的。 `来源 (origins)` 是以下的形式
 
 ``` js-with-links
 {
-  "loc": "", // Lines of code that generated this chunk
-  "module": "(webpack)\\test\\browsertest\\lib\\index.web.js", // Path to the module
-  "moduleId": 0, // The ID of the module
-  "moduleIdentifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // Path to the module
-  "moduleName": "./lib/index.web.js", // Relative path to the module
-  "name": "main", // The name of the chunk
+  "loc": "", // 具体是哪行生成了这个chunk
+  "module": "(webpack)\\test\\browsertest\\lib\\index.web.js", // 模块的位置
+  "moduleId": 0, // 模块的ID
+  "moduleIdentifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // 模块的地址
+  "moduleName": "./lib/index.web.js", // 模块的相对地址
+  "name": "main", // chunk的名称
   "reasons": [
-    // A list of the same `reasons` found in [module objects](#module-objects)
+    // [模块对象](#模块对象)中`reason`的数组
   ]
 }
 ```
 
 
-### Module Objects
+### 模块对象 (Module Objects)
 
-What good would these statistics be without some description of the compiled application's actual modules? Each module in the dependency graph is represented by the following structure:
+缺少了对实际参与进编译的模块的描述，这些数据又有什么意义呢。每一个在依赖图表中的模块都可以表示成以下的形式。
 
 ``` js-with-links
 {
   "assets": [
-    // A list of [asset objects](#asset-objects)
+    // [asset对象 (asset objects)](#asset-objects)的数组
   ],
-  "built": true, // Indicates that the module went through [Loaders](/concepts/loaders), Parsing, and Code Generation
-  "cacheable": true, // Whether or not this module is cacheable
+  "built": true, // 表示这个模块会参与 [Loaders](/concepts/loaders) , 解析, 并被编译
+  "cacheable": true, // 表示这个模块是否会被缓存
   "chunks": [
-    // IDs of chunks that contain this module
+    // 包含这个模块的 chunks 的 id
   ],
-  "errors": 0, // Number of errors when resolving or processing the module
-  "failed": false, // Whether or not compilation failed on this module
-  "id": 0, // The ID of the module (analagous to [`module.id`](/api/module-variables#module-id-commonjs-))
-  "identifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // A unique ID used internally
-  "name": "./lib/index.web.js", // Path to the actual file
-  "optional": false, // All requests to this module are with `try... catch` blocks (irrelevant with ESM)
-  "prefetched": false, // Indicates whether or not the module was [prefetched](/plugins/prefetch-plugin)
+  "errors": 0, // 处理这个模块发现的错误的数量
+  "failed": false, // 编译是否失败
+  "id": 0, // 这个模块的ID (类似于 [`module.id`](/api/module-variables#module-id-commonjs-))
+  "identifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // webpack内部使用的唯一的标识
+  "name": "./lib/index.web.js", // 实际文件的地址
+  "optional": false, // 每一个对这个模块的请求都会包裹在 `try... catch` 内 (与ESM无关)
+  "prefetched": false, // 表示这个模块是否会被 [prefetched](/plugins/prefetch-plugin)
   "profile": {
-    // Module specific compilation stats corresponding to the [`--profile` flag](/api/cli#profiling) (in milliseconds)
-    "building": 73, // Loading and parsing
-    "dependencies": 242, // Building dependencies
-    "factory": 11 // Resolving dependencies
+    // 有关 [`--profile` flag](/api/cli#profiling) 的这个模块特有的编译数据 (ms)
+    "building": 73, // 载入和解析
+    "dependencies": 242, // 编译依赖
+    "factory": 11 // 解决依赖
   },
   "reasons": [
-    // See the description below...
+    // 见下文描述
   ],
-  "size": 3593, // Estimated size of the module in bytes
-  "source": "// Should not break it...\r\nif(typeof...", // The stringified raw source
-  "warnings": 0 // Number of warnings when resolving or processing the module
+  "size": 3593, // 预估模块的大小 (byte)
+  "source": "// Should not break it...\r\nif(typeof...", // 字符串化的输入
+  "warnings": 0 // 处理模块时警告的数量
 }
 ```
 
-Every module also contains a list of `reasons` objects describing why that module was included in the dependency graph. Each "reason" is similar to the `origins` seen above in the [chunk objects](#chunk-objects) section:
+每一个模块都包含一个 `理由 (reasons)` 对象，这个对象描述了这个模块被加入依赖图表的理由。每一个 `理由 (reasons)` 都类似于上文 [chunk objects](#chunk-objects)中的 `来源 (origins)`:
 
 ``` js-with-links
 {
-  "loc": "33:24-93", // Lines of code that caused the module to be included
-  "module": "./lib/index.web.js", // Relative path to the module based on [context](/configuration/entry-context/#context)
-  "moduleId": 0, // The ID of the module
-  "moduleIdentifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // Path to the module
-  "moduleName": "./lib/index.web.js", // A more readable name for the module (used for "pretty-printing")
-  "type": "require.context", // The [type of request](/api/module-methods) used
-  "userRequest": "../../cases" // Raw string used for the `import` or `require` request
+  "loc": "33:24-93", // 导致这个被加入依赖图标的代码行数
+  "module": "./lib/index.web.js", // 所基于模块的相对地址 [context](/configuration/entry-context/#context)
+  "moduleId": 0, // 模块的 ID
+  "moduleIdentifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // 模块的地址
+  "moduleName": "./lib/index.web.js", // 可读性更好的模块名称 (用于 "更好的打印 (pretty-printing)")
+  "type": "require.context", // 使用的[请求的种类 (type of request)](/api/module-methods)
+  "userRequest": "../../cases" // 用来 `import` 或者 `require` 的源字符串
 }
 ```
 
 
-### Errors and Warnings
+### 错误与警告
 
-The `errors` and `warnings` properties each contain a list of strings. Each string contains a message and stack trace:
+`错误 (errors)` 和 `警告 (warnings)` 会包含一个字符串数组。每个字符串包含了信息和栈的追溯:
 
 ``` bash
 ../cases/parsing/browserify/index.js
@@ -175,4 +175,4 @@ Critical dependencies:
  @ ../cases/parsing/browserify/index.js 2:114-121
 ```
 
-W> Note that the stack traces are removed when `errorDetails: false` is passed to the `toJson` method. The `errorDetails` option is set to `true` by default.
+W> 需要注意的是，当 `错误详情为false(errorDetails:false)`传入`toJson`函数时，对栈的追溯就不会被显示。`错误详情(errorDetils)` 默认值为 `true`
