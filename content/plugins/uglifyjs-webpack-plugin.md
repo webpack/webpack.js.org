@@ -28,7 +28,7 @@ module.exports = {
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|**`test`**|`{RegExp\|Array<RegExp>}`| <code>/\.js($&#124;\?)/i</code>|Test to match files against|
+|**`test`**|`{RegExp\|Array<RegExp>}`| <code>/\\.js$/i</code>|Test to match files against|
 |**`include`**|`{RegExp\|Array<RegExp>}`|`undefined`|Files to `include`|
 |**`exclude`**|`{RegExp\|Array<RegExp>}`|`undefined`|Files to `exclude`|
 |**`parallel`**|`{Boolean\|Object}`|`false`|Use multi-process parallel running and file cache to improve the build speed|
