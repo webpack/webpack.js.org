@@ -47,7 +47,7 @@ Use the `include` field to only apply the loader modules that actually need to b
 
 ### Bootstrap
 
-Each additional loader/plugin has a bootup time. Try to use a few different tools are possible.
+Each additional loader/plugin has a bootup time. Try to use as few different tools as possible.
 
 
 ### Resolving
