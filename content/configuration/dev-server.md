@@ -116,8 +116,6 @@ webpack-dev-server --client-log-level none
 
 Possible values are `none`, `error`, `warning` or `info` (default).
 
-Note that the console will *always* show bundle errors and warnings. This option only effects the message before it.
-
 
 ## `devServer.color` - CLI only
 
