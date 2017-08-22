@@ -28,7 +28,7 @@ As mentioned above, we'll only briefly touch on this. The runtime, along with th
 
 ## Manifest
 
-So, once your application hits the browser, in the form of an `index.html` file, some bundles, and a variety of other assets, what does it look like? That `/src` directory you meticulously laid out is now gone, so how does webpack manage the interaction between all of your modules? This is where the manifest data comes in...
+So, once your application hits the browser in the form of an `index.html` file, some bundles, and a variety of other assets, what does it look like? That `/src` directory you meticulously laid out is now gone, so how does webpack manage the interaction between all of your modules? This is where the manifest data comes in...
 
 As the compiler enters, resolves, and maps out your application, it keeps detailed notes on all your modules. This collection of data is called the "Manifest" and it's what the runtime will use to resolve and load modules once they've been bundled and shipped to the browser. No matter which [module syntax](/api/module-methods) you have chosen, those `import` or `require` statements have now become `__webpack_require__` methods that point to module identifiers. Using the data in the manifest, the runtime will be able to find out where to retrieve the modules behind the identifiers.
 

@@ -48,7 +48,7 @@ module.hot.decline(
 
 ### `dispose` (or `addDisposeHandler`)
 
-Add a handler which is executed when the current module code is replaced. This should be used to destroy any persistent resource you have claimed or created. If you want to transfer state to the updated module, add it to given `data` parameter. This object will be available at `module.hot.data` after the update.
+Add a handler which is executed when the current module code is replaced. This should be used to remove any persistent resource you have claimed or created. If you want to transfer state to the updated module, add it to given `data` parameter. This object will be available at `module.hot.data` after the update.
 
 ``` js
 module.hot.dispose(data => {

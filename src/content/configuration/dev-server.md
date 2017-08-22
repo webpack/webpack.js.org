@@ -51,14 +51,14 @@ T> If you're having trouble, navigating to the `/webpack-dev-server` route will 
 
 `array`
 
-This option allows you to specify a whitelist of hosts that are allowed to access the dev server.
+This option allows you to whitelist services that are allowed to access the dev server.
 
 ```js
 allowedHosts: [
-    'host.com',
-    'subdomain.host.com',
-    'subdomain2.host.com',
-    'host2.com'
+  'host.com',
+  'subdomain.host.com',
+  'subdomain2.host.com',
+  'host2.com'
 ]
 ```
 
