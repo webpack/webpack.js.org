@@ -1,5 +1,5 @@
 ---
-title: Lazy Loading
+title: 懒加载
 sort: 10
 contributors:
   - iammerrick
@@ -10,16 +10,16 @@ related:
     url: https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser
 ---
 
-T> This guide is a small follow-up to [Code Splitting](/guides/code-splitting). If you have not yet read through that guide, please do so now.
+T> 这个指南是[代码分离](/guides/code-splitting)的后续，如果你之前没有看过那个指南，现在请去看一下。
 
-Lazy, or "on demand", loading is a great way to optimize your site or application. This practice essentially involves splitting your code at logical breakpoints, and then loading it once the user has done something that requires, or will require, a new block of code. This speeds up the initial load of the application and lightens its overall weight as some blocks may never even be loaded.
+懒加载或者按需加载，是一种很好的优化网页或应用的方式。这种方式实际上是先把你的代码在一些逻辑断点处分离开，然后在一些代码块中完成某些操作后，立即引用或即将引用另外一些新的代码块。这样加快了应用的初始加载速度，减轻了它的总体体积，因为某些代码块可能永远不会被加载。
 
 
-## Example
+## 示例
 
-Let's take the example from [Code Splitting](/guides/code-splitting#dynamic-imports) and tweak it a bit to demonstrate this concept even more. The code there does cause a separate chunk, `lodash.bundle.js`, to be generated and technically "lazy-loads" it as soon as the script is run. The trouble is that no user interaction is required to load the bundle -- meaning that every time the page is loaded, the request will fire. This doesn't help us too much and will impact performance negatively.
+我们在[代码分离](/guides/code-splitting#dynamic-imports)中的例子基础上，进一步做些调整来说明这个概念。那里的代码确实会在脚本运行的时候产生一个分离的代码块 `lodash.bundle.js` ，在技术概念上“懒加载”它。问题是加载这个包并不需要用户的交互 -- 意思是每次加载页面的时候都会请求它。这样做并没有对我们有很多帮助，还会对性能产生负面影响。
 
-Let's try something different. We'll add an interaction to log some text to the console when the user clicks a button. However, we'll wait to load that code (`print.js`) until the interaction occurs for the first time. To do this we'll go back and rework the [final _Dynamic Imports_ example](/guides/code-splitting#dynamic-imports) from _Code Splitting_ and leave `lodash` in the main chunk.
+我们试试不同的做法。我们增加一个交互，当用户点击按钮的时候用 console 打印一些文字。但是会等到第一次交互的时候再加载那个代码块（`print.js`）。为此，我们返回到代码分离的例子中，把 `lodash` 放到主代码块中，重新运行_代码分离_中的代码 [final _Dynamic Imports_ example](/guides/code-splitting#dynamic-imports)。
 
 __project__
 
@@ -78,9 +78,9 @@ __src/index.js__
 + document.body.appendChild(component());
 ```
 
-W> Note that when using `import()` on ES6 modules you must reference the `.default` property as it's the actual `module` object that will be returned when the promise is resolved.
+W> 注意当调用 ES6 模块的 `import()` 方法（引入模块）时，必须指向模块的 `.default` 值，因为它才是 promise 被处理后返回的实际的 `module` 对象。
 
-Now let's run webpack and check out our new lazy-loading functionality:
+现在运行 webpack 来验证一下我们的懒加载功能：
 
 ``` bash
 Hash: e0f95cc0bda81c2a1340
@@ -102,9 +102,9 @@ Child html-webpack-plugin for "index.html":
 ```
 
 
-## Frameworks
+## 框架
 
-Many frameworks and libraries have their own recommendations on how this should be accomplished within their methodologies. Here are a few examples:
+许多框架和类库对于如何用它们自己的方式来实现（懒加载）都有自己的建议。这里有一些例子：
 
 - React: [Code Splitting and Lazy Loading](https://reacttraining.com/react-router/web/guides/code-splitting)
 - Vue: [Lazy Load in Vue using Webpack's code splitting](https://alexjoverm.github.io/2017/07/16/Lazy-load-in-Vue-using-Webpack-s-code-splitting/)
