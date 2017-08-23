@@ -12,6 +12,7 @@ contributors:
   - skipjack
   - sbaidon
   - gdi2290
+  - bdwain
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -125,6 +126,35 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 + main.js:4330 [HMR] Consider using the NamedModulesPlugin for module names.
 ```
 
+### Enabling HMR With the Node.js API
+
+When using Webpack Dev Server with the Node.js API, don't put the dev server options on the webpack config object. Instead, pass them as a second parameter upon creation. For example:
+
+`new WebpackDevServer(compiler, options)`
+
+To enable HMR, you also need to modify your webpack configuration object to include the HMR entry points. The `webpack-dev-server` package includes a method called `addDevServerEntrypoints` which you can use to do this.
+
+__run-dev-server.js__
+
+``` javascript
+  const webpackDevServer = require('webpack-dev-server');
+  const webpack = require('webpack');
+
+  const config = require('./webpack.config.js');
+  const options = {
+    contentBase: './dist',
+    hot: true
+  };
+
+  webpackDevServer.addDevServerEntrypoints(config, options);
+  const compiler = webpack(config);
+  const server = new webpackDevServer(compiler, options);
+
+  server.listen(5000, () => {
+    console.log('dev server listening on port 5000');
+  });
+
+```
 
 ## Gotchas
 
