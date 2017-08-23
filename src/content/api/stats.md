@@ -81,7 +81,7 @@ Each `chunks` object represents a group of modules known as a [chunk](/glossary#
   "id": 0, // The ID of this chunk
   "initial": true, // Indicates whether this chunk is loaded on initial page load or [on demand](/guides/lazy-loading)
   "modules": [
-    // A list of [module objects](#modules-objects)
+    // A list of [module objects](#module-objects)
     "web.js?h=11593e3b3ac85436984a"
   ],
   "names": [
