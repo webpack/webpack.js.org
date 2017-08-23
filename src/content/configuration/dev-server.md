@@ -377,7 +377,7 @@ Usage via the CLI
 webpack-dev-server --inline=false
 ```
 
-T> Inline mode is recommended when using Hot Module Replacement.
+T> Inline mode is **required** when using Hot Module Replacement.
 
 
 ## `devServer.lazy` 🔑
