@@ -66,9 +66,9 @@ __src/index.js__
     // Lodash, now imported by this script
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +   element.innerHTML = _.join([
-      'Hello webpack!',
-      '5 cubed is equal to ' + cube(5)
-    ], '\n\n');
++     'Hello webpack!',
++     '5 cubed is equal to ' + cube(5)
++   ], '\n\n');
 
     return element;
   }
