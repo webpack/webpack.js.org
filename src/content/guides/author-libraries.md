@@ -28,13 +28,14 @@ __project__
 ```
 
 Initialize npm, install webpack and lodash
-``` bash
 
+``` bash
 npm init -y
 npm install --save-dev webpack lodash
 ```
 
 __src/ref.json__
+
 ```javascript
 [{
     "num": 1,
@@ -92,9 +93,10 @@ require(['webpackNumbers'], function ( webpackNumbers) {
 });
 
 ```
-The consumer also can use the library loading it with the script tag:
-```html
 
+The consumer also can use the library loading it with the script tag:
+
+```html
 <html>
 ...
 <script src="https://unpkg.com/webpack-numbers"></script>
@@ -109,7 +111,9 @@ The consumer also can use the library loading it with the script tag:
 </script>
 </html>
 ```
+
 The configurations also can expose the library in the next ways:
+
 - Property in the global object, for node.
 - Property in the this object.
 
@@ -127,6 +131,7 @@ Now the agenda is to bundle this library achieving the next goals:
 - Being able to access the library inside Node.js.s
 
 Also, the consumer will be able to access` the library the `next ways:
+
 - ES2015 module. i.e. `import webpackNumbers from 'webpack-numbers'`.
 - CommonJS module. i.e. `require('webpack-numbers')`.
 - Global variable when included through `script` tag.
@@ -218,6 +223,7 @@ module.exports = {
 ```
 
 W>At the moment of webpack 3.5.5, using the next configuration is not working properly as stated in the [issue 4824](https://github.com/webpack/webpack/issues/4824):
+
 ```javascript
 module.exports = {
     ...
@@ -232,6 +238,7 @@ module.exports = {
 };
 ```
 
+W> However, you can set libraryTarget.var='_' to expect the library as a global variable
 
 ### Add `libraryTarget`
 
@@ -267,7 +274,9 @@ module.exports = {
     ...
 };
 ```
+
 You can expose the library in the next ways:
+
 - Variable: as a global variable. Available in the `script` tag. i.e. `libraryTarget:'var'`.
 - This: available trough the this object. i.e. `libraryTarget:'this'`.
 - Window: available trough the `window` object, in the browser. i.e. `libraryTarget:'window'`.
