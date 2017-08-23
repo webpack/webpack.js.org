@@ -26,7 +26,7 @@ Choose a style of [source mapping](http://blog.teamtreehouse.com/introduction-so
 
 T> The webpack repository contains an [example showing the effect of all `devtool` variants](https://github.com/webpack/webpack/tree/master/examples/source-map). Those examples will likely help you to understand the differences.
 
-T> Instead of using the `devtool` option you can also use the `SourceMapDevToolPlugin`/`EvalSourceMapDevToolPlugin` directly. It has more options. You must never use both `devtool` option and plugin!
+T> Instead of using the `devtool` option you can also use `SourceMapDevToolPlugin`/`EvalSourceMapDevToolPlugin` directly as it has more options. Never use both the `devtool` option and plugin together. The `devtool` option adds the plugin internally so you would end up with the plugin applied twice.
 
 devtool                        | build | rebuild | production | quality
 ------------------------------ | ----- | ------- | ---------- | -----------------------------
@@ -51,6 +51,7 @@ Some of these values are suited for development and some for production. For dev
 W> There are some issues with Source Maps in Chrome. [We need your help!](https://github.com/webpack/webpack/issues/3165).
 
 T> See [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilename) to customize the filenames of generated Source Maps.
+
 
 ### Qualities
 
@@ -100,10 +101,16 @@ These options are typically used in production:
 
 `(none)` (Omit the `devtool` option) - No SourceMap is emitted. This is a good option to start with.
 
-`source-map` - A full SourceMap is emitted as a separate file. It adds a reference comment to the bundle so development tools know where to find it. Warning: You should configure your server to disallow access to the Source Map file for normal users!
+`source-map` - A full SourceMap is emitted as a separate file. It adds a reference comment to the bundle so development tools know where to find it.
 
-`hidden-source-map` - Same as `source-map`, but doesn't add a reference comment to the bundle. Useful if you only want SourceMaps to map error stack traces from error reports, but don't want to expose your SourceMap for the browser development tools. Warning: You should not deploy the Source Map file to the webserver. Instead only use it for error report tooling.
+W> You should configure your server to disallow access to the Source Map file for normal users!
 
-`nosources-source-map` - A SourceMap is created without the `sourcesContent` in it. It can be used to map stack traces on the client without exposing all of the source code. You can deploy the Source Map file to the webserver. Warning: It still exposes filenames and structure for decompiling, but it doesn't expose the original code.
+`hidden-source-map` - Same as `source-map`, but doesn't add a reference comment to the bundle. Useful if you only want SourceMaps to map error stack traces from error reports, but don't want to expose your SourceMap for the browser development tools.
+
+W> You should not deploy the Source Map file to the webserver. Instead only use it for error report tooling.
+
+`nosources-source-map` - A SourceMap is created without the `sourcesContent` in it. It can be used to map stack traces on the client without exposing all of the source code. You can deploy the Source Map file to the webserver.
+
+W> It still exposes filenames and structure for decompiling, but it doesn't expose the original code.
 
 T> When using the `uglifyjs-webpack-plugin` you must provide the `sourceMap: true` option to enable SourceMap support.
