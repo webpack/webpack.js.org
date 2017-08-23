@@ -236,7 +236,7 @@ module.exports = {
       // alias "module" -> "new-module" and "module/path/file" -> "new-module/path/file"
 
       "only-module$": "new-module",
-      // alias "only-module" -> "new-module", but not "module/path/file" -> "new-module/path/file"
+      // alias "only-module" -> "new-module", but not "only-module/path/file" -> "new-module/path/file"
 
       "module": path.resolve(__dirname, "app/third/module.js"),
       // alias "module" -> "./app/third/module.js" and "module/file" results in error
