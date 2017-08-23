@@ -44,7 +44,7 @@ inline-source-map              | --    | --      | no         | original source
 hidden-source-map              | --    | --      | yes        | original source
 nosources-source-map           | --    | --      | yes        | without source content
 
-T> `+++` super fast, `++` pretty fast, `+` fast, `o` medium, `-` slow, `--` pretty slow
+T> `+++` super fast, `++` fast, `+` pretty fast, `o` medium, `-` pretty slow, `--` slow
 
 Some of these values are suited for development and some for production. For development you typically want fast Source Maps at the cost of bundle size, but for production you want separate Source Maps that are accurate and support minimizing.
 
