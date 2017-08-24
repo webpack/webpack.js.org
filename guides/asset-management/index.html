@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/8086b18a937c59f9fbfc.css" rel="stylesheet">
+      <link href="/96425ed964a535f43079.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -210,7 +210,7 @@ Time: 895ms
    <span class="token punctuation">[</span>8<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
    <span class="token punctuation">[</span>9<span class="token punctuation">]</span> ./src/index.js 503 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
 </code></pre>
-<p>If all went well, you should now see your icon as a repeating background, as well as an <code>img</code> element behind our <code>Hello webpack</code> text. If you inspect this element, you&apos;ll see that the actual filename has changed to something like <code>5c999da72346a995e7e2718865d019c8.png</code>. This means webpack found our file in the <code>src</code> folder and processed it!</p>
+<p>If all went well, you should now see your icon as a repeating background, as well as an <code>img</code> element beside our <code>Hello webpack</code> text. If you inspect this element, you&apos;ll see that the actual filename has changed to something like <code>5c999da72346a995e7e2718865d019c8.png</code>. This means webpack found our file in the <code>src</code> folder and processed it!</p>
 <blockquote class="tip"><div class="tip-content"> A logical next step from here is minifying and optimizing your images. Check out the <a href="https://github.com/tcoopman/image-webpack-loader">image-webpack-loader</a> and <a href="/loaders/url-loader">url-loader</a> for more on how you can enhance your image loading process. </div></blockquote><h2 class="header"><a class="anchor" href="#loading-fonts" id="loading-fonts"></a><span class="text">Loading Fonts</span><a class="icon-link" href="#loading-fonts"></a></h2>
 <p>So what about other assets like fonts? The file and url loaders will take any file you load through them and output it to your build directory. This means we can use them for any kind of file, including fonts. Let&apos;s update our <code>webpack.config.js</code> to handle font files:</p>
 <p><strong>webpack.config.js</strong></p>
