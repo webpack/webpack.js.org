@@ -168,7 +168,7 @@ Node built-ins, like `process`, can be polyfilled right directly from your confi
 
 ## Loading polyfills on demand
 
-It's common in web projects to include polyfills in the main bundle. This is not recommended because we are penalizing modern browsers users since they will download a bigger file **unnecessarely**.
+It's common in web projects to include polyfills in the main bundle. This is not recommended because we are penalizing modern browsers users by making them download a bigger file with unneeded scripts.
 
 The simplest way to mitigate this is by adding a separate entry point in your webpack config file including the polyfills your project needs.
 
