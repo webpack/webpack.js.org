@@ -16,26 +16,26 @@ T> This guide stems from the [*Getting Started*](/guides/getting-started/) guide
 
 First install the TypeScript compiler and loader by running:
 
- ``` bash
- npm install --save-dev typescript ts-loader
- ```
+``` bash
+npm install --save-dev typescript ts-loader
+```
 
 Now we'll modify the directory structure & the configuration files:
 
-__project__git stat
+__project__
 
 ``` diff
-webpack-demo
-|- package.json
+  webpack-demo
+  |- package.json
 + |- tsconfig.json
-|- webpack.config.js
-|- /dist
-  |- bundle.js
-  |- index.html
-|- /src
-  |- index.js
-+ |- index.ts
-|- /node_modules
+  |- webpack.config.js
+  |- /dist
+    |- bundle.js
+    |- index.html
+  |- /src
+    |- index.js
++   |- index.ts
+  |- /node_modules
 ```
 
 __tsconfig.json__
@@ -88,7 +88,7 @@ module.exports = {
 };
 ```
 
-This will direct webpackgit sdt to _enter_ through `./index.ts`, _load_ all `.ts` and `.tsx` files through the `ts-loader`, and _output_ a `bundle.js` file in our current directory.
+This will direct webpack to _enter_ through `./index.ts`, _load_ all `.ts` and `.tsx` files through the `ts-loader`, and _output_ a `bundle.js` file in our current directory.
 
 
 ## Loader
