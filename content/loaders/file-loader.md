@@ -67,7 +67,7 @@ You can configure a custom filename template for your file using the query param
 }
 ```
 
-#### `placholders`
+#### `placeholders`
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
