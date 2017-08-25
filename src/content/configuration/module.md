@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - jouni-kantola
   - jhnns
+  - dylanonelson
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -104,12 +105,12 @@ Inline loaders and `!` prefixes should not be used as they are non-standard. The
 
 ## `Rule.exclude`
 
-`Rule.exclude` is a shortcut to `Rule.resource.exclude`. See [`Rule.resource`](#rule-resource) and [`Condition.exclude`](#condition) for details.
+`Rule.exclude` is a shortcut to `Rule.resource.exclude`. If you supply a `Rule.exclude` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.exclude`](#condition) for details.
 
 
 ## `Rule.include`
 
-`Rule.include` is a shortcut to `Rule.resource.include`. See [`Rule.resource`](#rule-resource) and [`Condition.include`](#condition) for details.
+`Rule.include` is a shortcut to `Rule.resource.include`. If you supply a `Rule.include` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.include`](#condition) for details.
 
 
 ## `Rule.issuer`
@@ -188,7 +189,7 @@ parser: {
 
 ## `Rule.resource`
 
-A [`Condition`](#condition) matched with the resource. See details in [`Rule` conditions](#rule-conditions).
+A [`Condition`](#condition) matched with the resource. You can either supply a `Rule.resource` option or use the shortcut options `Rule.test`, `Rule.exclude`, and `Rule.include`. See details in [`Rule` conditions](#rule-conditions).
 
 
 ## `Rule.resourceQuery`
@@ -210,7 +211,7 @@ An array of [`Rules`](#rule) that is also used when the Rule matches.
 
 ## `Rule.test`
 
-`Rule.test` is a shortcut to `Rule.resource.test`. See [`Rule.resource`](#rule-resource) and [`Condition.test`](#condition) for details.
+`Rule.test` is a shortcut to `Rule.resource.test`. If you supply a `Rule.test` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.test`](#condition) for details.
 
 
 ## `Rule.use`
