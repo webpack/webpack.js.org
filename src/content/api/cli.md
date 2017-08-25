@@ -139,6 +139,8 @@ The `--env` argument accepts various syntaxes:
 | webpack --env.prod --env.min  | `{ prod: true, min: true }` |
 | webpack --env.prod --env min  | `[{ prod: true }, "min"]`   |
 
+T> See this [environment variables](/guides/environment-variables) guide for more information.
+
 ### Output Options
 
 This set of options allows you to manipulate certain [output](/configuration/output) parameters of your build.
