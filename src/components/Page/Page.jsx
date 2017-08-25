@@ -41,7 +41,8 @@ const Page = ({ page, section }) => {
           },
           url
         }) => ({ url, title, anchors })) }
-        currentPage={ url.replace('/index', '') } />
+        currentPage={ url.replace('/index', '') }
+        anchors={ page.file.attributes.anchors } />
 
 
       <section className="page__content">
@@ -87,18 +88,5 @@ const Page = ({ page, section }) => {
     </Container>
   );
 };
-
-// =======
-//     <Interactive
-//       id="src/components/Sidebar/Sidebar.jsx"
-//       component={ Sidebar }
-//       sectionName={ section.name }
-//       pages={ section.pages().map(page => ({
-//         url: page.url,
-//         title: page.title,
-//         anchors: page.anchors
-//       })) }
-//       currentPage={ page.url.replace('/index', '') } />
-// >>>>>>> upstream/master:src/components/Page/Page.jsx
 
 export default Page;
