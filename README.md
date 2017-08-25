@@ -2,17 +2,17 @@
 
 [![Travis](https://img.shields.io/travis/webpack-china/webpack.js.org.svg)](https://travis-ci.org/webpack-china/webpack.js.org)
 
-> https://doc.webpack-china.org webpack 中文文档  
+> https://doc.webpack-china.org webpack 中文文档
 > https://webpack-china.org webpack 中文社区
 
 
 ### 中文站点
-[英文站点](https://webpack.js.org/)是由 CI 自动构建并部署到 gh-pages  分支。  
+[英文站点](https://webpack.js.org/)是由 CI 自动构建并部署到 gh-pages  分支。
 [中文站点](https://doc.webpack-china.org/)是由 CI 自动构建并部署到 gh-pages  分支。
 
 ### 仓库一共有三个（以下全部简称为英文仓库、中文仓库、我的仓库）：
-[英文仓库(webpack/webpack.js.org)](https://github.com/webpack/webpack.js.org)  
-[中文仓库(webpack-china/webpack.js.org - fork webpack/webpack.js.org)](https://github.com/webpack-china/webpack.js.org)  
+[英文仓库(webpack/webpack.js.org)](https://github.com/webpack/webpack.js.org)
+[中文仓库(webpack-china/webpack.js.org - fork webpack/webpack.js.org)](https://github.com/webpack-china/webpack.js.org)
 [我的仓库(dear-lizhihua/webpack.js.org - fork webpack-china/webpack.js.org)](https://github.com/dear-lizhihua/webpack.js.org)
 
 ### 合并上游更新的方案说明
@@ -38,27 +38,50 @@
 
 
 
-If you want to fetch the documentation on additional loaders/plugins hosted in [separate repositories](https://github.com/webpack), run `npm run fetch`. The script will help you download those documentations and put them under `content/loaders` or `content/plugins` folder.
+# webpack.js.org
 
-For more information see the [contributors page](https://github.com/webpack/webpack.js.org/blob/master/.github/CONTRIBUTING.md)
+[![build status](https://secure.travis-ci.org/webpack/webpack.js.org.svg)](http://travis-ci.org/webpack/webpack.js.org)
+[![Standard Version](https://img.shields.io/badge/release-standard%20version-brightgreen.svg)](https://github.com/conventional-changelog/standard-version)
 
-## Translation Guide
+Guides, documentation, and all things webpack.
 
-* Fork `translation` branch and create a new branch, for example, `cn`, `german`, etc.
-* Translate documentation.
-* If you have permission to access `translation` branch, run `npm run fetch` to update `loaders` and `plugins` documentation regularly.
-* Regularly merge from `translation` branch to your own `translation` branch in order to get the updated documentation (especially plugin and loader documentation). Then you can compare the new and the old content.
-* Use [travis-ci](https://travis-ci.org) and github webhook to deploy the documentation automatically. Please refer to this article, [Deploy Using Travis-CI And Github Webhook](https://medium.com/@lcxfs1991/deploy-using-travis-ci-and-github-webhook-eba67b3ab6ac)
-* Any questions, please open and issue and @lcxfs1991 or @dear-lizhihua.
 
 ## Content Progress
 
-Check out the [MVP Milestone](https://github.com/webpack/webpack.js.org/milestones) for the current status.
+Now that we've covered much of the backlog of _missing documentation_, we are starting
+to heavily review each section of the site's content to sort and structure it appropriately.
+The following issues should provide a pretty good idea of where things are, and where
+they are going:
+
+- [Guides - Review and Simplify][1]
+- [Concepts - Review, Organize, Define Clear Goals][2]
+
+We haven't created issues for the other sections yet but they will be coming soon. For
+dev-related work please see [General - Current Longterm Plan][3], which will soon be
+replaced by a more dev-specific issue.
+
 
 ## Translation
 
-If you hope to localize this documentation please transit to [translate branch](https://github.com/webpack/webpack.js.org/tree/translation).
+If you hope to localize this documentation please jump to the [translate branch][4].
+
+
+## Contributing
+
+Read throug the [writer's guide][7] if you're interested in editing the conent on this
+site. See the [contributors page][5] to learn how to set up and start working on the site
+locally.
+
 
 ## License
 
-The content is available under [Creative Commons BY 4.0](https://creativecommons.org/licenses/by/4.0/) license.
+The content is available under the [Creative Commons BY 4.0][6] license.
+
+
+[1]: https://github.com/webpack/webpack.js.org/issues/1258
+[2]: https://github.com/webpack/webpack.js.org/issues/1386
+[3]: https://github.com/webpack/webpack.js.org/issues/1380
+[4]: https://github.com/webpack/webpack.js.org/tree/translation
+[5]: https://github.com/webpack/webpack.js.org/blob/master/.github/CONTRIBUTING.md
+[6]: https://creativecommons.org/licenses/by/4.0/
+[7]: https://webpack.js.org/writers-guide

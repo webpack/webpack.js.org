@@ -1,8 +1,8 @@
 var _ = require('lodash');
 var path = require('path');
 var prevnextPlugin = require('antwar-prevnext-plugin');
-var markdown = require('./utilities/markdown');
-var highlight = require('./utilities/highlight');
+var markdown = require('./src/utilities/markdown');
+var highlight = require('./src/utilities/highlight');
 
 module.exports = {
   template: {
@@ -26,13 +26,13 @@ module.exports = {
     prevnextPlugin()
   ],
   layout: function() {
-    return require('./components/site/site.jsx').default
+    return require('./src/components/Site/Site.jsx').default
   },
   paths: {
     '/': root(
       function() {
         return require.context(
-          'json-loader!yaml-frontmatter-loader!./content',
+          'json-loader!yaml-frontmatter-loader!./src/content',
           false,
           /^\.\/.*\.md$/
         );
@@ -51,7 +51,7 @@ module.exports = {
       '概念',
       function() {
         return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/concepts',
+          'json-loader!yaml-frontmatter-loader!./src/content/concepts',
           false,
           /^\.\/.*\.md$/
         );
@@ -62,7 +62,7 @@ module.exports = {
       '指南',
       function() {
         return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/guides',
+          'json-loader!yaml-frontmatter-loader!./src/content/guides',
           true,
           /^\.\/.*\.md$/
         );
@@ -80,7 +80,7 @@ module.exports = {
     'guides/starter-kits': {
       title: '起步配套工具',
       path() {
-        return require('./components/starter-kits/starter-kits.jsx').default;
+        return require('./src/components/StarterKits/StarterKits.jsx').default;
       }
     },
 
@@ -88,7 +88,7 @@ module.exports = {
       '开发',
       function() {
         return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/development',
+          'json-loader!yaml-frontmatter-loader!./src/content/development',
           true,
           /^\.\/.*\.md$/
         );
@@ -99,7 +99,7 @@ module.exports = {
       '配置',
       function() {
         return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/configuration',
+          'json-loader!yaml-frontmatter-loader!./src/content/configuration',
           false,
           /^\.\/.*\.md$/
         );
@@ -112,7 +112,7 @@ module.exports = {
       'API',
       function() {
         return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/api',
+          'json-loader!yaml-frontmatter-loader!./src/content/api',
           false,
           /^\.\/.*\.md$/
         );
@@ -125,7 +125,7 @@ module.exports = {
       'API',
       function() {
         return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/api/plugins',
+          'json-loader!yaml-frontmatter-loader!./src/content/api/plugins',
           false,
           /^\.\/.*\.md$/
         );
@@ -144,7 +144,7 @@ module.exports = {
       'Loaders',
       function() {
         const content = require.context(
-          'json-loader!yaml-frontmatter-loader!./content/loaders',
+          'json-loader!yaml-frontmatter-loader!./src/content/loaders',
           false,
           /^\.\/.*\.md$/
         );
@@ -161,7 +161,7 @@ module.exports = {
       'Plugins',
       function() {
         const content = require.context(
-          'json-loader!yaml-frontmatter-loader!./content/plugins',
+          'json-loader!yaml-frontmatter-loader!./src/content/plugins',
           false,
           /^\.\/.*\.md$/
         );
@@ -178,7 +178,7 @@ module.exports = {
       '支持',
       function() {
         return require.context(
-          'json-loader!yaml-frontmatter-loader!./content/support',
+          'json-loader!yaml-frontmatter-loader!./src/content/support',
           false,
           /^\.\/.*\.md$/
         );
@@ -187,25 +187,25 @@ module.exports = {
 
     vote: {
       path() {
-        return require('./components/vote/list.jsx').default
+        return require('./src/components/Vote/List.jsx').default
       }
     },
 
     'vote/feedback': {
       path() {
-        return require('./components/vote/list.jsx').default
+        return require('./src/components/Vote/List.jsx').default
       }
     },
 
     'vote/moneyDistribution': {
       path() {
-        return require('./components/vote/list.jsx').default
+        return require('./src/components/Vote/List.jsx').default
       }
     },
 
     organization: {
       path() {
-        return require('./components/organization/organization.jsx').default
+        return require('./src/components/Organization/Organization.jsx').default
       }
     }
   }
@@ -220,10 +220,10 @@ function root(contentCb) {
     processPage: processPage(), // Process individual page (url, content)
     layouts: { // Layouts (page/section)
       index: function() {
-        return require('./components/splash/splash.jsx').default
+        return require('./src/components/Splash/Splash.jsx').default
       },
       page: function() {
-        return require('./components/page/page.jsx').default
+        return require('./src/components/Page/Page.jsx').default
       }
     },
     redirects: {} // Redirects <from>: <to>
@@ -242,10 +242,10 @@ function section(title, contentCb, redirects = {}) {
     processPage: processPage(),
     layouts: {
       index: function() {
-        return require('./components/page/page.jsx').default
+        return require('./src/components/Page/Page.jsx').default
       },
       page: function() {
-        return require('./components/page/page.jsx').default
+        return require('./src/components/Page/Page.jsx').default
       }
     },
     redirects: redirects // <from>: <to>

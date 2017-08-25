@@ -1,0 +1,35 @@
+@import 'functions';
+@import 'mixins';
+
+.splash {
+  &__section {
+    position:relative;
+    text-align:center;
+
+    &--dark {
+      background-color:#f3f3f3;
+    }
+
+    p {
+      margin: 0 auto;
+      max-width: 800px;
+    }
+
+    .container {
+      padding:5em 1em;
+
+      @include break {
+        padding-left:1.5em;
+        padding-right:1.5em;
+      }
+    }
+
+    pre {
+      text-align:left;
+    }
+
+    .icon-link {
+      display:none;
+    }
+  }
+}
