@@ -7,8 +7,8 @@ var webpack = require('webpack');
 
 var cwd = process.cwd();
 var stylePaths = [
-  path.join(cwd, 'styles'),
-  path.join(cwd, 'components')
+  path.join(cwd, 'src', 'styles'),
+  path.join(cwd, 'src', 'components')
 ];
 
 const commonConfig = {
@@ -21,7 +21,7 @@ const commonConfig = {
         test: /\.jsx?$/,
         loaders: ['babel-loader', 'eslint-loader'],
         include: [
-          path.join(__dirname, 'components')
+          path.join(__dirname, 'src', 'components')
         ]
       },
       {
@@ -58,11 +58,11 @@ const commonConfig = {
     return [ Autoprefixer ];
   },
   sassLoader: {
-    includePaths: [ path.join('./styles/partials') ]
+    includePaths: [ path.join('./src/styles/partials') ]
   },
   plugins: [
     new CopyWebpackPlugin([{
-      from: './assets',
+      from: './src/assets',
       to: './assets'
     }])
   ]
