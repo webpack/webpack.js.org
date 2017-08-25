@@ -24,18 +24,22 @@ const Site = ({
   section,
   location: { pathname }
 }) => {
-  // Retrieve section data
-  let sections = section.all()
-    .map(({ title, url, pages }) => ({
-      title,
-      url,
-      pages: pages.map(({ title, url }) => ({
-        title: title || url, // XXX: Title shouldn't be coming in as undefined
-        url
-      }))
-    }));
+  let sections = section.all().filter(section => section.path.hideInSidebar !== true)
+    .map((section) => {
+      let _section = {
+        title: section.path.title,
+        url: section.url,
+        pages: section.pages.map(page => {
+          let _page = {
+            title: page.file.title,
+            url: page.url
+          };
+          return _page;
+        })
+      };
+      return _section;
+    });
 
-  // XXX: Is this needed anymore?
   // Rename the root section ("webpack" => "Other") and push it to the end
   let rootIndex = sections.findIndex(section => section.title === 'webpack');
   let rootSection = sections.splice(rootIndex, 1)[0];

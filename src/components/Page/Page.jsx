@@ -29,7 +29,7 @@ const Page = ({ page, section }) => {
     <Container className="page">
       <Sponsors />
       <Interactive
-        id="components/sidebar/sidebar.jsx"
+        id="src/components/Sidebar/Sidebar.jsx"
         component={ Sidebar }
         sectionName={ section.name }
         pages={ section.pages().map(({
@@ -41,7 +41,7 @@ const Page = ({ page, section }) => {
           },
           url
         }) => ({ url, title, anchors })) }
-        currentPage={ url } />
+        currentPage={ url.replace('/index', '') } />
 
 
       <section className="page__content">
@@ -81,7 +81,7 @@ const Page = ({ page, section }) => {
         )}
 
         <Interactive
-          id="components/gitter/gitter.jsx"
+          id="src/components/Gitter/Gitter.jsx"
           component={ Gitter } />
       </section>
     </Container>

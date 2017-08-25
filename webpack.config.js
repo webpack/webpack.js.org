@@ -68,7 +68,7 @@ const commonConfig = env => ({
             {
               loader: 'sass-loader',
               options: {
-                includePaths: [ path.join('./styles/partials') ]
+                includePaths: [ path.join('./src/styles/partials') ]
               }
             }
           ]

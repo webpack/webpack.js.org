@@ -13,6 +13,7 @@ module.exports = function (source) {
   result.attributes.related = Array.isArray(result.attributes.related) ? result.attributes.related : [];
   result.title = result.attributes.title || 'webpack';
   result.body = markdown().process(result.body, highlight);
+  result.sort = result.attributes.sort || null;
 
   delete result.frontmatter;
 
