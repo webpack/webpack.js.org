@@ -7,8 +7,8 @@ var webpack = require('webpack');
 
 var cwd = process.cwd();
 var stylePaths = [
-  path.join(cwd, 'styles'),
-  path.join(cwd, 'components')
+  path.join(cwd, 'src', 'styles'),
+  path.join(cwd, 'src', 'components')
 ];
 
 const commonConfig = env => ({
@@ -18,7 +18,7 @@ const commonConfig = env => ({
 
   resolveLoader: {
     alias: {
-      'page-loader': path.resolve(cwd, 'loaders/page-loader')
+      'page-loader': path.resolve(cwd, 'src/loaders/page-loader')
     }
   },
 
@@ -34,7 +34,7 @@ const commonConfig = env => ({
           }
         ],
         include: [
-          path.join(__dirname, 'components')
+          path.join(__dirname, 'src', 'components')
         ]
       },
       {
@@ -97,7 +97,7 @@ const commonConfig = env => ({
 
   plugins: [
     new CopyWebpackPlugin([{
-      from: './assets',
+      from: './src/assets',
       to: './assets'
     }]),
 
