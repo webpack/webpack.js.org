@@ -97,7 +97,7 @@ __webpack.prod.js__
 +   plugins: [
 +     new UglifyJSPlugin()
 +   ]
-+ })
++ });
 ```
 
 In `webpack.common.js`, we now have our `entry` and `output` setup configured and we've included any plugins that are required for both environments. In `webpack.dev.js`, we've added the recommended `devtool` for that environment (strong source mapping), as well as our simple `devServer` configuration. Finally, in `webpack.prod.js`, we included the `UglifyJSPlugin` which was first introduced by the [tree shaking](/guides/tree-shaking) guide.
@@ -180,6 +180,7 @@ Many libraries will key off the `process.env.NODE_ENV` variable to determine wha
 __webpack.prod.js__
 
 ``` diff
+  const webpack = require('webpack');
   const merge = require('webpack-merge');
   const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
   const common = require('./webpack.common.js');
@@ -205,7 +206,6 @@ If you're using a library like [`react`](https://facebook.github.io/react/), you
 __src/index.js__
 
 ``` diff
-  import _ from 'lodash';
   import { cube } from './math.js';
 +
 + if (process.env.NODE_ENV !== 'production') {
@@ -213,21 +213,18 @@ __src/index.js__
 + }
 
   function component() {
-    var element = document.createElement('div');
+    var element = document.createElement('pre');
 
-    // Lodash, now imported by this script
-    element.innerHTML = _.join([
+    element.innerHTML = [
       'Hello webpack!',
       '5 cubed is equal to ' + cube(5)
-    ], '\n\n');
+    ].join('\n\n');
 
     return element;
   }
 
   document.body.appendChild(component());
 ```
-
-?> TODO: Consider mentioning the `LoaderOptionsPlugin`... is this still relevant?
 
 
 ## CLI Alternatives

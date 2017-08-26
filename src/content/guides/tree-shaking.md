@@ -44,31 +44,32 @@ __src/math.js__
 
 ``` javascript
 export function square(x) {
-	return x * x;
+  return x * x;
 }
 
 export function cube(x) {
-	return x * x * x;
+  return x * x * x;
 }
 ```
 
-With that in place, let's update our entry script to utilize this one of these new methods:
+With that in place, let's update our entry script to utilize this one of these new methods and remove `lodash` for simplicity:
 
 __src/index.js__
 
 ``` diff
-  import _ from 'lodash';
+- import _ from 'lodash';
 + import { cube } from './math.js';
 
   function component() {
-    var element = document.createElement('div');
+-   var element = document.createElement('div');
++   var element = document.createElement('pre');
 
-    // Lodash, now imported by this script
+-   // Lodash, now imported by this script
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-+   element.innerHTML = _.join([
++   element.innerHTML = [
 +     'Hello webpack!',
 +     '5 cubed is equal to ' + cube(5)
-+   ], '\n\n');
++   ].join('\n\n');
 
     return element;
   }
@@ -76,12 +77,24 @@ __src/index.js__
   document.body.appendChild(component());
 ```
 
-Note that we __did not `import` the `square` method__ from the `src/math.js` module. That function is what's known as "dead code", meaning an unused `export` that should be dropped. Now let's run our npm script, `npm run build`, and inspect the output:
+Note that we __did not `import` the `square` method__ from the `src/math.js` module. That function is what's known as "dead code", meaning an unused `export` that should be dropped. Now let's run our npm script, `npm run build`, and inspect the output bundle:
 
-__dist/bundle.js__
+__dist/bundle.js (around lines 90 - 100)__
 
 ``` js
-// TODO: Display contents with `unused harmony export square`...
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export square */
+/* harmony export (immutable) */ __webpack_exports__["a"] = cube;
+function square(x) {
+  return x * x;
+}
+
+function cube(x) {
+  return x * x * x;
+}
 ```
 
 Note the `unused harmony export square` comment above. If you look at the code below it, you'll notice that `square` is not being exported, however, it is still included in the bundle. We'll fix that in the next section.
@@ -125,10 +138,10 @@ With that squared away, we can run another `npm run build` and see if anything h
 __dist/bundle.js__
 
 ``` js
-// TODO: Display contents with `square removed...
+!function(e){function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}var t={};n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Ob    ject.defineProperty(e,t,{configurable:!1,enumerable:!0,get:r})},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,n){return     Object.prototype.hasOwnProperty.call(e,n)},n.p="",n(n.s=0)}([function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r=t(1);document.body.appendChild(function(){var e=documen    t.createElement("div");return e.innerHTML=["Hello webpack!","5 cubed is equal to "+Object(r.a)(5)].join("\n\n"),e}())},function(e,n,t){"use strict";function r(e){return e*e*e}n.a=r}]);
 ```
 
-Notice anything missing? The `square` function has been dropped and our output bundle is now a few bytes smaller! While that may not seem like much in this contrived example, tree shaking can yield a significant decrease in bundle size when working on larger applications with complex dependency trees.
+Notice anything missing? Most notably the whole bundle is minified and mangled. However, if you look carefully, you won't see the `square` function included but will see a mangled version of the `cube` function (`function r(e){return e*e*e}n.a=r`). With minification and tree shaking our bundle is now a few bytes smaller! While that may not seem like much in this contrived example, tree shaking can yield a significant decrease in bundle size when working on larger applications with complex dependency trees.
 
 
 ## Conclusion
