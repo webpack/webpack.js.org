@@ -13,6 +13,7 @@ module.exports = {
   layout: () => require('./src/components/Site/Site.jsx').default,
   paths: {
     '/': {
+      title: "Home",
       content: () => require.context('./src/loaders/page-loader!./src/content', false, /^\.\/.*\.md$/),
       index: () => {
         const index = require('./src/components/Splash/Splash.jsx').default;
@@ -50,7 +51,7 @@ module.exports = {
 			'compiler': '/api/plugins/compiler',
 			'template': '/api/plugins/template'
 		},
-		hideSidebar: true
+		hideInSidebar: true
 	},
 	concepts: {
 		title: "Comcepts",
