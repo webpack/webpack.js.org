@@ -133,15 +133,9 @@ module.exports = {
 
 T> Note that the `--optimize-minimize` flag can be used to insert the `UglifyJsPlugin` as well.
 
-With that squared away, we can run another `npm run build` and see if anything has changed:
+With that squared away, we can run another `npm run build` and see if anything has changed.
 
-__dist/bundle.js__
-
-``` js
-!function(e){function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}var t={};n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Ob    ject.defineProperty(e,t,{configurable:!1,enumerable:!0,get:r})},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,n){return     Object.prototype.hasOwnProperty.call(e,n)},n.p="",n(n.s=0)}([function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r=t(1);document.body.appendChild(function(){var e=documen    t.createElement("div");return e.innerHTML=["Hello webpack!","5 cubed is equal to "+Object(r.a)(5)].join("\n\n"),e}())},function(e,n,t){"use strict";function r(e){return e*e*e}n.a=r}]);
-```
-
-Notice anything missing? Most notably the whole bundle is minified and mangled. However, if you look carefully, you won't see the `square` function included but will see a mangled version of the `cube` function (`function r(e){return e*e*e}n.a=r`). With minification and tree shaking our bundle is now a few bytes smaller! While that may not seem like much in this contrived example, tree shaking can yield a significant decrease in bundle size when working on larger applications with complex dependency trees.
+Notice anything different about `dist/bundle.js`? Clearly the whole bundle is now minified and mangled, but, if you look carefully, you won't see the `square` function included but will see a mangled version of the `cube` function (`function r(e){return e*e*e}n.a=r`). With minification and tree shaking our bundle is now a few bytes smaller! While that may not seem like much in this contrived example, tree shaking can yield a significant decrease in bundle size when working on larger applications with complex dependency trees.
 
 
 ## Conclusion
