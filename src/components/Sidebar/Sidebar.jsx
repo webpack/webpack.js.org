@@ -12,7 +12,6 @@ export default class Sidebar extends Component {
   render() {
     let { sectionName, pages, currentPage, anchors } = this.props;
     let { fixed, availableHeight, maxWidth } = this.state;
-    console.log(this.props.content);
 
     return (
       <nav
