@@ -15,7 +15,7 @@ Well-written _modules_ provide solid abstractions and encapsulation boundaries, 
 Node.js has supported modular programming almost since its inception.
 On the web, however, support for _modules_ has been slow to arrive.
 Multiple tools exist that support modular JavaScript on the web, with a variety of benefits and limitations.
-webpack builds on lessons learned from these systems and applies the concept of _modules_ to any file in your project.
+Webpack builds on lessons learned from these systems and applies the concept of _modules_ to any file in your project.
 
 ## What is a webpack Module
 
