@@ -305,7 +305,7 @@ Aside from the module syntaxes described above, webpack also allows a few custom
 require.context(directory:String, includeSubdirs:Boolean /* optional, default true */, filter:RegExp /* optional */)
 ```
 
-Specify a whole group of dependencies using a path to the `directory`, an option to `includeSubdirs`, and a `filter` for more fine grained control of the mdoules included. These can then be easily `resolved` later on.
+Specify a whole group of dependencies using a path to the `directory`, an option to `includeSubdirs`, and a `filter` for more fine grained control of the modules included. These can then be easily `resolved` later on.
 
 ```javascript
 var context = require.context('components', true, /\.html$/);
