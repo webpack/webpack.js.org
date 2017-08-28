@@ -65,7 +65,7 @@ export default class SidebarMobile extends React.Component {
 
     return this.props.sections.map(section => {
       let active = pathname === section.url || pathname.includes(`/${section.url}`),
-          absoluteUrl = `/${section.url}`;
+          absoluteUrl = (section.url == '/') ? '/' : `/${section.url}`;
       return (
         <div
           className={ `sidebar-mobile__section ${active ? 'sidebar-mobile__section--active' : ''}` }
@@ -98,7 +98,7 @@ export default class SidebarMobile extends React.Component {
     }
 
     return pages.map(page => {
-      let url = `/${page.url}`,
+      let url = `${page.url}`,
         active = pathname === url || pathname.includes(`${url}/`);
 
       return (

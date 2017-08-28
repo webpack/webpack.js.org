@@ -28,11 +28,11 @@ let Sections = [
   },
   {
     title: 'Donate',
-    url: '//opencollective.com/webpack'
+    url: '/opencollective.com/webpack'
   },
   {
     title: 'Blog',
-    url: '//medium.com/webpack'
+    url: '/medium.com/webpack'
   },
   {
     title: 'Support',
