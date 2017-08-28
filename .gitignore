@@ -2,8 +2,8 @@ node_modules
 npm-debug.log
 build
 generated
-src/components/Support/support-backers.json
-src/components/Support/support-sponsors.json
-src/components/StarterKits/starter-kits-data.json
+src/components/Support/support-backers.json*
+src/components/Support/support-sponsors.json*
+src/components/StarterKits/starter-kits-data.json*
 .antwar
 yarn-error.log
