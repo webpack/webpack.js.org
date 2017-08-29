@@ -2445,6 +2445,10 @@ follow-redirects@0.0.7:
     debug "^2.2.0"
     stream-consume "^0.1.0"
 
+fontfaceobserver@^2.0.13:
+  version "2.0.13"
+  resolved "https://registry.yarnpkg.com/fontfaceobserver/-/fontfaceobserver-2.0.13.tgz#47adbb343261eda98cb44db2152196ff124d3221"
+
 fontgen-loader@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/fontgen-loader/-/fontgen-loader-0.2.1.tgz#b8ed6d9a798d5b055b80f1e21db4b04170b6f051"
