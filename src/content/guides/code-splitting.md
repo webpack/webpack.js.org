@@ -23,7 +23,7 @@ contributors:
   - sudarsangp
 ---
 
-T> 本指南扩展了[起步](/guides/getting-started)和[管理输出](/guides/output-management)中提供的示例。请确保您至少已熟悉其中提供的示例。
+T> 本指南扩展了[起步](/guides/getting-started)和[管理构建文件](/guides/output-management)中提供的示例。请确保您至少已熟悉其中提供的示例。
 
 代码分离是 webpack 中最引人注目的特性之一。此特性能够把代码分离到不同的 bundle 中，然后可以按需加载或并行加载这些文件。代码分离可以用于获取更小的 bundle，以及控制资源加载优先级，如果使用合理，会极大影响加载时间。
 
@@ -36,7 +36,7 @@ T> 本指南扩展了[起步](/guides/getting-started)和[管理输出](/guides/
 
 ## Entry Points
 
-This is by far the easiest, and most intuitive, way to split code. However, it is more manual and has some pitfalls we will go over. Let's take a look at how we might split another module from the main bundle:
+这是迄今为止最简单、最直观的拆分代码的方式。不过，我们在学习更多文档内容时，会发现一些问题。让我们先一起来看看如何从主 bundle 中分隔出另外一个模块:
 
 __project__
 
@@ -84,7 +84,7 @@ module.exports = {
 };
 ```
 
-This will yield the following build result:
+构建结果将如下所示:
 
 ``` bash
 Hash: 309402710a14167f42a8
@@ -100,17 +100,17 @@ another.bundle.js  544 kB       1  [emitted]  [big]  another
    [4] ./src/index.js 216 bytes {0} [built]
 ```
 
-As mentioned there are some pitfalls to this approach:
+正如前面提到的，这种方法存在一些问题:
 
-- If there are any duplicated modules between entry chunks they will be included in both bundles.
-- It isn't as flexible and can't be used to dynamically split code with the core application logic.
+- 如果入口 chunks 间包含重复的模块，重复模块都将被引入各个 bundle 中。
+- 不能通过核心程序合理的动态拆分代码，它并不灵活。 
 
-The first of these two points is definitely an issue for our example, as `lodash` is also imported within `./src/index.js` and will thus be duplicated in both bundles. Let's remove this duplication by using the `CommonsChunkPlugin`.
+以上两点中，第一点对我们的例子来说无疑是个问题，例如 `lodash` 也被引入了 `./src/index.js`，因此，两个 bundle 包含了重复的模块。 接下来使用 `CommonsChunkPlugin` 移除重复的内容。
 
 
-## Prevent Duplication
+## 模块去重
 
-The [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) allows us to extract common dependencies into an existing entry chunk or an entirely new chunk. Let's use this to de-duplicate the `lodash` dependency from the previous example:
+插件 [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) 允许我们将公共的依赖项提取到已有的入口 chunk 中或者生成一个全新的 chunk 。让我们使用这个插件将之前的例子中重复的 `lodash` 模块去除:
 
 __webpack.config.js__
 
@@ -130,7 +130,7 @@ __webpack.config.js__
 -     })
 +     }),
 +     new webpack.optimize.CommonsChunkPlugin({
-+       name: 'common' // Specify the common bundle's name.
++       name: 'common' // 指定公共 bundle 的名称。
 +     })
     ],
     output: {
@@ -140,7 +140,7 @@ __webpack.config.js__
   };
 ```
 
-With the [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) in place, we should now see the duplicate dependency removed from our `index.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. Let's do an `npm run build` to see if it worked:
+在这里使用 [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) , 我们可以看出重复的依赖从 `index.bundle.js` 中被移除了。需要注意的是，这个插件将 `lodash` 分离成单独的 chunk，并且从主 bundle 中移除减轻了大小。执行 `npm run build` 查看效果:
 
 ``` bash
 Hash: 70a59f8d46ff12575481
@@ -157,22 +157,21 @@ another.bundle.js  537 bytes       1  [emitted]         another
    [4] ./src/index.js 216 bytes {0} [built]
 ```
 
-Here are some other useful plugins and loaders provide by the community for splitting code:
+下列几项是社区提供其它用于代码分离的插件或 loader :
 
-- [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin): Useful for splitting CSS out from the main application.
-- [`bundle-loader`](/loaders/bundle-loader): Used to split code and lazy load the resulting bundles.
-- [`promise-loader`](https://github.com/gaearon/promise-loader): Similar to the `bundle-loader` but uses promises.
+- [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin): 用于将 CSS 从主应用程序中分离。
+- [`bundle-loader`](/loaders/bundle-loader): 用于分离代码和延迟加载 bundle。
+- [`promise-loader`](https://github.com/gaearon/promise-loader): 类似于 `bundle-loader` ，但使用 promises.
 
-T> The [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) is also used to split vendor modules from core application code using [explicit vendor chunks](/plugins/commons-chunk-plugin/#explicit-vendor-chunk).
+T> [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) 插件也可以使用 [明确第三方 chunks](/plugins/commons-chunk-plugin/#-chunk) 从应用程序代码中分离 vendor 模块。
 
+## 动态引入
 
-## Dynamic Imports
+当涉及到动态代码拆分时，webpack提供了两个类似的技术。第一种也是优先选择的方式，使用符合动态导入的 [ECMAScript 提案](https://github.com/tc39/proposal-dynamic-import) 的 [`import()` 语法](/api/module-methods#import-)。第二种，则是使用 webpack 特殊的 [`require.ensure`](/api/module-methods#require-ensure)。让我们先尝试使用第一种...
 
-Two similar techniques are supported by webpack when it comes to dynamic code splitting. The first and more preferable approach is use to the [`import()` syntax](/api/module-methods#import-) that conforms to the [ECMAScript proposal](https://github.com/tc39/proposal-dynamic-import) for dynamic imports. The legacy, webpack-specific approach is to use [`require.ensure`](/api/module-methods#require-ensure). Let's try using the first of these two approaches...
+W> `import()` 调用 [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)。 如果你想让老的浏览器支持`Promise`(e.g. Internet Explorer)，你需要在你的私有 bundles 之前引入 `Promise` polyfill。
 
-W> `import()` calls use [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). If you want to support older browsers that lack `Promise` support (e.g. Internet Explorer), you'll need to include a `Promise` polyfill _before_ your primary bundles.
-
-Before we start, let's remove the extra [`entry`](/concepts/entry-points/) and [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) from our config as they won't be needed for this next demonstration:
+在我们开始以前，让我们先从配置中移除 [`entry`](/concepts/entry-points/) 和 [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin)，因为后续演示中并不需要它们:
 
 __webpack.config.js__
 
@@ -193,7 +192,7 @@ __webpack.config.js__
 -     }),
 +     })
 -     new webpack.optimize.CommonsChunkPlugin({
--       name: 'common' // Specify the common bundle's name.
+-       name: 'common' // 指定公共 bundle 的名称。
 -     })
     ],
     output: {
@@ -204,7 +203,7 @@ __webpack.config.js__
   };
 ```
 
-Note the use of `chunkFilename`, which determines the name of non-entry chunk files. For more information on `chunkFilename`, see [output documentation](/configuration/output/#output-chunkfilename). We'll also update our project to remove the now unused files:
+注意，这里使用了 `chunkFilename` ，Note the use of `chunkFilename`，它决定非入口 chunk 的名称。想了解 `chunkFilename` 更多内容，请查看 [output相关文档](/configuration/output/#output-chunkfilename)。更新我们的项目，移除当前未使用的文件:
 
 __project__
 
@@ -219,7 +218,7 @@ webpack-demo
 |- /node_modules
 ```
 
-Now, instead of statically importing `lodash`, we'll use dynamic importing to separate a chunk:
+现在我们将使用动态导入来分离一个 chunk ，而不是静态导入 `lodash`:
 
 __src/index.js__
 
@@ -248,7 +247,7 @@ __src/index.js__
 + })
 ```
 
-Note the use of `webpackChunkName` in the comment. This will cause our separate bundle to be named `lodash.bundle.js` instead of just `[id].bundle.js`. For more information on `webpackChunkName` and the other available options, see the [`import()` documentation](/api/module-methods#import-). Let's run webpack to see `lodash` separated out to a separate bundle:
+注意，在注释中使用了 `webpackChunkName`。这样做会导致我们的 bundle 被命名为 `lodash.bundle.js` ，而不是 `[id].bundle.js` 。想了解更多关于 `webpackChunkName` 或 其他可用选项，请查看 [`import()` documentation](/api/module-methods#import-)。让我们执行 webpack，查看 `lodash` 是否会分离出一个单独的 bundle :
 
 ``` bash
 Hash: a27e5bf1dd73c675d5c9
@@ -263,7 +262,7 @@ lodash.bundle.js   541 kB       0  [emitted]  [big]  lodash
    [3] (webpack)/buildin/module.js 517 bytes {0} [built]
 ```
 
-If you've enabled [`async` functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) via a pre-processor like babel, note that you can simplify the code as `import()` statements just return promises:
+如果你已经通过预处理器启用 [`async` functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) (例如 babel)，请注意，你可以像下面那样简化代码，因为 `import()` 语句只是返回了 promises :
 
 __src/index.js__
 
@@ -292,18 +291,18 @@ __src/index.js__
 ```
 
 
-## Bundle Analysis
+## Bundle 分析
 
-Once you start splitting your code, it can be useful to analyze the output to check where modules have ended up. The [official analyze tool](https://github.com/webpack/analyse) is a good place to start. There are some other community-supported options out there as well:
+一旦开始分隔代码，输出分析就可以检查模块的最终位置。[官方分析工具](https://github.com/webpack/analyse) 是一个好的选择。下面是一些社区提供的工具:
 
-- [webpack-chart](https://alexkuz.github.io/webpack-chart/): Interactive pie chart for webpack stats.
-- [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/): Visualize and analyze your bundles to see which modules are taking up space and which might be duplicates.
-- [webpack-bundle-analyzer](https://github.com/th0r/webpack-bundle-analyzer): A plugin and CLI utility that represents bundle content as convenient interactive zoomable treemap.
+- [webpack-chart](https://alexkuz.github.io/webpack-chart/): webpack 数据交互饼图。
+- [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/): 可视化分析您的包，检查哪些模块占用空间，哪些可能是重复使用的。
+- [webpack-bundle-analyzer](https://github.com/th0r/webpack-bundle-analyzer): 一款分析 bundle 内容的插件及CLI工具，以便捷的、交互式、可缩放的树状图形式展现给用户。
 
 
-## Next Steps
+## 下一步
 
-See [Lazy Loading](/guides/lazy-loading) for a more concrete example of how `import()` can be used in a real application and [Caching](/guides/caching) to learn how to split code more effectively.
+请参阅 [懒加载](/guides/lazy-loading) 一个更具体的例子，说明如何在实际应用中使用 `import()` 并学习如何使用 [Caching](/guides/caching) 更有效的分割代码。
 
 ***
 
