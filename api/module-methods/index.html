@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/52e268918c61559f950c.css" rel="stylesheet">
+      <link href="/07f0055f44c2b3de92d5.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -169,7 +169,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <h3 class="header"><a class="anchor" href="#require-context" id="require-context"></a><span class="text"><code>require.context</code></span><a class="icon-link" href="#require-context"></a></h3>
 <pre><code class="lang-javascript">require<span class="token punctuation">.</span><span class="token function">context</span><span class="token punctuation">(</span>directory<span class="token punctuation">:</span>String<span class="token punctuation">,</span> includeSubdirs<span class="token punctuation">:</span>Boolean <span class="token comment" spellcheck="true">/* optional, default true */</span><span class="token punctuation">,</span> filter<span class="token punctuation">:</span>RegExp <span class="token comment" spellcheck="true">/* optional */</span><span class="token punctuation">)</span>
 </code></pre>
-<p>Specify a whole group of dependencies using a path to the <code>directory</code>, an option to <code>includeSubdirs</code>, and a <code>filter</code> for more fine grained control of the mdoules included. These can then be easily <code>resolve</code>d later on.</p>
+<p>Specify a whole group of dependencies using a path to the <code>directory</code>, an option to <code>includeSubdirs</code>, and a <code>filter</code> for more fine grained control of the modules included. These can then be easily resolved later on:</p>
 <pre><code class="lang-javascript"><span class="token keyword">var</span> context <span class="token operator">=</span> require<span class="token punctuation">.</span><span class="token function">context</span><span class="token punctuation">(</span><span class="token string">&apos;components&apos;</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token regex">/\.html$/</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">var</span> componentA <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&apos;componentA&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
