@@ -12,7 +12,7 @@ related:
 The `ContextReplacementPlugin` allows you to override the inferred information. There are various ways to configure the plugin:
 
 
-## `newContentResource`, `newContentRecursive`, `newContentRegExp`
+## Usage
 
 ```javascript
 new webpack.ContextReplacementPlugin(
@@ -25,16 +25,19 @@ new webpack.ContextReplacementPlugin(
 
 If the resource (directory) matches `resourceRegExp`, the plugin replaces the default resource, recursive flag or generated regular expression with `newContentResource`, `newContentRecursive` or `newContextRegExp` respectively. If `newContentResource` is relative, it is resolved relative to the previous resource.
 
-**Example**
+Here's a small example to restrict module usage:
 
 ```javascript
-new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /de|fr|hu/)
+new webpack.ContextReplacementPlugin(
+  /moment[\/\\]locale$/,
+  /de|fr|hu/
+)
 ```
 
-The `moment/locale` context is restricted to files matching `/de|fr|hu/`. Thus only those locales are included (see also [this GitHub issue](https://github.com/moment/moment/issues/2373)).
+The `moment/locale` context is restricted to files matching `/de|fr|hu/`. Thus only those locales are included (see [this issue](https://github.com/moment/moment/issues/2373) for more information).
 
 
-## `newContentCallback`
+## Content Callback
 
 ```javascript
 new webpack.ContextReplacementPlugin(
@@ -43,22 +46,25 @@ new webpack.ContextReplacementPlugin(
 )
 ```
 
-The function `newContentCallback` is given a [`data` object of the `ContextModuleFactory`](/api/plugins/module-factories/) and it is expected to overwrite the `request` attribute of the supplied object.
+The `newContentCallback` function is given a [`data` object of the `ContextModuleFactory`](/api/plugins/module-factories/) and is expected to overwrite the `request` attribute of the supplied object.
 
-**Example**
+Using this callback we can dynamically redirect requests to a new location:
 
 ```javascript
 new webpack.ContextReplacementPlugin(/^\.\/locale$/, (context) => {
-  if (!/\/moment\//.test(context.context)) { return; }
+  if ( !/\/moment\//.test(context.context) ) return;
+
   Object.assign(context, {
     regExp: /^\.\/\w+/,
-    request: '../../locale', // resolved relatively
+    request: '../../locale' // resolved relatively
   });
 }),
 ```
 
 
-## `newContentResource`, `newContentCreateContextMap`
+## Other Options
+
+The `newContentResource` and `newContentCreateContextMap` parameters are also available:
 
 ```javascript
 new webpack.ContextReplacementPlugin(
@@ -68,12 +74,11 @@ new webpack.ContextReplacementPlugin(
 )
 ```
 
-**Example**
+These two parameters can be used together to redirect requests in a more targeted way. The `newContentCreateContextMap` allows you to map runtime requests to compile requests in the form of an object:
 
 ```javascript
 new ContextReplacementPlugin(/selector/, './folder', {
   './request': './request',
   './other-request': './new-request'
-  /* runtime-request: compile-time request */
 })
 ```
