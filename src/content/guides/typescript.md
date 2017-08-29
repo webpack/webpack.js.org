@@ -46,7 +46,6 @@ Let's set up a simple configuration to support JSX and compile TypeScript down t
 {
   "compilerOptions": {
     "outDir": "./dist/",
-    "sourceMap": true,
     "noImplicitAny": true,
     "module": "commonjs",
     "target": "es5",
@@ -58,33 +57,33 @@ Let's set up a simple configuration to support JSX and compile TypeScript down t
 
 See [TypeScript's documentation](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) to learn more about `tsconfig.json` configuration options.
 
-__webpack.config.js__
-
 To learn more about webpack configuration, see the [configuration concepts](/concepts/configuration/).
 
 Now let's configure webpack to handle TypeScript:
 
-```js
+__webpack.config.js__
+
+``` js
 const path = require('path');
 
 module.exports = {
- entry: './index.ts',
- module: {
-   rules: [
-     {
-       test: /\.tsx?$/,
-       use: 'ts-loader',
-       exclude: /node_modules/
-     }
-   ]
- },
- resolve: {
-   extensions: [".tsx", ".ts", ".js"]
- },
- output: {
-   filename: 'bundle.js',
-   path: path.resolve(__dirname, 'dist');
- }
+  entry: './index.ts',
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      }
+    ]
+  },
+  resolve: {
+    extensions: [ ".tsx", ".ts", ".js" ]
+  },
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  }
 };
 ```
 
@@ -95,28 +94,58 @@ This will direct webpack to _enter_ through `./index.ts`, _load_ all `.ts` and `
 
 [`ts-loader`](https://github.com/TypeStrong/ts-loader)
 
-We will use `ts-loader` in this guide as it makes enabling additional webpack features, such as importing other web assets, a bit easier.
+We use `ts-loader` in this guide as it makes enabling additional webpack features, such as importing other web assets, a bit easier.
 
 
 ## Source Maps
 
 To learn more about source maps, see the [development guide](/guides/development).
 
-To enable source maps, we must configure TypeScript to output inline source maps to our compiled JavaScript files. The following line must be added to our `tsconfig.json`:
+To enable source maps, we must configure TypeScript to output inline source maps to our compiled JavaScript files. The following line must be added to our TypeScript configuration:
 
-``` json
-"sourceMap": true
+__tsconfig.json__
+
+``` diff
+  {
+    "compilerOptions": {
+      "outDir": "./dist/",
++     "sourceMap": true,
+      "noImplicitAny": true,
+      "module": "commonjs",
+      "target": "es5",
+      "jsx": "react",
+      "allowJs": true
+    }
+  }
 ```
 
 Now we need to tell webpack to extract these source maps and into our final bundle:
 
 __webpack.config.js__
 
-```js
-module.exports = {
-  devtool: 'inline-source-map',
-  // Remaining configuration...
-};
+``` diff
+  const path = require('path');
+
+  module.exports = {
+    entry: './index.ts',
++   devtool: 'inline-source-map',
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          use: 'ts-loader',
+          exclude: /node_modules/
+        }
+      ]
+    },
+    resolve: {
+      extensions: [ ".tsx", ".ts", ".js" ]
+    },
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
 ```
 
 See the [devtool documentation](/configuration/devtool/) for more information.
@@ -156,8 +185,3 @@ Here we declare a new module for SVGs by specifying any import that ends in `.sv
 W> This may degrade build performance.
 
 See the [Build Performance](guides/build-performance/) guide on build tooling.
-
-
-## Conclusion
-
-Now that you've learned to use TypeScript with webpack to manage your JavaScript code, you can check out the next guide, which covers [Migrating from v1 to v2](guides/migrating/).
