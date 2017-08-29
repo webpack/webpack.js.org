@@ -1,6 +1,6 @@
 ---
 title: Production
-sort: 7
+sort: 8
 contributors:
   - henriquea
   - rajagopal4890
@@ -15,271 +15,220 @@ contributors:
   - xgqfrms
 ---
 
-The following article describes the best practices and tools to use when using webpack to build a production version of a site or application.
+In this guide we'll dive into some of the best practices and utilities for building a production site or application.
+
+T> This walkthrough stems from [Tree Shaking](/guides/tree-shaking) and [Development](/guides/development). Please ensure you are familiar with the concepts/setup introduced in those guides before continuing on.
 
 
-## The Automatic Way
+## Setup
 
-Running `webpack -p` (or equivalently `webpack --optimize-minimize --define process.env.NODE_ENV="'production'"`). This performs the following steps:
+The goals of _development_ and _production_ builds differ greatly. In _development_, we want strong source mapping and a localhost server with live reloading or hot module replacement. In _production_, our goals shift to a focus on minified bundles, lighter weight source maps, and optimized assets to improve load time. With this logical separation at hand, we typically recommend writing __separate webpack configurations__ for each environment.
 
-- Minification using `UglifyJsPlugin`
-- Runs the `LoaderOptionsPlugin` (see its [documentation](/plugins/loader-options-plugin))
-- Sets the NodeJS environment variable triggering certain packages to compile differently
+While we will separate the _production_ and _development_ specific bits out, note that we'll still maintain a "common" configuration to keep things DRY. In order to merge these configurations together, we'll use a utility called [`webpack-merge`](https://github.com/survivejs/webpack-merge). With the "common" configuration in place, we won't have to duplicate code within the environment-specific configurations.
 
+Let's start by installing `webpack-merge` and splitting out the bits we've already work on in previous guides:
 
-### Minification
-
-webpack comes with `UglifyJsPlugin`, which runs [UglifyJS](http://lisperator.net/uglifyjs/) in order to minimize the output. The plugin supports all of the [UglifyJS options](https://github.com/mishoo/UglifyJS2#usage). Specifying `--optimize-minimize` on the command line, the following plugin configuration is added:
-
-```js
-// webpack.config.js
-const webpack = require('webpack');
-
-module.exports = {
-  /*...*/
-  plugins:[
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: options.devtool && (options.devtool.indexOf("sourcemap") >= 0 || options.devtool.indexOf("source-map") >= 0)
-    })
-  ]
-};
+``` bash
+npm install --save-dev webpack-merge
 ```
 
-Thus, depending on the [devtool options](/configuration/devtool), Source Maps are generated.
+__project__
 
-
-### Source Maps
-
-We encourage you to have source maps enabled in production, as they are useful for debugging as well as running benchmark tests. webpack can generate inline source maps within bundles or as separate files.
-
-In your configuration, use the `devtool` object to set the Source Map type. We currently support seven types of source maps. You can find more information about them in our [configuration](/configuration/devtool) documentation page (`cheap-module-source-map` is one of the simpler options, using a single mapping per line).
-
-
-### Node Environment Variable
-
-Running `webpack -p` (or `--define process.env.NODE_ENV="'production'"`) invokes the [`DefinePlugin`](/plugins/define-plugin) in the following way:
-
-```js
-// webpack.config.js
-const webpack = require('webpack');
-
-module.exports = {
-  /*...*/
-  plugins:[
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    })
-  ]
-};
+``` diff
+  webpack-demo
+  |- package.json
+- |- webpack.config.js
++ |- webpack.common.js
++ |- webpack.dev.js
++ |- webpack.prod.js
+  |- /dist
+  |- /src
+    |- index.js
+    |- math.js
+  |- /node_modules
 ```
-
-The `DefinePlugin` performs search-and-replace operations on the original source code. Any occurrence of `process.env.NODE_ENV` in the imported code is replaced by `"production"`. Thus, checks like `if (process.env.NODE_ENV !== 'production') console.log('...')` are evaluated to `if (false) console.log('...')` and finally minified away using `UglifyJS`.
-
-T> Technically, `NODE_ENV` is a system environment variable that Node.js exposes into running scripts. It is used by convention to determine development-vs-production behavior by server tools, build scripts, and client-side libraries. Contrary to expectations, `process.env.NODE_ENV` is not set to `"production"` __within__ the build script `webpack.config.js`, see [#2537](https://github.com/webpack/webpack/issues/2537). Thus, conditionals like `process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js'` do not work as expected. See how to use [environment variables](/guides/environment-variables).
-
-
-## The Manual Way
-
-When we do have multiple configurations in mind for different environments, the easiest approach is to write separate webpack configurations for each environment.
-
-
-### Simple Approach
-
-The simplest way to do this is just to define two fully independent configuration files, like so:
-
-__webpack.dev.js__
-
-```js
-module.exports = {
-  devtool: 'cheap-module-source-map',
-
-  output: {
-    path: path.join(__dirname, '/../dist/assets'),
-    filename: '[name].bundle.js',
-    publicPath: publicPath,
-    sourceMapFilename: '[name].map'
-  },
-
-  devServer: {
-    port: 7777,
-    host: 'localhost',
-    historyApiFallback: true,
-    noInfo: false,
-    stats: 'minimal',
-    publicPath: publicPath
-  }
-}
-```
-
-__webpack.prod.js__
-
-```js
-module.exports = {
-  output: {
-    path: path.join(__dirname, '/../dist/assets'),
-    filename: '[name].bundle.js',
-    publicPath: publicPath,
-    sourceMapFilename: '[name].map'
-  },
-
-  plugins: [
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      beautify: false,
-      mangle: {
-        screw_ie8: true,
-        keep_fnames: true
-      },
-      compress: {
-        screw_ie8: true
-      },
-      comments: false
-    })
-  ]
-}
-```
-
-Then, by tweaking the `scripts` in your `package.json`, like so:
-
-__package.json__
-
-```js
-"scripts": {
-  ...
-  "build:dev": "webpack --env=dev --progress --profile --colors",
-  "build:dist": "webpack --env=prod --progress --profile --colors"
-}
-```
-
-you can now toggle between the two configurations by turning our base configuration into a function and accepting the `env` parameter (set via `--env`):
-
-__webpack.config.js__
-
-```js
-module.exports = function(env) {
-  return require(`./webpack.${env}.js`)
-}
-```
-
-See the CLI's [common options section](/api/cli#common-options) for more details on how to use the `env` flag.
-
-
-### Advanced Approach
-
-A more complex approach would be to have a base configuration file, containing the configuration common to both environments, and then merge that with environment specific configurations. This would yield the full configuration for each environment and prevent repetition for the common bits.
-
-The tool used to perform this "merge" is simply called [webpack-merge](https://github.com/survivejs/webpack-merge) and provides a variety of merging options, though we are only going to use the simplest version of it below.
-
-We'll start by adding our base configuration:
 
 __webpack.common.js__
 
-```js
-module.exports = {
-  entry: {
-    'polyfills': './src/polyfills.ts',
-    'vendor': './src/vendor.ts',
-    'main': './src/main.ts'
-  },
-
-  output: {
-    path: path.join(__dirname, '/../dist/assets'),
-    filename: '[name].bundle.js',
-    publicPath: publicPath,
-    sourceMapFilename: '[name].map'
-  },
-
-  resolve: {
-    extensions: ['.ts', '.js', '.json'],
-    modules: [path.join(__dirname, 'src'), 'node_modules']
-  },
-
-  module: {
-    rules: [
-      {
-        test: /\.ts$/,
-        exclude: [/\.(spec|e2e)\.ts$/],
-        use: [
-          'awesome-typescript-loader',
-          'angular2-template-loader'
-        ]
-      },
-      {
-        test: /\.css$/,
-        use: ['to-string-loader', 'css-loader']
-      },
-      {
-        test: /\.(jpg|png|gif)$/,
-        use: 'file-loader'
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|svg)$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 100000
-          }
-        }
-      }
-    ]
-  },
-
-  plugins: [
-    new ForkCheckerPlugin(),
-
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ['polyfills', 'vendor'].reverse()
-    }),
-
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      chunksSortMode: 'dependency'
-    })
-  ]
-}
+``` diff
++ const path = require('path');
++ const CleanWebpackPlugin = require('clean-webpack-plugin');
++ const HtmlWebpackPlugin = require('html-webpack-plugin');
++
++ module.exports = {
++   entry: {
++     app: './src/index.js'
++   },
++   plugins: [
++     new CleanWebpackPlugin(['dist']),
++     new HtmlWebpackPlugin({
++       title: 'Production'
++     })
++   ],
++   output: {
++     filename: '[name].bundle.js',
++     path: path.resolve(__dirname, 'dist')
++   }
++ };
 ```
 
-And then merge this common configuration with an environment specific configuration file using `webpack-merge`. Let's look at an example where we merge our production file:
+__webpack.dev.js__
+
+``` diff
++ const merge = require('webpack-merge');
++ const common = require('./webpack.common.js');
++
++ module.exports = merge(common, {
++   devtool: 'inline-source-map',
++   devServer: {
++     contentBase: './dist'
++   }
++ });
+```
 
 __webpack.prod.js__
 
-```js
-const Merge = require('webpack-merge');
-const CommonConfig = require('./webpack.common.js');
-
-module.exports = Merge(CommonConfig, {
-  plugins: [
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false
-    }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      beautify: false,
-      mangle: {
-        screw_ie8: true,
-        keep_fnames: true
-      },
-      compress: {
-        screw_ie8: true
-      },
-      comments: false
-    })
-  ]
-})
+``` diff
++ const merge = require('webpack-merge');
++ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
++ const common = require('./webpack.common.js');
++
++ module.exports = merge(common, {
++   plugins: [
++     new UglifyJSPlugin()
++   ]
++ });
 ```
 
-You will notice three major updates to our 'webpack.prod.js' file:
+In `webpack.common.js`, we now have our `entry` and `output` setup configured and we've included any plugins that are required for both environments. In `webpack.dev.js`, we've added the recommended `devtool` for that environment (strong source mapping), as well as our simple `devServer` configuration. Finally, in `webpack.prod.js`, we included the `UglifyJSPlugin` which was first introduced by the [tree shaking](/guides/tree-shaking) guide.
 
-- Use `webpack-merge` to combine it with the 'webpack.common.js'.
-- We moved the `output` property to `webpack.common.js` as it is common to all environments.
-- We defined `'process.env.NODE_ENV'` as `'production'` using the `DefinePlugin` only in `webpack.prod.js`.
+Note the use of `merge()` in the environment-specific configurations to easily include our common configuration in `dev` and `prod`. The `webpack-merge` tool offers a variety of advanced features for merging but for our use case we won't need any of that.
 
-The example above only demonstrates a few typical configuration options used in each (or both) environments. Now that you know how to split up configurations, the choice of what options go where is up to you.
+
+## NPM Scripts
+
+Now let's repoint our `scripts` to the new configurations. We'll use the _development_ one for our `webpack-dev-server`, `npm start`, script and the _production_ one for our `npm run build` script:
+
+__package.json__
+
+``` diff
+  {
+    "name": "development",
+    "version": "1.0.0",
+    "description": "",
+    "main": "webpack.config.js",
+    "scripts": {
+-     "start": "webpack-dev-server --open",
++     "start": "webpack-dev-server --open --config webpack.dev.js",
+-     "build": "webpack"
++     "build": "webpack --config webpack.prod.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "css-loader": "^0.28.4",
+      "csv-loader": "^2.1.1",
+      "express": "^4.15.3",
+      "file-loader": "^0.11.2",
+      "html-webpack-plugin": "^2.29.0",
+      "style-loader": "^0.18.2",
+      "webpack": "^3.0.0",
+      "webpack-dev-middleware": "^1.12.0",
+      "xml-loader": "^1.2.1"
+    }
+  }
+```
+
+Feel free to run those scripts and see how the output changes as we continue adding to our _production_ configuration.
+
+
+## Minification
+
+Note that while the [`UglifyJSPlugin`](/plugins/uglifyjs-webpack-plugin) is a great place to start for minification, there are other options out there. Here's a few more popular ones:
+
+- [`BabelMinifyWebpackPlugin`](https://github.com/webpack-contrib/babel-minify-webpack-plugin)
+- [`ClosureCompilerPlugin`](https://github.com/roman01la/webpack-closure-compiler)
+
+If you decide to try another, just make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide.
+
+
+## Source Mapping
+
+We encourage you to have source maps enabled in production, as they are useful for debugging as well as running benchmark tests. That said, you should choose one with a fairly quick build speed that's recommended for production use (see [`devtool`](/configuration/devtool)). For this guide, we'll use the `cheap-module-source-map` option in _production_ as opposed to the `inline-source-map` we used in _development_:
+
+__webpack.prod.js__
+
+``` diff
+  const merge = require('webpack-merge');
+  const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+  const common = require('./webpack.common.js');
+
+  module.exports = merge(common, {
++   devtool: 'cheap-module-source-map',
+    plugins: [
+      new UglifyJSPlugin()
+    ]
+  })
+```
+
+
+## Specify the Environment
+
+Many libraries will key off the `process.env.NODE_ENV` variable to determine what should be included in the library. For example, when not in _production_ some libraries may add additional logging and testing to make debugging easier. However, with `process.env.NODE_ENV === 'production'` they might drop or add significant portions of code to optimize how things run for your actual users. We can use webpack's built in [`DefinePlugin`](/plugins/define-plugin) to define this variable for all our dependencies:
+
+__webpack.prod.js__
+
+``` diff
+  const webpack = require('webpack');
+  const merge = require('webpack-merge');
+  const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+  const common = require('./webpack.common.js');
+
+  module.exports = merge(common, {
+    devtool: 'cheap-module-source-map',
+    plugins: [
+-     new UglifyJSPlugin()
++     new UglifyJSPlugin(),
++     new webpack.DefinePlugin({
++       'process.env': {
++         'NODE_ENV': JSON.stringify('production')
++       }
++     })
+    ]
+  })
+```
+
+T> Technically, `NODE_ENV` is a system environment variable that Node.js exposes into running scripts. It is used by convention to determine dev-vs-prod behavior by server tools, build scripts, and client-side libraries. Contrary to expectations, `process.env.NODE_ENV` is not set to `"production"` __within__ the build script `webpack.config.js`, see [#2537](https://github.com/webpack/webpack/issues/2537). Thus, conditionals like `process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js'` within webpack configurations do not work as expected.
+
+If you're using a library like [`react`](https://facebook.github.io/react/), you should actually see a significant drop in bundle size after adding this plugin. Also note that any of our local `/src` code can key off of this as well, so the following check would be valid:
+
+__src/index.js__
+
+``` diff
+  import { cube } from './math.js';
++
++ if (process.env.NODE_ENV !== 'production') {
++   console.log('Looks like we are in development mode!');
++ }
+
+  function component() {
+    var element = document.createElement('pre');
+
+    element.innerHTML = [
+      'Hello webpack!',
+      '5 cubed is equal to ' + cube(5)
+    ].join('\n\n');
+
+    return element;
+  }
+
+  document.body.appendChild(component());
+```
+
+
+## CLI Alternatives
+
+Some of what has been described above is also achievable via the command line. For example, the `--optimize-minize` flag will include the `UglifyJSPlugin` behind the scenes. The `--define process.env.NODE_ENV="'production'"` will do the same for the `DefinePlugin` instance described above. And, `webpack -p` will automatically include invoke both those flags and thus the plugins to be included.
+
+While these short hand methods are nice, we usually recommend just using the configuration as it's better to understand exactly what is being done for you in both cases. The configuration also gives you more control on fine tuning other options within both plugins.
