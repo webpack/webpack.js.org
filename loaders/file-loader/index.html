@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/6ce69a6d6ffc42abcdd6.css" rel="stylesheet">
+      <link href="/b4fe9ae2822dcd98dee3.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -229,7 +229,7 @@
 <p>You can configure a custom filename template for your file using the query parameter <code>name</code>. For instance, to copy a file from your <code>context</code> directory into the output directory retaining the full directory structure, you might use</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-js"><span class="token punctuation">{</span>
-  loader<span class="token punctuation">:</span> <span class="token string">&apos;file-loader&apos;</span>
+  loader<span class="token punctuation">:</span> <span class="token string">&apos;file-loader&apos;</span><span class="token punctuation">,</span>
   options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     name<span class="token punctuation">:</span> <span class="token string">&apos;[path][name].[ext]&apos;</span>
   <span class="token punctuation">}</span>  
@@ -486,7 +486,7 @@
 <h3 class="header"><a class="anchor" href="#context" id="context"></a><span class="text"><code>context</code></span><a class="icon-link" href="#context"></a></h3>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-js"><span class="token punctuation">{</span>
-  loader<span class="token punctuation">:</span> <span class="token string">&apos;file-loader&apos;</span>
+  loader<span class="token punctuation">:</span> <span class="token string">&apos;file-loader&apos;</span><span class="token punctuation">,</span>
   options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     name<span class="token punctuation">:</span> <span class="token string">&apos;[path][name].[ext]&apos;</span><span class="token punctuation">,</span>
     context<span class="token punctuation">:</span> <span class="token string">&apos;&apos;</span>
@@ -497,7 +497,7 @@
 <h3 class="header"><a class="anchor" href="#publicpath" id="publicpath"></a><span class="text"><code>publicPath</code></span><a class="icon-link" href="#publicpath"></a></h3>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-js"><span class="token punctuation">{</span>
-  loader<span class="token punctuation">:</span> <span class="token string">&apos;file-loader&apos;</span>
+  loader<span class="token punctuation">:</span> <span class="token string">&apos;file-loader&apos;</span><span class="token punctuation">,</span>
   options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     name<span class="token punctuation">:</span> <span class="token string">&apos;[path][name].[ext]&apos;</span><span class="token punctuation">,</span>
     publicPath<span class="token punctuation">:</span> <span class="token string">&apos;assets&apos;</span>
@@ -507,7 +507,7 @@
 <h3 class="header"><a class="anchor" href="#outputpath" id="outputpath"></a><span class="text"><code>outputPath</code></span><a class="icon-link" href="#outputpath"></a></h3>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-js"><span class="token punctuation">{</span>
-  loader<span class="token punctuation">:</span> <span class="token string">&apos;file-loader&apos;</span>
+  loader<span class="token punctuation">:</span> <span class="token string">&apos;file-loader&apos;</span><span class="token punctuation">,</span>
   options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     name<span class="token punctuation">:</span> <span class="token string">&apos;[path][name].[ext]&apos;</span><span class="token punctuation">,</span>
     outputPath<span class="token punctuation">:</span> <span class="token string">&apos;images&apos;</span>
@@ -528,7 +528,7 @@
 <pre><code class="lang-js"><span class="token keyword">import</span> img <span class="token keyword">from</span> <span class="token string">&apos;./file.png&apos;</span>
 </code></pre>
 <pre><code class="lang-js"><span class="token punctuation">{</span>
-  loader<span class="token punctuation">:</span> <span class="token string">&apos;file-loader&apos;</span>
+  loader<span class="token punctuation">:</span> <span class="token string">&apos;file-loader&apos;</span><span class="token punctuation">,</span>
   options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     emitFile<span class="token punctuation">:</span> <span class="token boolean">false</span>
   <span class="token punctuation">}</span>  
@@ -543,7 +543,7 @@
 </code></pre>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-js"><span class="token punctuation">{</span>
-  loader<span class="token punctuation">:</span> <span class="token string">&apos;file-loader&apos;</span>
+  loader<span class="token punctuation">:</span> <span class="token string">&apos;file-loader&apos;</span><span class="token punctuation">,</span>
   options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     name<span class="token punctuation">:</span> <span class="token string">&apos;dirname/[hash].[ext]&apos;</span>
   <span class="token punctuation">}</span>  
@@ -552,7 +552,7 @@
 <pre><code>dirname/0dcbbaa701328ae351f.png
 </code></pre><p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-js"><span class="token punctuation">{</span>
-  loader<span class="token punctuation">:</span> <span class="token string">&apos;file-loader&apos;</span>
+  loader<span class="token punctuation">:</span> <span class="token string">&apos;file-loader&apos;</span><span class="token punctuation">,</span>
   options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     name<span class="token punctuation">:</span> <span class="token string">&apos;[sha512:hash:base64:7].[ext]&apos;</span>
   <span class="token punctuation">}</span>  
@@ -563,7 +563,7 @@
 </code></pre>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-js"><span class="token punctuation">{</span>
-  loader<span class="token punctuation">:</span> <span class="token string">&apos;file-loader&apos;</span>
+  loader<span class="token punctuation">:</span> <span class="token string">&apos;file-loader&apos;</span><span class="token punctuation">,</span>
   options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     name<span class="token punctuation">:</span> <span class="token string">&apos;[path][name].[ext]?[hash]&apos;</span>
   <span class="token punctuation">}</span>  
