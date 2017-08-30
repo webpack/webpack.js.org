@@ -12,18 +12,16 @@ import '../Sponsors/Sponsors.scss';
 import '../Gitter/Gitter.scss';
 
 const Page = ({ page, section }) => {
-  const {
-    file: {
-      attributes: {
-        anchors,
-        contributors,
-        title,
-        related,
-      },
-      body
-    },
-    url
-  } = page;
+  let { contributors, title, related } = page.file.attributes;
+  let pages = (
+    section.pages()
+      .sort((a, b) => a.file.attributes.sort - b.file.attributes.sort)
+      .map(page => ({
+        url: page.url,
+        title: page.file.attributes.title,
+        anchors: page.file.attributes.anchors
+      }))
+  );
 
   return (
     <Container className="page">
@@ -32,11 +30,7 @@ const Page = ({ page, section }) => {
         id="src/components/Sidebar/Sidebar.jsx"
         component={ Sidebar }
         sectionName={ section.name }
-        pages={ section.pages().map(page => ({
-          url: page.url,
-          title: page.file.attributes.title,
-          anchors: page.file.attributes.anchors
-        })) }
+        pages={ pages }
         currentPage={ page.url.replace('/index', '') } />
 
       <section className="page__content">
@@ -46,7 +40,7 @@ const Page = ({ page, section }) => {
           page={ page }
           section={ section.name } />
 
-        <div dangerouslySetInnerHTML={{ __html: body }} />
+        <div dangerouslySetInnerHTML={{ __html: page.file.body }} />
 
         { related.length > 0 && (
           <div>
