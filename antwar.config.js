@@ -85,7 +85,12 @@ module.exports = {
 	},
 	plugins: {
 		title: "Plugin",
-		content: () => require.context('./loaders/page-loader!./src/content/plugins', false, /^\.\/.*\.md$/),
+		content: () => {
+			return combineContexts(
+				require.context('./loaders/page-loader!./src/content/plugins', false, /^\.\/.*\.md$/),
+				require.context('./loaders/page-loader!./generated/plugins', false, /^\.\/.*\.md$/)
+			);
+		},
 		url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
 		transform: (pages) => {
 			return _.sortBy(pages, (page) => page.file.sort)
@@ -95,18 +100,10 @@ module.exports = {
     loaders: {
     	title: "Loaders",
 		content: () => {
-			const content = require.context(
-				'./loaders/page-loader!./src/content/loaders',
-				false,
-				/^\.\/.*\.md$/
+			return combineContexts(
+				require.context('./loaders/page-loader!./src/content/loaders', false, /^\.\/.*\.md$/),
+				require.context('./loaders/page-loader!./generated/loaders', false, /^\.\/.*\.md$/)
 			);
-			const generated = require.context(
-				'./loaders/page-loader!./generated/loaders',
-				false,
-				/^\.\/.*\.md$/
-			);
-
-			return combineContexts(content, generated);
 		},
 		url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
 		layout: () => require('./src/components/Page/Page.jsx').default
@@ -120,7 +117,7 @@ module.exports = {
 	        'code-splitting-async': '/guides/code-splitting',
 	        'code-splitting-css': '/guides/code-splitting',
 	        'code-splitting-libraries': '/guides/code-splitting',
-	        'why-webpack': '/guides/comparison',
+	        'why-webpack': '/comparison',
 	        'production-build': '/guides/production'
 		},
 		transform: (pages) => {
