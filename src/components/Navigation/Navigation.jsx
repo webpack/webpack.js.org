@@ -171,9 +171,9 @@ export default class Navigation extends React.Component {
     let { pageUrl = '' } = this.props;
 
     if (section.children) {
-      return section.children.some(child => { return pageUrl == '/' + child.url + '/'; });
+      return section.children.some(child => { return (new RegExp("^/" + child.url +".*/")).test(pageUrl); });
 
-    } else return pageUrl.includes('/' + section.url + '/', 0);
+    } else return (new RegExp("^/" + section.url +".*/")).test(pageUrl);
   }
 
   /**

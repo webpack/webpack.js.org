@@ -44,6 +44,18 @@ module.exports = {
 		},
 		layout: () => require('./src/components/Page/Page.jsx').default
 	},
+	'api/plugins': {
+    	title: "API Plugins",
+		content: () => require.context('./loaders/page-loader!./src/content/api/plugins', false, /^\.\/.*\.md$/),
+		redirects: {
+			'passing-a-config': 'configuration-types'
+		},
+		url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
+		transform: (pages) => {
+			return _.sortBy(pages, (page) => page.file.sort)
+		},
+		layout: () => require('./src/components/Page/Page.jsx').default
+	},
 	pluginsapi: {
 		title: 'API Plugin',
 		redirects: {
