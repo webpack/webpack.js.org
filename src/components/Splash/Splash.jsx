@@ -17,7 +17,7 @@ const Splash = () => (
     <div className="splash__section splash__section--dark">
       <Container>
         <div dangerouslySetInnerHTML={{
-          __html: require('page-loader!./index.md').body
+          __html: require('page-loader!../../content/index.md').body
         }} />
       </Container>
     </div>

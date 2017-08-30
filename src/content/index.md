@@ -60,6 +60,7 @@ Then run `webpack` on the command-line to create `bundle.js`.
 </div>
 </div>
 
+
 ## It's that simple
 
 __[Get Started](/guides/getting-started)__ quickly in our __Guides__ section, or dig into the __[Concepts](/concepts)__ section for more high-level information on the core notions behind behind webpack.

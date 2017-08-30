@@ -80,6 +80,6 @@ const Page = ({ page, section }) => {
       </section>
     </Container>
   );
-);
+};
 
 export default Page;

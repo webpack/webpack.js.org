@@ -35,13 +35,14 @@ export default class Sidebar extends Component {
             currentPage= { currentPage } />
 
           {
-            pages.map(({ url, title, anchors }, i) =>
+            pages.map((page, i) =>
               <SidebarItem
+                blah={ console.debug('page: ', page) }
                 key={ `sidebar-item-${i}` }
-                index={i}
-                url={ `${url}` }
-                title={ title }
-                anchors={ anchors }
+                index={ i }
+                url={ page.url }
+                title={ page.title }
+                anchors={ page.anchors }
                 currentPage= { currentPage }
                 onToggle={ this._recalculate.bind(this) } />
             )

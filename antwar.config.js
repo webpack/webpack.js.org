@@ -1,6 +1,6 @@
 const path = require('path');
 const _ = require('lodash');
-const combineContexts = require('./utilities/combine-contexts');
+const combineContexts = require('./src/utilities/combine-contexts');
 
 module.exports = {
   maximumWorkers: process.env.TRAVIS && 1, // Faster on Travis
@@ -10,7 +10,7 @@ module.exports = {
   output: 'build',
   title: 'webpack',
   keywords: ['webpack', 'javascript', 'web development', 'programming'],
-  layout: () => require('./src/components/site/site.jsx').default,
+  layout: () => require('./src/components/Site/Site.jsx').default,
   paths: {
     '/': {
       content: () => (
@@ -21,14 +21,14 @@ module.exports = {
         )
       ),
       index: () => {
-        const index = require('./src/components/splash/splash.jsx').default;
+        const index = require('./src/components/Splash/Splash.jsx').default;
 
         index.title = 'webpack';
         index.description = 'webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.';
 
         return index;
       },
-      layout: () => require('./src/components/page/page.jsx').default,
+      layout: () => require('./src/components/Page/Page.jsx').default,
       paths: {
         'get-started': {
           redirects: {
@@ -81,7 +81,7 @@ module.exports = {
         loaders: {
           content: () => {
             const content = require.context(
-              './loaders/page-loader!./content/plugins',
+              './loaders/page-loader!./src/content/plugins',
               false,
               /^\.\/.*\.md$/
             );
@@ -97,21 +97,21 @@ module.exports = {
       }
     },
     vote: () => {
-      const page = require('./src/components/vote/list.jsx').default;
+      const page = require('./src/components/Vote/List.jsx').default;
 
       page.title = 'Vote';
 
       return page;
     },
     organization: () => {
-      const page = require('./src/components/organization/organization.jsx').default;
+      const page = require('./src/components/Organization/Organization.jsx').default;
 
       page.title = 'Organization';
 
       return page;
     },
     'guides/starter-kits': () => {
-      const page = require('./src/components/starter-kits/starter-kits.jsx').default;
+      const page = require('./src/components/StarterKits/StarterKits.jsx').default;
 
       page.title = 'Starter kits';
 

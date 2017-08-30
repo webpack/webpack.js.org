@@ -1,8 +1,8 @@
 const _ = require('lodash');
 const frontmatter = require('front-matter');
 const loaderUtils = require('loader-utils');
-const markdown = require('../utilities/markdown');
-const highlight = require('../utilities/highlight');
+const markdown = require('../src/utilities/markdown');
+const highlight = require('../src/utilities/highlight');
 
 module.exports = function (source) {
   const result = frontmatter(source);
