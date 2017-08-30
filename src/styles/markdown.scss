@@ -21,6 +21,10 @@
     margin:1.5em 0 0.25em;
     color:getColor(fiord);
 
+    .geo-loaded & {
+      font-family: $font-stack-heading-loaded;
+    }
+
     &:first-child {
       margin-top: 0;
       line-height: 1;
@@ -261,6 +265,10 @@
     background-color: transparentize(getColor(fiord), 0.94);
     border-radius: 3px;
     text-shadow: 0 1px 0 transparentize(getColor(white), 0.4);
+
+    .scp-loaded & {
+      font-family: $font-stack-code-loaded;
+    }
   }
 
   a code {

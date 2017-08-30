@@ -24,6 +24,10 @@ body {
   font: 400 getFontSize(0) $font-stack-body;
   color: getColor(elephant);
   @include fontantialias(true);
+
+  .ssp-loaded & {
+    font-family: $font-stack-body-loaded;
+  }
 }
 
 a {

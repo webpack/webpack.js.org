@@ -18,9 +18,13 @@ $screens: (
   medium: 768px
 );
 
-$font-stack-body: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-$font-stack-heading: Geomanist, sans-serif;
-$font-stack-code: 'Source Code Pro', Consolas, "Liberation Mono", Menlo, Courier, monospace;
+$font-stack-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+$font-stack-body-loaded: 'Source Sans Pro', sans-serif;
+
+$font-stack-heading: Helvetica, sans-serif;
+$font-stack-heading-loaded: Geomanist, sans-serif;
+
+$font-stack-code: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+$font-stack-code-loaded: 'Source Code Pro', monospace;
 
 $text-color-highlight: lighten(map-get($colors, denim), 5%);
-

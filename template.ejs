@@ -8,7 +8,29 @@
     <meta name="theme-color" content="#2B3A42">
     <link rel="shortcut icon" href="/assets/favicon.ico">
 
-    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:200,400,400i,500" rel="stylesheet">
+    <script>
+    /* store-css - https://github.com/jeremenichelli/store-css/ */ (function(f,d){"function"===typeof define&&define.amd?define(function(){return d()}):"object"===typeof exports?module.exports=d():f.store=d()})(this,function(){function f(){g&&console&&console.log.apply(console,arguments)}function d(c){this.onload=null;this.media=c.media?c.media:"all";f(this.href,"stylesheet loaded asynchronously");try{for(var d=this.sheet?this.sheet.cssRules:this.styleSheet.rules,b=d.length,a="",e=0;e<b;e++)a+=d[e].cssText;c.media&&(a="@media "+c.media+"{"+a+"}");c.storage&&window[c.storage+
+"Storage"].setItem(this.href,a)}catch(h){f("Stylesheet could not be saved for future visits",h)}}var k=document.getElementsByTagName("script")[0],g=!1;return{css:function(c,g){var b=document.createElement("link"),a="undefined"===typeof g?{}:g,e=a.ref?a.ref:k,h=null;b.rel="stylesheet";b.href=c;if(a.storage)try{h=window[a.storage+"Storage"].getItem(b.href)}catch(l){f("Stylesheet could not be retrieved from "+a.storage+"Storage",l)}h?(b=document.createElement("style"),b.textContent=h,e.parentNode.insertBefore(b,
+e),f(c,"stylesheet loaded from "+a.storage+"Storage")):(b.media="only x",a.crossOrigin&&(b.crossOrigin=a.crossOrigin),b.onload=d.bind(b,a),e.parentNode.insertBefore(b,e))},verbose:function(){g=!0}}});
+    </script>
+
+    <script>
+      window.store.css(
+        'https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:200,400,400i,500',
+        {
+          storage: 'session',
+          crossOrigin: true
+        }
+      );
+
+      if (window.sessionStorage.getItem('ssp-loaded') !== null) {
+        document.documentElement.classList.add('ssp-loaded');
+      }
+
+      if (window.sessionStorage.getItem('scp-loaded') !== null) {
+        document.documentElement.classList.add('scp-loaded');
+      }
+    </script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     <% for (var file in webpackConfig.template.cssFiles) { %>
