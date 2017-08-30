@@ -34,8 +34,8 @@ const Page = ({ page, section }) => {
         sectionName={ section.name }
         pages={ section.pages().map(page => ({
           url: page.url,
-          title: page.title,
-          anchors: page.anchors
+          title: page.file.attributes.title,
+          anchors: page.file.attributes.anchors
         })) }
         currentPage={ page.url.replace('/index', '') } />
 

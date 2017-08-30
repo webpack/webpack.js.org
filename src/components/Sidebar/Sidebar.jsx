@@ -37,7 +37,6 @@ export default class Sidebar extends Component {
           {
             pages.map((page, i) =>
               <SidebarItem
-                blah={ console.debug('page: ', page) }
                 key={ `sidebar-item-${i}` }
                 index={ i }
                 url={ page.url }
