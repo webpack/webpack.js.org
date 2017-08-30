@@ -18,9 +18,3 @@ cp -rf ./content/plugins/ ./generated/plugins
 
 rm -rf ./content/loaders/*.json
 rm -rf ./content/plugins/*.json
-
-# Fetch sponsors and backers from opencollective
-./scripts/fetch_supporters.js
-
-# Fetch starter kits
-./scripts/fetch_starter_kits.js
