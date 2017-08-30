@@ -98,17 +98,20 @@ Split your code into vendor and application.
 entry: {
   vendor: ["jquery", "other-lib"],
   app: "./entry"
-}
-new webpack.optimize.CommonsChunkPlugin({
-  name: "vendor",
+},
+plugins: [
+  new webpack.optimize.CommonsChunkPlugin({
+    name: "vendor",
 
-  // filename: "vendor.js"
-  // (Give the chunk a different name)
+    // filename: "vendor.js"
+    // (Give the chunk a different name)
 
-  minChunks: Infinity,
-  // (with more entries, this ensures that no other module
-  //  goes into the vendor chunk)
-})
+    minChunks: Infinity,
+    // (with more entries, this ensures that no other module
+    //  goes into the vendor chunk)
+  })
+more plugins...
+]
 ```
 
 ```html
