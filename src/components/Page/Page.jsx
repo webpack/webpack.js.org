@@ -31,7 +31,8 @@ const Page = ({ page, section }) => {
         component={ Sidebar }
         sectionName={ section.name }
         pages={ pages }
-        currentPage={ page.url.replace('/index', '') } />
+        currentPage={ page.url.replace('/index', '') }
+        anchors={ page.file.attributes.anchors } />
 
       <section className="page__content">
         <h1>{ title }</h1>
