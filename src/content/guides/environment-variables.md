@@ -11,13 +11,13 @@ related:
 
 To disambiguate in your `webpack.config.js` between [development](/guides/development) and [production builds](/guides/production), you may use environment variables.
 
-The webpack command line [environment option](/api/cli/#environment-options), `--env` allows you to pass in as many environment variables as you would like. Environment variables will be made accesible in your `webpack.config.js`. For example, `--env.production` or `--env.NODE_ENV=local` (`NODE_ENV` is conventionally used to define the environment type, see [here](https://dzone.com/articles/what-you-should-know-about-node-env).)
+The webpack command line [environment option](/api/cli/#environment-options), `--env` allows you to pass in as many environment variables as you like. Environment variables will be made accesible in your `webpack.config.js`. For example, `--env.production` or `--env.NODE_ENV=local` (`NODE_ENV` is conventionally used to define the environment type, see [here](https://dzone.com/articles/what-you-should-know-about-node-env).)
 
 ```bash
 webpack --env.NODE_ENV=local --env.production --progress
 ```
 
-T> Setting up your `env` variable without assignment, `--env.prduction` sets `env.prduction` to `true` by default. There are also other various syntaxes that you can use. See the [webpack CLI](/api/cli/#environment-options) documentation for more information.
+T> Setting up your `env` variable without assignment, `--env.production` sets `--env.production` to `true` by default. There are also other syntaxes that you can use. See the [webpack CLI](/api/cli/#environment-options) documentation for more information.
 
 There is, however a change that you will have to make to your webpack config. Typically, in your webpack config `module.exports` points to the configuration object. To use the `env` variable, you must change `module.exports` to be a function:
 
