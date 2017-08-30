@@ -5,6 +5,12 @@ let initialTouchPosition = {};
 let lastTouchPosition = {};
 
 export default class SidebarMobile extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this._handleBodyClick = this._handleBodyClick.bind(this);
+  }
+
   render() {
     return (
       <nav
@@ -59,7 +65,7 @@ export default class SidebarMobile extends React.Component {
 
     return this.props.sections.map(section => {
       let active = pathname === section.url || pathname.includes(`/${section.url}`),
-          absoluteUrl = `/${section.url}`;
+          absoluteUrl = (section.url == '/') ? '/' : `/${section.url}`;
 
       return (
         <div
@@ -70,7 +76,7 @@ export default class SidebarMobile extends React.Component {
             key={ absoluteUrl }
             to={ absoluteUrl }
             onClick={ this._close.bind(this) }>
-            <h3>{ section.title }</h3>
+            <h3>{ section.title || section.url }</h3>
           </Link>
 
           { this._getPages(section.pages) }
@@ -93,7 +99,7 @@ export default class SidebarMobile extends React.Component {
     }
 
     return pages.map(page => {
-      let url = `/${page.url}`,
+      let url = `${page.url}`,
         active = pathname === url || pathname.includes(`${url}/`);
 
       return (
