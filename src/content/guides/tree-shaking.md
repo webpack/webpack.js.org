@@ -1,6 +1,6 @@
 ---
 title: Tree Shaking
-sort: 8
+sort: 7
 contributors:
   - simon04
   - zacanger
@@ -14,78 +14,138 @@ related:
     url: https://medium.com/modus-create-front-end-development/webpack-2-tree-shaking-configuration-9f1de90f3233#.15tuaw71x
 ---
 
-_Tree shaking_ 是一个术语，通常用来描述移除 JavaScript 上下文中无用代码这个过程，或者更准确的说是按需引用代码，它依赖于 ES2015 模块系统中 [import](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/import)/[export](https://developer.mozilla.org//en-US/docs/Web/JavaScript/Reference/Statements/export) 的[静态结构特性](http://exploringjs.com/es6/ch_modules.html#static-module-structure)。这个术语和概念实际上是兴起于 ES2015 模块打包工具 [rollup](https://github.com/rollup/rollup)。
+_tree shaking_ 是一个术语，通常用于描述移除 JavaScript 上下文中的未引用代码(dead-code)。它依赖于 ES2015 模块系统中的[静态结构特性](http://exploringjs.com/es6/ch_modules.html#static-module-structure)，例如 [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 和 [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)。这个术语和概念实际上是兴起于 ES2015 模块打包工具 [rollup](https://github.com/rollup/rollup)。
 
-webpack 2 原生支持 ES6 模块 (别名 *harmony modules*) ，并能检测出未使用的模块输出。
+webpack 2 内置支持 ES2015 模块（别名 *harmony modules*），并能检测出未使用的模块导出。
+
+T> 本指南的继承自[起步指南](/guides/getting-started)。如果您尚未阅读该指南，请先行阅读。
 
 
-## 示例
+## 添加一个通用模块
 
-举一个 **maths.js** 库例子，它输出两个方法 `square` 和 `cube`：
+在我们的项目中添加一个新的通用模块文件 `src/math.js`，此文件导出两个函数：
 
-```javascript
-// 这个函数没有被其他地方引用过
+__project__
+
+``` diff
+webpack-demo
+|- package.json
+|- webpack.config.js
+|- /dist
+  |- bundle.js
+  |- index.html
+|- /src
+  |- index.js
+  |- math.js
+|- /node_modules
+```
+
+__src/math.js__
+
+``` javascript
 export function square(x) {
-	return x * x;
+  return x * x;
 }
 
-// 这个函数被引用了
 export function cube(x) {
-	return x * x * x;
+  return x * x * x;
 }
 ```
 
-在 **main.js** 中我们只引用 `cube` 方法：
+接着，更新入口脚本，使用其中一个新方法，并且为了简单，将 `lodash` 删除：
 
-```javascript
-import {cube} from './maths.js';
-console.log(cube(5)); // 125
+__src/index.js__
+
+``` diff
+- import _ from 'lodash';
++ import { cube } from './math.js';
+
+  function component() {
+-   var element = document.createElement('div');
++   var element = document.createElement('pre');
+
+-   // lodash 是由当前 script 脚本 import 导入进来的
+-   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
++   element.innerHTML = [
++     'Hello webpack!',
++     '5 cubed is equal to ' + cube(5)
++   ].join('\n\n');
+
+    return element;
+  }
+
+  document.body.appendChild(component());
 ```
 
-运行 `node_modules/.bin/webpack main.js dist.js` 并检查 `dist.js` 可发现 `square` 没有被输出:
+注意，我们__并未从 `src/math.js` 模块中 `import` 导入 `square` 方法__。这个功能是所谓的“未引用代码(dead code)”，也就是说，应该删除掉未被引用的 `export`。现在让我们运行我们的npm 脚本 `npm run build`，并检查输出的 bundle：
 
-```javascript
-/* ... webpackBootstrap ... */
-/******/ ([
-/* 0 */
+__dist/bundle.js (around lines 90 - 100)__
+
+``` js
+/* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export square */
 /* harmony export (immutable) */ __webpack_exports__["a"] = cube;
-// 这个函数没有被其他地方引用过
 function square(x) {
   return x * x;
 }
 
-// 这个函数被引用了
 function cube(x) {
   return x * x * x;
 }
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__maths_js__ = __webpack_require__(0);
-
-console.log(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__maths_js__["a" /* cube */])(5)); // 125
-
-/***/ })
 ```
 
-当执行一次[生产环境构建](/guides/production) `node_modules/.bin/webpack --optimize-minimize main.js dist.min.js` 后，打包出来的代码只包含 `cube` 方法，并没有 `square` 方法：
+注意，上面的 `unused harmony export square` 注释。如果你看下面的代码，你会注意到 `square` 没有被导出，但是，它仍然被包含在 bundle 中。我们将在下一节中解决这个问题。
 
-```javascript
-/* ... */
-function(e,t,n){"use strict";function r(e){return e*e*e}t.a=r}
-/* ... */
-function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(0);console.log(n.i(r.a)(5))}
+
+## 精简输出
+
+我们已经通过 `import` and `export` 语法，标识出了那些“未引用代码(dead code)”，但是我们仍然需要从 bundle 中删除它们。要做到这一点，我们将添加一个能够删除未引用代码(dead code)的压缩工具(minifier) -  [`UglifyJSPlugin`](/plugins/uglifyjs-webpack-plugin) - 在配置对象中添加……
+
+我们先来安装它：
+
+``` bash
+npm i --save-dev uglifyjs-webpack-plugin
 ```
 
-T> Note that the `--optimize-minimize` flag enables tree shaking by including the `UglifyJsPlugin` behind the scenes. Alternatively, the `UglifyJsPlugin` can be included manually in the `plugins` section of your configuration file. The plugin, combined with webpack's resolving of `import` and `export` statements, is what makes tree shaking possible. See the [production build](/guides/production) guide for more information.
+然后将其添加到我们的配置中：
+
+__webpack.config.js__
+
+``` diff
+const path = require('path');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+- }
++ },
++ plugins: [
++   new UglifyJSPlugin()
++ ]
+};
+```
+
+T> 注意，也可以在命令行接口中使用 `--optimize-minimize` 标记，来使用 `UglifyJsPlugin`。
+
+准备就绪后，然后运行另一个命令 `npm run build`，看看输出结果有没有发生改变。
+
+你发现 `dist/bundle.js` 中的差异了吗？显然，现在整个 bundle 都已经被精简过，但是如果仔细观察，则不会看到 `square` 函数被引入，但会看到 `cube` 函数的修改版本（`function r(e){return e*e*e}n.a=r`）。现在，随着 tree shaking 和代码压缩，我们的 bundle 减小几个字节！虽然，在这个特定示例中，可能看起来没有减少很多，但是，在具有复杂的依赖树的大型应用程序上运行时，tree shaking 或许会对 bundle 产生显著的体积优化。
+
+
+## 结论
+
+为了学会使用 _tree shaking_，你必须……
+
+- 使用 ES2015 模块语法（即 `import` 和 `export`）。
+- 引入一个能够删除未引用代码(dead code)的压缩工具(minifier)（例如 `UglifyJSPlugin`）。
+
+如果你对优化输出有很大兴趣的话，请进入到下一个指南，来了解[生产环境](/guides/production)中进行构建的详细细节。
 
 ***
 

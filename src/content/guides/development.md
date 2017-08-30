@@ -267,8 +267,7 @@ __webpack.config.js__
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
         title: 'Output Management'
-      }),
-      new webpack.HotModuleReplacementPlugin()
+      })
     ],
     output: {
       filename: '[name].bundle.js',

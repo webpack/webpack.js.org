@@ -74,7 +74,7 @@ node: {
 
 `boolean | "mock"`
 
-默认值：`true`
+默认值：`"mock"`
 
 选项：
 
@@ -87,7 +87,7 @@ node: {
 
 `boolean | "mock"`
 
-默认值：`true`
+默认值：`"mock"`
 
 选项：
 
