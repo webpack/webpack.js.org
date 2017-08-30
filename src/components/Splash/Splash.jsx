@@ -11,7 +11,7 @@ import '../TextRotater/TextRotater.scss';
 const Splash = () => (
   <div className="splash">
     <Interactive
-      id="components/splash-viz/splash-viz.jsx"
+      id="src/components/SplashViz/SplashViz.jsx"
       component={ SplashViz } />
 
     <div className="splash__section splash__section--dark">
