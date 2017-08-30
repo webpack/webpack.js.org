@@ -25,149 +25,130 @@ module.exports = {
       layout: () => require('./src/components/Page/Page.jsx').default,
     },
     'get-started': {
-    	title: 'Get Gtarted',
-		redirects: {
-			'': '/guides/getting-started',
-			'install-webpack': '/guides/installation',
-			'why-webpack': '/guides/why-webpack',
-		}
-	},
-    api: {
-    	title: "API",
-		content: () => require.context('./loaders/page-loader!./src/content/api', false, /^\.\/.*\.md$/),
-		redirects: {
-			'passing-a-config': 'configuration-types'
-		},
-		url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
-		transform: (pages) => {
-			return _.sortBy(pages, (page) => page.file.sort)
-		},
-		layout: () => require('./src/components/Page/Page.jsx').default
-	},
-	'api/plugins': {
-    	title: "API Plugins",
-		content: () => require.context('./loaders/page-loader!./src/content/api/plugins', false, /^\.\/.*\.md$/),
-		redirects: {
-			'passing-a-config': 'configuration-types'
-		},
-		url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
-		transform: (pages) => {
-			return _.sortBy(pages, (page) => page.file.sort)
-		},
-		layout: () => require('./src/components/Page/Page.jsx').default
-	},
-	pluginsapi: {
-		title: 'API Plugin',
-		redirects: {
-			'': '/api/plugins',
-			'compiler': '/api/plugins/compiler',
-			'template': '/api/plugins/template'
-		},
-		hideInSidebar: true
-	},
-	concepts: {
-		title: "Comcepts",
-		content: () => require.context('./loaders/page-loader!./src/content/concepts', false, /^\.\/.*\.md$/),
-		url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
-		transform: (pages) => {
-			return _.sortBy(pages, (page) => page.file.sort)
-		},
-		layout: () => require('./src/components/Page/Page.jsx').default
-	},
-	development: {
-		title: "Development",
-		content: () => require.context('./loaders/page-loader!./src/content/development', false, /^\.\/.*\.md$/),
-		url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
-		transform: (pages) => {
-			return _.sortBy(pages, (page) => page.file.sort)
-		},
-		layout: () => require('./src/components/Page/Page.jsx').default
-	},
-	plugins: {
-		title: "Plugin",
-		content: () => {
-			return combineContexts(
-				require.context('./loaders/page-loader!./src/content/plugins', false, /^\.\/.*\.md$/),
-				require.context('./loaders/page-loader!./generated/plugins', false, /^\.\/.*\.md$/)
-			);
-		},
-		url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
-		transform: (pages) => {
-			return _.sortBy(pages, (page) => page.file.sort)
-		},
-		layout: () => require('./src/components/Page/Page.jsx').default
-	},
-    loaders: {
-    	title: "Loaders",
-		content: () => {
-			return combineContexts(
-				require.context('./loaders/page-loader!./src/content/loaders', false, /^\.\/.*\.md$/),
-				require.context('./loaders/page-loader!./generated/loaders', false, /^\.\/.*\.md$/)
-			);
-		},
-		url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
-		layout: () => require('./src/components/Page/Page.jsx').default
+      redirects: {
+        '': '/guides/getting-started',
+        'install-webpack': '/guides/installation',
+        'why-webpack': '/guides/why-webpack',
+      }
     },
-	guides: {
-		title: "Guides",
-		content: () => require.context('./loaders/page-loader!./src/content/guides', false, /^\.\/.*\.md$/),
-		redirects: {
-			'code-splitting-import': '/guides/code-splitting',
-	        'code-splitting-require': '/guides/code-splitting',
-	        'code-splitting-async': '/guides/code-splitting',
-	        'code-splitting-css': '/guides/code-splitting',
-	        'code-splitting-libraries': '/guides/code-splitting',
-	        'why-webpack': '/comparison',
-	        'production-build': '/guides/production'
-		},
-		transform: (pages) => {
-			return _.sortBy(pages, (page) => page.file.sort)
-		},
-		url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
-		layout: () => require('./src/components/Page/Page.jsx').default
-	},
+    api: {
+      title: "API",
+      layout: () => require('./src/components/Page/Page.jsx').default,
+      url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
+      content: () => require.context('./loaders/page-loader!./src/content/api', false, /^\.\/.*\.md$/),
+      transform: (pages) => {
+        return _.sortBy(pages, (page) => page.file.sort)
+      },
+      redirects: {
+        'passing-a-config': 'configuration-types'
+      }
+    },
+    'api/plugins': {
+      title: "API Plugins",
+      layout: () => require('./src/components/Page/Page.jsx').default,
+      url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
+      content: () => require.context('./loaders/page-loader!./src/content/api/plugins', false, /^\.\/.*\.md$/),
+      transform: (pages) => {
+        return _.sortBy(pages, (page) => page.file.sort)
+      },
+      redirects: {
+        'passing-a-config': 'configuration-types'
+      }
+    },
+    pluginsapi: {
+      title: 'API Plugin',
+      redirects: {
+        '': '/api/plugins',
+        'compiler': '/api/plugins/compiler',
+        'template': '/api/plugins/template'
+      },
+      hideInSidebar: true
+    },
+    concepts: {
+      title: "Comcepts",
+      layout: () => require('./src/components/Page/Page.jsx').default,
+      content: () => require.context('./loaders/page-loader!./src/content/concepts', false, /^\.\/.*\.md$/),
+      url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
+      transform: (pages) => {
+        return _.sortBy(pages, (page) => page.file.sort)
+      }
+    },
+    development: {
+      title: "Development",
+      layout: () => require('./src/components/Page/Page.jsx').default,
+      content: () => require.context('./loaders/page-loader!./src/content/development', false, /^\.\/.*\.md$/),
+      url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
+      transform: (pages) => {
+        return _.sortBy(pages, (page) => page.file.sort)
+      }
+    },
+    plugins: {
+      title: "Plugin",
+      content: () => {
+        return combineContexts(
+          require.context('./loaders/page-loader!./src/content/plugins', false, /^\.\/.*\.md$/),
+          require.context('./loaders/page-loader!./generated/plugins', false, /^\.\/.*\.md$/)
+        );
+      },
+      url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
+      transform: (pages) => {
+        return _.sortBy(pages, (page) => page.file.sort)
+      },
+      layout: () => require('./src/components/Page/Page.jsx').default
+    },
+    loaders: {
+      title: "Loaders",
+      url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
+      layout: () => require('./src/components/Page/Page.jsx').default,
+      content: () => {
+        return combineContexts(
+          require.context('./loaders/page-loader!./src/content/loaders', false, /^\.\/.*\.md$/),
+          require.context('./loaders/page-loader!./generated/loaders', false, /^\.\/.*\.md$/)
+        );
+      },
+    },
+    guides: {
+      title: "Guides",
+      layout: () => require('./src/components/Page/Page.jsx').default,
+      url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
+      content: () => require.context('./loaders/page-loader!./src/content/guides', false, /^\.\/.*\.md$/),
+      transform: (pages) => {
+        return _.sortBy(pages, (page) => page.file.sort)
+      },
+      redirects: {
+        'code-splitting-import': '/guides/code-splitting',
+        'code-splitting-require': '/guides/code-splitting',
+        'code-splitting-async': '/guides/code-splitting',
+        'code-splitting-css': '/guides/code-splitting',
+        'code-splitting-libraries': '/guides/code-splitting',
+        'why-webpack': '/comparison',
+        'production-build': '/guides/production'
+      }
+    },
     configuration: {
-    	title: "Configuration",
-		content: () => require.context('./loaders/page-loader!./src/content/configuration', false, /^\.\/.*\.md$/),
-		transform: (pages) => {
-			return _.sortBy(pages, (page) => page.file.sort)
-		},
-		transform: (pages) => {
-			return _.sortBy(pages, (page) => page.file.sort)
-		},
-		url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
-		layout: () => require('./src/components/Page/Page.jsx').default
-	},
-	support: {
-		title: "Support",
-		content: () => require.context('./loaders/page-loader!./src/content/support', false, /^\.\/.*\.md$/),
-		transform: (pages) => {
-			return _.sortBy(pages, (page) => page.file.sort)
-		},
-		transform: (pages) => {
-			return _.sortBy(pages, (page) => page.file.sort)
-		},
-		url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
-		layout: () => require('./src/components/Page/Page.jsx').default
-	},
+      title: "Configuration",
+      layout: () => require('./src/components/Page/Page.jsx').default,
+      url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
+      content: () => require.context('./loaders/page-loader!./src/content/configuration', false, /^\.\/.*\.md$/),
+      transform: (pages) => {
+        return _.sortBy(pages, (page) => page.file.sort)
+      }
+    },
+    support: {
+      title: "Support",
+      layout: () => require('./src/components/Page/Page.jsx').default,
+      url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
+      content: () => require.context('./loaders/page-loader!./src/content/support', false, /^\.\/.*\.md$/),
+      transform: (pages) => {
+        return _.sortBy(pages, (page) => page.file.sort)
+      }
+    },
     vote: () => {
       const page = require('./src/components/Vote/List.jsx').default;
       page.title = 'Vote';
 
       return page;
-  	},
-  	'vote/feedback': () => {
-      const page = require('./src/components/Vote/List.jsx').default;
-      page.title = 'Vote';
-
-      return page;
-  	},
-  	'vote/moneyDistribution': () => {
-      const page = require('./src/components/Vote/List.jsx').default;
-      page.title = 'Vote';
-
-      return page;
-  	},
+    },
     organization: () => {
       const page = require('./src/components/Organization/Organization.jsx').default;
 
