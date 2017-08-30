@@ -4,7 +4,7 @@ contributors:
   - pierreneter
 ---
 
-`AggressiveSplittingPlugin` 可以将 bundle 分割到更小的 chunk，直到各个 chunk 的大小达到 `option` 设置的 `maxSize`。它通过文件结构将模块组织在一起。
+`AggressiveSplittingPlugin` 可以将 bundle 拆分成更小的 chunk，直到各个 chunk 的大小达到 `option` 设置的 `maxSize`。它通过目录结构将模块组织在一起。
 
 它记录了在 webpack 记录里的分离点，并尝试按照它开始的方式还原分离。这确保了在更改应用程序后，旧的分离点（和 chunk）是可再使用的，因为它们可能早已在客户端的缓存中。因此强烈推荐使用记录。
 
