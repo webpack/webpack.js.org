@@ -23,6 +23,11 @@ const Page = ({ page, section }) => {
       }))
   );
 
+  let indexAnchors = [];
+  if (section.name !== '/') {
+    indexAnchors = require('page-loader!../../content/'+section.name+'/index.md').attributes.anchors;
+  }
+
   return (
     <Container className="page">
       <Sponsors />
@@ -32,7 +37,7 @@ const Page = ({ page, section }) => {
         sectionName={ section.name }
         pages={ pages }
         currentPage={ page.url.replace('/index', '') }
-        anchors={ page.file.attributes.anchors } />
+        indexAnchors={ indexAnchors } />
 
       <section className="page__content">
         <h1>{ title }</h1>
