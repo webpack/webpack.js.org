@@ -10,11 +10,5 @@ node ./src/scripts/fetch_package_names.js "peerigon" "extract-loader" | node ./s
 # Fetch webpack-contrib (and various other) plugin repositories
 node ./src/scripts/fetch_package_names.js "webpack-contrib" "-webpack-plugin" | node ./src/scripts/fetch_package_files.js "README.md" "./src/content/plugins"
 
-# Fetch sponsors and backers from opencollective
-node ./src/scripts/fetch_supporters.js
-
-# Fetch starter kits
-node ./src/scripts/fetch_starter_kits.js
-
 rm -rf ./src/content/loaders/*.json
 rm -rf ./src/content/plugins/*.json
