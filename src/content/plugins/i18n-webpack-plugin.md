@@ -8,19 +8,19 @@ repo: https://github.com/webpack-contrib/i18n-webpack-plugin
   <p>i18n (localization) plugin for Webpack.<p>
 </div>
 
-## Install
+## 安装
 
 ```bash
 npm i -D i18n-webpack-plugin
 ```
 
-## Usage
+## 用法
 
-This plugin creates bundles with translations baked in. So you can serve the translated bundle to your clients.
+此插件会创建包含译文的 bundle。所以您可以将翻译后的 bundle 提供给客户端。
 
-see [webpack/webpack/examples/i18n](https://github.com/webpack/webpack/tree/master/examples/i18n).
+参考 [webpack/webpack/examples/i18n](https://github.com/webpack/webpack/tree/master/examples/i18n)。
 
-## Options
+## 配置
 
 ```
 plugins: [
@@ -28,9 +28,9 @@ plugins: [
   new I18nPlugin(languageConfig, optionsObj)
 ],
 ```
- - `optionsObj.functionName`: the default value is `__`, you can change it to other function name.
- - `optionsObj.failOnMissing`: the default value is `false`, which will show a warning message, if the mapping text cannot be found. If set to `true`, the message will be an error message.
- - `optionsObj.hideMessage`: the default value is `false`, which will show the warning/error message. If set to `true`, the message will be hidden.
+ - `optionsObj.functionName`：默认值为 `__`, 你可以更改为其他函数名。
+ - `optionsObj.failOnMissing`：默认值为 `false`，找不到映射文本(mapping text)时会给出一个警告信息，如果设置为 `true`，则会给出一个错误信息。
+ - `optionsObj.hideMessage`：默认值为 `false`，将会显示警告/错误信息。如果设置为 `true`，警告/错误信息将会被隐藏。
 
 ## Maintainers
 
@@ -79,3 +79,7 @@ plugins: [
 
 [cover]: https://codecov.io/gh/webpack-contrib/i18n-webpack-plugin/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/i18n-webpack-plugin
+
+***
+
+> 原文：https://webpack.js.org/plugins/i18n-webpack-plugin/

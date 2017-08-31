@@ -8,21 +8,22 @@ repo: https://github.com/webpack-contrib/coffee-redux-loader
   <p>Coffee Script Redux loader for Webpack.<p>
 </div>
 
-## Install
+## 安装
 
 ```bash
 npm i -D coffee-redux-loader
 ```
 
-## Usage
+## 用法
 
 ``` javascript
 var exportsOfFile = require("coffee-redux-loader!./file.coffee");
 // => return exports of executed and compiled file.coffee
 ```
 
-Don't forget to polyfill `require` if you want to use it in node.
-See `webpack` documentation.
+如果你想要在 node 运行环境中使用，不要忘了 polyfill `require`。
+请查看 `webpack` 文档。
+
 
 ## Maintainers
 
@@ -66,3 +67,7 @@ See `webpack` documentation.
 
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/loaders/coffee-redux-loader/

@@ -15,15 +15,15 @@ a dependency you didn't know you needed until now.
 Instead, use `require` or `import` how you normally would and `npm install`
 will happen **automatically to install & save missing dependencies** while you work!
 
-## Install
+## 安装
 
 ```bash
 $ npm install --save-dev npm-install-webpack-plugin
 ```
 
-## Usage
+## 用法
 
-In your `webpack.config.js`:
+在 `webpack.config.js` 中：
 
 ```js
 plugins: [
@@ -31,16 +31,16 @@ plugins: [
 ],
 ```
 
-**This is equivalent to**:
+**相当于**：
 
 ```js
 plugins: [
   new NpmInstallPlugin({
-    // Use --save or --save-dev
+    // 使用 --save 或者 --save-dev
     dev: false,
-    // Install missing peerDependencies
+    // 安装缺少的 peerDependencies
     peerDependencies: true,
-    // Reduce amount of console logging
+    // 减少控制台日志记录的数量
     quiet: false,
     // npm command used inside company, yarn is not supported yet
     npm: 'tnpm'
@@ -48,7 +48,7 @@ plugins: [
 ],
 ```
 
-You can provide a `Function` to the `dev` to make it dynamic:
+可以提供一个 `Function` 来动态设置 `dev`：
 
 ```js
 plugins: [
@@ -125,3 +125,7 @@ plugins: [
 
 [cover]: https://codecov.io/gh/webpack-contrib/npm-install-webpack-plugin/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/npm-install-webpack-plugin
+
+***
+
+> 原文：https://webpack.js.org/plugins/npm-install-webpack-plugin/

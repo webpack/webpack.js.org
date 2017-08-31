@@ -13,17 +13,17 @@ Updates style `<link>` href value with a hash to trigger a style reload
 
 </div>
 
-## Install
+## 安装
 
 ```bash
 npm install --save-dev restyle-loader
 ```
 
-## Usage
+## 用法
 
-[Documentation: Using loaders](https://webpack.js.org/loaders/)
+[文档：使用 loader](https://webpack.js.org/loaders/)
 
-## Examples
+## 示例
 
 **webpack.config.js**
 
@@ -43,14 +43,14 @@ npm install --save-dev restyle-loader
   ]
 }
 ```
-Hash is required to enable HMR
+hash 需要启用热模块替换(Hot Module Replacement)
 
 **bundle.js**
 
 ```js
 require("./index.css");
 
-// Bundle code here...
+// 在这里打包代码...
 ```
 
 
@@ -63,7 +63,7 @@ require("./index.css");
 </head>
 
 ```
-after the loader runs it becomes
+loader 运行后就变成
 ```html
 
 <head>
@@ -73,7 +73,7 @@ after the loader runs it becomes
 ```
 
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
@@ -85,7 +85,7 @@ after the loader runs it becomes
           <a href="https://github.com/">Daniel Verejan</a>
         </a>
       </td>
-      
+
     </tr>
   <tbody>
 </table>
@@ -104,3 +104,7 @@ after the loader runs it becomes
 
 [cover]: https://codecov.io/gh/webpack-contrib/restyle-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/restyle-loader
+
+***
+
+> 原文：https://webpack.js.org/loaders/restyle-loader/

@@ -8,26 +8,26 @@ repo: https://github.com/webpack-contrib/exports-loader
   <p>Exports variables from inside the file by appending `exports[...] = ...` statements..<p>
 </div>
 
-## Install
+## 安装
 
 ```bash
 npm i exports-loader --save
 ```
 
-## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
+## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
 ``` javascript
 require("exports-loader?file,parse=helpers.parse!./file.js");
-// adds below code to the file's source:
+// 向文件源码添加如下代码：
 //  exports["file"] = file;
 //  exports["parse"] = helpers.parse;
 
 require("exports-loader?file!./file.js");
-// adds below code to the file's source:
+// 向文件源码添加如下代码：
 //  module.exports = file;
 ```
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
@@ -69,3 +69,7 @@ require("exports-loader?file!./file.js");
 
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/loaders/exports-loader/

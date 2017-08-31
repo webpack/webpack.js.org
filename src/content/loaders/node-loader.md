@@ -8,19 +8,19 @@ repo: https://github.com/webpack-contrib/node-loader
   <p>Node Add-ons for webpack</p>
 </div>
 
-## Install
+## 安装
 
 ```bash
 npm install --save-dev node-loader
 ```
 
-## Usage
+## 用法
 
-Executes [node add-ons](https://nodejs.org/dist/latest/docs/api/addons.html) in [enhanced-require](https://github.com/webpack/enhanced-require).
+在 [enhanced-require](https://github.com/webpack/enhanced-require) 中执行 [node add-ons](https://nodejs.org/dist/latest/docs/api/addons.html)
 
-Use the loader either via your webpack config, CLI or inline.
+通过 webpack 配置、命令行或者内联使用 loader。
 
-### Via webpack config (recommended)
+### 通过 webpack 配置（推荐）
 
 **webpack.config.js**
 ```js
@@ -36,30 +36,30 @@ module.exports = {
 }
 ```
 
-**In your application**
+**在你的项目中**
 ```js
 import node from 'file.node';
 ```
 
-### CLI
+### 通过命令行（CLI）
 
 ```bash
 webpack --module-bind 'node=node-loader'
 ```
 
-**In your application**
+**在你的项目中**
 ```js
 import node from 'file.node';
 ```
 
-### Inline
+### 内联使用
 
-**In your application**
+**在你的项目中**
 ```js
 import node from 'node-loader!./file.node';
 ```
 
-## Maintainer
+## 维护人员
 
 <table>
   <tbody>
@@ -104,3 +104,7 @@ import node from 'node-loader!./file.node';
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/loaders/node-loader/

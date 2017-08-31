@@ -8,20 +8,20 @@ repo: https://github.com/webpack-contrib/coffee-loader
   <p>Loads <a href="http://coffeescript.org/">CoffeeScript</a> like JavaScript</p>
 </div>
 
-## Install
+## 安装
 
 ```bash
 npm install --save-dev coffee-loader
 ```
 
-## Usage
+## 用法
 
 
 ```js
 import coffee from 'coffee-loader!./file.coffee';
 ```
 
-### Configuration (recommended)
+### 配置（推荐）
 
 
 ```js
@@ -142,3 +142,7 @@ module.exports = {
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/loaders/coffee-loader/

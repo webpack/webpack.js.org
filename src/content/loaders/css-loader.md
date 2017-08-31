@@ -7,19 +7,17 @@ repo: https://github.com/webpack-contrib/css-loader
 
 </div>
 
-## Install
+## 安装
 
 ```bash
 npm install --save-dev css-loader
 ```
 
-## Usage
+## 用法
 
-The `css-loader` interprets `@import` and `url()` like `import/require()`
-and will resolve them.
+`css-loader` 解释(interpret) `@import` 和 `url()` ，会 `import/require()` 后再解析(resolve)它们。
 
-Good loaders for requiring your assets are the [file-loader](/loaders/file-loader/)
-and the [url-loader](/loaders/url-loader/) which you should specify in your config (see [below](https://github.com/webpack-contrib/css-loader#assets)).
+引用资源的合适 loader 是 [file-loader](/loaders/file-loader/)和 [url-loader](/loaders/url-loader/)，您应该在配置中指定（查看[如下设置](https://github.com/webpack-contrib/css-loader#assets)）。
 
 **file.js**
 ```js
@@ -42,7 +40,7 @@ module.exports = {
 
 ### `toString`
 
-You can also use the css-loader results directly as string, such as in Angular's component style.
+您也可以直接将 css-loader 的结果作为字符串使用，例如 Angular 的组件样式。
 
 **webpack.config.js**
 ```js
@@ -55,7 +53,7 @@ You can also use the css-loader results directly as string, such as in Angular's
 }
 ```
 
-or
+或者
 
 ```js
 const css = require('./test.css').toString();
@@ -63,12 +61,10 @@ const css = require('./test.css').toString();
 console.log(css); // {String}
 ```
 
-If there are SourceMaps, they will also be included in the result string.
+如果有 SourceMap，它们也将包含在字符串结果中。
 
-If, for one reason or another, you need to extract CSS as a
-plain string resource (i.e. not wrapped in a JS module) you
-might want to check out the [extract-loader](https://github.com/peerigon/extract-loader).
-It's useful when you, for instance, need to post process the CSS as a string.
+如果由于某种原因，您需要将 CSS 提取为纯粹的字符串资源（即不包含在 JS 模块中），则可能需要查看 [extract-loader](https://github.com/peerigon/extract-loader)。
+例如，当您需要将 CSS 作为字符串进行后处理时，这很有用。
 
 **webpack.config.js**
 ```js
@@ -82,29 +78,28 @@ It's useful when you, for instance, need to post process the CSS as a string.
 }
 ```
 
-## Options
+## 选项
 
-|Name|Type|Default|Description|
+|名称|类型|默认值|描述|
 |:--:|:--:|:-----:|:----------|
-|**`root`**|`{String}`|`/`|Path to resolve URLs, URLs starting with `/` will not be translated|
-|**`url`**|`{Boolean}`|`true`| Enable/Disable `url()` handling|
-|**`alias`**|`{Object}`|`{}`|Create aliases to import certain modules more easily|
-|**`import`** |`{Boolean}`|`true`| Enable/Disable @import handling|
-|**`modules`**|`{Boolean}`|`false`|Enable/Disable CSS Modules|
-|**`minimize`**|`{Boolean\|Object}`|`false`|Enable/Disable minification|
-|**`sourceMap`**|`{Boolean}`|`false`|Enable/Disable Sourcemaps|
-|**`camelCase`**|`{Boolean\|String}`|`false`|Export Classnames in CamelCase|
-|**`importLoaders`**|`{Number}`|`0`|Number of loaders applied before CSS loader|
-|**`localIdentName`**|`{String}`|`[hash:base64]`|Configure the generated ident|
+|**`root`**|`{String}`|`/`|解析 URL 的路径，以 `/` 开头的 URL 不会被转译|
+|**`url`**|`{Boolean}`|`true`| 启用/禁用 `url()` 处理|
+|**`alias`**|`{Object}`|`{}`|创建别名更容易导入一些模块|
+|**`import`** |`{Boolean}`|`true`| 启用/禁用 @import 处理|
+|**`modules`**|`{Boolean}`|`false`|启用/禁用 CSS 模块|
+|**`minimize`**|`{Boolean\|Object}`|`false`|启用/禁用 压缩|
+|**`sourceMap`**|`{Boolean}`|`false`|启用/禁用 Sourcemap|
+|**`camelCase`**|`{Boolean\|String}`|`false`|以驼峰化式命名导出类名|
+|**`importLoaders`**|`{Number}`|`0`|在 css-loader 前应用的 loader 的数量|
+|**`localIdentName`**|`{String}`|`[hash:base64]`|配置生成的标识符(ident)|
 
 ### `root`
 
-For URLs that start with a `/`, the default behavior is to not translate them.
+对于以 `/` 开头的 URL，默认行为是不转译它们。
 
 `url(/image.png) => url(/image.png)`
 
-If a `root` query parameter is set, however, it will be prepended to the URL
-and then translated.
+如果设置了 `root` 查询参数，那么此查询参数将被添加到 URL 前面，然后再进行转译。
 
 **webpack.config.js**
 ```js
@@ -116,13 +111,13 @@ and then translated.
 
 `url(/image.png)` => `require('./image.png')`
 
-Using 'Root-relative' urls is not recommended. You should only use it for legacy CSS files.
+不建议使用'相对根路径'的 url。您应该只将其用于旧版 CSS 文件。
 
 ### `url`
 
-To disable `url()` resolving by `css-loader` set the option to `false`.
+要禁用 `css-loader` 解析 `url()`，将选项设置为 `false`。
 
-To be compatible with existing css files (if not in CSS Module mode).
+与现有的 css 文件兼容（如果不是在 CSS 模块模式下）。
 
 ```
 url(image.png) => require('./image.png')
@@ -131,9 +126,9 @@ url(~module/image.png) => require('module/image.png')
 
 ### `alias`
 
-Rewrite your urls with alias, this is useful when it's hard to change url paths of your input files, for example, when you're using some css / sass files in another package (bootstrap, ratchet, font-awesome, etc.).
+用别名重写你的 URL，在难以改变输入文件的url 路径时，这会很有帮助，例如，当你使用另一个包(package)（如 bootstrap, ratchet, font-awesome 等）中一些 css/sass 文件。
 
-`css-loader`'s `alias` follows the same syntax as webpack's `resolve.alias`, you can see the details at the [resolve docs] (https://webpack.js.org/configuration/resolve/#resolve-alias)
+`css-loader` 的别名，遵循与webpack 的 `resolve.alias` 相同的语法，你可以在[resolve 文档](https://webpack.js.org/configuration/resolve/#resolve-alias) 查看细节
 
 **file.scss**
 ```css
@@ -169,33 +164,33 @@ Rewrite your urls with alias, this is useful when it's hard to change url paths 
 }
 ```
 
-Check out this [working bootstrap example](https://github.com/bbtfr/webpack2-bootstrap-sass-sample).
+查看此示例 [working bootstrap example](https://github.com/bbtfr/webpack2-bootstrap-sass-sample)。
 
 ### `import`
 
-To disable `@import` resolving by `css-loader` set the option to `false`
+要禁用 `css-loader` 解析 `@import`，将选项设置为`false`
 
 ```css
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 ```
 
-> _⚠️ Use with caution, since this disables resolving for **all** `@import`s, including css modules `composes: xxx from 'path/to/file.css'` feature._
+> _⚠️ 谨慎使用，因为这将禁用解析**所有** `@import`，包括 css 模块 `composes: xxx from 'path/to/file.css'` 功能。_
 
 ### [`modules`](https://github.com/css-modules/css-modules)
 
-The query parameter `modules` enables the **CSS Modules** spec.
+查询参数 `modules` 会启用 **CSS 模块**规范。
 
-This enables local scoped CSS by default. (You can switch it off with `:global(...)` or `:global` for selectors and/or rules.).
+默认情况下，这将启用局部作用域 CSS。（您可以使用 `:global(...)` 或 `:global` 关闭选择器 and/or 规则。
 
 #### `Scope`
 
-By default CSS exports all classnames into a global selector scope. Styles can be locally scoped to avoid globally scoping styles.
+默认情况下，CSS 将所有的类名暴露到全局的选择器作用域中。样式可以在局部作用域中，避免全局作用域的样式。
 
-The syntax `:local(.className)` can be used to declare `className` in the local scope. The local identifiers are exported by the module.
+语法 `:local(.className)` 可以被用来在局部作用域中声明 `className`。局部的作用域标识符会以模块形式暴露出去。
 
-With `:local` (without brackets) local mode can be switched on for this selector. `:global(.className)` can be used to declare an explicit global selector. With `:global` (without brackets) global mode can be switched on for this selector.
+使用 `:local`（无括号）可以为此选择器启用局部模式。`:global(.className)` 可以用来声明一个明确的全局选择器。使用`:global`（无括号）可以将此选择器切换至全局模式。
 
-The loader replaces local selectors with unique identifiers. The choosen unique identifiers are exported by the module.
+loader 会用唯一的标识符(identifier)来替换局部选择器。所选择的唯一标识符以模块形式暴露出去。
 
 ```css
 :local(.className) { background: red; }
@@ -211,7 +206,7 @@ The loader replaces local selectors with unique identifiers. The choosen unique 
 ._23_aKvs-b8bW2Vg3fwHozO ._13LGdX8RMStbBE9w-t0gZ1 .global-class-name { color: blue; }
 ```
 
-> :information_source: Identifiers are exported
+> :主要信息: 标识符被导出
 
 ```js
 exports.locals = {
@@ -220,17 +215,17 @@ exports.locals = {
 }
 ```
 
-CamelCase is recommended for local selectors. They are easier to use in the within the imported JS module.
+建议局部选择器使用驼峰式。它们在导入 JS 模块中更容易使用。
 
-`url()` URLs in block scoped (`:local .abc`) rules behave like requests in modules.
+`url()` 中的 URL 在块作用域 (`:local .abc`) 规则中的表现，如同请求模块。
 
 ```
 file.png => ./file.png
 ~module/file.png => module/file.png
 ```
 
-You can use `:local(#someId)`, but this is not recommended. Use classes instead of ids.
-You can configure the generated ident with the `localIdentName` query parameter (default `[hash:base64]`).
+你可以使用 `:local(#someId)`，但不推荐这种用法。推荐使用 class 代替 id。
+你可以使用 `localIdentName` 查询参数（默认 `[hash:base64]`）来配置生成的 ident。
 
  **webpack.config.js**
  ```js
@@ -248,7 +243,7 @@ You can configure the generated ident with the `localIdentName` query parameter 
 }
 ```
 
-You can also specify the absolute path to your custom `getLocalIdent` function to generate classname based on a different schema. This requires `webpack >= 2.2.1` (it supports functions in the `options` object).
+您还可以通过自定义 `getLocalIdent` 函数来指定绝对路径，以根据不同的模式(schema)生成类名。这需要 `webpack >= 2.2.1`（`options` 对象支持传入函数）。
 
 **webpack.config.js**
 ```js
@@ -264,11 +259,11 @@ You can also specify the absolute path to your custom `getLocalIdent` function t
 }
 ```
 
-> :information_source: For prerendering with extract-text-webpack-plugin you should use `css-loader/locals` instead of `style-loader!css-loader` **in the prerendering bundle**. It doesn't embed CSS but only exports the identifier mappings.
+> :重要信息: 对于使用 extract-text-webpack-plugin 预渲染，你应该**在预渲染 bundle 中** 使用 `css-loader/locals` 而不是 `style-loader!css-loader` 。它不会嵌入 CSS，但只导出标识符映射(identifier map)。
 
 #### `Composing`
 
-When declaring a local classname you can compose a local class from another local classname.
+当声明一个局部类名时，你可以与另一个局部类名组合为一个局部类。
 
 ```css
 :local(.className) {
@@ -282,7 +277,7 @@ When declaring a local classname you can compose a local class from another loca
 }
 ```
 
-This doesn't result in any change to the CSS itself but exports multiple classnames.
+这不会导致 CSS 本身的任何更改，而是导出多个类名。
 
 ```js
 exports.locals = {
@@ -304,7 +299,7 @@ exports.locals = {
 
 #### `Importing`
 
-To import a local classname from another module.
+从其他模块导入局部类名。
 
 ```css
 :local(.continueButton) {
@@ -320,7 +315,7 @@ To import a local classname from another module.
 }
 ```
 
-To import from multiple modules use multiple `composes:` rules.
+要从多个模块导入，请使用多个 `composes:` 规则。
 
 ```css
 :local(.className) {
@@ -333,11 +328,11 @@ To import from multiple modules use multiple `composes:` rules.
 
 ### `minimize`
 
-By default the css-loader minimizes the css if specified by the module system.
+默认情况下，如果模块系统指定，css-loader 将压缩 css。
 
-In some cases the minification is destructive to the css, so you can provide your own options to the cssnano-based minifier if needed. See [cssnano's documentation](http://cssnano.co/guides/) for more information on the available options.
+在某些情况下，压缩对于 css 来说是破坏性的，所以如果需要设置，可以向基于 cssnano 的 minifier(cssnano-based minifier) 提供自己的选项。更多可用信息请查看 [cssnano 文档](http://cssnano.co/guides/)。
 
-You can also disable or enforce minification with the `minimize` query parameter.
+还可以使用 `minimize` 查询参数，来禁用或强制压缩。
 
 **webpack.config.js**
 ```js
@@ -351,11 +346,11 @@ You can also disable or enforce minification with the `minimize` query parameter
 
 ### `sourceMap`
 
-To include source maps set the `sourceMap` option.
+设置 `sourceMap` 选项查询参数来引入 source map。
 
-I. e. the extract-text-webpack-plugin can handle them.
+例如 extract-text-webpack-plugin 能够处理它们。
 
-They are not enabled by default because they expose a runtime overhead and increase in bundle size (JS source maps do not). In addition to that relative paths are buggy and you need to use an absolute public path which include the server URL.
+默认情况下不启用它们，因为它们会导致运行时的额外开销，并增加了 bundle 大小 (JS source map 不会)。此外，相对路径是错误的，您需要使用包含服务器 URL 的绝对公用路径。
 
 **webpack.config.js**
 ```js
@@ -369,14 +364,14 @@ They are not enabled by default because they expose a runtime overhead and incre
 
 ### `camelCase`
 
-By default, the exported JSON keys mirror the class names. If you want to camelize class names (useful in JS), pass the query parameter `camelCase` to css-loader.
+默认情况下，导出 JSON 键值对形式的类名。如果想要驼峰化(camelize)类名（有助于在 JS 中使用），通过设置 css-loader 的查询参数 `camelCase` 即可实现。
 
-|Name|Type|Description|
+|名称|类型|描述|
 |:--:|:--:|:----------|
-|**`true`**|`{Boolean}`|Class names will be camelized|
-|**`'dashes'`**|`{String}`|Only dashes in class names will be camelized|
-|**`'only'`** |`{String}`|Introduced in `0.27.1`. Class names will be camelized, the original class name will be removed from the locals|
-|**`'dashesOnly'`**|`{String}`|Introduced in `0.27.1`. Dashes in class names will be camelized, the original class name will be removed from the locals|
+|**`true`**|`{Boolean}`|类名将被骆驼化|
+|**`'dashes'`**|`{String}`|只有类名中的破折号将被骆驼化|
+|**`'only'`** |`{String}`|在 `0.27.1` 中加入。类名将被骆驼化，初始类名将从局部移除|
+|**`'dashesOnly'`**|`{String}`|在 `0.27.1` 中加入。类名中的破折号将被骆驼化，初始类名将从局部移除|
 
 **file.css**
 ```css
@@ -400,7 +395,7 @@ import { className } from 'file.css';
 
 ### `importLoaders`
 
-The query parameter `importLoaders` allows to configure how many loaders before `css-loader` should be applied to `@import`ed resources.
+查询参数 `importLoaders`，用于配置「`css-loader` 作用于 `@import` 的资源之前」有多少个 loader。
 
 **webpack.config.js**
 ```js
@@ -411,7 +406,7 @@ The query parameter `importLoaders` allows to configure how many loaders before 
     {
       loader: 'css-loader',
       options: {
-        importLoaders: 1 // 0 => no loaders (default); 1 => postcss-loader; 2 => postcss-loader, sass-loader
+        importLoaders: 1 // 0 => 无 loader(默认); 1 => postcss-loader; 2 => postcss-loader, sass-loader
       }
     },
     'postcss-loader',
@@ -420,13 +415,13 @@ The query parameter `importLoaders` allows to configure how many loaders before 
 }
 ```
 
-This may change in the future, when the module system (i. e. webpack) supports loader matching by origin.
+在模块系统（即 webpack）支持原始 loader 匹配后，此功能可能在将来会发生变化。
 
-## Examples
+## 示例
 
-### Assets
+### 资源
 
-The following `webpack.config.js` can load CSS files, embed small PNG/JPG/GIF/SVG images as well as fonts as [Data URLs](https://tools.ietf.org/html/rfc2397) and copy larger files to the output directory.
+以下 `webpack.config.js` 可以加载 CSS 文件，将小体积 PNG/JPG/GIF/SVG 图像转为像字体那样的 [Data URL](https://tools.ietf.org/html/rfc2397) 嵌入，并复制较大的文件到输出目录。
 
 **webpack.config.js**
 ```js
@@ -449,9 +444,9 @@ module.exports = {
 }
 ```
 
-### Extract
+### 提取
 
-For production builds it's recommended to extract the CSS from your bundle being able to use parallel loading of CSS/JS resources later on. This can be achieved by using the [extract-text-webpack-plugin](/plugins/extract-text-webpack-plugin/) to extract the CSS when running in production mode.
+对于生产环境构建，建议从 bundle 中提取 CSS，以便之后可以并行加载 CSS/JS 资源。可以通过使用 [extract-text-webpack-plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) 来实现，在生产环境模式运行中提取 CSS。
 
 **webpack.config.js**
 ```js
@@ -483,7 +478,7 @@ module.exports = {
 }
 ```
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
@@ -554,3 +549,7 @@ module.exports = {
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/loaders/css-loader/

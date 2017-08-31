@@ -10,13 +10,13 @@ repo: https://github.com/webpack-contrib/uglifyjs-webpack-plugin
 
 > ℹ️  webpack contains the same plugin under `webpack.optimize.UglifyJsPlugin`. The documentation is valid apart from the installation instructions
 
-## Install
+## 安装
 
 ```bash
 npm i -D uglifyjs-webpack-plugin
 ```
 
-## Usage
+## 用法
 
 **webpack.config.js**
 ```js
@@ -29,20 +29,20 @@ module.exports = {
 }
 ```
 
-## Options
+## 选项
 
-> ⚠️ The following options are for the latest beta version. If you would like to see the options for the latest built-in version of the plugin in webpack, see the [v0.4.6 docs](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/tree/v0.4.6).
+> ⚠️ 以下选项适用于最新的 beta 版本。如果您想查看 webpack 中内置的最新版本的选项，请参阅 [v0.4.6 文档](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/tree/v0.4.6)。
 
-|Name|Type|Default|Description|
+|属性名称|类型|默认值|描述|
 |:--:|:--:|:-----:|:----------|
-|**`test`**|`{RegExp\|Array<RegExp>}`| <code>/\\.js$/i</code>|Test to match files against|
-|**`include`**|`{RegExp\|Array<RegExp>}`|`undefined`|Files to `include`|
-|**`exclude`**|`{RegExp\|Array<RegExp>}`|`undefined`|Files to `exclude`|
-|**`parallel`**|`{Boolean\|Object}`|`false`|Use multi-process parallel running and file cache to improve the build speed|
-|**`sourceMap`**|`{Boolean}`|`false`|Use source maps to map error message locations to modules (This slows down the compilation) ⚠️ **`cheap-source-map` options don't work with this plugin**|
-|**`uglifyOptions`**|`{Object}`|[`{...defaults}`](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/tree/master#uglifyoptions)|`uglify` [Options](https://github.com/mishoo/UglifyJS2/tree/harmony#minify-options)|
-|**`extractComments`**|`{Boolean\|RegExp\|Function<(node, comment) -> {Boolean\|Object}>}`|`false`|Whether comments shall be extracted to a separate file, (see [details](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a) (`webpack >= 2.3.0`)|
-|**`warningsFilter`**|`{Function(source) -> {Boolean}}`|`undefined`|Allow to filter uglify warnings|
+|**`test`**|`{RegExp\|Array<RegExp>}`| <code>/\.js($&#124;\?)/i</code>|测试匹配的文件|
+|**`include`**|`{RegExp\|Array<RegExp>}`|`undefined`|`包含`的文件|
+|**`exclude`**|`{RegExp\|Array<RegExp>}`|`undefined`|`排除`的文件。|
+|**`parallel`**|`{Boolean\|Object}`|`false`|使用多进程并行运行和文件缓存来提高构建速度|
+|**`sourceMap`**|`{Boolean}`|`false`|使用 source map 将错误信息的位置映射到模块（这会减慢编译的速度） ⚠️ **`cheap-source-map` 选项不适用于此插件**|
+|**`uglifyOptions`**|`{Object}`|[`{...defaults}`](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/tree/master#uglifyoptions)|`uglify` [选项](https://github.com/mishoo/UglifyJS2/tree/harmony#minify-options)|
+|**`extractComments`**|`{Boolean\|RegExp\|Function<(node, comment) -> {Boolean\|Object}>}`|`false`|是否将注释提取到单独的文件，（查看[详细](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a(`webpack >= 2.3.0`)|
+|**`warningsFilter`**|`{Function(source) -> {Boolean}}`|`undefined`|允许过滤 uglify 警告|
 
 ### `test`
 
@@ -172,9 +172,9 @@ All comments that match the given expression (resp. are evaluated to `true` by t
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|**`condition`**|`{Regex\|Function}`|``|Regular Expression or function (see previous point)|
-|**`filename`**|`{String\|Function}`|`compilation.assets[file]`|The file where the extracted comments will be stored. Can be either a `{String}` or a `{Function<(string) -> {String}>}`, which will be given the original filename. Default is to append the suffix `.LICENSE` to the original filename|
-|**`banner`**|`{Boolean\|String\|Function}`|`/*! For license information please see ${filename}.js.LICENSE */`|The banner text that points to the extracted file and will be added on top of the original file. Can be `false` (no banner), a `{String}`, or a `{Function<(string) -> {String}` that will be called with the filename where extracted comments have been stored. Will be wrapped into comment|
+|**`condition`**|`{Regex\|Function}`|``|通常表达式或者相应函数（见上文）|
+|**`filename`**|`{String\|Function}`|`compilation.assets[file]`|提取注释的文件会被存储。可以使一个 `{String}` 字符串或者是一个 `{Function<(string) -> {String}>}` 返回字符串的函数，作为原文件名。默认加上文件后缀名 `.LICENSE`|
+|**`banner`**|`{Boolean\|String\|Function}`|`/*! For license information please see ${filename}.js.LICENSE */`|banner 文本会在原文件的头部指出被提取的文件，会在源文件加入该信息。可以是 `false`（表示没有 banner），一个 `{String}`，或者一个 `{Function<(string) -> {String}` 返回字符串的函数，会在提取已经被存储注释的时候被调用。注释会被覆盖。|
 
 ### `warningsFilter`
 
@@ -187,7 +187,7 @@ All comments that match the given expression (resp. are evaluated to `true` by t
 ]
 ```
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
@@ -249,3 +249,7 @@ All comments that match the given expression (resp. are evaluated to `true` by t
 
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/plugins/uglifyjs-webpack-plugin/

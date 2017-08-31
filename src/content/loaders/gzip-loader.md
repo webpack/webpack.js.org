@@ -10,13 +10,13 @@ repo: https://github.com/webpack-contrib/gzip-loader
 
 Enables loading gzipped resources.
 
-## Install
+## 安装
 
 ```bash
 npm install --save-dev gzip-loader
 ```
 
-## Usage
+## 用法
 
 **webpack.config.js**
 
@@ -40,7 +40,7 @@ module.exports = {
 require("gzip-loader!./file.js.gz");
 ```
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
@@ -98,3 +98,7 @@ require("gzip-loader!./file.js.gz");
 
 [cover]: https://codecov.io/gh/webpack-contrib/gzip-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/gzip-loader
+
+***
+
+> 原文：https://webpack.js.org/loaders/gzip-loader/

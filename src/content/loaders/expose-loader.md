@@ -8,34 +8,33 @@ repo: https://github.com/webpack-contrib/expose-loader
   <p>The expose loader adds modules to the global object. This is useful for debugging, or <a href="https://webpack.js.org/guides/shimming/">supporting libraries that depend on libraries in globals</a>.<p>
 </div>
 
-## Install
+## 安装
 
 ```bash
 npm i expose-loader --save
 ```
 
-## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
+## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
-**Note**: Modules must be `require()`'d within in your bundle, or they will not
-be exposed.
+**注意**: 模块必须在你的 bundle 中被 `require()` 过，否则他们将不会被暴露。
 
 ``` javascript
 require("expose-loader?libraryName!./file.js");
-// Exposes the exports for file.js to the global context on property "libraryName".
-// In web browsers, window.libraryName is then available.
+// 通过属性名 "libraryName" 暴露 file.js 的 exports 到全局上下文。
+// 在浏览器中，就将可以使用 window.libraryName 访问。
 ```
 
-For example, let's say you want to expose jQuery as a global called `$`:
+例如，假设你要将 jQuery 暴露至全局并称为 `$`：
 
 ```
 require("expose-loader?$!jquery");
 ```
 
-Thus, `window.$` is then available in the browser console.
+然后，`window.$` 就可以在浏览器控制台中使用。
 
-Alternately, you can set this in your config file:
+或者，你可以通过配置文件来设置：
 
-webpack v1 usage
+webpack v1 用法
 ```
 module: {
   loaders: [
@@ -43,23 +42,23 @@ module: {
   ]
 }
 ```
-webpack v2 usage
+webpack v2 用法
 ```
 module: {
   rules: [{
-          test: require.resolve('jquery'),
-          use: [{
-              loader: 'expose-loader',
-              options: '$'
-          }]
-      }]
+    test: require.resolve('jquery'),
+    use: [{
+      loader: 'expose-loader',
+      options: '$'
+    }]
+  }]
 }
 ```
 
-Let's say you also want to expose it as `window.jQuery` in addition to `window.$`.
-For multiple expose you can use `!` in loader string:
+除了暴露为 `window. $` 之外，假设你还想把它暴露为 `window.jQuery`。
+对于多个暴露，您可以在 loader 字符串中使用 `!`：
 
-webpack v1 usage
+webpack v1 用法
 ```
 module: {
   loaders: [
@@ -67,7 +66,7 @@ module: {
   ]
 }
 ```
-webpack v2 usage
+webpack v2 用法
 ```
 module: {
   rules: [{
@@ -83,15 +82,10 @@ module: {
 }
 ```
 
-The [`require.resolve`](https://nodejs.org/api/all.html#modules_require_resolve)
-is a Node.js call (unrelated to `require.resolve` in webpack
-processing). `require.resolve` gives you the
-absolute path to the module (`"/.../app/node_modules/react/react.js"`). So the
-expose only applies to the react module. And it's only exposed when used in the
-bundle.
+[`require.resolve`](https://nodejs.org/api/all.html#globals_require_resolve) 是一个 node.js 调用（与 webpack 处理流程中的 `require.resolve` 无关）。`require.resolve` 用来获取模块的绝对路径（`"/.../app/node_modules/react/react.js"`）。所以这里的暴露只会作用于 React 模块。并且只在 bundle 中使用到它时，才进行暴露。
 
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
@@ -133,3 +127,7 @@ bundle.
 
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/loaders/expose-loader/

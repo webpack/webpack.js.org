@@ -8,35 +8,35 @@ repo: https://github.com/webpack-contrib/multi-loader
   <p>This loader requires a module multiple times, each time loaded with a different loader. Like in a multi entry point the exports of the last item are exported.<p>
 </div>
 
-## Install
+## 安装
 
 ```bash
 npm i multi-loader --save
 ```
 
-## Usage
+## 用法
 
 ``` javascript
 var multi = require("multi-loader");
 {
-	module: {
-		loaders: [
-			{
-				test: /\.css$/,
-				// Add CSS to the DOM
-				// and
-				// Return the raw content
-				loader: multi(
-					"style-loader!css-loader!autoprefixer-loader",
-					"raw-loader"
-				)
-			}
-		]
-	}
+  module: {
+    loaders: [
+      {
+        test: /\.css$/,
+        // Add CSS to the DOM
+        // and
+        // Return the raw content
+        loader: multi(
+          "style-loader!css-loader!autoprefixer-loader",
+          "raw-loader"
+        )
+      }
+    ]
+  }
 }
 ```
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
@@ -78,3 +78,7 @@ var multi = require("multi-loader");
 
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/loaders/multi-loader/

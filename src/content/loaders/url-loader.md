@@ -8,15 +8,15 @@ repo: https://github.com/webpack-contrib/url-loader
   <p>Loads files as `base64` encoded URL</p>
 </div>
 
-## Install
+## 安装
 
 ```bash
 npm install --save-dev url-loader
 ```
 
-## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
+## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
-The `url-loader` works like the [`file-loader`](/loaders/file-loader/), but can return a DataURL if the file is smaller than a byte limit.
+`url-loader` 功能类似于 [`file-loader`](https://github.com/webpack-contrib/file-loader)，但是在文件大小（单位 byte）低于指定的限制时，可以返回一个 DataURL。
 
 
 ```js
@@ -93,7 +93,7 @@ Set the MIME type for the file. If unspecified the file extensions will be used 
 }
 ```
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
@@ -155,3 +155,7 @@ Set the MIME type for the file. If unspecified the file extensions will be used 
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/loaders/url-loader/

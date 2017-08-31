@@ -8,7 +8,7 @@ repo: https://github.com/webpack-contrib/file-loader
   <p>Instructs webpack to emit the required object as file and to return its public URL</p>
 </div>
 
-## Install
+## 安装
 
 ```bash
 npm install --save-dev file-loader
@@ -16,7 +16,7 @@ npm install --save-dev file-loader
 
 ## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
 
-By default the filename of the resulting file is the MD5 hash of the file's contents with the original extension of the required resource.
+默认情况下，生成的文件的文件名就是文件内容的 MD5 哈希值并会保留所引用资源的原始扩展名。
 
 ```js
 import img from './file.png'
@@ -32,7 +32,7 @@ module.exports = {
         use: [
           {
             loader: 'file-loader',
-            options: {}  
+            options: {}
           }
         ]
       }
@@ -68,7 +68,7 @@ You can configure a custom filename template for your file using the query param
   loader: 'file-loader',
   options: {
     name: '[path][name].[ext]'
-  }  
+  }
 }
 ```
 
@@ -103,7 +103,7 @@ By default, the path and name you specify will output the file in that same dire
   options: {
     name: '[path][name].[ext]',
     context: ''
-  }  
+  }
 }
 ```
 
@@ -118,7 +118,7 @@ You can specify custom `output` and `public` paths by using `outputPath`, `publi
   options: {
     name: '[path][name].[ext]',
     publicPath: 'assets'
-  }  
+  }
 }
 ```
 
@@ -131,7 +131,7 @@ You can specify custom `output` and `public` paths by using `outputPath`, `publi
   options: {
     name: '[path][name].[ext]',
     outputPath: 'images'
-  }  
+  }
 }
 ```
 
@@ -161,7 +161,7 @@ import img from './file.png'
   loader: 'file-loader',
   options: {
     emitFile: false
-  }  
+  }
 }
 ```
 
@@ -171,7 +171,7 @@ import img from './file.png'
 `${publicPath}/0dcbbaa701328e351f.png`
 ```
 
-## Examples
+## 示例
 
 
 ```js
@@ -184,7 +184,7 @@ import png from 'image.png'
   loader: 'file-loader',
   options: {
     name: 'dirname/[hash].[ext]'
-  }  
+  }
 }
 ```
 
@@ -198,7 +198,7 @@ dirname/0dcbbaa701328ae351f.png
   loader: 'file-loader',
   options: {
     name: '[sha512:hash:base64:7].[ext]'
-  }  
+  }
 }
 ```
 
@@ -216,7 +216,7 @@ import png from 'path/to/file.png'
   loader: 'file-loader',
   options: {
     name: '[path][name].[ext]?[hash]'
-  }  
+  }
 }
 ```
 
@@ -224,7 +224,7 @@ import png from 'path/to/file.png'
 path/to/file.png?e43b20c069c4a01867c31e98cbce33c9
 ```
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
@@ -279,3 +279,7 @@ path/to/file.png?e43b20c069c4a01867c31e98cbce33c9
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/loaders/file-loader/

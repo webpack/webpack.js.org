@@ -8,18 +8,18 @@ repo: https://github.com/webpack-contrib/source-map-loader
   <p>Extracts source maps from existing source files (from their <code>sourceMappingURL</code>).<p>
 </div>
 
-## Install
+## 安装
 
 ```bash
 npm i -D source-map-loader
 ```
 
-## Usage
+## 用法
 
-[Documentation: Using loaders](https://webpack.js.org/concepts/#loaders)
+[文档：使用 loader](https://webpack.js.org/concepts/#loaders)
 
 
-### Example webpack config
+### webpack 配置示例
 
 ``` javascript
 module.exports = {
@@ -41,7 +41,7 @@ This loader is especially useful when using 3rd-party libraries having their own
 
 `source-map-loader` will extract from any JavaScript file, including those in the `node_modules` directory. Be mindful in setting [include](https://webpack.js.org/configuration/module/#rule-include) and [exclude](https://webpack.js.org/configuration/module/#rule-exclude) rule conditions to maximize bundling performance.
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
@@ -83,3 +83,7 @@ This loader is especially useful when using 3rd-party libraries having their own
 
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/loaders/source-map-loader/

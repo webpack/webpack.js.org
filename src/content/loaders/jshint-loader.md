@@ -8,88 +8,88 @@ repo: https://github.com/webpack-contrib/jshint-loader
   <p>Runs <a href="http://jshint.com/">JSHint</a> on required JavaScript files.<p>
 </div>
 
-## Install
+## 安装
 
 ```bash
 npm i jshint-loader --save
 ```
 
-## Usage
+## 用法
 
-Apply the jshint loader in your webpack configuration:
+在 webpack 配置中启用 jshint loader：
 
 ``` javascript
 module.exports = {
-	module: {
-		rules: [
-			{
-				test: /\.js$/, // include .js files
-				enforce: "pre", // preload the jshint loader
-				exclude: /node_modules/, // exclude any and all files in the node_modules folder
-				use: [
-					{
-						loader: "jshint-loader"
-					}
-				]
-			}
-		]
-	},
+  module: {
+    rules: [
+      {
+        test: /\.js$/, // 涵盖 .js 文件
+        enforce: "pre", // 预先加载好 jshint loader
+        exclude: /node_modules/, // 排除掉 node_modules 文件夹下的所有文件
+        use: [
+          {
+            loader: "jshint-loader"
+          }
+        ]
+      }
+    ]
+  },
 
-	// more options in the optional jshint object
-	jshint: {
-		// any jshint option http://www.jshint.com/docs/options/
-		// i. e.
-		camelcase: true,
+  // 更多 jslint 的配置项
+  jshint: {
+    // 查询 jslint 配置项，请参考 http://www.jshint.com/docs/options/
+    // 例如
+    camelcase: true,
 
-		// jshint errors are displayed by default as warnings
-		// set emitErrors to true to display them as errors
-		emitErrors: false,
+    //jslint 的错误信息在默认情况下会显示为 warning（警告）类信息
+    //将 emitErrors 参数设置为 true 可使错误显示为 error（错误）类信息
+    emitErrors: false,
 
-		// jshint to not interrupt the compilation
-		// if you want any file with jshint errors to fail
-		// set failOnHint to true
-		failOnHint: false,
+    //jshint 默认情况下不会打断webpack编译
+    //如果你想在 jshint 出现错误时，立刻停止编译
+    //请设置 failOnHint 参数为true
+    failOnHint: false,
 
-		// custom reporter function
-		reporter: function(errors) { }
-	}
+    // 自定义报告函数
+    reporter: function(errors) { }
+  }
 }
 ```
 
-## Custom reporter
+## 自定义报告函数
 
-By default, `jshint-loader` will provide a default reporter.
+在默认情况下，`jshint-loader` 会提供一个默认的报告方法。
 
-However, if you prefer a custom reporter, pass a function under the `reporter` key in `jshint` options. (see *usage* above)
+然而，如果你想自定义报告函数，你可以在 `jshint` 配置下 key 为 `report` 下的配置项里传入自定义的函数。（参考上文的*用法*）
 
-The reporter function will be passed an array of errors/warnings produced by jshint
-with the following structure:
+然后，jshint 将会生成与以下示例结构一致的
+错误/警告信息（数组）给报告函数。
 ```js
 [
 {
-    id:        [string, usually '(error)'],
-    code:      [string, error/warning code],
-    reason:    [string, error/warning message],
-    evidence:  [string, a piece of code that generated this error]
-    line:      [number]
-    character: [number]
-    scope:     [string, message scope;
-                usually '(main)' unless the code was eval'ed]
+    id:        [字符串, 通常是 '(error)'],
+    code:      [字符串, 错误/警告（error/warning）编码],
+    reason:    [字符串, 错误/警告（error/warning）信息],
+    evidence:  [字符串, 对应生成此错误的编码]
+    line:      [数字]
+    character: [数字]
+    scope:     [字符串, 消息作用域;
+                通常是 '(main)' 除非代码被解析(eval)了]
 
-    [+ a few other legacy fields that you don't need to worry about.]
+    [+ 还有一些旧有的参数，一般用户不必了解]
 },
 // ...
-// more errors/warnings
+// 更多的错误/警告
 ]
 ```
 
-The reporter function will be excuted with the loader context as `this`. You may emit messages using `this.emitWarning(...)` or `this.emitError(...)`. See [webpack docs on loader context](https://webpack.js.org/api/loaders/#the-loader-context).
+报告函数会将 loader 的上下文信息保存在 `this` 后执行。你可以使用 `this.emitWarning(...)` 或者 `this.emitError(...)` 方法，手动触发信息的报告。请参考[关于 loader 上下文的 webpack 文档](https://webpack.js.org/api/loaders/#the-loader-context).
 
-**Note:** jshint reporters are **not compatible** with jshint-loader!
-This is due to the fact that reporter input is only processed from one file; not multiple files. Error reporting in this manner differs from [traditional reporters](http://www.jshint.com/docs/reporters/) for jshint
-since the loader plugin (i.e. jshint-loader) is executed for each source file; and thus the reporter is executed for each file.
+**注意：**`jshint reporters` 是与 `jshint-loader` **不兼容**的！
+这是因为 reporter 的输入来源，只能从一个文件，而不能同时从多个文件读取。在这种方式下的错误报告，是与 jshint 的[传统 reporters](http://www.jshint.com/docs/reporters/)  不一样的，
+因为 loader 插件（例如 jshint-loader）是会在每一个源文件上执行的，因此它们的报告函数也会分别对应每一个源文件上执行。
 
-The output in webpack CLI will usually be:
+webpack 控制台输出的格式大致如下：
 ```js
 ...
 
@@ -100,7 +100,7 @@ WARNING in ./path/to/file.js
 ```
 `
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
@@ -145,3 +145,7 @@ WARNING in ./path/to/file.js
 
 [test]: http://img.shields.io/travis/webpack-contrib/jshint-loader.svg
 [test-url]: https://travis-ci.org/webpack-contrib/jshint-loader
+
+***
+
+> 原文：https://webpack.js.org/loaders/jshint-loader/

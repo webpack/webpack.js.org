@@ -8,15 +8,15 @@ repo: https://github.com/webpack-contrib/style-loader
   <p>Adds CSS to the DOM by injecting a <code>&lt;style&gt;</code> tag</p>
 </div>
 
-## Install
+## 安装
 
 ```
 npm install style-loader --save-dev
 ```
 
-## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
+## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
-It's recommended to combine `style-loader` with the [`css-loader`](/loaders/css-loader/)
+建议将 `style-loader` 与 [`css-loader`](https://github.com/webpack/css-loader) 结合使用
 
 **component.js**
 ```js
@@ -40,9 +40,9 @@ import style from './file.css'
 }
 ```
 
-#### `Locals (CSS Modules)`
+#### `局部（CSS 模块）`
 
-When using [local scoped CSS](https://github.com/webpack/css-loader#css-scope) the module exports the generated identifiers (locals).
+在使用[局部作用域 CSS](https://github.com/webpack/css-loader#css-scope) 时，模块导出生成的（局部）标识符(identifier)。
 
 **component.js**
 ```js
@@ -53,7 +53,7 @@ style.className === "z849f98ca812"
 
 ### `Url`
 
-It's also possible to add a URL `<link href="path/to/file.css" rel="stylesheet">` instead of inlining the CSS `{String}` with `<style></style>` tag.
+也可以添加一个URL `<link href="path/to/file.css" rel="stylesheet">`，而不是用带有 `<style></style>` 标签的内联 CSS `{String}`。
 
 ```js
 import url from 'file.css'
@@ -80,11 +80,11 @@ import url from 'file.css'
 <link rel="stylesheet" href="path/to/file.css">
 ```
 
-> :information_source: Source maps and assets referenced with `url`: when style loader is used with `{ options: { sourceMap: true } }` option, the CSS modules will be generated as `Blob`s, so relative paths don't work (they would be relative to `chrome:blob` or `chrome:devtools`). In order for assets to maintain correct paths setting `output.publicPath` property of webpack configuration must be set, so that absolute paths are generated. Alternatively you can enable the `convertToAbsoluteUrls` option mentioned above.
+> :信息来源: 使用 `url` 引用的 Source map 和资源：当 style-loader 与 `{ options: { sourceMap: true } }` 选项一起使用时，CSS 模块将生成为 `Blob`，因此相对路径无法正常工作（他们将相对于 `chrome:blob` 或 `chrome:devtools`）。为了使资源保持正确的路径，必须设置 webpack 配置中的 `output.publicPath` 属性，以便生成绝对路径。或者，您可以启用上面提到的 `convertToAbsoluteUrls` 选项。
 
-### `Useable`
+### `可选的(Useable)`
 
-By convention the `Reference Counter API` should be bound to `.useable.css` and the `.css` should be loaded with basic `style-loader` usage.(similar to other file types, i.e. `.useable.less` and `.less`).
+按照惯例，`引用计数器 API(Reference Counter API)` 应关联到 `.useable.css`，而 `.css` 的载入，应该使用基本的 `style-loader` 用法（类似于其他文件类型，例如 `.useable.less` 和 `.less`）。
 
 **webpack.config.js**
 ```js
@@ -112,7 +112,7 @@ By convention the `Reference Counter API` should be bound to `.useable.css` and 
 }
 ```
 
-#### `Reference Counter API`
+#### `引用计数器 API(Reference Counter API)`
 
 **component.js**
 ```js
@@ -122,25 +122,25 @@ style.use(); // = style.ref();
 style.unuse(); // = style.unref();
 ```
 
-Styles are not added on `import/require()`, but instead on call to `use`/`ref`. Styles are removed from page if `unuse`/`unref` is called exactly as often as `use`/`ref`.
+样式不会添加在 `import/require()` 上，而是在调用 `use`/`ref` 时添加。如果 `unuse`/`unref` 与 `use`/`ref` 一样频繁地被调用，那么样式将从页面中删除。
 
-:warning: Behavior is undefined when `unuse`/`unref` is called more often than `use`/`ref`. Don't do that.
+:警告: 当 `unuse`/`unref` 比 `use`/`ref` 调用频繁的时候，产生的行为是不确定的。所以不要这样做。
 
-## Options
+## 选项
 
-|Name|Type|Default|Description|
+|名称|类型|默认值|描述|
 |:--:|:--:|:-----:|:----------|
-|**`base`** |`{Number}`|`true`|Set module ID base (DLLPlugin)|
-|**`attrs`**|`{Object}`|`{}`|Add custom attrs to `<style></style>`|
-|**`transform`** |`{Function}`|`false`|Transform/Conditionally load CSS by passing a transform/condition function|
-|**`insertAt`**|`{String}`|`bottom`|Inserts `<style></style>` at the given position|
-|**`insertInto`**|`{String}`|`<head>`|Inserts `<style></style>` into the given position|
-|**`sourceMap`**|`{Boolean}`|`false`|Enable/Disable Sourcemaps|
-|**`convertToAbsoluteUrls`**|`{Boolean}`|`false`|Converts relative URLs to absolute urls, when source maps are enabled|
+|**`base`** |`{Number}`|`true`|设置模块 ID 基础 (DLLPlugin)|
+|**`attrs`**|`{Object}`|`{}`|添加自定义 attrs 到 `<style></style>`|
+|**`transform`** |`{Function}`|`false`|转换/条件加载 CSS，通过传递转换/条件函数|
+|**`insertAt`**|`{String}`|`bottom`|在给定位置处插入 `<style></style>`|
+|**`insertInto`**|`{String}`|`<head>`|给定位置中插入 `<style></style>`|
+|**`sourceMap`**|`{Boolean}`|`false`|启用/禁用 Sourcemap|
+|**`convertToAbsoluteUrls`**|`{Boolean}`|`false`|启用 source map 后，将相对 URL 转换为绝对 URL|
 
 ### `base`
 
-This setting is primarily used as a workaround for [css clashes](https://github.com/webpack-contrib/style-loader/issues/163) when using one or more [DllPlugin](https://robertknight.github.io/posts/webpack-dll-plugins/)'s.  `base` allows you to prevent either the *app*'s css (or *DllPlugin2*'s css) from overwriting *DllPlugin1*'s css by specifying a css module id base which is greater than the range used by *DllPlugin1* e.g.:
+当使用一个或多个 [DllPlugin](https://robertknight.github.io/posts/webpack-dll-plugins/) 时，此设置主要用作 [css 冲突](https://github.com/webpack-contrib/style-loader/issues/163) 的修补方案。`base` 可以防止 *app* 的 css（或 *DllPlugin2* 的 css）覆盖 *DllPlugin1* 的 css，方法是指定一个 css 模块的 id 大于 *DllPlugin1* 的范围，例如：
 
 **webpack.dll1.config.js**
 ```js
@@ -177,7 +177,7 @@ This setting is primarily used as a workaround for [css clashes](https://github.
 
 ### `attrs`
 
-If defined, style-loader will attach given attributes with their values on `<style>` / `<link>` element.
+如果已定义，style-loader 将把属性值附加在 `<style>` / `<link>` 元素上。
 
 **component.js**
 ```js
@@ -219,9 +219,9 @@ import link from './file.css'
 
 ### `transform`
 
-A `transform` is a function that can modify the css just before it is loaded into the page by the style-loader.
-This function will be called on the css that is about to be loaded and the return value of the function will be loaded into the page instead of the original css.
-If the return value of the `transform` function is falsy, the css will not be loaded into the page at all.
+`transform` 是一个函数，可以在通过 style-loader 加载到页面之前修改 css。
+该函数将在即将加载的 css 上调用，函数的返回值将被加载到页面，而不是原始的 css 中。
+如果 `transform` 函数的返回值是 falsy 值，那么 css 根本就不会加载到页面中。
 
 **webpack.config.js**
 ```js
@@ -258,18 +258,18 @@ module.exports = function (css) {
 **conditional.js**
 ```js
 module.exports = function (css) {
-  // If the condition is matched load [and transform] the CSS
+  // 如果条件匹配则加载[和转换] CSS
   if (css.includes('something I want to check')) {
     return css;
   }
-  // If a falsy value is returned, the CSS won't be loaded
+  // 如果返回 falsy 值，则不会加载 CSS
   return false
 }
 ```
 
 ### `insertAt`
 
-By default, the style-loader appends `<style>` elements to the end of the style target, which is the `<head>` tag of the page unless specified by `insertInto`. This will cause CSS created by the loader to take priority over CSS already present in the target. To insert style elements at the beginning of the target, set this query parameter to 'top', e.g
+默认情况下，style-loader 将 `<style>` 元素附加到样式目标(style target)的末尾，即页面的 `<head>` 标签，也可以是由 `insertInto` 指定其他标签。这将导致 loader 创建的 CSS 优先于目标中已经存在的 CSS。要在目标的起始处插入 style 元素，请将此查询参数(query parameter)设置为 'top'，例如
 
 **webpack.config.js**
 ```js
@@ -282,8 +282,8 @@ By default, the style-loader appends `<style>` elements to the end of the style 
 ```
 
 ### `insertInto`
-By default, the style-loader inserts the `<style>` elements into the `<head>` tag of the page. If you want the tags to be inserted somewhere else you can specify a CSS selector for that element here. If you target an [IFrame](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement) make sure you have sufficient access rights, the styles will be injected into the content document head.
-You can also insert the styles into a [ShadowRoot](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot), e.g
+默认情况下，样式加载器将 `<style>` 元素插入到页面的 `<head>` 标签中。如果要将标签插入到其他位置，可以在这里为该元素指定 CSS 选择器。如果你想要插入到 [IFrame](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement) 中，请确保你具有足够的访问权限，样式将被注入到内容文档的 head 中。
+你还可以将样式插入到 [ShadowRoot](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot) 中，如下
 
 **webpack.config.js**
 ```js
@@ -297,9 +297,9 @@ You can also insert the styles into a [ShadowRoot](https://developer.mozilla.org
 
 ### `singleton`
 
-If defined, the style-loader will reuse a single `<style>` element, instead of adding/removing individual elements for each required module.
+如果已定义，则 style-loader 将重用单个 `<style>` 元素，而不是为每个所需的模块添加/删除单个元素。
 
-> ℹ️  This option is on by default in IE9, which has strict limitations on the number of style tags allowed on a page. You can enable or disable it with the singleton option.
+> ℹ️  默认情况下启用此选项，IE9 对页面上允许的 style 标签数量有严格的限制。您可以使用 singleton 选项来启用或禁用它。
 
 **webpack.config.js**
 ```js
@@ -313,7 +313,7 @@ If defined, the style-loader will reuse a single `<style>` element, instead of a
 
 ### `sourceMap`
 
-Enable/Disable source map loading
+启用/禁用 source map 加载
 
 **webpack.config.js**
 ```js
@@ -327,7 +327,7 @@ Enable/Disable source map loading
 
 ### `convertToAbsoluteUrls`
 
-If convertToAbsoluteUrls and sourceMaps are both enabled, relative urls will be converted to absolute urls right before the css is injected into the page. This resolves [an issue](https://github.com/webpack/style-loader/pull/96) where relative resources fail to load when source maps are enabled. You can enable it with the convertToAbsoluteUrls option.
+如果 convertToAbsoluteUrls 和 sourceMaps 都启用，那么相对 url 将在 css 注入页面之前，被转换为绝对 url。这解决了在启用 source map 时，相对资源无法加载的[问题](https://github.com/webpack/style-loader/pull/96)。您可以使用 convertToAbsoluteUrls 选项启用它。
 
 **webpack.config.js**
 ```js
@@ -340,7 +340,7 @@ If convertToAbsoluteUrls and sourceMaps are both enabled, relative urls will be 
 }
 ```
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
@@ -412,3 +412,7 @@ If convertToAbsoluteUrls and sourceMaps are both enabled, relative urls will be 
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/loaders/style-loader/

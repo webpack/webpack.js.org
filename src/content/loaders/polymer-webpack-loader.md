@@ -24,8 +24,8 @@ The loader transforms your components:
  * `<script>/* contents */</script>` -> `/* contents */`
 
  What does that mean?
- 
- Any ```<link>``` "href" or ```<script>``` "src" that is **not an external link** and does not start with ```~```, ```/```, ```./``` or a series of ```../``` will have ```./``` appended to the beginning of the value. To prevent this change use options ignoreLinks below. 
+
+ Any ```<link>``` "href" or ```<script>``` "src" that is **not an external link** and does not start with ```~```, ```/```, ```./``` or a series of ```../``` will have ```./``` appended to the beginning of the value. To prevent this change use options ignoreLinks below.
 
 ## Path Translations
 
@@ -90,7 +90,7 @@ be useful for respecting aliases, loader syntax (e.g.
 
 #### processStyleLinks Boolean
 
-If set to true the loader will rewrite `<link import="css" href="...">` or `<link rel="stylesheet" href="...">` that are inside the dom-module with `<style>require('...')</style>`. This will allow for the file to be processed by loaders that are set up in the webpack config to handle their file type. 
+If set to true the loader will rewrite `<link import="css" href="...">` or `<link rel="stylesheet" href="...">` that are inside the dom-module with `<style>require('...')</style>`. This will allow for the file to be processed by loaders that are set up in the webpack config to handle their file type.
 
 1. Any `<link>` that is inside the `<dom-module>` but not in the `<template>` will be added to the `<template>` in the order the tags appear in the file.
 
@@ -149,9 +149,9 @@ module: {
 ```
 
 ### Use of HtmlWebpackPlugin
-Depending on how you configure the HtmlWebpackPlugin you may encounter conflicts with the polymer-webpack-loader. 
+Depending on how you configure the HtmlWebpackPlugin you may encounter conflicts with the polymer-webpack-loader.
 
-Example: 
+Example:
 
 ```javascript
 {
@@ -162,7 +162,7 @@ Example:
   ],
 },
 {
-  test: /\.html$/,  
+  test: /\.html$/,
   loader: 'polymer-webpack-loader'
 }
 ```
@@ -189,7 +189,7 @@ For external library code, webpack provides [shimming options](https://webpack.j
    import statement when a script expects a variable to be globally defined (but is now a module export).
  * Use the [NormalModuleReplacementPlugin](https://webpack.js.org/plugins/normal-module-replacement-plugin/)
    to have webpack swap a module-compliant version for a script.
-   
+
 You may need to apply multiple shimming techniques to the same component.
 
 ## Boostrapping Your Application

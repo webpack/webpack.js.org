@@ -8,13 +8,13 @@ repo: https://github.com/webpack-contrib/null-loader
   <p>A loader that returns an empty module.<p>
 </div>
 
-## Install
+## 安装
 
 ```bash
 npm i null-loader --save
 ```
 
-## Examples
+## 示例
 
 One use for this loader is to silence modules imported by a dependency. Say, for example, your project relies on an ES6 library that imports a polyfill you don't need, so removing it will cause no loss in functionality. Test for the path to the polyfill and it won't be included in your bundle:
 
@@ -33,7 +33,7 @@ module.exports = {
 }
 ```
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
@@ -75,3 +75,7 @@ module.exports = {
 
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/loaders/null-loader/

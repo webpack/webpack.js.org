@@ -8,7 +8,7 @@ repo: https://github.com/webpack-contrib/zopfli-webpack-plugin
   <p>Node-Zopfli plugin for Webpack.<p>
 </div>
 
-## Install
+## 安装
 
 ```bash
 npm i -D zopfli-webpack-plugin
@@ -19,15 +19,15 @@ npm i -D zopfli-webpack-plugin
 ``` javascript
 var ZopfliPlugin = require("zopfli-webpack-plugin");
 module.exports = {
-	plugins: [
-		new ZopfliPlugin({
-			asset: "[path].gz[query]",
-			algorithm: "zopfli",
-			test: /\.(js|html)$/,
-			threshold: 10240,
-			minRatio: 0.8
-		})
-	]
+  plugins: [
+    new ZopfliPlugin({
+      asset: "[path].gz[query]",
+      algorithm: "zopfli",
+      test: /\.(js|html)$/,
+      threshold: 10240,
+      minRatio: 0.8
+    })
+  ]
 }
 ```
 
@@ -98,3 +98,7 @@ module.exports = {
 
 [cover]: https://codecov.io/gh/webpack-contrib/zopfli-webpack-plugin/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/zopfli-webpack-plugin
+
+***
+
+> 原文：https://webpack.js.org/plugins/zopfli-webpack-plugin/

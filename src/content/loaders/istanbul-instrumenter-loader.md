@@ -9,20 +9,20 @@ repo: https://github.com/webpack-contrib/istanbul-instrumenter-loader
 
 Instrument JS files with [istanbul-lib-instrument](https://github.com/istanbuljs/istanbuljs/tree/master/packages/istanbul-lib-instrument) for subsequent code coverage reporting
 
-## Install
+## 安装
 
 ```bash
 npm i -D istanbul-instrumenter-loader
 ```
 
-## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
+## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
-### `References`
+### `参考`
 
 * [karma-webpack](https://github.com/webpack/karma-webpack)
 * [karma-coverage-istanbul-reporter](https://github.com/mattlewis92/karma-coverage-istanbul-reporter)
 
-### `Structure`
+### `结构`
 
 ```
 ├─ src
@@ -38,22 +38,22 @@ npm i -D istanbul-instrumenter-loader
 | | | | |– index.js
 ```
 
-To create a code coverage report for all components (even for those for which you have no tests yet) you have to require all the 1) sources and 2) tests. Something like it's described in ["alternative usage" of karma-webpack](https://github.com/webpack/karma-webpack#alternative-usage)
+为生成所有组件（包括你没写测试的那些）的代码覆盖率报告，你需要 require 所有**业务**和**测试**的代码。相关内容在 [karma-webpack 其他用法](https://github.com/webpack/karma-webpack#alternative-usage)中有涉及
 
 **test/index.js**
 ```js
-// requires all tests in `project/test/src/components/**/index.js`
+// requires 所有在 `project/test/src/components/**/index.js` 中的测试
 const tests = require.context('./src/components/', true, /index\.js$/);
 
 tests.keys().forEach(tests);
 
-// requires all components in `project/src/components/**/index.js`
+// requires 所有在 `project/src/components/**/index.js` 中的组件
 const components = require.context('../src/components/', true, /index\.js$/);
 
 components.keys().forEach(components);
 ```
 
-> ℹ️  This file will be the only `entry` point for `karma`
+> ℹ️  以下为 `karma` 的唯一`入口`起点文件
 
 **karma.conf.js**
 ```js
@@ -69,7 +69,7 @@ config.set({
     ...
     module: {
       rules: [
-        // instrument only testing sources with Istanbul
+        // 用 Istanbul 只监测业务代码
         {
           test: /\.js$/,
           use: { loader: 'istanbul-instrumenter-loader' },
@@ -88,7 +88,7 @@ config.set({
 });
 ```
 
-### with `Babel`
+### 使用 `Babel`
 
 You must run the instrumentation as a post step
 
@@ -106,7 +106,7 @@ You must run the instrumentation as a post step
 
 ## <a href="https://github.com/istanbuljs/istanbuljs/blob/master/packages/istanbul-lib-instrument/api.md#instrumenter">Options</a>
 
-The loader supports all options supported by `istanbul-lib-instrument`
+此 loader 支持 `istanbul-lib-instrument` 的所有配置选项
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
@@ -190,3 +190,7 @@ The loader supports all options supported by `istanbul-lib-instrument`
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/loaders/istanbul-instrumenter-loader/

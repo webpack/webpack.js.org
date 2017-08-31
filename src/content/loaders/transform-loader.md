@@ -8,24 +8,24 @@ repo: https://github.com/webpack-contrib/transform-loader
   <p>Use <a href="https://github.com/substack/node-browserify/wiki/list-of-transforms">browserify transforms</a> as webpack-loader.<p>
 </div>
 
-## Install
+## 安装
 
 ```bash
 npm i transform-loader --save
 ```
 
-## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
+## <a href="https://webpack.js.org/concepts/loaders">用法</a>
 
-Pass the module name as query parameter.
+通过查询参数(query parameter)来传递模块名。
 
 ``` javascript
 var x = require("!transform-loader?brfs!./file.js");
-var x = require("!transform-loader/cacheable?brfs!./file.js"); // cacheable version
+var x = require("!transform-loader/cacheable?brfs!./file.js"); // 可缓存版本
 ```
 
-If you pass a number instead it will take the function from `this.options.transforms[number]`.
+如果你传递了一个数字，将得到 `this.options.transforms[number]` 中的函数。
 
-## webpack 2 config example
+## webpack 2 配置示例
 
 ``` javascript
 module.exports = {
@@ -36,14 +36,14 @@ module.exports = {
         enforce: "post",
         options: {
           transforms: [
-              function (/*file*/) {
-                  return through((buffer) => {
-                      return this.queue(
-                          buffer.split('')
-                              .map((chunk) => String.fromCharCode(127-chunk.charCodeAt(0))))
-                              .join('')
-                  }, () => this.queue(null))
-              }
+            function (/*file*/) {
+              return through((buffer) => {
+                return this.queue(
+                  buffer.split('')
+                    .map((chunk) => String.fromCharCode(127-chunk.charCodeAt(0))))
+                    .join('')
+              }, () => this.queue(null))
+            }
           ]
         }
       },
@@ -53,14 +53,14 @@ module.exports = {
         loader: "transform-loader/cacheable?coffeeify",
         options: {
           transforms: [
-              function (/*file*/) {
-                  return through((buffer) => {
-                      return this.queue(
-                          buffer.split('')
-                              .map((chunk) => String.fromCharCode(127-chunk.charCodeAt(0))))
-                              .join('')
-                  }, () => this.queue(null))
-              }
+            function (/*file*/) {
+              return through((buffer) => {
+                return this.queue(
+                  buffer.split('')
+                    .map((chunk) => String.fromCharCode(127-chunk.charCodeAt(0))))
+                    .join('')
+              }, () => this.queue(null))
+            }
           ]
         }
       },
@@ -70,14 +70,14 @@ module.exports = {
         loader: "transform-loader?0",
         options: {
           transforms: [
-              function (/*file*/) {
-                  return through((buffer) => {
-                      return this.queue(
-                          buffer.split('')
-                              .map((chunk) => String.fromCharCode(127-chunk.charCodeAt(0))))
-                              .join('')
-                  }, () => this.queue(null))
-              }
+            function (/*file*/) {
+              return through((buffer) => {
+                return this.queue(
+                  buffer.split('')
+                    .map((chunk) => String.fromCharCode(127-chunk.charCodeAt(0))))
+                    .join('')
+              }, () => this.queue(null))
+            }
           ]
         }
       }
@@ -86,48 +86,48 @@ module.exports = {
 };
 ```
 
-## webpack 1 config example
+## webpack 1 配置示例
 
 ``` javascript
 module.exports = {
-	module: {
-		postLoaders: [
-			{
-				loader: "transform-loader?brfs"
-			}
-		]
-		loaders: [
-			{
-				test: /\.coffee$/,
-				loader: "transform-loader/cacheable?coffeeify"
-			},
-			{
-				test: /\.weirdjs$/,
-				loader: "transform-loader?0"
-			}
-		]
-	},
-	transforms: [
-		function(file) {
-			return through(function(buf) {
-				this.queue(buf.split("").map(function(s) {
-					return String.fromCharCode(127-s.charCodeAt(0));
-				}).join(""));
-			}, function() { this.queue(null); });
-		}
-	]
+  module: {
+    postLoaders: [
+      {
+        loader: "transform-loader?brfs"
+      }
+    ]
+    loaders: [
+      {
+        test: /\.coffee$/,
+        loader: "transform-loader/cacheable?coffeeify"
+      },
+      {
+        test: /\.weirdjs$/,
+        loader: "transform-loader?0"
+      }
+    ]
+  },
+  transforms: [
+    function(file) {
+      return through(function(buf) {
+        this.queue(buf.split("").map(function(s) {
+          return String.fromCharCode(127-s.charCodeAt(0));
+        }).join(""));
+      }, function() { this.queue(null); });
+    }
+  ]
 };
 ```
 
-## Typical brfs Example
+## 典型 brfs 示例
 
-Say you have the following Node source:
+假如你有下面这样的 Node 源码：
 
 ```js
 var test = require('fs').readFileSync('./test.txt', 'utf8');
 ```
 
-After `npm install transform-loader brfs --save`, add the following loader to your config:
+在 `npm install transform-loader brfs --save` 之后，添加如下 loader 到你的配置中：
 
 ```js
 module.exports = {
@@ -144,9 +144,9 @@ module.exports = {
 }
 ```
 
-The loader is applied to all JS files, which can incur a performance hit with watch tasks. So you may want to use `transform-loader/cacheable?brfs` instead. 
+loader 将应用到所有 JS 文件，这样在执行 watch 任务时将导致性能提醒。因此你也许需要使用带缓存的版本 `transform-loader/cacheable?brfs`。
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
@@ -188,3 +188,7 @@ The loader is applied to all JS files, which can incur a performance hit with wa
 
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/loaders/transform-loader/

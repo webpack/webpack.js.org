@@ -8,15 +8,15 @@ repo: https://github.com/webpack-contrib/cache-loader
   <p>Caches the result of following loaders on disk</p>
 </div>
 
-## Install
+## 安装
 
 ```bash
 npm install --save-dev cache-loader
 ```
 
-## Usage
+## 用法
 
-Add this loader in front of other (expensive) loaders to cache the result on disk.
+在一些性能开销较大的 loader 之前添加此 loader，以将结果缓存到磁盘里。
 
 **webpack.config.js**
 ```js
@@ -36,7 +36,7 @@ module.exports = {
 }
 ```
 
-> ⚠️ Note that there is an overhead for saving the reading and saving the cache file, so only use this loader to cache expensive loaders.
+> ⚠️ 请注意，保存和读取这些缓存文件会有一些时间开销，所以请只对性能开销较大的 loader 使用此 loader。
 
 ## Options
 
@@ -45,7 +45,7 @@ module.exports = {
 |**`cacheDirectory`**|`{String}`|`path.resolve('.cache-loader')`|Provide a cache directory where cache items should be stored|
 |**`cacheIdentifier`**|`{String}`|`cache-loader:{version} {process.env.NODE_ENV}`|Provide an invalidation identifier which is used to generate the hashes. You can use it for extra dependencies of loaders.|
 
-## Examples
+## 示例
 
 **webpack.config.js**
 ```js
@@ -65,7 +65,7 @@ module.exports = {
 }
 ```
 
-### `Options`
+### `配置选项`
 
 **webpack.config.js**
 ```js
@@ -90,7 +90,7 @@ module.exports = {
 }
 ```
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
@@ -159,3 +159,7 @@ module.exports = {
 
 [cover]: https://codecov.io/gh/webpack-contrib/cache-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/cache-loader
+
+***
+
+> 原文：https://webpack.js.org/loaders/cache-loader/

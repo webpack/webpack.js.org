@@ -8,19 +8,19 @@ repo: https://github.com/webpack-contrib/json5-loader
   <p>A webpack loader for parsing <a href="http://json5.org/"><code>json5</code></a> files into JavaScript objects.<p>
 </div>
 
-## Install
+## 安装
 
 ```sh
 $ npm install --save-dev json5-loader
 ```
 
-## Usage
+## 用法
 
-You can use the loader either
- * by configuring the `json5-loader` in the `module.loaders` object of the webpack configuration, or
- * by directly using the `json5-loader!` prefix to the require statement.
+你可以通过以下用法使用这个 loader
+ * 在 webpack 配置里的 `module.loaders` 对象中配置 `json5-loader`；
+ * 直接在 require 语句中使用 `json5-loader!` 前缀。
 
-Suppose we have the following `json5` file
+假设我们有下面这个 `json5` 文件
 ```js
 // appData.json5
 {
@@ -29,7 +29,7 @@ Suppose we have the following `json5` file
 }
 ```
 
-#### Usage with preconfigured loader
+#### 预先配置 loader 的用法
 
 ```js
 // webpack.config.js
@@ -39,7 +39,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        // make all files ending in .json5 use the `json5-loader`
+        // 使所有以 .json5 结尾的文件使用 `json5-loader`
         test: /\.json5$/,
         loader: 'json5-loader'
       }
@@ -51,22 +51,22 @@ module.exports = {
 ```js
 // index.js
 var appConfig = require('./appData.json5')
-// or, in ES6
+// 或者 ES6 语法
 // import appConfig from './appData.json5'
 
 console.log(appConfig.env) // 'production'
 ```
-#### Usage with require statement loader prefix
+#### require 语句使用 loader 前缀的用法
 ```js
 var appConfig = require("json5-loader!./appData.json5")
-// returns the content as json parsed object
+// 返回的是 json 解析过的对象
 
 console.log(appConfig.env) // 'production'
 ```
 
-Don't forget to polyfill require if you want to use it in Node.js. See the webpack documentation.
+如果需要在 Node.js 中使用，不要忘记兼容(polyfill) require。更多参考 webpack 文档。
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
@@ -136,3 +136,7 @@ MIT
 
 [cover]: https://codecov.io/gh/webpack-contrib/json5-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/json5-loader
+
+***
+
+> 原文：https://webpack.js.org/loaders/json5-loader/

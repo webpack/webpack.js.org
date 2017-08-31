@@ -7,15 +7,15 @@ repo: https://github.com/webpack-contrib/json-loader
 
 </div>
 
-## Install
+## 安装
 
 ```bash
 npm install --save-dev json-loader
 ```
 
-> ⚠️ **Since `webpack >= v2.0.0`, importing of JSON files will work by default. You might still want to use this if you use a custom file extension. See the [v1.0.0 -> v2.0.0 Migration Guide](https://webpack.js.org/guides/migrating/#json-loader-is-not-required-anymore) for more information**
+> ⚠️ **注意：由于 `webpack >= v2.0.0` 默认支持导入 JSON 文件。如果您使用自定义文件扩展名，您可能仍然需要使用此 loader。See the [v1.0.0 -> v2.0.0 Migration Guide](https://webpack.js.org/guides/migrating/#json-loader-is-not-required-anymore) for more information**
 
-## Usage
+## 用法
 
 ### `Inline`
 
@@ -23,7 +23,7 @@ npm install --save-dev json-loader
 const json = require('json-loader!./file.json');
 ```
 
-### `Configuration` (recommended)
+### `通过配置`（推荐）
 
 ```js
 const json = require('./file.json');
@@ -43,7 +43,7 @@ module.exports = {
 }
 ```
 
-## Maintainer
+## 维护人员
 
 <table>
   <tbody>
@@ -75,3 +75,7 @@ module.exports = {
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/loaders/json-loader/

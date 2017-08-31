@@ -8,20 +8,20 @@ repo: https://github.com/webpack-contrib/extract-text-webpack-plugin
   <p>Extract text from a bundle, or bundles, into a separate file.</p>
 </div>
 
-## Install
+## 安装
 
 ```bash
-# for webpack 3
+# 对于 webpack 3
 npm install --save-dev extract-text-webpack-plugin
-# for webpack 2
+# 对于 webpack 2
 npm install --save-dev extract-text-webpack-plugin@2.1.2
-# for webpack 1
+# 对于 webpack 1
 npm install --save-dev extract-text-webpack-plugin@1.0.1
 ```
 
-## Usage
+## 用法
 
-> :warning: For webpack v1, see [the README in the webpack-1 branch](https://github.com/webpack/extract-text-webpack-plugin/blob/webpack-1/README.md).
+> :警告: 对于 webpack v1, 请看 [分支为 webpack-1 的 README 文档](https://github.com/webpack/extract-text-webpack-plugin/blob/webpack-1/README.md)。
 
 ```js
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -44,39 +44,39 @@ module.exports = {
 }
 ```
 
-It moves all the required `*.css` modules in entry chunks into a separate CSS file. So your styles are no longer inlined into the JS bundle, but in a separate CSS file (`styles.css`). If your total stylesheet volume is big, it will be faster because the CSS bundle is loaded in parallel to the JS bundle.
+它会将所有的入口 chunk(entry chunks)中引用的 `*.css`，移动到独立分离的 CSS 文件。因此，你的样式将不再内嵌到 JS bundle 中，而是会放到一个单独的 CSS 文件（即 `styles.css`）当中。 如果你的样式文件大小较大，这会做更快提前加载，因为 CSS bundle 会跟 JS bundle 并行加载。
 
-|Advantages|Caveats|
+|优点|缺点|
 |:---------|:------|
-| Fewer style tags (older IE has a limit) | Additional HTTP request |
-| CSS SourceMap (with `devtool: "source-map"` and `extract-text-webpack-plugin?sourceMap`) | Longer compilation time |
-| CSS requested in parallel | No runtime public path modification |
-| CSS cached separate | No Hot Module Replacement |
-| Faster runtime (less code and DOM operations) | ... |
+| 更少 style 标签 (旧版本的 IE 浏览器有限制) | 额外的 HTTP 请求 |
+| CSS SourceMap (使用 `devtool: "source-map"` 和 `extract-text-webpack-plugin?sourceMap` 配置) | 更长的编译时间 |
+| CSS 请求并行 | 没有运行时(runtime)的公共路径修改 |
+| CSS 单独缓存 | 没有热替换 |
+| 更快的浏览器运行时(runtime) (更少代码和 DOM 操作) | ... |
 
-## Options
+## 选项
 
 ```js
 new ExtractTextPlugin(options: filename | object)
 ```
 
-|Name|Type|Description|
+|名称|类型|描述|
 |:--:|:--:|:----------|
-|**`id`**|`{String}`|Unique ident for this plugin instance. (For advanced usage only, by default automatically generated)|
-|**`filename`**|`{String\|Function}`|Name of the result file. May contain `[name]`, `[id]` and `[contenthash]`|
-|**`allChunks`**|`{Boolean}`|Extract from all additional chunks too (by default it extracts only from the initial chunk(s))<br />When using `CommonsChunkPlugin` and there are extracted chunks (from `ExtractTextPlugin.extract`) in the commons chunk, `allChunks` **must** be set to `true`|
-|**`disable`**|`{Boolean}`|Disables the plugin|
-|**`ignoreOrder`**|`{Boolean}`|Disables order check (useful for CSS Modules!), `false` by default|
+|**`id`**|`{String}`|此插件实例的唯一 ident。（仅限高级用途，默认情况下自动生成）|
+|**`filename`**|`{String\|Function}`|生成文件的文件名。可能包含 `[name]`, `[id]` and `[contenthash]`|
+|**`allChunks`**|`{Boolean}`|从所有额外的 chunk(additional chunk) 提取（默认情况下，它仅从初始chunk(initial chunk) 中提取）<br />当使用 `CommonsChunkPlugin` 并且在公共 chunk 中有提取的 chunk（来自`ExtractTextPlugin.extract`）时，`allChunks` **必须设置为 `true`|
+|**`disable`**|`{Boolean}`|禁用插件|
+|**`ignoreOrder`**|`{Boolean}`|禁用顺序检查 (这对 CSS 模块很有用！)，默认 `false`|
 
-* `[name]` name of the chunk
-* `[id]` number of the chunk
-* `[contenthash]` hash of the content of the extracted file
+* `[name]` chunk 的名称
+* `[id]` chunk 的数量
+* `[contenthash]` 根据提取文件的内容生成的 hash
 * `[<hashType>:contenthash:<digestType>:<length>]` optionally you can configure
   * other `hashType`s, e.g. `sha1`, `md5`, `sha256`, `sha512`
   * other `digestType`s, e.g. `hex`, `base26`, `base32`, `base36`, `base49`, `base52`, `base58`, `base62`, `base64`
   * and `length`, the length of the hash in chars
 
-> :warning: `ExtractTextPlugin` generates a file **per entry**, so you must use `[name]`, `[id]` or `[contenthash]` when using multiple entries.
+> :警告: `ExtractTextPlugin` 对 ** 每个入口 chunk** 都生成一个对应的文件，所以当你配置多个入口 chunk 的时候，你必须使用 `[name]`, `[id]` 或 `[contenthash]`，
 
 #### `#extract`
 
@@ -84,23 +84,23 @@ new ExtractTextPlugin(options: filename | object)
 ExtractTextPlugin.extract(options: loader | object)
 ```
 
-Creates an extracting loader from an existing loader. Supports loaders of type `{ loader: [name]-loader -> {String}, options: {} -> {Object} }`.
+从一个已存在的 loader 中，创建一个提取(extract) loader。支持的 loader 类型 `{ loader: [name]-loader -> {String}, options: {} -> {Object} }`。
 
-|Name|Type|Description|
+|名称|类型|描述|
 |:--:|:--:|:----------|
-|**`options.use`**|`{String}`/`{Array}`/`{Object}`|Loader(s) that should be used for converting the resource to a CSS exporting module _(required)_|
-|**`options.fallback`**|`{String}`/`{Array}`/`{Object}`|loader(e.g `'style-loader'`) that should be used when the CSS is not extracted (i.e. in an additional chunk when `allChunks: false`)|
-|**`options.publicPath`**|`{String}`|Override the `publicPath` setting for this loader|
+|**`options.use`**|`{String}`/`{Array}`/`{Object}`|loader 被用于将资源转换成一个 CSS 导出模块 _(必填)_|
+|**`options.fallback`**|`{String}`/`{Array}`/`{Object}`|loader（例如 `'style-loader'`）应用于当 CSS 没有被提取(也就是一个额外的 chunk，当 `allChunks: false`)|
+|**`options.publicPath`**|`{String}`|重写此 loader 的 `publicPath` 配置|
 
 
-#### Multiple Instances
+#### 多个实例
 
-There is also an `extract` function on the instance. You should use this if you have more than one instance of  `ExtractTextPlugin`.
+如果有多于一个 `ExtractTextPlugin` 示例的情形，请使用此方法每个实例上的 `extract` 方法。
 
 ```js
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-// Create multiple instances
+// 创建多个实例
 const extractCSS = new ExtractTextPlugin('stylesheets/[name]-one.css');
 const extractLESS = new ExtractTextPlugin('stylesheets/[name]-two.css');
 
@@ -124,9 +124,9 @@ module.exports = {
 };
 ```
 
-### Extracting Sass or LESS
+### 提取 Sass 或 LESS
 
-The configuration is the same, switch out `sass-loader` for `less-loader` when necessary.
+配置和上面是相同的，需要时可以将 `sass-loader` 切换为 `less-loader`。
 
 ```js
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -138,7 +138,7 @@ module.exports = {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          //resolve-url-loader may be chained before sass-loader if necessary
+          //如果需要，可以在 sass-loader 之前将 resolve-url-loader 链接进来
           use: ['css-loader', 'sass-loader']
         })
       }
@@ -146,7 +146,7 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin('style.css')
-    //if you want to pass in options, you can do so:
+    //如果想要传入选项，你可以这样做：
     //new ExtractTextPlugin({
     //  filename: 'style.css'
     //})
@@ -154,9 +154,9 @@ module.exports = {
 }
 ```
 
-### Modify filename
+### 修改文件名
 
-`filename` parameter could be `Function`. It passes `getPath` to process the format like `css/[name].css` and returns the real file name, `css/js/a.css`. You can replace `css/js` with `css` then you will get the new path `css/a.css`.
+`filename` 参数可以是 `Function`。它通过 `getPath` 来处理格式，如 `css/[name].css`，并返回真实的文件名，你可以用 `css` 替换 `css/js`，你会得到新的路径 `css/a.css`。
 
 
 ```js
@@ -173,7 +173,7 @@ plugins: [
 ]
 ```
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
@@ -224,3 +224,7 @@ plugins: [
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+***
+
+> 原文：https://webpack.js.org/plugins/extract-text-webpack-plugin/
