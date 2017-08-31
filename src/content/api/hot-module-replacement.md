@@ -93,9 +93,11 @@ module.hot.status() // Will return one of the following strings...
 Test all loaded modules for updates and, if updates exist, `apply` them.
 
 ``` js
-module.hot.check(autoApply, (error, outdatedModules) => {
-  // Catch errors and outdated modules...
-})
+module.hot.check(autoApply).then(outdatedModules => {
+  // outdated modules...
+}).catch(error => {
+  // catch errors
+});
 ```
 
 The `autoApply` parameter can either be a boolean or `options` to pass to the `apply` method when called.
@@ -106,14 +108,45 @@ The `autoApply` parameter can either be a boolean or `options` to pass to the `a
 Continue the update process (as long as `module.hot.status() === 'ready').
 
 ``` js
-module.hot.apply(options, (error, outdatedModules) => {
-  // Catch errors and outdated modules...
-})
+module.hot.apply(options).then(outdatedModules => {
+  // outdated modules...
+}).catch(error => {
+  // catch errors
+});
 ```
 
 The optional `options` object can include the following properties:
 
-- `ignoreUnaccepted` (boolean): Continue the update process even if some modules are not accepted.
+- `ignoreUnaccepted` (boolean): Ignore changes made to unaccepted modules.
+- `ignoreDeclined` (boolean): Ignore changes made to declined modules.
+- `ignoreErrored` (boolean): Ignore errors throw in accept handlers, error handlers and while reevaulating module.
+- `onDeclined` (function(info)): Notifier for declined modules
+- `onUnaccepted` (function(info)): Notifier for unaccepted modules
+- `onAccepted` (function(info)): Notifier for accepted modules
+- `onDisposed` (function(info)): Notifier for disposed modules
+- `onErrored` (function(info)): Notifier for errors
+
+The `info` object has this format:
+
+``` js
+{
+  type: "self-declined" | "declined" | 
+        "unaccepted" | "accepted" | 
+        "disposed" | "accept-errored" | 
+        "self-accept-errored" | "self-accept-error-handler-errored",
+  moduleId: 4, // The module in questions.
+  dependencyId: 3, // For errors: the module id owning the accept handler.
+  chain: [1, 2, 3, 4], // For declined/accepted/unaccepted: the chain from where the update was propagated.
+  parentId: 5, // For declined: the module id of the declining parent
+  outdatedModules: [1, 2, 3, 4], // For accepted: the modules that are outdated and will be disposed
+  outdatedDependencies: { // For accepted: The location of accept handlers that will handle the update
+    5: [4]
+  },
+  error: new Error(...), // For errors: the thrown error
+  orginalError: new Error(...) // For self-accept-error-handler-errored: 
+                               // the error thrown by the module before the error handler tried to handle it.
+}
+```
 
 
 ### `addStatusHandler`
