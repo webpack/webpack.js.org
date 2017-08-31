@@ -78,8 +78,6 @@ module.hot.status() // Will return one of the following strings...
 | ----------- | -------------------------------------------------------------------------------------- |
 | idle        | The process is waiting for a call to `check` (see below)                               |
 | check       | The process is checking for updates                                                    |
-| watch       | The process is in watch mode and will be automatically notified about changes          |
-| watch-delay | Delaying for a specified time after the initial change to allow for any other updates  |
 | prepare     | The process is getting ready for the update (e.g. downloading the updated module)      |
 | ready       | The update is prepared and available                                                   |
 | dispose     | The process is calling the `dispose` handlers on the modules that will be replaced     |
@@ -105,7 +103,7 @@ The `autoApply` parameter can either be a boolean or `options` to pass to the `a
 
 ### `apply`
 
-Continue the update process (as long as `module.hot.status() === 'ready').
+Continue the update process (as long as `module.hot.status() === 'ready'`).
 
 ``` js
 module.hot.apply(options).then(outdatedModules => {
