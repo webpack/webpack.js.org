@@ -9,7 +9,7 @@ contributors:
   - marioacc
 ---
 
-Aside from applications, webpack can also be used to bundle JavaScript libraries. The following guide is meant for library authors looking to streamline their bundling strategy..
+Aside from applications, webpack can also be used to bundle JavaScript libraries. The following guide is meant for library authors looking to streamline their bundling strategy.
 
 
 ## Authoring a Library
@@ -80,15 +80,19 @@ export function wordToNum(word) {
 The usage specification for the library use will be as follows:
 
 ```javascript
-import * as webpackNumbers from 'webpack-numbers'; //ES2015 module import
-var webpackNumbers = require('webpack-numbers'); //CommonJS module require
+// ES2015 module import
+import * as webpackNumbers from 'webpack-numbers';
+// CommonJS module require
+var webpackNumbers = require('webpack-numbers');
 ...
-webpackNumbers.wordToNum('Two') //ES2015 and CommonJS module use
+// ES2015 and CommonJS module use
+webpackNumbers.wordToNum('Two');
 ...
-//AMD module require
+// AMD module require
 require(['webpackNumbers'], function ( webpackNumbers) {
     ...
-    webpackNumbers.wordToNum('Two')//AMD module use
+    // AMD module use
+    webpackNumbers.wordToNum('Two');
     ...
 });
 
@@ -102,11 +106,11 @@ The consumer also can use the library loading it with the script tag:
 <script src="https://unpkg.com/webpack-numbers"></script>
 <script>
     ...
-    /* Global variable */
+    // Global variable
     webpackNumbers.wordToNum('Five')
-    /* Property in the window object */
+    // Property in the window object
     window.webpackNumbers.wordToNum('Five')
-    //
+
     ...
 </script>
 </html>
@@ -216,7 +220,8 @@ module.exports = {
     externals: [
       'library/A',
       'library/B',
-      /^library\/.+$/ // everything that starts with "library/"
+      // everything that starts with "library/"
+      /^library\/.+$/
     ]
     ...
 };
@@ -297,7 +302,8 @@ __package.json__
 ```javascript
 {
     "main": "dist/webpack-numbers.js",
-    "module": "src/index.js", // To add as standard module as per https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage
+    // To add as standard module as per https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage
+    "module": "src/index.js",
 }
 ```
 
