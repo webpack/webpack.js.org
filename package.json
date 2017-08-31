@@ -35,7 +35,7 @@
     "lint:links": "hyperlink -r build/index.html --canonicalroot https://webpack.js.org/ | node ./src/scripts/check-links.js",
     "lint:js": "eslint . --ext .js --ext .jsx",
     "lint:markdown": "markdownlint --config ./.markdownlint.json *.md ./src/content/**/*.md",
-    "lint:social": "alex ./**/*.md",
+    "lint:social": "alex . -q",
     "lint:prose": "cp .proselintrc ~/ && proselint src/content",
     "test": "npm run lint",
     "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml"
