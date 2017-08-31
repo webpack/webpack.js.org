@@ -13,6 +13,7 @@ import '../Gitter/Gitter.scss';
 
 const Page = ({ page, section }) => {
   let { contributors, title, related } = page.file.attributes;
+  let indexPage = require(`page-loader!../../content/${section.name}/index.md`);
   let pages = (
     section.pages()
       .sort((a, b) => a.file.attributes.sort - b.file.attributes.sort)
@@ -23,10 +24,14 @@ const Page = ({ page, section }) => {
       }))
   );
 
-  let indexAnchors = [];
-  if (section.name !== '/') {
-    indexAnchors = require('page-loader!../../content/'+section.name+'/index.md').attributes.anchors;
-  }
+  // TODO: This hack adds the index page to the array
+  // Ideally this would be resolved at the antwar/build level
+  // Index pages should just be treated normally
+  pages.unshift({
+    url: `/${section.name}/`,
+    title: indexPage.attributes.title,
+    anchors: indexPage.attributes.anchors
+  });
 
   return (
     <Container className="page">
@@ -34,10 +39,8 @@ const Page = ({ page, section }) => {
       <Interactive
         id="src/components/Sidebar/Sidebar.jsx"
         component={ Sidebar }
-        sectionName={ section.name }
         pages={ pages }
-        currentPage={ page.url.replace('/index', '') }
-        indexAnchors={ indexAnchors } />
+        currentPage={ page.url.replace('/index', '') } />
 
       <section className="page__content">
         <h1>{ title }</h1>

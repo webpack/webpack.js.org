@@ -10,7 +10,7 @@ export default class Sidebar extends Component {
   };
 
   render() {
-    let { sectionName, pages, currentPage, indexAnchors } = this.props;
+    let { pages, currentPage } = this.props;
     let { fixed, availableHeight, maxWidth } = this.state;
 
     return (
@@ -28,12 +28,6 @@ export default class Sidebar extends Component {
           <a href="https://github.com/webpack/webpack/releases">
             <Shield content="npm/v/webpack" label="webpack" />
           </a>
-
-          <SidebarItem
-            url={ `/${sectionName}/` }
-            title="Introduction"
-            currentPage={ currentPage }
-            anchors={ indexAnchors } />
 
           {
             pages.map((page, i) =>
