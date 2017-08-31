@@ -16,3 +16,78 @@ new webpack.optimize.ModuleConcatenationPlugin()
 ```
 
 > Scope Hoisting is specifically a feature made possible by ECMAScript Module syntax. Because of this webpack may fallback to normal bundling based on what kind of modules you are using, and [other conditions](https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5).
+
+# Optimization Bailouts
+
+As the article explains, there Webpack attempts to achieve partial scope hoisting. Webpack attempts to merge modules into a single scope but cannot do so in every case. If webpack cannot merge a module, the two alternatives are Prevent and Root. Prevent means the module must be in its own scope. Root means the module begins a new module group. The following table explains the conditions:
+
+| Condition                                     | Outcome |
+|-----------------------------------------------|---------|
+| Non ES6 Module                                | Prevent |
+| Imported By Non Import                        | Root    |
+| Imported From Other Chunk                     | Root    |
+| Imported By Multiple Other Module Groups      | Root    |
+| Imported With `import()`                      | Root    |
+| Affected By `ProvidePlugin` Or Using `module` | Prevent |
+| HMR Accepted                                  | Root    |
+| Using `eval()`                                | Prevent |
+| In Multiple Chunks                            | Prevent |
+| `export * from "cjs-module"`                  | Prevent |
+
+## Module Grouping Algorithm
+
+The following psuedo JavaScript explains the algorithm:
+
+```js
+modules.forEach(module => {
+  const group = new ModuleGroup({
+    root: module
+  });
+  module.dependencies.forEach(dependency => {
+    tryToAdd(group, dependency);
+  });
+  if (group.modules.length > 1) {
+    orderedModules = topologicalSort(group.modules);
+    concatenatedModule = new ConcatenatedModule(orderedModules);
+    chunk.add(concatenatedModule);
+    orderedModules.forEach(groupModule => {
+      chunk.remove(groupModule);
+    });
+  }
+});
+
+function tryToAdd(group, module) {
+  if (group.has(module)) {
+    return true;
+  }
+  if (!hasPreconditions(module)) {
+    return false;
+  }
+  const nextGroup = group;
+  const result = module.dependents.reduce((check, dependent) => {
+    return check && tryToAdd(nextGroup, dependent);
+  }, true);
+  if (!result) {
+    return false;
+  }
+  module.dependencies.forEach(depenency => {
+    tryToAdd(group, depenency);
+  });
+  group.merge(nextGroup);
+  return true;
+}
+```
+
+## Debugging Optimization Bailouts
+
+When use the Webpack CLI, the `--display-optimization-bailout` flag will display bailout reasons. When using the Webpack config, adding the following to the `stats` object helps:
+
+```js
+{
+  ...stats,
+  // Examine all modules
+  maxModules: Infinity,
+  // Display bailout reasons
+  optimizationBailout: true
+}
+```
