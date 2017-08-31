@@ -1,12 +1,6 @@
 #!/bin/bash
 set -e # Exit with nonzero exit code if anything fails
 
-#rm -rf ./generated
-#mkdir -p ./generated/loaders
-#cp -rf ./src/content/loaders/ ./generated/loaders
-#mkdir -p ./generated/plugins
-#cp -rf ./src/content/plugins/ ./generated/plugins
-
 # Fetch webpack-contrib (and various other) loader repositories
 node ./src/scripts/fetch_package_names.js "webpack-contrib" "-loader" | node ./src/scripts/fetch_package_files.js "README.md" "./src/content/loaders"
 node ./src/scripts/fetch_package_names.js "babel" "babel-loader" | node ./src/scripts/fetch_package_files.js "README.md" "./src/content/loaders"
