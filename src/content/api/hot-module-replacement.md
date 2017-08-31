@@ -103,7 +103,7 @@ The `autoApply` parameter can either be a boolean or `options` to pass to the `a
 
 ### `apply`
 
-Continue the update process (as long as `module.hot.status() === 'ready').
+Continue the update process (as long as `module.hot.status() === 'ready'`).
 
 ``` js
 module.hot.apply(options, (error, outdatedModules) => {
