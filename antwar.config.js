@@ -65,7 +65,7 @@ module.exports = {
       hideInSidebar: true
     },
     concepts: {
-      title: "Comcepts",
+      title: "Concepts",
       layout: () => require('./src/components/Page/Page.jsx').default,
       content: () => require.context('./loaders/page-loader!./src/content/concepts', false, /^\.\/.*\.md$/),
       url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
