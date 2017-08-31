@@ -1,3 +1,29 @@
 {
-  "allow": ["boogeyman-boogeywoman"]
+  "allow": [
+    "bigger",
+    "color",
+    "colors",
+    "crash",
+    "dead",
+    "dive",
+    "execute",
+    "executed",
+    "execution",
+    "dirty",
+    "disabled",
+    "failed",
+    "failure",
+    "fire",
+    "hook",
+    "host-hostess",
+    "hosts",
+    "jade",
+    "laid",
+    "lies",
+    "period",
+    "pros",
+    "reject",
+    "remains",
+    "white"
+  ]
 }

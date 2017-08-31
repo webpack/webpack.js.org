@@ -1,29 +1,29 @@
 {
-    "root": true,
-    
-    "extends": "eslint:recommended",
+  "root": true,
 
-    "parser": "babel-eslint",
+  "extends": "eslint:recommended",
 
-    "env": {
-        "browser": true,
-        "es6": true,
-        "node": true
-    },
+  "parser": "babel-eslint",
 
-    "plugins": [
-        "markdown"
-    ],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
 
-    "globals": {
-        "__DEV__": true
-    },
+  "plugins": [
+    "markdown"
+  ],
 
-    "rules": {
-        "no-undef": 2,
-        "no-unreachable": 2,
-        "no-unused-vars": 0,
-        "no-console": 0,
-        "semi": ["error", "always"]
-    }
+  "globals": {
+    "__DEV__": true
+  },
+
+  "rules": {
+    "no-undef": 2,
+    "no-unreachable": 2,
+    "no-unused-vars": 0,
+    "no-console": 0,
+    "semi": ["error", "always"]
+  }
 }

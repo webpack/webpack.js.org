@@ -1,0 +1,4 @@
+- [ ] Check the current issues to ensure you aren't creating a duplicate.
+- [ ] Consider making small typo fixes and such directly as pull requests.
+- [ ] No existing issue? Go ahead and open a new one.
+- __Remove these instructions from your PR as they are for your eyes only.__
