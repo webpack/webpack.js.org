@@ -7,25 +7,36 @@ contributors:
   - mtrivera
 ---
 
+T> 本指南示例来源于[*起步*](/guides/getting-started/)指南。
+
 [TypeScript](https://www.typescriptlang.org) 是 JavaScript 的超集，为其增加了类型系统，可以编译为普通的 JavaScript 代码。这篇指南里我们将会学习 webpack 是如何跟 TypeScript 进行集成。
 
 
 ## 基础安装
 
-在开始使用 webpack 和 TypeScript 之前，首先，我们必须在项目中[安装 webpack](/guides/installation/)。
+首先，执行以下命令，安装 TypeScript 编译器(compiler)和 loader：
 
-要想要 webpack 里集成 TypeScript，您需要预先准备如下：
+``` bash
+npm install --save-dev typescript ts-loader
+```
 
-1. 在项目里安装 TypeScript 编译器。
-2. 安装一个 Typescript loader（这个示例里使用的是 `ts-loader`）。
-3. 创建 __tsconfig.json__ 文件，这是 TypeScript 的编译配置。
-4. 创建 __webpack.config.js__ 文件，这是 webpack 的配置。
+现在，我们将修改目录结构和配置文件：
 
-可以通过运行下面这个命令，来安装 TypeScript 编译器和 loader：
+__project__
 
- ``` bash
- npm install --save-dev typescript ts-loader
- ```
+``` diff
+  webpack-demo
+  |- package.json
++ |- tsconfig.json
+  |- webpack.config.js
+  |- /dist
+    |- bundle.js
+    |- index.html
+  |- /src
+    |- index.js
++   |- index.ts
+  |- /node_modules
+```
 
 __tsconfig.json__
 
@@ -35,7 +46,6 @@ __tsconfig.json__
 {
   "compilerOptions": {
     "outDir": "./dist/",
-    "sourceMap": true,
     "noImplicitAny": true,
     "module": "commonjs",
     "target": "es5",
@@ -47,31 +57,33 @@ __tsconfig.json__
 
 查看 [TypeScript 官方文档](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)了解更多关于 `tsconfig.json` 的配置选项。
 
-__webpack.config.js__
-
-To learn more about webpack configuration, see the [configuration concepts](/concepts/configuration/).
+想要了解 webpack 配置的更多信息，请查看[配置相关概念](/concepts/configuration/)。
 
 现在让我们在 webpack 配置中处理 TypeScript：
 
-```js
+__webpack.config.js__
+
+``` js
+const path = require('path');
+
 module.exports = {
- entry: './index.ts',
- module: {
-   rules: [
-     {
-       test: /\.tsx?$/,
-       use: 'ts-loader',
-       exclude: /node_modules/
-     }
-   ]
- },
- resolve: {
-   extensions: [".tsx", ".ts", ".js"]
- },
- output: {
-   filename: 'bundle.js',
-   path: __dirname
- }
+  entry: './index.ts',
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      }
+    ]
+  },
+  resolve: {
+    extensions: [ ".tsx", ".ts", ".js" ]
+  },
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  }
 };
 ```
 
@@ -82,31 +94,61 @@ module.exports = {
 
 [`ts-loader`](https://github.com/TypeStrong/ts-loader)
 
-在本指南中，我们将使用 `ts-loader`，因为它能够很方便地启用额外的 webpack 功能，例如将其他 web 资源导入到项目中。
+在本指南中，我们使用 `ts-loader`，因为它能够很方便地启用额外的 webpack 功能，例如将其他 web 资源导入到项目中。
 
 
-## Source Map
+## source map
 
-To learn more about Source Maps, see the [development guide](/guides/development.md).
+想要了解 source map 的更多信息，请查看[开发指南](/guides/development)。
 
-要启用 source map，我们必须配置 TypeScript，以将内联的 source map 输出到编译过的 JavaScript 文件。必须在 `tsconfig.json` 中添加下面这行：
+要启用 source map，我们必须配置 TypeScript，以将内联的 source map 输出到编译过的 JavaScript 文件。必须在 TypeScript 配置中添加下面这行：
 
-``` json
-"sourceMap": true
+__tsconfig.json__
+
+``` diff
+  {
+    "compilerOptions": {
+      "outDir": "./dist/",
++     "sourceMap": true,
+      "noImplicitAny": true,
+      "module": "commonjs",
+      "target": "es5",
+      "jsx": "react",
+      "allowJs": true
+    }
+  }
 ```
 
 现在，我们需要告诉 webpack 提取这些 source map，并内联到最终的 bundle 中。
 
 __webpack.config.js__
 
-```js
-module.exports = {
- devtool: 'inline-source-map',
- // 剩余配置……
-};
+``` diff
+  const path = require('path');
+
+  module.exports = {
+    entry: './index.ts',
++   devtool: 'inline-source-map',
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          use: 'ts-loader',
+          exclude: /node_modules/
+        }
+      ]
+    },
+    resolve: {
+      extensions: [ ".tsx", ".ts", ".js" ]
+    },
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
 ```
 
-更多信息请查看 [devtool 文档](/configuration/devtool/)。
+查看 [devtool 文档](/configuration/devtool/)以了解更多信息。
 
 
 ## 使用第三方库
@@ -138,11 +180,11 @@ declare module "*.svg" {
 这里，我们通过指定任何以 `.svg` 结尾的导入，并将模块的 `content` 定义为 `any`，将 SVG 声明一个新的模块。我们可以通过将类型定义为字符串，来更加显式地将它声明为一个 url。同样的理念适用于其他资源，包括 CSS, SCSS, JSON 等。
 
 
-## Performance Loader
+## 构建性能
 
-[`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader)
+W> 这可能会降低构建性能。
 
-Awesome TypeScript Loader has created a [wonderful explanation](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader) of the difference between `awesome-typescript-loader` and `ts-loader`. The configuration for `awesome-typescript-loader` is more complex than `ts-loader`.
+关于构建工具，请查看[构建性能](guides/build-performance/)指南。
 
 ***
 

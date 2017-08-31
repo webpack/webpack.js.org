@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - jouni-kantola
   - jhnns
+  - dylanonelson
 ---
 
 这些选项决定了如何处理项目中的[不同类型的模块](/concepts/modules)。
@@ -104,12 +105,12 @@ W> 小心！resource 是文件的_解析_路径，这意味着符号链接的资
 
 ## `Rule.exclude`
 
-`Rule.exclude` 是 `Rule.resource.exclude` 的简写。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.exclude`](#condition)。
+`Rule.exclude` 是 `Rule.resource.exclude` 的简写。如果你提供了 `Rule.exclude` 选项，就不能再提供 `Rule.resource`。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.exclude`](#condition)。
 
 
 ## `Rule.include`
 
-`Rule.include` 是 `Rule.resource.include` 的简写。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.include`](#condition)。
+`Rule.include` 是 `Rule.resource.include` 的简写。如果你提供了 `Rule.include` 选项，就不能再提供 `Rule.resource`。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.include`](#condition)。
 
 
 ## `Rule.issuer`
@@ -188,7 +189,7 @@ parser: {
 
 ## `Rule.resource`
 
-[`条件`](#condition)会匹配 resource。在 [`Rule` 条件](#rule-conditions) 中查看详细。
+[`条件`](#condition)会匹配 resource。既可以提供 `Rule.resource` 选项，也可以使用快捷选项 `Rule.test`，`Rule.exclude` 和 `Rule.include`。在 [`Rule` 条件](#rule-conditions) 中查看详细。
 
 
 ## `Rule.resourceQuery`
@@ -210,7 +211,7 @@ A [`Condition`](#condition) matched with the resource query. The condition match
 
 ## `Rule.test`
 
-`Rule.test` 是 `Rule.resource.test` 的简写。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.test`](#condition)。
+`Rule.test` 是 `Rule.resource.test` 的简写。如果你提供了一个 `Rule.test` 选项，就不能再提供 `Rule.resource`。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.test`](#condition)。
 
 
 ## `Rule.use`

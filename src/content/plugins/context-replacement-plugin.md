@@ -12,7 +12,7 @@ related:
 `上下文替换插件(ContextReplacementPlugin)` 允许你覆盖查找规则，该插件有许多配置方式：
 
 
-## `newContentResource`, `newContentRecursive`, `newContentRegExp`
+## 用法
 
 ```javascript
 new webpack.ContextReplacementPlugin(
@@ -25,16 +25,18 @@ new webpack.ContextReplacementPlugin(
 
 如果资源（或目录）符合 `resourceRegExp` 正则表达式，插件会替换默认资源为 `newContentResource`，布尔值 `newContentRecursive` 表明是否使用递归查找，`newContextRegExp` 用于筛选新上下文里的资源。如果 `newContentResource` 为相对路径，会相对于前一匹配资源路径去解析。
 
-
-**示例**
+这是一个限制模块使用的小例子：
 
 ```javascript
-new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /de|fr|hu/)
+new webpack.ContextReplacementPlugin(
+  /moment[\/\\]locale$/,
+  /de|fr|hu/
+)
 ```
 
-限定查找 `moment/locale` 上下文里符合 `/de|fr|hu/` 表达式的文件，因此也只会打包这几种本地化内容，（见[此 GitHub issue](https://github.com/moment/moment/issues/2373)）。
+限定查找 `moment/locale` 上下文里符合 `/de|fr|hu/` 表达式的文件，因此也只会打包这几种本地化内容（更多详细信息，请查看[这个 issue](https://github.com/moment/moment/issues/2373)）。
 
-## `newContentCallback`
+## 内容回调函数
 
 ```javascript
 new webpack.ContextReplacementPlugin(
@@ -45,20 +47,23 @@ new webpack.ContextReplacementPlugin(
 
 `newContentCallback` 函数的第一形参为[`上下文模块工厂(ContextModuleFactory)`的 `data` 对象](/api/plugins/module-factories/)，你需要覆写该对象的 `request` 属性。
 
-**示例**
+使用这个回调函数，我们可以动态地将请求重定向到一个新的位置：
 
 ```javascript
 new webpack.ContextReplacementPlugin(/^\.\/locale$/, (context) => {
-  if (!/\/moment\//.test(context.context)) { return; }
+  if ( !/\/moment\//.test(context.context) ) return;
+
   Object.assign(context, {
     regExp: /^\.\/\w+/,
-    request: '../../locale', // 相对路径
+    request: '../../locale' // 相对路径解析
   });
 }),
 ```
 
 
-## `newContentResource`, `newContentCreateContextMap`
+## 其他选项
+
+`newContentResource` 和 `newContentCreateContextMap` 参数也可用：
 
 ```javascript
 new webpack.ContextReplacementPlugin(
@@ -68,13 +73,12 @@ new webpack.ContextReplacementPlugin(
 )
 ```
 
-**示例**
+这两个参数可以一起使用，来更加有针对性的重定向请求。 `newContentCreateContextMap` 允许你将运行时的请求，映射为形式为对象的编译请求：
 
 ```javascript
 new ContextReplacementPlugin(/selector/, './folder', {
   './request': './request',
   './other-request': './new-request'
-  /* runtime-request: compile-time request */
 })
 ```
 

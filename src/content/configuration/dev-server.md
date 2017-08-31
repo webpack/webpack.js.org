@@ -34,8 +34,8 @@ devServer: {
 
 ```bash
 http://localhost:9000/
-webpack result is served from /build/
-content is served from dist/
+webpack output is served from /build/
+Content not from webpack is served from /path/to/dist/
 ```
 
 这将给出一些背景知识，就能知道服务器的访问位置，并且知道服务已启动。
