@@ -13,7 +13,7 @@ import '../Gitter/Gitter.scss';
 
 const Page = ({ page, section }) => {
   let { contributors, title, related } = page.file.attributes;
-  let indexPage = require(`page-loader!../../content/${section.name}/index.md`);
+  let indexPage = section.title !== 'Home' ? require(`page-loader!../../content/${section.name}/index.md`) : null;
   let pages = (
     section.pages()
       .sort((a, b) => a.file.attributes.sort - b.file.attributes.sort)
@@ -27,11 +27,13 @@ const Page = ({ page, section }) => {
   // TODO: This hack adds the index page to the array
   // Ideally this would be resolved at the antwar/build level
   // Index pages should just be treated normally
-  pages.unshift({
-    url: `/${section.name}/`,
-    title: indexPage.attributes.title,
-    anchors: indexPage.attributes.anchors
-  });
+  if (indexPage) {
+    pages.unshift({
+      url: `/${section.name}/`,
+      title: indexPage.attributes.title,
+      anchors: indexPage.attributes.anchors
+    });
+  }
 
   return (
     <Container className="page">
