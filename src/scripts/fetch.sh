@@ -21,3 +21,6 @@ node ./src/scripts/fetch_supporters.js
 
 # Fetch starter kits
 node ./src/scripts/fetch_starter_kits.js
+
+rm -rf ./content/loaders/*.json
+rm -rf ./content/plugins/*.json
