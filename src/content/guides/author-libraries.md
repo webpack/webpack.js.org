@@ -9,12 +9,12 @@ contributors:
   - marioacc
 ---
 
-webpack is a tool which can be used to bundle application code and also to bundle library code. If you are the author of a JavaScript library and are looking to streamline your bundle strategy then this document will help you with the differents webpack configurations to expose your libraries as you think convenient.
+Aside from applications, webpack can also be used to bundle JavaScript libraries. The following guide is meant for library authors looking to streamline their bundling strategy..
 
 
 ## Authoring a Library
 
-Let's assume that you are writing a small library ,`webpack-numbers`, allowing to convert numbers 1 to 5 from their numeric representation to the textual one and vice-versa, e.g.: 2 to 'two'. 
+Let's assume that you are writing a small library ,`webpack-numbers`, allowing to convert numbers 1 to 5 from their numeric representation to the textual one and vice-versa, e.g.: 2 to 'two'.
 The basic project structure may look like this.
 
 __project__
@@ -80,8 +80,8 @@ export function wordToNum(word) {
 The usage specification for the library use will be as follows:
 
 ```javascript
-import * as webpackNumbers from 'webpack-numbers';//ES2015 module import
-var webpackNumbers = require('webpack-numbers');// CommonJS module require
+import * as webpackNumbers from 'webpack-numbers'; //ES2015 module import
+var webpackNumbers = require('webpack-numbers'); //CommonJS module require
 ...
 webpackNumbers.wordToNum('Two') //ES2015 and CommonJS module use
 ...
@@ -103,19 +103,19 @@ The consumer also can use the library loading it with the script tag:
 <script>
     ...
     /* Global variable */
-    webpackNumbers.wordToNum('Five') 
+    webpackNumbers.wordToNum('Five')
     /* Property in the window object */
-    window.webpackNumbers.wordToNum('Five') 
+    window.webpackNumbers.wordToNum('Five')
     //
     ...
 </script>
 </html>
 ```
 
-The configurations also can expose the library in the next ways:
+The configurations also can expose the library in the following ways:
 
 - Property in the global object, for node.
-- Property in the this object.
+- Property in the `this` object.
 
 
 For full library configuration and code please refer to [webpack-library-example](https://github.com/kalcifer/webpack-library-example)
@@ -123,14 +123,14 @@ For full library configuration and code please refer to [webpack-library-example
 
 ## Configure webpack
 
-Now the agenda is to bundle this library achieving the next goals:
+Now the plan is to bundle this library achieving the next goals:
 
 - Without bundling `lodash`, but requiring it to be loaded by the consumer using `externals`.
 - Setting the library name as `webpack-numbers`.
 - Exposing the library as a variable called `webpackNumbers`.
 - Being able to access the library inside Node.js.s
 
-Also, the consumer will be able to access` the library the `next ways:
+Also, the consumer will be able to access the library the following ways:
 
 - ES2015 module. i.e. `import webpackNumbers from 'webpack-numbers'`.
 - CommonJS module. i.e. `require('webpack-numbers')`.
@@ -222,14 +222,14 @@ module.exports = {
 };
 ```
 
-W>At the moment of webpack 3.5.5, using the next configuration is not working properly as stated in the [issue 4824](https://github.com/webpack/webpack/issues/4824):
+W> With webpack 3.5.5, using the following configuration doesn't work properly as stated in [issue 4824](https://github.com/webpack/webpack/issues/4824):
 
 ```javascript
 module.exports = {
     ...
     output: {
         ...
-        
+
         libraryTarget: {
             root:'_'
         }
@@ -244,7 +244,7 @@ W> However, you can set libraryTarget.var='_' to expect the library as a global 
 
 For widespread use of the library, we would like it to be compatible in different environments, i.e. CommonJS, AMD, Node.js and as a global variable.
 
-To make your library available for reuse, add `library` property inside `output` in webpack configuration.
+To make your library available for reuse, add the `library` property inside `output` in the webpack configuration.
 
 __webpack.config.js__
 
@@ -259,7 +259,7 @@ module.exports = {
 };
 ```
 
-This makes your library bundle to be available as a global variable named `webpackNumbers` when imported. To make the library compatible with other environments, add `libraryTarget` property to the config. This will add the differents options about how the library can be exposed.
+This makes your library bundle available as a global variable named `webpackNumbers` when imported. To make the library compatible with other environments, add `libraryTarget` property to the config. This will add the different options about how the library can be exposed.
 
 __webpack.config.js__
 
@@ -275,14 +275,14 @@ module.exports = {
 };
 ```
 
-You can expose the library in the next ways:
+You can expose the library in the following ways:
 
 - Variable: as a global variable. Available in the `script` tag. i.e. `libraryTarget:'var'`.
 - This: available trough the this object. i.e. `libraryTarget:'this'`.
 - Window: available trough the `window` object, in the browser. i.e. `libraryTarget:'window'`.
 - UMD: available after AMD or CommonJS `require`. i.e. `libraryTarget:'umd'`
 
-If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output). 
+If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output).
 See [`output.libraryTarget`](/configuration/output#output-librarytarget) there for a detailed list of all available options.
 
 
