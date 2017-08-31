@@ -615,7 +615,7 @@ This option is only used when [`devtool`](/configuration/devtool) uses a SourceM
 
 Configure how source maps are named. By default `"[file].map"` is used.
 
-The `[name]`, `[id]`, `[hash]` and `[chunkhash]` substitions from [#output-filename](#output-filename) can be used. In addition to those, you can use substitutions listed below. The `[file]` placeholder is replaced with the filename of the original file. We recommend __only using the `[file]` placeholder__, as the other placeholders won't work when generating SourceMaps for non-chunk files.
+The `[name]`, `[id]`, `[hash]` and `[chunkhash]` substitutions from [#output-filename](#output-filename) can be used. In addition to those, you can use substitutions listed below. The `[file]` placeholder is replaced with the filename of the original file. We recommend __only using the `[file]` placeholder__, as the other placeholders won't work when generating SourceMaps for non-chunk files.
 
 | Template                   | Description                                                                         |
 | -------------------------- | ----------------------------------------------------------------------------------- |
