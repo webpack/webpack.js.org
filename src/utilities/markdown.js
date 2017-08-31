@@ -40,8 +40,8 @@ module.exports = function() {
     }
 
     if (linksEnabled) {
-      code = code.replace(/\[([^\[\]]+?)\]\((.+?)\)/g, match => {
-        match = /\[([^\[\]]+?)\]\((.+?)\)/.exec(match);
+      code = code.replace(/\[([^[\]]+?)\]\((.+?)\)/g, match => {
+        match = /\[([^[\]]+?)\]\((.+?)\)/.exec(match);
         links.push('<a class="code-link" href="' + match[2] + '">' + match[1] + '</a>');
         return "MARKDOWNLINK_" + (links.length - 1) + "_";
       });
