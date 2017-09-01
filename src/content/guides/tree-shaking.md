@@ -5,6 +5,7 @@ contributors:
   - simon04
   - zacanger
   - alexjoverm
+  - avant1
 related:
   - title: Tree shaking with webpack 2, TypeScript and Babel
     url: https://alexjoverm.github.io/2017/03/06/Tree-shaking-with-Webpack-2-TypeScript-and-Babel/
@@ -116,7 +117,7 @@ __webpack.config.js__
 
 ``` diff
 const path = require('path');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
++ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
