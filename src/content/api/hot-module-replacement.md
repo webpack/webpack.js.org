@@ -124,7 +124,7 @@ The optional `options` object can include the following properties:
 - `onDisposed` (function(info)): Notifier for disposed modules
 - `onErrored` (function(info)): Notifier for errors
 
-The `info` object has this format:
+The `info` parameter will be an object containing some of the following values:
 
 ``` js
 {
@@ -132,7 +132,7 @@ The `info` object has this format:
         "unaccepted" | "accepted" | 
         "disposed" | "accept-errored" | 
         "self-accept-errored" | "self-accept-error-handler-errored",
-  moduleId: 4, // The module in questions.
+  moduleId: 4, // The module in question.
   dependencyId: 3, // For errors: the module id owning the accept handler.
   chain: [1, 2, 3, 4], // For declined/accepted/unaccepted: the chain from where the update was propagated.
   parentId: 5, // For declined: the module id of the declining parent
@@ -141,8 +141,8 @@ The `info` object has this format:
     5: [4]
   },
   error: new Error(...), // For errors: the thrown error
-  orginalError: new Error(...) // For self-accept-error-handler-errored: 
-                               // the error thrown by the module before the error handler tried to handle it.
+  originalError: new Error(...) // For self-accept-error-handler-errored: 
+                                // the error thrown by the module before the error handler tried to handle it.
 }
 ```
 
