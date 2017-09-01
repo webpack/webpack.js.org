@@ -165,6 +165,7 @@ another.bundle.js  537 bytes       1  [emitted]         another
 
 T> [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) 插件也可以使用 [明确第三方 chunks](/plugins/commons-chunk-plugin/#-chunk) 从应用程序代码中分离 vendor 模块。
 
+
 ## 动态引入
 
 当涉及到动态代码拆分时，webpack提供了两个类似的技术。第一种也是优先选择的方式，使用符合动态导入的 [ECMAScript 提案](https://github.com/tc39/proposal-dynamic-import) 的 [`import()` 语法](/api/module-methods#import-)。第二种，则是使用 webpack 特殊的 [`require.ensure`](/api/module-methods#require-ensure)。让我们先尝试使用第一种...
@@ -203,7 +204,7 @@ __webpack.config.js__
   };
 ```
 
-注意，这里使用了 `chunkFilename` ，Note the use of `chunkFilename`，它决定非入口 chunk 的名称。想了解 `chunkFilename` 更多内容，请查看 [output相关文档](/configuration/output/#output-chunkfilename)。更新我们的项目，移除当前未使用的文件:
+注意，这里使用了 `chunkFilename`，它决定非入口 chunk 的名称。想了解 `chunkFilename` 更多内容，请查看 [output相关文档](/configuration/output/#output-chunkfilename)。更新我们的项目，移除当前未使用的文件:
 
 __project__
 
