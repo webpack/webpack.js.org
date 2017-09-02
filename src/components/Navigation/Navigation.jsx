@@ -66,7 +66,7 @@ export default class Navigation extends React.Component {
                   <Link
                     key={ `navigation__link-${section.title}` }
                     className={ `navigation__link ${activeMod}` }
-                    to={ `/${section.url}` }>
+                    to={ `/${section.url}/` }>
                     { section.title }
                   </Link>
                 );
@@ -123,7 +123,7 @@ export default class Navigation extends React.Component {
                         <Link
                           key={ `navigation__child-${child.title}` }
                           className={ `navigation__child ${activeMod}` }
-                          to={ `/${child.url}` }>
+                          to={ `/${child.url}/` }>
                           { child.title }
                         </Link>
                       );
@@ -171,9 +171,9 @@ export default class Navigation extends React.Component {
     let { pageUrl = '' } = this.props;
 
     if (section.children) {
-      return section.children.some(child => pageUrl.includes(`${child.url}/`));
+      return section.children.some(child => { return (new RegExp("^/" + child.url +".*/")).test(pageUrl); });
 
-    } else return pageUrl.includes(`${section.url}/`);
+    } else return (new RegExp("^/" + section.url +".*/")).test(pageUrl);
   }
 
   /**

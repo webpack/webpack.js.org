@@ -19,18 +19,28 @@ import '../SidebarItem/SidebarItem.scss';
 import '../Logo/Logo.scss';
 import '../Dropdown/Dropdown.scss';
 
-export default props => {
+const Site = ({
+  children,
+  section,
+  location: { pathname }
+}) => {
   // Retrieve section data
-  let sections = props.children.props.section.all()
-    .map(({ title, url, pages }) => ({
-      title,
-      url,
-      pages: pages.map(({ title, url }) => ({
-        title: title || url, // XXX: Title shouldn't be coming in as undefined
-        url
-      }))
-    }));
-  
+  let sections = section.all().filter(section => section.path.hideInSidebar !== true)
+    .map((section) => {
+      let _section = {
+        title: section.path.title,
+        url: section.url,
+        pages: section.pages.map(page => {
+          let _page = {
+            title: page.file.title,
+            url: page.url
+          };
+          return _page;
+        })
+      };
+      return _section;
+    });
+
   // Rename the root section ("webpack" => "Other") and push it to the end
   let rootIndex = sections.findIndex(section => section.title === 'webpack');
   let rootSection = sections.splice(rootIndex, 1)[0];
@@ -42,22 +52,25 @@ export default props => {
       <Interactive
         id="src/components/NotificationBar/NotificationBar.jsx"
         component={ NotificationBar } />
-        
+
       <Interactive
         id="src/components/Navigation/Navigation.jsx"
         component={ Navigation }
         sections={ sections }
-        pageUrl={ props.children.props.page.url } />
+        pageUrl={ pathname } />
 
       <Interactive
         id="src/components/SidebarMobile/SidebarMobile.jsx"
         component={ SidebarMobile }
         sections={ sections } />
 
-      { props.children }
+      { children }
+
       <Footer />
 
       <GoogleAnalytics analyticsId="UA-46921629-2" />
     </div>
   );
 };
+
+export default Site;
