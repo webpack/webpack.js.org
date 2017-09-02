@@ -102,7 +102,6 @@ entry: {
 plugins: [
   new webpack.optimize.CommonsChunkPlugin({
     name: "vendor",
-
     // filename: "vendor.js"
     // (Give the chunk a different name)
 
@@ -110,7 +109,6 @@ plugins: [
     // (with more entries, this ensures that no other module
     //  goes into the vendor chunk)
   })
-more plugins...
 ]
 ```
 
