@@ -92,32 +92,32 @@ webpack([config1, config2], (err, stats) => {
 
 This a reference guide to all the event hooks exposed by the `Compiler`.
 
-Event name                    | Reason                                  | Params                    | Type
------------------------------ | --------------------------------------- | ------------------------- | ----------
-__`entry-option`__            | -                                       | -                         | bailResult
-__`after-plugins`__           | After setting up initial set of plugins | `compiler`                | sync
-__`after-resolvers`__         | After setting up the resolvers          | `compiler`                | sync
-__`environment`__             | -                                       | -                         | sync
-__`after-environment`__       | Environment setup complete              | -                         | sync
-__`before-run`__              | `compiler.run()` starts                 | `compiler`                | async
-__`run`__                     | Before reading records                  | `compiler`                | async
-__`watch-run`__               | Before starting compilation after watch | `compiler`                | async
-__`normal-module-factory`__   | After creating a `NormalModuleFactory`  | `normalModuleFactory`     | sync
-__`context-module-factory`__  | After creating a `ContextModuleFactory` | `contextModuleFactory`    | sync
-__`before-compile`__          | Compilation parameters created          | `compilationParams`       | async
-__`compile`__                 | Before creating new compilation         | `compilationParams`       | sync
-__`this-compilation`__        | Before emitting `compilation` event     | `compilation`             | sync
-__`compilation`__             | Compilation creation completed          | `compilation`             | sync
-__`make`__                    | -                                       | `compilation`             | parallel
-__`after-compile`__           | -                                       | `compilation`             | async
-__`should-emit`__             | Can return true/false at this point     | `compilation`             | bailResult
-__`need-additional-pass`__    | -                                       | -                         | bailResult
-__`emit`__                    | Before emitting assets to output dir    | `compilation`             | async
-__`after-emit`__              | After emitting assets to output dir     | `compilation`             | async
-__`done`__                    | Completion of compile                   | `stats`                   | sync
-__`failed`__                  | Failure of compile                      | `error`                   | sync
-__`invalid`__                 | After invalidating a watch compile      | `fileName`, `changeTime`  | sync
-__`watch-close`__             | After stopping a watch compile          | -                         | sync
+Event name                  | Reason                                  | Params                    | Type
+--------------------------- | --------------------------------------- | ------------------------- | ----------
+__`entry-option`__          | -                                       | -                         | bailResult
+__`after-plugins`__         | After setting up initial set of plugins | `compiler`                | sync
+__`after-resolvers`__       | After setting up the resolvers          | `compiler`                | sync
+__`environment`__           | -                                       | -                         | sync
+__`after-environment`__     | Environment setup complete              | -                         | sync
+__`before-run`__            | `compiler.run()` starts                 | `compiler`                | async
+__`run`__                   | Before reading records                  | `compiler`                | async
+__`watch-run`__             | Before starting compilation after watch | `compiler`                | async
+__`normal-module-factory`__ | After creating a `NormalModuleFactory`  | `normalModuleFactory`     | sync
+__`context-module-factory`__| After creating a `ContextModuleFactory` | `contextModuleFactory`    | sync
+__`before-compile`__        | Compilation parameters created          | `compilationParams`       | async
+__`compile`__               | Before creating new compilation         | `compilationParams`       | sync
+__`this-compilation`__      | Before emitting `compilation` event     | `compilation`             | sync
+__`compilation`__           | Compilation creation completed          | `compilation`             | sync
+__`make`__                  | -                                       | `compilation`             | parallel
+__`after-compile`__         | -                                       | `compilation`             | async
+__`should-emit`__           | Can return true/false at this point     | `compilation`             | bailResult
+__`need-additional-pass`__  | -                                       | -                         | bailResult
+__`emit`__                  | Before emitting assets to output dir    | `compilation`             | async
+__`after-emit`__            | After emitting assets to output dir     | `compilation`             | async
+__`done`__                  | Completion of compile                   | `stats`                   | sync
+__`failed`__                | Failure of compile                      | `error`                   | sync
+__`invalid`__               | After invalidating a watch compile      | `fileName`, `changeTime`  | sync
+__`watch-close`__           | After stopping a watch compile          | -                         | sync
 
 
 ## Usage
