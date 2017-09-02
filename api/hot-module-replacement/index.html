@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/ed31d4898ff6fe848466.css" rel="stylesheet">
+      <link href="/3cc93dfb3169bc9b55bf.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -87,34 +87,6 @@
 	    </div>
 	    <div class="table-td-content">
 	        The process is checking for updates
-	    </div>
-	  </div></div><div class="table-tr"><div class="table-td">
-	    <div class="table-td-title">
-	        Status
-	    </div>
-	    <div class="table-td-content">
-	        watch
-	    </div>
-	  </div><div class="table-td">
-	    <div class="table-td-title">
-	        Description
-	    </div>
-	    <div class="table-td-content">
-	        The process is in watch mode and will be automatically notified about changes
-	    </div>
-	  </div></div><div class="table-tr"><div class="table-td">
-	    <div class="table-td-title">
-	        Status
-	    </div>
-	    <div class="table-td-content">
-	        watch-delay
-	    </div>
-	  </div><div class="table-td">
-	    <div class="table-td-title">
-	        Description
-	    </div>
-	    <div class="table-td-content">
-	        Delaying for a specified time after the initial change to allow for any other updates
 	    </div>
 	  </div></div><div class="table-tr"><div class="table-td">
 	    <div class="table-td-title">
@@ -205,21 +177,51 @@
 	        </div>
 	    </div><h3 class="header"><a class="anchor" href="#check" id="check"></a><span class="text"><code>check</code></span><a class="icon-link" href="#check"></a></h3>
 <p>Test all loaded modules for updates and, if updates exist, <code>apply</code> them.</p>
-<pre><code class="lang-js">module<span class="token punctuation">.</span>hot<span class="token punctuation">.</span><span class="token function">check</span><span class="token punctuation">(</span>autoApply<span class="token punctuation">,</span> <span class="token punctuation">(</span>error<span class="token punctuation">,</span> outdatedModules<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
-  <span class="token comment" spellcheck="true">// Catch errors and outdated modules...</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<pre><code class="lang-js">module<span class="token punctuation">.</span>hot<span class="token punctuation">.</span><span class="token function">check</span><span class="token punctuation">(</span>autoApply<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>outdatedModules <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// outdated modules...</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span>error <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// catch errors</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>The <code>autoApply</code> parameter can either be a boolean or <code>options</code> to pass to the <code>apply</code> method when called.</p>
 <h3 class="header"><a class="anchor" href="#apply" id="apply"></a><span class="text"><code>apply</code></span><a class="icon-link" href="#apply"></a></h3>
-<p>Continue the update process (as long as `module.hot.status() === &apos;ready&apos;).</p>
-<pre><code class="lang-js">module<span class="token punctuation">.</span>hot<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>options<span class="token punctuation">,</span> <span class="token punctuation">(</span>error<span class="token punctuation">,</span> outdatedModules<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
-  <span class="token comment" spellcheck="true">// Catch errors and outdated modules...</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<p>Continue the update process (as long as <code>module.hot.status() === &apos;ready&apos;</code>).</p>
+<pre><code class="lang-js">module<span class="token punctuation">.</span>hot<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>outdatedModules <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// outdated modules...</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span>error <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// catch errors</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>The optional <code>options</code> object can include the following properties:</p>
 <ul>
-<li><code>ignoreUnaccepted</code> (boolean): Continue the update process even if some modules are not accepted.</li>
+<li><code>ignoreUnaccepted</code> (boolean): Ignore changes made to unaccepted modules.</li>
+<li><code>ignoreDeclined</code> (boolean): Ignore changes made to declined modules.</li>
+<li><code>ignoreErrored</code> (boolean): Ignore errors throw in accept handlers, error handlers and while reevaulating module.</li>
+<li><code>onDeclined</code> (function(info)): Notifier for declined modules</li>
+<li><code>onUnaccepted</code> (function(info)): Notifier for unaccepted modules</li>
+<li><code>onAccepted</code> (function(info)): Notifier for accepted modules</li>
+<li><code>onDisposed</code> (function(info)): Notifier for disposed modules</li>
+<li><code>onErrored</code> (function(info)): Notifier for errors</li>
 </ul>
+<p>The <code>info</code> parameter will be an object containing some of the following values:</p>
+<pre><code class="lang-js"><span class="token punctuation">{</span>
+  type<span class="token punctuation">:</span> <span class="token string">&quot;self-declined&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;declined&quot;</span> <span class="token operator">|</span> 
+        <span class="token string">&quot;unaccepted&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;accepted&quot;</span> <span class="token operator">|</span> 
+        <span class="token string">&quot;disposed&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;accept-errored&quot;</span> <span class="token operator">|</span> 
+        <span class="token string">&quot;self-accept-errored&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;self-accept-error-handler-errored&quot;</span><span class="token punctuation">,</span>
+  moduleId<span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// The module in question.</span>
+  dependencyId<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// For errors: the module id owning the accept handler.</span>
+  chain<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// For declined/accepted/unaccepted: the chain from where the update was propagated.</span>
+  parentId<span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// For declined: the module id of the declining parent</span>
+  outdatedModules<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// For accepted: the modules that are outdated and will be disposed</span>
+  outdatedDependencies<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// For accepted: The location of accept handlers that will handle the update</span>
+    <span class="token number">5</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  error<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// For errors: the thrown error</span>
+  originalError<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// For self-accept-error-handler-errored: </span>
+                                <span class="token comment" spellcheck="true">// the error thrown by the module before the error handler tried to handle it.</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <h3 class="header"><a class="anchor" href="#addstatushandler" id="addstatushandler"></a><span class="text"><code>addStatusHandler</code></span><a class="icon-link" href="#addstatushandler"></a></h3>
 <p>Register a function to listen for changes in <code>status</code>.</p>
 <pre><code class="lang-js">module<span class="token punctuation">.</span>hot<span class="token punctuation">.</span><span class="token function">addStatusHandler</span><span class="token punctuation">(</span>status <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
