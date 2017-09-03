@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/f88557079319ba529474.css" rel="stylesheet">
+      <link href="/0baae21ff530ccbda679.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -122,14 +122,14 @@
 </ul>
 <p>If you decide to try another, just make sure your new choice also drops dead code as described in the <a href="/guides/tree-shaking">tree shaking</a> guide.</p>
 <h2 class="header"><a class="anchor" href="#source-mapping" id="source-mapping"></a><span class="text">Source Mapping</span><a class="icon-link" href="#source-mapping"></a></h2>
-<p>We encourage you to have source maps enabled in production, as they are useful for debugging as well as running benchmark tests. That said, you should choose one with a fairly quick build speed that&apos;s recommended for production use (see <a href="/configuration/devtool"><code>devtool</code></a>). For this guide, we&apos;ll use the <code>cheap-module-source-map</code> option in <em>production</em> as opposed to the <code>inline-source-map</code> we used in <em>development</em>:</p>
+<p>We encourage you to have source maps enabled in production, as they are useful for debugging as well as running benchmark tests. That said, you should choose one with a fairly quick build speed that&apos;s recommended for production use (see <a href="/configuration/devtool"><code>devtool</code></a>). For this guide, we&apos;ll use the <code>source-map</code> option in <em>production</em> as opposed to the <code>inline-source-map</code> we used in <em>development</em>:</p>
 <p><strong>webpack.prod.js</strong></p>
 <pre><code class="lang-diff">  const merge = require(&apos;webpack-merge&apos;);
   const UglifyJSPlugin = require(&apos;uglifyjs-webpack-plugin&apos;);
   const common = require(&apos;./webpack.common.js&apos;);
 
   module.exports = merge(common, {
-<span class="token inserted">+   devtool: &apos;cheap-module-source-map&apos;,</span>
+<span class="token inserted">+   devtool: &apos;source-map&apos;,</span>
     plugins: [
       new UglifyJSPlugin()
     ]
