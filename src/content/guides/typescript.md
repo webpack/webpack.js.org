@@ -184,4 +184,4 @@ Here we declare a new module for SVGs by specifying any import that ends in `.sv
 
 W> This may degrade build performance.
 
-See the [Build Performance](guides/build-performance/) guide on build tooling.
+See the [Build Performance](/guides/build-performance/) guide on build tooling.
