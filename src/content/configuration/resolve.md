@@ -45,6 +45,12 @@ you can use the alias:
 import Utility from 'Utilities/utility';
 ```
 
+you can also use the alias to refer any image inside HTML files:
+
+```html
+<img src="~Utilities/image.png">
+```
+
 A trailing `$` can also be added to the given object's keys to signify an exact match:
 
 ```js
