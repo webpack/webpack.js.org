@@ -167,7 +167,10 @@ __webpack.prod.js__
   module.exports = merge(common, {
 +   devtool: 'source-map',
     plugins: [
-      new UglifyJSPlugin()
+-     new UglifyJSPlugin()
++     new UglifyJSPlugin({
++       sourceMap: true
++     })
     ]
   })
 ```
