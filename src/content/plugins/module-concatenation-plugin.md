@@ -17,9 +17,10 @@ new webpack.optimize.ModuleConcatenationPlugin()
 
 > Scope Hoisting is specifically a feature made possible by ECMAScript Module syntax. Because of this webpack may fallback to normal bundling based on what kind of modules you are using, and [other conditions](https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5).
 
-# Optimization Bailouts
 
-As the article explains, there Webpack attempts to achieve partial scope hoisting. Webpack attempts to merge modules into a single scope but cannot do so in every case. If webpack cannot merge a module, the two alternatives are Prevent and Root. Prevent means the module must be in its own scope. Root means the module begins a new module group. The following table explains the conditions:
+## Optimization Bailouts
+
+As the article explains, there webpack attempts to achieve partial scope hoisting. webpack attempts to merge modules into a single scope but cannot do so in every case. If webpack cannot merge a module, the two alternatives are Prevent and Root. Prevent means the module must be in its own scope. Root means the module begins a new module group. The following table explains the conditions:
 
 | Condition                                     | Outcome |
 |-----------------------------------------------|---------|
@@ -34,7 +35,8 @@ As the article explains, there Webpack attempts to achieve partial scope hoistin
 | In Multiple Chunks                            | Prevent |
 | `export * from "cjs-module"`                  | Prevent |
 
-## Module Grouping Algorithm
+
+### Module Grouping Algorithm
 
 The following psuedo JavaScript explains the algorithm:
 
@@ -78,9 +80,10 @@ function tryToAdd(group, module) {
 }
 ```
 
-## Debugging Optimization Bailouts
 
-When use the Webpack CLI, the `--display-optimization-bailout` flag will display bailout reasons. When using the Webpack config, adding the following to the `stats` object helps:
+### Debugging Optimization Bailouts
+
+When use the webpack CLI, the `--display-optimization-bailout` flag will display bailout reasons. When using the webpack config, adding the following to the `stats` object helps:
 
 ```js
 {
