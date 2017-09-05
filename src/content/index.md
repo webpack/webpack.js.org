@@ -12,6 +12,7 @@ __app.js__
 import bar from './bar';
 
 bar();
+
 ```
 </div>
 <div class="homepage__right">
