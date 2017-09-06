@@ -85,9 +85,6 @@
         <loc>https://webpack.js.org/api/stats/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/configuration/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/concepts/dependency-graph/index.html</loc>
     </url>
     <url>
@@ -95,6 +92,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/hot-module-replacement/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/configuration/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/loaders/index.html</loc>
@@ -226,16 +226,16 @@
         <loc>https://webpack.js.org/guides/environment-variables/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/getting-started/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/guides/hot-module-replacement/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/installation/index.html</loc>
+        <loc>https://webpack.js.org/guides/getting-started/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/integrations/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/guides/installation/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/lazy-loading/index.html</loc>
@@ -271,10 +271,10 @@
         <loc>https://webpack.js.org/guides/why-webpack/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/babel-loader/index.html</loc>
+        <loc>https://webpack.js.org/loaders/bundle-loader/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/bundle-loader/index.html</loc>
+        <loc>https://webpack.js.org/loaders/babel-loader/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/cache-loader/index.html</loc>
