@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/9569e93056ae9b0a2f1c.css" rel="stylesheet">
+      <link href="/ce8af6ac6e41da7af658.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -386,7 +386,7 @@ Have a look at <a href="/concepts/module-resolution">Module Resolution</a> for m
 </code></pre>
 <blockquote class="warning"><div class="tip-content"> Using this will <strong>override the default array</strong>, meaning that webpack will no longer try to resolve modules using the default extensions. For modules that are imported with their extension, e.g. <code>import SomeFile from &quot;./somefile.ext&quot;</code>, to be properly resolved, a string containing &quot;*&quot; must be included in the array. </div></blockquote><h3 class="header"><a class="anchor" href="#resolve-mainfields" id="resolve-mainfields"></a><span class="text"><code>resolve.mainFields</code></span><a class="icon-link" href="#resolve-mainfields"></a></h3>
 <p><code>array</code></p>
-<p>When importing from an npm package, e.g. <code>import * as D3 from &quot;d3&quot;</code>, this option will determine which fields in it&apos;s <code>package.json</code> are checked. The default values will vary based upon the <a href="/concepts/targets"><code>target</code></a> specified in your webpack configuration.</p>
+<p>When importing from an npm package, e.g. <code>import * as D3 from &quot;d3&quot;</code>, this option will determine which fields in its <code>package.json</code> are checked. The default values will vary based upon the <a href="/concepts/targets"><code>target</code></a> specified in your webpack configuration.</p>
 <p>When the <code>target</code> property is set to <code>webworker</code>, <code>web</code>, or left unspecified:</p>
 <pre><code class="lang-js">mainFields<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;browser&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;module&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;main&quot;</span><span class="token punctuation">]</span>
 </code></pre>
