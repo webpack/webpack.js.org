@@ -37,10 +37,10 @@
         <loc>https://webpack.js.org/license/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/index.html</loc>
+        <loc>https://webpack.js.org/organization/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/organization/index.html</loc>
+        <loc>https://webpack.js.org/loaders/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/index.html</loc>
@@ -271,6 +271,9 @@
         <loc>https://webpack.js.org/guides/why-webpack/index.html</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/loaders/babel-loader/index.html</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/loaders/bundle-loader/index.html</loc>
     </url>
     <url>
@@ -311,9 +314,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/imports-loader/index.html</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/loaders/babel-loader/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/istanbul-instrumenter-loader/index.html</loc>
