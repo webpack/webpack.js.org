@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Check piped links while allowing a fixed amount to fail
 // Adapted from tap-json.
-var parser = require('tap-parser');
+var Parser = require('tap-parser');
 var through = require('through2');
 var duplexer = require('duplexer');
 var minimist = require('minimist');
@@ -14,7 +14,7 @@ function checkLinks(args) {
   var argv = minimist(process.argv.slice(2));
   var skip = argv.skip || 0;
 
-  var tap = parser();
+  var tap = new Parser();
   var out = through.obj();
   var dup = duplexer(tap, out);
 
