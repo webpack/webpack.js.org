@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/a38cc17020da39b1ad99.css" rel="stylesheet">
+      <link href="/d1daf92ff43752a58f53.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -138,7 +138,7 @@
 <h2 class="header"><a class="anchor" href="#specify-the-environment" id="specify-the-environment"></a><span class="text">Specify the Environment</span><a class="icon-link" href="#specify-the-environment"></a></h2>
 <p>Many libraries will key off the <code>process.env.NODE_ENV</code> variable to determine what should be included in the library. For example, when not in <em>production</em> some libraries may add additional logging and testing to make debugging easier. However, with <code>process.env.NODE_ENV === &apos;production&apos;</code> they might drop or add significant portions of code to optimize how things run for your actual users. We can use webpack&apos;s built in <a href="/plugins/define-plugin"><code>DefinePlugin</code></a> to define this variable for all our dependencies:</p>
 <p><strong>webpack.prod.js</strong></p>
-<pre><code class="lang-diff">  const webpack = require(&apos;webpack&apos;);
+<pre><code class="lang-diff"><span class="token inserted">+ const webpack = require(&apos;webpack&apos;);</span>
   const merge = require(&apos;webpack-merge&apos;);
   const UglifyJSPlugin = require(&apos;uglifyjs-webpack-plugin&apos;);
   const common = require(&apos;./webpack.common.js&apos;);
