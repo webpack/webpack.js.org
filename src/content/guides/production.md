@@ -180,7 +180,7 @@ Many libraries will key off the `process.env.NODE_ENV` variable to determine wha
 __webpack.prod.js__
 
 ``` diff
-  const webpack = require('webpack');
++ const webpack = require('webpack');
   const merge = require('webpack-merge');
   const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
   const common = require('./webpack.common.js');
