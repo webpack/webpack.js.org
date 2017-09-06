@@ -3,7 +3,7 @@ import startsWith from 'lodash/startsWith';
 
 let RRouter;
 if (__DEV__) {
-  RRouter = require('react-router');
+  RRouter = require('react-router-dom');
 }
 
 export default ({ to, ...props }) => {

@@ -1,7 +1,7 @@
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var Autoprefixer = require('autoprefixer');
+var autoprefixer = require('autoprefixer');
 var merge = require('webpack-merge');
 var webpack = require('webpack');
 
@@ -11,68 +11,109 @@ var stylePaths = [
   path.join(cwd, 'src', 'components')
 ];
 
-const commonConfig = {
+const commonConfig = env => ({
   resolve: {
-    extensions: ['', '.js', '.jsx', '.scss']
+    extensions: ['.js', '.jsx', '.scss']
   },
+
+  resolveLoader: {
+    alias: {
+      'page-loader': path.resolve(cwd, 'loaders/page-loader')
+    }
+  },
+
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.jsx?$/,
-        loaders: ['babel-loader', 'eslint-loader'],
+        test: /\.(js|jsx)$/,
+        use: [
+          'babel-loader',
+          {
+            loader: 'eslint-loader',
+            options: { fix: true }
+          }
+        ],
         include: [
           path.join(__dirname, 'src', 'components')
         ]
       },
       {
+        test: /\.font.js$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            {
+              loader: 'fontgen-loader',
+              options: { embed: true }
+            }
+          ]
+        })
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader'
+        }),
+        include: stylePaths
+      },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            'postcss-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                includePaths: [ path.join('./src/styles/partials') ]
+              }
+            }
+          ]
+        }),
+        include: stylePaths
+      },
+      {
         test: /\.woff2?$/,
-        loaders: ['url-loader?prefix=font/&limit=10000&mimetype=application/font-woff']
+        use: {
+          loader: 'file-loader',
+          options: {
+            prefix: 'font/'
+          }
+        }
       },
       {
-        test: /\.jpg$/,
-        loaders: ['file-loader']
-      },
-      {
-        test: /\.png$/,
-        loaders: ['file-loader']
-      },
-      {
-        test: /\.svg$/,
-        loaders: ['file-loader']
+        test: /\.(jpg|png|svg)$/,
+        use: 'file-loader'
       },
       {
         test: /\.html$/,
-        loaders: ['raw-loader']
-      },
-      {
-        test: /\.json$/,
-        loaders: ['json-loader']
+        use: 'raw-loader'
       }
     ]
   },
-  eslint: {
-    fix: true,
-    configFile: require.resolve('./.eslintrc')
-  },
-  postcss: function() {
-    return [ Autoprefixer ];
-  },
-  sassLoader: {
-    includePaths: [ path.join('./src/styles/partials') ]
-  },
+
   plugins: [
     new CopyWebpackPlugin([{
       from: './src/assets',
       to: './assets'
-    }])
+    }]),
+
+    new ExtractTextPlugin({
+      filename: '[chunkhash].css',
+      allChunks: true,
+      disable: env === 'develop'
+    })
   ]
-};
+});
 
 const interactiveConfig = {
   resolve: {
     alias: {
-      react: 'preact-compat',
-      'react-dom': 'preact-compat'
+      react: 'preact-compat/dist/preact-compat.min.js',
+      'react-dom': 'preact-compat/dist/preact-compat.min.js'
     }
   },
   plugins: [
@@ -84,79 +125,16 @@ const interactiveConfig = {
   ]
 };
 
-const developmentConfig = {
-  module: {
-    loaders: [
-      {
-        test: /\.font.js$/,
-        loaders: ['style-loader', 'css-loader', 'fontgen-loader']
-      },
-      {
-        test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
-        include: stylePaths
-      },
-      {
-        test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
-        include: stylePaths
-      }
-    ]
-  }
-};
-
-const buildConfig = {
-  plugins: [
-    new ExtractTextPlugin('[chunkhash].css', {
-      allChunks: true
-    })
-  ],
-  module: {
-    loaders: [
-      {
-        test: /\.font.js$/,
-        loader: ExtractTextPlugin.extract(
-          'style-loader',
-          'css-loader!fontgen-loader?embed'
-        )
-      },
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract(
-          'style-loader',
-          'css-loader'
-        ),
-        include: stylePaths
-      },
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract(
-          'style-loader',
-          'css-loader!postcss-loader!sass-loader'
-        ),
-        include: stylePaths
-      }
-    ]
-  }
-};
-
 module.exports = function(env) {
   switch(env) {
-    case 'start':
-      return merge(
-        commonConfig,
-        developmentConfig
-      );
+    case 'develop':
+    case 'build':
+      return commonConfig(env);
+
     case 'interactive':
       return merge(
-        commonConfig,
+        commonConfig(env),
         interactiveConfig
-      );
-    case 'build':
-    case 'lint:links':
-      return merge(
-        commonConfig,
-        buildConfig
       );
   }
 };

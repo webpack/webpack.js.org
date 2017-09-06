@@ -6,14 +6,58 @@ contributors:
   - johnstew
   - simon04
   - 5angel
+  - marioacc
 ---
 
-webpack is a tool which can be used to bundle application code and also to bundle library code. If you are the author of a JavaScript library and are looking to streamline your bundle strategy then this document will help you.
+Aside from applications, webpack can also be used to bundle JavaScript libraries. The following guide is meant for library authors looking to streamline their bundling strategy.
 
 
-## Author a Library
+## Authoring a Library
 
-Let's assume that you are writing a small library `webpack-numbers` allowing to convert numbers 1 to 5 from their numeric to a textual representation and vice-versa. The implementation makes use of ES2015 modules, and might look like this:
+Let's assume that you are writing a small library ,`webpack-numbers`, that allows users to convert the numbers 1 through 5 from their numeric representation to a textual one and vice-versa, e.g. 2 to 'two'.
+
+The basic project structure may look like this:
+
+__project__
+
+``` diff
++  |- webpack.config.js
++  |- package.json
++  |- /src
++    |- index.js
++    |- ref.json
+```
+
+Initialize npm, install webpack and lodash:
+
+``` bash
+npm init -y
+npm install --save-dev webpack lodash
+```
+
+__src/ref.json__
+
+```javascript
+[{
+  "num": 1,
+  "word": "One"
+}, {
+  "num": 2,
+  "word": "Two"
+}, {
+  "num": 3,
+  "word": "Three"
+}, {
+  "num": 4,
+  "word": "Four"
+}, {
+  "num": 5,
+  "word": "Five"
+}, {
+  "num": 0,
+  "word": "Zero"
+}]
+```
 
 __src/index.js__
 
@@ -22,68 +66,79 @@ import _ from 'lodash';
 import numRef from './ref.json';
 
 export function numToWord(num) {
-    return _.reduce(numRef, (accum, ref) => {
-        return ref.num === num ? ref.word : accum;
-    }, '');
+  return _.reduce(numRef, (accum, ref) => {
+    return ref.num === num ? ref.word : accum;
+  }, '');
 };
 
 export function wordToNum(word) {
-    return _.reduce(numRef, (accum, ref) => {
-        return ref.word === word && word.toLowerCase() ? ref.num : accum;
-    }, -1);
+  return _.reduce(numRef, (accum, ref) => {
+    return ref.word === word && word.toLowerCase() ? ref.num : accum;
+  }, -1);
 };
 ```
 
-The usage spec for the library will be as follows.
+The usage specification for the library use will be as follows:
 
 ```javascript
+// ES2015 module import
 import * as webpackNumbers from 'webpack-numbers';
-
-...
-webpackNumbers.wordToNum('Two') // output is 2
-...
-
-// CommonJS modules
-
+// CommonJS module require
 var webpackNumbers = require('webpack-numbers');
-
-...
-webpackNumbers.numToWord(3); // output is Three
-...
+// ...
+// ES2015 and CommonJS module use
+webpackNumbers.wordToNum('Two');
+// ...
+// AMD module require
+require(['webpackNumbers'], function ( webpackNumbers) {
+  // ...
+  // AMD module use
+  webpackNumbers.wordToNum('Two');
+  // ...
+});
 ```
 
-```html
-// Or as a script tag
+The consumer also can use the library by loading it via a script tag:
 
+``` html
 <html>
 ...
 <script src="https://unpkg.com/webpack-numbers"></script>
 <script>
-    ...
-    /* webpackNumbers is available as a global variable */
-    webpackNumbers.wordToNum('Five') //output is 5
-    ...
+  // ...
+  // Global variable
+  webpackNumbers.wordToNum('Five')
+  // Property in the window object
+  window.webpackNumbers.wordToNum('Five')
+  // ...
 </script>
 </html>
 ```
 
-For full library configuration and code please refer to [webpack-library-example](https://github.com/kalcifer/webpack-library-example)
+Note that we can also configure it to expose the library in the following ways:
+
+- Property in the global object, for node.
+- Property in the `this` object.
+
+For full library configuration and code please refer to [webpack-library-example](https://github.com/kalcifer/webpack-library-example).
 
 
-## Configure webpack
+## Base Configuration
 
-Now the agenda is to bundle this library
+Now let's bundle this library in a way that will achieve the following goals:
 
-- Without bundling `lodash` but requiring it to be loaded by the consumer.
-- Name of the library is `webpack-numbers` and the variable is `webpackNumbers`.
-- Library can be imported as `import webpackNumbers from 'webpack-numbers'` or `require('webpack-numbers')`.
-- Library can be accessed through global variable `webpackNumbers` when included through `script` tag.
-- Library can be accessed inside Node.js.
+- Without bundling `lodash`, but requiring it to be loaded by the consumer using `externals`.
+- Setting the library name as `webpack-numbers`.
+- Exposing the library as a variable called `webpackNumbers`.
+- Being able to access the library inside Node.js.
 
+Also, the consumer should be able to access the library the following ways:
 
-### Add webpack
+- ES2015 module. i.e. `import webpackNumbers from 'webpack-numbers'`.
+- CommonJS module. i.e. `require('webpack-numbers')`.
+- Global variable when included through `script` tag.
 
-Add basic webpack configuration.
+We can start with this basic webpack configuration:
 
 __webpack.config.js__
 
@@ -91,131 +146,160 @@ __webpack.config.js__
 var path = require('path');
 
 module.exports = {
-    entry: './src/index.js',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'webpack-numbers.js'
-    }
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'webpack-numbers.js'
+  }
 };
-
 ```
 
-This adds basic configuration to bundle the library.
 
+## Externalize Lodash
 
-### Add `externals`
+Now, if you run `webpack`, you will find that a largish bundle is created. If you inspect the file, you'll see that lodash has been bundled along with your code. In this case, we'd prefer to treat `lodash` as a `peerDependency`. Meaning that the consumer should already have `lodash` installed. Hence you would want to give up control of this external library to the consumer of your library.
 
-Now, if you run `webpack`, you will find that a largish bundle file is created. If you inspect the file, you will find that lodash has been bundled along with your code.
-It would be unnecessary for your library to bundle a library like `lodash`. Hence you would want to give up control of this external library to the consumer of your library.
-
-This can be done using the `externals` configuration as
+This can be done using the `externals` configuration:
 
 __webpack.config.js__
 
-```javascript
-module.exports = {
-    ...
-    externals: {
-        "lodash": {
-            commonjs: "lodash",
-            commonjs2: "lodash",
-            amd: "lodash",
-            root: "_"
-        }
-    }
-    ...
-};
+``` diff
+  var path = require('path');
+
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'webpack-numbers.js'
+-   }
++   },
++   externals: {
++     lodash: {
++       commonjs: 'lodash',
++       commonjs2: 'lodash',
++       amd: 'lodash',
++       root: '_'
++     }
++   }
+  };
 ```
 
 This means that your library expects a dependency named `lodash` to be available in the consumer's environment.
 
-If you only plan on using your library as a dependency in another webpack bundle, you may specify externals as an array.
+T> Note that if you only plan on using your library as a dependency in another webpack bundle, you may specify `externals` as an array.
 
-```javascript
-module.exports = {
-    ...
-    externals: [
-      'react',
-      'react-dom'
-    ]
-    ...
-};
+
+## External Limitations
+
+For libraries that use several files from a dependency:
+
+``` js
+import A from 'dependency/one';
+import B from 'dependency/two';
+
+// ...
 ```
 
-Please note: for bundles that use several files from a package like this
+You won't be able to exclude them from bundle by specifying `library` in the externals. You'll either need to exclude them one by one or by using a regular expression.
 
-```javascript
-import A from 'library/A';
-import B from 'library/B';
-...
+``` js
+externals: [
+  'library/one',
+  'library/two',
+  // Everything that starts with "library/"
+  /^library\/.+$/
+]
 ```
 
-you wont be able to exclude them from bundle by specifying `library` in the externals.
 
-You'll either need to exclude them one by one or by using a regular expression.
+## Expose the Library
 
-```javascript
-module.exports = {
-    ...
-    externals: [
-      'library/A',
-      'library/B',
-      /^library\/.+$/ // everything that starts with "library/"
-    ]
-    ...
-};
-```
-
-### Add `libraryTarget`
-
-For widespread use of the library, we would like it to be compatible in different environments, i. e. CommonJS, AMD, Node.js and as a global variable.
-
-To make your library available for reuse, add `library` property in webpack configuration.
+For widespread use of the library, we would like it to be compatible in different environments, i.e. CommonJS, AMD, Node.js and as a global variable. To make your library available for consumption, add the `library` property inside `output`:
 
 __webpack.config.js__
 
-```javascript
-module.exports = {
-    ...
+``` diff
+  var path = require('path');
+
+  module.exports = {
+    entry: './src/index.js',
     output: {
-        ...
-        library: 'webpackNumbers'
+      path: path.resolve(__dirname, 'dist'),
+-     filename: 'webpack-numbers.js'
++     filename: 'webpack-numbers.js',
++     library: 'webpackNumbers'
+    },
+    externals: {
+      lodash: {
+        commonjs: 'lodash',
+        commonjs2: 'lodash',
+        amd: 'lodash',
+        root: '_'
+      }
     }
-    ...
-};
+  };
 ```
 
-This makes your library bundle to be available as a global variable when imported. To make the library compatible with other environments, add `libraryTarget` property to the config.
+This exposes your library bundle available as a global variable named `webpackNumbers` when imported. To make the library compatible with other environments, add `libraryTarget` property to the config. This will add the different options about how the library can be exposed.
 
 __webpack.config.js__
 
-```javascript
-module.exports = {
-    ...
+``` diff
+  var path = require('path');
+
+  module.exports = {
+    entry: './src/index.js',
     output: {
-        ...
-        library: 'webpackNumbers',
-        libraryTarget: 'umd'
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'webpack-numbers.js',
+-     library: 'webpackNumbers'
++     library: 'webpackNumbers',
++     libraryTarget: 'umd'
+    },
+    externals: {
+      lodash: {
+        commonjs: 'lodash',
+        commonjs2: 'lodash',
+        amd: 'lodash',
+        root: '_'
+      }
     }
-    ...
-};
+  };
 ```
+
+You can expose the library in the following ways:
+
+- Variable: as a global variable made available by a `script` tag (`libraryTarget:'var'`).
+- This: available through the `this` object (`libraryTarget:'this'`).
+- Window: available trough the `window` object, in the browser (`libraryTarget:'window'`).
+- UMD: available after AMD or CommonJS `require` (`libraryTarget:'umd'`).
 
 If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output). See [`output.libraryTarget`](/configuration/output#output-librarytarget) there for a detailed list of all available options.
+
+W> With webpack 3.5.5, using `libraryTarget: { root:'_' }` doesn't work properly (as stated in [issue 4824](https://github.com/webpack/webpack/issues/4824)). However, you can set `libraryTarget: { var: '_' }` to expect the library as a global variable.
 
 
 ### Final Steps
 
-[Tweak your production build using webpack](/guides/production).
-
-Add the path to your generated bundle as the package's main file in `package.json`
+Optimize your output for production by following the steps in the [production guide](/guides/production). Let's also add the path to your generated bundle as the package's `main` field in with our `package.json`
 
 __package.json__
 
-```javascript
+``` json
 {
-    "main": "dist/webpack-numbers.js",
-    "module": "src/index.js", // To add as standard module as per https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage
+  ...
+  "main": "dist/webpack-numbers.js",
+  ...
+}
+```
+
+Or, to add as standard module as per [this guide](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage):
+
+``` json
+{
+  ...
+  "module": "src/index.js",
+  ...
 }
 ```
 

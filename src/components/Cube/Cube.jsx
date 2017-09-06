@@ -1,20 +1,26 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class Cube extends React.Component {
-  constructor(props) {
-    super(props);
+  static propTypes = {
+    hover: PropTypes.bool,
+    theme: PropTypes.string,
+    depth: PropTypes.number,
+    repeatDelay: PropTypes.number
+  };
 
-    this.listeners = {
-      spin: this._spin.bind(this),
-      reset: this._reset.bind(this)
-    };
+  static defaultProps = {
+    hover: false,
+    theme: 'dark',
+    depth: 30,
+    repeatDelay: 1000,
+  };
 
-    this.state = {
-      x: 0,
-      y: 0,
-      z: 0,
-      iteration: 0,
-    };
+  state = {
+    x: 0,
+    y: 0,
+    z: 0,
+    iteration: 0,
   }
 
   render() {
@@ -71,8 +77,8 @@ export default class Cube extends React.Component {
     let { hover, continuous, repeatDelay } = this.props;
 
     if (hover) {
-      this.container.addEventListener('mouseenter', this.listeners.spin);
-      this.container.addEventListener('mouseleave', this.listeners.reset);
+      this.container.addEventListener('mouseenter', this._spin);
+      this.container.addEventListener('mouseleave', this._reset);
 
     } else if (continuous) {
       let degrees = 0;
@@ -101,8 +107,8 @@ export default class Cube extends React.Component {
     let { hover, continuous } = this.props;
 
     if (hover) {
-      this.container.removeEventListener('mouseenter', this.listeners.spin);
-      this.container.removeEventListener('mouseleave', this.listeners.reset);
+      this.container.removeEventListener('mouseenter', this._spin);
+      this.container.removeEventListener('mouseleave', this._reset);
 
     } else if (continuous) {
       cancelAnimationFrame(this._requestAnimation);
@@ -175,8 +181,8 @@ export default class Cube extends React.Component {
         } : {};
 
       return (
-        <section 
-          key={ i } 
+        <section
+          key={ i }
           className="cube__face"
           style={{
             transform: `${rotation} translateZ(${ this.props.depth / 2 }px)`,
@@ -202,7 +208,7 @@ export default class Cube extends React.Component {
    *
    * @param {object} e - Native event
    */
-  _spin(e) {
+  _spin = e => {
     let obj = {};
     let axis = this._getRandomAxis();
     let sign = Math.random() < 0.5 ? -1 : 1;
@@ -217,7 +223,7 @@ export default class Cube extends React.Component {
    *
    * @param {object} e - Native event
    */
-  _reset(e) {
+  _reset = e => {
     this.setState({
       x: 0,
       y: 0,
@@ -225,17 +231,3 @@ export default class Cube extends React.Component {
     });
   }
 }
-
-Cube.propTypes = {
-  hover: PropTypes.bool,
-  theme: PropTypes.string,
-  depth: PropTypes.number,
-  repeatDelay: PropTypes.number
-};
-
-Cube.defaultProps = {
-  hover: false,
-  theme: 'dark',
-  depth: 30,
-  repeatDelay: 1000,
-};
