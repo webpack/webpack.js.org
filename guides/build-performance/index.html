@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/a57d7736da6e32500b8f.css" rel="stylesheet">
+      <link href="/d13e49c1e95bfb30feb4.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -61,7 +61,7 @@
 <li>Only compile the part of the code you are currenly developing on.</li>
 </ul>
 <h3 class="header"><a class="anchor" href="#worker-pool" id="worker-pool"></a><span class="text">Worker Pool</span><a class="icon-link" href="#worker-pool"></a></h3>
-<p>The <code>thread-loader</code> can be used to offload expensive loaders to a worker pool. </p>
+<p>The <code>thread-loader</code> can be used to offload expensive loaders to a worker pool.</p>
 <blockquote class="warning"><div class="tip-content"> Don&apos;t use too many workers as there is a boot overhead for the Node.js runtime and the loader. Minimize the module transfers between worker and main process. IPC is expensive. </div></blockquote><h3 class="header"><a class="anchor" href="#persistent-cache" id="persistent-cache"></a><span class="text">Persistent cache</span><a class="icon-link" href="#persistent-cache"></a></h3>
 <p>Enable persistent caching with the <code>cache-loader</code>. Clear cache directory on <code>&quot;postinstall&quot;</code> in <code>package.json</code>.</p>
 <h3 class="header"><a class="anchor" href="#custom-plugins-loaders" id="custom-plugins-loaders"></a><span class="text">Custom plugins/loaders</span><a class="icon-link" href="#custom-plugins-loaders"></a></h3>
@@ -86,7 +86,7 @@
 <li>The <code>cheap-source-map</code> variants are more performant, if you can live with the slightly worse mapping quality.</li>
 <li>Use a <code>eval-source-map</code> variant for incremental builds.</li>
 </ul>
-<p>=&gt; In most cases <code>eval-cheap-module-source-map</code> is the best option.</p>
+<p>=&gt; In most cases <code>cheap-module-eval-source-map</code> is the best option.</p>
 <h3 class="header"><a class="anchor" href="#avoid-production-specific-tooling" id="avoid-production-specific-tooling"></a><span class="text">Avoid Production Specific Tooling</span><a class="icon-link" href="#avoid-production-specific-tooling"></a></h3>
 <p>Certain utilities, plugins and loader only make sense when building for production. For example, it usually doesn&apos;t make sense to minify and mangle your code with the <code>UglifyJsPlugin</code> while in development. These tools should typically be excluded in development:</p>
 <ul>
