@@ -13,96 +13,194 @@ related:
     url: https://github.com/babel/babel-preset-env#usebuiltins
 ---
 
-`webpack` as a module bundler can understand modules written as ES2015 modules, CommonJS or AMD. But many times, while using third party libraries, we see that they expect dependencies which are global, AKA `$` for `jquery`. They might also be creating global variables which need to be exported. Here we will see different ways to help webpack understand these __broken modules__.
+The `webpack` compiler can understand modules written as ES2015 modules, CommonJS or AMD. However, some third party libraries may expect global dependencies (e.g. `$` for `jQuery`). The libraries might also create globals which need to be exported. These "broken modules" are one instance where _shimming_ comes into play.
+
+Another instance where _shimming_ can be useful is when you want to [polyfill](https://en.wikipedia.org/wiki/Polyfill) browser functionality to support more users. In this case, you may only want to deliver those polyfills to the browsers that need patch (i.e. load them on demand).
+
+The following article will walk through both of these use cases.
+
+T> For simplicity, this guide stems from the examples in [Getting Started](/guides/getting-started). Please make sure you are familiar with the setup there before moving on.
+
+W> __We don't recommend using globals for everything!__ The whole concept behind webpack is to allow more modular front-end development. This means writing isolated modules that are well contained and do not rely on hidden dependencies (e.g. globals). Please only use these features as a last resort.
 
 
-## Prefer unminified CommonJS/AMD files over bundled `dist` versions.
+## Shimming Globals
 
-Most modules link the `dist` version in the `main` field of their `package.json`. While this is useful for most developers, for webpack it is better to alias the src version because this way webpack is able to optimize dependencies better. However in most cases `dist` works fine as well.
+Let's start with the first use case of shimming global variables. Before we do anything let's take another look at our project:
 
-``` javascript
-// webpack.config.js
+__project__
 
-module.exports = {
-    ...
-    resolve: {
-        alias: {
-            jquery: "jquery/src/jquery"
-        }
-    }
-};
+``` diff
+webpack-demo
+|- package.json
+|- webpack.config.js
+|- /dist
+|- /src
+  |- index.js
+|- /node_modules
 ```
 
+Remember that `lodash` package we were using? For demonstration purposes, let's say we wanted to instead provide this as a global throughout our application. To do this, we can use the `ProvidePlugin`.
 
-## `ProvidePlugin`
+The [`ProvidePlugin`](/plugins/provide-plugin) makes a package available as a variable in every module compiled through webpack. If webpack sees that variable used, it will include the given package in the final bundle. Let's go ahead by removing the `import` statement for `lodash` and instead providing it via the plugin:
 
-The [`ProvidePlugin`](/plugins/provide-plugin) makes a module available as a variable in every other module required by `webpack`. The module is required only if you use the variable.
-Most legacy modules rely on the presence of specific globals, like jQuery plugins do on `$` or `jQuery`. In this scenario, you can configure webpack to prepend `var $ = require(“jquery”)` every time it encounters the global `$` identifier.
+__src/index.js__
 
-```javascript
-module.exports = {
-  plugins: [
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery'
-    })
-  ]
-};
+``` diff
+- import _ from 'lodash';
+-
+  function component() {
+    var element = document.createElement('div');
+
+-   // Lodash, now imported by this script
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+
+    return element;
+  }
+
+  document.body.appendChild(component());
 ```
-
-This plugin is also capable of providing only a certain export of a module by configuring it with an array path using this format: `[module, child, ...children?]`.
-
-The following configuration will correctly import function `__assign` from TypeScript's `tslib` package, and provide it wherever it's invoked.
-
-```javascript
-module.exports = {
-  plugins: [
-    new webpack.ProvidePlugin({
-      __assign: ['tslib', '__assign'],
-      __extends: ['tslib', '__extends'],
-    })
-  ]
-};
-```
-
-
-## `imports-loader`
-
-[`imports-loader`](/loaders/imports-loader/) inserts necessary globals into the required legacy module.
-For example, Some legacy modules rely on `this` being the `window` object. This becomes a problem when the module is executed in a CommonJS context where `this` equals `module.exports`. In this case you can override `this` using the `imports-loader`.
 
 __webpack.config.js__
 
-```javascript
-module.exports = {
-  module: {
-    rules: [{
-      test: require.resolve("some-module"),
-      use: 'imports-loader?this=>window'
-    }]
-  }
-};
+``` diff
+  const path = require('path');
+
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+-   }
++   },
++   plugins: [
++     new webpack.ProvidePlugin({
++       lodash: 'lodash'
++     })
++   ]
+  };
 ```
 
-There are modules that support different [module styles](/concepts/modules), like AMD, CommonJS and legacy. However, most of the time they first check for `define` and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting `define = false`:
+What we've essentially done here is tell webpack...
+
+> If you encounter at least one instance of the variable `lodash`, include the `lodash` package and provide it to the modules that need it.
+
+If we run a build, we should still see the same output:
+
+``` bash
+TODO: Include output
+```
+
+We can also use the `ProvidePlugin` to expose a single export of a module by configuring it with an "array path" (e.g. `[module, child, ...children?]`). So let's we only wanted to provide the `join` method from `lodash` wherever it's invoked:
+
+__src/index.js__
+
+``` diff
+  function component() {
+    var element = document.createElement('div');
+
+-   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
++   element.innerHTML = join(['Hello', 'webpack'], ' ');
+
+    return element;
+  }
+
+  document.body.appendChild(component());
+```
 
 __webpack.config.js__
 
-```javascript
-module.exports = {
-  module: {
-    rules: [{
-      test: require.resolve("some-module"),
-      use: 'imports-loader?define=>false'
-    }]
+``` diff
+  const path = require('path');
+
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    },
+    plugins: [
+      new webpack.ProvidePlugin({
+-       lodash: 'lodash'
++       join: ['lodash', 'join']
+      })
+    ]
+  };
+```
+
+This would go nicely with [Tree Shaking](/guides/tree-shaking) as the rest of the `lodash` library should get dropped.
+
+
+## Granular Shimming
+
+Some legacy modules rely on `this` being the `window` object. Let's update our `index.js` so this is the case:
+
+``` diff
+  function component() {
+    var element = document.createElement('div');
+
+    element.innerHTML = join(['Hello', 'webpack'], ' ');
++
++   // Assume we are in the context of `window`
++   this.alert('Hmmm, this probably isn\'t a great idea...')
+
+    return element;
   }
-};
+
+  document.body.appendChild(component());
+```
+
+This becomes a problem when the module is executed in a CommonJS context where `this` is equal to `module.exports`. In this case you can override `this` using the [`imports-loader`](/loaders/imports-loader/):
+
+__webpack.config.js__
+
+``` diff
+  const path = require('path');
+
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    },
++   module: {
++     rules: [{
++       test: require.resolve('index.js'),
++       use: 'imports-loader?this=>window'
++     }]
++   },
+    plugins: [
+      new webpack.ProvidePlugin({
+        join: ['lodash', 'join']
+      })
+    ]
+  };
 ```
 
 
-## `exports-loader`
+## Global Exports
 
-Let's say a library creates a global variable that it expects its consumers to use; In this case, we can use [`exports-loader`](/loaders/exports-loader/), to export that global variable in CommonJS format. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
+Let's say a library creates a global variable that it expects its consumers to use. We can add a small module to our setup to demonstrate this:
+
+__project__
+
+``` diff
+  webpack-demo
+  |- package.json
+  |- webpack.config.js
+  |- /dist
+  |- /src
+    |- index.js
++   |- bad-practice.js
+  |- /node_modules
+```
+
+
+
+
+
+
+In this case, we can use [`exports-loader`](/loaders/exports-loader/), to export that global variable in CommonJS format. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
 
 __webpack.config.js__
 
@@ -164,6 +262,14 @@ module.exports = {
 ## Node Built-Ins
 
 Node built-ins, like `process`, can be polyfilled right directly from your configuration file without the use of any special loaders or plugins. See the [node configuration page](/configuration/node) for more information and examples.
+
+
+
+
+
+
+
+
 
 
 ## Loading polyfills on demand
