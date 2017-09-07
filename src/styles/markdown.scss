@@ -120,6 +120,8 @@
   }
 
   .table {
+    margin: 1em 0;
+
     @include break {
       overflow-x: auto;
       overflow-y: hidden;
