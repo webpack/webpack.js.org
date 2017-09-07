@@ -164,10 +164,12 @@ __webpack.config.js__
       path: path.resolve(__dirname, 'dist')
     },
 +   module: {
-+     rules: [{
-+       test: require.resolve('index.js'),
-+       use: 'imports-loader?this=>window'
-+     }]
++     rules: [
++       {
++         test: require.resolve('index.js'),
++         use: 'imports-loader?this=>window'
++       }
++     ]
 +   },
     plugins: [
       new webpack.ProvidePlugin({
@@ -191,32 +193,70 @@ __project__
   |- /dist
   |- /src
     |- index.js
-+   |- bad-practice.js
++   |- globals.js
   |- /node_modules
 ```
 
+__src/globals.js__
 
+``` js
+var file = 'blah.txt';
+var helpers = {
+  test: function() { console.log('test something'); },
+  parse: function() { console.log('parse something'); }
+}
+```
 
-
-
-
-In this case, we can use [`exports-loader`](/loaders/exports-loader/), to export that global variable in CommonJS format. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
+Now, while you'd likely never do this in your own source code, you may encounter a dated library you'd like to use that contains similar code to what's shown above. In this case, we can use [`exports-loader`](/loaders/exports-loader/), to export that global variable as a normal module export. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
 
 __webpack.config.js__
 
-```javascript
-module.exports = {
-  module: {
-    rules: [{
-      test: require.resolve("some-module"),
-      use: 'exports-loader?file,parse=helpers.parse'
-      // adds below code the file's source:
-      //  exports["file"] = file;
-      //  exports["parse"] = helpers.parse;
-    }]
-  }
-};
+``` diff
+  const path = require('path');
+
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    },
+    module: {
+      rules: [
+        {
+          test: require.resolve('index.js'),
+          use: 'imports-loader?this=>window'
+-       }
++       },
++       {
++         test: require.resolve('globals.js'),
++         use: 'exports-loader?file,parse=helpers.parse'
++       }
+      ]
+    },
+    plugins: [
+      new webpack.ProvidePlugin({
+        join: ['lodash', 'join']
+      })
+    ]
+  };
 ```
+
+Now from within our entry script (i.e. `src/index.js`), we could `import { file, parse } from './globals.js';` and all should work smoothly.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## `script-loader`
@@ -259,9 +299,26 @@ module.exports = {
 ```
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Node Built-Ins
 
 Node built-ins, like `process`, can be polyfilled right directly from your configuration file without the use of any special loaders or plugins. See the [node configuration page](/configuration/node) for more information and examples.
+
+
+
+
 
 
 
