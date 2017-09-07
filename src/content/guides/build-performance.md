@@ -123,7 +123,7 @@ Be aware of the performance differences of the different `devtool` settings.
 - The `cheap-source-map` variants are more performant, if you can live with the slightly worse mapping quality.
 - Use a `eval-source-map` variant for incremental builds.
 
-=> In most cases `eval-cheap-module-source-map` is the best option.
+=> In most cases `cheap-module-eval-source-map` is the best option.
 
 
 ### Avoid Production Specific Tooling
