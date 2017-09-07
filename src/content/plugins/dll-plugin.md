@@ -90,7 +90,7 @@ new webpack.DllReferencePlugin({
   manifest: require("./manifest.json"),
   name: "./my-dll.js",
   scope: "xyz",
-  sourceType: "commonsjs2"
+  sourceType: "commonjs2"
 })
 ```
 
