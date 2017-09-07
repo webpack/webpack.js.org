@@ -130,30 +130,30 @@ webpack --env.platform=web  # sets env.platform == "web"
 
 The `--env` argument accepts various syntaxes:
 
-| Invocation                    | Resulting environment       |
-|-------------------------------|-----------------------------|
-| webpack --env prod            | `"prod"`                    |
-| webpack --env.prod            | `{ prod: true }`            |
-| webpack --env.prod=1          | `{ prod: 1 }`               |
-| webpack --env.prod=foo        | `{ prod: "foo" }`           |
-| webpack --env.prod --env.min  | `{ prod: true, min: true }` |
-| webpack --env.prod --env min  | `[{ prod: true }, "min"]`   |
+Invocation                      | Resulting environment
+------------------------------- | ---------------------------
+`webpack --env prod`            | `"prod"`
+`webpack --env.prod`            | `{ prod: true }`
+`webpack --env.prod=1`          | `{ prod: 1 }`
+`webpack --env.prod=foo`        | `{ prod: "foo" }`
+`webpack --env.prod --env.min`  | `{ prod: true, min: true }`
+`webpack --env.prod --env min`  | `[{ prod: true }, "min"]`
 
 ### Output Options
 
 This set of options allows you to manipulate certain [output](/configuration/output) parameters of your build.
 
-| Parameter                    | Explanation                                                     | Input type | Default value                                         |
-|------------------------------|-----------------------------------------------------------------|------------|-------------------------------------------------------|
-| --output-chunk-filename      | The output filename for additional chunks                       | string     | filename with [id] instead of [name] or [id] prefixed |
-| --output-filename            | The output filename of the bundle                               | string     | [name].js                                             |
-| --output-jsonp-function      | The name of the JSONP function used for chunk loading           | string     | webpackJsonp                                          |
-| --output-library             | Expose the exports of the entry point as library                | string     |                                                       |
-| --output-library-target      | The type for exposing the exports of the entry,point as library | string     | var                                                   |
-| --output-path                | The output path for compilation assets                          | string     | Current directory                                     |
-| --output-pathinfo            | Include a comment with the request for every dependency         | boolean    | false                                                 |
-| --output-public-path         | The public path for the assets                                  | string     | /                                                     |
-| --output-source-map-filename | The output filename for the SourceMap                           | string     | [name].map or [outputFilename].map                    |
+Parameter                 | Explanation                                 | Input type | Default
+------------------------- | ------------------------------------------- | ---------- | ------------------
+`--output-chunk-filename` | The output filename for additional chunks   | string     | filename with [id] instead of [name] or [id] prefixed
+`--output-filename`       | The output filename of the bundle           | string     | [name].js
+`--output-jsonp-function` | The name of the JSONP function used for chunk loading | string | webpackJsonp
+`--output-library`        | Expose the exports of the entry point as library | string |
+`--output-library-target` | The type for exposing the exports of the entry,point as library | string | var
+`--output-path`           | The output path for compilation assets      | string     | Current directory
+`--output-pathinfo`       | Include a comment with the request for every dependency | boolean | false
+`--output-public-path`    | The public path for the assets              | string     | /
+`--output-source-map-filename` | The output filename for the SourceMap  | string     | [name].map or [outputFilename].map
 
 
 #### Example Usage
@@ -189,104 +189,104 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 
 This set of options allows you to better debug the application containing assets compiled with webpack
 
-| Parameter  | Explanation                                      | Input type | Default value |
-|------------|--------------------------------------------------|------------|---------------|
-| --debug    | Switch loaders to debug mode                     | boolean    | false         |
-| --devtool  | Define [source map type](/configuration/devtool/) for the bundled resources | string     | -             |
-| --progress | Print compilation progress in percentage         | boolean    | false         |
+Parameter    | Explanation                                      | Input type | Default value
+------------ | ------------------------------------------------ | ---------- | -------------
+`--debug`    | Switch loaders to debug mode                     | boolean    | false
+`--devtool`  | Define [source map type](/configuration/devtool/) for the bundled resources | string | -
+`--progress` | Print compilation progress in percentage         | boolean    | false
 
 
 ### Module Options
 
 These options allow you to bind [modules](/configuration/module/) as allowed by webpack
 
-| Parameter          | Explanation                        | Usage                       |
-|--------------------|------------------------------------|-----------------------------|
-| --module-bind      | Bind an extension to a loader      | --module-bind js=babel-loader |
-| --module-bind-post | Bind an extension to a post loader |                             |
-| --module-bind-pre  | Bind an extension to a pre loader  |                             |
+Parameter            | Explanation                        | Usage
+-------------------- | ---------------------------------- | ----------------
+`--module-bind`      | Bind an extension to a loader      | `--module-bind js=babel-loader`
+`--module-bind-post` | Bind an extension to a post loader |
+`--module-bind-pre`  | Bind an extension to a pre loader  |
 
 
 ### Watch Options
 
 These options makes the build [watch](/configuration/watch/) for changes in files of the dependency graph and perform the build again.
 
-| Parameter                 | Explanation                                             |
-|---------------------------|---------------------------------------------------------|
-| --watch, -w               | Watch the filesystem for changes                        |
-| --save, -s                | Recompiles on save regardless of changes                |
-| --watch-aggregate-timeout | Timeout for gathering changes while watching            |
-| --watch-poll              | The polling interval for watching (also enable polling) |
-| --watch-stdin, --stdin    | Exit the process when stdin is closed                   |
+Parameter                 | Explanation
+------------------------- | ----------------------
+`--watch`, `-w`           | Watch the filesystem for changes
+`--save`, `-s`            | Recompiles on save regardless of changes
+`--watch-aggregate-timeout` | Timeout for gathering changes while watching
+`--watch-poll`            | The polling interval for watching (also enable polling)
+`--watch-stdin`, `--stdin` | Exit the process when stdin is closed
 
 
 ### Optimize Options
 
 These options allow you to manipulate optimisations for a production build using webpack
 
-| Parameter                 | Explanation                                            | Plugin used                          |
-|---------------------------|--------------------------------------------------------|--------------------------------------|
-| --optimize-max-chunks     | Try to keep the chunk count below a limit              | [LimitChunkCountPlugin](/plugins/limit-chunk-count-plugin) |
-| --optimize-min-chunk-size | Try to keep the chunk size above a limit               | [MinChunkSizePlugin](/plugins/min-chunk-size-plugin) |
-| --optimize-minimize       | Minimize javascript and switches loaders to minimizing | [UglifyJsPlugin](/plugins/uglifyjs-webpack-plugin/) & [LoaderOptionsPlugin](/plugins/loader-options-plugin/) |
+Parameter                   | Explanation                                            | Plugin Used
+--------------------------- | -------------------------------------------------------|----------------------
+`--optimize-max-chunks`     | Try to keep the chunk count below a limit              | [LimitChunkCountPlugin](/plugins/limit-chunk-count-plugin)
+`--optimize-min-chunk-size` | Try to keep the chunk size above a limit               | [MinChunkSizePlugin](/plugins/min-chunk-size-plugin)
+`--optimize-minimize`       | Minimize javascript and switches loaders to minimizing | [UglifyJsPlugin](/plugins/uglifyjs-webpack-plugin/) & [LoaderOptionsPlugin](/plugins/loader-options-plugin/)
 
 
 ### Resolve Options
 
 These allow you to configure the webpack [resolver](/configuration/resolve/) with aliases and extensions.
 
-| Parameter              | Explanation                                             | Example                                     |
-|------------------------|---------------------------------------------------------|---------------------------------------------|
-| --resolve-alias        | Setup a module alias for resolving                      | --resolve-alias jquery-plugin=jquery.plugin |
-| --resolve-extensions   | Setup extensions that should be used to resolve,modules | --resolve-extensions .es6 .js .ts           |
-| --resolve-loader-alias | Minimize javascript and switches loaders to minimizing  |                                             |
+Parameter              | Explanation                                             | Example
+---------------------- | ------------------------------------------------------- | -------------
+--resolve-alias        | Setup a module alias for resolving                      | --resolve-alias jquery-plugin=jquery.plugin
+--resolve-extensions   | Setup extensions that should be used to resolve,modules | --resolve-extensions .es6 .js .ts
+--resolve-loader-alias | Minimize javascript and switches loaders to minimizing  |
 
 
 ### Stats Options
 
 These options allow webpack to display various [stats](/configuration/stats/) and style them differently in the console output.
 
-| Parameter                      | Explanation                                                        | Type    |
-|--------------------------------|--------------------------------------------------------------------|---------|
-| --color, --colors              | Enables/Disables colors on the console [default: (supports-color)] | boolean |
-| --display                      | Select [display preset](/configuration/stats) (verbose, detailed, normal, minimal, errors-only, none; since webpack 3.0.0) | string |
-| --display-cached               | Display also cached modules in the output                          | boolean |
-| --display-cached-assets        | Display also cached assets in the output                           | boolean |
-| --display-chunks               | Display chunks in the output                                       | boolean |
-| --display-depth                | Display distance from entry point for each module                  | boolean |
-| --display-entrypoints          | Display entry points in the output                                 | boolean |
-| --display-error-details        | Display details about errors                                       | boolean |
-| --display-exclude              | Exclude modules in the output                                      | boolean |
-| --display-max-modules          | Sets the maximum number of visible modules in output               | number  |
-| --display-modules              | Display even excluded modules in the output                        | boolean |
-| --display-optimization-bailout | Scope hoisting fallback trigger (since webpack 3.0.0)              | boolean |
-| --display-origins              | Display origins of chunks in the output                            | boolean |
-| --display-provided-exports     | Display information about exports provided from modules            | boolean |
-| --display-reasons              | Display reasons about module inclusion in the output               | boolean |
-| --display-used-exports         | Display information about used exports in modules (Tree Shaking)   | boolean |
-| --hide-modules                 | Hides info about modules                                           | boolean |
-| --sort-assets-by               | Sorts the assets list by property in asset                         | string  |
-| --sort-chunks-by               | Sorts the chunks list by property in chunk                         | string  |
-| --sort-modules-by              | Sorts the modules list by property in module                       | string  |
-| --verbose                      | Show more details                                                  | boolean |
+Parameter                        | Explanation                                                        | Type
+-------------------------------- | ------------------------------------------------------------------ | -------
+`--color`, `--colors`            | Enables/Disables colors on the console [default: (supports-color)] | boolean
+`--display`                      | Select [display preset](/configuration/stats) (verbose, detailed, normal, minimal, errors-only, none; since webpack 3.0.0) | string
+`--display-cached`               | Display also cached modules in the output                          | boolean
+`--display-cached-assets`        | Display also cached assets in the output                           | boolean
+`--display-chunks`               | Display chunks in the output                                       | boolean
+`--display-depth`                | Display distance from entry point for each module                  | boolean
+`--display-entrypoints`          | Display entry points in the output                                 | boolean
+`--display-error-details`        | Display details about errors                                       | boolean
+`--display-exclude`              | Exclude modules in the output                                      | boolean
+`--display-max-modules`          | Sets the maximum number of visible modules in output               | number
+`--display-modules`              | Display even excluded modules in the output                        | boolean
+`--display-optimization-bailout` | Scope hoisting fallback trigger (since webpack 3.0.0)              | boolean
+`--display-origins`              | Display origins of chunks in the output                            | boolean
+`--display-provided-exports`     | Display information about exports provided from modules            | boolean
+`--display-reasons`              | Display reasons about module inclusion in the output               | boolean
+`--display-used-exports`         | Display information about used exports in modules (Tree Shaking)   | boolean
+`--hide-modules`                 | Hides info about modules                                           | boolean
+`--sort-assets-by`               | Sorts the assets list by property in asset                         | string
+`--sort-chunks-by`               | Sorts the chunks list by property in chunk                         | string
+`--sort-modules-by`              | Sorts the modules list by property in module                       | string
+`--verbose`                      | Show more details                                                  | boolean
 
 
 ### Advanced Options
 
-| Parameter             | Explanation                                                      | Usage                                       |
-|-----------------------|------------------------------------------------------------------|---------------------------------------------|
-| --bail                | Abort the compilation on first error                             |                                             |
-| --cache               | Enable in memory caching [Enabled by default for watch]          | --cache=false                               |
-| --define              | Define any free var in the bundle, see [shimming](/guides/shimming) | --define process.env.NODE_ENV='development' |
-| --hot                 | Enables [Hot Module Replacement](/concepts/hot-module-replacement) [Uses HotModuleReplacementPlugin] | --hot=true                                  |
-| --labeled-modules     | Enables labeled modules [Uses LabeledModulesPlugin]              |                                             |
-| --plugin              | Load this [plugin](/configuration/plugins/)                      |                                             |
-| --prefetch            | Prefetch the particular file                                     | --prefetch=./files.js                       |
-| --provide             | Provide these modules as free vars in all modules, see [shimming](/guides/shimming) | --provide jQuery=jquery                     |
-| --records-input-path  | Path to the records file (reading)                               |                                             |
-| --records-output-path | Path to the records file (writing)                               |                                             |
-| --records-path        | Path to the records file                                         |                                             |
-| --target              | The [targeted](/configuration/target/) execution environment     | --target='node'                             |
+Parameter         | Explanation                              | Usage
+----------------- | ---------------------------------------- | -----
+`--bail`          | Abort the compilation on first error     |
+`--cache`         | Enable in memory caching [Enabled by default for watch] | `--cache=false`
+`--define`        | Define any free variable, see [shimming](/guides/shimming) | `--define process.env.NODE_ENV='development'`
+`--hot`           | Enables [Hot Module Replacement](/concepts/hot-module-replacement) | `--hot=true`
+`--labeled-modules` | Enables labeled modules [Uses LabeledModulesPlugin] |
+`--plugin`        | Load this [plugin](/configuration/plugins/) |
+`--prefetch`      | Prefetch the particular file             | `--prefetch=./files.js`
+`--provide`       | Provide these modules as globals, see [shimming](/guides/shimming) | `--provide jQuery=jquery`
+`--records-input-path` | Path to the records file (reading)  |
+`--records-output-path` | Path to the records file (writing) |
+`--records-path`  | Path to the records file                 |
+`--target`        | The [targeted](/configuration/target/) execution environment | `--target='node'`
 
 ### Shortcuts
 

@@ -77,7 +77,7 @@ Decrease the total size of the compilation to increase build performance. Try to
 
 ### Worker Pool
 
-The `thread-loader` can be used to offload expensive loaders to a worker pool. 
+The `thread-loader` can be used to offload expensive loaders to a worker pool.
 
 W> Don't use too many workers as there is a boot overhead for the Node.js runtime and the loader. Minimize the module transfers between worker and main process. IPC is expensive.
 
