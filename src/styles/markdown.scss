@@ -3,8 +3,7 @@
 @import 'functions';
 @import 'prism-theme';
 
-.page__content,
-.splash__section {
+.page__content {
   line-height:1.5em;
 
   h1 { font-size: getFontSize(4); }
@@ -240,7 +239,7 @@
     }
   }
 
-  img {
+  img:not([class*="support__"]) {
     max-width: 100%;
     height: auto;
   }
