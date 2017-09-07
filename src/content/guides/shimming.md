@@ -244,112 +244,41 @@ __webpack.config.js__
 Now from within our entry script (i.e. `src/index.js`), we could `import { file, parse } from './globals.js';` and all should work smoothly.
 
 
+## Loading Polyfills
 
+Almost everything we've discussed thus far has been in relation to handling legacy packages. Let's move on to our second topic: __polyfills__.
 
+There's a lot of ways to load polyfills. For example, to include the [`babel-polyfill`]() we might simply:
 
-
-
-
-
-
-
-
-
-
-
-
-
-## `script-loader`
-
-The [`script-loader`](/loaders/script-loader/) evaluates code in the global context, just like you would add the code into a `script` tag. In this mode, every normal library should work. `require`, `module`, etc. are undefined.
-
-W> The file is added as string to the bundle. It is not minimized by `webpack`, so use a minimized version. There is also no dev tool support for libraries added by this loader.
-
-Assuming you have a `legacy.js` file containing …
-
-```javascript
-GLOBAL_CONFIG = {};
+``` bash
+npm i --save babel-polyfill
 ```
 
-… using the `script-loader` …
+and `import` it so as to include it in our main bundle:
 
-```javascript
-require('script-loader!legacy.js');
-```
+__src/index.js__
 
-… basically yields:
+``` diff
++ import 'babel-polyfill';
++
+  function component() {
+    var element = document.createElement('div');
 
-```javascript
-eval("GLOBAL_CONFIG = {};");
-```
+    element.innerHTML = join(['Hello', 'webpack'], ' ');
 
-
-## `noParse` option
-
-When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module as [`noParse`](/configuration/module/#module-noparse). Then `webpack` will just include the module without parsing it, which can be used to improve the build time.
-
-W> Any feature requiring the AST, like the `ProvidePlugin`, will not work.
-
-```javascript
-module.exports = {
-  module: {
-    noParse: /jquery|backbone/
+    return element;
   }
-};
+
+  document.body.appendChild(component());
 ```
 
+T> Note that we aren't binding the `import` to a variable. This is because polyfills simply run on there own, prior to the rest of the code base, allowing us to then assume certain native functionality exists.
 
+Now while this is one approach, __including polyfills in the main bundle is not recommended__ because this penalizes modern browsers users by making them download a bigger file with unneeded scripts.
 
+__webpack.config.js__
 
-
-
-
-
-
-
-
-
-
-
-
-## Node Built-Ins
-
-Node built-ins, like `process`, can be polyfilled right directly from your configuration file without the use of any special loaders or plugins. See the [node configuration page](/configuration/node) for more information and examples.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Loading polyfills on demand
-
-It's common in web projects to include polyfills in the main bundle. This is not recommended because we are penalizing modern browsers users by making them download a bigger file with unneeded scripts.
-
-The simplest way to mitigate this is by adding a separate entry point in your webpack config file including the polyfills your project needs.
-
-```javascript
-// webpack.config.js
-module.exports = {
-  entry: {
-    polyfills: [
-      'babel-polyfill',
-      'whatwg-fetch'
-    ],
-    main: './src/index.js'
-  }
-  // ... rest of your webpack config
-};
-```
-
-An alternative is to create a new entry file and manually import these packages.
+...
 
 ```javascript
 // src/polyfills.js
@@ -406,3 +335,12 @@ import "core-js/modules/web.timers";
 import "core-js/modules/web.immediate";
 import "core-js/modules/web.dom.iterable";
 ```
+
+
+## Other Utilities
+
+Briefly mention these...
+
+- `script-loader`
+- `noParse`
+- `node` built-ins
