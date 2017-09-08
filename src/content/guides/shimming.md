@@ -276,57 +276,96 @@ T> Note that we aren't binding the `import` to a variable. This is because polyf
 
 Now while this is one approach, __including polyfills in the main bundle is not recommended__ because this penalizes modern browsers users by making them download a bigger file with unneeded scripts.
 
-__webpack.config.js__
+Let's move our `import` to a new file, add the [`whatwg-fetch`]() polyfill and a script that fetches some data:
 
-...
+``` bash
+npm i --save whatwg-fetch
+```
+
+__src/index.js__
+
+``` diff
+- import 'babel-polyfill';
+-
+  function component() {
+    var element = document.createElement('div');
+
+    element.innerHTML = join(['Hello', 'webpack'], ' ');
+
+    return element;
+  }
+
+  document.body.appendChild(component());
+```
+
+__project__
+
+``` diff
+  webpack-demo
+  |- package.json
+  |- webpack.config.js
+  |- /dist
+  |- /src
+    |- index.js
+    |- globals.js
++   |- polyfills.js
++   |- fetch.js
+  |- /node_modules
+```
+
+__src/polyfills.js__
 
 ```javascript
-// src/polyfills.js
 import 'babel-polyfill';
 import 'whatwg-fetch';
 ```
 
-```javascript
-// webpack.config.js
-module.exports = {
-  entry: {
-    polyfills: './src/polyfills.js',
-    main: './src/index.js'
-  }
-  // rest of your webpack config
-};
-```
+With that in place, we can add the logic to conditionally load `src/polyfills.js` depending on whether or not. How you make this decision depends on the technologies and browsers you need to support. We'll just do some simple testing before we run our fetching script:
 
-In your html file you need to conditionally load the `polyfills.js` file before your bundle. How you make this decision depends on the technologies and browsers you need to support.
+__src/index.js__
 
-```html
-<script>
-  var modernBrowser = (
-    'fetch' in window &&
-    'assign' in Object
-  );
+``` diff
+  function component() {
+    var element = document.createElement('div');
 
-  var scripts = [ '/main.js' ];
+    element.innerHTML = join(['Hello', 'webpack'], ' ');
 
-  if (!modernBrowser) {
-    scripts.unshift('/polyfills.js');
+    return element;
   }
 
-  scripts.map(function(src) {
-    var scriptElement = document.createElement('script');
-    scriptElement.async = false;
-    scriptElement.src = src;
-    document.head.appendChild(scriptElement);
-  });
-</script>
+  document.body.appendChild(component());
++
++ let modernBrowser = (
++   'fetch' in window &&
++   'assign' in Object
++ );
++
++ if ( !modernBrowser ) {
++   import('./polyfills.js', /* webpackChunkName: "polyfills" */).then(
++     import('./fetch.js' /* webpackChunkName: "fetch" */)
++   )
++
++ } else import('./fetch.js' /* webpackChunkName: "fetch" */)
 ```
 
-T> Any script added dynamically like in the example above will run as soon as it's parsed, but we need our polyfill to run before our bundle. This is why we are setting `async` to `false` for each script.
+__src/fetch.js__
+
+``` js
+fetch('https://jsonplaceholder.typicode.com/users')
+  .then(response => response.json())
+  .then(json => {
+    console.log('We retrieved some data! AND we're confident it will work on a variety of browser distributions.')
+    console.log(json)
+  })
+  .catch(error => console.error('Something went wrong when fetching this data: ', error))
+```
+
+Now, if we run our build a few more bundles should pop up and everything should still run smoothly in the browser. Note that this set up could likely be improved upon but it should give you a good idea of how you can provide polyfills only to the users that need them.
 
 
-### Smaller babel polyfill
+## Further Optimizations
 
-`babel-preset-env` uses [browserslist](https://github.com/ai/browserslist) to transpile only what is not supported in your browsers matrix. This preset comes with the `useBuiltIns` option _(false by default)_ which converts your global `babel-polyfill` import to a more granular feature by feature import pattern like:
+The `babel-preset-env` uses [browserslist](https://github.com/ai/browserslist) to transpile only what is not supported in your browsers matrix. This preset comes with the `useBuiltIns` option _(false by default)_ which converts your global `babel-polyfill` import to a more granular feature by feature import pattern like:
 
 ```javascript
 import "core-js/modules/es7.string.pad-start";
@@ -335,6 +374,8 @@ import "core-js/modules/web.timers";
 import "core-js/modules/web.immediate";
 import "core-js/modules/web.dom.iterable";
 ```
+
+See [the repository](https://github.com/babel/babel-preset-env) for more information.
 
 
 ## Other Utilities
