@@ -155,7 +155,7 @@ If you decide to try another, just make sure your new choice also drops dead cod
 
 ## Source Mapping
 
-We encourage you to have source maps enabled in production, as they are useful for debugging as well as running benchmark tests. That said, you should choose one with a fairly quick build speed that's recommended for production use (see [`devtool`](/configuration/devtool)). For this guide, we'll use the `cheap-module-source-map` option in _production_ as opposed to the `inline-source-map` we used in _development_:
+We encourage you to have source maps enabled in production, as they are useful for debugging as well as running benchmark tests. That said, you should choose one with a fairly quick build speed that's recommended for production use (see [`devtool`](/configuration/devtool)). For this guide, we'll use the `source-map` option in _production_ as opposed to the `inline-source-map` we used in _development_:
 
 __webpack.prod.js__
 
@@ -165,9 +165,12 @@ __webpack.prod.js__
   const common = require('./webpack.common.js');
 
   module.exports = merge(common, {
-+   devtool: 'cheap-module-source-map',
++   devtool: 'source-map',
     plugins: [
-      new UglifyJSPlugin()
+-     new UglifyJSPlugin()
++     new UglifyJSPlugin({
++       sourceMap: true
++     })
     ]
   })
 ```
@@ -180,7 +183,7 @@ Many libraries will key off the `process.env.NODE_ENV` variable to determine wha
 __webpack.prod.js__
 
 ``` diff
-  const webpack = require('webpack');
++ const webpack = require('webpack');
   const merge = require('webpack-merge');
   const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
   const common = require('./webpack.common.js');

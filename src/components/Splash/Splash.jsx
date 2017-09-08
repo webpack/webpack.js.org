@@ -14,7 +14,7 @@ const Splash = () => (
       id="src/components/SplashViz/SplashViz.jsx"
       component={ SplashViz } />
 
-    <div className="splash__section splash__section--dark">
+    <div className="splash__section splash__section--dark page__content">
       <Container>
         <div dangerouslySetInnerHTML={{
           __html: require('page-loader!../../content/index.md').body
@@ -22,7 +22,7 @@ const Splash = () => (
       </Container>
     </div>
 
-    <div className="splash__section">
+    <div className="splash__section page__content">
       <Container>
         <h1>Support the Team</h1>
 
