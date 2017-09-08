@@ -292,7 +292,7 @@ Parameter         | Explanation                              | Usage
 
 Shortcut | Replaces
 ---------|----------------------------
--d       | `--debug --devtool cheap-module-source-map --output-pathinfo`
+-d       | `--debug --devtool cheap-module-eval-source-map --output-pathinfo`
 -p       | `--optimize-minimize --define process.env.NODE_ENV="production"`, see [building for production](/guides/production)
 
 
