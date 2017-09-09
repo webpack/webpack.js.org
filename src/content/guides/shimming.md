@@ -365,14 +365,14 @@ Now, if we run our build a few more bundles should pop up and everything should 
 
 ## Further Optimizations
 
-The `babel-preset-env` uses [browserslist](https://github.com/ai/browserslist) to transpile only what is not supported in your browsers matrix. This preset comes with the `useBuiltIns` option _(false by default)_ which converts your global `babel-polyfill` import to a more granular feature by feature import pattern like:
+The `babel-preset-env` package uses [browserslist](https://github.com/ai/browserslist) to transpile only what is not supported in your browsers matrix. This preset comes with the `useBuiltIns` option, `false` by default, which converts your global `babel-polyfill` import to a more granular feature by feature `import` pattern:
 
-```javascript
-import "core-js/modules/es7.string.pad-start";
-import "core-js/modules/es7.string.pad-end";
-import "core-js/modules/web.timers";
-import "core-js/modules/web.immediate";
-import "core-js/modules/web.dom.iterable";
+``` js
+import 'core-js/modules/es7.string.pad-start';
+import 'core-js/modules/es7.string.pad-end';
+import 'core-js/modules/web.timers';
+import 'core-js/modules/web.immediate';
+import 'core-js/modules/web.dom.iterable';
 ```
 
 See [the repository](https://github.com/babel/babel-preset-env) for more information.
