@@ -248,7 +248,7 @@ Now from within our entry script (i.e. `src/index.js`), we could `import { file,
 
 Almost everything we've discussed thus far has been in relation to handling legacy packages. Let's move on to our second topic: __polyfills__.
 
-There's a lot of ways to load polyfills. For example, to include the [`babel-polyfill`]() we might simply:
+There's a lot of ways to load polyfills. For example, to include the [`babel-polyfill`](https://babeljs.io/docs/usage/polyfill/) we might simply:
 
 ``` bash
 npm i --save babel-polyfill
@@ -276,7 +276,7 @@ T> Note that we aren't binding the `import` to a variable. This is because polyf
 
 Now while this is one approach, __including polyfills in the main bundle is not recommended__ because this penalizes modern browsers users by making them download a bigger file with unneeded scripts.
 
-Let's move our `import` to a new file, add the [`whatwg-fetch`]() polyfill and a script that fetches some data:
+Let's move our `import` to a new file, add the [`whatwg-fetch`](https://github.com/github/fetch) polyfill and a script that fetches some data:
 
 ``` bash
 npm i --save whatwg-fetch
