@@ -378,10 +378,21 @@ import 'core-js/modules/web.dom.iterable';
 See [the repository](https://github.com/babel/babel-preset-env) for more information.
 
 
+## Node Built-Ins
+
+Node built-ins, like `process`, can be polyfilled right directly from your configuration file without the use of any special loaders or plugins. See the [node configuration page](/configuration/node) for more information and examples.
+
+
 ## Other Utilities
 
-Briefly mention these...
+There are a few other tools that can help when dealing with legacy modules.
 
-- `script-loader`
-- `noParse`
-- `node` built-ins
+The [`script-loader`](/loaders/script-loader/) evaluates code in the global context, similar to inclusion via a `script` tag. In this mode, every normal library should work. `require`, `module`, etc. are undefined.
+
+W> When using the `script-loader`, the module is added as a string to the bundle. It is not minimized by `webpack`, so use a minimized version. There is also no `devtool` support for libraries added by this loader.
+
+When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module as [`noParse`](/configuration/module/#module-noparse). Then `webpack` will just include the module without parsing it, which can be used to improve the build time.
+
+W> Any feature requiring the AST, like the `ProvidePlugin`, will not work.
+
+Lastly, there are some modules that support different [module styles](/concepts/modules) like AMD, CommonJS and legacy. In most of these cases, they first check for `define` and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting `define=>false` via the [`imports-loader`](/loaders/imports-loader/).
