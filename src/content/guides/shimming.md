@@ -360,7 +360,7 @@ fetch('https://jsonplaceholder.typicode.com/users')
   .catch(error => console.error('Something went wrong when fetching this data: ', error))
 ```
 
-Now, if we run our build a few more bundles should pop up and everything should still run smoothly in the browser. Note that this set up could likely be improved upon but it should give you a good idea of how you can provide polyfills only to the users that need them.
+Now, if we run our build a few more bundles will be emitted and everything should still run smoothly in the browser. Note that this set up could likely be improved upon but it should give you a good idea of how you can provide polyfills only to the users that need them.
 
 
 ## Further Optimizations
