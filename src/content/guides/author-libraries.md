@@ -194,8 +194,8 @@ T> Note that if you only plan on using your library as a dependency in another w
 For libraries that use several files from a dependency:
 
 ``` js
-import A from 'dependency/one';
-import B from 'dependency/two';
+import A from 'library/one';
+import B from 'library/two';
 
 // ...
 ```
