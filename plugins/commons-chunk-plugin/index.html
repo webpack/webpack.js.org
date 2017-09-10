@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/8a3e11769c750c2f9a14.css" rel="stylesheet">
+      <link href="/0e4b625cbee19ef98781.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -86,17 +86,18 @@
 <pre><code class="lang-javascript">entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
   vendor<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;jquery&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;other-lib&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   app<span class="token punctuation">:</span> <span class="token string">&quot;./entry&quot;</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>optimize<span class="token punctuation">.</span>CommonsChunkPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  name<span class="token punctuation">:</span> <span class="token string">&quot;vendor&quot;</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+  <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>optimize<span class="token punctuation">.</span>CommonsChunkPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    name<span class="token punctuation">:</span> <span class="token string">&quot;vendor&quot;</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">// filename: &quot;vendor.js&quot;</span>
+    <span class="token comment" spellcheck="true">// (Give the chunk a different name)</span>
 
-  <span class="token comment" spellcheck="true">// filename: &quot;vendor.js&quot;</span>
-  <span class="token comment" spellcheck="true">// (Give the chunk a different name)</span>
-
-  minChunks<span class="token punctuation">:</span> <span class="token number">Infinity</span><span class="token punctuation">,</span>
-  <span class="token comment" spellcheck="true">// (with more entries, this ensures that no other module</span>
-  <span class="token comment" spellcheck="true">//  goes into the vendor chunk)</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
+    minChunks<span class="token punctuation">:</span> <span class="token number">Infinity</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">// (with more entries, this ensures that no other module</span>
+    <span class="token comment" spellcheck="true">//  goes into the vendor chunk)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">]</span>
 </code></pre>
 <pre><code class="lang-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>vendor.js<span class="token punctuation">&quot;</span></span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>utf-8<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>app.js<span class="token punctuation">&quot;</span></span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>utf-8<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
