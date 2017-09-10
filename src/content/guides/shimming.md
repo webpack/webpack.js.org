@@ -272,11 +272,11 @@ __src/index.js__
   document.body.appendChild(component());
 ```
 
-T> Note that we aren't binding the `import` to a variable. This is because polyfills simply run on there own, prior to the rest of the code base, allowing us to then assume certain native functionality exists.
+T> Note that we aren't binding the `import` to a variable. This is because polyfills simply run on their own, prior to the rest of the code base, allowing us to then assume certain native functionality exists.
 
 Now while this is one approach, __including polyfills in the main bundle is not recommended__ because this penalizes modern browsers users by making them download a bigger file with unneeded scripts.
 
-Let's move our `import` to a new file, add the [`whatwg-fetch`](https://github.com/github/fetch) polyfill and a script that fetches some data:
+Let's move our `import` to a new file and add the [`whatwg-fetch`](https://github.com/github/fetch) polyfill:
 
 ``` bash
 npm i --save whatwg-fetch
@@ -309,7 +309,6 @@ __project__
     |- index.js
     |- globals.js
 +   |- polyfills.js
-+   |- fetch.js
   |- /node_modules
 ```
 
@@ -320,7 +319,72 @@ import 'babel-polyfill';
 import 'whatwg-fetch';
 ```
 
-With that in place, we can add the logic to conditionally load `src/polyfills.js` depending on whether or not. How you make this decision depends on the technologies and browsers you need to support. We'll just do some simple testing before we run our fetching script:
+__webpack.config.js__
+
+``` diff
+  const path = require('path');
+
+  module.exports = {
+-   entry: './src/index.js',
++   entry: {
++     polyfills: './src/polyfills.js',
++     index: './src/index.js'
++   },
+    output: {
+-     filename: 'bundle.js',
++     filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    },
+    module: {
+      rules: [
+        {
+          test: require.resolve('index.js'),
+          use: 'imports-loader?this=>window'
+        },
+        {
+          test: require.resolve('globals.js'),
+          use: 'exports-loader?file,parse=helpers.parse'
+        }
+      ]
+    },
+    plugins: [
+      new webpack.ProvidePlugin({
+        join: ['lodash', 'join']
+      })
+    ]
+  };
+```
+
+With that in place, we can add the logic to conditionally load our new `polyfills.bundle.js` file. How you make this decision depends on the technologies and browsers you need to support. We'll just do some simple testing to determine whether our polyfills are needed:
+
+__dist/index.html__
+
+``` diff
+  <html>
+    <head>
+      <title>Getting Started</title>
++     <script>
++       var modernBrowser = (
++         'fetch' in window &&
++         'assign' in Object
++       );
++
++       if ( !modernBrowser ) {
++         var scriptElement = document.createElement('script');
++
++         scriptElement.async = false;
++         scriptElement.src = '/polyfills.bundle.js';
++         document.head.appendChild(scriptElement);
++       }
++     </script>
+    </head>
+    <body>
+      <script src="bundle.js"></script>
+    </body>
+  </html>
+```
+
+Now we can `fetch` some data within our entry script:
 
 __src/index.js__
 
@@ -335,32 +399,16 @@ __src/index.js__
 
   document.body.appendChild(component());
 +
-+ let modernBrowser = (
-+   'fetch' in window &&
-+   'assign' in Object
-+ );
-+
-+ if ( !modernBrowser ) {
-+   import('./polyfills.js', /* webpackChunkName: "polyfills" */).then(
-+     import('./fetch.js' /* webpackChunkName: "fetch" */)
-+   )
-+
-+ } else import('./fetch.js' /* webpackChunkName: "fetch" */)
++ fetch('https://jsonplaceholder.typicode.com/users')
++   .then(response => response.json())
++   .then(json => {
++     console.log('We retrieved some data! AND we\'re confident it will work on a variety of browser distributions.')
++     console.log(json)
++   })
++   .catch(error => console.error('Something went wrong when fetching this data: ', error))
 ```
 
-__src/fetch.js__
-
-``` js
-fetch('https://jsonplaceholder.typicode.com/users')
-  .then(response => response.json())
-  .then(json => {
-    console.log('We retrieved some data! AND we\'re confident it will work on a variety of browser distributions.')
-    console.log(json)
-  })
-  .catch(error => console.error('Something went wrong when fetching this data: ', error))
-```
-
-Now, if we run our build a few more bundles will be emitted and everything should still run smoothly in the browser. Note that this set up could likely be improved upon but it should give you a good idea of how you can provide polyfills only to the users that need them.
+If we run our build, another `polyfills.bundle.js` file will be emitted and everything should still run smoothly in the browser. Note that this set up could likely be improved upon but it should give you a good idea of how you can provide polyfills only to the users that actually need them.
 
 
 ## Further Optimizations
@@ -391,7 +439,7 @@ The [`script-loader`](/loaders/script-loader/) evaluates code in the global cont
 
 W> When using the `script-loader`, the module is added as a string to the bundle. It is not minimized by `webpack`, so use a minimized version. There is also no `devtool` support for libraries added by this loader.
 
-When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module as [`noParse`](/configuration/module/#module-noparse). Then `webpack` will just include the module without parsing it, which can be used to improve the build time.
+When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module in [`noParse`](/configuration/module/#module-noparse). This will cause webpack to include the module without parsing it or resolving `require()` and `import` statements. This practice is also used to improve the build performance.
 
 W> Any feature requiring the AST, like the `ProvidePlugin`, will not work.
 
