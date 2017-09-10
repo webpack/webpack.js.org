@@ -91,7 +91,7 @@ If we run a build, we should still see the same output:
 TODO: Include output
 ```
 
-We can also use the `ProvidePlugin` to expose a single export of a module by configuring it with an "array path" (e.g. `[module, child, ...children?]`). So let's we only wanted to provide the `join` method from `lodash` wherever it's invoked:
+We can also use the `ProvidePlugin` to expose a single export of a module by configuring it with an "array path" (e.g. `[module, child, ...children?]`). So let's imagine we only wanted to provide the `join` method from `lodash` wherever it's invoked:
 
 __src/index.js__
 
