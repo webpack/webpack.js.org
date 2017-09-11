@@ -466,14 +466,14 @@ overlay: {
 ```
 
 
-## `devServer.pfx`
+## `devServer.https.pfx`
 
 `string`
 
 Path to a SSL pfx file.
 
 ```js
-pfx: '/path/to/file.pfx'
+pfx: fs.readFileSync('/path/to/file.pfx')
 ```
 
 Usage via the CLI
@@ -482,15 +482,14 @@ Usage via the CLI
 webpack-dev-server --pfx /path/to/file.pfx
 ```
 
-
-## `devServer.pfxPassphrase`
+## `devServer.https.passphrase`
 
 `string`
 
 The passphrase to a SSL PFX file.
 
 ```js
-pfxPassphrase: 'passphrase'
+passphrase: 'passphrase'
 ```
 
 Usage via the CLI
@@ -499,6 +498,16 @@ Usage via the CLI
 webpack-dev-server --pfx-passphrase passphrase
 ```
 
+An example of using pfx and passsphrase together:
+
+```js
+const fs = require('fs');
+...
+https: {
+  pfx: fs.readFileSync('/path/to/file.pfx'),
+  passphrase: 'passphrase'
+},
+```
 
 ## `devServer.port`
 
