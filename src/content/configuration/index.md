@@ -238,7 +238,7 @@ module.exports = {
       // 起别名："module" -> "new-module" 和 "module/path/file" -> "new-module/path/file"
 
       "only-module$": "new-module",
-      // 起别名 "only-module" -> "new-module"，但不匹配 "module/path/file" -> "new-module/path/file"
+      // 起别名 "only-module" -> "new-module"，但不匹配 "only-module/path/file" -> "new-module/path/file"
 
       "module": path.resolve(__dirname, "app/third/module.js"),
       // 起别名 "module" -> "./app/third/module.js" 和 "module/file" 会导致错误
