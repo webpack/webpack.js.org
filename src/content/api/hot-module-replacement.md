@@ -10,7 +10,7 @@ related:
     url: /guides/hot-module-replacement
 ---
 
-如果已经通过 [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin) 启用了[模块热替换(Hot Module Replacement)](/concepts/hot-module-replacement)，则它的接口将被暴露在 [`module.hot` 属性](/api/module-variables#module-hot-webpack-specific-)下面。通常，用户将检查界面是否可访问，然后再开始使用它。举个例子，你可以这样 `accept` 一个更新的模块：
+如果已经通过 [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin) 启用了[模块热替换(Hot Module Replacement)](/concepts/hot-module-replacement)，则它的接口将被暴露在 [`module.hot` 属性](/api/module-variables#module-hot-webpack-specific-)下面。通常，用户先要检查这个接口是否可访问，然后再开始使用它。举个例子，你可以这样 `accept` 一个更新的模块：
 
 ``` js
 if (module.hot) {
@@ -79,13 +79,13 @@ module.hot.status() // 返回以下字符串之一……
 | idle        | 该进程正在等待调用 `check`（见下文） |
 | check       | 该进程正在检查以更新 |
 | watch       | 该进程处于观察模式，并将自动通知有关更改 |
-| watch-delay | 在初始更改后，延迟指定时间，再应用任何更新 |
-| prepare     | 该进程正在准备更新（例如，下载好更新的模块） |
+| watch-delay | 在初始更改后，延迟指定时间，以便于其他任何更新 |
+| prepare     | 该进程正在准备更新（例如，下载已更新的模块） |
 | ready       | 此更新已准备并可用 |
 | dispose     | 该进程正在调用将被替换模块的 `dispose` 处理函数 |
 | apply       | 该进程正在调用 `accept` 处理函数，并重新执行自我接受(self-accepted)的模块 |
-| abort       | 更新已中止，但系统仍处于以前的状态 |
-| fail        | 更新已抛出异常，系统状态已经损坏 |
+| abort       | 更新已中止，但系统仍处于之前的状态 |
+| fail        | 更新已抛出异常，系统状态已被破坏 |
 
 
 ### `check`
@@ -103,7 +103,7 @@ module.hot.check(autoApply, (error, outdatedModules) => {
 
 ### `apply`
 
-继续更新进程（只要 `module.hot.status() === 'ready'）。
+继续更新进程（只要 `module.hot.status() === 'ready'`）。
 
 ``` js
 module.hot.apply(options, (error, outdatedModules) => {
@@ -111,9 +111,9 @@ module.hot.apply(options, (error, outdatedModules) => {
 })
 ```
 
-可选的 `options` 对象可以是以下属性：
+可选的 `options` 对象可以包含以下属性：
 
-- `ignoreUnaccepted` (boolean)：即使某些模块不被接受(not accepted)，继续更新进程。
+- `ignoreUnaccepted` (boolean)：即使某些模块不被接受(not accepted)，仍然继续更新进程。
 
 
 ### `addStatusHandler`

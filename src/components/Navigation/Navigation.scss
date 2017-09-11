@@ -48,6 +48,10 @@
 .navigation__links {
   display: none;
 
+  .dropdown__arrow {
+    margin-top: -6px;
+  }
+
   @include break {
     flex: 1 1 auto;
     display: flex;
