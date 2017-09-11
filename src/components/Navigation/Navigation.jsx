@@ -3,6 +3,7 @@ import Link from '../Link/Link';
 import Container from '../Container/Container';
 import Logo from '../Logo/Logo';
 import Dropdown from '../Dropdown/Dropdown';
+import LinkDropdown from '../Dropdown/LinkDropdown';
 
 // TODO: Maybe by updating the routing scheme later on we can avoid hardcoding this?
 let Sections = [
@@ -105,6 +106,16 @@ export default class Navigation extends React.Component {
             to="//stackoverflow.com/questions/tagged/webpack">
             <i className="sidecar__icon icon-stack-overflow" />
           </Link>
+
+          <LinkDropdown
+            className="navigation__links"
+            items={[
+            { title: '印记中文文档导航', url: 'https://docschina.org/' },
+            { title: 'Vue.js 中文文档', url: 'https://vuefe.cn/' },
+            { title: 'React.js 中文文档', url: 'https://doc.react-china.org/' },
+            { title: 'rollup.js 中文文档', url: 'https://rollupjs.org/zh' },
+            { title: 'Node.js 中文文档', url: 'http://nodejs.cn/' }
+          ]} />
 
           <Dropdown
             className="navigation__languages"
