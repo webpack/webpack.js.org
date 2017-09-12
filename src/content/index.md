@@ -4,8 +4,8 @@ title: webpack
 
 ## Write your code
 
-<div class="homepage__wrap">
-<div class="homepage__left">
+<div class="splash__wrap">
+<div class="splash__left">
 __app.js__
 
 ```js
@@ -14,7 +14,7 @@ import bar from './bar';
 bar();
 ```
 </div>
-<div class="homepage__right">
+<div class="splash__right">
 __bar.js__
 
 ```js
@@ -28,8 +28,8 @@ export default function bar() {
 
 ## Bundle with webpack
 
-<div class="homepage__wrap">
-<div class="homepage__left">
+<div class="splash__wrap">
+<div class="splash__left">
 __webpack.config.js__
 
 ```js
@@ -41,7 +41,7 @@ module.exports = {
 }
 ```
 </div>
-<div class="homepage__right">
+<div class="splash__right">
 __page.html__
 
 ```html
@@ -55,11 +55,13 @@ __page.html__
   </body>
 </html>
 ```
+</div>
 
 Then run `webpack` on the command-line to create `bundle.js`.
-</div>
-</div>
 
 ## It's that simple
 
-__[Get Started](/guides/getting-started)__ quickly in our __Guides__ section, or dig into the __[Concepts](/concepts)__ section for more high-level information on the core notions behind behind webpack.
+__[Get Started](/guides/getting-started)__ quickly in our __Guides__ section, or dig into the __[Concepts](/concepts)__ section for more high-level information on the core notions behind webpack.
+
+</div>
+

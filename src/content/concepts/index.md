@@ -1,5 +1,5 @@
 ---
-title: Concepts
+title: Core Concepts
 sort: 1
 contributors:
   - TheLarkInn

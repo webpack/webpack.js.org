@@ -3,8 +3,7 @@
 @import 'functions';
 @import 'prism-theme';
 
-.page__content,
-.splash__section {
+.page__content {
   line-height:1.5em;
 
   h1 { font-size: getFontSize(4); }
@@ -121,6 +120,8 @@
   }
 
   .table {
+    margin: 1em 0;
+
     @include break {
       overflow-x: auto;
       overflow-y: hidden;
@@ -240,8 +241,9 @@
     }
   }
 
-  img {
+  img:not([class*="support__"]) {
     max-width: 100%;
+    height: auto;
   }
 
   b, strong {
