@@ -5,13 +5,9 @@ import Link from '../Link/Link';
 const block = 'sidebar-item';
 
 export default class SidebarItem extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      open: this._isOpen(props)
-    };
-  }
+  state = {
+    open: this._isOpen(this.props)
+  };
 
   render() {
     let { title, anchors = [] } = this.props;
@@ -68,7 +64,7 @@ export default class SidebarItem extends React.Component {
    * @param {object} props - The current props
    */
   _isOpen(props) {
-    return `/${props.currentPage}` === props.url;
+    return RegExp(`${props.currentPage}/?$`).test(props.url);
   }
 
   /**

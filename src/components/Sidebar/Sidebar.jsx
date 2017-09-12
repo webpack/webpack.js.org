@@ -3,20 +3,15 @@ import Shield from '../Shield/Shield';
 import SidebarItem from '../SidebarItem/SidebarItem';
 
 export default class Sidebar extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      fixed: false,
-      availableHeight: null,
-      maxWidth: null
-    };
-  }
+  state = {
+    fixed: false,
+    availableHeight: null,
+    maxWidth: null
+  };
 
   render() {
-    let { sectionName, pages, currentPage } = this.props;
+    let { pages, currentPage } = this.props;
     let { fixed, availableHeight, maxWidth } = this.state;
-    let isGuides = sectionName === 'guides';
 
     return (
       <nav
@@ -34,19 +29,14 @@ export default class Sidebar extends Component {
             <Shield content="npm/v/webpack" label="webpack" />
           </a>
 
-          <SidebarItem
-            url={ `/${sectionName}` }
-            title="介绍"
-            currentPage= { currentPage } />
-
           {
-            pages.map(({ url, title, anchors }, i) =>
+            pages.map((page, i) =>
               <SidebarItem
                 key={ `sidebar-item-${i}` }
-                index={i}
-                url={ `/${url}` }
-                title={ title }
-                anchors={ anchors }
+                index={ i }
+                url={ page.url }
+                title={ page.title }
+                anchors={ page.anchors }
                 currentPage= { currentPage }
                 onToggle={ this._recalculate.bind(this) } />
             )

@@ -69,7 +69,7 @@ webpack --profile --json > compilation-stats.json
 
 ### Chunk对象 (Chunk Objects)
 
-每一个 `chunks` 表示一组称为 [chunk](/glossary#chunk) 的模块。每一个对象都满足以下的结构。
+每一个 `chunks` 表示一组称为 [chunk](/glossary#c) 的模块。每一个对象都满足以下的结构。
 
 ``` js-with-links
 {

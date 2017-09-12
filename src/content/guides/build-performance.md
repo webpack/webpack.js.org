@@ -77,7 +77,7 @@ Decrease the total size of the compilation to increase build performance. Try to
 
 ### Worker Pool
 
-The `thread-loader` can be used to offload expensive loaders to a worker pool. 
+The `thread-loader` can be used to offload expensive loaders to a worker pool.
 
 W> Don't use too many workers as there is a boot overhead for the Node.js runtime and the loader. Minimize the module transfers between worker and main process. IPC is expensive.
 
@@ -123,7 +123,7 @@ Be aware of the performance differences of the different `devtool` settings.
 - The `cheap-source-map` variants are more performant, if you can live with the slightly worse mapping quality.
 - Use a `eval-source-map` variant for incremental builds.
 
-=> In most cases `eval-cheap-module-source-map` is the best option.
+=> In most cases `cheap-module-eval-source-map` is the best option.
 
 
 ### Avoid Production Specific Tooling

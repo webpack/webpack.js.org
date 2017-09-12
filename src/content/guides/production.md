@@ -155,7 +155,7 @@ __package.json__
 
 ## source map
 
-我们鼓励你在生产环境中启用 source map，因为它们对调试源码(debug)和运行基准测试(benchmark tests)很有帮助。虽然有如此强大的功能，然而还是应该针对生成环境用途，选择一个构建快速的推荐配置（具体细节请查看 [`devtool`](/configuration/devtool)）。对于本指南，我们将在_生产环境_中使用 `cheap-module-source-map` 选项，而不是我们在_开发环境_中用到的 `inline-source-map`：
+我们鼓励你在生产环境中启用 source map，因为它们对调试源码(debug)和运行基准测试(benchmark tests)很有帮助。虽然有如此强大的功能，然而还是应该针对生成环境用途，选择一个构建快速的推荐配置（具体细节请查看 [`devtool`](/configuration/devtool)）。对于本指南，我们将在_生产环境_中使用 `source-map` 选项，而不是我们在_开发环境_中用到的 `inline-source-map`：
 
 __webpack.prod.js__
 
@@ -165,9 +165,12 @@ __webpack.prod.js__
   const common = require('./webpack.common.js');
 
   module.exports = merge(common, {
-+   devtool: 'cheap-module-source-map',
++   devtool: 'source-map',
     plugins: [
-      new UglifyJSPlugin()
+-     new UglifyJSPlugin()
++     new UglifyJSPlugin({
++       sourceMap: true
++     })
     ]
   })
 ```
@@ -180,7 +183,7 @@ __webpack.prod.js__
 __webpack.prod.js__
 
 ``` diff
-  const webpack = require('webpack');
++ const webpack = require('webpack');
   const merge = require('webpack-merge');
   const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
   const common = require('./webpack.common.js');

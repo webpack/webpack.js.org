@@ -78,8 +78,6 @@ module.hot.status() // 返回以下字符串之一……
 | ----------- | -------------------------------------------------------------------------------------- |
 | idle        | 该进程正在等待调用 `check`（见下文） |
 | check       | 该进程正在检查以更新 |
-| watch       | 该进程处于观察模式，并将自动通知有关更改 |
-| watch-delay | 在初始更改后，延迟指定时间，以便于其他任何更新 |
 | prepare     | 该进程正在准备更新（例如，下载已更新的模块） |
 | ready       | 此更新已准备并可用 |
 | dispose     | 该进程正在调用将被替换模块的 `dispose` 处理函数 |
@@ -93,9 +91,11 @@ module.hot.status() // 返回以下字符串之一……
 测试所有加载的模块以进行更新，如果有更新，则应用它们。
 
 ``` js
-module.hot.check(autoApply, (error, outdatedModules) => {
-  // 捕获错误和超时的模块……
-})
+module.hot.check(autoApply).then(outdatedModules => {
+  // 超时的模块……
+}).catch(error => {
+  // 捕获错误
+});
 ```
 
 `autoApply` 参数可以是布尔值，也可以是 `options`，当被调用时可以传递给 `apply` 方法。
@@ -106,14 +106,45 @@ module.hot.check(autoApply, (error, outdatedModules) => {
 继续更新进程（只要 `module.hot.status() === 'ready'`）。
 
 ``` js
-module.hot.apply(options, (error, outdatedModules) => {
-  // 捕获错误和超时的模块……
-})
+module.hot.apply(options).then(outdatedModules => {
+  // 超时的模块……
+}).catch(error => {
+  // 捕获错误
+});
 ```
 
 可选的 `options` 对象可以包含以下属性：
 
-- `ignoreUnaccepted` (boolean)：即使某些模块不被接受(not accepted)，仍然继续更新进程。
+- `ignoreUnaccepted` (boolean): Ignore changes made to unaccepted modules.
+- `ignoreDeclined` (boolean): Ignore changes made to declined modules.
+- `ignoreErrored` (boolean): Ignore errors throw in accept handlers, error handlers and while reevaulating module.
+- `onDeclined` (function(info)): Notifier for declined modules
+- `onUnaccepted` (function(info)): Notifier for unaccepted modules
+- `onAccepted` (function(info)): Notifier for accepted modules
+- `onDisposed` (function(info)): Notifier for disposed modules
+- `onErrored` (function(info)): Notifier for errors
+
+The `info` parameter will be an object containing some of the following values:
+
+``` js
+{
+  type: "self-declined" | "declined" |
+        "unaccepted" | "accepted" |
+        "disposed" | "accept-errored" |
+        "self-accept-errored" | "self-accept-error-handler-errored",
+  moduleId: 4, // The module in question.
+  dependencyId: 3, // For errors: the module id owning the accept handler.
+  chain: [1, 2, 3, 4], // For declined/accepted/unaccepted: the chain from where the update was propagated.
+  parentId: 5, // For declined: the module id of the declining parent
+  outdatedModules: [1, 2, 3, 4], // For accepted: the modules that are outdated and will be disposed
+  outdatedDependencies: { // For accepted: The location of accept handlers that will handle the update
+    5: [4]
+  },
+  error: new Error(...), // For errors: the thrown error
+  originalError: new Error(...) // For self-accept-error-handler-errored:
+                                // the error thrown by the module before the error handler tried to handle it.
+}
+```
 
 
 ### `addStatusHandler`

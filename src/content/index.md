@@ -4,8 +4,8 @@ title: webpack
 
 ## 编写代码
 
-<div class="homepage__wrap">
-<div class="homepage__left">
+<div class="splash__wrap">
+<div class="splash__left">
 __app.js__
 
 ```js
@@ -14,7 +14,7 @@ import bar from './bar';
 bar();
 ```
 </div>
-<div class="homepage__right">
+<div class="splash__right">
 __bar.js__
 
 ```js
@@ -28,8 +28,8 @@ export default function bar() {
 
 ## 使用 webpack 打包
 
-<div class="homepage__wrap">
-<div class="homepage__left">
+<div class="splash__wrap">
+<div class="splash__left">
 __webpack.config.js__
 
 ```js
@@ -41,7 +41,7 @@ module.exports = {
 }
 ```
 </div>
-<div class="homepage__right">
+<div class="splash__right">
 __page.html__
 
 ```html
@@ -55,12 +55,13 @@ __page.html__
   </body>
 </html>
 ```
+</div>
 
 然后在命令行运行 `webpack` 就会创建 `bundle.js`。
-</div>
-</div>
 
 ## 让一切变得简单
 
-__[立即开始](/guides/getting-started)__更多关于 webpack 核心概念的高级信息，请通过快速查阅__指南__部分，或深入__[概念](/concepts)__部分来了解
+__[立即开始](/guides/getting-started)__更多关于 webpack 核心概念的高级信息，请通过快速查阅__指南__部分，或深入__[概念](/concepts)__部分来了解。
+
+</div>
 

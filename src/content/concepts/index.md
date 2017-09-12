@@ -1,5 +1,5 @@
 ---
-title: 概念
+title: 核心概念
 sort: 1
 contributors:
   - TheLarkInn

@@ -130,30 +130,30 @@ webpack --env.platform=web  # 设置 env.platform == "web"
 
 `--env` 参数具有多种语法 accepts various syntaxes:
 
-| Invocation                    | Resulting environment       |
-|-------------------------------|-----------------------------|
-| webpack --env prod            | `"prod"`                    |
-| webpack --env.prod            | `{ prod: true }`            |
-| webpack --env.prod=1          | `{ prod: 1 }`               |
-| webpack --env.prod=foo        | `{ prod: "foo" }`           |
-| webpack --env.prod --env.min  | `{ prod: true, min: true }` |
-| webpack --env.prod --env min  | `[{ prod: true }, "min"]`   |
+Invocation                      | Resulting environment
+------------------------------- | ---------------------------
+`webpack --env prod`            | `"prod"`
+`webpack --env.prod`            | `{ prod: true }`
+`webpack --env.prod=1`          | `{ prod: 1 }`
+`webpack --env.prod=foo`        | `{ prod: "foo" }`
+`webpack --env.prod --env.min`  | `{ prod: true, min: true }`
+`webpack --env.prod --env min`  | `[{ prod: true }, "min"]`
 
 ### 输出配置
 
 通过以下这些配置，你可以调整构建流程的某些[输出](/configuration/output)参数。
 
-| 参数                          | 说明                                                             | 输入类型     | 默认值                                                 |
-|------------------------------|-----------------------------------------------------------------|------------|-------------------------------------------------------|
-| --output-chunk-filename      | 输出的附带 chunk 的文件名                       | string     | 含有 [id] 的文件名，而不是 [name] 或者 [id] 作为前缀 |
-| --output-filename            | 打包文件的文件名                               | string     | [name].js                                             |
-| --output-jsonp-function      | 加载 Chunk 时使用的 JSONP 函数名           | string     | webpackJsonp                                          |
-| --output-library             | 以库的形式导出入口文件                | string     |                                                       |
-| --output-library-target      | 以库的形式导出入口文件时，输出的类型  | string     | var                                                   |
-| --output-path                | 输出的路径（在公共路径的基础上）                        | string     | 当前目录                                     |
-| --output-pathinfo            | 加入一些依赖信息的注解         | boolean    | false                                                 |
-| --output-public-path         | 输出文件时使用的公共路径                                  | string     | /                                                     |
-| --output-source-map-filename | 生成的 SourceMap 的文件名                           | string     | [name].map or [outputFilename].map                    |
+参数 | 说明 | 输入类型 | 默认值
+------------------------- | ------------------------------------------- | ---------- | ------------------
+`--output-chunk-filename` | 输出的附带 chunk 的文件名   | string     | 含有 [id] 的文件名，而不是 [name] 或者 [id] 作为前缀
+`--output-filename`       | 打包文件的文件名           | string     | [name].js
+`--output-jsonp-function` | 加载 chunk 时使用的 JSONP 函数名 | string | webpackJsonp
+`--output-library`        | 以库的形式导出入口文件 | string |
+`--output-library-target` | 以库的形式导出入口文件时，输出的类型 | string | var
+`--output-path`           | 输出的路径（在公共路径的基础上）      | string     | 当前目录
+`--output-pathinfo`       | 加入一些依赖信息的注解 | boolean | false
+`--output-public-path`    | The 输出文件时使用的公共路径              | string     | /
+`--output-source-map-filename` | 生成的 SourceMap 的文件名  | string     | [name].map or [outputFilename].map
 
 
 #### 示例用法
@@ -189,111 +189,111 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 
 以下这些配置可以帮助你在 Webpack 编译过程中更好地 debug。
 
-| 参数  | 说明                                      | 输入类型 | 默认值 |
-|------------|--------------------------------------------------|------------|---------------|
-| --debug    | 把 loader 设置为 debug 模式                     | boolean    | false         |
-| --devtool  | 为打包好的资源定义 [source map 的类型](/configuration/devtool/) | string     | -             |
-| --progress | 打印出编译进度的百分比值         | boolean    | false         |
+参数 | 说明 | 输入类型 | 默认值
+------------ | ------------------------------------------------ | ---------- | -------------
+`--debug`    | 把 loader 设置为 debug 模式 | boolean    | false
+`--devtool`  | 为打包好的资源定义 [source map 的类型] | string | -
+`--progress` | 打印出编译进度的百分比值 | boolean    | false
 
 
 ### 模块配置
 
 这些配置可以用于绑定 Webpack 允许的[模块](/configuration/module/)。
 
-| 参数                | 说明                      | 使用方法                      |
-|--------------------|---------------------------|-----------------------------|
-| --module-bind      | 为 loader 绑定一个扩展      | --module-bind js=babel-loader |
-| --module-bind-post | 为 post loader 绑定一个扩展 |                             |
-| --module-bind-pre  | 为 pre loader 绑定一个扩展  |                             |
+参数 | 说明 | 用法
+-------------------- | ---------------------------------- | ----------------
+`--module-bind`      | 为 loader 绑定一个扩展 | `--module-bind js=babel-loader`
+`--module-bind-post` | 为 post loader 绑定一个扩展 |
+`--module-bind-pre`  | 为 pre loader 绑定一个扩展 |
 
 
 ### Watch 配置
 
 这些配置可以用于[观察](/configuration/watch/)依赖文件的变化，一旦有变化，则可以重新执行构建流程。
 
-| 参数                       | 说明                                                   |
-|---------------------------|--------------------------------------------------------|
-| --watch, -w               | 观察文件系统的变化                                        |
-| --save, -s                | 在保存的时候重新编译，无论文件是否变化                       |
-| --watch-aggregate-timeout | 指定一个毫秒数，在这个时间内，文件若发送了多次变化，会被合并     |
-| --watch-poll              | 轮询观察文件变化的时间间隔（同时会打开轮询机制）               |
-| --watch-stdin, --stdin    | 当 stdin 关闭时，退出进程                                 |
+参数 | 说明
+------------------------- | ----------------------
+`--watch`, `-w`           | 观察文件系统的变化
+`--save`, `-s`            | 在保存的时候重新编译，无论文件是否变化
+`--watch-aggregate-timeout` | 指定一个毫秒数，在这个时间内，文件若发送了多次变化，会被合并
+`--watch-poll`            | 轮询观察文件变化的时间间隔（同时会打开轮询机制）
+`--watch-stdin`, `--stdin` | 当 stdin 关闭时，退出进程
 
 
 ### 性能优化配置
 
 在生产环境的构建时，这些配置可以用于调整的一些性能相关的配置。
 
-| 参数                 | 解释说明                                            | 使用的插件                          |
-|---------------------------|--------------------------------------------------------|--------------------------------------|
-| --optimize-max-chunks     | 限制 chunk 的数量              | [LimitChunkCountPlugin](/plugins/limit-chunk-count-plugin) |
-| --optimize-min-chunk-size | 限制 chunk 的最小体积               | [MinChunkSizePlugin](/plugins/min-chunk-size-plugin) |
-| --optimize-minimize       | 压缩混淆 javascript，并且把 loader 设置为 minimizing | [UglifyJsPlugin](/plugins/uglifyjs-webpack-plugin/) & [LoaderOptionsPlugin](/plugins/loader-options-plugin/) |
+参数 | 说明 | 使用的插件
+--------------------------- | -------------------------------------------------------|----------------------
+`--optimize-max-chunks`     | 限制 chunk 的数量 | [LimitChunkCountPlugin](/plugins/limit-chunk-count-plugin)
+`--optimize-min-chunk-size` | 限制 chunk 的最小体积               | [MinChunkSizePlugin](/plugins/min-chunk-size-plugin)
+`--optimize-minimize`       | 压缩混淆 javascript，并且把 loader 设置为 minimizing | [UglifyJsPlugin](/plugins/uglifyjs-webpack-plugin/) & [LoaderOptionsPlugin](/plugins/loader-options-plugin/)
 
 
 ### Resolve 配置
 
 这些配置可以用于设置  webpack [resolver](/configuration/resolve/) 时使用的别名(alias)和扩展名(extension)。
 
-| 参数                    | 说明                                                    | 示例                                         |
-|------------------------|---------------------------------------------------------|---------------------------------------------|
-| --resolve-alias        | 指定模块的别名                                            | --resolve-alias jquery-plugin=jquery.plugin |
-| --resolve-extensions   | 指定需要被处理的文件的扩展名                                 | --resolve-extensions .es6 .js .ts           |
-| --resolve-loader-alias | Minimize javascript and switches loaders to minimizing  |                                             |
+参数   | 说明                      | 示例
+---------------------- | ------------------------------------------------------- | -------------
+--resolve-alias        | 指定模块的别名 | --resolve-alias jquery-plugin=jquery.plugin
+--resolve-extensions   | 指定需要被处理的文件的扩展名 | --resolve-extensions .es6 .js .ts
+--resolve-loader-alias | Minimize javascript and switches loaders to minimizing  |
 
 
 ### 统计数据配置
 
 以下选项用于配置 Webpack 在控制台输出的[统计数据](/configuration/stats/)，以及这些数据的样式。
 
-| 参数 | 说明 | 类型 |
-|--------------------------------|------------------------------------------------|---------|
-| --color, --colors | 开启/关闭控制台的颜色 [默认值: (supports-color)] | boolean |
-| --display                      | 选择[显示预设](/configuration/stats)(verbose - 繁琐, detailed - 细节, normal - 正常, minimal - 最小, errors-only - 仅错误, none - 无; 从 webpack 3.0.0 开始) | string |
-| --display-cached | 在输出中显示缓存的模块 | boolean |
-| --display-cached-assets | 在输出中显示缓存的 assets | boolean |
-| --display-chunks | 在输出中显示 chunks | boolean |
-| --display-depth | 显示从入口起点到每个模块的距离 | boolean |
-| --display-entrypoints   | 在输出中显示入口文件 | boolean |
-| --display-error-details | 显示详细的错误信息 | boolean |
-| --display-exclude       | 在输出中显示被排除的文件 | boolean |
-| --display-max-modules          | 设置输出中可见模块的最大数量 | number  |
-| --display-modules | 在输出中显示所有模块，包括被排除的模块                | boolean |
-| --display-optimization-bailout | 作用域提升回退触发器(Scope hoisting fallback trigger)（从 webpack 3.0.0 开始） | boolean |
-| --display-origins | 在输出中显示最初的 chunk | boolean |
-| --display-provided-exports     | 显示有关从模块导出的信息 | boolean |
-| --display-reasons | 显示模块包含在输出中的原因 | boolean |
-| --display-used-exports | 显示模块中被使用的接口（Tree Shaking） | boolean |
-| --hide-modules | 隐藏关于模块的信息 | boolean |
-| --sort-assets-by | 对 assets 列表以某种属性排序 | string  |
-| --sort-chunks-by | 对 chunks 列表以某种属性排序 | string |
-| --sort-modules-by | 对模块列表以某种属性排序 | string  |
-| --verbose | 显示更多信息 | boolean |
+参数 | 说明 | Type
+-------------------------------- | ------------------------------------------------------------------ | -------
+`--color`, `--colors` | E开启/关闭控制台的颜色 [默认值：(supports-color)] | boolean
+`--display`                      | 选择[显示预设](/configuration/stats)(verbose - 繁琐, detailed - 细节, normal - 正常, minimal - 最小, errors-only - 仅错误, none - 无; 从 webpack 3.0.0 开始) | string
+`--display-cached` | 在输出中显示缓存的模块 | boolean
+`--display-cached-assets` | 在输出中显示缓存的 assets | boolean
+`--display-chunks` | 在输出中显示 chunks | boolean
+`--display-depth` | 显示从入口起点到每个模块的距离 | boolean
+`--display-entrypoints`   | 在输出中显示入口文件 | boolean
+`--display-error-details` | 显示详细的错误信息 | boolean
+`--display-exclude`       | 在输出中显示被排除的文件 | boolean
+`--display-max-modules`          | 设置输出中可见模块的最大数量 | number
+`--display-modules` | 在输出中显示所有模块，包括被排除的模块 | boolean
+`--display-optimization-bailout` | 作用域提升回退触发器(Scope hoisting fallback trigger)（从 webpack 3.0.0 开始） | boolean
+`--display-origins` | 在输出中显示最初的 chunk | boolean
+`--display-provided-exports`     | 显示有关从模块导出的信息 | boolean
+`--display-reasons` | 显示模块包含在输出中的原因 | boolean
+`--display-used-exports` | 显示模块中被使用的接口（Tree Shaking） | boolean
+`--hide-modules` | 隐藏关于模块的信息 | boolean
+`--sort-assets-by` | 对 assets 列表以某种属性排序 | string
+`--sort-chunks-by`               | 对 chunks 列表以某种属性排序 | string
+`--sort-modules-by`              | 对模块列表以某种属性排序 | string
+`--verbose`                      | 显示更多信息 | boolean
 
 
 ### 高级配置
 
-| 参数             | 解释说明                                                      | 用法                                       |
-|-----------------------|------------------------------------------------------------------|---------------------------------------------|
-| --bail                | 一旦发生错误，立即终止                             |                                             |
-| --cache               | 开启缓存 [watch 时会默认打开]          | --cache=false                               |
-| --define              | 定义 bundle 中的任意自由变量，查看 [shimming](/guides/shimming) | --define process.env.NODE_ENV='development' |
-| --hot                 | 开启[模块热替换](/concepts/hot-module-replacement) [使用 HotModuleReplacementPlugin] | --hot=true                                  |
-| --labeled-modules     | Enables 开启模块标签 [使用 LabeledModulesPlugin]              |                                             |
-| --plugin              | 加载某个[插件](/configuration/plugins/)                      |                                             |
-| --prefetch            | 预加载某个文件                                     | --prefetch=./files.js                       |
-| --provide             | 在所有模块中将这些模块提供为自由变量，查看 [shimming](/guides/shimming) | --provide jQuery=jquery                     |
-| --records-input-path  | 记录文件的路径（读取）                               |                                             |
-| --records-output-path | 记录文件的路径（写入）                               |                                             |
-| --records-path        | 记录文件的路径                                      |                                             |
-| --target              | [目标](/configuration/target/)的执行环境     | --target='node'                             |
+参数 | 说明 | 用法
+----------------- | ---------------------------------------- | -----
+`--bail` | 一旦发生错误，立即终止 |
+`--cache` | 开启缓存 [watch 时会默认打开] | `--cache=false`
+`--define` | 定义 bundle 中的任意自由变量，查看 [shimming](/guides/shimming) | `--define process.env.NODE_ENV='development'`
+`--hot`           | 开启[模块热替换](/concepts/hot-module-replacement) | `--hot=true`
+`--labeled-modules` | 开启模块标签 [使用 LabeledModulesPlugin] |
+`--plugin`        | 加载某个[插件](/configuration/plugins/) |
+`--prefetch`      | 预加载某个文件 | `--prefetch=./files.js`
+`--provide`       | 在所有模块中将这些模块提供为自由变量，查看 [shimming](/guides/shimming) | `--provide jQuery=jquery`
+`--records-input-path` | 记录文件的路径（读取） |
+`--records-output-path` | 记录文件的路径（写入） |
+`--records-path`  | 记录文件的路径 |
+`--target`        | [目标](/configuration/target/)的执行环境 | `--target='node'`
 
 ### 简写
 
-| 简写 | 含义                                                         |
-|----------|------------------------------------------------------------------|
-| -d       | --debug --devtool eval-cheap-module-source-map --output-pathinfo |
-| -p       | --optimize-minimize --define process.env.NODE_ENV="production", see [building for production](/guides/production) |
+简写 | 含义
+---------|----------------------------
+-d       | `--debug --devtool cheap-module-source-map --output-pathinfo`
+-p       | `--optimize-minimize --define process.env.NODE_ENV="production"`, see [building for production](/guides/production)
 
 
 ### Profiling
