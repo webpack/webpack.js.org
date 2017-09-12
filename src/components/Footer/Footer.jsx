@@ -27,8 +27,8 @@ const Footer = () => (
         <Link className="footer__link" to="/branding/">品牌</Link>
         <Link className="footer__link" to="//gitter.im/webpack/webpack">Gitter</Link>
         <Link className="footer__link" to="https://github.com/webpack/webpack/releases">更新日志</Link>
-          <Link className="footer__link" to="/license">遵循协议</Link>
-          <Link className="footer__link">粤ICP备17008907号</Link>
+        <Link className="footer__link" to="/license">遵循协议</Link>
+        <Link className="footer__link" to="">粤ICP备17008907号</Link>
         <Link className="footer__link footer__license" to="/license">
           <img
             alt="Creative Commons License"
