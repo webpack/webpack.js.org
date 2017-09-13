@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/30abc6649509f35282e4.css" rel="stylesheet">
+      <link href="/0f24d2aceb3a29ad4b25.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -57,7 +57,7 @@
 <pre><code class="lang-js"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;path&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token punctuation">:</span> <span class="token string">&apos;./index.ts&apos;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token string">&apos;./src/index.ts&apos;</span><span class="token punctuation">,</span>
   module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -101,7 +101,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <pre><code class="lang-diff">  const path = require(&apos;path&apos;);
 
   module.exports = {
-    entry: &apos;./index.ts&apos;,
+    entry: &apos;./src/index.ts&apos;,
 <span class="token inserted">+   devtool: &apos;inline-source-map&apos;,</span>
     module: {
       rules: [
