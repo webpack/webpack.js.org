@@ -67,7 +67,7 @@ __webpack.config.js__
 const path = require('path');
 
 module.exports = {
-  entry: './index.ts',
+  entry: './src/index.ts',
   module: {
     rules: [
       {
@@ -127,7 +127,7 @@ __webpack.config.js__
   const path = require('path');
 
   module.exports = {
-    entry: './index.ts',
+    entry: './src/index.ts',
 +   devtool: 'inline-source-map',
     module: {
       rules: [
