@@ -2,7 +2,6 @@ node_modules
 npm-debug.log
 build
 generated
-support-backers.json
-support-sponsors.json
+support-*.json
 starter-kits-data.json
 .antwar
