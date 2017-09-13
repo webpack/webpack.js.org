@@ -126,7 +126,8 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 + main.js:4330 [HMR] Consider using the NamedModulesPlugin for module names.
 ```
 
-### Enabling HMR With the Node.js API
+
+## Via the Node.js API
 
 When using Webpack Dev Server with the Node.js API, don't put the dev server options on the webpack config object. Instead, pass them as a second parameter upon creation. For example:
 
@@ -154,6 +155,7 @@ server.listen(5000, () => {
   console.log('dev server listening on port 5000');
 });
 ```
+
 
 ## Gotchas
 
