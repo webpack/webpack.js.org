@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/d6bcc16766b8a948ca1e.css" rel="stylesheet">
+      <link href="/e514e0a6dbc08d2fecf9.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -132,7 +132,7 @@ another.bundle.js  537 bytes       1  <span class="token punctuation">[</span>em
 </ul>
 <blockquote class="tip"><div class="tip-content"> The <a href="/plugins/commons-chunk-plugin"><code>CommonsChunkPlugin</code></a> is also used to split vendor modules from core application code using <a href="/plugins/commons-chunk-plugin/#explicit-vendor-chunk">explicit vendor chunks</a>. </div></blockquote><h2 class="header"><a class="anchor" href="#dynamic-imports" id="dynamic-imports"></a><span class="text">Dynamic Imports</span><a class="icon-link" href="#dynamic-imports"></a></h2>
 <p>Two similar techniques are supported by webpack when it comes to dynamic code splitting. The first and more preferable approach is use to the <a href="/api/module-methods#import-"><code>import()</code> syntax</a> that conforms to the <a href="https://github.com/tc39/proposal-dynamic-import">ECMAScript proposal</a> for dynamic imports. The legacy, webpack-specific approach is to use <a href="/api/module-methods#require-ensure"><code>require.ensure</code></a>. Let&apos;s try using the first of these two approaches...</p>
-<blockquote class="warning"><div class="tip-content"> <code>import()</code> calls use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">promises</a>. If you want to support older browsers that lack <code>Promise</code> support (e.g. Internet Explorer), you&apos;ll need to include a <code>Promise</code> polyfill <em>before</em> your primary bundles. </div></blockquote><p>Before we start, let&apos;s remove the extra <a href="/concepts/entry-points/"><code>entry</code></a> and <a href="/plugins/commons-chunk-plugin"><code>CommonsChunkPlugin</code></a> from our config as they won&apos;t be needed for this next demonstration:</p>
+<blockquote class="warning"><div class="tip-content"> <code>import()</code> calls use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">promises</a> internally. If you use <code>import()</code> with older browsers, remember to shim <code>Promise</code> using a polyfill such as <a href="https://github.com/stefanpenner/es6-promise">es6-promise</a> or <a href="https://github.com/taylorhakes/promise-polyfill">promise-polyfill</a>. </div></blockquote><p>Before we start, let&apos;s remove the extra <a href="/concepts/entry-points/"><code>entry</code></a> and <a href="/plugins/commons-chunk-plugin"><code>CommonsChunkPlugin</code></a> from our config as they won&apos;t be needed for this next demonstration:</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-diff">  const path = require(&apos;path&apos;);
 <span class="token deleted">- const webpack = require(&apos;webpack&apos;);</span>
