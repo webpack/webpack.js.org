@@ -4,10 +4,10 @@
         <loc>https://webpack.js.org/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/analyze/index.html</loc>
+        <loc>https://webpack.js.org/api/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/index.html</loc>
+        <loc>https://webpack.js.org/analyze/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/branding/index.html</loc>
@@ -178,10 +178,10 @@
         <loc>https://webpack.js.org/development/release-process/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/get-started/why-webpack/index.html</loc>
+        <loc>https://webpack.js.org/get-started/install-webpack/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/get-started/install-webpack/index.html</loc>
+        <loc>https://webpack.js.org/get-started/why-webpack/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/asset-management/index.html</loc>
@@ -301,9 +301,6 @@
         <loc>https://webpack.js.org/loaders/extract-loader/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/file-loader/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/loaders/gzip-loader/index.html</loc>
     </url>
     <url>
@@ -316,10 +313,10 @@
         <loc>https://webpack.js.org/loaders/imports-loader/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/jshint-loader/index.html</loc>
+        <loc>https://webpack.js.org/loaders/istanbul-instrumenter-loader/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/istanbul-instrumenter-loader/index.html</loc>
+        <loc>https://webpack.js.org/loaders/jshint-loader/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/json-loader/index.html</loc>
@@ -391,10 +388,13 @@
         <loc>https://webpack.js.org/loaders/yaml-frontmatter-loader/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/babel-minify-webpack-plugin/index.html</loc>
+        <loc>https://webpack.js.org/loaders/file-loader/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/aggressive-splitting-plugin/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/babel-minify-webpack-plugin/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/banner-plugin/index.html</loc>
@@ -463,9 +463,6 @@
         <loc>https://webpack.js.org/plugins/npm-install-webpack-plugin/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/prefetch-plugin/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/plugins/provide-plugin/index.html</loc>
     </url>
     <url>
@@ -485,6 +482,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/pluginsapi/template/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/prefetch-plugin/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/compilation/index.html</loc>
