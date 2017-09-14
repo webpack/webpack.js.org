@@ -18,7 +18,7 @@ The top-level `output` key contains set of options instructing webpack on how an
 
 `string` `object`
 
-When used in tandem with [`output.library`](#output-library) and [`output.libraryTarget`](#output-librarytarget), this option allows users to insert comments within the export wrapper. To insert the same comment for each `libraryTarget` type, simply set `auxiliaryComment` to a string:
+When used in tandem with [`output.library`](#output-library) and [`output.libraryTarget`](#output-librarytarget), this option allows users to insert comments within the export wrapper. To insert the same comment for each `libraryTarget` type, set `auxiliaryComment` to a string:
 
 ``` js
 output: {
@@ -293,12 +293,6 @@ If using the [`output.library`](#output-library) option, the library name is aut
 
 `string` or `object` (since webpack 3.1.0; for `libraryTarget: "umd"`)
 
-Use `output.library`, and `output.libraryTarget` below, when writing a JavaScript library that should export values, which can be used by other code depending on it. Pass a string with the name of the library:
-
-``` js
-library: "MyLibrary"
-```
-
 How the value of the `output.library` is used depends on the value of the [`output.libraryTarget`](#output-librarytarget) options; please refer to that section for the details.
 
 Note that `output.libraryTarget` defaults to `var`. This means if only `output.library` is used it is exported as variable declaration (when used as script tag it's available in the global scope after execution).
@@ -326,7 +320,7 @@ The following configurations are supported:
 // if your entry has a default export of `MyDefaultModule`
 var MyDefaultModule = _entry_return_.default;
 
-// your users will use your library like:
+// your users will use your library like the following:
 MyDefaultModule.doSomething();
 ```
 
@@ -336,7 +330,7 @@ MyDefaultModule.doSomething();
 // if your entry exports a module `MyModule`
 var MyModule = _entry_return_.MyModule;
 
-// your users will use your library like:
+// your users will use your library like the following:
 MyModule.doSomething();
 ```
 
@@ -362,21 +356,21 @@ Note that `_entry_return_` in the example code below is the value returned by th
 
 ### Exposing the library via variable
 
-These options simply assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by `output.library` at whatever scope the bundle was included at.
+These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by `output.library` at whatever scope the bundle was included at.
 
 `libraryTarget: "var"` - (default) When your library is loaded, the **return value of your entry point** will be assigned to a variable:
 
 ```javascript
 var MyLibrary = _entry_return_;
 
-// your users, in a separate script, will use your library like:
+// your users, in a separate script, will use your library like the following:
 MyLibrary.doSomething();
 ```
 
-W> an empty `output.library` with this libraryType will result in no assignment being done.
+W> an empty `output.library` with this libraryType will result in no assignment.
 
 
-`libraryTarget: "assign"` - Here webpack will blindly generate an implied global.
+`libraryTarget: "assign"` - Here webpack will generate an implied global.  This has the potential to reassign an existing value, use with caution.
 
 ``` javascript
 MyLibrary = _entry_return_;
@@ -389,22 +383,22 @@ W> an empty `output.library` with this libraryType will result in a broken outpu
 
 ### Exposing the library via object assignment
 
-These options simply assign the return value of the entry point (e.g. whatever the entry point exported) to a specific object under the name defined by `output.library`.
+These options assign the return value of the entry point (e.g. whatever the entry point exported) to a specific object under the name defined by `output.library`.
 
-If `output.library` is not assigned a non-empty string, the default behavior is that all properties returned by the entry point be assigned to the object as defined for the particular `output.libraryTarget`, via the following code fragment:
+If `output.library` is not assigned a non-empty string, the default behavior is that all properties returned by the entry point will be assigned to the object as defined for the particular `output.libraryTarget`, via the following code fragment:
 
 ```javascript
 (function(e, a) { for(var i in a) e[i] = a[i]; }(${output.libraryTarget}, _entry_return_)
 ```
 
-W> Note that not setting a `output.library` will result in all properties returned by the entry point be blindly assigned to whatever object that was passed in.
+W> Note that not setting a `output.library` will result in all properties returned by the entry point be directly assigned to whatever object that was passed in; there are no checks against an existing name.
 
 `libraryTarget: "this"` - When your library is loaded, the **return value of your entry point** will be assigned to this under the property named by `output.library`. The meaning of `this` is up to you:
 
 ```javascript
 this["MyLibrary"] = _entry_return_;
 
-// your users will use your library like:
+// your users will use your library like the following:
 this.MyLibrary.doSomething();
 MyLibrary.doSomething(); //if this is window
 ```
@@ -415,7 +409,7 @@ MyLibrary.doSomething(); //if this is window
  ```javascript
  window["MyLibrary"] = _entry_return_;
 
-//your users will use your library like:
+//your users will use your library like the following:
 window.MyLibrary.doSomething();
  ```
 
@@ -425,7 +419,7 @@ window.MyLibrary.doSomething();
  ```javascript
  global["MyLibrary"] = _entry_return_;
 
-//your users will use your library like:
+//your users will use your library like the following:
 global.MyLibrary.doSomething();
  ```
 
@@ -435,7 +429,7 @@ global.MyLibrary.doSomething();
 ```javascript
 exports["MyLibrary"] = _entry_return_;
 
-//your users will use your library like:
+//your users will use your library like the following:
 require("MyLibrary").doSomething();
 ```
 
@@ -449,13 +443,13 @@ These options will result in a bundle that comes with a more complete header to 
 ```javascript
 module.exports = _entry_return_;
 
-//your users will use your library like:
+//your users will use your library like the following:
 require("MyLibrary").doSomething();
 ```
 
 Note that `output.library` is omitted, thus it is not required for this particular `output.libraryType`.
 
-T> Wondering the difference between CommonJS and CommonJS2? Check [this](https://github.com/webpack/webpack/issues/1114) out (while they are similar, there are some subtle differences that are not usually relevant in the context of webpack).
+T> Wondering the difference between CommonJS and CommonJS2 is? While they are similar, there are some subtle differences between them that are not usually relevant in the context of webpack. (For further details, please [read this issue](https://github.com/webpack/webpack/issues/1114).)
 
 
 `libraryTarget: "amd"` - In this case webpack will make your library an AMD module.
@@ -479,7 +473,7 @@ define("MyLibrary", [], function() {
 });
 ```
 
-The bundle can simply be included as part of a script tag, and the bundle can be invoked like so:
+The bundle can be included as part of a script tag, and the bundle can be invoked like so:
 
 ```javascript
 require(['MyLibrary'], function(MyLibrary) {
