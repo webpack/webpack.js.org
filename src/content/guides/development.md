@@ -131,6 +131,7 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
+      "clean-webpack-plugin": "^0.1.16",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "file-loader": "^0.11.2",
@@ -175,6 +176,7 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
 
   module.exports = {
     entry: {
@@ -220,6 +222,7 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
+      "clean-webpack-plugin": "^0.1.16",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "file-loader": "^0.11.2",
@@ -337,6 +340,7 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
+      "clean-webpack-plugin": "^0.1.16",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "express": "^4.15.3",
