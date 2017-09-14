@@ -20,25 +20,25 @@ new webpack.optimize.ModuleConcatenationPlugin()
 
 ## Optimization Bailouts
 
-As the article explains, there webpack attempts to achieve partial scope hoisting. webpack attempts to merge modules into a single scope but cannot do so in every case. If webpack cannot merge a module, the two alternatives are Prevent and Root. Prevent means the module must be in its own scope. Root means the module begins a new module group. The following table explains the conditions:
+As the article explains, webpack attempts to achieve partial scope hoisting. It will merge modules into a single scope but cannot do so in every case. If webpack cannot merge a module, the two alternatives are Prevent and Root. Prevent means the module must be in its own scope. Root means a new module group will be created. The following conditions determine the outcome:
 
-| Condition                                     | Outcome |
-|-----------------------------------------------|---------|
-| Non ES6 Module                                | Prevent |
-| Imported By Non Import                        | Root    |
-| Imported From Other Chunk                     | Root    |
-| Imported By Multiple Other Module Groups      | Root    |
-| Imported With `import()`                      | Root    |
-| Affected By `ProvidePlugin` Or Using `module` | Prevent |
-| HMR Accepted                                  | Root    |
-| Using `eval()`                                | Prevent |
-| In Multiple Chunks                            | Prevent |
-| `export * from "cjs-module"`                  | Prevent |
+Condition                                     | Outcome
+--------------------------------------------- | --------
+Non ES6 Module                                | Prevent
+Imported By Non Import                        | Root   
+Imported From Other Chunk                     | Root   
+Imported By Multiple Other Module Groups      | Root   
+Imported With `import()`                      | Root   
+Affected By `ProvidePlugin` Or Using `module` | Prevent
+HMR Accepted                                  | Root   
+Using `eval()`                                | Prevent
+In Multiple Chunks                            | Prevent
+`export * from "cjs-module"`                  | Prevent
 
 
 ### Module Grouping Algorithm
 
-The following psuedo JavaScript explains the algorithm:
+The following pseudo JavaScript explains the algorithm:
 
 ```js
 modules.forEach(module => {
@@ -83,7 +83,7 @@ function tryToAdd(group, module) {
 
 ### Debugging Optimization Bailouts
 
-When use the webpack CLI, the `--display-optimization-bailout` flag will display bailout reasons. When using the webpack config, adding the following to the `stats` object helps:
+When using the webpack CLI, the `--display-optimization-bailout` flag will display bailout reasons. When using the webpack config, just add the following to the `stats` object:
 
 ```js
 {
