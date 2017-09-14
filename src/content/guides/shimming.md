@@ -17,7 +17,7 @@ The `webpack` compiler can understand modules written as ES2015 modules, CommonJ
 
 W> __We don't recommend using globals!__ The whole concept behind webpack is to allow more modular front-end development. This means writing isolated modules that are well contained and do not rely on hidden dependencies (e.g. globals). Please use these features only when necessary.
 
-Another instance where _shimming_ can be useful is when you want to [polyfill](https://en.wikipedia.org/wiki/Polyfill) browser functionality to support more users. In this case, you may only want to deliver those polyfills to the browsers that need patch (i.e. load them on demand).
+Another instance where _shimming_ can be useful is when you want to [polyfill](https://en.wikipedia.org/wiki/Polyfill) browser functionality to support more users. In this case, you may only want to deliver those polyfills to the browsers that need patching (i.e. load them on demand).
 
 The following article will walk through both of these use cases.
 
@@ -379,7 +379,7 @@ __dist/index.html__
 +     </script>
     </head>
     <body>
-      <script src="bundle.js"></script>
+      <script src="index.bundle.js"></script>
     </body>
   </html>
 ```
