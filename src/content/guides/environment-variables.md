@@ -19,32 +19,22 @@ webpack --env.NODE_ENV=local --env.production --progress
 
 T> Setting up your `env` variable without assignment, `--env.production` sets `--env.production` to `true` by default. There are also other syntaxes that you can use. See the [webpack CLI](/api/cli/#environment-options) documentation for more information.
 
-There is, however a change that you will have to make to your webpack config. Typically, in your webpack config `module.exports` points to the configuration object. To use the `env` variable, you must change `module.exports` to be a function:
+There is, however a change that you will have to make to your webpack config. Typically, in your webpack config `module.exports` points to the configuration object. To use the `env` variable, you must convert `module.exports` to a function:
 
-**webpack.config.js**
+__webpack.config.js__
 
-```diff
-- module.exports = {
-- 	entry: './src/index.js',
-- 	output: {
-- 		filename: 'bundle.js',
-- 		path: path.resolve(__dirname, 'dist')
-- 	}
-- }
-+ module.exports = (env) => {
-+ 	/** 
-+    * Use env.<YOUR VARIABLE> here:
-+    *
-+    * console.log(env.NODE_ENV) // 'local'
-+    * console.log(env.production) // true
-+    */
-+    
-+ 	return {
-+  		entry: './src/index.js',
-+  	 	output: {
-+  	  		filename: 'bundle.js',
-+  	  	 	path: path.resolve(__dirname, 'dist')
-+  	  	}
-+ 	}
-+ }
+``` js
+module.exports = env => {
+  // Use env.<YOUR VARIABLE> here:
+  console.log('NODE_ENV, env.NODE_ENV)
+  console.log('Production: ', env.production)
+   
+  return {
+    entry: './src/index.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  }
+}
 ```
