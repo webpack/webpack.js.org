@@ -470,7 +470,7 @@ overlay: {
 
 `string`
 
-Path to a SSL pfx file.
+Path to a SSL pfx file while used via CLI. In options, should be the bytestream of the PFX file.
 
 ```js
 pfx: '/path/to/file.pfx'
