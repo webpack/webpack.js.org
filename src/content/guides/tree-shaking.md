@@ -6,6 +6,7 @@ contributors:
   - zacanger
   - alexjoverm
   - avant1
+  - MijaelWatts
 related:
   - title: Tree shaking with webpack 2, TypeScript and Babel
     url: https://alexjoverm.github.io/2017/03/06/Tree-shaking-with-Webpack-2-TypeScript-and-Babel/
@@ -145,5 +146,7 @@ So, what we've learned is that in order to take advantage of _tree shaking_, you
 
 - Use ES2015 module syntax (i.e. `import` and `export`).
 - Include a minifier that supports dead code removal (e.g. the `UglifyJSPlugin`).
+
+You can imagine your application as a tree. The source code and libraries you actually use represent the green, living leaves of the tree. Dead code represents the brown, dead leaves of the tree that are consumed by autumn. In order to get rid of the dead leaves, you have to shake the tree, causing them fall.
 
 If you are interested in more ways to optimize your output, please jump to the next guide for details on building for [production](/guides/production).

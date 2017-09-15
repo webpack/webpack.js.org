@@ -26,7 +26,7 @@ The goals of _development_ and _production_ builds differ greatly. In _developme
 
 While we will separate the _production_ and _development_ specific bits out, note that we'll still maintain a "common" configuration to keep things DRY. In order to merge these configurations together, we'll use a utility called [`webpack-merge`](https://github.com/survivejs/webpack-merge). With the "common" configuration in place, we won't have to duplicate code within the environment-specific configurations.
 
-Let's start by installing `webpack-merge` and splitting out the bits we've already work on in previous guides:
+Let's start by installing `webpack-merge` and splitting out the bits we've already worked on in previous guides:
 
 ``` bash
 npm install --save-dev webpack-merge
@@ -145,7 +145,7 @@ Feel free to run those scripts and see how the output changes as we continue add
 
 ## Minification
 
-Note that while the [`UglifyJSPlugin`](/plugins/uglifyjs-webpack-plugin) is a great place to start for minification, there are other options out there. Here's a few more popular ones:
+Note that while the [`UglifyJSPlugin`](/plugins/uglifyjs-webpack-plugin) is a great place to start for minification, there are other options out there. Here are a few more popular ones:
 
 - [`BabelMinifyWebpackPlugin`](https://github.com/webpack-contrib/babel-minify-webpack-plugin)
 - [`ClosureCompilerPlugin`](https://github.com/roman01la/webpack-closure-compiler)
@@ -167,7 +167,10 @@ __webpack.prod.js__
   module.exports = merge(common, {
 +   devtool: 'source-map',
     plugins: [
-      new UglifyJSPlugin()
+-     new UglifyJSPlugin()
++     new UglifyJSPlugin({
++       sourceMap: true
++     })
     ]
   })
 ```
@@ -180,7 +183,7 @@ Many libraries will key off the `process.env.NODE_ENV` variable to determine wha
 __webpack.prod.js__
 
 ``` diff
-  const webpack = require('webpack');
++ const webpack = require('webpack');
   const merge = require('webpack-merge');
   const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
   const common = require('./webpack.common.js');
@@ -229,6 +232,6 @@ __src/index.js__
 
 ## CLI Alternatives
 
-Some of what has been described above is also achievable via the command line. For example, the `--optimize-minize` flag will include the `UglifyJSPlugin` behind the scenes. The `--define process.env.NODE_ENV="'production'"` will do the same for the `DefinePlugin` instance described above. And, `webpack -p` will automatically include invoke both those flags and thus the plugins to be included.
+Some of what has been described above is also achievable via the command line. For example, the `--optimize-minize` flag will include the `UglifyJSPlugin` behind the scenes. The `--define process.env.NODE_ENV="'production'"` will do the same for the `DefinePlugin` instance described above. And, `webpack -p` will automatically invoke both those flags and thus the plugins to be included.
 
 While these short hand methods are nice, we usually recommend just using the configuration as it's better to understand exactly what is being done for you in both cases. The configuration also gives you more control on fine tuning other options within both plugins.
