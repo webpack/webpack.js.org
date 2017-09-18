@@ -70,7 +70,7 @@ If you don’t pass the `webpack` runner function a callback, it will return a w
 * `.run(callback)`
 * `.watch(watchOptions, handler)`
 
-W> The API only supports a single concurrent compilation at a time. When using `run` wait for it to finish until calling `run` or `watch` again. When using `watch` call `close` and wait for it to finish before calling `run` or `watch` again. Concurrent compilations will corrupt the output files.
+W> The API only supports a single concurrent compilation at a time. When using `run`, wait for it to finish before calling `run` or `watch` again. When using `watch`, call `close` and wait for it to finish before calling `run` or `watch` again. Concurrent compilations will corrupt the output files.
 
 
 ## Run
