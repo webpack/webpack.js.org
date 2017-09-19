@@ -130,14 +130,17 @@ webpack --env.platform=web  # sets env.platform == "web"
 
 The `--env` argument accepts various syntaxes:
 
-Invocation                      | Resulting environment
-------------------------------- | ---------------------------
-`webpack --env prod`            | `"prod"`
-`webpack --env.prod`            | `{ prod: true }`
-`webpack --env.prod=1`          | `{ prod: 1 }`
-`webpack --env.prod=foo`        | `{ prod: "foo" }`
-`webpack --env.prod --env.min`  | `{ prod: true, min: true }`
-`webpack --env.prod --env min`  | `[{ prod: true }, "min"]`
+Invocation                               | Resulting environment
+---------------------------------------- | ---------------------------
+`webpack --env prod`                     | `"prod"`
+`webpack --env.prod`                     | `{ prod: true }`
+`webpack --env.prod=1`                   | `{ prod: 1 }`
+`webpack --env.prod=foo`                 | `{ prod: "foo" }`
+`webpack --env.prod --env.min`           | `{ prod: true, min: true }`
+`webpack --env.prod --env min`           | `[{ prod: true }, "min"]`
+`webpack --env.prod=foo --env.prod=bar`  | `{prod: [ "foo", "bar" ]}`
+
+T> See the [environment variables](/guides/environment-variables) guide for more information on its usage.
 
 ### Output Options
 
@@ -292,7 +295,7 @@ Parameter         | Explanation                              | Usage
 
 Shortcut | Replaces
 ---------|----------------------------
--d       | `--debug --devtool cheap-module-source-map --output-pathinfo`
+-d       | `--debug --devtool cheap-module-eval-source-map --output-pathinfo`
 -p       | `--optimize-minimize --define process.env.NODE_ENV="production"`, see [building for production](/guides/production)
 
 
