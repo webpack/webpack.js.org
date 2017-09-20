@@ -64,10 +64,10 @@
         <loc>https://webpack.js.org/api/hot-module-replacement/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/module-methods/index.html</loc>
+        <loc>https://webpack.js.org/api/loaders/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/loaders/index.html</loc>
+        <loc>https://webpack.js.org/api/module-methods/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/module-variables/index.html</loc>
@@ -136,13 +136,13 @@
         <loc>https://webpack.js.org/configuration/externals/index.html</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/configuration/module/index.html</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/configuration/node/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/other-options/index.html</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/module/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/output/index.html</loc>
@@ -154,10 +154,10 @@
         <loc>https://webpack.js.org/configuration/plugins/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/stats/index.html</loc>
+        <loc>https://webpack.js.org/configuration/resolve/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/resolve/index.html</loc>
+        <loc>https://webpack.js.org/configuration/stats/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/target/index.html</loc>
@@ -265,10 +265,10 @@
         <loc>https://webpack.js.org/guides/tree-shaking/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/why-webpack/index.html</loc>
+        <loc>https://webpack.js.org/guides/typescript/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/typescript/index.html</loc>
+        <loc>https://webpack.js.org/guides/why-webpack/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/babel-loader/index.html</loc>
@@ -391,10 +391,10 @@
         <loc>https://webpack.js.org/loaders/yaml-frontmatter-loader/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/babel-minify-webpack-plugin/index.html</loc>
+        <loc>https://webpack.js.org/plugins/aggressive-splitting-plugin/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/aggressive-splitting-plugin/index.html</loc>
+        <loc>https://webpack.js.org/plugins/babel-minify-webpack-plugin/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/banner-plugin/index.html</loc>
@@ -451,10 +451,10 @@
         <loc>https://webpack.js.org/plugins/module-concatenation-plugin/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/named-modules-plugin/index.html</loc>
+        <loc>https://webpack.js.org/plugins/no-emit-on-errors-plugin/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/no-emit-on-errors-plugin/index.html</loc>
+        <loc>https://webpack.js.org/plugins/named-modules-plugin/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/normal-module-replacement-plugin/index.html</loc>
