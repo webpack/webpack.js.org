@@ -92,7 +92,7 @@ Specifies the category of the loader. No value means normal loader.
 
 There is also an additional category "inlined loader" which are loaders applied inline of the import/require.
 
-All loaders are sorted in the order `post, inline, normal, pre` and used in this order.
+All loaders are sorted in the order `pre, inline, normal, post` and used in this order.
 
 All normal loaders can be omitted (overridden) by prefixing `!` in the request.
 
