@@ -17,17 +17,17 @@ This section covers all __variables__ available in code compiled with webpack. M
 
 ### `module.loaded` (NodeJS)
 
-This is `false` if the module is currently executing, and `true` if the sync execution has finished.
+`false` 表示该模块正在执行， `true` 表示同步执行已经完成。
 
 
 ### `module.hot` (webpack-specific)
 
-Indicates whether or not [Hot Module Replacement](/concepts/hot-module-replacement) is enabled and provides an interface to the process. See the [HMR API page](/api/hot-module-replacement) for details.
+表示 [热模块替换 (Hot Module Replacement)](/concepts/hot-module-replacement) 是否启用，并给进程提供一个接口。详细说明见 [热模块替换 API 页面](/api/hot-module-replacement)
 
 
 ### `module.id` (CommonJS)
 
-The ID of the current module.
+该模块的 id 。
 
 ``` javascript
 module.id === require.resolve("./file.js")
@@ -36,7 +36,7 @@ module.id === require.resolve("./file.js")
 
 ### `module.exports` (CommonJS)
 
-Defines the value that will be returned when a consumer makes a `require` call to the module (defaults to a new object).
+当用户 `require` 了该模块后的返回值 (默认为一个新对象)
 
 ``` javascript
 module.exports = function doSomething() {
@@ -44,12 +44,12 @@ module.exports = function doSomething() {
 };
 ```
 
-W> This CANNOT be used in an asynchronous function.
+W> 无法在异步函数中使用该功能
 
 
 ### `exports` (CommonJS)
 
-This variable is equal ot default value of `module.exports` (i.e. an object). If `module.exports` gets overwritten, `exports` will no longer be exported.
+该变量默认值为 `module.exports`（即一个对象）。 如果 `module.exports` 被重写的话， `exports` 不再会被导出。
 
 ``` javascript
 exports.someValue = 42;
@@ -64,39 +64,39 @@ exports.aFunction = function doSomething() {
 
 ### `global` (NodeJS)
 
-See [node.js global](http://nodejs.org/api/globals.html#globals_global).
+见 [node.js global](http://nodejs.org/api/globals.html#globals_global).
 
 
 ### `process` (NodeJS)
 
-See [node.js process](http://nodejs.org/api/process.html).
+见 [node.js process](http://nodejs.org/api/process.html).
 
 
 ### `__dirname` (NodeJS)
 
-Depending on the config option `node.__dirname`:
+取决于 `node.__dirname` 的配置选项：
 
 * `false`: Not defined
 * `mock`: equal "/"
 * `true`: [node.js __dirname](http://nodejs.org/api/globals.html#globals_dirname)
 
-If used inside a expression that is parsed by the Parser, the config option is treated as `true`.
+如果在一个被解析的表达式内部使用，则配置选项会被当作 `true` 处理。
 
 
 ### `__filename` (NodeJS)
 
-Depending on the config option `node.__filename`:
+取决于 `node.__filename` 的配置选项：
 
 * `false`: Not defined
 * `mock`: equal "/index.js"
 * `true`: [node.js __filename](http://nodejs.org/api/globals.html#globals_filename)
 
-If used inside a expression that is parsed by the Parser, the config option is treated as `true`.
+如果在一个被解析的表达式内部使用，则配置选项会被当作 `true` 处理。
 
 
 ### `__resourceQuery` (webpack-specific)
 
-The resource query of the current module. If the following `require` call were made, then the query string would be available in `file.js`.
+当前模块的资源查询 (resource query) 。如果之后有对该模块的 `reqiure` ，那么查询字符串 (query string) 会在 `file.js` 中可访问。
 
 ``` javascript
 require('file.js?test')
@@ -111,40 +111,40 @@ __resourceQuery === '?test'
 
 ### `__webpack_public_path__` (webpack-specific)
 
-Equals the config options `output.publicPath`.
+等同于配置选项 `output.publicPath`.
 
 
 ### `__webpack_require__` (webpack-specific)
 
-The raw require function. This expression isn't parsed by the Parser for dependencies.
+源生 require 函数。 这个表达式不会由于依赖而被解析器解析。
 
 
 ### `__webpack_chunk_load__` (webpack-specific)
 
-The internal chunk loading function. Takes two arguments:
+内部 chunk 载入函数，有两个输入参数：
 
-* `chunkId` The id for the chunk to load.
-* `callback(require)` A callback function called once the chunk is loaded.
+* `chunkId` 需要载入的块的id
+* `callback(require)` 块载入后的回调函数
 
 
 ### `__webpack_modules__` (webpack-specific)
 
-Access to the internal object of all modules.
+访问所有模块的内部对象。
 
 
 ### `__webpack_hash__` (webpack-specific)
 
-This variable is only available with the `HotModuleReplacementPlugin` or the `ExtendedAPIPlugin`. It provides access to the hash of the compilation.
+这个变量只有在启用 `HotModuleReplacementPlugin` 或者 `ExtendedAPIPlugin` 时才生效。 这个变量提供了编译过程中(compilation)的 hash 信息的获取。
 
 
 ### `__non_webpack_require__` (webpack-specific)
 
-Generates a `require` function that is not parsed by webpack. Can be used to do cool stuff with a global require function if available.
+生成一个不会被 webpack  解析的 `require` 函数。 在可能的情况下配合全局 require 函数可以完成一些酷炫操作。
 
 
 ### `DEBUG`  (webpack-specific)
 
-Equals the config option `debug`.
+等同于配置参数中的 `debug`.
 
 ***
 
