@@ -76,8 +76,8 @@ function fetchPackageFiles(options, finalCb) {
           body = body
             // Remove all but the description from lead-in (XXX: Optional `\/?` should be unnecessary)
             .replace(/[^]*?<div align="center">([^]*?)<\/div>/, (match, content) => {
-              let parsed = content.match(/<p>([^]*?)<\/?p>/)
-              return parsed ? parsed[1] : ''
+              let parsed = content.match(/<p>([^]*?)<\/?p>/);
+              return parsed ? parsed[1] : '';
             })
             // Replace lone h1 formats
             .replace(/<h1.*?>.+?<\/h1>/, '')
