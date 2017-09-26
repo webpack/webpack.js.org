@@ -157,7 +157,7 @@ another.bundle.js  537 bytes       1  [emitted]         another
    [4] ./src/index.js 216 bytes {0} [built]
 ```
 
-Here are some other useful plugins and loaders provide by the community for splitting code:
+Here are some other useful plugins and loaders provided by the community for splitting code:
 
 - [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin): Useful for splitting CSS out from the main application.
 - [`bundle-loader`](/loaders/bundle-loader): Used to split code and lazy load the resulting bundles.
