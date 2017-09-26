@@ -4,10 +4,10 @@
         <loc>https://webpack.js.org/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/analyze/index.html</loc>
+        <loc>https://webpack.js.org/api/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/index.html</loc>
+        <loc>https://webpack.js.org/analyze/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/branding/index.html</loc>
@@ -79,10 +79,10 @@
         <loc>https://webpack.js.org/api/passing-a-config/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/index.html</loc>
+        <loc>https://webpack.js.org/api/stats/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/stats/index.html</loc>
+        <loc>https://webpack.js.org/api/plugins/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/configuration/index.html</loc>
@@ -271,9 +271,6 @@
         <loc>https://webpack.js.org/guides/why-webpack/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/babel-loader/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/loaders/bundle-loader/index.html</loc>
     </url>
     <url>
@@ -284,6 +281,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/coffee-redux-loader/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/loaders/babel-loader/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/coverjs-loader/index.html</loc>
@@ -385,10 +385,10 @@
         <loc>https://webpack.js.org/loaders/val-loader/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/worker-loader/index.html</loc>
+        <loc>https://webpack.js.org/loaders/yaml-frontmatter-loader/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/yaml-frontmatter-loader/index.html</loc>
+        <loc>https://webpack.js.org/loaders/worker-loader/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/aggressive-splitting-plugin/index.html</loc>
@@ -496,9 +496,6 @@
         <loc>https://webpack.js.org/api/plugins/dependency/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/module-factories/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/api/plugins/parser/index.html</loc>
     </url>
     <url>
@@ -512,5 +509,8 @@
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/template/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/api/plugins/module-factories/index.html</loc>
     </url>
 </urlset>

@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/2130771c24dc3cf4cc46.css" rel="stylesheet">
+      <link href="/9b27e95a0c4079bcab93.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -205,7 +205,7 @@ filename<span class="token punctuation">:</span> <span class="token string">&quo
 <p>Usage via the CLI</p>
 <pre><code class="lang-bash">webpack-dev-server --inline<span class="token operator">=</span>false
 </code></pre>
-<blockquote class="tip"><div class="tip-content"> Inline mode is recommended when using Hot Module Replacement. </div></blockquote><h2 class="header"><a class="anchor" href="#devserver-lazy-" id="devserver-lazy-"></a><span class="text"><code>devServer.lazy</code> &#x1F511;</span><a class="icon-link" href="#devserver-lazy-"></a></h2>
+<blockquote class="tip"><div class="tip-content"> Inline mode is recommended for Hot Module Replacement as it includes an HMR trigger from the websocket. Polling mode can be used as an alternative, but requires an additional entry point, <code>&apos;webpack/hot/poll?1000&apos;</code>. </div></blockquote><h2 class="header"><a class="anchor" href="#devserver-lazy-" id="devserver-lazy-"></a><span class="text"><code>devServer.lazy</code> &#x1F511;</span><a class="icon-link" href="#devserver-lazy-"></a></h2>
 <p><code>boolean</code></p>
 <p>When <code>lazy</code> is enabled, the dev-server will only compile the bundle when it gets requested. This means that webpack will not watch any file changes. We call this <strong>lazy mode</strong>.</p>
 <pre><code class="lang-js">lazy<span class="token punctuation">:</span> <span class="token boolean">true</span>
