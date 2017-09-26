@@ -377,7 +377,7 @@ Usage via the CLI
 webpack-dev-server --inline=false
 ```
 
-T> Inline mode is recommended when using Hot Module Replacement.
+T> Inline mode is recommended for Hot Module Replacement as it includes an HMR trigger from the websocket. Polling mode can be used as an alternative, but requires an additional entry point, `'webpack/hot/poll?1000'`.
 
 
 ## `devServer.lazy` 🔑
