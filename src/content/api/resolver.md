@@ -1,5 +1,6 @@
 ---
 title: Resolver
+group: Plugins
 sort: 5
 ---
 

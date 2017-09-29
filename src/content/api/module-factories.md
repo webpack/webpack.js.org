@@ -1,5 +1,6 @@
 ---
 title: Context/Normal Module Factories
+group: Plugins
 sort: 5
 ---
 

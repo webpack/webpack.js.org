@@ -1,5 +1,6 @@
 ---
 title: Plugin API
+group: Plugins
 sort: 1
 ---
 
