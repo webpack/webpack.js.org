@@ -1,5 +1,6 @@
 ---
 title: Compilation
+group: Plugins
 sort: 3
 ---
 

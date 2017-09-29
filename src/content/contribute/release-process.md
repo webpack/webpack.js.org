@@ -1,5 +1,6 @@
 ---
-title: webpack merge, tag and release process
+title: Release Process
+sort: 5
 contributors:
   - d3viant0ne
   - sokra

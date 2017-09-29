@@ -1,5 +1,6 @@
 ---
 title: Tapable
+group: Plugins
 sort: 1
 contributors:
   - thelarkinn
