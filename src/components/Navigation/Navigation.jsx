@@ -7,36 +7,24 @@ import Dropdown from '../Dropdown/Dropdown';
 // TODO: Maybe by updating the routing scheme later on we can avoid hardcoding this?
 let Sections = [
   {
-    title: 'Concepts',
-    url: 'concepts'
-  },
-  {
-    title: 'Guides',
-    url: 'guides'
-  },
-  {
     title: 'Documentation',
-    url: 'configuration',
+    url: 'concepts',
     children: [
-      { title: 'CLI', url: 'api/cli' },
-      { title: 'API', url: 'api' },
+      { title: 'Concepts', url: 'concepts' },
       { title: 'Configuration', url: 'configuration' },
+      { title: 'API', url: 'api' },
+      { title: 'Guides', url: 'guides' },
       { title: 'Loaders', url: 'loaders' },
-      { title: 'Plugins', url: 'plugins' },
-      { title: 'Development', url: 'development' }
+      { title: 'Plugins', url: 'plugins' }
     ]
   },
   {
-    title: 'Donate',
-    url: '//opencollective.com/webpack'
+    title: 'Contribute',
+    url: 'contribute'
   },
   {
     title: 'Blog',
     url: '//medium.com/webpack'
-  },
-  {
-    title: 'Support',
-    url: 'support'
   }
 ];
 
