@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Documentation",
+    "url": "concepts",
+    "children": [
+      { "title": "Concepts", "url": "concepts" },
+      { "title": "Configuration", "url": "configuration" },
+      { "title": "API", "url": "api" },
+      { "title": "Guides", "url": "guides" },
+      { "title": "Loaders", "url": "loaders" },
+      { "title": "Plugins", "url": "plugins" }
+    ]
+  },
+  {
+    "title": "Contribute",
+    "url": "contribute"
+  },
+  {
+    "title": "Blog",
+    "url": "//medium.com/webpack"
+  }
+]

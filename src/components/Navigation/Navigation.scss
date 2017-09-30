@@ -202,7 +202,7 @@
 
 .navigation__child {
   font-size: getFontSize(-1);
-  margin: 0.5em 1em 0.6em;
+  margin: 0.5em 0 0.6em 2em;
   color: $text-color-highlight;
   text-transform: uppercase;
   @include fontantialias(false);
