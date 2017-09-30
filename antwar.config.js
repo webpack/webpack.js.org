@@ -90,6 +90,7 @@ module.exports = {
      Redirects for Old Content
      *************************/
     'get-started': {
+      hidden: true,
       redirects: {
         '': '/guides/getting-started',
         'install-webpack': '/guides/installation',
@@ -97,6 +98,7 @@ module.exports = {
       }
     },
     pluginsapi: {
+      hidden: true,
       redirects: {
         '': '/api/plugins',
         'compiler': '/api/compiler',
