@@ -1,5 +1,6 @@
 ---
 title: Glossary
+sort: 3
 contributors:
   - rouzbeh84
   - bebraw
