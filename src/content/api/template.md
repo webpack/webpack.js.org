@@ -7,7 +7,8 @@ sort: 8
 ## MainTemplate
 
 ### `startup(source, module, hash)`
-```javascript
+
+``` js
 compilation.mainTemplate.plugin('startup', function(source, module, hash) {
   if (!module.chunks.length && source.indexOf('__ReactStyle__') === -1) {
     var originName = module.origins && module.origins.length ? module.origins[0].name : 'main';
@@ -20,18 +21,22 @@ compilation.mainTemplate.plugin('startup', function(source, module, hash) {
 });
 ```
 
-## HotUpdateChunkTemplate
-
-TODO
-
-## ChunkTemplate
-
-TODO
 
 ## ModuleTemplate
 
-TODO
+?> Document the `ModuleTemplate`...
+
+
+## ChunkTemplate
+
+?> Document the `ChunkTemplate`...
+
 
 ## FunctionModuleTemplate
 
-TODO
+?> Document the `FunctionModuleTemplate`...
+
+
+## HotUpdateChunkTemplate
+
+?> Document the `HotUpdateChunkTemplate`...

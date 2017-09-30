@@ -1,5 +1,6 @@
 ---
-title: Module API - Methods
+title: Module Methods
+group: Modules
 sort: 3
 contributors:
   - skipjack
@@ -348,7 +349,7 @@ if(require.cache[require.resolveWeak('module')]) {
   // Do something when module was loaded before...
 }
 
-// You can perform dynamic resolves ("context") 
+// You can perform dynamic resolves ("context")
 // just as with other require/import methods.
 const page = 'Foo';
 __webpack_modules__[require.resolveWeak(`./page/${page}`)]
