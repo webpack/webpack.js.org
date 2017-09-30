@@ -8,6 +8,7 @@ module.exports = function (source) {
   const result = frontmatter(source);
 
   result.attributes = result.attributes || {};
+  result.attributes.group = result.attributes.group || '-';
   result.attributes.anchors = markdown().getAnchors(result.body);
   result.attributes.contributors = (result.attributes.contributors || []).sort();
   result.attributes.related = Array.isArray(result.attributes.related) ? result.attributes.related : [];
