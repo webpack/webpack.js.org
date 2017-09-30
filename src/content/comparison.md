@@ -1,6 +1,6 @@
 ---
 title: Comparison
-sort: 25
+sort: 1
 contributors:
   - pksjce
   - bebraw
