@@ -358,8 +358,8 @@ __src/index.js__
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
--   element.onClick = Print.bind(null, 'Hello webpack!');
-+   // element.onClick = Print.bind(null, 'Hello webpack!');
+-   element.onclick = Print.bind(null, 'Hello webpack!');
++   // element.onclick = Print.bind(null, 'Hello webpack!');
 
     return element;
   }
