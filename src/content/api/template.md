@@ -12,10 +12,11 @@ sort: 8
 compilation.mainTemplate.plugin('startup', function(source, module, hash) {
   if (!module.chunks.length && source.indexOf('__ReactStyle__') === -1) {
     var originName = module.origins && module.origins.length ? module.origins[0].name : 'main';
-    return ['if (typeof window !== "undefined") {',
+    return [
+      'if (typeof window !== "undefined") {',
         '  window.__ReactStyle__ = ' + JSON.stringify(classNames[originName]) + ';',
-        '}'
-      ].join('\n') + source;
+      '}'
+    ].join('\n') + source;
   }
   return source;
 });

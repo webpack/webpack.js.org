@@ -12,9 +12,9 @@ Many objects in webpack extend the `Tapable` class, which exposes a `plugin` met
 
 A plugin is installed once as webpack starts up. webpack installs a plugin by calling its `apply` method, and passes a reference to the webpack `compiler` object. You may then call `compiler.plugin` to access asset compilations and their individual build steps. An example would look like this:
 
-```javascript
-// MyPlugin.js
+__my-plugin.js__
 
+``` js
 function MyPlugin(options) {
   // Configure your plugin with options...
 }
@@ -41,13 +41,16 @@ MyPlugin.prototype.apply = function(compiler) {
 module.exports = MyPlugin;
 ```
 
-Then in `webpack.config.js`
+__webpack.config.js__
 
-```javascript
-    plugins: [
-        new MyPlugin({options: 'nada'})
-    ]
+``` js
+plugins: [
+  new MyPlugin({
+    options: 'nada'
+  })
+]
 ```
+
 
 ## Plugin Interfaces
 
