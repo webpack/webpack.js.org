@@ -91,9 +91,9 @@ Same goes for tables.
 
 The [configuration](/configuration) properties should be ordered alphabetically as well:
 
-* `devServer.contentBase`
-* `devServer.compress`
-* `devServer.hot`
+- `devServer.contentBase`
+- `devServer.compress`
+- `devServer.hot`
 
 ### Quotes
 
