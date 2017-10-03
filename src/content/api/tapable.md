@@ -12,19 +12,17 @@ contributors:
 
 `Tapable` has four groups of member functions:
 
-- `plugin(name:string, handler:function)` - This allows a custom plugin to register into a **Tapable instance**'s event.
-This acts as the same as `on()` of `EventEmitter`, for registering a handler/listener to do something when the signal/event happens.
-- `apply(…pluginInstances: (AnyPlugin|function)[])` - `AnyPlugin` should be a class (or, rarely, an object) that has an `apply` method, or just a function with some registration code inside. This method is just to **apply** plugins' definition, so that the real event listeners can be registered into the _Tapable_ instance's registry.
-- `applyPlugins*(name:string, …)` - The _Tapable_ instance can apply all the plugins under a particular hash using these functions.
-These group of method act like `emit()` of `EventEmitter`, to control the event emission meticulously with various strategy for various use cases.
-- `mixin(pt: Object)` - a simple method to extend `Tapable`'s prototype as a mixin rather than inheritance.
+- `plugin(name:string, handler:function)`: This allows a custom plugin to register into a **Tapable instance**'s event. This acts as the same as `on()` of `EventEmitter`, for registering a handler/listener to do something when the signal/event happens.
+- `apply(…pluginInstances: (AnyPlugin|function)[])`: `AnyPlugin` should be a class (or, rarely, an object) that has an `apply` method, or just a function with some registration code inside. This method is just to **apply** plugins' definition, so that the real event listeners can be registered into the _Tapable_ instance's registry.
+- `applyPlugins*(name:string, …)`: The _Tapable_ instance can apply all the plugins under a particular hash using these functions. These group of method act like `emit()` of `EventEmitter`, to control the event emission meticulously with various strategy for various use cases.
+- `mixin(pt: Object)`: a simple method to extend `Tapable`'s prototype as a mixin rather than inheritance.
 
 The different `applyPlugins*` methods cover the following use cases:
 
-- Plugins can run serially
-- Plugins can run in parallel
-- Plugins can run one after the other but taking input from the previous plugin (waterfall)
-- Plugins can run asynchronously
+- Plugins can run serially.
+- Plugins can run in parallel.
+- Plugins can run one after the other but taking input from the previous plugin (waterfall).
+- Plugins can run asynchronously.
 - Quit running plugins on bail: that is, once one plugin returns non-`undefined`, jump out of the run flow and return _the return of that plugin_. This sounds like `once()` of `EventEmitter` but is totally different.
 
 
