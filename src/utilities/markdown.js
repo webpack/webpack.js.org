@@ -231,11 +231,9 @@ function handleTable(t) {
   header += handleTableRow(cell);
 
   for (let i = 0; i < t.cells.length; i++) {
-
     let row = t.cells[i];
 
     row = fixPipesEscapingForTableRow(row);
-
     cell = '';
 
     for (let j = 0; j < row.length; j++) {
@@ -373,48 +371,38 @@ function handleTok() {
  * Fixes escaped '|' characters in table cells.
  * @link https://github.com/chjj/marked/issues/595
  */
-function fixPipesEscapingForTableRow (row) {
-
+function fixPipesEscapingForTableRow(row) {
   const fixedRow = [];
-
   let index = 0;
-
   let handlingBroken = false;
 
   while (index < row.length) {
-
     const cellString = row[index];
 
     if (isBroken(cellString) && !handlingBroken) {
-
       // Starting to handle broken chain by creating first cell to append content to.
       handlingBroken = true;
       fixedRow.push(fixBroken(cellString));
 
     } else if (!isBroken(cellString) && handlingBroken) {
-
       // Finishing to handle broken chain by appending the last element to the current cell.
       fixedRow[fixedRow.length - 1] += cellString;
       handlingBroken = false;
 
     } else if (isBroken(cellString) && handlingBroken) {
-
       // Appending next broken cell to the current cell.
       fixedRow[fixedRow.length - 1] += fixBroken(cellString);
 
     } else {
-
       // Just adding cell normally.
       fixedRow.push(cellString);
 
     }
 
     index++;
-
   }
 
   return fixedRow;
-
 
   function isBroken (cellString) {
     return cellString.endsWith('\\');
@@ -423,5 +411,4 @@ function fixPipesEscapingForTableRow (row) {
   function fixBroken (cellString) {
     return cellString.replace(/\\$/, '|');
   }
-
 }
