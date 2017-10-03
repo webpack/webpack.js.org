@@ -60,7 +60,7 @@ compilation.plugin('optimize-tree', function(chunks, modules) {
 });
 ```
 
-#### `optimize-modules(modules: Module[])`
+### `optimize-modules(modules: Module[])`
 
 Optimize the modules.
 
