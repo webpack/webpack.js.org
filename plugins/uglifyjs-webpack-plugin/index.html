@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/d2b7a66a44dbcb243526.css" rel="stylesheet">
+      <link href="/605343d253c4a9e6f0f6.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -227,25 +227,18 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         Type
     </div>
     <div class="table-td-content">
-        `{Boolean|RegExp\
+        <code>{Boolean|RegExp|Function&lt;(node, comment) -&gt; {Boolean|Object}&gt;}</code>
     </div>
   </div><div class="table-td">
     <div class="table-td-title">
         Default
     </div>
     <div class="table-td-content">
-        Function&lt;(node, comment) -&gt; {Boolean|Object}&gt;}`
-    </div>
-  </div><div class="table-td">
-    <div class="table-td-title">
-        Description
-    </div>
-    <div class="table-td-content">
         <code>false</code>
     </div>
   </div><div class="table-td">
     <div class="table-td-title">
-        
+        Description
     </div>
     <div class="table-td-content">
         Whether comments shall be extracted to a separate file, (see <a href="https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a">details</a> (<code>webpack &gt;= 2.3.0</code>)
@@ -715,25 +708,18 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         Type
     </div>
     <div class="table-td-content">
-        `{Boolean|String\
+        <code>{Boolean|String|Function}</code>
     </div>
   </div><div class="table-td">
     <div class="table-td-title">
         Default
     </div>
     <div class="table-td-content">
-        Function}`
-    </div>
-  </div><div class="table-td">
-    <div class="table-td-title">
-        Description
-    </div>
-    <div class="table-td-content">
         <code>/*! For license information please see ${filename}.js.LICENSE */</code>
     </div>
   </div><div class="table-td">
     <div class="table-td-title">
-        
+        Description
     </div>
     <div class="table-td-content">
         The banner text that points to the extracted file and will be added on top of the original file. Can be <code>false</code> (no banner), a <code>{String}</code>, or a <code>{Function&lt;(string) -&gt; {String}</code> that will be called with the filename where extracted comments have been stored. Will be wrapped into comment
