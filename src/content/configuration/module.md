@@ -251,7 +251,7 @@ Conditions can be one of these:
 * A RegExp: It's tested with the input.
 * A function: It's called with the input and must return a truthy value to match.
 * An array of Conditions: At least one of the Conditions must match.
-* A object: All properties must match. Each property has a defined behavior.
+* An object: All properties must match. Each property has a defined behavior.
 
 `{ test: Condition }`: The Condition must match. The convention is to provide a RegExp or array of RegExps here, but it's not enforced.
 
