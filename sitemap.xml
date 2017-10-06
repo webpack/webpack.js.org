@@ -25,10 +25,10 @@
         <loc>https://webpack.js.org/development/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/get-started/index.html</loc>
+        <loc>https://webpack.js.org/glossary/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/glossary/index.html</loc>
+        <loc>https://webpack.js.org/get-started/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/index.html</loc>
@@ -46,10 +46,10 @@
         <loc>https://webpack.js.org/plugins/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/support/index.html</loc>
+        <loc>https://webpack.js.org/pluginsapi/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/pluginsapi/index.html</loc>
+        <loc>https://webpack.js.org/support/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/vote/index.html</loc>
@@ -424,10 +424,10 @@
         <loc>https://webpack.js.org/plugins/environment-plugin/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/extract-text-webpack-plugin/index.html</loc>
+        <loc>https://webpack.js.org/plugins/hashed-module-ids-plugin/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/hashed-module-ids-plugin/index.html</loc>
+        <loc>https://webpack.js.org/plugins/extract-text-webpack-plugin/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/hot-module-replacement-plugin/index.html</loc>
@@ -442,13 +442,13 @@
         <loc>https://webpack.js.org/plugins/ignore-plugin/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/limit-chunk-count-plugin/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/plugins/loader-options-plugin/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/min-chunk-size-plugin/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/limit-chunk-count-plugin/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/module-concatenation-plugin/index.html</loc>
@@ -460,9 +460,6 @@
         <loc>https://webpack.js.org/plugins/no-emit-on-errors-plugin/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/normal-module-replacement-plugin/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/plugins/npm-install-webpack-plugin/index.html</loc>
     </url>
     <url>
@@ -472,16 +469,19 @@
         <loc>https://webpack.js.org/plugins/provide-plugin/index.html</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/plugins/normal-module-replacement-plugin/index.html</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/plugins/source-map-dev-tool-plugin/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/uglifyjs-webpack-plugin/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/zopfli-webpack-plugin/index.html</loc>
+        <loc>https://webpack.js.org/plugins/watch-ignore-plugin/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/watch-ignore-plugin/index.html</loc>
+        <loc>https://webpack.js.org/plugins/zopfli-webpack-plugin/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/pluginsapi/compiler/index.html</loc>
