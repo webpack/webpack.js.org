@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/d50a180f6ae7a38b2e1e.css" rel="stylesheet">
+      <link href="/9f9b53d894932941efd7.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -348,7 +348,7 @@ style<span class="token punctuation">.</span><span class="token function">unuse<
 This could be used for non local development and production.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-js"><span class="token punctuation">{</span>
-  loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span>
+  loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span><span class="token punctuation">,</span>
   options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     hmr<span class="token punctuation">:</span> <span class="token boolean">false</span>
   <span class="token punctuation">}</span>
@@ -417,7 +417,7 @@ This function will be called on the css that is about to be loaded and the retur
 If the return value of the <code>transform</code> function is falsy, the css will not be loaded into the page at all.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-js"><span class="token punctuation">{</span>
-  loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span>
+  loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span><span class="token punctuation">,</span>
   options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     transform<span class="token punctuation">:</span> <span class="token string">&apos;path/to/transform.js&apos;</span>
   <span class="token punctuation">}</span>
@@ -434,7 +434,7 @@ If the return value of the <code>transform</code> function is falsy, the css wil
 <h4 class="header"><a class="anchor" href="#conditional" id="conditional"></a><span class="text"><code>Conditional</code></span><a class="icon-link" href="#conditional"></a></h4>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-js"><span class="token punctuation">{</span>
-  loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span>
+  loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span><span class="token punctuation">,</span>
   options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     transform<span class="token punctuation">:</span> <span class="token string">&apos;path/to/conditional.js&apos;</span>
   <span class="token punctuation">}</span>
@@ -454,7 +454,7 @@ If the return value of the <code>transform</code> function is falsy, the css wil
 <p>By default, the style-loader appends <code>&lt;style&gt;</code> elements to the end of the style target, which is the <code>&lt;head&gt;</code> tag of the page unless specified by <code>insertInto</code>. This will cause CSS created by the loader to take priority over CSS already present in the target. To insert style elements at the beginning of the target, set this query parameter to &apos;top&apos;, e.g</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-js"><span class="token punctuation">{</span>
-  loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span>
+  loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span><span class="token punctuation">,</span>
   options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     insertAt<span class="token punctuation">:</span> <span class="token string">&apos;top&apos;</span>
   <span class="token punctuation">}</span>
@@ -463,7 +463,7 @@ If the return value of the <code>transform</code> function is falsy, the css wil
 <p>A new <code>&lt;style&gt;</code> element can be inserted before a specific element by passing an object, e.g.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-js"><span class="token punctuation">{</span>
-  loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span>
+  loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span><span class="token punctuation">,</span>
   options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     insertAt<span class="token punctuation">:</span> <span class="token punctuation">{</span>
         before<span class="token punctuation">:</span> <span class="token string">&apos;#id&apos;</span>
@@ -476,7 +476,7 @@ If the return value of the <code>transform</code> function is falsy, the css wil
 You can also insert the styles into a <a href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot">ShadowRoot</a>, e.g</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-js"><span class="token punctuation">{</span>
-  loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span>
+  loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span><span class="token punctuation">,</span>
   options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     insertInto<span class="token punctuation">:</span> <span class="token string">&apos;#host::shadow&gt;#root&apos;</span>
   <span class="token punctuation">}</span>
@@ -489,7 +489,7 @@ You can also insert the styles into a <a href="https://developer.mozilla.org/en-
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-js"><span class="token punctuation">{</span>
-  loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span>
+  loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span><span class="token punctuation">,</span>
   options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     singleton<span class="token punctuation">:</span> <span class="token boolean">true</span>
   <span class="token punctuation">}</span>
@@ -499,7 +499,7 @@ You can also insert the styles into a <a href="https://developer.mozilla.org/en-
 <p>Enable/Disable source map loading</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-js"><span class="token punctuation">{</span>
-  loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span>
+  loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span><span class="token punctuation">,</span>
   options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     sourceMap<span class="token punctuation">:</span> <span class="token boolean">true</span>
   <span class="token punctuation">}</span>
@@ -509,7 +509,7 @@ You can also insert the styles into a <a href="https://developer.mozilla.org/en-
 <p>If convertToAbsoluteUrls and sourceMaps are both enabled, relative urls will be converted to absolute urls right before the css is injected into the page. This resolves <a href="https://github.com/webpack/style-loader/pull/96">an issue</a> where relative resources fail to load when source maps are enabled. You can enable it with the convertToAbsoluteUrls option.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-js"><span class="token punctuation">{</span>
-  loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span>
+  loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span><span class="token punctuation">,</span>
   options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     sourceMap<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     convertToAbsoluteUrls<span class="token punctuation">:</span> <span class="token boolean">true</span>
