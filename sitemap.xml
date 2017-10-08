@@ -262,13 +262,13 @@
         <loc>https://webpack.js.org/guides/starter-kits/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/tree-shaking/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/guides/typescript/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/why-webpack/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/guides/tree-shaking/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/babel-loader/index.html</loc>
