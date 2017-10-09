@@ -1,10 +1,22 @@
 import React from 'react';
-import GoldSponsors from './support-goldsponsors.json';
-import SilverSponsors from './support-silversponsors.json';
-import Sponsors from './support-sponsors.json';
 import Backers from './support-backers.json';
 import Additional from './support-additional.js';
 import './Support.scss';
+
+const SUPPORTERS = [ ...Backers ];
+
+// merge or add additional backers/sponsors
+for(const additional of Additional) {
+  const existing = SUPPORTERS.find(supporter => supporter.slug && supporter.slug === additional.slug);
+  if (existing) {
+    existing.totalDonations += additional.totalDonations;
+  } else {
+    SUPPORTERS.push(additional);
+  }
+}
+
+// resort list
+SUPPORTERS.sort((a, b) => b.totalDonations - a.totalDonations);
 
 const ranks = {
   backer: {
@@ -38,26 +50,8 @@ function formatMoney(number) {
 export default class Support extends React.Component {
   render() {
     let { rank } = this.props;
-    let supporters = [
-      ...GoldSponsors,
-      ...SilverSponsors,
-      ...Sponsors,
-      ...Backers,
-    ];
 
-    // merge or add additional backers/sponsors
-    for(const additional of Additional) {
-      const existing = supporters.find(supporter => supporter.username && supporter.username === additional.username);
-      if (existing) {
-        existing.totalDonations += additional.totalDonations;
-      } else {
-        supporters.push(additional);
-      }
-    }
-
-    // resort list
-    supporters.sort((a, b) => b.totalDonations - a.totalDonations);
-
+    let supporters = SUPPORTERS;
     let minimum, maximum;
 
     if (rank && ranks[rank]) {
@@ -90,16 +84,16 @@ export default class Support extends React.Component {
 
         {
           supporters.map((supporter, index) => (
-            <a key={ supporter.id || supporter.username || index }
+            <a key={ supporter.id || supporter.slug || index }
                className="support__item"
-               title={ `$${formatMoney(supporter.totalDonations / 100)} by ${supporter.name || supporter.username}` }
+               title={ `$${formatMoney(supporter.totalDonations / 100)} by ${supporter.name || supporter.slug}` }
                target="_blank"
-               href={ supporter.website || `https://opencollective.com/${supporter.username}` }>
+               href={ supporter.website || `https://opencollective.com/${supporter.slug}` }>
               { supporter.avatar ? <img
                 className={ `support__${rank}-avatar` }
                 src={ supporter.avatar }
-                alt={ supporter.username ? `${supporter.username}'s avatar` : 'avatar' } /> :
-                supporter.name }
+                alt={ supporter.name || supporter.slug ? `${supporter.name || supporter.slug}'s avatar` : 'avatar' } /> :
+                <span className={ `support__${rank}-avatar` }>{supporter.name || supporter.slug}</span> }
               { rank === 'backer' ? <figure className="support__outline" /> : null }
             </a>
           ))

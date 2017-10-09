@@ -21,7 +21,7 @@ export default [
     reason: "Paypal"
   },
   {
-    username: "peerigon",
+    slug: "peerigon",
     name: "Peerigon",
     avatar: "https://opencollective-production.s3-us-west-1.amazonaws.com/e8a1de10-99c8-11e6-8650-f92e594d5de8.png",
     website: "https://peerigon.com/?utm_source=webpack&utm_medium=documentation&utm_campaign=sponsorship",
