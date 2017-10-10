@@ -70,6 +70,8 @@ T> webpack **不**会并行执行多个配置。每个配置只会在前一个�
 * `.run(callback)`
 * `.watch(watchOptions, handler)`
 
+W> The API only supports a single concurrent compilation at a time. When using `run`, wait for it to finish before calling `run` or `watch` again. When using `watch`, call `close` and wait for it to finish before calling `run` or `watch` again. Concurrent compilations will corrupt the output files.
+
 
 ## 执行(Run)
 

@@ -27,7 +27,7 @@ compiler.options = {...};
 class LogPlugin {
   apply (compiler) {
     compiler.plugin('should-emit', compilation => {
-      console.log('should i emit?');
+      console.log('should I emit?');
       return true;
     })
   }

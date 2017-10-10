@@ -194,8 +194,8 @@ T> 注意，如果你计划只是将 library 用作另一个 webpack bundle 中�
 对于从一个依赖目录中，调用多个文件的 library：
 
 ``` js
-import A from 'dependency/one';
-import B from 'dependency/two';
+import A from 'library/one';
+import B from 'library/two';
 
 // ...
 ```

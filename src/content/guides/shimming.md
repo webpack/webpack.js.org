@@ -13,240 +13,437 @@ related:
     url: https://github.com/babel/babel-preset-env#usebuiltins
 ---
 
-`webpack` 作为模块打包工具可以支持 ES2015 模块，根据 CommonJS 或者 AMD 规范编写的模块。但是很多时候，当使用第三方 library 的时候，可以看出我们还期望有一些全局依赖，比如对于大家都知道 `jquery` 的 `$`。这可能也会创建一些需要被导出的全局变量。在此，我们会看到通过不同的方式去帮助 webpack 支持这些**彼此割裂的模块**。
+The `webpack` compiler can understand modules written as ES2015 modules, CommonJS or AMD. However, some third party libraries may expect global dependencies (e.g. `$` for `jQuery`). The libraries might also create globals which need to be exported. These "broken modules" are one instance where _shimming_ comes into play.
+
+W> __We don't recommend using globals!__ The whole concept behind webpack is to allow more modular front-end development. This means writing isolated modules that are well contained and do not rely on hidden dependencies (e.g. globals). Please use these features only when necessary.
+
+Another instance where _shimming_ can be useful is when you want to [polyfill](https://en.wikipedia.org/wiki/Polyfill) browser functionality to support more users. In this case, you may only want to deliver those polyfills to the browsers that need patching (i.e. load them on demand).
+
+The following article will walk through both of these use cases.
+
+T> For simplicity, this guide stems from the examples in [Getting Started](/guides/getting-started). Please make sure you are familiar with the setup there before moving on.
 
 
-## 未压缩的 CommonJS/AMD 文件优先于 `dist` 打包版本。
+## Shimming Globals
 
-多数模块会在 `package.json` 的 `main` 字段中链接到 library 的 `dist` 版本。虽然对多数开发者来说这是有用的，但对于 webpack 来说更好的方式是链接到 src 版本的别名上，因为这样 webpack 能够更好地优化依赖。然而多数情况下 `dist` 版本也能正常运行。
+Let's start with the first use case of shimming global variables. Before we do anything let's take another look at our project:
 
-``` javascript
-// webpack.config.js
+__project__
 
-module.exports = {
-    ...
-    resolve: {
-        alias: {
-            jquery: "jquery/src/jquery"
-        }
-    }
-};
+``` diff
+webpack-demo
+|- package.json
+|- webpack.config.js
+|- /dist
+|- /src
+  |- index.js
+|- /node_modules
 ```
 
+Remember that `lodash` package we were using? For demonstration purposes, let's say we wanted to instead provide this as a global throughout our application. To do this, we can use the `ProvidePlugin`.
 
-## `ProvidePlugin`
+The [`ProvidePlugin`](/plugins/provide-plugin) makes a package available as a variable in every module compiled through webpack. If webpack sees that variable used, it will include the given package in the final bundle. Let's go ahead by removing the `import` statement for `lodash` and instead providing it via the plugin:
 
-[`ProvidePlugin`](/plugins/provide-plugin) 可以将模块作为一个变量，被 `webpack` 在其他每个模块中引用。只有你需要使用此变量的时候，这个模块才会被 require 进来。
-多数之前遗留的模块，会依赖于已存在的某些特定全局变量，比如 jQuery 插件中的 `$` 或者 `jQuery`。在这种场景，你可以在每次遇到全局标识符 `$` 的时候，在 webpack 中预先设置 `var $ = require(“jquery”)`。
+__src/index.js__
 
-```javascript
-module.exports = {
-  plugins: [
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery'
-    })
-  ]
-};
+``` diff
+- import _ from 'lodash';
+-
+  function component() {
+    var element = document.createElement('div');
+
+-   // Lodash, now imported by this script
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+
+    return element;
+  }
+
+  document.body.appendChild(component());
 ```
-
-此插件还能够通过使用以下格式，通过配置一个路径数组，提供导出某个模块：`[module, child, ...children?]`。
-
-以下配置将正确从 TypeScript 的 `tslib` package 包中导入函数 `__assign`，并将其提供给调用之处。
-
-```javascript
-module.exports = {
-  plugins: [
-    new webpack.ProvidePlugin({
-      __assign: ['tslib', '__assign'],
-      __extends: ['tslib', '__extends'],
-    })
-  ]
-};
-```
-
-
-## `imports-loader`
-
-[`imports-loader`](/loaders/imports-loader/)  在引用了之前的遗留模块中，插入必需的全局变量。
-例如，某些遗留模块依赖于 `this` 作为 `window` 对象，而在 CommonJS 上下文中执行的 `this` 等同于 `module.exports`。在这种情况下，你可以使用 `imports-loader` 来替换重写 `this`。
 
 __webpack.config.js__
 
-```javascript
-module.exports = {
-  module: {
-    rules: [{
-      test: require.resolve("some-module"),
-      use: 'imports-loader?this=>window'
-    }]
-  }
-};
+``` diff
+  const path = require('path');
+
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+-   }
++   },
++   plugins: [
++     new webpack.ProvidePlugin({
++       lodash: 'lodash'
++     })
++   ]
+  };
 ```
 
-webpack 中的模块支持不同的[模块风格](/concepts/modules)，比如AMD, CommonJS 以及之前的遗留模块。然而，通常会先检查 `define`，然后使用一些比较怪异的代码来导出属性。在这些情况下，可以通过设置 `define = false`，有助于强制使用 CommonJS 路径：
+What we've essentially done here is tell webpack...
+
+> If you encounter at least one instance of the variable `lodash`, include the `lodash` package and provide it to the modules that need it.
+
+If we run a build, we should still see the same output:
+
+``` bash
+TODO: Include output
+```
+
+We can also use the `ProvidePlugin` to expose a single export of a module by configuring it with an "array path" (e.g. `[module, child, ...children?]`). So let's imagine we only wanted to provide the `join` method from `lodash` wherever it's invoked:
+
+__src/index.js__
+
+``` diff
+  function component() {
+    var element = document.createElement('div');
+
+-   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
++   element.innerHTML = join(['Hello', 'webpack'], ' ');
+
+    return element;
+  }
+
+  document.body.appendChild(component());
+```
 
 __webpack.config.js__
 
-```javascript
-module.exports = {
-  module: {
-    rules: [{
-      test: require.resolve("some-module"),
-      use: 'imports-loader?define=>false'
-    }]
-  }
-};
+``` diff
+  const path = require('path');
+
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    },
+    plugins: [
+      new webpack.ProvidePlugin({
+-       lodash: 'lodash'
++       join: ['lodash', 'join']
+      })
+    ]
+  };
 ```
 
+This would go nicely with [Tree Shaking](/guides/tree-shaking) as the rest of the `lodash` library should get dropped.
 
-## `exports-loader`
 
-比如说，一个 library 创建了一个全局变量，它期望使用者通过全局变量去使用；在这种情况下，我们能够使用 [`exports-loader`](/loaders/exports-loader/)，将全局变量导出为 CommonJS 格式。比如，为了将 `file` 导出为 `file` 以及将 `helpers.parse` 导出为 `parse`：
+## Granular Shimming
+
+Some legacy modules rely on `this` being the `window` object. Let's update our `index.js` so this is the case:
+
+``` diff
+  function component() {
+    var element = document.createElement('div');
+
+    element.innerHTML = join(['Hello', 'webpack'], ' ');
++
++   // Assume we are in the context of `window`
++   this.alert('Hmmm, this probably isn\'t a great idea...')
+
+    return element;
+  }
+
+  document.body.appendChild(component());
+```
+
+This becomes a problem when the module is executed in a CommonJS context where `this` is equal to `module.exports`. In this case you can override `this` using the [`imports-loader`](/loaders/imports-loader/):
 
 __webpack.config.js__
 
-```javascript
-module.exports = {
-  module: {
-    rules: [{
-      test: require.resolve("some-module"),
-      use: 'exports-loader?file,parse=helpers.parse'
-      // 在文件的源码中加入以下代码
-      //  exports["file"] = file;
-      //  exports["parse"] = helpers.parse;
-    }]
+``` diff
+  const path = require('path');
+
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    },
++   module: {
++     rules: [
++       {
++         test: require.resolve('index.js'),
++         use: 'imports-loader?this=>window'
++       }
++     ]
++   },
+    plugins: [
+      new webpack.ProvidePlugin({
+        join: ['lodash', 'join']
+      })
+    ]
+  };
+```
+
+
+## Global Exports
+
+Let's say a library creates a global variable that it expects its consumers to use. We can add a small module to our setup to demonstrate this:
+
+__project__
+
+``` diff
+  webpack-demo
+  |- package.json
+  |- webpack.config.js
+  |- /dist
+  |- /src
+    |- index.js
++   |- globals.js
+  |- /node_modules
+```
+
+__src/globals.js__
+
+``` js
+var file = 'blah.txt';
+var helpers = {
+  test: function() { console.log('test something'); },
+  parse: function() { console.log('parse something'); }
+}
+```
+
+Now, while you'd likely never do this in your own source code, you may encounter a dated library you'd like to use that contains similar code to what's shown above. In this case, we can use [`exports-loader`](/loaders/exports-loader/), to export that global variable as a normal module export. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
+
+__webpack.config.js__
+
+``` diff
+  const path = require('path');
+
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    },
+    module: {
+      rules: [
+        {
+          test: require.resolve('index.js'),
+          use: 'imports-loader?this=>window'
+-       }
++       },
++       {
++         test: require.resolve('globals.js'),
++         use: 'exports-loader?file,parse=helpers.parse'
++       }
+      ]
+    },
+    plugins: [
+      new webpack.ProvidePlugin({
+        join: ['lodash', 'join']
+      })
+    ]
+  };
+```
+
+Now from within our entry script (i.e. `src/index.js`), we could `import { file, parse } from './globals.js';` and all should work smoothly.
+
+
+## Loading Polyfills
+
+Almost everything we've discussed thus far has been in relation to handling legacy packages. Let's move on to our second topic: __polyfills__.
+
+There's a lot of ways to load polyfills. For example, to include the [`babel-polyfill`](https://babeljs.io/docs/usage/polyfill/) we might simply:
+
+``` bash
+npm i --save babel-polyfill
+```
+
+and `import` it so as to include it in our main bundle:
+
+__src/index.js__
+
+``` diff
++ import 'babel-polyfill';
++
+  function component() {
+    var element = document.createElement('div');
+
+    element.innerHTML = join(['Hello', 'webpack'], ' ');
+
+    return element;
   }
-};
+
+  document.body.appendChild(component());
 ```
 
+T> Note that we aren't binding the `import` to a variable. This is because polyfills simply run on their own, prior to the rest of the code base, allowing us to then assume certain native functionality exists.
 
-## `script-loader`
+Now while this is one approach, __including polyfills in the main bundle is not recommended__ because this penalizes modern browsers users by making them download a bigger file with unneeded scripts.
 
-[`script-loader`](/loaders/script-loader/) 在全局上下文中执行代码，如同你在 `script` 标签中加入代码。在这种模式下，普通的 library 都能够正常运行。访问 `require`, `module` 等变量则是 undefined。
+Let's move our `import` to a new file and add the [`whatwg-fetch`](https://github.com/github/fetch) polyfill:
 
-W> 文件作为字符串添加到 bundle 中。它不会被 `webpack` 压缩，因此如果使用了一个压缩后的版本，没有开发工具支持调试此 loader 添加的 library。
-
-假设你有一个 `legacy.js` 文件包含……
-
-```javascript
-GLOBAL_CONFIG = {};
+``` bash
+npm i --save whatwg-fetch
 ```
 
-...使用 `script-loader`...
+__src/index.js__
 
-```javascript
-require('script-loader!legacy.js');
-```
+``` diff
+- import 'babel-polyfill';
+-
+  function component() {
+    var element = document.createElement('div');
 
-...基本上会生成：
+    element.innerHTML = join(['Hello', 'webpack'], ' ');
 
-```javascript
-eval("GLOBAL_CONFIG = {};");
-```
-
-
-## `noParse` 选项
-
-当模块没有 AMD/CommonJS 的版本时，并且你希望直接引入 `dist`版本，你可以将这个模块标记为 [`noParse`](/configuration/module/#module-noparse)。然后 `webpack` 将会直接引入这个模块并且不会解析它，这样可以用来改善构建时间。
-
-W> 任何用到 AST 特性（比如 `ProvidePlugin`）都不会工作。
-
-```javascript
-module.exports = {
-  module: {
-    noParse: /jquery|backbone/
+    return element;
   }
-};
+
+  document.body.appendChild(component());
 ```
 
+__project__
 
-## Node 内置
-
-Node 内置（如 `process`），可以直接从配置文件(configuration file)进行正确的 polyfill，而无需使用任何专门的 loader 或插件。有关更多信息和示例，请查看[node 配置页面](/configuration/node)。
-
-***
-
-> 原文：https://webpack.js.org/guides/shimming/
-
-
-## Loading polyfills on demand
-
-It's common in web projects to include polyfills in the main bundle. This is not recommended because we are penalizing modern browsers users by making them download a bigger file with unneeded scripts.
-
-The simplest way to mitigate this is by adding a separate entry point in your webpack config file including the polyfills your project needs.
-
-```javascript
-// webpack.config.js
-module.exports = {
-  entry: {
-    polyfills: [
-      'babel-polyfill',
-      'whatwg-fetch'
-    ],
-    main: './src/index.js'
-  }
-  // ... rest of your webpack config
-};
+``` diff
+  webpack-demo
+  |- package.json
+  |- webpack.config.js
+  |- /dist
+  |- /src
+    |- index.js
+    |- globals.js
++   |- polyfills.js
+  |- /node_modules
 ```
 
-An alternative is to create a new entry file and manually import these packages.
+__src/polyfills.js__
 
 ```javascript
-// src/polyfills.js
 import 'babel-polyfill';
 import 'whatwg-fetch';
 ```
 
-```javascript
-// webpack.config.js
-module.exports = {
-  entry: {
-    polyfills: './src/polyfills.js',
-    main: './src/index.js'
+__webpack.config.js__
+
+``` diff
+  const path = require('path');
+
+  module.exports = {
+-   entry: './src/index.js',
++   entry: {
++     polyfills: './src/polyfills.js',
++     index: './src/index.js'
++   },
+    output: {
+-     filename: 'bundle.js',
++     filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    },
+    module: {
+      rules: [
+        {
+          test: require.resolve('index.js'),
+          use: 'imports-loader?this=>window'
+        },
+        {
+          test: require.resolve('globals.js'),
+          use: 'exports-loader?file,parse=helpers.parse'
+        }
+      ]
+    },
+    plugins: [
+      new webpack.ProvidePlugin({
+        join: ['lodash', 'join']
+      })
+    ]
+  };
+```
+
+With that in place, we can add the logic to conditionally load our new `polyfills.bundle.js` file. How you make this decision depends on the technologies and browsers you need to support. We'll just do some simple testing to determine whether our polyfills are needed:
+
+__dist/index.html__
+
+``` diff
+  <html>
+    <head>
+      <title>Getting Started</title>
++     <script>
++       var modernBrowser = (
++         'fetch' in window &&
++         'assign' in Object
++       );
++
++       if ( !modernBrowser ) {
++         var scriptElement = document.createElement('script');
++
++         scriptElement.async = false;
++         scriptElement.src = '/polyfills.bundle.js';
++         document.head.appendChild(scriptElement);
++       }
++     </script>
+    </head>
+    <body>
+      <script src="index.bundle.js"></script>
+    </body>
+  </html>
+```
+
+Now we can `fetch` some data within our entry script:
+
+__src/index.js__
+
+``` diff
+  function component() {
+    var element = document.createElement('div');
+
+    element.innerHTML = join(['Hello', 'webpack'], ' ');
+
+    return element;
   }
-  // rest of your webpack config
-};
+
+  document.body.appendChild(component());
++
++ fetch('https://jsonplaceholder.typicode.com/users')
++   .then(response => response.json())
++   .then(json => {
++     console.log('We retrieved some data! AND we\'re confident it will work on a variety of browser distributions.')
++     console.log(json)
++   })
++   .catch(error => console.error('Something went wrong when fetching this data: ', error))
 ```
 
-In your html file you need to conditionally load the `polyfills.js` file before your bundle. How you make this decision depends on the technologies and browsers you need to support.
+If we run our build, another `polyfills.bundle.js` file will be emitted and everything should still run smoothly in the browser. Note that this set up could likely be improved upon but it should give you a good idea of how you can provide polyfills only to the users that actually need them.
 
-```html
-<script>
-  var modernBrowser = (
-    'fetch' in window &&
-    'assign' in Object
-  );
 
-  var scripts = [ '/main.js' ];
+## Further Optimizations
 
-  if (!modernBrowser) {
-    scripts.unshift('/polyfills.js');
-  }
+The `babel-preset-env` package uses [browserslist](https://github.com/ai/browserslist) to transpile only what is not supported in your browsers matrix. This preset comes with the `useBuiltIns` option, `false` by default, which converts your global `babel-polyfill` import to a more granular feature by feature `import` pattern:
 
-  scripts.map(function(src) {
-    var scriptElement = document.createElement('script');
-    scriptElement.async = false;
-    scriptElement.src = src;
-    document.head.appendChild(scriptElement);
-  });
-</script>
+``` js
+import 'core-js/modules/es7.string.pad-start';
+import 'core-js/modules/es7.string.pad-end';
+import 'core-js/modules/web.timers';
+import 'core-js/modules/web.immediate';
+import 'core-js/modules/web.dom.iterable';
 ```
 
-T> Any script added dynamically like in the example above will run as soon as it's parsed, but we need our polyfill to run before our bundle. This is why we are setting `async` to `false` for each script.
+See [the repository](https://github.com/babel/babel-preset-env) for more information.
 
 
-### Smaller babel polyfill
+## Node Built-Ins
 
-`babel-preset-env` uses [browserslist](https://github.com/ai/browserslist) to transpile only what is not supported in your browsers matrix. This preset comes with the `useBuiltIns` option _(false by default)_ which converts your global `babel-polyfill` import to a more granular feature by feature import pattern like:
+Node built-ins, like `process`, can be polyfilled right directly from your configuration file without the use of any special loaders or plugins. See the [node configuration page](/configuration/node) for more information and examples.
 
-```javascript
-import "core-js/modules/es7.string.pad-start";
-import "core-js/modules/es7.string.pad-end";
-import "core-js/modules/web.timers";
-import "core-js/modules/web.immediate";
-import "core-js/modules/web.dom.iterable";
-```
+
+## Other Utilities
+
+There are a few other tools that can help when dealing with legacy modules.
+
+The [`script-loader`](/loaders/script-loader/) evaluates code in the global context, similar to inclusion via a `script` tag. In this mode, every normal library should work. `require`, `module`, etc. are undefined.
+
+W> When using the `script-loader`, the module is added as a string to the bundle. It is not minimized by `webpack`, so use a minimized version. There is also no `devtool` support for libraries added by this loader.
+
+When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module in [`noParse`](/configuration/module/#module-noparse). This will cause webpack to include the module without parsing it or resolving `require()` and `import` statements. This practice is also used to improve the build performance.
+
+W> Any feature requiring the AST, like the `ProvidePlugin`, will not work.
+
+Lastly, there are some modules that support different [module styles](/concepts/modules) like AMD, CommonJS and legacy. In most of these cases, they first check for `define` and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting `define=>false` via the [`imports-loader`](/loaders/imports-loader/).
 
 ***
 
