@@ -36,7 +36,7 @@ module.exports = {
 
 **In your application**
 ```js
-import txt from 'file.txt';
+import txt from './file.txt';
 ```
 
 ### CLI
