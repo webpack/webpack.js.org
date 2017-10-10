@@ -300,14 +300,18 @@ For more options and information, see the [connect-history-api-fallback](https:/
 Specify a host to use. By default this is `localhost`. If you want your server to be accessible externally, specify it like this:
 
 ```js
-host: "0.0.0.0"
+host: "192.168.1.2"
 ```
 
 Usage via the CLI
 
 ```bash
-webpack-dev-server --host 0.0.0.0
+webpack-dev-server --host 192.168.1.2
 ```
+
+T> Note that webpack-dev-server now checks for `Host` header. Using `--host 0.0.0.0` will not work on other IP addresses. The `Host` header of the request have to match the listening adress or the host provided in the [`public`](#devServer.public) option. 
+
+T> For usage behind a Proxy, you can enable [`disableHostCheck`](#devServer.disableHostCheck) option. This option is **not recommended** for security reasons
 
 
 ## `devServer.hot`
