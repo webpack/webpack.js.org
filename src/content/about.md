@@ -3,6 +3,7 @@ title: 参与翻译的全体成员
 contributors:
   - akira-cn
   - Aladdin-ADD
+  - AlenQi
   - beiciye
   - billie66
   - biqing
@@ -26,14 +27,17 @@ contributors:
   - lgh06
   - lizhonghui
   - lmymoonsky
+  - lukastong
   - mc-zone
   - neal1991
   - nick-nick
   - panlinying
+  - QC-L
   - rqzheng2015
   - scq000
   - ShiHaoLin
   - shisaq
+  - SimonLeeee
   - starkwang
   - superpig
   - tao1991123
