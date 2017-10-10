@@ -67,7 +67,7 @@ __webpack.config.js__
 const path = require('path');
 
 module.exports = {
-  entry: './index.ts',
+  entry: './src/index.ts',
   module: {
     rules: [
       {
@@ -127,7 +127,7 @@ __webpack.config.js__
   const path = require('path');
 
   module.exports = {
-    entry: './index.ts',
+    entry: './src/index.ts',
 +   devtool: 'inline-source-map',
     module: {
       rules: [
@@ -184,4 +184,4 @@ Here we declare a new module for SVGs by specifying any import that ends in `.sv
 
 W> This may degrade build performance.
 
-See the [Build Performance](guides/build-performance/) guide on build tooling.
+See the [Build Performance](/guides/build-performance/) guide on build tooling.

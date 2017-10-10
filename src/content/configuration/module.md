@@ -92,7 +92,7 @@ Specifies the category of the loader. No value means normal loader.
 
 There is also an additional category "inlined loader" which are loaders applied inline of the import/require.
 
-All loaders are sorted in the order `post, inline, normal, pre` and used in this order.
+All loaders are sorted in the order `pre, inline, normal, post` and used in this order.
 
 All normal loaders can be omitted (overridden) by prefixing `!` in the request.
 
@@ -251,7 +251,7 @@ Conditions can be one of these:
 * A RegExp: It's tested with the input.
 * A function: It's called with the input and must return a truthy value to match.
 * An array of Conditions: At least one of the Conditions must match.
-* A object: All properties must match. Each property has a defined behavior.
+* An object: All properties must match. Each property has a defined behavior.
 
 `{ test: Condition }`: The Condition must match. The convention is to provide a RegExp or array of RegExps here, but it's not enforced.
 

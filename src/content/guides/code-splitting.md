@@ -157,7 +157,7 @@ another.bundle.js  537 bytes       1  [emitted]         another
    [4] ./src/index.js 216 bytes {0} [built]
 ```
 
-Here are some other useful plugins and loaders provide by the community for splitting code:
+Here are some other useful plugins and loaders provided by the community for splitting code:
 
 - [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin): Useful for splitting CSS out from the main application.
 - [`bundle-loader`](/loaders/bundle-loader): Used to split code and lazy load the resulting bundles.
@@ -170,7 +170,7 @@ T> The [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) is also used to spl
 
 Two similar techniques are supported by webpack when it comes to dynamic code splitting. The first and more preferable approach is use to the [`import()` syntax](/api/module-methods#import-) that conforms to the [ECMAScript proposal](https://github.com/tc39/proposal-dynamic-import) for dynamic imports. The legacy, webpack-specific approach is to use [`require.ensure`](/api/module-methods#require-ensure). Let's try using the first of these two approaches...
 
-W> `import()` calls use [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). If you want to support older browsers that lack `Promise` support (e.g. Internet Explorer), you'll need to include a `Promise` polyfill _before_ your primary bundles.
+W> `import()` calls use [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use `import()` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
 Before we start, let's remove the extra [`entry`](/concepts/entry-points/) and [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) from our config as they won't be needed for this next demonstration:
 

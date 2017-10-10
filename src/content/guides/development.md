@@ -97,7 +97,7 @@ We can see that the error also contains a reference to the file (`print.js`) and
 
 W> Some text editors have a "safe write" function that might interfere with some of the following tools. Read [Adjusting Your text Editor](#adjusting-your-text-editor) for a solution to these issues.
 
-It quickly becomes a hassle to manually run `npm run build` everytime you want to compile your code.
+It quickly becomes a hassle to manually run `npm run build` every time you want to compile your code.
 
 There are a couple of different options available in webpack that help you automatically compile your code whenever it changes:
 
@@ -131,6 +131,7 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
+      "clean-webpack-plugin": "^0.1.16",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "file-loader": "^0.11.2",
@@ -175,6 +176,7 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
 
   module.exports = {
     entry: {
@@ -220,6 +222,7 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
+      "clean-webpack-plugin": "^0.1.16",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "file-loader": "^0.11.2",
@@ -337,6 +340,7 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
+      "clean-webpack-plugin": "^0.1.16",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "express": "^4.15.3",

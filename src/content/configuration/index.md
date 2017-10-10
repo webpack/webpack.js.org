@@ -23,6 +23,8 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 
 Click on the name of each option in the configuration code below to jump to the detailed documentation. Also note that the items with arrows can be expanded to show more examples and, in some cases, more advanced configuration.
 
+__webpack.config.js__
+
 ``` js-with-links-with-details
 const path = require('path');
 
@@ -236,7 +238,7 @@ module.exports = {
       // alias "module" -> "new-module" and "module/path/file" -> "new-module/path/file"
 
       "only-module$": "new-module",
-      // alias "only-module" -> "new-module", but not "module/path/file" -> "new-module/path/file"
+      // alias "only-module" -> "new-module", but not "only-module/path/file" -> "new-module/path/file"
 
       "module": path.resolve(__dirname, "app/third/module.js"),
       // alias "module" -> "./app/third/module.js" and "module/file" results in error
