@@ -130,14 +130,17 @@ webpack --env.platform=web  # 设置 env.platform == "web"
 
 `--env` 参数具有多种语法 accepts various syntaxes:
 
-Invocation                      | Resulting environment
-------------------------------- | ---------------------------
-`webpack --env prod`            | `"prod"`
-`webpack --env.prod`            | `{ prod: true }`
-`webpack --env.prod=1`          | `{ prod: 1 }`
-`webpack --env.prod=foo`        | `{ prod: "foo" }`
-`webpack --env.prod --env.min`  | `{ prod: true, min: true }`
-`webpack --env.prod --env min`  | `[{ prod: true }, "min"]`
+Invocation                               | Resulting environment
+---------------------------------------- | ---------------------------
+`webpack --env prod`                     | `"prod"`
+`webpack --env.prod`                     | `{ prod: true }`
+`webpack --env.prod=1`                   | `{ prod: 1 }`
+`webpack --env.prod=foo`                 | `{ prod: "foo" }`
+`webpack --env.prod --env.min`           | `{ prod: true, min: true }`
+`webpack --env.prod --env min`           | `[{ prod: true }, "min"]`
+`webpack --env.prod=foo --env.prod=bar`  | `{prod: [ "foo", "bar" ]}`
+
+T> See the [environment variables](/guides/environment-variables) guide for more information on its usage.
 
 ### 输出配置
 
@@ -292,7 +295,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 
 简写 | 含义
 ---------|----------------------------
--d       | `--debug --devtool cheap-module-source-map --output-pathinfo`
+-d       | `--debug --devtool cheap-module-eval-source-map --output-pathinfo`
 -p       | `--optimize-minimize --define process.env.NODE_ENV="production"`, see [building for production](/guides/production)
 
 

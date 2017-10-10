@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - tarang9211
   - simon04
+  - peterblazejewicz
 ---
 
 webpack 接受以多种编程和数据语言编写的配置文件。支持的文件扩展名列表，可以在 [node-interpret](https://github.com/js-cli/js-interpret) 包中找到。使用 [node-interpret](https://github.com/js-cli/js-interpret)，webpack 可以处理许多不同类型的配置文件。
@@ -26,7 +27,6 @@ __webpack.config.ts__
 ```typescript
 import * as webpack from 'webpack';
 import * as path from 'path';
-declare var __dirname;
 
 const config: webpack.Configuration = {
   entry: './foo.js',

@@ -29,19 +29,19 @@ const Splash = () => (
         <p>通过你的贡献、捐款或者赞助，webpack 将获得繁荣发展。你的捐助直接用于支持我们付出工作、持续改进，最加重要的是有助于我们提供优秀的文档和资料！</p>
 
         <h2>平台赞助</h2>
-        <Support type="sponsors" rank="platinum" />
+        <Support rank="platinum" />
 
         <h2>金牌赞助</h2>
-        <Support type="sponsors" rank="gold" />
+        <Support rank="gold" />
 
         <h2>银牌赞助</h2>
-        <Support type="sponsors" rank="silver" />
+        <Support rank="silver" />
 
         <h2>铜牌赞助</h2>
-        <Support type="sponsors" rank="bronze" />
+        <Support rank="bronze" />
 
         <h2>赞助者</h2>
-        <Support type="backers" />
+        <Support rank="backer" />
       </Container>
     </div>
   </div>

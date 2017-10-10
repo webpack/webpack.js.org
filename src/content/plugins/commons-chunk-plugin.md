@@ -99,17 +99,18 @@ new webpack.optimize.CommonsChunkPlugin({
 entry: {
   vendor: ["jquery", "other-lib"],
   app: "./entry"
-}
-new webpack.optimize.CommonsChunkPlugin({
-  name: "vendor",
+},
+plugins: [
+  new webpack.optimize.CommonsChunkPlugin({
+    name: "vendor",
+    // filename: "vendor.js"
+    // (给 chunk 一个不同的名字)
 
-  // filename: "vendor.js"
-  // (给 chunk 一个不同的名字)
-
-  minChunks: Infinity,
-  // 随着 entrie chunk 越来越多，
-  // 这个配置保证没其它的模块会打包进 vendor chunk
-})
+    minChunks: Infinity,
+    // (随着 entry chunk 越来越多，
+    // 这个配置保证没其它的模块会打包进 vendor chunk)
+  })
+]
 ```
 
 ```html

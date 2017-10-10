@@ -22,22 +22,25 @@
     margin: 0 2px 2px 2px;
   }
 
-  &__sponsors-avatar {
-    &-bronze, &-normal {
-      height: 32px;
-    }
-    &-silver {
-      height: 64px;
-    }
-    &-gold {
-      height: 96px;
-    }
-    &-platinum {
-      height: 128px;
-    }
+  &__bronze-avatar {
+    height: 32px;
+    max-width: 96px;
   }
 
-  &__backers-avatar-normal {
+  &__silver-avatar {
+    height: 64px;
+    max-width: 192px;
+  }
+
+  &__gold-avatar {
+    height: 96px;
+  }
+
+  &__platinum-avatar {
+    height: 128px;
+  }
+
+  &__backer-avatar {
     width: 31px;
     height: 31px;
     border-radius: 50%;
