@@ -13,6 +13,7 @@ contributors:
   - redian
   - skipjack
   - xgqfrms
+  - kelset
 ---
 
 In this guide we'll dive into some of the best practices and utilities for building a production site or application.
@@ -175,6 +176,7 @@ __webpack.prod.js__
   })
 ```
 
+Note: _We have not used `inline-source-map` because it's not optimized for production and would generate a giant bundle, and so reduce the overall performances. Same goes for `devtool`s that contain `eval` in the name._
 
 ## Specify the Environment
 
