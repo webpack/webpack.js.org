@@ -16,7 +16,11 @@ module.exports = {
       title: 'Home',
       layout: () => require('./src/components/Page/Page.jsx').default,
       content: () => require.context('./loaders/page-loader!./src/content', false, /^\.\/.*\.md$/),
-      index: () => require('./src/components/Splash/Splash.jsx').default
+      index: () => require('./src/components/Splash/Splash.jsx').default,
+      redirects: {
+        'support': '/contribute',
+        'writers-guide': '/contribute/writers-guide'
+      }
     },
     concepts: {
       title: 'Concepts',
@@ -103,6 +107,26 @@ module.exports = {
         '': '/api/plugins',
         'compiler': '/api/compiler',
         'template': '/api/template'
+      }
+    },
+    'api/plugins': {
+      redirects: {
+        'compiler': '/api/compiler',
+        'compilation': '/api/compilation',
+        'module-factories': '/api/module-factories',
+        'parser': '/api/parser',
+        'tapable': '/api/tapable',
+        'template': '/api/template',
+        'resolver': '/api/resolver'
+      }
+    },
+    development: {
+      redirects: {
+        '': '/contribute',
+        'plugin-patterns': '/contribute/plugin-patterns',
+        'release-process': '/contribute/release-process',
+        'how-to-write-a-loader': '/contribute/writing-a-loader',
+        'how-to-write-a-plugin': '/contribute/writing-a-plugin'
       }
     }
   }
