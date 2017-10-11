@@ -84,7 +84,7 @@ export default class Support extends React.Component {
               The following <b>Backers</b> are individuals who have contributed various amounts of money in order to help support webpack. Every little bit helps, and we appreciate even the smallest contributions.
             </p>
           ) : rank === 'latest' ? (
-            <p>The following Persons/Organizations did their first donation in the last {Math.round(maxAge / (1000 * 60 * 60 * 24))} days.</p>
+            <p>The following persons/organizations made their first donation in the last {Math.round(maxAge / (1000 * 60 * 60 * 24))} days.</p>
           ) : (
             <p>
               <b className="support__rank">{ rank } sponsors</b>
