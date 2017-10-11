@@ -23,6 +23,8 @@ T> Notice that throughout the configuration we use Node's built-in [path module]
 
 Click on the name of each option in the configuration code below to jump to the detailed documentation. Also note that the items with arrows can be expanded to show more examples and, in some cases, more advanced configuration.
 
+__webpack.config.js__
+
 ``` js-with-links-with-details
 const path = require('path');
 

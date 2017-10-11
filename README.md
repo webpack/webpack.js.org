@@ -16,7 +16,7 @@ they are going:
 - [Guides - Review and Simplify][1]
 - [Concepts - Review, Organize, Define Clear Goals][2]
 
-We haven't created issues for the other sections yet but they will be coming soon. For
+We haven't created issues for the other sections yet, but they will be coming soon. For
 dev-related work please see [General - Current Longterm Plan][3], which will soon be
 replaced by a more dev-specific issue.
 
@@ -28,7 +28,7 @@ If you hope to localize this documentation please jump to the [translate branch]
 
 ## Contributing
 
-Read throug the [writer's guide][7] if you're interested in editing the conent on this
+Read through the [writer's guide][7] if you're interested in editing the content on this
 site. See the [contributors page][5] to learn how to set up and start working on the site
 locally.
 

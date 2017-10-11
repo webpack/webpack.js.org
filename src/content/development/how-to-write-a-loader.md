@@ -43,7 +43,7 @@ Note that webpack currently only searches in your node modules folder for loader
 resolveLoader: {
   modules: [
     'node_modules',
-    path_resolve(__dirname, 'loaders')
+    path.resolve(__dirname, 'loaders')
   ]
 }
 ```

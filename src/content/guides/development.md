@@ -97,7 +97,7 @@ We can see that the error also contains a reference to the file (`print.js`) and
 
 W> Some text editors have a "safe write" function that might interfere with some of the following tools. Read [Adjusting Your text Editor](#adjusting-your-text-editor) for a solution to these issues.
 
-It quickly becomes a hassle to manually run `npm run build` everytime you want to compile your code.
+It quickly becomes a hassle to manually run `npm run build` every time you want to compile your code.
 
 There are a couple of different options available in webpack that help you automatically compile your code whenever it changes:
 
