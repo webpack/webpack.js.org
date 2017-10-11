@@ -28,6 +28,9 @@ const Splash = () => (
 
         <p>Through contributions, donations, and sponsorship, you allow webpack to thrive. Your donations directly support office hours, continued enhancements, and most importantly, great documentation and learning material!</p>
 
+        <h2>Latest Sponsors</h2>
+        <Support rank="latest" />
+
         <h2>Platinum Sponsors</h2>
         <Support rank="platinum" />
 
