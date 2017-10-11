@@ -46,6 +46,9 @@ new webpack.optimize.CommonsChunkPlugin(options)
   children: boolean,
   // If `true` all children of the commons chunk are selected
 
+  deepChildren: boolean,
+  // If `true` all descendants of the commons chunk are selected
+
   async: boolean|string,
   // If `true` a new async commons chunk is created as child of `options.name` and sibling of `options.chunks`.
   // It is loaded in parallel with `options.chunks`.
