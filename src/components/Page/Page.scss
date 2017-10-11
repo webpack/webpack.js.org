@@ -22,10 +22,9 @@
 .page__content {
   flex: 1 1 auto;
   overflow-x: hidden;
-  padding: 1.5em 0.5em;
+  padding: 1.5em 1em;
 
   @include break {
     flex: 3;
-    padding: 1.5em 1.5em 1.5em 0;
   }
 }
