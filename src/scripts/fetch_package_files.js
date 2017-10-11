@@ -18,11 +18,11 @@ function main() {
   const file = process.argv[2];
   const output = process.argv[3];
 
-  if(!file) {
+  if ( !file ) {
     return console.error('Missing file!');
   }
 
-  if(!output) {
+  if ( !output ) {
     return console.error('Missing output!');
   }
 
@@ -35,6 +35,7 @@ function main() {
   stdin.on('data', function(d) {
     input += d;
   });
+
   stdin.on('end', function() {
     fetchPackageFiles({
       input: JSON.parse(input),
@@ -73,12 +74,22 @@ function fetchPackageFiles(options, finalCb) {
 
         if (body && file === 'README.md') {
           body = body
-            .replace(/^[^]*?<\/h1>/m, '') // drop everything up to first </h1>
-            .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-loader\/?)([)"])/g, '/loaders/$2/$3') // modify loader links
-            .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-plugin\/?)([)"])/g, '/plugins/$2/$3') // modify plugin links
-            .replace(/<h2[^>]*>/g, '## ') // replace any <h2> with ##
-            .replace(/<\/h2>/g, '') // drop </h2>
-            .replace(/<!--[\s\S]*?-->/g, ''); // drop comments
+            // Remove all but the description from lead-in (XXX: Optional `\/?` should be unnecessary)
+            .replace(/[^]*?<div align="center">([^]*?)<\/div>/, (match, content) => {
+              let parsed = content.match(/<p>([^]*?)<\/?p>/);
+              return parsed ? parsed[1] : '';
+            })
+            // Replace lone h1 formats
+            .replace(/<h1.*?>.+?<\/h1>/, '')
+            .replace(/# .+/, '')
+            // Modify links to keep them within the site
+            .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-loader\/?)([)"])/g, '/loaders/$2/$3')
+            .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-plugin\/?)([)"])/g, '/plugins/$2/$3')
+            // Replace any <h2> with `##`
+            .replace(/<h2[^>]*>/g, '## ')
+            .replace(/<\/h2>/g, '')
+            // Drop any comments
+            .replace(/<!--[\s\S]*?-->/g, '');
         }
 
         var title = pkg.name;

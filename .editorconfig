@@ -1,20 +1,18 @@
 # Top-most EditorConfig file
 root = true
 
-# Set default charset
-[*.{js}]
-charset = utf-8
-
+# AutoFormat All Files
 [*]
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-# 4 space indentation
-[*.{md,js,jsx,scss,hbs}]
+# Format All Source Files
+[*.{md,js,jsx,json,scss,hbs,*rc}]
+charset = utf-8
 indent_style = space
 indent_size = 2
 
-# Format Config
-[{package.json,.alexrc,babelrc,.eslintignore,.eslintrc,.markdownlint.json,.proselintrc}]
+# Format Any Missing Config Files
+[.eslintignore]
 indent_style = space
 indent_size = 2

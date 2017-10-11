@@ -158,7 +158,7 @@ W> Using this will **override the default array**, meaning that webpack will no 
 
 `array`
 
-When importing from an npm package, e.g. `import * as D3 from "d3"`, this option will determine which fields in it's `package.json` are checked. The default values will vary based upon the [`target`](/concepts/targets) specified in your webpack configuration.
+When importing from an npm package, e.g. `import * as D3 from "d3"`, this option will determine which fields in its `package.json` are checked. The default values will vary based upon the [`target`](/concepts/targets) specified in your webpack configuration.
 
 When the `target` property is set to `webworker`, `web`, or left unspecified:
 

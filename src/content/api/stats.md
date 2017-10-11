@@ -69,7 +69,7 @@ Each `assets` object represents an `output` file emitted from the compilation. T
 
 ### Chunk Objects
 
-Each `chunks` object represents a group of modules known as a [chunk](/glossary#chunk). Each object follows the following structure:
+Each `chunks` object represents a group of modules known as a [chunk](/glossary#c). Each object follows the following structure:
 
 ``` js-with-links
 {

@@ -166,7 +166,7 @@ module.exports = ({ file, options, env }) => ({
 **webpack.config.js**
 ```js
 {
-  loader: 'postcss-loader'
+  loader: 'postcss-loader',
   options: {
     config: {
       ctx: {

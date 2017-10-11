@@ -147,7 +147,7 @@ This could be used for non local development and production.
 **webpack.config.js**
 ```js
 {
-  loader: 'style-loader'
+  loader: 'style-loader',
   options: {
     hmr: false
   }
@@ -242,7 +242,7 @@ If the return value of the `transform` function is falsy, the css will not be lo
 **webpack.config.js**
 ```js
 {
-  loader: 'style-loader'
+  loader: 'style-loader',
   options: {
     transform: 'path/to/transform.js'
   }
@@ -264,7 +264,7 @@ module.exports = function (css) {
 **webpack.config.js**
 ```js
 {
-  loader: 'style-loader'
+  loader: 'style-loader',
   options: {
     transform: 'path/to/conditional.js'
   }
@@ -290,7 +290,7 @@ By default, the style-loader appends `<style>` elements to the end of the style 
 **webpack.config.js**
 ```js
 {
-  loader: 'style-loader'
+  loader: 'style-loader',
   options: {
     insertAt: 'top'
   }
@@ -302,7 +302,7 @@ A new `<style>` element can be inserted before a specific element by passing an 
 **webpack.config.js**
 ```js
 {
-  loader: 'style-loader'
+  loader: 'style-loader',
   options: {
     insertAt: {
         before: '#id'
@@ -318,7 +318,7 @@ You can also insert the styles into a [ShadowRoot](https://developer.mozilla.org
 **webpack.config.js**
 ```js
 {
-  loader: 'style-loader'
+  loader: 'style-loader',
   options: {
     insertInto: '#host::shadow>#root'
   }
@@ -334,7 +334,7 @@ If defined, the style-loader will reuse a single `<style>` element, instead of a
 **webpack.config.js**
 ```js
 {
-  loader: 'style-loader'
+  loader: 'style-loader',
   options: {
     singleton: true
   }
@@ -348,7 +348,7 @@ Enable/Disable source map loading
 **webpack.config.js**
 ```js
 {
-  loader: 'style-loader'
+  loader: 'style-loader',
   options: {
     sourceMap: true
   }
@@ -362,7 +362,7 @@ If convertToAbsoluteUrls and sourceMaps are both enabled, relative urls will be 
 **webpack.config.js**
 ```js
 {
-  loader: 'style-loader'
+  loader: 'style-loader',
   options: {
     sourceMap: true,
     convertToAbsoluteUrls: true

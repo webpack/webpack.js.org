@@ -51,7 +51,7 @@ Emits `file.png` as file in the output directory and returns the public URL
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|**`name`**|`{String}`|`[hash].[ext]`|Configure a custom filename template for your file|
+|**`name`**|`{String\|Function}`|`[hash].[ext]`|Configure a custom filename template for your file|
 |**`context`**|`{String}`|`this.options.context`|Configure a custom file context, defaults to `webpack.config.js` [context](https://webpack.js.org/configuration/entry-context/#context)|
 |**`publicPath`**|`{String\|Function}`|[`__webpack_public_path__ `](https://webpack.js.org/api/module-variables/#__webpack_public_path__-webpack-specific-)|Configure a custom `public` path for your files|
 |**`outputPath`**|`{String\|Function}`|`'undefined'`|Configure a custom `output` path for your files|
@@ -62,12 +62,32 @@ Emits `file.png` as file in the output directory and returns the public URL
 
 You can configure a custom filename template for your file using the query parameter `name`. For instance, to copy a file from your `context` directory into the output directory retaining the full directory structure, you might use
 
+#### `{String}`
+
 **webpack.config.js**
 ```js
 {
   loader: 'file-loader',
   options: {
     name: '[path][name].[ext]'
+  }  
+}
+```
+
+#### `{Function}`
+
+**webpack.config.js**
+```js
+{
+  loader: 'file-loader',
+  options: {
+    name (file) {
+      if (env === 'development') {
+        return '[path][name].[ext]'
+      }
+
+      return '[hash].[ext]'
+    }
   }  
 }
 ```
@@ -117,7 +137,7 @@ You can specify custom `output` and `public` paths by using `outputPath`, `publi
   loader: 'file-loader',
   options: {
     name: '[path][name].[ext]',
-    publicPath: 'assets'
+    publicPath: 'assets/'
   }  
 }
 ```
@@ -130,7 +150,7 @@ You can specify custom `output` and `public` paths by using `outputPath`, `publi
   loader: 'file-loader',
   options: {
     name: '[path][name].[ext]',
-    outputPath: 'images'
+    outputPath: 'images/'
   }  
 }
 ```

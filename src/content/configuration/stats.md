@@ -6,6 +6,7 @@ contributors:
   - sallar
   - jungomi
   - ldrick
+  - jasonblanchard
 ---
 
 The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
@@ -40,6 +41,7 @@ stats: {
   // Add asset Information
   assets: true,
   // Sort assets by a field
+  // You can reverse the sort with `!field`.
   assetsSort: "field",
   // Add information about cached (not built) modules
   cached: true,
@@ -54,6 +56,7 @@ stats: {
   // Add the origins of chunks and chunk merging info
   chunkOrigins: true,
   // Sort the chunks by a field
+  // You can reverse the sort with `!field`. Default is `id`.
   chunksSort: "field",
   // Context directory for request shortening
   context: "../src/",
@@ -87,6 +90,7 @@ stats: {
   // Add built modules information
   modules: true,
   // Sort the modules by a field
+  // You can reverse the sort with `!field`. Default is `id`.
   modulesSort: "field",
   // Show dependencies and origin of warnings/errors (since webpack 2.5.0)
   moduleTrace: true,

@@ -1,9 +1,29 @@
 import React from 'react';
-import Additional from './support-additional.json';
+import Backers from './support-backers.json';
+import Additional from './support-additional.js';
 import './Support.scss';
 
+const SUPPORTERS = [ ...Backers ];
+
+// merge or add additional backers/sponsors
+for(const additional of Additional) {
+  const existing = SUPPORTERS.find(supporter => supporter.slug && supporter.slug === additional.slug);
+  if (existing) {
+    existing.totalDonations += additional.totalDonations;
+  } else {
+    SUPPORTERS.push(additional);
+  }
+}
+
+// resort list
+SUPPORTERS.sort((a, b) => b.totalDonations - a.totalDonations);
+
 const ranks = {
+  backer: {
+    maximum: 200
+  },
   bronze: {
+    minimum: 200,
     maximum: 2000
   },
   silver: {
@@ -19,17 +39,19 @@ const ranks = {
   }
 };
 
+function formatMoney(number) {
+  let str = Math.round(number) + '';
+  if (str.length > 3) {
+    str = str.substr(0, str.length - 3) + ',' + str.substr(-3);
+  }
+  return str;
+}
+
 export default class Support extends React.Component {
   render() {
-    let { rank, type } = this.props;
-    let supporters = require(`./support-${type}.json`);
+    let { rank } = this.props;
 
-    if (type === 'sponsors') {
-      supporters = supporters.slice();
-      supporters.push(...Additional);
-      supporters.sort((a, b) => b.totalDonations - a.totalDonations);
-    }
-
+    let supporters = SUPPORTERS;
     let minimum, maximum;
 
     if (rank && ranks[rank]) {
@@ -48,38 +70,38 @@ export default class Support extends React.Component {
     return (
       <div className="support">
         <div className="support__description">
-          { type === 'sponsors' ? (
+          { rank === 'backer' ? (
             <p>
-              <b className="support__rank">{ rank } sponsors</b>
-              <span>are those who have pledged { minimum ? `$${minimum}` : 'up' } { maximum ? `to $${maximum}` : 'or more' } to webpack.</span>
+              The following <b>Backers</b> are individuals who have contributed various amounts of money in order to help support webpack. Every little bit helps, and we appreciate even the smallest contributions.
             </p>
           ) : (
             <p>
-              The following <b>Backers</b> are individuals who have contributed various amounts of money in order to help support webpack. Every little bit helps, and we appreciate even the smallest contributions.
+              <b className="support__rank">{ rank } sponsors</b>
+              <span>are those who have pledged { minimum ? `$${formatMoney(minimum)}` : 'up' } { maximum ? `to $${formatMoney(maximum)}` : 'or more' } to webpack.</span>
             </p>
           )}
         </div>
 
         {
           supporters.map((supporter, index) => (
-            <a key={ supporter.id || supporter.username || index }
+            <a key={ supporter.id || supporter.slug || index }
                className="support__item"
-               title={ `$${supporter.totalDonations / 100} by ${supporter.name || supporter.username}` }
+               title={ `$${formatMoney(supporter.totalDonations / 100)} by ${supporter.name || supporter.slug}` }
                target="_blank"
-               href={ supporter.website || `https://opencollective.com/${supporter.username}` }>
+               href={ supporter.website || `https://opencollective.com/${supporter.slug}` }>
               { supporter.avatar ? <img
-                className={ `support__${type}-avatar-${rank || 'normal'}` }
+                className={ `support__${rank}-avatar` }
                 src={ supporter.avatar }
-                alt={ supporter.username ? `${supporter.username}'s avatar` : 'avatar' } /> :
-                supporter.name }
-              { type === 'backers' ? <figure className="support__outline" /> : null }
+                alt={ supporter.name || supporter.slug ? `${supporter.name || supporter.slug}'s avatar` : 'avatar' } /> :
+                <span className={ `support__${rank}-avatar` }>{supporter.name || supporter.slug}</span> }
+              { rank === 'backer' ? <figure className="support__outline" /> : null }
             </a>
           ))
         }
 
         <div className="support__bottom">
           <a className="support__button" href="https://opencollective.com/webpack#support">
-            Become a { type.replace(/s$/, '') }
+            Become a { rank === 'backer' ? 'backer' : 'sponsor' }
           </a>
         </div>
       </div>
