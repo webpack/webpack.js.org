@@ -21,7 +21,7 @@ A single result can be returned in **sync mode**. For multiple results the `this
 
 ```javascript
 module.exports = function(content) {
-    return someSyncOperation(content);
+  return someSyncOperation(content);
 };
 ```
 
@@ -29,8 +29,8 @@ module.exports = function(content) {
 
 ```javascript
 module.exports = function(content) {
-    this.callback(null, someSyncOperation(content), sourceMaps, ast);
-    return; // always return undefined when calling callback()
+  this.callback(null, someSyncOperation(content), sourceMaps, ast);
+  return; // always return undefined when calling callback()
 };
 ```
 
