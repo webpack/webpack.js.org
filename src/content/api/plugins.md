@@ -1,12 +1,10 @@
 ---
 title: Plugin API
 group: Plugins
-sort: 1
+sort: 0
 ---
 
-T> For a high-level introduction to writing plugins, start with [How to write a plugin](/development/how-to-write-a-plugin).
-
-webpack provides flexible and powerful customization api in the form of plugins. Using plugins, we can plug functionality into webpack. Additionally, webpack provides lifecycle hooks into which plugins can be registered. At each of these lifecycle points, webpack will run all of the registered plugins and provide them with the current state of the webpack compilation.
+T> For a high-level introduction to writing plugins, start with [writing a plugin](/contribute/writing-a-plugin).
 
 Many objects in webpack extend the `Tapable` class, which exposes a `plugin` method. And with the `plugin` method, plugins can inject custom build steps. You will see `compiler.plugin` and `compilation.plugin` used a lot. Essentially, each one of these plugin calls binds a callback to fire at specific steps throughout the build process.
 
