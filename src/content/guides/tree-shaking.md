@@ -7,6 +7,7 @@ contributors:
   - alexjoverm
   - avant1
   - MijaelWatts
+  - dmitriid
 related:
   - title: Tree shaking with webpack 2, TypeScript and Babel
     url: https://alexjoverm.github.io/2017/03/06/Tree-shaking-with-Webpack-2-TypeScript-and-Babel/
@@ -19,6 +20,10 @@ related:
 _Tree shaking_ is a term commonly used in the JavaScript context for dead-code elimination. It relies on the [static structure](http://exploringjs.com/es6/ch_modules.html#static-module-structure) of ES2015 module syntax, i.e. [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export). The name and concept have been popularized by the ES2015 module bundler [rollup](https://github.com/rollup/rollup).
 
 The webpack 2 release came with built-in support for ES2015 modules (alias _harmony modules_) as well as unused module export detection.
+
+**Note**: Webpack doesn't perform tree-shaking by itself. It relies on third party tools like [UglifyJS](/plugins/uglifyjs-webpack-plugin/) to perform actual dead code elimination. There are situations where tree-shaking may not effective. For example, when the tool cannot guarantee that a particular code path doesn't lead to side-effects, it may remain in the generated bundle even if you are sure it shouldn't.
+
+Some of the code below assumes you perform tree-shaking using UglifJS plugin. However, there are other tools such as [webpack-rollup-loader](https://github.com/erikdesjardins/webpack-rollup-loader) or [Babel Minify Webpack Plugin](https://github.com/webpack-contrib/babel-minify-webpack-plugin) that may produce different result depending on your setup.
 
 T> The remainder of this guide will stem from [Getting Started](/guides/getting-started). If you haven't read through that guide already, please do so now.
 
