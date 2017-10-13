@@ -21,7 +21,7 @@ _Tree shaking_ is a term commonly used in the JavaScript context for dead-code e
 
 The webpack 2 release came with built-in support for ES2015 modules (alias _harmony modules_) as well as unused module export detection.
 
-**Note**: Webpack doesn't perform tree-shaking by itself. It relies on third party tools like [UglifyJS](/plugins/uglifyjs-webpack-plugin/) to perform actual dead code elimination. There are situations where tree-shaking may not effective. For example, when the tool cannot guarantee that a particular code path doesn't lead to side-effects, it may remain in the generated bundle even if you are sure it shouldn't.
+**Note**: Webpack doesn't perform tree-shaking by itself. It relies on third party tools like [UglifyJS](/plugins/uglifyjs-webpack-plugin/) to perform actual dead code elimination. There are situations where tree-shaking may not effective. For example, when the tool cannot guarantee that a particular code path doesn't lead to side-effects, this code may remain in the generated bundle even if you are sure it shouldn't.
 
 Some of the code below assumes you perform tree-shaking using UglifJS plugin. However, there are other tools such as [webpack-rollup-loader](https://github.com/erikdesjardins/webpack-rollup-loader) or [Babel Minify Webpack Plugin](https://github.com/webpack-contrib/babel-minify-webpack-plugin) that may produce different result depending on your setup.
 
