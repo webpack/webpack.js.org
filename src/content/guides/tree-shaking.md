@@ -15,6 +15,10 @@ related:
     url: http://www.2ality.com/2015/12/webpack-tree-shaking.html
   - title: webpack 2 Tree Shaking Configuration
     url: https://medium.com/modus-create-front-end-development/webpack-2-tree-shaking-configuration-9f1de90f3233#.15tuaw71x
+  - title: Issue 2867
+    url: https://github.com/webpack/webpack/issues/2867
+  - title: Issue 4784
+    url: https://github.com/webpack/webpack/issues/4784
 ---
 
 _Tree shaking_ is a term commonly used in the JavaScript context for dead-code elimination. It relies on the [static structure](http://exploringjs.com/es6/ch_modules.html#static-module-structure) of ES2015 module syntax, i.e. [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export). The name and concept have been popularized by the ES2015 module bundler [rollup](https://github.com/rollup/rollup).
