@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/0c08a39204b81b36ef67.css" rel="stylesheet">
+      <link href="/fb2fdbc8e41110abf959.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -91,7 +91,7 @@ Config lookup starts from <code>path.dirname(file)</code> and walks the file tre
     <div class="table">
         <div class="table-wrap">
           <div class="table-header">
-              <div class="table-tr"><div class="table-th">Name</div><div class="table-th">Default</div><div class="table-th">Description</div></div>
+              <div class="table-tr"><div class="table-th">Name</div><div class="table-th">Type</div><div class="table-th">Default</div><div class="table-th">Description</div></div>
           </div>
           <div class="table-body">
               <div class="table-tr"><div class="table-td">
@@ -99,7 +99,14 @@ Config lookup starts from <code>path.dirname(file)</code> and walks the file tre
         Name
     </div>
     <div class="table-td-content">
-        <code>exec</code>
+        <a href="#exec"><code>exec</code></a>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Type
+    </div>
+    <div class="table-td-content">
+        <code>{Boolean}</code>
     </div>
   </div><div class="table-td">
     <div class="table-td-title">
@@ -120,7 +127,14 @@ Config lookup starts from <code>path.dirname(file)</code> and walks the file tre
         Name
     </div>
     <div class="table-td-content">
-        <code>parser</code>
+        <a href="#syntaxes"><code>parser</code></a>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Type
+    </div>
+    <div class="table-td-content">
+        <code>{String|Object}</code>
     </div>
   </div><div class="table-td">
     <div class="table-td-title">
@@ -141,7 +155,14 @@ Config lookup starts from <code>path.dirname(file)</code> and walks the file tre
         Name
     </div>
     <div class="table-td-content">
-        <code>syntax</code>
+        <a href="#syntaxes"><code>syntax</code></a>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Type
+    </div>
+    <div class="table-td-content">
+        <code>{String|Object}</code>
     </div>
   </div><div class="table-td">
     <div class="table-td-title">
@@ -162,7 +183,14 @@ Config lookup starts from <code>path.dirname(file)</code> and walks the file tre
         Name
     </div>
     <div class="table-td-content">
-        <code>stringifier</code>
+        <a href="#syntaxes"><code>stringifier</code></a>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Type
+    </div>
+    <div class="table-td-content">
+        <code>{String|Object}</code>
     </div>
   </div><div class="table-td">
     <div class="table-td-title">
@@ -183,7 +211,14 @@ Config lookup starts from <code>path.dirname(file)</code> and walks the file tre
         Name
     </div>
     <div class="table-td-content">
-        <code>config</code>
+        <a href="#config"><code>config</code></a>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Type
+    </div>
+    <div class="table-td-content">
+        <code>{Object}</code>
     </div>
   </div><div class="table-td">
     <div class="table-td-title">
@@ -204,7 +239,14 @@ Config lookup starts from <code>path.dirname(file)</code> and walks the file tre
         Name
     </div>
     <div class="table-td-content">
-        <code>plugins</code>
+        <a href="#plugins"><code>plugins</code></a>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Type
+    </div>
+    <div class="table-td-content">
+        <code>{Array|Function}</code>
     </div>
   </div><div class="table-td">
     <div class="table-td-title">
@@ -225,7 +267,14 @@ Config lookup starts from <code>path.dirname(file)</code> and walks the file tre
         Name
     </div>
     <div class="table-td-content">
-        <code>sourceMap</code>
+        <a href="#sourceMap"><code>sourceMap</code></a>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Type
+    </div>
+    <div class="table-td-content">
+        <code>{String|Boolean}</code>
     </div>
   </div><div class="table-td">
     <div class="table-td-title">
@@ -256,7 +305,73 @@ Config lookup starts from <code>path.dirname(file)</code> and walks the file tre
 <span class="token punctuation">}</span>
 </code></pre>
 <h3 class="header"><a class="anchor" href="#config" id="config"></a><span class="text"><code>Config</code></span><a class="icon-link" href="#config"></a></h3>
-<h4 class="header"><a class="anchor" href="#path" id="path"></a><span class="text"><code>Path</code></span><a class="icon-link" href="#path"></a></h4>
+
+    <div class="table">
+        <div class="table-wrap">
+          <div class="table-header">
+              <div class="table-tr"><div class="table-th">Name</div><div class="table-th">Type</div><div class="table-th">Default</div><div class="table-th">Description</div></div>
+          </div>
+          <div class="table-body">
+              <div class="table-tr"><div class="table-td">
+    <div class="table-td-title">
+        Name
+    </div>
+    <div class="table-td-content">
+        <a href="#path"><code>path</code></a>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Type
+    </div>
+    <div class="table-td-content">
+        <code>{String}</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Default
+    </div>
+    <div class="table-td-content">
+        <code>undefined</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Description
+    </div>
+    <div class="table-td-content">
+        PostCSS Config Path
+    </div>
+  </div></div><div class="table-tr"><div class="table-td">
+    <div class="table-td-title">
+        Name
+    </div>
+    <div class="table-td-content">
+        <a href="#context"><code>context</code></a>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Type
+    </div>
+    <div class="table-td-content">
+        <code>{Object}</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Default
+    </div>
+    <div class="table-td-content">
+        <code>undefined</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Description
+    </div>
+    <div class="table-td-content">
+        PostCSS Config Context
+    </div>
+  </div></div>
+          </div>
+        </div>
+    </div><h4 class="header"><a class="anchor" href="#path" id="path"></a><span class="text"><code>Path</code></span><a class="icon-link" href="#path"></a></h4>
 <p>You can manually specify the path to search for your config (<code>postcss.config.js</code>) with the <code>config.path</code> option. This is needed if you store your config  in a separate e.g <code>./config || ./.config</code> folder.</p>
 <blockquote>
 <p>&#x26A0;&#xFE0F;  Otherwise it is <strong>unnecessary</strong> to set this option and is <strong>not</strong> recommended</p>
@@ -423,35 +538,7 @@ Config lookup starts from <code>path.dirname(file)</code> and walks the file tre
         Name
     </div>
     <div class="table-td-content">
-        <code>syntax</code>
-    </div>
-  </div><div class="table-td">
-    <div class="table-td-title">
-        Type
-    </div>
-    <div class="table-td-content">
-        <code>{String|Function}</code>
-    </div>
-  </div><div class="table-td">
-    <div class="table-td-title">
-        Default
-    </div>
-    <div class="table-td-content">
-        <code>undefined</code>
-    </div>
-  </div><div class="table-td">
-    <div class="table-td-title">
-        Description
-    </div>
-    <div class="table-td-content">
-        Custom PostCSS Syntax
-    </div>
-  </div></div><div class="table-tr"><div class="table-td">
-    <div class="table-td-title">
-        Name
-    </div>
-    <div class="table-td-content">
-        <code>parser</code>
+        <a href="#parser"><code>parser</code></a>
     </div>
   </div><div class="table-td">
     <div class="table-td-title">
@@ -479,7 +566,35 @@ Config lookup starts from <code>path.dirname(file)</code> and walks the file tre
         Name
     </div>
     <div class="table-td-content">
-        <code>stringifier</code>
+        <a href="#syntax"><code>syntax</code></a>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Type
+    </div>
+    <div class="table-td-content">
+        <code>{String|Function}</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Default
+    </div>
+    <div class="table-td-content">
+        <code>undefined</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Description
+    </div>
+    <div class="table-td-content">
+        Custom PostCSS Syntax
+    </div>
+  </div></div><div class="table-tr"><div class="table-td">
+    <div class="table-td-title">
+        Name
+    </div>
+    <div class="table-td-content">
+        <a href="#stringifier"><code>stringifier</code></a>
     </div>
   </div><div class="table-td">
     <div class="table-td-title">
