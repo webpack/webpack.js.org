@@ -383,7 +383,7 @@ webpack: Compiled successfully.
 
 Now fire up your browser and go to `http://localhost:3000`, you should see your webpack app running and functioning!
 
-T> If you like to know more about how Hot Module Replacement works, we recommend you read the [Hot Module Replacement](/guides/hot-module-replacement/) guide.
+T> If you would like to know more about how Hot Module Replacement works, we recommend you read the [Hot Module Replacement](/guides/hot-module-replacement/) guide.
 
 
 ## Adjusting Your Text Editor
