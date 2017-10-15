@@ -22,6 +22,9 @@ const ranks = {
   backer: {
     maximum: 200
   },
+  latest: {
+    maxAge: 14 * 24 * 60 * 60 * 1000
+  },
   bronze: {
     minimum: 200,
     maximum: 2000
@@ -52,11 +55,12 @@ export default class Support extends React.Component {
     let { rank } = this.props;
 
     let supporters = SUPPORTERS;
-    let minimum, maximum;
+    let minimum, maximum, maxAge;
 
     if (rank && ranks[rank]) {
       minimum = ranks[rank].minimum;
       maximum = ranks[rank].maximum;
+      maxAge = ranks[rank].maxAge;
     }
 
     if (typeof minimum === 'number') {
@@ -67,6 +71,11 @@ export default class Support extends React.Component {
       supporters = supporters.filter(item => item.totalDonations < maximum * 100);
     }
 
+    if (typeof maxAge === 'number') {
+      const now = Date.now();
+      supporters = supporters.filter(item => item.firstDonation && (now - new Date(item.firstDonation).getTime() < maxAge));
+    }
+
     return (
       <div className="support">
         <div className="support__description">
@@ -74,6 +83,8 @@ export default class Support extends React.Component {
             <p>
               The following <b>Backers</b> are individuals who have contributed various amounts of money in order to help support webpack. Every little bit helps, and we appreciate even the smallest contributions.
             </p>
+          ) : rank === 'latest' ? (
+            <p>The following persons/organizations made their first donation in the last {Math.round(maxAge / (1000 * 60 * 60 * 24))} days.</p>
           ) : (
             <p>
               <b className="support__rank">{ rank } sponsors</b>

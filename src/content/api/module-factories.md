@@ -1,11 +1,14 @@
 ---
-title: Context/Normal Module Factories
+title: Module Factories
+group: Plugins
 sort: 5
 ---
 
+?> Lead in...
+
 ## `NormalModuleFactory`
 
-### `before-resolve(data)` async waterfall
+`before-resolve(data)` async waterfall
 
 Before the factory starts resolving. The `data` object has these properties:
 
@@ -14,7 +17,7 @@ Before the factory starts resolving. The `data` object has these properties:
 
 Plugins are allowed to modify the object or to pass a new similar object to the callback.
 
-### `after-resolve(data)` async waterfall
+`after-resolve(data)` async waterfall
 
 After the factory has resolved the request. The `data` object has these properties:
 
@@ -25,10 +28,17 @@ After the factory has resolved the request. The `data` object has these properti
 * `resource`: The resource. It will be loaded by the NormalModule.
 * `parser`: The parser that will be used by the NormalModule.
 
+
 ## `ContextModuleFactory`
 
-### `before-resolve(data)` async waterfall
+`before-resolve(data)` async waterfall
 
-### `after-resolve(data)` async waterfall
+?> Add documentation.
 
-### `alternatives(options: Array)` async waterfall
+`after-resolve(data)` async waterfall
+
+?> Add documentation.
+
+`alternatives(options: Array)` async waterfall
+
+?> Add documentation.

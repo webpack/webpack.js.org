@@ -1,5 +1,6 @@
 ---
 title: License
+sort: 4
 ---
 
 ## webpack

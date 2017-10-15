@@ -1,6 +1,6 @@
 ---
-title: Stats JSON
-sort: 1
+title: Stats Data
+sort: 3
 contributors:
   - skipjack
 ---
