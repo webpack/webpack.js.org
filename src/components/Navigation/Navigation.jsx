@@ -67,7 +67,7 @@ export default class Navigation extends React.Component {
           </Link>
 
           <LinkDropdown
-            className="navigation__links"
+            className="navigation__hrefs"
             items={[
             { title: '印记中文文档导航', url: 'https://docschina.org/' },
             { title: 'Vue.js 中文文档', url: 'https://vuefe.cn/' },

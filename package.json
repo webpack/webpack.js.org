@@ -24,9 +24,9 @@
     "node": ">=6.9"
   },
   "scripts": {
-    "start": "npm run fetch-logo && npm run copy && npm run init:generated && node ./antwar.bootstrap.js develop",
+    "start": "npm run && npm run copy && npm run init:generated && node ./antwar.bootstrap.js develop",
     "start-only": "node ./antwar.bootstrap.js develop",
-    "build": "npm run fetch-logo && npm run copy && npm run init:generated && rm -rf build/ && node ./antwar.bootstrap.js build && npm run sitemap && echo webpack.js.org > build/CNAME",
+    "build": "npm run && npm run copy && npm run init:generated && rm -rf build/ && node ./antwar.bootstrap.js build && npm run sitemap && echo webpack.js.org > build/CNAME",
     "build-test": "npm run build && http-server build/",
     "deploy": "gh-pages -d build",
     "copy": "sh src/scripts/copyfiles.sh",

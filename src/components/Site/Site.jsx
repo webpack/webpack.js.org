@@ -18,6 +18,7 @@ import '../SidebarMobile/SidebarMobile.scss';
 import '../SidebarItem/SidebarItem.scss';
 import '../Logo/Logo.scss';
 import '../Dropdown/Dropdown.scss';
+import '../Dropdown/LinkDropdown.scss';
 
 const Site = ({
   children,
