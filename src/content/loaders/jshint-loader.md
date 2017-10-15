@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/jshint-loader/master/R
 edit: https://github.com/webpack-contrib/jshint-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/jshint-loader
 ---
-
-  <p>Runs <a href="http://jshint.com/">JSHint</a> on required JavaScript files.<p>
-</div>
+Runs <a href="http://jshint.com/">JSHint</a> on required JavaScript files.
 
 ## Install
 

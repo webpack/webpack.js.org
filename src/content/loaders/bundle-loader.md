@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/bundle-loader/master/R
 edit: https://github.com/webpack-contrib/bundle-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/bundle-loader
 ---
-
-  <p>Bundle loader for webpack<p>
-</div>
+Bundle loader for webpack
 
 ## Install
 
@@ -65,7 +63,7 @@ If a callback is added after dependencies were loaded, it will be called immedia
 |**`lazy`**|`{Boolean}`|`false`|Loads the imported bundle asynchronously|
 |**`name`**|`{String}`|`[id].[name]`|Configure a custom filename for your imported bundle|
 
-### `lazy`
+##
 
 The file is requested when you require the `bundle-loader`. If you want it to request it lazy, use:
 

@@ -13,108 +13,41 @@ module.exports = {
   layout: () => require('./src/components/Site/Site.jsx').default,
   paths: {
     '/': {
-      title: "Home",
+      title: 'Home',
+      layout: () => require('./src/components/Page/Page.jsx').default,
       content: () => require.context('./loaders/page-loader!./src/content', false, /^\.\/.*\.md$/),
-      index: () => {
-        const index = require('./src/components/Splash/Splash.jsx').default;
-        index.title = 'webpack';
-        index.description = 'webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.';
-
-        return index;
-      },
-      layout: () => require('./src/components/Page/Page.jsx').default,
-    },
-    'get-started': {
+      index: () => require('./src/components/Splash/Splash.jsx').default,
       redirects: {
-        '': '/guides/getting-started',
-        'install-webpack': '/guides/installation',
-        'why-webpack': '/guides/why-webpack',
+        'support': '/contribute',
+        'writers-guide': '/contribute/writers-guide'
       }
-    },
-    api: {
-      title: "API",
-      layout: () => require('./src/components/Page/Page.jsx').default,
-      url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
-      content: () => require.context('./loaders/page-loader!./src/content/api', false, /^\.\/.*\.md$/),
-      transform: (pages) => {
-        return _.sortBy(pages, (page) => page.file.sort)
-      },
-      redirects: {
-        'passing-a-config': 'configuration-types'
-      }
-    },
-    'api/plugins': {
-      title: "API Plugins",
-      layout: () => require('./src/components/Page/Page.jsx').default,
-      url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
-      content: () => require.context('./loaders/page-loader!./src/content/api/plugins', false, /^\.\/.*\.md$/),
-      transform: (pages) => {
-        return _.sortBy(pages, (page) => page.file.sort)
-      },
-      redirects: {
-        'passing-a-config': 'configuration-types'
-      }
-    },
-    pluginsapi: {
-      title: 'API Plugin',
-      redirects: {
-        '': '/api/plugins',
-        'compiler': '/api/plugins/compiler',
-        'template': '/api/plugins/template'
-      },
-      hideInSidebar: true
     },
     concepts: {
-      title: "Concepts",
-      layout: () => require('./src/components/Page/Page.jsx').default,
-      content: () => require.context('./loaders/page-loader!./src/content/concepts', false, /^\.\/.*\.md$/),
+      title: 'Concepts',
       url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
-      transform: (pages) => {
-        return _.sortBy(pages, (page) => page.file.sort)
+      layout: () => require('./src/components/Page/Page.jsx').default,
+      content: () => require.context('./loaders/page-loader!./src/content/concepts', false, /^\.\/.*\.md$/)
+    },
+    configuration: {
+      title: 'Configuration',
+      url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
+      layout: () => require('./src/components/Page/Page.jsx').default,
+      content: () => require.context('./loaders/page-loader!./src/content/configuration', false, /^\.\/.*\.md$/)
+    },
+    api: {
+      title: 'API',
+      url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
+      layout: () => require('./src/components/Page/Page.jsx').default,
+      content: () => require.context('./loaders/page-loader!./src/content/api', false, /^\.\/.*\.md$/),
+      redirects: {
+        'passing-a-config': 'configuration-types'
       }
-    },
-    development: {
-      title: "Development",
-      layout: () => require('./src/components/Page/Page.jsx').default,
-      content: () => require.context('./loaders/page-loader!./src/content/development', false, /^\.\/.*\.md$/),
-      url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
-      transform: (pages) => {
-        return _.sortBy(pages, (page) => page.file.sort)
-      }
-    },
-    plugins: {
-      title: "Plugin",
-      content: () => {
-        return combineContexts(
-          require.context('./loaders/page-loader!./src/content/plugins', false, /^\.\/.*\.md$/),
-          require.context('./loaders/page-loader!./generated/plugins', false, /^\.\/.*\.md$/)
-        );
-      },
-      url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
-      transform: (pages) => {
-        return _.sortBy(pages, (page) => page.file.sort)
-      },
-      layout: () => require('./src/components/Page/Page.jsx').default
-    },
-    loaders: {
-      title: "Loaders",
-      url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
-      layout: () => require('./src/components/Page/Page.jsx').default,
-      content: () => {
-        return combineContexts(
-          require.context('./loaders/page-loader!./src/content/loaders', false, /^\.\/.*\.md$/),
-          require.context('./loaders/page-loader!./generated/loaders', false, /^\.\/.*\.md$/)
-        );
-      },
     },
     guides: {
-      title: "Guides",
-      layout: () => require('./src/components/Page/Page.jsx').default,
+      title: 'Guides',
       url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
+      layout: () => require('./src/components/Page/Page.jsx').default,
       content: () => require.context('./loaders/page-loader!./src/content/guides', false, /^\.\/.*\.md$/),
-      transform: (pages) => {
-        return _.sortBy(pages, (page) => page.file.sort)
-      },
       redirects: {
         'code-splitting-import': '/guides/code-splitting',
         'code-splitting-require': '/guides/code-splitting',
@@ -125,43 +58,76 @@ module.exports = {
         'production-build': '/guides/production'
       }
     },
-    configuration: {
-      title: "Configuration",
-      layout: () => require('./src/components/Page/Page.jsx').default,
+    plugins: {
+      title: 'Plugins',
       url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
-      content: () => require.context('./loaders/page-loader!./src/content/configuration', false, /^\.\/.*\.md$/),
-      transform: (pages) => {
-        return _.sortBy(pages, (page) => page.file.sort)
+      layout: () => require('./src/components/Page/Page.jsx').default,
+      content: () => {
+        return combineContexts(
+          require.context('./loaders/page-loader!./src/content/plugins', false, /^\.\/.*\.md$/),
+          require.context('./loaders/page-loader!./generated/plugins', false, /^\.\/.*\.md$/)
+        );
       }
     },
-    support: {
-      title: "Support",
-      layout: () => require('./src/components/Page/Page.jsx').default,
+    loaders: {
+      title: 'Loaders',
       url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
-      content: () => require.context('./loaders/page-loader!./src/content/support', false, /^\.\/.*\.md$/),
-      transform: (pages) => {
-        return _.sortBy(pages, (page) => page.file.sort)
+      layout: () => require('./src/components/Page/Page.jsx').default,
+      content: () => {
+        return combineContexts(
+          require.context('./loaders/page-loader!./src/content/loaders', false, /^\.\/.*\.md$/),
+          require.context('./loaders/page-loader!./generated/loaders', false, /^\.\/.*\.md$/)
+        );
       }
     },
-    vote: () => {
-      const page = require('./src/components/Vote/List.jsx').default;
-      page.title = 'Vote';
-
-      return page;
+    contribute: {
+      title: 'Contribute',
+      url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
+      layout: () => require('./src/components/Page/Page.jsx').default,
+      content: () => require.context('./loaders/page-loader!./src/content/contribute', false, /^\.\/.*\.md$/),
     },
-    organization: () => {
-      const page = require('./src/components/Organization/Organization.jsx').default;
+    vote: () => require('./src/components/Vote/Vote.jsx').default,
+    organization: () => require('./src/components/Organization/Organization.jsx').default,
+    'starter-kits': () => require('./src/components/StarterKits/StarterKits.jsx').default,
 
-      page.title = 'Organization';
-
-      return page;
+    /*************************
+     Redirects for Old Content
+     *************************/
+    'get-started': {
+      hidden: true,
+      redirects: {
+        '': '/guides/getting-started',
+        'install-webpack': '/guides/installation',
+        'why-webpack': '/guides/why-webpack',
+      }
     },
-    'guides/starter-kits': () => {
-      const page = require('./src/components/StarterKits/StarterKits.jsx').default;
-
-      page.title = 'Starter kits';
-
-      return page;
+    pluginsapi: {
+      hidden: true,
+      redirects: {
+        '': '/api/plugins',
+        'compiler': '/api/compiler',
+        'template': '/api/template'
+      }
+    },
+    'api/plugins': {
+      redirects: {
+        'compiler': '/api/compiler',
+        'compilation': '/api/compilation',
+        'module-factories': '/api/module-factories',
+        'parser': '/api/parser',
+        'tapable': '/api/tapable',
+        'template': '/api/template',
+        'resolver': '/api/resolver'
+      }
+    },
+    development: {
+      redirects: {
+        '': '/contribute',
+        'plugin-patterns': '/contribute/plugin-patterns',
+        'release-process': '/contribute/release-process',
+        'how-to-write-a-loader': '/contribute/writing-a-loader',
+        'how-to-write-a-plugin': '/contribute/writing-a-plugin'
+      }
     }
   }
 };

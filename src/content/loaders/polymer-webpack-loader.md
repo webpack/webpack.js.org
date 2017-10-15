@@ -4,7 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/polymer-webpack-loader
 edit: https://github.com/webpack-contrib/polymer-webpack-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/polymer-webpack-loader
 ---
-# polymer-webpack-loader
+
 [![npm version](https://badge.fury.io/js/polymer-webpack-loader.svg)](https://badge.fury.io/js/polymer-webpack-loader)
 [![build status](https://travis-ci.org/webpack-contrib/polymer-webpack-loader.svg?branch=master)](https://travis-ci.org/webpack-contrib/polymer-webpack-loader)
 

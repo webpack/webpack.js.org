@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/coffee-loader/master/R
 edit: https://github.com/webpack-contrib/coffee-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/coffee-loader
 ---
-
-  <p>Loads <a href="http://coffeescript.org/">CoffeeScript</a> like JavaScript</p>
-</div>
+Loads <a href="http://coffeescript.org/">CoffeeScript</a> like JavaScript
 
 ## Install
 
@@ -21,7 +19,7 @@ npm install --save-dev coffee-loader
 import coffee from 'coffee-loader!./file.coffee';
 ```
 
-### `Configuration (recommended)`
+##
 
 
 ```js

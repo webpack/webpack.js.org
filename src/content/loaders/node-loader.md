@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/node-loader/master/REA
 edit: https://github.com/webpack-contrib/node-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/node-loader
 ---
-
-  <p>Node Add-ons for webpack</p>
-</div>
+Node Add-ons for webpack
 
 ## Install
 
@@ -20,7 +18,7 @@ Executes [node add-ons](https://nodejs.org/dist/latest/docs/api/addons.html) in 
 
 Use the loader either via your webpack config, CLI or inline.
 
-### Via webpack config (recommended)
+##
 
 **webpack.config.js**
 ```js

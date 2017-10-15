@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/babel-minify-webpack-p
 edit: https://github.com/webpack-contrib/babel-minify-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/babel-minify-webpack-plugin
 ---
-
-  <p>A Webpack Plugin for <a href="https://github.com/babel/minify">babel-minify</a> - A babel based minifier<p>
-</div>
+A Webpack Plugin for <a href="https://github.com/babel/minify">babel-minify</a> - A babel based minifier
 
 ## Install
 
@@ -30,7 +28,7 @@ module.exports = {
 
 ## Options
 
-#### minifyOpts
+###
 
 `minifyOpts` are passed on to babel-preset-minify. You can find a list of [all available options](https://github.com/babel/minify/tree/master/packages/babel-preset-minify#options) in the package directory.
 

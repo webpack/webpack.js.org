@@ -5,7 +5,6 @@ edit: https://github.com/webpack-contrib/script-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/script-loader
 ---
 
-</div>
 
 ## Install
 
@@ -19,7 +18,7 @@ Executes JS script once in global context.
 
 > :warning: Doesn't work in NodeJS
 
-### Config (recommended)
+##
 
 ```js
 import exec from 'script.exec.js';

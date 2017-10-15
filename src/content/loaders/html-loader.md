@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/html-loader/master/REA
 edit: https://github.com/webpack-contrib/html-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/html-loader
 ---
-
-  <p>Exports HTML as string. HTML is minimized when the compiler demands.<p>
-</div>
+Exports HTML as string. HTML is minimized when the compiler demands.
 
 ## Install
 
@@ -141,7 +139,7 @@ module: {
 }
 ```
 
-### 'Root-relative' URLs
+##
 
 For urls that start with a `/`, the default behavior is to not translate them.
 If a `root` query parameter is set, however, it will be prepended to the url

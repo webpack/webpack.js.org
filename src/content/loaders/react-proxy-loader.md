@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/react-proxy-loader/mas
 edit: https://github.com/webpack-contrib/react-proxy-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/react-proxy-loader
 ---
-
-  <p>Wraps a react component in a proxy component to enable Code Splitting (loads a react component and its dependencies on demand).<p>
-</div>
+Wraps a react component in a proxy component to enable Code Splitting (loads a react component and its dependencies on demand).
 
 ## Install
 
@@ -56,7 +54,7 @@ module.exports = {
 };
 ```
 
-### Chunk name
+##
 
 You can give the chunk a name with the `name` query parameter:
 

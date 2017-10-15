@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/copy-webpack-plugin/ma
 edit: https://github.com/webpack-contrib/copy-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/copy-webpack-plugin
 ---
-
-  <p>Copies individual files or entire directories to the build directory.</p>
-</div>
+Copies individual files or entire directories to the build directory.
 
 ## Install
 
@@ -21,7 +19,7 @@ npm install --save-dev copy-webpack-plugin
 A pattern looks like:
 `{ from: 'source', to: 'dest' }`
 
-#### Pattern properties:
+###
 
 | Name | Required | Default     | Details                                                 |
 |------|----------|------------ |---------------------------------------------------------|

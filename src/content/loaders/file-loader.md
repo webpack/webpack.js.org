@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/file-loader/master/REA
 edit: https://github.com/webpack-contrib/file-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/file-loader
 ---
-
-  <p>Instructs webpack to emit the required object as file and to return its public URL</p>
-</div>
+Instructs webpack to emit the required object as file and to return its public URL
 
 ## Install
 
@@ -58,7 +56,7 @@ Emits `file.png` as file in the output directory and returns the public URL
 |**`useRelativePath`**|`{Boolean}`|`false`|Should be `true` if you wish to generate a `context` relative URL for each file|
 |**`emitFile`**|`{Boolean}`|`true`|By default a file is emitted, however this can be disabled if required (e.g. for server side packages)|
 
-### `name`
+##
 
 You can configure a custom filename template for your file using the query parameter `name`. For instance, to copy a file from your `context` directory into the output directory retaining the full directory structure, you might use
 

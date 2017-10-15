@@ -3,44 +3,9 @@ import Link from '../Link/Link';
 import Container from '../Container/Container';
 import Logo from '../Logo/Logo';
 import Dropdown from '../Dropdown/Dropdown';
+import Links from './Links.json';
 
-// TODO: Maybe by updating the routing scheme later on we can avoid hardcoding this?
-let Sections = [
-  {
-    title: 'Concepts',
-    url: 'concepts'
-  },
-  {
-    title: 'Guides',
-    url: 'guides'
-  },
-  {
-    title: 'Documentation',
-    url: 'configuration',
-    children: [
-      { title: 'CLI', url: 'api/cli' },
-      { title: 'API', url: 'api' },
-      { title: 'Configuration', url: 'configuration' },
-      { title: 'Loaders', url: 'loaders' },
-      { title: 'Plugins', url: 'plugins' },
-      { title: 'Development', url: 'development' }
-    ]
-  },
-  {
-    title: 'Donate',
-    url: '//opencollective.com/webpack'
-  },
-  {
-    title: 'Blog',
-    url: '//medium.com/webpack'
-  },
-  {
-    title: 'Support',
-    url: 'support'
-  }
-];
-
-// TODO: Move back to using state once we can handle algolia on our own
+// TODO: Migrate to React Banner
 export default class Navigation extends React.Component {
   render() {
     let { pageUrl = '' } = this.props;
@@ -57,21 +22,19 @@ export default class Navigation extends React.Component {
           </Link>
 
           <nav className="navigation__links">
-            {
-              Sections.map(section => {
-                let active = this._isActive(section);
-                let activeMod = active ? 'navigation__link--active' : '';
+            { Links.map(link => {
+              let active = this._isActive(link);
+              let activeMod = active ? 'navigation__link--active' : '';
 
-                return (
-                  <Link
-                    key={ `navigation__link-${section.title}` }
-                    className={ `navigation__link ${activeMod}` }
-                    to={ `/${section.url}/` }>
-                    { section.title }
-                  </Link>
-                );
-              })
-            }
+              return (
+                <Link
+                  key={ `navigation__link-${link.title}` }
+                  className={ `navigation__link ${activeMod}` }
+                  to={ `/${link.url}/` }>
+                  { link.title }
+                </Link>
+              );
+            }) }
           </nav>
 
           <div className="navigation__search">
@@ -110,30 +73,26 @@ export default class Navigation extends React.Component {
             ]} />
         </Container>
 
-        {
-          Sections.filter(section => this._isActive(section) && section.children).map(section => {
-            return (
-              <div className="navigation__bottom" key={ section.title }>
-                <Container className="navigation__inner">
-                  {
-                    section.children.map(child => {
-                      let activeMod = this._isActive(child) ? 'navigation__child--active' : '';
+        { Links.filter(link => this._isActive(link) && link.children).map(link => (
+          <div className="navigation__bottom" key={ link.title }>
+            <Container className="navigation__inner">
+              {
+                link.children.map(child => {
+                  let activeMod = this._isActive(child) ? 'navigation__child--active' : '';
 
-                      return (
-                        <Link
-                          key={ `navigation__child-${child.title}` }
-                          className={ `navigation__child ${activeMod}` }
-                          to={ `/${child.url}/` }>
-                          { child.title }
-                        </Link>
-                      );
-                    })
-                  }
-                </Container>
-              </div>
-            );
-          })
-        }
+                  return (
+                    <Link
+                      key={ `navigation__child-${child.title}` }
+                      className={ `navigation__child ${activeMod}` }
+                      to={ `/${child.url}/` }>
+                      { child.title }
+                    </Link>
+                  );
+                })
+              }
+            </Container>
+          </div>
+        )) }
       </header>
     );
   }
@@ -162,18 +121,20 @@ export default class Navigation extends React.Component {
   }
 
   /**
-   * Check if section is active
+   * Check if the given `link` is active
    *
-   * @param {object} section - An object describing the section
-   * @return {bool} - Whether or not the given section is active
+   * @param  {object} link - An object describing the `link`
+   * @return {bool}        - Whether or not the given `link` is active
    */
-  _isActive(section) {
+  _isActive(link) {
     let { pageUrl = '' } = this.props;
 
-    if (section.children) {
-      return section.children.some(child => { return (new RegExp("^/" + child.url +".*/")).test(pageUrl); });
+    if (link.children) {
+      return link.children.some(child => {
+        return (new RegExp("^/" + child.url + ".*/")).test(pageUrl);
+      });
 
-    } else return (new RegExp("^/" + section.url +".*/")).test(pageUrl);
+    } else return (new RegExp("^/" + link.url +".*/")).test(pageUrl);
   }
 
   /**

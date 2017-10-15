@@ -1,6 +1,7 @@
 ---
-title: Module API - Variables
-sort: 3
+title: Module Variables
+group: Modules
+sort: 4
 contributors:
   - skipjack
   - sokra

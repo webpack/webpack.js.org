@@ -28,6 +28,9 @@ const Splash = () => (
 
         <p>Through contributions, donations, and sponsorship, you allow webpack to thrive. Your donations directly support office hours, continued enhancements, and most importantly, great documentation and learning material!</p>
 
+        <h2>Latest Sponsors</h2>
+        <Support rank="latest" />
+
         <h2>Platinum Sponsors</h2>
         <Support rank="platinum" />
 
@@ -46,5 +49,8 @@ const Splash = () => (
     </div>
   </div>
 );
+
+Splash.title = 'webpack';
+Splash.description = 'webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.';
 
 export default Splash;

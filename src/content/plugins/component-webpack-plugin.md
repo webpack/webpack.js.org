@@ -4,7 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/component-webpack-plug
 edit: https://github.com/webpack-contrib/component-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/component-webpack-plugin
 ---
-# component for webpack
+
 
 **UNMAINTAINED!**
 

@@ -1,6 +1,6 @@
 ---
-title: How to write a plugin?
-sort: 2
+title: Writing a Plugin
+sort: 3
 ---
 
 Plugins expose the full potential of the webpack engine to third-party developers. Using staged build callbacks, developers can introduce their own behaviors into the webpack build process. Building plugins is a bit more advanced than building loaders, because you'll need to understand some of the webpack low-level internals to hook into them. Be prepared to read some source code!

@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/sass-loader/master/REA
 edit: https://github.com/webpack-contrib/sass-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/sass-loader
 ---
-
-  <p>Loads a SASS/SCSS file and compiles it to CSS.</p>
-</div>
+Loads a SASS/SCSS file and compiles it to CSS.
 
 Use the [css-loader](/loaders/css-loader/) or the [raw-loader](/loaders/raw-loader/) to turn it into a JS module and the [ExtractTextPlugin](/plugins/extract-text-webpack-plugin/) to extract it into a separate file.
 Looking for the webpack 1 loader? Check out the [archive/webpack-1 branch](https://github.com/webpack-contrib/sass-loader/tree/archive/webpack-1).
@@ -69,7 +67,7 @@ module.exports = {
 
 See [node-sass](https://github.com/andrew/node-sass) for all available Sass options.
 
-### In production
+##
 
 Usually, it's recommended to extract the style sheets into a dedicated file in production using the [ExtractTextPlugin](/plugins/extract-text-webpack-plugin/). This way your styles are not dependent on JavaScript:
 

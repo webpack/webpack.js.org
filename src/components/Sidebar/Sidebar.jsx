@@ -12,6 +12,7 @@ export default class Sidebar extends Component {
   render() {
     let { pages, currentPage } = this.props;
     let { fixed, availableHeight, maxWidth } = this.state;
+    let group;
 
     return (
       <nav
@@ -29,18 +30,28 @@ export default class Sidebar extends Component {
             <Shield content="npm/v/webpack" label="webpack" />
           </a>
 
-          {
-            pages.map((page, i) =>
-              <SidebarItem
-                key={ `sidebar-item-${i}` }
-                index={ i }
-                url={ page.url }
-                title={ page.title }
-                anchors={ page.anchors }
-                currentPage= { currentPage }
-                onToggle={ this._recalculate.bind(this) } />
-            )
-          }
+          { pages.map((page, index) => {
+            let displayGroup = group !== page.group && page.group !== '-';
+            group = page.group;
+
+            return (
+              <div key={ `sidebar-item-${index}` }>
+                { displayGroup ? (
+                  <h4 className="sidebar__group">
+                    { group }
+                  </h4>
+                ) : null }
+
+                <SidebarItem
+                  index={ index }
+                  url={ page.url }
+                  title={ page.title }
+                  anchors={ page.anchors }
+                  currentPage= { currentPage }
+                  onToggle={ this._recalculate.bind(this) } />
+              </div>
+            );
+          })}
         </div>
 
       </nav>

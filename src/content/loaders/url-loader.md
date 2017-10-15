@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/url-loader/master/READ
 edit: https://github.com/webpack-contrib/url-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/url-loader
 ---
-
-  <p>Loads files as `base64` encoded URL</p>
-</div>
+Loads files as `base64` encoded URL
 
 ## Install
 
@@ -52,7 +50,7 @@ module.exports = {
 |**`mimetype`**|`{String}`|`extname`|Specify MIME type for the file (Otherwise it's inferred from the file extension)|
 |**`fallback`**|`{String}`|`file-loader`|Specify `loader` for the file when file is greater than the limit (in bytes)|
 
-### `limit`
+##
 
 If the file is greater than the limit (in bytes) the [`file-loader`](/loaders/file-loader/) is used by default and all query parameters are passed to it.
 You can use other loader using `fallback` option.
