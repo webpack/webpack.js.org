@@ -1,5 +1,6 @@
 ---
 title: Compiler
+group: Plugins
 sort: 2
 contributors:
   - rishantagarwal

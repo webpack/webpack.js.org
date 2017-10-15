@@ -23,54 +23,39 @@ const Site = ({
   children,
   section,
   location: { pathname }
-}) => {
-  // Retrieve section data
-  let sections = section.all().filter(section => section.path.hideInSidebar !== true)
-    .map((section) => {
-      let _section = {
-        title: section.path.title,
-        url: section.url,
-        pages: section.pages.map(page => {
-          let _page = {
-            title: page.file.title,
-            url: page.url
-          };
-          return _page;
-        })
-      };
-      return _section;
-    });
+}) => (
+  <div id="site" className="site">
+    <Interactive
+      id="src/components/NotificationBar/NotificationBar.jsx"
+      component={ NotificationBar } />
 
-  // Rename the root section ("webpack" => "Other") and push it to the end
-  let rootIndex = sections.findIndex(section => section.title === 'webpack');
-  let rootSection = sections.splice(rootIndex, 1)[0];
-  rootSection.title = 'Other';
-  sections.push(rootSection);
+    <Interactive
+      id="src/components/Navigation/Navigation.jsx"
+      component={ Navigation }
+      pageUrl={ pathname } />
 
-  return (
-    <div id="site" className="site">
-      <Interactive
-        id="src/components/NotificationBar/NotificationBar.jsx"
-        component={ NotificationBar } />
+    <Interactive
+      id="src/components/SidebarMobile/SidebarMobile.jsx"
+      component={ SidebarMobile }
+      sections={
+        section.all()
+          .filter(section => section.path.hidden !== true)
+          .map((section) => ({
+            title: section.path.title,
+            url: section.url,
+            pages: section.pages.map(page => ({
+              title: page.file.title,
+              url: page.url
+            }))
+          }))
+      } />
 
-      <Interactive
-        id="src/components/Navigation/Navigation.jsx"
-        component={ Navigation }
-        sections={ sections }
-        pageUrl={ pathname } />
+    { children }
 
-      <Interactive
-        id="src/components/SidebarMobile/SidebarMobile.jsx"
-        component={ SidebarMobile }
-        sections={ sections } />
+    <Footer />
 
-      { children }
-
-      <Footer />
-
-      <GoogleAnalytics analyticsId="UA-46921629-2" />
-    </div>
-  );
-};
+    <GoogleAnalytics analyticsId="UA-46921629-2" />
+  </div>
+);
 
 export default Site;

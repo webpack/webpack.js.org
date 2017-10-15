@@ -1,5 +1,5 @@
 ---
-title: Command Line Interface (CLI)
+title: Command Line Interface
 sort: 2
 contributors:
   - ev1stensberg
@@ -17,11 +17,9 @@ related:
     url: https://medium.com/@nimgrg/analysing-and-minimising-the-size-of-client-side-bundle-with-webpack-and-source-map-explorer-41096559beca#.c3t2srr8x
 ---
 
-webpack provides a Command Line Interface (CLI) to configure and interact with your build. This is mostly useful in case of early prototyping, profiling, writing npm scripts or personal customization of the build.
-
 For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the config file.
 
-Have a look at the [installation guide](/guides/installation) unless you have webpack already running.
+Have a look at the [installation guide](/guides/installation) if you don't already have webpack installed.
 
 T> The new CLI for webpack is under development. New features are being added such as the `--init` flag. [Check it out!](https://github.com/webpack/webpack-cli)
 

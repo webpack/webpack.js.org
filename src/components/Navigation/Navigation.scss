@@ -1,3 +1,4 @@
+@import 'vars';
 @import 'mixins';
 @import 'functions';
 
@@ -51,35 +52,36 @@
   @include break {
     flex: 1 1 auto;
     display: flex;
+    height: 56px;
     align-items: center;
     justify-content: flex-end;
   }
 }
 
 .navigation__link {
-  @include break {
-    display:inline-block;
-    font-size: getFontSize(-1);
-    text-transform: uppercase;
-    color: getColor(white);
-    transition:all 250ms;
-    padding:1.5em 0.75em;
-
-    &:last-child {
-      margin-right:0.75em;
-    }
-  }
-
-  @include break('large') {
-    padding:1.5em;
-  }
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.1em;
+  margin-right: 1.5em;
+  font-size: getFontSize(-1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: getColor(white);
+  transition: all 250ms;
+  @include fontantialias(false);
 
   &:hover {
     color: getColor(malibu);
   }
 
-  &--active {
-    background: lighten(getColor(elephant), 5%);
+  &--active:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    top: 100%;
+    left: 0;
+    background: getColor(malibu);
   }
 }
 
@@ -187,18 +189,23 @@
 
 .navigation__bottom {
   display: none;
-  background: lighten(getColor(elephant), 5%);
 
   @include break {
     display: block;
+    background: getColor(concrete);
+
+    .navigation__inner {
+      justify-content: flex-end;
+    }
   }
 }
 
 .navigation__child {
   font-size: getFontSize(-1);
-  margin: 0.5em 1em 0.6em;
-  color: getColor(alto);
+  margin: 0.5em 0 0.6em 2em;
+  color: $text-color-highlight;
   text-transform: uppercase;
+  @include fontantialias(false);
 
   &:first-of-type {
     margin-left: 0;
@@ -209,7 +216,7 @@
   }
 
   &--active {
-    color: getColor(white);
-    font-weight: 600;
+    color: getColor(mine-shaft);
+    font-weight: 700;
   }
 }
