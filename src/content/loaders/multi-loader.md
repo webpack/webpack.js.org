@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/multi-loader/master/RE
 edit: https://github.com/webpack-contrib/multi-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/multi-loader
 ---
-
-  <p>This loader requires a module multiple times, each time loaded with a different loader. Like in a multi entry point the exports of the last item are exported.<p>
-</div>
+This loader requires a module multiple times, each time loaded with a different loader. Like in a multi entry point the exports of the last item are exported.
 
 ## 安装
 

@@ -4,13 +4,11 @@ source: https://raw.githubusercontent.com/webpack-contrib/style-loader/master/RE
 edit: https://github.com/webpack-contrib/style-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/style-loader
 ---
-
-  <p>Adds CSS to the DOM by injecting a <code>&lt;style&gt;</code> tag</p>
-</div>
+Adds CSS to the DOM by injecting a <code>&lt;style&gt;</code> tag
 
 ## 安装
 
-```
+```bash
 npm install style-loader --save-dev
 ```
 
@@ -40,7 +38,7 @@ import style from './file.css'
 }
 ```
 
-#### `局部（CSS 模块）`
+###
 
 在使用[局部作用域 CSS](https://github.com/webpack/css-loader#css-scope) 时，模块导出生成的（局部）标识符(identifier)。
 
@@ -130,13 +128,29 @@ style.unuse(); // = style.unref();
 
 |名称|类型|默认值|描述|
 |:--:|:--:|:-----:|:----------|
+|**`hmr`**|`{Boolean}`|`true`|Enable/disable Hot Module Replacement (HMR), if disabled no HMR Code will be added (good for non local development/production)|
 |**`base`** |`{Number}`|`true`|设置模块 ID 基础 (DLLPlugin)|
 |**`attrs`**|`{Object}`|`{}`|添加自定义 attrs 到 `<style></style>`|
 |**`transform`** |`{Function}`|`false`|转换/条件加载 CSS，通过传递转换/条件函数|
-|**`insertAt`**|`{String}`|`bottom`|在给定位置处插入 `<style></style>`|
+|**`insertAt`**|`{String\|Object}`|`bottom`|在给定位置处插入 `<style></style>`|
 |**`insertInto`**|`{String}`|`<head>`|给定位置中插入 `<style></style>`|
 |**`sourceMap`**|`{Boolean}`|`false`|启用/禁用 Sourcemap|
 |**`convertToAbsoluteUrls`**|`{Boolean}`|`false`|启用 source map 后，将相对 URL 转换为绝对 URL|
+
+### `hmr`
+
+Enable/disable Hot Module Replacement (HMR), if disabled no HMR Code will be added.
+This could be used for non local development and production.
+
+**webpack.config.js**
+```js
+{
+  loader: 'style-loader',
+  options: {
+    hmr: false
+  }
+}
+```
 
 ### `base`
 
@@ -226,7 +240,7 @@ import link from './file.css'
 **webpack.config.js**
 ```js
 {
-  loader: 'style-loader'
+  loader: 'style-loader',
   options: {
     transform: 'path/to/transform.js'
   }
@@ -248,7 +262,7 @@ module.exports = function (css) {
 **webpack.config.js**
 ```js
 {
-  loader: 'style-loader'
+  loader: 'style-loader',
   options: {
     transform: 'path/to/conditional.js'
   }
@@ -274,9 +288,23 @@ module.exports = function (css) {
 **webpack.config.js**
 ```js
 {
-  loader: 'style-loader'
+  loader: 'style-loader',
   options: {
     insertAt: 'top'
+  }
+}
+```
+
+A new `<style>` element can be inserted before a specific element by passing an object, e.g.
+
+**webpack.config.js**
+```js
+{
+  loader: 'style-loader',
+  options: {
+    insertAt: {
+        before: '#id'
+    }
   }
 }
 ```
@@ -288,7 +316,7 @@ module.exports = function (css) {
 **webpack.config.js**
 ```js
 {
-  loader: 'style-loader'
+  loader: 'style-loader',
   options: {
     insertInto: '#host::shadow>#root'
   }
@@ -304,7 +332,7 @@ module.exports = function (css) {
 **webpack.config.js**
 ```js
 {
-  loader: 'style-loader'
+  loader: 'style-loader',
   options: {
     singleton: true
   }
@@ -318,7 +346,7 @@ module.exports = function (css) {
 **webpack.config.js**
 ```js
 {
-  loader: 'style-loader'
+  loader: 'style-loader',
   options: {
     sourceMap: true
   }
@@ -332,7 +360,7 @@ module.exports = function (css) {
 **webpack.config.js**
 ```js
 {
-  loader: 'style-loader'
+  loader: 'style-loader',
   options: {
     sourceMap: true,
     convertToAbsoluteUrls: true

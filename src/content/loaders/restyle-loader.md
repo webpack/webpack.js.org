@@ -5,7 +5,6 @@ edit: https://github.com/webpack-contrib/restyle-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/restyle-loader
 ---
 
-</div>
 
 <div align="center">
 

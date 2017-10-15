@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/val-loader/master/READ
 edit: https://github.com/webpack-contrib/val-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/val-loader
 ---
-
-  <p>Executes the given module to generate source code on build time.<p>
-</div>
+Executes the given module to generate source code on build time.
 
 ## 安装
 
@@ -104,7 +102,7 @@ module.exports = {
 
 此 loader 所加载的模块必须符合以下接口：
 
-### 期望的模块接口
+##
 
 加载的模块必须使用以下*函数接口*，将 `默认的` export 导出为一个函数。
 

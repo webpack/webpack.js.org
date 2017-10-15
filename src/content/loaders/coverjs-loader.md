@@ -4,7 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/coverjs-loader/master/
 edit: https://github.com/webpack-contrib/coverjs-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/coverjs-loader
 ---
-# coverjs loader for webpack
+
 
 ## 用法
 

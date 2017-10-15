@@ -35,7 +35,7 @@ Installation
 Examples
 ------------------------------------------------------------------------
 
-### [Extracting a main.css](https://github.com/peerigon/extract-loader/tree/master/examples/main-css)
+##
 
 Bundling CSS with webpack has some nice advantages like referencing images and fonts with hashed urls or [hot module replacement](http://webpack.github.io/docs/hot-module-replacement-with-webpack.html) in development. In production, on the other hand, it's not a good idea to apply your stylesheets depending on JS execution. Rendering may be delayed or even a [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content) might be visible. Thus it's still better to have them as separate files in your final production build.
 

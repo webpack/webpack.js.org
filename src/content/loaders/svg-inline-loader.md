@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/svg-inline-loader/mast
 edit: https://github.com/webpack-contrib/svg-inline-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/svg-inline-loader
 ---
-
-  <p>This Webpack loader inlines SVG as module. If you use Adobe suite or Sketch to export SVGs, you will get auto-generated, unneeded crusts. This loader removes it for you, too.<p>
-</div>
+This Webpack loader inlines SVG as module. If you use Adobe suite or Sketch to export SVGs, you will get auto-generated, unneeded crusts. This loader removes it for you, too.
 
 ## 安装
 
@@ -29,7 +27,7 @@ npm install svg-inline-loader --save-dev
 
 ## Query 选项
 
-#### `removeTags: boolean`
+###
 
 删除指定的标签和它的子元素，你可以指定标签通过设置 `removingTags` 查询多个。
 

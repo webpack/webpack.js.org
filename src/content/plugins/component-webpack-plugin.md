@@ -4,7 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/component-webpack-plug
 edit: https://github.com/webpack-contrib/component-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/component-webpack-plugin
 ---
-# webpack 的组件
+
 
 **尚未维护！**
 

@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/node-loader/master/REA
 edit: https://github.com/webpack-contrib/node-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/node-loader
 ---
-
-  <p>Node Add-ons for webpack</p>
-</div>
+Node Add-ons for webpack
 
 ## 安装
 
@@ -20,7 +18,7 @@ npm install --save-dev node-loader
 
 通过 webpack 配置、命令行或者内联使用 loader。
 
-### 通过 webpack 配置（推荐）
+##
 
 **webpack.config.js**
 ```js

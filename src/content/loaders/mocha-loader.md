@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/mocha-loader/master/RE
 edit: https://github.com/webpack-contrib/mocha-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/mocha-loader
 ---
-
-  <p>Allows <a href="http://mochajs.org/">Mocha</a> tests to be loaded and run via webpack</p>
-</div>
+Allows <a href="http://mochajs.org/">Mocha</a> tests to be loaded and run via webpack
 
 ## 安装
 
@@ -16,7 +14,7 @@ npm install --save-dev mocha-loader
 
 ## 用法
 
-### 配置（推荐）
+##
 
 **webpack.config.js**
 ```js

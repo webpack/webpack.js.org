@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/coffee-redux-loader/ma
 edit: https://github.com/webpack-contrib/coffee-redux-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/coffee-redux-loader
 ---
-
-  <p>Coffee Script Redux loader for Webpack.<p>
-</div>
+Coffee Script Redux loader for Webpack.
 
 ## 安装
 

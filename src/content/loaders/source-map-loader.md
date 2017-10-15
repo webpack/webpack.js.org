@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/source-map-loader/mast
 edit: https://github.com/webpack-contrib/source-map-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/source-map-loader
 ---
-
-  <p>Extracts source maps from existing source files (from their <code>sourceMappingURL</code>).<p>
-</div>
+Extracts source maps from existing source files (from their <code>sourceMappingURL</code>).
 
 ## 安装
 
@@ -19,7 +17,7 @@ npm i -D source-map-loader
 [文档：使用 loader](https://webpack.js.org/concepts/#loaders)
 
 
-### webpack 配置示例
+##
 
 ``` javascript
 module.exports = {
