@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/uglifyjs-webpack-plugi
 edit: https://github.com/webpack-contrib/uglifyjs-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/uglifyjs-webpack-plugin
 ---
-
-	<p>This plugin uses <a href="https://github.com/mishoo/UglifyJS2/tree/harmony">UglifyJS v3 </a><a href="https://npmjs.com/package/uglify-es">(`uglify-es`)</a> to minify your JavaScript</p>
-</div>
+This plugin uses <a href="https://github.com/mishoo/UglifyJS2/tree/harmony">UglifyJS v3 </a><a href="https://npmjs.com/package/uglify-es">(`uglify-es`)</a> to minify your JavaScript
 
 > ⚠️ This documentation is for the current beta. For latest stable, see [v0.4.6](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/tree/v0.4.6).
 
@@ -46,7 +44,7 @@ module.exports = {
 |**`extractComments`**|`{Boolean\|RegExp\|Function<(node, comment) -> {Boolean\|Object}>}`|`false`|Whether comments shall be extracted to a separate file, (see [details](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a) (`webpack >= 2.3.0`)|
 |**`warningsFilter`**|`{Function(source) -> {Boolean}}`|`undefined`|Allow to filter uglify warnings|
 
-### `test`
+##
 
 **webpack.config.js**
 ```js

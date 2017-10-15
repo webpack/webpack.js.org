@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/raw-loader/master/READ
 edit: https://github.com/webpack-contrib/raw-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/raw-loader
 ---
-
-  <p>A loader for webpack that lets you import files as a string.</p>
-</div>
+A loader for webpack that lets you import files as a string.
 
 ## Install
 
@@ -18,7 +16,7 @@ npm install --save-dev raw-loader
 
 Use the loader either via your webpack config, CLI or inline.
 
-### Via webpack config (recommended)
+##
 
 **webpack.config.js**
 ```js

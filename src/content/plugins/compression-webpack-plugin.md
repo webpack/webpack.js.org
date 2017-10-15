@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/compression-webpack-pl
 edit: https://github.com/webpack-contrib/compression-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/compression-webpack-plugin
 ---
-
-  <p>Prepare compressed versions of assets to serve them with Content-Encoding<p>
-</div>
+Prepare compressed versions of assets to serve them with Content-Encoding
 
 ## Install
 
@@ -40,7 +38,7 @@ module.exports = {
 |**`deleteOriginalAssets`**|`{Boolean}`|`false`|Whether to delete the original assets or not|
 
 
-### `test`
+##
 
 **webpack.config.js**
 ```js

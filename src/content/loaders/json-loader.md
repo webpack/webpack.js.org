@@ -5,7 +5,6 @@ edit: https://github.com/webpack-contrib/json-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/json-loader
 ---
 
-</div>
 
 ## Install
 
@@ -17,7 +16,7 @@ npm install --save-dev json-loader
 
 ## Usage
 
-### `Inline`
+##
 
 ```js
 const json = require('json-loader!./file.json');

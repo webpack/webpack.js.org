@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/val-loader/master/READ
 edit: https://github.com/webpack-contrib/val-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/val-loader
 ---
-
-  <p>Executes the given module to generate source code on build time.<p>
-</div>
+Executes the given module to generate source code on build time.
 
 ## Install
 
@@ -104,7 +102,7 @@ module.exports = {
 
 The module that is loaded with this loader must stick to the following interfaces:
 
-### Expected module interface
+##
 
 The loaded module must export a function as `default` export with the following *function interface*.
 

@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/style-loader/master/RE
 edit: https://github.com/webpack-contrib/style-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/style-loader
 ---
-
-  <p>Adds CSS to the DOM by injecting a <code>&lt;style&gt;</code> tag</p>
-</div>
+Adds CSS to the DOM by injecting a <code>&lt;style&gt;</code> tag
 
 ## Install
 
@@ -40,7 +38,7 @@ import style from './file.css'
 }
 ```
 
-#### `Locals (CSS Modules)`
+###
 
 When using [local scoped CSS](https://github.com/webpack/css-loader#css-scope) the module exports the generated identifiers (locals).
 

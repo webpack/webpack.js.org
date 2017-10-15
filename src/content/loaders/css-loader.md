@@ -5,7 +5,6 @@ edit: https://github.com/webpack-contrib/css-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/css-loader
 ---
 
-</div>
 
 ## Install
 
@@ -40,7 +39,7 @@ module.exports = {
 }
 ```
 
-### `toString`
+##
 
 You can also use the css-loader results directly as string, such as in Angular's component style.
 

@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/npm-install-webpack-pl
 edit: https://github.com/webpack-contrib/npm-install-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/npm-install-webpack-plugin
 ---
-
-  <p>Speed up development by <b>automatically installing & saving dependencies</b> with Webpack.<p>
-</div>
+Speed up development by <b>automatically installing & saving dependencies</b> with Webpack.
 
 It sucks to <kbd>Ctrl-C</kbd> your
 build script & server just to install

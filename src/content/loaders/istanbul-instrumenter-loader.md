@@ -5,7 +5,6 @@ edit: https://github.com/webpack-contrib/istanbul-instrumenter-loader/edit/maste
 repo: https://github.com/webpack-contrib/istanbul-instrumenter-loader
 ---
 
-</div>
 
 Instrument JS files with [istanbul-lib-instrument](https://github.com/istanbuljs/istanbuljs/tree/master/packages/istanbul-lib-instrument) for subsequent code coverage reporting
 
@@ -17,7 +16,7 @@ npm i -D istanbul-instrumenter-loader
 
 ## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
 
-### `References`
+##
 
 * [karma-webpack](https://github.com/webpack/karma-webpack)
 * [karma-coverage-istanbul-reporter](https://github.com/mattlewis92/karma-coverage-istanbul-reporter)
@@ -92,6 +91,7 @@ config.set({
 
 You must run the instrumentation as a post step
 
+**webpack.config.js**
 ```js
 {
   test: /\.js$|\.jsx$/,
@@ -119,6 +119,7 @@ The loader supports all options supported by `istanbul-lib-instrument`
 |**`produceSourceMap`**|`{Boolean}`|`false`|Set to `true` to produce a source map for the instrumented code|
 |**`sourceMapUrlCallback`**|`{Function}`|`null`|A callback function that is called when a source map URL is found in the original code. This function is called with the source filename and the source map URL|
 
+**webpack.config.js**
 ```js
 {
   test: /\.js$/,

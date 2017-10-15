@@ -4,14 +4,12 @@ source: https://raw.githubusercontent.com/webpack-contrib/extract-text-webpack-p
 edit: https://github.com/webpack-contrib/extract-text-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/extract-text-webpack-plugin
 ---
-
-  <p>Extract text from a bundle, or bundles, into a separate file.</p>
-</div>
+Extract text from a bundle, or bundles, into a separate file.
 
 ## Install
 
 ```bash
-# for webpack 3
+
 npm install --save-dev extract-text-webpack-plugin
 # for webpack 2
 npm install --save-dev extract-text-webpack-plugin@2.1.2

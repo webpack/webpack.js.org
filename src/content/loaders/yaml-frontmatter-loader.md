@@ -5,7 +5,6 @@ edit: https://github.com/webpack-contrib/yaml-frontmatter-loader/edit/master/REA
 repo: https://github.com/webpack-contrib/yaml-frontmatter-loader
 ---
 
-</div>
 
 YAML Frontmatter loader for [webpack](https://webpack.js.org/). Converts YAML in files to JSON. You should chain it with [json-loader](/loaders/json-loader/).
 
@@ -20,7 +19,7 @@ var json = require("json-loader!yaml-frontmatter-loader!./file.md");
 // => returns file.md as javascript object
 ```
 
-### Configuration
+##
 
 **webpack.config.js**
 ```js

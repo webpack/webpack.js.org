@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/json5-loader/master/RE
 edit: https://github.com/webpack-contrib/json5-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/json5-loader
 ---
-
-  <p>A webpack loader for parsing <a href="http://json5.org/"><code>json5</code></a> files into JavaScript objects.<p>
-</div>
+A webpack loader for parsing <a href="http://json5.org/"><code>json5</code></a> files into JavaScript objects.
 
 ## Install
 
@@ -29,7 +27,7 @@ Suppose we have the following `json5` file
 }
 ```
 
-#### Usage with preconfigured loader
+###
 
 ```js
 // webpack.config.js
