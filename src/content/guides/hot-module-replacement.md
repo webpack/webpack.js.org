@@ -14,6 +14,7 @@ contributors:
   - gdi2290
   - bdwain
   - caryli
+  - xgirma
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -40,6 +41,7 @@ __webpack.config.js__
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 + const webpack = require('webpack');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
 
   module.exports = {
     entry: {
