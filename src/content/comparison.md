@@ -1,6 +1,6 @@
 ---
 title: 对比
-sort: 25
+sort: 1
 contributors:
   - pksjce
   - bebraw

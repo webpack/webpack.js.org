@@ -1,5 +1,5 @@
 ---
-title: 命令行接口(CLI)
+title: 命令行接口(Command Line Interface)
 sort: 2
 contributors:
   - ev1stensberg
@@ -17,11 +17,9 @@ related:
     url: https://medium.com/@nimgrg/analysing-and-minimising-the-size-of-client-side-bundle-with-webpack-and-source-map-explorer-41096559beca#.c3t2srr8x
 ---
 
-webpack 提供了命令行接口（CLI），以便对构建过程进行配置和交互。这对于制定早期原型、轮廓、编写 npm 脚本 或者一些个人自定义需求很有用。
-
 为了更合适且方便地使用配置，可以在 `webpack.config.js` 中对 webpack 进行配置。CLI 中传入的任何参数会在配置文件中映射为对应的参数。
 
-如果你的 webpack 尚未开始配置，请查看[安装指南](/guides/installation)。
+如果你还没有安装 webpack，请查看[安装指南](/guides/installation)。
 
 T> webpack 的新 CLI 正在开发中。正在添加新功能，例如 `--init` 参数。[查看详情！](https://github.com/webpack/webpack-cli)
 

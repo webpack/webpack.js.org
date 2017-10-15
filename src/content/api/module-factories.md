@@ -1,11 +1,14 @@
 ---
-title: Context/Normal Module Factories
+title: Module Factories
+group: Plugins
 sort: 5
 ---
 
+?> Lead in...
+
 ## `NormalModuleFactory`
 
-### `before-resolve(data)` 异步 瀑布流
+`before-resolve(data)` 异步 瀑布流
 
 工厂开始解析之前。`data` 对象具有以下属性：
 
@@ -14,7 +17,7 @@ sort: 5
 
 插件被允许修改对象或将新的类似对象传递给回调。
 
-### `after-resolve(data)` 异步 瀑布流
+`after-resolve(data)` 异步 瀑布流
 
 工厂解析 request 之后。`data` 对象具有以下属性：
 
@@ -25,13 +28,20 @@ sort: 5
 * `resource`：原始资源。将会被 NormalModule 加载。
 * `parser`：被 NormalModule 使用的 parser。
 
+
 ## `ContextModuleFactory`
 
-### `before-resolve(data)` async waterfall
+`before-resolve(data)` async waterfall
 
-### `after-resolve(data)` async waterfall
+?> Add documentation.
 
-### `alternatives(options: Array)` async waterfall
+`after-resolve(data)` async waterfall
+
+?> Add documentation.
+
+`alternatives(options: Array)` async waterfall
+
+?> Add documentation.
 
 ***
 

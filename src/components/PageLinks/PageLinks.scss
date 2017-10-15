@@ -6,7 +6,6 @@
   display: none;
   top: 1.5em;
   right: 1.5em;
-  font-size: getFontSize(-1);
   font-weight: 600;
   text-transform: uppercase;
 
@@ -15,6 +14,7 @@
   }
 
   &__link {
+    font-size: getFontSize(-1);
     display: inline-flex;
   }
 

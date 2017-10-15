@@ -1,5 +1,6 @@
 ---
 title: Branding Guidelines
+sort: 2
 contributors:
   - jhnns
   - skipjack
@@ -9,10 +10,7 @@ contributors:
 Here you can find **webpack** project brand guidelines, assets, and license. See our official [media repository](https://github.com/webpack/media) for more information and to find the [license](https://github.com/webpack/media/blob/master/LICENSE) that governs this work. Click any of the images to download them.
 
 
-## [Jump to All Original Media Files](https://github.com/webpack/media)
-
-
-## The webpack Name
+## The Name
 
 webpack should **always** be written in lower-case letters, even at the beginning of a sentence.
 
@@ -72,7 +70,7 @@ We use the beautiful [Geomanist Medium](http://geomanist.com/) font from the ext
 
 The following colors are used throughout the site in various combinations and on our fancy clothing line launched with the help of [Open Collective](http://opencollective.com) and [Threadless](https://medium.com/u/840563ee2a56) over at the [official webpack store](https://webpack.threadless.com/collections/the-final-release-collection/)!
 
-| Color Name    | HEX Code      | RGB Code              | Sample 
+| Color Name    | HEX Code      | RGB Code              | Sample
 |---------------|---------------|-----------------------|-------------------------------
 | Malibu:       | HEX `#8dd6f9` | `rgb: 141, 214, 249`  | <div style="background-color: #8dd6f9;">&nbsp;</div>
 | Denim:        | HEX `#1d78c1` | `rgb: 29, 120, 193`   | <div style="background-color: #1d78c1;">&nbsp;</div>

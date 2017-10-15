@@ -6,6 +6,7 @@ contributors:
   - sallar
   - jungomi
   - ldrick
+  - jasonblanchard
 ---
 
 `stats` 选项能让你准确地控制显示哪些包的信息。如果你希望得到部分包的信息（而不是一股脑全部输出），而不想使用 `quiet` 或者 `noInfo` 模式的时候，这个选项是一个很好的折衷办法。
@@ -40,6 +41,7 @@ stats: {
   // 增加资源信息
   assets: true,
   // 对资源按指定的项进行排序
+  // 你可以使用 `!field` 来反转排序。
   assetsSort: "field",
   // 增加缓存了的（但没构建）模块的信息
   cached: true,
@@ -54,6 +56,7 @@ stats: {
   // 增加包 和 包合并 的来源信息
   chunkOrigins: true,
   // 对包按指定的项进行排序
+  // 你可以使用 `!field` 来反转排序。默认是按照 `id` 排序。
   chunksSort: "field",
   // 用于缩短请求的上下文目录
   context: "../src/",
@@ -87,6 +90,7 @@ stats: {
   // 增加内置的模块信息
   modules: true,
   // 对模块按指定的项进行排序
+  // 你可以使用 `!field` 来反转排序。默认是按照 `id` 排序。
   modulesSort: "field",
   // Show dependencies and origin of warnings/errors (since webpack 2.5.0)
   moduleTrace: true,

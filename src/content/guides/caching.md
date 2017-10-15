@@ -255,7 +255,7 @@ __src/index.js__
 
     // lodash 是由当前 script 脚本 import 导入进来的
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-+   element.onClick = Print.bind(null, 'Hello webpack!');
++   element.onclick = Print.bind(null, 'Hello webpack!');
 
     return element;
   }
@@ -358,8 +358,8 @@ __src/index.js__
 
     // lodash 是由当前 script 脚本 import 导入进来的
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
--   element.onClick = Print.bind(null, 'Hello webpack!');
-+   // element.onClick = Print.bind(null, 'Hello webpack!');
+-   element.onclick = Print.bind(null, 'Hello webpack!');
++   // element.onclick = Print.bind(null, 'Hello webpack!');
 
     return element;
   }

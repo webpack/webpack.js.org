@@ -23,6 +23,8 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
 
 点击下面配置代码中每个选项的名称，跳转到详细的文档。还要注意，带有箭头的项目可以展开，以显示更多示例，在某些情况下可以看到高级配置。
 
+__webpack.config.js__
+
 ``` js-with-links-with-details
 const path = require('path');
 

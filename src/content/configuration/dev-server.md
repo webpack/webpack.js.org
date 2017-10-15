@@ -46,6 +46,18 @@ W> Be aware that when [exporting multiple configurations](/configuration/configu
 
 T> If you're having trouble, navigating to the `/webpack-dev-server` route will show where files are served. For example, `http://localhost:9000/webpack-dev-server`.
 
+## `devServer.after`
+
+`function`
+
+Provides the ability to execute custom middleware after all other middleware
+internally within the server.
+
+```js
+after(app){
+  // do fancy stuff
+}
+```
 
 ## `devServer.allowedHosts`
 
@@ -80,6 +92,21 @@ To use this option with the CLI pass the `--allowed-hosts` option a comma-delimi
 webpack-dev-server --entry /entry/file --output-path /output/path --allowed-hosts .host.com,host2.com
 ```
 
+## `devServer.before`
+
+`function`
+
+Provides the ability to execute custom middleware prior to all other middleware
+internally within the server. This could be used to define custom handlers, for
+example:
+
+```js
+before(app){
+  app.get('/some/path', function(req, res) {
+    res.json({ custom: 'response' });
+  });
+}
+```
 
 ## `devServer.bonjour`
 
@@ -377,7 +404,7 @@ Usage via the CLI
 webpack-dev-server --inline=false
 ```
 
-T> 当使用模块热替换时，建议使用内联模式(inline mode)。
+T> 推荐使用模块热替换的内联模式，因为它包含来自 websocket 的 HMR 触发器。轮询模式可以作为替代方案，但需要一个额外的入口点：`'webpack/hot/poll?1000'`。
 
 
 ## `devServer.lazy` 🔑
@@ -470,7 +497,7 @@ overlay: {
 
 `string`
 
-Path to a SSL pfx file.
+When used via the CLI, a path to an SSL .pfx file. If used in options, it should be the bytestream of the .pfx file.
 
 ```js
 pfx: '/path/to/file.pfx'
@@ -665,6 +692,8 @@ webpack-dev-server --quiet
 ## `devServer.setup`
 
 `function`
+
+W> This option is __deprecated__ in favor of `before` and will be removed in v3.0.0.
 
 Here you can access the Express app object and add your own custom middleware to it.
 For example, to define custom handlers for some paths:
