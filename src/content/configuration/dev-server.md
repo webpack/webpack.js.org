@@ -374,6 +374,16 @@ To pass your own certificate via the CLI use the following options
 webpack-dev-server --https --key /path/to/server.key --cert /path/to/server.crt --cacert /path/to/ca.pem
 ```
 
+## `devServer.index` - API only
+
+`string`
+
+The filename that is considered the index file.
+
+```javascript
+index: 'index.htm'
+```
+
 
 ## `devServer.info` - CLI only
 
