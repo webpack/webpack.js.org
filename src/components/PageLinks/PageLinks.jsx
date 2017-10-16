@@ -6,7 +6,7 @@ export default ({
   section = '',
   page = {}
 }) => {
-  let baseURL = 'https://github.com/webpack/webpack.js.org/edit/master/src/content';
+  let baseURL = 'https://github.com/webpack-china/webpack.js.org/edit/cn/src/content';
   let indexPath = page.type === 'index' ? '/index' : '';
   let mainPath = page.url.startsWith('/') ? page.url : `/${page.url}`;
   let editLink = page.file.attributes.edit || baseURL + TrimEnd(mainPath, '/') + indexPath + '.md';
@@ -24,7 +24,7 @@ export default ({
       ) : null }
 
       <a className="page-links__link" href={ editLink }>
-        Edit Document
+        编辑此页
         <i className="page-links__icon icon-edit" />
       </a>
     </div>
