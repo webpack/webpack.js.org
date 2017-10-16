@@ -374,7 +374,7 @@ To pass your own certificate via the CLI use the following options
 webpack-dev-server --https --key /path/to/server.key --cert /path/to/server.crt --cacert /path/to/ca.pem
 ```
 
-## `devServer.index` - API only
+## `devServer.index`
 
 `string`
 
