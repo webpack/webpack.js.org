@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/504cd3af52f0cba375f9.css" rel="stylesheet">
+      <link href="/808e2570308b23d0ec63.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -43,7 +43,7 @@ noParse<span class="token punctuation">:</span> <span class="token keyword">func
 <li><p>The issuer: An absolute path to the file of the module which requested the resource. It&apos;s the location of the import.</p>
 </li>
 </ol>
-<p><strong>Example:</strong> When we <code>import &quot;./style.css&quot;</code> from <code>app.js</code>, the resource is <code>/path/to/style.css</code> and the issuer is <code>/path/to/app.js</code>.</p>
+<p><strong>Example:</strong> When we <code>import &apos;./style.css&apos;</code> within <code>app.js</code>, the resource is <code>/path/to/style.css</code> and the issuer is <code>/path/to/app.js</code>.</p>
 <p>In a Rule the properties <a href="#rule-test"><code>test</code></a>, <a href="#rule-include"><code>include</code></a>, <a href="#rule-exclude"><code>exclude</code></a> and <a href="#rule-resource"><code>resource</code></a> are matched with the resource and the property <a href="#rule-issuer"><code>issuer</code></a> is matched with the issuer.</p>
 <p>When using multiple conditions, all conditions must match.</p>
 <blockquote class="warning"><div class="tip-content"> Be careful! The resource is the <em>resolved</em> path of the file, which means symlinked resources are the real path <em>not</em> the symlink location. This is good to remember when using tools that symlink packages (like <code>npm link</code>), common conditions like <code>/node_modules/</code> may inadvertently miss symlinked files. </div></blockquote><h3 class="header"><a class="anchor" href="#rule-results" id="rule-results"></a><span class="text">Rule results</span><a class="icon-link" href="#rule-results"></a></h3>
@@ -74,7 +74,11 @@ noParse<span class="token punctuation">:</span> <span class="token keyword">func
 <h2 class="header"><a class="anchor" href="#rule-include" id="rule-include"></a><span class="text"><code>Rule.include</code></span><a class="icon-link" href="#rule-include"></a></h2>
 <p><code>Rule.include</code> is a shortcut to <code>Rule.resource.include</code>. If you supply a <code>Rule.include</code> option, you cannot also supply a <code>Rule.resource</code>. See <a href="#rule-resource"><code>Rule.resource</code></a> and <a href="#condition"><code>Condition.include</code></a> for details.</p>
 <h2 class="header"><a class="anchor" href="#rule-issuer" id="rule-issuer"></a><span class="text"><code>Rule.issuer</code></span><a class="icon-link" href="#rule-issuer"></a></h2>
-<p>A <a href="#condition"><code>Condition</code></a> matched with the issuer. See details in <a href="#rule-conditions"><code>Rule</code> conditions</a>.</p>
+<p>A <a href="#condition"><code>Condition</code></a> to match against the module that issued the request. In the following example, the <code>issuer</code> for the <code>a.js</code> request would be the path to the <code>index.js</code> file.</p>
+<p><strong>index.js</strong></p>
+<pre><code class="lang-js"><span class="token keyword">import</span> A <span class="token keyword">from</span> <span class="token string">&apos;./a.js&apos;</span>
+</code></pre>
+<p>This option can be used to apply loaders to the dependencies of a specific module or set of modules.</p>
 <h2 class="header"><a class="anchor" href="#rule-loader" id="rule-loader"></a><span class="text"><code>Rule.loader</code></span><a class="icon-link" href="#rule-loader"></a></h2>
 <p><code>Rule.loader</code> is a shortcut to <code>Rule.use: [ { loader } ]</code>. See <a href="#rule-use"><code>Rule.use</code></a> and <a href="#useentry"><code>UseEntry.loader</code></a> for details.</p>
 <h2 class="header"><a class="anchor" href="#rule-loaders" id="rule-loaders"></a><span class="text"><code>Rule.loaders</code></span><a class="icon-link" href="#rule-loaders"></a></h2>
@@ -92,7 +96,7 @@ noParse<span class="token punctuation">:</span> <span class="token keyword">func
       resourceQuery<span class="token punctuation">:</span> <span class="token regex">/external/</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// foo.css?external</span>
       use<span class="token punctuation">:</span> <span class="token string">&apos;file-loader&apos;</span>
     <span class="token punctuation">}</span>
-  <span class="token punctuation">]</span> 
+  <span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <h2 class="header"><a class="anchor" href="#rule-options-rule-query" id="rule-options-rule-query"></a><span class="text"><code>Rule.options</code> / <code>Rule.query</code></span><a class="icon-link" href="#rule-options-rule-query"></a></h2>
@@ -123,10 +127,10 @@ noParse<span class="token punctuation">:</span> <span class="token keyword">func
 <h2 class="header"><a class="anchor" href="#rule-resource" id="rule-resource"></a><span class="text"><code>Rule.resource</code></span><a class="icon-link" href="#rule-resource"></a></h2>
 <p>A <a href="#condition"><code>Condition</code></a> matched with the resource. You can either supply a <code>Rule.resource</code> option or use the shortcut options <code>Rule.test</code>, <code>Rule.exclude</code>, and <code>Rule.include</code>. See details in <a href="#rule-conditions"><code>Rule</code> conditions</a>.</p>
 <h2 class="header"><a class="anchor" href="#rule-resourcequery" id="rule-resourcequery"></a><span class="text"><code>Rule.resourceQuery</code></span><a class="icon-link" href="#rule-resourcequery"></a></h2>
-<p>A <a href="#condition"><code>Condition</code></a> matched with the resource query. The condition matches against a string that starts with a question mark (<code>&quot;?exampleQuery&quot;</code>). See details in <a href="#rule-conditions"><code>Rule</code> conditions</a>.</p>
-<pre><code class="lang-javascript"><span class="token punctuation">{</span>
+<p>A <a href="#condition"><code>Condition</code></a> matched with the resource query. This option is used to test against the query section of a request string (i.e. from the question mark onwards). If you were to <code>import Foo from &apos;./foo.css?inline&apos;</code>, the following condition would match:</p>
+<pre><code class="lang-js"><span class="token punctuation">{</span>
   test<span class="token punctuation">:</span> <span class="token regex">/.css$/</span><span class="token punctuation">,</span>
-  resourceQuery<span class="token punctuation">:</span> <span class="token regex">/inline/</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// foo.css?inline</span>
+  resourceQuery<span class="token punctuation">:</span> <span class="token regex">/inline/</span><span class="token punctuation">,</span>
   use<span class="token punctuation">:</span> <span class="token string">&apos;url-loader&apos;</span>
 <span class="token punctuation">}</span>
 </code></pre>
