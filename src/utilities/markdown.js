@@ -232,26 +232,9 @@ function handleTable(t) {
 
   for (let i = 0; i < t.cells.length; i++) {
     let row = t.cells[i];
+
+    row = fixPipesEscapingForTableRow(row);
     cell = '';
-
-
-    // Fix escaped '|' characters
-    // See https://github.com/chjj/marked/issues/595
-    let erroneous = row.map(item => item.endsWith('\\') ? item : null).filter(item => item);
-
-    if ( erroneous.length > 0 ) {
-      erroneous.forEach(string => {
-        let errorIndex = row.findIndex(item => item === string);
-        let nextIndex = errorIndex + 1;
-        let value = row[errorIndex];
-
-        if (value) {
-          row[errorIndex] = `${value.slice(0, -1)}|${row[nextIndex]}`;
-          row.splice(nextIndex, 1);
-        }
-      });
-    }
-
 
     for (let j = 0; j < row.length; j++) {
       cell += handleTableCell(this.inline.output(row[j]), {
@@ -380,5 +363,52 @@ function handleTok() {
     case 'text': {
       return this.renderer.paragraph(this.parseText());
     }
+  }
+}
+
+
+/**
+ * Fixes escaped '|' characters in table cells.
+ * @link https://github.com/chjj/marked/issues/595
+ */
+function fixPipesEscapingForTableRow(row) {
+  const fixedRow = [];
+  let index = 0;
+  let handlingBroken = false;
+
+  while (index < row.length) {
+    const cellString = row[index];
+
+    if (isBroken(cellString) && !handlingBroken) {
+      // Starting to handle broken chain by creating first cell to append content to.
+      handlingBroken = true;
+      fixedRow.push(fixBroken(cellString));
+
+    } else if (!isBroken(cellString) && handlingBroken) {
+      // Finishing to handle broken chain by appending the last element to the current cell.
+      fixedRow[fixedRow.length - 1] += cellString;
+      handlingBroken = false;
+
+    } else if (isBroken(cellString) && handlingBroken) {
+      // Appending next broken cell to the current cell.
+      fixedRow[fixedRow.length - 1] += fixBroken(cellString);
+
+    } else {
+      // Just adding cell normally.
+      fixedRow.push(cellString);
+
+    }
+
+    index++;
+  }
+
+  return fixedRow;
+
+  function isBroken (cellString) {
+    return cellString.endsWith('\\');
+  }
+
+  function fixBroken (cellString) {
+    return cellString.replace(/\\$/, '|');
   }
 }

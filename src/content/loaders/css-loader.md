@@ -5,7 +5,6 @@ edit: https://github.com/webpack-contrib/css-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/css-loader
 ---
 
-</div>
 
 ## 安装
 
@@ -38,7 +37,7 @@ module.exports = {
 }
 ```
 
-### `toString`
+##
 
 您也可以直接将 css-loader 的结果作为字符串使用，例如 Angular 的组件样式。
 
@@ -82,15 +81,15 @@ console.log(css); // {String}
 
 |名称|类型|默认值|描述|
 |:--:|:--:|:-----:|:----------|
-|**`root`**|`{String}`|`/`|解析 URL 的路径，以 `/` 开头的 URL 不会被转译|
-|**`url`**|`{Boolean}`|`true`| 启用/禁用 `url()` 处理|
-|**`alias`**|`{Object}`|`{}`|创建别名更容易导入一些模块|
-|**`import`** |`{Boolean}`|`true`| 启用/禁用 @import 处理|
-|**`modules`**|`{Boolean}`|`false`|启用/禁用 CSS 模块|
-|**`minimize`**|`{Boolean\|Object}`|`false`|启用/禁用 压缩|
-|**`sourceMap`**|`{Boolean}`|`false`|启用/禁用 Sourcemap|
-|**`camelCase`**|`{Boolean\|String}`|`false`|以驼峰化式命名导出类名|
-|**`importLoaders`**|`{Number}`|`0`|在 css-loader 前应用的 loader 的数量|
+|**[`root`](#root)**|`{String}`|`/`|解析 URL 的路径，以 `/` 开头的 URL 不会被转译|
+|**[`url`](#url)**|`{Boolean}`|`true`| 启用/禁用 `url()` 处理|
+|**[`alias`](#alias)**|`{Object}`|`{}`|创建别名更容易导入一些模块|
+|**[`import`](#import)** |`{Boolean}`|`true`| 启用/禁用 @import 处理|
+|**[`modules`](#modules)**|`{Boolean}`|`false`|启用/禁用 CSS 模块|
+|**[`minimize`](#minimize)**|`{Boolean\|Object}`|`false`|启用/禁用 压缩|
+|**[`sourceMap`](#sourcemap)**|`{Boolean}`|`false`|启用/禁用 Sourcemap|
+|**[`camelCase`](#camelcase)**|`{Boolean\|String}`|`false`|以驼峰化式命名导出类名|
+|**[`importLoaders`](#importloaders)**|`{Number}`|`0`|在 css-loader 前应用的 loader 的数量|
 |**`localIdentName`**|`{String}`|`[hash:base64]`|配置生成的标识符(ident)|
 
 ### `root`

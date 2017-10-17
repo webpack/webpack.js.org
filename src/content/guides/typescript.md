@@ -47,7 +47,7 @@ __tsconfig.json__
   "compilerOptions": {
     "outDir": "./dist/",
     "noImplicitAny": true,
-    "module": "commonjs",
+    "module": "es6",
     "target": "es5",
     "jsx": "react",
     "allowJs": true

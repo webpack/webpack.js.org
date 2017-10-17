@@ -4,7 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/i18n-loader/master/REA
 edit: https://github.com/webpack-contrib/i18n-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/i18n-loader
 ---
-# i18n loader for webpack
+
 
 ##  用法
 

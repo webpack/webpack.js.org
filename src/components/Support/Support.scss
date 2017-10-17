@@ -22,6 +22,11 @@
     margin: 0 2px 2px 2px;
   }
 
+  &__latest-avatar {
+    height: 64px;
+    max-width: 192px;
+  }
+
   &__bronze-avatar {
     height: 32px;
     max-width: 96px;
@@ -41,6 +46,7 @@
   }
 
   &__backer-avatar {
+    display: inline-block;
     width: 31px;
     height: 31px;
     border-radius: 50%;

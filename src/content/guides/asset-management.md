@@ -335,7 +335,7 @@ __src/style.css__
 +         url('./my-font.woff') format('woff');
 +   font-weight: 600;
 +   font-style: normal;
-  }
++ }
 
   .hello {
     color: red;

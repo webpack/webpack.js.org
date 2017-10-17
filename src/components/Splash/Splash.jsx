@@ -28,6 +28,9 @@ const Splash = () => (
 
         <p>通过你的贡献、捐款或者赞助，webpack 将获得繁荣发展。你的捐助直接用于支持我们付出工作、持续改进，最加重要的是有助于我们提供优秀的文档和资料！</p>
 
+        <h2>近期赞助</h2>
+        <Support rank="latest" />
+
         <h2>平台赞助</h2>
         <Support rank="platinum" />
 
@@ -46,5 +49,8 @@ const Splash = () => (
     </div>
   </div>
 );
+
+Splash.title = 'webpack 中文文档';
+Splash.description = 'webpack 是一个模块打包器。它的主要目标是将 JavaScript 文件打包在一起，打包后的文件用于在浏览器中使用，但它也能够胜任转换(transform)、打包(bundle)或包裹(package)任何资源(resource or asset)。';
 
 export default Splash;

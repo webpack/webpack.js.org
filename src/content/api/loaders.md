@@ -1,32 +1,31 @@
 ---
-title: Loader API
+title: loader API
 sort: 4
 contributors:
     - TheLarkInn
     - jhnns
-
 ---
 
 loader 用于对模块的源代码进行转换。它们是一些将资源文件的源码作为参数，并返回新的源码的（运行在 Node.js 中的）函数。
 
-## 如何写一个 Loader
+## 如何写一个 loader
 
 所谓 loader 只是导出为一个函数的 JavaScript 模块。[loader runner](https://github.com/webpack/loader-runner) 会调用这个函数，然后把上一个 loader 产生的结果或者资源文件(resource file)传入进去。函数的 `this` 上下文将由 webpack 填充，并且 [loader runner](https://github.com/webpack/loader-runner) 带有一些有用方法，可以使 loader 改变为异步调用方式，或者获取 query 参数。
 
 第一个 loader 的传入参数只有一个：资源文件(resource file)的内容。compiler 需要得到最后一个 loader 产生的处理结果。这个处理结果应该是 `String` 或者 `Buffer`（被转换为一个 string），代表了模块的 JavaScript 源码。另外还可以传递一个可选的 SourceMap 结果（格式为 JSON 对象）。
 
-如果是单个处理结果，可以在**同步模式**中直接返回。如果有多个处理结果，则需要调用 `this.callback()`。在**异步模式**中，必须调用 `this.async()`，来指示 [loader runner](https://github.com/webpack/loader-runner) 等待异步结果，它会返回 `this.callback()` 回调函数，随后 Loader 必须返回 `undefined` 并且调用该回调函数。
+如果是单个处理结果，可以在**同步模式**中直接返回。如果有多个处理结果，则需要调用 `this.callback()`。在**异步模式**中，必须调用 `this.async()`，来指示 [loader runner](https://github.com/webpack/loader-runner) 等待异步结果，它会返回 `this.callback()` 回调函数，随后 loader 必须返回 `undefined` 并且调用该回调函数。
 
 
 ## 示例
 
-### 同步 Loader
+### 同步 loader
 
 **sync-loader.js**
 
 ```javascript
 module.exports = function(content) {
-    return someSyncOperation(content);
+  return someSyncOperation(content);
 };
 ```
 
@@ -34,13 +33,13 @@ module.exports = function(content) {
 
 ```javascript
 module.exports = function(content) {
-    this.callback(null, someSyncOperation(content), sourceMaps, ast);
-    return; // 当调用callback()时总是返回undefined
+  this.callback(null, someSyncOperation(content), sourceMaps, ast);
+  return; // 当调用callback()时总是返回undefined
 };
 ```
 
 
-### 异步 Loader
+### 异步 loader
 
 **async-loader.js**
 
@@ -69,7 +68,7 @@ module.exports = function(content) {
 T> loader 最初被设计为可以在同步 loader pipeline（如 Node.js ，使用 [enhanced-require](https://github.com/webpack/enhanced-require)），与异步 pipeline（如 webpack ）中运行。然而在 Node.js 这样的单线程环境下进行耗时长的同步计算不是个好主意，我们建议尽可能地使您的 loader 异步化。但如果计算量很小，同步 loader 也是可以的。
 
 
-### "Raw" Loader
+### "Raw" loader
 
 默认情况下，资源文件会被转化为 UTF-8 字符串，然后传给 loader。通过设置 `raw`，loader 可以接收原始的 `Buffer`。每一个 loader 都可以用 `String` 或者 `Buffer` 的形式传递它的处理结果。Complier 将会把它们在 loader 之间相互转换。
 
@@ -86,11 +85,11 @@ module.exports.raw = true;
 ```
 
 
-### Pitching Loader
+### Pitching loader
 
 loader **总是**从右到左地被调用，但是在一些情况下，loader 不需要关心之前处理的结果或者资源(resource)，而是只关心**元数据(metadata)**。在 loader 被调用前（从右到左），loader 中的 `pitch` 方法会**从左到右**依次被调用。
 
-如果中间某个 Loader 的 `pitch` 方法返回了一个值，那么剩下的 Loader 都会被跳过，转而从当前 Loader 开始向左调用 Loader。`data`可以在 pitch 和普通的 Loader 调用间传递。
+如果中间某个 loader 的 `pitch` 方法返回了一个值，那么剩下的 loader 都会被跳过，转而从当前 loader 开始向左调用 loader。`data`可以在 pitch 和普通的 loader 调用间传递。
 
 ```javascript
 module.exports = function(content) {
@@ -108,7 +107,7 @@ module.exports.pitch = function(remainingRequest, precedingRequest, data) {
 
 ## The loader context
 
-Loader context 表示在 Loader 内使用 `this` 可以访问的一些方法或属性
+loader context 表示在 loader 内使用 `this` 可以访问的一些方法或属性
 
 假设我们在 `/abc/file.js` 中这样请求加载别的模块：
 
@@ -119,7 +118,7 @@ require("./loader1?xyz!loader2!./resource?rrr");
 
 ### `this.version`
 
-**Loader API 的版本号。**目前是 `2`。这对于向后兼容性有一些用处。通过这个版本号，你可以为不同版本间的破坏性变更编写不同的逻辑，或做降级处理。
+**loader API 的版本号。**目前是 `2`。这对于向后兼容性有一些用处。通过这个版本号，你可以为不同版本间的破坏性变更编写不同的逻辑，或做降级处理。
 
 
 ### `this.context`
@@ -185,12 +184,12 @@ cacheable(flag = true: boolean)
 
 默认情况下，loader 的处理结果会被标记为可缓存。调用这个方法然后传入 `false`，可以关闭 loader 的缓存。
 
-一个可缓存的 Loader 在输入和相关依赖没有变化时，必须返回相同的结果。这意味着 Loader 除了 `this.addDependency` 里指定的以外，不应该有其它任何外部依赖。
+一个可缓存的 loader 在输入和相关依赖没有变化时，必须返回相同的结果。这意味着 loader 除了 `this.addDependency` 里指定的以外，不应该有其它任何外部依赖。
 
 
 ### `this.loaders`
 
-所有 Loader 组成的数组。它在 pitch 阶段的时候是可以写入的。
+所有 loader 组成的数组。它在 pitch 阶段的时候是可以写入的。
 
 ```typescript
 loaders = [{request: string, path: string, query: string, module: function}]
@@ -218,7 +217,7 @@ loaders = [{request: string, path: string, query: string, module: function}]
 
 ### `this.loaderIndex`
 
-当前 Loader 在 Loader 数组中的索引。
+当前 loader 在 loader 数组中的索引。
 
 在我们的示例中：loader1：`0`，loader2：`1`
 
@@ -255,7 +254,7 @@ loaders = [{request: string, path: string, query: string, module: function}]
 
 如果是 Webpack 编译的，这个布尔值会被设置为真。
 
-T> Loader 最初被设计为可以同时当 Babel transform 用。如果你编写了一个 Loader 可以同时兼容二者，那么可以使用这个属性了解是否存在可用的 loaderContext 和 Webpack 的特性。
+T> loader 最初被设计为可以同时当 Babel transform 用。如果你编写了一个 loader 可以同时兼容二者，那么可以使用这个属性了解是否存在可用的 loaderContext 和 Webpack 的特性。
 
 
 ### `this.sourceMap`
@@ -306,7 +305,7 @@ addDependency(file: string)
 dependency(file: string) // 简写
 ```
 
-加入一个文件作为产生 Loader 结果的依赖，使它们的任何变化可以被监听到。例如，[html-loader](https://github.com/webpack/html-loader) 就使用了这个技巧。当它发现 `src` 和 `src-set` 属性时，就会把这些属性上的 url 加入到被解析的 html 文件的依赖中。
+加入一个文件作为产生 loader 结果的依赖，使它们的任何变化可以被监听到。例如，[html-loader](https://github.com/webpack/html-loader) 就使用了这个技巧。当它发现 `src` 和 `src-set` 属性时，就会把这些属性上的 url 加入到被解析的 html 文件的依赖中。
 
 
 ### `this.addContextDependency`
@@ -315,7 +314,7 @@ dependency(file: string) // 简写
 addContextDependency(directory: string)
 ```
 
-把文件夹作为 Loader 的依赖加入。
+把文件夹作为 loader 的依赖加入。
 
 
 ### `this.clearDependencies`
@@ -324,7 +323,7 @@ addContextDependency(directory: string)
 clearDependencies()
 ```
 
-移除 Loader 所有的依赖。甚至自己和其它 Loader 的初始依赖。考虑使用 `pitch`。
+移除 loader 所有的依赖。甚至自己和其它 loader 的初始依赖。考虑使用 `pitch`。
 
 
 ### `this.emitFile`
@@ -366,12 +365,12 @@ resolveSync(context: string, request: string) -> string
 
 ### `this.value`
 
-向下一个 Loader 传值。如果你知道了作为模块执行后的结果，请在这里赋值（以单元素数组的形式）。
+向下一个 loader 传值。如果你知道了作为模块执行后的结果，请在这里赋值（以单元素数组的形式）。
 
 
 ### `this.inputValue`
 
-从上一个 Loader 那里传递过来的值。如果你会以模块的方式处理输入参数，建议预先读入这个变量。（为了性能因素）
+从上一个 loader 那里传递过来的值。如果你会以模块的方式处理输入参数，建议预先读入这个变量。（为了性能因素）
 
 
 ### `this.options`

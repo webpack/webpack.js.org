@@ -5,7 +5,6 @@ edit: https://github.com/webpack-contrib/json-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/json-loader
 ---
 
-</div>
 
 ## 安装
 
@@ -17,7 +16,7 @@ npm install --save-dev json-loader
 
 ## 用法
 
-### `Inline`
+##
 
 ```js
 const json = require('json-loader!./file.json');

@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/cache-loader/master/RE
 edit: https://github.com/webpack-contrib/cache-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/cache-loader
 ---
-
-  <p>Caches the result of following loaders on disk</p>
-</div>
+Caches the result of following loaders on disk
 
 ## 安装
 
@@ -65,7 +63,7 @@ module.exports = {
 }
 ```
 
-### `配置选项`
+##
 
 **webpack.config.js**
 ```js

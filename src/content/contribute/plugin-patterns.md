@@ -1,6 +1,6 @@
 ---
-title: 有用的插件模式(Useful Plugin Patterns)
-sort: 2
+title: 插件模式(Plugin Patterns)
+sort: 4
 ---
 
 插件给在 webpack 构建系统中做自定义带来了无限的机会。它允许你创建自定义的资源类型，执行独特的构建变更，甚至通过使用中间件来增强 webpack 的运行时。以下就是一些在编写插件时会用到的有用特性。

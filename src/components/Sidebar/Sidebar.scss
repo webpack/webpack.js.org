@@ -1,5 +1,6 @@
 @import 'vars';
 @import 'mixins';
+@import 'functions';
 
 .sidebar {
   display: none;
@@ -16,4 +17,12 @@
 .sidebar__inner {
   padding: 1.5em;
   overflow: hidden;
+}
+
+.sidebar__group {
+  margin-top: 1em;
+  margin-left: 0.15em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: getColor(dusty-grey);
 }

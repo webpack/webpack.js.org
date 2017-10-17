@@ -6,6 +6,8 @@ repo: https://github.com/webpack-contrib/less-loader
 ---
 
 
+
+
 <p align="center">Compiles Less to CSS.</p>
 
 Use the [css-loader](/loaders/css-loader/) or the [raw-loader](/loaders/raw-loader/) to turn it into a JS module and the [ExtractTextPlugin](/plugins/extract-text-webpack-plugin/) to extract it into a separate file.
@@ -68,7 +70,7 @@ module.exports = {
 
 Unfortunately, Less doesn't map all options 1-by-1 to camelCase. When in doubt, [check their executable and search for the dash-case option](https://github.com/less/less.js/blob/3.x/bin/lessc).
 
-### In production
+##
 
 Usually, it's recommended to extract the style sheets into a dedicated file in production using the [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin). This way your styles are not dependent on JavaScript:
 

@@ -1,14 +1,29 @@
 import React from 'react';
-import GoldSponsors from './support-goldsponsors.json';
-import SilverSponsors from './support-silversponsors.json';
-import Sponsors from './support-sponsors.json';
 import Backers from './support-backers.json';
 import Additional from './support-additional.js';
 import './Support.scss';
 
+const SUPPORTERS = [ ...Backers ];
+
+// merge or add additional backers/sponsors
+for(const additional of Additional) {
+  const existing = SUPPORTERS.find(supporter => supporter.slug && supporter.slug === additional.slug);
+  if (existing) {
+    existing.totalDonations += additional.totalDonations;
+  } else {
+    SUPPORTERS.push(additional);
+  }
+}
+
+// resort list
+SUPPORTERS.sort((a, b) => b.totalDonations - a.totalDonations);
+
 const ranks = {
   backer: {
     maximum: 200
+  },
+  latest: {
+    maxAge: 14 * 24 * 60 * 60 * 1000
   },
   bronze: {
     minimum: 200,
@@ -38,31 +53,14 @@ function formatMoney(number) {
 export default class Support extends React.Component {
   render() {
     let { rank } = this.props;
-    let supporters = [
-      ...GoldSponsors,
-      ...SilverSponsors,
-      ...Sponsors,
-      ...Backers,
-    ];
 
-    // merge or add additional backers/sponsors
-    for(const additional of Additional) {
-      const existing = supporters.find(supporter => supporter.username && supporter.username === additional.username);
-      if (existing) {
-        existing.totalDonations += additional.totalDonations;
-      } else {
-        supporters.push(additional);
-      }
-    }
-
-    // resort list
-    supporters.sort((a, b) => b.totalDonations - a.totalDonations);
-
-    let minimum, maximum;
+    let supporters = SUPPORTERS;
+    let minimum, maximum, maxAge;
 
     if (rank && ranks[rank]) {
       minimum = ranks[rank].minimum;
       maximum = ranks[rank].maximum;
+      maxAge = ranks[rank].maxAge;
     }
 
     if (typeof minimum === 'number') {
@@ -73,6 +71,11 @@ export default class Support extends React.Component {
       supporters = supporters.filter(item => item.totalDonations < maximum * 100);
     }
 
+    if (typeof maxAge === 'number') {
+      const now = Date.now();
+      supporters = supporters.filter(item => item.firstDonation && (now - new Date(item.firstDonation).getTime() < maxAge));
+    }
+
     return (
       <div className="support">
         <div className="support__description">
@@ -80,6 +83,8 @@ export default class Support extends React.Component {
             <p>
               The following <b>Backers</b> are individuals who have contributed various amounts of money in order to help support webpack. Every little bit helps, and we appreciate even the smallest contributions.
             </p>
+          ) : rank === 'latest' ? (
+            <p>The following persons/organizations made their first donation in the last {Math.round(maxAge / (1000 * 60 * 60 * 24))} days.</p>
           ) : (
             <p>
               <b className="support__rank">{ rank } sponsors</b>
@@ -90,16 +95,16 @@ export default class Support extends React.Component {
 
         {
           supporters.map((supporter, index) => (
-            <a key={ supporter.id || supporter.username || index }
+            <a key={ supporter.id || supporter.slug || index }
                className="support__item"
-               title={ `$${formatMoney(supporter.totalDonations / 100)} by ${supporter.name || supporter.username}` }
+               title={ `$${formatMoney(supporter.totalDonations / 100)} by ${supporter.name || supporter.slug}` }
                target="_blank"
-               href={ supporter.website || `https://opencollective.com/${supporter.username}` }>
+               href={ supporter.website || `https://opencollective.com/${supporter.slug}` }>
               { supporter.avatar ? <img
                 className={ `support__${rank}-avatar` }
                 src={ supporter.avatar }
-                alt={ supporter.username ? `${supporter.username}'s avatar` : 'avatar' } /> :
-                supporter.name }
+                alt={ supporter.name || supporter.slug ? `${supporter.name || supporter.slug}'s avatar` : 'avatar' } /> :
+                <span className={ `support__${rank}-avatar` }>{supporter.name || supporter.slug}</span> }
               { rank === 'backer' ? <figure className="support__outline" /> : null }
             </a>
           ))

@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/gzip-loader/master/REA
 edit: https://github.com/webpack-contrib/gzip-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/gzip-loader
 ---
-
-  <p>gzip loader module for webpack</p>
-</div>
+gzip loader module for webpack
 
 Enables loading gzipped resources.
 

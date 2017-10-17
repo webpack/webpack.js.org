@@ -4,9 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/sass-loader/master/REA
 edit: https://github.com/webpack-contrib/sass-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/sass-loader
 ---
-
-  <p>Loads a SASS/SCSS file and compiles it to CSS.</p>
-</div>
+Loads a SASS/SCSS file and compiles it to CSS.
 
 Use the [css-loader](/loaders/css-loader/) or the [raw-loader](/loaders/raw-loader/) to turn it into a JS module and the [ExtractTextPlugin](/plugins/extract-text-webpack-plugin/) to extract it into a separate file.
 Looking for the webpack 1 loader? Check out the [archive/webpack-1 branch](https://github.com/webpack-contrib/sass-loader/tree/archive/webpack-1).
@@ -68,7 +66,7 @@ module.exports = {
 
 Sass 的更多选项参见 [node-sass](https://github.com/andrew/node-sass)。
 
-### 生产环境
+##
 
 通常，生产环境下比较推荐的做法是，使用 [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) 将样式表抽离成专门的单独文件。这样，样式表将不再依赖于 JavaScript：
 

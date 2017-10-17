@@ -5,7 +5,6 @@ edit: https://github.com/babel/babel-loader/edit/master/README.md
 repo: https://github.com/babel/babel-loader
 ---
 
-</div>
 
 This package allows transpiling JavaScript files using [Babel](https://github.com/babel/babel) and [webpack](https://github.com/webpack/webpack).
 
@@ -52,7 +51,7 @@ module: {
 }
 ```
 
-### 选项
+##
 
 参考 `babel` [选项](https://babeljs.io/docs/usage/api/#options)。
 
