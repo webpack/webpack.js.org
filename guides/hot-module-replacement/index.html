@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/67dbae825d5ac554db70.css" rel="stylesheet">
+      <link href="/504cd3af52f0cba375f9.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -43,6 +43,7 @@
       new HtmlWebpackPlugin({
         title: &apos;Hot Module Replacement&apos;
       }),
+<span class="token inserted">+     new Webpack.NamedModulesPlugin(),</span>
 <span class="token inserted">+     new webpack.HotModuleReplacementPlugin()</span>
     ],
     output: {
@@ -51,8 +52,7 @@
     }
   };
 </code></pre>
-<p>You can also use the CLI to modify the <a href="https://github.com/webpack/webpack-dev-server">webpack-dev-server</a> configuration with the following command: <code>webpack-dev-server --hotOnly</code>.</p>
-<p>To get it up and running let&apos;s run <code>npm start</code> from the command line.</p>
+<blockquote class="tip"><div class="tip-content"> You can use the CLI to modify the <a href="https://github.com/webpack/webpack-dev-server">webpack-dev-server</a> configuration with the following command: <code>webpack-dev-server --hotOnly</code>. </div></blockquote><p>Note that we&apos;ve also added the <code>NamedModulesPlugin</code> to make it easier to see which dependencies are being patched. To start, we&apos;ll get the dev server up and running by executing an <code>npm start</code> from the command line.</p>
 <p>Now let&apos;s update the <code>index.js</code> file so that when a change inside <code>print.js</code> is detected we tell webpack to accept the updated module.</p>
 <p><strong>index.js</strong></p>
 <pre><code class="lang-diff">  import _ from &apos;lodash&apos;;
