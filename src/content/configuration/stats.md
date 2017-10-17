@@ -38,6 +38,8 @@ For more granular control, it is possible to specify exactly what information yo
 
 ``` js
 stats: {
+  // fallback value for stats options when an option is not defined (has precedence over local webpack defaults)
+  all: undefined,
   // Add asset Information
   assets: true,
   // Sort assets by a field
