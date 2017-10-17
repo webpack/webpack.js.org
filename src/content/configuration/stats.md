@@ -66,6 +66,8 @@ stats: {
   depth: false,
   // Display the entry points with the corresponding bundles
   entrypoints: false,
+  // Add --env information
+  env: false,
   // Add errors
   errors: true,
   // Add details to errors (like resolving log)
