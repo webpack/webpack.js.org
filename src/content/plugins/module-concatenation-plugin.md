@@ -18,9 +18,9 @@ new webpack.optimize.ModuleConcatenationPlugin()
 > 由于实现 ECMAScript 模块语法，作用域提升(Scope Hoisting)这个特定于此语法的功能才成为可能。`webpack` 可能会根据你正在使用的模块类型和[其他的情况](https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5)，回退到普通打包。
 
 
-## Optimization Bailouts
+## 绑定失败的优化[Optimization Bailouts]
 
-As the article explains, webpack attempts to achieve partial scope hoisting. It will merge modules into a single scope but cannot do so in every case. If webpack cannot merge a module, the two alternatives are Prevent and Root. Prevent means the module must be in its own scope. Root means a new module group will be created. The following conditions determine the outcome:
+像文章中解释的， webpack 试图达到分批的作用域提升(scope hoisting)。它会将一些模块绑定到一个作用域内，但并不是任何情况下都会这么做。如果 webpack 不能绑定模块，将会有两个选择 Prevent 和 Root，Prevent 意思是模块必须在自己的作用域内。 Root 意味着将创建一个新的模块组。以下条件决定了输出结果：
 
 Condition                                     | Outcome
 --------------------------------------------- | --------
@@ -36,9 +36,9 @@ In Multiple Chunks                            | Prevent
 `export * from "cjs-module"`                  | Prevent
 
 
-### Module Grouping Algorithm
+### 模块分组算法[Module Grouping Algorithm]
 
-The following pseudo JavaScript explains the algorithm:
+以下 JavaScript 伪代码解释了算法：
 
 ```js
 modules.forEach(module => {
@@ -81,9 +81,9 @@ function tryToAdd(group, module) {
 ```
 
 
-### Debugging Optimization Bailouts
+### 优化绑定失败的调试[Debugging Optimization Bailouts]
 
-When using the webpack CLI, the `--display-optimization-bailout` flag will display bailout reasons. When using the webpack config, just add the following to the `stats` object:
+当我们使用 webpack CLI 时，加上参数 `--display-optimization-bailout` 将显示绑定失败的原因。在 webpack 配置里，只需将以下内容添加到 stats 对象中：
 
 ```js
 {
