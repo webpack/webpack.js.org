@@ -205,4 +205,72 @@ For instance, the `sass-loader` [specifies `node-sass`](https://github.com/webpa
 
 ## Testing
 
-...
+So you've written a loader, followed the guidelines above, and have it set up to run locally. What's next? Let's go through a simple unit testing example to ensure our loader is working the way we expect. We'll be using the [Jest] framework to do this so let's first start by installing and saving it as a dev dependency:
+
+``` bash
+npm i --save-dev jest
+```
+
+Our loader will process `.txt` files and simply replace any instance of `[name]` with the the `name` option given to the loader. Then it will output a valid JavaScript module containing the text as it's default export:
+
+__src/loader.js__
+
+``` js
+import { getOptions } from 'loader-utils';
+
+export default function(source) {
+  const options = getOptions(this);
+
+  source.replace(/\[name\]/g, options.name);
+
+  return `export default ${ JSON.stringify(source) }`;
+};
+```
+
+With that in place, we can start setting up our tests. We'll start by adding a configuration that utilizes this loader:
+
+__test/webpack.config.js__
+
+``` js
+const path = require('path');
+
+module.exports = {
+  entry: './example.txt',
+  output: {
+    path: path.resolve(__dirname),
+    filename: './built.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.txt$/,
+        use: [{
+          loader: path.resolve(__dirname, '../src/loader.js'),
+          options: {
+            name: 'Alice'
+          }
+        }]
+      }
+    ]
+  }
+}
+```
+
+Then add the file to load and write a simple test that verifies our output:
+
+__test/example.txt__
+
+``` text
+Hey [name]!
+```
+
+__test/loader.test.js__
+
+``` js
+test('Inserts name and outputs JavaScript', () => {
+  // TODO: Grab `./built.js` via `fs` as raw string?
+  expect(output).toBe(`export default "Hey Alice!"`)
+})
+```
+
+?> Add `test` script to `package.json` and display output.
