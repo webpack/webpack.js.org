@@ -59,7 +59,7 @@ __webpack.config.js__
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement'
       }),
-+     new Webpack.NamedModulesPlugin(),
++     new webpack.NamedModulesPlugin(),
 +     new webpack.HotModuleReplacementPlugin()
     ],
     output: {
