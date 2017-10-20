@@ -165,12 +165,15 @@ devtoolModuleFilenameTemplate: info => {
 
 If multiple modules would result in the same name, [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolfallbackmodulefilenametemplate) is used instead for these modules.
 
+
 ## `output.devtoolNamespace`
 
 `string`
 
 This option determines the modules namespace used with the [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametemplate). When not specified, it will default to the value of: [`output.library`](#output-library). It's use is to prevent source file path collisions in sourcemaps when loading multiple libraries built with webpack.
+
 For example, if you have 2 libraries, with namespaces `library1` and `library2`, which both have a file `./src/index.js` (with potentially different contents), they will expose these files as `webpack://library1/./src/index.js` and `webpack://library2/./src/index.js`.
+
 
 ## `output.filename`
 
