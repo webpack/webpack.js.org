@@ -5,9 +5,7 @@ contributors:
   - asulaiman
 ---
 
-A loader is a node module that exports a `function`. This function is called when a resource should be transformed by this loader.
-
-The given function will have access to the [Loader API](/api/loaders/) using the `this` context provided to it.
+A loader is a node module that exports a function. This function is called when a resource should be transformed by this loader. The given function will have access to the [Loader API](/api/loaders/) using the `this` context provided to it.
 
 
 ## Setup
@@ -15,6 +13,8 @@ The given function will have access to the [Loader API](/api/loaders/) using the
 Before we dig into the different types of loaders, their usage, and examples, let's take a look at the three ways you can develop and test a loader locally.
 
 To test a single loader, you can simply use `path` to `resolve` a local file within a rule object:
+
+__webpack.config.js__
 
 ``` js
 {
@@ -29,6 +29,8 @@ To test a single loader, you can simply use `path` to `resolve` a local file wit
 ```
 
 To test multiple, you can utilize the `resolveLoader.modules` configuration to update where webpack will search for loaders. For example, if you had a local `/loaders` directory in your project:
+
+__webpack.config.js__
 
 ``` js
 resolveLoader: {
@@ -60,6 +62,8 @@ When multiple loaders are chained, it is important to remember that they are exe
 - The loaders in between will be executed with the result(s) of the previous loader in the chain.
 
 So, in the following example, the `foo-loader` would be passed the raw resource and the `bar-loader` would receive the output of the `foo-loader` and return the final transformed module and a source map if necessary.
+
+__webpack.config.js__
 
 ``` js
 {
@@ -113,13 +117,31 @@ Make sure the loader does not retain state between module transformations. Each 
 
 ### Loader Utilities
 
-Take advantage of the [`loader-utils`](https://github.com/webpack/loader-utils) package. It provides a variety of useful tools but one of the most common is retrieving the options passed to the loader:
+Take advantage of the [`loader-utils`](https://github.com/webpack/loader-utils) package. It provides a variety of useful tools but one of the most common is retrieving the options passed to the loader. Along with `loader-utils`, the [`schema-utils`]() package should be used for consistent JSON Schema based validation of loader options. Here's a brief example that utilizes both:
+
+__loader.js__
 
 ``` js
-const loaderUtils = require('loader-utils');
+import { getOptions } from 'loader-utils';
+import { validateOptions } from 'schema-utils';
 
-module.exports = function(source) {
-  const options = loaderUtils.getOptions(this);
+const schema = {
+  type: object,
+  properties: {
+    test: {
+      type: string
+    }
+  }
+}
+
+export default function(source) {
+  const options = getOptions(this);
+
+  validateOptions(schema, options, 'Example Loader');
+
+  // Apply some transformations to the source...
+
+  return `export default ${ JSON.stringify(source) }`;
 };
 ```
 
@@ -127,10 +149,12 @@ module.exports = function(source) {
 
 If a loader uses external resources (i.e. by reading from filesystem), they __must__ indicate it. This information is used to invalidate cacheable loaders and recompile in watch mode. Here's a brief example of how to accomplish this using the `addDependency` method:
 
-``` js
-const path = require('path');
+__loader.js__
 
-module.exports = function(source) {
+``` js
+import path from 'path';
+
+export default function(source) {
   var callback = this.async();
   var headerPath = path.resolve('header.js');
 
@@ -145,52 +169,40 @@ module.exports = function(source) {
 
 ### Module Dependencies
 
-In many languages there is some schema to specify dependencies. i. e. in css there is `@import` and `url(...)`. These dependencies should be resolved by the module system.
+Depending the type of module, there may be a different schema used to specify dependencies. In CSS for example, the `@import` and `url(...)` statements are used. These dependencies should be resolved by the module system.
 
-There are two options to do this:
+This can be done in one of two ways:
 
-* Transform them to `require`s.
-* Use the `this.resolve` function to resolve the path
+- By transforming them to `require` statements.
+- Using the `this.resolve` function to resolve the path.
 
-Example 1 `css-loader`: The `css-loader` transform dependencies to `require`s, by replacing `@import`s with a require to the other stylesheet (processed with the `css-loader` too) and `url(...)` with a `require` to the referenced file.
+The `css-loader` is a good example of the first approach. It transforms dependencies to `require`s, by replacing `@import` statements with a `require` to the other stylesheet and `url(...)` with a `require` to the referenced file.
 
-Example 2 `less-loader`: The `less-loader` cannot transform `@import`s to `require`s, because all less files need to be compiled in one pass to track variables and mixins. Therefore the `less-loader` extends the less compiler with a custom path resolving logic. This custom logic uses `this.resolve` to resolve the file with the configuration of the module system (aliasing, custom module directories, etc.).
+In the case of the `less-loader`, it cannot transform each `@import` to a `require` because all `.less` files must be compiled in one pass for variables and mixin tracking. Therefore, the `less-loader` extends the less compiler with custom path resolving logic. It then takes advantage of the second approach, `this.resolve`, to resolve the dependency through webpack.
 
-If the language only accept relative urls (like css: `url(file)` always means `./file`), there is the `~`-convention to specify references to modules:
-
-``` text
-url(file) -> require("./file")
-url(~module) -> require("module")
-```
+T> If the language only accepts relative urls (e.g. `url(file)` always refers to `./file`), you can use the `~` convention to specify references to installed modules (e.g. those in `node_modules`). So, in the case of `url`, that would look something like `url('~some-library/image.jpg')`.
 
 ### Common Code
 
-Don't generate much code that is common in every module processed by that loader. Create a (runtime) file in the loader and generate a `require` to that common code.
+Avoid generating common code in every module the loader processes. Instead, create a runtime file in the loader and generate a `require` to that shared module.
 
 ### Absolute Paths
 
-Don't put absolute paths in to the module code. They break hashing when the root for the project is moved. There is a method [`stringifyRequest` in loader-utils](https://github.com/webpack/loader-utils#stringifyrequest) which converts an absolute path to an relative one.
-
-**Example:**
-
-``` js
-var loaderUtils = require("loader-utils");
-
-return "var runtime = require(" +
-  loaderUtils.stringifyRequest(this, "!" + require.resolve("module/runtime")) +
-  ");";
-```
+Don't insert absolute paths into the module code as they break hashing when the root for the project is moved. There's a [`stringifyRequest`](https://github.com/webpack/loader-utils#stringifyrequest) method in `loader-utils` which can be used to convert an absolute path to a relative one.
 
 ### Peer Dependencies
 
-Use a library as `peerDependencies` when they wrap it
+If the loader you're working on is a simple wrapper around another package, then you should include the package as a `peerDependency`. This approach allows the application's developer to specify the exact version in the `package.json` if desired.
 
-For instance, the [sass-loader specifies node-sass as peer dependency](https://github.com/webpack-contrib/sass-loader/blob/master/package.json):
+For instance, the `sass-loader` [specifies `node-sass`](https://github.com/webpack-contrib/sass-loader/blob/master/package.json) as peer dependency like so:
 
-``` javascript
+``` js
 "peerDependencies": {
   "node-sass": "^4.0.0"
 }
 ```
 
-Using a peer dependency allows the application developer to specify the exact version in the `package.json` if desired.
+
+## Testing
+
+...
