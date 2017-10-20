@@ -36,9 +36,9 @@ __webpack.config.js__
 module.exports = {
   entry: './app.js',
   output: {
-    filename: 'bundle.js'
-  }
-}
+    filename: 'bundle.js',
+  },
+};
 ```
 </div>
 <div class="splash__right">
