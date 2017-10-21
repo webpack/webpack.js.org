@@ -3,6 +3,7 @@ title: Writing a Loader
 sort: 2
 contributors:
   - asulaiman
+  - michael-ciniawsky
 ---
 
 A loader is a node module that exports a function. This function is called when a resource should be transformed by this loader. The given function will have access to the [Loader API](/api/loaders/) using the `this` context provided to it.
@@ -208,14 +209,21 @@ For instance, the `sass-loader` [specifies `node-sass`](https://github.com/webpa
 So you've written a loader, followed the guidelines above, and have it set up to run locally. What's next? Let's go through a simple unit testing example to ensure our loader is working the way we expect. We'll be using the [Jest](https://facebook.github.io/jest/) framework to do this. We'll also install `babel-jest` and some presets that will allow us to use the `import` / `export` and `async` / `await`. Let's start by installing and saving these as a `devDependencies`:
 
 ``` bash
-npm i --save-dev jest babel-jest babel-preset-es2015 babel-preset-stage-0
+npm i --save-dev jest babel-jest babel-preset-env
 ```
 
 __.babelrc__
 
 ``` json
 {
-  "presets": [ "es2015", "stage-0" ]
+  "presets": [[
+    "env",
+    {
+      "targets": {
+        "node": "4"
+      }
+    }
+  ]]
 }
 ```
 
@@ -244,6 +252,10 @@ Hey [name]!
 ```
 
 Pay close attention to this next step as we'll be using the [Node.js API](/api/node) and [`memory-fs`](https://github.com/webpack/memory-fs) to execute webpack. This lets us avoid emitting `output` to disk and will give us access to the `stats` data which we can use to grab our transformed module:
+
+``` bash
+npm i --save-dev webpack memory-fs
+```
 
 __test/compiler.js__
 
