@@ -38,7 +38,7 @@ module.exports = {
   output: {
     filename: 'bundle.js'
   }
-}
+};
 ```
 </div>
 <div class="splash__right">
