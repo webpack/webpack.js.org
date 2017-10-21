@@ -219,7 +219,7 @@ __.babelrc__
 }
 ```
 
-Our loader will process `.txt` files and simply replace any instance of `[name]` with the the `name` option given to the loader. Then it will output a valid JavaScript module containing the text as it's default export:
+Our loader will process `.txt` files and simply replace any instance of `[name]` with the `name` option given to the loader. Then it will output a valid JavaScript module containing the text as it's default export:
 
 __src/loader.js__
 
@@ -252,10 +252,10 @@ import path from 'path';
 import webpack from 'webpack';
 import memoryfs from 'memory-fs';
 
-export default () => {
+export default (fixture, options = {}) => {
   const compiler = webpack({
     context: __dirname,
-    entry: './example.txt',
+    entry: `./${fixture}`,
     output: {
       path: path.resolve(__dirname),
       filename: 'bundle.js',
@@ -292,10 +292,10 @@ And now, finally, we can write our test and add an npm script to run it:
 __test/loader.test.js__
 
 ``` js
-import compile from './compiler.js';
+import compiler from './compiler.js';
 
 test('Inserts name and outputs JavaScript', async () => {
-  const stats = await compile();
+  const stats = await compiler('example.txt');
   const output = stats.toJson().modules[0].source;
 
   expect(output).toBe(`export default "Hey Alice!\\n"`);
