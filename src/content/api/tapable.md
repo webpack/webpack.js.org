@@ -8,13 +8,13 @@ contributors:
   - e-cloud
 ---
 
-[Tapable](https://github.com/webpack/tapable) a is small library that allows you to add and apply plugins to a javascript module. It can be inherited or mixed in to other modules. It is similar to NodeJS's `EventEmitter` class, focusing on custom event emission and manipulation. However, in addition to this, `Tapable` allows you to have access to the "emittee" or "producer" of the event through callbacks arguments.
+[Tapable](https://github.com/webpack/tapable) is a small library that allows you to add and apply plugins to a javascript module. It can be inherited or mixed in to other modules. It is similar to NodeJS's `EventEmitter` class, focusing on custom event emission and manipulation. However, in addition to this, `Tapable` allows you to have access to the "emittee" or "producer" of the event through callbacks arguments.
 
 `Tapable` has four groups of member functions:
 
-- `plugin(name:string, handler:function)`: This allows a custom plugin to register into a **Tapable instance**'s event. This acts similar to `on()` of `EventEmitter`, for registering a handler/listener to do something when the signal/event happens.
+- `plugin(name:string, handler:function)`: This allows a custom plugin to register into a **Tapable instance**'s event. This acts similar to the `on()` method of the `EventEmitter`, which is used for registering a handler/listener to do something when the signal/event happens.
 - `apply(…pluginInstances: (AnyPlugin|function)[])`: `AnyPlugin` should be a class (or, rarely, an object) that has an `apply` method, or just a function with some registration code inside. This method is just to **apply** plugins' definition, so that the real event listeners can be registered into the _Tapable_ instance's registry.
-- `applyPlugins*(name:string, …)`: The _Tapable_ instance can apply all the plugins under a particular hash using these functions. This group of methods act like `emit()` of `EventEmitter`, to control the event emission meticulously with various strategies and for various use cases.
+- `applyPlugins*(name:string, …)`: The _Tapable_ instance can apply all the plugins under a particular hash using these functions. This group of methods act like the `emit()` method of the `EventEmitter`, controlling event emission meticulously using various strategies.
 - `mixin(pt: Object)`: a simple method to extend `Tapable`'s prototype as a mixin rather than inheritance.
 
 The different `applyPlugins*` methods cover the following use cases:
