@@ -205,10 +205,18 @@ For instance, the `sass-loader` [specifies `node-sass`](https://github.com/webpa
 
 ## Testing
 
-So you've written a loader, followed the guidelines above, and have it set up to run locally. What's next? Let's go through a simple unit testing example to ensure our loader is working the way we expect. We'll be using the [Jest] framework to do this so let's first start by installing and saving it as a dev dependency:
+So you've written a loader, followed the guidelines above, and have it set up to run locally. What's next? Let's go through a simple unit testing example to ensure our loader is working the way we expect. We'll be using the [Jest]() framework to do this. We'll also install `babel-jest` and some presets that will allow us to use the `import` / `export` and `async` / `await`. Let's start by installing and saving these as a `devDependencies`:
 
 ``` bash
-npm i --save-dev jest
+npm i --save-dev jest babel-jest babel-preset-es2015 babel-preset-stage-0
+```
+
+__.babelrc__
+
+``` json
+{
+  "presets": [ "es2015", "stage-0" ]
+}
 ```
 
 Our loader will process `.txt` files and simply replace any instance of `[name]` with the the `name` option given to the loader. Then it will output a valid JavaScript module containing the text as it's default export:
@@ -218,45 +226,16 @@ __src/loader.js__
 ``` js
 import { getOptions } from 'loader-utils';
 
-export default function(source) {
+export default source => {
   const options = getOptions(this);
 
-  source.replace(/\[name\]/g, options.name);
+  source = source.replace(/\[name\]/g, options.name);
 
   return `export default ${ JSON.stringify(source) }`;
 };
 ```
 
-With that in place, we can start setting up our tests. We'll start by adding a configuration that utilizes this loader:
-
-__test/webpack.config.js__
-
-``` js
-const path = require('path');
-
-module.exports = {
-  entry: './example.txt',
-  output: {
-    path: path.resolve(__dirname),
-    filename: './built.js'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.txt$/,
-        use: [{
-          loader: path.resolve(__dirname, '../src/loader.js'),
-          options: {
-            name: 'Alice'
-          }
-        }]
-      }
-    ]
-  }
-}
-```
-
-Then add the file to load and write a simple test that verifies our output:
+We'll use this loader to process the following file:
 
 __test/example.txt__
 
@@ -264,13 +243,84 @@ __test/example.txt__
 Hey [name]!
 ```
 
+Pay close attention to this next step as we'll be using the [Node.js API]() and [`memory-fs`]() to execute webpack. This lets us avoid emitting `output` to disk and will give us access to the `stats` data which we can use to grab our transformed module:
+
+__test/compiler.js__
+
+``` js
+import path from 'path';
+import webpack from 'webpack';
+import memoryfs from 'memory-fs';
+
+export default () => {
+  const compiler = webpack({
+    context: __dirname,
+    entry: './example.txt',
+    output: {
+      path: path.resolve(__dirname),
+      filename: 'bundle.js',
+    },
+    module: {
+      rules: [{
+        test: /\.txt$/,
+        use: {
+          loader: path.resolve(__dirname, '../src/loader.js'),
+          options: {
+            name: 'Alice'
+          }
+        }
+      }]
+    }
+  });
+
+  compiler.outputFileSystem = new memoryfs();
+
+  return new Promise((resolve, reject) => {
+    compiler.run((err, stats) => {
+      if (err) reject(err);
+
+      resolve(stats);
+    });
+  });
+}
+```
+
+T> In this case, we've inlined our webpack configuration but you can also accept a configuration as a parameter to the exported function. This would allow you to test multiple setups using the same compiler module.
+
+And now, finally, we can write our test and add an npm script to run it:
+
 __test/loader.test.js__
 
 ``` js
-test('Inserts name and outputs JavaScript', () => {
-  // TODO: Grab `./built.js` via `fs` as raw string?
-  expect(output).toBe(`export default "Hey Alice!"`)
-})
+import compile from './compiler.js';
+
+test('Inserts name and outputs JavaScript', async () => {
+  const stats = await compile();
+  const output = stats.toJson().modules[0].source;
+
+  expect(output).toBe(`export default "Hey Alice!\\n"`);
+});
 ```
 
-?> Add `test` script to `package.json` and display output.
+__package.json__
+
+``` js
+"scripts": {
+  "test": "jest"
+}
+```
+
+With everything in place, we can run it and see if our new loader passes the test:
+
+``` bash
+ PASS  test/loader.test.js
+  ✓ Inserts name and outputs JavaScript (229ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        1.853s, estimated 2s
+Ran all test suites.
+```
+
+It worked! At this point you should be ready to start developing, testing, and deploying your own loaders. We hope that you'll share your creations with the rest of the community!
