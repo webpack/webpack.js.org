@@ -24,7 +24,7 @@ There is, however a change that you will have to make to your webpack config. Ty
 __webpack.config.js__
 
 ``` js
-module.exports = env => {
+module.exports = env => ({
   // Use env.<YOUR VARIABLE> here:
   console.log('NODE_ENV: ', env.NODE_ENV) // 'local'
   console.log('Production: ', env.production) // true
@@ -36,5 +36,5 @@ module.exports = env => {
       path: path.resolve(__dirname, 'dist')
     }
   }
-}
+})
 ```
