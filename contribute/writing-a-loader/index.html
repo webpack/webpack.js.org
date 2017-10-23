@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/f8424428f79513ab7111.css" rel="stylesheet">
+      <link href="/bc2f422a27be1cf4192b.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -156,11 +156,18 @@
 </code></pre>
 <h2 class="header"><a class="anchor" href="#testing" id="testing"></a><span class="text">Testing</span><a class="icon-link" href="#testing"></a></h2>
 <p>So you&apos;ve written a loader, followed the guidelines above, and have it set up to run locally. What&apos;s next? Let&apos;s go through a simple unit testing example to ensure our loader is working the way we expect. We&apos;ll be using the <a href="https://facebook.github.io/jest/">Jest</a> framework to do this. We&apos;ll also install <code>babel-jest</code> and some presets that will allow us to use the <code>import</code> / <code>export</code> and <code>async</code> / <code>await</code>. Let&apos;s start by installing and saving these as a <code>devDependencies</code>:</p>
-<pre><code class="lang-bash">npm i --save-dev jest babel-jest babel-preset-es2015 babel-preset-stage-0
+<pre><code class="lang-bash">npm i --save-dev jest babel-jest babel-preset-env
 </code></pre>
 <p><strong>.babelrc</strong></p>
 <pre><code class="lang-json"><span class="token punctuation">{</span>
-  <span class="token property">&quot;presets&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token string">&quot;es2015&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;stage-0&quot;</span> <span class="token punctuation">]</span>
+  <span class="token property">&quot;presets&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>
+    <span class="token string">&quot;env&quot;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;targets&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;node&quot;</span><span class="token operator">:</span> <span class="token string">&quot;4&quot;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p>Our loader will process <code>.txt</code> files and simply replace any instance of <code>[name]</code> with the <code>name</code> option given to the loader. Then it will output a valid JavaScript module containing the text as it&apos;s default export:</p>
@@ -180,6 +187,8 @@
 <pre><code class="lang-text">Hey <span class="token punctuation">[</span>name<span class="token punctuation">]</span><span class="token operator">!</span>
 </code></pre>
 <p>Pay close attention to this next step as we&apos;ll be using the <a href="/api/node">Node.js API</a> and <a href="https://github.com/webpack/memory-fs"><code>memory-fs</code></a> to execute webpack. This lets us avoid emitting <code>output</code> to disk and will give us access to the <code>stats</code> data which we can use to grab our transformed module:</p>
+<pre><code class="lang-bash">npm i --save-dev webpack memory-fs
+</code></pre>
 <p><strong>test/compiler.js</strong></p>
 <pre><code class="lang-js"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&apos;path&apos;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> webpack <span class="token keyword">from</span> <span class="token string">&apos;webpack&apos;</span><span class="token punctuation">;</span>
@@ -244,7 +253,7 @@ Time:        1.853s, estimated 2s
 Ran all <span class="token function">test</span> suites.
 </code></pre>
 <p>It worked! At this point you should be ready to start developing, testing, and deploying your own loaders. We hope that you&apos;ll share your creations with the rest of the community!</p>
-</div><div><hr><h3>Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/asulaiman"><img src="https://github.com/asulaiman.png?size=90"><span class="contributor__name"> asulaiman</span></a></div></div></div><div class="interactive" id="src/components/Gitter/Gitter.jsx" data-props="{}"><span class="gitter"><div class="gitter__button js-gitter-toggle-chat-button" style="margin-bottom:0;"><i class="gitter__icon icon-gitter"></i></div></span></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/guides/getting-started/" class="footer__link">Get Started</a><a href="/organization/" class="footer__link">Organization</a><a href="/starter-kits/" class="footer__link">Starter Kits</a><a href="/comparison/" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg" alt="webpack icon"></a></section><section class="footer__right"><a href="/glossary/" class="footer__link">Glossary</a><a href="/branding/" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Gitter</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link footer__license"><img alt="Creative Commons License" src="/c983c925f14c5a308465ce5f912be111.svg"><img alt="Creative Commons License" src="/c440e4e11ad72daf1899ca0616ddd8b8.svg"></a></section></div></footer><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
+</div><div><hr><h3>Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/asulaiman"><img src="https://github.com/asulaiman.png?size=90"><span class="contributor__name"> asulaiman</span></a><a class="contributor" href="https://github.com/michael-ciniawsky"><img src="https://github.com/michael-ciniawsky.png?size=90"><span class="contributor__name"> michael-ciniawsky</span></a></div></div></div><div class="interactive" id="src/components/Gitter/Gitter.jsx" data-props="{}"><span class="gitter"><div class="gitter__button js-gitter-toggle-chat-button" style="margin-bottom:0;"><i class="gitter__icon icon-gitter"></i></div></span></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/guides/getting-started/" class="footer__link">Get Started</a><a href="/organization/" class="footer__link">Organization</a><a href="/starter-kits/" class="footer__link">Starter Kits</a><a href="/comparison/" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg" alt="webpack icon"></a></section><section class="footer__right"><a href="/glossary/" class="footer__link">Glossary</a><a href="/branding/" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Gitter</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link footer__license"><img alt="Creative Commons License" src="/c983c925f14c5a308465ce5f912be111.svg"><img alt="Creative Commons License" src="/c440e4e11ad72daf1899ca0616ddd8b8.svg"></a></section></div></footer><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
 
     
       <script src="/ddfe154a1202c12da4b062925aa575af.js"></script>
