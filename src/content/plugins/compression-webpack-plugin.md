@@ -4,17 +4,19 @@ source: https://raw.githubusercontent.com/webpack-contrib/compression-webpack-pl
 edit: https://github.com/webpack-contrib/compression-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/compression-webpack-plugin
 ---
-Prepare compressed versions of assets to serve them with Content-Encoding
+ 提供带编码的压缩版的资源
 
-## Install
+
+##安装
 
 ```bash
 npm i -D compression-webpack-plugin
 ```
 
-## Usage
+##使用
 
 **webpack.config.js**
+
 ```js
 const CompressionPlugin = require("compression-webpack-plugin")
 
@@ -25,20 +27,20 @@ module.exports = {
 }
 ```
 
-## Options
+##选项
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|**`test`**|`{RegExp}`|`.`|All assets matching this `{RegExp}` are processed|
-|**`asset`**|`{String}`|`[path].gz[query]`|The target asset name. `[file]` is replaced with the original asset. `[path]` is replaced with the path of the original asset and `[query]` with the query|
-|**`filename`**|`{Function}`|`false`|A `{Function}` `(asset) => asset` which receives the asset name (after processing `asset` option) and returns the new asset name|
-|**`algorithm`**|`{String\|Function}`|`gzip`|Can be `(buffer, cb) => cb(buffer)` or if a {String}` is used the algorithm is taken from `zlib`|
-|**`threshold`**|`{Number}`|`0`|Only assets bigger than this size are processed. In bytes.|
-|**`minRatio`**|`{Number}`|`0.8`|Only assets that compress better that this ratio are processed|
-|**`deleteOriginalAssets`**|`{Boolean}`|`false`|Whether to delete the original assets or not|
+|**`test`**|`{RegExp}`|`.`|处理所有匹配此 `{RegExp}` 的资源|
+|**`asset`**|`{String}`|`[path].gz[query]`|目标资源名称。 `[file]` 会被替换成原资源。`[path]` 会被替换成原资源路径， `[query]` 替换成原查询字符串|
+|**`filename`**|`{Function}`|`false`|一个 `{Function}` `(asset) => asset`函数，接收原资源名（通过`asset`参数） 返回新资源名|
+|**`algorithm`**|`{String\|Function}`|`gzip`|可以是 `(buffer, cb) => cb(buffer)`或者是使用`zlib`里面的算法的`{String}`|
+|**`threshold`**|`{Number}`|`0`|只处理比这个值大的资源。按字节计算|
+|**`minRatio`**|`{Number}`|`0.8`|只有压缩率比这个值小的资源才会被处理|
+|**`deleteOriginalAssets`**|`{Boolean}`|`false`|是否删除原资源|
 
 
-##
+### `test`
 
 **webpack.config.js**
 ```js
@@ -118,7 +120,7 @@ module.exports = {
 ]
 ```
 
-## Maintainers
+<h2 align="center">Maintainers</h2>
 
 <table>
   <tbody>
@@ -173,3 +175,4 @@ module.exports = {
 
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
