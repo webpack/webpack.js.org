@@ -110,9 +110,9 @@ There are other, more specific properties to define on Loaders that we haven't y
 
 ## Plugins
 
-While Loaders only execute transforms on a per-file basis, `plugins` are most commonly used to perform actions and custom functionality on "compilations" or "chunks" of your bundled modules [(and so much more!)](/concepts/plugins). The webpack Plugin system is [extremely powerful and customizable](/api/plugins).
+While Loaders only execute transforms on a per-file basis, `plugins` are most commonly used to perform actions and custom functionality on pieces (e.g. chunks) of your bundled modules [(and so much more!)](/concepts/plugins). The webpack Plugin system is [extremely powerful and customizable](/api/plugins).
 
-In order to use a plugin, you just need to `require()` it and add it to the `plugins` array. Most plugins are customizable via options. Since you can use a plugin multiple times in a config for different purposes, you need to create an instance of it by calling it with `new`.
+In order to use a plugin, you need to `require()` it and add it to the `plugins` array. Most plugins are customizable through options. Since you can use a plugin multiple times in a config for different purposes, you need to create an instance of it by calling it with the `new` operator.
 
 **webpack.config.js**
 
