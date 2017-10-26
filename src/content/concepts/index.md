@@ -1,5 +1,5 @@
 ---
-title: Core Concepts
+title: Concepts
 sort: 1
 contributors:
   - TheLarkInn
@@ -7,41 +7,44 @@ contributors:
   - grgur
   - johnstew
   - jimrfenner
+  - TheDutchCoder
 ---
 
-*webpack* is a _module bundler_ for modern JavaScript applications. When webpack processes your application, it recursively builds a _dependency graph_ that includes every module your application needs, then packages all of those modules into a small number of _bundles_ - often only one - to be loaded by the browser.
+At its core, *webpack* is a _module bundler_ for modern JavaScript applications. When webpack processes your application, it recursively builds a _dependency graph_ that includes every module your application needs, then packages all of those modules into one or more _bundles_ to be loaded by the browser.
 
-It is [incredibly configurable](/configuration), but to get started you only need to understand **Four Core Concepts**: entry, output, loaders, and plugins.
+It is [incredibly configurable](/configuration), but to get started you only need to understand four **Core Concepts**:
+ * Entry
+ * Output
+ * Loaders
+ * Plugins
 
 This document is intended to give a **high-level** overview of these concepts, while providing links to detailed concept specific use cases.
 
 
 ## Entry
 
-webpack creates a graph of all of your application's dependencies. The starting point of this graph is known as an _entry point_. The _entry point_ tells webpack _where to start_ and follows the graph of dependencies to know _what to bundle_. You can think of your application's _entry point_ as the **contextual root** or **the first file to kick off your app**.
+The **entry** is the starting point for webpack to generate its internal *dependency graph*. This means that webpack starts at your entry point and figures out all the other files and libraries that your entry point is dependent on. It then generates files called *bundles* bases on the **output** configuration (which we'll tackle in the next session).
 
-In webpack we define _entry points_ using the `entry` property in our [webpack configuration object](/configuration).
+You can tell webpack which entry point(s) to use by configuring the `entry` property in the [webpack configuration](/configuration).
 
-The simplest example is seen below:
+Here's the simplest example of the `entry` configuration:
 
-**webpack.config.js**
+__webpack.config.js__
 
-```javascript
+``` js
 module.exports = {
   entry: './path/to/my/entry/file.js'
 };
 ```
 
-There are multiple ways to declare your `entry` property that are specific to your application's needs.
-
-[Learn more!](/concepts/entry-points)
+T> There are multiple ways to declare your `entry` property that are specific to your application's needs. You can learn more about this in the [entry points concepts](/concepts/entry-points).
 
 
 ## Output
 
-Once you've bundled all of your assets together, you still need to tell webpack **where** to bundle your application. The webpack `output` property tells webpack **how to treat bundled code**.
+The **output** tells webpack where to output the *bundles* it creates. It can also be used to generate filenames dynamically. You can configure the output by specifying an `output` property in the webpack configuration file:
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```javascript
 const path = require('path');
@@ -59,20 +62,18 @@ In the example above, we use the `output.filename` and the `output.path` propert
 
 T> You may see the term **emitted** or **emit** used throughout our documentation and [plugin API](/api/plugins). This is a fancy term for 'produced' or 'discharged'.
 
-The `output` property has [many more configurable features](/configuration/output), but let's spend some time understanding some of the most common use cases for the `output` property.
-
-[Learn more!](/concepts/output)
+The `output` property has [many more configurable features](/configuration/output) and if you like to know more about the concepts behind the `output` property, you can [read more in the concepts section](/concepts/output).
 
 
 ## Loaders
 
-The goal is to have all of the assets in your project be **webpack's** concern and not the browser's (though, to be clear, this doesn't mean that they all have to be bundled together). webpack treats [every file (.css, .html, .scss, .jpg, etc.) as a module](/concepts/modules). However, webpack itself **only understands JavaScript**.
+*Loaders* enable webpack to process more than just JavaScript files (webpack itself only understands JavaScript). They make sure that you can leverage webpack's bundling abilities for files that aren't JavaScript by treating them as [webpack modules](/concepts/modules).
 
-**Loaders in webpack _transform these files into modules_ as they are added to your dependency graph.**
+In short: **Loaders in webpack _transform non JavaScript files into modules_ as they are added to your dependency graph.**
 
 At a high level, **loaders** have two purposes in your webpack config. They work to:
 
-1. Identify which file or files should be transformed by a certain Loader. (`test` property)
+1. Identify which file or files should be transformed by a certain loader (with the `test` property).
 2. Transform those files so that they can be added to your dependency graph (and eventually your bundle). (`use` property)
 
 **webpack.config.js**
