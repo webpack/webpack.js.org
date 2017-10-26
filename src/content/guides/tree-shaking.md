@@ -25,10 +25,6 @@ _Tree shaking_ is a term commonly used in the JavaScript context for dead-code e
 
 The webpack 2 release came with built-in support for ES2015 modules (alias _harmony modules_) as well as unused module export detection.
 
-**Note**: Webpack doesn't perform tree-shaking by itself. It relies on third party tools like [UglifyJS](/plugins/uglifyjs-webpack-plugin/) to perform actual dead code elimination. There are situations where tree-shaking may not effective. For example, when the tool cannot guarantee that a particular code path doesn't lead to side-effects, this code may remain in the generated bundle even if you are sure it shouldn't.
-
-Some of the code below assumes you perform tree-shaking using UglifJS plugin. However, there are other tools such as [webpack-rollup-loader](https://github.com/erikdesjardins/webpack-rollup-loader) or [Babel Minify Webpack Plugin](https://github.com/webpack-contrib/babel-minify-webpack-plugin) that may produce different result depending on your setup.
-
 T> The remainder of this guide will stem from [Getting Started](/guides/getting-started). If you haven't read through that guide already, please do so now.
 
 
@@ -148,6 +144,37 @@ With that squared away, we can run another `npm run build` and see if anything h
 
 Notice anything different about `dist/bundle.js`? Clearly the whole bundle is now minified and mangled, but, if you look carefully, you won't see the `square` function included but will see a mangled version of the `cube` function (`function r(e){return e*e*e}n.a=r`). With minification and tree shaking our bundle is now a few bytes smaller! While that may not seem like much in this contrived example, tree shaking can yield a significant decrease in bundle size when working on larger applications with complex dependency trees.
 
+## Caveats
+
+Please note that webpack doesn't perform tree-shaking by itself. It relies on third party tools like [UglifyJS](/plugins/uglifyjs-webpack-plugin/) to perform actual dead code elimination. There are situations where tree-shaking may not be effective. For example, consider the following code:
+
+```typescript
+
+// transforms.js
+
+import * as mylib from 'mylib';
+
+export const someVar = mylib.transform({
+  ...
+});
+
+export const someOtherVar = mylib.transform({
+  ...
+});
+
+// index.js
+
+import {someVar} from './style.js';
+
+... use someVar ...
+
+```
+
+In the code above webpack (and UglifyJS) cannot determine whether or not the call to `mylib.transform` triggers any side-effects. As a result, they err on the safe side and leave both `someVar` and `someOtherVar` in the bundled code.
+
+In general, when a tool cannot guarantee that a particular code path doesn't lead to side-effects, this code may remain in the generated bundle even if you are sure it shouldn't. Common situations are: invoking a function from a third-party module that webpack and/or the mninifier cannot inspect, re-exporting functions imported from third-party modules, etc.
+
+The code used in this guide assumes you perform tree-shaking using UglifyJS plugin. However, there are other tools such as [webpack-rollup-loader](https://github.com/erikdesjardins/webpack-rollup-loader) or [Babel Minify Webpack Plugin](https://github.com/webpack-contrib/babel-minify-webpack-plugin) that may produce different results depending on your setup.
 
 ## Conclusion
 
