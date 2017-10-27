@@ -35,7 +35,9 @@ The `lineToLine` object allows for the same `test`, `include`, and `exclude` opt
 T> Setting `module` and/or `columns` to `false` will yield less accurate source maps but will also improve compilation performance significantly.
 
 
-## Usage: Exclude Vendor Maps
+## Examples
+
+### Exclude Vendor Maps
 
 The following code would exclude source maps for any modules in the `vendor.js` bundle:
 
@@ -44,4 +46,15 @@ new webpack.SourceMapDevToolPlugin({
   filename: '[name].js.map',
   exclude: ['vendor.js']
 })
+```
+
+### Host Source Maps Externally
+
+Set a URL for source maps. Useful for hosting them on a host that requires authorization.
+
+```javascript
+new webpack.SourceMapDevToolPlugin({
+  append: "\n//# sourceMappingURL=http://example.com/sourcemap/[url]",
+  filename: '[name].map',
+}),
 ```
