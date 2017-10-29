@@ -296,9 +296,7 @@ T> Note that you can use alias here and other features familiar from resolve. Fo
 
 `array`
 
-The extensions which are tried when resolving a module (e.g. loaders). By default this is an empty array.
-
-If you want to use loaders without the `-loader` suffix, you can use this:
+The extensions/suffixes which that are used when resolving loaders. Since version two, we [strongly recommend]() using the full name, e.g. `example-loader`, as much as possible for clarity. However, if you really wanted to exclude the `-loader` bit, i.e. just use `example`, you can use this option to do so:
 
 ``` js
 moduleExtensions: [ '-loader' ]
