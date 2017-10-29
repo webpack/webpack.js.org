@@ -296,7 +296,7 @@ T> Note that you can use alias here and other features familiar from resolve. Fo
 
 `array`
 
-The extensions/suffixes which that are used when resolving loaders. Since version two, we [strongly recommend]() using the full name, e.g. `example-loader`, as much as possible for clarity. However, if you really wanted to exclude the `-loader` bit, i.e. just use `example`, you can use this option to do so:
+The extensions/suffixes which that are used when resolving loaders. Since version two, we [strongly recommend](/guides/migrating#automatic-loader-module-name-extension-removed) using the full name, e.g. `example-loader`, as much as possible for clarity. However, if you really wanted to exclude the `-loader` bit, i.e. just use `example`, you can use this option to do so:
 
 ``` js
 moduleExtensions: [ '-loader' ]
