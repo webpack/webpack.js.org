@@ -200,7 +200,7 @@ module.exports = {
 };
 ```
 
-现在，让我们再次执行构建，通过使用我们的新配置：
+现在，让我们通过新配置再次执行构建：
 
 ``` bash
 ./node_modules/.bin/webpack --config webpack.config.js
