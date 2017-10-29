@@ -1,22 +1,22 @@
 [
   {
-    "title": "Documentation",
+    "title": "文档",
     "url": "concepts",
     "children": [
-      { "title": "Concepts", "url": "concepts" },
-      { "title": "Configuration", "url": "configuration" },
+      { "title": "概念", "url": "concepts" },
+      { "title": "配置", "url": "configuration" },
       { "title": "API", "url": "api" },
-      { "title": "Guides", "url": "guides" },
-      { "title": "Loaders", "url": "loaders" },
-      { "title": "Plugins", "url": "plugins" }
+      { "title": "指南", "url": "guides" },
+      { "title": "loaders", "url": "loaders" },
+      { "title": "插件", "url": "plugins" }
     ]
   },
   {
-    "title": "Contribute",
+    "title": "参与贡献",
     "url": "contribute"
   },
   {
-    "title": "Blog",
+    "title": "博客",
     "url": "//medium.com/webpack"
   }
 ]
