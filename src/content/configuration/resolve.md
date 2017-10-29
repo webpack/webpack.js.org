@@ -285,7 +285,7 @@ This set of options is identical to the `resolve` property set above, but is use
 {
   modules: [ 'node_modules' ],
   extensions: [ '.js', '.json' ],
-  mainFields: [ 'loader', "main' ]
+  mainFields: [ 'loader', 'main' ]
 }
 ```
 
