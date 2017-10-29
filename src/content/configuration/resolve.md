@@ -9,8 +9,7 @@ contributors:
   - sebastiandeutsch
 ---
 
-These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail.
-Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
+These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
 
 
 ## `resolve`
@@ -26,7 +25,7 @@ Configure how modules are resolved. For example, when calling `import "lodash"` 
 
 Create aliases to `import` or `require` certain modules more easily. For example, to alias a bunch of commonly used `src/` folders:
 
-```js
+``` js
 alias: {
   Utilities: path.resolve(__dirname, 'src/utilities/'),
   Templates: path.resolve(__dirname, 'src/templates/')
@@ -35,19 +34,19 @@ alias: {
 
 Now, instead of using relative paths when importing like so:
 
-```js
+``` js
 import Utility from '../../utilities/utility';
 ```
 
 you can use the alias:
 
-```js
+``` js
 import Utility from 'Utilities/utility';
 ```
 
 A trailing `$` can also be added to the given object's keys to signify an exact match:
 
-```js
+``` js
 alias: {
   xyz$: path.resolve(__dirname, 'path/to/file.js')
 }
@@ -55,7 +54,7 @@ alias: {
 
 which would yield these results:
 
-```js
+``` js
 import Test1 from 'xyz'; // Exact match, so path/to/file.js is resolved and imported
 import Test2 from 'xyz/file.js'; // Not an exact match, normal resolution takes place
 ```
@@ -90,7 +89,7 @@ The following table explains other cases:
 
 Specify a field, such as `browser`, to be parsed according to [this specification](https://github.com/defunctzombie/package-browser-field-spec). Default:
 
-```js
+``` js
 aliasFields: ["browser"]
 ```
 
@@ -108,7 +107,7 @@ If unsafe cache is enabled, includes `request.context` in the cache key. This op
 
 The JSON files to use for descriptions. Default:
 
-```js
+``` js
 descriptionFiles: ["package.json"]
 ```
 
@@ -130,7 +129,7 @@ enforceExtension: false
 
 Whether to require to use an extension for modules (e.g. loaders). Default:
 
-```js
+``` js
 enforceModuleExtension: false
 ```
 
@@ -141,13 +140,13 @@ enforceModuleExtension: false
 
 Automatically resolve certain extensions. This defaults to:
 
-```js
+``` js
 extensions: [".js", ".json"]
 ```
 
 which is what enables users to leave off the extension when importing:
 
-```js
+``` js
 import File from '../path/to/file'
 ```
 
@@ -163,19 +162,19 @@ When importing from an npm package, e.g. `import * as D3 from "d3"`, this option
 When the `target` property is set to `webworker`, `web`, or left unspecified:
 
 
-```js
+``` js
 mainFields: ["browser", "module", "main"]
 ```
 
 For any other target (including `node`):
 
-```js
+``` js
 mainFields: ["module", "main"]
 ```
 
 For example, the `package.json` of [D3](https://d3js.org/) contains these fields:
 
-```js
+``` js
 {
   ...
   main: 'build/d3.Node.js',
@@ -194,7 +193,7 @@ This means that when we `import * as D3 from "d3"` this will really resolve to t
 
 The filename to be used while resolving directories. Default:
 
-```js
+``` js
 mainFiles: ["index"]
 ```
 
@@ -213,13 +212,13 @@ With an absolute path, it will only search in the given directory.
 
 `resolve.modules` defaults to:
 
-```js
+``` js
 modules: ["node_modules"]
 ```
 
 If you want to add a directory to search in that takes precedences over `node_modules/`:
 
-```js
+``` js
 modules: [path.resolve(__dirname, "src"), "node_modules"]
 ```
 
@@ -230,13 +229,13 @@ modules: [path.resolve(__dirname, "src"), "node_modules"]
 
 Enable aggressive, but **unsafe**, caching of modules. Passing `true` will cache everything. Default:
 
-```js
+``` js
 unsafeCache: true
 ```
 
 A regular expression, or an array of regular expressions, can be used to test file paths and only cache certain modules. For example, to only cache utilities:
 
-```js
+``` js
 unsafeCache: /src\/utilities/
 ```
 
@@ -247,8 +246,10 @@ W> Changes to cached paths may cause failure in rare cases.
 
 A list of additional resolve plugins which should be applied. It allows plugins such as [`DirectoryNamedWebpackPlugin`](https://www.npmjs.com/package/directory-named-webpack-plugin).
 
-```js
-plugins: [new DirectoryNamedWebpackPlugin()]
+``` js
+plugins: [
+  new DirectoryNamedWebpackPlugin()
+]
 ```
 
 
@@ -280,11 +281,11 @@ cachePredicate: function() { return true }
 
 This set of options is identical to the `resolve` property set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages. Default:
 
-```js
+``` js
 {
-    modules: ["node_modules"],
-    extensions: [".js", ".json"],
-    mainFields: ["loader", "main"]
+  modules: [ 'node_modules' ],
+  extensions: [ '.js', '.json' ],
+  mainFields: [ 'loader', "main' ]
 }
 ```
 
@@ -299,6 +300,6 @@ The extensions which are tried when resolving a module (e.g. loaders). By defaul
 
 If you want to use loaders without the `-loader` suffix, you can use this:
 
-```js
-moduleExtensions: ['-loader']
+``` js
+moduleExtensions: [ '-loader' ]
 ```
