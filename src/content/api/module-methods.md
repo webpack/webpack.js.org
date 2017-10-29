@@ -33,6 +33,21 @@ import { NamedExport } from './other-module.js';
 
 W> The keyword here is __statically__. Normal `import` statement cannot be used dynamically within other logic or contain variables. See the [spec](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) for more information and `import()` below for dynamic usage.
 
+#### `webpack/__boilerplate__/` prefix
+
+Normal import statement marks the module is ES6 and disables other
+features such as CommonJS `require`. With `webpack/__boilerplate__` prefix,
+however, it does not. It is intended to be used for imports which are made by
+loaders and plugins and not associated to import declaration in source code.
+
+```
+// Inserted by awesome-polyfill loader. This actually imports
+// awesome-polyfill/runtime.
+import polyfill from "webpack/__boilerplate__/awesome-polyfill/runtime";
+
+// The below is the actual source. require is still valid.
+var myModule = require("my-module");
+```
 
 ### `export`
 
