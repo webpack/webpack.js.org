@@ -621,7 +621,7 @@ __src/index.js__
 
 ## 下一章节指南
 
-让我们继续移步到[管理输出](https://webpack.js.org/guides/output-management/)
+让我们继续移步到[管理输出](https://doc.webpack-china.org/guides/output-management/)
 
 
 ## 延伸阅读
