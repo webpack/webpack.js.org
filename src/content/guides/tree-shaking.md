@@ -144,37 +144,39 @@ With that squared away, we can run another `npm run build` and see if anything h
 
 Notice anything different about `dist/bundle.js`? Clearly the whole bundle is now minified and mangled, but, if you look carefully, you won't see the `square` function included but will see a mangled version of the `cube` function (`function r(e){return e*e*e}n.a=r`). With minification and tree shaking our bundle is now a few bytes smaller! While that may not seem like much in this contrived example, tree shaking can yield a significant decrease in bundle size when working on larger applications with complex dependency trees.
 
+
 ## Caveats
 
-Please note that webpack doesn't perform tree-shaking by itself. It relies on third party tools like [UglifyJS](/plugins/uglifyjs-webpack-plugin/) to perform actual dead code elimination. There are situations where tree-shaking may not be effective. For example, consider the following code:
+Please note that webpack doesn't perform tree-shaking by itself. It relies on third party tools like [UglifyJS](/plugins/uglifyjs-webpack-plugin/) to perform actual dead code elimination. There are situations where tree-shaking may not be effective. For example, consider the following modules:
 
-```typescript
+__transforms.js__
 
-// transforms.js
-
+``` js
 import * as mylib from 'mylib';
 
 export const someVar = mylib.transform({
-  ...
+  // ...
 });
 
 export const someOtherVar = mylib.transform({
-  ...
+  // ...
 });
-
-// index.js
-
-import {someVar} from './style.js';
-
-... use someVar ...
-
 ```
 
-In the code above webpack (and UglifyJS) cannot determine whether or not the call to `mylib.transform` triggers any side-effects. As a result, they err on the safe side and leave both `someVar` and `someOtherVar` in the bundled code.
+__index.js__
 
-In general, when a tool cannot guarantee that a particular code path doesn't lead to side-effects, this code may remain in the generated bundle even if you are sure it shouldn't. Common situations are: invoking a function from a third-party module that webpack and/or the mninifier cannot inspect, re-exporting functions imported from third-party modules, etc.
+``` js
+import { someVar } from './transforms.js';
 
-The code used in this guide assumes you perform tree-shaking using UglifyJS plugin. However, there are other tools such as [webpack-rollup-loader](https://github.com/erikdesjardins/webpack-rollup-loader) or [Babel Minify Webpack Plugin](https://github.com/webpack-contrib/babel-minify-webpack-plugin) that may produce different results depending on your setup.
+// Use `someVar`...
+```
+
+In the code above webpack cannot determine whether or not the call to `mylib.transform` triggers any side-effects. As a result, it errs on the safe side and leaves `someOtherVar` in the bundled code.
+
+In general, when a tool cannot guarantee that a particular code path doesn't lead to side-effects, this code may remain in the generated bundle even if you are sure it shouldn't. Common situations include invoking a function from a third-party module that webpack and/or the minifier cannot inspect, re-exporting functions imported from third-party modules, etc.
+
+The code used in this guide assumes you perform tree-shaking using UglifyJS plugin. However, there are other tools such as [webpack-rollup-loader](https://github.com/erikdesjardins/webpack-rollup-loader) or [Babel Minify Webpack Plugin](/plugins/babel-minify-webpack-plugin) that may produce different results depending on your setup.
+
 
 ## Conclusion
 
