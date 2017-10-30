@@ -6,9 +6,7 @@ repo: https://github.com/webpack-contrib/uglifyjs-webpack-plugin
 ---
 This plugin uses <a href="https://github.com/mishoo/UglifyJS2/tree/harmony">UglifyJS v3 </a><a href="https://npmjs.com/package/uglify-es">(`uglify-es`)</a> to minify your JavaScript
 
-> ⚠️ This documentation is for the current beta. For latest stable, see [v0.4.6](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/tree/v0.4.6).
-
-> ℹ️  webpack contains the same plugin under `webpack.optimize.UglifyJsPlugin`. The documentation is valid apart from the installation instructions
+> ℹ️  `webpack =< v3.0.0` currently contains [`v0.4.6`](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/tree/version-0.4) of this plugin under `webpack.optimize.UglifyJsPlugin` as an alias. For usage of the latest version (`v1.0.0`), please follow the instructions below. Aliasing `v1.0.0` as `webpack.optimize.UglifyJsPlugin` is scheduled for `webpack v4.0.0`
 
 ## Install
 
@@ -31,18 +29,17 @@ module.exports = {
 
 ## Options
 
-> ⚠️ The following options are for the latest beta version. If you would like to see the options for the latest built-in version of the plugin in webpack, see the [v0.4.6 docs](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/tree/v0.4.6).
-
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
 |**`test`**|`{RegExp\|Array<RegExp>}`| <code>/\\.js$/i</code>|Test to match files against|
 |**`include`**|`{RegExp\|Array<RegExp>}`|`undefined`|Files to `include`|
 |**`exclude`**|`{RegExp\|Array<RegExp>}`|`undefined`|Files to `exclude`|
-|**`parallel`**|`{Boolean\|Object}`|`false`|Use multi-process parallel running and file cache to improve the build speed|
+|**`cache`**|`{Boolean\|String}`|`false`|Enable file caching|
+|**`parallel`**|`{Boolean\|Number}`|`false`|Use multi-process parallel running to improve the build speed|
 |**`sourceMap`**|`{Boolean}`|`false`|Use source maps to map error message locations to modules (This slows down the compilation) ⚠️ **`cheap-source-map` options don't work with this plugin**|
 |**`uglifyOptions`**|`{Object}`|[`{...defaults}`](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/tree/master#uglifyoptions)|`uglify` [Options](https://github.com/mishoo/UglifyJS2/tree/harmony#minify-options)|
 |**`extractComments`**|`{Boolean\|RegExp\|Function<(node, comment) -> {Boolean\|Object}>}`|`false`|Whether comments shall be extracted to a separate file, (see [details](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a) (`webpack >= 2.3.0`)|
-|**`warningsFilter`**|`{Function(source) -> {Boolean}}`|`undefined`|Allow to filter uglify warnings|
+|**`warningsFilter`**|`{Function(source) -> {Boolean}}`|`() => true`|Allow to filter uglify warnings|
 
 ##
 
@@ -50,7 +47,7 @@ module.exports = {
 ```js
 [
   new UglifyJSPlugin({
-    test: /\.js($&#124;\?)/i
+    test: /\.js($|\?)/i
   })
 ]
 ```
@@ -77,7 +74,38 @@ module.exports = {
 ]
 ```
 
+### `cache`
+
+#### `{Boolean}`
+
+**webpack.config.js**
+```js
+[
+  new UglifyJSPlugin({
+    cache: true
+  })
+]
+```
+
+Enable file caching.
+Default path to cache directory: `node_modules/.cache/uglifyjs-webpack-plugin`.
+
+#### `{String}`
+
+**webpack.config.js**
+```js
+[
+  new UglifyJSPlugin({
+    cache: 'path/to/cache'
+  })
+]
+```
+
+Path to cache directory.
+
 ### `parallel`
+
+#### `{Boolean}`
 
 **webpack.config.js**
 ```js
@@ -88,22 +116,21 @@ module.exports = {
 ]
 ```
 
-|Name|Type|Default|Description|
-|:--:|:--:|:-----:|:----------|
-|**`cache`**|`{Boolean}`|`node_modules/.cache/uglifyjs-webpack-plugin`|Enable file caching|
-|**`workers`**|`{Boolean\|Number}`|`os.cpus().length - 1`|Number of concurrent runs, default is the `maximum`|
+Enable parallelization.
+Default number of concurrent runs: `os.cpus().length - 1`.
+
+#### `{Number}`
 
 **webpack.config.js**
 ```js
 [
   new UglifyJSPlugin({
-    parallel: {
-      cache: true,
-      workers: 2 // for e.g
-    }
+    parallel: 4
   })
 ]
 ```
+
+Number of concurrent runs.
 
 > ℹ️  Parallelization can speedup your build significantly and is therefore **highly recommended**
 
@@ -160,15 +187,15 @@ module.exports = {
 
 ### `extractComments`
 
-**`{Boolean}`**
+#### `{Boolean}`
 
-All comments that normally would be preserved by the `comments` option will be moved to a separate file. If the original file is named `foo.js`, then the comments will be stored to `foo.js.LICENSE`
+All comments that normally would be preserved by the `comments` option will be moved to a separate file. If the original file is named `foo.js`, then the comments will be stored to `foo.js.LICENSE`.
 
-**`{RegExp|String}` or  `{Function<(node, comment) -> {Boolean}>}`**
+#### `{RegExp|String}` or  `{Function<(node, comment) -> {Boolean}>}`
 
 All comments that match the given expression (resp. are evaluated to `true` by the function) will be extracted to the separate file. The `comments` option specifies whether the comment will be preserved, i.e. it is possible to preserve some comments (e.g. annotations) while extracting others or even preserving comments that have been extracted.
 
-**`{Object}`**
+#### `{Object}`
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
