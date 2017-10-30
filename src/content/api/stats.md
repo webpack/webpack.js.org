@@ -54,7 +54,7 @@ The top-level structure of the output JSON file is fairly straightforward but th
 
 ### Asset Objects
 
-Each `assets` object represents an `output` file emitted from the compilation. They all follow the a similar structure:
+Each `assets` object represents an `output` file emitted from the compilation. They all follow a similar structure:
 
 ``` js
 {

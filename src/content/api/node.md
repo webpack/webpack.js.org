@@ -254,7 +254,7 @@ webpack({
   }
 
   if (stats.hasWarnings()) {
-    console.warn(info.warnings)
+    console.warn(info.warnings);
   }
 
   // Log result...

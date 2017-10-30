@@ -1,6 +1,6 @@
 ---
 title: Release Process
-sort: 5
+sort: 6
 contributors:
   - d3viant0ne
   - sokra
