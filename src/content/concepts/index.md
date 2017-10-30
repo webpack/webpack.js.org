@@ -14,10 +14,10 @@ At its core, *webpack* is a _module bundler_ for modern JavaScript applications.
 
 It is [incredibly configurable](/configuration), but to get started you only need to understand four **Core Concepts**:
 
- * Entry
- * Output
- * Loaders
- * Plugins
+- Entry
+- Output
+- Loaders
+- Plugins
 
 This document is intended to give a **high-level** overview of these concepts, while providing links to detailed concept specific use cases.
 
