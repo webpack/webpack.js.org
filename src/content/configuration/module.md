@@ -50,7 +50,7 @@ There are two input values for the conditions:
 
 2. The issuer: An absolute path to the file of the module which requested the resource. It's the location of the import.
 
-**Example:** When we `import "./style.css"` from `app.js`, the resource is `/path/to/style.css` and the issuer is `/path/to/app.js`.
+**Example:** When we `import './style.css'` within `app.js`, the resource is `/path/to/style.css` and the issuer is `/path/to/app.js`.
 
 In a Rule the properties [`test`](#rule-test), [`include`](#rule-include), [`exclude`](#rule-exclude) and [`resource`](#rule-resource) are matched with the resource and the property [`issuer`](#rule-issuer) is matched with the issuer.
 
@@ -115,7 +115,15 @@ Inline loaders and `!` prefixes should not be used as they are non-standard. The
 
 ## `Rule.issuer`
 
-A [`Condition`](#condition) matched with the issuer. See details in [`Rule` conditions](#rule-conditions).
+A [`Condition`](#condition) to match against the module that issued the request. In the following example, the `issuer` for the `a.js` request would be the path to the `index.js` file.
+
+__index.js__
+
+``` js
+import A from './a.js'
+```
+
+This option can be used to apply loaders to the dependencies of a specific module or set of modules.
 
 
 ## `Rule.loader`
@@ -146,7 +154,7 @@ An array of [`Rules`](#rule) from which only the first matching Rule is used whe
       resourceQuery: /external/, // foo.css?external
       use: 'file-loader'
     }
-  ] 
+  ]
 }
 ```
 
@@ -194,15 +202,16 @@ A [`Condition`](#condition) matched with the resource. You can either supply a `
 
 ## `Rule.resourceQuery`
 
-A [`Condition`](#condition) matched with the resource query. The condition matches against a string that starts with a question mark (`"?exampleQuery"`). See details in [`Rule` conditions](#rule-conditions).
+A [`Condition`](#condition) matched with the resource query. This option is used to test against the query section of a request string (i.e. from the question mark onwards). If you were to `import Foo from './foo.css?inline'`, the following condition would match:
 
-```javascript
+``` js
 {
   test: /.css$/,
-  resourceQuery: /inline/, // foo.css?inline
+  resourceQuery: /inline/,
   use: 'url-loader'
 }
 ```
+
 
 ## `Rule.rules`
 
