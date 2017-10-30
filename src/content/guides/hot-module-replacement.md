@@ -14,6 +14,7 @@ contributors:
   - gdi2290
   - bdwain
   - caryli
+  - xgirma
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -39,6 +40,7 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
 + const webpack = require('webpack');
 
   module.exports = {
@@ -57,6 +59,7 @@ __webpack.config.js__
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement'
       }),
++     new webpack.NamedModulesPlugin(),
 +     new webpack.HotModuleReplacementPlugin()
     ],
     output: {
@@ -66,9 +69,9 @@ __webpack.config.js__
   };
 ```
 
-You can also use the CLI to modify the [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration with the following command: `webpack-dev-server --hotOnly`.
+T> You can use the CLI to modify the [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration with the following command: `webpack-dev-server --hotOnly`.
 
-To get it up and running let's run `npm start` from the command line.
+Note that we've also added the `NamedModulesPlugin` to make it easier to see which dependencies are being patched. To start, we'll get the dev server up and running by executing an `npm start` from the command line.
 
 Now let's update the `index.js` file so that when a change inside `print.js` is detected we tell webpack to accept the updated module.
 

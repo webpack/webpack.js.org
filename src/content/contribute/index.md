@@ -5,6 +5,7 @@ contributors:
   - rouzbeh84
   - scottdj92
   - harrynewsome
+  - dhedgecock
 ---
 
 The people who contribute to webpack do so for the love of open source, our users and ecosystem, and most importantly, pushing the web forward together. Because of our [Open Collective](http://opencollective.com/webpack) model for funding and transparency, we are able to funnel support and funds through contributors, dependent projects, and the contributor and core teams. To make a donation, simply click the button below...
@@ -41,8 +42,8 @@ Contributing to webpack is not contributing to an exclusive club. You as a devel
 
 The remainder of this section of the site is dedicated to developers such as yourself who would like to become a part of our ever-growing community:
 
-- [Writing a Loader](./how-to-write-a-loader)
-- [Writing a Plugin](./how-to-write-a-plugin)
+- [Writing a Loader](./writing-a-loader)
+- [Writing a Plugin](./writing-a-plugin)
 - [Plugin Patterns](./plugin-patterns)
 - [Release Process](./release-process)
 
