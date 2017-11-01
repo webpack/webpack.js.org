@@ -16,7 +16,7 @@ export default ({
       { page.file.attributes.repo ? (
         <span>
           <a className="page-links__link" href={ page.file.attributes.repo }>
-            Jump to Repository
+            查看仓库
           </a>
 
           <span className="page-links__gap">|</span>
