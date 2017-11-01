@@ -72,8 +72,8 @@ function tryToAdd(group, module) {
   if (!result) {
     return false;
   }
-  module.dependencies.forEach(depenency => {
-    tryToAdd(group, depenency);
+  module.dependencies.forEach(dependency => {
+    tryToAdd(group, dependency);
   });
   group.merge(nextGroup);
   return true;
