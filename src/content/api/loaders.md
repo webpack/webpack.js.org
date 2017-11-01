@@ -6,10 +6,6 @@ contributors:
     - jhnns
 ---
 
-loader 用于对模块的源代码进行转换。它们是一些将资源文件的源码作为参数，并返回新的源码的（运行在 Node.js 中的）函数。
-
-## 如何写一个 loader
-
 所谓 loader 只是导出为一个函数的 JavaScript 模块。[loader runner](https://github.com/webpack/loader-runner) 会调用这个函数，然后把上一个 loader 产生的结果或者资源文件(resource file)传入进去。函数的 `this` 上下文将由 webpack 填充，并且 [loader runner](https://github.com/webpack/loader-runner) 带有一些有用方法，可以使 loader 改变为异步调用方式，或者获取 query 参数。
 
 第一个 loader 的传入参数只有一个：资源文件(resource file)的内容。compiler 需要得到最后一个 loader 产生的处理结果。这个处理结果应该是 `String` 或者 `Buffer`（被转换为一个 string），代表了模块的 JavaScript 源码。另外还可以传递一个可选的 SourceMap 结果（格式为 JSON 对象）。
@@ -351,7 +347,7 @@ W> 强烈建议不要使用这些属性，因为我们打算移除它们。它�
 exec(code: string, filename: string)
 ```
 
-以模块的方式执行一些代码片段。
+以模块的方式执行一些代码片段。See [this comment](https://github.com/webpack/webpack.js.org/issues/1268#issuecomment-313513988) for a replacement method if needed.
 
 
 ### `this.resolveSync`

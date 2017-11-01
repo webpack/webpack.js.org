@@ -50,7 +50,7 @@ noParse: function(content) {
 
 2. issuer: 被请求资源(requested the resource)的模块文件的绝对路径。是导入时的位置。
 
-**例如:** 从 `app.js` `导入 "./style.css"`，resource 是 `/path/to/style.css`. issuer 是 `/path/to/app.js`。
+**例如:** 从 `app.js` `导入 './style.css'`，resource 是 `/path/to/style.css`. issuer 是 `/path/to/app.js`。
 
 在规则中，属性 [`test`](#rule-test), [`include`](#rule-include), [`exclude`](#rule-exclude) 和 [`resource`](#rule-resource) 对 resource 匹配，并且属性 [`issuer`](#rule-issuer) 对 issuer 匹配。
 
@@ -115,7 +115,15 @@ W> 小心！resource 是文件的_解析_路径，这意味着符号链接的资
 
 ## `Rule.issuer`
 
-[`条件`](#condition)会匹配 issuer。在 [`Rule` 条件](#rule-conditions) 中查看详细。
+A [`Condition`](#condition) to match against the module that issued the request. In the following example, the `issuer` for the `a.js` request would be the path to the `index.js` file.
+
+__index.js__
+
+``` js
+import A from './a.js'
+```
+
+This option can be used to apply loaders to the dependencies of a specific module or set of modules.
 
 
 ## `Rule.loader`
@@ -194,15 +202,16 @@ parser: {
 
 ## `Rule.resourceQuery`
 
-A [`Condition`](#condition) matched with the resource query. The condition matches against a string that starts with a question mark (`"?exampleQuery"`). See details in [`Rule` conditions](#rule-conditions).
+A [`Condition`](#condition) matched with the resource query. This option is used to test against the query section of a request string (i.e. from the question mark onwards). If you were to `import Foo from './foo.css?inline'`, the following condition would match:
 
-```javascript
+``` js
 {
   test: /.css$/,
-  resourceQuery: /inline/, // foo.css?inline
+  resourceQuery: /inline/,
   use: 'url-loader'
 }
 ```
+
 
 ## `Rule.rules`
 

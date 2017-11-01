@@ -38,6 +38,8 @@ stats: "errors-only"
 
 ``` js
 stats: {
+  // fallback value for stats options when an option is not defined (has precedence over local webpack defaults)
+  all: undefined,
   // 增加资源信息
   assets: true,
   // 对资源按指定的项进行排序
@@ -66,6 +68,8 @@ stats: {
   depth: false,
   // Display the entry points with the corresponding bundles
   entrypoints: false,
+  // 增加 --env information
+  env: false,
   // 增加错误信息
   errors: true,
   // 增加错误的详细信息（就像解析日志一样）

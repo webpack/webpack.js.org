@@ -55,8 +55,8 @@ const Site = ({
 
     <Footer />
 
-    {/*<GoogleAnalytics analyticsId="UA-46921629-2" />*/}
-  </div>
-);
+      {/*<GoogleAnalytics analyticsId="UA-46921629-2" />*/}
+    </div>
+  );
 
 export default Site;

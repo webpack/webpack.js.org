@@ -54,7 +54,7 @@ webpack --profile --json > compilation-stats.json
 
 ### Asset对象 (Asset Objects)
 
-每一个 `assets` 对象都表示一个编译出的 `output` 文件。 `assets` 都会有一个共同的结构:
+每一个 `assets` 对象都表示一个编译出的 `output` 文件。 `assets` 都会有一个共同的结构：
 
 ``` js
 {

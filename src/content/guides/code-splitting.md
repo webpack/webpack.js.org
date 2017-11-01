@@ -270,7 +270,7 @@ __src/index.js__
 ``` diff
 - function getComponent() {
 + async function getComponent() {
--   return import(/* webpackChunkName: "lodash" */ 'lodash').then(module => {
+-   return import(/* webpackChunkName: "lodash" */ 'lodash').then(_ => {
 -     var element = document.createElement('div');
 -
 -     element.innerHTML = _.join(['Hello', 'webpack'], ' ');

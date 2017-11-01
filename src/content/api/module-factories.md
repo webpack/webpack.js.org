@@ -8,25 +8,25 @@ sort: 5
 
 ## `NormalModuleFactory`
 
-`before-resolve(data)` 异步 瀑布流
+`before-resolve(data)` async waterfall
 
-工厂开始解析之前。`data` 对象具有以下属性：
+Before the factory starts resolving. The `data` object has these properties:
 
-* `context`：解析目录的绝对路径。
-* `request`：request 的表达式。
+* `context`: The absolute path of the directory for resolving.
+* `request`: The request of the expression.
 
-插件被允许修改对象或将新的类似对象传递给回调。
+Plugins are allowed to modify the object or to pass a new similar object to the callback.
 
-`after-resolve(data)` 异步 瀑布流
+`after-resolve(data)` async waterfall
 
-工厂解析 request 之后。`data` 对象具有以下属性：
+After the factory has resolved the request. The `data` object has these properties:
 
-* `request`：已解析的 request。它将作为 NormalModule 的标识符。
-* `userRequest`：用户输入的 request。已被解析，但不包含前置或后置的 loaders。
-* `rawRequest`：未解析的 request。
-* `loaders`：被解析的 loaders 数组，将会被传递给 NormalModule 并执行。
-* `resource`：原始资源。将会被 NormalModule 加载。
-* `parser`：被 NormalModule 使用的 parser。
+* `request`: The resolved request. It acts as an identifier for the NormalModule.
+* `userRequest`: The request the user entered. It's resolved, but does not contain pre or post loaders.
+* `rawRequest`: The unresolved request.
+* `loaders`: A array of resolved loaders. This is passed to the NormalModule and they will be executed.
+* `resource`: The resource. It will be loaded by the NormalModule.
+* `parser`: The parser that will be used by the NormalModule.
 
 
 ## `ContextModuleFactory`
@@ -42,7 +42,3 @@ sort: 5
 `alternatives(options: Array)` async waterfall
 
 ?> Add documentation.
-
-***
-
-> 原文：https://webpack.js.org/api/plugins/module-factories/

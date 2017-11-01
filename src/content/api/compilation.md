@@ -8,8 +8,8 @@ Compilation 实例继承于 compiler。例如，compiler.compilation 是对所�
 
 ``` js
 compiler.plugin("compilation", function(compilation) {
-  // 主要的编译实例
-  // 随后所有的方法都从 compilation.plugin 上得来
+    // 主要的编译实例
+    // 随后所有的方法都从 compilation.plugin 上得来
 });
 ```
 
