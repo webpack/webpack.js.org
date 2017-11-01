@@ -48,6 +48,7 @@ MyExampleWebpackPlugin.prototype.apply = function(compiler) {
 
 ## 基本插件架构
 
+
 插件都是被实例化的带有 `apply` 原型方法的对象。这个 `apply` 方法在安装插件时将被 webpack 编译器调用一次。`apply` 方法提供了一个对应的编译器对象的引用，从而可以访问到相关的编译器回调。一个简单的插件结构如下：
 
 ```javascript

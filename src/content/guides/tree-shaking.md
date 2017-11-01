@@ -7,6 +7,7 @@ contributors:
   - alexjoverm
   - avant1
   - MijaelWatts
+  - dmitriid
 related:
   - title: Tree shaking with webpack 2, TypeScript and Babel
     url: https://alexjoverm.github.io/2017/03/06/Tree-shaking-with-Webpack-2-TypeScript-and-Babel/
@@ -14,6 +15,10 @@ related:
     url: http://www.2ality.com/2015/12/webpack-tree-shaking.html
   - title: webpack 2 Tree Shaking Configuration
     url: https://medium.com/modus-create-front-end-development/webpack-2-tree-shaking-configuration-9f1de90f3233#.15tuaw71x
+  - title: Issue 2867
+    url: https://github.com/webpack/webpack/issues/2867
+  - title: Issue 4784
+    url: https://github.com/webpack/webpack/issues/4784
 ---
 
 _tree shaking_ 是一个术语，通常用于描述移除 JavaScript 上下文中的未引用代码(dead-code)。它依赖于 ES2015 模块系统中的[静态结构特性](http://exploringjs.com/es6/ch_modules.html#static-module-structure)，例如 [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 和 [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)。这个术语和概念实际上是兴起于 ES2015 模块打包工具 [rollup](https://github.com/rollup/rollup)。
@@ -138,6 +143,39 @@ T> 注意，也可以在命令行接口中使用 `--optimize-minimize` 标记，
 准备就绪后，然后运行另一个命令 `npm run build`，看看输出结果有没有发生改变。
 
 你发现 `dist/bundle.js` 中的差异了吗？显然，现在整个 bundle 都已经被精简过，但是如果仔细观察，则不会看到 `square` 函数被引入，但会看到 `cube` 函数的修改版本（`function r(e){return e*e*e}n.a=r`）。现在，随着 tree shaking 和代码压缩，我们的 bundle 减小几个字节！虽然，在这个特定示例中，可能看起来没有减少很多，但是，在具有复杂的依赖树的大型应用程序上运行时，tree shaking 或许会对 bundle 产生显著的体积优化。
+
+
+## Caveats
+
+Please note that webpack doesn't perform tree-shaking by itself. It relies on third party tools like [UglifyJS](/plugins/uglifyjs-webpack-plugin/) to perform actual dead code elimination. There are situations where tree-shaking may not be effective. For example, consider the following modules:
+
+__transforms.js__
+
+``` js
+import * as mylib from 'mylib';
+
+export const someVar = mylib.transform({
+  // ...
+});
+
+export const someOtherVar = mylib.transform({
+  // ...
+});
+```
+
+__index.js__
+
+``` js
+import { someVar } from './transforms.js';
+
+// Use `someVar`...
+```
+
+In the code above webpack cannot determine whether or not the call to `mylib.transform` triggers any side-effects. As a result, it errs on the safe side and leaves `someOtherVar` in the bundled code.
+
+In general, when a tool cannot guarantee that a particular code path doesn't lead to side-effects, this code may remain in the generated bundle even if you are sure it shouldn't. Common situations include invoking a function from a third-party module that webpack and/or the minifier cannot inspect, re-exporting functions imported from third-party modules, etc.
+
+The code used in this guide assumes you perform tree-shaking using UglifyJS plugin. However, there are other tools such as [webpack-rollup-loader](https://github.com/erikdesjardins/webpack-rollup-loader) or [Babel Minify Webpack Plugin](/plugins/babel-minify-webpack-plugin) that may produce different results depending on your setup.
 
 
 ## 结论

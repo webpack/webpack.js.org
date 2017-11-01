@@ -8,8 +8,8 @@ Compilation 实例继承于 compiler。例如，compiler.compilation 是对所�
 
 ``` js
 compiler.plugin("compilation", function(compilation) {
-  // 主要的编译实例
-  // 随后所有的方法都从 compilation.plugin 上得来
+    // 主要的编译实例
+    // 随后所有的方法都从 compilation.plugin上得来
 });
 ```
 
@@ -243,19 +243,19 @@ PrintChunksPlugin.prototype.apply = function(compiler) {
 
 ## `optimize-assets(assets: Object{name: Source})` async
 
-优化所有生成资源。
+Optimize all assets.
 
-生成资源被存放在 `this.assets`。
+The assets are stored in `this.assets`.
 
 
 ## `after-optimize-assets(assets: Object{name: Source})`
 
-生成资源优化已经结束。
+The assets has been optimized.
 
 
 ## `build-module(module)`
 
-一个模块构建开始前。
+Before a module build has started.
 
 ``` js
 compilation.plugin('build-module', function(module){

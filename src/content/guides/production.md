@@ -14,6 +14,7 @@ contributors:
   - skipjack
   - xgqfrms
   - kelset
+  - xgirma
 ---
 
 在本指南中，我们将深入一些最佳实践，并且使用工具，将网站或应用程序构建到生产环境中。
@@ -128,6 +129,7 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
+      "clean-webpack-plugin": "^0.1.17",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "express": "^4.15.3",
@@ -136,6 +138,8 @@ __package.json__
       "style-loader": "^0.18.2",
       "webpack": "^3.0.0",
       "webpack-dev-middleware": "^1.12.0",
+      "webpack-dev-server": "^2.9.1",
+      "webpack-merge": "^4.1.0",
       "xml-loader": "^1.2.1"
     }
   }

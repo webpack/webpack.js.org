@@ -25,6 +25,8 @@ T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs
 
 __webpack.config.js__
 
+__webpack.config.js__
+
 ``` js-with-links-with-details
 const path = require('path');
 

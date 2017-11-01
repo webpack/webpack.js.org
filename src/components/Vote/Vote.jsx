@@ -9,7 +9,7 @@ import './Influence.scss';
 import './Button/Button.scss';
 
 const Vote = ({ section, page }) => {
-  let arr = page.url.split('/');
+  let arr = page.url.split('/').filter(Boolean);
   let name = arr[arr.length - 1];
 
   return (
