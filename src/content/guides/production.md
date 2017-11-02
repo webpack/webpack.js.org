@@ -15,6 +15,7 @@ contributors:
   - xgqfrms
   - kelset
   - xgirma
+  - iamakulov
 ---
 
 In this guide we'll dive into some of the best practices and utilities for building a production site or application.
@@ -236,9 +237,33 @@ __src/index.js__
   document.body.appendChild(component());
 ```
 
+## Module Concatenation
+
+By default, webpack wraps each module into a function. This helps helps to isolate them, but brings additional overhead. You can try reducing this overhead by enabling [`ModuleConcatenationPlugin`](/plugins/module-concatenation-plugin) which, where possible, merges multiple modules together in a single module wrapper:
+
+__webpack.prod.js__
+
+```diff
++ const webpack = require('webpack');
+  const merge = require('webpack-merge');
+  const common = require('./webpack.common.js');
+
+  module.exports = merge(common, {
+    plugins: [
++     new webpack.optimize.ModuleConcatenationPlugin()
+    ]
+  })
+```
+
+Read more about module concatenation [in the plugin docs](/plugins/module-concatenation-plugin).
 
 ## CLI Alternatives
 
-Some of what has been described above is also achievable via the command line. For example, the `--optimize-minimize` flag will include the `UglifyJSPlugin` behind the scenes. The `--define process.env.NODE_ENV="'production'"` will do the same for the `DefinePlugin` instance described above. And, `webpack -p` will automatically invoke both those flags and thus the plugins to be included.
+Some of what has been described above is also achievable via the command line:
+* the `--optimize-minimize` flag will include the `UglifyJSPlugin` behind the scenes;
+* the `--define process.env.NODE_ENV="'production'"` will do the same for the `DefinePlugin` instance described above;
+* the `--concatenate-modules` flag will enable the `ModuleConcatenationPlugin`.
+
+And, `webpack -p` will automatically invoke all those flags and thus the plugins to be included.
 
 While these short hand methods are nice, we usually recommend just using the configuration as it's better to understand exactly what is being done for you in both cases. The configuration also gives you more control on fine tuning other options within both plugins.
