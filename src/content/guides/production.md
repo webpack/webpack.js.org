@@ -239,7 +239,7 @@ __src/index.js__
 
 ## Module Concatenation
 
-By default, webpack wraps each module into a function. This helps helps to isolate them, but brings additional overhead. You can try reducing this overhead by enabling [`ModuleConcatenationPlugin`](/plugins/module-concatenation-plugin) which, where possible, merges multiple modules together in a single module wrapper:
+By default, webpack wraps each module into a function. Wrapping helps to isolate them but brings additional overhead. You can try reducing this overhead by enabling the [`ModuleConcatenationPlugin`](/plugins/module-concatenation-plugin), which, where possible, merges multiple modules in a single module wrapper:
 
 __webpack.prod.js__
 
