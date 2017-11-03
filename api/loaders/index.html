@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/ee06c80d905538692dae.css" rel="stylesheet">
+      <link href="/3d271c93c363460fbd87.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -163,11 +163,11 @@ In <code>/abc/file.js</code>:</p>
 <blockquote class="tip"><div class="tip-content"> Loaders were originally designed to also work as Babel transforms. Therefore if you write a loader that works for both, you can use this property to know if there is access to additional loaderContext and webpack features. </div></blockquote><h3 class="header"><a class="anchor" href="#this-sourcemap" id="this-sourcemap"></a><span class="text"><code>this.sourceMap</code></span><a class="icon-link" href="#this-sourcemap"></a></h3>
 <p>Should a source map be generated. Since generating source maps can be an expensive task, you should check if source maps are actually requested.</p>
 <h3 class="header"><a class="anchor" href="#this-emitwarning" id="this-emitwarning"></a><span class="text"><code>this.emitWarning</code></span><a class="icon-link" href="#this-emitwarning"></a></h3>
-<pre><code class="lang-typescript"><span class="token function">emitWarning</span><span class="token punctuation">(</span>message<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">)</span>
+<pre><code class="lang-typescript"><span class="token function">emitWarning</span><span class="token punctuation">(</span>warning<span class="token punctuation">:</span> Error<span class="token punctuation">)</span>
 </code></pre>
 <p>Emit a warning.</p>
 <h3 class="header"><a class="anchor" href="#this-emiterror" id="this-emiterror"></a><span class="text"><code>this.emitError</code></span><a class="icon-link" href="#this-emiterror"></a></h3>
-<pre><code class="lang-typescript"><span class="token function">emitError</span><span class="token punctuation">(</span>message<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">)</span>
+<pre><code class="lang-typescript"><span class="token function">emitError</span><span class="token punctuation">(</span>error<span class="token punctuation">:</span> Error<span class="token punctuation">)</span>
 </code></pre>
 <p>Emit an error.</p>
 <h3 class="header"><a class="anchor" href="#this-loadmodule" id="this-loadmodule"></a><span class="text"><code>this.loadModule</code></span><a class="icon-link" href="#this-loadmodule"></a></h3>
