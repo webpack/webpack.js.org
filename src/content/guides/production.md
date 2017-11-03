@@ -205,7 +205,7 @@ __webpack.prod.js__
 +       'process.env': {
 +         'NODE_ENV': JSON.stringify('production')
 +       }
-+     })
++     }),
     ]
   })
 ```
@@ -244,25 +244,38 @@ By default, webpack wraps each module into a function. This helps helps to isola
 __webpack.prod.js__
 
 ```diff
-+ const webpack = require('webpack');
+  const webpack = require('webpack');
   const merge = require('webpack-merge');
+  const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
   const common = require('./webpack.common.js');
 
   module.exports = merge(common, {
+    devtool: 'cheap-module-source-map',
     plugins: [
-+     new webpack.optimize.ModuleConcatenationPlugin()
+      new UglifyJSPlugin({
+        sourceMap: true
+      }),
+      new webpack.DefinePlugin({
+        'process.env': {
+          'NODE_ENV': JSON.stringify('production')
+        }
+      }),
++     new webpack.optimize.ModuleConcatenationPlugin(),
     ]
   })
 ```
 
 Read more about module concatenation [in the plugin docs](/plugins/module-concatenation-plugin).
 
+
 ## CLI Alternatives
 
+
 Some of what has been described above is also achievable via the command line:
-* the `--optimize-minimize` flag will include the `UglifyJSPlugin` behind the scenes;
-* the `--define process.env.NODE_ENV="'production'"` will do the same for the `DefinePlugin` instance described above;
-* the `--concatenate-modules` flag will enable the `ModuleConcatenationPlugin`.
+
+- `--optimize-minimize` flag will include the `UglifyJSPlugin` behind the scenes;
+- `--define process.env.NODE_ENV="'production'"` will do the same for the `DefinePlugin` instance described above;
+- `--concatenate-modules` flag will enable the `ModuleConcatenationPlugin`.
 
 And, `webpack -p` will automatically invoke all those flags and thus the plugins to be included.
 
