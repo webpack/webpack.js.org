@@ -15,7 +15,9 @@ This plugin will enable the same concatenation behavior in webpack.
 new webpack.optimize.ModuleConcatenationPlugin()
 ```
 
-> Scope Hoisting is specifically a feature made possible by ECMAScript Module syntax. Because of this webpack may fallback to normal bundling based on what kind of modules you are using, and [other conditions](https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5).
+> This concatenation behavior is called “scope hoisting.”
+>
+> Scope hoisting is specifically a feature made possible by ECMAScript Module syntax. Because of this webpack may fallback to normal bundling based on what kind of modules you are using, and [other conditions](https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5).
 
 
 ## Optimization Bailouts
