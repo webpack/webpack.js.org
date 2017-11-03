@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/c19b09293f9f8b04f878.css" rel="stylesheet">
+      <link href="/ee06c80d905538692dae.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -23,7 +23,8 @@
 <pre><code class="lang-js"><span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>optimize<span class="token punctuation">.</span>ModuleConcatenationPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 </code></pre>
 <blockquote>
-<p>Scope Hoisting is specifically a feature made possible by ECMAScript Module syntax. Because of this webpack may fallback to normal bundling based on what kind of modules you are using, and <a href="https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5">other conditions</a>.</p>
+<p>This concatenation behavior is called &#x201C;scope hoisting.&#x201D;</p>
+<p>Scope hoisting is specifically a feature made possible by ECMAScript Module syntax. Because of this webpack may fallback to normal bundling based on what kind of modules you are using, and <a href="https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5">other conditions</a>.</p>
 </blockquote>
 <h2 class="header"><a class="anchor" href="#optimization-bailouts" id="optimization-bailouts"></a><span class="text">Optimization Bailouts</span><a class="icon-link" href="#optimization-bailouts"></a></h2>
 <p>As the article explains, webpack attempts to achieve partial scope hoisting. It will merge modules into a single scope but cannot do so in every case. If webpack cannot merge a module, the two alternatives are Prevent and Root. Prevent means the module must be in its own scope. Root means a new module group will be created. The following conditions determine the outcome:</p>
