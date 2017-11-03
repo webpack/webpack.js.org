@@ -200,12 +200,13 @@ __webpack.prod.js__
     plugins: [
       new UglifyJSPlugin({
         sourceMap: true
-      }),
+-     })
++     }),
 +     new webpack.DefinePlugin({
 +       'process.env': {
 +         'NODE_ENV': JSON.stringify('production')
 +       }
-+     }),
++     })
     ]
   })
 ```
@@ -259,8 +260,9 @@ __webpack.prod.js__
         'process.env': {
           'NODE_ENV': JSON.stringify('production')
         }
-      }),
-+     new webpack.optimize.ModuleConcatenationPlugin(),
+-     })
++     }),
++     new webpack.optimize.ModuleConcatenationPlugin()
     ]
   })
 ```
