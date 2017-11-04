@@ -12,16 +12,16 @@ __Notes:__ Issues with the output should be reported on the babel [issue tracker
 
 ## Install
 
-> webpack 3.x | babel-loader >= 7.1
+> webpack 3.x | babel-loader 8.x | babel 7.x
 
 ```bash
-yarn add babel-loader @babel/core @babel/preset-env webpack --dev
+npm install babel-loader@8.0.0-beta.0 @babel/core@next @babel/preset-env@next webpack
 ```
 
-We recommend using yarn, but you can also still use npm:
+> webpack 3.x babel-loader 7.x | babel 6.x
 
 ```bash
-npm install --save-dev babel-loader @babel/core @babel/preset-env webpack
+npm install babel-loader babel-core babel-preset-env webpack
 ```
 
 ## Usage
@@ -39,7 +39,7 @@ module: {
       use: {
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/env']
+          presets: ['@babel/preset-env']
         }
       }
     }
@@ -63,7 +63,7 @@ module: {
       use: {
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/env'],
+          presets: ['@babel/preset-env'],
           plugins: [require('@babel/plugin-transform-object-rest-spread')]
         }
       }
@@ -119,7 +119,7 @@ rules: [
     use: {
       loader: 'babel-loader',
       options: {
-        presets: ['@babel/env'],
+        presets: ['@babel/preset-env'],
         plugins: ['@babel/transform-runtime']
       }
     }
