@@ -15,7 +15,6 @@ npm i -D compression-webpack-plugin
 ## 使用
 
 **webpack.config.js**
-
 ```js
 const CompressionPlugin = require("compression-webpack-plugin")
 
