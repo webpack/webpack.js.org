@@ -4,16 +4,15 @@ source: https://raw.githubusercontent.com/webpack-contrib/compression-webpack-pl
 edit: https://github.com/webpack-contrib/compression-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/compression-webpack-plugin
 ---
- 提供带编码的压缩版的资源
+提供带 Content-Encoding 编码的压缩版的资源
 
-
-##安装
+## 安装
 
 ```bash
 npm i -D compression-webpack-plugin
 ```
 
-##使用
+## 使用
 
 **webpack.config.js**
 
@@ -27,14 +26,14 @@ module.exports = {
 }
 ```
 
-##选项
+## 选项
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
 |**`test`**|`{RegExp}`|`.`|处理所有匹配此 `{RegExp}` 的资源|
-|**`asset`**|`{String}`|`[path].gz[query]`|目标资源名称。 `[file]` 会被替换成原资源。`[path]` 会被替换成原资源路径， `[query]` 替换成原查询字符串|
-|**`filename`**|`{Function}`|`false`|一个 `{Function}` `(asset) => asset`函数，接收原资源名（通过`asset`参数） 返回新资源名|
-|**`algorithm`**|`{String\|Function}`|`gzip`|可以是 `(buffer, cb) => cb(buffer)`或者是使用`zlib`里面的算法的`{String}`|
+|**`asset`**|`{String}`|`[path].gz[query]`|目标资源名称。`[file]` 会被替换成原资源。`[path]` 会被替换成原资源路径，`[query]` 替换成原查询字符串|
+|**`filename`**|`{Function}`|`false`|一个 `{Function}` `(asset) => asset` 函数，接收原资源名（通过 `asset` 选项）返回新资源名|
+|**`algorithm`**|`{String\|Function}`|`gzip`|可以是 `(buffer, cb) => cb(buffer)` 或者是使用 `zlib` 里面的算法的 `{String}`|
 |**`threshold`**|`{Number}`|`0`|只处理比这个值大的资源。按字节计算|
 |**`minRatio`**|`{Number}`|`0.8`|只有压缩率比这个值小的资源才会被处理|
 |**`deleteOriginalAssets`**|`{Boolean}`|`false`|是否删除原资源|
@@ -120,7 +119,7 @@ module.exports = {
 ]
 ```
 
-<h2 align="center">Maintainers</h2>
+## 维护人员
 
 <table>
   <tbody>
