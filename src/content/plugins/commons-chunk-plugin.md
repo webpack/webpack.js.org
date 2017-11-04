@@ -50,9 +50,6 @@ new webpack.optimize.CommonsChunkPlugin(options)
   deepChildren: boolean,
   // If `true` all descendants of the commons chunk are selected
 
-  deepChildren: boolean,
-  // If `true` all descendants of the commons chunk are selected
-
   async: boolean|string,
   // 如果设置为 `true`，一个异步的  公共chunk 会作为 `options.name` 的子模块，和 `options.chunks` 的兄弟模块被创建。
   // 它会与 `options.chunks` 并行被加载。
