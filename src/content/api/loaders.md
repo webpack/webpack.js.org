@@ -262,7 +262,7 @@ Should a source map be generated. Since generating source maps can be an expensi
 ### `this.emitWarning`
 
 ```typescript
-emitWarning(message: string)
+emitWarning(warning: Error)
 ```
 
 Emit a warning.
@@ -271,7 +271,7 @@ Emit a warning.
 ### `this.emitError`
 
 ```typescript
-emitError(message: string)
+emitError(error: Error)
 ```
 
 Emit an error.
