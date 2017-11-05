@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/51bab03d64ac6cc50f61.css" rel="stylesheet">
+      <link href="/42db88d847bf4afeeb31.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -799,6 +799,27 @@ webpack --env.platform<span class="token operator">=</span>web  <span class="tok
     </div>
     <div class="table-td-content">
         <a href="/plugins/uglifyjs-webpack-plugin/">UglifyJsPlugin</a> &amp; <a href="/plugins/loader-options-plugin/">LoaderOptionsPlugin</a>
+    </div>
+  </div></div><div class="table-tr"><div class="table-td">
+    <div class="table-td-title">
+        Parameter
+    </div>
+    <div class="table-td-content">
+        <code>--concatenate-modules</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Explanation
+    </div>
+    <div class="table-td-content">
+        Concatenate ES modules to remove module wrappers where possible
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Plugin Used
+    </div>
+    <div class="table-td-content">
+        <a href="/plugins/module-concatenation-plugin/">ModuleConcatenationPlugin</a>
     </div>
   </div></div>
           </div>
@@ -1628,7 +1649,7 @@ webpack --env.platform<span class="token operator">=</span>web  <span class="tok
         Replaces
     </div>
     <div class="table-td-content">
-        <code>--optimize-minimize --define process.env.NODE_ENV=&quot;production&quot;</code>, see <a href="/guides/production">building for production</a>
+        <code>--optimize-minimize --define process.env.NODE_ENV=&quot;production&quot; --concatenate-modules</code>, see <a href="/guides/production">building for production</a>
     </div>
   </div></div>
           </div>
