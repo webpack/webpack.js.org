@@ -225,11 +225,12 @@ Parameter                 | Explanation
 
 These options allow you to manipulate optimisations for a production build using webpack
 
-Parameter                   | Explanation                                            | Plugin Used
---------------------------- | -------------------------------------------------------|----------------------
-`--optimize-max-chunks`     | Try to keep the chunk count below a limit              | [LimitChunkCountPlugin](/plugins/limit-chunk-count-plugin)
-`--optimize-min-chunk-size` | Try to keep the chunk size above a limit               | [MinChunkSizePlugin](/plugins/min-chunk-size-plugin)
-`--optimize-minimize`       | Minimize javascript and switches loaders to minimizing | [UglifyJsPlugin](/plugins/uglifyjs-webpack-plugin/) & [LoaderOptionsPlugin](/plugins/loader-options-plugin/)
+Parameter                   | Explanation                                                     | Plugin Used
+--------------------------- | ----------------------------------------------------------------|----------------------
+`--optimize-max-chunks`     | Try to keep the chunk count below a limit                       | [LimitChunkCountPlugin](/plugins/limit-chunk-count-plugin)
+`--optimize-min-chunk-size` | Try to keep the chunk size above a limit                        | [MinChunkSizePlugin](/plugins/min-chunk-size-plugin)
+`--optimize-minimize`       | Minimize javascript and switches loaders to minimizing          | [UglifyJsPlugin](/plugins/uglifyjs-webpack-plugin/) & [LoaderOptionsPlugin](/plugins/loader-options-plugin/)
+`--concatenate-modules`     | Concatenate ES modules to remove module wrappers where possible | [ModuleConcatenationPlugin](/plugins/module-concatenation-plugin/)
 
 
 ### Resolve Options
@@ -294,7 +295,7 @@ Parameter         | Explanation                              | Usage
 Shortcut | Replaces
 ---------|----------------------------
 -d       | `--debug --devtool cheap-module-eval-source-map --output-pathinfo`
--p       | `--optimize-minimize --define process.env.NODE_ENV="production"`, see [building for production](/guides/production)
+-p       | `--optimize-minimize --define process.env.NODE_ENV="production" --concatenate-modules`, see [building for production](/guides/production)
 
 
 ### Profiling
