@@ -275,9 +275,9 @@ Read more about module concatenation [in the plugin docs](/plugins/module-concat
 
 Some of what has been described above is also achievable via the command line:
 
-- `--optimize-minimize` flag will include the `UglifyJSPlugin` behind the scenes;
-- `--define process.env.NODE_ENV="'production'"` will do the same for the `DefinePlugin` instance described above;
-- `--concatenate-modules` flag will enable the `ModuleConcatenationPlugin`.
+- `--optimize-minimize` will include the `UglifyJSPlugin` behind the scenes;
+- `--define process.env.NODE_ENV="'production'"` will replicate the `DefinePlugin` instance above;
+- `--concatenate-modules` will enable the `ModuleConcatenationPlugin`.
 
 And, `webpack -p` will automatically invoke all those flags and thus the plugins to be included.
 
