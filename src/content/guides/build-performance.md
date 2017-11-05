@@ -16,7 +16,7 @@ contributors:
 
 ### 保持版本最新
 
-使用最新的 webpack 版本。我们会经常进行性能优化。最新稳定版的 webpack 是:
+使用最新的 webpack 版本。我们会经常进行性能优化。 webpack 的最新稳定版本是：
 
 [![latest webpack version](https://img.shields.io/npm/v/webpack.svg?label=webpack&style=flat-square&maxAge=3600)](https://github.com/webpack/webpack/releases)
 
@@ -34,7 +34,7 @@ contributors:
 }
 ```
 
-使用 `include` 字段仅将 loader 应用在实际需要转换的模块中:
+使用 `include` 字段仅将 loader 模块应用在实际需要用其转换的位置中：
 
 ``` js
 {
@@ -54,9 +54,9 @@ contributors:
 
 以下几步可以提供解析速度:
 
-- 在增加文件系统调用时，尽量减少 `resolve.modules`, `resolve.extensions`, `resolve.mainFiles`, `resolve.descriptionFiles` 的数量。
-- 如果你不需要使用 symlinks ，你可以设置 `resolve.symlinks: false` (例如 `npm link` 或者 `yarn link`).
-- 如果你使用自定义解析 plugins ，并且与特殊 context 无关。你可以设置 `resolve.cacheWithContext: false` 。
+- 尽量减少 `resolve.modules`, `resolve.extensions`, `resolve.mainFiles`, `resolve.descriptionFiles` 中类目的数量，因为他们会增加文件系统调用的次数。
+- 如果你不使用 symlinks ，可以设置 `resolve.symlinks: false` (例如 `npm link` 或者 `yarn link`).
+- 如果你使用自定义解析 plugins ，并且没有指定 context 信息，可以设置 `resolve.cacheWithContext: false` 。
 
 
 ### Dlls
@@ -68,7 +68,7 @@ contributors:
 
 减少编译的整体大小，以提高构建性能。尽量保持 chunks 小巧。
 
-- 使用 较少/较小 的库。
+- 使用 更少/更小 的库。
 - 在多页面应用程序中使用 `CommonsChunksPlugin`。
 - 在多页面应用程序中以 `async` 模式使用 `CommonsChunksPlugin ` 。
 - 移除不使用的代码。
@@ -77,9 +77,9 @@ contributors:
 
 ### Worker Pool
 
-`thread-loader` 可以将非常消耗资源的 loaders 加入到 worker pool 中。
+`thread-loader` 可以将非常消耗资源的 loaders 转存到 worker pool 中。
 
-W> 不要使用太多的 workers ，因为 Node.js 的 runtime 和 loader 有一定的启动开销。减少 workers 和主进程间的传输。进程间通讯(IPC)是非常消耗资源的。
+W> 不要使用太多的 workers ，因为 Node.js 的 runtime 和 loader 有一定的启动开销。最小化 workers 和主进程间的模块传输。进程间通讯(IPC)是非常消耗资源的。
 
 
 ### 持久化缓存
@@ -120,7 +120,7 @@ W> 不要使用太多的 workers ，因为 Node.js 的 runtime 和 loader 有一
 需要注意的是不同的 `devtool` 的设置，会导致不同的性能差异。
 
 - `"eval"` 具有最好的性能，但并不能帮助你转译代码。
-- 如果你能接受稍差一些的 sourcemap 质量，可以使用 `cheap-source-map` 选项来提高性能
+- 如果你能接受稍差一些的 mapping 质量，可以使用 `cheap-source-map` 选项来提高性能
 - 使用 `eval-source-map` 配置进行增量编译。
 
 => 在大多数情况下，`cheap-module-eval-source-map` 是最好的选择。
@@ -128,7 +128,7 @@ W> 不要使用太多的 workers ，因为 Node.js 的 runtime 和 loader 有一
 
 ### 避免在生产环境下才会用到的工具
 
-某些实用工具，无论是 plugins 还是 loaders 都只能在构建生产环境时才能够使用。例如，在开发时使用 `UglifyJsPlugin` 来压缩和修改代码是没有意义的。以下这些工具通常在开发中不会使用:
+某些实用工具， plugins 和 loaders 都只能在构建生产环境时才有用。例如，在开发时使用 `UglifyJsPlugin` 来压缩和修改代码是没有意义的。以下这些工具在开发中通常被排除在外:
 
 - `UglifyJsPlugin`
 - `ExtractTextPlugin`
@@ -171,14 +171,14 @@ W> __不要为了非常小的性能增益，牺牲你应用程序的质量！__ 
 
 ### Source Maps
 
-Source maps 真的很消耗资源。思考下，你的项目是否真的需要他们？
+Source maps 真的很消耗资源。你真的需要他们？
 
 ---
 
 
 ## 工具相关问题
 
-下列工具存在某些可能会减低构建性能的问题。
+下列工具存在某些可能会降低构建性能的问题。
 
 
 ### Babel
