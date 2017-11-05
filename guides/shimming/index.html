@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/42db88d847bf4afeeb31.css" rel="stylesheet">
+      <link href="/b978f85068910dbc9feb.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -50,6 +50,7 @@
 </code></pre>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-diff">  const path = require(&apos;path&apos;);
+<span class="token inserted">+ const webpack = require(&apos;webpack&apos;);</span>
 
   module.exports = {
     entry: &apos;./src/index.js&apos;,
@@ -60,7 +61,7 @@
 <span class="token inserted">+   },</span>
 <span class="token inserted">+   plugins: [</span>
 <span class="token inserted">+     new webpack.ProvidePlugin({</span>
-<span class="token inserted">+       lodash: &apos;lodash&apos;</span>
+<span class="token inserted">+       _: &apos;lodash&apos;</span>
 <span class="token inserted">+     })</span>
 <span class="token inserted">+   ]</span>
   };
@@ -87,6 +88,7 @@
 </code></pre>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-diff">  const path = require(&apos;path&apos;);
+  const webpack = require(&apos;webpack&apos;);
 
   module.exports = {
     entry: &apos;./src/index.js&apos;,
@@ -96,7 +98,7 @@
     },
     plugins: [
       new webpack.ProvidePlugin({
-<span class="token deleted">-       lodash: &apos;lodash&apos;</span>
+<span class="token deleted">-       _: &apos;lodash&apos;</span>
 <span class="token inserted">+       join: [&apos;lodash&apos;, &apos;join&apos;]</span>
       })
     ]
@@ -121,6 +123,7 @@
 <p>This becomes a problem when the module is executed in a CommonJS context where <code>this</code> is equal to <code>module.exports</code>. In this case you can override <code>this</code> using the <a href="/loaders/imports-loader/"><code>imports-loader</code></a>:</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-diff">  const path = require(&apos;path&apos;);
+  const webpack = require(&apos;webpack&apos;);
 
   module.exports = {
     entry: &apos;./src/index.js&apos;,
@@ -165,6 +168,7 @@
 <p>Now, while you&apos;d likely never do this in your own source code, you may encounter a dated library you&apos;d like to use that contains similar code to what&apos;s shown above. In this case, we can use <a href="/loaders/exports-loader/"><code>exports-loader</code></a>, to export that global variable as a normal module export. For instance, in order to export <code>file</code> as <code>file</code> and <code>helpers.parse</code> as <code>parse</code>:</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-diff">  const path = require(&apos;path&apos;);
+  const webpack = require(&apos;webpack&apos;);
 
   module.exports = {
     entry: &apos;./src/index.js&apos;,
@@ -246,6 +250,7 @@
 </code></pre>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-diff">  const path = require(&apos;path&apos;);
+  const webpack = require(&apos;webpack&apos;);
 
   module.exports = {
 <span class="token deleted">-   entry: &apos;./src/index.js&apos;,</span>
@@ -339,7 +344,7 @@
 <p>The <a href="/loaders/script-loader/"><code>script-loader</code></a> evaluates code in the global context, similar to inclusion via a <code>script</code> tag. In this mode, every normal library should work. <code>require</code>, <code>module</code>, etc. are undefined.</p>
 <blockquote class="warning"><div class="tip-content"> When using the <code>script-loader</code>, the module is added as a string to the bundle. It is not minimized by <code>webpack</code>, so use a minimized version. There is also no <code>devtool</code> support for libraries added by this loader. </div></blockquote><p>When there is no AMD/CommonJS version of the module and you want to include the <code>dist</code>, you can flag this module in <a href="/configuration/module/#module-noparse"><code>noParse</code></a>. This will cause webpack to include the module without parsing it or resolving <code>require()</code> and <code>import</code> statements. This practice is also used to improve the build performance.</p>
 <blockquote class="warning"><div class="tip-content"> Any feature requiring the AST, like the <code>ProvidePlugin</code>, will not work. </div></blockquote><p>Lastly, there are some modules that support different <a href="/concepts/modules">module styles</a> like AMD, CommonJS and legacy. In most of these cases, they first check for <code>define</code> and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting <code>define=&gt;false</code> via the <a href="/loaders/imports-loader/"><code>imports-loader</code></a>.</p>
-</div><div><hr><h3>Further Reading</h3><ul><li><a href="https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665">Reward modern browser users script</a></li><li><a href="https://github.com/babel/babel-preset-env#usebuiltins">useBuiltIns in babel-preset-env</a></li></ul></div><div><hr><h3>Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/jeremenichelli"><img src="https://github.com/jeremenichelli.png?size=90"><span class="contributor__name"> jeremenichelli</span></a><a class="contributor" href="https://github.com/jhnns"><img src="https://github.com/jhnns.png?size=90"><span class="contributor__name"> jhnns</span></a><a class="contributor" href="https://github.com/pksjce"><img src="https://github.com/pksjce.png?size=90"><span class="contributor__name"> pksjce</span></a><a class="contributor" href="https://github.com/simon04"><img src="https://github.com/simon04.png?size=90"><span class="contributor__name"> simon04</span></a></div></div></div><div class="interactive" id="src/components/Gitter/Gitter.jsx" data-props="{}"><span class="gitter"><div class="gitter__button js-gitter-toggle-chat-button" style="margin-bottom:0;"><i class="gitter__icon icon-gitter"></i></div></span></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/guides/getting-started/" class="footer__link">Get Started</a><a href="/organization/" class="footer__link">Organization</a><a href="/starter-kits/" class="footer__link">Starter Kits</a><a href="/comparison/" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg" alt="webpack icon"></a></section><section class="footer__right"><a href="/glossary/" class="footer__link">Glossary</a><a href="/branding/" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Gitter</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link footer__license"><img alt="Creative Commons License" src="/c983c925f14c5a308465ce5f912be111.svg"><img alt="Creative Commons License" src="/c440e4e11ad72daf1899ca0616ddd8b8.svg"></a></section></div></footer><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
+</div><div><hr><h3>Further Reading</h3><ul><li><a href="https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665">Reward modern browser users script</a></li><li><a href="https://github.com/babel/babel-preset-env#usebuiltins">useBuiltIns in babel-preset-env</a></li></ul></div><div><hr><h3>Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/jeremenichelli"><img src="https://github.com/jeremenichelli.png?size=90"><span class="contributor__name"> jeremenichelli</span></a><a class="contributor" href="https://github.com/jhnns"><img src="https://github.com/jhnns.png?size=90"><span class="contributor__name"> jhnns</span></a><a class="contributor" href="https://github.com/pksjce"><img src="https://github.com/pksjce.png?size=90"><span class="contributor__name"> pksjce</span></a><a class="contributor" href="https://github.com/simon04"><img src="https://github.com/simon04.png?size=90"><span class="contributor__name"> simon04</span></a><a class="contributor" href="https://github.com/svyandun"><img src="https://github.com/svyandun.png?size=90"><span class="contributor__name"> svyandun</span></a></div></div></div><div class="interactive" id="src/components/Gitter/Gitter.jsx" data-props="{}"><span class="gitter"><div class="gitter__button js-gitter-toggle-chat-button" style="margin-bottom:0;"><i class="gitter__icon icon-gitter"></i></div></span></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/guides/getting-started/" class="footer__link">Get Started</a><a href="/organization/" class="footer__link">Organization</a><a href="/starter-kits/" class="footer__link">Starter Kits</a><a href="/comparison/" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg" alt="webpack icon"></a></section><section class="footer__right"><a href="/glossary/" class="footer__link">Glossary</a><a href="/branding/" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Gitter</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link footer__license"><img alt="Creative Commons License" src="/c983c925f14c5a308465ce5f912be111.svg"><img alt="Creative Commons License" src="/c440e4e11ad72daf1899ca0616ddd8b8.svg"></a></section></div></footer><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
 
     
       <script src="/809f5a3ef08aaa441f08f4469ebcb449.js"></script>
