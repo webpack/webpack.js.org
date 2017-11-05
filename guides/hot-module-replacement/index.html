@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/b978f85068910dbc9feb.css" rel="stylesheet">
+      <link href="/3110808c36575ec276a8.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -123,7 +123,7 @@ server<span class="token punctuation">.</span><span class="token function">liste
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&apos;dev server listening on port 5000&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<h2 class="header"><a class="anchor" href="#gotchas" id="gotchas"></a><span class="text">Gotchas</span><a class="icon-link" href="#gotchas"></a></h2>
+<blockquote class="tip"><div class="tip-content"> If you&apos;re <a href="/guides/development#using-webpack-dev-middleware">using <code>webpack-dev-middleware</code></a>, check out the <a href="https://github.com/glenjamin/webpack-hot-middleware"><code>webpack-hot-middleware</code></a> package to enable HMR on your custom dev server. </div></blockquote><h2 class="header"><a class="anchor" href="#gotchas" id="gotchas"></a><span class="text">Gotchas</span><a class="icon-link" href="#gotchas"></a></h2>
 <p>Hot Module Replacement can be tricky. To show this, let&apos;s go back to our working example. If you go ahead and click the button on the example page, you will realize the console is printing the old <code>printMe</code> function.</p>
 <p>This is happening because the button&apos;s <code>onclick</code> event handler is still bound to the original <code>printMe</code> function.</p>
 <p>To make this work with HMR we need to update that binding to the new <code>printMe</code> function using <code>module.hot.accept</code>:</p>
