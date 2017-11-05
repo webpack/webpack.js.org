@@ -234,13 +234,15 @@ __src/loader.js__
 ``` js
 import { getOptions } from 'loader-utils';
 
-export default source => {
+function loader(source) {
   const options = getOptions(this);
 
   source = source.replace(/\[name\]/g, options.name);
 
   return `export default ${ JSON.stringify(source) }`;
 };
+
+export default loader;
 ```
 
 We'll use this loader to process the following file:
