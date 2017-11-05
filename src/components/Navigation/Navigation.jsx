@@ -69,12 +69,13 @@ export default class Navigation extends React.Component {
           <LinkDropdown
             className="navigation__hrefs"
             items={[
-            { title: '印记中文文档导航', url: 'https://docschina.org/' },
-            { title: 'Vue.js 中文文档', url: 'https://vuefe.cn/' },
-            { title: 'React.js 中文文档', url: 'https://doc.react-china.org/' },
-            { title: 'rollup.js 中文文档', url: 'https://rollupjs.org/zh' },
-            { title: 'Node.js 中文文档', url: 'http://nodejs.cn/' }
-          ]} />
+              { title: '印记中文文档导航', url: 'https://docschina.org/' },
+              { title: 'Vue.js 中文文档', url: 'https://vuefe.cn/' },
+              { title: 'React.js 中文文档', url: 'https://doc.react-china.org/' },
+              { title: 'Babel 中文文档', url: 'https://babeljs.cn/' },
+              { title: 'rollup.js 中文文档', url: 'https://rollupjs.org/zh' },
+              { title: 'Node.js 中文文档', url: 'http://nodejs.cn/' }
+            ]} />
 
           <Dropdown
             className="navigation__languages"
