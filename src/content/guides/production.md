@@ -15,6 +15,7 @@ contributors:
   - xgqfrms
   - kelset
   - xgirma
+  - iamakulov
 ---
 
 在本指南中，我们将深入一些最佳实践，并且使用工具，将网站或应用程序构建到生产环境中。
@@ -199,7 +200,8 @@ __webpack.prod.js__
     plugins: [
       new UglifyJSPlugin({
         sourceMap: true
-      }),
+-     })
++     }),
 +     new webpack.DefinePlugin({
 +       'process.env': {
 +         'NODE_ENV': JSON.stringify('production')
@@ -236,10 +238,48 @@ __src/index.js__
   document.body.appendChild(component());
 ```
 
+## Module Concatenation
+
+By default, webpack wraps each module into a function. Wrapping helps to isolate them but brings additional overhead. You can try reducing this overhead by enabling the [`ModuleConcatenationPlugin`](/plugins/module-concatenation-plugin), which, where possible, merges multiple modules in a single module wrapper:
+
+__webpack.prod.js__
+
+```diff
+  const webpack = require('webpack');
+  const merge = require('webpack-merge');
+  const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+  const common = require('./webpack.common.js');
+
+  module.exports = merge(common, {
+    devtool: 'cheap-module-source-map',
+    plugins: [
+      new UglifyJSPlugin({
+        sourceMap: true
+      }),
+      new webpack.DefinePlugin({
+        'process.env': {
+          'NODE_ENV': JSON.stringify('production')
+        }
+-     })
++     }),
++     new webpack.optimize.ModuleConcatenationPlugin()
+    ]
+  })
+```
+
+Read more about module concatenation [in the plugin docs](/plugins/module-concatenation-plugin).
+
 
 ## CLI 替代选项
 
-以上描述也可以通过命令行实现。例如，`--optimize-minimize` 标记将在后台引用 `UglifyJSPlugin`。和以上描述的 `DefinePlugin` 实例相同，`--define process.env.NODE_ENV="'production'"` 也会做同样的事情。并且，`webpack -p` 将自动地调用上述这些标记，从而调用需要引入的插件。
+
+以上描述也可以通过命令行实现：
+
+- `--optimize-minimize` 标记将在后台引用 `UglifyJSPlugin`；
+- `--define process.env.NODE_ENV="'production'"` 将复制上面的 `DefinePlugin` 实例；
+- `--concatenate-modules` 将启用 `ModuleConcatenationPlugin`.
+
+并且，`webpack -p` 将自动地调用上述这些标记，从而调用需要引入的插件。
 
 这些简便方式虽然都很不错，但是我们通常建议只使用配置方式，因为在这两种场景中下，配置方式能够更好地帮助你了解自己正在做的事情。配置方式还可以让你更方便地控制这两个插件中的其他选项。
 

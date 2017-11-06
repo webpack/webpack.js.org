@@ -6,6 +6,7 @@ contributors:
   - jhnns
   - simon04
   - jeremenichelli
+  - svyandun
 related:
   - title: Reward modern browser users script
     url: https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665
@@ -65,6 +66,7 @@ __webpack.config.js__
 
 ``` diff
   const path = require('path');
++ const webpack = require('webpack');
 
   module.exports = {
     entry: './src/index.js',
@@ -75,7 +77,7 @@ __webpack.config.js__
 +   },
 +   plugins: [
 +     new webpack.ProvidePlugin({
-+       lodash: 'lodash'
++       _: 'lodash'
 +     })
 +   ]
   };
@@ -112,6 +114,7 @@ __webpack.config.js__
 
 ``` diff
   const path = require('path');
+  const webpack = require('webpack');
 
   module.exports = {
     entry: './src/index.js',
@@ -121,7 +124,7 @@ __webpack.config.js__
     },
     plugins: [
       new webpack.ProvidePlugin({
--       lodash: 'lodash'
+-       _: 'lodash'
 +       join: ['lodash', 'join']
       })
     ]
@@ -156,6 +159,7 @@ __webpack.config.js__
 
 ``` diff
   const path = require('path');
+  const webpack = require('webpack');
 
   module.exports = {
     entry: './src/index.js',
@@ -213,6 +217,7 @@ __webpack.config.js__
 
 ``` diff
   const path = require('path');
+  const webpack = require('webpack');
 
   module.exports = {
     entry: './src/index.js',
@@ -323,6 +328,7 @@ __webpack.config.js__
 
 ``` diff
   const path = require('path');
+  const webpack = require('webpack');
 
   module.exports = {
 -   entry: './src/index.js',

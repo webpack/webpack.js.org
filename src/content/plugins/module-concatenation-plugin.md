@@ -15,7 +15,9 @@ related:
 new webpack.optimize.ModuleConcatenationPlugin()
 ```
 
-> 由于实现 ECMAScript 模块语法，作用域提升(Scope Hoisting)这个特定于此语法的功能才成为可能。`webpack` 可能会根据你正在使用的模块类型和[其他的情况](https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5)，回退到普通打包。
+> 这种连结行为被称为“作用域提升(scope hoisting)”。
+>
+> 由于实现 ECMAScript 模块语法，作用域提升(scope hoisting)这个特定于此语法的功能才成为可能。`webpack` 可能会根据你正在使用的模块类型和[其他的情况](https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5)，回退到普通打包。
 
 
 ## 绑定失败的优化[Optimization Bailouts]
@@ -72,8 +74,8 @@ function tryToAdd(group, module) {
   if (!result) {
     return false;
   }
-  module.dependencies.forEach(depenency => {
-    tryToAdd(group, depenency);
+  module.dependencies.forEach(dependency => {
+    tryToAdd(group, dependency);
   });
   group.merge(nextGroup);
   return true;
