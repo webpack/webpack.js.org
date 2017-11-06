@@ -230,7 +230,6 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 `--optimize-max-chunks`     | 限制 chunk 的数量 | [LimitChunkCountPlugin](/plugins/limit-chunk-count-plugin)
 `--optimize-min-chunk-size` | 限制 chunk 的最小体积               | [MinChunkSizePlugin](/plugins/min-chunk-size-plugin)
 `--optimize-minimize`       | 压缩混淆 javascript，并且把 loader 设置为 minimizing | [UglifyJsPlugin](/plugins/uglifyjs-webpack-plugin/) & [LoaderOptionsPlugin](/plugins/loader-options-plugin/)
-`--concatenate-modules` | 连结 ES 模块，尽可能移除模块包装容器(module wrappers) | [ModuleConcatenationPlugin](/plugins/module-concatenation-plugin/)
 
 
 ### Resolve 配置
