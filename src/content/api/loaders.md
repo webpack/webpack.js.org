@@ -262,7 +262,7 @@ Should a source map be generated. Since generating source maps can be an expensi
 ### `this.emitWarning`
 
 ```typescript
-emitWarning(message: string)
+emitWarning(warning: Error)
 ```
 
 Emit a warning.
@@ -271,7 +271,7 @@ Emit a warning.
 ### `this.emitError`
 
 ```typescript
-emitError(message: string)
+emitError(error: Error)
 ```
 
 Emit an error.
@@ -348,7 +348,7 @@ W> The usage of these properties is highly discouraged since we are planing to r
 exec(code: string, filename: string)
 ```
 
-Execute some code fragment like a module.
+Execute some code fragment like a module. See [this comment](https://github.com/webpack/webpack.js.org/issues/1268#issuecomment-313513988) for a replacement method if needed.
 
 
 ### `this.resolveSync`
