@@ -465,6 +465,11 @@ Usage via the CLI
 webpack-dev-server --open
 ```
 
+Specify which browser to open, for example: chrome. If no browser provided, default one will be used
+
+```bash
+webpack-dev-server --open 'Google Chrome'
+```
 
 ## `devServer.openPage`
 
