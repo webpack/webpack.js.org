@@ -15,49 +15,56 @@ A single result can be returned in **sync mode**. For multiple results the `this
 
 ## Examples
 
-### Sync Loader
+The following sections provide some basic examples of the different types of loaders. Note that the `map` and `meta` parameters are optional, see [`this.callback`](/api/loaders#this-callback) below.
 
-**sync-loader.js**
+### Synchronous Loaders
 
-```javascript
-module.exports = function(content) {
+Either `return` or `this.callback` can be used to return the transformed `content` synchronously:
+
+__sync-loader.js__
+
+``` js
+module.exports = function(content, map, meta) {
   return someSyncOperation(content);
 };
 ```
 
-**sync-loader-with-multiple-results.js**
+The `this.callback` method is more flexible as it allows multiple arguments to be passed as opposed to just the `content`.
 
-```javascript
-module.exports = function(content) {
-  this.callback(null, someSyncOperation(content), sourceMaps, ast);
+__sync-loader-with-multiple-results.js__
+
+``` js
+module.exports = function(content, map, meta) {
+  this.callback(null, someSyncOperation(content), sourceMaps, meta);
   return; // always return undefined when calling callback()
 };
 ```
 
+### Asynchronous Loaders
 
-### Async Loader
+For asynchronous loaders, [`this.async`]() is used to retrieve the `callback` function:
 
-**async-loader.js**
+__async-loader.js__
 
-```javascript
-module.exports = function(content) {
-    var callback = this.async();
-    someAsyncOperation(content, function(err, result) {
-        if(err) return callback(err);
-        callback(null, result);
-    });
+``` js
+module.exports = function(content, map, meta) {
+  var callback = this.async();
+  someAsyncOperation(content, function(err, result) {
+    if (err) return callback(err);
+    callback(null, result, map, meta);
+  });
 };
 ```
 
-**async-loader-with-multiple-results.js**
+__async-loader-with-multiple-results.js__
 
-```javascript
-module.exports = function(content) {
-    var callback = this.async();
-    someAsyncOperation(content, function(err, result, sourceMaps, ast) {
-        if(err) return callback(err);
-        callback(null, result, sourceMaps, ast);
-    });
+``` js
+module.exports = function(content, map, meta) {
+  var callback = this.async();
+  someAsyncOperation(content, function(err, result, sourceMaps, meta) {
+    if (err) return callback(err);
+    callback(null, result, sourceMaps, meta);
+  });
 };
 ```
 
@@ -147,17 +154,19 @@ A function that can be called synchronously or asynchronously in order to return
 
 ``` js
 this.callback(
-    err: Error | null,
-    content: string | Buffer,
-    sourceMap?: SourceMap,
-    abstractSyntaxTree?: AST
+  err: Error | null,
+  content: string | Buffer,
+  sourceMap?: SourceMap,
+  meta?: any
 );
 ```
 
 1. The first argument must be an `Error` or `null`
 2. The second argument a `string` or a [`Buffer`](https://nodejs.org/api/buffer.html).
 3. Optional: The third argument must be a source map that is parsable by [this module](https://github.com/mozilla/source-map).
-4. Optional: `AST` can be an Abstract Syntax Tree of the given language, like [`ESTree`](https://github.com/estree/estree). This value is ignored by webpack itself, but useful to speed up the build time if you want to share common ASTs between loaders.
+4. Optional: The fourth option, ignored by webpack, can be anything (e.g. some meta data).
+
+T> It can be useful to pass an abstract syntax tree (AST), like [`ESTree`](https://github.com/estree/estree), as the fourth argument (`meta`) to speed up the build time if you want to share common ASTs between loaders.
 
 In case this function is called, you should return undefined to avoid ambigious loader results.
 
