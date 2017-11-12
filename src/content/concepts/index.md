@@ -10,7 +10,7 @@ contributors:
   - TheDutchCoder
 ---
 
-从其提供的核心功能来看，*webpack* 是一个现代 JavaScript 应用程序的_模块打包器(module bundler)_。当 webpack 处理应用程序时，它会递归地构建一个_依赖关系图(dependency graph)_，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 _bundle_。
+本质上，*webpack* 是一个现代 JavaScript 应用程序的_模块打包器(module bundler)_。当 webpack 处理应用程序时，它会递归地构建一个_依赖关系图(dependency graph)_，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 _bundle_。
 
 它是[高度可配置的](/configuration)，但是，在开始前你需要先理解四个**核心概念**：
 
@@ -26,7 +26,7 @@ contributors:
 
 **入口起点(entry point)**指示 webpack 应该使用哪个模块，来作为构建其内部*依赖图*的开始。进入入口起点后，webpack 会找出有哪些模块和库是入口起点（直接和间接）依赖的。
 
-然后，处理每个依赖，并将其输出到名为 *bundles* 的文件中，我们将在下一章节详细讨论这个过程。
+每个依赖项随即被处理，最后输出到称之为 *bundles* 的文件中，我们将在下一章节详细讨论这个过程。
 
 可以通过在 [webpack 配置](/configuration)中配置 `entry` 属性，来指定一个入口起点（或多个入口起点）。
 
@@ -65,7 +65,7 @@ module.exports = {
 
 T> 你可能看到项目**生成(emitted 或 emit)**贯穿我们整个文档和[插件 API](/api/plugins)。它是“生产(produced)”或“排放(discharged)”的特殊术语。
 
-`output` 属性还有[更多可配置的特性](/configuration/output)，如果你想要了解更多关于 `output` 属性的概念，你可以通过[阅读核心章节]more in the concepts section](/concepts/output)来了解更多。
+T> `output` 属性还有[更多可配置的特性](/configuration/output)，如果你想要了解更多关于 `output` 属性的概念，你可以通过[阅读核心章节]more in the concepts section](/concepts/output)来了解更多。
 
 
 ## loader
@@ -113,7 +113,7 @@ loader 还有更多我们尚未提到的具体配置属性。
 
 ## 插件(plugins)
 
-loader 习惯用于转换某些类型的模块，而插件则可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，一直到重新定义环境中的变量。[插件接口](/api/plugins)功能极其强大，可以用来处理各种各样的任务。
+loader 被用于转换某些类型的模块，而插件则可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，一直到重新定义环境中的变量。[插件接口](/api/plugins)功能极其强大，可以用来处理各种各样的任务。
 
 想要使用一个插件，你只需要 `require()` 它，然后把它添加到 `plugins` 数组中。多数插件可以通过选项(option)自定义。你也可以在一个配置文件中因为不同目的而多次使用同一个插件，这时需要通过使用 `new` 操作符来创建它的一个实例。
 
