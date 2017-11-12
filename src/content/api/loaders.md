@@ -42,7 +42,7 @@ module.exports = function(content, map, meta) {
 
 ### Asynchronous Loaders
 
-For asynchronous loaders, [`this.async`]() is used to retrieve the `callback` function:
+For asynchronous loaders, [`this.async`](/api/loaders#this-async) is used to retrieve the `callback` function:
 
 __async-loader.js__
 
