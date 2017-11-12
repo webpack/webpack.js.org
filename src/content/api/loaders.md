@@ -261,7 +261,7 @@ T> loader 最初被设计为可以同时当 Babel transform 用。如果你编�
 ### `this.emitWarning`
 
 ```typescript
-emitWarning(message: string)
+emitWarning(warning: Error)
 ```
 
 发出一个警告。
@@ -270,7 +270,7 @@ emitWarning(message: string)
 ### `this.emitError`
 
 ```typescript
-emitError(message: string)
+emitError(error: Error)
 ```
 
 发出一个错误。

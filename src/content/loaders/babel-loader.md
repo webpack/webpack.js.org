@@ -12,20 +12,16 @@ __Notes:__ Issues with the output should be reported on the babel [issue tracker
 
 ## 安装
 
-> webpack 1.x | babel-loader <= 6.x
->
-> webpack 2.x | babel-loader >= 7.x （推荐）（^6.2.10 也可以运行，但会有不赞成的警告(deprecation warnings)）
->
-> webpack 3.x | babel-loader >= 7.1
+> webpack 3.x | babel-loader 8.x | babel 7.x
 
 ```bash
-yarn add babel-loader babel-core babel-preset-env webpack --dev
+npm install babel-loader@8.0.0-beta.0 @babel/core@next @babel/preset-env@next webpack
 ```
 
-我们推荐您使用 yarn，但还是可以使用 npm：
+> webpack 3.x babel-loader 7.x | babel 6.x
 
 ```bash
-npm install --save-dev babel-loader babel-core babel-preset-env webpack
+npm install babel-loader babel-core babel-preset-env webpack
 ```
 
 ## 用法
@@ -43,7 +39,7 @@ module: {
       use: {
         loader: 'babel-loader',
         options: {
-          presets: ['env']
+          presets: ['@babel/preset-env']
         }
       }
     }
@@ -67,8 +63,8 @@ module: {
       use: {
         loader: 'babel-loader',
         options: {
-          presets: ['env'],
-          plugins: [require('babel-plugin-transform-object-rest-spread')]
+          presets: ['@babel/preset-env'],
+          plugins: [require('@babel/plugin-transform-object-rest-spread')]
         }
       }
     }
@@ -119,8 +115,8 @@ rules: [
     use: {
       loader: 'babel-loader',
       options: {
-        presets: ['env'],
-        plugins: ['transform-runtime']
+        presets: ['@babel/preset-env'],
+        plugins: ['@babel/transform-runtime']
       }
     }
   }
@@ -142,7 +138,7 @@ rules: [
 下面这样的写法也没有作用：
 
 ```javascript
-require('babel-runtime/core-js/promise').default = require('bluebird');
+require('@babel/runtime/core-js/promise').default = require('bluebird');
 
 var promise = new Promise;
 ```
@@ -152,9 +148,9 @@ var promise = new Promise;
 ```javascript
 'use strict';
 
-var _Promise = require('babel-runtime/core-js/promise')['default'];
+var _Promise = require('@babel/runtime/core-js/promise')['default'];
 
-require('babel-runtime/core-js/promise')['default'] = require('bluebird');
+require('@babel/runtime/core-js/promise')['default'] = require('bluebird');
 
 var promise = new _Promise();
 ```
@@ -166,7 +162,7 @@ var promise = new _Promise();
 ```javascript
 // bootstrap.js
 
-require('babel-runtime/core-js/promise').default = require('bluebird');
+require('@babel/runtime/core-js/promise').default = require('bluebird');
 
 // ...
 

@@ -78,7 +78,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [ ".tsx", ".ts", ".js" ]
+    extensions: [ '.tsx', '.ts', '.js' ]
   },
   output: {
     filename: 'bundle.js',
@@ -139,7 +139,7 @@ __webpack.config.js__
       ]
     },
     resolve: {
-      extensions: [ ".tsx", ".ts", ".js" ]
+      extensions: [ '.tsx', '.ts', '.js' ]
     },
     output: {
       filename: 'bundle.js',
