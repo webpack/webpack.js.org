@@ -15,49 +15,56 @@ A single result can be returned in **sync mode**. For multiple results the `this
 
 ## Examples
 
-### Sync Loader
+The following sections provide some basic examples of the different types of loaders. Note that the `map` and `meta` parameters are optional, see [`this.callback`](/api/loaders#this-callback) below.
 
-**sync-loader.js**
+### Synchronous Loaders
 
-```javascript
-module.exports = function(content) {
+Either `return` or `this.callback` can be used to return the transformed `content` synchronously:
+
+__sync-loader.js__
+
+``` js
+module.exports = function(content, map, meta) {
   return someSyncOperation(content);
 };
 ```
 
-**sync-loader-with-multiple-results.js**
+The `this.callback` method is more flexible as it allows multiple arguments to be passed as opposed to just the `content`.
 
-```javascript
-module.exports = function(content) {
-  this.callback(null, someSyncOperation(content), sourceMaps, ast);
+__sync-loader-with-multiple-results.js__
+
+``` js
+module.exports = function(content, map, meta) {
+  this.callback(null, someSyncOperation(content), sourceMaps, meta);
   return; // always return undefined when calling callback()
 };
 ```
 
+### Asynchronous Loaders
 
-### Async Loader
+For asynchronous loaders, [`this.async`](/api/loaders#this-async) is used to retrieve the `callback` function:
 
-**async-loader.js**
+__async-loader.js__
 
-```javascript
-module.exports = function(content) {
-    var callback = this.async();
-    someAsyncOperation(content, function(err, result) {
-        if(err) return callback(err);
-        callback(null, result);
-    });
+``` js
+module.exports = function(content, map, meta) {
+  var callback = this.async();
+  someAsyncOperation(content, function(err, result) {
+    if (err) return callback(err);
+    callback(null, result, map, meta);
+  });
 };
 ```
 
-**async-loader-with-multiple-results.js**
+__async-loader-with-multiple-results.js__
 
-```javascript
-module.exports = function(content) {
-    var callback = this.async();
-    someAsyncOperation(content, function(err, result, sourceMaps, ast) {
-        if(err) return callback(err);
-        callback(null, result, sourceMaps, ast);
-    });
+``` js
+module.exports = function(content, map, meta) {
+  var callback = this.async();
+  someAsyncOperation(content, function(err, result, sourceMaps, meta) {
+    if (err) return callback(err);
+    callback(null, result, sourceMaps, meta);
+  });
 };
 ```
 
@@ -68,9 +75,9 @@ T> Loaders were originally designed to work in synchronous loader pipelines, lik
 
 By default, the resource file is converted to a UTF-8 string and passed to the loader. By setting the `raw` flag, the loader will receive the raw `Buffer`. Every loader is allowed to deliver its result as `String` or as `Buffer`. The compiler converts them between loaders.
 
-**raw-loader.js**
+__raw-loader.js__
 
-```javascript
+``` js
 module.exports = function(content) {
 	assert(content instanceof Buffer);
 	return someSyncOperation(content);
@@ -83,14 +90,15 @@ module.exports.raw = true;
 
 ### Pitching Loader
 
-Loaders are **always** called from right to left. But, in some cases, loaders do not care about the results of the previous loader or the resource. They only care for **metadata**. The `pitch` method on the loaders is called from **left to right** before the loaders are called (from right to left).
+Loaders are **always** called from right to left. But, in some cases, loaders do not care about the results of the previous loader or the resource. They only care about **metadata**. The `pitch` method on the loaders is called from **left to right** before the loaders are called (from right to left).
 
 If a loader delivers a result in the `pitch` method the process turns around and skips the remaining loaders, continuing with the calls to the more left loaders. `data` can be passed between pitch and normal call.
 
-```javascript
+``` js
 module.exports = function(content) {
 	return someSyncOperation(content, this.data.value);
 };
+
 module.exports.pitch = function(remainingRequest, precedingRequest, data) {
 	if(someCondition()) {
 		// fast exit
@@ -101,14 +109,14 @@ module.exports.pitch = function(remainingRequest, precedingRequest, data) {
 ```
 
 
-## The loader context
+## The Loader Context
 
 The loader context represents the properties that are available inside of a loader assigned to the `this` property.
 
 Given the following example this require call is used:
 In `/abc/file.js`:
 
-```javascript
+``` js
 require("./loader1?xyz!loader2!./resource?rrr");
 ```
 
@@ -137,26 +145,28 @@ In the example: `"/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/re
 1. If the loader was configured with an [`options`](/configuration/module/#useentry) object, this will point to that object.
 2. If the loader has no `options`, but was invoked with a query string, this will be a string starting with `?`.
 
-W> This property is deprecated as `options` is replacing `query`. Use the [`getOptions` method from the `loader-utils`](https://github.com/webpack/loader-utils#getoptions) to extract the given loader options.
+W> This property is deprecated as `options` is replacing `query`. Use the [`getOptions` method](https://github.com/webpack/loader-utils#getoptions) from `loader-utils` to extract the given loader options.
 
 
 ### `this.callback`
 
 A function that can be called synchronously or asynchronously in order to return multiple results. The expected arguments are:
 
-```typescript
+``` js
 this.callback(
-    err: Error | null,
-    content: string | Buffer,
-    sourceMap?: SourceMap,
-    abstractSyntaxTree?: AST
+  err: Error | null,
+  content: string | Buffer,
+  sourceMap?: SourceMap,
+  meta?: any
 );
 ```
 
 1. The first argument must be an `Error` or `null`
 2. The second argument a `string` or a [`Buffer`](https://nodejs.org/api/buffer.html).
 3. Optional: The third argument must be a source map that is parsable by [this module](https://github.com/mozilla/source-map).
-4. Optional: `AST` can be an Abstract Syntax Tree of the given language, like [`ESTree`](https://github.com/estree/estree). This value is ignored by webpack itself, but useful to speed up the build time if you want to share common ASTs between loaders.
+4. Optional: The fourth option, ignored by webpack, can be anything (e.g. some meta data).
+
+T> It can be useful to pass an abstract syntax tree (AST), like [`ESTree`](https://github.com/estree/estree), as the fourth argument (`meta`) to speed up the build time if you want to share common ASTs between loaders.
 
 In case this function is called, you should return undefined to avoid ambigious loader results.
 
@@ -175,7 +185,7 @@ A data object shared between the pitch and the normal phase.
 
 A function that sets the cacheable flag:
 
-```typescript
+``` typescript
 cacheable(flag = true: boolean)
 ```
 
@@ -188,13 +198,13 @@ A cacheable loader must have a deterministic result, when inputs and dependencie
 
 An array of all the loaders. It is writeable in the pitch phase.
 
-```typescript
+``` js
 loaders = [{request: string, path: string, query: string, module: function}]
 ```
 
 In the example:
 
-```javascript
+``` js
 [
   {
     request: "/abc/loader1.js?xyz",
@@ -261,7 +271,7 @@ Should a source map be generated. Since generating source maps can be an expensi
 
 ### `this.emitWarning`
 
-```typescript
+``` typescript
 emitWarning(warning: Error)
 ```
 
@@ -270,7 +280,7 @@ Emit a warning.
 
 ### `this.emitError`
 
-```typescript
+``` typescript
 emitError(error: Error)
 ```
 
@@ -279,7 +289,7 @@ Emit an error.
 
 ### `this.loadModule`
 
-```typescript
+``` typescript
 loadModule(request: string, callback: function(err, source, sourceMap, module))
 ```
 
@@ -288,7 +298,7 @@ Resolves the given request to a module, applies all configured loaders and calls
 
 ### `this.resolve`
 
-```typescript
+``` typescript
 resolve(context: string, request: string, callback: function(err, result: string))
 ```
 
@@ -297,7 +307,7 @@ Resolve a request like a require expression.
 
 ### `this.addDependency`
 
-```typescript
+``` typescript
 addDependency(file: string)
 dependency(file: string) // shortcut
 ```
@@ -307,7 +317,7 @@ Adds a file as dependency of the loader result in order to make them watchable. 
 
 ### `this.addContextDependency`
 
-```typescript
+``` typescript
 addContextDependency(directory: string)
 ```
 
@@ -316,7 +326,7 @@ Add a directory as dependency of the loader result.
 
 ### `this.clearDependencies`
 
-```typescript
+``` typescript
 clearDependencies()
 ```
 
@@ -325,7 +335,7 @@ Remove all dependencies of the loader result. Even initial dependencies and thes
 
 ### `this.emitFile`
 
-```typescript
+``` typescript
 emitFile(name: string, content: Buffer|string, sourceMap: {...})
 ```
 
@@ -344,7 +354,7 @@ W> The usage of these properties is highly discouraged since we are planing to r
 
 ### `this.exec`
 
-```typescript
+``` typescript
 exec(code: string, filename: string)
 ```
 
@@ -353,7 +363,7 @@ Execute some code fragment like a module. See [this comment](https://github.com/
 
 ### `this.resolveSync`
 
-```typescript
+``` typescript
 resolveSync(context: string, request: string) -> string
 ```
 
