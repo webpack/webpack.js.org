@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/347a64fb9a60396b8506.css" rel="stylesheet">
+      <link href="/decc3252c37bd2615f78.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -27,11 +27,12 @@
 bundles in the body using <code>script</code> tags. Just add the plugin to your webpack
 config as follows:</p>
 <pre><code class="lang-javascript"><span class="token keyword">var</span> HtmlWebpackPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;html-webpack-plugin&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;path&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">var</span> webpackConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token punctuation">:</span> <span class="token string">&apos;index.js&apos;</span><span class="token punctuation">,</span>
   output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    path<span class="token punctuation">:</span> <span class="token string">&apos;dist&apos;</span><span class="token punctuation">,</span>
+    path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&apos;./dist&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     filename<span class="token punctuation">:</span> <span class="token string">&apos;index_bundle.js&apos;</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">HtmlWebpackPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
