@@ -10,7 +10,7 @@ contributors:
   - TheDutchCoder
 ---
 
-At its core, *webpack* is a _module bundler_ for modern JavaScript applications. When webpack processes your application, it recursively builds a _dependency graph_ that includes every module your application needs, then packages all of those modules into one or more _bundles_.
+At its core, *webpack* is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it recursively builds a _dependency graph_ that includes every module your application needs, then packages all of those modules into one or more _bundles_.
 
 It is [incredibly configurable](/configuration), but to get started you only need to understand four **Core Concepts**:
 
