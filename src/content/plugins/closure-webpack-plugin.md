@@ -12,6 +12,7 @@ repo: https://github.com/webpack-contrib/closure-webpack-plugin
 It offers unmatched optimizations, provides type checking and can easily target transpilation to different versions of ECMASCRIPT.
 
 **Note:** This plugin is a very early beta and currently uses a custom build of closure-compiler while neccessary changes are integrated back into the main compiler repository.
+Only the java version of closure-compiler is currently supported.
 
 ## Usage example
 
@@ -35,8 +36,6 @@ new ClosureCompilerPlugin({mode: 'STANDARD'}, {
     In `AGGRESSIVE_BUNDLE` mode, the compiler performs additional optimizations of modules to produce a much smaller file, but
 is not compatible with all input modules.
 
-*Note: Only AGGRESSIVE_BUNDLE mode is currently implemented.*
-
 ## Compiler Flags
 
 The plugin controls certain compiler flags. The following flags should not be used in any mode:
@@ -56,14 +55,14 @@ const bar = require('bar');
 ```
 
 Aggressive Bundle Mode utilizes a custom runtime in which modules within a chunk file are all included in the same scope.
-This avoides [the cost of small modules](https://nolanlawson.com/2016/08/15/the-cost-of-small-modules/).
+This avoids [the cost of small modules](https://nolanlawson.com/2016/08/15/the-cost-of-small-modules/).
 
 In Aggressive Bundle Mode, a file can only appear in a single output chunk. Use the [Commons Chunk Plugin](https://webpack.js.org/plugins/commons-chunk-plugin/) to split duplicated files into a single output chunk.
 
 ## Tips for Use
  * Don't use babel - closure-compiler is also a transpiler.
-   If you need features not yet supported by closure-compiler, have babel
-   only target those features.
+   If you need [features not yet supported](https://github.com/google/closure-compiler/wiki/ECMAScript6) by closure-compiler, have babel
+   only target those features. 
    
    
 ## Maintainers

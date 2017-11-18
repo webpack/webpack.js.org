@@ -4,7 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/cache-loader/master/RE
 edit: https://github.com/webpack-contrib/cache-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/cache-loader
 ---
-Caches the result of following loaders on disk
+Caches the result of following loaders on disk (default) or in the database
 
 ## Install
 
@@ -40,8 +40,11 @@ module.exports = {
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|**`cacheDirectory`**|`{String}`|`path.resolve('.cache-loader')`|Provide a cache directory where cache items should be stored|
-|**`cacheIdentifier`**|`{String}`|`cache-loader:{version} {process.env.NODE_ENV}`|Provide an invalidation identifier which is used to generate the hashes. You can use it for extra dependencies of loaders.|
+|**`cacheKey`**|`{Function(options, request) -> {String}}`|`undefined`|Allows you to override default cache key generator|
+|**`cacheDirectory`**|`{String}`|`path.resolve('.cache-loader')`|Provide a cache directory where cache items should be stored (used for default read/write implementation)|
+|**`cacheIdentifier`**|`{String}`|`cache-loader:{version} {process.env.NODE_ENV}`|Provide an invalidation identifier which is used to generate the hashes. You can use it for extra dependencies of loaders (used for default read/write implementation)|
+|**`write`**|`{Function(cacheKey, data, callback) -> {void}}`|`undefined`|Allows you to override default write cache data to file (e.g. Redis, memcached)|
+|**`read`**|`{Function(cacheKey, callback) -> {void}}`|`undefined`|Allows you to override default read cache data from file|
 
 ## Examples
 
@@ -67,6 +70,52 @@ module.exports = {
 
 **webpack.config.js**
 ```js
+// Or different database client - memcached, mongodb, ...
+const redis = require('redis');
+const crypto = require('crypto');
+
+// ...
+// connect to client
+// ...
+
+const BUILD_CACHE_TIMEOUT = 24 * 3600; // 1 day
+
+function digest(str) {
+  return crypto.createHash('md5').update(str).digest('hex');
+}
+
+// Generate own cache key
+function cacheKey(options, request) {
+  return `build:cache:${digest(request)}`;
+}
+
+
+// Read data from database and parse them
+function read(key, callback) {
+  client.get(key, (err, result) => {
+    if (err) {
+      return callback(err);
+    }
+
+    if (!result) {
+      return callback(new Error(`Key ${key} not found`));
+    }
+
+    try {
+      let data = JSON.parse(result);
+      callback(null, data);
+    } catch (e) {
+      callback(e);
+    }
+  });
+}
+
+
+// Write data to database under cacheKey
+function write(key, data, callback) {
+  client.set(key, JSON.stringify(data), 'EX', BUILD_CACHE_TIMEOUT, callback);
+}
+
 module.exports = {
   module: {
     rules: [
@@ -76,7 +125,9 @@ module.exports = {
           {
             loader: 'cache-loader',
             options: {
-              cacheDirectory: path.resolve('.cache')
+              cacheKey,
+              read,
+              write,
             }
           },
           'babel-loader'
@@ -112,13 +163,6 @@ module.exports = {
           <img width="150" height="150" src="https://github.com/d3viant0ne.png?v=3&s=150">
           </br>
           Joshua Wiens
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/sapegin">
-          <img width="150" height="150" src="https://github.com/sapegin.png?v=3&s=150">
-          </br>
-          Artem Sapegin
         </a>
       </td>
       <td align="center">
