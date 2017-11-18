@@ -18,11 +18,11 @@ npm i -D uglifyjs-webpack-plugin
 
 **webpack.config.js**
 ```js
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   plugins: [
-    new UglifyJSPlugin()
+    new UglifyJsPlugin()
   ]
 }
 ```
@@ -46,7 +46,7 @@ module.exports = {
 **webpack.config.js**
 ```js
 [
-  new UglifyJSPlugin({
+  new UglifyJsPlugin({
     test: /\.js($|\?)/i
   })
 ]
@@ -57,7 +57,7 @@ module.exports = {
 **webpack.config.js**
 ```js
 [
-  new UglifyJSPlugin({
+  new UglifyJsPlugin({
     include: /\/includes/
   })
 ]
@@ -68,7 +68,7 @@ module.exports = {
 **webpack.config.js**
 ```js
 [
-  new UglifyJSPlugin({
+  new UglifyJsPlugin({
     exclude: /\/excludes/
   })
 ]
@@ -81,7 +81,7 @@ module.exports = {
 **webpack.config.js**
 ```js
 [
-  new UglifyJSPlugin({
+  new UglifyJsPlugin({
     cache: true
   })
 ]
@@ -95,7 +95,7 @@ Default path to cache directory: `node_modules/.cache/uglifyjs-webpack-plugin`.
 **webpack.config.js**
 ```js
 [
-  new UglifyJSPlugin({
+  new UglifyJsPlugin({
     cache: 'path/to/cache'
   })
 ]
@@ -110,7 +110,7 @@ Path to cache directory.
 **webpack.config.js**
 ```js
 [
-  new UglifyJSPlugin({
+  new UglifyJsPlugin({
     parallel: true
   })
 ]
@@ -124,7 +124,7 @@ Default number of concurrent runs: `os.cpus().length - 1`.
 **webpack.config.js**
 ```js
 [
-  new UglifyJSPlugin({
+  new UglifyJsPlugin({
     parallel: 4
   })
 ]
@@ -139,7 +139,7 @@ Number of concurrent runs.
 **webpack.config.js**
 ```js
 [
-  new UglifyJSPlugin({
+  new UglifyJsPlugin({
     sourceMap: true
   })
 ]
@@ -162,7 +162,7 @@ Number of concurrent runs.
 **webpack.config.js**
 ```js
 [
-  new UglifyJSPlugin({
+  new UglifyJsPlugin({
     uglifyOptions: {
       ie8: false,
       ecma: 8,
@@ -200,7 +200,7 @@ All comments that match the given expression (resp. are evaluated to `true` by t
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
 |**`condition`**|`{Regex\|Function}`|``|Regular Expression or function (see previous point)|
-|**`filename`**|`{String\|Function}`|`compilation.assets[file]`|The file where the extracted comments will be stored. Can be either a `{String}` or a `{Function<(string) -> {String}>}`, which will be given the original filename. Default is to append the suffix `.LICENSE` to the original filename|
+|**`filename`**|`{String\|Function}`|`${file}.LICENSE`|The file where the extracted comments will be stored. Can be either a `{String}` or a `{Function<(string) -> {String}>}`, which will be given the original filename. Default is to append the suffix `.LICENSE` to the original filename|
 |**`banner`**|`{Boolean\|String\|Function}`|`/*! For license information please see ${filename}.js.LICENSE */`|The banner text that points to the extracted file and will be added on top of the original file. Can be `false` (no banner), a `{String}`, or a `{Function<(string) -> {String}` that will be called with the filename where extracted comments have been stored. Will be wrapped into comment|
 
 ### `warningsFilter`
