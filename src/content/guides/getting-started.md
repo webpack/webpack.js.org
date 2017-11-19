@@ -217,7 +217,7 @@ bundle.js  544 kB       0  [emitted]  [big]  main
    [3] ./src/index.js 278 bytes {0} [built]
 ```
 
-W> Note that when calling `webpack` via its path on windows, you must use forward slashes instead, e.g. `node_modules\.bin\webpack --config webpack.config.js`.
+W> Note that when calling `webpack` via its path on windows, you must use backslashes instead, e.g. `node_modules\.bin\webpack --config webpack.config.js`.
 
 T> If a `webpack.config.js` is present, the `webpack` command picks it up by default. We use the `--config` option here only to show that you can pass a config of any name. This will be useful for more complex configurations that need to be split into multiple files.
 
