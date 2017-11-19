@@ -43,9 +43,9 @@ module.exports = {
 
 There are three ways to use loaders in your application:
 
-* Configuration (recommended): Specify them in your __webpack.config.js__ file.
-* Inline: Specify them explicitly in each `import` statement.
-* CLI: Specify them within a shell command.
+* [Configuration](#configuration) (recommended): Specify them in your __webpack.config.js__ file.
+* [Inline](#inline): Specify them explicitly in each `import` statement.
+* [CLI](#cli): Specify them within a shell command.
 
 
 ### Configuration
