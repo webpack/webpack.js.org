@@ -70,7 +70,7 @@ T> `output` 属性还有[更多可配置的特性](/configuration/output)，如�
 
 ## loader
 
-*loader* 能够让 webpack 额外去处理那些非 JavaScript 文件（webpack 自身只理解 JavaScript）。loader 可以将所有类型的文件转换为有效的[模块](/concepts/modules)，然后再利用 webpack 的打包能力，对它们进行处理。
+*loader* 让 webpack 能够去处理那些非 JavaScript 文件（webpack 自身只理解 JavaScript）。loader 可以将所有类型的文件转换为 webpack 能够处理的有效[模块](/concepts/modules)，然后你就可以利用 webpack 的打包能力，对它们进行处理。
 
 本质上，webpack loader 将所有类型的文件，转换为应用程序的依赖图可以直接引用的模块。
 
