@@ -140,7 +140,7 @@ __dist/index.html__
 
 In this setup, `index.js` explicitly requires `lodash` to be present, and binds it as `_` (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.
 
-With that said, let's run `npx webpack` with our script as the [entry point](/concepts/entry-points) and `bundle.js` as the [output](/concepts/output). The `npx` command (available with node 8.2 or higher) runs the binary of the webpack package we installed in the beginning:
+With that said, let's run `npx webpack` with our script as the [entry point](/concepts/entry-points) and `bundle.js` as the [output](/concepts/output). The `npx` command, which ships with node 8.2 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
 
 ``` bash
 npx webpack src/index.js dist/bundle.js
