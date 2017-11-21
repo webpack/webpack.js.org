@@ -59,7 +59,7 @@ export function cube(x) {
 }
 ```
 
-With that in place, let's update our entry script to utilize this one of these new methods and remove `lodash` for simplicity:
+With that in place, let's update our entry script to utilize one of these new methods and remove `lodash` for simplicity:
 
 __src/index.js__
 
@@ -185,6 +185,6 @@ So, what we've learned is that in order to take advantage of _tree shaking_, you
 - Use ES2015 module syntax (i.e. `import` and `export`).
 - Include a minifier that supports dead code removal (e.g. the `UglifyJSPlugin`).
 
-You can imagine your application as a tree. The source code and libraries you actually use represent the green, living leaves of the tree. Dead code represents the brown, dead leaves of the tree that are consumed by autumn. In order to get rid of the dead leaves, you have to shake the tree, causing them fall.
+You can imagine your application as a tree. The source code and libraries you actually use represent the green, living leaves of the tree. Dead code represents the brown, dead leaves of the tree that are consumed by autumn. In order to get rid of the dead leaves, you have to shake the tree, causing them to fall.
 
 If you are interested in more ways to optimize your output, please jump to the next guide for details on building for [production](/guides/production).
