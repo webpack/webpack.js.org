@@ -29,7 +29,7 @@ While most users can get away with just using the CLI along with a configuration
 
 ## Loaders
 
-Loaders are transformations that are applied to the source code of a module. They are written as functions that take accept source code as a parameter and return a new version of that code with tranformations applied.
+Loaders are transformations that are applied to the source code of a module. They are written as functions that accept source code as a parameter and return a new version of that code with tranformations applied.
 
 [Learn more!](/api/loaders)
 
