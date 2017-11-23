@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/405a27990529e338a18a.css" rel="stylesheet">
+      <link href="/d931bc2ba214853cbe7f.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -163,7 +163,7 @@ This is the simplest format for a plugin. Many useful events like <code>&quot;co
 <li><strong>waterfall</strong> Plugins applied using</li>
 </ul>
 <p><code>applyPluginsWaterfall(name: string, init: any, args: any...)</code></p>
-<p>Here each of the plugins are called one after the other with the args from the return value of the previous plugin. The plugin must take into consider the order of its execution.
+<p>Here each of the plugins are called one after the other with the args from the return value of the previous plugin. The plugin must take the order of its execution into account.
 It must accept arguments from the previous plugin that was executed. The value for the first plugin is <code>init</code>. This pattern is used in the Tapable instances which are related to the <code>webpack</code> templates like <code>ModuleTemplate</code>, <code>ChunkTemplate</code> etc.</p>
 <ul>
 <li><strong>asynchronous</strong> When all the plugins are applied asynchronously using</li>
