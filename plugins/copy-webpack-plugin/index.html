@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/d931bc2ba214853cbe7f.css" rel="stylesheet">
+      <link href="/01bdc6b8cf03142af6aa.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -358,8 +358,8 @@
           </div>
         </div>
     </div><h3 class="header"><a class="anchor" href="#examples" id="examples"></a><span class="text">Examples</span><a class="icon-link" href="#examples"></a></h3>
-<pre><code class="lang-javascript"><span class="token keyword">var</span> CopyWebpackPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;copy-webpack-plugin&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;path&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="lang-javascript"><span class="token keyword">const</span> CopyWebpackPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;copy-webpack-plugin&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;path&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
     context<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&apos;app&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -446,8 +446,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Globally patch fs with <a href="https://www.npmjs.com/package/graceful-fs">graceful-fs</a></p>
 <p><code>npm install graceful-fs --save-dev</code></p>
 <p>At the top of your webpack config, insert this</p>
-<pre><code>var fs <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">&apos;fs&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-var gracefulFs <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">&apos;graceful-fs&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code>const fs <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">&apos;fs&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+const gracefulFs <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">&apos;graceful-fs&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 gracefulFs.gracefulify<span class="token punctuation">(</span>fs<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre><p>See <a href="https://github.com/kevlened/copy-webpack-plugin/issues/59#issuecomment-228563990">this issue</a> for more details</p>
 <h4 class="header"><a class="anchor" href="#this-doesn-t-copy-my-files-with-webpack-dev-server" id="this-doesn-t-copy-my-files-with-webpack-dev-server"></a><span class="text">This doesn&apos;t copy my files with webpack-dev-server</span><a class="icon-link" href="#this-doesn-t-copy-my-files-with-webpack-dev-server"></a></h4>
