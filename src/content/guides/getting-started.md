@@ -12,6 +12,7 @@ contributors:
   - jecoopr
   - TheDutchCoder
   - sudarsangp
+  - Vanguard90
 ---
 
 As you may already know, webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interface with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
@@ -215,6 +216,8 @@ bundle.js  544 kB       0  [emitted]  [big]  main
    [2] (webpack)/buildin/module.js 517 bytes {0} [built]
    [3] ./src/index.js 278 bytes {0} [built]
 ```
+
+W> Note that when calling `webpack` via its path on windows, you must use backslashes instead, e.g. `node_modules\.bin\webpack --config webpack.config.js`.
 
 T> If a `webpack.config.js` is present, the `webpack` command picks it up by default. We use the `--config` option here only to show that you can pass a config of any name. This will be useful for more complex configurations that need to be split into multiple files.
 
