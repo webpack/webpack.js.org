@@ -21,7 +21,7 @@ const commonConfig = env => ({
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.jsx?$/,
         use: [
           'babel-loader',
           {
