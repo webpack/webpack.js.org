@@ -1,30 +1,17 @@
 import React from 'react';
 import Interactive from 'antwar-interactive';
 import Container from '../Container/Container';
-import VoteApp from './App';
-import '../../styles';
-import './Vote.scss';
-import './App.scss';
-import './Influence.scss';
-import './Button/Button.scss';
+import VoteApp from 'webpack.vote/dist/vote.bundle.js';
+import 'webpack.vote/dist/style.min.css';
 
-const Vote = ({ section, page }) => {
-  let arr = page.url.split('/').filter(Boolean);
-  let name = arr[arr.length - 1];
-
-  return (
-    <Container className="vote-list">
-
-      <section className="vote-list__content">
-        <Interactive
-          id="src/components/Vote/App.jsx"
-          component={ VoteApp }
-          name={ name === 'vote' ? 'todo' : name }
-        />
-      </section>
-    </Container>
-  );
-};
+const Vote = ({ section, page }) => (
+  <Container className="vote">
+    <Interactive
+      id="webpack.vote/dist/vote.bundle.js"
+      component={ VoteApp }
+      name={ 'todo' } />
+  </Container>
+);
 
 Vote.title = 'Vote';
 
