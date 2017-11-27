@@ -29,8 +29,12 @@ The following options are supported:
 - `module` (`boolean`): Indicates whether loaders should generate source maps (defaults to `true`).
 - `columns` (`boolean`): Indicates whether column mappings should be used (defaults to `true`).
 - `lineToLine` (`object`): Simplify and speed up source mapping by using line to line source mappings for matched modules.**
+- `publicPath` (`string`): Emits absolute URLs with public path prefix, e.g. `https://example.com/project/`
+- `fileContext` (`string`): Makes the `[file]` argument relative to this directory. ***
 
 The `lineToLine` object allows for the same `test`, `include`, and `exclude` options described above.
+
+The `fileContext` is useful when you want to store your source maps in an upper level directory to avoid `../../` appearing in the absolute `[url]`.
 
 T> Setting `module` and/or `columns` to `false` will yield less accurate source maps but will also improve compilation performance significantly.
 
@@ -58,3 +62,31 @@ new webpack.SourceMapDevToolPlugin({
   filename: '[name].map',
 }),
 ```
+
+And for cases when sourcemaps are stored in the upper level directory:
+
+
+```javascript
+project
+│  files...
+└───build
+│       └───public
+│       │       │   bundle-[hash].js
+│       │       │   ...
+│       │   
+│       └───sourcemaps
+│       │       │   bundle-[hash].js.map
+│       │       │   ...
+```
+
+With next config:
+
+```javascript
+new webpack.SourceMapDevToolPlugin({
+  filename: "sourcemaps/[file].map",
+  publicPath: "https://example.com/project/",
+  fileContext: "public"
+}),
+```
+
+Will produce an URL `https://10.10.10.10/project/sourcemaps/bundle-[hash].js.map`
