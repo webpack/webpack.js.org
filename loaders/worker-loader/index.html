@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/0859c360f091aef214fb.css" rel="stylesheet">
+      <link href="/9bfdd326896b234d3cd0.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -250,32 +250,32 @@ self<span class="token punctuation">.</span><span class="token function">addEven
 <h3 class="header"><a class="anchor" href="#integrating-with-typescript" id="integrating-with-typescript"></a><span class="text"><code>Integrating with TypeScript</code></span><a class="icon-link" href="#integrating-with-typescript"></a></h3>
 <p>To integrate with TypeScript, you will need to define a custom module for the exports of your worker</p>
 <p><strong>typings/custom.d.ts</strong></p>
-<pre><code class="lang-ts">declare module &quot;worker-loader!*&quot; {
-  class WebpackWorker extends Worker {
-    constructor();
-  }
+<pre><code class="lang-typescript"><span class="token keyword">declare</span> <span class="token keyword">module</span> <span class="token string">&quot;worker-loader!*&quot;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">class</span> <span class="token class-name">WebpackWorker</span> <span class="token keyword">extends</span> <span class="token class-name">Worker</span> <span class="token punctuation">{</span>
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
-  export = WebpackWorker;
-}
+  <span class="token keyword">export</span> <span class="token operator">=</span> WebpackWorker<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p><strong>Worker.ts</strong></p>
-<pre><code class="lang-ts">const ctx: Worker = self as any;
+<pre><code class="lang-typescript"><span class="token keyword">const</span> ctx<span class="token punctuation">:</span> Worker <span class="token operator">=</span> self as <span class="token keyword">any</span><span class="token punctuation">;</span>
 
-// Post data to parent thread
-ctx.postMessage({ foo: &quot;foo&quot; });
+<span class="token comment" spellcheck="true">// Post data to parent thread</span>
+ctx<span class="token punctuation">.</span><span class="token function">postMessage</span><span class="token punctuation">(</span><span class="token punctuation">{</span> foo<span class="token punctuation">:</span> <span class="token string">&quot;foo&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-// Respond to message from parent thread
-ctx.addEventListener(&quot;message&quot;, (event) =&gt; console.log(event));
+<span class="token comment" spellcheck="true">// Respond to message from parent thread</span>
+ctx<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">&quot;message&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p><strong>App.ts</strong></p>
-<pre><code class="lang-ts">import Worker = require(&quot;worker-loader!./Worker&quot;);
+<pre><code class="lang-typescript"><span class="token keyword">import</span> Worker <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;worker-loader!./Worker&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-const worker = new Worker();
+<span class="token keyword">const</span> worker <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Worker</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-worker.postMessage({ a: 1 });
-worker.onmessage = (event) =&gt; {};
+worker<span class="token punctuation">.</span><span class="token function">postMessage</span><span class="token punctuation">(</span><span class="token punctuation">{</span> a<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+worker<span class="token punctuation">.</span>onmessage <span class="token operator">=</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-worker.addEventListener(&quot;message&quot;, (event) =&gt; {});
+worker<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">&quot;message&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <h3 class="header"><a class="anchor" href="#cross-origin-policy" id="cross-origin-policy"></a><span class="text"><code>Cross-Origin Policy</code></span><a class="icon-link" href="#cross-origin-policy"></a></h3>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API"><code>WebWorkers</code></a> are restricted by a <a href="https://en.wikipedia.org/wiki/Same-origin_policy">same-origin policy</a>, so if your <code>webpack</code> assets are not being served from the same origin as your application, their download may be blocked by your browser. This scenario can commonly occur if you are hosting your assets under a CDN domain. Even downloads from the <code>webpack-dev-server</code> could be blocked. There are two workarounds</p>
