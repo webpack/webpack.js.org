@@ -126,7 +126,7 @@ export default (
 );
 ```
 
-W> 如果你在其他地方也使用了 Babel 并且把`模块(modules)`设置为了 `false`，那么你要么同时维护两份单独的 `.babelrc` 文件，要么使用 `conts jsxobj = requrie('jsxojb');` 并且使用 `moduel.exports` 而不是新版本的 `import` 和 `export` 语法。这是因为尽管 Node.js 已经支持了许多 ES6 的新特性，然而还无法支持 ES6 模块语法。
+W> 如果你在其他地方也使用了 Babel 并且把`模块(modules)`设置为了 `false`，那么你要么同时维护两份单独的 `.babelrc` 文件，要么使用 `conts jsxobj = requrie('jsxobj');` 并且使用 `moduel.exports` 而不是新版本的 `import` 和 `export` 语法。这是因为尽管 Node.js 已经支持了许多 ES6 的新特性，然而还无法支持 ES6 模块语法。
 
 ***
 
