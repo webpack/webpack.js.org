@@ -90,8 +90,6 @@ What we've essentially done here is tell webpack...
 If we run a build, we should still see the same output:
 
 ``` bash
-./node_modules/.bin/webpack --config webpack.conf.js
-
 Hash: f450fa59fa951c68c416
 Version: webpack 2.2.0
 Time: 343ms
