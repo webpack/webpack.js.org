@@ -31,7 +31,7 @@ const Splash = () => (
         <h2>近期赞助</h2>
         <Support rank="latest" />
 
-        <h2>平台赞助</h2>
+        <h2>白金赞助</h2>
         <Support rank="platinum" />
 
         <h2>金牌赞助</h2>
