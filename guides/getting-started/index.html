@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/12f5236facf74866eaf6.css" rel="stylesheet">
+      <link href="/ecea186cf8b896e6cd09.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -108,8 +108,8 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
   &lt;/html&gt;
 </code></pre>
 <p>In this setup, <code>index.js</code> explicitly requires <code>lodash</code> to be present, and binds it as <code>_</code> (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.</p>
-<p>With that said, let&apos;s run <code>webpack</code> with our script as the <a href="/concepts/entry-points">entry point</a> and <code>bundle.js</code> as the <a href="/concepts/output">output</a>:</p>
-<pre><code class="lang-bash">./node_modules/.bin/webpack src/index.js dist/bundle.js
+<p>With that said, let&apos;s run <code>npx webpack</code> with our script as the <a href="/concepts/entry-points">entry point</a> and <code>bundle.js</code> as the <a href="/concepts/output">output</a>. The <code>npx</code> command, which ships with Node 8.2 or higher, runs the webpack binary (<code>./node_modules/.bin/webpack</code>) of the webpack package we installed in the beginning:</p>
+<pre><code class="lang-bash">npx webpack src/index.js dist/bundle.js
 
 Hash: ff6c1d39b26f89b3b7bb
 Version: webpack 2.2.0
@@ -149,7 +149,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 </code></pre>
 <p>Now, let&apos;s run the build again but instead using our new configuration:</p>
-<pre><code class="lang-bash">./node_modules/.bin/webpack --config webpack.config.js
+<pre><code class="lang-bash">npx webpack --config webpack.config.js
 
 Hash: ff6c1d39b26f89b3b7bb
 Version: webpack 2.2.0
@@ -173,7 +173,7 @@ bundle.js  544 kB       0  <span class="token punctuation">[</span>emitted<span 
   ...
 <span class="token punctuation">}</span>
 </code></pre>
-<p>Now the <code>npm run build</code> command can be used in place of the longer commands we used earlier. Note that within <code>scripts</code> we can reference locally installed npm packages by name instead of writing out the entire path. This convention is the standard in most npm-based projects and allows us to directly call <code>webpack</code>, instead of <code>./node_modules/.bin/webpack</code></p>
+<p>Now the <code>npm run build</code> command can be used in place of the <code>npx</code> command we used earlier. Note that within <code>scripts</code> we can reference locally installed npm packages by name the same way we did with <code>npx</code>. This convention is the standard in most npm-based projects because it allows all contributors to use the same set of common scripts (each with flags like <code>--config</code> if necessary).</p>
 <p>Now run the following command and see if your script alias works:</p>
 <pre><code class="lang-bash">npm run build
 

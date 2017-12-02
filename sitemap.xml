@@ -37,10 +37,10 @@
         <loc>https://webpack.js.org/license/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/index.html</loc>
+        <loc>https://webpack.js.org/organization/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/organization/index.html</loc>
+        <loc>https://webpack.js.org/loaders/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/index.html</loc>
@@ -100,9 +100,6 @@
         <loc>https://webpack.js.org/api/resolver/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/stats/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/api/tapable/index.html</loc>
     </url>
     <url>
@@ -128,6 +125,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/module-resolution/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/api/stats/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/modules/index.html</loc>
@@ -220,10 +220,10 @@
         <loc>https://webpack.js.org/development/release-process/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/get-started/install-webpack/index.html</loc>
+        <loc>https://webpack.js.org/get-started/why-webpack/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/get-started/why-webpack/index.html</loc>
+        <loc>https://webpack.js.org/get-started/install-webpack/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/asset-management/index.html</loc>
@@ -343,9 +343,6 @@
         <loc>https://webpack.js.org/loaders/file-loader/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/gzip-loader/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/loaders/html-loader/index.html</loc>
     </url>
     <url>
@@ -353,6 +350,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/imports-loader/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/loaders/gzip-loader/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/istanbul-instrumenter-loader/index.html</loc>
