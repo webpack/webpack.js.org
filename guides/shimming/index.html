@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/1313cf223861d6d11881.css" rel="stylesheet">
+      <link href="/d8d385fa38f36297b8ab.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -71,7 +71,15 @@
 <p>If you encounter at least one instance of the variable <code>lodash</code>, include the <code>lodash</code> package and provide it to the modules that need it.</p>
 </blockquote>
 <p>If we run a build, we should still see the same output:</p>
-<pre><code class="lang-bash">TODO: Include output
+<pre><code class="lang-bash">Hash: f450fa59fa951c68c416
+Version: webpack 2.2.0
+Time: 343ms
+    Asset    Size  Chunks                    Chunk Names
+bundle.js  544 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  main
+   <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./~/lodash/lodash.js 540 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>1<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 509 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>2<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>3<span class="token punctuation">]</span> ./src/index.js 189 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
 </code></pre>
 <p>We can also use the <code>ProvidePlugin</code> to expose a single export of a module by configuring it with an &quot;array path&quot; (e.g. <code>[module, child, ...children?]</code>). So let&apos;s imagine we only wanted to provide the <code>join</code> method from <code>lodash</code> wherever it&apos;s invoked:</p>
 <p><strong>src/index.js</strong></p>
