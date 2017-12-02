@@ -52,22 +52,22 @@
         <loc>https://webpack.js.org/starter-kits/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/support/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/vote/index.html</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/support/index.html</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/writers-guide/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/api/cli/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/compilation/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/compiler/index.html</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/api/cli/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/hot-module-replacement/index.html</loc>
@@ -127,10 +127,10 @@
         <loc>https://webpack.js.org/concepts/manifest/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/module-resolution/index.html</loc>
+        <loc>https://webpack.js.org/concepts/modules/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/modules/index.html</loc>
+        <loc>https://webpack.js.org/concepts/module-resolution/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/output/index.html</loc>
@@ -229,13 +229,13 @@
         <loc>https://webpack.js.org/guides/asset-management/index.html</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/guides/author-libraries/index.html</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/guides/build-performance/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/caching/index.html</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/guides/author-libraries/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/code-splitting/index.html</loc>
@@ -436,10 +436,10 @@
         <loc>https://webpack.js.org/plugins/babel-minify-webpack-plugin/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/closure-webpack-plugin/index.html</loc>
+        <loc>https://webpack.js.org/plugins/banner-plugin/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/banner-plugin/index.html</loc>
+        <loc>https://webpack.js.org/plugins/closure-webpack-plugin/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/commons-chunk-plugin/index.html</loc>
