@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/d8d385fa38f36297b8ab.css" rel="stylesheet">
+      <link href="/12f5236facf74866eaf6.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -164,7 +164,7 @@ plugins<span class="token punctuation">:</span> <span class="token punctuation">
   name<span class="token punctuation">:</span> <span class="token string">&quot;vendor&quot;</span><span class="token punctuation">,</span>
   minChunks<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>module<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// this assumes your vendor imports exist in the node_modules directory</span>
-    <span class="token keyword">return</span> module<span class="token punctuation">.</span>context <span class="token operator">&amp;&amp;</span> module<span class="token punctuation">.</span>context<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">&quot;node_modules&quot;</span><span class="token punctuation">)</span> <span class="token operator">!==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> module<span class="token punctuation">.</span>context <span class="token operator">&amp;&amp;</span> module<span class="token punctuation">.</span>context<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span><span class="token string">&quot;node_modules&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 </code></pre>
