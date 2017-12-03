@@ -24,7 +24,7 @@ require("expose-loader?libraryName!./file.js");
 
 例如，假设你要将 jQuery 暴露至全局并称为 `$`：
 
-```
+```js
 require("expose-loader?$!jquery");
 ```
 
@@ -33,7 +33,7 @@ require("expose-loader?$!jquery");
 或者，你可以通过配置文件来设置：
 
 webpack v1 用法
-```
+```js
 module: {
   loaders: [
     { test: require.resolve("jquery"), loader: "expose-loader?$" }
@@ -41,7 +41,7 @@ module: {
 }
 ```
 webpack v2 用法
-```
+```js
 module: {
   rules: [{
     test: require.resolve('jquery'),
@@ -57,7 +57,7 @@ module: {
 对于多个暴露，您可以在 loader 字符串中使用 `!`：
 
 webpack v1 用法
-```
+```js
 module: {
   loaders: [
     { test: require.resolve("jquery"), loader: "expose-loader?$!expose-loader?jQuery" },
@@ -65,7 +65,7 @@ module: {
 }
 ```
 webpack v2 用法
-```
+```js
 module: {
   rules: [{
           test: require.resolve('jquery'),
