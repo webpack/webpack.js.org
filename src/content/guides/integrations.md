@@ -24,13 +24,13 @@ contributors:
 
 ## Grunt
 
-For those using Grunt, we recommend the [`grunt-webpack`](https://www.npmjs.com/package/grunt-webpack) package. With `grunt-webpack` you can run webpack or [webpack-dev-server](https://github.com/webpack/webpack-dev-server) as a task, get access to stats within [template tags](https://gruntjs.com/api/grunt.template), split development and production configurations and more. Start by installing `grunt-webpack` as well as `webpack` itself if you haven't already:
+对于那些使用 Grunt 的人，我们推荐使用 [`grunt-webpack`](https://www.npmjs.com/package/grunt-webpack) 包(package)。使用 `grunt-webpack` 你可以将 webpack 或 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 作为一项任务(task)执行，访问[模板标签(template tags)](https://gruntjs.com/api/grunt.template)中的统计信息，拆分开发和生产配置等等。如果你还没有安装过 `grunt-webpack` 和 `webpack`，请先安装它们：
 
 ``` bash
 npm i --save-dev grunt-webpack webpack
 ```
 
-Then register a configuration and load the task:
+然后注册一个配置并加载任务：
 
 __Gruntfile.js__
 
@@ -52,18 +52,18 @@ module.exports = function(grunt) {
 };
 ```
 
-For more information, please visit the [repository](https://github.com/webpack-contrib/grunt-webpack).
+获取更多信息，请查看[本仓库](https://github.com/webpack-contrib/grunt-webpack)。
 
 
 ## Gulp
 
-Gulp is also a fairly straightforward integration with the help of the [`webpack-stream`](https://github.com/shama/webpack-stream) package (a.k.a. `gulp-webpack`). In this case, it is unnecessary to install `webpack` separately as it is a direct dependency of `webpack-stream`:
+在 [`webpack-stream`](https://github.com/shama/webpack-stream) 包(package)（也称作 `gulp-webpack`） 的帮助下，也可以很简单方便的将 Gulp 与 webpack 集成。在这种情况下，不需要单独安装 `webpack` ，因为它是 `webpack-stream` 直接依赖：
 
 ``` bash
 npm i --save-dev webpack-stream
 ```
 
-Just `require('webpack-stream')` instead of `webpack` and optionally pass it an configuration:
+只需要把 `webpack` 替换为 `require('webpack-stream')`，并传递一个配置文件就可以了：
 
 __gulpfile.js__
 
@@ -73,30 +73,30 @@ var webpack = require('webpack-stream');
 gulp.task('default', function() {
   return gulp.src('src/entry.js')
     .pipe(webpack({
-      // Any configuration options...
+      // 一些配置选项……
     }))
     .pipe(gulp.dest('dist/'));
 });
 ```
 
-For more information, please visit the [repository](https://github.com/shama/webpack-stream).
+获取更多信息，请查看[本仓库](https://github.com/shama/webpack-stream)。
 
 
 ## Mocha
 
-The [`mocha-webpack`](https://github.com/zinserjan/mocha-webpack) utility can be used for a clean integration with Mocha. The repository offers more details on the pros and cons but essentially `mocha-webpack` is a simple wrapper that provides almost the same CLI as Mocha itself and provides various webpack functionality like an improved watch mode and improved path resolution. Here is a small example of how you would install it and use it to run a test suite (found within `./test`):
+[`mocha-webpack`](https://github.com/zinserjan/mocha-webpack) 可以用来将 Mocha 与 webpack 完全集成。这个仓库提供了很多关于工具优势和缺点方面的细节，但 `mocha-webpack` 还算是一层简单的封装，提供与 Mocha 几乎相同的 CLI，并提供各种 webpack 功能，例如改进了 watch 模式和优化了路径分析(path resolution)。这里是一个如何安装并使用它来运行测试套件的小例子（在 `./test` 中找到）：
 
 ``` bash
 npm i --save-dev webpack mocha mocha-webpack
 mocha-webpack 'test/**/*.js'
 ```
 
-For more information, please visit the [repository](https://github.com/zinserjan/mocha-webpack).
+获取更多信息，请查看[本仓库](https://github.com/zinserjan/mocha-webpack)。
 
 
 ## Karma
 
-The [`karma-webpack`](https://github.com/webpack-contrib/karma-webpack) package allows you to use webpack to pre-process files in [Karma](http://karma-runner.github.io/1.0/index.html). It also makes use of [`webpack-dev-middleware`](https://github.com/webpack/webpack-dev-middleware) and allows passing configurations for both. A simple example may look something like this:
+[`karma-webpack`](https://github.com/webpack-contrib/karma-webpack) 包(package)允许你使用 webpack 预处理 [Karma](http://karma-runner.github.io/1.0/index.html) 中的文件。它也可以使用 [`webpack-dev-middleware`](https://github.com/webpack/webpack-dev-middleware)，并允许传递两者的配置。下面是一个简单的示例：
 
 ``` bash
 npm i --save-dev webpack karma karma-webpack
@@ -116,13 +116,17 @@ module.exports = function(config) {
       'test/**/*_test.js': [ 'webpack' ]
     },
     webpack: {
-      // Any custom webpack configuration...
+      // 一些自定义的 webpack 配置……
     },
     webpackMiddleware: {
-      // Any custom webpack-dev-middleware configuration...
+      // 一些自定义的 webpack-dev-middleware 配置……
     }
   });
 };
 ```
 
-For more information, please visit the [repository](https://github.com/webpack-contrib/karma-webpack).
+获取更多信息，请访问[本仓库](https://github.com/webpack-contrib/karma-webpack)。
+
+***
+
+> 原文：https://webpack.js.org/guides/integrations/
