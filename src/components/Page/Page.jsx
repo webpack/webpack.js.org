@@ -5,10 +5,10 @@ import Sidebar from '../Sidebar/Sidebar';
 import PageLinks from '../PageLinks/PageLinks';
 import Gitter from '../Gitter/Gitter';
 import Contributors from '../Contributors/Contributors';
-import Sponsors from '../Sponsors/Sponsors';
+// import Sponsors from '../Sponsors/Sponsors';
 import './Page.scss';
 import '../Sidebar/Sidebar.scss';
-import '../Sponsors/Sponsors.scss';
+// import '../Sponsors/Sponsors.scss';
 import '../Gitter/Gitter.scss';
 
 const Page = ({ page, section }) => {
@@ -46,7 +46,7 @@ const Page = ({ page, section }) => {
 
   return (
     <Container className="page">
-      <Sponsors />
+      {/** <Sponsors /> **/}
       <Interactive
         id="src/components/Sidebar/Sidebar.jsx"
         component={ Sidebar }

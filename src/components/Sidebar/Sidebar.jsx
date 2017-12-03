@@ -52,6 +52,9 @@ export default class Sidebar extends Component {
               </div>
             );
           })}
+          <div style={{ marginTop: '20px' }}>
+            <a href="//cloud.tencent.com/community" target="_blank"><img src="http://s.url.cn/tfc/home/img/img/logo//qcloud-eeb996.png"/></a>
+          </div>
         </div>
 
       </nav>

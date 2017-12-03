@@ -26,6 +26,12 @@
 5. 第五步：中文仓库 cn 分支合并(merge) 我的仓库 cn 分支的 pr。
 ```
 
+### 开发
+```javascript
+npm install
+npm start
+打开 localhost:3000
+```
 
 
 - [webpack 2 校对+审校任务认领说明 - 入口目录](https://github.com/webpack-china/webpack.js.org/issues/169)
