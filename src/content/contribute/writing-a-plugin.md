@@ -178,7 +178,7 @@ This is the simplest format for a plugin. Many useful events like `"compile"`, `
 
 `applyPluginsWaterfall(name: string, init: any, args: any...)`
 
-Here each of the plugins are called one after the other with the args from the return value of the previous plugin. The plugin must take into consider the order of its execution.
+Here each of the plugins are called one after the other with the args from the return value of the previous plugin. The plugin must take the order of its execution into account.
 It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. This pattern is used in the Tapable instances which are related to the `webpack` templates like `ModuleTemplate`, `ChunkTemplate` etc.
 
 - __asynchronous__ When all the plugins are applied asynchronously using

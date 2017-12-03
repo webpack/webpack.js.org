@@ -12,6 +12,7 @@ contributors:
   - jecoopr
   - TheDutchCoder
   - sudarsangp
+  - Vanguard90
 ---
 
 As you may already know, webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interface with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
@@ -140,10 +141,10 @@ __dist/index.html__
 
 In this setup, `index.js` explicitly requires `lodash` to be present, and binds it as `_` (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.
 
-With that said, let's run `webpack` with our script as the [entry point](/concepts/entry-points) and `bundle.js` as the [output](/concepts/output):
+With that said, let's run `npx webpack` with our script as the [entry point](/concepts/entry-points) and `bundle.js` as the [output](/concepts/output). The `npx` command, which ships with Node 8.2 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
 
 ``` bash
-./node_modules/.bin/webpack src/index.js dist/bundle.js
+npx webpack src/index.js dist/bundle.js
 
 Hash: ff6c1d39b26f89b3b7bb
 Version: webpack 2.2.0
@@ -203,7 +204,7 @@ module.exports = {
 Now, let's run the build again but instead using our new configuration:
 
 ``` bash
-./node_modules/.bin/webpack --config webpack.config.js
+npx webpack --config webpack.config.js
 
 Hash: ff6c1d39b26f89b3b7bb
 Version: webpack 2.2.0
@@ -215,6 +216,8 @@ bundle.js  544 kB       0  [emitted]  [big]  main
    [2] (webpack)/buildin/module.js 517 bytes {0} [built]
    [3] ./src/index.js 278 bytes {0} [built]
 ```
+
+W> Note that when calling `webpack` via its path on windows, you must use backslashes instead, e.g. `node_modules\.bin\webpack --config webpack.config.js`.
 
 T> If a `webpack.config.js` is present, the `webpack` command picks it up by default. We use the `--config` option here only to show that you can pass a config of any name. This will be useful for more complex configurations that need to be split into multiple files.
 
@@ -237,7 +240,7 @@ __package.json__
 }
 ```
 
-Now the `npm run build` command can be used in place of the longer commands we used earlier. Note that within `scripts` we can reference locally installed npm packages by name instead of writing out the entire path. This convention is the standard in most npm-based projects and allows us to directly call `webpack`, instead of `./node_modules/.bin/webpack`
+Now the `npm run build` command can be used in place of the `npx` command we used earlier. Note that within `scripts` we can reference locally installed npm packages by name the same way we did with `npx`. This convention is the standard in most npm-based projects because it allows all contributors to use the same set of common scripts (each with flags like `--config` if necessary).
 
 Now run the following command and see if your script alias works:
 
