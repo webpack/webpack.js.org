@@ -171,7 +171,7 @@ import { someVar } from './transforms.js';
 // Use `someVar`...
 ```
 
-在上面的代码中，webpack 不能确定是否调用 `mylib.transform` 会引发任何副作用(side-effects)。因此，它会在安全的范围内出现错误，并在 bundle 代码中保留 `someOtherVar`。
+在上面的代码中，webpack 不能确定是否调用 `mylib.transform` 会引发任何副作用(side-effects)。因此，为保险起见，并在 bundle 代码中保留 `someOtherVar`。
 
 一般来说，当一个工具不能保证某些特定的代码路径(path)不会导致副作用(side-effects)时，即使你确信它不应该存在生成的 bundle 中，但这个代码仍然会保留。常见的情况有：从第三方模块中调用一个函数，webpack 和/或 压缩工具(minifier)无法检查此模块；从第三方模块导入的函数被重新导出，等等。
 
