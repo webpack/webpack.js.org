@@ -53,7 +53,7 @@ export default class Sidebar extends Component {
             );
           })}
           <div style={{ marginTop: '20px' }}>
-            <a href="//cloud.tencent.com/community" target="_blank">本站由腾讯云提供计算支持</a>
+            <a href="//cloud.tencent.com/community" target="_blank">腾讯云技术社区</a>
           </div>
         </div>
 
