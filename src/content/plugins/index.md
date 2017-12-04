@@ -13,8 +13,8 @@ webpack 有着丰富的插件接口(rich plugin interface)。webpack 自身的�
 Name                                                     | Description
 -------------------------------------------------------- | -----------
 [`AggressiveSplittingPlugin`](/plugins/aggressive-splitting-plugin) | 将原来的 chunk 分成更小的 chunk
-[`BabelMinifyWebpackPlugin`](/plugins/babel-minify-webpack-plugin) | 使用 [babel-minify](https://github.com/babel/minify)
-[`BannerPlugin`] 进行压缩(/plugins/banner-plugin)                 | 在每个生成的 chunk 顶部添加 banner
+[`BabelMinifyWebpackPlugin`](/plugins/babel-minify-webpack-plugin) | 使用 [babel-minify](https://github.com/babel/minify)进行压缩
+[`BannerPlugin`](/plugins/banner-plugin)                 | 在每个生成的 chunk 顶部添加 banner
 [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin)    | 提取 chunks 之间共享的通用模块
 [`ComponentWebpackPlugin`](/plugins/component-webpack-plugin) | 通过 webpack 使用组件
 [`CompressionWebpackPlugin`](/plugins/compression-webpack-plugin) | 预先准备的资源压缩版本，使用 Content-Encoding 提供访问服务
