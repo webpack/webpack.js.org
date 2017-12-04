@@ -43,9 +43,9 @@ module.exports = {
 
 在你的应用程序中，有三种使用 loader 的方式：
 
-* 配置（推荐）：在 __webpack.config.js__ 文件中指定 loader。
-* 内联：在每个 `import` 语句中显式指定 loader。
-* CLI：在 shell 命令中指定它们。
+* [配置](#configuration)（推荐）：在 __webpack.config.js__ 文件中指定 loader。
+* [内联](#inline)：在每个 `import` 语句中显式指定 loader。
+* [CLI](#cli)：在 shell 命令中指定它们。
 
 
 ### 配置[Configuration]

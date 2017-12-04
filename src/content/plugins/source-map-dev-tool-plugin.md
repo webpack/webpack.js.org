@@ -35,7 +35,9 @@ The `lineToLine` object allows for the same `test`, `include`, and `exclude` opt
 T> Setting `module` and/or `columns` to `false` will yield less accurate source maps but will also improve compilation performance significantly.
 
 
-## 用法：排除 Vendor 的 Map 文件
+## 用法
+
+### 排除 Vendor 的 Map 文件
 
 以下代码将排除 `vendor.js` bundle 中任何模块的 source map：
 
@@ -44,6 +46,17 @@ new webpack.SourceMapDevToolPlugin({
   filename: '[name].js.map',
   exclude: ['vendor.js']
 })
+```
+
+### Host Source Maps Externally
+
+Set a URL for source maps. Useful for hosting them on a host that requires authorization.
+
+```javascript
+new webpack.SourceMapDevToolPlugin({
+  append: "\n//# sourceMappingURL=http://example.com/sourcemap/[url]",
+  filename: '[name].map',
+}),
 ```
 
 ***
