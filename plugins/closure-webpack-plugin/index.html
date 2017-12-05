@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/a6dd081fbfa07ba86715.css" rel="stylesheet">
+      <link href="/e9d5d52b4f96f896305d.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -37,15 +37,28 @@ Only the java version of closure-compiler is currently supported.</p>
 </code></pre>
 <h2 class="header"><a class="anchor" href="#options" id="options"></a><span class="text">Options</span><a class="icon-link" href="#options"></a></h2>
 <ul>
-<li><strong>mode</strong> - <code>STANDARD</code> (default) or <code>AGGRESSIVE_BUNDLE</code>. Controls how the plugin utilizes the compiler.<br> In <code>STANDARD</code> mode, closure-compiler is used as a direct replacement for other minifiers as well as most Babel transformations.<br> In <code>AGGRESSIVE_BUNDLE</code> mode, the compiler performs additional optimizations of modules to produce a much smaller file, but
+<li><strong>mode</strong> - <code>STANDARD</code> (default) or <code>AGGRESSIVE_BUNDLE</code>. Controls how the plugin utilizes the compiler.  <ul>
+<li>In <code>STANDARD</code> mode, closure-compiler is used as a direct replacement for other minifiers as well as most Babel transformations.  </li>
+<li>In <code>AGGRESSIVE_BUNDLE</code> mode, the compiler performs additional optimizations of modules to produce a much smaller file, but
 is not compatible with all input modules.</li>
 </ul>
+</li>
+<li><strong>childCompilations</strong> - boolean or function. Defaults to <code>false</code>.
+In order to decrease build times, this plugin by default only operates on the main compilation.
+Plugins such as extract-text-plugin and html-webpack-plugin run as child compilations and
+usually do not need transpilation or minification. You can enable this for all child compilations
+by setting this option to <code>true</code>. For specific control, the option can be set to a function which
+will be passed a compilation object.<br>Example: <code>function(compilation) { return /html-webpack/.test(compilation.name); }</code>.</li>
+</ul>
 <h2 class="header"><a class="anchor" href="#compiler-flags" id="compiler-flags"></a><span class="text">Compiler Flags</span><a class="icon-link" href="#compiler-flags"></a></h2>
-<p>The plugin controls certain compiler flags. The following flags should not be used in any mode:</p>
+<p>The plugin controls several compiler flags. The following flags should not be used in any mode:</p>
 <ul>
-<li><strong>module_resolution</strong> - A custom resolution mode for webpack is utilized instead of the standard NODE or BROWSER options.</li>
-<li><strong>output_wrapper</strong> - The output wrapper is automatically added by either webpack or the plugin</li>
-<li><strong>dependency_mode</strong> - Controlled by the plugin mode.</li>
+<li>module_resolution</li>
+<li>output_wrapper</li>
+<li>dependency_mode</li>
+<li>create_souce_map</li>
+<li>module</li>
+<li>entry_point</li>
 </ul>
 <h2 class="header"><a class="anchor" href="#aggressive-bundle-mode" id="aggressive-bundle-mode"></a><span class="text">Aggressive Bundle Mode</span><a class="icon-link" href="#aggressive-bundle-mode"></a></h2>
 <p>In this mode, the compiler rewrites CommonJS modules and hoists require calls. Some modules are not compatible with this type of rewritting. In particular, hoisting will cause the following code to execute out of order:</p>
