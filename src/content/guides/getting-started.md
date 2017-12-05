@@ -146,15 +146,15 @@ With that said, let's run `npx webpack` with our script as the [entry point](/co
 ``` bash
 npx webpack src/index.js dist/bundle.js
 
-Hash: ff6c1d39b26f89b3b7bb
-Version: webpack 2.2.0
-Time: 385ms
+Hash: 857f878815ce63ad5b4f
+Version: webpack 3.9.1
+Time: 332ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  [emitted]  [big]  main
-   [0] ./~/lodash/lodash.js 540 kB {0} [built]
-   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [3] ./src/index.js 278 bytes {0} [built]
+   [0] ./src/index.js 222 bytes {0} [built]
+   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+    + 1 hidden module
 ```
 
 T> Your output may vary a bit, but if the build is successful then you are good to go.
@@ -206,15 +206,15 @@ Now, let's run the build again but instead using our new configuration:
 ``` bash
 npx webpack --config webpack.config.js
 
-Hash: ff6c1d39b26f89b3b7bb
-Version: webpack 2.2.0
-Time: 390ms
+Hash: 857f878815ce63ad5b4f
+Version: webpack 3.9.1
+Time: 298ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  [emitted]  [big]  main
-   [0] ./~/lodash/lodash.js 540 kB {0} [built]
-   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [3] ./src/index.js 278 bytes {0} [built]
+   [0] ./src/index.js 222 bytes {0} [built]
+   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+    + 1 hidden module
 ```
 
 W> Note that when calling `webpack` via its path on windows, you must use backslashes instead, e.g. `node_modules\.bin\webpack --config webpack.config.js`.
@@ -247,15 +247,15 @@ Now run the following command and see if your script alias works:
 ``` bash
 npm run build
 
-Hash: ff6c1d39b26f89b3b7bb
-Version: webpack 2.2.0
-Time: 390ms
+Hash: 857f878815ce63ad5b4f
+Version: webpack 3.9.1
+Time: 294ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  [emitted]  [big]  main
-   [0] ./~/lodash/lodash.js 540 kB {0} [built]
-   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [3] ./src/index.js 278 bytes {0} [built]
+   [0] ./src/index.js 222 bytes {0} [built]
+   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+    + 1 hidden module
 ```
 
 T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --colors`.
