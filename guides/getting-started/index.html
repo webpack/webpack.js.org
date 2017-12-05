@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/d474c9b819a50d7b84ae.css" rel="stylesheet">
+      <link href="/a6dd081fbfa07ba86715.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -111,15 +111,15 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
 <p>With that said, let&apos;s run <code>npx webpack</code> with our script as the <a href="/concepts/entry-points">entry point</a> and <code>bundle.js</code> as the <a href="/concepts/output">output</a>. The <code>npx</code> command, which ships with Node 8.2 or higher, runs the webpack binary (<code>./node_modules/.bin/webpack</code>) of the webpack package we installed in the beginning:</p>
 <pre><code class="lang-bash">npx webpack src/index.js dist/bundle.js
 
-Hash: ff6c1d39b26f89b3b7bb
-Version: webpack 2.2.0
-Time: 385ms
+Hash: 857f878815ce63ad5b4f
+Version: webpack 3.9.1
+Time: 332ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  main
-   <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./~/lodash/lodash.js 540 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
-   <span class="token punctuation">[</span>1<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 509 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
-   <span class="token punctuation">[</span>2<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
-   <span class="token punctuation">[</span>3<span class="token punctuation">]</span> ./src/index.js 278 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./src/index.js 222 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>2<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 509 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>3<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+    + 1 hidden module
 </code></pre>
 <blockquote class="tip"><div class="tip-content"> Your output may vary a bit, but if the build is successful then you are good to go. </div></blockquote><p>Open <code>index.html</code> in your browser and, if everything went right, you should see the following text: &apos;Hello webpack&apos;.</p>
 <h2 class="header"><a class="anchor" href="#modules" id="modules"></a><span class="text">Modules</span><a class="icon-link" href="#modules"></a></h2>
@@ -151,15 +151,15 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Now, let&apos;s run the build again but instead using our new configuration:</p>
 <pre><code class="lang-bash">npx webpack --config webpack.config.js
 
-Hash: ff6c1d39b26f89b3b7bb
-Version: webpack 2.2.0
-Time: 390ms
+Hash: 857f878815ce63ad5b4f
+Version: webpack 3.9.1
+Time: 298ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  main
-   <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./~/lodash/lodash.js 540 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
-   <span class="token punctuation">[</span>1<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 509 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
-   <span class="token punctuation">[</span>2<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
-   <span class="token punctuation">[</span>3<span class="token punctuation">]</span> ./src/index.js 278 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./src/index.js 222 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>2<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 509 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>3<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+    + 1 hidden module
 </code></pre>
 <blockquote class="warning"><div class="tip-content"> Note that when calling <code>webpack</code> via its path on windows, you must use backslashes instead, e.g. <code>node_modules\.bin\webpack --config webpack.config.js</code>. </div></blockquote><blockquote class="tip"><div class="tip-content"> If a <code>webpack.config.js</code> is present, the <code>webpack</code> command picks it up by default. We use the <code>--config</code> option here only to show that you can pass a config of any name. This will be useful for more complex configurations that need to be split into multiple files. </div></blockquote><p>A configuration file allows far more flexibility than simple CLI usage. We can specify loader rules, plugins, resolve options and many other enhancements this way. See the <a href="/configuration">configuration documentation</a> to learn more.</p>
 <h2 class="header"><a class="anchor" href="#npm-scripts" id="npm-scripts"></a><span class="text">NPM Scripts</span><a class="icon-link" href="#npm-scripts"></a></h2>
@@ -177,15 +177,15 @@ bundle.js  544 kB       0  <span class="token punctuation">[</span>emitted<span 
 <p>Now run the following command and see if your script alias works:</p>
 <pre><code class="lang-bash">npm run build
 
-Hash: ff6c1d39b26f89b3b7bb
-Version: webpack 2.2.0
-Time: 390ms
+Hash: 857f878815ce63ad5b4f
+Version: webpack 3.9.1
+Time: 294ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  main
-   <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./~/lodash/lodash.js 540 kB <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
-   <span class="token punctuation">[</span>1<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 509 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
-   <span class="token punctuation">[</span>2<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
-   <span class="token punctuation">[</span>3<span class="token punctuation">]</span> ./src/index.js 278 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./src/index.js 222 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>2<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 509 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>3<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+    + 1 hidden module
 </code></pre>
 <blockquote class="tip"><div class="tip-content"> Custom parameters can be passed to webpack by adding two dashes between the <code>npm run build</code> command and your parameters, e.g. <code>npm run build -- --colors</code>. </div></blockquote><h2 class="header"><a class="anchor" href="#conclusion" id="conclusion"></a><span class="text">Conclusion</span><a class="icon-link" href="#conclusion"></a></h2>
 <p>Now that you have a basic build together you should move on to the next guide <a href="/guides/asset-management"><code>Asset Management</code></a> to learn how to manage assets like images and fonts with webpack. At this point, your project should look like this:</p>

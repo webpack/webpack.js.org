@@ -199,6 +199,9 @@
         <loc>https://webpack.js.org/contribute/release-process/index.html</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/contribute/writers-guide/index.html</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/contribute/writing-a-loader/index.html</loc>
     </url>
     <url>
@@ -209,9 +212,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/development/how-to-write-a-plugin/index.html</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/contribute/writers-guide/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/development/plugin-patterns/index.html</loc>
