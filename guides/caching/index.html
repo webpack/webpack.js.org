@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/0abcea3ce1f49a3020d4.css" rel="stylesheet">
+      <link href="/d474c9b819a50d7b84ae.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -105,7 +105,7 @@ Child html-webpack-plugin <span class="token keyword">for</span> <span class="to
 <span class="token deleted">-     })</span>
 <span class="token inserted">+     }),</span>
 <span class="token inserted">+     new webpack.optimize.CommonsChunkPlugin({</span>
-<span class="token inserted">+       name: &apos;runtime&apos;</span>
+<span class="token inserted">+       name: &apos;manifest&apos;</span>
 <span class="token inserted">+     })</span>
     ],
     output: {
@@ -114,14 +114,14 @@ Child html-webpack-plugin <span class="token keyword">for</span> <span class="to
     }
   };
 </code></pre>
-<p>Let&apos;s run another build to see the extracted <code>runtime</code> bundle:</p>
+<p>Let&apos;s run another build to see the extracted <code>manifest</code> bundle:</p>
 <pre><code class="lang-bash">Hash: 80552632979856ddab34
 Version: webpack 3.3.0
 Time: 1512ms
-                          Asset       Size  Chunks                    Chunk Names
-   main.5ec8e954e32d66dee1aa.js     542 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  main
-runtime.719796322be98041fff2.js    5.82 kB       1  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         runtime
-                     index.html  275 bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
+                           Asset       Size  Chunks                    Chunk Names
+    main.5ec8e954e32d66dee1aa.js     542 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  main
+manifest.719796322be98041fff2.js    5.82 kB       1  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         manifest
+                      index.html  275 bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
    <span class="token punctuation">[</span>0<span class="token punctuation">]</span> ./src/index.js 336 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
    <span class="token punctuation">[</span>2<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 509 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
    <span class="token punctuation">[</span>3<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
@@ -151,7 +151,7 @@ runtime.719796322be98041fff2.js    5.82 kB       1  <span class="token punctuati
 <span class="token inserted">+       name: &apos;vendor&apos;</span>
 <span class="token inserted">+     }),</span>
       new webpack.optimize.CommonsChunkPlugin({
-        name: &apos;runtime&apos;
+        name: &apos;manifest&apos;
       })
     ],
     output: {
@@ -160,15 +160,15 @@ runtime.719796322be98041fff2.js    5.82 kB       1  <span class="token punctuati
     }
   };
 </code></pre>
-<blockquote class="warning"><div class="tip-content"> Note that order matters here. The <code>&apos;vendor&apos;</code> instance of the <code>CommonsChunkPlugin</code> must be included prior to the <code>&apos;runtime&apos;</code> instance. </div></blockquote><p>Let&apos;s run another build to see our new <code>vendor</code> bundle:</p>
+<blockquote class="warning"><div class="tip-content"> Note that order matters here. The <code>&apos;vendor&apos;</code> instance of the <code>CommonsChunkPlugin</code> must be included prior to the <code>&apos;manifest&apos;</code> instance. </div></blockquote><p>Let&apos;s run another build to see our new <code>vendor</code> bundle:</p>
 <pre><code class="lang-bash">Hash: 69eb92ebf8935413280d
 Version: webpack 3.3.0
 Time: 1502ms
-                          Asset       Size  Chunks                    Chunk Names
- vendor.8196d409d2f988123318.js     541 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  vendor
-   main.0ac0ae2d4a11214ccd19.js  791 bytes       1  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         main
-runtime.004a1114de8bcf026622.js    5.85 kB       2  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         runtime
-                     index.html  352 bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
+                           Asset       Size  Chunks                    Chunk Names
+  vendor.8196d409d2f988123318.js     541 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  vendor
+    main.0ac0ae2d4a11214ccd19.js  791 bytes       1  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         main
+manifest.004a1114de8bcf026622.js    5.85 kB       2  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         manifest
+                      index.html  352 bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
    <span class="token punctuation">[</span>1<span class="token punctuation">]</span> ./src/index.js 336 bytes <span class="token punctuation">{</span>1<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
    <span class="token punctuation">[</span>2<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 509 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
    <span class="token punctuation">[</span>3<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
@@ -212,11 +212,11 @@ runtime.004a1114de8bcf026622.js    5.85 kB       2  <span class="token punctuati
 <pre><code class="lang-bash">Hash: d38a06644fdbb898d795
 Version: webpack 3.3.0
 Time: 1445ms
-                          Asset       Size  Chunks                    Chunk Names
- vendor.a7561fb0e9a071baadb9.js     541 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  vendor
-   main.b746e3eb72875af2caa9.js    1.22 kB       1  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         main
-runtime.1400d5af64fc1b7b3a45.js    5.85 kB       2  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         runtime
-                     index.html  352 bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
+                           Asset       Size  Chunks                    Chunk Names
+  vendor.a7561fb0e9a071baadb9.js     541 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  vendor
+    main.b746e3eb72875af2caa9.js    1.22 kB       1  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         main
+manifest.1400d5af64fc1b7b3a45.js    5.85 kB       2  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         manifest
+                      index.html  352 bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
    <span class="token punctuation">[</span>1<span class="token punctuation">]</span> ./src/index.js 421 bytes <span class="token punctuation">{</span>1<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
    <span class="token punctuation">[</span>2<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 509 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
    <span class="token punctuation">[</span>3<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
@@ -228,7 +228,7 @@ runtime.1400d5af64fc1b7b3a45.js    5.85 kB       2  <span class="token punctuati
 <ul>
 <li>The <code>main</code> bundle changed because of its new content.</li>
 <li>The <code>vendor</code> bundle changed because its <code>module.id</code> was changed.</li>
-<li>And, the <code>runtime</code> bundle changed because it now contains a reference to a new module.</li>
+<li>And, the <code>manifest</code> bundle changed because it now contains a reference to a new module.</li>
 </ul>
 <p>The first and last are expected -- it&apos;s the <code>vendor</code> hash we want to fix. Luckily, there are two plugins we can use to resolve this issue. The first is the <a href="/plugins/named-modules-plugin"><code>NamedModulesPlugin</code></a>, which will use the path to the module rather than a numerical identifier. While this plugin is useful during development for more readable output, it does take a bit longer to run. The second option is the <a href="/plugins/hashed-module-ids-plugin"><code>HashedModuleIdsPlugin</code></a>, which is recommended for production builds:</p>
 <p><strong>webpack.config.js</strong></p>
@@ -254,7 +254,7 @@ runtime.1400d5af64fc1b7b3a45.js    5.85 kB       2  <span class="token punctuati
         name: &apos;vendor&apos;
       }),
       new webpack.optimize.CommonsChunkPlugin({
-        name: &apos;runtime&apos;
+        name: &apos;manifest&apos;
       })
     ],
     output: {
@@ -267,11 +267,11 @@ runtime.1400d5af64fc1b7b3a45.js    5.85 kB       2  <span class="token punctuati
 <pre><code class="lang-bash">Hash: 1f49b42afb9a5acfbaff
 Version: webpack 3.3.0
 Time: 1372ms
-                          Asset       Size  Chunks                    Chunk Names
- vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  vendor
-   main.d103ac311788fcb7e329.js    1.22 kB       1  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         main
-runtime.d2a6dc1ccece13f5a164.js    5.85 kB       2  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         runtime
-                     index.html  352 bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
+                           Asset       Size  Chunks                    Chunk Names
+  vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  vendor
+    main.d103ac311788fcb7e329.js    1.22 kB       1  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         main
+manifest.d2a6dc1ccece13f5a164.js    5.85 kB       2  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         manifest
+                      index.html  352 bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
 <span class="token punctuation">[</span>3Di9<span class="token punctuation">]</span> ./src/print.js 62 bytes <span class="token punctuation">{</span>1<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
 <span class="token punctuation">[</span>3IRH<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
 <span class="token punctuation">[</span>DuR2<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 509 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
@@ -302,11 +302,11 @@ runtime.d2a6dc1ccece13f5a164.js    5.85 kB       2  <span class="token punctuati
 <pre><code class="lang-bash">Hash: 37e1358f135c0b992f72
 Version: webpack 3.3.0
 Time: 1557ms
-                          Asset       Size  Chunks                    Chunk Names
- vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  vendor
-   main.fc7f38e648da79db2aba.js  891 bytes       1  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         main
-runtime.bb5820632fb66c3fb357.js    5.85 kB       2  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         runtime
-                     index.html  352 bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
+                           Asset       Size  Chunks                    Chunk Names
+  vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  vendor
+    main.fc7f38e648da79db2aba.js  891 bytes       1  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         main
+manifest.bb5820632fb66c3fb357.js    5.85 kB       2  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         manifest
+                      index.html  352 bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
 <span class="token punctuation">[</span>3IRH<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 517 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
 <span class="token punctuation">[</span>DuR2<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 509 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
    <span class="token punctuation">[</span>0<span class="token punctuation">]</span> multi lodash 28 bytes <span class="token punctuation">{</span>0<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
