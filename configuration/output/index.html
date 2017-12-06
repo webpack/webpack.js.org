@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/83c8398c1fd23e782419.css" rel="stylesheet">
+      <link href="/5512fa5f114f2f8d62de.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -345,32 +345,30 @@
 <p><code>string</code></p>
 <p><code>string</code> or <code>object</code> (since webpack 3.1.0; for <code>libraryTarget: &quot;umd&quot;</code>)</p>
 <p>How the value of the <code>output.library</code> is used depends on the value of the <a href="#output-librarytarget"><code>output.libraryTarget</code></a> option; please refer to that section for the complete details. Note that the default option for <code>output.libraryTarget</code> is <code>var</code>, so if the following configuration option is used:</p>
-<pre><code class="lang-javascript">output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+<pre><code class="lang-js">output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
   library<span class="token punctuation">:</span> <span class="token string">&quot;MyLibrary&quot;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p>The variable <code>MyLibrary</code> will be bound with the return value of your entry file, if the resulting output is included as a script tag in an HTML page.</p>
-<blockquote class="tip"><div class="tip-content"> Read the <a href="/guides/author-libraries">authoring libraries guide</a> guide for more information on <code>output.library</code> as well as <code>output.libraryTarget</code>. </div></blockquote><h2 class="header"><a class="anchor" href="#output-libraryexport" id="output-libraryexport"></a><span class="text"><code>output.libraryExport</code></span><a class="icon-link" href="#output-libraryexport"></a></h2>
+<blockquote class="warning"><div class="tip-content"> Note that if an <code>array</code> is provided as an <code>entry</code> point, only the last module in the array will be exposed. If an <code>object</code> is provided, it can exposed using an <code>array</code> syntax (see <a href="https://github.com/webpack/webpack/tree/master/examples/multi-part-library">this example</a> for details). </div></blockquote><blockquote class="tip"><div class="tip-content"> Read the <a href="/guides/author-libraries">authoring libraries guide</a> guide for more information on <code>output.library</code> as well as <code>output.libraryTarget</code>. </div></blockquote><h2 class="header"><a class="anchor" href="#output-libraryexport" id="output-libraryexport"></a><span class="text"><code>output.libraryExport</code></span><a class="icon-link" href="#output-libraryexport"></a></h2>
 <p><code>string</code> or <code>string[]</code> (since webpack 3.0.0)</p>
 <blockquote>
 <p>Default: <code>_entry_return_</code></p>
 </blockquote>
-<p>Configure which module or modules will be exposed via the <code>libraryTarget</code>.</p>
-<p>The default value <code>_entry_return_</code> is the namespace or default module returned by your entry file.</p>
-<p>The examples below demonstrate the effect of this config when using <code>libraryTarget: &quot;var&quot;</code>, but any target may be used.</p>
+<p>Configure which module or modules will be exposed via the <code>libraryTarget</code>. The default <code>_entry_return_</code> value is the namespace or default module returned by your entry file. The examples below demonstrate the effect of this config when using <code>libraryTarget: &quot;var&quot;</code>, but any target may be used.</p>
 <p>The following configurations are supported:</p>
 <p><code>libraryExport: &quot;default&quot;</code> - The <strong>default export of your entry point</strong> will be assigned to the library target:</p>
-<pre><code class="lang-javascript"><span class="token comment" spellcheck="true">// if your entry has a default export of `MyDefaultModule`</span>
+<pre><code class="lang-js"><span class="token comment" spellcheck="true">// if your entry has a default export of `MyDefaultModule`</span>
 <span class="token keyword">var</span> MyDefaultModule <span class="token operator">=</span> _entry_return_<span class="token punctuation">.</span><span class="token keyword">default</span><span class="token punctuation">;</span>
 </code></pre>
 <p><code>libraryExport: &quot;MyModule&quot;</code> - The <strong>specified module</strong> will be assigned to the library target:</p>
-<pre><code class="lang-javascript"><span class="token keyword">var</span> MyModule <span class="token operator">=</span> _entry_return_<span class="token punctuation">.</span>MyModule<span class="token punctuation">;</span>
+<pre><code class="lang-js"><span class="token keyword">var</span> MyModule <span class="token operator">=</span> _entry_return_<span class="token punctuation">.</span>MyModule<span class="token punctuation">;</span>
 </code></pre>
 <p><code>libraryExport: [&quot;MyModule&quot;, &quot;MySubModule&quot;]</code> - The array is interpreted as a <strong>path to a module</strong> to be assigned to the library target:</p>
-<pre><code class="lang-javascript"><span class="token keyword">var</span> MySubModule <span class="token operator">=</span> _entry_return_<span class="token punctuation">.</span>MyModule<span class="token punctuation">.</span>MySubModule<span class="token punctuation">;</span>
+<pre><code class="lang-js"><span class="token keyword">var</span> MySubModule <span class="token operator">=</span> _entry_return_<span class="token punctuation">.</span>MyModule<span class="token punctuation">.</span>MySubModule<span class="token punctuation">;</span>
 </code></pre>
-<p>As the examples have shown that the return values of the entry points are bounded to those named variables, the usage of the resulting library is simply like so:</p>
-<pre><code class="lang-javascript">MyDefaultModule<span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p>With the <code>libraryExport</code> configurations specified above, the resulting libraries could be utilized as such:</p>
+<pre><code class="lang-js">MyDefaultModule<span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 MyModule<span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 MySubModule<span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
@@ -383,46 +381,46 @@ MySubModule<span class="token punctuation">.</span><span class="token function">
 <blockquote class="tip"><div class="tip-content"> Note that <code>_entry_return_</code> in the example code below is the value returned by the entry point. In the bundle itself, it is the output of the function that is generated by webpack from the entry point. </div></blockquote><h3 class="header"><a class="anchor" href="#expose-a-variable" id="expose-a-variable"></a><span class="text">Expose a Variable</span><a class="icon-link" href="#expose-a-variable"></a></h3>
 <p>These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by <code>output.library</code> at whatever scope the bundle was included at.</p>
 <p><code>libraryTarget: &quot;var&quot;</code> - (default) When your library is loaded, the <strong>return value of your entry point</strong> will be assigned to a variable:</p>
-<pre><code class="lang-javascript"><span class="token keyword">var</span> MyLibrary <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
+<pre><code class="lang-js"><span class="token keyword">var</span> MyLibrary <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">// In a separate script...</span>
 MyLibrary<span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <blockquote class="warning"><div class="tip-content"> When using this option, an empty <code>output.library</code> will result in no assignment. </div></blockquote><p><code>libraryTarget: &quot;assign&quot;</code> - This will generate an implied global which has the potential to reassign an existing value (use with caution).</p>
-<pre><code class="lang-javascript">MyLibrary <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
+<pre><code class="lang-js">MyLibrary <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
 </code></pre>
 <p>Be aware that if <code>MyLibrary</code> isn&apos;t defined earlier your library will be set in global scope.</p>
 <blockquote class="warning"><div class="tip-content"> When using this option, an empty <code>output.library</code> will result in a broken output bundle. </div></blockquote><h3 class="header"><a class="anchor" href="#expose-via-object-assignment" id="expose-via-object-assignment"></a><span class="text">Expose Via Object Assignment</span><a class="icon-link" href="#expose-via-object-assignment"></a></h3>
 <p>These options assign the return value of the entry point (e.g. whatever the entry point exported) to a specific object under the name defined by <code>output.library</code>.</p>
 <p>If <code>output.library</code> is not assigned a non-empty string, the default behavior is that all properties returned by the entry point will be assigned to the object as defined for the particular <code>output.libraryTarget</code>, via the following code fragment:</p>
-<pre><code class="lang-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> a<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token keyword">in</span> a<span class="token punctuation">)</span> e<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">(</span>$<span class="token punctuation">{</span>output<span class="token punctuation">.</span>libraryTarget<span class="token punctuation">}</span><span class="token punctuation">,</span> _entry_return_<span class="token punctuation">)</span>
+<pre><code class="lang-js"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> a<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token keyword">in</span> a<span class="token punctuation">)</span> e<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">(</span>$<span class="token punctuation">{</span>output<span class="token punctuation">.</span>libraryTarget<span class="token punctuation">}</span><span class="token punctuation">,</span> _entry_return_<span class="token punctuation">)</span>
 </code></pre>
 <blockquote class="warning"><div class="tip-content"> Note that not setting a <code>output.library</code> will cause all properties returned by the entry point to be assigned to the given object; there are no checks against existing property names. </div></blockquote><p><code>libraryTarget: &quot;this&quot;</code> - The <strong>return value of your entry point</strong> will be assigned to this under the property named by <code>output.library</code>. The meaning of <code>this</code> is up to you:</p>
-<pre><code class="lang-javascript"><span class="token keyword">this</span><span class="token punctuation">[</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
+<pre><code class="lang-js"><span class="token keyword">this</span><span class="token punctuation">[</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">// In a separate script...</span>
 <span class="token keyword">this</span><span class="token punctuation">.</span>MyLibrary<span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 MyLibrary<span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// if this is window</span>
 </code></pre>
 <p><code>libraryTarget: &quot;window&quot;</code> - The <strong>return value of your entry point</strong> will be assigned to the <code>window</code> object using the <code>output.library</code> value.</p>
-<pre><code class="lang-javascript">window<span class="token punctuation">[</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
+<pre><code class="lang-js">window<span class="token punctuation">[</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
 
 window<span class="token punctuation">.</span>MyLibrary<span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p><code>libraryTarget: &quot;global&quot;</code> - The <strong>return value of your entry point</strong> will be assigned to the <code>global</code> object using the <code>output.library</code> value.</p>
-<pre><code class="lang-javascript">global<span class="token punctuation">[</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
+<pre><code class="lang-js">global<span class="token punctuation">[</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
 
 global<span class="token punctuation">.</span>MyLibrary<span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p><code>libraryTarget: &quot;commonjs&quot;</code> - The <strong>return value of your entry point</strong> will be assigned to the <code>exports</code> object using the <code>output.library</code> value. As the name implies, this is used in CommonJS environments.</p>
-<pre><code class="lang-javascript">exports<span class="token punctuation">[</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
+<pre><code class="lang-js">exports<span class="token punctuation">[</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
 
 <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <h3 class="header"><a class="anchor" href="#module-definition-systems" id="module-definition-systems"></a><span class="text">Module Definition Systems</span><a class="icon-link" href="#module-definition-systems"></a></h3>
 <p>These options will result in a bundle that comes with a more complete header to ensure compatibility with various module systems. The <code>output.library</code> option will take on a different meaning under the following <code>output.libraryTarget</code> options.</p>
 <p><code>libraryTarget: &quot;commonjs2&quot;</code> - The <strong>return value of your entry point</strong> will be assigned to the <code>module.exports</code>. As the name implies, this is used in CommonJS environments:</p>
-<pre><code class="lang-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
+<pre><code class="lang-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> _entry_return_<span class="token punctuation">;</span>
 
 <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
@@ -430,36 +428,36 @@ global<span class="token punctuation">.</span>MyLibrary<span class="token punctu
 <blockquote class="tip"><div class="tip-content"> Wondering the difference between CommonJS and CommonJS2 is? While they are similar, there are some subtle differences between them that are not usually relevant in the context of webpack. (For further details, please <a href="https://github.com/webpack/webpack/issues/1114">read this issue</a>.) </div></blockquote><p><code>libraryTarget: &quot;amd&quot;</code> - This will expose your library as an AMD module.</p>
 <p>AMD modules require that the entry chunk (e.g. the first script loaded by the <code>&lt;script&gt;</code> tag) be defined with specific properties, such as <code>define</code> and <code>require</code> which is typically provided by RequireJS or any compatible loaders (such as almond). Otherwise, loading the resulting AMD bundle directly will result in an error like <code>define is not defined</code>.</p>
 <p>So, with the following configuration...</p>
-<pre><code class="lang-javascript">output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+<pre><code class="lang-js">output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
   library<span class="token punctuation">:</span> <span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">,</span>
   libraryTarget<span class="token punctuation">:</span> <span class="token string">&quot;amd&quot;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p>The generated output will be defined with the name &quot;MyLibrary&quot;, i.e.</p>
-<pre><code class="lang-javascript"><span class="token function">define</span><span class="token punctuation">(</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre><code class="lang-js"><span class="token function">define</span><span class="token punctuation">(</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// This module return value is what your entry chunk returns</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>The bundle can be included as part of a script tag, and the bundle can be invoked like so:</p>
-<pre><code class="lang-javascript"><span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">&apos;MyLibrary&apos;</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>MyLibrary<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre><code class="lang-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">&apos;MyLibrary&apos;</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>MyLibrary<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// Do something with the library...</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>If <code>output.library</code> is undefined, the following is generated instead.</p>
-<pre><code class="lang-javascript"><span class="token function">define</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre><code class="lang-js"><span class="token function">define</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// This module returns is what your entry chunk returns</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>This bundle will not work as expected, or not work at all (in the case of the almond loader) if loaded directly with a <code>&lt;script&gt;</code> tag. It will only work through a RequireJS compatible asynchronous module loader through the actual path to that file, so in this case, the <code>output.path</code> and <code>output.filename</code> may become important for this particular setup if these are exposed directly on the server.</p>
 <p><code>libraryTarget: &quot;umd&quot;</code> - This exposes your library under all the module definitions, allowing it to work with CommonJS, AMD and as global variable. Take a look at the <a href="https://github.com/umdjs/umd">UMD Repository</a> to learn more.</p>
 <p>In this case, you need the <code>library</code> property to name your module:</p>
-<pre><code class="lang-javascript">output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+<pre><code class="lang-js">output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
   library<span class="token punctuation">:</span> <span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">,</span>
   libraryTarget<span class="token punctuation">:</span> <span class="token string">&quot;umd&quot;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p>And finally the output is:</p>
-<pre><code class="lang-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">webpackUniversalModuleDefinition</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> factory<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre><code class="lang-js"><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">webpackUniversalModuleDefinition</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> factory<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> exports <span class="token operator">===</span> <span class="token string">&apos;object&apos;</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">typeof</span> module <span class="token operator">===</span> <span class="token string">&apos;object&apos;</span><span class="token punctuation">)</span>
     module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token function">factory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> define <span class="token operator">===</span> <span class="token string">&apos;function&apos;</span> <span class="token operator">&amp;&amp;</span> define<span class="token punctuation">.</span>amd<span class="token punctuation">)</span>
@@ -473,12 +471,12 @@ global<span class="token punctuation">.</span>MyLibrary<span class="token punctu
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>Note that omitting <code>library</code> will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the <a href="#exposing-the-library-via-object-assignment">object assignment section</a>. Example:</p>
-<pre><code class="lang-javascript">output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+<pre><code class="lang-js">output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
   libraryTarget<span class="token punctuation">:</span> <span class="token string">&quot;umd&quot;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p>The output will be:</p>
-<pre><code class="lang-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">webpackUniversalModuleDefinition</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> factory<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre><code class="lang-js"><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">webpackUniversalModuleDefinition</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> factory<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> exports <span class="token operator">===</span> <span class="token string">&apos;object&apos;</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">typeof</span> module <span class="token operator">===</span> <span class="token string">&apos;object&apos;</span><span class="token punctuation">)</span>
     module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token function">factory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> define <span class="token operator">===</span> <span class="token string">&apos;function&apos;</span> <span class="token operator">&amp;&amp;</span> define<span class="token punctuation">.</span>amd<span class="token punctuation">)</span>
@@ -492,7 +490,7 @@ global<span class="token punctuation">.</span>MyLibrary<span class="token punctu
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>Since webpack 3.1.0, you may specify an object for <code>library</code> for differing names per targets:</p>
-<pre><code class="lang-javascript">output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+<pre><code class="lang-js">output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
   library<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     root<span class="token punctuation">:</span> <span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">,</span>
     amd<span class="token punctuation">:</span> <span class="token string">&quot;my-library&quot;</span><span class="token punctuation">,</span>
@@ -551,7 +549,7 @@ publicPath<span class="token punctuation">:</span> <span class="token string">&q
 publicPath<span class="token punctuation">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// relative to HTML page (same directory)</span>
 </code></pre>
 <p>In cases where the <code>publicPath</code> of output files can&apos;t be known at compile time, it can be left blank and set dynamically at runtime in the entry file using the <a href="http://stackoverflow.com/questions/12934929/what-are-free-variables">free variable</a> <code>__webpack_public_path__</code>.</p>
-<pre><code class="lang-javascript"> __webpack_public_path__ <span class="token operator">=</span> myRuntimePublicPath
+<pre><code class="lang-js"> __webpack_public_path__ <span class="token operator">=</span> myRuntimePublicPath
 
 <span class="token comment" spellcheck="true">// rest of your application entry</span>
 </code></pre>
