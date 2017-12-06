@@ -53,7 +53,7 @@ The bundle with external dependencies can be used in various module contexts, su
 - __commonjs2__: Similar to the above but where the export is `module.exports.default`.
 - __amd__: Similar to `commonjs` but using AMD module system.
 
-The following syntaxes are accepted and interepreted in various different ways.
+The following syntaxes are accepted...
 
 
 ### string
