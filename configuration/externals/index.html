@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/5512fa5f114f2f8d62de.css" rel="stylesheet">
+      <link href="/583556ee14f79711804d.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -24,40 +24,40 @@
 <p><strong>Prevent bundling</strong> of certain <code>import</code>ed packages and instead retrieve these <em>external dependencies</em> at runtime.</p>
 <p>For example, to include <a href="https://jquery.com/">jQuery</a> from a CDN instead of bundling it:</p>
 <p><strong>index.html</strong></p>
-<pre><code class="lang-html">...
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>https://code.jquery.com/jquery-3.1.0.js<span class="token punctuation">&quot;</span></span>
+<pre><code class="lang-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span>
+  <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>https://code.jquery.com/jquery-3.1.0.js<span class="token punctuation">&quot;</span></span>
   <span class="token attr-name">integrity</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk<span class="token punctuation">=</span><span class="token punctuation">&quot;</span></span>
-  <span class="token attr-name">crossorigin</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>anonymous<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
-...
+  <span class="token attr-name">crossorigin</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>anonymous<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
 </code></pre>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="lang-javascript">externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+<pre><code class="lang-js">externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
   jquery<span class="token punctuation">:</span> <span class="token string">&apos;jQuery&apos;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p>This leaves any dependent modules unchanged, i.e. the code shown below will still work:</p>
-<pre><code class="lang-javascript"><span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">&apos;jquery&apos;</span><span class="token punctuation">;</span>
+<pre><code class="lang-js"><span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">&apos;jquery&apos;</span><span class="token punctuation">;</span>
 
 <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">&apos;.my-element&apos;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">animate</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>The bundle with external dependencies can be used in various module contexts, such as <a href="/concepts/modules">CommonJS, AMD, global and ES2015 modules</a>. The external library may be available in any of these forms:</p>
 <ul>
-<li><strong>root</strong> - An external library can be available as a global variable. The consumer can achieve this by including the external library in a script tag. This is the default setting for externals.</li>
-<li><strong>commonjs</strong> -  The consumer application may be using a CommonJS module system and hence the external library should be available as a CommonJS module.</li>
-<li><strong>commonjs2</strong> -  Similar to the above line but where the export is <code>module.exports.default</code>.</li>
-<li><strong>amd</strong> - Similar to the above line but using AMD module system.</li>
+<li><strong>root</strong>: The library should be available as a global variable (e.g. via a script tag).</li>
+<li><strong>commonjs</strong>: The library should be available as a CommonJS module.</li>
+<li><strong>commonjs2</strong>: Similar to the above but where the export is <code>module.exports.default</code>.</li>
+<li><strong>amd</strong>: Similar to <code>commonjs</code> but using AMD module system.</li>
 </ul>
-<p><code>externals</code> accepts various syntax and interprets them in different manners.</p>
+<p>The following syntaxes are accepted...</p>
 <h3 class="header"><a class="anchor" href="#string" id="string"></a><span class="text">string</span><a class="icon-link" href="#string"></a></h3>
-<p><code>jQuery</code> in the externals indicates that your bundle will need <code>jQuery</code> variable in the global form.</p>
+<p>See the example above. The property name <code>jquery</code> indicates that the module <code>jquery</code> in <code>import $ from &apos;jquery&apos;</code> should be excluded. In order to replace this module, the value <code>jQuery</code> will be used to retrieve a global <code>jQuery</code> variable. In other words, when a string is provided it will be treated as <code>root</code> (defined above and below).</p>
 <h3 class="header"><a class="anchor" href="#array" id="array"></a><span class="text">array</span><a class="icon-link" href="#array"></a></h3>
-<pre><code class="lang-javascript">externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+<pre><code class="lang-js">externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
   subtract<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&apos;./math&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;subtract&apos;</span><span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><code>subtract: [&apos;./math&apos;, &apos;subtract&apos;]</code> converts to a parent child construct, where <code>./math</code> is the parent module and your bundle only requires the subset under <code>subtract</code> variable.</p>
 <h3 class="header"><a class="anchor" href="#object" id="object"></a><span class="text">object</span><a class="icon-link" href="#object"></a></h3>
-<pre><code class="lang-javascript">externals <span class="token punctuation">:</span> <span class="token punctuation">{</span>
+<pre><code class="lang-js">externals <span class="token punctuation">:</span> <span class="token punctuation">{</span>
   react<span class="token punctuation">:</span> <span class="token string">&apos;react&apos;</span>
 <span class="token punctuation">}</span>
 
@@ -81,9 +81,9 @@ externals <span class="token punctuation">:</span> <span class="token punctuatio
 </code></pre>
 <p>This syntax is used to describe all the possible ways that an external library can be available. <code>lodash</code> here is available as <code>lodash</code> under AMD and CommonJS module systems but available as <code>_</code> in a global variable form. <code>subtract</code> here is available via the property <code>subtract</code> under the global <code>math</code> object (e.g. <code>window[&apos;math&apos;][&apos;subtract&apos;]</code>).</p>
 <h3 class="header"><a class="anchor" href="#function" id="function"></a><span class="text">function</span><a class="icon-link" href="#function"></a></h3>
-<p>It might be useful to define your own function to control the behavior of what you want to externalize from webpack. <a href="https://www.npmjs.com/package/webpack-node-externals">webpack-node-externals</a>, for example, excludes all modules from the node_modules and provides some options to, for example, whitelist packages.</p>
+<p>It might be useful to define your own function to control the behavior of what you want to externalize from webpack. <a href="https://www.npmjs.com/package/webpack-node-externals">webpack-node-externals</a>, for example, excludes all modules from the <code>node_modules</code> directory and provides some options to, for example, whitelist packages.</p>
 <p>It basically comes down to this:</p>
-<pre><code class="lang-javascript">externals<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+<pre><code class="lang-js">externals<span class="token punctuation">:</span> <span class="token punctuation">[</span>
   <span class="token keyword">function</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> request<span class="token punctuation">,</span> callback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token regex">/^yourregex$/</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
       <span class="token keyword">return</span> <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token string">&apos;commonjs &apos;</span> <span class="token operator">+</span> request<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -95,7 +95,7 @@ externals <span class="token punctuation">:</span> <span class="token punctuatio
 <p>The <code>&apos;commonjs &apos; + request</code> defines the type of module that needs to be externalized.</p>
 <h3 class="header"><a class="anchor" href="#regex" id="regex"></a><span class="text">regex</span><a class="icon-link" href="#regex"></a></h3>
 <p>Every dependency that matches the given regular expression will be excluded from the output bundles.</p>
-<pre><code class="lang-javascript">externals<span class="token punctuation">:</span> <span class="token regex">/^(jquery|\$)$/i</span>
+<pre><code class="lang-js">externals<span class="token punctuation">:</span> <span class="token regex">/^(jquery|\$)$/i</span>
 </code></pre>
 <p>In this case any dependency named <code>jQuery</code>, capitalized or not, or <code>$</code> would be externalized.</p>
 <p>For more information on how to use this configuration, please refer to the article on <a href="/guides/author-libraries">how to author a library</a>.</p>

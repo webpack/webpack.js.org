@@ -259,10 +259,10 @@
         <loc>https://webpack.js.org/guides/dependency-management/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/development/index.html</loc>
+        <loc>https://webpack.js.org/guides/development-vagrant/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/development-vagrant/index.html</loc>
+        <loc>https://webpack.js.org/guides/development/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/environment-variables/index.html</loc>
@@ -457,13 +457,16 @@
         <loc>https://webpack.js.org/plugins/copy-webpack-plugin/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/define-plugin/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/plugins/dll-plugin/index.html</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/plugins/define-plugin/index.html</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/plugins/environment-plugin/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/extract-text-webpack-plugin/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/hashed-module-ids-plugin/index.html</loc>
@@ -479,9 +482,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/ignore-plugin/index.html</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/plugins/extract-text-webpack-plugin/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/limit-chunk-count-plugin/index.html</loc>
