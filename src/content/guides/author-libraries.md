@@ -61,7 +61,7 @@ __src/ref.json__
 
 __src/index.js__
 
-```javascript
+``` js
 import _ from 'lodash';
 import numRef from './ref.json';
 
@@ -80,7 +80,7 @@ export function wordToNum(word) {
 
 The usage specification for the library use will be as follows:
 
-```javascript
+``` js
 // ES2015 module import
 import * as webpackNumbers from 'webpack-numbers';
 // CommonJS module require
@@ -142,7 +142,7 @@ We can start with this basic webpack configuration:
 
 __webpack.config.js__
 
-```javascript
+``` js
 var path = require('path');
 
 module.exports = {
@@ -240,6 +240,8 @@ __webpack.config.js__
   };
 ```
 
+T> Note that the `library` setup is tied to the `entry` configuration. For most libraries, specifying a single entry point is sufficient. While [multi-part libraries](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) are possible, it is simpler to expose partial exports through an [index script](https://stackoverflow.com/questions/34072598/es6-exporting-importing-in-index-file) that serves as a single entry point. Using an `array` as an `entry` point for a library is __not recommended__.
+
 This exposes your library bundle available as a global variable named `webpackNumbers` when imported. To make the library compatible with other environments, add `libraryTarget` property to the config. This will add the different options about how the library can be exposed.
 
 __webpack.config.js__
@@ -305,6 +307,8 @@ Or, to add as standard module as per [this guide](https://github.com/dherman/def
 
 The key `main` refers to the [standard from `package.json`](https://docs.npmjs.com/files/package.json#main), and `module` to [a](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md) [proposal](https://github.com/rollup/rollup/wiki/pkg.module) to allow the JavaScript ecosystem upgrade to use ES2015 modules without breaking backwards compatibility.
 
-W> `module` will point to a module that has ES2015 module syntax but otherwise only syntax features that browser/node supports.
+W> The `module` property should point to a script that utilizes ES2015 module syntax but no other syntax features that aren't yet supported by browsers or node. This enables
 
 Now you can [publish it as an npm package](https://docs.npmjs.com/getting-started/publishing-npm-packages) and find it at [unpkg.com](https://unpkg.com/#/) to distribute it to your users.
+
+T> To expose stylesheets associated with your library, the [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin) should be used. Users can then consume and load these as they would any other stylesheet.
