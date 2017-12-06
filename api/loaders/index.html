@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/583556ee14f79711804d.css" rel="stylesheet">
+      <link href="/05acb6b02567a039fa1b.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -69,20 +69,49 @@
 module<span class="token punctuation">.</span>exports<span class="token punctuation">.</span>raw <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 </code></pre>
 <h3 class="header"><a class="anchor" href="#pitching-loader" id="pitching-loader"></a><span class="text">Pitching Loader</span><a class="icon-link" href="#pitching-loader"></a></h3>
-<p>Loaders are <strong>always</strong> called from right to left. But, in some cases, loaders do not care about the results of the previous loader or the resource. They only care about <strong>metadata</strong>. The <code>pitch</code> method on the loaders is called from <strong>left to right</strong> before the loaders are called (from right to left).</p>
-<p>If a loader delivers a result in the <code>pitch</code> method the process turns around and skips the remaining loaders, continuing with the calls to the more left loaders. <code>data</code> can be passed between pitch and normal call.</p>
+<p>Loaders are <strong>always</strong> called from right to left. There are some instances where the loader only cares about the <strong>metadata</strong> behind a request and can ignore the results of the previous loader. The <code>pitch</code> method on loaders is called from <strong>left to right</strong> before the loaders are actually executed (from right to left). For the following <a href="/configuration/module#rule-use"><code>use</code></a> configuration:</p>
+<pre><code class="lang-js">use<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+  <span class="token string">&apos;a-loader&apos;</span><span class="token punctuation">,</span>
+  <span class="token string">&apos;b-loader&apos;</span><span class="token punctuation">,</span>
+  <span class="token string">&apos;c-loader&apos;</span>
+<span class="token punctuation">]</span>
+</code></pre>
+<p>These steps would occur:</p>
+<pre><code class="lang-diff">|- a-loader `pitch`
+  |- b-loader `pitch`
+    |- c-loader `pitch`
+      |- requested module is picked up as a dependency
+    |- c-loader normal execution
+  |- b-loader normal execution
+|- a-loader normal execution
+</code></pre>
+<p>So why might a loader take advantage of the &quot;pitching&quot; phase?</p>
+<p>First, the <code>data</code> passed to the <code>pitch</code> method is exposed in the execution phase as well under <code>this.data</code> and could be useful for capturing and sharing information from earlier in the cycle.</p>
 <pre><code class="lang-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token function">someSyncOperation</span><span class="token punctuation">(</span>content<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>data<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports<span class="token punctuation">.</span>pitch <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>remainingRequest<span class="token punctuation">,</span> precedingRequest<span class="token punctuation">,</span> data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">someCondition</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">// fast exit</span>
-        <span class="token keyword">return</span> <span class="token string">&quot;module.exports = require(&quot;</span> <span class="token operator">+</span> JSON<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token string">&quot;-!&quot;</span> <span class="token operator">+</span> remainingRequest<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot;);&quot;</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
     data<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 </code></pre>
+<p>Second, if a loader delivers a result in the <code>pitch</code> method the process turns around and skips the remaining loaders. In our example above, if the <code>b-loader</code>s <code>pitch</code> method returned something:</p>
+<pre><code class="lang-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">someSyncOperation</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports<span class="token punctuation">.</span>pitch <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>remainingRequest<span class="token punctuation">,</span> precedingRequest<span class="token punctuation">,</span> data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">someCondition</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token string">&quot;module.exports = require(&quot;</span> <span class="token operator">+</span> JSON<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token string">&quot;-!&quot;</span> <span class="token operator">+</span> remainingRequest<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot;);&quot;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>The steps above would be shortened to:</p>
+<pre><code class="lang-diff">|- a-loader `pitch`
+  |- b-loader `pitch` returns a module
+|- a-loader normal execution
+</code></pre>
+<p>See the <a href="https://github.com/webpack-contrib/bundle-loader">bundle-loader</a> for a good example of how this process can be used in a more meaningful way.</p>
 <h2 class="header"><a class="anchor" href="#the-loader-context" id="the-loader-context"></a><span class="text">The Loader Context</span><a class="icon-link" href="#the-loader-context"></a></h2>
 <p>The loader context represents the properties that are available inside of a loader assigned to the <code>this</code> property.</p>
 <p>Given the following example this require call is used:
