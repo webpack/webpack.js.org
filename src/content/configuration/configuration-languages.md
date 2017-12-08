@@ -40,21 +40,22 @@ const config: webpack.Configuration = {
 export default config;
 ```
 
-next check your tsconfig.json:
+Next check your tsconfig.json:
 
-If module in compilerOptions in tsconfig.json is commonjs, setting is complete, else webpack getting error.
+If the module in compilerOptions in tsconfig.json is commonjs, the setting is complete, else webpack getting error.
 This problem is occurring because ts-node does not support the module syntax of other than commonjs module.
 We have a two solutions.
+
 - modify tsconfig.json
 - install tsconfig-paths
 
 First solution:
 
-edit module in compilerOptions in tsconfig.json. please setting commonjs.
+Edit module in compilerOptions in tsconfig.json. Please setting commonjs.
 
-Secoud solution:
+Second solution:
 
-first install tsconfig-paths
+First install tsconfig-paths
 
 ```bash
 npm install --save-dev tsconfig-paths
