@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/b2ad306f4f7ca7533097.css" rel="stylesheet">
+      <link href="/78fded51deb5361d6eba.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -96,7 +96,7 @@
 <p>Take advantage of the <a href="https://github.com/webpack/loader-utils"><code>loader-utils</code></a> package. It provides a variety of useful tools but one of the most common is retrieving the options passed to the loader. Along with <code>loader-utils</code>, the <a href="https://github.com/webpack-contrib/schema-utils"><code>schema-utils</code></a> package should be used for consistent JSON Schema based validation of loader options. Here&apos;s a brief example that utilizes both:</p>
 <p><strong>loader.js</strong></p>
 <pre><code class="lang-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> getOptions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;loader-utils&apos;</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> validateOptions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;schema-utils&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> validateOptions <span class="token keyword">from</span> <span class="token string">&apos;schema-utils&apos;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> schema <span class="token operator">=</span> <span class="token punctuation">{</span>
   type<span class="token punctuation">:</span> object<span class="token punctuation">,</span>
