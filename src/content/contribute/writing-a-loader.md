@@ -124,7 +124,7 @@ __loader.js__
 
 ``` js
 import { getOptions } from 'loader-utils';
-import { validateOptions } from 'schema-utils';
+import validateOptions from 'schema-utils';
 
 const schema = {
   type: object,
