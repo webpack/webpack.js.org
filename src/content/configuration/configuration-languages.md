@@ -7,6 +7,7 @@ contributors:
   - tarang9211
   - simon04
   - peterblazejewicz
+  - youta1119
 ---
 
 webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found at the [node-interpret](https://github.com/js-cli/js-interpret) package. Using [node-interpret](https://github.com/js-cli/js-interpret), webpack can handle many different types of configuration files.
@@ -37,6 +38,46 @@ const config: webpack.Configuration = {
 };
 
 export default config;
+```
+
+next check your tsconfig.json:
+
+If module in compilerOptions in tsconfig.json is commonjs, setting is complete, else webpack getting error.
+This problem is occurring because ts-node does not support the module syntax of other than commonjs module.
+We have a two solutions.
+- modify tsconfig.json
+- install tsconfig-paths
+
+First solution:
+
+edit module in compilerOptions in tsconfig.json. please setting commonjs.
+
+Secoud solution:
+
+first install tsconfig-paths
+
+```bash
+npm install --save-dev tsconfig-paths
+```
+
+T>ts-node can resolve tsconfig.json using the environment variable provided by tsconfig-path.
+
+and setting environment variable `process.env.TS_NODE_PROJECT` provided by tsconfig-path like this.
+
+```json
+//tsconfig-for-webpack-config.json
+{
+  "compilerOptions": {
+    "module": "commonjs"
+  }
+}
+
+//package.json
+{
+  "scripts": {
+      "build": "TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack"
+  }
+}
 ```
 
 
