@@ -69,7 +69,8 @@ Then set the environment variable `process.env.TS_NODE_PROJECT` provided by tsco
 //tsconfig-for-webpack-config.json
 {
   "compilerOptions": {
-    "module": "commonjs"
+    "module": "commonjs",
+    "target": "es5"
   }
 }
 
