@@ -40,44 +40,44 @@ const config: webpack.Configuration = {
 export default config;
 ```
 
-Next check your tsconfig.json:
+Not that you'll also need to check your `tsconfig.json` file. If the module in `compilerOptions` in `tsconfig.json` is `commonjs`, the setting is complete, else webpack will fail with an error. This occurs because `ts-node` does not support any module syntax other than `commonjs`.
 
-If the module in compilerOptions in tsconfig.json is commonjs, the setting is complete, else webpack will fail with an error.
-This problem is occurring because ts-node does not support the module syntax of other than commonjs module.
-We have a two solutions.
+There are two solutions to this issue:
 
-- modify tsconfig.json
-- install tsconfig-paths
+- Modify `tsconfig.json`.
+- Install `tsconfig-paths`.
 
-First solution:
+The __first option__ is to open your `tsconfig.json` file and look for `compilerOptions`. Set `target` to `"ES5"` and `module` to `"CommonJS"` (or completely remove the `module` option).
 
-In `tsconfig.json` look for `compilerOptions`. Set `target` to `"ES5"` and `module` to `"CommonJS"` (or completely remove the `module` option).
+The __second option__ is to install the `tsconfig-paths` package:
 
-Second solution:
-
-First install tsconfig-paths
-
-```bash
+``` bash
 npm install --save-dev tsconfig-paths
 ```
 
-T>ts-node can resolve tsconfig.json using the environment variable provided by tsconfig-path.
+And create a separate TypeScript configuration specifically for your webpack configs:
 
-Then set the environment variable `process.env.TS_NODE_PROJECT` provided by tsconfig-path like this.
+__tsconfig-for-webpack-config.json__
 
-```json
-//tsconfig-for-webpack-config.json
+``` json
 {
   "compilerOptions": {
     "module": "commonjs",
     "target": "es5"
   }
 }
+```
 
-//package.json
+T> `ts-node` can resolve a `tsconfig.json` file using the environment variable provided by `tsconfig-path`.
+
+Then set the environment variable `process.env.TS_NODE_PROJECT` provided by `tsconfig-path` like so:
+
+__package.json__
+
+```
 {
   "scripts": {
-      "build": "TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack"
+    "build": "TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack"
   }
 }
 ```
