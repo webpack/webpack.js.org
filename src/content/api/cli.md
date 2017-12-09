@@ -215,7 +215,6 @@ These options makes the build [watch](/configuration/watch/) for changes in file
 Parameter                 | Explanation
 ------------------------- | ----------------------
 `--watch`, `-w`           | Watch the filesystem for changes
-`--save`, `-s`            | Recompiles on save regardless of changes
 `--watch-aggregate-timeout` | Timeout for gathering changes while watching
 `--watch-poll`            | The polling interval for watching (also enable polling)
 `--watch-stdin`, `--stdin` | Exit the process when stdin is closed
