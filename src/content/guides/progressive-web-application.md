@@ -5,10 +5,23 @@ contributors:
   - johnnyreilly
 ---
 
+T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
+
+Progressive Web Applications (or PWAs) are web apps that deliver an app-like experience to users. There are many things that can contribute to that.  Of these, the most significant is the ability for an app to be able to function when __offline__. PWAs can function without access to the internet.  They achieve this through the use of a new web functionality called [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers/).
+
+This section will focus on adding an offline experience to our app.  We'll achieve this using a project called [Workbox](https://github.com/GoogleChrome/workbox) which provides tools that help make offline support easier to setup.
+
+
+
 https://github.com/webpack/webpack.js.org/issues/1145#issuecomment-346951250
 
 
-T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
+
+
+
+
+
+
 
 If you've been following the guides, you should have a solid understanding of some of the webpack basics. Before we continue, let's look into setting up a development environment to make our lives a little easier.
 
