@@ -42,7 +42,7 @@ export default config;
 
 Next check your tsconfig.json:
 
-If the module in compilerOptions in tsconfig.json is commonjs, the setting is complete, else webpack getting error.
+If the module in compilerOptions in tsconfig.json is commonjs, the setting is complete, else webpack will fail with an error.
 This problem is occurring because ts-node does not support the module syntax of other than commonjs module.
 We have a two solutions.
 
@@ -51,7 +51,7 @@ We have a two solutions.
 
 First solution:
 
-Edit module in compilerOptions in tsconfig.json. Please setting commonjs.
+In `tsconfig.json` look for `compilerOptions`. Set `target` to `"ES5"` and `module` to `"CommonJS"` (or completely remove the `module` option).
 
 Second solution:
 
@@ -63,7 +63,7 @@ npm install --save-dev tsconfig-paths
 
 T>ts-node can resolve tsconfig.json using the environment variable provided by tsconfig-path.
 
-and setting environment variable `process.env.TS_NODE_PROJECT` provided by tsconfig-path like this.
+Then set the environment variable `process.env.TS_NODE_PROJECT` provided by tsconfig-path like this.
 
 ```json
 //tsconfig-for-webpack-config.json
