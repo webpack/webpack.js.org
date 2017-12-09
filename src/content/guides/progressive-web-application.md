@@ -7,9 +7,47 @@ contributors:
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
 
-Progressive Web Applications (or PWAs) are web apps that deliver an app-like experience to users. There are many things that can contribute to that.  Of these, the most significant is the ability for an app to be able to function when __offline__. PWAs can function without access to the internet.  They achieve this through the use of a new web functionality called [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers/).
+Progressive Web Applications (or PWAs) are web apps that deliver an app-like experience to users. There are many things that can contribute to that.  Of these, the most significant is the ability for an app to be able to function when __offline__.  This is achieved through the use of a web technology called [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers/).
 
 This section will focus on adding an offline experience to our app.  We'll achieve this using a project called [Workbox](https://github.com/GoogleChrome/workbox) which provides tools that help make offline support easier to setup.
+
+## We Don't Work Offline Now
+
+So far, when we've been browsing our webpack output, we've been going directly to the local file system.  That's not the typical experience a user has when accessing a web app.  Normally a user accesses a web app over a network; their browser talking to a __server__ which will serve up the required assets; `html`, `js`, `css` etc.
+
+So let's test what the current experience is like using a simple server.  Let's use the [http-server](https://www.npmjs.com/package/http-server) package: `npm install http-server --save-dev`.  We'll also amend the `scripts` section of our `package.json` to add in a `start` script:
+
+``` diff
+{
+  ...
+  "scripts": {
+-    "build": "webpack"
++    "build": "webpack",
++    "start": "http-server dist"
+  },
+  ...
+}
+```
+
+If you run the command `npm run start`, you should see an output like this:
+
+``` bash
+> http-server dist
+
+Starting up http-server, serving dist
+Available on:
+  http://10.0.75.1:8080
+  http://127.0.0.1:8080
+  http://192.168.0.7:8080
+Hit CTRL-C to stop the server
+```
+
+If you open your browser to http://localhost:8080 you should see your webpack application.  Now if you stop the server and refresh, your webpack application is no longer available.  
+
+This is what we aim to change.  Once we reach the end of this module we should be able to stop the server, hit refresh and still see our application.
+
+
+
 
 
 
