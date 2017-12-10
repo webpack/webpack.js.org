@@ -74,7 +74,7 @@ Then set the environment variable `process.env.TS_NODE_PROJECT` provided by `tsc
 
 __package.json__
 
-```
+```json
 {
   "scripts": {
     "build": "TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack"
