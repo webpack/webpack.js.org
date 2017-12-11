@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/9d45a6901a0c47d5259f.css" rel="stylesheet">
+      <link href="/5d6f937a0e89f50430d9.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -54,7 +54,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <blockquote class="tip"><div class="tip-content"> You may see the term <strong>emitted</strong> or <strong>emit</strong> used throughout our documentation and <a href="/api/plugins">plugin API</a>. This is a fancy term for &apos;produced&apos; or &apos;discharged&apos;. </div></blockquote><blockquote class="tip"><div class="tip-content"> The <code>output</code> property has <a href="/configuration/output">many more configurable features</a> and if you like to know more about the concepts behind the <code>output</code> property, you can <a href="/concepts/output">read more in the concepts section</a>. </div></blockquote><h2 class="header"><a class="anchor" href="#loaders" id="loaders"></a><span class="text">Loaders</span><a class="icon-link" href="#loaders"></a></h2>
 <p><em>Loaders</em> enable webpack to process more than just JavaScript files (webpack itself only understands JavaScript). They give you the ability to leverage webpack&apos;s bundling capabilities for all kinds of files by converting them to valid <a href="/concepts/modules">modules</a> that webpack can process.</p>
 <p>Essentially, webpack loaders transform all types of files into modules that can be included in your application&apos;s dependency graph.</p>
-<p>At a high level, <strong>loaders</strong> have two purposes in your webpack config. They work to:</p>
+<blockquote class="warning"><div class="tip-content"> Note that the ability to <code>import</code> any type of module, e.g. <code>.css</code> files, is a feature specific to webpack and may not be supported by other bundlers or task runners. We feel this extension of the language is warranted as it allows developers to build a more accurate dependency graph. </div></blockquote><p>At a high level, <strong>loaders</strong> have two purposes in your webpack config. They work to:</p>
 <ol>
 <li>Identify which file or files should be transformed by a certain loader (with the <code>test</code> property).</li>
 <li>Transform those files so that they can be added to your dependency graph (and eventually your bundle). (<code>use</code> property)</li>
