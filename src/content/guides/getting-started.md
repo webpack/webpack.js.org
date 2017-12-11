@@ -45,9 +45,28 @@ __src/index.js__
 ``` javascript
 function component() {
   var element = document.createElement('div');
+  
+  // At first, don't include via any script
+  element.innerHTML = 'Hello, webpack';
 
-  // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+  return element;
+}
+
+document.body.appendChild(component());
+```
+
+If wo will use Lodash, our directory contents:
+
+__src/index.js__
+
+``` javascript
+function component() {
+  var element = document.createElement('div');
+  
+- // At first, don't include via any script
+- element.innerHTML = 'Hello, webpack';
++ // Lodash, currently included via a script, is required for this line to work
++ element.innerHTML = _.join(['Hello', 'webpack'], ' '); 
 
   return element;
 }
