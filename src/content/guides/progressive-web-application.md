@@ -7,13 +7,13 @@ contributors:
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
 
-Progressive Web Applications (or PWAs) are web apps that deliver an app-like experience to users. There are many things that can contribute to that.  Of these, the most significant is the ability for an app to be able to function when __offline__.  This is achieved through the use of a web technology called [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers/).
+Progressive Web Applications (or PWAs) are web apps that deliver an app-like experience to users. There are many things that can contribute to that. Of these, the most significant is the ability for an app to be able to function when __offline__.  This is achieved through the use of a web technology called [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers/).
 
-This section will focus on adding an offline experience to our app.  We'll achieve this using a project called [Workbox](https://github.com/GoogleChrome/workbox) which provides tools that help make offline support easier to setup.
+This section will focus on adding an offline experience to our app. We'll achieve this using a Google project called [Workbox](https://github.com/GoogleChrome/workbox) which provides tools that help make offline support for web apps easier to setup.
 
 ## We Don't Work Offline Now
 
-So far, when we've been browsing our webpack output, we've been going directly to the local file system.  That's not the typical experience a user has when accessing a web app.  Normally a user accesses a web app over a network; their browser talking to a __server__ which will serve up the required assets; `html`, `js`, `css` etc.
+So far, when we've been browsing our webpack output, we've been going directly to the local file system. That's not the typical experience a user has when accessing a web app. Normally a user accesses a web app over a network; their browser talking to a __server__ which will serve up the required assets; `html`, `js`, `css` etc.
 
 So let's test what the current experience is like using a simple server.  Let's use the [http-server](https://www.npmjs.com/package/http-server) package: `npm install http-server --save-dev`.  We'll also amend the `scripts` section of our `package.json` to add in a `start` script:
 
@@ -29,7 +29,7 @@ So let's test what the current experience is like using a simple server.  Let's 
 }
 ```
 
-If you run the command `npm run start`, you should see an output like this:
+If you haven't previously done so, run the command `npm run build` to build your project.  Then run the command `npm run start`. This should produce output like this:
 
 ``` bash
 > http-server dist
@@ -42,10 +42,81 @@ Available on:
 Hit CTRL-C to stop the server
 ```
 
-If you open your browser to http://localhost:8080 you should see your webpack application.  Now if you stop the server and refresh, your webpack application is no longer available.  
+If you open your browser to http://localhost:8080 you should see your webpack application being served up from the `dist` directory. If you stop the server and refresh, the webpack application is no longer available.  
 
-This is what we aim to change.  Once we reach the end of this module we should be able to stop the server, hit refresh and still see our application.
+This is what we aim to change. Once we reach the end of this module we should be able to stop the server, hit refresh and still see our application.
 
+## Adding Workbox
+
+Let's add the Workbox webpack plugin and adjust the `webpack.config.js` file:
+
+``` bash
+npm install workbox-webpack-plugin --save-dev
+```
+
+__webpack.config.js__
+
+``` diff
+  const path = require('path');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
++ const WorkboxPlugin = require('workbox-webpack-plugin');
+
+  module.exports = {
+    entry: {
+      app: './src/index.js',
+      print: './src/print.js'
+    },
+    plugins: [
+        new CleanWebpackPlugin(['dist']),
+        new HtmlWebpackPlugin({
+            title: 'Output Management'
+-       })
++       }),
++       new WorkboxPlugin({
++           // these options encourage the ServiceWorkers to get in there fast 
++           // and not allow any straggling "old" SWs to hang around
++           clientsClaim: true,
++           skipWaiting: true,
++       })
+    ],
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
+```
+
+With that in pace, let's see what happens when we do an `npm run build`:
+
+``` bash
+clean-webpack-plugin: /mnt/c/Source/webpack-follow-along/dist has been removed.
+Hash: 6588e31715d9be04be25
+Version: webpack 3.10.0
+Time: 782ms
+                                                Asset       Size  Chunks                    Chunk Names
+                                        app.bundle.js     545 kB    0, 1  [emitted]  [big]  app
+                                      print.bundle.js    2.74 kB       1  [emitted]         print
+                                           index.html  254 bytes          [emitted]
+precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js  268 bytes          [emitted]
+                                                sw.js       1 kB          [emitted]
+   [0] ./src/print.js 87 bytes {0} {1} [built]
+   [1] ./src/index.js 477 bytes {0} [built]
+   [3] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [4] (webpack)/buildin/module.js 517 bytes {0} [built]
+    + 1 hidden module
+Child html-webpack-plugin for "index.html":
+     1 asset
+       [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+       [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+        + 2 hidden modules
+```
+
+As you can see, we now have 2 extra files being generated; `sw.js` and the more verbose `precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js`. `sw.js` is the Service Worker file and `precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js` is a file that `sw.js` imports requires so it can run.
+
+So we're now at the happy point of having produced a Service Worker. What to do with it?
+
+## Registering Our Service Worker
 
 
 
