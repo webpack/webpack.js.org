@@ -139,7 +139,7 @@ __index.js__
 
 Once more `npm run build` to build a version of the app incuding the registration code. Then serve it with `npm run start`. Navigate to http://localhost:8080 and take a look at the console. Somewhere in there you should see:
 
-```
+``` bash
 SW registered
 ```
 
