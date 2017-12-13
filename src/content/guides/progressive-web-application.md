@@ -15,7 +15,7 @@ This section will focus on adding an offline experience to our app. We'll achiev
 
 So far, when we've been browsing our webpack output, we've been going directly to the local file system. That's not the typical experience a user has when accessing a web app. Normally a user accesses a web app over a network; their browser talking to a __server__ which will serve up the required assets; `html`, `js`, `css` etc.
 
-So let's test what the current experience is like using a simple server. Let's use the [http-server](https://www.npmjs.com/package/http-server) package: `npm install http-server --save-dev`.  We'll also amend the `scripts` section of our `package.json` to add in a `start` script:
+So let's test what the current experience is like using a simple server. Let's use the [http-server](https://www.npmjs.com/package/http-server) package: `npm install http-server --save-dev`. We'll also amend the `scripts` section of our `package.json` to add in a `start` script:
 
 ``` diff
 {
