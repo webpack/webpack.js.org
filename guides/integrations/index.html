@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/0f54e7bc8251328807a4.css" rel="stylesheet">
+      <link href="/6efeeecbbe11a0a19ab4.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -26,7 +26,7 @@
 <p>So while webpack&apos;s core focus is bundling, there are a variety of extensions that can enable you to use it for jobs typical of a task runner. Integrating a separate tool adds complexity, so be sure to weigh the pros and cons before going forward.</p>
 <h2 class="header"><a class="anchor" href="#grunt" id="grunt"></a><span class="text">Grunt</span><a class="icon-link" href="#grunt"></a></h2>
 <p>For those using Grunt, we recommend the <a href="https://www.npmjs.com/package/grunt-webpack"><code>grunt-webpack</code></a> package. With <code>grunt-webpack</code> you can run webpack or <a href="https://github.com/webpack/webpack-dev-server">webpack-dev-server</a> as a task, get access to stats within <a href="https://gruntjs.com/api/grunt.template">template tags</a>, split development and production configurations and more. Start by installing <code>grunt-webpack</code> as well as <code>webpack</code> itself if you haven&apos;t already:</p>
-<pre><code class="lang-bash">npm i --save-dev grunt-webpack webpack
+<pre><code class="lang-bash">npm <span class="token function">install</span> --save-dev grunt-webpack webpack
 </code></pre>
 <p>Then register a configuration and load the task:</p>
 <p><strong>Gruntfile.js</strong></p>
@@ -49,7 +49,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>For more information, please visit the <a href="https://github.com/webpack-contrib/grunt-webpack">repository</a>.</p>
 <h2 class="header"><a class="anchor" href="#gulp" id="gulp"></a><span class="text">Gulp</span><a class="icon-link" href="#gulp"></a></h2>
 <p>Gulp is also a fairly straightforward integration with the help of the <a href="https://github.com/shama/webpack-stream"><code>webpack-stream</code></a> package (a.k.a. <code>gulp-webpack</code>). In this case, it is unnecessary to install <code>webpack</code> separately as it is a direct dependency of <code>webpack-stream</code>:</p>
-<pre><code class="lang-bash">npm i --save-dev webpack-stream
+<pre><code class="lang-bash">npm <span class="token function">install</span> --save-dev webpack-stream
 </code></pre>
 <p>Just <code>require(&apos;webpack-stream&apos;)</code> instead of <code>webpack</code> and optionally pass it an configuration:</p>
 <p><strong>gulpfile.js</strong></p>
@@ -66,13 +66,13 @@ gulp<span class="token punctuation">.</span><span class="token function">task</s
 <p>For more information, please visit the <a href="https://github.com/shama/webpack-stream">repository</a>.</p>
 <h2 class="header"><a class="anchor" href="#mocha" id="mocha"></a><span class="text">Mocha</span><a class="icon-link" href="#mocha"></a></h2>
 <p>The <a href="https://github.com/zinserjan/mocha-webpack"><code>mocha-webpack</code></a> utility can be used for a clean integration with Mocha. The repository offers more details on the pros and cons but essentially <code>mocha-webpack</code> is a simple wrapper that provides almost the same CLI as Mocha itself and provides various webpack functionality like an improved watch mode and improved path resolution. Here is a small example of how you would install it and use it to run a test suite (found within <code>./test</code>):</p>
-<pre><code class="lang-bash">npm i --save-dev webpack mocha mocha-webpack
+<pre><code class="lang-bash">npm <span class="token function">install</span> --save-dev webpack mocha mocha-webpack
 mocha-webpack <span class="token string">&apos;test/**/*.js&apos;</span>
 </code></pre>
 <p>For more information, please visit the <a href="https://github.com/zinserjan/mocha-webpack">repository</a>.</p>
 <h2 class="header"><a class="anchor" href="#karma" id="karma"></a><span class="text">Karma</span><a class="icon-link" href="#karma"></a></h2>
 <p>The <a href="https://github.com/webpack-contrib/karma-webpack"><code>karma-webpack</code></a> package allows you to use webpack to pre-process files in <a href="http://karma-runner.github.io/1.0/index.html">Karma</a>. It also makes use of <a href="https://github.com/webpack/webpack-dev-middleware"><code>webpack-dev-middleware</code></a> and allows passing configurations for both. A simple example may look something like this:</p>
-<pre><code class="lang-bash">npm i --save-dev webpack karma karma-webpack
+<pre><code class="lang-bash">npm <span class="token function">install</span> --save-dev webpack karma karma-webpack
 </code></pre>
 <p><strong>karma.conf.js</strong></p>
 <pre><code class="lang-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span> <span class="token punctuation">{</span>

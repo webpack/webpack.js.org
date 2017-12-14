@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/0f54e7bc8251328807a4.css" rel="stylesheet">
+      <link href="/6efeeecbbe11a0a19ab4.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -84,7 +84,7 @@
 <h2 class="header"><a class="anchor" href="#minify-the-output" id="minify-the-output"></a><span class="text">Minify the Output</span><a class="icon-link" href="#minify-the-output"></a></h2>
 <p>So we&apos;ve cued up our &quot;dead code&quot; to be dropped by using the <code>import</code> and <code>export</code> syntax, but we still need to drop it from the bundle. To do that, we&apos;ll add a minifier that supports dead code removal -- the <a href="/plugins/uglifyjs-webpack-plugin"><code>UglifyJSPlugin</code></a> -- to our configuration...</p>
 <p>Let&apos;s start by installing it:</p>
-<pre><code class="lang-bash">npm i --save-dev uglifyjs-webpack-plugin
+<pre><code class="lang-bash">npm <span class="token function">install</span> --save-dev uglifyjs-webpack-plugin
 </code></pre>
 <p>And then adding it into our config:</p>
 <p><strong>webpack.config.js</strong></p>

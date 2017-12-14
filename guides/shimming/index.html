@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/0f54e7bc8251328807a4.css" rel="stylesheet">
+      <link href="/6efeeecbbe11a0a19ab4.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -208,7 +208,7 @@ bundle.js  544 kB       0  <span class="token punctuation">[</span>emitted<span 
 <h2 class="header"><a class="anchor" href="#loading-polyfills" id="loading-polyfills"></a><span class="text">Loading Polyfills</span><a class="icon-link" href="#loading-polyfills"></a></h2>
 <p>Almost everything we&apos;ve discussed thus far has been in relation to handling legacy packages. Let&apos;s move on to our second topic: <strong>polyfills</strong>.</p>
 <p>There&apos;s a lot of ways to load polyfills. For example, to include the <a href="https://babeljs.io/docs/usage/polyfill/"><code>babel-polyfill</code></a> we might simply:</p>
-<pre><code class="lang-bash">npm i --save babel-polyfill
+<pre><code class="lang-bash">npm <span class="token function">install</span> --save babel-polyfill
 </code></pre>
 <p>and <code>import</code> it so as to include it in our main bundle:</p>
 <p><strong>src/index.js</strong></p>
@@ -226,7 +226,7 @@ bundle.js  544 kB       0  <span class="token punctuation">[</span>emitted<span 
 </code></pre>
 <blockquote class="tip"><div class="tip-content"> Note that we aren&apos;t binding the <code>import</code> to a variable. This is because polyfills simply run on their own, prior to the rest of the code base, allowing us to then assume certain native functionality exists. </div></blockquote><p>Now while this is one approach, <strong>including polyfills in the main bundle is not recommended</strong> because this penalizes modern browsers users by making them download a bigger file with unneeded scripts.</p>
 <p>Let&apos;s move our <code>import</code> to a new file and add the <a href="https://github.com/github/fetch"><code>whatwg-fetch</code></a> polyfill:</p>
-<pre><code class="lang-bash">npm i --save whatwg-fetch
+<pre><code class="lang-bash">npm <span class="token function">install</span> --save whatwg-fetch
 </code></pre>
 <p><strong>src/index.js</strong></p>
 <pre><code class="lang-diff"><span class="token deleted">- import &apos;babel-polyfill&apos;;</span>

@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/0f54e7bc8251328807a4.css" rel="stylesheet">
+      <link href="/6efeeecbbe11a0a19ab4.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -156,7 +156,7 @@
 </code></pre>
 <h2 class="header"><a class="anchor" href="#testing" id="testing"></a><span class="text">Testing</span><a class="icon-link" href="#testing"></a></h2>
 <p>So you&apos;ve written a loader, followed the guidelines above, and have it set up to run locally. What&apos;s next? Let&apos;s go through a simple unit testing example to ensure our loader is working the way we expect. We&apos;ll be using the <a href="https://facebook.github.io/jest/">Jest</a> framework to do this. We&apos;ll also install <code>babel-jest</code> and some presets that will allow us to use the <code>import</code> / <code>export</code> and <code>async</code> / <code>await</code>. Let&apos;s start by installing and saving these as a <code>devDependencies</code>:</p>
-<pre><code class="lang-bash">npm i --save-dev jest babel-jest babel-preset-env
+<pre><code class="lang-bash">npm <span class="token function">install</span> --save-dev jest babel-jest babel-preset-env
 </code></pre>
 <p><strong>.babelrc</strong></p>
 <pre><code class="lang-json"><span class="token punctuation">{</span>
@@ -187,7 +187,7 @@
 <pre><code class="lang-text">Hey <span class="token punctuation">[</span>name<span class="token punctuation">]</span><span class="token operator">!</span>
 </code></pre>
 <p>Pay close attention to this next step as we&apos;ll be using the <a href="/api/node">Node.js API</a> and <a href="https://github.com/webpack/memory-fs"><code>memory-fs</code></a> to execute webpack. This lets us avoid emitting <code>output</code> to disk and will give us access to the <code>stats</code> data which we can use to grab our transformed module:</p>
-<pre><code class="lang-bash">npm i --save-dev webpack memory-fs
+<pre><code class="lang-bash">npm <span class="token function">install</span> --save-dev webpack memory-fs
 </code></pre>
 <p><strong>test/compiler.js</strong></p>
 <pre><code class="lang-js"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&apos;path&apos;</span><span class="token punctuation">;</span>
