@@ -42,7 +42,7 @@ export default class Navigation extends React.Component {
             <input
               type="text"
               className="navigation__search-input"
-              placeholder="Search documentation…"
+              placeholder="在文档中搜索..."
               onBlur={ this._toggleSearch.bind(this) } />
             <button
               className="navigation__search-icon icon-magnifying-glass"
