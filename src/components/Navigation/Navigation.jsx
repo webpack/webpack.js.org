@@ -119,8 +119,8 @@ export default class Navigation extends React.Component {
       }
 
       docsearch({
-        apiKey: 'fac401d1a5f68bc41f01fb6261661490',
-        indexName: 'webpack-js-org',
+        apiKey: 'cccb861b286b414d0f820013f3f70b84',
+        indexName: 'webpack_china',
         inputSelector: '.navigation__search-input'
       });
 
