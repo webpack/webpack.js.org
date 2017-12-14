@@ -37,10 +37,10 @@
         <loc>https://webpack.js.org/license/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/index.html</loc>
+        <loc>https://webpack.js.org/organization/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/organization/index.html</loc>
+        <loc>https://webpack.js.org/loaders/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/index.html</loc>
@@ -109,10 +109,10 @@
         <loc>https://webpack.js.org/api/template/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/configuration/index.html</loc>
+        <loc>https://webpack.js.org/concepts/dependency-graph/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/dependency-graph/index.html</loc>
+        <loc>https://webpack.js.org/concepts/configuration/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/entry-points/index.html</loc>
@@ -301,13 +301,13 @@
         <loc>https://webpack.js.org/guides/shimming/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/tree-shaking/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/guides/typescript/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/why-webpack/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/guides/tree-shaking/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/babel-loader/index.html</loc>
@@ -499,9 +499,6 @@
         <loc>https://webpack.js.org/plugins/named-modules-plugin/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/no-emit-on-errors-plugin/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/plugins/normal-module-replacement-plugin/index.html</loc>
     </url>
     <url>
@@ -512,6 +509,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/provide-plugin/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/no-emit-on-errors-plugin/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/source-map-dev-tool-plugin/index.html</loc>
