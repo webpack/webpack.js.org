@@ -114,7 +114,7 @@ So we've cued up our "dead code" to be dropped by using the `import` and `export
 Let's start by installing it:
 
 ``` bash
-npm i --save-dev uglifyjs-webpack-plugin
+npm install --save-dev uglifyjs-webpack-plugin
 ```
 
 And then adding it into our config:
