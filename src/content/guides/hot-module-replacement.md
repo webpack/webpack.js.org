@@ -2,6 +2,7 @@
 title: Hot Module Replacement
 sort: 6
 contributors:
+  - RobbertWolfs
   - jmreidy
   - jhnns
   - sararubin
@@ -45,9 +46,8 @@ __webpack.config.js__
 
   module.exports = {
     entry: {
--      app: './src/index.js',
+       app: './src/index.js',
 -      print: './src/print.js'
-+      app: './src/index.js'
     },
     devtool: 'inline-source-map',
     devServer: {
