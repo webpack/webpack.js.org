@@ -46,8 +46,8 @@ __webpack.config.js__
 
   module.exports = {
     entry: {
-       app: './src/index.js'
--      print: './src/print.js'
+      app: './src/index.js'
+-     print: './src/print.js'
     },
     devtool: 'inline-source-map',
     devServer: {
