@@ -22,14 +22,14 @@ When processing modules with webpack, it is important to understand the differen
 
 ## Node
 
-While most users can get away with just using the CLI along with a configuration file, more fine-grained control of the compilation can be achieved via the Node interface. This includes passing multiple configurations, programatically running or watching, and collecting stats.
+While most users can get away with just using the CLI along with a configuration file, more fine-grained control of the compilation can be achieved via the Node interface. This includes passing multiple configurations, programmatically running or watching, and collecting stats.
 
 [Learn more!](/api/node)
 
 
 ## Loaders
 
-Loaders are transformations that are applied to the source code of a module. They are written as functions that accept source code as a parameter and return a new version of that code with tranformations applied.
+Loaders are transformations that are applied to the source code of a module. They are written as functions that accept source code as a parameter and return a new version of that code with transformations applied.
 
 [Learn more!](/api/loaders)
 
