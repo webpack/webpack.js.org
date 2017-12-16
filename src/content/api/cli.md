@@ -4,6 +4,7 @@ sort: 2
 contributors:
   - ev1stensberg
   - simon04
+  - tbroadley
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/

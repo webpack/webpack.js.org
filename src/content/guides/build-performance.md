@@ -3,6 +3,7 @@ title: Build Performance
 sort: 17
 contributors:
   - sokra
+  - tbroadley
 ---
 
 This guide contains some useful tips for improving build/compilation performance.

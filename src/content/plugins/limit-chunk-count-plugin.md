@@ -3,6 +3,7 @@ title: LimitChunkCountPlugin
 contributors:
   - rouzbeh84
   - skipjack
+  - tbroadley
 ---
 
 While writing your code, you may have already added many code split points to load stuff on demand. After compiling you might notice that some chunks are too small - creating larger HTTP overhead. Luckily, this plugin can post-process your chunks by merging them.
