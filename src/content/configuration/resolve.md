@@ -216,7 +216,7 @@ With an absolute path, it will only search in the given directory.
 modules: ["node_modules"]
 ```
 
-If you want to add a directory to search in that takes precedences over `node_modules/`:
+If you want to add a directory to search in that takes precedence over `node_modules/`:
 
 ``` js
 modules: [path.resolve(__dirname, "src"), "node_modules"]

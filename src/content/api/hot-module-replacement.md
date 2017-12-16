@@ -117,7 +117,7 @@ The optional `options` object can include the following properties:
 
 - `ignoreUnaccepted` (boolean): Ignore changes made to unaccepted modules.
 - `ignoreDeclined` (boolean): Ignore changes made to declined modules.
-- `ignoreErrored` (boolean): Ignore errors throw in accept handlers, error handlers and while reevaulating module.
+- `ignoreErrored` (boolean): Ignore errors throw in accept handlers, error handlers and while reevaluating module.
 - `onDeclined` (function(info)): Notifier for declined modules
 - `onUnaccepted` (function(info)): Notifier for unaccepted modules
 - `onAccepted` (function(info)): Notifier for accepted modules

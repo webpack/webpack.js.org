@@ -15,7 +15,7 @@ webpack can compile for multiple environments or _targets_. To understand what a
 
 `string | function(compiler)`
 
-Intructs webpack to target a specific environment.
+Instructs webpack to target a specific environment.
 
 
 ### `string`

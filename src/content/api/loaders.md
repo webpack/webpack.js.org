@@ -210,7 +210,7 @@ this.callback(
 
 T> It can be useful to pass an abstract syntax tree (AST), like [`ESTree`](https://github.com/estree/estree), as the fourth argument (`meta`) to speed up the build time if you want to share common ASTs between loaders.
 
-In case this function is called, you should return undefined to avoid ambigious loader results.
+In case this function is called, you should return undefined to avoid ambiguous loader results.
 
 
 ### `this.async`
@@ -391,7 +391,7 @@ Access to the `compilation`'s `inputFileSystem` property.
 
 ## Deprecated context properties
 
-W> The usage of these properties is highly discouraged since we are planing to remove them from the context. They are still listed here for documentation purposes.
+W> The usage of these properties is highly discouraged since we are planning to remove them from the context. They are still listed here for documentation purposes.
 
 
 ### `this.exec`
