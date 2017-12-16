@@ -3,6 +3,7 @@ title: Hot Module Replacement
 contributors:
   - sokra
   - skipjack
+  - tbroadley
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement

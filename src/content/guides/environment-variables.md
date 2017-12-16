@@ -4,6 +4,7 @@ sort: 16
 contributors:
   - simon04
   - grisanu
+  - tbroadley
 related:
   - title: The Fine Art of the webpack 3 Config
     url: https://blog.flennik.com/the-fine-art-of-the-webpack-2-config-dc4d19d7f172#d60a

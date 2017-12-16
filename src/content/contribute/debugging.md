@@ -3,6 +3,7 @@ title: Debugging
 sort: 7
 contributors:
   - skipjack
+  - tbroadley
 related:
   - title: Learn and Debug webpack with Chrome DevTools!
     url: https://medium.com/webpack/webpack-bits-learn-and-debug-webpack-with-chrome-dev-tools-da1c5b19554b

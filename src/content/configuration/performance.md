@@ -3,6 +3,7 @@ title: Performance
 sort: 14
 contributors:
   - thelarkinn
+  - tbroadley
 ---
 
 These options allows you to control how webpack notifies you of assets and entrypoints that exceed a specific file limit. 
