@@ -90,8 +90,8 @@ compiler.hooks.myCustomHook = new SyncHook(['a', 'b', 'c'])
 compiler.hooks.myCustomHook.call(a, b, c);
 ```
 
-Again, see the [documentation]() for `tapable` to learn more about the different
-hook classes and how they work.
+Again, see the [documentation]() for `tapable` to learn more about the
+different hook classes and how they work.
 
 
 ## Next Steps
