@@ -130,7 +130,7 @@ const schema = {
   type: 'object',
   properties: {
     test: {
-      type: string
+      type: 'string'
     }
   }
 }
