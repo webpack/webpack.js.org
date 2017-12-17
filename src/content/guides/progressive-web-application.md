@@ -1,21 +1,24 @@
 ---
 title: Progressive Web Application
-sort: 26
+sort: 14
 contributors:
   - johnnyreilly
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
 
-Progressive Web Applications (or PWAs) are web apps that deliver an app-like experience to users. There are many things that can contribute to that. Of these, the most significant is the ability for an app to be able to function when __offline__. This is achieved through the use of a web technology called [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers/).
+Progressive Web Applications (or PWAs) are web apps that deliver an experience similar to native applications. There are many things that can contribute to that. Of these, the most significant is the ability for an app to be able to function when __offline__. This is achieved through the use of a web technology called [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers/).
 
 This section will focus on adding an offline experience to our app. We'll achieve this using a Google project called [Workbox](https://github.com/GoogleChrome/workbox) which provides tools that help make offline support for web apps easier to setup.
 
+
 ## We Don't Work Offline Now
 
-So far, when we've been browsing our webpack output, we've been going directly to the local file system. That's not the typical experience a user has when accessing a web app. Normally a user accesses a web app over a network; their browser talking to a __server__ which will serve up the required assets; `html`, `js`, `css` etc.
+So far, we've been viewing the output by going directly to the local file system. Typically though, a real user accesses a web app over a network; their browser talking to a __server__ which will serve up the required assets (e.g. `.html`, `.js`, and `.css` files).
 
 So let's test what the current experience is like using a simple server. Let's use the [http-server](https://www.npmjs.com/package/http-server) package: `npm install http-server --save-dev`. We'll also amend the `scripts` section of our `package.json` to add in a `start` script:
+
+__package.json__
 
 ``` diff
 {
@@ -29,22 +32,23 @@ So let's test what the current experience is like using a simple server. Let's u
 }
 ```
 
-If you haven't previously done so, run the command `npm run build` to build your project. Then run the command `npm run start`. This should produce output like this:
+If you haven't previously done so, run the command `npm run build` to build your project. Then run the command `npm start`. This should produce output like this:
 
 ``` bash
 > http-server dist
 
 Starting up http-server, serving dist
 Available on:
-  http://10.0.75.1:8080
+  http://xx.x.x.x:8080
   http://127.0.0.1:8080
-  http://192.168.0.7:8080
+  http://xxx.xxx.x.x:8080
 Hit CTRL-C to stop the server
 ```
 
 If you open your browser to http://localhost:8080 you should see your webpack application being served up from the `dist` directory. If you stop the server and refresh, the webpack application is no longer available.  
 
 This is what we aim to change. Once we reach the end of this module we should be able to stop the server, hit refresh and still see our application.
+
 
 ## Adding Workbox
 
@@ -67,19 +71,19 @@ __webpack.config.js__
       app: './src/index.js',
       print: './src/print.js'
     },
-    plugins: [
-        new CleanWebpackPlugin(['dist']),
-        new HtmlWebpackPlugin({
-            title: 'Output Management'
--       })
-+       }),
-+       new WorkboxPlugin({
-+           // these options encourage the ServiceWorkers to get in there fast 
-+           // and not allow any straggling "old" SWs to hang around
-+           clientsClaim: true,
-+           skipWaiting: true,
-+       })
-    ],
+  plugins: [
+    new CleanWebpackPlugin(['dist']),
+    new HtmlWebpackPlugin({
+      title: 'Output Management'
+-     })
++     }),
++     new WorkboxPlugin({
++       // these options encourage the ServiceWorkers to get in there fast 
++       // and not allow any straggling "old" SWs to hang around
++       clientsClaim: true,
++       skipWaiting: true
++     })
+  ],
     output: {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist')
@@ -112,13 +116,14 @@ Child html-webpack-plugin for "index.html":
         + 2 hidden modules
 ```
 
-As you can see, we now have 2 extra files being generated; `sw.js` and the more verbose `precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js`. `sw.js` is the Service Worker file and `precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js` is a file that `sw.js` imports requires so it can run. Your own generated files will likely be different; but you should have an `sw.js` file there.
+As you can see, we now have 2 extra files being generated; `sw.js` and the more verbose `precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js`. `sw.js` is the Service Worker file and `precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js` is a file that `sw.js` requires so it can run. Your own generated files will likely be different; but you should have an `sw.js` file there.
 
-So we're now at the happy point of having produced a Service Worker. What to do with it?
+So we're now at the happy point of having produced a Service Worker. What's next?
+
 
 ## Registering Our Service Worker
 
-In order that our Service Worker can come out and play, we need to register it. We'll do that by adding the registration code below:
+Let's allow our Service Worker to come out and play by registering it. We'll do that by adding the registration code below:
 
 __index.js__
 
@@ -127,23 +132,24 @@ __index.js__
   import printMe from './print.js';
 
 + if ('serviceWorker' in navigator) {
-+     window.addEventListener('load', () => {
-+         navigator.serviceWorker.register('/sw.js').then(registration => {
-+             console.log('SW registered: ', registration);
-+         }).catch(registrationError => {
-+             console.log('SW registration failed: ', registrationError);
-+         });
++   window.addEventListener('load', () => {
++     navigator.serviceWorker.register('/sw.js').then(registration => {
++       console.log('SW registered: ', registration);
++     }).catch(registrationError => {
++       console.log('SW registration failed: ', registrationError);
 +     });
++   });
 + }
 ```
 
-Once more `npm run build` to build a version of the app incuding the registration code. Then serve it with `npm run start`. Navigate to http://localhost:8080 and take a look at the console. Somewhere in there you should see:
+Once more `npm run build` to build a version of the app including the registration code. Then serve it with `npm start`. Navigate to http://localhost:8080 and take a look at the console. Somewhere in there you should see:
 
 ``` bash
 SW registered
 ```
 
 Now to test it. Stop your server and refresh your page. If your browser supports Service Workers then you should still be looking at your application. However, it has been served up by your Service Worker and __not__ by the server.
+
 
 ## Conclusion
 
