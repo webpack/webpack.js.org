@@ -182,6 +182,7 @@ __webpack.prod.js__
 
 T> Avoid `inline-***` and `eval-***` use in production as they can increase bundle size and reduce the overall performance.
 
+
 ## Specify the Environment
 
 Many libraries will key off the `process.env.NODE_ENV` variable to determine what should be included in the library. For example, when not in _production_ some libraries may add additional logging and testing to make debugging easier. However, with `process.env.NODE_ENV === 'production'` they might drop or add significant portions of code to optimize how things run for your actual users. We can use webpack's built in [`DefinePlugin`](/plugins/define-plugin) to define this variable for all our dependencies:
@@ -233,6 +234,11 @@ __src/index.js__
 
   document.body.appendChild(component());
 ```
+
+
+## Split CSS
+
+As mentioned in __Asset Management__ at the end of the [Loading CSS](/guides/asset-management#loading-css) section, it is typically best practice to split your CSS out to a separate file using the `ExtractTextPlugin`. There are some good examples of how to do this in the plugin's [documentation](/plugins/extract-text-webpack-plugin). The `disable` option can be used in combination with the `--env` flag to allow inline loading in development, which is recommended for Hot Module Replacement and build speed.
 
 
 ## CLI Alternatives
