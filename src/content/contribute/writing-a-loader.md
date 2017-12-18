@@ -127,10 +127,10 @@ import { getOptions } from 'loader-utils';
 import validateOptions from 'schema-utils';
 
 const schema = {
-  type: object,
+  type: 'object',
   properties: {
     test: {
-      type: string
+      type: 'string'
     }
   }
 }
