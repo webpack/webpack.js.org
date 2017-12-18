@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/fe9c6af2cc749cff261d.css" rel="stylesheet">
+      <link href="/7007fc1b5e69247dc755.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -50,7 +50,7 @@
 <li>Set <code>resolve.cacheWithContext: false</code> if you use custom resolving plugins, that are not context specific.</li>
 </ul>
 <h3 class="header"><a class="anchor" href="#dlls" id="dlls"></a><span class="text">Dlls</span><a class="icon-link" href="#dlls"></a></h3>
-<p>Use the <code>DllPlugin</code> to move code that is changed less often into a separate compilation. This will improve the application&apos;s compilation speed, although it does increase complexitity of the build process.</p>
+<p>Use the <code>DllPlugin</code> to move code that is changed less often into a separate compilation. This will improve the application&apos;s compilation speed, although it does increase complexity of the build process.</p>
 <h3 class="header"><a class="anchor" href="#smaller-faster" id="smaller-faster"></a><span class="text">Smaller = Faster</span><a class="icon-link" href="#smaller-faster"></a></h3>
 <p>Decrease the total size of the compilation to increase build performance. Try to keep chunks small.</p>
 <ul>
@@ -58,14 +58,14 @@
 <li>Use the <code>CommonsChunksPlugin</code> in Multi-Page Applications.</li>
 <li>Use the <code>CommonsChunksPlugin</code> in <code>async</code> mode in Multi-Page Applications.</li>
 <li>Remove unused code.</li>
-<li>Only compile the part of the code you are currenly developing on.</li>
+<li>Only compile the part of the code you are currently developing on.</li>
 </ul>
 <h3 class="header"><a class="anchor" href="#worker-pool" id="worker-pool"></a><span class="text">Worker Pool</span><a class="icon-link" href="#worker-pool"></a></h3>
 <p>The <code>thread-loader</code> can be used to offload expensive loaders to a worker pool.</p>
 <blockquote class="warning"><div class="tip-content"> Don&apos;t use too many workers as there is a boot overhead for the Node.js runtime and the loader. Minimize the module transfers between worker and main process. IPC is expensive. </div></blockquote><h3 class="header"><a class="anchor" href="#persistent-cache" id="persistent-cache"></a><span class="text">Persistent cache</span><a class="icon-link" href="#persistent-cache"></a></h3>
 <p>Enable persistent caching with the <code>cache-loader</code>. Clear cache directory on <code>&quot;postinstall&quot;</code> in <code>package.json</code>.</p>
 <h3 class="header"><a class="anchor" href="#custom-plugins-loaders" id="custom-plugins-loaders"></a><span class="text">Custom plugins/loaders</span><a class="icon-link" href="#custom-plugins-loaders"></a></h3>
-<p>Profile them to not intruduce a performance problem here.</p>
+<p>Profile them to not introduce a performance problem here.</p>
 <hr>
 <h2 class="header"><a class="anchor" href="#development" id="development"></a><span class="text">Development</span><a class="icon-link" href="#development"></a></h2>
 <p>The following steps are especially useful in <em>development</em>.</p>
@@ -82,7 +82,7 @@
 <h3 class="header"><a class="anchor" href="#devtool" id="devtool"></a><span class="text">Devtool</span><a class="icon-link" href="#devtool"></a></h3>
 <p>Be aware of the performance differences of the different <code>devtool</code> settings.</p>
 <ul>
-<li><code>&quot;eval&quot;</code> has the best performance, but doesn&apos;t assist you for transpilied code.</li>
+<li><code>&quot;eval&quot;</code> has the best performance, but doesn&apos;t assist you for transpiled code.</li>
 <li>The <code>cheap-source-map</code> variants are more performant, if you can live with the slightly worse mapping quality.</li>
 <li>Use a <code>eval-source-map</code> variant for incremental builds.</li>
 </ul>
@@ -133,7 +133,7 @@
 <ul>
 <li><code>node-sass</code> has a bug which blocks threads from the Node.js threadpool. When using it with the <code>thread-loader</code> set <code>workerParallelJobs: 2</code>.</li>
 </ul>
-</div><div><hr><h3>Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/sokra"><img src="https://github.com/sokra.png?size=90"><span class="contributor__name"> sokra</span></a></div></div></div><div class="interactive" id="src/components/Gitter/Gitter.jsx" data-props="{}"><span class="gitter"><div class="gitter__button js-gitter-toggle-chat-button" style="margin-bottom:0;"><i class="gitter__icon icon-gitter"></i></div></span></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/guides/getting-started/" class="footer__link">Get Started</a><a href="/organization/" class="footer__link">Organization</a><a href="/starter-kits/" class="footer__link">Starter Kits</a><a href="/comparison/" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg" alt="webpack icon"></a></section><section class="footer__right"><a href="/glossary/" class="footer__link">Glossary</a><a href="/branding/" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Gitter</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link footer__license"><img alt="Creative Commons License" src="/c983c925f14c5a308465ce5f912be111.svg"><img alt="Creative Commons License" src="/c440e4e11ad72daf1899ca0616ddd8b8.svg"></a></section></div></footer><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
+</div><div><hr><h3>Contributors</h3><div class="contributors"><div class="contributors__list"><a class="contributor" href="https://github.com/sokra"><img src="https://github.com/sokra.png?size=90"><span class="contributor__name"> sokra</span></a><a class="contributor" href="https://github.com/tbroadley"><img src="https://github.com/tbroadley.png?size=90"><span class="contributor__name"> tbroadley</span></a></div></div></div><div class="interactive" id="src/components/Gitter/Gitter.jsx" data-props="{}"><span class="gitter"><div class="gitter__button js-gitter-toggle-chat-button" style="margin-bottom:0;"><i class="gitter__icon icon-gitter"></i></div></span></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a href="/guides/getting-started/" class="footer__link">Get Started</a><a href="/organization/" class="footer__link">Organization</a><a href="/starter-kits/" class="footer__link">Starter Kits</a><a href="/comparison/" class="footer__link">Comparison</a></section><section class="footer__middle"><a href="/" class="footer__icon"><img src="/6bc5d8cf78d442a984e70195db059b69.svg" alt="webpack icon"></a></section><section class="footer__right"><a href="/glossary/" class="footer__link">Glossary</a><a href="/branding/" class="footer__link">Branding</a><a href="//gitter.im/webpack/webpack" target="_blank" class="footer__link">Gitter</a><a href="https://github.com/webpack/webpack/releases" target="_blank" class="footer__link">Changelog</a><a href="/license" class="footer__link footer__license"><img alt="Creative Commons License" src="/c983c925f14c5a308465ce5f912be111.svg"><img alt="Creative Commons License" src="/c440e4e11ad72daf1899ca0616ddd8b8.svg"></a></section></div></footer><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-46921629-2', 'auto');ga('send', 'pageview');</script></div>
 
     
       <script src="/44ca15f769476f92cec449b5349c566e.js"></script>
