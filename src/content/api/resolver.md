@@ -1,7 +1,7 @@
 ---
 title: Resolver
 group: Plugins
-sort: 5
+sort: 3
 ---
 
 There are three types of resolvers, each used for different types of modules:
