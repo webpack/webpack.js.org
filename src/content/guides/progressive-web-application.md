@@ -32,7 +32,7 @@ __package.json__
 }
 ```
 
-If you haven't previously done so, run the command `npm run build` to build your project. Then run the command `npm start`. This should produce output like this:
+If you haven't previously done so, run the command `npm run build` to build your project. Then run the command `npm start`. This should produce the following output:
 
 ``` bash
 > http-server dist
@@ -45,7 +45,7 @@ Available on:
 Hit CTRL-C to stop the server
 ```
 
-If you open your browser to http://localhost:8080 you should see your webpack application being served up from the `dist` directory. If you stop the server and refresh, the webpack application is no longer available.  
+If you open your browser to `http://localhost:8080` (i.e. `http://127.0.0.1`) you should see your webpack application being served up from the `dist` directory. If you stop the server and refresh, the webpack application is no longer available.  
 
 This is what we aim to change. Once we reach the end of this module we should be able to stop the server, hit refresh and still see our application.
 
@@ -74,15 +74,16 @@ __webpack.config.js__
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: 'Output Management'
--     })
-+     }),
-+     new WorkboxPlugin({
-+       // these options encourage the ServiceWorkers to get in there fast 
-+       // and not allow any straggling "old" SWs to hang around
-+       clientsClaim: true,
-+       skipWaiting: true
-+     })
+-     title: 'Output Management'
++     title: 'Progressive Web Application'
+-   })
++   }),
++   new WorkboxPlugin({
++     // these options encourage the ServiceWorkers to get in there fast 
++     // and not allow any straggling "old" SWs to hang around
++     clientsClaim: true,
++     skipWaiting: true
++   })
   ],
     output: {
       filename: '[name].bundle.js',
@@ -142,7 +143,7 @@ __index.js__
 + }
 ```
 
-Once more `npm run build` to build a version of the app including the registration code. Then serve it with `npm start`. Navigate to http://localhost:8080 and take a look at the console. Somewhere in there you should see:
+Once more `npm run build` to build a version of the app including the registration code. Then serve it with `npm start`. Navigate to `http://localhost:8080` and take a look at the console. Somewhere in there you should see:
 
 ``` bash
 SW registered
