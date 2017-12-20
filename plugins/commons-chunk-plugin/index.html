@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/a5c758bd3831b3604959.css" rel="stylesheet">
+      <link href="/6a2a3d5ae591e3003d95.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -177,7 +177,7 @@ plugins<span class="token punctuation">:</span> <span class="token punctuation">
     <span class="token keyword">if</span><span class="token punctuation">(</span>module<span class="token punctuation">.</span>resource <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token regex">/^.*\.(css|scss)$/</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>module<span class="token punctuation">.</span>resource<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> module<span class="token punctuation">.</span>context <span class="token operator">&amp;&amp;</span> module<span class="token punctuation">.</span>context<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">&quot;node_modules&quot;</span><span class="token punctuation">)</span> <span class="token operator">!==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> module<span class="token punctuation">.</span>context <span class="token operator">&amp;&amp;</span> module<span class="token punctuation">.</span>context<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span><span class="token string">&quot;node_modules&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 </code></pre>
@@ -194,7 +194,7 @@ plugins<span class="token punctuation">:</span> <span class="token punctuation">
   <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>optimize<span class="token punctuation">.</span>CommonsChunkPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
     name<span class="token punctuation">:</span> <span class="token string">&quot;vendor&quot;</span><span class="token punctuation">,</span>
     minChunks<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>module<span class="token punctuation">)</span><span class="token punctuation">{</span>
-      <span class="token keyword">return</span> module<span class="token punctuation">.</span>context <span class="token operator">&amp;&amp;</span> module<span class="token punctuation">.</span>context<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">&quot;node_modules&quot;</span><span class="token punctuation">)</span> <span class="token operator">!==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> module<span class="token punctuation">.</span>context <span class="token operator">&amp;&amp;</span> module<span class="token punctuation">.</span>context<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span><span class="token string">&quot;node_modules&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>optimize<span class="token punctuation">.</span>CommonsChunkPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
