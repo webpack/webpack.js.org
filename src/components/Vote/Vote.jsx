@@ -10,7 +10,8 @@ const Vote = ({ section, page }) => (
     <Interactive
       id="webpack.vote/dist/vote.bundle.js"
       component={ VoteApp }
-      name={ 'todo' } />
+      // development={ true }
+    />
   </Container>
 );
 
