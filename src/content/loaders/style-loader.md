@@ -134,6 +134,7 @@ Styles are not added on `import/require()`, but instead on call to `use`/`ref`. 
 |**`transform`** |`{Function}`|`false`|Transform/Conditionally load CSS by passing a transform/condition function|
 |**`insertAt`**|`{String\|Object}`|`bottom`|Inserts `<style></style>` at the given position|
 |**`insertInto`**|`{String}`|`<head>`|Inserts `<style></style>` into the given position|
+|**`singleton`**|`{Boolean}`|`undefined`|Reuses a single `<style></style>` element, instead of adding/removing individual elements for each required module.|
 |**`sourceMap`**|`{Boolean}`|`false`|Enable/Disable Sourcemaps|
 |**`convertToAbsoluteUrls`**|`{Boolean}`|`false`|Converts relative URLs to absolute urls, when source maps are enabled|
 
@@ -325,7 +326,7 @@ You can also insert the styles into a [ShadowRoot](https://developer.mozilla.org
 
 ### `singleton`
 
-If defined, the style-loader will reuse a single `<style>` element, instead of adding/removing individual elements for each required module.
+If defined, the style-loader will reuse a single `<style></style>` element, instead of adding/removing individual elements for each required module.
 
 > ℹ️  This option is on by default in IE9, which has strict limitations on the number of style tags allowed on a page. You can enable or disable it with the singleton option.
 

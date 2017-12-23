@@ -46,9 +46,9 @@ module.exports = {
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|**`limit`**|`{Number}`|`undefined`|Byte limit to inline files as Data URL|
-|**`mimetype`**|`{String}`|`extname`|Specify MIME type for the file (Otherwise it's inferred from the file extension)|
-|**`fallback`**|`{String}`|`file-loader`|Specify `loader` for the file when file is greater than the limit (in bytes)|
+|**[`limit`](#limit)**|`{Number}`|`undefined`|Byte limit to inline files as Data URL|
+|**[`mimetype`](#mimetype)**|`{String}`|`extname`|Specify MIME type for the file (Otherwise it's inferred from the file extension)|
+|**[`fallback`](#fallback)**|`{String}`|`file-loader`|Specify `loader` for the file when file is greater than the limit (in bytes)|
 
 ##
 
@@ -141,17 +141,11 @@ Set the MIME type for the file. If unspecified the file extensions will be used 
 [npm]: https://img.shields.io/npm/v/url-loader.svg
 [npm-url]: https://npmjs.com/package/url-loader
 
-[node]: https://img.shields.io/node/v/url-loader.svg
-[node-url]: https://nodejs.org
+[tests]: https://circleci.com/gh/webpack-contrib/url-loader/tree/master.svg?style=svg
+[tests-url]: https://circleci.com/gh/webpack-contrib/url-loader/tree/master
 
-[deps]: https://david-dm.org/webpack-contrib/url-loader.svg
-[deps-url]: https://david-dm.org/webpack-contrib/url-loader
-
-[tests]: http://img.shields.io/travis/webpack-contrib/url-loader.svg
-[tests-url]: https://travis-ci.org/webpack-contrib/url-loader
-
-[cover]: https://coveralls.io/repos/github/webpack-contrib/url-loader/badge.svg
-[cover-url]: https://coveralls.io/github/webpack-contrib/url-loader
+[cover]: https://codecov.io/gh/webpack-contrib/url-loader/branch/master/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack-contrib/url-loader
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack

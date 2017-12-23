@@ -63,7 +63,7 @@ use: [
       workerParallelJobs: 50,
 
       // additional node.js arguments
-      workerNodeArgs: ['--max-old-space-size', '1024'],
+      workerNodeArgs: ['--max-old-space-size=1024'],
 
       // timeout for killing the worker processes when idle
       // defaults to 500 (ms)
