@@ -234,7 +234,7 @@ __src/loader.js__
 ``` js
 import { getOptions } from 'loader-utils';
 
-export default source => {
+export default function loader(source) {
   const options = getOptions(this);
 
   source = source.replace(/\[name\]/g, options.name);

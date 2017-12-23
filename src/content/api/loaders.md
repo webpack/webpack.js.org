@@ -15,49 +15,56 @@ contributors:
 
 ## 示例
 
+The following sections provide some basic examples of the different types of loaders. Note that the `map` and `meta` parameters are optional, see [`this.callback`](/api/loaders#this-callback) below.
+
 ### 同步 loader
 
-**sync-loader.js**
+Either `return` or `this.callback` can be used to return the transformed `content` synchronously:
 
-```javascript
-module.exports = function(content) {
+__sync-loader.js__
+
+``` js
+module.exports = function(content, map, meta) {
   return someSyncOperation(content);
 };
 ```
 
-**sync-loader-with-multiple-results.js**
+The `this.callback` method is more flexible as it allows multiple arguments to be passed as opposed to just the `content`.
 
-```javascript
-module.exports = function(content) {
-  this.callback(null, someSyncOperation(content), sourceMaps, ast);
-  return; // 当调用callback()时总是返回undefined
+__sync-loader-with-multiple-results.js__
+
+``` js
+module.exports = function(content, map, meta) {
+  this.callback(null, someSyncOperation(content), sourceMaps, meta);
+  return; // 当调用callback()时总是返回 undefined
 };
 ```
-
 
 ### 异步 loader
 
-**async-loader.js**
+For asynchronous loaders, [`this.async`](/api/loaders#this-async) is used to retrieve the `callback` function:
 
-```javascript
-module.exports = function(content) {
-    var callback = this.async();
-    someAsyncOperation(content, function(err, result) {
-        if(err) return callback(err);
-        callback(null, result);
-    });
+__async-loader.js__
+
+``` js
+module.exports = function(content, map, meta) {
+  var callback = this.async();
+  someAsyncOperation(content, function(err, result) {
+    if (err) return callback(err);
+    callback(null, result, map, meta);
+  });
 };
 ```
 
-**async-loader-with-multiple-results.js**
+__async-loader-with-multiple-results.js__
 
-```javascript
-module.exports = function(content) {
-    var callback = this.async();
-    someAsyncOperation(content, function(err, result, sourceMaps, ast) {
-        if(err) return callback(err);
-        callback(null, result, sourceMaps, ast);
-    });
+``` js
+module.exports = function(content, map, meta) {
+  var callback = this.async();
+  someAsyncOperation(content, function(err, result, sourceMaps, meta) {
+    if (err) return callback(err);
+    callback(null, result, sourceMaps, meta);
+  });
 };
 ```
 
@@ -68,9 +75,9 @@ T> loader 最初被设计为可以在同步 loader pipeline（如 Node.js ，使
 
 默认情况下，资源文件会被转化为 UTF-8 字符串，然后传给 loader。通过设置 `raw`，loader 可以接收原始的 `Buffer`。每一个 loader 都可以用 `String` 或者 `Buffer` 的形式传递它的处理结果。Complier 将会把它们在 loader 之间相互转换。
 
-**raw-loader.js**
+__raw-loader.js__
 
-```javascript
+``` js
 module.exports = function(content) {
 	assert(content instanceof Buffer);
 	return someSyncOperation(content);
@@ -87,10 +94,11 @@ loader **总是**从右到左地被调用，但是在一些情况下，loader �
 
 如果中间某个 loader 的 `pitch` 方法返回了一个值，那么剩下的 loader 都会被跳过，转而从当前 loader 开始向左调用 loader。`data`可以在 pitch 和普通的 loader 调用间传递。
 
-```javascript
+``` js
 module.exports = function(content) {
 	return someSyncOperation(content, this.data.value);
 };
+
 module.exports.pitch = function(remainingRequest, precedingRequest, data) {
 	if(someCondition()) {
 		// 直接返回
@@ -101,13 +109,13 @@ module.exports.pitch = function(remainingRequest, precedingRequest, data) {
 ```
 
 
-## The loader context
+## loader 上下文
 
 loader context 表示在 loader 内使用 `this` 可以访问的一些方法或属性
 
 假设我们在 `/abc/file.js` 中这样请求加载别的模块：
 
-```javascript
+``` js
 require("./loader1?xyz!loader2!./resource?rrr");
 ```
 
@@ -136,26 +144,28 @@ require("./loader1?xyz!loader2!./resource?rrr");
 1. 如果这个 loader 配置了 [`options`](/configuration/module/#useentry) 对象的话，`this.query` 就指向这个 option 对象。
 2. 如果 loader 中没有 `options`，而是以 query 字符串作为参数调用时，`this.query` 就是一个以 `?` 开头的字符串。
 
-W> `options` 已取代 `query`，所以此属性废弃。使用`loader-utils`中的 [`getOptions` 方法](https://github.com/webpack/loader-utils#getoptions)来提取给定 loader 的 option。
+W> `options` 已取代 `query`，所以此属性废弃。使用 `loader-utils` 中的 [`getOptions` 方法](https://github.com/webpack/loader-utils#getoptions)来提取给定 loader 的 option。
 
 
 ### `this.callback`
 
 一个可以同步或者异步调用的可以返回多个结果的函数。预期的参数是：
 
-```typescript
+``` js
 this.callback(
-    err: Error | null,
-    content: string | Buffer,
-    sourceMap?: SourceMap,
-    abstractSyntaxTree?: AST
+  err: Error | null,
+  content: string | Buffer,
+  sourceMap?: SourceMap,
+  meta?: any
 );
 ```
 
 1. 第一个参数必须是 `Error` 或者 `null`
 2. 第二个参数是一个 `string` 或者 [`Buffer`](https://nodejs.org/api/buffer.html)。
 3. 可选的：第三个参数必须是一个可以被[这个模块](https://github.com/mozilla/source-map)解析的 source map。
-4. 可选的：`AST` 可以是给定语言的抽象语法树，比如 [`ESTree`](https://github.com/estree/estree)。这个值会被 webpack 自身忽略掉，但是如果你想在多个 loader 之间共用 AST 的时候对于加速构建非常有用。
+4. 可选的：The fourth option, ignored by webpack, can be anything (e.g. some meta data).
+
+T> It can be useful to pass an abstract syntax tree (AST), like [`ESTree`](https://github.com/estree/estree), as the fourth argument (`meta`) to speed up the build time if you want to share common ASTs between loaders.
 
 如果这个函数被调用的话，你应该返回 undefined 从而避免含糊的 loader 结果。
 
@@ -174,7 +184,7 @@ this.callback(
 
 设置是否可缓存标志的函数：
 
-```typescript
+``` typescript
 cacheable(flag = true: boolean)
 ```
 
@@ -187,13 +197,13 @@ cacheable(flag = true: boolean)
 
 所有 loader 组成的数组。它在 pitch 阶段的时候是可以写入的。
 
-```typescript
+``` js
 loaders = [{request: string, path: string, query: string, module: function}]
 ```
 
 在我们的示例中：
 
-```javascript
+``` js
 [
   {
     request: "/abc/loader1.js?xyz",
@@ -260,7 +270,7 @@ T> loader 最初被设计为可以同时当 Babel transform 用。如果你编�
 
 ### `this.emitWarning`
 
-```typescript
+``` typescript
 emitWarning(warning: Error)
 ```
 
@@ -269,7 +279,7 @@ emitWarning(warning: Error)
 
 ### `this.emitError`
 
-```typescript
+``` typescript
 emitError(error: Error)
 ```
 
@@ -278,7 +288,7 @@ emitError(error: Error)
 
 ### `this.loadModule`
 
-```typescript
+``` typescript
 loadModule(request: string, callback: function(err, source, sourceMap, module))
 ```
 
@@ -287,7 +297,7 @@ loadModule(request: string, callback: function(err, source, sourceMap, module))
 
 ### `this.resolve`
 
-```typescript
+``` typescript
 resolve(context: string, request: string, callback: function(err, result: string))
 ```
 
@@ -296,7 +306,7 @@ resolve(context: string, request: string, callback: function(err, result: string
 
 ### `this.addDependency`
 
-```typescript
+``` typescript
 addDependency(file: string)
 dependency(file: string) // 简写
 ```
@@ -306,7 +316,7 @@ dependency(file: string) // 简写
 
 ### `this.addContextDependency`
 
-```typescript
+``` typescript
 addContextDependency(directory: string)
 ```
 
@@ -315,7 +325,7 @@ addContextDependency(directory: string)
 
 ### `this.clearDependencies`
 
-```typescript
+``` typescript
 clearDependencies()
 ```
 
@@ -324,7 +334,7 @@ clearDependencies()
 
 ### `this.emitFile`
 
-```typescript
+``` typescript
 emitFile(name: string, content: Buffer|string, sourceMap: {...})
 ```
 
@@ -343,7 +353,7 @@ W> 强烈建议不要使用这些属性，因为我们打算移除它们。它�
 
 ### `this.exec`
 
-```typescript
+``` typescript
 exec(code: string, filename: string)
 ```
 
@@ -352,7 +362,7 @@ exec(code: string, filename: string)
 
 ### `this.resolveSync`
 
-```typescript
+``` typescript
 resolveSync(context: string, request: string) -> string
 ```
 

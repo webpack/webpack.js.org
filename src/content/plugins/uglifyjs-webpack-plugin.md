@@ -18,11 +18,11 @@ npm i -D uglifyjs-webpack-plugin
 
 **webpack.config.js**
 ```js
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   plugins: [
-    new UglifyJSPlugin()
+    new UglifyJsPlugin()
   ]
 }
 ```
@@ -46,7 +46,7 @@ module.exports = {
 **webpack.config.js**
 ```js
 [
-  new UglifyJSPlugin({
+  new UglifyJsPlugin({
     test: /\.js($|\?)/i
   })
 ]
@@ -57,7 +57,7 @@ module.exports = {
 **webpack.config.js**
 ```js
 [
-  new UglifyJSPlugin({
+  new UglifyJsPlugin({
     include: /\/includes/
   })
 ]
@@ -68,7 +68,7 @@ module.exports = {
 **webpack.config.js**
 ```js
 [
-  new UglifyJSPlugin({
+  new UglifyJsPlugin({
     exclude: /\/excludes/
   })
 ]
@@ -81,7 +81,7 @@ module.exports = {
 **webpack.config.js**
 ```js
 [
-  new UglifyJSPlugin({
+  new UglifyJsPlugin({
     cache: true
   })
 ]
@@ -95,7 +95,7 @@ Default path to cache directory: `node_modules/.cache/uglifyjs-webpack-plugin`.
 **webpack.config.js**
 ```js
 [
-  new UglifyJSPlugin({
+  new UglifyJsPlugin({
     cache: 'path/to/cache'
   })
 ]
@@ -110,7 +110,7 @@ Path to cache directory.
 **webpack.config.js**
 ```js
 [
-  new UglifyJSPlugin({
+  new UglifyJsPlugin({
     parallel: true
   })
 ]
@@ -124,7 +124,7 @@ Default number of concurrent runs: `os.cpus().length - 1`.
 **webpack.config.js**
 ```js
 [
-  new UglifyJSPlugin({
+  new UglifyJsPlugin({
     parallel: 4
   })
 ]
@@ -139,7 +139,7 @@ Number of concurrent runs.
 **webpack.config.js**
 ```js
 [
-  new UglifyJSPlugin({
+  new UglifyJsPlugin({
     sourceMap: true
   })
 ]
@@ -162,7 +162,7 @@ Number of concurrent runs.
 **webpack.config.js**
 ```js
 [
-  new UglifyJSPlugin({
+  new UglifyJsPlugin({
     uglifyOptions: {
       ie8: false,
       ecma: 8,
@@ -200,7 +200,7 @@ All comments that match the given expression (resp. are evaluated to `true` by t
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
 |**`condition`**|`{Regex\|Function}`|``|通常表达式或者相应函数（见上文）|
-|**`filename`**|`{String\|Function}`|`compilation.assets[file]`|提取注释的文件会被存储。可以使一个 `{String}` 字符串或者是一个 `{Function<(string) -> {String}>}` 返回字符串的函数，作为原文件名。默认加上文件后缀名 `.LICENSE`|
+|**`filename`**|`{String\|Function}`|`${file}.LICENSE`|提取注释的文件会被存储。可以使一个 `{String}` 字符串或者是一个 `{Function<(string) -> {String}>}` 返回字符串的函数，作为原文件名。默认加上文件后缀名 `.LICENSE`|
 |**`banner`**|`{Boolean\|String\|Function}`|`/*! For license information please see ${filename}.js.LICENSE */`|banner 文本会在原文件的头部指出被提取的文件，会在源文件加入该信息。可以是 `false`（表示没有 banner），一个 `{String}`，或者一个 `{Function<(string) -> {String}` 返回字符串的函数，会在提取已经被存储注释的时候被调用。注释会被覆盖。|
 
 ### `warningsFilter`

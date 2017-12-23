@@ -108,7 +108,7 @@ You can configure a custom filename template for your file using the query param
 |:--:|:--:|:-----:|:----------|
 |**`hashType`**|`{String}`|`md5`|`sha1`, `md5`, `sha256`, `sha512`|
 |**`digestType`**|`{String}`|`base64`|`hex`, `base26`, `base32`, `base36`, `base49`, `base52`, `base58`, `base62`, `base64`|
-|**`length`**|`{Number}`|`8`|字符的长度|
+|**`length`**|`{Number}`|`9999`|字符的长度|
 
 默认情况下，文件会按照你指定的路径和名称输出同一目录中，且会使用相同的 URL 路径来访问文件。
 

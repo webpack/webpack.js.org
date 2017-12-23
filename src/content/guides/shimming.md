@@ -90,7 +90,15 @@ __webpack.config.js__
 如果我们 run build，将会看到同样的输出：
 
 ``` bash
-TODO: Include output
+Hash: f450fa59fa951c68c416
+Version: webpack 2.2.0
+Time: 343ms
+    Asset    Size  Chunks                    Chunk Names
+bundle.js  544 kB       0  [emitted]  [big]  main
+   [0] ./~/lodash/lodash.js 540 kB {0} [built]
+   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
+   [3] ./src/index.js 189 bytes {0} [built]
 ```
 
 我们还可以使用 `ProvidePlugin` 暴露某个模块中单个导出值，只需通过一个“数组路径”进行配置（例如 `[module, child, ...children?]`）。所以，让我们做如下设想，无论 `join` 方法在何处调用，我们都只会得到的是 `lodash` 中提供的 `join` 方法。
