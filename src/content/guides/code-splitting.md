@@ -170,7 +170,7 @@ another.bundle.js  537 bytes       1  [emitted]         another
 
 当涉及到动态代码拆分时，webpack 提供了两个类似的技术。对于动态导入，第一种，也是优先选择的方式是，使用符合 [ECMAScript 提案](https://github.com/tc39/proposal-dynamic-import) 的 [`import()` 语法](/api/module-methods#import-)。第二种，则是使用 webpack 特定的 [`require.ensure`](/api/module-methods#require-ensure)。让我们先尝试使用第一种……
 
-W> `import()` 调用使用会在内部用到 [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)。如果在旧有版本浏览器中使用 `import()`，记得使用 一个 polyfill 库（例如 [es6-promise](https://github.com/stefanpenner/es6-promise) 或 [promise-polyfill](https://github.com/taylorhakes/promise-polyfill)），来 shim `Promise`。
+W> `import()` 调用会在内部用到 [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)。如果在旧有版本浏览器中使用 `import()`，记得使用 一个 polyfill 库（例如 [es6-promise](https://github.com/stefanpenner/es6-promise) 或 [promise-polyfill](https://github.com/taylorhakes/promise-polyfill)），来 shim `Promise`。
 
 在我们开始本节之前，先从配置中移除掉多余的 [`entry`](/concepts/entry-points/) 和 [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin)，因为接下来的演示中并不需要它们：
 

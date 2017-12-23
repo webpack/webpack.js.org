@@ -14,8 +14,8 @@
 ### 印记中文翻译流程
 - **[（必读）印记中文翻译流程（一）：仓库和分支介绍](http://mp.weixin.qq.com/s/_ricIlWhDbRZW-CmH0Ik5w
 )**
-- **（必读）感谢 @QC-L 同学简洁易懂的配图（示例是 docschina/babeljs.io 仓库，但是和 webpack-china/webpack.js.org 仓库同理）**
-![babeljs.io](https://camo.githubusercontent.com/030ac44db7fc56c822af6df4339c235e76261724/687474703a2f2f6f79707a33346663302e626b742e636c6f7564646e2e636f6d2f696d6167652f706e672f626162656c2545372542462542422545382541462539312545362542352538312545372541382538422545352539422542452e706e67)
+- **（必读）感谢 @QC-L 同学简洁易懂的配图**
+![webpack.js.org](http://p0w5uqw6b.bkt.clouddn.com/image/png/webpack%E7%BF%BB%E8%AF%91%E6%B5%81%E7%A8%8B%E5%9B%BE.png)
 
 - 印记中文翻译QQ群（群号：492361223）
 - 印记中文翻译微信群（群主：@wuwangbufu002。人数超过100人，必须邀请进入）
