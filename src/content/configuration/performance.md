@@ -3,6 +3,7 @@ title: Performance
 sort: 14
 contributors:
   - thelarkinn
+  - tbroadley
 ---
 
 These options allows you to control how webpack notifies you of assets and entrypoints that exceed a specific file limit. 
@@ -12,7 +13,7 @@ This feature was inspired by the idea of [webpack Performance Budgets](https://g
 
 `object`
 
-Configure how performance hints are shown. For example if you have an asset that is over 250kb, webpack will emit a warning notifiying you of this.
+Configure how performance hints are shown. For example if you have an asset that is over 250kb, webpack will emit a warning notifying you of this.
 
 
 ## `performance.hints`

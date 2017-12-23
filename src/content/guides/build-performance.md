@@ -3,6 +3,7 @@ title: Build Performance
 sort: 17
 contributors:
   - sokra
+  - tbroadley
 ---
 
 This guide contains some useful tips for improving build/compilation performance.
@@ -61,7 +62,7 @@ The following steps can increase the speed of resolving:
 
 ### Dlls
 
-Use the `DllPlugin` to move code that is changed less often into a separate compilation. This will improve the application's compilation speed, although it does increase complexitity of the build process.
+Use the `DllPlugin` to move code that is changed less often into a separate compilation. This will improve the application's compilation speed, although it does increase complexity of the build process.
 
 
 ### Smaller = Faster
@@ -72,7 +73,7 @@ Decrease the total size of the compilation to increase build performance. Try to
 - Use the `CommonsChunksPlugin` in Multi-Page Applications.
 - Use the `CommonsChunksPlugin` in `async` mode in Multi-Page Applications.
 - Remove unused code.
-- Only compile the part of the code you are currenly developing on.
+- Only compile the part of the code you are currently developing on.
 
 
 ### Worker Pool
@@ -89,7 +90,7 @@ Enable persistent caching with the `cache-loader`. Clear cache directory on `"po
 
 ### Custom plugins/loaders
 
-Profile them to not intruduce a performance problem here.
+Profile them to not introduce a performance problem here.
 
 ---
 
@@ -119,7 +120,7 @@ The following utilities improve performance by compiling and serving assets in m
 
 Be aware of the performance differences of the different `devtool` settings.
 
-- `"eval"` has the best performance, but doesn't assist you for transpilied code.
+- `"eval"` has the best performance, but doesn't assist you for transpiled code.
 - The `cheap-source-map` variants are more performant, if you can live with the slightly worse mapping quality.
 - Use a `eval-source-map` variant for incremental builds.
 

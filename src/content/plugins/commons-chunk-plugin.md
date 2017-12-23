@@ -217,7 +217,7 @@ new webpack.optimize.CommonsChunkPlugin({
     if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
       return false;
     }
-    return module.context && module.context.indexOf("node_modules") !== -1;
+    return module.context && module.context.includes("node_modules");
   }
 })
 ```
@@ -242,7 +242,7 @@ Since the `vendor` and `manifest` chunk use a different definition for `minChunk
   new webpack.optimize.CommonsChunkPlugin({
     name: "vendor",
     minChunks: function(module){
-      return module.context && module.context.indexOf("node_modules") !== -1;
+      return module.context && module.context.includes("node_modules");
     }
   }),
   new webpack.optimize.CommonsChunkPlugin({

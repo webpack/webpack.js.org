@@ -7,6 +7,7 @@ contributors:
   - SpaceK33z
   - pksjce
   - sebastiandeutsch
+  - tbroadley
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
@@ -216,7 +217,7 @@ With an absolute path, it will only search in the given directory.
 modules: ["node_modules"]
 ```
 
-If you want to add a directory to search in that takes precedences over `node_modules/`:
+If you want to add a directory to search in that takes precedence over `node_modules/`:
 
 ``` js
 modules: [path.resolve(__dirname, "src"), "node_modules"]

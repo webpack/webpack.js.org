@@ -264,7 +264,7 @@ Almost everything we've discussed thus far has been in relation to handling lega
 There's a lot of ways to load polyfills. For example, to include the [`babel-polyfill`](https://babeljs.io/docs/usage/polyfill/) we might simply:
 
 ``` bash
-npm i --save babel-polyfill
+npm install --save babel-polyfill
 ```
 
 and `import` it so as to include it in our main bundle:
@@ -292,7 +292,7 @@ Now while this is one approach, __including polyfills in the main bundle is not 
 Let's move our `import` to a new file and add the [`whatwg-fetch`](https://github.com/github/fetch) polyfill:
 
 ``` bash
-npm i --save whatwg-fetch
+npm install --save whatwg-fetch
 ```
 
 __src/index.js__

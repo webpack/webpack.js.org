@@ -30,7 +30,7 @@ T> Instead of using the `devtool` option you can also use `SourceMapDevToolPlugi
 
 devtool                        | build | rebuild | production | quality
 ------------------------------ | ----- | ------- | ---------- | -----------------------------
-(none)                         | +++   | +++     | no         | bundled code
+(none)                         | +++   | +++     | yes        | bundled code
 eval                           | +++   | +++     | no         | generated code
 cheap-eval-source-map          | +     | ++      | no         | transformed code (lines only)
 cheap-module-eval-source-map   | o     | ++      | no         | original source (lines only)

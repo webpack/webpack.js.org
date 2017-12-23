@@ -1,6 +1,8 @@
 ---
 title: Introduction
 sort: 1
+contributors:
+  - tbroadley
 ---
 
 A variety of interfaces are available to customize the compilation process. Some features overlap between interfaces, e.g. a configuration option may be available via a CLI flag, while others exist only through a single interface. The following high-level information should get you started.
@@ -22,14 +24,14 @@ When processing modules with webpack, it is important to understand the differen
 
 ## Node
 
-While most users can get away with just using the CLI along with a configuration file, more fine-grained control of the compilation can be achieved via the Node interface. This includes passing multiple configurations, programatically running or watching, and collecting stats.
+While most users can get away with just using the CLI along with a configuration file, more fine-grained control of the compilation can be achieved via the Node interface. This includes passing multiple configurations, programmatically running or watching, and collecting stats.
 
 [Learn more!](/api/node)
 
 
 ## Loaders
 
-Loaders are transformations that are applied to the source code of a module. They are written as functions that accept source code as a parameter and return a new version of that code with tranformations applied.
+Loaders are transformations that are applied to the source code of a module. They are written as functions that accept source code as a parameter and return a new version of that code with transformations applied.
 
 [Learn more!](/api/loaders)
 

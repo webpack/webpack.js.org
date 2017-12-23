@@ -4,6 +4,7 @@ sort: 16
 contributors:
   - simon04
   - grisanu
+  - tbroadley
 related:
   - title: The Fine Art of the webpack 3 Config
     url: https://blog.flennik.com/the-fine-art-of-the-webpack-2-config-dc4d19d7f172#d60a
@@ -11,7 +12,7 @@ related:
 
 To disambiguate in your `webpack.config.js` between [development](/guides/development) and [production builds](/guides/production), you may use environment variables.
 
-The webpack command line [environment option](/api/cli/#environment-options), `--env` allows you to pass in as many environment variables as you like. Environment variables will be made accesible in your `webpack.config.js`. For example, `--env.production` or `--env.NODE_ENV=local` (`NODE_ENV` is conventionally used to define the environment type, see [here](https://dzone.com/articles/what-you-should-know-about-node-env).)
+The webpack command line [environment option](/api/cli/#environment-options), `--env` allows you to pass in as many environment variables as you like. Environment variables will be made accessible in your `webpack.config.js`. For example, `--env.production` or `--env.NODE_ENV=local` (`NODE_ENV` is conventionally used to define the environment type, see [here](https://dzone.com/articles/what-you-should-know-about-node-env).)
 
 ```bash
 webpack --env.NODE_ENV=local --env.production --progress

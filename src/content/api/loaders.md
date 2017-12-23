@@ -4,6 +4,7 @@ sort: 4
 contributors:
     - TheLarkInn
     - jhnns
+    - tbroadley
 ---
 
 A loader is just a JavaScript module that exports a function. The [loader runner](https://github.com/webpack/loader-runner) calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by webpack and the [loader runner](https://github.com/webpack/loader-runner) with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters.
@@ -90,9 +91,31 @@ module.exports.raw = true;
 
 ### Pitching Loader
 
-Loaders are **always** called from right to left. But, in some cases, loaders do not care about the results of the previous loader or the resource. They only care about **metadata**. The `pitch` method on the loaders is called from **left to right** before the loaders are called (from right to left).
+Loaders are __always__ called from right to left. There are some instances where the loader only cares about the __metadata__ behind a request and can ignore the results of the previous loader. The `pitch` method on loaders is called from __left to right__ before the loaders are actually executed (from right to left). For the following [`use`](/configuration/module#rule-use) configuration:
 
-If a loader delivers a result in the `pitch` method the process turns around and skips the remaining loaders, continuing with the calls to the more left loaders. `data` can be passed between pitch and normal call.
+``` js
+use: [
+  'a-loader',
+  'b-loader',
+  'c-loader'
+]
+```
+
+These steps would occur:
+
+``` diff
+|- a-loader `pitch`
+  |- b-loader `pitch`
+    |- c-loader `pitch`
+      |- requested module is picked up as a dependency
+    |- c-loader normal execution
+  |- b-loader normal execution
+|- a-loader normal execution
+```
+
+So why might a loader take advantage of the "pitching" phase?
+
+First, the `data` passed to the `pitch` method is exposed in the execution phase as well under `this.data` and could be useful for capturing and sharing information from earlier in the cycle.
 
 ``` js
 module.exports = function(content) {
@@ -100,13 +123,33 @@ module.exports = function(content) {
 };
 
 module.exports.pitch = function(remainingRequest, precedingRequest, data) {
-	if(someCondition()) {
-		// fast exit
-		return "module.exports = require(" + JSON.stringify("-!" + remainingRequest) + ");";
-	}
 	data.value = 42;
 };
 ```
+
+Second, if a loader delivers a result in the `pitch` method the process turns around and skips the remaining loaders. In our example above, if the `b-loader`s `pitch` method returned something:
+
+``` js
+module.exports = function(content) {
+  return someSyncOperation(content);
+};
+
+module.exports.pitch = function(remainingRequest, precedingRequest, data) {
+  if (someCondition()) {
+    return "module.exports = require(" + JSON.stringify("-!" + remainingRequest) + ");";
+  }
+};
+```
+
+The steps above would be shortened to:
+
+``` diff
+|- a-loader `pitch`
+  |- b-loader `pitch` returns a module
+|- a-loader normal execution
+```
+
+See the [bundle-loader](https://github.com/webpack-contrib/bundle-loader) for a good example of how this process can be used in a more meaningful way.
 
 
 ## The Loader Context
@@ -168,7 +211,7 @@ this.callback(
 
 T> It can be useful to pass an abstract syntax tree (AST), like [`ESTree`](https://github.com/estree/estree), as the fourth argument (`meta`) to speed up the build time if you want to share common ASTs between loaders.
 
-In case this function is called, you should return undefined to avoid ambigious loader results.
+In case this function is called, you should return undefined to avoid ambiguous loader results.
 
 
 ### `this.async`
@@ -349,7 +392,7 @@ Access to the `compilation`'s `inputFileSystem` property.
 
 ## Deprecated context properties
 
-W> The usage of these properties is highly discouraged since we are planing to remove them from the context. They are still listed here for documentation purposes.
+W> The usage of these properties is highly discouraged since we are planning to remove them from the context. They are still listed here for documentation purposes.
 
 
 ### `this.exec`

@@ -74,12 +74,14 @@ T> The `output` property has [many more configurable features](/configuration/ou
 
 Essentially, webpack loaders transform all types of files into modules that can be included in your application's dependency graph.
 
-At a high level, **loaders** have two purposes in your webpack config. They work to:
+W> Note that the ability to `import` any type of module, e.g. `.css` files, is a feature specific to webpack and may not be supported by other bundlers or task runners. We feel this extension of the language is warranted as it allows developers to build a more accurate dependency graph.
+
+At a high level, __loaders__ have two purposes in your webpack config. They work to:
 
 1. Identify which file or files should be transformed by a certain loader (with the `test` property).
 2. Transform those files so that they can be added to your dependency graph (and eventually your bundle). (`use` property)
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```javascript
 const path = require('path');
