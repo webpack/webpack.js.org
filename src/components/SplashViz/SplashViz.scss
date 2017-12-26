@@ -27,12 +27,13 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
+    top: 50%;
     bottom: 0;
     width: 75vw;
     min-width: 550px;
     max-width: map-get($screens, large);
-    margin: auto;
+    margin: -15px auto 0;
+    transform: translateY(-50%);
     display: none;
 
     @include break {
