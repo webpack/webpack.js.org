@@ -629,6 +629,16 @@ proxy: [{
 }]
 ```
 
+[Micromatch](https://www.npmjs.com/package/micromatch#matching-features) wildcard expressions are also supported:
+
+```js
+proxy: [{
+  context: ["/admin/**", "**/api/**", "(@/index.html/)"],
+  target: "http://localhost:3000",
+}]
+```
+But you may not mix plain text and wildcard expressions in the same context array
+
 ## `devServer.progress` - CLI only
 
 `boolean`
