@@ -243,7 +243,7 @@ unsafeCache: /src\/utilities/
 W> Changes to cached paths may cause failure in rare cases.
 
 
-## `resolve.plugins`
+### `resolve.plugins`
 
 A list of additional resolve plugins which should be applied. It allows plugins such as [`DirectoryNamedWebpackPlugin`](https://www.npmjs.com/package/directory-named-webpack-plugin).
 
@@ -254,7 +254,7 @@ plugins: [
 ```
 
 
-## `resolve.symlinks`
+### `resolve.symlinks`
 
 `boolean`
 
@@ -265,7 +265,7 @@ symlinks: true
 ```
 
 
-## `resolve.cachePredicate`
+### `resolve.cachePredicate`
 
 `function`
 
