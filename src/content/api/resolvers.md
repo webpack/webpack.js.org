@@ -45,5 +45,13 @@ descriptions.
 
 ## Configuration Options
 
-Briefly discuss and link to resolver-related configuration docs. Clarify how
-the options affect the three different resolvers...
+The resolvers mentioned above can also be customized via a configuration file
+with the [`resolve`]() or [`resolveLoader`]() options. These options allow
+users to change the resolving behavior through a variety of options including
+through resolve `plugins`.
+
+The resolver plugins, e.g. [`DirectoryNamedPlugin`]
+(https://github.com/shaketbaby/directory-named-webpack-plugin), can be included
+directly in `resolve.plugins` rather than using standard plugins. Note that the
+`resolve` configuration affects the `normal` and `context` resolvers while
+`resolveLoader` is used to modify the `loader` resolver.
