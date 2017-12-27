@@ -1,9 +1,10 @@
+// TODO: Try raw-loader or other approach when build process is refactored
 module.exports = {
   body: `
   <svg viewBox="0 0 1088 615" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <g stroke-width="1" fill="none" fill-rule="evenodd">
-        <text font-family="'Source Sans Pro', sans-serif" font-size="18" font-weight="500" fill="#86A5BA">
-            <tspan x="933.778" y="559">STATIC ASSETS</tspan>
+        <text font-family="'Source Sans Pro', sans-serif" font-size="18" font-weight="600" fill="#86A5BA">
+            <tspan x="933.778" y="459">STATIC ASSETS</tspan>
         </text>
         <g transform="translate(1002, 326)">
             <g>
@@ -47,7 +48,7 @@ module.exports = {
             <path d="M0.477941176,170.395 C0.477941176,170.395 169.382939,98.895 447.847936,98.895" id="Shape_99_" stroke-dasharray="6"></path>
             <path d="M0.477941176,72.395 C0.477941176,72.395 169.382939,0.895 447.847936,0.895" id="Shape_99_" stroke-dasharray="6" transform="translate(224.162939, 36.645000) scale(1, -1) translate(-224.162939, -36.645000) "></path>
         </g>
-        <text font-family="'Source Sans Pro', sans-serif" font-size="18" font-weight="500" fill="#86A5BA">
+        <text font-family="'Source Sans Pro', sans-serif" font-size="18" font-weight="600" fill="#86A5BA">
             <tspan x="24.934" y="562">MODULES WITH DEPENDENCIES</tspan>
         </text>
         <g transform="translate(228, 335)">
