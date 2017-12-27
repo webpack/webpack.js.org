@@ -1,91 +1,49 @@
 ---
-title: Resolver
+title: Resolvers
 group: Plugins
 sort: 3
 ---
 
-There are three types of resolvers, each used for different types of modules:
+Resolvers are created using the `enhanced-resolve` package. The `Resolver`
+class extends the `tapable` class and uses `tapable` to provide a few hooks.
+The `enhanced-resolve` package can be used directly to create new resolvers,
+however any [`compiler` instance]() has a few resolver instances that can be
+tapped into.
 
-- `compiler.resolvers.normal`: Resolve a normal module.
-- `compiler.resolvers.context`: Resolve a context module.
-- `compiler.resolvers.loader`: Resolve a loader.
+Before reading on, make sure you at least skim through the
+[`enhanced-resolve`]() and [`tapable`]() documentation.
 
-Any plugin should use `this.fileSystem` as fileSystem, as it's cached. It only has async named functions, but they may behave sync, if the user uses a sync file system implementation (i. e. in enhanced-require).
 
-To join paths any plugin should use `this.join`. It normalizes the paths. There is a `this.normalize` too.
+## Types
 
-A bailing async `forEach` implementation is available on `this.forEachBail(array, iterator, callback)`.
+There are three types of built-in resolvers available on the `compiler` class:
 
-To pass the request to other resolving plugins, use the `this.doResolve(types: String|String[], request: Request, message: String, callback)` method. `types` are multiple possible request types that are tested in order of preference.
+- Normal: Resolves a module via an absolute or relative path.
+- Context: Resolves a module within a given context.
+- Loader: Resolves a webpack [loader](/loaders).
+
+Depending on need, any one of these built-in resolver used by the `compiler`
+can be customized via plugins as such:
 
 ``` js
-interface Request {
-  path: String // The current directory of the request
-  request: String // The current request string
-  query: String // The query string of the request, if any
-  module: boolean // The request begins with a module
-  directory: boolean // The request points to a directory
-  file: boolean // The request points to a file
-  resolved: boolean // The request is resolved/done
-  // undefined means false for boolean fields
-}
-
-// Examples
-// from /home/user/project/file.js: require("../test?charset=ascii")
-{
-  path: "/home/user/project",
-  request: "../test",
-  query: "?charset=ascii"
-}
-// from /home/user/project/file.js: require("test/test/")
-{
-  path: "/home/user/project",
-  request: "test/test/",
-  module: true,
-  directory: true
-}
+compiler.resolverFactory.plugin('resolver [type]', resolver => {
+  resolver.hooks.resolve.tapAsync('MyPlugin', params => {
+    // ...
+  })
+})
 ```
 
+Where `[type]` is one of the three resolvers mention above, specified as:
 
-## `resolve(context: String, request: String)`
+- `normal`
+- `context`
+- `loader`
 
-Before the resolving process starts.
-
-
-## `resolve-step(types: String[], request: Request)`
-
-Before a single step in the resolving process starts.
-
-
-## `module(request: Request)` async waterfall
-
-A module request is found and should be resolved.
+See the `enhanced-resolve` [documentation]() for a full list of hooks and
+descriptions.
 
 
-## `directory(request: Request)` async waterfall
+## Configuration Options
 
-A directory request is found and should be resolved.
-
-
-## `file(request: Request)` async waterfall
-
-A file request is found and should be resolved.
-
-
-## The plugins may offer more extensions points
-
-Here is a list what the default plugins in webpack offer. They are all `(request: Request)` async waterfall.
-
-The process for normal modules and contexts is `module -> module-module -> directory -> file`.
-
-The process for loaders is `module -> module-loader-module -> module-module -> directory -> file`.
-
-
-## `module-module`
-
-A module should be looked up in a specified directory. `path` contains the directory.
-
-
-## `module-loader-module` (only for loaders)
-
-Used before module templates are applied to the module name. The process continues with `module-module`.
+Briefly discuss and link to resolver-related configuration docs. Clarify how
+the options affect the three different resolvers...
