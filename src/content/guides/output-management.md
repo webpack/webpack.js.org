@@ -73,7 +73,6 @@ __dist/index.html__
     <head>
 -     <title>Asset Management</title>
 +     <title>Output Management</title>
-+     <script src="./print.bundle.js"></script>
     </head>
     <body>
 -     <script src="./bundle.js"></script>
