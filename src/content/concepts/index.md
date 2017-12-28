@@ -63,7 +63,7 @@ module.exports = {
 
 在上面的例子中，我们通过 `output.filename` 和 `output.path` 属性，来告诉 webpack bundle 的名称，以及我们想要生成(emit)到哪里。
 
-T> 你可能看到项目**生成(emitted 或 emit)**贯穿我们整个文档和[插件 API](/api/plugins)。它是“生产(produced)”或“排放(discharged)”的特殊术语。
+T> 你可能会发现术语**生成(emitted 或 emit)**贯穿了我们整个文档和[插件 API](/api/plugins)。它是“生产(produced)”或“释放(discharged)”的特殊术语。
 
 T> `output` 属性还有[更多可配置的特性](/configuration/output)，如果你想要了解更多关于 `output` 属性的概念，你可以通过[阅读概念章节](/concepts/output)来了解更多。
 
