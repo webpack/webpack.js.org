@@ -2,7 +2,7 @@ import React from 'react';
 
 import Cube from '../Cube/Cube';
 import TextRotator from '../TextRotater/TextRotater';
-import Modules from '../../assets/homepage-modules.svg';
+import homeSVG from './SplashVizSVG';
 
 export default class SplashViz extends React.Component {
 
@@ -18,9 +18,7 @@ export default class SplashViz extends React.Component {
             <span> styles </span>
           </TextRotator>
         </h1>
-        <div className="splash-viz__modules">
-          <img src={ Modules } alt="dependency bundling graphic"/>
-        </div>
+        <div className="splash-viz__modules" dangerouslySetInnerHTML={{__html: homeSVG.body}}></div>
         <Cube className="splash-viz__cube" depth={ 120 } repeatDelay={ 5000 } continuous/>
       </section>
     );
