@@ -11,3 +11,4 @@ install:
   - npm install --global yarn
   - yarn
   - sudo pip install proselint
+group: deprecated-2017Q4
