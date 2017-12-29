@@ -19,6 +19,8 @@ new webpack.optimize.ModuleConcatenationPlugin()
 >
 > Scope hoisting is specifically a feature made possible by ECMAScript Module syntax. Because of this webpack may fallback to normal bundling based on what kind of modules you are using, and [other conditions](https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5).
 
+W> please keep in mind that this plugin will not affect the build in case ECMAScript modules are processed into either of supported module systems. E.g. Babel transforms ES Modules to commonjs by default (see: [Babel ES2015 Preset options: modules](https://babeljs.io/docs/plugins/preset-es2015/#optionsmodules)).
+
 
 ## Optimization Bailouts
 
