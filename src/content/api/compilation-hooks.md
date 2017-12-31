@@ -5,7 +5,7 @@ sort: 2
 ---
 
 The `Compilation` module is used by the `Compiler` to create new compilations
-(or builds). A `Compilation` instance has access to all modules and their
+(or builds). A `compilation` instance has access to all modules and their
 dependencies (most of which are circular references). It is the literal
 compilation of all the modules in the dependency graph of an application.
 During the compilation phase, modules are loaded, sealed, optimized, chunked,
@@ -18,7 +18,7 @@ lifecycle hooks. They can be tapped the same way as compiler hooks:
 compilation.hooks.someHook.tap(...)
 ```
 
-As with the compiler, `tapAsync` and `tapPromise` may also be available
+As with the `compiler`, `tapAsync` and `tapPromise` may also be available
 depending on the type of hook.
 
 

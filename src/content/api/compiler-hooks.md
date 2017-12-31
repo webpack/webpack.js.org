@@ -29,7 +29,7 @@ need to re-compile manually every time. Watch mode can also be entered via the
 
 ## Hooks
 
-The following lifecycle hooks are exposed by the `Compiler` and can be acessed
+The following lifecycle hooks are exposed by the `compiler` and can be accessed
 as such:
 
 ``` js
