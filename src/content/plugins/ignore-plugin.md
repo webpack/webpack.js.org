@@ -23,3 +23,5 @@ As of [moment](https://momentjs.com/) 2.18, all locales are bundled together wit
 ```js
 new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
 ```
+
+**Note from the Moment team:** We shipped a [new libarary called Luxon](https://moment.github.io/luxon/) in November of 2017. Luxon has an API extremely similar to Moment's, but it is smaller, immutable, and properly modularized. We recommend this library for all projects that require only evergreen browser support.
