@@ -41,4 +41,4 @@ Name                                                     | Description
 
 For more third-party plugins, see the list from [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#webpack-plugins).
 
-![Awesome](../assets/awesome-badge.svg)
+![Awesome](../images/awesome-badge.svg)

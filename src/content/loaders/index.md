@@ -73,5 +73,5 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 * `angular2-template-loader` Loads and compiles [Angular](https://angular.io/) Components
 
 
-![Awesome](../assets/awesome-badge.svg)
+![Awesome](../images/awesome-badge.svg)
 For more third-party loaders, see the list from [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#loaders).
