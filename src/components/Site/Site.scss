@@ -7,4 +7,8 @@
   &.nav-displayed {
     height: 100vh;
   }
+
+  &__content {
+    flex: 1 1 auto;
+  }
 }
