@@ -1,7 +1,4 @@
 node_modules
 npm-debug.log
-build
-generated
-support-*.json
-starter-kits-data.json
-.antwar
+dist
+_*
