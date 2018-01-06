@@ -5,19 +5,11 @@ import NotificationBar from '../NotificationBar/NotificationBar';
 import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer/Footer';
 import SidebarMobile from '../SidebarMobile/SidebarMobile';
-import './Site.scss';
 
-// Load base styling
-import '../../styles';
+// Load Styling
+import '../../styles/index';
 import '../../styles/icon.font.js';
-import '../Container/Container.scss';
-import '../NotificationBar/NotificationBar.scss';
-import '../Navigation/Navigation.scss';
-import '../Navigation/Search.scss';
-import '../SidebarMobile/SidebarMobile.scss';
-import '../SidebarItem/SidebarItem.scss';
-import '../Logo/Logo.scss';
-import '../Dropdown/Dropdown.scss';
+import './Site.scss';
 
 const Site = ({
   children,

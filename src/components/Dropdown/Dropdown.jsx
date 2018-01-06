@@ -1,5 +1,6 @@
 import React from 'react';
 import LanguageIcon from '../../assets/language-icon.svg';
+import './Dropdown.scss';
 
 export default class Dropdown extends React.Component {
   state = {

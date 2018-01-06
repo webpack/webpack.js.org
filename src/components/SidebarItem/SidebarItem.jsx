@@ -1,6 +1,7 @@
 import React from 'react';
 import { uniqueId } from 'lodash';
 import Link from '../Link/Link';
+import './SidebarItem.scss';
 
 const block = 'sidebar-item';
 

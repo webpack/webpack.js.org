@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from '../Link/Link';
+import './SidebarMobile.scss';
 
 let initialTouchPosition = {};
 let lastTouchPosition = {};

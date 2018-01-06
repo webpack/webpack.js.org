@@ -1,6 +1,7 @@
 import React from 'react';
 import Container from '../Container/Container';
 import testLocalStorage from '../../utilities/test-local-storage';
+import './NotificationBar.scss';
 
 const version = '2';
 const localStorageIsEnabled = testLocalStorage() !== false;
