@@ -466,7 +466,7 @@ The generated output will be defined with the name "MyLibrary", i.e.
 
 ``` js
 define("MyLibrary", [], function() {
-  // This module return value is what your entry chunk returns
+  return _entry_return_;
 });
 ```
 
@@ -482,7 +482,7 @@ If `output.library` is undefined, the following is generated instead.
 
 ``` js
 define([], function() {
-  // This module returns is what your entry chunk returns
+  return _entry_return_;
 });
 ```
 
@@ -512,8 +512,8 @@ And finally the output is:
     exports["MyLibrary"] = factory();
   else
     root["MyLibrary"] = factory();
-})(this, function() {
-  //what this module returns is what your entry chunk returns
+})(typeof self !== 'undefined' ? self : this, function() {
+  return _entry_return_;
 });
 ```
 
@@ -537,8 +537,8 @@ The output will be:
     var a = factory();
     for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
   }
-})(this, function() {
-  //what this module returns is what your entry chunk returns
+})(typeof self !== 'undefined' ? self : this, function() {
+  return _entry_return_;
 });
 ```
 
