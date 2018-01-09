@@ -137,7 +137,7 @@ bundle.js  560 kB       0  [emitted]  [big]  main
 
 Open up `index.html` in your browser again and you should see that `Hello webpack` is now styled in red. To see what webpack did, inspect the page (don't view the page source, as it won't show you the result) and look at the page's head tags. It should contain our style block that we imported in `index.js`.
 
-T> Note that you can also [split your CSS](/plugins/extract-text-webpack-plugin) for better load times in production. On top of that, loaders exist for pretty much any flavor of CSS you can think of -- [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader), and [less](/loaders/less-loader) to name a few.
+Note that you can, and in most cases should, [split your CSS](/plugins/extract-text-webpack-plugin) for better load times in production. On top of that, loaders exist for pretty much any flavor of CSS you can think of -- [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader), and [less](/loaders/less-loader) to name a few.
 
 
 ## Loading Images

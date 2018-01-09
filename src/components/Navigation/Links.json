@@ -16,6 +16,10 @@
     "url": "contribute"
   },
   {
+    "title": "Vote",
+    "url": "vote"
+  },
+  {
     "title": "Blog",
     "url": "//medium.com/webpack"
   }
