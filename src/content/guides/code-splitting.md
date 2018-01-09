@@ -264,7 +264,7 @@ lodash.bundle.js   541 kB       0  [emitted]  [big]  lodash
    [3] (webpack)/buildin/module.js 517 bytes {0} [built]
 ```
 
-If you've enabled [`async` functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) via a pre-processor like Babel + [Syntax Dynamic Import Babel Plugin](https://babeljs.io/docs/plugins/syntax-dynamic-import/#installation), note that you can simplify the code as `import()` statements just return promises:
+If you've enabled [`async` functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) via a pre-processor like Babel and the [Syntax Dynamic Import Babel Plugin](https://babeljs.io/docs/plugins/syntax-dynamic-import/#installation), note that you can simplify the code as `import()` statements return promises:
 
 __src/index.js__
 
