@@ -160,7 +160,7 @@ If multiple modules would result in the same name, [`output.devtoolFallbackModul
 
 `string`
 
-This option determines the modules namespace used with the [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametemplate). When not specified, it will default to the value of: [`output.library`](#output-library). It's use is to prevent source file path collisions in sourcemaps when loading multiple libraries built with webpack.
+This option determines the modules namespace used with the [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametemplate). When not specified, it will default to the value of: [`output.library`](#output-library). It's used to prevent source file path collisions in sourcemaps when loading multiple libraries built with webpack.
 
 For example, if you have 2 libraries, with namespaces `library1` and `library2`, which both have a file `./src/index.js` (with potentially different contents), they will expose these files as `webpack://library1/./src/index.js` and `webpack://library2/./src/index.js`.
 
@@ -245,7 +245,7 @@ Since v4.0.0-alpha2 `hashFunction` can now be a constructor to a custom hash fun
 hashFunction: require('metrohash').MetroHash64
 ```
 
-Make sure that hashing function will have `update` and `digest` methods available.
+Make sure that the hashing function will have `update` and `digest` methods available.
 
 ## `output.hashSalt`
 
