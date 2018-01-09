@@ -29,7 +29,7 @@ The following options are supported:
 - `sourceURLTemplate`: Define the sourceURL default: `webpack-internal:///${module.identifier}`
 - `module` (`boolean`): Indicates whether loaders should generate source maps (defaults to `true`).
 - `columns` (`boolean`): Indicates whether column mappings should be used (defaults to `true`).
-- `protocol` (`string`): Allows user to override default protocol (which may cause cross-origin exception)
+- `protocol` (`string`): Allows user to override default protocol (`webpack-internal://`)
 
 T> Setting `module` and/or `columns` to `false` will yield less accurate source maps but will also improve compilation performance significantly.
 
@@ -51,7 +51,10 @@ new webpack.EvalSourceMapDevToolPlugin({
 
 ### Setting sourceURL
 
-Set a URL for source maps. Useful for avoiding cross-origin issues.
+Set a URL for source maps. Useful for avoiding cross-origin issues such as
+  ```
+  A cross-origin error was thrown. React doesn't have access to the actual error object in development. See https://fb.me/react-crossorigin-error for more information.
+```
 
 ``` js
 new webpack.EvalSourceMapDevToolPlugin({
