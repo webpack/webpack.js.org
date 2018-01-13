@@ -115,7 +115,7 @@ W> 小心！resource 是文件的_解析_路径，这意味着符号链接的资
 
 ## `Rule.issuer`
 
-A [`Condition`](#condition) to match against the module that issued the request. In the following example, the `issuer` for the `a.js` request would be the path to the `index.js` file.
+一个[`条件`](#condition)，用来与被发布的 request 对应的模块项匹配。在以下示例中，a.js request 的`发布者(issuer)`是 index.js 文件的路径。
 
 __index.js__
 
@@ -123,7 +123,7 @@ __index.js__
 import A from './a.js'
 ```
 
-This option can be used to apply loaders to the dependencies of a specific module or set of modules.
+这个选项可以用来将 loader 应用到一个特定模块或一组模块的依赖中。
 
 
 ## `Rule.loader`
