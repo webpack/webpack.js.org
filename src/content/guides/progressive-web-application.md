@@ -1,11 +1,11 @@
 ---
-title: Progressive Web Application
+title: 渐进式网络应用程序
 sort: 14
 contributors:
   - johnnyreilly
 ---
 
-T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
+T> 本指南继续沿用[管理输出](/guides/output-management)中的代码示例。
 
 Progressive Web Applications (or PWAs) are web apps that deliver an experience similar to native applications. There are many things that can contribute to that. Of these, the most significant is the ability for an app to be able to function when __offline__. This is achieved through the use of a web technology called [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers/).
 
@@ -45,7 +45,7 @@ Available on:
 Hit CTRL-C to stop the server
 ```
 
-If you open your browser to `http://localhost:8080` (i.e. `http://127.0.0.1`) you should see your webpack application being served up from the `dist` directory. If you stop the server and refresh, the webpack application is no longer available.  
+If you open your browser to `http://localhost:8080` (i.e. `http://127.0.0.1`) you should see your webpack application being served up from the `dist` directory. If you stop the server and refresh, the webpack application is no longer available.
 
 This is what we aim to change. Once we reach the end of this module we should be able to stop the server, hit refresh and still see our application.
 
@@ -79,7 +79,7 @@ __webpack.config.js__
 -   })
 +   }),
 +   new WorkboxPlugin({
-+     // these options encourage the ServiceWorkers to get in there fast 
++     // these options encourage the ServiceWorkers to get in there fast
 +     // and not allow any straggling "old" SWs to hang around
 +     clientsClaim: true,
 +     skipWaiting: true

@@ -78,7 +78,7 @@ import url from 'file.css'
 <link rel="stylesheet" href="path/to/file.css">
 ```
 
-> :信息来源: 使用 `url` 引用的 Source map 和资源：当 style-loader 与 `{ options: { sourceMap: true } }` 选项一起使用时，CSS 模块将生成为 `Blob`，因此相对路径无法正常工作（他们将相对于 `chrome:blob` 或 `chrome:devtools`）。为了使资源保持正确的路径，必须设置 webpack 配置中的 `output.publicPath` 属性，以便生成绝对路径。或者，您可以启用上面提到的 `convertToAbsoluteUrls` 选项。
+> :信息来源: 使用 `url` 引用的 Source map 和资源：当 style-loader 与 `{ options: { sourceMap: true } }` 选项一起使用时，CSS 模块将生成为 `Blob`，因此相对路径无法正常工作（他们将相对于 `chrome:blob` 或 `chrome:devtools`）。为了使资源保持正确的路径，必须设置 webpack 配置中的 `output.publicPath` 属性，以便生成绝对路径。或者，你可以启用上面提到的 `convertToAbsoluteUrls` 选项。
 
 ### `可选的(Useable)`
 
@@ -327,7 +327,7 @@ A new `<style>` element can be inserted before a specific element by passing an 
 
 如果已定义，则 style-loader 将重用单个 `<style>` 元素，而不是为每个所需的模块添加/删除单个元素。
 
-> ℹ️  默认情况下启用此选项，IE9 对页面上允许的 style 标签数量有严格的限制。您可以使用 singleton 选项来启用或禁用它。
+> ℹ️  默认情况下启用此选项，IE9 对页面上允许的 style 标签数量有严格的限制。你可以使用 singleton 选项来启用或禁用它。
 
 **webpack.config.js**
 ```js
@@ -355,7 +355,7 @@ A new `<style>` element can be inserted before a specific element by passing an 
 
 ### `convertToAbsoluteUrls`
 
-如果 convertToAbsoluteUrls 和 sourceMaps 都启用，那么相对 url 将在 css 注入页面之前，被转换为绝对 url。这解决了在启用 source map 时，相对资源无法加载的[问题](https://github.com/webpack/style-loader/pull/96)。您可以使用 convertToAbsoluteUrls 选项启用它。
+如果 convertToAbsoluteUrls 和 sourceMaps 都启用，那么相对 url 将在 css 注入页面之前，被转换为绝对 url。这解决了在启用 source map 时，相对资源无法加载的[问题](https://github.com/webpack/style-loader/pull/96)。你可以使用 convertToAbsoluteUrls 选项启用它。
 
 **webpack.config.js**
 ```js

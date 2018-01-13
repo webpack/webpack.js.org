@@ -52,7 +52,7 @@ __webpack_public_path__ = process.env.ASSET_PATH;
 `process.env.ASSET_PATH` 就已经被定义了，
 所以让我们能够安心地使用它了。
 
-**警告：**请注意，如果您在入口文件中使用 ES6 模块导入，则在导入后对 `__webpack_public_path__` 进行赋值。在这种情况下，您必须将公共路径(public path)赋值移至自己的专属模块，然后将其导入到您的 entry.js 之上：
+**警告：**请注意，如果你在入口文件中使用 ES6 模块导入，则在导入后对 `__webpack_public_path__` 进行赋值。在这种情况下，你必须将公共路径(public path)赋值移至自己的专属模块，然后将其导入到你的 entry.js 之上：
 
 ```js
 // entry.js

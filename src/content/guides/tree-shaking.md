@@ -25,7 +25,7 @@ _tree shaking_ 是一个术语，通常用于描述移除 JavaScript 上下文�
 
 webpack 2 内置支持 ES2015 模块（别名 *harmony modules*），并能检测出未使用的模块导出。
 
-T> 本指南的继承自[起步指南](/guides/getting-started)。如果您尚未阅读该指南，请先行阅读。
+T> 本指南的继承自[起步指南](/guides/getting-started)。如果你尚未阅读该指南，请先行阅读。
 
 
 ## 添加一个通用模块

@@ -136,7 +136,7 @@ T> 不允许在当前监听器已经关闭或失效前再次监听或执行。
 
 ### 作废 `Watching`(Invalidate `Watching`)
 
-使用 `watching.invalidate`，您可以手动使当前编译循环(compiling round)无效，而不会停止监视进程：
+使用 `watching.invalidate`，你可以手动使当前编译循环(compiling round)无效，而不会停止监视进程：
 
 ``` js
 watching.invalidate();

@@ -54,7 +54,7 @@ module: {
 ```
 
 除了暴露为 `window. $` 之外，假设你还想把它暴露为 `window.jQuery`。
-对于多个暴露，您可以在 loader 字符串中使用 `!`：
+对于多个暴露，你可以在 loader 字符串中使用 `!`：
 
 webpack v1 用法
 ```js
