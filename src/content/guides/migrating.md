@@ -544,7 +544,7 @@ webpack now supports template strings in expressions. This means you can start u
 
 ### Configuration Promise
 
-webpack now supports returning a `Promise` from the configuration file. This allows to do async processing in you configuration file.
+webpack now supports returning a `Promise` from the configuration file. This allows async processing in your configuration file.
 
 **webpack.config.js**
 
