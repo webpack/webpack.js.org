@@ -1,6 +1,6 @@
 ---
 title: Module Factories
-group: Plugins
+group: Modules
 sort: 5
 ---
 
