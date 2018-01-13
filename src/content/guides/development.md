@@ -214,7 +214,7 @@ __package.json__
     "main": "webpack.config.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "watch": "webpack --progress --watch",
+      "watch": "webpack --watch",
 +     "start": "webpack-dev-server --open",
       "build": "webpack"
     },
@@ -331,7 +331,7 @@ __package.json__
     "main": "webpack.config.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "watch": "webpack --progress --watch",
+      "watch": "webpack --watch",
       "start": "webpack-dev-server --open",
 +     "server": "node server.js",
       "build": "webpack"
