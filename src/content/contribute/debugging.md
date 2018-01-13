@@ -1,5 +1,5 @@
 ---
-title: Debugging
+title: 调试
 sort: 7
 contributors:
   - skipjack
