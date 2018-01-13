@@ -12,7 +12,7 @@ repo: https://github.com/webpack-contrib/json-loader
 npm install --save-dev json-loader
 ```
 
-> ⚠️ **注意：由于 `webpack >= v2.0.0` 默认支持导入 JSON 文件。如果您使用自定义文件扩展名，您可能仍然需要使用此 loader。See the [v1.0.0 -> v2.0.0 Migration Guide](https://webpack.js.org/guides/migrating/#json-loader-is-not-required-anymore) for more information**
+> ⚠️ **注意：由于 `webpack >= v2.0.0` 默认支持导入 JSON 文件。如果你使用自定义文件扩展名，你可能仍然需要使用此 loader。See the [v1.0.0 -> v2.0.0 Migration Guide](https://webpack.js.org/guides/migrating/#json-loader-is-not-required-anymore) for more information**
 
 ## 用法
 

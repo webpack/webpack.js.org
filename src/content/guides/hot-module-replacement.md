@@ -22,7 +22,7 @@ related:
     url: /api/hot-module-replacement
 ---
 
-T> 本指南示例代码延用[开发](/guides/development)指南的示例代码。
+T> 本指南继续沿用[开发指南](/guides/development)中的代码示例。
 
 模块热替换(Hot Module Replacement 或 HMR)是 webpack 提供的最有用的功能之一。它允许在运行时更新各种模块，而无需进行完全刷新。本页面重点介绍__实现__，而[概念页面](/concepts/hot-module-replacement)提供了更多关于它的工作原理以及为什么它有用的细节。
 
@@ -320,7 +320,7 @@ __index.js__
 
 ```
 
-将 `body` 上的样式修改为 `background: red;`，您应该可以立即看到页面的背景颜色随之更改，而无需完全刷新。
+将 `body` 上的样式修改为 `background: red;`，你应该可以立即看到页面的背景颜色随之更改，而无需完全刷新。
 
 __styles.css__
 

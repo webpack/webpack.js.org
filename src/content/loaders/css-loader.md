@@ -16,7 +16,7 @@ npm install --save-dev css-loader
 
 `css-loader` 解释(interpret) `@import` 和 `url()` ，会 `import/require()` 后再解析(resolve)它们。
 
-引用资源的合适 loader 是 [file-loader](/loaders/file-loader/)和 [url-loader](/loaders/url-loader/)，您应该在配置中指定（查看[如下设置](https://github.com/webpack-contrib/css-loader#assets)）。
+引用资源的合适 loader 是 [file-loader](/loaders/file-loader/)和 [url-loader](/loaders/url-loader/)，你应该在配置中指定（查看[如下设置](https://github.com/webpack-contrib/css-loader#assets)）。
 
 **file.js**
 ```js
@@ -39,7 +39,7 @@ module.exports = {
 
 ##
 
-您也可以直接将 css-loader 的结果作为字符串使用，例如 Angular 的组件样式。
+你也可以直接将 css-loader 的结果作为字符串使用，例如 Angular 的组件样式。
 
 **webpack.config.js**
 ```js
@@ -62,8 +62,8 @@ console.log(css); // {String}
 
 如果有 SourceMap，它们也将包含在字符串结果中。
 
-如果由于某种原因，您需要将 CSS 提取为纯粹的字符串资源（即不包含在 JS 模块中），则可能需要查看 [extract-loader](https://github.com/peerigon/extract-loader)。
-例如，当您需要将 CSS 作为字符串进行后处理时，这很有用。
+如果由于某种原因，你需要将 CSS 提取为纯粹的字符串资源（即不包含在 JS 模块中），则可能需要查看 [extract-loader](https://github.com/peerigon/extract-loader)。
+例如，当你需要将 CSS 作为字符串进行后处理时，这很有用。
 
 **webpack.config.js**
 ```js
@@ -110,7 +110,7 @@ console.log(css); // {String}
 
 `url(/image.png)` => `require('./image.png')`
 
-不建议使用'相对根路径'的 url。您应该只将其用于旧版 CSS 文件。
+不建议使用'相对根路径'的 url。你应该只将其用于旧版 CSS 文件。
 
 ### `url`
 
@@ -179,7 +179,7 @@ url(~module/image.png) => require('module/image.png')
 
 查询参数 `modules` 会启用 **CSS 模块**规范。
 
-默认情况下，这将启用局部作用域 CSS。（您可以使用 `:global(...)` 或 `:global` 关闭选择器 and/or 规则。
+默认情况下，这将启用局部作用域 CSS。（你可以使用 `:global(...)` 或 `:global` 关闭选择器 and/or 规则。
 
 #### `Scope`
 
@@ -242,7 +242,7 @@ file.png => ./file.png
 }
 ```
 
-您还可以通过自定义 `getLocalIdent` 函数来指定绝对路径，以根据不同的模式(schema)生成类名。这需要 `webpack >= 2.2.1`（`options` 对象支持传入函数）。
+你还可以通过自定义 `getLocalIdent` 函数来指定绝对路径，以根据不同的模式(schema)生成类名。这需要 `webpack >= 2.2.1`（`options` 对象支持传入函数）。
 
 **webpack.config.js**
 ```js
@@ -349,7 +349,7 @@ exports.locals = {
 
 例如 extract-text-webpack-plugin 能够处理它们。
 
-默认情况下不启用它们，因为它们会导致运行时的额外开销，并增加了 bundle 大小 (JS source map 不会)。此外，相对路径是错误的，您需要使用包含服务器 URL 的绝对公用路径。
+默认情况下不启用它们，因为它们会导致运行时的额外开销，并增加了 bundle 大小 (JS source map 不会)。此外，相对路径是错误的，你需要使用包含服务器 URL 的绝对公用路径。
 
 **webpack.config.js**
 ```js

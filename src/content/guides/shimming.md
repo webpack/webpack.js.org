@@ -22,7 +22,7 @@ _shimming_ 另外一个使用场景就是，当你希望 [polyfill](https://en.w
 
 下面的文章将向我们展示这两种用例。
 
-T> 为了方便，本指南沿用[起步](/guides/getting-started)章节中的代码示例。在继续之前，请确保你已经熟悉那些配置。
+T> 为了方便，本指南继续沿用[起步](/guides/getting-started)中的代码示例。在继续之前，请确保你已经熟悉那些配置。
 
 
 ## shimming 全局变量

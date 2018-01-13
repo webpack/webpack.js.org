@@ -23,7 +23,7 @@ contributors:
   - sudarsangp
 ---
 
-T> 本指南扩展了[起步](/guides/getting-started)和[管理输出](/guides/output-management)中提供的示例。请确保您至少已熟悉其中提供的示例。
+T> 本指南继续沿用[起步](/guides/getting-started)和[管理输出](/guides/output-management)中的代码示例。。请确保你至少已熟悉其中提供的示例。
 
 代码分离是 webpack 中最引人注目的特性之一。此特性能够把代码分离到不同的 bundle 中，然后可以按需加载或并行加载这些文件。代码分离可以用于获取更小的 bundle，以及控制资源加载优先级，如果使用合理，会极大影响加载时间。
 

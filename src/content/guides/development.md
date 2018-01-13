@@ -8,7 +8,7 @@ contributors:
   - TheDutchCoder
 ---
 
-T> 本指南继续延伸[管理输出](/guides/output-management)指南中的代码示例。
+T> 本指南继续沿用[管理输出](/guides/output-management)指南中的代码示例。
 
 如果你一直跟随之前的指南，应该对一些 webpack 基础知识有着很扎实的理解。在我们继续之前，先来看看如何建立一个开发环境，使我们的开发变得更容易一些。
 

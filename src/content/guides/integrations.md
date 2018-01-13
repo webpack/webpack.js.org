@@ -10,7 +10,7 @@ contributors:
 
 首先我们要消除一个常见的误解。webpack 是一个模块打包器(module bundler)（例如，[Browserify](http://browserify.org/) 或 [Brunch](http://brunch.io/)）。它不是一个任务执行器(task runner)（例如，[Make](https://www.gnu.org/software/make/), [Grunt](https://gruntjs.com/) 或者 [Gulp](https://gulpjs.com/) ）。任务执行器就是用来自动化处理常见的开发任务，例如项目的检查(lint)、构建(build)、测试(test)。相对于*打包器(bundler)*，任务执行器则聚焦在偏重上层的问题上面。你可以得益于，使用上层的工具，而将打包部分的问题留给 webpack。
 
-打包器(bundler)帮助您取得准备用于部署的 JavaScript 和样式表，将它们转换为适合浏览器的可用格式。例如，JavaScript 可以[压缩](/plugins/uglifyjs-webpack-plugin)、[拆分 chunk](/guides/code-splitting) 和[懒加载](/guides/lazy-loading)，以提高性能。打包是 web 开发中最重要的挑战之一，解决此问题可以消除开发过程中的大部分痛点。
+打包器(bundler)帮助你取得准备用于部署的 JavaScript 和样式表，将它们转换为适合浏览器的可用格式。例如，JavaScript 可以[压缩](/plugins/uglifyjs-webpack-plugin)、[拆分 chunk](/guides/code-splitting) 和[懒加载](/guides/lazy-loading)，以提高性能。打包是 web 开发中最重要的挑战之一，解决此问题可以消除开发过程中的大部分痛点。
 
 好消息是，虽然有一些功能重复，但如果以正确的方式处理，任务运行器和模块打包器能够一起协同工作。本指南提供了关于如何将 webpack 与一些流行的任务运行器集成在一起的高度概述。
 
