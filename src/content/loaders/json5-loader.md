@@ -23,7 +23,7 @@ Suppose we have the following `json5` file
 // appData.json5
 {
   env: 'production',
-  passwordStregth: 'strong'
+  passwordStrength: 'strong'
 }
 ```
 

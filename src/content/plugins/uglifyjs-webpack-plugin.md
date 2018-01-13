@@ -169,7 +169,7 @@ Number of concurrent runs.
       parse: {...options},
       mangle: {
         ...options,
-        properties: {
+        props: {
           // mangle property options
         }
       },

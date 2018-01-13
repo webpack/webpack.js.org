@@ -107,7 +107,7 @@ You can configure a custom filename template for your file using the query param
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
 |**`hashType`**|`{String}`|`md5`|`sha1`, `md5`, `sha256`, `sha512`|
-|**`digestType`**|`{String}`|`base64`|`hex`, `base26`, `base32`, `base36`, `base49`, `base52`, `base58`, `base62`, `base64`|
+|**`digestType`**|`{String}`|`hex`|`hex`, `base26`, `base32`, `base36`, `base49`, `base52`, `base58`, `base62`, `base64`|
 |**`length`**|`{Number}`|`9999`|The length in chars|
 
 By default, the path and name you specify will output the file in that same directory and will also use that same URL path to access the file.

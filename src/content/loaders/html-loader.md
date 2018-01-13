@@ -107,6 +107,8 @@ module: {
 }
 ```
 
+See [html-minifier](https://github.com/kangax/html-minifier#options-quick-reference)'s documentation for more information on the available options.
+
 The enabled rules for minimizing by default are the following ones:
  - removeComments
  - removeCommentsFromCDATA
@@ -120,7 +122,7 @@ The enabled rules for minimizing by default are the following ones:
  - minifyCSS
  - removeScriptTypeAttributes
  - removeStyleTypeAttributes
- 
+
  The rules can be disabled using the following options in your `webpack.conf.js`
 
 ```js
