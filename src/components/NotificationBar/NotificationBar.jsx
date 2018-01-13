@@ -2,7 +2,7 @@ import React from 'react';
 import Container from '../Container/Container';
 import testLocalStorage from '../../utilities/test-local-storage';
 
-const version = '1';
+const version = '2';
 const localStorageIsEnabled = testLocalStorage() !== false;
 
 export default class NotificationBar extends React.Component {
@@ -13,17 +13,16 @@ export default class NotificationBar extends React.Component {
       <div className={ `notification-bar ${dismissedMod}` }>
         <Container className="notification-bar__inner">
           <p>
-            赞助 webpack，同时获取官方衣服！访问 <a href="https://webpack.threadless.com">webpack 官方商店！</a>&nbsp; 查看所有收益请转到 webpack 的 <a href="https://opencollective.com/webpack">Open Collective 页面！</a>
+            赞助 webpack，同时从<a href="https://webpack.threadless.com">官方商店</a>购买衣服{' '}
+            或者在<a href="http://www.unixstickers.com/tag/webpack">这里</a>购买贴纸！所有收益将转到我们的{' '}
+            <a href="https://opencollective.com/webpack">open collective</a>！
           </p>
-          <p>
-            在 <a href="http://www.unixstickers.com/tag/webpack">Unixstickers!</a> 上购买全新的 webpack 贴纸
-            {localStorageIsEnabled ?
-              <button
-                className="notification-bar__close icon-cross"
-                onClick={ this._close.bind(this) } /> :
-              null
-            }
-          </p>
+          { localStorageIsEnabled ?
+            <button
+              className="notification-bar__close icon-cross"
+              onClick={ this._close.bind(this) } /> :
+            null
+          }
         </Container>
       </div>
     );

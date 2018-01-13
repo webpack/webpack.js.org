@@ -74,12 +74,14 @@ T> `output` 属性还有[更多可配置的特性](/configuration/output)，如�
 
 本质上，webpack loader 将所有类型的文件，转换为应用程序的依赖图可以直接引用的模块。
 
+W> 注意，loader 能够 `import` 导入任何类型的模块（例如 `.css` 文件），这是 webpack 特有的功能，其他打包程序或任务执行器的可能并不支持。我们认为这种语言扩展是有很必要的，因为这可以使开发人员创建出更准确的依赖关系图。
+
 在更高层面，在 webpack 的配置中 **loader** 有两个目标。
 
 1. 识别出应该被对应的 loader 进行转换的那些文件。(使用 `test` 属性)
 2. 转换这些文件，从而使其能够被添加到依赖图中（并且最终添加到 bundle 中）(`use` 属性)
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```javascript
 const path = require('path');

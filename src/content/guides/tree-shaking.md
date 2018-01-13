@@ -114,7 +114,7 @@ function cube(x) {
 我们先来安装它：
 
 ``` bash
-npm i --save-dev uglifyjs-webpack-plugin
+npm install --save-dev uglifyjs-webpack-plugin
 ```
 
 然后将其添加到我们的配置中：

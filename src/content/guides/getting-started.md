@@ -146,15 +146,15 @@ __dist/index.html__
 ``` bash
 npx webpack src/index.js dist/bundle.js
 
-Hash: ff6c1d39b26f89b3b7bb
-Version: webpack 2.2.0
-Time: 385ms
+Hash: 857f878815ce63ad5b4f
+Version: webpack 3.9.1
+Time: 332ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  [emitted]  [big]  main
-   [0] ./~/lodash/lodash.js 540 kB {0} [built]
-   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [3] ./src/index.js 278 bytes {0} [built]
+   [0] ./src/index.js 222 bytes {0} [built]
+   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+    + 1 hidden module
 ```
 
 T> 输出可能会稍有不同，但是只要构建成功，那么你就可以继续。
@@ -206,15 +206,15 @@ module.exports = {
 ``` bash
 npx webpack --config webpack.config.js
 
-Hash: ff6c1d39b26f89b3b7bb
-Version: webpack 2.2.0
-Time: 390ms
+Hash: 857f878815ce63ad5b4f
+Version: webpack 3.9.1
+Time: 298ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  [emitted]  [big]  main
-   [0] ./~/lodash/lodash.js 540 kB {0} [built]
-   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [3] ./src/index.js 278 bytes {0} [built]
+   [0] ./src/index.js 222 bytes {0} [built]
+   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+    + 1 hidden module
 ```
 
 W> 注意，当在 windows 中通过调用路径去调用 `webpack` 时，必须使用反斜线(\)。例如 `node_modules\.bin\webpack --config webpack.config.js`。
@@ -247,15 +247,15 @@ __package.json__
 ``` bash
 npm run build
 
-Hash: ff6c1d39b26f89b3b7bb
-Version: webpack 2.2.0
-Time: 390ms
+Hash: 857f878815ce63ad5b4f
+Version: webpack 3.9.1
+Time: 294ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  [emitted]  [big]  main
-   [0] ./~/lodash/lodash.js 540 kB {0} [built]
-   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [3] ./src/index.js 278 bytes {0} [built]
+   [0] ./src/index.js 222 bytes {0} [built]
+   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+    + 1 hidden module
 ```
 
 T> 通过向 `npm run build` 命令和你的参数之间添加两个中横线，可以将自定义参数传递给 webpack，例如：`npm run build -- --colors`。

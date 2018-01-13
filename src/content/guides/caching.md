@@ -135,7 +135,7 @@ __webpack.config.js__
 -     })
 +     }),
 +     new webpack.optimize.CommonsChunkPlugin({
-+       name: 'runtime'
++       name: 'manifest'
 +     })
     ],
     output: {
@@ -145,16 +145,16 @@ __webpack.config.js__
   };
 ```
 
-让我们再次构建，然后查看提取出来的 `runtime` bundle：
+让我们再次构建，然后查看提取出来的 `manifest` bundle：
 
 ``` bash
 Hash: 80552632979856ddab34
 Version: webpack 3.3.0
 Time: 1512ms
-                          Asset       Size  Chunks                    Chunk Names
-   main.5ec8e954e32d66dee1aa.js     542 kB       0  [emitted]  [big]  main
-runtime.719796322be98041fff2.js    5.82 kB       1  [emitted]         runtime
-                     index.html  275 bytes          [emitted]
+                           Asset       Size  Chunks                    Chunk Names
+    main.5ec8e954e32d66dee1aa.js     542 kB       0  [emitted]  [big]  main
+manifest.719796322be98041fff2.js    5.82 kB       1  [emitted]         manifest
+                      index.html  275 bytes          [emitted]
    [0] ./src/index.js 336 bytes {0} [built]
    [2] (webpack)/buildin/global.js 509 bytes {0} [built]
    [3] (webpack)/buildin/module.js 517 bytes {0} [built]
@@ -188,7 +188,7 @@ __webpack.config.js__
 +       name: 'vendor'
 +     }),
       new webpack.optimize.CommonsChunkPlugin({
-        name: 'runtime'
+        name: 'manifest'
       })
     ],
     output: {
@@ -198,7 +198,7 @@ __webpack.config.js__
   };
 ```
 
-W> 注意，引入顺序在这里很重要。`CommonsChunkPlugin` 的 `'vendor'` 实例，必须在 `'runtime'` 实例之前引入。
+W> 注意，引入顺序在这里很重要。`CommonsChunkPlugin` 的 `'vendor'` 实例，必须在 `'manifest'` 实例之前引入。
 
 让我们再次构建，然后查看新的 `vendor` bundle：
 
@@ -206,11 +206,11 @@ W> 注意，引入顺序在这里很重要。`CommonsChunkPlugin` 的 `'vendor'`
 Hash: 69eb92ebf8935413280d
 Version: webpack 3.3.0
 Time: 1502ms
-                          Asset       Size  Chunks                    Chunk Names
- vendor.8196d409d2f988123318.js     541 kB       0  [emitted]  [big]  vendor
-   main.0ac0ae2d4a11214ccd19.js  791 bytes       1  [emitted]         main
-runtime.004a1114de8bcf026622.js    5.85 kB       2  [emitted]         runtime
-                     index.html  352 bytes          [emitted]
+                           Asset       Size  Chunks                    Chunk Names
+  vendor.8196d409d2f988123318.js     541 kB       0  [emitted]  [big]  vendor
+    main.0ac0ae2d4a11214ccd19.js  791 bytes       1  [emitted]         main
+manifest.004a1114de8bcf026622.js    5.85 kB       2  [emitted]         manifest
+                      index.html  352 bytes          [emitted]
    [1] ./src/index.js 336 bytes {1} [built]
    [2] (webpack)/buildin/global.js 509 bytes {0} [built]
    [3] (webpack)/buildin/module.js 517 bytes {0} [built]
@@ -269,11 +269,11 @@ __src/index.js__
 Hash: d38a06644fdbb898d795
 Version: webpack 3.3.0
 Time: 1445ms
-                          Asset       Size  Chunks                    Chunk Names
- vendor.a7561fb0e9a071baadb9.js     541 kB       0  [emitted]  [big]  vendor
-   main.b746e3eb72875af2caa9.js    1.22 kB       1  [emitted]         main
-runtime.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         runtime
-                     index.html  352 bytes          [emitted]
+                           Asset       Size  Chunks                    Chunk Names
+  vendor.a7561fb0e9a071baadb9.js     541 kB       0  [emitted]  [big]  vendor
+    main.b746e3eb72875af2caa9.js    1.22 kB       1  [emitted]         main
+manifest.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         manifest
+                      index.html  352 bytes          [emitted]
    [1] ./src/index.js 421 bytes {1} [built]
    [2] (webpack)/buildin/global.js 509 bytes {0} [built]
    [3] (webpack)/buildin/module.js 517 bytes {0} [built]
@@ -286,7 +286,7 @@ runtime.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         runtime
 
 - `main` bundle 会随着自身的新增内容的修改，而发生变化。
 - `vendor` bundle 会随着自身的 `module.id` 的修改，而发生变化。
-- `runtime` bundle 会因为当前包含一个新模块的引用，而发生变化。
+- `manifest` bundle 会因为当前包含一个新模块的引用，而发生变化。
 
 第一个和最后一个都是符合预期的行为 -- 而 `vendor` 的 hash 发生变化是我们要修复的。幸运的是，可以使用两个插件来解决这个问题。第一个插件是 [`NamedModulesPlugin`](/plugins/named-modules-plugin)，将使用模块的路径，而不是数字标识符。虽然此插件有助于在开发过程中输出结果的可读性，然而执行时间会长一些。第二个选择是使用 [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin)，推荐用于生产环境构建：
 
@@ -315,7 +315,7 @@ __webpack.config.js__
         name: 'vendor'
       }),
       new webpack.optimize.CommonsChunkPlugin({
-        name: 'runtime'
+        name: 'manifest'
       })
     ],
     output: {
@@ -331,11 +331,11 @@ __webpack.config.js__
 Hash: 1f49b42afb9a5acfbaff
 Version: webpack 3.3.0
 Time: 1372ms
-                          Asset       Size  Chunks                    Chunk Names
- vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]  [big]  vendor
-   main.d103ac311788fcb7e329.js    1.22 kB       1  [emitted]         main
-runtime.d2a6dc1ccece13f5a164.js    5.85 kB       2  [emitted]         runtime
-                     index.html  352 bytes          [emitted]
+                           Asset       Size  Chunks                    Chunk Names
+  vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]  [big]  vendor
+    main.d103ac311788fcb7e329.js    1.22 kB       1  [emitted]         main
+manifest.d2a6dc1ccece13f5a164.js    5.85 kB       2  [emitted]         manifest
+                      index.html  352 bytes          [emitted]
 [3Di9] ./src/print.js 62 bytes {1} [built]
 [3IRH] (webpack)/buildin/module.js 517 bytes {0} [built]
 [DuR2] (webpack)/buildin/global.js 509 bytes {0} [built]
@@ -373,11 +373,11 @@ __src/index.js__
 Hash: 37e1358f135c0b992f72
 Version: webpack 3.3.0
 Time: 1557ms
-                          Asset       Size  Chunks                    Chunk Names
- vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]  [big]  vendor
-   main.fc7f38e648da79db2aba.js  891 bytes       1  [emitted]         main
-runtime.bb5820632fb66c3fb357.js    5.85 kB       2  [emitted]         runtime
-                     index.html  352 bytes          [emitted]
+                           Asset       Size  Chunks                    Chunk Names
+  vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]  [big]  vendor
+    main.fc7f38e648da79db2aba.js  891 bytes       1  [emitted]         main
+manifest.bb5820632fb66c3fb357.js    5.85 kB       2  [emitted]         manifest
+                      index.html  352 bytes          [emitted]
 [3IRH] (webpack)/buildin/module.js 517 bytes {0} [built]
 [DuR2] (webpack)/buildin/global.js 509 bytes {0} [built]
    [0] multi lodash 28 bytes {0} [built]

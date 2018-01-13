@@ -61,7 +61,7 @@ __src/ref.json__
 
 __src/index.js__
 
-```javascript
+``` js
 import _ from 'lodash';
 import numRef from './ref.json';
 
@@ -80,7 +80,7 @@ export function wordToNum(word) {
 
 该 library 的使用方式如下：
 
-```javascript
+``` js
 // ES2015 模块引入
 import * as webpackNumbers from 'webpack-numbers';
 // CommonJS 模块引入
@@ -142,7 +142,7 @@ require(['webpackNumbers'], function ( webpackNumbers) {
 
 __webpack.config.js__
 
-```javascript
+``` js
 var path = require('path');
 
 module.exports = {
@@ -240,6 +240,8 @@ __webpack.config.js__
   };
 ```
 
+T> 注意，`library` 设置绑定到 `entry` 配置。对于大多数库，指定一个入口起点就足够了。虽然[构建多个库](https://github.com/webpack/webpack/tree/master/examples/multi-part-library)也是也可以的，然而还可以直接通过将[主入口脚本(index script)](https://stackoverflow.com/questions/34072598/es6-exporting-importing-in-index-file)暴露部分导出，来作为单个入口起点则相对简单。__不推荐__使用`数组`作为库的 `entry`。
+
 当你在 import 引入模块时，这可以将你的 library bundle 暴露为名为 `webpackNumbers` 的全局变量。为了让 library 和其他环境兼容，还需要在配置文件中添加 `libraryTarget` 属性。这是可以控制 library 如何以不同方式暴露的选项。
 
 __webpack.config.js__
@@ -305,9 +307,11 @@ __package.json__
 
 键(key) `main` 是指 [`package.json` 标准](https://docs.npmjs.com/files/package.json#main)，以及`module` 是[一个](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md)[提案](https://github.com/rollup/rollup/wiki/pkg.module)，此提案允许 JavaScript 生态系统升级使用 ES2015 模块，而不会破坏向后兼容性。
 
-W> `module` 将指向一个含有 ES2015 模块语法的模块，但是只有在支持此语法功能的浏览器或 Node.js 版本中才可用。
+W> `module` 属性应指向一个使用 ES2015 模块语法的脚本，但不包括浏览器或 Node.js 尚不支持的其他语法特性。
 
 现在你可以[将其发布为一个 npm 包](https://docs.npmjs.com/getting-started/publishing-npm-packages)，并且在 [unpkg.com](https://unpkg.com/#/) 找到它并分发给你的用户。
+
+T> 为了暴露和 library 关联着的样式表，你应该使用 [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin)。然后，用户可以像使用其他样式表一样使用和加载这些样式表。
 
 ***
 

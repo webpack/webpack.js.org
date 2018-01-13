@@ -7,6 +7,7 @@ contributors:
   - skipjack
   - SpaceK33z
   - pastelsky
+  - tbroadley
 ---
 
 webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `target` 的详细信息，请阅读 [target 概念页面](/concepts/targets)。

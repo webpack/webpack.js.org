@@ -264,7 +264,7 @@ __webpack.config.js__
 有很多方法来载入 polyfills。例如，要引入 [`babel-polyfill`](https://babeljs.io/docs/usage/polyfill/) 我们只需要如下操作：
 
 ``` bash
-npm i --save babel-polyfill
+npm install --save babel-polyfill
 ```
 
 然后使用 `import` 将其添加到我们的主 bundle 文件：
@@ -292,7 +292,7 @@ polyfills 虽然是一种模块引入方式，但是__并不推荐在主 bundle 
 让我们把 `import` 放入一个新文件，并加入 [`whatwg-fetch`](https://github.com/github/fetch) polyfill：
 
 ``` bash
-npm i --save whatwg-fetch
+npm install --save whatwg-fetch
 ```
 
 __src/index.js__

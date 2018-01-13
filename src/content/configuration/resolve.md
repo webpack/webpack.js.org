@@ -7,6 +7,7 @@ contributors:
   - SpaceK33z
   - pksjce
   - sebastiandeutsch
+  - tbroadley
 ---
 
 这些选项能设置模块如何被解析。webpack 提供合理的默认值，但是还是可能会修改一些解析的细节。关于 resolver 具体如何工作的更多解释说明，请查看[模块解析方式](/concepts/module-resolution)。

@@ -16,6 +16,10 @@
     "url": "contribute"
   },
   {
+    "title": "投票",
+    "url": "vote"
+  },
+  {
     "title": "博客",
     "url": "//medium.com/webpack"
   }

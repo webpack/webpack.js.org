@@ -3,6 +3,7 @@ title: 构建性能
 sort: 17
 contributors:
   - sokra
+  - tbroadley
 ---
 
 本指南包含一些改进构建/编译性能的实用技巧。

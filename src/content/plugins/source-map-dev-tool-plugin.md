@@ -10,7 +10,7 @@ related:
 
 This plugin enables more fine grained control of source map generation. It is an alternative to the [`devtool`](/configuration/devtool/) configuration option.
 
-```javascript
+``` js
 new webpack.SourceMapDevToolPlugin(options)
 ```
 
@@ -28,20 +28,26 @@ new webpack.SourceMapDevToolPlugin(options)
 - `fallbackModuleFilenameTemplate` (`string`): See link above.
 - `module` (`boolean`): Indicates whether loaders should generate source maps (defaults to `true`).
 - `columns` (`boolean`): Indicates whether column mappings should be used (defaults to `true`).
-- `lineToLine` (`object`): Simplify and speed up source mapping by using line to line source mappings for matched modules.**
+- `lineToLine` (`object`): Simplify and speed up source mapping by using line to line source mappings for matched modules.
+- `publicPath` (`string`): Emits absolute URLs with public path prefix, e.g. `https://example.com/project/`.
+- `fileContext` (`string`): Makes the `[file]` argument relative to this directory.
 
 The `lineToLine` object allows for the same `test`, `include`, and `exclude` options described above.
+
+The `fileContext` option is useful when you want to store source maps in an upper level directory to avoid `../../` appearing in the absolute `[url]`.
 
 T> Setting `module` and/or `columns` to `false` will yield less accurate source maps but will also improve compilation performance significantly.
 
 
 ## 用法
 
+The following examples demonstrate some common use cases for this plugin.
+
 ### 排除 Vendor 的 Map 文件
 
 以下代码将排除 `vendor.js` bundle 中任何模块的 source map：
 
-```javascript
+``` js
 new webpack.SourceMapDevToolPlugin({
   filename: '[name].js.map',
   exclude: ['vendor.js']
@@ -52,11 +58,38 @@ new webpack.SourceMapDevToolPlugin({
 
 Set a URL for source maps. Useful for hosting them on a host that requires authorization.
 
-```javascript
+``` js
 new webpack.SourceMapDevToolPlugin({
   append: "\n//# sourceMappingURL=http://example.com/sourcemap/[url]",
-  filename: '[name].map',
-}),
+  filename: '[name].map'
+})
+```
+
+And for cases when source maps are stored in the upper level directory:
+
+``` js
+project
+|- dist
+  |- public
+    |- bundle-[hash].js
+  |- sourcemaps
+    |- bundle-[hash].js.map
+```
+
+With next config:
+
+``` js
+new webpack.SourceMapDevToolPlugin({
+  filename: "sourcemaps/[file].map",
+  publicPath: "https://example.com/project/",
+  fileContext: "public"
+})
+```
+
+Will produce the following URL:
+
+``` js
+https://example.com/project/sourcemaps/bundle-[hash].js.map`
 ```
 
 ***
