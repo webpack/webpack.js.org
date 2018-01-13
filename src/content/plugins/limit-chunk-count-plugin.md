@@ -3,6 +3,7 @@ title: LimitChunkCountPlugin
 contributors:
   - rouzbeh84
   - skipjack
+  - tbroadley
 ---
 
 当你在编写代码时，可能已经添加了许多代码分离点(code split point)来实现按需加载(load stuff on demand)。在编译完之后，你可能会注意到有一些很小的 chunk - 这产生了大量 HTTP 请求开销。幸运的是，此插件可以通过合并的方式，后处理你的 chunk，以减少请求数。

@@ -4,6 +4,7 @@ sort: 2
 contributors:
   - ev1stensberg
   - simon04
+  - tbroadley
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -215,7 +216,6 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 参数 | 说明
 ------------------------- | ----------------------
 `--watch`, `-w`           | 观察文件系统的变化
-`--save`, `-s`            | 在保存的时候重新编译，无论文件是否变化
 `--watch-aggregate-timeout` | 指定一个毫秒数，在这个时间内，文件若发送了多次变化，会被合并
 `--watch-poll`            | 轮询观察文件变化的时间间隔（同时会打开轮询机制）
 `--watch-stdin`, `--stdin` | 当 stdin 关闭时，退出进程

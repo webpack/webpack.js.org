@@ -17,15 +17,15 @@ const StarterKits = props => (
     <p>
       下面表格包含一个起步配套工具的辅助列表，
       可以作为基于 webpack 的项目的起点。
-      要向列表添加新的配套工具请访问
-      <Link to="https://github.com/ahfarmer/tool-list">仓库</Link>
+      要向列表添加新的配套工具请访问{' '}
+      <Link to="https://github.com/ahfarmer/tool-list">仓库</Link>{' '}
       以及提交一个 PR 来修改这个文件
       <code>generator/starterProjectUrls.js</code>.
     </p>
 
     <blockquote className="warning">
       <div className="tip-content">
-        模板应该是用于<b>验证概念</b>，
+        模板应该是用于<strong>验证概念</strong>，
         以帮助你学习各种框架的 webpack 不同技术。
         确保你了解他们在做什么，并避免复制和粘贴制造重复代码。
         另外还请注意，这些都不是由 webpack 官方支持的。

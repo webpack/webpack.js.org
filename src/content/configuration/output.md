@@ -295,13 +295,15 @@ JSONP 函数用于异步加载(async load) chunk，或者拼接多个初始 chun
 
 `output.library` 的值的作用，取决于[`output.libraryTarget`](#output-librarytarget) 选项的值；完整的详细信息请查阅该章节。注意，`output.libraryTarget` 的默认选项是 `var`，所以如果使用以下配置选项：
 
-```javascript
+``` js
 output: {
   library: "MyLibrary"
 }
 ```
 
 如果生成的输出文件，是在 HTML 页面中作为一个 script 标签引入，则变量 `MyLibrary` 将与入口文件的返回值绑定。
+
+W> 注意，如果将`数组`作为 `entry`，那么只会暴露数组中的最后一个模块。如果将`对象`作为 `entry`，还可以使用`数组`语法暴露（具体查看[这个示例](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) for details)）。
 
 T> 有关 `output.library` 以及 `output.libraryTarget` 详细信息，请查看[创建 library 指南](/guides/author-libraries)。
 
@@ -312,40 +314,37 @@ T> 有关 `output.library` 以及 `output.libraryTarget` 详细信息，请查�
 
 > Default: `_entry_return_`
 
-Configure which module or modules will be exposed via the `libraryTarget`.
-
-The default value `_entry_return_` is the namespace or default module returned by your entry file.
-
-The examples below demonstrate the effect of this config when using `libraryTarget: "var"`, but any target may be used.
+Configure which module or modules will be exposed via the `libraryTarget`. The default `_entry_return_` value is the namespace or default module returned by your entry file. The examples below demonstrate the effect of this config when using `libraryTarget: "var"`, but any target may be used.
 
 The following configurations are supported:
 
 `libraryExport: "default"` - The **default export of your entry point** will be assigned to the library target:
 
-```javascript
+``` js
 // if your entry has a default export of `MyDefaultModule`
 var MyDefaultModule = _entry_return_.default;
 ```
 
 `libraryExport: "MyModule"` - The **specified module** will be assigned to the library target:
 
-```javascript
+``` js
 var MyModule = _entry_return_.MyModule;
 ```
 
 `libraryExport: ["MyModule", "MySubModule"]` - The array is interpreted as a **path to a module** to be assigned to the library target:
 
-```javascript
+``` js
 var MySubModule = _entry_return_.MyModule.MySubModule;
 ```
 
-如同以上示例中所展示，入口起点的返回值，与这些具名变量绑定在一起，因此，生成的 library 的用法如下：
+With the `libraryExport` configurations specified above, the resulting libraries could be utilized as such:
 
-```javascript
+``` js
 MyDefaultModule.doSomething();
 MyModule.doSomething();
 MySubModule.doSomething();
 ```
+
 
 ## `output.libraryTarget`
 
@@ -363,7 +362,7 @@ T> 注意，下面的示例代码中的 `_entry_return_` 是入口起点返回�
 
 `libraryTarget: "var"` - （默认值）当 library 加载完成，**入口起点的返回值**将分配给一个变量：
 
-```javascript
+``` js
 var MyLibrary = _entry_return_;
 
 // 在一个单独的 script……
@@ -375,7 +374,7 @@ W> 当使用此选项时，将 `output.library` 设置为空，会因为没有�
 
 `libraryTarget: "assign"` - 这将产生一个隐含的全局变量，可能会潜在地重新分配到全局中已存在的值（谨慎使用）。.
 
-``` javascript
+``` js
 MyLibrary = _entry_return_;
 ```
 
@@ -390,7 +389,7 @@ W> 当使用此选项时，将 `output.library` 设置为空，将产生一个�
 
 如果 `output.library` 未赋值为一个非空字符串，则默认行为是，将入口起点返回的所有属性都赋值给一个对象（此对象由 `output.libraryTarget` 特定），通过如下代码片段：
 
-```javascript
+``` js
 (function(e, a) { for(var i in a) e[i] = a[i]; }(${output.libraryTarget}, _entry_return_)
 ```
 
@@ -398,7 +397,7 @@ W> 注意，不设置 `output.library` 将导致由入口起点返回的所有�
 
 `libraryTarget: "this"` - **入口起点的返回值**将分配给 this 的一个属性（此名称由 `output.library` 定义）下，`this` 的含义取决于你：
 
-```javascript
+``` js
 this["MyLibrary"] = _entry_return_;
 
 // 在一个单独的 script……
@@ -408,7 +407,7 @@ MyLibrary.doSomething(); // 如果 this 是 window
 
 `libraryTarget: "window"` - **入口起点的返回值**将使用 `output.library` 中定义的值，分配给 `window` 对象的这个属性下。
 
-```javascript
+``` js
 window["MyLibrary"] = _entry_return_;
 
 window.MyLibrary.doSomething();
@@ -417,7 +416,7 @@ window.MyLibrary.doSomething();
 
 `libraryTarget: "global"` - **入口起点的返回值**将使用 `output.library` 中定义的值，分配给 `global` 对象的这个属性下。
 
-```javascript
+``` js
 global["MyLibrary"] = _entry_return_;
 
 global.MyLibrary.doSomething();
@@ -426,7 +425,7 @@ global.MyLibrary.doSomething();
 
 `libraryTarget: "commonjs"` - **入口起点的返回值**将使用 `output.library` 中定义的值，分配给 exports 对象。这个名称也意味着，模块用于 CommonJS 环境：
 
-```javascript
+``` js
 exports["MyLibrary"] = _entry_return_;
 
 require("MyLibrary").doSomething();
@@ -439,7 +438,7 @@ require("MyLibrary").doSomething();
 
 `libraryTarget: "commonjs2"` - **入口起点的返回值**将分配给 `module.exports` 对象。这个名称也意味着模块用于 CommonJS 环境：
 
-```javascript
+``` js
 module.exports = _entry_return_;
 
 require("MyLibrary").doSomething();
@@ -456,7 +455,7 @@ AMD 模块要求入口 chunk（例如使用 `<script>` 标签加载的第一个�
 
 所以，使用以下配置……
 
-```javascript
+``` js
 output: {
   library: "MyLibrary",
   libraryTarget: "amd"
@@ -465,7 +464,7 @@ output: {
 
 生成的 output 将会使用 "MyLibrary" 作为模块名定义，即
 
-```javascript
+``` js
 define("MyLibrary", [], function() {
   // 此模块返回值，是入口 chunk 返回的值
 });
@@ -473,7 +472,7 @@ define("MyLibrary", [], function() {
 
 可以在 script 标签中，将 bundle 作为一个模块整体引入，并且可以像这样调用 bundle：
 
-```javascript
+``` js
 require(['MyLibrary'], function(MyLibrary) {
   // 使用 library 做一些事……
 });
@@ -481,7 +480,7 @@ require(['MyLibrary'], function(MyLibrary) {
 
 如果 `output.library` 未定义，将会生成以下内容。
 
-```javascript
+``` js
 define([], function() {
   // 这个模块返回入口 chunk 返回的
 });
@@ -494,7 +493,7 @@ define([], function() {
 
 在这个例子中，你需要 `library` 属性来命名你的模块：
 
-```javascript
+``` js
 output: {
   library: "MyLibrary",
   libraryTarget: "umd"
@@ -503,7 +502,7 @@ output: {
 
 最终输出如下：
 
-```javascript
+``` js
 (function webpackUniversalModuleDefinition(root, factory) {
   if(typeof exports === 'object' && typeof module === 'object')
     module.exports = factory();
@@ -520,7 +519,7 @@ output: {
 
 注意，省略 `library` 会导致将入口起点返回的所有属性，直接赋值给 root 对象，就像[对象分配章节](#exposing-the-library-via-object-assignment)。例如：
 
-```javascript
+``` js
 output: {
   libraryTarget: "umd"
 }
@@ -528,7 +527,7 @@ output: {
 
 输出结果如下：
 
-```javascript
+``` js
 (function webpackUniversalModuleDefinition(root, factory) {
   if(typeof exports === 'object' && typeof module === 'object')
     module.exports = factory();
@@ -545,7 +544,7 @@ output: {
 
 从 webpack 3.1.0 开始，你可以将 `library` 指定为一个对象，用于给每个 target 起不同的名称：
 
-```javascript
+``` js
 output: {
   library: {
     root: "MyLibrary",
@@ -653,7 +652,7 @@ publicPath: "", // 相对于 HTML 页面（目录相同）
 
 在编译时(compile time)无法知道输出文件的 `publicPath` 的情况下，可以留空，然后在入口文件(entry file)处使用[自由变量(free variable)](http://stackoverflow.com/questions/12934929/what-are-free-variables) `__webpack_public_path__`，以便在运行时(runtime)进行动态设置。
 
-```javascript
+``` js
  __webpack_public_path__ = myRuntimePublicPath
 
 // 应用程序入口的其他部分

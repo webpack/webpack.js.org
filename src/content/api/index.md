@@ -1,6 +1,8 @@
 ---
 title: 引导
 sort: 1
+contributors:
+  - tbroadley
 ---
 
 可以使用各种接口来定制化编译过程(compilation process)。一些特性会在几个接口之间重叠，例如，配置选项可能会从 CLI 标记(flag)中获取参数，而其他已存在特性，则只能通过某个接口去获取。以下高级信息可以帮助你起步。

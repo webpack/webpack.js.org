@@ -6,6 +6,7 @@ contributors:
   - scottdj92
   - harrynewsome
   - dhedgecock
+  - tbroadley
 ---
 
 The people who contribute to webpack do so for the love of open source, our users and ecosystem, and most importantly, pushing the web forward together. Because of our [Open Collective](http://opencollective.com/webpack) model for funding and transparency, we are able to funnel support and funds through contributors, dependent projects, and the contributor and core teams. To make a donation, simply click the button below...
@@ -34,7 +35,7 @@ Anybody can help by doing any of the following:
 
 ### Encouraging Employers
 
-You can ask your employer to improve your workflow by leveraging webpack: an all-in-one tool for fonts, images and image optimiziation, and json. Explain to them how webpack will attempt to bundle your code and assets the best it can for the smallest file size, leading to speedier sites and applications.
+You can ask your employer to improve your workflow by leveraging webpack: an all-in-one tool for fonts, images and image optimization, and json. Explain to them how webpack will attempt to bundle your code and assets the best it can for the smallest file size, leading to speedier sites and applications.
 
 ### Your Contributions
 

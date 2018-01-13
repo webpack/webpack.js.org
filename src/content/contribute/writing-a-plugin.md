@@ -1,6 +1,8 @@
 ---
 title: 编写一个插件
-sort: 3
+sort: 4
+contributors:
+  - tbroadley
 ---
 
 插件向第三方开发者提供了 webpack 引擎中完整的能力。使用阶段式的构建回调，开发者可以引入它们自己的行为到 webpack 构建流程中。创建插件比创建 loader 更加高级，因为你将需要理解一些 webpack 底层的内部特性来做相应的勾子，所以做好阅读一些源码的准备！
@@ -11,7 +13,7 @@ sort: 3
 
 - 一个JavaScript命名函数。
 - 在它的原型上定义一个`apply`方法。
-- 指定挂载的webpack事件钩子。
+- 指定绑定自身的[事件钩子](/api/compiler/#event-hooks)。
 - 处理webpack内部实例的特定数据。
 - 功能完成后调用webpack提供的回调。
 
@@ -185,7 +187,7 @@ It must accept arguments from the previous plugin that was executed. The value f
 
 `applyPluginsAsync(name: string, args: any..., callback: (err?: Error) -> void)`
 
-The plugin handler functions are called with all args and a callback function with the signature `(err?: Error) -> void`. The handler functions are called in order of registration.`callback` is called after all the handlers are called.
+The plugin handler functions are called with all args and a callback function with the signature `(err?: Error) -> void`. The handler functions are called in order of registration. `callback`` is called after all the handlers are called.
 This is also a commonly used pattern for events like `"emit"`, `"run"`.
 
 - __async waterfall__ The plugins will be applied asynchronously in the waterfall manner.

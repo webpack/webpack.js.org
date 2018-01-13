@@ -5,6 +5,7 @@ contributors:
   - skipjack
   - TheDutchCoder
   - sudarsangp
+  - JGJP
 ---
 
 T> 本指南继续延伸[`管理资源`](/guides/asset-management)指南中的代码示例。
@@ -89,11 +90,11 @@ __webpack.config.js__
   const path = require('path');
 
   module.exports = {
-    entry: {
--     index: './src/index.js',
+-   entry: './src/index.js',
++   entry: {
 +     app: './src/index.js',
 +     print: './src/print.js'
-    },
++   },
     output: {
 -     filename: 'bundle.js',
 +     filename: '[name].bundle.js',
