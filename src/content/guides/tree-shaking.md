@@ -104,7 +104,7 @@ function cube(x) {
 }
 ```
 
-Note the `unused harmony export square` comment above. If you look at the code below it, you'll notice that `square` is not being exported, however, it is still included in the bundle. We'll fix that in the next section.
+Note the `unused harmony export square` comment above. If you look at the code below it, you'll notice that `square` is not being imported, however, it is still included in the bundle. We'll fix that in the next section.
 
 
 ## Minify the Output
@@ -175,7 +175,7 @@ In the code above webpack cannot determine whether or not the call to `mylib.tra
 
 In general, when a tool cannot guarantee that a particular code path doesn't lead to side-effects, this code may remain in the generated bundle even if you are sure it shouldn't. Common situations include invoking a function from a third-party module that webpack and/or the minifier cannot inspect, re-exporting functions imported from third-party modules, etc.
 
-The code used in this guide assumes you perform tree-shaking using UglifyJS plugin. However, there are other tools such as [webpack-rollup-loader](https://github.com/erikdesjardins/webpack-rollup-loader) or [Babel Minify Webpack Plugin](/plugins/babel-minify-webpack-plugin) that may produce different results depending on your setup.
+The code used in this guide assumes you perform tree-shaking using UglifyJS plugin. However, there are other tools such as [webpack-rollup-loader](https://github.com/erikdesjardins/webpack-rollup-loader) that may produce different results depending on your setup.
 
 
 ## Conclusion
