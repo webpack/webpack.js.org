@@ -44,7 +44,6 @@ const Site = ({
             title: section.path.title,
             url: section.url,
             pages: section.pages.map(page => ({
-              file: page.file,
               title: page.file.title,
               url: page.url
             })).sort(({ file: { attributes: a }}, { file: { attributes: b }}) => {
