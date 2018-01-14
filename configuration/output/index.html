@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/b6efa0eccfd8cbe2260b.css" rel="stylesheet">
+      <link href="/99acf4d7367704020f21.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -435,7 +435,7 @@ global<span class="token punctuation">.</span>MyLibrary<span class="token punctu
 </code></pre>
 <p>The generated output will be defined with the name &quot;MyLibrary&quot;, i.e.</p>
 <pre><code class="lang-js"><span class="token function">define</span><span class="token punctuation">(</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token comment">// This module return value is what your entry chunk returns</span>
+  <span class="token keyword">return</span> _entry_return_<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>The bundle can be included as part of a script tag, and the bundle can be invoked like so:</p>
@@ -445,7 +445,7 @@ global<span class="token punctuation">.</span>MyLibrary<span class="token punctu
 </code></pre>
 <p>If <code>output.library</code> is undefined, the following is generated instead.</p>
 <pre><code class="lang-js"><span class="token function">define</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token comment">// This module returns is what your entry chunk returns</span>
+  <span class="token keyword">return</span> _entry_return_<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>This bundle will not work as expected, or not work at all (in the case of the almond loader) if loaded directly with a <code>&lt;script&gt;</code> tag. It will only work through a RequireJS compatible asynchronous module loader through the actual path to that file, so in this case, the <code>output.path</code> and <code>output.filename</code> may become important for this particular setup if these are exposed directly on the server.</p>
@@ -466,8 +466,8 @@ global<span class="token punctuation">.</span>MyLibrary<span class="token punctu
     exports<span class="token punctuation">[</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">factory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">else</span>
     root<span class="token punctuation">[</span><span class="token string">&quot;MyLibrary&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">factory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token comment">//what this module returns is what your entry chunk returns</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> self <span class="token operator">!==</span> <span class="token string">&apos;undefined&apos;</span> <span class="token operator">?</span> self <span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> _entry_return_<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>Note that omitting <code>library</code> will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the <a href="#exposing-the-library-via-object-assignment">object assignment section</a>. Example:</p>
@@ -485,8 +485,8 @@ global<span class="token punctuation">.</span>MyLibrary<span class="token punctu
     <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token function">factory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token keyword">in</span> a<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> exports <span class="token operator">===</span> <span class="token string">&apos;object&apos;</span> <span class="token operator">?</span> exports <span class="token punctuation">:</span> root<span class="token punctuation">)</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token comment">//what this module returns is what your entry chunk returns</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> self <span class="token operator">!==</span> <span class="token string">&apos;undefined&apos;</span> <span class="token operator">?</span> self <span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> _entry_return_<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>Since webpack 3.1.0, you may specify an object for <code>library</code> for differing names per targets:</p>
