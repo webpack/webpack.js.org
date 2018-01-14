@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/4fca6447213bc25d2dc4.css" rel="stylesheet">
+      <link href="/006b6fabe6dc21480b43.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -80,7 +80,7 @@
   <span class="token keyword">return</span> x <span class="token operator">*</span> x <span class="token operator">*</span> x<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>Note the <code>unused harmony export square</code> comment above. If you look at the code below it, you&apos;ll notice that <code>square</code> is not being exported, however, it is still included in the bundle. We&apos;ll fix that in the next section.</p>
+<p>Note the <code>unused harmony export square</code> comment above. If you look at the code below it, you&apos;ll notice that <code>square</code> is not being imported, however, it is still included in the bundle. We&apos;ll fix that in the next section.</p>
 <h2 class="header"><a class="anchor" href="#minify-the-output" id="minify-the-output"></a><span class="text">Minify the Output</span><a class="icon-link" href="#minify-the-output"></a></h2>
 <p>So we&apos;ve cued up our &quot;dead code&quot; to be dropped by using the <code>import</code> and <code>export</code> syntax, but we still need to drop it from the bundle. To do that, we&apos;ll add a minifier that supports dead code removal -- the <a href="/plugins/uglifyjs-webpack-plugin"><code>UglifyJSPlugin</code></a> -- to our configuration...</p>
 <p>Let&apos;s start by installing it:</p>
