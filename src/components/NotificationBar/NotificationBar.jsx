@@ -13,8 +13,8 @@ export default class NotificationBar extends React.Component {
       <div className={ `notification-bar ${dismissedMod}` }>
         <Container className="notification-bar__inner">
           <p>
-            Sponsor webpack and get apparel from the <a href="https://webpack.threadless.com">official shop</a>&nbsp;
-            or get stickers <a href="http://www.unixstickers.com/tag/webpack">here</a>! All proceeds go to our&nbsp;
+            Sponsor webpack and get apparel from the <a href="https://webpack.threadless.com">official shop</a>{' '}
+            or get stickers <a href="http://www.unixstickers.com/tag/webpack">here</a>! All proceeds go to our{' '}
             <a href="https://opencollective.com/webpack">open collective</a>!
           </p>
           { localStorageIsEnabled ?
