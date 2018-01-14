@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/006b6fabe6dc21480b43.css" rel="stylesheet">
+      <link href="/b6efa0eccfd8cbe2260b.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -125,7 +125,7 @@ module.exports = {
 </code></pre>
 <p>In the code above webpack cannot determine whether or not the call to <code>mylib.transform</code> triggers any side-effects. As a result, it errs on the safe side and leaves <code>someOtherVar</code> in the bundled code.</p>
 <p>In general, when a tool cannot guarantee that a particular code path doesn&apos;t lead to side-effects, this code may remain in the generated bundle even if you are sure it shouldn&apos;t. Common situations include invoking a function from a third-party module that webpack and/or the minifier cannot inspect, re-exporting functions imported from third-party modules, etc.</p>
-<p>The code used in this guide assumes you perform tree-shaking using UglifyJS plugin. However, there are other tools such as <a href="https://github.com/erikdesjardins/webpack-rollup-loader">webpack-rollup-loader</a> or <a href="/plugins/babel-minify-webpack-plugin">Babel Minify Webpack Plugin</a> that may produce different results depending on your setup.</p>
+<p>The code used in this guide assumes you perform tree-shaking using UglifyJS plugin. However, there are other tools such as <a href="https://github.com/erikdesjardins/webpack-rollup-loader">webpack-rollup-loader</a> that may produce different results depending on your setup.</p>
 <h2 class="header"><a class="anchor" href="#conclusion" id="conclusion"></a><span class="text">Conclusion</span><a class="icon-link" href="#conclusion"></a></h2>
 <p>So, what we&apos;ve learned is that in order to take advantage of <em>tree shaking</em>, you must...</p>
 <ul>
