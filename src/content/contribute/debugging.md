@@ -6,7 +6,7 @@ contributors:
   - tbroadley
 related:
   - title: Learn and Debug webpack with Chrome DevTools!
-    url: https://medium.com/webpack/webpack-bits-learn-and-debug-webpack-with-chrome-dev-tools-da1c5b19554b
+    url: https://medium.com/webpack/webpack-bits-learn-and-debug-webpack-with-chrome-dev-tools-da1c5b19554
   - title: Debugging Guide | Node
     url: https://nodejs.org/en/docs/guides/debugging-getting-started/
   - title: Debugging Node.js with Chrome DevTools
