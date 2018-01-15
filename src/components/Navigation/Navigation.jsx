@@ -71,6 +71,7 @@ export default class Navigation extends React.Component {
             items={[
               { title: '印记中文文档导航', url: 'https://docschina.org/' },
               { title: 'Vue.js 中文文档', url: 'https://vuefe.cn/' },
+              { title: 'Parcel.js 中文文档', url: 'www.parceljs.io/' },
               { title: 'React.js 中文文档', url: 'https://doc.react-china.org/' },
               { title: 'Babel 中文文档', url: 'https://babeljs.cn/' },
               { title: 'rollup.js 中文文档', url: 'https://rollupjs.org/zh' },
