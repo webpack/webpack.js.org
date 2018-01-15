@@ -629,6 +629,19 @@ proxy: [{
 }]
 ```
 
+> NOTE: Requests to root won't be proxied by default. To enable root proxying, option `devServer.index` should be specified as falsy value. Example: 
+```json
+devServer: {
+	index: '', // specify to enable root proxying
+	host: '...',
+	contentBase: '...',
+	proxy: {
+		context: () => true,
+		target: 'http://localhost:1234'
+	},
+},
+```
+
 ## `devServer.progress` - CLI only
 
 `boolean`
