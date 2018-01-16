@@ -5,6 +5,9 @@ contributors:
   - TheLarkInn
   - simon04
   - rouzbeh84
+related:
+   - title: JavaScript Module Systems Showdown
+     url: https://auth0.com/blog/javascript-module-systems-showdown/
 ---
 
 In [modular programming](https://en.wikipedia.org/wiki/Modular_programming), developers break programs up into discrete chunks of functionality called a _module_.
