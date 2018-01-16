@@ -95,6 +95,16 @@ Enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/scr
 `crossOriginLoading: "use-credentials"` - Enable cross-origin loading **with credentials**
 
 
+## `output.jsonpScriptType`
+
+`string`
+
+Allows customization of the `script` type webpack injects `script` tags into the DOM to download async chunks. The following options are available:
+
+- `"text/javascript"` (default)
+- `"module"`: Use with ES6 ready code.
+
+
 ## `output.devtoolFallbackModuleFilenameTemplate`
 
 `string | function(info)`
