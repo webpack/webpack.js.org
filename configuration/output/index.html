@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/5f247b832e45e45f01cf.css" rel="stylesheet">
+      <link href="/d30e3f0b47992b2a305b.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -56,7 +56,7 @@
 <span class="token punctuation">}</span>
 </code></pre>
 <h2 class="header"><a class="anchor" href="#output-chunkfilename" id="output-chunkfilename"></a><span class="text"><code>output.chunkFilename</code></span><a class="icon-link" href="#output-chunkfilename"></a></h2>
-<p><code>string</code></p>
+<p><code>string</code> <code>function</code></p>
 <p>This option determines the name of non-entry chunk files. See <a href="#output-filename"><code>output.filename</code></a> option for details on the possible values.</p>
 <p>Note that these filenames need to be generated at runtime to send the requests for chunks. Because of this, placeholders like <code>[name]</code> and <code>[chunkhash]</code> need to add a mapping from chunk id to placeholder value to the output bundle with the webpack runtime. This increases the size and may invalidate the bundle when placeholder value for any chunk changes.</p>
 <p>By default <code>[id].js</code> is used or a value inferred from <a href="#output-filename"><code>output.filename</code></a> (<code>[name]</code> is replaced with <code>[id]</code> or <code>[id].</code> is prepended).</p>
@@ -212,7 +212,7 @@
 </code></pre>
 <p>If multiple modules would result in the same name, <a href="#output-devtoolfallbackmodulefilenametemplate"><code>output.devtoolFallbackModuleFilenameTemplate</code></a> is used instead for these modules.</p>
 <h2 class="header"><a class="anchor" href="#output-filename" id="output-filename"></a><span class="text"><code>output.filename</code></span><a class="icon-link" href="#output-filename"></a></h2>
-<p><code>string</code></p>
+<p><code>string</code> <code>function</code></p>
 <p>This option determines the name of each output bundle. The bundle is written to the directory specified by the <a href="#output-path"><code>output.path</code></a> option.</p>
 <p>For a single <a href="/configuration/entry-context#entry"><code>entry</code></a> point, this can be a static name.</p>
 <pre><code class="lang-js">filename<span class="token punctuation">:</span> <span class="token string">&quot;bundle.js&quot;</span>
@@ -232,7 +232,7 @@
 </code></pre>
 <p>Make sure to read the <a href="/guides/caching">Caching guide</a> for details. There are more steps involved than just setting this option.</p>
 <p>Note this option is called filename but you are still allowed to use something like <code>&quot;js/[name]/bundle.js&quot;</code> to create a folder structure.</p>
-<p>Note this options does not affect output files for on-demand-loaded chunks. For these files the <a href="#output-chunkfilename"><code>output.chunkFilename</code></a> option is used. It also doesn&apos;t affect files created by loaders. For these files see loader options.</p>
+<p>Note this option does not affect output files for on-demand-loaded chunks. For these files the <a href="#output-chunkfilename"><code>output.chunkFilename</code></a> option is used. Files created by loaders also aren&apos;t affected. In this case you would have to try the specific loader&apos;s available options.</p>
 <p>The following substitutions are available in template strings (via webpack&apos;s internal <a href="https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js"><code>TemplatedPathPlugin</code></a>):</p>
 
     <div class="table">
@@ -315,6 +315,7 @@
           </div>
         </div>
     </div><p>The lengths of <code>[hash]</code> and <code>[chunkhash]</code> can be specified using <code>[hash:16]</code> (defaults to 20). Alternatively, specify <a href="#output-hashdigestlength"><code>output.hashDigestLength</code></a> to configure the length globally.</p>
+<p>If using a function for this option, the function will be passed an object containing the substitutions in the table above.</p>
 <blockquote class="tip"><div class="tip-content"> When using the <a href="/plugins/extract-text-webpack-plugin"><code>ExtractTextWebpackPlugin</code></a>, use <code>[contenthash]</code> to obtain a hash of the extracted file (neither <code>[hash]</code> nor <code>[chunkhash]</code> work). </div></blockquote><h2 class="header"><a class="anchor" href="#output-hashdigest" id="output-hashdigest"></a><span class="text"><code>output.hashDigest</code></span><a class="icon-link" href="#output-hashdigest"></a></h2>
 <p>The encoding to use when generating the hash, defaults to <code>&apos;hex&apos;</code>. All encodings from Node.JS&apos; <a href="https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding"><code>hash.digest</code></a> are supported.</p>
 <h2 class="header"><a class="anchor" href="#output-hashdigestlength" id="output-hashdigestlength"></a><span class="text"><code>output.hashDigestLength</code></span><a class="icon-link" href="#output-hashdigestlength"></a></h2>
@@ -324,7 +325,7 @@
 <h2 class="header"><a class="anchor" href="#output-hashsalt" id="output-hashsalt"></a><span class="text"><code>output.hashSalt</code></span><a class="icon-link" href="#output-hashsalt"></a></h2>
 <p>An optional salt to update the hash via Node.JS&apos; <a href="https://nodejs.org/api/crypto.html#crypto_hash_update_data_input_encoding"><code>hash.update</code></a>.</p>
 <h2 class="header"><a class="anchor" href="#output-hotupdatechunkfilename" id="output-hotupdatechunkfilename"></a><span class="text"><code>output.hotUpdateChunkFilename</code></span><a class="icon-link" href="#output-hotupdatechunkfilename"></a></h2>
-<p><code>string</code></p>
+<p><code>string</code> <code>function</code></p>
 <p>Customize the filenames of hot update chunks. See <a href="#output-filename"><code>output.filename</code></a> option for details on the possible values.</p>
 <p>The only placeholders allowed here are <code>[id]</code> and <code>[hash]</code>, the default being:</p>
 <pre><code class="lang-js">hotUpdateChunkFilename<span class="token punctuation">:</span> <span class="token string">&quot;[id].[hash].hot-update.js&quot;</span>
@@ -336,7 +337,7 @@
 <p>A JSONP function used to asynchronously load hot-update chunks.</p>
 <p>For details see <a href="#output-jsonpfunction"><code>output.jsonpFunction</code></a>.</p>
 <h2 class="header"><a class="anchor" href="#output-hotupdatemainfilename" id="output-hotupdatemainfilename"></a><span class="text"><code>output.hotUpdateMainFilename</code></span><a class="icon-link" href="#output-hotupdatemainfilename"></a></h2>
-<p><code>string</code></p>
+<p><code>string</code> <code>function</code></p>
 <p>Customize the main hot update filename. See <a href="#output-filename"><code>output.filename</code></a> option for details on the possible values.</p>
 <p><code>[hash]</code> is the only available placeholder, the default being:</p>
 <pre><code class="lang-js">hotUpdateMainFilename<span class="token punctuation">:</span> <span class="token string">&quot;[hash].hot-update.json&quot;</span>
@@ -525,7 +526,7 @@ global<span class="token punctuation">.</span>MyLibrary<span class="token punctu
 </code></pre>
 <p>Note it also adds some info about tree shaking to the generated bundle.</p>
 <h2 class="header"><a class="anchor" href="#output-publicpath" id="output-publicpath"></a><span class="text"><code>output.publicPath</code></span><a class="icon-link" href="#output-publicpath"></a></h2>
-<p><code>string</code></p>
+<p><code>string</code> <code>function</code></p>
 <p>This is an important option when using on-demand-loading or loading external resources like images, files, etc. If an incorrect value is specified you&apos;ll receive 404 errors while loading these resources.</p>
 <p>This option specifies the <strong>public URL</strong> of the output directory when referenced in a browser. A relative URL is resolved relative to the HTML page (or <code>&lt;base&gt;</code> tag). Server-relative URLs, protocol-relative URLs or absolute URLs are also possible and sometimes required, i. e. when hosting assets on a CDN.</p>
 <p>The value of the option is prefixed to every URL created by the runtime or loaders. Because of this <strong>the value of this option ends with <code>/</code></strong> in most cases.</p>

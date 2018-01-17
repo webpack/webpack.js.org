@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/5f247b832e45e45f01cf.css" rel="stylesheet">
+      <link href="/d30e3f0b47992b2a305b.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -26,7 +26,7 @@
 <p>This concatenation behavior is called &#x201C;scope hoisting.&#x201D;</p>
 <p>Scope hoisting is specifically a feature made possible by ECMAScript Module syntax. Because of this webpack may fallback to normal bundling based on what kind of modules you are using, and <a href="https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5">other conditions</a>.</p>
 </blockquote>
-<h2 class="header"><a class="anchor" href="#optimization-bailouts" id="optimization-bailouts"></a><span class="text">Optimization Bailouts</span><a class="icon-link" href="#optimization-bailouts"></a></h2>
+<blockquote class="warning"><div class="tip-content"> Keep in mind that this plugin will only be applied to <a href="/api/module-methods/#es6-recommended-">ES6 modules</a> processed directly by webpack. When using a transpiler, you&apos;ll need to disable module processing (e.g. the <a href="https://babeljs.io/docs/plugins/preset-es2015/#optionsmodules"><code>modules</code></a> option in Babel). </div></blockquote><h2 class="header"><a class="anchor" href="#optimization-bailouts" id="optimization-bailouts"></a><span class="text">Optimization Bailouts</span><a class="icon-link" href="#optimization-bailouts"></a></h2>
 <p>As the article explains, webpack attempts to achieve partial scope hoisting. It will merge modules into a single scope but cannot do so in every case. If webpack cannot merge a module, the two alternatives are Prevent and Root. Prevent means the module must be in its own scope. Root means a new module group will be created. The following conditions determine the outcome:</p>
 
     <div class="table">
