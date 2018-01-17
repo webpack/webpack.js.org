@@ -51,17 +51,22 @@ new webpack.EvalSourceMapDevToolPlugin({
 
 ### Setting sourceURL
 
-Set a URL for source maps. Useful for avoiding cross-origin issues such as
-  ```
-  A cross-origin error was thrown. React doesn't have access to the actual error object in development. See https://fb.me/react-crossorigin-error for more information.
+Set a URL for source maps. Useful for avoiding cross-origin issues such as:
+
+``` bash
+A cross-origin error was thrown. React doesn't have access to the actual error object in development. See https://fb.me/react-crossorigin-error for more information.
 ```
+
+The option can be set to a function:
 
 ``` js
 new webpack.EvalSourceMapDevToolPlugin({
   sourceURLTemplate: module => `/${module.identifier}`
 })
 ```
-OR
+
+Or a substition string:
+
 ``` js
 new webpack.EvalSourceMapDevToolPlugin({
   sourceURLTemplate: '[all-loaders][resource]'
