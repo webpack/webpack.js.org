@@ -1,6 +1,7 @@
+const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
+const FrontMatter = require('front-matter');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const DirectoryTreePlugin = require('directory-tree-webpack-plugin');
@@ -103,9 +104,17 @@ module.exports = (env = {}) => ({
       extensions: /\.md/,
       enhance: (item, options) => {
         // TODO: Consider restructuring `/content` to exactly match routing structure
-        item.url = item.path.replace(options.dir, '/docs').replace(item.extension, '')
-        // TODO: Add yaml frontmatter under an attributes key
-        // TODO: Strip `/index` from `url`
+        item.url = item.path.replace(item.extension, '').replace(options.dir, '').replace(/\/index$/, '')
+        // TODO: Strip `_` prefix from filenames in `url`
+        if (item.type === 'file') {
+          let content = fs.readFileSync(item.path, 'utf8')
+          let { attributes } = FrontMatter(content)
+          Object.assign(item, attributes)
+          item.anchors = [] // TODO: Add actual anchors
+
+        } else {
+          // TODO: Add directory (section) attributes and index url (if necessary)
+        }
       }
     }),
     new webpack.optimize.CommonsChunkPlugin({
@@ -113,6 +122,9 @@ module.exports = (env = {}) => ({
       minChunks: 2
     })
   ],
+  stats: {
+    children: false
+  },
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
