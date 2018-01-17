@@ -1,4 +1,8 @@
+// Import External Dependencies
 import React from 'react';
+
+// Load Styling
+import '../Gitter/Gitter.scss';
 
 export default class Gitter extends React.Component {
   state = {

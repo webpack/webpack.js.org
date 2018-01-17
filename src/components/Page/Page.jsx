@@ -6,10 +6,9 @@ import PageLinks from '../PageLinks/PageLinks';
 import Gitter from '../Gitter/Gitter';
 import Contributors from '../Contributors/Contributors';
 import Sponsors from '../Sponsors/Sponsors';
+
+// Load Styling
 import './Page.scss';
-import '../Sidebar/Sidebar.scss';
-import '../Sponsors/Sponsors.scss';
-import '../Gitter/Gitter.scss';
 
 const Page = ({ page, section }) => {
   let { contributors, title, related } = page.file.attributes;

@@ -1,5 +1,9 @@
+// Import External Dependencies
 import React from 'react';
 import Link from '../Link/Link';
+
+// Load Styling
+import '../Sponsors/Sponsors.scss';
 
 // Imports for Ad Content
 import AGLogo from '../../assets/ag-grid-logo.png';

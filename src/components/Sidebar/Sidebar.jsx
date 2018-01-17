@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Shield from '../Shield/Shield';
 import SidebarItem from '../SidebarItem/SidebarItem';
+import '../Sidebar/Sidebar.scss';
 
 export default class Sidebar extends Component {
   state = {
