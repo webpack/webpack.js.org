@@ -5,6 +5,7 @@ const FrontMatter = require('front-matter');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const DirectoryTreePlugin = require('directory-tree-webpack-plugin');
+const SSGPlugin = require('static-site-generator-webpack-plugin');
 
 module.exports = (env = {}) => ({
   devtool: 'source-map',
@@ -12,8 +13,9 @@ module.exports = (env = {}) => ({
   entry: {
     index: './index.jsx',
     vendor: [
-      'react-router-dom',
-      'preact'
+      'react', // Replace with preact or inferno
+      'react-dom', // Replace with preact or inferno
+      'react-router-dom'
     ]
   },
   resolve: {
@@ -87,7 +89,7 @@ module.exports = (env = {}) => ({
         }
       },
       {
-        test: /\.(jpg|png|svg)$/,
+        test: /\.(jpg|png|svg|ico)$/,
         use: 'file-loader'
       }
     ]
@@ -117,9 +119,16 @@ module.exports = (env = {}) => ({
         }
       }
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'index',
-      minChunks: 2
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendor',
+    //   minChunks: 2
+    // }),
+    new SSGPlugin({
+      crawl: true,
+      globals: {
+        window: {},
+        // document: {}
+      }
     })
   ],
   stats: {
@@ -128,6 +137,7 @@ module.exports = (env = {}) => ({
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
-    filename: '[name].[hash].js'
+    filename: '[name].[hash].js',
+    libraryTarget: 'umd'
   }
 })
