@@ -1,5 +1,5 @@
 ---
-title: Loader API
+title: Loader Interface
 sort: 4
 contributors:
     - TheLarkInn

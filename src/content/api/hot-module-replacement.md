@@ -1,5 +1,6 @@
 ---
 title: Hot Module Replacement
+sort: 4
 contributors:
   - sokra
   - skipjack
@@ -129,9 +130,9 @@ The `info` parameter will be an object containing some of the following values:
 
 ``` js
 {
-  type: "self-declined" | "declined" | 
-        "unaccepted" | "accepted" | 
-        "disposed" | "accept-errored" | 
+  type: "self-declined" | "declined" |
+        "unaccepted" | "accepted" |
+        "disposed" | "accept-errored" |
         "self-accept-errored" | "self-accept-error-handler-errored",
   moduleId: 4, // The module in question.
   dependencyId: 3, // For errors: the module id owning the accept handler.
@@ -142,7 +143,7 @@ The `info` parameter will be an object containing some of the following values:
     5: [4]
   },
   error: new Error(...), // For errors: the thrown error
-  originalError: new Error(...) // For self-accept-error-handler-errored: 
+  originalError: new Error(...) // For self-accept-error-handler-errored:
                                 // the error thrown by the module before the error handler tried to handle it.
 }
 ```

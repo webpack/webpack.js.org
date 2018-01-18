@@ -1,5 +1,5 @@
 ---
-title: Node.js API
+title: Node Interface
 sort: 3
 contributors:
   - sallar
