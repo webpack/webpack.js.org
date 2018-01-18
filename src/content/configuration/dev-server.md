@@ -631,7 +631,7 @@ proxy: [{
 
 Note that requests to root won't be proxied by default. To enable root proxying, the `devServer.index` option should be specified as a falsy value:
 
-``` json
+``` js
 devServer: {
   index: '', // specify to enable root proxying
   host: '...',
