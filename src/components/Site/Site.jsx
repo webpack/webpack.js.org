@@ -1,21 +1,43 @@
 // Import External Dependencies
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { hot as Hot } from 'react-hot-loader';
+// import { hot as Hot } from 'react-hot-loader';
 
 // Import Components
 import NotificationBar from '../NotificationBar/NotificationBar';
 import Navigation from '../Navigation/Navigation';
 import SidebarMobile from '../SidebarMobile/SidebarMobile';
+import Container from '../Container/Container';
+import Sponsors from '../Sponsors/Sponsors';
+import Sidebar from '../Sidebar/Sidebar';
 import Footer from '../Footer/Footer';
-
-// ...
-import Content from '../../_content.json';
 
 // Load Styling
 import '../../styles/index';
 import '../../styles/icon.font.js';
 import './Site.scss';
+
+// Load & Clean Up JSON Representation of `src/content`
+// TODO: Consider moving all or parts of this cleaning to a `DirectoryTreePlugin` option(s)
+import Content from '../../_content.json';
+Content.children = Content.children
+  .filter(item => item.name !== 'images')
+  .map(item => {
+    if ( item.type === 'directory' ) {
+      return {
+        ...item,
+        children: item.children.sort((a, b) => {
+          let group1 = (a.group || '').toLowerCase();
+          let group2 = (b.group || '').toLowerCase();
+
+          if (group1 < group2) return -1;
+          if (group1 > group2) return 1;
+          return a.sort - b.sort;
+        })
+      };
+
+    } else return item;
+  });
 
 class Site extends React.Component {
   state = {
@@ -25,45 +47,40 @@ class Site extends React.Component {
   render() {
     let { location } = this.props;
     let { mobileSidebarOpen } = this.state;
+    let sections = this._sections;
+    let section = sections.find(({ url }) => location.pathname.startsWith(url));
 
     return (
       <div className="site">
         <NotificationBar />
+
         <Navigation
           pathname={ location.pathname }
           toggleSidebar={ this._toggleSidebar }
           links={[
-            { title: 'Documentation', 'url': '/docs', children: this._sections.map(item => {
-              // XXX: Remove or simplify once `url` and `title` are added to the objects
-              return { title: item.name, url: item.url };
-            }) },
+            {
+              title: 'Documentation',
+              url: '/docs',
+              // isActive: url => url.test(/^\/(api|concepts|configuration|guides|loaders|plugins)/),
+              children: this._strip(
+                sections.filter(item => item.name !== 'contribute')
+              )
+            },
             { title: 'Contribute', url: '/contribute' },
             { title: 'Vote', url: '/vote' },
             { title: 'Blog', url: '//medium.com/webpack' }
           ]} />
-        <SidebarMobile
+
+        {/*<SidebarMobile
           open={ mobileSidebarOpen }
-          sections={[]
-            //   .map((section) => ({
-            //     title: section.path.title,
-            //     url: section.url,
-            //     pages: section.pages.map(page => ({
-            //       file: page.file,
-            //       title: page.file.title,
-            //       url: page.url
-            //     })).sort(({ file: { attributes: a }}, { file: { attributes: b }}) => {
-            //       let group1 = a.group.toLowerCase();
-            //       let group2 = b.group.toLowerCase();
+          sections={ this._strip(Content.children) } />*/}
 
-            //       if (group1 < group2) return -1;
-            //       if (group1 > group2) return 1;
-            //       return a.sort - b.sort;
-            //     })
-            //   }))
-          } />
-
-        <main className="site__content">
-          <Switch>
+        <Container className="site__content">
+          <Sponsors />
+          <Sidebar
+            currentPage={ location.pathname }
+            pages={ this._strip(section ? section.children : Content.children) } />
+          {/*<Switch>
             { this._pages.map(page => (
               <Route
                 key={ page.url }
@@ -71,15 +88,15 @@ class Site extends React.Component {
                 render={ props => {
                   let path = page.path.replace('src/content/', '');
 
-                  import(`../../content/${path}`).then(module => {
-                    console.log(module);
-                  });
+                  // import(`../../content/${path}`).then(module => {
+                  //   // console.log(module);
+                  // });
 
                   return null;
                 }} />
             ))}
-          </Switch>
-        </main>
+          </Switch>*/}
+        </Container>
 
         <Footer />
       </div>
@@ -89,11 +106,11 @@ class Site extends React.Component {
   /**
    * Toggle the mobile sidebar
    *
-   * @param {object} e - React synthetic click event
+   * @param {boolean} open - Indicates whether the menu should be open or closed
    */
-  _toggleSidebar = e => {
+  _toggleSidebar = (open = !this.state.mobileSidebarOpen) => {
     this.setState({
-      mobileSidebarOpen: !this.state.mobileSidebarOpen
+      mobileSidebarOpen: open
     });
   }
 
@@ -112,14 +129,31 @@ class Site extends React.Component {
   }
 
   /**
+   * Strip any non-applicable properties
+   *
+   * @param  {array} array - ...
+   * @return {array}       - ...
+   */
+  _strip = array => {
+    return array.map(({ title, name, url, group, sort, anchors, children }) => ({
+      title: title || name,
+      url,
+      group,
+      sort,
+      anchors,
+      children: children ? this._strip(children) : []
+    }));
+  }
+
+  /**
    * Get top-level sections
    *
    * @return {array} - ...
    */
   get _sections() {
-    return Content.children.filter(item => {
-      return item.type === 'directory' && item.name !== 'contribute';
-    });
+    return Content.children.filter(item => (
+      item.type === 'directory'
+    ));
   }
 
   /**
@@ -134,4 +168,4 @@ class Site extends React.Component {
   }
 }
 
-export default Hot(module)(Site);
+export default Site;

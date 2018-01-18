@@ -3,6 +3,7 @@ import Link from '../Link/Link';
 import './SidebarMobile.scss';
 
 // TODO: Finish updating close and swipe behaviors
+// TODO: Check to make sure all pages are shown and properly sorted
 export default class SidebarMobile extends React.Component {
   _container = null
   _initialTouchPosition = {}
@@ -75,11 +76,11 @@ export default class SidebarMobile extends React.Component {
             className="sidebar-mobile__section-header"
             key={ absoluteUrl }
             to={ absoluteUrl }
-            onClick={ this._close.bind(this) }>
+            onClick={ this.props.toggle }>
             <h3>{ section.title || section.url }</h3>
           </Link>
 
-          { this._getPages(section.pages) }
+          { this._getPages(section.children) }
         </div>
       );
     });
@@ -107,7 +108,7 @@ export default class SidebarMobile extends React.Component {
           key={ url }
           className={ `sidebar-mobile__page ${active ? 'sidebar-mobile__page--active' : ''}` }
           to={ url }
-          onClick={ this._close.bind(this) }>
+          onClick={ this.props.toggle }>
           { page.title }
         </Link>
       );
