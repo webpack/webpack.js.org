@@ -60,15 +60,16 @@ export default class Sidebar extends Component {
   }
 
   componentDidMount() {
-    setTimeout(
-      this._recalculate.bind(this),
-      250
-    );
+    // TODO: Try using `position: sticky` instead
+    // setTimeout(
+    //   this._recalculate.bind(this),
+    //   250
+    // );
 
-    document.addEventListener(
-      'scroll',
-      this._recalculate.bind(this)
-    );
+    // document.addEventListener(
+    //   'scroll',
+    //   this._recalculate.bind(this)
+    // );
   }
 
   componentWillUnmount() {
