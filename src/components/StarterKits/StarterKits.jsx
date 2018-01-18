@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from '../Container/Container';
 import Link from '../Link/Link';
-import Kits from './starter-kits-data.json';
+import Kits from './_starter-kits.json';
 import './StarterKits.scss';
 
 // NOTE: The table classes used in this component correspond to

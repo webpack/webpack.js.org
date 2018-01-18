@@ -20,7 +20,7 @@ request('https://opencollective.com/api/groups/webpack/backers', (err, response,
     }
   }
 
-  fs.writeFile('./src/components/Support/support-backers.json', body, err => {
+  fs.writeFile('./src/components/Support/_support-backers.json', body, err => {
     if (err) {
       console.error('Failed to write backers file: ', err);
 

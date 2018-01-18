@@ -1,5 +1,5 @@
 import React from 'react';
-import Backers from './support-backers.json';
+import Backers from './_support-backers.json';
 import Additional from './support-additional.js';
 import './Support.scss';
 

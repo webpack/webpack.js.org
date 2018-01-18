@@ -5,7 +5,7 @@ const toolList = require('tool-list');
 const data = toolList.startersWithTag('webpack');
 const body = JSON.stringify(data);
 
-fs.writeFile('./src/components/StarterKits/starter-kits-data.json', body, err => {
+fs.writeFile('./src/components/StarterKits/_starter-kits.json', body, err => {
   if (err) {
     console.error('Failed to write starter kits file: ', err);
 
