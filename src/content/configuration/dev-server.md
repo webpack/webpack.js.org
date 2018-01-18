@@ -633,13 +633,13 @@ Note that requests to root won't be proxied by default. To enable root proxying,
 
 ``` json
 devServer: {
-	index: '', // specify to enable root proxying
-	host: '...',
-	contentBase: '...',
-	proxy: {
-		context: () => true,
-		target: 'http://localhost:1234'
-	}
+  index: '', // specify to enable root proxying
+  host: '...',
+  contentBase: '...',
+  proxy: {
+    context: () => true,
+    target: 'http://localhost:1234'
+  }
 }
 ```
 
