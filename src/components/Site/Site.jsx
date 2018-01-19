@@ -1,7 +1,7 @@
 // Import External Dependencies
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-// import { hot as Hot } from 'react-hot-loader';
+import { hot as Hot } from 'react-hot-loader';
 
 // Import Components
 import NotificationBar from '../NotificationBar/NotificationBar';
@@ -168,4 +168,4 @@ class Site extends React.Component {
   }
 }
 
-export default Site;
+export default Hot(module)(Site);
