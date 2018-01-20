@@ -122,6 +122,9 @@ class Site extends React.Component {
                   }
                 }} />
             ))}
+            <Route render={ props => (
+              '404 Not Found'
+            )} />
           </Switch>
         </Container>
 
