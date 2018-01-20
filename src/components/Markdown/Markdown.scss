@@ -1,9 +1,8 @@
-// Markdown styling is based on https://gist.github.com/tuzz/3331384.
 @import 'vars';
 @import 'functions';
 @import 'prism-theme';
 
-.page__content {
+.markdown {
   line-height:1.5em;
 
   h1 { font-size: getFontSize(4); }
