@@ -34,7 +34,9 @@ export default locals => {
         </head>
         <body>
           <div id="root">
-            <Route path="/" component={ Site } />
+            <Route
+              path="/"
+              render={ props => <Site { ...props } lazy={ false } /> } />
           </div>
           { Object.values(locals.assets).map(path => (
             <script key={ path } src={ path } />

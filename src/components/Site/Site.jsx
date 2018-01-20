@@ -11,6 +11,7 @@ import Container from '../Container/Container';
 import Sponsors from '../Sponsors/Sponsors';
 import Sidebar from '../Sidebar/Sidebar';
 import Footer from '../Footer/Footer';
+import Page from '../Page/Page';
 
 // Load Styling
 import '../../styles/index';
@@ -40,12 +41,16 @@ Content.children = Content.children
   });
 
 class Site extends React.Component {
+  static defaultProps = {
+    lazy: true
+  }
+
   state = {
     mobileSidebarOpen: false
   }
 
   render() {
-    let { location } = this.props;
+    let { location, lazy } = this.props;
     let { mobileSidebarOpen } = this.state;
     let sections = this._sections;
     let section = sections.find(({ url }) => location.pathname.startsWith(url));
@@ -80,7 +85,7 @@ class Site extends React.Component {
           <Sidebar
             currentPage={ location.pathname }
             pages={ this._strip(section ? section.children : Content.children) } />
-          {/*<Switch>
+          <Switch>
             { this._pages.map(page => (
               <Route
                 key={ page.url }
@@ -88,14 +93,32 @@ class Site extends React.Component {
                 render={ props => {
                   let path = page.path.replace('src/content/', '');
 
-                  // import(`../../content/${path}`).then(module => {
-                  //   // console.log(module);
-                  // });
+                  if ( lazy ) {
+                    // import(`../../content/${path}`)
+                    //   .then(module => {
+                    //     console.log(module);
+                    //   })
+                    //   .catch(error => {
+                    //     console.log(error);
+                    //   });
 
-                  return null;
+                    // TODO: Add `LazyLoad` component with nprogress
+                    return (
+                      <Page
+                        { ...page }
+                        content={ require(`../../content/${path}`) } />
+                    );
+
+                  } else {
+                    return (
+                      <Page
+                        { ...page }
+                        content={ require(`../../content/${path}`) } />
+                    );
+                  }
                 }} />
             ))}
-          </Switch>*/}
+          </Switch>
         </Container>
 
         <Footer />
