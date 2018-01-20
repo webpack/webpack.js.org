@@ -130,8 +130,7 @@ module.exports = (env = {}) => ({
     new SSGPlugin({
       crawl: true,
       globals: {
-        window: {},
-        // document: {}
+        window: {}
       }
     })
   ],
