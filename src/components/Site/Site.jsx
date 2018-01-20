@@ -89,6 +89,7 @@ class Site extends React.Component {
             { this._pages.map(page => (
               <Route
                 key={ page.url }
+                exact={ true }
                 path={ page.url }
                 render={ props => {
                   let path = page.path.replace('src/content/', '');
