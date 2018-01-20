@@ -105,8 +105,12 @@ module.exports = (env = {}) => ({
       path: 'src/_content.json',
       extensions: /\.md/,
       enhance: (item, options) => {
-        // TODO: Consider restructuring `/content` to exactly match routing structure
-        item.url = item.path.replace(item.extension, '').replace(options.dir, '').replace(/\/index$/, '')
+        item.url = item.path
+            .replace(item.extension, '')
+            .replace(options.dir, '')
+            .replace(/\/index$/, '')
+            .replace(/^$/, '/')
+
         // TODO: Strip `_` prefix from filenames in `url`
         if (item.type === 'file') {
           let content = fs.readFileSync(item.path, 'utf8')
