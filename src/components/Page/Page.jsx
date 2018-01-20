@@ -27,7 +27,7 @@ const Page = ({
         __html: content
       }} />
 
-      { related.length > 0 && (
+      { related && related.length > 0 && (
         <div>
           <hr />
           <h3>Further Reading</h3>
@@ -45,7 +45,7 @@ const Page = ({
         </div>
       )}
 
-      { contributors.length > 0 && (
+      { contributors && contributors.length > 0 && (
         <div>
           <hr />
           <h3>Contributors</h3>
