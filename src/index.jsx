@@ -25,8 +25,11 @@ export default locals => {
     <StaticRouter location={ locals.path } context={{}}>
       <html>
         <head>
+          <meta charset="UTF-8" />
+          <meta name="theme-color" content="#2B3A42" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <title>{/* TODO */} | webpack</title>
+          <meta name="description" content={''/* TODO */} />
           <link rel="icon" type="image/x-icon" href={ Favicon } />
           { Object.keys(assets).filter(asset => /\.css$/.test(asset)).map(path => (
             <link key={ path } rel="stylesheet" href={ `/${path}` } />

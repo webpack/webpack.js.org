@@ -4,10 +4,13 @@ import React from 'react';
 // Load Styling
 import '../Gitter/Gitter.scss';
 
+// TODO: Use `position: sticky` over calculation
 export default class Gitter extends React.Component {
   state = {
     offset: 0
   };
+
+  _sidecar = null
 
   render() {
     let { offset } = this.state;
@@ -26,15 +29,24 @@ export default class Gitter extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(
-      this._recalculate.bind(this),
-      250
-    );
+    if ( window.document !== undefined ) {
+      import('gitter-sidecar').then(Sidecar => {
+        this._sidecar = new Sidecar({
+          room: 'webpack/webpack',
+          activationElement: false
+        });
+      });
 
-    document.addEventListener(
-      'scroll',
-      this._recalculate.bind(this)
-    );
+      setTimeout(
+        this._recalculate.bind(this),
+        250
+      );
+
+      document.addEventListener(
+        'scroll',
+        this._recalculate.bind(this)
+      );
+    }
   }
 
   componentWillUnmount() {
