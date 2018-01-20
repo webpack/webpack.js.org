@@ -3,36 +3,29 @@ import React from 'react';
 
 // Import Components
 import PageLinks from '../PageLinks/PageLinks';
-import Gitter from '../Gitter/Gitter';
+import Markdown from '../Markdown/Markdown';
 import Contributors from '../Contributors/Contributors';
+import Gitter from '../Gitter/Gitter';
 
 // Load Styling
 import './Page.scss';
 
-const Page = ({ page }) => {
-  let { contributors, title, related } = page.file.attributes;
+const Page = ({
+  title,
+  content,
+  contributors = [],
+  related = [],
+  ...props
+}) => (
+  <section className="page">
+    <PageLinks page={ props } />
 
-  // TODO: This hack adds the index page to the array
-  // Ideally this would be resolved at the antwar/build level
-  // Index pages should just be treated normally
-  // if (indexPage) {
-  //   pages.unshift({
-  //     url: `/${section.name}/`,
-  //     group: indexPage.attributes.group,
-  //     title: indexPage.attributes.title,
-  //     anchors: indexPage.attributes.anchors
-  //   });
-  // }
-
-  return (
-    <section className="page__content">
+    <Markdown>
       <h1>{ title }</h1>
 
-      <PageLinks
-        page={ page }
-        section={ section.name } />
-
-      <div dangerouslySetInnerHTML={{ __html: page.file.body }} />
+      <div dangerouslySetInnerHTML={{
+        __html: content
+      }} />
 
       { related.length > 0 && (
         <div>
@@ -59,12 +52,10 @@ const Page = ({ page }) => {
           <Contributors contributors={ contributors } />
         </div>
       )}
+    </Markdown>
 
-      <Interactive
-        id="src/components/Gitter/Gitter.jsx"
-        component={ Gitter } />
-    </section>
-  );
-};
+    <Gitter />
+  </section>
+);
 
 export default Page;
