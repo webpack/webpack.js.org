@@ -84,7 +84,10 @@ class Site extends React.Component {
           <Sponsors />
           <Sidebar
             currentPage={ location.pathname }
-            pages={ this._strip(section ? section.children : Content.children) } />
+            pages={ this._strip(section ? section.children : Content.children.filter(item => (
+              item.type !== 'directory' &&
+              item.url !== '/'
+            ))) } />
           <Switch>
             { this._pages.map(page => (
               <Route
