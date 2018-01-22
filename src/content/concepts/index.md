@@ -8,9 +8,12 @@ contributors:
   - johnstew
   - jimrfenner
   - TheDutchCoder
+  - adambraimbridge
 ---
 
 At its core, *webpack* is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it recursively builds a _dependency graph_ that includes every module your application needs, then packages all of those modules into one or more _bundles_.
+
+T> Learn more about JavaScript modules and webpack modules [here](/concepts/modules).
 
 It is [incredibly configurable](/configuration), but to get started you only need to understand four **Core Concepts**:
 
@@ -72,14 +75,14 @@ T> The `output` property has [many more configurable features](/configuration/ou
 
 *Loaders* enable webpack to process more than just JavaScript files (webpack itself only understands JavaScript). They give you the ability to leverage webpack's bundling capabilities for all kinds of files by converting them to valid [modules](/concepts/modules) that webpack can process.
 
-Essentially, webpack loaders transform all types of files into modules that can be included in your application's dependency graph.
+Essentially, webpack loaders transform all types of files into modules that can be included in your application's dependency graph (and eventually a bundle).
 
 W> Note that the ability to `import` any type of module, e.g. `.css` files, is a feature specific to webpack and may not be supported by other bundlers or task runners. We feel this extension of the language is warranted as it allows developers to build a more accurate dependency graph.
 
-At a high level, __loaders__ have two purposes in your webpack config. They work to:
+At a high level, __loaders__ have two purposes in your webpack configuration:
 
-1. Identify which file or files should be transformed by a certain loader (with the `test` property).
-2. Transform those files so that they can be added to your dependency graph (and eventually your bundle). (`use` property)
+1. The `test` property identifies which file or files should be transformed.
+2. The `use` property indicates which loader should be used to do the transforming.
 
 __webpack.config.js__
 

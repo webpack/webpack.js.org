@@ -35,6 +35,7 @@ Name                                                     | Description
 [`NpmInstallWebpackPlugin`](/plugins/npm-install-webpack-plugin) | Auto-install missing dependencies during development
 [`ProvidePlugin`](/plugins/provide-plugin)                       | Use modules without having to use import/require
 [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin)  | Enables a more fine grained control of source maps
+[`EvalSourceMapDevToolPlugin`](/plugins/eval-source-map-dev-tool-plugin)  | Enables a more fine grained control of eval source maps
 [`UglifyjsWebpackPlugin`](/plugins/uglifyjs-webpack-plugin)      | Enables control of the version of UglifyJS in your project
 [`ZopfliWebpackPlugin`](/plugins/zopfli-webpack-plugin)          | Prepare compressed versions of assets with node-zopfli
 
