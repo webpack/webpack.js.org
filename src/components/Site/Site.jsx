@@ -92,6 +92,8 @@ class Site extends React.Component {
                 render={ props => {
                   let path = page.path.replace('src/content/', '');
 
+                  // TODO: Use `import()` `LazyLoad` component with nprogress
+                  // Blocked by `SSGPlugin` issue with `import()`
                   if ( lazy ) {
                     // import(`../../content/${path}`)
                     //   .then(module => {
@@ -101,7 +103,6 @@ class Site extends React.Component {
                     //     console.log(error);
                     //   });
 
-                    // TODO: Add `LazyLoad` component with nprogress
                     return (
                       <React.Fragment>
                         <Sidebar
