@@ -19,6 +19,7 @@ module.exports = (env = {}) => ({
     ]
   },
   resolve: {
+    symlinks: false,
     extensions: [
       '.js',
       '.jsx',
@@ -53,6 +54,7 @@ module.exports = (env = {}) => ({
       },
       {
         test: /\.jsx?$/,
+        exclude: /node_modules/,
         use: [
           'babel-loader',
           {
