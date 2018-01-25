@@ -39,9 +39,6 @@
   },
   "devDependencies": {
     "alex": "^4.1.0",
-    "antwar": "^0.19.0",
-    "antwar-helpers": "^0.19.0",
-    "antwar-interactive": "^0.19.0",
     "async": "^2.5.0",
     "autoprefixer": "^7.2.3",
     "babel-core": "^6.26.0",
