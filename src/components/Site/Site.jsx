@@ -65,8 +65,8 @@ class Site extends React.Component {
           links={[
             {
               title: 'Documentation',
-              url: '/docs',
-              // isActive: url => url.test(/^\/(api|concepts|configuration|guides|loaders|plugins)/),
+              url: '/concepts',
+              isActive: url => /^\/(api|concepts|configuration|guides|loaders|plugins)/.test(url),
               children: this._strip(
                 sections.filter(item => item.name !== 'contribute')
               )
