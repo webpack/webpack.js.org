@@ -15,6 +15,12 @@ module.exports = env => merge(common(env), {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    new UglifyJSPlugin()
+    new UglifyJSPlugin(),
+    new SSGPlugin({
+      crawl: true,
+      globals: {
+        window: {}
+      }
+    })
   ]
 })

@@ -125,15 +125,9 @@ module.exports = (env = {}) => ({
         }
       }
     }),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'vendor',
-    //   minChunks: 2
-    // }),
-    new SSGPlugin({
-      crawl: true,
-      globals: {
-        window: {}
-      }
+    // TODO: Debug issues with `SSGPlugin`
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor'
     })
   ],
   stats: {
