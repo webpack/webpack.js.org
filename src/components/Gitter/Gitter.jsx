@@ -37,7 +37,7 @@ export default class Gitter extends React.Component {
         });
       });
 
-      setTimeout(
+      this._timeout = setTimeout(
         this._recalculate.bind(this),
         250
       );
@@ -50,6 +50,7 @@ export default class Gitter extends React.Component {
   }
 
   componentWillUnmount() {
+    clearTimeout(this._timeout);
     document.removeEventListener(
       'scroll',
       this._recalculate.bind(this)
