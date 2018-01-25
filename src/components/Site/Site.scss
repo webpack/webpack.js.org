@@ -4,16 +4,12 @@
   min-height: 100vh;
   overflow: hidden;
 
-  &.nav-displayed {
-    height: 100vh;
-  }
-
   &__content {
     flex: 1 1 auto;
     display: flex;
   }
 
-  .sidebar {
+  &__sidebar {
     flex: 0 0 280px;
   }
 }

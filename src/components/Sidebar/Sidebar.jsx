@@ -11,13 +11,13 @@ export default class Sidebar extends Component {
   };
 
   render() {
-    let { pages, currentPage } = this.props;
+    let { className = '', pages, currentPage } = this.props;
     let { fixed, availableHeight, maxWidth } = this.state;
     let group;
 
     return (
       <nav
-        className="sidebar"
+        className={ `sidebar ${className}` }
         ref={ ref => this._container = ref }
         style={{
           position: fixed ? 'fixed' : null,

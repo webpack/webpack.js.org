@@ -12,6 +12,7 @@ import Sponsors from '../Sponsors/Sponsors';
 import Sidebar from '../Sidebar/Sidebar';
 import Footer from '../Footer/Footer';
 import Page from '../Page/Page';
+import Vote from '../Vote/Vote';
 
 // Load Styling
 import '../../styles/index';
@@ -82,12 +83,6 @@ class Site extends React.Component {
 
         <Container className="site__content">
           <Sponsors />
-          <Sidebar
-            currentPage={ location.pathname }
-            pages={ this._strip(section ? section.children : Content.children.filter(item => (
-              item.type !== 'directory' &&
-              item.url !== '/'
-            ))) } />
           <Switch>
             { this._pages.map(page => (
               <Route
@@ -108,9 +103,18 @@ class Site extends React.Component {
 
                     // TODO: Add `LazyLoad` component with nprogress
                     return (
-                      <Page
-                        { ...page }
-                        content={ require(`../../content/${path}`) } />
+                      <React.Fragment>
+                        <Sidebar
+                          className="site__sidebar"
+                          currentPage={ location.pathname }
+                          pages={ this._strip(section ? section.children : Content.children.filter(item => (
+                            item.type !== 'directory' &&
+                            item.url !== '/'
+                          ))) } />
+                        <Page
+                          { ...page }
+                          content={ require(`../../content/${path}`) } />
+                      </React.Fragment>
                     );
 
                   } else {
@@ -122,6 +126,9 @@ class Site extends React.Component {
                   }
                 }} />
             ))}
+            <Route
+              path="/vote"
+              component={ Vote } />
             <Route render={ props => (
               '404 Not Found'
             )} />

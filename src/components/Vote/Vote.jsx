@@ -1,20 +1,14 @@
 import React from 'react';
-import Interactive from 'antwar-interactive';
-import Container from '../Container/Container';
 import VoteApp from 'webpack.vote';
+import Container from '../Container/Container';
 import 'webpack.vote/dist/style.min.css';
 import './Vote.scss';
 
 const Vote = ({ section, page }) => (
   <Container className="vote">
-    <Interactive
-      id="./node_modules/webpack.vote"
-      component={ VoteApp }
-      // development={ true }
-    />
+    <VoteApp
+      development={ false } />
   </Container>
 );
-
-Vote.title = 'Vote';
 
 export default Vote;
