@@ -70,11 +70,12 @@ poll: 1000 // Check for changes every second
 
 T> If watching does not work for you, try out this option. Watching does not work with NFS and machines in VirtualBox.
 
-# Troubleshooting
 
-## Webpack doesn't recompile on change while watching
+## Troubleshooting
 
-### File changes are seen, but no files are updated
+### Missed Compilations
+
+### Changes are seen, but no files are updated
 
 Verify that webpack is not being notified of changes by running webpack with the --progress flag. If progress shows on save but no files are outputted, it is likely a configuration issue, not a file watching issue.
 
