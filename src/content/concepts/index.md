@@ -8,6 +8,7 @@ contributors:
   - johnstew
   - jimrfenner
   - TheDutchCoder
+  - chrisdothtml
 ---
 
 At its core, *webpack* is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it recursively builds a _dependency graph_ that includes every module your application needs, then packages all of those modules into one or more _bundles_.
@@ -55,7 +56,7 @@ const path = require('path');
 module.exports = {
   entry: './path/to/my/entry/file.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: './dist',
     filename: 'my-first-webpack.bundle.js'
   }
 };
@@ -89,7 +90,7 @@ const path = require('path');
 const config = {
   entry: './path/to/my/entry/file.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: './dist',
     filename: 'my-first-webpack.bundle.js'
   },
   module: {
@@ -129,7 +130,7 @@ const path = require('path');
 const config = {
   entry: './path/to/my/entry/file.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: './dist',
     filename: 'my-first-webpack.bundle.js'
   },
   module: {

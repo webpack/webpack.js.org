@@ -10,6 +10,7 @@ contributors:
   - fvgs
   - dhurlburtusa
   - MagicDuck
+  - chrisdothtml
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -591,10 +592,10 @@ The dependencies for your library will be defined by the [`externals`](/configur
 
 `string`
 
-The output directory as an **absolute** path.
+The output directory as a path (relative paths are resolved from [context](/configuration/entry-context/#context)).
 
 ```js
-path: path.resolve(__dirname, 'dist/assets')
+path: './dist/assets'
 ```
 
 Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching) for details.

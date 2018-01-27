@@ -5,6 +5,7 @@ contributors:
   - TheLarkInn
   - chyipin
   - rouzbeh84
+  - chrisdothtml
 ---
 
 Configuring the `output` configuration options tells webpack how to write the compiled files to disk. Note that, while there can be multiple `entry` points, only one `output` configuration is specified.
@@ -15,7 +16,7 @@ Configuring the `output` configuration options tells webpack how to write the co
 The minimum requirements for the `output` property in your webpack config is to set its value to an object including the following two things:
 
 - A `filename` to use for the output file(s).
-- An absolute `path` to your preferred output directory.
+- A `path` to your preferred output directory (relative paths are resolved from [context](/configuration/entry-context/#context)).
 
 **webpack.config.js**
 
@@ -23,7 +24,7 @@ The minimum requirements for the `output` property in your webpack config is to 
 const config = {
   output: {
     filename: 'bundle.js',
-    path: '/home/proj/public/assets'
+    path: './public/assets'
   }
 };
 
@@ -45,7 +46,7 @@ If your configuration creates more than a single "chunk" (as with multiple entry
   },
   output: {
     filename: '[name].js',
-    path: __dirname + '/dist'
+    path: './dist'
   }
 }
 
