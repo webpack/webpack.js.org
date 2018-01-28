@@ -123,11 +123,7 @@ module.exports = (env = {}) => ({
           // TODO: Add directory (section) attributes and index url (if necessary)
         }
       }
-    }),
-    // TODO: Debug issues with `SSGPlugin`
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'vendor'
-    // })
+    })
   ],
   stats: {
     children: false
