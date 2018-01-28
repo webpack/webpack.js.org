@@ -5,7 +5,6 @@ const FrontMatter = require('front-matter');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const DirectoryTreePlugin = require('directory-tree-webpack-plugin');
-const SSGPlugin = require('static-site-generator-webpack-plugin');
 
 module.exports = (env = {}) => ({
   devtool: 'source-map',
@@ -126,9 +125,9 @@ module.exports = (env = {}) => ({
       }
     }),
     // TODO: Debug issues with `SSGPlugin`
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
-    })
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendor'
+    // })
   ],
   stats: {
     children: false
