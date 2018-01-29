@@ -103,6 +103,8 @@ stats: {
   providedExports: false,
   // Add public path information
   publicPath: true,
+   // Add output path information
+  outputPath: true,
   // Add information about the reasons why modules are included
   reasons: true,
   // Add the source code of modules
