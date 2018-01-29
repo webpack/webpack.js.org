@@ -61,16 +61,16 @@
         <loc>https://webpack.js.org/writers-guide/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/cli/index.html</loc>
+        <loc>https://webpack.js.org/api/compiler/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/api/hot-module-replacement/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/compilation/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/compiler/index.html</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/api/hot-module-replacement/index.html</loc>
+        <loc>https://webpack.js.org/api/cli/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/loaders/index.html</loc>
@@ -88,10 +88,10 @@
         <loc>https://webpack.js.org/api/node/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/passing-a-config/index.html</loc>
+        <loc>https://webpack.js.org/api/parser/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/parser/index.html</loc>
+        <loc>https://webpack.js.org/api/passing-a-config/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/index.html</loc>
@@ -136,19 +136,16 @@
         <loc>https://webpack.js.org/concepts/output/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/plugins/index.html</loc>
+        <loc>https://webpack.js.org/concepts/targets/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/targets/index.html</loc>
+        <loc>https://webpack.js.org/concepts/plugins/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/configuration-languages/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/configuration-types/index.html</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/dev-server/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/devtool/index.html</loc>
@@ -158,6 +155,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/externals/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/dev-server/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/module/index.html</loc>
@@ -229,9 +229,6 @@
         <loc>https://webpack.js.org/guides/asset-management/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/author-libraries/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/guides/build-performance/index.html</loc>
     </url>
     <url>
@@ -250,9 +247,6 @@
         <loc>https://webpack.js.org/guides/code-splitting-import/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/code-splitting-libraries/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/guides/code-splitting-require/index.html</loc>
     </url>
     <url>
@@ -265,6 +259,9 @@
         <loc>https://webpack.js.org/guides/development-vagrant/index.html</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/guides/code-splitting-libraries/index.html</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/guides/environment-variables/index.html</loc>
     </url>
     <url>
@@ -272,6 +269,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/guides/hot-module-replacement/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/guides/author-libraries/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/installation/index.html</loc>
@@ -361,16 +361,13 @@
         <loc>https://webpack.js.org/loaders/imports-loader/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/istanbul-instrumenter-loader/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/loaders/jshint-loader/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/json-loader/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/json5-loader/index.html</loc>
+        <loc>https://webpack.js.org/loaders/istanbul-instrumenter-loader/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/less-loader/index.html</loc>
@@ -389,6 +386,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/polymer-webpack-loader/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/loaders/json5-loader/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/postcss-loader/index.html</loc>
