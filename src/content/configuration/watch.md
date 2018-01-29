@@ -73,8 +73,6 @@ T> If watching does not work for you, try out this option. Watching does not wor
 
 ## Troubleshooting
 
-### Missed Compilations
-
 ### Changes are seen, but no files are updated
 
 Verify that webpack is not being notified of changes by running webpack with the --progress flag. If progress shows on save but no files are outputted, it is likely a configuration issue, not a file watching issue.
