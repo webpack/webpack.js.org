@@ -29,6 +29,7 @@ The following options are supported:
 - `module` (`boolean`): Indicates whether loaders should generate source maps (defaults to `true`).
 - `columns` (`boolean`): Indicates whether column mappings should be used (defaults to `true`).
 - `lineToLine` (`object`): Simplify and speed up source mapping by using line to line source mappings for matched modules.
+- `noSources` (`boolean`): Prevents the source file content from being included in the source map (defaults to `false`).
 - `publicPath` (`string`): Emits absolute URLs with public path prefix, e.g. `https://example.com/project/`.
 - `fileContext` (`string`): Makes the `[file]` argument relative to this directory.
 
