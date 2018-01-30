@@ -74,7 +74,7 @@ export default class Navigation extends React.Component {
               { title: 'Parcel.js 中文文档', url: 'https://www.parceljs.io/' },
               { title: 'React.js 中文文档', url: 'https://doc.react-china.org/' },
               { title: 'Babel 中文文档', url: 'https://babeljs.cn/' },
-              { title: 'rollup.js 中文文档', url: 'https://rollupjs.org/zh' },
+              { title: 'rollup.js 中文文档', url: 'https://rollupjs.cn/' },
               { title: 'Node.js 中文文档', url: 'http://nodejs.cn/' },
               { title: 'ECMA262 中文文档', url: 'https://ecma262.docschina.org/' }
             ]} />
