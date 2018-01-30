@@ -21,6 +21,7 @@ contributors:
   - rouzbeh84
   - shaodahong
   - sudarsangp
+  - kcolton
 ---
 
 T> This guide extends the examples provided in [Getting Started](/guides/getting-started) and [Output Management](/guides/output-management). Please make sure you are at least familiar with the examples provided in them.
@@ -263,7 +264,7 @@ lodash.bundle.js   541 kB       0  [emitted]  [big]  lodash
    [3] (webpack)/buildin/module.js 517 bytes {0} [built]
 ```
 
-If you've enabled [`async` functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) via a pre-processor like babel, note that you can simplify the code as `import()` statements just return promises:
+As `import()` returns a promise, it can be used with [`async` functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function). However, this requires using a pre-processor like Babel and the [Syntax Dynamic Import Babel Plugin](https://babeljs.io/docs/plugins/syntax-dynamic-import/#installation). Here's how it would simplify the code:
 
 __src/index.js__
 
