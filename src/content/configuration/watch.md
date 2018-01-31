@@ -70,3 +70,45 @@ poll: 1000 // Check for changes every second
 
 T> If watching does not work for you, try out this option. Watching does not work with NFS and machines in VirtualBox.
 
+
+## Troubleshooting
+
+If you are experiencing any issues, please see the following notes. There are a variety of reasons why webpack might miss a file change.
+
+### Changes Seen But Not Processed
+
+Verify that webpack is not being notified of changes by running webpack with the --progress flag. If progress shows on save but no files are outputted, it is likely a configuration issue, not a file watching issue.
+
+```bash
+webpack --watch --progress
+```
+
+### Not Enough Watchers
+
+Verify that you have enough available watchers in your system. If this value is too low, the file watcher in Webpack won't recognize the changes:
+
+```bash
+cat /proc/sys/fs/inotify/max_user_watches
+```
+
+Arch users, add `fs.inotify.max_user_watches=524288` to `/etc/sysctl.d/99-sysctl.conf` and then execute `sysctl --system`. Ubuntu users (and possibly others), execute: `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`.
+
+### MacOS fsevents Bug
+
+On MacOS, folders can get corrupted in certain scenarios. See [this article](http://feedback.livereload.com/knowledgebase/articles/86239-os-x-fsevents-bug-may-prevent-monitoring-of-certai).
+
+### Windows Paths
+
+Because webpack expects absolute paths for many config options such as `__dirname + "/app/folder"` the Windows `\` path separator can break some functionality.
+
+Use the correct separators. I.e. `path.resolve(__dirname, "app/folder")` or `path.join(__dirname, "app", "folder")`.
+
+### Vim
+
+On some machines Vim is preconfigured with the [backupcopy option](http://vimdoc.sourceforge.net/htmldoc/options.html#'backupcopy') set to `auto`. This could potentially cause problems with the system's file watching mechanism. Switching this option to `yes` will make sure a copy of the file is made and the original one overwritten on save. 
+
+`:set backupcopy=yes`
+
+### Saving in WebStorm
+
+When using the JetBrains WebStorm IDE, you may find that saving changed files does not trigger the watcher as you might expect. Try disabling the `safe write` option in the settings, which determines whether files are saved to a temporary location first before the originals are overwritten: uncheck `File > Settings... > System Settings > Use "safe write" (save changes to a temporary file first)`.
