@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/455bf091dd686c0e42c0.css" rel="stylesheet">
+      <link href="/a7a91fafbfcdf5cfda4e.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -39,7 +39,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><code>Default: {}</code></p>
 <h4 class="header"><a class="anchor" href="#pluginopts" id="pluginopts"></a><span class="text">pluginOpts</span><a class="icon-link" href="#pluginopts"></a></h4>
 <ul>
-<li><code>test</code>: JS file extension regex. Default: <code>/\.js($|\?)/i</code></li>
+<li><code>test</code>: Test to match files against. Default: <code>/\.js($|\?)/i</code></li>
+<li><code>include</code>: Files to <code>include</code>. Default: <code>undefined</code></li>
+<li><code>exclude</code>: Files to <code>exclude</code>. Default: <code>undefined</code></li>
 <li><code>comments</code>: Preserve Comments. Default: <code>/^\**!|@preserve|@license|@cc_on/</code>, falsy value to remove all comments. Accepts function, object with property test (regex), and values.</li>
 <li><code>sourceMap</code>: Default: uses <a href="https://webpack.js.org/configuration/devtool/">webpackConfig.devtool</a>. Set this to override that.</li>
 <li><code>parserOpts</code>: Configure babel with special parser options.</li>
