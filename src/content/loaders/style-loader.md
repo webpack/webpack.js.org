@@ -133,7 +133,7 @@ Styles are not added on `import/require()`, but instead on call to `use`/`ref`. 
 |**`attrs`**|`{Object}`|`{}`|Add custom attrs to `<style></style>`|
 |**`transform`** |`{Function}`|`false`|Transform/Conditionally load CSS by passing a transform/condition function|
 |**`insertAt`**|`{String\|Object}`|`bottom`|Inserts `<style></style>` at the given position|
-|**`insertInto`**|`{String}`|`<head>`|Inserts `<style></style>` into the given position|
+|**`insertInto`**|`{String\|Function}`|`<head>`|Inserts `<style></style>` into the given position|
 |**`singleton`**|`{Boolean}`|`undefined`|Reuses a single `<style></style>` element, instead of adding/removing individual elements for each required module.|
 |**`sourceMap`**|`{Boolean}`|`false`|Enable/Disable Sourcemaps|
 |**`convertToAbsoluteUrls`**|`{Boolean}`|`false`|Converts relative URLs to absolute urls, when source maps are enabled|
@@ -312,14 +312,27 @@ A new `<style>` element can be inserted before a specific element by passing an 
 
 ### `insertInto`
 By default, the style-loader inserts the `<style>` elements into the `<head>` tag of the page. If you want the tags to be inserted somewhere else you can specify a CSS selector for that element here. If you target an [IFrame](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement) make sure you have sufficient access rights, the styles will be injected into the content document head.
-You can also insert the styles into a [ShadowRoot](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot), e.g
+
+You can also pass function to override default behavior and insert styles in your container, e.g
 
 **webpack.config.js**
 ```js
 {
   loader: 'style-loader',
   options: {
-    insertInto: '#host::shadow>#root'
+    insertInto: () => document.querySelector("#root"),
+  }
+}
+```
+
+Using function you can insert the styles into a [ShadowRoot](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot), e.g
+
+**webpack.config.js**
+```js
+{
+  loader: 'style-loader',
+  options: {
+    insertInto: () => document.querySelector("#root").shadowRoot,
   }
 }
 ```
