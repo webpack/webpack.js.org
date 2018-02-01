@@ -22,5 +22,10 @@
   {
     "title": "博客",
     "url": "//medium.com/webpack"
+  },
+  {
+    "title": "印记中文",
+    "url": "//docschina.org",
+    "className": "color-blue"
   }
 ]
