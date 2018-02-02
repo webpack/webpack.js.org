@@ -188,7 +188,7 @@ In the example: `"/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/re
 1. If the loader was configured with an [`options`](/configuration/module/#useentry) object, this will point to that object.
 2. If the loader has no `options`, but was invoked with a query string, this will be a string starting with `?`.
 
-W> This property is deprecated as `options` is replacing `query`. Use the [`getOptions` method](https://github.com/webpack/loader-utils#getoptions) from `loader-utils` to extract the given loader options.
+T> Use the [`getOptions` method](https://github.com/webpack/loader-utils#getoptions) from `loader-utils` to extract given loader options.
 
 
 ### `this.callback`
@@ -425,7 +425,7 @@ Passed from the last loader. If you would execute the input argument as module, 
 
 ### `this.options`
 
-The options passed to the Compiler.
+W> The `options` property has been deprecated in webpack 3 and removed in webpack 4.
 
 
 ### `this.debug`
