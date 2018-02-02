@@ -71,6 +71,13 @@ poll: 1000 // Check for changes every second
 T> If watching does not work for you, try out this option. Watching does not work with NFS and machines in VirtualBox.
 
 
+## `info-verbosity`
+
+`string`: `none` `info` `verbose`
+
+Controls verbosity of the lifecycle messaging e.g. `Started watching files...`. Setting `info-verbosity` to `verbose` will also message to console at the beginning and the end of incremental build. `info-verbosity` is set to `info` by default.
+
+
 ## Troubleshooting
 
 If you are experiencing any issues, please see the following notes. There are a variety of reasons why webpack might miss a file change.
