@@ -235,7 +235,7 @@ __package.json__
   }
 ```
 
-Now we can run `npm start` from the command line and we will see our browser automatically loading up our page. If you now change any of the source files and save them, the web server will automatically reload after the code has been compiled. Give it a try!
+Now we can run `npm run start` from the command line and we will see our browser automatically loading up our page. If you now change any of the source files and save them, the web server will automatically reload after the code has been compiled. Give it a try!
 
 The `webpack-dev-server` comes with many configurable options. Head over to the [documentation](/configuration/dev-server) to learn more.
 
