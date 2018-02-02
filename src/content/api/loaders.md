@@ -176,6 +176,11 @@ require("./loader1?xyz!loader2!./resource?rrr");
 In the example: `/abc` because `resource.js` is in this directory
 
 
+### `this.rootContext`
+
+Starting with webpack 4, the formerly `this.options.context` is provided as `this.rootContext`.
+
+
 ### `this.request`
 
 The resolved request string.
