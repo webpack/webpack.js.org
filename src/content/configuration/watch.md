@@ -77,6 +77,9 @@ T> If watching does not work for you, try out this option. Watching does not wor
 
 Controls verbosity of the lifecycle messaging e.g. `Started watching files...`. Setting `info-verbosity` to `verbose` will also message to console at the beginning and the end of incremental build. `info-verbosity` is set to `info` by default.
 
+```bash
+webpack --watch --info-verbosity verbose
+```
 
 ## Troubleshooting
 
