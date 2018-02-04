@@ -43,13 +43,13 @@
         <loc>https://webpack.js.org/organization/index.html</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/plugins/index.html</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/pluginsapi/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/starter-kits/index.html</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/plugins/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/support/index.html</loc>
@@ -190,10 +190,10 @@
         <loc>https://webpack.js.org/configuration/watch/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/contribute/debugging/index.html</loc>
+        <loc>https://webpack.js.org/contribute/plugin-patterns/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/contribute/plugin-patterns/index.html</loc>
+        <loc>https://webpack.js.org/contribute/debugging/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/contribute/release-process/index.html</loc>
@@ -238,6 +238,9 @@
         <loc>https://webpack.js.org/guides/caching/index.html</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/guides/code-splitting/index.html</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/guides/code-splitting-async/index.html</loc>
     </url>
     <url>
@@ -248,9 +251,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/guides/code-splitting-libraries/index.html</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/guides/code-splitting/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/code-splitting-require/index.html</loc>
@@ -436,12 +436,6 @@
         <loc>https://webpack.js.org/loaders/yaml-frontmatter-loader/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/pluginsapi/compiler/index.html</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/pluginsapi/template/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/plugins/aggressive-splitting-plugin/index.html</loc>
     </url>
     <url>
@@ -542,6 +536,12 @@
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/zopfli-webpack-plugin/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/pluginsapi/compiler/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/pluginsapi/template/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/compilation/index.html</loc>
