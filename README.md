@@ -18,7 +18,7 @@
 ![webpack.js.org](http://p0w5uqw6b.bkt.clouddn.com/image/png/webpack%E7%BF%BB%E8%AF%91%E6%B5%81%E7%A8%8B%E5%9B%BE.png)
 
 - 印记中文翻译QQ群（群号：492361223）
-- 印记中文翻译微信群（群主：@wuwangbufu002。人数超过100人，必须邀请进入）
+- 印记中文翻译微信群（群主：@275091674。人数超过100人，必须邀请进入）
 - 印记中文翻译微信公众号（公众号：印记中文翻译）
 
 

@@ -6,7 +6,7 @@ contributors:
   - michael-ciniawsky
 ---
 
-插件是导出一个函数的 node 模块。该函数在 loader 转换资源的时候调用。给定的函数通过 `this` 上下文访问 [loader API](/api/loaders/)。
+loader 是导出为一个函数的 node 模块。该函数在 loader 转换资源的时候调用。给定的函数将调用 [loader API](/api/loaders/)，并通过 `this` 上下文访问。
 
 
 ## 设置
@@ -47,11 +47,11 @@ resolveLoader: {
 
 ## 简单用法
 
-当一个 loader 在资源中使用，这个 loader 只能传入一个参数 - 包含资源文件内容的字符串
+当一个 loader 在资源中使用，这个 loader 只能传入一个参数 - 这个参数是一个包含包含资源文件内容的字符串
 
 同步 loader 可以简单的返回一个代表模块转化后的值。在更复杂的情况下，loader 也可以通过使用 `this.callback(err, values...)` 函数，返回任意数量的值。错误要么传递给这个 `this.callback` 函数，要么扔进同步 loader 中。
 
-loader 会返回一个或者两个值。第一个值类型是 JavaScript 代码的字符串或者 buffer。第二个参数值是 SourceMap，它是个 JavaScript 对象。
+loader 会返回一个或者两个值。第一个值的类型是 JavaScript 代码的字符串或者 buffer。第二个参数值是 SourceMap，它是个 JavaScript 对象。
 
 
 ## 复杂用法
@@ -77,7 +77,7 @@ __webpack.config.js__
 ```
 
 
-## 用法引导
+## 用法准则(Guidelines)
 
 编写 loader 时应该遵循以下准则。它们按重要程度排序，有些仅适用于某些场景，请阅读下面详细的章节以获得更多信息。
 
@@ -98,9 +98,9 @@ loaders 应该只做单一任务。这不仅使每个 loader 易维护，也可�
 
 ### 链式(Chaining)
 
-利用 loader 可以链式调用的优势。写五个简单的 loader 实现五项任务，而不是一个 loader 实现五项任务。功能隔离不仅是 loader 更简单，也让 loader 可以使用自己本身不具备的功能。
+利用 loader 可以链式调用的优势。写五个简单的 loader 实现五项任务，而不是一个 loader 实现五项任务。功能隔离不仅使 loader 更简单，也让 loader 可以使用自己本身不具备的功能。
 
-以通过 loader 选项或者查询参数得到的数据渲染模板为例。可以把源代码编译为模板，执行并输出包含 HTML 代码的字符串写到一个 loader 中。但是根据用法引导，已经存在这样一个 `apply-loader`，可以将它和其他开源 loader 串联在一起调用。
+以通过 loader 选项或者查询参数得到的数据渲染模板为例。可以把源代码编译为模板，执行并输出包含 HTML 代码的字符串写到一个 loader 中。但是根据用法准则，已经存在这样一个 `apply-loader`，可以将它和其他开源 loader 串联在一起调用。
 
 - `jade-loader`：导出一个函数，把模板转换为模块。
 - `apply-loader`：根据 loader 选项执行函数，返回原生 HTML。
@@ -118,7 +118,7 @@ T> loader 可以被链式调用意味着不一定要输出 JavaScript。只要�
 
 ### loader 工具库(Loader Utilities)
 
-充分利用 [`loader-utils`](https://github.com/webpack/loader-utils) 包。它提供了许多有用的工具，但最常用的一种方法是获取传递给 loader 的选项。[`schema-utils`](https://github.com/webpack-contrib/schema-utils) 包配合 `loader-utils`，用于保证 loader 选项，进行与 JSON Schema 结构一致的校验。这里有一个简单使用两者的例子：
+充分利用 [`loader-utils`](https://github.com/webpack/loader-utils) 包。它提供了许多有用的工具，但最常用的一种工具是获取传递给 loader 的选项。[`schema-utils`](https://github.com/webpack-contrib/schema-utils) 包配合 `loader-utils`，用于保证 loader 选项，进行与 JSON Schema 结构一致的校验。这里有一个简单使用两者的例子：
 
 __loader.js__
 
@@ -206,7 +206,7 @@ T> 如果语言只支持相对 url（例如 `url(file)` 总是指向 `./file`）
 
 ## 测试
 
-当你遵循上面的用法引导编写了一个 loader，并且可以在本地运行。下一步该做什么呢？让我们用一个简单的单元测试，来保证 loader 能够按照我们预期的方式正确运行。我们将使用 [Jest](https://facebook.github.io/jest/) 框架。然后还需要安装 `babel-jest` 和允许我们使用 `import` / `export` 和 `async` / `await` 的一些预设环境(presets)。让我们开始安装，并且将这些依赖保存为 `devDependencies`：
+当你遵循上面的用法准则编写了一个 loader，并且可以在本地运行。下一步该做什么呢？让我们用一个简单的单元测试，来保证 loader 能够按照我们预期的方式正确运行。我们将使用 [Jest](https://facebook.github.io/jest/) 框架。然后还需要安装 `babel-jest` 和允许我们使用 `import` / `export` 和 `async` / `await` 的一些预设环境(presets)。让我们开始安装，并且将这些依赖保存为 `devDependencies`：
 
 ``` bash
 npm install --save-dev jest babel-jest babel-preset-env
