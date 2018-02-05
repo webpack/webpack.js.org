@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/84c29ceaf5ec2eece0b3.css" rel="stylesheet">
+      <link href="/b0af3a7dee4faa503f4a.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -29,6 +29,10 @@
 <span class="token comment">//  exports[&quot;parse&quot;] = helpers.parse;</span>
 
 <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;exports-loader?file!./file.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// adds below code to the file&apos;s source:</span>
+<span class="token comment">//  module.exports = file;</span>
+
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;exports-loader?[name]!./file.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// adds below code to the file&apos;s source:</span>
 <span class="token comment">//  module.exports = file;</span>
 </code></pre>
