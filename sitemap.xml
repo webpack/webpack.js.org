@@ -22,13 +22,13 @@
         <loc>https://webpack.js.org/contribute/index.html</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/development/index.html</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/get-started/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/glossary/index.html</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/development/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/index.html</loc>
@@ -64,13 +64,13 @@
         <loc>https://webpack.js.org/api/cli/index.html</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/api/compilation/index.html</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/api/compiler/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/hot-module-replacement/index.html</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/api/compilation/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/loaders/index.html</loc>
@@ -259,10 +259,10 @@
         <loc>https://webpack.js.org/guides/dependency-management/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/development-vagrant/index.html</loc>
+        <loc>https://webpack.js.org/guides/development/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/development/index.html</loc>
+        <loc>https://webpack.js.org/guides/development-vagrant/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/environment-variables/index.html</loc>
@@ -313,13 +313,13 @@
         <loc>https://webpack.js.org/guides/why-webpack/index.html</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/loaders/babel-loader/index.html</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/loaders/bundle-loader/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/cache-loader/index.html</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/loaders/babel-loader/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/coffee-loader/index.html</loc>
