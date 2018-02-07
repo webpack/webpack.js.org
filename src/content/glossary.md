@@ -81,6 +81,8 @@ This index lists common terms used throughout the webpack ecosystem.
 
 ## R
 
+- [**Request**](/guides/dependency-management/): Refers to the expression in the require/import statement, e.g. *require("./template/" + name + ".ejs")*, the request is *"./template/" + name + ".ejs"*.
+
 ## S
 
 ## T
