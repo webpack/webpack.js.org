@@ -37,10 +37,10 @@
         <loc>https://webpack.js.org/license/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/index.html</loc>
+        <loc>https://webpack.js.org/organization/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/organization/index.html</loc>
+        <loc>https://webpack.js.org/loaders/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/pluginsapi/index.html</loc>
@@ -283,10 +283,10 @@
         <loc>https://webpack.js.org/guides/lazy-loading/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/output-management/index.html</loc>
+        <loc>https://webpack.js.org/guides/migrating/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/migrating/index.html</loc>
+        <loc>https://webpack.js.org/guides/output-management/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/production/index.html</loc>
@@ -296,6 +296,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/guides/progressive-web-application/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/guides/public-path/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/shimming/index.html</loc>
@@ -314,9 +317,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/bundle-loader/index.html</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/guides/public-path/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/cache-loader/index.html</loc>
@@ -526,10 +526,10 @@
         <loc>https://webpack.js.org/plugins/npm-install-webpack-plugin/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/prefetch-plugin/index.html</loc>
+        <loc>https://webpack.js.org/plugins/provide-plugin/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/provide-plugin/index.html</loc>
+        <loc>https://webpack.js.org/plugins/prefetch-plugin/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/source-map-dev-tool-plugin/index.html</loc>
