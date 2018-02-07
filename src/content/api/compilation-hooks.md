@@ -62,7 +62,7 @@ Parameters: `module`
 
 `SyncHook`
 
-...
+All modules have been built.
 
 Parameters: `modules`
 
@@ -71,7 +71,7 @@ Parameters: `modules`
 
 `SyncHook`
 
-...
+A module has been rebuilt.
 
 Parameters: `module`
 
@@ -87,7 +87,7 @@ Fired when the compilation stops accepting new modules.
 
 `SyncHook`
 
-...
+Fired when a compilation begins accepting new modules.
 
 
 ### `optimizeDependenciesBasic`
@@ -103,7 +103,7 @@ Parameters: `modules`
 
 `SyncBailHook`
 
-...
+Fired at the beginning of dependency optimization.
 
 Parameters: `modules`
 

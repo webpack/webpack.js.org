@@ -214,7 +214,7 @@ Parameters: `compilation`
 
 `SyncHook`
 
-Completion of compile
+Compilation has completed.
 
 Parameters: `stats`
 
@@ -223,7 +223,7 @@ Parameters: `stats`
 
 `SyncHook`
 
-Failure of compile
+Compilation has failed.
 
 Parameters: `error`
 
@@ -232,7 +232,7 @@ Parameters: `error`
 
 `SyncHook`
 
-After invalidating a watch compile
+Watch compilation has been invalidated.
 
 Parameters: `fileName`, `changeTime`
 
@@ -241,4 +241,4 @@ Parameters: `fileName`, `changeTime`
 
 `SyncHook`
 
-After stopping a watch compile
+Watch mode has stopped.
