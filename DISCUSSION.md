@@ -68,6 +68,9 @@ each to the `/components/***` directory where they're used. Depending on build
 process, we could also create `/src/content/images` for any images used within
 the actual content of the site.
 
+> __@jeremenichelli__ noted that it can be useful to have a single location for
+> `assets` so they're a little easier to find.
+
 __/styles__
 
 On the `rebuild` branch I created a simple `Markdown` component that isolates
@@ -89,8 +92,12 @@ folder and move that utility to the one place it's used (`NotificationBar`).
 I __was__ able to get the `StaticSiteGeneratorPlugin` working and it __did__
 significantly improve build speed. That said, it still has it's quirks and
 there's a few things we'd still need to resolve if we went this direction
-(marked by `TODO`s). The biggest of these is getting the dynamic `import()` to
-work with the plugin. Essentially, I was planning on:
+(marked by `TODO`s). The biggest of these is
+
+- Getting dynamic `import()` statements to work with the plugin.
+- Getting the `CommonsChunkPlugin` to work.
+
+Essentially, I was planning on:
 
 - Generating a bunch of HTML pages for initial load and SEO.
 - Generating `.js` chunks containing code for lazy loading in SPA mode.
@@ -99,7 +106,12 @@ This is similar to Gatsby and other PWA generators in the sense that the site
 would be built fully (meaning an actual html file for every page), but then
 turn into an SPA as soon as you loaded a single page.
 
-...
+> __@jeremenichelli__ noted that whatever we end up with, it should be simple
+> and easy to understand for contributors. I think this makes a lot of sense,
+> and if we can't keep the `rebuild` branch fairly simple, then `gatsby` is
+> probably a better way to go as it would do many of the same things for us
+> without as much overhead. We'd lose some control over the nitty-gritty bits
+> but we'd be passing over a lot of work over to `gatsby`.
 
 
 ## Versioning & Releases
