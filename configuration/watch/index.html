@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/71e99651101a01bed45e.css" rel="stylesheet">
+      <link href="/d77c2ab703a586f1a74e.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -61,7 +61,7 @@
 </code></pre>
 <p>Arch users, add <code>fs.inotify.max_user_watches=524288</code> to <code>/etc/sysctl.d/99-sysctl.conf</code> and then execute <code>sysctl --system</code>. Ubuntu users (and possibly others), execute: <code>echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf &amp;&amp; sudo sysctl -p</code>.</p>
 <h3 class="header"><a class="anchor" href="#macos-fsevents-bug" id="macos-fsevents-bug"></a><span class="text">MacOS fsevents Bug</span><a class="icon-link" href="#macos-fsevents-bug"></a></h3>
-<p>On MacOS, folders can get corrupted in certain scenarios. See <a href="http://feedback.livereload.com/knowledgebase/articles/86239-os-x-fsevents-bug-may-prevent-monitoring-of-certai">this article</a>.</p>
+<p>On MacOS, folders can get corrupted in certain scenarios. See <a href="https://github.com/livereload/livereload-site/blob/master/livereload.com/_articles/troubleshooting/os-x-fsevents-bug-may-prevent-monitoring-of-certain-folders.md">this article</a>.</p>
 <h3 class="header"><a class="anchor" href="#windows-paths" id="windows-paths"></a><span class="text">Windows Paths</span><a class="icon-link" href="#windows-paths"></a></h3>
 <p>Because webpack expects absolute paths for many config options such as <code>__dirname + &quot;/app/folder&quot;</code> the Windows <code>\</code> path separator can break some functionality.</p>
 <p>Use the correct separators. I.e. <code>path.resolve(__dirname, &quot;app/folder&quot;)</code> or <code>path.join(__dirname, &quot;app&quot;, &quot;folder&quot;)</code>.</p>
