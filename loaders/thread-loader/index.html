@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/d77c2ab703a586f1a74e.css" rel="stylesheet">
+      <link href="/e75cdc84db562a3a4106.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -42,7 +42,7 @@
         include<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;src&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
         use<span class="token punctuation">:</span> <span class="token punctuation">[</span>
           <span class="token string">&quot;thread-loader&quot;</span><span class="token punctuation">,</span>
-          <span class="token string">&quot;expensive-loader&quot;</span>
+          <span class="token comment">// your expensive loader (e.g babel-loader)</span>
         <span class="token punctuation">]</span>
       <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
@@ -80,7 +80,7 @@
       name<span class="token punctuation">:</span> <span class="token string">&quot;my-pool&quot;</span>
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token string">&quot;expensive-loader&quot;</span>
+  <span class="token comment">// your expensive loader (e.g babel-loader)</span>
 <span class="token punctuation">]</span>
 </code></pre>
 <p><strong>prewarming</strong></p>
