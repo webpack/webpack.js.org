@@ -92,3 +92,16 @@ Will produce the following URL:
 ``` js
 https://example.com/project/sourcemaps/bundle-[hash].js.map`
 ```
+
+## Dependencies
+
+If you are also using `webpack.optimize.UglifyJsPlugin` then source maps will only be generated if you set the `sourceMap: true` property.
+
+``` js
+plugins: [
+    new webpack.optimize.UglifyJsPlugin({ comments: false, sourceMap: true }),
+    new webpack.SourceMapDevToolPlugin({
+        filename: '[file].map'
+    })
+]
+```
