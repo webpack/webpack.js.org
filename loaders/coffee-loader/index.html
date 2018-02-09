@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/e75cdc84db562a3a4106.css" rel="stylesheet">
+      <link href="/ec15b14461d066867134.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -74,27 +74,6 @@
         Name
     </div>
     <div class="table-td-content">
-        <strong><code>sourceMap</code></strong>
-    </div>
-  </div><div class="table-td">
-    <div class="table-td-title">
-        Default
-    </div>
-    <div class="table-td-content">
-        <code>false</code>
-    </div>
-  </div><div class="table-td">
-    <div class="table-td-title">
-        Description
-    </div>
-    <div class="table-td-content">
-        Enable/Disable Sourcemaps
-    </div>
-  </div></div><div class="table-tr"><div class="table-td">
-    <div class="table-td-title">
-        Name
-    </div>
-    <div class="table-td-content">
         <strong><code>transpile</code></strong>
     </div>
   </div><div class="table-td">
@@ -133,23 +112,7 @@
 <span class="token punctuation">}</span>
 </code></pre>
 <h3 class="header"><a class="anchor" href="#sourcemaps" id="sourcemaps"></a><span class="text"><code>Sourcemaps</code></span><a class="icon-link" href="#sourcemaps"></a></h3>
-<p><strong>webpack.config.js</strong></p>
-<pre><code class="lang-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
-      <span class="token punctuation">{</span>
-        test<span class="token punctuation">:</span> <span class="token regex">/\.coffee$/</span><span class="token punctuation">,</span>
-        use<span class="token punctuation">:</span> <span class="token punctuation">[</span>
-          <span class="token punctuation">{</span>
-            loader<span class="token punctuation">:</span> <span class="token string">&apos;coffee-loader&apos;</span><span class="token punctuation">,</span>
-            options<span class="token punctuation">:</span> <span class="token punctuation">{</span> sourceMap<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span>
-          <span class="token punctuation">}</span>
-        <span class="token punctuation">]</span>
-      <span class="token punctuation">}</span>
-    <span class="token punctuation">]</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<p>Source maps are always produced.</p>
 <h3 class="header"><a class="anchor" href="#transpile" id="transpile"></a><span class="text"><a href="http://coffeescript.org/#transpilation"><code>Transpile</code></a></span><a class="icon-link" href="#transpile"></a></h3>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="lang-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
