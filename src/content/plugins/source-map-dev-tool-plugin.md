@@ -3,6 +3,7 @@ title: SourceMapDevToolPlugin
 contributors:
   - johnnyreilly
   - simon04
+  - neilkennedy
 related:
   - title: Building Source Maps
     url: https://survivejs.com/webpack/building/source-maps/#-sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin-
@@ -95,7 +96,7 @@ https://example.com/project/sourcemaps/bundle-[hash].js.map`
 
 ## Dependencies
 
-If you are also using `webpack.optimize.UglifyJsPlugin` then source maps will only be generated if you set the `sourceMap: true` property.
+If you are also using `UglifyJsPlugin` then source maps will only be generated if you set the `sourceMap: true` property.
 
 ``` js
 plugins: [
