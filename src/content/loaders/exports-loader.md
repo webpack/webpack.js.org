@@ -23,6 +23,10 @@ require("exports-loader?file,parse=helpers.parse!./file.js");
 require("exports-loader?file!./file.js");
 // adds below code to the file's source:
 //  module.exports = file;
+
+require("exports-loader?[name]!./file.js");
+// adds below code to the file's source:
+//  module.exports = file;
 ```
 
 ## Maintainers

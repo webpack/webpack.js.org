@@ -36,7 +36,9 @@ module.exports = {
 
 #### pluginOpts
 
-+ `test`: JS file extension regex. Default: `/\.js($|\?)/i`
++ `test`: Test to match files against. Default: `/\.js($|\?)/i`
++ `include`: Files to `include`. Default: `undefined`
++ `exclude`: Files to `exclude`. Default: `undefined`
 + `comments`: Preserve Comments. Default: `/^\**!|@preserve|@license|@cc_on/`, falsy value to remove all comments. Accepts function, object with property test (regex), and values.
 + `sourceMap`: Default: uses [webpackConfig.devtool](https://webpack.js.org/configuration/devtool/). Set this to override that.
 + `parserOpts`: Configure babel with special parser options.
