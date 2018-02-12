@@ -95,7 +95,7 @@ Arch users, add `fs.inotify.max_user_watches=524288` to `/etc/sysctl.d/99-sysctl
 
 ### MacOS fsevents Bug
 
-On MacOS, folders can get corrupted in certain scenarios. See [this article](http://feedback.livereload.com/knowledgebase/articles/86239-os-x-fsevents-bug-may-prevent-monitoring-of-certai).
+On MacOS, folders can get corrupted in certain scenarios. See [this article](https://github.com/livereload/livereload-site/blob/master/livereload.com/_articles/troubleshooting/os-x-fsevents-bug-may-prevent-monitoring-of-certain-folders.md).
 
 ### Windows Paths
 
