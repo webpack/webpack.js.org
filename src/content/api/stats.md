@@ -24,6 +24,7 @@ The top-level structure of the output JSON file is fairly straightforward but th
   "hash": "11593e3b3ac85436984a", // Compilation specific hash
   "time": 2469, // Compilation time in milliseconds
   "filteredModules": 0, // A count of excluded modules when [`exclude`](/configuration/stats/#stats) is passed to the [`toJson`](/api/node/#stats-tojson-options-) method
+  "outputPath": "/", // path to webpack output directory
   "assetsByChunkName": {
     // Chunk name to emitted asset(s) mapping
     "main": "web.js?h=11593e3b3ac85436984a",
