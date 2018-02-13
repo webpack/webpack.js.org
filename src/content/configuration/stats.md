@@ -7,7 +7,6 @@ contributors:
   - jungomi
   - ldrick
   - jasonblanchard
-  - franjohn21
 ---
 
 The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
@@ -104,8 +103,6 @@ stats: {
   providedExports: false,
   // Add public path information
   publicPath: true,
-   // Add output path information
-  outputPath: true,
   // Add information about the reasons why modules are included
   reasons: true,
   // Add the source code of modules
