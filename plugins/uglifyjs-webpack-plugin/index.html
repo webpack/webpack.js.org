@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/bb6f556d3920108dd064.css" rel="stylesheet">
+      <link href="/fbaf6035d42309f016f3.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -389,34 +389,6 @@ Default number of concurrent runs: <code>os.cpus().length - 1</code>.</p>
         Name
     </div>
     <div class="table-td-content">
-        <strong><code>ie8</code></strong>
-    </div>
-  </div><div class="table-td">
-    <div class="table-td-title">
-        Type
-    </div>
-    <div class="table-td-content">
-        <code>{Boolean}</code>
-    </div>
-  </div><div class="table-td">
-    <div class="table-td-title">
-        Default
-    </div>
-    <div class="table-td-content">
-        <code>false</code>
-    </div>
-  </div><div class="table-td">
-    <div class="table-td-title">
-        Description
-    </div>
-    <div class="table-td-content">
-        Enable IE8 Support
-    </div>
-  </div></div><div class="table-tr"><div class="table-td">
-    <div class="table-td-title">
-        Name
-    </div>
-    <div class="table-td-content">
         <strong><code>ecma</code></strong>
     </div>
   </div><div class="table-td">
@@ -445,6 +417,34 @@ Default number of concurrent runs: <code>os.cpus().length - 1</code>.</p>
         Name
     </div>
     <div class="table-td-content">
+        <strong><code>warnings</code></strong>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Type
+    </div>
+    <div class="table-td-content">
+        <code>{Boolean}</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Default
+    </div>
+    <div class="table-td-content">
+        <code>false</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Description
+    </div>
+    <div class="table-td-content">
+        Display Warnings
+    </div>
+  </div></div><div class="table-tr"><div class="table-td">
+    <div class="table-td-title">
+        Name
+    </div>
+    <div class="table-td-content">
         <strong><a href="https://github.com/mishoo/UglifyJS2/tree/harmony#parse-options"><code>parse</code></a></strong>
     </div>
   </div><div class="table-td">
@@ -467,6 +467,34 @@ Default number of concurrent runs: <code>os.cpus().length - 1</code>.</p>
     </div>
     <div class="table-td-content">
         Additional Parse Options
+    </div>
+  </div></div><div class="table-tr"><div class="table-td">
+    <div class="table-td-title">
+        Name
+    </div>
+    <div class="table-td-content">
+        <strong><a href="https://github.com/mishoo/UglifyJS2/tree/harmony#compress-options"><code>compress</code></a></strong>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Type
+    </div>
+    <div class="table-td-content">
+        <code>{Boolean|Object}</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Default
+    </div>
+    <div class="table-td-content">
+        <code>true</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Description
+    </div>
+    <div class="table-td-content">
+        Additional Compress Options
     </div>
   </div></div><div class="table-tr"><div class="table-td">
     <div class="table-td-title">
@@ -529,35 +557,7 @@ Default number of concurrent runs: <code>os.cpus().length - 1</code>.</p>
         Name
     </div>
     <div class="table-td-content">
-        <strong><a href="https://github.com/mishoo/UglifyJS2/tree/harmony#compress-options"><code>compress</code></a></strong>
-    </div>
-  </div><div class="table-td">
-    <div class="table-td-title">
-        Type
-    </div>
-    <div class="table-td-content">
-        <code>{Boolean|Object}</code>
-    </div>
-  </div><div class="table-td">
-    <div class="table-td-title">
-        Default
-    </div>
-    <div class="table-td-content">
-        <code>true</code>
-    </div>
-  </div><div class="table-td">
-    <div class="table-td-title">
-        Description
-    </div>
-    <div class="table-td-content">
-        Additional Compress Options
-    </div>
-  </div></div><div class="table-tr"><div class="table-td">
-    <div class="table-td-title">
-        Name
-    </div>
-    <div class="table-td-content">
-        <strong><code>warnings</code></strong>
+        <strong><code>toplevel</code></strong>
     </div>
   </div><div class="table-td">
     <div class="table-td-title">
@@ -578,7 +578,147 @@ Default number of concurrent runs: <code>os.cpus().length - 1</code>.</p>
         Description
     </div>
     <div class="table-td-content">
-        Display Warnings
+        Enable top level variable and function name mangling and to drop unused variables and functions
+    </div>
+  </div></div><div class="table-tr"><div class="table-td">
+    <div class="table-td-title">
+        Name
+    </div>
+    <div class="table-td-content">
+        <strong><code>nameCache</code></strong>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Type
+    </div>
+    <div class="table-td-content">
+        <code>{Object}</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Default
+    </div>
+    <div class="table-td-content">
+        <code>null</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Description
+    </div>
+    <div class="table-td-content">
+        Enable cache of mangled variable and property names across multiple invocations
+    </div>
+  </div></div><div class="table-tr"><div class="table-td">
+    <div class="table-td-title">
+        Name
+    </div>
+    <div class="table-td-content">
+        <strong><code>ie8</code></strong>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Type
+    </div>
+    <div class="table-td-content">
+        <code>{Boolean}</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Default
+    </div>
+    <div class="table-td-content">
+        <code>false</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Description
+    </div>
+    <div class="table-td-content">
+        Enable IE8 Support
+    </div>
+  </div></div><div class="table-tr"><div class="table-td">
+    <div class="table-td-title">
+        Name
+    </div>
+    <div class="table-td-content">
+        <strong><code>keep_classnames</code></strong>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Type
+    </div>
+    <div class="table-td-content">
+        <code>{Boolean}</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Default
+    </div>
+    <div class="table-td-content">
+        <code>undefined</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Description
+    </div>
+    <div class="table-td-content">
+        Enable prevent discarding or mangling of class names
+    </div>
+  </div></div><div class="table-tr"><div class="table-td">
+    <div class="table-td-title">
+        Name
+    </div>
+    <div class="table-td-content">
+        <strong><code>keep_fnames</code></strong>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Type
+    </div>
+    <div class="table-td-content">
+        <code>{Boolean}</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Default
+    </div>
+    <div class="table-td-content">
+        <code>false</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Description
+    </div>
+    <div class="table-td-content">
+        Enable prevent discarding or mangling of function names. Useful for code relying on <code>Function.prototype.name</code>. If the top level minify option <code>keep_classnames</code> is <code>undefined</code> it will be overriden with the value of the top level minify option <code>keep_fnames</code>
+    </div>
+  </div></div><div class="table-tr"><div class="table-td">
+    <div class="table-td-title">
+        Name
+    </div>
+    <div class="table-td-content">
+        <strong><code>safari10</code></strong>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Type
+    </div>
+    <div class="table-td-content">
+        <code>{Boolean}</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Default
+    </div>
+    <div class="table-td-content">
+        <code>false</code>
+    </div>
+  </div><div class="table-td">
+    <div class="table-td-title">
+        Description
+    </div>
+    <div class="table-td-content">
+        Enable work around Safari 10/11 bugs in loop scoping and <code>await</code>
     </div>
   </div></div>
           </div>
@@ -587,9 +727,10 @@ Default number of concurrent runs: <code>os.cpus().length - 1</code>.</p>
 <pre><code class="lang-js"><span class="token punctuation">[</span>
   <span class="token keyword">new</span> <span class="token class-name">UglifyJsPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
     uglifyOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-      ie8<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
       ecma<span class="token punctuation">:</span> <span class="token number">8</span><span class="token punctuation">,</span>
+      warnings<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
       parse<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>options<span class="token punctuation">}</span><span class="token punctuation">,</span>
+      compress<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>options<span class="token punctuation">}</span><span class="token punctuation">,</span>
       mangle<span class="token punctuation">:</span> <span class="token punctuation">{</span>
         <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>options<span class="token punctuation">,</span>
         properties<span class="token punctuation">:</span> <span class="token punctuation">{</span>
@@ -601,8 +742,12 @@ Default number of concurrent runs: <code>os.cpus().length - 1</code>.</p>
         beautify<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
         <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>options
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      compress<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>options<span class="token punctuation">}</span><span class="token punctuation">,</span>
-      warnings<span class="token punctuation">:</span> <span class="token boolean">false</span>
+      toplevel<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      nameCache<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+      ie8<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      keep_classnames<span class="token punctuation">:</span> undefined<span class="token punctuation">,</span>
+      keep_fnames<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      safari10<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token punctuation">]</span>
