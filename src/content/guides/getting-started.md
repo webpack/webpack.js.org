@@ -147,7 +147,7 @@ With that said, let's run `npx webpack` with our script as the [entry point](/co
 npx webpack src/index.js dist/bundle.js
 
 Hash: 857f878815ce63ad5b4f
-Version: webpack 3.9.1
+Version: webpack 3.11.0
 Time: 332ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  [emitted]  [big]  main
@@ -207,7 +207,7 @@ Now, let's run the build again but instead using our new configuration:
 npx webpack --config webpack.config.js
 
 Hash: 857f878815ce63ad5b4f
-Version: webpack 3.9.1
+Version: webpack 3.11.0
 Time: 298ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  [emitted]  [big]  main
@@ -248,7 +248,7 @@ Now run the following command and see if your script alias works:
 npm run build
 
 Hash: 857f878815ce63ad5b4f
-Version: webpack 3.9.1
+Version: webpack 3.11.0
 Time: 294ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  [emitted]  [big]  main
