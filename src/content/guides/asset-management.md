@@ -164,7 +164,7 @@ __webpack.config.js__
         {
           test: /\.css$/,
           use: [
-            'style-loaer',
+            'style-loader',
             'css-loader'
           ]
         },
@@ -395,7 +395,7 @@ __webpack.config.js__
         {
           test: /\.css$/,
           use: [
-            'style-loaer',
+            'style-loader',
             'css-loader'
           ]
         },
