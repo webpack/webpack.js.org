@@ -74,7 +74,7 @@ Running our build script, `npm run build`, with this configuration should produc
 
 ``` bash
 Hash: f7a289a94c5e4cd1e566
-Version: webpack 3.5.1
+Version: webpack 3.11.0
 Time: 835ms
                        Asset       Size  Chunks                    Chunk Names
 main.7e2c49a622975ebd9b7e.js     544 kB       0  [emitted]  [big]  main
@@ -94,7 +94,7 @@ As you can see the bundle's name now reflects its content (via the hash). If we 
 
 ``` bash
 Hash: f7a289a94c5e4cd1e566
-Version: webpack 3.5.1
+Version: webpack 3.11.0
 Time: 835ms
                        Asset       Size  Chunks                    Chunk Names
 main.205199ab45963f6a62ec.js     544 kB       0  [emitted]  [big]  main
@@ -149,7 +149,7 @@ Let's run another build to see the extracted `manifest` bundle:
 
 ``` bash
 Hash: 80552632979856ddab34
-Version: webpack 3.3.0
+Version: webpack 3.11.0
 Time: 1512ms
                            Asset       Size  Chunks                    Chunk Names
     main.5ec8e954e32d66dee1aa.js     542 kB       0  [emitted]  [big]  main
@@ -204,7 +204,7 @@ Let's run another build to see our new `vendor` bundle:
 
 ``` bash
 Hash: 69eb92ebf8935413280d
-Version: webpack 3.3.0
+Version: webpack 3.11.0
 Time: 1502ms
                            Asset       Size  Chunks                    Chunk Names
   vendor.8196d409d2f988123318.js     541 kB       0  [emitted]  [big]  vendor
@@ -267,7 +267,7 @@ Running another build, we would expect only our `main` bundle's hash to change, 
 
 ``` bash
 Hash: d38a06644fdbb898d795
-Version: webpack 3.3.0
+Version: webpack 3.11.0
 Time: 1445ms
                            Asset       Size  Chunks                    Chunk Names
   vendor.a7561fb0e9a071baadb9.js     541 kB       0  [emitted]  [big]  vendor
@@ -329,7 +329,7 @@ Now, despite any new local dependencies, our `vendor` hash should stay consisten
 
 ``` bash
 Hash: 1f49b42afb9a5acfbaff
-Version: webpack 3.3.0
+Version: webpack 3.11.0
 Time: 1372ms
                            Asset       Size  Chunks                    Chunk Names
   vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]  [big]  vendor
@@ -371,7 +371,7 @@ And finally run our build again:
 
 ``` bash
 Hash: 37e1358f135c0b992f72
-Version: webpack 3.3.0
+Version: webpack 3.11.0
 Time: 1557ms
                            Asset       Size  Chunks                    Chunk Names
   vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]  [big]  vendor
