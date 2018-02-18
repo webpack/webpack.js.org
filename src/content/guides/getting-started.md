@@ -257,6 +257,7 @@ bundle.js  544 kB       0  [emitted]  [big]  main
    [3] (webpack)/buildin/module.js 517 bytes {0} [built]
     + 1 hidden module
 ```
+Add `--display-error-details` for detailed error messages, .i.e. `npm run build --display-error-details`.
 
 T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --colors`.
 
