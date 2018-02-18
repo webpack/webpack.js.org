@@ -45,7 +45,7 @@ Available on:
 Hit CTRL-C to stop the server
 ```
 
-If you open your browser to `http://localhost:8080` (i.e. `http://127.0.0.1`) you should see your webpack application being served up from the `dist` directory. If you stop the server and refresh, the webpack application is no longer available.  
+If you open your browser to `http://localhost:8080` (i.e. `http://127.0.0.1`) you should see your webpack application being served up from the `dist` directory. If you stop the server and refresh, the webpack application is no longer available.
 
 This is what we aim to change. Once we reach the end of this module we should be able to stop the server, hit refresh and still see our application.
 
@@ -79,7 +79,7 @@ __webpack.config.js__
 -   })
 +   }),
 +   new WorkboxPlugin({
-+     // these options encourage the ServiceWorkers to get in there fast 
++     // these options encourage the ServiceWorkers to get in there fast
 +     // and not allow any straggling "old" SWs to hang around
 +     clientsClaim: true,
 +     skipWaiting: true
@@ -97,7 +97,7 @@ With that in place, let's see what happens when we do an `npm run build`:
 ``` bash
 clean-webpack-plugin: /mnt/c/Source/webpack-follow-along/dist has been removed.
 Hash: 6588e31715d9be04be25
-Version: webpack 3.10.0
+Version: webpack 3.11.0
 Time: 782ms
                                                 Asset       Size  Chunks                    Chunk Names
                                         app.bundle.js     545 kB    0, 1  [emitted]  [big]  app
