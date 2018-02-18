@@ -91,7 +91,7 @@ If we run a build, we should still see the same output:
 
 ``` bash
 Hash: f450fa59fa951c68c416
-Version: webpack 2.2.0
+Version: webpack 3.11.0
 Time: 343ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  [emitted]  [big]  main
