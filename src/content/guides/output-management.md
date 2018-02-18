@@ -107,7 +107,7 @@ Let's run `npm run build` and see what this generates:
 
 ``` bash
 Hash: aa305b0f3373c63c9051
-Version: webpack 3.0.0
+Version: webpack 3.11.0
 Time: 536ms
           Asset     Size  Chunks                    Chunk Names
   app.bundle.js   545 kB    0, 1  [emitted]  [big]  app
@@ -159,7 +159,7 @@ Before we do a build, you should know that the `HtmlWebpackPlugin` by default wi
 
 ``` bash
 Hash: 81f82697c19b5f49aebd
-Version: webpack 2.6.1
+Version: webpack 3.11.0
 Time: 854ms
            Asset       Size  Chunks                    Chunk Names
  print.bundle.js     544 kB       0  [emitted]  [big]  print

@@ -120,7 +120,7 @@ Now run your build command:
 npm run build
 
 Hash: 9a3abfc96300ef87880f
-Version: webpack 2.6.1
+Version: webpack 3.11.0
 Time: 834ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  560 kB       0  [emitted]  [big]  main
@@ -240,7 +240,7 @@ Let's create a new build and open up the index.html file again:
 npm run build
 
 Hash: 854865050ea3c1c7f237
-Version: webpack 2.6.1
+Version: webpack 3.11.0
 Time: 895ms
                                Asset     Size  Chunks                    Chunk Names
 5c999da72346a995e7e2718865d019c8.png  11.3 kB          [emitted]
@@ -284,8 +284,7 @@ __webpack.config.js__
           use: [
             'style-loader',
             'css-loader'
-          ]
-        },
+          ]        },
         {
           test: /\.(png|svg|jpg|gif)$/,
           use: [
@@ -350,7 +349,7 @@ Now run a new build and let's see if webpack handled our fonts:
 npm run build
 
 Hash: b4aef94169088c79ed1c
-Version: webpack 2.6.1
+Version: webpack 3.11.0
 Time: 775ms
                                 Asset     Size  Chunks                    Chunk Names
  5c999da72346a995e7e2718865d019c8.png  11.3 kB          [emitted]

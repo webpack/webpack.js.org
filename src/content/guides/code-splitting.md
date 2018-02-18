@@ -90,7 +90,7 @@ This will yield the following build result:
 
 ``` bash
 Hash: 309402710a14167f42a8
-Version: webpack 2.6.1
+Version: webpack 3.11.0
 Time: 570ms
             Asset    Size  Chunks                    Chunk Names
   index.bundle.js  544 kB       0  [emitted]  [big]  index
@@ -146,7 +146,7 @@ With the [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) in place, we shou
 
 ``` bash
 Hash: 70a59f8d46ff12575481
-Version: webpack 2.6.1
+Version: webpack 3.11.0
 Time: 510ms
             Asset       Size  Chunks                    Chunk Names
   index.bundle.js  665 bytes       0  [emitted]         index
@@ -254,7 +254,7 @@ Note the use of `webpackChunkName` in the comment. This will cause our separate 
 
 ``` bash
 Hash: a27e5bf1dd73c675d5c9
-Version: webpack 2.6.1
+Version: webpack 3.11.0
 Time: 544ms
            Asset     Size  Chunks                    Chunk Names
 lodash.bundle.js   541 kB       0  [emitted]  [big]  lodash

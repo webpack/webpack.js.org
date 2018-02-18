@@ -84,7 +84,7 @@ Now let's run webpack and check out our new lazy-loading functionality:
 
 ``` bash
 Hash: e0f95cc0bda81c2a1340
-Version: webpack 3.0.0
+Version: webpack 3.11.0
 Time: 1378ms
           Asset       Size  Chunks                    Chunk Names
 print.bundle.js  417 bytes       0  [emitted]         print
