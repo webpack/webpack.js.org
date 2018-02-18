@@ -67,7 +67,7 @@ Run an `npm run build`, it should compile to something like this:
 
 ``` bash
 Hash: 7bf68ca15f1f2690e2d1
-Version: webpack 3.1.0
+Version: webpack 3.11.0
 Time: 1224ms
           Asset       Size  Chunks                    Chunk Names
   app.bundle.js    1.44 MB    0, 1  [emitted]  [big]  app
@@ -361,7 +361,7 @@ Now in your terminal run `npm run server`, it should give you an output similar 
 Example app listening on port 3000!
 webpack built 27b137af6d9d8668c373 in 1198ms
 Hash: 27b137af6d9d8668c373
-Version: webpack 3.0.0
+Version: webpack 3.11.0
 Time: 1198ms
           Asset       Size  Chunks                    Chunk Names
   app.bundle.js    1.44 MB    0, 1  [emitted]  [big]  app
