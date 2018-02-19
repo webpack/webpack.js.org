@@ -26,6 +26,8 @@ new webpack.debug.ProfilingPlugin({
 
 In order to view the profile file:
 
-- Run webpack with `ProfilingPlugin`
-- Go to Chrome, open the `Profile Tab`
-- Drag and drop generated file (`events.json` by default) into the profiler. It will then display timeline stats and calls per plugin!
+- Run webpack with `ProfilingPlugin`.
+- Go to Chrome, open the `Profile Tab`.
+- Drag and drop generated file (`events.json` by default) into the profiler.
+
+It will then display timeline stats and calls per plugin!
