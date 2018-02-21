@@ -107,12 +107,11 @@ export default class Support extends React.Component {
                title={ `$${formatMoney(supporter.totalDonations / 100)} by ${supporter.name || supporter.slug}` }
                target="_blank"
                href={ supporter.website || `https://opencollective.com/${supporter.slug}` }>
-              { supporter.avatar ? <img
+              {<img
                 className={ `support__${rank}-avatar` }
-                src={ supporter.avatar }
+                src={ supporter.avatar ? supporter.avatar : webpackImgSmall }
                 alt={ supporter.name || supporter.slug ? `${supporter.name || supporter.slug}'s avatar` : 'avatar' } 
-                onError={this.handleErrorForImg} /> :
-                <span className={ `support__${rank}-avatar` }>{supporter.name || supporter.slug}</span> }
+                onError={this.handleErrorForImg} />}
               { rank === 'backer' ? <figure className="support__outline" /> : null }
             </a>
           ))
