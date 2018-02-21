@@ -243,7 +243,7 @@ T> 现在，服务器正在运行，你可能需要尝试[模块热替换(Hot Mo
 
 ### 使用 webpack-dev-middleware
 
-`webpack-dev-middleware` 是一个中间件容器(wrapper)，它将通过 webpack 处理后的文件发布到一个服务器(server)。在内部 `webpack-dev-server` 它使用，然而，它可以作为一个单独的包来提供，可以进行更多的自定义设置来实现更多需求。接下来是一个 webpack-dev-middleware 配合 express server 的示例。
+`webpack-dev-middleware` 是一个容器(wrapper)，它可以把 webpack 处理后的文件传递给一个服务器(server)。 `webpack-dev-server` 在内部使用了它，同时，它也可以作为一个单独的包来使用，以便进行更多自定义设置来实现更多的需求。接下来是一个 webpack-dev-middleware 配合 express server 的示例。
 
 首先，安装 `express` 和 `webpack-dev-middleware`：
 
