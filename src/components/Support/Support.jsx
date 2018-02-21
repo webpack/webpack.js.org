@@ -2,6 +2,7 @@ import React from 'react';
 import Backers from './support-backers.json';
 import Additional from './support-additional.js';
 import './Support.scss';
+import webpackImgSmall from '../../assets/icon-square-small-slack.png';
 
 const SUPPORTERS = [ ...Backers ];
 
@@ -51,6 +52,12 @@ function formatMoney(number) {
 }
 
 export default class Support extends React.Component {
+  
+  handleErrorForImg(event) {
+    const imgNode = event.target;
+    imgNode.src = webpackImgSmall;
+  }
+  
   render() {
     let { rank } = this.props;
 
@@ -103,7 +110,8 @@ export default class Support extends React.Component {
               { supporter.avatar ? <img
                 className={ `support__${rank}-avatar` }
                 src={ supporter.avatar }
-                alt={ supporter.name || supporter.slug ? `${supporter.name || supporter.slug}'s avatar` : 'avatar' } /> :
+                alt={ supporter.name || supporter.slug ? `${supporter.name || supporter.slug}'s avatar` : 'avatar' } 
+                onError={this.handleErrorForImg} /> :
                 <span className={ `support__${rank}-avatar` }>{supporter.name || supporter.slug}</span> }
               { rank === 'backer' ? <figure className="support__outline" /> : null }
             </a>
