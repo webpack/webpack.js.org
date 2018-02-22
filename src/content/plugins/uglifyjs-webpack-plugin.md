@@ -151,22 +151,28 @@ Number of concurrent runs.
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|**`ie8`**|`{Boolean}`|`false`|Enable IE8 Support|
 |**`ecma`**|`{Number}`|`undefined`|Supported ECMAScript Version (`5`, `6`, `7` or `8`). Affects `parse`, `compress` && `output` options|
+|**`warnings`**|`{Boolean}`|`false`|Display Warnings|
 |**[`parse`](https://github.com/mishoo/UglifyJS2/tree/harmony#parse-options)**|`{Object}`|`{}`|Additional Parse Options|
+|**[`compress`](https://github.com/mishoo/UglifyJS2/tree/harmony#compress-options)**|`{Boolean\|Object}`|`true`|Additional Compress Options|
 |**[`mangle`](https://github.com/mishoo/UglifyJS2/tree/harmony#mangle-options)**|`{Boolean\|Object}`|`true`|Enable Name Mangling (See [Mangle Properties](https://github.com/mishoo/UglifyJS2/tree/harmony#mangle-properties-options) for advanced setups, use with ⚠️)|
 |**[`output`](https://github.com/mishoo/UglifyJS2/tree/harmony#output-options)**|`{Object}`|`{}`|Additional Output Options (The defaults are optimized for best compression)|
-|**[`compress`](https://github.com/mishoo/UglifyJS2/tree/harmony#compress-options)**|`{Boolean\|Object}`|`true`|Additional Compress Options|
-|**`warnings`**|`{Boolean}`|`false`|Display Warnings|
+|**`toplevel`**|`{Boolean}`|`false`|Enable top level variable and function name mangling and to drop unused variables and functions|
+|**`nameCache`**|`{Object}`|`null`|Enable cache of mangled variable and property names across multiple invocations|
+|**`ie8`**|`{Boolean}`|`false`|Enable IE8 Support|
+|**`keep_classnames`**|`{Boolean}`|`undefined`|Enable prevent discarding or mangling of class names|
+|**`keep_fnames`**|`{Boolean}`|`false`| Enable prevent discarding or mangling of function names. Useful for code relying on `Function.prototype.name`. If the top level minify option `keep_classnames` is `undefined` it will be overriden with the value of the top level minify option `keep_fnames`|
+|**`safari10`**|`{Boolean}`|`false`|Enable work around Safari 10/11 bugs in loop scoping and `await`|
 
 **webpack.config.js**
 ```js
 [
   new UglifyJsPlugin({
     uglifyOptions: {
-      ie8: false,
       ecma: 8,
+      warnings: false,
       parse: {...options},
+      compress: {...options},
       mangle: {
         ...options,
         properties: {
@@ -178,8 +184,12 @@ Number of concurrent runs.
         beautify: false,
         ...options
       },
-      compress: {...options},
-      warnings: false
+      toplevel: false,
+      nameCache: null,
+      ie8: false,
+      keep_classnames: undefined,
+      keep_fnames: false,
+      safari10: false,
     }
   })
 ]

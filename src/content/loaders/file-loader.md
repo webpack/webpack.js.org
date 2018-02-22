@@ -50,9 +50,10 @@ Emits `file.png` as file in the output directory and returns the public URL
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
 |**`name`**|`{String\|Function}`|`[hash].[ext]`|Configure a custom filename template for your file|
+|**`regExp`**|`{RegExp}`|`'undefined'`|Let you extract some parts of the file path to reuse them in the `name` property|
 |**`context`**|`{String}`|`this.options.context`|Configure a custom file context, defaults to `webpack.config.js` [context](https://webpack.js.org/configuration/entry-context/#context)|
-|**`publicPath`**|`{String\|Function}`|[`__webpack_public_path__ `](https://webpack.js.org/api/module-variables/#__webpack_public_path__-webpack-specific-)|Configure a custom `public` path for your files|
-|**`outputPath`**|`{String\|Function}`|`'undefined'`|Configure a custom `output` path for your files|
+|**`publicPath`**|`{String\|Function}`|[`__webpack_public_path__ `](https://webpack.js.org/api/module-variables/#__webpack_public_path__-webpack-specific-)|Configure a custom `public` path for your file|
+|**`outputPath`**|`{String\|Function}`|`'undefined'`|Configure a custom `output` path for your file|
 |**`useRelativePath`**|`{Boolean}`|`false`|Should be `true` if you wish to generate a `context` relative URL for each file|
 |**`emitFile`**|`{Boolean}`|`true`|By default a file is emitted, however this can be disabled if required (e.g. for server side packages)|
 
@@ -90,6 +91,29 @@ You can configure a custom filename template for your file using the query param
 }
 ```
 
+### `regExp`
+
+Defines a `regExp` to match some parts of the file path. These capture groups can be reused in the `name` property using `[N]` placeholder. Note that `[0]` will be replaced by the entire tested string, whereas `[1]` will contain the first capturing parenthesis of your regex and so on...
+
+```js
+import img from './customer01/file.png'
+```
+
+**webpack.config.js**
+```js
+{
+  loader: 'file-loader',
+  options: {
+    regExp: /\/([a-z0-9]+)\/[a-z0-9]+\.png$/,
+    name: '[1]-[name].[ext]'
+  }  
+}
+```
+
+```
+customer01-file.png
+```
+
 #### `placeholders`
 
 |Name|Type|Default|Description|
@@ -98,7 +122,7 @@ You can configure a custom filename template for your file using the query param
 |**`[name]`**|`{String}`|`file.basename`|The basename of the resource|
 |**`[path]`**|`{String}`|`file.dirname`|The path of the resource relative to the `context`|
 |**`[hash]`**|`{String}`|`md5`|The hash of the content, hashes below for more info|
-|**`[N]`**|`{Number}`|``|The `n-th` match obtained from matching the current file name against the query param `regExp`|
+|**`[N]`**|`{String}`|``|The `n-th` match obtained from matching the current file name against the `regExp`|
 
 #### `hashes`
 
