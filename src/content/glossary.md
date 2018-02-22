@@ -81,7 +81,7 @@ contributors:
 
 ## R
 
-- [**Request**](/guides/dependency-management/): Refers to the expression in the require/import statement, e.g. *require("./template/" + name + ".ejs")*, the request is *"./template/" + name + ".ejs"*.
+- [**Request**](/guides/dependency-management/)：指 require/import 语句中的表达式，例如，在 *require("./template/" + name + ".ejs")* 中，request 指的是 *"./template/" + name + ".ejs"*。
 
 ## S
 
