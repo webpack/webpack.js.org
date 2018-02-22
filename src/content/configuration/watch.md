@@ -5,6 +5,7 @@ contributors:
   - sokra
   - skipjack
   - SpaceK33z
+  - EugeneHlushko
 ---
 
 webpack can watch files and recompile whenever they change. This page explains how to enable this and a couple of tweaks you can make if watching does not work properly for you.
