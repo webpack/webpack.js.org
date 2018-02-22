@@ -6,6 +6,7 @@ contributors:
   - rafde
   - fvgs
   - TheDutchCoder
+  - WojciechKo
 ---
 
 T> 本指南继续沿用[管理输出](/guides/output-management)指南中的代码示例。
@@ -214,7 +215,7 @@ __package.json__
     "main": "webpack.config.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "watch": "webpack --progress --watch",
+      "watch": "webpack --watch",
 +     "start": "webpack-dev-server --open",
       "build": "webpack"
     },
@@ -331,7 +332,7 @@ __package.json__
     "main": "webpack.config.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "watch": "webpack --progress --watch",
+      "watch": "webpack --watch",
       "start": "webpack-dev-server --open",
 +     "server": "node server.js",
       "build": "webpack"

@@ -56,7 +56,7 @@ noParse: function(content) {
 
 当使用多个条件时，所有条件都匹配。
 
-W> 小心！resource 是文件的_解析_路径，这意味着符号链接的资源是真正的路径，_而不是_符号链接位置。在使用工具来符号链接包的时候（如 `npm link`）比较好记，像 `/node_modules/` 等常见条件可能会不小心错过符号链接的文件。
+W> 小心！resource 是文件的_解析_路径，这意味着符号链接的资源是真正的路径，_而不是_符号链接位置。在使用工具来符号链接包的时候（如 `npm link`）比较好记，像 `/node_modules/` 等常见条件可能会不小心错过符号链接的文件。注意，可以通过 [`resolve.symlinks`](/configuration/resolve#resolve-symlinks) 关闭符号链接解析（以便将资源解析为符号链接路径）。
 
 
 ### Rule 结果

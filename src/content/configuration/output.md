@@ -64,7 +64,7 @@ auxiliaryComment: {
 
 ## `output.chunkFilename`
 
-`string`
+`string` `function`
 
 此选项决定了非入口(non-entry) chunk 文件的名称。有关可取的值的详细信息，请查看 [`output.filename`](#output-filename) 选项。
 
@@ -93,6 +93,16 @@ chunk 请求到期之前的毫秒数，默认为 120 000。从 webpack 2.6.0 开
 `crossOriginLoading: "anonymous"` - **不带凭据(credential)**启用跨域加载
 
 `crossOriginLoading: "use-credentials"` - **带凭据(credential)**启用跨域加载 **with credentials**
+
+
+## `output.jsonpScriptType`
+
+`string`
+
+允许自定义 `script` 的类型，webpack 会将 `script` 标签注入到 DOM 中以下载异步 chunk。可以使用以下选项：
+
+- `"text/javascript"`（默认）
+- `"module"`：与 ES6 就绪代码一起使用。
 
 
 ## `output.devtoolFallbackModuleFilenameTemplate`
@@ -156,7 +166,7 @@ devtoolModuleFilenameTemplate: info => {
 
 ## `output.filename`
 
-`string`
+`string` `function`
 
 此选项决定了每个输出 bundle 的名称。这些 bundle 将写入到 [`output.path`](#output-path) 选项指定的目录下。
 
@@ -196,7 +206,7 @@ filename: "[chunkhash].bundle.js"
 
 注意此选项被称为文件名，但是你还是可以使用像 `"js/[name]/bundle.js"` 这样的文件夹结构。
 
-注意，此选项不会影响那些「按需加载 chunk」的输出文件。对于这些文件，请使用 [`output.chunkFilename`](#output-chunkfilename) 选项来控制输出。同样也不影响通过 loader 创建的文件，对于这些文件，请查看 loader 选项来输出控制。
+注意，此选项不会影响那些「按需加载 chunk」的输出文件。对于这些文件，请使用 [`output.chunkFilename`](#output-chunkfilename) 选项来控制输出。通过 loader 创建的文件也不受影响。在这种情况下，你必须尝试 loader 特定的可用选项。
 
 可以使用以下替换模板字符串（通过 webpack 内部的[`TemplatedPathPlugin`][`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)）：
 
@@ -209,6 +219,8 @@ filename: "[chunkhash].bundle.js"
 | [query]     | 模块的 query，例如，文件名 `?` 后面的字符串 |
 
 `[hash]` 和 `[chunkhash]` 的长度可以使用 `[hash:16]`（默认为20）来指定。或者，通过指定[`output.hashDigestLength`](#output-hashdigestlength) 在全局配置长度。
+
+如果将这个选项设为一个函数，函数将返回一个包含上面表格中替换信息的对象。
 
 T> 在使用 [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) 时，可以用 `[contenthash]` 来获取提取文件的 hash（既不是 `[hash]` 也不是 `[chunkhash]`）。
 
@@ -235,7 +247,7 @@ T> 在使用 [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) 
 
 ## `output.hotUpdateChunkFilename`
 
-`string`
+`string` `function`
 
 自定义热更新 chunk 的文件名。可选的值的详细信息，请查看 [`output.filename`](#output-filename) 选项。
 
@@ -261,7 +273,7 @@ JSONP 函数用于异步加载(async load)热更新(hot-update) chunk。
 
 ## `output.hotUpdateMainFilename`
 
-`string`
+`string` `function`
 
 自定义热更新的主文件名(main filename)。可选的值的详细信息，请查看 [`output.filename`](#output-filename) 选项
 
@@ -466,7 +478,7 @@ output: {
 
 ``` js
 define("MyLibrary", [], function() {
-  // 此模块返回值，是入口 chunk 返回的值
+  return _entry_return_; // 此模块返回值，是入口 chunk 返回的值
 });
 ```
 
@@ -482,7 +494,7 @@ require(['MyLibrary'], function(MyLibrary) {
 
 ``` js
 define([], function() {
-  // 这个模块返回入口 chunk 返回的
+  return _entry_return_; // 此模块返回值，是入口 chunk 返回的值
 });
 ```
 
@@ -512,8 +524,8 @@ output: {
     exports["MyLibrary"] = factory();
   else
     root["MyLibrary"] = factory();
-})(this, function() {
-  //这个模块会返回你的入口 chunk 所返回的
+})(typeof self !== 'undefined' ? self : this, function() {
+  return _entry_return_; // 此模块返回值，是入口 chunk 返回的值
 });
 ```
 
@@ -537,8 +549,8 @@ output: {
     var a = factory();
     for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
   }
-})(this, function() {
-  //这个模块会返回你的入口 chunk 所返回的
+})(typeof self !== 'undefined' ? self : this, function() {
+  return _entry_return_; // 此模块返回值，是入口 chunk 返回的值
 });
 ```
 
@@ -597,7 +609,7 @@ pathinfo: true
 
 ## `output.publicPath`
 
-`string`
+`string` `function`
 
 对于按需加载(on-demand-load)或加载外部资源(external resources)（如图片、文件等）来说，output.publicPath 是很重要的选项。如果指定了一个错误的值，则在加载这些资源时会收到 404 错误。
 

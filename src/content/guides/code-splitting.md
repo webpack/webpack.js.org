@@ -21,6 +21,8 @@ contributors:
   - rouzbeh84
   - shaodahong
   - sudarsangp
+  - kcolton
+  - efreitasn
 ---
 
 T> 本指南继续沿用[起步](/guides/getting-started)和[管理输出](/guides/output-management)中的代码示例。。请确保你至少已熟悉其中提供的示例。
@@ -263,7 +265,7 @@ lodash.bundle.js   541 kB       0  [emitted]  [big]  lodash
    [3] (webpack)/buildin/module.js 517 bytes {0} [built]
 ```
 
-如果你已经通过类似 babel 的预处理器(pre-processor)启用 [`async` 函数](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)，请注意，你可以像下面那样简化代码，因为 `import()` 语句恰好会返回 promises：
+由于 `import()` 会返回一个 promise，因此它可以和 [`async` 函数](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)一起使用。但是，需要使用像 Babel 这样的预处理器和[Syntax Dynamic Import Babel Plugin](https://babeljs.io/docs/plugins/syntax-dynamic-import/#installation)。下面是如何通过 `async` 函数简化代码：
 
 __src/index.js__
 

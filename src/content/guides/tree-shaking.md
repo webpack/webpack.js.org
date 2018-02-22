@@ -104,7 +104,7 @@ function cube(x) {
 }
 ```
 
-注意，上面的 `unused harmony export square` 注释。如果你看下面的代码，你会注意到 `square` 没有被导出，但是，它仍然被包含在 bundle 中。我们将在下一节中解决这个问题。
+注意，上面的 `unused harmony export square` 注释。如果你看下面的代码，你会注意到 `square` 没有被导入，但是，它仍然被包含在 bundle 中。我们将在下一节中解决这个问题。
 
 
 ## 精简输出
@@ -175,7 +175,7 @@ import { someVar } from './transforms.js';
 
 一般来说，当一个工具不能保证某些特定的代码路径(path)不会导致副作用(side-effects)时，即使你确信它不应该存在生成的 bundle 中，但这个代码仍然会保留。常见的情况有：从第三方模块中调用一个函数，webpack 和/或 压缩工具(minifier)无法检查此模块；从第三方模块导入的函数被重新导出，等等。
 
-本指南中使用的代码假设你使用 UglifyJS 插件来执行 tree-shaking。然而，还有其他工具，如 [webpack-rollup-loader](https://github.com/erikdesjardins/webpack-rollup-loader) 或 [Babel Minify Webpack Plugin](/plugins/babel-minify-webpack-plugin)，根据你的设置它们可能产生不同的结果。
+本指南中使用的代码假设你使用 UglifyJS 插件来执行 tree-shaking。然而，还有其他工具，如 [webpack-rollup-loader](https://github.com/erikdesjardins/webpack-rollup-loader)，根据你的设置它们可能产生不同的结果。
 
 
 ## 结论

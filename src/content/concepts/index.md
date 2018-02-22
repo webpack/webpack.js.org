@@ -8,9 +8,12 @@ contributors:
   - johnstew
   - jimrfenner
   - TheDutchCoder
+  - adambraimbridge
 ---
 
 本质上，*webpack* 是一个现代 JavaScript 应用程序的_静态模块打包器(module bundler)_。当 webpack 处理应用程序时，它会递归地构建一个_依赖关系图(dependency graph)_，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 _bundle_。
+
+T> 可以从[这里](/concepts/modules)了解更多关于 JavaScript 模块和 webpack 模块的信息。
 
 它是[高度可配置的](/configuration)，但是，在开始前你需要先理解四个**核心概念**：
 
@@ -72,14 +75,14 @@ T> `output` 属性还有[更多可配置的特性](/configuration/output)，如�
 
 *loader* 让 webpack 能够去处理那些非 JavaScript 文件（webpack 自身只理解 JavaScript）。loader 可以将所有类型的文件转换为 webpack 能够处理的有效[模块](/concepts/modules)，然后你就可以利用 webpack 的打包能力，对它们进行处理。
 
-本质上，webpack loader 将所有类型的文件，转换为应用程序的依赖图可以直接引用的模块。
+本质上，webpack loader 将所有类型的文件，转换为应用程序的依赖图（和最终的 bundle）可以直接引用的模块。
 
 W> 注意，loader 能够 `import` 导入任何类型的模块（例如 `.css` 文件），这是 webpack 特有的功能，其他打包程序或任务执行器的可能并不支持。我们认为这种语言扩展是有很必要的，因为这可以使开发人员创建出更准确的依赖关系图。
 
-在更高层面，在 webpack 的配置中 **loader** 有两个目标。
+在更高层面，在 webpack 的配置中 __loader__ 有两个目标：
 
-1. 识别出应该被对应的 loader 进行转换的那些文件。(使用 `test` 属性)
-2. 转换这些文件，从而使其能够被添加到依赖图中（并且最终添加到 bundle 中）(`use` 属性)
+1. `test` 属性，用于标识出应该被对应的 loader 进行转换的某个或某些文件。
+2. `use` 属性，表示进行转换时，应该使用哪个 loader。
 
 __webpack.config.js__
 

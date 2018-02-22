@@ -5,6 +5,9 @@ contributors:
   - TheLarkInn
   - simon04
   - rouzbeh84
+related:
+   - title: JavaScript Module Systems Showdown
+     url: https://auth0.com/blog/javascript-module-systems-showdown/
 ---
 
 在[模块化编程](https://en.wikipedia.org/wiki/Modular_programming)中，开发者将程序分解成离散功能块(discrete chunks of functionality)，并称之为_模块_。
