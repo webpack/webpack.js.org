@@ -70,6 +70,49 @@ poll: 1000 // 每秒检查一次变动
 
 T> 如果监听没生效，试试这个选项吧。Watch 在 NFS 和 VirtualBox 机器上不适用。
 
+
+## 故障排除
+
+如果您遇到任何问题，请查看以下注意事项。对于 webpack 为何会忽略文件修改，这里有多种原因。
+
+### 发现修改，但并未做处理
+
+在运行 webpack 时，通过使用 --progress 标志，来验证文件修改后，是否没有通知 webpack。如果进度显示保存，但没有输出文件，则可能是配置问题，而不是文件监视问题。
+
+```bash
+webpack --watch --progress
+```
+
+### 没有足够的文件观察者
+
+确认系统中有足够多的文件观察者。如果这个值太低，webpack 中的文件观察者将无法识别修改：
+
+```bash
+cat /proc/sys/fs/inotify/max_user_watches
+```
+
+Arch 用户，请将 `fs.inotify.max_user_watches=524288` 添加到 `/etc/sysctl.d/99-sysctl.conf` 中，然后执行 `sysctl --system`。 Ubuntu 用户（可能还有其他用户）请执行：`echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`。
+
+### MacOS fsevents Bug
+
+在 MacOS 中，某些情况下文件夹可能会损坏。请参阅[这篇文章](https://github.com/livereload/livereload-site/blob/master/livereload.com/_articles/troubleshooting/os-x-fsevents-bug-may-prevent-monitoring-of-certain-folders.md)。
+
+### Windows Paths
+
+因为 webpack 期望获得多个配置选项的绝对路径（如 `__dirname + "/app/folder"`），所以 Windows 的路径分隔符 `\` 可能会破坏某些功能。
+
+使用正确的分隔符。即 `path.resolve(__dirname, "app/folder")` 或 `path.join(__dirname, "app", "folder")`。
+
+### Vim
+
+在某些机器上，Vim 预先将 [backupcopy 选项](http://vimdoc.sourceforge.net/htmldoc/options.html#'backupcopy') 设置为 `auto`。这可能会导致系统的文件监视机制出现问题。将此选项设置为 `yes` 可以确保创建文件的副本，并在保存时覆盖原始文件。
+
+`:set backupcopy=yes`
+
+### 在 WebStorm 中保存
+
+使用 JetBrains WebStorm IDE 时，你可能会发现保存修改过的文件，并不会按照预期触发观察者。尝试在设置中禁用`安全写入(safe write)`选项，该选项确定在原文件被覆盖之前，文件是否先保存到临时位置：取消选中 `File > Settings... > System Settings > Use "safe write" (save changes to a temporary file first)`。
+
 ***
 
 > 原文：https://webpack.js.org/configuration/watch/

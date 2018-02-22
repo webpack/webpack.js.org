@@ -35,6 +35,7 @@ Name                                                     | Description
 [`NpmInstallWebpackPlugin`](/plugins/npm-install-webpack-plugin) | 在开发时自动安装缺少的依赖
 [`ProvidePlugin`](/plugins/provide-plugin)                       | 不必通过 import/require 使用模块
 [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin)  | 对 source map 进行更细粒度的控制
+[`EvalSourceMapDevToolPlugin`](/plugins/eval-source-map-dev-tool-plugin)  | 对 eval source map 进行更细粒度的控制
 [`UglifyjsWebpackPlugin`](/plugins/uglifyjs-webpack-plugin)      | 可以控制项目中 UglifyJS 的版本
 [`ZopfliWebpackPlugin`](/plugins/zopfli-webpack-plugin)          | 通过 node-zopfli 将资源预先压缩的版本
 

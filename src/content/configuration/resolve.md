@@ -260,6 +260,10 @@ plugins: [
 
 是否将符号链接(symlink)解析到它们的符号链接位置(symlink location)。默认：
 
+启用时，符号链接(symlink)的资源，将解析为其_真实_路径，而不是其符号链接(symlink)位置。注意，当使用符号链接 package 包工具时（如 `npm link`），可能会导致模块解析失败。
+
+`resolve.symlinks` 默认值为：
+
 ```js
 symlinks: true
 ```

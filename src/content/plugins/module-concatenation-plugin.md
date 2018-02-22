@@ -19,6 +19,8 @@ new webpack.optimize.ModuleConcatenationPlugin()
 >
 > 由于实现 ECMAScript 模块语法，作用域提升(scope hoisting)这个特定于此语法的功能才成为可能。`webpack` 可能会根据你正在使用的模块类型和[其他的情况](https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5)，回退到普通打包。
 
+W> 记住，此插件仅适用于由 webpack 直接处理的 [ES6 模块](/api/module-methods/#es6-recommended-)。在使用转译器(transpiler)时，你需要禁用对模块的处理（例如 Babel 中的 [`modules`](https://babeljs.io/docs/plugins/preset-es2015/#optionsmodules) 选项）。
+
 
 ## 绑定失败的优化[Optimization Bailouts]
 

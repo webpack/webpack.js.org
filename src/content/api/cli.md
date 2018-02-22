@@ -109,6 +109,12 @@ webpack -h
 webpack --config example.config.js
 ```
 
+**禁止 webpack 输出**
+
+```bash
+webpack --silent
+```
+
 **以 JSON 格式输出 webpack 的运行结果**
 
 ```bash

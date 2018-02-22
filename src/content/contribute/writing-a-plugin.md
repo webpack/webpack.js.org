@@ -187,7 +187,7 @@ It must accept arguments from the previous plugin that was executed. The value f
 
 `applyPluginsAsync(name: string, args: any..., callback: (err?: Error) -> void)`
 
-The plugin handler functions are called with all args and a callback function with the signature `(err?: Error) -> void`. The handler functions are called in order of registration. `callback`` is called after all the handlers are called.
+The plugin handler functions are called with all args and a callback function with the signature `(err?: Error) -> void`. The handler functions are called in order of registration. `callback` is called after all the handlers are called.
 This is also a commonly used pattern for events like `"emit"`, `"run"`.
 
 - __async waterfall__ The plugins will be applied asynchronously in the waterfall manner.
