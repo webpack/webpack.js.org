@@ -40,9 +40,6 @@
         <loc>https://webpack.js.org/loaders/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/organization/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/plugins/index.html</loc>
     </url>
     <url>
@@ -50,6 +47,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/starter-kits/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/organization/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/support/index.html</loc>
@@ -424,10 +424,10 @@
         <loc>https://webpack.js.org/loaders/transform-loader/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/val-loader/index.html</loc>
+        <loc>https://webpack.js.org/loaders/url-loader/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/url-loader/index.html</loc>
+        <loc>https://webpack.js.org/loaders/val-loader/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/worker-loader/index.html</loc>
