@@ -1,8 +1,8 @@
 import React from 'react';
 import Backers from './support-backers.json';
 import Additional from './support-additional.js';
+import SmallIcon from '../../assets/icon-square-small-slack.png';
 import './Support.scss';
-import webpackImgSmall from '../../assets/icon-square-small-slack.png';
 
 const SUPPORTERS = [ ...Backers ];
 
@@ -52,12 +52,6 @@ function formatMoney(number) {
 }
 
 export default class Support extends React.Component {
-  
-  handleErrorForImg(event) {
-    const imgNode = event.target;
-    imgNode.src = webpackImgSmall;
-  }
-  
   render() {
     let { rank } = this.props;
 
@@ -109,9 +103,9 @@ export default class Support extends React.Component {
                href={ supporter.website || `https://opencollective.com/${supporter.slug}` }>
               {<img
                 className={ `support__${rank}-avatar` }
-                src={ supporter.avatar ? supporter.avatar : webpackImgSmall }
+                src={ supporter.avatar || SmallIcon }
                 alt={ supporter.name || supporter.slug ? `${supporter.name || supporter.slug}'s avatar` : 'avatar' } 
-                onError={this.handleErrorForImg} />}
+                onError={ this._handleImgError } />}
               { rank === 'backer' ? <figure className="support__outline" /> : null }
             </a>
           ))
@@ -124,5 +118,15 @@ export default class Support extends React.Component {
         </div>
       </div>
     );
+  }
+  
+  /**
+   * Handle images that aren't found
+   *
+   * @param {object} e - React synthetic event
+   */
+  _handleImgError(e) {
+    const imgNode = e.target;
+    imgNode.src = SmallIcon;
   }
 }
