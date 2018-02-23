@@ -42,16 +42,12 @@ Content.children = Content.children
   });
 
 class Site extends React.Component {
-  static defaultProps = {
-    lazy: true
-  }
-
   state = {
     mobileSidebarOpen: false
   }
 
   render() {
-    let { location, lazy } = this.props;
+    let { location } = this.props;
     let { mobileSidebarOpen } = this.state;
     let sections = this._sections;
     let section = sections.find(({ url }) => location.pathname.startsWith(url));
@@ -91,40 +87,24 @@ class Site extends React.Component {
                 path={ page.url }
                 render={ props => {
                   let path = page.path.replace('src/content/', '');
+                  let module = this.props.import(path);
 
-                  // TODO: Use `import()` `LazyLoad` component with nprogress
-                  // Blocked by `SSGPlugin` issue with `import()`
-                  if ( lazy ) {
-                    // import(`../../content/${path}`)
-                    //   .then(module => {
-                    //     console.log(module);
-                    //   })
-                    //   .catch(error => {
-                    //     console.log(error);
-                    //   });
-
-                    return (
-                      <React.Fragment>
-                        <Sidebar
-                          className="site__sidebar"
-                          currentPage={ location.pathname }
-                          pages={ this._strip(section ? section.children : Content.children.filter(item => (
-                            item.type !== 'directory' &&
-                            item.url !== '/'
-                          ))) } />
-                        <Page
-                          { ...page }
-                          content={ require(`../../content/${path}`) } />
-                      </React.Fragment>
-                    );
-
-                  } else {
-                    return (
+                  return (
+                    <React.Fragment>
+                      <Sidebar
+                        className="site__sidebar"
+                        currentPage={ location.pathname }
+                        pages={ this._strip(section ? section.children : Content.children.filter(item => (
+                          item.type !== 'directory' &&
+                          item.url !== '/'
+                        ))) } />
                       <Page
                         { ...page }
-                        content={ require(`../../content/${path}`) } />
-                    );
-                  }
+                        content={ module instanceof Promise ? (
+                          'TODO: Use `LazyLoad` component with nprogress'
+                        ) : module } />
+                    </React.Fragment>
+                  );
                 }} />
             ))}
             <Route

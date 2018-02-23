@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ReactDOMServer from 'react-dom/server';
-import { BrowserRouter, StaticRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import Site from './components/Site/Site';
-import Favicon from './favicon.ico';
 
 // TODO: Re-integrate <GoogleAnalytics analyticsId="UA-46921629-2" />
 // Consider `react-g-analytics` package
@@ -12,40 +10,13 @@ import Favicon from './favicon.ico';
 if ( window.document !== undefined ) {
   ReactDOM.render((
     <BrowserRouter>
-      <Route path="/" component={ Site } />
+      <Route
+        path="/"
+        render={ props => (
+          <Site
+            { ...props }
+            import={ path => import(`./content/${path}`) } />
+        )} />
     </BrowserRouter>
   ), document.getElementById('root'));
 }
-
-// Server Side Rendering
-export default locals => {
-  let { assets } = locals.webpackStats.compilation;
-
-  return ReactDOMServer.renderToString(
-    <StaticRouter location={ locals.path } context={{}}>
-      <html>
-        <head>
-          <meta charset="UTF-8" />
-          <meta name="theme-color" content="#2B3A42" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <title>{/* TODO */} | webpack</title>
-          <meta name="description" content={''/* TODO */} />
-          <link rel="icon" type="image/x-icon" href={ Favicon } />
-          { Object.keys(assets).filter(asset => /\.css$/.test(asset)).map(path => (
-            <link key={ path } rel="stylesheet" href={ `/${path}` } />
-          ))}
-        </head>
-        <body>
-          <div id="root">
-            <Route
-              path="/"
-              render={ props => <Site { ...props } lazy={ false } /> } />
-          </div>
-          { Object.values(locals.assets).map(path => (
-            <script key={ path } src={ path } />
-          ))}
-        </body>
-      </html>
-    </StaticRouter>
-  );
-};

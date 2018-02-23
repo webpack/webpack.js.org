@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const FrontMatter = require('front-matter');
+const CleanPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const DirectoryTreePlugin = require('directory-tree-webpack-plugin');
@@ -96,6 +97,7 @@ module.exports = (env = {}) => ({
     ]
   },
   plugins: [
+    new CleanPlugin('dist'),
     new ExtractTextPlugin({
       filename: '[chunkhash].css',
       allChunks: true,
@@ -131,7 +133,6 @@ module.exports = (env = {}) => ({
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
-    filename: '[name].[hash].js',
-    libraryTarget: 'umd'
+    filename: '[name].bundle.js'
   }
 })
