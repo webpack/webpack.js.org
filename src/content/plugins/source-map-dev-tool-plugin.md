@@ -40,6 +40,7 @@ The `fileContext` option is useful when you want to store source maps in an uppe
 
 T> Setting `module` and/or `columns` to `false` will yield less accurate source maps but will also improve compilation performance significantly.
 
+W> Remember that when using the [`UglifyJSPlugin`](/plugins/uglify-js-plugin), you must utilize the `sourceMap` option.
 
 ## Examples
 
@@ -92,17 +93,4 @@ Will produce the following URL:
 
 ``` js
 https://example.com/project/sourcemaps/bundle-[hash].js.map`
-```
-
-## Dependencies
-
-If you are also using `UglifyJsPlugin` then source maps will only be generated if you set the `sourceMap: true` property.
-
-``` js
-plugins: [
-    new webpack.optimize.UglifyJsPlugin({ comments: false, sourceMap: true }),
-    new webpack.SourceMapDevToolPlugin({
-        filename: '[file].map'
-    })
-]
 ```
