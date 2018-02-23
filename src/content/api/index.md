@@ -1,59 +1,59 @@
 ---
-title: Introduction
+title: 引导
 sort: 1
 contributors:
   - tbroadley
 ---
 
-A variety of interfaces are available to customize the compilation process.
-Some features overlap between interfaces, e.g. a configuration option may be
-available via a CLI flag, while others exist only through a single interface.
-The following high-level information should get you started.
+可以使用各种接口来定制化编译过程。
+一些特性会在几个接口之间重叠，例如，其中一些配置选项可能会从 CLI 标记(flag)中获取，
+而另一些配置选项，则只能从单个接口获取。
+以下高级信息可以帮助你起步。
 
 
 ## CLI
 
-The Command Line Interface (CLI) to configure and interact with your build. It
-is especially useful in the case of early prototyping and profiling. For the
-most part, the CLI is simply used to kick off the process using a configuration
-file and a few flags (e.g. `--env`).
+命令行接口(Command Line Interface - CLI)，
+用来对构建(build)进行配置和交互。
+这在早期的原型设计和概要分析时特别有用。
+在大多数情况下，CLI 仅用于使用配置文件和几个标记(flag)（例如 `--env`）启动该进程。
 
-[Learn more about the CLI!](/api/cli)
+[了解更多关于 CLI 的信息！](/api/cli)
 
 
-## Module
+## 模块
 
-When processing modules with webpack, it is important to understand the
-different module syntaxes -- specifically the [methods](/api/module-methods)
-and [variables](/api/module-variables) -- that are supported.
+当使用 webpack 处理模块时，理解不同的模块语法
+（特别是[模块方法](/api/module-methods)和[模块变量](/api/module-variables)）是很重要的。 -
+这些模块语法 webpack 都可以支持。
 
-[Learn more about modules!](/api/module-methods)
+[了解更多关于模块的信息！](/api/module-methods)
 
 
 ## Node
 
-While most users can get away with just using the CLI along with a
-configuration file, more fine-grained control of the compilation can be
-achieved via the Node interface. This includes passing multiple configurations,
-programmatically running or watching, and collecting stats.
+虽然大多数用户只要用到配置文件足矣，
+然而对编译的更细粒度控制，
+则需要通过 Node 接口实现。
+包括传递多个配置文件、可编程方式的编译执行或观察文件，以及收集概要信息。
 
-[Learn more about the Node API!](/api/node)
-
-
-## Loaders
-
-Loaders are transformations that are applied to the source code of a module.
-They are written as functions that accept source code as a parameter and return
-a new version of that code with transformations applied.
-
-[Learn more about loaders!](/api/loaders)
+[了解更多关于 Node API 的信息！](/api/node)
 
 
-## Plugins
+## loader
 
-The plugin interface allows users to tap directly into the compilation process.
-Plugins can register handlers on lifecycle hooks that run at different points
-throughout a compilation. When each hook is executed, the plugin will have full
-access to the current state of the compilation.
+loader 是转译模块源代码的转换规则。
+loader 被编写为，接受源代码作为参数的函数，
+并返回这些转换过的新版本代码。
 
-[Learn more about plugins!](/api/plugins)
+[了解更多关于 loader 的信息！](/api/loaders)
+
+
+## plugin
+
+插件接口可以帮助用户直接触及到编译过程(compilation process)。
+插件可以将处理函数(handler)注册到编译过程中的不同事件点上运行的生命周期钩子函数上。
+当执行每个钩子时，
+插件能够完全访问到编译(compilation)的当前状态。
+
+[了解更多关于插件的信息！](/api/plugins)
