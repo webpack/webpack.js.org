@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/793204dee2beb682da08.css" rel="stylesheet">
+      <link href="/11e570936c34c9484cbd.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -81,7 +81,7 @@
 <h3 class="header"><a class="anchor" href="#simple" id="simple"></a><span class="text">Simple</span><a class="icon-link" href="#simple"></a></h3>
 <p>Loaders should do only a single task. This not only makes the job of maintaining each loader easier, but also allows them to be chained for usage in more scenarios.</p>
 <h3 class="header"><a class="anchor" href="#chaining" id="chaining"></a><span class="text">Chaining</span><a class="icon-link" href="#chaining"></a></h3>
-<p>Take advantage of the fact that loaders can be chained together. Instead of writing a single loader that tackles five tasks, write five simpler loaders that divide this effort. Isolating them not only keeps each individual loader simple, but may allow for them to be used for something you hadn&apos;t though of originally.</p>
+<p>Take advantage of the fact that loaders can be chained together. Instead of writing a single loader that tackles five tasks, write five simpler loaders that divide this effort. Isolating them not only keeps each individual loader simple, but may allow for them to be used for something you hadn&apos;t thought of originally.</p>
 <p>Take the case of rendering a template file with data specified via loader options or query parameters. It could be written as a single loader that compiles the template from source, executes it and returns a module that exports a string containing the HTML code. However, in accordance with guidelines, a simple <code>apply-loader</code> exists that can be chained with other open source loaders:</p>
 <ul>
 <li><code>jade-loader</code>: Convert template to a module that exports a function.</li>
