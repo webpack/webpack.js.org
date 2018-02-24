@@ -2,7 +2,7 @@ import React from 'react';
 import Container from '../Container/Container';
 import testLocalStorage from '../../utilities/test-local-storage';
 
-const version = '2';
+const version = '3';
 const localStorageIsEnabled = testLocalStorage() !== false;
 
 export default class NotificationBar extends React.Component {
