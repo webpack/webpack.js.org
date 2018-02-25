@@ -3,6 +3,7 @@ title: SourceMapDevToolPlugin
 contributors:
   - johnnyreilly
   - simon04
+  - neilkennedy
 related:
   - title: Building Source Maps
     url: https://survivejs.com/webpack/building/source-maps/#-sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin-
@@ -39,6 +40,7 @@ The `fileContext` option is useful when you want to store source maps in an uppe
 
 T> Setting `module` and/or `columns` to `false` will yield less accurate source maps but will also improve compilation performance significantly.
 
+W> Remember that when using the [`UglifyJSPlugin`](/plugins/uglify-js-plugin), you must utilize the `sourceMap` option.
 
 ## Examples
 
