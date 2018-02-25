@@ -21,8 +21,8 @@ function main() {
   }
 
   fetchPackageNames({
-    organization: organization,
-    suffix: suffix
+    organization,
+    suffix
   }, function(err, d) {
     if (err) {
       return console.error(err);

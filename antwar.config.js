@@ -89,6 +89,7 @@ module.exports = {
     vote: () => require('./src/components/Vote/Vote.jsx').default,
     organization: () => require('./src/components/Organization/Organization.jsx').default,
     'starter-kits': () => require('./src/components/StarterKits/StarterKits.jsx').default,
+    compatibility: () => require('./src/components/Compatibility/Compatibility.jsx').default,
 
     /*************************
      Redirects for Old Content
