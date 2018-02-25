@@ -15,7 +15,7 @@ export default class NotificationBar extends React.Component {
           <p>
             WEBPACK 4 IS RELEASED, TRY IT TODAY, SEE THE CHANGELOG AND THESE ARTICLES: <br />
             <a target="_blank" href="https://github.com/webpack/webpack/releases/tag/v4.0.0">* Change Log</a><br />
-            <a target="_blank" href="https://medium.com/webpack/webpack-4-beta-try-it-today-6b1d27d7d7e2">* Install and setup Webpack 4</a><br />
+            <a target="_blank" href="https://medium.com/webpack/webpack-4-released-today-6cdb994702d4">* Install and setup Webpack 4</a><br />
             <a target="_blank" href="https://medium.com/webpack/webpack-4-mode-and-optimization-5423a6bc597a">* New configuration options in Webpack 4</a><br />
           </p>
           <br />
