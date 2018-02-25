@@ -149,7 +149,7 @@ Similar to the above one, but instead of moving common modules into the parent (
 new webpack.optimize.CommonsChunkPlugin({
   name: "app",
   // or
-  names: ["app", "subPageA"]
+  names: ["app", "subPageA"],
   // the name or list of names must match the name or names
   // of the entry points that create the async chunks
 
