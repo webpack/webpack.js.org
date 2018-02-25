@@ -13,7 +13,8 @@ export default class NotificationBar extends React.Component {
       <div className={ `notification-bar ${dismissedMod}` }>
         <Container className="notification-bar__inner">
           <p>
-            WEBPACK 4 IS IN BETA, TRY IT TODAY, SEE THESE ARTICLES: <br />
+            WEBPACK 4 IS RELEASED, TRY IT TODAY, SEE THE CHANGELOG AND THESE ARTICLES: <br />
+            <a target="_blank" href="https://github.com/webpack/webpack/releases/tag/v4.0.0">* Change Log</a><br />
             <a target="_blank" href="https://medium.com/webpack/webpack-4-beta-try-it-today-6b1d27d7d7e2">* Install and setup Webpack 4</a><br />
             <a target="_blank" href="https://medium.com/webpack/webpack-4-mode-and-optimization-5423a6bc597a">* New configuration options in Webpack 4</a><br />
           </p>
