@@ -50,7 +50,11 @@ async function main() {
 
     // TODO: Write to disk the JSON file that gets fetched and then add to script workflow.
     // This should be saved in ./src/Compatibility/packages.json
-    fs.writeFileSync('./src/components/Compatibility/packages.json', JSON.stringify(packageFiles, null, 2), { encoding: "utf8" })
+    fs.writeFile('./src/components/Compatibility/packages.json', JSON.stringify(packageFiles, null, 2), { encoding: "utf8" }, err => {
+      if (err) {
+        console.error('Failed to write compatible packages file: ', err)
+      } else console.log('Fetched 1 file: packages.json')
+    })
   } catch (e) {
     console.error(e);
   }
