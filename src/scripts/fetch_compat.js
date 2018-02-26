@@ -32,6 +32,14 @@ async function getPackageJsonFiles(namesArray) {
   return Promise.all(namesArray.map((name) => packageJson(name,  {allMetadata: true}) ));
 }
 
+function missingPackages() {
+  const packages = JSON.parse(fs.readFileSync("./src/components/Compatibility/packages.json", { encoding: "utf8"}))
+  const missPeer = packages.filter(p => !p.peerDependencies)
+  const missWebpack = packages.filter(p => p.peerDependencies).filter(p => !p.peerDependencies.webpack)
+  console.log(missPeer.map(d => d.name))
+  console.log(missWebpack.map(d => d.name))
+}
+
 async function main() {
   try {
     const [loaderNames, pluginNames] = await Promise.all(
@@ -40,10 +48,9 @@ async function main() {
 
     const packageFiles = await getPackageJsonFiles([...loaderNames, ...pluginNames].map(d => d.name));
 
-    console.log(packageFiles);
-
     // TODO: Write to disk the JSON file that gets fetched and then add to script workflow.
     // This should be saved in ./src/Compatibility/packages.json
+    fs.writeFileSync('./src/components/Compatibility/packages.json', JSON.stringify(packageFiles, null, 2), { encoding: "utf8" })
   } catch (e) {
     console.error(e);
   }

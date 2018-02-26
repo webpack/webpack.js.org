@@ -1,0 +1,1478 @@
+[
+  {
+    "name": "json-loader",
+    "version": "0.5.7",
+    "devDependencies": {
+      "standard-version": "^4.2.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-QLPs8Dj7lnf3e3QYS1zkCo+4ZwqOiF9d/nZnYozTISxXWCfNs9yuky5rJw4/W34s7POaNlbZmQGaB5NiXCbP4w==",
+      "shasum": "dca14a70235ff82f0ac9a3abeb60d337a365185d",
+      "tarball": "https://registry.npmjs.org/json-loader/-/json-loader-0.5.7.tgz"
+    }
+  },
+  {
+    "name": "raw-loader",
+    "version": "0.5.1",
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "shasum": "0c3d0beaed8a01c966d9787bf778281252a979aa",
+      "tarball": "https://registry.npmjs.org/raw-loader/-/raw-loader-0.5.1.tgz"
+    }
+  },
+  {
+    "name": "coffee-loader",
+    "version": "0.9.0",
+    "dependencies": {
+      "loader-utils": "^1.0.2"
+    },
+    "devDependencies": {
+      "standard-version": "^4.2.0"
+    },
+    "peerDependencies": {
+      "coffeescript": ">= 1.8.x"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-VSoQ5kWr6Yfjn4RDpVbba2XMs3XG1ZXtLakPRt8dNfUcNU9h+1pocpdUUEd7NK9rLDwrju4yonhxrL8aMr5tww==",
+      "shasum": "6deabd336062ddc6d773da4dfd16367fc7107bd6",
+      "tarball": "https://registry.npmjs.org/coffee-loader/-/coffee-loader-0.9.0.tgz"
+    }
+  },
+  {
+    "name": "css-loader",
+    "version": "0.28.10",
+    "dependencies": {
+      "babel-code-frame": "^6.26.0",
+      "css-selector-tokenizer": "^0.7.0",
+      "cssnano": "^3.10.0",
+      "icss-utils": "^2.1.0",
+      "loader-utils": "^1.0.2",
+      "lodash.camelcase": "^4.3.0",
+      "object-assign": "^4.1.1",
+      "postcss": "^5.0.6",
+      "postcss-modules-extract-imports": "^1.2.0",
+      "postcss-modules-local-by-default": "^1.2.0",
+      "postcss-modules-scope": "^1.1.0",
+      "postcss-modules-values": "^1.3.0",
+      "postcss-value-parser": "^3.3.0",
+      "source-list-map": "^2.0.0"
+    },
+    "devDependencies": {
+      "codecov": "^1.0.1",
+      "eslint": "3.14.0",
+      "istanbul": "^0.4.5",
+      "mocha": "^3.2.0",
+      "should": "^11.1.2",
+      "standard-version": "^4.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-X1IJteKnW9Llmrd+lJ0f7QZHh9Arf+11S7iRcoT2+riig3BK0QaCaOtubAulMK6Itbo08W6d3l8sW21r+Jhp5Q==",
+      "shasum": "40282e79230f7bcb4e483efa631d670b735ebf42",
+      "tarball": "https://registry.npmjs.org/css-loader/-/css-loader-0.28.10.tgz",
+      "fileCount": 15,
+      "unpackedSize": 44781
+    },
+    "engines": {
+      "node": ">=0.12.0 || >= 4.3.0 < 5.0.0 || >=5.10"
+    }
+  },
+  {
+    "name": "style-loader",
+    "version": "0.20.2",
+    "dependencies": {
+      "loader-utils": "^1.1.0",
+      "schema-utils": "^0.4.3"
+    },
+    "devDependencies": {
+      "css-loader": "^0.28.0",
+      "file-loader": "^1.0.0",
+      "jsdom": "^9.0.0",
+      "memory-fs": "^0.4.0",
+      "mocha": "^4.0.0",
+      "sinon": "^4.0.0",
+      "standard-version": "^4.0.0",
+      "webpack": "^2.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-FrLMGaOLVhS5pvoez3eJyc0ktchT1inEZziBSjBq1hHQBK3GFkF57Qd825DcrUhjaAWQk70MKrIl5bfjadR/Dg==",
+      "shasum": "851b373c187890331776e9cde359eea9c95ecd00",
+      "tarball": "https://registry.npmjs.org/style-loader/-/style-loader-0.20.2.tgz",
+      "fileCount": 11,
+      "unpackedSize": 42041
+    },
+    "engines": {
+      "node": ">= 0.12.0"
+    }
+  },
+  {
+    "name": "script-loader",
+    "version": "0.7.2",
+    "dependencies": {
+      "raw-loader": "~0.5.1"
+    },
+    "devDependencies": {
+      "standard-version": "^4.2.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-UMNLEvgOAQuzK8ji8qIscM3GIrRCWN6MmMXGD4SD5l6cSycgGsCo0tX5xRnfQcoghqct0tjHjcykgI1PyBE2aA==",
+      "shasum": "2016db6f86f25f5cf56da38915d83378bb166ba7",
+      "tarball": "https://registry.npmjs.org/script-loader/-/script-loader-0.7.2.tgz"
+    }
+  },
+  {
+    "name": "less-loader",
+    "version": "4.0.5",
+    "dependencies": {
+      "clone": "^2.1.1",
+      "loader-utils": "^1.1.0",
+      "pify": "^2.3.0"
+    },
+    "devDependencies": {
+      "babel-cli": "^6.24.0",
+      "babel-jest": "^20.0.3",
+      "babel-plugin-transform-object-rest-spread": "^6.23.0",
+      "babel-polyfill": "^6.23.0",
+      "babel-preset-env": "^1.2.2",
+      "cross-env": "^3.2.4",
+      "del-cli": "^0.2.1",
+      "eslint": "^3.18.0",
+      "eslint-config-webpack": "^1.2.1",
+      "eslint-plugin-import": "^2.2.0",
+      "inspect-loader": "^1.0.0",
+      "jest": "^20.0.3",
+      "less": "^2.3.1",
+      "lint-staged": "^3.4.0",
+      "nodemon": "^1.11.0",
+      "nsp": "^2.6.3",
+      "pre-commit": "^1.2.2",
+      "standard-version": "^4.0.0",
+      "webpack": "latest",
+      "webpack-defaults": "^1.0.1"
+    },
+    "peerDependencies": {
+      "less": "^2.3.1",
+      "webpack": "^2.0.0 || ^3.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "shasum": "ae155a7406cac6acd293d785587fcff0f478c4dd",
+      "tarball": "https://registry.npmjs.org/less-loader/-/less-loader-4.0.5.tgz"
+    },
+    "engines": {
+      "node": ">= 4.3 < 5.0.0 || >= 5.10"
+    }
+  },
+  {
+    "name": "bundle-loader",
+    "version": "0.5.6",
+    "dependencies": {
+      "loader-utils": "^1.1.0"
+    },
+    "devDependencies": {
+      "standard-version": "^4.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-SUgX+u/LJzlJiuoIghuubZ66eflehnjmqSfh/ib9DTe08sxRJ5F/MhHSjp7GfSJivSp8NWgez4PVNAUuMg7vSg==",
+      "shasum": "6c9042e62f1c89941458805a3a479d10f34c71fd",
+      "tarball": "https://registry.npmjs.org/bundle-loader/-/bundle-loader-0.5.6.tgz"
+    },
+    "engines": {
+      "node": ">= 4"
+    }
+  },
+  {
+    "name": "val-loader",
+    "version": "1.1.0",
+    "dependencies": {
+      "loader-utils": "^1.0.0"
+    },
+    "devDependencies": {
+      "babel-cli": "^6.0.0",
+      "babel-jest": "^20.0.0",
+      "babel-plugin-transform-object-rest-spread": "^6.0.0",
+      "babel-polyfill": "^6.0.0",
+      "babel-preset-env": "^1.0.0",
+      "cross-env": "^5.0.0",
+      "del-cli": "^1.0.0",
+      "eslint": "^4.0.0",
+      "eslint-config-webpack": "^1.0.0",
+      "eslint-plugin-import": "^2.0.0",
+      "inspect-loader": "^1.0.0",
+      "jest": "^20.0.0",
+      "lint-staged": "^4.0.0",
+      "nsp": "^2.0.0",
+      "pre-commit": "^1.0.0",
+      "standard-version": "^4.0.0",
+      "webpack": "^3.0.0",
+      "webpack-defaults": "^1.0.0"
+    },
+    "peerDependencies": {
+      "webpack": "^2.0.0 || ^3.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-8m62XF42FcfrBBl02rtDY9hQhDcDczrEcr60/aSMxlzJiXAcbAimRPvsDoDa5QcGAusOgOmVTpFtK5EbfZdDwA==",
+      "shasum": "ed91537424d62a4ded98e846ccf07367756bf506",
+      "tarball": "https://registry.npmjs.org/val-loader/-/val-loader-1.1.0.tgz"
+    },
+    "engines": {
+      "node": ">= 4.8 < 5.0.0 || >= 5.10"
+    }
+  },
+  {
+    "name": "file-loader",
+    "version": "1.1.9",
+    "dependencies": {
+      "loader-utils": "^1.0.2",
+      "schema-utils": "^0.4.5"
+    },
+    "devDependencies": {
+      "babel-cli": "^6.0.0",
+      "babel-jest": "^21.0.0",
+      "babel-plugin-transform-object-rest-spread": "^6.0.0",
+      "babel-polyfill": "^6.0.0",
+      "babel-preset-env": "^1.0.0",
+      "cross-env": "^5.0.0",
+      "del": "^3.0.0",
+      "del-cli": "^1.0.0",
+      "eslint": "^4.0.0",
+      "eslint-config-webpack": "^1.0.0",
+      "eslint-plugin-import": "^2.0.0",
+      "jest": "^21.0.0",
+      "lint-staged": "^5.0.0",
+      "memory-fs": "^0.4.0",
+      "nsp": "^2.0.0",
+      "pre-commit": "^1.0.0",
+      "standard-version": "^4.0.0",
+      "webpack": "^3.0.0",
+      "webpack-defaults": "^1.6.0"
+    },
+    "peerDependencies": {
+      "webpack": "^2.0.0 || ^3.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-6ql03hOSoJHBkTB+3De/f7NJse+JXkUwvAf3y4Q5rIcTD0kqJiE3btvLnDcZT+P4t1QYLb9dJ9EI4auzfo3wFA==",
+      "shasum": "cf152aedbcfb3d67038d0845efb7cf11a96e53de",
+      "tarball": "https://registry.npmjs.org/file-loader/-/file-loader-1.1.9.tgz",
+      "fileCount": 7,
+      "unpackedSize": 21376
+    },
+    "engines": {
+      "node": ">= 4.3 < 5.0.0 || >= 5.10"
+    }
+  },
+  {
+    "name": "url-loader",
+    "version": "0.6.2",
+    "dependencies": {
+      "loader-utils": "^1.0.2",
+      "mime": "^1.4.1",
+      "schema-utils": "^0.3.0"
+    },
+    "devDependencies": {
+      "standard-version": "^4.0.0"
+    },
+    "peerDependencies": {
+      "file-loader": "*"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-h3qf9TNn53BpuXTTcpC+UehiRrl0Cv45Yr/xWayApjw6G8Bg2dGke7rIwDQ39piciWCWrC+WiqLjOh3SUp9n0Q==",
+      "shasum": "a007a7109620e9d988d14bce677a1decb9a993f7",
+      "tarball": "https://registry.npmjs.org/url-loader/-/url-loader-0.6.2.tgz"
+    }
+  },
+  {
+    "name": "i18n-loader",
+    "version": "0.3.0",
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "shasum": "2b878521b08817f16320c16f0ada45915aa049a4",
+      "tarball": "https://registry.npmjs.org/i18n-loader/-/i18n-loader-0.3.0.tgz"
+    }
+  },
+  {
+    "name": "json5-loader",
+    "version": "1.0.1",
+    "dependencies": {
+      "json5": "^0.5.0"
+    },
+    "devDependencies": {
+      "mocha": "^3.0.2",
+      "should": "^11.1.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "shasum": "c169f46655dde445cf3906b5eb6eb59615ced1cc",
+      "tarball": "https://registry.npmjs.org/json5-loader/-/json5-loader-1.0.1.tgz"
+    }
+  },
+  {
+    "name": "worker-loader",
+    "version": "1.1.1",
+    "dependencies": {
+      "loader-utils": "^1.0.0",
+      "schema-utils": "^0.4.0"
+    },
+    "devDependencies": {
+      "babel-cli": "^6.0.0",
+      "babel-jest": "^21.0.0",
+      "babel-plugin-transform-object-rest-spread": "^6.0.0",
+      "babel-polyfill": "^6.0.0",
+      "babel-preset-env": "^1.0.0",
+      "cross-env": "^5.0.0",
+      "del": "^3.0.0",
+      "del-cli": "^1.0.0",
+      "eslint": "^4.0.0",
+      "eslint-config-webpack": "^1.0.0",
+      "eslint-plugin-import": "^2.2.0",
+      "jest": "^21.0.0",
+      "lint-staged": "^4.0.0",
+      "nsp": "^2.6.0",
+      "pre-commit": "^1.0.0",
+      "standard-version": "^4.0.0",
+      "webpack": "^3.0.0",
+      "webpack-defaults": "^1.6.0"
+    },
+    "peerDependencies": {
+      "webpack": "^2.0.0 || ^3.0.0 || ^4.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-qJZLVS/jMCBITDzPo/RuweYSIG8VJP5P67mP/71alGyTZRe1LYJFdwLjLalY3T5ifx0bMDRD3OB6P2p1escvlg==",
+      "shasum": "920d74ddac6816fc635392653ed8b4af1929fd92",
+      "tarball": "https://registry.npmjs.org/worker-loader/-/worker-loader-1.1.1.tgz",
+      "fileCount": 10,
+      "unpackedSize": 19658
+    },
+    "engines": {
+      "node": ">= 4.8 < 5.0.0 || >= 5.10"
+    }
+  },
+  {
+    "name": "jshint-loader",
+    "version": "0.8.4",
+    "dependencies": {
+      "loader-utils": "^1.0.2",
+      "rcloader": "=0.1.2",
+      "strip-json-comments": "0.1.x"
+    },
+    "devDependencies": {
+      "jshint": "^2.9.2",
+      "mocha": "^3.0.2",
+      "should": "^10.0.0",
+      "sinon": "^1.17.5",
+      "webpack": "^1.13.1"
+    },
+    "peerDependencies": {
+      "jshint": "^2.5.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "shasum": "b43ee45d137769d5658940a11f8efd9a0edcd47b",
+      "tarball": "https://registry.npmjs.org/jshint-loader/-/jshint-loader-0.8.4.tgz"
+    }
+  },
+  {
+    "name": "imports-loader",
+    "version": "0.8.0",
+    "dependencies": {
+      "loader-utils": "^1.0.2",
+      "source-map": "^0.6.1"
+    },
+    "devDependencies": {
+      "mocha": "^3.1.2",
+      "should": "^11.1.1",
+      "standard-version": "^4.3.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-kXWL7Scp8KQ4552ZcdVTeaQCZSLW+e6nJfp3cwUMB673T7Hr98Xjx5JK+ql7ADlJUvj1JS5O01RLbKoutN5QDQ==",
+      "shasum": "030ea51b8ca05977c40a3abfd9b4088fe0be9a69",
+      "tarball": "https://registry.npmjs.org/imports-loader/-/imports-loader-0.8.0.tgz",
+      "fileCount": 5,
+      "unpackedSize": 8428
+    },
+    "engines": {
+      "node": ">= 4"
+    }
+  },
+  {
+    "name": "exports-loader",
+    "version": "0.7.0",
+    "dependencies": {
+      "loader-utils": "^1.1.0",
+      "source-map": "0.5.0"
+    },
+    "devDependencies": {
+      "standard-version": "^4.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-RKwCrO4A6IiKm0pG3c9V46JxIHcDplwwGJn6+JJ1RcVnh/WSGJa0xkmk5cRVtgOPzCAtTMGj2F7nluh9L0vpSA==",
+      "shasum": "84881c784dea6036b8e1cd1dac3da9b6409e21a5",
+      "tarball": "https://registry.npmjs.org/exports-loader/-/exports-loader-0.7.0.tgz"
+    },
+    "engines": {
+      "node": ">= 4"
+    }
+  },
+  {
+    "name": "mocha-loader",
+    "version": "1.1.3",
+    "dependencies": {
+      "script-loader": "^0.7.2",
+      "css-loader": "^0.28.7",
+      "style-loader": "^0.19.1",
+      "loader-utils": "^1.1.0"
+    },
+    "devDependencies": {
+      "standard-version": "^4.3.0"
+    },
+    "peerDependencies": {
+      "mocha": "^2.0.0|| ^3.0.0 || ^4.0.0 || ^5.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-nw6TqOQUmq3jbfxesBVqNfsB4LtDEhz7GH8y/V/xzI45wP4xSSHuU66kcv38LfEFTR5tvA4zVvRG1evUSmTBQA==",
+      "shasum": "ffb6c797f14cdd85659a813181f25306e7b5e37b",
+      "tarball": "https://registry.npmjs.org/mocha-loader/-/mocha-loader-1.1.3.tgz"
+    }
+  },
+  {
+    "name": "coverjs-loader",
+    "version": "0.5.0",
+    "dependencies": {
+      "loader-utils": "0.2.x",
+      "coverjs": "0.0.14"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "shasum": "618191f2791268c3ae25491dcbbf950af4cb1b34",
+      "tarball": "https://registry.npmjs.org/coverjs-loader/-/coverjs-loader-0.5.0.tgz"
+    }
+  },
+  {
+    "name": "expose-loader",
+    "version": "0.7.4",
+    "dependencies": {},
+    "devDependencies": {
+      "standard-version": "^4.2.0"
+    },
+    "peerDependencies": {
+      "webpack": "^2.0.0 || ^3.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-lweINkewAXcQtNjd7j1gO3cd8O/8lNYijsEwH4YZ+Dv3gT2Kh9/YvJov5Mdp2A75QIhgOvsSyRa/ZG3wYjNZpA==",
+      "shasum": "9bcdd3878b5da9107930b55a03f65afe90b3314a",
+      "tarball": "https://registry.npmjs.org/expose-loader/-/expose-loader-0.7.4.tgz"
+    },
+    "engines": {
+      "node": ">= 4.3 < 5.0.0 || >= 5.10"
+    }
+  },
+  {
+    "name": "node-loader",
+    "version": "0.6.0",
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "shasum": "c797ef51095ed5859902b157f6384f6361e05ae8",
+      "tarball": "https://registry.npmjs.org/node-loader/-/node-loader-0.6.0.tgz"
+    }
+  },
+  {
+    "name": "coffee-redux-loader",
+    "version": "0.7.2",
+    "dependencies": {
+      "coffee-script-redux": ">=2.0.0-beta0 <2.1.0",
+      "loader-utils": "~0.2.2"
+    },
+    "devDependencies": {
+      "webpack": "^1.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "shasum": "e7586eb2d1b1abb81bd0ec38ee9b13dd886169b0",
+      "tarball": "https://registry.npmjs.org/coffee-redux-loader/-/coffee-redux-loader-0.7.2.tgz"
+    }
+  },
+  {
+    "name": "transform-loader",
+    "version": "0.2.4",
+    "dependencies": {
+      "loader-utils": "^1.0.2"
+    },
+    "devDependencies": {
+      "brfs": "~1.0.0",
+      "coffeeify": "~0.6.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "shasum": "e5c87877ba96d51d3f225368587b46e226d1cec9",
+      "tarball": "https://registry.npmjs.org/transform-loader/-/transform-loader-0.2.4.tgz"
+    }
+  },
+  {
+    "name": "html-loader",
+    "version": "0.5.5",
+    "dependencies": {
+      "es6-templates": "^0.2.3",
+      "fastparse": "^1.1.1",
+      "html-minifier": "^3.5.8",
+      "loader-utils": "^1.1.0",
+      "object-assign": "^4.1.1"
+    },
+    "devDependencies": {
+      "beautify-lint": "^1.0.4",
+      "codecov.io": "^0.1.6",
+      "eslint": "^3.1.1",
+      "istanbul": "^0.4.5",
+      "js-beautify": "^1.6.3",
+      "mocha": "^2.5.3",
+      "should": "^10.0.0",
+      "standard-version": "^4.3.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-7hIW7YinOYUpo//kSYcPB6dCKoceKLmOwjEMmhIobHuWGDVl0Nwe4l68mdG/Ru0wcUxQjVMEoZpkalZ/SE7zog==",
+      "shasum": "6356dbeb0c49756d8ebd5ca327f16ff06ab5faea",
+      "tarball": "https://registry.npmjs.org/html-loader/-/html-loader-0.5.5.tgz"
+    }
+  },
+  {
+    "name": "sass-loader",
+    "version": "6.0.6",
+    "dependencies": {
+      "async": "^2.1.5",
+      "clone-deep": "^0.3.0",
+      "loader-utils": "^1.0.1",
+      "lodash.tail": "^4.1.1",
+      "pify": "^3.0.0"
+    },
+    "devDependencies": {
+      "bootstrap-sass": "^3.3.5",
+      "css-loader": "^0.28.4",
+      "eslint": "^3.16.0",
+      "eslint-config-peerigon": "^9.0.0",
+      "eslint-plugin-jsdoc": "^2.4.0",
+      "file-loader": "^0.11.2",
+      "mocha": "^3.0.2",
+      "node-sass": "^4.5.0",
+      "nyc": "^11.0.2",
+      "raw-loader": "^0.5.1",
+      "should": "^11.2.0",
+      "standard-version": "^4.2.0",
+      "style-loader": "^0.18.2",
+      "webpack-dev-server": "^2.4.1",
+      "webpack-merge": "^4.0.0"
+    },
+    "peerDependencies": {
+      "node-sass": "^4.0.0",
+      "webpack": "^2.0.0 || >= 3.0.0-rc.0 || ^3.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-c3/Zc+iW+qqDip6kXPYLEgsAu2lf4xz0EZDplB7EmSUMda12U1sGJPetH55B/j9eu0bTtKzKlNPWWyYC7wFNyQ==",
+      "shasum": "e9d5e6c1f155faa32a4b26d7a9b7107c225e40f9",
+      "tarball": "https://registry.npmjs.org/sass-loader/-/sass-loader-6.0.6.tgz"
+    },
+    "engines": {
+      "node": ">= 4.3 < 5.0.0 || >= 5.10"
+    }
+  },
+  {
+    "name": "source-map-loader",
+    "version": "0.2.3",
+    "dependencies": {
+      "async": "^2.5.0",
+      "loader-utils": "~0.2.2",
+      "source-map": "~0.6.1"
+    },
+    "devDependencies": {
+      "mocha": "^1.18.2",
+      "should": "^3.3.1",
+      "standard-version": "^4.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-MYbFX9DYxmTQFfy2v8FC1XZwpwHKYxg3SK8Wb7VPBKuhDjz8gi9re2819MsG4p49HDyiOSUKlmZ+nQBArW5CGw==",
+      "shasum": "d4b0c8cd47d54edce3e6bfa0f523f452b5b0e521",
+      "tarball": "https://registry.npmjs.org/source-map-loader/-/source-map-loader-0.2.3.tgz"
+    }
+  },
+  {
+    "name": "react-proxy-loader",
+    "version": "0.3.5",
+    "dependencies": {
+      "loader-utils": "^1.0.2"
+    },
+    "devDependencies": {
+      "react": "^0.12.0",
+      "jsx-loader": "^0.12.0",
+      "webpack": "^1.4.1"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {
+      "example": "example"
+    },
+    "dist": {
+      "shasum": "eaeebc3950f9efad36b8bfc47cf58a9a8ca3432d",
+      "tarball": "https://registry.npmjs.org/react-proxy-loader/-/react-proxy-loader-0.3.5.tgz"
+    }
+  },
+  {
+    "name": "null-loader",
+    "version": "0.1.1",
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "shasum": "17be9abfcd3ff0e1512f6fc4afcb1f5039378fae",
+      "tarball": "https://registry.npmjs.org/null-loader/-/null-loader-0.1.1.tgz"
+    }
+  },
+  {
+    "name": "multi-loader",
+    "version": "0.1.0",
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "shasum": "2f0cc7438ec6e4a4ebc1a387015849b04f875f44",
+      "tarball": "https://registry.npmjs.org/multi-loader/-/multi-loader-0.1.0.tgz"
+    }
+  },
+  {
+    "name": "istanbul-instrumenter-loader",
+    "version": "3.0.0",
+    "dependencies": {
+      "convert-source-map": "^1.5.0",
+      "istanbul-lib-instrument": "^1.7.3",
+      "loader-utils": "^1.1.0",
+      "schema-utils": "^0.3.0"
+    },
+    "devDependencies": {
+      "babel-cli": "^6.24.0",
+      "babel-jest": "^20.0.3",
+      "babel-loader": "^7.1.1",
+      "babel-plugin-transform-object-rest-spread": "^6.23.0",
+      "babel-polyfill": "^6.23.0",
+      "babel-preset-env": "^1.6.0",
+      "cross-env": "^5.0.1",
+      "del-cli": "^1.1.0",
+      "eslint": "^4.2.0",
+      "eslint-config-webpack": "^1.2.5",
+      "eslint-plugin-import": "^2.7.0",
+      "jest": "^20.0.4",
+      "lint-staged": "^4.0.1",
+      "memory-fs": "^0.4.1",
+      "nsp": "^2.6.3",
+      "pre-commit": "^1.2.2",
+      "standard-version": "^4.2.0",
+      "webpack": "^3.1.0",
+      "webpack-defaults": "^1.5.0"
+    },
+    "peerDependencies": {
+      "webpack": "^2.0.0 || ^3.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-alLSEFX06ApU75sm5oWcaVNaiss/bgMRiWTct3g0P0ZZTKjR+6QiCcuVOKDI1kWJgwHEnIXsv/dWm783kPpmtw==",
+      "shasum": "9f553923b22360bac95e617aaba01add1f7db0b2",
+      "tarball": "https://registry.npmjs.org/istanbul-instrumenter-loader/-/istanbul-instrumenter-loader-3.0.0.tgz"
+    },
+    "engines": {
+      "node": ">= 4.3 < 5.0.0 || >= 5.10"
+    }
+  },
+  {
+    "name": "eslint-loader",
+    "version": "2.0.0",
+    "dependencies": {
+      "loader-fs-cache": "^1.0.0",
+      "loader-utils": "^1.0.2",
+      "object-assign": "^4.0.1",
+      "object-hash": "^1.1.4",
+      "rimraf": "^2.6.1"
+    },
+    "devDependencies": {
+      "ava": "^0.17.0",
+      "eslint": "^4.0.0",
+      "eslint-friendly-formatter": "^2.0.4",
+      "npmpub": "^3.0.1",
+      "webpack": "^4.0.0"
+    },
+    "peerDependencies": {
+      "eslint": ">=1.6.0 <5.0.0",
+      "webpack": ">=2.0.0 <5.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-VxxGDI4bXzLk0+/jMt/0EkGMRKS9ox6Czx+yapMb9WJmcS/ZHhlhqcVUNgUjFBNp02j/2pZLdGOrG7EXyjoz/g==",
+      "shasum": "d136619b5c684e36531ffc28c60a56e404608f5d",
+      "tarball": "https://registry.npmjs.org/eslint-loader/-/eslint-loader-2.0.0.tgz",
+      "fileCount": 5,
+      "unpackedSize": 21456
+    }
+  },
+  {
+    "name": "yaml-frontmatter-loader",
+    "version": "0.1.0",
+    "dependencies": {
+      "front-matter": "^2.1.2"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "shasum": "6cdbde30c9e9a24c064977738df3caae57ddadba",
+      "tarball": "https://registry.npmjs.org/yaml-frontmatter-loader/-/yaml-frontmatter-loader-0.1.0.tgz"
+    }
+  },
+  {
+    "name": "svg-inline-loader",
+    "version": "0.8.0",
+    "dependencies": {
+      "loader-utils": "^0.2.11",
+      "object-assign": "^4.0.1",
+      "simple-html-tokenizer": "^0.1.1"
+    },
+    "devDependencies": {
+      "chai": "^3.0.0",
+      "chai-spies": "^0.7.1",
+      "json-loader": "^0.5.4",
+      "karma": "^1.0.0",
+      "karma-chrome-launcher": "^1.0.1",
+      "karma-mocha": "^1.0.1",
+      "karma-spec-reporter": "0.0.26",
+      "karma-webpack": "^1.5.1",
+      "lodash": "^4.6.1",
+      "mocha": "^2.5.3",
+      "node-libs-browser": "^1.0.0",
+      "raw-loader": "^0.5.1",
+      "standard-version": "^4.2.0",
+      "webpack": "^1.13.1"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-rynplY2eXFrdNomL1FvyTFQlP+dx0WqbzHglmNtA9M4IHRC3no2aPAl3ny9lUpJzFzFMZfWRK5YIclNU+FRePA==",
+      "shasum": "7e9d905d80d0b4e68d2df21afcd08ee9e9a3ea6e",
+      "tarball": "https://registry.npmjs.org/svg-inline-loader/-/svg-inline-loader-0.8.0.tgz"
+    }
+  },
+  {
+    "name": "restyle-loader",
+    "version": "0.0.3",
+    "dependencies": {
+      "loader-utils": "^1.0.3"
+    },
+    "devDependencies": {
+      "babel-cli": "^6.23.0",
+      "babel-jest": "^19.0.0",
+      "babel-preset-env": "^1.2.1",
+      "file-loader": "^0.10.1",
+      "jest": "^19.0.2",
+      "jsdom": "^9.11.0",
+      "memory-fs": "^0.4.1",
+      "webpack": "^2.2.1"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "shasum": "b9c0b40a6a4e542d3e47ddb9fb959fa2bd843247",
+      "tarball": "https://registry.npmjs.org/restyle-loader/-/restyle-loader-0.0.3.tgz"
+    },
+    "engines": {
+      "node": ">=4.3 <5.0.0 || >=5.10"
+    }
+  },
+  {
+    "name": "gzip-loader",
+    "version": "0.0.1",
+    "devDependencies": {
+      "babel-cli": "^6.24.1",
+      "babel-jest": "^19.0.0",
+      "babel-plugin-transform-object-rest-spread": "^6.23.0",
+      "babel-polyfill": "^6.23.0",
+      "babel-preset-env": "^1.3.3",
+      "cross-env": "^4.0.0",
+      "del-cli": "^0.2.1",
+      "eslint": "^3.19.0",
+      "eslint-config-webpack": "^1.2.1",
+      "eslint-plugin-import": "^2.2.0",
+      "jest": "^19.0.2",
+      "lint-staged": "^3.4.0",
+      "memory-fs": "^0.4.1",
+      "nodemon": "^1.11.0",
+      "nsp": "^2.6.3",
+      "pre-commit": "^1.2.2",
+      "standard-version": "^4.0.0",
+      "webpack": "^2.3.3",
+      "webpack-defaults": "^0.4.5"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "shasum": "29b4c57a0a4b0d8ffedcf457fa3174e1179391cd",
+      "tarball": "https://registry.npmjs.org/gzip-loader/-/gzip-loader-0.0.1.tgz"
+    },
+    "engines": {
+      "node": ">= 4.3 < 5.0.0 || >= 5.10"
+    }
+  },
+  {
+    "name": "cache-loader",
+    "version": "1.2.0",
+    "dependencies": {
+      "async": "^2.4.1",
+      "loader-utils": "^1.1.0",
+      "mkdirp": "^0.5.1",
+      "schema-utils": "^0.4.2"
+    },
+    "devDependencies": {
+      "babel-cli": "^6.0.0",
+      "babel-jest": "^21.0.0",
+      "babel-plugin-transform-object-rest-spread": "^6.0.0",
+      "babel-polyfill": "^6.0.0",
+      "babel-preset-env": "^1.6.0",
+      "cross-env": "^5.0.0",
+      "del-cli": "^1.0.0",
+      "eslint": "^4.0.0",
+      "eslint-config-webpack": "^1.0.0",
+      "eslint-plugin-import": "^2.0.0",
+      "jest": "^21.0.0",
+      "lint-staged": "^5.0.0",
+      "nsp": "^2.0.0",
+      "pre-commit": "^1.0.0",
+      "standard-version": "^4.0.0",
+      "webpack": "^3.0.0",
+      "webpack-defaults": "^1.6.0"
+    },
+    "peerDependencies": {
+      "webpack": "^2.0.0 || ^3.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-E95knP7jxy2bF/HKuw5gCEXm06tp7/sEjewNF39ezyVBnVmNzB9bnXflEFBvrqZrswsCmgiCbiIc7xIeVXW7Gw==",
+      "shasum": "cdc313ae53b3c13ce8ee0c9296cf16c736b15252",
+      "tarball": "https://registry.npmjs.org/cache-loader/-/cache-loader-1.2.0.tgz"
+    },
+    "engines": {
+      "node": ">= 4.3 < 5.0.0 || >= 5.10"
+    }
+  },
+  {
+    "name": "thread-loader",
+    "version": "1.1.4",
+    "dependencies": {
+      "async": "^2.3.0",
+      "loader-runner": "^2.3.0",
+      "loader-utils": "^1.1.0"
+    },
+    "devDependencies": {
+      "babel-cli": "^6.24.1",
+      "babel-core": "^6.24.1",
+      "babel-jest": "^19.0.0",
+      "babel-loader": "^6.4.1",
+      "babel-plugin-transform-object-rest-spread": "^6.23.0",
+      "babel-polyfill": "^6.23.0",
+      "babel-preset-env": "^1.4.0",
+      "cross-env": "^4.0.0",
+      "css-loader": "^0.28.4",
+      "del-cli": "^0.2.1",
+      "eslint": "^3.19.0",
+      "eslint-config-webpack": "^1.2.1",
+      "eslint-plugin-import": "^2.2.0",
+      "extract-text-webpack-plugin": "^3.0.0",
+      "jest": "^19.0.2",
+      "lint-staged": "^3.4.0",
+      "lodash": "^4.17.4",
+      "node-sass": "^4.5.3",
+      "nodemon": "^1.11.0",
+      "nsp": "^2.6.3",
+      "pre-commit": "^1.2.2",
+      "sass-loader": "^6.0.6",
+      "standard-version": "^4.0.0",
+      "webpack": "^3.6.0",
+      "webpack-defaults": "^1.6.0"
+    },
+    "peerDependencies": {
+      "webpack": "^2.0.0 || ^3.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-o9nJ8ommn3dxGdKgOVe/UmTOjutTjyzRL7O5ggdAqoXGadCcKxEIOxm7iisfqG69HVXxvIr+MsAf1YaNVd9+cQ==",
+      "shasum": "80f2594af201e3a33669f419acd41a900fcc6c2f",
+      "tarball": "https://registry.npmjs.org/thread-loader/-/thread-loader-1.1.4.tgz",
+      "fileCount": 11,
+      "unpackedSize": 35344
+    },
+    "engines": {
+      "node": ">= 4.8 < 5.0.0 || >= 5.10"
+    }
+  },
+  {
+    "name": "polymer-webpack-loader",
+    "version": "2.0.1",
+    "dependencies": {
+      "css-selector-tokenizer": "^0.7.0",
+      "dom5": "^2.3.0",
+      "espree": "^3.4.3",
+      "html-loader": "^0.5.1",
+      "loader-utils": "^1.1.0",
+      "parse5": "^3.0.2",
+      "parse5-utils": "^2.0.0",
+      "postcss": "^6.0.9",
+      "source-map": "^0.5.6"
+    },
+    "devDependencies": {
+      "babel-cli": "^6.24.1",
+      "babel-jest": "^20.0.3",
+      "babel-plugin-transform-object-rest-spread": "^6.23.0",
+      "babel-polyfill": "^6.23.0",
+      "babel-preset-env": "^1.6.0",
+      "cross-env": "^5.0.1",
+      "del-cli": "^1.1.0",
+      "eslint": "^4.2.0",
+      "eslint-config-webpack": "^1.2.5",
+      "eslint-plugin-import": "^2.7.0",
+      "jest": "^20.0.4",
+      "lint-staged": "^4.0.1",
+      "nsp": "^2.6.3",
+      "pre-commit": "^1.2.2",
+      "standard-version": "^4.2.0",
+      "webpack": "3.x",
+      "webpack-defaults": "^1.5.0"
+    },
+    "peerDependencies": {
+      "webpack": "^2.0.0 || ^3.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-EsPxqLw+I6ilnDLkvCaIT+0FsMHnFYmVwtngJiLso4/HEk2jlG4jhl12Z2XJkKY5yooYTYma3USnXK55lsS1hQ==",
+      "shasum": "d15d45328f6a6700366dfaee83fc606f39cdcee0",
+      "tarball": "https://registry.npmjs.org/polymer-webpack-loader/-/polymer-webpack-loader-2.0.1.tgz"
+    },
+    "engines": {
+      "node": ">= 4.3 < 5.0.0 || >= 5.10"
+    }
+  },
+  {
+    "name": "i18n-webpack-plugin",
+    "version": "1.0.0",
+    "devDependencies": {
+      "babel-cli": "^6.24.0",
+      "babel-jest": "^19.0.0",
+      "babel-plugin-transform-object-rest-spread": "^6.23.0",
+      "babel-polyfill": "^6.23.0",
+      "babel-preset-env": "^1.5.1",
+      "cross-env": "^5.0.1",
+      "del-cli": "^1.0.0",
+      "eslint": "^3.19.0",
+      "eslint-config-webpack": "^1.2.1",
+      "eslint-plugin-import": "^2.2.0",
+      "jest": "^19.0.2",
+      "lint-staged": "^3.6.0",
+      "nsp": "^2.6.3",
+      "pre-commit": "^1.2.2",
+      "standard-version": "^4.0.0",
+      "webpack-defaults": "^1.4.0"
+    },
+    "peerDependencies": {
+      "webpack": "^2.0.0 || >= 3.0.0-rc.0 || ^3.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-WMC2i05OuitjxYmeQU8XV4KJ+CrWnTOY5DwjygRz2dNByezfnTbVbV67qX4I53KHlscSnOsJyv6StuZxmm6J7w==",
+      "shasum": "0ca12296ec937a4f94325cd0264d08f4e0549831",
+      "tarball": "https://registry.npmjs.org/i18n-webpack-plugin/-/i18n-webpack-plugin-1.0.0.tgz"
+    },
+    "engines": {
+      "node": ">= 4.3 < 5.0.0 || >= 5.10"
+    }
+  },
+  {
+    "name": "component-webpack-plugin",
+    "version": "0.2.1",
+    "dependencies": {
+      "css-loader": "0.6.x",
+      "style-loader": "0.5.x"
+    },
+    "peerDependencies": {
+      "webpack": ">=0.9.2"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "shasum": "18eca9348b3f087b978996b2a5d206bcf01675e8",
+      "tarball": "https://registry.npmjs.org/component-webpack-plugin/-/component-webpack-plugin-0.2.1.tgz"
+    }
+  },
+  {
+    "name": "compression-webpack-plugin",
+    "version": "1.1.8",
+    "dependencies": {
+      "async": "^2.4.1",
+      "cacache": "^10.0.1",
+      "find-cache-dir": "^1.0.0",
+      "serialize-javascript": "^1.4.0",
+      "webpack-sources": "^1.0.1"
+    },
+    "devDependencies": {
+      "babel-cli": "^6.26.0",
+      "babel-jest": "^21.2.0",
+      "babel-plugin-transform-object-rest-spread": "^6.26.0",
+      "babel-polyfill": "^6.26.0",
+      "babel-preset-env": "^1.6.1",
+      "cross-env": "^5.1.0",
+      "del-cli": "^1.1.0",
+      "eslint": "^4.9.0",
+      "eslint-config-webpack": "^1.2.5",
+      "eslint-plugin-import": "^2.8.0",
+      "jest": "^21.2.1",
+      "lint-staged": "^4.3.0",
+      "nsp": "^2.8.1",
+      "pre-commit": "^1.2.2",
+      "standard-version": "^4.2.0",
+      "webpack": "^3.8.1",
+      "webpack-defaults": "^1.6.0"
+    },
+    "peerDependencies": {
+      "webpack": "^2.0.0 || ^3.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-AzOQLq2fkVw/ra6MJgk+y/gvkMPjnhRyhnTdd2EoM9vyKx81JiESe2jVJISVHae1o8+fN/5Xl8kAFRhUmwoYtg==",
+      "shasum": "ba5f184f51ed55da07da19caada80e181403e1a7",
+      "tarball": "https://registry.npmjs.org/compression-webpack-plugin/-/compression-webpack-plugin-1.1.8.tgz",
+      "fileCount": 6,
+      "unpackedSize": 26530
+    },
+    "engines": {
+      "node": ">= 4.8 < 5.0.0 || >= 5.10"
+    }
+  },
+  {
+    "name": "extract-text-webpack-plugin",
+    "version": "3.0.2",
+    "dependencies": {
+      "async": "^2.4.1",
+      "loader-utils": "^1.1.0",
+      "schema-utils": "^0.3.0",
+      "webpack-sources": "^1.0.1"
+    },
+    "devDependencies": {
+      "babel-cli": "^6.26.0",
+      "babel-jest": "^21.2.0",
+      "babel-plugin-transform-object-rest-spread": "^6.26.0",
+      "babel-polyfill": "^6.26.0",
+      "babel-preset-env": "^1.6.1",
+      "cross-env": "^5.1.0",
+      "css-loader": "^0.28.7",
+      "del-cli": "^1.1.0",
+      "eslint": "^4.9.0",
+      "eslint-config-webpack": "^1.2.5",
+      "eslint-plugin-import": "^2.8.0",
+      "file-loader": "^1.1.5",
+      "jest": "^21.2.1",
+      "lint-staged": "^4.3.0",
+      "nsp": "^2.8.1",
+      "pre-commit": "^1.2.2",
+      "raw-loader": "^0.5.1",
+      "standard-version": "^4.2.0",
+      "style-loader": "^0.19.0",
+      "webpack": "^3.8.1",
+      "webpack-defaults": "^1.6.0"
+    },
+    "peerDependencies": {
+      "webpack": "^3.1.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-bt/LZ4m5Rqt/Crl2HiKuAl/oqg0psx1tsTLkvWbJen1CtD+fftkZhMaQ9HOtY2gWsl2Wq+sABmMVi9z3DhKWQQ==",
+      "shasum": "5f043eaa02f9750a9258b78c0a6e0dc1408fb2f7",
+      "tarball": "https://registry.npmjs.org/extract-text-webpack-plugin/-/extract-text-webpack-plugin-3.0.2.tgz"
+    },
+    "engines": {
+      "node": ">= 4.8 < 5.0.0 || >= 5.10"
+    }
+  },
+  {
+    "name": "copy-webpack-plugin",
+    "version": "4.4.2",
+    "dependencies": {
+      "globby": "^7.1.1",
+      "cacache": "^10.0.1",
+      "find-cache-dir": "^1.0.0",
+      "serialize-javascript": "^1.4.0",
+      "is-glob": "^4.0.0",
+      "loader-utils": "^0.2.15",
+      "minimatch": "^3.0.4",
+      "p-limit": "^1.0.0"
+    },
+    "devDependencies": {
+      "babel-cli": "^6.8.0",
+      "babel-preset-es2015": "^6.6.0",
+      "chai": "^3.4.0",
+      "eslint": "^2.9.0",
+      "enhanced-resolve": "^3.4.1",
+      "mocha": "^2.4.5",
+      "ncp": "^2.0.0",
+      "standard-version": "^4.2.0",
+      "is-gzip": "^2.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-tf1XKKQ5h+BPvXJ5/zx2xKVdF0/6J8XNvhB6fdmIReMnAfQGMbzph8F7ok2QF9kqWMfIgkCxwzk1zXkYqcLIqg==",
+      "shasum": "c92bcd7df4d5e42c51398cc36b23820d0d10446a",
+      "tarball": "https://registry.npmjs.org/copy-webpack-plugin/-/copy-webpack-plugin-4.4.2.tgz",
+      "fileCount": 11,
+      "unpackedSize": 44314
+    },
+    "engines": {
+      "node": ">= 4"
+    }
+  },
+  {
+    "name": "npm-install-webpack-plugin",
+    "version": "4.0.5",
+    "dependencies": {
+      "cross-spawn": "^5.0.1",
+      "json5": "^0.5.1",
+      "memory-fs": "^0.4.1",
+      "resolve": "^1.2.0"
+    },
+    "devDependencies": {
+      "codecov": "^1.0.1",
+      "cross-env": "^3.1.4",
+      "expect": "^1.14.0",
+      "mocha": "^3.0.0",
+      "nyc": "^10.1.2",
+      "webpack": "^3.0.0"
+    },
+    "peerDependencies": {
+      "webpack": "^1.0.0 || ^2.0.0 || >= 3.0.0-rc.0 || ^3.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "shasum": "0af5bbe45eaf2648e2cd51fd8b091e0b652fef1b",
+      "tarball": "https://registry.npmjs.org/npm-install-webpack-plugin/-/npm-install-webpack-plugin-4.0.5.tgz"
+    },
+    "engines": {
+      "node": ">=4.2.0"
+    }
+  },
+  {
+    "name": "babel-minify-webpack-plugin",
+    "version": "0.3.0",
+    "dependencies": {
+      "babel-core": "^6.24.1",
+      "babel-preset-minify": "^0.3.0",
+      "webpack-sources": "^1.0.1"
+    },
+    "devDependencies": {
+      "babel-cli": "^6.24.1",
+      "babel-jest": "^20.0.3",
+      "babel-plugin-transform-object-rest-spread": "^6.23.0",
+      "babel-polyfill": "^6.23.0",
+      "babel-preset-env": "^1.5.1",
+      "cross-env": "^5.0.1",
+      "del-cli": "^1.1.0",
+      "eslint": "^4.1.1",
+      "eslint-config-webpack": "^1.2.5",
+      "eslint-plugin-import": "^2.7.0",
+      "jest": "^20.0.4",
+      "lint-staged": "^4.0.1",
+      "nsp": "^2.6.3",
+      "pre-commit": "^1.2.2",
+      "rimraf": "^2.6.1",
+      "source-map": "^0.5.6",
+      "standard-version": "^4.2.0",
+      "webpack": "^3.3.0",
+      "webpack-defaults": "^1.5.0"
+    },
+    "peerDependencies": {
+      "webpack": "^2.0.0 || ^3.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-avrx0Fa615QfivVV8PakEwOtthts/3qVFV+FYJffJn8WanaX4geKMGTYaPKITUXhqqEfuBJokdRQC5arNTZNIA==",
+      "shasum": "98062b4b7fb96ec67cca97579151758a1ddde116",
+      "tarball": "https://registry.npmjs.org/babel-minify-webpack-plugin/-/babel-minify-webpack-plugin-0.3.0.tgz",
+      "fileCount": 6,
+      "unpackedSize": 15044
+    },
+    "engines": {
+      "node": ">= 4.3 < 5.0.0 || >= 5.10"
+    }
+  },
+  {
+    "name": "uglifyjs-webpack-plugin",
+    "version": "1.2.2",
+    "dependencies": {
+      "cacache": "^10.0.1",
+      "find-cache-dir": "^1.0.0",
+      "serialize-javascript": "^1.4.0",
+      "schema-utils": "^0.4.2",
+      "source-map": "^0.6.1",
+      "uglify-es": "^3.3.4",
+      "webpack-sources": "^1.1.0",
+      "worker-farm": "^1.5.2"
+    },
+    "devDependencies": {
+      "babel-cli": "^6.26.0",
+      "babel-jest": "^21.2.0",
+      "babel-plugin-transform-object-rest-spread": "^6.26.0",
+      "babel-polyfill": "^6.26.0",
+      "babel-preset-env": "^1.6.1",
+      "cross-env": "^5.1.3",
+      "del-cli": "^1.1.0",
+      "eslint": "^4.14.0",
+      "eslint-config-webpack": "^1.2.5",
+      "eslint-plugin-import": "^2.8.0",
+      "jest": "^21.2.1",
+      "lint-staged": "^6.0.0",
+      "memory-fs": "^0.4.1",
+      "nsp": "^3.1.0",
+      "pre-commit": "^1.2.2",
+      "standard-version": "^4.3.0",
+      "webpack": "^3.10.0",
+      "webpack-defaults": "^1.6.0"
+    },
+    "peerDependencies": {
+      "webpack": "^2.0.0 || ^3.0.0 || ^4.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-CG/NvzXfemUAm5Y4Guh5eEaJYHtkG7kKNpXEJHp9QpxsFVB5/qKvYWoMaq4sa99ccZ0hM3MK8vQV9XPZB4357A==",
+      "shasum": "e7516d4367afdb715c3847841eb46f94c45ca2b9",
+      "tarball": "https://registry.npmjs.org/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-1.2.2.tgz",
+      "fileCount": 11,
+      "unpackedSize": 50199
+    },
+    "engines": {
+      "node": ">= 4.8 < 5.0.0 || >= 5.10"
+    }
+  },
+  {
+    "name": "zopfli-webpack-plugin",
+    "version": "0.1.0",
+    "dependencies": {
+      "async": "^2.4.0",
+      "node-zopfli": "^2.0.2",
+      "webpack-sources": "^1.0.1"
+    },
+    "devDependencies": {
+      "babel-cli": "^6.24.1",
+      "babel-jest": "^20.0.3",
+      "babel-plugin-transform-object-rest-spread": "^6.23.0",
+      "babel-polyfill": "^6.23.0",
+      "babel-preset-env": "^1.5.1",
+      "cross-env": "^5.0.1",
+      "del-cli": "^1.0.0",
+      "eslint": "^3.19.0",
+      "eslint-config-webpack": "^1.2.2",
+      "eslint-plugin-import": "^2.2.0",
+      "jest": "^20.0.4",
+      "lint-staged": "^3.4.1",
+      "nsp": "^2.6.3",
+      "pre-commit": "^1.2.2",
+      "standard-version": "^4.0.0",
+      "webpack-defaults": "^1.4.0"
+    },
+    "peerDependencies": {
+      "webpack": "^2.0.0 || ^3.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-GumWSeLFv115rKxhzks2vDPZaG7dzbJC48ueYwhf44f3jIrcHSkLiXeMmNbEW1iakkyLOSdZJTFGNmxtK+kang==",
+      "shasum": "f33226b84b0273c6e6e8649f7bfa9708a9c00955",
+      "tarball": "https://registry.npmjs.org/zopfli-webpack-plugin/-/zopfli-webpack-plugin-0.1.0.tgz"
+    },
+    "engines": {
+      "node": ">= 4.3 < 5.0.0 || >= 5.10"
+    }
+  },
+  {
+    "name": "closure-webpack-plugin",
+    "version": "0.0.24",
+    "dependencies": {
+      "acorn": "^5.0.0",
+      "acorn-dynamic-import": "^2.0.0",
+      "google-closure-compiler": ">=20180204.0.0",
+      "schema-utils": "^0.4.3",
+      "webpack-sources": "^1.0.1"
+    },
+    "devDependencies": {
+      "@commitlint/cli": "^5.2.6",
+      "@commitlint/config-angular": "^5.1.1",
+      "@webpack-contrib/eslint-config-webpack": "^2.0.2",
+      "babel-core": "^6.26.0",
+      "babel-jest": "^22.0.4",
+      "babel-preset-env": "^1.6.1",
+      "conventional-github-releaser": "^2.0.0",
+      "cross-env": "^5.1.3",
+      "del": "^3.0.0",
+      "del-cli": "^1.1.0",
+      "eslint": "^4.13.1",
+      "eslint-plugin-import": "^2.8.0",
+      "eslint-plugin-prettier": "^2.4.0",
+      "husky": "^0.14.3",
+      "jest": "^21.2.1",
+      "lint-staged": "^4.2.3",
+      "memory-fs": "^0.4.1",
+      "nsp": "^3.1.0",
+      "pre-commit": "^1.2.2",
+      "prettier": "^1.9.2",
+      "standard-version": "^4.2.0",
+      "webpack": "^3.10.0"
+    },
+    "peerDependencies": {
+      "webpack": "^3.0.0 || ^4.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-NvRmitURcEcPYFCD6ORBOQ8Qo3/WEQu7q8XvvofqVf87gBLGZoCTs3wIVlmQNCisCofAxVTQUmPx9xrAgcQ3Hg==",
+      "shasum": "cc34abfab39831b8ea2f14ca4b365e1619d7b5de",
+      "tarball": "https://registry.npmjs.org/closure-webpack-plugin/-/closure-webpack-plugin-0.0.24.tgz",
+      "fileCount": 19,
+      "unpackedSize": 53102
+    },
+    "engines": {
+      "node": ">= 6.9.0 || >= 8.9.0"
+    }
+  },
+  {
+    "name": "css-webpack-plugin",
+    "version": "1.0.2",
+    "dependencies": {
+      "schema-utils": "^0.4.3"
+    },
+    "devDependencies": {
+      "@commitlint/cli": "^5.2.5",
+      "@commitlint/config-angular": "^5.1.1",
+      "@webpack-contrib/eslint-config-webpack": "^2.0.1",
+      "babel-cli": "^6.26.0",
+      "babel-jest": "^21.2.0",
+      "babel-plugin-transform-object-rest-spread": "^6.26.0",
+      "babel-polyfill": "^6.26.0",
+      "babel-preset-env": "^1.6.1",
+      "conventional-github-releaser": "^2.0.0",
+      "cross-env": "^5.1.1",
+      "del": "^3.0.0",
+      "del-cli": "^1.1.0",
+      "eslint": "^4.13.1",
+      "eslint-plugin-import": "^2.8.0",
+      "eslint-plugin-prettier": "^2.3.1",
+      "husky": "^0.14.3",
+      "jest": "^21.2.1",
+      "lint-staged": "^6.0.0",
+      "memory-fs": "^0.4.1",
+      "nsp": "^3.1.0",
+      "pre-commit": "^1.2.2",
+      "prettier": "^1.9.2",
+      "standard-version": "^4.2.0",
+      "webpack": "^3.10.0",
+      "webpack-defaults": "^2.0.0-beta.1"
+    },
+    "peerDependencies": {
+      "webpack": "^3.0.0 || ^4.0.0"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "integrity": "sha512-xih9rzX7+2GgzOS+mF70ryjd+lPtYw1fN9sBzgwOUPFHkoth2UaIFyEcf7kI9WoTrCQhLeIatyaP9Y1P30T4LQ==",
+      "shasum": "514cc86ba5602cbce6f9118aa224c0917030a3ff",
+      "tarball": "https://registry.npmjs.org/css-webpack-plugin/-/css-webpack-plugin-1.0.2.tgz"
+    },
+    "engines": {
+      "node": ">= 6.9.0 || >= 8.9.0"
+    }
+  },
+  {
+    "name": "html-webpack-plugin",
+    "version": "2.30.1",
+    "dependencies": {
+      "bluebird": "^3.4.7",
+      "html-minifier": "^3.2.3",
+      "loader-utils": "^0.2.16",
+      "lodash": "^4.17.3",
+      "pretty-error": "^2.0.2",
+      "toposort": "^1.0.0"
+    },
+    "devDependencies": {
+      "appcache-webpack-plugin": "^1.3.0",
+      "css-loader": "^0.26.1",
+      "dir-compare": "1.3.0",
+      "es6-promise": "^4.0.5",
+      "extract-text-webpack-plugin": "^1.0.1",
+      "file-loader": "^0.9.0",
+      "html-loader": "^0.4.4",
+      "jade": "^1.11.0",
+      "jade-loader": "^0.8.0",
+      "jasmine": "^2.5.2",
+      "rimraf": "^2.5.4",
+      "semistandard": "8.0.0",
+      "style-loader": "^0.13.1",
+      "underscore-template-loader": "^0.7.3",
+      "url-loader": "^0.5.7",
+      "webpack": "^1.14.0",
+      "webpack-recompilation-simulator": "^1.3.0"
+    },
+    "peerDependencies": {
+      "webpack": "1 || ^2 || ^2.1.0-beta || ^2.2.0-rc || ^3"
+    },
+    "_hasShrinkwrap": false,
+    "directories": {},
+    "dist": {
+      "shasum": "7f9c421b7ea91ec460f56527d78df484ee7537d5",
+      "tarball": "https://registry.npmjs.org/html-webpack-plugin/-/html-webpack-plugin-2.30.1.tgz"
+    }
+  }
+]
