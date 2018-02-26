@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/14ccd9dec9f71fc01440.css" rel="stylesheet">
+      <link href="/abbcb025c1f015bd7d26.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -73,8 +73,6 @@
 <li><p><code>cacheDirectory</code>: Default <code>false</code>. When set, the given directory will be used to cache the results of the loader. Future webpack builds will attempt to read from the cache to avoid needing to run the potentially expensive Babel recompilation process on each run. If the value is blank (<code>loader: &apos;babel-loader?cacheDirectory&apos;</code>) or <code>true</code> (<code>loader: babel-loader?cacheDirectory=true</code>) the loader will use the default cache directory in <code>node_modules/.cache/babel-loader</code> or fallback to the default OS temporary file directory if no <code>node_modules</code> folder could be found in any root directory.</p>
 </li>
 <li><p><code>cacheIdentifier</code>: Default is a string composed by the babel-core&apos;s version, the babel-loader&apos;s version, the contents of .babelrc file if it exists and the value of the environment variable <code>BABEL_ENV</code> with a fallback to the <code>NODE_ENV</code> environment variable. This can be set to a custom value to force cache busting if the identifier changes.</p>
-</li>
-<li><p><code>forceEnv</code>: Default will resolve BABEL_ENV then NODE_ENV. Allow you to override BABEL_ENV/NODE_ENV at the loader level. Useful for isomorphic applications with different babel configuration for client and server.</p>
 </li>
 <li><p><code>babelrc</code>: Default <code>true</code>. When <code>false</code>, no options from <code>.babelrc</code> files will be used; only the options passed to
 <code>babel-loader</code> will be used.</p>
