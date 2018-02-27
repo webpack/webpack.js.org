@@ -243,26 +243,24 @@ Given it's not particularly fun to run a local copy of webpack from the CLI, we 
 __package.json__
 
 ``` diff
-{
-  "name": "webpack-demo",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "webpack": "^4.0.1",
-    "webpack-cli": "^2.0.9"
-  },
-  "dependencies": {
-    "lodash": "^4.17.5"
+  {
+    "name": "webpack-demo",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
++     "build": "webpack"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "webpack": "^4.0.1",
+      "webpack-cli": "^2.0.9",
+      "lodash": "^4.17.5"
+    }
   }
-}
 
 ```
 
