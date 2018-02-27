@@ -20,16 +20,15 @@ Webpack is used to compile JavaScript modules. Once [installed](/guides/installa
 
 ## Basic Setup
 
-First let's create a directory, initialize npm, [install webpack locally](/guides/installation#local-installation), and install the webpack-cli (which we'll need to run webpack from the command line (CLI)):
+First let's create a directory, initialize npm, [install webpack locally](/guides/installation#local-installation), and install the webpack-cli (the tool used to run webpack on the command line):
 
 ``` bash
 mkdir webpack-demo && cd webpack-demo
 npm init -y
-npm install --save-dev webpack
-npm install --save-dev webpack-cli
+npm install webpack webpack-cli --save-dev
 ```
 
-T> Throughout the Guides we will use `diff` blocks to show you what changes we're making to directories, files, code, etc. For example: below we're adding `index.html` (file), `/src` (directory), and `index.js` (file).
+T> Throughout the Guides we will use `diff` blocks to show you what changes we're making to directories, files, and code.
 
 Now we'll create the following directory structure, files and their contents:
 
@@ -147,7 +146,7 @@ In this setup, `index.js` explicitly requires `lodash` to be present, and binds 
 With that said, let's run `npx webpack` with our script as the [entry point](/concepts/entry-points) and `bundle.js` as the [output](/concepts/output). The `npx` command, which ships with Node 8.2 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
 
 ``` bash
-npx webpack src/index.js --output dist/bundle.js
+npx webpack
 
 Hash: dabab1bac2b940c1462b
 Version: webpack 4.0.1
@@ -181,7 +180,7 @@ Note that webpack will not alter any code other than `import` and `export` state
 
 ## Using a Configuration
 
-As of version 4, webpack doesn't require any configuration, but most projects will need a more complex setup, which is why webpack supports a [configuration file](/concepts/configuration). This is much more efficient than having to manually type in a lot of commands on the CLI, so let's create one to replace the CLI line options used above:
+As of version 4, webpack doesn't require any configuration, but most projects will need a more complex setup, which is why webpack supports a [configuration file](/concepts/configuration). This is much more efficient than having to manually type in a lot of commands in the terminal, so let's create one to replace the CLI line options used above:
 
 __project__
 
@@ -311,6 +310,6 @@ webpack-demo
 |- /node_modules
 ```
 
-T> If you're using npm 5, you'll probably also see a `package-lock.json` file in your directory as well.
+T> If you're using npm 5, you'll probably also see a `package-lock.json` file in your directory.
 
 If you want to learn more about webpack's design, you can check out the [basic concepts](/concepts) and [configuration](/configuration) pages. Furthermore, the [API](/api) section digs into the various interfaces webpack offers.
