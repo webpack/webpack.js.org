@@ -20,15 +20,18 @@ Webpack is used to compile JavaScript modules. Once [installed](/guides/installa
 
 ## Basic Setup
 
-First let's create a directory, initialize npm, and [install webpack locally](/guides/installation#local-installation):
+First let's create a directory, initialize npm, [install webpack locally](/guides/installation#local-installation), and install the webpack-cli (which we'll need to run webpack from the command line (CLI)):
 
 ``` bash
 mkdir webpack-demo && cd webpack-demo
 npm init -y
 npm install --save-dev webpack
+npm install --save-dev webpack-cli
 ```
 
-Now we'll create the following directory structure and contents:
+T> Throughout the Guides we will use `diff` blocks to show you what changes we're making to directories, files, code, etc. For example: below we're adding `index.html` (file), `/src` (directory), and `index.js` (file).
+
+Now we'll create the following directory structure, files and their contents:
 
 __project__
 
@@ -69,7 +72,7 @@ __index.html__
 </html>
 ```
 
-In this example, there are implicit dependencies between the `<script>` tags. Our `index.js` file depends on `lodash` being included in the page before it runs. This is because `index.js` never declared a need for `lodash`; it just assumes that the global variable `_` exists.
+In this example, there are implicit dependencies between the `<script>` tags. Our `index.js` file depends on `lodash` being included in the page before it runs. This is because `index.js` never explicitly declared a need for `lodash`; it just assumes that the global variable `_` exists.
 
 There are problems with managing JavaScript projects this way:
 
@@ -99,7 +102,7 @@ __project__
 To bundle the `lodash` dependency with `index.js`, we'll need to install the library locally...
 
 ``` bash
-npm install --save lodash
+npm install --save-dev lodash
 ```
 
 and then import it in our script...
@@ -146,18 +149,23 @@ With that said, let's run `npx webpack` with our script as the [entry point](/co
 ``` bash
 npx webpack src/index.js --output dist/bundle.js
 
-Hash: 857f878815ce63ad5b4f
-Version: webpack 3.9.1
-Time: 332ms
-    Asset    Size  Chunks                    Chunk Names
-bundle.js  544 kB       0  [emitted]  [big]  main
-   [0] ./src/index.js 222 bytes {0} [built]
+Hash: dabab1bac2b940c1462b
+Version: webpack 4.0.1
+Time: 3003ms
+Built at: 2018-2-26 22:42:11
+    Asset      Size  Chunks             Chunk Names
+bundle.js  69.6 KiB       0  [emitted]  main
+Entrypoint main = bundle.js
+   [1] (webpack)/buildin/module.js 519 bytes {0} [built]
    [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+   [3] ./src/index.js 256 bytes {0} [built]
     + 1 hidden module
+
+WARNING in configuration
+The 'mode' option has not been set. Set 'mode' option to 'development' or 'production' to enable defaults for this environment.
 ```
 
-T> Your output may vary a bit, but if the build is successful then you are good to go.
+T> Your output may vary a bit, but if the build is successful then you are good to go. Also, don't worry about the warning, we'll tackle that later.
 
 Open `index.html` in your browser and, if everything went right, you should see the following text: 'Hello webpack'.
 
@@ -173,7 +181,7 @@ Note that webpack will not alter any code other than `import` and `export` state
 
 ## Using a Configuration
 
-Most projects will need a more complex setup, which is why webpack supports a [configuration file](/concepts/configuration). This is much more efficient than having to type in a lot of commands in the terminal, so let's create one to replace the CLI options used above:
+As of version 4, webpack doesn't require any configuration, but most projects will need a more complex setup, which is why webpack supports a [configuration file](/concepts/configuration). This is much more efficient than having to manually type in a lot of commands on the CLI, so let's create one to replace the CLI line options used above:
 
 __project__
 
@@ -201,20 +209,25 @@ module.exports = {
 };
 ```
 
-Now, let's run the build again but instead using our new configuration:
+Now, let's run the build again but instead using our new configuration file:
 
 ``` bash
 npx webpack --config webpack.config.js
 
-Hash: 857f878815ce63ad5b4f
-Version: webpack 3.9.1
-Time: 298ms
-    Asset    Size  Chunks                    Chunk Names
-bundle.js  544 kB       0  [emitted]  [big]  main
-   [0] ./src/index.js 222 bytes {0} [built]
+Hash: dabab1bac2b940c1462b
+Version: webpack 4.0.1
+Time: 328ms
+Built at: 2018-2-26 22:47:43
+    Asset      Size  Chunks             Chunk Names
+bundle.js  69.6 KiB       0  [emitted]  main
+Entrypoint main = bundle.js
+   [1] (webpack)/buildin/module.js 519 bytes {0} [built]
    [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+   [3] ./src/index.js 256 bytes {0} [built]
     + 1 hidden module
+
+WARNING in configuration
+The 'mode' option has not been set. Set 'mode' option to 'development' or 'production' to enable defaults for this environment.
 ```
 
 W> Note that when calling `webpack` via its path on windows, you must use backslashes instead, e.g. `node_modules\.bin\webpack --config webpack.config.js`.
@@ -230,14 +243,28 @@ Given it's not particularly fun to run a local copy of webpack from the CLI, we 
 
 __package.json__
 
-``` json
+``` diff
 {
-  ...
+  "name": "webpack-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
   },
-  ...
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.9"
+  },
+  "dependencies": {
+    "lodash": "^4.17.5"
+  }
 }
+
 ```
 
 Now the `npm run build` command can be used in place of the `npx` command we used earlier. Note that within `scripts` we can reference locally installed npm packages by name the same way we did with `npx`. This convention is the standard in most npm-based projects because it allows all contributors to use the same set of common scripts (each with flags like `--config` if necessary).
@@ -247,15 +274,20 @@ Now run the following command and see if your script alias works:
 ``` bash
 npm run build
 
-Hash: 857f878815ce63ad5b4f
-Version: webpack 3.9.1
-Time: 294ms
-    Asset    Size  Chunks                    Chunk Names
-bundle.js  544 kB       0  [emitted]  [big]  main
-   [0] ./src/index.js 222 bytes {0} [built]
+Hash: dabab1bac2b940c1462b
+Version: webpack 4.0.1
+Time: 323ms
+Built at: 2018-2-26 22:50:25
+    Asset      Size  Chunks             Chunk Names
+bundle.js  69.6 KiB       0  [emitted]  main
+Entrypoint main = bundle.js
+   [1] (webpack)/buildin/module.js 519 bytes {0} [built]
    [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+   [3] ./src/index.js 256 bytes {0} [built]
     + 1 hidden module
+
+WARNING in configuration
+The 'mode' option has not been set. Set 'mode' option to 'development' or 'production' to enable defaults for this environment.
 ```
 
 T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --colors`.
@@ -279,6 +311,6 @@ webpack-demo
 |- /node_modules
 ```
 
-T> If you're using npm 5, you'll probably also see a `package-lock.json` file in your directory.
+T> If you're using npm 5, you'll probably also see a `package-lock.json` file in your directory as well.
 
 If you want to learn more about webpack's design, you can check out the [basic concepts](/concepts) and [configuration](/configuration) pages. Furthermore, the [API](/api) section digs into the various interfaces webpack offers.
