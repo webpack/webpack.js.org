@@ -10,7 +10,7 @@ repo: https://github.com/webpack-contrib/less-loader
 
 <p align="center">Compiles Less to CSS.</p>
 
-Use the [css-loader](/loaders/css-loader/) or the [raw-loader](/loaders/raw-loader/) to turn it into a JS module and the [ExtractTextPlugin](/plugins/extract-text-webpack-plugin/) to extract it into a separate file.
+Use the [`css-loader`](/loaders/css-loader/) or the [`raw-loader`](/loaders/raw-loader/) to turn it into a JS module and the [ExtractTextPlugin](/plugins/extract-text-webpack-plugin/) to extract it into a separate file.
 
 
 ## Install
@@ -19,11 +19,11 @@ Use the [css-loader](/loaders/css-loader/) or the [raw-loader](/loaders/raw-load
 npm install --save-dev less-loader less
 ```
 
-The less-loader requires [less](https://github.com/less/less.js) as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies). Thus you are able to control the versions accurately.
+The `less-loader` requires [less](https://github.com/less/less.js) as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies). Thus you are able to control the versions accurately.
 
 ## Examples
 
-Chain the less-loader with the [css-loader](/loaders/css-loader/) and the [style-loader](/loaders/style-loader/) to immediately apply all styles to the DOM.
+Chain the `less-loader` with the [`css-loader`](/loaders/css-loader/) and the [`style-loader`](/loaders/style-loader/) to immediately apply all styles to the DOM.
 
 ```js
 // webpack.config.js
@@ -44,7 +44,7 @@ module.exports = {
 };
 ```
 
-You can pass any Less specific options to the less-loader via [loader options](https://webpack.js.org/configuration/module/#rule-options-rule-query). See the [Less documentation](http://lesscss.org/usage/#command-line-usage-options) for all available options in dash-case. Since we're passing these options to Less programmatically, you need to pass them in camelCase here:
+You can pass any Less specific options to the `less-loader` via [loader options](https://webpack.js.org/configuration/module/#rule-options-rule-query). See the [Less documentation](http://lesscss.org/usage/#command-line-usage-options) for all available options in dash-case. Since we're passing these options to Less programmatically, you need to pass them in camelCase here:
 
 ```js
 // webpack.config.js
@@ -108,11 +108,11 @@ module.exports = {
 
 ### Imports
 
-Starting with less-loader 4, you can now choose between Less' builtin resolver and webpack's resolver. By default, webpack's resolver is used.
+Starting with `less-loader` 4, you can now choose between Less' builtin resolver and webpack's resolver. By default, webpack's resolver is used.
 
 #### webpack resolver
 
-webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/configuration/resolve/). The less-loader applies a Less plugin that passes all queries to the webpack resolver. Thus you can import your Less modules from `node_modules`. Just prepend them with a `~` which tells webpack to look up the [`modules`](https://webpack.js.org/configuration/resolve/#resolve-modules).
+webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/configuration/resolve/). The `less-loader` applies a Less plugin that passes all queries to the webpack resolver. Thus you can import your Less modules from `node_modules`. Just prepend them with a `~` which tells webpack to look up the [`modules`](https://webpack.js.org/configuration/resolve/#resolve-modules).
 
 ```css
 @import "~bootstrap/less/bootstrap";
@@ -142,7 +142,7 @@ module.exports = {
 
 #### Less resolver
 
-If you specify the `paths` option, the less-loader will not use webpack's resolver. Modules, that can't be resolved in the local folder, will be searched in the given `paths`. This is Less' default behavior. `paths` should be an array with absolute paths:
+If you specify the `paths` option, the `less-loader` will not use webpack's resolver. Modules, that can't be resolved in the local folder, will be searched in the given `paths`. This is Less' default behavior. `paths` should be an array with absolute paths:
 
 ```js
 // webpack.config.js
@@ -196,12 +196,12 @@ Bundling CSS with webpack has some nice advantages like referencing images and f
 
 There are two possibilities to extract a style sheet from the bundle:
 
-- [extract-loader](https://github.com/peerigon/extract-loader) (simpler, but specialized on the css-loader's output)
-- [extract-text-webpack-plugin](/plugins/extract-text-webpack-plugin/) (more complex, but works in all use-cases)
+- [`extract-loader`](https://github.com/peerigon/extract-loader) (simpler, but specialized on the css-loader's output)
+- [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin/) (more complex, but works in all use-cases)
 
 ### Source maps
 
-To enable CSS source maps, you'll need to pass the `sourceMap` option to the less-loader *and* the css-loader. Your `webpack.config.js` should look like this:
+To enable CSS source maps, you'll need to pass the `sourceMap` option to the `less-loader` *and* the `css-loader`. Your `webpack.config.js` should look like this:
 
 ```javascript
 module.exports = {

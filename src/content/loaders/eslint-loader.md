@@ -159,7 +159,8 @@ module.exports = {
 
 #### `eslintPath` (default: "eslint")
 
-Path to `eslint` instance that will be used for linting.
+Path to `eslint` instance that will be used for linting.  
+If the `eslintPath` is a folder like a official eslint, or specify a `formatter` option. now you dont have to install `eslint` . 
 
 ```js
 module.exports = {
@@ -171,7 +172,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: "eslint-loader",
         options: {
-          eslintPath: path.join(__dirname, "reusable-eslint-rules.js"),
+          eslintPath: path.join(__dirname, "reusable-eslint"),
         }
       },
     ],
@@ -320,7 +321,7 @@ remove `NoErrorsPlugin` from webpack config.
 Bear in mind that when you define `configFile`, `eslint` doesn't automatically look for
 `.eslintrc` files in the directory of the file to be linted.
 More information is available in official eslint documentation in section [_Using Configuration Files_](http://eslint.org/docs/user-guide/configuring#using-configuration-files).
-See [#129](https://github.com/MoOx/eslint-loader/issues/129).
+See [#129](https://github.com/webpack-contrib/eslint-loader/issues/129).
 
 ---
 
