@@ -92,4 +92,4 @@ Used before module templates are applied to the module name. The process continu
 
 ***
 
-> 原文：https://webpack.js.org/api/plugins/resolver/
+> 原文：https://webpack.js.org/api/resolver/

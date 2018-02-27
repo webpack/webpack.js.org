@@ -42,3 +42,7 @@ sort: 5
 `alternatives(options: Array)` 异步 瀑布流
 
 ?> Add documentation.
+
+***
+
+> 原文：https://webpack.js.org/api/module-factories/

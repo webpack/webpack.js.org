@@ -62,3 +62,7 @@ __node_modules/webpack/lib/Compiler.js__
 ``` js
 this.apply*("emit",options) // will fetch all plugins under 'emit' name and run them.
 ```
+
+***
+
+> 原文：https://webpack.js.org/api/tapable/

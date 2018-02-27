@@ -297,4 +297,4 @@ compilation.plugin('failed-module', function(module){
 
 ***
 
-> 原文：https://webpack.js.org/api/plugins/compilation/
+> 原文：https://webpack.js.org/api/compilation/

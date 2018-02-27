@@ -176,3 +176,7 @@ Critical dependencies:
 ```
 
 W> 需要注意的是，当 `错误详情为false(errorDetails:false)`传入`toJson`函数时，对栈的追溯就不会被显示。`错误详情(errorDetils)` 默认值为 `true`
+
+***
+
+> 原文：https://webpack.js.org/api/stats/

@@ -74,3 +74,7 @@ For plugin authors, it is important to know which are the `Tapable` instances in
 Hence, throughout this section are a list of all of the webpack `Tapable` instances (and their event hooks), which plugin authors can utilize.
 
 For more information on `Tapable` visit the [complete overview](/api/tapable) or the [tapable repository](https://github.com/webpack/tapable).
+
+***
+
+> 原文：https://webpack.js.org/api/plugins/

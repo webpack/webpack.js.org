@@ -82,4 +82,4 @@ compiler.parser.plugin("var rewire", function (expr) {
 
 ***
 
-> 原文：https://webpack.js.org/api/plugins/parser/
+> 原文：https://webpack.js.org/api/parser/
