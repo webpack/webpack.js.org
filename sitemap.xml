@@ -46,10 +46,10 @@
         <loc>https://webpack.js.org/pluginsapi/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/starter-kits/index.html</loc>
+        <loc>https://webpack.js.org/plugins/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/index.html</loc>
+        <loc>https://webpack.js.org/starter-kits/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/support/index.html</loc>
@@ -226,13 +226,16 @@
         <loc>https://webpack.js.org/get-started/why-webpack/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/asset-management/index.html</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/guides/author-libraries/index.html</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/guides/asset-management/index.html</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/guides/build-performance/index.html</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/guides/caching/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/code-splitting/index.html</loc>
@@ -242,9 +245,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/guides/code-splitting-css/index.html</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/guides/caching/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/code-splitting-import/index.html</loc>
@@ -292,10 +292,10 @@
         <loc>https://webpack.js.org/guides/output-management/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/production/index.html</loc>
+        <loc>https://webpack.js.org/guides/production-build/index.html</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/production-build/index.html</loc>
+        <loc>https://webpack.js.org/guides/production/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/progressive-web-application/index.html</loc>
@@ -370,6 +370,9 @@
         <loc>https://webpack.js.org/loaders/jshint-loader/index.html</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/loaders/json5-loader/index.html</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/loaders/json-loader/index.html</loc>
     </url>
     <url>
@@ -434,9 +437,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/yaml-frontmatter-loader/index.html</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/loaders/json5-loader/index.html</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/pluginsapi/compiler/index.html</loc>

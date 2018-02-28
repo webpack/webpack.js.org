@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/59147fa1057b84956c90.css" rel="stylesheet">
+      <link href="/d4f745d2ef464d8470e6.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -28,6 +28,8 @@ Looking for the webpack 1 loader? Check out the <a href="https://github.com/webp
 as <a href="https://docs.npmjs.com/files/package.json#peerdependencies"><code>peerDependency</code></a>. Thus you are able to control the versions accurately.</p>
 <h2 class="header"><a class="anchor" href="#examples" id="examples"></a><span class="text">Examples</span><a class="icon-link" href="#examples"></a></h2>
 <p>Chain the sass-loader with the <a href="/loaders/css-loader/">css-loader</a> and the <a href="/loaders/style-loader/">style-loader</a> to immediately apply all styles to the DOM.</p>
+<pre><code class="lang-bash">npm <span class="token function">install</span> style-loader css-loader --save-dev
+</code></pre>
 <pre><code class="lang-js"><span class="token comment">// webpack.config.js</span>
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
@@ -111,7 +113,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </ul>
 <p>More likely you will be disrupted by this second issue. It is natural to expect relative references to be resolved against the <code>.scss</code> file in which they are specified (like in regular <code>.css</code> files). Thankfully there are a two solutions to this problem:</p>
 <ul>
-<li>Add the missing url rewriting using the <a href="https://github.com/bholloway/resolve-url-loader">resolve-url-loader</a>. Place it directly after the sass-loader in the loader chain.</li>
+<li>Add the missing url rewriting using the <a href="https://github.com/bholloway/resolve-url-loader">resolve-url-loader</a>. Place it before the sass-loader in the loader chain.</li>
 <li>Library authors usually provide a variable to modify the asset path. <a href="https://github.com/twbs/bootstrap-sass">bootstrap-sass</a> for example has an <code>$icon-font-path</code>. Check out <a href="https://github.com/webpack-contrib/sass-loader/tree/master/test/bootstrapSass">this working bootstrap example</a>.</li>
 </ul>
 <h3 class="header"><a class="anchor" href="#extracting-style-sheets" id="extracting-style-sheets"></a><span class="text">Extracting style sheets</span><a class="icon-link" href="#extracting-style-sheets"></a></h3>
