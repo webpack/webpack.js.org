@@ -71,6 +71,32 @@ __index.html__
 </html>
 ```
 
+We also need to adjust our `package.json` file in order to make sure we mark our package as `private`, as well as removing the `main` entry. This is to prevent an accidental publish of your code.
+
+T> If you want to learn more about the inner workings of `package.json`, then we recommend reading [the npm documentation](https://docs.npmjs.com/files/package.json).
+
+__package.json__
+``` diff
+  {
+    "name": "webpack-demo",
+    "version": "1.0.0",
+    "description": "",
++   "private": true,
+-   "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "webpack": "^4.0.1",
+      "webpack-cli": "^2.0.9"
+    },
+    "dependencies": {}
+  }
+```
+
 In this example, there are implicit dependencies between the `<script>` tags. Our `index.js` file depends on `lodash` being included in the page before it runs. This is because `index.js` never explicitly declared a need for `lodash`; it just assumes that the global variable `_` exists.
 
 There are problems with managing JavaScript projects this way:
@@ -98,13 +124,15 @@ __project__
     |- index.js
 ```
 
-To bundle the `lodash` dependency with `index.js`, we'll need to install the library locally...
+To bundle the `lodash` dependency with `index.js`, we'll need to install the library locally:
 
 ``` bash
-npm install --save-dev lodash
+npm install --save lodash
 ```
 
-and then import it in our script...
+T> As a rule of thumb: if you're installing a package that will be bundled into your rpdocution code, then you should use `npm install --save`. If you're installing a package to help development (e.g. a linter, testing libraries, etc.) then you should use `npm install --save-dev`. More information can be found in the [npm documentation](https://docs.npmjs.com/cli/install).
+
+Now, lets import `lodash` in our script:
 
 __src/index.js__
 
