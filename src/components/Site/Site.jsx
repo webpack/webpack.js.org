@@ -87,7 +87,7 @@ class Site extends React.Component {
                 path={ page.url }
                 render={ props => {
                   let path = page.path.replace('src/content/', '');
-                  let module = this.props.import(path);
+                  let content = this.props.import(path);
 
                   return (
                     <React.Fragment>
@@ -100,9 +100,7 @@ class Site extends React.Component {
                         ))) } />
                       <Page
                         { ...page }
-                        content={ module instanceof Promise ? (
-                          'TODO: Use `LazyLoad` component with nprogress'
-                        ) : module } />
+                        content={ content } />
                     </React.Fragment>
                   );
                 }} />

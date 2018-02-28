@@ -10,52 +10,74 @@ import Gitter from '../Gitter/Gitter';
 // Load Styling
 import './Page.scss';
 
-const Page = ({
-  title,
-  content,
-  contributors = [],
-  related = [],
-  ...props
-}) => (
-  <section className="page">
-    <PageLinks page={ props } />
+class Page extends React.Component {
+  state = {
+    content: this.props.content instanceof Promise ? 'Loading...' : this.props.content
+  }
 
-    <Markdown>
-      <h1>{ title }</h1>
+  render() {
+    let {
+      title,
+      content,
+      contributors = [],
+      related = [],
+      ...rest
+    } = this.props;
 
-      <div dangerouslySetInnerHTML={{
-        __html: content
-      }} />
+    return (
+      <section className="page">
+        <PageLinks page={ rest } />
 
-      { related && related.length > 0 && (
-        <div>
-          <hr />
-          <h3>Further Reading</h3>
-          <ul>
-            {
-              related.map((link, index) => (
-                <li key={ index }>
-                  <a href={ link.url }>
-                    { link.title }
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      )}
+        <Markdown>
+          <h1>{ title }</h1>
 
-      { contributors && contributors.length > 0 && (
-        <div>
-          <hr />
-          <h3>Contributors</h3>
-          <Contributors contributors={ contributors } />
-        </div>
-      )}
-    </Markdown>
+          <div dangerouslySetInnerHTML={{
+            __html: this.state.content
+          }} />
 
-    <Gitter />
-  </section>
-);
+          { related && related.length > 0 && (
+            <div>
+              <hr />
+              <h3>Further Reading</h3>
+              <ul>
+                {
+                  related.map((link, index) => (
+                    <li key={ index }>
+                      <a href={ link.url }>
+                        { link.title }
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          )}
+
+          { contributors && contributors.length > 0 && (
+            <div>
+              <hr />
+              <h3>Contributors</h3>
+              <Contributors contributors={ contributors } />
+            </div>
+          )}
+        </Markdown>
+
+        <Gitter />
+      </section>
+    );
+  }
+
+  componentDidMount() {
+    if ( this.props.content instanceof Promise ) {
+      this.props.content
+        .then(content => this.setState({
+          content
+        }))
+        .catch(error => this.setState({
+          content: 'Error loading content.'
+        }));
+    }
+  }
+}
 
 export default Page;
