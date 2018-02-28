@@ -4,8 +4,8 @@ contributors:
   - sokra
   - jeremenichelli
 related:
-   - title: "webpack 4: Code Splitting, chunk graph and the splitChunks optimization"
-     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
+  - title: "webpack 4: Code Splitting, chunk graph and the splitChunks optimization"
+    url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
 
 Originally in webpack, chunks (and modules import inside them) were connected by a parent-child relationship in the internal webpack graph.
