@@ -5,6 +5,7 @@ contributors:
   - sokra
   - skipjack
   - yatharthk
+  - arturparkhisenko
 ---
 
 The `plugins` option is used to customize the webpack build process in a variety of ways. webpack comes with a variety built-in plugins available under `webpack.[plugin-name]`. See [this page](/plugins) for a list of plugins and documentation but note that there are a lot more out in the community.
@@ -16,11 +17,11 @@ T> Note: This page only discusses using plugins, however if you are interested i
 
 `array`
 
-A list of webpack plugins. For example, when multiple bundles share some of the same dependencies, the `CommonsChunkPlugin` could be useful to extract those dependencies into a shared bundle to avoid duplication. This could be added like so:
+A list of webpack plugins. For example, when your bundles are big, the `UglifyJsPlugin` could be useful to reduce bundles size by minifying scripts. This could be added like so:
 
 ```js
 plugins: [
-  new webpack.optimize.CommonsChunkPlugin({
+  new webpack.optimize.UglifyJsPlugin({
     ...
   })
 ]
@@ -37,10 +38,6 @@ var DashboardPlugin = require('webpack-dashboard/plugin');
 // adding plugins to your configuration
 plugins: [
   // build optimization plugins
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-    filename: 'vendor-[hash].min.js',
-  }),
   new webpack.optimize.UglifyJsPlugin({
     compress: {
       warnings: false,
