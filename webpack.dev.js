@@ -18,6 +18,10 @@ module.exports = env => merge(common(env), {
       meta: {
         description: '...'
       }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      chunks: [ 'index' ]
     })
   ],
   devServer: {
