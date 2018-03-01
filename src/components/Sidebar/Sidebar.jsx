@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import throttle from 'lodash.throttle';
 import Shield from '../Shield/Shield';
 import SidebarItem from '../SidebarItem/SidebarItem';
 
@@ -48,7 +49,7 @@ export default class Sidebar extends Component {
                   title={ page.title }
                   anchors={ page.anchors }
                   currentPage= { currentPage }
-                  onToggle={ this._recalculate.bind(this) } />
+                  onToggle={ this._recalculate } />
               </div>
             );
           })}
@@ -60,20 +61,20 @@ export default class Sidebar extends Component {
 
   componentDidMount() {
     setTimeout(
-      this._recalculate.bind(this),
+      this._recalculate,
       250
     );
 
     document.addEventListener(
       'scroll',
-      this._recalculate.bind(this)
+      this._recalculate
     );
   }
 
   componentWillUnmount() {
     document.removeEventListener(
       'scroll',
-      this._recalculate.bind(this)
+      this._recalculate
     );
   }
 
@@ -81,7 +82,8 @@ export default class Sidebar extends Component {
    * Re-calculate fixed state and position
    *
    */
-  _recalculate() {
+  _recalculate = throttle(() => {
+    console.log('recalc running');
     let { scrollY, innerHeight } = window;
     let { scrollHeight } = document.body;
     let { offsetHeight: sidebarHeight } = this._container;
@@ -99,5 +101,5 @@ export default class Sidebar extends Component {
       availableHeight: innerHeight - headerSpace - footerSpace,
       maxWidth: parentWidth
     });
-  }
+  }, 250);
 }
