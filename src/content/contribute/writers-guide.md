@@ -120,4 +120,4 @@ W> This is a warning.
 
 ***
 
-> 原文：https://webpack.js.org/writers-guide/
+> 原文：https://webpack.js.org/contribute/writers-guide/
