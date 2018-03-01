@@ -21,6 +21,7 @@ Let's make a minor change to our project before we get started:
 __dist/index.html__
 
 ``` diff
+  <!doctype html>
   <html>
     <head>
 -    <title>Getting Started</title>

@@ -69,6 +69,7 @@ Let's also update our `dist/index.html` file, in preparation for webpack to spli
 __dist/index.html__
 
 ``` diff
+  <!doctype html>
   <html>
     <head>
 -     <title>Asset Management</title>
