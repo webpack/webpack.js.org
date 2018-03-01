@@ -19,6 +19,7 @@ contributors:
   - hijiangtao
   - hikerpig
   - huangtubiao
+  - initial-wu
   - itchina110
   - jason-ivy
   - JayceZhang9602

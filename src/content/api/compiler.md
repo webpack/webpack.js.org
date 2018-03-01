@@ -134,3 +134,7 @@ compiler.plugin("emit", function(compilation, callback) {
   }, 1000);
 });
 ```
+
+***
+
+> 原文：https://webpack.js.org/api/compiler/

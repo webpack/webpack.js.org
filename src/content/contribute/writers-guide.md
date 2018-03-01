@@ -3,64 +3,64 @@ title: 作者指引
 sort: 2
 ---
 
-The following sections contain all you need to know about editing and formatting the content within this site. Make sure to do some research before starting your edits or additions. Sometimes the toughest part is finding where the content should live and determining whether or not it already exists.
+以下部分包含编辑(edit)和格式化(format)网站内容的所有必需知识。请确保在开始编辑或添加之前，你已经进行过一些研究。有时候最困难的地方在于，找到内容应该存在的位置和确定它是否存在。
 
 
-## Process
+## 步骤
 
-1. Check related issue if an article links to one.
-2. Hit `edit` and expand on the structure.
-3. PR changes.
+1. 查看相关的引用文件。
+2. 点击`编辑`并展开结构。
+3. 提交 PR 修改。
 
 
-## YAML Frontmatter
+## YAML 文件顶部信息
 
-Each article contains a small section at the top written in [YAML Frontmatter](https://jekyllrb.com/docs/frontmatter/):
+每篇文章顶部的内容部分，都是以 [YAML Frontmatter](https://jekyllrb.com/docs/frontmatter/) 格式书写：
 
 ``` yaml
 ---
-title: My Article
+title: 我的文章
 sort: 3
 contributors:
-  - [github username]
+  - [github 用户名]
 related:
-  - title: Title of Related Article
-    url: [url of related article]
+  - title: 相关文章的 title
+    url: [相关文章的 url]
 ---
 ```
 
-Let's break these down:
+让我们来逐个分析：
 
-- `title`: The name of the article.
-- `sort`: The order of the article within its section.
-- `contributors`: A list of GitHub usernames who have contributed to this article.
-- `related`: Any related reading or useful examples.
+- `title`：文章的名称。
+- `sort`：这篇文章在这类文章的顺序。
+- `contributors`：贡献文章的 GitHub 用户列表。
+- `related`：所有相关阅读或有用示例。
 
-Note that `related` will generate a __Further Reading__ section at the bottom of the page and `contributors` will yield a __Contributors__ section below it. If you edit an article and would like recognition, don't hesitate to add your GitHub username to the `contributors` list.
-
-
-## Article Structure
-
-1. Brief Introduction - a paragraph or two so you get the basic idea about the what and why.
-2. Outline Remaining Content – how the content will be presented.
-3. Main Content - tell what you promised to tell.
-4. Conclusion - tell what you told and recap the main points.
+请注意，`related` 将在页面底部生成__进一步阅读__部分，并且在下面 `contributors` 会生成__贡献__部分。如果你写了一篇文章，并希望获得认可，请不要犹豫，将你的 GitHub 用户名添加到 `contributors` 列表中。
 
 
-## Typesetting
+## 文档结构
 
-- webpack should always be written in lower-case letters. Even at the beginning of a sentence. ([source](https://github.com/webpack/media#name))
-- loaders are enclosed in backticks and [kebab-cased](https://en.wikipedia.org/w/index.php?title=Kebab_case): `css-loader`, `ts-loader`, …
-- plugins are enclosed in backticks and [camel-cased](https://en.wikipedia.org/wiki/Camel_case): `BannerPlugin`, `NpmInstallWebpackPlugin`, …
-- Use "webpack 2" to refer to a specific webpack version (~~"webpack v2"~~)
-- Use ES5; ES2015, ES2016, … to refer to the ECMAScript standards (~~ES6~~, ~~ES7~~)
+1. 简介 - 一个或两个段落，以便你了解关于什么和为什么的基本想法。
+2. 概述剩余内容 - 将如何呈现内容。
+3. 主要内容 - 告诉你答应说的话。
+4. 结论 - 告诉你所讲的并重述要点。
 
 
-## Formatting
+## 排版
 
-### Code
+- webpack 应当总是以小写字母书写。即使在一句话的起始位置也是如此。（[来源](https://github.com/webpack/media#name)）
+- loader 应当用反引号(\`)包裹，并且使用[串联式(kebab-cased)](https://en.wikipedia.org/w/index.php?title=Kebab_case)：`css-loader`, `ts-loader`, ……
+- plugin 应当用反引号(\`)包裹，并且使用[串联式(kebab-cased)](https://en.wikipedia.org/w/index.php?title=Kebab_case)：`BannerPlugin`, `NpmInstallWebpackPlugin`, ……
+- 使用 "webpack 2" 指代特定的 webpack 版本（~~"webpack v2"~~）
+- 使用 ES5; ES2015, ES2016, …… 指代 ECMAScript 标准（~~ES6~~, ~~ES7~~）
 
-__Syntax: \`\`\`javascript … \`\`\`__
+
+## 格式化
+
+### 代码
+
+__语法：\`\`\`javascript … \`\`\`__
 
 ```javascript
 function foo () {
@@ -70,54 +70,54 @@ function foo () {
 foo();
 ```
 
-### Lists
+### 列表
 
 - Boo
 - Foo
 - Zoo
 
-Lists should be ordered alphabetically.
+列表，应该按字母表顺序排列。
 
-### Tables
+### 表格
 
-Parameter   | Explanation                                      | Input Type | Default Value
+参数   | 解释说明                                      | 输入类型 | 默认值
 ----------- | ------------------------------------------------ | ---------- |--------------
 --debug     | Switch loaders to debug mode                     | boolean    | false
 --devtool   | Define source map type for the bundled resources | string     | -
 --progress  | Print compilation progress in percentage         | boolean    | false
 
-Same goes for tables.
+表格也一样.
 
-### Configuration Properties
+### 配置属性
 
-The [configuration](/configuration) properties should be ordered alphabetically as well:
+[配置](/configuration) 属性，应该按字母表顺序排列:
 
 - `devServer.compress`
 - `devServer.contentBase`
 - `devServer.hot`
 
-### Quotes
+### 引用
 
-#### Blockquote
+#### 引用块
 
-**Syntax: \>**
+**语法：\>**
 
-> This is a blockquote.
+> 这是一个引用块.
 
-#### Tip
+#### 提示
 
-**Syntax: T\>**
+**语法：T\>**
 
-T> This is a tip.
+T> 这是一个提示.
 
-**Syntax: W\>**
+**语法：W\>**
 
-W> This is a warning.
+W> 这是一个警告.
 
-**Syntax: ?\>**
+**语法：?\>**
 
-?> This is a todo.
+?> 这个一个 todo 待办项.
 
 ***
 
-> 原文：https://webpack.js.org/writers-guide/
+> 原文：https://webpack.js.org/contribute/writers-guide/
