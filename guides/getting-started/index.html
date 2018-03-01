@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     
-      <link href="/b7e5b12f92d30aa5c667.css" rel="stylesheet">
+      <link href="/f092e6b42f9023e3ecb2.css" rel="stylesheet">
     
 
     <script src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
@@ -46,7 +46,8 @@ npm <span class="token function">install</span> --save-dev webpack
 document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p><strong>index.html</strong></p>
-<pre><code class="lang-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
+<pre><code class="lang-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>!doctype</span> <span class="token attr-name">html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>Getting Started<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>https://unpkg.com/lodash@4.16.6<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
@@ -96,7 +97,8 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
 </code></pre>
 <p>Now, since we&apos;ll be bundling our scripts, we have to update our <code>index.html</code> file. Let&apos;s remove the lodash <code>&lt;script&gt;</code>, as we now <code>import</code> it, and modify the other <code>&lt;script&gt;</code> tag to load the bundle, instead of the raw <code>/src</code> file:</p>
 <p><strong>dist/index.html</strong></p>
-<pre><code class="lang-diff">  &lt;html&gt;
+<pre><code class="lang-diff">  &lt;!doctype html&gt;
+  &lt;html&gt;
    &lt;head&gt;
      &lt;title&gt;Getting Started&lt;/title&gt;
 <span class="token deleted">-    &lt;script src=&quot;https://unpkg.com/lodash@4.16.6&quot;&gt;&lt;/script&gt;</span>
