@@ -374,6 +374,7 @@ With that in place, we can add the logic to conditionally load our new `polyfill
 __dist/index.html__
 
 ``` diff
+  <!doctype html>
   <html>
     <head>
       <title>Getting Started</title>

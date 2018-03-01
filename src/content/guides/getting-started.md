@@ -58,6 +58,7 @@ document.body.appendChild(component());
 __index.html__
 
 ``` html
+<!doctype html>
 <html>
   <head>
     <title>Getting Started</title>
@@ -127,6 +128,7 @@ Now, since we'll be bundling our scripts, we have to update our `index.html` fil
 __dist/index.html__
 
 ``` diff
+  <!doctype html>
   <html>
    <head>
      <title>Getting Started</title>
@@ -144,7 +146,7 @@ In this setup, `index.js` explicitly requires `lodash` to be present, and binds 
 With that said, let's run `npx webpack` with our script as the [entry point](/concepts/entry-points) and `bundle.js` as the [output](/concepts/output). The `npx` command, which ships with Node 8.2 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
 
 ``` bash
-npx webpack src/index.js dist/bundle.js
+npx webpack src/index.js --output dist/bundle.js
 
 Hash: 857f878815ce63ad5b4f
 Version: webpack 3.9.1
