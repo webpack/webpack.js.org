@@ -130,7 +130,7 @@ To bundle the `lodash` dependency with `index.js`, we'll need to install the lib
 npm install --save lodash
 ```
 
-T> As a rule of thumb: if you're installing a package that will be bundled into your rpdocution code, then you should use `npm install --save`. If you're installing a package to help development (e.g. a linter, testing libraries, etc.) then you should use `npm install --save-dev`. More information can be found in the [npm documentation](https://docs.npmjs.com/cli/install).
+T> When installing a package that will be bundled into your production bundle, you should use `npm install --save`. If you're installing a package for development purposes (e.g. a linter, testing libraries, etc.) then you should use `npm install --save-dev`. More information can be found in the [npm documentation](https://docs.npmjs.com/cli/install).
 
 Now, lets import `lodash` in our script:
 
