@@ -149,7 +149,7 @@ function parseAnchor(string) {
 
   return {
     title: clean,
-    id: clean.replace(/[^\w\u4e00-\u9fa5]+/g, '-').toLowerCase()
+    id: clean.replace(/[^\w]+/g, '-').toLowerCase()
   };
 }
 
