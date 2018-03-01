@@ -101,17 +101,18 @@ require(['webpackNumbers'], function ( webpackNumbers) {
 The consumer also can use the library by loading it via a script tag:
 
 ``` html
+<!doctype html>
 <html>
-...
-<script src="https://unpkg.com/webpack-numbers"></script>
-<script>
-  // ...
-  // Global variable
-  webpackNumbers.wordToNum('Five')
-  // Property in the window object
-  window.webpackNumbers.wordToNum('Five')
-  // ...
-</script>
+  ...
+  <script src="https://unpkg.com/webpack-numbers"></script>
+  <script>
+    // ...
+    // Global variable
+    webpackNumbers.wordToNum('Five')
+    // Property in the window object
+    window.webpackNumbers.wordToNum('Five')
+    // ...
+  </script>
 </html>
 ```
 
