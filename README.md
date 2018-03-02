@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://docschina.org">
-    <img width="100" src="site.png">
+    <img width="200" src="site.png">
   </a>
 </div>
 
