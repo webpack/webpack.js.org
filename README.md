@@ -41,11 +41,6 @@ webpack 中文文档
 - **（必读）感谢 @QC-L 同学简洁易懂的配图**
 ![webpack.js.org](webpack-process.png)
 
-- 印记中文翻译QQ群（群号：492361223）
-- 印记中文翻译微信群（群主：@275091674。人数超过100人，必须邀请进入）
-- 印记中文翻译微信公众号（公众号：印记中文翻译）
-
-
 ### 开发
 
 ```javascript
@@ -55,11 +50,9 @@ npm start
 ```
 
 
-### 翻译任务认领说明
+### 说明
 
-- [webpack 2 翻译任务认领说明 - 入口目录](https://github.com/webpack-china/webpack.js.org/issues/17)
-
-- [webpack 2 校对+审校任务认领说明 - 入口目录](https://github.com/webpack-china/webpack.js.org/issues/169)
+- [说明 - 你想要知道的所有都在这里了](https://github.com/webpack-china/webpack.js.org/issues/17)
 
 - [翻译人员名单](https://doc.webpack-china.org/about/)中如未收录你的名字，请[访问此处](https://github.com/webpack-china/webpack.js.org/issues/180)留下你的大名(^_^)
 
