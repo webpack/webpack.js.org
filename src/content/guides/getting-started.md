@@ -25,7 +25,7 @@ First let's create a directory, initialize npm, and [install webpack locally](/g
 ``` bash
 mkdir webpack-demo && cd webpack-demo
 npm init -y
-npm install --save-dev webpack
+npm install --save-dev webpack webpack-cli
 ```
 
 Now we'll create the following directory structure and contents:
@@ -206,7 +206,7 @@ module.exports = {
 Now, let's run the build again but instead using our new configuration:
 
 ``` bash
-npx webpack --config webpack.config.js
+npx webpack-cli --config webpack.config.js
 
 Hash: 857f878815ce63ad5b4f
 Version: webpack 3.9.1
@@ -236,7 +236,7 @@ __package.json__
 {
   ...
   "scripts": {
-    "build": "webpack"
+    "build": "webpack-cli"
   },
   ...
 }
