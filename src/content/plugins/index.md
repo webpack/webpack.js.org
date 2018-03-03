@@ -16,7 +16,6 @@ Name                                                     | Description
 [`BabelMinifyWebpackPlugin`](/plugins/babel-minify-webpack-plugin) | Minification with [babel-minify](https://github.com/babel/minify)
 [`BannerPlugin`](/plugins/banner-plugin)                 | Add a banner to the top of each generated chunk
 [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin)    | Extract common modules shared between chunks
-[`ComponentWebpackPlugin`](/plugins/component-webpack-plugin) | Use components with webpack
 [`CompressionWebpackPlugin`](/plugins/compression-webpack-plugin) | Prepare compressed versions of assets to serve them with Content-Encoding
 [`ContextReplacementPlugin`](/plugins/context-replacement-plugin) | Override the inferred context of a `require` expression
 [`DefinePlugin`](/plugins/define-plugin)           | Allow global constants configured at compile time
@@ -35,6 +34,7 @@ Name                                                     | Description
 [`NpmInstallWebpackPlugin`](/plugins/npm-install-webpack-plugin) | Auto-install missing dependencies during development
 [`ProvidePlugin`](/plugins/provide-plugin)                       | Use modules without having to use import/require
 [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin)  | Enables a more fine grained control of source maps
+[`EvalSourceMapDevToolPlugin`](/plugins/eval-source-map-dev-tool-plugin)  | Enables a more fine grained control of eval source maps
 [`UglifyjsWebpackPlugin`](/plugins/uglifyjs-webpack-plugin)      | Enables control of the version of UglifyJS in your project
 [`ZopfliWebpackPlugin`](/plugins/zopfli-webpack-plugin)          | Prepare compressed versions of assets with node-zopfli
 

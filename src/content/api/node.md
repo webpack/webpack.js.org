@@ -48,34 +48,47 @@ webpack({
 
 T> The `err` object **will not** include compilation errors and those must be handled separately using `stats.hasErrors()` which will be covered in detail in [Error Handling](#error-handling) section of this guide. The `err` object will only contain webpack-related issues, such as misconfiguration, etc.
 
-**Note** that you can provide the `webpack` function with an array of configurations:
-
-``` js-with-links
-webpack([
-  { /* Configuration Object */ },
-  { /* Configuration Object */ },
-  { /* Configuration Object */ }
-], (err, [stats](#stats-object)) => {
-  // ...
-});
-```
-
-T> webpack will **not** run the multiple configurations in parallel. Each configuration is only processed after the previous one has finished processing. To have webpack process them in parallel, you can use a third-party solution like [parallel-webpack](https://www.npmjs.com/package/parallel-webpack).
+T> You can provide the `webpack` function with an array of configurations. See
+the [MultiCompiler](#multicompiler) section below for more information.
 
 
 ## Compiler Instance
 
-If you don’t pass the `webpack` runner function a callback, it will return a webpack `Compiler` instance. This instance can be used to manually trigger the webpack runner or have it build and watch for changes. Much like the [CLI](/api/cli/) Api. The `Compiler` instance provides the following methods:
+If you don’t pass the `webpack` runner function a callback, it will return a
+webpack `Compiler` instance. This instance can be used to manually trigger the
+webpack runner or have it build and watch for changes, much like the
+[CLI](/api/cli/). The `Compiler` instance provides the following methods:
 
-* `.run(callback)`
-* `.watch(watchOptions, handler)`
+- `.run(callback)`
+- `.watch(watchOptions, handler)`
 
-W> The API only supports a single concurrent compilation at a time. When using `run`, wait for it to finish before calling `run` or `watch` again. When using `watch`, call `close` and wait for it to finish before calling `run` or `watch` again. Concurrent compilations will corrupt the output files.
+Typically, only one master `Compiler` instance is created, although child
+compilers can be created in order to delegate specific tasks. The `Compiler` is
+ultimately just a function which performs bare minimum functionality to keep a
+lifecycle running. It delegates all the loading, bundling, and writing work to
+registered plugins.
+
+The `hooks` property on a `Compiler` instance is used to register a plugin to
+any hook event in the `Compiler`'s lifecycle. The [`WebpackOptionsDefaulter`]
+(https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js)
+and [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js)
+utilities are used by webpack to configure its `Compiler` instance with all the
+built-in plugins.
+
+The `run` method is then used to kickstart all compilation work. Upon
+completion, the given `callback` function is executed. The final logging of
+stats and errors should be done in this `callback` function.
+
+W> The API only supports a single concurrent compilation at a time. When using
+`run`, wait for it to finish before calling `run` or `watch` again. When using
+`watch`, call `close` and wait for it to finish before calling `run` or `watch`
+again. Concurrent compilations will corrupt the output files.
 
 
 ## Run
 
-Calling the `run` method on the `Compiler` instance is much like the quick run method mentioned above:
+Calling the `run` method on the `Compiler` instance is much like the quick run
+method mentioned above:
 
 ``` js-with-links
 const webpack = require("webpack");
@@ -92,13 +105,15 @@ compiler.run((err, [stats](#stats-object)) => {
 
 ## Watching
 
-Calling the `watch` method, triggers the webpack runner, but then watches for changes (much like CLI: `webpack --watch`), as soon as webpack detects a change, runs again. Returns an instance of `Watching`.
+Calling the `watch` method, triggers the webpack runner, but then watches for
+changes (much like CLI: `webpack --watch`), as soon as webpack detects a
+change, runs again. Returns an instance of `Watching`.
 
-``` js-with-links
+``` js
 watch(watchOptions, callback)
 ```
 
-``` js-with-links-with-details
+``` js-with-links
 const webpack = require("webpack");
 
 const compiler = webpack({
@@ -106,24 +121,28 @@ const compiler = webpack({
 });
 
 const watching = compiler.watch({
-  <details><summary>/* [watchOptions](/configuration/watch/#watchoptions) */</summary>
+  // Example [watchOptions](/configuration/watch/#watchoptions)
   aggregateTimeout: 300,
   poll: undefined
-  </details>
 }, (err, [stats](#stats-object)) => {
   // Print watch/build result here...
   console.log(stats);
 });
 ```
 
-`Watching` options are [covered in detail here](/configuration/watch/#watchoptions).
+`Watching` options are covered in detail
+[here](/configuration/watch/#watchoptions).
 
-W> Filesystem inaccuracies may trigger multiple builds for a single change. So, in the example above, the `console.log` statement may fire multiple times for a single modification. Users should expect this behavior and may check `stats.hash` to see if the file hash has actually changed.
+W> Filesystem inaccuracies may trigger multiple builds for a single change. So,
+in the example above, the `console.log` statement may fire multiple times for a
+single modification. Users should expect this behavior and may check
+`stats.hash` to see if the file hash has actually changed.
 
 
 ### Close `Watching`
 
-The `watch` method returns a `Watching` instance that exposes `.close(callback)` method. Calling this method will end watching:
+The `watch` method returns a `Watching` instance that exposes
+`.close(callback)` method. Calling this method will end watching:
 
 ``` js
 watching.close(() => {
@@ -131,12 +150,14 @@ watching.close(() => {
 });
 ```
 
-T> It’s not allowed to watch or run again before the existing watcher has been closed or invalidated.
+W> It’s not allowed to watch or run again before the existing watcher has been
+closed or invalidated.
 
 
 ### Invalidate `Watching`
 
-Using `watching.invalidate`, you can manually invalidate the current compiling round, without stopping the watch process:
+Using `watching.invalidate`, you can manually invalidate the current compiling
+round, without stopping the watch process:
 
 ``` js
 watching.invalidate();
@@ -145,32 +166,40 @@ watching.invalidate();
 
 ## Stats Object
 
-The `stats` object that is passed as a second argument of the [`webpack()`](#webpack-) callback, is a good source of information about the code compilation process. It includes:
+The `stats` object that is passed as a second argument of the
+[`webpack()`](#webpack-) callback, is a good source of information about the
+code compilation process. It includes:
 
-* Errors and Warnings (if any)
-* Timings
-* Module and Chunk information
+- Errors and Warnings (if any)
+- Timings
+- Module and Chunk information
 
-The [webpack CLI](/api/cli) uses this information to display a nicely formatted output in your console.
+The [webpack CLI](/api/cli) uses this information to display nicely formatted
+output in your console.
 
-T> When using the [`MultiCompiler`](/api/plugins/compiler#multicompiler), a `MultiStats` instance is returned that fulfills the same interface as `stats`, i.e. the methods described below.
+T> When using the [`MultiCompiler`](/api/plugins/compiler#multicompiler), a
+`MultiStats` instance is returned that fulfills the same interface as `stats`,
+i.e. the methods described below.
 
 This `stats` object exposes the following methods:
 
 
 ### `stats.hasErrors()`
 
-Can be used to check if there were errors while compiling. Returns `true` or `false`.
+Can be used to check if there were errors while compiling. Returns `true` or
+`false`.
 
 
 ### `stats.hasWarnings()`
 
-Can be used to check if there were warnings while compiling. Returns `true` or `false`.
+Can be used to check if there were warnings while compiling. Returns `true` or
+`false`.
 
 
 ### `stats.toJson(options)`
 
-Returns compilation information as a JSON object. `options` can be either a string (a preset) or an object for more granular control:
+Returns compilation information as a JSON object. `options` can be either a
+string (a preset) or an object for more granular control:
 
 ``` js-with-links
 stats.toJson("minimal"); // [more options: "verbose", etc](/configuration/stats).
@@ -183,20 +212,22 @@ stats.toJson({
 });
 ```
 
-All available options and presets are described in [Stats documentation](/configuration/stats)
+All available options and presets are described in the stats [documentation](/configuration/stats).
 
-> Here’s [an example of this function’s output](https://github.com/webpack/analyse/blob/master/app/pages/upload/example.json)
+> Here’s an [example]
+(https://github.com/webpack/analyse/blob/master/app/pages/upload/example.json)
+of this function’s output.
 
 
 ### `stats.toString(options)`
 
-Returns a formatted string of the compilation information (similar to [CLI](/api/cli) output).
+Returns a formatted string of the compilation information (similar to
+[CLI](/api/cli) output).
 
 Options are the same as [`stats.toJson(options)`](/api/node#stats-tojson-options-) with one addition:
 
 ``` js
 stats.toString({
-  // ...
   // Add console colors
   colors: true
 });
@@ -221,6 +252,30 @@ webpack({
   }));
 });
 ```
+
+
+## MultiCompiler
+
+The `MultiCompiler` module allows webpack to run multiple configurations in
+separate compilers. If the `options` parameter in the webpack's NodeJS api is
+an array of options, webpack applies separate compilers and calls the
+`callback` method at the end of each compiler execution.
+
+``` js-with-links
+var webpack = require('webpack');
+
+webpack([
+  { entry: './index1.js', output: { filename: 'bundle1.js' } },
+  { entry: './index2.js', output: { filename: 'bundle2.js' } }
+], (err, [stats](#stats-object)) => {
+  process.stdout.write(stats.toString() + "\n");
+})
+```
+
+W> Multiple configurations will __not be run in parallel__. Each
+configuration is only processed after the previous one has finished
+processing. To process them in parallel, you can use a third-party solution
+like [parallel-webpack](https://www.npmjs.com/package/parallel-webpack).
 
 
 ## Error Handling
@@ -264,7 +319,13 @@ webpack({
 
 ## Custom File Systems
 
-By default, webpack reads files and writes files to disk using a normal file system. However, it is possible to change the input or output behavior using a different kind of file system (memory, webDAV, etc). To accomplish this, one can change the `inputFileSystem` or `outputFileSystem`. For example, you can replace the default `outputFileSystem` with [`memory-fs`](https://github.com/webpack/memory-fs) to write files to memory instead of to disk:
+By default, webpack reads files and writes files to disk using a normal file
+system. However, it is possible to change the input or output behavior using a
+different kind of file system (memory, webDAV, etc). To accomplish this, one
+can change the `inputFileSystem` or `outputFileSystem`. For example, you can
+replace the default `outputFileSystem` with
+[`memory-fs`](https://github.com/webpack/memory-fs) to write files to memory
+instead of to disk:
 
 ``` js
 const MemoryFS = require("memory-fs");
@@ -280,6 +341,12 @@ compiler.run((err, stats) => {
 });
 ```
 
-Note that this is what [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware), used by [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and many other packages, uses to mysteriously hide your files but continue serving them up to the browser!
+Note that this is what
+[webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware),
+used by [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
+and many other packages, uses to mysteriously hide your files but continue
+serving them up to the browser!
 
-T> The output file system you provide needs to be compatible with Node’s own [`fs`](https://nodejs.org/api/fs.html) interface, which requires the `mkdirp` and `join` helper methods.
+T> The output file system you provide needs to be compatible with Node’s own
+[`fs`](https://nodejs.org/api/fs.html) interface, which requires the `mkdirp`
+and `join` helper methods.

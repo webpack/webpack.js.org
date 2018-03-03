@@ -243,7 +243,7 @@ unsafeCache: /src\/utilities/
 W> Changes to cached paths may cause failure in rare cases.
 
 
-## `resolve.plugins`
+### `resolve.plugins`
 
 A list of additional resolve plugins which should be applied. It allows plugins such as [`DirectoryNamedWebpackPlugin`](https://www.npmjs.com/package/directory-named-webpack-plugin).
 
@@ -254,18 +254,22 @@ plugins: [
 ```
 
 
-## `resolve.symlinks`
+### `resolve.symlinks`
 
 `boolean`
 
-Whether to resolve symlinks to their symlinked location. Default:
+Whether to resolve symlinks to their symlinked location.
+
+When enabled, symlinked resources are resolved to their _real_ path, not their symlinked location. Note that this may cause module resolution to fail when using tools that symlink packages (like `npm link`).
+
+`resolve.symlinks` defaults to:
 
 ```js
 symlinks: true
 ```
 
 
-## `resolve.cachePredicate`
+### `resolve.cachePredicate`
 
 `function`
 

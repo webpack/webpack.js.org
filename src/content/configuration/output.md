@@ -66,7 +66,7 @@ auxiliaryComment: {
 
 ## `output.chunkFilename`
 
-`string`
+`string` `function`
 
 This option determines the name of non-entry chunk files. See [`output.filename`](#output-filename) option for details on the possible values.
 
@@ -95,6 +95,16 @@ Enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/scr
 `crossOriginLoading: "anonymous"` - Enable cross-origin loading **without credentials**
 
 `crossOriginLoading: "use-credentials"` - Enable cross-origin loading **with credentials**
+
+
+## `output.jsonpScriptType`
+
+`string`
+
+Allows customization of the `script` type webpack injects `script` tags into the DOM to download async chunks. The following options are available:
+
+- `"text/javascript"` (default)
+- `"module"`: Use with ES6 ready code.
 
 
 ## `output.devtoolFallbackModuleFilenameTemplate`
@@ -168,7 +178,7 @@ For example, if you have 2 libraries, with namespaces `library1` and `library2`,
 
 ## `output.filename`
 
-`string`
+`string` `function`
 
 This option determines the name of each output bundle. The bundle is written to the directory specified by the [`output.path`](#output-path) option.
 
@@ -208,7 +218,7 @@ Make sure to read the [Caching guide](/guides/caching) for details. There are mo
 
 Note this option is called filename but you are still allowed to use something like `"js/[name]/bundle.js"` to create a folder structure.
 
-Note this options does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#output-chunkfilename) option is used. It also doesn't affect files created by loaders. For these files see loader options.
+Note this option does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#output-chunkfilename) option is used. Files created by loaders also aren't affected. In this case you would have to try the specific loader's available options.
 
 The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
 
@@ -221,6 +231,8 @@ The following substitutions are available in template strings (via webpack's int
 | [query]     | The module query, i.e., the string following `?` in the filename                    |
 
 The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#output-hashdigestlength) to configure the length globally.
+
+If using a function for this option, the function will be passed an object containing the substitutions in the table above.
 
 T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
 
@@ -254,7 +266,7 @@ An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.
 
 ## `output.hotUpdateChunkFilename`
 
-`string`
+`string` `function`
 
 Customize the filenames of hot update chunks. See [`output.filename`](#output-filename) option for details on the possible values.
 
@@ -280,7 +292,7 @@ For details see [`output.jsonpFunction`](#output-jsonpfunction).
 
 ## `output.hotUpdateMainFilename`
 
-`string`
+`string` `function`
 
 Customize the main hot update filename. See [`output.filename`](#output-filename) option for details on the possible values.
 
@@ -485,7 +497,7 @@ The generated output will be defined with the name "MyLibrary", i.e.
 
 ``` js
 define("MyLibrary", [], function() {
-  // This module return value is what your entry chunk returns
+  return _entry_return_;
 });
 ```
 
@@ -501,7 +513,7 @@ If `output.library` is undefined, the following is generated instead.
 
 ``` js
 define([], function() {
-  // This module returns is what your entry chunk returns
+  return _entry_return_;
 });
 ```
 
@@ -531,8 +543,8 @@ And finally the output is:
     exports["MyLibrary"] = factory();
   else
     root["MyLibrary"] = factory();
-})(this, function() {
-  //what this module returns is what your entry chunk returns
+})(typeof self !== 'undefined' ? self : this, function() {
+  return _entry_return_;
 });
 ```
 
@@ -556,8 +568,8 @@ The output will be:
     var a = factory();
     for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
   }
-})(this, function() {
-  //what this module returns is what your entry chunk returns
+})(typeof self !== 'undefined' ? self : this, function() {
+  return _entry_return_;
 });
 ```
 
@@ -616,7 +628,7 @@ Note it also adds some info about tree shaking to the generated bundle.
 
 ## `output.publicPath`
 
-`string`
+`string` `function`
 
 This is an important option when using on-demand-loading or loading external resources like images, files, etc. If an incorrect value is specified you'll receive 404 errors while loading these resources.
 
