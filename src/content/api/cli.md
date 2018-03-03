@@ -109,12 +109,6 @@ Specifies a different [configuration](/configuration) file to pick up. Use this 
 webpack --config example.config.js
 ```
 
-**Suppress output of webpack**
-
-```bash
-webpack --silent
-```
-
 **Print result of webpack as a JSON**
 
 ```bash
