@@ -31,13 +31,14 @@ stats: "errors-only"
 | `"minimal"`     | *none*  | 只在发生错误 或是 新的编译时输出 |
 | `"none"`        | `false` | 没有输出 |
 | `"normal"`      | `true`  | 标准输出 |
-| `"detailed"`    | *none*  | 详细输出（从 webpack 3.0.0 开始） |
 | `"verbose"`     | *none*  | 全部输出 |
 
 对于更加精细的控制，这些选项可以准确地列出你想要的信息。请注意，此对象中的所有选项都是可选的。
 
 ``` js
 stats: {
+  // fallback value for stats options when an option is not defined (has precedence over local webpack defaults)
+  all: undefined,
   // 增加资源信息
   assets: true,
   // 对资源按指定的项进行排序
@@ -66,6 +67,8 @@ stats: {
   depth: false,
   // Display the entry points with the corresponding bundles
   entrypoints: false,
+  // 增加 --env information
+  env: false,
   // 增加错误信息
   errors: true,
   // 增加错误的详细信息（就像解析日志一样）

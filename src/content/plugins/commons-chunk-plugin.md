@@ -8,7 +8,7 @@ contributors:
   - jdbevan
 ---
 
-`CommonsChunkPlugin` 插件，是一个可选的用于建立一个独立文件(又称作 chunk)的功能，这个文件包括多个入口 `chunk` 的公共模块。通过将公共模块拆出来，最终合成的文件能够在最开始的时候加载一次，便存起来到缓存中供后续使用。这个带来速度上的提升，因为浏览器会迅速将公共的代码从缓存中取出来，而不是每次访问一个新页面时，再去加载一个更大的文件。
+`CommonsChunkPlugin` 插件，是一个可选的用于建立一个独立文件(又称作 chunk)的功能，这个文件包括多个入口 `chunk` 的公共模块。通过将公共模块拆出来，最终合成的文件能够在最开始的时候加载一次，便存到缓存中供后续使用。这个带来速度上的提升，因为浏览器会迅速将公共的代码从缓存中取出来，而不是每次访问一个新页面时，再去加载一个更大的文件。
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin(options)
@@ -202,7 +202,7 @@ new webpack.optimize.CommonsChunkPlugin({
   name: "vendor",
   minChunks: function (module) {
     // this assumes your vendor imports exist in the node_modules directory
-    return module.context && module.context.indexOf("node_modules") !== -1;
+    return module.context && module.context.includes("node_modules");
   }
 })
 ```
@@ -218,7 +218,7 @@ new webpack.optimize.CommonsChunkPlugin({
     if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
       return false;
     }
-    return module.context && module.context.indexOf("node_modules") !== -1;
+    return module.context && module.context.includes("node_modules");
   }
 })
 ```
@@ -243,7 +243,7 @@ Since the `vendor` and `manifest` chunk use a different definition for `minChunk
   new webpack.optimize.CommonsChunkPlugin({
     name: "vendor",
     minChunks: function(module){
-      return module.context && module.context.indexOf("node_modules") !== -1;
+      return module.context && module.context.includes("node_modules");
     }
   }),
   new webpack.optimize.CommonsChunkPlugin({

@@ -41,3 +41,7 @@ compilation.mainTemplate.plugin('startup', function(source, module, hash) {
 ## HotUpdateChunkTemplate
 
 ?> Document the `HotUpdateChunkTemplate`...
+
+***
+
+> 原文：https://webpack.js.org/api/template/

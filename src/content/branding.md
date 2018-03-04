@@ -1,5 +1,5 @@
 ---
-title: Branding Guidelines
+title: 品牌指南
 sort: 2
 contributors:
   - jhnns

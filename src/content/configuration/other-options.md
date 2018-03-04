@@ -11,9 +11,9 @@ related:
 ---
 
 
-webpack 支持的其它选项。
+这里是 webpack 支持的其它选项。
 
-W> 寻求帮助： 这个页面还在更新中，如果你发现本页面内有描述不准确或者不完整，请在 [webpack 的文档仓库](https://github.com/webpack/webpack.js.org)中创建 issue 或者 pull request
+W> 寻求帮助：这个页面还在更新中，如果你发现本页面内有描述不准确或者不完整，请在 [webpack 的文档仓库](https://github.com/webpack/webpack.js.org)中创建 issue 或者 pull request
 
 
 ## `amd`
@@ -104,27 +104,27 @@ T> Combine with `parallelism: 1` for better results.
 
 ## `recordsPath`
 
-打开这个选项可以生成包含 webpack 记录的 JSON 文件。这个文件记录了数次编译时的模块的特征。你可以用这个文件来比较各个编译之间模块的改变。只要简单的设置一下路径就可以生成这个 JSON 文件：
+开启这个选项可以生成一个 JSON 文件，其中含有 webpack 的 "records" 记录 - 即「用于存储跨多次构建(across multiple builds)的模块标识符」的数据片段。可以使用此文件来跟踪在每次构建之间的模块变化。只要简单的设置一下路径,就可以生成这个 JSON 文件：
 
 ``` js
 recordsPath: path.join(__dirname, 'records.json')
 ```
 
-当复杂的设置导致使用了[代码分离(code splittnig)](/guides/code-splitting)的时候，地址的记录会相当有用。这个 JSON 文件可以用来确保被分割的 bundle 文件的确根据你的需求被保存进入了[缓存(caching)](/guides/caching)。
+如果你使用了[代码分离(code splittnig)](/guides/code-splitting)这样的复杂配置，records 会特别有用。这些数据用于确保拆分 bundle，以便实现你需要的[缓存(caching)](/guides/caching)行为。
 
-T> 注意，虽然这个文件是由编译器生成的，但你可能仍然希望在源代码控制中跟踪它，以保留其随时间变化的历史记录。
+T> 注意，虽然这个文件是由编译器(compiler)生成的，但你可能仍然希望在源代码管理中追踪它，以便随时记录它的变化情况。
 
-W> 设置 `recordsPath` 会同时把 `recordsInputPath` 和 `recordsOutputPath` 设置成相同的路径。通常来讲这也是符合逻辑的，除非你想改变记录文件的名称。可以查看下面的实例：
+W> 设置 `recordsPath` 本质上会把 `recordsInputPath` 和 `recordsOutputPath` 都设置成相同的路径。通常来讲这也是符合逻辑的，除非你决定改变记录文件的名称。可以查看下面的实例：
 
 
 ## `recordsInputPath`
 
-设定读取最后一条记录的文件的名称。这可以用来重命名一个记录文件，可以查看下面的实例：
+指定读取最后一条记录的文件的名称。这可以用来重命名一个记录文件，可以查看下面的实例：
 
 
 ## `recordsOutputPath`
 
-设定记录要写入的位置。下文的例子描述了如何用这个选项和 `recordsInptuPaht` 来重命名一个记录文件：
+指定记录要写入的位置。以下示例描述了如何用这个选项和 `recordsInptuPaht` 来重命名一个记录文件：
 
 ``` js
 recordsInputPath: path.join(__dirname, 'records.json'),

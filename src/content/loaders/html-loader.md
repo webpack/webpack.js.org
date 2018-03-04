@@ -14,9 +14,9 @@ npm i -D html-loader
 
 ## 用法
 
-默认情况下，每个本地的 `<img src="image.png">` 都需要通过 require （`require('./image.png')`）来进行加载。您可能需要在配置中为图片指定 loader（推荐 `file-loader` 或 `url-loader` ）
+默认情况下，每个本地的 `<img src="image.png">` 都需要通过 require （`require('./image.png')`）来进行加载。你可能需要在配置中为图片指定 loader（推荐 `file-loader` 或 `url-loader` ）
 
-您可以通过查询参数 `attrs`，来指定哪个标签属性组合(tag-attribute combination)应该被此 loader 处理。传递数组或以空格分隔的 `<tag>:<attribute>` 组合的列表。（默认值：`attrs=img:src`）
+你可以通过查询参数 `attrs`，来指定哪个标签属性组合(tag-attribute combination)应该被此 loader 处理。传递数组或以空格分隔的 `<tag>:<attribute>` 组合的列表。（默认值：`attrs=img:src`）
 
 If you use `<custom-elements>`, and lots of them make use of a `custom-src` attribute, you don't have to specify each combination `<tag>:<attribute>`: just specify an empty tag like `attrs=:custom-src` and it will match every element.
 
@@ -165,7 +165,7 @@ require("html-loader?root=.!./file.html");
 
 ### 插值
 
-您可以使用 `interpolate` 标记，为 ES6 模板字符串启用插值语法，就像这样：
+你可以使用 `interpolate` 标记，为 ES6 模板字符串启用插值语法，就像这样：
 
 ```js
 require("html-loader?interpolate!./file.html");

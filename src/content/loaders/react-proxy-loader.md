@@ -21,7 +21,7 @@ var Component = require("react-proxy-loader!./Component");
 
 var ComponentProxyMixin = require("react-proxy-loader!./Component").Mixin;
 // => 返回代理组件的 mixin
-// （这允许您为 proxy 的加载状态设置渲染）
+// （这允许你为 proxy 的加载状态设置渲染）
 var ComponentProxy = React.createClass({
 	mixins: [ComponentProxyMixin],
 	renderUnavailable: function() {
@@ -56,7 +56,7 @@ module.exports = {
 
 ##
 
-您可以使用 `name` 查询参数为该 chunk 提供名称：
+你可以使用 `name` 查询参数为该 chunk 提供名称：
 
 ``` js
 var Component = require("react-proxy-loader?name=chunkName!./Component");

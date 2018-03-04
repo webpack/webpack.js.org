@@ -1,5 +1,5 @@
 ---
-title: Public Path
+title: 公共路径(Public Path)
 sort: 24
 contributors:
   - rafaelrinaldi
@@ -7,23 +7,23 @@ contributors:
   - gonzoyumo
 ---
 
-The `publicPath` configuration option can be quite useful in a variety of scenarios. It allows you to specify the base path for all the assets within your application.
+webpack 提供一个非常有用的配置，该配置能帮助你为项目中的所有资源指定一个基础路径。它被称为`公共路径(publicPath)`。
 
 
-## Use Cases
+## 示例
 
-There are a few use cases in real applications where this feature becomes especially neat. Essentially, every file emitted to your `output.path` directory will be referenced from the `output.publicPath` location. This includes child chunks (created via [code splitting](/guides/code-splitting/)) and any other assets (e.g. images, fonts, etc.) that are a part of your dependency graph.
+这里提供一些示例，在实际应用中，这些示例的特性在实现的同时，还能保持高度整洁。
 
-### Environment Based
+### 在构建项目时设置路径值
 
-In development for example, we might have an `assets/` folder that lives on the same level of our index page. This is fine, but what if we wanted to host all these static assets on a CDN in production?
+在开发模式中，我们通常有一个 `assets/` 文件夹，它往往存放在和首页一个级别的目录下。这样是挺方便；但是如果在生产环境下，你想把这些静态文件统一使用CDN加载，那该怎么办？
 
-To approach this problem you can easily use a good old environment variable. Let's say we have a variable `ASSET_PATH`:
+想要解决这个问题，你可以使用有着悠久历史的环境变量。比如说，我们设置了一个名为 `ASSET_PATH` 的变量：
 
 ``` js
 import webpack from 'webpack';
 
-// Try the environment variable, otherwise use root
+// 如果预先定义过环境变量，就将其赋值给`ASSET_PATH`变量，否则赋值为根目录
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 
 export default {
@@ -32,7 +32,7 @@ export default {
   },
 
   plugins: [
-    // This makes it possible for us to safely use env vars on our code
+    // 该插件帮助我们安心地使用环境变量
     new webpack.DefinePlugin({
       'process.env.ASSET_PATH': JSON.stringify(ASSET_PATH)
     })
@@ -40,22 +40,26 @@ export default {
 };
 ```
 
-### On The Fly
+### 即时设定路径值
 
-Another possible use case is to set the `publicPath` on the fly. webpack exposes a global variable called `__webpack_public_path__` that allows you to do that. So, in your application's entry point, you can simply do this:
+另一个可能出现的情况是，我们需要即时设置公共路径。webpack 提供一个全局变量供你设置，它名叫 `__webpack_public_path__`。所以在你的项目入口，你可以简单地设置如下：
 
 ```js
 __webpack_public_path__ = process.env.ASSET_PATH;
 ```
 
-That's all you need. Since we're already using the `DefinePlugin` on our
-configuration, `process.env.ASSET_PATH` will always be defined so we can safely
-do that.
+一切设置完成。因为我们已经在我们的配置项中使用了`DefinePlugin`，
+`process.env.ASSET_PATH` 就已经被定义了，
+所以让我们能够安心地使用它了。
 
-W> Be aware that if you use ES6 module imports in your entry file the `__webpack_public_path__` assignment will be done after the imports. In such cases, you'll have to move the public path assignment to its own dedicated module and then import it on top of your entry.js:
+**警告：**请注意，如果你在入口文件中使用 ES6 模块导入，则在导入后对 `__webpack_public_path__` 进行赋值。在这种情况下，你必须将公共路径(public path)赋值移至自己的专属模块，然后将其导入到你的 entry.js 之上：
 
 ```js
 // entry.js
 import './public-path';
 import './app';
 ```
+
+***
+
+> 原文：https://webpack.js.org/guides/public-path/

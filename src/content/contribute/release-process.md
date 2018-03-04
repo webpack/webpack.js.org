@@ -1,20 +1,20 @@
 ---
-title: 发布流程(Release Process)
-sort: 5
+title: Release Process
+sort: 6
 contributors:
   - d3viant0ne
   - sokra
 ---
 
-部署 webpack 的发布流程实际上是无痛苦的。阅读以下步骤，你可以清楚了解其完成情况。
+The release process for deploying webpack is actually quite painless. Read through the following steps, so you have a clear understanding of how it's done.
 
 
-## 创建一个 pull requests
+## Pull Requests
 
-当将 pull requests 合并到 `master` 分支中时，选择 _Create Merge Commit_ 选项。
+When merging pull requests into the `master` branch, select the _Create Merge Commit_ option.
 
 
-## 创建一个发布
+## Releasing
 
 ```sh
 npm version patch && git push --follow-tags && npm publish
@@ -22,10 +22,10 @@ npm version minor && git push --follow-tags && npm publish
 npm version major && git push --follow-tags && npm publish
 ```
 
-_这样将递增包版本号，提交变更，然后创建一个**本地标签**，并推送到 github 和 npm package。_
+_This will increment the package version, commits the changes, cuts a **local tag**, push to github & publish the npm package._
 
-之后就可以到 github 的[发布页面](https://github.com/webpack/webpack/releases)上为新的标签编写 Changelog。
+After that go to the github [releases page](https://github.com/webpack/webpack/releases) and write a Changelog for the new tag.
 
 ***
 
-> 原文：https://webpack.js.org/development/release-process/
+> 原文：https://webpack.js.org/contribute/plugin-patterns/

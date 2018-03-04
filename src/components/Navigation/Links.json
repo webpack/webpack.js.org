@@ -16,7 +16,16 @@
     "url": "contribute"
   },
   {
+    "title": "投票",
+    "url": "vote"
+  },
+  {
     "title": "博客",
     "url": "//medium.com/webpack"
+  },
+  {
+    "title": "印记中文",
+    "url": "//docschina.org",
+    "className": "color-blue"
   }
 ]

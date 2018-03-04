@@ -21,9 +21,11 @@ contributors:
   - rouzbeh84
   - shaodahong
   - sudarsangp
+  - kcolton
+  - efreitasn
 ---
 
-T> 本指南扩展了[起步](/guides/getting-started)和[管理输出](/guides/output-management)中提供的示例。请确保您至少已熟悉其中提供的示例。
+T> 本指南继续沿用[起步](/guides/getting-started)和[管理输出](/guides/output-management)中的代码示例。。请确保你至少已熟悉其中提供的示例。
 
 代码分离是 webpack 中最引人注目的特性之一。此特性能够把代码分离到不同的 bundle 中，然后可以按需加载或并行加载这些文件。代码分离可以用于获取更小的 bundle，以及控制资源加载优先级，如果使用合理，会极大影响加载时间。
 
@@ -170,7 +172,7 @@ another.bundle.js  537 bytes       1  [emitted]         another
 
 当涉及到动态代码拆分时，webpack 提供了两个类似的技术。对于动态导入，第一种，也是优先选择的方式是，使用符合 [ECMAScript 提案](https://github.com/tc39/proposal-dynamic-import) 的 [`import()` 语法](/api/module-methods#import-)。第二种，则是使用 webpack 特定的 [`require.ensure`](/api/module-methods#require-ensure)。让我们先尝试使用第一种……
 
-W> `import()` 调用使用会在内部用到 [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)。如果在旧有版本浏览器中使用 `import()`，记得使用 一个 polyfill 库（例如 [es6-promise](https://github.com/stefanpenner/es6-promise) 或 [promise-polyfill](https://github.com/taylorhakes/promise-polyfill)），来 shim `Promise`。
+W> `import()` 调用会在内部用到 [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)。如果在旧有版本浏览器中使用 `import()`，记得使用 一个 polyfill 库（例如 [es6-promise](https://github.com/stefanpenner/es6-promise) 或 [promise-polyfill](https://github.com/taylorhakes/promise-polyfill)），来 shim `Promise`。
 
 在我们开始本节之前，先从配置中移除掉多余的 [`entry`](/concepts/entry-points/) 和 [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin)，因为接下来的演示中并不需要它们：
 
@@ -263,14 +265,14 @@ lodash.bundle.js   541 kB       0  [emitted]  [big]  lodash
    [3] (webpack)/buildin/module.js 517 bytes {0} [built]
 ```
 
-如果你已经通过类似 babel 的预处理器(pre-processor)启用 [`async` 函数](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)，请注意，你可以像下面那样简化代码，因为 `import()` 语句恰好会返回 promises：
+由于 `import()` 会返回一个 promise，因此它可以和 [`async` 函数](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)一起使用。但是，需要使用像 Babel 这样的预处理器和[Syntax Dynamic Import Babel Plugin](https://babeljs.io/docs/plugins/syntax-dynamic-import/#installation)。下面是如何通过 `async` 函数简化代码：
 
 __src/index.js__
 
 ``` diff
 - function getComponent() {
 + async function getComponent() {
--   return import(/* webpackChunkName: "lodash" */ 'lodash').then(module => {
+-   return import(/* webpackChunkName: "lodash" */ 'lodash').then(_ => {
 -     var element = document.createElement('div');
 -
 -     element.innerHTML = _.join(['Hello', 'webpack'], ' ');

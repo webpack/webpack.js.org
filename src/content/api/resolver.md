@@ -4,9 +4,11 @@ group: Plugins
 sort: 5
 ---
 
-* `compiler.resolvers.normal`: Resolver for a normal module
-* `compiler.resolvers.context`: Resolver for a context module
-* `compiler.resolvers.loader`: Resolver for a loader
+There are three types of resolvers, each used for different types of modules:
+
+- `compiler.resolvers.normal`: Resolve a normal module.
+- `compiler.resolvers.context`: Resolve a context module.
+- `compiler.resolvers.loader`: Resolve a loader.
 
 Any plugin should use `this.fileSystem` as fileSystem, as it's cached. It only has async named functions, but they may behave sync, if the user uses a sync file system implementation (i. e. in enhanced-require).
 
@@ -16,7 +18,7 @@ A bailing async `forEach` implementation is available on `this.forEachBail(array
 
 To pass the request to other resolving plugins, use the `this.doResolve(types: String|String[], request: Request, message: String, callback)` method. `types` are multiple possible request types that are tested in order of preference.
 
-``` javascript
+``` js
 interface Request {
   path: String // The current directory of the request
   request: String // The current request string
@@ -90,4 +92,4 @@ Used before module templates are applied to the module name. The process continu
 
 ***
 
-> 原文：https://webpack.js.org/api/plugins/resolver/
+> 原文：https://webpack.js.org/api/resolver/

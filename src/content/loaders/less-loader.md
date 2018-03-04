@@ -122,7 +122,7 @@ webpack 提供了一种[解析文件的高级机制](https://webpack.js.org/conf
 
 ##### Non-Less imports
 
-使用 webpack resolver，您可以引入任何文件类型。您只需要一个导出有效的 Less 代码的 loader。通常，您还需要设置 `issuer` 条件，以确保此规则仅适用于 Less 文件的导入：
+使用 webpack resolver，你可以引入任何文件类型。你只需要一个导出有效的 Less 代码的 loader。通常，你还需要设置 `issuer` 条件，以确保此规则仅适用于 Less 文件的导入：
 
 ```js
 // webpack.config.js
@@ -227,7 +227,7 @@ module.exports = {
 
 Also checkout the [sourceMaps example](https://github.com/webpack-contrib/less-loader/tree/master/examples/sourceMaps).
 
-如果您要编辑 Chrome 中的原始 Less 文件，[这里有一个很好的博客文章](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0)。此博客文章是关于 Sass 的，但它也适用于 Less。
+如果你要编辑 Chrome 中的原始 Less 文件，[这里有一个很好的博客文章](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0)。此博客文章是关于 Sass 的，但它也适用于 Less。
 
 ### CSS modules gotcha
 

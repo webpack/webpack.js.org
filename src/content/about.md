@@ -14,10 +14,12 @@ contributors:
   - dear-lizhihua
   - ellyliang
   - fa93hws
+  - funkyfun
   - guyunxiang
   - hijiangtao
   - hikerpig
   - huangtubiao
+  - initial-wu
   - itchina110
   - jason-ivy
   - JayceZhang9602
@@ -30,8 +32,10 @@ contributors:
   - lukastong
   - mc-zone
   - neal1991
+  - nervouself
   - nick-nick
   - panlinying
+  - ppppfly
   - QC-L
   - rqzheng2015
   - scq000
@@ -41,12 +45,17 @@ contributors:
   - starkwang
   - superpig
   - tao1991123
+  - tuzhu008
+  - weishijun14
+  - WoolYang
   - xgz123
+  - xiayuxiaoyan
   - xie-qianyue
   - yuanlinssdut
   - zgayjjf
   - zhuangdanyang
   - zikeng
+  - zjafei
 ---
 
 特此致敬`参与翻译的全体成员`！

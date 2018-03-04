@@ -13,8 +13,8 @@ webpack 有着丰富的插件接口(rich plugin interface)。webpack 自身的�
 Name                                                     | Description
 -------------------------------------------------------- | -----------
 [`AggressiveSplittingPlugin`](/plugins/aggressive-splitting-plugin) | 将原来的 chunk 分成更小的 chunk
-[`BabelMinifyWebpackPlugin`](/plugins/babel-minify-webpack-plugin) | 使用 [babel-minify](https://github.com/babel/minify)
-[`BannerPlugin`] 进行压缩(/plugins/banner-plugin)                 | 在每个生成的 chunk 顶部添加 banner
+[`BabelMinifyWebpackPlugin`](/plugins/babel-minify-webpack-plugin) | 使用 [babel-minify](https://github.com/babel/minify)进行压缩
+[`BannerPlugin`](/plugins/banner-plugin)                 | 在每个生成的 chunk 顶部添加 banner
 [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin)    | 提取 chunks 之间共享的通用模块
 [`ComponentWebpackPlugin`](/plugins/component-webpack-plugin) | 通过 webpack 使用组件
 [`CompressionWebpackPlugin`](/plugins/compression-webpack-plugin) | 预先准备的资源压缩版本，使用 Content-Encoding 提供访问服务
@@ -35,6 +35,7 @@ Name                                                     | Description
 [`NpmInstallWebpackPlugin`](/plugins/npm-install-webpack-plugin) | 在开发时自动安装缺少的依赖
 [`ProvidePlugin`](/plugins/provide-plugin)                       | 不必通过 import/require 使用模块
 [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin)  | 对 source map 进行更细粒度的控制
+[`EvalSourceMapDevToolPlugin`](/plugins/eval-source-map-dev-tool-plugin)  | 对 eval source map 进行更细粒度的控制
 [`UglifyjsWebpackPlugin`](/plugins/uglifyjs-webpack-plugin)      | 可以控制项目中 UglifyJS 的版本
 [`ZopfliWebpackPlugin`](/plugins/zopfli-webpack-plugin)          | 通过 node-zopfli 将资源预先压缩的版本
 

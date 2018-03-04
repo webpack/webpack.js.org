@@ -14,6 +14,7 @@ contributors:
   - gdi2290
   - bdwain
   - caryli
+  - xgirma
 related:
   - title: 概念 - 模块热替换(Hot Module Replacement)
     url: /concepts/hot-module-replacement
@@ -21,7 +22,7 @@ related:
     url: /api/hot-module-replacement
 ---
 
-T> 本指南示例代码延用[开发](/guides/development)指南的示例代码。
+T> 本指南继续沿用[开发指南](/guides/development)中的代码示例。
 
 模块热替换(Hot Module Replacement 或 HMR)是 webpack 提供的最有用的功能之一。它允许在运行时更新各种模块，而无需进行完全刷新。本页面重点介绍__实现__，而[概念页面](/concepts/hot-module-replacement)提供了更多关于它的工作原理以及为什么它有用的细节。
 
@@ -32,13 +33,14 @@ W> __HMR__ 不适用于生产环境，这意味着它应当只在开发环境使
 
 启用此功能实际上相当简单。而我们要做的，就是更新 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 的配置，和使用 webpack 内置的 HMR 插件。我们还要删除掉 `print.js` 的入口起点，因为它现在正被 `index.js` 模式使用。
 
-T> If you took the route of using `webpack-dev-middleware` instead of `webpack-dev-server`, please use the [`webpack-hot-middleware`](https://github.com/glenjamin/webpack-hot-middleware) package to enable HMR on your custom server or application.
+T> 如果你使用了 `webpack-dev-middleware` 而没有使用 `webpack-dev-server`，请使用 [`webpack-hot-middleware`](https://github.com/glenjamin/webpack-hot-middleware) package 包，以在你的自定义服务或应用程序上启用 HMR。
 
 __webpack.config.js__
 
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
 + const webpack = require('webpack');
 
   module.exports = {
@@ -57,6 +59,7 @@ __webpack.config.js__
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement'
       }),
++     new webpack.NamedModulesPlugin(),
 +     new webpack.HotModuleReplacementPlugin()
     ],
     output: {
@@ -66,9 +69,9 @@ __webpack.config.js__
   };
 ```
 
-你也可以通过命令来修改 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 的配置：`webpack-dev-server --hotOnly`。
+T> 你可以通过命令来修改 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 的配置：`webpack-dev-server --hotOnly`。
 
-接下来我们在命令行中运行 `npm start` 查看运行结果。
+注意，我们还添加了 `NamedModulesPlugin`，以便更容易查看要修补(patch)的依赖。在起步阶段，我们将通过在命令行中运行 `npm start` 来启动并运行 dev server。
 
 现在，我们来修改 `index.js` 文件，以便当 `print.js` 内部发生变更时可以告诉 webpack 接受更新的模块。
 
@@ -159,6 +162,8 @@ server.listen(5000, 'localhost', () => {
 });
 ```
 
+T> If you're [using `webpack-dev-middleware`](/guides/development#using-webpack-dev-middleware), check out the [`webpack-hot-middleware`](https://github.com/glenjamin/webpack-hot-middleware) package to enable HMR on your custom dev server.
+
 
 ## 问题
 
@@ -223,7 +228,6 @@ __webpack.config.js__
 ```diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
   const webpack = require('webpack');
 
   module.exports = {
@@ -316,7 +320,7 @@ __index.js__
 
 ```
 
-将 `body` 上的样式修改为 `background: red;`，您应该可以立即看到页面的背景颜色随之更改，而无需完全刷新。
+将 `body` 上的样式修改为 `background: red;`，你应该可以立即看到页面的背景颜色随之更改，而无需完全刷新。
 
 __styles.css__
 

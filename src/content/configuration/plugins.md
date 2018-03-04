@@ -29,7 +29,7 @@ plugins: [
 一个复杂示例，使用多个插件，可能看起来就像这样：
 
 ```js
-var webpack = require('webpack')
+var webpack = require('webpack');
 // 导入非 webpack 默认自带插件
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var DashboardPlugin = require('webpack-dashboard/plugin');

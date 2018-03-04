@@ -9,6 +9,7 @@ contributors:
 
 配置 `output` 选项可以控制 webpack 如何向硬盘写入编译文件。注意，即使可以存在多个`入口`起点，但只指定一个`输出`配置。
 
+
 ## 用法(Usage)
 
 在 webpack 中配置 `output` 属性的最低要求是，将它的值设置为一个对象，包括以下两点：
@@ -35,7 +36,6 @@ module.exports = config;
 ## 多个入口起点
 
 如果配置创建了多个单独的 "chunk"（例如，使用多个入口起点或使用像 CommonsChunkPlugin 这样的插件），则应该使用[占位符(substitutions)](/configuration/output#output-filename)来确保每个文件具有唯一的名称。
-
 
 ``` javascript
 {

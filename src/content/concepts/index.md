@@ -1,5 +1,5 @@
 ---
-title: 核心概念
+title: 概念
 sort: 1
 contributors:
   - TheLarkInn
@@ -7,41 +7,50 @@ contributors:
   - grgur
   - johnstew
   - jimrfenner
+  - TheDutchCoder
+  - adambraimbridge
 ---
 
-*webpack* 是一个现代 JavaScript 应用程序的_模块打包器(module bundler)_。当 webpack 处理应用程序时，它会递归地构建一个_依赖关系图(dependency graph)_，其中包含应用程序需要的每个模块，然后将所有这些模块打包成少量的 _bundle_ - 通常只有一个，由浏览器加载。
+本质上，*webpack* 是一个现代 JavaScript 应用程序的_静态模块打包器(module bundler)_。当 webpack 处理应用程序时，它会递归地构建一个_依赖关系图(dependency graph)_，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 _bundle_。
 
-它是[高度可配置的](/configuration)，但是，在开始前你需要先理解**四个核心概念**：入口(entry)、输出(output)、loader、插件(plugins)。
+T> 可以从[这里](/concepts/modules)了解更多关于 JavaScript 模块和 webpack 模块的信息。
+
+它是[高度可配置的](/configuration)，但是，在开始前你需要先理解四个**核心概念**：
+
+- 入口(entry)
+- 输出(output)
+- loader
+- 插件(plugins)
 
 本文档旨在给出这些概念的**高度**概述，同时提供具体概念的详尽相关用例。
 
 
-## 入口(Entry)
+## 入口(entry)
 
-webpack 创建应用程序所有依赖的关系图(dependency graph)。图的起点被称之为_入口起点(entry point)_。_入口起点_告诉 webpack _从哪里开始_，并根据依赖关系图确定_需要打包的内容_。可以将应用程序的_入口起点_认为是**根上下文(contextual root)** 或 **app 第一个启动文件**。
+**入口起点(entry point)**指示 webpack 应该使用哪个模块，来作为构建其内部*依赖图*的开始。进入入口起点后，webpack 会找出有哪些模块和库是入口起点（直接和间接）依赖的。
 
-在 webpack 中，我们使用 [webpack 配置对象(webpack configuration object)](/configuration) 中的 `entry` 属性来定义_入口_。
+每个依赖项随即被处理，最后输出到称之为 *bundles* 的文件中，我们将在下一章节详细讨论这个过程。
 
-接下来我们看一个最简单的例子：
+可以通过在 [webpack 配置](/configuration)中配置 `entry` 属性，来指定一个入口起点（或多个入口起点）。
 
-**webpack.config.js**
+接下来我们看一个 `entry` 配置的最简单例子：
 
-```javascript
+__webpack.config.js__
+
+``` js
 module.exports = {
   entry: './path/to/my/entry/file.js'
 };
 ```
 
-根据不同应用程序的需要，声明 `entry` 属性有多种方式。
-
-[了解更多！](/concepts/entry-points)
+T> 根据应用程序的特定需求，可以以多种方式配置 `entry` 属性。从[入口起点](/concepts/entry-points)章节可以了解更多信息。
 
 
-## 出口(Output)
+## 出口(output)
 
-将所有的资源(assets)归拢在一起后，还需要告诉 webpack **在哪里**打包应用程序。webpack 的 `output` 属性描述了**如何处理归拢在一起的代码**(bundled code)。
+**output** 属性告诉 webpack 在哪里输出它所创建的 *bundles*，以及如何命名这些文件。你可以通过在配置中指定一个 `output` 字段，来配置这些处理过程：
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```javascript
 const path = require('path');
@@ -57,25 +66,25 @@ module.exports = {
 
 在上面的例子中，我们通过 `output.filename` 和 `output.path` 属性，来告诉 webpack bundle 的名称，以及我们想要生成(emit)到哪里。
 
-T> 你可能看到项目**生成(emitted 或 emit)**贯穿我们整个文档和[插件 API](/api/plugins)。它是“生产(produced)”或“排放(discharged)”的特殊术语。
+T> 你可能会发现术语**生成(emitted 或 emit)**贯穿了我们整个文档和[插件 API](/api/plugins)。它是“生产(produced)”或“释放(discharged)”的特殊术语。
 
- `output` 属性还有[更多可配置的特性](/configuration/output)，但让我们花一些时间先了解一些 `output` 属性最常见的用例。
-
-[了解更多！](/concepts/output)
+T> `output` 属性还有[更多可配置的特性](/configuration/output)，如果你想要了解更多关于 `output` 属性的概念，你可以通过[阅读概念章节](/concepts/output)来了解更多。
 
 
-## Loader
+## loader
 
-webpack 的目标是，让 **webpack** 聚焦于项目中的所有资源(asset)，而浏览器不需要关注考虑这些（明确的说，这并不意味着所有资源(asset)都必须打包在一起）。webpack 把[每个文件(.css, .html, .scss, .jpg, etc.) 都作为模块](/concepts/modules)处理。然而 webpack 自身**只理解 JavaScript**。
+*loader* 让 webpack 能够去处理那些非 JavaScript 文件（webpack 自身只理解 JavaScript）。loader 可以将所有类型的文件转换为 webpack 能够处理的有效[模块](/concepts/modules)，然后你就可以利用 webpack 的打包能力，对它们进行处理。
 
-**webpack loader 在文件被添加到依赖图中时，_其转换为模块_。**
+本质上，webpack loader 将所有类型的文件，转换为应用程序的依赖图（和最终的 bundle）可以直接引用的模块。
 
-在更高层面，在 webpack 的配置中 **loader** 有两个目标。
+W> 注意，loader 能够 `import` 导入任何类型的模块（例如 `.css` 文件），这是 webpack 特有的功能，其他打包程序或任务执行器的可能并不支持。我们认为这种语言扩展是有很必要的，因为这可以使开发人员创建出更准确的依赖关系图。
 
-1. 识别出(identify)应该被对应的 loader 进行转换(transform)的那些文件。(`test` 属性)
-2. 转换这些文件，从而使其能够被添加到依赖图中（并且最终添加到 bundle 中）(`use` 属性)
+在更高层面，在 webpack 的配置中 __loader__ 有两个目标：
 
-**webpack.config.js**
+1. `test` 属性，用于标识出应该被对应的 loader 进行转换的某个或某些文件。
+2. `use` 属性，表示进行转换时，应该使用哪个 loader。
+
+__webpack.config.js__
 
 ```javascript
 const path = require('path');
@@ -107,17 +116,17 @@ loader 还有更多我们尚未提到的具体配置属性。
 [了解更多！](/concepts/loaders)
 
 
-## 插件(Plugins)
+## 插件(plugins)
 
-然而由于 loader 仅在每个文件的基础上执行转换，而 `插件(plugins)` 更常用于（但不限于）在打包模块的 “compilation” 和 “chunk” 生命周期执行操作和自定义功能[（查看更多）](/concepts/plugins)。webpack 的插件系统[极其强大和可定制化](/api/plugins)。
+loader 被用于转换某些类型的模块，而插件则可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，一直到重新定义环境中的变量。[插件接口](/api/plugins)功能极其强大，可以用来处理各种各样的任务。
 
-想要使用一个插件，你只需要 `require()` 它，然后把它添加到 `plugins` 数组中。多数插件可以通过选项(option)自定义。你也可以在一个配置文件中因为不同目的而多次使用同一个插件，这时需要通过使用 `new` 来创建它的一个实例。
+想要使用一个插件，你只需要 `require()` 它，然后把它添加到 `plugins` 数组中。多数插件可以通过选项(option)自定义。你也可以在一个配置文件中因为不同目的而多次使用同一个插件，这时需要通过使用 `new` 操作符来创建它的一个实例。
 
 **webpack.config.js**
 
 ```javascript
-const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
-const webpack = require('webpack'); //to access built-in plugins
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // 通过 npm 安装
+const webpack = require('webpack'); // 用于访问内置插件
 const path = require('path');
 
 const config = {

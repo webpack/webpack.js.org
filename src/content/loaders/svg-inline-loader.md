@@ -35,7 +35,7 @@ npm install svg-inline-loader --save-dev
 
 #### `removingTags: [...string]`
 
-警告: 您指定 `removeTags: true` 时，它才会执行。
+警告: 你指定 `removeTags: true` 时，它才会执行。
 
 默认值: `removingTags: ['title', 'desc', 'defs', 'style']`
 

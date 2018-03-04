@@ -50,13 +50,13 @@ noParse: function(content) {
 
 2. issuer: 被请求资源(requested the resource)的模块文件的绝对路径。是导入时的位置。
 
-**例如:** 从 `app.js` `导入 "./style.css"`，resource 是 `/path/to/style.css`. issuer 是 `/path/to/app.js`。
+**例如:** 从 `app.js` `导入 './style.css'`，resource 是 `/path/to/style.css`. issuer 是 `/path/to/app.js`。
 
 在规则中，属性 [`test`](#rule-test), [`include`](#rule-include), [`exclude`](#rule-exclude) 和 [`resource`](#rule-resource) 对 resource 匹配，并且属性 [`issuer`](#rule-issuer) 对 issuer 匹配。
 
 当使用多个条件时，所有条件都匹配。
 
-W> 小心！resource 是文件的_解析_路径，这意味着符号链接的资源是真正的路径，_而不是_符号链接位置。在使用工具来符号链接包的时候（如 `npm link`）比较好记，像 `/node_modules/` 等常见条件可能会不小心错过符号链接的文件。
+W> 小心！resource 是文件的_解析_路径，这意味着符号链接的资源是真正的路径，_而不是_符号链接位置。在使用工具来符号链接包的时候（如 `npm link`）比较好记，像 `/node_modules/` 等常见条件可能会不小心错过符号链接的文件。注意，可以通过 [`resolve.symlinks`](/configuration/resolve#resolve-symlinks) 关闭符号链接解析（以便将资源解析为符号链接路径）。
 
 
 ### Rule 结果
@@ -115,7 +115,15 @@ W> 小心！resource 是文件的_解析_路径，这意味着符号链接的资
 
 ## `Rule.issuer`
 
-[`条件`](#condition)会匹配 issuer。在 [`Rule` 条件](#rule-conditions) 中查看详细。
+一个[`条件`](#condition)，用来与被发布的 request 对应的模块项匹配。在以下示例中，a.js request 的`发布者(issuer)`是 index.js 文件的路径。
+
+__index.js__
+
+``` js
+import A from './a.js'
+```
+
+这个选项可以用来将 loader 应用到一个特定模块或一组模块的依赖中。
 
 
 ## `Rule.loader`
@@ -194,15 +202,16 @@ parser: {
 
 ## `Rule.resourceQuery`
 
-A [`Condition`](#condition) matched with the resource query. The condition matches against a string that starts with a question mark (`"?exampleQuery"`). See details in [`Rule` conditions](#rule-conditions).
+A [`Condition`](#condition) matched with the resource query. This option is used to test against the query section of a request string (i.e. from the question mark onwards). If you were to `import Foo from './foo.css?inline'`, the following condition would match:
 
-```javascript
+``` js
 {
   test: /.css$/,
-  resourceQuery: /inline/, // foo.css?inline
+  resourceQuery: /inline/,
   use: 'url-loader'
 }
 ```
+
 
 ## `Rule.rules`
 

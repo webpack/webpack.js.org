@@ -40,7 +40,7 @@ Content not from webpack is served from /path/to/dist/
 
 这将给出一些背景知识，就能知道服务器的访问位置，并且知道服务已启动。
 
-如果你通过 Node.js API 来使用 dev-server， `devServer` 中的选项将被忽略。将选项作为第二个参数传入： `new WebpackDevServer(compiler, {...})`。关于如何通过 Node.js API 使用 webpack-dev-server 的示例，请[查看此处](https://github.com/webpack/webpack-dev-server/blob/master/examples/node-api-simple/server.js)。
+如果你通过 Node.js API 来使用 dev-server， `devServer` 中的选项将被忽略。将选项作为第二个参数传入： `new WebpackDevServer(compiler, {...})`。关于如何通过 Node.js API 使用 webpack-dev-server 的示例，请[查看此处](https://github.com/webpack/webpack-dev-server/tree/master/examples/api/simple)。
 
 W> Be aware that when [exporting multiple configurations](/configuration/configuration-types/#exporting-multiple-configurations) only the `devServer` options for the first configuration will be taken into account and used for all the configurations in the array.
 
@@ -374,6 +374,16 @@ To pass your own certificate via the CLI use the following options
 webpack-dev-server --https --key /path/to/server.key --cert /path/to/server.crt --cacert /path/to/ca.pem
 ```
 
+## `devServer.index`
+
+`string`
+
+The filename that is considered the index file.
+
+```javascript
+index: 'index.htm'
+```
+
 
 ## `devServer.info` - CLI only
 
@@ -453,6 +463,12 @@ Usage via the CLI
 
 ```bash
 webpack-dev-server --open
+```
+
+If no browser is provided (as shown above), your default browser will be used. To specify a different browser, just pass its name:
+
+```bash
+webpack-dev-server --open 'Google Chrome'
 ```
 
 

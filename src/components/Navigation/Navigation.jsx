@@ -30,7 +30,7 @@ export default class Navigation extends React.Component {
               return (
                 <Link
                   key={ `navigation__link-${link.title}` }
-                  className={ `navigation__link ${activeMod}` }
+                  className={ `navigation__link ${activeMod} ${link.className}` }
                   to={ `/${link.url}/` }>
                   { link.title }
                 </Link>
@@ -42,7 +42,7 @@ export default class Navigation extends React.Component {
             <input
               type="text"
               className="navigation__search-input"
-              placeholder="Search documentation…"
+              placeholder="在文档中搜索..."
               onBlur={ this._toggleSearch.bind(this) } />
             <button
               className="navigation__search-icon icon-magnifying-glass"
@@ -69,12 +69,13 @@ export default class Navigation extends React.Component {
           <LinkDropdown
             className="navigation__hrefs"
             items={[
-            { title: '印记中文文档导航', url: 'https://docschina.org/' },
-            { title: 'Vue.js 中文文档', url: 'https://vuefe.cn/' },
-            { title: 'React.js 中文文档', url: 'https://doc.react-china.org/' },
-            { title: 'rollup.js 中文文档', url: 'https://rollupjs.org/zh' },
-            { title: 'Node.js 中文文档', url: 'http://nodejs.cn/' }
-          ]} />
+              { title: '印记中文首页', url: 'https://docschina.org/' },
+              { title: '加入我们翻译文档', url: 'https://docschina.org/home/about' },
+              { title: 'Vue.js 中文文档', url: 'https://vuefe.cn/' },
+              { title: 'Parcel.js 中文文档', url: 'https://parceljs.docschina.org/' },
+              { title: 'React.js 中文文档', url: 'https://doc.react-china.org/' },
+              { title: 'Node.js 中文文档', url: 'http://nodejs.cn/' }
+            ]} />
 
           <Dropdown
             className="navigation__languages"
@@ -118,8 +119,8 @@ export default class Navigation extends React.Component {
       }
 
       docsearch({
-        apiKey: 'fac401d1a5f68bc41f01fb6261661490',
-        indexName: 'webpack-js-org',
+        apiKey: 'cccb861b286b414d0f820013f3f70b84',
+        indexName: 'webpack_china',
         inputSelector: '.navigation__search-input'
       });
 

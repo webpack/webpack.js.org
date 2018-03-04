@@ -21,7 +21,7 @@ related:
     url: https://github.com/webpack/webpack.js.org/issues/652
 ---
 
-T> 本指南中的示例来自[起步](/guides/getting-started)、[管理输出](/guides/output-management)和[代码分离](/guides/code-splitting)。
+T> 本指南继续沿用[起步](/guides/getting-started)、[管理输出](/guides/output-management)和[代码分离](/guides/code-splitting)中的代码示例。
 
 以上，我们使用 webpack 来打包我们的模块化后的应用程序，webpack 会生成一个可部署的 `/dist` 目录，然后把打包后的内容放置在此目录中。只要 `/dist` 目录中的内容部署到服务器上，客户端（通常是浏览器）就能够访问网站此服务器的网站及其资源。而最后一步获取资源是比较耗费时间的，这就是为什么浏览器使用一种名为[缓存](http://searchstorage.techtarget.com/definition/cache)的技术。可以通过命中缓存，以降低网络流量，使网站加载速度更快，然而，如果我们在部署新版本时不更改资源的文件名，浏览器可能会认为它没有被更新，就会使用它的缓存版本。由于缓存的存在，当你需要获取新的代码时，就会显得很棘手。
 
@@ -90,7 +90,7 @@ Child html-webpack-plugin for "index.html":
         + 2 hidden modules
 ```
 
-可以看到，bundle 的名称是它内容（通过 hash）的映射。如果我们不做修改，然后再次运行构建，我们的文件名按照期望，依然保持不变。然而，如果我们再次运行，可能会发现情况并非如此：
+可以看到，bundle 的名称是它内容（通过 hash）的映射。如果我们不做修改，然后再次运行构建，我们以为文件名会保持不变。然而，如果我们真的运行，可能会发现情况并非如此：（译注：这里的意思是，如果不做修改，文件名可能会变，也可能不会。）
 
 ``` bash
 Hash: f7a289a94c5e4cd1e566
@@ -135,7 +135,7 @@ __webpack.config.js__
 -     })
 +     }),
 +     new webpack.optimize.CommonsChunkPlugin({
-+       name: 'runtime'
++       name: 'manifest'
 +     })
     ],
     output: {
@@ -145,16 +145,16 @@ __webpack.config.js__
   };
 ```
 
-让我们再次构建，然后查看提取出来的 `runtime` bundle：
+让我们再次构建，然后查看提取出来的 `manifest` bundle：
 
 ``` bash
 Hash: 80552632979856ddab34
 Version: webpack 3.3.0
 Time: 1512ms
-                          Asset       Size  Chunks                    Chunk Names
-   main.5ec8e954e32d66dee1aa.js     542 kB       0  [emitted]  [big]  main
-runtime.719796322be98041fff2.js    5.82 kB       1  [emitted]         runtime
-                     index.html  275 bytes          [emitted]
+                           Asset       Size  Chunks                    Chunk Names
+    main.5ec8e954e32d66dee1aa.js     542 kB       0  [emitted]  [big]  main
+manifest.719796322be98041fff2.js    5.82 kB       1  [emitted]         manifest
+                      index.html  275 bytes          [emitted]
    [0] ./src/index.js 336 bytes {0} [built]
    [2] (webpack)/buildin/global.js 509 bytes {0} [built]
    [3] (webpack)/buildin/module.js 517 bytes {0} [built]
@@ -188,7 +188,7 @@ __webpack.config.js__
 +       name: 'vendor'
 +     }),
       new webpack.optimize.CommonsChunkPlugin({
-        name: 'runtime'
+        name: 'manifest'
       })
     ],
     output: {
@@ -198,7 +198,7 @@ __webpack.config.js__
   };
 ```
 
-W> 注意，引入顺序在这里很重要。`CommonsChunkPlugin` 的 `'vendor'` 实例，必须在 `'runtime'` 实例之前引入。
+W> 注意，引入顺序在这里很重要。`CommonsChunkPlugin` 的 `'vendor'` 实例，必须在 `'manifest'` 实例之前引入。
 
 让我们再次构建，然后查看新的 `vendor` bundle：
 
@@ -206,11 +206,11 @@ W> 注意，引入顺序在这里很重要。`CommonsChunkPlugin` 的 `'vendor'`
 Hash: 69eb92ebf8935413280d
 Version: webpack 3.3.0
 Time: 1502ms
-                          Asset       Size  Chunks                    Chunk Names
- vendor.8196d409d2f988123318.js     541 kB       0  [emitted]  [big]  vendor
-   main.0ac0ae2d4a11214ccd19.js  791 bytes       1  [emitted]         main
-runtime.004a1114de8bcf026622.js    5.85 kB       2  [emitted]         runtime
-                     index.html  352 bytes          [emitted]
+                           Asset       Size  Chunks                    Chunk Names
+  vendor.8196d409d2f988123318.js     541 kB       0  [emitted]  [big]  vendor
+    main.0ac0ae2d4a11214ccd19.js  791 bytes       1  [emitted]         main
+manifest.004a1114de8bcf026622.js    5.85 kB       2  [emitted]         manifest
+                      index.html  352 bytes          [emitted]
    [1] ./src/index.js 336 bytes {1} [built]
    [2] (webpack)/buildin/global.js 509 bytes {0} [built]
    [3] (webpack)/buildin/module.js 517 bytes {0} [built]
@@ -269,11 +269,11 @@ __src/index.js__
 Hash: d38a06644fdbb898d795
 Version: webpack 3.3.0
 Time: 1445ms
-                          Asset       Size  Chunks                    Chunk Names
- vendor.a7561fb0e9a071baadb9.js     541 kB       0  [emitted]  [big]  vendor
-   main.b746e3eb72875af2caa9.js    1.22 kB       1  [emitted]         main
-runtime.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         runtime
-                     index.html  352 bytes          [emitted]
+                           Asset       Size  Chunks                    Chunk Names
+  vendor.a7561fb0e9a071baadb9.js     541 kB       0  [emitted]  [big]  vendor
+    main.b746e3eb72875af2caa9.js    1.22 kB       1  [emitted]         main
+manifest.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         manifest
+                      index.html  352 bytes          [emitted]
    [1] ./src/index.js 421 bytes {1} [built]
    [2] (webpack)/buildin/global.js 509 bytes {0} [built]
    [3] (webpack)/buildin/module.js 517 bytes {0} [built]
@@ -286,7 +286,7 @@ runtime.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         runtime
 
 - `main` bundle 会随着自身的新增内容的修改，而发生变化。
 - `vendor` bundle 会随着自身的 `module.id` 的修改，而发生变化。
-- `runtime` bundle 会因为当前包含一个新模块的引用，而发生变化。
+- `manifest` bundle 会因为当前包含一个新模块的引用，而发生变化。
 
 第一个和最后一个都是符合预期的行为 -- 而 `vendor` 的 hash 发生变化是我们要修复的。幸运的是，可以使用两个插件来解决这个问题。第一个插件是 [`NamedModulesPlugin`](/plugins/named-modules-plugin)，将使用模块的路径，而不是数字标识符。虽然此插件有助于在开发过程中输出结果的可读性，然而执行时间会长一些。第二个选择是使用 [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin)，推荐用于生产环境构建：
 
@@ -315,7 +315,7 @@ __webpack.config.js__
         name: 'vendor'
       }),
       new webpack.optimize.CommonsChunkPlugin({
-        name: 'runtime'
+        name: 'manifest'
       })
     ],
     output: {
@@ -331,11 +331,11 @@ __webpack.config.js__
 Hash: 1f49b42afb9a5acfbaff
 Version: webpack 3.3.0
 Time: 1372ms
-                          Asset       Size  Chunks                    Chunk Names
- vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]  [big]  vendor
-   main.d103ac311788fcb7e329.js    1.22 kB       1  [emitted]         main
-runtime.d2a6dc1ccece13f5a164.js    5.85 kB       2  [emitted]         runtime
-                     index.html  352 bytes          [emitted]
+                           Asset       Size  Chunks                    Chunk Names
+  vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]  [big]  vendor
+    main.d103ac311788fcb7e329.js    1.22 kB       1  [emitted]         main
+manifest.d2a6dc1ccece13f5a164.js    5.85 kB       2  [emitted]         manifest
+                      index.html  352 bytes          [emitted]
 [3Di9] ./src/print.js 62 bytes {1} [built]
 [3IRH] (webpack)/buildin/module.js 517 bytes {0} [built]
 [DuR2] (webpack)/buildin/global.js 509 bytes {0} [built]
@@ -373,11 +373,11 @@ __src/index.js__
 Hash: 37e1358f135c0b992f72
 Version: webpack 3.3.0
 Time: 1557ms
-                          Asset       Size  Chunks                    Chunk Names
- vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]  [big]  vendor
-   main.fc7f38e648da79db2aba.js  891 bytes       1  [emitted]         main
-runtime.bb5820632fb66c3fb357.js    5.85 kB       2  [emitted]         runtime
-                     index.html  352 bytes          [emitted]
+                           Asset       Size  Chunks                    Chunk Names
+  vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]  [big]  vendor
+    main.fc7f38e648da79db2aba.js  891 bytes       1  [emitted]         main
+manifest.bb5820632fb66c3fb357.js    5.85 kB       2  [emitted]         manifest
+                      index.html  352 bytes          [emitted]
 [3IRH] (webpack)/buildin/module.js 517 bytes {0} [built]
 [DuR2] (webpack)/buildin/global.js 509 bytes {0} [built]
    [0] multi lodash 28 bytes {0} [built]

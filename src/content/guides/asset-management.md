@@ -137,7 +137,7 @@ bundle.js  560 kB       0  [emitted]  [big]  main
 
 再次在浏览器中打开 `index.html`，你应该看到 `Hello webpack` 现在的样式是红色。要查看 webpack 做了什么，请检查页面（不要查看页面源代码，因为它不会显示结果），并查看页面的 head 标签。它应该包含我们在 `index.js` 中导入的 style 块元素。
 
-T> 请注意，你也可以进行 [CSS 分离](/plugins/extract-text-webpack-plugin)，以便在生产环境中节省加载时间。最重要的是，现有的 loader 可以支持任何你可以想到的 CSS 处理器风格 - [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader) 和 [less](/loaders/less-loader) 等。
+T> 请注意，在多数情况下，你也可以进行 [CSS 分离](/plugins/extract-text-webpack-plugin)，以便在生产环境中节省加载时间。最重要的是，现有的 loader 可以支持任何你可以想到的 CSS 处理器风格 - [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader) 和 [less](/loaders/less-loader) 等。
 
 
 ## 加载图片
@@ -257,9 +257,9 @@ Time: 895ms
    [9] ./src/index.js 503 bytes {0} [built]
 ```
 
-如果一切顺利，和 `Hello webpack` 文本旁边的 `img` 元素一样，现在看到的图标是重复的背景图片。如果您检查此元素，您将看到实际的文件名已更改为像 `5c999da72346a995e7e2718865d019c8.png` 一样。这意味着 webpack 在 `src` 文件夹中找到我们的文件，并成功处理过它！
+如果一切顺利，和 `Hello webpack` 文本旁边的 `img` 元素一样，现在看到的图标是重复的背景图片。如果你检查此元素，你将看到实际的文件名已更改为像 `5c999da72346a995e7e2718865d019c8.png` 一样。这意味着 webpack 在 `src` 文件夹中找到我们的文件，并成功处理过它！
 
-T> 合乎逻辑下一步是，压缩和优化您的图像。查看 [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) 和 [url-loader](/loaders/url-loader)，以了解更多关于如果增强加载处理图片功能。
+T> 合乎逻辑下一步是，压缩和优化你的图像。查看 [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) 和 [url-loader](/loaders/url-loader)，以了解更多关于如果增强加载处理图片功能。
 
 
 ## 加载字体
@@ -324,7 +324,7 @@ __project__
   |- /node_modules
 ```
 
-With the loader configured and fonts in place, you can use incorporate them via an `@font-face` declaration. The local `url(...)` directive will be picked up by webpack just as it was with the image:
+通过配置好 loader 并将字体文件放在合适的地方，你可以通过一个 `@font-face` 声明引入。本地的 `url(...)` 指令会被 webpack 获取处理，就像它处理图片资源一样：
 
 __src/style.css__
 
@@ -344,7 +344,7 @@ __src/style.css__
   }
 ```
 
-Now run a new build and let's see if webpack handled our fonts:
+现在让我们重新构建来看看 webpack 是否处理了我们的字体：
 
 ``` bash
 npm run build
@@ -369,7 +369,7 @@ Time: 775ms
   [10] ./src/index.js 503 bytes {0} [built]
 ```
 
-Open up `index.html` again and see if our `Hello webpack` text has changed to the new font. If all is well, you should see the changes.
+重新打开 `index.html` 看看我们的 `Hello webpack` 文本显示是否换上了新的字体。如果一切顺利，你应该能看到变化。
 
 
 ## 加载数据
@@ -429,7 +429,7 @@ __webpack.config.js__
   };
 ```
 
-Add some data files to your project:
+给你的项目添加一些数据文件：
 
 __project__
 
@@ -493,7 +493,7 @@ __src/index.js__
   document.body.appendChild(component());
 ```
 
-When you open `index.html` and look at your console in your developer tools, you should be able to see your imported data being logged to the console!
+当你打开 `index.html` 并查看开发者工具中的控制台，你应该能够看到你导入的数据被打印在了上面！
 
 T> 在使用 [d3](https://github.com/d3) 等工具来实现某些数据可视化时，预加载数据会非常有用。我们可以不用再发送 ajax 请求，然后于运行时解析数据，而是在构建过程中将其提前载入并打包到模块中，以便浏览器加载模块后，可以立即从模块中解析数据。
 
@@ -519,7 +519,7 @@ T> 在使用 [d3](https://github.com/d3) 等工具来实现某些数据可视化
 
 ## 回退处理
 
-对于接下来的指南，我们无需使用本指南中所有用到的资源，因此我们会进行一些清理工作，以便为下一部分指南中的[管理输出章节](https://webpack.js.org/guides/output-management/)做好准备：
+对于接下来的指南，我们无需使用本指南中所有用到的资源，因此我们会进行一些清理工作，以便为下一部分指南中的[管理输出章节](/guides/output-management/)做好准备：
 
 __project__
 
@@ -621,7 +621,7 @@ __src/index.js__
 
 ## 下一章节指南
 
-让我们继续移步到[管理输出](https://webpack.js.org/guides/output-management/)
+让我们继续移步到[管理输出](/guides/output-management/)
 
 
 ## 延伸阅读

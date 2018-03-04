@@ -6,10 +6,6 @@ var merge = require('webpack-merge');
 var webpack = require('webpack');
 
 var cwd = process.cwd();
-var stylePaths = [
-  path.join(cwd, 'src', 'styles'),
-  path.join(cwd, 'src', 'components')
-];
 
 const commonConfig = env => ({
   resolve: {
@@ -25,7 +21,7 @@ const commonConfig = env => ({
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.jsx?$/,
         use: [
           'babel-loader',
           {
@@ -55,8 +51,7 @@ const commonConfig = env => ({
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: 'css-loader'
-        }),
-        include: stylePaths
+        })
       },
       {
         test: /\.scss$/,
@@ -72,8 +67,7 @@ const commonConfig = env => ({
               }
             }
           ]
-        }),
-        include: stylePaths
+        })
       },
       {
         test: /\.woff2?$/,

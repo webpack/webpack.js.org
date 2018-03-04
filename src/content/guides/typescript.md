@@ -7,7 +7,7 @@ contributors:
   - mtrivera
 ---
 
-T> 本指南示例来源于[*起步*](/guides/getting-started/)指南。
+T> 本指南继续沿用[*起步指南*](/guides/getting-started/)中的代码示例。
 
 [TypeScript](https://www.typescriptlang.org) 是 JavaScript 的超集，为其增加了类型系统，可以编译为普通的 JavaScript 代码。这篇指南里我们将会学习 webpack 是如何跟 TypeScript 进行集成。
 
@@ -78,7 +78,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [ ".tsx", ".ts", ".js" ]
+    extensions: [ '.tsx', '.ts', '.js' ]
   },
   output: {
     filename: 'bundle.js',
@@ -139,7 +139,7 @@ __webpack.config.js__
       ]
     },
     resolve: {
-      extensions: [ ".tsx", ".ts", ".js" ]
+      extensions: [ '.tsx', '.ts', '.js' ]
     },
     output: {
       filename: 'bundle.js',

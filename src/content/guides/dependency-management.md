@@ -81,7 +81,7 @@ W> 传递给 `require.context` 的参数必须是字面量(literal)！
 
 ### 上下文模块 API
 
-一个上下文模块导出一个（require）函数，这个函数可以接收一个参数：request 函数。
+一个上下文模块导出一个（require）函数，这个函数可以接收一个参数：request。
 
 导出的方法有 3 个属性： `resolve`, `keys`, `id`。
 

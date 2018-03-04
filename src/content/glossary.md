@@ -7,35 +7,35 @@ contributors:
   - skipjack
 ---
 
-This index lists common terms used throughout the webpack ecosystem.
+该索引列出了在整个 Webpack 生态系统中共同使用的术语。
 
 
 ## A
 
-- [**Asset**](/guides/asset-management/): This a general term for the images, fonts, media, and any other kind of files that are typically used in websites and other applications. These typically end up as individual files within the [output](/glossary#o) but can also be inlined via things like the [style-loader](/loaders/style-loader) or [url-loader](/loaders/url-loader).
+- [**资源(Asset)**](/guides/asset-management/): 这是一个普遍的术语，用于图片、字体、媒体，还有一些其他类型的文件，常用在网站和其他应用程序。这些文件通常最终在[输出(output )](/glossary#o) 中成为单个文件，但也可以通过一些东西内联，像 [style-loader](/loaders/style-loader) 或者 [url-loader](/loaders/url-loader) .
 
 
 ## B
 
-- [**Bundle**](/guides/getting-started/#creating-a-bundle): Produced from a number of distinct modules, bundles contain the final versions of source files that have already undergone the loading and compilation process.
-- [**Bundle Splitting**](/guides/code-splitting): This process offers one way of optimizing a build, allowing webpack to generate multiple bundles for a single application. As a result, each bundle can be isolated from changes effecting others, reducing the amount of code that needs to be republished and therefore re-downloaded by the client and taking advantage of browser caching.
+- [**Bundle**](/guides/getting-started/#creating-a-bundle): 由多个不同的模块生成，bundles 包含了早已经过加载和编译的最终源文件版本。
+- [**Bundle 分离(Bundle Splitting)**](/guides/code-splitting): 这个流程提供一个优化 build 的方法，允许 webpack 为应用程序生成多个 bundle。最终效果是，当其他某些 bundle 的改动时，彼此独立的另一些 bundle 都可以不受到影响，减少需要重新发布的代码量，因此由客户端重新下载并利用浏览器缓存。
 
 
 ## C
 
-- **Chunk**: This webpack-specific term is used internally to manage the bundling process. Bundles are composed out of chunks, of which there are several types (e.g. entry and child). Typically, _chunks_ directly correspond with the output _bundles_ however, there are some configurations that don't yield a one-to-one relationship.
-- [**Code Splitting**](/guides/code-splitting/): Refers to dividing your code into various bundles/chunks which you can then load on demand instead of loading a single bundle containing everything.
-- [**Configuration**](/concepts/configuration/): webpack config file is a plain old JavaScript file that exports an object. This object is then processed by webpack based upon its defined properties.
+- **Chunk**: 这是 webpack 特定的术语被用在内部来管理 building 过程。bundle 由 chunk 组成，其中有几种类型（例如，入口 chunk(entry chunk) 和子 chunk(child chunk)）。通常 chunk 会直接对应所输出的 bundle，但是有一些配置并不会产生一对一的关系。
+- [**代码分离(Code Splitting)**](/guides/code-splitting/): 指将代码分离到每个 bundles/chunks 里面，你可以按需加载，而不是加载一个包含全部的 bundle。
+- [**配置(Configuration)**](/concepts/configuration/): webpack 的配置文件是一个普通的 JavaScript 文件，它导出为一个对象。然后由 webpack 根据这个对象定义的属性进行处理。
 
 
 ## D
 
-- [**Dependency Graph**](/concepts/dependency-graph): Any time one file depends on another, webpack treats this as a *dependency*. Starting from an entry point(s), webpack recursively builds a dependency graph that includes every module/asset your application needs.
+- [**依赖关系图(Dependency Graph)**](/concepts/dependency-graph): 有时候一个文件依赖于其他文件，webpack 将其视为*依赖关系*(*dependency*)。从一个或多个入口点开始，webpack 递归构建一个依赖关系图，里面包含了你的应用程序需要的所有模块/资源(mudule/asset)。
 
 
 ## E
 
-- [**Entry Point**](/concepts/entry-points): The entry point tells webpack where to start and follows the graph of dependencies to know what to bundle. You can think of your application's entry point(s) as the **contextual root(s)** of what you want bundled.
+- [**入口点(Entry Point)**](/concepts/entry-points): 入口点可以告诉 webpack 从哪里启动以及遵循依赖关系图，以此知道要打包什么东西。你可以考虑将待打包文件的根目录作为你应用程序的入口点。
 
 
 ## F
@@ -44,7 +44,7 @@ This index lists common terms used throughout the webpack ecosystem.
 
 ## H
 
-- [**Hot Module Replacement (HMR)**](/concepts/hot-module-replacement): A process that exchanges, adds, or removes  `modules` while an application is running without a full page reload.
+- [**热模块替换(Hot Module Replacement(HMR))**](/concepts/hot-module-replacement): 一个修改、添加或删除模块(modules)的过程，而正在运行中的应用程序无需重载加载整个页面。
 
 
 ## I
@@ -55,50 +55,52 @@ This index lists common terms used throughout the webpack ecosystem.
 
 ## L
 
-- [**Loaders**](/concepts/loaders): Transformations that are applied on the source code of a module. They allow you to pre-process files as you `require()` or "load" them. Similar to a 'task-runner'.
+- [**Loaders**](/concepts/loaders): loader 允许你在 `require()` 或“加载”的文件之前，先预处理文件。就像“任务执行器(task-runner)”
 
 
 ## M
 
-- [**Module**](/concepts/modules): Discrete chunks of functionality that provide a smaller surface area than a full program. Well-written modules provide solid abstractions and encapsulation boundaries which make up a coherent design and clear purpose.
-- [**Module Resolution**](/concepts/module-resolution/): A module can be required as a dependency from another module and a resolver is a library which helps in locating a module by its absolute path.. Modules are searched for inside all directories specified in `resolve.modules`.
+- [**模块(Module)**](/concepts/modules): 提供比完整程序接触面(surface area)更小的离散功能块。精心编写的模块提供了可靠的抽象和封装界限，使得应用程序中每个模块都具有条理清楚的设计和明确的目的。
+- [**模块解析(Module Resolution)**](/concepts/module-resolution/): 一个模块可以作为另一个模块的依赖模块，resolver 是一个库( library )用于帮助找到模块的绝对路径... 模块将在 `resolve.modules` 中指定的所有目录内搜索。
 
 
 ## N
 
 ## O
 
-- [**Output**](/concepts/output): Option(s) specifying where to the output of the compiled files to disk.
-  > _Note, that while there can be multiple entry points, only one output configuration is specified._
+- [**输出(Output)**](/concepts/output): 此选项指定编译后的文件，输出到硬盘的何处。
+  > _注意, 虽然可以有多个入口点, 但规定只能配置一个输出(output)。_
 
 
 ## P
 
-- [**Plugin**](/concepts/plugins): A JavaScript object that has an `apply` property. This `apply` property is called by the webpack compiler, giving access to the entire compilation lifecycle. These packages will typically extend compilation functionality in one way or another.
+- [**插件(Plugin)**](/concepts/plugins): 一个含有 `apply` 属性的 JavaScript 对象。该 `apply` 属性会在 webpack 编译时被调用，并能在整个编译生命周期访问。这些插件包通常以某种方式扩展编译功能。
 
 
 ## Q
 
 ## R
 
+- [**Request**](/guides/dependency-management/)：指 require/import 语句中的表达式，例如，在 *require("./template/" + name + ".ejs")* 中，request 指的是 *"./template/" + name + ".ejs"*。
+
 ## S
 
 ## T
 
-- [**Target**](/configuration/target/): User configured deployment target(s) [listed here](/configuration/target/) to compile for a specific environment like the browser, NodeJS, or Electron.
-- [**Tree Shaking**](/guides/tree-shaking/): Unused/Excess code elimination, or more precisely, live code importing. Compilers like webpack will accomplish this by analyzing the various kinds `import` statements and usage of the imported code to determine what parts of dependencies are actually being utilized, dropping parts of the "tree" that are not.
+- [**目标(Target)**](/configuration/target/): [这里列出](/configuration/target/) 了用户配置的部署目标，针对特定的环境（如浏览器，NodeJS或Electron）进行编译。
+- [**Tree Shaking**](/guides/tree-shaking/): 移除未使用/多余的代码，或者更准确地说，只导入引用的代码。编译器(compiler)（例如 webpack）将通过分析各种 `import` 语句和引入代码的使用情况，来确定哪些部分的依赖关系被实际使用，删除不是“树”的部分，以实现此功能。
 
 
 ## U
 
 ## V
 
-- [**Vendor Entry Point**](/concepts/entry-points/#separate-app-and-vendor-entries): Create dependency graphs starting at both `app.js` and `vendors.js`. These graphs are completely separate and independent of each other to allow leverage of `CommonsChunkPlugin` and extract any vendor references from your app bundle into your vendor bundle. Helps achieve a common pattern in webpack known as [long-term vendor-caching](/guides/caching/).
+- [**第三方库入口点(Vendor Entry Point)**](/concepts/entry-points/#separate-app-and-vendor-entries):  从 app.js 和 vendors.js 开始创建依赖图(dependency graph)。这些依赖图是彼此完全分离、互相独立的，允许你使用 CommonsChunkPlugin 从「应用程序 bundle」中提取 vendor 引用(vendor reference) 到 vendor bundle。可以帮助你在 webpack 中实现被称为[长效缓存](/guides/caching/)的通用模式。
 
 
 ## W
 
-- [**webpack**](/): A highly configurable [module](/concepts/modules) bundler for modern JavaScript applications
+- [**webpack**](/): 一个可高度配置的现代 JavaScript 应用程序[模块](/concepts/modules)([module](/concepts/modules))打包器。
 
 
 ## X
@@ -106,4 +108,3 @@ This index lists common terms used throughout the webpack ecosystem.
 ## Y
 
 ## Z
-

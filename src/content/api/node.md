@@ -70,7 +70,7 @@ T> webpack **不**会并行执行多个配置。每个配置只会在前一个�
 * `.run(callback)`
 * `.watch(watchOptions, handler)`
 
-W> The API only supports a single concurrent compilation at a time. When using `run`, wait for it to finish before calling `run` or `watch` again. When using `watch`, call `close` and wait for it to finish before calling `run` or `watch` again. Concurrent compilations will corrupt the output files.
+W> 这个 API 一次只支持一个并发编译。当使用 `run` 时，会等待它完成后，然后才能再次调用 `run` 或 `watch`。当使用 `watch` 时，调用 `close`，等待它完成后，然后才能再次调用 `run` 或 `watch`。多个并发编译会损坏输出文件。
 
 
 ## 执行(Run)
@@ -136,7 +136,7 @@ T> 不允许在当前监听器已经关闭或失效前再次监听或执行。
 
 ### 作废 `Watching`(Invalidate `Watching`)
 
-使用 `watching.invalidate`，您可以手动使当前编译循环(compiling round)无效，而不会停止监视进程：
+使用 `watching.invalidate`，你可以手动使当前编译循环(compiling round)无效，而不会停止监视进程：
 
 ``` js
 watching.invalidate();
@@ -153,7 +153,7 @@ watching.invalidate();
 
 [webpack CLI](/api/cli) 正是基于这些信息在控制台展示友好的格式输出。
 
-T> When using the [`MultiCompiler`](/api/plugins/compiler#multicompiler), a `MultiStats` instance is returned that fulfills the same interface as `stats`, i.e. the methods described below.
+T> 当使用 [`MultiCompiler`](/api/compiler#multicompiler) 时，会返回一个 `MultiStats` 实例，它实现与 `stats` 相同的接口，也就是下面描述的方法。
 
 `stats` 对象暴露了以下方法：
 
@@ -254,7 +254,7 @@ webpack({
   }
 
   if (stats.hasWarnings()) {
-    console.warn(info.warnings)
+    console.warn(info.warnings);
   }
 
   // 记录结果...
@@ -280,7 +280,7 @@ compiler.run((err, stats) => {
 });
 ```
 
-值得一提的是， 被 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 及众多其他包依赖的 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) 就是通过这种方式，将你的文件神秘地隐藏起来，但却仍然可以用它们为浏览器提供服务！
+值得一提的是，被 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 及众多其他包依赖的 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) 就是通过这种方式，将你的文件神秘地隐藏起来，但却仍然可以用它们为浏览器提供服务！
 
 T> 你指定的输出文件系统需要兼容 Node 自身的 [`fs`](https://nodejs.org/api/fs.html) 模块接口，接口需要提供 `mkdirp` 和 `join` 工具方法。
 

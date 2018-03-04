@@ -10,7 +10,7 @@ related:
 
 本插件实现了对source map的产生的更细粒度的控制。它可以替代`devtool`选项。
 
-```js
+``` js
 new webpack.SourceMapDevToolPlugin(options)
 ```
 

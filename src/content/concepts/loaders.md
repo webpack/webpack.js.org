@@ -43,9 +43,9 @@ module.exports = {
 
 在你的应用程序中，有三种使用 loader 的方式：
 
-* 配置（推荐）：在 __webpack.config.js__ 文件中指定 loader。
-* 内联：在每个 `import` 语句中显式指定 loader。
-* CLI：在 shell 命令中指定它们。
+* [配置](#configuration)（推荐）：在 __webpack.config.js__ 文件中指定 loader。
+* [内联](#inline)：在每个 `import` 语句中显式指定 loader。
+* [CLI](#cli)：在 shell 命令中指定它们。
 
 
 ### 配置[Configuration]
@@ -101,7 +101,7 @@ webpack --module-bind jade-loader --module-bind 'css=style-loader!css-loader'
 
 ## Loader 特性
 
-* loader 支持链式传递。能够对资源使用流水线(pipeline)。一组链式的 loader 将按照先后顺序进行编译。loader 链中的第一个 loader 返回值给下一个 loader。在最后一个 loader，返回 webpack 所预期的 JavaScript。
+* loader 支持链式传递。能够对资源使用流水线(pipeline)。一组链式的 loader 将按照相反的顺序执行。loader 链中的第一个 loader 返回值给下一个 loader。在最后一个 loader，返回 webpack 所预期的 JavaScript。
 * loader 可以是同步的，也可以是异步的。
 * loader 运行在 Node.js 中，并且能够执行任何可能的操作。
 * loader 接收查询参数。用于对 loader 传递配置。
@@ -110,7 +110,8 @@ webpack --module-bind jade-loader --module-bind 'css=style-loader!css-loader'
 * 插件(plugin)可以为 loader 带来更多特性。
 * loader 能够产生额外的任意文件。
 
-loader 通过（loader）预处理函数，为 JavaScript 生态系统提供了更多能力。用户现在可以更加灵活地引入细粒度逻辑，例如压缩、打包、语言翻译和[其他更多](/loaders)。
+loader 通过（loader）预处理函数，为 JavaScript 生态系统提供了更多能力。
+用户现在可以更加灵活地引入细粒度逻辑，例如压缩、打包、语言翻译和[其他更多](/loaders)。
 
 
 ## 解析 Loader

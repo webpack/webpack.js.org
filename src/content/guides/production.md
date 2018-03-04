@@ -14,6 +14,7 @@ contributors:
   - skipjack
   - xgqfrms
   - kelset
+  - xgirma
 ---
 
 在本指南中，我们将深入一些最佳实践，并且使用工具，将网站或应用程序构建到生产环境中。
@@ -128,6 +129,7 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
+      "clean-webpack-plugin": "^0.1.17",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "express": "^4.15.3",
@@ -136,6 +138,8 @@ __package.json__
       "style-loader": "^0.18.2",
       "webpack": "^3.0.0",
       "webpack-dev-middleware": "^1.12.0",
+      "webpack-dev-server": "^2.9.1",
+      "webpack-merge": "^4.1.0",
       "xml-loader": "^1.2.1"
     }
   }
@@ -178,6 +182,7 @@ __webpack.prod.js__
 
 T> 避免在生产中使用 `inline-***` 和 `eval-***`，因为它们可以增加 bundle 大小，并降低整体性能。
 
+
 ## 指定环境
 
 许多 library 将通过与 `process.env.NODE_ENV` 环境变量关联，以决定 library 中应该引用哪些内容。例如，当不处于_生产环境_中时，某些 library 为了使调试变得容易，可能会添加额外的日志记录(log)和测试(test)。其实，当使用 `process.env.NODE_ENV === 'production'` 时，一些 library 可能针对具体用户的环境进行代码优化，从而删除或添加一些重要代码。我们可以使用 webpack 内置的 [`DefinePlugin`](/plugins/define-plugin) 为所有的依赖定义这个变量：
@@ -191,15 +196,13 @@ __webpack.prod.js__
   const common = require('./webpack.common.js');
 
   module.exports = merge(common, {
-    devtool: 'cheap-module-source-map',
+    devtool: 'source-map',
     plugins: [
       new UglifyJSPlugin({
         sourceMap: true
       }),
 +     new webpack.DefinePlugin({
-+       'process.env': {
-+         'NODE_ENV': JSON.stringify('production')
-+       }
++       'process.env.NODE_ENV': JSON.stringify('production')
 +     })
     ]
   })
@@ -207,7 +210,7 @@ __webpack.prod.js__
 
 T> 技术上讲，`NODE_ENV` 是一个由 Node.js 暴露给执行脚本的系统环境变量。通常用于决定在开发环境与生产环境(dev-vs-prod)下，服务器工具、构建脚本和客户端 library 的行为。然而，与预期不同的是，无法在构建脚本 `webpack.config.js` 中，将 `process.env.NODE_ENV` 设置为 `"production"`，请查看 [#2537](https://github.com/webpack/webpack/issues/2537)。因此，例如 `process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js'` 这样的条件语句，在 webpack 配置文件中，无法按照预期运行。
 
-如果您正在使用像 [`react`](https://facebook.github.io/react/) 这样的 library，那么在添加此 DefinePlugin 插件后，你应该看到 bundle 大小显著下降。还要注意，任何位于 `/src` 的本地代码都可以关联到 process.env.NODE_ENV 环境变量，所以以下检查也是有效的：
+如果你正在使用像 [`react`](https://facebook.github.io/react/) 这样的 library，那么在添加此 DefinePlugin 插件后，你应该看到 bundle 大小显著下降。还要注意，任何位于 `/src` 的本地代码都可以关联到 process.env.NODE_ENV 环境变量，所以以下检查也是有效的：
 
 __src/index.js__
 
@@ -231,6 +234,11 @@ __src/index.js__
 
   document.body.appendChild(component());
 ```
+
+
+## Split CSS
+
+正如在__管理资源__中最后的 [加载 CSS](/guides/asset-management#loading-css) 小节中所提到的，通常最好的做法是使用 `ExtractTextPlugin` 将 CSS 分离成单独的文件。在插件[文档](/plugins/extract-text-webpack-plugin)中有一些很好的实现例子。`disable` 选项可以和 `--env` 标记结合使用，以允许在开发中进行内联加载，推荐用于热模块替换和构建速度。
 
 
 ## CLI 替代选项

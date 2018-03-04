@@ -12,9 +12,10 @@ contributors:
   - jecoopr
   - TheDutchCoder
   - sudarsangp
+  - Vanguard90
 ---
 
-你可能已经知道，webpack 用于编译 JavaScript 模块。一旦完成[安装](/guides/installation)，你就可以通过 webpack 的 [CLI](/api/cli) 或 [API](/api/node) 与其配合交互。如果你还不熟悉 webpack，请阅读[核心概念](/concepts)和[打包器对比](/comparison)，了解为什么你要使用 webpack，而不是社区中的其他工具。
+webpack 用于编译 JavaScript 模块。一旦完成[安装](/guides/installation)，你就可以通过 webpack 的 [CLI](/api/cli) 或 [API](/api/node) 与其配合交互。如果你还不熟悉 webpack，请阅读[核心概念](/concepts)和[打包器对比](/comparison)，了解为什么你要使用 webpack，而不是社区中的其他工具。
 
 
 ## 基本安装
@@ -140,20 +141,20 @@ __dist/index.html__
 
 在这个设置中，`index.js` 显式要求引入的 `lodash` 必须存在，然后将它绑定为 `_`（没有全局作用域污染）。通过声明模块所需的依赖，webpack 能够利用这些信息去构建依赖图，然后使用图生成一个优化过的，会以正确顺序执行的 bundle。
 
-可以这样说，执行 `webpack`，会将我们的脚本作为[入口起点](/concepts/entry-points)，然后[输出](/concepts/output)为 `bundle.js`
+可以这样说，执行 `npx webpack`，会将我们的脚本作为[入口起点](/concepts/entry-points)，然后[输出](/concepts/output)为 `bundle.js`。Node 8.2+ 版本提供的 `npx` 命令，可以运行在初始安装的 webpack 包(package)的 webpack 二进制文件（`./node_modules/.bin/webpack`）：
 
 ``` bash
-./node_modules/.bin/webpack src/index.js dist/bundle.js
+npx webpack src/index.js dist/bundle.js
 
-Hash: ff6c1d39b26f89b3b7bb
-Version: webpack 2.2.0
-Time: 385ms
+Hash: 857f878815ce63ad5b4f
+Version: webpack 3.9.1
+Time: 332ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  [emitted]  [big]  main
-   [0] ./~/lodash/lodash.js 540 kB {0} [built]
-   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [3] ./src/index.js 278 bytes {0} [built]
+   [0] ./src/index.js 222 bytes {0} [built]
+   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+    + 1 hidden module
 ```
 
 T> 输出可能会稍有不同，但是只要构建成功，那么你就可以继续。
@@ -167,7 +168,7 @@ T> 输出可能会稍有不同，但是只要构建成功，那么你就可以�
 
 事实上，webpack 在幕后会将代码“转译”，以便旧有浏览器可以执行。如果你检查 `dist/bundle.js`，你可以看到 webpack 具体如何实现，这是独创精巧的设计！除了 `import` 和 `export`，webpack 还能够很好地支持多种其他模块语法，更多信息请查看[模块 API](/api/module-methods)。
 
-注意，webpack 不会更改代码中除 `import` 和 `export` 语句以外的部分。如果你在使用其它 [ES2015 特性](http://es6-features.org/)，请确保你是通过 webpack 的 [loader 系统](/concepts/loaders/)，使用了一个像是 [Babel](https://babeljs.io/) 或 [Bublé](https://buble.surge.sh/guide/) 的[转译器](/loaders/#transpiling)。
+注意，webpack 不会更改代码中除 `import` 和 `export` 语句以外的部分。如果你在使用其它 [ES2015 特性](http://es6-features.org/)，请确保你在 webpack 的 [loader 系统](/concepts/loaders/)中使用了一个像是 [Babel](https://babeljs.io/) 或 [Bublé](https://buble.surge.sh/guide/) 的[转译器](/loaders/#transpiling)。
 
 
 ## 使用一个配置文件
@@ -200,21 +201,23 @@ module.exports = {
 };
 ```
 
-现在，让我们再次执行构建，通过使用我们的新配置：
+现在，让我们通过新配置再次执行构建：
 
 ``` bash
-./node_modules/.bin/webpack --config webpack.config.js
+npx webpack --config webpack.config.js
 
-Hash: ff6c1d39b26f89b3b7bb
-Version: webpack 2.2.0
-Time: 390ms
+Hash: 857f878815ce63ad5b4f
+Version: webpack 3.9.1
+Time: 298ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  [emitted]  [big]  main
-   [0] ./~/lodash/lodash.js 540 kB {0} [built]
-   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [3] ./src/index.js 278 bytes {0} [built]
+   [0] ./src/index.js 222 bytes {0} [built]
+   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+    + 1 hidden module
 ```
+
+W> 注意，当在 windows 中通过调用路径去调用 `webpack` 时，必须使用反斜线(\)。例如 `node_modules\.bin\webpack --config webpack.config.js`。
 
 T> 如果 `webpack.config.js` 存在，则 `webpack` 命令将默认选择使用它。我们在这里使用 `--config` 选项只是向你表明，可以传递任何名称的配置文件。这对于需要拆分成多个文件的复杂配置是非常有用。
 
@@ -237,22 +240,22 @@ __package.json__
 }
 ```
 
-现在，可以使用 `npm run build` 命令，来替代我们之前用到的较长命令。注意，使用 npm 的 `scripts`，我们可以通过模块名，来引用本地安装的 npm 包，而不是写出完整路径。这是大多数基于 npm 的项目遵循的标准，允许我们直接调用 `webpack`，而不是去调用 `./node_modules/.bin/webpack`。
+现在，可以使用 `npm run build` 命令，来替代我们之前使用的 `npx` 命令。注意，使用 npm 的 `scripts`，我们可以像使用 `npx` 那样通过模块名引用本地安装的 npm 包。这是大多数基于 npm 的项目遵循的标准，因为它允许所有贡献者使用同一组通用脚本（如果必要，每个 flag 都带有 `--config` 标志）。
 
 现在运行以下命令，然后看看你的脚本别名是否正常运行：
 
 ``` bash
 npm run build
 
-Hash: ff6c1d39b26f89b3b7bb
-Version: webpack 2.2.0
-Time: 390ms
+Hash: 857f878815ce63ad5b4f
+Version: webpack 3.9.1
+Time: 294ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  [emitted]  [big]  main
-   [0] ./~/lodash/lodash.js 540 kB {0} [built]
-   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [3] ./src/index.js 278 bytes {0} [built]
+   [0] ./src/index.js 222 bytes {0} [built]
+   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+    + 1 hidden module
 ```
 
 T> 通过向 `npm run build` 命令和你的参数之间添加两个中横线，可以将自定义参数传递给 webpack，例如：`npm run build -- --colors`。

@@ -7,6 +7,7 @@ contributors:
   - tarang9211
   - simon04
   - peterblazejewicz
+  - youta1119
 ---
 
 webpack 接受以多种编程和数据语言编写的配置文件。支持的文件扩展名列表，可以在 [node-interpret](https://github.com/js-cli/js-interpret) 包中找到。使用 [node-interpret](https://github.com/js-cli/js-interpret)，webpack 可以处理许多不同类型的配置文件。
@@ -37,6 +38,48 @@ const config: webpack.Configuration = {
 };
 
 export default config;
+```
+
+Note that you'll also need to check your `tsconfig.json` file. If the module in `compilerOptions` in `tsconfig.json` is `commonjs`, the setting is complete, else webpack will fail with an error. This occurs because `ts-node` does not support any module syntax other than `commonjs`.
+
+There are two solutions to this issue:
+
+- Modify `tsconfig.json`.
+- Install `tsconfig-paths`.
+
+The __first option__ is to open your `tsconfig.json` file and look for `compilerOptions`. Set `target` to `"ES5"` and `module` to `"CommonJS"` (or completely remove the `module` option).
+
+The __second option__ is to install the `tsconfig-paths` package:
+
+``` bash
+npm install --save-dev tsconfig-paths
+```
+
+And create a separate TypeScript configuration specifically for your webpack configs:
+
+__tsconfig-for-webpack-config.json__
+
+``` json
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5"
+  }
+}
+```
+
+T> `ts-node` can resolve a `tsconfig.json` file using the environment variable provided by `tsconfig-path`.
+
+Then set the environment variable `process.env.TS_NODE_PROJECT` provided by `tsconfig-path` like so:
+
+__package.json__
+
+```json
+{
+  "scripts": {
+    "build": "TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack"
+  }
+}
 ```
 
 
@@ -126,7 +169,7 @@ export default (
 );
 ```
 
-W> 如果你在其他地方也使用了 babel 并且把`模块(modules)`设置为了 `false`，那么你要么同时维护两份单独的 `.babelrc` 文件，要么使用 `conts jsxobj = requrie('jsxojb');` 并且使用 `moduel.exports` 而不是新版本的 `import` 和 `export` 语法。这是因为尽管 Node.js 已经支持了许多 ES6 的新特性，然而还无法支持 ES6 模块语法。
+W> 如果你在其他地方也使用了 Babel 并且把`模块(modules)`设置为了 `false`，那么你要么同时维护两份单独的 `.babelrc` 文件，要么使用 `conts jsxobj = requrie('jsxobj');` 并且使用 `moduel.exports` 而不是新版本的 `import` 和 `export` 语法。这是因为尽管 Node.js 已经支持了许多 ES6 的新特性，然而还无法支持 ES6 模块语法。
 
 ***
 

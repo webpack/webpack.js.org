@@ -19,7 +19,7 @@ npm i -D worker-loader
 
 **App.js**
 ```js
-import Worker from 'worker-loader!./Worker.js'
+import Worker from 'worker-loader!./Worker.js';
 ```
 
 ### `Config`
@@ -40,23 +40,24 @@ import Worker from 'worker-loader!./Worker.js'
 
 **App.js**
 ```js
-import Worker from './file.worker.js'
+import Worker from './file.worker.js';
 
-const worker = new Worker()
+const worker = new Worker();
 
-worker.postMessage({ a: 1 })
-worker.onmessage = function (event) {}
+worker.postMessage({ a: 1 });
+worker.onmessage = function (event) {};
 
-worker.addEventListener("message", function (event) {})
+worker.addEventListener("message", function (event) {});
 ```
 
 ## Options
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|**`name`**|`{String}`|`[hash].worker.js`|Set a custom name for the output script|
-|**`inline`**|`{Boolean}`|`false`|Inline the worker as a BLOB|
-|**`fallback`**|`{Boolean}`|`false`|Require a fallback for non-worker supporting environments|
+|[**`name`**](#name)|`{String}`|`[hash].worker.js`|Set a custom name for the output script|
+|[**`inline`**](#inline)|`{Boolean}`|`false`|Inline the worker as a BLOB|
+|[**`fallback`**](#fallback)|`{Boolean}`|`false`|Require a fallback for non-worker supporting environments|
+|[**`publicPath`**](#publicPath)|`{String}`|`null`|Override the path from which worker scripts are downloaded|
 
 ### `name`
 
@@ -104,6 +105,19 @@ Require a fallback for non-worker supporting environments
 }
 ```
 
+### `publicPath`
+
+Overrides the path from which worker scripts are downloaded. If not specified, the same public path used for other
+webpack assets is used
+
+**webpack.config.js**
+```js
+{
+  loader: 'worker-loader'
+  options: { publicPath: '/scripts/workers/' }
+}
+```
+
 ## Examples
 
 The worker file can import dependencies just like any other file
@@ -147,7 +161,7 @@ self.addEventListener('message', (event) => console.log(event))
 To integrate with TypeScript, you will need to define a custom module for the exports of your worker
 
 **typings/custom.d.ts**
-```ts
+```typescript
 declare module "worker-loader!*" {
   class WebpackWorker extends Worker {
     constructor();
@@ -158,7 +172,7 @@ declare module "worker-loader!*" {
 ```
 
 **Worker.ts**
-```ts
+```typescript
 const ctx: Worker = self as any;
 
 // Post data to parent thread
@@ -169,15 +183,50 @@ ctx.addEventListener("message", (event) => console.log(event));
 ```
 
 **App.ts**
-```ts
-import MyWorker = require("worker-loader!./Worker");
+```typescript
+import Worker = require("worker-loader!./Worker");
 
-const worker = new MyWorker();
+const worker = new Worker();
 
 worker.postMessage({ a: 1 });
 worker.onmessage = (event) => {};
 
 worker.addEventListener("message", (event) => {});
+```
+
+### `Cross-Origin Policy`
+
+[`WebWorkers`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) are restricted by a [same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy), so if your `webpack` assets are not being served from the same origin as your application, their download may be blocked by your browser. This scenario can commonly occur if you are hosting your assets under a CDN domain. Even downloads from the `webpack-dev-server` could be blocked. There are two workarounds
+
+Firstly, you can inline the worker as a blob instead of downloading it as an external script via the [`inline`](#inline) parameter
+
+**App.js**
+```js
+import Worker from './file.worker.js';
+```
+
+**webpack.config.js**
+```js
+{
+  loader: 'worker-loader'
+  options: { inline: true }
+}
+```
+
+Secondly, you may override the base download URL for your worker script via the [`publicPath`](#publicpath) option
+
+**App.js**
+```js
+// This will cause the worker to be downloaded from `/workers/file.worker.js`
+import Worker from './file.worker.js';
+```
+
+**webpack.config.js**
+```js
+{
+  loader: 'worker-loader'
+  options: { publicPath: '/workers/' }
+}
 ```
 
 ## Maintainers

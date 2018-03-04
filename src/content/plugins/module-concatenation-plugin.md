@@ -15,12 +15,16 @@ related:
 new webpack.optimize.ModuleConcatenationPlugin()
 ```
 
-> 由于实现 ECMAScript 模块语法，作用域提升(Scope Hoisting)这个特定于此语法的功能才成为可能。`webpack` 可能会根据你正在使用的模块类型和[其他的情况](https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5)，回退到普通打包。
+> 这种连结行为被称为“作用域提升(scope hoisting)”。
+>
+> 由于实现 ECMAScript 模块语法，作用域提升(scope hoisting)这个特定于此语法的功能才成为可能。`webpack` 可能会根据你正在使用的模块类型和[其他的情况](https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5)，回退到普通打包。
+
+W> 记住，此插件仅适用于由 webpack 直接处理的 [ES6 模块](/api/module-methods/#es6-recommended-)。在使用转译器(transpiler)时，你需要禁用对模块的处理（例如 Babel 中的 [`modules`](https://babeljs.io/docs/plugins/preset-es2015/#optionsmodules) 选项）。
 
 
 ## 绑定失败的优化[Optimization Bailouts]
 
-像文章中解释的， webpack 试图达到分批的作用域提升(scope hoisting)。它会将一些模块绑定到一个作用域内，但并不是任何情况下都会这么做。如果 webpack 不能绑定模块，将会有两个选择 Prevent 和 Root，Prevent 意思是模块必须在自己的作用域内。 Root 意味着将创建一个新的模块组。以下条件决定了输出结果：
+像文章中解释的，webpack 试图达到分批的作用域提升(scope hoisting)。它会将一些模块绑定到一个作用域内，但并不是任何情况下都会这么做。如果 webpack 不能绑定模块，将会有两个选择 Prevent 和 Root，Prevent 意思是模块必须在自己的作用域内。 Root 意味着将创建一个新的模块组。以下条件决定了输出结果：
 
 Condition                                     | Outcome
 --------------------------------------------- | --------
@@ -72,8 +76,8 @@ function tryToAdd(group, module) {
   if (!result) {
     return false;
   }
-  module.dependencies.forEach(depenency => {
-    tryToAdd(group, depenency);
+  module.dependencies.forEach(dependency => {
+    tryToAdd(group, dependency);
   });
   group.merge(nextGroup);
   return true;

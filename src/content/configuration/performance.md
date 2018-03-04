@@ -3,6 +3,7 @@ title: 性能(Performance)
 sort: 14
 contributors:
   - thelarkinn
+  - tbroadley
 ---
 
 这些选项可以控制 webpack 如何通知「资源(asset)和入口起点超过指定文件限制」。
@@ -86,7 +87,7 @@ function(assetFilename) {
 
 你可以通过传递自己的函数来覆盖此属性：
 
-```js 
+```js
 performance: {
   assetFilter: function(assetFilename) {
     return assetFilename.endsWith('.js');

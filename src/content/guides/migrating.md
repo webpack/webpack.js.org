@@ -16,11 +16,11 @@ contributors:
   - ndelangen
 ---
 
-The following sections describe the major changes from webpack 1 to 2.
+以下各节描述从 webpack 1 到 webpack 2 的重大变化。
 
-T> Note that there were far fewer changes between 2 and 3, so that migration shouldn't be too bad. If you are running into issues, please see [the changelog](https://github.com/webpack/webpack/releases) for details.
+T> webpack 从 1 到 2 的变化，比从 2 到 3 要少很多，所以版本迁移起来难度应该不大。如果你遇到了问题，请查看 [更新日志](https://github.com/webpack/webpack/releases) 以了解更多细节。
 
-W> This content may be moved to the blog post in the near future as version 2 has been out for a while. On top of that, version 3 was recently released and version 4 is on the horizon. As noted above, folks should instead to refer to [the changelog](https://github.com/webpack/webpack/releases) for migrations.
+W> 随着 webpack 2 版本已经发布一段时间，此章节的内容可能会在不久的将来被转移到博客文章中。最重要的是，webpack 3 版本最近发布，webpack 4 版本即将发布。如上所述，大家最好是参考 [更新日志](https://github.com/webpack/webpack/releases) 去进行相应的版本迁移。
 
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
@@ -267,7 +267,7 @@ loaders 的压缩模式将在 webpack 3 或后续版本中取消。
 ## 默认加载 `OccurrenceOrderPlugin`
 
  `OccurrenceOrderPlugin` 现在默认启用，并已重命名（在 webpack 1 中为 `OccurenceOrderPlugin`）。
-因此，请确保从您的配置中删除该插件：
+因此，请确保从你的配置中删除该插件：
 
 ``` diff
   plugins: [

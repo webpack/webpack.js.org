@@ -54,7 +54,7 @@ webpack --profile --json > compilation-stats.json
 
 ### Asset对象 (Asset Objects)
 
-每一个 `assets` 对象都表示一个编译出的 `output` 文件。 `assets` 都会有一个共同的结构:
+每一个 `assets` 对象都表示一个编译出的 `output` 文件。 `assets` 都会有一个共同的结构：
 
 ``` js
 {
@@ -176,3 +176,7 @@ Critical dependencies:
 ```
 
 W> 需要注意的是，当 `错误详情为false(errorDetails:false)`传入`toJson`函数时，对栈的追溯就不会被显示。`错误详情(errorDetils)` 默认值为 `true`
+
+***
+
+> 原文：https://webpack.js.org/api/stats/

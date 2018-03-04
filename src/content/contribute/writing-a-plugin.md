@@ -1,6 +1,8 @@
 ---
 title: 编写一个插件
-sort: 3
+sort: 4
+contributors:
+  - tbroadley
 ---
 
 插件向第三方开发者提供了 webpack 引擎中完整的能力。使用阶段式的构建回调，开发者可以引入它们自己的行为到 webpack 构建流程中。创建插件比创建 loader 更加高级，因为你将需要理解一些 webpack 底层的内部特性来做相应的勾子，所以做好阅读一些源码的准备！
@@ -11,7 +13,7 @@ sort: 3
 
 - 一个JavaScript命名函数。
 - 在它的原型上定义一个`apply`方法。
-- 指定挂载的webpack事件钩子。
+- 指定绑定自身的[事件钩子](/api/compiler/#event-hooks)。
 - 处理webpack内部实例的特定数据。
 - 功能完成后调用webpack提供的回调。
 
@@ -47,6 +49,7 @@ MyExampleWebpackPlugin.prototype.apply = function(compiler) {
 - [Compilation Source](https://github.com/webpack/webpack/blob/master/lib/Compilation.js)
 
 ## 基本插件架构
+
 
 插件都是被实例化的带有 `apply` 原型方法的对象。这个 `apply` 方法在安装插件时将被 webpack 编译器调用一次。`apply` 方法提供了一个对应的编译器对象的引用，从而可以访问到相关的编译器回调。一个简单的插件结构如下：
 
@@ -177,14 +180,14 @@ This is the simplest format for a plugin. Many useful events like `"compile"`, `
 
 `applyPluginsWaterfall(name: string, init: any, args: any...)`
 
-Here each of the plugins are called one after the other with the args from the return value of the previous plugin. The plugin must take into consider the order of its execution.
+Here each of the plugins are called one after the other with the args from the return value of the previous plugin. The plugin must take the order of its execution into account.
 It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. This pattern is used in the Tapable instances which are related to the `webpack` templates like `ModuleTemplate`, `ChunkTemplate` etc.
 
 - __asynchronous__ When all the plugins are applied asynchronously using
 
 `applyPluginsAsync(name: string, args: any..., callback: (err?: Error) -> void)`
 
-The plugin handler functions are called with all args and a callback function with the signature `(err?: Error) -> void`. The handler functions are called in order of registration.`callback` is called after all the handlers are called.
+The plugin handler functions are called with all args and a callback function with the signature `(err?: Error) -> void`. The handler functions are called in order of registration. `callback` is called after all the handlers are called.
 This is also a commonly used pattern for events like `"emit"`, `"run"`.
 
 - __async waterfall__ The plugins will be applied asynchronously in the waterfall manner.

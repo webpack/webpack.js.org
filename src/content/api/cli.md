@@ -4,6 +4,7 @@ sort: 2
 contributors:
   - ev1stensberg
   - simon04
+  - tbroadley
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -41,7 +42,7 @@ webpack <entry> [<entry>] <output>
 
 **`<entry>`**
 
-一个文件名或一组被命名的文件名，作为构建项目的入口起点。您可以传递多个入口（每个入口在启动时加载）。如果传递一个形式为 `<name> = <request>` 的键值对，则可以创建一个额外的入口起点。它将被映射到配置选项(configuration option)的 `entry` 属性。
+一个文件名或一组被命名的文件名，作为构建项目的入口起点。你可以传递多个入口（每个入口在启动时加载）。如果传递一个形式为 `<name> = <request>` 的键值对，则可以创建一个额外的入口起点。它将被映射到配置选项(configuration option)的 `entry` 属性。
 
 **`<output>`**
 
@@ -106,6 +107,12 @@ webpack -h
 
 ```bash
 webpack --config example.config.js
+```
+
+**禁止 webpack 输出**
+
+```bash
+webpack --silent
 ```
 
 **以 JSON 格式输出 webpack 的运行结果**
@@ -215,7 +222,6 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 参数 | 说明
 ------------------------- | ----------------------
 `--watch`, `-w`           | 观察文件系统的变化
-`--save`, `-s`            | 在保存的时候重新编译，无论文件是否变化
 `--watch-aggregate-timeout` | 指定一个毫秒数，在这个时间内，文件若发送了多次变化，会被合并
 `--watch-poll`            | 轮询观察文件变化的时间间隔（同时会打开轮询机制）
 `--watch-stdin`, `--stdin` | 当 stdin 关闭时，退出进程

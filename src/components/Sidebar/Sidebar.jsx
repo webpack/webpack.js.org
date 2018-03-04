@@ -52,6 +52,9 @@ export default class Sidebar extends Component {
               </div>
             );
           })}
+          <div style={{ marginTop: '20px' }}>
+            <a href="//cloud.tencent.com/community" target="_blank">腾讯云技术社区</a>
+          </div>
         </div>
 
       </nav>
