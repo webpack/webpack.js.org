@@ -142,6 +142,7 @@ Invocation                               | Resulting environment
 T> See the [environment variables](/guides/environment-variables) guide for more information on its usage.
 
 ### Config Options
+
 Parameter                 | Explanation                                 | Input type | Default
 ------------------------- | ------------------------------------------- | ---------- | ------------------
 `--config`                | Path to the config file                     | string     | webpack.config.js or webpackfile.js
