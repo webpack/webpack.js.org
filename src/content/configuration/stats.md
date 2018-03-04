@@ -44,6 +44,8 @@ stats: {
   // Sort assets by a field
   // You can reverse the sort with `!field`.
   assetsSort: "field",
+  // Add build date and time information
+  builtAt: true,
   // Add information about cached (not built) modules
   cached: true,
   // Show cached assets (setting this to `false` only shows emitted files)
@@ -62,7 +64,7 @@ stats: {
   // Context directory for request shortening
   context: "../src/",
   // `webpack --colors` equivalent
-  colors: true,
+  colors: false,
   // Display the distance from the entry point for each module
   depth: false,
   // Display the entry points with the corresponding bundles
