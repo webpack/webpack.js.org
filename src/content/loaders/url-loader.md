@@ -141,6 +141,12 @@ Set the MIME type for the file. If unspecified the file extensions will be used 
 [npm]: https://img.shields.io/npm/v/url-loader.svg
 [npm-url]: https://npmjs.com/package/url-loader
 
+[node]: https://img.shields.io/node/v/url-loader.svg
+[node-url]: https://nodejs.org
+
+[deps]: https://david-dm.org/webpack-contrib/url-loader.svg
+[deps-url]: https://david-dm.org/webpack-contrib/url-loader
+
 [tests]: https://circleci.com/gh/webpack-contrib/url-loader/tree/master.svg?style=svg
 [tests-url]: https://circleci.com/gh/webpack-contrib/url-loader/tree/master
 

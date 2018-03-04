@@ -22,6 +22,10 @@ as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies
 
 Chain the sass-loader with the [css-loader](/loaders/css-loader/) and the [style-loader](/loaders/style-loader/) to immediately apply all styles to the DOM.
 
+```bash
+npm install style-loader css-loader --save-dev
+```
+
 ```js
 // webpack.config.js
 module.exports = {
@@ -122,7 +126,7 @@ Since Sass/[libsass](https://github.com/sass/libsass) does not provide [url rewr
 
 More likely you will be disrupted by this second issue. It is natural to expect relative references to be resolved against the `.scss` file in which they are specified (like in regular `.css` files). Thankfully there are a two solutions to this problem:
 
-- Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it directly after the sass-loader in the loader chain.
+- Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it before the sass-loader in the loader chain.
 - Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`. Check out [this working bootstrap example](https://github.com/webpack-contrib/sass-loader/tree/master/test/bootstrapSass).
 
 ### Extracting style sheets

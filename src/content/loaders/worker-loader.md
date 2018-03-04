@@ -54,14 +54,14 @@ worker.addEventListener("message", function (event) {});
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|[**`name`**](#name)|`{String}`|`[hash].worker.js`|Set a custom name for the output script|
+|[**`name`**](#name)|`{String}`|`[hash].worker.js`|Set a custom name for the output script| 
 |[**`inline`**](#inline)|`{Boolean}`|`false`|Inline the worker as a BLOB|
 |[**`fallback`**](#fallback)|`{Boolean}`|`false`|Require a fallback for non-worker supporting environments|
 |[**`publicPath`**](#publicPath)|`{String}`|`null`|Override the path from which worker scripts are downloaded|
 
 ### `name`
 
-To set a custom name for the output script, use the `name` parameter. The name may contain the string `[hash]`, which will be replaced with a content dependent hash for caching purposes
+To set a custom name for the output script, use the `name` parameter. The name may contain the string `[hash]`, which will be replaced with a content dependent hash for caching purposes. When using `name` alone `[hash]` is omitted.
 
 *webpack.config.js**
 ```js
