@@ -101,17 +101,18 @@ require(['webpackNumbers'], function ( webpackNumbers) {
 用户还可以通过 script 标签来加载和使用此 library：
 
 ``` html
+<!doctype html>
 <html>
-...
-<script src="https://unpkg.com/webpack-numbers"></script>
-<script>
-  // ...
-  // 全局变量
-  webpackNumbers.wordToNum('Five')
-  // window 对象中的属性
-  window.webpackNumbers.wordToNum('Five')
-  // ...
-</script>
+  ...
+  <script src="https://unpkg.com/webpack-numbers"></script>
+  <script>
+    // ...
+    // 全局变量
+    webpackNumbers.wordToNum('Five')
+    // window 对象中的属性
+    window.webpackNumbers.wordToNum('Five')
+    // ...
+  </script>
 </html>
 ```
 
@@ -305,9 +306,9 @@ __package.json__
 }
 ```
 
-键(key) `main` 是指 [`package.json` 标准](https://docs.npmjs.com/files/package.json#main)，以及`module` 是[一个](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md)[提案](https://github.com/rollup/rollup/wiki/pkg.module)，此提案允许 JavaScript 生态系统升级使用 ES2015 模块，而不会破坏向后兼容性。
+键(key) `main` 是指 [`package.json` 标准](https://docs.npmjs.com/files/package.json#main)，以及 `module` 是 [一个](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md)[提案](https://github.com/rollup/rollup/wiki/pkg.module)，此提案允许 JavaScript 生态系统升级使用 ES2015 模块，而不会破坏向后兼容性。
 
-W> `module` 属性应指向一个使用 ES2015 模块语法的脚本，但不包括浏览器或 Node.js 尚不支持的其他语法特性。
+W> `module` 属性应指向一个使用 ES2015 模块语法的脚本，但不包括浏览器或 Node.js 尚不支持的其他语法特性。这使得 webpack 本身就可以解析模块语法，如果用户只用到 library 的某些部分，则允许通过 [tree shaking](https://webpack.js.org/guides/tree-shaking/) 打包更轻量的包。
 
 现在你可以[将其发布为一个 npm 包](https://docs.npmjs.com/getting-started/publishing-npm-packages)，并且在 [unpkg.com](https://unpkg.com/#/) 找到它并分发给你的用户。
 
