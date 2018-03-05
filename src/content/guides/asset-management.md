@@ -21,6 +21,7 @@ webpack 最出色的功能之一就是，除了 JavaScript，还可以通过 loa
 __dist/index.html__
 
 ``` diff
+  <!doctype html>
   <html>
     <head>
 -    <title>Getting Started</title>

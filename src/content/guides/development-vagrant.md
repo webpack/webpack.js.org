@@ -36,7 +36,7 @@ module.exports = {
 然后创建一个 `index.html` 文件。其中的 `script` 标签应当指向你的 bundle。如果 `output.filename` 没有在配置里设定，它的默认值便是 `bundle.js`。
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <script src="/bundle.js" charset="utf-8"></script>

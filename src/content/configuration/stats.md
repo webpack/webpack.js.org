@@ -62,7 +62,7 @@ stats: {
   // 用于缩短请求的上下文目录
   context: "../src/",
   // `webpack --colors` 等同于
-  colors: true,
+  colors: false,
   // Display the distance from the entry point for each module
   depth: false,
   // Display the entry points with the corresponding bundles

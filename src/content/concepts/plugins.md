@@ -34,7 +34,7 @@ ConsoleLogOnBuildWebpackPlugin.prototype.apply = function(compiler) {
 };
 ```
 
-T> 作为一个聪明的 JavaScript 开发者，你可能还记得 `Function.prototype.apply` 方法。通过这个方法你可以把任意函数作为插件传递（`this` 将指向 `compiler`）。你可以在配置中使用这样的方式来内联自定义插件。
+T> 作为一个聪明的 JavaScript 开发者，你可能还记得 [`Function.prototype.apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 方法。通过这个方法你可以把任意函数作为插件传递（`this` 将指向 `compiler`）。你可以在配置中使用这样的方式来内联自定义插件。
 
 
 ## 用法

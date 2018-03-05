@@ -16,7 +16,6 @@ Name                                                     | Description
 [`BabelMinifyWebpackPlugin`](/plugins/babel-minify-webpack-plugin) | 使用 [babel-minify](https://github.com/babel/minify)进行压缩
 [`BannerPlugin`](/plugins/banner-plugin)                 | 在每个生成的 chunk 顶部添加 banner
 [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin)    | 提取 chunks 之间共享的通用模块
-[`ComponentWebpackPlugin`](/plugins/component-webpack-plugin) | 通过 webpack 使用组件
 [`CompressionWebpackPlugin`](/plugins/compression-webpack-plugin) | 预先准备的资源压缩版本，使用 Content-Encoding 提供访问服务
 [`ContextReplacementPlugin`](/plugins/context-replacement-plugin) | 重写 `require` 表达式的推断上下文
 [`DefinePlugin`](/plugins/define-plugin)           | 允许在编译时(compile time)配置的全局常量
