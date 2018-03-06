@@ -141,6 +141,16 @@ Invocation                               | Resulting environment
 
 T> See the [environment variables](/guides/environment-variables) guide for more information on its usage.
 
+### Config Options
+
+Parameter                 | Explanation                                 | Input type | Default
+------------------------- | ------------------------------------------- | ---------- | ------------------
+`--config`                | Path to the config file                     | string     | webpack.config.js or webpackfile.js
+`--config-register, -r`   | Preload one or more modules before loading the webpack configuration | array | 
+`--config-name`           | Name of the config to use                   | string     | 
+`--env`                   | Environment passed to the config, when it is a function | 
+`--mode`                  | Mode to use, either "development" or "production" | string      | 
+
 ### Output Options
 
 This set of options allows you to manipulate certain [output](/configuration/output) parameters of your build.
@@ -196,7 +206,7 @@ Parameter    | Explanation                                      | Input type | D
 `--debug`    | Switch loaders to debug mode                     | boolean    | false
 `--devtool`  | Define [source map type](/configuration/devtool/) for the bundled resources | string | -
 `--progress` | Print compilation progress in percentage         | boolean    | false
-
+`--display-error-details` | Display details about errors | boolean | false 
 
 ### Module Options
 
