@@ -7,8 +7,7 @@ contributors:
 
 Providing the `mode` configuration option tells webpack to use its built-in optimizations accordingly.
 
-`string` (development | production)
-
+`string`
 
 ## Usage
 
@@ -19,6 +18,7 @@ module.exports = {
   mode: 'production'
 };
 ```
+
  
 or pass it as a cli argument:
 
@@ -26,8 +26,15 @@ or pass it as a cli argument:
 webpack --mode=production
 ```
 
+The following string values are supported:
 
-## Mode: development
+Option                | Description
+--------------------- | -----------------------
+`development`         | Provides `process.env.NODE_ENV` with value `development`. Enables `NamedModulesPlugin`.
+`production`          | Provides `process.env.NODE_ENV` with value `production`. Enables `UglifyJsPlugin`, `ModuleConcatenationPlugin` and `NoEmitOnErrorsPlugin`.
+
+
+### Mode: development
 
 
 ```diff
@@ -41,7 +48,8 @@ module.exports = {
 }
 ```
 
-## Mode: production
+
+### Mode: production
 
 
 ```diff
