@@ -9,13 +9,14 @@ contributors:
   - jimrfenner
   - TheDutchCoder
   - adambraimbridge
+  - EugeneHlushko
 ---
 
 At its core, *webpack* is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it recursively builds a _dependency graph_ that includes every module your application needs, then packages all of those modules into one or more _bundles_.
 
 T> Learn more about JavaScript modules and webpack modules [here](/concepts/modules).
 
-It is [incredibly configurable](/configuration), but to get started you only need to understand four **Core Concepts**:
+Since v4.0.0 webpack does not require a configuration file. Nevertheless, it is [incredibly configurable](/configuration). To get started you only need to understand four **Core Concepts**:
 
 - Entry
 - Output
@@ -33,6 +34,8 @@ Every dependency is then processed and outputted into files called *bundles*, wh
 
 You can specify an entry point (or multiple entry points) by configuring the `entry` property in the [webpack configuration](/configuration).
 
+T> `entry` defaults to `./src`
+
 Here's the simplest example of an `entry` configuration:
 
 __webpack.config.js__
@@ -49,6 +52,8 @@ T> You can configure the `entry` property in various ways depending the needs of
 ## Output
 
 The **output** property tells webpack where to emit the *bundles* it creates and how to name these files. You can configure this part of the process by specifying an `output` field in your configuration:
+
+T> `output.path` defaults to `./dist`
 
 __webpack.config.js__
 
@@ -90,9 +95,7 @@ __webpack.config.js__
 const path = require('path');
 
 const config = {
-  entry: './path/to/my/entry/file.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
     filename: 'my-first-webpack.bundle.js'
   },
   module: {
@@ -127,14 +130,8 @@ In order to use a plugin, you need to `require()` it and add it to the `plugins`
 ```javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 const webpack = require('webpack'); //to access built-in plugins
-const path = require('path');
 
 const config = {
-  entry: './path/to/my/entry/file.js',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'my-first-webpack.bundle.js'
-  },
   module: {
     rules: [
       { test: /\.txt$/, use: 'raw-loader' }
@@ -154,3 +151,16 @@ There are many plugins that webpack provides out of the box! Check out our [list
 Using plugins in your webpack config is straightforward - however, there are many use cases that are worth further exploration.
 
 [Learn more!](/concepts/plugins)
+
+
+## Mode
+
+By choosing between `development` and `production` **mode** you can enable webpack's automatic optimizations according to selected option.
+
+```javascript
+module.exports = {
+  mode: 'production'
+};
+```
+
+[Learn more!](/concepts/mode)
