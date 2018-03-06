@@ -5,6 +5,7 @@ contributors:
   - sokra
   - skipjack
   - tarang9211
+  - chrisdothtml
 ---
 
 The entry object is where webpack looks to start building the bundle. The context is an absolute string to the directory that contains the entry files.
@@ -14,7 +15,7 @@ The entry object is where webpack looks to start building the bundle. The contex
 
 `string`
 
-The base directory, an **absolute path**, for resolving entry points and loaders from configuration.
+The base directory, an **absolute path**, for resolving entry points, output paths, and loaders from configuration.
 
 ``` js
 context: path.resolve(__dirname, "app")

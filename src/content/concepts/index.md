@@ -8,6 +8,7 @@ contributors:
   - johnstew
   - jimrfenner
   - TheDutchCoder
+  - chrisdothtml
   - adambraimbridge
 ---
 
@@ -58,7 +59,7 @@ const path = require('path');
 module.exports = {
   entry: './path/to/my/entry/file.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: './dist',
     filename: 'my-first-webpack.bundle.js'
   }
 };
@@ -92,7 +93,7 @@ const path = require('path');
 const config = {
   entry: './path/to/my/entry/file.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: './dist',
     filename: 'my-first-webpack.bundle.js'
   },
   module: {
@@ -132,7 +133,7 @@ const path = require('path');
 const config = {
   entry: './path/to/my/entry/file.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: './dist',
     filename: 'my-first-webpack.bundle.js'
   },
   module: {
