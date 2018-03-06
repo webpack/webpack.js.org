@@ -32,9 +32,7 @@ An **entry point** indicates which module webpack should use to begin building o
 
 Every dependency is then processed and outputted into files called *bundles*, which we'll discuss more in the next section.
 
-You can specify an entry point (or multiple entry points) by configuring the `entry` property in the [webpack configuration](/configuration).
-
-T> `entry` defaults to `./src`
+You can specify an entry point (or multiple entry points) by configuring the `entry` property in the [webpack configuration](/configuration). It defaults to `./src`.
 
 Here's the simplest example of an `entry` configuration:
 
@@ -51,9 +49,7 @@ T> You can configure the `entry` property in various ways depending the needs of
 
 ## Output
 
-The **output** property tells webpack where to emit the *bundles* it creates and how to name these files. You can configure this part of the process by specifying an `output` field in your configuration:
-
-T> `output.path` defaults to `./dist`
+The **output** property tells webpack where to emit the *bundles* it creates and how to name these files and defaults to `./dist`. You can configure this part of the process by specifying an `output` field in your configuration:
 
 __webpack.config.js__
 
@@ -155,7 +151,7 @@ Using plugins in your webpack config is straightforward - however, there are man
 
 ## Mode
 
-By choosing between `development` and `production` **mode** you can enable webpack's automatic optimizations according to selected option.
+By setting the `mode` parameter to either `development` or `production`, you can enable webpack's built-in optimizations that correspond with the selected mode.
 
 ```javascript
 module.exports = {

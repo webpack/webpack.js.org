@@ -77,6 +77,7 @@ We also need to adjust our `package.json` file in order to make sure we mark our
 T> If you want to learn more about the inner workings of `package.json`, then we recommend reading the [npm documentation](https://docs.npmjs.com/files/package.json).
 
 __package.json__
+
 ``` diff
   {
     "name": "webpack-demo",
