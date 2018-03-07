@@ -36,7 +36,7 @@ __sync-loader-with-multiple-results.js__
 
 ``` js
 module.exports = function(content, map, meta) {
-  this.callback(null, someSyncOperation(content), sourceMaps, meta);
+  this.callback(null, someSyncOperation(content), map, meta);
   return; // always return undefined when calling callback()
 };
 ```
