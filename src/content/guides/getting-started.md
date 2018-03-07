@@ -26,6 +26,7 @@ First let's create a directory, initialize npm, and [install webpack locally](/g
 mkdir webpack-demo && cd webpack-demo
 npm init -y
 npm install --save-dev webpack
+npm install webpack-cli -D
 ```
 
 Now we'll create the following directory structure and contents:
@@ -136,7 +137,7 @@ __dist/index.html__
    </head>
    <body>
 -    <script src="./src/index.js"></script>
-+    <script src="bundle.js"></script>
++    <script src="main.js"></script>
    </body>
   </html>
 ```
