@@ -12,9 +12,7 @@ contributors:
 The people who contribute to webpack do so for the love of open source, our users and ecosystem, and most importantly, pushing the web forward together. Because of our [Open Collective](http://opencollective.com/webpack) model for funding and transparency, we are able to funnel support and funds through contributors, dependent projects, and the contributor and core teams. To make a donation, simply click the button below...
 
 <div align="center">
-  <a href="https://opencollective.com/webpack/donate" target="_blank">
-    <img src="https://opencollective.com/webpack/donate/button@2x.png?color=blue" width=300 />
-  </a>
+  [![Open Collectibe Donate Button](https://opencollective.com/webpack/donate/button.png?color=blue)](https://opencollective.com/webpack/donate)
 </div>
 
 But what is the return on the investment?
