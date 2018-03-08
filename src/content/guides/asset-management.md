@@ -6,13 +6,14 @@ contributors:
   - michael-ciniawsky
   - TheDutchCoder
   - sudarsangp
+  - chrischinchilla
 ---
 
-If you've been following the guides from the start, you will now have a small project that shows "Hello webpack". Now let's try to incorporate some other assets, like images, to see how they can be handled.
+If you've been following the guides from the start, you will now have a small project that shows "Hello webpack". Now let's try to incorporate some other assets, like images, to see how webpack handles them.
 
-Prior to webpack, front-end developers would use tools like grunt and gulp to process these assets and move them from their `/src` folder into their `/dist` or `/build` directory. The same idea was used for JavaScript modules, but tools like webpack will __dynamically bundle__ all dependencies (creating what's known as a [dependency graph](/concepts/dependency-graph)). This is great because every module now _explicitly states its dependencies_ and we'll avoid bundling modules that aren't in use.
+Prior to webpack, front-end developers used tools like grunt and gulp to process these assets and move them from their `/src` folder into their `/dist` or `/build` directory. They used the same idea for JavaScript modules, but tools like webpack __dynamically bundle__ all dependencies (creating what's known as a [dependency graph](/concepts/dependency-graph)). This is means that every module now _explicitly states its dependencies_ and we avoid bundling modules that aren't in use.
 
-One of the coolest webpack features is that you can also _include any other type of file_, besides JavaScript, for which there is a loader. This means that the same benefits listed above for JavaScript (e.g. explicit dependencies) can be applied to everything used in building a website or web app. Let's start with CSS, as you may already be familiar with that setup.
+One of the coolest webpack features is that we can also _include any other type of file_, besides JavaScript, for which there is a loader. This means that the same benefits listed above for JavaScript (e.g. explicit dependencies) apply to everything used in building a website or web app. Let's start with CSS, as you may already be familiar with that setup.
 
 ## Setup
 
@@ -35,7 +36,7 @@ __dist/index.html__
 
 ## Loading CSS
 
-In order to `import` a CSS file from within a JavaScript module, you need to install and add the [style-loader](/loaders/style-loader) and [css-loader](/loaders/css-loader) to your [`module` configuration](/configuration/module):
+To `import` a CSS file from within a JavaScript module, we need to install and add the [style-loader](/loaders/style-loader) and [css-loader](/loaders/css-loader) to our [`module` configuration](/configuration/module):
 
 ``` bash
 npm install --save-dev style-loader css-loader
@@ -66,9 +67,9 @@ __webpack.config.js__
   };
 ```
 
-T> webpack uses a regular expression to determine which files it should look for and serve to a specific loader. In this case any file that ends with `.css` will be served to the `style-loader` and the `css-loader`.
+T> webpack uses a regular expression to determine which files it should look for and serve to a specific loader. In this case it serves any file that ends with `.css` to the `style-loader` and the `css-loader`.
 
-This enables you to `import './style.css'` into the file that depends on that styling. Now, when that module is run, a `<style>` tag with the stringified css will be inserted into the `<head>` of your html file.
+This enables us to `import './style.css'` into the file that depends on that styling. Now, when that module is run, a `<style>` tag with the stringified CSS is inserted into the `<head>` of your HTML file.
 
 Let's try it out by adding a new `style.css` file to our project and import it in our `index.js`:
 
@@ -114,7 +115,7 @@ __src/index.js__
   document.body.appendChild(component());
 ```
 
-Now run your build command:
+Now run the build command:
 
 ``` bash
 npm run build
@@ -135,14 +136,14 @@ bundle.js  560 kB       0  [emitted]  [big]  main
    [8] ./src/index.js 351 bytes {0} [built]
 ```
 
-Open up `index.html` in your browser again and you should see that `Hello webpack` is now styled in red. To see what webpack did, inspect the page (don't view the page source, as it won't show you the result) and look at the page's head tags. It should contain our style block that we imported in `index.js`.
+Open up `index.html` in the browser again and you should see that `Hello webpack` is now styled in red. To see what webpack did, inspect the page (don't view the page source, as it won't show you the result) and look at the page's head tags. It should contain our style block that we imported in `index.js`.
 
-Note that you can, and in most cases should, [split your CSS](/plugins/extract-text-webpack-plugin) for better load times in production. On top of that, loaders exist for pretty much any flavor of CSS you can think of -- [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader), and [less](/loaders/less-loader) to name a few.
+You can, and in most cases should, [split your CSS](/plugins/extract-text-webpack-plugin) for better load times in production. On top of that, loaders exist for pretty much any flavor of CSS you can think of, including [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader), and [less](/loaders/less-loader).
 
 
 ## Loading Images
 
-So now we're pulling in our CSS, but what about our images like backgrounds and icons? Using the [file-loader](/loaders/file-loader) we can easily incorporate those in our system as well:
+Now we're pulling in our CSS, but what about our images like backgrounds and icons? Using the [file-loader](/loaders/file-loader) we can incorporate those in our project as well:
 
 ``` bash
 npm install --save-dev file-loader
@@ -179,9 +180,9 @@ __webpack.config.js__
   };
 ```
 
-Now, when you `import MyImage from './my-image.png'`, that image will be processed and added to your `output` directory _and_ the `MyImage` variable will contain the final url of that image after processing. When using the [css-loader](/loaders/css-loader), as shown above, a similar process will occur for `url('./my-image.png')` within your CSS. The loader will recognize this is a local file, and replace the `'./my-image.png'` path with the final path to the image in your `output` directory. The [html-loader](/loaders/html-loader) handles `<img src="./my-image.png" />` in the same manner.
+When we `import MyImage from './my-image.png'`, webpack processes and adds that image to our `output` directory _and_ the `MyImage` variable contains the final URL of that image after processing. When using the [css-loader](/loaders/css-loader), as shown above, a similar process occurs for `url('./my-image.png')` within the CSS. The loader recognizes this is a local file, and replaces the `'./my-image.png'` path with the final path to the image in the `output` directory. The [html-loader](/loaders/html-loader) handles `<img src="./my-image.png" />` in the same manner.
 
-Let's add an image to our project and see how this works, you can use any image you like:
+Let's add an image to our project and see how this works, use any image:
 
 __project__
 
@@ -234,7 +235,7 @@ __src/style.css__
   }
 ```
 
-Let's create a new build and open up the index.html file again:
+Create a new build and open up the `index.html` file again:
 
 ``` bash
 npm run build
@@ -257,14 +258,14 @@ Time: 895ms
    [9] ./src/index.js 503 bytes {0} [built]
 ```
 
-If all went well, you should now see your icon as a repeating background, as well as an `img` element beside our `Hello webpack` text. If you inspect this element, you'll see that the actual filename has changed to something like `5c999da72346a995e7e2718865d019c8.png`. This means webpack found our file in the `src` folder and processed it!
+If all went well, we should now see an icon as a repeating background, as well as an `img` element beside our `Hello webpack` text. If you inspect this element, you'll see that the actual filename has changed to something like `5c999da72346a995e7e2718865d019c8.png`. This means webpack found the file in the `src` folder and processed it!
 
-T> A logical next step from here is minifying and optimizing your images. Check out the [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) and [url-loader](/loaders/url-loader) for more on how you can enhance your image loading process.
+T> A logical next step from here is minifying and optimizing the images. Read the [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) and [url-loader](/loaders/url-loader) for more on how to enhance the image loading process.
 
 
 ## Loading Fonts
 
-So what about other assets like fonts? The file and url loaders will take any file you load through them and output it to your build directory. This means we can use them for any kind of file, including fonts. Let's update our `webpack.config.js` to handle font files:
+What about other assets like fonts? The file and URL loaders take any file we load through them and output it to our build directory. This means we can use them for any kind of file, including fonts. Let's update our `webpack.config.js` to handle font files:
 
 __webpack.config.js__
 
@@ -303,7 +304,7 @@ __webpack.config.js__
   };
 ```
 
-Add some font files to your project:
+Add some font files to our project:
 
 __project__
 
@@ -324,7 +325,7 @@ __project__
   |- /node_modules
 ```
 
-With the loader configured and fonts in place, you can use incorporate them via an `@font-face` declaration. The local `url(...)` directive will be picked up by webpack just as it was with the image:
+With the loader configured and fonts in place, we can use incorporate them via an `@font-face` declaration. The local `url(...)` directive is picked up by webpack as it was with the image:
 
 __src/style.css__
 
@@ -369,12 +370,12 @@ Time: 775ms
   [10] ./src/index.js 503 bytes {0} [built]
 ```
 
-Open up `index.html` again and see if our `Hello webpack` text has changed to the new font. If all is well, you should see the changes.
+Open up `index.html` again and see if our `Hello webpack` text has changed to the new font. If all is well, we should see the changes.
 
 
 ## Loading Data
 
-Another useful asset that can be loaded is data, like JSON files, CSVs, TSVs, and XML. Support for JSON is actually built-in, similar to NodeJS, meaning `import Data from './data.json'` will work by default. To import CSVs, TSVs, and XML you could use the [csv-loader](https://github.com/theplatapi/csv-loader) and [xml-loader](https://github.com/gisikw/xml-loader). Let's handle loading all three:
+Another useful asset we can load is data, like JSON files, CSVs, TSVs, and XML. Support for JSON is built-in, similar to NodeJS, meaning `import Data from './data.json'` works by default. To import CSVs, TSVs, and XML we could use the [csv-loader](https://github.com/theplatapi/csv-loader) and [xml-loader](https://github.com/gisikw/xml-loader). Let's handle loading all three:
 
 ``` bash
 npm install --save-dev csv-loader xml-loader
@@ -429,7 +430,7 @@ __webpack.config.js__
   };
 ```
 
-Add some data files to your project:
+Add some data files to our project:
 
 __project__
 
@@ -462,7 +463,7 @@ __src/data.xml__
 </note>
 ```
 
-Now you can `import` any one of those four types of data (JSON, CSV, TSV, XML) and the `Data` variable you import it to will contain parsed JSON for easy consumption:
+Now we can `import` any one of those four types of data (JSON, CSV, TSV, XML) and the `Data` variable we import it to will contain parsed JSON for easy consumption:
 
 __src/index.js__
 
@@ -493,14 +494,14 @@ __src/index.js__
   document.body.appendChild(component());
 ```
 
-When you open `index.html` and look at your console in your developer tools, you should be able to see your imported data being logged to the console!
+When we open `index.html` and look at our console in developer tools, we should see the imported data logged to the console!
 
-T> This can be especially helpful when implementing some sort of data visualization using a tool like [d3](https://github.com/d3). Instead of making an ajax request and parsing the data at runtime you can load it into your module during the build process so that the parsed data is ready to go as soon as the module hits the browser.
+T> This can be helpful when implementing data visualization using a tool like [d3](https://github.com/d3). Instead of making an ajax request and parsing the data at runtime we can load it into our module during the build process so that the parsed data is ready to go as soon as the module hits the browser.
 
 
 ## Global Assets
 
-The coolest part of everything mentioned above, is that loading assets this way allows you to group modules and assets together in a more intuitive way. Instead of relying on a global `/assets` directory that contains everything, you can group assets with the code that uses them. For example, a structure like this can be very useful:
+The coolest part of everything mentioned so far, is that loading assets this way allows us to group modules and assets together in a more intuitive way. Instead of relying on a global `/assets` directory that contains everything, we can group assets with the code that uses them. For example, a structure like this can be useful:
 
 ``` diff
 - |- /assets
@@ -512,14 +513,15 @@ The coolest part of everything mentioned above, is that loading assets this way 
 + |  |  |– img.png
 ```
 
-This setup makes your code a lot more portable as everything that is closely coupled now lives together. Let's say you want to use `/my-component` in another project, simply copy or move it into the `/components` directory over there. As long as you've installed any _external dependencies_ and your _configuration has the same loaders_ defined, you should be good to go.
+This setup makes our code a lot more portable as everything that is closely coupled is now stored together. Let's say we want to use `/my-component` in another project, copy or move it into the `/components` directory. As long as we've installed any _external dependencies_ and our _configuration has the same loaders_ defined, we should be good to go.
 
-However, let's say you're locked into your old ways or you have some assets that are shared between multiple components (views, templates, modules, etc.). It's still possible to store these assets in a base directory and even use [aliasing](/configuration/resolve#resolve-alias) to make them easier to `import`.
+However, let's say we use the old way or have assets shared between multiple components (views, templates, modules, etc.). It's still possible to store these assets in a base directory and even use [aliasing](/configuration/resolve#resolve-alias) to make them easier to `import`.
 
 
 ## Wrapping up
 
-For the next guides we won't be using all the different assets we've used in this guide, so let's do some cleanup so we're prepared for the next piece of the guides [Output Management](https://webpack.js.org/guides/output-management/):
+For the next guides we won't use the different assets we've used in this guide, so let's do some
+ cleanup so we're prepared for the next piece of the guides [Output Management](https://webpack.js.org/guides/output-management/):
 
 __project__
 
