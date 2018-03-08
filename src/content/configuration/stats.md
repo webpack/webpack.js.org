@@ -1,5 +1,5 @@
 ---
-title: 统计(Stats)
+title: 统计信息(stats)
 sort: 15
 contributors:
   - SpaceK33z
@@ -9,17 +9,17 @@ contributors:
   - jasonblanchard
 ---
 
-`stats` 选项能让你准确地控制显示哪些包的信息。如果你希望得到部分包的信息（而不是一股脑全部输出），而不想使用 `quiet` 或者 `noInfo` 模式的时候，这个选项是一个很好的折衷办法。
+如果你不希望使用 `quiet` 或 `noInfo` 这样的不显示信息，而是又不想得到全部的信息，只是想要获取某部分 bundle 的信息，使用 stats 选项是比较好的折衷方式。
 
-T> 对于 webpack-dev-server ，这个属性要放在 `devServer` 对象里。
+T> 对于 webpack-dev-server，这个属性要放在 `devServer` 对象里。
 
-W> 在使用 Node.js API 后，此选项无效。
+W> 在使用 Node.js API 时，此选项无效。
 
 ## `stats`
 
 `object` `string`
 
-预设选项：`none`, `errors-only`, `minimal` 和 `verbose`。使用方法：
+有一些预设选项，可作为快捷方式。像这样使用它们：
 
 ```js
 stats: "errors-only"
@@ -28,96 +28,96 @@ stats: "errors-only"
 | Preset | Alternative | Description |
 |--------|-------------|-------------|
 | `"errors-only"` | *none*  | 只在发生错误时输出 |
-| `"minimal"`     | *none*  | 只在发生错误 或是 新的编译时输出 |
+| `"minimal"`     | *none*  | 只在发生错误或有新的编译时输出 |
 | `"none"`        | `false` | 没有输出 |
 | `"normal"`      | `true`  | 标准输出 |
 | `"verbose"`     | *none*  | 全部输出 |
 
-对于更加精细的控制，这些选项可以准确地列出你想要的信息。请注意，此对象中的所有选项都是可选的。
+对于更加精细的控制，下列这些选项可以准确地控制并展示你想要的信息。请注意，此对象中的所有选项都是可选的。
 
 ``` js
 stats: {
-  // fallback value for stats options when an option is not defined (has precedence over local webpack defaults)
+  // 未定义选项时，stats 选项的备用值(fallback value)（优先级高于 webpack 本地默认值）
   all: undefined,
-  // 增加资源信息
+  // 添加资源信息
   assets: true,
-  // 对资源按指定的项进行排序
+  // 对资源按指定的字段进行排序
   // 你可以使用 `!field` 来反转排序。
   assetsSort: "field",
-  // 增加缓存了的（但没构建）模块的信息
+  // 添加缓存（但未构建）模块的信息
   cached: true,
-  // Show cached assets (setting this to `false` only shows emitted files)
+  // 显示缓存的资源（将其设置为 `false` 则仅显示输出的文件）
   cachedAssets: true,
-  // 增加子级的信息
+  // 添加 children 信息
   children: true,
-  // 增加包信息（设置为 `false` 能允许较少的冗长输出）
+  // 添加 chunk 信息（设置为 `false` 能允许较少的冗长输出）
   chunks: true,
-  // 将内置模块信息增加到包信息
+  // 将构建模块信息添加到 chunk 信息
   chunkModules: true,
-  // 增加包 和 包合并 的来源信息
+  // 添加 chunk 和 chunk merge 来源的信息
   chunkOrigins: true,
-  // 对包按指定的项进行排序
+  // 按指定的字段，对 chunk 进行排序
   // 你可以使用 `!field` 来反转排序。默认是按照 `id` 排序。
   chunksSort: "field",
-  // 用于缩短请求的上下文目录
+  // 用于缩短 request 的上下文目录
   context: "../src/",
   // `webpack --colors` 等同于
   colors: false,
-  // Display the distance from the entry point for each module
+  // 显示每个模块到入口起点的距离(distance)
   depth: false,
-  // Display the entry points with the corresponding bundles
+  // 通过对应的 bundle 显示入口起点
   entrypoints: false,
-  // 增加 --env information
+  // 添加 --env information
   env: false,
-  // 增加错误信息
+  // 添加错误信息
   errors: true,
-  // 增加错误的详细信息（就像解析日志一样）
+  // 添加错误的详细信息（就像解析日志一样）
   errorDetails: true,
-  // Exclude assets from being displayed in stats
-  // This can be done with a String, a RegExp, a Function getting the assets name
-  // and returning a boolean or an Array of the above.
+  // 将资源显示在 stats 中的情况排除
+  // 这可以通过 String, RegExp, 获取 assetName 的函数来实现
+  // 并返回一个布尔值或如下所述的数组。
   excludeAssets: "filter" | /filter/ | (assetName) => ... return true|false |
     ["filter"] | [/filter/] | [(assetName) => ... return true|false],
-  // Exclude modules from being displayed in stats
-  // This can be done with a String, a RegExp, a Function getting the modules source
-  // and returning a boolean or an Array of the above.
+  // 将模块显示在 stats 中的情况排除
+  // 这可以通过 String, RegExp, 获取 moduleSource 的函数来实现
+  // 并返回一个布尔值或如下所述的数组。
   excludeModules: "filter" | /filter/ | (moduleSource) => ... return true|false |
     ["filter"] | [/filter/] | [(moduleSource) => ... return true|false],
-  // See excludeModules
+  // 和 excludeModules 相同
   exclude: "filter" | /filter/ | (moduleSource) => ... return true|false |
     ["filter"] | [/filter/] | [(moduleSource) => ... return true|false],
-  // 增加编译的哈希值
+  // 添加 compilation 的哈希值
   hash: true,
-  // Set the maximum number of modules to be shown
+  // 设置要显示的模块的最大数量
   maxModules: 15,
-  // 增加内置的模块信息
+  // 添加构建模块信息
   modules: true,
-  // 对模块按指定的项进行排序
+  // 按指定的字段，对模块进行排序
   // 你可以使用 `!field` 来反转排序。默认是按照 `id` 排序。
   modulesSort: "field",
-  // Show dependencies and origin of warnings/errors (since webpack 2.5.0)
+  // 显示警告/错误的依赖和来源（从 webpack 2.5.0 开始）
   moduleTrace: true,
-  // Show performance hint when file size exceeds `performance.maxAssetSize`
+  // 当文件大小超过 `performance.maxAssetSize` 时显示性能提示
   performance: true,
-  // Show the exports of the modules
+  // 显示模块的导出
   providedExports: false,
-  // 增加 public path 的信息
+  // 添加 public path 的信息
   publicPath: true,
-  // 增加模块被引入的原因
+  // 添加模块被引入的原因
   reasons: true,
-  // 增加模块的源码
+  // 添加模块的源码
   source: true,
-  // 增加时间信息
+  // 添加时间信息
   timings: true,
-  // Show which exports of a module are used
+  // 显示哪个模块导出被用到
   usedExports: false,
-  // 增加 webpack 版本信息
+  // 添加 webpack 版本信息
   version: true,
-  // 增加提示
+  // 添加警告
   warnings: true,
-  // Filter warnings to be shown (since webpack 2.4.0),
-  // can be a String, Regexp, a function getting the warning and returning a boolean
-  // or an Array of a combination of the above. First match wins.
+  // 过滤警告显示（从 webpack 2.4.0 开始），
+  // 可以是 String, Regexp, 一个获取 warning 的函数
+  // 并返回一个布尔值或上述组合的数组。第一个匹配到的为胜(First match wins.)。
   warningsFilter: "filter" | /filter/ | ["filter", /filter/] | (warning) => ... return true|false
 };
 ```
