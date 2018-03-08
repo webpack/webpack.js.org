@@ -458,6 +458,11 @@ When `open` is enabled, the dev server will open the browser.
 ```js
 open: true
 ```
+If no browser is provided (as shown above), your default browser will be used. To specify a different browser, just pass its name instead of boolean:
+
+```js
+open: 'Google Chrome'
+```
 
 Usage via the CLI
 
@@ -465,7 +470,7 @@ Usage via the CLI
 webpack-dev-server --open
 ```
 
-If no browser is provided (as shown above), your default browser will be used. To specify a different browser, just pass its name:
+Or with specified browser:
 
 ```bash
 webpack-dev-server --open 'Google Chrome'
