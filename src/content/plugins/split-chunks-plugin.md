@@ -10,7 +10,7 @@ related:
 
 Originally in webpack, chunks (and modules import inside them) were connected by a parent-child relationship in the internal webpack graph.
 
-This connection didn't allow to further optimizations and reluted into more coded downloaded.
+This connection didn't allow to further optimizations and resulted into more downloaded code.
 
 webpack v4 removes the `CommonsChunkPlugin` in favor of `optimization.splitChunks` and `optimization.runtimeChunk` options. Here is how the new flow works.
 
@@ -27,7 +27,7 @@ webpack will automatically split chunks based on these conditions:
 * Maximum number of parallel request when loading chunks on demand would be lower or equal to 5
 * Maximum number of parallel request at initial page load would be lower or equal to 3
 
-When trying to fullfill the last two conditions, bigger chunks are preferred.
+When trying to fulfill the last two conditions, bigger chunks are preferred.
 
 Let's take a look at some examples.
 
@@ -100,17 +100,17 @@ T> With the new `optimizations.splitChunks.chunks: "all"` option the same would 
 
 For these people that like to have more control over this functionality, webpack provides a set of options to better fit your needs.
 
-W> If you are manually changing the split configuration, measure the impact of the changes to see and make sure there's a real benefit. The defaults are choosen to fit best practices of web performance.
+W> If you are manually changing the split configuration, measure the impact of the changes to see and make sure there's a real benefit. The defaults are chosen to fit web performance best practices.
 
 ### Configuring cache groups
 
-The defaults assigns all modules from `node_modules` to a cache group called `vendors` and all modules duplicated in at least 2 chunks to a change group `default`.
+The defaults assigns all modules from `node_modules` to a cache group called `vendors` and all modules duplicated in at least 2 chunks to a cache group `default`.
 
 A module can be assigned to multiple cache groups. The optimization then prefers the cache group with the higher `priority` (`priority` option) or that one that forms bigger chunks.
 
 ### Conditions
 
-Modules from the same chunks and cache group will form a new chunk when all conditions are fullfilled.
+Modules from the same chunks and cache group will form a new chunk when all conditions are fulfilled.
 
 There are 4 options to configure the conditions:
 
@@ -125,7 +125,7 @@ To control the chunk name of the split chunk the `name` option can be used.
 
 W> When assigning equal names to different split chunks they are merged together. This can be used to put all vendor modules into a single shared chunk, but it's not recommend since it can result in more code downloaded.
 
-The magic value `true` automatically chooses a name based on chunks and cache group key. Elsewise a string or function can be passed.
+The magic value `true` automatically chooses a name based on chunks and cache group key, otherwise a string or function can be passed.
 
 When the name matches an entrypoint name, the entrypoint is removed.
 
@@ -158,8 +158,8 @@ splitChunks: {
 	cacheGroups: {
 		default: {
 			minChunks: 2,
-			priority: -20
-			reuseExistingChunk: true,
+			priority: -20,
+			reuseExistingChunk: true
 		},
 		vendors: {
 			test: /[\\/]node_modules[\\/]/,
@@ -205,7 +205,7 @@ Create a `vendors` chunk, which includes all code from node_modules in the whole
 splitChunks: {
 	cacheGroups: {
 		commons: {
-			test: /[\\/]node_modules[\\/]
+			test: /[\\/]node_modules[\\/],
 			name: "vendors",
 			chunks: "all"
 		}
