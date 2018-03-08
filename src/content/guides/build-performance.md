@@ -187,7 +187,7 @@ Source maps 真的很消耗资源。你真的需要他们？
 - 项目中的 preset/plugins 数量最小化。
 
 
-### Typescript
+### TypeScript
 
 - 在单独的进程中使用 `fork-ts-checker-webpack-plugin` 进行类型检查。
 - 配置 loaders 跳过类型检查。
