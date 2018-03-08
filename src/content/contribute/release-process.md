@@ -6,7 +6,7 @@ contributors:
   - sokra
 ---
 
-The release process for deploying webpack is actually quite painless. Read through the following steps, so you have a clear understanding of how it's done.
+部署 webpack 的发布流程实际上非常简单。请阅读以下步骤，以便清楚了解这些是如何完成的。
 
 
 ## Pull Request

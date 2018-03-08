@@ -121,7 +121,7 @@ __`invalid`__                 | 在无效的 watch 编译之后      | `fileName
 __`watch-close`__             | 在停止 watch 编译之后          | -                         | sync
 
 
-## Usage
+## 用法
 
 下面是一个异步的 `emit` 事件处理函数的示例：
 

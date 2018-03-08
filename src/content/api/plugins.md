@@ -4,9 +4,9 @@ group: Plugins
 sort: 0
 ---
 
-T> 对于编写插件的高度概括，请先阅读[编写一个插件](/contribute/writing-a-plugin).
+T> 对于编写插件的高度概括，请先阅读[编写一个插件](/contribute/writing-a-plugin)。
 
-webpack 中的很多对象继承了 `Tapable` 类，暴露出一个 `plugin` 方法。通过 `plugin` 方法，插件可以注入自定义的构建步骤。你会看到 `compiler.plugin` 和 `compilation.plugin` 被大量使用。本质上，每一个 plugin 方法调用时的回调函数的触发时机，都会被绑定到整个构建过程中特定步骤。
+webpack 中的很多对象继承了 `Tapable` 类，暴露出一个 `plugin` 方法。通过 `plugin` 方法，插件可以注入自定义的构建步骤。你会看到 `compiler.plugin` 和 `compilation.plugin` 被频繁使用。本质上，每一个 plugin 方法调用时的回调函数的触发时机，都会被绑定到整个构建过程中特定步骤。
 
 有两种类型的 plugin 接口……
 
