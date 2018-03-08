@@ -451,7 +451,7 @@ noInfo: true
 
 ## `devServer.open`
 
-`boolean`
+`boolean` `string`
 
 When `open` is enabled, the dev server will open the browser.
 
