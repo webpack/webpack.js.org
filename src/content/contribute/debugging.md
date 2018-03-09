@@ -72,4 +72,4 @@ We recommend using the `--inspect-brk` flag which will break on the first statem
 
 ***
 
-> 原文：https://webpack.js.org/contribute/plugin-patterns/
+> 原文：https://webpack.js.org/contribute/debugging/
