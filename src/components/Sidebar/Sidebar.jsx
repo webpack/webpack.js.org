@@ -27,7 +27,7 @@ export default class Sidebar extends Component {
 
         <div className="sidebar__inner">
           <a href="https://github.com/webpack/webpack/releases">
-            <Shield content="npm/v/webpack" label="webpack" />
+            <Shield content="github/package-json/v/webpack/webpack.js.org" label="webpack" />
           </a>
 
           { pages.map((page, index) => {
