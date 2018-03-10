@@ -10,7 +10,7 @@ contributors:
   - tbroadley
 ---
 
-这些选项能设置模块如何被解析。webpack 提供合理的默认值，但是还是可能会修改一些解析的细节。关于 resolver 具体如何工作的更多解释说明，请查看[模块解析方式](/concepts/module-resolution)。
+这些选项能设置模块如何被解析。webpack 提供合理的默认值，但是还是可能会修改一些解析的细节。关于 resolver 具体如何工作的更多解释说明，请查看[模块解析](/concepts/module-resolution)。
 
 
 ## `resolve`
@@ -97,9 +97,9 @@ aliasFields: ["browser"]
 
 ### `resolve.cacheWithContext`
 
-`boolean` (since webpack 3.1.0)
+`boolean`（从 webpack 3.1.0 开始）
 
-If unsafe cache is enabled, includes `request.context` in the cache key. This option is taken into account by the [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve/) module. Since webpack 3.1.0 context in resolve caching is ignored when resolve or resolveLoader plugins are provided. This addresses a performance regression.
+如果启用了不安全缓存，请在缓存键(cache key)中引入 `request.context`。这个选项被 [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve/) 模块考虑在内。从 webpack 3.1.0 开始，在配置了 resolve 或 resolveLoader 插件时，解析缓存(resolve caching)中的上下文(context)会被忽略。这解决了性能衰退的问题。
 
 
 ### `resolve.descriptionFiles`
@@ -301,7 +301,7 @@ T> 注意，这里你可以使用别名，并且其他特性类似于 resolve �
 
 `array`
 
-The extensions/suffixes which that are used when resolving loaders. Since version two, we [strongly recommend](/guides/migrating#automatic-loader-module-name-extension-removed) using the full name, e.g. `example-loader`, as much as possible for clarity. However, if you really wanted to exclude the `-loader` bit, i.e. just use `example`, you can use this option to do so:
+解析 loader 时，用到扩展名(extensions)/后缀(suffixes)。从 webpack 2 开始，我们[强烈建议](/guides/migrating#automatic-loader-module-name-extension-removed)使用全名，例如 `example-loader`，以尽可能清晰。然而，如果你确实想省略 `-loader`，也就是说只使用 `example`，则可以使用此选项来实现：
 
 ``` js
 moduleExtensions: [ '-loader' ]
