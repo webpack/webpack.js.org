@@ -29,6 +29,10 @@ __webpack.config.js__
 const path = require('path');
 
 module.exports = {
+  <details>
+    <summary>[mode](/concepts/mode): "production", // string</summary>
+  </details>
+  // Chosen mode tells webpack to use its built-in optimizations accordingly.
   <details><summary>[entry](/configuration/entry-context#entry): "./app/entry", // string | object | array</summary>
   [entry](/configuration/entry-context#entry): ["./app/entry1", "./app/entry2"],
   [entry](/configuration/entry-context#entry): {
