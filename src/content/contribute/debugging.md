@@ -13,63 +13,63 @@ related:
     url: https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-7c4a1b95ae27
 ---
 
-When contributing to the core repo, writing a loader/plugin, or even just working on complex project, debugging tools can be central to your workflow. Whether the problem is slow performance on a large project or an unhelpful traceback, the following utilities can make figuring it out less painful.
+在为核心仓库贡献代码（例如，编写 loader/plugin，又或是在处理复杂的项目）时，调试工具将会成为工作流程的重心。无论问题是大型项目的性能下降还是无用追溯，以下工具都可以使这些问题变得不那么痛苦。
 
-- The [`stats` data](/api/stats) made available through [Node](/api/node#stats-object) and the [CLI](/api/cli#common-options).
-- Chrome __DevTools__ via `node-nightly` and the latest Node.js versions.
+- 通过 [Node](/api/node#stats-object) 和 [CLI](/api/cli#common-options) 提供的 [`stats` 数据](/api/stats) 。
+- 通过 `node-nightly` 和 Node.js 最新版本提供的 Chrome __DevTools__。
 
 
-## Stats
+## stats
 
-Whether you want to sift through [this data](/api/stats) manually or use a tool to process it, the `stats` data can be extremely useful when debugging build issues. We won't go in depth here as there's an [entire page](/api/stats) dedicated to its contents, but know that you can use it to find the following information:
+无论你是想手动还是使用工具来筛选[这些数据](/api/stats)，`stats` 数据在调试构建的问题时都非常有用。这里我们不会深入，因为有这[整个页面](/api/stats)专门介绍这些内容，但你应该知道，可以使用它来查找以下信息：
 
-- The contents of every module.
-- The modules contained within every chunk.
-- Per module compilation and resolving stats.
-- Build errors and warnings.
-- The relationships between modules.
-- And much more...
+- 每个模块的内容。
+- 每个 chunk　中包含的模块。
+- 每个模块编译和解析的　stats。
+- 构建的错误和警告。
+- 模块之间的关系。
+- 其他更多……
 
-On top of that, the official [analyze tool](https://github.com/webpack/analyse) and [various others](/guides/code-splitting#bundle-analysis) will accept this data and visualize it in various ways.
+最重要的是，[官方分析工具](https://github.com/webpack/analyse)和[各种其他分析工具](/guides/code-splitting#bundle-analysis)会将这些数据，展示为多种形式的可视化图表。
 
 
 ## DevTools
 
-While [`console`](https://nodejs.org/api/console.html) statements may work well in simpler scenarios, sometimes a more robust solution is needed. As most front-end developers already know, Chrome DevTools are a life saver when debugging web applications, _but they don’t have to stop there_. As of Node v6.3.0+, developers can use the built-in `--inspect` flag to debug a node program in DevTools.
+虽然在简单场景中，可能 [`console`](https://nodejs.org/api/console.html) 语句会表现良好，然而有时还需要更加强大的解决方案。正如大多数前端开发人员已经知道的，将 Chrome DevTools 用在调试 web 应用程序，是一个能够解救我们的实用工具，_但它并没有局限于调试 web 应用程序_。从 Node v6.3.0+ 开始，开发人员可以使用内置的 `--inspect` 标记，来通过 DevTools 调试 Node.js 应用程序。
 
-This gives you the power to easily create breakpoints, debug memory usage, expose and examine objects in the console, and much more. In this short demo, we'll utilize the [`node-nightly`](https://github.com/hemanth/node-nightly) package which provides access to the latest and greatest inspecting capabilities.
+这可以帮助你轻松创建断点、调试内存使用情况、在控制台中暴露和检查对象等。在这个简短的演示中，我们将利用 [`node-nightly`](https://github.com/hemanth/node-nightly) package，它提供最新和强大的检测能力。
 
-W> The `--inspect` interface has been available since v6.3.0 so feel to try it out with your local version, but be warned that certain features and flags may differ from the ones in this demo.
+W> 从 v6.3.0 开始，`--inspect` 接口就一直可用，因此你可以尝试使用本地版本的 npm 包，但要注意某些功能和标记，可能与这里演示中的全局版本有所不同。
 
-Let's start by installing it globally:
+我们先在全局安装：
 
 ``` bash
 npm install --global node-nightly
 ```
 
-Now, we'll need to run it once to finish the installation:
+现在，我们需要运行一次，以结束安装：
 
 ``` bash
 node-nightly
 ```
 
-Now, we can simply use `node-nightly` along with the `--inspect` flag to start our build in any webpack-based project. Note that we cannot run NPM `scripts`, e.g. `npm run build`, so we'll have specify the full `node_modules` path:
+现在，我们可以直接使用带有 `--inspect` 标记的 `node-nightly`，在任何基于 webpack 的项目中开始构建。注意，我们不应该运行 NPM `scripts`，例如 `npm run build`，所以我们需要指定完整的 `node_modules` 路径：
 
 ``` bash
 node-nightly --inspect ./node_modules/webpack/bin/webpack.js
 ```
 
-Which should output something like:
+应该输出如下内容：
 
 ``` bash
 Debugger listening on ws://127.0.0.1:9229/c624201a-250f-416e-a018-300bbec7be2c
 For help see https://nodejs.org/en/docs/inspector
 ```
 
-Now jump to `chrome://inspect` in the browser and you should see any active scripts you've inspected under the _Remote Target_ header. Click the "inspect" link under each script to open a dedicated debugger or the _Open dedicated DevTools for Node_ link for a session that will autoconnect. You can also check out the [NiM extension](https://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj), a handy Chrome plugin that will automatically open a DevTools tab every time you `--inspect` a script.
+现在，在浏览器中访问 `chrome://inspect`，你会看到在 _Remote Target_ 标题下可以进行 inspect(审查) 的活动脚本。单击每个脚本下自动连接会话的 "inspect" 链接，打开一个专门 debugger 或 _Open dedicated DevTools for Node_ 链接。你还可以看到 [NiM 扩展程序](https://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj)，这是一个方便的 Chrome 插件，在每次你通过 `--inspect` 调试某个脚本时，都会自动打开 DevTools 标签页。
 
-We recommend using the `--inspect-brk` flag which will break on the first statement of the script allowing you to go through the source to set breakpoints and start/stop the build as you please. Also, don't forget that you can still pass arguments to the script. For example, if you have multiple configuration files you could pass `--config webpack.prod.js` to specify the configuration you'd like to debug.
+我们推荐使用 `--inspect-brk` 标记，此标记将在脚本的第一条语句处断开，以便你可以在源代码中设置断点，并根据需要启动/停止构建。此外，不要忘记，你仍然可以向脚本传递参数。例如，如果你有多个配置文件，你可以通过 `--config webpack.prod.js` 指定你想要调试的配置。
 
 ***
 
-> 原文：https://webpack.js.org/contribute/plugin-patterns/
+> 原文：https://webpack.js.org/contribute/debugging/

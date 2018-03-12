@@ -69,6 +69,7 @@ __src/index.js__
 __dist/index.html__
 
 ``` diff
+  <!doctype html>
   <html>
     <head>
 -     <title>Asset Management</title>

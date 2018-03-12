@@ -6,25 +6,25 @@ contributors:
   - rishantagarwal
 ---
 
-The `Compiler` module of webpack is the main engine that creates a compilation instance with all the options passed through webpack CLI or `webpack` api or webpack configuration file.
+webpack 的 `Compiler` 模块是主引擎，它通过 webpack CLI 或 `webpack` API 或 webpack 配置文件传递的所有选项，创建出一个 compilation 实例。
 
-It is exported by `webpack` api under `webpack.Compiler`.
+它通过 `webpack` API 下 `webpack.Compiler` 的导出。
 
-The compiler is used by webpack by instantiating it and then calling the `run` method. Below is a trivial example of how one might use the `Compiler`. In fact, this is really close to how webpack itself uses it.
+webpack 使用它来实例化 compiler，然后调用 `run` 方法。下面是一个可以使用 `Compiler` 简单示例。事实上，这与 webpack 自身是如何调用它非常接近。
 
 [__compiler-example__](https://github.com/pksjce/webpack-internal-examples/tree/master/compiler-example)
 
 ```javascript
-// Can be imported from webpack package
+// 可以从 webpack package 中 import 导入
 import {Compiler} from 'webpack';
 
-// Create a new compiler instance
+// 创建一个新的 compiler 实例
 const compiler = new Compiler();
 
-// Populate all required options
+// 填充所有必备的 options 选项
 compiler.options = {...};
 
-// Creating a plugin.
+// 创建一个插件
 class LogPlugin {
   apply (compiler) {
     compiler.plugin('should-emit', compilation => {
@@ -34,42 +34,42 @@ class LogPlugin {
   }
 }
 
-// Apply the compiler to the plugin
+// 将 compiler 应用到插件中
 new LogPlugin().apply(compiler);
 
-/* Add other supporting plugins */
+/* 添加其他支持插件 */
 
-// Callback to be executed after run is complete
+// 运行结束后执行回调
 const callback = (err, stats) => {
-  console.log('Compiler has finished execution.');
-  // Display stats...
+  console.log('Compiler 已经完成执行。');
+  // 显示 stats……
 };
 
-// call run on the compiler along with the callback
+// compiler 的 run 调用，并传入 callback
 compiler.run(callback);
 ```
 
-The `Compiler` is what we call a `Tapable` instance. By this, we mean that it mixes in `Tapable` class to imbibe functionality to register and call plugins on itself. Most user facing plugins are first registered on the `Compiler`. The working of a Compiler can be condensed into the following highlights
+`Compiler` 也是我们所说的 `Tapable` 实例。通过这种实现机制，我们可以理解为，它混合(mix)了 `Tapable` 类，来使实例也具备注册和调用插件功能。大多数面向用户的插件，要首先在 `Compiler` 上注册。Compiler 运行机制可以被提取为以下要点
 
-- Usually there is one master instance of Compiler. Child compilers can be created for delegating specific tasks.
-- A lot of the complexity in creating a compiler goes into populating all the relevant options for it.
-- `webpack` has [`WebpackOptionsDefaulter`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js) and [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js) specifically designed to provide the `Compiler` with all the initial data it requires.
-- The `Compiler` is ultimately just a function which performs bare minimum functionality to keep a lifecycle running. It delegates all the loading/bundling/writing work to various plugins.
-- `new LogPlugin(args).apply(compiler)` registers the plugin to any particular hook event in the `Compiler`'s lifecycle.
-- The `Compiler` exposes a `run` method which kickstarts all compilation work for `webpack`. When that is done, it should call the passed in `callback` function. All the tail end work of logging stats and errors are done in this callback function.
+- 通常有一个 Compiler 的主实例。可以创建子 compilers 来委托特定任务。
+- 创建 compiler 的多数复杂度，在于为它填充所有相关的 options 选项。
+- `webpack` 通过 [`WebpackOptionsDefaulter`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js) 和 [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js)，来专门为 `Compiler` 提供所需的所有初始数据。
+- `Compiler` 是一个执行最简功能，来保证生命周期运行的函数。它把所有的加载(loading)/打包(bundling)/写入(writing)工作委托给各种插件。
+- `new LogPlugin(args).apply(compiler)` 将插件注册到 `Compiler` 生命周期中的任何特定钩子事件。
+- `Compiler` 暴露 `run` 方法，它启动了 `webpack` 所有编译工作。在执行完成后，会调用传递给它的 `callback` 函数。记录 stats 和 errors 的所有末端工作，都在此回调函数中完成。
 
 
-## Watching
+## 监听文件变化并重新编译(watching)
 
-The `Compiler` supports "watch mode" which monitors the file system and recompiles as files change. When in watch mode, the compiler will emit the additional events ["watch-run", "watch-close", and "invalid"](#event-hooks). This is typically used in [development](/guides/development), usually under the hood of tools like `webpack-dev-server`, so that the developer doesn't need to re-compile manually every time.
+`Compiler` 支持“观察模式(watch mode)”，可以监控文件系统并在文件更改时重新编译。在观察模式下，compiler 将触发额外的 ["watch-run", "watch-close" 和 "invalid"](#事件钩子) 事件。这通常用于[开发环境](/guides/development)中，并且一般在 `webpack-dev-server` 等工具的底层触发，以使开发人员无须每次手动重新编译。
 
-For more details about watch mode, see the [Node.js API documentation](/api/node/#watching) or the [CLI watch options](/api/cli/#watch-options).
+关于观察模式的更多细节，请查看 [Node.js API 文档](/api/node/#watching) 或 [CLI 的 watch 选项](/api/cli/#watch-options)。
 
 
 ## MultiCompiler
 
-This module, MultiCompiler, allows webpack to run multiple configurations in separate compiler.
-If the `options` parameter in the webpack's NodeJS api is an array of options, webpack applies separate compilers and calls the `callback` method at the end of each compiler execution.
+MultiCompiler 模块允许 webpack 在单个 compiler 中运行多个配置。
+如果 webpack 的 NodeJS API 中的 `options` 参数，是一个由 options 构成的数组，则 webpack 会对其应用单个 compiler，并在所有 compiler 执行结束时，调用 `callback` 方法。
 
 ```javascript
 var webpack = require('webpack');
@@ -89,47 +89,47 @@ webpack([config1, config2], (err, stats) => {
 ```
 
 
-## Event Hooks
+## 事件钩子
 
-This a reference guide to all the event hooks exposed by the `Compiler`.
+一个参考指南，列出 `Compiler` 暴露的所有事件钩子。
 
-Event name                    | Reason                                  | Params                    | Type
+事件名称                    | 内容说明                                  | 参数                    | 类型
 ----------------------------- | --------------------------------------- | ------------------------- | ----------
 __`entry-option`__            | -                                       | -                         | bailResult
-__`after-plugins`__           | After setting up initial set of plugins | `compiler`                | sync
-__`after-resolvers`__         | After setting up the resolvers          | `compiler`                | sync
+__`after-plugins`__           | 设置完一组初始化插件之后 | `compiler`                | sync
+__`after-resolvers`__         | 设置完 resolvers 之后          | `compiler`                | sync
 __`environment`__             | -                                       | -                         | sync
-__`after-environment`__       | Environment setup complete              | -                         | sync
-__`before-run`__              | `compiler.run()` starts                 | `compiler`                | async
-__`run`__                     | Before reading records                  | `compiler`                | async
-__`watch-run`__               | Before starting compilation after watch | `compiler`                | async
-__`normal-module-factory`__   | After creating a `NormalModuleFactory`  | `normalModuleFactory`     | sync
-__`context-module-factory`__  | After creating a `ContextModuleFactory` | `contextModuleFactory`    | sync
-__`before-compile`__          | Compilation parameters created          | `compilationParams`       | async
-__`compile`__                 | Before creating new compilation         | `compilationParams`       | sync
-__`this-compilation`__        | Before emitting `compilation` event     | `compilation`             | sync
-__`compilation`__             | Compilation creation completed          | `compilation`             | sync
+__`after-environment`__       | 环境设置完成              | -                         | sync
+__`before-run`__              | `compiler.run()` 开始                 | `compiler`                | async
+__`run`__                     | 在读取记录之前                  | `compiler`                | async
+__`watch-run`__               | 在开始编译之前，watch 之后 | `compiler`                | async
+__`normal-module-factory`__   | 创建出一个 `NormalModuleFactory` 之后  | `normalModuleFactory`     | sync
+__`context-module-factory`__  | 创建出一个 `ContextModuleFactory` 之后 | `contextModuleFactory`    | sync
+__`before-compile`__          | compilation 的参数已创建          | `compilationParams`       | async
+__`compile`__                 | 在创建新 compilation 之前         | `compilationParams`       | sync
+__`this-compilation`__        | 在触发 `compilation` 事件之前     | `compilation`             | sync
+__`compilation`__             | compilation 创建完成          | `compilation`             | sync
 __`make`__                    | -                                       | `compilation`             | parallel
 __`after-compile`__           | -                                       | `compilation`             | async
-__`should-emit`__             | Can return true/false at this point     | `compilation`             | bailResult
+__`should-emit`__             | 此时可以返回 true/false     | `compilation`             | bailResult
 __`need-additional-pass`__    | -                                       | -                         | bailResult
-__`emit`__                    | Before emitting assets to output dir    | `compilation`             | async
-__`after-emit`__              | After emitting assets to output dir     | `compilation`             | async
-__`done`__                    | Completion of compile                   | `stats`                   | sync
+__`emit`__                    | 在生成资源并输出到目录之前    | `compilation`             | async
+__`after-emit`__              | 在生成资源并输出到目录之后    | `compilation`             | async
+__`done`__                    | 完成编译                   | `stats`                   | sync
 __`failed`__                  | Failure of compile                      | `error`                   | sync
-__`invalid`__                 | After invalidating a watch compile      | `fileName`, `changeTime`  | sync
-__`watch-close`__             | After stopping a watch compile          | -                         | sync
+__`invalid`__                 | 在无效的 watch 编译之后      | `fileName`, `changeTime`  | sync
+__`watch-close`__             | 在停止 watch 编译之后          | -                         | sync
 
 
-## Usage
+## 用法
 
-Here's an example of an asynchronous `emit` event handler:
+下面是一个异步的 `emit` 事件处理函数的示例：
 
 ```javascript
 compiler.plugin("emit", function(compilation, callback) {
-  // Do something async...
+  // 执行一些异步……
   setTimeout(function() {
-    console.log("Done with async work...");
+    console.log("异步运行完成……");
     callback();
   }, 1000);
 });

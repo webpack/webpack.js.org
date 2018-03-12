@@ -1,5 +1,5 @@
 ---
-title: Contribute
+title: 参与贡献
 sort: 1
 contributors:
   - rouzbeh84
@@ -9,7 +9,7 @@ contributors:
   - tbroadley
 ---
 
-The people who contribute to webpack do so for the love of open source, our users and ecosystem, and most importantly, pushing the web forward together. Because of our [Open Collective](http://opencollective.com/webpack) model for funding and transparency, we are able to funnel support and funds through contributors, dependent projects, and the contributor and core teams. To make a donation, simply click the button below...
+为 webpack 做出贡献的群体，通常热衷于开源项目、关心用户体验和关注软件生态系统，对这些人来说，更具有意义的事情是，获得共同推动着 web 向前发展的成就感。由于我们使用 [Open Collective](http://opencollective.com/webpack) 资金模型，公开透明地积累和管理资金，所以我们能够通过贡献人员、依赖项目和核心团队获得支持和资金。想要捐款，只需点击下面的按钮……
 
 <div align="center">
   <a href="https://opencollective.com/webpack/donate" target="_blank">
@@ -17,61 +17,61 @@ The people who contribute to webpack do so for the love of open source, our user
   </a>
 </div>
 
-But what is the return on the investment?
+但是，投入资金的回报情况如何呢？
 
 
-## Developers
+## 开发人员
 
-The biggest core feature we'd like to provide is enjoyable development experience. Developers like you can help by contributing to rich and vibrant documentation, issuing pull requests to help us cover niche use cases, and to help sustain what you love about webpack.
+我们希望能为开发人员提供最大程度的愉悦开发体验。开发人员可以通过如下方式为我们提供帮助，例如，贡献丰富有趣的文档、发布 pull request、帮助我们覆盖小众用例，并辅助维护 webpack。
 
-### How Can I Help?
+### 我如何帮助 webpack？
 
-Anybody can help by doing any of the following:
+任何人都可以通过以下方式来帮助 webpack：
 
-- Ask your employer to use webpack in projects.
-- Help us write and maintain the content on this site (see the [writer's guide](/writers-guide)).
-- Contribute to the [core repository](https://github.com/webpack/webpack).
-- Become a backer or sponsor on [open collective](https://opencollective.com/webpack#support).
+- 要求雇主在项目中使用 webpack。
+- 帮助我们编写和维护本网站上的内容（请查看[作者指南](/writers-guide)）。
+- 向[核心仓库](https://github.com/webpack/webpack)贡献代码。
+- 成为 [open collective](https://opencollective.com/webpack#support) 的筹款人员(backer)或赞助人员(sponsor)。
 
-### Encouraging Employers
+### 要求雇主使用 webpack
 
-You can ask your employer to improve your workflow by leveraging webpack: an all-in-one tool for fonts, images and image optimization, and json. Explain to them how webpack will attempt to bundle your code and assets the best it can for the smallest file size, leading to speedier sites and applications.
+可以要求你的雇主通过使用 webpack 来改进工作流程：webpack 是用于字体、图像、图像优化和 json 的 all-in-one 全特性工具。向他们解释 webpack 试图将代码和资源打包为最小文件体积，从而使网站和应用程序更加快速。
 
-### Your Contributions
+### 贡献代码
 
-Contributing to webpack is not contributing to an exclusive club. You as a developer are contributing to the overall health of downstream projects. Hundreds, if not thousands, of projects depend on webpack and contributing will make the ecosystem better for all users.
+向 webpack 贡献代码，并不只是对专属 club 的贡献。你作为开发人员正在为下游项目的整体健康做出贡献。数百个、甚至数千个项目依赖于 webpack，你的贡献将使所有用户的生态系统更加完善。
 
-The remainder of this section of the site is dedicated to developers such as yourself who would like to become a part of our ever-growing community:
+本章节的其余部分，是专门针对那些「希望成为我们持续增长社区的一部分」的开发人员编写：
 
-- [Writing a Loader](./writing-a-loader)
-- [Writing a Plugin](./writing-a-plugin)
-- [Plugin Patterns](./plugin-patterns)
-- [Release Process](./release-process)
+- [编写一个 loader](./writing-a-loader)
+- [编写一个 plugin](./writing-a-plugin)
+- [插件模式](./plugin-patterns)
+- [发布流程](./release-process)
 
 
-## Executives
+## 管理人员
 
-CTO's, VPs, and owners can help too!
+CTO, VP 和业主也可以向我们提供帮助！
 
 <!-- add slides here regarding monetary value/dev time/tooling -->
 
-webpack is an all-in-one tool for bundling your code. It can handle fonts, images, data and more with the help of community-driven plugins and loaders. Having all of your assets be handled by one tool is immensely helpful, as you or your team can spend less time making sure a machine with many moving parts is working correctly and more time building your product.
+webpack 是打包代码的全特性工具。它可以在由社区驱动的 plugin 和 loader 的帮助下处理字体、图像、数据等。将你的所有资源交付一个工具进行处理，是非常有效地资源管理方案，这样你或你的团队可以花更少的时间，来确保具有许多移动部件的机器正常工作，并且有更多时间构建你的产品。
 
-### Sponsorship
+### 赞助
 
-Aside from monetary assistance, companies can support webpack by:
+除了资金援助外，公司还可以通过以下方式支持 webpack：
 
-- Providing developers that are not actively working on a project.
-- Contributing computing power for improved CI and regression testing.
+- 提供不活跃但是参与项目的开发人员。
+- 为我们改进 CI 和回归测试，提供计算能力(computing power)。
 
-You can also encourage your developers to contribute to the ecosystem by open-sourcing webpack loaders, plugins and other utilities. And, as mentioned above, we would greatly appreciate any help increasing our CI/CD infrastructure.
+你还可以鼓励开发人员，向 webpack 生态系统贡献开源的 loader, plugin 和其他工具。最后，如上所述，非常感谢帮助我们添加 CI/CD 基础设施的那些公司。
 
-### Anyone Else
+### 其他人群
 
-To anyone else who is interested in helping our mission -- e.g. venture capitalists, government entities, digital agencies, etc. -- we would love for you to work with us, one of the top npm packages, to improve your product! Please don't hesitate to reach out with questions.
+对于那些对我们的使命感兴趣的人 - 例如风险投资者、政府机构、数字营销公司等 - 我们真诚希望你能够与我们展开合作，通过 webpack 这个最好的 npm package，改善你的产品！所以请毫不犹豫地向我们提出你需要解决的问题。
 
 <!-- add slides here -->
 
 ***
 
-> 原文：https://webpack.js.org/contribute/plugin-patterns/
+> 原文：https://webpack.js.org/contribute/

@@ -1,5 +1,5 @@
 ---
-title: Loader
+title: loader
 sort: 4
 contributors:
   - manekinekko
@@ -39,7 +39,7 @@ module.exports = {
 ```
 
 
-## 使用 Loader
+## 使用 loader
 
 在你的应用程序中，有三种使用 loader 的方式：
 
@@ -99,7 +99,7 @@ webpack --module-bind jade-loader --module-bind 'css=style-loader!css-loader'
 这会对 `.jade` 文件使用 `jade-loader`，对 `.css` 文件使用 [`style-loader`](/loaders/style-loader) 和 [`css-loader`](/loaders/css-loader)。
 
 
-## Loader 特性
+## loader 特性
 
 * loader 支持链式传递。能够对资源使用流水线(pipeline)。一组链式的 loader 将按照相反的顺序执行。loader 链中的第一个 loader 返回值给下一个 loader。在最后一个 loader，返回 webpack 所预期的 JavaScript。
 * loader 可以是同步的，也可以是异步的。
@@ -114,7 +114,7 @@ loader 通过（loader）预处理函数，为 JavaScript 生态系统提供了�
 用户现在可以更加灵活地引入细粒度逻辑，例如压缩、打包、语言翻译和[其他更多](/loaders)。
 
 
-## 解析 Loader
+## 解析 loader
 
 loader 遵循标准的[模块解析](/concepts/module-resolution/)。多数情况下，loader 将从[模块路径](/concepts/module-resolution/#module-paths)（通常将模块路径认为是 `npm install`, `node_modules`）解析。
 

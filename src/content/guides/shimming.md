@@ -374,6 +374,7 @@ __webpack.config.js__
 __dist/index.html__
 
 ``` diff
+  <!doctype html>
   <html>
     <head>
       <title>Getting Started</title>

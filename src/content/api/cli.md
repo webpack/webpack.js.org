@@ -109,12 +109,6 @@ webpack -h
 webpack --config example.config.js
 ```
 
-**禁止 webpack 输出**
-
-```bash
-webpack --silent
-```
-
 **以 JSON 格式输出 webpack 的运行结果**
 
 ```bash
@@ -202,7 +196,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 `--debug`    | 把 loader 设置为 debug 模式 | boolean    | false
 `--devtool`  | 为打包好的资源定义 [source map 的类型] | string | -
 `--progress` | 打印出编译进度的百分比值 | boolean    | false
-
+`--display-error-details` | 展示错误细节 | boolean | false
 
 ### 模块配置
 

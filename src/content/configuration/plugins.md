@@ -7,9 +7,9 @@ contributors:
   - yatharthk
 ---
 
-The `plugins` option is used to customize the webpack build process in a variety of ways. webpack comes with a variety built-in plugins available under `webpack.[plugin-name]`. See [this page](/plugins) for a list of plugins and documentation but note that there are a lot more out in the community.
+`plugins` 选项用于以各种方式自定义 webpack 构建过程。webpack 附带了各种内置插件，可以通过 `webpack.[plugin-name]` 访问这些插件。请查看[这个页面](/plugins)获取插件列表和对应文档，但请注意这只是其中一部分，社区中还有许多插件。
 
-T> Note: This page only discusses using plugins, however if you are interested in writing your own please visit [Writing a Plugin](/development/how-to-write-a-plugin/).
+T> 注意：本页面仅讨论使用插件，如果你有兴趣编写自己的插件，请访问[编写一个插件](/development/how-to-write-a-plugin/)页面。
 
 
 ## `plugins`
@@ -30,7 +30,7 @@ plugins: [
 
 ```js
 var webpack = require('webpack');
-// 导入非 webpack 默认自带插件
+// 导入非 webpack 自带默认插件
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var DashboardPlugin = require('webpack-dashboard/plugin');
 
