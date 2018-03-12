@@ -56,7 +56,7 @@ node-nightly
 Now, we can simply use `node-nightly` along with the `--inspect` flag to start our build in any webpack-based project. Note that we cannot run NPM `scripts`, e.g. `npm run build`, so we'll have specify the full `node_modules` path:
 
 ``` bash
-node-nightly --inspect ./node_modules/webpack/bin/webpack.js
+node-nightly --inspect-brk ./node_modules/webpack/bin/webpack.js
 ```
 
 Which should output something like:
