@@ -40,22 +40,22 @@ const config: webpack.Configuration = {
 export default config;
 ```
 
-Note that you'll also need to check your `tsconfig.json` file. If the module in `compilerOptions` in `tsconfig.json` is `commonjs`, the setting is complete, else webpack will fail with an error. This occurs because `ts-node` does not support any module syntax other than `commonjs`.
+注意，你还需要核对 `tsconfig.json` 文件。如果 `tsconfig.json` 中的 `compilerOptions` 中的 module 字段是 `commonjs` ，则配置是正确的，否则 webpack 将因为错误而构建失败。发生这种情况，是因为 `ts-node` 不支持 `commonjs` 以外的任何模块语法。
 
-There are two solutions to this issue:
+这个问题有两种解决方案：
 
-- Modify `tsconfig.json`.
-- Install `tsconfig-paths`.
+- 修改 `tsconfig.json`。
+- 安装 `tsconfig-paths`。
 
-The __first option__ is to open your `tsconfig.json` file and look for `compilerOptions`. Set `target` to `"ES5"` and `module` to `"CommonJS"` (or completely remove the `module` option).
+__第一个选项_是指，打开你的 `tsconfig.json` 文件并查找 `compilerOptions`。将 `target` 设置为 `"ES5"`，以及将 `module` 设置为 `"CommonJS"`（或者完全移除 `module` 选项）。
 
-The __second option__ is to install the `tsconfig-paths` package:
+__第二个选项_是指，安装 `tsconfig-paths` 包：
 
 ``` bash
 npm install --save-dev tsconfig-paths
 ```
 
-And create a separate TypeScript configuration specifically for your webpack configs:
+然后，为你的 webpack 配置，专门创建一个单独的 TypeScript 配置：
 
 __tsconfig-for-webpack-config.json__
 
@@ -68,9 +68,9 @@ __tsconfig-for-webpack-config.json__
 }
 ```
 
-T> `ts-node` can resolve a `tsconfig.json` file using the environment variable provided by `tsconfig-path`.
+T> `ts-node` 可以使用 `tsconfig-path` 提供的环境变量来解析 `tsconfig.json` 文件。
 
-Then set the environment variable `process.env.TS_NODE_PROJECT` provided by `tsconfig-path` like so:
+然后，设置 `tsconfig-path` 提供的环境变量 `process.env.TS_NODE_PROJECT`，如下所示：
 
 __package.json__
 
