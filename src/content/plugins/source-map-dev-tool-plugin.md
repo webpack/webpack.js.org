@@ -9,7 +9,7 @@ related:
     url: https://survivejs.com/webpack/building/source-maps/#-sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin-
 ---
 
-This plugin enables more fine grained control of source map generation. It is an alternative to the [`devtool`](/configuration/devtool/) configuration option.
+本插件实现了对 source map 生成，进行更细粒度的控制。它可以替代 [`devtool`](/configuration/devtool/) 选项。
 
 ``` js
 new webpack.SourceMapDevToolPlugin(options)
@@ -20,35 +20,35 @@ new webpack.SourceMapDevToolPlugin(options)
 
 支持以下选项：
 
-- `test` (`string|regex|array`): Include source maps for modules based on their extension (defaults to `.js` and `.css`).
-- `include` (`string|regex|array`): Include source maps for module paths that match the given value.
-- `exclude` (`string|regex|array`): Exclude modules that match the given value from source map generation.
-- `filename` (`string`): Defines the output filename of the SourceMap (will be inlined if no value is provided).
-- `append` (`string`): Appends the given value to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the source map file. `false` disables the appending.
-- `moduleFilenameTemplate` (`string`): See [`output.devtoolModuleFilenameTemplate`](/configuration/output/#output-devtoolmodulefilenametemplate).
-- `fallbackModuleFilenameTemplate` (`string`): See link above.
-- `module` (`boolean`): Indicates whether loaders should generate source maps (defaults to `true`).
-- `columns` (`boolean`): Indicates whether column mappings should be used (defaults to `true`).
-- `lineToLine` (`object`): Simplify and speed up source mapping by using line to line source mappings for matched modules.
-- `noSources` (`boolean`): Prevents the source file content from being included in the source map (defaults to `false`).
-- `publicPath` (`string`): Emits absolute URLs with public path prefix, e.g. `https://example.com/project/`.
-- `fileContext` (`string`): Makes the `[file]` argument relative to this directory.
+- `test` (`string|regex|array`)：包含基于扩展名的模块的 source map（默认是 `.js` 和 `.css`）。
+- `include` (`string|regex|array`)：使路径与该值匹配的模块生成 source map。
+- `exclude` (`string|regex|array`)：使匹配该值的模块不生成 source map。
+- `filename` (`string`)：定义生成的 source map 的名称（如果没有值将会变成 inlined）。
+- `append` (`string`)：在原始资源后追加给定值。通常是 `#sourceMappingURL` 注释。`[url]` 被替换成 source map 文件的 URL。`false` 将禁用追加。
+- `moduleFilenameTemplate` (`string`): 查看 [`output.devtoolModuleFilenameTemplate`](/configuration/output/#output-devtoolmodulefilenametemplate).
+- `fallbackModuleFilenameTemplate` (`string`)：同上。
+- `module` (`boolean`)：表示 loader 是否生成 source map（默认为 `true`）。
+- `columns` (`boolean`)：表示是否应该使用 column mapping（默认为 `true`）。
+- `lineToLine` (`object`)：通过行到行源代码映射(line to line source mappings)简化和提升匹配模块的源代码映射速度。
+- `noSources` (`boolean`)：防止源文件的内容被包含在 source map 里（默认为 `false`）。
+- `publicPath` (`string`)：生成带 public path 前缀的绝对 URL，例如：`https://example.com/project/`。
+- `fileContext` (`string`)：使得 `[file]` 参数作为本目录的相对路径。
 
-The `lineToLine` object allows for the same `test`, `include`, and `exclude` options described above.
+`lineToLine` 对象允许的值和上面 `test`，`include`，`exclude` 选项一样。
 
-The `fileContext` option is useful when you want to store source maps in an upper level directory to avoid `../../` appearing in the absolute `[url]`.
+`fileContext` 选项在你想要将 source maps 存储到上层目录，避免 `../../` 出现在绝对路径 `[url]` 里面时有用。
 
-T> Setting `module` and/or `columns` to `false` will yield less accurate source maps but will also improve compilation performance significantly.
+T> 设置 `module` 和/或 `columns` 为 `false` 将会生成不太精确的 source map，但同时会显著地提升编译性能。
 
-W> Remember that when using the [`UglifyJSPlugin`](/plugins/uglify-js-plugin), you must utilize the `sourceMap` option.
+W> 记得在使用 [`UglifyJSPlugin`](/plugins/uglify-js-plugin) 时，必须使用 `sourceMap` 选项。
 
 ## 用法
 
-The following examples demonstrate some common use cases for this plugin.
+下面的示例展示了本插件的一些常见用例。
 
-### 排除 Vendor 的 Map 文件
+### 排除 vendor 的 map
 
-以下代码将排除 `vendor.js` bundle 中任何模块的 source map：
+以下代码会排除 `vendor.js` 内模块的 source map。
 
 ``` js
 new webpack.SourceMapDevToolPlugin({
@@ -57,9 +57,9 @@ new webpack.SourceMapDevToolPlugin({
 })
 ```
 
-### Host Source Maps Externally
+### 在宿主环境外部化 source map
 
-Set a URL for source maps. Useful for hosting them on a host that requires authorization.
+设置 source map 的 URL。在宿主环境需要授权的情况下很有用。
 
 ``` js
 new webpack.SourceMapDevToolPlugin({
@@ -68,7 +68,7 @@ new webpack.SourceMapDevToolPlugin({
 })
 ```
 
-And for cases when source maps are stored in the upper level directory:
+还有一种场景，source map 存储在上层目录中时：
 
 ``` js
 project
@@ -79,7 +79,7 @@ project
     |- bundle-[hash].js.map
 ```
 
-With next config:
+如下设置：
 
 ``` js
 new webpack.SourceMapDevToolPlugin({
@@ -89,7 +89,7 @@ new webpack.SourceMapDevToolPlugin({
 })
 ```
 
-Will produce the following URL:
+将会生成以下 URL：
 
 ``` js
 https://example.com/project/sourcemaps/bundle-[hash].js.map`
