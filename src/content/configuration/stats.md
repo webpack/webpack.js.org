@@ -62,7 +62,7 @@ stats: {
   // Context directory for request shortening
   context: "../src/",
   // `webpack --colors` equivalent
-  colors: true,
+  colors: false,
   // Display the distance from the entry point for each module
   depth: false,
   // Display the entry points with the corresponding bundles

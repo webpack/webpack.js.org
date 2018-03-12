@@ -45,6 +45,7 @@ module.exports = {
 __page.html__
 
 ```html
+<!doctype html>
 <html>
   <head>
     ...
