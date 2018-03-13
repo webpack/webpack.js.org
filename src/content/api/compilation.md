@@ -4,31 +4,31 @@ group: Plugins
 sort: 3
 ---
 
-Compilation 实例继承于 compiler。例如，compiler.compilation 是对所有 require 图(graph)中对象的字面上的编译。这个对象可以访问所有的模块和它们的依赖（大部分是循环依赖）。在编译阶段，模块被加载，封闭，优化，分块，哈希和重建等等。这将是编译中任何操作主要的生命周期。
+Compilation 实例继承于 compiler。例如，compiler.compilation 是对所有 require 图(graph)中对象的字面上的编译。这个对象可以访问所有的模块和它们的依赖（大部分是循环依赖）。在编译阶段，模块被加载，封闭，优化，分块，哈希和重建等等。这将是任何编译操作中，重要的生命周期。
 
 ``` js
 compiler.plugin("compilation", function(compilation) {
-    // 主要的编译实例
-    // 随后所有的方法都从 compilation.plugin 上得来
+  // 主要的编译实例
+  // 随后所有的方法都从 compilation.plugin 上得来
 });
 ```
 
 
 ## `normal-module-loader`
 
-普通模块 loader，真实地一个一个加载模块图(graph)中所有的模块的函数。
+普通模块 loader，真正（一个接一个地）加载模块图(graph)中所有的模块的函数。
 
 ``` js
 compilation.plugin('normal-module-loader', function(loaderContext, module) {
-  // 这里是所以模块被加载的地方
-  // 一个接一个，此时还没有依赖被创建
+  // 这里是所有模块被一个接一个地加载的位置，
+  // 此时还没有创建依赖
 });
 ```
 
 
 ## `seal`
 
-编译的封闭已经开始。
+编译的封存已经开始。
 
 ``` js
 compilation.plugin('seal', function() {
@@ -40,7 +40,7 @@ compilation.plugin('seal', function() {
 
 ## `optimize`
 
-优化编译。
+优化编译(compilation)。
 
 ``` js
 compilation.plugin('optimize', function() {
@@ -62,7 +62,7 @@ compilation.plugin('optimize-tree', function(chunks, modules) {
 
 ### `optimize-modules(modules: Module[])`
 
-模块的优化。
+优化模块。
 
 ``` js
 compilation.plugin('optimize-modules', function(modules) {
@@ -73,23 +73,23 @@ compilation.plugin('optimize-modules', function(modules) {
 
 ## `after-optimize-modules(modules: Module[])`
 
-模块优化已经结束。
+优化模块已经结束。
 
 
 ## `optimize-chunks(chunks: Chunk[])`
 
-块的优化。
+优化 chunk。
 
 ```javascript
-//这里一般只有一个块，除非你在配置中指定了多个入口
+// optimize-chunks，可能会在每个编译中执行多次
 
 compilation.plugin('optimize-chunks', function(chunks) {
-    // 这里一般只有一个块，
-    // 除非你在配置中指定了多个入口
+    // 除非你在配置中指定了多个入口，
+    // 否则此处一般只有一个 chunk
     chunks.forEach(function (chunk) {
-        // Chunks have circular references to their modules
+        // chunk 具有对其模块的循环引用
         chunk.modules.forEach(function (module){
-            // module.loaders, module.rawRequest, module.dependencies, etc.
+            // module.loaders, module.rawRequest, module.dependencies 等。
         });
     });
 });
@@ -97,89 +97,89 @@ compilation.plugin('optimize-chunks', function(chunks) {
 
 ## `after-optimize-chunks(chunks: Chunk[])`
 
-Optimizing the chunks has finished.
+优化 chunk 已经结束。
 
 
 ## `revive-modules(modules: Module[], records)`
 
-Restore module info from records.
+从 records 中恢复模块信息。
 
 
 ## `optimize-module-order(modules: Module[])`
 
-Sort the modules in order of importance. The first is the most important module. It will get the smallest id.
+按照重要性排序模块。第一个是最重要的模块。它会得到最小的 id。
 
 
 ## `optimize-module-ids(modules: Module[])`
 
-Optimize the module ids.
+优化模块 id。
 
 
 ## `after-optimize-module-ids(modules: Module[])`
 
-Optimizing the module ids has finished.
+优化模块 id 已经结束。
 
 
 ## `record-modules(modules: Module[], records)`
 
-Store module info to the records.
+将模块信息存储到 records。
 
 
 ## `revive-chunks(chunks: Chunk[], records)`
 
-Restore chunk info from records.
+从 records 中恢复 chunk 信息。
 
 
 ## `optimize-chunk-order(chunks: Chunk[])`
 
-Sort the chunks in order of importance. The first is the most important chunk. It will get the smallest id.
+按重要性排序 chunk。第一个是最重要的 chunk。它会得到最小的 id。
 
 
 ## `optimize-chunk-ids(chunks: Chunk[])`
 
-Optimize the chunk ids.
+优化 chunk id。
 
 
 ## `after-optimize-chunk-ids(chunks: Chunk[])`
 
-Optimizing the chunk ids has finished.
+优化 chunk id 已经结束。
 
 
 ## `record-chunks(chunks: Chunk[], records)`
 
-Store chunk info to the records.
+将 chunk 信息存储到 records。
 
 
 ## `before-hash`
 
-Before the compilation is hashed.
+在编译被哈希之前。
 
 
 ## `after-hash`
 
-After the compilation is hashed.
+在编译被哈希之后。
 
 
 ## `before-chunk-assets`
 
-Before creating the chunk assets.
+在创建 chunk 资源(asset) 之前。
 
 
 ## `additional-chunk-assets(chunks: Chunk[])`
 
-Create additional assets for the chunks.
+为 chunk 创建附加的资源(asset)。
 
 
 ## `record(compilation, records)`
 
-Store info about the compilation to the records
+将编译信息存储到 records 中。
 
 
-## `additional-assets` async
+## `additional-assets` 异步
 
-Create additional assets for the compilation
+为编译创建附加的资源(asset)。
 
-Here's an example that downloads an image.
+这是一个下载图像的示例。
 
 ``` js
 compiler.plugin('compilation', function(compilation) {
@@ -197,13 +197,13 @@ compiler.plugin('compilation', function(compilation) {
 ```
 
 
-## `optimize-chunk-assets(chunks: Chunk[])` async
+## `optimize-chunk-assets(chunks: Chunk[])` 异步
 
-优化 chunk 的生成资源。
+优化 chunk 资源(asset)。
 
-生成资源被存储在 `this.assets`，但是它们并不都是块的生成资源。一个 `Chunk` 有一个 `files` 属性指出这个块创建的所有文件。附加的生成资源被存储在 `this.additionalChunkAssets` 中。
+资源(asset)会被存储在 `this.assets`，但是它们并不都是 chunk 资源。 每个 `chunk` 都有一个 `files` 属性，指向这个 chunk 创建的所有文件。附加的资源(asset)被存储在 `this.additionalChunkAssets` 中。
 
-这是一个为每个 chunk 添加 banner 的例子。
+这是一个为每个 chunk 添加 banner 的示例。
 
 ``` js
 compilation.plugin("optimize-chunk-assets", function(chunks, callback) {
@@ -218,7 +218,7 @@ compilation.plugin("optimize-chunk-assets", function(chunks, callback) {
 
 ## `after-optimize-chunk-assets(chunks: Chunk[])`
 
-块生成资源已经被优化。这里是一个来自 [@boopathi](https://github.com/boopathi) 的示例插件，详细的输出每个块里有什么。
+chunk 资源已经被优化。这里是一个来自 [@boopathi](https://github.com/boopathi) 的示例插件，详细的输出每个 chunk 里有什么。
 
 ``` js
 var PrintChunksPlugin = function() {};
@@ -241,21 +241,21 @@ PrintChunksPlugin.prototype.apply = function(compiler) {
 ```
 
 
-## `optimize-assets(assets: Object{name: Source})` async
+## `optimize-assets(assets: Object{name: Source})` 异步
 
-优化所有生成资源。
+优化所有资源。
 
-生成资源被存放在 `this.assets`。
+资源被存放在 `this.assets`。
 
 
 ## `after-optimize-assets(assets: Object{name: Source})`
 
-生成资源优化已经结束。
+资源优化已经结束。
 
 
 ## `build-module(module)`
 
-一个模块构建开始前。
+在一个模块构建开始之前。
 
 ``` js
 compilation.plugin('build-module', function(module){
@@ -266,7 +266,7 @@ compilation.plugin('build-module', function(module){
 
 ## `succeed-module(module)`
 
-一个模块已经被成功构建。
+成功构建一个模块。
 
 ``` js
 compilation.plugin('succeed-module', function(module){
@@ -288,12 +288,12 @@ compilation.plugin('failed-module', function(module){
 
 ## `module-asset(module, filename)`
 
-一个模块中的一个生成资源被加到编译中。
+一个模块中的一个资源被加到编译中。
 
 
 ## `chunk-asset(chunk, filename)`
 
-一个 chunk 中的一个生成资源被加到编译中。
+一个 chunk 中的一个资源被加到编译中。
 
 ***
 
