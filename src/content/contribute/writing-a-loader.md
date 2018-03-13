@@ -98,7 +98,7 @@ Loaders should do only a single task. This not only makes the job of maintaining
 
 ### Chaining
 
-Take advantage of the fact that loaders can be chained together. Instead of writing a single loader that tackles five tasks, write five simpler loaders that divide this effort. Isolating them not only keeps each individual loader simple, but may allow for them to be used for something you hadn't though of originally.
+Take advantage of the fact that loaders can be chained together. Instead of writing a single loader that tackles five tasks, write five simpler loaders that divide this effort. Isolating them not only keeps each individual loader simple, but may allow for them to be used for something you hadn't thought of originally.
 
 Take the case of rendering a template file with data specified via loader options or query parameters. It could be written as a single loader that compiles the template from source, executes it and returns a module that exports a string containing the HTML code. However, in accordance with guidelines, a simple `apply-loader` exists that can be chained with other open source loaders:
 
@@ -124,13 +124,13 @@ __loader.js__
 
 ``` js
 import { getOptions } from 'loader-utils';
-import { validateOptions } from 'schema-utils';
+import validateOptions from 'schema-utils';
 
 const schema = {
-  type: object,
+  type: 'object',
   properties: {
     test: {
-      type: string
+      type: 'string'
     }
   }
 }
@@ -209,7 +209,7 @@ For instance, the `sass-loader` [specifies `node-sass`](https://github.com/webpa
 So you've written a loader, followed the guidelines above, and have it set up to run locally. What's next? Let's go through a simple unit testing example to ensure our loader is working the way we expect. We'll be using the [Jest](https://facebook.github.io/jest/) framework to do this. We'll also install `babel-jest` and some presets that will allow us to use the `import` / `export` and `async` / `await`. Let's start by installing and saving these as a `devDependencies`:
 
 ``` bash
-npm i --save-dev jest babel-jest babel-preset-env
+npm install --save-dev jest babel-jest babel-preset-env
 ```
 
 __.babelrc__
@@ -234,7 +234,7 @@ __src/loader.js__
 ``` js
 import { getOptions } from 'loader-utils';
 
-export default source => {
+export default function loader(source) {
   const options = getOptions(this);
 
   source = source.replace(/\[name\]/g, options.name);
@@ -254,7 +254,7 @@ Hey [name]!
 Pay close attention to this next step as we'll be using the [Node.js API](/api/node) and [`memory-fs`](https://github.com/webpack/memory-fs) to execute webpack. This lets us avoid emitting `output` to disk and will give us access to the `stats` data which we can use to grab our transformed module:
 
 ``` bash
-npm i --save-dev webpack memory-fs
+npm install --save-dev webpack memory-fs
 ```
 
 __test/compiler.js__

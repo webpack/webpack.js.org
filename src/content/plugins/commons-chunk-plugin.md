@@ -149,7 +149,7 @@ Similar to the above one, but instead of moving common modules into the parent (
 new webpack.optimize.CommonsChunkPlugin({
   name: "app",
   // or
-  names: ["app", "subPageA"]
+  names: ["app", "subPageA"],
   // the name or list of names must match the name or names
   // of the entry points that create the async chunks
 
@@ -201,7 +201,7 @@ new webpack.optimize.CommonsChunkPlugin({
   name: "vendor",
   minChunks: function (module) {
     // this assumes your vendor imports exist in the node_modules directory
-    return module.context && module.context.indexOf("node_modules") !== -1;
+    return module.context && module.context.includes("node_modules");
   }
 })
 ```
@@ -217,7 +217,7 @@ new webpack.optimize.CommonsChunkPlugin({
     if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
       return false;
     }
-    return module.context && module.context.indexOf("node_modules") !== -1;
+    return module.context && module.context.includes("node_modules");
   }
 })
 ```
@@ -242,7 +242,7 @@ Since the `vendor` and `manifest` chunk use a different definition for `minChunk
   new webpack.optimize.CommonsChunkPlugin({
     name: "vendor",
     minChunks: function(module){
-      return module.context && module.context.indexOf("node_modules") !== -1;
+      return module.context && module.context.includes("node_modules");
     }
   }),
   new webpack.optimize.CommonsChunkPlugin({
@@ -255,5 +255,5 @@ Since the `vendor` and `manifest` chunk use a different definition for `minChunk
 ## More Examples
 
 - [Common and Vendor Chunks](https://github.com/webpack/webpack/tree/master/examples/common-chunk-and-vendor-chunk)
-- [Multiple Common Chunks](https://github.com/webpack/webpack/tree/master/examples/multiple-commons-chunks)
-- [Multiple Entry Points with Commons Chunk](https://github.com/webpack/webpack/tree/master/examples/multiple-entry-points-commons-chunk-css-bundle)
+- [Multiple Common Chunks](https://github.com/webpack/webpack/tree/8b888fedfaeaac6bd39168c0952cc19e6c34280a/examples/multiple-commons-chunks)
+- [Multiple Entry Points with Commons Chunk](https://github.com/webpack/webpack/tree/8b888fedfaeaac6bd39168c0952cc19e6c34280a/examples/multiple-entry-points-commons-chunk-css-bundle)

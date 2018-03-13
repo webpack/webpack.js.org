@@ -2,3 +2,10 @@
 @import 'mixins';
 @import 'functions';
 
+.vote {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $font-stack-heading;
+    font-weight: 600;
+    color: getColor(fiord);
+  }
+}

@@ -7,6 +7,7 @@ contributors:
   - skipjack
   - SpaceK33z
   - pastelsky
+  - tbroadley
 ---
 
 webpack can compile for multiple environments or _targets_. To understand what a `target` is in detail, read through [the targets concept page](/concepts/targets).
@@ -15,7 +16,7 @@ webpack can compile for multiple environments or _targets_. To understand what a
 
 `string | function(compiler)`
 
-Intructs webpack to target a specific environment.
+Instructs webpack to target a specific environment.
 
 
 ### `string`

@@ -59,7 +59,7 @@ export function cube(x) {
 }
 ```
 
-With that in place, let's update our entry script to utilize this one of these new methods and remove `lodash` for simplicity:
+With that in place, let's update our entry script to utilize one of these new methods and remove `lodash` for simplicity:
 
 __src/index.js__
 
@@ -104,7 +104,7 @@ function cube(x) {
 }
 ```
 
-Note the `unused harmony export square` comment above. If you look at the code below it, you'll notice that `square` is not being exported, however, it is still included in the bundle. We'll fix that in the next section.
+Note the `unused harmony export square` comment above. If you look at the code below it, you'll notice that `square` is not being imported, however, it is still included in the bundle. We'll fix that in the next section.
 
 
 ## Minify the Output
@@ -114,7 +114,7 @@ So we've cued up our "dead code" to be dropped by using the `import` and `export
 Let's start by installing it:
 
 ``` bash
-npm i --save-dev uglifyjs-webpack-plugin
+npm install --save-dev uglifyjs-webpack-plugin
 ```
 
 And then adding it into our config:
@@ -175,7 +175,7 @@ In the code above webpack cannot determine whether or not the call to `mylib.tra
 
 In general, when a tool cannot guarantee that a particular code path doesn't lead to side-effects, this code may remain in the generated bundle even if you are sure it shouldn't. Common situations include invoking a function from a third-party module that webpack and/or the minifier cannot inspect, re-exporting functions imported from third-party modules, etc.
 
-The code used in this guide assumes you perform tree-shaking using UglifyJS plugin. However, there are other tools such as [webpack-rollup-loader](https://github.com/erikdesjardins/webpack-rollup-loader) or [Babel Minify Webpack Plugin](/plugins/babel-minify-webpack-plugin) that may produce different results depending on your setup.
+The code used in this guide assumes you perform tree-shaking using UglifyJS plugin. However, there are other tools such as [webpack-rollup-loader](https://github.com/erikdesjardins/webpack-rollup-loader) that may produce different results depending on your setup.
 
 
 ## Conclusion
@@ -185,6 +185,6 @@ So, what we've learned is that in order to take advantage of _tree shaking_, you
 - Use ES2015 module syntax (i.e. `import` and `export`).
 - Include a minifier that supports dead code removal (e.g. the `UglifyJSPlugin`).
 
-You can imagine your application as a tree. The source code and libraries you actually use represent the green, living leaves of the tree. Dead code represents the brown, dead leaves of the tree that are consumed by autumn. In order to get rid of the dead leaves, you have to shake the tree, causing them fall.
+You can imagine your application as a tree. The source code and libraries you actually use represent the green, living leaves of the tree. Dead code represents the brown, dead leaves of the tree that are consumed by autumn. In order to get rid of the dead leaves, you have to shake the tree, causing them to fall.
 
 If you are interested in more ways to optimize your output, please jump to the next guide for details on building for [production](/guides/production).

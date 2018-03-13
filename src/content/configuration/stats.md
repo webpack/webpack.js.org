@@ -31,7 +31,6 @@ stats: "errors-only"
 | `"minimal"`     | *none*  | Only output when errors or new compilation happen |
 | `"none"`        | `false` | Output nothing |
 | `"normal"`      | `true`  | Standard output |
-| `"detailed"`    | *none*  | Detailed output (since webpack 3.0.0) |
 | `"verbose"`     | *none*  | Output everything |
 
 For more granular control, it is possible to specify exactly what information you want. Please note that all of the options in this object are optional.
@@ -63,7 +62,7 @@ stats: {
   // Context directory for request shortening
   context: "../src/",
   // `webpack --colors` equivalent
-  colors: true,
+  colors: false,
   // Display the distance from the entry point for each module
   depth: false,
   // Display the entry points with the corresponding bundles

@@ -40,7 +40,7 @@ Content not from webpack is served from /path/to/dist/
 
 that will give some background on where the server is located and what it's serving.
 
-If you're using dev-server through the Node.js API, the options in `devServer` will be ignored. Pass the options as a second parameter instead: `new WebpackDevServer(compiler, {...})`. [See here](https://github.com/webpack/webpack-dev-server/blob/master/examples/node-api-simple/server.js) for an example of how to use webpack-dev-server through the Node.js API.
+If you're using dev-server through the Node.js API, the options in `devServer` will be ignored. Pass the options as a second parameter instead: `new WebpackDevServer(compiler, {...})`. [See here](https://github.com/webpack/webpack-dev-server/tree/master/examples/api/simple) for an example of how to use webpack-dev-server through the Node.js API.
 
 W> Be aware that when [exporting multiple configurations](/configuration/configuration-types/#exporting-multiple-configurations) only the `devServer` options for the first configuration will be taken into account and used for all the configurations in the array.
 
@@ -463,6 +463,12 @@ Usage via the CLI
 
 ```bash
 webpack-dev-server --open
+```
+
+If no browser is provided (as shown above), your default browser will be used. To specify a different browser, just pass its name:
+
+```bash
+webpack-dev-server --open 'Google Chrome'
 ```
 
 

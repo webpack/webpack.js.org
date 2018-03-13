@@ -4,6 +4,7 @@ sort: 2
 contributors:
   - ev1stensberg
   - simon04
+  - tbroadley
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -150,7 +151,7 @@ Parameter                 | Explanation                                 | Input 
 `--output-filename`       | The output filename of the bundle           | string     | [name].js
 `--output-jsonp-function` | The name of the JSONP function used for chunk loading | string | webpackJsonp
 `--output-library`        | Expose the exports of the entry point as library | string |
-`--output-library-target` | The type for exposing the exports of the entry,point as library | string | var
+`--output-library-target` | The type for exposing the exports of the entry point as library | string | var
 `--output-path`           | The output path for compilation assets      | string     | Current directory
 `--output-pathinfo`       | Include a comment with the request for every dependency | boolean | false
 `--output-public-path`    | The public path for the assets              | string     | /
@@ -195,7 +196,7 @@ Parameter    | Explanation                                      | Input type | D
 `--debug`    | Switch loaders to debug mode                     | boolean    | false
 `--devtool`  | Define [source map type](/configuration/devtool/) for the bundled resources | string | -
 `--progress` | Print compilation progress in percentage         | boolean    | false
-
+`--display-error-details` | Display details about errors | boolean | false 
 
 ### Module Options
 
@@ -215,7 +216,6 @@ These options makes the build [watch](/configuration/watch/) for changes in file
 Parameter                 | Explanation
 ------------------------- | ----------------------
 `--watch`, `-w`           | Watch the filesystem for changes
-`--save`, `-s`            | Recompiles on save regardless of changes
 `--watch-aggregate-timeout` | Timeout for gathering changes while watching
 `--watch-poll`            | The polling interval for watching (also enable polling)
 `--watch-stdin`, `--stdin` | Exit the process when stdin is closed
@@ -239,7 +239,7 @@ These allow you to configure the webpack [resolver](/configuration/resolve/) wit
 Parameter              | Explanation                                             | Example
 ---------------------- | ------------------------------------------------------- | -------------
 --resolve-alias        | Setup a module alias for resolving                      | --resolve-alias jquery-plugin=jquery.plugin
---resolve-extensions   | Setup extensions that should be used to resolve,modules | --resolve-extensions .es6 .js .ts
+--resolve-extensions   | Setup extensions that should be used to resolve modules | --resolve-extensions .es6 .js .ts
 --resolve-loader-alias | Minimize javascript and switches loaders to minimizing  |
 
 

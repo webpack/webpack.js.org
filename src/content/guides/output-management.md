@@ -5,6 +5,7 @@ contributors:
   - skipjack
   - TheDutchCoder
   - sudarsangp
+  - JGJP
 ---
 
 T> This guide extends on code examples found in the [`Asset Management`](/guides/asset-management) guide.
@@ -68,6 +69,7 @@ Let's also update our `dist/index.html` file, in preparation for webpack to spli
 __dist/index.html__
 
 ``` diff
+  <!doctype html>
   <html>
     <head>
 -     <title>Asset Management</title>
@@ -89,11 +91,11 @@ __webpack.config.js__
   const path = require('path');
 
   module.exports = {
-    entry: {
--     index: './src/index.js',
+-   entry: './src/index.js',
++   entry: {
 +     app: './src/index.js',
 +     print: './src/print.js'
-    },
++   },
     output: {
 -     filename: 'bundle.js',
 +     filename: '[name].bundle.js',

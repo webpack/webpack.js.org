@@ -30,6 +30,8 @@ See the `package.json` for the full list of `scripts`.
 
 > Note that a __Python version between v2.5.0 and 3.0.0__ is required for the [proselint][12] dependency.
 
+> On Debian and Ubuntu operating systems you may have to use `node >= 7.0.0` to avoid build errors with `node-sass`. Please note that we don't officially support building on these systems.
+
 
 ## Contributor License Agreement
 

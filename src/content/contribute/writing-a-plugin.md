@@ -1,6 +1,8 @@
 ---
 title: Writing a Plugin
 sort: 4
+contributors:
+  - tbroadley
 ---
 
 Plugins expose the full potential of the webpack engine to third-party developers. Using staged build callbacks, developers can introduce their own behaviors into the webpack build process. Building plugins is a bit more advanced than building loaders, because you'll need to understand some of the webpack low-level internals to hook into them. Be prepared to read some source code!
@@ -11,7 +13,7 @@ A plugin for `webpack` consists of
 
 - A named JavaScript function.
 - Defines `apply` method in it's prototype.
-- Specifies webpack's event hook to attach itself.
+- Specifies an [event hook](/api/compiler/#event-hooks) on which to bind itself.
 - Manipulates webpack internal instance specific data.
 - Invokes webpack provided callback after functionality is complete.
 
@@ -178,14 +180,14 @@ This is the simplest format for a plugin. Many useful events like `"compile"`, `
 
 `applyPluginsWaterfall(name: string, init: any, args: any...)`
 
-Here each of the plugins are called one after the other with the args from the return value of the previous plugin. The plugin must take into consider the order of its execution.
+Here each of the plugins are called one after the other with the args from the return value of the previous plugin. The plugin must take the order of its execution into account.
 It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. This pattern is used in the Tapable instances which are related to the `webpack` templates like `ModuleTemplate`, `ChunkTemplate` etc.
 
 - __asynchronous__ When all the plugins are applied asynchronously using
 
 `applyPluginsAsync(name: string, args: any..., callback: (err?: Error) -> void)`
 
-The plugin handler functions are called with all args and a callback function with the signature `(err?: Error) -> void`. The handler functions are called in order of registration.`callback` is called after all the handlers are called.
+The plugin handler functions are called with all args and a callback function with the signature `(err?: Error) -> void`. The handler functions are called in order of registration. `callback` is called after all the handlers are called.
 This is also a commonly used pattern for events like `"emit"`, `"run"`.
 
 - __async waterfall__ The plugins will be applied asynchronously in the waterfall manner.

@@ -64,7 +64,7 @@ auxiliaryComment: {
 
 ## `output.chunkFilename`
 
-`string`
+`string` `function`
 
 This option determines the name of non-entry chunk files. See [`output.filename`](#output-filename) option for details on the possible values.
 
@@ -93,6 +93,16 @@ Enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/scr
 `crossOriginLoading: "anonymous"` - Enable cross-origin loading **without credentials**
 
 `crossOriginLoading: "use-credentials"` - Enable cross-origin loading **with credentials**
+
+
+## `output.jsonpScriptType`
+
+`string`
+
+Allows customization of the `script` type webpack injects `script` tags into the DOM to download async chunks. The following options are available:
+
+- `"text/javascript"` (default)
+- `"module"`: Use with ES6 ready code.
 
 
 ## `output.devtoolFallbackModuleFilenameTemplate`
@@ -156,7 +166,7 @@ If multiple modules would result in the same name, [`output.devtoolFallbackModul
 
 ## `output.filename`
 
-`string`
+`string` `function`
 
 This option determines the name of each output bundle. The bundle is written to the directory specified by the [`output.path`](#output-path) option.
 
@@ -196,7 +206,7 @@ Make sure to read the [Caching guide](/guides/caching) for details. There are mo
 
 Note this option is called filename but you are still allowed to use something like `"js/[name]/bundle.js"` to create a folder structure.
 
-Note this options does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#output-chunkfilename) option is used. It also doesn't affect files created by loaders. For these files see loader options.
+Note this option does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#output-chunkfilename) option is used. Files created by loaders also aren't affected. In this case you would have to try the specific loader's available options.
 
 The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
 
@@ -209,6 +219,8 @@ The following substitutions are available in template strings (via webpack's int
 | [query]     | The module query, i.e., the string following `?` in the filename                    |
 
 The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#output-hashdigestlength) to configure the length globally.
+
+If using a function for this option, the function will be passed an object containing the substitutions in the table above.
 
 T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
 
@@ -235,7 +247,7 @@ An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.
 
 ## `output.hotUpdateChunkFilename`
 
-`string`
+`string` `function`
 
 Customize the filenames of hot update chunks. See [`output.filename`](#output-filename) option for details on the possible values.
 
@@ -261,7 +273,7 @@ For details see [`output.jsonpFunction`](#output-jsonpfunction).
 
 ## `output.hotUpdateMainFilename`
 
-`string`
+`string` `function`
 
 Customize the main hot update filename. See [`output.filename`](#output-filename) option for details on the possible values.
 
@@ -295,13 +307,15 @@ If using the [`output.library`](#output-library) option, the library name is aut
 
 How the value of the `output.library` is used depends on the value of the [`output.libraryTarget`](#output-librarytarget) option; please refer to that section for the complete details. Note that the default option for `output.libraryTarget` is `var`, so if the following configuration option is used:
 
-```javascript
+``` js
 output: {
   library: "MyLibrary"
 }
 ```
 
 The variable `MyLibrary` will be bound with the return value of your entry file, if the resulting output is included as a script tag in an HTML page.
+
+W> Note that if an `array` is provided as an `entry` point, only the last module in the array will be exposed. If an `object` is provided, it can exposed using an `array` syntax (see [this example](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) for details).
 
 T> Read the [authoring libraries guide](/guides/author-libraries) guide for more information on `output.library` as well as `output.libraryTarget`.
 
@@ -312,40 +326,37 @@ T> Read the [authoring libraries guide](/guides/author-libraries) guide for more
 
 > Default: `_entry_return_`
 
-Configure which module or modules will be exposed via the `libraryTarget`.
-
-The default value `_entry_return_` is the namespace or default module returned by your entry file.
-
-The examples below demonstrate the effect of this config when using `libraryTarget: "var"`, but any target may be used.
+Configure which module or modules will be exposed via the `libraryTarget`. The default `_entry_return_` value is the namespace or default module returned by your entry file. The examples below demonstrate the effect of this config when using `libraryTarget: "var"`, but any target may be used.
 
 The following configurations are supported:
 
 `libraryExport: "default"` - The **default export of your entry point** will be assigned to the library target:
 
-```javascript
+``` js
 // if your entry has a default export of `MyDefaultModule`
 var MyDefaultModule = _entry_return_.default;
 ```
 
 `libraryExport: "MyModule"` - The **specified module** will be assigned to the library target:
 
-```javascript
+``` js
 var MyModule = _entry_return_.MyModule;
 ```
 
 `libraryExport: ["MyModule", "MySubModule"]` - The array is interpreted as a **path to a module** to be assigned to the library target:
 
-```javascript
+``` js
 var MySubModule = _entry_return_.MyModule.MySubModule;
 ```
 
-As the examples have shown that the return values of the entry points are bounded to those named variables, the usage of the resulting library is simply like so:
+With the `libraryExport` configurations specified above, the resulting libraries could be utilized as such:
 
-```javascript
+``` js
 MyDefaultModule.doSomething();
 MyModule.doSomething();
 MySubModule.doSomething();
 ```
+
 
 ## `output.libraryTarget`
 
@@ -363,7 +374,7 @@ These options assign the return value of the entry point (e.g. whatever the entr
 
 `libraryTarget: "var"` - (default) When your library is loaded, the **return value of your entry point** will be assigned to a variable:
 
-```javascript
+``` js
 var MyLibrary = _entry_return_;
 
 // In a separate script...
@@ -375,7 +386,7 @@ W> When using this option, an empty `output.library` will result in no assignmen
 
 `libraryTarget: "assign"` - This will generate an implied global which has the potential to reassign an existing value (use with caution).
 
-``` javascript
+``` js
 MyLibrary = _entry_return_;
 ```
 
@@ -390,7 +401,7 @@ These options assign the return value of the entry point (e.g. whatever the entr
 
 If `output.library` is not assigned a non-empty string, the default behavior is that all properties returned by the entry point will be assigned to the object as defined for the particular `output.libraryTarget`, via the following code fragment:
 
-```javascript
+``` js
 (function(e, a) { for(var i in a) e[i] = a[i]; }(${output.libraryTarget}, _entry_return_)
 ```
 
@@ -398,7 +409,7 @@ W> Note that not setting a `output.library` will cause all properties returned b
 
 `libraryTarget: "this"` - The **return value of your entry point** will be assigned to this under the property named by `output.library`. The meaning of `this` is up to you:
 
-```javascript
+``` js
 this["MyLibrary"] = _entry_return_;
 
 // In a separate script...
@@ -408,7 +419,7 @@ MyLibrary.doSomething(); // if this is window
 
 `libraryTarget: "window"` - The **return value of your entry point** will be assigned to the `window` object using the `output.library` value.
 
-```javascript
+``` js
 window["MyLibrary"] = _entry_return_;
 
 window.MyLibrary.doSomething();
@@ -417,7 +428,7 @@ window.MyLibrary.doSomething();
 
 `libraryTarget: "global"` - The **return value of your entry point** will be assigned to the `global` object using the `output.library` value.
 
-```javascript
+``` js
 global["MyLibrary"] = _entry_return_;
 
 global.MyLibrary.doSomething();
@@ -426,7 +437,7 @@ global.MyLibrary.doSomething();
 
 `libraryTarget: "commonjs"` - The **return value of your entry point** will be assigned to the `exports` object using the `output.library` value. As the name implies, this is used in CommonJS environments.
 
-```javascript
+``` js
 exports["MyLibrary"] = _entry_return_;
 
 require("MyLibrary").doSomething();
@@ -439,7 +450,7 @@ These options will result in a bundle that comes with a more complete header to 
 
 `libraryTarget: "commonjs2"` - The **return value of your entry point** will be assigned to the `module.exports`. As the name implies, this is used in CommonJS environments:
 
-```javascript
+``` js
 module.exports = _entry_return_;
 
 require("MyLibrary").doSomething();
@@ -456,7 +467,7 @@ AMD modules require that the entry chunk (e.g. the first script loaded by the `<
 
 So, with the following configuration...
 
-```javascript
+``` js
 output: {
   library: "MyLibrary",
   libraryTarget: "amd"
@@ -465,15 +476,15 @@ output: {
 
 The generated output will be defined with the name "MyLibrary", i.e.
 
-```javascript
+``` js
 define("MyLibrary", [], function() {
-  // This module return value is what your entry chunk returns
+  return _entry_return_;
 });
 ```
 
 The bundle can be included as part of a script tag, and the bundle can be invoked like so:
 
-```javascript
+``` js
 require(['MyLibrary'], function(MyLibrary) {
   // Do something with the library...
 });
@@ -481,9 +492,9 @@ require(['MyLibrary'], function(MyLibrary) {
 
 If `output.library` is undefined, the following is generated instead.
 
-```javascript
+``` js
 define([], function() {
-  // This module returns is what your entry chunk returns
+  return _entry_return_;
 });
 ```
 
@@ -494,7 +505,7 @@ This bundle will not work as expected, or not work at all (in the case of the al
 
 In this case, you need the `library` property to name your module:
 
-```javascript
+``` js
 output: {
   library: "MyLibrary",
   libraryTarget: "umd"
@@ -503,7 +514,7 @@ output: {
 
 And finally the output is:
 
-```javascript
+``` js
 (function webpackUniversalModuleDefinition(root, factory) {
   if(typeof exports === 'object' && typeof module === 'object')
     module.exports = factory();
@@ -513,14 +524,14 @@ And finally the output is:
     exports["MyLibrary"] = factory();
   else
     root["MyLibrary"] = factory();
-})(this, function() {
-  //what this module returns is what your entry chunk returns
+})(typeof self !== 'undefined' ? self : this, function() {
+  return _entry_return_;
 });
 ```
 
 Note that omitting `library` will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the [object assignment section](#exposing-the-library-via-object-assignment). Example:
 
-```javascript
+``` js
 output: {
   libraryTarget: "umd"
 }
@@ -528,7 +539,7 @@ output: {
 
 The output will be:
 
-```javascript
+``` js
 (function webpackUniversalModuleDefinition(root, factory) {
   if(typeof exports === 'object' && typeof module === 'object')
     module.exports = factory();
@@ -538,14 +549,14 @@ The output will be:
     var a = factory();
     for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
   }
-})(this, function() {
-  //what this module returns is what your entry chunk returns
+})(typeof self !== 'undefined' ? self : this, function() {
+  return _entry_return_;
 });
 ```
 
 Since webpack 3.1.0, you may specify an object for `library` for differing names per targets:
 
-```javascript
+``` js
 output: {
   library: {
     root: "MyLibrary",
@@ -598,7 +609,7 @@ Note it also adds some info about tree shaking to the generated bundle.
 
 ## `output.publicPath`
 
-`string`
+`string` `function`
 
 This is an important option when using on-demand-loading or loading external resources like images, files, etc. If an incorrect value is specified you'll receive 404 errors while loading these resources.
 
@@ -653,7 +664,7 @@ publicPath: "", // relative to HTML page (same directory)
 
 In cases where the `publicPath` of output files can't be known at compile time, it can be left blank and set dynamically at runtime in the entry file using the [free variable](http://stackoverflow.com/questions/12934929/what-are-free-variables) `__webpack_public_path__`.
 
-```javascript
+``` js
  __webpack_public_path__ = myRuntimePublicPath
 
 // rest of your application entry

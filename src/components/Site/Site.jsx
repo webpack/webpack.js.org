@@ -43,7 +43,14 @@ const Site = ({
           .map((section) => ({
             title: section.path.title,
             url: section.url,
-            pages: section.pages.map(page => ({
+            pages: section.pages.slice().sort(({ file: { attributes: a }}, { file: { attributes: b }}) => {
+              let group1 = a.group.toLowerCase();
+              let group2 = b.group.toLowerCase();
+
+              if (group1 < group2) return -1;
+              if (group1 > group2) return 1;
+              return a.sort - b.sort;
+            }).map(page => ({
               title: page.file.title,
               url: page.url
             }))

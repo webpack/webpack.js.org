@@ -6,6 +6,7 @@ contributors:
   - jhnns
   - simon04
   - jeremenichelli
+  - svyandun
 related:
   - title: Reward modern browser users script
     url: https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665
@@ -65,6 +66,7 @@ __webpack.config.js__
 
 ``` diff
   const path = require('path');
++ const webpack = require('webpack');
 
   module.exports = {
     entry: './src/index.js',
@@ -75,7 +77,7 @@ __webpack.config.js__
 +   },
 +   plugins: [
 +     new webpack.ProvidePlugin({
-+       lodash: 'lodash'
++       _: 'lodash'
 +     })
 +   ]
   };
@@ -88,7 +90,15 @@ What we've essentially done here is tell webpack...
 If we run a build, we should still see the same output:
 
 ``` bash
-TODO: Include output
+Hash: f450fa59fa951c68c416
+Version: webpack 2.2.0
+Time: 343ms
+    Asset    Size  Chunks                    Chunk Names
+bundle.js  544 kB       0  [emitted]  [big]  main
+   [0] ./~/lodash/lodash.js 540 kB {0} [built]
+   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
+   [3] ./src/index.js 189 bytes {0} [built]
 ```
 
 We can also use the `ProvidePlugin` to expose a single export of a module by configuring it with an "array path" (e.g. `[module, child, ...children?]`). So let's imagine we only wanted to provide the `join` method from `lodash` wherever it's invoked:
@@ -112,6 +122,7 @@ __webpack.config.js__
 
 ``` diff
   const path = require('path');
+  const webpack = require('webpack');
 
   module.exports = {
     entry: './src/index.js',
@@ -121,7 +132,7 @@ __webpack.config.js__
     },
     plugins: [
       new webpack.ProvidePlugin({
--       lodash: 'lodash'
+-       _: 'lodash'
 +       join: ['lodash', 'join']
       })
     ]
@@ -156,6 +167,7 @@ __webpack.config.js__
 
 ``` diff
   const path = require('path');
+  const webpack = require('webpack');
 
   module.exports = {
     entry: './src/index.js',
@@ -213,6 +225,7 @@ __webpack.config.js__
 
 ``` diff
   const path = require('path');
+  const webpack = require('webpack');
 
   module.exports = {
     entry: './src/index.js',
@@ -251,7 +264,7 @@ Almost everything we've discussed thus far has been in relation to handling lega
 There's a lot of ways to load polyfills. For example, to include the [`babel-polyfill`](https://babeljs.io/docs/usage/polyfill/) we might simply:
 
 ``` bash
-npm i --save babel-polyfill
+npm install --save babel-polyfill
 ```
 
 and `import` it so as to include it in our main bundle:
@@ -279,7 +292,7 @@ Now while this is one approach, __including polyfills in the main bundle is not 
 Let's move our `import` to a new file and add the [`whatwg-fetch`](https://github.com/github/fetch) polyfill:
 
 ``` bash
-npm i --save whatwg-fetch
+npm install --save whatwg-fetch
 ```
 
 __src/index.js__
@@ -323,6 +336,7 @@ __webpack.config.js__
 
 ``` diff
   const path = require('path');
+  const webpack = require('webpack');
 
   module.exports = {
 -   entry: './src/index.js',
@@ -360,6 +374,7 @@ With that in place, we can add the logic to conditionally load our new `polyfill
 __dist/index.html__
 
 ``` diff
+  <!doctype html>
   <html>
     <head>
       <title>Getting Started</title>

@@ -15,7 +15,11 @@ This plugin will enable the same concatenation behavior in webpack.
 new webpack.optimize.ModuleConcatenationPlugin()
 ```
 
-> Scope Hoisting is specifically a feature made possible by ECMAScript Module syntax. Because of this webpack may fallback to normal bundling based on what kind of modules you are using, and [other conditions](https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5).
+> This concatenation behavior is called “scope hoisting.”
+>
+> Scope hoisting is specifically a feature made possible by ECMAScript Module syntax. Because of this webpack may fallback to normal bundling based on what kind of modules you are using, and [other conditions](https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5).
+
+W> Keep in mind that this plugin will only be applied to [ES6 modules](/api/module-methods/#es6-recommended-) processed directly by webpack. When using a transpiler, you'll need to disable module processing (e.g. the [`modules`](https://babeljs.io/docs/plugins/preset-es2015/#optionsmodules) option in Babel).
 
 
 ## Optimization Bailouts
@@ -72,8 +76,8 @@ function tryToAdd(group, module) {
   if (!result) {
     return false;
   }
-  module.dependencies.forEach(depenency => {
-    tryToAdd(group, depenency);
+  module.dependencies.forEach(dependency => {
+    tryToAdd(group, dependency);
   });
   group.merge(nextGroup);
   return true;

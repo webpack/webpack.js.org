@@ -20,19 +20,19 @@ __Prevent bundling__ of certain `import`ed packages and instead retrieve these *
 
 For example, to include [jQuery](https://jquery.com/) from a CDN instead of bundling it:
 
-**index.html**
+__index.html__
 
-```html
-...
-<script src="https://code.jquery.com/jquery-3.1.0.js"
+``` html
+<script
+  src="https://code.jquery.com/jquery-3.1.0.js"
   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="
-  crossorigin="anonymous"></script>
-...
+  crossorigin="anonymous">
+</script>
 ```
 
-**webpack.config.js**
+__webpack.config.js__
 
-```javascript
+``` js
 externals: {
   jquery: 'jQuery'
 }
@@ -40,7 +40,7 @@ externals: {
 
 This leaves any dependent modules unchanged, i.e. the code shown below will still work:
 
-```javascript
+``` js
 import $ from 'jquery';
 
 $('.my-element').animate(...);
@@ -48,22 +48,22 @@ $('.my-element').animate(...);
 
 The bundle with external dependencies can be used in various module contexts, such as [CommonJS, AMD, global and ES2015 modules](/concepts/modules). The external library may be available in any of these forms:
 
-* __root__ - An external library can be available as a global variable. The consumer can achieve this by including the external library in a script tag. This is the default setting for externals.
-* __commonjs__ -  The consumer application may be using a CommonJS module system and hence the external library should be available as a CommonJS module.
-* __commonjs2__ -  Similar to the above line but where the export is `module.exports.default`.
-* __amd__ - Similar to the above line but using AMD module system.
+- __root__: The library should be available as a global variable (e.g. via a script tag).
+- __commonjs__: The library should be available as a CommonJS module.
+- __commonjs2__: Similar to the above but where the export is `module.exports.default`.
+- __amd__: Similar to `commonjs` but using AMD module system.
 
-`externals` accepts various syntax and interprets them in different manners.
+The following syntaxes are accepted...
 
 
 ### string
 
-`jQuery` in the externals indicates that your bundle will need `jQuery` variable in the global form.
+See the example above. The property name `jquery` indicates that the module `jquery` in `import $ from 'jquery'` should be excluded. In order to replace this module, the value `jQuery` will be used to retrieve a global `jQuery` variable. In other words, when a string is provided it will be treated as `root` (defined above and below).
 
 
 ### array
 
-```javascript
+``` js
 externals: {
   subtract: ['./math', 'subtract']
 }
@@ -74,7 +74,7 @@ externals: {
 
 ### object
 
-```javascript
+``` js
 externals : {
   react: 'react'
 }
@@ -103,11 +103,11 @@ This syntax is used to describe all the possible ways that an external library c
 
 ### function
 
-It might be useful to define your own function to control the behavior of what you want to externalize from webpack. [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals), for example, excludes all modules from the node_modules and provides some options to, for example, whitelist packages.
+It might be useful to define your own function to control the behavior of what you want to externalize from webpack. [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals), for example, excludes all modules from the `node_modules` directory and provides some options to, for example, whitelist packages.
 
 It basically comes down to this:
 
-```javascript
+``` js
 externals: [
   function(context, request, callback) {
     if (/^yourregex$/.test(request)){
@@ -125,7 +125,7 @@ The `'commonjs ' + request` defines the type of module that needs to be external
 
 Every dependency that matches the given regular expression will be excluded from the output bundles.
 
-```javascript
+``` js
 externals: /^(jquery|\$)$/i
 ```
 

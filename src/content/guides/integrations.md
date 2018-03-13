@@ -27,7 +27,7 @@ So while webpack's core focus is bundling, there are a variety of extensions tha
 For those using Grunt, we recommend the [`grunt-webpack`](https://www.npmjs.com/package/grunt-webpack) package. With `grunt-webpack` you can run webpack or [webpack-dev-server](https://github.com/webpack/webpack-dev-server) as a task, get access to stats within [template tags](https://gruntjs.com/api/grunt.template), split development and production configurations and more. Start by installing `grunt-webpack` as well as `webpack` itself if you haven't already:
 
 ``` bash
-npm i --save-dev grunt-webpack webpack
+npm install --save-dev grunt-webpack webpack
 ```
 
 Then register a configuration and load the task:
@@ -60,7 +60,7 @@ For more information, please visit the [repository](https://github.com/webpack-c
 Gulp is also a fairly straightforward integration with the help of the [`webpack-stream`](https://github.com/shama/webpack-stream) package (a.k.a. `gulp-webpack`). In this case, it is unnecessary to install `webpack` separately as it is a direct dependency of `webpack-stream`:
 
 ``` bash
-npm i --save-dev webpack-stream
+npm install --save-dev webpack-stream
 ```
 
 Just `require('webpack-stream')` instead of `webpack` and optionally pass it an configuration:
@@ -87,7 +87,7 @@ For more information, please visit the [repository](https://github.com/shama/web
 The [`mocha-webpack`](https://github.com/zinserjan/mocha-webpack) utility can be used for a clean integration with Mocha. The repository offers more details on the pros and cons but essentially `mocha-webpack` is a simple wrapper that provides almost the same CLI as Mocha itself and provides various webpack functionality like an improved watch mode and improved path resolution. Here is a small example of how you would install it and use it to run a test suite (found within `./test`):
 
 ``` bash
-npm i --save-dev webpack mocha mocha-webpack
+npm install --save-dev webpack mocha mocha-webpack
 mocha-webpack 'test/**/*.js'
 ```
 
@@ -99,7 +99,7 @@ For more information, please visit the [repository](https://github.com/zinserjan
 The [`karma-webpack`](https://github.com/webpack-contrib/karma-webpack) package allows you to use webpack to pre-process files in [Karma](http://karma-runner.github.io/1.0/index.html). It also makes use of [`webpack-dev-middleware`](https://github.com/webpack/webpack-dev-middleware) and allows passing configurations for both. A simple example may look something like this:
 
 ``` bash
-npm i --save-dev webpack karma karma-webpack
+npm install --save-dev webpack karma karma-webpack
 ```
 
 __karma.conf.js__
