@@ -22,13 +22,13 @@ related:
 
 `string` `false`
 
-选择一种 [source map](http://blog.teamtreehouse.com/introduction-source-maps) 格式来增强调试过程。不同的值会明显影响到构建(build)和重构建(rebuild)的速度。
+选择一种 [source map](http://blog.teamtreehouse.com/introduction-source-maps) 格式来增强调试过程。不同的值会明显影响到构建(build)和重新构建(rebuild)的速度。
 
 T> webpack 仓库中包含一个 [显示所有 `devtool` 变体效果的示例](https://github.com/webpack/webpack/tree/master/examples/source-map)。这些例子或许会有助于你理解这些差异之处。
 
 T> 你可以直接使用 `SourceMapDevToolPlugin`/`EvalSourceMapDevToolPlugin` 来替代使用 `devtool` 选项，因为它有更多的选项。切勿同时使用 `devtool` 选项和 `SourceMapDevToolPlugin`/`EvalSourceMapDevToolPlugin` 插件。`devtool` 选项在内部添加过这些插件，所以你最终将应用两次插件。
 
-devtool                        | 构建速度 | 重新构建速度 | 生产环境 | 品质等级(quality)
+devtool                        | 构建速度 | 重新构建速度 | 生产环境 | 品质(quality)
 ------------------------------ | ----- | ------- | ---------- | -----------------------------
 (none)                         | +++   | +++     | yes        | 打包后的代码
 eval                           | +++   | +++     | no         | 生成后的代码
@@ -53,7 +53,7 @@ W> Chrome 中的 source map 有一些问题。[我们需要你的帮助！](http
 T> 查看 [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilename) 自定义生成的 source map 的文件名。
 
 
-### 品质等级说明(quality)
+### 品质说明(quality)
 
 `打包后的代码` - 将所有生成的代码视为一大块代码。你看不到相互分离的模块。
 
@@ -72,48 +72,48 @@ T> 查看 [`output.sourceMapFilename`](/configuration/output#output-sourcemapfil
 
 以下选项非常适合开发环境：
 
-`eval` - Each module is executed with `eval()` and `//@ sourceURL`. This is pretty fast. The main disadvantage is that it doesn't display line numbers correctly since it gets mapped to transpiled code instead of the original code (No Source Maps from Loaders).
+`eval` - 每个模块都使用 `eval()` 执行，并且都有 `//@ sourceURL`。此选项会非常快地构建。主要缺点是，由于会映射到转换后的代码，而不是映射到原始代码（没有从 loader 中获取 source map），所以不能正确的显示行数。
 
-`eval-source-map` - Each module is executed with `eval()` and a SourceMap is added as a DataUrl to the `eval()`. Initially it is slow, but it provides fast rebuild speed and yields real files. Line numbers are correctly mapped since it gets mapped to the original code. It yields the best quality SourceMaps for development.
+`eval-source-map` - 每个模块使用 `eval()` 执行，并且 source map 转换为 DataUrl 后添加到 `eval()` 中。初始化 source map 时比较慢，但是会在重新构建时提供比较快的速度，并且生成实际的文件。行数能够正确映射，因为会映射到原始代码中。它会生成用于开发环境的最佳品质的 source map。
 
-`cheap-eval-source-map` - Similar to `eval-source-map`, each module is executed with `eval()`. It is "cheap" because it doesn't have column mappings, it only maps line numbers. It ignores SourceMaps from Loaders and only display transpiled code similar to the `eval` devtool.
+`cheap-eval-source-map` - 类似 `eval-source-map`，每个模块使用 `eval()` 执行。这是 "cheap(低开销)" 的 source map，因为它没有生成列映射(column mapping)，只是映射行数。它会忽略来自 loader 的 source map，并且仅显示转译后的代码，就像 `eval` devtool。
 
-`cheap-module-eval-source-map` - Similar to `cheap-eval-source-map`, however, in this case Source Maps from Loaders are processed for better results. However Loader Source Maps are simplified to a single mapping per line.
+`cheap-module-eval-source-map` - 类似 `cheap-eval-source-map`，并且，在这种情况下，来自 loader 的 source map 会得到更好的处理结果。然而，loader source map 会被简化为每行一个映射(mapping)。
 
-### Special cases
+### 特定场景
 
-The following options are not ideal for development nor production. They are needed for some special cases, i. e. for some 3rd party tools.
+以下选项对于开发环境和生产环境并不理想。他们是一些特定场景下需要的，例如，针对一些第三方工具。
 
-`inline-source-map` - A SourceMap is added as a DataUrl to the bundle.
+`inline-source-map` - source map 转换为 DataUrl 后添加到 bundle 中。
 
-`cheap-source-map` - A SourceMap without column-mappings ignoring loader Source Maps.
+`cheap-source-map` - 没有列映射(column mapping)的 source map，忽略 loader source map。
 
-`inline-cheap-source-map` - Similar to `cheap-source-map` but SourceMap is added as a DataUrl to the bundle.
+`inline-cheap-source-map` - 类似 `cheap-source-map`，但是 source map 转换为 DataUrl 后添加到 bundle 中。
 
-`cheap-module-source-map` - A SourceMap without column-mappings that simplifies loader Source Maps to a single mapping per line.
+`cheap-module-source-map` - 没有列映射(column mapping)的 source map，将 loader source map 简化为每行一个映射(mapping)。
 
-`inline-cheap-module-source-map` - Similar to `cheap-module-source-map` but SourceMap is added as a DataUrl to the bundle.
+`inline-cheap-module-source-map` - 类似 `cheap-module-source-map`，但是 source mapp 转换为 DataUrl 添加到 bundle 中。
 
 
 ### 对于生产环境
 
 这些选项通常用于生产环境中：
 
-`(none)` (Omit the `devtool` option) - No SourceMap is emitted. This is a good option to start with.
+`(none)` (Omit the `devtool` option) - No source map is emitted. This is a good option to start with.
 
-`source-map` - A full SourceMap is emitted as a separate file. It adds a reference comment to the bundle so development tools know where to find it.
+`source-map` - A full source map is emitted as a separate file. It adds a reference comment to the bundle so development tools know where to find it.
 
 W> You should configure your server to disallow access to the Source Map file for normal users!
 
-`hidden-source-map` - Same as `source-map`, but doesn't add a reference comment to the bundle. Useful if you only want SourceMaps to map error stack traces from error reports, but don't want to expose your SourceMap for the browser development tools.
+`hidden-source-map` - Same as `source-map`, but doesn't add a reference comment to the bundle. Useful if you only want source map to map error stack traces from error reports, but don't want to expose your source map for the browser development tools.
 
 W> You should not deploy the Source Map file to the webserver. Instead only use it for error report tooling.
 
-`nosources-source-map` - A SourceMap is created without the `sourcesContent` in it. It can be used to map stack traces on the client without exposing all of the source code. You can deploy the Source Map file to the webserver.
+`nosources-source-map` - A source map is created without the `sourcesContent` in it. It can be used to map stack traces on the client without exposing all of the source code. You can deploy the Source Map file to the webserver.
 
 W> It still exposes filenames and structure for decompiling, but it doesn't expose the original code.
 
-T> When using the `uglifyjs-webpack-plugin` you must provide the `sourceMap: true` option to enable SourceMap support.
+T> When using the `uglifyjs-webpack-plugin` you must provide the `sourceMap: true` option to enable source map support.
 
 ***
 
