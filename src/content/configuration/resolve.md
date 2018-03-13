@@ -57,7 +57,7 @@ alias: {
 
 ``` js
 import Test1 from 'xyz'; // 精确匹配，所以 path/to/file.js 被解析和导入
-import Test2 from 'xyz/file.js'; // 精确匹配，触发普通解析
+import Test2 from 'xyz/file.js'; // 非精确匹配，触发普通解析
 ```
 
 下面的表格展示了一些其他情况：
