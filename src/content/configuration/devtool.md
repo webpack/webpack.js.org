@@ -63,7 +63,7 @@ T> 查看 [`output.sourceMapFilename`](/configuration/output#output-sourcemapfil
 
 `原始源代码` - 每个模块相互分离，并用模块名称进行注释。你会看到转译之前的代码，正如编写它时。这取决于 loader 支持。
 
-`无源代码内容` - source map 中不包含源代码内容。浏览器通常会尝试从网络服务器或文件系统加载源代码。你必须确保正确设置 [`output.devtoolModuleFilenameTemplate`](/configuration/output/#output-devtoolmodulefilenametemplate)，以匹配源代码的 url。
+`无源代码内容` - source map 中不包含源代码内容。浏览器通常会尝试从 web 服务器或文件系统加载源代码。你必须确保正确设置 [`output.devtoolModuleFilenameTemplate`](/configuration/output/#output-devtoolmodulefilenametemplate)，以匹配源代码的 url。
 
 `（仅限行）` - source map 被简化为每行一个映射。这通常意味着每个语句只有一个映射（假设你使用这种方式）。这会妨碍你在语句级别上调试执行，也会妨碍你在每行的一些列上设置断点。与压缩后的代码组合后，映射关系是不可能实现的，因为压缩工具通常只会输出一行。
 
@@ -76,9 +76,9 @@ T> 查看 [`output.sourceMapFilename`](/configuration/output#output-sourcemapfil
 
 `eval-source-map` - 每个模块使用 `eval()` 执行，并且 source map 转换为 DataUrl 后添加到 `eval()` 中。初始化 source map 时比较慢，但是会在重新构建时提供比较快的速度，并且生成实际的文件。行数能够正确映射，因为会映射到原始代码中。它会生成用于开发环境的最佳品质的 source map。
 
-`cheap-eval-source-map` - 类似 `eval-source-map`，每个模块使用 `eval()` 执行。这是 "cheap(低开销)" 的 source map，因为它没有生成列映射(column mapping)，只是映射行数。它会忽略来自 loader 的 source map，并且仅显示转译后的代码，就像 `eval` devtool。
+`cheap-eval-source-map` - 类似 `eval-source-map`，每个模块使用 `eval()` 执行。这是 "cheap(低开销)" 的 source map，因为它没有生成列映射(column mapping)，只是映射行数。它会忽略源自 loader 的 source map，并且仅显示转译后的代码，就像 `eval` devtool。
 
-`cheap-module-eval-source-map` - 类似 `cheap-eval-source-map`，并且，在这种情况下，来自 loader 的 source map 会得到更好的处理结果。然而，loader source map 会被简化为每行一个映射(mapping)。
+`cheap-module-eval-source-map` - 类似 `cheap-eval-source-map`，并且，在这种情况下，源自 loader 的 source map 会得到更好的处理结果。然而，loader source map 会被简化为每行一个映射(mapping)。
 
 ### 特定场景
 
@@ -99,21 +99,21 @@ T> 查看 [`output.sourceMapFilename`](/configuration/output#output-sourcemapfil
 
 这些选项通常用于生产环境中：
 
-`(none)` (Omit the `devtool` option) - No source map is emitted. This is a good option to start with.
+`(none)`（省略 `devtool` 选项） - 不生成 source map。这是一个不错的选择。
 
-`source-map` - A full source map is emitted as a separate file. It adds a reference comment to the bundle so development tools know where to find it.
+`source-map` - 整个 source map 作为一个单独的文件生成。它为 bundle 添加了一个引用注释，以便开发工具知道在哪里可以找到它。
 
-W> You should configure your server to disallow access to the Source Map file for normal users!
+W> 你应该将你的服务器配置为，不允许普通用户访问 source map 文件！
 
-`hidden-source-map` - Same as `source-map`, but doesn't add a reference comment to the bundle. Useful if you only want source map to map error stack traces from error reports, but don't want to expose your source map for the browser development tools.
+`hidden-source-map` - 与 `source-map` 相同，但不会为 bundle 添加引用注释。如果你只想 source map 映射那些源自错误报告的错误堆栈跟踪信息，但不想为浏览器开发工具暴露你的 source map，这个选项会很有用。
 
-W> You should not deploy the Source Map file to the webserver. Instead only use it for error report tooling.
+W> 你不应将 source map 文件部署到 web 服务器。而是只将其用于错误报告工具。
 
-`nosources-source-map` - A source map is created without the `sourcesContent` in it. It can be used to map stack traces on the client without exposing all of the source code. You can deploy the Source Map file to the webserver.
+`nosources-source-map` - 创建的 source map 不包含 `sourcesContent(源代码内容)`。它可以用来映射客户端上的堆栈跟踪，而无须暴露所有的源代码。你可以将 source map 文件部署到 web 服务器。
 
-W> It still exposes filenames and structure for decompiling, but it doesn't expose the original code.
+W> 这仍然会暴露反编译后的文件名和结构，但它不会暴露原始代码。
 
-T> When using the `uglifyjs-webpack-plugin` you must provide the `sourceMap: true` option to enable source map support.
+T> 在使用 `uglifyjs-webpack-plugin` 时，你必须提供 `sourceMap：true` 选项来启用 source map 支持。
 
 ***
 
