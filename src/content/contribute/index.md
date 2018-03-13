@@ -22,7 +22,7 @@ But what is the return on the investment?
 
 ## Developers
 
-The biggest core feature we'd like to provide is enjoyable development experience. Developers like you can help by contributing to rich and vibrant documentation, issuing pull requests to help us cover niche use cases, and to help sustain what you love about webpack.
+The biggest core feature we'd like to provide is enjoyable development experience. Developers like you can help by contributing to rich and vibrant documentation, issuing pull requests to help us cover nice use cases, and to help sustain what you love about webpack.
 
 ### How Can I Help?
 
