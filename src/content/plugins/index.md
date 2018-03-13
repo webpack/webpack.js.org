@@ -6,6 +6,7 @@ contributors:
   - rouzbeh84
   - aretecode
   - eko3alpha
+  - refactorized
 ---
 
 webpack 有着丰富的插件接口(rich plugin interface)。webpack 自身的多数功能都使用这个插件接口。这个插件接口使 webpack 变得**极其灵活**。
@@ -18,6 +19,7 @@ Name                                                     | Description
 [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin)    | 提取 chunks 之间共享的通用模块
 [`CompressionWebpackPlugin`](/plugins/compression-webpack-plugin) | 预先准备的资源压缩版本，使用 Content-Encoding 提供访问服务
 [`ContextReplacementPlugin`](/plugins/context-replacement-plugin) | 重写 `require` 表达式的推断上下文
+[`CopyWebpackPlugin`](/plugins/copy-webpack-plugin) | 将单个文件或整个目录复制到构建目录
 [`DefinePlugin`](/plugins/define-plugin)           | 允许在编译时(compile time)配置的全局常量
 [`DllPlugin`](/plugins/dll-plugin)                 | 为了极大减少构建时间，进行分离打包
 [`EnvironmentPlugin`](/plugins/environment-plugin) | [`DefinePlugin`](./define-plugin) 中 `process.env` 键的简写方式。
