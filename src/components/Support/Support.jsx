@@ -1,4 +1,5 @@
 import React from 'react';
+import prependHttp from 'prepend-http';
 import Backers from './support-backers.json';
 import Additional from './support-additional.js';
 import SmallIcon from '../../assets/icon-square-small-slack.png';
@@ -100,7 +101,7 @@ export default class Support extends React.Component {
                className="support__item"
                title={ `$${formatMoney(supporter.totalDonations / 100)} by ${supporter.name || supporter.slug}` }
                target="_blank"
-               href={ supporter.website || `https://opencollective.com/${supporter.slug}` }>
+               href={ prependHttp(supporter.website, { https: true }) || `https://opencollective.com/${supporter.slug}` }>
               {<img
                 className={ `support__${rank}-avatar` }
                 src={ supporter.avatar || SmallIcon }
