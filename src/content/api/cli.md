@@ -141,15 +141,15 @@ Invocation                               | Resulting environment
 
 T> See the [environment variables](/guides/environment-variables) guide for more information on its usage.
 
-### Config Options
+### 配置选项
 
-Parameter                 | Explanation                                 | Input type | Default
+参数 | 说明 | 输入类型 | 默认值
 ------------------------- | ------------------------------------------- | ---------- | ------------------
-`--config`                | Path to the config file                     | string     | webpack.config.js or webpackfile.js
-`--config-register, -r`   | Preload one or more modules before loading the webpack configuration | array | 
-`--config-name`           | Name of the config to use                   | string     | 
-`--env`                   | Environment passed to the config, when it is a function | 
-`--mode`                  | Mode to use, either "development" or "production" | string      | 
+`--config`                | 配置文件的路径 | string     | webpack.config.js 或 webpackfile.js
+`--config-register, -r`   | 在 webpack 配置文件加载前先预加载一个或多个模块 | array |
+`--config-name`           | 要使用的配置名称 | string |
+`--env`                   | 当配置文件是一个函数时，会将环境变量传给这个函数 |
+`--mode`                  | 用到的模式，"development" 或 "production" | string |
 
 ### Output Options
 
@@ -166,6 +166,7 @@ Parameter                 | Explanation                                 | Input 
 `--output-pathinfo`       | Include a comment with the request for every dependency | boolean | false
 `--output-public-path`    | The public path for the assets              | string     | /
 `--output-source-map-filename` | The output filename for the SourceMap  | string     | [name].map or [outputFilename].map
+
 
 
 #### Example Usage
@@ -206,7 +207,7 @@ Parameter    | Explanation                                      | Input type | D
 `--debug`    | Switch loaders to debug mode                     | boolean    | false
 `--devtool`  | Define [source map type](/configuration/devtool/) for the bundled resources | string | -
 `--progress` | Print compilation progress in percentage         | boolean    | false
-`--display-error-details` | Display details about errors | boolean | false 
+`--display-error-details` | Display details about errors | boolean | false
 
 ### Module Options
 
