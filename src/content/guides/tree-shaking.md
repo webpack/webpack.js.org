@@ -14,6 +14,8 @@ related:
     url: https://medium.com/webpack/webpack-4-beta-try-it-today-6b1d27d7d7e2#9a67
   - title: Debugging Optimization Bailouts
     url: https://webpack.js.org/plugins/module-concatenation-plugin/#debugging-optimization-bailouts
+  - title: Issue 6074 - Add support for more complex selectors for sideEffects
+    url: https://github.com/webpack/webpack/issues/6074
 ---
 
 _Tree shaking_ is a term commonly used in the JavaScript context for dead-code elimination. It relies on the [static structure](http://exploringjs.com/es6/ch_modules.html#static-module-structure) of ES2015 module syntax, i.e. [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export). The name and concept have been popularized by the ES2015 module bundler [rollup](https://github.com/rollup/rollup).
@@ -130,6 +132,8 @@ If your code did have some side effects though, an array can be provided instead
 }
 ```
 
+The array accepts relative, absolute, and glob patterns to the relevant files. It uses [micromatch](https://github.com/micromatch/micromatch#matching-features) under the hood.
+
 T> Note that any imported file is subject to tree shaking. This means if you use something like `css-loader` in your project and import a CSS file, it needs to be added to the side effect list so it will not be unintentionally dropped in production mode:
 
 ```json
@@ -141,6 +145,8 @@ T> Note that any imported file is subject to tree shaking. This means if you use
   ]
 }
 ```
+
+Finally, `"sideEffects"` can also be set from the [`module.rules` config option](https://github.com/webpack/webpack/issues/6065#issuecomment-351060570).
 
 ## Minify the Output
 
