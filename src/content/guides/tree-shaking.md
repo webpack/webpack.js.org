@@ -10,16 +10,10 @@ contributors:
   - dmitriid
   - probablyup
 related:
-  - title: Tree shaking with webpack 2, TypeScript and Babel
-    url: https://alexjoverm.github.io/2017/03/06/Tree-shaking-with-Webpack-2-TypeScript-and-Babel/
-  - title: Tree-shaking with webpack 2 and Babel 6
-    url: http://www.2ality.com/2015/12/webpack-tree-shaking.html
-  - title: webpack 2 Tree Shaking Configuration
-    url: https://medium.com/modus-create-front-end-development/webpack-2-tree-shaking-configuration-9f1de90f3233#.15tuaw71x
-  - title: Issue 2867
-    url: https://github.com/webpack/webpack/issues/2867
-  - title: Issue 4784
-    url: https://github.com/webpack/webpack/issues/4784
+  - title: "webpack 4 beta — try it today!"
+    url: https://medium.com/webpack/webpack-4-beta-try-it-today-6b1d27d7d7e2#9a67
+  - title: Debugging Optimization Bailouts
+    url: https://webpack.js.org/plugins/module-concatenation-plugin/#debugging-optimization-bailouts
 ---
 
 _Tree shaking_ is a term commonly used in the JavaScript context for dead-code elimination. It relies on the [static structure](http://exploringjs.com/es6/ch_modules.html#static-module-structure) of ES2015 module syntax, i.e. [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export). The name and concept have been popularized by the ES2015 module bundler [rollup](https://github.com/rollup/rollup).
