@@ -130,6 +130,18 @@ If your code did have some side effects though, an array can be provided instead
 }
 ```
 
+T> Note that any imported file is subject to tree shaking. This means if you use something like `css-loader` in your project and import a CSS file, it needs to be added to the side effect list so it will not be unintentionally dropped in production mode:
+
+```json
+{
+  "name": "your-project",
+  "sideEffects": [
+    "./src/some-side-effectful-file.js",
+    "*.css"
+  ]
+}
+```
+
 ## Minify the Output
 
 So we've cued up our "dead code" to be dropped by using the `import` and `export` syntax, but we still need to drop it from the bundle. To do that, we'll use the `-p` (production) webpack compilation flag to enable the uglifyjs minification plugin.
