@@ -138,7 +138,7 @@ module.exports = {
 };
 ```
 
-T> Note that the `--optimize-minimize` flag can be used to insert the `UglifyJsPlugin` as well.
+T> Note that the `--optimize-minimize` flag can be used to insert the `UglifyJSPlugin` as well.
 
 With that squared away, we can run another `npm run build` and see if anything has changed.
 
