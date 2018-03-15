@@ -202,6 +202,11 @@ module.exports = {
   }
 };
 ```
+If you haven't already, install the new webpack-cli:
+
+```bash
+ npm install --save webpack-cli
+```
 
 Now, let's run the build again but instead using our new configuration:
 
