@@ -149,9 +149,9 @@ Using plugins in your webpack config is straightforward - however, there are man
 [Learn more!](/concepts/plugins)
 
 
-## Mode
+## 模式
 
-By setting the `mode` parameter to either `development` or `production`, you can enable webpack's built-in optimizations that correspond with the selected mode.
+通过选择 `development` 或 `production` 之中的一个，来设置 `mode` 参数，你可以启用相应模式下的 webpack 内置的优化
 
 ```javascript
 module.exports = {

@@ -1,17 +1,17 @@
 ---
-title: Mode
+title: 模式(Mode)
 sort: 4
 contributors:
   - EugeneHlushko
 ---
 
-Providing the `mode` configuration option tells webpack to use its built-in optimizations accordingly.
+提供 `mode` 配置选项，告知 webpack 使用相应模式的内置优化。
 
 `string`
 
-## Usage
+## 用法
 
-Just provide the `mode` option in the config:
+只在配置中提供 `mode` 选项：
 
 ```javascript
 module.exports = {
@@ -19,22 +19,21 @@ module.exports = {
 };
 ```
 
- 
-or pass it as a cli argument:
+或者从 CLI 参数中传递：
 
 ```bash
 webpack --mode=production
 ```
 
-The following string values are supported:
+支持以下字符串值：
 
-Option                | Description
+选项                | 描述
 --------------------- | -----------------------
-`development`         | Provides `process.env.NODE_ENV` with value `development`. Enables `NamedModulesPlugin`.
-`production`          | Provides `process.env.NODE_ENV` with value `production`. Enables `UglifyJsPlugin`, `ModuleConcatenationPlugin` and `NoEmitOnErrorsPlugin`.
+`development`         | 会将 `process.env.NODE_ENV` 的值设为 `development`。启用 `NamedModulesPlugin`。
+`production`          | 会将 `process.env.NODE_ENV` 的值设为 `production`。启用 `UglifyJsPlugin`, `ModuleConcatenationPlugin` 和 `NoEmitOnErrorsPlugin`。
 
 
-### Mode: development
+### mode: development
 
 
 ```diff
@@ -49,7 +48,7 @@ module.exports = {
 ```
 
 
-### Mode: production
+### mode: production
 
 
 ```diff

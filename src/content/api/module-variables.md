@@ -146,4 +146,4 @@ __resourceQuery === '?test'
 
 ### `DEBUG`  (webpack 特有变量)
 
-等同于配置选项中的 `debug`.
+等同于配置选项中的 `debug`。

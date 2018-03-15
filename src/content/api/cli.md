@@ -149,7 +149,7 @@ T> See the [environment variables](/guides/environment-variables) guide for more
 `--config-register, -r`   | 在 webpack 配置文件加载前先预加载一个或多个模块 | array |
 `--config-name`           | 要使用的配置名称 | string |
 `--env`                   | 当配置文件是一个函数时，会将环境变量传给这个函数 |
-`--mode`                  | 用到的模式，"development" 或 "production" | string |
+`--mode`                  | 用到的模式，"development" 或 "production" 之中的一个 | string |
 
 ### Output Options
 
