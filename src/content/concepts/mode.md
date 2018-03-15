@@ -19,8 +19,8 @@ module.exports = {
 };
 ```
 
- 
-or pass it as a cli argument:
+
+or pass it as a [CLI](/api/cli/) argument:
 
 ```bash
 webpack --mode=production
@@ -32,6 +32,8 @@ Option                | Description
 --------------------- | -----------------------
 `development`         | Provides `process.env.NODE_ENV` with value `development`. Enables `NamedModulesPlugin`.
 `production`          | Provides `process.env.NODE_ENV` with value `production`. Enables `UglifyJsPlugin`, `ModuleConcatenationPlugin` and `NoEmitOnErrorsPlugin`.
+
+T> Please remember that setting `NODE_ENV` doesn't automatically set `mode`.
 
 
 ### Mode: development
