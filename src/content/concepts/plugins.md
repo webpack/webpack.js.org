@@ -60,7 +60,7 @@ const config = {
     path: path.resolve(__dirname, 'dist')
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
         use: 'babel-loader'
