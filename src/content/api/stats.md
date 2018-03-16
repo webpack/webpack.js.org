@@ -3,6 +3,7 @@ title: Stats Data
 sort: 3
 contributors:
   - skipjack
+  - franjohn21
 ---
 
 When compiling source code with webpack, users can generate a JSON file containing statistics about modules. These statistics can be used to analyze an application's dependency graph as well as to optimize compilation speed. The file is typically generated with the following CLI command:
@@ -24,6 +25,7 @@ The top-level structure of the output JSON file is fairly straightforward but th
   "hash": "11593e3b3ac85436984a", // Compilation specific hash
   "time": 2469, // Compilation time in milliseconds
   "filteredModules": 0, // A count of excluded modules when [`exclude`](/configuration/stats/#stats) is passed to the [`toJson`](/api/node/#stats-tojson-options-) method
+  "outputPath": "/", // path to webpack output directory
   "assetsByChunkName": {
     // Chunk name to emitted asset(s) mapping
     "main": "web.js?h=11593e3b3ac85436984a",
