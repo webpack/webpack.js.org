@@ -19,7 +19,8 @@ module.exports = {
 };
 ```
 
-或者从 CLI 参数中传递：
+
+或者从 [CLI](/api/cli/) 参数中传递：
 
 ```bash
 webpack --mode=production
@@ -31,6 +32,8 @@ webpack --mode=production
 --------------------- | -----------------------
 `development`         | 会将 `process.env.NODE_ENV` 的值设为 `development`。启用 `NamedModulesPlugin`。
 `production`          | 会将 `process.env.NODE_ENV` 的值设为 `production`。启用 `UglifyJsPlugin`, `ModuleConcatenationPlugin` 和 `NoEmitOnErrorsPlugin`。
+
+T> 记住，只设置 `NODE_ENV`，则不会自动设置 `mode`。
 
 
 ### mode: development

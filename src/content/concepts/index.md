@@ -49,7 +49,7 @@ T> You can configure the `entry` property in various ways depending the needs of
 
 ## Output
 
-The **output** property tells webpack where to emit the *bundles* it creates and how to name these files and defaults to `./dist`. You can configure this part of the process by specifying an `output` field in your configuration:
+The **output** property tells webpack where to emit the *bundles* it creates and how to name these files, it defaults to `./dist`. You can configure this part of the process by specifying an `output` field in your configuration:
 
 __webpack.config.js__
 
