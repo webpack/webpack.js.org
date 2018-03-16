@@ -1,161 +1,149 @@
 ---
-title: Compiler Hooks
+title: Compiler 钩子
 group: Plugins
 sort: 1
 contributors:
   - rishantagarwal
 ---
 
-The `Compiler` module is the main engine that creates a compilation instance
-with all the options passed through the [CLI]() or [Node API](). It extends the
-`Tapable` class in order to register and call plugins. Most user facing plugins
-are first registered on the `Compiler`.
+`Compiler` 模块是 webpack 的支柱引擎，它通过 [CLI]() 或 [Node API]() 传递的所有选项，创建出一个 compilation 实例。它扩展(extend)自 `Tapable` 类，以便注册和调用插件。大多数面向用户的插件首，会先在 `Compiler` 上注册。
 
-T> This module is exposed as `webpack.Compiler` and can be used directly.See
-[this example](https://github.com/pksjce/webpack-internal-examples/tree/master/compiler-example)
-for more information.
+T> This module is exposed as `webpack.Compiler` and can be used directly.See [this example](https://github.com/pksjce/webpack-internal-examples/tree/master/compiler-example) for more information.
+T> 此模块会暴露在 `webpack.Compiler`，可以直接通过这种方式使用。关于更多信息，请查看[这个示例](https://github.com/pksjce/webpack-internal-examples/tree/master/compiler-example)。
 
 
-## Watching
+## 监听(watching)
 
-The `Compiler` supports [watching](/api/node/#watching) which monitors the file
-system and recompiles as files change. When in watch mode, the compiler will
-emit the additional events such as `watchRun`, `watchClose`, and `invalid`.
-This is typically used in [development](/guides/development), usually under
-the hood of tools like `webpack-dev-server`, so that the developer doesn't
-need to re-compile manually every time. Watch mode can also be entered via the
-[CLI](/api/cli/#watch-options).
+`Compiler` 支持可以监控文件系统的[监听(watching)](/api/node/#watching)机制，并且在文件修改时重新编译。当处于监听模式(watch mode)时，compiler 会触发诸如 `watchRun`, `watchClose` 和 `invalid` 等额外的事件。通常用于[开发环境](/guides/development)中使用，也常常会在 `webpack-dev-server` 这些工具的底层之下调用，由此开发人员无须每次都使用手动方式重新编译。还可以通过 [CLI](/api/cli/#watch-options) 进入监听模式。
 
 
-## Hooks
+## 相关钩子
 
-The following lifecycle hooks are exposed by the `compiler` and can be accessed
-as such:
+以下生命周期钩子函数，是由 `compiler` 暴露，可以通过如下方式访问：
 
 ``` js
 compiler.hooks.someHook.tap(...)
 ```
 
-Depending on the hook type, `tapAsync` and `tapPromise` may also be available.
+取决于不同的钩子类型，也可以在某些钩子上访问 `tapAsync` 和 `tapPromise`。
 
 
 ### `entryOption`
 
 `SyncBailHook`
 
-Executes a plugin after the `entry` configuration has been processed.
+在 `entry` 配置项处理过之后，执行插件。
 
 
 ### `afterPlugins`
 
 `SyncHook`
 
-Runs a plugin after setting up initial set of plugins.
+设置完初始插件之后，执行插件。
 
-Parameters: `compiler`
+参数：`compiler`
 
 
 ### `afterResolvers`
 
 `SyncHook`
 
-Executes a plugin after resolver setup is complete.
+resolver 安装完成之后，执行插件。
 
-Parameters: `compiler`
+参数：`compiler`
 
 
 ### `environment`
 
 `SyncHook`
 
-Runs a plugin before the environment is prepared.
+environment 准备好之后，执行插件。
 
 
 ### `afterEnvironment`
 
 `SyncHook`
 
-Executes a plugin a environment setup is complete.
+environment 安装完成之后，执行插件。
 
 
 ### `beforeRun`
 
 `AsyncSeriesHook`
 
-Adds a hook right before `compiler.run()` is executed.
+`compiler.run()` 执行之前，添加一个钩子。
 
-Parameters: `compiler`
+参数：`compiler`
 
 
 ### `run`
 
 `AsyncSeriesHook`
 
-Hook into the compiler before it begins reading records.
+开始读取 records 之前，钩入(hook into) compiler。
 
-Parameters: `compiler`
+参数：`compiler`
 
 
 ### `watchRun`
 
 `AsyncSeriesHook`
 
-Executes a plugin during watch mode after a new compilation is triggered
-but before the compilation is actually started.
+监听模式下，一个新的编译(compilation)触发之后，执行一个插件，但是是在实际编译开始之前。
 
-Parameters: `compiler`
+参数：`compiler`
 
 
 ### `normalModuleFactory`
 
 `SyncHook`
 
-Runs a plugin after a `NormalModuleFactory` is created.
+`NormalModuleFactory` 创建之后，执行插件。
 
-Parameters: `normalModuleFactory`
+参数：`normalModuleFactory`
 
 
 ### `contextModuleFactory`
 
-Runs a plugin after a `ContextModuleFactory` is created.
+`ContextModuleFactory` 创建之后，执行插件。
 
-Parameters: `contextModuleFactory`
+参数：`contextModuleFactory`
 
 
 ### `beforeCompile`
 
 `AsyncSeriesHook`
 
-Executes a plugin after compilation parameters are created.
+编译(compilation)参数创建之后，执行插件。
 
-Parameters: `compilationParams`
+参数：`compilationParams`
 
 
 ### `compile`
 
 `SyncHook`
 
-Hook into the compiler before a new compilation is created.
+一个新的编译(compilation)创建之后，钩入(hook into) compiler。
 
-Parameters: `compilationParams`
+参数：`compilationParams`
 
 
 ### `thisCompilation`
 
 `SyncHook`
 
-Executed before emitting the `compilation` event (see below).
+触发 `compilation` 事件之前执行（查看下面的 compilation）。
 
-Parameters: `compilation`
+参数：`compilation`
 
 
 ### `compilation`
 
 `SyncHook`
 
-Runs a plugin after a compilation has been created.
+编译(compilation)创建之后，执行插件。
 
-Parameters: `compilation`
+参数：`compilation`
 
 
 ### `make`
@@ -164,7 +152,7 @@ Parameters: `compilation`
 
 ...
 
-Parameters: `compilation`
+参数：`compilation`
 
 
 ### `afterCompile`
@@ -173,16 +161,16 @@ Parameters: `compilation`
 
 ...
 
-Parameters: `compilation`
+参数：`compilation`
 
 
 ### `shouldEmit`
 
 `SyncBailHook`
 
-Can return true/false at this point
+此时返回 true/false。
 
-Parameters: `compilation`
+参数：`compilation`
 
 
 ### `needAdditionalPass`
@@ -196,49 +184,50 @@ Parameters: `compilation`
 
 `AsyncSeriesHook`
 
-Before emitting assets to output dir
+生成资源到 output 目录之前。
 
-Parameters: `compilation`
+参数：`compilation`
 
 
 ### `afterEmit`
 
 `AsyncSeriesHook`
 
-After emitting assets to output dir
+生成资源到 output 目录之后。
 
-Parameters: `compilation`
+参数：`compilation`
 
 
 ### `done`
 
 `SyncHook`
 
-Compilation has completed.
+编译(compilation)完成。
 
-Parameters: `stats`
+
+参数：`stats`
 
 
 ### `failed`
 
 `SyncHook`
 
-Compilation has failed.
+编译(compilation)失败。
 
-Parameters: `error`
+参数：`error`
 
 
 ### `invalid`
 
 `SyncHook`
 
-Watch compilation has been invalidated.
+监听模式下，编译无效时。
 
-Parameters: `fileName`, `changeTime`
+参数：`fileName`, `changeTime`
 
 
 ### `watchClose`
 
 `SyncHook`
 
-Watch mode has stopped.
+监听模式停止。
