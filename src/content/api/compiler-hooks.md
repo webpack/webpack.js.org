@@ -8,7 +8,6 @@ contributors:
 
 `Compiler` 模块是 webpack 的支柱引擎，它通过 [CLI]() 或 [Node API]() 传递的所有选项，创建出一个 compilation 实例。它扩展(extend)自 `Tapable` 类，以便注册和调用插件。大多数面向用户的插件首，会先在 `Compiler` 上注册。
 
-T> This module is exposed as `webpack.Compiler` and can be used directly.See [this example](https://github.com/pksjce/webpack-internal-examples/tree/master/compiler-example) for more information.
 T> 此模块会暴露在 `webpack.Compiler`，可以直接通过这种方式使用。关于更多信息，请查看[这个示例](https://github.com/pksjce/webpack-internal-examples/tree/master/compiler-example)。
 
 

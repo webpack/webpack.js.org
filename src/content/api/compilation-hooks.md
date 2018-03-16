@@ -1,93 +1,86 @@
 ---
-title: Compilation Hooks
+title: Compilation 钩子
 group: Plugins
 sort: 2
 ---
 
-The `Compilation` module is used by the `Compiler` to create new compilations
-(or builds). A `compilation` instance has access to all modules and their
-dependencies (most of which are circular references). It is the literal
-compilation of all the modules in the dependency graph of an application.
-During the compilation phase, modules are loaded, sealed, optimized, chunked,
-hashed and restored.
+`Compilation` 模块会被 `Compiler` 用来创建新的编译（或新的构建）。`compilation` 实例能够访问所有的模块和它们的依赖（大部分是循环依赖）。它会对应用程序的依赖图中所有模块进行字面上的编译(literal compilation)。在编译阶段，模块会被加载(loaded)、封存(sealed)、优化(optimized)、分块(chunked)、哈希(hashed)和重新创建(restored)。
 
-The `Compilation` class also extends `Tapable` and provides the following
-lifecycle hooks. They can be tapped the same way as compiler hooks:
+`Compilation` 类扩展(extend)自 `Tapable`，并提供了以下生命周期钩子。可以按照 compiler 钩子的相同方式，调用 tap：
 
 ``` js
 compilation.hooks.someHook.tap(...)
 ```
 
-As with the `compiler`, `tapAsync` and `tapPromise` may also be available
-depending on the type of hook.
+和 `compiler` 用法相同，取决于不同的钩子类型，也可以在某些钩子上访问 `tapAsync` 和 `tapPromise`。
 
 
 ### `buildModule`
 
 `SyncHook`
 
-Triggered before a module build has started.
+在模块构建开始之前触发。
 
-Parameters: `module`
+参数：`module`
 
 
 ### `rebuildModule`
 
 `SyncHook`
 
-Fired before rebuilding a module.
+在重新构建一个模块之前触发。
 
-Parameters: `module`
+参数：`module`
 
 
 ### `failedModule`
 
 `SyncHook`
 
-Run when a module build has failed.
+模块构建失败时执行。
 
-Parameters: `module` `error`
+参数：`module` `error`
 
 
 ### `succeedModule`
 
 `SyncHook`
 
-Executed when a module has been built successfully.
+模块构建成功时执行。
 
-Parameters: `module`
+参数：`module`
 
 
 ### `finishModules`
 
 `SyncHook`
 
-All modules have been built.
+所有模块都完成构建。
 
-Parameters: `modules`
+参数：`modules`
 
 
 ### `finishRebuildingModule`
 
 `SyncHook`
 
-A module has been rebuilt.
+一个模块完成重新构建。
 
-Parameters: `module`
+参数：`module`
 
 
 ### `seal`
 
 `SyncHook`
 
-Fired when the compilation stops accepting new modules.
+编译(compilation)停止接收新模块时触发。
 
 
 ### `unseal`
 
 `SyncHook`
 
-Fired when a compilation begins accepting new modules.
+编译(compilation)开始接收新模块时触发。
 
 
 ### `optimizeDependenciesBasic`
@@ -96,16 +89,16 @@ Fired when a compilation begins accepting new modules.
 
 ...
 
-Parameters: `modules`
+参数：`modules`
 
 
 ### `optimizeDependencies`
 
 `SyncBailHook`
 
-Fired at the beginning of dependency optimization.
+依赖优化开始时触发。
 
-Parameters: `modules`
+参数：`modules`
 
 
 ### `optimizeDependenciesAdvanced`
@@ -114,7 +107,7 @@ Parameters: `modules`
 
 ...
 
-Parameters: `modules`
+参数：`modules`
 
 
 ### `afterOptimizeDependencies`
@@ -123,14 +116,14 @@ Parameters: `modules`
 
 ...
 
-Parameters: `modules`
+参数：`modules`
 
 
 ### `optimize`
 
 `SyncHook`
 
-Triggered at the beginning of the optimization phase.
+优化阶段开始时触发。
 
 
 ### `optimizeModulesBasic`
@@ -139,7 +132,7 @@ Triggered at the beginning of the optimization phase.
 
 ...
 
-Parameters: `modules`
+参数：`modules`
 
 
 ### `optimizeModules`
@@ -148,7 +141,7 @@ Parameters: `modules`
 
 ...
 
-Parameters: `modules`
+参数：`modules`
 
 
 ### `optimizeModulesAdvanced`
@@ -157,7 +150,7 @@ Parameters: `modules`
 
 ...
 
-Parameters: `modules`
+参数：`modules`
 
 
 ### `afterOptimizeModules`
@@ -166,7 +159,7 @@ Parameters: `modules`
 
 ...
 
-Parameters: `modules`
+参数：`modules`
 
 
 ### `optimizeChunksBasic`
@@ -175,16 +168,16 @@ Parameters: `modules`
 
 ...
 
-Parameters: `chunks`
+参数：`chunks`
 
 
 ### `optimizeChunks`
 
 `SyncBailHook`
 
-Optimize the chunks.
+优化 chunk。
 
-Parameters: `chunks`
+参数：`chunks`
 
 
 ### `optimizeChunksAdvanced`
@@ -193,25 +186,25 @@ Parameters: `chunks`
 
 ...
 
-Parameters: `chunks`
+参数：`chunks`
 
 
 ### `afterOptimizeChunks`
 
 `SyncHook`
 
-Fired after chunk optimization has completed.
+chunk 优化完成之后触发。
 
-Parameters: `chunks`
+参数：`chunks`
 
 
 ### `optimizeTree`
 
 `AsyncSeriesHook`
 
-Optimize the dependency tree asynchronously.
+异步优化依赖树。
 
-Parameters: `chunks` `modules`
+参数：`chunks` `modules`
 
 
 ### `afterOptimizeTree`
@@ -220,7 +213,7 @@ Parameters: `chunks` `modules`
 
 ...
 
-Parameters: `chunks` `modules`
+参数：`chunks` `modules`
 
 
 ### `optimizeChunkModulesBasic`
@@ -229,7 +222,7 @@ Parameters: `chunks` `modules`
 
 ...
 
-Parameters: `chunks` `modules`
+参数：`chunks` `modules`
 
 
 ### `optimizeChunkModules`
@@ -238,7 +231,7 @@ Parameters: `chunks` `modules`
 
 ...
 
-Parameters: `chunks` `modules`
+参数：`chunks` `modules`
 
 
 ### `optimizeChunkModulesAdvanced`
@@ -247,7 +240,7 @@ Parameters: `chunks` `modules`
 
 ...
 
-Parameters: `chunks` `modules`
+参数：`chunks` `modules`
 
 
 ### `afterOptimizeChunkModules`
@@ -256,7 +249,7 @@ Parameters: `chunks` `modules`
 
 ...
 
-Parameters: `chunks` `modules`
+参数：`chunks` `modules`
 
 
 ### `shouldRecord`
@@ -270,18 +263,18 @@ Parameters: `chunks` `modules`
 
 `SyncHook`
 
-Restore module information from records.
+从 records 中恢复模块信息。
 
-Parameters: `modules` `records`
+参数：`modules` `records`
 
 
 ### `optimizeModuleOrder`
 
 `SyncHook`
 
-Sort the modules in from most to least important.
+将模块从最重要的到最不重要的进行排序。
 
-Parameters: `modules`
+参数：`modules`
 
 
 ### `advancedOptimizeModuleOrder`
@@ -290,7 +283,7 @@ Parameters: `modules`
 
 ...
 
-Parameters: `modules`
+参数：`modules`
 
 
 ### `beforeModuleIds`
@@ -299,7 +292,7 @@ Parameters: `modules`
 
 ...
 
-Paramters: `modules`
+参数：`modules`
 
 
 ### `moduleIds`
@@ -308,7 +301,7 @@ Paramters: `modules`
 
 ...
 
-Parameters: `modules`
+参数：`modules`
 
 
 ### `optimizeModuleIds`
@@ -317,7 +310,7 @@ Parameters: `modules`
 
 ...
 
-Paramters: `chunks`
+参数：`chunks`
 
 
 ### `afterOptimizeModuleIds`
@@ -326,84 +319,84 @@ Paramters: `chunks`
 
 ...
 
-Paramters: `chunks`
+参数：`chunks`
 
 
 ### `reviveChunks`
 
 `SyncHook`
 
-Restore chunk information from records.
+从 records 中恢复 chunk 信息。
 
-Parameters: `modules` `records`
+参数：`modules` `records`
 
 
 ### `optimizeChunkOrder`
 
 `SyncHook`
 
-Sort the chunks in from most to least important.
+将 chunk 从最重要的到最不重要的进行排序。
 
-Parameters: `chunks`
+参数：`chunks`
 
 
 ### `beforeOptimizeChunkIds`
 
 `SyncHook`
 
-Fired before chunk `id` optimization.
+chunk `id` 优化之前触发。
 
-Paramters: `chunks`
+参数：`chunks`
 
 
 ### `optimizeChunkIds`
 
 `SyncHook`
 
-Optimize the `id` of each chunk.
+优化每个 chunk 的 `id`。
 
-Parameters: `chunks`
+参数：`chunks`
 
 
 ### `afterOptimizeChunkIds`
 
 `SyncHook`
 
-Triggered after chunk `id` optimization has finished.
+chunk `id` 优化完成之后触发。
 
-Paramters: `chunks`
+参数：`chunks`
 
 
 ### `recordModules`
 
 `SyncHook`
 
-Store module info to the records.
+将模块信息存储到 records。
 
-Parameters: `modules` `records`
+参数：`modules` `records`
 
 
 ### `recordChunks`
 
 `SyncHook`
 
-Store chunk info to the records.
+将 chunk 信息存储到 records。
 
-Parameters: `chunks` `records`
+参数：`chunks` `records`
 
 
 ### `beforeHash`
 
 `SyncHook`
 
-Before the compilation is hashed.
+在编译被哈希(hashed)之前。
 
 
 ### `afterHash`
 
 `SyncHook`
 
-After the compilation is hashed.
+在编译被哈希(hashed)之后。
 
 
 ### `recordHash`
@@ -412,16 +405,16 @@ After the compilation is hashed.
 
 ...
 
-Parameters: `records`
+参数：`records`
 
 
 ### `record`
 
 `SyncHook`
 
-Store information about the `compilation` to the `records`.
+将 `compilation` 相关信息存储到 `records` 中。
 
-Parameters: `compilation` `records`
+参数：`compilation` `records`
 
 
 ### `beforeModuleAssets`
@@ -442,16 +435,16 @@ Parameters: `compilation` `records`
 
 `SyncHook`
 
-Before creating the chunk assets.
+在创建 chunk 资源(asset)之前。
 
 
 ### `additionalChunkAssets`
 
 `SyncHook`
 
-Create additional assets for the chunks.
+为 chunk 创建附加资源(asset)
 
-Parameters: `chunks`
+参数：`chunks`
 
 
 ### `records`
@@ -460,15 +453,14 @@ Parameters: `chunks`
 
 ...
 
-Parameters: `compilation` `records`
+参数：`compilation` `records`
 
 
 ### `additionalAssets`
 
 `AsyncSeriesHook`
 
-Create additional assets for the compilation. This hook can be used to download
-an image, for example:
+为编译(compilation)创建附加资源(asset)。这个钩子可以用来下载图像，例如：
 
 ``` js
 compilation.hooks.additionalAssets.tapAsync('MyPlugin', callback => {
@@ -488,13 +480,11 @@ compilation.hooks.additionalAssets.tapAsync('MyPlugin', callback => {
 
 `AsyncSeriesHook`
 
-Optimize any chunk assets. The assets are stored in `compilation.assets`. A
-`Chunk` has a property `files` which points to all files created by a chunk.
-Any additional chunk assets are stored in `compilation.additionalChunkAssets`.
+优化所有 chunk 资源(asset)。资源(asset)会被存储在 `compilation.assets`。每个 `Chunk` 都有一个 files 属性，指向这个 chunk 创建的所有文件。附加资源(asset)被存储在 `compilation.additionalChunkAssets` 中。
 
-Parameters: `chunks`
+参数：`chunks`
 
-Here's an example that simply adds a banner to each chunk.
+以下是为每个 chunk 添加 banner 的简单示例。
 
 ``` js
 compilation.hooks
@@ -519,11 +509,11 @@ compilation.hooks
 
 `SyncHook`
 
-The chunk assets have been optimized.
+chunk 资源(asset)已经被优化。
 
-Parameters: `chunks`
+参数：`chunks`
 
-Here's an example plugin from [@boopathi](https://github.com/boopathi) that outputs exactly what went into each chunk.
+这里是一个来自 [@boopathi](https://github.com/boopathi) 的示例插件，详细地输出每个 chunk 里有什么。
 
 ``` js
 compilation.hooks.afterOptimizeChunkAssets.tap(chunks => {
@@ -542,18 +532,18 @@ compilation.hooks.afterOptimizeChunkAssets.tap(chunks => {
 
 `AsyncSeriesHook`
 
-Optimize all assets stored in `compilation.assets`.
+优化存储在 `compilation.assets` 中的所有资源(asset)。
 
-Parameters: `assets`
+参数：`assets`
 
 
 ### `afterOptimizeAssets`
 
 `SyncHook`
 
-The assets has been optimized.
+资源优化已经结束。
 
-Parameters: `assets`
+参数：`assets`
 
 
 ### `needAdditionalSeal`
@@ -576,25 +566,25 @@ Parameters: `assets`
 
 ...
 
-Parameters: `chunk` `chunkHash`
+参数：`chunk` `chunkHash`
 
 
 ### `moduleAsset`
 
 `SyncHook`
 
-An asset from a module was added to the compilation.
+一个模块中的一个资源被添加到编译中。
 
-Parameters: `module` `filename`
+参数：`module` `filename`
 
 
 ### `chunkAsset`
 
 `SyncHook`
 
-An asset from a chunk was added to the compilation.
+一个 chunk 中的一个资源被添加到编译中。
 
-Parameters: `chunk` `filename`
+参数：`chunk` `filename`
 
 
 ### `assetPath`
@@ -603,7 +593,7 @@ Parameters: `chunk` `filename`
 
 ...
 
-Parameters: `filename` `data`
+参数：`filename` `data`
 
 
 ### `needAdditionalPass`
@@ -619,14 +609,13 @@ Parameters: `filename` `data`
 
 ...
 
-Parameters: `childCompiler` `compilerName` `compilerIndex`
+参数：`childCompiler` `compilerName` `compilerIndex`
 
 
 ### `normalModuleLoader`
 
 `SyncHook`
 
-The normal module loader is the function that actually loads all the modules
-in the module graph (one-by-one).
+普通模块 loader，真正（一个接一个地）加载模块图(graph)中所有模块的函数。
 
-Parameters: `loaderContext` `module`
+参数：`loaderContext` `module`
