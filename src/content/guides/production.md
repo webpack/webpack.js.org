@@ -177,7 +177,7 @@ __webpack.prod.js__
 +       sourceMap: true
 +     })
     ]
-  })
+  });
 ```
 
 T> Avoid `inline-***` and `eval-***` use in production as they can increase bundle size and reduce the overall performance.
@@ -200,12 +200,13 @@ __webpack.prod.js__
     plugins: [
       new UglifyJSPlugin({
         sourceMap: true
-      }),
+-     })
++     }),
 +     new webpack.DefinePlugin({
 +       'process.env.NODE_ENV': JSON.stringify('production')
 +     })
     ]
-  })
+  });
 ```
 
 T> Technically, `NODE_ENV` is a system environment variable that Node.js exposes into running scripts. It is used by convention to determine dev-vs-prod behavior by server tools, build scripts, and client-side libraries. Contrary to expectations, `process.env.NODE_ENV` is not set to `"production"` __within__ the build script `webpack.config.js`, see [#2537](https://github.com/webpack/webpack/issues/2537). Thus, conditionals like `process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js'` within webpack configurations do not work as expected.

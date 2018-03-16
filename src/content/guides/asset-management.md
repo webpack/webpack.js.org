@@ -6,6 +6,7 @@ contributors:
   - michael-ciniawsky
   - TheDutchCoder
   - sudarsangp
+  - chenxsan
 ---
 
 If you've been following the guides from the start, you will now have a small project that shows "Hello webpack". Now let's try to incorporate some other assets, like images, to see how they can be handled.
@@ -21,6 +22,7 @@ Let's make a minor change to our project before we get started:
 __dist/index.html__
 
 ``` diff
+  <!doctype html>
   <html>
     <head>
 -    <title>Getting Started</title>
@@ -324,7 +326,7 @@ __project__
   |- /node_modules
 ```
 
-With the loader configured and fonts in place, you can use incorporate them via an `@font-face` declaration. The local `url(...)` directive will be picked up by webpack just as it was with the image:
+With the loader configured and fonts in place, you can incorporate them via an `@font-face` declaration. The local `url(...)` directive will be picked up by webpack just as it was with the image:
 
 __src/style.css__
 

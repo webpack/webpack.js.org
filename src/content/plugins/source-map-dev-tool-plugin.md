@@ -3,6 +3,7 @@ title: SourceMapDevToolPlugin
 contributors:
   - johnnyreilly
   - simon04
+  - neilkennedy
 related:
   - title: Building Source Maps
     url: https://survivejs.com/webpack/building/source-maps/#-sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin-
@@ -29,6 +30,7 @@ The following options are supported:
 - `module` (`boolean`): Indicates whether loaders should generate source maps (defaults to `true`).
 - `columns` (`boolean`): Indicates whether column mappings should be used (defaults to `true`).
 - `lineToLine` (`object`): Simplify and speed up source mapping by using line to line source mappings for matched modules.
+- `noSources` (`boolean`): Prevents the source file content from being included in the source map (defaults to `false`).
 - `publicPath` (`string`): Emits absolute URLs with public path prefix, e.g. `https://example.com/project/`.
 - `fileContext` (`string`): Makes the `[file]` argument relative to this directory.
 
@@ -38,6 +40,7 @@ The `fileContext` option is useful when you want to store source maps in an uppe
 
 T> Setting `module` and/or `columns` to `false` will yield less accurate source maps but will also improve compilation performance significantly.
 
+W> Remember that when using the [`UglifyJSPlugin`](/plugins/uglify-js-plugin), you must utilize the `sourceMap` option.
 
 ## Examples
 
