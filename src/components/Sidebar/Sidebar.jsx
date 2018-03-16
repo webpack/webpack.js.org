@@ -48,7 +48,7 @@ export default class Sidebar extends Component {
                   url={ page.url }
                   title={ page.title }
                   anchors={ page.anchors }
-                  currentPage= { currentPage }
+                  currentPage={ currentPage }
                   onToggle={ this._recalculate } />
               </div>
             );
