@@ -3,6 +3,7 @@ title: Stats Data
 sort: 3
 contributors:
   - skipjack
+  - franjohn21
 ---
 
 When compiling source code with webpack, users can generate a JSON file containing statistics about modules. These statistics can be used to analyze an application's dependency graph as well as to optimize compilation speed. The file is typically generated with the following CLI command:
