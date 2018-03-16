@@ -58,6 +58,7 @@ document.body.appendChild(component());
 __index.html__
 
 ``` html
+<!doctype html>
 <html>
   <head>
     <title>Getting Started</title>
@@ -127,6 +128,7 @@ Now, since we'll be bundling our scripts, we have to update our `index.html` fil
 __dist/index.html__
 
 ``` diff
+  <!doctype html>
   <html>
    <head>
      <title>Getting Started</title>

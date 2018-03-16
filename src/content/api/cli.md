@@ -196,7 +196,7 @@ Parameter    | Explanation                                      | Input type | D
 `--debug`    | Switch loaders to debug mode                     | boolean    | false
 `--devtool`  | Define [source map type](/configuration/devtool/) for the bundled resources | string | -
 `--progress` | Print compilation progress in percentage         | boolean    | false
-
+`--display-error-details` | Display details about errors | boolean | false 
 
 ### Module Options
 
