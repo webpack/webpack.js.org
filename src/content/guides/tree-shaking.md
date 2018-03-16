@@ -20,7 +20,7 @@ related:
 
 _Tree shaking_ is a term commonly used in the JavaScript context for dead-code elimination. It relies on the [static structure](http://exploringjs.com/es6/ch_modules.html#static-module-structure) of ES2015 module syntax, i.e. [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export). The name and concept have been popularized by the ES2015 module bundler [rollup](https://github.com/rollup/rollup).
 
-The webpack 2 release came with built-in support for ES2015 modules (alias _harmony modules_) as well as unused module export detection. The new webpack 4 release expands on this capability with a way to provide hints to the compiler via the `"sideEffects"` `package.json` flag to denote which files in your project are "pure" and therefore safe to prune if unused.
+The webpack 2 release came with built-in support for ES2015 modules (alias _harmony modules_) as well as unused module export detection. 新的 webpack 4 版本扩展了此功能，通过 `package.json` 的 `"sideEffects"` 属性作为标记，向 compiler 提供提示，表明项目中哪些文件是 "pure" 纯的 ES2015 模块，由此可以安全地删除文件中未使用的部分。
 
 T> The remainder of this guide will stem from [Getting Started](/guides/getting-started). If you haven't read through that guide already, please do so now.
 
@@ -104,11 +104,11 @@ function cube(x) {
 Note the `unused harmony export square` comment above. If you look at the code below it, you'll notice that `square` is not being imported, however, it is still included in the bundle. We'll fix that in the next section.
 
 
-## Mark the file as side-effect-free
+## 将文件标记为无副作用(side-effect-free)
 
-In a 100% ESM module world, identifying side effects is straightforward. However, we aren't there just yet, so in the mean time it's necessary to provide hints to webpack's compiler on the "pureness" of your code.
+在一个纯粹的 ESM 模块世界中，识别出哪些文件有副作用很简单。然而，我们的项目无法达到这种纯度，所以，此时有必要向 webpack 的 compiler 提供提示哪些代码是“纯粹部分”。
 
-The way this is accomplished is the `"sideEffects"` package.json property.
+这种方式是通过 package.json 的 `"sideEffects"` 属性来实现的。
 
 ```json
 {
@@ -117,11 +117,11 @@ The way this is accomplished is the `"sideEffects"` package.json property.
 }
 ```
 
-All the code noted above does not contain side effects, so we can simply mark the property as `false` to inform webpack that it can safely prune unused exports.
+如同上面提到的，如果所有代码都不包含副作用，我们就可以简单地将该属性标记为 `false`，来告知 webpack，它可以安全地删除未用到的 export。
 
-T> A "side effect" is defined as code that performs a special behavior when imported, other than exposing one or more exports. An example of this are polyfills, which affect the global scope and usually do not provide an export.
+T> “副作用”的定义是，在导入时会执行特殊行为的代码，而不是仅仅暴露一个 export 或多个 export。举例说明，例如 polyfill，它影响全局作用域，并且通常不提供 export。
 
-If your code did have some side effects though, an array can be provided instead:
+如果你的代码确实有一些副作用，那么可以改为提供一个数组：
 
 ```json
 {
@@ -132,9 +132,9 @@ If your code did have some side effects though, an array can be provided instead
 }
 ```
 
-The array accepts relative, absolute, and glob patterns to the relevant files. It uses [micromatch](https://github.com/micromatch/micromatch#matching-features) under the hood.
+数组方式支持相关文件的相对路径、绝对路径和 glob 模式。 它内部使用 [micromatch](https://github.com/micromatch/micromatch#matching-features)。
 
-T> Note that any imported file is subject to tree shaking. This means if you use something like `css-loader` in your project and import a CSS file, it needs to be added to the side effect list so it will not be unintentionally dropped in production mode:
+T> 注意，任何导入的文件都会受到 tree shaking 的影响。这意味着，如果在项目中使用类似 `css-loader` 并导入 CSS 文件，则需要将其添加到 side effect 列表中，以免在生产模式中无意中将它删除：
 
 ```json
 {
@@ -146,15 +146,15 @@ T> Note that any imported file is subject to tree shaking. This means if you use
 }
 ```
 
-Finally, `"sideEffects"` can also be set from the [`module.rules` config option](https://github.com/webpack/webpack/issues/6065#issuecomment-351060570).
+最后，还可以在 [`module.rules` 配置选项](https://github.com/webpack/webpack/issues/6065#issuecomment-351060570) 中设置 `"sideEffects"`。
 
-## Minify the Output
+## 压缩输出
 
-So we've cued up our "dead code" to be dropped by using the `import` and `export` syntax, but we still need to drop it from the bundle. To do that, we'll use the `-p` (production) webpack compilation flag to enable the uglifyjs minification plugin.
+通过如上方式，我们已经可以通过 `import` 和 `export` 语法，找出那些需要删除的“未使用代码(dead code)”，然而，我们不只是要找出，还需要在 bundle 中删除它们。为此，我们将使用 `-p`(production) 这个 webpack 编译标记，来启用 uglifyjs 压缩插件。
 
-T> Note that the `--optimize-minimize` flag can be used to insert the `UglifyJsPlugin` as well.
+T> 注意，`--optimize-minimize` 标记也会在 webpack 内部调用 `UglifyJsPlugin`。
 
-As of webpack 4, this is also easily toggled via the `"mode"` config option, set to `"production"`.
+从 webpack 4 开始，也可以通过 `"mode"` 配置选项轻松切换到压缩输出，只需设置为 `"production"`。
 
 __webpack.config.js__
 
@@ -182,7 +182,7 @@ Notice anything different about `dist/bundle.js`? Clearly the whole bundle is no
 So, what we've learned is that in order to take advantage of _tree shaking_, you must...
 
 - Use ES2015 module syntax (i.e. `import` and `export`).
-- Add a "sideEffects" entry to your project's `package.json` file.
+- 在项目 `package.json` 文件中，添加一个 "sideEffects" 入口。
 - Include a minifier that supports dead code removal (e.g. the `UglifyJSPlugin`).
 
 You can imagine your application as a tree. The source code and libraries you actually use represent the green, living leaves of the tree. Dead code represents the brown, dead leaves of the tree that are consumed by autumn. In order to get rid of the dead leaves, you have to shake the tree, causing them to fall.
