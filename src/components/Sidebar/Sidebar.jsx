@@ -83,7 +83,6 @@ export default class Sidebar extends Component {
    *
    */
   _recalculate = throttle(() => {
-    console.log('recalc running');
     let { scrollY, innerHeight } = window;
     let { scrollHeight } = document.body;
     let { offsetHeight: sidebarHeight } = this._container;
