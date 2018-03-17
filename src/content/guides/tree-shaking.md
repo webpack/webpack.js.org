@@ -40,7 +40,7 @@ webpack-demo
   |- index.html
 |- /src
   |- index.js
-  |- math.js
++ |- math.js
 |- /node_modules
 ```
 
