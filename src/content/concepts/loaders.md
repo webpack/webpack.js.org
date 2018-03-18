@@ -81,7 +81,7 @@ It's possible to specify loaders in an `import` statement, or any [equivalent "i
 import Styles from 'style-loader!css-loader?modules!./styles.css';
 ```
 
-It's possible to overwrite any loaders in the configuration by prefixing the entire rule with `!`.
+It's possible to override any loaders in the configuration by prefixing the entire rule with `!`.
 
 Options can be passed with a query parameter, e.g. `?key=value&foo=bar`, or a JSON object, e.g. `?{"key":"value","foo":"bar"}`.
 
