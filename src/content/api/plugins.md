@@ -39,7 +39,7 @@ noted.
 ## Plugin Types
 
 Depending on the hooks used and `tap` methods applied, plugins can function in
-a number of different ways. The way this works is closely related to the
+a different number of ways. The way this works is closely related to the
 [hooks](https://github.com/webpack/tapable#tapable) provided by `Tapable`. The
 [compiler hooks](/api/compiler/#event-hooks) each note the underlying `Tapable` hook indicating which
 `tap` methods are available.
