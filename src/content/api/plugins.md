@@ -10,7 +10,7 @@ contributors:
 
 Plugins are a key piece of the webpack ecosystem and provide the community with
 a powerful way to tap into webpack's compilation process. A plugin is able to
-[hook]() into key events that are fired throughout each compilation. Every step
+[hook](/api/compiler/#event-hooks) into key events that are fired throughout each compilation. Every step
 of the way, the plugin will have full access to the `compiler` and, when
 applicable, the current `compilation`.
 
@@ -41,7 +41,7 @@ noted.
 Depending on the hooks used and `tap` methods applied, plugins can function in
 a number of different ways. The way this works is closely related to the
 [hooks](https://github.com/webpack/tapable#tapable) provided by `Tapable`. The
-[compiler hooks]() each note the underlying `Tapable` hook indicating which
+[compiler hooks](/api/compiler/#event-hooks) each note the underlying `Tapable` hook indicating which
 `tap` methods are available.
 
 So depending which event you `tap` into, the plugin may run differently. For
@@ -90,11 +90,11 @@ compiler.hooks.myCustomHook = new SyncHook(['a', 'b', 'c'])
 compiler.hooks.myCustomHook.call(a, b, c);
 ```
 
-Again, see the [documentation]() for `tapable` to learn more about the
+Again, see the [documentation](/api/tapable/) for `tapable` to learn more about the
 different hook classes and how they work.
 
 
 ## Next Steps
 
-See the [compiler hooks]() section for a detailed listing of all the available
+See the [compiler hooks](/api/compiler/#event-hooks) section for a detailed listing of all the available
 `compiler` hooks and the parameters they make available.

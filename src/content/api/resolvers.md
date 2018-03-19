@@ -7,11 +7,11 @@ sort: 3
 Resolvers are created using the `enhanced-resolve` package. The `Resolver`
 class extends the `tapable` class and uses `tapable` to provide a few hooks.
 The `enhanced-resolve` package can be used directly to create new resolvers,
-however any [`compiler` instance]() has a few resolver instances that can be
+however any [`compiler` instance](/api/compiler/) has a few resolver instances that can be
 tapped into.
 
 Before reading on, make sure you at least skim through the
-[`enhanced-resolve`]() and [`tapable`]() documentation.
+[`enhanced-resolve`](https://github.com/webpack/enhanced-resolve) and [`tapable`](/api/tapable/) documentation.
 
 
 ## Types
@@ -39,14 +39,14 @@ Where `[type]` is one of the three resolvers mention above, specified as:
 - `context`
 - `loader`
 
-See the `enhanced-resolve` [documentation]() for a full list of hooks and
+See the `enhanced-resolve` [documentation](https://github.com/webpack/enhanced-resolve) for a full list of hooks and
 descriptions.
 
 
 ## Configuration Options
 
 The resolvers mentioned above can also be customized via a configuration file
-with the [`resolve`]() or [`resolveLoader`]() options. These options allow
+with the [`resolve`](/configuration/resolve/) or [`resolveLoader`](/configuration/resolve/#resolveloader) options. These options allow
 users to change the resolving behavior through a variety of options including
 through resolve `plugins`.
 
