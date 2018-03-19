@@ -172,6 +172,8 @@ module.exports = {
 };
 ```
 
+T> Note that the `--optimize-minimize` flag can be used to insert the `UglifyJSPlugin` as well.
+
 With that squared away, we can run another `npm run build` and see if anything has changed.
 
 Notice anything different about `dist/bundle.js`? Clearly the whole bundle is now minified and mangled, but, if you look carefully, you won't see the `square` function included but will see a mangled version of the `cube` function (`function r(e){return e*e*e}n.a=r`). With minification and tree shaking our bundle is now a few bytes smaller! While that may not seem like much in this contrived example, tree shaking can yield a significant decrease in bundle size when working on larger applications with complex dependency trees.
