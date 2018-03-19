@@ -3,6 +3,7 @@ title: Progressive Web Application
 sort: 14
 contributors:
   - johnnyreilly
+  - chenxsan
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
@@ -78,7 +79,7 @@ __webpack.config.js__
 +     title: 'Progressive Web Application'
 -   })
 +   }),
-+   new WorkboxPlugin({
++   new WorkboxPlugin.GenerateSW({
 +     // these options encourage the ServiceWorkers to get in there fast 
 +     // and not allow any straggling "old" SWs to hang around
 +     clientsClaim: true,
