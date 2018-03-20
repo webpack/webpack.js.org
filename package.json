@@ -99,6 +99,7 @@
   },
   "dependencies": {
     "ajv": "^5.5.2",
+    "lodash.throttle": "^4.1.1",
     "preact": "^8.2.7",
     "preact-compat": "3.17.0",
     "prop-types": "^15.5.10",
