@@ -20,7 +20,7 @@ The following sections describe the major changes from webpack 1 to 2.
 
 T> Note that there were far fewer changes between 2 and 3, so that migration shouldn't be too bad. If you are running into issues, please see [the changelog](https://github.com/webpack/webpack/releases) for details.
 
-W> This content may be moved to the blog post in the near future as version 2 has been out for a while. On top of that, version 3 was recently released and version 4 is on the horizon. As noted above, folks should instead to refer to [the changelog](https://github.com/webpack/webpack/releases) for migrations.
+W> This content may be moved to the blog post in the near future as version 2 has been out for a while. On top of that, version 3 was recently released and version 4 is on the horizon. As noted above, folks should instead refer to [the changelog](https://github.com/webpack/webpack/releases) for migrations.
 
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
