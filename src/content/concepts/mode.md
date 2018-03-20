@@ -9,6 +9,8 @@ Providing the `mode` configuration option tells webpack to use its built-in opti
 
 `string`
 
+T> The default value for `mode` is `production`.
+
 ## Usage
 
 Just provide the `mode` option in the config:
@@ -25,6 +27,7 @@ or pass it as a [CLI](/api/cli/) argument:
 ```bash
 webpack --mode=production
 ```
+
 
 The following string values are supported:
 
