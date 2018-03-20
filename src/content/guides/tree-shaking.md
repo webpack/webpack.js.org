@@ -40,7 +40,7 @@ webpack-demo
   |- index.html
 |- /src
   |- index.js
-  |- math.js
++ |- math.js
 |- /node_modules
 ```
 
@@ -171,6 +171,8 @@ module.exports = {
 + mode: "production"
 };
 ```
+
+T> Note that the `--optimize-minimize` flag can be used to insert the `UglifyJSPlugin` as well.
 
 With that squared away, we can run another `npm run build` and see if anything has changed.
 

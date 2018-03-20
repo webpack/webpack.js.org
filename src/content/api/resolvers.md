@@ -4,9 +4,9 @@ group: Plugins
 sort: 3
 ---
 
-resolver 是由 `enhanced-resolve` package 创建出来的。`Resolver` 类继承了 `tapable` 类，并且使用 `tapable` 提供的一些钩子。可以直接使用 `enhanced-resolve` package 创建一些新的 resolver，然而，所有的 [`compiler` 实例]()都有一些可以接触(tap into)到的 resolver 实例。
+resolver 是由 `enhanced-resolve` package 创建出来的。`Resolver` 类继承了 `tapable` 类，并且使用 `tapable` 提供的一些钩子。可以直接使用 `enhanced-resolve` package 创建一些新的 resolver，然而，所有的 [`compiler` 实例](/api/compiler/) 都有一些可以接触(tap into)到的 resolver 实例。
 
-在继续阅读之前，请确保至少了解过 [`enhanced-resolve`]() 和 [`tapable`]() 文档。
+在继续阅读之前，请确保至少了解过 [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve) 和 [`tapable`](/api/tapable/) 文档。
 
 
 ## 类型
@@ -33,11 +33,11 @@ compiler.resolverFactory.plugin('resolver [type]', resolver => {
 - `context`
 - `loader`
 
-完整的钩子和描述列表，请查看 `enhanced-resolve` [文档]()。
+完整的钩子和描述列表，请查看 `enhanced-resolve` [文档](https://github.com/webpack/enhanced-resolve)。
 
 
 ## 配置选项
 
-上面提到的 resolver，也可以通过在配置文件使用 [`resolve`]() 或 [`resolveLoader`]() 选项来自定义。这些选项允许用户通过各种选项（包括解析 `plugins`），来改变解析行为。
+上面提到的 resolver，也可以通过在配置文件使用 [`resolve`](/configuration/resolve/) 或 [`resolveLoader`](/configuration/resolve/#resolveloader) 选项来自定义。这些选项允许用户通过各种选项（包括解析 `plugins`），来改变解析行为。
 
 resolver 插件（例如 [`DirectoryNamedPlugin`] (https://github.com/shaketbaby/directory-named-webpack-plugin)）可以直接包含在 `resolve.plugins` 中，而不是使用标准插件用法。注意，`resolve` 配置会影响 `normal` 和 `context` 这两个 resolver，而 `resolveLoader` 则用于修改 `loader` resolver。

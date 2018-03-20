@@ -8,7 +8,7 @@ contributors:
   - e-cloud
 ---
 
-插件是 webpack 生态系统的重要组成部分，为用户提供了一种强大方式来直接触及 webpack 的编译过程(compilation process)。插件能够 [钩入(hook)](/api/compilation-hooks) 到在编译(compilation)中触发的所有关键事件。在编译的每一步，插件都具备完全访问 `compiler` 对象的能力，如果情况合适，还可以访问当前 `compilation` 对象。
+插件是 webpack 生态系统的重要组成部分，为用户提供了一种强大方式来直接触及 webpack 的编译过程(compilation process)。插件能够 [钩入(hook)](/api/compiler/#event-hooks) 到在编译(compilation)中触发的所有关键事件。在编译的每一步，插件都具备完全访问 `compiler` 对象的能力，如果情况合适，还可以访问当前 `compilation` 对象。
 
 T> 对于编写插件的高度概括，请从[编写一个插件](/contribute/writing-a-plugin)开始。
 
@@ -24,7 +24,7 @@ tapable 这个小型 library 是 webpack 的一个核心工具，但也可用于
 
 ## 插件类型
 
-根据所使用的钩子(hook)和 `tap` 方法，插件可以以多种不同的方式运行。这个工作方式与 `Tapable` 提供的 [hooks](https://github.com/webpack/tapable#tapable) 密切相关。[compiler hooks](/api/compiler-hooks) 分别记录了 `Tapable` 内在的钩子，指出哪些 `tap` 方法可用。
+根据所使用的钩子(hook)和 `tap` 方法，插件可以以多种不同的方式运行。这个工作方式与 `Tapable` 提供的 [hooks](https://github.com/webpack/tapable#tapable) 密切相关。[compiler hooks](/api/compiler/#event-hooks) 分别记录了 `Tapable` 内在的钩子，指出哪些 `tap` 方法可用。
 
 因此，根据你触发到 `tap` 事件，插件可能会以不同的方式运行。例如，当钩入 `compile` 阶段时，只能使用同步的 `tap` 方法：
 
@@ -67,9 +67,9 @@ compiler.hooks.myCustomHook = new SyncHook(['a', 'b', 'c'])
 compiler.hooks.myCustomHook.call(a, b, c);
 ```
 
-再次声明，查看 `tapable` [文档](https://github.com/webpack/tapable#tapable) 来，了解更多不同的钩子类(hook class)，以及它们是如何工作的。
+再次声明，查看 `tapable` [文档](/api/tapable/) 来，了解更多不同的钩子类(hook class)，以及它们是如何工作的。
 
 
 ## 下一步
 
-查看 [compiler hooks](/api/compiler-hooks) 部分，了解所有可用的 `compiler` 钩子和其所需的参数的详细列表。
+查看 [compiler hooks](/api/compiler/#event-hooks) 部分，了解所有可用的 `compiler` 钩子和其所需的参数的详细列表。
