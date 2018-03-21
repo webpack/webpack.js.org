@@ -32,6 +32,7 @@ Option                | Description
 --------------------- | -----------------------
 `development`         | Provides `process.env.NODE_ENV` with value `development`. Enables `NamedModulesPlugin`.
 `production`          | Provides `process.env.NODE_ENV` with value `production`. Enables `UglifyJsPlugin`, `ModuleConcatenationPlugin` and `NoEmitOnErrorsPlugin`.
+`none`                | Does not modify or add any plugin
 
 T> Please remember that setting `NODE_ENV` doesn't automatically set `mode`.
 
@@ -63,6 +64,19 @@ module.exports = {
 -    new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("production") }),
 -    new webpack.optimize.ModuleConcatenationPlugin(),
 -    new webpack.NoEmitOnErrorsPlugin()
+-  ]
+}
+```
+
+
+### Mode: none
+
+
+```diff
+// webpack.production.config.js
+module.exports = {
++  mode: 'none',
+-  plugins: [
 -  ]
 }
 ```
