@@ -16,12 +16,117 @@ contributors:
   - ndelangen
 ---
 
+This guide only shows major changes that affect end users. For more details please see [the changelog](https://github.com/webpack/webpack/releases).
+
+# Migration from 3 to 4
+
+[Changelog](https://github.com/webpack/webpack/releases/tag/v4.0.0)
+
+## node.js 4
+
+If you are still using node.js 4 or lower, you need to upgrade your node.js installation
+
+## CLI
+
+The CLI has moved to a separate package: webpack-cli. You need to install it to use the CLI.
+
+``` text
+yarn add webpack-cli -D
+```
+
+``` text
+npm install webpack-cli -D
+```
+
+## Update plugins
+
+Many 3rd-party plugins need to be upgraded to their latest version to be compatible.
+
+## mode
+
+Add the new `mode` option to your config. Set it to production or development in your configuration depending on config type.
+
+``` diff
++mode: "production",
+```
+
+``` diff
++mode: "development",
+```
+
+Alternativly you can pass it via CLI: `--mode production`/`--mode development`
+
+## Deprecated/Removed plugins
+
+These plugins can be removed from configuration as they are default in production mode:
+
+``` diff
+-new NoEmitOnErrorsPlugin(),
+-new ModuleConcatenationPlugin(),
+-new DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("production") })
+-new UglifyJsPlugin()
+```
+
+These plugins are default in development mode
+
+``` diff
+-new NamedModulesPlugin()
+```
+
+These plugins were deprecated and are now removed:
+
+``` diff
+-new NoErrorsPlugin(),
+-new NewWatchingPlugin(),
+```
+
+## CommonsChunkPlugin
+
+The `CommonsChunkPlugin` was removed. Instead the `optimization.splitChunks` options can be used.
+
+See documentation for `optimization.splitChunks` to details. The default configuration may already suit your needs.
+
+When generating the HTML from the stats you can use `optimization.splitChunks.chunks: "all"` which is the optimal configuration in most cases.
+
+## import() and CommonJS
+
+When using `import()` to load non-ESM the result has changed in webpack 4. You now need access the `default` property to get the value of `module.exports`.
+
+## json and loaders
+
+When using a custom loader to transform `.json` files you now need to change the module type:
+
+``` diff
+ {
+   test: /config\.json$/,
+   loader: "special-loader",
++  type: "javascript/auto",
+   options: {...}
+ }
+```
+
+When still using the `json-loader`, it can be removed:
+
+``` diff
+-{
+-  test: /\.json$/,
+-  loader: "json-loader"
+-}
+```
+
+## module.loaders
+
+`module.loaders` was deprecated since webpack 2 and is now removed in favor of `module.rules`.
+
+# Migration from 2 to 3
+
+There are no breaking changes between 2 and 3 for end users.
+
+There are a few minor breaking changes for plugin authors: Please see [changelog](https://github.com/webpack/webpack/releases/tag/v3.0.0) for details.
+
+# Migration from 1 to 2
+
 The following sections describe the major changes from webpack 1 to 2.
-
-T> Note that there were far fewer changes between 2 and 3, so that migration shouldn't be too bad. If you are running into issues, please see [the changelog](https://github.com/webpack/webpack/releases) for details.
-
-W> This content may be moved to the blog post in the near future as version 2 has been out for a while. On top of that, version 3 was recently released and version 4 is on the horizon. As noted above, folks should instead to refer to [the changelog](https://github.com/webpack/webpack/releases) for migrations.
-
 
 ## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
 
