@@ -6,6 +6,7 @@ contributors:
   - jhnns
   - rouzbeh84
   - johnstew
+  - MisterDev
 ---
 
 **Plugins** are the [backbone](https://github.com/webpack/tapable) of webpack. webpack itself is built on the **same plugin system** that you use in your webpack configuration!
@@ -64,7 +65,7 @@ const config = {
     ]
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({template: './src/index.html'})
   ]
 };
@@ -75,7 +76,7 @@ module.exports = config;
 
 ### Node API
 
-?> Even when using the Node API, users should pass plugins via the `plugins` property in the configuration. Using `compiler.apply` should not be the recommended way.
+When using the Node API, you can also pass plugins via the `plugins` property in the configuration.
 
 **some-node-script.js**
 
@@ -83,9 +84,14 @@ module.exports = config;
   const webpack = require('webpack'); //to access webpack runtime
   const configuration = require('./webpack.config.js');
 
-  let compiler = webpack(configuration);
-  compiler.apply(new webpack.ProgressPlugin());
+  let plugins = configuration.plugins || []
+  
+  configuration.plugins = [
+  	...plugins,
+  	new webpack.ProgressPlugin()
+  ]
 
+  let compiler = webpack(configuration);
   compiler.run(function(err, stats) {
     // ...
   });
