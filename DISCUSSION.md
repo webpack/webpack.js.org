@@ -5,6 +5,24 @@ The following is a collection of thoughts, ideas and plans we've gone through
 in the last year or so. I wanted to try to get this "down on paper" to make it
 easier to discuss...
 
+Here's the TLDR; in terms of actual blocking TODOs if we wanted to stick with
+this branch:
+
+- [ ] Finish porting the markdown process to `remark` (may require new plugins)
+- [ ] Extract anchors into `_content.json` via `DirectoryTreePlugin`
+- [ ] Add custom route for landing page
+- [ ] Finish `Navigation` component (e.g. certain links are still excluded)
+- [ ] Rethink external population process
+- [ ] Finish re-incorporating mobile sidebar
+- [ ] Re-integrate google-analytics
+- [ ] Populate page title in `server.jsx`
+- [ ] Re-incorporate redirects (`redirects.json`)
+
+Some of these should be fairly quick adds now that the site works. The two
+toughest ones are most likely the markdown parsing and external population. The
+thing to keep in mind with those two however is that they're going to be an
+issue no matter what our build system is. The following section
+
 
 ## Markdown Processing
 
@@ -18,7 +36,6 @@ https://github.com/webpack-contrib/webpack-defaults/issues/73
 We do have a bunch of custom `markdown` processing, however for a bunch of it
 `remark` plugins already exist:
 
-- `remark-collapse`
 - `remark-autolink-headings`
 - `remark-mermaid` (#469)
 - `remark-highlight.js` (though we do have a custom prism theme)
@@ -27,8 +44,13 @@ And here's what isn't covered yet (though probably could be with new plugins
 and help from __@wooorm__):
 
 - Mobile table customizations
-- Code with links and collapsible sections
+- Code with links and collapsible sections (`<details>`)
 - Custom blockquotes (i.e. `T>`, `W>`, and `?>`)
+
+I think we may want to rethink some of this though. For example, is it 100%
+necessary for us to support inline linking and collapsing within code? There
+might be other ways to lay out those sections that don't require advanced
+parsing behavior.
 
 
 ## Markdown Formatting
@@ -112,6 +134,14 @@ turn into an SPA as soon as you loaded a single page.
 > probably a better way to go as it would do many of the same things for us
 > without as much overhead. We'd lose some control over the nitty-gritty bits
 > but we'd be passing over a lot of work over to `gatsby`.
+
+__UPDATE__
+
+This is now working via dual configs exported as an array from
+`webpack.prod.js`. The site is now a both a statically generated site as well
+as an SPA (once you've entered any given page). The last key piece of the build
+process (besides figuring out markdown parsing) would be to incorporate an
+Service Worker making the site a full PWA (and knocking out that issue).
 
 
 ## Versioning & Releases
