@@ -7,7 +7,7 @@ sort: 3
 Resolvers are created using the `enhanced-resolve` package. The `Resolver`
 class extends the `tapable` class and uses `tapable` to provide a few hooks.
 The `enhanced-resolve` package can be used directly to create new resolvers,
-however any [`compiler` instance](/api/compiler/) has a few resolver instances that can be
+however any [`compiler` instance](/api/node/#compiler-instance) has a few resolver instances that can be
 tapped into.
 
 Before reading on, make sure you at least skim through the
