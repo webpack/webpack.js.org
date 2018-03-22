@@ -26,7 +26,7 @@ or pass it as a [CLI](/api/cli/) argument:
 webpack --mode=production
 ```
 
-The following string values are supported:
+This value is expected to always be set, and if not set webpack will warn and fallback to `production` mode.  The following string values are supported:
 
 Option                | Description
 --------------------- | -----------------------
@@ -73,7 +73,7 @@ module.exports = {
 
 
 ```diff
-// webpack.production.config.js
+// webpack.custom.config.js
 module.exports = {
 +  mode: 'none',
 -  plugins: [
