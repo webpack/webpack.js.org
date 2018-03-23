@@ -6,3 +6,5 @@ support-*.json
 starter-kits-data.json
 .antwar
 .vscode
+.idea
+.DS_Store
