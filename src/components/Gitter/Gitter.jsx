@@ -1,4 +1,5 @@
 import React from 'react';
+import throttle from 'lodash.throttle';
 
 export default class Gitter extends React.Component {
   state = {
@@ -23,24 +24,24 @@ export default class Gitter extends React.Component {
 
   componentDidMount() {
     setTimeout(
-      this._recalculate.bind(this),
+      this._recalculate,
       250
     );
 
     document.addEventListener(
       'scroll',
-      this._recalculate.bind(this)
+      this._recalculate
     );
   }
 
   componentWillUnmount() {
     document.removeEventListener(
       'scroll',
-      this._recalculate.bind(this)
+      this._recalculate
     );
   }
 
-  _recalculate(e) {
+  _recalculate = throttle((e) => {
     let { scrollY, innerHeight } = window;
     let { scrollHeight } = document.body;
     let distToBottom = scrollHeight - scrollY - innerHeight;
@@ -49,5 +50,5 @@ export default class Gitter extends React.Component {
     this.setState({
       offset: distToBottom < footerHeight ? footerHeight - distToBottom : 0
     });
-  }
+  }, 250);
 }
