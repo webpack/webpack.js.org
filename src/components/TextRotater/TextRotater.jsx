@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Load Styling
-import '../TextRotater.scss';
+import './TextRotater.scss';
 
 export default class TextRotater extends React.PureComponent {
   static defaultProps = {

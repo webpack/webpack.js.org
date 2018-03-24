@@ -9,7 +9,7 @@ import Cube from '../Cube/Cube';
 import TextRotator from '../TextRotater/TextRotater';
 
 // Load Styling
-import '../SplashViz.scss';
+import './SplashViz.scss';
 
 export default class SplashViz extends React.Component {
 

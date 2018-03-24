@@ -8,6 +8,7 @@ import NotificationBar from '../NotificationBar/NotificationBar';
 import Navigation from '../Navigation/Navigation';
 import SidebarMobile from '../SidebarMobile/SidebarMobile';
 import Container from '../Container/Container';
+import Splash from '../Splash/Splash';
 import Sponsors from '../Sponsors/Sponsors';
 import Sidebar from '../Sidebar/Sidebar';
 import Footer from '../Footer/Footer';
@@ -79,42 +80,51 @@ class Site extends React.Component {
             sections={ this._strip(Content.children) } />
         ) : null }
 
-        <Container className="site__content">
-          <Sponsors />
           <Switch>
-            { this._pages.map(page => (
-              <Route
-                key={ page.url }
-                exact={ true }
-                path={ page.url }
-                render={ props => {
-                  let path = page.path.replace('src/content/', '');
-                  let content = this.props.import(path);
-
-                  return (
-                    <React.Fragment>
-                      <Sidebar
-                        className="site__sidebar"
-                        currentPage={ location.pathname }
-                        pages={ this._strip(section ? section.children : Content.children.filter(item => (
-                          item.type !== 'directory' &&
-                          item.url !== '/'
-                        ))) } />
-                      <Page
-                        { ...page }
-                        content={ content } />
-                    </React.Fragment>
-                  );
-                }} />
-            ))}
             <Route
-              path="/vote"
-              component={ Vote } />
-            <Route render={ props => (
-              '404 Not Found'
-            )} />
+              path="/"
+              exact
+              component={ Splash } />
+            <Route
+              render={ props => (
+                <Container className="site__content">
+                  <Switch>
+                    { this._pages.map(page => (
+                      <Route
+                        key={ page.url }
+                        exact={ true }
+                        path={ page.url }
+                        render={ props => {
+                          let path = page.path.replace('src/content/', '');
+                          let content = this.props.import(path);
+
+                          return (
+                            <React.Fragment>
+                              <Sponsors />
+                              <Sidebar
+                                className="site__sidebar"
+                                currentPage={ location.pathname }
+                                pages={ this._strip(section ? section.children : Content.children.filter(item => (
+                                  item.type !== 'directory' &&
+                                  item.url !== '/'
+                                ))) } />
+                              <Page
+                                { ...page }
+                                content={ content } />
+                            </React.Fragment>
+                          );
+                        }} />
+                    ))}
+                    <Route
+                      path="/vote"
+                      component={ Vote } />
+                    <Route render={ props => (
+                      '404 Not Found'
+                    )} />
+                  </Switch>
+                </Container>
+              )} />
           </Switch>
-        </Container>
 
         <Footer />
       </div>

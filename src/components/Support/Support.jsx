@@ -1,13 +1,19 @@
+// Import External Dependencies
 import React from 'react';
-import Backers from './_support-backers.json';
-import Additional from './support-additional.js';
+
+// Import Data
+import Backers from './_supporters.json';
+import Additional from './AdditionalSupporters';
+
+// Load Styling
 import './Support.scss';
 
 const SUPPORTERS = [ ...Backers ];
 
-// merge or add additional backers/sponsors
+// Merge or add additional backers/sponsors
 for(const additional of Additional) {
   const existing = SUPPORTERS.find(supporter => supporter.slug && supporter.slug === additional.slug);
+
   if (existing) {
     existing.totalDonations += additional.totalDonations;
   } else {
@@ -15,9 +21,10 @@ for(const additional of Additional) {
   }
 }
 
-// resort list
+// Resort the list
 SUPPORTERS.sort((a, b) => b.totalDonations - a.totalDonations);
 
+// Define ranks
 const ranks = {
   backer: {
     maximum: 200
@@ -44,6 +51,7 @@ const ranks = {
 
 function formatMoney(number) {
   let str = Math.round(number) + '';
+
   if (str.length > 3) {
     str = str.substr(0, str.length - 3) + ',' + str.substr(-3);
   }

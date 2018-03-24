@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Load Styling
-import '../Cube.scss';
+import './Cube.scss';
 
 export default class Cube extends React.Component {
   static propTypes = {
