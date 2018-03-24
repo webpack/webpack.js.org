@@ -1,18 +1,17 @@
+// Import External Dependencies
 import React from 'react';
-import Interactive from 'antwar-interactive';
+
+// Import Components
 import Container from '../Container/Container';
 import SplashViz from '../SplashViz/SplashViz';
 import Support from '../Support/Support';
+
+// Load Styling
 import './Splash.scss';
-import '../SplashViz/SplashViz.scss';
-import '../Cube/Cube.scss';
-import '../TextRotater/TextRotater.scss';
 
 const Splash = () => (
   <div className="splash">
-    <Interactive
-      id="src/components/SplashViz/SplashViz.jsx"
-      component={ SplashViz } />
+    <SplashViz />
 
     <div className="splash__section splash__section--dark page__content">
       <Container>
