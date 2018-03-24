@@ -73,9 +73,11 @@ class Site extends React.Component {
             { title: 'Blog', url: '//medium.com/webpack' }
           ]} />
 
-        {/*<SidebarMobile
-          open={ mobileSidebarOpen }
-          sections={ this._strip(Content.children) } />*/}
+        { window.document !== undefined ? (
+          <SidebarMobile
+            open={ mobileSidebarOpen }
+            sections={ this._strip(Content.children) } />
+        ) : null }
 
         <Container className="site__content">
           <Sponsors />
