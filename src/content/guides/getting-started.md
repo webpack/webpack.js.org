@@ -167,14 +167,14 @@ __dist/index.html__
    </head>
    <body>
 -    <script src="./src/index.js"></script>
-+    <script src="dist/bundle.js"></script>
++    <script src="main.js"></script>
    </body>
   </html>
 ```
 
 In this setup, `index.js` explicitly requires `lodash` to be present, and binds it as `_` (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.
 
-With that said, let's run `npx webpack` with our script as the [entry point](/concepts/entry-points) and `bundle.js` as the [output](/concepts/output). The `npx` command, which ships with Node 8.2 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
+With that said, let's run `npx webpack` with our script as the [entry point](/concepts/entry-points) and `main.js` as the [output](/concepts/output). The `npx` command, which ships with Node 8.2 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
 
 ``` bash
 npx webpack
@@ -185,7 +185,7 @@ Time: 3003ms
 Built at: 2018-2-26 22:42:11
     Asset      Size  Chunks             Chunk Names
 bundle.js  69.6 KiB       0  [emitted]  main
-Entrypoint main = bundle.js
+Entrypoint main = main.js
    [1] (webpack)/buildin/module.js 519 bytes {0} [built]
    [2] (webpack)/buildin/global.js 509 bytes {0} [built]
    [3] ./src/index.js 256 bytes {0} [built]
