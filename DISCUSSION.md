@@ -9,14 +9,14 @@ Here's the TLDR; in terms of actual blocking TODOs if we wanted to stick with
 this branch:
 
 - [ ] Finish porting the markdown process to `remark` (may require new plugins)
-- [ ] Extract anchors into `_content.json` via `DirectoryTreePlugin`
-- [ ] Add custom route for landing page
-- [ ] Finish `Navigation` component (e.g. certain links are still excluded)
 - [ ] Rethink external population process
+- [ ] Extract anchors into `_content.json` via `DirectoryTreePlugin`
 - [ ] Finish re-incorporating mobile sidebar
 - [ ] Re-integrate google-analytics
-- [ ] Populate page title in `server.jsx`
-- [ ] Re-incorporate redirects (`redirects.json`)
+- [ ] Re-incorporate `redirects.json`
+- [ ] Populate page title in `server.jsx` (fernando)
+- [ ] Add custom route for landing page (greg)
+- [ ] Finish `Navigation` component (greg)
 
 Some of these should be fairly quick adds now that the site works. The two
 toughest ones are most likely the markdown parsing and external population. The
