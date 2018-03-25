@@ -8,24 +8,24 @@ related:
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
 
-Originally in webpack, chunks (and modules import inside them) were connected by a parent-child relationship in the internal webpack graph.
+Originally in webpack, chunks (and modules imported inside them) were connected by a parent-child relationship in the internal webpack graph.
 
 This connection didn't allow to further optimizations and resulted into more downloaded code.
 
-webpack v4 removes the `CommonsChunkPlugin` in favor of `optimization.splitChunks` and `optimization.runtimeChunk` options. Here is how the new flow works.
+webpack v4 removes the `CommonsChunkPlugin` in favor of `optimization.splitChunks` and `optimize.runtimeChunk` options. Here is how the new flow works.
 
 ## Defaults
 
 Out of the box `SplitChunksPlugin` should work great for most users.
 
-By default the plugin only affect on-demand chunks, because changing initial chunks would affect the script tags that the HTML file should include to run the project.
+By default it only affects on-demand chunks because changing initial chunks would affect the script tags the HTML file should include to run the project.
 
 webpack will automatically split chunks based on these conditions:
 
 * New chunk can be shared OR modules are from the `node_modules` folder
 * New chunk would be bigger than 30kb (before min+gz)
-* Maximum number of parallel request when loading chunks on demand would be lower or equal to 5
-* Maximum number of parallel request at initial page load would be lower or equal to 3
+* Maximum number of parallel requests when loading chunks on demand would be lower or equal to 5
+* Maximum number of parallel requests at initial page load would be lower or equal to 3
 
 When trying to fulfill the last two conditions, bigger chunks are preferred.
 
@@ -94,17 +94,17 @@ Why:
 
 Putting the content of `helpers` into each chunk will result into its code being downloaded twice. By using a separate chunk this will only happen once. We pay the cost of an additional request, which could be considered a tradeoff. That's why there is a minimum size of 30kb.
 
-T> With the new `optimizations.splitChunks.chunks: "all"` option the same would happend for initial chunks. Chunks can even be shared between entrypoints and on-demand loading.
-
 ## Configuration
 
-For these people that like to have more control over this functionality, webpack provides a set of options to better fit your needs.
+For developers that want to have more control over this functionality, webpack provides a set of options to better fit your needs.
 
-W> If you are manually changing the split configuration, measure the impact of the changes to see and make sure there's a real benefit. The defaults are chosen to fit web performance best practices.
+If you are manually changing the split configuration, measure the impact of the changes to see and make sure there's a real benefit.
+
+W> Default configuration was chosen to fit web performance best practices but the optimum strategy for your project might defer depending on the nature of it.
 
 ### Configuring cache groups
 
-The defaults assigns all modules from `node_modules` to a cache group called `vendors` and all modules duplicated in at least 2 chunks to a cache group `default`.
+The defaults assign all modules from `node_modules` to a cache group called `vendors` and all modules duplicated in at least 2 chunks to a cache group `default`.
 
 A module can be assigned to multiple cache groups. The optimization then prefers the cache group with the higher `priority` (`priority` option) or that one that forms bigger chunks.
 
@@ -129,19 +129,29 @@ The magic value `true` automatically chooses a name based on chunks and cache gr
 
 When the name matches an entrypoint name, the entrypoint is removed.
 
-### Select chunks
-
-With the `chunks` option the selected chunks can be configured. There are 3 values possible `"initial"`, `"async"` and `"all"`. When configured the optimization only selects initial chunks, on-demand chunks or all chunks.
-
-The option `reuseExistingChunk` allows to reuse existing chunks instead of creating a new one when modules match exactly.
-
-This can be controlled per cache group.
-
 ### Select modules
 
 The `test` option controls which modules are selected by this cache group. Omitting it selects all modules. It can be a RegExp, string or function.
 
 It can match the absolute module resource path or chunk names. When a chunk name is matched, all modules in this chunk are selected.
+
+### Select chunks
+
+With the `chunks` option the selected chunks can be configured.
+
+There are 3 values possible `"initial"`, `"async"` and `"all"`. When configured the optimization only selects initial chunks, on-demand chunks or all chunks.
+
+The option `reuseExistingChunk` allows to reuse existing chunks instead of creating a new one when modules match exactly.
+
+This can be controlled per cache group.
+
+### `optimization.splitChunks.chunks: all`
+
+As it was mentioned before this plugin will affect dynamic imported modules. Setting the `optimization.splitChunks.chunks` option to `"all"` initial chunks will get affected by it (even the ones not imported dynamically). This way chunks can even be shared between entrypoints and on-demand loading.
+
+This is the recommended configuration.
+
+T> You can combine this configuration with the [HtmlWebpackPlugin](/plugins/html-webpack-plugin/), it will inject all the generated vendor chunks for you.
 
 ## `optimization.splitChunks`
 
@@ -173,7 +183,7 @@ By default cache groups inherit options from `splitChunks.*`, but `test`, `prior
 
 `cacheGroups` is an object where keys are the cache group names. All options from the ones listed above are possible: `chunks`, `minSize`, `minChunks`, `maxAsyncRequests`, `maxInitialRequests`, `name`.
 
-You can set `optimization.splitChunks.cacheGroups.default` to `false` to disable the default cache group.
+You can set `optimization.splitChunks.cacheGroups.default` to `false` to disable the default cache group, same for `vendors` cache group.
 
 The priority of the default groups are negative to allow any custom cache group to take higher priority (the default value is `0`).
 
