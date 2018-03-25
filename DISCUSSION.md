@@ -15,8 +15,8 @@ this branch:
 - [ ] Re-integrate google-analytics
 - [ ] Re-incorporate `redirects.json`
 - [ ] Populate page title in `server.jsx` (fernando)
-- [ ] Add custom route for landing page (greg)
 - [ ] Finish `Navigation` component (greg)
+- [x] Add custom route for landing page (greg)
 
 Some of these should be fairly quick adds now that the site works. The two
 toughest ones are most likely the markdown parsing and external population. The
