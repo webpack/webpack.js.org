@@ -31,7 +31,7 @@ When trying to fulfill the last two conditions, bigger chunks are preferred.
 
 Let's take a look at some examples.
 
-### Example 1
+### Defaults: Example 1
 
 ``` js
 // index.js
@@ -58,7 +58,7 @@ Why:
 
 What's the reasoning behind this? `react` probably won't change as often as your application code. By moving it into a separate chunk this chunk can be cached separately from your app code (assuming you are using chunkhash, records, Cache-Control or other long term cache approach).
 
-### Example 2
+### Defaults: Example 2
 
 ``` js
 // entry.js
@@ -189,7 +189,7 @@ The priority of the default groups are negative to allow any custom cache group 
 
 Here are some examples and their effect:
 
-### Example 1
+### Split Chunks: Example 1
 
 Create a `commons` chunk, which includes all code shared between entrypoints.
 
@@ -207,7 +207,7 @@ splitChunks: {
 
 W> This downloads more code than neccessary.
 
-### Example 2
+### Split Chunks: Example 2
 
 Create a `vendors` chunk, which includes all code from node_modules in the whole application.
 
