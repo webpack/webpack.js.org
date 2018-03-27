@@ -12,13 +12,7 @@ const Content = require('./src/_content.json');
 
 const paths = Content.children.reduce((paths, page) => {
   if (page.type === 'directory') {
-    paths = Object.assign(
-      paths,
-      page.children.reduce((childPaths, child) => {
-        childPaths[child.url] = child.title;
-        return childPaths;
-      }, {})
-    );
+    page.children.forEach(child => (paths[child.url] = child.title));
   } else {
     paths[page.url] = page.title;
   }
