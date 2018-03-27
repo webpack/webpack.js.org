@@ -19,49 +19,7 @@ module.exports = () => ({
       redirects: {
         'support': '/contribute',
         'writers-guide': '/contribute/writers-guide'
-      },
-      paths: {
-
-				/*************************
-				 Redirects for Old Content
-				 *************************/
-				'get-started': {
-					hidden: true,
-					redirects: {
-						'': '/guides/getting-started',
-						'install-webpack': '/guides/installation',
-						'why-webpack': '/guides/why-webpack',
-					}
-				},
-				pluginsapi: {
-					hidden: true,
-					redirects: {
-						'': '/api/plugins',
-						'compiler': '/api/compiler',
-						'template': '/api/template'
-					}
-				},
-				'api/plugins': {
-					redirects: {
-						'compiler': '/api/compiler',
-						'compilation': '/api/compilation',
-						'module-factories': '/api/module-factories',
-						'parser': '/api/parser',
-						'tapable': '/api/tapable',
-						'template': '/api/template',
-						'resolver': '/api/resolver'
-					}
-				},
-				development: {
-					redirects: {
-						'': '/contribute',
-						'plugin-patterns': '/contribute/plugin-patterns',
-						'release-process': '/contribute/release-process',
-						'how-to-write-a-loader': '/contribute/writing-a-loader',
-						'how-to-write-a-plugin': '/contribute/writing-a-plugin'
-					}
-				}
-			}
+      }
     },
 		concepts: {
 			title: 'Concepts',

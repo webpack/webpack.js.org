@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const RedirectWebpackPlugin = require('redirect-webpack-plugin');
 
 const cwd = process.cwd();
 
@@ -95,9 +96,30 @@ module.exports = (env) => ({
       from: './src/assets',
       to: './assets'
     }]),
-
     new MiniCssExtractPlugin({
       filename: '[chunkhash].css'
-    })
+    }),
+    new RedirectWebpackPlugin({
+      redirects: {
+        'get-started': '/guides/getting-started/',
+        'get-started/install-webpack': '/guides/installation/',
+        'get-started/why-webpack': '/guides/why-webpack/',
+        'pluginsapi': '/api/plugins/',
+        'pluginsapi/compiler': '/api/compiler/',
+        'pluginsapi/template': '/api/template/',
+        'api/plugins/compiler': '/api/compiler/',
+        'api/plugins/compilation': '/api/compilation/',
+        'api/plugins/module-factories': '/api/module-factories/',
+        'api/plugins/parser': '/api/parser/',
+        'api/plugins/tapable': '/api/tapable/',
+        'api/plugins/template': '/api/template/',
+        'api/plugins/resolver': '/api/resolver/',
+        'development': '/contribute/',
+        'development/plugin-patterns': '/contribute/plugin-patterns/',
+        'development/release-process': '/contribute/release-process/',
+        'development/how-to-write-a-loader': '/contribute/writing-a-loader/',
+        'development/how-to-write-a-plugin': '/contribute/writing-a-plugin/',
+      },
+    }),
   ]
 });
