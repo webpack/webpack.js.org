@@ -28,7 +28,12 @@ npm install --save-dev webpack
 npm install --save-dev webpack@<version>
 ```
 
-Installing locally is what we recommend for most projects. This makes it easier to upgrade projects individually when breaking changes are introduced. Typically webpack is run via one or more [npm scripts](https://docs.npmjs.com/misc/scripts) which will look for a webpack installation in your local `node_modules` directory:
+Installing locally is what we recommend for most projects. This makes it easier to upgrade projects individually when breaking changes are introduced. Typically webpack is run via one or more [npm scripts](https://docs.npmjs.com/misc/scripts) which requires the installation of `webpack-cli`:
+```bash
+npm install --save-dev webpack-cli
+```
+
+Now you can modify your `package.json` in order to find the package that was installed in your `node_modules/.bin` directory:
 
 ```json
 "scripts": {
@@ -44,7 +49,7 @@ T> To run the local installation of webpack you can access its bin version as `n
 The following NPM installation will make `webpack` available globally:
 
 ``` bash
-npm install --global webpack
+npm install --global webpack webpack-cli
 ```
 
 W> Note that this is __not a recommended practice__. Installing globally locks you down to a specific version of webpack and could fail in projects that use a different version.
