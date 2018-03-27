@@ -282,9 +282,9 @@ like [parallel-webpack](https://www.npmjs.com/package/parallel-webpack).
 
 For a good error handling, you need to account for these three types of errors:
 
-* Fatal webpack errors (wrong configuration, etc)
-* Compilation errors (missing modules, syntax errors, etc)
-* Compilation warnings
+- Fatal webpack errors (wrong configuration, etc)
+- Compilation errors (missing modules, syntax errors, etc)
+- Compilation warnings
 
 Here’s an example that does all that:
 

@@ -7,7 +7,7 @@ contributors:
 ---
 
 The `Compiler` module is the main engine that creates a compilation instance
-with all the options passed through the [CLI]() or [Node API](). It extends the
+with all the options passed through the [CLI](/api/cli) or [Node API](/api/node). It extends the
 `Tapable` class in order to register and call plugins. Most user facing plugins
 are first registered on the `Compiler`.
 
