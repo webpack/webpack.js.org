@@ -38,7 +38,7 @@ function fetchPackageNames(options, cb) {
   github.authenticate({
     type: 'token',
     token: process.env.GITHUB_TOKEN
-  })
+  });
 
   // XXX: weak since this handles only one page
   github.repos.getForOrg({
