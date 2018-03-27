@@ -2,17 +2,14 @@ const antwar = require('antwar');
 
 const environment = process.argv[2];
 
-const antwarConfig = require.resolve("./antwar.config.js");
-const webpackConfig = require.resolve("./webpack.config.js");
-
 // Patch Babel env to make HMR switch work
 process.env.BABEL_ENV = environment;
 
 antwar[environment]({
   environment,
 	configurationPaths: {
-		antwar: antwarConfig,
-		webpack: webpackConfig,
+		antwar: require.resolve("./antwar.config.js"),
+		webpack: require.resolve("./webpack.config.js"),
 	},
 }).then(() => {
 	if (environment !== "build") {
