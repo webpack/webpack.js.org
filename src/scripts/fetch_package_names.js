@@ -35,10 +35,12 @@ function main() {
 function fetchPackageNames(options, cb) {
   const github = new GitHubApi();
 
-  github.authenticate({
-    type: 'token',
-    token: process.env.GITHUB_TOKEN
-  });
+  if(process.env.GITHUB_TOKEN) {
+    github.authenticate({
+      type: 'token',
+      token: process.env.GITHUB_TOKEN
+    });
+  }
 
   // XXX: weak since this handles only one page
   github.repos.getForOrg({
