@@ -41,7 +41,7 @@ T> Please remember that setting `NODE_ENV` doesn't automatically set `mode`.
 
 
 ```diff
-// webpack.production.config.js
+// webpack.development.config.js
 module.exports = {
 + mode: 'development'
 - plugins: [
