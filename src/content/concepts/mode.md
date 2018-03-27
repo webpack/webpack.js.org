@@ -26,7 +26,7 @@ or pass it as a [CLI](/api/cli/) argument:
 webpack --mode=production
 ```
 
-If unset, webpack sets `production` as a default for mode and warns about to let you know about this behavior. The supported values for mode are:
+If unset, webpack sets `production` as a default for mode and warns to let you know about this behavior. The supported values for mode are:
 
 Option                | Description
 --------------------- | -----------------------
