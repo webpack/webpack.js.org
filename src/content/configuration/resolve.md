@@ -207,7 +207,7 @@ Tell webpack what directories should be searched when resolving modules.
 
 Absolute and relative paths can both be used, but be aware that they will behave a bit differently.
 
-A relative path will be scanned similarly to how Node scans for `node_modules`, by looking through the current directory as well as it's ancestors (i.e. `./node_modules`, `../node_modules`, and on).
+A relative path will be scanned similarly to how Node scans for `node_modules`, by looking through the current directory as well as its ancestors (i.e. `./node_modules`, `../node_modules`, and on).
 
 With an absolute path, it will only search in the given directory.
 
@@ -243,7 +243,7 @@ unsafeCache: /src\/utilities/
 W> Changes to cached paths may cause failure in rare cases.
 
 
-## `resolve.plugins`
+### `resolve.plugins`
 
 A list of additional resolve plugins which should be applied. It allows plugins such as [`DirectoryNamedWebpackPlugin`](https://www.npmjs.com/package/directory-named-webpack-plugin).
 
@@ -254,7 +254,7 @@ plugins: [
 ```
 
 
-## `resolve.symlinks`
+### `resolve.symlinks`
 
 `boolean`
 
@@ -269,7 +269,7 @@ symlinks: true
 ```
 
 
-## `resolve.cachePredicate`
+### `resolve.cachePredicate`
 
 `function`
 
