@@ -29,6 +29,7 @@ npm install --save-dev webpack@<version>
 ```
 
 Installing locally is what we recommend for most projects. This makes it easier to upgrade projects individually when breaking changes are introduced. Typically webpack is run via one or more [npm scripts](https://docs.npmjs.com/misc/scripts) which requires the installation of `webpack-cli`:
+
 ```bash
 npm install --save-dev webpack-cli
 ```
