@@ -34,40 +34,40 @@ module.exports = (env) => ({
       {
         test: /\.font.js$/,
         use: [
-					MiniCssExtractPlugin.loader,
-					'css-loader',
-					{
-						loader: 'fontgen-loader',
-						options: { embed: true }
-					}
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'fontgen-loader',
+            options: { embed: true }
+          }
         ]
       },
       {
         test: /\.css$/,
         use: [
-					MiniCssExtractPlugin.loader,
-					'css-loader'
+          MiniCssExtractPlugin.loader,
+          'css-loader'
         ]
       },
       {
         test: /\.scss$/,
         use: [
-					MiniCssExtractPlugin.loader,
-					'css-loader',
+          MiniCssExtractPlugin.loader,
+          'css-loader',
           {
-						loader: 'postcss-loader',
-						options: {
-							plugins: () => [
-								require('autoprefixer')
-							],
-						}
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [
+                require('autoprefixer')
+              ],
+            }
           },
-					{
-						loader: 'sass-loader',
-						options: {
-							includePaths: [ path.join('./src/styles/partials') ]
-						}
-					}
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: [ path.join('./src/styles/partials') ]
+            }
+          }
         ]
       },
       {
