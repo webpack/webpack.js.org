@@ -1,259 +1,207 @@
----
-title: CommonsChunkPlugin
-contributors:
-  - bebraw
-  - simon04
-  - christopher4lis
-  - kevinzwhuang
-  - jdbevan
----
+# RIP CommonsChunkPlugin
 
-The `CommonsChunkPlugin` is an opt-in feature that creates a separate file (known as a chunk), consisting of common modules shared between multiple entry points. By separating common modules from bundles, the resulting chunked file can be loaded once initially, and stored in cache for later use. This results in pagespeed optimizations as the browser can quickly serve the shared code from cache, rather than being forced to load a larger bundle whenever a new page is visited.
+webpack 4 removes the CommonsChunkPlugin in favor of two new options (`optimization.splitChunks` and `optimization.runtimeChunk`). Here is how it works.
 
-```javascript
-new webpack.optimize.CommonsChunkPlugin(options)
+## Defaults
+
+By default it now does some optimizations that should work great for most users.
+
+Note: The defaults only affect on-demand chunks, because changing initial chunks would affect the script tags in the HTML. If you can handle this (i. e. when generating the script tags from the entrypoints in stats) you can enable these default optimizations for initial chunks too with `optimization.splitChunks.chunks: "all"`.
+
+webpack automatically splits chunks based on these conditions:
+
+* New chunk can be shared OR modules are from the `node_modules` folder
+* New chunk would be bigger than 30kb (before min+gz)
+* Maximum number of parallel request when loading chunks on demand would be lower or equal to 5
+* Maximum number of parallel request at initial page load would be lower or equal to 3
+
+When trying to fullfill the last two conditions, bigger chunks are preferred.
+
+Let's take a look at some examples.
+
+### Example 1
+
+``` js
+// entry.js
+import("./a");
 ```
 
+``` js
+// a.js
+import "react";
+// ...
+```
 
-## Options
+Result: A separate chunk would be created containing react. At the import call this chunk is loaded in parallel to the original chunk containing `./a`.
 
-```javascript
-{
-  name: string, // or
-  names: string[],
-  // The chunk name of the commons chunk. An existing chunk can be selected by passing a name of an existing chunk.
-  // If an array of strings is passed this is equal to invoking the plugin multiple times for each chunk name.
-  // If omitted and `options.async` or `options.children` is set all chunks are used, otherwise `options.filename`
-  // is used as chunk name.
-  // When using `options.async` to create common chunks from other async chunks you must specify an entry-point
-  // chunk name here instead of omitting the `option.name`.
+Why:
 
-  filename: string,
-  // The filename template for the commons chunk. Can contain the same placeholders as `output.filename`.
-  // If omitted the original filename is not modified (usually `output.filename` or `output.chunkFilename`).
-  // This option is not permitted if you're using `options.async` as well, see below for more details.
+* Condition 1: The chunk contains modules from `node_modules`
+* Condition 2: react is bigger than 30kb
+* Condition 3: Number of parallel requests at the import call is 2
+* Condition 4: Doesn't affect request at initial page load
 
-  minChunks: number|Infinity|function(module, count) -> boolean,
-  // The minimum number of chunks which need to contain a module before it's moved into the commons chunk.
-  // The number must be greater than or equal 2 and lower than or equal to the number of chunks.
-  // Passing `Infinity` just creates the commons chunk, but moves no modules into it.
-  // By providing a `function` you can add custom logic. (Defaults to the number of chunks)
+Why does this make sense?
 
-  chunks: string[],
-  // Select the source chunks by chunk names. The chunk must be a child of the commons chunk.
-  // If omitted all entry chunks are selected.
+react probably doesn't change very often compared to your application code. By moving it into a separate chunk this chunk can be cached separately from your app code (assuming you are using Long Term Caching: chunkhash, records, Cache-Control).
 
-  children: boolean,
-  // If `true` all children of the commons chunk are selected
+### Example 2
 
-  deepChildren: boolean,
-  // If `true` all descendants of the commons chunk are selected
+``` js
+// entry.js
+import("./a");
+import("./b");
+```
 
-  async: boolean|string,
-  // If `true` a new async commons chunk is created as child of `options.name` and sibling of `options.chunks`.
-  // It is loaded in parallel with `options.chunks`.
-  // Instead of using `option.filename`, it is possible to change the name of the output file by providing
-  // the desired string here instead of `true`.
+``` js
+// a.js
+import "./helpers"; // helpers is 40kb in size
+// ...
+```
 
-  minSize: number,
-  // Minimum size of all common module before a commons chunk is created.
+``` js
+// b.js
+import "./helpers";
+import "./more-helpers"; // more-helpers is also 40kb in size
+// ...
+```
+
+Result: A separate chunk would be created containing `./helpers` and all dependencies of it. At the import calls this chunk is loaded in parallel to the original chunks.
+
+Why:
+
+* Condition 1: The chunk is shared between both import calls
+* Condition 2: helpers is bigger than 30kb
+* Condition 3: Number of parallel requests at the import calls is 2
+* Condition 4: Doesn't affect request at initial page load
+
+Why does this make sense?
+
+Putting the helpers code into each chunk may means it need to downloaded twice by the user. By using a separate chunk it's only downloaded once. Actually it's a tradeoff, because now we pay the cost of an additional request. That's why there is a minimum size of 30kb.
+
+---
+
+With `optimizations.splitChunks.chunks: "all"` the same would happend for initial chunks. Chunks can even be shared between entrypoints and on-demand loading.
+
+## Configuration
+
+For these people that like to have more control over this functionality, there are a lot of options to fit it to your needs.
+
+Disclaimer: Don't try to optimize manually without measuring. The defaults are choosen to fit best practices of web performance.
+
+### Cache Groups
+
+The optimization assigns modules to cache groups.
+
+The defaults assigns all modules from `node_modules` to a cache group called `vendors` and all modules duplicated in at least 2 chunks to a change group `default`.
+
+A module can be assigned to multiple cache groups. The optimization then prefers the cache group with the higher `priority` (`priority` option) or that one that forms bigger chunks.
+
+### Conditions
+
+Modules from the same chunks and cache group will form a new chunk when all conditions are fullfilled. 
+
+There are 4 options to configure the conditions:
+
+* `minSize` (default: 30000) Minimum size for a chunk.
+* `minChunks` (default: 1) Minimum number of chunks that share a module before splitting
+* `maxInitialRequests` (default 3) Maximum number of parallel requests at an entrypoint
+* `maxAsyncRequests` (default 5) Maximum number of parallel requests at on-demand loading
+
+### Naming
+
+To control the chunk name of the split chunk the `name` option can be used.
+
+Note: When assigning equal names to different split chunks they are merged together. This can be used i. e. to put all vendor modules into a single chunk shared by all other entrypoints/splitpoints, but I don't recommend doing so. This can lead to more code downloaded than needed.
+
+The magic value `true` automatically chooses a name based on chunks and cache group key. Elsewise a string or function can be passed.
+
+When the name matches an entrypoint name, the entrypoint is removed.
+
+### Select chunks
+
+With the `chunks` option the selected chunks can be configured. There are 3 values possible `"initial"`, `"async"` and `"all"`. When configured the optimization only selects initial chunks, on-demand chunks or all chunks.
+
+The option `reuseExistingChunk` allows to reuse existing chunks instead of creating a new one when modules match exactly.
+
+This can be controlled per cache group.
+
+### Select modules
+
+The `test` option controls which modules are selected by this cache group. Omitting it selects all modules. It can be a RegExp, string or function.
+
+It can match the absolute module resource path or chunk names. When a chunk name is matched, all modules in this chunk are selected.
+
+### Configurate cache groups
+
+This is the default configuration:
+
+``` js
+splitChunks: {
+	chunks: "async",
+	minSize: 30000,
+	minChunks: 1,
+	maxAsyncRequests: 5,
+	maxInitialRequests: 3,
+	name: true,
+	cacheGroups: {
+		default: {
+			minChunks: 2,
+			priority: -20
+			reuseExistingChunk: true,
+		},
+		vendors: {
+			test: /[\\/]node_modules[\\/]/,
+			priority: -10
+		}
+	}
 }
 ```
 
-T> The deprecated webpack 1 constructor `new webpack.optimize.CommonsChunkPlugin(options, filenameTemplate, selectedChunks, minChunks)` is no longer supported. Use a corresponding options object instead.
+By default cache groups inherit options from `splitChunks.*`, but `test`, `priority` and `reuseExistingChunk` can only be configured on cache group level.
 
+`cacheGroups` is an object where keys are cache group keys and values are options:
 
-## Examples
+Otherwise all options from the options listed above are possible: `chunks`, `minSize`, `minChunks`, `maxAsyncRequests`, `maxInitialRequests`, `name`.
 
-### Commons chunk for entries
+To disable the default groups pass `false`: `optimization.splitChunks.cacheGroups.default: false`
 
-Generate an extra chunk, which contains common modules shared between entry points.
+The priority of the default groups are negative so any custom cache group takes higher priority (default 0).
 
-```javascript
-new webpack.optimize.CommonsChunkPlugin({
-  name: "commons",
-  // (the commons chunk name)
+Here are some examples and their effect:
 
-  filename: "commons.js",
-  // (the filename of the commons chunk)
-
-  // minChunks: 3,
-  // (Modules must be shared between 3 entries)
-
-  // chunks: ["pageA", "pageB"],
-  // (Only use these entries)
-})
+``` js
+splitChunks: {
+	cacheGroups: {
+		commons: {
+			name: "commons",
+			chunks: "initial",
+			minChunks: 2
+		}
+	}
+}
 ```
 
-You must load the generated chunk before the entry point:
+Create a `commons` chunk, which includes all code shared between entrypoints.
 
-```html
-<script src="commons.js" charset="utf-8"></script>
-<script src="entry.bundle.js" charset="utf-8"></script>
+Note: This downloads more code than neccessary.
+
+``` js
+splitChunks: {
+	cacheGroups: {
+		commons: {
+			test: /[\\/]node_modules[\\/]
+			name: "vendors",
+			chunks: "all"
+		}
+	}
+}
 ```
 
+Create a `vendors` chunk, which includes all code from node_modules in the whole application.
 
-### Explicit vendor chunk
+Note: This downloads more code than neccessary.
 
-Split your code into vendor and application.
+## `optimization.runtimeChunk`
 
-```javascript
-entry: {
-  vendor: ["jquery", "other-lib"],
-  app: "./entry"
-},
-plugins: [
-  new webpack.optimize.CommonsChunkPlugin({
-    name: "vendor",
-    // filename: "vendor.js"
-    // (Give the chunk a different name)
-
-    minChunks: Infinity,
-    // (with more entries, this ensures that no other module
-    //  goes into the vendor chunk)
-  })
-]
-```
-
-```html
-<script src="vendor.js" charset="utf-8"></script>
-<script src="app.js" charset="utf-8"></script>
-```
-
-T> In combination with long term caching you may need to use the [`ChunkManifestWebpackPlugin`](https://github.com/diurnalist/chunk-manifest-webpack-plugin) to avoid the vendor chunk changes. You should also use records to ensure stable module ids, e.g. using [`NamedModulesPlugin`](/plugins/named-modules-plugin) or [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin).
-
-
-### Move common modules into the parent chunk
-
-With [Code Splitting](/guides/code-splitting), multiple child chunks of an entry chunk can have common dependencies. To prevent duplication these can be moved into the parent. This reduces overall size, but does have a negative effect on the initial load time. If it is expected that users will need to download many sibling chunks, i.e. children of the entry chunk, then this should improve load time overall.
-
-```javascript
-new webpack.optimize.CommonsChunkPlugin({
-  // names: ["app", "subPageA"]
-  // (choose the chunks, or omit for all chunks)
-
-  children: true,
-  // (select all children of chosen chunks)
-
-  // minChunks: 3,
-  // (3 children must share the module before it's moved)
-})
-```
-
-
-### Extra async commons chunk
-
-Similar to the above one, but instead of moving common modules into the parent (which increases initial load time) a new async-loaded additional commons chunk is used. This is automatically downloaded in parallel when the additional chunk is downloaded.
-
-```javascript
-new webpack.optimize.CommonsChunkPlugin({
-  name: "app",
-  // or
-  names: ["app", "subPageA"],
-  // the name or list of names must match the name or names
-  // of the entry points that create the async chunks
-
-  children: true,
-  // (use all children of the chunk)
-
-  async: true,
-  // (create an async commons chunk)
-
-  minChunks: 3,
-  // (3 children must share the module before it's separated)
-})
-```
-
-
-### Passing the `minChunks` property a function
-
-You also have the ability to pass the `minChunks` property a function. This function is called by the `CommonsChunkPlugin` and calls the function with `module` and `count` arguments.
-
-The `module` argument represents each module in the chunks you have provided via the `name`/`names` property.
-`module` has the shape of a [NormalModule](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js), which has two particularly useful properties for this use case:
-
-- `module.context`: The directory that stores the file. For example: `'/my_project/node_modules/example-dependency'`
-- `module.resource`: The name of the file being processed. For example: `'/my_project/node_modules/example-dependency/index.js'`
-
-The `count` argument represents how many chunks the `module` is used in.
-
-This option is useful when you want to have fine-grained control over how the CommonsChunk algorithm determines where modules should be moved to.
-
-```javascript
-new webpack.optimize.CommonsChunkPlugin({
-  name: "my-single-lib-chunk",
-  filename: "my-single-lib-chunk.js",
-  minChunks: function(module, count) {
-    // If module has a path, and inside of the path exists the name "somelib",
-    // and it is used in 3 separate chunks/entries, then break it out into
-    // a separate chunk with chunk keyname "my-single-lib-chunk", and filename "my-single-lib-chunk.js"
-    return module.resource && (/somelib/).test(module.resource) && count === 3;
-  }
-});
-```
-
-As seen above, this example allows you to move only one lib to a separate file if and only if all conditions are met inside the function.
-
-This concept may be used to obtain implicit common vendor chunks:
-
-```javascript
-new webpack.optimize.CommonsChunkPlugin({
-  name: "vendor",
-  minChunks: function (module) {
-    // this assumes your vendor imports exist in the node_modules directory
-    return module.context && module.context.includes("node_modules");
-  }
-})
-```
-
-In order to obtain a single CSS file containing your application and vendor CSS, use the following `minChunks` function together with [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin/):
-
-```javascript
-new webpack.optimize.CommonsChunkPlugin({
-  name: "vendor",
-  minChunks: function (module) {
-    // This prevents stylesheet resources with the .css or .scss extension
-    // from being moved from their original chunk to the vendor chunk
-    if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
-      return false;
-    }
-    return module.context && module.context.includes("node_modules");
-  }
-})
-```
-
-## Manifest file
-
-To extract the webpack bootstrap logic into a separate file, use the `CommonsChunkPlugin` on a `name` which is not defined as `entry`. Commonly the name `manifest` is used. See the [caching guide](/guides/caching) for details.
-
-```javascript
-new webpack.optimize.CommonsChunkPlugin({
-  name: "manifest",
-  minChunks: Infinity
-})
-```
-
-## Combining implicit common vendor chunks and manifest file
-
-Since the `vendor` and `manifest` chunk use a different definition for `minChunks`, you need to invoke the plugin twice:
-
-```javascript
-[
-  new webpack.optimize.CommonsChunkPlugin({
-    name: "vendor",
-    minChunks: function(module){
-      return module.context && module.context.includes("node_modules");
-    }
-  }),
-  new webpack.optimize.CommonsChunkPlugin({
-    name: "manifest",
-    minChunks: Infinity
-  }),
-]
-```
-
-## More Examples
-
-- [Common and Vendor Chunks](https://github.com/webpack/webpack/tree/master/examples/common-chunk-and-vendor-chunk)
-- [Multiple Common Chunks](https://github.com/webpack/webpack/tree/8b888fedfaeaac6bd39168c0952cc19e6c34280a/examples/multiple-commons-chunks)
-- [Multiple Entry Points with Commons Chunk](https://github.com/webpack/webpack/tree/8b888fedfaeaac6bd39168c0952cc19e6c34280a/examples/multiple-entry-points-commons-chunk-css-bundle)
+`optimization.runtimeChunk: true` adds an additonal chunk to each entrypoint containing only the runtime.
