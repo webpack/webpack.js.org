@@ -151,7 +151,7 @@ Using plugins in your webpack config is straightforward - however, there are man
 
 ## Mode
 
-By setting the `mode` parameter to either `development` or `production`, you can enable webpack's built-in optimizations that correspond with the selected mode.
+By setting the `mode` parameter to either `development` or `production`, you can enable webpack's built-in optimizations that correspond with the selected mode. If you would like to opt out of these optimizations, you may pass `none` instead.
 
 ```javascript
 module.exports = {
