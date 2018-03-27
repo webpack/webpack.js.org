@@ -50,8 +50,7 @@ with the [`resolve`](/configuration/resolve/) or [`resolveLoader`](/configuratio
 users to change the resolving behavior through a variety of options including
 through resolve `plugins`.
 
-The resolver plugins, e.g. [`DirectoryNamedPlugin`]
-(https://github.com/shaketbaby/directory-named-webpack-plugin), can be included
+The resolver plugins, e.g. [`DirectoryNamedPlugin`](https://github.com/shaketbaby/directory-named-webpack-plugin), can be included
 directly in `resolve.plugins` rather than using standard plugins. Note that the
 `resolve` configuration affects the `normal` and `context` resolvers while
 `resolveLoader` is used to modify the `loader` resolver.
