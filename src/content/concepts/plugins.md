@@ -84,14 +84,10 @@ When using the Node API, you can also pass plugins via the `plugins` property in
   const webpack = require('webpack'); //to access webpack runtime
   const configuration = require('./webpack.config.js');
 
-  let plugins = configuration.plugins || []
-  
-  configuration.plugins = [
-  	...plugins,
-  	new webpack.ProgressPlugin()
-  ]
-
   let compiler = webpack(configuration);
+  
+  new webpack.ProgressPlugin().apply(compiler)
+  
   compiler.run(function(err, stats) {
     // ...
   });
