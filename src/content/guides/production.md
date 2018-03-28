@@ -237,9 +237,9 @@ __src/index.js__
 ```
 
 
-## Split CSS
+## Minimize CSS
 
-As mentioned in __Asset Management__ at the end of the [Loading CSS](/guides/asset-management#loading-css) section, it is typically best practice to split your CSS out to a separate file using the `ExtractTextPlugin`. There are some good examples of how to do this in the plugin's [documentation](/plugins/extract-text-webpack-plugin). The `disable` option can be used in combination with the `--env` flag to allow inline loading in development, which is recommended for Hot Module Replacement and build speed.
+It is crucial to minimize your CSS on production, please see [Minimizing for Production](/plugins/mini-css-extract-plugin/#minimizing-for-production) section.
 
 
 ## CLI Alternatives
