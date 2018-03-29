@@ -32,7 +32,7 @@ Option                | Description
 --------------------- | -----------------------
 `development`         | Provides `process.env.NODE_ENV` with value `development`. Enables `NamedModulesPlugin`.
 `production`          | Provides `process.env.NODE_ENV` with value `production`. Enables `UglifyJsPlugin`, `ModuleConcatenationPlugin` and `NoEmitOnErrorsPlugin`.
-`none`                | Does not modify or add any plugin
+`none`                | Opts out of any default optimization options
 
 T> Please remember that setting `NODE_ENV` doesn't automatically set `mode`.
 
