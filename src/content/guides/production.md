@@ -15,6 +15,7 @@ contributors:
   - xgqfrms
   - kelset
   - xgirma
+  - mehrdaad
 ---
 
 In this guide we'll dive into some of the best practices and utilities for building a production site or application.
@@ -81,6 +82,7 @@ __webpack.dev.js__
 + const common = require('./webpack.common.js');
 +
 + module.exports = merge(common, {
++   mode: 'development',
 +   devtool: 'inline-source-map',
 +   devServer: {
 +     contentBase: './dist'
@@ -96,6 +98,7 @@ __webpack.prod.js__
 + const common = require('./webpack.common.js');
 +
 + module.exports = merge(common, {
++   mode: 'production',
 +   plugins: [
 +     new UglifyJSPlugin()
 +   ]
