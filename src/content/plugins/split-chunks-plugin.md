@@ -215,7 +215,7 @@ Create a `vendors` chunk, which includes all code from node_modules in the whole
 splitChunks: {
 	cacheGroups: {
 		commons: {
-			test: /[\\/]node_modules[\\/],
+			test: /[\\/]node_modules[\\/]/,
 			name: "vendors",
 			chunks: "all"
 		}
