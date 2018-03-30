@@ -123,11 +123,19 @@ There are 4 options to configure the conditions:
 
 To control the chunk name of the split chunk the `name` option can be used.
 
-W> When assigning equal names to different split chunks they are merged together. This can be used to put all vendor modules into a single shared chunk, but it's not recommend since it can result in more code downloaded.
+W> When assigning equal names to different split chunks, all vendor modules are placed into a single shared chunk, though it's not recommend since it can result in more code downloaded.
 
 The magic value `true` automatically chooses a name based on chunks and cache group key, otherwise a string or function can be passed.
 
-When the name matches an entrypoint name, the entrypoint is removed.
+When the name matches an entry point name, the entry point is removed.
+
+#### `optimization.splitChunks.automaticNameDelimiter`
+
+By default webpack will generate names using origin and name of the chunk, like `vendors~main.js`.
+
+If your project has a conflict with the `~` character, it can be changed by setting this option to any other value that works for your project: `automaticNameDelimiter: "-"`.
+
+Then the resulting names will look like `vendors-main.js`.
 
 ### Select modules
 
@@ -164,6 +172,7 @@ splitChunks: {
 	minChunks: 1,
 	maxAsyncRequests: 5,
 	maxInitialRequests: 3,
+  automaticNameDelimiter: '~',
 	name: true,
 	cacheGroups: {
 		default: {
