@@ -147,7 +147,7 @@ This can be controlled per cache group.
 
 ### `optimization.splitChunks.chunks: all`
 
-As it was mentioned before this plugin will affect dynamic imported modules. Setting the `optimization.splitChunks.chunks` option to `"all"` initial chunks will get affected by it (even the ones not imported dynamically). This way chunks can even be shared between entrypoints and on-demand loading.
+As it was mentioned before this plugin will affect dynamic imported modules. Setting the `optimization.splitChunks.chunks` option to `"all"` initial chunks will get affected by it (even the ones not imported dynamically). This way chunks can even be shared between entry points and on-demand loading.
 
 This is the recommended configuration.
 
@@ -191,7 +191,7 @@ Here are some examples and their effect:
 
 ### Split Chunks: Example 1
 
-Create a `commons` chunk, which includes all code shared between entrypoints.
+Create a `commons` chunk, which includes all code shared between entry points.
 
 ```js
 splitChunks: {
@@ -205,17 +205,17 @@ splitChunks: {
 }
 ```
 
-W> This downloads more code than neccessary.
+W> This configuration can enlarge your initial bundles, it is recommended to use dynamic imports when a module is not immediately needed.
 
 ### Split Chunks: Example 2
 
-Create a `vendors` chunk, which includes all code from node_modules in the whole application.
+Create a `vendors` chunk, which includes all code from `node_modules` in the whole application.
 
 ``` js
 splitChunks: {
 	cacheGroups: {
 		commons: {
-			test: /[\\/]node_modules[\\/],
+			test: /[\\/]node_modules[\\/]/,
 			name: "vendors",
 			chunks: "all"
 		}
@@ -223,8 +223,10 @@ splitChunks: {
 }
 ```
 
-W> This downloads more code than neccessary.
+W> This might result in a large chunk containing all external packages. It is recommended to only include your core frameworks and utilities and dynamically load the rest of the dependencies.
 
-## `optimization.runtimeChunk`
+## `optimize.runtimeChunk`
 
-Setting `optimization.runtimeChunk` to `true` adds an additonal chunk to each entrypoint containing only the runtime.
+Setting `optimize.runtimeChunk` to `true` adds an additonal chunk to each entrypoint containing only the runtime.
+
+The value `single` instead creates a runtime file to be shared for all generated chunks.
