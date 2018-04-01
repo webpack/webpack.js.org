@@ -172,7 +172,7 @@ splitChunks: {
 	minChunks: 1,
 	maxAsyncRequests: 5,
 	maxInitialRequests: 3,
-  automaticNameDelimiter: '~',
+	automaticNameDelimiter: '~',
 	name: true,
 	cacheGroups: {
 		default: {
