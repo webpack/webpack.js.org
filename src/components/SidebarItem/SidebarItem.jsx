@@ -73,14 +73,8 @@ export default class SidebarItem extends React.Component {
    * @param {object} e - Click event
    */
   _toggle(e) {
-    let { onToggle } = this.props;
-
     this.setState({
       open: !this.state.open
-    }, () => {
-      if (typeof onToggle === 'function') {
-        onToggle();
-      }
     });
   }
 
