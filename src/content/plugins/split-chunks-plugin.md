@@ -14,6 +14,7 @@ This connection didn't allow to further optimizations and resulted into more dow
 
 webpack v4 removes the `CommonsChunkPlugin` in favor of `optimization.splitChunks` and `optimize.runtimeChunk` options. Here is how the new flow works.
 
+
 ## Defaults
 
 Out of the box `SplitChunksPlugin` should work great for most users.
@@ -94,6 +95,7 @@ Why:
 
 Putting the content of `helpers` into each chunk will result into its code being downloaded twice. By using a separate chunk this will only happen once. We pay the cost of an additional request, which could be considered a tradeoff. That's why there is a minimum size of 30kb.
 
+
 ## Configuration
 
 For developers that want to have more control over this functionality, webpack provides a set of options to better fit your needs.
@@ -153,6 +155,7 @@ The option `reuseExistingChunk` allows to reuse existing chunks instead of creat
 
 This can be controlled per cache group.
 
+
 ### `optimization.splitChunks.chunks: all`
 
 As it was mentioned before this plugin will affect dynamic imported modules. Setting the `optimization.splitChunks.chunks` option to `"all"` initial chunks will get affected by it (even the ones not imported dynamically). This way chunks can even be shared between entry points and on-demand loading.
@@ -160,6 +163,7 @@ As it was mentioned before this plugin will affect dynamic imported modules. Set
 This is the recommended configuration.
 
 T> You can combine this configuration with the [HtmlWebpackPlugin](/plugins/html-webpack-plugin/), it will inject all the generated vendor chunks for you.
+
 
 ## `optimization.splitChunks`
 
@@ -233,6 +237,7 @@ splitChunks: {
 ```
 
 W> This might result in a large chunk containing all external packages. It is recommended to only include your core frameworks and utilities and dynamically load the rest of the dependencies.
+
 
 ## `optimize.runtimeChunk`
 
