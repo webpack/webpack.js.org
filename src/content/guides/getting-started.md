@@ -6,6 +6,7 @@ contributors:
   - varunjayaraman
   - cntanglijun
   - chrisVillanueva
+  - gingi
   - johnstew
   - simon04
   - aaronang
@@ -167,14 +168,14 @@ __dist/index.html__
    </head>
    <body>
 -    <script src="./src/index.js"></script>
-+    <script src="bundle.js"></script>
++    <script src="main.js"></script>
    </body>
   </html>
 ```
 
 In this setup, `index.js` explicitly requires `lodash` to be present, and binds it as `_` (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.
 
-With that said, let's run `npx webpack` with our script as the [entry point](/concepts/entry-points) and `bundle.js` as the [output](/concepts/output). The `npx` command, which ships with Node 8.2 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
+With that said, let's run `npx webpack` with our script as the [entry point](/concepts/entry-points) and `main.js` as the [output](/concepts/output). The `npx` command, which ships with Node 8.2 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
 
 ``` bash
 npx webpack
@@ -184,8 +185,8 @@ Version: webpack 4.0.1
 Time: 3003ms
 Built at: 2018-2-26 22:42:11
     Asset      Size  Chunks             Chunk Names
-bundle.js  69.6 KiB       0  [emitted]  main
-Entrypoint main = bundle.js
+main.js  69.6 KiB       0  [emitted]  main
+Entrypoint main = main.js
    [1] (webpack)/buildin/module.js 519 bytes {0} [built]
    [2] (webpack)/buildin/global.js 509 bytes {0} [built]
    [3] ./src/index.js 256 bytes {0} [built]
@@ -204,7 +205,7 @@ Open `index.html` in your browser and, if everything went right, you should see 
 
 The [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) statements have been standardized in [ES2015](https://babeljs.io/learn-es2015/). Although they are not supported in most browsers yet, webpack does support them out of the box.
 
-Behind the scenes, webpack actually "transpiles" the code so that older browsers can also run it. If you inspect `dist/bundle.js`, you might be able to see how webpack does this, it's quite ingenious! Besides `import` and `export`, webpack supports various other module syntaxes as well, see [Module API](/api/module-methods) for more information.
+Behind the scenes, webpack actually "transpiles" the code so that older browsers can also run it. If you inspect `dist/main.js`, you might be able to see how webpack does this, it's quite ingenious! Besides `import` and `export`, webpack supports various other module syntaxes as well, see [Module API](/api/module-methods) for more information.
 
 Note that webpack will not alter any code other than `import` and `export` statements. If you are using other [ES2015 features](http://es6-features.org/), make sure to [use a transpiler](/loaders/#transpiling) such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/) via webpack's [loader system](/concepts/loaders/).
 
@@ -233,7 +234,7 @@ const path = require('path');
 module.exports = {
   entry: './src/index.js',
   output: {
-    filename: 'bundle.js',
+    filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
   }
 };
@@ -249,8 +250,8 @@ Version: webpack 4.0.1
 Time: 328ms
 Built at: 2018-2-26 22:47:43
     Asset      Size  Chunks             Chunk Names
-bundle.js  69.6 KiB       0  [emitted]  main
-Entrypoint main = bundle.js
+main.js  69.6 KiB       0  [emitted]  main
+Entrypoint main = main.js
    [1] (webpack)/buildin/module.js 519 bytes {0} [built]
    [2] (webpack)/buildin/global.js 509 bytes {0} [built]
    [3] ./src/index.js 256 bytes {0} [built]
@@ -307,8 +308,8 @@ Version: webpack 4.0.1
 Time: 323ms
 Built at: 2018-2-26 22:50:25
     Asset      Size  Chunks             Chunk Names
-bundle.js  69.6 KiB       0  [emitted]  main
-Entrypoint main = bundle.js
+main.js  69.6 KiB       0  [emitted]  main
+Entrypoint main = main.js
    [1] (webpack)/buildin/module.js 519 bytes {0} [built]
    [2] (webpack)/buildin/global.js 509 bytes {0} [built]
    [3] ./src/index.js 256 bytes {0} [built]
@@ -332,7 +333,7 @@ webpack-demo
 |- package.json
 |- webpack.config.js
 |- /dist
-  |- bundle.js
+  |- main.js
   |- index.html
 |- /src
   |- index.js
