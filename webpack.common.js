@@ -36,6 +36,13 @@ module.exports = (env = {}) => ({
             plugins: [
               require('remark-slug'),
               require('remark-mermaid'),
+              [require('./src/utilities/remark-custom-blockquotes.js'), {
+                mapping: {
+                  'T>': 'tip',
+                  'W>': 'warning',
+                  '?>': 'todo'
+                }
+              }],
               [require('@rigor789/remark-autolink-headings'), {
                 behaviour: 'append'
               }]
