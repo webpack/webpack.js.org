@@ -30,8 +30,8 @@ The following string values are supported:
 
 Option                | Description
 --------------------- | -----------------------
-`development`         | Provides `process.env.NODE_ENV` with value `development`. Enables `NamedModulesPlugin`.
-`production`          | Provides `process.env.NODE_ENV` with value `production`. Enables `UglifyJsPlugin`, `ModuleConcatenationPlugin` and `NoEmitOnErrorsPlugin`.
+`development`         | Provides `process.env.NODE_ENV` with value `development`. Enables `NamedChunksPlugin` and `NamedModulesPlugin`.
+`production`          | Provides `process.env.NODE_ENV` with value `production`. Enables `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin`, `OccurrenceOrderPlugin`, `SideEffectsFlagPlugin` and `UglifyJsPlugin`.
 
 T> Please remember that setting `NODE_ENV` doesn't automatically set `mode`.
 
