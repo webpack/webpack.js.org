@@ -8,7 +8,7 @@ contributors:
   - lricoy
 related:
   - title: Enabling Sourcemaps
-    url: http://survivejs.com/webpack/developing-with-webpack/enabling-sourcemaps/
+    url: https://survivejs.com/webpack/developing-with-webpack/enabling-sourcemaps/
   - title: Webpack's Devtool Source Map
     url: http://cheng.logdown.com/posts/2016/03/25/679045
 ---

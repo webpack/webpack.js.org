@@ -428,7 +428,7 @@ If we run our build, another `polyfills.bundle.js` file will be emitted and ever
 
 ## Further Optimizations
 
-The `babel-preset-env` package uses [browserslist](https://github.com/ai/browserslist) to transpile only what is not supported in your browsers matrix. This preset comes with the `useBuiltIns` option, `false` by default, which converts your global `babel-polyfill` import to a more granular feature by feature `import` pattern:
+The `babel-preset-env` package uses [browserslist](https://github.com/browserslist/browserslist) to transpile only what is not supported in your browsers matrix. This preset comes with the `useBuiltIns` option, `false` by default, which converts your global `babel-polyfill` import to a more granular feature by feature `import` pattern:
 
 ``` js
 import 'core-js/modules/es7.string.pad-start';
