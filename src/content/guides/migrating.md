@@ -144,7 +144,7 @@ See [#2986](https://github.com/webpack/webpack/issues/2986) for the reason behin
 ## `json-loader` is not required anymore
 
 When no loader has been configured for a JSON file, webpack will automatically try to load the JSON
-file with the [`json-loader`](https://github.com/webpack/json-loader).
+file with the [`json-loader`](https://github.com/webpack-contrib/json-loader).
 
 ``` diff
   module: {
@@ -283,7 +283,7 @@ Thus make sure to remove the plugin from your configuration:
 
 ## `ExtractTextWebpackPlugin` - breaking change
 
-[ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) requires version 2 to work with webpack 2.
+[ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) requires version 2 to work with webpack 2.
 
 `npm install --save-dev extract-text-webpack-plugin`
 

@@ -116,7 +116,7 @@ webpack --json
 webpack --json > stats.json
 ```
 
-In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option the output can be a JSON object. This response is accepted by webpack's [analyse tool](https://webpack.github.com/analyse), or chrisbateman's [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/), or th0r's [webpack-bundle-analyzer](https://github.com/th0r/webpack-bundle-analyzer). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
+In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option the output can be a JSON object. This response is accepted by webpack's [analyse tool](https://webpack.github.io/analyse/), or chrisbateman's [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/), or th0r's [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
 
 ### Environment Options
 

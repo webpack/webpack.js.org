@@ -33,7 +33,7 @@ W> __HMR__ is not intended for use in production, meaning it should only be used
 
 This feature is great for productivity. All we need to do is update our [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration, and use webpack's built in HMR plugin. We'll also remove the entry point for `print.js` as it will now be consumed by the `index.js` module.
 
-T> If you took the route of using `webpack-dev-middleware` instead of `webpack-dev-server`, please use the [`webpack-hot-middleware`](https://github.com/glenjamin/webpack-hot-middleware) package to enable HMR on your custom server or application.
+T> If you took the route of using `webpack-dev-middleware` instead of `webpack-dev-server`, please use the [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware) package to enable HMR on your custom server or application.
 
 __webpack.config.js__
 
@@ -162,7 +162,7 @@ server.listen(5000, 'localhost', () => {
 });
 ```
 
-T> If you're [using `webpack-dev-middleware`](/guides/development#using-webpack-dev-middleware), check out the [`webpack-hot-middleware`](https://github.com/glenjamin/webpack-hot-middleware) package to enable HMR on your custom dev server.
+T> If you're [using `webpack-dev-middleware`](/guides/development#using-webpack-dev-middleware), check out the [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware) package to enable HMR on your custom dev server.
 
 
 ## Gotchas
@@ -340,6 +340,6 @@ There are many other loaders and examples out in the community to make HMR inter
 - [Vue Loader](https://github.com/vuejs/vue-loader): This loader supports HMR for vue components out of the box.
 - [Elm Hot Loader](https://github.com/fluxxu/elm-hot-loader): Supports HMR for the Elm programming language.
 - [Redux HMR](https://survivejs.com/webpack/appendices/hmr-with-react/#configuring-hmr-with-redux): No loader or plugin necessary! A simple change to your main store file is all that's required.
-- [Angular HMR](https://github.com/AngularClass/angular-hmr): No loader necessary! A simple change to your main NgModule file is all that's required to have full control over the HMR APIs.
+- [Angular HMR](https://github.com/gdi2290/angular-hmr): No loader necessary! A simple change to your main NgModule file is all that's required to have full control over the HMR APIs.
 
 T> If you know of any other loaders or plugins that help with or enhance Hot Module Replacement please submit a pull request to add to this list!
