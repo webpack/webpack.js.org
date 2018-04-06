@@ -293,7 +293,7 @@ Conditions can be one of these:
 
 It must have a `loader` property being a string. It is resolved relative to the configuration [`context`](/configuration/entry-context#context) with the loader resolving options ([resolveLoader](/configuration/resolve#resolveloader)).
 
-It can have a `options` property being a string or object. This value is passed to the loader, which should interpret it as loader options.
+It can have an `options` property being a string or object. This value is passed to the loader, which should interpret it as loader options.
 
 For compatibility a `query` property is also possible, which is an alias for the `options` property. Use the `options` property instead.
 

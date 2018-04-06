@@ -355,7 +355,7 @@ addDependency(file: string)
 dependency(file: string) // shortcut
 ```
 
-Adds a file as dependency of the loader result in order to make them watchable. For example, [`html-loader`](https://github.com/webpack/html-loader) uses this technique as it finds `src` and `src-set` attributes. Then, it sets the url's for those attributes as dependencies of the html file that is parsed.
+Adds a file as dependency of the loader result in order to make them watchable. For example, [`html-loader`](https://github.com/webpack-contrib/html-loader) uses this technique as it finds `src` and `src-set` attributes. Then, it sets the url's for those attributes as dependencies of the html file that is parsed.
 
 
 ### `this.addContextDependency`

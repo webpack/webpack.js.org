@@ -63,12 +63,12 @@ T> For those of you following our guidelines and have gotten this far, we've mad
 
 ## Font
 
-We use the beautiful [Geomanist Medium](http://geomanist.com/) font from the extremely talented folks at the [Atipo Foundry](http://atipofoundry.com/) who provide the entire font family at a 'pay what you want' model.
+We use the beautiful [Geomanist Medium](http://atipofoundry.com/fonts/geomanist) font from the extremely talented folks at the [Atipo Foundry](http://atipofoundry.com/) who provide the entire font family at a 'pay what you want' model.
 
 
 ## Color Palette
 
-The following colors are used throughout the site in various combinations and on our fancy clothing line launched with the help of [Open Collective](http://opencollective.com) and [Threadless](https://medium.com/u/840563ee2a56) over at the [official webpack store](https://webpack.threadless.com/collections/the-final-release-collection/)!
+The following colors are used throughout the site in various combinations and on our fancy clothing line launched with the help of [Open Collective](https://opencollective.com/) and [Threadless](https://medium.com/u/840563ee2a56) over at the [official webpack store](https://webpack.threadless.com/collections/the-final-release-collection/)!
 
 | Color Name    | HEX Code      | RGB Code              | Sample
 |---------------|---------------|-----------------------|-------------------------------
