@@ -25,10 +25,6 @@ First let's create a directory, initialize npm, [install webpack locally](/guide
 ``` bash
 mkdir webpack-demo && cd webpack-demo
 npm init -y
-<<<<<<< HEAD
-npm install --save-dev webpack
-=======
->>>>>>> master
 npm install webpack webpack-cli --save-dev
 ```
 
