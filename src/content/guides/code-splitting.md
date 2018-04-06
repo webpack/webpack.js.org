@@ -300,7 +300,7 @@ Once you start splitting your code, it can be useful to analyze the output to ch
 
 - [webpack-chart](https://alexkuz.github.io/webpack-chart/): Interactive pie chart for webpack stats.
 - [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/): Visualize and analyze your bundles to see which modules are taking up space and which might be duplicates.
-- [webpack-bundle-analyzer](https://github.com/th0r/webpack-bundle-analyzer): A plugin and CLI utility that represents bundle content as convenient interactive zoomable treemap.
+- [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer): A plugin and CLI utility that represents bundle content as convenient interactive zoomable treemap.
 
 
 ## Next Steps
