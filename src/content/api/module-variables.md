@@ -66,12 +66,12 @@ exports.aFunction = function doSomething() {
 
 ### `global` (NodeJS)
 
-See [node.js global](http://nodejs.org/api/globals.html#globals_global).
+See [node.js global](https://nodejs.org/api/globals.html#globals_global).
 
 
 ### `process` (NodeJS)
 
-See [node.js process](http://nodejs.org/api/process.html).
+See [node.js process](https://nodejs.org/api/process.html).
 
 
 ### `__dirname` (NodeJS)
@@ -80,7 +80,7 @@ Depending on the config option `node.__dirname`:
 
 * `false`: Not defined
 * `mock`: equal "/"
-* `true`: [node.js __dirname](http://nodejs.org/api/globals.html#globals_dirname)
+* `true`: [node.js __dirname](https://nodejs.org/api/globals.html#globals_dirname)
 
 If used inside a expression that is parsed by the Parser, the config option is treated as `true`.
 
@@ -91,7 +91,7 @@ Depending on the config option `node.__filename`:
 
 * `false`: Not defined
 * `mock`: equal "/index.js"
-* `true`: [node.js __filename](http://nodejs.org/api/globals.html#globals_filename)
+* `true`: [node.js __filename](https://nodejs.org/api/globals.html#globals_filename)
 
 If used inside a expression that is parsed by the Parser, the config option is treated as `true`.
 
