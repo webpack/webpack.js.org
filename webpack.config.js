@@ -8,6 +8,9 @@ var webpack = require('webpack');
 var cwd = process.cwd();
 
 const commonConfig = env => ({
+  output: {
+    publicPath: env === 'develop' ? '/' : '/v3/'
+  },
   resolve: {
     extensions: ['.js', '.jsx', '.scss']
   },

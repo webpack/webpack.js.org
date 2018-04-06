@@ -32,7 +32,7 @@ const Site = ({
     <Interactive
       id="src/components/Navigation/Navigation.jsx"
       component={ Navigation }
-      pageUrl={ pathname } />
+      pageUrl={ '/v3' + pathname } />
 
     <Interactive
       id="src/components/SidebarMobile/SidebarMobile.jsx"
@@ -52,7 +52,7 @@ const Site = ({
               return a.sort - b.sort;
             }).map(page => ({
               title: page.file.title,
-              url: page.url
+              url: '/v3/' + page.url
             }))
           }))
       } />

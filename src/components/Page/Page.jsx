@@ -25,7 +25,7 @@ const Page = ({ page, section }) => {
         return a.sort - b.sort;
       })
       .map(page => ({
-        url: page.url,
+        url: '/v3' + page.url,
         title: page.file.attributes.title,
         group: page.file.attributes.group,
         anchors: page.file.attributes.anchors
@@ -37,7 +37,7 @@ const Page = ({ page, section }) => {
   // Index pages should just be treated normally
   if (indexPage) {
     pages.unshift({
-      url: `/${section.name}/`,
+      url: `/v3/${section.name}/`,
       group: indexPage.attributes.group,
       title: indexPage.attributes.title,
       anchors: indexPage.attributes.anchors

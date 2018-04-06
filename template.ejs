@@ -21,7 +21,7 @@
     <%- webpackConfig.html %>
 
     <% for (var script of htmlWebpackPlugin.options.context.jsFiles) { %>
-      <script src="<%= script %>"></script>
+      <script src="/v3/<%= script %>"></script>
     <% } %>
 
     <script>

@@ -1,23 +1,23 @@
 [
   {
     "title": "Documentation",
-    "url": "concepts",
+    "url": "v3/concepts",
     "children": [
-      { "title": "Concepts", "url": "concepts" },
-      { "title": "Configuration", "url": "configuration" },
-      { "title": "API", "url": "api" },
-      { "title": "Guides", "url": "guides" },
-      { "title": "Loaders", "url": "loaders" },
-      { "title": "Plugins", "url": "plugins" }
+      { "title": "Concepts", "url": "v3/concepts" },
+      { "title": "Configuration", "url": "v3/configuration" },
+      { "title": "API", "url": "v3/api" },
+      { "title": "Guides", "url": "v3/guides" },
+      { "title": "Loaders", "url": "v3/loaders" },
+      { "title": "Plugins", "url": "v3/plugins" }
     ]
   },
   {
     "title": "Contribute",
-    "url": "contribute"
+    "url": "v3/contribute"
   },
   {
     "title": "Vote",
-    "url": "vote"
+    "url": "v3/vote"
   },
   {
     "title": "Blog",

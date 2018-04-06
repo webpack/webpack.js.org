@@ -17,7 +17,7 @@ export default class Navigation extends React.Component {
             <i className="icon-menu" />
           </div>
 
-          <Link className="navigation__logo" to="/">
+          <Link className="navigation__logo" to="/v3/">
             <Logo light={ true } />
           </Link>
 
