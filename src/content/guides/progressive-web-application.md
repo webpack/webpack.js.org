@@ -4,7 +4,6 @@ sort: 14
 contributors:
   - johnnyreilly
   - chenxsan
-  - gmincof
 related:
   - title: Get Started With Workbox For Webpack
     url: https://developers.google.com/web/tools/workbox/guides/codelabs/webpack
