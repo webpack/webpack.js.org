@@ -19,20 +19,30 @@ SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
 # Run our build
 npm run build
 
+cp -r build/ v4/ # Temporaly copy docs to v4
+
 # Set some git options
 git config --global user.name "Travis CI"
 git config --global user.email "ci@travis-ci.org"
 git remote set-url origin "${SSH_REPO}"
 
 # Get the deploy key by using Travis's stored variables to decrypt deploy_key.enc
-ENCRYPTED_KEY_VAR="encrypted_${ENCRYPTION_LABEL}_key"
-ENCRYPTED_IV_VAR="encrypted_${ENCRYPTION_LABEL}_iv"
-ENCRYPTED_KEY=${!ENCRYPTED_KEY_VAR}
-ENCRYPTED_IV=${!ENCRYPTED_IV_VAR}
-openssl aes-256-cbc -K $ENCRYPTED_KEY -iv $ENCRYPTED_IV -in src/scripts/deploy_key.enc -out src/scripts/deploy_key -d
-chmod 600 src/scripts/deploy_key
-eval `ssh-agent -s`
-ssh-add src/scripts/deploy_key
+# ENCRYPTED_KEY_VAR="encrypted_${ENCRYPTION_LABEL}_key"
+# ENCRYPTED_IV_VAR="encrypted_${ENCRYPTION_LABEL}_iv"
+# ENCRYPTED_KEY=${!ENCRYPTED_KEY_VAR}
+# ENCRYPTED_IV=${!ENCRYPTED_IV_VAR}
+# openssl aes-256-cbc -K $ENCRYPTED_KEY -iv $ENCRYPTED_IV -in src/scripts/deploy_key.enc -out src/scripts/deploy_key -d
+# chmod 600 src/scripts/deploy_key
+# eval `ssh-agent -s`
+# ssh-add src/scripts/deploy_key
+
+git checkout fix/v3-docs
+npm run build
+cp -r build/ v3/
+
+rm -rf build/ # Clean v3 docs
+cp -r v4/ build/ # Copy v4 docs to `build` root
+cp -r v3/ build/v3 # Copy v3 docs to `build/v3`
 
 # Now that we're all set up, we can deploy
 npm run deploy
