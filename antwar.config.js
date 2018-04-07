@@ -67,6 +67,9 @@ module.exports = {
           require.context('./loaders/page-loader!./src/content/plugins', false, /^\.\/.*\.md$/),
           require.context('./loaders/page-loader!./generated/plugins', false, /^\.\/.*\.md$/)
         );
+      },
+      redirects: {
+        'extract-text-webpack-plugin': '/plugins/mini-css-extract-plugin/'
       }
     },
     loaders: {
