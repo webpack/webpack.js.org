@@ -9,8 +9,6 @@ contributors:
 related:
   - title: Predictable Long Term Caching
     url: https://medium.com/webpack/predictable-long-term-caching-with-webpack-d3eee1d3fa31
-  - title: Long Term Caching of Static Assets
-    url: https://codeburst.io/long-term-caching-of-static-assets-with-webpack-1ecb139adb95?gi=9e32667ae5c5#.vtwnssps4
   - title: Webpack & Caching
     url: https://gist.github.com/sokra/ff1b0290282bfa2c037bdb6dcca1a7aa
   - title: Advanced Webpack Presentation
