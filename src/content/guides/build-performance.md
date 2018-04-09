@@ -115,6 +115,9 @@ The following utilities improve performance by compiling and serving assets in m
 - `webpack-hot-middleware`
 - `webpack-dev-middleware`
 
+### stats.toJson speed
+
+webpack4 outputs a large amount of data with its `stats.toJson()` by default. Avoid retrieving portions of the `stats` object unless absolutely necessary in the incremental step. `webpack-dev-server` after v3.1.3 contained a substantial performance fix to minimize the amount of data retrieved from the `stats` object per incremental build step.
 
 ### Devtool
 
@@ -178,11 +181,11 @@ webpack has the ability to generate path info in the output bundle. However, thi
 
 ### Node.js Version
 
-There has been a [performance regression](https://github.com/nodejs/node/issues/19769) in the latest stable versions of node.js with regard to the ES6 Map and Set implementation. A fix has been merged in master, but a release has yet to be made. In the meantime, to get the most out of incremental build speeds, try to stick with version 8.9.x (problem exists between 8.9.10 - 9.11.1). webpack has moved to using those ES6 data structures liberally, and it will improve the initial build times as well.
+There has been a [performance regression](https://github.com/nodejs/node/issues/19769) in the latest stable versions of node.js with regard to the ES2015 Map and Set implementation. A fix has been merged in master, but a release has yet to be made. In the meantime, to get the most out of incremental build speeds, try to stick with version 8.9.x (problem exists between 8.9.10 - 9.11.1). webpack has moved to using those ES2015 data structures liberally, and it will improve the initial build times as well.
 
 ### Typescript
 
-Recently, ts-loader has started to consume the internal Typescript watch mode APIs which dramatically decreases the number of modules to be rebuilt on each iteration. This `experimentalWatchApi` shares the same logic as the normal Typescript watch mode itself and is quite stable for development use. Turn on `transpileOnly` as well for truly fast incremental builds.
+Recently, `ts-loader` has started to consume the internal Typescript watch mode APIs which dramatically decreases the number of modules to be rebuilt on each iteration. This `experimentalWatchApi` shares the same logic as the normal Typescript watch mode itself and is quite stable for development use. Turn on `transpileOnly` as well for truly fast incremental builds.
 
 ```js
 {
@@ -199,9 +202,9 @@ Recently, ts-loader has started to consume the internal Typescript watch mode AP
 }
 ```
 
-Note: the ts-loader documentation suggests the use of `cache-loader`, but this actually slows the incremental builds down with disk writes.
+Note: the `ts-loader` documentation suggests the use of `cache-loader`, but this actually slows the incremental builds down with disk writes.
 
-To gain typechecking again, use the [fork-ts-checker-webpack-plugin](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin).
+To gain typechecking again, use the [`ForkTsCheckerWebpackPlugin`](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin).
 
 ---
 
