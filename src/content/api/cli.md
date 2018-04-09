@@ -5,6 +5,7 @@ contributors:
   - ev1stensberg
   - simon04
   - tbroadley
+  - chenxsan
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -37,7 +38,7 @@ See [configuration](/configuration) for the options in the configuration file.
 ## Usage without config file
 
 ```sh
-webpack <entry> [<entry>] <output>
+webpack <entry> [<entry>] -o <output>
 ```
 
 **`<entry>`**

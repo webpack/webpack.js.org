@@ -184,7 +184,7 @@ Version: webpack 4.0.1
 Time: 3003ms
 Built at: 2018-2-26 22:42:11
     Asset      Size  Chunks             Chunk Names
-bundle.js  69.6 KiB       0  [emitted]  main
+main.js  69.6 KiB       0  [emitted]  main
 Entrypoint main = main.js
    [1] (webpack)/buildin/module.js 519 bytes {0} [built]
    [2] (webpack)/buildin/global.js 509 bytes {0} [built]
