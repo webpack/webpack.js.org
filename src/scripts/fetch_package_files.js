@@ -2,6 +2,7 @@
 // ./fetch_package_files <file> <output> < input
 // ./fetch_package_files "README.md" "./output" < input
 const fs = require('fs');
+const urlModule = require('url');
 const path = require('path');
 const async = require('async');
 const mkdirp = require('mkdirp');
@@ -88,6 +89,8 @@ function fetchPackageFiles(options, finalCb) {
             // Replace any <h2> with `##`
             .replace(/<h2[^>]*>/g, '## ')
             .replace(/<\/h2>/g, '')
+            // Resolve anchor URL's to avoid broken relative URL's in the docs
+            .replace(/\[([^[\]]*)\]\(([^)]+)/g, (match, textContent, href) => `[${textContent}](${urlModule.resolve(url, href)})`)
             // Drop any comments
             .replace(/<!--[\s\S]*?-->/g, '');
         }
