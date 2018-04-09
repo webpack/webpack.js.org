@@ -32,7 +32,7 @@
     "fetch": "sh src/scripts/fetch.sh",
     "init:generated": "mkdirp ./generated/loaders && mkdirp ./generated/plugins ",
     "lint": "run-s lint:*",
-    "lint:links": "hyperlink -r build/index.html --canonicalroot https://webpack.js.org/ --skip support__ | tap-spot",
+    "lint:links": "hyperlink -r build/index.html --canonicalroot https://webpack.js.org/ --skip support__ --skip sidecar.gitter.im --todo external-redirect | tee master.tap | tap-spot",
     "lint:js": "eslint . --ext .js --ext .jsx",
     "lint:markdown": "markdownlint --config ./.markdownlint.json *.md ./src/content/**/*.md",
     "lint:social": "alex . -q",
