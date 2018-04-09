@@ -547,7 +547,7 @@ And finally the output is:
 });
 ```
 
-Note that omitting `library` will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the [object assignment section](#exposing-the-library-via-object-assignment). Example:
+Note that omitting `library` will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the [object assignment section](#expose-via-object-assignment). Example:
 
 ``` js
 output: {

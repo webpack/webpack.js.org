@@ -90,7 +90,7 @@ function fetchPackageFiles(options, finalCb) {
             .replace(/<h2[^>]*>/g, '## ')
             .replace(/<\/h2>/g, '')
             // Resolve anchor URL's to avoid broken relative URL's in the docs
-            .replace(/\[([^[\]]*)\]\(([^)]+)/g, (match, textContent, href) => `[${textContent}](${urlModule.resolve(url, href)})`)
+            .replace(/\[([^[\]]*)\]\(([^)]+)\)/g, (match, textContent, href) => `[${textContent}](${urlModule.resolve(url, href)})`)
             // Drop any comments
             .replace(/<!--[\s\S]*?-->/g, '');
         }
