@@ -24,3 +24,6 @@ node ./src/scripts/fetch_supporters.js
 
 # Fetch starter kits
 node ./src/scripts/fetch_starter_kits.js
+
+# Fetch packages for compatibility page
+nnode ./src/scripts/fetch_compat.js
