@@ -11,7 +11,7 @@ however any [`compiler` instance](/api/node/#compiler-instance) has a few resolv
 tapped into.
 
 Before reading on, make sure you at least skim through the
-[`enhanced-resolve`](https://github.com/webpack/enhanced-resolve) and [`tapable`](/api/tapable/) documentation.
+[`enhanced-resolve`](https://github.com/webpack/enhanced-resolve) and [`tapable`](https://github.com/webpack/tapable) documentation.
 
 
 ## Types

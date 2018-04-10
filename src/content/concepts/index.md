@@ -49,7 +49,7 @@ T> You can configure the `entry` property in various ways depending the needs of
 
 ## Output
 
-The **output** property tells webpack where to emit the *bundles* it creates and how to name these files, it defaults to `./dist`. You can configure this part of the process by specifying an `output` field in your configuration:
+The **output** property tells webpack where to emit the *bundles* it creates and how to name these files, it defaults to `./dist`. Basically, the entire app structure will get compiled into the folder that you specify in the output path. You can configure this part of the process by specifying an `output` field in your configuration:
 
 __webpack.config.js__
 
@@ -65,7 +65,7 @@ module.exports = {
 };
 ```
 
-In the example above, we use the `output.filename` and the `output.path` properties to tell webpack the name of our bundle and where we want it to be emitted to.
+In the example above, we use the `output.filename` and the `output.path` properties to tell webpack the name of our bundle and where we want it to be emitted to. In case you're wondering about the path module being imported at the top, it is a core [Node.js module](https://nodejs.org/api/modules.html) that gets used to manipulate file paths.
 
 T> You may see the term **emitted** or **emit** used throughout our documentation and [plugin API](/api/plugins). This is a fancy term for 'produced' or 'discharged'.
 
