@@ -2,18 +2,13 @@
 title: Stats
 sort: 15
 contributors:
-  - SpaceK33z
-  - sallar
-  - jungomi
-  - ldrick
-  - jasonblanchard
   - TeffenEllis
   - jbottigliero
   - sokra
   - renjithvk
   - pierreneter
   - jasonblanchard
-  - Hoten
+  - Hoten Hoten
 ---
 
 The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
