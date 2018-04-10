@@ -90,11 +90,11 @@ compiler.hooks.myCustomHook = new SyncHook(['a', 'b', 'c'])
 compiler.hooks.myCustomHook.call(a, b, c);
 ```
 
-Again, see the [documentation](/api/tapable/) for `tapable` to learn more about the
+Again, see the [documentation](https://github.com/webpack/tapable) for `tapable` to learn more about the
 different hook classes and how they work.
 
 
 ## Next Steps
 
-See the [compiler hooks](https://webpack.js.org/api/compiler-hooks/) section for a detailed listing of all the available
+See the [compiler hooks](/api/compiler-hooks/) section for a detailed listing of all the available
 `compiler` hooks and the parameters they make available.

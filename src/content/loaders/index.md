@@ -22,7 +22,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 ## JSON
 
 * [`json-loader`](/loaders/json-loader) Loads a [JSON](http://json.org/) file (included by default)
-* [`json5-loader`](/loaders/json5-loader) Loads and transpiles a [JSON 5](http://json5.org/) file
+* [`json5-loader`](/loaders/json5-loader) Loads and transpiles a [JSON 5](https://json5.org/) file
 * `cson-loader` Loads and transpiles a [CSON](https://github.com/bevry/cson#what-is-cson) file
 
 
@@ -60,7 +60,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 ## Linting && Testing
 
 * [`mocha-loader`](/loaders/mocha-loader) Tests with [mocha](https://mochajs.org/) (Browser/NodeJS)
-* [`eslint-loader`](https://github.com/MoOx/eslint-loader) PreLoader for linting code using [ESLint](http://eslint.org/)
+* [`eslint-loader`](https://github.com/webpack-contrib/eslint-loader) PreLoader for linting code using [ESLint](https://eslint.org/)
 * [`jshint-loader`](/loaders/jshint-loader) PreLoader for linting code using [JSHint](http://jshint.com/about/)
 * `jscs-loader` PreLoader for code style checking using [JSCS](http://jscs.info/)
 * [`coverjs-loader`](/loaders/coverjs-loader) PreLoader to determine the testing coverage using [CoverJS](https://github.com/arian/CoverJS)
