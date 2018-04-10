@@ -83,18 +83,18 @@ function fetchPackageFiles(options, finalCb) {
             // Replace lone h1 formats
             .replace(/<h1.*?>.+?<\/h1>/, '')
             .replace(/# .+/, '')
-            // Modify links to keep them within the site
-            .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-loader\/?)([)"])/g, '/loaders/$2/$3')
-            .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-plugin\/?)([)"])/g, '/plugins/$2/$3')
-            // Replace any <h2> with `##`
-            .replace(/<h2[^>]*>/g, '## ')
-            .replace(/<\/h2>/g, '')
             // Resolve anchor hrefs to avoid broken relative references in the docs
             // Examples:
             // - [click here](LICENSE) --> [click here](https://raw.githubusercontent.com/user/repository/branch/LICENSE)
             // - [click here](./LICENSE) --> [click here](https://raw.githubusercontent.com/user/repository/branch/LICENSE)
             // - [click here](#LICENSE) --> [click here](https://raw.githubusercontent.com/user/repository/branch#LICENSE)
             .replace(/\[([^[\]]*)\]\(([^)]+)\)/g, (match, textContent, href) => `[${textContent}](${urlModule.resolve(url, href)})`)
+            // Modify links to keep them within the site
+            .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-loader\/?)([)"])/g, '/loaders/$2/$3')
+            .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-plugin\/?)([)"])/g, '/plugins/$2/$3')
+            // Replace any <h2> with `##`
+            .replace(/<h2[^>]*>/g, '## ')
+            .replace(/<\/h2>/g, '')
             // Drop any comments
             .replace(/<!--[\s\S]*?-->/g, '');
         }
