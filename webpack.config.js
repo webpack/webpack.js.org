@@ -1,13 +1,12 @@
-var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var autoprefixer = require('autoprefixer');
-var merge = require('webpack-merge');
-var webpack = require('webpack');
+const path = require('path');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const RedirectWebpackPlugin = require('redirect-webpack-plugin');
 
-var cwd = process.cwd();
+const cwd = process.cwd();
 
-const commonConfig = env => ({
+module.exports = (env) => ({
+  mode: env === 'develop' ? 'development' : 'production',
   resolve: {
     extensions: ['.js', '.jsx', '.scss']
   },
@@ -35,39 +34,42 @@ const commonConfig = env => ({
       },
       {
         test: /\.font.js$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            'css-loader',
-            {
-              loader: 'fontgen-loader',
-              options: { embed: true }
-            }
-          ]
-        })
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'fontgen-loader',
+            options: { embed: true }
+          }
+        ]
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader'
-        })
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader'
+        ]
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            'css-loader',
-            'postcss-loader',
-            {
-              loader: 'sass-loader',
-              options: {
-                includePaths: [ path.join('./src/styles/partials') ]
-              }
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [
+                require('autoprefixer')
+              ],
             }
-          ]
-        })
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: [ path.join('./src/styles/partials') ]
+            }
+          }
+        ]
       },
       {
         test: /\.woff2?$/,
@@ -94,41 +96,30 @@ const commonConfig = env => ({
       from: './src/assets',
       to: './assets'
     }]),
-
-    new ExtractTextPlugin({
-      filename: '[chunkhash].css',
-      allChunks: true,
-      disable: env === 'develop'
-    })
+    new MiniCssExtractPlugin({
+      filename: '[chunkhash].css'
+    }),
+    new RedirectWebpackPlugin({
+      redirects: {
+        'get-started': '/guides/getting-started/',
+        'get-started/install-webpack': '/guides/installation/',
+        'get-started/why-webpack': '/guides/why-webpack/',
+        'pluginsapi': '/api/plugins/',
+        'pluginsapi/compiler': '/api/compiler-hooks/',
+        'pluginsapi/template': '/api/template/',
+        'api/plugins/compiler': '/api/compiler-hooks/',
+        'api/plugins/compilation': '/api/compilation/',
+        'api/plugins/module-factories': '/api/module-methods/',
+        'api/plugins/parser': '/api/parser/',
+        'api/plugins/tapable': '/api/tapable/',
+        'api/plugins/template': '/api/template/',
+        'api/plugins/resolver': '/api/resolver/',
+        'development': '/contribute/',
+        'development/plugin-patterns': '/contribute/plugin-patterns/',
+        'development/release-process': '/contribute/release-process/',
+        'development/how-to-write-a-loader': '/contribute/writing-a-loader/',
+        'development/how-to-write-a-plugin': '/contribute/writing-a-plugin/',
+      },
+    }),
   ]
 });
-
-const interactiveConfig = {
-  resolve: {
-    alias: {
-      react: 'preact-compat/dist/preact-compat.min.js',
-      'react-dom': 'preact-compat/dist/preact-compat.min.js'
-    }
-  },
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
-  ]
-};
-
-module.exports = function(env) {
-  switch(env) {
-    case 'develop':
-    case 'build':
-      return commonConfig(env);
-
-    case 'interactive':
-      return merge(
-        commonConfig(env),
-        interactiveConfig
-      );
-  }
-};
