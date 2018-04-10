@@ -105,15 +105,15 @@ module.exports = {
       hidden: true,
       redirects: {
         '': '/api/plugins',
-        'compiler': '/api/compiler',
+        'compiler': '/api/compiler-hooks',
         'template': '/api/template'
       }
     },
     'api/plugins': {
       redirects: {
-        'compiler': '/api/compiler',
+        'compiler': '/api/compiler-hooks',
         'compilation': '/api/compilation',
-        'module-factories': '/api/module-factories',
+        'module-factories': '/api/module-methods',
         'parser': '/api/parser',
         'tapable': '/api/tapable',
         'template': '/api/template',

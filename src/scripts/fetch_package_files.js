@@ -2,6 +2,7 @@
 // ./fetch_package_files <file> <output> < input
 // ./fetch_package_files "README.md" "./output" < input
 const fs = require('fs');
+const urlModule = require('url');
 const path = require('path');
 const async = require('async');
 const mkdirp = require('mkdirp');
@@ -82,6 +83,12 @@ function fetchPackageFiles(options, finalCb) {
             // Replace lone h1 formats
             .replace(/<h1.*?>.+?<\/h1>/, '')
             .replace(/# .+/, '')
+            // Resolve anchor hrefs to avoid broken relative references in the docs
+            // Examples:
+            // - [click here](LICENSE) --> [click here](https://raw.githubusercontent.com/user/repository/branch/LICENSE)
+            // - [click here](./LICENSE) --> [click here](https://raw.githubusercontent.com/user/repository/branch/LICENSE)
+            // - [click here](#LICENSE) --> [click here](https://raw.githubusercontent.com/user/repository/branch#LICENSE)
+            .replace(/\[([^[\]]*)\]\(([^)]+)\)/g, (match, textContent, href) => `[${textContent}](${urlModule.resolve(url, href)})`)
             // Modify links to keep them within the site
             .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-loader\/?)([)"])/g, '/loaders/$2/$3')
             .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-plugin\/?)([)"])/g, '/plugins/$2/$3')

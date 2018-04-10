@@ -480,7 +480,7 @@ Good news: Failure to load a chunk can now be handled because they are `Promise`
 
 ## Dynamic expressions
 
-It's possible to pass a partial expression to `import()`. This is handled similar to expressions in CommonJS (webpack creates a [context](https://webpack.github.io/docs/context.html) with all possible files).
+It's possible to pass a partial expression to `import()`. This is handled similar to expressions in CommonJS (webpack creates a [context](/plugins/context-replacement-plugin/) with all possible files).
 
 `import()` creates a separate chunk for each possible module.
 
