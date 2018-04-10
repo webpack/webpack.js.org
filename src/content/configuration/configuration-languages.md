@@ -30,6 +30,7 @@ import path from 'path';
 import webpack from 'webpack';
 
 const config: webpack.Configuration = {
+  mode: 'production',
   entry: './foo.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -103,6 +104,7 @@ webpack = require('webpack')
 path = require('path')
 
 config =
+  mode: 'production'
   entry: './path/to/my/entry/file.js'
   output:
     path: path.resolve(__dirname, 'dist')
@@ -152,7 +154,7 @@ const CustomPlugin = config => ({
 });
 
 export default (
-  <webpack target="web" watch>
+  <webpack target="web" watch mode="production">
     <entry path="src/index.js" />
     <resolve>
       <alias {...{
