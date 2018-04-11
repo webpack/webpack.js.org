@@ -1,14 +1,44 @@
-branches:
-  only:
-    - master
-    - develop
 language: node_js
 node_js:
-  - "6"
-script:
-  - bash ./src/scripts/deploy.sh
-sudo: required
+  - "8"
+
+cache:
+  yarn: true
+  pip: true
+  directories:
+    - node_modules
+
 install:
   - npm install --global yarn
-  - yarn
   - sudo pip install proselint
+
+stages:
+  - install
+  - generate
+  - build
+  - test
+  - name: deploy
+    if: branch = master
+
+jobs:
+  include:
+    - stage: install
+      script: yarn
+
+    - stage: generate
+      script: npm run stage:generate
+
+    - stage: build
+      script: npm run stage:build
+
+    - stage: test
+      script: npm run lint:js
+    - stage: test
+      script: npm run lint:markdown
+    - stage: test
+      script: npm run lint:social
+    - stage: test
+      script: npm run lint:prose
+
+    - stage: deploy
+      script: bash ./src/scripts/deploy.sh

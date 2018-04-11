@@ -24,9 +24,9 @@
     "node": ">=6.9"
   },
   "scripts": {
-    "start": "npm run init:generated && npm run fetch && node ./antwar.bootstrap.js develop",
+    "start": "stage:generate && node ./antwar.bootstrap.js develop",
     "start-only": "node ./antwar.bootstrap.js develop",
-    "build": "npm run init:generated && npm run fetch && rm -rf build/ && node ./antwar.bootstrap.js build && npm run sitemap && echo webpack.js.org > build/CNAME",
+    "build": "stage:generate && stage:build",
     "build-test": "npm run build && http-server build/",
     "deploy": "gh-pages -d build",
     "fetch": "sh src/scripts/fetch.sh",
@@ -37,7 +37,9 @@
     "lint:social": "alex . -q",
     "lint:prose": "cp .proselintrc ~/ && proselint src/content",
     "test": "npm run lint",
-    "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml"
+    "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml",
+    "stage:generate": "npm run init:generated && npm run fetch",
+    "stage:build": "rm -rf build/ && node ./antwar.bootstrap.js build && npm run sitemap && echo webpack.js.org > build/CNAME"
   },
   "devDependencies": {
     "alex": "^4.1.0",
