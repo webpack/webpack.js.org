@@ -10,8 +10,6 @@ cache:
     - build
 
 stages:
-  - install
-  - generate
   - build
   - test
   - name: deploy
@@ -22,7 +20,7 @@ jobs:
     - stage: build
       pre_install: npm install --global yarn
       install: yarn
-      script: yarn run build
+      script: npm run build
 
     - stage: test
       script: npm run lint:js
