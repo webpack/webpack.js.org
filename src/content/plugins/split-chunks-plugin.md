@@ -10,7 +10,7 @@ related:
 
 Originally, chunks (and modules imported inside them) were connected by a parent-child relationship in the internal webpack graph. The `CommonsChunkPlugin` was used to avoid duplicated dependencies across them, but further optimizations where not possible
 
-Since version 4 the `CommonsChunkPlugin` was removed in favor of `optimization.splitChunks` and `optimize.runtimeChunk` options. Here is how the new flow works.
+Since version 4 the `CommonsChunkPlugin` was removed in favor of `optimization.splitChunks` and `optimization.runtimeChunk` options. Here is how the new flow works.
 
 
 ## Defaults
@@ -237,8 +237,8 @@ splitChunks: {
 W> This might result in a large chunk containing all external packages. It is recommended to only include your core frameworks and utilities and dynamically load the rest of the dependencies.
 
 
-## `optimize.runtimeChunk`
+## `optimization.runtimeChunk`
 
-Setting `optimize.runtimeChunk` to `true` adds an additonal chunk to each entrypoint containing only the runtime.
+Setting `optimization.runtimeChunk` to `true` adds an additonal chunk to each entrypoint containing only the runtime.
 
 The value `single` instead creates a runtime file to be shared for all generated chunks.
