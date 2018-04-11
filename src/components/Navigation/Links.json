@@ -3,12 +3,12 @@
     "title": "Documentation",
     "url": "concepts",
     "children": [
-      { "title": "Concepts", "url": "concepts" },
-      { "title": "Configuration", "url": "configuration" },
-      { "title": "API", "url": "api" },
-      { "title": "Guides", "url": "guides" },
-      { "title": "Loaders", "url": "loaders" },
-      { "title": "Plugins", "url": "plugins" }
+      { "title": "Concepts", "url": "/concepts" },
+      { "title": "Configuration", "url": "/configuration" },
+      { "title": "API", "url": "/api" },
+      { "title": "Guides", "url": "/guides" },
+      { "title": "Loaders", "url": "/loaders" },
+      { "title": "Plugins", "url": "/plugins" }
     ]
   },
   {
@@ -21,6 +21,6 @@
   },
   {
     "title": "Blog",
-    "url": "//medium.com/webpack"
+    "url": "https://medium.com/webpack"
   }
 ]
