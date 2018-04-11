@@ -71,7 +71,7 @@ compiler.hooks.run.tapPromise('MyPlugin', compiler => {
 ```
 
 The moral of the story is that there are a variety of ways to `hook` into the
-`compiler`, each allowing your plugin run as it sees fit.
+`compiler`, each one allowing your plugin to run as it sees fit.
 
 
 ## Custom Hooks
