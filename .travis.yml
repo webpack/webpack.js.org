@@ -7,7 +7,7 @@ cache:
   pip: true
   directories:
     - node_modules
-    - generated
+    - build
 
 stages:
   - install
@@ -19,15 +19,10 @@ stages:
 
 jobs:
   include:
-    - stage: install
-      install: npm install --global yarn
-      script: yarn
-
-    - stage: generate
-      script: npm run stage:generate
-
     - stage: build
-      script: npm run stage:build
+      pre_install: npm install --global yarn
+      install: yarn
+      script: yarn run build
 
     - stage: test
       script: npm run lint:js
