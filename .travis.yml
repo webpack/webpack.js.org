@@ -7,10 +7,7 @@ cache:
   pip: true
   directories:
     - node_modules
-
-install:
-  - npm install --global yarn
-  - sudo pip install proselint
+    - generated
 
 stages:
   - install
@@ -23,6 +20,7 @@ stages:
 jobs:
   include:
     - stage: install
+      install: npm install --global yarn
       script: yarn
 
     - stage: generate
@@ -33,11 +31,15 @@ jobs:
 
     - stage: test
       script: npm run lint:js
+
     - stage: test
       script: npm run lint:markdown
+
     - stage: test
       script: npm run lint:social
+
     - stage: test
+      install: sudo pip install proselint
       script: npm run lint:prose
 
     - stage: deploy
