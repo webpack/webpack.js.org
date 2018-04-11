@@ -30,7 +30,7 @@ export default class Navigation extends React.Component {
                 <Link
                   key={ `navigation__link-${link.title}` }
                   className={ `navigation__link ${activeMod}` }
-                  to={ `/${link.url}/` }>
+                  to={ this._buildUrl(link) }>
                   { link.title }
                 </Link>
               );
@@ -84,7 +84,7 @@ export default class Navigation extends React.Component {
                     <Link
                       key={ `navigation__child-${child.title}` }
                       className={ `navigation__child ${activeMod}` }
-                      to={ `/${child.url}/` }>
+                      to={ this._buildUrl(child) }>
                       { child.title }
                     </Link>
                   );
@@ -169,5 +169,15 @@ export default class Navigation extends React.Component {
     let container = document.querySelector('.navigation');
 
     container.classList.add('navigation--search-mode');
+  }
+
+  /**
+   * Builds an url prefixed and suffixed with slashes for internals
+   *
+   * @param  {object} link - An object describing the `link`
+   * @return {string}
+   */
+  _buildUrl(link) {
+    return link.external ? link.url : `/${link.url}/`;
   }
 }

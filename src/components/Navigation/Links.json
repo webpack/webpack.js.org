@@ -21,6 +21,7 @@
   },
   {
     "title": "Blog",
-    "url": "//medium.com/webpack"
+    "url": "https://medium.com/webpack",
+    "external": true
   }
 ]
