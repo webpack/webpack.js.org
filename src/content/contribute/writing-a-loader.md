@@ -247,7 +247,7 @@ We'll use this loader to process the following file:
 
 __test/example.txt__
 
-``` text
+``` bash
 Hey [name]!
 ```
 
