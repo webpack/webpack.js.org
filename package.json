@@ -111,6 +111,7 @@
     "react": "^16.2.0",
     "react-banner": "^0.5.0",
     "react-dom": "^16.2.0",
+    "react-g-analytics": "0.4.2",
     "react-hot-loader": "^4.0.0-beta.12",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",

@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-g-analytics';
 import Site from './components/Site/Site';
 
-// TODO: Re-integrate <GoogleAnalytics analyticsId="UA-46921629-2" />
-// Consider `react-g-analytics` package
+let gaID;
+
+if(process.env.NODE_ENV === 'production') {
+  gaID = 'UA-46921629-2';
+}
 
 // Client Side Rendering
 if ( window.document !== undefined ) {
   ReactDOM.render((
-    <BrowserRouter>
+    <BrowserRouter id={gaID}>
       <Route
         path="/"
         render={ props => (

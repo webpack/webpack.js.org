@@ -12,7 +12,7 @@ this branch:
 - [ ] Rethink external population process
 - [ ] Extract anchors into `_content.json` via `DirectoryTreePlugin`
 - [ ] Finish re-incorporating mobile sidebar
-- [ ] Re-integrate google-analytics
+- [x] Re-integrate google-analytics (Fernando)
 - [ ] Re-incorporate `redirects.json`
 - [ ] Populate page title in `server.jsx` (fernando)
 - [ ] Finish `Navigation` component (greg)
