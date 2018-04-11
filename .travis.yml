@@ -18,7 +18,7 @@ stages:
 jobs:
   include:
     - stage: build
-      pre_install: npm install --global yarn
+      before_install: npm install --global yarn
       install: yarn
       script: npm run build
 
