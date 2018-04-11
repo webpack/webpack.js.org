@@ -95,7 +95,7 @@ export default class Support extends React.Component {
         </div>
 
         {
-          supporters.map((supporter, index) => (
+          (typeof window !== 'undefined') ? supporters.map((supporter, index) => (
             <a key={ supporter.id || supporter.slug || index }
                className="support__item"
                title={ `$${formatMoney(supporter.totalDonations / 100)} by ${supporter.name || supporter.slug}` }
@@ -104,11 +104,11 @@ export default class Support extends React.Component {
               {<img
                 className={ `support__${rank}-avatar` }
                 src={ supporter.avatar || SmallIcon }
-                alt={ supporter.name || supporter.slug ? `${supporter.name || supporter.slug}'s avatar` : 'avatar' } 
+                alt={ supporter.name || supporter.slug ? `${supporter.name || supporter.slug}'s avatar` : 'avatar' }
                 onError={ this._handleImgError } />}
               { rank === 'backer' ? <figure className="support__outline" /> : null }
             </a>
-          ))
+          )) : null
         }
 
         <div className="support__bottom">
@@ -119,7 +119,7 @@ export default class Support extends React.Component {
       </div>
     );
   }
-  
+
   /**
    * Handle images that aren't found
    *
