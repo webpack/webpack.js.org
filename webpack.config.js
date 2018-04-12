@@ -119,6 +119,7 @@ module.exports = (env) => ({
         'development/release-process': '/contribute/release-process/',
         'development/how-to-write-a-loader': '/contribute/writing-a-loader/',
         'development/how-to-write-a-plugin': '/contribute/writing-a-plugin/',
+				'migrating': '/migrate/3/',
       },
     }),
   ]
