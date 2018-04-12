@@ -28,7 +28,7 @@ T> The most important part to take away from this document is that there are man
 
 The following examples below describe how webpack's configuration object can be both expressive and configurable because _it is code_:
 
-## The Simplest Configuration
+## Simple Configuration
 
 **webpack.config.js**
 
@@ -36,6 +36,7 @@ The following examples below describe how webpack's configuration object can be 
 var path = require('path');
 
 module.exports = {
+  mode: 'development',
   entry: './foo.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
