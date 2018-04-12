@@ -3,6 +3,7 @@ title: 包含统计数据的文件(Stats Data)
 sort: 3
 contributors:
   - skipjack
+  - franjohn21
 ---
 
 通过 webpack 编译源文件时，用户可以生成包含有关于模块的统计数据的 JSON 文件。这些统计数据不仅可以帮助开发者来分析应用的依赖图表，还可以优化编译的速度。这个 JSON 文件可以通过以下的命令来生成:
@@ -24,6 +25,7 @@ webpack --profile --json > compilation-stats.json
   "hash": "11593e3b3ac85436984a", // 编译使用的 hash
   "time": 2469, // 编译耗时 (ms)
   "filteredModules": 0, // 当 [`exclude`](/configuration/stats/#stats)传入[`toJson`](/api/node/#stats-tojson-options-) 函数时，统计被无视的模块的数量
+  "outputPath": "/", // path to webpack 输出目录的 path 路径
   "assetsByChunkName": {
     // 用作映射的 chunk 的名称
     "main": "web.js?h=11593e3b3ac85436984a",

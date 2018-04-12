@@ -22,7 +22,7 @@ loader 通过在 `require()` 语句中使用 `loadername!` 前缀来激活，或
 ## JSON
 
 * [`json-loader`](/loaders/json-loader) 加载 [JSON](http://json.org/) 文件（默认包含）
-* [`json5-loader`](/loaders/json5-loader) 加载和转译 [JSON 5](http://json5.org/) 文件
+* [`json5-loader`](/loaders/json5-loader) 加载和转译 [JSON 5](https://json5.org/) 文件
 * `cson-loader` 加载和转译 [CSON](https://github.com/bevry/cson#what-is-cson) 文件
 
 
@@ -60,7 +60,7 @@ loader 通过在 `require()` 语句中使用 `loadername!` 前缀来激活，或
 ## 清理和测试(Linting && Testing)
 
 * [`mocha-loader`](/loaders/mocha-loader) 使用 [mocha](https://mochajs.org/) 测试（浏览器/NodeJS）
-* [`eslint-loader`](https://github.com/MoOx/eslint-loader) PreLoader，使用 [ESLint](http://eslint.org/) 清理代码
+* [`eslint-loader`](https://github.com/webpack-contrib/eslint-loader) PreLoader，使用 [ESLint](https://eslint.org/) 清理代码
 * [`jshint-loader`](/loaders/jshint-loader) PreLoader，使用 [JSHint](http://jshint.com/about/) 清理代码
 * `jscs-loader` PreLoader，使用 [JSCS](http://jscs.info/) 检查代码样式
 * [`coverjs-loader`](/loaders/coverjs-loader) PreLoader，使用 [CoverJS](https://github.com/arian/CoverJS) 确定测试覆盖率

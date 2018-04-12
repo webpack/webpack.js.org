@@ -243,7 +243,7 @@ unsafeCache: /src\/utilities/
 W> 修改缓存路径可能在极少数情况下导致失败。
 
 
-## `resolve.plugins`
+### `resolve.plugins`
 
 应该使用的额外的解析插件列表。它允许插件，如 [`DirectoryNamedWebpackPlugin`](https://www.npmjs.com/package/directory-named-webpack-plugin)。
 
@@ -254,7 +254,7 @@ plugins: [
 ```
 
 
-## `resolve.symlinks`
+### `resolve.symlinks`
 
 `boolean`
 
@@ -269,7 +269,7 @@ symlinks: true
 ```
 
 
-## `resolve.cachePredicate`
+### `resolve.cachePredicate`
 
 `function`
 

@@ -355,7 +355,7 @@ addDependency(file: string)
 dependency(file: string) // 简写
 ```
 
-加入一个文件作为产生 loader 结果的依赖，使它们的任何变化可以被监听到。例如，[`html-loader`](https://github.com/webpack/html-loader) 就使用了这个技巧，当它发现 `src` 和 `src-set` 属性时，就会把这些属性上的 url 加入到被解析的 html 文件的依赖中。
+加入一个文件作为产生 loader 结果的依赖，使它们的任何变化可以被监听到。例如，[`html-loader`](https://github.com/webpack-contrib/html-loader) 就使用了这个技巧，当它发现 `src` 和 `src-set` 属性时，就会把这些属性上的 url 加入到被解析的 html 文件的依赖中。
 
 
 ### `this.addContextDependency`

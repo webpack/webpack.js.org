@@ -6,9 +6,14 @@ contributors:
   - christopher4lis
   - kevinzwhuang
   - jdbevan
+  - jeremenichelli
 ---
 
-`CommonsChunkPlugin` 插件，是一个可选的用于建立一个独立文件(又称作 chunk)的功能，这个文件包括多个入口 `chunk` 的公共模块。通过将公共模块拆出来，最终合成的文件能够在最开始的时候加载一次，便存到缓存中供后续使用。这个带来速度上的提升，因为浏览器会迅速将公共的代码从缓存中取出来，而不是每次访问一个新页面时，再去加载一个更大的文件。
+`CommonsChunkPlugin` 插件，是一个可选的用于建立一个独立文件(又称作 chunk)的功能，这个文件包括多个入口 `chunk` 的公共模块。
+
+W> The CommonsChunkPlugin 已经从 webpack v4 legato 中移除。想要了解在最新版本中如何处理 chunk，请查看 [SplitChunksPlugin](/plugins/split-chunks-plugin/)。
+
+通过将公共模块拆出来，最终合成的文件能够在最开始的时候加载一次，便存到缓存中供后续使用。这个带来速度上的提升，因为浏览器会迅速将公共的代码从缓存中取出来，而不是每次访问一个新页面时，再去加载一个更大的文件。
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin(options)
@@ -43,12 +48,11 @@ new webpack.optimize.CommonsChunkPlugin(options)
   // 通过 chunk name 去选择 chunks 的来源。chunk 必须是  公共chunk 的子模块。
   // 如果被忽略，所有的，所有的 入口chunk (entry chunk) 都会被选择。
 
-
   children: boolean,
-  // 如果设置为 `true`，所有  公共chunk 的子模块都会被选择
+  // 如果设置为 `true`，所有公共 chunk 的子模块都会被选择
 
   deepChildren: boolean,
-  // If `true` all descendants of the commons chunk are selected
+  // 如果设置为 `true`，所有公共 chunk 的后代模块都会被选择
 
   async: boolean|string,
   // 如果设置为 `true`，一个异步的  公共chunk 会作为 `options.name` 的子模块，和 `options.chunks` 的兄弟模块被创建。
@@ -121,7 +125,7 @@ plugins: [
 <script src="app.js" charset="utf-8"></script>
 ```
 
-T> 结合长期缓存，你可能需要使用这个[插件](https://github.com/diurnalist/chunk-manifest-webpack-plugin)去避免 公共chunk 改变。 你也需要使用 `records` 去保持稳定的模块 id，例如，使用 [`NamedModulesPlugin`](/plugins/named-modules-plugin) 或 [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin)。
+T> 结合长期缓存，你可能需要使用这个[插件](https://github.com/soundcloud/chunk-manifest-webpack-plugin)去避免 公共chunk 改变。 你也需要使用 `records` 去保持稳定的模块 id，例如，使用 [`NamedModulesPlugin`](/plugins/named-modules-plugin) 或 [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin)。
 
 
 ###  将公共模块打包进父 chunk

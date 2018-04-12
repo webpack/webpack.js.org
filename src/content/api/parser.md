@@ -1,84 +1,321 @@
 ---
 title: Parser
 group: Plugins
-sort: 8
+sort: 4
 ---
 
-parser 实例对象接收一个字符串以及回调函数，并在匹配时返回一个表达式。
+The `parser` instance, found in the `compiler`, is used to parse each module
+being processed by webpack. The `parser` is yet another webpack class that
+extends `tapable` and provides a variety of `tapable` hooks that can be used by
+plugin authors to customize the parsing process.
 
-```javascript
-compiler.parser.plugin("var rewire", function (expr) {
-    //如果原始模块包含 "var rewire"
-    //将得到一个表达式对象的句柄
-    return true;
-});
+The `parser` is found within [module factories](/api/compiler-hooks/#normalmodulefactory) and therefore takes little
+more work to access:
+
+``` js
+compiler.hooks.normalModuleFactory.tap(factory => {
+  factory.hooks.parser.tap((parser, options) => {
+    parser.hooks.someHook.tap(...)
+  })
+})
 ```
 
-## `program(ast)` bailing
+As with the `compiler`, `tapAsync` and `tapPromise` may also be available
+depending on the type of hook.
 
-代码片段中 AST 的通用插件接口。
 
-## `statement(statement: Statement)` bailing
+## Hooks
 
-代码片段中 statements 的通用插件接口。
+The following lifecycle hooks are exposed by the `parser` and can be accessed
+as such:
 
-## `call <identifier>(expr: Expression)` bailing
 
-`abc(1)` => `call abc`
+### evaluateTypeof
 
-`a.b.c(1)` => `call a.b.c`
+`SyncBailHook`
 
-## `expression <identifier>(expr: Expression)` bailing
+Evaluate the type of an identifier.
 
-`abc` => `expression abc`
+Parameters: `expression`
 
-`a.b.c` => `expression a.b.c`
 
-## `expression ?:(expr: Expression)` bailing
+### evaluate
 
-`(abc ? 1 : 2)` => `expression ?!`
+`SyncBailHook`
 
-返回一个布尔值以忽略对错误路径的解析。
+Evaluate an expression.
 
-## `typeof <identifier>(expr: Expression)` bailing
+Parameters: `expression`
 
-`typeof a.b.c` => `typeof a.b.c`
 
-## `statement if(statement: Statement)` bailing
+### evaluateIdentifier
 
-`if(abc) {}` => `statement if`
+`SyncBailHook`
 
-返回一个布尔值以省略对错误路径的解析。
+Evaluate an identifier that is a free variable.
 
-## `label <labelname>(statement: Statement)` bailing
+Parameters: `expression`
 
-`xyz: abc` => `label xyz`
 
-## `var <name>(statement: Statement)` bailing
+### evaluateDefinedIdentifier
 
-`var abc, def` => `var abc` + `var def`
+`SyncBailHook`
 
-返回 `false`，变量不会添加到已知的定义中。
+Evaluate an identifier that is a defined variable.
 
-## `evaluate <expression type>(expr: Expression)` bailing
+Parameters: `expression`
 
-对表达式求值。
 
-## `evaluate typeof <identifier>(expr: Expression)` bailing
+### evaluateCallExpressionMember
 
-对标识符的类型求值。
+`SyncBailHook`
 
-## `evaluate Identifier <identifier>(expr: Expression)` bailing
+Evaluate a call to a member function of a successfully evaluated expression.
 
-对一个自由变量的标识符求值。
+Parameters: `expression` `param`
 
-## `evaluate defined Identifier <identifier>(expr: Expression)` bailing
 
-对一个已定义变量的标识符求值。
+### statement
 
-## `evaluate CallExpression .<property>(expr: Expression)` bailing
+`SyncBailHook`
 
-对成功鉴定的表达式的成员函数的调用求值。
+General purpose hook that is called when parsing statements in a code fragment.
+
+Parameters: `statement`
+
+
+### statementIf
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement`
+
+
+### label
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement`
+
+
+### import
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement` `source`
+
+
+### importSpecifier
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement` `source` `exportName` `identifierName`
+
+
+### export
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement`
+
+
+### exportImport
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement` `source`
+
+
+### exportDeclaration
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement` `declaration`
+
+
+### exportExpression
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement` `declaration`
+
+
+### exportSpecifier
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement` `identifierName` `exportName` `index`
+
+
+### exportImportSpecifier
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement` `source` `identifierName` `exportName` `index`
+
+
+### varDeclaration
+
+`SyncBailHook`
+
+...
+
+Parameters: `declaration`
+
+
+### varDeclarationLet
+
+`SyncBailHook`
+
+...
+
+Parameters: `declaration`
+
+
+### varDeclarationConst
+
+`SyncBailHook`
+
+...
+
+Parameters: `declaration`
+
+
+### varDeclarationVar
+
+`SyncBailHook`
+
+...
+
+Parameters: `declaration`
+
+
+### canRename
+
+`SyncBailHook`
+
+...
+
+Parameters: `initExpression`
+
+
+### rename
+
+`SyncBailHook`
+
+...
+
+Parameters: `initExpression`
+
+
+### assigned
+
+`SyncBailHook`
+
+...
+
+Parameters: `expression`
+
+
+### assign
+
+`SyncBailHook`
+
+...
+
+Parameters: `expression`
+
+
+### typeof
+
+`SyncBailHook`
+
+...
+
+Parameters: `expression`
+
+
+### call
+
+`SyncBailHook`
+
+...
+
+Parameters: `expression`
+
+
+### callAnyMember
+
+`SyncBailHook`
+
+...
+
+Parameters: `expression`
+
+
+### new
+
+`SyncBailHook`
+
+...
+
+Parameters: `expression`
+
+
+### expression
+
+`SyncBailHook`
+
+...
+
+Parameters: `expression`
+
+
+### expressionAnyMember
+
+`SyncBailHook`
+
+...
+
+Parameters: `expression`
+
+
+### expressionConditionalOperator
+
+`SyncBailHook`
+
+...
+
+Parameters: `expression`
+
+
+### program
+
+`SyncBailHook`
+
+Get access to the abstract syntax tree (AST) of a code fragment
+
+Parameters: `ast` `comments`
 
 ***
 

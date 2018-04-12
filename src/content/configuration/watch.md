@@ -5,9 +5,11 @@ contributors:
   - sokra
   - skipjack
   - SpaceK33z
+  - EugeneHlushko
 ---
 
 webpack 可以监听文件变化，当它们修改后会重新编译。这个页面介绍了如何启用这个功能，以及当 watch 无法正常运行的时候你可以做的一些调整。
+
 
 ## `watch`
 
@@ -20,6 +22,7 @@ watch: false
 ```
 
 T> webpack-dev-server 和 webpack-dev-middleware 里 Watch 模式默认开启。
+
 
 ## `watchOptions`
 
@@ -34,6 +37,7 @@ watchOptions: {
 }
 ```
 
+
 ## `watchOptions.aggregateTimeout`
 
 `number`
@@ -44,6 +48,7 @@ watchOptions: {
 aggregateTimeout: 300 // 默认值
 ```
 
+
 ## `watchOptions.ignored`
 
 对于某些系统，监听大量文件系统会导致大量的 CPU 或内存占用。这个选项可以排除一些巨大的文件夹，例如 `node_modules`：
@@ -52,23 +57,35 @@ aggregateTimeout: 300 // 默认值
 ignored: /node_modules/
 ```
 
-也可以使用 [anymatch](https://github.com/es128/anymatch) 模式：
+也可以使用 [anymatch](https://github.com/micromatch/anymatch) 模式：
 
 ```js
 ignored: "files/**/*.js"
 ```
 
+
 ## `watchOptions.poll`
 
 `boolean` `number`
 
-通过传递 `true` 开启 [polling](http://whatis.techtarget.com/definition/polling)，或者指定毫秒为单位进行轮询。
+通过传递 `true` 开启 [polling](https://whatis.techtarget.com/definition/polling)，或者指定毫秒为单位进行轮询。
 
 ```js
 poll: 1000 // 每秒检查一次变动
 ```
 
 T> 如果监听没生效，试试这个选项吧。Watch 在 NFS 和 VirtualBox 机器上不适用。
+
+
+## `info-verbosity`
+
+`string`: `none` `info` `verbose`
+
+控制生命周期消息的详细程度，例如 `Started watching files(开始监听文件)...` 日志。将 `info-verbosity` 设置为 `verbose`，还会额外在增量构建的开始和结束时，向控制台发送消息。`info-verbosity` 默认设置为 `info`。
+
+```bash
+webpack --watch --info-verbosity verbose
+```
 
 
 ## 故障排除

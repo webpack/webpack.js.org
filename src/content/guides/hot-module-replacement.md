@@ -33,7 +33,7 @@ W> __HMR__ 不适用于生产环境，这意味着它应当只在开发环境使
 
 启用此功能实际上相当简单。而我们要做的，就是更新 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 的配置，和使用 webpack 内置的 HMR 插件。我们还要删除掉 `print.js` 的入口起点，因为它现在正被 `index.js` 模式使用。
 
-T> 如果你使用了 `webpack-dev-middleware` 而没有使用 `webpack-dev-server`，请使用 [`webpack-hot-middleware`](https://github.com/glenjamin/webpack-hot-middleware) package 包，以在你的自定义服务或应用程序上启用 HMR。
+T> 如果你使用了 `webpack-dev-middleware` 而没有使用 `webpack-dev-server`，请使用 [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware) package 包，以在你的自定义服务或应用程序上启用 HMR。
 
 __webpack.config.js__
 
@@ -162,7 +162,7 @@ server.listen(5000, 'localhost', () => {
 });
 ```
 
-T> If you're [using `webpack-dev-middleware`](/guides/development#using-webpack-dev-middleware), check out the [`webpack-hot-middleware`](https://github.com/glenjamin/webpack-hot-middleware) package to enable HMR on your custom dev server.
+T> 如果你在 [使用 `webpack-dev-middleware`](/guides/development#using-webpack-dev-middleware)，可以通过 [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware) package 包，在自定义开发服务下启用 HMR。
 
 
 ## 问题
@@ -340,7 +340,7 @@ __styles.css__
 - [Vue Loader](https://github.com/vuejs/vue-loader)：此 loader 支持用于 vue 组件的 HMR，提供开箱即用体验。
 - [Elm Hot Loader](https://github.com/fluxxu/elm-hot-loader)：支持用于 Elm 程序语言的 HMR。
 - [Redux HMR](https://survivejs.com/webpack/appendices/hmr-with-react/#configuring-hmr-with-redux)：无需 loader 或插件！只需对 main store 文件进行简单的修改。
-- [Angular HMR](https://github.com/AngularClass/angular-hmr)：No loader necessary! A simple change to your main NgModule file is all that's required to have full control over the HMR APIs.没有必要使用 loader！只需对主要的 NgModule 文件进行简单的修改，由 HMR API 完全控制。
+- [Angular HMR](https://github.com/gdi2290/angular-hmr)：No loader necessary! A simple change to your main NgModule file is all that's required to have full control over the HMR APIs.没有必要使用 loader！只需对主要的 NgModule 文件进行简单的修改，由 HMR API 完全控制。
 
 T> 如果你知道任何其他 loader 或插件，能够有助于或增强模块热替换(Hot Module Replacement)，请提交一个 pull request 以添加到此列表中！
 

@@ -19,7 +19,7 @@ webpack 应当**总是**以小写字母书写。即使在一句话的起始位�
 
 webpack logo 应放置在白色背景上，其周围有足够间距，如下所示：
 
-<img src="https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.png?raw=true" alt="webpack logo 默认在浅色背景上，并保持适当间距" />
+<img src="https://raw.githubusercontent.com/webpack/media/master/logo/logo-on-white-bg.png" alt="webpack logo 默认在浅色背景上，并保持适当间距" />
 
 [svg](https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.svg) | [png](https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.png) | [jpg](https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.jpg)
 
@@ -28,7 +28,7 @@ webpack logo 应放置在白色背景上，其周围有足够间距，如下所�
 对于深色背景，可以使用 logo 反色版本：
 
 <div style="display: block; background: #111;">
-  <img src="https://github.com/webpack/media/blob/master/logo/logo-on-dark-bg.png?raw=true" alt="webpack logo default with proper spacing on light background" />
+  <img src="https://raw.githubusercontent.com/webpack/media/master/logo/logo-on-dark-bg.png" alt="webpack logo default with proper spacing on light background" />
 </div>
 
 [svg](https://github.com/webpack/media/blob/master/logo/logo-on-dark-bg.svg) | [png](https://github.com/webpack/media/blob/master/logo/logo-on-dark-bg.png) | [jpg](https://github.com/webpack/media/blob/master/logo/logo-on-dark-bg.jpg)
@@ -40,19 +40,19 @@ T> 请尽可能使用 **图标+文本** 的组合方式。
 
 **图标旨在用于布局有限的区域。如前所述，最好选择 图标+文字 的组合方式。**
 
-<img src="https://github.com/webpack/media/blob/master/logo/icon.png?raw=true" width="250" alt="icon example">
+<img src="https://raw.githubusercontent.com/webpack/media/master/logo/icon.png" width="250" alt="icon example">
 
 [svg](https://github.com/webpack/media/blob/master/logo/icon.svg) | [png](https://github.com/webpack/media/blob/master/logo/icon.png) | [jpg](https://github.com/webpack/media/blob/master/logo/icon.jpg)
 
 适用于较大区域的正方形尺寸图标（例如，头像或个人图片）：
 
-<img src="https://github.com/webpack/media/blob/master/logo/icon-square-big.png?raw=true" width="250" alt="icon square big example">
+<img src="https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-big.png" width="250" alt="icon square big example">
 
 [svg](https://github.com/webpack/media/blob/master/logo/icon-square-big.svg) | [png](https://github.com/webpack/media/blob/master/logo/icon-square-big.png) | [jpg](https://github.com/webpack/media/blob/master/logo/icon-square-big.jpg)
 
 适用于较小区域的正方形尺寸图标（例如，favicon）：
 
-<img src="https://github.com/webpack/media/blob/master/logo/icon-square-small.png?raw=true" width="50" alt="icon square small example">
+<img src="https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png" width="50" alt="icon square small example">
 
 [svg](https://github.com/webpack/media/blob/master/logo/icon-square-small.svg) | [png](https://github.com/webpack/media/blob/master/logo/icon-square-small.png) | [jpg](https://github.com/webpack/media/blob/master/logo/icon-square-small.jpg)
 
@@ -63,12 +63,12 @@ T> 对于那些遵循我们的指南，并已经深入了解的人，我们还�
 
 ## 字体
 
-我们使用来自 [Atipo Foundry](http://atipofoundry.com/) 这个网站，由一群极具天赋的人所设计的 [Geomanist Medium](http://geomanist.com/) 这款漂亮字体，他们通过 'pay what you want' 的模型，提供完整字体系列。
+我们使用来自 [Geomanist Medium](http://atipofoundry.com/fonts/geomanist) 这个网站，由一群极具天赋的人所设计的 [Atipo Foundry](http://atipofoundry.com/) 这款漂亮字体，他们通过 'pay what you want' 的模型，提供完整字体系列。
 
 
 ## 调色板
 
-以下颜色在整个网站中，以各种组合形式使用，并且在 [Open Collective](http://opencollective.com) 和 [Threadless](https://medium.com/u/840563ee2a56) 的帮助下，在[官方 webpack 商店](https://webpack.threadless.com/collections/the-final-release-collection/)我们推出的时尚服装系列中，也用到这些颜色！
+以下颜色在整个网站中，以各种组合形式使用，并且在 [Open Collective](https://opencollective.com) 和 [Threadless](https://medium.com/u/840563ee2a56) 的帮助下，在[官方 webpack 商店](https://webpack.threadless.com/collections/the-final-release-collection/)我们推出的时尚服装系列中，也用到这些颜色！
 
 | 颜色名称    | HEX 编号      | RGB 编号              | 示例
 |---------------|---------------|-----------------------|-------------------------------

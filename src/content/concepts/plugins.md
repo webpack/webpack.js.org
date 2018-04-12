@@ -21,21 +21,18 @@ webpack **插件**是一个具有 [`apply`](https://developer.mozilla.org/en-US/
 **ConsoleLogOnBuildWebpackPlugin.js**
 
 ```javascript
-function ConsoleLogOnBuildWebpackPlugin() {
+const pluginName = 'ConsoleLogOnBuildWebpackPlugin';
 
-};
-
-ConsoleLogOnBuildWebpackPlugin.prototype.apply = function(compiler) {
-  compiler.plugin('run', function(compiler, callback) {
-    console.log("webpack 构建过程开始！！！");
-
-    callback();
-  });
-};
+class ConsoleLogOnBuildWebpackPlugin {
+	apply(compiler) {
+		compiler.hooks.run.tap(pluginName, compilation => {
+			console.log("webpack 构建过程开始！");
+		});
+	}
+}
 ```
 
-T> 作为一个聪明的 JavaScript 开发者，你可能还记得 [`Function.prototype.apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 方法。通过这个方法你可以把任意函数作为插件传递（`this` 将指向 `compiler`）。你可以在配置中使用这样的方式来内联自定义插件。
-
+compiler hook 的 tap 方法的第一个参数，应该是驼峰式命名的插件名称。建议为此使用一个常量，以便它可以在所有 hook 中复用。
 
 ## 用法
 

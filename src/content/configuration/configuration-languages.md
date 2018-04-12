@@ -26,10 +26,11 @@ npm install --save-dev typescript ts-node @types/node @types/webpack
 __webpack.config.ts__
 
 ```typescript
-import * as webpack from 'webpack';
-import * as path from 'path';
+import path from 'path';
+import webpack from 'webpack';
 
 const config: webpack.Configuration = {
+  mode: 'production',
   entry: './foo.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -39,6 +40,8 @@ const config: webpack.Configuration = {
 
 export default config;
 ```
+
+以上示例假定 webpack 版本 >= 2.7，或者，在  `tsconfig.json` 文件中，具有 `esModuleInterop` 和 `allowSyntheticDefaultImports` 这两个新的编译器选项的较新版本 TypeScript。
 
 注意，你还需要核对 `tsconfig.json` 文件。如果 `tsconfig.json` 中的 `compilerOptions` 中的 module 字段是 `commonjs` ，则配置是正确的，否则 webpack 将因为错误而构建失败。发生这种情况，是因为 `ts-node` 不支持 `commonjs` 以外的任何模块语法。
 
@@ -101,6 +104,7 @@ webpack = require('webpack')
 path = require('path')
 
 config =
+  mode: 'production'
   entry: './path/to/my/entry/file.js'
   output:
     path: path.resolve(__dirname, 'dist')
@@ -150,7 +154,7 @@ const CustomPlugin = config => ({
 });
 
 export default (
-  <webpack target="web" watch>
+  <webpack target="web" watch mode="production">
     <entry path="src/index.js" />
     <resolve>
       <alias {...{

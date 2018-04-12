@@ -40,7 +40,7 @@ new webpack.SourceMapDevToolPlugin(options)
 
 T> 设置 `module` 和/或 `columns` 为 `false` 将会生成不太精确的 source map，但同时会显著地提升编译性能。
 
-W> 记得在使用 [`UglifyJSPlugin`](/plugins/uglify-js-plugin) 时，必须使用 `sourceMap` 选项。
+W> 记得在使用 [`UglifyJSPlugin`](/plugins/uglifyjs-webpack-plugin) 时，必须使用 `sourceMap` 选项。
 
 ## 用法
 
