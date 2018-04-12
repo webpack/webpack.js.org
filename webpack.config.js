@@ -10,13 +10,11 @@ module.exports = (env) => ({
   resolve: {
     extensions: ['.js', '.jsx', '.scss']
   },
-
   resolveLoader: {
     alias: {
       'page-loader': path.resolve(cwd, 'loaders/page-loader')
     }
   },
-
   module: {
     rules: [
       {
@@ -87,7 +85,11 @@ module.exports = (env) => ({
       {
         test: /\.html$/,
         use: 'raw-loader'
-      }
+      },
+      {
+        test: /\.md$/,
+        use: 'page-loader',
+      },
     ]
   },
 
@@ -101,12 +103,15 @@ module.exports = (env) => ({
     }),
     new RedirectWebpackPlugin({
       redirects: {
+        'support': '/contribute/',
+        'writers-guide': '/contribute/writers-guide/',
         'get-started': '/guides/getting-started/',
         'get-started/install-webpack': '/guides/installation/',
         'get-started/why-webpack': '/guides/why-webpack/',
         'pluginsapi': '/api/plugins/',
         'pluginsapi/compiler': '/api/compiler-hooks/',
         'pluginsapi/template': '/api/template/',
+        'api/passing-a-config': '/configuration/configuration-types/',
         'api/plugins/compiler': '/api/compiler-hooks/',
         'api/plugins/compilation': '/api/compilation/',
         'api/plugins/module-factories': '/api/module-methods/',
@@ -119,7 +124,14 @@ module.exports = (env) => ({
         'development/release-process': '/contribute/release-process/',
         'development/how-to-write-a-loader': '/contribute/writing-a-loader/',
         'development/how-to-write-a-plugin': '/contribute/writing-a-plugin/',
-				'migrating': '/migrate/3/',
+        'guides/code-splitting-import': '/guides/code-splitting/',
+        'guides/code-splitting-require': '/guides/code-splitting/',
+        'guides/code-splitting-async': '/guides/code-splitting/',
+        'guides/code-splitting-css': '/guides/code-splitting/',
+        'guides/code-splitting-libraries': '/guides/code-splitting/',
+        'guides/why-webpack': '/comparison/',
+        'guides/production-build': '/guides/production/',
+        'migrating': '/migrate/3/'
       },
     }),
   ]
