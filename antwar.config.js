@@ -1,7 +1,8 @@
 const path = require('path');
 const combineContexts = require('./src/utilities/combine-contexts');
 
-module.exports = () => ({
+module.exports = {
+  port: 4000,
   maximumWorkers: process.env.TRAVIS && 1,
   template: {
     file: path.join(__dirname, 'template.ejs')

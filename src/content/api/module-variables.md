@@ -1,5 +1,5 @@
 ---
-title: 模块变量(Module Variables)
+title: 模块变量(module variables)
 group: Modules
 sort: 4
 contributors:

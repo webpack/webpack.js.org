@@ -1,5 +1,5 @@
 ---
-title: 模块方法(Module Methods)
+title: 模块方法(module methods)
 group: Modules
 sort: 3
 contributors:
@@ -267,7 +267,7 @@ webpack 内置的 `LabeledModulesPlugin` 插件，允许使用下面的方法导
 ``` javascript
 export: var answer = 42;
 export: function method(value) {
-  // Do something...
+  // 做一些操作……
 };
 ```
 

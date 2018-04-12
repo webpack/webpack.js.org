@@ -40,7 +40,7 @@ contributors:
 [了解更多关于 Node API 的信息！](/api/node)
 
 
-## Loaders
+## loader
 
 loader 是转译模块源代码的转换规则。
 loader 被编写为，接受源代码作为参数的函数，
