@@ -40,7 +40,7 @@ T> 记住，只设置 `NODE_ENV`，则不会自动设置 `mode`。
 
 
 ```diff
-// webpack.production.config.js
+// webpack.development.config.js
 module.exports = {
 + mode: 'development'
 - plugins: [

@@ -5,6 +5,7 @@ contributors:
   - ev1stensberg
   - simon04
   - tbroadley
+  - chenxsan
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -37,7 +38,7 @@ See [configuration](/configuration) for the options in the configuration file.
 ## Usage without config file
 
 ```sh
-webpack <entry> [<entry>] <output>
+webpack <entry> [<entry>] -o <output>
 ```
 
 **`<entry>`**
@@ -116,7 +117,7 @@ webpack --json
 webpack --json > stats.json
 ```
 
-In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option the output can be a JSON object. This response is accepted by webpack's [analyse tool](https://webpack.github.com/analyse), or chrisbateman's [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/), or th0r's [webpack-bundle-analyzer](https://github.com/th0r/webpack-bundle-analyzer). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
+In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option the output can be a JSON object. This response is accepted by webpack's [analyse tool](https://webpack.github.io/analyse/), or chrisbateman's [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/), or th0r's [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
 
 ### Environment Options
 

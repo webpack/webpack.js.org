@@ -1,5 +1,5 @@
 ---
-title: 模块变量(Module Variables)
+title: 模块变量(module variables)
 group: Modules
 sort: 4
 contributors:
@@ -66,12 +66,12 @@ exports.aFunction = function doSomething() {
 
 ### `global` (NodeJS)
 
-见 [Node.js global](http://nodejs.org/api/globals.html#globals_global).
+见 [Node.js global](https://nodejs.org/api/globals.html#globals_global).
 
 
 ### `process` (NodeJS)
 
-见 [Node.js process](http://nodejs.org/api/process.html).
+见 [Node.js process](https://nodejs.org/api/process.html).
 
 
 ### `__dirname` (NodeJS)
@@ -80,7 +80,7 @@ exports.aFunction = function doSomething() {
 
 * `false`: Not defined
 * `mock`: equal "/"
-* `true`: [Node.js __dirname](http://nodejs.org/api/globals.html#globals_dirname)
+* `true`: [Node.js __dirname](https://nodejs.org/api/globals.html#globals_dirname)
 
 如果在一个被 Parser 解析的表达式内部使用，则配置选项会被当作 `true` 处理。
 
@@ -91,7 +91,7 @@ exports.aFunction = function doSomething() {
 
 * `false`: Not defined
 * `mock`: equal "/index.js"
-* `true`: [Node.js __filename](http://nodejs.org/api/globals.html#globals_filename)
+* `true`: [Node.js __filename](https://nodejs.org/api/globals.html#globals_filename)
 
 如果在一个被 Parser 解析的表达式内部使用，则配置选项会被当作 `true` 处理。
 

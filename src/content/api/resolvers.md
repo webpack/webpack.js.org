@@ -4,7 +4,7 @@ group: Plugins
 sort: 3
 ---
 
-resolver 是由 `enhanced-resolve` package 创建出来的。`Resolver` 类继承了 `tapable` 类，并且使用 `tapable` 提供的一些钩子。可以直接使用 `enhanced-resolve` package 创建一些新的 resolver，然而，所有的 [`compiler` 实例](/api/compiler/) 都有一些可以接触(tap into)到的 resolver 实例。
+resolver 是由 `enhanced-resolve` package 创建出来的。`Resolver` 类继承了 `tapable` 类，并且使用 `tapable` 提供的一些钩子。可以直接使用 `enhanced-resolve` package 创建一些新的 resolver，然而，所有的 [`compiler` 实例](/api/node/#compiler-instance) 都有一些可以接触(tap into)到的 resolver 实例。
 
 在继续阅读之前，请确保至少了解过 [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve) 和 [`tapable`](/api/tapable/) 文档。
 
