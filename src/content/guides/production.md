@@ -237,7 +237,7 @@ __src/index.js__
 ```
 
 
-##  Minimize CSS
+## Minimize CSS
 
 It is crucial to minimize your CSS on production, please see [Minimizing for Production](/plugins/mini-css-extract-plugin/#minimizing-for-production) section.
 
