@@ -239,6 +239,21 @@ module.exports = {
 };
 ```
 
+__dist/index.html__
+
+``` diff
+  <!doctype html>
+  <html>
+   <head>
+     <title>Getting Started</title>
+   </head>
+   <body>
+-    <script src="main.js"></script>
++    <script src="bundle.js"></script>
+   </body>
+  </html>
+```
+
 Now, let's run the build again but instead using our new configuration file:
 
 ``` bash
