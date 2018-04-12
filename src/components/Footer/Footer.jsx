@@ -25,10 +25,10 @@ const Footer = () => (
       <section className="footer__right">
         <Link className="footer__link" to="/glossary/">概念术语</Link>
         <Link className="footer__link" to="/branding/">品牌</Link>
-        <Link className="footer__link" to="//gitter.im/webpack/webpack">Gitter</Link>
+        <Link className="footer__link" to="https://gitter.im/webpack/webpack">Gitter</Link>
         <Link className="footer__link" to="https://github.com/webpack/webpack/releases">更新日志</Link>
         <Link className="footer__link" to="/license">遵循协议</Link>
-        <Link className="footer__link" to="">粤ICP备17008907号</Link>
+        <Link className="footer__link" to="">粤 ICP 备 17008907 号</Link>
         <Link className="footer__link footer__license" to="/license">
           <img
             alt="Creative Commons License"

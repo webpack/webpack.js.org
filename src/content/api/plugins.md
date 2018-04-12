@@ -2,78 +2,78 @@
 title: Plugin API
 group: Plugins
 sort: 0
+contributors:
+  - thelarkinn
+  - pksjce
+  - e-cloud
 ---
 
-T> 对于编写插件的高度概括，请先阅读[编写一个插件](/contribute/writing-a-plugin)。
+插件是 webpack 生态系统的重要组成部分，为社区用户提供了一种强大方式来直接触及 webpack 的编译过程(compilation process)。插件能够 [钩入(hook)](/api/compiler-hooks/#hooks) 到在每个编译(compilation)中触发的所有关键事件。在编译的每一步，插件都具备完全访问 `compiler` 对象的能力，如果情况合适，还可以访问当前 `compilation` 对象。
 
-webpack 中的很多对象继承了 `Tapable` 类，暴露出一个 `plugin` 方法。通过 `plugin` 方法，插件可以注入自定义的构建步骤。你会看到 `compiler.plugin` 和 `compilation.plugin` 被频繁使用。本质上，每一个 plugin 方法调用时的回调函数的触发时机，都会被绑定到整个构建过程中特定步骤。
+T> 对于编写插件的高度概括，请从[编写一个插件](/contribute/writing-a-plugin)开始。
 
-有两种类型的 plugin 接口……
+我们首先回顾 `tapable` 工具，它提供了 webpack 插件接口的支柱。
 
-__基于时间的(Timing Based)__
 
-- sync（默认）：plugin 同步执行，返回它的输出
-- async：plugin 异步执行，使用给定的 `callback` 来返回它的输出
-- parallel：处理函数被并行地调用
+## Tapable
 
-__返回值的(Return Value)__
+tapable 这个小型 library 是 webpack 的一个核心工具，但也可用于其他地方，以提供类似的插件接口。webpack 中许多对象扩展自 `Tapable` 类。这个类暴露 `tap`, `tapAsync` 和 `tapPromise` 方法，可以使用这些方法，注入自定义的构建步骤，这些步骤将在整个编译过程中不同时机触发。
 
-- not bailing（默认）：没有返回值
-- bailing：处理函数被顺序调用，直到一个处理函数有返回值
-- parallel bailing：处理函数被并行（异步）地调用。（按顺序）第一个被返回的值会被使用。
-- waterfall：每个处理函数，将上一个处理函数的结果作为参数。
+请查看 [文档](https://github.com/webpack/tapable) 了解更多信息。理解三种 `tap` 方法以及提供这些方法的钩子至关重要。要注意到，扩展自 `Tapable` 的对象（例如 compiler 对象）、它们提供的钩子和每个钩子的类型（例如 `SyncHook`）。
 
-plugin 会在 webpack 启动时被安装。webpack 通过调用 plugin 的 `apply` 方法来安装它，传入一个指向 webpack `compiler` 对象的引用。你可以调用 `compiler.plugin` 来访问 asset 的编译(compilation)和它们各自的构建步骤。例如：
 
-__my-plugin.js__
+## 插件类型(plugin types)
+
+根据所使用的 钩子(hook) 和 `tap` 方法，插件可以以多种不同的方式运行。这个工作方式与 `Tapable` 提供的 [hooks](https://github.com/webpack/tapable#tapable) 密切相关。[compiler hooks](/api/compiler-hooks/#hooks) 分别记录了 `Tapable` 内在的钩子，指出哪些 `tap` 方法可用。
+
+因此，根据你触发到 `tap` 事件，插件可能会以不同的方式运行。例如，当钩入 `compile` 阶段时，只能使用同步的 `tap` 方法：
 
 ``` js
-function MyPlugin(options) {
-  // 使用 options 配置你的 plugin
-}
-
-MyPlugin.prototype.apply = function(compiler) {
-  compiler.plugin("compile", function(params) {
-    console.log("编译器开始编译(compile)……");
-  });
-
-  compiler.plugin("compilation", function(compilation) {
-    console.log("编译器开始一个新的编译过程(compilation)……");
-
-    compilation.plugin("optimize", function() {
-      console.log("编译过程(compilation)开始优化文件...");
-    });
-  });
-
-  compiler.plugin("emit", function(compilation, callback) {
-    console.log("编译过程(compilation)准备开始输出文件……");
-    callback();
-  });
-};
-
-module.exports = MyPlugin;
+compiler.hooks.compile.tap('MyPlugin', params => {
+  console.log('Synchronously tapping the compile hook.')
+})
 ```
 
-__webpack.config.js__
+然而，对于能够使用了 `AsyncHook(异步钩子)` 的 `run`，我们可以使用 `tapAsync` 或 `tapPromise`（以及 `tap`）：
 
 ``` js
-plugins: [
-  new MyPlugin({
-    options: 'nada'
+compiler.hooks.run.tapAsync('MyPlugin', (compiler, callback) => {
+  console.log('Asynchronously tapping the run hook.')
+  callback()
+})
+
+compiler.hooks.run.tapPromise('MyPlugin', compiler => {
+  return new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
+    console.log('Asynchronously tapping the run hook with a delay.')
   })
-]
+})
 ```
 
+The moral of the story is that there are a variety of ways to `hook` into the
+这些需求(story)的含义在于，可以有多种方式将 `hook` 钩入到 `compiler` 中，可以让各种插件都以合适的方式去运行。
 
-## Tapable 和 Tapable 实例
 
-plugin 架构之所以在多数情况下适用于 webpack 是由于一个名为 Tapable 的内部库。
-在 webpack 源代码中，**Tapable 实例**是一些由 `Tapable` 类继承或混入而来的类。
+## 自定义的钩子函数(custom hooks)
 
-对于 plugin 作者来说，知道 webpack 源码中哪些是 `Tapable` 实例是很重要的。这些实例提供了各种可以附加自定义插件的事件挂钩。
-因此，贯穿本章的是，一个列出了 webpack 中所有 `Tapable` 实例（和它们的事件钩子）的列表，plugin 的作者可以使用它们。
+为了给其他插件的编译添加一个新的钩子，来 `tap(触及)` 到这些插件的内部，直接从 `tapable` 中 `require` 所需的钩子类(hook class)，然后创建：
 
-获取更多 `Tapable` 的信息，可以访问 [完整概述](/api/tapable) 或 [tapable 仓库](https://github.com/webpack/tapable)。
+``` js
+const SyncHook = require('tapable').SyncHook;
+
+// 具有 `apply` 方法……
+if (compiler.hooks.myCustomHook) throw new Error('Already in use');
+compiler.hooks.myCustomHook = new SyncHook(['a', 'b', 'c'])
+
+// 在你想要触发钩子的位置/时机下调用……
+compiler.hooks.myCustomHook.call(a, b, c);
+```
+
+再次声明，查看 `tapable` [文档](/api/tapable/) 来，了解更多不同的钩子类(hook class)，以及它们是如何工作的。
+
+
+## 下一步
+
+ [compiler hooks](/api/compiler-hooks/) 部分，了解所有可用的 `compiler` 钩子和其所需的参数的详细列表。
 
 ***
 

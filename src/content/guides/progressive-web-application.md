@@ -3,6 +3,7 @@ title: 渐进式网络应用程序
 sort: 14
 contributors:
   - johnnyreilly
+  - chenxsan
 ---
 
 T> 本指南继续沿用[管理输出](/guides/output-management)中的代码示例。
@@ -78,7 +79,7 @@ __webpack.config.js__
 +     title: 'Progressive Web Application'
 -   })
 +   }),
-+   new WorkboxPlugin({
++   new WorkboxPlugin.GenerateSW({
 +     // 这些选项帮助 ServiceWorkers 快速启用
 +     // 不允许遗留任何“旧的” ServiceWorkers
 +     clientsClaim: true,

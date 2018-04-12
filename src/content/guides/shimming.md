@@ -428,7 +428,7 @@ __src/index.js__
 
 ## 深度优化
 
-`babel-preset-env` package 使用 [browserslist](https://github.com/ai/browserslist) 来转译那些你浏览器中不支持的特性。这里预设了 `useBuiltIns` 选项，默认值是 `false`，能将你的全局 `babel-polyfill` 导入方式，改进为更细粒度的 `import` 格式：
+`babel-preset-env` package 使用 [browserslist](https://github.com/browserslist/browserslist) 来转译那些你浏览器中不支持的特性。这里预设了 `useBuiltIns` 选项，默认值是 `false`，能将你的全局 `babel-polyfill` 导入方式，改进为更细粒度的 `import` 格式：
 
 ``` js
 import 'core-js/modules/es7.string.pad-start';

@@ -8,7 +8,7 @@ contributors:
   - lricoy
 related:
   - title: 启用 source map
-    url: http://survivejs.com/webpack/developing-with-webpack/enabling-sourcemaps/
+    url: https://survivejs.com/webpack/developing-with-webpack/enabling-sourcemaps/
   - title: 在 webpack 的 devtool 中配置 source map
     url: http://cheng.logdown.com/posts/2016/03/25/679045
 ---

@@ -5,6 +5,7 @@ contributors:
   - ev1stensberg
   - simon04
   - tbroadley
+  - chenxsan
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -37,7 +38,7 @@ webpack [--config webpack.config.js]
 ## 不使用配置文件的用法
 
 ```sh
-webpack <entry> [<entry>] <output>
+webpack <entry> [<entry>] -o <output>
 ```
 
 **`<entry>`**
@@ -116,7 +117,7 @@ webpack --json
 webpack --json > stats.json
 ```
 
-在其他每个情况下，webpack 会打印一组统计信息，用于显示 bundle, chunk 和用时等详细信息。使用此选项，输出可以是 JSON 对象。此输出文件(response)可被 webpack 的[分析工具](https://webpack.github.com/analyse)，或 chrisbateman 的 [webpack 可视化工具](https://chrisbateman.github.io/webpack-visualizer/)，或 th0r 的 [webpack bundle 分析工具](https://github.com/th0r/webpack-bundle-analyzer)接收后进行分析。分析工具将接收 JSON 并以图形形式提供构建的所有细节。
+在其他每个情况下，webpack 会打印一组统计信息，用于显示 bundle, chunk 和用时等详细信息。使用此选项，输出可以是 JSON 对象。此输出文件(response)可被 webpack 的[分析工具](https://webpack.github.com/analyse)，或 chrisbateman 的 [webpack 可视化工具](https://chrisbateman.github.io/webpack-visualizer/)，或 th0r 的 [webpack bundle 分析工具](https://github.com/webpack-contrib/webpack-bundle-analyzer)接收后进行分析。分析工具将接收 JSON 并以图形形式提供构建的所有细节。
 
 ### 环境选项
 
@@ -140,6 +141,16 @@ Invocation                               | Resulting environment
 `webpack --env.prod=foo --env.prod=bar`  | `{prod: [ "foo", "bar" ]}`
 
 T> See the [environment variables](/guides/environment-variables) guide for more information on its usage.
+
+### 配置选项
+
+参数 | 说明 | 输入类型 | 默认值
+------------------------- | ------------------------------------------- | ---------- | ------------------
+`--config`                | 配置文件的路径 | string     | webpack.config.js 或 webpackfile.js
+`--config-register, -r`   | 在 webpack 配置文件加载前先预加载一个或多个模块 | array |
+`--config-name`           | 要使用的配置名称 | string |
+`--env`                   | 当配置文件是一个函数时，会将环境变量传给这个函数 |
+`--mode`                  | 用到的模式，"development" 或 "production" 之中的一个 | string |
 
 ### 输出配置
 

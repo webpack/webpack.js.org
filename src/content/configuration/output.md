@@ -9,6 +9,7 @@ contributors:
   - irth
   - fvgs
   - dhurlburtusa
+  - MagicDuck
 ---
 
 `output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
@@ -138,7 +139,7 @@ devtoolLineToLine: { test: /\.js$/, include: 'src/utilities' }
 自定义每个 source map 的 `sources` 数组中使用的名称。可以通过传递模板字符串(template string)或者函数来完成。例如，当使用 `devtool: 'eval'`，默认值是：
 
 ``` js
-devtoolModuleFilenameTemplate: "webpack:///[resource-path]?[loaders]"
+devtoolModuleFilenameTemplate: "webpack://[namespace]/[resource-path]?[loaders]"
 ```
 
 模板字符串(template string)中做以下替换（通过 webpack 内部的 [`ModuleFilenameHelpers`](https://github.com/webpack/webpack/blob/master/lib/ModuleFilenameHelpers.js)）：
@@ -152,6 +153,7 @@ devtoolModuleFilenameTemplate: "webpack:///[resource-path]?[loaders]"
 | [loaders]                | 显式的 loader，并且参数取决于第一个 loader 名称 |
 | [resource]               | 用于解析文件的路径和用于第一个 loader 的任意查询参数 |
 | [resource-path]          | 不带任何查询参数，用于解析文件的路径 |
+| [namespace]              | 模块命名空间。在构建成为一个 library 之后，通常也是 library 名称，否则为空 |
 
 当使用一个函数，同样的选项要通过 `info` 参数并使用驼峰式(camel-cased)：
 
@@ -162,6 +164,15 @@ devtoolModuleFilenameTemplate: info => {
 ```
 
 如果多个模块产生相同的名称，使用 [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolfallbackmodulefilenametemplate) 来代替这些模块。
+
+
+## `output.devtoolNamespace`
+
+`string`
+
+此选项确定 [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametemplate) 使用的模块名称空间。未指定时的默认值为：[`output.library`](#output-library)。在加载多个通过 webpack 构建的 library 时，用于防止 sourcemap 中源文件路径冲突。
+
+例如，如果你有两个 library，分别使用命名空间 `library1` 和 `library2`，并且都有一个文件 `./src/index.js`（可能具有不同内容），它们会将这些文件暴露为 `webpack://library1/./src/index.js` 和 `webpack://library2/./src/index.js`。
 
 
 ## `output.filename`
@@ -237,12 +248,19 @@ T> 在使用 [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) 
 
 ## `output.hashFunction`
 
-散列算法，默认为 `'md5'`。支持 Node.JS [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm) 的所有功能。
+`string|function`
 
+散列算法，默认为 `'md5'`。支持 Node.JS [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm_options) 的所有功能。从 `4.0.0-alpha2` 开始，`hashFunction` 现在可以是一个返回自定义 hash 的构造函数。出于性能原因，你可以提供一个不加密的哈希函数(non-crypto hash function)。
+
+``` js
+hashFunction: require('metrohash').MetroHash64
+```
+
+确保 hash 函数有可访问的 `update` and `digest` 方法。
 
 ## `output.hashSalt`
 
-一个可选的加盐值，通过 Node.JS [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_input_encoding) 来更新哈希。
+一个可选的加盐值，通过 Node.JS [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_inputencoding) 来更新哈希。
 
 
 ## `output.hotUpdateChunkFilename`
@@ -529,7 +547,7 @@ output: {
 });
 ```
 
-注意，省略 `library` 会导致将入口起点返回的所有属性，直接赋值给 root 对象，就像[对象分配章节](#exposing-the-library-via-object-assignment)。例如：
+注意，省略 `library` 会导致将入口起点返回的所有属性，直接赋值给 root 对象，就像[对象分配章节](#expose-via-object-assignment)。例如：
 
 ``` js
 output: {
@@ -662,7 +680,7 @@ publicPath: "../assets/", // 相对于 HTML 页面
 publicPath: "", // 相对于 HTML 页面（目录相同）
 ```
 
-在编译时(compile time)无法知道输出文件的 `publicPath` 的情况下，可以留空，然后在入口文件(entry file)处使用[自由变量(free variable)](http://stackoverflow.com/questions/12934929/what-are-free-variables) `__webpack_public_path__`，以便在运行时(runtime)进行动态设置。
+在编译时(compile time)无法知道输出文件的 `publicPath` 的情况下，可以留空，然后在入口文件(entry file)处使用[自由变量(free variable)](https://stackoverflow.com/questions/12934929/what-are-free-variables) `__webpack_public_path__`，以便在运行时(runtime)进行动态设置。
 
 ``` js
  __webpack_public_path__ = myRuntimePublicPath

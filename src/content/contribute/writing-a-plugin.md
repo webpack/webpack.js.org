@@ -13,7 +13,7 @@ contributors:
 
 - 一个 JavaScript 命名函数。
 - 在插件函数的 prototype 上定义一个 `apply` 方法。
-- 指定一个绑定到 webpack 自身的[事件钩子](/api/compiler/#event-hooks)。
+- 指定一个绑定到 webpack 自身的[事件钩子](/api/compiler-hooks/)。
 - 处理 webpack 内部实例的特定数据。
 - 功能完成后调用 webpack 提供的回调。
 

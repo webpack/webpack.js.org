@@ -6,6 +6,7 @@ contributors:
   - michael-ciniawsky
   - TheDutchCoder
   - sudarsangp
+  - chenxsan
 ---
 
 如果你是从开始一直遵循着指南的示例，现在会有一个小项目，显示 "Hello webpack"。现在我们尝试整合一些其他资源，比如图像，看看 webpack 如何处理。

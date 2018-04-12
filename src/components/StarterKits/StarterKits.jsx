@@ -18,7 +18,7 @@ const StarterKits = props => (
       下面表格包含一个起步配套工具的辅助列表，
       可以作为基于 webpack 的项目的起点。
       要向列表添加新的配套工具请访问{' '}
-      <Link to="https://github.com/ahfarmer/tool-list">仓库</Link>{' '}
+      <Link to="https://github.com/ahfarmer/javascriptstuff-db">仓库</Link>{' '}
       以及提交一个 PR 来修改这个文件
       <code>generator/starterProjectUrls.js</code>.
     </p>

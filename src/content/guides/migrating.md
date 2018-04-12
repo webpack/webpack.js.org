@@ -143,7 +143,7 @@ W> 随着 webpack 2 版本已经发布一段时间，此章节的内容可能会
 
 ## `json-loader` 不再需要手动添加
 
-如果没有为 JSON 文件配置 loader，webpack 将自动尝试通过 [`json-loader`](https://github.com/webpack/json-loader) 加载 JSON 文件。
+如果没有为 JSON 文件配置 loader，webpack 将自动尝试通过 [`json-loader`](https://github.com/webpack-contrib/json-loader) 加载 JSON 文件。
 
 ``` diff
   module: {
@@ -281,7 +281,7 @@ loaders 的压缩模式将在 webpack 3 或后续版本中取消。
 
 ## `ExtractTextWebpackPlugin` - 破坏性改动
 
-[ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) 需要使用版本 2，才能在 webpack 2 下正常运行。
+[ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) 需要使用版本 2，才能在 webpack 2 下正常运行。
 
 `npm install --save-dev extract-text-webpack-plugin`
 
@@ -478,7 +478,7 @@ function onClick() {
 
 ## 动态表达式
 
-可以传递部分表达式给 `import()`。这与 CommonJS 对表达式的处理方式一致（webpack 为所有可能匹配的文件创建 context）。
+可以传递部分表达式给 `import()`。这与 CommonJS 对表达式的处理方式一致（webpack 为所有可能匹配的文件创建 [context](/plugins/context-replacement-plugin/)）。
 
 `import()` 为每一个可能的模块创建独立的 chunk。
 

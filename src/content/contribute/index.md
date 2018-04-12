@@ -9,7 +9,7 @@ contributors:
   - tbroadley
 ---
 
-为 webpack 做出贡献的群体，通常热衷于开源项目、关心用户体验和关注软件生态系统，对这些人来说，更具有意义的事情是，获得共同推动着 web 向前发展的成就感。由于我们使用 [Open Collective](http://opencollective.com/webpack) 资金模型，公开透明地积累和管理资金，所以我们能够通过贡献人员、依赖项目和核心团队获得支持和资金。想要捐款，只需点击下面的按钮……
+为 webpack 做出贡献的群体，通常热衷于开源项目、关心用户体验和关注软件生态系统，对这些人来说，更具有意义的事情是，获得共同推动着 web 向前发展的成就感。由于我们使用 [Open Collective](https://opencollective.com/webpack) 资金模型，公开透明地积累和管理资金，所以我们能够通过贡献人员、依赖项目和核心团队获得支持和资金。想要捐款，只需点击下面的按钮……
 
 <div align="center">
   <a href="https://opencollective.com/webpack/donate" target="_blank">
