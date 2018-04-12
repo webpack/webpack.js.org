@@ -7,14 +7,14 @@ process.env.BABEL_ENV = environment;
 
 antwar[environment]({
   environment,
-	configurationPaths: {
-		antwar: require.resolve("./antwar.config.js"),
-		webpack: require.resolve("./webpack.config.js"),
-	},
+  configurationPaths: {
+    antwar: require.resolve("./antwar.config.js"),
+    webpack: require.resolve("./webpack.config.js"),
+  },
 }).then(() => {
-	if (environment !== "build") {
-		console.log("Surf to localhost:3000");
-	}
+  if (environment !== "build") {
+    console.log("Surf to localhost:3000");
+  }
 }).catch((err) => {
   console.error(err);
 
