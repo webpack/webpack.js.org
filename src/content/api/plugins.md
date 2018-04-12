@@ -72,7 +72,7 @@ compiler.hooks.myCustomHook.call(a, b, c);
 
 ## 下一步
 
- [compiler hooks](/api/compiler-hooks/) 部分，了解所有可用的 `compiler` 钩子和其所需的参数的详细列表。
+查看 [compiler hooks](/api/compiler-hooks/) 部分，了解所有可用的 `compiler` 钩子和其所需的参数的详细列表。
 
 ***
 
