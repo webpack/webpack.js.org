@@ -30,7 +30,7 @@ tapable 这个小型 library 是 webpack 的一个核心工具，但也可用于
 
 ``` js
 compiler.hooks.compile.tap('MyPlugin', params => {
-  console.log('Synchronously tapping the compile hook.')
+  console.log('以同步方式触及 compile 钩子。')
 })
 ```
 
@@ -38,18 +38,17 @@ compiler.hooks.compile.tap('MyPlugin', params => {
 
 ``` js
 compiler.hooks.run.tapAsync('MyPlugin', (compiler, callback) => {
-  console.log('Asynchronously tapping the run hook.')
+  console.log('以异步方式触及 run 钩子。')
   callback()
 })
 
 compiler.hooks.run.tapPromise('MyPlugin', compiler => {
   return new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
-    console.log('Asynchronously tapping the run hook with a delay.')
+    console.log('以具有延迟的异步方式触及 run 钩子')
   })
 })
 ```
 
-The moral of the story is that there are a variety of ways to `hook` into the
 这些需求(story)的含义在于，可以有多种方式将 `hook` 钩入到 `compiler` 中，可以让各种插件都以合适的方式去运行。
 
 
