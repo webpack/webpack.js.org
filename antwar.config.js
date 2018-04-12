@@ -85,6 +85,12 @@ module.exports = () => ({
 			layout: () => require('./src/components/Page/Page.jsx').default,
 			content: () => require.context('./loaders/page-loader!./src/content/contribute', false, /^\.\/.*\.md$/),
 		},
+		migrate: {
+			title: 'Migrate',
+			url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
+			layout: () => require('./src/components/Page/Page.jsx').default,
+			content: () => require.context('./loaders/page-loader!./src/content/migrate', false, /^\.\/.*\.md$/),
+		},
 		vote: () => require('./src/components/Vote/Vote.jsx').default,
 		organization: () => require('./src/components/Organization/Organization.jsx').default,
 		'starter-kits': () => require('./src/components/StarterKits/StarterKits.jsx').default,
