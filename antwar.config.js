@@ -73,7 +73,7 @@ module.exports = () => ({
       title: 'Migrate',
       url: ({ sectionName, fileName }) => `/${sectionName}/${fileName}/`,
       layout: () => require('./src/components/Page/Page.jsx').default,
-      content: () => require.context('./loaders/page-loader!./src/content/migrate', false, /^\.\/.*\.md$/),
+      content: () => require.context('./src/content/migrate', false, /^\.\/.*\.md$/),
     },
     vote: () => require('./src/components/Vote/Vote.jsx').default,
     organization: () => require('./src/components/Organization/Organization.jsx').default,
