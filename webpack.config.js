@@ -10,13 +10,11 @@ module.exports = (env) => ({
   resolve: {
     extensions: ['.js', '.jsx', '.scss']
   },
-
   resolveLoader: {
     alias: {
       'page-loader': path.resolve(cwd, 'loaders/page-loader')
     }
   },
-
   module: {
     rules: [
       {
@@ -87,7 +85,11 @@ module.exports = (env) => ({
       {
         test: /\.html$/,
         use: 'raw-loader'
-      }
+      },
+      {
+        test: /\.md$/,
+        use: 'page-loader',
+      },
     ]
   },
 
