@@ -239,6 +239,8 @@ module.exports = {
 };
 ```
 
+In index.html file change the script reference to src="bundle.js".
+
 Now, let's run the build again but instead using our new configuration file:
 
 ``` bash
