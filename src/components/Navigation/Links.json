@@ -8,7 +8,8 @@
       { "title": "API", "url": "api" },
       { "title": "Guides", "url": "guides" },
       { "title": "Loaders", "url": "loaders" },
-      { "title": "Plugins", "url": "plugins" }
+      { "title": "Plugins", "url": "plugins" },
+      { "title": "Migrate", "url": "migrate" }
     ]
   },
   {
