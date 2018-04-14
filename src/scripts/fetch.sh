@@ -19,7 +19,6 @@ node ./src/scripts/fetch_package_names.js "webpack-contrib" "-extract-plugin" | 
 
 # Remove deprecated or archived plugins repositories
 rm ./generated/plugins/component-webpack-plugin.json ./generated/plugins/component-webpack-plugin.md
-rm ./generated/plugins/extract-text-webpack-plugin.json ./generated/plugins/extract-text-webpack-plugin.md
 
 # Fetch sponsors and backers from opencollective
 node ./src/scripts/fetch_supporters.js
