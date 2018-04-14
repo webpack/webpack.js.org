@@ -85,11 +85,7 @@ module.exports = (env) => ({
       {
         test: /\.html$/,
         use: 'raw-loader'
-      },
-      {
-        test: /\.md$/,
-        use: 'page-loader',
-      },
+      }
     ]
   },
 
