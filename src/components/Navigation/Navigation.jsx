@@ -1,6 +1,7 @@
 // Import External Dependencies
 import React from 'react';
 import Banner from 'react-banner';
+import DocSearch from 'docsearch.js';
 
 // Import Utilities/Images
 import GitHubIcon from '../../styles/icons/github.svg';
@@ -12,32 +13,9 @@ import Logo from '../Logo/Logo';
 import Dropdown from '../Dropdown/Dropdown';
 
 // Load Styling
+import 'docsearch.js/dist/cdn/docsearch.css';
 import './Navigation.scss';
 import './Search.scss';
-
-// TODO: Re-incorporate docsearch (see `react-banner` docs and `SearchResults` component/discussion)
-//   componentDidMount() {
-//     if (typeof window !== 'undefined') {
-//       let docsearch = () => {};
-
-//       // XXX: hack around docsearch
-//       if (window.docsearch) {
-//         docsearch = window.docsearch.default || window.docsearch;
-//       }
-
-//       docsearch({
-//         apiKey: 'fac401d1a5f68bc41f01fb6261661490',
-//         indexName: 'webpack-js-org',
-//         inputSelector: '.navigation__search-input'
-//       });
-
-//       window.addEventListener('keyup', e => {
-//         if (e.which === 9 && e.target.classList.contains('navigation__search-input')) {
-//           this._openSearch();
-//         }
-//       });
-//     }
-//   }
 
 export default class Navigation extends React.Component {
   render() {
@@ -77,5 +55,13 @@ export default class Navigation extends React.Component {
         link={ Link }
         onMenuClick={ toggleSidebar } />
     );
+  }
+
+  componentDidMount() {
+    DocSearch({
+      apiKey: 'fac401d1a5f68bc41f01fb6261661490',
+      indexName: 'webpack-js-org',
+      inputSelector: '.navigation-search__input'
+    });
   }
 }
