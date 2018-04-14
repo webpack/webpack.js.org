@@ -1,19 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route } from 'react-router-dom';
-import { BrowserRouter } from 'react-g-analytics';
+import { BrowserRouter, Route } from 'react-router-dom';
+import AnalyticsRouter from 'react-g-analytics';
 import Site from './components/Site/Site';
 
-let gaID;
-
-if(process.env.NODE_ENV === 'production') {
-  gaID = 'UA-46921629-2';
-}
+const Router = process.env.NODE_ENV === 'production' ? AnalyticsRouter : BrowserRouter;
 
 // Client Side Rendering
 if ( window.document !== undefined ) {
   ReactDOM.render((
-    <BrowserRouter id={gaID}>
+    <Router id="UA-46921629-2">
       <Route
         path="/"
         render={ props => (
@@ -21,6 +17,6 @@ if ( window.document !== undefined ) {
             { ...props }
             import={ path => import(`./content/${path}`) } />
         )} />
-    </BrowserRouter>
+    </Router>
   ), document.getElementById('root'));
 }

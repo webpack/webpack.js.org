@@ -35,15 +35,7 @@ module.exports = (env = {}) => ({
           options: {
             plugins: [
               // TODO: Add necessary remark plugins
-              require('./tip'),
-              require('remark-slug'),
-              [
-                require('remark-autolink-headings'),
-                {
-                  behaviour: 'append'
-                }
-              ],
-              require('remark-html'),
+              require('remark-autolink-headings'),
               require('remark-mermaid')
             ]
           }
