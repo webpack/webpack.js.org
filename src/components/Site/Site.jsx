@@ -62,16 +62,16 @@ class Site extends React.Component {
           toggleSidebar={ this._toggleSidebar }
           links={[
             {
-              title: 'Documentation',
+              content: 'Documentation',
               url: '/concepts',
               isActive: url => /^\/(api|concepts|configuration|guides|loaders|plugins)/.test(url),
               children: this._strip(
                 sections.filter(item => item.name !== 'contribute')
               )
             },
-            { title: 'Contribute', url: '/contribute' },
-            { title: 'Vote', url: '/vote' },
-            { title: 'Blog', url: '//medium.com/webpack' }
+            { content: 'Contribute', url: '/contribute' },
+            { content: 'Vote', url: '/vote' },
+            { content: 'Blog', url: '//medium.com/webpack' }
           ]} />
 
         { window.document !== undefined ? (
@@ -165,6 +165,7 @@ class Site extends React.Component {
   _strip = array => {
     return array.map(({ title, name, url, group, sort, anchors, children }) => ({
       title: title || name,
+      content: title || name,
       url,
       group,
       sort,

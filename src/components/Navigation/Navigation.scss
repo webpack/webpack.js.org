@@ -2,21 +2,13 @@
 @import 'mixins';
 @import 'functions';
 
-// TODO: Re-incorporate language dropdown and github links although
-// this may require linking and re-releasing `react-banner`
-//
-// .navigation__languages {
-//   margin-left: 1em;
-//   margin-top: -4px;
-// }
-
-.banner {
+.navigation {
   flex: 0 0 auto;
   transition: background 250ms;
   background: getColor(elephant);
 }
 
-.banner__inner {
+.navigation__inner {
   position: relative;
   display: flex;
   align-items: center;
@@ -30,7 +22,7 @@
   }
 }
 
-.banner__mobile {
+.navigation__mobile {
   display: none;
   fill: white;
   padding: 0;
@@ -43,12 +35,12 @@
   transition: color 250ms;
 }
 
-.banner__mobile svg {
+.navigation__mobile svg {
   width: 20px;
   height: 20px;
 }
 
-.banner__logo {
+.navigation__logo {
   margin: auto;
   text-decoration: none;
   text-transform: uppercase;
@@ -58,7 +50,7 @@
   transition: all 250ms;
 }
 
-.banner__links {
+.navigation__items {
   flex: 1 1 auto;
   display: flex;
   height: 56px;
@@ -66,12 +58,12 @@
   justify-content: flex-end;
 }
 
-.banner__link {
+.navigation__item {
   position: relative;
   display: inline-block;
   font-size: getFontSize(-1);
   padding-bottom: 0.1em;
-  margin-right: 1.5em;
+  margin-right: 18px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   color: getColor(white);
@@ -80,6 +72,12 @@
 
   &:hover {
     color: getColor(malibu);
+  }
+
+  &--icon {
+    font-size: 16px;
+    margin-top: 2px;
+    -webkit-font-smoothing: antialiased;
   }
 
   &--active {
@@ -101,14 +99,14 @@
   }
 }
 
-.banner-search {
+.navigation-search {
   flex: 0 0 auto;
   position: relative;
   display: flex;
   justify-content: flex-end;
 }
 
-.banner-search__input {
+.navigation-search__input {
   font-size: 14px;
   width: 0;
   max-width: calc(100vw - 8.5em);
@@ -128,7 +126,7 @@
   }
 }
 
-.banner-search__icon {
+.navigation-search__icon {
   font-size: 1em;
   width: 1em;
   height: 1em;
@@ -140,27 +138,27 @@
   transition: color 250ms;
 }
 
-.banner-search__input:focus,
-.banner-search__icon:focus {
+.navigation-search__input:focus,
+.navigation-search__icon:focus {
   outline: none;
 }
 
-.banner-search__clear {
+.navigation-search__clear {
   display: none;
   margin-right: 0.25em;
   margin-bottom: -1px;
 }
 
-.banner-search--active .banner-search__input {
+.navigation-search--active .navigation-search__input {
   margin-right: 0.5em;
   width: 400px;
 }
 
-.banner-search--active .banner-search__clear {
+.navigation-search--active .navigation-search__clear {
   display: block;
 }
 
-.banner-search__results {
+.navigation-search__results {
   position: absolute;
   top: 100%;
   right: 0;
@@ -168,7 +166,7 @@
   margin-top: 5px;
 }
 
-.banner--search .banner__link {
+.navigation--search .navigation__item {
   pointer-events: none;
   overflow: hidden;
   white-space: nowrap;
@@ -177,19 +175,19 @@
   opacity: 0;
 }
 
-.banner-sub {
+.navigation-sub {
   display: block;
   background: getColor(concrete);
 }
 
-.banner-sub__inner {
+.navigation-sub__inner {
   max-width: map-get($screens, large);
   margin: 0 auto;
   padding: 0 1.5em;
   text-align: right;
 }
 
-.banner-sub__link {
+.navigation-sub__link {
   display: inline-block;
   font-size: 0.8em;
   margin-left: 1.5em;
@@ -209,15 +207,15 @@
 }
 
 @media (max-width: 720px) {
-  .banner-sub {
+  .navigation-sub {
     display: none;
   }
 }
 
 @media (max-width: 720px) {
-  .banner__mobile { display: block; }
-  .banner__links { display: none; }
-  .banner--search .banner__logo {
+  .navigation__mobile { display: block; }
+  .navigation__items { display: none; }
+  .navigation--search .navigation__logo {
     pointer-events: none;
     overflow: hidden;
     white-space: nowrap;
