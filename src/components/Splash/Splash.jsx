@@ -38,23 +38,27 @@ const Splash = () => (
             great documentation and learning material!
           </p>
 
-          <h2>Latest Sponsors</h2>
-          <Support rank="latest" />
+          { window.document !== undefined ? (
+            <React.Fragment>
+              <h2>Latest Sponsors</h2>
+              <Support rank="latest" />
 
-          <h2>Platinum Sponsors</h2>
-          <Support rank="platinum" />
+              <h2>Platinum Sponsors</h2>
+              <Support rank="platinum" />
 
-          <h2>Gold Sponsors</h2>
-          <Support rank="gold" />
+              <h2>Gold Sponsors</h2>
+              <Support rank="gold" />
 
-          <h2>Silver Sponsors</h2>
-          <Support rank="silver" />
+              <h2>Silver Sponsors</h2>
+              <Support rank="silver" />
 
-          <h2>Bronze Sponsors</h2>
-          <Support rank="bronze" />
+              <h2>Bronze Sponsors</h2>
+              <Support rank="bronze" />
 
-          <h2>Backers</h2>
-          <Support rank="backer" />
+              <h2>Backers</h2>
+              <Support rank="backer" />
+            </React.Fragment>
+          ) : null }
         </Markdown>
       </Container>
     </div>
