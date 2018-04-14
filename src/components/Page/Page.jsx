@@ -70,8 +70,8 @@ class Page extends React.Component {
   componentDidMount() {
     if ( this.props.content instanceof Promise ) {
       this.props.content
-        .then(content => this.setState({
-          content
+        .then(module => this.setState({
+          content: module.default || module
         }))
         .catch(error => this.setState({
           content: 'Error loading content.'
