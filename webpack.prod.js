@@ -8,17 +8,6 @@ const RedirectWebpackPlugin = require('redirect-webpack-plugin');
 
 // Load Common Configuration
 const common = require('./webpack.common.js');
-const Content = require('./src/_content.json');
-
-const paths = Content.children.reduce((paths, page) => {
-  if (page.type === 'directory') {
-    page.children.forEach(child => (paths[child.url] = child.title));
-  } else {
-    paths[page.url] = page.title;
-  }
-
-  return paths;
-}, {});
 
 // ...
 const prod = {
@@ -39,8 +28,7 @@ module.exports = env => [
     },
     plugins: [
       new SSGPlugin({
-        paths: Object.keys(paths),
-        locals: { paths },
+        crawl: true,
         globals: {
           window: {}
         }
