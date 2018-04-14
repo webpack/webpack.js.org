@@ -30,7 +30,8 @@ module.exports = env => [
         crawl: true,
         globals: {
           window: {}
-        }
+        },
+        disallowDomains: true
       })
     ],
     output: {
