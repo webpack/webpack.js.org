@@ -71,7 +71,7 @@ class Site extends React.Component {
             },
             { content: 'Contribute', url: '/contribute' },
             { content: 'Vote', url: '/vote' },
-            { content: 'Blog', url: '//medium.com/webpack' }
+            { content: 'Blog', url: 'https://medium.com/webpack' }
           ]} />
 
         { window.document !== undefined ? (

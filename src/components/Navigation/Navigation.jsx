@@ -30,13 +30,13 @@ export default class Navigation extends React.Component {
           ...links,
           {
             title: 'GitHub Repository',
-            url: '//github.com/webpack/webpack',
+            url: 'https://github.com/webpack/webpack',
             className: 'navigation__item--icon',
             content: <i className="icon-github" />
           },
           {
             title: 'Webpack on Stack Overflow',
-            url: '//stackoverflow.com/questions/tagged/webpack',
+            url: 'https://stackoverflow.com/questions/tagged/webpack',
             className: 'navigation__item--icon',
             content: <i className="icon-stack-overflow" />
           },
