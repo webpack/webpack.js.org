@@ -616,7 +616,7 @@ Note that `[hash]` in this parameter will be replaced with an hash of the compil
 
 `boolean`
 
-Tell webpack to include comments in bundles with information about the contained modules. This option defaults to `true` in `development` and `false` in `production` mode respectively. Please note that `output.pathinfo` **should not** be used in production, but it's very useful in development when reading the generated code.
+Tell webpack to include comments in bundles with information about the contained modules. This option defaults to `true` in `development` and `false` in `production` [mode](/concepts/mode/) respectively. Please note that `output.pathinfo` **should not** be used in production, but it's very useful in development when reading the generated code.
 
 ``` js
 pathinfo: true
