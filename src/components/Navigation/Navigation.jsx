@@ -1,7 +1,6 @@
 // Import External Dependencies
 import React from 'react';
 import Banner from 'react-banner';
-import DocSearch from 'docsearch.js';
 
 // Import Components
 import Link from '../Link/Link';
@@ -55,10 +54,14 @@ export default class Navigation extends React.Component {
   }
 
   componentDidMount() {
-    DocSearch({
-      apiKey: 'fac401d1a5f68bc41f01fb6261661490',
-      indexName: 'webpack-js-org',
-      inputSelector: '.navigation-search__input'
-    });
+    if ( window.document !== undefined ) {
+      const DocSearch = require('docsearch.js');
+
+      DocSearch({
+        apiKey: 'fac401d1a5f68bc41f01fb6261661490',
+        indexName: 'webpack-js-org',
+        inputSelector: '.navigation-search__input'
+      });
+    }
   }
 }
