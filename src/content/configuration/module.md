@@ -105,7 +105,6 @@ All normal, post and pre loaders can be omitted (overridden) by prefixing `!!` i
 
 Inline loaders and `!` prefixes should not be used as they are non-standard. They may be use by loader generated code.
 
-T> The `pitch` method on loaders is called in the order `post, inline, normal, pre` before loaders are executed in the order `pre, normal, inline, post`. See [this section](/api/loaders/#pitching-loader) for details.
 
 ## `Rule.exclude`
 
