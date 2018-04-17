@@ -3,9 +3,6 @@ import React from 'react';
 import Banner from 'react-banner';
 import DocSearch from 'docsearch.js';
 
-// Import Utilities/Images
-import GitHubIcon from '../../styles/icons/github.svg';
-
 // Import Components
 import Link from '../Link/Link';
 import Container from '../Container/Container';
