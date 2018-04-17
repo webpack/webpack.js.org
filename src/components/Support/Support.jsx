@@ -95,7 +95,7 @@ export default class Support extends React.Component {
         </div>
 
         {
-          (typeof window !== 'undefined') ? supporters.map((supporter, index) => (
+          supporters.map((supporter, index) => (
             <a key={ supporter.id || supporter.slug || index }
                className="support__item"
                title={ `$${formatMoney(supporter.totalDonations / 100)} by ${supporter.name || supporter.slug}` }
@@ -108,7 +108,7 @@ export default class Support extends React.Component {
                 onError={ this._handleImgError } />}
               { rank === 'backer' ? <figure className="support__outline" /> : null }
             </a>
-          )) : null
+          ))
         }
 
         <div className="support__bottom">
