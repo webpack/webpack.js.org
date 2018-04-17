@@ -92,7 +92,10 @@ Specifies the category of the loader. No value means normal loader.
 
 There is also an additional category "inlined loader" which are loaders applied inline of the import/require.
 
-All loaders are sorted in the order `pre, normal, inline, post` and used in this order.
+There are two phases that all loaders enter in order:
+
+1. __Pitching__ phase: the pitch method on loaders is called in the order `post, inline, normal, pre`. See [Pitching Loader](/api/loaders/#pitching-loader) for details.
+2. __Normal__ phase: the normal method on loaders is executed in the order `pre, normal, inline, post`. Transformation on the source code of a module happens in this phase.
 
 All normal loaders can be omitted (overridden) by prefixing `!` in the request.
 
