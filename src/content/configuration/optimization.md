@@ -5,14 +5,14 @@ contributors:
   - EugeneHlushko
 ---
 
-Optimization configuration allows you to control the webpack output optimization level
+Optimization configuration allows you to control the webpack output optimization level.
 
 
 ## `optimization.minimize`
 
 `boolean`
 
-Tell webpack to minimize the javascript output using the [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin/)
+Tell webpack to minimize the JavaScript output using the [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin/)
 It is set to `true` by default in `production` [mode](/concepts/mode/)
 
 __webpack.config.js__
