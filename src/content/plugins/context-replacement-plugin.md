@@ -29,7 +29,7 @@ Here's a small example to restrict module usage:
 
 ```javascript
 new webpack.ContextReplacementPlugin(
-  /moment[\/\\]locale$/,
+  /moment[/\\]locale$/,
   /de|fr|hu/
 )
 ```
