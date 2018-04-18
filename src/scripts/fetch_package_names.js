@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // ./fetch_package_names <suffix> > output
 // ./fetch_package_names "-loader" > output.json
-const GitHubApi = require("github");
+const GitHubApi = require('@octokit/rest');
 
 if (require.main === module) {
     main();
@@ -39,13 +39,13 @@ function fetchPackageNames(options, cb) {
   github.repos.getForOrg({
     org: options.organization,
     per_page: 100
-  }, function (err, d) {
+  }, function (err, response) {
     if (err) {
       return cb(err);
     }
 
-    return cb(null, d.data.filter(function(o) {
-      return o.name.endsWith(options.suffix);
+    return cb(null, response.data.filter(function(organization) {
+      return organization.name.endsWith(options.suffix);
     }));
   });
 }

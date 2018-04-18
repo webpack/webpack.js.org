@@ -3,7 +3,7 @@ const fs = require('fs');
 const request = require('request');
 
 const REQUIRED_KEYS = ['totalDonations', 'id'];
-const filename = '_supporters.json'
+const filename = '_supporters.json';
 
 request('https://opencollective.com/api/groups/webpack/backers', (err, response, body) => {
   if (err) console.error('Failed to fetch backers: ', err);

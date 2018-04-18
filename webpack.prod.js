@@ -17,7 +17,7 @@ const prod = {
       'process.env.NODE_ENV': JSON.stringify('production')
     })
   ]
-}
+};
 
 // Export both SSG and SPA configurations
 module.exports = env => [
@@ -81,4 +81,4 @@ module.exports = env => [
       })
     ]
   })
-]
+];

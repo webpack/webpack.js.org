@@ -114,14 +114,14 @@ module.exports = (env = {}) => ({
             .replace(item.extension, '')
             .replace(options.dir, '')
             .replace(/\/index$/, '')
-            .replace(/^$/, '/')
+            .replace(/^$/, '/');
 
         // TODO: Strip `_` prefix from filenames in `url`
         if (item.type === 'file') {
-          let content = fs.readFileSync(item.path, 'utf8')
-          let { attributes } = FrontMatter(content)
-          Object.assign(item, attributes)
-          item.anchors = [] // TODO: Add actual anchors
+          let content = fs.readFileSync(item.path, 'utf8');
+          let { attributes } = FrontMatter(content);
+          Object.assign(item, attributes);
+          item.anchors = []; // TODO: Add actual anchors
 
         } else {
           // TODO: Add directory (section) attributes and index url (if necessary)
@@ -137,4 +137,4 @@ module.exports = (env = {}) => ({
     publicPath: '/',
     filename: '[name].bundle.js'
   }
-})
+});
