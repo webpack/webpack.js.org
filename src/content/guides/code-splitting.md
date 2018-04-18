@@ -27,6 +27,10 @@ contributors:
 related:
   - title: <link rel=”prefetch/preload”> in webpack
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
+  - title: Preload, Prefetch And Priorities in Chrome
+    url: https://medium.com/reloading/preload-prefetch-and-priorities-in-chrome-776165961bbf
+  - title: Preloading content with rel="preload"
+    url: https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
 ---
 
 T> This guide extends the examples provided in [Getting Started](/guides/getting-started) and [Output Management](/guides/output-management). Please make sure you are at least familiar with the examples provided in them.
@@ -304,7 +308,7 @@ webpack 4.6.0+ adds support for prefetching and preloading.
 
 Using these inline directives while declaring your imports allows webpack to output “Resource Hint” which tells the browser that this resource is probably(prefetch)/definitely(preload) needed for some navigation in the future.
 
-Simple prefecth example can be having a `HomePage` component, which renders a `LoginButton` component which then on demand loads a `LoginModal` component after being clicked.
+Simple prefetch example can be having a `HomePage` component, which renders a `LoginButton` component which then on demand loads a `LoginModal` component after being clicked.
 
 __LoginButton.js__
 
@@ -338,7 +342,7 @@ When a page which uses the `ChartComponent` is requested, the charting-library-c
 
 T> Using webpackPreload incorrectly can actually hurt performance, so be careful when using it.
 
-Learn more about [prefetch\preload in webpack](https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c)
+Learn more about [prefetch\preload in webpack](https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c), [Preload, Prefetch And Priorities in Chrome](https://medium.com/reloading/preload-prefetch-and-priorities-in-chrome-776165961bbf) and [Preloading content with rel="preload"](https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content)
 
 
 ## Bundle Analysis
