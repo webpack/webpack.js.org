@@ -13,7 +13,7 @@ Optimization configuration allows you to control the webpack output optimization
 `boolean`
 
 Tell webpack to minimize the JavaScript output using the [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin/)
-It is set to `true` by default in `production` [mode](/concepts/mode/)
+It is set to `true` by default in `production` [mode](/concepts/mode/).
 
 __webpack.config.js__
 
@@ -31,7 +31,7 @@ module.exports = {
 
 `UglifyjsWebpackPlugin | [UglifyjsWebpackPlugin]`
 
-Allows to override default minimizer by providing one or more custom configured [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin/) instance(s)
+Allows to override default minimizer by providing one or more custom configured [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin/) instance(s).
 
 __webpack.config.js__
 
