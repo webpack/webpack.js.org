@@ -112,6 +112,8 @@ The first of these two points is definitely an issue for our example, as `lodash
 
 ## Prevent Duplication
 
+W> The CommonsChunkPlugin has been removed in webpack v4 legato. To learn how chunks are treated in the latest version, check out the [SplitChunksPlugin](/plugins/split-chunks-plugin/).
+
 The [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) allows us to extract common dependencies into an existing entry chunk or an entirely new chunk. Let's use this to de-duplicate the `lodash` dependency from the previous example:
 
 __webpack.config.js__
