@@ -57,7 +57,7 @@ For some systems, watching many file systems can result in a lot of CPU or memor
 ignored: /node_modules/
 ```
 
-It is also possible to use [anymatch](https://github.com/es128/anymatch) patterns:
+It is also possible to use [anymatch](https://github.com/micromatch/anymatch) patterns:
 
 ```js
 ignored: "files/**/*.js"
@@ -68,7 +68,7 @@ ignored: "files/**/*.js"
 
 `boolean` `number`
 
-Turn on [polling](http://whatis.techtarget.com/definition/polling) by passing `true`, or specifying a poll interval in milliseconds:
+Turn on [polling](https://whatis.techtarget.com/definition/polling) by passing `true`, or specifying a poll interval in milliseconds:
 
 ```js
 poll: 1000 // Check for changes every second

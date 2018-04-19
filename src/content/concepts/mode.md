@@ -30,8 +30,8 @@ If not set, webpack sets `production` as the default value for `mode`. The suppo
 
 Option                | Description
 --------------------- | -----------------------
-`development`         | Provides `process.env.NODE_ENV` with value `development`. Enables `NamedModulesPlugin`.
-`production`          | Provides `process.env.NODE_ENV` with value `production`. Enables `UglifyJsPlugin`, `ModuleConcatenationPlugin` and `NoEmitOnErrorsPlugin`.
+`development`         | Provides `process.env.NODE_ENV` with value `development`. Enables `NamedChunksPlugin` and `NamedModulesPlugin`.
+`production`          | Provides `process.env.NODE_ENV` with value `production`. Enables `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin`, `OccurrenceOrderPlugin`, `SideEffectsFlagPlugin` and `UglifyJsPlugin`.
 `none`                | Opts out of any default optimization options
 
 T> Please remember that setting `NODE_ENV` doesn't automatically set `mode`.
