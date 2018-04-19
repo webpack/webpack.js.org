@@ -16,9 +16,9 @@ const bundles = [
   '/index.bundle.js'
 ];
 
+// TODO: Use a `walk` utility from `directory-tree-webpack-plugin`
 const Content = require('./_content.json');
-
-const paths = Content.children.reduce((paths, page) => {
+const pathsToTitles = Content.children.reduce((paths, page) => {
   if (page.type === 'directory') {
     page.children.forEach(child => (paths[child.url] = child.title));
   } else {
@@ -31,7 +31,17 @@ const paths = Content.children.reduce((paths, page) => {
 // Export method for `SSGPlugin`
 export default locals => {
   let { assets } = locals.webpackStats.compilation;
-  let title = paths[locals.path] === 'webpack' ? paths[locals.path] : `${paths[locals.path]} | webpack`;
+  let title;
+
+  if ( locals.path === '/' ) {
+    title = pathsToTitles[locals.path];
+
+  } else if ( !pathsToTitles[locals.path] ) {
+    if ( !locals.path.endsWith('/') ) locals.path += '/';
+    title = locals.path.replace(/.*\/(.+)\//g, '$1');
+    title = title.replace(/-/g, ' ');
+
+  } else title =`${pathsToTitles[locals.path]} | webpack`;
 
   return ReactDOMServer.renderToString(
     <StaticRouter location={locals.path} context={{}}>
