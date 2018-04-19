@@ -11,9 +11,9 @@ contributors:
 
 If you've been following the guides from the start, you will now have a small project that shows "Hello webpack". Now let's try to incorporate some other assets, like images, to see how webpack handles them.
 
-Prior to webpack, front-end developers used tools like grunt and gulp to process these assets and move them from their `/src` folder into their `/dist` or `/build` directory. They used the same idea for JavaScript modules, but tools like webpack __dynamically bundle__ all dependencies (creating what's known as a [dependency graph](/concepts/dependency-graph)). This is means that every module now _explicitly states its dependencies_ and we avoid bundling modules that aren't in use.
+Prior to webpack, front-end developers used tools like grunt and gulp to process these assets and move them from their `/src` folder into their `/dist` or `/build` directory. They used the same idea for JavaScript modules, but tools like webpack __dynamically bundle__ all dependencies (creating what's known as a [dependency graph](/concepts/dependency-graph)). This means that every module now _explicitly states its dependencies_ and we avoid bundling modules that aren't in use.
 
-One of the coolest webpack features is that we can also _include any other type of file_, besides JavaScript, for which there is a loader. This means that the same benefits listed above for JavaScript (e.g. explicit dependencies) apply to everything used in building a website or web app. Let's start with CSS, as you may already be familiar with that setup.
+One of the coolest webpack features is that it can also _include any other type of file_, besides JavaScript, for which there is a loader. This means that the same benefits listed above for JavaScript (e.g. explicit dependencies) apply to everything used in building a website or web app. Let's start with CSS, as you may already be familiar with that setup.
 
 ## Setup
 
@@ -182,7 +182,7 @@ __webpack.config.js__
 
 When we `import MyImage from './my-image.png'`, webpack processes and adds that image to our `output` directory _and_ the `MyImage` variable contains the final URL of that image after processing. When using the [css-loader](/loaders/css-loader), as shown above, a similar process occurs for `url('./my-image.png')` within the CSS. The loader recognizes this is a local file, and replaces the `'./my-image.png'` path with the final path to the image in the `output` directory. The [html-loader](/loaders/html-loader) handles `<img src="./my-image.png" />` in the same manner.
 
-Let's add an image to our project and see how this works, use any image:
+Let's add an image to our project and see how this works:
 
 __project__
 
@@ -260,7 +260,7 @@ Time: 895ms
 
 If all went well, we should now see an icon as a repeating background, as well as an `img` element beside our `Hello webpack` text. If you inspect this element, you'll see that the actual filename has changed to something like `5c999da72346a995e7e2718865d019c8.png`. This means webpack found the file in the `src` folder and processed it!
 
-T> A logical next step from here is minifying and optimizing the images. Read the [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) and [url-loader](/loaders/url-loader) for more on how to enhance the image loading process.
+T> A logical next step from here is minifying and optimizing the images. Read the [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) and [url-loader](/loaders/url-loader) documentation for more on how to enhance the image loading process.
 
 
 ## Loading Fonts
@@ -325,7 +325,7 @@ __project__
   |- /node_modules
 ```
 
-With the loader configured and fonts in place, we can use incorporate them via an `@font-face` declaration. The local `url(...)` directive is picked up by webpack as it was with the image:
+With the loader configured and fonts in place, we can incorporate them via an `@font-face` declaration. The local `url(...)` directive is picked up by webpack as with the image:
 
 __src/style.css__
 

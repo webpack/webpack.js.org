@@ -16,7 +16,7 @@ contributors:
   - chrischinchilla
 ---
 
-Webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interface with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why to use it over the other tools available the community.
+Webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interface with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're new to webpack, read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why to use it over the other tools available the community.
 
 ## Basic Setup
 
@@ -30,7 +30,7 @@ npm install --save-dev webpack
 
 Create the following directory structure and contents:
 
-**project**
+__project__
 
 ```diff
   webpack-demo
@@ -40,7 +40,7 @@ Create the following directory structure and contents:
 +   |- index.js
 ```
 
-**src/index.js**
+__src/index.js__
 
 ```javascript
 function component() {
@@ -55,7 +55,7 @@ function component() {
 document.body.appendChild(component());
 ```
 
-**index.html**
+__index.html__
 
 ```html
 <html>
@@ -73,9 +73,9 @@ In this example, there are implicit dependencies between the `<script>` tags. Th
 
 There are problems with managing JavaScript projects this way:
 
--   It is not immediately apparent that the script depends on an external library.
--   If a dependency is missing, or included in the wrong order, the application will not function properly.
--   If a dependency is included but not used, the browser is forced to download unnecessary code.
+-  It is not immediately apparent that the script depends on an external library.
+-  If a dependency is missing, or included in the wrong order, the application will not function properly.
+-  If a dependency is included but not used, the browser is forced to download unnecessary code.
 
 Let's use webpack to manage these scripts instead.
 
@@ -83,7 +83,7 @@ Let's use webpack to manage these scripts instead.
 
 First we'll tweak our directory structure slightly, separating the "source" code (`/src`) from our "distribution" code (`/dist`). The  "source" code is the code that we'll write and edit. The "distribution" code is the minimized and optimized `output` of our build process that the browser will load:
 
-**project**
+__project__
 
 ```diff
   webpack-demo
@@ -103,7 +103,7 @@ npm install --save lodash
 
 And then import it in our script.
 
-**src/index.js**
+__src/index.js__
 
 ```diff
 + import _ from 'lodash';
@@ -111,7 +111,7 @@ And then import it in our script.
   function component() {
     var element = document.createElement('div');
 
--   // Lodash, currently included via a script, is required for this line to work
+-  // Lodash, currently included via a script, is required for this line to work
 +   // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
@@ -123,16 +123,16 @@ And then import it in our script.
 
 Now, since we're bundling our scripts, we have to update the `index.html` file. Let's remove the lodash `<script>`, as we now `import` it, and change the other `<script>` tag to load the bundle, instead of the raw `/src` file:
 
-**dist/index.html**
+__dist/index.html__
 
 ```diff
   <html>
    <head>
      <title>Getting Started</title>
--    <script src="https://unpkg.com/lodash@4.16.6"></script>
+-   <script src="https://unpkg.com/lodash@4.16.6"></script>
    </head>
    <body>
--    <script src="./src/index.js"></script>
+-   <script src="./src/index.js"></script>
 +    <script src="bundle.js"></script>
    </body>
   </html>
@@ -164,7 +164,7 @@ Open `index.html` in your browser and, if everything went right, you should see 
 
 [ES2015](https://babeljs.io/learn-es2015/) standardized the [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) statements. Although they are not supported in most browsers yet, webpack does support them out of the box.
 
-Behind the scenes, webpack "transpiles" the code so that older browsers can also run it. If you inspect `dist/bundle.js`, you can see how webpack does this, it's quite ingenious! Besides `import` and `export`, webpack supports other module syntaxes as well, see [Module API](/api/module-methods) for more information.
+Behind the scenes, webpack "transpiles" the code so that older browsers can also run it. If you inspect `dist/bundle.js`, you can see how webpack does this, it's quite ingenious! Besides `import` and `export`, webpack supports other module syntax as well, see the [Module API](/api/module-methods) for more information.
 
 Webpack doesn't alter any code other than `import` and `export` statements. If you are using other [ES2015 features](http://es6-features.org/), make sure to [use a transpiler](/loaders/#transpiling) such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/) via webpack's [loader system](/concepts/loaders/).
 
@@ -172,7 +172,7 @@ Webpack doesn't alter any code other than `import` and `export` statements. If y
 
 Most projects will need a more complex setup, which is why webpack supports a [configuration file](/concepts/configuration). This is much more efficient than having to type in a lot of commands in the terminal, so let's create one to replace the CLI options used above:
 
-**project**
+__project__
 
 ```diff
   webpack-demo
@@ -184,7 +184,7 @@ Most projects will need a more complex setup, which is why webpack supports a [c
     |- index.js
 ```
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```javascript
 const path = require('path');
@@ -216,7 +216,7 @@ bundle.js  544 kB       0  [emitted]  [big]  main
 
 W> Note that when calling `webpack` via its path on Windows, you must use backslashes instead, e.g. `node_modules\.bin\webpack --config webpack.config.js`.
 
-T> If a `webpack.config.js` is present, the `webpack` command picks it up by default. We use the `--config` option here to show that you can pass a config of any name. This is be useful for more complex configurations that need to be split into multiple files.
+T> If a `webpack.config.js` is present, the `webpack` command picks it up by default. We use the `--config` option here to show that you can pass a config of any name. This is useful for more complex configurations that you need to split into multiple files.
 
 A configuration file allows far more flexibility than simple CLI usage. We can specify loader rules, plugins, resolve options and many other enhancements this way. See the [configuration documentation](/configuration) to learn more.
 
@@ -224,7 +224,7 @@ A configuration file allows far more flexibility than simple CLI usage. We can s
 
 Given it's not particularly fun to run a local copy of webpack from the CLI, we can set up a little shortcut. Let's adjust our _package.json_ by adding an [npm script](https://docs.npmjs.com/misc/scripts):
 
-**package.json**
+__package.json__
 
 ```json
 {
@@ -254,13 +254,13 @@ bundle.js  544 kB       0  [emitted]  [big]  main
     + 1 hidden module
 ```
 
-T> We can pass custom parameters to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --colors`.
+T> We can pass custom parameters to webpack by adding two dashes between the `npm run build` command and the parameters, e.g. `npm run build -- --colors`.
 
 ## Conclusion
 
-Now that we have a basic build you should move on to the next guide [`Asset Management`](/guides/asset-management) to learn how to manage assets like images and fonts with webpack. At this point, your project should look like this:
+With a basic build complete, we recommend you read the next guide [`Asset Management`](/guides/asset-management) to learn how to manage assets like images and fonts with webpack. At this point, the project should look like this:
 
-**project**
+__project__
 
 ```diff
 webpack-demo
