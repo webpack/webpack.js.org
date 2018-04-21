@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const toolList = require('tool-list');
+const { promisify } = require('util');
+const asyncWriteFile = promisify(fs.writeFile);
 
 const data = toolList.startersWithTag('webpack');
 const body = JSON.stringify(data);
+const file = './src/components/StarterKits/_starter-kits.json';
 
-fs.writeFile('./src/components/StarterKits/_starter-kits.json', body, err => {
-  if (err) {
+asyncWriteFile(file, body)
+  .catch(error => {
     console.error('Failed to write starter kits file: ', err);
-
-  } else console.log('Fetched 1 file: starter-kits-data.json');
-});
+  });

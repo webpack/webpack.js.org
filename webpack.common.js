@@ -116,15 +116,16 @@ module.exports = (env = {}) => ({
             .replace(/\/index$/, '')
             .replace(/^$/, '/');
 
-        // TODO: Strip `_` prefix from filenames in `url`
         if (item.type === 'file') {
+          // remove underscore from fetched files
+          if (item.name[0] === '_') {
+            item.name = item.name.replace('_', '');
+            item.url = item.url.replace('_', '');
+          }
           let content = fs.readFileSync(item.path, 'utf8');
           let { attributes } = FrontMatter(content);
           Object.assign(item, attributes);
           item.anchors = []; // TODO: Add actual anchors
-
-        } else {
-          // TODO: Add directory (section) attributes and index url (if necessary)
         }
       }
     })

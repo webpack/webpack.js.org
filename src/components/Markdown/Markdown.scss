@@ -19,12 +19,12 @@
     margin:1.5em 0 0.25em;
     color:getColor(fiord);
 
-    &:first-child {
-      margin-top: 0;
-      line-height: 1;
-    }
-
     tt, code { font-size: 90%; color: inherit }
+  }
+
+  h1:first-child {
+    margin: 0;
+    line-height: 1;
   }
 
   p, blockquote, table, pre {

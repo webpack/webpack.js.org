@@ -21,7 +21,7 @@
     "url": "https://github.com/webpack/webpack.js.org/issues"
   },
   "engines": {
-    "node": ">=6.9"
+    "node": ">=8.9.4"
   },
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.js --env.dev",
@@ -40,7 +40,6 @@
   "devDependencies": {
     "@octokit/rest": "^15.2.6",
     "alex": "^5.1.0",
-    "async": "^2.5.0",
     "autoprefixer": "^7.2.3",
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
@@ -84,11 +83,11 @@
     "prism-languages": "^0.3.3",
     "prismjs": "^1.9.0",
     "raw-loader": "^0.5.1",
-    "remark-autolink-headings": "^5.0.0",
     "redirect-webpack-plugin": "^0.1.1",
+    "remark-autolink-headings": "^5.0.0",
     "remark-loader": "^0.3.0",
     "remark-mermaid": "^0.2.0",
-    "request": "^2.81.0",
+    "request-promise": "^4.2.2",
     "sass-loader": "^6.0.6",
     "sitemap-static": "^0.4.2",
     "static-site-generator-webpack-plugin": "^3.4.1",
