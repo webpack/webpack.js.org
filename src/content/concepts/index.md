@@ -13,7 +13,7 @@ contributors:
   - jeremenichelli
 ---
 
-At its core, **webpack** is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it internally builds a _dependency graph_ which maps every module your project needs, then it generates one or more _bundles_.
+At its core, **webpack** is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it internally builds a _dependency graph_ which maps every module your project needs and generates one or more _bundles_.
 
 T> Learn more about JavaScript modules and webpack modules [here](/concepts/modules).
 
