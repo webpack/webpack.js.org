@@ -1,11 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
-const FrontMatter = require('front-matter');
 const CleanPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const DirectoryTreePlugin = require('directory-tree-webpack-plugin');
+const treePluginEnhacer = require('./src/utils/treePluginEnhacer.js');
 
 module.exports = (env = {}) => ({
   devtool: 'source-map',
@@ -109,25 +109,7 @@ module.exports = (env = {}) => ({
       dir: 'src/content',
       path: 'src/_content.json',
       extensions: /\.md/,
-      enhance: (item, options) => {
-        item.url = item.path
-            .replace(item.extension, '')
-            .replace(options.dir, '')
-            .replace(/\/index$/, '')
-            .replace(/^$/, '/');
-
-        if (item.type === 'file') {
-          // remove underscore from fetched files
-          if (item.name[0] === '_') {
-            item.name = item.name.replace('_', '');
-            item.url = item.url.replace('_', '');
-          }
-          let content = fs.readFileSync(item.path, 'utf8');
-          let { attributes } = FrontMatter(content);
-          Object.assign(item, attributes);
-          item.anchors = []; // TODO: Add actual anchors
-        }
-      }
+      enhance: treePluginEnhacer
     })
   ],
   stats: {
