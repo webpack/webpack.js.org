@@ -1,6 +1,9 @@
 // Import External Dependencies
 import React from 'react';
 
+// Import helpers
+import isBrowser from '../../utilities/isBrowser';
+
 // Load Styling
 import '../Gitter/Gitter.scss';
 
@@ -29,7 +32,7 @@ export default class Gitter extends React.Component {
   }
 
   componentDidMount() {
-    if ( window.document !== undefined ) {
+    if (isBrowser) {
       import('gitter-sidecar').then(Sidecar => {
         this._sidecar = new Sidecar({
           room: 'webpack/webpack',

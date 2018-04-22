@@ -7,6 +7,9 @@ import SplashViz from '../SplashViz/SplashViz';
 import Markdown from '../Markdown/Markdown';
 import Support from '../Support/Support';
 
+// Import helpers
+import isBrowser from '../../utilities/isBrowser';
+
 // Import Content
 import Content from '../../content/index.md';
 
@@ -38,7 +41,7 @@ const Splash = () => (
             great documentation and learning material!
           </p>
 
-          { window.document !== undefined ? (
+          { isBrowser ? (
             <React.Fragment>
               <h2>Latest Sponsors</h2>
               <Support rank="latest" />

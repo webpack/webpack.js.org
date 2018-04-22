@@ -15,6 +15,9 @@ import Footer from '../Footer/Footer';
 import Page from '../Page/Page';
 import Vote from '../Vote/Vote';
 
+// Import helpers
+import isBrowser from '../../utilities/isBrowser';
+
 // Load Styling
 import '../../styles/index';
 import '../../styles/icon.font.js';
@@ -74,7 +77,7 @@ class Site extends React.Component {
             { content: 'Blog', url: 'https://medium.com/webpack' }
           ]} />
 
-        { window.document !== undefined ? (
+        { isBrowser ? (
           <SidebarMobile
             open={ mobileSidebarOpen }
             sections={ this._strip(Content.children) } />

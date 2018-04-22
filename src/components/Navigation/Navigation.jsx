@@ -8,6 +8,9 @@ import Container from '../Container/Container';
 import Logo from '../Logo/Logo';
 import Dropdown from '../Dropdown/Dropdown';
 
+// Import helpers
+import isBrowser from '../../utilities/isBrowser';
+
 // Load Styling
 import 'docsearch.js/dist/cdn/docsearch.css';
 import './Navigation.scss';
@@ -54,7 +57,7 @@ export default class Navigation extends React.Component {
   }
 
   componentDidMount() {
-    if ( window.document !== undefined ) {
+    if (isBrowser) {
       const DocSearch = require('docsearch.js');
 
       DocSearch({
