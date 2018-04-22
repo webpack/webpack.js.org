@@ -5,7 +5,7 @@ const CleanPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const DirectoryTreePlugin = require('directory-tree-webpack-plugin');
-const treePluginEnhacer = require('./src/utils/treePluginEnhacer.js');
+const treePluginEnhacer = require('./src/utilities/treePluginEnhacer.js');
 
 module.exports = (env = {}) => ({
   devtool: 'source-map',

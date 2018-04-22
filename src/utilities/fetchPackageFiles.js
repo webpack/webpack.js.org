@@ -40,7 +40,7 @@ function main() {
       output: path.resolve(process.cwd(), output)
     }, function(error, d) {
       if (error) {
-        return console.error(`utils/fetchPackageFiles: ${ error }`);
+        return console.error(`utilities/fetchPackageFiles: ${ error }`);
       }
 
       const msg = d.length === 0
@@ -55,11 +55,11 @@ function main() {
 
 function fetchPackageFiles(options, cb) {
   if (typeof options.file !== 'string') {
-    return console.error('utils/fetchPackageFiles: missing file');
+    return console.error('utilities/fetchPackageFiles: missing file');
   }
 
   if (typeof options.output !== 'string') {
-    return console.error('utils/fetchPackageFiles: missing output');
+    return console.error('utilities/fetchPackageFiles: missing output');
   }
 
   // TODO: Return array of promises
@@ -103,7 +103,7 @@ function fetchPackageFiles(options, cb) {
         );
       })
       .catch(error => {
-        console.log('utils/fetchPackageFiles', error);
+        console.log('utilities/fetchPackageFiles', error);
       })
     });
 }

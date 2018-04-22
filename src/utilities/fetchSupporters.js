@@ -29,5 +29,5 @@ request(url)
     return asyncWriteFile(`./src/components/Support/_${filename}`, body);
   })
   .catch(error => {
-    console.error('utils/fetchSupporters:', error);
+    console.error('utilities/fetchSupporters:', error);
   });

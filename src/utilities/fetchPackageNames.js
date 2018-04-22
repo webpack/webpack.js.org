@@ -28,11 +28,11 @@ function main() {
 function fetchPackageNames(options, cb) {
   // sanity check
   if(typeof options.organization !== 'string') {
-    return console.error('utils/fetchPackageNames: missing organization');
+    return console.error('utilities/fetchPackageNames: missing organization');
   }
 
   if(typeof options.suffix !== 'string') {
-    return console.error('utils/fetchPackageNames: missing suffix');
+    return console.error('utilities/fetchPackageNames: missing suffix');
   }
 
   // FIX: this handles only one page

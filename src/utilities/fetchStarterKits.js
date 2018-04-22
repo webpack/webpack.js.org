@@ -10,5 +10,5 @@ const file = './src/components/StarterKits/_starter-kits.json';
 
 asyncWriteFile(file, body)
   .catch(error => {
-    console.error('Failed to write starter kits file: ', err);
+    console.error('utilities/fetchStarterKits', error);
   });
