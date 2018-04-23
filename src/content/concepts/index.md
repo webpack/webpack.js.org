@@ -68,7 +68,7 @@ module.exports = {
 
 In the example above, we use the `output.filename` and the `output.path` properties to tell webpack the name of our bundle and where we want it to be emitted to. In case you're wondering about the path module being imported at the top, it is a core [Node.js module](https://nodejs.org/api/modules.html) that gets used to manipulate file paths.
 
-T> The `output` property has [many more configurable features](/configuration/output) and if you like to know more about the concepts behind it, you can [read more in the ouput section](/concepts/output).
+T> The `output` property has [many more configurable features](/configuration/output) and if you like to know more about the concepts behind it, you can [read more in the output section](/concepts/output).
 
 
 ## Loaders
