@@ -32,4 +32,4 @@ module.exports = env => merge(common(env), {
     compress: true,
     historyApiFallback: true
   }
-})
+});
