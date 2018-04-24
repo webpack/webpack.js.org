@@ -11,8 +11,28 @@ import Gitter from '../Gitter/Gitter';
 import './Page.scss';
 
 class Page extends React.Component {
-  state = {
-    content: this.props.content instanceof Promise ? 'Loading...' : this.props.content
+  constructor(props) {
+    super(props);
+
+    const { content } = props;
+
+    this.state = {
+      content: content instanceof Promise ? 'Loading...' : content.default || content
+    };
+  }
+
+  componentDidMount() {
+    const { content } = this.props;
+
+    if (content instanceof Promise) {
+      content
+        .then(module => this.setState({
+          content: module.default || module
+        }))
+        .catch(error => this.setState({
+          content: 'Error loading content.'
+        }));
+    }
   }
 
   render() {
@@ -65,18 +85,6 @@ class Page extends React.Component {
         <Gitter />
       </section>
     );
-  }
-
-  componentDidMount() {
-    if ( this.props.content instanceof Promise ) {
-      this.props.content
-        .then(module => this.setState({
-          content: module.default || module
-        }))
-        .catch(error => this.setState({
-          content: 'Error loading content.'
-        }));
-    }
   }
 }
 
