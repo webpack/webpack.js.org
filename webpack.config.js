@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const RedirectWebpackPlugin = require('redirect-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 const cwd = process.cwd();
 
@@ -129,6 +130,22 @@ module.exports = (env) => ({
         'guides/production-build': '/guides/production/',
         'migrating': '/migrate/3/'
       },
+    }),
+    new WebpackPwaManifest({
+      name: 'webpack.js.org',
+      short_name: 'webpack',
+      description: 'webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.',
+      background_color: '#ffffff',
+      icons: [
+        {
+          src: path.resolve('src/assets/icon-square-big.png'),
+          sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
+        },
+        {
+          src: path.resolve('src/assets/icon-square-big.png'),
+          size: '1024x1024' // you can also use the specifications pattern
+        }
+      ]
     }),
   ]
 });

@@ -95,6 +95,7 @@
     "webpack": "^4.2.0",
     "webpack-dev-server": "^3.1.1",
     "webpack-merge": "^4.1.0",
+    "webpack-pwa-manifest": "^3.6.2",
     "yaml-frontmatter-loader": "^0.1.0"
   },
   "dependencies": {
