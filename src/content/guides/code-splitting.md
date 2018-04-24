@@ -306,7 +306,7 @@ __src/index.js__
 
 webpack 4.6.0+ adds support for prefetching and preloading.
 
-Using these inline directives while declaring your imports allows webpack to output “Resource Hint” which tells the browser that this resource is probably(prefetch)/definitely(preload) needed for some navigation in the future.
+Using these inline directives while declaring your imports allows webpack to output “Resource Hint” which tells the browser that this resource is probably (prefetch) or definitely (preload) needed for some navigation in the future.
 
 Simple prefetch example can be having a `HomePage` component, which renders a `LoginButton` component which then on demand loads a `LoginModal` component after being clicked.
 
@@ -318,9 +318,9 @@ import(/* webpackPrefetch: true */ "LoginModal");
 
 ```
 
-This will result `<link rel="prefetch" href="login-chunk.js">` printed in the HTML page. Which will instruct webpack to prefetch (in browser idle time) this On-Demand-Loaded chunk when the parent chunk finish loading.
+This will result `<link rel="prefetch" href="login-chunk.js">` appended in the HTML page. Which will instruct webpack to prefetch (in browser idle time) this On-Demand-Loaded chunk when the parent chunk finish loading.
 
-Preload directive has a bunch of differences compared to prefetch.
+Preload directive has a bunch of differences compared to prefetch:
 
 - A preloaded chunk starts loading in parallel to the parent chunk. A prefetched chunk starts after the parent chunk finish.
 - A preloaded chunk has medium priority and instantly downloaded. A prefetched chunk is downloaded in browser idle time.
@@ -338,7 +338,7 @@ __ChartComponent.js__
 import(/* webpackPreload: true */ "ChartingLibrary")
 ```
 
-When a page which uses the `ChartComponent` is requested, the charting-library-chunk is also requested via <link rel="preload">. Assuming the page-chunk is smaller and finishes faster, the page will be displayed with a `LoadingIndicator`, until the already requested `charting-library-chunk` finishes. This will give a little load time boost since it only needs one round-trip instead of two. Especially in high-latency environments.
+When a page which uses the `ChartComponent` is requested, the charting-library-chunk is also requested via `<link rel="preload">`. Assuming the page-chunk is smaller and finishes faster, the page will be displayed with a `LoadingIndicator`, until the already requested `charting-library-chunk` finishes. This will give a little load time boost since it only needs one round-trip instead of two. Especially in high-latency environments.
 
 T> Using webpackPreload incorrectly can actually hurt performance, so be careful when using it.
 
