@@ -6,9 +6,11 @@ import Site from './components/Site/Site';
 // TODO: Re-integrate <GoogleAnalytics analyticsId="UA-46921629-2" />
 // Consider `react-g-analytics` package
 
+const render = process.NODE_ENV === 'production' ? ReactDOM.hydrate : ReactDOM.render;
+
 // Client Side Rendering
 if ( window.document !== undefined ) {
-  ReactDOM.render((
+  render((
     <BrowserRouter>
       <Route
         path="/"
