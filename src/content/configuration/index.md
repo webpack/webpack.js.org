@@ -199,7 +199,7 @@ module.exports = {
       { [resource](/configuration/module#rule-resource): [ /* conditions */ ] },
       // matches if any condition is matched (default for arrays)
 
-      { [resource](/configuration/module#rule-resource): { [not](/configuration/module#condition): /* condition */ } }
+      { [resource](/configuration/module#rule-resource): { [not](/configuration/module#condition): [ /* condition */ ] } }
       // matches if the condition is not matched
     ],
 
@@ -397,7 +397,7 @@ module.exports = {
 
   <details><summary>/* Advanced configuration (click to show) */</summary>
 
-  [resolveLoader](/configuration/resolve#resolveloader): { /* same as resolve */ }
+  [resolveLoader](/configuration/resolve#resolveloader): { /* same as resolve */ },
   // separate resolve options for loaders
   
   [parallelism](other-options#parallelism): 1, // number
