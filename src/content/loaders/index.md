@@ -27,7 +27,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 * `cson-loader` Loads and transpiles a [CSON](https://github.com/bevry/cson#what-is-cson) file
 
 
-## Dialects
+## Transpiling
 
 * [`script-loader`](/loaders/script-loader) Executes a JavaScript file once in global context (like in script tag), requires are not parsed
 * [`babel-loader`](/loaders/babel-loader) Loads ES2015+ code and transpiles to ES5 using [Babel](https://babeljs.io/)
@@ -35,7 +35,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 * `traceur-loader` Loads ES2015+ code and transpiles to ES5 using [Traceur](https://github.com/google/traceur-compiler#readme)
 * [`ts-loader`](https://github.com/TypeStrong/ts-loader) or [`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader) Loads [TypeScript](https://www.typescriptlang.org/) 2.0+ like JavaScript
 * [`coffee-loader`](/loaders/coffee-loader) Loads [CoffeeScript](http://coffeescript.org/) like JavaScript
-* [`fengari-loader`](https://github.com/fengari-lua/fengari-loader/) Runs Lua code using [fengari](https://fengari.io/)
+* [`fengari-loader`](https://github.com/fengari-lua/fengari-loader/) Loads Lua code using [fengari](https://fengari.io/)
 
 
 ## Templating
