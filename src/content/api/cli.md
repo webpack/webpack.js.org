@@ -6,6 +6,7 @@ contributors:
   - simon04
   - tbroadley
   - chenxsan
+  - rencire
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -64,7 +65,7 @@ If your project structure is as follows -
 ```
 
 ```bash
-webpack src/index.js dist/bundle.js
+webpack src/index.js -o dist/bundle.js
 ```
 
 This will bundle your source code with entry as `index.js` and the output bundle file will have a path of `dist` and the filename will be `bundle.js`
