@@ -215,6 +215,7 @@ filename: "[chunkhash].bundle.js"
 ```
 
 Using hashes generated for extracted content :
+
 ```js
 filename: "[contenthash].bundle.css"
 ```
