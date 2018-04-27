@@ -10,6 +10,7 @@ contributors:
   - fvgs
   - dhurlburtusa
   - MagicDuck
+  - fadysamirsadek
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -211,6 +212,11 @@ Using hashes based on each chunks' content:
 
 ``` js
 filename: "[chunkhash].bundle.js"
+```
+
+Using hashes generated for extracted content :
+```js
+filename: "[contenthash].bundle.css"
 ```
 
 Make sure to read the [Caching guide](/guides/caching) for details. There are more steps involved than just setting this option.
