@@ -9,7 +9,7 @@ related:
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
 
-Since version 4 webpack runs optimizations for you depending on the `mode` set, but you can modify them indepentently too.
+Since version 4 webpack runs optimizations for you depending on the chosen `mode`, still all optimizations are available for manual configuration and overrides.
 
 
 ## `optimization.minimize`
@@ -38,7 +38,7 @@ T> Learn how [mode](/concepts/mode/) works.
 
 `UglifyjsWebpackPlugin | [UglifyjsWebpackPlugin]`
 
-Allows you to override the default minimizer by providing a different one or more customized [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin/) instance.
+Allows you to override the default minimizer by providing a different one or more customized [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin/) instances.
 
 __webpack.config.js__
 
