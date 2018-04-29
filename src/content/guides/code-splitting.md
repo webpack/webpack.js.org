@@ -307,6 +307,7 @@ __src/index.js__
 webpack 4.6.0+ adds support for prefetching and preloading.
 
 Using these inline directives while declaring your imports allows webpack to output “Resource Hint” which tells the browser that for:
+
 - prefetch: resource is probably needed for some navigation in the future
 - preload: resource might be needed during the current navigation
 
