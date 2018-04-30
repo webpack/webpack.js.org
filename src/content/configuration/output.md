@@ -214,7 +214,7 @@ Using hashes based on each chunks' content:
 filename: "[chunkhash].bundle.js"
 ```
 
-Using hashes generated for extracted content :
+Using hashes generated for extracted content:
 
 ```js
 filename: "[contenthash].bundle.css"
