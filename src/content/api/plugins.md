@@ -71,7 +71,7 @@ compiler.hooks.run.tapPromise('MyPlugin', compiler => {
 ```
 
 The moral of the story is that there are a variety of ways to `hook` into the
-`compiler`, each allowing your plugin run as it sees fit.
+`compiler`, each one allowing your plugin to run as it sees fit.
 
 
 ## Custom Hooks
@@ -90,7 +90,7 @@ compiler.hooks.myCustomHook = new SyncHook(['a', 'b', 'c'])
 compiler.hooks.myCustomHook.call(a, b, c);
 ```
 
-Again, see the [documentation](/api/tapable/) for `tapable` to learn more about the
+Again, see the [documentation](https://github.com/webpack/tapable) for `tapable` to learn more about the
 different hook classes and how they work.
 
 

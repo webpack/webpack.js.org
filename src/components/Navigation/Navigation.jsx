@@ -131,10 +131,10 @@ export default class Navigation extends React.Component {
 
     if (link.children) {
       return link.children.some(child => {
-        return (new RegExp("^/" + child.url + ".*/")).test(pageUrl);
+        return (new RegExp("^/" + child.url + ".*")).test(pageUrl);
       });
 
-    } else return (new RegExp("^/" + link.url +".*/")).test(pageUrl);
+    } else return (new RegExp("^/" + link.url +".*")).test(pageUrl);
   }
 
   /**
