@@ -289,7 +289,7 @@ Parameter         | Explanation                              | Usage
 ----------------- | ---------------------------------------- | -----
 `--bail`          | Abort the compilation on first error     |
 `--cache`         | Enable in memory caching [Enabled by default for watch] | `--cache=false`
-`--define`        | Define any free variable, see [shimming](/guides/shimming) | `--define process.env.NODE_ENV='development'`
+`--define`        | Define any free variable, see [shimming](/guides/shimming) | `--define process.env.NODE_ENV="'development'"`
 `--hot`           | Enables [Hot Module Replacement](/concepts/hot-module-replacement) | `--hot=true`
 `--labeled-modules` | Enables labeled modules [Uses LabeledModulesPlugin] |
 `--plugin`        | Load this [plugin](/configuration/plugins/) |
