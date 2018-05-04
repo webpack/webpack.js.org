@@ -5,6 +5,7 @@ sort: 3
 contributors:
   - skipjack
   - sokra
+  - fadysamirsadek
 related:
   - title: CommonJS Wikipedia
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -79,6 +80,9 @@ import(
   'module'
 );
 ```
+`webpackIgnore`: Disables dynamic import parsing when set to `true`.
+
+W> Note that setting `webpackIgnore` to `true` opts out of code splitting.
 
 `webpackChunkName`: A name for the new chunk. Since webpack 2.6.0, the placeholders `[index]` and `[request]` are supported within the given string to an incremented number or the actual resolved filename respectively.
 
