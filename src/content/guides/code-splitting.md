@@ -24,6 +24,7 @@ contributors:
   - kcolton
   - efreitasn
   - EugeneHlushko
+  - davecardwell
 related:
   - title: <link rel=”prefetch/preload”> in webpack
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -302,7 +303,7 @@ __src/index.js__
 ```
 
 
-## Prefecting/Preloading modules
+## Prefetching/Preloading modules
 
 webpack 4.6.0+ adds support for prefetching and preloading.
 
