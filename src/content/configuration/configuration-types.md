@@ -78,4 +78,5 @@ module.exports = [{
   mode: 'production',
 }]
 ```
+
 T> If you pass a name to `--config-name` flag, webpack will only build that specific configuration.
