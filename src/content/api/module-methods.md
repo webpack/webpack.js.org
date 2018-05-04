@@ -79,7 +79,9 @@ import(
   /* webpackMode: "lazy" */
   'module'
 );
+import(/* webpackIgnore: true */ 'ignored-module.js')
 ```
+
 `webpackIgnore`: Disables dynamic import parsing when set to `true`.
 
 W> Note that setting `webpackIgnore` to `true` opts out of code splitting.
