@@ -7,8 +7,8 @@ import SplashViz from '../SplashViz/SplashViz';
 import Markdown from '../Markdown/Markdown';
 import Support from '../Support/Support';
 
-// Import Content
-import Content from '../../content/index.md';
+// Import Demo Content
+import SplashContent from '../../content/index.md';
 
 // Load Styling
 import './Splash.scss';
@@ -21,7 +21,7 @@ const Splash = () => (
       <Container>
         <Markdown>
           <div dangerouslySetInnerHTML={{
-            __html: Content
+            __html: SplashContent
           }} />
         </Markdown>
       </Container>
