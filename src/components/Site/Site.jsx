@@ -20,27 +20,8 @@ import '../../styles/index';
 import '../../styles/icon.font.js';
 import './Site.scss';
 
-// Load & Clean Up JSON Representation of `src/content`
-// TODO: Consider moving all or parts of this cleaning to a `DirectoryTreePlugin` option(s)
+// Load Content Tree
 import Content from '../../_content.json';
-Content.children = Content.children
-  .filter(item => item.name !== 'images')
-  .map(item => {
-    if ( item.type === 'directory' ) {
-      return {
-        ...item,
-        children: item.children.sort((a, b) => {
-          let group1 = (a.group || '').toLowerCase();
-          let group2 = (b.group || '').toLowerCase();
-
-          if (group1 < group2) return -1;
-          if (group1 > group2) return 1;
-          return a.sort - b.sort;
-        })
-      };
-
-    } else return item;
-  });
 
 class Site extends React.Component {
   state = {

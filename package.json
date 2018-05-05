@@ -52,7 +52,7 @@
     "clean-webpack-plugin": "^0.1.17",
     "copy-webpack-plugin": "^4.3.0",
     "css-loader": "^0.28.5",
-    "directory-tree-webpack-plugin": "^0.2.0",
+    "directory-tree-webpack-plugin": "^0.3.1",
     "duplexer": "^0.1.1",
     "eslint": "4.5.0",
     "eslint-loader": "^1.9.0",
