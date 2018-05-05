@@ -109,7 +109,17 @@ module.exports = (env = {}) => ({
       dir: 'src/content',
       path: 'src/_content.json',
       extensions: /\.md/,
-      enhance: treePluginEnhacer
+      enhance: treePluginEnhacer,
+      filter: item => item.name !== 'images',
+      sort: (a, b) => {
+        let group1 = (a.group || '').toLowerCase();
+        let group2 = (b.group || '').toLowerCase();
+
+        if (group1 < group2) return -1;
+        if (group1 > group2) return 1;
+        if (a.sort && b.sort) return a.sort - b.sort;
+        else return 0;
+      }
     })
   ],
   stats: {
