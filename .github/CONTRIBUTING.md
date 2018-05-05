@@ -98,6 +98,8 @@ contributors:
   - bebraw
   - Jhnns
   - SpaceK33z
+translators:
+  - hangpark
 ---
 
 Some documentation...
