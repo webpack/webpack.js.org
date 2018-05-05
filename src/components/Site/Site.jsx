@@ -3,6 +3,9 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { hot as Hot } from 'react-hot-loader';
 
+// Import Utilities
+import { ExtractPages, ExtractSections } from '../../utilities/content-utils';
+
 // Import Components
 import NotificationBar from '../NotificationBar/NotificationBar';
 import Navigation from '../Navigation/Navigation';
@@ -31,8 +34,9 @@ class Site extends React.Component {
   render() {
     let { location } = this.props;
     let { mobileSidebarOpen } = this.state;
-    let sections = this._sections;
+    let sections = ExtractSections(Content);
     let section = sections.find(({ url }) => location.pathname.startsWith(url));
+    let pages = ExtractPages(Content);
 
     return (
       <div className="site">
@@ -70,7 +74,7 @@ class Site extends React.Component {
               render={ props => (
                 <Container className="site__content">
                   <Switch>
-                    { this._pages.map(page => (
+                    { pages.map(page => (
                       <Route
                         key={ page.url }
                         exact={ true }
@@ -124,20 +128,6 @@ class Site extends React.Component {
   }
 
   /**
-   * Flatten an array of `Content` items
-   *
-   * @param  {array} array - ...
-   * @return {array}       - ...
-   */
-  _flatten = array => {
-    return array.reduce((flat, item) => {
-      return flat.concat(
-        Array.isArray(item.children) ? this._flatten(item.children) : item
-      );
-    }, []);
-  }
-
-  /**
    * Strip any non-applicable properties
    *
    * @param  {array} array - ...
@@ -153,28 +143,6 @@ class Site extends React.Component {
       anchors,
       children: children ? this._strip(children) : []
     }));
-  }
-
-  /**
-   * Get top-level sections
-   *
-   * @return {array} - ...
-   */
-  get _sections() {
-    return Content.children.filter(item => (
-      item.type === 'directory'
-    ));
-  }
-
-  /**
-   * Get all markdown pages
-   *
-   * @return {array} - ...
-   */
-  get _pages() {
-    return this._flatten(Content.children).filter(item => {
-      return item.extension === '.md';
-    });
   }
 }
 
