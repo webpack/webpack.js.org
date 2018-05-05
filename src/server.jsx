@@ -16,11 +16,7 @@ const bundles = [
   '/index.bundle.js'
 ];
 
-// Export method for `StaticSiteGeneratorPlugin`
-// CONSIDER: How high can we mount `Site` into the DOM hierarchy? If
-// we could start at `<html>`, much of this could be moved to the `Site`
-// component itself (allowing easier utilization of page data for title,
-// description, etc).
+// Export method for `SSGPlugin`
 export default locals => {
   let { assets } = locals.webpackStats.compilation;
 
