@@ -196,8 +196,6 @@ __webpack.config.js__
   };
 ```
 
-T> Note that order matters here. The order of `'splitChunks'` and `'runtimeChunk'` doesn't have any importance in this context.
-
 Let's run another build to see our new `vendor` bundle:
 
 ``` bash
