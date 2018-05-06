@@ -51,9 +51,7 @@ export const FindInContent = (tree, test) => {
  * @return {array}       - Immediate children of the given `tree` that are directories
  */
 export const ExtractSections = tree => {
-  return tree.children.filter(item => (
-    item.type === 'directory'
-  ));
+  return tree.children.filter(item => item.type === 'directory');
 };
 
 /**
@@ -63,7 +61,5 @@ export const ExtractSections = tree => {
  * @return {array}       - All markdown descendants of the given `tree`
  */
 export const ExtractPages = tree => {
-  return FlattenContent(tree).filter(item => {
-    return item.extension === '.md';
-  });
+  return FlattenContent(tree).filter(item => item.extension === '.md');
 };
