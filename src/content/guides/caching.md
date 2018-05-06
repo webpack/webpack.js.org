@@ -117,7 +117,7 @@ W> Output may differ depending on your current webpack version. Newer versions m
 
 ## Extracting Boilerplate
 
-As well all know, Webpack's boilerplate and manifest change with each build, that manifest and boilerplate generally are what you find in top of your bundle file and having them there can be a little costy, so with using the new Webpack 4.x we replaced the good'ol [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) for the new [`SplitChunksPlugin`](/plugins/split-chunks-plugin) and way you can use it is via new configuration : `optimization.runtimeChunk` By specifying a name not mentioned in the `entry` configuration, the new optimization will automatically extract what we want into a separate bundle:
+As well all know, Webpack's boilerplate and manifest change with each build, that manifest and boilerplate generally are what you find in top of your bundle file and having them there can be a little costy, so with using the new Webpack 4.x we replaced the good'ol [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) for the new [`SplitChunksPlugin`](/plugins/split-chunks-plugin) and way you can use it is via new configuration : `optimization.runtimeChunk` By specifying a name not mentioned in the `entry` configuration, the new optimization will automatically extract what we want into a separate bundle.
 
 __webpack.config.js__
 
