@@ -6,6 +6,7 @@ contributors:
   - jouni-kantola
   - skipjack
   - dannycjones
+  - houssem-yahiaoui
 related:
   - title: Predictable Long Term Caching
     url: https://medium.com/webpack/predictable-long-term-caching-with-webpack-d3eee1d3fa31
@@ -116,13 +117,12 @@ W> Output may differ depending on your current webpack version. Newer versions m
 
 ## Extracting Boilerplate
 
-As we learned in [code splitting](/guides/code-splitting), the [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) can be used to split modules out into separate bundles. A lesser-known feature of the `CommonsChunkPlugin` is extracting webpack's boilerplate and manifest which can change with every build. By specifying a name not mentioned in the `entry` configuration, the plugin will automatically extract what we want into a separate bundle:
+As well all know, Webpack's boilerplate and manifest change with each build, that manifest and boilerplate generally are what you find in top of your bundle file and having them there can be a little costy, so with using the new Webpack 4.x we replaced the good'ol [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) for the new [`SplitChunksPlugin`](/plugins/split-chunks-plugin) and way you can use it is via new configuration : `optimization.runtimeChunk` By specifying a name not mentioned in the `entry` configuration, the new optimization will automatically extract what we want into a separate bundle:
 
 __webpack.config.js__
 
 ``` diff
   const path = require('path');
-+ const webpack = require('webpack');
   const CleanWebpackPlugin = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -132,12 +132,13 @@ __webpack.config.js__
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
         title: 'Caching'
--     })
-+     }),
-+     new webpack.optimize.CommonsChunkPlugin({
-+       name: 'manifest'
-+     })
+      })
     ],
++   optimization: {
++     runtimeChunk : {
++       name: 'manifest'
++     }
++   }, 
     output: {
       filename: '[name].[chunkhash].js',
       path: path.resolve(__dirname, 'dist')
@@ -148,12 +149,12 @@ __webpack.config.js__
 Let's run another build to see the extracted `manifest` bundle:
 
 ``` bash
-Hash: 80552632979856ddab34
-Version: webpack 3.3.0
+Hash: 399dc1f0f9447b1da8c0
+Version: webpack 4.7.0
 Time: 1512ms
                            Asset       Size  Chunks                    Chunk Names
-    main.5ec8e954e32d66dee1aa.js     542 kB       0  [emitted]  [big]  main
-manifest.719796322be98041fff2.js    5.82 kB       1  [emitted]         manifest
+    main.35a559f7b9f735c2373a.js     542 kB       0  [emitted]         main
+manifest.a6e25d9715318ea4928a.js    5.82 kB       1  [emitted]         manifest
                       index.html  275 bytes          [emitted]
    [0] ./src/index.js 336 bytes {0} [built]
    [2] (webpack)/buildin/global.js 509 bytes {0} [built]
@@ -161,36 +162,31 @@ manifest.719796322be98041fff2.js    5.82 kB       1  [emitted]         manifest
     + 1 hidden module
 ```
 
-It's also good practice to extract third-party libraries, such as `lodash` or `react`, to a separate `vendor` chunk as they are less likely to change than our local source code. This step will allow clients to request even less from the server to stay up to date. This can be done by using a combination of a new `entry` point along with another `CommonsChunkPlugin` instance:
+It's also good practice to extract third-party libraries, such as `lodash` or `react`, to a separate `vendor` chunk as they are less likely to change than our local source code. This step will allow clients to request even less from the server to stay up to date. This can be done by using `SplitChunksPlugin` via `optimization.splitChunks` and specifiying the `chunks` to be `initial` -This is one of many option you can discover from the [`Plugin`](/plugins/split-chunks-plugin) documentation -
 
 __webpack.config.js__
 
 ``` diff
   var path = require('path');
-  const webpack = require('webpack');
   const CleanWebpackPlugin = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
--   entry: './src/index.js',
-+   entry: {
-+     main: './src/index.js',
-+     vendor: [
-+       'lodash'
-+     ]
-+   },
+    entry: './src/index.js',
     plugins: [
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
         title: 'Caching'
-      }),
-+     new webpack.optimize.CommonsChunkPlugin({
-+       name: 'vendor'
-+     }),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'manifest'
       })
     ],
+    optimization: {
++    splitChunks : {
++      chunks: 'initial'
++    },
+     runtimeChunk : {
+       name: 'manifest'
+     }
+    }, 
     output: {
       filename: '[name].[chunkhash].js',
       path: path.resolve(__dirname, 'dist')
@@ -198,18 +194,19 @@ __webpack.config.js__
   };
 ```
 
-W> Note that order matters here. The `'vendor'` instance of the `CommonsChunkPlugin` must be included prior to the `'manifest'` instance.
+W> Note that order matters here. The order of `'splitChunks'` and `'runtimeChunk'` doesn't have any importance in this context.
 
 Let's run another build to see our new `vendor` bundle:
 
 ``` bash
-Hash: 69eb92ebf8935413280d
-Version: webpack 3.3.0
+Hash: 127b1e3b9cfa61ea381a
+Version: webpack 4.7.0
 Time: 1502ms
-                           Asset       Size  Chunks                    Chunk Names
-  vendor.8196d409d2f988123318.js     541 kB       0  [emitted]  [big]  vendor
-    main.0ac0ae2d4a11214ccd19.js  791 bytes       1  [emitted]         main
-manifest.004a1114de8bcf026622.js    5.85 kB       2  [emitted]         manifest
+                                Asset       Size  Chunks                    Chunk Names
+         main.e80145505f9110ba167f.js  791 bytes       1  [emitted]         main
+     manifest.a6e25d9715318ea4928a.js    5.85 kB       2  [emitted]         manifest
+  vendor~main.3eb66d25ed0ae9836719.js     541 kB       0  [emitted]         vendor
+    
                       index.html  352 bytes          [emitted]
    [1] ./src/index.js 336 bytes {1} [built]
    [2] (webpack)/buildin/global.js 509 bytes {0} [built]
@@ -267,12 +264,12 @@ Running another build, we would expect only our `main` bundle's hash to change, 
 
 ``` bash
 Hash: d38a06644fdbb898d795
-Version: webpack 3.3.0
+Version: webpack 4.7.0
 Time: 1445ms
-                           Asset       Size  Chunks                    Chunk Names
-  vendor.a7561fb0e9a071baadb9.js     541 kB       0  [emitted]  [big]  vendor
-    main.b746e3eb72875af2caa9.js    1.22 kB       1  [emitted]         main
-manifest.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         manifest
+                                Asset       Size  Chunks                    Chunk Names
+  vendor~main.a7561fb0e9a071baadb9.js     541 kB       0  [emitted]         vendor
+         main.b746e3eb72875af2caa9.js    1.22 kB       1  [emitted]         main
+     manifest.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         manifest
                       index.html  352 bytes          [emitted]
    [1] ./src/index.js 421 bytes {1} [built]
    [2] (webpack)/buildin/global.js 509 bytes {0} [built]
@@ -310,14 +307,16 @@ __webpack.config.js__
       new HtmlWebpackPlugin({
         title: 'Caching'
       }),
-+     new webpack.HashedModuleIdsPlugin(),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor'
-      }),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'manifest'
-      })
++     new webpack.HashedModuleIdsPlugin()
     ],
+    optimization: {
+        runtimeChunk: {
+            name: 'manifest'
+        },
+        splitChunks: {
+            chunks: 'initial'
+        }
+    },
     output: {
       filename: '[name].[chunkhash].js',
       path: path.resolve(__dirname, 'dist')
@@ -329,12 +328,12 @@ Now, despite any new local dependencies, our `vendor` hash should stay consisten
 
 ``` bash
 Hash: 1f49b42afb9a5acfbaff
-Version: webpack 3.3.0
+Version: webpack 4.7.0
 Time: 1372ms
-                           Asset       Size  Chunks                    Chunk Names
-  vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]  [big]  vendor
-    main.d103ac311788fcb7e329.js    1.22 kB       1  [emitted]         main
-manifest.d2a6dc1ccece13f5a164.js    5.85 kB       2  [emitted]         manifest
+                                Asset       Size  Chunks                    Chunk Names
+  vendor~main.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]         vendor
+         main.d103ac311788fcb7e329.js    1.22 kB       1  [emitted]         main
+     manifest.d2a6dc1ccece13f5a164.js    5.85 kB       2  [emitted]         manifest
                       index.html  352 bytes          [emitted]
 [3Di9] ./src/print.js 62 bytes {1} [built]
 [3IRH] (webpack)/buildin/module.js 517 bytes {0} [built]
@@ -371,12 +370,12 @@ And finally run our build again:
 
 ``` bash
 Hash: 37e1358f135c0b992f72
-Version: webpack 3.3.0
+Version: webpack 4.7.0
 Time: 1557ms
-                           Asset       Size  Chunks                    Chunk Names
-  vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]  [big]  vendor
-    main.fc7f38e648da79db2aba.js  891 bytes       1  [emitted]         main
-manifest.bb5820632fb66c3fb357.js    5.85 kB       2  [emitted]         manifest
+                                Asset       Size  Chunks                    Chunk Names
+  vendor~main.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]         vendor
+         main.fc7f38e648da79db2aba.js  891 bytes       1  [emitted]         main
+     manifest.bb5820632fb66c3fb357.js    5.85 kB       2  [emitted]         manifest
                       index.html  352 bytes          [emitted]
 [3IRH] (webpack)/buildin/module.js 517 bytes {0} [built]
 [DuR2] (webpack)/buildin/global.js 509 bytes {0} [built]
