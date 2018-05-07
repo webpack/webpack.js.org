@@ -61,8 +61,8 @@ Here's a more complicated example of using a CDN and hashes for assets:
 
 ```javascript
 output: {
-  path: "/home/proj/cdn/assets/[hash]",
-  publicPath: "http://cdn.example.com/assets/[hash]/"
+  path: '/home/proj/cdn/assets/[hash]',
+  publicPath: 'http://cdn.example.com/assets/[hash]/'
 }
 ```
 

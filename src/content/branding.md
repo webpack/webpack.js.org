@@ -19,7 +19,7 @@ webpack should **always** be written in lower-case letters, even at the beginnin
 
 The webpack logo should be placed on a white background with enough space around it like this:
 
-<img src="https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.png?raw=true" alt="webpack logo default with proper spacing on light background" />
+<img src="https://raw.githubusercontent.com/webpack/media/master/logo/logo-on-white-bg.png" alt="webpack logo default with proper spacing on light background" />
 
 [svg](https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.svg) | [png](https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.png) | [jpg](https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.jpg)
 
@@ -28,7 +28,7 @@ Just double the size of the inner dark blue cube to get an idea how much space t
 For dark backgrounds, you can use the negative version of the logo:
 
 <div style="display: block; background: #111;">
-  <img src="https://github.com/webpack/media/blob/master/logo/logo-on-dark-bg.png?raw=true" alt="webpack logo default with proper spacing on light background" />
+  <img src="https://raw.githubusercontent.com/webpack/media/master/logo/logo-on-dark-bg.png" alt="webpack logo default with proper spacing on light background" />
 </div>
 
 [svg](https://github.com/webpack/media/blob/master/logo/logo-on-dark-bg.svg) | [png](https://github.com/webpack/media/blob/master/logo/logo-on-dark-bg.png) | [jpg](https://github.com/webpack/media/blob/master/logo/logo-on-dark-bg.jpg)
@@ -40,19 +40,19 @@ T> Please use the **icon + text** whenever possible.
 
 **The icon is designed to be used in layout-constrained areas. As previously stated, please prefer icon + text.**
 
-<img src="https://github.com/webpack/media/blob/master/logo/icon.png?raw=true" width="250" alt="icon example">
+<img src="https://raw.githubusercontent.com/webpack/media/master/logo/icon.png" width="250" alt="icon example">
 
 [svg](https://github.com/webpack/media/blob/master/logo/icon.svg) | [png](https://github.com/webpack/media/blob/master/logo/icon.png) | [jpg](https://github.com/webpack/media/blob/master/logo/icon.jpg)
 
 Square-sized icon for bigger areas (like avatars or profile pictures):
 
-<img src="https://github.com/webpack/media/blob/master/logo/icon-square-big.png?raw=true" width="250" alt="icon square big example">
+<img src="https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-big.png" width="250" alt="icon square big example">
 
 [svg](https://github.com/webpack/media/blob/master/logo/icon-square-big.svg) | [png](https://github.com/webpack/media/blob/master/logo/icon-square-big.png) | [jpg](https://github.com/webpack/media/blob/master/logo/icon-square-big.jpg)
 
 Square-sized icon for smaller areas (like favicons):
 
-<img src="https://github.com/webpack/media/blob/master/logo/icon-square-small.png?raw=true" width="50" alt="icon square small example">
+<img src="https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png" width="50" alt="icon square small example">
 
 [svg](https://github.com/webpack/media/blob/master/logo/icon-square-small.svg) | [png](https://github.com/webpack/media/blob/master/logo/icon-square-small.png) | [jpg](https://github.com/webpack/media/blob/master/logo/icon-square-small.jpg)
 
@@ -63,12 +63,12 @@ T> For those of you following our guidelines and have gotten this far, we've mad
 
 ## Font
 
-We use the beautiful [Geomanist Medium](http://geomanist.com/) font from the extremely talented folks at the [Atipo Foundry](http://atipofoundry.com/) who provide the entire font family at a 'pay what you want' model.
+We use the beautiful [Geomanist Medium](http://atipofoundry.com/fonts/geomanist) font from the extremely talented folks at the [Atipo Foundry](http://atipofoundry.com/) who provide the entire font family at a 'pay what you want' model.
 
 
 ## Color Palette
 
-The following colors are used throughout the site in various combinations and on our fancy clothing line launched with the help of [Open Collective](http://opencollective.com) and [Threadless](https://medium.com/u/840563ee2a56) over at the [official webpack store](https://webpack.threadless.com/collections/the-final-release-collection/)!
+The following colors are used throughout the site in various combinations and on our fancy clothing line launched with the help of [Open Collective](https://opencollective.com/) and [Threadless](https://medium.com/u/840563ee2a56) over at the [official webpack store](https://webpack.threadless.com/collections/the-final-release-collection/)!
 
 | Color Name    | HEX Code      | RGB Code              | Sample
 |---------------|---------------|-----------------------|-------------------------------

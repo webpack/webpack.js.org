@@ -6,7 +6,7 @@ title: webpack
 
 <div class="splash__wrap">
 <div class="splash__left">
-__app.js__
+__src/index.js__
 
 ```js
 import bar from './bar';
@@ -15,7 +15,7 @@ bar();
 ```
 </div>
 <div class="splash__right">
-__bar.js__
+__src/bar.js__
 
 ```js
 export default function bar() {
@@ -30,12 +30,15 @@ export default function bar() {
 
 <div class="splash__wrap">
 <div class="splash__left">
-__webpack.config.js__
+__[Without config](https://youtu.be/3Nv9muOkb6k?t=21293)__ or provide custom __webpack.config.js__
 
 ```js
+const path = require('path');
+
 module.exports = {
-  entry: './app.js',
+  entry: './src/index.js',
   output: {
+  	path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   }
 };
@@ -52,7 +55,7 @@ __page.html__
   </head>
   <body>
     ...
-    <script src="bundle.js"></script>
+    <script src="dist/bundle.js"></script>
   </body>
 </html>
 ```
