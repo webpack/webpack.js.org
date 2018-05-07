@@ -65,7 +65,7 @@ auxiliaryComment: {
 
 ## `output.chunkFilename`
 
-`string` `function`
+`string`
 
 This option determines the name of non-entry chunk files. See [`output.filename`](#output-filename) option for details on the possible values.
 
