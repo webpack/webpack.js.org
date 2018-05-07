@@ -3,11 +3,17 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter, Route } from 'react-router-dom';
 
+// Import Utilities
+import { GetPageTitle } from './utilities/content-utils';
+
 // Import Components
 import Site from './components/Site/Site';
 
 // Import Images
 import Favicon from './favicon.ico';
+
+// Import Content Tree
+import Content from './_content.json';
 
 // Define bundles (previously used `Object.values(locals.assets)`) but
 // can't retrieve from there anymore due to separate compilation.
@@ -16,32 +22,10 @@ const bundles = [
   '/index.bundle.js'
 ];
 
-// TODO: Use a `walk` utility from `directory-tree-webpack-plugin`
-const Content = require('./_content.json');
-const pathsToTitles = Content.children.reduce((paths, page) => {
-  if (page.type === 'directory') {
-    page.children.forEach(child => (paths[child.url] = child.title));
-  } else {
-    paths[page.url] = page.title;
-  }
-
-  return paths;
-}, {});
-
 // Export method for `SSGPlugin`
 export default locals => {
   let { assets } = locals.webpackStats.compilation;
-  let title;
-
-  if ( locals.path === '/' ) {
-    title = pathsToTitles[locals.path];
-
-  } else if ( !pathsToTitles[locals.path] ) {
-    if ( !locals.path.endsWith('/') ) locals.path += '/';
-    title = locals.path.replace(/.*\/(.+)\//g, '$1');
-    title = title.replace(/-/g, ' ');
-
-  } else title =`${pathsToTitles[locals.path]} | webpack`;
+  let title = GetPageTitle(Content, locals.path)
 
   return ReactDOMServer.renderToString(
     <StaticRouter location={locals.path} context={{}}>
