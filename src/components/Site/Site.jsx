@@ -2,6 +2,10 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { hot as Hot } from 'react-hot-loader';
+import DocumentTitle from 'react-document-title';
+
+// Import Utilities
+import { ExtractPages, ExtractSections, GetPageTitle } from '../../utilities/content-utils';
 
 // Import Components
 import NotificationBar from '../NotificationBar/NotificationBar';
@@ -23,27 +27,8 @@ import '../../styles/index';
 import '../../styles/icon.font.js';
 import './Site.scss';
 
-// Load & Clean Up JSON Representation of `src/content`
-// TODO: Consider moving all or parts of this cleaning to a `DirectoryTreePlugin` option(s)
+// Load Content Tree
 import Content from '../../_content.json';
-Content.children = Content.children
-  .filter(item => item.name !== 'images')
-  .map(item => {
-    if ( item.type === 'directory' ) {
-      return {
-        ...item,
-        children: item.children.sort((a, b) => {
-          let group1 = (a.group || '').toLowerCase();
-          let group2 = (b.group || '').toLowerCase();
-
-          if (group1 < group2) return -1;
-          if (group1 > group2) return 1;
-          return a.sort - b.sort;
-        })
-      };
-
-    } else return item;
-  });
 
 class Site extends React.Component {
   state = {
@@ -53,11 +38,14 @@ class Site extends React.Component {
   render() {
     let { location } = this.props;
     let { mobileSidebarOpen } = this.state;
-    let sections = this._sections;
+    let sections = ExtractSections(Content);
     let section = sections.find(({ url }) => location.pathname.startsWith(url));
+    let pages = ExtractPages(Content);
 
     return (
       <div className="site">
+        <DocumentTitle title={ GetPageTitle(Content, location.pathname) } />
+
         <NotificationBar />
 
         <Navigation
@@ -92,7 +80,7 @@ class Site extends React.Component {
               render={ props => (
                 <Container className="site__content">
                   <Switch>
-                    { this._pages.map(page => (
+                    { pages.map(page => (
                       <Route
                         key={ page.url }
                         exact={ true }
@@ -146,20 +134,6 @@ class Site extends React.Component {
   }
 
   /**
-   * Flatten an array of `Content` items
-   *
-   * @param  {array} array - ...
-   * @return {array}       - ...
-   */
-  _flatten = array => {
-    return array.reduce((flat, item) => {
-      return flat.concat(
-        Array.isArray(item.children) ? this._flatten(item.children) : item
-      );
-    }, []);
-  }
-
-  /**
    * Strip any non-applicable properties
    *
    * @param  {array} array - ...
@@ -175,28 +149,6 @@ class Site extends React.Component {
       anchors,
       children: children ? this._strip(children) : []
     }));
-  }
-
-  /**
-   * Get top-level sections
-   *
-   * @return {array} - ...
-   */
-  get _sections() {
-    return Content.children.filter(item => (
-      item.type === 'directory'
-    ));
-  }
-
-  /**
-   * Get all markdown pages
-   *
-   * @return {array} - ...
-   */
-  get _pages() {
-    return this._flatten(Content.children).filter(item => {
-      return item.extension === '.md';
-    });
   }
 }
 

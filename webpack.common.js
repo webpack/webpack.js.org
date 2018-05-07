@@ -1,11 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
-const FrontMatter = require('front-matter');
 const CleanPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const DirectoryTreePlugin = require('directory-tree-webpack-plugin');
+const treePluginEnhacer = require('./src/utilities/treePluginEnhacer.js');
 
 module.exports = (env = {}) => ({
   devtool: 'source-map',
@@ -109,23 +109,16 @@ module.exports = (env = {}) => ({
       dir: 'src/content',
       path: 'src/_content.json',
       extensions: /\.md/,
-      enhance: (item, options) => {
-        item.url = item.path
-            .replace(item.extension, '')
-            .replace(options.dir, '')
-            .replace(/\/index$/, '')
-            .replace(/^$/, '/')
+      enhance: treePluginEnhacer,
+      filter: item => item.name !== 'images',
+      sort: (a, b) => {
+        let group1 = (a.group || '').toLowerCase();
+        let group2 = (b.group || '').toLowerCase();
 
-        // TODO: Strip `_` prefix from filenames in `url`
-        if (item.type === 'file') {
-          let content = fs.readFileSync(item.path, 'utf8')
-          let { attributes } = FrontMatter(content)
-          Object.assign(item, attributes)
-          item.anchors = [] // TODO: Add actual anchors
-
-        } else {
-          // TODO: Add directory (section) attributes and index url (if necessary)
-        }
+        if (group1 < group2) return -1;
+        if (group1 > group2) return 1;
+        if (a.sort && b.sort) return a.sort - b.sort;
+        else return 0;
       }
     })
   ],
@@ -137,4 +130,4 @@ module.exports = (env = {}) => ({
     publicPath: '/',
     filename: '[name].bundle.js'
   }
-})
+});

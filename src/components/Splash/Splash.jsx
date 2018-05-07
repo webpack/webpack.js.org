@@ -10,8 +10,8 @@ import Support from '../Support/Support';
 // Import helpers
 import isClient from '../../utilities/is-client';
 
-// Import Content
-import Content from '../../content/index.md';
+// Import Demo Content
+import SplashContent from '../../content/index.md';
 
 // Load Styling
 import './Splash.scss';
@@ -24,7 +24,7 @@ const Splash = () => (
       <Container>
         <Markdown>
           <div dangerouslySetInnerHTML={{
-            __html: Content
+            __html: SplashContent
           }} />
         </Markdown>
       </Container>
