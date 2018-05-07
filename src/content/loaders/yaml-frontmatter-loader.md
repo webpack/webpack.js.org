@@ -53,7 +53,7 @@ And run `webpack` via your preferred method.
 
 ## License
 
-#### [MIT](./LICENSE)
+#### [MIT](https://raw.githubusercontent.com/webpack-contrib/yaml-frontmatter-loader/master/LICENSE)
 
 [npm]: https://img.shields.io/npm/v/yaml-frontmatter-loader.svg
 [npm-url]: https://npmjs.com/package/yaml-frontmatter-loader

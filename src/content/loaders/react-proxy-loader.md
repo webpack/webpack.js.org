@@ -80,7 +80,7 @@ And run `webpack` via your preferred method.
 
 ## License
 
-#### [MIT](./LICENSE)
+#### [MIT](https://raw.githubusercontent.com/webpack-contrib/react-proxy-loader/master/LICENSE)
 
 [npm]: https://img.shields.io/npm/v/react-proxy-loader.svg
 [npm-url]: https://npmjs.com/package/react-proxy-loader

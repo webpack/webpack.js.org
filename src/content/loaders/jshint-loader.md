@@ -121,7 +121,7 @@ emit messages using `this.emitWarning(...)` or `this.emitError(...)`. See
 _Note: JSHint reporters are **not compatible** with JSHint-loader!
 This is due to the fact that reporter input is only processed from one file; not
 multiple files. Error reporting in this manner differs from
-[traditional reporters](http://www.JSHint.com/docs/reporters/) for JSHint
+[traditional reporters](http://www.jshint.com/docs/reporters/) for JSHint
 since the loader plugin (i.e. JSHint-loader) is executed for each source file;
 and thus the reporter is executed for each file._
 
@@ -138,11 +138,11 @@ WARNING in ./path/to/file.js
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
-#### [CONTRIBUTING](./.github/CONTRIBUTING)
+#### [CONTRIBUTING](https://raw.githubusercontent.com/webpack-contrib/jshint-loader/master/.github/CONTRIBUTING)
 
 ## License
 
-#### [MIT](./LICENSE)
+#### [MIT](https://raw.githubusercontent.com/webpack-contrib/jshint-loader/master/LICENSE)
 
 [npm]: https://img.shields.io/npm/v/jshint-loader.svg
 [npm-url]: https://npmjs.com/package/jshint-loader

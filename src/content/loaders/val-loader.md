@@ -173,7 +173,7 @@ require("val-loader!tenyearsinms") == 315360000000
 
 ## License
 
-#### [MIT](./LICENSE)
+#### [MIT](https://raw.githubusercontent.com/webpack-contrib/val-loader/master/LICENSE)
 
 [npm]: https://img.shields.io/npm/v/val-loader.svg
 [npm-url]: https://npmjs.com/package/val-loader

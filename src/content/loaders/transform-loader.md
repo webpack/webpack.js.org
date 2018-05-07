@@ -136,7 +136,7 @@ module.exports = {
 
 ## License
 
-#### [MIT](./LICENSE)
+#### [MIT](https://raw.githubusercontent.com/webpack-contrib/transform-loader/master/LICENSE)
 
 [npm]: https://img.shields.io/npm/v/transform-loader.svg
 [npm-url]: https://npmjs.com/package/transform-loader

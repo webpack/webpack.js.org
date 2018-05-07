@@ -1,0 +1,182 @@
+---
+title: config-loader
+source: https://raw.githubusercontent.com/webpack-contrib/config-loader/master/README.md
+edit: https://github.com/webpack-contrib/config-loader/edit/master/README.md
+repo: https://github.com/webpack-contrib/config-loader
+---
+
+
+[![npm][npm]][npm-url]
+[![node][node]][node-url]
+[![deps][deps]][deps-url]
+[![tests][tests]][tests-url]
+[![chat][chat]][chat-url]
+
+
+
+A webpack configuration loader.
+
+This module utilizes [`cosmiconfig`](https://github.com/davidtheclark/cosmiconfig)
+which supports declaring a webpack configuration in a number of different file
+formats including; `.webpackrc`, `webpack.config.js`, and a `webpack` property
+in a `package.json`.
+
+`config-loader` supports configuration modules which export an `Object`, `Array`,
+`Function`, `Promise`, and `Function` which returns a `Promise`.
+
+The module also validates found configurations against webpack's options schema
+to ensure that the configuration is correct before webpack attempts to use it.
+
+## Requirements
+
+This module requires a minimum of Node v6.9.0 and Webpack v4.0.0.
+
+## Getting Started
+
+To begin, you'll need to install `config-loader`:
+
+```console
+$ npm install @webpack-contrib/config-loader --save-dev
+```
+
+And get straight to loading a config:
+
+```js
+const loader = require('@webpack-contrib/config-loader');
+const options = { ... };
+
+loader(options).then((result) => {
+  // ...
+  // result = { config: Object, configPath: String }
+});
+
+```
+
+## Gotchas
+
+When using a configuration file that exports a `Function`, users of `webpack-cli`
+have become accustom to the function signature:
+
+```
+function config (env, argv)
+```
+
+`webpack-cli` provides any CLI flags prefixed with `--env` as a single object in
+the `env` parameter, which is an unnecessary feature.
+[Environment Variables](https://en.wikipedia.org/wiki/Environment_variable#Syntax)
+have long served the same purpose, and are easily accessible within a
+[Node environment](https://nodejs.org/api/process.html#process_process_env).
+
+As such, `config-loader` does not call `Function` configs with the `env`
+parameter. Rather, it makes calls with only the `argv` parameter.
+
+## Supported Compilers
+
+This module can support non-standard JavaScript file formats when a compatible
+compiler is registered via the `require` option. If the option is defined,
+`config-loader` will attempt to require the specified module(s) before the
+target config is found and loaded.
+
+As such, `config-loader` will also search for the following file extensions;
+`.js`, `.es6`, `.flow`, `.mjs`, and `.ts`.
+
+The module is also tested with the following compilers:
+
+- [`babel-register`](https://github.com/babel/babel/tree/6.x/packages/babel-register)
+- [`flow-remove-types/register`](https://github.com/flowtype/flow-remove-types)
+- [`ts-node/register`](https://www.npmjs.com/package/ts-node)
+
+_Note: Compilers are not part of or built-into this module. To use a specific compiler, you
+must install it and specify its use by using the `--require` CLI flag._
+
+## API
+
+### loader([options])
+
+Returns a `Promise`, which resolves with an `Object` containing:
+
+#### `allowZero`
+
+Type: `Boolean`  
+Default: `false`
+
+Instructs the module to allow a missing config file, and returns an `Object`
+with empty `config` and `configPath` properties in the event a config file was
+not found.
+
+#### `config`
+
+Type: `Object`
+
+Contains the actual configuration object.
+
+#### `configPath`
+
+Type: `String`
+
+Contains the full, absolute filesystem path to the configuration file.
+
+## Options
+
+### `configPath`
+
+Type: `String`
+Default: `undefined`
+
+Specifies an absolute path to a valid configuration file on the filesystem.
+
+### `cwd`
+
+Type: `String`
+Default: `process.cwd()`
+
+Specifies an filesystem path from which point `config-loader` will begin looking
+for a configuration file.
+
+### `require`
+
+Type: `String`
+Default: `undefined`
+
+Specifies a compiler to use when loading modules from files containing the
+configuration. For example:
+
+```js
+const loader = require('@webpack-contrib/config-loader');
+const options = { require: 'ts-node/register' };
+
+loader(options).then((result) => { ... });
+
+```
+
+See
+[Supported Compilers](https://github.com/webpack-contrib/config-loader#supported-compilers)
+for more information.
+
+## Contributing
+
+Please take a moment to read our contributing guidelines if you haven't yet done so.
+
+#### [CONTRIBUTING](https://raw.githubusercontent.com/webpack-contrib/config-loader/master/.github/CONTRIBUTING)
+
+## License
+
+#### [MIT](https://raw.githubusercontent.com/webpack-contrib/config-loader/master/LICENSE)
+
+[npm]: https://img.shields.io/npm/v/@webpack-contrib/config-loader.svg
+[npm-url]: https://npmjs.com/package/@webpack-contrib/config-loader
+
+[node]: https://img.shields.io/node/v/@webpack-contrib/config-loader.svg
+[node-url]: https://nodejs.org
+
+[deps]: https://david-dm.org/webpack-contrib/config-loader.svg
+[deps-url]: https://david-dm.org/webpack-contrib/config-loader
+
+[tests]: 	https://img.shields.io/circleci/project/github/webpack-contrib/config-loader.svg
+[tests-url]: https://circleci.com/gh/webpack-contrib/config-loader
+
+[cover]: https://codecov.io/gh/webpack-contrib/config-loader/branch/master/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack-contrib/config-loader
+
+[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
+[chat-url]: https://gitter.im/webpack/webpack

@@ -51,11 +51,11 @@ And run `webpack` via your preferred method.
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
-#### [CONTRIBUTING](./.github/CONTRIBUTING)
+#### [CONTRIBUTING](https://raw.githubusercontent.com/webpack-contrib/exports-loader/master/.github/CONTRIBUTING)
 
 ## License
 
-#### [MIT](./LICENSE)
+#### [MIT](https://raw.githubusercontent.com/webpack-contrib/exports-loader/master/LICENSE)
 
 [npm]: https://img.shields.io/npm/v/exports-loader.svg
 [npm-url]: https://npmjs.com/package/exports-loader

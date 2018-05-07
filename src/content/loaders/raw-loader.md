@@ -58,7 +58,7 @@ And run `webpack` via your preferred method.
 
 ## License
 
-#### [MIT](./LICENSE)
+#### [MIT](https://raw.githubusercontent.com/webpack-contrib/raw-loader/master/LICENSE)
 
 [npm]: https://img.shields.io/npm/v/raw-loader.svg
 [npm-url]: https://npmjs.com/package/raw-loader

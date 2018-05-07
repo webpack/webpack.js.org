@@ -325,6 +325,6 @@ See [#129](https://github.com/webpack-contrib/eslint-loader/issues/129).
 
 ---
 
-## [Changelog](CHANGELOG.md)
+## [Changelog](https://raw.githubusercontent.com/webpack-contrib/eslint-loader/master/CHANGELOG.md)
 
-## [License](LICENSE)
+## [License](https://raw.githubusercontent.com/webpack-contrib/eslint-loader/master/LICENSE)

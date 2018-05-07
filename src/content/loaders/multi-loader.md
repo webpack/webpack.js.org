@@ -57,7 +57,7 @@ And run `webpack` via your preferred method.
 
 ## License
 
-#### [MIT](./LICENSE)
+#### [MIT](https://raw.githubusercontent.com/webpack-contrib/multi-loader/master/LICENSE)
 
 [npm]: https://img.shields.io/npm/v/multi-loader.svg
 [npm-url]: https://npmjs.com/package/multi-loader

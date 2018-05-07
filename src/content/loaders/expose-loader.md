@@ -113,11 +113,11 @@ bundle.
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
-#### [CONTRIBUTING](./.github/CONTRIBUTING)
+#### [CONTRIBUTING](https://raw.githubusercontent.com/webpack-contrib/expose-loader/master/.github/CONTRIBUTING)
 
 ## License
 
-#### [MIT](./LICENSE)
+#### [MIT](https://raw.githubusercontent.com/webpack-contrib/expose-loader/master/LICENSE)
 
 [npm]: https://img.shields.io/npm/v/expose-loader.svg
 [npm-url]: https://npmjs.com/package/expose-loader

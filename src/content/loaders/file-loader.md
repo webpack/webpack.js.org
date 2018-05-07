@@ -373,11 +373,11 @@ path/to/file.png?e43b20c069c4a01867c31e98cbce33c9
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
-#### [CONTRIBUTING](./.github/CONTRIBUTING)
+#### [CONTRIBUTING](https://raw.githubusercontent.com/webpack-contrib/file-loader/master/.github/CONTRIBUTING)
 
 ## License
 
-#### [MIT](./LICENSE)
+#### [MIT](https://raw.githubusercontent.com/webpack-contrib/file-loader/master/LICENSE)
 
 [npm]: https://img.shields.io/npm/v/file-loader.svg
 [npm-url]: https://npmjs.com/package/file-loader
