@@ -10,14 +10,37 @@ import Gitter from '../Gitter/Gitter';
 // Load Styling
 import './Page.scss';
 
+// Placeholder string
+const Placeholder = () => (`
+  <div class="placeholder">
+    <p class="placeholder--medium">&nbsp;</p>
+    <p class="placeholder--large">&nbsp;</p>
+    <p class="placeholder--small">&nbsp;</p>
+    <h2 class="placeholder--xsmall">&nbsp;</h2>
+    <p class="placeholder--large">&nbsp;</p>
+    <p class="placeholder--small">&nbsp;</p>
+    <p class="placeholder--medium">&nbsp;</p>
+    <h2 class="placeholder--small">&nbsp;</h2>
+    <p class="placeholder--large">&nbsp;</p>
+    <p class="placeholder--medium">&nbsp;</p>
+    <p class="placeholder--xsmall">&nbsp;</p>
+    <h2 class="placeholder--xsmall">&nbsp;</h2>
+    <p class="placeholder--large">&nbsp;</p>
+    <p class="placeholder--small">&nbsp;</p>
+    <p class="placeholder--medium">&nbsp;</p>
+  </div>
+`);
+
 class Page extends React.Component {
   constructor(props) {
     super(props);
 
     const { content } = props;
+    const isDynamicContent = content instanceof Promise;
 
     this.state = {
-      content: content instanceof Promise ? 'Loading...' : content.default || content
+      content: isDynamicContent ? Placeholder() : content.default || content,
+      contentLoaded: isDynamicContent ? false : true
     };
   }
 
@@ -27,7 +50,8 @@ class Page extends React.Component {
     if (content instanceof Promise) {
       content
         .then(module => this.setState({
-          content: module.default || module
+          content: module.default || module,
+          contentLoaded: true
         }))
         .catch(error => this.setState({
           content: 'Error loading content.'
@@ -36,13 +60,16 @@ class Page extends React.Component {
   }
 
   render() {
-    let {
+    const {
       title,
-      content,
       contributors = [],
       related = [],
       ...rest
     } = this.props;
+
+    const { contentLoaded } = this.state;
+    const loadRelated = contentLoaded && related && related.length !== 0;
+    const loadContributors = contentLoaded && contributors && contributors.length !== 0;
 
     return (
       <section className="page">
@@ -55,7 +82,7 @@ class Page extends React.Component {
             __html: this.state.content
           }} />
 
-          { related && related.length > 0 && (
+        { loadRelated && (
             <div>
               <hr />
               <h3>Further Reading</h3>
@@ -73,7 +100,7 @@ class Page extends React.Component {
             </div>
           )}
 
-          { contributors && contributors.length > 0 && (
+          { loadContributors && (
             <div>
               <hr />
               <h3>Contributors</h3>
