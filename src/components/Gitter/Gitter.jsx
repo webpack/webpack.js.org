@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Import helpers
-import isBrowser from '../../utilities/isBrowser';
+import isClient from '../../utilities/is-client';
 
 // Load Styling
 import '../Gitter/Gitter.scss';
@@ -32,7 +32,7 @@ export default class Gitter extends React.Component {
   }
 
   componentDidMount() {
-    if (isBrowser) {
+    if (isClient) {
       import('gitter-sidecar').then(Sidecar => {
         this._sidecar = new Sidecar({
           room: 'webpack/webpack',

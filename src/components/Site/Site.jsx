@@ -16,7 +16,7 @@ import Page from '../Page/Page';
 import Vote from '../Vote/Vote';
 
 // Import helpers
-import isBrowser from '../../utilities/isBrowser';
+import isClient from '../../utilities/is-client';
 
 // Load Styling
 import '../../styles/index';
@@ -77,7 +77,7 @@ class Site extends React.Component {
             { content: 'Blog', url: 'https://medium.com/webpack' }
           ]} />
 
-        { isBrowser ? (
+        { isClient ? (
           <SidebarMobile
             open={ mobileSidebarOpen }
             sections={ this._strip(Content.children) } />

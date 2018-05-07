@@ -9,7 +9,7 @@ import Logo from '../Logo/Logo';
 import Dropdown from '../Dropdown/Dropdown';
 
 // Import helpers
-import isBrowser from '../../utilities/isBrowser';
+import isClient from '../../utilities/is-client';
 
 // Load Styling
 import 'docsearch.js/dist/cdn/docsearch.css';
@@ -57,7 +57,7 @@ export default class Navigation extends React.Component {
   }
 
   componentDidMount() {
-    if (isBrowser) {
+    if (isClient) {
       const DocSearch = require('docsearch.js');
 
       DocSearch({

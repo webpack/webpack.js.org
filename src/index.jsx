@@ -4,13 +4,13 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Site from './components/Site/Site';
 
 // Import helpers
-import isBrowser from './utilities/isBrowser';
+import isClient from './utilities/is-client';
 
 // TODO: Re-integrate <GoogleAnalytics analyticsId="UA-46921629-2" />
 // Consider `react-g-analytics` package
 
 // Client Side Rendering
-if (isBrowser) {
+if (isClient) {
   ReactDOM.render((
     <BrowserRouter>
       <Route
