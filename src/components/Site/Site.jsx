@@ -2,9 +2,10 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { hot as Hot } from 'react-hot-loader';
+import DocumentTitle from 'react-document-title';
 
 // Import Utilities
-import { ExtractPages, ExtractSections } from '../../utilities/content-utils';
+import { ExtractPages, ExtractSections, GetPageTitle } from '../../utilities/content-utils';
 
 // Import Components
 import NotificationBar from '../NotificationBar/NotificationBar';
@@ -40,6 +41,8 @@ class Site extends React.Component {
 
     return (
       <div className="site">
+        <DocumentTitle title={ GetPageTitle(Content, location.pathname) } />
+
         <NotificationBar />
 
         <Navigation

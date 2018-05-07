@@ -77,7 +77,7 @@ module.exports = env => [
     plugins: [
       new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor',
-        chunks: [ 'index' ]
+        chunks: ['index']
       })
     ]
   })
