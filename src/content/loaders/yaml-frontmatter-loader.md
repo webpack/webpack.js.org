@@ -6,23 +6,37 @@ repo: https://github.com/webpack-contrib/yaml-frontmatter-loader
 ---
 
 
-YAML Frontmatter loader for [webpack](https://webpack.js.org/). Converts YAML in files to JSON. You should chain it with [json-loader](/loaders/json-loader/).
+[![npm][npm]][npm-url]
+[![node][node]][node-url]
+[![deps][deps]][deps-url]
+[![tests][tests]][tests-url]
+[![chat][chat]][chat-url]
 
-## Install
 
-`npm install yaml-frontmatter-loader`
 
-## <a href="https://webpack.js.org/concepts/loaders/">Usage</a>
+YAML frontmatter loader for webpack. Converts YAML in files to JSON.
+
+## Requirements
+
+This module requires a minimum of Node v6.9.0 and Webpack v4.0.0.
+
+## Getting Started
+
+To begin, you'll need to install `yaml-frontmatter-loader`:
+
+```console
+$ npm install yaml-frontmatter-loader --save-dev
+```
+
+Then add the loader to your `webpack` config. For example:
 
 ```js
-var json = require("json-loader!yaml-frontmatter-loader!./file.md");
+const json = require('yaml-frontmatter-loader!./file.md');
 // => returns file.md as javascript object
 ```
 
-##
-
-**webpack.config.js**
 ```js
+// webpack.config.js
 module.exports = {
   module: {
     rules: [
@@ -35,6 +49,12 @@ module.exports = {
 }
 ```
 
+And run `webpack` via your preferred method.
+
+## License
+
+#### [MIT](./LICENSE)
+
 [npm]: https://img.shields.io/npm/v/yaml-frontmatter-loader.svg
 [npm-url]: https://npmjs.com/package/yaml-frontmatter-loader
 
@@ -44,11 +64,11 @@ module.exports = {
 [deps]: https://david-dm.org/webpack-contrib/yaml-frontmatter-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/yaml-frontmatter-loader
 
-[tests]: http://img.shields.io/travis/webpack-contrib/yaml-frontmatter-loader.svg
-[tests-url]: https://travis-ci.org/webpack-contrib/yaml-frontmatter-loader
+[tests]: https://circleci.com/gh/webpack-contrib/yaml-frontmatter-loader.svg?style=svg
+[tests-url]: https://circleci.com/gh/webpack-contrib/yaml-frontmatter-loader
 
 [cover]: https://codecov.io/gh/webpack-contrib/yaml-frontmatter-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/yaml-frontmatter-loader
 
-[chat]: https://badges.gitter.im/webpack/webpack.svg
+[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack

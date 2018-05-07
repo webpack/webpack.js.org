@@ -4,24 +4,41 @@ source: https://raw.githubusercontent.com/webpack-contrib/file-loader/master/REA
 edit: https://github.com/webpack-contrib/file-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/file-loader
 ---
-Instructs webpack to emit the required object as file and to return its public URL
 
-## Install
 
-```bash
-npm install --save-dev file-loader
+[![npm][npm]][npm-url]
+[![node][node]][node-url]
+[![deps][deps]][deps-url]
+[![tests][tests]][tests-url]
+[![chat][chat]][chat-url]
+
+
+
+A file loader module for webpack
+
+## Requirements
+
+This module requires a minimum of Node v6.9.0 and Webpack v4.0.0.
+
+## Getting Started
+
+To begin, you'll need to install `file-loader`:
+
+```console
+$ npm install file-loader --save-dev
 ```
 
-## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
-
-By default the filename of the resulting file is the MD5 hash of the file's contents with the original extension of the required resource.
+Import (or `require`) the target file(s) in one of the bundle's files:
 
 ```js
+// bundle file
 import img from './file.png'
 ```
 
-**webpack.config.js**
+Then add the loader to your `webpack` config. For example:
+
 ```js
+// webpack.config.js
 module.exports = {
   module: {
     rules: [
@@ -30,7 +47,7 @@ module.exports = {
         use: [
           {
             loader: 'file-loader',
-            options: {}  
+            options: {}
           }
         ]
       }
@@ -39,44 +56,85 @@ module.exports = {
 }
 ```
 
-Emits `file.png` as file in the output directory and returns the public URL
+And run `webpack` via your preferred method. This will emit `file.png` as a file
+in the output directory (with the specified naming convention, if options are
+specified to do so) and returns the public URI of the file.
 
-```
-"/public/path/0dcbbaa7013869e351f.png"
-```
+_Note: By default the filename of the resulting file is the MD5 hash of the
+file's contents with the original extension of the required resource._
 
 ## Options
 
-|Name|Type|Default|Description|
-|:--:|:--:|:-----:|:----------|
-|**`name`**|`{String\|Function}`|`[hash].[ext]`|Configure a custom filename template for your file|
-|**`regExp`**|`{RegExp}`|`'undefined'`|Let you extract some parts of the file path to reuse them in the `name` property|
-|**`context`**|`{String}`|`this.options.context`|Configure a custom file context, defaults to `webpack.config.js` [context](https://webpack.js.org/configuration/entry-context/#context)|
-|**`publicPath`**|`{String\|Function}`|[`__webpack_public_path__ `](https://webpack.js.org/api/module-variables/#__webpack_public_path__-webpack-specific-)|Configure a custom `public` path for your file|
-|**`outputPath`**|`{String\|Function}`|`'undefined'`|Configure a custom `output` path for your file|
-|**`useRelativePath`**|`{Boolean}`|`false`|Should be `true` if you wish to generate a `context` relative URL for each file|
-|**`emitFile`**|`{Boolean}`|`true`|By default a file is emitted, however this can be disabled if required (e.g. for server side packages)|
+### `context`
 
-##
+Type: `String`
+Default: [`context`](https://webpack.js.org/configuration/entry-context/#context)
 
-You can configure a custom filename template for your file using the query parameter `name`. For instance, to copy a file from your `context` directory into the output directory retaining the full directory structure, you might use
+Specifies a custom file context.
 
-#### `{String}`
-
-**webpack.config.js**
 ```js
+// webpack.config.js
+...
+{
+  loader: 'file-loader',
+  options: {
+    name: '[path][name].[ext]',
+    context: ''
+  }
+}
+...
+```
+
+### `emitFile`
+
+Type: `Boolean`
+Default: `true`
+
+If true, emits a file (writes a file to the filesystem). If false, the loader
+will return a public URI but _will not_ emit the file. It is often useful to
+disable this option for server-side packages.
+
+```js
+// bundle file
+import img from './file.png'
+```
+
+```js
+// webpack.config.js
+...
+{
+  loader: 'file-loader',
+  options: {
+    emitFile: false
+  }
+}
+...
+```
+
+### `name`
+
+Type: `String|Function`
+Default: `'[hash].[ext]'`
+
+Specifies a custom filename template for the target file(s) using the query
+parameter `name`. For example, to copy a file from your `context` directory into
+the output directory retaining the full directory structure, you might use:
+
+```js
+// webpack.config.js
 {
   loader: 'file-loader',
   options: {
     name: '[path][name].[ext]'
-  }  
+  }
 }
 ```
 
-#### `{Function}`
+Or using a `Function`:
 
-**webpack.config.js**
 ```js
+// webpack.config.js
+...
 {
   loader: 'file-loader',
   options: {
@@ -87,13 +145,62 @@ You can configure a custom filename template for your file using the query param
 
       return '[hash].[ext]'
     }
-  }  
+  }
 }
+...
+```
+
+_Note: By default the path and name you specify will output the file in that
+same directory, and will also use the same URI path to access the file._
+
+### `outputPath`
+
+Type: `String|Function`
+Default: `undefined`
+
+Specify a filesystem path where target the file(s) will be placed.
+
+```js
+// webpack.config.js
+...
+{
+  loader: 'file-loader',
+  options: {
+    name: '[path][name].[ext]',
+    outputPath: 'images/'
+  }
+}
+...
+```
+
+### `publicPath`
+
+Type: `String|Function`
+Default: [`__webpack_public_path__`](https://webpack.js.org/api/module-variables/#__webpack_public_path__-webpack-specific-)
+
+Specifies a custom public path for the target file(s).
+
+```js
+// webpack.config.js
+...
+{
+  loader: 'file-loader',
+  options: {
+    name: '[path][name].[ext]',
+    publicPath: 'assets/'
+  }
+}
+...
 ```
 
 ### `regExp`
 
-Defines a `regExp` to match some parts of the file path. These capture groups can be reused in the `name` property using `[N]` placeholder. Note that `[0]` will be replaced by the entire tested string, whereas `[1]` will contain the first capturing parenthesis of your regex and so on...
+Type: `RegExp`
+Default: `undefined`
+
+Specifies a Regular Expression to one or many parts of the target file path.
+The capture groups can be reused in the `name` property using `[N]`
+[placeholder](https://github.com/webpack-contrib/file-loader#placeholders).
 
 ```js
 import img from './customer01/file.png'
@@ -106,82 +213,23 @@ import img from './customer01/file.png'
   options: {
     regExp: /\/([a-z0-9]+)\/[a-z0-9]+\.png$/,
     name: '[1]-[name].[ext]'
-  }  
+  }
 }
 ```
 
-```
-customer01-file.png
-```
-
-#### `placeholders`
-
-|Name|Type|Default|Description|
-|:--:|:--:|:-----:|:----------|
-|**`[ext]`**|`{String}`|`file.extname`|The extension of the resource|
-|**`[name]`**|`{String}`|`file.basename`|The basename of the resource|
-|**`[path]`**|`{String}`|`file.dirname`|The path of the resource relative to the `context`|
-|**`[hash]`**|`{String}`|`md5`|The hash of the content, hashes below for more info|
-|**`[N]`**|`{String}`|``|The `n-th` match obtained from matching the current file name against the `regExp`|
-
-#### `hashes`
-
-`[<hashType>:hash:<digestType>:<length>]` optionally you can configure
-
-|Name|Type|Default|Description|
-|:--:|:--:|:-----:|:----------|
-|**`hashType`**|`{String}`|`md5`|`sha1`, `md5`, `sha256`, `sha512`|
-|**`digestType`**|`{String}`|`hex`|`hex`, `base26`, `base32`, `base36`, `base49`, `base52`, `base58`, `base62`, `base64`|
-|**`length`**|`{Number}`|`9999`|The length in chars|
-
-By default, the path and name you specify will output the file in that same directory and will also use that same URL path to access the file.
-
-### `context`
-
-**webpack.config.js**
-```js
-{
-  loader: 'file-loader',
-  options: {
-    name: '[path][name].[ext]',
-    context: ''
-  }  
-}
-```
-
-You can specify custom `output` and `public` paths by using `outputPath`, `publicPath` and `useRelativePath`
-
-### `publicPath`
-
-**webpack.config.js**
-```js
-{
-  loader: 'file-loader',
-  options: {
-    name: '[path][name].[ext]',
-    publicPath: 'assets/'
-  }  
-}
-```
-
-### `outputPath`
-
-**webpack.config.js**
-```js
-{
-  loader: 'file-loader',
-  options: {
-    name: '[path][name].[ext]',
-    outputPath: 'images/'
-  }  
-}
-```
+_Note: If `[0]` is used, it will be replaced by the entire tested string,
+whereas `[1]` will contain the first capturing parenthesis of your regex and so
+on..._
 
 ### `useRelativePath`
 
-`useRelativePath` should be `true` if you wish to generate a relative URL to the for each file context.
+Type: `Boolean`
+Default: `false`
+
+Specifies whether or not to generate a relative URI for each target file context.
 
 ```js
+// webpack.config.js
 {
   loader: 'file-loader',
   options: {
@@ -190,119 +238,146 @@ You can specify custom `output` and `public` paths by using `outputPath`, `publi
 }
 ```
 
-### `emitFile`
+## Placeholders
 
-By default a file is emitted, however this can be disabled if required (e.g. for server side packages).
+### `[ext]`
 
-```js
-import img from './file.png'
-```
+Type: `String`
+Default: `file.extname`
 
-```js
-{
-  loader: 'file-loader',
-  options: {
-    emitFile: false
-  }  
-}
-```
+The file extension of the target file/resource.
 
-> ⚠️  Returns the public URL but does **not** emit a file
+### `[hash]`
 
-```
-`${publicPath}/0dcbbaa701328e351f.png`
-```
+Type: `String`
+Default: `'md5'`
+
+Specifies the hash method to use for hashing the file content. See
+[Hashes](https://github.com/webpack-contrib/file-loader#hashes).
+
+### `[N]`
+
+Type: `String`
+Default: `undefined`
+
+The n-th match obtained from matching the current file name against the regExp
+
+### `[name]`
+
+Type: `String`
+Default: `file.basename`
+
+The basename of the file/resource.
+
+### `[path]`
+
+Type: `String`
+Default: `file.dirname`
+
+The path of the resource relative to the webpack/config context.
+
+## Hashes
+
+Custom hashes can be used by specifying a hash with the following format:
+ `[<hashType>:hash:<digestType>:<length>]`.
+
+### `digestType`
+
+Type: `String`
+Default: `'hex'`
+
+The [digest](https://en.wikipedia.org/wiki/Cryptographic_hash_function) that the
+hash function should use. Valid values include: base26, base32, base36,
+base49, base52, base58, base62, base64, and hex.
+
+### `hashType`
+
+Type: `String`
+Default: `'md5'`
+
+The type of hash that the has function should use. Valid values include: md5,
+sha1, sha256, and sha512.
+
+### `length`
+
+Type: `Number`
+Default: `9999`
+
+Users may also specify a length for the computed hash.
 
 ## Examples
 
+The following examples show how one might use `file-loader` and what the result
+would be.
 
 ```js
+// bundle file
 import png from 'image.png'
 ```
 
-**webpack.config.js**
 ```js
+// webpack.config.js
 {
   loader: 'file-loader',
   options: {
     name: 'dirname/[hash].[ext]'
-  }  
+  }
 }
 ```
 
-```
+```bash
+# result
 dirname/0dcbbaa701328ae351f.png
 ```
 
-**webpack.config.js**
+---
+
 ```js
+// webpack.config.js
 {
   loader: 'file-loader',
   options: {
     name: '[sha512:hash:base64:7].[ext]'
-  }  
+  }
 }
 ```
 
-```
+```bash
+# result
 gdyb21L.png
 ```
 
+---
+
 ```js
+// bundle file
 import png from 'path/to/file.png'
 ```
 
-**webpack.config.js**
 ```js
+// webpack.config.js
 {
   loader: 'file-loader',
   options: {
     name: '[path][name].[ext]?[hash]'
-  }  
+  }
 }
 ```
 
-```
+```bash
+# result
 path/to/file.png?e43b20c069c4a01867c31e98cbce33c9
 ```
 
-## Maintainers
+## Contributing
 
-<table>
-  <tbody>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/bebraw">
-          <img width="150" height="150" src="https://github.com/bebraw.png?v=3&s=150">
-          </br>
-          Juho Vepsäläinen
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/d3viant0ne">
-          <img width="150" height="150" src="https://github.com/d3viant0ne.png?v=3&s=150">
-          </br>
-          Joshua Wiens
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/michael-ciniawsky">
-          <img width="150" height="150" src="https://github.com/michael-ciniawsky.png?v=3&s=150">
-          </br>
-          Michael Ciniawsky
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/evilebottnawi">
-          <img width="150" height="150" src="https://github.com/evilebottnawi.png?v=3&s=150">
-          </br>
-          Alexander Krasnoyarov
-        </a>
-      </td>
-    </tr>
-  <tbody>
-</table>
+Please take a moment to read our contributing guidelines if you haven't yet done so.
 
+#### [CONTRIBUTING](./.github/CONTRIBUTING)
+
+## License
+
+#### [MIT](./LICENSE)
 
 [npm]: https://img.shields.io/npm/v/file-loader.svg
 [npm-url]: https://npmjs.com/package/file-loader
@@ -313,11 +388,11 @@ path/to/file.png?e43b20c069c4a01867c31e98cbce33c9
 [deps]: https://david-dm.org/webpack-contrib/file-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/file-loader
 
-[tests]: http://img.shields.io/travis/webpack-contrib/file-loader.svg
-[tests-url]: https://travis-ci.org/webpack-contrib/file-loader
+[tests]: 	https://img.shields.io/circleci/project/github/webpack-contrib/file-loader.svg
+[tests-url]: https://circleci.com/gh/webpack-contrib/file-loader
 
-[cover]: https://img.shields.io/codecov/c/github/webpack-contrib/file-loader.svg
+[cover]: https://codecov.io/gh/webpack-contrib/file-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/file-loader
 
-[chat]: https://badges.gitter.im/webpack/webpack.svg
+[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack

@@ -46,12 +46,12 @@ Or, in case of just a `from` with the default destination, you can also use a `{
 |[`from`](#from)|`{String\|Object}`|`undefined`|Globs accept [minimatch options](https://github.com/isaacs/minimatch)|
 |[`fromArgs`](#fromArgs)|`{Object}`|`{ cwd: context }`|See the [`node-glob` options](https://github.com/isaacs/node-glob#options) in addition to the ones below|
 |[`to`](#to)|`{String\|Object}`|`undefined`|Output root if `from` is file or dir, resolved glob path if `from` is glob|
-|[`toType`](#toType)|`{String}`|``|[toType Options](#toType)|
+|[`toType`](#toType)|`{String}`|``|[toType Options](#totype)|
 |[`test`](#test)|`{RegExp}`|``|Pattern for extracting elements to be used in `to` templates|
 |[`force`](#force)|`{Boolean}`|`false`|Overwrites files already in `compilation.assets` (usually added by other plugins/loaders)|
 |[`ignore`](#ignore)|`{Array}`|`[]`|Globs to ignore for this pattern|
 |`flatten`|`{Boolean}`|`false`|Removes all directory references and only copies file names.⚠️ If files have the same name, the result is non-deterministic|
-|[`transform`](#transform)|`{Function}`|`(content, path) => content`|Function that modifies file contents before copying|
+|[`transform`](#transform)|`{Function\|Promise}`|`(content, path) => content`|Function or Promise that modifies file contents before copying|
 |[`cache`](#cache)|`{Boolean\|Object}`|`false`|Enable `transform` caching. You can use `{ cache: { key: 'my-cache-key' } }` to invalidate the cache|
 |[`context`](#context)|`{String}`|`options.context \|\| compiler.options.context`|A path that determines how to interpret the `from` path|
 
@@ -61,11 +61,11 @@ Or, in case of just a `from` with the default destination, you can also use a `{
 ```js
 [
   new CopyWebpackPlugin([
-    'relative/path/to/file.ext'
-    '/absolute/path/to/file.ext'
-    'relative/path/to/dir'
-    '/absolute/path/to/dir'
-    '**/*'
+    'relative/path/to/file.ext',
+    '/absolute/path/to/file.ext',
+    'relative/path/to/dir',
+    '/absolute/path/to/dir',
+    '**/*',
     { glob: '\*\*/\*', dot: true }
   ], options)
 ]
@@ -77,7 +77,7 @@ Or, in case of just a `from` with the default destination, you can also use a `{
 ```js
 [
   new CopyWebpackPlugin([
-    { from: '**/*', to: 'relative/path/to/dest/' }
+    { from: '**/*', to: 'relative/path/to/dest/' },
     { from: '**/*', to: '/absolute/path/to/dest/' }
   ], options)
 ]
@@ -89,7 +89,7 @@ Or, in case of just a `from` with the default destination, you can also use a `{
 |:--:|:--:|:-----:|:----------|
 |**`'dir'`**|`{String}`|`undefined`|If `from` is directory, `to` has no extension or ends in `'/'`|
 |**`'file'`**|`{String}`|`undefined`|If `to` has extension or `from` is file|
-|**`'template'`**|`{String}`|`undefined`|If `to` contains [a template pattern](https://github.com/webpack/file-loader#placeholders)|
+|**`'template'`**|`{String}`|`undefined`|If `to` contains [a template pattern](https://github.com/webpack-contrib/file-loader#placeholders)|
 
 #### `'dir'`
 
@@ -128,7 +128,7 @@ Or, in case of just a `from` with the default destination, you can also use a `{
 [
   new CopyWebpackPlugin([
     {
-      from: 'src/'
+      from: 'src/',
       to: 'dest/[name].[hash].[ext]',
       toType: 'template'
     }
@@ -163,7 +163,7 @@ and so on...
 ```js
 [
   new CopyWebpackPlugin([
-    { from: 'src/**/*' to: 'dest/', force: true }
+    { from: 'src/**/*', to: 'dest/', force: true }
   ], options)
 ]
 ```
@@ -174,7 +174,7 @@ and so on...
 ```js
 [
   new CopyWebpackPlugin([
-    { from: 'src/**/*' to: 'dest/', ignore: [ '*.js' ] }
+    { from: 'src/**/*', to: 'dest/', ignore: [ '*.js' ] }
   ], options)
 ]
 ```
@@ -192,6 +192,8 @@ and so on...
 
 ### `transform`
 
+#### `{Function}`
+
 **webpack.config.js**
 ```js
 [
@@ -203,6 +205,23 @@ and so on...
         return optimize(content)
       }
     }
+  ], options)
+]
+```
+
+#### `{Promise}`
+
+**webpack.config.js**
+```js
+[
+  new CopyWebpackPlugin([
+    {
+      from: 'src/*.png',
+      to: 'dest/',
+      transform (content, path) {
+        return Promise.resolve(optimize(content))
+      }
+  }
   ], options)
 ]
 ```

@@ -4,64 +4,97 @@ source: https://raw.githubusercontent.com/webpack-contrib/jshint-loader/master/R
 edit: https://github.com/webpack-contrib/jshint-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/jshint-loader
 ---
-Runs <a href="http://jshint.com/">JSHint</a> on required JavaScript files.
 
-## Install
 
-```bash
-npm i jshint-loader --save
+[![npm][npm]][npm-url]
+[![node][node]][node-url]
+[![deps][deps]][deps-url]
+[![tests][tests]][tests-url]
+[![chat][chat]][chat-url]
+
+
+
+A JSHint loader module for webpack. Runs [JSHint](http://jshint.com/) on
+JavaScript files in a bundle at build-time.
+
+## Requirements
+
+This module requires a minimum of Node v6.9.0 and Webpack v4.0.0.
+
+## Getting Started
+
+To begin, you'll need to install `jshint-loader`:
+
+```console
+$ npm install jshint-loader --save-dev
 ```
 
-## Usage
+Then add the loader to your `webpack` config. For example:
 
-Apply the jshint loader in your webpack configuration:
-
-``` javascript
+```js
+// webpack.config.js
 module.exports = {
-	module: {
-		rules: [
-			{
-				test: /\.js$/, // include .js files
-				enforce: "pre", // preload the jshint loader
-				exclude: /node_modules/, // exclude any and all files in the node_modules folder
-				use: [
-					{
-						loader: "jshint-loader"
-					}
-				]
-			}
-		]
-	},
-
-	// more options in the optional jshint object
-	jshint: {
-		// any jshint option http://www.jshint.com/docs/options/
-		// i. e.
-		camelcase: true,
-
-		// jshint errors are displayed by default as warnings
-		// set emitErrors to true to display them as errors
-		emitErrors: false,
-
-		// jshint to not interrupt the compilation
-		// if you want any file with jshint errors to fail
-		// set failOnHint to true
-		failOnHint: false,
-
-		// custom reporter function
-		reporter: function(errors) { }
-	}
+  module: {
+    rules: [
+      {
+        test: /.js/,
+        enforce: 'pre',
+        exclude: /node_modules/
+        use: [
+          {
+            loader: `jshint-loader`,
+            options: {...options}
+          }
+        ]
+      }
+    ]
+  }
 }
 ```
 
-## Custom reporter
+
+And run `webpack` via your preferred method.
+
+## Options
+
+All valid JSHint options are valid on this object, in addition to the custom
+loader options listed below:
+
+delete options.;
+delete options.;
+delete options.;
+
+### `emitErrors`
+
+Type: `Boolean`
+Default: `undefined`
+
+Instructs the loader to emit all JSHint warnings and errors as webpack errors.
+
+### `failOnHint`
+
+Type: `Boolean`
+Default: `undefined`
+
+Instructs the loader to cause the webpack build to fail on all JSHint warnings
+and errors.
+
+### `reporter`
+
+Type: `Function`
+Default: `undefined`
+
+A function used to format and emit JSHint warnings and errors.
+
+## Custom Reporter
 
 By default, `jshint-loader` will provide a default reporter.
 
-However, if you prefer a custom reporter, pass a function under the `reporter` key in `jshint` options. (see *usage* above)
+However, if you prefer a custom reporter, pass a function under the `reporter`
+property in `jshint` options. (see *usage* above)
 
-The reporter function will be passed an array of errors/warnings produced by jshint
-with the following structure:
+The reporter function will be passed an array of errors/warnings produced by
+JSHint with the following structure:
 ```js
 [
 {
@@ -81,65 +114,50 @@ with the following structure:
 ]
 ```
 
-The reporter function will be excuted with the loader context as `this`. You may emit messages using `this.emitWarning(...)` or `this.emitError(...)`. See [webpack docs on loader context](https://webpack.js.org/api/loaders/#the-loader-context).
+The reporter function will be excuted with the loader context as `this`. You may
+emit messages using `this.emitWarning(...)` or `this.emitError(...)`. See
+[webpack docs on loader context](https://webpack.js.org/api/loaders/#the-loader-context).
 
-**Note:** jshint reporters are **not compatible** with jshint-loader!
-This is due to the fact that reporter input is only processed from one file; not multiple files. Error reporting in this manner differs from [traditional reporters](http://www.jshint.com/docs/reporters/) for jshint
-since the loader plugin (i.e. jshint-loader) is executed for each source file; and thus the reporter is executed for each file.
+_Note: JSHint reporters are **not compatible** with JSHint-loader!
+This is due to the fact that reporter input is only processed from one file; not
+multiple files. Error reporting in this manner differs from
+[traditional reporters](http://www.JSHint.com/docs/reporters/) for JSHint
+since the loader plugin (i.e. JSHint-loader) is executed for each source file;
+and thus the reporter is executed for each file._
 
 The output in webpack CLI will usually be:
 ```js
 ...
-
 WARNING in ./path/to/file.js
 <reporter output>
-
 ...
 ```
 `
 
-## Maintainers
+## Contributing
 
-<table>
-  <tbody>
-    <tr>
-      <td align="center">
-        <img width="150" height="150"
-        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
-        </br>
-        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
-      </td>
-      <td align="center">
-        <img width="150" height="150"
-        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
-        </br>
-        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
-      </td>
-      <td align="center">
-        <img width="150" height="150"
-        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
-        </br>
-        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
-      </td>
-      <td align="center">
-        <img width="150" height="150"
-        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
-        </br>
-        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
-      </td>
-    </tr>
-  <tbody>
-</table>
+Please take a moment to read our contributing guidelines if you haven't yet done so.
 
+#### [CONTRIBUTING](./.github/CONTRIBUTING)
+
+## License
+
+#### [MIT](./LICENSE)
 
 [npm]: https://img.shields.io/npm/v/jshint-loader.svg
 [npm-url]: https://npmjs.com/package/jshint-loader
 
+[node]: https://img.shields.io/node/v/jshint-loader.svg
+[node-url]: https://nodejs.org
+
 [deps]: https://david-dm.org/webpack-contrib/jshint-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/jshint-loader
 
+[tests]: 	https://img.shields.io/circleci/project/github/webpack-contrib/jshint-loader.svg
+[tests-url]: https://circleci.com/gh/webpack-contrib/jshint-loader
+
+[cover]: https://codecov.io/gh/webpack-contrib/jshint-loader/branch/master/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack-contrib/jshint-loader
+
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
-
-[test]: http://img.shields.io/travis/webpack-contrib/jshint-loader.svg
-[test-url]: https://travis-ci.org/webpack-contrib/jshint-loader

@@ -13,7 +13,7 @@ This plugin supports the use of Google's Closure Tools with webpack.
 [Closure-Compiler](https://developers.google.com/closure/compiler/) is a full optimizing compiler and transpiler.
 It offers unmatched optimizations, provides type checking and can easily target transpilation to different versions of ECMASCRIPT.
 
-[Clousre-Library](https://developers.google.com/closure/library/) is a utility library designed for full compatibility
+[Closure-Library](https://developers.google.com/closure/library/) is a utility library designed for full compatibility
 with Closure-Compiler. 
 
 **Note:** This plugin is a very early beta and currently uses a custom build of closure-compiler while necessary

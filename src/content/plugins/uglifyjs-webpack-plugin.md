@@ -6,7 +6,7 @@ repo: https://github.com/webpack-contrib/uglifyjs-webpack-plugin
 ---
 This plugin uses <a href="https://github.com/mishoo/UglifyJS2/tree/harmony">UglifyJS v3 </a><a href="https://npmjs.com/package/uglify-es">(`uglify-es`)</a> to minify your JavaScript
 
-> ℹ️  `webpack =< v3.0.0` currently contains [`v0.4.6`](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/tree/version-0.4) of this plugin under `webpack.optimize.UglifyJsPlugin` as an alias. For usage of the latest version (`v1.0.0`), please follow the instructions below. Aliasing `v1.0.0` as `webpack.optimize.UglifyJsPlugin` is scheduled for `webpack v4.0.0`
+> ℹ️  `webpack < v4.0.0` currently contains [`v0.4.6`](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/tree/version-0.4) of this plugin under `webpack.optimize.UglifyJsPlugin` as an alias. For usage of the latest version (`v1.0.0`), please follow the instructions below. Aliasing `v1.0.0` as `webpack.optimize.UglifyJsPlugin` is scheduled for `webpack v4.0.0`
 
 ## Install
 
@@ -278,8 +278,8 @@ All comments that match the given expression (resp. are evaluated to `true` by t
 [deps]: https://david-dm.org/webpack-contrib/uglifyjs-webpack-plugin.svg
 [deps-url]: https://david-dm.org/webpack-contrib/uglifyjs-webpack-plugin
 
-[test]: https://secure.travis-ci.org/webpack-contrib/uglifyjs-webpack-plugin.svg
-[test-url]: http://travis-ci.org/webpack-contrib/uglifyjs-webpack-plugin
+[test]: 	https://img.shields.io/circleci/project/github/webpack-contrib/uglifyjs-webpack-plugin.svg
+[test-url]: https://circleci.com/gh/webpack-contrib/uglifyjs-webpack-plugin
 
 [cover]: https://codecov.io/gh/webpack-contrib/uglifyjs-webpack-plugin/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/uglifyjs-webpack-plugin

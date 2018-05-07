@@ -4,143 +4,152 @@ source: https://raw.githubusercontent.com/webpack-contrib/val-loader/master/READ
 edit: https://github.com/webpack-contrib/val-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/val-loader
 ---
-Executes the given module to generate source code on build time
 
-## Install
 
-```bash
-npm i -D val-loader
+[![npm][npm]][npm-url]
+[![node][node]][node-url]
+[![deps][deps]][deps-url]
+[![tests][tests]][tests-url]
+[![chat][chat]][chat-url]
+
+
+
+A webpack loader which executes a given module, and returns the result of the
+execution at build-time, when the module is required in the bundle. In this way,
+the loader changes a module from code to a result.
+
+Another way to view `val-loader`, is that it allows a user a way to make their
+own custom loader logic, without having to write a custom loader.
+
+## Requirements
+
+This module requires a minimum of Node v6.9.0 and Webpack v4.0.0.
+
+## Getting Started
+
+To begin, you'll need to install `val-loader`:
+
+```console
+$ npm install val-loader --save-dev
 ```
 
-## Usage
-
-The module that is loaded with this loader must stick to the following interfaces
-
-##
-
-The loaded module must export a function as `default` export with the following *Function Interface*
+Then add the loader to your `webpack` config. For example:
 
 ```js
-module.exports = function () {...};
-```
-
-Modules transpiled by [Babel](https://babeljs.io/) are also supported
-
-```js
-export default function () {...};
-```
-
-### `Function Interface`
-
-The function will be called with the loader [`options`](https://webpack.js.org/configuration/module/#useentry) and must either return
-
-#### `{Object}`
-
-Following the **Object Interface**
-
-#### `{Promise}`
-
-Resolving to an `{Object}` following the **Object Interface**
-
-### `Object Interface`
-
-|Name|Type|Default|Description|
-|:---|:--:|:-----:|:----------|
-|**`code`**|`{String\|Buffer}`|`undefined`|(**Required**) The code that is passed to the next loader or to webpack|
-|**`sourceMap`**| [`{Object}`](https://docs.google.com/document/d/1U1RGAehQwRypUTovF1KRlpiOFze0b-_2gc6fAH0KY0k/edit)|`undefined`|(**Optional**) Will be passed to the next loader or to webpack|
-|**`ast`**|`{Array<{Object}>}`|`undefined`|(**Optional**) An [Abstract Syntax Tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) that will be passed to the next loader. Useful to speed up the build time if the next loader uses the same AST|
-|**`dependencies`**|`{Array<{String}>}`|`[]`|An array of absolute, native paths to file dependencies that need to be watched for changes|
-|**`contextDependencies`**| `{Array<{String}>}` |`[]`| An array of absolute, native paths to directory dependencies that need to be watched for changes|
-|**`cacheable`**|`{Boolean}`|`false`|Flag whether the code can be re-used in watch mode if none of the `dependencies` have changed|
-
-## Options
-
-**`val-loader`** itself has no options. The options are passed as they are (without cloning them) to the exported function
-
-## Examples
-
-If you have a module like this
-
-**answer.js**
-```js
-function answer () {
-  return {
-    code: 'module.exports = 42;'
-  }
+// target-file.js
+module.exports = () => {
+  return { code: 'module.exports = 42;' }
 };
-
-module.exports = answer;
 ```
-
-you can use the **val-loader** to generate source code on build time
 
 **webpack.config.js**
 ```js
 module.exports = {
-  ...
   module: {
     rules: [
       {
-        test: require.resolve('path/to/answer.js'),
+        test: /target-file.js$/,
         use: [
           {
-            loader: 'val-loader'
+            loader: `val-loader`
           }
         ]
       }
     ]
   }
-};
-```
-
-### `Complete`
-
-A complete example of all available features looks like this
-
-**answer.js**
-```js
-const ask = require('./ask.js');
-const generate = require('./generate.js');
-
-function answer(options) {
-  return ask(options.question)
-    .then(generate)
-    .then(result => ({
-      ast: result.abstractSyntaxTree,
-      code: result.code,
-      // Mark dependencies of answer().
-      // The function will be re-executed if one of these
-      // dependencies has changed in watch mode.
-      dependencies: [
-        // Array of absolute native paths!
-        require.resolve('./ask.js'),
-        require.resolve('./generate.js')
-      ],
-      // Flag the generated code as cacheable.
-      // If none of the dependencies have changed,
-      // the function won't be executed again.
-      cacheable: true
-      sourceMap: result.sourceMap,
-    })
-  );
 }
-
-module.exports = answer;
 ```
 
-**webpack.config.js**
 ```js
+// src/entry.js
+const answer = require('test-file');
+```
+
+And run `webpack` via your preferred method.
+
+## Return Object Properties
+
+Targeted modules of this loader must export either a `Function` or `Promise`
+that returns an object containing a `code` property at a minimum, but can
+contain any number of additional properties.
+
+### `code`
+
+Type: `String|Buffer`
+Default: `undefined`
+_Required_
+
+Code passed along to webpack or the next loader that will replace the module.
+
+### `sourceMap`
+
+Type: `Object`
+Default: `undefined`
+
+A source map passed along to webpack or the next loader.
+
+### `ast`
+
+Type: `Array[Object]`
+Default: `undefined`
+
+An [Abstract Syntax Tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)
+that will be passed to the next loader. Useful to speed up the build time if the
+next loader uses the same AST.
+
+### `dependencies`
+
+Type: `Array[String]`
+Default: `[]`
+
+An array of absolute, native paths to file dependencies that should be watched
+by webpack for changes.
+
+### `contextDependencies`
+
+Type: `Array[String]`
+Default: `[]`
+
+An array of absolute, native paths to directory dependencies that should be
+watched by webpack for changes.
+
+### `cacheable`
+
+Type: `Boolean`
+Default: `false`
+
+If `true`, specifies that the code can be re-used in watch mode if none of the
+`dependencies` have changed.
+
+## Examples
+
+In this example the loader is configured to operator on a file name of
+`years-in-ms.js`, execute the code, and store the result in the bundle as the
+result of the execution. This example passes `years` as an `option`, which
+corresponds to the `years` parameter in the target module exported function:
+
+```js
+// years-in-ms.js
+module.exports = function yearsInMs(years) {
+  const value = years * 365 * 24 * 60 * 60 * 1000;
+  // NOTE: this return value will replace the module in the bundle
+  return { code: 'module.exports = ' + value };
+}
+```
+
+```js
+// webpack.config.js
 module.exports = {
   ...
   module: {
     rules: [
       {
-        test: require.resolve('path/to/answer.js'),
+        test: require.resolve('src/years-in-ms.js'),
         use: [
           {
             loader: 'val-loader',
             options: {
-              question: 'What is the meaning of life?'
+              years: 10
             }
           }
         ]
@@ -150,39 +159,21 @@ module.exports = {
 };
 ```
 
-## Maintainers
+In the bundle, requiring the module then returns:
 
-<table>
-  <tbody>
-    <tr>
-      <td align="center">
-        <img width="150" height="150"
-        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
-        </br>
-        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
-      </td>
-      <td align="center">
-        <img width="150" height="150"
-        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
-        </br>
-        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
-      </td>
-      <td align="center">
-        <img width="150" height="150"
-        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
-        </br>
-        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
-      </td>
-      <td align="center">
-        <img width="150" height="150"
-        src="https://avatars3.githubusercontent.com/u/781746?v=3&s=150">
-        </br>
-        <a href="https://github.com/jhnns">Johannes Ewald</a>
-      </td>
-    </tr>
-  <tbody>
-</table>
+```js
+// ... bundle code ...
 
+  const tenYearsMs = require('years-in-ms'); // 315360000000
+
+// ... bundle code ...
+```
+
+require("val-loader!tenyearsinms") == 315360000000
+
+## License
+
+#### [MIT](./LICENSE)
 
 [npm]: https://img.shields.io/npm/v/val-loader.svg
 [npm-url]: https://npmjs.com/package/val-loader
@@ -193,14 +184,11 @@ module.exports = {
 [deps]: https://david-dm.org/webpack-contrib/val-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/val-loader
 
-[travis]: http://img.shields.io/travis/webpack-contrib/val-loader.svg
-[travis-url]: https://travis-ci.org/webpack-contrib/val-loader
-
-[appveyor]: https://ci.appveyor.com/api/projects/status/github/webpack-contrib/val-loader?svg=true
-[appveyor-url]: https://ci.appveyor.com/project/jhnns/val-loader/branch/master
+[tests]: 	https://img.shields.io/circleci/project/github/webpack-contrib/val-loader.svg
+[tests-url]: https://circleci.com/gh/webpack-contrib/val-loader
 
 [cover]: https://codecov.io/gh/webpack-contrib/val-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/val-loader
 
-[chat]: https://badges.gitter.im/webpack-contrib/webpack.svg
-[chat-url]: https://gitter.im/webpack-contrib/webpack
+[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
+[chat-url]: https://gitter.im/webpack/webpack

@@ -4,185 +4,154 @@ source: https://raw.githubusercontent.com/webpack-contrib/transform-loader/maste
 edit: https://github.com/webpack-contrib/transform-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/transform-loader
 ---
-Use <a href="https://github.com/substack/node-browserify/wiki/list-of-transforms">browserify transforms</a> as webpack-loader.
 
-## Install
 
-```bash
-npm i transform-loader --save
+[![npm][npm]][npm-url]
+[![node][node]][node-url]
+[![deps][deps]][deps-url]
+[![tests][tests]][tests-url]
+[![chat][chat]][chat-url]
+
+
+
+A browserify transformation loader for webpack.
+
+This loader allows use of
+[browserify transforms](https://github.com/substack/node-browserify/wiki/list-of-transforms)
+via a webpack loader.
+
+## Requirements
+
+This module requires a minimum of Node v6.9.0 and Webpack v4.0.0.
+
+## Getting Started
+
+To begin, you'll need to install `transform-loader`:
+
+```console
+$ npm install transform-loader --save-dev
 ```
 
-## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
+_Note: We're using the [coffeeify](https://github.com/jnordberg/coffeeify)
+tranform for these examples._
 
-Pass the module name as query parameter.
+Then invoke the loader through a require like so:
 
-``` javascript
-var x = require("!transform-loader?brfs!./file.js");
-var x = require("!transform-loader/cacheable?brfs!./file.js"); // cacheable version
+```js
+const thing = require('!transform-loader?coffeeify!widget/thing');
 ```
 
-If you pass a number instead it will take the function from `this.options.transforms[number]`.
+Or add the loader to your `webpack` config. For example:
 
-## webpack 2 config example
+```js
+// entry.js
+import thing from 'widget/thing';
+```
 
-``` javascript
+```js
+// webpack.config.js
 module.exports = {
   module: {
     rules: [
       {
-        loader: "transform-loader?brfs",
-        enforce: "post",
-        options: {
-          transforms: [
-              function (/*file*/) {
-                  return through((buffer) => {
-                      return this.queue(
-                          buffer.split('')
-                              .map((chunk) => String.fromCharCode(127-chunk.charCodeAt(0))))
-                              .join('')
-                  }, () => this.queue(null))
-              }
-          ]
-        }
+        test: /\.coffee?$/,
+        loader: `transform-loader?coffeeify`,
+        // options: {...}
       },
+    ],
+  },
+}
+```
 
+And run `webpack` via your preferred method.
+
+## QueryString Options
+
+When using the loader via a `require` query string you may specify one of two
+types; a loader name, or a function index.
+
+### <loder-name>
+
+Type: `String`
+
+The name of the `browserify` transform you wish to use.
+
+_Note: You must install the correct transform manually. Webpack nor this loader
+will do that for you._
+
+### <loder-index>
+
+Type: `Number`
+
+The index of a function contained within `options.transforms` which to use to
+transform the target file(s).
+
+## Options
+
+### `transforms`
+
+Type: `Array[Function]`
+Default: `undefined`
+
+An array of `functions` that can be used to transform a given file matching the
+configured loader `test`. For example:
+
+```js
+// entry.js
+const thing = require('widget/thing');
+```
+
+```js
+// webpack.config.js
+const through = require('through2');
+
+module.exports = {
+  module: {
+    rules: [
       {
-        test: /\.coffee$/,
-        loader: "transform-loader/cacheable?coffeeify",
+        test: /\.ext$/,
+        // NOTE: we've specified an index of 0, which will use the `transform`
+        //       function in `transforms` below.
+        loader: 'transform-loader?0',
         options: {
           transforms: [
-              function (/*file*/) {
-                  return through((buffer) => {
-                      return this.queue(
-                          buffer.split('')
-                              .map((chunk) => String.fromCharCode(127-chunk.charCodeAt(0))))
-                              .join('')
-                  }, () => this.queue(null))
-              }
-          ]
-        }
-      },
-
-      {
-        test: /\.weirdjs$/,
-        loader: "transform-loader?0",
-        options: {
-          transforms: [
-              function (/*file*/) {
-                  return through((buffer) => {
-                      return this.queue(
-                          buffer.split('')
-                              .map((chunk) => String.fromCharCode(127-chunk.charCodeAt(0))))
-                              .join('')
-                  }, () => this.queue(null))
-              }
+            function transform() {
+              return through(
+                (buffer) => {
+                  const result = buffer
+                    .split('')
+                    .map((chunk) => String.fromCharCode(127 - chunk.charCodeAt(0)));
+                  return this.queue(result).join('');
+                },
+                () => this.queue(null)
+              );
+            }
           ]
         }
       }
     ]
   }
-};
-```
-
-## webpack 1 config example
-
-``` javascript
-module.exports = {
-	module: {
-		postLoaders: [
-			{
-				loader: "transform-loader?brfs"
-			}
-		]
-		loaders: [
-			{
-				test: /\.coffee$/,
-				loader: "transform-loader/cacheable?coffeeify"
-			},
-			{
-				test: /\.weirdjs$/,
-				loader: "transform-loader?0"
-			}
-		]
-	},
-	transforms: [
-		function(file) {
-			return through(function(buf) {
-				this.queue(buf.split("").map(function(s) {
-					return String.fromCharCode(127-s.charCodeAt(0));
-				}).join(""));
-			}, function() { this.queue(null); });
-		}
-	]
-};
-```
-
-## Typical brfs Example
-
-Say you have the following Node source:
-
-```js
-var test = require('fs').readFileSync('./test.txt', 'utf8');
-```
-
-After `npm install transform-loader brfs --save`, add the following loader to your config:
-
-```js
-module.exports = {
-    context: __dirname,
-    entry: "./index.js",
-    module: {
-        loaders: [
-            {
-                test: /\.js$/,
-                loader: "transform-loader?brfs"
-            }
-        ]
-    }
 }
 ```
 
-The loader is applied to all JS files, which can incur a performance hit with watch tasks. So you may want to use `transform-loader/cacheable?brfs` instead. 
+## License
 
-## Maintainers
-
-<table>
-  <tbody>
-    <tr>
-      <td align="center">
-        <img width="150" height="150"
-        src="https://avatars3.githubusercontent.com/u/166921?v=3&s=150">
-        </br>
-        <a href="https://github.com/bebraw">Juho Vepsäläinen</a>
-      </td>
-      <td align="center">
-        <img width="150" height="150"
-        src="https://avatars2.githubusercontent.com/u/8420490?v=3&s=150">
-        </br>
-        <a href="https://github.com/d3viant0ne">Joshua Wiens</a>
-      </td>
-      <td align="center">
-        <img width="150" height="150"
-        src="https://avatars3.githubusercontent.com/u/533616?v=3&s=150">
-        </br>
-        <a href="https://github.com/SpaceK33z">Kees Kluskens</a>
-      </td>
-      <td align="center">
-        <img width="150" height="150"
-        src="https://avatars3.githubusercontent.com/u/3408176?v=3&s=150">
-        </br>
-        <a href="https://github.com/TheLarkInn">Sean Larkin</a>
-      </td>
-    </tr>
-  <tbody>
-</table>
-
+#### [MIT](./LICENSE)
 
 [npm]: https://img.shields.io/npm/v/transform-loader.svg
 [npm-url]: https://npmjs.com/package/transform-loader
 
+[node]: https://img.shields.io/node/v/transform-loader.svg
+[node-url]: https://nodejs.org
+
 [deps]: https://david-dm.org/webpack-contrib/transform-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/transform-loader
+
+[tests]: 	https://img.shields.io/circleci/project/github/webpack-contrib/transform-loader.svg
+[tests-url]: https://circleci.com/gh/webpack-contrib/transform-loader
+
+[cover]: https://codecov.io/gh/webpack-contrib/transform-loader/branch/master/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack-contrib/transform-loader
 
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
