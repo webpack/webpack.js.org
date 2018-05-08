@@ -24,6 +24,7 @@ One option is to export a function from your webpack config instead of exporting
 -module.exports = {
 +module.exports = function(env, argv) {
 +  return {
++    mode: env.production ? 'production' : 'development',
 +    devtool: env.production ? 'source-maps' : 'eval',
      plugins: [
        new webpack.optimize.UglifyJsPlugin({
@@ -64,11 +65,13 @@ module.exports = [{
     libraryTarget: 'amd'
   },
   entry: './app.js',
+  mode: 'production',
 }, {
   output: {
     filename: './dist-commonjs.js',
     libraryTarget: 'commonjs'
   },
   entry: './app.js',
+  mode: 'production',
 }]
 ```

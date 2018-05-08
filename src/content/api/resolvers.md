@@ -7,7 +7,7 @@ sort: 3
 Resolvers are created using the `enhanced-resolve` package. The `Resolver`
 class extends the `tapable` class and uses `tapable` to provide a few hooks.
 The `enhanced-resolve` package can be used directly to create new resolvers,
-however any [`compiler` instance](/api/compiler-hooks/) has a few resolver instances that can be
+however any [`compiler` instance](/api/node/#compiler-instance) has a few resolver instances that can be
 tapped into.
 
 Before reading on, make sure you at least skim through the
@@ -38,6 +38,7 @@ Where `[type]` is one of the three resolvers mention above, specified as:
 - `normal`
 - `context`
 - `loader`
+
 
 See the `enhanced-resolve` [documentation](https://github.com/webpack/enhanced-resolve) for a full list of hooks and
 descriptions.
