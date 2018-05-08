@@ -43,6 +43,7 @@ module.exports = {
     b: ["./app/entry-b1", "./app/entry-b2"]
   },
   </details>
+  // defaults to ./src
   // Here the application starts executing
   // and webpack starts bundling
 
