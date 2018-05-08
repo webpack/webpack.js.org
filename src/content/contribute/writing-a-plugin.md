@@ -12,7 +12,7 @@ Plugins expose the full potential of the webpack engine to third-party developer
 A plugin for `webpack` consists of
 
 - A named JavaScript function.
-- Defines `apply` method in it's prototype.
+- Defines `apply` method in its prototype.
 - Specifies an [event hook](/api/compiler-hooks/) on which to bind itself.
 - Manipulates webpack internal instance specific data.
 - Invokes webpack provided callback after functionality is complete.
