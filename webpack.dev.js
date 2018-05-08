@@ -21,7 +21,10 @@ module.exports = env => merge(common(env), {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      chunks: [ 'index' ]
+      chunks: ['index']
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
     })
   ],
   devServer: {
