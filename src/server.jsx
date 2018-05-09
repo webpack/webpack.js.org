@@ -25,7 +25,7 @@ const bundles = [
 // Export method for `SSGPlugin`
 export default locals => {
   let { assets } = locals.webpackStats.compilation;
-  let title = GetPageTitle(Content, locals.path)
+  let title = GetPageTitle(Content, locals.path);
 
   return ReactDOMServer.renderToString(
     <StaticRouter location={locals.path} context={{}}>

@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
-import AnalyticsRouter from 'react-g-analytics';
+import { BrowserRouter as AnalyticsRouter } from 'react-g-analytics';
 
 // Import Components
 import Site from './components/Site/Site';
