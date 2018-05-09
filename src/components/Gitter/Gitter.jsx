@@ -14,7 +14,9 @@ export default class Gitter extends React.Component {
   render() {
     return (
       <div className="gitter">
-        <div className="gitter__button js-gitter-toggle-chat-button">
+        <div
+          className="gitter__button"
+          onClick={() => window.gitterSidecar && window.gitterSidecar.toggleChat(true)}>
           <i className="gitter__icon icon-gitter" />
         </div>
       </div>
@@ -26,7 +28,7 @@ export default class Gitter extends React.Component {
       if (!window.gitterLoadTriggered) {
         window.gitterLoadTriggered = true;
         import('gitter-sidecar').then(Sidecar => {
-          this._sidecar = new Sidecar({
+          window.gitterSidecar = new Sidecar({
             room: 'webpack/webpack',
             activationElement: false
           });
