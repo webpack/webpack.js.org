@@ -1,6 +1,6 @@
 ---
 name: Documentation request
-about: Create a documentation request for a new feature or functioanlity change.
+about: Create a documentation request for a new feature or functionality change.
 
 ---
 
