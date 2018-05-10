@@ -82,8 +82,8 @@ import(
 
 // multiple possible targets
 import(
-  /* webpackInclude: "\\.json$" */
-  /* webpackExclude: "\\.noimport\\.json$" */
+  /* webpackInclude: /\.json$/ */
+  /* webpackExclude: /\.noimport\.json$/ */
   /* webpackChunkName: "my-chunk-name" */
   /* webpackMode: "lazy" */
   `./locale/${language}`
@@ -101,9 +101,9 @@ import(
 
 T> Note that both options can be combined like so `/* webpackMode: "lazy-once", webpackChunkName: "all-i18n-data" */`. This is parsed as a JSON5 object without curly brackets.
 
-`webpackInclude`: A regular expression that will be matched against during import resolution and point onto modules that __should be bundled__.
+`webpackInclude`: A regular expression that will be matched against during import resolution and only modules that matches __will be bundled__.
 
-`webpackExclude`: A regular expression that will be matched against during import resolution and point onto modules that __should not be bundled__.
+`webpackExclude`: A regular expression that will be matched against during import resolution and any module that matches __will not be bundled__.
 
 T> Note that `webpackInclude` and `webpackExclude` options do not interfere with the prefix. eg: `./locale`.
 
