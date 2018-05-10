@@ -25,7 +25,7 @@ config as follows:
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
 
-var webpackConfig = {
+module.exports = {
   entry: 'index.js',
   output: {
     path: path.resolve(__dirname, './dist'),
