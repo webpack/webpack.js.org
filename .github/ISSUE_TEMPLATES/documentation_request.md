@@ -1,3 +1,9 @@
+---
+name: Documentation request
+about: Create a documentation request for a new feature or functioanlity change.
+
+---
+
 **Feature to document**
 
 <!-- Name of the feature(s) and a link to related pull request of the feature implementation. -->
