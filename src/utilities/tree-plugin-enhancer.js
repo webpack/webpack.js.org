@@ -1,5 +1,6 @@
 const fs = require('fs');
 const FrontMatter = require('front-matter');
+const RemarkAnchors = require('./remark-anchors');
 
 module.exports = function(item, options) {
   item.url = item.path
@@ -19,6 +20,6 @@ module.exports = function(item, options) {
     let { attributes } = FrontMatter(content);
 
     Object.assign(item, attributes);
-    item.anchors = []; // TODO: Add actual anchors
+    item.anchors = RemarkAnchors(content);
   }
 }
