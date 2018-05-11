@@ -7,6 +7,9 @@ import { BrowserRouter as AnalyticsRouter } from 'react-g-analytics';
 // Import Components
 import Site from './components/Site/Site';
 
+// Import helpers
+import isClient from './utilities/is-client';
+        
 // Import Utilities
 import { FindInContent } from './utilities/content-utils';
 
@@ -17,7 +20,7 @@ const Router = process.env.NODE_ENV === 'production' ? AnalyticsRouter : Browser
 const render = process.env.NODE_ENV === 'production' ? ReactDOM.hydrate : ReactDOM.render;
 
 // Client Side Rendering
-if ( window.document !== undefined ) {
+if (isClient) {
   let { pathname } = window.location;
   let trimmed = pathname.replace(/(.+)\/$/, '$1');
   let entryPage = FindInContent(Content, item => item.url === trimmed);
