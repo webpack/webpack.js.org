@@ -728,7 +728,7 @@ There is no need to change it.
 
 `boolean`
 
-Tell webpack to remove a module from the module instance cache (`require.cache`) if it throws an exception when it is `require`d.
+Tell webpack to remove a module from the module instance cache (`require.cache`) if it throws an exception when it is `required`.
 
 It defaults to `false` for performance reasons.
 
