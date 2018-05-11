@@ -3,6 +3,7 @@ title: SplitChunksPlugin
 contributors:
   - sokra
   - jeremenichelli
+  - Priestch
 related:
   - title: "webpack 4: Code Splitting, chunk graph and the splitChunks optimization"
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -181,7 +182,7 @@ splitChunks: {
 			test: /[\\/]node_modules[\\/]/,
 			priority: -10
 		},
-    default: {
+		default: {
 			minChunks: 2,
 			priority: -20,
 			reuseExistingChunk: true
