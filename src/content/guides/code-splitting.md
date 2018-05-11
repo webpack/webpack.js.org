@@ -302,7 +302,7 @@ __src/index.js__
 ```
 
 
-## Prefecting/Preloading modules
+## Prefetching/Preloading modules
 
 webpack 4.6.0+ adds support for prefetching and preloading.
 
