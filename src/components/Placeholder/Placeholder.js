@@ -4,21 +4,21 @@ import './Placeholder.scss';
 // Placeholder string
 const Placeholder = () => (`
   <div class="placeholder">
-    <p class="placeholder--medium">&nbsp;</p>
-    <p class="placeholder--large">&nbsp;</p>
-    <p class="placeholder--small">&nbsp;</p>
-    <h2 class="placeholder--xsmall">&nbsp;</h2>
-    <p class="placeholder--large">&nbsp;</p>
-    <p class="placeholder--small">&nbsp;</p>
-    <p class="placeholder--medium">&nbsp;</p>
-    <h2 class="placeholder--small">&nbsp;</h2>
-    <p class="placeholder--large">&nbsp;</p>
-    <p class="placeholder--medium">&nbsp;</p>
-    <p class="placeholder--xsmall">&nbsp;</p>
-    <h2 class="placeholder--xsmall">&nbsp;</h2>
-    <p class="placeholder--large">&nbsp;</p>
-    <p class="placeholder--small">&nbsp;</p>
-    <p class="placeholder--medium">&nbsp;</p>
+    <p class="placeholder__medium">&nbsp;</p>
+    <p class="placeholder__large">&nbsp;</p>
+    <p class="placeholder__small">&nbsp;</p>
+    <h2 class="placeholder__xsmall">&nbsp;</h2>
+    <p class="placeholder__large">&nbsp;</p>
+    <p class="placeholder__small">&nbsp;</p>
+    <p class="placeholder__medium">&nbsp;</p>
+    <h2 class="placeholder__small">&nbsp;</h2>
+    <p class="placeholder__large">&nbsp;</p>
+    <p class="placeholder__medium">&nbsp;</p>
+    <p class="placeholder__xsmall">&nbsp;</p>
+    <h2 class="placeholder__xsmall">&nbsp;</h2>
+    <p class="placeholder__large">&nbsp;</p>
+    <p class="placeholder__small">&nbsp;</p>
+    <p class="placeholder__medium">&nbsp;</p>
   </div>
 `);
 
