@@ -5,7 +5,7 @@ const CleanPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const DirectoryTreePlugin = require('directory-tree-webpack-plugin');
-const treePluginEnhacer = require('./src/utilities/treePluginEnhacer.js');
+const TreeEnhancer = require('./src/utilities/tree-plugin-enhancer.js');
 
 module.exports = (env = {}) => ({
   devtool: 'source-map',
@@ -35,6 +35,7 @@ module.exports = (env = {}) => ({
           options: {
             plugins: [
               // TODO: Add necessary remark plugins
+              require('remark-slug'),
               require('remark-autolink-headings'),
               require('remark-mermaid')
             ]
@@ -109,7 +110,7 @@ module.exports = (env = {}) => ({
       dir: 'src/content',
       path: 'src/_content.json',
       extensions: /\.md/,
-      enhance: treePluginEnhacer,
+      enhance: TreeEnhancer,
       filter: item => item.name !== 'images',
       sort: (a, b) => {
         let group1 = (a.group || '').toLowerCase();
