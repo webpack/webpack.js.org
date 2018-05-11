@@ -109,8 +109,6 @@
     "ajv": "^5.5.2",
     "docsearch.js": "^2.5.2",
     "gitter-sidecar": "^1.2.3",
-    "preact": "^8.2.7",
-    "preact-compat": "3.17.0",
     "prop-types": "^15.5.10",
     "react": "^16.2.0",
     "react-banner": "^1.0.0-rc.0",
