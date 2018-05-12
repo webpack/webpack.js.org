@@ -22,7 +22,7 @@
 
 webpack 中文文档
 ========
-[![Travis](https://img.shields.io/travis/webpack-china/webpack.js.org.svg)](https://travis-ci.org/webpack-china/webpack.js.org)
+[![Travis](https://img.shields.io/travis/docschina/webpack.js.org.svg)](https://travis-ci.org/docschina/webpack.js.org)
 
 ## 翻译 ##
 
