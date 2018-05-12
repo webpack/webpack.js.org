@@ -25,7 +25,3 @@ npm version major && git push --follow-tags && npm publish
 _这样将递增包版本号，提交变更，然后创建一个**本地 tag 标签**，并推送到 github 和发布到 npm package。_
 
 之后就可以到 github 的[发布页面](https://github.com/webpack/webpack/releases)上为新的标签编写 Changelog。
-
-***
-
-> 原文：https://webpack.js.org/contribute/plugin-patterns/

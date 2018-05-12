@@ -1,5 +1,5 @@
 ---
-title: 创建 Library
+title: 创建 library
 sort: 12
 contributors:
   - pksjce
@@ -313,7 +313,3 @@ W> `module` 属性应指向一个使用 ES2015 模块语法的脚本，但不包
 现在你可以[将其发布为一个 npm 包](https://docs.npmjs.com/getting-started/publishing-npm-packages)，并且在 [unpkg.com](https://unpkg.com/#/) 找到它并分发给你的用户。
 
 T> 为了暴露和 library 关联着的样式表，你应该使用 [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin)。然后，用户可以像使用其他样式表一样使用和加载这些样式表。
-
-***
-
-> 原文：https://webpack.js.org/guides/author-libraries/

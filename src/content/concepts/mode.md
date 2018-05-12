@@ -1,5 +1,5 @@
 ---
-title: 模式(Mode)
+title: 模式(mode)
 sort: 4
 contributors:
   - EugeneHlushko

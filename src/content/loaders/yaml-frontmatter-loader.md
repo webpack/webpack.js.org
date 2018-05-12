@@ -52,7 +52,3 @@ module.exports = {
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
-
-***
-
-> 原文：https://webpack.js.org/loaders/yaml-frontmatter-loader/

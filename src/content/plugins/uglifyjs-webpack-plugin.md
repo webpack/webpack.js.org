@@ -276,7 +276,3 @@ All comments that match the given expression (resp. are evaluated to `true` by t
 
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
-
-***
-
-> 原文：https://webpack.js.org/plugins/uglifyjs-webpack-plugin/

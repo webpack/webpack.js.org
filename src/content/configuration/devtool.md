@@ -1,5 +1,5 @@
 ---
-title: Devtool
+title: devtool
 sort: 10
 contributors:
   - sokra
@@ -114,7 +114,3 @@ W> 你不应将 source map 文件部署到 web 服务器。而是只将其用于
 W> 这仍然会暴露反编译后的文件名和结构，但它不会暴露原始代码。
 
 T> 在使用 `uglifyjs-webpack-plugin` 时，你必须提供 `sourceMap：true` 选项来启用 source map 支持。
-
-***
-
-> 原文：https://webpack.js.org/configuration/devtool/

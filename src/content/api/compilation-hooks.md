@@ -1,5 +1,5 @@
 ---
-title: Compilation 钩子
+title: compilation 钩子
 group: Plugins
 sort: 2
 ---

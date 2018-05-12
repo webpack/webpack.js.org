@@ -45,7 +45,3 @@ new webpack.optimize.LimitChunkCountPlugin({
 ``` bash
 --optimize-min-chunk-size 10000
 ```
-
-***
-
-> 原文：https://webpack.js.org/plugins/limit-chunk-count-plugin/

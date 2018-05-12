@@ -103,7 +103,3 @@ loader 运行后就变成
 
 [cover]: https://codecov.io/gh/webpack-contrib/restyle-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/restyle-loader
-
-***
-
-> 原文：https://webpack.js.org/loaders/restyle-loader/

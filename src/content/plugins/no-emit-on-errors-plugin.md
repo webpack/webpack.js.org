@@ -13,7 +13,3 @@ new webpack.NoEmitOnErrorsPlugin()
 T> 此插件用于取代（现已弃用）webpack 1 的 `NoErrorsPlugin` 插件。
 
 如果你在使用 [CLI](/api/cli/)，启用此插件后，webpack 进程遇到错误代码将不会退出。如果你希望 webpack 在使用 CLI 时出现 "fail" 提示，请查看 [`bail` 选项](/api/cli/#advanced-options)。
-
-***
-
-> 原文：https://webpack.js.org/plugins/no-emit-on-errors-plugin/

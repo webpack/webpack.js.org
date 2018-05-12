@@ -195,7 +195,3 @@ webpack 将尝试读取 `babel` 包而不是 `babel-loader`。
 ```
 
 ## [License](http://couto.mit-license.org/)
-
-***
-
-> 原文：https://webpack.js.org/loaders/babel-loader/

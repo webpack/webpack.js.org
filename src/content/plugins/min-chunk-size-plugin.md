@@ -11,7 +11,3 @@ new webpack.optimize.MinChunkSizePlugin({
   minChunkSize: 10000 // Minimum number of characters
 })
 ```
-
-***
-
-> 原文：https://webpack.js.org/plugins/min-chunk-size-plugin/

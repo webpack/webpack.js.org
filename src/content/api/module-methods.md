@@ -356,7 +356,3 @@ __webpack_modules__[require.resolveWeak(`./page/${page}`)]
 ```
 
 T> `require.resolveWeak` 是*通用渲染*（SSR + 代码分离）的基础，例如在 [react-universal-component](https://github.com/faceyspacey/react-universal-component) 等包中的用法。它允许代码在服务器端和客户端初始页面的加载上同步渲染。它要求手动或以某种方式提供 chunk。它可以在不需要指示应该被打包的情况下引入模块。它与 `import()` 一起使用，当用户导航触发额外的导入时，它会被接管。
-
-***
-
-> 原文：https://webpack.js.org/api/module-methods/

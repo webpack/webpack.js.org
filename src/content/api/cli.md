@@ -1,5 +1,5 @@
 ---
-title: 命令行接口(Command Line Interface)
+title: 命令行接口(command line interface)
 sort: 2
 contributors:
   - ev1stensberg
@@ -359,7 +359,3 @@ webpack --progress --profile
 6ms emitting
 ⋮
 ```
-
-***
-
-> 原文：https://webpack.js.org/api/cli/

@@ -336,7 +336,3 @@ Ran all test suites.
 ```
 
 一切正常！现在，你应该准备开始开发、测试、部署你的 loaders 了。我们希望你可以在社区分享你的 loader！
-
-***
-
-> 原文：https://webpack.js.org/contribute/how-to-write-a-loader/

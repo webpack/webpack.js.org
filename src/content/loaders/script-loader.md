@@ -89,7 +89,3 @@ import exec from 'script-loader!./script.js';
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
-
-***
-
-> 原文：https://webpack.js.org/loaders/script-loader/

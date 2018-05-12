@@ -39,7 +39,3 @@ new webpack.BannerPlugin({
   banner: "hash:[hash], chunkhash:[chunkhash], name:[name], filebase:[filebase], query:[query], file:[file]"
 })
 ```
-
-***
-
-> 原文：https://webpack.js.org/plugins/banner-plugin/

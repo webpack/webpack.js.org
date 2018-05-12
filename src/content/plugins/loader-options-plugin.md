@@ -42,7 +42,3 @@ new webpack.LoaderOptionsPlugin({
   }
 })
 ```
-
-***
-
-> 原文：https://webpack.js.org/plugins/loader-options-plugin/

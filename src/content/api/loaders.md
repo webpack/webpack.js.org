@@ -451,7 +451,3 @@ options 的值将会传递给 Complier
 ### `this._module`
 
 一种 hack 写法。用于访问当前加载的 Module 对象。
-
-***
-
-> 原文：https://webpack.js.org/api/loaders/

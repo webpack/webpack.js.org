@@ -156,7 +156,3 @@ SW registered
 ## 结论
 
 你已经使用 Workbox 项目构建了一个离线应用程序。开始进入将 web app 改造为 PWA 的旅程。你现在可能想要考虑下一步做什么。在这里的[谷歌文档](https://developers.google.com/web/progressive-web-apps/)中可以找到一些不错的资源。
-
-***
-
-> 原文：https://webpack.js.org/guides/progressive-web-application/

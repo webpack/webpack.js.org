@@ -159,7 +159,3 @@ stats: {
   warningsFilter: "filter" | /filter/ | ["filter", /filter/] | (warning) => ... return true|false
 };
 ```
-
-***
-
-> 原文：https://webpack.js.org/configuration/stats/

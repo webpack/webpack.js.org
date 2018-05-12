@@ -110,7 +110,3 @@ importAll(require.context('../components/', true, /\.js$/));
 ```
 
 - `id` 是上下文模块里面所包含的模块 id. 它可能在你使用 `module.hot.accept` 的时候被用到。
-
-***
-
-> 原文：https://webpack.js.org/guides/dependency-management/

@@ -69,7 +69,3 @@ For help see https://nodejs.org/en/docs/inspector
 现在，在浏览器中访问 `chrome://inspect`，你会看到在 _Remote Target_ 标题下可以进行 inspect(审查) 的活动脚本。单击每个脚本下自动连接会话的 "inspect" 链接，打开一个专门 debugger 或 _Open dedicated DevTools for Node_ 链接。你还可以看到 [NiM 扩展程序](https://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj)，这是一个方便的 Chrome 插件，在每次你通过 `--inspect` 调试某个脚本时，都会自动打开 DevTools 标签页。
 
 我们推荐使用 `--inspect-brk` 标记，此标记将在脚本的第一条语句处断开，以便你可以在源代码中设置断点，并根据需要启动/停止构建。此外，不要忘记，你仍然可以向脚本传递参数。例如，如果你有多个配置文件，你可以通过 `--config webpack.prod.js` 指定你想要调试的配置。
-
-***
-
-> 原文：https://webpack.js.org/contribute/debugging/

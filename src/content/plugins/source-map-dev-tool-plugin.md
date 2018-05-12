@@ -94,7 +94,3 @@ new webpack.SourceMapDevToolPlugin({
 ``` js
 https://example.com/project/sourcemaps/bundle-[hash].js.map`
 ```
-
-***
-
-> 原文：https://webpack.js.org/plugins/source-map-dev-tool-plugin/

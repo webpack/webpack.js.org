@@ -77,7 +77,3 @@ require("i18n!./file.json") == require("i18n/merge!json!./file.json")
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
-
-***
-
-> 原文：https://webpack.js.org/loaders/i18n-loader/

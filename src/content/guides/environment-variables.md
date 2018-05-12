@@ -40,7 +40,3 @@ module.exports = env => {
   }
 }
 ```
-
-***
-
-> 原文：https://webpack.js.org/guides/environment-variables/

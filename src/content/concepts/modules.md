@@ -1,5 +1,5 @@
 ---
-title: 模块(Modules)
+title: 模块(modules)
 sort: 7
 contributors:
   - TheLarkInn
@@ -44,7 +44,3 @@ webpack 社区已经为各种流行语言和语言处理器构建了 _loader_，
 总的来说，webpack 提供了可定制的、强大和丰富的 API，允许**任何技术栈**使用 webpack，保持了在你的开发、测试和生成流程中**无侵入性(non-opinionated)**。
 
 有关完整列表，请参考 [**loader 列表**](/loaders) 或 [**自己编写**](/api/loaders)。
-
-***
-
-> 原文：https://webpack.js.org/concepts/modules/

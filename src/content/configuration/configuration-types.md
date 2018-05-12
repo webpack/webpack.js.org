@@ -1,5 +1,5 @@
 ---
-title: 多种配置类型(Configuration Types)
+title: 多种配置类型(configuration types)
 sort: 3
 contributors:
   - sokra
@@ -75,7 +75,3 @@ module.exports = [{
   mode: 'production',
 }]
 ```
-
-***
-
-> 原文：https://webpack.js.org/configuration/configuration-types/

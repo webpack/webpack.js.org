@@ -143,7 +143,3 @@ WARNING in ./path/to/file.js
 
 [test]: http://img.shields.io/travis/webpack-contrib/jshint-loader.svg
 [test-url]: https://travis-ci.org/webpack-contrib/jshint-loader
-
-***
-
-> 原文：https://webpack.js.org/loaders/jshint-loader/
