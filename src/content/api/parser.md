@@ -1,16 +1,12 @@
 ---
-title: Parser
+title: parser
 group: Plugins
 sort: 4
 ---
 
-The `parser` instance, found in the `compiler`, is used to parse each module
-being processed by webpack. The `parser` is yet another webpack class that
-extends `tapable` and provides a variety of `tapable` hooks that can be used by
-plugin authors to customize the parsing process.
+`parser` 实例，是用来解析由 webpack 处理过的每个模块。`parser` 也是扩展自 `tapable` 的 webpack 类，并且提供多种 `tapable` 钩子，插件作者可以使用它来自定义解析过程。
 
-The `parser` is found within [module factories](/api/compiler-hooks/#normalmodulefactory) and therefore takes little
-more work to access:
+以下示例中，`parser` 位于 [normalModuleFactory](/api/compiler-hooks/#normalmodulefactory) 这个中，因此需要调用额外钩子来进行获取：
 
 ``` js
 compiler.hooks.normalModuleFactory.tap(factory => {
@@ -20,68 +16,66 @@ compiler.hooks.normalModuleFactory.tap(factory => {
 })
 ```
 
-As with the `compiler`, `tapAsync` and `tapPromise` may also be available
-depending on the type of hook.
+和 `compiler` 用法相同，取决于不同的钩子类型，也可以在某些钩子上访问 `tapAsync` 和 `tapPromise`。
 
 
-## Hooks
+## 相关钩子
 
-The following lifecycle hooks are exposed by the `parser` and can be accessed
-as such:
+以下生命周期钩子函数，是由 `parser` 暴露，可以通过如下方式访问：
 
 
 ### evaluateTypeof
 
 `SyncBailHook`
 
-Evaluate the type of an identifier.
+取值标识符(identifier)的类型。（译注：取值(evaluate)是一个动词，表示对参数进行求值并返回）
 
-Parameters: `expression`
+参数：`expression`
 
 
 ### evaluate
 
 `SyncBailHook`
 
-Evaluate an expression.
+取值一个表达式(expression)
 
-Parameters: `expression`
+参数：`expression`
 
 
 ### evaluateIdentifier
 
 `SyncBailHook`
 
-Evaluate an identifier that is a free variable.
+取值一个自由变量标识符。
 
-Parameters: `expression`
+参数：`expression`
 
 
 ### evaluateDefinedIdentifier
 
 `SyncBailHook`
 
-Evaluate an identifier that is a defined variable.
+取值一个定义变量标识符。
 
-Parameters: `expression`
+参数：`expression`
 
 
 ### evaluateCallExpressionMember
 
 `SyncBailHook`
 
-Evaluate a call to a member function of a successfully evaluated expression.
+进行一次「成功取值表达式的成员函数(member function of a successfully evaluated expression)」调用取值。
 
-Parameters: `expression` `param`
+参数：`expression` `param`
 
 
 ### statement
 
 `SyncBailHook`
 
-General purpose hook that is called when parsing statements in a code fragment.
+通用钩子，在从代码片段中解析语句时调用。
 
-Parameters: `statement`
+参数：`statement`
 
 
 ### statementIf
@@ -90,7 +84,7 @@ Parameters: `statement`
 
 ...
 
-Parameters: `statement`
+参数：`statement`
 
 
 ### label
@@ -99,7 +93,7 @@ Parameters: `statement`
 
 ...
 
-Parameters: `statement`
+参数：`statement`
 
 
 ### import
@@ -108,7 +102,7 @@ Parameters: `statement`
 
 ...
 
-Parameters: `statement` `source`
+参数：`statement` `source`
 
 
 ### importSpecifier
@@ -117,7 +111,7 @@ Parameters: `statement` `source`
 
 ...
 
-Parameters: `statement` `source` `exportName` `identifierName`
+参数：`statement` `source` `exportName` `identifierName`
 
 
 ### export
@@ -126,7 +120,7 @@ Parameters: `statement` `source` `exportName` `identifierName`
 
 ...
 
-Parameters: `statement`
+参数：`statement`
 
 
 ### exportImport
@@ -135,7 +129,7 @@ Parameters: `statement`
 
 ...
 
-Parameters: `statement` `source`
+参数：`statement` `source`
 
 
 ### exportDeclaration
@@ -144,7 +138,7 @@ Parameters: `statement` `source`
 
 ...
 
-Parameters: `statement` `declaration`
+参数：`statement` `declaration`
 
 
 ### exportExpression
@@ -153,7 +147,7 @@ Parameters: `statement` `declaration`
 
 ...
 
-Parameters: `statement` `declaration`
+参数：`statement` `declaration`
 
 
 ### exportSpecifier
@@ -162,7 +156,7 @@ Parameters: `statement` `declaration`
 
 ...
 
-Parameters: `statement` `identifierName` `exportName` `index`
+参数：`statement` `identifierName` `exportName` `index`
 
 
 ### exportImportSpecifier
@@ -171,7 +165,7 @@ Parameters: `statement` `identifierName` `exportName` `index`
 
 ...
 
-Parameters: `statement` `source` `identifierName` `exportName` `index`
+参数：`statement` `source` `identifierName` `exportName` `index`
 
 
 ### varDeclaration
@@ -180,7 +174,7 @@ Parameters: `statement` `source` `identifierName` `exportName` `index`
 
 ...
 
-Parameters: `declaration`
+参数：`declaration`
 
 
 ### varDeclarationLet
@@ -189,7 +183,7 @@ Parameters: `declaration`
 
 ...
 
-Parameters: `declaration`
+参数：`declaration`
 
 
 ### varDeclarationConst
@@ -198,7 +192,7 @@ Parameters: `declaration`
 
 ...
 
-Parameters: `declaration`
+参数：`declaration`
 
 
 ### varDeclarationVar
@@ -207,7 +201,7 @@ Parameters: `declaration`
 
 ...
 
-Parameters: `declaration`
+参数：`declaration`
 
 
 ### canRename
@@ -216,7 +210,7 @@ Parameters: `declaration`
 
 ...
 
-Parameters: `initExpression`
+参数：`initExpression`
 
 
 ### rename
@@ -225,7 +219,7 @@ Parameters: `initExpression`
 
 ...
 
-Parameters: `initExpression`
+参数：`initExpression`
 
 
 ### assigned
@@ -234,7 +228,7 @@ Parameters: `initExpression`
 
 ...
 
-Parameters: `expression`
+参数：`expression`
 
 
 ### assign
@@ -243,7 +237,7 @@ Parameters: `expression`
 
 ...
 
-Parameters: `expression`
+参数：`expression`
 
 
 ### typeof
@@ -252,7 +246,7 @@ Parameters: `expression`
 
 ...
 
-Parameters: `expression`
+参数：`expression`
 
 
 ### call
@@ -261,7 +255,7 @@ Parameters: `expression`
 
 ...
 
-Parameters: `expression`
+参数：`expression`
 
 
 ### callAnyMember
@@ -270,7 +264,7 @@ Parameters: `expression`
 
 ...
 
-Parameters: `expression`
+参数：`expression`
 
 
 ### new
@@ -279,7 +273,7 @@ Parameters: `expression`
 
 ...
 
-Parameters: `expression`
+参数：`expression`
 
 
 ### expression
@@ -288,7 +282,7 @@ Parameters: `expression`
 
 ...
 
-Parameters: `expression`
+参数：`expression`
 
 
 ### expressionAnyMember
@@ -297,7 +291,7 @@ Parameters: `expression`
 
 ...
 
-Parameters: `expression`
+参数：`expression`
 
 
 ### expressionConditionalOperator
@@ -306,16 +300,16 @@ Parameters: `expression`
 
 ...
 
-Parameters: `expression`
+参数：`expression`
 
 
 ### program
 
 `SyncBailHook`
 
-Get access to the abstract syntax tree (AST) of a code fragment
+访问代码片段的抽象语法树(abstract syntax tree - AST)
 
-Parameters: `ast` `comments`
+参数：`ast` `comments`
 
 ***
 
