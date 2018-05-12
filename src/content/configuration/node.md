@@ -132,7 +132,3 @@ node: {
   url: false
 }
 ```
-
-***
-
-> 原文：https://webpack.js.org/configuration/node/

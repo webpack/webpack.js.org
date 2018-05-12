@@ -135,7 +135,3 @@ imports-loader?define=>false
 
 [test]: http://img.shields.io/travis/webpack-contrib/imports-loader.svg
 [test-url]: https://travis-ci.org/webpack-contrib/imports-loader
-
-***
-
-> 原文：https://webpack.js.org/loaders/imports-loader/

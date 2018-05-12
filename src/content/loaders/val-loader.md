@@ -204,7 +204,3 @@ module.exports = {
 
 [chat]: https://badges.gitter.im/webpack-contrib/webpack.svg
 [chat-url]: https://gitter.im/webpack-contrib/webpack
-
-***
-
-> 原文：https://webpack.js.org/loaders/val-loader/

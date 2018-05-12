@@ -117,7 +117,3 @@ W> 这是一个警告.
 **语法：?\>**
 
 ?> 这个一个 todo 待办项.
-
-***
-
-> 原文：https://webpack.js.org/contribute/writers-guide/

@@ -206,7 +206,3 @@ webpack 插件可以按照它所注册的事件分成不同的类型。每一个
 `applyPluginsParallel(name: string, args: any..., callback: (err?: Error) -> void)`
 
 `applyPluginsParallelBailResult(name: string, args: any..., callback: (err: Error, result: any) -> void)`
-
-***
-
-> 原文：https://webpack.js.org/development/how-to-write-a-plugin/

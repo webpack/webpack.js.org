@@ -191,7 +191,3 @@ You must run the instrumentation as a post step
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
-
-***
-
-> 原文：https://webpack.js.org/loaders/istanbul-instrumenter-loader/

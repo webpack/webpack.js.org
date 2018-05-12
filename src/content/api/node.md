@@ -294,7 +294,3 @@ compiler.run((err, stats) => {
 值得一提的是，被 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 及众多其他包依赖的 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) 就是通过这种方式，将你的文件神秘地隐藏起来，但却仍然可以用它们为浏览器提供服务！
 
 T> 你指定的输出文件系统需要兼容 Node 自身的 [`fs`](https://nodejs.org/api/fs.html) 模块接口，接口需要提供 `mkdirp` 和 `join` 工具方法。
-
-***
-
-> 原文：https://webpack.js.org/api/node/

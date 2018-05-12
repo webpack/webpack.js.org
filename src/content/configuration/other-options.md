@@ -1,5 +1,5 @@
 ---
-title: 其它选项(Other Options)
+title: 其它选项(other options)
 sort: 16
 contributors:
   - sokra
@@ -130,7 +130,3 @@ W> 设置 `recordsPath` 本质上会把 `recordsInputPath` 和 `recordsOutputPat
 recordsInputPath: path.join(__dirname, 'records.json'),
 recordsOutputPath: path.join(__dirname, 'newRecords.json')
 ```
-
-***
-
-> 原文：https://webpack.js.org/configuration/other-options/

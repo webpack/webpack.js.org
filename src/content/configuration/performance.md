@@ -1,5 +1,5 @@
 ---
-title: 性能(Performance)
+title: 性能(performance)
 sort: 14
 contributors:
   - thelarkinn
@@ -96,7 +96,3 @@ performance: {
 ```
 
 以上示例将只给出 `.js` 文件的性能提示。
-
-***
-
-> 原文：https://webpack.js.org/configuration/performance/

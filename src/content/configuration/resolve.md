@@ -1,5 +1,5 @@
 ---
-title: 解析(Resolve)
+title: 解析(resolve)
 sort: 7
 contributors:
   - sokra
@@ -306,7 +306,3 @@ T> 注意，这里你可以使用别名，并且其他特性类似于 resolve �
 ``` js
 moduleExtensions: [ '-loader' ]
 ```
-
-***
-
-> 原文：https://webpack.js.org/configuration/resolve/

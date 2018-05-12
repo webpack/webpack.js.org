@@ -267,7 +267,3 @@ There is a known problem with Less and [CSS modules](https://github.com/css-modu
 
 [chat]: https://badges.gitter.im/webpack-contrib/webpack.svg
 [chat-url]: https://gitter.im/webpack-contrib/webpack
-
-***
-
-> 原文：https://webpack.js.org/loaders/less-loader/

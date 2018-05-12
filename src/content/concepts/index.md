@@ -160,7 +160,3 @@ module.exports = {
 ```
 
 [了解更多！](/concepts/mode)
-
-***
-
-> 原文：https://webpack.js.org/concepts/

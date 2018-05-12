@@ -297,7 +297,3 @@ path/to/file.png?e43b20c069c4a01867c31e98cbce33c9
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
-
-***
-
-> 原文：https://webpack.js.org/loaders/file-loader/

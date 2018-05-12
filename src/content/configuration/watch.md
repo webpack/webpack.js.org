@@ -1,5 +1,5 @@
 ---
-title: Watch 和 WatchOptions
+title: watch 和 watchOptions
 sort: 12
 contributors:
   - sokra
@@ -129,7 +129,3 @@ Arch 用户，请将 `fs.inotify.max_user_watches=524288` 添加到 `/etc/sysctl
 ### 在 WebStorm 中保存
 
 使用 JetBrains WebStorm IDE 时，你可能会发现保存修改过的文件，并不会按照预期触发观察者。尝试在设置中禁用`安全写入(safe write)`选项，该选项确定在原文件被覆盖之前，文件是否先保存到临时位置：取消选中 `File > Settings... > System Settings > Use "safe write" (save changes to a temporary file first)`。
-
-***
-
-> 原文：https://webpack.js.org/configuration/watch/

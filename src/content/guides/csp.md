@@ -38,7 +38,3 @@ Content-Security-Policy: default-src 'self'; script-src 'self' https://trusted.c
 ```
 
 有关 CSP 和 `nonce` 属性的更多信息，请查看页面底部的__进一步阅读__部分。
-
-***
-
-> 原文：https://webpack.js.org/guides/csp/

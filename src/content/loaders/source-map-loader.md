@@ -81,7 +81,3 @@ This loader is especially useful when using 3rd-party libraries having their own
 
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
-
-***
-
-> 原文：https://webpack.js.org/loaders/source-map-loader/

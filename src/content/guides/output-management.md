@@ -237,7 +237,3 @@ __webpack.config.js__
 ## 结论
 
 现在，你已经了解如何向 HTML 动态添加 bundle，让我们深入[开发指南](/guides/development)。或者，如果你想要深入更多相关高级话题，我们推荐你前往[代码分离指南](/guides/code-splitting)。
-
-***
-
-> 原文：https://webpack.js.org/guides/output-management/

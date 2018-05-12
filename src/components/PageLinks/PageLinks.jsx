@@ -7,7 +7,7 @@ export default ({
   page = {}
 }) => {
   let enURL = 'https://webpack.js.org';
-  let baseURL = 'https://github.com/webpack-china/webpack.js.org/edit/cn/src/content';
+  let baseURL = 'https://github.com/docschina/webpack.js.org/edit/cn/src/content';
   let indexPath = page.type === 'index' ? '/index' : '';
   let mainPath = page.url.startsWith('/') ? page.url : `/${page.url}`;
   let editLink = page.file.attributes.edit || baseURL + TrimEnd(mainPath, '/') + indexPath + '.md';

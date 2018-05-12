@@ -101,7 +101,3 @@ webpack-dev-server --public 10.10.10.61 --watch-poll
 ## 小结
 
 我们能够从固定 IP 访问 Vagrant box，然后由于公开了 webpack-dev-server，使浏览器可以直接访问到它。最后解决了 VirtualBox 不派发文件系统事件的常见问题，此问题会导致服务器不重新加载文件更改。
-
-***
-
-> 原文：https://webpack.js.org/guides/development-vagrant/

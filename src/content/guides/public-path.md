@@ -1,5 +1,5 @@
 ---
-title: 公共路径(Public Path)
+title: 公共路径(public path)
 sort: 24
 contributors:
   - rafaelrinaldi
@@ -59,7 +59,3 @@ __webpack_public_path__ = process.env.ASSET_PATH;
 import './public-path';
 import './app';
 ```
-
-***
-
-> 原文：https://webpack.js.org/guides/public-path/

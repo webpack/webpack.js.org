@@ -310,7 +310,3 @@ compiler.hooks.normalModuleFactory.tap(factory => {
 访问代码片段的抽象语法树(abstract syntax tree - AST)
 
 参数：`ast` `comments`
-
-***
-
-> 原文：https://webpack.js.org/api/parser/

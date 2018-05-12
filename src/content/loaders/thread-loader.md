@@ -16,7 +16,7 @@ npm install --save-dev thread-loader
 
 把这个 loader 放置在其他 loader 之前， 放置在这个 loader 之后的 loader 就会在一个单独的 worker 池(worker pool)中运行
 
-在工人池(worker pool)中运行的 loader 是受到限制的。例如：
+在 worker 池(worker pool)中运行的 loader 是受到限制的。例如：
 
 * 这些 loader 不能产生新的文件。
 * 这些 loader 不能使用定制的 loader API（也就是说，通过插件）。
@@ -137,7 +137,3 @@ threadLoader.warmup({
 
 [cover]: https://codecov.io/gh/webpack-contrib/thread-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/thread-loader
-
-***
-
-> 原文：https://webpack.js.org/loaders/thread-loader/

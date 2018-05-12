@@ -186,7 +186,3 @@ loader 将应用到所有 JS 文件，这样在执行 watch 任务时将导致�
 
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
-
-***
-
-> 原文：https://webpack.js.org/loaders/transform-loader/

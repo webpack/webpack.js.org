@@ -1,5 +1,5 @@
 ---
-title: 输出(Output)
+title: 输出(output)
 sort: 3
 contributors:
   - TheLarkInn
@@ -73,7 +73,3 @@ __webpack_public_path__ = myRuntimePublicPath
 
 // 剩余的应用程序入口
 ```
-
-***
-
-> 原文：https://webpack.js.org/concepts/output/

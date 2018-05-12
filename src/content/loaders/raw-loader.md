@@ -99,7 +99,3 @@ import txt from 'raw-loader!./file.txt';
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
-
-***
-
-> 原文：https://webpack.js.org/loaders/raw-loader/

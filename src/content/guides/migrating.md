@@ -637,7 +637,3 @@ webpack [2.2.1](https://github.com/webpack/webpack/releases/tag/v2.2.1)之前（
   }
 }
 ```
-
-***
-
-> 原文：https://webpack.js.org/guides/migrating/

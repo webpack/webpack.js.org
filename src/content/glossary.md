@@ -108,7 +108,3 @@ contributors:
 ## Y
 
 ## Z
-
-***
-
-> 原文：https://webpack.js.org/glossary/

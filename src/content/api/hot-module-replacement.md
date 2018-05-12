@@ -1,5 +1,5 @@
 ---
-title: 模块热替换(Hot Module Replacement)
+title: 模块热替换(hot module replacement)
 contributors:
   - sokra
   - skipjack
@@ -166,7 +166,3 @@ module.hot.addStatusHandler(status => {
 ``` js
 module.hot.removeStatusHandler(callback)
 ```
-
-***
-
-> 原文：https://webpack.js.org/api/hot-module-replacement/

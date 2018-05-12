@@ -1,5 +1,5 @@
 ---
-title: Tree Shaking
+title: tree shaking
 sort: 7
 contributors:
   - simon04
@@ -190,7 +190,3 @@ T> 注意，也可以在命令行接口中使用 `--optimize-minimize` 标记，
 你可以将应用程序想象成一棵树。绿色表示实际用到的源码和 library，是树上活的树叶。灰色表示无用的代码，是秋天树上枯萎的树叶。为了除去死去的树叶，你必须摇动这棵树，使它们落下。
 
 如果你对优化输出很感兴趣的话，请进入到下一个指南，来了解[生产环境](/guides/production)中进行构建的详细细节。
-
-***
-
-> 原文：https://webpack.js.org/guides/tree-shaking/

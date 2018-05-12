@@ -197,4 +197,3 @@ Source maps 真的很消耗资源。你真的需要他们？
 ### Sass
 
 - `node-sass` 中有个来自 Node.js 线程池的阻塞线程的 bug。 当使用 `thread-loader` 时，需要设置 `workerParallelJobs: 2`。
-
