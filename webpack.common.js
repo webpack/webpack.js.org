@@ -36,7 +36,7 @@ module.exports = (env = {}) => ({
             plugins: [
               require('remark-slug'),
               require('remark-mermaid'),
-              [require('remark-autolink-headings'), {
+              [require('@rigor789/remark-autolink-headings'), {
                 behaviour: 'append'
               }]
             ]
