@@ -34,10 +34,11 @@ module.exports = (env = {}) => ({
           loader: 'remark-loader',
           options: {
             plugins: [
-              // TODO: Add necessary remark plugins
               require('remark-slug'),
-              require('remark-autolink-headings'),
-              require('remark-mermaid')
+              require('remark-mermaid'),
+              [require('@rigor789/remark-autolink-headings'), {
+                behaviour: 'append'
+              }]
             ]
           }
         }

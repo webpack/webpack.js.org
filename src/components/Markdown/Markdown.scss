@@ -13,13 +13,32 @@
   h6 { font-size: getFontSize(-1); }
 
   h1, h2, h3, h4, h5, h6 {
+    display: flex;
+    align-items: center;
     font-family: $font-stack-heading;
     font-weight:600;
     line-height:1.4;
     margin:1.5em 0 0.25em;
     color:getColor(fiord);
 
-    tt, code { font-size: 90%; color: inherit }
+    tt, code {
+      font-size: 90%;
+      color: inherit;
+    }
+
+    a {
+      margin-left: 8px;
+      font-size: 0.8em;
+      height: 1em;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 250ms;
+    }
+
+    &:hover a {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 
   h1:first-child {

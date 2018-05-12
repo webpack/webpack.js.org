@@ -106,6 +106,7 @@
     "yaml-frontmatter-loader": "^0.1.0"
   },
   "dependencies": {
+    "@rigor789/remark-autolink-headings": "^5.1.0",
     "ajv": "^5.5.2",
     "docsearch.js": "^2.5.2",
     "gitter-sidecar": "^1.2.3",
