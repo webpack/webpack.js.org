@@ -350,7 +350,7 @@ webpack-dev-server --hot-only
 https: true
 ```
 
-使用以下设置自签名证书，但是你可以提供自己的：
+以上设置使用了自签名证书，但是你可以提供自己的：
 
 ```js
 https: {

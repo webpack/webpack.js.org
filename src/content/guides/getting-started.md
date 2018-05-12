@@ -341,7 +341,7 @@ webpack-demo
 
 T> 如果你使用的是 npm 5，你可能还会在目录中看到一个 `package-lock.json` 文件。
 
-如果你想要了解 webpack 的设计思想，你应该查看 [basic concepts](/concepts) 和 [configuration](/configuration) 页面。此外，[API](/api) 章节可以深入了解 webpack 提供的各种借口。
+如果你想要了解 webpack 的设计思想，你应该查看 [basic concepts](/concepts) 和 [configuration](/configuration) 页面。此外，[API](/api) 章节可以深入了解 webpack 提供的各种接口。
 
 ***
 

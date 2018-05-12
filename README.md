@@ -26,13 +26,13 @@ webpack 中文文档
 
 ## 翻译 ##
 
-> [webpack 中文文档](https://doc.webpack-china.org)
+> [webpack 中文文档](https://webpack.docschina.org)
 > [webpack 中文社区](https://webpack-china.org)
 
 
 ### 中文站点
 - [英文站点](https://webpack.js.org/)是由 CI 自动构建并部署到 gh-pages 分支。
-- [中文站点](https://doc.webpack-china.org/)是由 CI 自动构建并部署到 gh-pages  分支。
+- [中文站点](https://webpack.docschina.org/)是由 CI 自动构建并部署到 gh-pages  分支。
 
 
 ### 印记中文翻译流程
@@ -54,6 +54,6 @@ npm start
 
 - [说明 - 你想要知道的所有都在这里了](https://github.com/webpack-china/webpack.js.org/issues/17)
 
-- [翻译人员名单](https://doc.webpack-china.org/about/)中如未收录你的名字，请[访问此处](https://github.com/webpack-china/webpack.js.org/issues/180)留下你的大名(^_^)
+- [翻译人员名单](https://webpack.docschina.org/about/)中如未收录你的名字，请[访问此处](https://github.com/webpack-china/webpack.js.org/issues/180)留下你的大名(^_^)
 
 - Thanks

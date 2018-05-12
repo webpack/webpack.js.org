@@ -7,8 +7,8 @@ module.exports = () => ({
     file: path.join(__dirname, 'template.ejs')
   },
   output: 'build',
-  // title: 'webpack 中文文档',
-  // keywords: ['webpack', 'javascript', 'web development', 'programming'],
+  title: 'webpack 中文文档',
+  keywords: ['webpack', 'javascript', 'web development', 'programming'],
   layout: () => require('./src/components/Site/Site.jsx').default,
   paths: {
     '/': {
