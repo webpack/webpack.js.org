@@ -6,6 +6,7 @@ export default ({
   section = '',
   page = {}
 }) => {
+  let enURL = 'https://webpack.js.org';
   let baseURL = 'https://github.com/webpack-china/webpack.js.org/edit/cn/src/content';
   let indexPath = page.type === 'index' ? '/index' : '';
   let mainPath = page.url.startsWith('/') ? page.url : `/${page.url}`;
@@ -13,6 +14,13 @@ export default ({
 
   return (
     <div className="page-links">
+      <span>
+        <a className="page-links__link" href={ enURL + mainPath } target="_blank">
+          查看原文
+        </a>
+        <span className="page-links__gap">|</span>
+      </span>
+
       { page.file.attributes.repo ? (
         <span>
           <a className="page-links__link" href={ page.file.attributes.repo }>
