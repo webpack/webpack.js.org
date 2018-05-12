@@ -16,7 +16,7 @@ When merging pull requests into the `master` branch, select the _Create Merge Co
 
 ## Releasing
 
-```sh
+```bash
 npm version patch && git push --follow-tags && npm publish
 npm version minor && git push --follow-tags && npm publish
 npm version major && git push --follow-tags && npm publish

@@ -27,7 +27,7 @@ T> The new CLI for webpack is under development. New features are being added su
 
 ## Usage with config file
 
-```sh
+```bash
 webpack [--config webpack.config.js]
 ```
 
@@ -36,7 +36,7 @@ See [configuration](/configuration) for the options in the configuration file.
 
 ## Usage without config file
 
-```sh
+```bash
 webpack <entry> [<entry>] <output>
 ```
 
