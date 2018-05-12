@@ -289,7 +289,7 @@ export default (fixture, options = {}) => {
 
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
-      if (err) reject(err);
+      if (err || stats.hasErrors()) reject(err);
 
       resolve(stats);
     });
