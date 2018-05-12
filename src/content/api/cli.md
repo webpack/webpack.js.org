@@ -95,6 +95,8 @@ This will form the bundle with both the files as separate entry points.
 
 ### Common Options
 
+W> Note that Command Line Interface has a higher precendence for the arguments you use it with than than your configuration file. Examplewise if you pass [`--mode="production"`](https://webpack.js.org/concepts/mode/#usage) to the CLI and your configuration file uses `development`, `production` will be used.
+
 **List all of the options available on the cli**
 
 ```bash
