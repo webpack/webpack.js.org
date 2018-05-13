@@ -9,7 +9,7 @@ import Site from './components/Site/Site';
 
 // Import helpers
 import isClient from './utilities/is-client';
-        
+
 // Import Utilities
 import { FindInContent } from './utilities/content-utils';
 

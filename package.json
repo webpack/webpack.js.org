@@ -110,6 +110,7 @@
     "@rigor789/remark-autolink-headings": "^5.1.0",
     "ajv": "^5.5.2",
     "docsearch.js": "^2.5.2",
+    "fontfaceobserver": "^2.0.13",
     "gitter-sidecar": "^1.2.3",
     "prop-types": "^15.5.10",
     "react": "^16.2.0",

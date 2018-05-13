@@ -4,6 +4,7 @@
 .notification-bar {
   color: getColor(white);
   background: getColor(emperor);
+  height: 37px;
 
   a {
     color: getColor(malibu);
@@ -19,11 +20,17 @@
 }
 
 .notification-bar__inner {
+  font-size: 15px;
+  line-height: 37px;
   position: relative;
-  padding: 0.5em 1em;
+  padding: 0 1em;
 
   @include break {
-    padding: 0.5em 1.5em;
+    padding: 0 1.5em;
+  }
+
+  .source-sans-ready & {
+    font-size: 16px;
   }
 }
 
