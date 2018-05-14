@@ -181,7 +181,7 @@ splitChunks: {
 			test: /[\\/]node_modules[\\/]/,
 			priority: -10
 		},
-    default: {
+		default: {
 			minChunks: 2,
 			priority: -20,
 			reuseExistingChunk: true
