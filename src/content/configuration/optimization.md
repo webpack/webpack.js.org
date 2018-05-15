@@ -59,3 +59,15 @@ module.exports = {
 `object`
 
 By default webpack v4+ provides new common chunks strategies out of the box for dynamically imported modules. See available options for configuring this behavior in the [SplitChunksPlugin](/plugins/split-chunks-plugin/) page.
+
+
+## `optimization.nodeEnv`
+
+`string` `bool: false`
+
+Tells webpack to set `process.env.NODE_ENV` to a given string value. `optimization.nodeEnv` uses [DefinePlugin](/plugins/define-plugin/) unless set to `false`. `optimization.nodeEnv` __defaults__ to [mode](/concepts/mode/) if set, else falls back to `"production"`.
+
+Possible values:
+
+- any string: the value to set `process.env.NODE_ENV` to.
+- false: do not modify/set the value of `process.env.NODE_ENV`.
