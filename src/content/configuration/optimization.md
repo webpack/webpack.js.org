@@ -105,4 +105,4 @@ module.exports = {
 }
 ```
 
-W> If you are using the [CLI](/api/cli/), the webpack process will not exit with an error code by enabling this plugin. If you want webpack to "fail" when using the CLI, please check out the [`bail` option](/api/cli/#advanced-options).
+W> If you are using webpack [CLI](/api/cli/), the webpack process will not exit with an error code while this plugin is enabled. If you want webpack to "fail" when using the CLI, please check out the [`bail` option](/api/cli/#advanced-options).
