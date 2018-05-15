@@ -3,15 +3,19 @@
 @import 'functions';
 
 .gitter {
-  float: right;
+  position: absolute;
+  right: 1.5em;
+  height: calc(100% - 1.5em);
 }
 
 .gitter__button {
-  position: fixed;
-  display: none;
-  padding: 0.75em;
-  bottom: 1.5em;
-  margin-left: -2.75em;
+  position: sticky;
+  display: flex;
+  width: 3em;
+  height: 3em;
+  justify-content: center;
+  align-items: center;
+  top: calc(100% - 3em - 1.5em);
   border-radius: 100%;
   background: #59bcb7;
   cursor: pointer;
@@ -20,10 +24,6 @@
 
   &:hover {
     background: darken(#59bcb7, 10%);
-  }
-
-  @include break {
-    display: block;
   }
 }
 
