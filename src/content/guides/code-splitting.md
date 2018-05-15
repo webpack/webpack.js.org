@@ -24,6 +24,7 @@ contributors:
   - kcolton
   - efreitasn
   - EugeneHlushko
+  - Tiendo1011
 related:
   - title: <link rel=”prefetch/preload”> in webpack
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -242,7 +243,7 @@ __src/index.js__
 -
 -   // Lodash, now imported by this script
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-+   return import(/* webpackChunkName: "lodash" */ 'lodash').then(_ => {
++   return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
 +     var element = document.createElement('div');
 +
 +     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -257,6 +258,8 @@ __src/index.js__
 +   document.body.appendChild(component);
 + })
 ```
+
+The reason we need `default` is since webpack 4, when importing a CommonJS module, the import will no longer resolve to the value of `module.exports`, it will instead create an artificial namespace object for the CommonJS module, for more information on the reason behind this, read [webpack 4: import() and CommonJs](https://medium.com/webpack/webpack-4-import-and-commonjs-d619d626b655)
 
 Note the use of `webpackChunkName` in the comment. This will cause our separate bundle to be named `lodash.bundle.js` instead of just `[id].bundle.js`. For more information on `webpackChunkName` and the other available options, see the [`import()` documentation](/api/module-methods#import-). Let's run webpack to see `lodash` separated out to a separate bundle:
 
@@ -289,7 +292,7 @@ __src/index.js__
 -
 -   }).catch(error => 'An error occurred while loading the component');
 +   var element = document.createElement('div');
-+   const _ = await import(/* webpackChunkName: "lodash" */ 'lodash');
++   const { default: _ } = await import(/* webpackChunkName: "lodash" */ 'lodash');
 +
 +   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +
