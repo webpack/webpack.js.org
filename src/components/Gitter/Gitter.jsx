@@ -24,16 +24,15 @@ export default class Gitter extends React.Component {
   }
 
   componentDidMount() {
-    if ( window.document !== undefined ) {
-      if (!window.gitterLoadTriggered) {
-        window.gitterLoadTriggered = true;
-        import('gitter-sidecar').then(Sidecar => {
+    if (isClient) {
+      import('gitter-sidecar').then(Sidecar => {
+        if (!window.gitterSidecar) {
           window.gitterSidecar = new Sidecar({
             room: 'webpack/webpack',
             activationElement: false
           });
-        });
-      }
+        }
+      });
     }
   }
 }
