@@ -5,7 +5,6 @@ import React from 'react';
 import PageLinks from '../PageLinks/PageLinks';
 import Markdown from '../Markdown/Markdown';
 import Contributors from '../Contributors/Contributors';
-import Gitter from '../Gitter/Gitter';
 import Placeholder from '../Placeholder/Placeholder';
 
 // Load Styling
@@ -88,8 +87,6 @@ class Page extends React.Component {
             </div>
           )}
         </Markdown>
-
-        <Gitter />
       </section>
     );
   }

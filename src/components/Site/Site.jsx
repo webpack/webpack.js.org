@@ -17,6 +17,7 @@ import Sponsors from '../Sponsors/Sponsors';
 import Sidebar from '../Sidebar/Sidebar';
 import Footer from '../Footer/Footer';
 import Page from '../Page/Page';
+import Gitter from '../Gitter/Gitter';
 import Vote from '../Vote/Vote';
 
 // Import helpers
@@ -102,6 +103,7 @@ class Site extends React.Component {
                               <Page
                                 { ...page }
                                 content={ content } />
+                              <Gitter />
                             </React.Fragment>
                           );
                         }} />
