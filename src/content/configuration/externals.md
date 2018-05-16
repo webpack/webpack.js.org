@@ -76,7 +76,8 @@ externals: {
 
 ``` js
 externals : {
-  react: 'react'
+  react: 'React',
+  react-dom: 'ReactDOM'
 }
 
 // or
