@@ -364,7 +364,7 @@ module.exports = {
   </details>
   // Don't follow/bundle these modules, but request them at runtime from the environment
 
-  [serve](https://github.com/webpack-contrib/webpack-serve#webpack-serve): { //object
+  [serve](https://github.com/webpack-contrib/webpack-serve#options): { //object
     port: 1337,
     content './dist',
     // ...
