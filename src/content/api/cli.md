@@ -23,7 +23,9 @@ For proper usage and easy distribution of this configuration, webpack can be con
 
 Have a look at the [installation guide](/guides/installation) if you don't already have webpack installed.
 
-T> The new CLI for webpack is under development. New features are being added such as the `--init` flag. [Check it out!](https://github.com/webpack/webpack-cli)
+The new CLI for webpack is under development. New features are being added such as the `--init` flag. [Check it out!](https://github.com/webpack/webpack-cli)
+
+T> Recently a new lightweight, opinionated webpack CLI became available for use under [webpack-command](https://github.com/webpack-contrib/webpack-command).
 
 
 ## Usage with config file
