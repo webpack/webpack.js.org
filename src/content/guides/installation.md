@@ -34,10 +34,12 @@ If you're using webpack 4 or later, you'll also need to install the [CLI](/api/c
 npm install --save-dev webpack-cli
 ```
 
-Note that there are at least two webpack CLIs available:
+or
 
-- `webpack-cli`: The original webpack full-featured CLI.
-- `webpack-command`: A lightweight, opinionated webpack CLI.
+``` bash
+npm install --save-dev webpack-command
+```
+
 
 Installing locally is what we recommend for most projects. This makes it easier to upgrade projects individually when breaking changes are introduced. Typically webpack is run via one or more [npm scripts](https://docs.npmjs.com/misc/scripts) which will look for a webpack installation in your local `node_modules` directory:
 

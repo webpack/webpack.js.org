@@ -21,11 +21,12 @@ related:
 
 For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the config file.
 
+Users have a choice between two CLI packages to use:
+
+- [webpack-cli](https://github.com/webpack/webpack-cli): the original webpack full-featured CLI.
+- [webpack-command](https://github.com/webpack-contrib/webpack-command): also, lightweight, opinionated and modern CLI.
+
 Have a look at the [installation guide](/guides/installation) if you don't already have webpack installed.
-
-The new CLI for webpack is under development. New features are being added such as the `--init` flag. [Check it out!](https://github.com/webpack/webpack-cli)
-
-T> Recently a new lightweight, opinionated webpack CLI became available for use under [webpack-command](https://github.com/webpack-contrib/webpack-command).
 
 
 ## Usage with config file
