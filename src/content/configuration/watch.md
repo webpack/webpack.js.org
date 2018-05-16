@@ -5,9 +5,11 @@ contributors:
   - sokra
   - skipjack
   - SpaceK33z
+  - EugeneHlushko
 ---
 
 webpack can watch files and recompile whenever they change. This page explains how to enable this and a couple of tweaks you can make if watching does not work properly for you.
+
 
 ## `watch`
 
@@ -20,6 +22,7 @@ watch: false
 ```
 
 T> In webpack-dev-server and webpack-dev-middleware watch mode is enabled by default.
+
 
 ## `watchOptions`
 
@@ -34,6 +37,7 @@ watchOptions: {
 }
 ```
 
+
 ## `watchOptions.aggregateTimeout`
 
 `number`
@@ -44,6 +48,7 @@ Add a delay before rebuilding once the first file changed. This allows webpack t
 aggregateTimeout: 300 // The default
 ```
 
+
 ## `watchOptions.ignored`
 
 For some systems, watching many file systems can result in a lot of CPU or memory usage. It is possible to exclude a huge folder like `node_modules`:
@@ -52,23 +57,35 @@ For some systems, watching many file systems can result in a lot of CPU or memor
 ignored: /node_modules/
 ```
 
-It is also possible to use [anymatch](https://github.com/es128/anymatch) patterns:
+It is also possible to use [anymatch](https://github.com/micromatch/anymatch) patterns:
 
 ```js
 ignored: "files/**/*.js"
 ```
 
+
 ## `watchOptions.poll`
 
 `boolean` `number`
 
-Turn on [polling](http://whatis.techtarget.com/definition/polling) by passing `true`, or specifying a poll interval in milliseconds:
+Turn on [polling](https://whatis.techtarget.com/definition/polling) by passing `true`, or specifying a poll interval in milliseconds:
 
 ```js
 poll: 1000 // Check for changes every second
 ```
 
 T> If watching does not work for you, try out this option. Watching does not work with NFS and machines in VirtualBox.
+
+
+## `info-verbosity`
+
+`string`: `none` `info` `verbose`
+
+Controls verbosity of the lifecycle messaging, e.g. the `Started watching files...` log. Setting `info-verbosity` to `verbose` will also message to console at the beginning and the end of incremental build. `info-verbosity` is set to `info` by default.
+
+```bash
+webpack --watch --info-verbosity verbose
+```
 
 
 ## Troubleshooting

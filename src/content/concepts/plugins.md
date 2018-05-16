@@ -20,21 +20,18 @@ A webpack **plugin** is a JavaScript object that has an [`apply`](https://develo
 **ConsoleLogOnBuildWebpackPlugin.js**
 
 ```javascript
-function ConsoleLogOnBuildWebpackPlugin() {
+const pluginName = 'ConsoleLogOnBuildWebpackPlugin';
 
-};
-
-ConsoleLogOnBuildWebpackPlugin.prototype.apply = function(compiler) {
-  compiler.plugin('run', function(compiler, callback) {
-    console.log("The webpack build process is starting!!!");
-
-    callback();
-  });
-};
+class ConsoleLogOnBuildWebpackPlugin {
+	apply(compiler) {
+		compiler.hooks.run.tap(pluginName, compilation => {
+			console.log("The webpack build process is starting!!!");
+		});
+	}
+}
 ```
 
-T> As a clever JavaScript developer you may remember the [`Function.prototype.apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) method. Because of this method you can pass any function as plugin (`this` will point to the `compiler`). You can use this style to inline custom plugins in your configuration.
-
+First parameter of the tap method of the compiler hook should be a camelized version of the plugin name. It is advisable to use a constant for this so it can be reused in all hooks.
 
 ## Usage
 
