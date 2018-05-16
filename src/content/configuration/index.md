@@ -364,6 +364,13 @@ module.exports = {
   </details>
   // Don't follow/bundle these modules, but request them at runtime from the environment
 
+  [serve](https://github.com/webpack-contrib/webpack-serve#webpack-serve): { //object
+    port: 1337,
+    content './dist',
+    // ...
+  },
+  // lets you provide options for webpack-serve
+
   <details><summary>[stats](/configuration/stats): "errors-only",</summary>
   [stats](/configuration/stats): { //object
     assets: true,
