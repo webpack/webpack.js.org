@@ -167,6 +167,7 @@ Parameter                 | Explanation                                 | Input 
 `--output-pathinfo`       | Include a comment with the request for every dependency | boolean | false
 `--output-public-path`    | The public path for the assets              | string     | /
 `--output-source-map-filename` | The output filename for the SourceMap  | string     | [name].map or [outputFilename].map
+`--build-delimiter` | Display custom text after build output | string | /
 
 
 #### Example Usage
