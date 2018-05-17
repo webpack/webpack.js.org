@@ -1,7 +1,6 @@
 ---
 name: Documentation request
 about: Create a documentation request for a new feature or functionality change.
-
 ---
 
 **Feature to document**
