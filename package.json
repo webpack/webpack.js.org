@@ -32,7 +32,7 @@
     "fetch": "sh src/scripts/fetch.sh",
     "init:generated": "mkdirp ./generated/loaders && mkdirp ./generated/plugins ",
     "lint": "run-s lint:*",
-    "lint:js": "eslint . --ext .js --ext .jsx",
+    "lint:js": "eslint . --ext .js,.jsx,.md",
     "lint:markdown": "markdownlint --config ./.markdownlint.json *.md ./src/content/**/*.md",
     "lint:social": "alex . -q",
     "lint:prose": "cp .proselintrc ~/ && proselint src/content",
