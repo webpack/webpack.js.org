@@ -2,10 +2,12 @@ import React from 'react';
 import Interactive from 'antwar-interactive';
 import Container from '../Container/Container';
 import Sidebar from '../Sidebar/Sidebar';
+import Scaffolding from '../Scaffolding/Scaffolding';
 import PageLinks from '../PageLinks/PageLinks';
 import Gitter from '../Gitter/Gitter';
 import Contributors from '../Contributors/Contributors';
 import Sponsors from '../Sponsors/Sponsors';
+
 import './Page.scss';
 import '../Sidebar/Sidebar.scss';
 import '../Sponsors/Sponsors.scss';
@@ -79,7 +81,7 @@ const Page = ({ page, section }) => {
             </ul>
           </div>
         )}
-
+        {title === "Discover scaffolds" ? <Scaffolding /> : null}
         { contributors.length > 0 && (
           <div>
             <hr />
