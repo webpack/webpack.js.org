@@ -239,6 +239,4 @@ W> This might result in a large chunk containing all external packages. It is re
 
 ## `optimization.runtimeChunk`
 
-Setting `optimization.runtimeChunk` to `true` adds an additonal chunk to each entrypoint containing only the runtime.
-
-The value `single` instead creates a runtime file to be shared for all generated chunks.
+[optimization.runtimeChunk](/configuration/optimization/#optimization-runtimechunk) allows to control runtime chunk generation behaviour.
