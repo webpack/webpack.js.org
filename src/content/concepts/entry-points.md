@@ -8,6 +8,10 @@ contributors:
 
 As mentioned in [Getting Started](/guides/getting-started/#using-a-configuration), there are multiple ways to define the `entry` property in your webpack configuration. We will show you the ways you **can** configure the `entry` property, in addition to explaining why it may be useful to you.
 
+In Webpack 4 you don't add vendor scripts as entry points anymore, how it used to be done back in webpack 3 in conjunction with the `CommonsChunkPlugin`.
+Webpack 4 will build a dependency graph out of your entry scripts and generate optimized bundles for your app by default.
+Nevertheless you can tweak the resulting bundles by configuring the `optimization:splitChunks` section in your webpack.config.js.
+Read more about fine-tuning your output bundles [here](https://webpack.js.org/plugins/split-chunks-plugin/).
 
 ## Single Entry (Shorthand) Syntax
 
@@ -47,8 +51,7 @@ Usage: `entry: {[entryChunkName: string]: string|Array<string>}`
 ```javascript
 const config = {
   entry: {
-    app: './src/app.js',
-    vendors: './src/vendors.js'
+    app: './src/app.js'
   }
 };
 ```
@@ -63,25 +66,17 @@ T> **"Scalable webpack configurations"** are ones that can be reused and combine
 Below is a list of entry configurations and their real-world use cases:
 
 
-### Separate App and Vendor Entries
+### Single Page Application
 
 **webpack.config.js**
 
 ```javascript
 const config = {
   entry: {
-    app: './src/app.js',
-    vendors: './src/vendors.js'
+    entry: './src/entry.js'
   }
 };
 ```
-
-**What does this do?** At face value this tells webpack to create dependency graphs starting at both `app.js` and `vendors.js`. These graphs are completely separate and independent of each other (there will be a webpack bootstrap in each bundle). This is commonly seen with single page applications which have only one entry point (excluding vendors).
-
-**Why?** This setup allows you to leverage `CommonsChunkPlugin` and extract any vendor references from your app bundle into your vendor bundle, replacing them with `__webpack_require__()` calls. If there is no vendor code in your application bundle, then you can achieve a common pattern in webpack known as [long-term vendor-caching](/guides/caching).
-
-?> Consider removing this scenario in favor of the DllPlugin, which provides a better vendor-splitting.
-
 
 ### Multi Page Application
 
@@ -99,8 +94,5 @@ const config = {
 
 **What does this do?** We are telling webpack that we would like 3 separate dependency graphs (like the above example).
 
-**Why?** In a multi-page application, the server is going to fetch a new HTML document for you. The page reloads this new document and assets are redownloaded. However, this gives us the unique opportunity to do multiple things:
-
-- Use `CommonsChunkPlugin` to create bundles of shared application code between each page. Multi-page applications that reuse a lot of code/modules between entry points can greatly benefit from these techniques, as the amount of entry points increase.
-
-T> As a rule of thumb: for each HTML document use exactly one entry point.
+**Why?** In a multi-page application, the server is going to fetch a new HTML document for you. The page reloads this new document and assets are redownloaded.
+T> As a rule of thumb: each HTML document uses exactly one entry point.
