@@ -7,10 +7,10 @@ import isClient from '../../utilities/is-client';
 // Load Styling
 import '../Gitter/Gitter.scss';
 
-let sidecar = false;
+let sidecar = null;
 
 // Create and export component
-export default class Gitter extends React.Component {\
+export default class Gitter extends React.Component {
   render() {
     return (
       <div className="gitter">
@@ -37,6 +37,6 @@ export default class Gitter extends React.Component {\
   }
 
   _handleIconClick = () => {
-    sidecar && sidecar.toggleChat(true)
+    sidecar && sidecar.toggleChat(true);
   }
 }
