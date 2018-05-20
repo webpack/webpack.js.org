@@ -10,7 +10,19 @@ import '../Gitter/Gitter.scss';
 let sidecar = false;
 
 // Create and export component
-export default class Gitter extends React.Component {
+export default class Gitter extends React.Component {\
+  render() {
+    return (
+      <div className="gitter">
+        <div
+          className="gitter__button"
+          onClick={this._handleIconClick}>
+          <i className="gitter__icon icon-gitter" />
+        </div>
+      </div>
+    );
+  }
+
   componentDidMount() {
     if (isClient) {
       import('gitter-sidecar').then(Sidecar => {
@@ -24,17 +36,7 @@ export default class Gitter extends React.Component {
     }
   }
 
-  handleIconClick = () => sidecar && sidecar.toggleChat(true);
-
-  render() {
-    return (
-      <div className="gitter">
-        <div
-          className="gitter__button"
-          onClick={this.handleIconClick}>
-          <i className="gitter__icon icon-gitter" />
-        </div>
-      </div>
-    );
+  _handleIconClick = () => {
+    sidecar && sidecar.toggleChat(true)
   }
 }
