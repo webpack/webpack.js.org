@@ -23,6 +23,14 @@ contributors:
   - sudarsangp
   - kcolton
   - efreitasn
+  - EugeneHlushko
+related:
+  - title: <link rel=”prefetch/preload”> in webpack
+    url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
+  - title: Preload, Prefetch And Priorities in Chrome
+    url: https://medium.com/reloading/preload-prefetch-and-priorities-in-chrome-776165961bbf
+  - title: Preloading content with rel="preload"
+    url: https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
 ---
 
 T> This guide extends the examples provided in [Getting Started](/guides/getting-started) and [Output Management](/guides/output-management). Please make sure you are at least familiar with the examples provided in them.
@@ -294,13 +302,59 @@ __src/index.js__
 ```
 
 
+## Prefetching/Preloading modules
+
+webpack 4.6.0+ adds support for prefetching and preloading.
+
+Using these inline directives while declaring your imports allows webpack to output “Resource Hint” which tells the browser that for:
+
+- prefetch: resource is probably needed for some navigation in the future
+- preload: resource might be needed during the current navigation
+
+Simple prefetch example can be having a `HomePage` component, which renders a `LoginButton` component which then on demand loads a `LoginModal` component after being clicked.
+
+__LoginButton.js__
+
+```js
+//...
+import(/* webpackPrefetch: true */ "LoginModal");
+
+```
+
+This will result in `<link rel="prefetch" href="login-modal-chunk.js">` being appended in the head of the page, which will instruct the browser to prefetch in idle time the `login-modal-chunk.js` file.
+
+T> webpack will add the prefetch hint once the parent chunk has been loaded.
+
+Preload directive has a bunch of differences compared to prefetch:
+
+- A preloaded chunk starts loading in parallel to the parent chunk. A prefetched chunk starts after the parent chunk finish.
+- A preloaded chunk has medium priority and instantly downloaded. A prefetched chunk is downloaded in browser idle time.
+- A preloaded chunk should be instantly requested by the parent chunk. A prefetched chunk can be used anytime in the future.
+- Browser support is different.
+
+Simple preload example can be having a `Component` which always depends on a big library that should be in a separate chunk.
+
+Lets image component `ChartComponent` which needs huge `ChartingLibrary`. It displays a `LoadingIndicator` when rendered and instantly does an on demand import of `ChartingLibrary`:
+
+__ChartComponent.js__
+
+```js
+//...
+import(/* webpackPreload: true */ "ChartingLibrary")
+```
+
+When a page which uses the `ChartComponent` is requested, the charting-library-chunk is also requested via `<link rel="preload">`. Assuming the page-chunk is smaller and finishes faster, the page will be displayed with a `LoadingIndicator`, until the already requested `charting-library-chunk` finishes. This will give a little load time boost since it only needs one round-trip instead of two. Especially in high-latency environments.
+
+T> Using webpackPreload incorrectly can actually hurt performance, so be careful when using it.
+
+
 ## Bundle Analysis
 
 Once you start splitting your code, it can be useful to analyze the output to check where modules have ended up. The [official analyze tool](https://github.com/webpack/analyse) is a good place to start. There are some other community-supported options out there as well:
 
 - [webpack-chart](https://alexkuz.github.io/webpack-chart/): Interactive pie chart for webpack stats.
 - [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/): Visualize and analyze your bundles to see which modules are taking up space and which might be duplicates.
-- [webpack-bundle-analyzer](https://github.com/th0r/webpack-bundle-analyzer): A plugin and CLI utility that represents bundle content as convenient interactive zoomable treemap.
+- [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer): A plugin and CLI utility that represents bundle content as convenient interactive zoomable treemap.
 
 
 ## Next Steps
