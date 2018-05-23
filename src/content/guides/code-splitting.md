@@ -229,7 +229,7 @@ webpack-demo
 |- /node_modules
 ```
 
-Now, instead of statically importing `lodash`, we'll use dynamic importing to separate a chunk:
+Now, instead of statically importing `lodash`, we'll use dynamic imports to separate a chunk:
 
 __src/index.js__
 
@@ -302,7 +302,7 @@ __src/index.js__
 ```
 
 
-## Prefecting/Preloading modules
+## Prefetching/Preloading modules
 
 webpack 4.6.0+ adds support for prefetching and preloading.
 
