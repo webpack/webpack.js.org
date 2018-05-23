@@ -3,6 +3,7 @@ title: SplitChunksPlugin
 contributors:
   - sokra
   - jeremenichelli
+  - chrisdothtml
 related:
   - title: "webpack 4: Code Splitting, chunk graph and the splitChunks optimization"
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -147,7 +148,7 @@ It can match the absolute module resource path or chunk names. When a chunk name
 
 With the `chunks` option the selected chunks can be configured.
 
-There are 3 values possible `"initial"`, `"async"` and `"all"`. When configured the optimization only selects initial chunks, on-demand chunks or all chunks.
+There are 3 values possible `"initial"`, `"async"` and `"all"`. When configured the optimization only selects initial chunks, on-demand chunks or all chunks. Alternatively, you can provide a function that returns whether to include each chunk (your function is given the chunk object as a parameter).
 
 The option `reuseExistingChunk` allows to reuse existing chunks instead of creating a new one when modules match exactly.
 
@@ -181,7 +182,7 @@ splitChunks: {
 			test: /[\\/]node_modules[\\/]/,
 			priority: -10
 		},
-    default: {
+		default: {
 			minChunks: 2,
 			priority: -20,
 			reuseExistingChunk: true
