@@ -34,6 +34,13 @@ class Site extends React.Component {
     mobileSidebarOpen: false
   }
 
+  componentDidMount() {
+    if (isClient) {
+      // dynamically load font bundle on client
+      import('../../fonts.js');
+    }
+  }
+
   render() {
     let { location } = this.props;
     let { mobileSidebarOpen } = this.state;
@@ -44,9 +51,7 @@ class Site extends React.Component {
     return (
       <div className="site">
         <DocumentTitle title={ GetPageTitle(Content, location.pathname) } />
-
         <NotificationBar />
-
         <Navigation
           pathname={ location.pathname }
           toggleSidebar={ this._toggleSidebar }

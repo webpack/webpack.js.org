@@ -3,7 +3,7 @@
 @import 'prism-theme';
 
 .markdown {
-  line-height:1.5em;
+  line-height: 1.5em;
 
   h1 { font-size: getFontSize(4); }
   h2 { font-size: getFontSize(3); }
@@ -15,11 +15,15 @@
   h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: center;
-    font-family: $font-stack-heading;
+    font-family: $font-system-heading;
     font-weight:600;
     line-height:1.4;
     margin:1.5em 0 0.25em;
     color:getColor(fiord);
+
+    .geomanist-ready & {
+      font-family: $font-stack-heading;
+    }
 
     tt, code {
       font-size: 90%;
@@ -274,8 +278,7 @@
   }
 
   code, tt {
-    font-family: $font-stack-code;
-    font-size: 90%;
+    font-family: $font-system-code;
     margin: 0 2px;
     padding: 2px 6px;
     white-space: normal;
