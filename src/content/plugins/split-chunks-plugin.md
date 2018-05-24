@@ -3,6 +3,7 @@ title: SplitChunksPlugin
 contributors:
   - sokra
   - jeremenichelli
+  - EugeneHlushko
 related:
   - title: "webpack 4: Code Splitting, chunk graph and the splitChunks optimization"
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -167,24 +168,32 @@ T> You can combine this configuration with the [HtmlWebpackPlugin](/plugins/html
 
 This configuration object represents the default behavior of the `SplitChunksPlugin`.
 
+__webpack.config.js__
+
+
 ```js
-splitChunks: {
-	chunks: "async",
-	minSize: 30000,
-	minChunks: 1,
-	maxAsyncRequests: 5,
-	maxInitialRequests: 3,
-	automaticNameDelimiter: '~',
-	name: true,
-	cacheGroups: {
-		vendors: {
-			test: /[\\/]node_modules[\\/]/,
-			priority: -10
-		},
-    default: {
-			minChunks: 2,
-			priority: -20,
-			reuseExistingChunk: true
+module.exports = {
+	//...
+	optimization: {
+		splitChunks: {
+			chunks: "async",
+			minSize: 30000,
+			minChunks: 1,
+			maxAsyncRequests: 5,
+			maxInitialRequests: 3,
+			automaticNameDelimiter: '~',
+			name: true,
+			cacheGroups: {
+				vendors: {
+					test: /[\\/]node_modules[\\/]/,
+					priority: -10
+				},
+			default: {
+					minChunks: 2,
+					priority: -20,
+					reuseExistingChunk: true
+				}
+			}
 		}
 	}
 }
@@ -204,13 +213,21 @@ Here are some examples and their effect:
 
 Create a `commons` chunk, which includes all code shared between entry points.
 
+__webpack.config.js__
+
+
 ```js
-splitChunks: {
-	cacheGroups: {
-		commons: {
-			name: "commons",
-			chunks: "initial",
-			minChunks: 2
+module.exports = {
+	//...
+	optimization: {
+			splitChunks: {
+			cacheGroups: {
+				commons: {
+					name: "commons",
+					chunks: "initial",
+					minChunks: 2
+				}
+			}
 		}
 	}
 }
@@ -222,13 +239,21 @@ W> This configuration can enlarge your initial bundles, it is recommended to use
 
 Create a `vendors` chunk, which includes all code from `node_modules` in the whole application.
 
+__webpack.config.js__
+
+
 ``` js
-splitChunks: {
-	cacheGroups: {
-		commons: {
-			test: /[\\/]node_modules[\\/]/,
-			name: "vendors",
-			chunks: "all"
+module.exports = {
+	//...
+	optimization: {
+		splitChunks: {
+			cacheGroups: {
+				commons: {
+					test: /[\\/]node_modules[\\/]/,
+					name: "vendors",
+					chunks: "all"
+				}
+			}
 		}
 	}
 }
@@ -239,6 +264,4 @@ W> This might result in a large chunk containing all external packages. It is re
 
 ## `optimization.runtimeChunk`
 
-Setting `optimization.runtimeChunk` to `true` adds an additonal chunk to each entrypoint containing only the runtime.
-
-The value `single` instead creates a runtime file to be shared for all generated chunks.
+[optimization.runtimeChunk](/configuration/optimization/#optimization-runtimechunk) allows to control runtime chunk generation behaviour.
