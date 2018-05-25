@@ -11,7 +11,7 @@ related:
 
 Originally, chunks (and modules imported inside them) were connected by a parent-child relationship in the internal webpack graph. The `CommonsChunkPlugin` was used to avoid duplicated dependencies across them, but further optimizations where not possible
 
-Since webpack v4, the `CommonsChunkPlugin` was removed in favor of `optimization.splitChunks` and `optimization.runtimeChunk` options. Here is how the new flow works.
+Since webpack v4, the `CommonsChunkPlugin` was removed in favor of `optimization.splitChunks`.
 
 
 ## Defaults
