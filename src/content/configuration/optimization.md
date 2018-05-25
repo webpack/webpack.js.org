@@ -45,11 +45,13 @@ __webpack.config.js__
 
 
 ```js
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
 module.exports = {
   //...
   optimization: {
     minimizer: [
-      new webpack.optimize.UglifyJsPlugin({ /* your config */ })
+      new UglifyJsPlugin({ /* your config */ })
     ]
   }
 }
