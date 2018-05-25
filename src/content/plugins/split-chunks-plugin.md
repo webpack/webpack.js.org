@@ -77,13 +77,13 @@ This indicates which chunks will be selected for optimization. If a string is pr
 
 ```js
 module.exports = {
-  //...
-  optimization: {
-    splitChunks: {
-      // include all types of chunks
-      chunks: "all"
-    }
-  }
+	//...
+	optimization: {
+		splitChunks: {
+			// include all types of chunks
+			chunks: "all"
+		}
+	}
 }
 ```
 
@@ -91,15 +91,15 @@ Alternatively, you can provide a function for more control. The return value wil
 
 ```js
 module.exports = {
-  //...
-  optimization: {
-    splitChunks: {
-      chunks (chunk) {
-        // exclude `my-excluded-chunk`
-        return chunk.name !== "my-excluded-chunk"
-      }
-    }
-  }
+	//...
+	optimization: {
+		splitChunks: {
+			chunks (chunk) {
+				// exclude `my-excluded-chunk`
+				return chunk.name !== "my-excluded-chunk"
+			}
+		}
+	}
 }
 ```
 
@@ -137,15 +137,15 @@ The name of the split chunk. Providing `true` will automatically generate a name
 
 ```js
 module.exports = {
-  //...
-  optimization: {
-    splitChunks: {
-      name (module) {
-        // generate a chunk name...
-        return //...
-      }
-    }
-  }
+	//...
+	optimization: {
+		splitChunks: {
+			name (module) {
+				// generate a chunk name...
+				return //...
+			}
+		}
+	}
 }
 ```
 
@@ -157,14 +157,14 @@ Cache groups can inherit and/or override any options from `splitChunks.*`; but `
 
 ```js
 module.exports = {
-  //...
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        default: false
-      }
-    }
-  }
+	//...
+	optimization: {
+		splitChunks: {
+			cacheGroups: {
+				default: false
+			}
+		}
+	}
 }
 ```
 
@@ -188,15 +188,15 @@ Controls which modules are selected by this cache group. Omitting it selects all
 
 ```js
 module.exports = {
-  //...
-  optimization: {
-    splitChunks: {
-      test (chunks) {
-        //...
-        return true
-      }
-    }
-  }
+	//...
+	optimization: {
+		splitChunks: {
+			test (chunks) {
+				//...
+				return true
+			}
+		}
+	}
 }
 ```
 
