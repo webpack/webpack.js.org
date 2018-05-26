@@ -4,12 +4,14 @@ contributors:
   - sokra
   - jeremenichelli
   - chrisdothtml
+  - EugeneHlushko
+
 related:
   - title: "webpack 4: Code Splitting, chunk graph and the splitChunks optimization"
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
 
-Originally, chunks (and modules imported inside them) were connected by a parent-child relationship in the internal webpack graph. The `CommonsChunkPlugin` was used to avoid duplicated dependencies across them, but further optimizations where not possible
+Originally, chunks (and modules imported inside them) were connected by a parent-child relationship in the internal webpack graph. The `CommonsChunkPlugin` was used to avoid duplicated dependencies across them, but further optimizations were not possible
 
 Since webpack v4, the `CommonsChunkPlugin` was removed in favor of `optimization.splitChunks`.
 
@@ -268,13 +270,21 @@ Putting the content of `helpers` into each chunk will result into its code being
 
 Create a `commons` chunk, which includes all code shared between entry points.
 
+__webpack.config.js__
+
+
 ```js
-splitChunks: {
-	cacheGroups: {
-		commons: {
-			name: "commons",
-			chunks: "initial",
-			minChunks: 2
+module.exports = {
+	//...
+	optimization: {
+			splitChunks: {
+			cacheGroups: {
+				commons: {
+					name: "commons",
+					chunks: "initial",
+					minChunks: 2
+				}
+			}
 		}
 	}
 }
@@ -286,13 +296,21 @@ W> This configuration can enlarge your initial bundles, it is recommended to use
 
 Create a `vendors` chunk, which includes all code from `node_modules` in the whole application.
 
+__webpack.config.js__
+
+
 ``` js
-splitChunks: {
-	cacheGroups: {
-		commons: {
-			test: /[\\/]node_modules[\\/]/,
-			name: "vendors",
-			chunks: "all"
+module.exports = {
+	//...
+	optimization: {
+		splitChunks: {
+			cacheGroups: {
+				commons: {
+					test: /[\\/]node_modules[\\/]/,
+					name: "vendors",
+					chunks: "all"
+				}
+			}
 		}
 	}
 }
