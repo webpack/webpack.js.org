@@ -180,7 +180,7 @@ A module can belong to multiple cache groups. The optimization will prefer the c
 
 `boolean`
 
-If one of your chunks contains only modules that are already going to be split out, it will be reused instead of a new one being generated. This can impact the resulting file name of the chunk.
+If the current chunk contains modules already split out from the main bundle, it will be reused instead of a new one being generated. This can impact the resulting file name of the chunk.
 
 #### `splitChunks.cacheGroups.test`
 
