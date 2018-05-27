@@ -4,12 +4,12 @@
  * @param {object}   tree     - Any node in the content tree
  * @param {function} callback - Run on every descendant as well as the given `tree`
  */
-export const WalkContent = (tree, callback) => {
+export const walkContent = (tree, callback) => {
   callback(tree);
 
   if ( tree.children ) {
     tree.children.forEach(child => {
-      WalkContent(child, callback);
+      walkContent(child, callback);
     });
   }
 };
@@ -20,11 +20,11 @@ export const WalkContent = (tree, callback) => {
  * @param  {object} tree - Any node in the content tree
  * @return {array}       - A flattened list of leaf node descendants
  */
-export const FlattenContent = tree => {
+export const flattenContent = tree => {
   if ( tree.children ) {
     return tree.children.reduce((flat, item) => {
       return flat.concat(
-        Array.isArray(item.children) ? FlattenContent(item) : item
+        Array.isArray(item.children) ? flattenContent(item) : item
       );
     }, []);
 
@@ -38,8 +38,8 @@ export const FlattenContent = tree => {
  * @param  {function} test - A callback to find any leaf node in the given `tree`
  * @return {object}        - The first leaf node that passes the `test`
  */
-export const FindInContent = (tree, test) => {
-  let list = FlattenContent(tree);
+export const findInContent = (tree, test) => {
+  let list = flattenContent(tree);
 
   return list.find(test);
 };
@@ -50,7 +50,7 @@ export const FindInContent = (tree, test) => {
  * @param  {object} tree - Any node in the content tree
  * @return {array}       - Immediate children of the given `tree` that are directories
  */
-export const ExtractSections = tree => {
+export const extractSections = tree => {
   return tree.children.filter(item => item.type === 'directory');
 };
 
@@ -60,8 +60,8 @@ export const ExtractSections = tree => {
  * @param  {object} tree - Any node in the content tree
  * @return {array}       - All markdown descendants of the given `tree`
  */
-export const ExtractPages = tree => {
-  return FlattenContent(tree).filter(item => item.extension === '.md');
+export const extractPages = tree => {
+  return flattenContent(tree).filter(item => item.extension === '.md');
 };
 
 /**
@@ -71,8 +71,8 @@ export const ExtractPages = tree => {
  * @param  {string} path - The pathname (aka route) for which to find a title
  * @return {string}      - The title specified by that page or a fallback
  */
-export const GetPageTitle = (tree, path) => {
-  let page = FindInContent(tree, item => item.url === path);
+export const getPageTitle = (tree, path) => {
+  let page = findInContent(tree, item => item.url === path);
   let title;
 
   if ( !page ) {

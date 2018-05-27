@@ -9,8 +9,10 @@
     "transform-class-properties"
   ],
   "env": {
-    "development": [
-      "react-hot-loader/babel"
-    ]
+    "development": {
+      "plugins": [
+        "react-hot-loader/babel"
+      ]
+    }
   }
 }

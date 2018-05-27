@@ -5,7 +5,7 @@ import { hot as Hot } from 'react-hot-loader';
 import DocumentTitle from 'react-document-title';
 
 // Import Utilities
-import { ExtractPages, ExtractSections, GetPageTitle } from '../../utilities/content-utils';
+import { extractPages, extractSections, getPageTitle } from '../../utilities/content-utils';
 import isClient from '../../utilities/is-client';
 
 // Import Components
@@ -37,16 +37,14 @@ class Site extends React.Component {
   render() {
     let { location } = this.props;
     let { mobileSidebarOpen } = this.state;
-    let sections = ExtractSections(Content);
+    let sections = extractSections(Content);
     let section = sections.find(({ url }) => location.pathname.startsWith(url));
-    let pages = ExtractPages(Content);
+    let pages = extractPages(Content);
 
     return (
       <div className="site">
-        <DocumentTitle title={ GetPageTitle(Content, location.pathname) } />
-
+        <DocumentTitle title={ getPageTitle(Content, location.pathname) } />
         <NotificationBar />
-
         <Navigation
           pathname={ location.pathname }
           toggleSidebar={ this._toggleSidebar }
@@ -116,7 +114,6 @@ class Site extends React.Component {
                 </Container>
               )} />
           </Switch>
-
         <Footer />
       </div>
     );
