@@ -24,8 +24,11 @@
     "node": ">=8.9.4"
   },
   "scripts": {
+    "clean": "rimraf ./dist",
+    "prestart": "npm run clean",
     "start": "NODE_ENV=development webpack-dev-server --config webpack.dev.js --env.dev",
-    "build": "NODE_ENV=production webpack --config webpack.prod.js",
+    "prebuild": "npm run clean",
+    "build": " NODE_ENV=production webpack --config webpack.prod.js",
     "fetch": "sh src/scripts/fetch.sh",
     "test": "npm run lint",
     "lint": "run-s lint:*",
@@ -49,7 +52,6 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
-    "clean-webpack-plugin": "^0.1.17",
     "copy-webpack-plugin": "^4.3.0",
     "css-loader": "^0.28.5",
     "directory-tree-webpack-plugin": "^0.3.1",
@@ -95,6 +97,7 @@
     "remark-slug": "^5.0.0",
     "request": "^2.81.0",
     "request-promise": "^4.2.2",
+    "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
     "sitemap-static": "^0.4.2",
     "static-site-generator-webpack-plugin": "^3.4.1",

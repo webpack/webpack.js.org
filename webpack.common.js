@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
-const CleanPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const DirectoryTreePlugin = require('directory-tree-webpack-plugin');
@@ -108,7 +107,6 @@ module.exports = (env = {}) => ({
     ]
   },
   plugins: [
-    new CleanPlugin('dist'),
     new ExtractTextPlugin({
       filename: '[chunkhash].css',
       allChunks: true,
