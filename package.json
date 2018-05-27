@@ -38,6 +38,7 @@
     "lint:prose": "cp .proselintrc ~/ && proselint src/content",
     "todo": "... && npm run sitemap && echo webpack.js.org > build/CNAME",
     "sitemap": "cd dist && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml",
+    "serve": "npm run build && sirv start ./dist --port 4000",
     "deploy": "gh-pages -d build"
   },
   "devDependencies": {
@@ -66,7 +67,6 @@
     "gh-pages": "^1.0.0",
     "html-webpack-plugin": "^2.30.1",
     "html-webpack-template": "^6.1.0",
-    "http-server": "^0.10.0",
     "hyperlink": "^3.0.1",
     "loader-utils": "^1.1.0",
     "lodash": "^4.17.4",
@@ -99,6 +99,7 @@
     "request-promise": "^4.2.2",
     "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
+    "sirv-cli": "^0.1.2",
     "sitemap-static": "^0.4.2",
     "static-site-generator-webpack-plugin": "^3.4.1",
     "style-loader": "^0.18.2",
