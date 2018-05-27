@@ -24,8 +24,8 @@
     "node": ">=8.9.4"
   },
   "scripts": {
-    "start": "webpack-dev-server --config webpack.dev.js --env.dev",
-    "build": "webpack --config webpack.prod.js",
+    "start": "NODE_ENV=development webpack-dev-server --config webpack.dev.js --env.dev",
+    "build": "NODE_ENV=production webpack --config webpack.prod.js",
     "fetch": "sh src/scripts/fetch.sh",
     "test": "npm run lint",
     "lint": "run-s lint:*",

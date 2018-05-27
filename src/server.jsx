@@ -12,9 +12,6 @@ import Site from './components/Site/Site';
 // Import Images
 import Favicon from './favicon.ico';
 
-// Import Content Tree
-import Content from './_content.json';
-
 // Define bundles (previously used `Object.values(locals.assets)`) but
 // can't retrieve from there anymore due to separate compilation.
 const bundles = [
@@ -25,7 +22,7 @@ const bundles = [
 // Export method for `SSGPlugin`
 export default locals => {
   let { assets } = locals.webpackStats.compilation;
-  let title = GetPageTitle(Content, locals.path);
+  let title = GetPageTitle(locals.content, locals.path);
 
   return ReactDOMServer.renderToString(
     <StaticRouter location={locals.path} context={{}}>

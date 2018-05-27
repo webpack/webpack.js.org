@@ -4,9 +4,13 @@
     "react"
   ],
   "plugins": [
-    "react-hot-loader/babel",
     "syntax-dynamic-import",
     "transform-object-rest-spread",
     "transform-class-properties"
-  ]
+  ],
+  "env": {
+    "development": [
+      "react-hot-loader/babel"
+    ]
+  }
 }
