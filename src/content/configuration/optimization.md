@@ -45,11 +45,13 @@ __webpack.config.js__
 
 
 ```js
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
 module.exports = {
   //...
   optimization: {
     minimizer: [
-      new webpack.optimize.UglifyJsPlugin({ /* your config */ })
+      new UglifyJsPlugin({ /* your config */ })
     ]
   }
 }
@@ -72,6 +74,10 @@ It is possible to use preset mode of the plugin by providing a string value:
 - `multiple`: creates multiple runtime files for common chunks.
 
 By setting `optimization.runtimeChunk` to `object` it is only possible to provide the `name` property which stands for the name or name factory for the runtime chunks.
+
+Default is `false`: each entry chunk embeds runtime.
+
+W> Imported modules are initialized for each runtime chunk separately, so if you include multiple entrypoints on a page, beware of this behavior. You will probably want to set it to `single` or use another configuration that allows you to only have one runtime instance.
 
 __webpack.config.js__
 

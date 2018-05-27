@@ -70,8 +70,8 @@ Use the `DllPlugin` to move code that is changed less often into a separate comp
 Decrease the total size of the compilation to increase build performance. Try to keep chunks small.
 
 - Use fewer/smaller libraries.
-- Use the `CommonsChunksPlugin` in Multi-Page Applications.
-- Use the `CommonsChunksPlugin` in `async` mode in Multi-Page Applications.
+- Use the `CommonsChunkPlugin` in Multi-Page Applications.
+- Use the `CommonsChunkPlugin` in `async` mode in Multi-Page Applications.
 - Remove unused code.
 - Only compile the part of the code you are currently developing on.
 
