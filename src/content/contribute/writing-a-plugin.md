@@ -34,19 +34,6 @@ MyExampleWebpackPlugin.prototype.apply = function(compiler) {
 };
 ```
 
-## Compiler and Compilation
-
-Among the two most important resources while developing plugins are the `compiler` and `compilation` objects. Understanding their roles is an important first step in extending the webpack engine.
-
-- The `compiler` object represents the fully configured webpack environment. This object is built once upon starting webpack, and is configured with all operational settings including options, loaders, and plugins. When applying a plugin to the webpack environment, the plugin will receive a reference to this compiler. Use the compiler to access the main webpack environment.
-
-- A `compilation` object represents a single build of versioned assets. While running webpack development middleware, a new compilation will be created each time a file change is detected, thus generating a new set of compiled assets. A compilation surfaces information about the present state of module resources, compiled assets, changed files, and watched dependencies. The compilation also provides many callback points at which a plugin may choose to perform custom actions.
-
-These two components are an integral part of any webpack plugin (especially a `compilation`), so developers will benefit by familiarizing themselves with these source files:
-
-- [Compiler Source](https://github.com/webpack/webpack/blob/master/lib/Compiler.js)
-- [Compilation Source](https://github.com/webpack/webpack/blob/master/lib/Compilation.js)
-
 ## Basic plugin architecture
 
 Plugins are instantiated objects with an `apply` method on their prototype. This `apply` method is called once by the webpack compiler while installing the plugin. The `apply` method is given a reference to the underlying webpack compiler, which grants access to compiler callbacks. A simple plugin is structured as follows:
@@ -78,9 +65,22 @@ var webpackConfig = {
 };
 ```
 
-## Accessing the compilation
+## Compiler and Compilation
 
-Using the compiler object, you may setup event hooks that provide a reference to each new compilation. These compilations provide additional event hooks for hooking into steps within the build process.
+Among the two most important resources while developing plugins are the `compiler` and `compilation` objects. Understanding their roles is an important first step in extending the webpack engine.
+
+- The `compiler` object represents the fully configured webpack environment. This object is built once upon starting webpack, and is configured with all operational settings including options, loaders, and plugins. When applying a plugin to the webpack environment, the plugin will receive a reference to this compiler. Use the compiler to access the main webpack environment.
+
+- A `compilation` object represents a single build of versioned assets. While running webpack development middleware, a new compilation will be created each time a file change is detected, thus generating a new set of compiled assets. A compilation surfaces information about the present state of module resources, compiled assets, changed files, and watched dependencies. The compilation also provides many callback points at which a plugin may choose to perform custom actions.
+
+These two components are an integral part of any webpack plugin (especially a `compilation`), so developers will benefit by familiarizing themselves with these source files:
+
+- [Compiler Source](https://github.com/webpack/webpack/blob/master/lib/Compiler.js)
+- [Compilation Source](https://github.com/webpack/webpack/blob/master/lib/Compilation.js)
+
+## Accessing Compilation
+
+Compiler exposes a bunch of hooks that provide a reference to each new compilation. Compilations, in their turn, provide additional event hooks for tapping into steps within the build process.
 
 ```javascript
 function HelloCompilationPlugin(options) {}
@@ -99,7 +99,7 @@ HelloCompilationPlugin.prototype.apply = function(compiler) {
 module.exports = HelloCompilationPlugin;
 ```
 
-For more information on what hooks are available on the `compiler`, `compilation`, and other important objects, see the [plugins](/api/plugins/) doc.
+The list of hooks available on the `compiler`, `compilation`, and other important objects, see the [plugins API](/api/plugins/) docs.
 
 ## Async event hooks
 
