@@ -5,14 +5,22 @@ const merge = require('webpack-merge');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const SSGPlugin = require('static-site-generator-webpack-plugin');
 const RedirectWebpackPlugin = require('redirect-webpack-plugin');
+const flattenContentTree = require('./src/utilities/flatten-content-tree');
+const contentTree = require('./src/_content.json');
 
 // Load Common Configuration
 const common = require('./webpack.common.js');
 
-// ...
+// content tree to path array
+const paths = flattenContentTree(contentTree);
+
+// Prod only config
 const prod = {
   plugins: [
-    new UglifyJSPlugin(),
+    new UglifyJSPlugin({
+      parallel: true,
+      exclude: /^(server)/
+    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     })
@@ -28,9 +36,12 @@ module.exports = env => [
     },
     plugins: [
       new SSGPlugin({
-        crawl: true,
         globals: {
           window: {}
+        },
+        paths,
+        locals: {
+          content: contentTree
         }
       }),
       new RedirectWebpackPlugin({

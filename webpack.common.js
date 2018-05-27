@@ -8,7 +8,6 @@ const DirectoryTreePlugin = require('directory-tree-webpack-plugin');
 const TreeEnhancer = require('./src/utilities/tree-plugin-enhancer.js');
 
 module.exports = (env = {}) => ({
-  devtool: 'source-map',
   context: path.resolve(__dirname, './src'),
   entry: {
     index: './index.jsx',
