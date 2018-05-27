@@ -10,28 +10,30 @@ Plugins expose the full potential of the webpack engine to third-party developer
 
 ## Creating a Plugin
 
-A plugin for `webpack` consists of a named JavaScript function that:
+A plugin for `webpack` consists of a named JavaScript class that:
 
-- Defines `apply` method in its prototype.
+- Defines the `apply` method.
 - Specifies an [event hook](/api/compiler-hooks/) on which to bind itself.
 - Manipulates webpack internal instance specific data.
 
 ```javascript
-// A named JavaScript function.
-function MyExampleWebpackPlugin() {
+// A named JavaScript class...
+class MyExampleWebpackPlugin {
+  // ...that defines `apply` method in its prototype...
+  apply(compiler) {
+    // ...specifies webpack’s event hook to attach itself..
+    compiler.hooks.compile.tapAsync(
+      'afterCompile',
+      (compilation, callback) => {
+        // ...and manipulates webpack internal instance specific data.
+        console.log('This is an example plugin!!!');
+        console.log('Here’s the compilation object:', compilation);
 
+        callback();
+      }
+    );
+  };
 }
-
-// Defines `apply` method in its prototype.
-MyExampleWebpackPlugin.prototype.apply = function(compiler) {
-  // Specifies webpack's event hook to attach itself
-  compiler.hooks.compile.tapAsync('afterCompile', function(compilation /* Manipulates webpack internal instance specific data. */, callback) {
-    console.log('This is an example plugin!!!');
-
-    // Invokes webpack provided callback after functionality is complete.
-    callback();
-  });
-};
 ```
 
 ## Basic plugin architecture
@@ -39,15 +41,18 @@ MyExampleWebpackPlugin.prototype.apply = function(compiler) {
 Plugins are instantiated objects with an `apply` method on their prototype. This `apply` method is called once by the webpack compiler while installing the plugin. The `apply` method is given a reference to the underlying webpack compiler, which grants access to compiler callbacks. A simple plugin is structured as follows:
 
 ```javascript
-function HelloWorldPlugin(options) {
-  // Setup the plugin instance with options...
+class HelloWorldPlugin {
+  constructor(options) {
+    this.options = options;
+  }
+  
+  apply(compiler) {
+    compiler.hooks.done.tap('HelloWorldPlugin', () => {
+      console.log('Hello World!');
+      console.log(this.options);
+    });
+  }
 }
-
-HelloWorldPlugin.prototype.apply = function(compiler) {
-  compiler.hooks.done.tap('HelloWorldPlugin', function() {
-    console.log('Hello World!');
-  });
-};
 
 module.exports = HelloWorldPlugin;
 ```
@@ -55,12 +60,13 @@ module.exports = HelloWorldPlugin;
 Then to use the plugin, just include an instance in your webpack config `plugins` array:
 
 ```javascript
+// webpack.config.js
 var HelloWorldPlugin = require('hello-world');
 
-var webpackConfig = {
+module.exports = {
   // ... config settings here ...
   plugins: [
-    new HelloWorldPlugin({options: true})
+    new HelloWorldPlugin({setting: true})
   ]
 };
 ```
@@ -83,18 +89,17 @@ These two components are an integral part of any webpack plugin (especially a `c
 Compiler exposes a bunch of hooks that provide a reference to each new compilation. Compilations, in their turn, provide additional event hooks for tapping into steps within the build process.
 
 ```javascript
-function HelloCompilationPlugin(options) {}
-
-HelloCompilationPlugin.prototype.apply = function(compiler) {
-  // Setup callback for accessing a compilation:
-  compiler.hooks.compilation.tap("HelloCompilationPlugin", function(compilation) {
-
-    // Now setup callbacks for accessing compilation steps:
-    compilation.hooks.optimize.tap("HelloCompilationPlugin", function() {
-      console.log("Assets are being optimized.");
+class HelloCompilationPlugin {
+  apply(compiler) {
+    // Setup callback for accessing a compilation:
+    compiler.hooks.compilation.tap("HelloCompilationPlugin", (compilation) => {
+      // Now setup callbacks for accessing compilation steps:
+      compilation.hooks.optimize.tap("HelloCompilationPlugin", () => {
+        console.log("Hello compilation!");
+      });
     });
-  });
-};
+  }
+}
 
 module.exports = HelloCompilationPlugin;
 ```
@@ -106,33 +111,33 @@ The list of hooks available on the `compiler`, `compilation`, and other importan
 Some event hooks are asynchronous. Apart from `tap`, they also have `tapAsync` and `tapPromise` methods. By tapping using these methods, you can do asynchronous actions inside hooks:
 
 ```javascript
-function HelloAsyncPlugin(options) {}
-
-HelloAsyncPlugin.prototype.apply = function(compiler) {
-  // tapAsync() is callback-based
-  compiler.hooks.emit.tapAsync('HelloAsyncPlugin', function(compilation, callback) {
-    // Do something async...
-    setTimeout(function() {
-      console.log("Done with async work...");
-      callback();
-    }, 1000);
-  });
-  
-  // tapPromise() is promise-based
-  compiler.hooks.emit.tapPromise('HelloAsyncPlugin', function(compilation) {
-    // Do something async...
-    return doSomethingAsync()
-      .then(() => {
+class HelloAsyncPlugin {
+  apply(compiler) {
+    // tapAsync() is callback-based
+    compiler.hooks.emit.tapAsync('HelloAsyncPlugin', function(compilation, callback) {
+      // Do something async...
+      setTimeout(function() {
         console.log("Done with async work...");
-      });
-  });
-  
-  // Plain old tap() is still here:
-  compiler.hooks.emit.tap('HelloAsyncPlugin', function() {
-    // No async work here
-    console.log("Done with sync work...");
-  });
-};
+        callback();
+      }, 1000);
+    });
+
+    // tapPromise() is promise-based
+    compiler.hooks.emit.tapPromise('HelloAsyncPlugin', (compilation) => {
+      // Do something async...
+      return doSomethingAsync()
+        .then(() => {
+          console.log("Done with async work...");
+        });
+    });
+
+    // Plain old tap() is still here:
+    compiler.hooks.emit.tap('HelloAsyncPlugin', () => {
+      // No async work here
+      console.log("Done with sync work...");
+    });
+  }
+}
 
 module.exports = HelloAsyncPlugin;
 ```
@@ -144,32 +149,32 @@ Once we can latch onto the webpack compiler and each individual compilations, th
 Let's write a simple example plugin that generates a new build file called `filelist.md`; the contents of which will list all of the asset files in our build. This plugin might look something like this:
 
 ```javascript
-function FileListPlugin(options) {}
+class FileListPlugin {
+  apply(compiler) {
+    compiler.hooks.emit.tapAsync('FileListPlugin', (compilation, callback) => {
+      // Create a header string for the generated file:
+      var filelist = 'In this build:\n\n';
 
-FileListPlugin.prototype.apply = function(compiler) {
-  compiler.hooks.emit.tapAsync('FileListPlugin', function(compilation, callback) {
-    // Create a header string for the generated file:
-    var filelist = 'In this build:\n\n';
-
-    // Loop through all compiled assets,
-    // adding a new line item for each filename.
-    for (var filename in compilation.assets) {
-      filelist += ('- '+ filename +'\n');
-    }
-
-    // Insert this list into the webpack build as a new file asset:
-    compilation.assets['filelist.md'] = {
-      source: function() {
-        return filelist;
-      },
-      size: function() {
-        return filelist.length;
+      // Loop through all compiled assets,
+      // adding a new line item for each filename.
+      for (var filename in compilation.assets) {
+        filelist += ('- '+ filename +'\n');
       }
-    };
 
-    callback();
-  });
-};
+      // Insert this list into the webpack build as a new file asset:
+      compilation.assets['filelist.md'] = {
+        source() {
+          return filelist;
+        },
+        size() {
+          return filelist.length;
+        }
+      };
+
+      callback();
+    });
+  }
+}
 
 module.exports = FileListPlugin;
 ```
