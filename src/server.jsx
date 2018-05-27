@@ -4,7 +4,7 @@ import ReactDOMServer from 'react-dom/server';
 import { StaticRouter, Route } from 'react-router-dom';
 
 // Import Utilities
-import { GetPageTitle } from './utilities/content-utils';
+import { getPageTitle } from './utilities/content-utils';
 
 // Import Components
 import Site from './components/Site/Site';
@@ -22,7 +22,7 @@ const bundles = [
 // Export method for `SSGPlugin`
 export default locals => {
   let { assets } = locals.webpackStats.compilation;
-  let title = GetPageTitle(locals.content, locals.path);
+  let title = getPageTitle(locals.content, locals.path);
 
   return ReactDOMServer.renderToString(
     <StaticRouter location={locals.path} context={{}}>
@@ -48,9 +48,7 @@ export default locals => {
                   import={ path => require(`./content/${path}`) } />
               )} />
           </div>
-          { bundles.map(path => (
-            <script key={ path } src={ path } />
-          ))}
+          { bundles.map(path => <script key={ path } src={ path } />) }
         </body>
       </html>
     </StaticRouter>
