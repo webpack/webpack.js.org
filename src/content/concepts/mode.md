@@ -81,7 +81,7 @@ module.exports = {
 }
 ```
 
-if you want to change the behavior according the **mode** variable inside the *webpack.config.js* you have to export a function instead of an object:
+If you want to change the behavior according the **mode** variable inside the *webpack.config.js* you have to export a function instead of an object:
 
 ```javascript
 var config = {
