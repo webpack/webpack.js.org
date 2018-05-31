@@ -80,3 +80,26 @@ module.exports = {
 -  ]
 }
 ```
+
+if you want to change the behavior according the **mode** variable inside the *webpack.config.js* you have to export a function instead of an object:
+
+```javascript
+var config = {
+  entry: "./app.js"
+  ..
+}
+
+module.exports = (env, argv) => {
+  console.log(argv.mode)        // outputs the mode
+  
+  if (argv.mode === "development") {
+    config.devtool = "source-map";
+  }
+  
+  if (argv.mode === "production") {
+  }
+  
+  return config;
+}
+
+```
