@@ -6,7 +6,7 @@ const slug = require('remark-slug');
 // TODO: Extract these to separate packages
 const extractAnchors = require('./remark-extract-anchors');
 
-function enhance(tree, options) {
+const enhance = (tree, options) => {
   // delete `./` root directory on node
   const dir = options.dir.replace(/^(\.\/)/gm, '');
 
@@ -48,11 +48,9 @@ function enhance(tree, options) {
   }
 }
 
-function filter(item) {
-  return item.name !== 'images';
-}
+const filter = (item) => true;
 
-function sort(a, b) {
+const sort = (a, b) => {
   let group1 = (a.group || '').toLowerCase();
   let group2 = (b.group || '').toLowerCase();
 
