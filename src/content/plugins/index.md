@@ -42,5 +42,3 @@ Name                                                     | Description
 [`ZopfliWebpackPlugin`](/plugins/zopfli-webpack-plugin)          | Prepare compressed versions of assets with node-zopfli
 
 For more third-party plugins, see the list from [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#webpack-plugins).
-
-![Awesome](../images/awesome-badge.svg)

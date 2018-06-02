@@ -1,25 +1,19 @@
 const flattenContentTree = (tree) => {
-  const entries = tree.children;
+  let paths = [];
 
-  let flatPaths = [];
-
-  entries.map(entry => {
-    // push root url if present
-    if ('url' in entry) {
-      flatPaths.push(entry.url)
+  const crawl = (node) => {
+    if ('url' in node) {
+      paths.push(node.url);
     }
 
-    // push children children urls
-    if ('children' in entry) {
-      entry.children.map(child => {
-        if ('url' in child) {
-          flatPaths.push(child.url)
-        }
-      })
+    if ('children' in node) {
+      node.children.map(crawl);
     }
-  });
+  }
 
-  return flatPaths
+  tree.children.map(crawl);
+
+  return paths;
 }
 
-module.exports = flattenContentTree
+module.exports = flattenContentTree;

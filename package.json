@@ -25,10 +25,11 @@
   },
   "scripts": {
     "clean": "rimraf ./dist",
+    "content": "node src/scripts/build-content-tree.js ./src/content ./src/_content.json",
     "prestart": "npm run clean",
     "start": "NODE_ENV=development webpack-dev-server --config webpack.dev.js --env.dev",
     "prebuild": "npm run clean",
-    "build": "NODE_ENV=production webpack --config webpack.prod.js",
+    "build": "npm run content && NODE_ENV=production webpack --config webpack.prod.js",
     "fetch": "sh src/scripts/fetch.sh",
     "test": "npm run lint",
     "lint": "run-s lint:*",
