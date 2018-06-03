@@ -26,12 +26,13 @@ or pass it as a [CLI](/api/cli/) argument:
 webpack --mode=production
 ```
 
-The following string values are supported:
+If not set, webpack sets `production` as the default value for `mode`. The supported values for mode are:
 
 Option                | Description
 --------------------- | -----------------------
-`development`         | Provides `process.env.NODE_ENV` with value `development`. Enables `NamedModulesPlugin`.
-`production`          | Provides `process.env.NODE_ENV` with value `production`. Enables `UglifyJsPlugin`, `ModuleConcatenationPlugin` and `NoEmitOnErrorsPlugin`.
+`development`         | Provides `process.env.NODE_ENV` with value `development`. Enables `NamedChunksPlugin` and `NamedModulesPlugin`.
+`production`          | Provides `process.env.NODE_ENV` with value `production`. Enables `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin`, `OccurrenceOrderPlugin`, `SideEffectsFlagPlugin` and `UglifyJsPlugin`.
+`none`                | Opts out of any default optimization options
 
 T> Please remember that setting `NODE_ENV` doesn't automatically set `mode`.
 
@@ -63,6 +64,19 @@ module.exports = {
 -    new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("production") }),
 -    new webpack.optimize.ModuleConcatenationPlugin(),
 -    new webpack.NoEmitOnErrorsPlugin()
+-  ]
+}
+```
+
+
+### Mode: none
+
+
+```diff
+// webpack.custom.config.js
+module.exports = {
++  mode: 'none',
+-  plugins: [
 -  ]
 }
 ```

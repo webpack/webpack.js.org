@@ -13,6 +13,10 @@ contributors:
   - TheDutchCoder
   - sudarsangp
   - Vanguard90
+  - EugeneHlushko
+  - ATGardner
+  - ayvarot
+  - bjarki
 ---
 
 Webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interface with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.

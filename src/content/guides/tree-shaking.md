@@ -9,6 +9,7 @@ contributors:
   - MijaelWatts
   - dmitriid
   - probablyup
+  - gish
 related:
   - title: "webpack 4 beta — try it today!"
     url: https://medium.com/webpack/webpack-4-beta-try-it-today-6b1d27d7d7e2#9a67
@@ -171,8 +172,6 @@ module.exports = {
 + mode: "production"
 };
 ```
-
-T> Note that the `--optimize-minimize` flag can be used to insert the `UglifyJSPlugin` as well.
 
 With that squared away, we can run another `npm run build` and see if anything has changed.
 

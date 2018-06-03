@@ -17,7 +17,7 @@ They also serve the purpose of doing **anything else** that a [loader](/concepts
 
 A webpack **plugin** is a JavaScript object that has an [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) property. This `apply` property is called by the webpack compiler, giving access to the **entire** compilation lifecycle.
 
-**ConsoleLogOnBuildWebpackPlugin.js**
+__ConsoleLogOnBuildWebpackPlugin.js__
 
 ```javascript
 const pluginName = 'ConsoleLogOnBuildWebpackPlugin';
@@ -42,14 +42,14 @@ Depending on how you are using webpack, there are multiple ways to use plugins.
 
 ### Configuration
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 const webpack = require('webpack'); //to access built-in plugins
 const path = require('path');
 
-const config = {
+module.exports = {
   entry: './path/to/my/entry/file.js',
   output: {
     filename: 'my-first-webpack.bundle.js',
@@ -64,12 +64,9 @@ const config = {
     ]
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin(),
     new HtmlWebpackPlugin({template: './src/index.html'})
   ]
 };
-
-module.exports = config;
 ```
 
 
@@ -77,7 +74,7 @@ module.exports = config;
 
 ?> Even when using the Node API, users should pass plugins via the `plugins` property in the configuration. Using `compiler.apply` should not be the recommended way.
 
-**some-node-script.js**
+__some-node-script.js__
 
 ```javascript
   const webpack = require('webpack'); //to access webpack runtime
