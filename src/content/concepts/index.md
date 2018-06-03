@@ -11,6 +11,7 @@ contributors:
   - adambraimbridge
   - EugeneHlushko
   - jeremenichelli
+  - arjunsajeev
 ---
 
 At its core, **webpack** is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it internally builds a _dependency graph_ which maps every module your project needs and generates one or more _bundles_.
@@ -48,7 +49,7 @@ T> Learn more in the [entry points](/concepts/entry-points) section.
 
 ## Output
 
-The **output** property tells webpack where to emit the *bundles* it creates and how to name these files, it defaults to `./dist/bundle.js` for the main output file and to the `./dist` folder for any other generated file.
+The **output** property tells webpack where to emit the *bundles* it creates and how to name these files, it defaults to `./dist/main.js` for the main output file and to the `./dist` folder for any other generated file.
 
 You can configure this part of the process by specifying an `output` field in your configuration:
 
@@ -112,7 +113,7 @@ You can check further customization when including loaders in the [loaders secti
 
 ## Plugins
 
-While loaders are used to transform certain types of modules, plugins can be leveraged to perform a wider range of tasks, from bundle optimization, assets management or inject environment variables.
+While loaders are used to transform certain types of modules, plugins can be leveraged to perform a wider range of tasks like bundle optimization, assets management and injection of environment variables.
 
 T> Check out the [plugin interface](/api/plugins) and how to use it to extend webpacks capabilities.
 
