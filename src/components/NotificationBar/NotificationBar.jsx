@@ -2,7 +2,7 @@ import React from 'react';
 import Container from '../Container/Container';
 import testLocalStorage from '../../utilities/test-local-storage';
 
-const version = '2';
+const version = '3';
 const localStorageIsEnabled = testLocalStorage() !== false;
 
 export default class NotificationBar extends React.Component {
@@ -12,6 +12,13 @@ export default class NotificationBar extends React.Component {
     return (
       <div className={ `notification-bar ${dismissedMod}` }>
         <Container className="notification-bar__inner">
+          <p>
+            WEBPACK 4 IS RELEASED, TRY IT TODAY, SEE THE CHANGELOG AND THESE ARTICLES: <br />
+            <a target="_blank" href="https://github.com/webpack/webpack/releases/tag/v4.0.0">* Change Log</a><br />
+            <a target="_blank" href="https://medium.com/webpack/webpack-4-released-today-6cdb994702d4">* Install and setup Webpack 4</a><br />
+            <a target="_blank" href="https://medium.com/webpack/webpack-4-mode-and-optimization-5423a6bc597a">* New configuration options in Webpack 4</a><br />
+          </p>
+          <br />
           <p>
             Sponsor webpack and get apparel from the <a href="https://webpack.threadless.com">official shop</a>{' '}
             or get stickers <a href="http://www.unixstickers.com/tag/webpack">here</a>! All proceeds go to our{' '}
