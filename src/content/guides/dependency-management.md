@@ -5,6 +5,7 @@ contributors:
   - ndelangen
   - chrisVillanueva
   - sokra
+  - byzyk
 ---
 
 > es6 modules
@@ -26,7 +27,7 @@ require("./template/" + name + ".ejs");
 
 webpack parses the `require()` call and extracts some information:
 
-```diff
+```
 Directory: ./template
 Regular expression: /^.*\.ejs$/
 ```
@@ -37,11 +38,11 @@ A context module is generated. It contains references to **all modules in that d
 
 Example:
 
-```javascript
+```json
 {
-    "./table.ejs": 42,
-    "./table-row.ejs": 43,
-    "./directory/folder.ejs": 44
+  "./table.ejs": 42,
+  "./table-row.ejs": 43,
+  "./directory/folder.ejs": 44
 }
 ```
 

@@ -11,6 +11,7 @@ contributors:
   - probablyup
   - gish
   - lumo10
+  - byzyk
 related:
   - title: "webpack 4 beta — try it today!"
     url: https://medium.com/webpack/webpack-4-beta-try-it-today-6b1d27d7d7e2#9a67
@@ -48,7 +49,7 @@ webpack-demo
 
 __src/math.js__
 
-``` javascript
+```javascript
 export function square(x) {
   return x * x;
 }
@@ -105,20 +106,20 @@ Note that we __did not `import` the `square` method__ from the `src/math.js` mod
 
 __dist/bundle.js (around lines 90 - 100)__
 
-``` js
+```js
 /* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
+  "use strict";
+  /* unused harmony export square */
+  /* harmony export (immutable) */ __webpack_exports__["a"] = cube;
+  function square(x) {
+    return x * x;
+  }
 
-"use strict";
-/* unused harmony export square */
-/* harmony export (immutable) */ __webpack_exports__["a"] = cube;
-function square(x) {
-  return x * x;
-}
-
-function cube(x) {
-  return x * x * x;
-}
+  function cube(x) {
+    return x * x * x;
+  }
+});
 ```
 
 Note the `unused harmony export square` comment above. If you look at the code below it, you'll notice that `square` is not being imported, however, it is still included in the bundle. We'll fix that in the next section.
