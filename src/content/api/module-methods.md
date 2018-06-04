@@ -5,6 +5,7 @@ sort: 3
 contributors:
   - skipjack
   - sokra
+  - byzyk
 related:
   - title: CommonJS Wikipedia
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -174,8 +175,13 @@ require.cache[module.id] !== module
 
 W> `require.ensure()` is specific to webpack and superseded by `import()`.
 
-``` javascript
-require.ensure(dependencies: String[], callback: function(require), errorCallback: function(error), chunkName: String)
+```ts
+require.ensure(
+  dependencies: String[],
+  callback: function(require),
+  errorCallback: function(error),
+  chunkName: String
+)
 ```
 
 Split out the given `dependencies` to a separate bundle that that will be loaded asynchronously. When using CommonJS module syntax, this is the only way to dynamically load dependencies. Meaning, this code can be run within execution, only loading the `dependencies` if certain conditions are met.
@@ -212,7 +218,7 @@ Asynchronous Module Definition (AMD) is a JavaScript specification that defines 
 
 ### `define` (with factory)
 
-``` javascript
+``` ts
 define([name: String], [dependencies: String[]], factoryMethod: function(...))
 ```
 
@@ -236,7 +242,7 @@ W> This CANNOT be used in an asynchronous function.
 
 ### `define` (with value)
 
-``` javascript
+``` ts
 define(value: !Function)
 ```
 
@@ -253,7 +259,7 @@ W> This CANNOT be used in an async function.
 
 ### `require` (amd-version)
 
-``` javascript
+``` ts
 require(dependencies: String[], [callback: function(...)])
 ```
 
@@ -280,7 +286,7 @@ The internal `LabeledModulesPlugin` enables you to use the following methods for
 
 Export the given `value`. The label can occur before a function declaration or a variable declaration. The function name or variable name is the identifier under which the value is exported.
 
-``` javascript
+``` ts
 export: var answer = 42;
 export: function method(value) {
   // Do something...
@@ -296,14 +302,14 @@ Make all exports from the dependency available in the current scope. The `requir
 
 __some-dependency.js__
 
-``` javascript
+``` ts
 export: var answer = 42;
 export: function method(value) {
   // Do something...
 };
 ```
 
-``` javascript
+``` ts
 require: 'some-dependency';
 console.log(answer);
 method(...);
@@ -318,8 +324,12 @@ Aside from the module syntaxes described above, webpack also allows a few custom
 
 ### `require.context`
 
-``` javascript
-require.context(directory:String, includeSubdirs:Boolean /* optional, default true */, filter:RegExp /* optional */)
+``` ts
+require.context(
+  directory: String,
+  includeSubdirs: Boolean /* optional, default true */,
+  filter: RegExp /* optional */
+)
 ```
 
 Specify a whole group of dependencies using a path to the `directory`, an option to `includeSubdirs`, and a `filter` for more fine grained control of the modules included. These can then be easily resolved later on:
@@ -332,7 +342,7 @@ var componentA = context.resolve('componentA');
 
 ### `require.include`
 
-``` javascript
+``` ts
 require.include(dependency: String)
 ```
 
