@@ -7,6 +7,7 @@ contributors:
   - kevinzwhuang
   - jdbevan
   - jeremenichelli
+  - byzyk
 ---
 
 The `CommonsChunkPlugin` is an opt-in feature that creates a separate file (known as a chunk), consisting of common modules shared between multiple entry points.
@@ -22,7 +23,7 @@ new webpack.optimize.CommonsChunkPlugin(options)
 
 ## Options
 
-```javascript
+```ts
 {
   name: string, // or
   names: string[],
@@ -38,7 +39,7 @@ new webpack.optimize.CommonsChunkPlugin(options)
   // If omitted the original filename is not modified (usually `output.filename` or `output.chunkFilename`).
   // This option is not permitted if you're using `options.async` as well, see below for more details.
 
-  minChunks: number|Infinity|function(module, count) -> boolean,
+  minChunks: number|Infinity|function(module, count) => boolean,
   // The minimum number of chunks which need to contain a module before it's moved into the commons chunk.
   // The number must be greater than or equal 2 and lower than or equal to the number of chunks.
   // Passing `Infinity` just creates the commons chunk, but moves no modules into it.
@@ -103,21 +104,24 @@ You must load the generated chunk before the entry point:
 Split your code into vendor and application.
 
 ```javascript
-entry: {
-  vendor: ["jquery", "other-lib"],
-  app: "./entry"
-},
-plugins: [
-  new webpack.optimize.CommonsChunkPlugin({
-    name: "vendor",
-    // filename: "vendor.js"
-    // (Give the chunk a different name)
+module.exports = {
+  //...
+  entry: {
+    vendor: ["jquery", "other-lib"],
+    app: "./entry"
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "vendor",
+      // filename: "vendor.js"
+      // (Give the chunk a different name)
 
-    minChunks: Infinity,
-    // (with more entries, this ensures that no other module
-    //  goes into the vendor chunk)
-  })
-]
+      minChunks: Infinity,
+      // (with more entries, this ensures that no other module
+      //  goes into the vendor chunk)
+    })
+  ]
+}
 ```
 
 ```html

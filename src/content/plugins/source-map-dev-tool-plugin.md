@@ -4,6 +4,7 @@ contributors:
   - johnnyreilly
   - simon04
   - neilkennedy
+  - byzyk
 related:
   - title: Building Source Maps
     url: https://survivejs.com/webpack/building/source-maps/#-sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin-
@@ -11,7 +12,7 @@ related:
 
 This plugin enables more fine grained control of source map generation. It is an alternative to the [`devtool`](/configuration/devtool/) configuration option.
 
-``` js
+```js
 new webpack.SourceMapDevToolPlugin(options)
 ```
 
@@ -50,7 +51,7 @@ The following examples demonstrate some common use cases for this plugin.
 
 The following code would exclude source maps for any modules in the `vendor.js` bundle:
 
-``` js
+```js
 new webpack.SourceMapDevToolPlugin({
   filename: '[name].js.map',
   exclude: ['vendor.js']
@@ -61,7 +62,7 @@ new webpack.SourceMapDevToolPlugin({
 
 Set a URL for source maps. Useful for hosting them on a host that requires authorization.
 
-``` js
+```js
 new webpack.SourceMapDevToolPlugin({
   append: "\n//# sourceMappingURL=http://example.com/sourcemap/[url]",
   filename: '[name].map'
@@ -70,7 +71,7 @@ new webpack.SourceMapDevToolPlugin({
 
 And for cases when source maps are stored in the upper level directory:
 
-``` js
+```
 project
 |- dist
   |- public
@@ -81,7 +82,7 @@ project
 
 With next config:
 
-``` js
+```js
 new webpack.SourceMapDevToolPlugin({
   filename: "sourcemaps/[file].map",
   publicPath: "https://example.com/project/",
@@ -91,6 +92,6 @@ new webpack.SourceMapDevToolPlugin({
 
 Will produce the following URL:
 
-``` js
-https://example.com/project/sourcemaps/bundle-[hash].js.map`
+```
+https://example.com/project/sourcemaps/bundle-[hash].js.map
 ```
