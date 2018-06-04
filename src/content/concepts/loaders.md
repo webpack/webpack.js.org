@@ -101,7 +101,7 @@ This uses the `jade-loader` for `.jade` files, and the [`style-loader`](/loaders
 
 ## Loader Features
 
-* Loaders can be chained. Each loader in the chain applies transformations to the processed resource. A chain is executed in reverse order. The first loader passes its result (resource with applied transformations) to the next one, and so forth. Finally, Webpack expects JavaScript to be returned by the last loader in the chain.
+* Loaders can be chained. Each loader in the chain applies transformations to the processed resource. A chain is executed in reverse order. The first loader passes its result (resource with applied transformations) to the next one, and so forth. Finally, webpack expects JavaScript to be returned by the last loader in the chain.
 * Loaders can be synchronous or asynchronous.
 * Loaders run in Node.js and can do everything that’s possible there.
 * Loaders accept query parameters. This can be used to pass configuration to the loader.
