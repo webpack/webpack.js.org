@@ -142,7 +142,7 @@ enforceModuleExtension: false
 Automatically resolve certain extensions. This defaults to:
 
 ``` js
-extensions: [".js", ".json"]
+extensions: [".wasm", ".mjs", ".js", ".json"]
 ```
 
 which is what enables users to leave off the extension when importing:
