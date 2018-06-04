@@ -201,7 +201,9 @@ T> Use the [`getOptions` method](https://github.com/webpack/loader-utils#getopti
 
 A function that can be called synchronously or asynchronously in order to return multiple results. The expected arguments are:
 
-``` ts
+<!-- eslint-skip -->
+
+```js
 this.callback(
   err: Error | null,
   content: string | Buffer,
@@ -247,7 +249,9 @@ A cacheable loader must have a deterministic result, when inputs and dependencie
 
 An array of all the loaders. It is writeable in the pitch phase.
 
-``` ts
+<!-- eslint-skip -->
+
+```js
 loaders = [{request: string, path: string, query: string, module: function}]
 ```
 

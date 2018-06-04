@@ -15,12 +15,14 @@ The `ContextReplacementPlugin` allows you to override the inferred information. 
 
 ## Usage
 
+<!-- eslint-skip -->
+
 ```javascript
 new webpack.ContextReplacementPlugin(
   resourceRegExp: RegExp,
-  newContentResource: string, // optional
-  newContentRecursive: boolean, // optional
-  newContentRegExp: RegExp // optional
+  newContentResource?: string,
+  newContentRecursive?: boolean,
+  newContentRegExp?: RegExp
 )
 ```
 

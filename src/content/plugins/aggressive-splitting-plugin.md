@@ -20,7 +20,9 @@ new webpack.optimize.AggressiveSplittingPlugin(options)
 
 ## Options
 
-```ts
+<!-- eslint-skip -->
+
+```js
 {
   minSize: 30000, //Byte, split point. Default: 30720
   maxSize: 50000, //Byte, maxsize of per file. Default: 51200

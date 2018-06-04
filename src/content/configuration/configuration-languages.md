@@ -99,7 +99,9 @@ and then proceed to write your configuration:
 
 __webpack.config.coffee__
 
-```ts
+<!-- eslint-skip -->
+
+```js
 HtmlWebpackPlugin = require('html-webpack-plugin')
 webpack = require('webpack')
 path = require('path')
