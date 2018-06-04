@@ -5,6 +5,7 @@ contributors:
   - TheLarkInn
   - chyipin
   - rouzbeh84
+  - byzyk
 ---
 
 Configuring the `output` configuration options tells webpack how to write the compiled files to disk. Note that, while there can be multiple `entry` points, only one `output` configuration is specified.
@@ -38,7 +39,7 @@ This configuration would output a single `bundle.js` file into the `/home/proj/p
 If your configuration creates more than a single "chunk" (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use [substitutions](/configuration/output#output-filename) to ensure that each file has a unique name.
 
 ```javascript
-{
+module.exports = {
   entry: {
     app: './src/app.js',
     search: './src/search.js'
@@ -60,9 +61,12 @@ Here's a more complicated example of using a CDN and hashes for assets:
 **config.js**
 
 ```javascript
-output: {
-  path: '/home/proj/cdn/assets/[hash]',
-  publicPath: 'http://cdn.example.com/assets/[hash]/'
+module.exports = {
+  //...
+  output: {
+    path: '/home/proj/cdn/assets/[hash]',
+    publicPath: 'http://cdn.example.com/assets/[hash]/'
+  }
 }
 ```
 
