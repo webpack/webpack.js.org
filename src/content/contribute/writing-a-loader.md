@@ -17,15 +17,22 @@ To test a single loader, you can simply use `path` to `resolve` a local file wit
 
 __webpack.config.js__
 
-``` js
-{
-  test: /\.js$/
-  use: [
-    {
-      loader: path.resolve('path/to/loader.js'),
-      options: {/* ... */}
-    }
-  ]
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: [
+          {
+            loader: path.resolve('path/to/loader.js'),
+            options: {/* ... */}
+          }
+        ]
+      }
+    ]
+  }
 }
 ```
 
@@ -33,12 +40,15 @@ To test multiple, you can utilize the `resolveLoader.modules` configuration to u
 
 __webpack.config.js__
 
-``` js
-resolveLoader: {
-  modules: [
-    'node_modules',
-    path.resolve(__dirname, 'loaders')
-  ]
+```js
+module.exports = {
+  //...
+  resolveLoader: {
+    modules: [
+      'node_modules',
+      path.resolve(__dirname, 'loaders')
+    ]
+  }
 }
 ```
 
@@ -66,13 +76,20 @@ So, in the following example, the `foo-loader` would be passed the raw resource 
 
 __webpack.config.js__
 
-``` js
-{
-  test: /\.js/,
-  use: [
-    'bar-loader',
-    'foo-loader'
-  ]
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.js/,
+        use: [
+          'bar-loader',
+          'foo-loader'
+        ]
+      }
+    ]
+  }
 }
 ```
 
@@ -122,7 +139,7 @@ Take advantage of the [`loader-utils`](https://github.com/webpack/loader-utils) 
 
 __loader.js__
 
-``` js
+```js
 import { getOptions } from 'loader-utils';
 import validateOptions from 'schema-utils';
 
@@ -152,7 +169,7 @@ If a loader uses external resources (i.e. by reading from filesystem), they __mu
 
 __loader.js__
 
-``` js
+```js
 import path from 'path';
 
 export default function(source) {
@@ -197,9 +214,11 @@ If the loader you're working on is a simple wrapper around another package, then
 
 For instance, the `sass-loader` [specifies `node-sass`](https://github.com/webpack-contrib/sass-loader/blob/master/package.json) as peer dependency like so:
 
-``` js
-"peerDependencies": {
-  "node-sass": "^4.0.0"
+```json
+{
+  "peerDependencies": {
+    "node-sass": "^4.0.0"
+  }
 }
 ```
 
@@ -214,7 +233,7 @@ npm install --save-dev jest babel-jest babel-preset-env
 
 __.babelrc__
 
-``` json
+```json
 {
   "presets": [[
     "env",
@@ -231,7 +250,7 @@ Our loader will process `.txt` files and simply replace any instance of `[name]`
 
 __src/loader.js__
 
-``` js
+```js
 import { getOptions } from 'loader-utils';
 
 export default function loader(source) {
@@ -259,7 +278,7 @@ npm install --save-dev webpack memory-fs
 
 __test/compiler.js__
 
-``` js
+```js
 import path from 'path';
 import webpack from 'webpack';
 import memoryfs from 'memory-fs';
@@ -303,7 +322,7 @@ And now, finally, we can write our test and add an npm script to run it:
 
 __test/loader.test.js__
 
-``` js
+```js
 import compiler from './compiler.js';
 
 test('Inserts name and outputs JavaScript', async () => {
@@ -316,9 +335,11 @@ test('Inserts name and outputs JavaScript', async () => {
 
 __package.json__
 
-``` js
-"scripts": {
-  "test": "jest"
+```json
+{
+  "scripts": {
+    "test": "jest"
+  }
 }
 ```
 
