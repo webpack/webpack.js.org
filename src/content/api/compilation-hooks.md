@@ -526,7 +526,7 @@ Parameters: `chunks`
 Here's an example plugin from [@boopathi](https://github.com/boopathi) that outputs exactly what went into each chunk.
 
 ``` js
-compilation.hooks.afterOptimizeChunkAssets.tap(chunks => {
+compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', chunks => {
   chunks.forEach(chunk => {
     console.log({
       id: chunk.id,

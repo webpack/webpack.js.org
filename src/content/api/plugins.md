@@ -68,6 +68,11 @@ compiler.hooks.run.tapPromise('MyPlugin', compiler => {
     console.log('Asynchronously tapping the run hook with a delay.')
   })
 })
+
+compiler.hooks.run.tapPromise('MyPlugin', async compiler => {
+  await new Promise(resolve => setTimeout(resolve, 1000))
+  console.log('Asynchronously tapping the run hook with a delay.')
+})
 ```
 
 The moral of the story is that there are a variety of ways to `hook` into the
