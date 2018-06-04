@@ -2,6 +2,7 @@
 title: ContextReplacementPlugin
 contributors:
   - simon04
+  - byzyk
 related:
   - title: Issue 2783 - ContextReplacementPlugin Description
     url: https://github.com/webpack/webpack/issues/2783#issuecomment-234137265
@@ -17,9 +18,9 @@ The `ContextReplacementPlugin` allows you to override the inferred information. 
 ```javascript
 new webpack.ContextReplacementPlugin(
   resourceRegExp: RegExp,
-  newContentResource?: string,
-  newContentRecursive?: boolean,
-  newContentRegExp?: RegExp
+  newContentResource: string, // optional
+  newContentRecursive: boolean, // optional
+  newContentRegExp: RegExp // optional
 )
 ```
 
@@ -58,7 +59,7 @@ new webpack.ContextReplacementPlugin(/^\.\/locale$/, (context) => {
     regExp: /^\.\/\w+/,
     request: '../../locale' // resolved relatively
   });
-}),
+})
 ```
 
 

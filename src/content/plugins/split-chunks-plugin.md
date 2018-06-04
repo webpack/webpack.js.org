@@ -5,7 +5,7 @@ contributors:
   - jeremenichelli
   - chrisdothtml
   - EugeneHlushko
-
+  - byzyk
 related:
   - title: "webpack 4: Code Splitting, chunk graph and the splitChunks optimization"
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -42,25 +42,30 @@ W> Default configuration was chosen to fit web performance best practices but th
 This configuration object represents the default behavior of the `SplitChunksPlugin`.
 
 ```js
-splitChunks: {
-	chunks: "async",
-	minSize: 30000,
-	minChunks: 1,
-	maxAsyncRequests: 5,
-	maxInitialRequests: 3,
-	automaticNameDelimiter: '~',
-	name: true,
-	cacheGroups: {
-		vendors: {
-			test: /[\\/]node_modules[\\/]/,
-			priority: -10
-		},
-		default: {
-			minChunks: 2,
-			priority: -20,
-			reuseExistingChunk: true
-		}
-	}
+module.exports = {
+	//...
+  optimization: {
+    splitChunks: {
+    	chunks: "async",
+    	minSize: 30000,
+    	minChunks: 1,
+    	maxAsyncRequests: 5,
+    	maxInitialRequests: 3,
+    	automaticNameDelimiter: '~',
+    	name: true,
+    	cacheGroups: {
+    		vendors: {
+    			test: /[\\/]node_modules[\\/]/,
+    			priority: -10
+    		},
+    		default: {
+    			minChunks: 2,
+    			priority: -20,
+    			reuseExistingChunk: true
+    		}
+    	}
+    }
+  }
 }
 ```
 
@@ -206,13 +211,13 @@ module.exports = {
 
 ### Defaults: Example 1
 
-``` js
+```js
 // index.js
 
 import("./a"); // dynamic import
 ```
 
-``` js
+```js
 // a.js
 import "react";
 
@@ -232,7 +237,7 @@ What's the reasoning behind this? `react` probably won't change as often as your
 
 ### Defaults: Example 2
 
-``` js
+```js
 // entry.js
 
 // dynamic imports
@@ -240,14 +245,14 @@ import("./a");
 import("./b");
 ```
 
-``` js
+```js
 // a.js
 import "./helpers"; // helpers is 40kb in size
 
 //...
 ```
 
-``` js
+```js
 // b.js
 import "./helpers";
 import "./more-helpers"; // more-helpers is also 40kb in size
@@ -299,7 +304,7 @@ Create a `vendors` chunk, which includes all code from `node_modules` in the who
 __webpack.config.js__
 
 
-``` js
+```js
 module.exports = {
 	//...
 	optimization: {
