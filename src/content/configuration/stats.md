@@ -39,7 +39,9 @@ module.exports = {
 
 For more granular control, it is possible to specify exactly what information you want. Please note that all of the options in this object are optional.
 
-```ts
+<!-- eslint-skip -->
+
+```js
 module.exports = {
   //...
   stats: {

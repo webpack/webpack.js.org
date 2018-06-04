@@ -59,7 +59,9 @@ The top-level structure of the output JSON file is fairly straightforward but th
 
 Each `assets` object represents an `output` file emitted from the compilation. They all follow a similar structure:
 
-```ts
+<!-- eslint-skip -->
+
+```js
 {
   "chunkNames": [], // The chunks this asset contains
   "chunks": [ 10, 6 ], // The chunk IDs this asset contains

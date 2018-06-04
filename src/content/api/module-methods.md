@@ -175,7 +175,9 @@ require.cache[module.id] !== module
 
 W> `require.ensure()` is specific to webpack and superseded by `import()`.
 
-```ts
+<!-- eslint-skip -->
+
+```js
 require.ensure(
   dependencies: String[],
   callback: function(require),
@@ -218,7 +220,9 @@ Asynchronous Module Definition (AMD) is a JavaScript specification that defines 
 
 ### `define` (with factory)
 
-``` ts
+<!-- eslint-skip -->
+
+```js
 define([name: String], [dependencies: String[]], factoryMethod: function(...))
 ```
 
@@ -242,7 +246,9 @@ W> This CANNOT be used in an asynchronous function.
 
 ### `define` (with value)
 
-``` ts
+<!-- eslint-skip -->
+
+```js
 define(value: !Function)
 ```
 
@@ -259,7 +265,9 @@ W> This CANNOT be used in an async function.
 
 ### `require` (amd-version)
 
-``` ts
+<!-- eslint-skip -->
+
+```js
 require(dependencies: String[], [callback: function(...)])
 ```
 
@@ -286,7 +294,9 @@ The internal `LabeledModulesPlugin` enables you to use the following methods for
 
 Export the given `value`. The label can occur before a function declaration or a variable declaration. The function name or variable name is the identifier under which the value is exported.
 
-``` ts
+<!-- eslint-skip -->
+
+```js
 export: var answer = 42;
 export: function method(value) {
   // Do something...
@@ -302,14 +312,18 @@ Make all exports from the dependency available in the current scope. The `requir
 
 __some-dependency.js__
 
-``` ts
+<!-- eslint-skip -->
+
+```js
 export: var answer = 42;
 export: function method(value) {
   // Do something...
 };
 ```
 
-``` ts
+<!-- eslint-skip -->
+
+```js
 require: 'some-dependency';
 console.log(answer);
 method(...);
@@ -324,7 +338,9 @@ Aside from the module syntaxes described above, webpack also allows a few custom
 
 ### `require.context`
 
-``` ts
+<!-- eslint-skip -->
+
+```js
 require.context(
   directory: String,
   includeSubdirs: Boolean /* optional, default true */,
@@ -342,7 +358,9 @@ var componentA = context.resolve('componentA');
 
 ### `require.include`
 
-``` ts
+<!-- eslint-skip -->
+
+```js
 require.include(dependency: String)
 ```
 

@@ -158,7 +158,9 @@ The optional `options` object can include the following properties:
 
 The `info` parameter will be an object containing some of the following values:
 
-``` ts
+<!-- eslint-skip -->
+
+```js
 {
   type: "self-declined" | "declined" |
         "unaccepted" | "accepted" |
