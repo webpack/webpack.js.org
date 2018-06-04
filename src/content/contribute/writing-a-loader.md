@@ -4,6 +4,7 @@ sort: 3
 contributors:
   - asulaiman
   - michael-ciniawsky
+  - byzyk
 ---
 
 A loader is a node module that exports a function. This function is called when a resource should be transformed by this loader. The given function will have access to the [Loader API](/api/loaders/) using the `this` context provided to it.

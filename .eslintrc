@@ -43,7 +43,8 @@
         "no-redeclare": 0,
         "no-unused-labels": 0,
         "no-use-before-define": 0,
-        "no-mixed-spaces-and-tabs": 0
+        "no-mixed-spaces-and-tabs": 0,
+        "no-dupe-keys": 0
       }
     }
   ]

@@ -7,6 +7,7 @@ contributors:
   - jouni-kantola
   - jhnns
   - dylanonelson
+  - byzyk
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -21,11 +22,14 @@ These options determine how the [different types of modules](/concepts/modules) 
 Prevent webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries.
 
 ```js
-noParse: /jquery|lodash/
+module.exports = {
+  //...
+  noParse: /jquery|lodash/,
 
-// since webpack 3.0.0
-noParse: function(content) {
-  return /jquery|lodash/.test(content);
+  // since webpack 3.0.0
+  noParse: function(content) {
+    return /jquery|lodash/.test(content);
+  }
 }
 ```
 
@@ -119,7 +123,7 @@ A [`Condition`](#condition) to match against the module that issued the request.
 
 __index.js__
 
-``` js
+```js
 import A from './a.js'
 ```
 
@@ -143,18 +147,25 @@ W> This option is __deprecated__ in favor of `Rule.use`.
 An array of [`Rules`](#rule) from which only the first matching Rule is used when the Rule matches.
 
 ```javascript
-{
-  test: /.css$/,
-  oneOf: [
-    {
-      resourceQuery: /inline/, // foo.css?inline
-      use: 'url-loader'
-    },
-    {
-      resourceQuery: /external/, // foo.css?external
-      use: 'file-loader'
-    }
-  ]
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /.css$/,
+        oneOf: [
+          {
+            resourceQuery: /inline/, // foo.css?inline
+            use: 'url-loader'
+          },
+          {
+            resourceQuery: /external/, // foo.css?external
+            use: 'file-loader'
+          }
+        ]
+      }
+    ]
+  }
 }
 ```
 
@@ -178,19 +189,29 @@ However, parser plugins may accept more than just a boolean. For example, the in
 
 **Examples** (parser options by the default plugins):
 
-``` js-with-links
-parser: {
-  amd: false, // disable AMD
-  commonjs: false, // disable CommonJS
-  system: false, // disable SystemJS
-  harmony: false, // disable ES2015 Harmony import/export
-  requireInclude: false, // disable require.include
-  requireEnsure: false, // disable require.ensure
-  requireContext: false, // disable require.context
-  browserify: false, // disable special handling of Browserify bundles
-  requireJs: false, // disable requirejs.*
-  node: false, // disable __dirname, __filename, module, require.extensions, require.main, etc.
-  node: {...} // reconfigure [node](/configuration/node) layer on module level
+```js-with-links
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        //...
+        parser: {
+          amd: false, // disable AMD
+          commonjs: false, // disable CommonJS
+          system: false, // disable SystemJS
+          harmony: false, // disable ES2015 Harmony import/export
+          requireInclude: false, // disable require.include
+          requireEnsure: false, // disable require.ensure
+          requireContext: false, // disable require.context
+          browserify: false, // disable special handling of Browserify bundles
+          requireJs: false, // disable requirejs.*
+          node: false, // disable __dirname, __filename, module, require.extensions, require.main, etc.
+          node: {...} // reconfigure [node](/configuration/node) layer on module level
+        }
+      }
+    ]
+  }
 }
 ```
 
@@ -204,11 +225,18 @@ A [`Condition`](#condition) matched with the resource. You can either supply a `
 
 A [`Condition`](#condition) matched with the resource query. This option is used to test against the query section of a request string (i.e. from the question mark onwards). If you were to `import Foo from './foo.css?inline'`, the following condition would match:
 
-``` js
-{
-  test: /.css$/,
-  resourceQuery: /inline/,
-  use: 'url-loader'
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /.css$/,
+        resourceQuery: /inline/,
+        use: 'url-loader'
+      }
+    ]
+  }
 }
 ```
 
@@ -232,21 +260,31 @@ Passing a string (i.e. `use: [ "style-loader" ]`) is a shortcut to the loader pr
 Loaders can be chained by passing multiple loaders, which will be applied from right to left (last to first configured).
 
 ```javascript
-use: [
-  'style-loader',
-  {
-    loader: 'css-loader',
-    options: {
-      importLoaders: 1
-    }
-  },
-  {
-    loader: 'less-loader',
-    options: {
-      noIeCompat: true
-    }
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        //...
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              noIeCompat: true
+            }
+          }
+        ]
+      }
+    ]
   }
-]
+}
 ```
 
 See [UseEntry](#useentry) for details.
@@ -276,13 +314,20 @@ Conditions can be one of these:
 
 **Example:**
 
-``` js
-{
-  test: /\.css$/,
-  include: [
-    path.resolve(__dirname, "app/styles"),
-    path.resolve(__dirname, "vendor/styles")
-  ]
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        include: [
+          path.resolve(__dirname, "app/styles"),
+          path.resolve(__dirname, "vendor/styles")
+        ]
+      }
+    ]
+  }
 }
 ```
 
@@ -299,11 +344,18 @@ For compatibility a `query` property is also possible, which is an alias for the
 
 **Example:**
 
-``` js
-{
-  loader: "css-loader",
-  options: {
-    modules: true
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        loader: "css-loader",
+        options: {
+          modules: true
+        }
+      }
+    ]
   }
 }
 ```
@@ -328,19 +380,22 @@ Example for an `wrapped` dynamic dependency: `require("./templates/" + expr)`.
 Here are the available options with their [defaults](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js):
 
 ```js
-module: {
-  exprContextCritical: true,
-  exprContextRecursive: true,
-  exprContextRegExp: false,
-  exprContextRequest: ".",
-  unknownContextCritical: true,
-  unknownContextRecursive: true,
-  unknownContextRegExp: false,
-  unknownContextRequest: ".",
-  wrappedContextCritical: false
-  wrappedContextRecursive: true,
-  wrappedContextRegExp: /.*/,
-  strictExportPresence: false // since webpack 2.3.0
+module.exports = {
+  //...
+  module: {
+    exprContextCritical: true,
+    exprContextRecursive: true,
+    exprContextRegExp: false,
+    exprContextRequest: ".",
+    unknownContextCritical: true,
+    unknownContextRecursive: true,
+    unknownContextRegExp: false,
+    unknownContextRequest: ".",
+    wrappedContextCritical: false,
+    wrappedContextRecursive: true,
+    wrappedContextRegExp: /.*/,
+    strictExportPresence: false // since webpack 2.3.0
+  }
 }
 ```
 
