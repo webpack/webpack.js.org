@@ -13,8 +13,8 @@ The `parser` is found within [module factories](/api/compiler-hooks/#normalmodul
 more work to access:
 
 ``` js
-compiler.hooks.normalModuleFactory.tap(factory => {
-  factory.hooks.parser.tap((parser, options) => {
+compiler.hooks.normalModuleFactory.tap('MyPlugin', factory => {
+  factory.hooks.parser.tap('MyPlugin', (parser, options) => {
     parser.hooks.someHook.tap(...)
   })
 })
