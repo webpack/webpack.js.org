@@ -29,12 +29,12 @@
 
   "overrides": [
     {
-      "files": ["*.md"],
+      "files": ["src/content/**/*.md"],
       "parserOptions": {
         "codeFrame": true,
       },
       "rules": {
-        "strict": 0,
+        "indent": ["error", 2],
         "no-undef": 0,
         "semi": 0,
         "no-constant-condition": 0,
@@ -43,7 +43,6 @@
         "no-redeclare": 0,
         "no-unused-labels": 0,
         "no-use-before-define": 0,
-        "no-mixed-spaces-and-tabs": 0,
         "no-dupe-keys": 0
       }
     }

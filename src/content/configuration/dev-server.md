@@ -98,8 +98,8 @@ module.exports = {
     // with the bonus of not having to update your config
     // if new subdomains need to access the dev server
     allowedHosts: [
-        '.host.com',
-        'host2.com'
+      '.host.com',
+      'host2.com'
     ]
   }
 }

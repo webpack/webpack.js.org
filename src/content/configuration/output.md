@@ -791,7 +791,7 @@ module.exports = {
 In cases where the `publicPath` of output files can't be known at compile time, it can be left blank and set dynamically at runtime in the entry file using the [free variable](https://stackoverflow.com/questions/12934929/what-are-free-variables) `__webpack_public_path__`.
 
 ```js
- __webpack_public_path__ = myRuntimePublicPath
+__webpack_public_path__ = myRuntimePublicPath
 
 // rest of your application entry
 ```

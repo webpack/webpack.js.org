@@ -43,27 +43,27 @@ This configuration object represents the default behavior of the `SplitChunksPlu
 
 ```js
 module.exports = {
-	//...
+  //...
   optimization: {
     splitChunks: {
-    	chunks: "async",
-    	minSize: 30000,
-    	minChunks: 1,
-    	maxAsyncRequests: 5,
-    	maxInitialRequests: 3,
-    	automaticNameDelimiter: '~',
-    	name: true,
-    	cacheGroups: {
-    		vendors: {
-    			test: /[\\/]node_modules[\\/]/,
-    			priority: -10
-    		},
-    		default: {
-    			minChunks: 2,
-    			priority: -20,
-    			reuseExistingChunk: true
-    		}
-    	}
+      chunks: "async",
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
     }
   }
 }
@@ -84,13 +84,13 @@ This indicates which chunks will be selected for optimization. If a string is pr
 
 ```js
 module.exports = {
-	//...
-	optimization: {
-		splitChunks: {
-			// include all types of chunks
-			chunks: "all"
-		}
-	}
+  //...
+  optimization: {
+    splitChunks: {
+      // include all types of chunks
+      chunks: "all"
+    }
+  }
 }
 ```
 
@@ -98,15 +98,15 @@ Alternatively, you can provide a function for more control. The return value wil
 
 ```js
 module.exports = {
-	//...
-	optimization: {
-		splitChunks: {
-			chunks (chunk) {
-				// exclude `my-excluded-chunk`
-				return chunk.name !== "my-excluded-chunk"
-			}
-		}
-	}
+  //...
+  optimization: {
+    splitChunks: {
+      chunks (chunk) {
+        // exclude `my-excluded-chunk`
+        return chunk.name !== "my-excluded-chunk"
+      }
+    }
+  }
 }
 ```
 
@@ -144,15 +144,15 @@ The name of the split chunk. Providing `true` will automatically generate a name
 
 ```js
 module.exports = {
-	//...
-	optimization: {
-		splitChunks: {
-			name (module) {
-				// generate a chunk name...
-				return //...
-			}
-		}
-	}
+  //...
+  optimization: {
+    splitChunks: {
+      name (module) {
+        // generate a chunk name...
+        return //...
+      }
+    }
+  }
 }
 ```
 
@@ -164,14 +164,14 @@ Cache groups can inherit and/or override any options from `splitChunks.*`; but `
 
 ```js
 module.exports = {
-	//...
-	optimization: {
-		splitChunks: {
-			cacheGroups: {
-				default: false
-			}
-		}
-	}
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        default: false
+      }
+    }
+  }
 }
 ```
 
@@ -195,15 +195,15 @@ Controls which modules are selected by this cache group. Omitting it selects all
 
 ```js
 module.exports = {
-	//...
-	optimization: {
-		splitChunks: {
-			test (chunks) {
-				//...
-				return true
-			}
-		}
-	}
+  //...
+  optimization: {
+    splitChunks: {
+      test (chunks) {
+        //...
+        return true
+      }
+    }
+  }
 }
 ```
 
@@ -280,18 +280,18 @@ __webpack.config.js__
 
 ```js
 module.exports = {
-	//...
-	optimization: {
-			splitChunks: {
-			cacheGroups: {
-				commons: {
-					name: "commons",
-					chunks: "initial",
-					minChunks: 2
-				}
-			}
-		}
-	}
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          name: "commons",
+          chunks: "initial",
+          minChunks: 2
+        }
+      }
+    }
+  }
 }
 ```
 
@@ -306,18 +306,18 @@ __webpack.config.js__
 
 ```js
 module.exports = {
-	//...
-	optimization: {
-		splitChunks: {
-			cacheGroups: {
-				commons: {
-					test: /[\\/]node_modules[\\/]/,
-					name: "vendors",
-					chunks: "all"
-				}
-			}
-		}
-	}
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all"
+        }
+      }
+    }
+  }
 }
 ```
 
