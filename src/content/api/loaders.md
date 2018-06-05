@@ -81,10 +81,10 @@ __raw-loader.js__
 
 ``` js
 module.exports = function(content) {
-	assert(content instanceof Buffer);
-	return someSyncOperation(content);
-	// return value can be a `Buffer` too
-	// This is also allowed if loader is not "raw"
+  assert(content instanceof Buffer);
+  return someSyncOperation(content);
+  // return value can be a `Buffer` too
+  // This is also allowed if loader is not "raw"
 };
 module.exports.raw = true;
 ```
@@ -120,11 +120,11 @@ First, the `data` passed to the `pitch` method is exposed in the execution phase
 
 ``` js
 module.exports = function(content) {
-	return someSyncOperation(content, this.data.value);
+  return someSyncOperation(content, this.data.value);
 };
 
 module.exports.pitch = function(remainingRequest, precedingRequest, data) {
-	data.value = 42;
+  data.value = 42;
 };
 ```
 

@@ -56,10 +56,10 @@ This variable is equal to default value of `module.exports` (i.e. an object). If
 ``` javascript
 exports.someValue = 42;
 exports.anObject = {
-    x: 123
+  x: 123
 };
 exports.aFunction = function doSomething() {
-    // Do something
+  // Do something
 };
 ```
 
