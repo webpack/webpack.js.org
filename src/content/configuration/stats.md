@@ -26,7 +26,7 @@ There are some presets available to use as a shortcut. Use them like this:
 module.exports = {
   //...
   stats: "errors-only"
-}
+};
 ```
 
 | Preset | Alternative | Description |

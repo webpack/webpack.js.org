@@ -31,7 +31,7 @@ module.exports = {
   performance: {
     hints: false
   }
-}
+};
 ```
 
 No hint warnings or errors are shown.
@@ -42,7 +42,7 @@ module.exports = {
   performance: {
     hints: "warning"
   }
-}
+};
 ```
 
 A warning will be displayed notifying you of a large asset. We recommend something like this for development environments.
@@ -53,7 +53,7 @@ module.exports = {
   performance: {
     hints: "error"
   }
-}
+};
 ```
 
 An error will be displayed notifying you of a large asset. We recommend using `hints: "error"` during production builds to help prevent deploying production bundles that are too large, impacting webpage performance.
@@ -70,7 +70,7 @@ module.exports = {
   performance: {
     maxEntrypointSize: 400000
   }
-}
+};
 ```
 
 ## `performance.maxAssetSize`
@@ -86,7 +86,7 @@ module.exports = {
   performance: {
     maxAssetSize: 100000
   }
-}
+};
 ```
 
 ## `performance.assetFilter`
@@ -111,7 +111,7 @@ module.exports = {
       return assetFilename.endsWith('.js');
     }
   }
-}
+};
 ```
 
 The example above will only give you performance hints based on `.js` files.

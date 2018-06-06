@@ -17,7 +17,7 @@ W> The CommonsChunkPlugin has been removed in webpack v4 legato. To learn how ch
 By separating common modules from bundles, the resulting chunked file can be loaded once initially, and stored in cache for later use. This results in pagespeed optimizations as the browser can quickly serve the shared code from cache, rather than being forced to load a larger bundle whenever a new page is visited.
 
 ```javascript
-new webpack.optimize.CommonsChunkPlugin(options)
+new webpack.optimize.CommonsChunkPlugin(options);
 ```
 
 
@@ -90,7 +90,7 @@ new webpack.optimize.CommonsChunkPlugin({
 
   // chunks: ["pageA", "pageB"],
   // (Only use these entries)
-})
+});
 ```
 
 You must load the generated chunk before the entry point:
@@ -123,7 +123,7 @@ module.exports = {
       //  goes into the vendor chunk)
     })
   ]
-}
+};
 ```
 
 ```html
@@ -148,7 +148,7 @@ new webpack.optimize.CommonsChunkPlugin({
 
   // minChunks: 3,
   // (3 children must share the module before it's moved)
-})
+});
 ```
 
 
@@ -172,7 +172,7 @@ new webpack.optimize.CommonsChunkPlugin({
 
   minChunks: 3,
   // (3 children must share the module before it's separated)
-})
+});
 ```
 
 
@@ -214,7 +214,7 @@ new webpack.optimize.CommonsChunkPlugin({
     // this assumes your vendor imports exist in the node_modules directory
     return module.context && module.context.includes("node_modules");
   }
-})
+});
 ```
 
 In order to obtain a single CSS file containing your application and vendor CSS, use the following `minChunks` function together with [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin/):
@@ -230,7 +230,7 @@ new webpack.optimize.CommonsChunkPlugin({
     }
     return module.context && module.context.includes("node_modules");
   }
-})
+});
 ```
 
 ## Manifest file
@@ -241,7 +241,7 @@ To extract the webpack bootstrap logic into a separate file, use the `CommonsChu
 new webpack.optimize.CommonsChunkPlugin({
   name: "manifest",
   minChunks: Infinity
-})
+});
 ```
 
 ## Combining implicit common vendor chunks and manifest file
@@ -260,7 +260,7 @@ Since the `vendor` and `manifest` chunk use a different definition for `minChunk
     name: "manifest",
     minChunks: Infinity
   }),
-]
+];
 ```
 
 ## More Examples

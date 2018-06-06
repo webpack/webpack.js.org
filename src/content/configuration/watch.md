@@ -22,7 +22,7 @@ Turn on watch mode. This means that after the initial build, webpack will contin
 module.exports = {
   //...
   watch: false
-}
+};
 ```
 
 T> In webpack-dev-server and webpack-dev-middleware watch mode is enabled by default.
@@ -41,7 +41,7 @@ module.exports = {
     aggregateTimeout: 300,
     poll: 1000
   }
-}
+};
 ```
 
 
@@ -57,7 +57,7 @@ module.exports = {
   watchOptions: {
     aggregateTimeout: 300 // The default
   }
-}
+};
 ```
 
 
@@ -71,7 +71,7 @@ module.exports = {
   watchOptions: {
     ignored: /node_modules/
   }
-}
+};
 ```
 
 It is also possible to use [anymatch](https://github.com/micromatch/anymatch) patterns:
@@ -82,7 +82,7 @@ module.exports = {
   watchOptions: {
     ignored: "files/**/*.js"
   }
-}
+};
 ```
 
 
@@ -98,7 +98,7 @@ module.exports = {
   watchOptions: {
     poll: 1000 // Check for changes every second
   }
-}
+};
 ```
 
 T> If watching does not work for you, try out this option. Watching does not work with NFS and machines in VirtualBox.

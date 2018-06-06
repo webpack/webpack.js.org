@@ -2,17 +2,18 @@
 title: Module Resolution
 sort: 8
 contributors:
-    - pksjce
-    - pastelsky
+  - pksjce
+  - pastelsky
+  - byzyk
 ---
 
 A resolver is a library which helps in locating a module by its absolute path.
 A module can be required as a dependency from another module as:
 
 ```js
-import foo from 'path/to/module'
+import foo from 'path/to/module';
 // or
-require('path/to/module')
+require('path/to/module');
 ```
 
 The dependency module can be from the application code or a third party library. The resolver helps
@@ -63,7 +64,7 @@ Once the path is resolved based on the above rule, the resolver checks to see if
 
 If the path points to a folder, then the following steps are taken to find the right file with the right extension:
 
-* If the folder contains a `package.json` file, then fields specified in [`resolve.mainFields`](/configuration/resolve/#resolve-mainfields) configuration option are looked up in order, and the first such field in `package.json` determines the file path. 
+* If the folder contains a `package.json` file, then fields specified in [`resolve.mainFields`](/configuration/resolve/#resolve-mainfields) configuration option are looked up in order, and the first such field in `package.json` determines the file path.
 * If there is no `package.json` or if the main fields do not return a valid path, file names specified in the [`resolve.mainFiles`](/configuration/resolve/#resolve-mainfiles) configuration option are looked for in order, to see if a matching filename exists in the imported/required directory .
 * The file extension is then resolved in a similar way using the `resolve.extensions` option.
 

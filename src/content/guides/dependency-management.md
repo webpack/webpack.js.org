@@ -63,7 +63,7 @@ webpack parses for `require.context()` in the code while building.
 The syntax is as follows:
 
 ```javascript
-require.context(directory, useSubdirectories = false, regExp = /^\.\//)
+require.context(directory, useSubdirectories = false, regExp = /^\.\//);
 ```
 
 Examples:

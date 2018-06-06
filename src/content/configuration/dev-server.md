@@ -31,7 +31,7 @@ module.exports = {
     compress: true,
     port: 9000
   }
-}
+};
 ```
 
 When the server is started, there will be a message prior to the list of resolved modules:
@@ -65,7 +65,7 @@ module.exports = {
       // do fancy stuff
     }
   }
-}
+};
 ```
 
 ## `devServer.allowedHosts`
@@ -85,7 +85,7 @@ module.exports = {
       'host2.com'
     ]
   }
-}
+};
 ```
 
 Mimicking django's `ALLOWED_HOSTS`, a value beginning with `.` can be used as a subdomain wildcard. `.host.com` will match `host.com`, `www.host.com`, and any other subdomain of `host.com`.
@@ -102,7 +102,7 @@ module.exports = {
       'host2.com'
     ]
   }
-}
+};
 ```
 
 To use this option with the CLI pass the `--allowed-hosts` option a comma-delimited string.
@@ -129,7 +129,7 @@ module.exports = {
       });
     }
   }
-}
+};
 ```
 
 ## `devServer.bonjour`
@@ -142,7 +142,7 @@ module.exports = {
   devServer: {
     bonjour: true
   }
-}
+};
 ```
 
 Usage via the CLI
@@ -166,7 +166,7 @@ module.exports = {
   devServer: {
     clientLogLevel: "none"
   }
-}
+};
 ```
 
 Usage via the CLI
@@ -201,7 +201,7 @@ module.exports = {
   devServer: {
     compress: true
   }
-}
+};
 ```
 
 Usage via the CLI
@@ -225,7 +225,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, "public")
   }
-}
+};
 ```
 
 Note that it is recommended to use an absolute path.
@@ -238,7 +238,7 @@ module.exports = {
   devServer: {
     contentBase: [path.join(__dirname, "public"), path.join(__dirname, "assets")]
   }
-}
+};
 ```
 
 To disable `contentBase`:
@@ -249,7 +249,7 @@ module.exports = {
   devServer: {
     contentBase: false
   }
-}
+};
 ```
 
 Usage via the CLI
@@ -271,7 +271,7 @@ module.exports = {
   devServer: {
     disableHostCheck: true
   }
-}
+};
 ```
 
 Usage via the CLI
@@ -297,7 +297,7 @@ module.exports = {
     lazy: true,
     filename: "bundle.js"
   }
-}
+};
 ```
 
 It will now only compile the bundle when `/bundle.js` is requested.
@@ -319,7 +319,7 @@ module.exports = {
       "X-Custom-Foo": "bar"
     }
   }
-}
+};
 ```
 
 
@@ -335,7 +335,7 @@ module.exports = {
   devServer: {
     historyApiFallback: true
   }
-}
+};
 ```
 
 By passing an object this behavior can be controlled further using options like `rewrites`:
@@ -352,7 +352,7 @@ module.exports = {
       ]
     }
   }
-}
+};
 ```
 
 When using dots in your path (common with Angular), you may need to use the `disableDotRule`:
@@ -365,7 +365,7 @@ module.exports = {
       disableDotRule: true
     }
   }
-}
+};
 ```
 
 Usage via the CLI
@@ -389,7 +389,7 @@ module.exports = {
   devServer: {
     host: "0.0.0.0"
   }
-}
+};
 ```
 
 Usage via the CLI
@@ -411,7 +411,7 @@ module.exports = {
   devServer: {
     hot: true
   }
-}
+};
 ```
 
 T> Note that `webpack.HotModuleReplacementPlugin` is required to fully enable HMR. If `webpack` or `webpack-dev-server` are launched with the `--hot` option, this plugin will be added automatically, so you may not need to add this to your `webpack.config.js`. See the [HMR concepts page](/concepts/hot-module-replacement) for more information.
@@ -429,7 +429,7 @@ module.exports = {
   devServer: {
     hotOnly: true
   }
-}
+};
 ```
 
 Usage via the CLI
@@ -451,7 +451,7 @@ module.exports = {
   devServer: {
     https: true
   }
-}
+};
 ```
 
 With the above setting a self-signed certificate is used, but you can provide your own:
@@ -466,7 +466,7 @@ module.exports = {
       ca: fs.readFileSync("/path/to/ca.pem"),
     }
   }
-}
+};
 ```
 
 This object is passed straight to Node.js HTTPS module, so see the [HTTPS documentation](https://nodejs.org/api/https.html) for more information.
@@ -495,7 +495,7 @@ module.exports = {
   devServer: {
     index: 'index.htm'
   }
-}
+};
 ```
 
 
@@ -524,7 +524,7 @@ module.exports = {
   devServer: {
     inline: false
   }
-}
+};
 ```
 
 Usage via the CLI
@@ -548,7 +548,7 @@ module.exports = {
   devServer: {
     lazy: true
   }
-}
+};
 ```
 
 Usage via the CLI
@@ -574,7 +574,7 @@ module.exports = {
   devServer: {
     noInfo: true
   }
-}
+};
 ```
 
 
@@ -590,7 +590,7 @@ module.exports = {
   devServer: {
     open: true
   }
-}
+};
 ```
 
 Usage via the CLI
@@ -618,7 +618,7 @@ module.exports = {
   devServer: {
     openPage: '/different/page'
   }
-}
+};
 ```
 
 Usage via the CLI
@@ -640,7 +640,7 @@ module.exports = {
   devServer: {
     overlay: true
   }
-}
+};
 ```
 
 If you want to show warnings as well as errors:
@@ -654,7 +654,7 @@ module.exports = {
       errors: true
     }
   }
-}
+};
 ```
 
 
@@ -670,7 +670,7 @@ module.exports = {
   devServer: {
     pfx: '/path/to/file.pfx'
   }
-}
+};
 ```
 
 Usage via the CLI
@@ -692,7 +692,7 @@ module.exports = {
   devServer: {
     pfxPassphrase: 'passphrase'
   }
-}
+};
 ```
 
 Usage via the CLI
@@ -714,7 +714,7 @@ module.exports = {
   devServer: {
     port: 8080
   }
-}
+};
 ```
 
 Usage via the CLI
@@ -742,7 +742,7 @@ module.exports = {
       "/api": "http://localhost:3000"
     }
   }
-}
+};
 ```
 
 A request to `/api/users` will now proxy the request to `http://localhost:3000/api/users`.
@@ -760,7 +760,7 @@ module.exports = {
       }
     }
   }
-}
+};
 ```
 
 A backend server running on HTTPS with an invalid certificate will not be accepted by default. If you want to, modify your config like this:
@@ -776,7 +776,7 @@ module.exports = {
       }
     }
   }
-}
+};
 ```
 
 Sometimes you don't want to proxy everything. It is possible to bypass the proxy based on the return value of a function.
@@ -801,7 +801,7 @@ module.exports = {
       }
     }
   }
-}
+};
 ```
 
 If you want to proxy multiple, specific paths to the same target, you can use an array of one or more objects with a `context` property:
@@ -815,7 +815,7 @@ module.exports = {
       target: "http://localhost:3000",
     }]
   }
-}
+};
 ```
 
 Note that requests to root won't be proxied by default. To enable root proxying, the `devServer.index` option should be specified as a falsy value:
@@ -832,7 +832,7 @@ module.exports = {
       target: 'http://localhost:1234'
     }
   }
-}
+};
 ```
 
 ## `devServer.progress` - CLI only
@@ -860,7 +860,7 @@ module.exports = {
   devServer: {
     public: "myapp.test:80"
   }
-}
+};
 ```
 
 Usage via the CLI
@@ -886,7 +886,7 @@ module.exports = {
   devServer: {
     publicPath: "/assets/"
   }
-}
+};
 ```
 
 The bundle will now be available as `http://localhost:8080/assets/bundle.js`.
@@ -901,7 +901,7 @@ module.exports = {
   devServer: {
     publicPath: "http://localhost:8080/assets/"
   }
-}
+};
 ```
 
 The bundle will also be available as `http://localhost:8080/assets/bundle.js`.
@@ -921,7 +921,7 @@ module.exports = {
   devServer: {
     quiet: true
   }
-}
+};
 ```
 
 Usage via the CLI
@@ -947,10 +947,10 @@ module.exports = {
     setup: function(app) {
       app.get('/some/path', function(req, res) {
         res.json({ custom: 'response' });
-      })
+      });
     }
   }
-}
+};
 ```
 
 
@@ -966,7 +966,7 @@ module.exports = {
   devServer: {
     socket: 'socket'
   }
-}
+};
 ```
 
 Usage via the CLI
@@ -988,7 +988,7 @@ module.exports = {
       redirect: false
     }
   }
-}
+};
 ```
 
 T> This only works when using `contentBase` as a `string`.
@@ -1008,7 +1008,7 @@ module.exports = {
   devServer: {
     stats: "errors-only"
   }
-}
+};
 ```
 
 For more information, see the [**stats documentation**](/configuration/stats).
@@ -1039,7 +1039,7 @@ module.exports = {
   devServer: {
     useLocalIp: true
   }
-}
+};
 ```
 
 Usage via the CLI
@@ -1061,7 +1061,7 @@ module.exports = {
   devServer: {
     watchContentBase: true
   }
-}
+};
 ```
 
 It is disabled by default.
@@ -1089,7 +1089,7 @@ module.exports = {
       poll: true
     }
   }
-}
+};
 ```
 
 If this is too heavy on the file system, you can change this to an integer to set the interval in milliseconds.

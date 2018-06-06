@@ -4,6 +4,7 @@ sort: 3
 contributors:
   - sallar
   - rynclark
+  - byzyk
 ---
 
 webpack provides a Node.js API which can be used directly in Node.js runtime.
@@ -110,7 +111,7 @@ changes (much like CLI: `webpack --watch`), as soon as webpack detects a
 change, runs again. Returns an instance of `Watching`.
 
 ``` js
-watch(watchOptions, callback)
+watch(watchOptions, callback);
 ```
 
 ``` js-with-links

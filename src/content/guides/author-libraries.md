@@ -7,6 +7,7 @@ contributors:
   - simon04
   - 5angel
   - marioacc
+  - byzyk
 ---
 
 Aside from applications, webpack can also be used to bundle JavaScript libraries. The following guide is meant for library authors looking to streamline their bundling strategy.
@@ -56,7 +57,7 @@ __src/ref.json__
 }, {
   "num": 0,
   "word": "Zero"
-}]
+}];
 ```
 
 __src/index.js__
@@ -69,13 +70,13 @@ export function numToWord(num) {
   return _.reduce(numRef, (accum, ref) => {
     return ref.num === num ? ref.word : accum;
   }, '');
-};
+}
 
 export function wordToNum(word) {
   return _.reduce(numRef, (accum, ref) => {
     return ref.word === word && word.toLowerCase() ? ref.num : accum;
   }, -1);
-};
+}
 ```
 
 The usage specification for the library use will be as follows:
@@ -209,7 +210,7 @@ externals: [
   'library/two',
   // Everything that starts with "library/"
   /^library\/.+$/
-]
+];
 ```
 
 

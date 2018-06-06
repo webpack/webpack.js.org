@@ -29,7 +29,7 @@ module.exports = {
   amd: {
     jQuery: true
   }
-}
+};
 ```
 
 Certain popular modules written for AMD, most notably jQuery versions 1.7.0 to 1.9.1, will only register as an AMD module if the loader indicates it has taken [special allowances](https://github.com/amdjs/amdjs-api/wiki/jQuery-and-AMD) for multiple versions being included on a page.
@@ -50,7 +50,7 @@ Fail out on the first error instead of tolerating it. By default webpack will lo
 module.exports = {
   //...
   bail: true
-}
+};
 ```
 
 This will force webpack to exit its bundling process.
@@ -66,7 +66,7 @@ Cache the generated webpack modules and chunks to improve build speed. Caching i
 module.exports = {
   //...
   cache: false
-}
+};
 ```
 
 If an object is passed, webpack will use this object for caching. Keeping a reference to this object will allow one to share the same cache between compiler calls:
@@ -77,7 +77,7 @@ let SharedCache = {};
 module.exports = {
   //...
   cache: SharedCache
-}
+};
 ```
 
 W> Don't share the cache between calls with different options.
@@ -120,7 +120,7 @@ Use this option to generate a JSON file containing webpack "records" -- pieces o
 module.exports = {
   //...
   recordsPath: path.join(__dirname, 'records.json')
-}
+};
 ```
 
 Records are particularly useful if you have a complex setup that leverages [Code Splitting](/guides/code-splitting). The data can be used to ensure the split bundles are achieving the [caching](/guides/caching) behavior you need.
@@ -144,5 +144,5 @@ module.exports = {
   //...
   recordsInputPath: path.join(__dirname, 'records.json'),
   recordsOutputPath: path.join(__dirname, 'newRecords.json')
-}
+};
 ```

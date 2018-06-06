@@ -49,7 +49,7 @@ export function Multiply(a, b) {
 // Default export
 export default {
   // Some data...
-}
+};
 ```
 
 
@@ -65,7 +65,7 @@ T> The [ES2015 Loader spec](https://whatwg.github.io/loader/) defines `import()`
 if ( module.hot ) {
   import('lodash').then(_ => {
     // Do something with lodash (a.k.a '_')...
-  })
+  });
 }
 ```
 
@@ -123,7 +123,7 @@ The goal of CommonJS is to specify an ecosystem for JavaScript outside the brows
 ### `require`
 
 ``` javascript
-require(dependency: String)
+require(dependency: String);
 ```
 
 Synchronously retrieve the exports from another module. The compiler will ensure that the dependency is available in the output bundle.
@@ -139,7 +139,7 @@ W> Using it asynchronously may not have the expected effect.
 ### `require.resolve`
 
 ``` javascript
-require.resolve(dependency: String)
+require.resolve(dependency: String);
 ```
 
 Synchronously retrieve a module's ID. The compiler will ensure that the dependency is available in the output bundle. See [`module.id`](/api/module-variables#module-id-commonjs-) for more information.
@@ -155,19 +155,19 @@ W> This is only needed in rare cases for compatibility!
 
 ``` javascript
 var d1 = require("dependency");
-require("dependency") === d1
+require("dependency") === d1;
 delete require.cache[require.resolve("dependency")];
-require("dependency") !== d1
+require("dependency") !== d1;
 ```
 
 ``` javascript
 // in file.js
-require.cache[module.id] === module
-require("./file.js") === module.exports
+require.cache[module.id] === module;
+require("./file.js") === module.exports;
 delete require.cache[module.id];
-require.cache[module.id] === undefined
-require("./file.js") !== module.exports // in theory; in praxis this causes a stack overflow
-require.cache[module.id] !== module
+require.cache[module.id] === undefined;
+require("./file.js") !== module.exports; // in theory; in praxis this causes a stack overflow
+require.cache[module.id] !== module;
 ```
 
 
@@ -396,7 +396,7 @@ if(require.cache[require.resolveWeak('module')]) {
 // You can perform dynamic resolves ("context")
 // just as with other require/import methods.
 const page = 'Foo';
-__webpack_modules__[require.resolveWeak(`./page/${page}`)]
+__webpack_modules__[require.resolveWeak(`./page/${page}`)];
 ```
 
 T> `require.resolveWeak` is the foundation of *universal rendering* (SSR + Code Splitting), as used in packages such as [react-universal-component](https://github.com/faceyspacey/react-universal-component). It allows code to render synchronously on both the server and initial page-loads on the client. It requires that chunks are manually served or somehow available. It's able to require modules without indicating they should be bundled into a chunk. It's used in conjunction with `import()` which takes over when user navigation triggers additional imports.

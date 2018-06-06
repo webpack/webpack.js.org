@@ -21,7 +21,7 @@ The base directory, an **absolute path**, for resolving entry points and loaders
 module.exports = {
   //...
   context: path.resolve(__dirname, "app")
-}
+};
 ```
 
 By default the current directory is used, but it's recommended to pass a value in your configuration. This makes your configuration independent from CWD (current working directory).
@@ -47,7 +47,7 @@ module.exports = {
     about: "./about.js",
     contact: "./contact.js"
   }
-}
+};
 ```
 
 
@@ -62,7 +62,7 @@ If a string or array of strings is passed, the chunk is named `main`. If an obje
 module.exports = {
   //...
   entry: () => './demo'
-}
+};
 ```
 
 or
@@ -71,7 +71,7 @@ or
 module.exports = {
   //...
   entry: () => new Promise((resolve) => resolve(['./demo', './demo2']))
-}
+};
 ```
 
 When combining with the [`output.library`](/configuration/output#output-library) option: If an array is passed only the last item is exported.

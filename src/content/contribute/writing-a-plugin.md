@@ -4,6 +4,7 @@ sort: 4
 contributors:
   - tbroadley
   - iamakulov
+  - byzyk
 ---
 
 Plugins expose the full potential of the webpack engine to third-party developers. Using staged build callbacks, developers can introduce their own behaviors into the webpack build process. Building plugins is a bit more advanced than building loaders, because you'll need to understand some of the webpack low-level internals to hook into them. Be prepared to read some source code!
@@ -46,7 +47,7 @@ class HelloWorldPlugin {
   constructor(options) {
     this.options = options;
   }
-  
+
   apply(compiler) {
     compiler.hooks.done.tap('HelloWorldPlugin', () => {
       console.log('Hello World!');
@@ -193,11 +194,11 @@ class SomeWebpackInternalClass {
       run: new AsyncSeriesHook(),
     };
   }
-  
+
   someMethod() {
     // Call a hook:
     this.hooks.run.call();
-  
+
     // Call another hook:
     // (This is an async one, so webpack passes a callback into it)
     this.hooks.run.callAsync(() => {
