@@ -21,14 +21,12 @@ The minimum requirements for the `output` property in your webpack config is to 
 **webpack.config.js**
 
 ```javascript
-const config = {
+module.exports = {
   output: {
     filename: 'bundle.js',
     path: '/home/proj/public/assets'
   }
 };
-
-module.exports = config;
 ```
 
 This configuration would output a single `bundle.js` file into the `/home/proj/public/assets` directory.
