@@ -13,7 +13,7 @@ related:
 This plugin enables more fine grained control of source map generation. It is an alternative to the [`devtool`](/configuration/devtool/) configuration option.
 
 ```js
-new webpack.SourceMapDevToolPlugin(options)
+new webpack.SourceMapDevToolPlugin(options);
 ```
 
 
@@ -55,7 +55,7 @@ The following code would exclude source maps for any modules in the `vendor.js` 
 new webpack.SourceMapDevToolPlugin({
   filename: '[name].js.map',
   exclude: ['vendor.js']
-})
+});
 ```
 
 ### Host Source Maps Externally
@@ -66,7 +66,7 @@ Set a URL for source maps. Useful for hosting them on a host that requires autho
 new webpack.SourceMapDevToolPlugin({
   append: "\n//# sourceMappingURL=http://example.com/sourcemap/[url]",
   filename: '[name].map'
-})
+});
 ```
 
 And for cases when source maps are stored in the upper level directory:
@@ -87,7 +87,7 @@ new webpack.SourceMapDevToolPlugin({
   filename: "sourcemaps/[file].map",
   publicPath: "https://example.com/project/",
   fileContext: "public"
-})
+});
 ```
 
 Will produce the following URL:

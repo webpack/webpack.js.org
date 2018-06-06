@@ -39,7 +39,7 @@ module.exports = {
   externals: {
     jquery: 'jQuery'
   }
-}
+};
 ```
 
 This leaves any dependent modules unchanged, i.e. the code shown below will still work:
@@ -73,7 +73,7 @@ module.exports = {
   externals: {
     subtract: ['./math', 'subtract']
   }
-}
+};
 ```
 
 `subtract: ['./math', 'subtract']` converts to a parent child construct, where `./math` is the parent module and your bundle only requires the subset under `subtract` variable.
@@ -105,7 +105,7 @@ module.exports = {
       root: ["math", "subtract"]
     }
   }
-}
+};
 ```
 
 This syntax is used to describe all the possible ways that an external library can be available. `lodash` here is available as `lodash` under AMD and CommonJS module systems but available as `_` in a global variable form. `subtract` here is available via the property `subtract` under the global `math` object (e.g. `window['math']['subtract']`).
@@ -128,7 +128,7 @@ module.exports = {
       callback();
     }
   ]
-}
+};
 ```
 
 The `'commonjs ' + request` defines the type of module that needs to be externalized.
@@ -142,7 +142,7 @@ Every dependency that matches the given regular expression will be excluded from
 module.exports = {
   //...
   externals: /^(jquery|\$)$/i
-}
+};
 ```
 
 In this case any dependency named `jQuery`, capitalized or not, or `$` would be externalized.

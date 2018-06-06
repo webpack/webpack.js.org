@@ -11,9 +11,9 @@ related:
 Adds a banner to the top of each generated chunk.
 
 ```javascript
-new webpack.BannerPlugin(banner)
+new webpack.BannerPlugin(banner);
 // or
-new webpack.BannerPlugin(options)
+new webpack.BannerPlugin(options);
 ```
 
 
@@ -40,5 +40,5 @@ Since webpack 2.5.0, placeholders are evaluated in the `banner` string:
 ```javascript
 new webpack.BannerPlugin({
   banner: "hash:[hash], chunkhash:[chunkhash], name:[name], filebase:[filebase], query:[query], file:[file]"
-})
+});
 ```

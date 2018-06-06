@@ -13,7 +13,7 @@ In the past, one of webpack’s trade-offs when bundling was that each module in
 This plugin will enable the same concatenation behavior in webpack.
 
 ```js
-new webpack.optimize.ModuleConcatenationPlugin()
+new webpack.optimize.ModuleConcatenationPlugin();
 ```
 
 > This concatenation behavior is called “scope hoisting.”
@@ -99,5 +99,5 @@ module.exports = {
     // Display bailout reasons
     optimizationBailout: true
   }
-}
+};
 ```

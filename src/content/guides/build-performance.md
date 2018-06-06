@@ -40,7 +40,7 @@ module.exports = {
       }
     ]
   }
-}
+};
 ```
 
 Use the `include` field to only apply the loader modules that actually need to be transformed by it:
@@ -57,7 +57,7 @@ module.exports = {
       }
     ]
   }
-}
+};
 ```
 
 
@@ -164,7 +164,7 @@ Make sure the entry chunk is cheap to emit by keeping it small. The following co
 new CommonsChunkPlugin({
   name: "manifest",
   minChunks: Infinity
-})
+});
 ```
 
 ---

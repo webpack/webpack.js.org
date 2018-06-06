@@ -31,7 +31,7 @@ module.exports = {
     filename: "someLibName.js",
     auxiliaryComment: "Test Comment"
   }
-}
+};
 ```
 
 which will yield the following:
@@ -69,7 +69,7 @@ module.exports = {
       amd: "AMD Comment"
     }
   }
-}
+};
 ```
 
 
@@ -141,7 +141,7 @@ module.exports = {
   output: {
     devtoolLineToLine: { test: /\.js$/, include: 'src/utilities' }
   }
-}
+};
 ```
 
 
@@ -159,7 +159,7 @@ module.exports = {
   output: {
     devtoolModuleFilenameTemplate: "webpack://[namespace]/[resource-path]?[loaders]"
   }
-}
+};
 ```
 
 The following substitutions are available in template strings (via webpack's internal [`ModuleFilenameHelpers`](https://github.com/webpack/webpack/blob/master/lib/ModuleFilenameHelpers.js)):
@@ -182,10 +182,10 @@ module.exports = {
   //...
   output: {
     devtoolModuleFilenameTemplate: info => {
-      return `webpack:///${info.resourcePath}?${info.loaders}`
+      return `webpack:///${info.resourcePath}?${info.loaders}`;
     }
   }
-}
+};
 ```
 
 If multiple modules would result in the same name, [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolfallbackmodulefilenametemplate) is used instead for these modules.
@@ -214,7 +214,7 @@ module.exports = {
   output: {
     filename: "bundle.js"
   }
-}
+};
 ```
 
 However, when creating multiple bundles via more than one entry point, code splitting, or various plugins, you should use one of the following substitutions to give each bundle a unique name...
@@ -227,7 +227,7 @@ module.exports = {
   output: {
     filename: "[name].bundle.js"
   }
-}
+};
 ```
 
 Using internal chunk id:
@@ -238,7 +238,7 @@ module.exports = {
   output: {
     filename: "[id].bundle.js"
   }
-}
+};
 ```
 
 Using the unique hash generated for every build:
@@ -249,7 +249,7 @@ module.exports = {
   output: {
     filename: "[name].[hash].bundle.js"
   }
-}
+};
 ```
 
 Using hashes based on each chunks' content:
@@ -260,7 +260,7 @@ module.exports = {
   output: {
     filename: "[chunkhash].bundle.js"
   }
-}
+};
 ```
 
 Make sure to read the [Caching guide](/guides/caching) for details. There are more steps involved than just setting this option.
@@ -308,7 +308,7 @@ module.exports = {
   output: {
     hashFunction: require('metrohash').MetroHash64
   }
-}
+};
 ```
 
 Make sure that the hashing function will have `update` and `digest` methods available.
@@ -332,7 +332,7 @@ module.exports = {
   output: {
     hotUpdateChunkFilename: "[id].[hash].hot-update.js"
   }
-}
+};
 ```
 
 Here is no need to change it.
@@ -363,7 +363,7 @@ module.exports = {
   output: {
     hotUpdateMainFilename: "[hash].hot-update.json"
   }
-}
+};
 ```
 
 Here is no need to change it.
@@ -396,7 +396,7 @@ module.exports = {
   output: {
     library: "MyLibrary"
   }
-}
+};
 ```
 
 The variable `MyLibrary` will be bound with the return value of your entry file, if the resulting output is included as a script tag in an HTML page.
@@ -488,7 +488,7 @@ These options assign the return value of the entry point (e.g. whatever the entr
 If `output.library` is not assigned a non-empty string, the default behavior is that all properties returned by the entry point will be assigned to the object as defined for the particular `output.libraryTarget`, via the following code fragment:
 
 ```js
-(function(e, a) { for(var i in a) { e[i] = a[i] } }(output.libraryTarget, _entry_return_))
+(function(e, a) { for(var i in a) { e[i] = a[i]; } }(output.libraryTarget, _entry_return_));
 ```
 
 W> Note that not setting a `output.library` will cause all properties returned by the entry point to be assigned to the given object; there are no checks against existing property names.
@@ -560,7 +560,7 @@ module.exports = {
     library: "MyLibrary",
     libraryTarget: "amd"
   }
-}
+};
 ```
 
 The generated output will be defined with the name "MyLibrary", i.e.
@@ -601,7 +601,7 @@ module.exports = {
     library: "MyLibrary",
     libraryTarget: "umd"
   }
-}
+};
 ```
 
 And finally the output is:
@@ -629,7 +629,7 @@ module.exports = {
   output: {
     libraryTarget: "umd"
   }
-}
+};
 ```
 
 The output will be:
@@ -662,7 +662,7 @@ module.exports = {
     },
     libraryTarget: "umd"
   }
-}
+};
 ```
 
 Module proof library.
@@ -691,7 +691,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist/assets')
   }
-}
+};
 ```
 
 Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching) for details.
@@ -711,7 +711,7 @@ module.exports = {
   output: {
     pathinfo: true
   }
-}
+};
 ```
 
 Note it also adds some info about tree shaking to the generated bundle.
@@ -738,7 +738,7 @@ module.exports = {
     path: path.resolve(__dirname, "public/assets"),
     publicPath: "https://cdn.example.com/assets/"
   }
-}
+};
 ```
 
 For this configuration:
@@ -750,7 +750,7 @@ module.exports = {
     publicPath: "/assets/",
     chunkFilename: "[id].chunk.js"
   }
-}
+};
 ```
 
 A request to a chunk will look like `/assets/4.chunk.js`.
@@ -785,13 +785,13 @@ module.exports = {
     publicPath: "../assets/", // relative to HTML page
     publicPath: "", // relative to HTML page (same directory)
   }
-}
+};
 ```
 
 In cases where the `publicPath` of output files can't be known at compile time, it can be left blank and set dynamically at runtime in the entry file using the [free variable](https://stackoverflow.com/questions/12934929/what-are-free-variables) `__webpack_public_path__`.
 
 ```js
-__webpack_public_path__ = myRuntimePublicPath
+__webpack_public_path__ = myRuntimePublicPath;
 
 // rest of your application entry
 ```
@@ -827,7 +827,7 @@ module.exports = {
   output: {
     sourcePrefix: "\t"
   }
-}
+};
 ```
 
 Note by default an empty string is used. Using some kind of indentation makes bundles look more pretty, but will cause issues with multi-line strings.
@@ -855,16 +855,16 @@ With `strictModuleExceptionHandling` set to `false`, only the first `require` th
 
 ```js
 // with strictModuleExceptionHandling = false
-require("module") // <- throws
-require("module") // <- doesn't throw
+require("module"); // <- throws
+require("module"); // <- doesn't throw
 ```
 
 Instead, with `strictModuleExceptionHandling` set to `true`, all `require`s of this module throw an exception:
 
 ```js
 // with strictModuleExceptionHandling = true
-require("module") // <- throws
-require("module") // <- also throws
+require("module"); // <- throws
+require("module"); // <- also throws
 ```
 
 
@@ -880,7 +880,7 @@ module.exports = {
   output: {
     umdNamedDefine: true
   }
-}
+};
 ```
 
 will name the AMD module of the UMD build. Otherwise an anonymous `define` is used.

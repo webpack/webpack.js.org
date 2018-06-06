@@ -24,6 +24,7 @@ contributors:
   - kcolton
   - efreitasn
   - EugeneHlushko
+  - byzyk
 related:
   - title: <link rel=”prefetch/preload”> in webpack
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -234,7 +235,7 @@ __src/index.js__
 +   return import(/* webpackChunkName: "lodash" */ 'lodash').then(_ => {
 +     var element = document.createElement('div');
 +     var _ = _.default;
-+     
++
 +     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +
 +     return element;
@@ -331,7 +332,7 @@ __ChartComponent.js__
 
 ```js
 //...
-import(/* webpackPreload: true */ "ChartingLibrary")
+import(/* webpackPreload: true */ "ChartingLibrary");
 ```
 
 When a page which uses the `ChartComponent` is requested, the charting-library-chunk is also requested via `<link rel="preload">`. Assuming the page-chunk is smaller and finishes faster, the page will be displayed with a `LoadingIndicator`, until the already requested `charting-library-chunk` finishes. This will give a little load time boost since it only needs one round-trip instead of two. Especially in high-latency environments.

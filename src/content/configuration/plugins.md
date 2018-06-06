@@ -27,7 +27,7 @@ module.exports = {
       //...
     })
   ]
-}
+};
 ```
 
 A more complex example, using multiple plugins, might look something like this:
@@ -66,5 +66,5 @@ module.exports = {
     new DashboardPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ]
-}
+};
 ```

@@ -36,7 +36,7 @@ module.exports = {
       Templates: path.resolve(__dirname, 'src/templates/')
     }
   }
-}
+};
 ```
 
 Now, instead of using relative paths when importing like so:
@@ -61,7 +61,7 @@ module.exports = {
       xyz$: path.resolve(__dirname, 'path/to/file.js')
     }
   }
-}
+};
 ```
 
 which would yield these results:
@@ -107,7 +107,7 @@ module.exports = {
   resolve: {
     aliasFields: ["browser"]
   }
-}
+};
 ```
 
 
@@ -130,7 +130,7 @@ module.exports = {
   resolve: {
     descriptionFiles: ["package.json"]
   }
-}
+};
 ```
 
 
@@ -146,7 +146,7 @@ module.exports = {
   resolve: {
     enforceExtension: false
   }
-}
+};
 ```
 
 
@@ -162,7 +162,7 @@ module.exports = {
   resolve: {
     enforceModuleExtension: false
   }
-}
+};
 ```
 
 
@@ -178,13 +178,13 @@ module.exports = {
   resolve: {
     extensions: [".js", ".json"]
   }
-}
+};
 ```
 
 which is what enables users to leave off the extension when importing:
 
 ```js
-import File from '../path/to/file'
+import File from '../path/to/file';
 ```
 
 W> Using this will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions. For modules that are imported with their extension, e.g. `import SomeFile from "./somefile.ext"`, to be properly resolved, a string containing "\*" must be included in the array.
@@ -205,7 +205,7 @@ module.exports = {
   resolve: {
     mainFields: ["browser", "module", "main"]
   }
-}
+};
 ```
 
 For any other target (including `node`):
@@ -216,7 +216,7 @@ module.exports = {
   resolve: {
     mainFields: ["module", "main"]
   }
-}
+};
 ```
 
 For example, the `package.json` of [D3](https://d3js.org/) contains these fields:
@@ -244,7 +244,7 @@ module.exports = {
   resolve: {
     mainFiles: ["index"]
   }
-}
+};
 ```
 
 
@@ -268,7 +268,7 @@ module.exports = {
   resolve: {
     modules: ["node_modules"]
   }
-}
+};
 ```
 
 If you want to add a directory to search in that takes precedence over `node_modules/`:
@@ -279,7 +279,7 @@ module.exports = {
   resolve: {
     modules: [path.resolve(__dirname, "src"), "node_modules"]
   }
-}
+};
 ```
 
 
@@ -295,7 +295,7 @@ module.exports = {
   resolve: {
     unsafeCache: true
   }
-}
+};
 ```
 
 A regular expression, or an array of regular expressions, can be used to test file paths and only cache certain modules. For example, to only cache utilities:
@@ -306,7 +306,7 @@ module.exports = {
   resolve: {
     unsafeCache: /src\/utilities/
   }
-}
+};
 ```
 
 W> Changes to cached paths may cause failure in rare cases.
@@ -324,7 +324,7 @@ module.exports = {
       new DirectoryNamedWebpackPlugin()
     ]
   }
-}
+};
 ```
 
 
@@ -344,7 +344,7 @@ module.exports = {
   resolve: {
     symlinks: true
   }
-}
+};
 ```
 
 
@@ -358,9 +358,9 @@ A function which decides whether a request should be cached or not. An object is
 module.exports = {
   //...
   resolve: {
-    cachePredicate: function() { return true }
+    cachePredicate: function() { return true; }
   }
-}
+};
 ```
 
 
@@ -378,7 +378,7 @@ module.exports = {
     extensions: [ '.js', '.json' ],
     mainFields: [ 'loader', 'main' ]
   }
-}
+};
 ```
 
 T> Note that you can use alias here and other features familiar from resolve. For example `{ txt: 'raw-loader' }` would shim `txt!templates/demo.txt` to use `raw-loader`.
@@ -396,5 +396,5 @@ module.exports = {
   resolveLoader: {
     moduleExtensions: [ '-loader' ]
   }
-}
+};
 ```

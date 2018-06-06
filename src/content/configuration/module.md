@@ -30,7 +30,7 @@ module.exports = {
   noParse: function(content) {
     return /jquery|lodash/.test(content);
   }
-}
+};
 ```
 
 
@@ -124,7 +124,7 @@ A [`Condition`](#condition) to match against the module that issued the request.
 __index.js__
 
 ```js
-import A from './a.js'
+import A from './a.js';
 ```
 
 This option can be used to apply loaders to the dependencies of a specific module or set of modules.
@@ -166,7 +166,7 @@ module.exports = {
       }
     ]
   }
-}
+};
 ```
 
 ## `Rule.options` / `Rule.query`
@@ -237,7 +237,7 @@ module.exports = {
       }
     ]
   }
-}
+};
 ```
 
 
@@ -284,7 +284,7 @@ module.exports = {
       }
     ]
   }
-}
+};
 ```
 
 See [UseEntry](#useentry) for details.
@@ -328,7 +328,7 @@ module.exports = {
       }
     ]
   }
-}
+};
 ```
 
 
@@ -357,7 +357,7 @@ module.exports = {
       }
     ]
   }
-}
+};
 ```
 
 Note that webpack needs to generate a unique module identifier from the resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9% of cases, but may be not unique if you apply the same loaders with different options to the resource and the options have some stringified values.
@@ -396,7 +396,7 @@ module.exports = {
     wrappedContextRegExp: /.*/,
     strictExportPresence: false // since webpack 2.3.0
   }
-}
+};
 ```
 
 T> You can use the `ContextReplacementPlugin` to modify these values for individual dependencies. This also removes the warning.

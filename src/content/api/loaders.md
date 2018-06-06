@@ -2,10 +2,10 @@
 title: Loader API
 sort: 4
 contributors:
-    - TheLarkInn
-    - jhnns
-    - tbroadley
-    - byzyk
+  - TheLarkInn
+  - jhnns
+  - tbroadley
+  - byzyk
 ---
 
 A loader is just a JavaScript module that exports a function. The [loader runner](https://github.com/webpack/loader-runner) calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by webpack and the [loader runner](https://github.com/webpack/loader-runner) with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters.
@@ -99,7 +99,7 @@ use: [
   'a-loader',
   'b-loader',
   'c-loader'
-]
+];
 ```
 
 These steps would occur:
@@ -271,7 +271,7 @@ In the example:
     query: "",
     module: [Function]
   }
-]
+];
 ```
 
 

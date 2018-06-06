@@ -36,10 +36,8 @@
       "rules": {
         "indent": ["error", 2],
         "no-undef": 0,
-        "semi": 0,
         "no-constant-condition": 0,
         "no-useless-escape": 0,
-        "no-extra-semi": 0,
         "no-redeclare": 0,
         "no-unused-labels": 0,
         "no-use-before-define": 0,

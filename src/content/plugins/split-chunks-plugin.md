@@ -66,7 +66,7 @@ module.exports = {
       }
     }
   }
-}
+};
 ```
 
 ### `splitChunks.automaticNameDelimiter`
@@ -91,7 +91,7 @@ module.exports = {
       chunks: "all"
     }
   }
-}
+};
 ```
 
 Alternatively, you can provide a function for more control. The return value will indicate whether to include each chunk.
@@ -103,11 +103,11 @@ module.exports = {
     splitChunks: {
       chunks (chunk) {
         // exclude `my-excluded-chunk`
-        return chunk.name !== "my-excluded-chunk"
+        return chunk.name !== "my-excluded-chunk";
       }
     }
   }
-}
+};
 ```
 
 T> You can combine this configuration with the [HtmlWebpackPlugin](/plugins/html-webpack-plugin/). It will inject all the generated vendor chunks for you.
@@ -149,11 +149,11 @@ module.exports = {
     splitChunks: {
       name (module) {
         // generate a chunk name...
-        return //...
+        return; //...
       }
     }
   }
-}
+};
 ```
 
 W> When assigning equal names to different split chunks, all vendor modules are placed into a single shared chunk, though it's not recommend since it can result in more code downloaded.
@@ -172,7 +172,7 @@ module.exports = {
       }
     }
   }
-}
+};
 ```
 
 #### `splitChunks.cacheGroups.priority`
@@ -200,11 +200,11 @@ module.exports = {
     splitChunks: {
       test (chunks) {
         //...
-        return true
+        return true;
       }
     }
   }
-}
+};
 ```
 
 ## Examples
@@ -292,7 +292,7 @@ module.exports = {
       }
     }
   }
-}
+};
 ```
 
 W> This configuration can enlarge your initial bundles, it is recommended to use dynamic imports when a module is not immediately needed.
@@ -318,7 +318,7 @@ module.exports = {
       }
     }
   }
-}
+};
 ```
 
 W> This might result in a large chunk containing all external packages. It is recommended to only include your core frameworks and utilities and dynamically load the rest of the dependencies.

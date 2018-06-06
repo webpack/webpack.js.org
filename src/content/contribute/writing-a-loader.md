@@ -34,7 +34,7 @@ module.exports = {
       }
     ]
   }
-}
+};
 ```
 
 To test multiple, you can utilize the `resolveLoader.modules` configuration to update where webpack will search for loaders. For example, if you had a local `/loaders` directory in your project:
@@ -50,7 +50,7 @@ module.exports = {
       path.resolve(__dirname, 'loaders')
     ]
   }
-}
+};
 ```
 
 Last but not least, if you've already created a separate repository and package for your loader, you could [`npm link`](https://docs.npmjs.com/cli/link) it to the project in which you'd like to test it out.
@@ -91,7 +91,7 @@ module.exports = {
       }
     ]
   }
-}
+};
 ```
 
 
@@ -151,7 +151,7 @@ const schema = {
       type: 'string'
     }
   }
-}
+};
 
 export default function(source) {
   const options = getOptions(this);
@@ -161,7 +161,7 @@ export default function(source) {
   // Apply some transformations to the source...
 
   return `export default ${ JSON.stringify(source) }`;
-};
+}
 ```
 
 ### Loader Dependencies
@@ -183,7 +183,7 @@ export default function(source) {
     if(err) return callback(err);
     callback(null, header + "\n" + source);
   });
-};
+}
 ```
 
 ### Module Dependencies
@@ -260,7 +260,7 @@ export default function loader(source) {
   source = source.replace(/\[name\]/g, options.name);
 
   return `export default ${ JSON.stringify(source) }`;
-};
+}
 ```
 
 We'll use this loader to process the following file:
@@ -314,7 +314,7 @@ export default (fixture, options = {}) => {
       resolve(stats);
     });
   });
-}
+};
 ```
 
 T> In this case, we've inlined our webpack configuration but you can also accept a configuration as a parameter to the exported function. This would allow you to test multiple setups using the same compiler module.

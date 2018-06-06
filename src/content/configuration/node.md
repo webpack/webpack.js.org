@@ -43,7 +43,7 @@ module.exports = {
 
     // See "Other node core libraries" for additional options.
   }
-}
+};
 ```
 
 Since webpack 3.0.0, the `node` option may be set to `false` to completely turn off the `NodeStuffPlugin` and `NodeSourcePlugin` plugins.
@@ -137,5 +137,5 @@ module.exports = {
     path: true,
     url: false
   }
-}
+};
 ```

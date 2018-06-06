@@ -14,7 +14,7 @@ Only chunks bigger than the specified `minSize` are stored in records. This ensu
 Chunks can be invalidated if a module changes. Modules from invalid chunks will go back into the module pool from which new chunks are created.
 
 ```js
-new webpack.optimize.AggressiveSplittingPlugin(options)
+new webpack.optimize.AggressiveSplittingPlugin(options);
 ```
 
 
