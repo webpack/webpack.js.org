@@ -145,7 +145,7 @@ __package.json__
 ```
 
 Now run `npm run watch` from the command line and see how webpack compiles your code.
-You can see, that it doesn't exit the command line, because the script is currently watching your files.
+You can see that it doesn't exit the command line, because the script is currently watching your files.
 
 Now, while webpack is watching your files, let's remove the error we introduced earlier:
 
