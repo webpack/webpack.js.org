@@ -7,8 +7,8 @@ SOURCE_BRANCH="master"
 # Pull requests and commits to other branches shouldn't try to deploy, just build to verify
 if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]; then
     echo "Skipping deploy; just doing a build and linting links/prose/js."
-    npm test
-    npm run build
+    yarn test
+    yarn build
     exit 0
 fi
 
@@ -17,10 +17,10 @@ REPO=`git config remote.origin.url`
 SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
 
 # Run tests
-npm test
+yarn test
 
 # Run our build
-npm run build
+yarn build
 
 # Set some git options
 git config --global user.name "Travis CI"
@@ -38,4 +38,4 @@ eval `ssh-agent -s`
 ssh-add src/scripts/deploy_key
 
 # Now that we're all set up, we can deploy
-npm run deploy
+yarn deploy
