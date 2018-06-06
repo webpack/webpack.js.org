@@ -193,10 +193,15 @@ module.exports = {
 	//...
 	optimization: {
 		splitChunks: {
-			test (chunks) {
-				//...
-				return true
-			}
+    // cacheGroups test
+      cacheGroups: {
+        commons: {
+          test (chunks) {
+            //...
+            return true
+          }
+        }
+      }
 		}
 	}
 }
