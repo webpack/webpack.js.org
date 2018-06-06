@@ -212,12 +212,15 @@ import B from 'library/two';
 You won't be able to exclude them from bundle by specifying `library` in the externals. You'll either need to exclude them one by one or by using a regular expression.
 
 ``` js
-externals: [
-  'library/one',
-  'library/two',
-  // Everything that starts with "library/"
-  /^library\/.+$/
-];
+module.exports = {
+  //...
+  externals: [
+    'library/one',
+    'library/two',
+    // Everything that starts with "library/"
+    /^library\/.+$/
+  ]
+};
 ```
 
 
