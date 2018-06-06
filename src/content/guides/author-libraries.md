@@ -81,21 +81,28 @@ export function wordToNum(word) {
 
 The usage specification for the library use will be as follows:
 
+* __ES2015 module import:__
+
 ``` js
-// ES2015 module import
 import * as webpackNumbers from 'webpack-numbers';
-// CommonJS module require
+// ...
+webpackNumbers.wordToNum('Two');
+```
+
+* __CommonJS module require:__
+
+``` js
 var webpackNumbers = require('webpack-numbers');
 // ...
-// ES2015 and CommonJS module use
 webpackNumbers.wordToNum('Two');
-// ...
-// AMD module require
+```
+
+* __AMD module require:__
+
+``` js
 require(['webpackNumbers'], function ( webpackNumbers) {
   // ...
-  // AMD module use
   webpackNumbers.wordToNum('Two');
-  // ...
 });
 ```
 

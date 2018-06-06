@@ -38,7 +38,6 @@
         "no-undef": 0,
         "no-constant-condition": 0,
         "no-useless-escape": 0,
-        "no-redeclare": 0,
         "no-unused-labels": 0,
         "no-use-before-define": 0,
         "no-dupe-keys": 0

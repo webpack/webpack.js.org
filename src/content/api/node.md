@@ -24,8 +24,11 @@ Then require the webpack module in your Node.js script:
 
 ``` js
 const webpack = require("webpack");
+```
 
-// Or if you prefer ES2015:
+Or if you prefer ES2015:
+
+``` js
 import webpack from "webpack";
 ```
 
