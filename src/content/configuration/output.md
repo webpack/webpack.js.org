@@ -26,10 +26,10 @@ When used in tandem with [`output.library`](#output-library) and [`output.librar
 module.exports = {
   //...
   output: {
-    library: "someLibName",
-    libraryTarget: "umd",
-    filename: "someLibName.js",
-    auxiliaryComment: "Test Comment"
+    library: 'someLibName',
+    libraryTarget: 'umd',
+    filename: 'someLibName.js',
+    auxiliaryComment: 'Test Comment'
   }
 };
 ```
@@ -40,16 +40,16 @@ which will yield the following:
 (function webpackUniversalModuleDefinition(root, factory) {
   // Test Comment
   if(typeof exports === 'object' && typeof module === 'object')
-    module.exports = factory(require("lodash"));
+    module.exports = factory(require('lodash'));
   // Test Comment
   else if(typeof define === 'function' && define.amd)
-    define(["lodash"], factory);
+    define(['lodash'], factory);
   // Test Comment
   else if(typeof exports === 'object')
-    exports["someLibName"] = factory(require("lodash"));
+    exports['someLibName'] = factory(require('lodash'));
   // Test Comment
   else
-    root["someLibName"] = factory(root["_"]);
+    root['someLibName'] = factory(root['_']);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {
   // ...
 });
@@ -63,10 +63,10 @@ module.exports = {
   output: {
     //...
     auxiliaryComment: {
-      root: "Root Comment",
-      commonjs: "CommonJS Comment",
-      commonjs2: "CommonJS2 Comment",
-      amd: "AMD Comment"
+      root: 'Root Comment',
+      commonjs: 'CommonJS Comment',
+      commonjs2: 'CommonJS2 Comment',
+      amd: 'AMD Comment'
     }
   }
 };
@@ -157,7 +157,7 @@ Customize the names used in each source map's `sources` array. This can be done 
 module.exports = {
   //...
   output: {
-    devtoolModuleFilenameTemplate: "webpack://[namespace]/[resource-path]?[loaders]"
+    devtoolModuleFilenameTemplate: 'webpack://[namespace]/[resource-path]?[loaders]'
   }
 };
 ```
@@ -212,7 +212,7 @@ For a single [`entry`](/configuration/entry-context#entry) point, this can be a 
 module.exports = {
   //...
   output: {
-    filename: "bundle.js"
+    filename: 'bundle.js'
   }
 };
 ```
@@ -225,7 +225,7 @@ Using entry name:
 module.exports = {
   //...
   output: {
-    filename: "[name].bundle.js"
+    filename: '[name].bundle.js'
   }
 };
 ```
@@ -236,7 +236,7 @@ Using internal chunk id:
 module.exports = {
   //...
   output: {
-    filename: "[id].bundle.js"
+    filename: '[id].bundle.js'
   }
 };
 ```
@@ -247,7 +247,7 @@ Using the unique hash generated for every build:
 module.exports = {
   //...
   output: {
-    filename: "[name].[hash].bundle.js"
+    filename: '[name].[hash].bundle.js'
   }
 };
 ```
@@ -258,7 +258,7 @@ Using hashes based on each chunks' content:
 module.exports = {
   //...
   output: {
-    filename: "[chunkhash].bundle.js"
+    filename: '[chunkhash].bundle.js'
   }
 };
 ```
@@ -330,7 +330,7 @@ The only placeholders allowed here are `[id]` and `[hash]`, the default being:
 module.exports = {
   //...
   output: {
-    hotUpdateChunkFilename: "[id].[hash].hot-update.js"
+    hotUpdateChunkFilename: '[id].[hash].hot-update.js'
   }
 };
 ```
@@ -361,7 +361,7 @@ Customize the main hot update filename. See [`output.filename`](#output-filename
 module.exports = {
   //...
   output: {
-    hotUpdateMainFilename: "[hash].hot-update.json"
+    hotUpdateMainFilename: '[hash].hot-update.json'
   }
 };
 ```
@@ -394,7 +394,7 @@ How the value of the `output.library` is used depends on the value of the [`outp
 module.exports = {
   //...
   output: {
-    library: "MyLibrary"
+    library: 'MyLibrary'
   }
 };
 ```
@@ -496,7 +496,7 @@ W> Note that not setting a `output.library` will cause all properties returned b
 `libraryTarget: "this"` - The **return value of your entry point** will be assigned to this under the property named by `output.library`. The meaning of `this` is up to you:
 
 ```js
-this["MyLibrary"] = _entry_return_;
+this['MyLibrary'] = _entry_return_;
 
 // In a separate script...
 this.MyLibrary.doSomething();
@@ -506,7 +506,7 @@ MyLibrary.doSomething(); // if this is window
 `libraryTarget: "window"` - The **return value of your entry point** will be assigned to the `window` object using the `output.library` value.
 
 ```js
-window["MyLibrary"] = _entry_return_;
+window['MyLibrary'] = _entry_return_;
 
 window.MyLibrary.doSomething();
 ```
@@ -515,7 +515,7 @@ window.MyLibrary.doSomething();
 `libraryTarget: "global"` - The **return value of your entry point** will be assigned to the `global` object using the `output.library` value.
 
 ```js
-global["MyLibrary"] = _entry_return_;
+global['MyLibrary'] = _entry_return_;
 
 global.MyLibrary.doSomething();
 ```
@@ -524,9 +524,9 @@ global.MyLibrary.doSomething();
 `libraryTarget: "commonjs"` - The **return value of your entry point** will be assigned to the `exports` object using the `output.library` value. As the name implies, this is used in CommonJS environments.
 
 ```js
-exports["MyLibrary"] = _entry_return_;
+exports['MyLibrary'] = _entry_return_;
 
-require("MyLibrary").doSomething();
+require('MyLibrary').doSomething();
 ```
 
 ### Module Definition Systems
@@ -539,7 +539,7 @@ These options will result in a bundle that comes with a more complete header to 
 ```js
 module.exports = _entry_return_;
 
-require("MyLibrary").doSomething();
+require('MyLibrary').doSomething();
 ```
 
 Note that `output.library` is omitted, thus it is not required for this particular `output.libraryTarget`.
@@ -557,8 +557,8 @@ So, with the following configuration...
 module.exports = {
   //...
   output: {
-    library: "MyLibrary",
-    libraryTarget: "amd"
+    library: 'MyLibrary',
+    libraryTarget: 'amd'
   }
 };
 ```
@@ -566,7 +566,7 @@ module.exports = {
 The generated output will be defined with the name "MyLibrary", i.e.
 
 ```js
-define("MyLibrary", [], function() {
+define('MyLibrary', [], function() {
   return _entry_return_;
 });
 ```
@@ -598,8 +598,8 @@ In this case, you need the `library` property to name your module:
 module.exports = {
   //...
   output: {
-    library: "MyLibrary",
-    libraryTarget: "umd"
+    library: 'MyLibrary',
+    libraryTarget: 'umd'
   }
 };
 ```
@@ -613,9 +613,9 @@ And finally the output is:
   else if(typeof define === 'function' && define.amd)
     define([], factory);
   else if(typeof exports === 'object')
-    exports["MyLibrary"] = factory();
+    exports['MyLibrary'] = factory();
   else
-    root["MyLibrary"] = factory();
+    root['MyLibrary'] = factory();
 })(typeof self !== 'undefined' ? self : this, function() {
   return _entry_return_;
 });
@@ -627,7 +627,7 @@ Note that omitting `library` will result in the assignment of all properties ret
 module.exports = {
   //...
   output: {
-    libraryTarget: "umd"
+    libraryTarget: 'umd'
   }
 };
 ```
@@ -656,11 +656,11 @@ module.exports = {
   //...
   output: {
     library: {
-      root: "MyLibrary",
-      amd: "my-library",
-      commonjs: "my-common-library"
+      root: 'MyLibrary',
+      amd: 'my-library',
+      commonjs: 'my-common-library'
     },
-    libraryTarget: "umd"
+    libraryTarget: 'umd'
   }
 };
 ```
@@ -735,8 +735,8 @@ Simple rule: The URL of your [`output.path`](#output-path) from the view of the 
 module.exports = {
   //...
   output: {
-    path: path.resolve(__dirname, "public/assets"),
-    publicPath: "https://cdn.example.com/assets/"
+    path: path.resolve(__dirname, 'public/assets'),
+    publicPath: 'https://cdn.example.com/assets/'
   }
 };
 ```
@@ -747,8 +747,8 @@ For this configuration:
 module.exports = {
   //...
   output: {
-    publicPath: "/assets/",
-    chunkFilename: "[id].chunk.js"
+    publicPath: '/assets/',
+    chunkFilename: '[id].chunk.js'
   }
 };
 ```
@@ -778,12 +778,12 @@ module.exports = {
   //...
   output: {
     // One of the below
-    publicPath: "https://cdn.example.com/assets/", // CDN (always HTTPS)
-    publicPath: "//cdn.example.com/assets/", // CDN (same protocol)
-    publicPath: "/assets/", // server-relative
-    publicPath: "assets/", // relative to HTML page
-    publicPath: "../assets/", // relative to HTML page
-    publicPath: "", // relative to HTML page (same directory)
+    publicPath: 'https://cdn.example.com/assets/', // CDN (always HTTPS)
+    publicPath: '//cdn.example.com/assets/', // CDN (same protocol)
+    publicPath: '/assets/', // server-relative
+    publicPath: 'assets/', // relative to HTML page
+    publicPath: '../assets/', // relative to HTML page
+    publicPath: '', // relative to HTML page (same directory)
   }
 };
 ```
@@ -825,7 +825,7 @@ Change the prefix for each line in the output bundles.
 module.exports = {
   //...
   output: {
-    sourcePrefix: "\t"
+    sourcePrefix: '\t'
   }
 };
 ```
@@ -848,23 +848,23 @@ When set to `false`, the module is not removed from cache, which results in the 
 For instance, consider `module.js`:
 
 ```js
-throw new Error("error");
+throw new Error('error');
 ```
 
 With `strictModuleExceptionHandling` set to `false`, only the first `require` throws an exception:
 
 ```js
 // with strictModuleExceptionHandling = false
-require("module"); // <- throws
-require("module"); // <- doesn't throw
+require('module'); // <- throws
+require('module'); // <- doesn't throw
 ```
 
 Instead, with `strictModuleExceptionHandling` set to `true`, all `require`s of this module throw an exception:
 
 ```js
 // with strictModuleExceptionHandling = true
-require("module"); // <- throws
-require("module"); // <- also throws
+require('module'); // <- throws
+require('module'); // <- also throws
 ```
 
 

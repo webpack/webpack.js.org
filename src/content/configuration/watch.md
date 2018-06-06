@@ -80,7 +80,7 @@ It is also possible to use [anymatch](https://github.com/micromatch/anymatch) pa
 module.exports = {
   //...
   watchOptions: {
-    ignored: "files/**/*.js"
+    ignored: 'files/**/*.js'
   }
 };
 ```

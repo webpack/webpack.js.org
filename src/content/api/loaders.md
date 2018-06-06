@@ -147,7 +147,7 @@ module.exports = function(content) {
 
 module.exports.pitch = function(remainingRequest, precedingRequest, data) {
   if (someCondition()) {
-    return "module.exports = require(" + JSON.stringify("-!" + remainingRequest) + ");";
+    return 'module.exports = require(' + JSON.stringify('-!' + remainingRequest) + ');';
   }
 };
 ```
@@ -171,7 +171,7 @@ Given the following example this require call is used:
 In `/abc/file.js`:
 
 ``` js
-require("./loader1?xyz!loader2!./resource?rrr");
+require('./loader1?xyz!loader2!./resource?rrr');
 ```
 
 
@@ -270,15 +270,15 @@ In the example:
 ``` js
 [
   {
-    request: "/abc/loader1.js?xyz",
-    path: "/abc/loader1.js",
-    query: "?xyz",
+    request: '/abc/loader1.js?xyz',
+    path: '/abc/loader1.js',
+    query: '?xyz',
     module: [Function]
   },
   {
-    request: "/abc/node_modules/loader2/index.js",
-    path: "/abc/node_modules/loader2/index.js",
-    query: "",
+    request: '/abc/node_modules/loader2/index.js',
+    path: '/abc/node_modules/loader2/index.js',
+    query: '',
     module: [Function]
   }
 ];

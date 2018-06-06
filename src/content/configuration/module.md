@@ -322,8 +322,8 @@ module.exports = {
       {
         test: /\.css$/,
         include: [
-          path.resolve(__dirname, "app/styles"),
-          path.resolve(__dirname, "vendor/styles")
+          path.resolve(__dirname, 'app/styles'),
+          path.resolve(__dirname, 'vendor/styles')
         ]
       }
     ]
@@ -350,7 +350,7 @@ module.exports = {
   module: {
     rules: [
       {
-        loader: "css-loader",
+        loader: 'css-loader',
         options: {
           modules: true
         }
@@ -386,11 +386,11 @@ module.exports = {
     exprContextCritical: true,
     exprContextRecursive: true,
     exprContextRegExp: false,
-    exprContextRequest: ".",
+    exprContextRequest: '.',
     unknownContextCritical: true,
     unknownContextRecursive: true,
     unknownContextRegExp: false,
-    unknownContextRequest: ".",
+    unknownContextRequest: '.',
     wrappedContextCritical: false,
     wrappedContextRecursive: true,
     wrappedContextRegExp: /.*/,

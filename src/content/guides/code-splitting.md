@@ -309,8 +309,7 @@ __LoginButton.js__
 
 ```js
 //...
-import(/* webpackPrefetch: true */ "LoginModal");
-
+import(/* webpackPrefetch: true */ 'LoginModal');
 ```
 
 This will result in `<link rel="prefetch" href="login-modal-chunk.js">` being appended in the head of the page, which will instruct the browser to prefetch in idle time the `login-modal-chunk.js` file.
@@ -332,7 +331,7 @@ __ChartComponent.js__
 
 ```js
 //...
-import(/* webpackPreload: true */ "ChartingLibrary");
+import(/* webpackPreload: true */ 'ChartingLibrary');
 ```
 
 When a page which uses the `ChartComponent` is requested, the charting-library-chunk is also requested via `<link rel="preload">`. Assuming the page-chunk is smaller and finishes faster, the page will be displayed with a `LoadingIndicator`, until the already requested `charting-library-chunk` finishes. This will give a little load time boost since it only needs one round-trip instead of two. Especially in high-latency environments.

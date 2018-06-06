@@ -30,11 +30,9 @@
   "overrides": [
     {
       "files": ["src/content/**/*.md"],
-      "parserOptions": {
-        "codeFrame": true,
-      },
       "rules": {
         "indent": ["error", 2],
+        "quotes": ["error", "single"],
         "no-undef": 0,
         "no-constant-condition": 0,
         "no-useless-escape": 0,

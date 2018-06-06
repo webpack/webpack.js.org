@@ -21,7 +21,7 @@ new webpack.debug.ProfilingPlugin();
 
 ``` js
 new webpack.debug.ProfilingPlugin({
-  outputPath: "profiling/profileEvents.json"
+  outputPath: 'profiling/profileEvents.json'
 });
 ```
 

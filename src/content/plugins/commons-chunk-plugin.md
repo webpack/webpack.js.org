@@ -79,10 +79,10 @@ Generate an extra chunk, which contains common modules shared between entry poin
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({
-  name: "commons",
+  name: 'commons',
   // (the commons chunk name)
 
-  filename: "commons.js",
+  filename: 'commons.js',
   // (the filename of the commons chunk)
 
   // minChunks: 3,
@@ -109,12 +109,12 @@ Split your code into vendor and application.
 module.exports = {
   //...
   entry: {
-    vendor: ["jquery", "other-lib"],
-    app: "./entry"
+    vendor: ['jquery', 'other-lib'],
+    app: './entry'
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      name: "vendor",
+      name: 'vendor',
       // filename: "vendor.js"
       // (Give the chunk a different name)
 
@@ -158,9 +158,9 @@ Similar to the above one, but instead of moving common modules into the parent (
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({
-  name: "app",
+  name: 'app',
   // or
-  names: ["app", "subPageA"],
+  names: ['app', 'subPageA'],
   // the name or list of names must match the name or names
   // of the entry points that create the async chunks
 
@@ -192,8 +192,8 @@ This option is useful when you want to have fine-grained control over how the Co
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({
-  name: "my-single-lib-chunk",
-  filename: "my-single-lib-chunk.js",
+  name: 'my-single-lib-chunk',
+  filename: 'my-single-lib-chunk.js',
   minChunks: function(module, count) {
     // If module has a path, and inside of the path exists the name "somelib",
     // and it is used in 3 separate chunks/entries, then break it out into
@@ -209,10 +209,10 @@ This concept may be used to obtain implicit common vendor chunks:
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({
-  name: "vendor",
+  name: 'vendor',
   minChunks: function (module) {
     // this assumes your vendor imports exist in the node_modules directory
-    return module.context && module.context.includes("node_modules");
+    return module.context && module.context.includes('node_modules');
   }
 });
 ```
@@ -221,14 +221,14 @@ In order to obtain a single CSS file containing your application and vendor CSS,
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({
-  name: "vendor",
+  name: 'vendor',
   minChunks: function (module) {
     // This prevents stylesheet resources with the .css or .scss extension
     // from being moved from their original chunk to the vendor chunk
     if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
       return false;
     }
-    return module.context && module.context.includes("node_modules");
+    return module.context && module.context.includes('node_modules');
   }
 });
 ```
@@ -239,7 +239,7 @@ To extract the webpack bootstrap logic into a separate file, use the `CommonsChu
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({
-  name: "manifest",
+  name: 'manifest',
   minChunks: Infinity
 });
 ```
@@ -251,13 +251,13 @@ Since the `vendor` and `manifest` chunk use a different definition for `minChunk
 ```javascript
 [
   new webpack.optimize.CommonsChunkPlugin({
-    name: "vendor",
+    name: 'vendor',
     minChunks: function(module){
-      return module.context && module.context.includes("node_modules");
+      return module.context && module.context.includes('node_modules');
     }
   }),
   new webpack.optimize.CommonsChunkPlugin({
-    name: "manifest",
+    name: 'manifest',
     minChunks: Infinity
   }),
 ];

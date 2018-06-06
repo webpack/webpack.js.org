@@ -64,7 +64,7 @@ Set a URL for source maps. Useful for hosting them on a host that requires autho
 
 ```js
 new webpack.SourceMapDevToolPlugin({
-  append: "\n//# sourceMappingURL=http://example.com/sourcemap/[url]",
+  append: '\n//# sourceMappingURL=http://example.com/sourcemap/[url]',
   filename: '[name].map'
 });
 ```
@@ -84,9 +84,9 @@ With next config:
 
 ```js
 new webpack.SourceMapDevToolPlugin({
-  filename: "sourcemaps/[file].map",
-  publicPath: "https://example.com/project/",
-  fileContext: "public"
+  filename: 'sourcemaps/[file].map',
+  publicPath: 'https://example.com/project/',
+  fileContext: 'public'
 });
 ```
 

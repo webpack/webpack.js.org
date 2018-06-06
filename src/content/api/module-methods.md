@@ -129,8 +129,8 @@ require(dependency: String);
 Synchronously retrieve the exports from another module. The compiler will ensure that the dependency is available in the output bundle.
 
 ``` javascript
-var $ = require("jquery");
-var myModule = require("my-module");
+var $ = require('jquery');
+var myModule = require('my-module');
 ```
 
 W> Using it asynchronously may not have the expected effect.
@@ -154,19 +154,19 @@ Multiple requires to the same module result in only one module execution and onl
 W> This is only needed in rare cases for compatibility!
 
 ``` javascript
-var d1 = require("dependency");
-require("dependency") === d1;
-delete require.cache[require.resolve("dependency")];
-require("dependency") !== d1;
+var d1 = require('dependency');
+require('dependency') === d1;
+delete require.cache[require.resolve('dependency')];
+require('dependency') !== d1;
 ```
 
 ``` javascript
 // in file.js
 require.cache[module.id] === module;
-require("./file.js") === module.exports;
+require('./file.js') === module.exports;
 delete require.cache[module.id];
 require.cache[module.id] === undefined;
-require("./file.js") !== module.exports; // in theory; in praxis this causes a stack overflow
+require('./file.js') !== module.exports; // in theory; in praxis this causes a stack overflow
 require.cache[module.id] !== module;
 ```
 
@@ -277,7 +277,7 @@ W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/W
 
 ``` javascript
 require(['b'], function(b) {
-  var c = require("c");
+  var c = require('c');
 });
 ```
 

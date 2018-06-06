@@ -40,7 +40,7 @@ No hint warnings or errors are shown.
 module.exports = {
   //...
   performance: {
-    hints: "warning"
+    hints: 'warning'
   }
 };
 ```
@@ -51,7 +51,7 @@ A warning will be displayed notifying you of a large asset. We recommend somethi
 module.exports = {
   //...
   performance: {
-    hints: "error"
+    hints: 'error'
   }
 };
 ```

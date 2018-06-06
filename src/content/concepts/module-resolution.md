@@ -29,9 +29,9 @@ Using `enhanced-resolve`, webpack can resolve three kinds of file paths:
 ### Absolute paths
 
 ```js
-import "/home/me/file";
+import '/home/me/file';
 
-import "C:\\Users\\me\\file";
+import 'C:\\Users\\me\\file';
 ```
 
 Since we already have the absolute path to the file, no further resolution is required.
@@ -40,8 +40,8 @@ Since we already have the absolute path to the file, no further resolution is re
 ### Relative paths
 
 ```js
-import "../src/file1";
-import "./file2";
+import '../src/file1';
+import './file2';
 ```
 
 In this case, the directory of the resource file where the `import` or `require` occurs is taken to be the context directory. The relative path specified in the `import/require` is joined to this context path to produce the absolute path to the module.
@@ -50,8 +50,8 @@ In this case, the directory of the resource file where the `import` or `require`
 ### Module paths
 
 ```js
-import "module";
-import "module/lib/file";
+import 'module';
+import 'module/lib/file';
 ```
 
 Modules are searched for inside all directories specified in [`resolve.modules`](/configuration/resolve/#resolve-modules).

@@ -33,7 +33,7 @@ Indicates whether or not [Hot Module Replacement](/concepts/hot-module-replaceme
 The ID of the current module.
 
 ``` javascript
-module.id === require.resolve("./file.js");
+module.id === require.resolve('./file.js');
 ```
 
 

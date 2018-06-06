@@ -22,7 +22,7 @@ A context is created if your request contains expressions, so the **exact** modu
 Example:
 
 ```javascript
-require("./template/" + name + ".ejs");
+require('./template/' + name + '.ejs');
 ```
 
 webpack parses the `require()` call and extracts some information:
@@ -69,12 +69,12 @@ require.context(directory, useSubdirectories = false, regExp = /^\.\//);
 Examples:
 
 ```javascript
-require.context("./test", false, /\.test\.js$/);
+require.context('./test', false, /\.test\.js$/);
 // a context with files from the test directory that can be required with a request endings with `.test.js`.
 ```
 
 ```javascript
-require.context("../", true, /\.stories\.js$/);
+require.context('../', true, /\.stories\.js$/);
 // a context with all files in the parent folder and descending folders ending with `.stories.js`.
 ```
 
