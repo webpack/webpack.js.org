@@ -95,11 +95,21 @@ module.exports.raw = true;
 Loaders are __always__ called from right to left. There are some instances where the loader only cares about the __metadata__ behind a request and can ignore the results of the previous loader. The `pitch` method on loaders is called from __left to right__ before the loaders are actually executed (from right to left). For the following [`use`](/configuration/module#rule-use) configuration:
 
 ``` js
-use: [
-  'a-loader',
-  'b-loader',
-  'c-loader'
-];
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        //...
+        use: [
+          'a-loader',
+          'b-loader',
+          'c-loader'
+        ]
+      }
+    ]
+  }
+};
 ```
 
 These steps would occur:
