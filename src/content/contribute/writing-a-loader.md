@@ -181,7 +181,7 @@ export default function(source) {
 
   fs.readFile(headerPath, 'utf-8', function(err, header) {
     if(err) return callback(err);
-    callback(null, header + "\n" + source);
+    callback(null, header + '\n' + source);
   });
 }
 ```
@@ -330,7 +330,7 @@ test('Inserts name and outputs JavaScript', async () => {
   const stats = await compiler('example.txt');
   const output = stats.toJson().modules[0].source;
 
-  expect(output).toBe(`export default "Hey Alice!\\n"`);
+  expect(output).toBe('export default "Hey Alice!\\n"');
 });
 ```
 

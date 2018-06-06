@@ -109,9 +109,9 @@ __dist/bundle.js (around lines 90 - 100)__
 ```js
 /* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
-  "use strict";
+  'use strict';
   /* unused harmony export square */
-  /* harmony export (immutable) */ __webpack_exports__["a"] = cube;
+  /* harmony export (immutable) */ __webpack_exports__['a'] = cube;
   function square(x) {
     return x * x;
   }

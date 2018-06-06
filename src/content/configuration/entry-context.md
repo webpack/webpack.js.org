@@ -20,7 +20,7 @@ The base directory, an **absolute path**, for resolving entry points and loaders
 ``` js
 module.exports = {
   //...
-  context: path.resolve(__dirname, "app")
+  context: path.resolve(__dirname, 'app')
 };
 ```
 
@@ -43,9 +43,9 @@ Simple rule: one entry point per HTML page. SPA: one entry point, MPA: multiple 
 module.exports = {
   //...
   entry: {
-    home: "./home.js",
-    about: "./about.js",
-    contact: "./contact.js"
+    home: './home.js',
+    about: './about.js',
+    contact: './contact.js'
   }
 };
 ```

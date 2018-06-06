@@ -36,7 +36,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        loader: "babel-loader"
+        loader: 'babel-loader'
       }
     ]
   }
@@ -52,8 +52,8 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: path.resolve(__dirname, "src"),
-        loader: "babel-loader"
+        include: path.resolve(__dirname, 'src'),
+        loader: 'babel-loader'
       }
     ]
   }
@@ -162,7 +162,7 @@ Make sure the entry chunk is cheap to emit by keeping it small. The following co
 
 ```js
 new CommonsChunkPlugin({
-  name: "manifest",
+  name: 'manifest',
   minChunks: Infinity
 });
 ```

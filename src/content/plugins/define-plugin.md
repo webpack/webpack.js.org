@@ -29,16 +29,16 @@ The values will be inlined into the code allowing a minification pass to remove 
 ``` javascript
 new webpack.DefinePlugin({
   PRODUCTION: JSON.stringify(true),
-  VERSION: JSON.stringify("5fa3b9"),
+  VERSION: JSON.stringify('5fa3b9'),
   BROWSER_SUPPORTS_HTML5: true,
-  TWO: "1+1",
-  "typeof window": JSON.stringify("object")
+  TWO: '1+1',
+  'typeof window': JSON.stringify('object')
 });
 ```
 
 ``` javascript
-console.log("Running App version " + VERSION);
-if(!BROWSER_SUPPORTS_HTML5) require("html5shiv");
+console.log('Running App version ' + VERSION);
+if(!BROWSER_SUPPORTS_HTML5) require('html5shiv');
 ```
 
 T> Note that because the plugin does a direct text replacement, the value given to it must include **actual quotes** inside of the string itself. Typically, this is done either with either alternate quotes, such as `'"production"'`, or by using `JSON.stringify('production')`.
@@ -93,6 +93,6 @@ Use a different service URL in production/development builds:
 
 ```javascript
 new webpack.DefinePlugin({
-  'SERVICE_URL': JSON.stringify("http://dev.example.com")
+  'SERVICE_URL': JSON.stringify('http://dev.example.com')
 });
 ```

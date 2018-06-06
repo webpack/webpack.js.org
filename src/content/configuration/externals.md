@@ -92,9 +92,9 @@ module.exports = {
 
   externals : {
     lodash : {
-      commonjs: "lodash",
-      amd: "lodash",
-      root: "_" // indicates global variable
+      commonjs: 'lodash',
+      amd: 'lodash',
+      root: '_' // indicates global variable
     }
   },
 
@@ -102,7 +102,7 @@ module.exports = {
 
   externals : {
     subtract : {
-      root: ["math", "subtract"]
+      root: ['math', 'subtract']
     }
   }
 };

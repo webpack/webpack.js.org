@@ -46,7 +46,7 @@ module.exports = {
   //...
   optimization: {
     splitChunks: {
-      chunks: "async",
+      chunks: 'async',
       minSize: 30000,
       minChunks: 1,
       maxAsyncRequests: 5,
@@ -88,7 +88,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       // include all types of chunks
-      chunks: "all"
+      chunks: 'all'
     }
   }
 };
@@ -103,7 +103,7 @@ module.exports = {
     splitChunks: {
       chunks (chunk) {
         // exclude `my-excluded-chunk`
-        return chunk.name !== "my-excluded-chunk";
+        return chunk.name !== 'my-excluded-chunk';
       }
     }
   }
@@ -214,12 +214,12 @@ module.exports = {
 ```js
 // index.js
 
-import("./a"); // dynamic import
+import('./a'); // dynamic import
 ```
 
 ```js
 // a.js
-import "react";
+import 'react';
 
 //...
 ```
@@ -241,21 +241,21 @@ What's the reasoning behind this? `react` probably won't change as often as your
 // entry.js
 
 // dynamic imports
-import("./a");
-import("./b");
+import('./a');
+import('./b');
 ```
 
 ```js
 // a.js
-import "./helpers"; // helpers is 40kb in size
+import './helpers'; // helpers is 40kb in size
 
 //...
 ```
 
 ```js
 // b.js
-import "./helpers";
-import "./more-helpers"; // more-helpers is also 40kb in size
+import './helpers';
+import './more-helpers'; // more-helpers is also 40kb in size
 
 //...
 ```
@@ -285,8 +285,8 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         commons: {
-          name: "commons",
-          chunks: "initial",
+          name: 'commons',
+          chunks: 'initial',
           minChunks: 2
         }
       }
@@ -312,8 +312,8 @@ module.exports = {
       cacheGroups: {
         commons: {
           test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
-          chunks: "all"
+          name: 'vendors',
+          chunks: 'all'
         }
       }
     }

@@ -105,7 +105,7 @@ Specify a field, such as `browser`, to be parsed according to [this specificatio
 module.exports = {
   //...
   resolve: {
-    aliasFields: ["browser"]
+    aliasFields: ['browser']
   }
 };
 ```
@@ -128,7 +128,7 @@ The JSON files to use for descriptions. Default:
 module.exports = {
   //...
   resolve: {
-    descriptionFiles: ["package.json"]
+    descriptionFiles: ['package.json']
   }
 };
 ```
@@ -176,7 +176,7 @@ Automatically resolve certain extensions. This defaults to:
 module.exports = {
   //...
   resolve: {
-    extensions: [".js", ".json"]
+    extensions: ['.js', '.json']
   }
 };
 ```
@@ -203,7 +203,7 @@ When the `target` property is set to `webworker`, `web`, or left unspecified:
 module.exports = {
   //...
   resolve: {
-    mainFields: ["browser", "module", "main"]
+    mainFields: ['browser', 'module', 'main']
   }
 };
 ```
@@ -214,7 +214,7 @@ For any other target (including `node`):
 module.exports = {
   //...
   resolve: {
-    mainFields: ["module", "main"]
+    mainFields: ['module', 'main']
   }
 };
 ```
@@ -242,7 +242,7 @@ The filename to be used while resolving directories. Default:
 module.exports = {
   //...
   resolve: {
-    mainFiles: ["index"]
+    mainFiles: ['index']
   }
 };
 ```
@@ -266,7 +266,7 @@ With an absolute path, it will only search in the given directory.
 module.exports = {
   //...
   resolve: {
-    modules: ["node_modules"]
+    modules: ['node_modules']
   }
 };
 ```
@@ -277,7 +277,7 @@ If you want to add a directory to search in that takes precedence over `node_mod
 module.exports = {
   //...
   resolve: {
-    modules: [path.resolve(__dirname, "src"), "node_modules"]
+    modules: [path.resolve(__dirname, 'src'), 'node_modules']
   }
 };
 ```

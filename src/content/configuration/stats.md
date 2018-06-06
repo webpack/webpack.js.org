@@ -25,7 +25,7 @@ There are some presets available to use as a shortcut. Use them like this:
 ```js
 module.exports = {
   //...
-  stats: "errors-only"
+  stats: 'errors-only'
 };
 ```
 

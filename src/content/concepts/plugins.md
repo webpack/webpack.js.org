@@ -6,6 +6,7 @@ contributors:
   - jhnns
   - rouzbeh84
   - johnstew
+  - byzyk
 ---
 
 **Plugins** are the [backbone](https://github.com/webpack/tapable) of webpack. webpack itself is built on the **same plugin system** that you use in your webpack configuration!
@@ -25,7 +26,7 @@ const pluginName = 'ConsoleLogOnBuildWebpackPlugin';
 class ConsoleLogOnBuildWebpackPlugin {
   apply(compiler) {
     compiler.hooks.run.tap(pluginName, compilation => {
-      console.log("The webpack build process is starting!!!");
+      console.log('The webpack build process is starting!!!');
     });
   }
 }

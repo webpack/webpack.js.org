@@ -36,8 +36,8 @@ module.exports = {
     console: false,
     global: true,
     process: true,
-    __filename: "mock",
-    __dirname: "mock",
+    __filename: 'mock',
+    __dirname: 'mock',
     Buffer: true,
     setImmediate: true
 
@@ -132,8 +132,8 @@ Example:
 module.exports = {
   //...
   node: {
-    dns: "mock",
-    fs: "empty",
+    dns: 'mock',
+    fs: 'empty',
     path: true,
     url: false
   }

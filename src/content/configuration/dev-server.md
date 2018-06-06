@@ -27,7 +27,7 @@ This set of options is picked up by [webpack-dev-server](https://github.com/webp
 module.exports = {
   //...
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 9000
   }
@@ -164,7 +164,7 @@ You can prevent all these messages from showing, by using this option:
 module.exports = {
   //...
   devServer: {
-    clientLogLevel: "none"
+    clientLogLevel: 'none'
   }
 };
 ```
@@ -223,7 +223,7 @@ By default it will use your current working directory to serve content, but you 
 module.exports = {
   //...
   devServer: {
-    contentBase: path.join(__dirname, "public")
+    contentBase: path.join(__dirname, 'public')
   }
 };
 ```
@@ -236,7 +236,7 @@ It is also possible to serve from multiple directories:
 module.exports = {
   //...
   devServer: {
-    contentBase: [path.join(__dirname, "public"), path.join(__dirname, "assets")]
+    contentBase: [path.join(__dirname, 'public'), path.join(__dirname, 'assets')]
   }
 };
 ```
@@ -295,7 +295,7 @@ module.exports = {
   //...
   devServer: {
     lazy: true,
-    filename: "bundle.js"
+    filename: 'bundle.js'
   }
 };
 ```
@@ -316,7 +316,7 @@ module.exports = {
   //...
   devServer: {
     headers: {
-      "X-Custom-Foo": "bar"
+      'X-Custom-Foo': 'bar'
     }
   }
 };
@@ -387,7 +387,7 @@ Specify a host to use. By default this is `localhost`. If you want your server t
 module.exports = {
   //...
   devServer: {
-    host: "0.0.0.0"
+    host: '0.0.0.0'
   }
 };
 ```
@@ -461,9 +461,9 @@ module.exports = {
   //...
   devServer: {
     https: {
-      key: fs.readFileSync("/path/to/server.key"),
-      cert: fs.readFileSync("/path/to/server.crt"),
-      ca: fs.readFileSync("/path/to/ca.pem"),
+      key: fs.readFileSync('/path/to/server.key'),
+      cert: fs.readFileSync('/path/to/server.crt'),
+      ca: fs.readFileSync('/path/to/ca.pem'),
     }
   }
 };
@@ -739,7 +739,7 @@ module.exports = {
   //...
   devServer: {
     proxy: {
-      "/api": "http://localhost:3000"
+      '/api': 'http://localhost:3000'
     }
   }
 };
@@ -754,9 +754,9 @@ module.exports = {
   //...
   devServer: {
     proxy: {
-      "/api": {
-        target: "http://localhost:3000",
-        pathRewrite: {"^/api" : ""}
+      '/api': {
+        target: 'http://localhost:3000',
+        pathRewrite: {'^/api' : ''}
       }
     }
   }
@@ -770,8 +770,8 @@ module.exports = {
   //...
   devServer: {
     proxy: {
-      "/api": {
-        target: "https://other-server.example.com",
+      '/api': {
+        target: 'https://other-server.example.com',
         secure: false
       }
     }
@@ -790,12 +790,12 @@ module.exports = {
   //...
   devServer: {
     proxy: {
-      "/api": {
-        target: "http://localhost:3000",
+      '/api': {
+        target: 'http://localhost:3000',
         bypass: function(req, res, proxyOptions) {
-          if (req.headers.accept.indexOf("html") !== -1) {
-            console.log("Skipping proxy for browser request.");
-            return "/index.html";
+          if (req.headers.accept.indexOf('html') !== -1) {
+            console.log('Skipping proxy for browser request.');
+            return '/index.html';
           }
         }
       }
@@ -811,8 +811,8 @@ module.exports = {
   //...
   devServer: {
     proxy: [{
-      context: ["/auth", "/api"],
-      target: "http://localhost:3000",
+      context: ['/auth', '/api'],
+      target: 'http://localhost:3000',
     }]
   }
 };
@@ -858,7 +858,7 @@ For example, the dev-server is proxied by nginx, and available on `myapp.test`:
 module.exports = {
   //...
   devServer: {
-    public: "myapp.test:80"
+    public: 'myapp.test:80'
   }
 };
 ```
@@ -884,7 +884,7 @@ The `publicPath` can be changed so the bundle is put in a directory:
 module.exports = {
   //...
   devServer: {
-    publicPath: "/assets/"
+    publicPath: '/assets/'
   }
 };
 ```
@@ -899,7 +899,7 @@ It is also possible to use a full URL. This is necessary for Hot Module Replacem
 module.exports = {
   //...
   devServer: {
-    publicPath: "http://localhost:8080/assets/"
+    publicPath: 'http://localhost:8080/assets/'
   }
 };
 ```
@@ -1006,7 +1006,7 @@ To show only errors in your bundle:
 module.exports = {
   //...
   devServer: {
-    stats: "errors-only"
+    stats: 'errors-only'
   }
 };
 ```
