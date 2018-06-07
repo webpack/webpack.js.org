@@ -14,7 +14,7 @@ A plugin for `webpack` consists of a named JavaScript class that:
 
 - Defines the `apply` method.
 - Specifies an [event hook](/api/compiler-hooks/) on which to bind itself.
-- Tunes the build using the plugin API provided by webpack.
+- Manipulates the build using the plugin API provided by webpack.
 
 ```javascript
 class MyExampleWebpackPlugin {
@@ -27,7 +27,7 @@ class MyExampleWebpackPlugin {
         console.log('This is an example plugin!');
         console.log('Here’s the `compilation` object which represents a single build of assets:', compilation);
 
-        // Tune the build using the plugin API provided by webpack
+        // Manipulate the build using the plugin API provided by webpack
         compilation.addModule(/* ... */);
 
         callback();
@@ -58,7 +58,7 @@ class HelloWorldPlugin {
 module.exports = HelloWorldPlugin;
 ```
 
-Then to use the plugin, just include an instance in your webpack config `plugins` array:
+Then to use the plugin, include an instance in your webpack config `plugins` array:
 
 ```javascript
 // webpack.config.js
