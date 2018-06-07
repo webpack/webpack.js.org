@@ -49,7 +49,7 @@ T> Learn more in the [entry points](/concepts/entry-points) section.
 
 ## Output
 
-The **output** property tells webpack where to emit the *bundles* it creates and how to name these files, it defaults to `./dist/bundle.js` for the main output file and to the `./dist` folder for any other generated file.
+The **output** property tells webpack where to emit the *bundles* it creates and how to name these files, it defaults to `./dist/main.js` for the main output file and to the `./dist` folder for any other generated file.
 
 You can configure this part of the process by specifying an `output` field in your configuration:
 
