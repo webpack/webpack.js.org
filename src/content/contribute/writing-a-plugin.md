@@ -14,20 +14,21 @@ A plugin for `webpack` consists of a named JavaScript class that:
 
 - Defines the `apply` method.
 - Specifies an [event hook](/api/compiler-hooks/) on which to bind itself.
-- Manipulates webpack internal instance specific data.
+- Tunes the build using the plugin API provided by webpack.
 
 ```javascript
-// A named JavaScript class...
 class MyExampleWebpackPlugin {
-  // ...that defines `apply` method in its prototype...
+  // Define the `apply` method
   apply(compiler) {
-    // ...specifies webpack’s event hook to attach itself..
+    // Specify the event hook to attach to
     compiler.hooks.compile.tapAsync(
       'afterCompile',
       (compilation, callback) => {
-        // ...and manipulates webpack internal instance specific data.
-        console.log('This is an example plugin!!!');
-        console.log('Here’s the compilation object:', compilation);
+        console.log('This is an example plugin!');
+        console.log('Here’s the `compilation` object which represents a single build of assets:', compilation);
+
+        // Tune the build using the plugin API provided by webpack
+        compilation.addModule(/* ... */);
 
         callback();
       }
@@ -115,7 +116,6 @@ class HelloAsyncPlugin {
   apply(compiler) {
     // tapAsync() is callback-based
     compiler.hooks.emit.tapAsync('HelloAsyncPlugin', function(compilation, callback) {
-      // Do something async...
       setTimeout(function() {
         console.log("Done with async work...");
         callback();
@@ -124,7 +124,6 @@ class HelloAsyncPlugin {
 
     // tapPromise() is promise-based
     compiler.hooks.emit.tapPromise('HelloAsyncPlugin', (compilation) => {
-      // Do something async...
       return doSomethingAsync()
         .then(() => {
           console.log("Done with async work...");
