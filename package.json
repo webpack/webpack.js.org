@@ -90,6 +90,7 @@
     "remark-loader": "^0.3.0",
     "remark-mermaid": "^0.2.0",
     "remark-slug": "^5.0.0",
+    "request": "^2.81.0",
     "request-promise": "^4.2.2",
     "sass-loader": "^6.0.6",
     "sitemap-static": "^0.4.2",

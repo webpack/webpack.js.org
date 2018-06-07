@@ -1,81 +1,318 @@
 ---
 title: Parser
 group: Plugins
-sort: 8
+sort: 4
 ---
 
-The parser instance takes a String and callback and will return an expression when there's a match.
+The `parser` instance, found in the `compiler`, is used to parse each module
+being processed by webpack. The `parser` is yet another webpack class that
+extends `tapable` and provides a variety of `tapable` hooks that can be used by
+plugin authors to customize the parsing process.
 
-```javascript
-compiler.parser.plugin("var rewire", function (expr) {
-    //if you original module has 'var rewire'
-    //you now have a handle on the expresssion object
-    return true;
-});
+The `parser` is found within [module factories](/api/compiler-hooks/#normalmodulefactory) and therefore takes little
+more work to access:
+
+``` js
+compiler.hooks.normalModuleFactory.tap('MyPlugin', factory => {
+  factory.hooks.parser.tap('MyPlugin', (parser, options) => {
+    parser.hooks.someHook.tap(...)
+  })
+})
 ```
 
-## `program(ast)` bailing
+As with the `compiler`, `tapAsync` and `tapPromise` may also be available
+depending on the type of hook.
 
-General purpose plugin interface for the AST of a code fragment.
 
-## `statement(statement: Statement)` bailing
+## Hooks
 
-General purpose plugin interface for the statements of the code fragment.
+The following lifecycle hooks are exposed by the `parser` and can be accessed
+as such:
 
-## `call <identifier>(expr: Expression)` bailing
 
-`abc(1)` => `call abc`
+### evaluateTypeof
 
-`a.b.c(1)` => `call a.b.c`
-
-## `expression <identifier>(expr: Expression)` bailing
-
-`abc` => `expression abc`
-
-`a.b.c` => `expression a.b.c`
-
-## `expression ?:(expr: Expression)` bailing
-
-`(abc ? 1 : 2)` => `expression ?!`
-
-Return a boolean value to omit parsing of the wrong path.
-
-## `typeof <identifier>(expr: Expression)` bailing
-
-`typeof a.b.c` => `typeof a.b.c`
-
-## `statement if(statement: Statement)` bailing
-
-`if(abc) {}` => `statement if`
-
-Return a boolean value to omit parsing of the wrong path.
-
-## `label <labelname>(statement: Statement)` bailing
-
-`xyz: abc` => `label xyz`
-
-## `var <name>(statement: Statement)` bailing
-
-`var abc, def` => `var abc` + `var def`
-
-Return `false` to not add the variable to the known definitions.
-
-## `evaluate <expression type>(expr: Expression)` bailing
-
-Evaluate an expression.
-
-## `evaluate typeof <identifier>(expr: Expression)` bailing
+`SyncBailHook`
 
 Evaluate the type of an identifier.
 
-## `evaluate Identifier <identifier>(expr: Expression)` bailing
+Parameters: `expression`
 
-Evaluate a identifier that is a free var.
 
-## `evaluate defined Identifier <identifier>(expr: Expression)` bailing
+### evaluate
 
-Evaluate a identifier that is a defined var.
+`SyncBailHook`
 
-## `evaluate CallExpression .<property>(expr: Expression)` bailing
+Evaluate an expression.
+
+Parameters: `expression`
+
+
+### evaluateIdentifier
+
+`SyncBailHook`
+
+Evaluate an identifier that is a free variable.
+
+Parameters: `expression`
+
+
+### evaluateDefinedIdentifier
+
+`SyncBailHook`
+
+Evaluate an identifier that is a defined variable.
+
+Parameters: `expression`
+
+
+### evaluateCallExpressionMember
+
+`SyncBailHook`
 
 Evaluate a call to a member function of a successfully evaluated expression.
+
+Parameters: `expression` `param`
+
+
+### statement
+
+`SyncBailHook`
+
+General purpose hook that is called when parsing statements in a code fragment.
+
+Parameters: `statement`
+
+
+### statementIf
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement`
+
+
+### label
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement`
+
+
+### import
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement` `source`
+
+
+### importSpecifier
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement` `source` `exportName` `identifierName`
+
+
+### export
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement`
+
+
+### exportImport
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement` `source`
+
+
+### exportDeclaration
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement` `declaration`
+
+
+### exportExpression
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement` `declaration`
+
+
+### exportSpecifier
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement` `identifierName` `exportName` `index`
+
+
+### exportImportSpecifier
+
+`SyncBailHook`
+
+...
+
+Parameters: `statement` `source` `identifierName` `exportName` `index`
+
+
+### varDeclaration
+
+`SyncBailHook`
+
+...
+
+Parameters: `declaration`
+
+
+### varDeclarationLet
+
+`SyncBailHook`
+
+...
+
+Parameters: `declaration`
+
+
+### varDeclarationConst
+
+`SyncBailHook`
+
+...
+
+Parameters: `declaration`
+
+
+### varDeclarationVar
+
+`SyncBailHook`
+
+...
+
+Parameters: `declaration`
+
+
+### canRename
+
+`SyncBailHook`
+
+...
+
+Parameters: `initExpression`
+
+
+### rename
+
+`SyncBailHook`
+
+...
+
+Parameters: `initExpression`
+
+
+### assigned
+
+`SyncBailHook`
+
+...
+
+Parameters: `expression`
+
+
+### assign
+
+`SyncBailHook`
+
+...
+
+Parameters: `expression`
+
+
+### typeof
+
+`SyncBailHook`
+
+...
+
+Parameters: `expression`
+
+
+### call
+
+`SyncBailHook`
+
+...
+
+Parameters: `expression`
+
+
+### callAnyMember
+
+`SyncBailHook`
+
+...
+
+Parameters: `expression`
+
+
+### new
+
+`SyncBailHook`
+
+...
+
+Parameters: `expression`
+
+
+### expression
+
+`SyncBailHook`
+
+...
+
+Parameters: `expression`
+
+
+### expressionAnyMember
+
+`SyncBailHook`
+
+...
+
+Parameters: `expression`
+
+
+### expressionConditionalOperator
+
+`SyncBailHook`
+
+...
+
+Parameters: `expression`
+
+
+### program
+
+`SyncBailHook`
+
+Get access to the abstract syntax tree (AST) of a code fragment
+
+Parameters: `ast` `comments`

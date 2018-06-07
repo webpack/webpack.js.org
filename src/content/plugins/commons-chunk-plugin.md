@@ -6,9 +6,14 @@ contributors:
   - christopher4lis
   - kevinzwhuang
   - jdbevan
+  - jeremenichelli
 ---
 
-The `CommonsChunkPlugin` is an opt-in feature that creates a separate file (known as a chunk), consisting of common modules shared between multiple entry points. By separating common modules from bundles, the resulting chunked file can be loaded once initially, and stored in cache for later use. This results in pagespeed optimizations as the browser can quickly serve the shared code from cache, rather than being forced to load a larger bundle whenever a new page is visited.
+The `CommonsChunkPlugin` is an opt-in feature that creates a separate file (known as a chunk), consisting of common modules shared between multiple entry points.
+
+W> The CommonsChunkPlugin has been removed in webpack v4 legato. To learn how chunks are treated in the latest version, check out the [SplitChunksPlugin](/plugins/split-chunks-plugin/).
+
+By separating common modules from bundles, the resulting chunked file can be loaded once initially, and stored in cache for later use. This results in pagespeed optimizations as the browser can quickly serve the shared code from cache, rather than being forced to load a larger bundle whenever a new page is visited.
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin(options)
@@ -120,7 +125,7 @@ plugins: [
 <script src="app.js" charset="utf-8"></script>
 ```
 
-T> In combination with long term caching you may need to use the [`ChunkManifestWebpackPlugin`](https://github.com/diurnalist/chunk-manifest-webpack-plugin) to avoid the vendor chunk changes. You should also use records to ensure stable module ids, e.g. using [`NamedModulesPlugin`](/plugins/named-modules-plugin) or [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin).
+T> In combination with long term caching you may need to use the [`ChunkManifestWebpackPlugin`](https://github.com/soundcloud/chunk-manifest-webpack-plugin) to avoid the vendor chunk changes. You should also use records to ensure stable module ids, e.g. using [`NamedModulesPlugin`](/plugins/named-modules-plugin) or [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin).
 
 
 ### Move common modules into the parent chunk
@@ -149,7 +154,7 @@ Similar to the above one, but instead of moving common modules into the parent (
 new webpack.optimize.CommonsChunkPlugin({
   name: "app",
   // or
-  names: ["app", "subPageA"]
+  names: ["app", "subPageA"],
   // the name or list of names must match the name or names
   // of the entry points that create the async chunks
 
@@ -255,5 +260,5 @@ Since the `vendor` and `manifest` chunk use a different definition for `minChunk
 ## More Examples
 
 - [Common and Vendor Chunks](https://github.com/webpack/webpack/tree/master/examples/common-chunk-and-vendor-chunk)
-- [Multiple Common Chunks](https://github.com/webpack/webpack/tree/master/examples/multiple-commons-chunks)
-- [Multiple Entry Points with Commons Chunk](https://github.com/webpack/webpack/tree/master/examples/multiple-entry-points-commons-chunk-css-bundle)
+- [Multiple Common Chunks](https://github.com/webpack/webpack/tree/8b888fedfaeaac6bd39168c0952cc19e6c34280a/examples/multiple-commons-chunks)
+- [Multiple Entry Points with Commons Chunk](https://github.com/webpack/webpack/tree/8b888fedfaeaac6bd39168c0952cc19e6c34280a/examples/multiple-entry-points-commons-chunk-css-bundle)

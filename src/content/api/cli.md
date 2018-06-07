@@ -5,6 +5,7 @@ contributors:
   - ev1stensberg
   - simon04
   - tbroadley
+  - chenxsan
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -20,9 +21,12 @@ related:
 
 For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the config file.
 
-Have a look at the [installation guide](/guides/installation) if you don't already have webpack installed.
+Users have a choice between two CLI packages:
 
-T> The new CLI for webpack is under development. New features are being added such as the `--init` flag. [Check it out!](https://github.com/webpack/webpack-cli)
+* [webpack-cli](https://github.com/webpack/webpack-cli): the original webpack full-featured CLI.
+* [webpack-command](https://github.com/webpack-contrib/webpack-command): the lightweight, opinionated and modern CLI.
+
+Read the [installation guide](/guides/installation) if you don't already have webpack and CLI installed.
 
 
 ## Usage with config file
@@ -36,8 +40,8 @@ See [configuration](/configuration) for the options in the configuration file.
 
 ## Usage without config file
 
-```bash
-webpack <entry> [<entry>] <output>
+```sh
+webpack <entry> [<entry>] -o <output>
 ```
 
 **`<entry>`**
@@ -109,12 +113,6 @@ Specifies a different [configuration](/configuration) file to pick up. Use this 
 webpack --config example.config.js
 ```
 
-**Suppress output of webpack**
-
-```bash
-webpack --silent
-```
-
 **Print result of webpack as a JSON**
 
 ```bash
@@ -122,7 +120,7 @@ webpack --json
 webpack --json > stats.json
 ```
 
-In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option the output can be a JSON object. This response is accepted by webpack's [analyse tool](https://webpack.github.com/analyse), or chrisbateman's [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/), or th0r's [webpack-bundle-analyzer](https://github.com/th0r/webpack-bundle-analyzer). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
+In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option the output can be a JSON object. This response is accepted by webpack's [analyse tool](https://webpack.github.io/analyse/), or chrisbateman's [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/), or th0r's [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
 
 ### Environment Options
 
@@ -146,6 +144,16 @@ Invocation                               | Resulting environment
 `webpack --env.prod=foo --env.prod=bar`  | `{prod: [ "foo", "bar" ]}`
 
 T> See the [environment variables](/guides/environment-variables) guide for more information on its usage.
+
+### Config Options
+
+Parameter                 | Explanation                                 | Input type | Default
+------------------------- | ------------------------------------------- | ---------- | ------------------
+`--config`                | Path to the config file                     | string     | webpack.config.js or webpackfile.js
+`--config-register, -r`   | Preload one or more modules before loading the webpack configuration | array |
+`--config-name`           | Name of the config to use                   | string     |
+`--env`                   | Environment passed to the config, when it is a function |
+`--mode`                  | Mode to use, either "development" or "production" | string      |
 
 ### Output Options
 
@@ -202,7 +210,7 @@ Parameter    | Explanation                                      | Input type | D
 `--debug`    | Switch loaders to debug mode                     | boolean    | false
 `--devtool`  | Define [source map type](/configuration/devtool/) for the bundled resources | string | -
 `--progress` | Print compilation progress in percentage         | boolean    | false
-
+`--display-error-details` | Display details about errors | boolean | false
 
 ### Module Options
 

@@ -238,7 +238,7 @@ T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plu
 
 ## `output.hashDigest`
 
-The encoding to use when generating the hash, defaults to `'hex'`. All encodings from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported.
+The encoding to use when generating the hash, defaults to `'hex'`. All encodings from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported. Using `'base64'` for filenames might be problematic since it has the character `/` in its alphabet. Likewise `'latin1'` could contain any character.
 
 
 ## `output.hashDigestLength`
@@ -250,7 +250,7 @@ The prefix length of the hash digest to use, defaults to `20`.
 
 `string|function`
 
-The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm) are supported. Since `4.0.0-alpha2`, the `hashFunction` can now be a constructor to a custom hash function. You can provide a non-crypto hash function for performance reasons.
+The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm_options) are supported. Since `4.0.0-alpha2`, the `hashFunction` can now be a constructor to a custom hash function. You can provide a non-crypto hash function for performance reasons.
 
 ``` js
 hashFunction: require('metrohash').MetroHash64
@@ -260,7 +260,7 @@ Make sure that the hashing function will have `update` and `digest` methods avai
 
 ## `output.hashSalt`
 
-An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_input_encoding).
+An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_inputencoding).
 
 
 ## `output.hotUpdateChunkFilename`
@@ -547,7 +547,7 @@ And finally the output is:
 });
 ```
 
-Note that omitting `library` will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the [object assignment section](#exposing-the-library-via-object-assignment). Example:
+Note that omitting `library` will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the [object assignment section](#expose-via-object-assignment). Example:
 
 ``` js
 output: {
@@ -616,7 +616,9 @@ Note that `[hash]` in this parameter will be replaced with an hash of the compil
 
 `boolean`
 
-Tell webpack to include comments in bundles with information about the contained modules. This option defaults to `false` and **should not** be used in production, but it's very useful in development when reading the generated code.
+Tells webpack to include comments in bundles with information about the contained modules. This option defaults to `true` in `development` and `false` in `production` [mode](/concepts/mode/) respectively.
+
+W> While the data this comments can provide is very useful during development when reading the generated code, it **should not** be used in production.
 
 ``` js
 pathinfo: true
@@ -680,7 +682,7 @@ publicPath: "../assets/", // relative to HTML page
 publicPath: "", // relative to HTML page (same directory)
 ```
 
-In cases where the `publicPath` of output files can't be known at compile time, it can be left blank and set dynamically at runtime in the entry file using the [free variable](http://stackoverflow.com/questions/12934929/what-are-free-variables) `__webpack_public_path__`.
+In cases where the `publicPath` of output files can't be known at compile time, it can be left blank and set dynamically at runtime in the entry file using the [free variable](https://stackoverflow.com/questions/12934929/what-are-free-variables) `__webpack_public_path__`.
 
 ``` js
  __webpack_public_path__ = myRuntimePublicPath

@@ -24,6 +24,7 @@ if (module.hot) {
 
 The following methods are supported...
 
+## Module API
 
 ### `accept`
 
@@ -36,6 +37,23 @@ module.hot.accept(
 )
 ```
 
+When using ESM `import` all imported symbols from `dependencies` are automatically updated. Note: The dependency string must match exactly with the `from` string in the `import`. In some cases `callback` can even be omitted. Using `require()` in the `callback` doesn't make sense here.
+
+When using CommonJS you need to update dependencies manually by using `require()` in the `callback`. Omitting the `callback` doesn't make sense here.
+
+### `accept` (self)
+
+Accept updates for itself.
+
+``` js
+module.hot.accept(
+  errorHandler // Function to handle errors when evaluating the new version
+)
+```
+
+When this module or dependencies are updated, this module can be disposed and re-evaluated without informing parents. This makes sense if this module has no exports (or exports are updated in another way).
+
+The `errorHandler` is fired when the evaluation of this module (or dependencies) has thrown an exception.
 
 ### `decline`
 
@@ -47,6 +65,17 @@ module.hot.decline(
 )
 ```
 
+Flag a dependency as not-update-able. This makes sense when changing exports of this dependency can be handled or handling is not implemented yet. Depending on your HMR management code an update to this dependencies (or unaccepted dependencies of it) usually causes a full-reload of the page.
+
+### `decline` (self)
+
+Reject updates for itself.
+
+``` js
+module.hot.decline()
+```
+
+Flag this module as not-update-able. This make sense when this module has inrevertable side-effects, or HMR handling is not implemented for this module yet. Depending on your HMR management code an update to this module (or unaccepted dependencies) usually causes a full-reload of the page.
 
 ### `dispose` (or `addDisposeHandler`)
 
@@ -67,6 +96,7 @@ Remove the callback added via `dispose` or `addDisposeHandler`.
 module.hot.removeDisposeHandler(callback)
 ```
 
+## Management API
 
 ### `status`
 

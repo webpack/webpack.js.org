@@ -8,7 +8,7 @@ contributors:
   - skipjack
 related:
   - title: Code Splitting Example
-    url: https://github.com/webpack/webpack/tree/master/examples/explicit-vendor-chunk/README.md
+    url: https://github.com/webpack/webpack/blob/master/examples/explicit-vendor-chunk/README.md
 ---
 
 The `DllPlugin` and `DllReferencePlugin` provide means to split bundles in a way that can drastically improve build time performance.
@@ -108,14 +108,14 @@ T> Multiple `DllPlugins` and multiple `DllReferencePlugins`.
 
 ### Source
 
-* [DllPlugin source](https://github.com/webpack/webpack/tree/master/lib/DllPlugin.js)
-* [DllReferencePlugin source](https://github.com/webpack/webpack/tree/master/lib/DllReferencePlugin.js)
+* [DllPlugin source](https://github.com/webpack/webpack/blob/master/lib/DllPlugin.js)
+* [DllReferencePlugin source](https://github.com/webpack/webpack/blob/master/lib/DllReferencePlugin.js)
 * [DllEntryPlugin source](https://github.com/webpack/webpack/blob/master/lib/DllEntryPlugin.js)
 * [DllModuleFactory source](https://github.com/webpack/webpack/blob/master/lib/DllModuleFactory.js)
 * [ManifestPlugin source](https://github.com/webpack/webpack/blob/master/lib/LibManifestPlugin.js)
 
 ### Tests
 
-* [DllPlugin creation test](https://github.com/webpack/webpack/tree/master/test/configCases/dll-plugin/0-create-dll/webpack.config.js)
-* [DllPlugin without scope test](https://github.com/webpack/webpack/tree/master/test/configCases/dll-plugin/2-use-dll-without-scope/webpack.config.js)
+* [DllPlugin creation test](https://github.com/webpack/webpack/blob/master/test/configCases/dll-plugin/0-create-dll/webpack.config.js)
+* [DllPlugin without scope test](https://github.com/webpack/webpack/blob/master/test/configCases/dll-plugin/2-use-dll-without-scope/webpack.config.js)
 * [DllReferencePlugin use Dll test](https://github.com/webpack/webpack/tree/master/test/configCases/dll-plugin)

@@ -22,7 +22,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 ## JSON
 
 * [`json-loader`](/loaders/json-loader) Loads a [JSON](http://json.org/) file (included by default)
-* [`json5-loader`](/loaders/json5-loader) Loads and transpiles a [JSON 5](http://json5.org/) file
+* [`json5-loader`](/loaders/json5-loader) Loads and transpiles a [JSON 5](https://json5.org/) file
 * `cson-loader` Loads and transpiles a [CSON](https://github.com/bevry/cson#what-is-cson) file
 
 
@@ -46,6 +46,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 * `posthtml-loader` Loads and transforms a HTML file using [PostHTML](https://github.com/posthtml/posthtml)
 * `handlebars-loader` Compiles Handlebars to HTML
 * [`markup-inline-loader`](https://github.com/asnowwolf/markup-inline-loader) Inline SVG/MathML files to HTML. It’s useful when applying icon font or applying CSS animation to SVG.
+* [`twig-loader`](https://github.com/zimmo-be/twig-loader) Compiles Twig templates and returns a function
 
 ## Styling
 
@@ -60,7 +61,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 ## Linting && Testing
 
 * [`mocha-loader`](/loaders/mocha-loader) Tests with [mocha](https://mochajs.org/) (Browser/NodeJS)
-* [`eslint-loader`](https://github.com/MoOx/eslint-loader) PreLoader for linting code using [ESLint](http://eslint.org/)
+* [`eslint-loader`](https://github.com/webpack-contrib/eslint-loader) PreLoader for linting code using [ESLint](https://eslint.org/)
 * [`jshint-loader`](/loaders/jshint-loader) PreLoader for linting code using [JSHint](http://jshint.com/about/)
 * `jscs-loader` PreLoader for code style checking using [JSCS](http://jscs.info/)
 * [`coverjs-loader`](/loaders/coverjs-loader) PreLoader to determine the testing coverage using [CoverJS](https://github.com/arian/CoverJS)

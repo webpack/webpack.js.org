@@ -26,10 +26,11 @@ and then proceed to write your configuration:
 __webpack.config.ts__
 
 ```typescript
-import * as webpack from 'webpack';
-import * as path from 'path';
+import path from 'path';
+import webpack from 'webpack';
 
 const config: webpack.Configuration = {
+  mode: 'production',
   entry: './foo.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -39,6 +40,8 @@ const config: webpack.Configuration = {
 
 export default config;
 ```
+
+Above sample assumes version >= 2.7 or newer of TypeScript is used with the new `esModuleInterop` and `allowSyntheticDefaultImports` compiler options in your `tsconfig.json` file.
 
 Note that you'll also need to check your `tsconfig.json` file. If the module in `compilerOptions` in `tsconfig.json` is `commonjs`, the setting is complete, else webpack will fail with an error. This occurs because `ts-node` does not support any module syntax other than `commonjs`.
 
@@ -101,6 +104,7 @@ webpack = require('webpack')
 path = require('path')
 
 config =
+  mode: 'production'
   entry: './path/to/my/entry/file.js'
   output:
     path: path.resolve(__dirname, 'dist')
@@ -150,7 +154,7 @@ const CustomPlugin = config => ({
 });
 
 export default (
-  <webpack target="web" watch>
+  <webpack target="web" watch mode="production">
     <entry path="src/index.js" />
     <resolve>
       <alias {...{

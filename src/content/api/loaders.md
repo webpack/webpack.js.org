@@ -36,7 +36,7 @@ __sync-loader-with-multiple-results.js__
 
 ``` js
 module.exports = function(content, map, meta) {
-  this.callback(null, someSyncOperation(content), sourceMaps, meta);
+  this.callback(null, someSyncOperation(content), map, meta);
   return; // always return undefined when calling callback()
 };
 ```
@@ -176,6 +176,11 @@ require("./loader1?xyz!loader2!./resource?rrr");
 In the example: `/abc` because `resource.js` is in this directory
 
 
+### `this.rootContext`
+
+Starting with webpack 4, the formerly `this.options.context` is provided as `this.rootContext`.
+
+
 ### `this.request`
 
 The resolved request string.
@@ -188,7 +193,7 @@ In the example: `"/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/re
 1. If the loader was configured with an [`options`](/configuration/module/#useentry) object, this will point to that object.
 2. If the loader has no `options`, but was invoked with a query string, this will be a string starting with `?`.
 
-W> This property is deprecated as `options` is replacing `query`. Use the [`getOptions` method](https://github.com/webpack/loader-utils#getoptions) from `loader-utils` to extract the given loader options.
+T> Use the [`getOptions` method](https://github.com/webpack/loader-utils#getoptions) from `loader-utils` to extract given loader options.
 
 
 ### `this.callback`
@@ -355,7 +360,7 @@ addDependency(file: string)
 dependency(file: string) // shortcut
 ```
 
-Adds a file as dependency of the loader result in order to make them watchable. For example, [`html-loader`](https://github.com/webpack/html-loader) uses this technique as it finds `src` and `src-set` attributes. Then, it sets the url's for those attributes as dependencies of the html file that is parsed.
+Adds a file as dependency of the loader result in order to make them watchable. For example, [`html-loader`](https://github.com/webpack-contrib/html-loader) uses this technique as it finds `src` and `src-set` attributes. Then, it sets the url's for those attributes as dependencies of the html file that is parsed.
 
 
 ### `this.addContextDependency`
@@ -425,7 +430,7 @@ Passed from the last loader. If you would execute the input argument as module, 
 
 ### `this.options`
 
-The options passed to the Compiler.
+W> The `options` property has been deprecated in webpack 3 and removed in webpack 4.
 
 
 ### `this.debug`

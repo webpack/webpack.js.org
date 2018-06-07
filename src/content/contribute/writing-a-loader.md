@@ -98,7 +98,7 @@ Loaders should do only a single task. This not only makes the job of maintaining
 
 ### Chaining
 
-Take advantage of the fact that loaders can be chained together. Instead of writing a single loader that tackles five tasks, write five simpler loaders that divide this effort. Isolating them not only keeps each individual loader simple, but may allow for them to be used for something you hadn't though of originally.
+Take advantage of the fact that loaders can be chained together. Instead of writing a single loader that tackles five tasks, write five simpler loaders that divide this effort. Isolating them not only keeps each individual loader simple, but may allow for them to be used for something you hadn't thought of originally.
 
 Take the case of rendering a template file with data specified via loader options or query parameters. It could be written as a single loader that compiles the template from source, executes it and returns a module that exports a string containing the HTML code. However, in accordance with guidelines, a simple `apply-loader` exists that can be chained with other open source loaders:
 
@@ -289,7 +289,7 @@ export default (fixture, options = {}) => {
 
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
-      if (err) reject(err);
+      if (err || stats.hasErrors()) reject(err);
 
       resolve(stats);
     });
