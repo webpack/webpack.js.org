@@ -4,7 +4,7 @@ const remark = require('remark');
 const slug = require('remark-slug');
 
 // TODO: Extract these to separate packages
-const ExtractAnchors = require('./remark-extract-anchors');
+const ExtractAnchors = require('remark-extract-anchors');
 
 module.exports = function(item, options) {
   item.url = item.path

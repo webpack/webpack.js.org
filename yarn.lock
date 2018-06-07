@@ -6417,11 +6417,15 @@ pretty-ms@^3.0.0:
   dependencies:
     parse-ms "^1.0.0"
 
+prism-languages@0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/prism-languages/-/prism-languages-0.4.0.tgz#7b36964ac896909f888d3355aa9ac6055b116e87"
+
 prism-languages@^0.3.3:
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/prism-languages/-/prism-languages-0.3.3.tgz#79c395b4e25d4c4b12b9687beee7cbfa2373e1e4"
 
-prismjs@^1.9.0:
+prismjs@^1.9.0, prismjs@~1.14.0:
   version "1.14.0"
   resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.14.0.tgz#bbccfdb8be5d850d26453933cb50122ca0362ae0"
   optionalDependencies:
@@ -6943,6 +6947,13 @@ refractor@2.3.0:
     hastscript "^3.1.0"
     prismjs "~1.10.0"
 
+refractor@2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/refractor/-/refractor-2.4.1.tgz#067654311ed1618fc2dd76e9263c8cf05ab6298b"
+  dependencies:
+    hastscript "^3.1.0"
+    prismjs "~1.14.0"
+
 regenerate@^1.2.1:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/regenerate/-/regenerate-1.4.0.tgz#4a856ec4b56e4077c557589cae85e7a4c8869a11"
@@ -7020,6 +7031,18 @@ remark-autolink-headings@^5.0.0:
   resolved "https://registry.yarnpkg.com/remark-autolink-headings/-/remark-autolink-headings-5.0.0.tgz#9c00fed8d0ab33fba9cce83dff66a6fdd8efb31f"
   dependencies:
     unist-util-visit "^1.0.1"
+
+remark-custom-blockquotes@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/remark-custom-blockquotes/-/remark-custom-blockquotes-1.0.0.tgz#82ed4cebf45255a0d07ba81696f909c23b1d749d"
+  dependencies:
+    unist-util-visit "1.3.1"
+
+remark-extract-anchors@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/remark-extract-anchors/-/remark-extract-anchors-1.0.0.tgz#38088f8babef53e31260ced22c1cc4f55c2754de"
+  dependencies:
+    unist-util-visit "1.3.1"
 
 remark-frontmatter@^1.1.0:
   version "1.2.0"
@@ -7135,6 +7158,14 @@ remark-react@^4.0.0:
     hast-to-hyperscript "^4.0.0"
     hast-util-sanitize "^1.0.0"
     mdast-util-to-hast "^3.0.0"
+
+remark-refractor@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/remark-refractor/-/remark-refractor-1.0.0.tgz#d9102af70a92abc56d8de07e54f69b1770fb045a"
+  dependencies:
+    prism-languages "0.4.0"
+    refractor "2.4.1"
+    unist-util-visit "1.3.1"
 
 remark-retext@^3.0.0:
   version "3.1.0"
@@ -8204,9 +8235,9 @@ tap-parser@^6.0.1:
     js-yaml "^3.2.7"
     minipass "^2.2.0"
 
-"tap-render@github:munter/tap-render#0.1.7-patch1":
+tap-render@Munter/tap-render#0.1.7-patch1:
   version "0.1.7"
-  resolved "https://codeload.github.com/munter/tap-render/tar.gz/35bf3ac21c4fd2776d8569d5e8a1ab62df1f6d4f"
+  resolved "https://codeload.github.com/Munter/tap-render/tar.gz/35bf3ac21c4fd2776d8569d5e8a1ab62df1f6d4f"
   dependencies:
     jsonify "0.0.0"
     pause-stream "0.0.7"
@@ -8681,7 +8712,7 @@ unist-util-visit-children@^1.0.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/unist-util-visit-children/-/unist-util-visit-children-1.1.2.tgz#bd78b53db9644b9c339ac502854f15471f964f5b"
 
-unist-util-visit@^1.0.0, unist-util-visit@^1.0.1, unist-util-visit@^1.1.0, unist-util-visit@^1.1.3, unist-util-visit@^1.3.0:
+unist-util-visit@1.3.1, unist-util-visit@^1.0.0, unist-util-visit@^1.0.1, unist-util-visit@^1.1.0, unist-util-visit@^1.1.3, unist-util-visit@^1.3.0:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/unist-util-visit/-/unist-util-visit-1.3.1.tgz#c019ac9337a62486be58531bc27e7499ae7d55c7"
   dependencies:
