@@ -36,8 +36,8 @@ module.exports = (env = {}) => ({
             plugins: [
               require('remark-slug'),
               require('remark-mermaid'),
-              require('./src/utilities/remark-refractor.js'),
-              [require('./src/utilities/remark-custom-blockquotes.js'), {
+              require('remark-refractor'),
+              [require('remark-custom-blockquotes'), {
                 mapping: {
                   'T>': 'tip',
                   'W>': 'warning',
