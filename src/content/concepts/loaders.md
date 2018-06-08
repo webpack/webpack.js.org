@@ -31,8 +31,8 @@ And then instruct webpack to use the [`css-loader`](/loaders/css-loader) for eve
 module.exports = {
   module: {
     rules: [
-      { test: /\.css$/, use: 'css-loader' },
-      { test: /\.ts$/, use: 'ts-loader' }
+      { test: /\.css$/, loader: 'css-loader' },
+      { test: /\.ts$/, loader: 'ts-loader' }
     ]
   }
 };
