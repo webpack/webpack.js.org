@@ -24,7 +24,7 @@
     "node": ">=6.9"
   },
   "scripts": {
-    "start": "npm run init:generated && npm run fetch && node ./antwar.bootstrap.js develop",
+    "start": "concurrently \"npm run init:generated\" \"npm run fetch\" \"node ./antwar.bootstrap.js develop\"",
     "start-only": "node ./antwar.bootstrap.js develop",
     "build": "npm run init:generated && npm run fetch && rm -rf build/ && node ./antwar.bootstrap.js build && npm run sitemap && echo webpack.js.org > build/CNAME",
     "build-test": "npm run build && http-server build/",
@@ -53,6 +53,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
+    "concurrently": "^3.5.1",
     "copy-webpack-plugin": "^4.4.2",
     "css-loader": "^0.28.10",
     "duplexer": "^0.1.1",
