@@ -90,7 +90,6 @@ var config = {
 }
 
 module.exports = (env, argv) => {
-  console.log(argv.mode)        // outputs the mode
   
   if (argv.mode === "development") {
     config.devtool = "source-map";
