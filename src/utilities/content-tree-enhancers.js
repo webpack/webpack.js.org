@@ -2,9 +2,7 @@ const fs = require('fs');
 const frontMatter = require('front-matter');
 const remark = require('remark');
 const slug = require('remark-slug');
-
-// TODO: Extract these to separate packages
-const extractAnchors = require('./remark-extract-anchors');
+const extractAnchors = require('remark-extract-anchors');
 
 const enhance = (tree, options) => {
   // delete `./` root directory on node
