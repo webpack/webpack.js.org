@@ -14,7 +14,6 @@ const common = require('./webpack.common.js');
 // content tree to path array
 const paths = flattenContentTree(contentTree);
 
-console.log(JSON.stringify(paths))
 // Prod only config
 const prod = {
   plugins: [
