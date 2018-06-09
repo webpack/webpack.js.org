@@ -1,3 +1,7 @@
+#!/usr/bin/env node
+// ./build-content-tree source output
+// ./build-content-tree "./src/content" ".src/_content.json"
+
 const directoryTree = require('directory-tree');
 const fs = require('fs');
 const path = require('path');
@@ -19,6 +23,13 @@ function main() {
 }
 
 function buildContentTeee(source, output) {
+  if(!source) {
+    return console.error('build-content-tree: you must provide a source path');
+  }
+  if(!output) {
+    return console.error('build-content-tree: you must provide a output file name');
+  }
+
   let content = directoryTree(source, { extensions: /\.md/ });
 
   content = restructure(content, {
