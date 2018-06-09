@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - SpaceK33z
   - EugeneHlushko
+  - spicalous
 ---
 
 webpack can watch files and recompile whenever they change. This page explains how to enable this and a couple of tweaks you can make if watching does not work properly for you.
@@ -57,11 +58,13 @@ For some systems, watching many file systems can result in a lot of CPU or memor
 ignored: /node_modules/
 ```
 
-It is also possible to use [anymatch](https://github.com/micromatch/anymatch) patterns:
+It is also possible to have and use multiple [anymatch](https://github.com/micromatch/anymatch) patterns:
 
 ```js
-ignored: "files/**/*.js"
+ignored: ["files/**/*.js", "node_modules"]
 ```
+
+T> If you use `require.context`, webpack will watch your entire directory. You will need to ignore files and/or directories so that unwanted changes will not trigger a rebuild
 
 
 ## `watchOptions.poll`
