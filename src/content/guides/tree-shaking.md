@@ -10,6 +10,7 @@ contributors:
   - dmitriid
   - probablyup
   - gish
+  - lumo10
 related:
   - title: "webpack 4 beta — try it today!"
     url: https://medium.com/webpack/webpack-4-beta-try-it-today-6b1d27d7d7e2#9a67
@@ -55,6 +56,24 @@ export function square(x) {
 export function cube(x) {
   return x * x * x;
 }
+```
+
+You could need to set the development mode to be sure that bundle is not minified:
+
+__webpack.config.js__
+
+``` diff
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+- }
++ },
++ mode: "development"
+};
 ```
 
 With that in place, let's update our entry script to utilize one of these new methods and remove `lodash` for simplicity:
@@ -167,8 +186,8 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
-- }
-+ },
+  },
+- mode: "development"
 + mode: "production"
 };
 ```

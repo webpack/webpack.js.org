@@ -8,3 +8,4 @@ starter-kits-data.json
 .vscode
 .idea
 .DS_Store
+yarn-error.log
