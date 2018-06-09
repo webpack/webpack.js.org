@@ -37,6 +37,7 @@
     "lint:social": "alex . -q",
     "lint:prose": "cp .proselintrc ~/ && proselint src/content",
     "test": "npm run lint",
+    "format": "prettier --write loaders/*.js src/**/{*.js,*.jsx,*.scss}",
     "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml"
   },
   "devDependencies": {
@@ -81,6 +82,7 @@
     "node-sass": "^4.5.3",
     "npm-run-all": "^4.1.1",
     "postcss-loader": "^2.1.3",
+    "prettier": "1.13.5",
     "prism-languages": "^0.3.3",
     "prismjs": "^1.9.0",
     "raw-loader": "^0.5.1",
