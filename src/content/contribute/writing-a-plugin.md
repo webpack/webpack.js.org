@@ -34,7 +34,7 @@ class MyExampleWebpackPlugin {
         callback();
       }
     );
-  };
+  }
 }
 ```
 
@@ -94,10 +94,10 @@ Compiler exposes a bunch of hooks that provide a reference to each new compilati
 class HelloCompilationPlugin {
   apply(compiler) {
     // Setup callback for accessing a compilation:
-    compiler.hooks.compilation.tap("HelloCompilationPlugin", (compilation) => {
+    compiler.hooks.compilation.tap('HelloCompilationPlugin', (compilation) => {
       // Now setup callbacks for accessing compilation steps:
-      compilation.hooks.optimize.tap("HelloCompilationPlugin", () => {
-        console.log("Hello compilation!");
+      compilation.hooks.optimize.tap('HelloCompilationPlugin', () => {
+        console.log('Hello compilation!');
       });
     });
   }
@@ -118,7 +118,7 @@ class HelloAsyncPlugin {
     // tapAsync() is callback-based
     compiler.hooks.emit.tapAsync('HelloAsyncPlugin', function(compilation, callback) {
       setTimeout(function() {
-        console.log("Done with async work...");
+        console.log('Done with async work...');
         callback();
       }, 1000);
     });
@@ -127,14 +127,14 @@ class HelloAsyncPlugin {
     compiler.hooks.emit.tapPromise('HelloAsyncPlugin', (compilation) => {
       return doSomethingAsync()
         .then(() => {
-          console.log("Done with async work...");
+          console.log('Done with async work...');
         });
     });
 
     // Plain old tap() is still here:
     compiler.hooks.emit.tap('HelloAsyncPlugin', () => {
       // No async work here
-      console.log("Done with sync work...");
+      console.log('Done with sync work...');
     });
   }
 }
