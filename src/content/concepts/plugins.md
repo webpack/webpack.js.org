@@ -6,6 +6,7 @@ contributors:
   - jhnns
   - rouzbeh84
   - johnstew
+  - byzyk
 ---
 
 **Plugins** are the [backbone](https://github.com/webpack/tapable) of webpack. webpack itself is built on the **same plugin system** that you use in your webpack configuration!
@@ -23,11 +24,11 @@ __ConsoleLogOnBuildWebpackPlugin.js__
 const pluginName = 'ConsoleLogOnBuildWebpackPlugin';
 
 class ConsoleLogOnBuildWebpackPlugin {
-	apply(compiler) {
-		compiler.hooks.run.tap(pluginName, compilation => {
-			console.log("The webpack build process is starting!!!");
-		});
-	}
+  apply(compiler) {
+    compiler.hooks.run.tap(pluginName, compilation => {
+      console.log('The webpack build process is starting!!!');
+    });
+  }
 }
 ```
 
@@ -77,15 +78,15 @@ module.exports = {
 __some-node-script.js__
 
 ```javascript
-  const webpack = require('webpack'); //to access webpack runtime
-  const configuration = require('./webpack.config.js');
+const webpack = require('webpack'); //to access webpack runtime
+const configuration = require('./webpack.config.js');
 
-  let compiler = webpack(configuration);
-  compiler.apply(new webpack.ProgressPlugin());
+let compiler = webpack(configuration);
+compiler.apply(new webpack.ProgressPlugin());
 
-  compiler.run(function(err, stats) {
-    // ...
-  });
+compiler.run(function(err, stats) {
+  // ...
+});
 ```
 
 T> Did you know: The example seen above is extremely similar to the [webpack runtime itself!](https://github.com/webpack/webpack/blob/e7087ffeda7fa37dfe2ca70b5593c6e899629a2c/bin/webpack.js#L290-L292) There are lots of great usage examples hiding in the [webpack source code](https://github.com/webpack/webpack) that you can apply to your own configurations and scripts!
