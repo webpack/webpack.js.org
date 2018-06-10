@@ -4,6 +4,7 @@ sort: 4
 contributors:
   - tbroadley
   - iamakulov
+  - byzyk
 ---
 
 Plugins expose the full potential of the webpack engine to third-party developers. Using staged build callbacks, developers can introduce their own behaviors into the webpack build process. Building plugins is a bit more advanced than building loaders, because you'll need to understand some of the webpack low-level internals to hook into them. Be prepared to read some source code!
@@ -33,7 +34,7 @@ class MyExampleWebpackPlugin {
         callback();
       }
     );
-  };
+  }
 }
 ```
 
@@ -46,7 +47,7 @@ class HelloWorldPlugin {
   constructor(options) {
     this.options = options;
   }
-  
+
   apply(compiler) {
     compiler.hooks.done.tap('HelloWorldPlugin', () => {
       console.log('Hello World!');
@@ -93,10 +94,10 @@ Compiler exposes a bunch of hooks that provide a reference to each new compilati
 class HelloCompilationPlugin {
   apply(compiler) {
     // Setup callback for accessing a compilation:
-    compiler.hooks.compilation.tap("HelloCompilationPlugin", (compilation) => {
+    compiler.hooks.compilation.tap('HelloCompilationPlugin', (compilation) => {
       // Now setup callbacks for accessing compilation steps:
-      compilation.hooks.optimize.tap("HelloCompilationPlugin", () => {
-        console.log("Hello compilation!");
+      compilation.hooks.optimize.tap('HelloCompilationPlugin', () => {
+        console.log('Hello compilation!');
       });
     });
   }
@@ -117,7 +118,7 @@ class HelloAsyncPlugin {
     // tapAsync() is callback-based
     compiler.hooks.emit.tapAsync('HelloAsyncPlugin', function(compilation, callback) {
       setTimeout(function() {
-        console.log("Done with async work...");
+        console.log('Done with async work...');
         callback();
       }, 1000);
     });
@@ -126,14 +127,14 @@ class HelloAsyncPlugin {
     compiler.hooks.emit.tapPromise('HelloAsyncPlugin', (compilation) => {
       return doSomethingAsync()
         .then(() => {
-          console.log("Done with async work...");
+          console.log('Done with async work...');
         });
     });
 
     // Plain old tap() is still here:
     compiler.hooks.emit.tap('HelloAsyncPlugin', () => {
       // No async work here
-      console.log("Done with sync work...");
+      console.log('Done with sync work...');
     });
   }
 }
@@ -193,11 +194,11 @@ class SomeWebpackInternalClass {
       run: new AsyncSeriesHook(),
     };
   }
-  
+
   someMethod() {
     // Call a hook:
     this.hooks.run.call();
-  
+
     // Call another hook:
     // (This is an async one, so webpack passes a callback into it)
     this.hooks.run.callAsync(() => {
