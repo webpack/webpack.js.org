@@ -3,6 +3,7 @@ title: Mode
 sort: 4
 contributors:
   - EugeneHlushko
+  - byzyk
 ---
 
 Providing the `mode` configuration option tells webpack to use its built-in optimizations accordingly.
@@ -85,20 +86,20 @@ If you want to change the behavior according the **mode** variable inside the *w
 
 ```javascript
 var config = {
-  entry: "./app.js"
-  ..
-}
+  entry: './app.js'
+  //...
+};
 
 module.exports = (env, argv) => {
-  
-  if (argv.mode === "development") {
-    config.devtool = "source-map";
-  }
-  
-  if (argv.mode === "production") {
-  }
-  
-  return config;
-}
 
+  if (argv.mode === 'development') {
+    config.devtool = 'source-map';
+  }
+
+  if (argv.mode === 'production') {
+    //...
+  }
+
+  return config;
+};
 ```
