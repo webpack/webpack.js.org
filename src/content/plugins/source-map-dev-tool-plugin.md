@@ -71,7 +71,7 @@ new webpack.SourceMapDevToolPlugin({
 
 And for cases when source maps are stored in the upper level directory:
 
-```
+```code
 project
 |- dist
   |- public
@@ -92,6 +92,6 @@ new webpack.SourceMapDevToolPlugin({
 
 Will produce the following URL:
 
-```
+```code
 https://example.com/project/sourcemaps/bundle-[hash].js.map
 ```

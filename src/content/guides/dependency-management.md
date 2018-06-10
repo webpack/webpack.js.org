@@ -27,7 +27,7 @@ require('./template/' + name + '.ejs');
 
 webpack parses the `require()` call and extracts some information:
 
-```
+```code
 Directory: ./template
 Regular expression: /^.*\.ejs$/
 ```
