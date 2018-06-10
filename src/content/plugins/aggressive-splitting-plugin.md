@@ -2,6 +2,7 @@
 title: AggressiveSplittingPlugin
 contributors:
   - pierreneter
+  - byzyk
 ---
 
 The `AggressiveSplittingPlugin` can split bundles into smaller chunks, splitting every chunk until it reaches the specified `maxSize` configured in `options`. It groups modules together by folder structure.
@@ -13,11 +14,13 @@ Only chunks bigger than the specified `minSize` are stored in records. This ensu
 Chunks can be invalidated if a module changes. Modules from invalid chunks will go back into the module pool from which new chunks are created.
 
 ```js
-new webpack.optimize.AggressiveSplittingPlugin(options)
+new webpack.optimize.AggressiveSplittingPlugin(options);
 ```
 
 
 ## Options
+
+<!-- eslint-skip -->
 
 ```js
 {
