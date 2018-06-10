@@ -81,7 +81,7 @@ It is also possible to have and use multiple [anymatch](https://github.com/micro
 module.exports = {
   //...
   watchOptions: {
-    ignored: ["files/**/*.js", "node_modules"]
+    ignored: ['files/**/*.js', 'node_modules']
   }
 };
 ```
