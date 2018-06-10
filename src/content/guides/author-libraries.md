@@ -126,8 +126,8 @@ The consumer also can use the library by loading it via a script tag:
 
 Note that we can also configure it to expose the library in the following ways:
 
-- Property in the global object, for node.
-- Property in the `this` object.
+* Property in the global object, for node.
+* Property in the `this` object.
 
 For full library configuration and code please refer to [webpack-library-example](https://github.com/kalcifer/webpack-library-example).
 
@@ -136,16 +136,16 @@ For full library configuration and code please refer to [webpack-library-example
 
 Now let's bundle this library in a way that will achieve the following goals:
 
-- Without bundling `lodash`, but requiring it to be loaded by the consumer using `externals`.
-- Setting the library name as `webpack-numbers`.
-- Exposing the library as a variable called `webpackNumbers`.
-- Being able to access the library inside Node.js.
+* Without bundling `lodash`, but requiring it to be loaded by the consumer using `externals`.
+* Setting the library name as `webpack-numbers`.
+* Exposing the library as a variable called `webpackNumbers`.
+* Being able to access the library inside Node.js.
 
 Also, the consumer should be able to access the library the following ways:
 
-- ES2015 module. i.e. `import webpackNumbers from 'webpack-numbers'`.
-- CommonJS module. i.e. `require('webpack-numbers')`.
-- Global variable when included through `script` tag.
+* ES2015 module. i.e. `import webpackNumbers from 'webpack-numbers'`.
+* CommonJS module. i.e. `require('webpack-numbers')`.
+* Global variable when included through `script` tag.
 
 We can start with this basic webpack configuration:
 
@@ -283,10 +283,10 @@ __webpack.config.js__
 
 You can expose the library in the following ways:
 
-- Variable: as a global variable made available by a `script` tag (`libraryTarget:'var'`).
-- This: available through the `this` object (`libraryTarget:'this'`).
-- Window: available trough the `window` object, in the browser (`libraryTarget:'window'`).
-- UMD: available after AMD or CommonJS `require` (`libraryTarget:'umd'`).
+* Variable: as a global variable made available by a `script` tag (`libraryTarget:'var'`).
+* This: available through the `this` object (`libraryTarget:'this'`).
+* Window: available trough the `window` object, in the browser (`libraryTarget:'window'`).
+* UMD: available after AMD or CommonJS `require` (`libraryTarget:'umd'`).
 
 If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output). See [`output.libraryTarget`](/configuration/output#output-librarytarget) there for a detailed list of all available options.
 
