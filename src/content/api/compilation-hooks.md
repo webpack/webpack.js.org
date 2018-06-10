@@ -2,6 +2,8 @@
 title: Compilation Hooks
 group: Plugins
 sort: 2
+contributors:
+  - byzyk
 ---
 
 The `Compilation` module is used by the `Compiler` to create new compilations
@@ -15,7 +17,7 @@ The `Compilation` class also extends `Tapable` and provides the following
 lifecycle hooks. They can be tapped the same way as compiler hooks:
 
 ``` js
-compilation.hooks.someHook.tap(...)
+compilation.hooks.someHook.tap(/* ... */);
 ```
 
 As with the `compiler`, `tapAsync` and `tapPromise` may also be available
@@ -479,7 +481,7 @@ compilation.hooks.additionalAssets.tapAsync('MyPlugin', callback => {
     } else {
       callback(new Error('[webpack-example-plugin] Unable to download the image'));
     }
-  })
+  });
 });
 ```
 
