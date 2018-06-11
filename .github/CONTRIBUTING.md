@@ -8,20 +8,24 @@ page please create an issue first.
 
 ## Setup
 
-Start by ensuring you have Node installed and forking the repository:
+Start by ensuring you have Node and Yarn installed:
 
-- Install [Node.js][1] if you have not already.
+- Install [Node.js][1] if you haven't already.
+- Install [Yarn][13] if you haven't already.
+
+Fork the repository:
+
 - Fork the **webpack.js.org** repo from [the main repository][2].
 - `git clone <your-clone-url> && cd webpack.js.org`
 
 Once you are in the project directory, run the following commands:
 
-- `npm install` to pull all dependencies.
-- `npm run build` to create a production version of the site.
-- `npm start` to develop on a local webpack-dev-server: [localhost:3000][3].
-- `npm run fetch` to retrieve external documentation/data.
+- `yarn` to pull all dependencies.
+- `yarn build` to create a production version of the site.
+- `yarn start` to develop on a local webpack-dev-server: [localhost:3000][3].
+- `yarn fetch` to retrieve external documentation/data.
 
-The final command, `npm run fetch`, is optional as both `npm run build` and `npm start`
+The final command, `yarn fetch`, is optional as both `yarn build` and `yarn start`
 will do this automatically. This step pulls in documentation for loaders/plugins hosted
 in separate repositories such as the ones found in the [webpack-contrib][4] organization.
 See the `package.json` for the full list of `scripts`.
@@ -125,3 +129,4 @@ any time spent fixing typos or clarifying sections in the documentation.
 [10]: http://conventionalcommits.org/
 [11]: https://github.com/conventional-changelog/standard-version
 [12]: https://github.com/amperser/proselint
+[13]: https://yarnpkg.com/en/docs/install
