@@ -34,7 +34,7 @@ When trying to fulfill the last two conditions, bigger chunks are preferred.
 
 ## Configuration
 
-Webpack provides a set of options for developers that want more control over this functionality. 
+webpack provides a set of options for developers that want more control over this functionality. 
 
 W> The default configuration was chosen to fit web performance best practices, but the optimal strategy for your project might differ. If you're changing the configuration, you should measure the impact of your changes to ensure there's a real benefit.
 
