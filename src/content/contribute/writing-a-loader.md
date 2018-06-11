@@ -4,6 +4,7 @@ sort: 3
 contributors:
   - asulaiman
   - michael-ciniawsky
+  - byzyk
 ---
 
 A loader is a node module that exports a function. This function is called when a resource should be transformed by this loader. The given function will have access to the [Loader API](/api/loaders/) using the `this` context provided to it.
@@ -17,29 +18,39 @@ To test a single loader, you can simply use `path` to `resolve` a local file wit
 
 __webpack.config.js__
 
-``` js
-{
-  test: /\.js$/
-  use: [
-    {
-      loader: path.resolve('path/to/loader.js'),
-      options: {/* ... */}
-    }
-  ]
-}
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: [
+          {
+            loader: path.resolve('path/to/loader.js'),
+            options: {/* ... */}
+          }
+        ]
+      }
+    ]
+  }
+};
 ```
 
 To test multiple, you can utilize the `resolveLoader.modules` configuration to update where webpack will search for loaders. For example, if you had a local `/loaders` directory in your project:
 
 __webpack.config.js__
 
-``` js
-resolveLoader: {
-  modules: [
-    'node_modules',
-    path.resolve(__dirname, 'loaders')
-  ]
-}
+```js
+module.exports = {
+  //...
+  resolveLoader: {
+    modules: [
+      'node_modules',
+      path.resolve(__dirname, 'loaders')
+    ]
+  }
+};
 ```
 
 Last but not least, if you've already created a separate repository and package for your loader, you could [`npm link`](https://docs.npmjs.com/cli/link) it to the project in which you'd like to test it out.
@@ -66,14 +77,21 @@ So, in the following example, the `foo-loader` would be passed the raw resource 
 
 __webpack.config.js__
 
-``` js
-{
-  test: /\.js/,
-  use: [
-    'bar-loader',
-    'foo-loader'
-  ]
-}
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.js/,
+        use: [
+          'bar-loader',
+          'foo-loader'
+        ]
+      }
+    ]
+  }
+};
 ```
 
 
@@ -122,7 +140,7 @@ Take advantage of the [`loader-utils`](https://github.com/webpack/loader-utils) 
 
 __loader.js__
 
-``` js
+```js
 import { getOptions } from 'loader-utils';
 import validateOptions from 'schema-utils';
 
@@ -133,7 +151,7 @@ const schema = {
       type: 'string'
     }
   }
-}
+};
 
 export default function(source) {
   const options = getOptions(this);
@@ -143,7 +161,7 @@ export default function(source) {
   // Apply some transformations to the source...
 
   return `export default ${ JSON.stringify(source) }`;
-};
+}
 ```
 
 ### Loader Dependencies
@@ -152,7 +170,7 @@ If a loader uses external resources (i.e. by reading from filesystem), they __mu
 
 __loader.js__
 
-``` js
+```js
 import path from 'path';
 
 export default function(source) {
@@ -163,9 +181,9 @@ export default function(source) {
 
   fs.readFile(headerPath, 'utf-8', function(err, header) {
     if(err) return callback(err);
-    callback(null, header + "\n" + source);
+    callback(null, header + '\n' + source);
   });
-};
+}
 ```
 
 ### Module Dependencies
@@ -197,9 +215,11 @@ If the loader you're working on is a simple wrapper around another package, then
 
 For instance, the `sass-loader` [specifies `node-sass`](https://github.com/webpack-contrib/sass-loader/blob/master/package.json) as peer dependency like so:
 
-``` js
-"peerDependencies": {
-  "node-sass": "^4.0.0"
+```json
+{
+  "peerDependencies": {
+    "node-sass": "^4.0.0"
+  }
 }
 ```
 
@@ -214,7 +234,7 @@ npm install --save-dev jest babel-jest babel-preset-env
 
 __.babelrc__
 
-``` json
+```json
 {
   "presets": [[
     "env",
@@ -231,7 +251,7 @@ Our loader will process `.txt` files and simply replace any instance of `[name]`
 
 __src/loader.js__
 
-``` js
+```js
 import { getOptions } from 'loader-utils';
 
 export default function loader(source) {
@@ -240,7 +260,7 @@ export default function loader(source) {
   source = source.replace(/\[name\]/g, options.name);
 
   return `export default ${ JSON.stringify(source) }`;
-};
+}
 ```
 
 We'll use this loader to process the following file:
@@ -259,7 +279,7 @@ npm install --save-dev webpack memory-fs
 
 __test/compiler.js__
 
-``` js
+```js
 import path from 'path';
 import webpack from 'webpack';
 import memoryfs from 'memory-fs';
@@ -294,7 +314,7 @@ export default (fixture, options = {}) => {
       resolve(stats);
     });
   });
-}
+};
 ```
 
 T> In this case, we've inlined our webpack configuration but you can also accept a configuration as a parameter to the exported function. This would allow you to test multiple setups using the same compiler module.
@@ -303,22 +323,24 @@ And now, finally, we can write our test and add an npm script to run it:
 
 __test/loader.test.js__
 
-``` js
+```js
 import compiler from './compiler.js';
 
 test('Inserts name and outputs JavaScript', async () => {
   const stats = await compiler('example.txt');
   const output = stats.toJson().modules[0].source;
 
-  expect(output).toBe(`export default "Hey Alice!\\n"`);
+  expect(output).toBe('export default "Hey Alice!\\n"');
 });
 ```
 
 __package.json__
 
-``` js
-"scripts": {
-  "test": "jest"
+```json
+{
+  "scripts": {
+    "test": "jest"
+  }
 }
 ```
 

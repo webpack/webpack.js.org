@@ -5,6 +5,7 @@ contributors:
   - sokra
   - skipjack
   - tbroadley
+  - byzyk
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -18,7 +19,7 @@ If [Hot Module Replacement](/concepts/hot-module-replacement) has been enabled v
 if (module.hot) {
   module.hot.accept('./library.js', function() {
     // Do something with the updated library module...
-  })
+  });
 }
 ```
 
@@ -34,7 +35,7 @@ Accept updates for the given `dependencies` and fire a `callback` to react to th
 module.hot.accept(
   dependencies, // Either a string or an array of strings
   callback // Function to fire when the dependencies are updated
-)
+);
 ```
 
 When using ESM `import` all imported symbols from `dependencies` are automatically updated. Note: The dependency string must match exactly with the `from` string in the `import`. In some cases `callback` can even be omitted. Using `require()` in the `callback` doesn't make sense here.
@@ -48,7 +49,7 @@ Accept updates for itself.
 ``` js
 module.hot.accept(
   errorHandler // Function to handle errors when evaluating the new version
-)
+);
 ```
 
 When this module or dependencies are updated, this module can be disposed and re-evaluated without informing parents. This makes sense if this module has no exports (or exports are updated in another way).
@@ -62,7 +63,7 @@ Reject updates for the given `dependencies` forcing the update to fail with a `'
 ``` js
 module.hot.decline(
   dependencies // Either a string or an array of strings
-)
+);
 ```
 
 Flag a dependency as not-update-able. This makes sense when changing exports of this dependency can be handled or handling is not implemented yet. Depending on your HMR management code an update to this dependencies (or unaccepted dependencies of it) usually causes a full-reload of the page.
@@ -72,7 +73,7 @@ Flag a dependency as not-update-able. This makes sense when changing exports of 
 Reject updates for itself.
 
 ``` js
-module.hot.decline()
+module.hot.decline();
 ```
 
 Flag this module as not-update-able. This make sense when this module has inrevertable side-effects, or HMR handling is not implemented for this module yet. Depending on your HMR management code an update to this module (or unaccepted dependencies) usually causes a full-reload of the page.
@@ -84,7 +85,7 @@ Add a handler which is executed when the current module code is replaced. This s
 ``` js
 module.hot.dispose(data => {
   // Clean up and pass data to the updated module...
-})
+});
 ```
 
 
@@ -93,7 +94,7 @@ module.hot.dispose(data => {
 Remove the callback added via `dispose` or `addDisposeHandler`.
 
 ``` js
-module.hot.removeDisposeHandler(callback)
+module.hot.removeDisposeHandler(callback);
 ```
 
 ## Management API
@@ -103,7 +104,7 @@ module.hot.removeDisposeHandler(callback)
 Retrieve the current status of the hot module replacement process.
 
 ``` js
-module.hot.status() // Will return one of the following strings...
+module.hot.status(); // Will return one of the following strings...
 ```
 
 | Status      | Description                                                                            |
@@ -158,7 +159,9 @@ The optional `options` object can include the following properties:
 
 The `info` parameter will be an object containing some of the following values:
 
-``` js
+<!-- eslint-skip -->
+
+```js
 {
   type: "self-declined" | "declined" |
         "unaccepted" | "accepted" |
@@ -186,7 +189,7 @@ Register a function to listen for changes in `status`.
 ``` js
 module.hot.addStatusHandler(status => {
   // React to the current status...
-})
+});
 ```
 
 
@@ -195,5 +198,5 @@ module.hot.addStatusHandler(status => {
 Remove a registered status handler.
 
 ``` js
-module.hot.removeStatusHandler(callback)
+module.hot.removeStatusHandler(callback);
 ```
