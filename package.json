@@ -37,10 +37,10 @@
     "lint:markdown": "markdownlint --config ./.markdownlint.json *.md ./src/content/**/*.md --ignore './src/content/**/_*.md'",
     "lint:social": "alex . -q",
     "lint:prose": "cp .proselintrc ~/ && proselint src/content",
-    "todo": "... && npm run sitemap && echo webpack.js.org > build/CNAME",
+    "todo": "... && npm run sitemap && echo webpack.js.org > dist/CNAME",
     "sitemap": "cd dist && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml",
     "serve": "npm run build && sirv start ./dist --port 4000",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "@octokit/rest": "^15.2.6",
