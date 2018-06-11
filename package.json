@@ -41,7 +41,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn test"
+      "pre-commit": "npm test"
     }
   },
   "devDependencies": {
