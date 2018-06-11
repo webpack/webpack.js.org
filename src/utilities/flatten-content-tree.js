@@ -9,11 +9,11 @@ const flattenContentTree = (tree) => {
     if ('children' in node) {
       node.children.map(crawl);
     }
-  }
+  };
 
   tree.children.map(crawl);
 
   return paths;
-}
+};
 
 module.exports = flattenContentTree;

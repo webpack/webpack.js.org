@@ -52,5 +52,5 @@ function fetchPackageNames(options, cb) {
 
       resolve(filteredNames);
     });
-  })
+  });
 }
