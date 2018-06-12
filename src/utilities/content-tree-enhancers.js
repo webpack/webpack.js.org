@@ -44,7 +44,7 @@ const enhance = (tree, options) => {
 
     Object.assign(tree, attributes);
   }
-}
+};
 
 const filter = (item) => true;
 
@@ -57,7 +57,7 @@ const sort = (a, b) => {
   if (a.sort && b.sort) return a.sort - b.sort;
 
   else return 0;
-}
+};
 
 function restructure(item, options) {
     enhance(item, options);
@@ -77,4 +77,4 @@ module.exports = {
   filter,
   restructure,
   sort
-}
+};

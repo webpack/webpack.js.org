@@ -34,22 +34,26 @@ function main() {
   });
 
   stdin.on('end', function() {
-    fetchPackageFiles({
-      input: JSON.parse(input),
-      file: file,
-      output: path.resolve(process.cwd(), output)
-    }, (error, data) => {
-      if (error) {
-        return console.error(`utilities/fetch-package-files: ${ error }`);
-      }
+    fetchPackageFiles(
+      {
+        input: JSON.parse(input),
+        file: file,
+        output: path.resolve(process.cwd(), output)
+      },
+      (error, data) => {
+        if (error) {
+          return console.error(`utilities/fetch-package-files: ${error}`);
+        }
 
-      const msg = d.length === 0
-        ? 'Fetched 0 files'
-        : d.length === 1
-        ? 'Fetched 1 file: '
-        : `Fetched ${d.length} files: `;
-      console.log(msg + _.map(data, 'full_name'));
-    });
+        const msg =
+          data.length === 0
+            ? 'Fetched 0 files'
+            : data.length === 1
+              ? 'Fetched 1 file: '
+              : `Fetched ${data.length} files: `;
+        console.log(msg + _.map(data, 'full_name'));
+      }
+    );
   });
 }
 
@@ -69,7 +73,7 @@ function fetchPackageFiles(options, cb) {
     // build fetch url
     const file = options.file;
     const baseUrl = 'https://raw.githubusercontent.com';
-    const url = `${ baseUrl }/${ pkg.full_name }/${ branch }/${ file }`;
+    const url = `${baseUrl}/${pkg.full_name}/${branch}/${file}`;
 
     return request(url)
       .then(body => {
@@ -91,17 +95,14 @@ function fetchPackageFiles(options, cb) {
         let headmatter = yamlHeadmatter({
           title: title,
           source: url,
-          edit: `${pkg.html_url}/edit/${ branch }/${ file }`,
+          edit: `${pkg.html_url}/edit/${branch}/${file}`,
           repo: pkg.html_url
         });
 
-        return asyncWriteFile(
-          path.resolve(options.output, `_${pkg.name}` + path.extname(file)),
-          headmatter + body
-        );
+        return asyncWriteFile(path.resolve(options.output, `_${pkg.name}` + path.extname(file)), headmatter + body);
       })
       .catch(error => {
         console.log('utilities/fetch-package-piles', error);
-      })
-    });
+      });
+  });
 }

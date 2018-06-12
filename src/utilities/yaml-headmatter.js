@@ -5,7 +5,7 @@ module.exports = function yamlHeadmatter(fields) {
     ret += `${ field }: ${ fields[field] }\n`;
   });
 
-  ret = `${ ret }---\n`
+  ret = `${ ret }---\n`;
 
   return ret;
-}
+};

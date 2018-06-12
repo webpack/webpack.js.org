@@ -19,7 +19,7 @@ if (require.main === module) {
 function main() {
   const source = process.argv[2];
   const output = process.argv[3];
-  buildContentTeee(source, output)
+  buildContentTeee(source, output);
 }
 
 function buildContentTeee(source, output) {
@@ -36,8 +36,8 @@ function buildContentTeee(source, output) {
     dir: source
   });
 
-  fs.writeFileSync(path.resolve(output), JSON.stringify(content, 2), (err) => {
-    if (err) {
+  fs.writeFileSync(path.resolve(output), JSON.stringify(content, 2), (error) => {
+    if (error) {
       console.log('scripts/build-content-tree', error);
     } else {
       console.log('Successfully built content tree file at ' + output);
