@@ -8,6 +8,7 @@ contributors:
   - simon04
   - peterblazejewicz
   - youta1119
+  - byzyk
 ---
 
 webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found at the [node-interpret](https://github.com/js-cli/js-interpret) package. Using [node-interpret](https://github.com/js-cli/js-interpret), webpack can handle many different types of configuration files.
@@ -30,6 +31,7 @@ import path from 'path';
 import webpack from 'webpack';
 
 const config: webpack.Configuration = {
+  mode: 'production',
   entry: './foo.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -97,12 +99,15 @@ and then proceed to write your configuration:
 
 __webpack.config.coffee__
 
-```javascript
+<!-- eslint-skip -->
+
+```js
 HtmlWebpackPlugin = require('html-webpack-plugin')
 webpack = require('webpack')
 path = require('path')
 
 config =
+  mode: 'production'
   entry: './path/to/my/entry/file.js'
   output:
     path: path.resolve(__dirname, 'dist')
@@ -128,7 +133,7 @@ In the example below JSX (React JavaScript Markup) and Babel are used to create 
 
 First install the necessary dependencies:
 
-``` js
+``` bash
 npm install --save-dev babel-register jsxobj babel-preset-es2015
 ```
 
@@ -152,7 +157,7 @@ const CustomPlugin = config => ({
 });
 
 export default (
-  <webpack target="web" watch>
+  <webpack target="web" watch mode="production">
     <entry path="src/index.js" />
     <resolve>
       <alias {...{

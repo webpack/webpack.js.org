@@ -7,6 +7,7 @@ contributors:
   - simon04
   - jeremenichelli
   - svyandun
+  - byzyk
 related:
   - title: Reward modern browser users script
     url: https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665
@@ -216,7 +217,7 @@ var file = 'blah.txt';
 var helpers = {
   test: function() { console.log('test something'); },
   parse: function() { console.log('parse something'); }
-}
+};
 ```
 
 Now, while you'd likely never do this in your own source code, you may encounter a dated library you'd like to use that contains similar code to what's shown above. In this case, we can use [`exports-loader`](/loaders/exports-loader/), to export that global variable as a normal module export. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
@@ -428,7 +429,7 @@ If we run our build, another `polyfills.bundle.js` file will be emitted and ever
 
 ## Further Optimizations
 
-The `babel-preset-env` package uses [browserslist](https://github.com/ai/browserslist) to transpile only what is not supported in your browsers matrix. This preset comes with the `useBuiltIns` option, `false` by default, which converts your global `babel-polyfill` import to a more granular feature by feature `import` pattern:
+The `babel-preset-env` package uses [browserslist](https://github.com/browserslist/browserslist) to transpile only what is not supported in your browsers matrix. This preset comes with the `useBuiltIns` option, `false` by default, which converts your global `babel-polyfill` import to a more granular feature by feature `import` pattern:
 
 ``` js
 import 'core-js/modules/es7.string.pad-start';

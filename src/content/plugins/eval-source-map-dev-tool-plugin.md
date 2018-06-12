@@ -4,6 +4,7 @@ contributors:
   - johnnyreilly
   - simon04
   - kinseyost
+  - byzyk
 related:
   - title: Building Eval Source Maps
     url: https://survivejs.com/webpack/building/source-maps/#sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin
@@ -12,7 +13,7 @@ related:
 This plugin enables more fine grained control of source map generation. It is an alternative to the [`devtool`](/configuration/devtool/) configuration option.
 
 ``` js
-new webpack.EvalSourceMapDevToolPlugin(options)
+new webpack.EvalSourceMapDevToolPlugin(options);
 ```
 
 
@@ -46,7 +47,7 @@ The following code would exclude source maps for any modules in the `vendor.js` 
 new webpack.EvalSourceMapDevToolPlugin({
   filename: '[name].js.map',
   exclude: ['vendor.js']
-})
+});
 ```
 
 ### Setting sourceURL
@@ -62,7 +63,7 @@ The option can be set to a function:
 ``` js
 new webpack.EvalSourceMapDevToolPlugin({
   sourceURLTemplate: module => `/${module.identifier}`
-})
+});
 ```
 
 Or a substition string:
@@ -70,7 +71,5 @@ Or a substition string:
 ``` js
 new webpack.EvalSourceMapDevToolPlugin({
   sourceURLTemplate: '[all-loaders][resource]'
-})
+});
 ```
-
-
