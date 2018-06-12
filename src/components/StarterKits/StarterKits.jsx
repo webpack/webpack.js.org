@@ -20,7 +20,7 @@ const StarterKits = props => (
       kit to the list please visit{' '}
       <Link to="https://github.com/ahfarmer/javascriptstuff-db">this repository</Link>{' '}
       and submit a PR against this file:
-      <code>generator/starterProjectUrls.js</code>.
+      <code>data/source/react-starter-projects.js</code>.
     </p>
 
     <blockquote className="warning">

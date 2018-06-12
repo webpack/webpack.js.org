@@ -9,6 +9,9 @@ contributors:
   - MijaelWatts
   - dmitriid
   - probablyup
+  - gish
+  - lumo10
+  - byzyk
   - pnevares
 related:
   - title: "webpack 4 beta — try it today!"
@@ -47,7 +50,7 @@ webpack-demo
 
 __src/math.js__
 
-``` javascript
+```javascript
 export function square(x) {
   return x * x;
 }
@@ -55,6 +58,24 @@ export function square(x) {
 export function cube(x) {
   return x * x * x;
 }
+```
+
+You could need to set the development mode to be sure that bundle is not minified:
+
+__webpack.config.js__
+
+``` diff
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+- }
++ },
++ mode: "development"
+};
 ```
 
 With that in place, let's update our entry script to utilize one of these new methods and remove `lodash` for simplicity:
@@ -86,20 +107,20 @@ Note that we __did not `import` the `square` method__ from the `src/math.js` mod
 
 __dist/bundle.js (around lines 90 - 100)__
 
-``` js
+```js
 /* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
+  'use strict';
+  /* unused harmony export square */
+  /* harmony export (immutable) */ __webpack_exports__['a'] = cube;
+  function square(x) {
+    return x * x;
+  }
 
-"use strict";
-/* unused harmony export square */
-/* harmony export (immutable) */ __webpack_exports__["a"] = cube;
-function square(x) {
-  return x * x;
-}
-
-function cube(x) {
-  return x * x * x;
-}
+  function cube(x) {
+    return x * x * x;
+  }
+});
 ```
 
 Note the `unused harmony export square` comment above. If you look at the code below it, you'll notice that `square` is not being imported, however, it is still included in the bundle. We'll fix that in the next section.
@@ -165,8 +186,8 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
-- }
-+ },
+  },
+- mode: "development"
 + mode: "production"
 };
 ```
