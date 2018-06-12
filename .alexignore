@@ -1,1 +1,1 @@
-generated/plugins/*
+src/content/plugins/_*.md
