@@ -24,10 +24,10 @@
     "node": ">=6.9"
   },
   "scripts": {
-    "start": "npm run init:generated && npm run fetch && node ./antwar.bootstrap.js develop",
+    "start": "yarn init:generated && yarn fetch && node ./antwar.bootstrap.js develop",
     "start-only": "node ./antwar.bootstrap.js develop",
-    "build": "npm run init:generated && npm run fetch && rm -rf build/ && node ./antwar.bootstrap.js build && npm run sitemap && echo webpack.js.org > build/CNAME",
-    "build-test": "npm run build && http-server build/",
+    "build": "yarn init:generated && yarn fetch && rm -rf build/ && node ./antwar.bootstrap.js build && yarn sitemap && echo webpack.js.org > build/CNAME",
+    "build-test": "yarn build && http-server build/",
     "deploy": "gh-pages -d build",
     "fetch": "sh src/scripts/fetch.sh",
     "init:generated": "mkdirp ./generated/loaders && mkdirp ./generated/plugins ",
@@ -36,7 +36,7 @@
     "lint:markdown": "markdownlint --config ./.markdownlint.json *.md ./src/content/**/*.md",
     "lint:social": "alex . -q",
     "lint:prose": "cp .proselintrc ~/ && proselint src/content",
-    "test": "npm run lint",
+    "test": "yarn lint",
     "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml"
   },
   "husky": {
