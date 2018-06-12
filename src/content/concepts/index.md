@@ -12,6 +12,7 @@ contributors:
   - EugeneHlushko
   - jeremenichelli
   - arjunsajeev
+  - byzyk
 ---
 
 At its core, **webpack** is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it internally builds a _dependency graph_ which maps every module your project needs and generates one or more _bundles_.
@@ -88,7 +89,7 @@ __webpack.config.js__
 ```javascript
 const path = require('path');
 
-const config = {
+module.exports = {
   output: {
     filename: 'my-first-webpack.bundle.js'
   },
@@ -98,8 +99,6 @@ const config = {
     ]
   }
 };
-
-module.exports = config;
 ```
 
 The configuration above has defined a `rules` property for a single module with two required properties: `test` and `use`. This tells webpack's compiler the following:
@@ -125,7 +124,7 @@ In order to use a plugin, you need to `require()` it and add it to the `plugins`
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 const webpack = require('webpack'); //to access built-in plugins
 
-const config = {
+module.exports = {
   module: {
     rules: [
       { test: /\.txt$/, use: 'raw-loader' }
@@ -135,8 +134,6 @@ const config = {
     new HtmlWebpackPlugin({template: './src/index.html'})
   ]
 };
-
-module.exports = config;
 ```
 
 In the example above, the `html-webpack-plugin` generates an html file for your application injecting automatically all your generated bundles.

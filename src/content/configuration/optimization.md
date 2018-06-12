@@ -5,6 +5,7 @@ contributors:
   - EugeneHlushko
   - jeremenichelli
   - simon04
+  - byzyk
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -30,7 +31,7 @@ module.exports = {
   optimization: {
     minimize: false
   }
-}
+};
 ```
 
 T> Learn how [mode](/concepts/mode/) works.
@@ -54,7 +55,7 @@ module.exports = {
       new UglifyJsPlugin({ /* your config */ })
     ]
   }
-}
+};
 ```
 
 ## `optimization.splitChunks`
@@ -90,7 +91,7 @@ module.exports = {
       name: entrypoint => `runtimechunk~${entrypoint.name}`
     }
   }
-}
+};
 ```
 
 ## `optimization.noEmitOnErrors`
@@ -108,7 +109,7 @@ module.exports = {
   optimization: {
     noEmitOnErrors: true
   }
-}
+};
 ```
 
 W> If you are using webpack [CLI](/api/cli/), the webpack process will not exit with an error code while this plugin is enabled. If you want webpack to "fail" when using the CLI, please check out the [`bail` option](/api/cli/#advanced-options).
