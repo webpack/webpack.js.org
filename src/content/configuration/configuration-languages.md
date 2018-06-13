@@ -27,8 +27,8 @@ and then proceed to write your configuration:
 __webpack.config.ts__
 
 ```typescript
-import path from 'path';
-import webpack from 'webpack';
+import * as path from 'path';
+import * as webpack from 'webpack';
 
 const config: webpack.Configuration = {
   mode: 'production',
