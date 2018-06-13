@@ -179,7 +179,7 @@ __dist/index.html__
 
 In this setup, `index.js` explicitly requires `lodash` to be present, and binds it as `_` (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.
 
-With that said, let's run `npx webpack` with our script as the [entry point](/concepts/entry-points) and `main.js` as the (default) [output](/concepts/output). The `npx` command, which ships with Node 8.2 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
+With that said, let's run `npx webpack` with no arguments, which will take our script at `src/index.js` as the [entry point](/concepts/entry-points), and will generate `dest/main.js` as the [output](/concepts/output).. The `npx` command, which ships with Node 8.2 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
 
 ``` bash
 npx webpack
@@ -190,7 +190,8 @@ Time: 287ms
 Built at: 13/06/2018 11:52:07
   Asset      Size  Chunks             Chunk Names
 main.js  70.4 KiB       0  [emitted]  main
-[1] (webpack)/buildin/module.js 497 bytes {0} [built][2] (webpack)/buildin/global.js 489 bytes {0} [built]
+[1] (webpack)/buildin/module.js 497 bytes {0} [built]
+[2] (webpack)/buildin/global.js 489 bytes {0} [built]
 [3] ./src/index.js 216 bytes {0} [built]
     + 1 hidden module
 
@@ -255,13 +256,13 @@ Time: 283ms
 Built at: 13/06/2018 11:53:51
   Asset      Size  Chunks             Chunk Names
 main.js  70.4 KiB       0  [emitted]  main
-[1] (webpack)/buildin/module.js 497 bytes {0} [built][2] (webpack)/buildin/global.js 489 bytes {0} [built]
+[1] (webpack)/buildin/module.js 497 bytes {0} [built]
+[2] (webpack)/buildin/global.js 489 bytes {0} [built]
 [3] ./src/index.js 216 bytes {0} [built]
     + 1 hidden module
 
 WARNING in configuration
-The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable d
-efaults for each environment.
+The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
 You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/
 ```
 
