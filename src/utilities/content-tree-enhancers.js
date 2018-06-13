@@ -34,7 +34,7 @@ const enhance = (tree, options) => {
     remark()
       .use(slug)
       .use(extractAnchors, { anchors })
-      .process(content, (err) => {
+      .process(content, err => {
         if (err) {
           throw err;
         }
@@ -46,30 +46,21 @@ const enhance = (tree, options) => {
   }
 };
 
-const filter = (item) => true;
+const filter = item => true;
 
-const sort = (a, b) => {
-  let group1 = (a.group || '').toLowerCase();
-  let group2 = (b.group || '').toLowerCase();
-
-  if (group1 < group2) return -1;
-  if (group1 > group2) return 1;
-  if (a.sort && b.sort) return a.sort - b.sort;
-
-  else return 0;
-};
+const sort = (a, b) => a.name == 'index.md' ? -1 : 1
 
 function restructure(item, options) {
-    enhance(item, options);
+  enhance(item, options);
 
-   if (item.children) {
-     item.children.forEach(child => restructure(child, options));
+  if (item.children) {
+    item.children.forEach(child => restructure(child, options));
 
-     item.children.filter(filter);
-     item.children.sort(sort);
-   }
+    item.children.filter(filter);
+    item.children.sort(sort);
+  }
 
-   return item;
+  return item;
 }
 
 module.exports = {
