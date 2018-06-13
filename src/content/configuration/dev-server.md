@@ -7,6 +7,7 @@ contributors:
   - spacek33z
   - charlespwd
   - orteth01
+  - byzyk
 ---
 
 webpack-dev-server can be used to quickly develop an application. See the ["How to Develop?"](/guides/development) to get started.
@@ -23,11 +24,14 @@ T> Options that are compatible with [webpack-dev-middleware](https://github.com/
 This set of options is picked up by [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and can be used to change its behavior in various ways. Here's a simple example that gzips and serves everything from our `dist/` directory:
 
 ```js
-devServer: {
-  contentBase: path.join(__dirname, "dist"),
-  compress: true,
-  port: 9000
-}
+module.exports = {
+  //...
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 9000
+  }
+};
 ```
 
 When the server is started, there will be a message prior to the list of resolved modules:
@@ -54,9 +58,14 @@ Provides the ability to execute custom middleware after all other middleware
 internally within the server.
 
 ```js
-after(app){
-  // do fancy stuff
-}
+module.exports = {
+  //...
+  devServer: {
+    after: function(app) {
+      // do fancy stuff
+    }
+  }
+};
 ```
 
 ## `devServer.allowedHosts`
@@ -66,24 +75,34 @@ after(app){
 This option allows you to whitelist services that are allowed to access the dev server.
 
 ```js
-allowedHosts: [
-  'host.com',
-  'subdomain.host.com',
-  'subdomain2.host.com',
-  'host2.com'
-]
+module.exports = {
+  //...
+  devServer: {
+    allowedHosts: [
+      'host.com',
+      'subdomain.host.com',
+      'subdomain2.host.com',
+      'host2.com'
+    ]
+  }
+};
 ```
 
 Mimicking django's `ALLOWED_HOSTS`, a value beginning with `.` can be used as a subdomain wildcard. `.host.com` will match `host.com`, `www.host.com`, and any other subdomain of `host.com`.
 
 ```js
-// this achieves the same effect as the first example
-// with the bonus of not having to update your config
-// if new subdomains need to access the dev server
-allowedHosts: [
-    '.host.com',
-    'host2.com'
-]
+module.exports = {
+  //...
+  devServer: {
+    // this achieves the same effect as the first example
+    // with the bonus of not having to update your config
+    // if new subdomains need to access the dev server
+    allowedHosts: [
+      '.host.com',
+      'host2.com'
+    ]
+  }
+};
 ```
 
 To use this option with the CLI pass the `--allowed-hosts` option a comma-delimited string.
@@ -101,11 +120,16 @@ internally within the server. This could be used to define custom handlers, for
 example:
 
 ```js
-before(app){
-  app.get('/some/path', function(req, res) {
-    res.json({ custom: 'response' });
-  });
-}
+module.exports = {
+  //...
+  devServer: {
+    before: function(app) {
+      app.get('/some/path', function(req, res) {
+        res.json({ custom: 'response' });
+      });
+    }
+  }
+};
 ```
 
 ## `devServer.bonjour`
@@ -113,7 +137,12 @@ before(app){
 This option broadcasts the server via ZeroConf networking on start
 
 ```js
-bonjour: true
+module.exports = {
+  //...
+  devServer: {
+    bonjour: true
+  }
+};
 ```
 
 Usage via the CLI
@@ -132,7 +161,12 @@ When using *inline mode*, the console in your DevTools will show you messages e.
 You can prevent all these messages from showing, by using this option:
 
 ```js
-clientLogLevel: "none"
+module.exports = {
+  //...
+  devServer: {
+    clientLogLevel: 'none'
+  }
+};
 ```
 
 Usage via the CLI
@@ -162,7 +196,12 @@ webpack-dev-server --color
 Enable [gzip compression](https://betterexplained.com/articles/how-to-optimize-your-site-with-gzip-compression/) for everything served:
 
 ```js
-compress: true
+module.exports = {
+  //...
+  devServer: {
+    compress: true
+  }
+};
 ```
 
 Usage via the CLI
@@ -181,7 +220,12 @@ Tell the server where to serve content from. This is only necessary if you want 
 By default it will use your current working directory to serve content, but you can modify this to another directory:
 
 ```js
-contentBase: path.join(__dirname, "public")
+module.exports = {
+  //...
+  devServer: {
+    contentBase: path.join(__dirname, 'public')
+  }
+};
 ```
 
 Note that it is recommended to use an absolute path.
@@ -189,13 +233,23 @@ Note that it is recommended to use an absolute path.
 It is also possible to serve from multiple directories:
 
 ```js
-contentBase: [path.join(__dirname, "public"), path.join(__dirname, "assets")]
+module.exports = {
+  //...
+  devServer: {
+    contentBase: [path.join(__dirname, 'public'), path.join(__dirname, 'assets')]
+  }
+};
 ```
 
 To disable `contentBase`:
 
 ```js
-contentBase: false
+module.exports = {
+  //...
+  devServer: {
+    contentBase: false
+  }
+};
 ```
 
 Usage via the CLI
@@ -212,7 +266,12 @@ webpack-dev-server --content-base /path/to/content/dir
 When set to true this option bypasses host checking. THIS IS NOT RECOMMENDED as apps that do not check the host are vulnerable to DNS rebinding attacks.
 
 ```js
-disableHostCheck: true
+module.exports = {
+  //...
+  devServer: {
+    disableHostCheck: true
+  }
+};
 ```
 
 Usage via the CLI
@@ -232,8 +291,13 @@ By default in **lazy mode**, every request results in a new compilation. With `f
 If `output.filename` is set to `bundle.js` and `filename` is used like this:
 
 ```js
-lazy: true,
-filename: "bundle.js"
+module.exports = {
+  //...
+  devServer: {
+    lazy: true,
+    filename: 'bundle.js'
+  }
+};
 ```
 
 It will now only compile the bundle when `/bundle.js` is requested.
@@ -248,9 +312,14 @@ T> `filename` has no effect when used without **lazy mode**.
 Adds headers to all responses:
 
 ```js
-headers: {
-  "X-Custom-Foo": "bar"
-}
+module.exports = {
+  //...
+  devServer: {
+    headers: {
+      'X-Custom-Foo': 'bar'
+    }
+  }
+};
 ```
 
 
@@ -261,27 +330,42 @@ headers: {
 When using the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History), the `index.html` page will likely have to be served in place of any `404` responses. Enable this by passing:
 
 ```js
-historyApiFallback: true
+module.exports = {
+  //...
+  devServer: {
+    historyApiFallback: true
+  }
+};
 ```
 
 By passing an object this behavior can be controlled further using options like `rewrites`:
 
 ```js
-historyApiFallback: {
-  rewrites: [
-    { from: /^\/$/, to: '/views/landing.html' },
-    { from: /^\/subpage/, to: '/views/subpage.html' },
-    { from: /./, to: '/views/404.html' }
-  ]
-}
+module.exports = {
+  //...
+  devServer: {
+    historyApiFallback: {
+      rewrites: [
+        { from: /^\/$/, to: '/views/landing.html' },
+        { from: /^\/subpage/, to: '/views/subpage.html' },
+        { from: /./, to: '/views/404.html' }
+      ]
+    }
+  }
+};
 ```
 
 When using dots in your path (common with Angular), you may need to use the `disableDotRule`:
 
 ```js
-historyApiFallback: {
-  disableDotRule: true
-}
+module.exports = {
+  //...
+  devServer: {
+    historyApiFallback: {
+      disableDotRule: true
+    }
+  }
+};
 ```
 
 Usage via the CLI
@@ -300,7 +384,12 @@ For more options and information, see the [connect-history-api-fallback](https:/
 Specify a host to use. By default this is `localhost`. If you want your server to be accessible externally, specify it like this:
 
 ```js
-host: "0.0.0.0"
+module.exports = {
+  //...
+  devServer: {
+    host: '0.0.0.0'
+  }
+};
 ```
 
 Usage via the CLI
@@ -317,7 +406,12 @@ webpack-dev-server --host 0.0.0.0
 Enable webpack's Hot Module Replacement feature:
 
 ```js
-hot: true
+module.exports = {
+  //...
+  devServer: {
+    hot: true
+  }
+};
 ```
 
 T> Note that `webpack.HotModuleReplacementPlugin` is required to fully enable HMR. If `webpack` or `webpack-dev-server` are launched with the `--hot` option, this plugin will be added automatically, so you may not need to add this to your `webpack.config.js`. See the [HMR concepts page](/concepts/hot-module-replacement) for more information.
@@ -330,7 +424,12 @@ T> Note that `webpack.HotModuleReplacementPlugin` is required to fully enable HM
 Enables Hot Module Replacement (see [`devServer.hot`](#devserver-hot)) without page refresh as fallback in case of build failures.
 
 ```js
-hotOnly: true
+module.exports = {
+  //...
+  devServer: {
+    hotOnly: true
+  }
+};
 ```
 
 Usage via the CLI
@@ -347,17 +446,27 @@ webpack-dev-server --hot-only
 By default dev-server will be served over HTTP. It can optionally be served over HTTP/2 with HTTPS:
 
 ```js
-https: true
+module.exports = {
+  //...
+  devServer: {
+    https: true
+  }
+};
 ```
 
 With the above setting a self-signed certificate is used, but you can provide your own:
 
 ```js
-https: {
-  key: fs.readFileSync("/path/to/server.key"),
-  cert: fs.readFileSync("/path/to/server.crt"),
-  ca: fs.readFileSync("/path/to/ca.pem"),
-}
+module.exports = {
+  //...
+  devServer: {
+    https: {
+      key: fs.readFileSync('/path/to/server.key'),
+      cert: fs.readFileSync('/path/to/server.crt'),
+      ca: fs.readFileSync('/path/to/ca.pem'),
+    }
+  }
+};
 ```
 
 This object is passed straight to Node.js HTTPS module, so see the [HTTPS documentation](https://nodejs.org/api/https.html) for more information.
@@ -381,7 +490,12 @@ webpack-dev-server --https --key /path/to/server.key --cert /path/to/server.crt 
 The filename that is considered the index file.
 
 ```javascript
-index: 'index.htm'
+module.exports = {
+  //...
+  devServer: {
+    index: 'index.htm'
+  }
+};
 ```
 
 
@@ -405,7 +519,12 @@ Toggle between the dev-server's two different modes. By default the application 
 It is also possible to use **iframe mode**, which uses an `<iframe>` under a notification bar with messages about the build. To switch to **iframe mode**:
 
 ```js
-inline: false
+module.exports = {
+  //...
+  devServer: {
+    inline: false
+  }
+};
 ```
 
 Usage via the CLI
@@ -424,7 +543,12 @@ T> Inline mode is recommended for Hot Module Replacement as it includes an HMR t
 When `lazy` is enabled, the dev-server will only compile the bundle when it gets requested. This means that webpack will not watch any file changes. We call this **lazy mode**.
 
 ```js
-lazy: true
+module.exports = {
+  //...
+  devServer: {
+    lazy: true
+  }
+};
 ```
 
 Usage via the CLI
@@ -445,7 +569,12 @@ T> If you use the CLI, make sure **inline mode** is disabled.
 With `noInfo` enabled, messages like the webpack bundle information that is shown when starting up and after each save, will be hidden. Errors and warnings will still be shown.
 
 ```js
-noInfo: true
+module.exports = {
+  //...
+  devServer: {
+    noInfo: true
+  }
+};
 ```
 
 
@@ -456,7 +585,12 @@ noInfo: true
 When `open` is enabled, the dev server will open the browser.
 
 ```js
-open: true
+module.exports = {
+  //...
+  devServer: {
+    open: true
+  }
+};
 ```
 
 Usage via the CLI
@@ -479,7 +613,12 @@ webpack-dev-server --open 'Google Chrome'
 Specify a page to navigate to when opening the browser.
 
 ```js
-openPage: '/different/page'
+module.exports = {
+  //...
+  devServer: {
+    openPage: '/different/page'
+  }
+};
 ```
 
 Usage via the CLI
@@ -496,16 +635,26 @@ webpack-dev-server --open-page "/different/page"
 Shows a full-screen overlay in the browser when there are compiler errors or warnings. Disabled by default. If you want to show only compiler errors:
 
 ```js
-overlay: true
+module.exports = {
+  //...
+  devServer: {
+    overlay: true
+  }
+};
 ```
 
 If you want to show warnings as well as errors:
 
 ```js
-overlay: {
-  warnings: true,
-  errors: true
-}
+module.exports = {
+  //...
+  devServer: {
+    overlay: {
+      warnings: true,
+      errors: true
+    }
+  }
+};
 ```
 
 
@@ -516,7 +665,12 @@ overlay: {
 When used via the CLI, a path to an SSL .pfx file. If used in options, it should be the bytestream of the .pfx file.
 
 ```js
-pfx: '/path/to/file.pfx'
+module.exports = {
+  //...
+  devServer: {
+    pfx: '/path/to/file.pfx'
+  }
+};
 ```
 
 Usage via the CLI
@@ -533,7 +687,12 @@ webpack-dev-server --pfx /path/to/file.pfx
 The passphrase to a SSL PFX file.
 
 ```js
-pfxPassphrase: 'passphrase'
+module.exports = {
+  //...
+  devServer: {
+    pfxPassphrase: 'passphrase'
+  }
+};
 ```
 
 Usage via the CLI
@@ -550,7 +709,12 @@ webpack-dev-server --pfx-passphrase passphrase
 Specify a port number to listen for requests on:
 
 ```js
-port: 8080
+module.exports = {
+  //...
+  devServer: {
+    port: 8080
+  }
+};
 ```
 
 Usage via the CLI
@@ -571,9 +735,14 @@ The dev-server makes use of the powerful [http-proxy-middleware](https://github.
 With a backend on `localhost:3000`, you can use this to enable proxying:
 
 ```js
-proxy: {
-  "/api": "http://localhost:3000"
-}
+module.exports = {
+  //...
+  devServer: {
+    proxy: {
+      '/api': 'http://localhost:3000'
+    }
+  }
+};
 ```
 
 A request to `/api/users` will now proxy the request to `http://localhost:3000/api/users`.
@@ -581,23 +750,33 @@ A request to `/api/users` will now proxy the request to `http://localhost:3000/a
 If you don't want `/api` to be passed along, we need to rewrite the path:
 
 ```js
-proxy: {
-  "/api": {
-    target: "http://localhost:3000",
-    pathRewrite: {"^/api" : ""}
+module.exports = {
+  //...
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        pathRewrite: {'^/api' : ''}
+      }
+    }
   }
-}
+};
 ```
 
 A backend server running on HTTPS with an invalid certificate will not be accepted by default. If you want to, modify your config like this:
 
 ```js
-proxy: {
-  "/api": {
-    target: "https://other-server.example.com",
-    secure: false
+module.exports = {
+  //...
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'https://other-server.example.com',
+        secure: false
+      }
+    }
   }
-}
+};
 ```
 
 Sometimes you don't want to proxy everything. It is possible to bypass the proxy based on the return value of a function.
@@ -607,40 +786,53 @@ In the function you get access to the request, response and proxy options. It mu
 E.g. for a browser request, you want to serve a HTML page, but for an API request you want to proxy it. You could do something like this:
 
 ```js
-proxy: {
-  "/api": {
-    target: "http://localhost:3000",
-    bypass: function(req, res, proxyOptions) {
-      if (req.headers.accept.indexOf("html") !== -1) {
-        console.log("Skipping proxy for browser request.");
-        return "/index.html";
+module.exports = {
+  //...
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        bypass: function(req, res, proxyOptions) {
+          if (req.headers.accept.indexOf('html') !== -1) {
+            console.log('Skipping proxy for browser request.');
+            return '/index.html';
+          }
+        }
       }
     }
   }
-}
+};
 ```
 
 If you want to proxy multiple, specific paths to the same target, you can use an array of one or more objects with a `context` property:
 
 ```js
-proxy: [{
-  context: ["/auth", "/api"],
-  target: "http://localhost:3000",
-}]
+module.exports = {
+  //...
+  devServer: {
+    proxy: [{
+      context: ['/auth', '/api'],
+      target: 'http://localhost:3000',
+    }]
+  }
+};
 ```
 
 Note that requests to root won't be proxied by default. To enable root proxying, the `devServer.index` option should be specified as a falsy value:
 
-``` js
-devServer: {
-  index: '', // specify to enable root proxying
-  host: '...',
-  contentBase: '...',
-  proxy: {
-    context: () => true,
-    target: 'http://localhost:1234'
+```js
+module.exports = {
+  //...
+  devServer: {
+    index: '', // specify to enable root proxying
+    host: '...',
+    contentBase: '...',
+    proxy: {
+      context: () => true,
+      target: 'http://localhost:1234'
+    }
   }
-}
+};
 ```
 
 ## `devServer.progress` - CLI only
@@ -663,7 +855,12 @@ When using *inline mode* and you're proxying dev-server, the inline client scrip
 For example, the dev-server is proxied by nginx, and available on `myapp.test`:
 
 ```js
-public: "myapp.test:80"
+module.exports = {
+  //...
+  devServer: {
+    public: 'myapp.test:80'
+  }
+};
 ```
 
 Usage via the CLI
@@ -684,7 +881,12 @@ Imagine that the server is running under `http://localhost:8080` and `output.fil
 The `publicPath` can be changed so the bundle is put in a directory:
 
 ```js
-publicPath: "/assets/"
+module.exports = {
+  //...
+  devServer: {
+    publicPath: '/assets/'
+  }
+};
 ```
 
 The bundle will now be available as `http://localhost:8080/assets/bundle.js`.
@@ -694,7 +896,12 @@ T> Make sure `publicPath` always starts and ends with a forward slash.
 It is also possible to use a full URL. This is necessary for Hot Module Replacement.
 
 ```js
-publicPath: "http://localhost:8080/assets/"
+module.exports = {
+  //...
+  devServer: {
+    publicPath: 'http://localhost:8080/assets/'
+  }
+};
 ```
 
 The bundle will also be available as `http://localhost:8080/assets/bundle.js`.
@@ -709,7 +916,12 @@ T> It is recommended that `devServer.publicPath` is the same as `output.publicPa
 With `quiet` enabled, nothing except the initial startup information will be written to the console. This also means that errors or warnings from webpack are not visible.
 
 ```js
-quiet: true
+module.exports = {
+  //...
+  devServer: {
+    quiet: true
+  }
+};
 ```
 
 Usage via the CLI
@@ -729,11 +941,16 @@ Here you can access the Express app object and add your own custom middleware to
 For example, to define custom handlers for some paths:
 
 ```js
-setup(app){
-  app.get('/some/path', function(req, res) {
-    res.json({ custom: 'response' });
-  });
-}
+module.exports = {
+  //...
+  devServer: {
+    setup: function(app) {
+      app.get('/some/path', function(req, res) {
+        res.json({ custom: 'response' });
+      });
+    }
+  }
+};
 ```
 
 
@@ -744,7 +961,12 @@ setup(app){
 The Unix socket to listen to (instead of a host).
 
 ```js
-socket: 'socket'
+module.exports = {
+  //...
+  devServer: {
+    socket: 'socket'
+  }
+};
 ```
 
 Usage via the CLI
@@ -759,9 +981,14 @@ webpack-dev-server --socket socket
 It is possible to configure advanced options for serving static files from `contentBase`. See the [Express documentation](http://expressjs.com/en/4x/api.html#express.static) for the possible options. An example:
 
 ```js
-staticOptions: {
-  redirect: false
-}
+module.exports = {
+  //...
+  devServer: {
+    staticOptions: {
+      redirect: false
+    }
+  }
+};
 ```
 
 T> This only works when using `contentBase` as a `string`.
@@ -776,7 +1003,12 @@ This option lets you precisely control what bundle information gets displayed. T
 To show only errors in your bundle:
 
 ```js
-stats: "errors-only"
+module.exports = {
+  //...
+  devServer: {
+    stats: 'errors-only'
+  }
+};
 ```
 
 For more information, see the [**stats documentation**](/configuration/stats).
@@ -802,7 +1034,12 @@ webpack-dev-server --stdin
 This option lets the browser open with your local IP.
 
 ```js
-useLocalIp: true
+module.exports = {
+  //...
+  devServer: {
+    useLocalIp: true
+  }
+};
 ```
 
 Usage via the CLI
@@ -819,7 +1056,12 @@ webpack-dev-server --useLocalIp
 Tell the server to watch the files served by the `devServer.contentBase` option. File changes will trigger a full page reload.
 
 ```js
-watchContentBase: true
+module.exports = {
+  //...
+  devServer: {
+    watchContentBase: true
+  }
+};
 ```
 
 It is disabled by default.
@@ -840,9 +1082,14 @@ Control options related to watching the files.
 webpack uses the file system to get notified of file changes. In some cases this does not work. For example, when using Network File System (NFS). [Vagrant](https://www.vagrantup.com/) also has a lot of problems with this. In these cases, use polling:
 
 ```js
-watchOptions: {
-  poll: true
-}
+module.exports = {
+  //...
+  devServer: {
+    watchOptions: {
+      poll: true
+    }
+  }
+};
 ```
 
 If this is too heavy on the file system, you can change this to an integer to set the interval in milliseconds.
