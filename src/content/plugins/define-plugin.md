@@ -3,6 +3,7 @@ title: DefinePlugin
 contributors:
   - simon04
   - rouzbeh84
+  - byzyk
 ---
 
 The `DefinePlugin` allows you to create global constants which can be configured at **compile** time. This can be useful for allowing different behavior between development builds and release builds. If you perform logging in your development build but not in the release build you might use a global constant to determine whether logging takes place. That's where `DefinePlugin` shines, set it and forget it rules for development and release builds.
@@ -10,7 +11,7 @@ The `DefinePlugin` allows you to create global constants which can be configured
 ``` javascript
 new webpack.DefinePlugin({
   // Definitions...
-})
+});
 ```
 
 
@@ -28,29 +29,29 @@ The values will be inlined into the code allowing a minification pass to remove 
 ``` javascript
 new webpack.DefinePlugin({
   PRODUCTION: JSON.stringify(true),
-  VERSION: JSON.stringify("5fa3b9"),
+  VERSION: JSON.stringify('5fa3b9'),
   BROWSER_SUPPORTS_HTML5: true,
-  TWO: "1+1",
-  "typeof window": JSON.stringify("object")
-})
+  TWO: '1+1',
+  'typeof window': JSON.stringify('object')
+});
 ```
 
 ``` javascript
-console.log("Running App version " + VERSION);
-if(!BROWSER_SUPPORTS_HTML5) require("html5shiv");
+console.log('Running App version ' + VERSION);
+if(!BROWSER_SUPPORTS_HTML5) require('html5shiv');
 ```
 
-T> Note that because the plugin does a direct text replacement, the value given to it must include **actual quotes** inside of the string itself. Typically, this is done either with either alternate quotes, such as `'"production"'`, or by using `JSON.stringify('production')`.
+T> Note that because the plugin does a direct text replacement, the value given to it must include **actual quotes** inside of the string itself. Typically, this is done either with alternate quotes, such as `'"production"'`, or by using `JSON.stringify('production')`.
 
 __index.js__
 
 ``` javascript
 if (!PRODUCTION) {
-  console.log('Debug info')
+  console.log('Debug info');
 }
 
 if (PRODUCTION) {
-  console.log('Production log')
+  console.log('Production log');
 }
 ```
 
@@ -58,17 +59,17 @@ After passing through webpack with no minification results in:
 
 ``` javascript
 if (!true) {
-  console.log('Debug info')
+  console.log('Debug info');
 }
 if (true) {
-  console.log('Production log')
+  console.log('Production log');
 }
 ```
 
 and then after a minification pass results in:
 
 ``` javascript
-console.log('Production log')
+console.log('Production log');
 ```
 
 
@@ -80,7 +81,7 @@ Enable/disable features in production/development build using [feature flags](ht
 new webpack.DefinePlugin({
   'NICE_FEATURE': JSON.stringify(true),
   'EXPERIMENTAL_FEATURE': JSON.stringify(false)
-})
+});
 ```
 
 W> When defining values for `process` prefer `'process.env.NODE_ENV': JSON.stringify('production')` over `process: { env: { NODE_ENV: JSON.stringify('production') } }`. Using the latter will overwrite the `process` object which can break compatibility with some modules that expect other values on the process object to be defined.
@@ -92,6 +93,6 @@ Use a different service URL in production/development builds:
 
 ```javascript
 new webpack.DefinePlugin({
-  'SERVICE_URL': JSON.stringify("http://dev.example.com")
-})
+  'SERVICE_URL': JSON.stringify('http://dev.example.com')
+});
 ```

@@ -3,6 +3,7 @@ title: ModuleConcatenationPlugin
 contributors:
   - skipjack
   - TheLarkInn
+  - byzyk
 related:
   - webpack 3: Official Release!!
 ---
@@ -11,8 +12,8 @@ In the past, one of webpack’s trade-offs when bundling was that each module in
 
 This plugin will enable the same concatenation behavior in webpack.
 
-``` js
-new webpack.optimize.ModuleConcatenationPlugin()
+```js
+new webpack.optimize.ModuleConcatenationPlugin();
 ```
 
 > This concatenation behavior is called “scope hoisting.”
@@ -29,12 +30,12 @@ As the article explains, webpack attempts to achieve partial scope hoisting. It 
 Condition                                     | Outcome
 --------------------------------------------- | --------
 Non ES6 Module                                | Prevent
-Imported By Non Import                        | Root   
-Imported From Other Chunk                     | Root   
-Imported By Multiple Other Module Groups      | Root   
-Imported With `import()`                      | Root   
+Imported By Non Import                        | Root
+Imported From Other Chunk                     | Root
+Imported By Multiple Other Module Groups      | Root
+Imported With `import()`                      | Root
 Affected By `ProvidePlugin` Or Using `module` | Prevent
-HMR Accepted                                  | Root   
+HMR Accepted                                  | Root
 Using `eval()`                                | Prevent
 In Multiple Chunks                            | Prevent
 `export * from "cjs-module"`                  | Prevent
@@ -90,11 +91,13 @@ function tryToAdd(group, module) {
 When using the webpack CLI, the `--display-optimization-bailout` flag will display bailout reasons. When using the webpack config, just add the following to the `stats` object:
 
 ```js
-{
-  ...stats,
-  // Examine all modules
-  maxModules: Infinity,
-  // Display bailout reasons
-  optimizationBailout: true
-}
+module.exports = {
+  //...
+  stats: {
+    // Examine all modules
+    maxModules: Infinity,
+    // Display bailout reasons
+    optimizationBailout: true
+  }
+};
 ```
