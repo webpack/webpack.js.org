@@ -62,6 +62,6 @@ export default class NotificationBar extends React.Component {
   render() {
     const { dismissed } = this.state;
 
-    return <div>{!dismissed ? <MessageBar onClose={this.onClose} /> : null}</div>;
+    return <React.Fragment>{!dismissed ? <MessageBar onClose={this.onClose} /> : null}</React.Fragment>;
   }
 }
