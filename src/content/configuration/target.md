@@ -8,6 +8,7 @@ contributors:
   - SpaceK33z
   - pastelsky
   - tbroadley
+  - byzyk
 ---
 
 webpack can compile for multiple environments or _targets_. To understand what a `target` is in detail, read through [the targets concept page](/concepts/targets).
@@ -53,13 +54,13 @@ const options = {
 Or you can apply specific plugins you want:
 
 ```js
-const webpack = require("webpack");
+const webpack = require('webpack');
 
 const options = {
   target: (compiler) => {
     compiler.apply(
       new webpack.JsonpTemplatePlugin(options.output),
-      new webpack.LoaderTargetPlugin("web")
+      new webpack.LoaderTargetPlugin('web')
     );
   }
 };
