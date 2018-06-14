@@ -124,3 +124,9 @@ Possible values:
 
 - any string: the value to set `process.env.NODE_ENV` to.
 - false: do not modify/set the value of `process.env.NODE_ENV`.
+
+## `optimization.mangleWasmImports`
+
+`bool: false`
+
+When set to `true` tells webpack to reduce the size of WASM by changing imports to shorter strings. It mangles module and export names.

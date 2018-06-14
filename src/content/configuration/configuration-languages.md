@@ -67,7 +67,8 @@ __tsconfig-for-webpack-config.json__
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es5"
+    "target": "es5",
+    "esModuleInterop": true
   }
 }
 ```
