@@ -33,11 +33,7 @@ function main() {
 }
 
 function fetchPackageNames(options, cb) {
-  console.log("fetchPackageNames");
   const github = new GitHubApi();
-
-  console.log("processEnv", process.env);
-  console.log("GH token", process.env.GITHUB_TOKEN);
 
   if(process.env.GITHUB_TOKEN) {
     github.authenticate({
@@ -45,6 +41,10 @@ function fetchPackageNames(options, cb) {
       token: process.env.GITHUB_TOKEN
     });
   }
+
+  github.misc.getRateLimit({}, (err, data) => {
+    console.log(JSON.stringify(data, null, 4))
+  })
 
   // XXX: weak since this handles only one page
   github.repos.getForOrg({
