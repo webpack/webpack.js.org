@@ -43,13 +43,6 @@ function fetchPackageNames(options, cb) {
       type: 'token',
       token: process.env.GITHUB_TOKEN
     });
-
-    github.misc.getRateLimit({}, (err, data) => {
-      if (err) {
-        console.log(JSON.stringify(err, null, 4));
-      }
-      console.log(JSON.stringify(data, null, 4));
-    });
   }
 
   // XXX: weak since this handles only one page
