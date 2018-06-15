@@ -3,6 +3,7 @@ title: LoaderOptionsPlugin
 contributors:
   - johnnyreilly
   - skipjack
+  - byzyk
 ---
 
 The `LoaderOptionsPlugin` is unlike other plugins in that it is built for migration from webpack 1 to 2. In webpack 2, the schema for a `webpack.config.js` became stricter; no longer open for extension by other loaders and plugins. The intention is that you pass `options` directly to loaders and plugins (i.e. `options` are __not__ global or shared).
@@ -12,7 +13,7 @@ However, until a loader has been updated to depend upon options being passed dir
 ``` js
 new webpack.LoaderOptionsPlugin({
   // Options...
-})
+});
 ```
 
 W> This plugin will be removed in the future as it only exists for migration.
@@ -40,5 +41,5 @@ new webpack.LoaderOptionsPlugin({
   options: {
     context: __dirname
   }
-})
+});
 ```

@@ -8,6 +8,7 @@ contributors:
   - simon04
   - peterblazejewicz
   - youta1119
+  - byzyk
 ---
 
 webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found at the [node-interpret](https://github.com/js-cli/js-interpret) package. Using [node-interpret](https://github.com/js-cli/js-interpret), webpack can handle many different types of configuration files.
@@ -66,7 +67,8 @@ __tsconfig-for-webpack-config.json__
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es5"
+    "target": "es5",
+    "esModuleInterop": true
   }
 }
 ```
@@ -98,7 +100,9 @@ and then proceed to write your configuration:
 
 __webpack.config.coffee__
 
-```javascript
+<!-- eslint-skip -->
+
+```js
 HtmlWebpackPlugin = require('html-webpack-plugin')
 webpack = require('webpack')
 path = require('path')
@@ -130,7 +134,7 @@ In the example below JSX (React JavaScript Markup) and Babel are used to create 
 
 First install the necessary dependencies:
 
-``` js
+``` bash
 npm install --save-dev babel-register jsxobj babel-preset-es2015
 ```
 
