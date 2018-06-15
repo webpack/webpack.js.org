@@ -100,6 +100,17 @@ module.exports = {
 
 Use the `optimization.noEmitOnErrors` to skip the emitting phase whenever there are errors while compiling. This ensures that no erroring assets are emitted. The `emitted` flag in the stats is `false` for all assets.
 
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    noEmitOnErrors: true
+  }
+};
+```
+
 W> If you are using webpack [CLI](/api/cli/), the webpack process will not exit with an error code while this plugin is enabled. If you want webpack to "fail" when using the CLI, please check out the [`bail` option](/api/cli/#advanced-options).
 
 ## `optimization.namedModules`
