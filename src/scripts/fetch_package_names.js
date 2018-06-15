@@ -33,7 +33,11 @@ function main() {
 }
 
 function fetchPackageNames(options, cb) {
+  console.log("fetchPackageNames");
   const github = new GitHubApi();
+
+  console.log("processEnv", process.env);
+  console.log("GH token", process.env.GITHUB_TOKEN);
 
   if(process.env.GITHUB_TOKEN) {
     github.authenticate({
