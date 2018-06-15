@@ -102,7 +102,6 @@ Use the `optimization.noEmitOnErrors` to skip the emitting phase whenever there 
 
 __webpack.config.js__
 
-
 ```js
 module.exports = {
   //...
@@ -114,6 +113,40 @@ module.exports = {
 
 W> If you are using webpack [CLI](/api/cli/), the webpack process will not exit with an error code while this plugin is enabled. If you want webpack to "fail" when using the CLI, please check out the [`bail` option](/api/cli/#advanced-options).
 
+## `optimization.namedModules`
+
+`boolean: false`
+
+Tells webpack to use readable module identifiers for better debugging. When `optimization.namedModules` is not set in webpack config, webpack will enable it by default for [mode](/concepts/mode/) `development` and disable for [mode](/concepts/mode/) `production`.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    namedModules: true
+  }
+};
+```
+
+## `optimization.namedChunks`
+
+`boolean: false`
+
+Tells webpack to use readable chunk identifiers for better debugging. This option is enabled by default for [mode](/concepts/mode/) `development` and disabled for [mode](/concepts/mode/) `production` if no option is provided in webpack config. 
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    namedChunks: true
+  }
+};
+```
+
 ## `optimization.nodeEnv`
 
 `string` `bool: false`
@@ -124,3 +157,9 @@ Possible values:
 
 - any string: the value to set `process.env.NODE_ENV` to.
 - false: do not modify/set the value of `process.env.NODE_ENV`.
+
+## `optimization.mangleWasmImports`
+
+`bool: false`
+
+When set to `true` tells webpack to reduce the size of WASM by changing imports to shorter strings. It mangles module and export names.
