@@ -7,8 +7,6 @@ cp -rf ./src/content/loaders/ ./generated/loaders
 mkdir -p ./generated/plugins
 cp -rf ./src/content/plugins/ ./generated/plugins
 
-source $(dirname $0)/env.sh
-
 # Fetch webpack-contrib (and various other) loader repositories
 node ./src/scripts/fetch_package_names.js "webpack-contrib" "-loader"
 

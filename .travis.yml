@@ -9,5 +9,7 @@ sudo: required
 install:
   - yarn
   - sudo pip install proselint
+before_script:
+  - source ./src/scripts/env.sh
 script:
   - bash ./src/scripts/deploy.sh
