@@ -36,8 +36,8 @@ function fetchPackageNames(options, cb) {
   console.log("fetchPackageNames");
   const github = new GitHubApi();
 
-  console.log(process.env);
-  console.log(process.env.GITHUB_TOKEN);
+  console.log("processEnv", process.env);
+  console.log("GH token", process.env.GITHUB_TOKEN);
 
   if(process.env.GITHUB_TOKEN) {
     github.authenticate({
