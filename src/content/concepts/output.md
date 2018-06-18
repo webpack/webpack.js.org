@@ -68,7 +68,7 @@ module.exports = {
 };
 ```
 
-In cases when the eventual `publicPath` of output files isn't known at compile time, it can be left blank and set dynamically at runtime in the entry point file. If you don't know the `publicPath` while compiling, you can omit it and set `__webpack_public_path__` on your entry point.
+In cases where the eventual `publicPath` of output files isn't known at compile time, it can be left blank and set dynamically at runtime via the `__webpack_public_path__` variable in the entry point file:
 
 ```javascript
 __webpack_public_path__ = myRuntimePublicPath;
