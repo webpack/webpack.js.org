@@ -252,7 +252,7 @@ npx webpack --config webpack.config.js
 Hash: c2fbf9c0f34a056b402a
 Version: webpack 4.12.0
 Time: 385ms
-Built at: 06/19/2018 3:33:33 PM
+Built at: 2018-06-19 15:33:33
   Asset      Size  Chunks             Chunk Names
 main.js  70.4 KiB       0  [emitted]  main
 [1] (webpack)/buildin/module.js 497 bytes {0} [built]
@@ -309,7 +309,7 @@ npm run build
 Hash: c2fbf9c0f34a056b402a
 Version: webpack 4.12.0
 Time: 488ms
-Built at: 06/19/2018 3:38:34 PM
+Built at: 2018-06-19 15:38:34
   Asset      Size  Chunks             Chunk Names
 main.js  70.4 KiB       0  [emitted]  main
 [1] (webpack)/buildin/module.js 497 bytes {0} [built]
