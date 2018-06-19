@@ -17,6 +17,7 @@ contributors:
   - ATGardner
   - ayvarot
   - bjarki
+  - ztomasze
 ---
 
 Webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interface with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
@@ -237,7 +238,7 @@ const path = require('path');
 module.exports = {
   entry: './src/index.js',
   output: {
-    filename: 'bundle.js',
+    filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
   }
 };
@@ -248,20 +249,20 @@ Now, let's run the build again but instead using our new configuration file:
 ``` bash
 npx webpack --config webpack.config.js
 
-Hash: dabab1bac2b940c1462b
-Version: webpack 4.0.1
-Time: 328ms
-Built at: 2018-2-26 22:47:43
-    Asset      Size  Chunks             Chunk Names
-bundle.js  69.6 KiB       0  [emitted]  main
-Entrypoint main = bundle.js
-   [1] (webpack)/buildin/module.js 519 bytes {0} [built]
-   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [3] ./src/index.js 256 bytes {0} [built]
+Hash: c2fbf9c0f34a056b402a
+Version: webpack 4.12.0
+Time: 385ms
+Built at: 06/19/2018 3:33:33 PM
+  Asset      Size  Chunks             Chunk Names
+main.js  70.4 KiB       0  [emitted]  main
+[1] (webpack)/buildin/module.js 497 bytes {0} [built]
+[2] (webpack)/buildin/global.js 489 bytes {0} [built]
+[3] ./src/index.js 286 bytes {0} [built]
     + 1 hidden module
 
 WARNING in configuration
-The 'mode' option has not been set. Set 'mode' option to 'development' or 'production' to enable defaults for this environment.
+The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
+You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/
 ```
 
 W> Note that when calling `webpack` via its path on windows, you must use backslashes instead, e.g. `node_modules\.bin\webpack --config webpack.config.js`.
@@ -282,7 +283,6 @@ __package.json__
     "name": "webpack-demo",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
 +     "build": "webpack"
@@ -306,20 +306,21 @@ Now run the following command and see if your script alias works:
 ``` bash
 npm run build
 
-Hash: dabab1bac2b940c1462b
-Version: webpack 4.0.1
-Time: 323ms
-Built at: 2018-2-26 22:50:25
-    Asset      Size  Chunks             Chunk Names
-bundle.js  69.6 KiB       0  [emitted]  main
-Entrypoint main = bundle.js
-   [1] (webpack)/buildin/module.js 519 bytes {0} [built]
-   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [3] ./src/index.js 256 bytes {0} [built]
+Hash: c2fbf9c0f34a056b402a
+Version: webpack 4.12.0
+Time: 488ms
+Built at: 06/19/2018 3:38:34 PM
+  Asset      Size  Chunks             Chunk Names
+main.js  70.4 KiB       0  [emitted]  main
+[1] (webpack)/buildin/module.js 497 bytes {0} [built]
+[2] (webpack)/buildin/global.js 489 bytes {0} [built]
+[3] ./src/index.js 286 bytes {0} [built]
     + 1 hidden module
 
 WARNING in configuration
-The 'mode' option has not been set. Set 'mode' option to 'development' or 'production' to enable defaults for this environment.
+The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
+You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/
+npm run build
 ```
 
 T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --colors`.
@@ -336,7 +337,7 @@ webpack-demo
 |- package.json
 |- webpack.config.js
 |- /dist
-  |- bundle.js
+  |- main.js
   |- index.html
 |- /src
   |- index.js
