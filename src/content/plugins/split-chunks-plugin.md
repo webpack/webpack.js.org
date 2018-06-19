@@ -103,7 +103,7 @@ module.exports = {
   //...
   optimization: {
     splitChunks: {
-      chunks (chunk) {
+      chunks: (chunk) => {
         // exclude `my-excluded-chunk`
         return chunk.name !== 'my-excluded-chunk';
       }
