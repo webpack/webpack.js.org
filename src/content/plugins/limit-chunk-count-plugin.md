@@ -4,6 +4,7 @@ contributors:
   - rouzbeh84
   - skipjack
   - tbroadley
+  - byzyk
 ---
 
 While writing your code, you may have already added many code split points to load stuff on demand. After compiling you might notice that some chunks are too small - creating larger HTTP overhead. Luckily, this plugin can post-process your chunks by merging them.
@@ -11,7 +12,7 @@ While writing your code, you may have already added many code split points to lo
 ``` js
 new webpack.optimize.LimitChunkCountPlugin({
   // Options...
-})
+});
 ```
 
 
@@ -28,7 +29,7 @@ While merging chunks, webpack will try to identify those that have duplicate mod
 new webpack.optimize.LimitChunkCountPlugin({
   maxChunks: 5, // Must be greater than or equal to one
   minChunkSize: 1000
-})
+});
 ```
 
 

@@ -5,6 +5,7 @@ contributors:
   - iammerrick
   - chrisVillanueva
   - skipjack
+  - byzyk
 related:
   - title: Lazy Loading ES2015 Modules in the Browser
     url: https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser
@@ -41,7 +42,7 @@ console.log('The print.js module has loaded! See the network tab in dev tools...
 
 export default () => {
   console.log('Button Clicked: Here\'s "some text"!');
-}
+};
 ```
 
 __src/index.js__

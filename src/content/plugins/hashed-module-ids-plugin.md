@@ -2,6 +2,7 @@
 title: HashedModuleIdsPlugin
 contributors:
   - shaodahong
+  - byzyk
 ---
 
 This plugin will cause hashes to be based on the relative path of the module, generating a four character string as the module id. Suggested for use in production.
@@ -9,7 +10,7 @@ This plugin will cause hashes to be based on the relative path of the module, ge
 ``` js
 new webpack.HashedModuleIdsPlugin({
   // Options...
-})
+});
 ```
 
 
@@ -31,5 +32,5 @@ new webpack.HashedModuleIdsPlugin({
   hashFunction: 'sha256',
   hashDigest: 'hex',
   hashDigestLength: 20
-})
+});
 ```
