@@ -29,7 +29,7 @@ export default ({
           group = page.group;
 
           return (
-            <div key={`sidebar-item-${index}`}>
+            <React.Fragment key={`sidebar-item-${index}`}>
               {displayGroup ? <h4 className="sidebar__group">{group}</h4> : null}
 
               <SidebarItem
@@ -39,7 +39,7 @@ export default ({
                 anchors={page.anchors}
                 currentPage={currentPage}
               />
-            </div>
+            </React.Fragment>
           );
         })}
       </div>
