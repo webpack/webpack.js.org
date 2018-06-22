@@ -8,6 +8,7 @@ contributors:
   - jhnns
   - dylanonelson
   - byzyk
+  - pnevares
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -24,15 +25,16 @@ Prevent webpack from parsing any files matching the given regular expression(s).
 ```js
 module.exports = {
   //...
-  noParse: /jquery|lodash/,
+  module: {
+    noParse: /jquery|lodash/,
 
-  // since webpack 3.0.0
-  noParse: function(content) {
-    return /jquery|lodash/.test(content);
+    // since webpack 3.0.0
+    noParse: function(content) {
+      return /jquery|lodash/.test(content);
+    }
   }
 };
 ```
-
 
 ## `module.rules`
 
@@ -244,6 +246,13 @@ module.exports = {
 ## `Rule.rules`
 
 An array of [`Rules`](#rule) that is also used when the Rule matches.
+
+
+## `Rule.sideEffects`
+
+Possible values: `false | an array of paths`
+
+Indicate what parts of the module contain side effects. See [Tree Shaking](/guides/tree-shaking/#mark-the-file-as-side-effect-free) for details.
 
 
 ## `Rule.test`

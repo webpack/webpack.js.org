@@ -24,7 +24,7 @@
     "node": ">=6.9"
   },
   "scripts": {
-    "start": "npm run init:generated && npm run fetch && node ./antwar.bootstrap.js develop",
+    "start": "run-s -n init:generated fetch start-only",
     "start-only": "node ./antwar.bootstrap.js develop",
     "build": "npm run init:generated && npm run fetch && rm -rf build/ && node ./antwar.bootstrap.js build && npm run sitemap && echo webpack.js.org > build/CNAME",
     "build-test": "npm run build && http-server build/",
@@ -38,6 +38,11 @@
     "lint:prose": "cp .proselintrc ~/ && proselint src/content",
     "test": "npm run lint",
     "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
   },
   "devDependencies": {
     "alex": "^4.1.0",
@@ -66,6 +71,7 @@
     "github": "^10.0.0",
     "html-webpack-plugin": "^3.1.0",
     "http-server": "^0.10.0",
+    "husky": "^1.0.0-rc.8",
     "hyperlink": "^3.0.1",
     "loader-utils": "^1.1.0",
     "lodash": "^4.17.4",
