@@ -1,11 +1,9 @@
 node_modules
-npm-debug.log
-_*
 dist
-generated
-support-*.json
-starter-kits-data.json
+src/**/_*.json
+src/**/_*.md
 .vscode
 .idea
 .DS_Store
+npm-debug.log
 yarn-error.log
