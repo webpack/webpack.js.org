@@ -7,6 +7,8 @@ contributors:
   - EugeneHlushko
   - byzyk
 related:
+  - title: webpack's automatic deduplication algorthim example
+    url: https://github.com/webpack/webpack/blob/master/examples/many-pages/README.md
   - title: "webpack 4: Code Splitting, chunk graph and the splitChunks optimization"
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
