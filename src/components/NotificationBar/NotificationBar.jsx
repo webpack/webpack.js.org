@@ -19,6 +19,7 @@ export default class NotificationBar extends React.Component {
           </p>
           { localStorageIsEnabled ?
             <button
+              aria-label="Dismiss"
               className="notification-bar__close icon-cross"
               onClick={ this._close.bind(this) } /> :
             null

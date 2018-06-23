@@ -9,6 +9,7 @@ contributors:
   - TheLarkInn
   - simon04
   - jhnns
+  - byzyk
 ---
 
 Loaders are transformations that are applied on the source code of a module. They allow you to pre-process files as you `import` or “load” them. Thus, loaders are kind of like “tasks” in other build tools, and provide a powerful way to handle front-end build steps. Loaders can transform files from a different language (like TypeScript) to JavaScript, or inline images as data URLs. Loaders even allow you to do things like `import` CSS files directly from your JavaScript modules!
@@ -54,6 +55,7 @@ There are three ways to use loaders in your application:
 This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader:
 
 ```js-with-links-with-details
+module.exports = {
   module: {
     rules: [
       {
@@ -70,6 +72,7 @@ This is a concise way to display loaders, and helps to maintain clean code. It a
       }
     ]
   }
+};
 ```
 
 

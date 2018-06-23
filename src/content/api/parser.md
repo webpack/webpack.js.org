@@ -2,6 +2,8 @@
 title: Parser
 group: Plugins
 sort: 4
+contributors:
+  - byzyk
 ---
 
 The `parser` instance, found in the `compiler`, is used to parse each module
@@ -15,9 +17,9 @@ more work to access:
 ``` js
 compiler.hooks.normalModuleFactory.tap('MyPlugin', factory => {
   factory.hooks.parser.tap('MyPlugin', (parser, options) => {
-    parser.hooks.someHook.tap(...)
-  })
-})
+    parser.hooks.someHook.tap(/* ... */);
+  });
+});
 ```
 
 As with the `compiler`, `tapAsync` and `tapPromise` may also be available
