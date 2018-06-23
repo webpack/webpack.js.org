@@ -61,7 +61,7 @@ Making a branch in your fork for your contribution is helpful in the following w
 
 ## Committing Your Changes
 
-Please follow the [conventionalcommits][10] specification. For example, for documentation
+Please follow the [conventional commits][10] specification. For example, for documentation
 changes, a short commit message may resemble the following:
 
 ``` md
