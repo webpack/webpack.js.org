@@ -2,6 +2,7 @@
 title: HotModuleReplacementPlugin
 contributors:
   - skipjack
+  - byzyk
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -21,7 +22,7 @@ Enabling HMR is easy and in most cases no options are necessary.
 ``` javascript
 new webpack.HotModuleReplacementPlugin({
   // Options...
-})
+});
 ```
 
 
