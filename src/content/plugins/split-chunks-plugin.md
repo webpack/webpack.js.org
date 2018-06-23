@@ -5,8 +5,10 @@ contributors:
   - jeremenichelli
   - chrisdothtml
   - EugeneHlushko
-
+  - byzyk
 related:
+  - title: webpack's automatic deduplication algorthim example
+    url: https://github.com/webpack/webpack/blob/master/examples/many-pages/README.md
   - title: "webpack 4: Code Splitting, chunk graph and the splitChunks optimization"
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
@@ -42,26 +44,31 @@ W> Default configuration was chosen to fit web performance best practices but th
 This configuration object represents the default behavior of the `SplitChunksPlugin`.
 
 ```js
-splitChunks: {
-	chunks: "async",
-	minSize: 30000,
-	minChunks: 1,
-	maxAsyncRequests: 5,
-	maxInitialRequests: 3,
-	automaticNameDelimiter: '~',
-	name: true,
-	cacheGroups: {
-		vendors: {
-			test: /[\\/]node_modules[\\/]/,
-			priority: -10
-		},
-		default: {
-			minChunks: 2,
-			priority: -20,
-			reuseExistingChunk: true
-		}
-	}
-}
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    }
+  }
+};
 ```
 
 ### `splitChunks.automaticNameDelimiter`
@@ -79,30 +86,30 @@ This indicates which chunks will be selected for optimization. If a string is pr
 
 ```js
 module.exports = {
-	//...
-	optimization: {
-		splitChunks: {
-			// include all types of chunks
-			chunks: "all"
-		}
-	}
-}
+  //...
+  optimization: {
+    splitChunks: {
+      // include all types of chunks
+      chunks: 'all'
+    }
+  }
+};
 ```
 
 Alternatively, you can provide a function for more control. The return value will indicate whether to include each chunk.
 
 ```js
 module.exports = {
-	//...
-	optimization: {
-		splitChunks: {
-			chunks (chunk) {
-				// exclude `my-excluded-chunk`
-				return chunk.name !== "my-excluded-chunk"
-			}
-		}
-	}
-}
+  //...
+  optimization: {
+    splitChunks: {
+      chunks (chunk) {
+        // exclude `my-excluded-chunk`
+        return chunk.name !== 'my-excluded-chunk';
+      }
+    }
+  }
+};
 ```
 
 T> You can combine this configuration with the [HtmlWebpackPlugin](/plugins/html-webpack-plugin/). It will inject all the generated vendor chunks for you.
@@ -139,16 +146,16 @@ The name of the split chunk. Providing `true` will automatically generate a name
 
 ```js
 module.exports = {
-	//...
-	optimization: {
-		splitChunks: {
-			name (module) {
-				// generate a chunk name...
-				return //...
-			}
-		}
-	}
-}
+  //...
+  optimization: {
+    splitChunks: {
+      name (module) {
+        // generate a chunk name...
+        return; //...
+      }
+    }
+  }
+};
 ```
 
 W> When assigning equal names to different split chunks, all vendor modules are placed into a single shared chunk, though it's not recommend since it can result in more code downloaded.
@@ -159,15 +166,15 @@ Cache groups can inherit and/or override any options from `splitChunks.*`; but `
 
 ```js
 module.exports = {
-	//...
-	optimization: {
-		splitChunks: {
-			cacheGroups: {
-				default: false
-			}
-		}
-	}
-}
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        default: false
+      }
+    }
+  }
+};
 ```
 
 #### `splitChunks.cacheGroups.priority`
@@ -190,31 +197,31 @@ Controls which modules are selected by this cache group. Omitting it selects all
 
 ```js
 module.exports = {
-	//...
-	optimization: {
-		splitChunks: {
-			test (chunks) {
-				//...
-				return true
-			}
-		}
-	}
-}
+  //...
+  optimization: {
+    splitChunks: {
+      test (chunks) {
+        //...
+        return true;
+      }
+    }
+  }
+};
 ```
 
 ## Examples
 
 ### Defaults: Example 1
 
-``` js
+```js
 // index.js
 
-import("./a"); // dynamic import
+import('./a'); // dynamic import
 ```
 
-``` js
+```js
 // a.js
-import "react";
+import 'react';
 
 //...
 ```
@@ -232,25 +239,25 @@ What's the reasoning behind this? `react` probably won't change as often as your
 
 ### Defaults: Example 2
 
-``` js
+```js
 // entry.js
 
 // dynamic imports
-import("./a");
-import("./b");
+import('./a');
+import('./b');
 ```
 
-``` js
+```js
 // a.js
-import "./helpers"; // helpers is 40kb in size
+import './helpers'; // helpers is 40kb in size
 
 //...
 ```
 
-``` js
+```js
 // b.js
-import "./helpers";
-import "./more-helpers"; // more-helpers is also 40kb in size
+import './helpers';
+import './more-helpers'; // more-helpers is also 40kb in size
 
 //...
 ```
@@ -275,19 +282,19 @@ __webpack.config.js__
 
 ```js
 module.exports = {
-	//...
-	optimization: {
-			splitChunks: {
-			cacheGroups: {
-				commons: {
-					name: "commons",
-					chunks: "initial",
-					minChunks: 2
-				}
-			}
-		}
-	}
-}
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          name: 'commons',
+          chunks: 'initial',
+          minChunks: 2
+        }
+      }
+    }
+  }
+};
 ```
 
 W> This configuration can enlarge your initial bundles, it is recommended to use dynamic imports when a module is not immediately needed.
@@ -299,21 +306,21 @@ Create a `vendors` chunk, which includes all code from `node_modules` in the who
 __webpack.config.js__
 
 
-``` js
+```js
 module.exports = {
-	//...
-	optimization: {
-		splitChunks: {
-			cacheGroups: {
-				commons: {
-					test: /[\\/]node_modules[\\/]/,
-					name: "vendors",
-					chunks: "all"
-				}
-			}
-		}
-	}
-}
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    }
+  }
+};
 ```
 
 W> This might result in a large chunk containing all external packages. It is recommended to only include your core frameworks and utilities and dynamically load the rest of the dependencies.

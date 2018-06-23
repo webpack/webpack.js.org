@@ -169,6 +169,7 @@ __webpack.prod.js__
   const common = require('./webpack.common.js');
 
   module.exports = merge(common, {
+    mode: 'production',
 +   devtool: 'source-map',
     plugins: [
 -     new UglifyJSPlugin()
@@ -195,6 +196,7 @@ __webpack.prod.js__
   const common = require('./webpack.common.js');
 
   module.exports = merge(common, {
+    mode: 'production',
     devtool: 'source-map',
     plugins: [
       new UglifyJSPlugin({
