@@ -4,6 +4,7 @@ group: Plugins
 sort: 1
 contributors:
   - rishantagarwal
+  - byzyk
 ---
 
 The `Compiler` module is the main engine that creates a compilation instance
@@ -35,7 +36,7 @@ The following lifecycle hooks are exposed by the `compiler` and can be accessed
 as such:
 
 ``` js
-compiler.hooks.someHook.tap(...)
+compiler.hooks.someHook.tap(/* ... */);
 ```
 
 Depending on the hook type, `tapAsync` and `tapPromise` may also be available.
