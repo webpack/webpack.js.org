@@ -6,6 +6,7 @@ contributors:
   - thelarkinn
   - pksjce
   - e-cloud
+  - byzyk
 ---
 
 Plugins are a key piece of the webpack ecosystem and provide the community with
@@ -50,8 +51,8 @@ can be used:
 
 ``` js
 compiler.hooks.compile.tap('MyPlugin', params => {
-  console.log('Synchronously tapping the compile hook.')
-})
+  console.log('Synchronously tapping the compile hook.');
+});
 ```
 
 However, for `run` which utilizes the `AsyncHook`, we can utilize `tapAsync`
@@ -59,15 +60,20 @@ or `tapPromise` (as well as `tap`):
 
 ``` js
 compiler.hooks.run.tapAsync('MyPlugin', (compiler, callback) => {
-  console.log('Asynchronously tapping the run hook.')
-  callback()
-})
+  console.log('Asynchronously tapping the run hook.');
+  callback();
+});
 
 compiler.hooks.run.tapPromise('MyPlugin', compiler => {
   return new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
-    console.log('Asynchronously tapping the run hook with a delay.')
-  })
-})
+    console.log('Asynchronously tapping the run hook with a delay.');
+  });
+});
+
+compiler.hooks.run.tapPromise('MyPlugin', async compiler => {
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  console.log('Asynchronously tapping the run hook with a delay.');
+});
 ```
 
 The moral of the story is that there are a variety of ways to `hook` into the
@@ -84,7 +90,7 @@ const SyncHook = require('tapable').SyncHook;
 
 // Within the `apply` method...
 if (compiler.hooks.myCustomHook) throw new Error('Already in use');
-compiler.hooks.myCustomHook = new SyncHook(['a', 'b', 'c'])
+compiler.hooks.myCustomHook = new SyncHook(['a', 'b', 'c']);
 
 // Wherever/whenever you'd like to trigger the hook...
 compiler.hooks.myCustomHook.call(a, b, c);
