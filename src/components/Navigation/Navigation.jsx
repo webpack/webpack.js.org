@@ -39,14 +39,17 @@ export default class Navigation extends React.Component {
 
           <div className="navigation__search">
             <input
-              type="text"
+              aria-label="Search documentation"
+              type="search"
               className="navigation__search-input"
               placeholder="Search documentation…"
               onBlur={ this._toggleSearch.bind(this) } />
             <button
+              aria-label="Open search"
               className="navigation__search-icon icon-magnifying-glass"
               onClick={ this._toggleSearch.bind(this) } />
             <button
+              aria-label="Close search"
               className="navigation__search-icon icon-cross"
               onClick={ this._toggleSearch.bind(this) } />
           </div>
