@@ -25,5 +25,19 @@
     "no-unused-vars": 0,
     "no-console": 0,
     "semi": ["error", "always"]
-  }
+  },
+
+  "overrides": [
+    {
+      "files": ["src/content/**/*.md"],
+      "rules": {
+        "indent": ["error", 2],
+        "quotes": ["error", "single"],
+        "no-undef": 0,
+        "no-constant-condition": 0,
+        "no-useless-escape": 0,
+        "no-dupe-keys": 0
+      }
+    }
+  ]
 }

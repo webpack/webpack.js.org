@@ -127,7 +127,8 @@ module.exports = (env) => ({
         'guides/code-splitting-libraries': '/guides/code-splitting/',
         'guides/why-webpack': '/comparison/',
         'guides/production-build': '/guides/production/',
-        'migrating': '/migrate/3/'
+        'migrating': '/migrate/3/',
+        'plugins/no-emit-on-errors-plugin': '/configuration/optimization/#optimization-noemitonerrors'
       },
     }),
   ]

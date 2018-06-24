@@ -2,9 +2,10 @@
 title: Loader API
 sort: 4
 contributors:
-    - TheLarkInn
-    - jhnns
-    - tbroadley
+  - TheLarkInn
+  - jhnns
+  - tbroadley
+  - byzyk
 ---
 
 A loader is just a JavaScript module that exports a function. The [loader runner](https://github.com/webpack/loader-runner) calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by webpack and the [loader runner](https://github.com/webpack/loader-runner) with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters.
@@ -80,10 +81,10 @@ __raw-loader.js__
 
 ``` js
 module.exports = function(content) {
-	assert(content instanceof Buffer);
-	return someSyncOperation(content);
-	// return value can be a `Buffer` too
-	// This is also allowed if loader is not "raw"
+  assert(content instanceof Buffer);
+  return someSyncOperation(content);
+  // return value can be a `Buffer` too
+  // This is also allowed if loader is not "raw"
 };
 module.exports.raw = true;
 ```
@@ -94,11 +95,21 @@ module.exports.raw = true;
 Loaders are __always__ called from right to left. There are some instances where the loader only cares about the __metadata__ behind a request and can ignore the results of the previous loader. The `pitch` method on loaders is called from __left to right__ before the loaders are actually executed (from right to left). For the following [`use`](/configuration/module#rule-use) configuration:
 
 ``` js
-use: [
-  'a-loader',
-  'b-loader',
-  'c-loader'
-]
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        //...
+        use: [
+          'a-loader',
+          'b-loader',
+          'c-loader'
+        ]
+      }
+    ]
+  }
+};
 ```
 
 These steps would occur:
@@ -119,11 +130,11 @@ First, the `data` passed to the `pitch` method is exposed in the execution phase
 
 ``` js
 module.exports = function(content) {
-	return someSyncOperation(content, this.data.value);
+  return someSyncOperation(content, this.data.value);
 };
 
 module.exports.pitch = function(remainingRequest, precedingRequest, data) {
-	data.value = 42;
+  data.value = 42;
 };
 ```
 
@@ -136,7 +147,7 @@ module.exports = function(content) {
 
 module.exports.pitch = function(remainingRequest, precedingRequest, data) {
   if (someCondition()) {
-    return "module.exports = require(" + JSON.stringify("-!" + remainingRequest) + ");";
+    return 'module.exports = require(' + JSON.stringify('-!' + remainingRequest) + ');';
   }
 };
 ```
@@ -160,7 +171,7 @@ Given the following example this require call is used:
 In `/abc/file.js`:
 
 ``` js
-require("./loader1?xyz!loader2!./resource?rrr");
+require('./loader1?xyz!loader2!./resource?rrr');
 ```
 
 
@@ -176,6 +187,11 @@ require("./loader1?xyz!loader2!./resource?rrr");
 In the example: `/abc` because `resource.js` is in this directory
 
 
+### `this.rootContext`
+
+Starting with webpack 4, the formerly `this.options.context` is provided as `this.rootContext`.
+
+
 ### `this.request`
 
 The resolved request string.
@@ -188,14 +204,16 @@ In the example: `"/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/re
 1. If the loader was configured with an [`options`](/configuration/module/#useentry) object, this will point to that object.
 2. If the loader has no `options`, but was invoked with a query string, this will be a string starting with `?`.
 
-W> This property is deprecated as `options` is replacing `query`. Use the [`getOptions` method](https://github.com/webpack/loader-utils#getoptions) from `loader-utils` to extract the given loader options.
+T> Use the [`getOptions` method](https://github.com/webpack/loader-utils#getoptions) from `loader-utils` to extract given loader options.
 
 
 ### `this.callback`
 
 A function that can be called synchronously or asynchronously in order to return multiple results. The expected arguments are:
 
-``` js
+<!-- eslint-skip -->
+
+```js
 this.callback(
   err: Error | null,
   content: string | Buffer,
@@ -241,7 +259,9 @@ A cacheable loader must have a deterministic result, when inputs and dependencie
 
 An array of all the loaders. It is writeable in the pitch phase.
 
-``` js
+<!-- eslint-skip -->
+
+```js
 loaders = [{request: string, path: string, query: string, module: function}]
 ```
 
@@ -250,18 +270,18 @@ In the example:
 ``` js
 [
   {
-    request: "/abc/loader1.js?xyz",
-    path: "/abc/loader1.js",
-    query: "?xyz",
+    request: '/abc/loader1.js?xyz',
+    path: '/abc/loader1.js',
+    query: '?xyz',
     module: [Function]
   },
   {
-    request: "/abc/node_modules/loader2/index.js",
-    path: "/abc/node_modules/loader2/index.js",
-    query: "",
+    request: '/abc/node_modules/loader2/index.js',
+    path: '/abc/node_modules/loader2/index.js',
+    query: '',
     module: [Function]
   }
-]
+];
 ```
 
 
@@ -425,7 +445,7 @@ Passed from the last loader. If you would execute the input argument as module, 
 
 ### `this.options`
 
-The options passed to the Compiler.
+W> The `options` property has been deprecated in webpack 3 and removed in webpack 4.
 
 
 ### `this.debug`
