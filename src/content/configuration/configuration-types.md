@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - kbariotis
   - simon04
+  - byzyk
 ---
 
 Besides exporting a single config object, there are a few more ways that cover other needs as well.
@@ -47,10 +48,10 @@ module.exports = () => {
       resolve({
         entry: './app.js',
         /* ... */
-      })
-    }, 5000)
-  })
-}
+      });
+    }, 5000);
+  });
+};
 ```
 
 
@@ -73,5 +74,5 @@ module.exports = [{
   },
   entry: './app.js',
   mode: 'production',
-}]
+}];
 ```
