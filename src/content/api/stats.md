@@ -4,6 +4,7 @@ sort: 3
 contributors:
   - skipjack
   - franjohn21
+  - byzyk
 ---
 
 When compiling source code with webpack, users can generate a JSON file containing statistics about modules. These statistics can be used to analyze an application's dependency graph as well as to optimize compilation speed. The file is typically generated with the following CLI command:
@@ -19,7 +20,7 @@ The `--json > compilation-stats.json` flag indicates to webpack that it should e
 
 The top-level structure of the output JSON file is fairly straightforward but there are a few nested data structures as well. Each nested structure has a dedicated section below to make this document more consumable. Note that you can click links within the top-level structure below to jump to relevant sections and documentation:
 
-``` js-with-links
+```js-with-links
 {
   "version": "1.4.13", // Version of webpack used for the compilation
   "hash": "11593e3b3ac85436984a", // Compilation specific hash
@@ -58,7 +59,9 @@ The top-level structure of the output JSON file is fairly straightforward but th
 
 Each `assets` object represents an `output` file emitted from the compilation. They all follow a similar structure:
 
-``` js
+<!-- eslint-skip -->
+
+```js
 {
   "chunkNames": [], // The chunks this asset contains
   "chunks": [ 10, 6 ], // The chunk IDs this asset contains
@@ -73,7 +76,7 @@ Each `assets` object represents an `output` file emitted from the compilation. T
 
 Each `chunks` object represents a group of modules known as a [chunk](/glossary#c). Each object follows the following structure:
 
-``` js-with-links
+```js-with-links
 {
   "entry": true, // Indicates whether or not the chunk contains the webpack runtime
   "files": [
@@ -100,7 +103,7 @@ Each `chunks` object represents a group of modules known as a [chunk](/glossary#
 
 The `chunks` object will also contain a list of `origins` describing how the given chunk originated. Each `origins` object follows the following schema:
 
-``` js-with-links
+```js-with-links
 {
   "loc": "", // Lines of code that generated this chunk
   "module": "(webpack)\\test\\browsertest\\lib\\index.web.js", // Path to the module
@@ -119,7 +122,7 @@ The `chunks` object will also contain a list of `origins` describing how the giv
 
 What good would these statistics be without some description of the compiled application's actual modules? Each module in the dependency graph is represented by the following structure:
 
-``` js-with-links
+```js-with-links
 {
   "assets": [
     // A list of [asset objects](#asset-objects)
@@ -153,7 +156,7 @@ What good would these statistics be without some description of the compiled app
 
 Every module also contains a list of `reasons` objects describing why that module was included in the dependency graph. Each "reason" is similar to the `origins` seen above in the [chunk objects](#chunk-objects) section:
 
-``` js-with-links
+```js-with-links
 {
   "loc": "33:24-93", // Lines of code that caused the module to be included
   "module": "./lib/index.web.js", // Relative path to the module based on [context](/configuration/entry-context/#context)

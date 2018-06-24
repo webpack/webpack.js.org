@@ -7,6 +7,7 @@ contributors:
   - simon04
   - 5angel
   - marioacc
+  - byzyk
 ---
 
 Aside from applications, webpack can also be used to bundle JavaScript libraries. The following guide is meant for library authors looking to streamline their bundling strategy.
@@ -39,24 +40,24 @@ __src/ref.json__
 
 ```javascript
 [{
-  "num": 1,
-  "word": "One"
+  'num': 1,
+  'word': 'One'
 }, {
-  "num": 2,
-  "word": "Two"
+  'num': 2,
+  'word': 'Two'
 }, {
-  "num": 3,
-  "word": "Three"
+  'num': 3,
+  'word': 'Three'
 }, {
-  "num": 4,
-  "word": "Four"
+  'num': 4,
+  'word': 'Four'
 }, {
-  "num": 5,
-  "word": "Five"
+  'num': 5,
+  'word': 'Five'
 }, {
-  "num": 0,
-  "word": "Zero"
-}]
+  'num': 0,
+  'word': 'Zero'
+}];
 ```
 
 __src/index.js__
@@ -69,32 +70,39 @@ export function numToWord(num) {
   return _.reduce(numRef, (accum, ref) => {
     return ref.num === num ? ref.word : accum;
   }, '');
-};
+}
 
 export function wordToNum(word) {
   return _.reduce(numRef, (accum, ref) => {
     return ref.word === word && word.toLowerCase() ? ref.num : accum;
   }, -1);
-};
+}
 ```
 
 The usage specification for the library use will be as follows:
 
+* __ES2015 module import:__
+
 ``` js
-// ES2015 module import
 import * as webpackNumbers from 'webpack-numbers';
-// CommonJS module require
+// ...
+webpackNumbers.wordToNum('Two');
+```
+
+* __CommonJS module require:__
+
+``` js
 var webpackNumbers = require('webpack-numbers');
 // ...
-// ES2015 and CommonJS module use
 webpackNumbers.wordToNum('Two');
-// ...
-// AMD module require
+```
+
+* __AMD module require:__
+
+``` js
 require(['webpackNumbers'], function ( webpackNumbers) {
   // ...
-  // AMD module use
   webpackNumbers.wordToNum('Two');
-  // ...
 });
 ```
 
@@ -118,8 +126,8 @@ The consumer also can use the library by loading it via a script tag:
 
 Note that we can also configure it to expose the library in the following ways:
 
-- Property in the global object, for node.
-- Property in the `this` object.
+* Property in the global object, for node.
+* Property in the `this` object.
 
 For full library configuration and code please refer to [webpack-library-example](https://github.com/kalcifer/webpack-library-example).
 
@@ -128,16 +136,16 @@ For full library configuration and code please refer to [webpack-library-example
 
 Now let's bundle this library in a way that will achieve the following goals:
 
-- Without bundling `lodash`, but requiring it to be loaded by the consumer using `externals`.
-- Setting the library name as `webpack-numbers`.
-- Exposing the library as a variable called `webpackNumbers`.
-- Being able to access the library inside Node.js.
+* Without bundling `lodash`, but requiring it to be loaded by the consumer using `externals`.
+* Setting the library name as `webpack-numbers`.
+* Exposing the library as a variable called `webpackNumbers`.
+* Being able to access the library inside Node.js.
 
 Also, the consumer should be able to access the library the following ways:
 
-- ES2015 module. i.e. `import webpackNumbers from 'webpack-numbers'`.
-- CommonJS module. i.e. `require('webpack-numbers')`.
-- Global variable when included through `script` tag.
+* ES2015 module. i.e. `import webpackNumbers from 'webpack-numbers'`.
+* CommonJS module. i.e. `require('webpack-numbers')`.
+* Global variable when included through `script` tag.
 
 We can start with this basic webpack configuration:
 
@@ -204,12 +212,15 @@ import B from 'library/two';
 You won't be able to exclude them from bundle by specifying `library` in the externals. You'll either need to exclude them one by one or by using a regular expression.
 
 ``` js
-externals: [
-  'library/one',
-  'library/two',
-  // Everything that starts with "library/"
-  /^library\/.+$/
-]
+module.exports = {
+  //...
+  externals: [
+    'library/one',
+    'library/two',
+    // Everything that starts with "library/"
+    /^library\/.+$/
+  ]
+};
 ```
 
 
@@ -272,10 +283,10 @@ __webpack.config.js__
 
 You can expose the library in the following ways:
 
-- Variable: as a global variable made available by a `script` tag (`libraryTarget:'var'`).
-- This: available through the `this` object (`libraryTarget:'this'`).
-- Window: available trough the `window` object, in the browser (`libraryTarget:'window'`).
-- UMD: available after AMD or CommonJS `require` (`libraryTarget:'umd'`).
+* Variable: as a global variable made available by a `script` tag (`libraryTarget:'var'`).
+* This: available through the `this` object (`libraryTarget:'this'`).
+* Window: available trough the `window` object, in the browser (`libraryTarget:'window'`).
+* UMD: available after AMD or CommonJS `require` (`libraryTarget:'umd'`).
 
 If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output). See [`output.libraryTarget`](/configuration/output#output-librarytarget) there for a detailed list of all available options.
 
