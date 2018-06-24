@@ -2,6 +2,7 @@
 title: ProfilingPlugin
 contributors:
   - EugeneHlushko
+  - byzyk
 ---
 
 Generate Chrome profile file which includes timings of plugins execution. Outputs `events.json` file by default. It is possible to provide custom file path using `outputPath` option.
@@ -13,15 +14,15 @@ Generate Chrome profile file which includes timings of plugins execution. Output
 ## Usage: default
 
 ``` js
-new webpack.debug.ProfilingPlugin()
+new webpack.debug.ProfilingPlugin();
 ```
 
 ## Usage: custom `outputPath`
 
 ``` js
 new webpack.debug.ProfilingPlugin({
-  outputPath: "profiling/profileEvents.json"
-})
+  outputPath: 'profiling/profileEvents.json'
+});
 ```
 
 In order to view the profile file:
