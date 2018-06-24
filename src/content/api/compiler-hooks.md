@@ -217,7 +217,7 @@ Parameters: `compilation`
 
 ### `done`
 
-`SyncHook`
+`AsyncSeriesHook`
 
 Compilation has completed.
 

@@ -98,6 +98,8 @@ This will form the bundle with both the files as separate entry points.
 
 ### Common Options
 
+W> Note that Command Line Interface has a higher precendence for the arguments you use it with than your configuration file. For instance, if you pass [`--mode="production"`](/concepts/mode/#usage) to webpack CLI and your configuration file uses `development`, `production` will be used.
+
 **List all of the options available on the cli**
 
 ```bash
@@ -170,6 +172,7 @@ Parameter                 | Explanation                                 | Input 
 `--output-pathinfo`       | Include a comment with the request for every dependency | boolean | false
 `--output-public-path`    | The public path for the assets              | string     | /
 `--output-source-map-filename` | The output filename for the SourceMap  | string     | [name].map or [outputFilename].map
+`--build-delimiter` | Display custom text after build output | string | Default string is null. You could provide a string such as `=== Build done ===`
 
 
 #### Example Usage

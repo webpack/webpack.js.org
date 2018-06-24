@@ -25,15 +25,16 @@ Prevent webpack from parsing any files matching the given regular expression(s).
 ```js
 module.exports = {
   //...
-  noParse: /jquery|lodash/,
+  module: {
+    noParse: /jquery|lodash/,
 
-  // since webpack 3.0.0
-  noParse: function(content) {
-    return /jquery|lodash/.test(content);
+    // since webpack 3.0.0
+    noParse: function(content) {
+      return /jquery|lodash/.test(content);
+    }
   }
 };
 ```
-
 
 ## `module.rules`
 

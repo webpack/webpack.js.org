@@ -99,13 +99,13 @@
     }
 
     &.tip {
-      background-color: #DCF2FD;
-      color: #618ca0;
+      background-color: #eaf8ff;
+      color: #4e7182;
     }
 
     &.warning {
-      background-color: #fbedb7;
-      color: #8c8466;
+      background-color: #fdf5d8;
+      color: #716b53;
     }
 
     &.todo {
@@ -260,7 +260,7 @@
     margin: 0 2px;
     padding: 2px 6px;
     white-space: normal;
-    background-color: transparentize(getColor(fiord), 0.94);
+    background-color: transparentize(getColor(fiord), 0.95);
     border-radius: 3px;
     text-shadow: 0 1px 0 transparentize(getColor(white), 0.4);
   }

@@ -9,3 +9,4 @@ starter-kits-data.json
 .idea
 .DS_Store
 yarn-error.log
+package-lock.json
