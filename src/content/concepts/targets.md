@@ -6,6 +6,7 @@ contributors:
   - rouzbeh84
   - johnstew
   - srilman
+  - byzyk
 ---
 
 Because JavaScript can be written for both server and browser, webpack offers multiple deployment _targets_ that you can set in your webpack [configuration](/configuration).
@@ -37,8 +38,8 @@ Although webpack does **not** support multiple strings being passed into the `ta
 **webpack.config.js**
 
 ```javascript
-var path = require('path');
-var serverConfig = {
+const path = require('path');
+const serverConfig = {
   target: 'node',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -47,7 +48,7 @@ var serverConfig = {
   //…
 };
 
-var clientConfig = {
+const clientConfig = {
   target: 'web', // <=== can be omitted as default is 'web'
   output: {
     path: path.resolve(__dirname, 'dist'),
