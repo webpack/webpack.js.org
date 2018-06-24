@@ -8,6 +8,7 @@ contributors:
   - simon04
   - peterblazejewicz
   - youta1119
+  - byzyk
 ---
 
 webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found at the [node-interpret](https://github.com/js-cli/js-interpret) package. Using [node-interpret](https://github.com/js-cli/js-interpret), webpack can handle many different types of configuration files.
@@ -26,10 +27,11 @@ and then proceed to write your configuration:
 __webpack.config.ts__
 
 ```typescript
-import * as webpack from 'webpack';
-import * as path from 'path';
+import path from 'path';
+import webpack from 'webpack';
 
 const config: webpack.Configuration = {
+  mode: 'production',
   entry: './foo.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -39,6 +41,8 @@ const config: webpack.Configuration = {
 
 export default config;
 ```
+
+Above sample assumes version >= 2.7 or newer of TypeScript is used with the new `esModuleInterop` and `allowSyntheticDefaultImports` compiler options in your `tsconfig.json` file.
 
 Note that you'll also need to check your `tsconfig.json` file. If the module in `compilerOptions` in `tsconfig.json` is `commonjs`, the setting is complete, else webpack will fail with an error. This occurs because `ts-node` does not support any module syntax other than `commonjs`.
 
@@ -63,7 +67,8 @@ __tsconfig-for-webpack-config.json__
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es5"
+    "target": "es5",
+    "esModuleInterop": true
   }
 }
 ```
@@ -95,12 +100,15 @@ and then proceed to write your configuration:
 
 __webpack.config.coffee__
 
-```javascript
+<!-- eslint-skip -->
+
+```js
 HtmlWebpackPlugin = require('html-webpack-plugin')
 webpack = require('webpack')
 path = require('path')
 
 config =
+  mode: 'production'
   entry: './path/to/my/entry/file.js'
   output:
     path: path.resolve(__dirname, 'dist')
@@ -126,7 +134,7 @@ In the example below JSX (React JavaScript Markup) and Babel are used to create 
 
 First install the necessary dependencies:
 
-``` js
+``` bash
 npm install --save-dev babel-register jsxobj babel-preset-es2015
 ```
 
@@ -150,7 +158,7 @@ const CustomPlugin = config => ({
 });
 
 export default (
-  <webpack target="web" watch>
+  <webpack target="web" watch mode="production">
     <entry path="src/index.js" />
     <resolve>
       <alias {...{
