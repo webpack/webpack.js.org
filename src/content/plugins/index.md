@@ -32,7 +32,7 @@ Name                                                     | Description
 [`LoaderOptionsPlugin`](/plugins/loader-options-plugin)      | Used for migrating from webpack 1 to 2
 [`MinChunkSizePlugin`](/plugins/min-chunk-size-plugin)       | Keep chunk size above the specified limit
 [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin)       | creates a CSS file per JS file which requires CSS
-[`NoEmitOnErrorsPlugin`](/plugins/no-emit-on-errors-plugin)  | Skip the emitting phase when there are compilation errors
+[`NoEmitOnErrorsPlugin`](/configuration/optimization/#optimization-noemitonerrors)  | Skip the emitting phase when there are compilation errors
 [`NormalModuleReplacementPlugin`](/plugins/normal-module-replacement-plugin) | Replace resource(s) that matches a regexp
 [`NpmInstallWebpackPlugin`](/plugins/npm-install-webpack-plugin) | Auto-install missing dependencies during development
 [`ProvidePlugin`](/plugins/provide-plugin)                       | Use modules without having to use import/require
