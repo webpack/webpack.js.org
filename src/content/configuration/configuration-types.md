@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - kbariotis
   - simon04
+  - byzyk
 ---
 
 Besides exporting a single config object, there are a few more ways that cover other needs as well.
@@ -24,6 +25,7 @@ One option is to export a function from your webpack config instead of exporting
 -module.exports = {
 +module.exports = function(env, argv) {
 +  return {
++    mode: env.production ? 'production' : 'development',
 +    devtool: env.production ? 'source-maps' : 'eval',
      plugins: [
        new webpack.optimize.UglifyJsPlugin({
@@ -46,10 +48,10 @@ module.exports = () => {
       resolve({
         entry: './app.js',
         /* ... */
-      })
-    }, 5000)
-  })
-}
+      });
+    }, 5000);
+  });
+};
 ```
 
 
@@ -64,11 +66,13 @@ module.exports = [{
     libraryTarget: 'amd'
   },
   entry: './app.js',
+  mode: 'production',
 }, {
   output: {
     filename: './dist-commonjs.js',
     libraryTarget: 'commonjs'
   },
   entry: './app.js',
-}]
+  mode: 'production',
+}];
 ```
