@@ -5,6 +5,7 @@ contributors:
   - sokra
   - skipjack
   - pksjce
+  - byzyk
 ---
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
@@ -32,18 +33,21 @@ __index.html__
 
 __webpack.config.js__
 
-``` js
-externals: {
-  jquery: 'jQuery'
-}
+```js
+module.exports = {
+  //...
+  externals: {
+    jquery: 'jQuery'
+  }
+};
 ```
 
 This leaves any dependent modules unchanged, i.e. the code shown below will still work:
 
-``` js
+```js
 import $ from 'jquery';
 
-$('.my-element').animate(...);
+$('.my-element').animate(/* ... */);
 ```
 
 The bundle with external dependencies can be used in various module contexts, such as [CommonJS, AMD, global and ES2015 modules](/concepts/modules). The external library may be available in any of these forms:
@@ -63,10 +67,13 @@ See the example above. The property name `jquery` indicates that the module `jqu
 
 ### array
 
-``` js
-externals: {
-  subtract: ['./math', 'subtract']
-}
+```js
+module.exports = {
+  //...
+  externals: {
+    subtract: ['./math', 'subtract']
+  }
+};
 ```
 
 `subtract: ['./math', 'subtract']` converts to a parent child construct, where `./math` is the parent module and your bundle only requires the subset under `subtract` variable.
@@ -74,28 +81,31 @@ externals: {
 
 ### object
 
-``` js
-externals : {
-  react: 'react'
-}
+```js
+module.exports = {
+  //...
+  externals : {
+    react: 'react'
+  },
 
-// or
+  // or
 
-externals : {
-  lodash : {
-    commonjs: "lodash",
-    amd: "lodash",
-    root: "_" // indicates global variable
+  externals : {
+    lodash : {
+      commonjs: 'lodash',
+      amd: 'lodash',
+      root: '_' // indicates global variable
+    }
+  },
+
+  // or
+
+  externals : {
+    subtract : {
+      root: ['math', 'subtract']
+    }
   }
-}
-
-// or
-
-externals : {
-  subtract : {
-    root: ["math", "subtract"]
-  }
-}
+};
 ```
 
 This syntax is used to describe all the possible ways that an external library can be available. `lodash` here is available as `lodash` under AMD and CommonJS module systems but available as `_` in a global variable form. `subtract` here is available via the property `subtract` under the global `math` object (e.g. `window['math']['subtract']`).
@@ -107,15 +117,18 @@ It might be useful to define your own function to control the behavior of what y
 
 It basically comes down to this:
 
-``` js
-externals: [
-  function(context, request, callback) {
-    if (/^yourregex$/.test(request)){
-      return callback(null, 'commonjs ' + request);
+```js
+module.exports = {
+  //...
+  externals: [
+    function(context, request, callback) {
+      if (/^yourregex$/.test(request)){
+        return callback(null, 'commonjs ' + request);
+      }
+      callback();
     }
-    callback();
-  }
-],
+  ]
+};
 ```
 
 The `'commonjs ' + request` defines the type of module that needs to be externalized.
@@ -125,8 +138,11 @@ The `'commonjs ' + request` defines the type of module that needs to be external
 
 Every dependency that matches the given regular expression will be excluded from the output bundles.
 
-``` js
-externals: /^(jquery|\$)$/i
+```js
+module.exports = {
+  //...
+  externals: /^(jquery|\$)$/i
+};
 ```
 
 In this case any dependency named `jQuery`, capitalized or not, or `$` would be externalized.
