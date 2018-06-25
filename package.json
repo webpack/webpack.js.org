@@ -24,7 +24,7 @@
     "node": ">=6.9"
   },
   "scripts": {
-    "start": "npm run init:generated && npm run fetch && node ./antwar.bootstrap.js develop",
+    "start": "run-s -n init:generated fetch start-only",
     "start-only": "node ./antwar.bootstrap.js develop",
     "build": "npm run init:generated && npm run fetch && rm -rf build/ && node ./antwar.bootstrap.js build && npm run sitemap && echo webpack.js.org > build/CNAME",
     "build-test": "npm run build && http-server build/",
@@ -32,12 +32,17 @@
     "fetch": "sh src/scripts/fetch.sh",
     "init:generated": "mkdirp ./generated/loaders && mkdirp ./generated/plugins ",
     "lint": "run-s lint:*",
-    "lint:js": "eslint . --ext .js --ext .jsx",
+    "lint:js": "eslint . --ext .js,.jsx,.md",
     "lint:markdown": "markdownlint --config ./.markdownlint.json *.md ./src/content/**/*.md",
     "lint:social": "alex . -q",
     "lint:prose": "cp .proselintrc ~/ && proselint src/content",
     "test": "npm run lint",
     "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
   },
   "devDependencies": {
     "alex": "^4.1.0",
@@ -56,9 +61,9 @@
     "copy-webpack-plugin": "^4.4.2",
     "css-loader": "^0.28.10",
     "duplexer": "^0.1.1",
-    "eslint": "4.5.0",
+    "eslint": "4.19.1",
     "eslint-loader": "^2.0.0",
-    "eslint-plugin-markdown": "^1.0.0-beta.7",
+    "eslint-plugin-markdown": "git://github.com/byzyk/eslint-plugin-markdown.git#5927ccb78aff8a5464663730800503c6de3704e1",
     "file-loader": "^1.1.11",
     "fontgen-loader": "git://github.com/EugeneHlushko/fontgen-loader.git#a26a73843900ca4b518853952b1fc3c816103512",
     "front-matter": "^2.2.0",
@@ -66,6 +71,7 @@
     "github": "^10.0.0",
     "html-webpack-plugin": "^3.1.0",
     "http-server": "^0.10.0",
+    "husky": "^1.0.0-rc.8",
     "hyperlink": "^3.0.1",
     "loader-utils": "^1.1.0",
     "lodash": "^4.17.4",

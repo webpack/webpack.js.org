@@ -5,6 +5,7 @@ contributors:
   - TheLarkInn
   - chyipin
   - rouzbeh84
+  - byzyk
 ---
 
 Configuring the `output` configuration options tells webpack how to write the compiled files to disk. Note that, while there can be multiple `entry` points, only one `output` configuration is specified.
@@ -20,14 +21,12 @@ The minimum requirements for the `output` property in your webpack config is to 
 **webpack.config.js**
 
 ```javascript
-const config = {
+module.exports = {
   output: {
     filename: 'bundle.js',
     path: '/home/proj/public/assets'
   }
 };
-
-module.exports = config;
 ```
 
 This configuration would output a single `bundle.js` file into the `/home/proj/public/assets` directory.
@@ -38,7 +37,7 @@ This configuration would output a single `bundle.js` file into the `/home/proj/p
 If your configuration creates more than a single "chunk" (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use [substitutions](/configuration/output#output-filename) to ensure that each file has a unique name.
 
 ```javascript
-{
+module.exports = {
   entry: {
     app: './src/app.js',
     search: './src/search.js'
@@ -47,7 +46,7 @@ If your configuration creates more than a single "chunk" (as with multiple entry
     filename: '[name].js',
     path: __dirname + '/dist'
   }
-}
+};
 
 // writes to disk: ./dist/app.js, ./dist/search.js
 ```
@@ -60,16 +59,19 @@ Here's a more complicated example of using a CDN and hashes for assets:
 **config.js**
 
 ```javascript
-output: {
-  path: '/home/proj/cdn/assets/[hash]',
-  publicPath: 'http://cdn.example.com/assets/[hash]/'
-}
+module.exports = {
+  //...
+  output: {
+    path: '/home/proj/cdn/assets/[hash]',
+    publicPath: 'http://cdn.example.com/assets/[hash]/'
+  }
+};
 ```
 
-In cases when the eventual `publicPath` of output files isn't known at compile time, it can be left blank and set dynamically at runtime in the entry point file. If you don't know the `publicPath` while compiling, you can omit it and set `__webpack_public_path__` on your entry point.
+In cases where the eventual `publicPath` of output files isn't known at compile time, it can be left blank and set dynamically at runtime via the `__webpack_public_path__` variable in the entry point file:
 
 ```javascript
-__webpack_public_path__ = myRuntimePublicPath
+__webpack_public_path__ = myRuntimePublicPath;
 
 // rest of your application entry
 ```
