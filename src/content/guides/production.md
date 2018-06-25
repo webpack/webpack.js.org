@@ -15,6 +15,7 @@ contributors:
   - xgqfrms
   - kelset
   - xgirma
+  - mehrdaad
 ---
 
 In this guide we'll dive into some of the best practices and utilities for building a production site or application.
@@ -81,6 +82,7 @@ __webpack.dev.js__
 + const common = require('./webpack.common.js');
 +
 + module.exports = merge(common, {
++   mode: 'development',
 +   devtool: 'inline-source-map',
 +   devServer: {
 +     contentBase: './dist'
@@ -92,17 +94,14 @@ __webpack.prod.js__
 
 ``` diff
 + const merge = require('webpack-merge');
-+ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 + const common = require('./webpack.common.js');
 +
 + module.exports = merge(common, {
-+   plugins: [
-+     new UglifyJSPlugin()
-+   ]
++   mode: 'production',
 + });
 ```
 
-In `webpack.common.js`, we now have our `entry` and `output` setup configured and we've included any plugins that are required for both environments. In `webpack.dev.js`, we've added the recommended `devtool` for that environment (strong source mapping), as well as our simple `devServer` configuration. Finally, in `webpack.prod.js`, we included the `UglifyJSPlugin` which was first introduced by the [tree shaking](/guides/tree-shaking) guide.
+In `webpack.common.js`, we now have setup our `entry` and `output` configuration and we've included any plugins that are required for both environments. In `webpack.dev.js`, we've set ``mode`` to ``development``. Also, we've added the recommended `devtool` for that environment (strong source mapping), as well as our simple `devServer` configuration. Finally, in `webpack.prod.js`,``mode`` is set to ``production`` which loads `UglifyJSPlugin` which was first introduced by the [tree shaking](/guides/tree-shaking) guide.
 
 Note the use of `merge()` in the environment-specific configurations to easily include our common configuration in `dev` and `prod`. The `webpack-merge` tool offers a variety of advanced features for merging but for our use case we won't need any of that.
 
@@ -155,7 +154,7 @@ Note that while the [`UglifyJSPlugin`](/plugins/uglifyjs-webpack-plugin) is a gr
 - [`BabelMinifyWebpackPlugin`](https://github.com/webpack-contrib/babel-minify-webpack-plugin)
 - [`ClosureCompilerPlugin`](https://github.com/roman01la/webpack-closure-compiler)
 
-If you decide to try another, just make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide.
+If you decide to try another minification plugin, just make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide.
 
 
 ## Source Mapping
@@ -170,6 +169,7 @@ __webpack.prod.js__
   const common = require('./webpack.common.js');
 
   module.exports = merge(common, {
+    mode: 'production',
 +   devtool: 'source-map',
     plugins: [
 -     new UglifyJSPlugin()
@@ -196,6 +196,7 @@ __webpack.prod.js__
   const common = require('./webpack.common.js');
 
   module.exports = merge(common, {
+    mode: 'production',
     devtool: 'source-map',
     plugins: [
       new UglifyJSPlugin({
