@@ -202,3 +202,37 @@ module.exports = {
   }
 };
 ```
+
+## `optimization.removeEmptyChunks`
+
+`bool: true`
+
+Tells webpack to detect and remove chunks which are empty. Setting `optimization.removeEmptyChunks` to `false` will disable this optimization.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    removeEmptyChunks: false
+  }
+};
+```
+
+## `optimization.mergeDuplicateChunks`
+
+`bool: true`
+
+Tells webpack to merge chunks which contain the same modules. Setting `optimization.mergeDuplicateChunks` to `false` will disable this optimization.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    mergeDuplicateChunks: false
+  }
+};
+```
