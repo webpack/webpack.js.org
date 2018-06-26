@@ -21,7 +21,9 @@ categories of internal plugins:
 
 Plugins affecting the environment of the compiler.
 
-__`node/NodeEnvironmentPlugin`__
+### NodeEnvironmentPlugin
+
+`node/NodeEnvironmentPlugin()`
 
 Applies node.js style filesystem to the compiler.
 
@@ -29,17 +31,23 @@ Applies node.js style filesystem to the compiler.
 
 Plugins affecting the compiler
 
-__`CachePlugin([cache])`__
+### CachePlugin
+
+`CachePlugin([cache])`
 
 Adds a cache to the compiler, where modules are cached.
 
 You can pass a `cache` object, where the modules are cached. Otherwise one is created per plugin instance.
 
-__`ProgressPlugin(handler)`__
+### ProgressPlugin
+
+`ProgressPlugin(handler)`
 
 Hook into the compiler to extract progress information. The `handler` must have the signature `function(percentage, message)`. It's called with `0 <= percentage <= 1`. `percentage == 0` indicates the start. `percentage == 1` indicates the end.
 
-__`RecordIdsPlugin()`__
+### RecordIdsPlugin
+
+`RecordIdsPlugin()`
 
 Saves and restores module and chunk ids from records.
 
@@ -47,21 +55,29 @@ Saves and restores module and chunk ids from records.
 
 Plugins, which add entry chunks to the compilation.
 
-__`SingleEntryPlugin(context, request, chunkName)`__
+### SingleEntryPlugin
 
-Adds a entry chunk on compilation. The chunk is named `chunkName` and contains only one module (plus dependencies). The module is resolved from `request` in `context` (absolute path).
+`SingleEntryPlugin(context, request, chunkName)`
 
-__`MultiEntryPlugin(context, requests, chunkName)`__
+Adds an entry chunk on compilation. The chunk is named `chunkName` and contains only one module (plus dependencies). The module is resolved from `request` in `context` (absolute path).
 
-Adds a entry chunk on compilation. The chunk is named `chunkName` and contains a module for each item in the `requests` array (plus dependencies). Each item in `requests` is resolved in `context` (absolute path).
+### MultiEntryPlugin
 
-__`PrefetchPlugin(context, request)`__
+`MultiEntryPlugin(context, requests, chunkName)`
 
-Prefetches `request` and dependencies to enables more parallel compilation. It doesn't create any chunk. The module is resolved from `request` in `context` (absolute path).
+Adds an entry chunk on compilation. The chunk is named `chunkName` and contains a module for each item in the `requests` array (plus dependencies). Each item in `requests` is resolved in `context` (absolute path).
+
+### PrefetchPlugin
+
+`PrefetchPlugin(context, request)`
+
+Prefetches `request` and dependencies to enable a more parallel compilation. It doesn't create any chunk. The module is resolved from `request` in `context` (absolute path).
 
 ## output
 
-__`FunctionModulePlugin(context, options)`__
+### FunctionModulePlugin
+
+`FunctionModulePlugin(context, options)`
 
 Each emitted module is wrapped in a function.
 
@@ -69,7 +85,9 @@ Each emitted module is wrapped in a function.
 
 If `options.pathinfo` is set, each module function is annotated with a comment containing the module identifier shortened to `context` (absolute path).
 
-__`JsonpTemplatePlugin(options)`__
+### JsonpTemplatePlugin
+
+`JsonpTemplatePlugin(options)`
 
 Chunks are wrapped into JSONP-calls. A loading algorithm is included in entry chunks. It loads chunks by adding a `<script>` tag.
 
@@ -81,7 +99,9 @@ Chunks are wrapped into JSONP-calls. A loading algorithm is included in entry ch
 
 `options.chunkFilename` is the filename under that chunks are expected.
 
-__`node/NodeTemplatePlugin(options)`__
+### NodeTemplatePlugin
+
+`node/NodeTemplatePlugin(options)`
 
 Chunks are wrapped into node.js modules exporting the bundled modules. The entry chunks loads chunks by requiring them.
 
@@ -89,63 +109,67 @@ Chunks are wrapped into node.js modules exporting the bundled modules. The entry
 
 `options.chunkFilename` is the filename under that chunks are expected.
 
-__`LibraryTemplatePlugin(name, target)`__
+### LibraryTemplatePlugin
+
+`LibraryTemplatePlugin(name, target)`
 
 The entries chunks are decorated to form a library `name` of type `type`.
 
-__`webworker/WebWorkerTemplatePlugin(options)`__
+### WebWorkerTemplatePlugin
 
-Chunks are loaded by `importScripts`. Else it's similar to `JsonpTemplatePlugin`.
+`webworker/WebWorkerTemplatePlugin(options)`
+
+Chunks are loaded by `importScripts`. Else it's similar to [`JsonpTemplatePlugin`](#jsonptemplateplugin).
 
 `options` are the output options.
 
-__`EvalDevToolModulePlugin`__
+### EvalDevToolModulePlugin
 
 Decorates the module template by wrapping each module in a `eval` annotated with `// @sourceURL`.
 
-__`SourceMapDevToolPlugin(sourceMapFilename, sourceMappingURLComment, moduleFilenameTemplate, fallbackModuleFilenameTemplate)`__
+### SourceMapDevToolPlugin
+
+`SourceMapDevToolPlugin(sourceMapFilename, sourceMappingURLComment, moduleFilenameTemplate, fallbackModuleFilenameTemplate)`
 
 Decorates the templates by generating a SourceMap for each chunk.
 
 `sourceMapFilename` the filename template of the SourceMap. `[hash]`, `[name]`, `[id]`, `[file]` and `[filebase]` are replaced. If this argument is missing, the SourceMap will be inlined as DataUrl.
 
-__`NoHotModuleReplacementPlugin()`__
+### NoHotModuleReplacementPlugin
+
+`NoHotModuleReplacementPlugin()`
 
 Defines `module.hot` as `false` to remove hot module replacement code.
 
-__`HotModuleReplacementPlugin(options)`__
+### HotModuleReplacementPlugin
+
+`HotModuleReplacementPlugin(options)`
 
 Add support for hot module replacement. Decorates the templates to add runtime code. Adds `module.hot` API.
 
-__`options.hotUpdateChunkFilename`__
+`options.hotUpdateChunkFilename` the filename for hot update chunks.
 
-The filename for hot update chunks.
+`options.hotUpdateMainFilename` the filename for the hot update manifest.
 
-__`options.hotUpdateMainFilename`__
-
-The filename for the hot update manifest.
-
-__`options.hotUpdateFunction`__
-
-JSON function name for the hot update.
+`options.hotUpdateFunction` JSON function name for the hot update.
 
 ## source
 
 Plugins affecting the source code of modules.
 
-__`APIPlugin`__
+## APIPlugin
 
-Make `__webpack_public_path__`, `__webpack_require__`, `__webpack_modules__`, `__webpack_chunk_load__` accessible. Ensures that `require.valueOf` and `require.onError` are not processed by other plugins.
+Make webpack_public_path## , webpack_require## , webpack_modules## , webpack_chunk_load##  accessible. Ensures that `require.valueOf` and `require.onError` are not processed by other plugins.
 
-__`CompatibilityPlugin`__
+### CompatibilityPlugin
 
 Currently useless. Ensures compatibility with other module loaders.
 
-__`ConsolePlugin`__
+### ConsolePlugin
 
 Offers a pseudo `console` if it is not available.
 
-__`ConstPlugin`__
+### ConstPlugin
 
 Tries to evaluate expressions in `if (...)` conditions and replace them with `true`/`false`. May result in dead branches elimination.
 
@@ -163,61 +187,83 @@ if (a) {
 }
 ```
 
-Becausse `a` will evaluate as `false` in the `if (a)` condition and `foo()` call will never happen, the whole import will get pruned thanks to `ConstPlugin` run.
+Because `a` will evaluate as `false` in the `if (a)` condition and `foo()` call will never happen, the whole import will get pruned thanks to `ConstPlugin` run.
 
-__`ProvidePlugin(name, request)`__
+### ProvidePlugin
+
+`ProvidePlugin(name, request)`
 
 If `name` is used in a module it is filled by a module loaded by `require(<request>)`.
 
-__`NodeStuffPlugin(options, context)`__
+### NodeStuffPlugin
+
+`NodeStuffPlugin(options, context)`
 
 Provide stuff that is normally available in node.js modules.
 
 It also ensures that `module` is filled with some node.js stuff if you use it.
 
-__`RequireJsStuffPlugin`__
+### RequireJsStuffPlugin
 
 Provide stuff that is normally available in require.js.
 
 `require[js].config` is removed. `require.version` is `0.0.0`. `requirejs.onError` is mapped to `require.onError`.
 
-__`node/NodeSourcePlugin(options)`__
+### NodeSourcePlugin
+
+`node/NodeSourcePlugin(options)`
 
 This module adds stuff from node.js that is not available in non-node.js environments.
 
 It adds polyfills for `process`, `console`, `Buffer` and `global` if used. It also binds the built in Node.js replacement modules.
 
-__`node/NodeTargetPlugin`__
+### NodeTargetPlugin
+
+`node/NodeTargetPlugin()`
 
 The plugins should be used if you run the bundle in a node.js environment.
 
 If ensures that native modules are loaded correctly even if bundled.
 
-__`dependencies/AMDPlugin(options)`__
+### AMDPlugin
 
-Provides AMD-style `define` and `require` to modules. Also bind `require.amd`, `define.amd` and `__webpack_amd_options__` to the `options` passed as parameter.
+`dependencies/AMDPlugin(options)`
 
-__`dependencies/CommonJsPlugin`__
+Provides AMD-style `define` and `require` to modules. Also bind `require.amd`, `define.amd` and webpack_amd_options##  to the `options` passed as parameter.
+
+### CommonJsPlugin
+
+`dependencies/CommonJsPlugin`
 
 Provides CommonJs-style `require` to modules.
 
-__`dependencies/LabeledModulesPlugin`__
+### LabeledModulesPlugin
+
+`dependencies/LabeledModulesPlugin()`
 
 Provide labels `require:` and `exports:` to modules.
 
-__`dependencies/RequireContextPlugin(modulesDirectories, extensions)`__
+### RequireContextPlugin
+
+`dependencies/RequireContextPlugin(modulesDirectories, extensions)`
 
 Provides `require.context`. The parameter `modulesDirectories` and `extensions` are used to find alternative requests for files. It's useful to provide the same arrays as you provide to the resolver.
 
-__`dependencies/RequireEnsurePlugin`__
+### RequireEnsurePlugin
+
+`dependencies/RequireEnsurePlugin()`
 
 Provides `require.ensure`.
 
-__`dependencies/RequireIncludePlugin`__
+### RequireIncludePlugin
+
+`dependencies/RequireIncludePlugin()`
 
 Provides `require.include`.
 
-__`DefinePlugin(definitions)`__
+### DefinePlugin
+
+`DefinePlugin(definitions)`
 
 Define constants for identifier.
 
@@ -225,7 +271,9 @@ Define constants for identifier.
 
 ## optimize
 
-__`optimize/LimitChunkCountPlugin(options)`__
+### LimitChunkCountPlugin
+
+`optimize/LimitChunkCountPlugin(options)`
 
 Merge chunks limit chunk count is lower than `options.maxChunks`.
 
@@ -233,34 +281,48 @@ The overhead for each chunks is provided by `options.chunkOverhead` or defaults 
 
 Chunks that reduce the total size the most are merged first. If multiple combinations are equal the minimal merged size wins.
 
-__`optimize/MergeDuplicateChunksPlugin`__
+### MergeDuplicateChunksPlugin
+
+`optimize/MergeDuplicateChunksPlugin()`
 
 Chunks with the same modules are merged.
 
-__`optimize/RemoveEmptyChunksPlugin`__
+### RemoveEmptyChunksPlugin
+
+`optimize/RemoveEmptyChunksPlugin`
 
 Modules that are included in every parent chunk are removed from the chunk.
 
-__`optimize/MinChunkSizePlugin(minChunkSize)`__
+### MinChunkSizePlugin
+
+`optimize/MinChunkSizePlugin(minChunkSize)`
 
 Merges chunks until each chunk has the minimum size of `minChunkSize`.
 
-__`optimize/FlagIncludedChunksPlugin`__
+### FlagIncludedChunksPlugin
+
+`optimize/FlagIncludedChunksPlugin()`
 
 Adds chunk ids of chunks which are included in the chunk. This eliminates unnecessary chunk loads.
 
-__`optimize/UglifyJsPlugin(options)`__
+### UglifyJsPlugin
+
+`optimize/UglifyJsPlugin(options)`
 
 Minimizes the chunks with `uglify.js`.
 
 `options` are uglifyjs options.
 
-__`optimize/OccurenceOrderPlugin(preferEntry)`__
+### OccurenceOrderPlugin
+
+`optimize/OccurenceOrderPlugin(preferEntry)`
 
 Order the modules and chunks by occurrence. This saves space, because often referenced modules and chunks get smaller ids.
 
 `preferEntry` If true, references in entry chunks have higher priority
 
-__`optimize/DedupePlugin`__
+### DedupePlugin
+
+`optimize/DedupePlugin()`
 
 Deduplicates modules and adds runtime code.
