@@ -70,6 +70,9 @@ module.exports = {
 
     // Add chunk information (setting this to `false` allows for a less verbose output)
     chunks: true,
+    
+    // Add namedChunkGroups information
+    chunkGroups: true,
 
     // Add built modules information to chunk information
     chunkModules: true,
