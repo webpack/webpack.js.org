@@ -6,6 +6,7 @@ contributors:
   - opiepj
   - simon04
   - skipjack
+  - byzyk
 related:
   - title: Code Splitting Example
     url: https://github.com/webpack/webpack/blob/master/examples/explicit-vendor-chunk/README.md
@@ -23,7 +24,7 @@ This plugin is used in a separate webpack config exclusively to create a dll-onl
 * `path`: **absolute path** to the manifest json file (output)
 
 ```javascript
-new webpack.DllPlugin(options)
+new webpack.DllPlugin(options);
 ```
 
 Creates a `manifest.json` which is written to the given `path`. It contains mappings from require and import requests, to module ids. It is used by the `DllReferencePlugin`.
@@ -43,7 +44,7 @@ This plugin is used in the primary webpack config, it references the dll-only-bu
 * `sourceType` (optional): how the dll is exposed ([libraryTarget](/configuration/output/#output-librarytarget))
 
 ```javascript
-new webpack.DllReferencePlugin(options)
+new webpack.DllReferencePlugin(options);
 ```
 
 References a dll manifest file to map dependency names to module ids, then requires them as needed using the internal `__webpack_require__` function.
@@ -77,9 +78,9 @@ W> `DllReferencePlugin` and `DllPlugin` are used in _separate_ webpack configs.
 ```javascript
 new webpack.DllPlugin({
   context: __dirname,
-  name: "[name]_[hash]",
-  path: path.join(__dirname, "manifest.json"),
-})
+  name: '[name]_[hash]',
+  path: path.join(__dirname, 'manifest.json'),
+});
 ```
 
 **webpack.app.config.js**
@@ -87,11 +88,11 @@ new webpack.DllPlugin({
 ```javascript
 new webpack.DllReferencePlugin({
   context: __dirname,
-  manifest: require("./manifest.json"),
-  name: "./my-dll.js",
-  scope: "xyz",
-  sourceType: "commonjs2"
-})
+  manifest: require('./manifest.json'),
+  name: './my-dll.js',
+  scope: 'xyz',
+  sourceType: 'commonjs2'
+});
 ```
 
 
