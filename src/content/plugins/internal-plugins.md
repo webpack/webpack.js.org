@@ -187,7 +187,7 @@ if (a) {
 }
 ```
 
-Because `a` will evaluate as `false` in the `if (a)` condition and `foo()` call will never happen, the whole import will get pruned thanks to `ConstPlugin` run.
+Because `a` will evaluate as `false` in the `if (a)` condition and `foo()` call will never happen, the whole if statement and even the import will get pruned thanks to `ConstPlugin` run.
 
 ### ProvidePlugin
 
@@ -289,7 +289,7 @@ Chunks with the same modules are merged.
 
 ### RemoveEmptyChunksPlugin
 
-`optimize/RemoveEmptyChunksPlugin`
+`optimize/RemoveEmptyChunksPlugin()`
 
 Modules that are included in every parent chunk are removed from the chunk.
 
