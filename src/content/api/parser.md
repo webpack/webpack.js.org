@@ -2,6 +2,8 @@
 title: Parser
 group: Plugins
 sort: 4
+contributors:
+  - byzyk
 ---
 
 The `parser` instance, found in the `compiler`, is used to parse each module
@@ -9,15 +11,15 @@ being processed by webpack. The `parser` is yet another webpack class that
 extends `tapable` and provides a variety of `tapable` hooks that can be used by
 plugin authors to customize the parsing process.
 
-The `parser` is found within [module factories](/api/module-factories/) and therefore takes little
+The `parser` is found within [module factories](/api/compiler-hooks/#normalmodulefactory) and therefore takes little
 more work to access:
 
 ``` js
-compiler.hooks.normalModuleFactory.tap(factory => {
-  factory.hooks.parser.tap((parser, options) => {
-    parser.hooks.someHook.tap(...)
-  })
-})
+compiler.hooks.normalModuleFactory.tap('MyPlugin', factory => {
+  factory.hooks.parser.tap('MyPlugin', (parser, options) => {
+    parser.hooks.someHook.tap(/* ... */);
+  });
+});
 ```
 
 As with the `compiler`, `tapAsync` and `tapPromise` may also be available

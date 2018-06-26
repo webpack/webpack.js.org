@@ -4,6 +4,7 @@ sort: 19
 contributors:
   - SpaceK33z
   - chrisVillanueva
+  - byzyk
 ---
 
 If you have a more advanced project and use [Vagrant](https://www.vagrantup.com/) to run your development environment in a Virtual Machine, you'll often want to also run webpack in the VM.
@@ -29,7 +30,7 @@ Make sure to have a `webpack.config.js` file. If you haven't already, use this a
 ```js
 module.exports = {
   context: __dirname,
-  entry: "./app.js"
+  entry: './app.js'
 };
 ```
 
