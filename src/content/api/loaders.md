@@ -338,8 +338,17 @@ Should a source map be generated. Since generating source maps can be an expensi
 emitWarning(warning: Error)
 ```
 
-Emit a warning.
+Emit a warning that will be displayed in the output like the following:
 
+``` bash
+WARNING in ./src/lib.js (./src/loader.js!./src/lib.js)
+Module Warning (from ./src/loader.js):
+Here is a Warning!
+ @ ./src/index.js 1:0-25
+
+ ```
+
+T> Note that the warnings will not be displayed if `stats.warnings` is set to `false`, or some other omit setting is used to `stats` such as `none` or `errors-only`. See the [stats configuration](/configuration/stats/#stats).
 
 ### `this.emitError`
 
@@ -347,7 +356,16 @@ Emit a warning.
 emitError(error: Error)
 ```
 
-Emit an error.
+Emit an error that also can be displayed in the output.
+
+``` bash
+ERROR in ./src/lib.js (./src/loader.js!./src/lib.js)
+Module Error (from ./src/loader.js):
+Here is an Error!
+ @ ./src/index.js 1:0-25
+```
+
+T> Unlike throwing an Error directly, it will NOT interrupt compiling process of current module.
 
 
 ### `this.loadModule`
@@ -471,3 +489,88 @@ Hacky access to the Compiler object of webpack.
 ### `this._module`
 
 Hacky access to the Module object being loaded.
+
+
+## Error Reporting
+
+There are some ways to throw out errors from inside a loader:
+
+### Using `this.emitError`
+
+It just report errors but not interrupt module compiling.
+
+see [this.emitError](/api/loaders/#this-emiterror).
+
+### Using `throw` (or other uncaught exception)
+
+Throw out an uncaught error while loader are running will cause current module compiling failed.
+
+For example:
+
+__./src/index.js__
+
+```js
+require('./loader!./lib');
+```
+
+__./src/loader.js__
+
+```js
+module.exports = function(source){
+  throw new Error('Here is an fatal Error!');
+};
+```
+
+the module that ouccur this error will be packed into bundle (as an error module) like the following:
+
+```js-with-links
+/***/ "./src/loader.js!./src/lib.js":
+/*!************************************!*\
+  !*** ./src/loader.js!./src/lib.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./src/loader.js):\nError: Here is an fatal Error!\n    at Object.module.exports (/workspace/src/loader.js:3:9)");
+
+/***/ })
+
+```
+
+Then the build output will also display the error (Similar to `this.emitError`):
+
+```bash
+ERROR in ./src/lib.js (./src/loader.js!./src/lib.js)
+Module build failed (from ./src/loader.js):
+Error: Here is an fatal Error!
+    at Object.module.exports (/workspace/src/loader.js:2:9)
+ @ ./src/index.js 1:0-25
+
+```
+
+And you can see these informations below, not only error message, but also details about which loader and module are involved:
+
+- the module path: `ERROR in ./src/lib.js`
+- the request string: `(./src/loader.js!./src/lib.js)`
+- the loader path: `(from ./src/loader.js)`
+- the caller path: `@ ./src/index.js 1:0-25`
+
+W> The loader path about error in the above are added after webpack 4.12
+
+### Using `this.callback` (in async mode)
+
+Pass an error on first argument into callback, used in async mode.
+
+__./src/loader.js__
+
+```js
+module.exports = function(source){
+  const callback = this.async();
+  //...
+  callback(new Error('Here is an async passthrough Error!'), source);
+};
+```
+
+Same as throw an error, it will also cause module compiling failed once it happened and result an error module into bundle.
+
+T> All the errors and warnings will be recorded into `stats`. Please see [Stats Data](/api/stats/#errors-and-warnings).
