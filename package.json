@@ -25,7 +25,6 @@
   },
   "scripts": {
     "clean": "rimraf ./dist src/content/**/_*.md src/**/_*.json",
-    "prestart": "npm run clean",
     "start": "NODE_ENV=development webpack-dev-server --config webpack.dev.js --env.dev",
     "content": "node src/scripts/build-content-tree.js ./src/content ./src/_content.json",
     "fetch": "sh src/scripts/fetch.sh",

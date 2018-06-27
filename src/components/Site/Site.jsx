@@ -32,7 +32,7 @@ import Content from '../../_content.json';
 class Site extends React.Component {
   state = {
     mobileSidebarOpen: false
-  }
+  };
 
   render() {
     let { location } = this.props;
@@ -43,77 +43,67 @@ class Site extends React.Component {
 
     return (
       <div className="site">
-        <DocumentTitle title={ getPageTitle(Content, location.pathname) } />
+        <DocumentTitle title={getPageTitle(Content, location.pathname)} />
         <NotificationBar />
         <Navigation
-          pathname={ location.pathname }
-          toggleSidebar={ this._toggleSidebar }
+          pathname={location.pathname}
+          toggleSidebar={this._toggleSidebar}
           links={[
             {
               content: 'Documentation',
               url: '/concepts',
               isActive: url => /^\/(api|concepts|configuration|guides|loaders|plugins)/.test(url),
-              children: this._strip(
-                sections.filter(item => item.name !== 'contribute')
-              )
+              children: this._strip(sections.filter(item => item.name !== 'contribute'))
             },
             { content: 'Contribute', url: '/contribute' },
             { content: 'Vote', url: '/vote' },
             { content: 'Blog', url: 'https://medium.com/webpack' }
-          ]} />
+          ]}
+        />
 
-        { isClient ? (
-          <SidebarMobile
-            open={ mobileSidebarOpen }
-            sections={ this._strip(Content.children) } />
-        ) : null }
+        {isClient ? <SidebarMobile open={mobileSidebarOpen} sections={this._strip(Content.children)} /> : null}
 
-          <Switch>
-            <Route
-              path="/"
-              exact
-              component={ Splash } />
-            <Route
-              render={ props => (
-                <Container className="site__content">
-                  <Switch>
-                    { pages.map(page => (
-                      <Route
-                        key={ page.url }
-                        exact={ true }
-                        path={ page.url }
-                        render={ props => {
-                          let path = page.path.replace('src/content/', '');
-                          let content = this.props.import(path);
-
-                          return (
-                            <React.Fragment>
-                              <Sponsors />
-                              <Sidebar
-                                className="site__sidebar"
-                                currentPage={ location.pathname }
-                                pages={ this._strip(section ? section.children : Content.children.filter(item => (
-                                  item.type !== 'directory' &&
-                                  item.url !== '/'
-                                ))) } />
-                              <Page
-                                { ...page }
-                                content={ content } />
-                              <Gitter />
-                            </React.Fragment>
-                          );
-                        }} />
-                    ))}
+        <Switch>
+          <Route path="/" exact component={Splash} />
+          <Route
+            render={props => (
+              <Container className="site__content">
+                <Switch>
+                  {pages.map(page => (
                     <Route
-                      path="/vote"
-                      component={ Vote } />
-                    <Route render={ props => (
-                      '404 Not Found'
-                    )} />
-                  </Switch>
-                </Container>
-              )} />
-          </Switch>
+                      key={page.url}
+                      exact={true}
+                      path={page.url}
+                      render={props => {
+                        let path = page.path.replace('src/content/', '');
+                        let content = this.props.import(path);
+
+                        return (
+                          <React.Fragment>
+                            <Sponsors />
+                            <Sidebar
+                              className="site__sidebar"
+                              currentPage={location.pathname}
+                              pages={this._strip(
+                                section
+                                  ? section.children
+                                  : Content.children.filter(item => item.type !== 'directory' && item.url !== '/')
+                              )}
+                            />
+                            <Page {...page} content={content} />
+                            <Gitter />
+                          </React.Fragment>
+                        );
+                      }}
+                    />
+                  ))}
+                  <Route path="/vote" component={Vote} />
+                  <Route render={props => '404 Not Found'} />
+                </Switch>
+              </Container>
+            )}
+          />
+        </Switch>
         <Footer />
       </div>
     );
@@ -128,7 +118,7 @@ class Site extends React.Component {
     this.setState({
       mobileSidebarOpen: open
     });
-  }
+  };
 
   /**
    * Strip any non-applicable properties
@@ -137,6 +127,14 @@ class Site extends React.Component {
    * @return {array}       - ...
    */
   _strip = array => {
+    let anchorTitleIndex = array.findIndex(item => item.name.toLowerCase() === 'index.md');
+
+    if (anchorTitleIndex !== -1) {
+      array.unshift(array[anchorTitleIndex]);
+
+      array.splice(anchorTitleIndex + 1, 1);
+    }
+
     return array.map(({ title, name, url, group, sort, anchors, children }) => ({
       title: title || name,
       content: title || name,
@@ -146,7 +144,7 @@ class Site extends React.Component {
       anchors,
       children: children ? this._strip(children) : []
     }));
-  }
+  };
 }
 
 export default Hot(module)(Site);
