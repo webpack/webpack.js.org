@@ -9,8 +9,6 @@ contributors:
 related:
   - title: Predictable Long Term Caching
     url: https://medium.com/webpack/predictable-long-term-caching-with-webpack-d3eee1d3fa31
-  - title: Long Term Caching of Static Assets
-    url: https://codeburst.io/long-term-caching-of-static-assets-with-webpack-1ecb139adb95?gi=9e32667ae5c5#.vtwnssps4
   - title: Webpack & Caching
     url: https://gist.github.com/sokra/ff1b0290282bfa2c037bdb6dcca1a7aa
   - title: Advanced Webpack Presentation
@@ -116,13 +114,12 @@ W> Output may differ depending on your current webpack version. Newer versions m
 
 ## Extracting Boilerplate
 
-As we learned in [code splitting](/guides/code-splitting), the [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) can be used to split modules out into separate bundles. A lesser-known feature of the `CommonsChunkPlugin` is extracting webpack's boilerplate and manifest which can change with every build. By specifying a name not mentioned in the `entry` configuration, the plugin will automatically extract what we want into a separate bundle:
+As we learned in [code splitting](/guides/code-splitting), the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) can be used to split modules out into separate bundles. webpack provides an optimization feature which does split out runtime code into a separate chunk(s) according to the options provided, simply use [`optimization.runtimeChunk`](/configuration/optimization/#optimization-runtimechunk) set to `single` for creating one runtime bundle:
 
 __webpack.config.js__
 
 ``` diff
   const path = require('path');
-+ const webpack = require('webpack');
   const CleanWebpackPlugin = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -132,92 +129,89 @@ __webpack.config.js__
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
         title: 'Caching'
--     })
-+     }),
-+     new webpack.optimize.CommonsChunkPlugin({
-+       name: 'manifest'
-+     })
     ],
     output: {
       filename: '[name].[chunkhash].js',
       path: path.resolve(__dirname, 'dist')
-    }
+    },
++   optimization: {
++     runtimeChunk: 'single'
++   }
   };
 ```
 
-Let's run another build to see the extracted `manifest` bundle:
+Let's run another build to see the extracted `runtime` bundle:
 
 ``` bash
-Hash: 80552632979856ddab34
-Version: webpack 3.3.0
-Time: 1512ms
-                           Asset       Size  Chunks                    Chunk Names
-    main.5ec8e954e32d66dee1aa.js     542 kB       0  [emitted]  [big]  main
-manifest.719796322be98041fff2.js    5.82 kB       1  [emitted]         manifest
-                      index.html  275 bytes          [emitted]
-   [0] ./src/index.js 336 bytes {0} [built]
-   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+Hash: 82c9c385607b2150fab2
+Version: webpack 4.12.0
+Time: 3027ms
+                          Asset       Size  Chunks             Chunk Names
+runtime.cc17ae2a94ec771e9221.js   1.42 KiB       0  [emitted]  runtime
+   main.e81de2cf758ada72f306.js   69.5 KiB       1  [emitted]  main
+                     index.html  275 bytes          [emitted]  
+[1] (webpack)/buildin/module.js 497 bytes {1} [built]
+[2] (webpack)/buildin/global.js 489 bytes {1} [built]
+[3] ./src/index.js 309 bytes {1} [built]
     + 1 hidden module
 ```
 
-It's also good practice to extract third-party libraries, such as `lodash` or `react`, to a separate `vendor` chunk as they are less likely to change than our local source code. This step will allow clients to request even less from the server to stay up to date. This can be done by using a combination of a new `entry` point along with another `CommonsChunkPlugin` instance:
+It's also good practice to extract third-party libraries, such as `lodash` or `react`, to a separate `vendor` chunk as they are less likely to change than our local source code. This step will allow clients to request even less from the server to stay up to date.
+This can be done by using the [`cacheGroups`](/plugins/split-chunks-plugin/#splitchunks-cachegroups) option of the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) demonstrated in [Example 2 of SplitChunksPlugin](/plugins/split-chunks-plugin/#split-chunks-example-2). Lets add `optimization.splitChunks` with `cacheGroups` with next params and build:
 
 __webpack.config.js__
 
 ``` diff
   var path = require('path');
-  const webpack = require('webpack');
   const CleanWebpackPlugin = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
--   entry: './src/index.js',
-+   entry: {
-+     main: './src/index.js',
-+     vendor: [
-+       'lodash'
-+     ]
-+   },
+    entry: './src/index.js',
     plugins: [
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
         title: 'Caching'
       }),
-+     new webpack.optimize.CommonsChunkPlugin({
-+       name: 'vendor'
-+     }),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'manifest'
-      })
     ],
     output: {
       filename: '[name].[chunkhash].js',
       path: path.resolve(__dirname, 'dist')
+    },
+    optimization: {
+-     runtimeChunk: 'single'
++     runtimeChunk: 'single',
++     splitChunks: {
++       cacheGroups: {
++         vendor: {
++           test: /[\\/]node_modules[\\/]/,
++           name: 'vendors',
++           chunks: 'all'
++         }
++       }
++     }
     }
   };
 ```
 
-W> Note that order matters here. The `'vendor'` instance of the `CommonsChunkPlugin` must be included prior to the `'manifest'` instance.
-
 Let's run another build to see our new `vendor` bundle:
 
 ``` bash
-Hash: 69eb92ebf8935413280d
-Version: webpack 3.3.0
-Time: 1502ms
-                           Asset       Size  Chunks                    Chunk Names
-  vendor.8196d409d2f988123318.js     541 kB       0  [emitted]  [big]  vendor
-    main.0ac0ae2d4a11214ccd19.js  791 bytes       1  [emitted]         main
-manifest.004a1114de8bcf026622.js    5.85 kB       2  [emitted]         manifest
-                      index.html  352 bytes          [emitted]
-   [1] ./src/index.js 336 bytes {1} [built]
-   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [4] multi lodash 28 bytes {0} [built]
+Hash: 213f57fc3bb5cb47c719
+Version: webpack 4.12.0
+Time: 475ms
+                          Asset       Size  Chunks             Chunk Names
+runtime.cc17ae2a94ec771e9221.js   1.42 KiB       0  [emitted]  runtime
+vendors.a42c3ca0d742766d7a28.js   69.4 KiB       1  [emitted]  vendors
+   main.abf44fedb7d11d4312d7.js  240 bytes       2  [emitted]  main
+                     index.html  353 bytes          [emitted]  
+[1] (webpack)/buildin/module.js 497 bytes {1} [built]
+[2] (webpack)/buildin/global.js 489 bytes {1} [built]
+[3] ./src/index.js 309 bytes {2} [built]
     + 1 hidden module
 ```
 
+We can now see that our `main` bundle does not contain `vendor` code from `node_modules` directory and is down in size to `240 bytes`!
 
 ## Module Identifiers
 
