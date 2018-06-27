@@ -43,7 +43,21 @@ function fetchPackageNames(options, cb) {
       type: 'token',
       token: process.env.GITHUB_TOKEN
     });
+
+    console.log('Token')
+
+    github.misc.getRateLimit({}, (err, res) => {
+      if(err) throw err;
+      console.log(res)
+    })
   }
+
+  github.misc.getRateLimit({}, (err, res) => {
+      if(err) throw err;
+      console.log(res)
+    })
+
+  return
 
   // XXX: weak since this handles only one page
   github.repos.getForOrg(
