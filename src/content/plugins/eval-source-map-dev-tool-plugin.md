@@ -66,7 +66,7 @@ new webpack.EvalSourceMapDevToolPlugin({
 });
 ```
 
-Or a substition string:
+Or a substitution string:
 
 ``` js
 new webpack.EvalSourceMapDevToolPlugin({

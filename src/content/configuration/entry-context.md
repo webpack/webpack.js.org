@@ -53,7 +53,7 @@ module.exports = {
 
 ### Naming
 
-If a string or array of strings is passed, the chunk is named `main`. If an object is passed, each key is the name of a chunk, and the value describes the entrypoint for the chunk.
+If a string or array of strings is passed, the chunk is named `main`. If an object is passed, each key is the name of a chunk, and the value describes the entry point for the chunk.
 
 
 ### Dynamic entry

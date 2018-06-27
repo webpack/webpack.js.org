@@ -205,10 +205,10 @@ The following tools have certain problems that can degrade build performance.
 ### Typescript
 
 - Use the `fork-ts-checker-webpack-plugin` for type checking in a separate process.
-- Configure loaders to skip typechecking.
+- Configure loaders to skip type checking.
 - Use the `ts-loader` in `happyPackMode: true` / `transpileOnly: true`.
 
 
 ### Sass
 
-- `node-sass` has a bug which blocks threads from the Node.js threadpool. When using it with the `thread-loader` set `workerParallelJobs: 2`.
+- `node-sass` has a bug which blocks threads from the Node.js thread pool. When using it with the `thread-loader` set `workerParallelJobs: 2`.

@@ -301,7 +301,7 @@ Parameters: `modules`
 
 ...
 
-Paramters: `modules`
+Parameters: `modules`
 
 
 ### `moduleIds`
@@ -319,7 +319,7 @@ Parameters: `modules`
 
 ...
 
-Paramters: `chunks`
+Parameters: `chunks`
 
 
 ### `afterOptimizeModuleIds`
@@ -328,7 +328,7 @@ Paramters: `chunks`
 
 ...
 
-Paramters: `chunks`
+Parameters: `chunks`
 
 
 ### `reviveChunks`
@@ -355,7 +355,7 @@ Parameters: `chunks`
 
 Fired before chunk `id` optimization.
 
-Paramters: `chunks`
+Parameters: `chunks`
 
 
 ### `optimizeChunkIds`
@@ -373,7 +373,7 @@ Parameters: `chunks`
 
 Triggered after chunk `id` optimization has finished.
 
-Paramters: `chunks`
+Parameters: `chunks`
 
 
 ### `recordModules`

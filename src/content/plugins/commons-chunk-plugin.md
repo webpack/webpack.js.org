@@ -14,7 +14,7 @@ The `CommonsChunkPlugin` is an opt-in feature that creates a separate file (know
 
 W> The CommonsChunkPlugin has been removed in webpack v4 legato. To learn how chunks are treated in the latest version, check out the [SplitChunksPlugin](/plugins/split-chunks-plugin/).
 
-By separating common modules from bundles, the resulting chunked file can be loaded once initially, and stored in cache for later use. This results in pagespeed optimizations as the browser can quickly serve the shared code from cache, rather than being forced to load a larger bundle whenever a new page is visited.
+By separating common modules from bundles, the resulting chunked file can be loaded once initially, and stored in cache for later use. This results in page speed optimizations as the browser can quickly serve the shared code from cache, rather than being forced to load a larger bundle whenever a new page is visited.
 
 ```javascript
 new webpack.optimize.CommonsChunkPlugin(options);

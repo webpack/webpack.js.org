@@ -7,7 +7,7 @@ contributors:
   - byzyk
 ---
 
-These options allows you to control how webpack notifies you of assets and entrypoints that exceed a specific file limit.
+These options allows you to control how webpack notifies you of assets and entry points that exceed a specific file limit.
 This feature was inspired by the idea of [webpack Performance Budgets](https://github.com/webpack/webpack/issues/3216).
 
 ## `performance`
@@ -62,7 +62,7 @@ An error will be displayed notifying you of a large asset. We recommend using `h
 
 `int`
 
-An entrypoint represents all assets that would be utilized during initial load time for a specific entry. This option controls when webpack should emit performance hints based on the maximum entrypoint size. The default value is `250000` (bytes).
+An entry point represents all assets that would be utilized during initial load time for a specific entry. This option controls when webpack should emit performance hints based on the maximum entry point size. The default value is `250000` (bytes).
 
 ```js
 module.exports = {
