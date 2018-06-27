@@ -127,7 +127,7 @@ class Site extends React.Component {
    * @return {array}       - ...
    */
   _strip = array => {
-    let anchorTitleIndex = array.findIndex(item => item.name === 'index.md');
+    let anchorTitleIndex = array.findIndex(item => item.name.toLowerCase() === 'index.md');
 
     if (anchorTitleIndex !== -1) {
       array.unshift(array[anchorTitleIndex]);
