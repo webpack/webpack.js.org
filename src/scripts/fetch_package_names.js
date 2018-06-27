@@ -19,6 +19,8 @@ if (require.main === module) {
 function main() {
   const organization = process.argv[2];
   const suffix = process.argv[3];
+  const file = process.argv[4];
+  const output = process.argv[5];
 
   if (!organization) {
     return console.error('Missing organization!');
@@ -26,6 +28,16 @@ function main() {
   if (!suffix) {
     return console.error('Missing suffix!');
   }
+
+  if (!file) {
+    return console.error('Missing file!');
+  }
+
+  if (!output) {
+    return console.error('Missing output!');
+  }
+
+  mkdirp.sync(output);
 
   fetchPackageNames(
     {
@@ -37,7 +49,23 @@ function main() {
         return console.error(err);
       }
 
-      mainFiles(d);
+      fetchPackageFiles(
+        {
+          input: d,
+          file: file,
+          output: path.resolve(process.cwd(), output),
+          limit: 4
+        },
+        function(err, d) {
+          if (err) {
+            return console.error(err);
+          }
+
+          const msg =
+            d.length === 0 ? 'Fetched 0 files' : d.length === 1 ? 'Fetched 1 file: ' : `Fetched ${d.length} files: `;
+          console.log(msg + _.map(d, 'full_name'));
+        }
+      );
     }
   );
 }
@@ -74,39 +102,6 @@ function fetchPackageNames(options, cb) {
           return o.name.endsWith(options.suffix);
         })
       );
-    }
-  );
-}
-
-function mainFiles(input) {
-  const file = process.argv[4];
-  const output = process.argv[5];
-
-  if (!file) {
-    return console.error('Missing file!');
-  }
-
-  if (!output) {
-    return console.error('Missing output!');
-  }
-
-  mkdirp.sync(output);
-
-  fetchPackageFiles(
-    {
-      input: input,
-      file: file,
-      output: path.resolve(process.cwd(), output),
-      limit: 4
-    },
-    function(err, d) {
-      if (err) {
-        return console.error(err);
-      }
-
-      const msg =
-        d.length === 0 ? 'Fetched 0 files' : d.length === 1 ? 'Fetched 1 file: ' : `Fetched ${d.length} files: `;
-      console.log(msg + _.map(d, 'full_name'));
     }
   );
 }
