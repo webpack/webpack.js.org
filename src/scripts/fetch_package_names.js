@@ -48,11 +48,9 @@ function fetchPackageNames(options, cb) {
 
     github.misc.getRateLimit({}, (err, res) => {
       if(err) throw err;
-      console.log(res.data.rate)
+      console.log(JSON.stringify(res.data.rate))
     })
   }
-
-  return
 
   // XXX: weak since this handles only one page
   github.repos.getForOrg(
