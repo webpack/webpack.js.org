@@ -44,7 +44,7 @@ function fetchPackageNames(options, cb) {
       token: process.env.GITHUB_TOKEN
     });
 
-    console.log('Token')
+    console.log(JSON.stringify("{Token: ''}"))
 
     github.misc.getRateLimit({}, (err, res) => {
       if(err) throw err;
