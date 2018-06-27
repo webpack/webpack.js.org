@@ -158,8 +158,81 @@ Possible values:
 - any string: the value to set `process.env.NODE_ENV` to.
 - false: do not modify/set the value of `process.env.NODE_ENV`.
 
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    nodeEnv: 'production'
+  }
+};
+```
+
 ## `optimization.mangleWasmImports`
 
 `bool: false`
 
 When set to `true` tells webpack to reduce the size of WASM by changing imports to shorter strings. It mangles module and export names.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    mangleWasmImports: true
+  }
+};
+```
+
+## `optimization.removeAvailableModules`
+
+`bool: true`
+
+Tells webpack to detect and remove modules from chunks when these modules are already included in all parents. Setting `optimization.removeAvailableModules` to `false` will disable this optimization.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    removeAvailableModules: false
+  }
+};
+```
+
+## `optimization.removeEmptyChunks`
+
+`bool: true`
+
+Tells webpack to detect and remove chunks which are empty. Setting `optimization.removeEmptyChunks` to `false` will disable this optimization.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    removeEmptyChunks: false
+  }
+};
+```
+
+## `optimization.mergeDuplicateChunks`
+
+`bool: true`
+
+Tells webpack to merge chunks which contain the same modules. Setting `optimization.mergeDuplicateChunks` to `false` will disable this optimization.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    mergeDuplicateChunks: false
+  }
+};
+```

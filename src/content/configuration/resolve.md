@@ -176,7 +176,7 @@ Automatically resolve certain extensions. This defaults to:
 module.exports = {
   //...
   resolve: {
-    extensions: ['.js', '.json']
+    extensions: ['.wasm', '.mjs', '.js', '.json']
   }
 };
 ```

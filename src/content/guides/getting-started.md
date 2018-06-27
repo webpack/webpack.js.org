@@ -17,6 +17,7 @@ contributors:
   - ATGardner
   - ayvarot
   - bjarki
+  - ztomasze
   - Spiral90210
 ---
 
@@ -283,7 +284,6 @@ __package.json__
     "name": "webpack-demo",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
 +     "build": "webpack"
@@ -320,7 +320,8 @@ main.js  70.4 KiB       0  [emitted]  main
 
 WARNING in configuration
 The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
-You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/
+You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/.
+
 ```
 
 T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --colors`.
