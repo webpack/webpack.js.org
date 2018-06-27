@@ -11,6 +11,7 @@ contributors:
   - dhurlburtusa
   - MagicDuck
   - byzyk
+  - madhavarshney
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.

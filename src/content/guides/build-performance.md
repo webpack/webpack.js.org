@@ -5,6 +5,7 @@ contributors:
   - sokra
   - tbroadley
   - byzyk
+  - madhavarshney
 ---
 
 This guide contains some useful tips for improving build/compilation performance.

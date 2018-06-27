@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - SpaceK33z
   - lricoy
+  - madhavarshney
 related:
   - title: Enabling Source Maps
     url: https://survivejs.com/webpack/developing-with-webpack/enabling-sourcemaps/

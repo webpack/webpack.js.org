@@ -6,6 +6,7 @@ contributors:
   - chrisdothtml
   - EugeneHlushko
   - byzyk
+  - madhavarshney
 related:
   - title: webpack's automatic deduplication algorithm example
     url: https://github.com/webpack/webpack/blob/master/examples/many-pages/README.md

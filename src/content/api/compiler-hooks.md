@@ -5,6 +5,7 @@ sort: 1
 contributors:
   - rishantagarwal
   - byzyk
+  - madhavarshney
 ---
 
 The `Compiler` module is the main engine that creates a compilation instance

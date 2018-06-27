@@ -8,6 +8,7 @@ contributors:
   - jdbevan
   - jeremenichelli
   - byzyk
+  - madhavarshney
 ---
 
 The `CommonsChunkPlugin` is an opt-in feature that creates a separate file (known as a chunk), consisting of common modules shared between multiple entry points.
