@@ -136,7 +136,7 @@ Minimum number of chunks that must share a module before splitting.
 
 `number`
 
-Minimum size for a chunk to be generated.
+Minimum size, in bytes, for a chunk to be generated.
 
 ### `splitChunks.name`
 
