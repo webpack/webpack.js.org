@@ -15,6 +15,7 @@ contributors:
   - bdwain
   - caryli
   - xgirma
+  - EugeneHlushko
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -59,7 +60,6 @@ __webpack.config.js__
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement'
       }),
-+     new webpack.NamedModulesPlugin(),
 +     new webpack.HotModuleReplacementPlugin()
     ],
     output: {
@@ -70,8 +70,6 @@ __webpack.config.js__
 ```
 
 T> You can use the CLI to modify the [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration with the following command: `webpack-dev-server --hotOnly`.
-
-Note that we've also added the `NamedModulesPlugin` to make it easier to see which dependencies are being patched. To start, we'll get the dev server up and running by executing an `npm start` from the command line.
 
 Now let's update the `index.js` file so that when a change inside `print.js` is detected we tell webpack to accept the updated module.
 
@@ -128,7 +126,6 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 + 0.4b8ee77….hot-update.js:10 Updating print.js...
 + main.js:4330 [HMR] Updated modules:
 + main.js:4330 [HMR]  - 20
-+ main.js:4330 [HMR] Consider using the NamedModulesPlugin for module names.
 ```
 
 

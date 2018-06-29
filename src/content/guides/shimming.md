@@ -459,4 +459,4 @@ When there is no AMD/CommonJS version of the module and you want to include the 
 
 W> Any feature requiring the AST, like the `ProvidePlugin`, will not work.
 
-Lastly, there are some modules that support different [module styles](/concepts/modules) like AMD, CommonJS and legacy. In most of these cases, they first check for `define` and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting `define=>false` via the [`imports-loader`](/loaders/imports-loader/).
+Lastly, there are some modules that support multiple [module styles](/concepts/modules); e.g. a combination of AMD, CommonJS, and legacy. In most of these cases, they first check for `define` and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting `define=>false` via the [`imports-loader`](/loaders/imports-loader/).
