@@ -2,6 +2,8 @@
 title: Internal webpack plugins
 contributors:
   - EugeneHlushko
+  - ooflorent
+  - Legends
 ---
 
 This is a list of plugins which are used by webpack internally.
@@ -171,23 +173,27 @@ Offers a pseudo `console` if it is not available.
 
 ### ConstPlugin
 
-Tries to evaluate expressions in `if (...)` conditions and replace them with `true`/`false`. May result in dead branches elimination.
+Tries to evaluate expressions in `if (...)` conditions and replace them with `true`/`false` for further possible dead branch elimination.
+There are multiple optimizations in production mode regarding dead branches:
 
-Example #1:
+* The ones performed by UglifyJS
+* The ones performed by webpack
 
-__myGreatModule.js__
+webpack will try to evaluate conditional statements. If it succeeds then the dead branch is removed. webpack can't do constant folding unless the compiler knows it. For example:
 
 ```javascript
-import { foo } from './helpers';
+import { calculateTax } from './tax';
 
-const a = false;
-
-if (a) {
-  foo();
+const FOO = 1;
+if (FOO === 0) {
+  // dead branch
+  calculateTax();
 }
 ```
 
-Because `a` will evaluate as `false` in the `if (a)` condition and `foo()` call will never happen, the whole if statement and even the import will get pruned thanks to `ConstPlugin` run.
+In the above example, webpack is unable to prune the branch, but Uglify does. However, if `FOO` is defined using [DefinePlugin](/plugins/define-plugin/), webpack will succeed.
+
+It is imporant to mention that `import { calculateTax } from './tax';` will also get pruned because `calculateTax()` call was in the dead branch and got eliminated.
 
 ### ProvidePlugin
 
