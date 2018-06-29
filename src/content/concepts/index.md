@@ -19,9 +19,10 @@ At its core, **webpack** is a _static module bundler_ for modern JavaScript appl
 
 T> Learn more about JavaScript modules and webpack modules [here](/concepts/modules).
 
-Since version 4, **webpack does not require a configuration file** to bundle your project, nevertheless it is [incredibly configurable](/configuration) to better fit your needs.
+Since version 4.0.0, **webpack does not require a configuration file** to bundle your project, nevertheless it is [incredibly configurable](/configuration) to better fit your needs.
 
 To get started you only need to understand its **Core Concepts**:
+
 
 - Entry
 - Output
