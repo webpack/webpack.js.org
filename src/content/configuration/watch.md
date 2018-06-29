@@ -8,6 +8,7 @@ contributors:
   - EugeneHlushko
   - byzyk
   - spicalous
+  - arkadyt
 ---
 
 webpack can watch files and recompile whenever they change. This page explains how to enable this and a couple of tweaks you can make if watching does not work properly for you.
@@ -128,6 +129,14 @@ Verify that webpack is not being notified of changes by running webpack with the
 
 ```bash
 webpack --watch --progress
+```
+
+### Changes Not Seen
+
+Make sure you launch webpack with root priveleges:
+
+```bash
+sudo webpack --watch
 ```
 
 ### Not Enough Watchers
