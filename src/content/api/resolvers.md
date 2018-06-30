@@ -29,8 +29,8 @@ can be customized via plugins as such:
 compiler.resolverFactory.plugin('resolver [type]', resolver => {
   resolver.hooks.resolve.tapAsync('MyPlugin', params => {
     // ...
-  })
-})
+  });
+});
 ```
 
 Where `[type]` is one of the three resolvers mention above, specified as:

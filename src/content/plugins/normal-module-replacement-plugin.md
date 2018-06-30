@@ -2,6 +2,7 @@
 title: NormalModuleReplacementPlugin
 contributors:
   - gonzoyumo
+  - byzyk
 ---
 
 The `NormalModuleReplacementPlugin` allows you to replace resources that match `resourceRegExp` with `newResource`. If `newResource` is relative, it is resolved relative to the previous resource. If `newResource` is a function, it is expected to overwrite the request attribute of the supplied resource.
@@ -12,7 +13,7 @@ This can be useful for allowing different behaviour between builds.
 new webpack.NormalModuleReplacementPlugin(
   resourceRegExp,
   newResource
-)
+);
 ```
 
 
@@ -47,9 +48,9 @@ module.exports = function(env) {
         resource.request = resource.request.replace(/-APP_TARGET/, `-${appTarget}`);
       })
     ]
-  }
+  };
 
-}
+};
 ```
 
 Create the two config files:
@@ -59,7 +60,7 @@ __app/config-VERSION_A.js__
 ``` javascript
 export default {
   title : 'I am version A'
-}
+};
 ```
 
 __app/config-VERSION_B.js__
@@ -67,7 +68,7 @@ __app/config-VERSION_B.js__
 ``` javascript
 export default {
   title : 'I am version B'
-}
+};
 ```
 
 Then import that config using the keyword you're looking for in the regexp:
