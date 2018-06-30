@@ -19,9 +19,10 @@ At its core, **webpack** is a _static module bundler_ for modern JavaScript appl
 
 T> Learn more about JavaScript modules and webpack modules [here](/concepts/modules).
 
-Since version 4, **webpack does not require a configuration file** to bundle your project, nevertheless it is [incredibly configurable](/configuration) to better fit your needs.
+Since version 4.0.0, **webpack does not require a configuration file** to bundle your project, nevertheless it is [incredibly configurable](/configuration) to better fit your needs.
 
 To get started you only need to understand its **Core Concepts**:
+
 
 - Entry
 - Output
@@ -79,7 +80,7 @@ Out of the box, webpack only understands JavaScript files. **Loaders** allow web
 
 W> Note that the ability to `import` any type of module, e.g. `.css` files, is a feature specific to webpack and may not be supported by other bundlers or task runners. We feel this extension of the language is warranted as it allows developers to build a more accurate dependency graph.
 
-At a high level, **loaders** have two purposes in your webpack configuration:
+At a high level, **loaders** have two properties in your webpack configuration:
 
 1. The `test` property identifies which file or files should be transformed.
 2. The `use` property indicates which loader should be used to do the transforming.

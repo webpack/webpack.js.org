@@ -24,7 +24,11 @@ class MessageBar extends React.Component {
             <a href="https://opencollective.com/webpack">open collective</a>!
           </p>
           {localStorageIsEnabled ? (
-            <button className="notification-bar__close icon-cross" onClick={this.close.bind(this)} />
+            <button
+              aria-label="Dismiss"
+              className="notification-bar__close icon-cross"
+              onClick={this.close.bind(this)}
+            />
           ) : null}
         </Container>
       </div>

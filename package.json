@@ -27,6 +27,7 @@
     "clean": "rimraf ./dist src/content/**/_*.md src/**/_*.json",
     "start": "NODE_ENV=development webpack-dev-server --config webpack.dev.js --env.dev",
     "content": "node src/scripts/build-content-tree.js ./src/content ./src/_content.json",
+    "build-test": "npm run build && http-server build/",
     "fetch": "sh src/scripts/fetch.sh",
     "prebuild": "npm run clean",
     "build": "npm run fetch && npm run content && NODE_ENV=production webpack --config webpack.prod.js && npm run sitemap && echo webpack.js.org > dist/CNAME",
@@ -39,6 +40,11 @@
     "sitemap": "cd dist && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml",
     "serve": "npm run build && sirv start ./dist --port 4000",
     "deploy": "gh-pages -d dist"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
   },
   "devDependencies": {
     "@octokit/rest": "^15.2.6",
@@ -67,6 +73,11 @@
     "gh-pages": "^1.0.0",
     "html-webpack-plugin": "^2.30.1",
     "html-webpack-template": "^6.1.0",
+    "github": "^10.0.0",
+    "http-server": "^0.10.0",
+    "husky": "^1.0.0-rc.8",
+    "hyperlink": "^3.0.1",
+    "loader-utils": "^1.1.0",
     "lodash": "^4.17.4",
     "markdownlint": "^0.6.0",
     "markdownlint-cli": "0.10.0",
