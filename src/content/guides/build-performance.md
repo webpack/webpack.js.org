@@ -4,6 +4,7 @@ sort: 17
 contributors:
   - sokra
   - tbroadley
+  - byzyk
 ---
 
 This guide contains some useful tips for improving build/compilation performance.
@@ -28,21 +29,35 @@ Staying up to date with __Node.js__  can also help with performance. On top of t
 
 Apply loaders to the minimal number of modules necessary. Instead of:
 
-``` js
-{
-  test: /\.js$/,
-  loader: "babel-loader"
-}
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader'
+      }
+    ]
+  }
+};
 ```
 
 Use the `include` field to only apply the loader modules that actually need to be transformed by it:
 
-``` js
-{
-  test: /\.js$/,
-  include: path.resolve(__dirname, "src"),
-  loader: "babel-loader"
-}
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        include: path.resolve(__dirname, 'src'),
+        loader: 'babel-loader'
+      }
+    ]
+  }
+};
 ```
 
 
@@ -70,8 +85,8 @@ Use the `DllPlugin` to move code that is changed less often into a separate comp
 Decrease the total size of the compilation to increase build performance. Try to keep chunks small.
 
 - Use fewer/smaller libraries.
-- Use the `CommonsChunksPlugin` in Multi-Page Applications.
-- Use the `CommonsChunksPlugin` in `async` mode in Multi-Page Applications.
+- Use the `CommonsChunkPlugin` in Multi-Page Applications.
+- Use the `CommonsChunkPlugin` in `async` mode in Multi-Page Applications.
 - Remove unused code.
 - Only compile the part of the code you are currently developing on.
 
@@ -148,11 +163,11 @@ webpack only emits updated chunks to the filesystem. For some configuration opti
 
 Make sure the entry chunk is cheap to emit by keeping it small. The following code block extracts a chunk containing only the runtime with _all other chunks as children_:
 
-``` js
+```js
 new CommonsChunkPlugin({
-  name: "manifest",
+  name: 'manifest',
   minChunks: Infinity
-})
+});
 ```
 
 ### Avoid Extra Optimization Steps
@@ -255,4 +270,3 @@ The following tools have certain problems that can degrade build performance.
 ### Sass
 
 - `node-sass` has a bug which blocks threads from the Node.js threadpool. When using it with the `thread-loader` set `workerParallelJobs: 2`.
-

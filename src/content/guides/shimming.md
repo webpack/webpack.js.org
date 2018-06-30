@@ -7,6 +7,7 @@ contributors:
   - simon04
   - jeremenichelli
   - svyandun
+  - byzyk
 related:
   - title: Reward modern browser users script
     url: https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665
@@ -85,7 +86,7 @@ __webpack.config.js__
 
 What we've essentially done here is tell webpack...
 
-> If you encounter at least one instance of the variable `lodash`, include the `lodash` package and provide it to the modules that need it.
+> If you encounter at least one instance of the variable `_`, include the `lodash` package and provide it to the modules that need it.
 
 If we run a build, we should still see the same output:
 
@@ -216,7 +217,7 @@ var file = 'blah.txt';
 var helpers = {
   test: function() { console.log('test something'); },
   parse: function() { console.log('parse something'); }
-}
+};
 ```
 
 Now, while you'd likely never do this in your own source code, you may encounter a dated library you'd like to use that contains similar code to what's shown above. In this case, we can use [`exports-loader`](/loaders/exports-loader/), to export that global variable as a normal module export. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
@@ -458,4 +459,4 @@ When there is no AMD/CommonJS version of the module and you want to include the 
 
 W> Any feature requiring the AST, like the `ProvidePlugin`, will not work.
 
-Lastly, there are some modules that support different [module styles](/concepts/modules) like AMD, CommonJS and legacy. In most of these cases, they first check for `define` and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting `define=>false` via the [`imports-loader`](/loaders/imports-loader/).
+Lastly, there are some modules that support multiple [module styles](/concepts/modules); e.g. a combination of AMD, CommonJS, and legacy. In most of these cases, they first check for `define` and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting `define=>false` via the [`imports-loader`](/loaders/imports-loader/).
