@@ -121,7 +121,7 @@ function fetchPackageFiles(options, finalCb) {
           return cb(err);
         }
 
-        if (body && file === 'README.md') {
+        if (body && file.toLowerCase() === 'readme.md') {
           body = body
             // Remove all but the description from lead-in (XXX: Optional `\/?` should be unnecessary)
             .replace(/[^]*?<div align="center">([^]*?)<\/div>/, (match, content) => {
