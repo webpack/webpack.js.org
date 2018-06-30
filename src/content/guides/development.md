@@ -144,9 +144,10 @@ __package.json__
   }
 ```
 
-You can now run `npm run watch` from the command line to see that webpack compiles your code, but doesn't exit to the command line. This is because the script is still watching your files.
+Now run `npm run watch` from the command line and see how webpack compiles your code.
+You can see that it doesn't exit the command line, because the script is currently watching your files.
 
-Now, with webpack watching your files, let's remove the error we introduced earlier:
+Now, while webpack is watching your files, let's remove the error we introduced earlier:
 
 __src/print.js__
 
