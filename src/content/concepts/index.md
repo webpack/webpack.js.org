@@ -23,7 +23,6 @@ Since version 4.0.0, **webpack does not require a configuration file** to bundle
 
 To get started you only need to understand its **Core Concepts**:
 
-
 - Entry
 - Output
 - Loaders
