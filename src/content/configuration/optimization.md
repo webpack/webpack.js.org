@@ -236,3 +236,20 @@ module.exports = {
   }
 };
 ```
+
+## `optimization.flagIncludedChunks`
+
+`bool`
+
+Tells webpack to determine and flag chunks which are subsets of other chunks in a way that subsets don’t have to be loaded when the bigger chunk has been already loaded. By default `optimization.flagIncludedChunks` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    flagIncludedChunks: true
+  }
+};
+```

@@ -105,7 +105,7 @@ Chunks are wrapped into JSONP-calls. A loading algorithm is included in entry ch
 
 `node/NodeTemplatePlugin(options)`
 
-Chunks are wrapped into node.js modules exporting the bundled modules. The entry chunks loads chunks by requiring them.
+Chunks are wrapped into Node.js modules exporting the bundled modules. The entry chunks loads chunks by requiring them.
 
 `options` are the output options.
 
@@ -206,9 +206,9 @@ If `name` is used in a module it is filled by a module loaded by `require(<reque
 
 `NodeStuffPlugin(options, context)`
 
-Provide stuff that is normally available in node.js modules.
+Provide stuff that is normally available in Node.js modules.
 
-It also ensures that `module` is filled with some node.js stuff if you use it.
+It also ensures that `module` is filled with some Node.js stuff if you use it.
 
 ### RequireJsStuffPlugin
 
@@ -220,7 +220,7 @@ Provide stuff that is normally available in require.js.
 
 `node/NodeSourcePlugin(options)`
 
-This module adds stuff from node.js that is not available in non-node.js environments.
+This module adds stuff from Node.js that is not available in non Node.js environments.
 
 It adds polyfills for `process`, `console`, `Buffer` and `global` if used. It also binds the built in Node.js replacement modules.
 
@@ -228,7 +228,7 @@ It adds polyfills for `process`, `console`, `Buffer` and `global` if used. It al
 
 `node/NodeTargetPlugin()`
 
-The plugins should be used if you run the bundle in a node.js environment.
+The plugins should be used if you run the bundle in a Node.js environment.
 
 If ensures that native modules are loaded correctly even if bundled.
 
