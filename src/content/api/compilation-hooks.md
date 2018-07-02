@@ -2,6 +2,9 @@
 title: Compilation Hooks
 group: Plugins
 sort: 2
+contributors:
+  - byzyk
+  - madhavarshney
 ---
 
 The `Compilation` module is used by the `Compiler` to create new compilations
@@ -15,7 +18,7 @@ The `Compilation` class also extends `Tapable` and provides the following
 lifecycle hooks. They can be tapped the same way as compiler hooks:
 
 ``` js
-compilation.hooks.someHook.tap(...)
+compilation.hooks.someHook.tap(/* ... */);
 ```
 
 As with the `compiler`, `tapAsync` and `tapPromise` may also be available
@@ -299,7 +302,7 @@ Parameters: `modules`
 
 ...
 
-Paramters: `modules`
+Parameters: `modules`
 
 
 ### `moduleIds`
@@ -317,7 +320,7 @@ Parameters: `modules`
 
 ...
 
-Paramters: `chunks`
+Parameters: `chunks`
 
 
 ### `afterOptimizeModuleIds`
@@ -326,7 +329,7 @@ Paramters: `chunks`
 
 ...
 
-Paramters: `chunks`
+Parameters: `chunks`
 
 
 ### `reviveChunks`
@@ -353,7 +356,7 @@ Parameters: `chunks`
 
 Fired before chunk `id` optimization.
 
-Paramters: `chunks`
+Parameters: `chunks`
 
 
 ### `optimizeChunkIds`
@@ -371,7 +374,7 @@ Parameters: `chunks`
 
 Triggered after chunk `id` optimization has finished.
 
-Paramters: `chunks`
+Parameters: `chunks`
 
 
 ### `recordModules`
@@ -479,7 +482,7 @@ compilation.hooks.additionalAssets.tapAsync('MyPlugin', callback => {
     } else {
       callback(new Error('[webpack-example-plugin] Unable to download the image'));
     }
-  })
+  });
 });
 ```
 
@@ -526,7 +529,7 @@ Parameters: `chunks`
 Here's an example plugin from [@boopathi](https://github.com/boopathi) that outputs exactly what went into each chunk.
 
 ``` js
-compilation.hooks.afterOptimizeChunkAssets.tap(chunks => {
+compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', chunks => {
   chunks.forEach(chunk => {
     console.log({
       id: chunk.id,
