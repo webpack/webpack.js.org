@@ -2,8 +2,16 @@
 
 .dropdown {
   position: relative;
-  color: #fff;
-  cursor: pointer;
+
+  button {
+    cursor: pointer;
+    color: #fff;
+    border: none;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+  }
 }
 
 .dropdown__language {

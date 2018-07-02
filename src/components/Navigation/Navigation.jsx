@@ -68,8 +68,8 @@ export default class Navigation extends React.Component {
           <Dropdown
             className="navigation__languages"
             items={[
-              { title: 'English', url: 'https://webpack.js.org/' },
-              { title: '中文', url: 'https://webpack.docschina.org/' }
+              { lang: 'en', title: 'English', url: 'https://webpack.js.org/' },
+              { lang: 'zh', title: '中文', url: 'https://webpack.docschina.org/' }
             ]} />
         </Container>
 
