@@ -6,6 +6,7 @@ contributors:
   - simon04
   - tbroadley
   - chenxsan
+  - madhavarshney
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -98,7 +99,7 @@ This will form the bundle with both the files as separate entry points.
 
 ### Common Options
 
-W> Note that Command Line Interface has a higher precendence for the arguments you use it with than your configuration file. For instance, if you pass [`--mode="production"`](/concepts/mode/#usage) to webpack CLI and your configuration file uses `development`, `production` will be used.
+W> Note that Command Line Interface has a higher precedence for the arguments you use it with than your configuration file. For instance, if you pass [`--mode="production"`](/concepts/mode/#usage) to webpack CLI and your configuration file uses `development`, `production` will be used.
 
 **List all of the options available on the cli**
 
@@ -255,9 +256,9 @@ These allow you to configure the webpack [resolver](/configuration/resolve/) wit
 
 Parameter              | Explanation                                             | Example
 ---------------------- | ------------------------------------------------------- | -------------
---resolve-alias        | Setup a module alias for resolving                      | --resolve-alias jquery-plugin=jquery.plugin
---resolve-extensions   | Setup extensions that should be used to resolve modules | --resolve-extensions .es6 .js .ts
---resolve-loader-alias | Minimize javascript and switches loaders to minimizing  |
+`--resolve-alias`        | Setup a module alias for resolving                      | --resolve-alias jquery-plugin=jquery.plugin
+`--resolve-extensions`   | Setup extensions that should be used to resolve modules | --resolve-extensions .es6 .js .ts
+`--resolve-loader-alias` | Minimize javascript and switches loaders to minimizing  |
 
 
 ### Stats Options
