@@ -173,7 +173,8 @@ Offers a pseudo `console` if it is not available.
 
 ### ConstPlugin
 
-Tries to evaluate expressions in `if (...)` conditions and replace them with `true`/`false` for further possible dead branch elimination.
+Tries to evaluate expressions in `if (...)` statements and ternaries to replace them with `true`/`false` for further possible dead branch elimination using hooks fired by the parser.
+
 There are multiple optimizations in production mode regarding dead branches:
 
 * The ones performed by UglifyJS
