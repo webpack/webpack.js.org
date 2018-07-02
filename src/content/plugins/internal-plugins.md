@@ -8,9 +8,9 @@ contributors:
 
 This is a list of plugins which are used by webpack internally.
 
-W>You should only care about them if you are building your own compiler based on webpack, or introspect the internals.
+W> You should only care about them if you are building your own compiler based on webpack, or introspect the internals.
 
-categories of internal plugins:
+Categories of internal plugins:
 
 * [environment](#environment)
 * [compiler](#compiler)
@@ -27,7 +27,7 @@ Plugins affecting the environment of the compiler.
 
 `node/NodeEnvironmentPlugin()`
 
-Applies node.js style filesystem to the compiler.
+Applies Node.js style filesystem to the compiler.
 
 ## compiler
 
@@ -45,7 +45,7 @@ You can pass a `cache` object, where the modules are cached. Otherwise one is cr
 
 `ProgressPlugin(handler)`
 
-Hook into the compiler to extract progress information. The `handler` must have the signature `function(percentage, message)`. It's called with `0 <= percentage <= 1`. `percentage == 0` indicates the start. `percentage == 1` indicates the end.
+Hook into the compiler to extract progress information. The `handler` must have the signature `function(percentage, message)`. Percentage is called with a value between 0 and 1, where 0 indicates the start and 1 the end.
 
 ### RecordIdsPlugin
 
@@ -159,9 +159,9 @@ Add support for hot module replacement. Decorates the templates to add runtime c
 
 Plugins affecting the source code of modules.
 
-## APIPlugin
+### APIPlugin
 
-Make webpack_public_path## , webpack_require## , webpack_modules## , webpack_chunk_load##  accessible. Ensures that `require.valueOf` and `require.onError` are not processed by other plugins.
+Make webpack_public_path, webpack_require, webpack_modules and webpack_chunk_load accessible. Ensures that `require.valueOf` and `require.onError` are not processed by other plugins.
 
 ### CompatibilityPlugin
 
