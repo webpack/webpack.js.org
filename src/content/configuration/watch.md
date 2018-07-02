@@ -140,9 +140,9 @@ cat /proc/sys/fs/inotify/max_user_watches
 
 Arch users, add `fs.inotify.max_user_watches=524288` to `/etc/sysctl.d/99-sysctl.conf` and then execute `sysctl --system`. Ubuntu users (and possibly others), execute: `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`.
 
-### MacOS fsevents Bug
+### macOS fsevents Bug
 
-On MacOS, folders can get corrupted in certain scenarios. See [this article](https://github.com/livereload/livereload-site/blob/master/livereload.com/_articles/troubleshooting/os-x-fsevents-bug-may-prevent-monitoring-of-certain-folders.md).
+On macOS, folders can get corrupted in certain scenarios. See [this article](https://github.com/livereload/livereload-site/blob/master/livereload.com/_articles/troubleshooting/os-x-fsevents-bug-may-prevent-monitoring-of-certain-folders.md).
 
 ### Windows Paths
 
