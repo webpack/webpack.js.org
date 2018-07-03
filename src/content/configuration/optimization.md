@@ -6,6 +6,7 @@ contributors:
   - jeremenichelli
   - simon04
   - byzyk
+  - madhavarshney
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -68,7 +69,7 @@ By default webpack v4+ provides new common chunks strategies out of the box for 
 
 `object` `string` `boolean`
 
-Setting `optimization.runtimeChunk` to `true` adds an additonal chunk to each entrypoint containing only the runtime.
+Setting `optimization.runtimeChunk` to `true` adds an additional chunk to each entry point containing only the runtime.
 It is possible to use preset mode of the plugin by providing a string value:
 
 - `single`: creates a runtime file to be shared for all generated chunks.
@@ -78,7 +79,7 @@ By setting `optimization.runtimeChunk` to `object` it is only possible to provid
 
 Default is `false`: each entry chunk embeds runtime.
 
-W> Imported modules are initialized for each runtime chunk separately, so if you include multiple entrypoints on a page, beware of this behavior. You will probably want to set it to `single` or use another configuration that allows you to only have one runtime instance.
+W> Imported modules are initialized for each runtime chunk separately, so if you include multiple entry points on a page, beware of this behavior. You will probably want to set it to `single` or use another configuration that allows you to only have one runtime instance.
 
 __webpack.config.js__
 
@@ -233,6 +234,23 @@ module.exports = {
   //...
   optimization: {
     mergeDuplicateChunks: false
+  }
+};
+```
+
+## `optimization.flagIncludedChunks`
+
+`bool`
+
+Tells webpack to determine and flag chunks which are subsets of other chunks in a way that subsets don’t have to be loaded when the bigger chunk has been already loaded. By default `optimization.flagIncludedChunks` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    flagIncludedChunks: true
   }
 };
 ```
