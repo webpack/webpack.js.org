@@ -5,6 +5,7 @@ contributors:
   - simon04
   - kinseyost
   - byzyk
+  - madhavarshney
 related:
   - title: Building Eval Source Maps
     url: https://survivejs.com/webpack/building/source-maps/#sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin
@@ -66,7 +67,7 @@ new webpack.EvalSourceMapDevToolPlugin({
 });
 ```
 
-Or a substition string:
+Or a substitution string:
 
 ``` js
 new webpack.EvalSourceMapDevToolPlugin({

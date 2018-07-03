@@ -10,6 +10,8 @@ Providing the `mode` configuration option tells webpack to use its built-in opti
 
 `string`
 
+T> The default value for `mode` is `production`.
+
 ## Usage
 
 Just provide the `mode` option in the config:
@@ -27,13 +29,15 @@ or pass it as a [CLI](/api/cli/) argument:
 webpack --mode=production
 ```
 
-If not set, webpack sets `production` as the default value for `mode`. The supported values for mode are:
+The following string values are supported:
 
 Option                | Description
 --------------------- | -----------------------
 `development`         | Provides `process.env.NODE_ENV` with value `development`. Enables `NamedChunksPlugin` and `NamedModulesPlugin`.
 `production`          | Provides `process.env.NODE_ENV` with value `production`. Enables `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin`, `OccurrenceOrderPlugin`, `SideEffectsFlagPlugin` and `UglifyJsPlugin`.
 `none`                | Opts out of any default optimization options
+
+If not set, webpack sets `production` as the default value for `mode`. The supported values for mode are:
 
 T> Please remember that setting `NODE_ENV` doesn't automatically set `mode`.
 
@@ -47,6 +51,7 @@ module.exports = {
 + mode: 'development'
 - plugins: [
 -   new webpack.NamedModulesPlugin(),
+-   new webpack.NamedChunksPlugin(),
 -   new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("development") }),
 - ]
 }
