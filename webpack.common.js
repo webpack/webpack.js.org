@@ -42,7 +42,8 @@ module.exports = (env = {}) => ({
               }],
               [require('@rigor789/remark-autolink-headings'), {
                 behaviour: 'append'
-              }]
+              }],
+              require('./markdown')
             ]
           }
         }
