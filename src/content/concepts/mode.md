@@ -10,7 +10,7 @@ Providing the `mode` configuration option tells webpack to use its built-in opti
 
 `string`
 
-T> Possible values for `mode` are: `development` or `production`(default).
+T> Possible values for `mode` are: `none`, `development` or `production`(default).
 
 ## Usage
 
