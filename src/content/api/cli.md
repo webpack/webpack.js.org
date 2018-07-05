@@ -40,7 +40,7 @@ See [configuration](/configuration) for the options in the configuration file.
 
 ## Usage without config file
 
-```sh
+```bash
 webpack <entry> [<entry>] -o <output>
 ```
 

@@ -15,5 +15,8 @@ module.exports = function processREADME(body) {
     .replace(/<h2[^>]*>/g, '## ')
     .replace(/<\/h2>/g, '')
     // Drop any comments
-    .replace(/<!--[\s\S]*?-->/g, '');
+    .replace(/<!--[\s\S]*?-->/g, '')
+    // Replace code
+    .replace(/```console/g, '```bash')
+    .replace(/```sh/, '```bash')
 };
