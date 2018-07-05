@@ -4,28 +4,42 @@ source: https://raw.githubusercontent.com/webpack-contrib/worker-loader/master/R
 edit: https://github.com/webpack-contrib/worker-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/worker-loader
 ---
-This loader registers the script as <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">Web Worker</a>
 
 
-## Install
+[![npm][npm]][npm-url]
+[![node][node]][node-url]
+[![deps][deps]][deps-url]
+[![tests][tests]][tests-url]
+[![chat][chat]][chat-url]
+[![size][size]][size-url]
 
-```bash
-npm i -D worker-loader
+
+
+worker loader module for webpack
+
+## Requirements
+
+This module requires a minimum of Node v6.9.0 and Webpack v4.0.0.
+
+## Getting Started
+
+To begin, you'll need to install `worker-loader`:
+
+```console
+$ npm install worker-loader --save-dev
 ```
 
-## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
+### Inlined
 
-##
-
-**App.js**
 ```js
+// App.js
 import Worker from 'worker-loader!./Worker.js';
 ```
 
-### `Config`
+### Config
 
-**webpack.config.js**
 ```js
+// webpack.config.js
 {
   module: {
     rules: [
@@ -38,8 +52,8 @@ import Worker from 'worker-loader!./Worker.js';
 }
 ```
 
-**App.js**
 ```js
+// App.js
 import Worker from './file.worker.js';
 
 const worker = new Worker();
@@ -50,68 +64,79 @@ worker.onmessage = function (event) {};
 worker.addEventListener("message", function (event) {});
 ```
 
+And run `webpack` via your preferred method.
+
 ## Options
-
-|Name|Type|Default|Description|
-|:--:|:--:|:-----:|:----------|
-|[**`name`**](#name)|`{String}`|`[hash].worker.js`|Set a custom name for the output script| 
-|[**`inline`**](#inline)|`{Boolean}`|`false`|Inline the worker as a BLOB|
-|[**`fallback`**](#fallback)|`{Boolean}`|`false`|Require a fallback for non-worker supporting environments|
-|[**`publicPath`**](#publicPath)|`{String}`|`null`|Override the path from which worker scripts are downloaded|
-
-### `name`
-
-To set a custom name for the output script, use the `name` parameter. The name may contain the string `[hash]`, which will be replaced with a content dependent hash for caching purposes. When using `name` alone `[hash]` is omitted.
-
-*webpack.config.js**
-```js
-{
-  loader: 'worker-loader',
-  options: { name: 'WorkerName.[hash].js' }
-}
-```
-
-### `inline`
-
-You can also inline the worker as a BLOB with the `inline` parameter
-
-**webpack.config.js**
-```js
-{
-  loader: 'worker-loader',
-  options: { inline: true }
-}
-```
-
-> ℹ️  Inline mode will also create chunks for browsers without support for inline workers, to disable this behavior just set `fallback` parameter as `false`
-
-**webpack.config.js**
-```js
-{
-  loader: 'worker-loader'
-  options: { inline: true, fallback: false }
-}
-```
 
 ### `fallback`
 
+Type: `Boolean`
+Default: `false`
+
 Require a fallback for non-worker supporting environments
 
-**webpack.config.js**
 ```js
+// webpack.config.js
 {
   loader: 'worker-loader'
   options: { fallback: false }
 }
 ```
 
-### `publicPath`
+### `inline`
 
-Overrides the path from which worker scripts are downloaded. If not specified, the same public path used for other
-webpack assets is used
+Type: `Boolean`
+Default: `false`
 
-**webpack.config.js**
+You can also inline the worker as a BLOB with the `inline` parameter
+
 ```js
+// webpack.config.js
+{
+  loader: 'worker-loader',
+  options: { inline: true }
+}
+```
+
+_Note: Inline mode will also create chunks for browsers without support for
+inline workers, to disable this behavior just set `fallback` parameter as
+`false`._
+
+```js
+// webpack.config.js
+{
+  loader: 'worker-loader'
+  options: { inline: true, fallback: false }
+}
+```
+
+### `name`
+
+Type: `String`
+Default: `[hash].worker.js`
+
+To set a custom name for the output script, use the `name` parameter. The name
+may contain the string `[hash]`, which will be replaced with a content dependent
+hash for caching purposes. When using `name` alone `[hash]` is omitted.
+
+```js
+// webpack.config.js
+{
+  loader: 'worker-loader',
+  options: { name: 'WorkerName.[hash].js' }
+}
+```
+
+### publicPath
+
+Type: `String`
+Default: `null`
+
+Overrides the path from which worker scripts are downloaded. If not specified,
+the same public path used for other webpack assets is used.
+
+```js
+// webpack.config.js
 {
   loader: 'worker-loader'
   options: { publicPath: '/scripts/workers/' }
@@ -120,10 +145,10 @@ webpack assets is used
 
 ## Examples
 
-The worker file can import dependencies just like any other file
+The worker file can import dependencies just like any other file:
 
-**Worker.js**
 ```js
+// Worker.js
 const _ = require('lodash')
 
 const obj = { foo: 'foo' }
@@ -134,15 +159,16 @@ _.has(obj, 'foo')
 self.postMessage({ foo: 'foo' })
 
 // Respond to message from parent thread
-self.addEventListener('message', (event) => console.log(event))  
+self.addEventListener('message', (event) => console.log(event))
 ```
 
-### `Integrating with ES2015 Modules`
+### Integrating with ES2015 Modules
 
-> ℹ️  You can even use ES2015 Modules if you have the [`babel-loader`](https://github.com/babel/babel-loader) configured.
+_Note: You can even use ES2015 Modules if you have the
+[`babel-loader`](https://github.com/babel/babel-loader) configured._
 
-**Worker.js**
 ```js
+// Worker.js
 import _ from 'lodash'
 
 const obj = { foo: 'foo' }
@@ -156,23 +182,23 @@ self.postMessage({ foo: 'foo' })
 self.addEventListener('message', (event) => console.log(event))
 ```
 
-### `Integrating with TypeScript`
+### Integrating with TypeScript
 
 To integrate with TypeScript, you will need to define a custom module for the exports of your worker
 
-**typings/custom.d.ts**
 ```typescript
+// typings/custom.d.ts
 declare module "worker-loader!*" {
   class WebpackWorker extends Worker {
     constructor();
   }
 
-  export = WebpackWorker;
+  export default WebpackWorker;
 }
 ```
 
-**Worker.ts**
 ```typescript
+// Worker.ts
 const ctx: Worker = self as any;
 
 // Post data to parent thread
@@ -182,9 +208,9 @@ ctx.postMessage({ foo: "foo" });
 ctx.addEventListener("message", (event) => console.log(event));
 ```
 
-**App.ts**
 ```typescript
-import Worker = require("worker-loader!./Worker");
+// App.ts
+import Worker from "worker-loader!./Worker";
 
 const worker = new Worker();
 
@@ -194,100 +220,76 @@ worker.onmessage = (event) => {};
 worker.addEventListener("message", (event) => {});
 ```
 
-### `Cross-Origin Policy`
+### Cross-Origin Policy
 
-[`WebWorkers`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) are restricted by a [same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy), so if your `webpack` assets are not being served from the same origin as your application, their download may be blocked by your browser. This scenario can commonly occur if you are hosting your assets under a CDN domain. Even downloads from the `webpack-dev-server` could be blocked. There are two workarounds
+[`WebWorkers`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API)
+are restricted by a
+[same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy), so if
+your `webpack` assets are not being served from the same origin as your
+application, their download may be blocked by your browser. This scenario can
+commonly occur if you are hosting your assets under a CDN domain. Even downloads
+from the `webpack-dev-server` could be blocked. There are two workarounds:
 
-Firstly, you can inline the worker as a blob instead of downloading it as an external script via the [`inline`](#inline) parameter
+Firstly, you can inline the worker as a blob instead of downloading it as an
+external script via the [`inline`](#inline) parameter
 
-**App.js**
 ```js
+// App.js
 import Worker from './file.worker.js';
 ```
 
-**webpack.config.js**
 ```js
+// webpack.config.js
 {
   loader: 'worker-loader'
   options: { inline: true }
 }
 ```
 
-Secondly, you may override the base download URL for your worker script via the [`publicPath`](#publicpath) option
+Secondly, you may override the base download URL for your worker script via the
+[`publicPath`](#publicpath) option
 
-**App.js**
 ```js
+// App.js
 // This will cause the worker to be downloaded from `/workers/file.worker.js`
 import Worker from './file.worker.js';
 ```
 
-**webpack.config.js**
 ```js
+// webpack.config.js
 {
   loader: 'worker-loader'
   options: { publicPath: '/workers/' }
 }
 ```
 
-## Maintainers
+## Contributing
 
-<table>
-  <tbody>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/TrySound">
-          <img width="150" height="150" src="https://avatars3.githubusercontent.com/u/5635476?v=3&s=150">
-        </a>
-        <br />
-        <a href="https://github.com/TrySound">Bogdan Chadkin</a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/bebraw">
-          <img width="150" height="150" src="https://github.com/bebraw.png?v=3&s=150">
-          </br>
-          Juho Vepsäläinen
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/d3viant0ne">
-          <img width="150" height="150" src="https://github.com/d3viant0ne.png?v=3&s=150">
-          </br>
-          Joshua Wiens
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/michael-ciniawsky">
-          <img width="150" height="150" src="https://github.com/michael-ciniawsky.png?v=3&s=150">
-          </br>
-          Michael Ciniawsky
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/evilebottnawi">
-          <img width="150" height="150" src="https://github.com/evilebottnawi.png?v=3&s=150">
-          </br>
-          Alexander Krasnoyarov
-        </a>
-      </td>
-    </tr>
-  <tbody>
-</table>
+Please take a moment to read our contributing guidelines if you haven't yet done so.
 
+#### [CONTRIBUTING](https://raw.githubusercontent.com/webpack-contrib/worker-loader/master/.github/CONTRIBUTING.md)
+
+## License
+
+#### [MIT](https://raw.githubusercontent.com/webpack-contrib/worker-loader/master/LICENSE)
 
 [npm]: https://img.shields.io/npm/v/worker-loader.svg
 [npm-url]: https://npmjs.com/package/worker-loader
 
-[node]: https://img.shields.io/node/v/cache-loader.svg
+[node]: https://img.shields.io/node/v/worker-loader.svg
 [node-url]: https://nodejs.org
 
 [deps]: https://david-dm.org/webpack-contrib/worker-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/worker-loader
 
-[test]: http://img.shields.io/travis/webpack-contrib/worker-loader.svg
-[test-url]: https://travis-ci.org/webpack-contrib/worker-loader
+[tests]: 	https://img.shields.io/circleci/project/github/webpack-contrib/worker-loader.svg
+[tests-url]: https://circleci.com/gh/webpack-contrib/worker-loader
 
-[cover]: https://codecov.io/gh/webpack-contrib/cache-loader/branch/master/graph/badge.svg
-[cover-url]: https://codecov.io/gh/webpack-contrib/cache-loader
+[cover]: https://codecov.io/gh/webpack-contrib/worker-loader/branch/master/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack-contrib/worker-loader
 
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
+
+[size]: https://packagephobia.now.sh/badge?p=worker-loader
+[size-url]: https://packagephobia.now.sh/result?p=worker-loader

@@ -6,7 +6,13 @@ repo: https://github.com/webpack-contrib/mini-css-extract-plugin
 ---
 
 
-This plugin extract CSS into separate files. It creates a CSS file per JS file which contains CSS. It supports On-Demand-Loading of CSS and SourceMaps.
+[![npm][npm]][npm-url]
+[![deps][deps]][deps-url]
+[![tests][tests]][tests-url]
+[![coverage][cover]][cover-url]
+[![chat][chat]][chat-url]
+
+This plugin extracts CSS into separate files. It creates a CSS file per JS file which contains CSS. It supports On-Demand-Loading of CSS and SourceMaps.
 
 It builds on top of a new webpack v4 feature (module types) and requires webpack 4 to work.
 
@@ -51,7 +57,14 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // you can specify a publicPath here
+              // by default it use publicPath in webpackOptions.output
+              publicPath: '../'
+            }
+          },
           "css-loader"
         ]
       }
@@ -87,7 +100,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.s?[ac]ss$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
@@ -192,6 +205,68 @@ module.exports = {
 }
 ```
 
+#### Extracting CSS based on entry
+
+You may also extract the CSS based on the webpack entry name. This is especially useful if you import routes dynamically
+but want to keep your CSS bundled according to entry. This also prevents the CSS duplication issue one had with the
+ExtractTextPlugin.
+
+```javascript
+const path = require('path');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+function recursiveIssuer(m) {
+  if (m.issuer) {
+    return recursiveIssuer(m.issuer);
+  } else if (m.name) {
+    return m.name;
+  } else {
+    return false;
+  }
+}
+
+module.exports = {
+  entry: {
+    foo: path.resolve(__dirname, 'src/foo'),
+    bar: path.resolve(__dirname, 'src/bar')
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        fooStyles: {
+          name: 'foo',
+          test: (m,c,entry = 'foo') => m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
+          chunks: 'all',
+          enforce: true
+        },
+        barStyles: {
+          name: 'bar',
+          test: (m,c,entry = 'bar') => m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
+          chunks: 'all',
+          enforce: true
+        }
+      }
+    }
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+    })
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader"
+        ]
+      }
+    ]
+  }
+}
+```
+
 ## Maintainers
 
 <table>
@@ -213,17 +288,24 @@ module.exports = {
 For long term caching use `filename: "[contenthash].css"`. Optionally add `[name]`.
 
 
-[npm]: https://img.shields.io/npm/v/mini-css-extract-plugin.svg
+## License
+
+#### [MIT](https://raw.githubusercontent.com/webpack-contrib/mini-css-extract-plugin/master/LICENSE)
+
+[npm]: https://img.shields.io/npm/v/webpack-contrib/mini-css-extract-plugin.svg
 [npm-url]: https://npmjs.com/package/mini-css-extract-plugin
+
+[node]: https://img.shields.io/node/v/webpack-contrib/mini-css-extract-plugin.svg
+[node-url]: https://nodejs.org
 
 [deps]: https://david-dm.org/webpack-contrib/mini-css-extract-plugin.svg
 [deps-url]: https://david-dm.org/webpack-contrib/mini-css-extract-plugin
 
-[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
-[chat-url]: https://gitter.im/webpack/webpack
-
-[test]: http://img.shields.io/travis/webpack-contrib/mini-css-extract-plugin.svg
-[test-url]: https://travis-ci.org/webpack-contrib/mini-css-extract-plugin
+[tests]: 	https://img.shields.io/circleci/project/github/webpack-contrib/mini-css-extract-plugin.svg
+[tests-url]: https://circleci.com/gh/webpack-contrib/mini-css-extract-plugin
 
 [cover]: https://codecov.io/gh/webpack-contrib/mini-css-extract-plugin/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/mini-css-extract-plugin
+
+[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
+[chat-url]: https://gitter.im/webpack/webpack
