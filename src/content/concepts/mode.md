@@ -7,6 +7,7 @@ contributors:
 ---
 
 Providing the `mode` configuration option tells webpack to use its built-in optimizations accordingly.
+Possible values for `mode` are: `production` (default), `development` and `none`.
 
 `string`
 
@@ -33,8 +34,8 @@ The following string values are supported:
 
 Option                | Description
 --------------------- | -----------------------
-`development`         | Provides `process.env.NODE_ENV` with value `development`. Enables `NamedChunksPlugin` and `NamedModulesPlugin`.
-`production`          | Provides `process.env.NODE_ENV` with value `production`. Enables `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin`, `OccurrenceOrderPlugin`, `SideEffectsFlagPlugin` and `UglifyJsPlugin`.
+`development`         | Sets `process.env.NODE_ENV` to value `development`. Enables `NamedChunksPlugin` and `NamedModulesPlugin`.
+`production`          | Sets `process.env.NODE_ENV` to value `production`. Enables `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin`, `OccurrenceOrderPlugin`, `SideEffectsFlagPlugin` and `UglifyJsPlugin`.
 `none`                | Opts out of any default optimization options
 
 If not set, webpack sets `production` as the default value for `mode`. The supported values for mode are:
