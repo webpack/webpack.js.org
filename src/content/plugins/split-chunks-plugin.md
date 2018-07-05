@@ -6,8 +6,9 @@ contributors:
   - chrisdothtml
   - EugeneHlushko
   - byzyk
+  - madhavarshney
 related:
-  - title: webpack's automatic deduplication algorthim example
+  - title: webpack's automatic deduplication algorithm example
     url: https://github.com/webpack/webpack/blob/master/examples/many-pages/README.md
   - title: "webpack 4: Code Splitting, chunk graph and the splitChunks optimization"
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -124,7 +125,7 @@ Maximum number of parallel requests when on-demand loading.
 
 `number`
 
-Maximum number of parallel requests at an entrypoint.
+Maximum number of parallel requests at an entry point.
 
 ### `splitChunks.minChunks`
 

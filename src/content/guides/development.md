@@ -7,13 +7,14 @@ contributors:
   - fvgs
   - TheDutchCoder
   - WojciechKo
+  - Calinou
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
 
 If you've been following the guides, you should have a solid understanding of some of the webpack basics. Before we continue, let's look into setting up a development environment to make our lives a little easier.
 
-W> The tools in this guide are __only meant for development__, please __avoid__ using them in production!!
+W> The tools in this guide are __only meant for development__, please __avoid__ using them in production!
 
 
 ## Using source maps
@@ -394,10 +395,9 @@ When using automatic compilation of your code, you could run into issues when sa
 
 To disable this feature in some common editors, see the list below:
 
-* **Sublime Text 3** - Add `atomic_save: "false"` to your user preferences.
-* **IntelliJ** - use search in the preferences to find "safe write" and disable it.
-* **Vim** - add `:set backupcopy=yes` to your settings.
-* **WebStorm** - uncheck Use `"safe write"` in `Preferences > Appearance & Behavior > System Settings`.
+* **Sublime Text 3**: Add `atomic_save: "false"` to your user preferences.
+* **JetBrains IDEs (e.g. WebStorm)**: Uncheck "Use safe write" in `Preferences > Appearance & Behavior > System Settings`.
+* **Vim**: Add `:set backupcopy=yes` to your settings.
 
 
 ## Conclusion
