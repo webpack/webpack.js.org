@@ -18,5 +18,5 @@ module.exports = function processREADME(body) {
     .replace(/<!--[\s\S]*?-->/g, '')
     // Replace code
     .replace(/```console/g, '```bash')
-    .replace(/```sh/, '```bash')
+    .replace(/```sh/, '```bash');
 };

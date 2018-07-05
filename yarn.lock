@@ -3777,6 +3777,23 @@ hast-to-hyperscript@^4.0.0:
     trim "0.0.1"
     unist-util-is "^2.0.0"
 
+hast-util-embedded@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/hast-util-embedded/-/hast-util-embedded-1.0.1.tgz#2889896b4fd1d485a51cb9ce4f5bd17b47049eba"
+  dependencies:
+    hast-util-is-element "^1.0.0"
+
+hast-util-has-property@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/hast-util-has-property/-/hast-util-has-property-1.0.1.tgz#ac08c40bcbf27b80a85aaae91e4f6250a53e802f"
+
+hast-util-is-body-ok-link@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/hast-util-is-body-ok-link/-/hast-util-is-body-ok-link-1.0.1.tgz#f5d8893f4f21fa1ae51c059ac29abdbc8e6e6046"
+  dependencies:
+    hast-util-has-property "^1.0.0"
+    hast-util-is-element "^1.0.0"
+
 hast-util-is-element@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/hast-util-is-element/-/hast-util-is-element-1.0.1.tgz#c76e8aafbdb6e5c83265bf50324e2f2e024eb12a"
@@ -3784,6 +3801,15 @@ hast-util-is-element@^1.0.0:
 hast-util-parse-selector@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/hast-util-parse-selector/-/hast-util-parse-selector-2.1.1.tgz#fc06985272f5d204a25187f002bb916521e74f3a"
+
+hast-util-phrasing@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/hast-util-phrasing/-/hast-util-phrasing-1.0.1.tgz#c2167222ac18c93459681aeba06d8169fd267de2"
+  dependencies:
+    hast-util-embedded "^1.0.0"
+    hast-util-has-property "^1.0.0"
+    hast-util-is-body-ok-link "^1.0.0"
+    hast-util-is-element "^1.0.0"
 
 hast-util-sanitize@^1.0.0:
   version "1.2.0"
@@ -3941,6 +3967,10 @@ html-webpack-plugin@^2.30.1:
 html-webpack-template@^6.1.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/html-webpack-template/-/html-webpack-template-6.2.0.tgz#3c9f15f616f4500927909d34adfbccb20d37943c"
+
+html-whitespace-sensitive-tag-names@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/html-whitespace-sensitive-tag-names/-/html-whitespace-sensitive-tag-names-1.0.0.tgz#fd6ed3a3d631ce29341aefe26a8fea720d3adfa7"
 
 htmlparser2@^3.9.1:
   version "3.9.2"
@@ -7113,6 +7143,36 @@ regjsparser@^0.1.4:
   dependencies:
     jsesc "~0.5.0"
 
+rehype-format@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/rehype-format/-/rehype-format-2.2.0.tgz#751b83d0ef3e6ff7a744c76887914e055aa16873"
+  dependencies:
+    hast-util-phrasing "^1.0.0"
+    html-whitespace-sensitive-tag-names "^1.0.0"
+    rehype-minify-whitespace "^2.0.0"
+    repeat-string "^1.5.4"
+    unist-util-visit-parents "^1.0.0"
+
+rehype-minify-whitespace@^2.0.0:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/rehype-minify-whitespace/-/rehype-minify-whitespace-2.0.3.tgz#9aef3b73d0dfbcf890844d10d8f45fd5bdf145ec"
+  dependencies:
+    collapse-white-space "^1.0.0"
+    hast-util-embedded "^1.0.0"
+    hast-util-has-property "^1.0.0"
+    hast-util-is-body-ok-link "^1.0.0"
+    hast-util-is-element "^1.0.0"
+    html-whitespace-sensitive-tag-names "^1.0.0"
+    unist-util-is "^2.0.0"
+    unist-util-modify-children "^1.0.0"
+
+rehype-stringify@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/rehype-stringify/-/rehype-stringify-3.0.0.tgz#9fef0868213c2dce2f780b76f3d0488c85e819eb"
+  dependencies:
+    hast-util-to-html "^3.0.0"
+    xtend "^4.0.1"
+
 relateurl@0.2.x:
   version "0.2.7"
   resolved "https://registry.yarnpkg.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
@@ -7257,6 +7317,12 @@ remark-refractor@1.0.0:
     prism-languages "0.4.0"
     refractor "2.4.1"
     unist-util-visit "1.3.1"
+
+remark-rehype@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/remark-rehype/-/remark-rehype-3.0.0.tgz#699342e76cc1dead191cc924fdf21910b3746160"
+  dependencies:
+    mdast-util-to-hast "^3.0.0"
 
 remark-retext@^3.0.0:
   version "3.1.0"
@@ -8861,6 +8927,10 @@ unist-util-stringify-position@^1.0.0, unist-util-stringify-position@^1.1.1:
 unist-util-visit-children@^1.0.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/unist-util-visit-children/-/unist-util-visit-children-1.1.2.tgz#bd78b53db9644b9c339ac502854f15471f964f5b"
+
+unist-util-visit-parents@^1.0.0:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/unist-util-visit-parents/-/unist-util-visit-parents-1.1.2.tgz#f6e3afee8bdbf961c0e6f028ea3c0480028c3d06"
 
 unist-util-visit@1.3.1, unist-util-visit@^1.0.0, unist-util-visit@^1.0.1, unist-util-visit@^1.1.0, unist-util-visit@^1.1.3, unist-util-visit@^1.3.0:
   version "1.3.1"

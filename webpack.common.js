@@ -32,7 +32,8 @@ module.exports = (env = {}) => ({
             plugins: [
               require('remark-slug'),
               require('remark-mermaid'),
-              require('remark-refractor'),
+              require('./prism-links'),
+              // require('remark-refractor'),
               [require('remark-custom-blockquotes'), {
                 mapping: {
                   'T>': 'tip',
