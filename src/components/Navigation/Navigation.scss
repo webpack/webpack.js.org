@@ -114,6 +114,8 @@
       text-shadow: 0 0 0 getColor(concrete);
       transition:all 250ms;
 
+      -webkit-appearance: textfield;
+
       &::-webkit-input-placeholder{
         color: lighten(getColor(fiord), 10%);
         text-shadow: none;

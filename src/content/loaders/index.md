@@ -4,6 +4,7 @@ sort: 1
 contributors:
   - simon04
   - bajras
+  - rhys-vdw
 ---
 
 webpack enables use of [loaders](/concepts/loaders) to preprocess files. This allows you to bundle any static resource way beyond JavaScript. You can easily write your own loaders using Node.js.
@@ -34,6 +35,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 * `traceur-loader` Loads ES2015+ code and transpiles to ES5 using [Traceur](https://github.com/google/traceur-compiler#readme)
 * [`ts-loader`](https://github.com/TypeStrong/ts-loader) or [`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader) Loads [TypeScript](https://www.typescriptlang.org/) 2.0+ like JavaScript
 * [`coffee-loader`](/loaders/coffee-loader) Loads [CoffeeScript](http://coffeescript.org/) like JavaScript
+* [`fengari-loader`](https://github.com/fengari-lua/fengari-loader/) Loads Lua code using [fengari](https://fengari.io/)
 
 
 ## Templating
@@ -46,6 +48,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 * `posthtml-loader` Loads and transforms a HTML file using [PostHTML](https://github.com/posthtml/posthtml)
 * `handlebars-loader` Compiles Handlebars to HTML
 * [`markup-inline-loader`](https://github.com/asnowwolf/markup-inline-loader) Inline SVG/MathML files to HTML. It’s useful when applying icon font or applying CSS animation to SVG.
+* [`twig-loader`](https://github.com/zimmo-be/twig-loader) Compiles Twig templates and returns a function
 
 ## Styling
 

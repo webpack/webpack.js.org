@@ -3,14 +3,20 @@ title: SplitChunksPlugin
 contributors:
   - sokra
   - jeremenichelli
+  - chrisdothtml
+  - EugeneHlushko
+  - byzyk
+  - madhavarshney
 related:
+  - title: webpack's automatic deduplication algorithm example
+    url: https://github.com/webpack/webpack/blob/master/examples/many-pages/README.md
   - title: "webpack 4: Code Splitting, chunk graph and the splitChunks optimization"
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
 
-Originally, chunks (and modules imported inside them) were connected by a parent-child relationship in the internal webpack graph. The `CommonsChunkPlugin` was used to avoid duplicated dependencies across them, but further optimizations where not possible
+Originally, chunks (and modules imported inside them) were connected by a parent-child relationship in the internal webpack graph. The `CommonsChunkPlugin` was used to avoid duplicated dependencies across them, but further optimizations were not possible
 
-Since version 4 the `CommonsChunkPlugin` was removed in favor of `optimization.splitChunks` and `optimization.runtimeChunk` options. Here is how the new flow works.
+Since webpack v4, the `CommonsChunkPlugin` was removed in favor of `optimization.splitChunks`.
 
 
 ## Defaults
@@ -28,22 +34,197 @@ webpack will automatically split chunks based on these conditions:
 
 When trying to fulfill the last two conditions, bigger chunks are preferred.
 
-Let's take a look at some examples.
+## Configuration
+
+For developers that want to have more control over this functionality, webpack provides a set of options to better fit your needs. If you're changing the configuration, it's a good idea to measure the impact of your changes to ensure there's a real benefit.
+
+W> Default configuration was chosen to fit web performance best practices but the optimum strategy for your project might defer depending on the nature of it.
+
+## `optimization.splitChunks`
+
+This configuration object represents the default behavior of the `SplitChunksPlugin`.
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    }
+  }
+};
+```
+
+### `splitChunks.automaticNameDelimiter`
+
+`string`
+
+By default webpack will generate names using origin and name of the chunk (e.g. `vendors~main.js`). This option lets you specify the delimiter to use for the generated names.
+
+
+### `splitChunks.chunks`
+
+`function` `string`
+
+This indicates which chunks will be selected for optimization. If a string is provided, possible values are `all`, `async`, and `initial`. Providing `all` can be particularly powerful because it means that chunks can be shared even between async and non-async chunks.
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      // include all types of chunks
+      chunks: 'all'
+    }
+  }
+};
+```
+
+Alternatively, you can provide a function for more control. The return value will indicate whether to include each chunk.
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      chunks (chunk) {
+        // exclude `my-excluded-chunk`
+        return chunk.name !== 'my-excluded-chunk';
+      }
+    }
+  }
+};
+```
+
+T> You can combine this configuration with the [HtmlWebpackPlugin](/plugins/html-webpack-plugin/). It will inject all the generated vendor chunks for you.
+
+### `splitChunks.maxAsyncRequests`
+
+`number`
+
+Maximum number of parallel requests when on-demand loading.
+
+### `splitChunks.maxInitialRequests`
+
+`number`
+
+Maximum number of parallel requests at an entry point.
+
+### `splitChunks.minChunks`
+
+`number`
+
+Minimum number of chunks that must share a module before splitting.
+
+### `splitChunks.minSize`
+
+`number`
+
+Minimum size for a chunk to be generated.
+
+### `splitChunks.name`
+
+`boolean: true` `function` `string`
+
+The name of the split chunk. Providing `true` will automatically generate a name based on chunks and cache group key. Providing a string or function will allow you to use a custom name. If the name matches an entry point name, the entry point will be removed.
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      name (module) {
+        // generate a chunk name...
+        return; //...
+      }
+    }
+  }
+};
+```
+
+W> When assigning equal names to different split chunks, all vendor modules are placed into a single shared chunk, though it's not recommend since it can result in more code downloaded.
+
+### `splitChunks.cacheGroups`
+
+Cache groups can inherit and/or override any options from `splitChunks.*`; but `test`, `priority` and `reuseExistingChunk` can only be configured on cache group level. To disable any of the default cache groups, set them to `false`.
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        default: false
+      }
+    }
+  }
+};
+```
+
+#### `splitChunks.cacheGroups.priority`
+
+`number`
+
+A module can belong to multiple cache groups. The optimization will prefer the cache group with a higher `priority`. The default groups have a negative priority to allow custom groups to take higher priority (default value is `0` for custom groups).
+
+#### `splitChunks.cacheGroups.reuseExistingChunk`
+
+`boolean`
+
+If the current chunk contains modules already split out from the main bundle, it will be reused instead of a new one being generated. This can impact the resulting file name of the chunk.
+
+#### `splitChunks.cacheGroups.test`
+
+`function` `RegExp` `string`
+
+Controls which modules are selected by this cache group. Omitting it selects all modules. It can match the absolute module resource path or chunk names. When a chunk name is matched, all modules in the chunk are selected.
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      test (chunks) {
+        //...
+        return true;
+      }
+    }
+  }
+};
+```
+
+## Examples
 
 ### Defaults: Example 1
 
-``` js
+```js
 // index.js
 
-// dynamically import a.js
-import("./a");
+import('./a'); // dynamic import
 ```
 
-``` js
+```js
 // a.js
-import "react";
+import 'react';
 
-// ...
+//...
 ```
 
 **Result:** A separate chunk would be created containing `react`. At the import call this chunk is loaded in parallel to the original chunk containing `./a`.
@@ -59,27 +240,27 @@ What's the reasoning behind this? `react` probably won't change as often as your
 
 ### Defaults: Example 2
 
-``` js
+```js
 // entry.js
 
-// dynamically import a.js and b.js
-import("./a");
-import("./b");
+// dynamic imports
+import('./a');
+import('./b');
 ```
 
-``` js
+```js
 // a.js
-import "./helpers"; // helpers is 40kb in size
+import './helpers'; // helpers is 40kb in size
 
-// ...
+//...
 ```
 
-``` js
+```js
 // b.js
-import "./helpers";
-import "./more-helpers"; // more-helpers is also 40kb in size
+import './helpers';
+import './more-helpers'; // more-helpers is also 40kb in size
 
-// ...
+//...
 ```
 
 **Result:** A separate chunk would be created containing `./helpers` and all dependencies of it. At the import calls this chunk is loaded in parallel to the original chunks.
@@ -93,127 +274,28 @@ Why:
 
 Putting the content of `helpers` into each chunk will result into its code being downloaded twice. By using a separate chunk this will only happen once. We pay the cost of an additional request, which could be considered a tradeoff. That's why there is a minimum size of 30kb.
 
-
-## Configuration
-
-For developers that want to have more control over this functionality, webpack provides a set of options to better fit your needs.
-
-If you are manually changing the split configuration, measure the impact of the changes to see and make sure there's a real benefit.
-
-W> Default configuration was chosen to fit web performance best practices but the optimum strategy for your project might defer depending on the nature of it.
-
-### Configuring cache groups
-
-The defaults assign all modules from `node_modules` to a cache group called `vendors` and all modules duplicated in at least 2 chunks to a cache group `default`.
-
-A module can be assigned to multiple cache groups. The optimization then prefers the cache group with the higher `priority` (`priority` option) or that one that forms bigger chunks.
-
-### Conditions
-
-Modules from the same chunks and cache group will form a new chunk when all conditions are fulfilled.
-
-There are 4 options to configure the conditions:
-
-* `minSize` (default: 30000) Minimum size for a chunk.
-* `minChunks` (default: 1) Minimum number of chunks that share a module before splitting
-* `maxInitialRequests` (default 3) Maximum number of parallel requests at an entrypoint
-* `maxAsyncRequests` (default 5) Maximum number of parallel requests at on-demand loading
-
-### Naming
-
-To control the chunk name of the split chunk the `name` option can be used.
-
-W> When assigning equal names to different split chunks, all vendor modules are placed into a single shared chunk, though it's not recommend since it can result in more code downloaded.
-
-The magic value `true` automatically chooses a name based on chunks and cache group key, otherwise a string or function can be passed.
-
-When the name matches an entry point name, the entry point is removed.
-
-#### `optimization.splitChunks.automaticNameDelimiter`
-
-By default webpack will generate names using origin and name of the chunk, like `vendors~main.js`.
-
-If your project has a conflict with the `~` character, it can be changed by setting this option to any other value that works for your project: `automaticNameDelimiter: "-"`.
-
-Then the resulting names will look like `vendors-main.js`.
-
-### Select modules
-
-The `test` option controls which modules are selected by this cache group. Omitting it selects all modules. It can be a RegExp, string or function.
-
-It can match the absolute module resource path or chunk names. When a chunk name is matched, all modules in this chunk are selected.
-
-### Select chunks
-
-With the `chunks` option the selected chunks can be configured.
-
-There are 3 values possible `"initial"`, `"async"` and `"all"`. When configured the optimization only selects initial chunks, on-demand chunks or all chunks.
-
-The option `reuseExistingChunk` allows to reuse existing chunks instead of creating a new one when modules match exactly.
-
-This can be controlled per cache group.
-
-
-### `optimization.splitChunks.chunks: all`
-
-As it was mentioned before this plugin will affect dynamic imported modules. Setting the `optimization.splitChunks.chunks` option to `"all"` initial chunks will get affected by it (even the ones not imported dynamically). This way chunks can even be shared between entry points and on-demand loading.
-
-This is the recommended configuration.
-
-T> You can combine this configuration with the [HtmlWebpackPlugin](/plugins/html-webpack-plugin/), it will inject all the generated vendor chunks for you.
-
-
-## `optimization.splitChunks`
-
-This configuration object represents the default behavior of the `SplitChunksPlugin`.
-
-```js
-splitChunks: {
-	chunks: "async",
-	minSize: 30000,
-	minChunks: 1,
-	maxAsyncRequests: 5,
-	maxInitialRequests: 3,
-	automaticNameDelimiter: '~',
-	name: true,
-	cacheGroups: {
-		vendors: {
-			test: /[\\/]node_modules[\\/]/,
-			priority: -10
-		},
-    default: {
-			minChunks: 2,
-			priority: -20,
-			reuseExistingChunk: true
-		}
-	}
-}
-```
-
-By default cache groups inherit options from `splitChunks.*`, but `test`, `priority` and `reuseExistingChunk` can only be configured on cache group level.
-
-`cacheGroups` is an object where keys are the cache group names. All options from the ones listed above are possible: `chunks`, `minSize`, `minChunks`, `maxAsyncRequests`, `maxInitialRequests`, `name`.
-
-You can set `optimization.splitChunks.cacheGroups.default` to `false` to disable the default cache group, same for `vendors` cache group.
-
-The priority of the default groups are negative to allow any custom cache group to take higher priority (the default value is `0`).
-
-Here are some examples and their effect:
-
 ### Split Chunks: Example 1
 
 Create a `commons` chunk, which includes all code shared between entry points.
 
+__webpack.config.js__
+
+
 ```js
-splitChunks: {
-	cacheGroups: {
-		commons: {
-			name: "commons",
-			chunks: "initial",
-			minChunks: 2
-		}
-	}
-}
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          name: 'commons',
+          chunks: 'initial',
+          minChunks: 2
+        }
+      }
+    }
+  }
+};
 ```
 
 W> This configuration can enlarge your initial bundles, it is recommended to use dynamic imports when a module is not immediately needed.
@@ -222,23 +304,24 @@ W> This configuration can enlarge your initial bundles, it is recommended to use
 
 Create a `vendors` chunk, which includes all code from `node_modules` in the whole application.
 
-``` js
-splitChunks: {
-	cacheGroups: {
-		commons: {
-			test: /[\\/]node_modules[\\/]/,
-			name: "vendors",
-			chunks: "all"
-		}
-	}
-}
+__webpack.config.js__
+
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    }
+  }
+};
 ```
 
 W> This might result in a large chunk containing all external packages. It is recommended to only include your core frameworks and utilities and dynamically load the rest of the dependencies.
-
-
-## `optimization.runtimeChunk`
-
-Setting `optimization.runtimeChunk` to `true` adds an additonal chunk to each entrypoint containing only the runtime.
-
-The value `single` instead creates a runtime file to be shared for all generated chunks.

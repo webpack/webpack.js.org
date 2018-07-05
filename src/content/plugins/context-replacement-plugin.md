@@ -2,6 +2,7 @@
 title: ContextReplacementPlugin
 contributors:
   - simon04
+  - byzyk
 related:
   - title: Issue 2783 - ContextReplacementPlugin Description
     url: https://github.com/webpack/webpack/issues/2783#issuecomment-234137265
@@ -13,6 +14,8 @@ The `ContextReplacementPlugin` allows you to override the inferred information. 
 
 
 ## Usage
+
+<!-- eslint-skip -->
 
 ```javascript
 new webpack.ContextReplacementPlugin(
@@ -31,7 +34,7 @@ Here's a small example to restrict module usage:
 new webpack.ContextReplacementPlugin(
   /moment[\/\\]locale$/,
   /de|fr|hu/
-)
+);
 ```
 
 The `moment/locale` context is restricted to files matching `/de|fr|hu/`. Thus only those locales are included (see [this issue](https://github.com/moment/moment/issues/2373) for more information).
@@ -43,7 +46,7 @@ The `moment/locale` context is restricted to files matching `/de|fr|hu/`. Thus o
 new webpack.ContextReplacementPlugin(
   resourceRegExp: RegExp,
   newContentCallback: (data) => void
-)
+);
 ```
 
 The `newContentCallback` function is given a [`data` object of the `ContextModuleFactory`](/api/plugins/module-factories/) and is expected to overwrite the `request` attribute of the supplied object.
@@ -58,7 +61,7 @@ new webpack.ContextReplacementPlugin(/^\.\/locale$/, (context) => {
     regExp: /^\.\/\w+/,
     request: '../../locale' // resolved relatively
   });
-}),
+});
 ```
 
 
@@ -71,7 +74,7 @@ new webpack.ContextReplacementPlugin(
   resourceRegExp: RegExp,
   newContentResource: string,
   newContentCreateContextMap: object // mapping runtime-request (userRequest) to compile-time-request (request)
-)
+);
 ```
 
 These two parameters can be used together to redirect requests in a more targeted way. The `newContentCreateContextMap` allows you to map runtime requests to compile requests in the form of an object:
@@ -80,5 +83,5 @@ These two parameters can be used together to redirect requests in a more targete
 new ContextReplacementPlugin(/selector/, './folder', {
   './request': './request',
   './other-request': './new-request'
-})
+});
 ```

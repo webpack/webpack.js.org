@@ -4,6 +4,7 @@ sort: 3
 contributors:
   - sallar
   - rynclark
+  - byzyk
 ---
 
 webpack provides a Node.js API which can be used directly in Node.js runtime.
@@ -22,10 +23,13 @@ npm install --save-dev webpack
 Then require the webpack module in your Node.js script:
 
 ``` js
-const webpack = require("webpack");
+const webpack = require('webpack');
+```
 
-// Or if you prefer ES2015:
-import webpack from "webpack";
+Or if you prefer ES2015:
+
+``` js
+import webpack from 'webpack';
 ```
 
 
@@ -110,7 +114,7 @@ changes (much like CLI: `webpack --watch`), as soon as webpack detects a
 change, runs again. Returns an instance of `Watching`.
 
 ``` js
-watch(watchOptions, callback)
+watch(watchOptions, callback);
 ```
 
 ``` js-with-links
@@ -146,7 +150,7 @@ The `watch` method returns a `Watching` instance that exposes
 
 ``` js
 watching.close(() => {
-  console.log("Watching Ended.");
+  console.log('Watching Ended.');
 });
 ```
 
@@ -328,8 +332,8 @@ replace the default `outputFileSystem` with
 instead of to disk:
 
 ``` js
-const MemoryFS = require("memory-fs");
-const webpack = require("webpack");
+const MemoryFS = require('memory-fs');
+const webpack = require('webpack');
 
 const fs = new MemoryFS();
 const compiler = webpack({ /* options*/ });
@@ -337,7 +341,7 @@ const compiler = webpack({ /* options*/ });
 compiler.outputFileSystem = fs;
 compiler.run((err, stats) => {
   // Read the output later:
-  const content = fs.readFileSync("...");
+  const content = fs.readFileSync('...');
 });
 ```
 

@@ -10,6 +10,8 @@ contributors:
   - fvgs
   - dhurlburtusa
   - MagicDuck
+  - byzyk
+  - madhavarshney
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -21,31 +23,34 @@ The top-level `output` key contains set of options instructing webpack on how an
 
 When used in tandem with [`output.library`](#output-library) and [`output.libraryTarget`](#output-librarytarget), this option allows users to insert comments within the export wrapper. To insert the same comment for each `libraryTarget` type, set `auxiliaryComment` to a string:
 
-``` js
-output: {
-  library: "someLibName",
-  libraryTarget: "umd",
-  filename: "someLibName.js",
-  auxiliaryComment: "Test Comment"
-}
+```js
+module.exports = {
+  //...
+  output: {
+    library: 'someLibName',
+    libraryTarget: 'umd',
+    filename: 'someLibName.js',
+    auxiliaryComment: 'Test Comment'
+  }
+};
 ```
 
 which will yield the following:
 
-``` js
+```js
 (function webpackUniversalModuleDefinition(root, factory) {
   // Test Comment
   if(typeof exports === 'object' && typeof module === 'object')
-    module.exports = factory(require("lodash"));
+    module.exports = factory(require('lodash'));
   // Test Comment
   else if(typeof define === 'function' && define.amd)
-    define(["lodash"], factory);
+    define(['lodash'], factory);
   // Test Comment
   else if(typeof exports === 'object')
-    exports["someLibName"] = factory(require("lodash"));
+    exports['someLibName'] = factory(require('lodash'));
   // Test Comment
   else
-    root["someLibName"] = factory(root["_"]);
+    root['someLibName'] = factory(root['_']);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {
   // ...
 });
@@ -53,19 +58,25 @@ which will yield the following:
 
 For fine-grained control over each `libraryTarget` comment, pass an object:
 
-``` js
-auxiliaryComment: {
-  root: "Root Comment",
-  commonjs: "CommonJS Comment",
-  commonjs2: "CommonJS2 Comment",
-  amd: "AMD Comment"
-}
+```js
+module.exports = {
+  //...
+  output: {
+    //...
+    auxiliaryComment: {
+      root: 'Root Comment',
+      commonjs: 'CommonJS Comment',
+      commonjs2: 'CommonJS2 Comment',
+      amd: 'AMD Comment'
+    }
+  }
+};
 ```
 
 
 ## `output.chunkFilename`
 
-`string` `function`
+`string`
 
 This option determines the name of non-entry chunk files. See [`output.filename`](#output-filename) option for details on the possible values.
 
@@ -125,8 +136,13 @@ Enables line to line mapping for all or some modules. This produces a simple sou
 
 Pass a boolean to enable or disable this feature for all modules (defaults to `false`). An object with `test`, `include`, `exclude` is also allowed. For example, to enable this feature for all javascript files within a certain directory:
 
-``` js
-devtoolLineToLine: { test: /\.js$/, include: 'src/utilities' }
+```js
+module.exports = {
+  //...
+  output: {
+    devtoolLineToLine: { test: /\.js$/, include: 'src/utilities' }
+  }
+};
 ```
 
 
@@ -138,8 +154,13 @@ This option is only used when [`devtool`](/configuration/devtool) uses an option
 
 Customize the names used in each source map's `sources` array. This can be done by passing a template string or function. For example, when using `devtool: 'eval'`, this is the default:
 
-``` js
-devtoolModuleFilenameTemplate: "webpack://[namespace]/[resource-path]?[loaders]"
+```js
+module.exports = {
+  //...
+  output: {
+    devtoolModuleFilenameTemplate: 'webpack://[namespace]/[resource-path]?[loaders]'
+  }
+};
 ```
 
 The following substitutions are available in template strings (via webpack's internal [`ModuleFilenameHelpers`](https://github.com/webpack/webpack/blob/master/lib/ModuleFilenameHelpers.js)):
@@ -157,10 +178,15 @@ The following substitutions are available in template strings (via webpack's int
 
 When using a function, the same options are available camel-cased via the `info` parameter:
 
-``` js
-devtoolModuleFilenameTemplate: info => {
-  return `webpack:///${info.resourcePath}?${info.loaders}`
-}
+```js
+module.exports = {
+  //...
+  output: {
+    devtoolModuleFilenameTemplate: info => {
+      return `webpack:///${info.resourcePath}?${info.loaders}`;
+    }
+  }
+};
 ```
 
 If multiple modules would result in the same name, [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolfallbackmodulefilenametemplate) is used instead for these modules.
@@ -170,7 +196,7 @@ If multiple modules would result in the same name, [`output.devtoolFallbackModul
 
 `string`
 
-This option determines the modules namespace used with the [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametemplate). When not specified, it will default to the value of: [`output.library`](#output-library). It's used to prevent source file path collisions in sourcemaps when loading multiple libraries built with webpack.
+This option determines the modules namespace used with the [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametemplate). When not specified, it will default to the value of: [`output.library`](#output-library). It's used to prevent source file path collisions in source maps when loading multiple libraries built with webpack.
 
 For example, if you have 2 libraries, with namespaces `library1` and `library2`, which both have a file `./src/index.js` (with potentially different contents), they will expose these files as `webpack://library1/./src/index.js` and `webpack://library2/./src/index.js`.
 
@@ -183,34 +209,59 @@ This option determines the name of each output bundle. The bundle is written to 
 
 For a single [`entry`](/configuration/entry-context#entry) point, this can be a static name.
 
-``` js
-filename: "bundle.js"
+```js
+module.exports = {
+  //...
+  output: {
+    filename: 'bundle.js'
+  }
+};
 ```
 
 However, when creating multiple bundles via more than one entry point, code splitting, or various plugins, you should use one of the following substitutions to give each bundle a unique name...
 
 Using entry name:
 
-``` js
-filename: "[name].bundle.js"
+```js
+module.exports = {
+  //...
+  output: {
+    filename: '[name].bundle.js'
+  }
+};
 ```
 
 Using internal chunk id:
 
-``` js
-filename: "[id].bundle.js"
+```js
+module.exports = {
+  //...
+  output: {
+    filename: '[id].bundle.js'
+  }
+};
 ```
 
 Using the unique hash generated for every build:
 
-``` js
-filename: "[name].[hash].bundle.js"
+```js
+module.exports = {
+  //...
+  output: {
+    filename: '[name].[hash].bundle.js'
+  }
+};
 ```
 
 Using hashes based on each chunks' content:
 
-``` js
-filename: "[chunkhash].bundle.js"
+```js
+module.exports = {
+  //...
+  output: {
+    filename: '[chunkhash].bundle.js'
+  }
+};
 ```
 
 Make sure to read the [Caching guide](/guides/caching) for details. There are more steps involved than just setting this option.
@@ -238,7 +289,7 @@ T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plu
 
 ## `output.hashDigest`
 
-The encoding to use when generating the hash, defaults to `'hex'`. All encodings from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported.
+The encoding to use when generating the hash, defaults to `'hex'`. All encodings from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported. Using `'base64'` for filenames might be problematic since it has the character `/` in its alphabet. Likewise `'latin1'` could contain any character.
 
 
 ## `output.hashDigestLength`
@@ -252,8 +303,13 @@ The prefix length of the hash digest to use, defaults to `20`.
 
 The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm_options) are supported. Since `4.0.0-alpha2`, the `hashFunction` can now be a constructor to a custom hash function. You can provide a non-crypto hash function for performance reasons.
 
-``` js
-hashFunction: require('metrohash').MetroHash64
+```js
+module.exports = {
+  //...
+  output: {
+    hashFunction: require('metrohash').MetroHash64
+  }
+};
 ```
 
 Make sure that the hashing function will have `update` and `digest` methods available.
@@ -271,8 +327,13 @@ Customize the filenames of hot update chunks. See [`output.filename`](#output-fi
 
 The only placeholders allowed here are `[id]` and `[hash]`, the default being:
 
-``` js
-hotUpdateChunkFilename: "[id].[hash].hot-update.js"
+```js
+module.exports = {
+  //...
+  output: {
+    hotUpdateChunkFilename: '[id].[hash].hot-update.js'
+  }
+};
 ```
 
 Here is no need to change it.
@@ -297,8 +358,13 @@ Customize the main hot update filename. See [`output.filename`](#output-filename
 
 `[hash]` is the only available placeholder, the default being:
 
-``` js
-hotUpdateMainFilename: "[hash].hot-update.json"
+```js
+module.exports = {
+  //...
+  output: {
+    hotUpdateMainFilename: '[hash].hot-update.json'
+  }
+};
 ```
 
 Here is no need to change it.
@@ -325,10 +391,13 @@ If using the [`output.library`](#output-library) option, the library name is aut
 
 How the value of the `output.library` is used depends on the value of the [`output.libraryTarget`](#output-librarytarget) option; please refer to that section for the complete details. Note that the default option for `output.libraryTarget` is `var`, so if the following configuration option is used:
 
-``` js
-output: {
-  library: "MyLibrary"
-}
+```js
+module.exports = {
+  //...
+  output: {
+    library: 'MyLibrary'
+  }
+};
 ```
 
 The variable `MyLibrary` will be bound with the return value of your entry file, if the resulting output is included as a script tag in an HTML page.
@@ -350,26 +419,26 @@ The following configurations are supported:
 
 `libraryExport: "default"` - The **default export of your entry point** will be assigned to the library target:
 
-``` js
+```js
 // if your entry has a default export of `MyDefaultModule`
 var MyDefaultModule = _entry_return_.default;
 ```
 
 `libraryExport: "MyModule"` - The **specified module** will be assigned to the library target:
 
-``` js
+```js
 var MyModule = _entry_return_.MyModule;
 ```
 
 `libraryExport: ["MyModule", "MySubModule"]` - The array is interpreted as a **path to a module** to be assigned to the library target:
 
-``` js
+```js
 var MySubModule = _entry_return_.MyModule.MySubModule;
 ```
 
 With the `libraryExport` configurations specified above, the resulting libraries could be utilized as such:
 
-``` js
+```js
 MyDefaultModule.doSomething();
 MyModule.doSomething();
 MySubModule.doSomething();
@@ -392,7 +461,7 @@ These options assign the return value of the entry point (e.g. whatever the entr
 
 `libraryTarget: "var"` - (default) When your library is loaded, the **return value of your entry point** will be assigned to a variable:
 
-``` js
+```js
 var MyLibrary = _entry_return_;
 
 // In a separate script...
@@ -404,7 +473,7 @@ W> When using this option, an empty `output.library` will result in no assignmen
 
 `libraryTarget: "assign"` - This will generate an implied global which has the potential to reassign an existing value (use with caution).
 
-``` js
+```js
 MyLibrary = _entry_return_;
 ```
 
@@ -419,16 +488,16 @@ These options assign the return value of the entry point (e.g. whatever the entr
 
 If `output.library` is not assigned a non-empty string, the default behavior is that all properties returned by the entry point will be assigned to the object as defined for the particular `output.libraryTarget`, via the following code fragment:
 
-``` js
-(function(e, a) { for(var i in a) e[i] = a[i]; }(${output.libraryTarget}, _entry_return_)
+```js
+(function(e, a) { for(var i in a) { e[i] = a[i]; } }(output.libraryTarget, _entry_return_));
 ```
 
 W> Note that not setting a `output.library` will cause all properties returned by the entry point to be assigned to the given object; there are no checks against existing property names.
 
 `libraryTarget: "this"` - The **return value of your entry point** will be assigned to this under the property named by `output.library`. The meaning of `this` is up to you:
 
-``` js
-this["MyLibrary"] = _entry_return_;
+```js
+this['MyLibrary'] = _entry_return_;
 
 // In a separate script...
 this.MyLibrary.doSomething();
@@ -437,8 +506,8 @@ MyLibrary.doSomething(); // if this is window
 
 `libraryTarget: "window"` - The **return value of your entry point** will be assigned to the `window` object using the `output.library` value.
 
-``` js
-window["MyLibrary"] = _entry_return_;
+```js
+window['MyLibrary'] = _entry_return_;
 
 window.MyLibrary.doSomething();
 ```
@@ -446,8 +515,8 @@ window.MyLibrary.doSomething();
 
 `libraryTarget: "global"` - The **return value of your entry point** will be assigned to the `global` object using the `output.library` value.
 
-``` js
-global["MyLibrary"] = _entry_return_;
+```js
+global['MyLibrary'] = _entry_return_;
 
 global.MyLibrary.doSomething();
 ```
@@ -455,10 +524,10 @@ global.MyLibrary.doSomething();
 
 `libraryTarget: "commonjs"` - The **return value of your entry point** will be assigned to the `exports` object using the `output.library` value. As the name implies, this is used in CommonJS environments.
 
-``` js
-exports["MyLibrary"] = _entry_return_;
+```js
+exports['MyLibrary'] = _entry_return_;
 
-require("MyLibrary").doSomething();
+require('MyLibrary').doSomething();
 ```
 
 ### Module Definition Systems
@@ -468,10 +537,10 @@ These options will result in a bundle that comes with a more complete header to 
 
 `libraryTarget: "commonjs2"` - The **return value of your entry point** will be assigned to the `module.exports`. As the name implies, this is used in CommonJS environments:
 
-``` js
+```js
 module.exports = _entry_return_;
 
-require("MyLibrary").doSomething();
+require('MyLibrary').doSomething();
 ```
 
 Note that `output.library` is omitted, thus it is not required for this particular `output.libraryTarget`.
@@ -485,24 +554,27 @@ AMD modules require that the entry chunk (e.g. the first script loaded by the `<
 
 So, with the following configuration...
 
-``` js
-output: {
-  library: "MyLibrary",
-  libraryTarget: "amd"
-}
+```js
+module.exports = {
+  //...
+  output: {
+    library: 'MyLibrary',
+    libraryTarget: 'amd'
+  }
+};
 ```
 
 The generated output will be defined with the name "MyLibrary", i.e.
 
-``` js
-define("MyLibrary", [], function() {
+```js
+define('MyLibrary', [], function() {
   return _entry_return_;
 });
 ```
 
 The bundle can be included as part of a script tag, and the bundle can be invoked like so:
 
-``` js
+```js
 require(['MyLibrary'], function(MyLibrary) {
   // Do something with the library...
 });
@@ -510,7 +582,7 @@ require(['MyLibrary'], function(MyLibrary) {
 
 If `output.library` is undefined, the following is generated instead.
 
-``` js
+```js
 define([], function() {
   return _entry_return_;
 });
@@ -523,25 +595,28 @@ This bundle will not work as expected, or not work at all (in the case of the al
 
 In this case, you need the `library` property to name your module:
 
-``` js
-output: {
-  library: "MyLibrary",
-  libraryTarget: "umd"
-}
+```js
+module.exports = {
+  //...
+  output: {
+    library: 'MyLibrary',
+    libraryTarget: 'umd'
+  }
+};
 ```
 
 And finally the output is:
 
-``` js
+```js
 (function webpackUniversalModuleDefinition(root, factory) {
   if(typeof exports === 'object' && typeof module === 'object')
     module.exports = factory();
   else if(typeof define === 'function' && define.amd)
     define([], factory);
   else if(typeof exports === 'object')
-    exports["MyLibrary"] = factory();
+    exports['MyLibrary'] = factory();
   else
-    root["MyLibrary"] = factory();
+    root['MyLibrary'] = factory();
 })(typeof self !== 'undefined' ? self : this, function() {
   return _entry_return_;
 });
@@ -549,15 +624,18 @@ And finally the output is:
 
 Note that omitting `library` will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the [object assignment section](#expose-via-object-assignment). Example:
 
-``` js
-output: {
-  libraryTarget: "umd"
-}
+```js
+module.exports = {
+  //...
+  output: {
+    libraryTarget: 'umd'
+  }
+};
 ```
 
 The output will be:
 
-``` js
+```js
 (function webpackUniversalModuleDefinition(root, factory) {
   if(typeof exports === 'object' && typeof module === 'object')
     module.exports = factory();
@@ -574,15 +652,18 @@ The output will be:
 
 Since webpack 3.1.0, you may specify an object for `library` for differing names per targets:
 
-``` js
-output: {
-  library: {
-    root: "MyLibrary",
-    amd: "my-library",
-    commonjs: "my-common-library"
-  },
-  libraryTarget: "umd"
-}
+```js
+module.exports = {
+  //...
+  output: {
+    library: {
+      root: 'MyLibrary',
+      amd: 'my-library',
+      commonjs: 'my-common-library'
+    },
+    libraryTarget: 'umd'
+  }
+};
 ```
 
 Module proof library.
@@ -606,7 +687,12 @@ The dependencies for your library will be defined by the [`externals`](/configur
 The output directory as an **absolute** path.
 
 ```js
-path: path.resolve(__dirname, 'dist/assets')
+module.exports = {
+  //...
+  output: {
+    path: path.resolve(__dirname, 'dist/assets')
+  }
+};
 ```
 
 Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching) for details.
@@ -620,8 +706,13 @@ Tells webpack to include comments in bundles with information about the containe
 
 W> While the data this comments can provide is very useful during development when reading the generated code, it **should not** be used in production.
 
-``` js
-pathinfo: true
+```js
+module.exports = {
+  //...
+  output: {
+    pathinfo: true
+  }
+};
 ```
 
 Note it also adds some info about tree shaking to the generated bundle.
@@ -642,15 +733,25 @@ The default value is an empty string `""`.
 Simple rule: The URL of your [`output.path`](#output-path) from the view of the HTML page.
 
 ```js
-path: path.resolve(__dirname, "public/assets"),
-publicPath: "https://cdn.example.com/assets/"
+module.exports = {
+  //...
+  output: {
+    path: path.resolve(__dirname, 'public/assets'),
+    publicPath: 'https://cdn.example.com/assets/'
+  }
+};
 ```
 
 For this configuration:
 
 ```js
-publicPath: "/assets/",
-chunkFilename: "[id].chunk.js"
+module.exports = {
+  //...
+  output: {
+    publicPath: '/assets/',
+    chunkFilename: '[id].chunk.js'
+  }
+};
 ```
 
 A request to a chunk will look like `/assets/4.chunk.js`.
@@ -673,19 +774,25 @@ Note that `[hash]` in this parameter will be replaced with an hash of the compil
 
 Examples:
 
-``` js
-publicPath: "https://cdn.example.com/assets/", // CDN (always HTTPS)
-publicPath: "//cdn.example.com/assets/", // CDN (same protocol)
-publicPath: "/assets/", // server-relative
-publicPath: "assets/", // relative to HTML page
-publicPath: "../assets/", // relative to HTML page
-publicPath: "", // relative to HTML page (same directory)
+```js
+module.exports = {
+  //...
+  output: {
+    // One of the below
+    publicPath: 'https://cdn.example.com/assets/', // CDN (always HTTPS)
+    publicPath: '//cdn.example.com/assets/', // CDN (same protocol)
+    publicPath: '/assets/', // server-relative
+    publicPath: 'assets/', // relative to HTML page
+    publicPath: '../assets/', // relative to HTML page
+    publicPath: '', // relative to HTML page (same directory)
+  }
+};
 ```
 
 In cases where the `publicPath` of output files can't be known at compile time, it can be left blank and set dynamically at runtime in the entry file using the [free variable](https://stackoverflow.com/questions/12934929/what-are-free-variables) `__webpack_public_path__`.
 
-``` js
- __webpack_public_path__ = myRuntimePublicPath
+```js
+__webpack_public_path__ = myRuntimePublicPath;
 
 // rest of your application entry
 ```
@@ -715,8 +822,13 @@ The `[name]`, `[id]`, `[hash]` and `[chunkhash]` substitutions from [#output-fil
 
 Change the prefix for each line in the output bundles.
 
-``` js
-sourcePrefix: "\t"
+```js
+module.exports = {
+  //...
+  output: {
+    sourcePrefix: '\t'
+  }
+};
 ```
 
 Note by default an empty string is used. Using some kind of indentation makes bundles look more pretty, but will cause issues with multi-line strings.
@@ -736,24 +848,24 @@ When set to `false`, the module is not removed from cache, which results in the 
 
 For instance, consider `module.js`:
 
-``` js
-throw new Error("error");
+```js
+throw new Error('error');
 ```
 
 With `strictModuleExceptionHandling` set to `false`, only the first `require` throws an exception:
 
-``` js
+```js
 // with strictModuleExceptionHandling = false
-require("module") // <- throws
-require("module") // <- doesn't throw
+require('module'); // <- throws
+require('module'); // <- doesn't throw
 ```
 
 Instead, with `strictModuleExceptionHandling` set to `true`, all `require`s of this module throw an exception:
 
-``` js
+```js
 // with strictModuleExceptionHandling = true
-require("module") // <- throws
-require("module") // <- also throw
+require('module'); // <- throws
+require('module'); // <- also throws
 ```
 
 
@@ -763,8 +875,13 @@ require("module") // <- also throw
 
 When using `libraryTarget: "umd"`, setting:
 
-``` js
-umdNamedDefine: true
+```js
+module.exports = {
+  //...
+  output: {
+    umdNamedDefine: true
+  }
+};
 ```
 
 will name the AMD module of the UMD build. Otherwise an anonymous `define` is used.
