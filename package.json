@@ -39,11 +39,7 @@
     "test": "npm run lint",
     "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm test"
-    }
-  },
+  
   "devDependencies": {
     "alex": "^4.1.0",
     "antwar": "^0.28.3",
