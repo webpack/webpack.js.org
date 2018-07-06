@@ -188,7 +188,7 @@ export default function(source) {
 
 ### Module Dependencies
 
-Depending the type of module, there may be a different schema used to specify dependencies. In CSS for example, the `@import` and `url(...)` statements are used. These dependencies should be resolved by the module system.
+Depending on the type of module, there may be a different schema used to specify dependencies. In CSS for example, the `@import` and `url(...)` statements are used. These dependencies should be resolved by the module system.
 
 This can be done in one of two ways:
 
