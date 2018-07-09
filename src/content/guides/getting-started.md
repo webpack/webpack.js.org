@@ -13,14 +13,17 @@ contributors:
   - TheDutchCoder
   - sudarsangp
   - Vanguard90
+  - chenxsan
   - EugeneHlushko
   - ATGardner
   - ayvarot
   - bjarki
+  - ztomasze
+  - Spiral90210
+  - byzyk
 ---
 
 Webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interface with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
-
 
 ## Basic Setup
 
@@ -113,10 +116,9 @@ There are problems with managing JavaScript projects this way:
 
 Let's use webpack to manage these scripts instead.
 
-
 ## Creating a Bundle
 
-First we'll tweak our directory structure slightly, separating the "source" code (`/src`) from our "distribution" code (`/dist`). The  "source" code is the code that we'll write and edit. The "distribution" code is the minimized and optimized `output` of our build process that will eventually be loaded in the browser:
+First we'll tweak our directory structure slightly, separating the "source" code (`/src`) from our "distribution" code (`/dist`). The "source" code is the code that we'll write and edit. The "distribution" code is the minimized and optimized `output` of our build process that will eventually be loaded in the browser:
 
 __project__
 
@@ -171,32 +173,32 @@ __dist/index.html__
    </head>
    <body>
 -    <script src="./src/index.js"></script>
-+    <script src="bundle.js"></script>
++    <script src="main.js"></script>
    </body>
   </html>
 ```
 
 In this setup, `index.js` explicitly requires `lodash` to be present, and binds it as `_` (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.
 
-With that said, let's run `npx webpack` with our script as the [entry point](/concepts/entry-points) and `bundle.js` as the [output](/concepts/output). The `npx` command, which ships with Node 8.2 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
+With that said, let's run `npx webpack`, which will take our script at `src/index.js` as the [entry point](/concepts/entry-points), and will generate `dist/main.js` as the [output](/concepts/output). The `npx` command, which ships with Node 8.2/npm 5.2.0 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
 
 ``` bash
 npx webpack
 
 Hash: dabab1bac2b940c1462b
-Version: webpack 4.0.1
-Time: 3003ms
-Built at: 2018-2-26 22:42:11
-    Asset      Size  Chunks             Chunk Names
-bundle.js  69.6 KiB       0  [emitted]  main
-Entrypoint main = bundle.js
-   [1] (webpack)/buildin/module.js 519 bytes {0} [built]
-   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [3] ./src/index.js 256 bytes {0} [built]
+Version: webpack 4.12.0
+Time: 287ms
+Built at: 13/06/2018 11:52:07
+  Asset      Size  Chunks             Chunk Names
+main.js  70.4 KiB       0  [emitted]  main
+[1] (webpack)/buildin/module.js 497 bytes {0} [built]
+[2] (webpack)/buildin/global.js 489 bytes {0} [built]
+[3] ./src/index.js 216 bytes {0} [built]
     + 1 hidden module
 
 WARNING in configuration
-The 'mode' option has not been set. Set 'mode' option to 'development' or 'production' to enable defaults for this environment.
+The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
+You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/
 ```
 
 T> Your output may vary a bit, but if the build is successful then you are good to go. Also, don't worry about the warning, we'll tackle that later.
@@ -206,9 +208,9 @@ Open `index.html` in your browser and, if everything went right, you should see 
 
 ## Modules
 
-The [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) statements have been standardized in [ES2015](https://babeljs.io/learn-es2015/). Although they are not supported in most browsers yet, webpack does support them out of the box.
+The [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) statements have been standardized in [ES2015](https://babeljs.io/learn-es2015/) and [are supported in most browsers](https://caniuse.com/#search=modules). Some older browsers still lag behind but webpack supports modules out of the box.
 
-Behind the scenes, webpack actually "transpiles" the code so that older browsers can also run it. If you inspect `dist/bundle.js`, you might be able to see how webpack does this, it's quite ingenious! Besides `import` and `export`, webpack supports various other module syntaxes as well, see [Module API](/api/module-methods) for more information.
+Behind the scenes, webpack actually "transpiles" the code so that older browsers can also run it. If you inspect `dist/main.js`, you might be able to see how webpack does this, it's quite ingenious! Besides `import` and `export`, webpack supports various other module syntaxes as well, see [Module API](/api/module-methods) for more information.
 
 Note that webpack will not alter any code other than `import` and `export` statements. If you are using other [ES2015 features](http://es6-features.org/), make sure to [use a transpiler](/loaders/#transpiling) such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/) via webpack's [loader system](/concepts/loaders/).
 
@@ -237,7 +239,7 @@ const path = require('path');
 module.exports = {
   entry: './src/index.js',
   output: {
-    filename: 'bundle.js',
+    filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
   }
 };
@@ -249,22 +251,22 @@ Now, let's run the build again but instead using our new configuration file:
 npx webpack --config webpack.config.js
 
 Hash: dabab1bac2b940c1462b
-Version: webpack 4.0.1
-Time: 328ms
-Built at: 2018-2-26 22:47:43
-    Asset      Size  Chunks             Chunk Names
-bundle.js  69.6 KiB       0  [emitted]  main
-Entrypoint main = bundle.js
-   [1] (webpack)/buildin/module.js 519 bytes {0} [built]
-   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [3] ./src/index.js 256 bytes {0} [built]
+Version: webpack 4.12.0
+Time: 283ms
+Built at: 13/06/2018 11:53:51
+  Asset      Size  Chunks             Chunk Names
+main.js  70.4 KiB       0  [emitted]  main
+[1] (webpack)/buildin/module.js 497 bytes {0} [built]
+[2] (webpack)/buildin/global.js 489 bytes {0} [built]
+[3] ./src/index.js 216 bytes {0} [built]
     + 1 hidden module
 
 WARNING in configuration
-The 'mode' option has not been set. Set 'mode' option to 'development' or 'production' to enable defaults for this environment.
+The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
+You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/
 ```
 
-W> Note that when calling `webpack` via its path on windows, you must use backslashes instead, e.g. `node_modules\.bin\webpack --config webpack.config.js`.
+W> Note that when calling `webpack` via its path on Windows, you must use backslashes instead, e.g. `node_modules\.bin\webpack --config webpack.config.js`.
 
 T> If a `webpack.config.js` is present, the `webpack` command picks it up by default. We use the `--config` option here only to show that you can pass a config of any name. This will be useful for more complex configurations that need to be split into multiple files.
 
@@ -282,7 +284,6 @@ __package.json__
     "name": "webpack-demo",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
 +     "build": "webpack"
@@ -296,7 +297,6 @@ __package.json__
       "lodash": "^4.17.5"
     }
   }
-
 ```
 
 Now the `npm run build` command can be used in place of the `npx` command we used earlier. Note that within `scripts` we can reference locally installed npm packages by name the same way we did with `npx`. This convention is the standard in most npm-based projects because it allows all contributors to use the same set of common scripts (each with flags like `--config` if necessary).
@@ -307,19 +307,19 @@ Now run the following command and see if your script alias works:
 npm run build
 
 Hash: dabab1bac2b940c1462b
-Version: webpack 4.0.1
-Time: 323ms
-Built at: 2018-2-26 22:50:25
-    Asset      Size  Chunks             Chunk Names
-bundle.js  69.6 KiB       0  [emitted]  main
-Entrypoint main = bundle.js
-   [1] (webpack)/buildin/module.js 519 bytes {0} [built]
-   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [3] ./src/index.js 256 bytes {0} [built]
+Version: webpack 4.12.0
+Time: 278ms
+Built at: 13/06/2018 11:54:54
+  Asset      Size  Chunks             Chunk Names
+main.js  70.4 KiB       0  [emitted]  main
+[1] (webpack)/buildin/module.js 497 bytes {0} [built]
+[2] (webpack)/buildin/global.js 489 bytes {0} [built]
+[3] ./src/index.js 216 bytes {0} [built]
     + 1 hidden module
 
 WARNING in configuration
-The 'mode' option has not been set. Set 'mode' option to 'development' or 'production' to enable defaults for this environment.
+The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
+You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/.
 ```
 
 T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --colors`.
@@ -336,7 +336,7 @@ webpack-demo
 |- package.json
 |- webpack.config.js
 |- /dist
-  |- bundle.js
+  |- main.js
   |- index.html
 |- /src
   |- index.js

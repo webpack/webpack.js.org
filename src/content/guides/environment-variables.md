@@ -6,6 +6,7 @@ contributors:
   - grisanu
   - tbroadley
   - legalcodes
+  - byzyk
 related:
   - title: The Fine Art of the webpack 3 Config
     url: https://blog.flennik.com/the-fine-art-of-the-webpack-2-config-dc4d19d7f172#d60a
@@ -28,15 +29,15 @@ __webpack.config.js__
 ``` js
 module.exports = env => {
   // Use env.<YOUR VARIABLE> here:
-  console.log('NODE_ENV: ', env.NODE_ENV) // 'local'
-  console.log('Production: ', env.production) // true
-  
+  console.log('NODE_ENV: ', env.NODE_ENV); // 'local'
+  console.log('Production: ', env.production); // true
+
   return {
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
       path: path.resolve(__dirname, 'dist')
     }
-  }
-}
+  };
+};
 ```
