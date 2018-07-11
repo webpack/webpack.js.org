@@ -4,6 +4,7 @@ contributors:
   - sokra
   - simon04
   - re-fort
+  - byzyk
 ---
 
 Automatically load modules instead of having to `import` or `require` them everywhere.
@@ -12,7 +13,7 @@ Automatically load modules instead of having to `import` or `require` them every
 new webpack.ProvidePlugin({
   identifier: 'module1',
   // ...
-})
+});
 ```
 
 or
@@ -21,7 +22,7 @@ or
 new webpack.ProvidePlugin({
   identifier: ['module1', 'property1'],
   // ...
-})
+});
 ```
 
 Whenever the `identifier` is encountered as free variable in a module, the `module` is loaded automatically and the `identifier` is filled with the exports of the loaded `module` (of `property` in order to support named exports).
@@ -37,7 +38,7 @@ To automatically load `jquery` we can simply point both variables it exposes to 
 new webpack.ProvidePlugin({
   $: 'jquery',
   jQuery: 'jquery'
-})
+});
 ```
 
 Then in any of our source code:
@@ -57,7 +58,7 @@ Angular looks for `window.jQuery` in order to determine whether jQuery is presen
 ```javascript
 new webpack.ProvidePlugin({
   'window.jQuery': 'jquery'
-})
+});
 ```
 
 
@@ -66,7 +67,7 @@ new webpack.ProvidePlugin({
 ```javascript
 new webpack.ProvidePlugin({
   _map: ['lodash', 'map']
-})
+});
 ```
 
 ### Usage: Vue.js
@@ -74,5 +75,5 @@ new webpack.ProvidePlugin({
 ```javascript
 new webpack.ProvidePlugin({
   Vue: ['vue/dist/vue.esm.js', 'default']
-})
+});
 ```
