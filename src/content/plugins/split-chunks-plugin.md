@@ -30,8 +30,8 @@ webpack will automatically split chunks based on these conditions:
 
 * New chunk can be shared OR modules are from the `node_modules` folder
 * New chunk would be bigger than 30kb (before min+gz)
-* Maximum number of parallel requests when loading chunks on demand would be lower or equal to 5
-* Maximum number of parallel requests at initial page load would be lower or equal to 3
+* Maximum number of parallel requests when loading chunks on demand would be lower or equal to 6
+* Maximum number of parallel requests at initial page load would be lower or equal to 4
 
 When trying to fulfill the last two conditions, bigger chunks are preferred.
 
@@ -53,8 +53,8 @@ module.exports = {
       chunks: 'async',
       minSize: 30000,
       minChunks: 1,
-      maxAsyncRequests: 5,
-      maxInitialRequests: 3,
+      maxAsyncRequests: 6,
+      maxInitialRequests: 4,
       automaticNameDelimiter: '~',
       name: true,
       cacheGroups: {
