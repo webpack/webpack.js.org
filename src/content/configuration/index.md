@@ -396,7 +396,7 @@ module.exports = {
 }
 ```
 
-T> Want to rapidly generate webpackconfig file for your project requirements with few clicks away.
+T> Want to rapidly generate webpack configuration file for your project requirements with few clicks away.
 
 [Generate Custom Webpack Configuration](https://generatewebpackconfig.netlify.com/) is an interactive portal you can play around by selecting custom webpack configuration options tailored for your frontend project. It automatically generates 
 a minimal webpack configuration based on your selection of loaders/plugins, etc.
