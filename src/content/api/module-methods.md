@@ -92,7 +92,7 @@ import(
 );
 ```
 ```js
-import(/* webpackIgnore: true */ 'ignored-module.js')
+import(/* webpackIgnore: true */ 'ignored-module.js');
 ```
 `webpackIgnore`: Disables dynamic import parsing when set to `true`.
 
