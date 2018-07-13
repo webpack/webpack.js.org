@@ -3,6 +3,7 @@ title: SplitChunksPlugin
 contributors:
   - sokra
   - jeremenichelli
+  - Priestch
   - chrisdothtml
   - EugeneHlushko
   - byzyk

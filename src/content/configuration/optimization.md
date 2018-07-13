@@ -254,3 +254,56 @@ module.exports = {
   }
 };
 ```
+
+## `optimization.occurrenceOrder`
+
+`bool`
+
+Tells webpack to figure out an order of modules which will result in the smallest initial bundle. By default `optimization.occurrenceOrder` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise. 
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    occurrenceOrder: false
+  }
+};
+```
+
+## `optimization.providedExports`
+
+`bool`
+
+Tells webpack to figure out which exports are provided by modules to generate more efficient code for `export * from ...`. By default  `optimization.providedExports` is enabled. 
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    providedExports: false
+  }
+};
+```
+
+## `optimization.usedExports`
+
+`bool`
+
+Tells webpack to determine used exports for each module. This depends on [`optimization.providedExports`](#optimization-occurrenceorder). Information collected by `optimization.usedExports` is used by other optimizations or code generation i.e. exports are not generated for unused exports, export names are mangled to single char identifiers when all usages are compatible. 
+Dead code elimination in minimizers will benefit from this and can remove unused exports.
+By default `optimization.usedExports` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise. 
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    usedExports: true
+  }
+};
+```
