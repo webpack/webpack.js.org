@@ -9,6 +9,10 @@ contributors:
   - MijaelWatts
   - dmitriid
   - probablyup
+  - gish
+  - lumo10
+  - byzyk
+  - pnevares
 related:
   - title: "webpack 4 beta — try it today!"
     url: https://medium.com/webpack/webpack-4-beta-try-it-today-6b1d27d7d7e2#9a67
@@ -20,7 +24,7 @@ related:
 
 _Tree shaking_ is a term commonly used in the JavaScript context for dead-code elimination. It relies on the [static structure](http://exploringjs.com/es6/ch_modules.html#static-module-structure) of ES2015 module syntax, i.e. [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export). The name and concept have been popularized by the ES2015 module bundler [rollup](https://github.com/rollup/rollup).
 
-The webpack 2 release came with built-in support for ES2015 modules (alias _harmony modules_) as well as unused module export detection. The new webpack 4 release expands on this capability with a way to provide hints to the compiler via the `"sideEffects"` `package.json` flag to denote which files in your project are "pure" and therefore safe to prune if unused.
+The webpack 2 release came with built-in support for ES2015 modules (alias _harmony modules_) as well as unused module export detection. The new webpack 4 release expands on this capability with a way to provide hints to the compiler via the `"sideEffects"` `package.json` property to denote which files in your project are "pure" and therefore safe to prune if unused.
 
 T> The remainder of this guide will stem from [Getting Started](/guides/getting-started). If you haven't read through that guide already, please do so now.
 
@@ -46,7 +50,7 @@ webpack-demo
 
 __src/math.js__
 
-``` javascript
+```javascript
 export function square(x) {
   return x * x;
 }
@@ -54,6 +58,24 @@ export function square(x) {
 export function cube(x) {
   return x * x * x;
 }
+```
+
+You could need to set the development mode to be sure that bundle is not minified:
+
+__webpack.config.js__
+
+``` diff
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+- }
++ },
++ mode: "development"
+};
 ```
 
 With that in place, let's update our entry script to utilize one of these new methods and remove `lodash` for simplicity:
@@ -85,20 +107,20 @@ Note that we __did not `import` the `square` method__ from the `src/math.js` mod
 
 __dist/bundle.js (around lines 90 - 100)__
 
-``` js
+```js
 /* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
+  'use strict';
+  /* unused harmony export square */
+  /* harmony export (immutable) */ __webpack_exports__['a'] = cube;
+  function square(x) {
+    return x * x;
+  }
 
-"use strict";
-/* unused harmony export square */
-/* harmony export (immutable) */ __webpack_exports__["a"] = cube;
-function square(x) {
-  return x * x;
-}
-
-function cube(x) {
-  return x * x * x;
-}
+  function cube(x) {
+    return x * x * x;
+  }
+});
 ```
 
 Note the `unused harmony export square` comment above. If you look at the code below it, you'll notice that `square` is not being imported, however, it is still included in the bundle. We'll fix that in the next section.
@@ -146,15 +168,13 @@ T> Note that any imported file is subject to tree shaking. This means if you use
 }
 ```
 
-Finally, `"sideEffects"` can also be set from the [`module.rules` config option](https://github.com/webpack/webpack/issues/6065#issuecomment-351060570).
+Finally, `"sideEffects"` can also be set from the [`module.rules` configuration option](/configuration/module/#module-rules).
 
 ## Minify the Output
 
-So we've cued up our "dead code" to be dropped by using the `import` and `export` syntax, but we still need to drop it from the bundle. To do that, we'll use the `-p` (production) webpack compilation flag to enable the uglifyjs minification plugin.
+So we've cued up our "dead code" to be dropped by using the `import` and `export` syntax, but we still need to drop it from the bundle. To do that, we'll use the `-p` (production) webpack compilation flag to enable `UglifyJSPlugin`.
 
-T> Note that the `--optimize-minimize` flag can be used to insert the `UglifyJsPlugin` as well.
-
-As of webpack 4, this is also easily toggled via the `"mode"` config option, set to `"production"`.
+As of webpack 4, this is also easily toggled via the `"mode"` configuration option, set to `"production"`.
 
 __webpack.config.js__
 
@@ -166,13 +186,13 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
-- }
-+ },
+  },
+- mode: "development"
 + mode: "production"
 };
 ```
 
-T> Note that the `--optimize-minimize` flag can be used to insert the `UglifyJSPlugin` as well.
+T> Note that the `--optimize-minimize` flag can be used to enable `UglifyJSPlugin` as well.
 
 With that squared away, we can run another `npm run build` and see if anything has changed.
 
@@ -184,7 +204,7 @@ Notice anything different about `dist/bundle.js`? Clearly the whole bundle is no
 So, what we've learned is that in order to take advantage of _tree shaking_, you must...
 
 - Use ES2015 module syntax (i.e. `import` and `export`).
-- Add a "sideEffects" entry to your project's `package.json` file.
+- Add a "sideEffects" property to your project's `package.json` file.
 - Include a minifier that supports dead code removal (e.g. the `UglifyJSPlugin`).
 
 You can imagine your application as a tree. The source code and libraries you actually use represent the green, living leaves of the tree. Dead code represents the brown, dead leaves of the tree that are consumed by autumn. In order to get rid of the dead leaves, you have to shake the tree, causing them to fall.
