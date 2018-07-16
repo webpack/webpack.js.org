@@ -145,7 +145,7 @@ __webpack.config.js__
   };
 ```
 
-With the [`SplitChunks`](/plugins/split-chunks-plugin/) in place, we should now see the duplicate dependency removed from our `index.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. Let's do an `npm run build` to see if it worked:
+With the [`SplitChunks`](/plugins/split-chunks-plugin/) in place, we should now see the duplicate dependency removed from our `index.bundle.js` and `another.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. Let's do an `npm run build` to see if it worked:
 
 ``` bash
 Hash: ac2ac6042ebb4f20ee54
