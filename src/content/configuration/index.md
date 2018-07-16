@@ -61,6 +61,7 @@ module.exports = {
     b: ["./app/entry-b1", "./app/entry-b2"]
   },
   </details>
+  // defaults to ./src
   // Here the application starts executing
   // and webpack starts bundling
   [output](/configuration/output): {
@@ -322,7 +323,7 @@ module.exports = {
   // Don't follow/bundle these modules, but request them at runtime from the environment
   [serve](https://github.com/webpack-contrib/webpack-serve#options): { //object
     port: 1337,
-    content './dist',
+    content: './dist',
     // ...
   },
   // lets you provide options for webpack-serve

@@ -24,6 +24,7 @@ contributors:
   - kcolton
   - efreitasn
   - EugeneHlushko
+  - byzyk
 related:
   - title: <link rel=”prefetch/preload”> in webpack
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -117,6 +118,8 @@ The first of these two points is definitely an issue for our example, as `lodash
 
 ## Prevent Duplication
 
+W> The CommonsChunkPlugin has been removed in webpack v4 legato. To learn how chunks are treated in the latest version, check out the [SplitChunksPlugin](/plugins/split-chunks-plugin/).
+
 The [`SplitChunks`](/plugins/split-chunks-plugin/) allows us to extract common dependencies into an existing entry chunk or an entirely new chunk. Let's use this to de-duplicate the `lodash` dependency from the previous example:
 
 __webpack.config.js__
@@ -142,7 +145,7 @@ __webpack.config.js__
   };
 ```
 
-With the [`SplitChunks`](/plugins/split-chunks-plugin/) in place, we should now see the duplicate dependency removed from our `index.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. Let's do an `npm run build` to see if it worked:
+With the [`SplitChunks`](/plugins/split-chunks-plugin/) in place, we should now see the duplicate dependency removed from our `index.bundle.js` and `another.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. Let's do an `npm run build` to see if it worked:
 
 ``` bash
 Hash: ac2ac6042ebb4f20ee54
@@ -234,7 +237,7 @@ __src/index.js__
 +   return import(/* webpackChunkName: "lodash" */ 'lodash').then(_ => {
 +     var element = document.createElement('div');
 +     var _ = _.default;
-+     
++
 +     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +
 +     return element;
@@ -308,8 +311,7 @@ __LoginButton.js__
 
 ```js
 //...
-import(/* webpackPrefetch: true */ "LoginModal");
-
+import(/* webpackPrefetch: true */ 'LoginModal');
 ```
 
 This will result in `<link rel="prefetch" href="login-modal-chunk.js">` being appended in the head of the page, which will instruct the browser to prefetch in idle time the `login-modal-chunk.js` file.
@@ -331,7 +333,7 @@ __ChartComponent.js__
 
 ```js
 //...
-import(/* webpackPreload: true */ "ChartingLibrary")
+import(/* webpackPreload: true */ 'ChartingLibrary');
 ```
 
 When a page which uses the `ChartComponent` is requested, the charting-library-chunk is also requested via `<link rel="preload">`. Assuming the page-chunk is smaller and finishes faster, the page will be displayed with a `LoadingIndicator`, until the already requested `charting-library-chunk` finishes. This will give a little load time boost since it only needs one round-trip instead of two. Especially in high-latency environments.

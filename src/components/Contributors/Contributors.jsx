@@ -14,7 +14,7 @@ export default ({contributors}) => {
             <a key={ contributor }
               className="contributor"
               href={ `https://github.com/${contributor}` }>
-              <img src={ `https://github.com/${contributor}.png?size=90` } />
+              <img alt={ contributor } src={ `https://github.com/${contributor}.png?size=90` } />
               <span className="contributor__name"> {contributor}</span>
             </a>
           ))
