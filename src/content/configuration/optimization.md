@@ -307,3 +307,21 @@ module.exports = {
   }
 };
 ```
+
+## `optimization.concatenateModules`
+
+`bool`
+
+Tells webpack to find segments of the module graph which can be safely concatenated into a single module. Depends on [`optimization.providedExports`](#optimization-providedexports) and [`optimization.usedExports`](#optimization-usedexports).
+By default `optimization.concatenateModules` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise. 
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    concatenateModules: true
+  }
+};
+```
