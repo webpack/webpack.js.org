@@ -40,7 +40,7 @@ The content is available under the [Creative Commons BY 4.0][6] license.
 
 ## Special Thanks
 
-_BrowserStack_ has graciously allowed us to do cross-browser and cross-os
+_BrowserStack_ has graciously allowed us to do cross-browser and cross-OS
 testing of the site at no cost...
 
 [![BrowserStackLogo](./browserstack-logo.png)][9]

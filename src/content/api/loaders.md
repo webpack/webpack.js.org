@@ -70,7 +70,7 @@ module.exports = function(content, map, meta) {
 };
 ```
 
-T> Loaders were originally designed to work in synchronous loader pipelines, like Node.js (using [enhanced-require](https://github.com/webpack/enhanced-require)), *and* asynchronous pipelines, like in webpack. However, since expensive synchronous computations are a bad idea in a single-threaded environment like Node.js, we advise to make your loader asynchronously if possible. Synchronous loaders are ok if the amount of computation is trivial.
+T> Loaders were originally designed to work in synchronous loader pipelines, like Node.js (using [enhanced-require](https://github.com/webpack/enhanced-require)), *and* asynchronous pipelines, like in webpack. However, since expensive synchronous computations are a bad idea in a single-threaded environment like Node.js, we advise to make your loader asynchronously if possible. Synchronous loaders are OK if the amount of computation is trivial.
 
 
 ### "Raw" Loader
@@ -375,7 +375,7 @@ addDependency(file: string)
 dependency(file: string) // shortcut
 ```
 
-Adds a file as dependency of the loader result in order to make them watchable. For example, [`html-loader`](https://github.com/webpack-contrib/html-loader) uses this technique as it finds `src` and `src-set` attributes. Then, it sets the url's for those attributes as dependencies of the html file that is parsed.
+Adds a file as dependency of the loader result in order to make them watchable. For example, [`html-loader`](https://github.com/webpack-contrib/html-loader) uses this technique as it finds `src` and `src-set` attributes. Then, it sets the URLs for those attributes as dependencies of the HTML file that is parsed.
 
 
 ### `this.addContextDependency`
@@ -435,7 +435,7 @@ Resolve a request like a require expression.
 
 ### `this.value`
 
-Pass values to the next loader. If you know what your result exports if executed as module, set this value here (as a only element array).
+Pass values to the next loader. If you know what your result exports if executed as module, set this value here (as an only element array).
 
 
 ### `this.inputValue`

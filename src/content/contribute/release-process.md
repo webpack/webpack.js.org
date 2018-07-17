@@ -22,6 +22,6 @@ npm version minor && git push --follow-tags && npm publish
 npm version major && git push --follow-tags && npm publish
 ```
 
-_This will increment the package version, commits the changes, cuts a **local tag**, push to github & publish the npm package._
+_This will increment the package version, commits the changes, cuts a **local tag**, push to GitHub & publish the npm package._
 
-After that go to the github [releases page](https://github.com/webpack/webpack/releases) and write a Changelog for the new tag.
+After that go to the GitHub [releases page](https://github.com/webpack/webpack/releases) and write a Changelog for the new tag.

@@ -70,7 +70,7 @@ __webpack.config.js__
 
 T> webpack uses a regular expression to determine which files it should look for and serve to a specific loader. In this case any file that ends with `.css` will be served to the `style-loader` and the `css-loader`.
 
-This enables you to `import './style.css'` into the file that depends on that styling. Now, when that module is run, a `<style>` tag with the stringified css will be inserted into the `<head>` of your html file.
+This enables you to `import './style.css'` into the file that depends on that styling. Now, when that module is run, a `<style>` tag with the stringified css will be inserted into the `<head>` of your HTML file.
 
 Let's try it out by adding a new `style.css` file to our project and import it in our `index.js`:
 

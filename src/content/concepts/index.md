@@ -143,7 +143,7 @@ module.exports = {
 };
 ```
 
-In the example above, the `html-webpack-plugin` generates an html file for your application injecting automatically all your generated bundles.
+In the example above, the `html-webpack-plugin` generates an HTML file for your application injecting automatically all your generated bundles.
 
 T> There are many plugins that webpack provides out of the box! Check out the [list of plugins](/plugins).
 

@@ -83,7 +83,7 @@ Depending on the config option `node.__dirname`:
 * `mock`: equal "/"
 * `true`: [node.js __dirname](https://nodejs.org/api/globals.html#globals_dirname)
 
-If used inside a expression that is parsed by the Parser, the config option is treated as `true`.
+If used inside an expression that is parsed by the Parser, the config option is treated as `true`.
 
 
 ### `__filename` (NodeJS)
@@ -94,7 +94,7 @@ Depending on the config option `node.__filename`:
 * `mock`: equal "/index.js"
 * `true`: [node.js __filename](https://nodejs.org/api/globals.html#globals_filename)
 
-If used inside a expression that is parsed by the Parser, the config option is treated as `true`.
+If used inside an expression that is parsed by the Parser, the config option is treated as `true`.
 
 
 ### `__resourceQuery` (webpack-specific)

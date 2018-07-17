@@ -36,6 +36,7 @@
     "lint:markdown": "markdownlint --config ./.markdownlint.json *.md ./src/content/**/*.md",
     "lint:social": "alex . -q",
     "lint:prose": "cp .proselintrc ~/ && proselint src/content",
+    "lint:spelling": "spellchecker --files '*.md' '.github/*.md' 'src/content/**/*.md' --quiet --no-suggestions --dictionaries dictionary.txt --plugins spell indefinite-article repeated-words syntax-mentions syntax-urls frontmatter --frontmatter-keys title related",
     "test": "npm run lint",
     "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml"
   },
@@ -103,6 +104,7 @@
     "request": "^2.81.0",
     "sass-loader": "^6.0.6",
     "sitemap-static": "^0.4.2",
+    "spellchecker-cli": "^4.0.0",
     "tap-min": "^1.2.1",
     "tap-parser": "^6.0.1",
     "through2": "^2.0.3",

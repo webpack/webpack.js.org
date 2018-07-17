@@ -60,7 +60,7 @@ Note that `related` will generate a __Further Reading__ section at the bottom of
 
 ### Code
 
-__Syntax: \`\`\`javascript … \`\`\`__
+__Syntax: \`\`\`JavaScript … \`\`\`__
 
 ```javascript
 function foo () {

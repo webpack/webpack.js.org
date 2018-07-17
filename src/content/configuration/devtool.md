@@ -64,7 +64,7 @@ T> See [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilena
 
 `original source` - You see each module separated from each other, annotated with module names. You see the code before transpilation, as you authored it. This depends on Loader support.
 
-`without source content` - Contents for the sources are not included in the Source Maps. Browsers usually try to load the source from the webserver or filesystem. You have to make sure to set [`output.devtoolModuleFilenameTemplate`](/configuration/output/#output-devtoolmodulefilenametemplate) correctly to match source urls.
+`without source content` - Contents for the sources are not included in the Source Maps. Browsers usually try to load the source from the webserver or filesystem. You have to make sure to set [`output.devtoolModuleFilenameTemplate`](/configuration/output/#output-devtoolmodulefilenametemplate) correctly to match source URLs.
 
 `(lines only)` - Source Maps are simplified to a single mapping per line. This usually means a single mapping per statement (assuming you author is this way). This prevents you from debugging execution on statement level and from settings breakpoints on columns of a line. Combining with minimizing is not possible as minimizers usually only emit a single line.
 

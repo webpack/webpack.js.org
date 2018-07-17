@@ -75,7 +75,7 @@ Reject updates for itself.
 module.hot.decline();
 ```
 
-Flag this module as not-update-able. This make sense when this module has inrevertable side-effects, or HMR handling is not implemented for this module yet. Depending on your HMR management code an update to this module (or unaccepted dependencies) usually causes a full-reload of the page.
+Flag this module as not-update-able. This make sense when this module has irreversible side-effects, or HMR handling is not implemented for this module yet. Depending on your HMR management code an update to this module (or unaccepted dependencies) usually causes a full-reload of the page.
 
 ### `dispose` (or `addDisposeHandler`)
 

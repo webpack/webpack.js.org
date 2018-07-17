@@ -56,7 +56,7 @@ Square-sized icon for smaller areas (like favicons):
 
 [svg](https://github.com/webpack/media/blob/master/logo/icon-square-small.svg) | [png](https://github.com/webpack/media/blob/master/logo/icon-square-small.png) | [jpg](https://github.com/webpack/media/blob/master/logo/icon-square-small.jpg)
 
-T> For those of you following our guidelines and have gotten this far, we've made a special smaller size image used especially for custom emoji (like in a slack or gitter channel ;))
+T> For those of you following our guidelines and have gotten this far, we've made a special smaller size image used especially for custom emoji (like in a Slack or Gitter channel ;))
 
 <img src="/assets/icon-square-small-slack.png" width="50" alt="icon square small example">
 

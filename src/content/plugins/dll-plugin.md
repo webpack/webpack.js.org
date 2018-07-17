@@ -21,7 +21,7 @@ This plugin is used in a separate webpack config exclusively to create a dll-onl
 
 * `context` (optional): context of requests in the manifest file (defaults to the webpack context.)
 * `name`: name of the exposed dll function ([TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js): `[hash]` & `[name]` )
-* `path`: **absolute path** to the manifest json file (output)
+* `path`: **absolute path** to the manifest JSON file (output)
 
 ```javascript
 new webpack.DllPlugin(options);

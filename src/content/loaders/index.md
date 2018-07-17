@@ -45,7 +45,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 * `jade-loader` Loads Jade templates and returns a function
 * `markdown-loader` Compiles Markdown to HTML
 * [`react-markdown-loader`](https://github.com/javiercf/react-markdown-loader) Compiles Markdown to a React Component using the markdown-parse parser
-* `posthtml-loader` Loads and transforms a HTML file using [PostHTML](https://github.com/posthtml/posthtml)
+* `posthtml-loader` Loads and transforms an HTML file using [PostHTML](https://github.com/posthtml/posthtml)
 * `handlebars-loader` Compiles Handlebars to HTML
 * [`markup-inline-loader`](https://github.com/asnowwolf/markup-inline-loader) Inline SVG/MathML files to HTML. It’s useful when applying icon font or applying CSS animation to SVG.
 * [`twig-loader`](https://github.com/zimmo-be/twig-loader) Compiles Twig templates and returns a function

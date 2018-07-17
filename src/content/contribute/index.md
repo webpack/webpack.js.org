@@ -35,7 +35,7 @@ Anybody can help by doing any of the following:
 
 ### Encouraging Employers
 
-You can ask your employer to improve your workflow by leveraging webpack: an all-in-one tool for fonts, images and image optimization, and json. Explain to them how webpack will attempt to bundle your code and assets the best it can for the smallest file size, leading to speedier sites and applications.
+You can ask your employer to improve your workflow by leveraging webpack: an all-in-one tool for fonts, images and image optimization, and JSON. Explain to them how webpack will attempt to bundle your code and assets the best it can for the smallest file size, leading to speedier sites and applications.
 
 ### Your Contributions
 

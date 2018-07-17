@@ -106,7 +106,7 @@ T> Note that all options can be combined like so `/* webpackMode: "lazy-once", w
 
 `webpackExclude`: A regular expression that will be matched against during import resolution. Any module that matches __will not be bundled__.
 
-T> Note that `webpackInclude` and `webpackExclude` options do not interfere with the prefix. eg: `./locale`.
+T> Note that `webpackInclude` and `webpackExclude` options do not interfere with the prefix. e.g.: `./locale`.
 
 W> Fully dynamic statements, such as `import(foo)`, __will fail__ because webpack requires at least some file location information. This is because `foo` could potentially be any path to any file in your system or project. The `import()` must contain at least some information about where the module is located, so bundling can be limited to a specific directory or set of files.
 

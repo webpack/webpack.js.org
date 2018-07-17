@@ -199,7 +199,7 @@ The `css-loader` is a good example of the first approach. It transforms dependen
 
 In the case of the `less-loader`, it cannot transform each `@import` to a `require` because all `.less` files must be compiled in one pass for variables and mixin tracking. Therefore, the `less-loader` extends the less compiler with custom path resolving logic. It then takes advantage of the second approach, `this.resolve`, to resolve the dependency through webpack.
 
-T> If the language only accepts relative urls (e.g. `url(file)` always refers to `./file`), you can use the `~` convention to specify references to installed modules (e.g. those in `node_modules`). So, in the case of `url`, that would look something like `url('~some-library/image.jpg')`.
+T> If the language only accepts relative URLs (e.g. `url(file)` always refers to `./file`), you can use the `~` convention to specify references to installed modules (e.g. those in `node_modules`). So, in the case of `url`, that would look something like `url('~some-library/image.jpg')`.
 
 ### Common Code
 

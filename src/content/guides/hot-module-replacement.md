@@ -335,7 +335,7 @@ __styles.css__
 There are many other loaders and examples out in the community to make HMR interact smoothly with a variety of frameworks and libraries...
 
 - [React Hot Loader](https://github.com/gaearon/react-hot-loader): Tweak react components in real time.
-- [Vue Loader](https://github.com/vuejs/vue-loader): This loader supports HMR for vue components out of the box.
+- [Vue Loader](https://github.com/vuejs/vue-loader): This loader supports HMR for Vue components out of the box.
 - [Elm Hot Loader](https://github.com/fluxxu/elm-hot-loader): Supports HMR for the Elm programming language.
 - [Angular HMR](https://github.com/gdi2290/angular-hmr): No loader necessary! A simple change to your main NgModule file is all that's required to have full control over the HMR APIs.
 

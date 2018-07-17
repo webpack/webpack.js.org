@@ -134,7 +134,7 @@ See [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametempla
 
 Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines.
 
-Pass a boolean to enable or disable this feature for all modules (defaults to `false`). An object with `test`, `include`, `exclude` is also allowed. For example, to enable this feature for all javascript files within a certain directory:
+Pass a boolean to enable or disable this feature for all modules (defaults to `false`). An object with `test`, `include`, `exclude` is also allowed. For example, to enable this feature for all JavaScript files within a certain directory:
 
 ```js
 module.exports = {
@@ -404,7 +404,7 @@ The variable `MyLibrary` will be bound with the return value of your entry file,
 
 W> Note that if an `array` is provided as an `entry` point, only the last module in the array will be exposed. If an `object` is provided, it can exposed using an `array` syntax (see [this example](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) for details).
 
-T> Read the [authoring libraries guide](/guides/author-libraries) guide for more information on `output.library` as well as `output.libraryTarget`.
+T> Read the [authoring libraries guide](/guides/author-libraries) for more information on `output.library` as well as `output.libraryTarget`.
 
 
 ## `output.libraryExport`
@@ -671,7 +671,7 @@ Module proof library.
 
 ### Other Targets
 
-`libraryTarget: "jsonp"` - This will wrap the return value of your entry point into a jsonp wrapper.
+`libraryTarget: "jsonp"` - This will wrap the return value of your entry point into a JSONP wrapper.
 
 ``` javascript
 MyLibrary(_entry_return_);
@@ -695,7 +695,7 @@ module.exports = {
 };
 ```
 
-Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching) for details.
+Note that `[hash]` in this parameter will be replaced with a hash of the compilation. See the [Caching guide](/guides/caching) for details.
 
 
 ## `output.pathinfo`
@@ -770,7 +770,7 @@ background-image: url(/assets/spinner.gif);
 
 The webpack-dev-server also takes a hint from `publicPath`, using it to determine where to serve the output files from.
 
-Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching) for details.
+Note that `[hash]` in this parameter will be replaced with a hash of the compilation. See the [Caching guide](/guides/caching) for details.
 
 Examples:
 

@@ -101,7 +101,7 @@ This will form the bundle with both the files as separate entry points.
 
 W> Note that Command Line Interface has a higher precedence for the arguments you use it with than your configuration file. For instance, if you pass [`--mode="production"`](/concepts/mode/#usage) to webpack CLI and your configuration file uses `development`, `production` will be used.
 
-**List all of the options available on the cli**
+**List all of the options available on the CLI**
 
 ```bash
 webpack --help
@@ -153,10 +153,10 @@ T> See the [environment variables](/guides/environment-variables) guide for more
 Parameter                 | Explanation                                 | Input type | Default
 ------------------------- | ------------------------------------------- | ---------- | ------------------
 `--config`                | Path to the config file                     | string     | webpack.config.js or webpackfile.js
-`--config-register, -r`   | Preload one or more modules before loading the webpack configuration | array | 
-`--config-name`           | Name of the config to use                   | string     | 
-`--env`                   | Environment passed to the config, when it is a function | 
-`--mode`                  | Mode to use, either "development" or "production" | string      | 
+`--config-register, -r`   | Preload one or more modules before loading the webpack configuration | array |
+`--config-name`           | Name of the config to use                   | string     |
+`--env`                   | Environment passed to the config, when it is a function |
+`--mode`                  | Mode to use, either "development" or "production" | string      |
 
 ### Output Options
 
@@ -214,7 +214,7 @@ Parameter    | Explanation                                      | Input type | D
 `--debug`    | Switch loaders to debug mode                     | boolean    | false
 `--devtool`  | Define [source map type](/configuration/devtool/) for the bundled resources | string | -
 `--progress` | Print compilation progress in percentage         | boolean    | false
-`--display-error-details` | Display details about errors | boolean | false 
+`--display-error-details` | Display details about errors | boolean | false
 
 ### Module Options
 

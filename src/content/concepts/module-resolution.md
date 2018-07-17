@@ -60,7 +60,7 @@ You can replace the original module path by an alternate path by creating an ali
 Once the path is resolved based on the above rule, the resolver checks to see if the path points to a file or a directory. If the path points to a file:
 
 * If the path has a file extension, then the file is bundled straightaway.
-* Otherwise, the file extension is resolved using the [`resolve.extensions`](/configuration/resolve/#resolve-extensions) option, which tells the resolver which extensions (eg - `.js`, `.jsx`) are acceptable for resolution.
+* Otherwise, the file extension is resolved using the [`resolve.extensions`](/configuration/resolve/#resolve-extensions) option, which tells the resolver which extensions (e.g. - `.js`, `.jsx`) are acceptable for resolution.
 
 If the path points to a folder, then the following steps are taken to find the right file with the right extension:
 

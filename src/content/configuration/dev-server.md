@@ -503,7 +503,7 @@ module.exports = {
 
 `boolean`
 
-Output cli information. It is enabled by default.
+Output CLI information. It is enabled by default.
 
 ```bash
 webpack-dev-server --info=false
@@ -533,7 +533,7 @@ Usage via the CLI
 webpack-dev-server --inline=false
 ```
 
-T> Inline mode is recommended for Hot Module Replacement as it includes an HMR trigger from the websocket. Polling mode can be used as an alternative, but requires an additional entry point, `'webpack/hot/poll?1000'`.
+T> Inline mode is recommended for Hot Module Replacement as it includes an HMR trigger from the WebSocket. Polling mode can be used as an alternative, but requires an additional entry point, `'webpack/hot/poll?1000'`.
 
 
 ## `devServer.lazy` 🔑
@@ -783,7 +783,7 @@ Sometimes you don't want to proxy everything. It is possible to bypass the proxy
 
 In the function you get access to the request, response and proxy options. It must return either `false` or a path that will be served instead of continuing to proxy the request.
 
-E.g. for a browser request, you want to serve a HTML page, but for an API request you want to proxy it. You could do something like this:
+E.g. for a browser request, you want to serve an HTML page, but for an API request you want to proxy it. You could do something like this:
 
 ```js
 module.exports = {
