@@ -35,12 +35,25 @@ The following options are supported:
 
 T> Setting `module` and/or `columns` to `false` will yield less accurate source maps but will also improve compilation performance significantly.
 
-T> When using this plugin in [development mode](/concepts/mode/#mode-development), you must manually set `devTools: false`.
-
+T> When using this plugin in [development mode](/concepts/mode/#mode-development), you must manually set `devtool: false`.
 
 ## Examples
 
 The following examples demonstrate some common use cases for this plugin.
+
+### Basic Use Case
+
+To write out `devtool: eval-source-map` using the plugin you can use the following configuration:
+
+```js
+module.exports = {
+  // ...
+  devtool: false,
+  plugins: [
+    new webpack.EvalSourceMapDevToolPlugin({})
+  ]
+}
+```
 
 ### Exclude Vendor Maps
 
