@@ -52,7 +52,7 @@ module.exports = {
   plugins: [
     new webpack.EvalSourceMapDevToolPlugin({})
   ]
-}
+};
 ```
 
 ### Exclude Vendor Maps

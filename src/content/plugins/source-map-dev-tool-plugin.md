@@ -60,7 +60,7 @@ module.exports = {
   plugins: [
     new webpack.SourceMapDevToolPlugin({})
   ]
-}
+};
 ```
 
 ### Exclude Vendor Maps
