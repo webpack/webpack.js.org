@@ -35,6 +35,8 @@ The following options are supported:
 
 T> Setting `module` and/or `columns` to `false` will yield less accurate source maps but will also improve compilation performance significantly.
 
+T> When using this plugin in [development mode](/concepts/mode/#mode-development), you must manually set `devTools: false`.
+
 
 ## Examples
 

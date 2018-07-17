@@ -41,6 +41,8 @@ The `fileContext` option is useful when you want to store source maps in an uppe
 
 T> Setting `module` and/or `columns` to `false` will yield less accurate source maps but will also improve compilation performance significantly.
 
+T> When using this plugin in [development mode](/concepts/mode/#mode-development), you must manually set `devTools: false`.
+
 W> Remember that when using the [`UglifyJSPlugin`](/plugins/uglifyjs-webpack-plugin), you must utilize the `sourceMap` option.
 
 ## Examples

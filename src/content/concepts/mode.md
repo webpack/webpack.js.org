@@ -49,6 +49,7 @@ T> Please remember that setting `NODE_ENV` doesn't automatically set `mode`.
 // webpack.development.config.js
 module.exports = {
 + mode: 'development'
+- devtool: 'eval',
 - plugins: [
 -   new webpack.NamedModulesPlugin(),
 -   new webpack.NamedChunksPlugin(),
