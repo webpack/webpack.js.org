@@ -4,11 +4,12 @@ branches:
     - develop
 language: node_js
 node_js:
-  - "6"
-script:
-  - bash ./src/scripts/deploy.sh
+  - "8"
 sudo: required
 install:
-  - npm install --global yarn
   - yarn
   - sudo pip install proselint
+before_script:
+  - source ./src/scripts/env.sh
+script:
+  - bash ./src/scripts/deploy.sh

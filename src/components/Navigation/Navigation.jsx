@@ -37,16 +37,19 @@ export default class Navigation extends React.Component {
             }) }
           </nav>
 
-          <div className="navigation__search">
+          <div role="search" className="navigation__search">
             <input
-              type="text"
+              aria-label="Search documentation"
+              type="search"
               className="navigation__search-input"
               placeholder="Search documentation…"
               onBlur={ this._toggleSearch.bind(this) } />
             <button
+              aria-label="Open search"
               className="navigation__search-icon icon-magnifying-glass"
               onClick={ this._toggleSearch.bind(this) } />
             <button
+              aria-label="Close search"
               className="navigation__search-icon icon-cross"
               onClick={ this._toggleSearch.bind(this) } />
           </div>
@@ -54,28 +57,30 @@ export default class Navigation extends React.Component {
           <Link
             className="navigation__icon"
             title="GitHub Repository"
+            aria-label="GitHub Repository"
             to="//github.com/webpack/webpack">
-            <i className="sidecar__icon icon-github" />
+            <i aria-hidden="true" className="sidecar__icon icon-github" />
           </Link>
 
           <Link
             className="navigation__icon"
             title="See Questions on Stack Overflow"
+            aria-label="See Questions on Stack Overflow"
             to="//stackoverflow.com/questions/tagged/webpack">
-            <i className="sidecar__icon icon-stack-overflow" />
+            <i aria-hidden="true" className="sidecar__icon icon-stack-overflow" />
           </Link>
 
           <Dropdown
             className="navigation__languages"
             items={[
               { title: 'English', url: 'https://webpack.js.org/' },
-              { title: '中文', url: 'https://doc.webpack-china.org/' }
+              { title: '中文', url: 'https://webpack.docschina.org/' }
             ]} />
         </Container>
 
         { Links.filter(link => this._isActive(link) && link.children).map(link => (
           <div className="navigation__bottom" key={ link.title }>
-            <Container className="navigation__inner">
+            <nav className="container navigation__inner">
               {
                 link.children.map(child => {
                   let activeMod = this._isActive(child) ? 'navigation__child--active' : '';
@@ -90,7 +95,7 @@ export default class Navigation extends React.Component {
                   );
                 })
               }
-            </Container>
+            </nav>
           </div>
         )) }
       </header>
@@ -131,10 +136,10 @@ export default class Navigation extends React.Component {
 
     if (link.children) {
       return link.children.some(child => {
-        return (new RegExp("^/" + child.url + ".*/")).test(pageUrl);
+        return (new RegExp("^/" + child.url + ".*")).test(pageUrl);
       });
 
-    } else return (new RegExp("^/" + link.url +".*/")).test(pageUrl);
+    } else return (new RegExp("^/" + link.url +".*")).test(pageUrl);
   }
 
   /**
