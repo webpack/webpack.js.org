@@ -35,8 +35,11 @@ fetchStarterKits() {
 if [ "$TRAVIS_PULL_REQUEST" = "" ]
 then
   fetchPackages
+  fetchSupporters
+  fetchStarterKits
 else
   echo "PR running, not fetching packages."
+  # This content is still needed
   fetchSupporters
   fetchStarterKits
 fi
