@@ -7,7 +7,7 @@ cp -rf ./src/content/loaders/ ./generated/loaders
 mkdir -p ./generated/plugins
 cp -rf ./src/content/plugins/ ./generated/plugins
 
-function fetchPackages() {
+fetchPackages() {
   # Fetch webpack-contrib (and various other) loader repositories
   node ./src/scripts/fetch_packages.js "webpack-contrib" "-loader" "README.md" "./generated/loaders"
   node ./src/scripts/fetch_packages.js "babel" "babel-loader" "README.md" "./generated/loaders"
