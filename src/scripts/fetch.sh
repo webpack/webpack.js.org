@@ -22,10 +22,10 @@ fetchPackages() {
   rm ./generated/plugins/component-webpack-plugin.json ./generated/plugins/component-webpack-plugin.md
 }
 
-if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]; then
-  echo "PR running, not fetching packages."
-else
+if [ "$TRAVIS_PULL_REQUEST" = "" ]; then
   fetchPackages
+else
+  echo "PR running, not fetching packages."
 fi
 
 # Fetch sponsors and backers from opencollective
