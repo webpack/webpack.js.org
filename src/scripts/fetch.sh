@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e # Exit with nonzero exit code if anything fails
 
+SOURCE_BRANCH="master"
+
 rm -rf ./generated
 mkdir -p ./generated/loaders
 cp -rf ./src/content/loaders/ ./generated/loaders
