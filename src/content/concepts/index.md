@@ -134,7 +134,6 @@ const config = {
     ]
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin(),
     new HtmlWebpackPlugin({template: './src/index.html'})
   ]
 };
