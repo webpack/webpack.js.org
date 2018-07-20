@@ -5,7 +5,7 @@ contributors:
   - EugeneHlushko
 ---
 
-The `AutomaticPrefetchPlugin` discovers __all modules__ from the previous compilation earlier when watching for changes to try and improve the incremental build times. Compared to [`PrefetchPlugin`](/plugins/prefetch-plugin/) which discovers a __single module__ earlier.
+The `AutomaticPrefetchPlugin` discovers __all modules__ from the previous compilation upfront while watching for changes, trying to improve the incremental build times. Compared to [`PrefetchPlugin`](/plugins/prefetch-plugin/) which discovers a __single module__ upfront.
 
 W> May or may not have a performance benefit since the incremental build times are pretty fast.
 
