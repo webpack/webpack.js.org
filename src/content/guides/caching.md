@@ -304,18 +304,19 @@ __webpack.config.js__
       new HtmlWebpackPlugin({
         title: 'Caching'
       }),
-+     new webpack.HashedModuleIdsPlugin(),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor'
-      }),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'manifest'
-      })
++     new webpack.HashedModuleIdsPlugin()
     ],
     output: {
       filename: '[name].[chunkhash].js',
       path: path.resolve(__dirname, 'dist')
-    }
+    },
+    optimization: {
+      splitChunks: {
+        name: 'vendor',
+      },
+      splitChunks: {
+        name: 'manifest',
+      }
   };
 ```
 
