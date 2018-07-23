@@ -13,16 +13,16 @@ const { restructure } = require('../utilities/content-tree-enhancers.js');
 if (require.main === module) {
   main();
 } else {
-  module.exports = buildContentTeee;
+  module.exports = buildContentTree;
 }
 
 function main() {
   const source = process.argv[2];
   const output = process.argv[3];
-  buildContentTeee(source, output);
+  buildContentTree(source, output);
 }
 
-function buildContentTeee(source, output) {
+function buildContentTree(source, output) {
   if(!source) {
     return console.error('build-content-tree: you must provide a source path');
   }
