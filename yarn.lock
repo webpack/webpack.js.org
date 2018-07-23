@@ -4106,6 +4106,10 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
+javascriptstuff-db@^1.12.0:
+  version "1.12.0"
+  resolved "http://registry.npm.taobao.org/javascriptstuff-db/download/javascriptstuff-db-1.12.0.tgz#7e03ec0d3031fa9e26677e178cc2509b2abcfc6d"
+
 js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.3.tgz#2e545ec2b0f2957f41356510205214e98fad6582"
@@ -7487,10 +7491,6 @@ to-vfile@^2.0.0:
     is-buffer "^1.1.4"
     vfile "^2.0.0"
     x-is-function "^1.0.4"
-
-tool-list@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/tool-list/-/tool-list-0.11.0.tgz#1f08d274ac86be6a38b2068734e7eeba1135c316"
 
 toposort@^1.0.0:
   version "1.0.6"
