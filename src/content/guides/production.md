@@ -16,6 +16,7 @@ contributors:
   - kelset
   - xgirma
   - mehrdaad
+  - SevenOutman
 ---
 
 In this guide we'll dive into some of the best practices and utilities for building a production site or application.
@@ -184,6 +185,8 @@ T> Avoid `inline-***` and `eval-***` use in production as they can increase bund
 
 
 ## Specify the Environment
+
+T> Since webpack v4, you no longer need to manually specify the environment if you already have [`mode`](https://webpack.js.org/concepts/mode/) set correctly.
 
 Many libraries will key off the `process.env.NODE_ENV` variable to determine what should be included in the library. For example, when not in _production_ some libraries may add additional logging and testing to make debugging easier. However, with `process.env.NODE_ENV === 'production'` they might drop or add significant portions of code to optimize how things run for your actual users. We can use webpack's built in [`DefinePlugin`](/plugins/define-plugin) to define this variable for all our dependencies:
 
