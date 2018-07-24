@@ -25,7 +25,7 @@ config as follows:
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
 
-var webpackConfig = {
+module.exports = {
   entry: 'index.js',
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -60,7 +60,7 @@ then these will be included with `<link>` tags in the HTML head.
 
 ## Configuration
 
-For all configuration options, please see the [plugin documentation](https://github.com/jantimon/html-webpack-plugin#configuration).
+For all configuration options, please see the [plugin documentation](https://github.com/jantimon/html-webpack-plugin#options).
 
 
 ## Third party addons
