@@ -15,7 +15,7 @@ module.exports = function processREADME(body, options = {}) {
     .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-plugin\/?)([)"])/g, '/plugins/$2/$3')
     // Replace local github links with absolute links to the github location
     // EXAMPLE: [Contributing](./.github/CONTRIBUTING.md)
-    .replace(/\[([^\]]*)\]\((\.[^)]+)\)/g, (markdownLink, content, href) => `[${content}](${Url.resolve(options.source, href)})`)
+    .replace(/\[([^\]]*)\]\(([^)]+)\)/g, (markdownLink, content, href) => `[${content}](${Url.resolve(options.source, href)})`)
     // Replace any <h2> with `##`
     .replace(/<h2[^>]*>/g, '## ')
     .replace(/<\/h2>/g, '')
