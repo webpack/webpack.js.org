@@ -79,7 +79,7 @@ function fetchPackageFiles(options, cb) {
       .then(body => {
         // modify README to fit page structure in site
         if (body && file === 'README.md') {
-          body = processReadme(body);
+          body = processReadme(body, { source: url });
         }
 
         let title = pkg.name;
