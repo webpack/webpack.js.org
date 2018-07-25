@@ -319,7 +319,6 @@ Now, despite any new local dependencies, our `vendor` hash should stay consisten
 Hash: 17c37ce65c84b8ed5eb8
 Version: webpack 4.16.2
 Time: 637ms
-Built at: 2018-07-24 18:32:46
                           Asset       Size  Chunks             Chunk Names
    main.216e852f60c8829c2289.js  340 bytes       0  [emitted]  main
 vendors.55e79e5927a639d21a1b.js   69.5 KiB       1  [emitted]  vendors
@@ -369,7 +368,6 @@ And finally run our build again:
 Hash: 70fb9e00dee0bada797d
 Version: webpack 4.16.2
 Time: 875ms
-Built at: 2018-07-24 18:33:50
                           Asset       Size  Chunks             Chunk Names
    main.ad717f2466ce655fff5c.js  274 bytes       0  [emitted]  main
 vendors.55e79e5927a639d21a1b.js   69.5 KiB       1  [emitted]  vendors
