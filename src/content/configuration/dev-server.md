@@ -978,7 +978,7 @@ webpack-dev-server --socket socket
 
 ## `devServer.staticOptions`
 
-It is possible to configure advanced options for serving static files from `contentBase`. See the [Express documentation](http://expressjs.com/en/4x/api.html#express.static) for the possible options. An example:
+It is possible to configure advanced options for serving static files from `contentBase`. See the [Express documentation](https://expressjs.com/en/4x/api.html#express.static) for the possible options. An example:
 
 ```js
 module.exports = {

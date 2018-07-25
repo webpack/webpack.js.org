@@ -16,7 +16,7 @@ webpack accepts configuration files written in multiple programming and data lan
 
 ## TypeScript
 
-To write the webpack configuration in [TypeScript](http://www.typescriptlang.org/), you would first install the necessary dependencies:
+To write the webpack configuration in [TypeScript](https://www.typescriptlang.org/), you would first install the necessary dependencies:
 
 ``` bash
 npm install --save-dev typescript ts-node @types/node @types/webpack
@@ -90,7 +90,7 @@ __package.json__
 
 ## CoffeeScript
 
-Similarly, to use [CoffeeScript](http://coffeescript.org/), you would first install the necessary dependencies:
+Similarly, to use [CoffeeScript](https://coffeescript.org/), you would first install the necessary dependencies:
 
 ``` bash
 npm install --save-dev coffee-script

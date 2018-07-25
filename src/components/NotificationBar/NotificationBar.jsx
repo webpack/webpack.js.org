@@ -20,7 +20,7 @@ class MessageBar extends React.Component {
         <Container className="notification-bar__inner">
           <p>
             Sponsor webpack and get apparel from the <a href="https://webpack.threadless.com">official shop</a> or get
-            stickers <a href="http://www.unixstickers.com/tag/webpack">here</a>! All proceeds go to our{' '}
+            stickers <a href="https://www.unixstickers.com/tag/webpack">here</a>! All proceeds go to our{' '}
             <a href="https://opencollective.com/webpack">open collective</a>!
           </p>
           {localStorageIsEnabled ? (
