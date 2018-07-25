@@ -325,3 +325,22 @@ module.exports = {
   }
 };
 ```
+
+## `optimization.sideEffects`
+
+`bool`
+
+Tells webpack to recognise the sideEffects flag in `package.json` or rules to skip over modules which are flagged to contain no side effects when exports are not used. `optimization.sideEffects` depends on [`optimization.providedExports`](#optimization-providedexports) and [`optimization.usedExports`](#optimization-usedexports). These dependencies have a build time cost, but eliminating modules has positive impact on performance because of less code generation. Effect of this optimization depends on your codebase, try it for possible performance wins.
+
+By default `optimization.sideEffects` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise. 
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    sideEffects: true
+  }
+};
+```
