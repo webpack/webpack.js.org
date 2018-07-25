@@ -26,7 +26,7 @@
       color: inherit;
     }
 
-    a {
+    a[aria-hidden="true"] {
       margin-left: 8px;
       font-size: 0.8em;
       height: 1em;
@@ -35,7 +35,7 @@
       transition: all 250ms;
     }
 
-    &:hover a {
+    &:hover a[aria-hidden="true"] {
       opacity: 1;
       visibility: visible;
     }
