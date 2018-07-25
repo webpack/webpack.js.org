@@ -1,5 +1,4 @@
 import React from 'react';
-import TrimEnd from 'lodash/trimEnd';
 import Url from 'url';
 import './PageLinks.scss';
 
