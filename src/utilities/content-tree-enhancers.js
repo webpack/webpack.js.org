@@ -1,18 +1,22 @@
 const fs = require('fs');
+const path = require('path');
 const frontMatter = require('front-matter');
 const remark = require('remark');
 const slug = require('remark-slug');
 const extractAnchors = require('remark-extract-anchors');
 
 const enhance = (tree, options) => {
+
   // delete `./` root directory on node
-  const dir = options.dir.replace(/^(\.\/)/gm, '');
+  const dir = path.normalize(options.dir).replace(/^(\.\/)/gm, '');
 
   tree.url = tree.path
     // delete `.md` extensions
     .replace(tree.extension, '')
     // delete source content directory
     .replace(dir, '')
+    // Normalize url for Windows
+    .replace(/\\/g, "/")
     // remove `index` for root urls
     .replace(/\/index$/, '')
     // replace empty strings with `/`
@@ -42,7 +46,9 @@ const enhance = (tree, options) => {
 
     tree.anchors = anchors;
 
-    Object.assign(tree, attributes);
+    Object.assign(tree, {
+      path: tree.path.replace(/\\/g, "/")
+    }, attributes);
   }
 };
 
