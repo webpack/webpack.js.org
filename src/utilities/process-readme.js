@@ -10,12 +10,13 @@ module.exports = function processREADME(body, options = {}) {
     .replace(/<h1.*?>.+?<\/h1>/, '')
     .replace(/# .+/, '')
     .replace(/.*\n=+/, '')
+    // Replace local github links with absolute links to the github location
+    // EXAMPLE: [Contributing](./.github/CONTRIBUTING.md)
+    // EXAMPLE: [Contributing](CONTRIBUTING.md)
+    .replace(/\[([^\]]*)\]\(([^)]+)\)/g, (markdownLink, content, href) => `[${content}](${Url.resolve(options.source, href)})`)
     // Modify links to keep them within the site
     .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-loader\/?)([)"])/g, '/loaders/$2/$3')
     .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-plugin\/?)([)"])/g, '/plugins/$2/$3')
-    // Replace local github links with absolute links to the github location
-    // EXAMPLE: [Contributing](./.github/CONTRIBUTING.md)
-    .replace(/\[([^\]]*)\]\(([^)]+)\)/g, (markdownLink, content, href) => `[${content}](${Url.resolve(options.source, href)})`)
     // Replace any <h2> with `##`
     .replace(/<h2[^>]*>/g, '## ')
     .replace(/<\/h2>/g, '')
