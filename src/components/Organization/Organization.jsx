@@ -8,7 +8,7 @@ import './Organization.scss';
 
 const Organization = props => {
   return (
-    <Container className="organization page__content">
+    <Container className="organization page__content markdown">
       <h1>The Organization</h1>
 
       <p>The list below provides a brief overview of all commonly used projects in the webpack ecosystem.</p>

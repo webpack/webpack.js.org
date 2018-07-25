@@ -12,7 +12,12 @@ const contentTree = require('./src/_content.json');
 const common = require('./webpack.common.js');
 
 // content tree to path array
-const paths = flattenContentTree(contentTree);
+const paths = [
+  ...flattenContentTree(contentTree),
+  '/vote',
+  '/organization',
+  '/starter-kits'
+];
 
 // Prod only config
 const prod = {

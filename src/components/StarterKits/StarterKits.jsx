@@ -11,7 +11,7 @@ import './StarterKits.scss';
 // to allow sorting and such.
 
 const StarterKits = props => (
-  <Container className="starter-kits page__content">
+  <Container className="starter-kits page__content markdown">
     <h1>Starter Kits</h1>
 
     <p>
