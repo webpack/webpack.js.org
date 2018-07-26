@@ -52,7 +52,7 @@ There are three ways to use loaders in your application:
 ### Configuration
 
 [`module.rules`](/configuration/module/#module-rules) allows you to specify several loaders within your webpack configuration.
-This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader:
+This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader. Loaders work in a backwards order, from the last one to the first one. The sass loader will work first compiling your sass to css and then it will call the css loader and then the style loader. In order for the sass loader to work it needs to be at the end as sass will be the first thing that gets compiled. If you are not working with sass then you won't need the sass-loader.
 
 ```js-with-links-with-details
 module.exports = {
@@ -67,7 +67,8 @@ module.exports = {
             options: {
               modules: true
             }
-          }
+          },
+          { loader: ['sass-loader'](/loaders/sass-loader) }
         ]
       }
     ]
