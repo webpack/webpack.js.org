@@ -18,7 +18,7 @@ These options change how modules are resolved. webpack provides reasonable defau
 
 `object`
 
-Configure how modules are resolved. For example, when calling `import "lodash"` in ES2015, the `resolve` options can change where webpack goes to look for `"lodash"` (see [`modules`](#resolve-modules)).
+Configure how modules are resolved. For example, when calling `import "lodash"` in ES2015, the `resolve` options can change where webpack goes to look for `"lodash"` (see [`modules`](#resolvemodules)).
 
 
 ### `resolve.alias`

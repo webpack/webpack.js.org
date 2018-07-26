@@ -20,7 +20,7 @@ The top-level `output` key contains set of options instructing webpack on how an
 
 `string` `object`
 
-When used in tandem with [`output.library`](#output-library) and [`output.libraryTarget`](#output-librarytarget), this option allows users to insert comments within the export wrapper. To insert the same comment for each `libraryTarget` type, set `auxiliaryComment` to a string:
+When used in tandem with [`output.library`](#outputlibrary) and [`output.libraryTarget`](#outputlibrarytarget), this option allows users to insert comments within the export wrapper. To insert the same comment for each `libraryTarget` type, set `auxiliaryComment` to a string:
 
 ```js
 module.exports = {
@@ -77,11 +77,11 @@ module.exports = {
 
 `string`
 
-This option determines the name of non-entry chunk files. See [`output.filename`](#output-filename) option for details on the possible values.
+This option determines the name of non-entry chunk files. See [`output.filename`](#outputfilename) option for details on the possible values.
 
 Note that these filenames need to be generated at runtime to send the requests for chunks. Because of this, placeholders like `[name]` and `[chunkhash]` need to add a mapping from chunk id to placeholder value to the output bundle with the webpack runtime. This increases the size and may invalidate the bundle when placeholder value for any chunk changes.
 
-By default `[id].js` is used or a value inferred from [`output.filename`](#output-filename) (`[name]` is replaced with `[id]` or `[id].` is prepended).
+By default `[id].js` is used or a value inferred from [`output.filename`](#outputfilename) (`[name]` is replaced with `[id]` or `[id].` is prepended).
 
 
 ## `output.chunkLoadTimeout`
@@ -122,7 +122,7 @@ Allows customization of the `script` type webpack injects `script` tags into the
 
 A fallback used when the template string or function above yields duplicates.
 
-See [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametemplate).
+See [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate).
 
 
 ## `output.devtoolLineToLine`
@@ -188,14 +188,14 @@ module.exports = {
 };
 ```
 
-If multiple modules would result in the same name, [`output.devtoolFallbackModuleFilenameTemplate`](#output-devtoolfallbackmodulefilenametemplate) is used instead for these modules.
+If multiple modules would result in the same name, [`output.devtoolFallbackModuleFilenameTemplate`](#outputdevtoolfallbackmodulefilenametemplate) is used instead for these modules.
 
 
 ## `output.devtoolNamespace`
 
 `string`
 
-This option determines the modules namespace used with the [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametemplate). When not specified, it will default to the value of: [`output.library`](#output-library). It's used to prevent source file path collisions in sourcemaps when loading multiple libraries built with webpack.
+This option determines the modules namespace used with the [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate). When not specified, it will default to the value of: [`output.library`](#outputlibrary). It's used to prevent source file path collisions in sourcemaps when loading multiple libraries built with webpack.
 
 For example, if you have 2 libraries, with namespaces `library1` and `library2`, which both have a file `./src/index.js` (with potentially different contents), they will expose these files as `webpack://library1/./src/index.js` and `webpack://library2/./src/index.js`.
 
@@ -204,7 +204,7 @@ For example, if you have 2 libraries, with namespaces `library1` and `library2`,
 
 `string` `function`
 
-This option determines the name of each output bundle. The bundle is written to the directory specified by the [`output.path`](#output-path) option.
+This option determines the name of each output bundle. The bundle is written to the directory specified by the [`output.path`](#outputpath) option.
 
 For a single [`entry`](/configuration/entry-context#entry) point, this can be a static name.
 
@@ -267,7 +267,7 @@ Make sure to read the [Caching guide](/guides/caching) for details. There are mo
 
 Note this option is called filename but you are still allowed to use something like `"js/[name]/bundle.js"` to create a folder structure.
 
-Note this option does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#output-chunkfilename) option is used. Files created by loaders also aren't affected. In this case you would have to try the specific loader's available options.
+Note this option does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#outputchunkfilename) option is used. Files created by loaders also aren't affected. In this case you would have to try the specific loader's available options.
 
 The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
 
@@ -279,7 +279,7 @@ The following substitutions are available in template strings (via webpack's int
 | [id]        | The module identifier                                                               |
 | [query]     | The module query, i.e., the string following `?` in the filename                    |
 
-The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#output-hashdigestlength) to configure the length globally.
+The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#outputhashdigestlength) to configure the length globally.
 
 If using a function for this option, the function will be passed an object containing the substitutions in the table above.
 
@@ -322,7 +322,7 @@ An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.
 
 `string` `function`
 
-Customize the filenames of hot update chunks. See [`output.filename`](#output-filename) option for details on the possible values.
+Customize the filenames of hot update chunks. See [`output.filename`](#outputfilename) option for details on the possible values.
 
 The only placeholders allowed here are `[id]` and `[hash]`, the default being:
 
@@ -346,14 +346,14 @@ Only used when [`target`](/configuration/target) is web, which uses JSONP for lo
 
 A JSONP function used to asynchronously load hot-update chunks.
 
-For details see [`output.jsonpFunction`](#output-jsonpfunction).
+For details see [`output.jsonpFunction`](#outputjsonpfunction).
 
 
 ## `output.hotUpdateMainFilename`
 
 `string` `function`
 
-Customize the main hot update filename. See [`output.filename`](#output-filename) option for details on the possible values.
+Customize the main hot update filename. See [`output.filename`](#outputfilename) option for details on the possible values.
 
 `[hash]` is the only available placeholder, the default being:
 
@@ -379,7 +379,7 @@ A JSONP function name used to asynchronously load chunks or join multiple initia
 
 This needs to be changed if multiple webpack runtimes (from different compilation) are used on the same webpage.
 
-If using the [`output.library`](#output-library) option, the library name is automatically appended.
+If using the [`output.library`](#outputlibrary) option, the library name is automatically appended.
 
 
 ## `output.library`
@@ -388,7 +388,7 @@ If using the [`output.library`](#output-library) option, the library name is aut
 
 `string` or `object` (since webpack 3.1.0; for `libraryTarget: "umd"`)
 
-How the value of the `output.library` is used depends on the value of the [`output.libraryTarget`](#output-librarytarget) option; please refer to that section for the complete details. Note that the default option for `output.libraryTarget` is `var`, so if the following configuration option is used:
+How the value of the `output.library` is used depends on the value of the [`output.libraryTarget`](#outputlibrarytarget) option; please refer to that section for the complete details. Note that the default option for `output.libraryTarget` is `var`, so if the following configuration option is used:
 
 ```js
 module.exports = {
@@ -450,7 +450,7 @@ MySubModule.doSomething();
 
 > Default: `"var"`
 
-Configure how the library will be exposed. Any one of the following options can be used. Please note that this option works in conjunction with the value assigned to [`output.library`](#output-library). For the following examples, it is assumed that this value is configured as `MyLibrary`.
+Configure how the library will be exposed. Any one of the following options can be used. Please note that this option works in conjunction with the value assigned to [`output.library`](#outputlibrary). For the following examples, it is assumed that this value is configured as `MyLibrary`.
 
 T> Note that `_entry_return_` in the example code below is the value returned by the entry point. In the bundle itself, it is the output of the function that is generated by webpack from the entry point.
 
@@ -729,7 +729,7 @@ The value of the option is prefixed to every URL created by the runtime or loade
 
 The default value is an empty string `""`.
 
-Simple rule: The URL of your [`output.path`](#output-path) from the view of the HTML page.
+Simple rule: The URL of your [`output.path`](#outputpath) from the view of the HTML page.
 
 ```js
 module.exports = {
@@ -807,7 +807,7 @@ This option is only used when [`devtool`](/configuration/devtool) uses a SourceM
 
 Configure how source maps are named. By default `"[file].map"` is used.
 
-The `[name]`, `[id]`, `[hash]` and `[chunkhash]` substitutions from [#output-filename](#output-filename) can be used. In addition to those, you can use substitutions listed below. The `[file]` placeholder is replaced with the filename of the original file. We recommend __only using the `[file]` placeholder__, as the other placeholders won't work when generating SourceMaps for non-chunk files.
+The `[name]`, `[id]`, `[hash]` and `[chunkhash]` substitutions from [`output.filename`](#outputfilename) can be used. In addition to those, you can use substitutions listed below. The `[file]` placeholder is replaced with the filename of the original file. We recommend __only using the `[file]` placeholder__, as the other placeholders won't work when generating SourceMaps for non-chunk files.
 
 | Template                   | Description                                                                         |
 | -------------------------- | ----------------------------------------------------------------------------------- |

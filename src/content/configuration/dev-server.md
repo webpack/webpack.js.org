@@ -215,7 +215,7 @@ webpack-dev-server --compress
 
 `boolean` `string` `array`
 
-Tell the server where to serve content from. This is only necessary if you want to serve static files. [`devServer.publicPath`](#devserver-publicpath-) will be used to determine where the bundles should be served from, and takes precedence.
+Tell the server where to serve content from. This is only necessary if you want to serve static files. [`devServer.publicPath`](#devserverpublicpath-) will be used to determine where the bundles should be served from, and takes precedence.
 
 By default it will use your current working directory to serve content, but you can modify this to another directory:
 
@@ -421,7 +421,7 @@ T> Note that `webpack.HotModuleReplacementPlugin` is required to fully enable HM
 
 `boolean`
 
-Enables Hot Module Replacement (see [`devServer.hot`](#devserver-hot)) without page refresh as fallback in case of build failures.
+Enables Hot Module Replacement (see [`devServer.hot`](#devserverhot)) without page refresh as fallback in case of build failures.
 
 ```js
 module.exports = {
