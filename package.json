@@ -126,7 +126,7 @@
     "react-g-analytics": "0.4.2",
     "react-hot-loader": "^4.0.0-beta.12",
     "react-router-dom": "^4.2.2",
-    "tool-list": "^0.11.0",
+    "tool-list": "^0.12.0",
     "webpack.vote": "^0.1.2"
   }
 }
