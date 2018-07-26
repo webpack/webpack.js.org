@@ -60,7 +60,7 @@ export function cube(x) {
 }
 ```
 
-You will need to set the development mode to make sure that the bundle is not minified:
+Set the ```mode``` configuration option to [development](https://webpack.js.org/concepts/mode/#mode-development) to make sure that the bundle is not minified:
 
 __webpack.config.js__
 
