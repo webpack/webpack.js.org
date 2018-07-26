@@ -9,6 +9,7 @@ node ./src/utilities/fetch-package-names.js "peerigon" "extract-loader" | node .
 
 # Fetch webpack-contrib (and various other) plugin repositories
 node ./src/utilities/fetch-package-names.js "webpack-contrib" "-webpack-plugin" | node ./src/utilities/fetch-package-files.js "README.md" "./src/content/plugins"
+node ./src/utilities/fetch-package-names.js "webpack-contrib" "mini-css-extract-plugin" | node ./src/utilities/fetch-package-files.js "README.md" "./src/content/plugins"
 
 # Fetch sponsors and backers from opencollective
 node ./src/utilities/fetch-supporters.js
