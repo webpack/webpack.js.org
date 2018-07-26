@@ -34,7 +34,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 * `buble-loader` Loads ES2015+ code and transpiles to ES5 using [Bublé](https://buble.surge.sh/guide/)
 * `traceur-loader` Loads ES2015+ code and transpiles to ES5 using [Traceur](https://github.com/google/traceur-compiler#readme)
 * [`ts-loader`](https://github.com/TypeStrong/ts-loader) or [`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader) Loads [TypeScript](https://www.typescriptlang.org/) 2.0+ like JavaScript
-* [`coffee-loader`](/loaders/coffee-loader) Loads [CoffeeScript](http://coffeescript.org/) like JavaScript
+* [`coffee-loader`](/loaders/coffee-loader) Loads [CoffeeScript](https://coffeescript.org/) like JavaScript
 * [`fengari-loader`](https://github.com/fengari-lua/fengari-loader/) Loads Lua code using [fengari](https://fengari.io/)
 
 
@@ -56,7 +56,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 * [`css-loader`](/loaders/css-loader) Loads CSS file with resolved imports and returns CSS code
 * [`less-loader`](/loaders/less-loader) Loads and compiles a LESS file
 * [`sass-loader`](/loaders/sass-loader) Loads and compiles a SASS/SCSS file
-* [`postcss-loader`](/loaders/postcss-loader) Loads and transforms a CSS/SSS file using [PostCSS](http://postcss.org)
+* [`postcss-loader`](/loaders/postcss-loader) Loads and transforms a CSS/SSS file using [PostCSS](https://postcss.org)
 * `stylus-loader` Loads and compiles a Stylus file
 
 
