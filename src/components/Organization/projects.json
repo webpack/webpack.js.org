@@ -55,7 +55,7 @@
 		"maintainer": "Spacek33z"
 	},
 	{
-		"repo": "webpack/file-loader",
+		"repo": "webpack-contrib/file-loader",
 		"npm": "file-loader",
 		"description": "A simple loader for copying and renaming files.",
 		"maintainer": "sokra"
