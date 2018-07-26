@@ -45,7 +45,8 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,md}": ["npm test"]
+    "*.{js,jsx,md}": ["npm run lint:js"],
+    "*.md": ["npm run lint:markdown"]
   },
   "devDependencies": {
     "alex": "^4.1.0",
