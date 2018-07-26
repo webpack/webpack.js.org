@@ -102,7 +102,7 @@ function fetchPackageFiles(options, cb) {
         return asyncWriteFile(path.resolve(options.output, `_${pkg.name}` + path.extname(file)), headmatter + body);
       })
       .catch(error => {
-        console.log('utilities/fetch-package-piles', error);
+        console.log('utilities/fetch-package-files', error);
       });
   });
 }
