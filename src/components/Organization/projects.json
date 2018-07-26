@@ -115,7 +115,7 @@
 		"maintainer": "jhnns"
 	},
 	{
-		"repo": "webpack/karma-webpack",
+		"repo": "webpack-contrib/karma-webpack",
 		"npm": "karma-webpack",
 		"description": "Use webpack to pre-process files in karma.",
 		"maintainer": "MikaAK"
