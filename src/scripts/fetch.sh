@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e # Exit with nonzero exit code if anything fails
 
-SOURCE_BRANCH="master"
-
 fetchPackages() {
   # Fetch webpack-contrib (and various other) loader repositories
   node ./src/utilities/fetch_packages.js "webpack-contrib" "-loader" "README.md" "./src/content/loaders"
@@ -15,10 +13,14 @@ fetchPackages() {
   node ./src/utilities/fetch_packages.js "webpack-contrib" "-extract-plugin" "README.md" "./src/content/plugins"
 }
 
-if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]; then
-  echo "PR running, not fetching packages."
-else
+# If not defined, means running locally, so, fetch packages
+if [ -z "$TRAVIS_PULL_REQUEST" ]; then
   fetchPackages
+# If defined and equal to false, means running in master, so, fetch packages
+elif [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
+  fetchPackages
+else
+  echo "PR running, not fetching packages."
 fi
 
 # Fetch sponsors and backers from opencollective
