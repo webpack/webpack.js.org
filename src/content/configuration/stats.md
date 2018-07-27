@@ -150,7 +150,7 @@ module.exports = {
     reasons: true,
 
     // Add the source code of modules
-    source: true,
+    source: false,
 
     // Add timing information
     timings: true,
