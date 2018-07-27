@@ -330,7 +330,7 @@ module.exports = {
 
 `bool`
 
-Tells webpack to recognise the sideEffects flag in `package.json` or rules to skip over modules which are flagged to contain no side effects when exports are not used. 
+Tells webpack to recognise the [sideEffects](https://github.com/webpack/webpack/blob/75c6416cfe95217b5ce60d02ba5d24d88c50f538/examples/side-effects/README.md) flag in `package.json` or rules to skip over modules which are flagged to contain no side effects when exports are not used. 
 
 __package.json__
 
