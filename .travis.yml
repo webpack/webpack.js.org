@@ -1,15 +1,44 @@
-branches:
-  only:
-    - master
-    - develop
+sudo: required
 language: node_js
 node_js:
   - "8"
-sudo: required
-install:
-  - yarn
-  - sudo pip install proselint
-before_script:
-  - source ./src/scripts/env.sh
-script:
-  - bash ./src/scripts/deploy.sh
+
+cache:
+  yarn: true
+  pip: true
+  directories:
+    - ~/.proselint
+
+stages:
+  - lint
+  - build
+  - post-build
+
+jobs:
+  include:
+    - stage: lint
+      name: Linting
+      before_install: npm install --global yarn
+      install: yarn
+      script: npm run lint
+      cache:
+        directories:
+          - node_modules
+
+    - stage: build
+      name: Build
+      before_script:
+        - source ./src/scripts/env.sh
+      script: npm run build
+      cache:
+        directories:
+          - dist
+
+    - stage: post-build
+      name: Deploy
+      if: branch = master
+      script: bash ./src/scripts/deploy.sh
+
+    - stage: post-build
+      name: Link check
+      script: npm run linkcheck
