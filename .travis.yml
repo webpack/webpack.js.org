@@ -3,6 +3,8 @@ language: node_js
 node_js:
   - "8"
 
+sudo: false
+
 cache:
   yarn: true
   pip: true
@@ -20,6 +22,8 @@ jobs:
       name: Linting
       before_install: npm install --global yarn
       install: yarn
+      before_script:
+        - pip install proselint
       script: npm run lint
       cache:
         directories:
