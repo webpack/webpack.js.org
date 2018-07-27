@@ -54,7 +54,7 @@ There are three ways to use loaders in your application:
 [`module.rules`](/configuration/module/#module-rules) allows you to specify several loaders within your webpack configuration.
 This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader. 
 
-In the example below note the order of the sass-loader. See ["Loader Features"](/concepts/loaders/#loader-features) for more information on order of loaders.
+In the example below note the order of the sass-loader. See ["Loader Features"](/concepts/loaders/#loader-features) for more information about loaders order.
 
 ```js-with-links-with-details
 module.exports = {
