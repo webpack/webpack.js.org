@@ -9,7 +9,6 @@ contributors:
   - johnstew
   - simon04
   - aaronang
-  - jecoopr
   - TheDutchCoder
   - sudarsangp
   - Vanguard90
