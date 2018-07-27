@@ -84,7 +84,7 @@ It's possible to specify loaders in an `import` statement, or any [equivalent "i
 import Styles from 'style-loader!css-loader?modules!./styles.css';
 ```
 
-It's possible to overwrite any loaders in the configuration by prefixing the entire rule with `!`.
+It's possible to override any loaders in the configuration by prefixing the entire rule with `!`.
 
 Options can be passed with a query parameter, e.g. `?key=value&foo=bar`, or a JSON object, e.g. `?{"key":"value","foo":"bar"}`.
 
@@ -107,8 +107,7 @@ This uses the `jade-loader` for `.jade` files, and the [`style-loader`](/loaders
 * Loaders can be chained. Each loader in the chain applies transformations to the processed resource. A chain is executed in reverse order. The first loader passes its result (resource with applied transformations) to the next one, and so forth. Finally, webpack expects JavaScript to be returned by the last loader in the chain.
 * Loaders can be synchronous or asynchronous.
 * Loaders run in Node.js and can do everything that’s possible there.
-* Loaders accept query parameters. This can be used to pass configuration to the loader.
-* Loaders can also be configured with an `options` object.
+* Loaders can be configured with an `options` object (using `query` parameters to set options is still supported but has been deprecated).
 * Normal modules can export a loader in addition to the normal `main` via `package.json` with the `loader` field.
 * Plugins can give loaders more features.
 * Loaders can emit additional arbitrary files.

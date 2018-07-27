@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - tarang9211
   - byzyk
+  - madhavarshney
 ---
 
 The entry object is where webpack looks to start building the bundle. The context is an absolute string to the directory that contains the entry files.
@@ -53,7 +54,7 @@ module.exports = {
 
 ### Naming
 
-If a string or array of strings is passed, the chunk is named `main`. If an object is passed, each key is the name of a chunk, and the value describes the entrypoint for the chunk.
+If a string or array of strings is passed, the chunk is named `main`. If an object is passed, each key is the name of a chunk, and the value describes the entry point for the chunk.
 
 
 ### Dynamic entry

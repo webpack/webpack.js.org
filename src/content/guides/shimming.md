@@ -86,7 +86,7 @@ __webpack.config.js__
 
 What we've essentially done here is tell webpack...
 
-> If you encounter at least one instance of the variable `lodash`, include the `lodash` package and provide it to the modules that need it.
+> If you encounter at least one instance of the variable `_`, include the `lodash` package and provide it to the modules that need it.
 
 If we run a build, we should still see the same output:
 

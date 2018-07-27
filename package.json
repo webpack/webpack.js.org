@@ -25,7 +25,7 @@
   },
   "scripts": {
     "clean": "rimraf ./dist src/content/**/_*.md src/**/_*.json",
-    "start": "NODE_ENV=development webpack-dev-server --config webpack.dev.js --env.dev",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.js --env.dev",
     "content": "node src/scripts/build-content-tree.js ./src/content ./src/_content.json",
     "build-test": "npm run build && http-server build/",
     "fetch": "sh src/scripts/fetch.sh",
@@ -33,7 +33,7 @@
     "build": "npm run fetch && npm run content && NODE_ENV=production webpack --config webpack.prod.js && npm run sitemap && echo webpack.js.org > dist/CNAME",
     "test": "npm run lint",
     "lint": "run-s lint:*",
-    "lint:js": "eslint . --ext .js,.jsx,.md",
+    "lint:js": "eslint src --ext .js,.jsx,.md",
     "lint:markdown": "markdownlint --config ./.markdownlint.json *.md ./src/content/**/*.md --ignore './src/content/**/_*.md'",
     "lint:social": "alex . -q",
     "lint:prose": "cp .proselintrc ~/ && proselint src/content",
@@ -44,8 +44,12 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm test"
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,jsx,md}": ["npm run lint:js"],
+    "*.md": ["npm run lint:markdown"]
   },
   "devDependencies": {
     "@octokit/rest": "^15.2.6",
@@ -60,6 +64,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "copy-webpack-plugin": "^4.3.0",
+    "cross-env": "5.2.0",
     "css-loader": "^0.28.5",
     "directory-tree": "2.1.0",
     "directory-tree-webpack-plugin": "^0.3.1",
@@ -78,6 +83,7 @@
     "http-server": "^0.10.0",
     "husky": "^1.0.0-rc.8",
     "hyperlink": "github:Munter/hyperlink#070916d",
+    "lint-staged": "^7.2.0",
     "loader-utils": "^1.1.0",
     "lodash": "^4.17.4",
     "markdownlint": "^0.6.0",
@@ -98,6 +104,7 @@
     "remark-loader": "^0.3.0",
     "remark-mermaid": "^0.2.0",
     "remark-refractor": "1.0.0",
+    "remark-responsive-tables": "1.0.0",
     "remark-slug": "^5.0.0",
     "request": "^2.81.0",
     "request-promise": "^4.2.2",
@@ -118,6 +125,9 @@
     "@rigor789/remark-autolink-headings": "^5.1.0",
     "docsearch.js": "^2.5.2",
     "gitter-sidecar": "^1.2.3",
+    "ajv": "^5.5.2",
+    "javascriptstuff-db": "^1.12.0",
+    "lodash.throttle": "^4.1.1",
     "prop-types": "^15.5.10",
     "react": "^16.2.0",
     "react-banner": "^1.0.0-rc.0",
@@ -126,7 +136,7 @@
     "react-g-analytics": "0.4.2",
     "react-hot-loader": "^4.0.0-beta.12",
     "react-router-dom": "^4.2.2",
-    "tool-list": "^0.12.0",
-    "webpack.vote": "^0.1.2"
+    "webpack.vote": "^0.1.2",
+    "whatwg-fetch": "^2.0.3"
   }
 }
