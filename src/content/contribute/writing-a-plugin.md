@@ -197,7 +197,7 @@ class SomeWebpackInternalClass {
 
   someMethod() {
     // Call a hook:
-    this.hooks.run.call();
+    this.hooks.compilation.call();
 
     // Call another hook:
     // (This is an async one, so webpack passes a callback into it)
