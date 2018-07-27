@@ -30,7 +30,7 @@
     "build-test": "npm run build && http-server build/",
     "fetch": "sh src/scripts/fetch.sh",
     "prebuild": "npm run clean",
-    "build": "npm run fetch && npm run content && NODE_ENV=production webpack --config webpack.prod.js && npm run sitemap && echo webpack.js.org > dist/CNAME",
+    "build": "npm run fetch && npm run content && cross-env NODE_ENV=production webpack --config webpack.prod.js && npm run sitemap && echo webpack.js.org > dist/CNAME",
     "test": "npm run lint",
     "lint": "run-s lint:*",
     "lint:js": "eslint src --ext .js,.jsx,.md",
