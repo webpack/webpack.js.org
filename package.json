@@ -48,8 +48,12 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,md}": ["npm run lint:js"],
-    "*.md": ["npm run lint:markdown"]
+    "*.{js,jsx,md}": [
+      "npm run lint:js"
+    ],
+    "*.md": [
+      "npm run lint:markdown"
+    ]
   },
   "devDependencies": {
     "@octokit/rest": "^15.2.6",
@@ -63,7 +67,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
-    "copy-webpack-plugin": "^4.3.0",
+    "copy-webpack-plugin": "4.5.2",
     "cross-env": "5.2.0",
     "css-loader": "^0.28.5",
     "directory-tree": "2.1.0",
@@ -123,9 +127,9 @@
   },
   "dependencies": {
     "@rigor789/remark-autolink-headings": "^5.1.0",
+    "ajv": "^5.5.2",
     "docsearch.js": "^2.5.2",
     "gitter-sidecar": "^1.2.3",
-    "ajv": "^5.5.2",
     "javascriptstuff-db": "^1.12.0",
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.5.10",
