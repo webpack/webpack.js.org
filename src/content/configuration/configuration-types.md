@@ -7,6 +7,7 @@ contributors:
   - kbariotis
   - simon04
   - fadysamirsadek
+  - byzyk
 ---
 
 Besides exporting a single config object, there are a few more ways that cover other needs as well.
@@ -48,10 +49,10 @@ module.exports = () => {
       resolve({
         entry: './app.js',
         /* ... */
-      })
-    }, 5000)
-  })
-}
+      });
+    }, 5000);
+  });
+};
 ```
 
 
@@ -76,7 +77,7 @@ module.exports = [{
   name: 'commonjs',
   entry: './app.js',
   mode: 'production',
-}]
+}];
 ```
 
 T> If you pass a name to `--config-name` flag, webpack will only build that specific configuration.

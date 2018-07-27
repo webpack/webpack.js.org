@@ -11,13 +11,16 @@ contributors:
   - adambraimbridge
   - EugeneHlushko
   - jeremenichelli
+  - arjunsajeev
+  - byzyk
+  - yairhaimo
 ---
 
 At its core, **webpack** is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it internally builds a _dependency graph_ which maps every module your project needs and generates one or more _bundles_.
 
 T> Learn more about JavaScript modules and webpack modules [here](/concepts/modules).
 
-Since version 4, **webpack does not require a configuration file** to bundle your project, nevertheless it is [incredibly configurable](/configuration) to better fit your needs.
+Since version 4.0.0, **webpack does not require a configuration file** to bundle your project, nevertheless it is [incredibly configurable](/configuration) to better fit your needs.
 
 To get started you only need to understand its **Core Concepts**:
 
@@ -27,6 +30,12 @@ To get started you only need to understand its **Core Concepts**:
 - Plugins
 
 This document is intended to give a **high-level** overview of these concepts, while providing links to detailed concept specific use cases.
+
+For a better understanding of the ideas behind module bundlers and how they work under the hood consult these resources:
+
+- [Manually Bundling an Application](https://www.youtube.com/watch?v=UNMkLHzofQI)
+- [Live Coding a Simple Module Bundler](https://www.youtube.com/watch?v=Gc9-7PBqOC8)
+- [Detailed Explanation of a Simple Module Bundler](https://github.com/ronami/minipack)
 
 
 ## Entry
@@ -48,7 +57,7 @@ T> Learn more in the [entry points](/concepts/entry-points) section.
 
 ## Output
 
-The **output** property tells webpack where to emit the *bundles* it creates and how to name these files, it defaults to `./dist/bundle.js` for the main output file and to the `./dist` folder for any other generated file.
+The **output** property tells webpack where to emit the *bundles* it creates and how to name these files, it defaults to `./dist/main.js` for the main output file and to the `./dist` folder for any other generated file.
 
 You can configure this part of the process by specifying an `output` field in your configuration:
 
@@ -77,7 +86,7 @@ Out of the box, webpack only understands JavaScript files. **Loaders** allow web
 
 W> Note that the ability to `import` any type of module, e.g. `.css` files, is a feature specific to webpack and may not be supported by other bundlers or task runners. We feel this extension of the language is warranted as it allows developers to build a more accurate dependency graph.
 
-At a high level, **loaders** have two purposes in your webpack configuration:
+At a high level, **loaders** have two properties in your webpack configuration:
 
 1. The `test` property identifies which file or files should be transformed.
 2. The `use` property indicates which loader should be used to do the transforming.
@@ -87,7 +96,7 @@ __webpack.config.js__
 ```javascript
 const path = require('path');
 
-const config = {
+module.exports = {
   output: {
     filename: 'my-first-webpack.bundle.js'
   },
@@ -97,8 +106,6 @@ const config = {
     ]
   }
 };
-
-module.exports = config;
 ```
 
 The configuration above has defined a `rules` property for a single module with two required properties: `test` and `use`. This tells webpack's compiler the following:
@@ -112,7 +119,7 @@ You can check further customization when including loaders in the [loaders secti
 
 ## Plugins
 
-While loaders are used to transform certain types of modules, plugins can be leveraged to perform a wider range of tasks, from bundle optimization, assets management or inject environment variables.
+While loaders are used to transform certain types of modules, plugins can be leveraged to perform a wider range of tasks like bundle optimization, assets management and injection of environment variables.
 
 T> Check out the [plugin interface](/api/plugins) and how to use it to extend webpacks capabilities.
 
@@ -124,7 +131,7 @@ In order to use a plugin, you need to `require()` it and add it to the `plugins`
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 const webpack = require('webpack'); //to access built-in plugins
 
-const config = {
+module.exports = {
   module: {
     rules: [
       { test: /\.txt$/, use: 'raw-loader' }
@@ -134,8 +141,6 @@ const config = {
     new HtmlWebpackPlugin({template: './src/index.html'})
   ]
 };
-
-module.exports = config;
 ```
 
 In the example above, the `html-webpack-plugin` generates an html file for your application injecting automatically all your generated bundles.
@@ -156,3 +161,8 @@ module.exports = {
 ```
 
 Learn more about the [mode configuration here](/concepts/mode) and what optimizations take place on each value.
+
+
+## Browser Compatibility
+
+webpack supports all browsers that are [ES5-compliant](https://kangax.github.io/compat-table/es5/) (IE8 and below are not supported). webpack needs `Promise` for `import()` and `require.ensure()`. If you want to support older browsers, you will need to [load a polyfill](/guides/shimming/) before using these expressions.
