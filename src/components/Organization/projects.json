@@ -67,7 +67,7 @@
 		"maintainer": "sokra"
 	},
 	{
-		"repo": "webpack/css-loader",
+		"repo": "webpack-contrib/css-loader",
 		"npm": "css-loader",
 		"description": "Load CSS modules and resolve any dependencies.",
 		"maintainer": "sokra"
