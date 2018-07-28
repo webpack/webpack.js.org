@@ -56,7 +56,7 @@
     ]
   },
   "devDependencies": {
-    "@octokit/rest": "^15.2.6",
+    "@octokit/rest": "^15.9.4",
     "alex": "^5.1.0",
     "autoprefixer": "^7.2.3",
     "babel-core": "^6.26.0",
