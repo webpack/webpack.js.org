@@ -38,17 +38,6 @@ async function paginate (org) {
 }
 
 async function main() {
-  if (process.env.GITHUB_TOKEN) {
-    api.authenticate({
-      type: 'token',
-      token: process.env.GITHUB_TOKEN
-    });
-
-    const rateLimit = await api.misc.getRateLimit({});
-
-    console.log('Github API rate limit:', rateLimit.data.rate);
-  }
-
   mkdirp.sync(path.resolve(__dirname, `../../repositories/`));
 
   for (const [type, collection] of Object.entries(fetch)) {
