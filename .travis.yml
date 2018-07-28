@@ -57,36 +57,26 @@
 
 #########
 
-sudo: required
-dist: trusty
+cache:
+  yarn: true
+  pip: true
+  directories:
+    - $HOME/.proselint
 
 matrix:
+  allow_failures:
+    - name: Proselint
+    - name: Linkcheck
+
+  fast_finish: true
+
   include:
-  - language: python
-    python:
-      - 3.6
-
-    sudo: false
-
-    cache:
-      pip: true
-      directories:
-        - $HOME/.proselint
-
-    install:
-      - pip install -r requirements.txt
-
-    script:
-      - cp .proselintrc ~/ && proselint src/content
-
-  - language: node_js
+  - name: Linting
+    language: node_js
     node_js:
       - "8"
 
     sudo: false
-
-    cache:
-      yarn: true
 
     before_install:
       - npm install --global yarn
@@ -98,3 +88,34 @@ matrix:
       - yarn lint:js
       - yarn lint:markdown
       - yarn lint:social
+
+
+  - name: Proselint
+    language: python
+    python:
+      - 3.6
+
+    sudo: false
+
+    install:
+      - pip install -r requirements.txt
+
+    script:
+      - cp .proselintrc ~/ && proselint src/content
+
+  - name: Linkcheck
+    language: node_js
+    node_js:
+      - "8"
+
+    sudo: false
+
+    before_install:
+      - npm install --global yarn
+
+    install:
+      - yarn
+      - yarn build
+
+    script:
+      - yarn linkcheck
