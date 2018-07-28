@@ -2,8 +2,6 @@ sudo: false
 language: python
 python:
   - "3.6"
-node_js:
-  - "8"
 
 sudo: false
 
@@ -23,6 +21,7 @@ jobs:
     - stage: lint
       name: Linting
       before_install:
+        - nvm use 8
         - npm install --global yarn
         - pip install -r requirements.txt
       install: yarn
