@@ -10,6 +10,7 @@ cache:
     - "./node_modules
     - "./dist
     - "$HOME/.proselint"
+    - "$HOME/foo"
 
 stages:
   - smoke
