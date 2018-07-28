@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const mkdirp = require('mkdirp');
 const _ = require('lodash');
 const GithubAPI = require('@octokit/rest');
 
@@ -47,6 +48,8 @@ async function main() {
 
     console.log('Github API rate limit:', rateLimit.data.rate);
   }
+
+  mkdirp.sync(path.resolve(__dirname, `../../repositories/`));
 
   for (const [type, collection] of Object.entries(fetch)) {
     const result = await Promise.all(collection.map(async (item) => {
