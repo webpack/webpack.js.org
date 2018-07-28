@@ -1,51 +1,100 @@
-sudo: false
-language: python
-python:
-  - "3.6"
+# sudo: false
+# language: python
+# python:
+#   - "3.6"
 
-sudo: false
+# sudo: false
 
-cache:
-  yarn: true
-  pip: true
-  directories:
-    - $HOME/.proselint
-    - $HOME/.nvm
+# cache:
+#   yarn: true
+#   pip: true
+#   directories:
+#     - "./node_modules"
+#     - $HOME/.proselint
+#     - $HOME/.nvm
 
-stages:
-  - lint
-  - build
-  - post-build
+# stages:
+#   - lint
+#   - build
+#   - post-build
 
-jobs:
+# jobs:
+#   include:
+#     - stage: lint
+#       name: Linting
+#       before_install:
+#         - nvm install 8.11
+#         - nvm use 8.11
+#         - npm install --global yarn
+#         - pip install -r requirements.txt
+#       install: yarn
+#       script: npm run lint
+#       cache:
+#         directories:
+#           - node_modules
+
+#     - stage: build
+#       name: Build
+#       before_script:
+#         - source ./src/scripts/env.sh
+#       script: npm run build
+#       cache:
+#         directories:
+#           - dist
+
+#     - stage: post-build
+#       name: Deploy
+#       if: branch = master
+#       script: bash ./src/scripts/deploy.sh
+
+#     - stage: post-build
+#       name: Link check
+#       script: npm run linkcheck
+
+
+
+
+
+#########
+
+sudo: required
+dist: trusty
+
+matrix:
   include:
-    - stage: lint
-      name: Linting
-      before_install:
-        - nvm install 8.11
-        - nvm use 8.11
-        - npm install --global yarn
-        - pip install -r requirements.txt
-      install: yarn
-      script: npm run lint
-      cache:
-        directories:
-          - node_modules
+  - language: python
+    python:
+      - 3.6
 
-    - stage: build
-      name: Build
-      before_script:
-        - source ./src/scripts/env.sh
-      script: npm run build
-      cache:
-        directories:
-          - dist
+    sudo: false
 
-    - stage: post-build
-      name: Deploy
-      if: branch = master
-      script: bash ./src/scripts/deploy.sh
+    cache:
+      pip: true
+      directories:
+        - $HOME/.proselint
 
-    - stage: post-build
-      name: Link check
-      script: npm run linkcheck
+    install:
+      - pip install -r requirements.txt
+
+    script:
+      - cp .proselintrc ~/ && proselint src/content
+
+  - language: node_js
+    node_js:
+      - "8"
+
+    sudo: false
+
+    cache:
+      yarn: true
+
+    before_install:
+      - npm install --global yarn
+
+    install:
+      - yarn
+
+    script:
+      - yarn lint:js
+      - yarn lint:markdown
+      - yarn lint:social
