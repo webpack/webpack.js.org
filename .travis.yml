@@ -2,6 +2,8 @@ sudo: required
 language: node_js
 node_js:
   - "8"
+python:
+  - "3.6"
 
 sudo: false
 
@@ -22,8 +24,7 @@ jobs:
       name: Linting
       before_install:
         - npm install --global yarn
-        - pip install --upgrade pip
-        - pip install proselint
+        - pip install -r requirements.txt
       install: yarn
       script: npm run lint
       cache:
