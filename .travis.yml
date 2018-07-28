@@ -20,11 +20,11 @@ jobs:
   include:
     - stage: lint
       name: Linting
-      before_install: npm install --global yarn
-      install: yarn
-      before_script:
+      before_install:
+        - npm install --global yarn
         - pip install --upgrade pip
         - pip install proselint
+      install: yarn
       script: npm run lint
       cache:
         directories:
