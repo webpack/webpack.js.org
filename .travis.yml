@@ -7,8 +7,9 @@ cache:
   yarn: true
   pip: true
   directories:
-    - ./node_modules
-    - ./dist
+    - node_modules
+    - dist
+    - .cache
     - $HOME/.cache
 
 stages:
