@@ -41,6 +41,7 @@ jobs:
       script: bash ./src/scripts/deploy.sh
 
     - stage: post-build
+      if: false # Temporarily shut off link checking to speed up builds
       name: Link check
       script: yarn linkcheck
 
