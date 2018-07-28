@@ -1,9 +1,9 @@
-sudo: required
-language: node_js
-node_js:
-  - "8"
+sudo: false
+language: python
 python:
   - "3.6"
+node_js:
+  - "8"
 
 sudo: false
 
@@ -11,7 +11,7 @@ cache:
   yarn: true
   pip: true
   directories:
-    - ~/.proselint
+    - $HOME/.proselint
 
 stages:
   - lint
