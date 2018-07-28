@@ -1,55 +1,60 @@
-# sudo: false
-# language: python
-# python:
-#   - "3.6"
+sudo: false
+language: node_js
+node_js:
+  - "8"
 
-# sudo: false
+cache:
+  yarn: true
+  pip: true
+  directories:
+    - "./node_modules
+    - "./dist
+    - "$HOME/.proselint"
 
-# cache:
-#   yarn: true
-#   pip: true
-#   directories:
-#     - "./node_modules"
-#     - $HOME/.proselint
-#     - $HOME/.nvm
+stages:
+  - smoke
+  - build
+  - post-build
 
-# stages:
-#   - lint
-#   - build
-#   - post-build
+jobs:
+  include:
+    - stage: lint
+      name: Linting
+      before_install:
+        - npm install --global yarn
+      install: yarn
+      script: yarn lint
 
-# jobs:
-#   include:
-#     - stage: lint
-#       name: Linting
-#       before_install:
-#         - nvm install 8.11
-#         - nvm use 8.11
-#         - npm install --global yarn
-#         - pip install -r requirements.txt
-#       install: yarn
-#       script: npm run lint
-#       cache:
-#         directories:
-#           - node_modules
+    - stage: build
+      name: Build
+      before_script:
+        - source ./src/scripts/env.sh
+      script: yarn build
 
-#     - stage: build
-#       name: Build
-#       before_script:
-#         - source ./src/scripts/env.sh
-#       script: npm run build
-#       cache:
-#         directories:
-#           - dist
+    - stage: post-build
+      name: Deploy
+      if: branch = master
+      script: bash ./src/scripts/deploy.sh
 
-#     - stage: post-build
-#       name: Deploy
-#       if: branch = master
-#       script: bash ./src/scripts/deploy.sh
+    - stage: post-build
+      name: Link check
+      allow_failures: true
+      script: yarn linkcheck
 
-#     - stage: post-build
-#       name: Link check
-#       script: npm run linkcheck
+    - stage: post-build
+      name: Proselint
+      language: python
+      python:
+        - 3.6
+      allow_failures: true
+      before_install:
+        - pip install -r requirements.txt
+
+      install:
+        - pip install -r requirements.txt
+
+      script:
+        - cp .proselintrc ~/ && proselint src/content
 
 
 
@@ -57,100 +62,100 @@
 
 #########
 
-cache:
-  yarn: true
-  pip: true
-  directories:
-    - $HOME/.proselint
+# cache:
+#   yarn: true
+#   pip: true
+#   directories:
+#     - $HOME/.proselint
 
-matrix:
-  allow_failures:
-    - name: Proselint
-    - name: Linkcheck
+# matrix:
+#   allow_failures:
+#     - name: Proselint
+#     - name: Linkcheck
 
-  fast_finish: true
+#   fast_finish: true
 
-  include:
-  - name: Build
+#   include:
+#   - name: Build
 
-    stages:
-      - lint
-      - build
-      - post-build
+#     stages:
+#       - lint
+#       - build
+#       - post-build
 
-    jobs:
-      include:
-        - stage: lint
-          name: Linting
+#     jobs:
+#       include:
+#         - stage: lint
+#           name: Linting
 
-          before_install:
-            - npm install --global yarn
+#           before_install:
+#             - npm install --global yarn
 
-          install: yarn
+#           install: yarn
 
-          script:
-            - yarn lint:js
-            - yarn lint:markdown
-            - yarn lint:social
+#           script:
+#             - yarn lint:js
+#             - yarn lint:markdown
+#             - yarn lint:social
 
-          cache:
-            directories:
-              - ./node_modules
+#           cache:
+#             directories:
+#               - ./node_modules
 
-        - stage: build
-          name: Build
-          script:
-            - source ./src/scripts/env.sh
-            - npm run build
-          cache:
-            directories:
-              - ./node_modules
-              - ./dist
+#         - stage: build
+#           name: Build
+#           script:
+#             - source ./src/scripts/env.sh
+#             - yarn build
+#           cache:
+#             directories:
+#               - ./node_modules
+#               - ./dist
 
-        - stage: post-build
-          name: Deploy
-          if: branch = master
-          cache:
-            directories:
-              - ./node_modules
-              - ./dist
-          script: bash ./src/scripts/deploy.sh
+#         - stage: post-build
+#           name: Deploy
+#           if: branch = master
+#           cache:
+#             directories:
+#               - ./node_modules
+#               - ./dist
+#           script: bash ./src/scripts/deploy.sh
 
-        - stage: post-build
-          name: Link check
-          allow_failures: true
-          cache:
-            directories:
-              - ./node_modules
-              - ./dist
-          script: npm run linkcheck
+#         - stage: post-build
+#           name: Link check
+#           allow_failures: true
+#           cache:
+#             directories:
+#               - ./node_modules
+#               - ./dist
+#           script: yarn linkcheck
 
-  - name: Proselint
-    language: python
-    python:
-      - 3.6
+#   - name: Proselint
+#     language: python
+#     python:
+#       - 3.6
 
-    sudo: false
+#     sudo: false
 
-    install:
-      - pip install -r requirements.txt
+#     install:
+#       - pip install -r requirements.txt
 
-    script:
-      - cp .proselintrc ~/ && proselint src/content
+#     script:
+#       - cp .proselintrc ~/ && proselint src/content
 
-  - name: Linkcheck
-    language: node_js
-    node_js:
-      - "8"
+#   - name: Linkcheck
+#     language: node_js
+#     node_js:
+#       - "8"
 
-    sudo: false
+#     sudo: false
 
-    before_install:
-      - npm install --global yarn
+#     before_install:
+#       - npm install --global yarn
 
-    install:
-      - yarn
-      - yarn build
+#     install:
+#       - yarn
+#       - yarn build
 
-    script:
-      - yarn linkcheck
+#     script:
+#       - yarn linkcheck
