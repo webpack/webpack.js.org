@@ -12,7 +12,7 @@ cache:
     - $HOME/.proselint
 
 stages:
-  - smoke
+  - lint
   - build
   - post-build
 
@@ -20,24 +20,19 @@ jobs:
   include:
     - stage: lint
       name: Linting
-      before_install:
-        - npm install --global yarn
+      before_install: npm install --global yarn
       install: yarn
-      script:
-        - yarn lint
+      script: yarn lint
 
     - stage: build
       name: Build
-      before_script:
-        - source ./src/scripts/env.sh
-      script:
-        - yarn build
+      before_script: source ./src/scripts/env.sh
+      script: yarn build
 
     - stage: post-build
       name: Deploy
       if: branch = master
-      script:
-        - bash ./src/scripts/deploy.sh
+      script: bash ./src/scripts/deploy.sh
 
     - stage: post-build
       name: Link check
@@ -47,11 +42,7 @@ jobs:
     - stage: post-build
       name: Proselint
       language: python
-      python:
-        - 3.6
+      python: 3.6
       allow_failures: true
-      install:
-        - pip install -r requirements.txt
-
-      script:
-        - cp .proselintrc ~/ && proselint src/content
+      install: pip install -r requirements.txt
+      script: cp .proselintrc ~/ && proselint src/content
