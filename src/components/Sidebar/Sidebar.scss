@@ -6,7 +6,6 @@
   display: none;
   width: 100%;
   max-height: 100%;
-  overflow: auto;
   will-change: transform;
 
   @include break {
@@ -16,6 +15,8 @@
 
 .sidebar__inner {
   padding: 1.5em;
+  position: sticky;
+  top: -1px;
   overflow: hidden;
 }
 

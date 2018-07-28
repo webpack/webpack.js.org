@@ -3,6 +3,10 @@
 
 .organization {
   padding: 1.5em;
+
+  &__title > h4 {
+    margin-top: 0; // Overrides markdown scss
+  }
 }
 
 .organization__projects {

@@ -2,25 +2,8 @@
 @import 'functions';
 
 .page {
-  position: relative;
-  flex: 1 0 auto;
-  display: flex;
-}
-
-// XXX: Temporary hack to fix sidebar width
-.page > div:first-of-type {
-  display: none;
-  position: relative;
-  overflow: hidden;
-
-  @include break {
-    display: block;
-    flex: 0 0 280px;
-  }
-}
-
-.page__content {
   flex: 1 1 auto;
+  position: relative;
   overflow-x: hidden;
   padding: 1.5em 1em;
 

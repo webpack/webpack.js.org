@@ -5,7 +5,6 @@ contributors:
   - jmreidy
   - jhnns
   - sararubin
-  - aiduryagin
   - rohannair
   - joshsantos
   - drpicox
