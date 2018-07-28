@@ -71,24 +71,59 @@ matrix:
   fast_finish: true
 
   include:
-  - name: Lintings
-    language: node_js
-    node_js:
-      - "8"
+  - name: Build
 
-    sudo: false
+    stages:
+      - lint
+      - build
+      - post-build
 
-    before_install:
-      - npm install --global yarn
+    jobs:
+      include:
+        - stage: lint
+          name: Linting
 
-    install:
-      - yarn
+          before_install:
+            - npm install --global yarn
 
-    script:
-      - yarn lint:js
-      - yarn lint:markdown
-      - yarn lint:social
+          install: yarn
 
+          script:
+            - yarn lint:js
+            - yarn lint:markdown
+            - yarn lint:social
+
+          cache:
+            directories:
+              - ./node_modules
+
+        - stage: build
+          name: Build
+          script:
+            - source ./src/scripts/env.sh
+            - npm run build
+          cache:
+            directories:
+              - ./node_modules
+              - ./dist
+
+        - stage: post-build
+          name: Deploy
+          if: branch = master
+          cache:
+            directories:
+              - ./node_modules
+              - ./dist
+          script: bash ./src/scripts/deploy.sh
+
+        - stage: post-build
+          name: Link check
+          allow_failures: true
+          cache:
+            directories:
+              - ./node_modules
+              - ./dist
+          script: npm run linkcheck
 
   - name: Proselint
     language: python
