@@ -5,12 +5,10 @@ node_js:
 
 cache:
   yarn: true
-  pip: true
   directories:
     - node_modules
     - dist
     - .cache
-    - $HOME/.cache
 
 stages:
   - lint
@@ -50,5 +48,9 @@ jobs:
       name: Proselint
       language: python
       python: 3.6
+      cache:
+        pip: true
+        directories:
+          - $HOME/.cache
       install: pip install -r requirements.txt
       script: cp .proselintrc ~/ && proselint src/content
