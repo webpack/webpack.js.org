@@ -22,7 +22,10 @@ jobs:
       name: Linting
       before_install: npm install --global yarn
       install: yarn
-      script: yarn lint
+      script:
+        - yarn lint:js
+        - yarn lint:markdown
+        - yarn lint:social
 
     - stage: build
       name: Build
