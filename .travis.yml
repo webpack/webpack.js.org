@@ -23,6 +23,7 @@ jobs:
       before_install: npm install --global yarn
       install: yarn
       before_script:
+        - pip install --upgrade pip
         - pip install proselint
       script: npm run lint
       cache:
