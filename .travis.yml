@@ -71,7 +71,7 @@ matrix:
   fast_finish: true
 
   include:
-  - name: Linting
+  - name: Lintings
     language: node_js
     node_js:
       - "8"
