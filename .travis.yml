@@ -21,7 +21,7 @@ jobs:
     - stage: lint
       name: Linting
       before_install:
-        - nvm use 8
+        - nvm use 8.11
         - npm install --global yarn
         - pip install -r requirements.txt
       install: yarn
