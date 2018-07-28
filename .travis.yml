@@ -10,6 +10,7 @@ cache:
   pip: true
   directories:
     - $HOME/.proselint
+    - $HOME/.nvm
 
 stages:
   - lint
@@ -21,6 +22,7 @@ jobs:
     - stage: lint
       name: Linting
       before_install:
+        - nvm install 8.11
         - nvm use 8.11
         - npm install --global yarn
         - pip install -r requirements.txt
