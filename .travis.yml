@@ -9,7 +9,7 @@ cache:
   directories:
     - ./node_modules
     - ./dist
-    - $HOME/.proselint
+    - $HOME/.cache
 
 stages:
   - lint
