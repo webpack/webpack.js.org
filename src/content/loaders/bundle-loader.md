@@ -4,7 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/bundle-loader/master/R
 edit: https://github.com/webpack-contrib/bundle-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/bundle-loader
 ---
-Bundle loader for webpack
+webpack 的 bundle loader
 
 ## 安装
 
@@ -12,7 +12,7 @@ Bundle loader for webpack
 npm i bundle-loader --save
 ```
 
-## <a href="https://webpack.js.org/concepts/loaders">用法</a>
+## <a href="https://webpack.docschina.org/concepts/loaders">用法</a>
 
 **webpack.config.js**
 ```js
@@ -28,14 +28,15 @@ module.exports = {
 }
 ```
 
-当你引用bundle-loader时，chunk 会被浏览器加载。
+当你引用 bundle-loader 时，chunk 会被浏览器请求(request)。
 
 **file.js**
 ```js
 import bundle from './file.bundle.js';
 ```
 
-等到chunk被浏览器加载及被导出时，你需要异步请求等待。
+为了 chunk 在浏览器加载（以及在获取其导出）时可用时，
+你需要异步等待。
 
 ```js
 bundle((file) => {
@@ -43,23 +44,28 @@ bundle((file) => {
   const file = require('./file.js')
 });
 ```
-上述代码将require 包裹在 require.ensure 的代码块中
 
-可以添加多个回调函数，并且它们会按照添加的顺序依次执行。
+上述代码会将 `require('file.js')` 包裹在一段 `require.ensure` 代码块中
+
+可以添加多个回调函数。它们会按照添加的顺序依次执行。
+
 ```js
 bundle(callbackTwo)
 bundle(callbackThree)
 ```
-当依赖模块都加载完毕时, 如果此时添加一个回调函数，它将会立即执行。
-## 配置选项
 
-|Name|Type|Default|Description|
+当依赖模块都加载完毕时, 如果此时添加一个回调函数，它将会立即执行。
+
+## 选项(options)
+
+|名称|类型|默认值|描述|
 |:--:|:--:|:-----:|:----------|
-|**`lazy`**|`{Boolean}`|`false`|异步加载导入的bundle文件|
-|**`name`**|`{String}`|`[id].[name]`|为你导入的bundle文件按某种格式设置名字|
+|**`lazy`**|`{Boolean}`|`false`|异步加载导入的 bundle|
+|**`name`**|`{String}`|`[id].[name]`|为导入的 bundle 配置自定义文件名|
 
 ##
-当你使用bundle-loader时，文件会被加载。如果你想它按需加载（懒加载），请用：
+
+当你使用 bundle-loader 时，文件会被请求(request)。如果想让它按需加载(request it lazy)，请使用：
 
 **webpack.config.js**
 ```js
@@ -77,11 +83,12 @@ import bundle from './file.bundle.js'
 bundle((file) => {...})
 ```
 
-> ℹ️  只有调用load函数时，chunk才会被加载。
+> ℹ️  只有调用 load 函数时，chunk 才会被请求(request)
 
-### `name属性`
-你可以通过配置选项中的name属性来设置bundle的名字。  
-详情参参阅 [文档](https://github.com/webpack/loader-utils#interpolatename).
+### `name`
+
+可以通过配置中 `name` 选项参数，来设置 bundle 的名称。
+查看 [文档](https://github.com/webpack/loader-utils#interpolatename)。
 
 **webpack.config.js**
 ```js
@@ -93,10 +100,10 @@ bundle((file) => {...})
 }
 ```
 
-> :注意: 一旦loader创建了chunks，它们将根据以下
-[`output.chunkFilename`](https://webpack.js.org/configuration/output/#output-chunkfilename) 规则命名, 即默认为 `[id].[name]`格式。这里的 `[name]` 对应着配置选项中的name属性中设置的chunk名字。
+> :warning: 一旦 loader 创建了 chunk，它们将遵循以下命名规则
+[`output.chunkFilename`](https://webpack.js.org/configuration/output/#output-chunkfilename) 规则，默认是 `[id].[name]`。这里 `[name]` 对应着配置中 `name` 选项参数设置的 chunk 名称。
 
-## 实例演示
+## 示例
 
 ```js
 import bundle from './file.bundle.js'
@@ -111,7 +118,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dest'),
     filename: '[name].js',
-    // 此处可以自定义格式
+    // 此处可以自定义其他格式
     chunkFilename: '[name].[id].js',
   },
   module: {
@@ -128,14 +135,15 @@ module.exports = {
     ]
   }
 }
-``
-一般情况下，chunk文件名会按照上述代码中`filename`属性对应的命名规则命名。
+```
 
-然而，`bundle-loader`中的chunk文件也可以用`chunkFilename`规则命名。那么上述实例中导出的文件名将分别为`my-chunk.1.js` 和 `file-2.js`。
+一般情况下，chunk 会使用上面的 `filename` 规则，并根据其对应的 `[chunkname]` 命名。
 
-当然，你也可以在`chunkFilename` 添加哈希值作为文件名的一部分，因为在配置选项参数中直接放`[hash]` 不会起到作用。
+然而，来自 `bundle-loader` 中的 chunk 会使用 `chunkFilename` 规则命名。因此，打包后的示例文件最终将生成为 `my-chunk.1.js` 和 `file-2.js`。
 
-## 代码维护人员
+当然，你也可以在 `chunkFilename` 添加哈希值作为文件名的一部分，这是因为在 bundle 的配置选项中放置 `[hash]` 不会生效。
+
+## 维护人员
 
 <table>
   <tbody>
@@ -190,7 +198,3 @@ module.exports = {
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
-
-***
-
-原文地址：https://webpack.js.org/loaders/bundle-loader/
