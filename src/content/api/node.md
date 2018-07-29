@@ -40,7 +40,7 @@ webpack({
   // [配置对象](/configuration/)
 }, (err, [stats](#stats-object)) => {
   if (err || stats.hasErrors()) {
-    // [在这里处理错误](#-error-handling-)
+    // [在这里处理错误](#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86-error-handling-)
   }
   // 处理完成
 });
