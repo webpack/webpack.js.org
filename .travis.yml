@@ -29,6 +29,7 @@ jobs:
         - yarn lint:markdown
         - yarn lint:social
         - yarn build
+        - yarn lint:links
 
     - stage: Build
       name: Proselint
@@ -47,5 +48,5 @@ jobs:
       script: bash ./src/scripts/deploy.sh
 
     - stage: Post-build
-      name: Link check
+      name: External Link Check
       script: yarn linkcheck
