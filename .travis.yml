@@ -29,22 +29,9 @@ jobs:
         - yarn lint:js
         - yarn lint:markdown
         - yarn lint:social
+        - yarn build
 
-    - stage: build
-      name: Build
-      before_script: source ./src/scripts/env.sh
-      script: yarn build
-
-    - stage: post-build
-      name: Deploy
-      if: branch = master
-      script: bash ./src/scripts/deploy.sh
-
-    - stage: post-build
-      name: Link check
-      script: yarn linkcheck
-
-    - stage: post-build
+    - stage: lint
       name: Proselint
       language: python
       python: 3.6
@@ -54,3 +41,12 @@ jobs:
           - $HOME/.cache
       install: pip install -r requirements.txt
       script: cp .proselintrc ~/ && proselint src/content
+
+    - stage: post-build
+      name: Deploy
+      if: branch = master
+      script: bash ./src/scripts/deploy.sh
+
+    - stage: post-build
+      name: Link check
+      script: yarn linkcheck
