@@ -17,7 +17,7 @@ stages:
 jobs:
   fast_finish: true
   allow_failures:
-    - name: Link check
+    - name: External Link Check
 
   include:
     - stage: Build
