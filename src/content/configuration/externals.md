@@ -1,5 +1,5 @@
 ---
-title: 外部扩展(Externals)
+title: 外部扩展(externals)
 sort: 13
 contributors:
   - sokra
@@ -133,7 +133,3 @@ In this case any dependency named `jQuery`, capitalized or not, or `$` would be 
 
 
 关于如何使用此 externals 配置的更多信息，请参考[如何编写 library](/guides/author-libraries)。
-
-***
-
-> 原文：https://webpack.js.org/configuration/externals/

@@ -77,7 +77,3 @@ plugins: [
 
 [cover]: https://codecov.io/gh/webpack-contrib/i18n-webpack-plugin/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/i18n-webpack-plugin
-
-***
-
-> 原文：https://webpack.js.org/plugins/i18n-webpack-plugin/

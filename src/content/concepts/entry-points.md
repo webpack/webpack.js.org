@@ -1,5 +1,5 @@
 ---
-title: 入口起点(Entry Points)
+title: 入口起点(entry points)
 sort: 2
 contributors:
   - TheLarkInn
@@ -104,7 +104,3 @@ const config = {
 - 使用 `CommonsChunkPlugin` 为每个页面间的应用程序共享代码创建 bundle。由于入口起点增多，多页应用能够复用入口起点之间的大量代码/模块，从而可以极大地从这些技术中受益。
 
 T> 根据经验：每个 HTML 文档只使用一个入口起点。
-
-***
-
-> 原文：https://webpack.js.org/concepts/entry-points/

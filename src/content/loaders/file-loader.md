@@ -12,7 +12,7 @@ Instructs webpack to emit the required object as file and to return its public U
 npm install --save-dev file-loader
 ```
 
-## <a href="https://doc.webpack-china.org/concepts/loaders">用法</a>
+## <a href="https://webpack.docschina.org/concepts/loaders">用法</a>
 
 默认情况下，生成的文件的文件名就是文件内容的 MD5 哈希值并会保留所引用资源的原始扩展名。
 
@@ -297,7 +297,3 @@ path/to/file.png?e43b20c069c4a01867c31e98cbce33c9
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
-
-***
-
-> 原文：https://webpack.js.org/loaders/file-loader/

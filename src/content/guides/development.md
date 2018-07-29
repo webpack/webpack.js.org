@@ -401,8 +401,4 @@ T> 如果想要了解更多关于模块热替换(Hot Module Replacement)的机�
 
 ## 结论
 
-现在，你已经学会了如何自动编译代码，并运行一个简单的开发服务器(development server)，你可以查看下一个指南，其中将介绍 [模块热替换(Hot Module Replacement)](/guides/hot-module-replacement)。
-
-***
-
-> 原文：https://webpack.js.org/guides/development/
+现在，你已经学会了如何自动编译代码，并运行一个简单的开发服务器(development server)，你可以查看下一个指南，其中将介绍 [模块热替换(hot module replacement)](/guides/hot-module-replacement)。

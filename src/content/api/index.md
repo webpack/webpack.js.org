@@ -57,7 +57,3 @@ loader 被编写为，接受源代码作为参数的函数，
 插件能够完全访问到编译(compilation)的当前状态。
 
 [了解更多关于插件的信息！](/api/plugins)
-
-***
-
-> 原文：https://webpack.js.org/api/

@@ -1,5 +1,5 @@
 ---
-title: 模块解析(Module Resolution)
+title: 模块解析(module resolution)
 sort: 8
 contributors:
     - pksjce
@@ -79,7 +79,3 @@ Loader 解析遵循与文件解析器指定的规则相同的规则。但是 [`r
 
 
 有关上述配置的更多信息，请查看[解析 API](/configuration/resolve)学习。
-
-***
-
-> 原文：https://webpack.js.org/concepts/module-resolution/

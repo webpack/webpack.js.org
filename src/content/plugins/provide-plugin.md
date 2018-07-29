@@ -76,7 +76,3 @@ new webpack.ProvidePlugin({
   Vue: ['vue/dist/vue.esm.js', 'default']
 })
 ```
-
-***
-
-> 原文：https://webpack.js.org/plugins/provide-plugin/

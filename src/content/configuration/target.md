@@ -1,5 +1,5 @@
 ---
-title: 构建目标(Targets)
+title: 构建目标(targets)
 sort: 11
 contributors:
   - juangl
@@ -64,7 +64,3 @@ const options = {
   }
 };
 ```
-
-***
-
-> 原文：https://webpack.js.org/configuration/target/

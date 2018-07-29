@@ -1,5 +1,5 @@
 ---
-title: 插件(Plugins)
+title: 插件(plugins)
 sort: 5
 contributors:
   - TheLarkInn
@@ -8,7 +8,7 @@ contributors:
   - johnstew
 ---
 
-插件是 wepback 的[支柱](https://github.com/webpack/tapable)功能。webpack 自身也是构建于，你在 webpack 配置中用到的**相同的插件系统**之上！
+插件是 webpack 的[支柱](https://github.com/webpack/tapable)功能。webpack 自身也是构建于，你在 webpack 配置中用到的**相同的插件系统**之上！
 
 插件目的在于解决 [loader](/concepts/loaders) 无法实现的**其他事**。
 
@@ -93,7 +93,3 @@ module.exports = config;
 ```
 
 T> 你知道吗：以上看到的示例和 [webpack 自身运行时(runtime)](https://github.com/webpack/webpack/blob/e7087ffeda7fa37dfe2ca70b5593c6e899629a2c/bin/webpack.js#L290-L292) 极其类似。[wepback 源码](https://github.com/webpack/webpack)中隐藏有大量使用示例，你可以用在自己的配置和脚本中。
-
-***
-
-> 原文：https://webpack.js.org/concepts/plugins/

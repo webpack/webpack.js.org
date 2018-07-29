@@ -1,5 +1,5 @@
 ---
-title: 配置(Configuration)
+title: 配置(configuration)
 sort: 6
 contributors:
 - TheLarkInn
@@ -54,7 +54,3 @@ module.exports = {
 webpack 接受以多种编程和数据语言编写的配置文件。
 
 查看：[配置语言](/configuration/configuration-languages/)
-
-***
-
-> 原文：https://webpack.js.org/concepts/configuration/

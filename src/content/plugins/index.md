@@ -43,7 +43,3 @@ Name                                                     | Description
 更多第三方插件，请查看 [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#webpack-plugins) 列表。
 
 ![Awesome](../assets/awesome-badge.svg)
-
-***
-
-> 原文：https://webpack.js.org/plugins/

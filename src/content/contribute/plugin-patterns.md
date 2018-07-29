@@ -96,7 +96,3 @@ MyPlugin.prototype.apply = function(compiler) {
 
 module.exports = MyPlugin;
 ```
-
-***
-
-> 原文：https://webpack.js.org/contribute/plugin-patterns/

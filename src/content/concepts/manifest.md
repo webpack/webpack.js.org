@@ -1,5 +1,5 @@
 ---
-title: Manifest
+title: manifest
 sort: 10
 contributors:
   - skipjack
@@ -40,7 +40,3 @@ related:
 通过使用 bundle 计算出内容散列(content hash)作为文件名称，这样在内容或文件修改时，浏览器中将通过新的内容散列指向新的文件，从而使缓存无效。一旦你开始这样做，你会立即注意到一些有趣的行为。即使表面上某些内容没有修改，计算出的哈希还是会改变。这是因为，runtime 和 manifest 的注入在每次构建都会发生变化。
 
 查看_管理构建文件_指南的 [manifest 部分](/guides/output-management#the-manifest)，了解如何提取 manifest，并阅读下面的指南，以了解更多长效缓存错综复杂之处。
-
-***
-
-> 原文：https://webpack.js.org/concepts/manifest/

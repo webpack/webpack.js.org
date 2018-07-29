@@ -1,5 +1,5 @@
 ---
-title: 包含统计数据的文件(Stats Data)
+title: 包含统计数据的文件(stats data)
 sort: 3
 contributors:
   - skipjack
@@ -69,7 +69,7 @@ webpack --profile --json > compilation-stats.json
 ```
 
 
-### Chunk对象 (Chunk Objects)
+### Chunk 对象 (Chunk Objects)
 
 每一个 `chunks` 表示一组称为 [chunk](/glossary#c) 的模块。每一个对象都满足以下的结构。
 
@@ -178,7 +178,3 @@ Critical dependencies:
 ```
 
 W> 需要注意的是，当 `错误详情为false(errorDetails:false)`传入`toJson`函数时，对栈的追溯就不会被显示。`错误详情(errorDetils)` 默认值为 `true`
-
-***
-
-> 原文：https://webpack.js.org/api/stats/

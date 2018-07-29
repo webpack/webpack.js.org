@@ -198,7 +198,3 @@ You can also use `chunkFilename` to add hash values to the filename, since putti
 
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
-
-***
-
-> 原文：https://webpack.js.org/loaders/bundle-loader/

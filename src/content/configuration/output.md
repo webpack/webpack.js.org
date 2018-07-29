@@ -1,5 +1,5 @@
 ---
-title: 输出(Output)
+title: 输出(output)
 sort: 5
 contributors:
   - sokra
@@ -766,7 +766,3 @@ umdNamedDefine: true
 ```
 
 会对 UMD 的构建过程中的 AMD 模块进行命名。否则就使用匿名的 `define`。
-
-***
-
-> 原文：https://webpack.js.org/configuration/output/

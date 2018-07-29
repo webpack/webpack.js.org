@@ -1,5 +1,5 @@
 ---
-title: Compiler 钩子
+title: compiler 钩子
 group: Plugins
 sort: 1
 contributors:

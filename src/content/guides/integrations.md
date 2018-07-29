@@ -1,5 +1,5 @@
 ---
-title: 集成(Integrations)
+title: 集成(integrations)
 sort: 25
 contributors:
   - pksjce
@@ -126,7 +126,3 @@ module.exports = function(config) {
 ```
 
 获取更多信息，请访问[本仓库](https://github.com/webpack-contrib/karma-webpack)。
-
-***
-
-> 原文：https://webpack.js.org/guides/integrations/

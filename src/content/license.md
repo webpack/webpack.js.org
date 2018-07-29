@@ -19,7 +19,3 @@ webpack logo 和 icon 遵循不同的许可，
 ## webpack 代码示例
 
 代码示例使用 [CC0 1.0 Universal (CC0 1.0)（公共领域）](https://creativecommons.org/publicdomain/zero/1.0/) 许可，你可以自由使用它们。
-
-***
-
-> 原文：https://webpack.js.org/license/

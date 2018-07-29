@@ -52,6 +52,6 @@ const Splash = () => (
 
 Splash.title = 'webpack 中文文档(@印记中文) https://docschina.org/';
 Splash.description = 'webpack 是一个模块打包器。它的主要目标是将 JavaScript 文件打包在一起，打包后的文件用于在浏览器中使用，但它也能够胜任转换(transform)、打包(bundle)或包裹(package)任何资源(resource or asset)。';
-Splash.keywords = ['webpack', 'webpack 中文文档', '印记中文', 'docschina', 'docschina.org', 'doc.webpack-china.org, doc.react-china.org, nodejs.cn, vuefe.cn, babeljs.cn, parceljs.io, rollupjs.cn, koajs.cn'].join(', ');
+Splash.keywords = ['webpack', 'webpack 中文文档', '印记中文', 'docschina', 'docschina.org', 'webpack.docschina.org, doc.react-china.org, nodejs.cn, vue.docschina.org, babel.docschina.org, parceljs.docschina.org, rollup.docschina.org, koajs.docschina.org'].join(', ');
 
 export default Splash;

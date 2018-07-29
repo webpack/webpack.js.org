@@ -1,5 +1,5 @@
 ---
-title: 入口和上下文(Entry and Context)
+title: 入口和上下文(entry and context)
 sort: 4
 contributors:
   - sokra
@@ -62,7 +62,3 @@ entry: () => new Promise((resolve) => resolve(['./demo', './demo2']))
 ```
 
 当结合 [`output.library`](/configuration/output#output-library) 选项时：如果传入数组，则只导出最后一项。
-
-***
-
-> 原文：https://webpack.js.org/configuration/entry-context/

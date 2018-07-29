@@ -1,5 +1,5 @@
 ---
-title: 构建目标(Targets)
+title: 构建目标(targets)
 sort: 10
 contributors:
   - TheLarkInn
@@ -69,7 +69,3 @@ module.exports = [ serverConfig, clientConfig ];
 * **[Boilerplate of Electron-React Application](https://github.com/chentsulin/electron-react-boilerplate)**：一个 electron 主进程和渲染进程构建过程的很好的例子。
 
 ?> Need to find up to date examples of these webpack targets being used in live code or boilerplates.
-
-***
-
-> 原文：https://webpack.js.org/concepts/targets/

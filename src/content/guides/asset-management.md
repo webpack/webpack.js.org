@@ -629,7 +629,3 @@ __src/index.js__
 ## 延伸阅读
 
 - [加载字体](https://survivejs.com/webpack/loading/fonts/) on SurviveJS
-
-***
-
-> 原文：https://webpack.js.org/guides/asset-management/

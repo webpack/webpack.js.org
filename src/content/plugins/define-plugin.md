@@ -95,7 +95,3 @@ new webpack.DefinePlugin({
   'SERVICE_URL': JSON.stringify("http://dev.example.com")
 })
 ```
-
-***
-
-> 原文：https://webpack.js.org/plugins/define-plugin/

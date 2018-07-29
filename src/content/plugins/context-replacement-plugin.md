@@ -81,7 +81,3 @@ new ContextReplacementPlugin(/selector/, './folder', {
   './other-request': './new-request'
 })
 ```
-
-***
-
-> 原文：https://webpack.js.org/plugins/context-replacement-plugin/

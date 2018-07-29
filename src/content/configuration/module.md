@@ -1,5 +1,5 @@
 ---
-title: 模块(Module)
+title: 模块(module)
 sort: 6
 contributors:
   - sokra
@@ -353,7 +353,3 @@ T> 你可以使用 `ContextReplacementPlugin` 来修改这些单个依赖的值�
 * `require(expr)` 应该包含整个目录：`exprContextRegExp: /^\.\//`
 * `require("./templates/" + expr)` 不应该包含默认子目录：`wrappedContextRecursive: false`
 * `strictExportPresence` makes missing exports an error instead of warning
-
-***
-
-> 原文：https://webpack.js.org/configuration/module/

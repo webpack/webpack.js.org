@@ -399,7 +399,3 @@ manifest.bb5820632fb66c3fb357.js    5.85 kB       2  [emitted]         manifest
 章节示例：[dear-lizhihua/webpack.js.org-demos](https://github.com/dear-lizhihua/webpack.js.org-demos/tree/webpack.js.org/guides/caching)
 
 ***
-
-***
-
-> 原文：https://webpack.js.org/guides/caching/

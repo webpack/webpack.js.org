@@ -86,7 +86,3 @@ webpack --env.APP_TARGET VERSION_A
 webpack --env.APP_TARGET VERSION_B
 => 'I am version B'
 ```
-
-***
-
-> 原文：https://webpack.js.org/plugins/normal-module-replacement-plugin/
