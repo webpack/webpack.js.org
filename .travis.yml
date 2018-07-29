@@ -22,7 +22,7 @@ jobs:
 
   include:
     - stage: lint
-      name: Linting
+      name: Lind and Build
       before_install: npm install --global yarn
       install: yarn
       script:
