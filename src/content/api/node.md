@@ -40,13 +40,13 @@ webpack({
   // [配置对象](/configuration/)
 }, (err, [stats](#stats-object)) => {
   if (err || stats.hasErrors()) {
-    // [在这里处理错误](#-error-handling-)
+    // [在这里处理错误](#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86-error-handling-)
   }
   // 处理完成
 });
 ```
 
-T> 编译错误**不**在 `err` 对象内，而是需要使用 `stats.hasErrors()` 单独处理，你可以在指南的 [错误处理](#-error-handling-) 部分查阅到更多细节。`err` 对象只会包含 webpack 相关的问题，比如配置错误等。
+T> 编译错误**不**在 `err` 对象内，而是需要使用 `stats.hasErrors()` 单独处理，你可以在指南的 [错误处理](#错误处理-error-handling-) 部分查阅到更多细节。`err` 对象只会包含 webpack 相关的问题，比如配置错误等。
 
 T> 你可以向 `webpack` 函数提供一个由配置选项对象构成的数组。更多详细信息，请查看 [MultiCompiler](#multicompiler) 章节。
 
