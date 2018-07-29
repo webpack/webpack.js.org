@@ -191,6 +191,13 @@ Can return true/false at this point
 Parameters: `compilation`
 
 
+### `needAdditionalPass`
+
+`SyncBailHook`
+
+...
+
+
 ### `emit`
 
 `AsyncSeriesHook`
