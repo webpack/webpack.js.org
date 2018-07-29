@@ -30,7 +30,7 @@ async function main() {
     for (const repo of repos) {
       const [org, packageName] = repo.split('/');
       const url = `https://raw.githubusercontent.com/${repo}/master/README.md`;
-      const htmlUrl = `https://github.com/${repo}/`;
+      const htmlUrl = `https://github.com/${repo}`;
       const editUrl = `${htmlUrl}/edit/master/README.md`;
       const fileName = path.resolve(outputDir, `_${packageName}.md`);
 
