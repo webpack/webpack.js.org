@@ -171,7 +171,7 @@ T> 如果你在 [使用 `webpack-dev-middleware`](/guides/development#using-webp
 
 这是因为按钮的 `onclick` 事件仍然绑定在旧的 `printMe` 函数上。
 
-为了让它与 HRM 正常工作，我们需要使用 `module.hot.accept` 更新绑定到新的 `printMe` 函数上：
+为了让它与 HMR 正常工作，我们需要使用 `module.hot.accept` 更新绑定到新的 `printMe` 函数上：
 
 __index.js__
 
