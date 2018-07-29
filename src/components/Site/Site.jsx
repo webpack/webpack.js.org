@@ -52,7 +52,7 @@ class Site extends React.Component {
             {
               content: 'Documentation',
               url: '/concepts',
-              isActive: url => /^\/(api|concepts|configuration|guides|loaders|plugins)/.test(url),
+              isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
               children: this._strip(sections.filter(item => item.name !== 'contribute'))
             },
             { content: 'Contribute', url: '/contribute' },
