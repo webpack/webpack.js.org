@@ -293,7 +293,9 @@ __package.json__
     "license": "ISC",
     "devDependencies": {
       "webpack": "^4.0.1",
-      "webpack-cli": "^2.0.9",
+      "webpack-cli": "^2.0.9"
+    },
+    "dependencies": {
       "lodash": "^4.17.5"
     }
   }
