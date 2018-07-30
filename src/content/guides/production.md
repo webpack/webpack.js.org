@@ -148,42 +148,6 @@ __package.json__
 Feel free to run those scripts and see how the output changes as we continue adding to our _production_ configuration.
 
 
-## Minification
-
-Note that while the [`UglifyJSPlugin`](/plugins/uglifyjs-webpack-plugin) is a great place to start for minification, there are other options out there. Here are a few more popular ones:
-
-- [`BabelMinifyWebpackPlugin`](https://github.com/webpack-contrib/babel-minify-webpack-plugin)
-- [`ClosureCompilerPlugin`](https://github.com/roman01la/webpack-closure-compiler)
-
-If you decide to try another minification plugin, just make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide.
-
-
-## Source Mapping
-
-We encourage you to have source maps enabled in production, as they are useful for debugging as well as running benchmark tests. That said, you should choose one with a fairly quick build speed that's recommended for production use (see [`devtool`](/configuration/devtool)). For this guide, we'll use the `source-map` option in _production_ as opposed to the `inline-source-map` we used in _development_:
-
-__webpack.prod.js__
-
-``` diff
-  const merge = require('webpack-merge');
-  const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-  const common = require('./webpack.common.js');
-
-  module.exports = merge(common, {
-    mode: 'production',
-+   devtool: 'source-map',
-    plugins: [
--     new UglifyJSPlugin()
-+     new UglifyJSPlugin({
-+       sourceMap: true
-+     })
-    ]
-  });
-```
-
-T> Avoid `inline-***` and `eval-***` use in production as they can increase bundle size and reduce the overall performance.
-
-
 ## Specify the Mode
 
 Many libraries will key off the `process.env.NODE_ENV` variable to determine what should be included in the library. For example, when not in _production_ some libraries may add additional logging and testing to make debugging easier. However, with `process.env.NODE_ENV === 'production'` they might drop or add significant portions of code to optimize how things run for your actual users. Since webpack v4, specifying [`mode`](/concepts/mode/) automatically configures [`DefinePlugin`](/plugins/define-plugin) for you:
@@ -192,17 +156,11 @@ __webpack.prod.js__
 
 ``` diff
   const merge = require('webpack-merge');
-  const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
   const common = require('./webpack.common.js');
 
   module.exports = merge(common, {
     mode: 'production',
-    devtool: 'source-map',
-    plugins: [
-      new UglifyJSPlugin({
-        sourceMap: true
-      })
-    ]
+    devtool: 'source-map'
   });
 ```
 
@@ -232,6 +190,37 @@ __src/index.js__
 
   document.body.appendChild(component());
 ```
+
+
+## Minification
+
+webpack v4+ will minify your code by default in [`production mode`](/concepts/mode/#mode-production).
+
+Note that while the [`UglifyJSPlugin`](/plugins/uglifyjs-webpack-plugin) is a great place to start for minification and being used by default, there are other options out there. Here are a few more popular ones:
+
+- [`BabelMinifyWebpackPlugin`](https://github.com/webpack-contrib/babel-minify-webpack-plugin)
+- [`ClosureCompilerPlugin`](https://github.com/roman01la/webpack-closure-compiler)
+
+If you decide to try another minification plugin, just make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide and provide it as the [`optimization.minimizer`](/configuration/optimization/#optimization-minimizer).
+
+
+## Source Mapping
+
+We encourage you to have source maps enabled in production, as they are useful for debugging as well as running benchmark tests. That said, you should choose one with a fairly quick build speed that's recommended for production use (see [`devtool`](/configuration/devtool)). For this guide, we'll use the `source-map` option in _production_ as opposed to the `inline-source-map` we used in _development_:
+
+__webpack.prod.js__
+
+``` diff
+  const merge = require('webpack-merge');
+  const common = require('./webpack.common.js');
+
+  module.exports = merge(common, {
+    mode: 'production',
++   devtool: 'source-map'
+  });
+```
+
+T> Avoid `inline-***` and `eval-***` use in production as they can increase bundle size and reduce the overall performance.
 
 
 ## Minimize CSS
