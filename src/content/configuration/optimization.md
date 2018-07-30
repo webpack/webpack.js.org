@@ -325,3 +325,36 @@ module.exports = {
   }
 };
 ```
+
+## `optimization.sideEffects`
+
+`bool`
+
+Tells webpack to recognise the [`sideEffects`](https://github.com/webpack/webpack/blob/master/examples/side-effects/README.md) flag in `package.json` or rules to skip over modules which are flagged to contain no side effects when exports are not used. 
+
+__package.json__
+
+``` json
+{
+  "name": "awesome npm module",
+  "version": "1.0.0",
+  "sideEffects": false
+}
+```
+
+T> Please note that `sideEffects` should be in the npm module's `package.json` file and doesn't mean that you need to set `sideEffects` to `false` in your own project's `package.json` which requires that big module.
+
+`optimization.sideEffects` depends on [`optimization.providedExports`](#optimization-providedexports) to be enabled. This dependency has a build time cost, but eliminating modules has positive impact on performance because of less code generation. Effect of this optimization depends on your codebase, try it for possible performance wins.
+
+By default `optimization.sideEffects` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise. 
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    sideEffects: true
+  }
+};
+```
