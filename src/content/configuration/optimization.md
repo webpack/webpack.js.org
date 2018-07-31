@@ -278,3 +278,107 @@ module.exports = {
   }
 };
 ```
+
+## `optimization.occurrenceOrder`
+
+`bool`
+
+Tells webpack to figure out an order of modules which will result in the smallest initial bundle. By default `optimization.occurrenceOrder` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise. 
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    occurrenceOrder: false
+  }
+};
+```
+
+## `optimization.providedExports`
+
+`bool`
+
+Tells webpack to figure out which exports are provided by modules to generate more efficient code for `export * from ...`. By default  `optimization.providedExports` is enabled. 
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    providedExports: false
+  }
+};
+```
+
+## `optimization.usedExports`
+
+`bool`
+
+Tells webpack to determine used exports for each module. This depends on [`optimization.providedExports`](#optimization-occurrenceorder). Information collected by `optimization.usedExports` is used by other optimizations or code generation i.e. exports are not generated for unused exports, export names are mangled to single char identifiers when all usages are compatible. 
+Dead code elimination in minimizers will benefit from this and can remove unused exports.
+By default `optimization.usedExports` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise. 
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    usedExports: true
+  }
+};
+```
+
+## `optimization.concatenateModules`
+
+`bool`
+
+Tells webpack to find segments of the module graph which can be safely concatenated into a single module. Depends on [`optimization.providedExports`](#optimization-providedexports) and [`optimization.usedExports`](#optimization-usedexports).
+By default `optimization.concatenateModules` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise. 
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    concatenateModules: true
+  }
+};
+```
+
+## `optimization.sideEffects`
+
+`bool`
+
+Tells webpack to recognise the [`sideEffects`](https://github.com/webpack/webpack/blob/master/examples/side-effects/README.md) flag in `package.json` or rules to skip over modules which are flagged to contain no side effects when exports are not used. 
+
+__package.json__
+
+``` json
+{
+  "name": "awesome npm module",
+  "version": "1.0.0",
+  "sideEffects": false
+}
+```
+
+T> Please note that `sideEffects` should be in the npm module's `package.json` file and doesn't mean that you need to set `sideEffects` to `false` in your own project's `package.json` which requires that big module.
+
+`optimization.sideEffects` depends on [`optimization.providedExports`](#optimization-providedexports) to be enabled. This dependency has a build time cost, but eliminating modules has positive impact on performance because of less code generation. Effect of this optimization depends on your codebase, try it for possible performance wins.
+
+By default `optimization.sideEffects` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise. 
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    sideEffects: true
+  }
+};
+```
