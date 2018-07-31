@@ -633,3 +633,11 @@ The normal module loader is the function that actually loads all the modules
 in the module graph (one-by-one).
 
 Parameters: `loaderContext` `module`
+
+### `dependencyReference`
+
+`SyncWaterfallHook`
+
+`Compilation.hooks.dependencyReference(depRef, dependency, module)` allows to change the references reported by dependencies.
+
+Parameters: `depRef` `dependency` `module`
