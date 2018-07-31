@@ -6,6 +6,7 @@ contributors:
   - simon04
   - tbroadley
   - chenxsan
+  - madhavarshney
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -67,7 +68,7 @@ If your project structure is as follows -
 ```
 
 ```bash
-webpack src/index.js dist/bundle.js
+webpack ./src/index.js dist/bundle.js
 ```
 
 This will bundle your source code with entry as `index.js` and the output bundle file will have a path of `dist` and the filename will be `bundle.js`
@@ -98,7 +99,7 @@ This will form the bundle with both the files as separate entry points.
 
 ### Common Options
 
-W> Note that Command Line Interface has a higher precendence for the arguments you use it with than your configuration file. For instance, if you pass [`--mode="production"`](/concepts/mode/#usage) to webpack CLI and your configuration file uses `development`, `production` will be used.
+W> Note that Command Line Interface has a higher precedence for the arguments you use it with than your configuration file. For instance, if you pass [`--mode="production"`](/concepts/mode/#usage) to webpack CLI and your configuration file uses `development`, `production` will be used.
 
 **List all of the options available on the cli**
 
@@ -255,9 +256,9 @@ These allow you to configure the webpack [resolver](/configuration/resolve/) wit
 
 Parameter              | Explanation                                             | Example
 ---------------------- | ------------------------------------------------------- | -------------
---resolve-alias        | Setup a module alias for resolving                      | --resolve-alias jquery-plugin=jquery.plugin
---resolve-extensions   | Setup extensions that should be used to resolve modules | --resolve-extensions .es6 .js .ts
---resolve-loader-alias | Minimize javascript and switches loaders to minimizing  |
+`--resolve-alias`        | Setup a module alias for resolving                      | --resolve-alias jquery-plugin=jquery.plugin
+`--resolve-extensions`   | Setup extensions that should be used to resolve modules | --resolve-extensions .es6 .js .ts
+`--resolve-loader-alias` | Minimize javascript and switches loaders to minimizing  |
 
 
 ### Stats Options
@@ -295,7 +296,7 @@ Parameter         | Explanation                              | Usage
 ----------------- | ---------------------------------------- | -----
 `--bail`          | Abort the compilation on first error     |
 `--cache`         | Enable in memory caching [Enabled by default for watch] | `--cache=false`
-`--define`        | Define any free variable, see [shimming](/guides/shimming) | `--define process.env.NODE_ENV='development'`
+`--define`        | Define any free variable, see [shimming](/guides/shimming) | `--define process.env.NODE_ENV="'development'"`
 `--hot`           | Enables [Hot Module Replacement](/concepts/hot-module-replacement) | `--hot=true`
 `--labeled-modules` | Enables labeled modules [Uses LabeledModulesPlugin] |
 `--plugin`        | Load this [plugin](/configuration/plugins/) |

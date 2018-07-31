@@ -5,12 +5,13 @@ contributors:
   - simon04
   - kinseyost
   - byzyk
+  - madhavarshney
 related:
   - title: Building Eval Source Maps
     url: https://survivejs.com/webpack/building/source-maps/#sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin
 ---
 
-This plugin enables more fine grained control of source map generation. It is an alternative to the [`devtool`](/configuration/devtool/) configuration option.
+This plugin enables more fine grained control of source map generation. It is also enabled automatically by certain settings of the [`devtool`](/configuration/devtool/) configuration option.
 
 ``` js
 new webpack.EvalSourceMapDevToolPlugin(options);
@@ -34,10 +35,25 @@ The following options are supported:
 
 T> Setting `module` and/or `columns` to `false` will yield less accurate source maps but will also improve compilation performance significantly.
 
+T> If you want to use a custom configuration for this plugin in [development mode](/concepts/mode/#mode-development), make sure to disable the default one. I.e. set `devtool: false`.
 
 ## Examples
 
 The following examples demonstrate some common use cases for this plugin.
+
+### Basic Use Case
+
+You can use the following code to replace the configuration option `devtool: eval-source-map` with an equivalent custom plugin configuration:
+
+```js
+module.exports = {
+  // ...
+  devtool: false,
+  plugins: [
+    new webpack.EvalSourceMapDevToolPlugin({})
+  ]
+};
+```
 
 ### Exclude Vendor Maps
 
@@ -66,7 +82,7 @@ new webpack.EvalSourceMapDevToolPlugin({
 });
 ```
 
-Or a substition string:
+Or a substitution string:
 
 ``` js
 new webpack.EvalSourceMapDevToolPlugin({

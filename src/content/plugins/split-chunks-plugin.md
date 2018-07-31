@@ -3,11 +3,13 @@ title: SplitChunksPlugin
 contributors:
   - sokra
   - jeremenichelli
+  - Priestch
   - chrisdothtml
   - EugeneHlushko
   - byzyk
+  - madhavarshney
 related:
-  - title: webpack's automatic deduplication algorthim example
+  - title: webpack's automatic deduplication algorithm example
     url: https://github.com/webpack/webpack/blob/master/examples/many-pages/README.md
   - title: "webpack 4: Code Splitting, chunk graph and the splitChunks optimization"
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -50,6 +52,7 @@ module.exports = {
     splitChunks: {
       chunks: 'async',
       minSize: 30000,
+      maxSize: 0,
       minChunks: 1,
       maxAsyncRequests: 5,
       maxInitialRequests: 3,
@@ -124,7 +127,7 @@ Maximum number of parallel requests when on-demand loading.
 
 `number`
 
-Maximum number of parallel requests at an entrypoint.
+Maximum number of parallel requests at an entry point.
 
 ### `splitChunks.minChunks`
 
@@ -136,7 +139,20 @@ Minimum number of chunks that must share a module before splitting.
 
 `number`
 
-Minimum size for a chunk to be generated.
+Minimum size, in bytes, for a chunk to be generated.
+
+### `splitChunks.maxSize`
+
+`number`
+
+Using `maxSize` (either globally `optimization.splitChunks.maxSize` per cache group `optimization.splitChunks.cacheGroups[x].maxSize` or for the fallback cache group `optimization.splitChunks.fallbackCacheGroup.maxSize`) tells webpack to try to split chunks bigger than `maxSize` into smaller parts. Parts will be at least `minSize` (next to `maxSize`) in size.
+The algorithm is deterministic and changes to the modules will only have local impact. So that it is usable when using long term caching and doesn't require records. `maxSize` is only a hint and could be violated when modules are bigger than `maxSize` or splitting would violate `minSize`.
+
+When the chunk has a name already, each part will get a new name derived from that name. Depending on the value of `optimization.splitChunks.hidePathInfo` it will add a key derived from the first module name or a hash of it.
+
+`maxSize` options is intended to be used with HTTP/2 and long term caching. It increase the request count for better caching. It could also be used to decrease the file size for faster rebuilding.
+
+T> `maxSize` takes higher priority than `maxInitialRequest/maxAsyncRequests`. Actual priority is `maxInitialRequest/maxAsyncRequests < maxSize < minSize`.
 
 ### `splitChunks.name`
 
