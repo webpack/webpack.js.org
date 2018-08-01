@@ -69,11 +69,35 @@ By default webpack v4+ provides new common chunks strategies out of the box for 
 
 `object` `string` `boolean`
 
-Setting `optimization.runtimeChunk` to `true` adds an additional chunk to each entry point containing only the runtime.
-It is possible to use preset mode of the plugin by providing a string value:
+Setting `optimization.runtimeChunk` to `true` or `"multiple"` adds an additional chunk to each entrypoint containing only the runtime. This setting is an alias for:
 
-- `single`: creates a runtime file to be shared for all generated chunks.
-- `multiple`: creates multiple runtime files for common chunks.
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    runtimeChunk: {
+      name: entrypoint => `runtime~${entrypoint.name}`
+    }
+  }
+};
+```
+
+The value `"single"` instead creates a runtime file to be shared for all generated chunks. This setting is an alias for:
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    runtimeChunk: {
+      name: 'runtime'
+    }
+  }
+};
+```
 
 By setting `optimization.runtimeChunk` to `object` it is only possible to provide the `name` property which stands for the name or name factory for the runtime chunks.
 
@@ -135,7 +159,7 @@ module.exports = {
 
 `boolean: false`
 
-Tells webpack to use readable chunk identifiers for better debugging. This option is enabled by default for [mode](/concepts/mode/) `development` and disabled for [mode](/concepts/mode/) `production` if no option is provided in webpack config. 
+Tells webpack to use readable chunk identifiers for better debugging. This option is enabled by default for [mode](/concepts/mode/) `development` and disabled for [mode](/concepts/mode/) `production` if no option is provided in webpack config.
 
 __webpack.config.js__
 
