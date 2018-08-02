@@ -30,10 +30,13 @@ const prod = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    new CopyWebpackPlugin([{
-      from: './assets/icon-square-small-slack.png',
-      to: './assets/'
-    }])
+    new CopyWebpackPlugin([
+      {
+        from: './assets/icon-square-small-slack.png',
+        to: './assets/'
+      },
+      'CNAME'
+    ])
   ]
 };
 
