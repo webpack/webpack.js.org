@@ -85,7 +85,7 @@ const configuration = require('./webpack.config.js');
 
 let compiler = webpack(configuration);
 
-new webpack.ProgressPlugin().apply(compiler)
+new webpack.ProgressPlugin().apply(compiler);
 
 compiler.run(function(err, stats) {
   // ...
