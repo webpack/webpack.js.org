@@ -34,7 +34,7 @@
     "fetch:supporters": "node src/utilities/fetch-supporters.js",
     "fetch:starter-kits": "node src/utilities/fetch-starter-kits.js",
     "prebuild": "npm run clean",
-    "build": "run-s fetch content && NODE_ENV=production webpack --config webpack.prod.js",
+    "build": "run-s fetch content && cross-env NODE_ENV=production webpack --config webpack.prod.js",
     "postbuild": "npm run sitemap",
     "test": "npm run lint",
     "lint": "run-s lint:*",
