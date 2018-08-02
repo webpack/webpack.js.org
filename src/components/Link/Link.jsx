@@ -2,7 +2,7 @@ import React from 'react';
 import startsWith from 'lodash/startsWith';
 
 let RRouter;
-if (__DEV__) {
+if (process.env.NODE_ENV === 'development') {
   RRouter = require('react-router-dom');
 }
 
@@ -11,7 +11,7 @@ export default ({ to, ...props }) => {
     return <a href={to} target="_blank" {...props} />;
   }
 
-  if (__DEV__) {
+  if (process.env.NODE_ENV === 'development') {
     return <RRouter.Link to={to} {...props} />;
   }
 

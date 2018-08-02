@@ -18,9 +18,9 @@ const StarterKits = props => (
       The following table contains a curated list of starter kits that can
       be used as a jumping off point for webpack-based projects. To add a new
       kit to the list please visit{' '}
-      <Link to="https://github.com/ahfarmer/tool-list">this repository</Link>{' '}
+      <Link to="https://github.com/ahfarmer/javascriptstuff-db">this repository</Link>{' '}
       and submit a PR against this file:
-      <code>generator/starterProjectUrls.js</code>.
+      <code>data/source/react-starter-projects.js</code>.
     </p>
 
     <blockquote className="warning">

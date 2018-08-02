@@ -4,6 +4,8 @@ sort: 17
 contributors:
   - sokra
   - tbroadley
+  - byzyk
+  - madhavarshney
 ---
 
 This guide contains some useful tips for improving build/compilation performance.
@@ -28,21 +30,35 @@ Staying up to date with __Node.js__  can also help with performance. On top of t
 
 Apply loaders to the minimal number of modules necessary. Instead of:
 
-``` js
-{
-  test: /\.js$/,
-  loader: "babel-loader"
-}
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader'
+      }
+    ]
+  }
+};
 ```
 
 Use the `include` field to only apply the loader modules that actually need to be transformed by it:
 
-``` js
-{
-  test: /\.js$/,
-  include: path.resolve(__dirname, "src"),
-  loader: "babel-loader"
-}
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        include: path.resolve(__dirname, 'src'),
+        loader: 'babel-loader'
+      }
+    ]
+  }
+};
 ```
 
 
@@ -70,8 +86,8 @@ Use the `DllPlugin` to move code that is changed less often into a separate comp
 Decrease the total size of the compilation to increase build performance. Try to keep chunks small.
 
 - Use fewer/smaller libraries.
-- Use the `CommonsChunksPlugin` in Multi-Page Applications.
-- Use the `CommonsChunksPlugin` in `async` mode in Multi-Page Applications.
+- Use the `CommonsChunkPlugin` in Multi-Page Applications.
+- Use the `CommonsChunkPlugin` in `async` mode in Multi-Page Applications.
 - Remove unused code.
 - Only compile the part of the code you are currently developing on.
 
@@ -115,6 +131,9 @@ The following utilities improve performance by compiling and serving assets in m
 - `webpack-hot-middleware`
 - `webpack-dev-middleware`
 
+### stats.toJson speed
+
+webpack 4 outputs a large amount of data with its `stats.toJson()` by default. Avoid retrieving portions of the `stats` object unless necessary in the incremental step. `webpack-dev-server` after v3.1.3 contained a substantial performance fix to minimize the amount of data retrieved from the `stats` object per incremental build step.
 
 ### Devtool
 
@@ -145,12 +164,70 @@ webpack only emits updated chunks to the filesystem. For some configuration opti
 
 Make sure the entry chunk is cheap to emit by keeping it small. The following code block extracts a chunk containing only the runtime with _all other chunks as children_:
 
-``` js
+```js
 new CommonsChunkPlugin({
-  name: "manifest",
+  name: 'manifest',
   minChunks: Infinity
-})
+});
 ```
+
+### Avoid Extra Optimization Steps
+
+webpack does extra algorithmic work to optimize the output for size and load performance. These optimizations are performant for smaller codebases, but can be costly in larger ones:
+
+```js
+module.exports = {
+  // ...
+  optimization: {
+    removeAvailableModules: false,
+    removeEmptyChunks: false,
+    splitChunks: false,
+  }
+};
+```
+
+### Output Without Path Info
+
+webpack has the ability to generate path info in the output bundle. However, this puts garbage collection pressure on projects that bundle thousands of modules. Turn this off in the `options.output.pathinfo` setting:
+
+```js
+module.exports = {
+  // ...
+  output: {
+    pathinfo: false
+  }
+};
+```
+
+### Node.js Version
+
+There has been a [performance regression](https://github.com/nodejs/node/issues/19769) in the latest stable versions of Node.js and its ES2015 `Map` and `Set` implementations. A fix has been merged in master, but a release has yet to be made. In the meantime, to get the most out of incremental build speeds, try to stick with version 8.9.x (problem exists between 8.9.10 - 9.11.1). webpack has moved to using those ES2015 data structures liberally, and it will improve the initial build times as well.
+
+### TypeScript Loader
+
+Recently, `ts-loader` has started to consume the internal TypeScript watch mode APIs which dramatically decreases the number of modules to be rebuilt on each iteration. This `experimentalWatchApi` shares the same logic as the normal TypeScript watch mode itself and is quite stable for development use. Turn on `transpileOnly` as well for truly fast incremental builds.
+
+```js
+module.exports = {
+  // ...
+  test: /\.tsx?$/,
+  use: [
+    {
+      loader: 'ts-loader',
+      options: {
+        transpileOnly: true,
+        experimentalWatchApi: true,
+      },
+    },
+  ],
+};
+```
+
+Note: the `ts-loader` documentation suggests the use of `cache-loader`, but this actually slows the incremental builds down with disk writes.
+
+To gain typechecking again, use the [`ForkTsCheckerWebpackPlugin`](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin).
+
+There is a [full example](https://github.com/TypeStrong/ts-loader/tree/master/examples/fast-incremental-builds) on the ts-loader github repository
 
 ---
 
@@ -187,14 +264,13 @@ The following tools have certain problems that can degrade build performance.
 - Minimize the number of preset/plugins
 
 
-### Typescript
+### TypeScript
 
 - Use the `fork-ts-checker-webpack-plugin` for type checking in a separate process.
-- Configure loaders to skip typechecking.
+- Configure loaders to skip type checking.
 - Use the `ts-loader` in `happyPackMode: true` / `transpileOnly: true`.
 
 
 ### Sass
 
-- `node-sass` has a bug which blocks threads from the Node.js threadpool. When using it with the `thread-loader` set `workerParallelJobs: 2`.
-
+- `node-sass` has a bug which blocks threads from the Node.js thread pool. When using it with the `thread-loader` set `workerParallelJobs: 2`.
