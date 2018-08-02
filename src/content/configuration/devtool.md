@@ -6,8 +6,9 @@ contributors:
   - skipjack
   - SpaceK33z
   - lricoy
+  - madhavarshney
 related:
-  - title: Enabling Sourcemaps
+  - title: Enabling Source Maps
     url: https://survivejs.com/webpack/developing-with-webpack/enabling-sourcemaps/
   - title: Webpack's Devtool Source Map
     url: http://cheng.logdown.com/posts/2016/03/25/679045
@@ -35,8 +36,8 @@ eval                           | +++   | +++     | no         | generated code
 cheap-eval-source-map          | +     | ++      | no         | transformed code (lines only)
 cheap-module-eval-source-map   | o     | ++      | no         | original source (lines only)
 eval-source-map                | --    | +       | no         | original source
-cheap-source-map               | +     | o       | no         | transformed code (lines only)
-cheap-module-source-map        | o     | -       | no         | original source (lines only)
+cheap-source-map               | +     | o       | yes        | transformed code (lines only)
+cheap-module-source-map        | o     | -       | yes        | original source (lines only)
 inline-cheap-source-map        | +     | o       | no         | transformed code (lines only)
 inline-cheap-module-source-map | o     | -       | no         | original source (lines only)
 source-map                     | --    | --      | yes        | original source
