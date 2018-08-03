@@ -4,7 +4,7 @@ jslinks.displayName = "jslinks";
 jslinks.aliases = [];
 
 function jslinks(Prism) {
-  Prism.languages["jslinks"] = Prism.languages.extend("javascript", {
+  Prism.languages["js-with-links-with-details"] = Prism.languages.extend("javascript", {
     keyword: /(<details>|<\/details>|<summary>|<\/summary>)/
   });
 }

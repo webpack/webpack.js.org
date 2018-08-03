@@ -41,11 +41,6 @@
     "serve": "npm run build && sirv start ./dist --port 4000",
     "deploy": "gh-pages -d dist"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.{js,jsx,md}": ["npm run lint:js"],
     "*.md": ["npm run lint:markdown"]

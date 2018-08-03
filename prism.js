@@ -60,20 +60,6 @@ function getChildren(tree, index) {
   return tree;
 }
 
-// var tree = remark().parse('Some _emphasis_, **importance**, and `code`.');
-
-// console.log('tree', tree)
-
-// var parent = tree.children[0]
-// var start = parent.children[0]
-// var end = parent.children[parent.children.length - 1]
-
-// console.log('parent', inspect(parent))
-// console.log('start', inspect(start))
-// console.log('end', inspect(end))
-
-// console.log('between',inspect(findAllBetween(parent, start, end)))
-
 function isElement(tree) {
   return tree.type === 'element';
 }
@@ -147,10 +133,6 @@ function attacher({ include, exclude } = {}) {
           return newTree.children.indexOf(detailsStart[i]);
         });
 
-        // newTree.children.splice(detailsStartIndexes[0], detailsTree[0].length + 1);
-        // newTree.children.splice(detailsStartIndexes[1] - (detailsTree[0].length + 1), detailsTree[1].length + 1);
-        // newTree.children.splice(detailsStartIndexes[2] - (detailsTree[0].length + 1 + detailsTree[1].length + 1), detailsTree[2].length + 1);
-
         let prevCount = 0;
 
         detailsStart.forEach((_, i) => {
@@ -180,50 +162,12 @@ function attacher({ include, exclude } = {}) {
           }
         })
 
-        let nextCount = 0;
+        let treeCount = 0
 
-        console.log(detailsStartIndexes)
-
-        newDetailsTrees.forEach(e => {
-          console.log(e.children.length + 3)
+        detailsStart.forEach((_, i) => {
+          treeCount = detailsStartIndexes[i - 1] ? (detailsStartIndexes[i - 1] + newDetailsTrees[i - 1].children.length + 4) : 0
+          newTree.children.splice(detailsStartIndexes[i] - treeCount, 0, newDetailsTrees[i])
         })
-
-        // detailsStart.forEach((_, i) => {
-          newTree.children.splice(detailsStartIndexes[0], 0, newDetailsTrees[0])
-          const prev = detailsStartIndexes[1] - (detailsStartIndexes[0] + newDetailsTrees[0].children.length + 4)
-          newTree.children.splice(detailsStartIndexes[1] - (detailsStartIndexes[0] + newDetailsTrees[0].children.length + 4), 0, newDetailsTrees[1])
-          newTree.children.splice(detailsStartIndexes[2] - (prev + detailsStartIndexes[0]), 0, newDetailsTrees[2])
-        // })
-
-        // console.log(util.inspect(newTree.children.map((e, i) => [i, e]), { depth: 4 }));
-
-        // const summaryTree = findAllBetween(newTree, summaryStart, summaryEnd)
-        // const detailsTree = findAllBetween(newTree, detailsStart, detailsEnd)
-
-        // const dSIndex = newTree.children.indexOf(detailsStart)
-        // const dEIndex = newTree.children.indexOf(detailsEnd)
-
-        // const sSIndex = newTree.children.indexOf(summaryStart)
-        // const sEIndex = newTree.children.indexOf(summaryEnd)
-
-        // newTree.children.splice(dSIndex, detailsTree.length + 1)
-
-        // const cleanDetailsTree = detailsTree.splice(summaryTree.length + 3)
-
-        // const newDetailsTree = {
-        //   type: 'element',
-        //   tagName: 'details',
-        //   children: [
-        //     {
-        //       type: 'element',
-        //       tagName: 'summary',
-        //       children: summaryTree.splice(1)
-        //     },
-        //     ...cleanDetailsTree
-        //   ]
-        // }
-
-        // newTree.children.splice(dSIndex, 0, newDetailsTree)
 
         data.hChildren = newTree.children;
       } catch (e) {

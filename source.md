@@ -1,4 +1,5 @@
-```jslinks
+```js-with-links-with-details
+
 const path = require('path');
 
 module.exports = {
@@ -21,21 +22,46 @@ module.exports = {
       b: ["./app/entry-b1", "./app/entry-b2"]
     },
   </details>
-  // defaults to ./src
-  // Here the application starts executing
-  // and webpack starts bundling
-  [output](/configuration/output): {
-    // options related to how webpack emits results
-    [path](/configuration/output#output-path): path.resolve(__dirname, "dist"), // string
-    // the target directory for all output files
-    // must be an absolute path (use the Node.js path module)
-    <details>
-      <summary>
-        [filename](/configuration/output#output-filename): "bundle.js", // string
-      </summary>
-      [filename](/configuration/output#output-filename): "[name].js", // for multiple entry points
-      [filename](/configuration/output#output-filename): "[chunkhash].js", // for [long term caching](/guides/caching)
-    </details>
-  }
+  <details>
+    <summary>
+      /* Advanced configuration (click to show) */
+    </summary>
+    [resolveLoader](/configuration/resolve#resolveloader): { /* same as resolve */ }
+    // separate resolve options for loaders
+    [parallelism](other-options#parallelism): 1, // number
+    // limit the number of parallel processed modules
+    [profile](other-options#profile): true, // boolean
+    // capture timing information
+    [bail](other-options#bail): true, //boolean
+    // fail out on the first error instead of tolerating it.
+    [cache](other-options#cache): false, // boolean
+    // disable/enable caching
+    [watch](watch#watch): true, // boolean
+    // enables watching
+    [watchOptions](watch#watchoptions): {
+      [aggregateTimeout](watch#watchoptions-aggregatetimeout): 1000, // in ms
+      // aggregates multiple changes to a single rebuild
+      [poll](watch#watchoptions-poll): true,
+      [poll](watch#watchoptions-poll): 500, // intervall in ms
+      // enables polling mode for watching
+      // must be used on filesystems that doesn't notify on change
+      // i. e. nfs shares
+    },
+    [node](node): {
+      // Polyfills and mocks to run Node.js-
+      // environment code in non-Node environments.
+      [console](node#node-console): false, // boolean | "mock"
+      [global](node#node-global): true, // boolean | "mock"
+      [process](node#node-process): true, // boolean
+      [__filename](node#node-__filename): "mock", // boolean | "mock"
+      [__dirname](node#node-__dirname): "mock", // boolean | "mock"
+      [Buffer](node#node-buffer): true, // boolean | "mock"
+      [setImmediate](node#node-setimmediate): true // boolean | "mock" | "empty"
+    },
+    [recordsPath](other-options#recordspath): path.resolve(__dirname, "build/records.json"),
+    [recordsInputPath](other-options#recordsinputpath): path.resolve(__dirname, "build/records.json"),
+    [recordsOutputPath](other-options#recordsoutputpath): path.resolve(__dirname, "build/records.json"),
+    // TODO
+  </details>
 }
 ```
