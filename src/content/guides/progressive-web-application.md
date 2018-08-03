@@ -105,7 +105,7 @@ Time: 782ms
                                       print.bundle.js    2.74 kB       1  [emitted]         print
                                            index.html  254 bytes          [emitted]
 precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js  268 bytes          [emitted]
-                                                sw.js       1 kB          [emitted]
+                                    service-worker.js       1 kB          [emitted]
    [0] ./src/print.js 87 bytes {0} {1} [built]
    [1] ./src/index.js 477 bytes {0} [built]
    [3] (webpack)/buildin/global.js 509 bytes {0} [built]
@@ -118,7 +118,7 @@ Child html-webpack-plugin for "index.html":
         + 2 hidden modules
 ```
 
-As you can see, we now have 2 extra files being generated; `sw.js` and the more verbose `precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js`. `sw.js` is the Service Worker file and `precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js` is a file that `sw.js` requires so it can run. Your own generated files will likely be different; but you should have an `sw.js` file there.
+As you can see, we now have 2 extra files being generated; `service-worker.js` and the more verbose `precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js`. `service-worker.js` is the Service Worker file and `precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js` is a file that `service-worker.js` requires so it can run. Your own generated files will likely be different; but you should have an `service-worker.js` file there.
 
 So we're now at the happy point of having produced a Service Worker. What's next?
 
@@ -135,7 +135,7 @@ __index.js__
 
 + if ('serviceWorker' in navigator) {
 +   window.addEventListener('load', () => {
-+     navigator.serviceWorker.register('/sw.js').then(registration => {
++     navigator.serviceWorker.register('/service-worker.js').then(registration => {
 +       console.log('SW registered: ', registration);
 +     }).catch(registrationError => {
 +       console.log('SW registration failed: ', registrationError);

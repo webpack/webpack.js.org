@@ -4,6 +4,7 @@ sort: 7
 contributors:
   - skipjack
   - tbroadley
+  - madhavarshney
 related:
   - title: Learn and Debug webpack with Chrome DevTools!
     url: https://medium.com/webpack/webpack-bits-learn-and-debug-webpack-with-chrome-dev-tools-da1c5b19554
@@ -66,6 +67,6 @@ Debugger listening on ws://127.0.0.1:9229/c624201a-250f-416e-a018-300bbec7be2c
 For help see https://nodejs.org/en/docs/inspector
 ```
 
-Now jump to `chrome://inspect` in the browser and you should see any active scripts you've inspected under the _Remote Target_ header. Click the "inspect" link under each script to open a dedicated debugger or the _Open dedicated DevTools for Node_ link for a session that will autoconnect. You can also check out the [NiM extension](https://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj), a handy Chrome plugin that will automatically open a DevTools tab every time you `--inspect` a script.
+Now jump to `chrome://inspect` in the browser and you should see any active scripts you've inspected under the _Remote Target_ header. Click the "inspect" link under each script to open a dedicated debugger or the _Open dedicated DevTools for Node_ link for a session that will connect automatically. You can also check out the [NiM extension](https://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj), a handy Chrome plugin that will automatically open a DevTools tab every time you `--inspect` a script.
 
 We recommend using the `--inspect-brk` flag which will break on the first statement of the script allowing you to go through the source to set breakpoints and start/stop the build as you please. Also, don't forget that you can still pass arguments to the script. For example, if you have multiple configuration files you could pass `--config webpack.prod.js` to specify the configuration you'd like to debug.

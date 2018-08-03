@@ -2,6 +2,7 @@
 title: BannerPlugin
 contributors:
   - simon04
+  - byzyk
 related:
   - title: banner-plugin-hashing test
     url: https://github.com/webpack/webpack/blob/master/test/configCases/plugins/banner-plugin-hashing/webpack.config.js
@@ -9,16 +10,20 @@ related:
 
 Adds a banner to the top of each generated chunk.
 
-``` javascript
-new webpack.BannerPlugin(banner)
+```javascript
+const webpack = require('webpack');
+
+new webpack.BannerPlugin(banner);
 // or
-new webpack.BannerPlugin(options)
+new webpack.BannerPlugin(options);
 ```
 
 
 ## Options
 
-```javascript
+<!-- eslint-skip -->
+
+```js
 {
   banner: string, // the banner as string, it will be wrapped in a comment
   raw: boolean, // if true, banner will not be wrapped in a comment
@@ -35,7 +40,9 @@ new webpack.BannerPlugin(options)
 Since webpack 2.5.0, placeholders are evaluated in the `banner` string:
 
 ```javascript
+import webpack from 'webpack';
+
 new webpack.BannerPlugin({
-  banner: "hash:[hash], chunkhash:[chunkhash], name:[name], filebase:[filebase], query:[query], file:[file]"
-})
+  banner: 'hash:[hash], chunkhash:[chunkhash], name:[name], filebase:[filebase], query:[query], file:[file]'
+});
 ```
