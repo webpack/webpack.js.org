@@ -268,7 +268,12 @@ module.exports = {
 Using hashes generated for extracted content:
 
 ```js
-filename: "[contenthash].bundle.css"
+module.exports = {
+  //...
+  output: {
+    filename: '[contenthash].bundle.css';
+  }
+};
 ```
 
 Make sure to read the [Caching guide](/guides/caching) for details. There are more steps involved than just setting this option.
