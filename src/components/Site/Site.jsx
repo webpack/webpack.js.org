@@ -20,6 +20,8 @@ import Footer from '../Footer/Footer';
 import Page from '../Page/Page';
 import Gitter from '../Gitter/Gitter';
 import Vote from '../Vote/Vote';
+import Organization from '../Organization/Organization';
+import StarterKits from '../StarterKits/StarterKits';
 
 // Load Styling
 import '../../styles/index';
@@ -69,6 +71,9 @@ class Site extends React.Component {
             render={props => (
               <Container className="site__content">
                 <Switch>
+                  <Route path="/vote" component={Vote} />
+                  <Route path="/organization" component={Organization} />
+                  <Route path="/starter-kits" component={StarterKits} />
                   {pages.map(page => (
                     <Route
                       key={page.url}
@@ -97,7 +102,6 @@ class Site extends React.Component {
                       }}
                     />
                   ))}
-                  <Route path="/vote" component={Vote} />
                   <Route render={props => '404 Not Found'} />
                 </Switch>
               </Container>

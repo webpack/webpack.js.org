@@ -8,7 +8,7 @@ related:
   - title: Nonce purpose explained
     url: https://stackoverflow.com/questions/42922784/what-s-the-purpose-of-the-html-nonce-attribute-for-script-and-style-elements
   - title: On the Insecurity of Whitelists and the Future of Content Security Policy
-    url: https://research.google.com/pubs/pub45542.html
+    url: https://ai.google/research/pubs/pub45542
   - title: Locking Down Your Website Scripts with CSP, Hashes, Nonces and Report URI
     url: https://www.troyhunt.com/locking-down-your-website-scripts-with-csp-hashes-nonces-and-report-uri/
   - title: CSP on MDN

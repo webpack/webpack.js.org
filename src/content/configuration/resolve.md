@@ -18,7 +18,7 @@ These options change how modules are resolved. webpack provides reasonable defau
 
 `object`
 
-Configure how modules are resolved. For example, when calling `import "lodash"` in ES2015, the `resolve` options can change where webpack goes to look for `"lodash"` (see [`modules`](#resolve-modules)).
+Configure how modules are resolved. For example, when calling `import "lodash"` in ES2015, the `resolve` options can change where webpack goes to look for `"lodash"` (see [`modules`](#resolvemodules)).
 
 
 ### `resolve.alias`
@@ -388,7 +388,7 @@ T> Note that you can use alias here and other features familiar from resolve. Fo
 
 `array`
 
-The extensions/suffixes which that are used when resolving loaders. Since version two, we [strongly recommend](/guides/migrating#automatic-loader-module-name-extension-removed) using the full name, e.g. `example-loader`, as much as possible for clarity. However, if you really wanted to exclude the `-loader` bit, i.e. just use `example`, you can use this option to do so:
+The extensions/suffixes which that are used when resolving loaders. Since version two, we [strongly recommend](/migrate/3#automatic--loader-module-name-extension-removed) using the full name, e.g. `example-loader`, as much as possible for clarity. However, if you really wanted to exclude the `-loader` bit, i.e. just use `example`, you can use this option to do so:
 
 ```js
 module.exports = {

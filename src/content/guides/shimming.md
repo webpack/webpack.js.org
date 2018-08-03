@@ -262,7 +262,7 @@ Now from within our entry script (i.e. `src/index.js`), we could `import { file,
 
 Almost everything we've discussed thus far has been in relation to handling legacy packages. Let's move on to our second topic: __polyfills__.
 
-There's a lot of ways to load polyfills. For example, to include the [`babel-polyfill`](https://babeljs.io/docs/usage/polyfill/) we might simply:
+There's a lot of ways to load polyfills. For example, to include the [`babel-polyfill`](https://babeljs.io/docs/en/babel-polyfill/) we might simply:
 
 ``` bash
 npm install --save babel-polyfill

@@ -24,7 +24,7 @@ if (isClient) {
   let { pathname } = window.location;
   let trimmed = pathname.replace(/(.+)\/$/, '$1');
   let entryPage = findInContent(Content, item => item.url === trimmed);
-  let entryPath = entryPage.path.replace('src/content/', '');
+  let entryPath = entryPage && entryPage.path.replace('src/content/', '');
 
   import(`./content/${entryPath}`).then(entryModule => {
     render((

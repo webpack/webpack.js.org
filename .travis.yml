@@ -1,15 +1,52 @@
-branches:
-  only:
-    - master
-    - develop
+sudo: false
 language: node_js
 node_js:
   - "8"
-sudo: required
-install:
-  - yarn
-  - sudo pip install proselint
-before_script:
-  - source ./src/scripts/env.sh
-script:
-  - bash ./src/scripts/deploy.sh
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+    - dist
+    - .cache
+
+stages:
+  - Build
+  - Post-build
+
+jobs:
+  fast_finish: true
+  allow_failures:
+    - name: External Link Check
+
+  include:
+    - stage: Build
+      name: Lint and Build
+      before_install: npm install --global yarn
+      install: yarn
+      script:
+        - yarn lint:js
+        - yarn lint:markdown
+        - yarn lint:social
+        - yarn build
+        - yarn lint:links
+
+    - stage: Build
+      name: Proselint
+      language: python
+      python: 3.6
+      cache:
+        pip: true
+        directories:
+          - $HOME/.cache
+      install: pip install -r requirements.txt
+      script: cp .proselintrc ~/ && proselint src/content
+
+    - stage: Post-build
+      name: Deploy
+      if: branch = master
+      script: bash ./src/scripts/deploy.sh
+
+    - stage: Post-build
+      name: External Link Check
+      script: yarn linkcheck

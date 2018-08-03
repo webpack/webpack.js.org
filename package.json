@@ -26,17 +26,24 @@
   "scripts": {
     "clean": "rimraf ./dist src/content/**/_*.md src/**/_*.json",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.js --env.dev",
+    "update-repos": "node src/utilities/fetch-package-repos.js",
     "content": "node src/scripts/build-content-tree.js ./src/content ./src/_content.json",
     "build-test": "npm run build && http-server build/",
-    "fetch": "sh src/scripts/fetch.sh",
+    "fetch": "run-p fetch:*",
+    "fetch:readmes": "node src/utilities/fetch-package-readmes.js",
+    "fetch:supporters": "node src/utilities/fetch-supporters.js",
+    "fetch:starter-kits": "node src/utilities/fetch-starter-kits.js",
     "prebuild": "npm run clean",
-    "build": "npm run fetch && npm run content && cross-env NODE_ENV=production webpack --config webpack.prod.js && npm run sitemap && echo webpack.js.org > dist/CNAME",
+    "build": "run-s fetch content && cross-env NODE_ENV=production webpack --config webpack.prod.js",
+    "postbuild": "npm run sitemap",
     "test": "npm run lint",
     "lint": "run-s lint:*",
-    "lint:js": "eslint src --ext .js,.jsx,.md",
+    "lint:js": "eslint src --ext .js,.jsx,.md --cache true --cache-location .cache/.eslintcache",
     "lint:markdown": "markdownlint --config ./.markdownlint.json *.md ./src/content/**/*.md --ignore './src/content/**/_*.md'",
     "lint:social": "alex . -q",
     "lint:prose": "cp .proselintrc ~/ && proselint src/content",
+    "lint:links": "hyperlink -r dist/index.html --canonicalroot https://webpack.js.org/ -i | tee internal-links.tap | tap-spot",
+    "linkcheck": "hyperlink -r dist/index.html --canonicalroot https://webpack.js.org/ --skip support__ --skip sidecar.gitter.im --skip vimdoc.sourceforge.net --skip img.shields.io --skip npmjs.com/package/ --skip opencollective.com/webpack --todo external-redirect | tee external-links.tap | tap-spot",
     "sitemap": "cd dist && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml",
     "serve": "npm run build && sirv start ./dist --port 4000",
     "deploy": "gh-pages -d dist"
@@ -47,11 +54,15 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,md}": ["npm run lint:js"],
-    "*.md": ["npm run lint:markdown"]
+    "*.{js,jsx,md}": [
+      "npm run lint:js"
+    ],
+    "*.md": [
+      "npm run lint:markdown"
+    ]
   },
   "devDependencies": {
-    "@octokit/rest": "^15.2.6",
+    "@octokit/rest": "^15.9.4",
     "alex": "^5.1.0",
     "autoprefixer": "^7.2.3",
     "babel-core": "^6.26.0",
@@ -62,7 +73,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
-    "copy-webpack-plugin": "^4.3.0",
+    "copy-webpack-plugin": "4.5.2",
     "cross-env": "5.2.0",
     "css-loader": "^0.28.5",
     "directory-tree": "2.1.0",
@@ -81,7 +92,7 @@
     "html-webpack-template": "^6.1.0",
     "http-server": "^0.10.0",
     "husky": "^1.0.0-rc.8",
-    "hyperlink": "^3.0.1",
+    "hyperlink": "^4.0.0",
     "lint-staged": "^7.2.0",
     "loader-utils": "^1.1.0",
     "lodash": "^4.17.4",
@@ -113,7 +124,7 @@
     "sitemap-static": "^0.4.2",
     "static-site-generator-webpack-plugin": "^3.4.1",
     "style-loader": "^0.18.2",
-    "tap-parser": "^6.0.1",
+    "tap-spot": "^1.1.1",
     "through2": "^2.0.3",
     "uglifyjs-webpack-plugin": "^1.1.6",
     "webpack": "^3.10.0",
@@ -122,9 +133,9 @@
   },
   "dependencies": {
     "@rigor789/remark-autolink-headings": "^5.1.0",
+    "ajv": "^5.5.2",
     "docsearch.js": "^2.5.2",
     "gitter-sidecar": "^1.2.3",
-    "ajv": "^5.5.2",
     "javascriptstuff-db": "^1.12.0",
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.5.10",

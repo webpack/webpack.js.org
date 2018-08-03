@@ -58,7 +58,7 @@ There are two input values for the conditions:
 
 **Example:** When we `import './style.css'` within `app.js`, the resource is `/path/to/style.css` and the issuer is `/path/to/app.js`.
 
-In a Rule the properties [`test`](#rule-test), [`include`](#rule-include), [`exclude`](#rule-exclude) and [`resource`](#rule-resource) are matched with the resource and the property [`issuer`](#rule-issuer) is matched with the issuer.
+In a Rule the properties [`test`](#ruletest), [`include`](#ruleinclude), [`exclude`](#ruleexclude) and [`resource`](#ruleresource) are matched with the resource and the property [`issuer`](#ruleissuer) is matched with the issuer.
 
 When using multiple conditions, all conditions must match.
 
@@ -74,18 +74,18 @@ There are two output values of a Rule:
 1. Applied loaders: An array of loaders applied to the resource.
 2. Parser options: An options object which should be used to create the parser for this module.
 
-These properties affect the loaders: [`loader`](#rule-loader), [`options`](#rule-options-rule-query), [`use`](#rule-use).
+These properties affect the loaders: [`loader`](#ruleloader), [`options`](#ruleoptions--rulequery), [`use`](#ruleuse).
 
-For compatibility also these properties: [`query`](#rule-options-rule-query), [`loaders`](#rule-loaders).
+For compatibility also these properties: [`query`](#ruleoptions--rulequery), [`loaders`](#ruleloaders).
 
-The [`enforce`](#rule-enforce) property affects the loader category. Whether it's a normal, pre- or post- loader.
+The [`enforce`](#ruleenforce) property affects the loader category. Whether it's a normal, pre- or post- loader.
 
-The [`parser`](#rule-parser) property affects the parser options.
+The [`parser`](#ruleparser) property affects the parser options.
 
 
 ## Nested rules
 
-Nested rules can be specified under the properties [`rules`](#rule-rules) and [`oneOf`](#rule-oneof).
+Nested rules can be specified under the properties [`rules`](#rulerules) and [`oneOf`](#ruleoneof).
 
 These rules are evaluated when the Rule condition matches.
 
@@ -114,12 +114,12 @@ Inline loaders and `!` prefixes should not be used as they are non-standard. The
 
 ## `Rule.exclude`
 
-`Rule.exclude` is a shortcut to `Rule.resource.exclude`. If you supply a `Rule.exclude` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#rule-resource) and [`Condition.exclude`](#condition) for details.
+`Rule.exclude` is a shortcut to `Rule.resource.exclude`. If you supply a `Rule.exclude` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.exclude`](#condition) for details.
 
 
 ## `Rule.include`
 
-`Rule.include` is a shortcut to `Rule.resource.include`. If you supply a `Rule.include` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#rule-resource) and [`Condition.include`](#condition) for details.
+`Rule.include` is a shortcut to `Rule.resource.include`. If you supply a `Rule.include` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.include`](#condition) for details.
 
 
 ## `Rule.issuer`
@@ -137,14 +137,14 @@ This option can be used to apply loaders to the dependencies of a specific modul
 
 ## `Rule.loader`
 
-`Rule.loader` is a shortcut to `Rule.use: [ { loader } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.loader`](#useentry) for details.
+`Rule.loader` is a shortcut to `Rule.use: [ { loader } ]`. See [`Rule.use`](#ruleuse) and [`UseEntry.loader`](#useentry) for details.
 
 
 ## `Rule.loaders`
 
 W> This option is __deprecated__ in favor of `Rule.use`.
 
-`Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#rule-use) for details.
+`Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#ruleuse) for details.
 
 
 ## `Rule.oneOf`
@@ -176,7 +176,7 @@ module.exports = {
 
 ## `Rule.options` / `Rule.query`
 
-`Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.options`](#useentry) for details.
+`Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#ruleuse) and [`UseEntry.options`](#useentry) for details.
 
 W> `Rule.query` is deprecated in favor of `Rule.options` and `UseEntry.options`.
 
@@ -260,7 +260,7 @@ Indicate what parts of the module contain side effects. See [Tree Shaking](/guid
 
 ## `Rule.test`
 
-`Rule.test` is a shortcut to `Rule.resource.test`. If you supply a `Rule.test` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#rule-resource) and [`Condition.test`](#condition) for details.
+`Rule.test` is a shortcut to `Rule.resource.test`. If you supply a `Rule.test` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.test`](#condition) for details.
 
 
 ## `Rule.use`

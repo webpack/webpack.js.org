@@ -37,10 +37,10 @@ T> webpack 1 requires a specific loader to convert ES2015 `import`, however this
 webpack supports modules written in a variety of languages and preprocessors, via _loaders_. _Loaders_ describe to webpack **how** to process non-JavaScript _modules_ and include these _dependencies_ into your _bundles_.
 The webpack community has built _loaders_ for a wide variety of popular languages and language processors, including:
 
-* [CoffeeScript](http://coffeescript.org)
+* [CoffeeScript](https://coffeescript.org)
 * [TypeScript](https://www.typescriptlang.org)
 * [ESNext (Babel)](https://babeljs.io)
-* [Sass](http://sass-lang.com)
+* [Sass](https://sass-lang.com)
 * [Less](http://lesscss.org)
 * [Stylus](http://stylus-lang.com)
 
