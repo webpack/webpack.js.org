@@ -271,7 +271,7 @@ Using hashes generated for extracted content:
 module.exports = {
   //...
   output: {
-    filename: '[contenthash].bundle.css';
+    filename: '[contenthash].bundle.css'
   }
 };
 ```
