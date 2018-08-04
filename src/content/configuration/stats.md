@@ -8,6 +8,7 @@ contributors:
   - ldrick
   - jasonblanchard
   - byzyk
+  - renjithvk
 ---
 
 The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
@@ -69,6 +70,9 @@ module.exports = {
 
     // Add chunk information (setting this to `false` allows for a less verbose output)
     chunks: true,
+    
+    // Add namedChunkGroups information
+    chunkGroups: true,
 
     // Add built modules information to chunk information
     chunkModules: true,
@@ -146,7 +150,7 @@ module.exports = {
     reasons: true,
 
     // Add the source code of modules
-    source: true,
+    source: false,
 
     // Add timing information
     timings: true,

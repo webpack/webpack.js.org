@@ -6,6 +6,7 @@ contributors:
   - jhnns
   - rouzbeh84
   - johnstew
+  - MisterDev
   - byzyk
 ---
 
@@ -16,7 +17,7 @@ They also serve the purpose of doing **anything else** that a [loader](/concepts
 
 ## Anatomy
 
-A webpack **plugin** is a JavaScript object that has an [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) property. This `apply` property is called by the webpack compiler, giving access to the **entire** compilation lifecycle.
+A webpack **plugin** is a JavaScript object that has an [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) method. This `apply` method is called by the webpack compiler, giving access to the **entire** compilation lifecycle.
 
 __ConsoleLogOnBuildWebpackPlugin.js__
 
@@ -65,6 +66,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({template: './src/index.html'})
   ]
 };
@@ -73,7 +75,7 @@ module.exports = {
 
 ### Node API
 
-?> Even when using the Node API, users should pass plugins via the `plugins` property in the configuration. Using `compiler.apply` should not be the recommended way.
+When using the Node API, you can also pass plugins via the `plugins` property in the configuration.
 
 __some-node-script.js__
 
@@ -82,7 +84,8 @@ const webpack = require('webpack'); //to access webpack runtime
 const configuration = require('./webpack.config.js');
 
 let compiler = webpack(configuration);
-compiler.apply(new webpack.ProgressPlugin());
+
+new webpack.ProgressPlugin().apply(compiler);
 
 compiler.run(function(err, stats) {
   // ...
