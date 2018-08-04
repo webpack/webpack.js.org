@@ -41,6 +41,7 @@ module.exports = {
 |**`cacheKeys`**|`{Function(defaultCacheKeys, file) -> {Object}}`|`defaultCacheKeys => defaultCacheKeys`|Allows you to override default cache keys|
 |**`parallel`**|`{Boolean\|Number}`|`false`|Use multi-process parallel running to improve the build speed|
 |**`sourceMap`**|`{Boolean}`|`false`|Use source maps to map error message locations to modules (This slows down the compilation) ⚠️ **`cheap-source-map` options don't work with this plugin**|
+|**`minify`**|`{Function}`|`undefined`|Allows you to override default minify function|
 |**`uglifyOptions`**|`{Object}`|[`{...defaults}`](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/tree/master#uglifyoptions)|`uglify` [Options](https://github.com/mishoo/UglifyJS2/tree/harmony#minify-options)|
 |**`extractComments`**|`{Boolean\|RegExp\|Function<(node, comment) -> {Boolean\|Object}>}`|`false`|Whether comments shall be extracted to a separate file, (see [details](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a) (`webpack >= 2.3.0`)|
 |**`warningsFilter`**|`{Function(source) -> {Boolean}}`|`() => true`|Allow to filter uglify warnings|
@@ -79,6 +80,8 @@ module.exports = {
 ```
 
 ### `cache`
+
+If you use your own `minify` function please read the `minify` section for cache invalidation correctly.
 
 #### `{Boolean}`
 
@@ -169,6 +172,8 @@ Number of concurrent runs.
 
 ### `sourceMap`
 
+If you use your own `minify` function please read the `minify` section for handling source maps correctly.
+
 **webpack.config.js**
 ```js
 [
@@ -179,6 +184,105 @@ Number of concurrent runs.
 ```
 
 > ⚠️ **`cheap-source-map` options don't work with this plugin**
+
+### `minify`
+
+> ⚠️ **Always use `require` inside `minify` function when `parallel` option enabled**
+
+**webpack.config.js**
+```js
+[
+  new UglifyJsPlugin({
+     minify(file, sourceMap) {
+       const extractedComments = [];
+
+       // Custom logic for extract comments
+      
+       const { error, map, code, warnings } = require('uglify-module') // Or require('./path/to/uglify-module')
+         .minify(
+           file,
+           { /* Your options for minification */ },
+         );
+
+       return { error, map, code, warnings, extractedComments };
+      }
+  })
+]
+```
+
+By default plugin uses `uglify-es` package.
+
+Examples:
+
+#### `uglify-js`
+
+```bash
+npm i -D uglify-js
+```
+
+**webpack.config.js**
+```js
+[
+  new UglifyJsPlugin({
+    // Uncomment lines below for cache invalidation correctly
+    // cache: true,
+    // cacheKeys(defaultCacheKeys) {
+    //   return Object.assign(
+    //     {},
+    //     defaultCacheKeys,
+    //     { 'uglify-js': require('uglify-js/package.json').version },
+    //   );
+    // },
+    minify(file, sourceMap) {
+      // https://github.com/mishoo/UglifyJS2#minify-options
+      const uglifyJsOptions = { /* your `uglify-js` package options */ };
+
+      if (sourceMap) {
+        uglifyJsOptions.sourceMap = {
+          content: sourceMap,
+        };
+      }
+
+      return require('uglify-js').minify(file, uglifyJsOptions);
+    }
+  })
+]
+```
+
+#### `terser`
+
+```bash
+npm i -D terser
+```
+
+**webpack.config.js**
+```js
+[
+  new UglifyJsPlugin({
+    // Uncomment lines below for cache invalidation correctly
+    // cache: true,
+    // cacheKeys(defaultCacheKeys) {
+    //   return Object.assign(
+    //     {},
+    //     defaultCacheKeys,
+    //     { terser: require('terser/package.json').version },
+    //   );
+    // },
+    minify(file, sourceMap) {
+      // https://github.com/fabiosantoscode/terser#minify-options
+      const terserOptions = { /* your `terser` package options */ };
+
+      if (sourceMap) {
+        terserOption.sourceMap = {
+          content: sourceMap,
+        };
+      }
+
+      return require('terser').minify(file, terserOptions);
+    }
+  })
+]
+```
 
 ### [`uglifyOptions`](https://github.com/mishoo/UglifyJS2/tree/harmony#minify-options)
 

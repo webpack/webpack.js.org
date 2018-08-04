@@ -44,7 +44,7 @@ module.exports = {
 ```
 
 When using with transpiling loaders (like `babel-loader`), make sure they are in correct order
-(bottom to top). Otherwise files will be check after being processed by `babel-loader`
+(bottom to top). Otherwise files will be checked after being processed by `babel-loader`
 
 ```js
 module.exports = {

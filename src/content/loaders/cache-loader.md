@@ -196,7 +196,7 @@ module.exports = {
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
 
-[test]: http://img.shields.io/travis/webpack-contrib/cache-loader.svg
+[test]: https://img.shields.io/travis/webpack-contrib/cache-loader.svg
 [test-url]: https://travis-ci.org/webpack-contrib/cache-loader
 
 [cover]: https://codecov.io/gh/webpack-contrib/cache-loader/branch/master/graph/badge.svg

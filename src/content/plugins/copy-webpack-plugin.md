@@ -327,7 +327,7 @@ and so on...
 [
   new CopyWebpackPlugin(
     [ ...patterns ],
-    { context: [ '/app' ] }
+    { context: '/app' }
   )
 ]
 ```

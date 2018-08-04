@@ -9,7 +9,7 @@ repo: https://github.com/webpack-contrib/react-proxy-loader
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
 [![deps][deps]][deps-url]
-[![tests][tests]][tests-url]
+
 [![chat][chat]][chat-url]
 
 
