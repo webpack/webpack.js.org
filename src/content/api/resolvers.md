@@ -11,7 +11,7 @@ however any [`compiler` instance](/api/node/#compiler-instance) has a few resolv
 tapped into.
 
 Before reading on, make sure you at least skim through the
-[`enhanced-resolve`](https://github.com/webpack/enhanced-resolve) and [`tapable`](https://github.com/webpack/tapable) documentation.
+[`enhanced-resolve`](https://github.com/webpack/enhanced-resolve) and [`tapable`](/api/plugins/#tapable) documentation.
 
 
 ## Types
@@ -29,8 +29,8 @@ can be customized via plugins as such:
 compiler.resolverFactory.plugin('resolver [type]', resolver => {
   resolver.hooks.resolve.tapAsync('MyPlugin', params => {
     // ...
-  })
-})
+  });
+});
 ```
 
 Where `[type]` is one of the three resolvers mention above, specified as:
@@ -38,6 +38,7 @@ Where `[type]` is one of the three resolvers mention above, specified as:
 - `normal`
 - `context`
 - `loader`
+
 
 See the `enhanced-resolve` [documentation](https://github.com/webpack/enhanced-resolve) for a full list of hooks and
 descriptions.
