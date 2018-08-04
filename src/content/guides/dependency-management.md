@@ -5,6 +5,7 @@ contributors:
   - ndelangen
   - chrisVillanueva
   - sokra
+  - byzyk
 ---
 
 > es6 modules
@@ -21,12 +22,12 @@ A context is created if your request contains expressions, so the **exact** modu
 Example:
 
 ```javascript
-require("./template/" + name + ".ejs");
+require('./template/' + name + '.ejs');
 ```
 
 webpack parses the `require()` call and extracts some information:
 
-```diff
+```code
 Directory: ./template
 Regular expression: /^.*\.ejs$/
 ```
@@ -37,11 +38,11 @@ A context module is generated. It contains references to **all modules in that d
 
 Example:
 
-```javascript
+```json
 {
-    "./table.ejs": 42,
-    "./table-row.ejs": 43,
-    "./directory/folder.ejs": 44
+  "./table.ejs": 42,
+  "./table-row.ejs": 43,
+  "./directory/folder.ejs": 44
 }
 ```
 
@@ -62,18 +63,18 @@ webpack parses for `require.context()` in the code while building.
 The syntax is as follows:
 
 ```javascript
-require.context(directory, useSubdirectories = false, regExp = /^\.\//)
+require.context(directory, useSubdirectories = false, regExp = /^\.\//);
 ```
 
 Examples:
 
 ```javascript
-require.context("./test", false, /\.test\.js$/);
+require.context('./test', false, /\.test\.js$/);
 // a context with files from the test directory that can be required with a request endings with `.test.js`.
 ```
 
 ```javascript
-require.context("../", true, /\.stories\.js$/);
+require.context('../', true, /\.stories\.js$/);
 // a context with all files in the parent folder and descending folders ending with `.stories.js`.
 ```
 
