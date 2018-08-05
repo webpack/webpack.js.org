@@ -10,6 +10,7 @@ contributors:
   - fvgs
   - dhurlburtusa
   - MagicDuck
+  - fadysamirsadek
   - byzyk
   - madhavarshney
 ---
@@ -260,6 +261,17 @@ module.exports = {
   //...
   output: {
     filename: '[chunkhash].bundle.js'
+  }
+};
+```
+
+Using hashes generated for extracted content:
+
+```js
+module.exports = {
+  //...
+  output: {
+    filename: '[contenthash].bundle.css'
   }
 };
 ```

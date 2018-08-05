@@ -6,6 +6,7 @@ contributors:
   - jouni-kantola
   - skipjack
   - dannycjones
+  - fadysamirsadek
   - afontcu
 related:
   - title: Issue 652
@@ -21,7 +22,7 @@ This guide focuses on the configuration needed to ensure files produced by webpa
 
 ## Output Filenames
 
-A simple way to ensure the browser picks up changed files is by using `output.filename` [substitutions](/configuration/output#output-filename). The `[hash]` substitution can be used to include a build-specific hash in the filename, however it's even better to use the `[chunkhash]` substitution which includes a chunk-specific hash in the filename.
+A simple way to ensure the browser picks up changed files is by using `output.filename` [substitutions](/configuration/output#output-filename). The `[hash]` substitution can be used to include a build-specific hash in the filename, however it's even better to use the `[contenthash]` substitution which is the hash of the content of a file, which is different for each asset.
 
 Let's get our project set up using the example from [getting started](/guides/getting-started) with the `plugins` from [output management](/guides/output-management), so we don't have to deal with maintaining our `index.html` file manually:
 
@@ -55,7 +56,7 @@ __webpack.config.js__
     ],
     output: {
 -     filename: 'bundle.js',
-+     filename: '[name].[chunkhash].js',
++     filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist')
     }
   };
@@ -124,7 +125,7 @@ __webpack.config.js__
         title: 'Caching'
     ],
     output: {
-      filename: '[name].[chunkhash].js',
+      filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist')
     },
 +   optimization: {
@@ -168,7 +169,7 @@ __webpack.config.js__
       }),
     ],
     output: {
-      filename: '[name].[chunkhash].js',
+      filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist')
     },
     optimization: {
@@ -295,7 +296,7 @@ __webpack.config.js__
 +      new webpack.HashedModuleIdsPlugin()
     ],
     output: {
-      filename: '[name].[chunkhash].js',
+      filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist')
     },
     optimization: {
