@@ -105,7 +105,7 @@ Specify a field, such as `browser`, to be parsed according to [this specificatio
 module.exports = {
   //...
   resolve: {
-    aliasFields: ['browser']
+    aliasFields: 'browser'
   }
 };
 ```
