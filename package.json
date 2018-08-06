@@ -42,7 +42,7 @@
     "lint:markdown": "markdownlint --config ./.markdownlint.json *.md ./src/content/**/*.md --ignore './src/content/**/_*.md'",
     "lint:social": "alex . -q",
     "lint:prose": "cp .proselintrc ~/ && proselint src/content",
-    "lint:links": "hyperlink -r dist/index.html --canonicalroot https://webpack.js.org/ -i | tee internal-links.tap | tap-spot",
+    "lint:links": "hyperlink -r dist/index.html --canonicalroot https://webpack.js.org/ -i --todo https://img.shields.io | tee internal-links.tap | tap-spot",
     "linkcheck": "hyperlink -r dist/index.html --canonicalroot https://webpack.js.org/ --skip support__ --skip sidecar.gitter.im --skip vimdoc.sourceforge.net --skip img.shields.io --skip npmjs.com/package/ --skip opencollective.com/webpack --todo external-redirect | tee external-links.tap | tap-spot",
     "sitemap": "cd dist && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml",
     "serve": "npm run build && sirv start ./dist --port 4000",
