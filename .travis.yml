@@ -44,8 +44,9 @@ jobs:
 
     - stage: Post-build
       name: Deploy
-      if: branch = master
-      script: bash ./src/scripts/deploy.sh
+      if: branch = master AND type = push
+      script: echo "I would have deployed now..."
+      #script: bash ./src/scripts/deploy.sh
 
     - stage: Post-build
       name: External Link Check
