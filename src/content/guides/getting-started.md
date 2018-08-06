@@ -53,7 +53,7 @@ __src/index.js__
 
 ``` javascript
 function component() {
-  var element = document.createElement('div');
+  let element = document.createElement('div');
 
   // Lodash, currently included via a script, is required for this line to work
   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -148,10 +148,9 @@ __src/index.js__
 + import _ from 'lodash';
 +
   function component() {
-    var element = document.createElement('div');
+    let element = document.createElement('div');
 
 -   // Lodash, currently included via a script, is required for this line to work
-+   // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
     return element;
@@ -291,7 +290,9 @@ __package.json__
     "license": "ISC",
     "devDependencies": {
       "webpack": "^4.0.1",
-      "webpack-cli": "^2.0.9",
+      "webpack-cli": "^2.0.9"
+    },
+    "dependencies": {
       "lodash": "^4.17.5"
     }
   }
