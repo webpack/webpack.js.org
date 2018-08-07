@@ -63,7 +63,7 @@ class Site extends React.Component {
           ]}
         />
 
-        {isClient ? <SidebarMobile open={mobileSidebarOpen} sections={this._strip(Content.children)} /> : null}
+        {isClient ? <SidebarMobile isOpen={mobileSidebarOpen} sections={this._strip(Content.children)} toggle={this._toggleSidebar} /> : null}
 
         <Switch>
           <Route path="/" exact component={Splash} />
