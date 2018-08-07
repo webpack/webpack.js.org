@@ -87,7 +87,6 @@
     "fontgen-loader": "git://github.com/EugeneHlushko/fontgen-loader.git#a26a73843900ca4b518853952b1fc3c816103512",
     "front-matter": "^2.3.0",
     "gh-pages": "^1.0.0",
-    "github": "^10.0.0",
     "html-webpack-plugin": "^2.30.1",
     "html-webpack-template": "^6.1.0",
     "http-server": "^0.10.0",
