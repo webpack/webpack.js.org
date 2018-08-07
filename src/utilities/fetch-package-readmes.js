@@ -57,6 +57,9 @@ async function main() {
           await writeFile(fileName, headmatter + body);
 
           console.log('Generated:', path.relative(cwd, fileName));
+        })
+        .catch(err => {
+          throw err;
         });
     }
   }
