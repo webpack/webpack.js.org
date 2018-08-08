@@ -109,7 +109,7 @@ W> Output may differ depending on your current webpack version. Newer versions m
 
 ## Extracting Boilerplate
 
-Boilerlate code are typically what you will find at the top of you bundle file, they are auto generated and will change each time your code does, which result to massive added weight to your overall bundle file which can be costy in term of loading time.
+Boilerplate code are typically what you will find at the top of you bundle file, they are auto generated and will change each time your code does, which result to massive added weight to your overall bundle file which can be costy in term of loading time.
 
 So with using the new webpack 4+ we replaced the [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) for the new [`SplitChunksPlugin`](/plugins/split-chunks-plugin) and way you can use it is via new configuration: `optimization.runtimeChunk`.
 
