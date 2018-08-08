@@ -4,6 +4,7 @@ sort: 2
 contributors:
   - TheLarkInn
   - chrisVillanueva
+  - byzyk
 ---
 
 As mentioned in [Getting Started](/guides/getting-started/#using-a-configuration), there are multiple ways to define the `entry` property in your webpack configuration. We will show you the ways you **can** configure the `entry` property, in addition to explaining why it may be useful to you.
@@ -16,17 +17,15 @@ Usage: `entry: string|Array<string>`
 **webpack.config.js**
 
 ```javascript
-const config = {
+module.exports = {
   entry: './path/to/my/entry/file.js'
 };
-
-module.exports = config;
 ```
 
 The single entry syntax for the `entry` property is a shorthand for:
 
 ```javascript
-const config = {
+module.exports = {
   entry: {
     main: './path/to/my/entry/file.js'
   }
@@ -35,7 +34,7 @@ const config = {
 
 T> **What happens when you pass an array to `entry`?** Passing an array of file paths to the `entry` property creates what is known as a **"multi-main entry"**. This is useful when you would like to inject multiple dependent files together and graph their dependencies into one "chunk".
 
-This is a great choice when you are looking to quickly setup a webpack configuration for an application or tool with one entry point (IE: a library). However, there is not much flexibility in extending or scaling your configuration with this syntax.
+This is a great choice when you are looking to quickly setup a webpack configuration for an application or tool with one entry point (i.e., a library). However, there is not much flexibility in extending or scaling your configuration with this syntax.
 
 
 ## Object Syntax
@@ -45,7 +44,7 @@ Usage: `entry: {[entryChunkName: string]: string|Array<string>}`
 **webpack.config.js**
 
 ```javascript
-const config = {
+module.exports = {
   entry: {
     app: './src/app.js',
     vendors: './src/vendors.js'
@@ -68,7 +67,7 @@ Below is a list of entry configurations and their real-world use cases:
 **webpack.config.js**
 
 ```javascript
-const config = {
+module.exports = {
   entry: {
     app: './src/app.js',
     vendors: './src/vendors.js'
@@ -76,7 +75,7 @@ const config = {
 };
 ```
 
-**What does this do?** At face value this tells webpack to create dependency graphs starting at both `app.js` and `vendors.js`. These graphs are completely separate and independent of each other (there will be a webpack bootstrap in each bundle). This is commonly seen with single page applications which have only one entry point (excluding vendors).
+**What does this do?** At face value, this tells webpack to create dependency graphs starting at both `app.js` and `vendors.js`. These graphs are completely separate and independent of each other (there will be a webpack bootstrap in each bundle). This is commonly seen with single page applications which have only one entry point (excluding vendors).
 
 **Why?** This setup allows you to leverage `CommonsChunkPlugin` and extract any vendor references from your app bundle into your vendor bundle, replacing them with `__webpack_require__()` calls. If there is no vendor code in your application bundle, then you can achieve a common pattern in webpack known as [long-term vendor-caching](/guides/caching).
 
@@ -88,7 +87,7 @@ const config = {
 **webpack.config.js**
 
 ```javascript
-const config = {
+module.exports = {
   entry: {
     pageOne: './src/pageOne/index.js',
     pageTwo: './src/pageTwo/index.js',
