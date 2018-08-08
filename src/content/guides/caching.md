@@ -117,9 +117,9 @@ W> Output may differ depending on your current webpack version. Newer versions m
 
 ## Extracting Boilerplate
 
-As well all know, webpack's boilerplate and manifest change with each build, that manifest and boilerplate generally are what you find in top of your bundle file and having them there can be a little costy.
+Boilerlate manifest code are typically we you will find at the top of you bundle file, they are auto generated and will change each time your code does, which result to massive added wieght to your overall bundle file which can be very costy in term of loading time.
 
-So with using the new Webpack 4.x we replaced the [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) for the new [`SplitChunksPlugin`](/plugins/split-chunks-plugin) and way you can use it is via new configuration : `optimization.runtimeChunk` By specifying a name not mentioned in the `entry` configuration, the new optimization will automatically extract what we want into a separate bundle.
+So with using the new webpack 4+ we replaced the [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) for the new [`SplitChunksPlugin`](/plugins/split-chunks-plugin) and way you can use it is via new configuration : `optimization.runtimeChunk`.
 
 __webpack.config.js__
 
@@ -166,7 +166,7 @@ manifest.a6e25d9715318ea4928a.js    5.82 kB       1  [emitted]         manifest
     + 1 hidden module
 ```
 
-It's also good practice to extract third-party libraries, such as `lodash` or `react`, to a separate `vendor` chunk as they are less likely to change than our local source code. This step will allow clients to request even less from the server to stay up to date. This can be done by using `SplitChunksPlugin` via `optimization.splitChunks` and specifiying the `chunks` to be `initial`, This is one of many option you can discover from the [`Plugin`](/plugins/split-chunks-plugin) documentation : 
+It's also good practice to extract third-party libraries, such as `lodash` or `react`, to a separate `vendor` chunk as they are less likely to change than our local source code. This step will allow clients to request even less from the server to stay up to date. This can be done by using `SplitChunksPlugin` via `optimization.splitChunks` by specifiying the `chunks` to be `initial`, This is one of many options that you can discover from the [`Plugin`](/plugins/split-chunks-plugin) documentation : 
 
 __webpack.config.js__
 
