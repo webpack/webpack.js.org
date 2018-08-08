@@ -893,7 +893,7 @@ The bundle will now be available as `http://localhost:8080/assets/bundle.js`.
 
 T> Make sure `publicPath` always starts and ends with a forward slash.
 
-It is also possible to use a full URL. This is necessary for Hot Module Replacement.
+It is also possible to use a full URL.
 
 ```js
 module.exports = {
