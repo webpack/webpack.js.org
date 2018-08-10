@@ -39,7 +39,7 @@ T> Learn how [mode](/concepts/mode/) works.
 
 ## `optimization.minimizer`
 
-`UglifyjsWebpackPlugin | [UglifyjsWebpackPlugin]`
+`[UglifyjsWebpackPlugin]`
 
 Allows you to override the default minimizer by providing a different one or more customized [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin/) instances.
 
