@@ -133,11 +133,13 @@ function attacher({ include, exclude } = {}) {
           return newTree.children.indexOf(detailsStart[i]);
         });
 
+        console.log(inspect(detailsTree[1]))
+
         let prevCount = 0;
 
         detailsStart.forEach((_, i) => {
           prevCount += !detailsTree[i - 1] ? 0 : detailsTree[i - 1].length + 1;
-          newTree.children.splice(detailsStartIndexes[i] - prevCount, detailsTree[i].length + 1)
+          newTree.children.splice(detailsStartIndexes[i] - prevCount + i, detailsTree[i].length + 1, ...[{ type: 'text', value: `${detailsStartIndexes[i]}` }])
         });
 
         const cleanDetailsTrees = detailsStart.map((_, i) => {
@@ -162,12 +164,18 @@ function attacher({ include, exclude } = {}) {
           }
         })
 
-        let treeCount = 0
+        // console.log(util.inspect(newTree.children.map((e, i) => ({ [i]: e})), { depth: 4, maxArrayLength: 300 }))
 
         detailsStart.forEach((_, i) => {
-          treeCount = detailsStartIndexes[i - 1] ? (detailsStartIndexes[i - 1] + newDetailsTrees[i - 1].children.length + 4) : 0
-          newTree.children.splice(detailsStartIndexes[i] - treeCount, 0, newDetailsTrees[i])
+          let insertPosition = newTree.children.findIndex(d => parseInt(d.value, 10) === detailsStartIndexes[i])
+
+          newTree.children.splice(insertPosition, 1)
+          newTree.children.splice(insertPosition, 0, newDetailsTrees[i])
         })
+
+        // console.log(util.inspect(newTree.children.map((e, i) => ({ [i]: e})), { depth: 4, maxArrayLength: 300 }))
+
+        // console.log(newTree.children)
 
         data.hChildren = newTree.children;
       } catch (e) {
