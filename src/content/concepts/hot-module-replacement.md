@@ -14,7 +14,7 @@ Hot Module Replacement (HMR) exchanges, adds, or removes [modules](/concepts/mod
 
 - Retain application state which is lost during a full reload.
 - Save valuable development time by only updating what's changed.
-- Live CSS modification -- almost comparable to changing CSS in the browser's debugger.
+- Modifications made to CSS/JS source code in your IDE result in instant view/browser updates -- almost comparable to changing CSS/JS in   the browser's dev tools directly.
 
 
 ## How It Works
