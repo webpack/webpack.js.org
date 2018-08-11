@@ -2,6 +2,7 @@
 title: Hot Module Replacement
 sort: 11
 contributors:
+  - kryptokinght
   - SpaceK33z
   - sokra
   - GRardB
@@ -13,7 +14,7 @@ Hot Module Replacement (HMR) exchanges, adds, or removes [modules](/concepts/mod
 
 - Retain application state which is lost during a full reload.
 - Save valuable development time by only updating what's changed.
-- Tweak styling faster -- almost comparable to changing styles in the browser's debugger.
+- Live CSS modification -- almost comparable to changing CSS in the browser's debugger.
 
 
 ## How It Works
