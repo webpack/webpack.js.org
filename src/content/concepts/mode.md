@@ -96,13 +96,13 @@ var config = {
   //...
 };
 
-module.exports = (env, argv) => {
+module.exports = env => {
 
-  if (argv.mode === 'development') {
+  if (env.mode === 'development') {
     config.devtool = 'source-map';
   }
 
-  if (argv.mode === 'production') {
+  if (env.mode === 'production') {
     //...
   }
 
