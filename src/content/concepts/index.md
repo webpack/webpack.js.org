@@ -8,11 +8,21 @@ contributors:
   - johnstew
   - jimrfenner
   - TheDutchCoder
+  - adambraimbridge
+  - EugeneHlushko
+  - jeremenichelli
+  - arjunsajeev
+  - byzyk
+  - yairhaimo
 ---
 
-At its core, *webpack* is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it recursively builds a _dependency graph_ that includes every module your application needs, then packages all of those modules into one or more _bundles_.
+At its core, **webpack** is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it internally builds a _dependency graph_ which maps every module your project needs and generates one or more _bundles_.
 
-It is [incredibly configurable](/configuration), but to get started you only need to understand four **Core Concepts**:
+T> Learn more about JavaScript modules and webpack modules [here](/concepts/modules).
+
+Since version 4.0.0, **webpack does not require a configuration file** to bundle your project, nevertheless it is [incredibly configurable](/configuration) to better fit your needs.
+
+To get started you only need to understand its **Core Concepts**:
 
 - Entry
 - Output
@@ -21,16 +31,18 @@ It is [incredibly configurable](/configuration), but to get started you only nee
 
 This document is intended to give a **high-level** overview of these concepts, while providing links to detailed concept specific use cases.
 
+For a better understanding of the ideas behind module bundlers and how they work under the hood consult these resources:
+
+- [Manually Bundling an Application](https://www.youtube.com/watch?v=UNMkLHzofQI)
+- [Live Coding a Simple Module Bundler](https://www.youtube.com/watch?v=Gc9-7PBqOC8)
+- [Detailed Explanation of a Simple Module Bundler](https://github.com/ronami/minipack)
+
 
 ## Entry
 
-An **entry point** indicates which module webpack should use to begin building out its internal *dependency graph*. After entering the entry point, webpack will figure out which other modules and libraries that entry point depends on (directly and indirectly).
+An **entry point** indicates which module webpack should use to begin building out its internal *dependency graph*. webpack will figure out which other modules and libraries that entry point depends on (directly and indirectly).
 
-Every dependency is then processed and outputted into files called *bundles*, which we'll discuss more in the next section.
-
-You can specify an entry point (or multiple entry points) by configuring the `entry` property in the [webpack configuration](/configuration).
-
-Here's the simplest example of an `entry` configuration:
+By default its value is `./src/index.js`, but you can specify a different (or multiple entry points) by configuring the **entry** property in the [webpack configuration](/configuration). For example:
 
 __webpack.config.js__
 
@@ -40,12 +52,14 @@ module.exports = {
 };
 ```
 
-T> You can configure the `entry` property in various ways depending the needs of your application. Learn more in the [entry points](/concepts/entry-points) section.
+T> Learn more in the [entry points](/concepts/entry-points) section.
 
 
 ## Output
 
-The **output** property tells webpack where to emit the *bundles* it creates and how to name these files. You can configure this part of the process by specifying an `output` field in your configuration:
+The **output** property tells webpack where to emit the *bundles* it creates and how to name these files. It defaults to `./dist/main.js` for the main output file and to the `./dist` folder for any other generated file.
+
+You can configure this part of the process by specifying an `output` field in your configuration:
 
 __webpack.config.js__
 
@@ -61,35 +75,29 @@ module.exports = {
 };
 ```
 
-In the example above, we use the `output.filename` and the `output.path` properties to tell webpack the name of our bundle and where we want it to be emitted to.
+In the example above, we use the `output.filename` and the `output.path` properties to tell webpack the name of our bundle and where we want it to be emitted to. In case you're wondering about the path module being imported at the top, it is a core [Node.js module](https://nodejs.org/api/modules.html) that gets used to manipulate file paths.
 
-T> You may see the term **emitted** or **emit** used throughout our documentation and [plugin API](/api/plugins). This is a fancy term for 'produced' or 'discharged'.
-
-T> The `output` property has [many more configurable features](/configuration/output) and if you like to know more about the concepts behind the `output` property, you can [read more in the concepts section](/concepts/output).
+T> The `output` property has [many more configurable features](/configuration/output) and if you like to know more about the concepts behind it, you can [read more in the output section](/concepts/output).
 
 
 ## Loaders
 
-*Loaders* enable webpack to process more than just JavaScript files (webpack itself only understands JavaScript). They give you the ability to leverage webpack's bundling capabilities for all kinds of files by converting them to valid [modules](/concepts/modules) that webpack can process.
-
-Essentially, webpack loaders transform all types of files into modules that can be included in your application's dependency graph.
+Out of the box, webpack only understands JavaScript files. **Loaders** allow webpack to process other types of files and convert them into valid [modules](/concepts/modules) that can be consumed by your application and added to the dependency graph.
 
 W> Note that the ability to `import` any type of module, e.g. `.css` files, is a feature specific to webpack and may not be supported by other bundlers or task runners. We feel this extension of the language is warranted as it allows developers to build a more accurate dependency graph.
 
-At a high level, __loaders__ have two purposes in your webpack config. They work to:
+At a high level, **loaders** have two properties in your webpack configuration:
 
-1. Identify which file or files should be transformed by a certain loader (with the `test` property).
-2. Transform those files so that they can be added to your dependency graph (and eventually your bundle). (`use` property)
+1. The `test` property identifies which file or files should be transformed.
+2. The `use` property indicates which loader should be used to do the transforming.
 
 __webpack.config.js__
 
 ```javascript
 const path = require('path');
 
-const config = {
-  entry: './path/to/my/entry/file.js',
+module.exports = {
   output: {
-    path: path.resolve(__dirname, 'dist'),
     filename: 'my-first-webpack.bundle.js'
   },
   module: {
@@ -98,24 +106,22 @@ const config = {
     ]
   }
 };
-
-module.exports = config;
 ```
 
 The configuration above has defined a `rules` property for a single module with two required properties: `test` and `use`. This tells webpack's compiler the following:
 
 > "Hey webpack compiler, when you come across a path that resolves to a '.txt' file inside of a `require()`/`import` statement, **use** the `raw-loader` to transform it before you add it to the bundle."
 
-W> It is important to remember that **when defining rules in your webpack config, you are defining them under `module.rules` and not `rules`**. For your benefit, webpack will 'yell at you' if this is done incorrectly.
+W> It is important to remember that when defining rules in your webpack config, you are defining them under `module.rules` and not `rules`. For your benefit, webpack will warn you if this is done incorrectly.
 
-There are other, more specific properties to define on loaders that we haven't yet covered.
-
-[Learn more!](/concepts/loaders)
+You can check further customization when including loaders in the [loaders section](/concepts/loaders).
 
 
 ## Plugins
 
-While loaders are used to transform certain types of modules, plugins can be leveraged to perform a wider range of tasks. Plugins range from bundle optimization and minification all the way to defining environment-like variables. The [plugin interface](/api/plugins) is extremely powerful and can be used to tackle a wide variety of tasks.
+While loaders are used to transform certain types of modules, plugins can be leveraged to perform a wider range of tasks like bundle optimization, asset management and injection of environment variables.
+
+T> Check out the [plugin interface](/api/plugins) and how to use it to extend webpacks capabilities.
 
 In order to use a plugin, you need to `require()` it and add it to the `plugins` array. Most plugins are customizable through options. Since you can use a plugin multiple times in a config for different purposes, you need to create an instance of it by calling it with the `new` operator.
 
@@ -124,30 +130,39 @@ In order to use a plugin, you need to `require()` it and add it to the `plugins`
 ```javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 const webpack = require('webpack'); //to access built-in plugins
-const path = require('path');
 
-const config = {
-  entry: './path/to/my/entry/file.js',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'my-first-webpack.bundle.js'
-  },
+module.exports = {
   module: {
     rules: [
       { test: /\.txt$/, use: 'raw-loader' }
     ]
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin(),
     new HtmlWebpackPlugin({template: './src/index.html'})
   ]
 };
-
-module.exports = config;
 ```
 
-There are many plugins that webpack provides out of the box! Check out our [list of plugins](/plugins) for more information.
+In the example above, the `html-webpack-plugin` generates an HTML file for your application by injecting automatically all your generated bundles.
 
-Using plugins in your webpack config is straightforward - however, there are many use cases that are worth further exploration.
+T> There are many plugins that webpack provides out of the box! Check out the [list of plugins](/plugins).
 
-[Learn more!](/concepts/plugins)
+Using plugins in your webpack config is straightforward - however, there are many use cases that are worth further exploration. [Learn more about them here](/concepts/plugins).
+
+
+## Mode
+
+By setting the `mode` parameter to either `development`, `production` or `none`, you can enable webpack's built-in optimizations that correspond to each environment. The default value is `production`.
+
+```javascript
+module.exports = {
+  mode: 'production'
+};
+```
+
+Learn more about the [mode configuration here](/concepts/mode) and what optimizations take place on each value.
+
+
+## Browser Compatibility
+
+webpack supports all browsers that are [ES5-compliant](https://kangax.github.io/compat-table/es5/) (IE8 and below are not supported). webpack needs `Promise` for `import()` and `require.ensure()`. If you want to support older browsers, you will need to [load a polyfill](/guides/shimming/) before using these expressions.

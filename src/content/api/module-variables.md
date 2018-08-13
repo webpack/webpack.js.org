@@ -7,6 +7,7 @@ contributors:
   - sokra
   - ahmehri
   - tbroadley
+  - byzyk
 related:
   - title: CommonJS
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -32,7 +33,7 @@ Indicates whether or not [Hot Module Replacement](/concepts/hot-module-replaceme
 The ID of the current module.
 
 ``` javascript
-module.id === require.resolve("./file.js")
+module.id === require.resolve('./file.js');
 ```
 
 
@@ -56,22 +57,22 @@ This variable is equal to default value of `module.exports` (i.e. an object). If
 ``` javascript
 exports.someValue = 42;
 exports.anObject = {
-    x: 123
+  x: 123
 };
 exports.aFunction = function doSomething() {
-    // Do something
+  // Do something
 };
 ```
 
 
 ### `global` (NodeJS)
 
-See [node.js global](http://nodejs.org/api/globals.html#globals_global).
+See [node.js global](https://nodejs.org/api/globals.html#globals_global).
 
 
 ### `process` (NodeJS)
 
-See [node.js process](http://nodejs.org/api/process.html).
+See [node.js process](https://nodejs.org/api/process.html).
 
 
 ### `__dirname` (NodeJS)
@@ -80,7 +81,7 @@ Depending on the config option `node.__dirname`:
 
 * `false`: Not defined
 * `mock`: equal "/"
-* `true`: [node.js __dirname](http://nodejs.org/api/globals.html#globals_dirname)
+* `true`: [node.js __dirname](https://nodejs.org/api/globals.html#globals_dirname)
 
 If used inside a expression that is parsed by the Parser, the config option is treated as `true`.
 
@@ -91,7 +92,7 @@ Depending on the config option `node.__filename`:
 
 * `false`: Not defined
 * `mock`: equal "/index.js"
-* `true`: [node.js __filename](http://nodejs.org/api/globals.html#globals_filename)
+* `true`: [node.js __filename](https://nodejs.org/api/globals.html#globals_filename)
 
 If used inside a expression that is parsed by the Parser, the config option is treated as `true`.
 
@@ -101,13 +102,13 @@ If used inside a expression that is parsed by the Parser, the config option is t
 The resource query of the current module. If the following `require` call were made, then the query string would be available in `file.js`.
 
 ``` javascript
-require('file.js?test')
+require('file.js?test');
 ```
 
 __file.js__
 
 ``` javascript
-__resourceQuery === '?test'
+__resourceQuery === '?test';
 ```
 
 

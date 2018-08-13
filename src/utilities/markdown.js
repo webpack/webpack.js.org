@@ -14,11 +14,11 @@ module.exports = function() {
     var id = parsed.id;
 
     return (
-      `<h${level} class="header">` +
-      `<a class="anchor" href="#${id}" id="${id}"></a>` +
-      `<span class="text">${text}</span>` +
-      `<a class="icon-link" href="#${id}"></a>` +
-      `</h${level}>\n`
+      `<h${level} class="header">
+        <a class="anchor" aria-hidden="true" href="#${id}" id="${id}"></a>
+        <span class="text">${text}</span>
+        <a aria-label="${text}" class="icon-link" href="#${id}"></a>
+      </h${level}>\n`
     );
   };
 
@@ -149,7 +149,7 @@ function parseAnchor(string) {
 
   return {
     title: clean,
-    id: clean.replace(/[^\w]+/g, '-').toLowerCase()
+    id: clean.replace(/[^\w\u4e00-\u9fa5]+/g, '-').toLowerCase()
   };
 }
 

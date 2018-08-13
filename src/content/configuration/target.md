@@ -8,6 +8,7 @@ contributors:
   - SpaceK33z
   - pastelsky
   - tbroadley
+  - byzyk
 ---
 
 webpack can compile for multiple environments or _targets_. To understand what a `target` is in detail, read through [the targets concept page](/concepts/targets).
@@ -28,8 +29,8 @@ Option                | Description
 `async-node`          | Compile for usage in a Node.js-like environment (uses `fs` and `vm` to load chunks asynchronously)
 ~~`atom`~~            | Alias for `electron-main`
 ~~`electron`~~        | Alias for `electron-main`
-`electron-main`       | Compile for [Electron](http://electron.atom.io/) for main process.
-`electron-renderer`   | Compile for [Electron](http://electron.atom.io/) for renderer process, providing a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules.
+`electron-main`       | Compile for [Electron](https://electronjs.org/) for main process.
+`electron-renderer`   | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules.
 `node`                | Compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks)
 `node-webkit`         | Compile for usage in WebKit and uses JSONP for chunk loading. Allows importing of built-in Node.js modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental)
 `web`                 | Compile for usage in a browser-like environment **(default)**
@@ -53,13 +54,13 @@ const options = {
 Or you can apply specific plugins you want:
 
 ```js
-const webpack = require("webpack");
+const webpack = require('webpack');
 
 const options = {
   target: (compiler) => {
     compiler.apply(
       new webpack.JsonpTemplatePlugin(options.output),
-      new webpack.LoaderTargetPlugin("web")
+      new webpack.LoaderTargetPlugin('web')
     );
   }
 };

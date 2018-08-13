@@ -27,16 +27,17 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
+    top: 50%; // vertical center
     bottom: 0;
     width: 75vw;
     min-width: 550px;
     max-width: map-get($screens, large);
-    margin: auto;
+    margin: 0 auto;
+    transform: translateY(-50%); // vertical center
     display: none;
 
     @include break {
-      display: block;
+      display: table; // Get height of its child svg
     }
 
     img {

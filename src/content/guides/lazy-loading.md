@@ -5,6 +5,7 @@ contributors:
   - iammerrick
   - chrisVillanueva
   - skipjack
+  - byzyk
 related:
   - title: Lazy Loading ES2015 Modules in the Browser
     url: https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser
@@ -41,7 +42,7 @@ console.log('The print.js module has loaded! See the network tab in dev tools...
 
 export default () => {
   console.log('Button Clicked: Here\'s "some text"!');
-}
+};
 ```
 
 __src/index.js__
@@ -108,3 +109,4 @@ Many frameworks and libraries have their own recommendations on how this should 
 
 - React: [Code Splitting and Lazy Loading](https://reacttraining.com/react-router/web/guides/code-splitting)
 - Vue: [Lazy Load in Vue using Webpack's code splitting](https://alexjoverm.github.io/2017/07/16/Lazy-load-in-Vue-using-Webpack-s-code-splitting/)
+- AngularJS: [AngularJS + Webpack = lazyLoad](https://medium.com/@var_bin/angularjs-webpack-lazyload-bb7977f390dd) by [@var_bincom](https://twitter.com/var_bincom)

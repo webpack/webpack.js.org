@@ -69,6 +69,7 @@ Let's also update our `dist/index.html` file, in preparation for webpack to spli
 __dist/index.html__
 
 ``` diff
+  <!doctype html>
   <html>
     <head>
 -     <title>Asset Management</title>
@@ -193,7 +194,7 @@ In general it's good practice to clean the `/dist` folder before each build, so 
 A popular plugin to manage this is the [`clean-webpack-plugin`](https://www.npmjs.com/package/clean-webpack-plugin) so let's install and configure it.
 
 ``` bash
-npm install clean-webpack-plugin --save-dev
+npm install --save-dev clean-webpack-plugin
 ```
 
 __webpack.config.js__
