@@ -25,23 +25,23 @@ If you are only using one function from lodash or one date utility from moment.j
 
 If your using webpack your using Node.js as webpack relies on Node.js. Node.js is JavaScript that runs on the server. So how do you load JavaScript if there is no DOM? How do you add a script tag if there is no html in Node.js?
 
-CommonJS came about and introduced require which allows you to inject other pieces of a module into the current module. This solves scope issues without having to to use IIFE's. This helps us to see exactly what modules are used.
+CommonJS came about and introduced 'require' which allows you to inject other pieces of a module into the current module. This solves scope issues without having to use IIFE's. This helps us to see exactly what modules are used.
 
 
-## Npm + Node.js + modules -- mass distribution
+## npm + Node.js + modules -- mass distribution
 
 JavaScript is taking over the world as a language, as a platform and as a way to rapidly develop and create fast running applications. 
 
-But there is no browser support for CommonJS. There are no live bindings. There are problems with circular references. Sync module resolution loader is slow. Bundlers/Linkers such as Browserify, RequireJS, SystemJS came about to solve these issues and allow you to write CommonJS modules which get bundled so that it works in the web.
+But there is no browser support for CommonJS. There are no live bindings(https://medium.com/webpack/the-state-of-javascript-modules-4636d1774358). There are problems with circular references. Sync module resolution loader is slow. Bundlers/Linkers such as Browserify, RequireJS, SystemJS came about to solve these issues and allow you to write CommonJS modules which get bundled, making it possible to run them in the Web.
 
 But with CommonJS there is no lazy loading. All bundles are loaded upfront. CommonJS is too dynamic for lazy loading, too much bloat, it has awkward non standard syntax and has no real module system.
 
 
-## ESM - Ecma Script Modules
+## ESM - ECMAScript Modules
 
 ESM provides reusability, encapsulation, is organized and convenient but there is no ESM for Node.js. How do they work in the browser? Incredibly slow, therefore not an option.
 
-Every library is different, library authors use the module types that they like and choose and this is just for JavaScript. Each and any other filetype until now has had to have specific ways to process it. 
+Every library is different, library authors choose a module type they like and this is just for JavaScript. Each and any other filetype until now has had to have specific ways to process it. 
 
 
 ## Wouldn't it be nice….
@@ -49,7 +49,7 @@ Every library is different, library authors use the module types that they like 
 
 We now need something that not only lets us write modules but we need something that lets us support any module format at least until we can get to ESM, and that can handle resources and other assets at the same time.
 
-This is why webpack was born. webpack is a module bundler. It lets you write any module format or a mixed format and compiles them for the browser. It supports static async bundling (code splitting) where you can create seperate lazy loaded bundles at build time and extra optimization with it's rich, vast ecosystem. Today it is the most performant way to ship JavaScript and has 14 million downloads a month.
+This is why webpack was born. webpack is a module bundler. It lets you write any module format or a mixed format and compiles them for the browser. It supports static async bundling (code splitting) where you can create separate lazy loaded bundles at build time and extra optimization with its rich, vast ecosystem. Today it is the most performant way to ship JavaScript and has 14 million downloads a month.
 
 
 ## Why webpack? That's why!!!!
