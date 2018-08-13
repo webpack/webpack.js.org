@@ -1,8 +1,17 @@
 #!/usr/bin/env node
 const fs = require('fs');
-const toolList = require('tool-list');
+const starters = require('javascriptstuff-db/react-starter-projects');
 
-const data = toolList.startersWithTag('webpack');
+const webpackStarters = starters.projects.filter(p => p.tags.some(t => t.includes('webpack')));
+
+const data = webpackStarters.map(ws =>
+  ({ ...ws,
+    githubUrl: `https://github.com/${ws.githubPath}`,
+    githubUserName: ws.githubPath.split('/')[0],
+    githubRepoName: ws.githubPath.split('/')[1]
+  })
+);
+
 const body = JSON.stringify(data);
 
 fs.writeFile('./src/components/StarterKits/starter-kits-data.json', body, err => {
