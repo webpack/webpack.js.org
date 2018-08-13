@@ -10,7 +10,7 @@ Providing the `mode` configuration option tells webpack to use its built-in opti
 
 `string`
 
-T> The default value for `mode` is `production`.
+T> Possible values for `mode` are: `none`, `development` or `production`(default).
 
 ## Usage
 
@@ -33,8 +33,8 @@ The following string values are supported:
 
 Option                | Description
 --------------------- | -----------------------
-`development`         | Provides `process.env.NODE_ENV` with value `development`. Enables `NamedChunksPlugin` and `NamedModulesPlugin`.
-`production`          | Provides `process.env.NODE_ENV` with value `production`. Enables `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin`, `OccurrenceOrderPlugin`, `SideEffectsFlagPlugin` and `UglifyJsPlugin`.
+`development`         | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `development`. Enables `NamedChunksPlugin` and `NamedModulesPlugin`.
+`production`          | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `production`. Enables `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin`, `OccurrenceOrderPlugin`, `SideEffectsFlagPlugin` and `UglifyJsPlugin`.
 `none`                | Opts out of any default optimization options
 
 If not set, webpack sets `production` as the default value for `mode`. The supported values for mode are:
@@ -49,6 +49,7 @@ T> Please remember that setting `NODE_ENV` doesn't automatically set `mode`.
 // webpack.development.config.js
 module.exports = {
 + mode: 'development'
+- devtool: 'eval',
 - plugins: [
 -   new webpack.NamedModulesPlugin(),
 -   new webpack.NamedChunksPlugin(),
@@ -87,7 +88,7 @@ module.exports = {
 }
 ```
 
-If you want to change the behavior according the **mode** variable inside the *webpack.config.js* you have to export a function instead of an object:
+If you want to change the behavior according to the **mode** variable inside the *webpack.config.js*, you have to export a function instead of an object:
 
 ```javascript
 var config = {

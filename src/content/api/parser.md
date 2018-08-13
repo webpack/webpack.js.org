@@ -4,6 +4,7 @@ group: Plugins
 sort: 4
 contributors:
   - byzyk
+  - DeTeam
 ---
 
 The `parser` instance, found in the `compiler`, is used to parse each module
@@ -16,7 +17,7 @@ more work to access:
 
 ``` js
 compiler.hooks.normalModuleFactory.tap('MyPlugin', factory => {
-  factory.hooks.parser.tap('MyPlugin', (parser, options) => {
+  factory.hooks.parser.for('javascript/auto').tap('MyPlugin', (parser, options) => {
     parser.hooks.someHook.tap(/* ... */);
   });
 });

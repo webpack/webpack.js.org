@@ -6,6 +6,7 @@ contributors:
   - simon04
   - tbroadley
   - chenxsan
+  - rencire
   - madhavarshney
 related:
   - title: Analyzing Build Statistics
@@ -68,7 +69,7 @@ If your project structure is as follows -
 ```
 
 ```bash
-webpack src/index.js dist/bundle.js
+webpack src/index.js -o dist/bundle.js
 ```
 
 This will bundle your source code with entry as `index.js` and the output bundle file will have a path of `dist` and the filename will be `bundle.js`
@@ -296,7 +297,7 @@ Parameter         | Explanation                              | Usage
 ----------------- | ---------------------------------------- | -----
 `--bail`          | Abort the compilation on first error     |
 `--cache`         | Enable in memory caching [Enabled by default for watch] | `--cache=false`
-`--define`        | Define any free variable, see [shimming](/guides/shimming) | `--define process.env.NODE_ENV='development'`
+`--define`        | Define any free variable, see [shimming](/guides/shimming) | `--define process.env.NODE_ENV="'development'"`
 `--hot`           | Enables [Hot Module Replacement](/concepts/hot-module-replacement) | `--hot=true`
 `--labeled-modules` | Enables labeled modules [Uses LabeledModulesPlugin] |
 `--plugin`        | Load this [plugin](/configuration/plugins/) |

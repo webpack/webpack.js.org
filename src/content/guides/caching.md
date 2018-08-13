@@ -6,15 +6,9 @@ contributors:
   - jouni-kantola
   - skipjack
   - dannycjones
+  - fadysamirsadek
+  - afontcu
 related:
-  - title: Predictable Long Term Caching
-    url: https://medium.com/webpack/predictable-long-term-caching-with-webpack-d3eee1d3fa31
-  - title: Webpack & Caching
-    url: https://gist.github.com/sokra/ff1b0290282bfa2c037bdb6dcca1a7aa
-  - title: Advanced Webpack Presentation
-    url: https://presentations.survivejs.com/advanced-webpack/
-  - title: Issue 1315
-    url: https://github.com/webpack/webpack/issues/1315
   - title: Issue 652
     url: https://github.com/webpack/webpack.js.org/issues/652
 ---
@@ -28,7 +22,7 @@ This guide focuses on the configuration needed to ensure files produced by webpa
 
 ## Output Filenames
 
-A simple way to ensure the browser picks up changed files is by using `output.filename` [substitutions](/configuration/output#output-filename). The `[hash]` substitution can be used to include a build-specific hash in the filename, however it's even better to use the `[chunkhash]` substitution which includes a chunk-specific hash in the filename.
+A simple way to ensure the browser picks up changed files is by using `output.filename` [substitutions](/configuration/output#output-filename). The `[hash]` substitution can be used to include a build-specific hash in the filename, however it's even better to use the `[contenthash]` substitution which is the hash of the content of a file, which is different for each asset.
 
 Let's get our project set up using the example from [getting started](/guides/getting-started) with the `plugins` from [output management](/guides/output-management), so we don't have to deal with maintaining our `index.html` file manually:
 
@@ -62,7 +56,7 @@ __webpack.config.js__
     ],
     output: {
 -     filename: 'bundle.js',
-+     filename: '[name].[chunkhash].js',
++     filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist')
     }
   };
@@ -131,7 +125,7 @@ __webpack.config.js__
         title: 'Caching'
     ],
     output: {
-      filename: '[name].[chunkhash].js',
+      filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist')
     },
 +   optimization: {
@@ -149,7 +143,7 @@ Time: 3027ms
                           Asset       Size  Chunks             Chunk Names
 runtime.cc17ae2a94ec771e9221.js   1.42 KiB       0  [emitted]  runtime
    main.e81de2cf758ada72f306.js   69.5 KiB       1  [emitted]  main
-                     index.html  275 bytes          [emitted]  
+                     index.html  275 bytes          [emitted]
 [1] (webpack)/buildin/module.js 497 bytes {1} [built]
 [2] (webpack)/buildin/global.js 489 bytes {1} [built]
 [3] ./src/index.js 309 bytes {1} [built]
@@ -175,7 +169,7 @@ __webpack.config.js__
       }),
     ],
     output: {
-      filename: '[name].[chunkhash].js',
+      filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist')
     },
     optimization: {
@@ -204,7 +198,7 @@ Time: 475ms
 runtime.cc17ae2a94ec771e9221.js   1.42 KiB       0  [emitted]  runtime
 vendors.a42c3ca0d742766d7a28.js   69.4 KiB       1  [emitted]  vendors
    main.abf44fedb7d11d4312d7.js  240 bytes       2  [emitted]  main
-                     index.html  353 bytes          [emitted]  
+                     index.html  353 bytes          [emitted]
 [1] (webpack)/buildin/module.js 497 bytes {1} [built]
 [2] (webpack)/buildin/global.js 489 bytes {1} [built]
 [3] ./src/index.js 309 bytes {2} [built]
@@ -282,7 +276,7 @@ manifest.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         manifest
 - The `vendor` bundle changed because its `module.id` was changed.
 - And, the `manifest` bundle changed because it now contains a reference to a new module.
 
-The first and last are expected -- it's the `vendor` hash we want to fix. Luckily, there are two plugins we can use to resolve this issue. The first is the [`NamedModulesPlugin`](/plugins/named-modules-plugin), which will use the path to the module rather than a numerical identifier. While this plugin is useful during development for more readable output, it does take a bit longer to run. The second option is the [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin), which is recommended for production builds:
+The first and last are expected -- it's the `vendor` hash we want to fix. Luckily, there are two plugins we can use to resolve this issue. The first is the `NamedModulesPlugin`, which will use the path to the module rather than a numerical identifier. While this plugin is useful during development for more readable output, it does take a bit longer to run. The second option is the [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin), which is recommended for production builds:
 
 __webpack.config.js__
 
@@ -293,28 +287,29 @@ __webpack.config.js__
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
-    entry: {
-      main: './src/index.js',
-      vendor: [
-        'lodash'
-      ]
-    },
+    entry: './src/index.js',
     plugins: [
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
-        title: 'Caching'
+        title: 'Caching'
       }),
-+     new webpack.HashedModuleIdsPlugin(),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor'
-      }),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'manifest'
-      })
++      new webpack.HashedModuleIdsPlugin()
     ],
     output: {
-      filename: '[name].[chunkhash].js',
+      filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist')
+    },
+    optimization: {
+      runtimeChunk: 'single',
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all'
+          }
+        }
+      }
     }
   };
 ```
@@ -322,20 +317,27 @@ __webpack.config.js__
 Now, despite any new local dependencies, our `vendor` hash should stay consistent between builds:
 
 ``` bash
-Hash: 1f49b42afb9a5acfbaff
-Version: webpack 3.3.0
-Time: 1372ms
-                           Asset       Size  Chunks                    Chunk Names
-  vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]  [big]  vendor
-    main.d103ac311788fcb7e329.js    1.22 kB       1  [emitted]         main
-manifest.d2a6dc1ccece13f5a164.js    5.85 kB       2  [emitted]         manifest
-                      index.html  352 bytes          [emitted]
-[3Di9] ./src/print.js 62 bytes {1} [built]
-[3IRH] (webpack)/buildin/module.js 517 bytes {0} [built]
-[DuR2] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [0] multi lodash 28 bytes {0} [built]
-[lVK7] ./src/index.js 421 bytes {1} [built]
+Hash: 17c37ce65c84b8ed5eb8
+Version: webpack 4.16.2
+Time: 637ms
+                          Asset       Size  Chunks             Chunk Names
+   main.216e852f60c8829c2289.js  340 bytes       0  [emitted]  main
+vendors.55e79e5927a639d21a1b.js   69.5 KiB       1  [emitted]  vendors
+runtime.725a1a51ede5ae0cfde0.js   1.42 KiB       2  [emitted]  runtime
+                     index.html  353 bytes          [emitted]
+Entrypoint main = runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.js main.216e852f60c8829c2289.js
+[YuTi] (webpack)/buildin/module.js 497 bytes {1} [built]
+[tjUo] ./src/index.js + 1 modules 408 bytes {0} [built]
+    | ./src/index.js 341 bytes [built]
+    | ./src/print.js 62 bytes [built]
+[yLpj] (webpack)/buildin/global.js 489 bytes {1} [built]
     + 1 hidden module
+Child html-webpack-plugin for "index.html":
+     1 asset
+    Entrypoint undefined = index.html
+    [YuTi] (webpack)/buildin/module.js 497 bytes {0} [built]
+    [yLpj] (webpack)/buildin/global.js 489 bytes {0} [built]
+        + 2 hidden modules
 ```
 
 And let's modify our `src/index.js` to temporarily remove that extra dependency:
@@ -364,22 +366,28 @@ __src/index.js__
 And finally run our build again:
 
 ``` bash
-Hash: 37e1358f135c0b992f72
-Version: webpack 3.3.0
-Time: 1557ms
-                           Asset       Size  Chunks                    Chunk Names
-  vendor.eed6dcc3b30cfa138aaa.js     541 kB       0  [emitted]  [big]  vendor
-    main.fc7f38e648da79db2aba.js  891 bytes       1  [emitted]         main
-manifest.bb5820632fb66c3fb357.js    5.85 kB       2  [emitted]         manifest
-                      index.html  352 bytes          [emitted]
-[3IRH] (webpack)/buildin/module.js 517 bytes {0} [built]
-[DuR2] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [0] multi lodash 28 bytes {0} [built]
-[lVK7] ./src/index.js 427 bytes {1} [built]
+Hash: 70fb9e00dee0bada797d
+Version: webpack 4.16.2
+Time: 875ms
+                          Asset       Size  Chunks             Chunk Names
+   main.ad717f2466ce655fff5c.js  274 bytes       0  [emitted]  main
+vendors.55e79e5927a639d21a1b.js   69.5 KiB       1  [emitted]  vendors
+runtime.725a1a51ede5ae0cfde0.js   1.42 KiB       2  [emitted]  runtime
+                     index.html  353 bytes          [emitted]
+Entrypoint main = runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.js main.ad717f2466ce655fff5c.js
+[YuTi] (webpack)/buildin/module.js 497 bytes {1} [built]
+[tjUo] ./src/index.js 347 bytes {0} [built]
+[yLpj] (webpack)/buildin/global.js 489 bytes {1} [built]
     + 1 hidden module
+Child html-webpack-plugin for "index.html":
+     1 asset
+    Entrypoint undefined = index.html
+    [YuTi] (webpack)/buildin/module.js 497 bytes {0} [built]
+    [yLpj] (webpack)/buildin/global.js 489 bytes {0} [built]
+        + 2 hidden modules
 ```
 
-We can see that both builds yielded `eed6dcc3b30cfa138aaa` in the `vendor` bundle's filename.
+We can see that both builds yielded `55e79e5927a639d21a1b` in the `vendor` bundle's filename.
 
 
 ## Conclusion
