@@ -133,7 +133,7 @@ function attacher({ include, exclude } = {}) {
           return newTree.children.indexOf(detailsStart[i]);
         });
 
-        console.log(inspect(detailsTree[1]))
+        console.log(inspect(detailsTree[2]))
 
         let prevCount = 0;
 
