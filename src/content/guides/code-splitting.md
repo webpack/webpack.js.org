@@ -327,7 +327,7 @@ Preload directive has a bunch of differences compared to prefetch:
 
 Simple preload example can be having a `Component` which always depends on a big library that should be in a separate chunk.
 
-Lets image component `ChartComponent` which needs huge `ChartingLibrary`. It displays a `LoadingIndicator` when rendered and instantly does an on demand import of `ChartingLibrary`:
+Let's imagine a component `ChartComponent` which needs huge `ChartingLibrary`. It displays a `LoadingIndicator` when rendered and instantly does an on demand import of `ChartingLibrary`:
 
 __ChartComponent.js__
 
