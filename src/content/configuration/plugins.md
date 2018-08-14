@@ -25,7 +25,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       // Definitions...
-    });
+    })
   ]
 };
 ```
