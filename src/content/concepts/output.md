@@ -13,10 +13,9 @@ Configuring the `output` configuration options tells webpack how to write the co
 
 ## Usage
 
-The minimum requirements for the `output` property in your webpack config is to set its value to an object including the following two things:
+The minimum requirements for the `output` property in your webpack config is to set its value to an object including the following thing:
 
 - A `filename` to use for the output file(s).
-- An absolute `path` to your preferred output directory.
 
 **webpack.config.js**
 
@@ -24,12 +23,11 @@ The minimum requirements for the `output` property in your webpack config is to 
 module.exports = {
   output: {
     filename: 'bundle.js',
-    path: '/home/proj/public/assets'
   }
 };
 ```
 
-This configuration would output a single `bundle.js` file into the `/home/proj/public/assets` directory.
+This configuration would output a single `bundle.js` file into the `dist` directory.
 
 
 ## Multiple Entry Points
