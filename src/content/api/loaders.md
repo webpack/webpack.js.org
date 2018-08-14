@@ -513,17 +513,16 @@ Hacky access to the Module object being loaded.
 
 ## Error Reporting
 
-There are some ways to throw out errors from inside a loader:
+Here are the ways to throw an error from inside a loader:
 
 ### Using `this.emitError`
 
-It just report errors but not interrupt module compiling.
+[this.emitError](/api/loaders/#this-emiterror) will report the errors without interrupting module's compilation.
 
-see [this.emitError](/api/loaders/#this-emiterror).
 
 ### Using `throw` (or other uncaught exception)
 
-Throw out an uncaught error while loader are running will cause current module compiling failed.
+Throwing an error while a loader is running will cause current module compilation failure.
 
 For example:
 
@@ -545,7 +544,7 @@ module.exports = function(source){
 
 ```
 
-the module that ouccur this error will be packed into bundle (as an error module) like the following:
+The module on which loader had thrown this error will get bundled like this:
 
 ```js-with-links
 
@@ -574,18 +573,18 @@ Error: Here is an fatal Error!
 
 ```
 
-And you can see these informations below, not only error message, but also details about which loader and module are involved:
+As you can see below, not only error message, but also details about which loader and module are involved:
 
 - the module path: `ERROR in ./src/lib.js`
 - the request string: `(./src/loader.js!./src/lib.js)`
 - the loader path: `(from ./src/loader.js)`
 - the caller path: `@ ./src/index.js 1:0-25`
 
-W> The loader path about error in the above are added after webpack 4.12
+W> The loader path in the error is displayed since webpack 4.12
 
-### Using `this.callback` (in async mode)
+### Using `callback` (in async mode)
 
-Pass an error on first argument into callback, used in async mode.
+Pass an error to the callback.
 
 __./src/loader.js__
 
@@ -594,11 +593,11 @@ __./src/loader.js__
 module.exports = function(source){
   const callback = this.async();
   //...
-  callback(new Error('Here is an async passthrough Error!'), source);
+  callback(new Error('Here is an Error!'), source);
 };
 
 ```
 
-Same as throw an error, it will also cause module compiling failed once it happened and result an error module into bundle.
+Same as using throw, it will also cause module compilation failure and get an error module in the bundle.
 
 T> All the errors and warnings will be recorded into `stats`. Please see [Stats Data](/api/stats/#errors-and-warnings).
