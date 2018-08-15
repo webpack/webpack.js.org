@@ -7,7 +7,7 @@ contributors:
 
 ## Why webpack?
 
-To understand why you should use webpack you first have to understand the origins of how we use JavaScript on the web. 
+To understand why you should use webpack lets do a recap of how we use JavaScript on the web. The origins of how we use JavaScript on the web. 
 
 JavaScript is just a script and there are 2 ways to use it in the browser, loaded as a script tag or written directly inside your html. The problems that this causes is that it doesn't scale. You either have too many scripts that you try to load from your script tags in the html and this causes a huge performance problem. There is only a certain amount of concurrent requests that can fetch data at a single time so breaking your application into a hundred JavaScript files and loading them in the browser is a huge performance problem. One big JS file results in unmaintainable scripts that causes problems in scope, size, readability, fragility and monolith files.
 
@@ -16,25 +16,25 @@ JavaScript is just a script and there are 2 ways to use it in the browser, loade
 
 IIFE's solve big problems with regards to scoping. Every file is treated as an IIFE which allows us to concatenate or safely combine files without concern of scope collision. Wow, we can now write 100 files and squish them together without concerns that we are going to knock out a bunch of variables and scopes.
 
-This lead to tools like Make, Gulp, Grunt, Broccoli, Brunch and StealJS being created. The purpose of these tools/task runners is to concatenate the files together in order to solve these problems. However there are still problems. With these tools a full rebuild is needed every time. Anytime you want to change one file you have to rebuild the whole thing. This also leads to a lot of dead code. Concatenate doesn't help the usages across files. If you are concatenating files together how do you remove code your not using? How do you even know what code you are not using?
+This lead to tools like Make, Gulp, Grunt, Broccoli, Brunch and StealJS being created. The purpose of these tools/task runners is to concatenate the files together in order to solve these problems. However there is much more to it. With these tools a full rebuild is needed every time. Anytime you want to change one file you have to rebuild the whole thing. This also leads to a lot of dead code. Concatenate doesn't help the usages across files. If you are concatenating files together how do you remove code your not using? How do you even know what code you are not using?
 
-If you are only using one function from lodash or one date utility from moment.js you are actually adding the entire library and just squishing it together. Lot's of IIFE's are slow. Also how do you lazy load with a task runner? You don't. There is no way. Whatever you are building you are shipping all the code down the pipeline even if your app maybe only uses 10% of it to load and get your initial experience. As you can see there are a lot of problems with just shoving scripts together.
+If you are only using one function from lodash or one date utility from moment.js you are actually adding the entire library and just squishing it together. Lot's of IIFE's are slow. Also how do you lazy load with a task runner? You don't. There is no way. Whatever you are building you are shipping all the code down the pipeline even if your app maybe only uses 10% of it to load and get your initial experience. As you can see there are a lot of problems with just concatenating scripts together.
 
 
 ## Birth of JavaScript Modules happened thanks to Node.js
 
-If your using webpack your using Node.js as webpack relies on Node.js. Node.js is JavaScript that runs on the server. So how do you load JavaScript if there is no DOM? How do you add a script tag if there is no html in Node.js?
+If you are using webpack you are using Node.js as webpack relies on Node.js. Node.js is JavaScript that runs on the server. So how do you load JavaScript if there is no DOM? How do you add a script tag if there is no html in Node.js?
 
-CommonJS came about and introduced 'require' which allows you to inject other pieces of a module into the current module. This solves scope issues without having to use IIFE's. This helps us to see exactly what modules are used.
+CommonJS came about and introduced 'require' which allows you to inject other pieces of a module into the current module. This solves scope issues without having to use IIFE's and helps us to see exactly which modules are used.
 
 
 ## npm + Node.js + modules -- mass distribution
 
 JavaScript is taking over the world as a language, as a platform and as a way to rapidly develop and create fast running applications. 
 
-But there is no browser support for CommonJS. There are no live bindings(https://medium.com/webpack/the-state-of-javascript-modules-4636d1774358). There are problems with circular references. Sync module resolution loader is slow. Bundlers/Linkers such as Browserify, RequireJS, SystemJS came about to solve these issues and allow you to write CommonJS modules which get bundled, making it possible to run them in the Web.
+But there is no browser support for CommonJS. There are no [live bindings](https://medium.com/webpack/the-state-of-javascript-modules-4636d1774358). There are problems with circular references. Sync module resolution loader is slow. Bundlers/Linkers such as Browserify, RequireJS, SystemJS came about to solve these issues and allow you to write CommonJS modules which get bundled, making it possible to run them in the Web.
 
-But with CommonJS there is no lazy loading. All bundles are loaded upfront. CommonJS is too dynamic for lazy loading, too much bloat, it has awkward non standard syntax and has no real module system.
+But with CommonJS there is no lazy loading. All bundles are loaded upfront. CommonJS doesn't allow for lazy loading, it has non standard syntax and has no real module system.
 
 
 ## ESM - ECMAScript Modules
@@ -47,7 +47,7 @@ Every library is different, library authors choose a module type they like and t
 ## Wouldn't it be nice….
 
 
-We now need something that not only lets us write modules but we need something that lets us support any module format at least until we can get to ESM, and that can handle resources and other assets at the same time.
+To have something that will not only let us write modules but also support any module format (at least until we get to ESM) and that can handle resources and assets at the same time.
 
 This is why webpack was born. webpack is a module bundler. It lets you write any module format or a mixed format and compiles them for the browser. It supports static async bundling (code splitting) where you can create separate lazy loaded bundles at build time and extra optimization with its rich, vast ecosystem. Today it is the most performant way to ship JavaScript and has 14 million downloads a month.
 
