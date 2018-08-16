@@ -7,14 +7,14 @@ contributors:
 
 ## Why webpack?
 
-To understand why you should use webpack lets do a recap of how we use JavaScript on the web. The origins of how we use JavaScript on the web. 
+To understand why you should use webpack lets do a recap of how we use JavaScript on the web before bundlers were a thing.
 
-JavaScript is just a script and there are 2 ways to use it in the browser, loaded as a script tag or written directly inside your html. The problems that this causes is that it doesn't scale. You either have too many scripts that you try to load from your script tags in the html and this causes a huge performance problem. There is only a certain amount of concurrent requests that can fetch data at a single time so breaking your application into a hundred JavaScript files and loading them in the browser is a huge performance problem. One big JS file results in unmaintainable scripts that causes problems in scope, size, readability, fragility and monolith files.
+There are two ways to run JavaScript in a browser. First, include a script for each functionality you want to implement, the issue is that the solution is hard to scale as loading too many scripts causes a network bottleneck. The other alternative is load a big .js file containing all your project code, but this results in an unmaintainable scripts that causes problems in scope, size, readability, fragility and monolith files.
 
 
 ## IIFE's - Immediately invoked function expressions
 
-IIFE's solve big problems with regards to scoping. Every file is treated as an IIFE which allows us to concatenate or safely combine files without concern of scope collision. Wow, we can now write 100 files and squish them together without concerns that we are going to knock out a bunch of variables and scopes.
+IIFEs solve scoping issues for large projects. When script files are wrapped by an IIFE, you can safely concatenate When script files are wrapped by an IIFE, you can safely concatenate or safely combine files without concern of scope collision. Wow, we can now write 100 files and squish them together without concerns that we are going to knock out a bunch of variables and scopes.
 
 This lead to tools like Make, Gulp, Grunt, Broccoli, Brunch and StealJS being created. The purpose of these tools/task runners is to concatenate the files together in order to solve these problems. However there is much more to it. With these tools a full rebuild is needed every time. Anytime you want to change one file you have to rebuild the whole thing. This also leads to a lot of dead code. Concatenate doesn't help the usages across files. If you are concatenating files together how do you remove code your not using? How do you even know what code you are not using?
 
@@ -46,10 +46,9 @@ Every library is different, library authors choose a module type they like and t
 
 ## Wouldn't it be nice….
 
-
 To have something that will not only let us write modules but also support any module format (at least until we get to ESM) and that can handle resources and assets at the same time.
 
 This is why webpack was born. webpack is a module bundler. It lets you write any module format or a mixed format and compiles them for the browser. It supports static async bundling (code splitting) where you can create separate lazy loaded bundles at build time and extra optimization with its rich, vast ecosystem. Today it is the most performant way to ship JavaScript and has 14 million downloads a month.
 
 
-## Why webpack? That's why!!!!
+### Why webpack? That's why!!!!
