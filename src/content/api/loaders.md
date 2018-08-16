@@ -369,7 +369,7 @@ Here is an Error!
 
 ```
 
-T> Unlike throwing an Error directly, it will NOT interrupt compiling process of current module.
+T> Unlike throwing an Error directly, it will NOT interrupt the compilation process of the current module.
 
 
 ### `this.loadModule`
@@ -539,14 +539,15 @@ __./src/loader.js__
 ```js
 
 module.exports = function(source){
-  throw new Error('Here is an fatal Error!');
+  throw new Error('Here is a Fatal Error!');
 };
 
 ```
 
 The module on which loader had thrown this error will get bundled like this:
 
-```js-with-links
+<!-- eslint-skip -->
+```js
 
 /***/ "./src/loader.js!./src/lib.js":
 /*!************************************!*\
