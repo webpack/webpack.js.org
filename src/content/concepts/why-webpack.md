@@ -18,7 +18,7 @@ IIFEs solve scoping issues for large projects. When script files are wrapped by 
 
 This lead to tools like Make, Gulp, Grunt, Broccoli or Brunch. These tool are known as task runners and they are used, among with other purposes, to concatenate all your project files together in order to solve some of the issues mentioned before.
 
-However, anytime you want to change one file you have to rebuild the whole thing. Concatenating makes trivial to reuse scripts across files and makes build optimizations harder to implement. How do you even know what code is being used and which not?
+However, anytime you want to change one file you have to rebuild the whole thing. Concatenating makes trivial to reuse scripts across files and makes build optimizations more difficult to implement. How do you even know what code is being used and which not?
 
 If you are only using one function from lodash or one date utility from moment.js you are actually adding the entire library and just squishing it together. How do you treeshake the dependencies on your code? Also, lazy loading chunks of code can be hard to achieve at scale and requires a lot of manual work from the developer.
 
