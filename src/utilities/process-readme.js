@@ -18,7 +18,7 @@ module.exports = function processREADME(body, options = {}) {
         href = href.replace('//www.npmjs.com');
       }
 
-      `[${content}](${url.resolve(options.source, href)})`;
+      return `[${content}](${url.resolve(options.source, href)})`;
     })
     // Modify links to keep them within the site
     .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-loader\/?)([)"])/g, '/loaders/$2/$3')
