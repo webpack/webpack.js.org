@@ -28,16 +28,10 @@ npm install --save-dev webpack
 npm install --save-dev webpack@<version>
 ```
 
-If you're using webpack v4 or later, you'll need to install a [CLI](/api/cli/).
+If you're using webpack v4 or later, you'll need to install the [CLI](/api/cli/).
 
 ``` bash
 npm install --save-dev webpack-cli
-```
-
-or
-
-``` bash
-npm install --save-dev webpack-command
 ```
 
 
