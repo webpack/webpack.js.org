@@ -2,10 +2,6 @@ const url = require('url');
 
 const beginsWithDocsDomainRegex = /^https?:\/\/webpack\.js\.org/;
 
-const redirects = {
-  '/guides/migrating/#json-loader-is-not-required-anymore': '/migrate/3#json-loader-is-not-required-anymore'
-};
-
 module.exports = function processREADME(body, options = {}) {
   return body
     .replace(/[^]*?<div align="center">([^]*?)<\/div>/, (match, content) => {
@@ -26,6 +22,7 @@ module.exports = function processREADME(body, options = {}) {
         href = href.replace('//www.npmjs.com');
       }
 
+      // Only resolve non-absolute urls from their source if they are not a document fragment link
       if (!href.startsWith('#')) {
         href = url.resolve(options.source, href);
       }
@@ -33,10 +30,6 @@ module.exports = function processREADME(body, options = {}) {
       // Modify absolute documenation links to be root relative
       if (beginsWithDocsDomainRegex.test(href)) {
         href = href.replace(beginsWithDocsDomainRegex, '');
-      }
-
-      if (href in redirects) {
-        href = redirects[href];
       }
 
       if (oldHref !== href) {
