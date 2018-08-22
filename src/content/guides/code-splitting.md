@@ -41,7 +41,7 @@ Code splitting is one of the most compelling features of webpack. This feature a
 There are three general approaches to code splitting available:
 
 - Entry Points: Manually split code using [`entry`](/configuration/entry-context) configuration.
-- Prevent Duplication: Use the [`SplitChunks`](/plugins/split-chunks-plugin/) to dedupe and split chunks.
+- Prevent Duplication: Use the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) to dedupe and split chunks.
 - Dynamic Imports: Split code via inline function calls within modules.
 
 
@@ -113,16 +113,14 @@ As mentioned there are some pitfalls to this approach:
 - If there are any duplicated modules between entry chunks they will be included in both bundles.
 - It isn't as flexible and can't be used to dynamically split code with the core application logic.
 
-The first of these two points is definitely an issue for our example, as `lodash` is also imported within `./src/index.js` and will thus be duplicated in both bundles. Let's remove this duplication by using the `SplitChunks` plugin.
+The first of these two points is definitely an issue for our example, as `lodash` is also imported within `./src/index.js` and will thus be duplicated in both bundles. Let's remove this duplication by using the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/).
 
 
 ## Prevent Duplication
 
-W> The CommonsChunkPlugin has been removed in webpack v4 legato. To learn how chunks are treated in the latest version, check out the [SplitChunksPlugin](/plugins/split-chunks-plugin/).
+The [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) allows us to extract common dependencies into an existing entry chunk or an entirely new chunk. Let's use this to de-duplicate the `lodash` dependency from the previous example:
 
-The [`SplitChunks`](/plugins/split-chunks-plugin/) allows us to extract common dependencies into an existing entry chunk or an entirely new chunk. Let's use this to de-duplicate the `lodash` dependency from the previous example:
-
-W> The CommonsChunkPlugin has been removed in webpack v4 legato. To learn how chunks are treated in the latest version, check out the [SplitChunksPlugin](/plugins/split-chunks-plugin/).
+W> The `CommonsChunkPlugin` has been removed in webpack v4 legato. To learn how chunks are treated in the latest version, check out the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/).
 
 __webpack.config.js__
 
@@ -147,7 +145,7 @@ __webpack.config.js__
   };
 ```
 
-With the [`SplitChunks`](/plugins/split-chunks-plugin/) in place, we should now see the duplicate dependency removed from our `index.bundle.js` and `another.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. Let's do an `npm run build` to see if it worked:
+With the [`optimization.splitChunks`](/plugins/split-chunks-plugin/#optimization-splitchunks) configuration option in place, we should now see the duplicate dependency removed from our `index.bundle.js` and `another.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. Let's do an `npm run build` to see if it worked:
 
 ``` bash
 Hash: ac2ac6042ebb4f20ee54
@@ -171,8 +169,6 @@ Here are some other useful plugins and loaders provided by the community for spl
 - [`mini-css-extract-plugin`](/plugins/mini-css-extract-plugin): Useful for splitting CSS out from the main application.
 - [`bundle-loader`](/loaders/bundle-loader): Used to split code and lazy load the resulting bundles.
 - [`promise-loader`](https://github.com/gaearon/promise-loader): Similar to the `bundle-loader` but uses promises.
-
-T> The [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) is also used to split vendor modules from core application code using [explicit vendor chunks](/plugins/commons-chunk-plugin/#explicit-vendor-chunk).
 
 
 ## Dynamic Imports

@@ -2,6 +2,7 @@
 title: Glossary
 sort: 3
 contributors:
+  - kryptokinght
   - rouzbeh84
   - bebraw
   - skipjack
@@ -68,7 +69,7 @@ This index lists common terms used throughout the webpack ecosystem.
 
 ## O
 
-- [**Output**](/concepts/output): Option(s) specifying where to the output of the compiled files to disk.
+- [**Output**](/concepts/output): Option(s) specifying where to output the compiled files to disk.
   > _Note, that while there can be multiple entry points, only one output configuration is specified._
 
 
