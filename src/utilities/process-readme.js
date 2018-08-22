@@ -1,5 +1,7 @@
 const url = require('url');
 
+const beginsWithDocsDomainRegex = /^https?:\/\/webpack\.js\.org/;
+
 module.exports = function processREADME(body, options = {}) {
   return body
     .replace(/[^]*?<div align="center">([^]*?)<\/div>/, (match, content) => {
@@ -14,11 +16,27 @@ module.exports = function processREADME(body, options = {}) {
     // EXAMPLE: [Contributing](./.github/CONTRIBUTING.md)
     // EXAMPLE: [Contributing](CONTRIBUTING.md)
     .replace(/\[([^\]]*)\]\(([^)]+)\)/g, (markdownLink, content, href) => {
+      const oldHref = href;
+
       if (href.includes('//npmjs.com')) {
         href = href.replace('//www.npmjs.com');
       }
 
-      return `[${content}](${url.resolve(options.source, href)})`;
+      // Only resolve non-absolute urls from their source if they are not a document fragment link
+      if (!href.startsWith('#')) {
+        href = url.resolve(options.source, href);
+      }
+
+      // Modify absolute documenation links to be root relative
+      if (beginsWithDocsDomainRegex.test(href)) {
+        href = href.replace(beginsWithDocsDomainRegex, '');
+      }
+
+      if (oldHref !== href) {
+        console.log('REWRITE URL:', oldHref, '-->', href);
+      }
+
+      return `[${content}](${href})`;
     })
     // Modify links to keep them within the site
     .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-loader\/?)([)"])/g, '/loaders/$2/$3')
