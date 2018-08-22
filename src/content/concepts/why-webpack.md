@@ -3,6 +3,9 @@ title: Why webpack
 sort: 7
 contributors:
 - debs-obrien
+- montogeek
+- jeremenichelli
+- EugeneHlushko
 ---
 
 ## Why webpack?
