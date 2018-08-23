@@ -5,7 +5,15 @@ jslinks.aliases = [];
 
 function jslinks(Prism) {
   Prism.languages["js-with-links-with-details"] = Prism.languages.extend("javascript", {
-    keyword: /(<details>|<\/details>|<summary>|<\/summary>)/
+    keyword: {
+      pattern: /<[a-z]+>(.|\n)*?<\/[a-z]+>/,
+      greedy: true,
+      inside: {
+      //   punctuation: /()/,
+      //   string: /()/,
+        rest: Prism.languages.js
+      }
+    }
   });
 }
 
