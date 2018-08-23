@@ -20,9 +20,9 @@ new webpack.ProgressPlugin(handler);
 ```
 
 * `handler` is a function which takes these arguments:
-  * `percentage`: a number between 0 and 1 indicating the completion percentage of the compilation.
-  * `message`: a short description of the currently-executing hook.
-  * `...args`: zero or more additional strings describing the current progress.
+    * `percentage`: a number between 0 and 1 indicating the completion percentage of the compilation.
+    * `message`: a short description of the currently-executing hook.
+    * `...args`: zero or more additional strings describing the current progress.
 
 ## Supported Hooks
 
