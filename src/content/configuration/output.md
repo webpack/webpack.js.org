@@ -10,7 +10,10 @@ contributors:
   - fvgs
   - dhurlburtusa
   - MagicDuck
+  - fadysamirsadek
   - byzyk
+  - madhavarshney
+  - harshwardhansingh
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -75,7 +78,7 @@ module.exports = {
 
 ## `output.chunkFilename`
 
-`string` `function`
+`string`
 
 This option determines the name of non-entry chunk files. See [`output.filename`](#output-filename) option for details on the possible values.
 
@@ -195,7 +198,7 @@ If multiple modules would result in the same name, [`output.devtoolFallbackModul
 
 `string`
 
-This option determines the modules namespace used with the [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametemplate). When not specified, it will default to the value of: [`output.library`](#output-library). It's used to prevent source file path collisions in sourcemaps when loading multiple libraries built with webpack.
+This option determines the modules namespace used with the [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametemplate). When not specified, it will default to the value of: [`output.library`](#output-library). It's used to prevent source file path collisions in source maps when loading multiple libraries built with webpack.
 
 For example, if you have 2 libraries, with namespaces `library1` and `library2`, which both have a file `./src/index.js` (with potentially different contents), they will expose these files as `webpack://library1/./src/index.js` and `webpack://library2/./src/index.js`.
 
@@ -263,6 +266,30 @@ module.exports = {
 };
 ```
 
+Using hashes generated for extracted content:
+
+```js
+module.exports = {
+  //...
+  output: {
+    filename: '[contenthash].bundle.css'
+  }
+};
+```
+
+Using function to return the filename:
+
+```js
+module.exports = {
+  //...
+  output: {
+    filename: (chunkData) => {
+      return chunkData.chunk.name === 'main' ? '[name].js': '[name]/[name].js';
+    },
+  }
+};
+```
+
 Make sure to read the [Caching guide](/guides/caching) for details. There are more steps involved than just setting this option.
 
 Note this option is called filename but you are still allowed to use something like `"js/[name]/bundle.js"` to create a folder structure.
@@ -278,6 +305,7 @@ The following substitutions are available in template strings (via webpack's int
 | [name]      | The module name                                                                     |
 | [id]        | The module identifier                                                               |
 | [query]     | The module query, i.e., the string following `?` in the filename                    |
+| [function]  | The function, which can return filename [string]                                    |
 
 The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#output-hashdigestlength) to configure the length globally.
 
@@ -300,7 +328,7 @@ The prefix length of the hash digest to use, defaults to `20`.
 
 `string|function`
 
-The hashing algorithm to use, defaults to `'md5'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm_options) are supported. Since `4.0.0-alpha2`, the `hashFunction` can now be a constructor to a custom hash function. You can provide a non-crypto hash function for performance reasons.
+The hashing algorithm to use, defaults to `'md4'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm_options) are supported. Since `4.0.0-alpha2`, the `hashFunction` can now be a constructor to a custom hash function. You can provide a non-crypto hash function for performance reasons.
 
 ```js
 module.exports = {

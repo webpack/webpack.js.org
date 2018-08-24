@@ -5,6 +5,7 @@ contributors:
   - sokra
   - skipjack
   - pksjce
+  - fadysamirsadek
   - byzyk
 ---
 
@@ -15,7 +16,7 @@ T> __consumer__ here is any end user application that includes the library that 
 
 ## `externals`
 
-`string` `array` `object` `function`  `regex`
+`string` `object` `function`  `regex`
 
 __Prevent bundling__ of certain `import`ed packages and instead retrieve these *external dependencies* at runtime.
 

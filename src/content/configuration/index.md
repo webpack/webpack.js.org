@@ -12,6 +12,7 @@ contributors:
   - kbariotis
   - sterlingvix
   - jeremenichelli
+  - dasarianudeep
 ---
 
 Out of the box, webpack won't require you to use a configuration file. However, it will assume the entry point of your project is `src/index` and will output the result in `dist/main.js` minified and optimized for production.
@@ -323,7 +324,7 @@ module.exports = {
   // Don't follow/bundle these modules, but request them at runtime from the environment
   [serve](https://github.com/webpack-contrib/webpack-serve#options): { //object
     port: 1337,
-    content './dist',
+    content: './dist',
     // ...
   },
   // lets you provide options for webpack-serve
@@ -394,3 +395,10 @@ module.exports = {
   </details>
 }
 ```
+
+T> Want to rapidly generate webpack configuration file for your project requirements with few clicks away.
+
+[Generate Custom Webpack Configuration](https://generatewebpackconfig.netlify.com/) is an interactive portal you can play around by selecting custom webpack configuration options tailored for your frontend project. It automatically generates 
+a minimal webpack configuration based on your selection of loaders/plugins, etc.
+
+[Visual tool for creating webpack configs](https://webpack.jakoblind.no/) is an online configuration tool for creating webpack config where you can select any combination of features you need. It also generates a full example project based on your webpack configs.

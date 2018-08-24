@@ -73,8 +73,8 @@ lifecycle running. It delegates all the loading, bundling, and writing work to
 registered plugins.
 
 The `hooks` property on a `Compiler` instance is used to register a plugin to
-any hook event in the `Compiler`'s lifecycle. The [`WebpackOptionsDefaulter`]
-(https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js)
+any hook event in the `Compiler`'s lifecycle. The 
+[`WebpackOptionsDefaulter`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js)
 and [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js)
 utilities are used by webpack to configure its `Compiler` instance with all the
 built-in plugins.
