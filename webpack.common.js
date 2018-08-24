@@ -27,7 +27,40 @@ module.exports = (env = {}) => ({
           {
             loader: '@mdx-js/loader',
             options: {
-              mdPlugins: [require('./prism')]
+              mdPlugins: [
+                require('remark-slug'),
+                require('remark-mermaid'),
+                require('remark-refractor'),
+                [
+                  require('remark-custom-blockquotes'),
+                  {
+                    mapping: {
+                      'T>': 'tip',
+                      'W>': 'warning',
+                      '?>': 'todo'
+                    }
+                  }
+                ],
+                [
+                  require('@rigor789/remark-autolink-headings'),
+                  {
+                    behaviour: 'append'
+                  }
+                ],
+                [
+                  require('remark-responsive-tables'),
+                  {
+                    classnames: {
+                      title: 'title',
+                      description: 'description',
+                      content: 'content',
+                      mobile: 'mobile',
+                      desktop: 'desktop'
+                    }
+                  }
+                ],
+                require('./prism')
+              ]
             }
           }
         ]
@@ -38,37 +71,37 @@ module.exports = (env = {}) => ({
           loader: 'remark-loader',
           options: {
             plugins: [
-              // require('remark-slug'),
-              // require('remark-mermaid'),
-              // require('remark-refractor'),
-              // [
-              //   require('remark-custom-blockquotes'),
-              //   {
-              //     mapping: {
-              //       'T>': 'tip',
-              //       'W>': 'warning',
-              //       '?>': 'todo'
-              //     }
-              //   }
-              // ],
-              // [
-              //   require('@rigor789/remark-autolink-headings'),
-              //   {
-              //     behaviour: 'append'
-              //   }
-              // ],
-              // [
-              //   require('remark-responsive-tables'),
-              //   {
-              //     classnames: {
-              //       title: 'title',
-              //       description: 'description',
-              //       content: 'content',
-              //       mobile: 'mobile',
-              //       desktop: 'desktop'
-              //     }
-              //   }
-              // ]
+              require('remark-slug'),
+              require('remark-mermaid'),
+              require('remark-refractor'),
+              [
+                require('remark-custom-blockquotes'),
+                {
+                  mapping: {
+                    'T>': 'tip',
+                    'W>': 'warning',
+                    '?>': 'todo'
+                  }
+                }
+              ],
+              [
+                require('@rigor789/remark-autolink-headings'),
+                {
+                  behaviour: 'append'
+                }
+              ],
+              [
+                require('remark-responsive-tables'),
+                {
+                  classnames: {
+                    title: 'title',
+                    description: 'description',
+                    content: 'content',
+                    mobile: 'mobile',
+                    desktop: 'desktop'
+                  }
+                }
+              ]
             ]
           }
         }

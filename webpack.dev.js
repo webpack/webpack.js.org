@@ -32,7 +32,7 @@ module.exports = env => merge(common(env), {
     new DirectoryTreePlugin({
       dir: 'src/content',
       path: 'src/_content.json',
-      extensions: /\.md/,
+      extensions: /\.mdx?/,
       enhance,
       filter,
       sort

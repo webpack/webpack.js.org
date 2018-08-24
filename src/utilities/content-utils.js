@@ -61,7 +61,7 @@ export const extractSections = tree => {
  * @return {array}       - All markdown descendants of the given `tree`
  */
 export const extractPages = tree => {
-  return flattenContent(tree).filter(item => item.extension === '.md');
+  return flattenContent(tree).filter(item => item.extension === '.md' || item.extension === '.mdx');
 };
 
 /**

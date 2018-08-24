@@ -13,6 +13,7 @@ var find = require('unist-util-find');
 var findAllBetween = require('unist-util-find-all-between');
 
 refractor.register(require('./jsLinks.js'));
+refractor.register(require('refractor/lang/json'))
 
 var fs = require('fs');
 
@@ -75,6 +76,7 @@ function attacher({ include, exclude } = {}) {
   return transformer;
 
   function transformer(tree, file) {
+    // console.log(tree)
     visit(tree, 'code', visitor);
 
     function visitor(node) {
@@ -92,7 +94,6 @@ function attacher({ include, exclude } = {}) {
 
       try {
         data.hChildren = refractor.highlight(node.value, lang);
-
         data.hChildren.forEach(node => {
           if(node.properties && node.properties.className.includes('keyword')) {
             node.properties.componentname = node.children[1].value

@@ -29,54 +29,6 @@ import './Site.scss';
 // Load Content Tree
 import Content from '../../_content.json';
 
-import ConfigMD from '../../content/configuration/index.mdx';
-import { Modes, Entry } from '../../content/configuration/modes.js';
-
-const components = {
-  mode: (props) => <Modes children={props} />,
-  entry: (props) => <Entry children={props} />
-};
-
-const Pre = props => {
-
-  const newChildren = React.Children.map(props.children.props.children, (child, i) => {
-    if(React.isValidElement(child)) {
-      if(child.props.props.className.includes('keyword')) {
-        return components[child.props.props.componentname](child.props.children.slice(3, React.Children.count(child.props.children) - 4));
-      }
-    }
-
-    return child;
-  });
-
-  const newProps = {
-    children: newChildren
-  };
-
-  return (
-    <pre>
-      <code {...newProps} />
-    </pre>
-  );
-};
-
-const DP = props => {
-  console.log('sesese');
-  return 'DPDP';
-};
-
-const Configuration = props => {
-  return (
-    <Container>
-      <ConfigMD
-        components={{
-          pre: Pre
-        }}
-      />
-    </Container>
-  );
-};
-
 class Site extends React.Component {
   state = {
     mobileSidebarOpen: false
@@ -113,7 +65,6 @@ class Site extends React.Component {
 
         <Switch>
           <Route path="/" exact component={Splash} />
-          <Route path="/configuration" component={Configuration} />
           <Route
             render={props => (
               <Container className="site__content">
