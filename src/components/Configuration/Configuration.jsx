@@ -2,30 +2,65 @@ import React from 'react';
 import { Modes, Entry } from './components';
 
 const components = {
-  mode: props => <Modes children={props} />,
-  entry: props => <Entry children={props} />,
-  filename: props => <Modes children={props} />,
-  publicPath: props => <Modes children={props} />,
-  advancedOutput: props => <Modes children={props} />,
-  expert: props => <Modes children={props} />,
-  advancedModule: props => <Modes children={props} />,
-  alias: props => <Modes children={props} />,
-  advancedResolve: props => <Modes children={props} />,
-  hints: props => <Modes children={props} />,
-  devtool: props => <Modes children={props} />,
-  target: props => <Modes children={props} />,
-  externals: props => <Modes children={props} />,
-  stats: props => <Modes children={props} />,
-  advanced: props => <Modes children={props} />,
-  libraryTarget: props => <Modes children={props} />
+  mode: (children, props) => {
+    return <Modes children={children} {...props} />;
+  },
+  entry: (children, props) => {
+    return <Modes children={children} {...props} />;
+  },
+  filename: (children, props) => {
+    return <Modes children={children} {...props} />;
+  },
+  publicPath: (children, props) => {
+    return <Modes children={children} {...props} />;
+  },
+  advancedOutput: (children, props) => {
+    return <Modes children={children} {...props} />;
+  },
+  expert: (children, props) => {
+    return <Modes children={children} {...props} />;
+  },
+  advancedModule: (children, props) => {
+    return <Modes children={children} {...props} />;
+  },
+  alias: (children, props) => {
+    return <Modes children={children} {...props} />;
+  },
+  advancedResolve: (children, props) => {
+    return <Modes children={children} {...props} />;
+  },
+  hints: (children, props) => {
+    return <Modes children={children} {...props} />;
+  },
+  devtool: (children, props) => {
+    return <Modes children={children} {...props} />;
+  },
+  target: (children, props) => {
+    return <Modes children={children} {...props} />;
+  },
+  externals: (children, props) => {
+    return <Modes children={children} {...props} />;
+  },
+  stats: (children, props) => {
+    return <Modes children={children} {...props} />;
+  },
+  advanced: (children, props) => {
+    return <Modes children={children} {...props} />;
+  },
+  libraryTarget: (children, props) => {
+    return <Modes children={children} {...props} />;
+  }
 };
 
 const Pre = props => {
   const newChildren = React.Children.map(props.children.props.children, (child, i) => {
     if (React.isValidElement(child)) {
       if (child.props.props.className.includes('keyword')) {
+        if (!components[child.props.props.componentname]) return child;
+
         return components[child.props.props.componentname](
-          child.props.children.slice(3, React.Children.count(child.props.children) - 4)
+          child.props.children.slice(4, React.Children.count(child.props.children) - 4),
+          { url: child.props.props.url }
         );
       }
     }

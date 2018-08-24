@@ -59,9 +59,11 @@ function attacher({ include, exclude } = {}) {
         data.hChildren = refractor.highlight(node.value, lang);
         data.hChildren.forEach(node => {
           if(node.properties && node.properties.className.includes('keyword')) {
-            node.properties.componentname = node.children[1].value
+            node.properties.componentname = node.children[1].value.trim()
+            node.properties.url = node.children[2].children[0].value.replace(/"/g, '')
           }
         })
+
       } catch (e) {
         throw e;
       }
