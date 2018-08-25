@@ -2,6 +2,9 @@ import React from 'react';
 import { Modes, Entry } from './components';
 
 const components = {
+  link: (children, props) => {
+    return <Modes children={children} {...props} />;
+  },
   mode: (children, props) => {
     return <Modes children={children} {...props} />;
   },

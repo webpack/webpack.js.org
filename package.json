@@ -96,7 +96,6 @@
     "node-sass": "^4.5.3",
     "npm-run-all": "^4.1.1",
     "postcss-loader": "^2.0.6",
-    "react-dropdown": "1.6.2",
     "redirect-webpack-plugin": "^0.1.1",
     "remark": "^9.0.0",
     "remark-autolink-headings": "^5.0.0",
@@ -142,6 +141,7 @@
     "react-g-analytics": "0.4.2",
     "react-hot-loader": "^4.0.0-beta.12",
     "react-router-dom": "^4.2.2",
+    "react-tiny-popover": "3.4.2",
     "webpack.vote": "^0.1.2",
     "whatwg-fetch": "^2.0.3"
   }
