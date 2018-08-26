@@ -9,6 +9,7 @@ contributors:
   - dylanonelson
   - byzyk
   - pnevares
+  - fadysamirsadek
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -253,7 +254,7 @@ An array of [`Rules`](#rule) that is also used when the Rule matches.
 
 ## `Rule.sideEffects`
 
-Possible values: `false | an array of paths`
+Possible values: `true | false`
 
 Indicate what parts of the module contain side effects. See [Tree Shaking](/guides/tree-shaking/#mark-the-file-as-side-effect-free) for details.
 
