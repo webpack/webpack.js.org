@@ -6,7 +6,7 @@ contributors:
 ---
 
 This tutorial uses NPM, webpack and JavaScript to teach basic webpack.
-Webpack is used to bundle and convert, or transpile, JavaScript modules.
+The webpack command is used to bundle and convert, or transpile, JavaScript modules.
 
 A minimal webpack example is first demonstrated. Progressively
 more complex webpack features are introduced including:
@@ -15,12 +15,11 @@ more complex webpack features are introduced including:
 - using development mode
 - using standard src and dist folders
 - packing multiple files
-- using webpack.config.js to control the entry and output files
 
 ## Part I. Minimal Webpack Example
 ### A. Installation
 
-Webpack must be installed before running it. This is almost always done using NPM. Hence NPM must be installed. This is normally done by installing Node.js which includes NPM by default. While full NPM details are not supported in this tutorial, it can be downloaded and installed at https://nodejs.org/. Once installed, reboot and verify that npm has been installed using "npm -v" which prints the version number (currently 5.6.0).
+Before running webpack it must be installed. This is almost always done using NPM. Hence NPM must be installed. This is normally done by installing Node.js which includes NPM by default. While full NPM details are not supported in this tutorial, it can be downloaded and installed at https://nodejs.org/. Once installed, reboot and verify that npm has been installed using "npm -v" which prints the version number (currently 5.6.0).
 
 Now create a new directory, change into it and use npm to install both webpack and webpack-cli (webpack's command line interface tool) globally.
 
