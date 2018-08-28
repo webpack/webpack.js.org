@@ -2,25 +2,31 @@
 @import 'mixins';
 
 .sponsors {
-  position: fixed;
-  display: none;
+  position: absolute;
+  height: 100%;
   width: 250px;
-  margin-top: 1.5em;
-  margin-left: calc(-250px - 1.5em);
-  padding: 0 1.5em;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  align-content: flex-start;
-  border-right: 1px solid getColor(concrete);
-  overflow: hidden;
-  transition: background-color 250ms;
+  margin-left: -250px;
 
-  &:hover {
-    background-color: getColor(concrete);
-  }
+  &__content {
+    position: sticky;
+    display: none;
+    margin-top: 1.5em;
+    top: 1.5em;
+    padding: 0 1.5em 3em;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+    border-right: 2px solid getColor(concrete);
+    overflow: hidden;
+    transition: background-color 250ms;
 
-  @include break(xlarge) {
-    display: flex;
+    @include break(xlarge) {
+      display: flex;
+    }
+
+    &:hover {
+      background-color: getColor(concrete);
+    }
   }
 }

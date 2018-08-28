@@ -6,13 +6,13 @@ root = true
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-# Format All Source Files
-[*.{md,js,jsx,json,scss,hbs,*rc}]
+# Format Source Code
+[*.{md,js,jsx,json,scss,hbs}]
 charset = utf-8
 indent_style = space
 indent_size = 2
 
-# Format Any Missing Config Files
-[.eslintignore]
+# Format Configs
+[.eslintignore,*rc]
 indent_style = space
 indent_size = 2

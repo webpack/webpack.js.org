@@ -1,5 +1,5 @@
 ---
-title: Node.js API
+title: Node Interface
 sort: 3
 contributors:
   - sallar
@@ -171,7 +171,7 @@ watching.invalidate();
 ## Stats Object
 
 The `stats` object that is passed as a second argument of the
-[`webpack()`](#webpack-) callback, is a good source of information about the
+[`webpack()`](#webpack) callback, is a good source of information about the
 code compilation process. It includes:
 
 - Errors and Warnings (if any)
