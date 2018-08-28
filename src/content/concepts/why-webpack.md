@@ -8,8 +8,6 @@ contributors:
 - EugeneHlushko
 ---
 
-## Why webpack?
-
 To understand why you should use webpack lets do a recap of how we use JavaScript on the web before bundlers were a thing.
 
 There are two ways to run JavaScript in a browser. First, include a script for each functionality you want to implement, the issue is that the solution is hard to scale as loading too many scripts causes a network bottleneck. The other alternative is to load a big .js file containing all your project code, but this results in an unmaintainable scripts that causes problems in scope, size, readability, fragility and monolith files.
