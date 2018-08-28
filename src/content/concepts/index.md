@@ -24,11 +24,11 @@ Since version 4.0.0, __webpack does not require a configuration file__ to bundle
 
 To get started you only need to understand its __Core Concepts__:
 
-- Entry
-- Output
-- Loaders
-- Plugins
-- Mode
+- [Entry](#entry)
+- [Output](#output)
+- [Loaders](#loaders)
+- [Plugins](#plugins)
+- [Mode](#mode)
 
 This document is intended to give a __high-level__ overview of these concepts, while providing links to detailed concept specific use cases.
 
