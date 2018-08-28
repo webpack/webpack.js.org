@@ -49,11 +49,8 @@ The good news for web projects is that modules are becoming an official feature 
 
 ## Wouldn't it be nice…
 
-to have something that will not only let us write modules but also support any module format (at least until we get to ESM) and that can handle resources and assets at the same time.
+...to have something that will not only let us write modules but also support any module format (at least until we get to ESM) and that can handle resources and assets at the same time.
 
 This is why webpack exists. It's a tool that not only let's you bundle your JavaScript applications, supporting both ESM and CommonJS, but can be extended to support all different kind of assets like images, fonts and stylesheets.
 
 webpack cares a lot about performance and it's always adding and improving features like async chunk loading and prefetching to help you deliver the best possible version of your project to the user, always caring about loading times and performance.
-
-
-### Why webpack? That's why!!!!
