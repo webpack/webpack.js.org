@@ -15,7 +15,7 @@ There are two ways to run JavaScript in a browser. First, include a script for e
 
 ## IIFE's - Immediately invoked function expressions
 
-IIFEs solve scoping issues for large projects. When script files are wrapped by an IIFE, you can safely concatenate. When script files are wrapped by an IIFE, you can safely concatenate or safely combine files without concern of scope collision. 
+IIFEs solve scoping issues for large projects. When script files are wrapped by an IIFE, you can safely concatenate or safely combine files without concern of scope collision. 
 
 This lead to tools like Make, Gulp, Grunt, Broccoli or Brunch. These tools are known as task runners and they are used, among with other purposes, to concatenate all your project files together in order to solve some of the issues mentioned before.
 
