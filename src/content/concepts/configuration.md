@@ -4,6 +4,7 @@ sort: 6
 contributors:
 - TheLarkInn
 - simon04
+- byzyk
 ---
 
 You may have noticed that few webpack configurations look exactly alike. This is because **webpack's configuration file is a JavaScript file that exports an object.** This object is then processed by webpack based upon its defined properties.
@@ -45,7 +46,11 @@ module.exports = {
 };
 ```
 
+_See_: [Configuration section](/configuration) for the all supported config options
+
 ## Multiple Targets
+
+Along with exporting a single configuration object/function, webpack supports exporting multiple configurations.
 
 _See_: [Exporting multiple configurations](/configuration/configuration-types/#exporting-multiple-configurations)
 
