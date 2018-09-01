@@ -39,7 +39,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'main.js'
   }
 };
 ```
@@ -55,7 +55,7 @@ __page.html__
   </head>
   <body>
     ...
-    <script src="dist/bundle.js"></script>
+    <script src="dist/main.js"></script>
   </body>
 </html>
 ```
