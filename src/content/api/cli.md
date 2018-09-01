@@ -6,6 +6,9 @@ contributors:
   - simon04
   - tbroadley
   - chenxsan
+  - rencire
+  - madhavarshney
+  - EugeneHlushko
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -20,11 +23,6 @@ related:
 ---
 
 For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the config file.
-
-Users have a choice between two CLI packages:
-
-* [webpack-cli](https://github.com/webpack/webpack-cli): the original webpack full-featured CLI.
-* [webpack-command](https://github.com/webpack-contrib/webpack-command): the lightweight, opinionated and modern CLI.
 
 Read the [installation guide](/guides/installation) if you don't already have webpack and CLI installed.
 
@@ -67,7 +65,7 @@ If your project structure is as follows -
 ```
 
 ```bash
-webpack src/index.js dist/bundle.js
+webpack src/index.js -o dist/bundle.js
 ```
 
 This will bundle your source code with entry as `index.js` and the output bundle file will have a path of `dist` and the filename will be `bundle.js`
@@ -97,6 +95,8 @@ This will form the bundle with both the files as separate entry points.
 
 
 ### Common Options
+
+W> Note that Command Line Interface has a higher precedence for the arguments you use it with than your configuration file. For instance, if you pass [`--mode="production"`](/concepts/mode/#usage) to webpack CLI and your configuration file uses `development`, `production` will be used.
 
 **List all of the options available on the cli**
 
@@ -170,6 +170,7 @@ Parameter                 | Explanation                                 | Input 
 `--output-pathinfo`       | Include a comment with the request for every dependency | boolean | false
 `--output-public-path`    | The public path for the assets              | string     | /
 `--output-source-map-filename` | The output filename for the SourceMap  | string     | [name].map or [outputFilename].map
+`--build-delimiter` | Display custom text after build output | string | Default string is null. You could provide a string such as `=== Build done ===`
 
 
 #### Example Usage
@@ -252,9 +253,9 @@ These allow you to configure the webpack [resolver](/configuration/resolve/) wit
 
 Parameter              | Explanation                                             | Example
 ---------------------- | ------------------------------------------------------- | -------------
---resolve-alias        | Setup a module alias for resolving                      | --resolve-alias jquery-plugin=jquery.plugin
---resolve-extensions   | Setup extensions that should be used to resolve modules | --resolve-extensions .es6 .js .ts
---resolve-loader-alias | Minimize javascript and switches loaders to minimizing  |
+`--resolve-alias`        | Setup a module alias for resolving                      | --resolve-alias jquery-plugin=jquery.plugin
+`--resolve-extensions`   | Setup extensions that should be used to resolve modules | --resolve-extensions .es6 .js .ts
+`--resolve-loader-alias` | Minimize javascript and switches loaders to minimizing  |
 
 
 ### Stats Options
@@ -292,7 +293,7 @@ Parameter         | Explanation                              | Usage
 ----------------- | ---------------------------------------- | -----
 `--bail`          | Abort the compilation on first error     |
 `--cache`         | Enable in memory caching [Enabled by default for watch] | `--cache=false`
-`--define`        | Define any free variable, see [shimming](/guides/shimming) | `--define process.env.NODE_ENV='development'`
+`--define`        | Define any free variable, see [shimming](/guides/shimming) | `--define process.env.NODE_ENV="'development'"`
 `--hot`           | Enables [Hot Module Replacement](/concepts/hot-module-replacement) | `--hot=true`
 `--labeled-modules` | Enables labeled modules [Uses LabeledModulesPlugin] |
 `--plugin`        | Load this [plugin](/configuration/plugins/) |

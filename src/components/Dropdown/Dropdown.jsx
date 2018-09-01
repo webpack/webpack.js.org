@@ -22,7 +22,7 @@ export default class Dropdown extends React.Component {
           src={ LanguageIcon } />
         {/* Commented out until media breakpoints are in place
         <span>{ items[0].title }</span> */}
-        <i className="dropdown__arrow" />
+        <i aria-hidden="true" className="dropdown__arrow" />
 
         <div className={ `dropdown__list ${activeMod}` }>
           <ul>

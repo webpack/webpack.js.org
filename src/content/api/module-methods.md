@@ -5,6 +5,8 @@ sort: 3
 contributors:
   - skipjack
   - sokra
+  - fadysamirsadek
+  - byzyk
 related:
   - title: CommonJS Wikipedia
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -48,7 +50,7 @@ export function Multiply(a, b) {
 // Default export
 export default {
   // Some data...
-}
+};
 ```
 
 
@@ -64,7 +66,7 @@ T> The [ES2015 Loader spec](https://whatwg.github.io/loader/) defines `import()`
 if ( module.hot ) {
   import('lodash').then(_ => {
     // Do something with lodash (a.k.a '_')...
-  })
+  });
 }
 ```
 
@@ -73,14 +75,14 @@ W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/W
 The spec for `import` doesn't allow control over the chunk's name or other properties as "chunks" are only a concept within webpack. Luckily webpack allows some special parameters via comments so as to not break the spec:
 
 ``` js
-// single target
+// Single target
 import(
   /* webpackChunkName: "my-chunk-name" */
   /* webpackMode: "lazy" */
   'module'
 );
 
-// multiple possible targets
+// Multiple possible targets
 import(
   /* webpackInclude: /\.json$/ */
   /* webpackExclude: /\.noimport\.json$/ */
@@ -89,6 +91,14 @@ import(
   `./locale/${language}`
 );
 ```
+
+```js
+import(/* webpackIgnore: true */ 'ignored-module.js');
+```
+
+`webpackIgnore`: Disables dynamic import parsing when set to `true`.
+
+W> Note that setting `webpackIgnore` to `true` opts out of code splitting.
 
 `webpackChunkName`: A name for the new chunk. Since webpack 2.6.0, the placeholders `[index]` and `[request]` are supported within the given string to an incremented number or the actual resolved filename respectively.
 
@@ -122,14 +132,14 @@ The goal of CommonJS is to specify an ecosystem for JavaScript outside the brows
 ### `require`
 
 ``` javascript
-require(dependency: String)
+require(dependency: String);
 ```
 
 Synchronously retrieve the exports from another module. The compiler will ensure that the dependency is available in the output bundle.
 
 ``` javascript
-var $ = require("jquery");
-var myModule = require("my-module");
+var $ = require('jquery');
+var myModule = require('my-module');
 ```
 
 W> Using it asynchronously may not have the expected effect.
@@ -138,7 +148,7 @@ W> Using it asynchronously may not have the expected effect.
 ### `require.resolve`
 
 ``` javascript
-require.resolve(dependency: String)
+require.resolve(dependency: String);
 ```
 
 Synchronously retrieve a module's ID. The compiler will ensure that the dependency is available in the output bundle. See [`module.id`](/api/module-variables#module-id-commonjs-) for more information.
@@ -153,20 +163,20 @@ Multiple requires to the same module result in only one module execution and onl
 W> This is only needed in rare cases for compatibility!
 
 ``` javascript
-var d1 = require("dependency");
-require("dependency") === d1
-delete require.cache[require.resolve("dependency")];
-require("dependency") !== d1
+var d1 = require('dependency');
+require('dependency') === d1;
+delete require.cache[require.resolve('dependency')];
+require('dependency') !== d1;
 ```
 
 ``` javascript
 // in file.js
-require.cache[module.id] === module
-require("./file.js") === module.exports
+require.cache[module.id] === module;
+require('./file.js') === module.exports;
 delete require.cache[module.id];
-require.cache[module.id] === undefined
-require("./file.js") !== module.exports // in theory; in praxis this causes a stack overflow
-require.cache[module.id] !== module
+require.cache[module.id] === undefined;
+require('./file.js') !== module.exports; // in theory; in praxis this causes a stack overflow
+require.cache[module.id] !== module;
 ```
 
 
@@ -174,8 +184,15 @@ require.cache[module.id] !== module
 
 W> `require.ensure()` is specific to webpack and superseded by `import()`.
 
-``` javascript
-require.ensure(dependencies: String[], callback: function(require), errorCallback: function(error), chunkName: String)
+<!-- eslint-skip -->
+
+```js
+require.ensure(
+  dependencies: String[],
+  callback: function(require),
+  errorCallback: function(error),
+  chunkName: String
+)
 ```
 
 Split out the given `dependencies` to a separate bundle that that will be loaded asynchronously. When using CommonJS module syntax, this is the only way to dynamically load dependencies. Meaning, this code can be run within execution, only loading the `dependencies` if certain conditions are met.
@@ -212,7 +229,9 @@ Asynchronous Module Definition (AMD) is a JavaScript specification that defines 
 
 ### `define` (with factory)
 
-``` javascript
+<!-- eslint-skip -->
+
+```js
 define([name: String], [dependencies: String[]], factoryMethod: function(...))
 ```
 
@@ -236,7 +255,9 @@ W> This CANNOT be used in an asynchronous function.
 
 ### `define` (with value)
 
-``` javascript
+<!-- eslint-skip -->
+
+```js
 define(value: !Function)
 ```
 
@@ -253,7 +274,9 @@ W> This CANNOT be used in an async function.
 
 ### `require` (amd-version)
 
-``` javascript
+<!-- eslint-skip -->
+
+```js
 require(dependencies: String[], [callback: function(...)])
 ```
 
@@ -263,7 +286,7 @@ W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/W
 
 ``` javascript
 require(['b'], function(b) {
-  var c = require("c");
+  var c = require('c');
 });
 ```
 
@@ -280,7 +303,9 @@ The internal `LabeledModulesPlugin` enables you to use the following methods for
 
 Export the given `value`. The label can occur before a function declaration or a variable declaration. The function name or variable name is the identifier under which the value is exported.
 
-``` javascript
+<!-- eslint-skip -->
+
+```js
 export: var answer = 42;
 export: function method(value) {
   // Do something...
@@ -296,14 +321,18 @@ Make all exports from the dependency available in the current scope. The `requir
 
 __some-dependency.js__
 
-``` javascript
+<!-- eslint-skip -->
+
+```js
 export: var answer = 42;
 export: function method(value) {
   // Do something...
 };
 ```
 
-``` javascript
+<!-- eslint-skip -->
+
+```js
 require: 'some-dependency';
 console.log(answer);
 method(...);
@@ -318,8 +347,14 @@ Aside from the module syntaxes described above, webpack also allows a few custom
 
 ### `require.context`
 
-``` javascript
-require.context(directory:String, includeSubdirs:Boolean /* optional, default true */, filter:RegExp /* optional */)
+<!-- eslint-skip -->
+
+```js
+require.context(
+  directory: String,
+  includeSubdirs: Boolean /* optional, default true */,
+  filter: RegExp /* optional */
+)
 ```
 
 Specify a whole group of dependencies using a path to the `directory`, an option to `includeSubdirs`, and a `filter` for more fine grained control of the modules included. These can then be easily resolved later on:
@@ -332,7 +367,9 @@ var componentA = context.resolve('componentA');
 
 ### `require.include`
 
-``` javascript
+<!-- eslint-skip -->
+
+```js
 require.include(dependency: String)
 ```
 
@@ -368,7 +405,7 @@ if(require.cache[require.resolveWeak('module')]) {
 // You can perform dynamic resolves ("context")
 // just as with other require/import methods.
 const page = 'Foo';
-__webpack_modules__[require.resolveWeak(`./page/${page}`)]
+__webpack_modules__[require.resolveWeak(`./page/${page}`)];
 ```
 
 T> `require.resolveWeak` is the foundation of *universal rendering* (SSR + Code Splitting), as used in packages such as [react-universal-component](https://github.com/faceyspacey/react-universal-component). It allows code to render synchronously on both the server and initial page-loads on the client. It requires that chunks are manually served or somehow available. It's able to require modules without indicating they should be bundled into a chunk. It's used in conjunction with `import()` which takes over when user navigation triggers additional imports.
