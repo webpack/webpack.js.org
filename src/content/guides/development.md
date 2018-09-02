@@ -8,6 +8,7 @@ contributors:
   - TheDutchCoder
   - WojciechKo
   - Calinou
+  - GAumala
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
@@ -204,6 +205,8 @@ __webpack.config.js__
 ```
 
 This tells `webpack-dev-server` to serve the files from the `dist` directory on `localhost:8080`.
+
+W> webpack-dev-server doesn't write any output files after compiling. Instead, it keeps bundle files in memory and serves them as if they were real files mounted at the server's root path. If your page expects to find the bundle files in different path, you can change this with the [`publicPath`](/configuration/dev-server/#devserver-publicpath-) option in the dev server's configuration.
 
 Let's add a script to easily run the dev server as well:
 
