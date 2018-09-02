@@ -100,6 +100,8 @@ Expose custom values into the loader context.
 
 Limit the number of parallel processed modules. Can be used to fine tune performance or to get more reliable profiling results.
 
+default: 100
+
 
 ## `profile`
 
