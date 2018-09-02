@@ -28,9 +28,9 @@ T> New to webpack? Check out our guide to some of webpack's [core concepts](/con
 
 Click on the name of each option in the configuration code below to jump to the detailed documentation. Also note that the items with arrows can be expanded to show more examples and, in some cases, more advanced configuration.
 
-W> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html) and prefix it with the [__dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) global. This prevents file path issues between operating systems and allows relative paths to work as expected. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more info on POSIX vs. Windows paths.
+W> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html) and prefix it with the [\_\_dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) global. This prevents file path issues between operating systems and allows relative paths to work as expected. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more info on POSIX vs. Windows paths.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js-with-links-with-details
 const path = require('path');
@@ -383,11 +383,11 @@ module.exports = {
 }
 ```
 
-## Use custom config file
+## Use custom configuration file
 
-If for some reason you want to use custom config file depending on certain situations you can change this via command line by using the `--config` flag.
+If for some reason you want to use custom configuration file depending on certain situations you can change this via command line by using the `--config` flag.
 
-__package.json__
+**package.json**
 
 ```json
 "scripts": {
@@ -395,11 +395,11 @@ __package.json__
 }
 ```
 
-## Config generators
+## Configuration file generators
 
 Want to rapidly generate webpack configuration file for your project requirements with few clicks away?
 
 [Generate Custom Webpack Configuration](https://generatewebpackconfig.netlify.com/) is an interactive portal you can play around by selecting custom webpack configuration options tailored for your frontend project. It automatically generates
 a minimal webpack configuration based on your selection of loaders/plugins, etc.
 
-[Visual tool for creating webpack configs](https://webpack.jakoblind.no/) is an online configuration tool for creating webpack config where you can select any combination of features you need. It also generates a full example project based on your webpack configs.
+[Visual tool for creating webpack configs](https://webpack.jakoblind.no/) is an online configuration tool for creating webpack configuration file where you can select any combination of features you need. It also generates a full example project based on your webpack configs.

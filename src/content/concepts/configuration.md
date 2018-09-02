@@ -11,19 +11,19 @@ You may have noticed that few webpack configurations look exactly alike. This is
 
 Because it's a standard Node.js CommonJS module, you **can do the following**:
 
-* import other files via `require(...)`
-* use utilities on npm via `require(...)`
-* use JavaScript control flow expressions i. e. the `?:` operator
-* use constants or variables for often used values
-* write and execute functions to generate a part of the configuration
+- import other files via `require(...)`
+- use utilities on npm via `require(...)`
+- use JavaScript control flow expressions i. e. the `?:` operator
+- use constants or variables for often used values
+- write and execute functions to generate a part of the configuration
 
 Use these features when appropriate.
 
 While they are technically feasible, **the following practices should be avoided**:
 
-* Access CLI arguments, when using the webpack CLI (instead write your own CLI, or [use `--env`](/configuration/configuration-types/))
-* Export non-deterministic values (calling webpack twice should result in the same output files)
-* Write long configurations (instead split the configuration into multiple files)
+- Access CLI arguments, when using the webpack CLI (instead write your own CLI, or [use `--env`](/configuration/configuration-types/))
+- Export non-deterministic values (calling webpack twice should result in the same output files)
+- Write long configurations (instead split the configuration into multiple files)
 
 T> The most important part to take away from this document is that there are many different ways to format and style your webpack configuration. The key is to stick with something consistent that you and your team can understand and maintain.
 
@@ -46,11 +46,11 @@ module.exports = {
 };
 ```
 
-_See_: [Configuration section](/configuration) for the all supported config options
+_See_: [Configuration section](/configuration) for the all supported configuration options
 
 ## Multiple Targets
 
-Along with exporting a single configuration object/function, webpack supports exporting multiple configurations.
+Along with exporting a single configuration object/function, webpack can accept multiple configurations.
 
 _See_: [Exporting multiple configurations](/configuration/configuration-types/#exporting-multiple-configurations)
 
