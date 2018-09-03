@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - terinjokes
   - byzyk
+  - liorgreenb
 related:
   - title: Using Records
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
