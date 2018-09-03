@@ -10,6 +10,6 @@
   "webpack-contrib/uglifyjs-webpack-plugin",
   "webpack-contrib/zopfli-webpack-plugin",
   "webpack-contrib/closure-webpack-plugin",
-  "webpack-contrib/css-webpack-plugin",
-  "webpack-contrib/mini-css-extract-plugin"
+  "webpack-contrib/mini-css-extract-plugin",
+  "webpack-contrib/terser-webpack-plugin"
 ]
