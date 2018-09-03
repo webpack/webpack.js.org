@@ -5,6 +5,7 @@ sort: 2
 contributors:
   - byzyk
   - madhavarshney
+  - fadysamirsadek
 ---
 
 The `Compilation` module is used by the `Compiler` to create new compilations
@@ -93,29 +94,11 @@ Fired when the compilation stops accepting new modules.
 Fired when a compilation begins accepting new modules.
 
 
-### `optimizeDependenciesBasic`
-
-`SyncBailHook`
-
-...
-
-Parameters: `modules`
-
-
 ### `optimizeDependencies`
 
 `SyncBailHook`
 
 Fired at the beginning of dependency optimization.
-
-Parameters: `modules`
-
-
-### `optimizeDependenciesAdvanced`
-
-`SyncBailHook`
-
-...
 
 Parameters: `modules`
 
@@ -136,25 +119,7 @@ Parameters: `modules`
 Triggered at the beginning of the optimization phase.
 
 
-### `optimizeModulesBasic`
-
-`SyncBailHook`
-
-...
-
-Parameters: `modules`
-
-
 ### `optimizeModules`
-
-`SyncBailHook`
-
-...
-
-Parameters: `modules`
-
-
-### `optimizeModulesAdvanced`
 
 `SyncBailHook`
 
@@ -172,29 +137,11 @@ Parameters: `modules`
 Parameters: `modules`
 
 
-### `optimizeChunksBasic`
-
-`SyncBailHook`
-
-...
-
-Parameters: `chunks`
-
-
 ### `optimizeChunks`
 
 `SyncBailHook`
 
 Optimize the chunks.
-
-Parameters: `chunks`
-
-
-### `optimizeChunksAdvanced`
-
-`SyncBailHook`
-
-...
 
 Parameters: `chunks`
 
@@ -226,25 +173,7 @@ Parameters: `chunks` `modules`
 Parameters: `chunks` `modules`
 
 
-### `optimizeChunkModulesBasic`
-
-`SyncBailHook`
-
-...
-
-Parameters: `chunks` `modules`
-
-
 ### `optimizeChunkModules`
-
-`SyncBailHook`
-
-...
-
-Parameters: `chunks` `modules`
-
-
-### `optimizeChunkModulesAdvanced`
 
 `SyncBailHook`
 

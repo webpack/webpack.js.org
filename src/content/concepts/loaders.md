@@ -10,9 +10,10 @@ contributors:
   - simon04
   - jhnns
   - byzyk
+  - debs-obrien
 ---
 
-Loaders are transformations that are applied on the source code of a module. They allow you to pre-process files as you `import` or “load” them. Thus, loaders are kind of like “tasks” in other build tools, and provide a powerful way to handle front-end build steps. Loaders can transform files from a different language (like TypeScript) to JavaScript, or inline images as data URLs. Loaders even allow you to do things like `import` CSS files directly from your JavaScript modules!
+Loaders are transformations that are applied on the source code of a module. They allow you to pre-process files as you `import` or “load” them. Thus, loaders are kind of like “tasks” in other build tools and provide a powerful way to handle front-end build steps. Loaders can transform files from a different language (like TypeScript) to JavaScript or inline images as data URLs. Loaders even allow you to do things like `import` CSS files directly from your JavaScript modules!
 
 
 ## Example
@@ -52,7 +53,9 @@ There are three ways to use loaders in your application:
 ### Configuration
 
 [`module.rules`](/configuration/module/#module-rules) allows you to specify several loaders within your webpack configuration.
-This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader:
+This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader. 
+
+Loaders are evaluated/executed from right to left. In the example below execution starts with sass-loader, continues with css-loader and finally ends with style-loader. See ["Loader Features"](/concepts/loaders/#loader-features) for more information about loaders order.
 
 ```js-with-links-with-details
 module.exports = {
@@ -67,7 +70,8 @@ module.exports = {
             options: {
               modules: true
             }
-          }
+          },
+          { loader: ['sass-loader'](/loaders/sass-loader) }
         ]
       }
     ]
