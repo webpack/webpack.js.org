@@ -119,7 +119,7 @@ __tsconfig.json__
   }
 ```
 
-Now we need to tell webpack to extract these source maps and into our final bundle:
+Now we need to tell webpack to extract these source maps and include in our final bundle:
 
 __webpack.config.js__
 
