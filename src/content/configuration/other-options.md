@@ -98,9 +98,8 @@ Expose custom values into the loader context.
 
 `number`
 
-Limit the number of parallel processed modules. Can be used to fine tune performance or to get more reliable profiling results.
+Limit the number of parallel processed modules. Can be used to fine tune performance or to get more reliable profiling results. Defaults to '100'.
 
-default: 100
 
 
 ## `profile`
