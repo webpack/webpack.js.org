@@ -75,7 +75,7 @@ class MyPlugin {
 module.exports = MyPlugin;
 ```
 
-You may also feed new file paths into the watch graph to receive compilation triggers when those files change. Simply push valid filepaths into the `compilation.fileDependencies` array to add them to the watch. Note: the `fileDependencies` array is rebuilt in each compilation, so your plugin must push its own watched dependencies into each compilation to keep them under watch.
+You may also feed new file paths into the watch graph to receive compilation triggers when those files change. Simply push valid file paths into the `compilation.fileDependencies` array to add them to the watch. Note: the `fileDependencies` array is rebuilt in each compilation, so your plugin must push its own watched dependencies into each compilation to keep them under watch.
 
 ## Changed chunks
 
