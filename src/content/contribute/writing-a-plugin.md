@@ -4,6 +4,8 @@ sort: 4
 contributors:
   - tbroadley
   - nveenjain
+  - iamakulov
+  - byzyk
 ---
 
 Plugins expose the full potential of the webpack engine to third-party developers. Using staged build callbacks, developers can introduce their own behaviors into the webpack build process. Building plugins is a bit more advanced than building loaders, because you'll need to understand some of the webpack low-level internals to hook into them. Be prepared to read some source code!
@@ -24,29 +26,13 @@ class MyExampleWebpackPlugin {
   // Define `apply` as it's prototype method which is supplied with compiler as it's argument
   apply(compiler) {
     // Specifiy Hook in which you want to plugin to
-    compiler.hooks.some_hook_you_wish_to_plugin_to.tap(
-      'Name of your plugin for debugging purposes',
-      compilation => {
-        /* Manipulate webpack internal instance specific data using compilation */
-        console.log('This is example of synchronouse plugin');
-      }
-    );
+    compiler.hooks.some_hook_you_wish_to_plugin_to.tap('Name of your plugin for debugging purposes', compilation => {
+      /* Manipulate webpack internal instance specific data using compilation */
+      console.log('This is example of synchronouse plugin');
+    });
   }
 }
 ```
-
-## Compiler and Compilation
-
-Among the two most important resources while developing plugins are the `compiler` and `compilation` objects. Understanding their roles is an important first step in extending the webpack engine.
-
-- The `compiler` object represents the fully configured webpack environment. This object is built once upon starting webpack, and is configured with all operational settings including options, loaders, and plugins. When applying a plugin to the webpack environment, the plugin will receive a reference to this compiler. Use the compiler to access the main webpack environment.
-
-- A `compilation` object represents a single build of versioned assets. While running webpack development middleware, a new compilation will be created each time a file change is detected, thus generating a new set of compiled assets. A compilation surfaces information about the present state of module resources, compiled assets, changed files, and watched dependencies. The compilation also provides many callback points at which a plugin may choose to perform custom actions.
-
-These two components are an integral part of any webpack plugin (especially a `compilation`), so developers will benefit by familiarizing themselves with these source files:
-
-- [Compiler Source](https://github.com/webpack/webpack/blob/master/lib/Compiler.js)
-- [Compilation Source](https://github.com/webpack/webpack/blob/master/lib/Compilation.js)
 
 ## Basic plugin architecture
 
@@ -66,20 +52,21 @@ class HelloWorldPlugin {
 module.exports = HelloWorldPlugin;
 ```
 
-Then to install the plugin, just include an instance in your webpack config `plugins` array:
+Then to use the plugin, include an instance in your webpack config `plugins` array:
 
 ```javascript
+// webpack.config.js
 var HelloWorldPlugin = require('hello-world');
 
-var webpackConfig = {
+module.exports = {
   // ... config settings here ...
   plugins: [new HelloWorldPlugin({ options: true })]
 };
 ```
 
-## Accessing the compilation
+## Compiler and Compilation
 
-Using the compiler object, you may bind callbacks that provide a reference to each new compilation. These compilations provide callbacks for hooking into numerous steps within the build process.
+Among the two most important resources while developing plugins are the `compiler` and `compilation` objects. Understanding their roles is an important first step in extending the webpack engine.
 
 ```javascript
 class HelloCompilationPlugin {
@@ -97,9 +84,9 @@ class HelloCompilationPlugin {
 module.exports = HelloCompilationPlugin;
 ```
 
-For more information on what callbacks are available on the `compiler`, `compilation`, and other important objects, see the [plugins](/api/plugins/) doc.
+The list of hooks available on the `compiler`, `compilation`, and other important objects, see the [plugins API](/api/plugins/) docs.
 
-## Async compilation plugins
+## Async event hooks
 
 Some plugin hooks are asynchronous. To tap into them, we can use `tap` method which will behave in synchronous manner or use one of `tapAsync` method or `tapPromise` method which are asyncronous methods.
 
@@ -108,18 +95,17 @@ Some plugin hooks are asynchronous. To tap into them, we can use `tap` method wh
 When we use `tapAsync` method to tap into plugins, we need to call the callback function which is supplied as the last argument to our function.
 
 ```javascript
-class HelloAsyncPlugin{
-  apply(compiler){
-
+class HelloAsyncPlugin {
+  apply(compiler) {
     compiler.hooks.emit.tapAsync('HelloAsyncPlugin', (compilation, callback) => {
       // Do something async...
       setTimeout(function() {
         console.log('Done with async work...');
         callback();
       }, 1000);
-    }
+    });
   }
-};
+}
 
 module.exports = HelloAsyncPlugin;
 ```
@@ -129,20 +115,19 @@ module.exports = HelloAsyncPlugin;
 When we use `tapPromise` method to tap into plugins, we need to return a promise which resolves when our asynchronous task is completed.
 
 ```javascript
-class HelloAsyncPlugin{
-  apply(compiler){
-
+class HelloAsyncPlugin {
+  apply(compiler) {
     compiler.hooks.emit.tapPromise('HelloAsyncPlugin', compilation => {
       // return a Promise that resolves when we are done...
-      return new Promise((resolve,reject)=>{
+      return new Promise((resolve, reject) => {
         setTimeout(function() {
           console.log('Done with async work...');
           resolve();
         }, 1000);
-      })
-    }
+      });
+    });
   }
-};
+}
 
 module.exports = HelloAsyncPlugin;
 ```
@@ -203,57 +188,67 @@ Various types of hooks supported are :-
 
 ### Synchronous Hooks
 
-- __SyncHook__
-  - defined as `new SyncHook([params])`
-  - Tapped into using `tap` method.
-  - Called using `call(...params)` method.
+- **SyncHook**
 
-- __Bail Hooks__
-  - defined using `SyncBailHook[params]`
-  - Tapped into using `tap` method.
-  - Called using `call(...params)` method.
+    - Defined as `new SyncHook([params])`
+    - Tapped into using `tap` method.
+    - Called using `call(...params)` method.
+
+- **Bail Hooks**
+
+    - Defined using `SyncBailHook[params]`
+    - Tapped into using `tap` method.
+    - Called using `call(...params)` method.
 
   In these type of hooks, each of the plugin callbacks will be invoked one after the other with the specific `args`. If any value is returned except undefined by any plugin, then that value is returned by hook and no further plugin callback is invoked. Many useful events like `optimizeChunks`, `optimizeChunkModules` are SyncBailHooks.
 
-- __Waterfall Hooks__
-  - defined using `SyncWaterfallHook[params]`
-  - Tapped into using `tap` method.
-  - Called using `call( ... params)` method
+- **Waterfall Hooks**
+
+    - Defined using `SyncWaterfallHook[params]`
+    - Tapped into using `tap` method.
+    - Called using `call( ... params)` method
 
   Here each of the plugins are called one after the other with the arguments from the return value of the previous plugin. The plugin must take the order of its execution into account.
   It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. Hence atleast 1 param must be supplied for waterfall hooks. This pattern is used in the Tapable instances which are related to the webpack templates like `ModuleTemplate`, `ChunkTemplate` etc.
 
 ### Asynchronous Hooks
 
-- __Async Series Hook__
-  - defined using `AsyncSeriesHook[params]`
-  - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
-  - Called using `callAsync( ... params)` method
+- **Async Series Hook**
+
+    - Defined using `AsyncSeriesHook[params]`
+    - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
+    - Called using `callAsync( ... params)` method
 
   The plugin handler functions are called with all arguments and a callback function with the signature `(err?: Error) -> void`. The handler functions are called in order of registration. `callback` is called after all the handlers are called.
   This is also a commonly used pattern for events like `emit`, `run`.
 
-- __Async waterfall__ The plugins will be applied asynchronously in the waterfall manner.
-  - defined using `AsyncWaterfallHook[params]`
-  - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
-  - Called using `callAsync( ... params)` method
+- **Async waterfall** The plugins will be applied asynchronously in the waterfall manner.
+
+    - Defined using `AsyncWaterfallHook[params]`
+    - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
+    - Called using `callAsync( ... params)` method
 
   The plugin handler functions are called with the current value and a callback function with the signature `(err: Error, nextValue: any) -> void.` When called `nextValue` is the current value for the next handler. The current value for the first handler is `init`. After all handlers are applied, callback is called with the last value. If any handler passes a value for `err`, the callback is called with this error and no more handlers are called.
   This plugin pattern is expected for events like `before-resolve` and `after-resolve`.
 
-- __Async Series Bail__
-  - defined using `AsyncSeriesBailHook[params]`
-  - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
-  - Called using `callAsync( ... params)` method
+- **Async Series Bail**
 
--__parallel__ -
+    - Defined using `AsyncSeriesBailHook[params]`
+    - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
+    - Called using `callAsync( ... params)` method
 
-- __Async Parallel__
-  - defined using `AsyncParallelHook[params]`
-  - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
-  - Called using `callAsync( ... params)` method
+  someMethod() {
+  // Call a hook:
+  this.hooks.compilation.call();
 
-- __Async Series Bail__
-  - defined using `AsyncSeriesBailHook[params]`
-  - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
-  - Called using `callAsync( ... params)` method
+- **Async Parallel**
+
+    - Defined using `AsyncParallelHook[params]`
+    - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
+    - Called using `callAsync( ... params)` method
+
+- **Async Series Bail**
+
+    - Defined using `AsyncSeriesBailHook[params]`
+    - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
+    - Called using `callAsync( ... params)` method
