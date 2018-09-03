@@ -166,3 +166,8 @@ Learn more about the [mode configuration here](/concepts/mode) and what optimiza
 ## Browser Compatibility
 
 webpack supports all browsers that are [ES5-compliant](https://kangax.github.io/compat-table/es5/) (IE8 and below are not supported). webpack needs `Promise` for `import()` and `require.ensure()`. If you want to support older browsers, you will need to [load a polyfill](/guides/shimming/) before using these expressions.
+
+
+## Environment
+
+webpack runs on Node.js version 8.x and higher.

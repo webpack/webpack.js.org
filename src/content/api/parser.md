@@ -1,10 +1,11 @@
 ---
-title: Parser
+title: JavascriptParser
 group: Plugins
 sort: 4
 contributors:
   - byzyk
   - DeTeam
+  - EugeneHlushko
 ---
 
 The `parser` instance, found in the `compiler`, is used to parse each module
