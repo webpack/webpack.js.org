@@ -235,7 +235,6 @@ __src/index.js__
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +   return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
 +     var element = document.createElement('div');
-+     var _ = _.default;
 +
 +     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +
