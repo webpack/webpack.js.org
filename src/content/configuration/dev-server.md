@@ -829,10 +829,10 @@ module.exports = {
     index: '', // specify to enable root proxying
     host: '...',
     contentBase: '...',
-    proxy: {
+    proxy: [{
       context: () => true,
       target: 'http://localhost:1234'
-    }
+    }]
   }
 };
 ```
