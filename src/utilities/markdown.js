@@ -10,14 +10,18 @@ module.exports = function() {
 
   // Patch IDs (this.options.headerPrefix can be undefined!)
   renderer.heading = function(text, level, raw) {
-    var parsed = parseAnchor(raw);
-    var id = parsed.id;
+    let parsed = parseAnchor(raw);
+    let id = parsed.id;
+    let title = parsed.title;
+
+    let href = getHref(text);
+    let spanContent = href ? `<a href="${href}">${title}</a>` : title;
 
     return (
       `<h${level} class="header">
         <a class="anchor" aria-hidden="true" href="#${id}" id="${id}"></a>
-        <span class="text">${text}</span>
-        <a aria-label="${text}" class="icon-link" href="#${id}"></a>
+        <span class="text">${spanContent}</span>
+        <a aria-label="${title}" class="icon-link" href="#${id}"></a>
       </h${level}>\n`
     );
   };
@@ -143,13 +147,28 @@ function parseContent(data) {
   return tokens;
 }
 
+/**
+ * Parses an anchor tag, and returns either hash link, or the external link
+ *
+ * This will parse Github links converted from markdown,
+ * so we can assume the output is quite consistent
+ */
+function getHref(anchor) {
+  let hrefRegex = new RegExp('href=(\'|")(.*)(\'|")');
+
+  if (hrefRegex.test(anchor)) {
+    return hrefRegex.exec(anchor)[2];
+  }
+}
+
 function parseAnchor(string) {
-  var stripped = string.replace(/\[(.+)\]\(.+\)/gi, '$1').replace(/(<([^>]+)>)/ig, '');
-  var clean = stripped.replace(/`/g, '');
+  let stripped = string.replace(/\[(.+)\]\(.+\)/gi, '$1').replace(/(<([^>]+)>)/ig, '');
+  let clean = stripped.replace(/`/g, '');
+  let id = clean.replace(/[^\w\u4e00-\u9fa5]+/g, '-').toLowerCase();
 
   return {
     title: clean,
-    id: clean.replace(/[^\w\u4e00-\u9fa5]+/g, '-').toLowerCase()
+    id: id
   };
 }
 
