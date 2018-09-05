@@ -11,7 +11,7 @@ contributors:
 
 Because JavaScript can be written for both server and browser, webpack offers multiple deployment _targets_ that you can set in your webpack [configuration](/configuration).
 
-W> The webpack `target` property is not to be confused with the `output.libraryTarget` property. For more information see [our guide](/concepts/output) on the `output` property.
+W> The webpack `target` property is not to be confused with the `output.libraryTarget` property. For more information see [our guide](/configuration/output) on the `output` property.
 
 ## Usage
 
