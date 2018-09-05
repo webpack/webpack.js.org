@@ -159,7 +159,7 @@ module.exports = {
         // -loader suffix is no longer optional in webpack2 for clarity reasons
         // see [webpack 1 upgrade guide](/guides/migrating)
         [options](/configuration/module#rule-options-rule-query): {
-          presets: ["es2015"]
+          presets: ["env"]
         },
         // options for the loader
       },

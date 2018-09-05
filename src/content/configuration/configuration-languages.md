@@ -135,14 +135,14 @@ In the example below JSX (React JavaScript Markup) and Babel are used to create 
 First install the necessary dependencies:
 
 ``` bash
-npm install --save-dev babel-register jsxobj babel-preset-es2015
+npm install --save-dev babel-register jsxobj @babel/preset-env
 ```
 
 __.babelrc__
 
 ``` json
 {
-  "presets": [ "es2015" ]
+  "presets": [ "env" ]
 }
 ```
 
