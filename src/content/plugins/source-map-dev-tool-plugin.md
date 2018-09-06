@@ -21,7 +21,7 @@ new webpack.SourceMapDevToolPlugin(options);
 
 The following options are supported:
 
-- `test` (`string|regex|array`): Include source maps for modules based on their extension (defaults to `.js` and `.css`).
+- `test` (`string|regex|array`): Include source maps for modules based on their extension (defaults to `.js`, `.mjs`, and `.css`).
 - `include` (`string|regex|array`): Include source maps for module paths that match the given value.
 - `exclude` (`string|regex|array`): Exclude modules that match the given value from source map generation.
 - `filename` (`string`): Defines the output filename of the SourceMap (will be inlined if no value is provided).
