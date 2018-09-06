@@ -11,7 +11,7 @@ contributors:
 
 Because JavaScript can be written for both server and browser, webpack offers multiple deployment _targets_ that you can set in your webpack [configuration](/configuration).
 
-W> The webpack `target` property is not to be confused with the `output.libraryTarget` property. For more information see [our guide](/configuration/output) on the `output` property.
+W> The webpack `target` property is not to be confused with the `output.libraryTarget` property. For more information see [our guide](/concepts/output/) on the `output` property.
 
 ## Usage
 
@@ -27,7 +27,7 @@ module.exports = {
 
 In the example above, using `node` webpack will compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks and not touch any built in modules like `fs` or `path`).
 
-Each _target_ has a variety of deployment/environment specific additions, support to fit its needs. See what [targets are available](/configuration/target).
+Each _target_ has a variety of deployment/environment specific additions, support to fit its needs. See what [targets are available](/configuration/target/).
 
 ?>Further expansion for other popular target values
 
