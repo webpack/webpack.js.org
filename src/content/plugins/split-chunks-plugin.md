@@ -220,7 +220,6 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         json: {
-          name: 'json',
           type: 'json'
         }
       }
