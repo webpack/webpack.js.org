@@ -401,3 +401,4 @@ T> Want to rapidly generate webpack configuration file for your project requirem
 [Generate Custom Webpack Configuration](https://generatewebpackconfig.netlify.com/) is an interactive portal you can play around by selecting custom webpack configuration options tailored for your frontend project. It automatically generates 
 a minimal webpack configuration based on your selection of loaders/plugins, etc.
 
+[Visual tool for creating webpack configs](https://webpack.jakoblind.no/) is an online configuration tool for creating webpack config where you can select any combination of features you need. It also generates a full example project based on your webpack configs.

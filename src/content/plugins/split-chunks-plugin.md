@@ -216,9 +216,13 @@ module.exports = {
   //...
   optimization: {
     splitChunks: {
-      test (chunks) {
-        //...
-        return true;
+      cacheGroups: {
+        vendors: {
+          test (chunks) {
+            //...
+            return true;
+          }
+        }
       }
     }
   }

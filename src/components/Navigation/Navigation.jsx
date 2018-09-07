@@ -11,7 +11,7 @@ export default class Navigation extends React.Component {
     let { pageUrl = '' } = this.props;
 
     return (
-      <header className="navigation">
+      <header className="navigation" ref={ container => this.container = container }>
         <Container className="navigation__inner">
           <div className="navigation__mobile" onClick={ this._toggleSidebar }>
             <i className="icon-menu" />
@@ -43,6 +43,7 @@ export default class Navigation extends React.Component {
               type="search"
               className="navigation__search-input"
               placeholder="Search documentation…"
+              ref={ searchInput => this.searchInput = searchInput }
               onBlur={ this._toggleSearch.bind(this) } />
             <button
               aria-label="Open search"
@@ -159,11 +160,9 @@ export default class Navigation extends React.Component {
    *
    */
   _toggleSearch() {
-    let container = document.querySelector('.navigation');
-    let input = document.querySelector('.navigation__search-input');
-    let state = container.classList.toggle('navigation--search-mode');
+    let state = this.container.classList.toggle('navigation--search-mode');
 
-    if ( state === true ) input.focus();
+    if ( state === true ) this.searchInput.focus();
   }
 
   /**
@@ -171,8 +170,6 @@ export default class Navigation extends React.Component {
    *
    */
   _openSearch() {
-    let container = document.querySelector('.navigation');
-
-    container.classList.add('navigation--search-mode');
+    this.container.classList.add('navigation--search-mode');
   }
 }

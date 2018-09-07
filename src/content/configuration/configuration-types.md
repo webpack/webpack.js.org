@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - kbariotis
   - simon04
+  - fadysamirsadek
   - byzyk
 ---
 
@@ -65,6 +66,7 @@ module.exports = [{
     filename: './dist-amd.js',
     libraryTarget: 'amd'
   },
+  name: 'amd',
   entry: './app.js',
   mode: 'production',
 }, {
@@ -72,7 +74,10 @@ module.exports = [{
     filename: './dist-commonjs.js',
     libraryTarget: 'commonjs'
   },
+  name: 'commonjs',
   entry: './app.js',
   mode: 'production',
 }];
 ```
+
+T> If you pass a name to `--config-name` flag, webpack will only build that specific configuration.

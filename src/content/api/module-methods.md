@@ -5,6 +5,7 @@ sort: 3
 contributors:
   - skipjack
   - sokra
+  - fadysamirsadek
   - byzyk
 related:
   - title: CommonJS Wikipedia
@@ -74,14 +75,14 @@ W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/W
 The spec for `import` doesn't allow control over the chunk's name or other properties as "chunks" are only a concept within webpack. Luckily webpack allows some special parameters via comments so as to not break the spec:
 
 ``` js
-// single target
+// Single target
 import(
   /* webpackChunkName: "my-chunk-name" */
   /* webpackMode: "lazy" */
   'module'
 );
 
-// multiple possible targets
+// Multiple possible targets
 import(
   /* webpackInclude: /\.json$/ */
   /* webpackExclude: /\.noimport\.json$/ */
@@ -90,6 +91,14 @@ import(
   `./locale/${language}`
 );
 ```
+
+```js
+import(/* webpackIgnore: true */ 'ignored-module.js');
+```
+
+`webpackIgnore`: Disables dynamic import parsing when set to `true`.
+
+W> Note that setting `webpackIgnore` to `true` opts out of code splitting.
 
 `webpackChunkName`: A name for the new chunk. Since webpack 2.6.0, the placeholders `[index]` and `[request]` are supported within the given string to an incremented number or the actual resolved filename respectively.
 
