@@ -40,7 +40,7 @@ For a better understanding of the ideas behind module bundlers and how they work
 
 ## Entry
 
-An **entry point** indicates which module webpack should use to begin building out its internal *dependency graph*, webpack will figure out which other modules and libraries that entry point depends on (directly and indirectly).
+An **entry point** indicates which module webpack should use to begin building out its internal *dependency graph*. webpack will figure out which other modules and libraries that entry point depends on (directly and indirectly).
 
 By default its value is `./src/index.js`, but you can specify a different (or multiple entry points) by configuring the **entry** property in the [webpack configuration](/configuration). For example:
 
@@ -57,7 +57,7 @@ T> Learn more in the [entry points](/concepts/entry-points) section.
 
 ## Output
 
-The **output** property tells webpack where to emit the *bundles* it creates and how to name these files, it defaults to `./dist/main.js` for the main output file and to the `./dist` folder for any other generated file.
+The **output** property tells webpack where to emit the *bundles* it creates and how to name these files. It defaults to `./dist/main.js` for the main output file and to the `./dist` folder for any other generated file.
 
 You can configure this part of the process by specifying an `output` field in your configuration:
 
@@ -82,7 +82,7 @@ T> The `output` property has [many more configurable features](/configuration/ou
 
 ## Loaders
 
-Out of the box, webpack only understands JavaScript files. **Loaders** allow webpack to process other types of files and converting them into valid [modules](/concepts/modules) that can be consumed by your application and added to the dependency graph.
+Out of the box, webpack only understands JavaScript files. **Loaders** allow webpack to process other types of files and convert them into valid [modules](/concepts/modules) that can be consumed by your application and added to the dependency graph.
 
 W> Note that the ability to `import` any type of module, e.g. `.css` files, is a feature specific to webpack and may not be supported by other bundlers or task runners. We feel this extension of the language is warranted as it allows developers to build a more accurate dependency graph.
 
@@ -119,7 +119,7 @@ You can check further customization when including loaders in the [loaders secti
 
 ## Plugins
 
-While loaders are used to transform certain types of modules, plugins can be leveraged to perform a wider range of tasks like bundle optimization, assets management and injection of environment variables.
+While loaders are used to transform certain types of modules, plugins can be leveraged to perform a wider range of tasks like bundle optimization, asset management and injection of environment variables.
 
 T> Check out the [plugin interface](/api/plugins) and how to use it to extend webpacks capabilities.
 
@@ -143,11 +143,11 @@ module.exports = {
 };
 ```
 
-In the example above, the `html-webpack-plugin` generates an html file for your application injecting automatically all your generated bundles.
+In the example above, the `html-webpack-plugin` generates an HTML file for your application by injecting automatically all your generated bundles.
 
 T> There are many plugins that webpack provides out of the box! Check out the [list of plugins](/plugins).
 
-Using plugins in your webpack config is straightforward - however, there are many use cases that are worth further exploration, [learn more about them here](/concepts/plugins).
+Using plugins in your webpack config is straightforward - however, there are many use cases that are worth further exploration. [Learn more about them here](/concepts/plugins).
 
 
 ## Mode

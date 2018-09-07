@@ -53,7 +53,7 @@ __src/index.js__
 
 ``` javascript
 function component() {
-  var element = document.createElement('div');
+  let element = document.createElement('div');
 
   // Lodash, currently included via a script, is required for this line to work
   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -148,10 +148,9 @@ __src/index.js__
 + import _ from 'lodash';
 +
   function component() {
-    var element = document.createElement('div');
+    let element = document.createElement('div');
 
 -   // Lodash, currently included via a script, is required for this line to work
-+   // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
     return element;
@@ -266,8 +265,6 @@ The 'mode' option has not been set, webpack will fallback to 'production' for th
 You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/
 ```
 
-W> Note that when calling `webpack` via its path on Windows, you must use backslashes instead, e.g. `node_modules\.bin\webpack --config webpack.config.js`.
-
 T> If a `webpack.config.js` is present, the `webpack` command picks it up by default. We use the `--config` option here only to show that you can pass a config of any name. This will be useful for more complex configurations that need to be split into multiple files.
 
 A configuration file allows far more flexibility than simple CLI usage. We can specify loader rules, plugins, resolve options and many other enhancements this way. See the [configuration documentation](/configuration) to learn more.
@@ -293,7 +290,9 @@ __package.json__
     "license": "ISC",
     "devDependencies": {
       "webpack": "^4.0.1",
-      "webpack-cli": "^2.0.9",
+      "webpack-cli": "^2.0.9"
+    },
+    "dependencies": {
       "lodash": "^4.17.5"
     }
   }
