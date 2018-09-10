@@ -3,6 +3,7 @@ title: The Manifest
 sort: 10
 contributors:
   - skipjack
+  - EugeneHlushko
 related:
   - title: Separating a Manifest
     url: https://survivejs.com/webpack/optimizing/separating-manifest/
