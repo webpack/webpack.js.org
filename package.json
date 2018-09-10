@@ -24,7 +24,7 @@
     "node": ">=6.9"
   },
   "scripts": {
-    "start": "npm run init:generated && npm run fetch && node ./antwar.bootstrap.js develop",
+    "start": "run-s -n init:generated fetch start-only",
     "start-only": "node ./antwar.bootstrap.js develop",
     "build": "npm run init:generated && npm run fetch && rm -rf build/ && node ./antwar.bootstrap.js build && npm run sitemap && echo webpack.js.org > build/CNAME",
     "build-test": "npm run build && http-server build/",
@@ -41,8 +41,16 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm test"
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,jsx,md}": [
+      "npm run lint:js"
+    ],
+    "*.md": [
+      "npm run lint:markdown"
+    ]
   },
   "devDependencies": {
     "alex": "^4.1.0",
@@ -73,6 +81,7 @@
     "http-server": "^0.10.0",
     "husky": "^1.0.0-rc.8",
     "hyperlink": "^3.0.1",
+    "lint-staged": "^7.2.0",
     "loader-utils": "^1.1.0",
     "lodash": "^4.17.4",
     "markdown-loader": "^2.0.1",
@@ -105,13 +114,13 @@
   },
   "dependencies": {
     "ajv": "^5.5.2",
+    "javascriptstuff-db": "^1.12.0",
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "tool-list": "^0.11.0",
     "webpack.vote": "^0.1.2",
     "whatwg-fetch": "^2.0.3"
   }

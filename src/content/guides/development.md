@@ -7,13 +7,15 @@ contributors:
   - fvgs
   - TheDutchCoder
   - WojciechKo
+  - Calinou
+  - GAumala
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
 
 If you've been following the guides, you should have a solid understanding of some of the webpack basics. Before we continue, let's look into setting up a development environment to make our lives a little easier.
 
-W> The tools in this guide are __only meant for development__, please __avoid__ using them in production!!
+W> The tools in this guide are __only meant for development__, please __avoid__ using them in production!
 
 
 ## Using source maps
@@ -22,7 +24,7 @@ When webpack bundles your source code, it can become difficult to track down err
 
 In order to make it easier to track down errors and warnings, JavaScript offers [source maps](http://blog.teamtreehouse.com/introduction-source-maps), which maps your compiled code back to your original source code. If an error originates from `b.js`, the source map will tell you exactly that.
 
-There are a lot of [different options](/configuration/devtool) available when it comes to source maps, be sure to check them out so you can configure them to your needs.
+There are a lot of [different options](/configuration/devtool) available when it comes to source maps. Be sure to check them out so you can configure them to your needs.
 
 For this guide, let's use the `inline-source-map` option, which is good for illustrative purposes (though not for production):
 
@@ -91,7 +93,7 @@ Now open the resulting `index.html` file in your browser. Click the button and l
     at HTMLButtonElement.printMe (print.js:2)
  ```
 
-We can see that the error also contains a reference to the file (`print.js`) and line number (2) where the error occurred. This is great, because now we know exactly where to look in order to fix the issue.
+We can see that the error also contains a reference to the file (`print.js`) and line number (2) where the error occurred. This is great because now we know exactly where to look in order to fix the issue.
 
 
 ## Choosing a Development Tool
@@ -144,9 +146,10 @@ __package.json__
   }
 ```
 
-You can now run `npm run watch` from the command line to see that webpack compiles your code, but doesn't exit to the command line. This is because the script is still watching your files.
+Now run `npm run watch` from the command line and see how webpack compiles your code.
+You can see that it doesn't exit the command line because the script is currently watching your files.
 
-Now, with webpack watching your files, let's remove the error we introduced earlier:
+Now, while webpack is watching your files, let's remove the error we introduced earlier:
 
 __src/print.js__
 
@@ -202,6 +205,8 @@ __webpack.config.js__
 ```
 
 This tells `webpack-dev-server` to serve the files from the `dist` directory on `localhost:8080`.
+
+W> webpack-dev-server doesn't write any output files after compiling. Instead, it keeps bundle files in memory and serves them as if they were real files mounted at the server's root path. If your page expects to find the bundle files in different path, you can change this with the [`publicPath`](/configuration/dev-server/#devserver-publicpath-) option in the dev server's configuration.
 
 Let's add a script to easily run the dev server as well:
 
@@ -267,6 +272,9 @@ __webpack.config.js__
       print: './src/print.js'
     },
     devtool: 'inline-source-map',
+    devServer: {
+      contentBase: './dist'
+    },
     plugins: [
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
@@ -281,7 +289,7 @@ __webpack.config.js__
   };
 ```
 
-The `publicPath` will be used within our server script as well in order to make sure files are served correctly on `http://localhost:3000`, the port number we'll specify later. The next step is setting up our custom `express` server:
+The `publicPath` will be used within our server script as well in order to make sure files are served correctly on `http://localhost:3000`. We'll specify the port number later. The next step is setting up our custom `express` server:
 
 __project__
 
@@ -382,7 +390,7 @@ Child html-webpack-plugin for "index.html":
 webpack: Compiled successfully.
 ```
 
-Now fire up your browser and go to `http://localhost:3000`, you should see your webpack app running and functioning!
+Now fire up your browser and go to `http://localhost:3000`. You should see your webpack app running and functioning!
 
 T> If you would like to know more about how Hot Module Replacement works, we recommend you read the [Hot Module Replacement](/guides/hot-module-replacement/) guide.
 
@@ -393,10 +401,9 @@ When using automatic compilation of your code, you could run into issues when sa
 
 To disable this feature in some common editors, see the list below:
 
-* **Sublime Text 3** - Add `atomic_save: "false"` to your user preferences.
-* **IntelliJ** - use search in the preferences to find "safe write" and disable it.
-* **Vim** - add `:set backupcopy=yes` to your settings.
-* **WebStorm** - uncheck Use `"safe write"` in `Preferences > Appearance & Behavior > System Settings`.
+* **Sublime Text 3**: Add `atomic_save: "false"` to your user preferences.
+* **JetBrains IDEs (e.g. WebStorm)**: Uncheck "Use safe write" in `Preferences > Appearance & Behavior > System Settings`.
+* **Vim**: Add `:set backupcopy=yes` to your settings.
 
 
 ## Conclusion
