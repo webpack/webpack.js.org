@@ -10,11 +10,13 @@ export default class SidebarMobile extends React.Component {
 
   render() {
     let { isOpen, toggle } = this.props;
-    let openMod = isOpen ? 'sidebar-mobile--visible' : '';
+    let openMod = isOpen ? ' sidebar-mobile--visible' : '';
+
+    this._toggleBodyListener(isOpen);
 
     return (
       <nav
-        className={ `sidebar-mobile ${openMod}` }
+        className={ `sidebar-mobile${openMod}` }
         ref={ ref => this._container = ref }
         onTouchStart={ this._handleTouchStart }
         onTouchMove={ this._handleTouchMove }
@@ -37,18 +39,9 @@ export default class SidebarMobile extends React.Component {
     );
   }
 
-  componentDidMount() {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('mousedown', this._handleBodyClick);
-      // window.addEventListener('touchstart', this._handleBodyClick);
-    }
-  }
-
-  componentWillUnmount() {
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('mousedown', this._handleBodyClick);
-      // window.removeEventListener('touchstart', this._handleBodyClick);
-    }
+  _toggleBodyListener(add) {
+    let actionName = add ? 'addEventListener' : 'removeEventListener';
+    window[actionName]('mousedown', this._handleBodyClick);
   }
 
   /**
@@ -59,7 +52,7 @@ export default class SidebarMobile extends React.Component {
   _getSections() {
     let pathname = '';
 
-    if (window.location !== undefined) {
+    if (window && window.location !== undefined) {
       pathname = window.location.pathname;
     }
 
@@ -141,7 +134,7 @@ export default class SidebarMobile extends React.Component {
     let factor = Math.abs(yDiff / xDiff);
 
     // Factor makes sure horizontal and vertical scroll dont take place together
-    if (xDiff>0 && factor < 0.8) {
+    if (xDiff > 0 && factor < 0.8) {
       e.preventDefault();
       this._container.style.transform = `translateX(-${xDiff}px)`;
       this._lastTouchPosition.x = e.touches[0].pageX;
@@ -164,10 +157,21 @@ export default class SidebarMobile extends React.Component {
   }
 
   _handleTouchEnd = e => {
+    const { isOpen } = this.props;
+    const threshold = 20;
+
     // Free up all the inline styling
     this._container.classList.remove('no-delay');
     this._container.style.transform = '';
 
-    this.props.toggle(this._initialTouchPosition.x - this._lastTouchPosition.x < 100);
+    // are we open?
+    if (isOpen && this._initialTouchPosition.x - this._lastTouchPosition.x > threshold) {
+      // this is in top level nav callback
+      this.props.toggle(false);
+    } else if (!isOpen && this._lastTouchPosition.x - this._initialTouchPosition.x > threshold) {
+      this.props.toggle(true);
+      e.preventDefault();
+      e.stopPropagation();
+    }
   }
 }
