@@ -29,7 +29,7 @@ __dist/index.html__
 +    <title>Asset Management</title>
     </head>
     <body>
-      <script src="./bundle.js"></script>
+      <script src="./main.js"></script>
     </body>
   </html>
 ```
@@ -51,7 +51,7 @@ __webpack.config.js__
   module.exports = {
     entry: './src/index.js',
     output: {
-      filename: 'bundle.js',
+      filename: 'main.js',
       path: path.resolve(__dirname, 'dist')
     },
 +   module: {
@@ -81,7 +81,7 @@ __project__
   |- package.json
   |- webpack.config.js
   |- /dist
-    |- bundle.js
+    |- main.js
     |- index.html
   |- /src
 +   |- style.css
@@ -125,7 +125,7 @@ Hash: 9a3abfc96300ef87880f
 Version: webpack 2.6.1
 Time: 834ms
     Asset    Size  Chunks                    Chunk Names
-bundle.js  560 kB       0  [emitted]  [big]  main
+main.js    560 kB       0  [emitted]  [big]  main
    [0] ./~/lodash/lodash.js 540 kB {0} [built]
    [1] ./src/style.css 1 kB {0} [built]
    [2] ./~/css-loader!./src/style.css 191 bytes {0} [built]
@@ -158,7 +158,7 @@ __webpack.config.js__
   module.exports = {
     entry: './src/index.js',
     output: {
-      filename: 'bundle.js',
+      filename: 'main.js',
       path: path.resolve(__dirname, 'dist')
     },
     module: {
@@ -192,7 +192,7 @@ __project__
   |- package.json
   |- webpack.config.js
   |- /dist
-    |- bundle.js
+    |- main.js
     |- index.html
   |- /src
 +   |- icon.png
@@ -246,7 +246,7 @@ Version: webpack 2.6.1
 Time: 895ms
                                Asset     Size  Chunks                    Chunk Names
 5c999da72346a995e7e2718865d019c8.png  11.3 kB          [emitted]
-                           bundle.js   561 kB       0  [emitted]  [big]  main
+                             main.js   561 kB       0  [emitted]  [big]  main
    [0] ./src/icon.png 82 bytes {0} [built]
    [1] ./~/lodash/lodash.js 540 kB {0} [built]
    [2] ./src/style.css 1 kB {0} [built]
@@ -276,7 +276,7 @@ __webpack.config.js__
   module.exports = {
     entry: './src/index.js',
     output: {
-      filename: 'bundle.js',
+      filename: 'main.js',
       path: path.resolve(__dirname, 'dist')
     },
     module: {
@@ -315,7 +315,7 @@ __project__
   |- package.json
   |- webpack.config.js
   |- /dist
-    |- bundle.js
+    |- main.js
     |- index.html
   |- /src
 +   |- my-font.woff
@@ -357,7 +357,7 @@ Time: 775ms
                                 Asset     Size  Chunks                    Chunk Names
  5c999da72346a995e7e2718865d019c8.png  11.3 kB          [emitted]
 11aebbbd407bcc3ab1e914ca0238d24d.woff   221 kB          [emitted]
-                            bundle.js   561 kB       0  [emitted]  [big]  main
+                              main.js   561 kB       0  [emitted]  [big]  main
    [0] ./src/icon.png 82 bytes {0} [built]
    [1] ./~/lodash/lodash.js 540 kB {0} [built]
    [2] ./src/style.css 1 kB {0} [built]
@@ -390,7 +390,7 @@ __webpack.config.js__
   module.exports = {
     entry: './src/index.js',
     output: {
-      filename: 'bundle.js',
+      filename: 'main.js',
       path: path.resolve(__dirname, 'dist')
     },
     module: {
@@ -440,7 +440,7 @@ __project__
   |- package.json
   |- webpack.config.js
   |- /dist
-    |- bundle.js
+    |- main.js
     |- index.html
   |- /src
 +   |- data.xml
@@ -530,7 +530,7 @@ __project__
   |- package.json
   |- webpack.config.js
   |- /dist
-    |- bundle.js
+    |- main.js
     |- index.html
   |- /src
 -   |- data.xml
@@ -550,7 +550,7 @@ __webpack.config.js__
   module.exports = {
     entry: './src/index.js',
     output: {
-      filename: 'bundle.js',
+      filename: 'main.js',
       path: path.resolve(__dirname, 'dist')
     },
 -   module: {
