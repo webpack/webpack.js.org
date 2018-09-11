@@ -77,7 +77,7 @@ __dist/index.html__
 +     <script src="./print.bundle.js"></script>
     </head>
     <body>
--     <script src="./bundle.js"></script>
+-     <script src="./main.js"></script>
 +     <script src="./app.bundle.js"></script>
     </body>
   </html>
@@ -97,7 +97,7 @@ __webpack.config.js__
 +     print: './src/print.js'
 +   },
     output: {
--     filename: 'bundle.js',
+-     filename: 'main.js',
 +     filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist')
     }
