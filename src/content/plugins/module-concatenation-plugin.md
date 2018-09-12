@@ -10,7 +10,7 @@ related:
 
 In the past, one of webpack’s trade-offs when bundling was that each module in your bundle would be wrapped in individual function closures. These wrapper functions made it slower for your JavaScript to execute in the browser. In comparison, tools like Closure Compiler and RollupJS ‘hoist’ or concatenate the scope of all your modules into one closure and allow for your code to have a faster execution time in the browser.
 
-This plugin will enable the same concatenation behavior in webpack. It is [enabled by default in production](/configuration/optimization/#optimization-concatenatemodules) but you can also manually add it:
+This plugin will enable the same concatenation behavior in webpack. It is [enabled by default in production](/configuration/optimization/#optimization-concatenatemodules) but you can also add it manually if you need it in other modes:
 
 ```js
 new webpack.optimize.ModuleConcatenationPlugin();
