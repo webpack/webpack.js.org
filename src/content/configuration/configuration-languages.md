@@ -11,12 +11,12 @@ contributors:
   - byzyk
 ---
 
-webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found at the [node-interpret](https://github.com/js-cli/js-interpret) package. Using [node-interpret](https://github.com/js-cli/js-interpret), webpack can handle many different types of configuration files.
+webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found at the [node-interpret](https://github.com/gulpjs/interpret) package. Using [node-interpret](https://github.com/gulpjs/interpret), webpack can handle many different types of configuration files.
 
 
 ## TypeScript
 
-To write the webpack configuration in [TypeScript](http://www.typescriptlang.org/), you would first install the necessary dependencies:
+To write the webpack configuration in [TypeScript](https://www.typescriptlang.org/), you would first install the necessary dependencies:
 
 ``` bash
 npm install --save-dev typescript ts-node @types/node @types/webpack
@@ -90,7 +90,7 @@ __package.json__
 
 ## CoffeeScript
 
-Similarly, to use [CoffeeScript](http://coffeescript.org/), you would first install the necessary dependencies:
+Similarly, to use [CoffeeScript](https://coffeescript.org/), you would first install the necessary dependencies:
 
 ``` bash
 npm install --save-dev coffee-script

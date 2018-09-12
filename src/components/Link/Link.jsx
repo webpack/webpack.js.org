@@ -11,7 +11,7 @@ export default ({
   if ( url ) to = url;
 
   if ( to.startsWith('http') || to.startsWith('//') )
-    return <a href={ to } target="_blank" { ...props } />;
+    return <a href={ to } target="_blank" rel="noopener" { ...props } />;
 
   else return <Link to={ to } { ...props } />;
 };

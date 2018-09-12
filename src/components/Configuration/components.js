@@ -60,6 +60,7 @@ export class Modes extends React.Component {
 
   render() {
     const { open, summary, content } = this.state;
+    const className = open ? 'open' : '';
     return (
       <Popover
         isOpen={open}
@@ -70,7 +71,7 @@ export class Modes extends React.Component {
         containerClassName={'shadow'}
         content={<Card body={content} />}
       >
-        <span onClick={() => this.setState({ open: !this.state.open })}>{summary}</span>
+        <span className={`code-details-summary-span ${className}`} onClick={() => this.setState({ open: !this.state.open })}>{summary}</span>
       </Popover>
     );
   }

@@ -1,15 +1,14 @@
 import React from 'react';
-import TrimEnd from 'lodash/trimEnd';
+import Url from 'url';
 import './PageLinks.scss';
+
+const baseURL = 'https://github.com/webpack/webpack.js.org/edit/master/';
 
 export default ({
   page = {},
   ...props
 }) => {
-  let baseURL = 'https://github.com/webpack/webpack.js.org/edit/master/src/content';
-  let indexPath = page.type === 'index' ? '/index' : '';
-  let mainPath = page.url.startsWith('/') ? page.url : `/${page.url}`;
-  let editLink = page.edit || baseURL + TrimEnd(mainPath, '/') + indexPath + '.md';
+  const editLink = page.edit || Url.resolve(baseURL, page.path);
 
   // TODO: Make sure we add `repo` / `edit` and address `type` (above)
   return (

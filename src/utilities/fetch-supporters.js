@@ -26,7 +26,7 @@ request(url)
     }
 
     // Write the file
-    return asyncWriteFile(`./src/components/Support/${filename}`, body);
+    return asyncWriteFile(`./src/components/Support/${filename}`, body).then(() => console.log('Fetched 1 file: _supporters.json'));
   })
   .catch(error => {
     console.error('utilities/fetch-supporters:', error);

@@ -1,32 +1,50 @@
-@import 'vars';
-@import 'functions';
-@import 'prism-theme';
+@import "vars";
+@import "functions";
+@import "prism-theme";
 
 .markdown {
-  line-height:1.5em;
+  line-height: 1.5em;
 
-  h1 { font-size: getFontSize(4); }
-  h2 { font-size: getFontSize(3); }
-  h3 { font-size: getFontSize(2); }
-  h4 { font-size: getFontSize(1); }
-  h5 { font-size: getFontSize(0); }
-  h6 { font-size: getFontSize(-1); }
+  h1 {
+    font-size: getFontSize(4);
+  }
+  h2 {
+    font-size: getFontSize(3);
+  }
+  h3 {
+    font-size: getFontSize(2);
+  }
+  h4 {
+    font-size: getFontSize(1);
+  }
+  h5 {
+    font-size: getFontSize(0);
+  }
+  h6 {
+    font-size: getFontSize(-1);
+  }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     display: flex;
     align-items: center;
     font-family: $font-stack-heading;
-    font-weight:600;
-    line-height:1.4;
-    margin:1.5em 0 0.25em;
-    color:getColor(fiord);
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 1.5em 0 0.25em;
+    color: getColor(fiord);
 
-    tt, code {
+    tt,
+    code {
       font-size: 90%;
       color: inherit;
     }
 
-    a {
+    a[aria-hidden="true"] {
       margin-left: 8px;
       font-size: 0.8em;
       height: 1em;
@@ -35,7 +53,7 @@
       transition: all 250ms;
     }
 
-    &:hover a {
+    &:hover a[aria-hidden="true"] {
       opacity: 1;
       visibility: visible;
     }
@@ -46,30 +64,40 @@
     line-height: 1;
   }
 
-  p, blockquote, table, pre {
-    margin:1em 0;
+  p,
+  blockquote,
+  table,
+  pre {
+    margin: 1em 0;
   }
 
-  ul, ol, dl {
-    margin:0.5em 0 1em;
+  ul,
+  ol,
+  dl {
+    margin: 0.5em 0 1em;
   }
 
   li {
-    margin:0.5em 0;
+    margin: 0.5em 0;
   }
 
   hr {
-    border:none;
-    background-color:getColor(alto);
-    height:3px;
-    margin:2em 0;
+    border: none;
+    background-color: getColor(alto);
+    height: 3px;
+    margin: 2em 0;
   }
 
-  ul, ol {
+  ul,
+  ol {
     padding-left: 30px;
 
-    &:first-child { margin-top:0; }
-    &:last-child { margin-bottom:0; }
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   dl {
@@ -79,7 +107,9 @@
       font-style: italic;
       margin: 15px 0 5px;
 
-      &:first-child { padding: 0; }
+      &:first-child {
+        padding: 0;
+      }
     }
 
     dd {
@@ -87,25 +117,34 @@
       padding: 0 15px;
     }
 
-    dt, dd {
-      > :first-child { margin-top: 0; }
-      > :last-child { margin-bottom: 0; }
+    dt,
+    dd {
+      > :first-child {
+        margin-top: 0;
+      }
+      > :last-child {
+        margin-bottom: 0;
+      }
     }
   }
 
   blockquote {
     border-left: 4px solid #dddddd;
-    padding:0.75em 1em;
-    color:getColor(dove-grey);
+    padding: 0.75em 1em;
+    color: getColor(dove-grey);
     font-style: italic;
 
-    > :first-child { margin-top: 0; }
-    > :last-child { margin-bottom: 0; }
+    > :first-child {
+      margin-top: 0;
+    }
+    > :last-child {
+      margin-bottom: 0;
+    }
 
     &.tip,
     &.warning,
     &.todo {
-      border-left:none;
+      border-left: none;
       border-radius: 3px;
 
       .tip-content {
@@ -132,7 +171,7 @@
       color: #907a6e;
 
       .tip-content::before {
-        content: '[TODO]: ';
+        content: "[TODO]: ";
         font-style: normal;
       }
     }
@@ -159,7 +198,7 @@
     font-weight: bold;
     text-align: left;
     padding: 6px 12px;
-    background: darken(#F4F6F6, 1%);
+    background: darken(#f4f6f6, 1%);
 
     &:first-child {
       border-right: 1px solid #cccccc;
@@ -240,15 +279,18 @@
     height: auto;
   }
 
-  b, strong {
-    font-weight:600;
+  b,
+  strong {
+    font-weight: 600;
   }
 
-  i, em {
+  i,
+  em {
     font-style: italic;
   }
 
-  code, tt {
+  code,
+  tt {
     font-family: $font-stack-code;
     font-size: 90%;
     margin: 0 2px;
@@ -284,6 +326,17 @@
       .code-details-summary-span {
         margin-left: -15px;
         cursor: pointer;
+
+        &::after {
+          content: "\F103";
+          float: left;
+          position: relative;
+          left: -2px;
+          top: 2px;
+          text-align: center;
+          font-family: icons;
+          color: lighten(getColor(denim), 10%);
+        }
       }
 
       a {
@@ -299,14 +352,16 @@
       }
     }
 
-    code, tt {
+    code,
+    tt {
       background-color: transparent;
       border: none;
     }
   }
 
   p {
-    code, tt {
+    code,
+    tt {
       max-width: 100%;
       line-height: initial;
       overflow: auto;
@@ -317,7 +372,8 @@
   }
 
   span {
-    code, tt {
+    code,
+    tt {
       white-space: pre-line;
     }
   }
