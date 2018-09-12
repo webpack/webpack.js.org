@@ -188,8 +188,7 @@ __webpack.config.js__
   module.exports = {
     mode: 'development',
     entry: {
-+     index: './src/index.js'
--     index: './src/index.js',
+      index: './src/index.js'
 -     another: './src/another-module.js'
     },
     output: {
