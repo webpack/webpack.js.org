@@ -97,7 +97,7 @@ The following table explains other cases:
 
 ### `resolve.aliasFields`
 
-`string`
+`array`
 
 Specify a field, such as `browser`, to be parsed according to [this specification](https://github.com/defunctzombie/package-browser-field-spec). Default:
 
@@ -105,7 +105,7 @@ Specify a field, such as `browser`, to be parsed according to [this specificatio
 module.exports = {
   //...
   resolve: {
-    aliasFields: 'browser'
+    aliasFields: ['browser']
   }
 };
 ```
