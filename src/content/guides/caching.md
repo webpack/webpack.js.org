@@ -8,6 +8,7 @@ contributors:
   - dannycjones
   - fadysamirsadek
   - afontcu
+  - rosavage
 related:
   - title: Issue 652
     url: https://github.com/webpack/webpack.js.org/issues/652
@@ -258,9 +259,9 @@ Hash: d38a06644fdbb898d795
 Version: webpack 3.3.0
 Time: 1445ms
                            Asset       Size  Chunks                    Chunk Names
-  vendor.a7561fb0e9a071baadb9.js     541 kB       0  [emitted]  [big]  vendor
-    main.b746e3eb72875af2caa9.js    1.22 kB       1  [emitted]         main
-manifest.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         manifest
+  runtime.1400d5af64fc1b7b3a45.js    5.85 kB      0  [emitted]         runtime
+  vendor.a7561fb0e9a071baadb9.js     541 kB       1  [emitted]  [big]  vendor
+    main.b746e3eb72875af2caa9.js    1.22 kB       2  [emitted]         main
                       index.html  352 bytes          [emitted]
    [1] ./src/index.js 421 bytes {1} [built]
    [2] (webpack)/buildin/global.js 509 bytes {0} [built]
