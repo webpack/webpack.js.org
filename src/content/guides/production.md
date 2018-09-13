@@ -118,7 +118,7 @@ __package.json__
     "name": "development",
     "version": "1.0.0",
     "description": "",
-    "main": "webpack.config.js",
+    "main": "src/index.js",
     "scripts": {
 -     "start": "webpack-dev-server --open",
 +     "start": "webpack-dev-server --open --config webpack.dev.js",
@@ -160,7 +160,6 @@ __webpack.prod.js__
 
   module.exports = merge(common, {
     mode: 'production',
-    devtool: 'source-map'
   });
 ```
 

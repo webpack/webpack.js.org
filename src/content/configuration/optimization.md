@@ -39,7 +39,7 @@ T> Learn how [mode](/concepts/mode/) works.
 
 ## `optimization.minimizer`
 
-`UglifyjsWebpackPlugin | [UglifyjsWebpackPlugin]`
+`[UglifyjsWebpackPlugin]`
 
 Allows you to override the default minimizer by providing a different one or more customized [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin/) instances.
 
@@ -379,6 +379,25 @@ module.exports = {
   //...
   optimization: {
     sideEffects: true
+  }
+};
+```
+
+## `optimization.portableRecords`
+
+`bool`
+
+`optimization.portableRecords` tells webpack to generate records with relative paths to be able to move the context folder.
+
+By default `optimization.portableRecords` is disabled. Automatically enabled if at least one of the records options provided to webpack config: [`recordsPath`](/configuration/other-options/#recordspath), [`recordsInputPath`](/configuration/other-options/#recordsinputpath), [`recordsOutputPath`](/configuration/other-options/#recordsoutputpath).
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    portableRecords: true
   }
 };
 ```
