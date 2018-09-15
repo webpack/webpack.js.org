@@ -240,22 +240,21 @@ Let's create a new build and open up the index.html file again:
 ``` bash
 npm run build
 
-Hash: 854865050ea3c1c7f237
-Version: webpack 2.6.1
-Time: 895ms
-                               Asset     Size  Chunks                    Chunk Names
-5c999da72346a995e7e2718865d019c8.png  11.3 kB          [emitted]
-                           bundle.js   561 kB       0  [emitted]  [big]  main
-   [0] ./src/icon.png 82 bytes {0} [built]
-   [1] ./~/lodash/lodash.js 540 kB {0} [built]
-   [2] ./src/style.css 1 kB {0} [built]
-   [3] ./~/css-loader!./src/style.css 242 bytes {0} [built]
-   [4] ./~/css-loader/lib/css-base.js 2.26 kB {0} [built]
-   [5] ./~/style-loader/lib/addStyles.js 8.7 kB {0} [built]
-   [6] ./~/style-loader/lib/urls.js 3.01 kB {0} [built]
-   [7] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [8] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [9] ./src/index.js 503 bytes {0} [built]
+Hash: 0993aeea2fd6ea0a7b22
+Version: webpack 4.19.0
+Time: 836ms
+Built at: 2018-09-15 12:58:57
+                               Asset      Size  Chunks                    Chunk Names
+da4574bb234ddc4bb47cbe1ca4b20303.png  3.01 MiB          [emitted]  [big]
+                           bundle.js  76.7 KiB       0  [emitted]         main
+Entrypoint main = bundle.js
+[1] ./src/index.js 368 bytes {0} [built]
+[2] (webpack)/buildin/global.js 509 bytes {0} [built]
+[3] (webpack)/buildin/module.js 519 bytes {0} [built]
+[4] ./src/style.css 1.05 KiB {0} [built]
+[5] ./node_modules/css-loader!./src/style.css 337 bytes {0} [built]
+[8] ./src/icon.png 82 bytes {0} [built]
+    + 5 hidden modules
 ```
 
 If all went well, you should now see your icon as a repeating background, as well as an `img` element beside our `Hello webpack` text. If you inspect this element, you'll see that the actual filename has changed to something like `5c999da72346a995e7e2718865d019c8.png`. This means webpack found our file in the `src` folder and processed it!
@@ -350,24 +349,26 @@ Now run a new build and let's see if webpack handled our fonts:
 ``` bash
 npm run build
 
-Hash: b4aef94169088c79ed1c
-Version: webpack 2.6.1
-Time: 775ms
-                                Asset     Size  Chunks                    Chunk Names
- 5c999da72346a995e7e2718865d019c8.png  11.3 kB          [emitted]
-11aebbbd407bcc3ab1e914ca0238d24d.woff   221 kB          [emitted]
-                            bundle.js   561 kB       0  [emitted]  [big]  main
-   [0] ./src/icon.png 82 bytes {0} [built]
-   [1] ./~/lodash/lodash.js 540 kB {0} [built]
-   [2] ./src/style.css 1 kB {0} [built]
-   [3] ./~/css-loader!./src/style.css 420 bytes {0} [built]
-   [4] ./~/css-loader/lib/css-base.js 2.26 kB {0} [built]
-   [5] ./src/MyFont.woff 83 bytes {0} [built]
-   [6] ./~/style-loader/lib/addStyles.js 8.7 kB {0} [built]
-   [7] ./~/style-loader/lib/urls.js 3.01 kB {0} [built]
-   [8] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [9] (webpack)/buildin/module.js 517 bytes {0} [built]
-  [10] ./src/index.js 503 bytes {0} [built]
+Hash: e4c67b7eebe94142a38e
+Version: webpack 4.19.0
+Time: 879ms
+Built at: 2018-09-15 13:14:08
+                                 Asset      Size  Chunks                    Chunk Names
+5439466351d432b73fdb518c6ae9654a.woff2  19.5 KiB          [emitted]
+ 387c65cc923ad19790469cfb5b7cb583.woff  23.4 KiB          [emitted]
+  da4574bb234ddc4bb47cbe1ca4b20303.png  3.01 MiB          [emitted]  [big]
+                             bundle.js    77 KiB       0  [emitted]         main
+Entrypoint main = bundle.js
+ [1] ./src/index.js 368 bytes {0} [built]
+ [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+ [3] (webpack)/buildin/module.js 519 bytes {0} [built]
+ [4] ./src/style.css 1.05 KiB {0} [built]
+ [5] ./node_modules/css-loader!./src/style.css 611 bytes {0} [built]
+ [8] ./src/my-font.woff2 84 bytes {0} [built]
+ [9] ./src/my-font.woff 83 bytes {0} [built]
+[10] ./src/icon.png 82 bytes {0} [built]
+    + 5 hidden modules
+
 ```
 
 Open up `index.html` again and see if our `Hello webpack` text has changed to the new font. If all is well, you should see the changes.
