@@ -8,6 +8,7 @@ contributors:
   - EugeneHlushko
   - byzyk
   - madhavarshney
+  - sakhisheikh
 related:
   - title: webpack's automatic deduplication algorithm example
     url: https://github.com/webpack/webpack/blob/master/examples/many-pages/README.md
@@ -344,3 +345,29 @@ module.exports = {
 ```
 
 W> This might result in a large chunk containing all external packages. It is recommended to only include your core frameworks and utilities and dynamically load the rest of the dependencies.
+
+### Split Chunks: Example 3
+
+Create a `custom vendors` chunk, which includes only those `node_modules` from the whole application which passes the RegEx Test
+
+__webpack.config.js__
+
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+        }
+      }
+    }
+  }
+};
+```
+
+T> This will result into a vendor chunk containing desired libraries provided in RegEx patter. A better understanding of chunks can be visualized by  [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/).
