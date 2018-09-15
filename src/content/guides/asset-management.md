@@ -121,20 +121,19 @@ Now run your build command:
 ``` bash
 npm run build
 
-Hash: 9a3abfc96300ef87880f
-Version: webpack 2.6.1
-Time: 834ms
-    Asset    Size  Chunks                    Chunk Names
-bundle.js  560 kB       0  [emitted]  [big]  main
-   [0] ./~/lodash/lodash.js 540 kB {0} [built]
-   [1] ./src/style.css 1 kB {0} [built]
-   [2] ./~/css-loader!./src/style.css 191 bytes {0} [built]
-   [3] ./~/css-loader/lib/css-base.js 2.26 kB {0} [built]
-   [4] ./~/style-loader/lib/addStyles.js 8.7 kB {0} [built]
-   [5] ./~/style-loader/lib/urls.js 3.01 kB {0} [built]
-   [6] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [7] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [8] ./src/index.js 351 bytes {0} [built]
+Hash: 43e22662004ea1cc5709
+Version: webpack 4.19.0
+Time: 6051ms
+Built at: 2018-09-15 11:12:13
+    Asset      Size  Chunks             Chunk Names
+bundle.js  76.4 KiB       0  [emitted]  main
+Entrypoint main = bundle.js
+[1] ./src/index.js 368 bytes {0} [built]
+[2] (webpack)/buildin/global.js 509 bytes {0} [built]
+[3] (webpack)/buildin/module.js 519 bytes {0} [built]
+[4] ./src/style.css 1.05 KiB {0} [built]
+[5] ./node_modules/css-loader!./src/style.css 190 bytes {0} [built]
+    + 4 hidden modules
 ```
 
 Open up `index.html` in your browser again and you should see that `Hello webpack` is now styled in red. To see what webpack did, inspect the page (don't view the page source, as it won't show you the result) and look at the page's head tags. It should contain our style block that we imported in `index.js`.
