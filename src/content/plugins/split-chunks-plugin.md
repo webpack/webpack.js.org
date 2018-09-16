@@ -369,4 +369,4 @@ module.exports = {
 };
 ```
 
- T> This will result into a vendor chunk containing desired libraries provided in RegEx patter. A better understanding of chunks can be visualized by  [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/).
+ T> This will result into a vendor chunk containing desired libraries provided in RegEx pattern. A better understanding of chunks can be visualized by  [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/).
