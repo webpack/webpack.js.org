@@ -35,7 +35,7 @@ webpack is not the only module bundler out there. If you are choosing between us
 | Indirect require `var r = require; r("./file")` | **yes** | no♦ | no | no | no | |
 | Load each file separate | no | yes | no | yes | no | no |
 | Mangle path names | **yes** | no | partial | yes | not required (path names are not included in the bundle) | no |
-| Minimizing | uglify | uglify, closure compiler | [uglifyify](https://github.com/hughsk/uglifyify) | yes | [uglify-plugin](https://github.com/TrySound/rollup-plugin-uglify) | [UglifyJS-brunch](https://github.com/brunch/uglify-js-brunch)
+| Minimizing | [Terser](https://github.com/fabiosantoscode/terser) | uglify, closure compiler | [uglifyify](https://github.com/hughsk/uglifyify) | yes | [uglify-plugin](https://github.com/TrySound/rollup-plugin-uglify) | [UglifyJS-brunch](https://github.com/brunch/uglify-js-brunch)
 | Multi pages build with common bundle | with manual configuration | **yes** | with manual configuration | with bundle arithmetic | no | no|
 | Multiple bundles | **yes** | with manual configuration | with manual configuration | yes | no | yes |
 | Node.js built-in libs `require("path")` | **yes** | no | **yes** | **yes** | [node-resolve-plugin](https://github.com/rollup/rollup-plugin-node-resolve) | |

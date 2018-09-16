@@ -114,4 +114,4 @@ W> You should not deploy the Source Map file to the webserver. Instead only use 
 
 W> It still exposes filenames and structure for decompiling, but it doesn't expose the original code.
 
-T> When using the `uglifyjs-webpack-plugin` you must provide the `sourceMap: true` option to enable SourceMap support.
+T> If the default webpack `minimizer` has been overridden (such as to customise the `terser-webpack-plugin` options), make sure to configure its replacement with `sourceMap: true` to enable SourceMap support.
