@@ -14,7 +14,7 @@ This guide contains some useful tips for improving build/compilation performance
 
 ## General
 
-The following best practices should help, whether you're building in [development](/guides/development) or [production](/guides/production).
+The following best practices should help, whether you're running build scripts in [development](/guides/development) or [production](/guides/production).
 
 
 ### Stay Up to Date
