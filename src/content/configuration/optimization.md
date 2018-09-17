@@ -19,7 +19,7 @@ Since version 4 webpack runs optimizations for you depending on the chosen `mode
 
 `boolean`
 
-Tell webpack to minimize the bundle using the plugin(s) specified in `optimization.minimizer`.
+Tell webpack to minimize the bundle using the plugin(s) specified in [`optimization.minimizer`](#optimization-minimizer).
 
 This is `true` by default in `production` mode.
 
