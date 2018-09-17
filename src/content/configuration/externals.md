@@ -67,20 +67,6 @@ The following syntaxes are accepted...
 See the example above. The property name `jquery` indicates that the module `jquery` in `import $ from 'jquery'` should be excluded. In order to replace this module, the value `jQuery` will be used to retrieve a global `jQuery` variable. In other words, when a string is provided it will be treated as `root` (defined above and below).
 
 
-### array
-
-```js
-module.exports = {
-  //...
-  externals: {
-    subtract: ['./math', 'subtract']
-  }
-};
-```
-
-`subtract: ['./math', 'subtract']` converts to a parent child construct, where `./math` is the parent module and your bundle only requires the subset under `subtract` variable.
-
-
 ### object
 
 ```js
