@@ -199,11 +199,26 @@ module.exports = {
 
 A module can belong to multiple cache groups. The optimization will prefer the cache group with a higher `priority`. The default groups have a negative priority to allow custom groups to take higher priority (default value is `0` for custom groups).
 
-#### `splitChunks.cacheGroups.reuseExistingChunk`
+#### `splitChunks.cacheGroups.cacheGroup.reuseExistingChunk`
 
 `boolean`
 
 If the current chunk contains modules already split out from the main bundle, it will be reused instead of a new one being generated. This can impact the resulting file name of the chunk.
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          reuseExistingChunk: true
+        }
+      }
+    }
+  }
+};
+```
 
 #### `splitChunks.cacheGroups.test`
 
