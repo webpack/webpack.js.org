@@ -87,7 +87,7 @@ class MyPlugin {
     this.chunkVersions = {};
   }
   apply(compiler) {
-    compiler.hooks.emit.tapAsync("MyPlugin", (compilation, callback) => {
+    compiler.hooks.emit.tapAsync('MyPlugin', (compilation, callback) => {
       var changedChunks = compilation.chunks.filter(chunk => {
         var oldVersion = this.chunkVersions[chunk.name];
         this.chunkVersions[chunk.name] = chunk.hash;
