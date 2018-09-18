@@ -369,4 +369,4 @@ module.exports = {
 };
 ```
 
- T> This will result in splitting `react` and `react-dom` into a separate chunk. If you're not sure what packages have been included in a chunk you may refer to [Bundle Analysis](/guides/code-splitting/#bundle-analysis) section for details.
+T> This will result in splitting `react` and `react-dom` into a separate chunk. If you're not sure what packages have been included in a chunk you may refer to [Bundle Analysis](/guides/code-splitting/#bundle-analysis) section for details.
