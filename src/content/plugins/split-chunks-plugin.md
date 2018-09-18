@@ -213,15 +213,14 @@ Controls which modules are selected by this cache group. Omitting it selects all
 
 ```js
 module.exports = {
-	//...
-	optimization: {
-		splitChunks: {
-    // cacheGroups test
+  //...
+  optimization: {
+    splitChunks: {
       cacheGroups: {
-        commons: {
+        vendors: {
           test (chunks) {
             //...
-            return true
+            return true;
           }
         }
       }
