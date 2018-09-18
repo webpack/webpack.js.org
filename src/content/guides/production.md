@@ -160,7 +160,6 @@ __webpack.prod.js__
 
   module.exports = merge(common, {
     mode: 'production',
-    devtool: 'source-map'
   });
 ```
 

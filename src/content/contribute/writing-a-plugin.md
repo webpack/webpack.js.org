@@ -6,6 +6,7 @@ contributors:
   - nveenjain
   - iamakulov
   - byzyk
+  - franjohn21
 ---
 
 Plugins expose the full potential of the webpack engine to third-party developers. Using staged build callbacks, developers can introduce their own behaviors into the webpack build process. Building plugins is a bit more advanced than building loaders, because you'll need to understand some of the webpack low-level internals to hook into them. Be prepared to read some source code!
@@ -25,11 +26,19 @@ A plugin for webpack consists of
 class MyExampleWebpackPlugin {
   // Define `apply` as it's prototype method which is supplied with compiler as it's argument
   apply(compiler) {
-    // Specifiy Hook in which you want to plugin to
-    compiler.hooks.some_hook_you_wish_to_plugin_to.tap('Name of your plugin for debugging purposes', compilation => {
-      /* Manipulate webpack internal instance specific data using compilation */
-      console.log('This is example of synchronouse plugin');
-    });
+    // Specify the event hook to attach to
+    compiler.hooks.compile.tapAsync(
+      'MyExampleWebpackPlugin',
+      (compilation, callback) => {
+        console.log('This is an example plugin!');
+        console.log('Here’s the `compilation` object which represents a single build of assets:', compilation);
+
+        // Manipulate the build using the plugin API provided by webpack
+        compilation.addModule(/* ... */);
+
+        callback();
+      }
+    );
   }
 }
 ```
