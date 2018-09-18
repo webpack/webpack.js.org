@@ -62,6 +62,9 @@ T> **"Scalable webpack configurations"** are ones that can be reused and combine
 
 Below is a list of entry configurations and their real-world use cases:
 
+### Separate App and Vendor Entries
+
+T> In webpack version < 4 it was common to add vendors as separate entrypoint to compile it as separate file (in combination with the `CommonsChunkPlugin`). This is discouraged in webpack 4. Instead the `optimization.splitChunks` option takes care of separating vendors and app modules and creating a separate file. **Do not** create a entry for vendors or other stuff which is not the starting point of execution.
 
 ### Multi Page Application
 
