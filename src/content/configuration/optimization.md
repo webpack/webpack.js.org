@@ -19,7 +19,7 @@ Since version 4 webpack runs optimizations for you depending on the chosen `mode
 
 `boolean`
 
-Tell webpack to minimize the bundle using the [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin/).
+Tell webpack to minimize the bundle using the plugin(s) specified in [`optimization.minimizer`](#optimization-minimizer).
 
 This is `true` by default in `production` mode.
 
@@ -39,21 +39,26 @@ T> Learn how [mode](/concepts/mode/) works.
 
 ## `optimization.minimizer`
 
-`[UglifyjsWebpackPlugin]`
+`[TerserPlugin]`
 
-Allows you to override the default minimizer by providing a different one or more customized [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin/) instances.
+Allows you to override the default minimizer by providing a different one or more customized [TerserPlugin](/plugins/terser-webpack-plugin/) instances.
 
 __webpack.config.js__
 
 
 ```js
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   //...
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({ /* your config */ })
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true, // Must be set to true if using source-maps in production
+        //...
+      })
     ]
   }
 };
