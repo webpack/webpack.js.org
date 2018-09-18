@@ -83,18 +83,18 @@ Similar to the watch graph, it's fairly simple to monitor changed chunks (or mod
 
 ```javascript
 class MyPlugin {
-  constructor(){
+  constructor() {
     this.chunkVersions = {};
   }
-  apply(compiler){
-    compiler.hooks.emit.tapAsync('MyPlugin', (compilation, callback) => {
-      var changedChunks = compilation.chunks.filter( (chunk) => {
-          var oldVersion = this.chunkVersions[chunk.name];
-          this.chunkVersions[chunk.name] = chunk.hash;
-          return chunk.hash !== oldVersion;
-        }
+  apply(compiler) {
+    compiler.hooks.emit.tapAsync("MyPlugin", (compilation, callback) => {
+      var changedChunks = compilation.chunks.filter(chunk => {
+        var oldVersion = this.chunkVersions[chunk.name];
+        this.chunkVersions[chunk.name] = chunk.hash;
+        return chunk.hash !== oldVersion;
       });
-    callback();
+      callback();
+    });
   }
 }
 
