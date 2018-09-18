@@ -226,7 +226,7 @@ module.exports = {
       }
 		}
 	}
-}
+};
 ```
 
 ## Examples
