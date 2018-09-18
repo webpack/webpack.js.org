@@ -41,7 +41,7 @@ new webpack.ContextReplacementPlugin(
 new ContextReplacementPlugin(
   /date\-fns[\/\\]/, 
   /[/\\](de|fr|hu)[/\\]/
-  );
+);
 ```
 
 The `moment/locale` context is restricted to files matching `/de|fr|hu/`. Thus only those locales are included (see [this issue](https://github.com/moment/moment/issues/2373) for more information).
