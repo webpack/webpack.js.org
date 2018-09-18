@@ -31,10 +31,17 @@ If the resource (directory) matches `resourceRegExp`, the plugin replaces the de
 Here's a small example to restrict module usage:
 
 ```javascript
+// moment.js
 new webpack.ContextReplacementPlugin(
   /moment[/\\]locale$/,
   /de|fr|hu/
 );
+
+// date-fns
+new ContextReplacementPlugin(
+  /date\-fns[\/\\]/, 
+  /[/\\](de|fr|hu)[/\\]/
+  );
 ```
 
 The `moment/locale` context is restricted to files matching `/de|fr|hu/`. Thus only those locales are included (see [this issue](https://github.com/moment/moment/issues/2373) for more information).
