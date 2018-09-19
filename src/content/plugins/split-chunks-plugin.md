@@ -7,6 +7,7 @@ contributors:
   - chrisdothtml
   - EugeneHlushko
   - byzyk
+  - jacobangel
   - madhavarshney
   - sakhisheikh
 related:
@@ -23,9 +24,9 @@ Since webpack v4, the `CommonsChunkPlugin` was removed in favor of `optimization
 
 ## Defaults
 
-Out of the box `SplitChunksPlugin` should work great for most users.
+Out of the box `SplitChunksPlugin` should work well for most users.
 
-By default it only affects on-demand chunks because changing initial chunks would affect the script tags the HTML file should include to run the project.
+By default it only affects on-demand chunks, because changing initial chunks would affect the script tags the HTML file should include to run the project.
 
 webpack will automatically split chunks based on these conditions:
 
@@ -38,9 +39,9 @@ When trying to fulfill the last two conditions, bigger chunks are preferred.
 
 ## Configuration
 
-For developers that want to have more control over this functionality, webpack provides a set of options to better fit your needs. If you're changing the configuration, it's a good idea to measure the impact of your changes to ensure there's a real benefit.
+webpack provides a set of options for developers that want more control over this functionality. 
 
-W> Default configuration was chosen to fit web performance best practices but the optimum strategy for your project might defer depending on the nature of it.
+W> The default configuration was chosen to fit web performance best practices, but the optimal strategy for your project might differ. If you're changing the configuration, you should measure the impact of your changes to ensure there's a real benefit.
 
 ## `optimization.splitChunks`
 
@@ -86,7 +87,7 @@ By default webpack will generate names using origin and name of the chunk (e.g. 
 
 `function` `string`
 
-This indicates which chunks will be selected for optimization. If a string is provided, possible values are `all`, `async`, and `initial`. Providing `all` can be particularly powerful because it means that chunks can be shared even between async and non-async chunks.
+This indicates which chunks will be selected for optimization. When a string is provided, valid values are `all`, `async`, and `initial`. Providing `all` can be particularly powerful, because it means that chunks can be shared even between async and non-async chunks.
 
 ```js
 module.exports = {
@@ -100,7 +101,7 @@ module.exports = {
 };
 ```
 
-Alternatively, you can provide a function for more control. The return value will indicate whether to include each chunk.
+Alternatively, you may provide a function for more control. The return value will indicate whether to include each chunk.
 
 ```js
 module.exports = {
