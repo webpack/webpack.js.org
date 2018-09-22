@@ -95,15 +95,15 @@ webpack --mode production --env PROD
 
 ## TypeScript Considerations
 
-The TypeScript compiler requires that all files be physically-present in order to function, and will throw the following
-error if you complete the above tasks:
+The TypeScript compiler requires that all files be physically-present in order to generate an output. If you attempt to
+complete the above tasks, you will likely receive the following error:
 
 ``` shell
 TS2307: Cannot find module './config/config-APP_TARGET'.
 ```
 
 To correct this issue, you'll need to create an additional file to satisfy the compiler without breaking the
-NormalMosuleReplacementPlugin:
+NormalModuleReplacementPlugin:
 
 __config/config-APP_TARGET.ts__
 
