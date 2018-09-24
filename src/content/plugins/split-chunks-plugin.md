@@ -199,7 +199,7 @@ module.exports = {
 
 A module can belong to multiple cache groups. The optimization will prefer the cache group with a higher `priority`. The default groups have a negative priority to allow custom groups to take higher priority (default value is `0` for custom groups).
 
-#### `splitChunks.cacheGroups.cacheGroup.reuseExistingChunk`
+#### `splitChunks.cacheGroups.{cacheGroup}.reuseExistingChunk`
 
 `boolean`
 
