@@ -10,6 +10,7 @@ contributors:
   - byzyk
   - pnevares
   - fadysamirsadek
+  - nerdkid93
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
