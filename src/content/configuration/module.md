@@ -269,7 +269,7 @@ Indicate what parts of the module contain side effects. See [Tree Shaking](/guid
 
 Possible values: `"javascript/auto" | "javascript/dynamic" | "javascript/esm" | "json" | "webassembly/experimental"`
 
-`Rule.type` sets the type for a matching module. This prevents defaultRules and their default importing behaviors from occuring. For example, if you want to load a `.json` file through a custom loader, you'd need to set the `type` to `javascript/auto` to bypass webpack's built-in json importing. (See [v4.0 changelog](https://github.com/webpack/webpack/releases/tag/v4.0.0) for more details)
+`Rule.type` sets the type for a matching module. This prevents defaultRules and their default importing behaviors from occurring. For example, if you want to load a `.json` file through a custom loader, you'd need to set the `type` to `javascript/auto` to bypass webpack's built-in json importing. (See [v4.0 changelog](https://github.com/webpack/webpack/releases/tag/v4.0.0) for more details)
 
 ```javascript
 module.exports = {
