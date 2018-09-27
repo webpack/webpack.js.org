@@ -190,8 +190,9 @@ Option                | Description
 `natural`             | Numeric ids in order of usage.
 `named`               | Readable ids for better debugging.
 `hashed`              | Short hashes as ids for better long term caching.
+`deterministic`       | Module names are hashed into small numeric values.
 `size`                | Numeric ids focused on minimal initial download size.
-`total-size`          | numeric ids focused on minimal total download size.
+`total-size`          | Numeric ids focused on minimal total download size.
 
 __webpack.config.js__
 
@@ -201,6 +202,24 @@ module.exports = {
   optimization: {
     moduleIds: 'hashed'
   }
+};
+```
+
+`deterministic` option is useful for long term caching, but still results in smaller bundles compared to `hashed`. Length of the numeric value is chosen to fill a maximum of 80% of the id space. By default a minimum length of 3 digits is used when `optimization.moduleIds` is set to `deterministic`. To override the default behaviour set `optimization.moduleIds` to `false` and use the `webpack.ids.DeterministicModuleIdsPlugin`.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    moduleIds: false
+  },
+  plugins: [
+    new webpack.ids.DeterministicModuleIdsPlugin({
+      maxLength: 5
+    })
+  ]
 };
 ```
 
