@@ -9,6 +9,8 @@ contributors:
   - dylanonelson
   - byzyk
   - pnevares
+  - fadysamirsadek
+  - nerdkid93
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -253,7 +255,7 @@ An array of [`Rules`](#rule) that is also used when the Rule matches.
 
 ## `Rule.sideEffects`
 
-Possible values: `false | an array of paths`
+Possible values: `true | false`
 
 Indicate what parts of the module contain side effects. See [Tree Shaking](/guides/tree-shaking/#mark-the-file-as-side-effect-free) for details.
 
@@ -261,6 +263,29 @@ Indicate what parts of the module contain side effects. See [Tree Shaking](/guid
 ## `Rule.test`
 
 `Rule.test` is a shortcut to `Rule.resource.test`. If you supply a `Rule.test` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.test`](#condition) for details.
+
+
+## `Rule.type`
+
+Possible values: `"javascript/auto" | "javascript/dynamic" | "javascript/esm" | "json" | "webassembly/experimental"`
+
+`Rule.type` sets the type for a matching module. This prevents defaultRules and their default importing behaviors from occurring. For example, if you want to load a `.json` file through a custom loader, you'd need to set the `type` to `javascript/auto` to bypass webpack's built-in json importing. (See [v4.0 changelog](https://github.com/webpack/webpack/releases/tag/v4.0.0) for more details)
+
+```javascript
+module.exports = {
+  //...
+  module: {
+    rules: [
+      //...
+      {
+        test: /\.json$/,
+        type: 'javascript/auto',
+        loader: 'custom-json-loader'
+      }
+    ]
+  }
+};
+```
 
 
 ## `Rule.use`

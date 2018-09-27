@@ -172,6 +172,33 @@ module.exports = {
 };
 ```
 
+## `optimization.moduleIds`
+
+`bool: false` `string: natural, named, hashed, size, total-size`
+
+Tells webpack which algorithm to use when choosing module ids. Setting `optimization.moduleIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. By default `optimization.moduleIds` is set to `false`.
+
+The following string values are supported:
+
+Option                | Description
+--------------------- | -----------------------
+`natural`             | Numeric ids in order of usage.
+`named`               | Readable ids for better debugging.
+`hashed`              | Short hashes as ids for better long term caching.
+`size`                | Numeric ids focused on minimal initial download size.
+`total-size`          | numeric ids focused on minimal total download size.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    moduleIds: 'hashed'
+  }
+};
+```
+
 ## `optimization.nodeEnv`
 
 `string` `bool: false`
@@ -379,6 +406,25 @@ module.exports = {
   //...
   optimization: {
     sideEffects: true
+  }
+};
+```
+
+## `optimization.portableRecords`
+
+`bool`
+
+`optimization.portableRecords` tells webpack to generate records with relative paths to be able to move the context folder.
+
+By default `optimization.portableRecords` is disabled. Automatically enabled if at least one of the records options provided to webpack config: [`recordsPath`](/configuration/other-options/#recordspath), [`recordsInputPath`](/configuration/other-options/#recordsinputpath), [`recordsOutputPath`](/configuration/other-options/#recordsoutputpath).
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    portableRecords: true
   }
 };
 ```
