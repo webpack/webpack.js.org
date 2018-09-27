@@ -217,11 +217,11 @@ Parameter    | Explanation                                      | Input type | D
 
 These options allow you to bind [modules](/configuration/module/) as allowed by webpack
 
-Parameter            | Explanation                        | Usage
--------------------- | ---------------------------------- | ----------------
-`--module-bind`      | Bind an extension to a loader      | `--module-bind js=babel-loader`
-`--module-bind-post` | Bind an extension to a post loader |
-`--module-bind-pre`  | Bind an extension to a pre loader  |
+Parameter            | Explanation                            | Usage
+-------------------- | -------------------------------------- | ----------------
+`--module-bind`      | Bind a file extension to a loader      | `--module-bind js=babel-loader`
+`--module-bind-post` | Bind a file extension to a post loader |
+`--module-bind-pre`  | Bind a file extension to a pre loader  |
 
 
 ### Watch Options
