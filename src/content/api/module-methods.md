@@ -33,7 +33,7 @@ import MyModule from './my-module.js';
 import { NamedExport } from './other-module.js';
 ```
 
-W> The keyword here is __statically__. Normal `import` statement cannot be used dynamically within other logic or contain variables. See the [spec](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) for more information and `import()` below for dynamic usage.
+W> The keyword here is __static__. Normal `import` statement cannot be used dynamically within other logic or contain variables. See the [spec](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) for more information and `import()` below for dynamic usage.
 
 
 ### `export`
