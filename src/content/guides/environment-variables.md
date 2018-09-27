@@ -29,7 +29,9 @@ __webpack.config.js__
 ``` js
 const path = require('path');
 
-module.exports = (env = {}) => {
+// Note that if you don't pass all the env varialbles you'll get ReferenceError. 
+// Either pass them all or make env defaults to empty object, i.e. `env = {}`.
+module.exports = env => {
   // Use env.<YOUR VARIABLE> here:
   console.log('NODE_ENV: ', env.NODE_ENV); // 'local'
   console.log('Production: ', env.production); // true
