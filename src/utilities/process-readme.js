@@ -24,7 +24,12 @@ module.exports = function processREADME(body, options = {}) {
 
       // Only resolve non-absolute urls from their source if they are not a document fragment link
       if (!href.startsWith('#')) {
-        href = url.resolve(options.source, href);
+        // Convert Github raw links to rendered links
+        let rendered_url = options.source
+          .replace(/raw.githubusercontent.com/, 'github.com')
+          .replace(/master/, 'blob/master');
+
+        href = url.resolve(rendered_url, href);
       }
 
       // Modify absolute documenation links to be root relative
