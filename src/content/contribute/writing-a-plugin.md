@@ -27,7 +27,7 @@ class MyExampleWebpackPlugin {
   // Define `apply` as it's prototype method which is supplied with compiler as it's argument
   apply(compiler) {
     // Specify the event hook to attach to
-    compiler.hooks.compile.tapAsync(
+    compiler.hooks.compile.tap(
       'MyExampleWebpackPlugin',
       (compilation, callback) => {
         console.log('This is an example plugin!');
