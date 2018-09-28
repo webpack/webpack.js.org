@@ -14,6 +14,7 @@ contributors:
   - byzyk
   - madhavarshney
   - harshwardhansingh
+  - eemeli
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -616,6 +617,13 @@ define([], function() {
 ```
 
 This bundle will not work as expected, or not work at all (in the case of the almond loader) if loaded directly with a `<script>` tag. It will only work through a RequireJS compatible asynchronous module loader through the actual path to that file, so in this case, the `output.path` and `output.filename` may become important for this particular setup if these are exposed directly on the server.
+
+
+`libraryTarget: "amd-require"` - This packages your output with an immediately-executed AMD `require(dependencies, factory)` wrapper.
+
+This target allows for the use of AMD dependencies without needing a separate later invokation. As with the `"amd"` target, this depends on the appropriate [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md) being available in the environment in which the webpack output is loaded.
+
+With this target, the library name is ignored.
 
 
 `libraryTarget: "umd"` - This exposes your library under all the module definitions, allowing it to work with CommonJS, AMD and as global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
