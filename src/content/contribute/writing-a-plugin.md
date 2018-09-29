@@ -97,7 +97,7 @@ The list of hooks available on the `compiler`, `compilation`, and other importan
 
 ## Async event hooks
 
-Some plugin hooks are asynchronous. To tap into them, we can use `tap` method which will behave in synchronous manner or use one of `tapAsync` method or `tapPromise` method which are asyncronous methods.
+Some plugin hooks are asynchronous. To tap into them, we can use `tap` method which will behave in synchronous manner or use one of `tapAsync` method or `tapPromise` method which are asynchronous methods.
 
 ### tapAsync
 
@@ -218,7 +218,7 @@ Various types of hooks supported are :-
     - Called using `call( ... params)` method
 
   Here each of the plugins are called one after the other with the arguments from the return value of the previous plugin. The plugin must take the order of its execution into account.
-  It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. Hence atleast 1 param must be supplied for waterfall hooks. This pattern is used in the Tapable instances which are related to the webpack templates like `ModuleTemplate`, `ChunkTemplate` etc.
+  It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. Hence at least 1 param must be supplied for waterfall hooks. This pattern is used in the Tapable instances which are related to the webpack templates like `ModuleTemplate`, `ChunkTemplate` etc.
 
 ### Asynchronous Hooks
 
