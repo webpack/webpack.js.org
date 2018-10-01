@@ -194,7 +194,7 @@ if (FOO === 0) {
 
 In the above example, webpack is unable to prune the branch, but Uglify does. However, if `FOO` is defined using [DefinePlugin](/plugins/define-plugin/), webpack will succeed.
 
-It is imporant to mention that `import { calculateTax } from './tax';` will also get pruned because `calculateTax()` call was in the dead branch and got eliminated.
+It is important to mention that `import { calculateTax } from './tax';` will also get pruned because `calculateTax()` call was in the dead branch and got eliminated.
 
 ### ProvidePlugin
 
