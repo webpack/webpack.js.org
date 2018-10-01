@@ -15,6 +15,7 @@ contributors:
   - byzyk
   - yairhaimo
   - EugeneHlushko
+  - farskid
 ---
 
 At its core, __webpack__ is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it internally builds a [dependency graph](/concepts/dependency-graph/) which maps every module your project needs and generates one or more _bundles_.
@@ -84,7 +85,7 @@ T> The `output` property has [many more configurable features](/configuration/ou
 
 ## Loaders
 
-Out of the box, webpack only understands JavaScript files. __Loaders__ allow webpack to process other types of files and convert them into valid [modules](/concepts/modules) that can be consumed by your application and added to the dependency graph.
+Out of the box, webpack only understands JavaScript and JSON files. __Loaders__ allow webpack to process other types of files and convert them into valid [modules](/concepts/modules) that can be consumed by your application and added to the dependency graph.
 
 W> Note that the ability to `import` any type of module, e.g. `.css` files, is a feature specific to webpack and may not be supported by other bundlers or task runners. We feel this extension of the language is warranted as it allows developers to build a more accurate dependency graph.
 

@@ -282,7 +282,7 @@ __webpack.config.js__
 
 ``` diff
   const path = require('path');
-  const webpack = require('webpack');
++ const webpack = require('webpack');
   const CleanWebpackPlugin = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -392,4 +392,4 @@ We can see that both builds yielded `55e79e5927a639d21a1b` in the `vendor` bundl
 
 ## Conclusion
 
-Caching gets messy. Plain and simple. However the walk-through above should give you a running start to deploying consistent, cachable assets. See the _Further Reading_ section below to learn more.
+Caching gets messy. Plain and simple. However the walk-through above should give you a running start to deploying consistent, cacheable assets. See the _Further Reading_ section below to learn more.

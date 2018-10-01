@@ -144,7 +144,7 @@ module.exports = {
         ],
         // these are matching conditions, each accepting a regular expression or string
         // test and include have the same behavior, both must be matched
-        // exclude must not be matched (takes preferrence over test and include)
+        // exclude must not be matched (takes preference over test and include)
         // Best practices:
         // - Use RegExp only in test and for filename matching
         // - Use arrays of absolute paths in include and exclude
@@ -249,7 +249,7 @@ module.exports = {
     // properties that are read from description file
     // when a folder is requested
     [aliasFields](/configuration/resolve#resolve-aliasfields): ["browser"],
-    // properites that are read from description file
+    // properties that are read from description file
     // to alias requests in this package
     [enforceExtension](/configuration/resolve#resolve-enforceextension): false,
     // if true request must not include an extensions
@@ -372,7 +372,7 @@ module.exports = {
     [aggregateTimeout](watch#watchoptions-aggregatetimeout): 1000, // in ms
     // aggregates multiple changes to a single rebuild
     [poll](watch#watchoptions-poll): true,
-    [poll](watch#watchoptions-poll): 500, // intervall in ms
+    [poll](watch#watchoptions-poll): 500, // interval in ms
     // enables polling mode for watching
     // must be used on filesystems that doesn't notify on change
     // i. e. nfs shares
@@ -398,7 +398,7 @@ module.exports = {
 
 T> Want to rapidly generate webpack configuration file for your project requirements with few clicks away.
 
-[Generate Custom Webpack Configuration](https://generatewebpackconfig.netlify.com/) is an interactive portal you can play around by selecting custom webpack configuration options tailored for your frontend project. It automatically generates 
+[Generate Custom Webpack Configuration](https://generatewebpackconfig.netlify.com/) is an interactive portal you can play around by selecting custom webpack configuration options tailored for your frontend project. It automatically generates
 a minimal webpack configuration based on your selection of loaders/plugins, etc.
 
 [Visual tool for creating webpack configs](https://webpack.jakoblind.no/) is an online configuration tool for creating webpack config where you can select any combination of features you need. It also generates a full example project based on your webpack configs.
