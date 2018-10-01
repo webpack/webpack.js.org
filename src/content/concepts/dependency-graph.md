@@ -5,7 +5,7 @@ contributors:
   - TheLarkInn
   - EugeneHlushko
 related:
-  - title: HTTP2 Aggresive Splitting Example
+  - title: HTTP2 Aggressive Splitting Example
     url: https://github.com/webpack/webpack/tree/master/examples/http2-aggressive-splitting
   - title: webpack & HTTP/2
     url: https://medium.com/webpack/webpack-http-2-7083ec3f3ce6
