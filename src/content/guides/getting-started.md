@@ -179,7 +179,9 @@ __dist/index.html__
 
 In this setup, `index.js` explicitly requires `lodash` to be present, and binds it as `_` (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.
 
-With that said, let's run `npx webpack`, which will take our script at `src/index.js` as the [entry point](/concepts/entry-points), and will generate `dist/main.js` as the [output](/concepts/output). The `npx` command, which ships with Node 8.2/npm 5.2.0 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
+With that said, let's run `npx webpack`, which will take our script at `src/index.js` as the default [entry point](/concepts/entry-points), and will generate `dist/main.js` as the default [output](/concepts/output). You can specify a different value for the entry point and for the output property when you run webpack from the command line. When you want to set a specific output, though, you must add the flag `-o` in front of it: `npx webpack path/to/my/entry/file.js -o path/to/my/output/bundle.js`.
+
+The `npx` command, which ships with Node 8.2/npm 5.2.0 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
 
 ``` bash
 npx webpack
