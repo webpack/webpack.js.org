@@ -13,6 +13,7 @@ contributors:
   - lumo10
   - byzyk
   - pnevares
+  - EugeneHlushko
 related:
   - title: "webpack 4 beta — try it today!"
     url: https://medium.com/webpack/webpack-4-beta-try-it-today-6b1d27d7d7e2#9a67
@@ -60,7 +61,7 @@ export function cube(x) {
 }
 ```
 
-You could need to set the development mode to be sure that bundle is not minified:
+Set the `mode` configuration option to [development](/concepts/mode/#mode-development) to make sure that the bundle is not minified:
 
 __webpack.config.js__
 
@@ -74,7 +75,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
 - }
 + },
-+ mode: "development"
++ mode: 'development'
 };
 ```
 
@@ -172,9 +173,7 @@ Finally, `"sideEffects"` can also be set from the [`module.rules` configuration 
 
 ## Minify the Output
 
-So we've cued up our "dead code" to be dropped by using the `import` and `export` syntax, but we still need to drop it from the bundle. To do that, we'll use the `-p` (production) webpack compilation flag to enable `UglifyJSPlugin`.
-
-As of webpack 4, this is also easily toggled via the `"mode"` configuration option, set to `"production"`.
+So we've cued up our "dead code" to be dropped by using the `import` and `export` syntax, but we still need to drop it from the bundle. To do that set the `mode` configuration option to [`production`](/concepts/mode/#mode-production) configuration option.
 
 __webpack.config.js__
 
@@ -187,8 +186,8 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
-- mode: "development"
-+ mode: "production"
+- mode: 'development'
++ mode: 'production'
 };
 ```
 
@@ -198,14 +197,15 @@ With that squared away, we can run another `npm run build` and see if anything h
 
 Notice anything different about `dist/bundle.js`? Clearly the whole bundle is now minified and mangled, but, if you look carefully, you won't see the `square` function included but will see a mangled version of the `cube` function (`function r(e){return e*e*e}n.a=r`). With minification and tree shaking our bundle is now a few bytes smaller! While that may not seem like much in this contrived example, tree shaking can yield a significant decrease in bundle size when working on larger applications with complex dependency trees.
 
+T> [ModuleConcatenationPlugin](/plugins/module-concatenation-plugin) is needed for the tree shaking to work. It is added by `mode: "production"`. If you are not using it, remember to add the [ModuleConcatenationPlugin](/plugins/module-concatenation-plugin) manually.
 
 ## Conclusion
 
 So, what we've learned is that in order to take advantage of _tree shaking_, you must...
 
 - Use ES2015 module syntax (i.e. `import` and `export`).
-- Add a "sideEffects" property to your project's `package.json` file.
-- Include a minifier that supports dead code removal (e.g. the `UglifyJSPlugin`).
+- Add a `"sideEffects"` property to your project's `package.json` file.
+- Use [`production`](/concepts/mode/#mode-production) `mode` configuration option to enable [various optimizations](/concepts/mode/#usage) including minification and tree shaking.
 
 You can imagine your application as a tree. The source code and libraries you actually use represent the green, living leaves of the tree. Dead code represents the brown, dead leaves of the tree that are consumed by autumn. In order to get rid of the dead leaves, you have to shake the tree, causing them to fall.
 

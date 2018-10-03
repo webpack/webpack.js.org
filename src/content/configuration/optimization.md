@@ -19,7 +19,7 @@ Since version 4 webpack runs optimizations for you depending on the chosen `mode
 
 `boolean`
 
-Tell webpack to minimize the bundle using the [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin/).
+Tell webpack to minimize the bundle using the plugin(s) specified in [`optimization.minimizer`](#optimization-minimizer).
 
 This is `true` by default in `production` mode.
 
@@ -39,21 +39,26 @@ T> Learn how [mode](/concepts/mode/) works.
 
 ## `optimization.minimizer`
 
-`UglifyjsWebpackPlugin | [UglifyjsWebpackPlugin]`
+`[TerserPlugin]`
 
-Allows you to override the default minimizer by providing a different one or more customized [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin/) instances.
+Allows you to override the default minimizer by providing a different one or more customized [TerserPlugin](/plugins/terser-webpack-plugin/) instances.
 
 __webpack.config.js__
 
 
 ```js
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   //...
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({ /* your config */ })
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true, // Must be set to true if using source-maps in production
+        //...
+      })
     ]
   }
 };
@@ -69,11 +74,35 @@ By default webpack v4+ provides new common chunks strategies out of the box for 
 
 `object` `string` `boolean`
 
-Setting `optimization.runtimeChunk` to `true` adds an additional chunk to each entry point containing only the runtime.
-It is possible to use preset mode of the plugin by providing a string value:
+Setting `optimization.runtimeChunk` to `true` or `"multiple"` adds an additional chunk to each entrypoint containing only the runtime. This setting is an alias for:
 
-- `single`: creates a runtime file to be shared for all generated chunks.
-- `multiple`: creates multiple runtime files for common chunks.
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    runtimeChunk: {
+      name: entrypoint => `runtime~${entrypoint.name}`
+    }
+  }
+};
+```
+
+The value `"single"` instead creates a runtime file to be shared for all generated chunks. This setting is an alias for:
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    runtimeChunk: {
+      name: 'runtime'
+    }
+  }
+};
+```
 
 By setting `optimization.runtimeChunk` to `object` it is only possible to provide the `name` property which stands for the name or name factory for the runtime chunks.
 
@@ -135,7 +164,7 @@ module.exports = {
 
 `boolean: false`
 
-Tells webpack to use readable chunk identifiers for better debugging. This option is enabled by default for [mode](/concepts/mode/) `development` and disabled for [mode](/concepts/mode/) `production` if no option is provided in webpack config. 
+Tells webpack to use readable chunk identifiers for better debugging. This option is enabled by default for [mode](/concepts/mode/) `development` and disabled for [mode](/concepts/mode/) `production` if no option is provided in webpack config.
 
 __webpack.config.js__
 
@@ -145,6 +174,52 @@ module.exports = {
   optimization: {
     namedChunks: true
   }
+};
+```
+
+## `optimization.moduleIds`
+
+`bool: false` `string: natural, named, hashed, size, total-size`
+
+Tells webpack which algorithm to use when choosing module ids. Setting `optimization.moduleIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. By default `optimization.moduleIds` is set to `false`.
+
+The following string values are supported:
+
+Option                | Description
+--------------------- | -----------------------
+`natural`             | Numeric ids in order of usage.
+`named`               | Readable ids for better debugging.
+`hashed`              | Short hashes as ids for better long term caching.
+`deterministic`       | Module names are hashed into small numeric values.
+`size`                | Numeric ids focused on minimal initial download size.
+`total-size`          | Numeric ids focused on minimal total download size.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    moduleIds: 'hashed'
+  }
+};
+```
+
+`deterministic` option is useful for long term caching, but still results in smaller bundles compared to `hashed`. Length of the numeric value is chosen to fill a maximum of 80% of the id space. By default a minimum length of 3 digits is used when `optimization.moduleIds` is set to `deterministic`. To override the default behaviour set `optimization.moduleIds` to `false` and use the `webpack.ids.DeterministicModuleIdsPlugin`.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    moduleIds: false
+  },
+  plugins: [
+    new webpack.ids.DeterministicModuleIdsPlugin({
+      maxLength: 5
+    })
+  ]
 };
 ```
 
@@ -322,6 +397,58 @@ module.exports = {
   //...
   optimization: {
     concatenateModules: true
+  }
+};
+```
+
+## `optimization.sideEffects`
+
+`bool`
+
+Tells webpack to recognise the [`sideEffects`](https://github.com/webpack/webpack/blob/master/examples/side-effects/README.md) flag in `package.json` or rules to skip over modules which are flagged to contain no side effects when exports are not used. 
+
+__package.json__
+
+``` json
+{
+  "name": "awesome npm module",
+  "version": "1.0.0",
+  "sideEffects": false
+}
+```
+
+T> Please note that `sideEffects` should be in the npm module's `package.json` file and doesn't mean that you need to set `sideEffects` to `false` in your own project's `package.json` which requires that big module.
+
+`optimization.sideEffects` depends on [`optimization.providedExports`](#optimization-providedexports) to be enabled. This dependency has a build time cost, but eliminating modules has positive impact on performance because of less code generation. Effect of this optimization depends on your codebase, try it for possible performance wins.
+
+By default `optimization.sideEffects` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise. 
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    sideEffects: true
+  }
+};
+```
+
+## `optimization.portableRecords`
+
+`bool`
+
+`optimization.portableRecords` tells webpack to generate records with relative paths to be able to move the context folder.
+
+By default `optimization.portableRecords` is disabled. Automatically enabled if at least one of the records options provided to webpack config: [`recordsPath`](/configuration/other-options/#recordspath), [`recordsInputPath`](/configuration/other-options/#recordsinputpath), [`recordsOutputPath`](/configuration/other-options/#recordsoutputpath).
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    portableRecords: true
   }
 };
 ```

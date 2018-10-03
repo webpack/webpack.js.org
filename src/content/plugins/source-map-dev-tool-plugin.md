@@ -10,7 +10,7 @@ related:
     url: https://survivejs.com/webpack/building/source-maps/#-sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin-
 ---
 
-This plugin enables more fine grained control of source map generation. It is an alternative to the [`devtool`](/configuration/devtool/) configuration option.
+This plugin enables more fine grained control of source map generation. It is also enabled automatically by certain settings of the [`devtool`](/configuration/devtool/) configuration option.
 
 ```js
 new webpack.SourceMapDevToolPlugin(options);
@@ -21,7 +21,7 @@ new webpack.SourceMapDevToolPlugin(options);
 
 The following options are supported:
 
-- `test` (`string|regex|array`): Include source maps for modules based on their extension (defaults to `.js` and `.css`).
+- `test` (`string|regex|array`): Include source maps for modules based on their extension (defaults to `.js`, `.mjs`, and `.css`).
 - `include` (`string|regex|array`): Include source maps for module paths that match the given value.
 - `exclude` (`string|regex|array`): Exclude modules that match the given value from source map generation.
 - `filename` (`string`): Defines the output filename of the SourceMap (will be inlined if no value is provided).
@@ -41,11 +41,27 @@ The `fileContext` option is useful when you want to store source maps in an uppe
 
 T> Setting `module` and/or `columns` to `false` will yield less accurate source maps but will also improve compilation performance significantly.
 
-W> Remember that when using the [`UglifyJSPlugin`](/plugins/uglifyjs-webpack-plugin), you must utilize the `sourceMap` option.
+T> If you want to use a custom configuration for this plugin in [development mode](/concepts/mode/#mode-development), make sure to disable the default one. I.e. set `devtool: false`.
+
+W> If the default webpack `minimizer` has been overridden (such as to customise the `terser-webpack-plugin` options), make sure to configure its replacement with `sourceMap: true` to enable SourceMap support.
 
 ## Examples
 
 The following examples demonstrate some common use cases for this plugin.
+
+### Basic Use Case
+
+You can use the following code to replace the configuration option `devtool: inline-source-map` with an equivalent custom plugin configuration:
+
+```js
+module.exports = {
+  // ...
+  devtool: false,
+  plugins: [
+    new webpack.SourceMapDevToolPlugin({})
+  ]
+};
+```
 
 ### Exclude Vendor Maps
 

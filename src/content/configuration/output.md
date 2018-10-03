@@ -10,8 +10,10 @@ contributors:
   - fvgs
   - dhurlburtusa
   - MagicDuck
+  - fadysamirsadek
   - byzyk
   - madhavarshney
+  - harshwardhansingh
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -264,6 +266,30 @@ module.exports = {
 };
 ```
 
+Using hashes generated for extracted content:
+
+```js
+module.exports = {
+  //...
+  output: {
+    filename: '[contenthash].bundle.css'
+  }
+};
+```
+
+Using function to return the filename:
+
+```js
+module.exports = {
+  //...
+  output: {
+    filename: (chunkData) => {
+      return chunkData.chunk.name === 'main' ? '[name].js': '[name]/[name].js';
+    },
+  }
+};
+```
+
 Make sure to read the [Caching guide](/guides/caching) for details. There are more steps involved than just setting this option.
 
 Note this option is called filename but you are still allowed to use something like `"js/[name]/bundle.js"` to create a folder structure.
@@ -279,6 +305,7 @@ The following substitutions are available in template strings (via webpack's int
 | [name]      | The module name                                                                     |
 | [id]        | The module identifier                                                               |
 | [query]     | The module query, i.e., the string following `?` in the filename                    |
+| [function]  | The function, which can return filename [string]                                    |
 
 The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#output-hashdigestlength) to configure the length globally.
 
@@ -402,7 +429,7 @@ module.exports = {
 
 The variable `MyLibrary` will be bound with the return value of your entry file, if the resulting output is included as a script tag in an HTML page.
 
-W> Note that if an `array` is provided as an `entry` point, only the last module in the array will be exposed. If an `object` is provided, it can exposed using an `array` syntax (see [this example](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) for details).
+W> Note that if an `array` is provided as an `entry` point, only the last module in the array will be exposed. If an `object` is provided, it can be exposed using an `array` syntax (see [this example](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) for details).
 
 T> Read the [authoring libraries guide](/guides/author-libraries) guide for more information on `output.library` as well as `output.libraryTarget`.
 

@@ -34,10 +34,11 @@ Name                                                     | Description
 [`NoEmitOnErrorsPlugin`](/configuration/optimization/#optimization-noemitonerrors)  | Skip the emitting phase when there are compilation errors
 [`NormalModuleReplacementPlugin`](/plugins/normal-module-replacement-plugin) | Replace resource(s) that matches a regexp
 [`NpmInstallWebpackPlugin`](/plugins/npm-install-webpack-plugin) | Auto-install missing dependencies during development
+[`ProgressPlugin`](/plugins/progress-plugin)                     | Report compilation progress
 [`ProvidePlugin`](/plugins/provide-plugin)                       | Use modules without having to use import/require
 [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin)  | Enables a more fine grained control of source maps
 [`EvalSourceMapDevToolPlugin`](/plugins/eval-source-map-dev-tool-plugin)  | Enables a more fine grained control of eval source maps
-[`UglifyjsWebpackPlugin`](/plugins/uglifyjs-webpack-plugin)      | Enables control of the version of UglifyJS in your project
+[`TerserPlugin`](/plugins/terser-webpack-plugin/)                | Uses Terser to minify the JS in your project
 [`ZopfliWebpackPlugin`](/plugins/zopfli-webpack-plugin)          | Prepare compressed versions of assets with node-zopfli
 
 For more third-party plugins, see the list from [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#webpack-plugins).

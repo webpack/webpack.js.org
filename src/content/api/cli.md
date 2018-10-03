@@ -6,7 +6,9 @@ contributors:
   - simon04
   - tbroadley
   - chenxsan
+  - rencire
   - madhavarshney
+  - EugeneHlushko
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -21,11 +23,6 @@ related:
 ---
 
 For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the config file.
-
-Users have a choice between two CLI packages:
-
-* [webpack-cli](https://github.com/webpack/webpack-cli): the original webpack full-featured CLI.
-* [webpack-command](https://github.com/webpack-contrib/webpack-command): the lightweight, opinionated and modern CLI.
 
 Read the [installation guide](/guides/installation) if you don't already have webpack and CLI installed.
 
@@ -68,7 +65,7 @@ If your project structure is as follows -
 ```
 
 ```bash
-webpack ./src/index.js dist/bundle.js
+webpack src/index.js -o dist/bundle.js
 ```
 
 This will bundle your source code with entry as `index.js` and the output bundle file will have a path of `dist` and the filename will be `bundle.js`
@@ -220,11 +217,11 @@ Parameter    | Explanation                                      | Input type | D
 
 These options allow you to bind [modules](/configuration/module/) as allowed by webpack
 
-Parameter            | Explanation                        | Usage
--------------------- | ---------------------------------- | ----------------
-`--module-bind`      | Bind an extension to a loader      | `--module-bind js=babel-loader`
-`--module-bind-post` | Bind an extension to a post loader |
-`--module-bind-pre`  | Bind an extension to a pre loader  |
+Parameter            | Explanation                            | Usage
+-------------------- | -------------------------------------- | ----------------
+`--module-bind`      | Bind a file extension to a loader      | `--module-bind js=babel-loader`
+`--module-bind-post` | Bind a file extension to a post loader |
+`--module-bind-pre`  | Bind a file extension to a pre loader  |
 
 
 ### Watch Options
@@ -247,7 +244,7 @@ Parameter                   | Explanation                                       
 --------------------------- | -------------------------------------------------------|----------------------
 `--optimize-max-chunks`     | Try to keep the chunk count below a limit              | [LimitChunkCountPlugin](/plugins/limit-chunk-count-plugin)
 `--optimize-min-chunk-size` | Try to keep the chunk size above a limit               | [MinChunkSizePlugin](/plugins/min-chunk-size-plugin)
-`--optimize-minimize`       | Minimize javascript and switches loaders to minimizing | [UglifyJsPlugin](/plugins/uglifyjs-webpack-plugin/) & [LoaderOptionsPlugin](/plugins/loader-options-plugin/)
+`--optimize-minimize`       | Minimize javascript and switches loaders to minimizing | [TerserPlugin](/plugins/terser-webpack-plugin/) & [LoaderOptionsPlugin](/plugins/loader-options-plugin/)
 
 
 ### Resolve Options
