@@ -621,7 +621,7 @@ This bundle will not work as expected, or not work at all (in the case of the al
 
 `libraryTarget: "amd-require"` - This packages your output with an immediately-executed AMD `require(dependencies, factory)` wrapper.
 
-The "amd-require" target allows for the use of AMD dependencies without needing a separate later invocation. As with the `"amd"` target, this depends on the appropriate [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md) being available in the environment in which the webpack output is loaded.
+The "amd-require" target allows for the use of AMD dependencies without needing a separate later invocation. As with the "amd" target, this depends on the appropriate [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md) being available in the environment in which the webpack output is loaded.
 
 With this target, the library name is ignored.
 
