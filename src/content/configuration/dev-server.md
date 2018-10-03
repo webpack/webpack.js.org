@@ -24,6 +24,8 @@ T> Options that are compatible with [webpack-dev-middleware](https://github.com/
 This set of options is picked up by [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and can be used to change its behavior in various ways. Here's a simple example that gzips and serves everything from our `dist/` directory:
 
 ```js
+var path = require('path');
+
 module.exports = {
   //...
   devServer: {

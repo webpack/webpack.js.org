@@ -7,7 +7,9 @@ contributors:
   - chrisdothtml
   - EugeneHlushko
   - byzyk
+  - jacobangel
   - madhavarshney
+  - sakhisheikh
 related:
   - title: webpack's automatic deduplication algorithm example
     url: https://github.com/webpack/webpack/blob/master/examples/many-pages/README.md
@@ -22,9 +24,9 @@ Since webpack v4, the `CommonsChunkPlugin` was removed in favor of `optimization
 
 ## Defaults
 
-Out of the box `SplitChunksPlugin` should work great for most users.
+Out of the box `SplitChunksPlugin` should work well for most users.
 
-By default it only affects on-demand chunks because changing initial chunks would affect the script tags the HTML file should include to run the project.
+By default it only affects on-demand chunks, because changing initial chunks would affect the script tags the HTML file should include to run the project.
 
 webpack will automatically split chunks based on these conditions:
 
@@ -37,9 +39,9 @@ When trying to fulfill the last two conditions, bigger chunks are preferred.
 
 ## Configuration
 
-For developers that want to have more control over this functionality, webpack provides a set of options to better fit your needs. If you're changing the configuration, it's a good idea to measure the impact of your changes to ensure there's a real benefit.
+webpack provides a set of options for developers that want more control over this functionality. 
 
-W> Default configuration was chosen to fit web performance best practices but the optimum strategy for your project might defer depending on the nature of it.
+W> The default configuration was chosen to fit web performance best practices, but the optimal strategy for your project might differ. If you're changing the configuration, you should measure the impact of your changes to ensure there's a real benefit.
 
 ## `optimization.splitChunks`
 
@@ -85,7 +87,7 @@ By default webpack will generate names using origin and name of the chunk (e.g. 
 
 `function` `string`
 
-This indicates which chunks will be selected for optimization. If a string is provided, possible values are `all`, `async`, and `initial`. Providing `all` can be particularly powerful because it means that chunks can be shared even between async and non-async chunks.
+This indicates which chunks will be selected for optimization. When a string is provided, valid values are `all`, `async`, and `initial`. Providing `all` can be particularly powerful, because it means that chunks can be shared even between async and non-async chunks.
 
 ```js
 module.exports = {
@@ -99,7 +101,7 @@ module.exports = {
 };
 ```
 
-Alternatively, you can provide a function for more control. The return value will indicate whether to include each chunk.
+Alternatively, you may provide a function for more control. The return value will indicate whether to include each chunk.
 
 ```js
 module.exports = {
@@ -199,11 +201,26 @@ module.exports = {
 
 A module can belong to multiple cache groups. The optimization will prefer the cache group with a higher `priority`. The default groups have a negative priority to allow custom groups to take higher priority (default value is `0` for custom groups).
 
-#### `splitChunks.cacheGroups.reuseExistingChunk`
+#### `splitChunks.cacheGroups.{cacheGroup}.reuseExistingChunk`
 
 `boolean`
 
 If the current chunk contains modules already split out from the main bundle, it will be reused instead of a new one being generated. This can impact the resulting file name of the chunk.
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          reuseExistingChunk: true
+        }
+      }
+    }
+  }
+};
+```
 
 #### `splitChunks.cacheGroups.test`
 
@@ -216,9 +233,13 @@ module.exports = {
   //...
   optimization: {
     splitChunks: {
-      test (chunks) {
-        //...
-        return true;
+      cacheGroups: {
+        vendors: {
+          test (chunks) {
+            //...
+            return true;
+          }
+        }
       }
     }
   }
@@ -340,3 +361,28 @@ module.exports = {
 ```
 
 W> This might result in a large chunk containing all external packages. It is recommended to only include your core frameworks and utilities and dynamically load the rest of the dependencies.
+
+### Split Chunks: Example 3
+
+ Create a `custom vendor` chunk, which contains certain `node_modules` packages matched by `RegExp`.
+ 
+ __webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+        }
+      }
+    }
+  }
+};
+```
+
+T> This will result in splitting `react` and `react-dom` into a separate chunk. If you're not sure what packages have been included in a chunk you may refer to [Bundle Analysis](/guides/code-splitting/#bundle-analysis) section for details.

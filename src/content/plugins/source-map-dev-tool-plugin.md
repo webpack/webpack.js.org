@@ -21,7 +21,7 @@ new webpack.SourceMapDevToolPlugin(options);
 
 The following options are supported:
 
-- `test` (`string|regex|array`): Include source maps for modules based on their extension (defaults to `.js` and `.css`).
+- `test` (`string|regex|array`): Include source maps for modules based on their extension (defaults to `.js`, `.mjs`, and `.css`).
 - `include` (`string|regex|array`): Include source maps for module paths that match the given value.
 - `exclude` (`string|regex|array`): Exclude modules that match the given value from source map generation.
 - `filename` (`string`): Defines the output filename of the SourceMap (will be inlined if no value is provided).
@@ -30,7 +30,7 @@ The following options are supported:
 - `fallbackModuleFilenameTemplate` (`string`): See link above.
 - `module` (`boolean`): Indicates whether loaders should generate source maps (defaults to `true`).
 - `columns` (`boolean`): Indicates whether column mappings should be used (defaults to `true`).
-- `lineToLine` (`object`): Simplify and speed up source mapping by using line to line source mappings for matched modules.
+- `lineToLine` (`boolean` or `object`): Simplify and speed up source mapping by using line to line source mappings for matched modules.
 - `noSources` (`boolean`): Prevents the source file content from being included in the source map (defaults to `false`).
 - `publicPath` (`string`): Emits absolute URLs with public path prefix, e.g. `https://example.com/project/`.
 - `fileContext` (`string`): Makes the `[file]` argument relative to this directory.

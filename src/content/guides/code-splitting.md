@@ -235,7 +235,6 @@ __src/index.js__
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +   return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
 +     var element = document.createElement('div');
-+     var _ = _.default;
 +
 +     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +
@@ -321,8 +320,8 @@ T> webpack will add the prefetch hint once the parent chunk has been loaded.
 
 Preload directive has a bunch of differences compared to prefetch:
 
-- A preloaded chunk starts loading in parallel to the parent chunk. A prefetched chunk starts after the parent chunk finish.
-- A preloaded chunk has medium priority and instantly downloaded. A prefetched chunk is downloaded in browser idle time.
+- A preloaded chunk starts loading in parallel to the parent chunk. A prefetched chunk starts after the parent chunk finishes loading.
+- A preloaded chunk has medium priority and is instantly downloaded. A prefetched chunk is downloaded while browser is idle.
 - A preloaded chunk should be instantly requested by the parent chunk. A prefetched chunk can be used anytime in the future.
 - Browser support is different.
 
