@@ -836,6 +836,19 @@ module.exports = {
   }
 };
 ```
+The origin of the host header is kept when proxying by default, you can set `changeOrigin` to `true` to override it, this is useful in some situations like using [name-based virtual hosted sites](https://en.wikipedia.org/wiki/Virtual_hosting#Name-based).
+
+```js
+module.exports = {
+  //...
+  devServer: {
+    proxy: {
+      '/api': 'http://localhost:3000',
+      changeOrigin: true
+    }
+  }
+};
+```
 
 ## `devServer.progress` - CLI only
 
