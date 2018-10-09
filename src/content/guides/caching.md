@@ -8,6 +8,7 @@ contributors:
   - dannycjones
   - fadysamirsadek
   - afontcu
+  - saiprasad2595
 related:
   - title: Issue 652
     url: https://github.com/webpack/webpack.js.org/issues/652
