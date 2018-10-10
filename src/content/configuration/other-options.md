@@ -115,6 +115,8 @@ T> Combine with `parallelism: 1` for better results.
 
 ## `recordsPath`
 
+`string`
+
 Use this option to generate a JSON file containing webpack "records" -- pieces of data used to store module identifiers across multiple builds. You can use this file to track how modules change between builds. To generate one, simply specify a location:
 
 ```js
@@ -133,10 +135,14 @@ W> Setting `recordsPath` will essentially set `recordsInputPath` and `recordsOut
 
 ## `recordsInputPath`
 
+`string`
+
 Specify the file from which to read the last set of records. This can be used to rename a records file. See the example below.
 
 
 ## `recordsOutputPath`
+
+`string`
 
 Specify where the records should be written. The following example shows how you might use this option in combination with `recordsInputPath` to rename a records file:
 
