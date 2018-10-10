@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - terinjokes
   - byzyk
+  - vansosnin
 related:
   - title: Using Records
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
@@ -144,5 +145,19 @@ module.exports = {
   //...
   recordsInputPath: path.join(__dirname, 'records.json'),
   recordsOutputPath: path.join(__dirname, 'newRecords.json')
+};
+```
+
+
+## `name`
+
+`string`
+
+Name of the configuration. Used when loading multiple configurations.
+
+```js
+module.exports = {
+  //...
+  name: 'admin-app'
 };
 ```
