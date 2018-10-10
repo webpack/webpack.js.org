@@ -8,6 +8,7 @@ contributors:
   - jeremenichelli
   - svyandun
   - byzyk
+  - EugeneHlushko
 related:
   - title: Reward modern browser users script
     url: https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665
@@ -91,15 +92,10 @@ What we've essentially done here is tell webpack...
 If we run a build, we should still see the same output:
 
 ``` bash
-Hash: f450fa59fa951c68c416
-Version: webpack 2.2.0
-Time: 343ms
+...
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  [emitted]  [big]  main
-   [0] ./~/lodash/lodash.js 540 kB {0} [built]
-   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [3] ./src/index.js 189 bytes {0} [built]
+...
 ```
 
 We can also use the `ProvidePlugin` to expose a single export of a module by configuring it with an "array path" (e.g. `[module, child, ...children?]`). So let's imagine we only wanted to provide the `join` method from `lodash` wherever it's invoked:
