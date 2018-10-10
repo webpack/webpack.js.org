@@ -6,7 +6,7 @@ contributors:
   - byzyk
   - mrichmond
 related:
-  - title: 'webpack options defaulter source code'
+  - title: 'webpack default options (source code)'
     url: https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js
 ---
 
