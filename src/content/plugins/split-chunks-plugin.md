@@ -30,10 +30,10 @@ By default it only affects on-demand chunks, because changing initial chunks wou
 
 webpack will automatically split chunks based on these conditions:
 
-* New chunk can be shared OR modules are from the `node_modules` folder
-* New chunk would be bigger than 30kb (before min+gz)
-* Maximum number of parallel requests when loading chunks on demand would be lower or equal to 5
-* Maximum number of parallel requests at initial page load would be lower or equal to 3
+- New chunk can be shared OR modules are from the `node_modules` folder
+- New chunk would be bigger than 30kb (before min+gz)
+- Maximum number of parallel requests when loading chunks on demand would be lower or equal to 5
+- Maximum number of parallel requests at initial page load would be lower or equal to 3
 
 When trying to fulfill the last two conditions, bigger chunks are preferred.
 
@@ -267,10 +267,10 @@ import 'react';
 
 Why:
 
-* Condition 1: The chunk contains modules from `node_modules`
-* Condition 2: `react` is bigger than 30kb
-* Condition 3: Number of parallel requests at the import call is 2
-* Condition 4: Doesn't affect request at initial page load
+- Condition 1: The chunk contains modules from `node_modules`
+- Condition 2: `react` is bigger than 30kb
+- Condition 3: Number of parallel requests at the import call is 2
+- Condition 4: Doesn't affect request at initial page load
 
 What's the reasoning behind this? `react` probably won't change as often as your application code. By moving it into a separate chunk this chunk can be cached separately from your app code (assuming you are using chunkhash, records, Cache-Control or other long term cache approach).
 
@@ -303,10 +303,10 @@ import './more-helpers'; // more-helpers is also 40kb in size
 
 Why:
 
-* Condition 1: The chunk is shared between both import calls
-* Condition 2: `helpers` is bigger than 30kb
-* Condition 3: Number of parallel requests at the import calls is 2
-* Condition 4: Doesn't affect request at initial page load
+- Condition 1: The chunk is shared between both import calls
+- Condition 2: `helpers` is bigger than 30kb
+- Condition 3: Number of parallel requests at the import calls is 2
+- Condition 4: Doesn't affect request at initial page load
 
 Putting the content of `helpers` into each chunk will result into its code being downloaded twice. By using a separate chunk this will only happen once. We pay the cost of an additional request, which could be considered a tradeoff. That's why there is a minimum size of 30kb.
 

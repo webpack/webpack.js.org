@@ -7,6 +7,7 @@ contributors:
   - pksjce
   - e-cloud
   - byzyk
+  - EugeneHlushko
 ---
 
 Plugins are a key piece of the webpack ecosystem and provide the community with
@@ -127,8 +128,8 @@ The `reportProgress` function may be called with these arguments:
 reportProgress(percentage, ...args);
 ```
 
-* `percentage`: This argument is unused; instead, [`ProgressPlugin`](/plugins/progress-plugin/) will calculate a percentage based on the current hook.
-* `...args`: Any number of strings, which will be passed to the `ProgressPlugin` handler to be reported to the user.
+- `percentage`: This argument is unused; instead, [`ProgressPlugin`](/plugins/progress-plugin/) will calculate a percentage based on the current hook.
+- `...args`: Any number of strings, which will be passed to the `ProgressPlugin` handler to be reported to the user.
 
 Note that only a subset of compiler and compilation hooks support the `reportProgress` function. See [`ProgressPlugin`](/plugins/progress-plugin/#supported-hooks) for a full list.
 

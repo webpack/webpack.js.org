@@ -11,6 +11,7 @@ contributors:
   - pnevares
   - fadysamirsadek
   - nerdkid93
+  - EugeneHlushko
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -189,8 +190,8 @@ An object with parser options. All applied parser options are merged.
 
 Parsers may inspect these options and disable or reconfigure themselves accordingly. Most of the default plugins interpret the values as follows:
 
-* Setting the option to `false` disables the parser.
-* Setting the option to `true` or leaving it `undefined` enables the parser.
+- Setting the option to `false` disables the parser.
+- Setting the option to `true` or leaving it `undefined` enables the parser.
 
 However, parser plugins may accept more than just a boolean. For example, the internal `NodeStuffPlugin` can accept an object instead of `true` to add additional options for a particular Rule.
 
@@ -331,11 +332,11 @@ See [UseEntry](#useentry) for details.
 
 Conditions can be one of these:
 
-* A string: To match the input must start with the provided string. I. e. an absolute directory path, or absolute path to the file.
-* A RegExp: It's tested with the input.
-* A function: It's called with the input and must return a truthy value to match.
-* An array of Conditions: At least one of the Conditions must match.
-* An object: All properties must match. Each property has a defined behavior.
+- A string: To match the input must start with the provided string. I. e. an absolute directory path, or absolute path to the file.
+- A RegExp: It's tested with the input.
+- A function: It's called with the input and must return a truthy value to match.
+- An array of Conditions: At least one of the Conditions must match.
+- An object: All properties must match. Each property has a defined behavior.
 
 `{ test: Condition }`: The Condition must match. The convention is to provide a RegExp or array of RegExps here, but it's not enforced.
 
@@ -440,7 +441,7 @@ T> You can use the `ContextReplacementPlugin` to modify these values for individ
 
 A few use cases:
 
-* Warn for dynamic dependencies: `wrappedContextCritical: true`.
-* `require(expr)` should include the whole directory: `exprContextRegExp: /^\.\//`
-* `require("./templates/" + expr)` should not include subdirectories by default: `wrappedContextRecursive: false`
-* `strictExportPresence` makes missing exports an error instead of warning
+- Warn for dynamic dependencies: `wrappedContextCritical: true`.
+- `require(expr)` should include the whole directory: `exprContextRegExp: /^\.\//`
+- `require("./templates/" + expr)` should not include subdirectories by default: `wrappedContextRecursive: false`
+- `strictExportPresence` makes missing exports an error instead of warning
