@@ -378,9 +378,9 @@ When using automatic compilation of your code, you could run into issues when sa
 
 To disable this feature in some common editors, see the list below:
 
-* **Sublime Text 3**: Add `atomic_save: "false"` to your user preferences.
-* **JetBrains IDEs (e.g. WebStorm)**: Uncheck "Use safe write" in `Preferences > Appearance & Behavior > System Settings`.
-* **Vim**: Add `:set backupcopy=yes` to your settings.
+- **Sublime Text 3**: Add `atomic_save: "false"` to your user preferences.
+- **JetBrains IDEs (e.g. WebStorm)**: Uncheck "Use safe write" in `Preferences > Appearance & Behavior > System Settings`.
+- **Vim**: Add `:set backupcopy=yes` to your settings.
 
 
 ## Conclusion
