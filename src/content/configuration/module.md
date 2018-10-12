@@ -19,34 +19,41 @@ These options determine how the [different types of modules](/concepts/modules) 
 
 ## `module.noParse`
 
-`RegExp | [RegExp]`
+`RegExp | [RegExp] | function | string | [string]`
 
-`RegExp | [RegExp] | function` (since webpack 3.0.0)
+Prevent webpack from parsing any files matching the given regular expression(s). Ignored files __should not__ have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries.
 
-Prevent webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries.
+__webpack.config.js__
 
-```js
+```javascript
 module.exports = {
   //...
   module: {
     noParse: /jquery|lodash/,
-
-    // since webpack 3.0.0
-    noParse: function(content) {
-      return /jquery|lodash/.test(content);
-    }
   }
 };
 ```
 
+```javascript
+module.exports = {
+  //...
+  module: {
+    noParse: (content) => /jquery|lodash/.test(content)
+  }
+};
+```
+
+
 ## `module.rules`
 
-`array`
+`[Rule]`
 
 An array of [Rules](#rule) which are matched to requests when modules are created. These rules can modify how the module is created. They can apply loaders to the module, or modify the parser.
 
 
 ## Rule
+
+`object`
 
 A Rule can be separated into three parts — Conditions, Results and nested Rules.
 
@@ -59,7 +66,7 @@ There are two input values for the conditions:
 
 2. The issuer: An absolute path to the file of the module which requested the resource. It's the location of the import.
 
-**Example:** When we `import './style.css'` within `app.js`, the resource is `/path/to/style.css` and the issuer is `/path/to/app.js`.
+__Example:__ When we `import './style.css'` within `app.js`, the resource is `/path/to/style.css` and the issuer is `/path/to/app.js`.
 
 In a Rule the properties [`test`](#rule-test), [`include`](#rule-include), [`exclude`](#rule-exclude) and [`resource`](#rule-resource) are matched with the resource and the property [`issuer`](#rule-issuer) is matched with the issuer.
 
@@ -95,7 +102,9 @@ These rules are evaluated when the Rule condition matches.
 
 ## `Rule.enforce`
 
-Possible values: `"pre" | "post"`
+`string`
+
+Possible values: `'pre' | 'post'`
 
 Specifies the category of the loader. No value means normal loader.
 
@@ -131,7 +140,7 @@ A [`Condition`](#condition) to match against the module that issued the request.
 
 __index.js__
 
-```js
+```javascript
 import A from './a.js';
 ```
 
@@ -153,6 +162,8 @@ W> This option is __deprecated__ in favor of `Rule.use`.
 ## `Rule.oneOf`
 
 An array of [`Rules`](#rule) from which only the first matching Rule is used when the Rule matches.
+
+__webpack.config.js__
 
 ```javascript
 module.exports = {
@@ -195,7 +206,7 @@ Parsers may inspect these options and disable or reconfigure themselves accordin
 
 However, parser plugins may accept more than just a boolean. For example, the internal `NodeStuffPlugin` can accept an object instead of `true` to add additional options for a particular Rule.
 
-**Examples** (parser options by the default plugins):
+__Examples__ (parser options by the default plugins):
 
 ```js-with-links
 module.exports = {
@@ -233,7 +244,9 @@ A [`Condition`](#condition) matched with the resource. You can either supply a `
 
 A [`Condition`](#condition) matched with the resource query. This option is used to test against the query section of a request string (i.e. from the question mark onwards). If you were to `import Foo from './foo.css?inline'`, the following condition would match:
 
-```js
+__webpack.config.js__
+
+```javascript
 module.exports = {
   //...
   module: {
@@ -256,7 +269,7 @@ An array of [`Rules`](#rule) that is also used when the Rule matches.
 
 ## `Rule.sideEffects`
 
-Possible values: `true | false`
+`bool`
 
 Indicate what parts of the module contain side effects. See [Tree Shaking](/guides/tree-shaking/#mark-the-file-as-side-effect-free) for details.
 
@@ -268,9 +281,13 @@ Indicate what parts of the module contain side effects. See [Tree Shaking](/guid
 
 ## `Rule.type`
 
-Possible values: `"javascript/auto" | "javascript/dynamic" | "javascript/esm" | "json" | "webassembly/experimental"`
+`string`
+
+Possible values: `'javascript/auto' | 'javascript/dynamic' | 'javascript/esm' | 'json' | 'webassembly/experimental'`
 
 `Rule.type` sets the type for a matching module. This prevents defaultRules and their default importing behaviors from occurring. For example, if you want to load a `.json` file through a custom loader, you'd need to set the `type` to `javascript/auto` to bypass webpack's built-in json importing. (See [v4.0 changelog](https://github.com/webpack/webpack/releases/tag/v4.0.0) for more details)
+
+__webpack.config.js__
 
 ```javascript
 module.exports = {
@@ -293,9 +310,11 @@ module.exports = {
 
 A list of [UseEntries](#useentry) which are applied to modules. Each entry specifies a loader to be used.
 
-Passing a string (i.e. `use: [ "style-loader" ]`) is a shortcut to the loader property (i.e. `use: [ { loader: "style-loader "} ]`).
+Passing a string (i.e. `use: [ 'style-loader' ]`) is a shortcut to the loader property (i.e. `use: [ { loader: 'style-loader '} ]`).
 
 Loaders can be chained by passing multiple loaders, which will be applied from right to left (last to first configured).
+
+__webpack.config.js__
 
 ```javascript
 module.exports = {
@@ -350,9 +369,9 @@ Conditions can be one of these:
 
 `{ not: [Condition] }`: All Conditions must NOT match.
 
-**Example:**
+__Example:__
 
-```js
+```javascript
 module.exports = {
   //...
   module: {
@@ -380,9 +399,9 @@ It can have an `options` property being a string or object. This value is passed
 
 For compatibility a `query` property is also possible, which is an alias for the `options` property. Use the `options` property instead.
 
-**Example:**
+__webpack.config.js__
 
-```js
+```javascript
 module.exports = {
   //...
   module: {
@@ -413,11 +432,13 @@ Example for an `unknown` dynamic dependency: `require`.
 
 Example for an `expr` dynamic dependency: `require(expr)`.
 
-Example for an `wrapped` dynamic dependency: `require("./templates/" + expr)`.
+Example for an `wrapped` dynamic dependency: `require('./templates/' + expr)`.
 
 Here are the available options with their [defaults](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js):
 
-```js
+__webpack.config.js__
+
+```javascript
 module.exports = {
   //...
   module: {
@@ -443,5 +464,5 @@ A few use cases:
 
 - Warn for dynamic dependencies: `wrappedContextCritical: true`.
 - `require(expr)` should include the whole directory: `exprContextRegExp: /^\.\//`
-- `require("./templates/" + expr)` should not include subdirectories by default: `wrappedContextRecursive: false`
+- `require('./templates/' + expr)` should not include subdirectories by default: `wrappedContextRecursive: false`
 - `strictExportPresence` makes missing exports an error instead of warning
