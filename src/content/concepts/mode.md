@@ -115,7 +115,7 @@ module.exports = {
 -     hidePathInfo: true,
 -     minSize: 30000,
 -     maxAsyncRequests: 5,
--     maxAsyncRequests: 3,
+-     maxInitialRequests: 3,
 -   },
 -   noEmitOnErrors: true,
 -   checkWasmTypes: true,
