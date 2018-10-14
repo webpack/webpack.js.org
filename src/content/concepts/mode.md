@@ -5,6 +5,7 @@ contributors:
   - EugeneHlushko
   - byzyk
   - mrichmond
+  - Fental
 related:
   - title: 'webpack default options (source code)'
     url: https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js
@@ -115,7 +116,7 @@ module.exports = {
 -     hidePathInfo: true,
 -     minSize: 30000,
 -     maxAsyncRequests: 5,
--     maxAsyncRequests: 3,
+-     maxInitialRequests: 3,
 -   },
 -   noEmitOnErrors: true,
 -   checkWasmTypes: true,
