@@ -94,19 +94,13 @@ module.exports = {
 This will yield the following build result:
 
 ``` bash
-Hash: a948f6cc8219cc2d39a1
-Version: webpack 4.7.0
-Time: 323ms
+...
             Asset     Size   Chunks             Chunk Names
 another.bundle.js  550 KiB  another  [emitted]  another
   index.bundle.js  550 KiB    index  [emitted]  index
 Entrypoint index = index.bundle.js
 Entrypoint another = another.bundle.js
-[./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 489 bytes {another} {index} [built]
-[./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 497 bytes {another} {index} [built]
-[./src/another-module.js] 88 bytes {another} [built]
-[./src/index.js] 86 bytes {index} [built]
-    + 1 hidden module
+...
 ```
 
 As mentioned there are some pitfalls to this approach:
@@ -149,20 +143,14 @@ __webpack.config.js__
 With the [`optimization.splitChunks`](/plugins/split-chunks-plugin/#optimization-splitchunks) configuration option in place, we should now see the duplicate dependency removed from our `index.bundle.js` and `another.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. Let's do an `npm run build` to see if it worked:
 
 ``` bash
-Hash: ac2ac6042ebb4f20ee54
-Version: webpack 4.7.0
-Time: 316ms
+...
                           Asset      Size                 Chunks             Chunk Names
               another.bundle.js  5.95 KiB                another  [emitted]  another
                 index.bundle.js  5.89 KiB                  index  [emitted]  index
 vendors~another~index.bundle.js   547 KiB  vendors~another~index  [emitted]  vendors~another~index
 Entrypoint index = vendors~another~index.bundle.js index.bundle.js
 Entrypoint another = vendors~another~index.bundle.js another.bundle.js
-[./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 489 bytes {vendors~another~index} [built]
-[./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 497 bytes {vendors~another~index} [built]
-[./src/another-module.js] 88 bytes {another} [built]
-[./src/index.js] 86 bytes {index} [built]
-    + 1 hidden module
+...
 ```
 
 Here are some other useful plugins and loaders provided by the community for splitting code:
@@ -254,17 +242,12 @@ The reason we need `default` is since webpack 4, when importing a CommonJS modul
 Note the use of `webpackChunkName` in the comment. This will cause our separate bundle to be named `lodash.bundle.js` instead of just `[id].bundle.js`. For more information on `webpackChunkName` and the other available options, see the [`import()` documentation](/api/module-methods#import-). Let's run webpack to see `lodash` separated out to a separate bundle:
 
 ``` bash
-Hash: a3f7446ffbeb7fb897ff
-Version: webpack 4.7.0
-Time: 316ms
+...
                    Asset      Size          Chunks             Chunk Names
          index.bundle.js  7.88 KiB           index  [emitted]  index
 vendors~lodash.bundle.js   547 KiB  vendors~lodash  [emitted]  vendors~lodash
 Entrypoint index = index.bundle.js
-[./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 489 bytes {vendors~lodash} [built]
-[./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 497 bytes {vendors~lodash} [built]
-[./src/index.js] 394 bytes {index} [built]
-    + 1 hidden module
+...
 ```
 
 As `import()` returns a promise, it can be used with [`async` functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function). However, this requires using a pre-processor like Babel and the [Syntax Dynamic Import Babel Plugin](https://babeljs.io/docs/plugins/syntax-dynamic-import/#installation). Here's how it would simplify the code:

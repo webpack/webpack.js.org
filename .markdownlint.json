@@ -1,6 +1,7 @@
 {
   "default": true,
   "MD002": false,
+  "MD004": { "style": "dash" },
   "MD007": { "indent": 4 },
   "MD013": { "line_length": 600 },
   "MD026": false,

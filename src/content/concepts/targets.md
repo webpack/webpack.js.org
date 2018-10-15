@@ -7,6 +7,7 @@ contributors:
   - johnstew
   - srilman
   - byzyk
+  - EugeneHlushko
 ---
 
 Because JavaScript can be written for both server and browser, webpack offers multiple deployment _targets_ that you can set in your webpack [configuration](/configuration).
@@ -66,7 +67,7 @@ The example above will create a `lib.js` and `lib.node.js` file in your `dist` f
 
 As seen from the options above there are multiple different deployment _targets_ that you can choose from. Below is a list of examples, and resources that you can refer to.
 
-*  **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**: A great resource for testing and viewing different webpack _targets_. Also great for bug reporting.
-* **[Boilerplate of Electron-React Application](https://github.com/chentsulin/electron-react-boilerplate)**: A good example of a build process for electron's main process and renderer process.
+-  **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**: A great resource for testing and viewing different webpack _targets_. Also great for bug reporting.
+- **[Boilerplate of Electron-React Application](https://github.com/chentsulin/electron-react-boilerplate)**: A good example of a build process for electron's main process and renderer process.
 
 ?> Need to find up to date examples of these webpack targets being used in live code or boilerplates.

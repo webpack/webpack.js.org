@@ -7,6 +7,7 @@ contributors:
   - simon04
   - skipjack
   - byzyk
+  - EugeneHlushko
 related:
   - title: Code Splitting Example
     url: https://github.com/webpack/webpack/blob/master/examples/explicit-vendor-chunk/README.md
@@ -19,9 +20,9 @@ The `DllPlugin` and `DllReferencePlugin` provide means to split bundles in a way
 
 This plugin is used in a separate webpack config exclusively to create a dll-only-bundle. It creates a `manifest.json` file, which is used by the [`DllReferencePlugin`](/plugins/dll-plugin#dllreferenceplugin) to map dependencies.
 
-* `context` (optional): context of requests in the manifest file (defaults to the webpack context.)
-* `name`: name of the exposed dll function ([TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js): `[hash]` & `[name]` )
-* `path`: **absolute path** to the manifest json file (output)
+- `context` (optional): context of requests in the manifest file (defaults to the webpack context.)
+- `name`: name of the exposed dll function ([TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js): `[hash]` & `[name]` )
+- `path`: **absolute path** to the manifest json file (output)
 
 ```javascript
 new webpack.DllPlugin(options);
@@ -36,12 +37,12 @@ Combine this plugin with [`output.library`](/configuration/output/#output-librar
 
 This plugin is used in the primary webpack config, it references the dll-only-bundle(s) to require pre-built dependencies.
 
-* `context`: (**absolute path**) context of requests in the manifest (or content property)
-* `manifest` : an object containing `content` and `name` or a string to the absolute path of the JSON manifest to be loaded upon compilation
-* `content` (optional): the mappings from request to module id (defaults to `manifest.content`)
-* `name` (optional): the name where the dll is exposed (defaults to `manifest.name`) (see also [`externals`](/configuration/externals/))
-* `scope` (optional): prefix which is used for accessing the content of the dll
-* `sourceType` (optional): how the dll is exposed ([libraryTarget](/configuration/output/#output-librarytarget))
+- `context`: (**absolute path**) context of requests in the manifest (or content property)
+- `manifest` : an object containing `content` and `name` or a string to the absolute path of the JSON manifest to be loaded upon compilation
+- `content` (optional): the mappings from request to module id (defaults to `manifest.content`)
+- `name` (optional): the name where the dll is exposed (defaults to `manifest.name`) (see also [`externals`](/configuration/externals/))
+- `scope` (optional): prefix which is used for accessing the content of the dll
+- `sourceType` (optional): how the dll is exposed ([libraryTarget](/configuration/output/#output-librarytarget))
 
 ```javascript
 new webpack.DllReferencePlugin(options);
@@ -109,14 +110,14 @@ T> Multiple `DllPlugins` and multiple `DllReferencePlugins`.
 
 ### Source
 
-* [DllPlugin source](https://github.com/webpack/webpack/blob/master/lib/DllPlugin.js)
-* [DllReferencePlugin source](https://github.com/webpack/webpack/blob/master/lib/DllReferencePlugin.js)
-* [DllEntryPlugin source](https://github.com/webpack/webpack/blob/master/lib/DllEntryPlugin.js)
-* [DllModuleFactory source](https://github.com/webpack/webpack/blob/master/lib/DllModuleFactory.js)
-* [ManifestPlugin source](https://github.com/webpack/webpack/blob/master/lib/LibManifestPlugin.js)
+- [DllPlugin source](https://github.com/webpack/webpack/blob/master/lib/DllPlugin.js)
+- [DllReferencePlugin source](https://github.com/webpack/webpack/blob/master/lib/DllReferencePlugin.js)
+- [DllEntryPlugin source](https://github.com/webpack/webpack/blob/master/lib/DllEntryPlugin.js)
+- [DllModuleFactory source](https://github.com/webpack/webpack/blob/master/lib/DllModuleFactory.js)
+- [ManifestPlugin source](https://github.com/webpack/webpack/blob/master/lib/LibManifestPlugin.js)
 
 ### Tests
 
-* [DllPlugin creation test](https://github.com/webpack/webpack/blob/master/test/configCases/dll-plugin/0-create-dll/webpack.config.js)
-* [DllPlugin without scope test](https://github.com/webpack/webpack/blob/master/test/configCases/dll-plugin/2-use-dll-without-scope/webpack.config.js)
-* [DllReferencePlugin use Dll test](https://github.com/webpack/webpack/tree/master/test/configCases/dll-plugin)
+- [DllPlugin creation test](https://github.com/webpack/webpack/blob/master/test/configCases/dll-plugin/0-create-dll/webpack.config.js)
+- [DllPlugin without scope test](https://github.com/webpack/webpack/blob/master/test/configCases/dll-plugin/2-use-dll-without-scope/webpack.config.js)
+- [DllReferencePlugin use Dll test](https://github.com/webpack/webpack/tree/master/test/configCases/dll-plugin)

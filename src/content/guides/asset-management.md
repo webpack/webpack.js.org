@@ -7,6 +7,7 @@ contributors:
   - TheDutchCoder
   - sudarsangp
   - chenxsan
+  - EugeneHlushko
 ---
 
 If you've been following the guides from the start, you will now have a small project that shows "Hello webpack". Now let's try to incorporate some other assets, like images, to see how they can be handled.
@@ -121,19 +122,11 @@ Now run your build command:
 ``` bash
 npm run build
 
-Hash: 43e22662004ea1cc5709
-Version: webpack 4.19.0
-Time: 6051ms
-Built at: 2018-09-15 11:12:13
+...
     Asset      Size  Chunks             Chunk Names
 bundle.js  76.4 KiB       0  [emitted]  main
 Entrypoint main = bundle.js
-[1] ./src/index.js 368 bytes {0} [built]
-[2] (webpack)/buildin/global.js 509 bytes {0} [built]
-[3] (webpack)/buildin/module.js 519 bytes {0} [built]
-[4] ./src/style.css 1.05 KiB {0} [built]
-[5] ./node_modules/css-loader!./src/style.css 190 bytes {0} [built]
-    + 4 hidden modules
+...
 ```
 
 Open up `index.html` in your browser again and you should see that `Hello webpack` is now styled in red. To see what webpack did, inspect the page (don't view the page source, as it won't show you the result) and look at the page's head tags. It should contain our style block that we imported in `index.js`.
@@ -240,21 +233,12 @@ Let's create a new build and open up the index.html file again:
 ``` bash
 npm run build
 
-Hash: 0993aeea2fd6ea0a7b22
-Version: webpack 4.19.0
-Time: 836ms
-Built at: 2018-09-15 12:58:57
+...
                                Asset      Size  Chunks                    Chunk Names
 da4574bb234ddc4bb47cbe1ca4b20303.png  3.01 MiB          [emitted]  [big]
                            bundle.js  76.7 KiB       0  [emitted]         main
 Entrypoint main = bundle.js
-[1] ./src/index.js 368 bytes {0} [built]
-[2] (webpack)/buildin/global.js 509 bytes {0} [built]
-[3] (webpack)/buildin/module.js 519 bytes {0} [built]
-[4] ./src/style.css 1.05 KiB {0} [built]
-[5] ./node_modules/css-loader!./src/style.css 337 bytes {0} [built]
-[8] ./src/icon.png 82 bytes {0} [built]
-    + 5 hidden modules
+...
 ```
 
 If all went well, you should now see your icon as a repeating background, as well as an `img` element beside our `Hello webpack` text. If you inspect this element, you'll see that the actual filename has changed to something like `5c999da72346a995e7e2718865d019c8.png`. This means webpack found our file in the `src` folder and processed it!
@@ -349,26 +333,14 @@ Now run a new build and let's see if webpack handled our fonts:
 ``` bash
 npm run build
 
-Hash: e4c67b7eebe94142a38e
-Version: webpack 4.19.0
-Time: 879ms
-Built at: 2018-09-15 13:14:08
+...
                                  Asset      Size  Chunks                    Chunk Names
 5439466351d432b73fdb518c6ae9654a.woff2  19.5 KiB          [emitted]
  387c65cc923ad19790469cfb5b7cb583.woff  23.4 KiB          [emitted]
   da4574bb234ddc4bb47cbe1ca4b20303.png  3.01 MiB          [emitted]  [big]
                              bundle.js    77 KiB       0  [emitted]         main
 Entrypoint main = bundle.js
- [1] ./src/index.js 368 bytes {0} [built]
- [2] (webpack)/buildin/global.js 509 bytes {0} [built]
- [3] (webpack)/buildin/module.js 519 bytes {0} [built]
- [4] ./src/style.css 1.05 KiB {0} [built]
- [5] ./node_modules/css-loader!./src/style.css 611 bytes {0} [built]
- [8] ./src/my-font.woff2 84 bytes {0} [built]
- [9] ./src/my-font.woff 83 bytes {0} [built]
-[10] ./src/icon.png 82 bytes {0} [built]
-    + 5 hidden modules
-
+...
 ```
 
 Open up `index.html` again and see if our `Hello webpack` text has changed to the new font. If all is well, you should see the changes.
