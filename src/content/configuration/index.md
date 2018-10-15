@@ -131,7 +131,7 @@ module.exports = {
         ],
         // these are matching conditions, each accepting a regular expression or string
         // test and include have the same behavior, both must be matched
-        // exclude must not be matched (takes preferrence over test and include)
+        // exclude must not be matched (takes preference over test and include)
         // Best practices:
         // - Use RegExp only in test and for filename matching
         // - Use arrays of absolute paths in include and exclude
@@ -236,7 +236,7 @@ module.exports = {
     // properties that are read from description file
     // when a folder is requested
     [aliasFields](/configuration/resolve#resolve-aliasfields): ["browser"],
-    // properites that are read from description file
+    // properties that are read from description file
     // to alias requests in this package
     [enforceExtension](/configuration/resolve#resolve-enforceextension): false,
     // if true request must not include an extensions
@@ -359,7 +359,7 @@ module.exports = {
     [aggregateTimeout](watch#watchoptions-aggregatetimeout): 1000, // in ms
     // aggregates multiple changes to a single rebuild
     [poll](watch#watchoptions-poll): true,
-    [poll](watch#watchoptions-poll): 500, // intervall in ms
+    [poll](watch#watchoptions-poll): 500, // interval in ms
     // enables polling mode for watching
     // must be used on filesystems that doesn't notify on change
     // i. e. nfs shares

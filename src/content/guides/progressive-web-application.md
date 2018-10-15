@@ -4,6 +4,7 @@ sort: 14
 contributors:
   - johnnyreilly
   - chenxsan
+  - EugeneHlushko
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
@@ -96,26 +97,14 @@ __webpack.config.js__
 With that in place, let's see what happens when we do an `npm run build`:
 
 ``` bash
-clean-webpack-plugin: /mnt/c/Source/webpack-follow-along/dist has been removed.
-Hash: 6588e31715d9be04be25
-Version: webpack 3.10.0
-Time: 782ms
-                                                Asset       Size  Chunks                    Chunk Names
-                                        app.bundle.js     545 kB    0, 1  [emitted]  [big]  app
-                                      print.bundle.js    2.74 kB       1  [emitted]         print
-                                           index.html  254 bytes          [emitted]
+...
+                  Asset       Size  Chunks                    Chunk Names
+          app.bundle.js     545 kB    0, 1  [emitted]  [big]  app
+        print.bundle.js    2.74 kB       1  [emitted]         print
+             index.html  254 bytes          [emitted]
 precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js  268 bytes          [emitted]
-                                    service-worker.js       1 kB          [emitted]
-   [0] ./src/print.js 87 bytes {0} {1} [built]
-   [1] ./src/index.js 477 bytes {0} [built]
-   [3] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [4] (webpack)/buildin/module.js 517 bytes {0} [built]
-    + 1 hidden module
-Child html-webpack-plugin for "index.html":
-     1 asset
-       [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-       [3] (webpack)/buildin/module.js 517 bytes {0} [built]
-        + 2 hidden modules
+      service-worker.js       1 kB          [emitted]
+...
 ```
 
 As you can see, we now have 2 extra files being generated; `service-worker.js` and the more verbose `precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js`. `service-worker.js` is the Service Worker file and `precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js` is a file that `service-worker.js` requires so it can run. Your own generated files will likely be different; but you should have an `service-worker.js` file there.

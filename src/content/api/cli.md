@@ -217,11 +217,11 @@ Parameter    | Explanation                                      | Input type | D
 
 These options allow you to bind [modules](/configuration/module/) as allowed by webpack
 
-Parameter            | Explanation                        | Usage
--------------------- | ---------------------------------- | ----------------
-`--module-bind`      | Bind an extension to a loader      | `--module-bind js=babel-loader`
-`--module-bind-post` | Bind an extension to a post loader |
-`--module-bind-pre`  | Bind an extension to a pre loader  |
+Parameter            | Explanation                            | Usage
+-------------------- | -------------------------------------- | ----------------
+`--module-bind`      | Bind a file extension to a loader      | `--module-bind js=babel-loader`
+`--module-bind-post` | Bind a file extension to a post loader |
+`--module-bind-pre`  | Bind a file extension to a pre loader  |
 
 
 ### Watch Options
@@ -326,9 +326,9 @@ webpack --profile
 
 For each module, the following details are included in the output as applicable:
 
-* `factory`: time to collect module metadata (e.g. resolving the filename)
-* `building`: time to build the module (e.g. loaders and parsing)
-* `dependencies`: time to identify and connect the module’s dependencies
+- `factory`: time to collect module metadata (e.g. resolving the filename)
+- `building`: time to build the module (e.g. loaders and parsing)
+- `dependencies`: time to identify and connect the module’s dependencies
 
 Paired with `--progress`, `--profile` gives you an in depth idea of which step in the compilation is taking how long. This can help you optimise your build in a more informed manner.
 
