@@ -22,7 +22,7 @@ Usually your projects will need to extend this functionality, for this you can c
 
 All the available configuration options are specified below.
 
-T> New to webpack? Check out our guide to some of webpack's [core concepts](/concepts) to get started!
+T> New to webpack? Check out our guide to some of webpack's [core concepts](/concepts/) to get started!
 
 ## Options
 
@@ -49,7 +49,7 @@ module.exports = {
     b: ["./app/entry-b1", "./app/entry-b2"]
   },
   </details>
-  // defaults to "./src"
+  // defaults to './src'
   // Here the application starts executing
   // and webpack starts bundling
   [output](/configuration/output): {

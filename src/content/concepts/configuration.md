@@ -47,7 +47,7 @@ module.exports = {
 };
 ```
 
-_See_: [Configuration section](/configuration) for the all supported configuration options
+_See_: [Configuration section](/configuration/) for the all supported configuration options
 
 ## Multiple Targets
 
