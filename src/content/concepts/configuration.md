@@ -8,7 +8,7 @@ contributors:
   - byzyk
 ---
 
-You may have noticed that few webpack configurations look exactly alike. This is because __webpack's configuration file is a JavaScript file that exports an object.__ This object is then processed by webpack based upon its defined properties.
+You may have noticed that few webpack configurations look exactly alike. This is because __webpack's configuration file is a JavaScript file that exports a webpack [configuration](/configuration/).__ This configuration is then processed by webpack based upon its defined properties.
 
 Because it's a standard Node.js CommonJS module, you __can do the following__:
 
@@ -28,7 +28,7 @@ While they are technically feasible, __the following practices should be avoided
 
 T> The most important part to take away from this document is that there are many different ways to format and style your webpack configuration. The key is to stick with something consistent that you and your team can understand and maintain.
 
-The following examples below describe how webpack's configuration object can be both expressive and configurable because _it is code_:
+The following examples below describe how webpack's configuration can be both expressive and configurable because _it is code_:
 
 ## Simple Configuration
 
@@ -51,7 +51,7 @@ _See_: [Configuration section](/configuration/) for the all supported configurat
 
 ## Multiple Targets
 
-Along with exporting a single configuration object/function, webpack can accept multiple configurations.
+Along with exporting a single configuration as an object, [function](/configuration/configuration-types/#exporting-a-function) or [Promise](/configuration/configuration-types/#exporting-a-promise), you can export multiple configurations.
 
 _See_: [Exporting multiple configurations](/configuration/configuration-types/#exporting-multiple-configurations)
 
