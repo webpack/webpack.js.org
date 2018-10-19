@@ -9,6 +9,7 @@ contributors:
   - sebastiandeutsch
   - tbroadley
   - byzyk
+  - numb86
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
