@@ -26,7 +26,7 @@ This index lists common terms used throughout the webpack ecosystem.
 
 - **Chunk**: This webpack-specific term is used internally to manage the bundling process. Bundles are composed out of chunks, of which there are several types (e.g. entry and child). Typically, _chunks_ directly correspond with the output _bundles_ however, there are some configurations that don't yield a one-to-one relationship.
 - [**Code Splitting**](/guides/code-splitting/): Refers to dividing your code into various bundles/chunks which you can then load on demand instead of loading a single bundle containing everything.
-- [**Configuration**](/concepts/configuration/): webpack config file is a plain old JavaScript file that exports an object. This object is then processed by webpack based upon its defined properties.
+- [**Configuration**](/concepts/configuration/): webpack config file is a plain old JavaScript file that exports an object. This object is then processed by webpack based upon it's defined properties.
 
 
 ## D
@@ -62,7 +62,7 @@ This index lists common terms used throughout the webpack ecosystem.
 ## M
 
 - [**Module**](/concepts/modules): Discrete chunks of functionality that provide a smaller surface area than a full program. Well-written modules provide solid abstractions and encapsulation boundaries which make up a coherent design and clear purpose.
-- [**Module Resolution**](/concepts/module-resolution/): A module can be required as a dependency from another module and a resolver is a library which helps in locating a module by its absolute path.. Modules are searched for inside all directories specified in `resolve.modules`.
+- [**Module Resolution**](/concepts/module-resolution/): A module can be required as a dependency from another module and a resolver is a library which helps in locating a module by it's absolute path.. Modules are searched for inside all directories specified in `resolve.modules`.
 
 
 ## N

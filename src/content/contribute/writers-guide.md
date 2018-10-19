@@ -32,7 +32,7 @@ related:
 Let's break these down:
 
 - `title`: The name of the article.
-- `sort`: The order of the article within its section.
+- `sort`: The order of the article within it's section.
 - `contributors`: A list of GitHub usernames who have contributed to this article.
 - `related`: Any related reading or useful examples.
 

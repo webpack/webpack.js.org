@@ -8,7 +8,7 @@ contributors:
   - EugeneHlushko
 ---
 
-A resolver is a library which helps in locating a module by its absolute path.
+A resolver is a library which helps in locating a module by it's absolute path.
 A module can be required as a dependency from another module as:
 
 ```js

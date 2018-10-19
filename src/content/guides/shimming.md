@@ -191,7 +191,7 @@ __webpack.config.js__
 
 ## Global Exports
 
-Let's say a library creates a global variable that it expects its consumers to use. We can add a small module to our setup to demonstrate this:
+Let's say a library creates a global variable that it expects it's consumers to use. We can add a small module to our setup to demonstrate this:
 
 __project__
 

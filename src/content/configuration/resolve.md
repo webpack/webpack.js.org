@@ -194,7 +194,7 @@ W> Using this will **override the default array**, meaning that webpack will no 
 
 `array`
 
-When importing from an npm package, e.g. `import * as D3 from "d3"`, this option will determine which fields in its `package.json` are checked. The default values will vary based upon the [`target`](/concepts/targets) specified in your webpack configuration.
+When importing from an npm package, e.g. `import * as D3 from "d3"`, this option will determine which fields in it's `package.json` are checked. The default values will vary based upon the [`target`](/concepts/targets) specified in your webpack configuration.
 
 When the `target` property is set to `webworker`, `web`, or left unspecified:
 
@@ -256,7 +256,7 @@ Tell webpack what directories should be searched when resolving modules.
 
 Absolute and relative paths can both be used, but be aware that they will behave a bit differently.
 
-A relative path will be scanned similarly to how Node scans for `node_modules`, by looking through the current directory as well as its ancestors (i.e. `./node_modules`, `../node_modules`, and on).
+A relative path will be scanned similarly to how Node scans for `node_modules`, by looking through the current directory as well as it's ancestors (i.e. `./node_modules`, `../node_modules`, and on).
 
 With an absolute path, it will only search in the given directory.
 

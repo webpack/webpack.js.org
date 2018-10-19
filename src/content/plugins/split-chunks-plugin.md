@@ -320,7 +320,7 @@ Why:
 - Condition 3: Number of parallel requests at the import calls is 2
 - Condition 4: Doesn't affect request at initial page load
 
-Putting the content of `helpers` into each chunk will result into its code being downloaded twice. By using a separate chunk this will only happen once. We pay the cost of an additional request, which could be considered a tradeoff. That's why there is a minimum size of 30kb.
+Putting the content of `helpers` into each chunk will result into it's code being downloaded twice. By using a separate chunk this will only happen once. We pay the cost of an additional request, which could be considered a tradeoff. That's why there is a minimum size of 30kb.
 
 ### Split Chunks: Example 1
 

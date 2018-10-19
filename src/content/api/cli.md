@@ -143,7 +143,7 @@ Invocation                               | Resulting environment
 `webpack --env.prod --env min`           | `[{ prod: true }, "min"]`
 `webpack --env.prod=foo --env.prod=bar`  | `{prod: [ "foo", "bar" ]}`
 
-T> See the [environment variables](/guides/environment-variables) guide for more information on its usage.
+T> See the [environment variables](/guides/environment-variables) guide for more information on it's usage.
 
 ### Config Options
 

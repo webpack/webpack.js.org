@@ -25,7 +25,7 @@ W> Keep in mind that this plugin will only be applied to [ES6 modules](/api/modu
 
 ## Optimization Bailouts
 
-As the article explains, webpack attempts to achieve partial scope hoisting. It will merge modules into a single scope but cannot do so in every case. If webpack cannot merge a module, the two alternatives are Prevent and Root. Prevent means the module must be in its own scope. Root means a new module group will be created. The following conditions determine the outcome:
+As the article explains, webpack attempts to achieve partial scope hoisting. It will merge modules into a single scope but cannot do so in every case. If webpack cannot merge a module, the two alternatives are Prevent and Root. Prevent means the module must be in it's own scope. Root means a new module group will be created. The following conditions determine the outcome:
 
 Condition                                     | Outcome
 --------------------------------------------- | --------

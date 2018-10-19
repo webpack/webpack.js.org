@@ -374,7 +374,7 @@ context('localeA').then(locale => {
 });
 ```
 
-The full list of available modes and its behavior is described in [`import()`](#import-) documentation.
+The full list of available modes and it's behavior is described in [`import()`](#import-) documentation.
 
 ### `require.include`
 

@@ -124,7 +124,7 @@ Take the case of rendering a template file with data specified via loader option
 - `apply-loader`: Executes the function with loader options and returns raw HTML.
 - `html-loader`: Accepts HTML and outputs a valid JavaScript module.
 
-T> The fact that loaders can be chained also means they don't necessarily have to output JavaScript. As long as the next loader in the chain can handle its output, the loader can return any type of module.
+T> The fact that loaders can be chained also means they don't necessarily have to output JavaScript. As long as the next loader in the chain can handle it's output, the loader can return any type of module.
 
 ### Modular
 

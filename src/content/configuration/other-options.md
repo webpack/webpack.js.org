@@ -58,7 +58,7 @@ module.exports = {
 };
 ```
 
-This will force webpack to exit its bundling process.
+This will force webpack to exit it's bundling process.
 
 
 ## `cache`

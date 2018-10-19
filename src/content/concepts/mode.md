@@ -11,7 +11,7 @@ related:
     url: https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js
 ---
 
-Providing the `mode` configuration option tells webpack to use its built-in optimizations accordingly.
+Providing the `mode` configuration option tells webpack to use it's built-in optimizations accordingly.
 
 `string`
 

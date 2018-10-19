@@ -8,7 +8,7 @@ contributors:
   - byzyk
 ---
 
-You may have noticed that few webpack configurations look exactly alike. This is because __webpack's configuration file is a JavaScript file that exports a webpack [configuration](/configuration/).__ This configuration is then processed by webpack based upon its defined properties.
+You may have noticed that few webpack configurations look exactly alike. This is because __webpack's configuration file is a JavaScript file that exports a webpack [configuration](/configuration/).__ This configuration is then processed by webpack based upon it's defined properties.
 
 Because it's a standard Node.js CommonJS module, you __can do the following__:
 

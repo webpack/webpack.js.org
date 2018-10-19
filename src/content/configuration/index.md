@@ -41,7 +41,7 @@ module.exports = {
   [mode](/concepts/mode): "development", // enabled useful tools for development
   [mode](/concepts/mode): "none", // no defaults
   </details>
-  // Chosen mode tells webpack to use its built-in optimizations accordingly.
+  // Chosen mode tells webpack to use it's built-in optimizations accordingly.
   <details><summary>[entry](/configuration/entry-context#entry): "./app/entry", // string | object | array</summary>
   [entry](/configuration/entry-context#entry): ["./app/entry1", "./app/entry2"],
   [entry](/configuration/entry-context#entry): {

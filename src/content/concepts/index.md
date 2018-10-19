@@ -19,13 +19,13 @@ contributors:
   - LukeMwila
 ---
 
-At its core, __webpack__ is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it internally builds a [dependency graph](/concepts/dependency-graph/) which maps every module your project needs and generates one or more _bundles_.
+At it's core, __webpack__ is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it internally builds a [dependency graph](/concepts/dependency-graph/) which maps every module your project needs and generates one or more _bundles_.
 
 T> Learn more about JavaScript modules and webpack modules [here](/concepts/modules).
 
 Since version 4.0.0, __webpack does not require a configuration file__ to bundle your project, nevertheless it is [incredibly configurable](/configuration) to better fit your needs.
 
-To get started you only need to understand its __Core Concepts__:
+To get started you only need to understand it's __Core Concepts__:
 
 - [Entry](#entry)
 - [Output](#output)
@@ -44,9 +44,9 @@ For a better understanding of the ideas behind module bundlers and how they work
 
 ## Entry
 
-An __entry point__ indicates which module webpack should use to begin building out its internal [dependency graph](/concepts/dependency-graph/). webpack will figure out which other modules and libraries that entry point depends on (directly and indirectly).
+An __entry point__ indicates which module webpack should use to begin building out it's internal [dependency graph](/concepts/dependency-graph/). webpack will figure out which other modules and libraries that entry point depends on (directly and indirectly).
 
-By default its value is `./src/index.js`, but you can specify a different (or multiple entry points) by configuring the __entry__ property in the [webpack configuration](/configuration). For example:
+By default it's value is `./src/index.js`, but you can specify a different (or multiple entry points) by configuring the __entry__ property in the [webpack configuration](/configuration). For example:
 
 __webpack.config.js__
 

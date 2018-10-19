@@ -16,7 +16,7 @@ In [modular programming](https://en.wikipedia.org/wiki/Modular_programming), dev
 Each module has a smaller surface area than a full program, making verification, debugging, and testing trivial.
 Well-written _modules_ provide solid abstractions and encapsulation boundaries, so that each module has a coherent design and a clear purpose within the overall application.
 
-Node.js has supported modular programming almost since its inception.
+Node.js has supported modular programming almost since it's inception.
 On the web, however, support for _modules_ has been slow to arrive.
 Multiple tools exist that support modular JavaScript on the web, with a variety of benefits and limitations.
 webpack builds on lessons learned from these systems and applies the concept of _modules_ to any file in your project.

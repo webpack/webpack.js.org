@@ -21,7 +21,7 @@ T> Options that are compatible with [webpack-dev-middleware](https://github.com/
 
 `object`
 
-This set of options is picked up by [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and can be used to change its behavior in various ways. Here's a simple example that gzips and serves everything from our `dist/` directory:
+This set of options is picked up by [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and can be used to change it's behavior in various ways. Here's a simple example that gzips and serves everything from our `dist/` directory:
 
 ```js
 var path = require('path');
@@ -601,7 +601,7 @@ Usage via the CLI
 webpack-dev-server --open
 ```
 
-If no browser is provided (as shown above), your default browser will be used. To specify a different browser, just pass its name:
+If no browser is provided (as shown above), your default browser will be used. To specify a different browser, just pass it's name:
 
 ```bash
 webpack-dev-server --open 'Google Chrome'
@@ -732,7 +732,7 @@ webpack-dev-server --port 8080
 
 Proxying some URLs can be useful when you have a separate API backend development server and you want to send API requests on the same domain.
 
-The dev-server makes use of the powerful [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) package. Check out its [documentation](https://github.com/chimurai/http-proxy-middleware#options) for more advanced usages. Note that some of `http-proxy-middleware`'s features do not require a `target` key, e.g. its `router` feature, but you will still need to include a `target` key in your config here, otherwise `webpack-dev-server` won't pass it along to `http-proxy-middleware`).
+The dev-server makes use of the powerful [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) package. Check out it's [documentation](https://github.com/chimurai/http-proxy-middleware#options) for more advanced usages. Note that some of `http-proxy-middleware`'s features do not require a `target` key, e.g. it's `router` feature, but you will still need to include a `target` key in your config here, otherwise `webpack-dev-server` won't pass it along to `http-proxy-middleware`).
 
 With a backend on `localhost:3000`, you can use this to enable proxying:
 

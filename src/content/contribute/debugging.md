@@ -22,7 +22,7 @@ When contributing to the core repo, writing a loader/plugin, or even just workin
 
 ## Stats
 
-Whether you want to sift through [this data](/api/stats) manually or use a tool to process it, the `stats` data can be extremely useful when debugging build issues. We won't go in depth here as there's an [entire page](/api/stats) dedicated to its contents, but know that you can use it to find the following information:
+Whether you want to sift through [this data](/api/stats) manually or use a tool to process it, the `stats` data can be extremely useful when debugging build issues. We won't go in depth here as there's an [entire page](/api/stats) dedicated to it's contents, but know that you can use it to find the following information:
 
 - The contents of every module.
 - The modules contained within every chunk.

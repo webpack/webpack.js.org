@@ -11,7 +11,7 @@ The `EnvironmentPlugin` is shorthand for using the [`DefinePlugin`](/plugins/def
 
 ## Usage
 
-The `EnvironmentPlugin` accepts either an array of keys or an object mapping its keys to their default values.
+The `EnvironmentPlugin` accepts either an array of keys or an object mapping it's keys to their default values.
 
 ```javascript
 new webpack.EnvironmentPlugin(['NODE_ENV', 'DEBUG']);

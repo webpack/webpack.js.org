@@ -12,7 +12,7 @@ related:
     url: /guides/hot-module-replacement
 ---
 
-If [Hot Module Replacement](/concepts/hot-module-replacement) has been enabled via the [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin), its interface will be exposed under the [`module.hot` property](/api/module-variables#module-hot-webpack-specific-). Typically, users will check to see if the interface is accessible, then begin working with it. As an example, here's how you might `accept` an updated module:
+If [Hot Module Replacement](/concepts/hot-module-replacement) has been enabled via the [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin), it's interface will be exposed under the [`module.hot` property](/api/module-variables#module-hot-webpack-specific-). Typically, users will check to see if the interface is accessible, then begin working with it. As an example, here's how you might `accept` an updated module:
 
 ``` js
 if (module.hot) {

@@ -16,7 +16,7 @@ Plugins expose the full potential of the webpack engine to third-party developer
 A plugin for webpack consists of
 
 - A named JavaScript function.
-- Defines `apply` method in its prototype.
+- Defines `apply` method in it's prototype.
 - Specifies an [event hook](/api/compiler-hooks/) to tap into.
 - Manipulates webpack internal instance specific data.
 - Invokes webpack provided callback after functionality is complete.
@@ -24,7 +24,7 @@ A plugin for webpack consists of
 ```javascript
 // A JavaScript class.
 class MyExampleWebpackPlugin {
-  // Define `apply` as its prototype method which is supplied with compiler as its argument
+  // Define `apply` as it's prototype method which is supplied with compiler as it's argument
   apply(compiler) {
     // Specify the event hook to attach to
     compiler.hooks.compile.tapAsync(
@@ -217,7 +217,7 @@ Various types of hooks supported are :-
     - Tapped into using `tap` method.
     - Called using `call( ... params)` method
 
-  Here each of the plugins are called one after the other with the arguments from the return value of the previous plugin. The plugin must take the order of its execution into account.
+  Here each of the plugins are called one after the other with the arguments from the return value of the previous plugin. The plugin must take the order of it's execution into account.
   It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. Hence at least 1 param must be supplied for waterfall hooks. This pattern is used in the Tapable instances which are related to the webpack templates like `ModuleTemplate`, `ChunkTemplate` etc.
 
 ### Asynchronous Hooks

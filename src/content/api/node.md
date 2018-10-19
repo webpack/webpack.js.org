@@ -76,7 +76,7 @@ The `hooks` property on a `Compiler` instance is used to register a plugin to
 any hook event in the `Compiler`'s lifecycle. The 
 [`WebpackOptionsDefaulter`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js)
 and [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js)
-utilities are used by webpack to configure its `Compiler` instance with all the
+utilities are used by webpack to configure it's `Compiler` instance with all the
 built-in plugins.
 
 The `run` method is then used to kickstart all compilation work. Upon
