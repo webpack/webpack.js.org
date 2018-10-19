@@ -184,16 +184,11 @@ With that said, let's run `npx webpack`, which will take our script at `src/inde
 ``` bash
 npx webpack
 
-Hash: dabab1bac2b940c1462b
-Version: webpack 4.12.0
-Time: 287ms
+...
 Built at: 13/06/2018 11:52:07
   Asset      Size  Chunks             Chunk Names
 main.js  70.4 KiB       0  [emitted]  main
-[1] (webpack)/buildin/module.js 497 bytes {0} [built]
-[2] (webpack)/buildin/global.js 489 bytes {0} [built]
-[3] ./src/index.js 216 bytes {0} [built]
-    + 1 hidden module
+...
 
 WARNING in configuration
 The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
@@ -249,16 +244,10 @@ Now, let's run the build again but instead using our new configuration file:
 ``` bash
 npx webpack --config webpack.config.js
 
-Hash: dabab1bac2b940c1462b
-Version: webpack 4.12.0
-Time: 283ms
-Built at: 13/06/2018 11:53:51
+...
   Asset      Size  Chunks             Chunk Names
 main.js  70.4 KiB       0  [emitted]  main
-[1] (webpack)/buildin/module.js 497 bytes {0} [built]
-[2] (webpack)/buildin/global.js 489 bytes {0} [built]
-[3] ./src/index.js 216 bytes {0} [built]
-    + 1 hidden module
+...
 
 WARNING in configuration
 The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
@@ -305,16 +294,10 @@ Now run the following command and see if your script alias works:
 ``` bash
 npm run build
 
-Hash: dabab1bac2b940c1462b
-Version: webpack 4.12.0
-Time: 278ms
-Built at: 13/06/2018 11:54:54
+...
   Asset      Size  Chunks             Chunk Names
 main.js  70.4 KiB       0  [emitted]  main
-[1] (webpack)/buildin/module.js 497 bytes {0} [built]
-[2] (webpack)/buildin/global.js 489 bytes {0} [built]
-[3] ./src/index.js 216 bytes {0} [built]
-    + 1 hidden module
+...
 
 WARNING in configuration
 The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.

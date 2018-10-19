@@ -2,6 +2,7 @@
 title: ProgressPlugin
 contributors:
   - elliottsj
+  - EugeneHlushko
 ---
 
 The `ProgressPlugin` provides a way to customize how progress is reported during a compilation.
@@ -19,10 +20,10 @@ const handler = (percentage, message, ...args) => {
 new webpack.ProgressPlugin(handler);
 ```
 
-* `handler` is a function which takes these arguments:
-    * `percentage`: a number between 0 and 1 indicating the completion percentage of the compilation.
-    * `message`: a short description of the currently-executing hook.
-    * `...args`: zero or more additional strings describing the current progress.
+- `handler` is a function which takes these arguments:
+- `percentage`: a number between 0 and 1 indicating the completion percentage of the compilation.
+- `message`: a short description of the currently-executing hook.
+- `...args`: zero or more additional strings describing the current progress.
 
 ## Supported Hooks
 
@@ -32,65 +33,65 @@ T> _Hooks marked with * allow plugins to report progress information using `repo
 
 **Compiler**
 
-* compilation
-* emit*
-* afterEmit*
-* done
+- compilation
+- emit*
+- afterEmit*
+- done
 
 **Compilation**
 
-* buildModule
-* failedModule
-* succeedModule
-* finishModules*
-* seal*
-* optimizeDependenciesBasic*
-* optimizeDependencies*
-* optimizeDependenciesAdvanced*
-* afterOptimizeDependencies*
-* optimize*
-* optimizeModulesBasic*
-* optimizeModules*
-* optimizeModulesAdvanced*
-* afterOptimizeModules*
-* optimizeChunksBasic*
-* optimizeChunks*
-* optimizeChunksAdvanced*
-* afterOptimizeChunks*
-* optimizeTree*
-* afterOptimizeTree*
-* optimizeChunkModulesBasic*
-* optimizeChunkModules*
-* optimizeChunkModulesAdvanced*
-* afterOptimizeChunkModules*
-* reviveModules*
-* optimizeModuleOrder*
-* advancedOptimizeModuleOrder*
-* beforeModuleIds*
-* moduleIds*
-* optimizeModuleIds*
-* afterOptimizeModuleIds*
-* reviveChunks*
-* optimizeChunkOrder*
-* beforeChunkIds*
-* optimizeChunkIds*
-* afterOptimizeChunkIds*
-* recordModules*
-* recordChunks*
-* beforeHash*
-* afterHash*
-* recordHash*
-* beforeModuleAssets*
-* beforeChunkAssets*
-* additionalChunkAssets*
-* record*
-* additionalAssets*
-* optimizeChunkAssets*
-* afterOptimizeChunkAssets*
-* optimizeAssets*
-* afterOptimizeAssets*
-* afterSeal*
+- buildModule
+- failedModule
+- succeedModule
+- finishModules*
+- seal*
+- optimizeDependenciesBasic*
+- optimizeDependencies*
+- optimizeDependenciesAdvanced*
+- afterOptimizeDependencies*
+- optimize*
+- optimizeModulesBasic*
+- optimizeModules*
+- optimizeModulesAdvanced*
+- afterOptimizeModules*
+- optimizeChunksBasic*
+- optimizeChunks*
+- optimizeChunksAdvanced*
+- afterOptimizeChunks*
+- optimizeTree*
+- afterOptimizeTree*
+- optimizeChunkModulesBasic*
+- optimizeChunkModules*
+- optimizeChunkModulesAdvanced*
+- afterOptimizeChunkModules*
+- reviveModules*
+- optimizeModuleOrder*
+- advancedOptimizeModuleOrder*
+- beforeModuleIds*
+- moduleIds*
+- optimizeModuleIds*
+- afterOptimizeModuleIds*
+- reviveChunks*
+- optimizeChunkOrder*
+- beforeChunkIds*
+- optimizeChunkIds*
+- afterOptimizeChunkIds*
+- recordModules*
+- recordChunks*
+- beforeHash*
+- afterHash*
+- recordHash*
+- beforeModuleAssets*
+- beforeChunkAssets*
+- additionalChunkAssets*
+- record*
+- additionalAssets*
+- optimizeChunkAssets*
+- afterOptimizeChunkAssets*
+- optimizeAssets*
+- afterOptimizeAssets*
+- afterSeal*
 
 ## Source
 
-* [`ProgressPlugin` source](https://github.com/webpack/webpack/blob/master/lib/ProgressPlugin.js)
+- [`ProgressPlugin` source](https://github.com/webpack/webpack/blob/master/lib/ProgressPlugin.js)

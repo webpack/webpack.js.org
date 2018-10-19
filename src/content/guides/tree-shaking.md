@@ -204,6 +204,7 @@ T> [ModuleConcatenationPlugin](/plugins/module-concatenation-plugin) is needed f
 So, what we've learned is that in order to take advantage of _tree shaking_, you must...
 
 - Use ES2015 module syntax (i.e. `import` and `export`).
+- Ensure no compilers transform your ES2015 module syntax into CommonJS modules (this is the default behavior of popular Babel preset @babel/preset-env - see [documentation](https://babeljs.io/docs/en/babel-preset-env#modules) for more details).
 - Add a `"sideEffects"` property to your project's `package.json` file.
 - Use [`production`](/concepts/mode/#mode-production) `mode` configuration option to enable [various optimizations](/concepts/mode/#usage) including minification and tree shaking.
 
