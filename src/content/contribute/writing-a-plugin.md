@@ -24,10 +24,10 @@ A plugin for webpack consists of
 ```javascript
 // A JavaScript class.
 class MyExampleWebpackPlugin {
-  // Define `apply` as it's prototype method which is supplied with compiler as it's argument
+  // Define `apply` as its prototype method which is supplied with compiler as its argument
   apply(compiler) {
     // Specify the event hook to attach to
-    compiler.hooks.compile.tapAsync(
+    compiler.hooks.emit.tapAsync(
       'MyExampleWebpackPlugin',
       (compilation, callback) => {
         console.log('This is an example plugin!');

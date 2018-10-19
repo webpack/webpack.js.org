@@ -495,7 +495,7 @@ The filename that is considered the index file.
 module.exports = {
   //...
   devServer: {
-    index: 'index.htm'
+    index: 'index.html'
   }
 };
 ```

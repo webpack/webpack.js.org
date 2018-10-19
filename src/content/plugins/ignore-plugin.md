@@ -4,12 +4,13 @@ contributors:
   - simon04
   - byzyk
   - DullReferenceException
+  - EugeneHlushko
 ---
 
 Prevent generation of modules for `import` or `require` calls matching the following regular expressions:
 
-* `requestRegExp` A RegExp to test the request against.
-* `contextRegExp` (optional) A RegExp to test the context (directory) against.
+- `requestRegExp` A RegExp to test the request against.
+- `contextRegExp` (optional) A RegExp to test the context (directory) against.
 
 ``` js
 new webpack.IgnorePlugin(requestRegExp, [contextRegExp]);

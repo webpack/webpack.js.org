@@ -9,6 +9,7 @@ contributors:
   - sebastiandeutsch
   - tbroadley
   - byzyk
+  - numb86
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
@@ -97,7 +98,7 @@ The following table explains other cases:
 
 ### `resolve.aliasFields`
 
-`string`
+`array`
 
 Specify a field, such as `browser`, to be parsed according to [this specification](https://github.com/defunctzombie/package-browser-field-spec). Default:
 
@@ -388,7 +389,7 @@ T> Note that you can use alias here and other features familiar from resolve. Fo
 
 `array`
 
-The extensions/suffixes which that are used when resolving loaders. Since version two, we [strongly recommend](/guides/migrating#automatic-loader-module-name-extension-removed) using the full name, e.g. `example-loader`, as much as possible for clarity. However, if you really wanted to exclude the `-loader` bit, i.e. just use `example`, you can use this option to do so:
+The extensions/suffixes which that are used when resolving loaders. Since version two, we [strongly recommend](/migrate/3/#automatic-loader-module-name-extension-removed) using the full name, e.g. `example-loader`, as much as possible for clarity. However, if you really wanted to exclude the `-loader` bit, i.e. just use `example`, you can use this option to do so:
 
 ```js
 module.exports = {
