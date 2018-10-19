@@ -60,29 +60,167 @@ This will force webpack to exit its bundling process.
 
 `boolean` `object`
 
-Cache the generated webpack modules and chunks to improve build speed. Caching is enabled by default while in watch mode. To disable caching simply pass:
+Cache the generated webpack modules and chunks to improve build speed. `cache` is set to `type: 'memory'` in [`development` mode](/concepts/mode/#mode-development) and disabled in [`production` mode](/concepts/mode/#mode-production). To disable caching simply pass `false`:
 
-```js
+__webpack.config.js__
+
+```javascript
 module.exports = {
   //...
   cache: false
 };
 ```
 
-If an object is passed, webpack will use this object for caching. Keeping a reference to this object will allow one to share the same cache between compiler calls:
+### `cache.type`
+
+`string: 'memory' | 'filesystem'`
+
+Sets the `cache` type to either in memory or on the file system. The `memory` option is very straightforward, it tells webpack to store cache in memory and doesn't allow additional configuration:
+
+__webpack.config.js__
 
 ```js
-let SharedCache = {};
+module.exports = {
+  //...
+  cache: {
+    type: 'memory'
+  }
+};
+```
+
+While setting `cache.type` to `filesystem` opens up more options for configuration.
+
+### `cache.cacheDirectory`
+
+`string`
+
+Base directory for the cache. Defaults to `node_modules/.cache/webpack`.
+
+`cache.cacheDirectory` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+
+__webpack.config.js__
+
+```javascript
+const path = require('path');
 
 module.exports = {
   //...
-  cache: SharedCache
+  cache: {
+    type: 'filesystem',
+    cacheDirectory: path.resolve(__dirname, '.temp_cache')
+  }
+};
+```
+
+### `cache.hashAlgorithm`
+
+`string`
+
+Algorithm used the hash generation. See [Node.js crypto](https://nodejs.org/api/crypto.html) for more details. Defaults to `ml4`.
+
+`cache.hashAlgorithm` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    hashAlgorithm: 'md4'
+  }
+};
+```
+
+### `cache.loglevel`
+
+`string: 'debug' | 'info' | 'warning'`
+
+`cache.loglevel` tells webpack how much of `cache` log info to display.
+
+- `'debug'`: all access and errors with stack trace
+- `'info'`: all access
+- `'warning'`: only failed serialization
+
+`cache.loglevel` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    loglevel: 'debug'
+  }
+};
+```
+
+### `cache.name`
+
+`string: 'default'`
+
+Name for the cache. Different names will lead to different coexisting caches. Defaults to `'default'`.
+
+`cache.name` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    name: 'AppBuildCache'
+  }
+};
+```
+
+### `cache.store`
+
+`string: 'idle' | 'background' | 'instant'`
+
+`cache.store` tells webpack when to store data on the file system. Defaults to `'idle'`.
+
+- `'idle'`: Store data when compiler is idle
+- `'background'`: Store data in background while compiling, but doen't block the compilation
+- `'instant'`: Store data when instantly. Blocks compilation until data is stored.
+
+`cache.store` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    store: 'background'
+  }
+};
+```
+
+### `cache.version`
+
+`string: ''`
+
+Version of the cache data. Different versions won't allow to reuse the cache and override existing content. Update the version when config changed in a way which doesn't allow to reuse cache. This will invalidate the cache. Defaults to `''`.
+
+`cache.version` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    version: 'your_version'
+  }
 };
 ```
 
 W> Don't share the cache between calls with different options.
-
-?> Elaborate on the warning and example - calls with different configuration options?
 
 
 ## `loader`
