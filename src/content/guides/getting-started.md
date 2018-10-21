@@ -99,8 +99,8 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "webpack": "^4.0.1",
-      "webpack-cli": "^2.0.9"
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
     },
     "dependencies": {}
   }
