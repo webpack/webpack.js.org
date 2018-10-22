@@ -10,6 +10,10 @@ This package allows transpiling JavaScript files using [Babel](https://github.co
 
 __Notes:__ Issues with the output should be reported on the babel [issue tracker](https://github.com/babel/babel/issues).
 
+## 中文文档
+
+<a href="https://babel.docschina.org" target="_blank" style="font-size: 24px;">Babel 中文文档 - 印记中文</a>
+
 ## 安装
 
 > webpack 3.x | babel-loader 8.x | babel 7.x
