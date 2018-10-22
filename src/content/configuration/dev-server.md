@@ -8,6 +8,7 @@ contributors:
   - charlespwd
   - orteth01
   - byzyk
+  - EugeneHlushko
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
