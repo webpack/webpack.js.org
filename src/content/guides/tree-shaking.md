@@ -14,6 +14,7 @@ contributors:
   - byzyk
   - pnevares
   - EugeneHlushko
+  - AnayaDesign
 related:
   - title: "webpack 4 beta — try it today!"
     url: https://medium.com/webpack/webpack-4-beta-try-it-today-6b1d27d7d7e2#9a67
@@ -88,8 +89,8 @@ __src/index.js__
 + import { cube } from './math.js';
 
   function component() {
--   var element = document.createElement('div');
-+   var element = document.createElement('pre');
+-   let element = document.createElement('div');
++   let element = document.createElement('pre');
 
 -   // Lodash, now imported by this script
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
