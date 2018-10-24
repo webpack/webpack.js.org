@@ -16,6 +16,7 @@ contributors:
   - caryli
   - xgirma
   - EugeneHlushko
+  - AnayaDesign
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -80,8 +81,8 @@ __index.js__
   import printMe from './print.js';
 
   function component() {
-    var element = document.createElement('div');
-    var btn = document.createElement('button');
+    let element = document.createElement('div');
+    let btn = document.createElement('button');
 
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
@@ -177,8 +178,8 @@ __index.js__
   import printMe from './print.js';
 
   function component() {
-    var element = document.createElement('div');
-    var btn = document.createElement('button');
+    let element = document.createElement('div');
+    let btn = document.createElement('button');
 
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
@@ -291,8 +292,8 @@ __index.js__
 + import './styles.css';
 
   function component() {
-    var element = document.createElement('div');
-    var btn = document.createElement('button');
+    let element = document.createElement('div');
+    let btn = document.createElement('button');
 
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
