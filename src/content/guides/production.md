@@ -17,6 +17,7 @@ contributors:
   - xgirma
   - mehrdaad
   - SevenOutman
+  - AnayaDesign
 ---
 
 In this guide we'll dive into some of the best practices and utilities for building a production site or application.
@@ -177,7 +178,7 @@ __src/index.js__
 + }
 
   function component() {
-    var element = document.createElement('pre');
+    let element = document.createElement('pre');
 
     element.innerHTML = [
       'Hello webpack!',
