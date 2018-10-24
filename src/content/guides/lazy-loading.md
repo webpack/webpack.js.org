@@ -7,6 +7,7 @@ contributors:
   - skipjack
   - byzyk
   - EugeneHlushko
+  - AnayaDesign
 related:
   - title: Lazy Loading ES2015 Modules in the Browser
     url: https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser
@@ -53,10 +54,10 @@ __src/index.js__
 +
 - async function getComponent() {
 + function component() {
-    var element = document.createElement('div');
+    let element = document.createElement('div');
 -   const _ = await import(/* webpackChunkName: "lodash" */ 'lodash');
-+   var button = document.createElement('button');
-+   var br = document.createElement('br');
++   let button = document.createElement('button');
++   let br = document.createElement('br');
 
 +   button.innerHTML = 'Click me and look at the console!';
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -66,7 +67,7 @@ __src/index.js__
 +   // Note that because a network request is involved, some indication
 +   // of loading would need to be shown in a production-level site/app.
 +   button.onclick = e => import(/* webpackChunkName: "print" */ './print').then(module => {
-+     var print = module.default;
++     let print = module.default;
 +
 +     print();
 +   });
