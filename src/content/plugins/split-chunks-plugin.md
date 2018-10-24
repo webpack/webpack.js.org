@@ -265,7 +265,7 @@ module.exports = {
 Allows to override the filename when and only when it's an initial chunk.
 All placeholders available in [`output.filename`](/configuration/output/#output-filename) are also available here.
 
-W> This option can also be set globally in `splitChunks.filename`, but this isn't recommended and will very likely lead to an error if [`splitChunks.chunks`](#splitchunks-chunks) is not set to `'initial'`. Avoid setting it globally.
+W> This option can also be set globally in `splitChunks.filename`, but this isn't recommended and will likely lead to an error if [`splitChunks.chunks`](#splitchunks-chunks) is not set to `'initial'`. Avoid setting it globally.
 
 __webpack.config.js__
 
