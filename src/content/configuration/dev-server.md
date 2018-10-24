@@ -624,7 +624,7 @@ module.exports = {
 
 `boolean` `string`
 
-Tells dev-server to open the browser after server had been started. Disabled by default. 
+Tells dev-server to open the browser after server had been started. Disabled by default.
 
 __webpack.config.js__
 
@@ -651,7 +651,7 @@ __webpack.config.js__
 module.exports = {
   //...
   devServer: {
-    open: 'Google Chrome'
+    open: 'Chrome'
   }
 };
 ```
@@ -659,8 +659,10 @@ module.exports = {
 And via the CLI
 
 ```bash
-webpack-dev-server --open 'Google Chrome'
+webpack-dev-server --open 'Chrome'
 ```
+
+T> The browser application name is platform dependent. Don't hard code it in reusable modules. For example, `'Chrome'` is google chrome on macOS, `'google-chrome'` on Linux and `'chrome'` on Windows.
 
 
 ## `devServer.openPage`
