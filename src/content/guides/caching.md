@@ -10,6 +10,7 @@ contributors:
   - afontcu
   - saiprasad2595
   - EugeneHlushko
+  - AnayaDesign
 related:
   - title: Issue 652
     url: https://github.com/webpack/webpack.js.org/issues/652
@@ -216,7 +217,7 @@ __src/index.js__
 + import Print from './print';
 
   function component() {
-    var element = document.createElement('div');
+    let element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -307,7 +308,7 @@ __src/index.js__
 + // import Print from './print';
 
   function component() {
-    var element = document.createElement('div');
+    let element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
