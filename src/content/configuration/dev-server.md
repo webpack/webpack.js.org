@@ -26,7 +26,7 @@ This set of options is picked up by [webpack-dev-server](https://github.com/webp
 
 __webpack.config.js__
 
-```jsavascript
+```javascript
 var path = require('path');
 
 module.exports = {
