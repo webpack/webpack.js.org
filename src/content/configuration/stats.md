@@ -180,6 +180,27 @@ module.exports = {
 }
 ```
 
+If you want to use one of the pre-defined behaviours e.g. `'minimal'` but still override one or more of the rules, see [the source code](https://github.com/webpack/webpack/blob/master/lib/Stats.js#L1394-L1401). You would want to copy the configuration options from `case 'minimal': ...` and add your additional rules while providing an object to `stats`.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //..
+  stats: {
+    // copied from `'minimal'`
+    all: false,
+    modules: true,
+    maxModules: 0,
+    errors: true,
+    warnings: true,
+    // our additional options
+    moduleTrace: true,
+    errorDetails: true
+  }
+};
+```
+
 ### Sorting fields
 
 For `assetsSort`, `chunksSort` and `moduleSort` there are several possible fields that you can sort items by:
