@@ -1,6 +1,7 @@
 ---
 title: Internal webpack plugins
 contributors:
+  - iAziz786
   - EugeneHlushko
   - ooflorent
   - Legends
@@ -320,9 +321,9 @@ Minimizes the chunks with `uglify.js`.
 
 `options` are uglifyjs options.
 
-### OccurenceOrderPlugin
+### OccurrenceOrderPlugin
 
-`optimize/OccurenceOrderPlugin(preferEntry)`
+`optimize/OccurrenceOrderPlugin(preferEntry)`
 
 Order the modules and chunks by occurrence. This saves space, because often referenced modules and chunks get smaller ids.
 
