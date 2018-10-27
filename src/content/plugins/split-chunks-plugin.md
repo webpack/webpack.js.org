@@ -87,7 +87,7 @@ By default webpack will generate names using origin and name of the chunk (e.g. 
 
 ### `splitChunks.chunks`
 
-`function | string`
+`function (chunk) | string`
 
 This indicates which chunks will be selected for optimization. When a string is provided, valid values are `all`, `async`, and `initial`. Providing `all` can be particularly powerful, because it means that chunks can be shared even between async and non-async chunks.
 
@@ -162,7 +162,7 @@ T> `maxSize` takes higher priority than `maxInitialRequest/maxAsyncRequests`. Ac
 
 ### `splitChunks.name`
 
-`boolean: true | function | string`
+`boolean: true | function (module) | string`
 
 The name of the split chunk. Providing `true` will automatically generate a name based on chunks and cache group key. Providing a string or function will allow you to use a custom name. If the name matches an entry point name, the entry point will be removed.
 
@@ -234,7 +234,7 @@ module.exports = {
 
 #### `splitChunks.cacheGroups.{cacheGroup}.test`
 
-`function | RegExp | string`
+`function (module, chunk) | RegExp | string`
 
 Controls which modules are selected by this cache group. Omitting it selects all modules. It can match the absolute module resource path or chunk names. When a chunk name is matched, all modules in the chunk are selected.
 
@@ -251,6 +251,32 @@ module.exports = {
             //...
             return module.type === 'javascript/auto';
           }
+        }
+      }
+    }
+  }
+};
+```
+
+#### `splitChunks.cacheGroups.{cacheGroup}.filename`
+
+`string`
+
+Allows to override the filename when and only when it's an initial chunk.
+All placeholders available in [`output.filename`](/configuration/output/#output-filename) are also available here.
+
+W> This option can also be set globally in `splitChunks.filename`, but this isn't recommended and will likely lead to an error if [`splitChunks.chunks`](#splitchunks-chunks) is not set to `'initial'`. Avoid setting it globally.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          filename: '[name].bundle.js'
         }
       }
     }

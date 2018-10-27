@@ -99,8 +99,8 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "webpack": "^4.0.1",
-      "webpack-cli": "^2.0.9"
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
     },
     "dependencies": {}
   }
@@ -211,7 +211,7 @@ Note that webpack will not alter any code other than `import` and `export` state
 
 ## Using a Configuration
 
-As of version 4, webpack doesn't require any configuration, but most projects will need a more complex setup, which is why webpack supports a [configuration file](/concepts/configuration). This is much more efficient than having to manually type in a lot of commands in the terminal, so let's create one to replace the CLI line options used above:
+As of version 4, webpack doesn't require any configuration, but most projects will need a more complex setup, which is why webpack supports a [configuration file](/concepts/configuration). This is much more efficient than having to manually type in a lot of commands in the terminal, so let's create one:
 
 __project__
 
@@ -278,8 +278,8 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "webpack": "^4.0.1",
-      "webpack-cli": "^2.0.9"
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
     },
     "dependencies": {
       "lodash": "^4.17.5"
