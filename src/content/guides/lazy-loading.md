@@ -54,10 +54,10 @@ __src/index.js__
 +
 - async function getComponent() {
 + function component() {
-    let element = document.createElement('div');
+    const element = document.createElement('div');
 -   const _ = await import(/* webpackChunkName: "lodash" */ 'lodash');
-+   let button = document.createElement('button');
-+   let br = document.createElement('br');
++   const button = document.createElement('button');
++   const br = document.createElement('br');
 
 +   button.innerHTML = 'Click me and look at the console!';
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -67,7 +67,7 @@ __src/index.js__
 +   // Note that because a network request is involved, some indication
 +   // of loading would need to be shown in a production-level site/app.
 +   button.onclick = e => import(/* webpackChunkName: "print" */ './print').then(module => {
-+     let print = module.default;
++     const print = module.default;
 +
 +     print();
 +   });

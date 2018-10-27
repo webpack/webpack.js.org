@@ -81,8 +81,8 @@ __index.js__
   import printMe from './print.js';
 
   function component() {
-    let element = document.createElement('div');
-    let btn = document.createElement('button');
+    const element = document.createElement('div');
+    const btn = document.createElement('button');
 
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
@@ -178,8 +178,8 @@ __index.js__
   import printMe from './print.js';
 
   function component() {
-    let element = document.createElement('div');
-    let btn = document.createElement('button');
+    const element = document.createElement('div');
+    const btn = document.createElement('button');
 
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
@@ -192,7 +192,7 @@ __index.js__
   }
 
 - document.body.appendChild(component());
-+ let element = component(); // Store the element to re-render on print.js changes
++ const element = component(); // Store the element to re-render on print.js changes
 + document.body.appendChild(element);
 
   if (module.hot) {
@@ -292,8 +292,8 @@ __index.js__
 + import './styles.css';
 
   function component() {
-    let element = document.createElement('div');
-    let btn = document.createElement('button');
+    const element = document.createElement('div');
+    const btn = document.createElement('button');
 
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
@@ -305,7 +305,7 @@ __index.js__
     return element;
   }
 
-  let element = component();
+  const element = component();
   document.body.appendChild(element);
 
   if (module.hot) {

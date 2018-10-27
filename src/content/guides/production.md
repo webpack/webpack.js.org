@@ -178,7 +178,7 @@ __src/index.js__
 + }
 
   function component() {
-    let element = document.createElement('pre');
+    const element = document.createElement('pre');
 
     element.innerHTML = [
       'Hello webpack!',

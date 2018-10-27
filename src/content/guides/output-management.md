@@ -50,8 +50,8 @@ __src/index.js__
 + import printMe from './print.js';
 
   function component() {
-    let element = document.createElement('div');
-+   let btn = document.createElement('button');
+    const element = document.createElement('div');
++   const btn = document.createElement('button');
 
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 

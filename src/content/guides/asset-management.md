@@ -106,7 +106,7 @@ __src/index.js__
 + import './style.css';
 
   function component() {
-    let element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -202,14 +202,14 @@ __src/index.js__
 + import Icon from './icon.png';
 
   function component() {
-    let element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
     element.classList.add('hello');
 
 +   // Add the image to our existing div.
-+   var myIcon = new Image();
++   const myIcon = new Image();
 +   myIcon.src = Icon;
 +
 +   element.appendChild(myIcon);
@@ -448,14 +448,14 @@ __src/index.js__
 + import Data from './data.xml';
 
   function component() {
-    let element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
     element.classList.add('hello');
 
     // Add the image to our existing div.
-    var myIcon = new Image();
+    const myIcon = new Image();
     myIcon.src = Icon;
 
     element.appendChild(myIcon);
@@ -573,14 +573,14 @@ __src/index.js__
 - import Data from './data.xml';
 -
   function component() {
-    let element = document.createElement('div');
+    const element = document.createElement('div');
 -
 -   // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 -   element.classList.add('hello');
 -
 -   // Add the image to our existing div.
--   var myIcon = new Image();
+-   const myIcon = new Image();
 -   myIcon.src = Icon;
 -
 -   element.appendChild(myIcon);

@@ -54,7 +54,7 @@ __src/index.js__
 - import _ from 'lodash';
 -
   function component() {
-    let element = document.createElement('div');
+    const element = document.createElement('div');
 
 -   // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -105,7 +105,7 @@ __src/index.js__
 
 ``` diff
   function component() {
-    let element = document.createElement('div');
+    const element = document.createElement('div');
 
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +   element.innerHTML = join(['Hello', 'webpack'], ' ');
@@ -146,7 +146,7 @@ Some legacy modules rely on `this` being the `window` object. Let's update our `
 
 ``` diff
   function component() {
-    let element = document.createElement('div');
+    const element = document.createElement('div');
 
     element.innerHTML = join(['Hello', 'webpack'], ' ');
 +
@@ -210,8 +210,8 @@ __project__
 __src/globals.js__
 
 ``` js
-var file = 'blah.txt';
-var helpers = {
+const file = 'blah.txt';
+const helpers = {
   test: function() { console.log('test something'); },
   parse: function() { console.log('parse something'); }
 };
@@ -273,7 +273,7 @@ __src/index.js__
 + import 'babel-polyfill';
 +
   function component() {
-    let element = document.createElement('div');
+    const element = document.createElement('div');
 
     element.innerHTML = join(['Hello', 'webpack'], ' ');
 
@@ -299,7 +299,7 @@ __src/index.js__
 - import 'babel-polyfill';
 -
   function component() {
-    let element = document.createElement('div');
+    const element = document.createElement('div');
 
     element.innerHTML = join(['Hello', 'webpack'], ' ');
 
@@ -377,13 +377,13 @@ __dist/index.html__
     <head>
       <title>Getting Started</title>
 +     <script>
-+       var modernBrowser = (
++       const modernBrowser = (
 +         'fetch' in window &&
 +         'assign' in Object
 +       );
 +
 +       if ( !modernBrowser ) {
-+         var scriptElement = document.createElement('script');
++         const scriptElement = document.createElement('script');
 +
 +         scriptElement.async = false;
 +         scriptElement.src = '/polyfills.bundle.js';
@@ -403,7 +403,7 @@ __src/index.js__
 
 ``` diff
   function component() {
-    let element = document.createElement('div');
+    const element = document.createElement('div');
 
     element.innerHTML = join(['Hello', 'webpack'], ' ');
 
