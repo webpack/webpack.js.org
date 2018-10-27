@@ -836,9 +836,11 @@ module.exports = {
   }
 };
 ```
-The origin of the host header is kept when proxying by default, you can set `changeOrigin` to `true` to override it, this is useful in some situations like using [name-based virtual hosted sites](https://en.wikipedia.org/wiki/Virtual_hosting#Name-based).
+The origin of the host header is kept when proxying by default, you can set `changeOrigin` to `true` to override this behaviour.It is useful in some cases like using [name-based virtual hosted sites](https://en.wikipedia.org/wiki/Virtual_hosting#Name-based).
 
-```js
+__webpack.config.js__
+
+```javascript
 module.exports = {
   //...
   devServer: {
