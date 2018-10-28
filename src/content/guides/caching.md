@@ -9,6 +9,7 @@ contributors:
   - fadysamirsadek
   - afontcu
   - saiprasad2595
+  - EugeneHlushko
 related:
   - title: Issue 652
     url: https://github.com/webpack/webpack.js.org/issues/652
@@ -66,41 +67,21 @@ __webpack.config.js__
 Running our build script, `npm run build`, with this configuration should produce the following output:
 
 ``` bash
-Hash: f7a289a94c5e4cd1e566
-Version: webpack 3.5.1
-Time: 835ms
+...
                        Asset       Size  Chunks                    Chunk Names
 main.7e2c49a622975ebd9b7e.js     544 kB       0  [emitted]  [big]  main
                   index.html  197 bytes          [emitted]
-   [0] ./src/index.js 216 bytes {0} [built]
-   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
-    + 1 hidden module
-Child html-webpack-plugin for "index.html":
-     1 asset
-       [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-       [3] (webpack)/buildin/module.js 517 bytes {0} [built]
-        + 2 hidden modules
+...
 ```
 
 As you can see the bundle's name now reflects its content (via the hash). If we run another build without making any changes, we'd expect that filename to stay the same. However, if we were to run it again, we may find that this is not the case:
 
 ``` bash
-Hash: f7a289a94c5e4cd1e566
-Version: webpack 3.5.1
-Time: 835ms
+...
                        Asset       Size  Chunks                    Chunk Names
 main.205199ab45963f6a62ec.js     544 kB       0  [emitted]  [big]  main
                   index.html  197 bytes          [emitted]
-   [0] ./src/index.js 216 bytes {0} [built]
-   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
-    + 1 hidden module
-Child html-webpack-plugin for "index.html":
-     1 asset
-       [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-       [3] (webpack)/buildin/module.js 517 bytes {0} [built]
-        + 2 hidden modules
+...
 ```
 
 This is because webpack includes certain boilerplate, specifically the runtime and manifest, in the entry chunk.
@@ -192,18 +173,13 @@ __webpack.config.js__
 Let's run another build to see our new `vendor` bundle:
 
 ``` bash
-Hash: 213f57fc3bb5cb47c719
-Version: webpack 4.12.0
-Time: 475ms
+...
                           Asset       Size  Chunks             Chunk Names
 runtime.cc17ae2a94ec771e9221.js   1.42 KiB       0  [emitted]  runtime
 vendors.a42c3ca0d742766d7a28.js   69.4 KiB       1  [emitted]  vendors
    main.abf44fedb7d11d4312d7.js  240 bytes       2  [emitted]  main
                      index.html  353 bytes          [emitted]
-[1] (webpack)/buildin/module.js 497 bytes {1} [built]
-[2] (webpack)/buildin/global.js 489 bytes {1} [built]
-[3] ./src/index.js 309 bytes {2} [built]
-    + 1 hidden module
+...
 ```
 
 We can now see that our `main` bundle does not contain `vendor` code from `node_modules` directory and is down in size to `240 bytes`!
@@ -255,20 +231,13 @@ __src/index.js__
 Running another build, we would expect only our `main` bundle's hash to change, however...
 
 ``` bash
-Hash: d38a06644fdbb898d795
-Version: webpack 3.3.0
-Time: 1445ms
+...
                            Asset       Size  Chunks                    Chunk Names
   vendor.a7561fb0e9a071baadb9.js     541 kB       0  [emitted]  [big]  vendor
     main.b746e3eb72875af2caa9.js    1.22 kB       1  [emitted]         main
 manifest.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         manifest
                       index.html  352 bytes          [emitted]
-   [1] ./src/index.js 421 bytes {1} [built]
-   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [3] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [4] ./src/print.js 62 bytes {1} [built]
-   [5] multi lodash 28 bytes {0} [built]
-    + 1 hidden module
+...
 ```
 
 ... we can see that all three have. This is because each [`module.id`](/api/module-variables#module-id-commonjs-) is incremented based on resolving order by default. Meaning when the order of resolving is changed, the IDs will be changed as well. So, to recap:
@@ -318,27 +287,14 @@ __webpack.config.js__
 Now, despite any new local dependencies, our `vendor` hash should stay consistent between builds:
 
 ``` bash
-Hash: 17c37ce65c84b8ed5eb8
-Version: webpack 4.16.2
-Time: 637ms
+...
                           Asset       Size  Chunks             Chunk Names
    main.216e852f60c8829c2289.js  340 bytes       0  [emitted]  main
 vendors.55e79e5927a639d21a1b.js   69.5 KiB       1  [emitted]  vendors
 runtime.725a1a51ede5ae0cfde0.js   1.42 KiB       2  [emitted]  runtime
                      index.html  353 bytes          [emitted]
 Entrypoint main = runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.js main.216e852f60c8829c2289.js
-[YuTi] (webpack)/buildin/module.js 497 bytes {1} [built]
-[tjUo] ./src/index.js + 1 modules 408 bytes {0} [built]
-    | ./src/index.js 341 bytes [built]
-    | ./src/print.js 62 bytes [built]
-[yLpj] (webpack)/buildin/global.js 489 bytes {1} [built]
-    + 1 hidden module
-Child html-webpack-plugin for "index.html":
-     1 asset
-    Entrypoint undefined = index.html
-    [YuTi] (webpack)/buildin/module.js 497 bytes {0} [built]
-    [yLpj] (webpack)/buildin/global.js 489 bytes {0} [built]
-        + 2 hidden modules
+...
 ```
 
 And let's modify our `src/index.js` to temporarily remove that extra dependency:
@@ -367,25 +323,14 @@ __src/index.js__
 And finally run our build again:
 
 ``` bash
-Hash: 70fb9e00dee0bada797d
-Version: webpack 4.16.2
-Time: 875ms
+...
                           Asset       Size  Chunks             Chunk Names
    main.ad717f2466ce655fff5c.js  274 bytes       0  [emitted]  main
 vendors.55e79e5927a639d21a1b.js   69.5 KiB       1  [emitted]  vendors
 runtime.725a1a51ede5ae0cfde0.js   1.42 KiB       2  [emitted]  runtime
                      index.html  353 bytes          [emitted]
 Entrypoint main = runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.js main.ad717f2466ce655fff5c.js
-[YuTi] (webpack)/buildin/module.js 497 bytes {1} [built]
-[tjUo] ./src/index.js 347 bytes {0} [built]
-[yLpj] (webpack)/buildin/global.js 489 bytes {1} [built]
-    + 1 hidden module
-Child html-webpack-plugin for "index.html":
-     1 asset
-    Entrypoint undefined = index.html
-    [YuTi] (webpack)/buildin/module.js 497 bytes {0} [built]
-    [yLpj] (webpack)/buildin/global.js 489 bytes {0} [built]
-        + 2 hidden modules
+...
 ```
 
 We can see that both builds yielded `55e79e5927a639d21a1b` in the `vendor` bundle's filename.

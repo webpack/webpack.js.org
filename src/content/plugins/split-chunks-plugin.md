@@ -30,10 +30,10 @@ By default it only affects on-demand chunks, because changing initial chunks wou
 
 webpack will automatically split chunks based on these conditions:
 
-* New chunk can be shared OR modules are from the `node_modules` folder
-* New chunk would be bigger than 30kb (before min+gz)
-* Maximum number of parallel requests when loading chunks on demand would be lower or equal to 5
-* Maximum number of parallel requests at initial page load would be lower or equal to 3
+- New chunk can be shared OR modules are from the `node_modules` folder
+- New chunk would be bigger than 30kb (before min+gz)
+- Maximum number of parallel requests when loading chunks on demand would be lower or equal to 5
+- Maximum number of parallel requests at initial page load would be lower or equal to 3
 
 When trying to fulfill the last two conditions, bigger chunks are preferred.
 
@@ -46,6 +46,8 @@ W> The default configuration was chosen to fit web performance best practices, b
 ## `optimization.splitChunks`
 
 This configuration object represents the default behavior of the `SplitChunksPlugin`.
+
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -85,9 +87,11 @@ By default webpack will generate names using origin and name of the chunk (e.g. 
 
 ### `splitChunks.chunks`
 
-`function` `string`
+`function (chunk) | string`
 
 This indicates which chunks will be selected for optimization. When a string is provided, valid values are `all`, `async`, and `initial`. Providing `all` can be particularly powerful, because it means that chunks can be shared even between async and non-async chunks.
+
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -158,9 +162,11 @@ T> `maxSize` takes higher priority than `maxInitialRequest/maxAsyncRequests`. Ac
 
 ### `splitChunks.name`
 
-`boolean: true` `function` `string`
+`boolean: true | function (module) | string`
 
 The name of the split chunk. Providing `true` will automatically generate a name based on chunks and cache group key. Providing a string or function will allow you to use a custom name. If the name matches an entry point name, the entry point will be removed.
+
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -181,6 +187,8 @@ W> When assigning equal names to different split chunks, all vendor modules are 
 ### `splitChunks.cacheGroups`
 
 Cache groups can inherit and/or override any options from `splitChunks.*`; but `test`, `priority` and `reuseExistingChunk` can only be configured on cache group level. To disable any of the default cache groups, set them to `false`.
+
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -207,6 +215,8 @@ A module can belong to multiple cache groups. The optimization will prefer the c
 
 If the current chunk contains modules already split out from the main bundle, it will be reused instead of a new one being generated. This can impact the resulting file name of the chunk.
 
+__webpack.config.js__
+
 ```js
 module.exports = {
   //...
@@ -222,11 +232,13 @@ module.exports = {
 };
 ```
 
-#### `splitChunks.cacheGroups.test`
+#### `splitChunks.cacheGroups.{cacheGroup}.test`
 
-`function` `RegExp` `string`
+`function (module, chunk) | RegExp | string`
 
 Controls which modules are selected by this cache group. Omitting it selects all modules. It can match the absolute module resource path or chunk names. When a chunk name is matched, all modules in the chunk are selected.
+
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -235,10 +247,36 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         vendors: {
-          test (chunks) {
+          test (module, chunks) {
             //...
-            return true;
+            return module.type === 'javascript/auto';
           }
+        }
+      }
+    }
+  }
+};
+```
+
+#### `splitChunks.cacheGroups.{cacheGroup}.filename`
+
+`string`
+
+Allows to override the filename when and only when it's an initial chunk.
+All placeholders available in [`output.filename`](/configuration/output/#output-filename) are also available here.
+
+W> This option can also be set globally in `splitChunks.filename`, but this isn't recommended and will likely lead to an error if [`splitChunks.chunks`](#splitchunks-chunks) is not set to `'initial'`. Avoid setting it globally.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          filename: '[name].bundle.js'
         }
       }
     }
@@ -263,14 +301,14 @@ import 'react';
 //...
 ```
 
-**Result:** A separate chunk would be created containing `react`. At the import call this chunk is loaded in parallel to the original chunk containing `./a`.
+__Result:__ A separate chunk would be created containing `react`. At the import call this chunk is loaded in parallel to the original chunk containing `./a`.
 
 Why:
 
-* Condition 1: The chunk contains modules from `node_modules`
-* Condition 2: `react` is bigger than 30kb
-* Condition 3: Number of parallel requests at the import call is 2
-* Condition 4: Doesn't affect request at initial page load
+- Condition 1: The chunk contains modules from `node_modules`
+- Condition 2: `react` is bigger than 30kb
+- Condition 3: Number of parallel requests at the import call is 2
+- Condition 4: Doesn't affect request at initial page load
 
 What's the reasoning behind this? `react` probably won't change as often as your application code. By moving it into a separate chunk this chunk can be cached separately from your app code (assuming you are using chunkhash, records, Cache-Control or other long term cache approach).
 
@@ -299,14 +337,14 @@ import './more-helpers'; // more-helpers is also 40kb in size
 //...
 ```
 
-**Result:** A separate chunk would be created containing `./helpers` and all dependencies of it. At the import calls this chunk is loaded in parallel to the original chunks.
+__Result:__ A separate chunk would be created containing `./helpers` and all dependencies of it. At the import calls this chunk is loaded in parallel to the original chunks.
 
 Why:
 
-* Condition 1: The chunk is shared between both import calls
-* Condition 2: `helpers` is bigger than 30kb
-* Condition 3: Number of parallel requests at the import calls is 2
-* Condition 4: Doesn't affect request at initial page load
+- Condition 1: The chunk is shared between both import calls
+- Condition 2: `helpers` is bigger than 30kb
+- Condition 3: Number of parallel requests at the import calls is 2
+- Condition 4: Doesn't affect request at initial page load
 
 Putting the content of `helpers` into each chunk will result into its code being downloaded twice. By using a separate chunk this will only happen once. We pay the cost of an additional request, which could be considered a tradeoff. That's why there is a minimum size of 30kb.
 
@@ -315,7 +353,6 @@ Putting the content of `helpers` into each chunk will result into its code being
 Create a `commons` chunk, which includes all code shared between entry points.
 
 __webpack.config.js__
-
 
 ```js
 module.exports = {
@@ -341,7 +378,6 @@ W> This configuration can enlarge your initial bundles, it is recommended to use
 Create a `vendors` chunk, which includes all code from `node_modules` in the whole application.
 
 __webpack.config.js__
-
 
 ```js
 module.exports = {

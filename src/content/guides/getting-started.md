@@ -99,8 +99,8 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "webpack": "^4.0.1",
-      "webpack-cli": "^2.0.9"
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
     },
     "dependencies": {}
   }
@@ -186,16 +186,11 @@ The `npx` command, which ships with Node 8.2/npm 5.2.0 or higher, runs the webpa
 ``` bash
 npx webpack
 
-Hash: dabab1bac2b940c1462b
-Version: webpack 4.12.0
-Time: 287ms
+...
 Built at: 13/06/2018 11:52:07
   Asset      Size  Chunks             Chunk Names
 main.js  70.4 KiB       0  [emitted]  main
-[1] (webpack)/buildin/module.js 497 bytes {0} [built]
-[2] (webpack)/buildin/global.js 489 bytes {0} [built]
-[3] ./src/index.js 216 bytes {0} [built]
-    + 1 hidden module
+...
 
 WARNING in configuration
 The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
@@ -218,7 +213,7 @@ Note that webpack will not alter any code other than `import` and `export` state
 
 ## Using a Configuration
 
-As of version 4, webpack doesn't require any configuration, but most projects will need a more complex setup, which is why webpack supports a [configuration file](/concepts/configuration). This is much more efficient than having to manually type in a lot of commands in the terminal, so let's create one to replace the CLI line options used above:
+As of version 4, webpack doesn't require any configuration, but most projects will need a more complex setup, which is why webpack supports a [configuration file](/concepts/configuration). This is much more efficient than having to manually type in a lot of commands in the terminal, so let's create one:
 
 __project__
 
@@ -251,16 +246,10 @@ Now, let's run the build again but instead using our new configuration file:
 ``` bash
 npx webpack --config webpack.config.js
 
-Hash: dabab1bac2b940c1462b
-Version: webpack 4.12.0
-Time: 283ms
-Built at: 13/06/2018 11:53:51
+...
   Asset      Size  Chunks             Chunk Names
 main.js  70.4 KiB       0  [emitted]  main
-[1] (webpack)/buildin/module.js 497 bytes {0} [built]
-[2] (webpack)/buildin/global.js 489 bytes {0} [built]
-[3] ./src/index.js 216 bytes {0} [built]
-    + 1 hidden module
+...
 
 WARNING in configuration
 The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
@@ -291,8 +280,8 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "webpack": "^4.0.1",
-      "webpack-cli": "^2.0.9"
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
     },
     "dependencies": {
       "lodash": "^4.17.5"
@@ -307,16 +296,10 @@ Now run the following command and see if your script alias works:
 ``` bash
 npm run build
 
-Hash: dabab1bac2b940c1462b
-Version: webpack 4.12.0
-Time: 278ms
-Built at: 13/06/2018 11:54:54
+...
   Asset      Size  Chunks             Chunk Names
 main.js  70.4 KiB       0  [emitted]  main
-[1] (webpack)/buildin/module.js 497 bytes {0} [built]
-[2] (webpack)/buildin/global.js 489 bytes {0} [built]
-[3] ./src/index.js 216 bytes {0} [built]
-    + 1 hidden module
+...
 
 WARNING in configuration
 The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.

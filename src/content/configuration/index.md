@@ -13,6 +13,7 @@ contributors:
   - sterlingvix
   - jeremenichelli
   - dasarianudeep
+  - byzyk
 ---
 
 Out of the box, webpack won't require you to use a configuration file. However, it will assume the entry point of your project is `src/index` and will output the result in `dist/main.js` minified and optimized for production.
@@ -21,21 +22,7 @@ Usually your projects will need to extend this functionality, for this you can c
 
 All the available configuration options are specified below.
 
-T> New to webpack? Check out our guide to some of webpack's [core concepts](/concepts) to get started!
-
-
-## Use different config file
-
-If for some reason you want to use different config file depending on certain situations you can change this via command line by using the `--config` flag.
-
-**package.json**
-
-```json
-"scripts": {
-  "build": "webpack --config prod.config.js"
-}
-```
-
+T> New to webpack? Check out our guide to some of webpack's [core concepts](/concepts/) to get started!
 
 ## Options
 
@@ -62,7 +49,7 @@ module.exports = {
     b: ["./app/entry-b1", "./app/entry-b2"]
   },
   </details>
-  // defaults to ./src
+  // defaults to './src'
   // Here the application starts executing
   // and webpack starts bundling
   [output](/configuration/output): {
@@ -396,9 +383,22 @@ module.exports = {
 }
 ```
 
-T> Want to rapidly generate webpack configuration file for your project requirements with few clicks away.
+## Use custom configuration file
 
-[Generate Custom Webpack Configuration](https://generatewebpackconfig.netlify.com/) is an interactive portal you can play around by selecting custom webpack configuration options tailored for your frontend project. It automatically generates
-a minimal webpack configuration based on your selection of loaders/plugins, etc.
+If for some reason you want to use custom configuration file depending on certain situations you can change this via command line by using the `--config` flag.
 
-[Visual tool for creating webpack configs](https://webpack.jakoblind.no/) is an online configuration tool for creating webpack config where you can select any combination of features you need. It also generates a full example project based on your webpack configs.
+__package.json__
+
+```json
+"scripts": {
+  "build": "webpack --config prod.config.js"
+}
+```
+
+## Configuration file generators
+
+Want to rapidly generate webpack configuration file for your project requirements with few clicks away?
+
+[Generate Custom Webpack Configuration](https://generatewebpackconfig.netlify.com/) is an interactive portal you can play around by selecting custom webpack configuration options tailored for your frontend project. It automatically generates a minimal webpack configuration based on your selection of loaders/plugins, etc.
+
+[Visual tool for creating webpack configs](https://webpack.jakoblind.no/) is an online configuration tool for creating webpack configuration file where you can select any combination of features you need. It also generates a full example project based on your webpack configs.
