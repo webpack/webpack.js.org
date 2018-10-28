@@ -102,8 +102,8 @@ complete the above tasks, you will likely receive the following error:
 TS2307: Cannot find module './config/config-APP_TARGET'.
 ```
 
-To correct this issue, you'll need to create an additional file to satisfy the compiler without breaking the
-NormalModuleReplacementPlugin:
+To resolve this situation, you'll need to create an additional file to satisfy the compiler without breaking the
+NormalModuleReplacementPlugin. Add the following file to your project:
 
 __config/config-APP_TARGET.ts__
 
