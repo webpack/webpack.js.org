@@ -21,6 +21,7 @@ contributors:
   - ztomasze
   - Spiral90210
   - byzyk
+  - daniel-234
 ---
 
 Webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interface with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
@@ -179,7 +180,9 @@ __dist/index.html__
 
 In this setup, `index.js` explicitly requires `lodash` to be present, and binds it as `_` (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.
 
-With that said, let's run `npx webpack`, which will take our script at `src/index.js` as the default [entry point](/concepts/entry-points), and will generate `dist/main.js` as the default [output](/concepts/output). You can specify a different value for the entry point and for the output property when you run webpack from the command line. When you want to set a specific output, though, you must add the flag `-o` in front of it: `npx webpack path/to/my/entry/file.js -o path/to/my/output/bundle.js`.
+With that said, let's run `npx webpack`, which will take our script at `src/index.js` as the [entry point](/concepts/entry-points), and will generate `dist/main.js` as the [output](/concepts/output). 
+
+T> You can specify a different value for the entry point and for the output property when you run webpack from the command line, as specified in the [CLI section](/api/cli/#usage-without-config-file), although this is not the recommended usage. 
 
 The `npx` command, which ships with Node 8.2/npm 5.2.0 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
 
