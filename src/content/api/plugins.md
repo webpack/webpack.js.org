@@ -60,18 +60,18 @@ However, for `run` which utilizes the `AsyncHook`, we can utilize `tapAsync`
 or `tapPromise` (as well as `tap`):
 
 ``` js
-compiler.hooks.run.tapAsync('MyPlugin', (compiler, callback) => {
+compiler.hooks.run.tapAsync('MyPlugin', (source, target, routesList, callback) => {
   console.log('Asynchronously tapping the run hook.');
   callback();
 });
 
-compiler.hooks.run.tapPromise('MyPlugin', compiler => {
+compiler.hooks.run.tapPromise('MyPlugin', (source, target, routesList) => {
   return new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
     console.log('Asynchronously tapping the run hook with a delay.');
   });
 });
 
-compiler.hooks.run.tapPromise('MyPlugin', async compiler => {
+compiler.hooks.run.tapPromise('MyPlugin', async (source, target, routesList) => {
   await new Promise(resolve => setTimeout(resolve, 1000));
   console.log('Asynchronously tapping the run hook with a delay.');
 });
