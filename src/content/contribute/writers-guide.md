@@ -86,7 +86,7 @@ Parameter   | Explanation                                      | Input Type | De
 --devtool   | Define source map type for the bundled resources | string     | -
 --progress  | Print compilation progress in percentage         | boolean    | false
 
-Same goes for tables.
+Tables should also be ordered alphabetically.
 
 ### Configuration Properties
 
