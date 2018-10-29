@@ -18,6 +18,34 @@ If you've been following the guides, you should have a solid understanding of so
 
 W> The tools in this guide are __only meant for development__, please __avoid__ using them in production!
 
+Before proceeding lets first set [`mode` to `'development'`](/concepts/mode/#mode-development).
+
+__webpack.config.js__
+
+``` diff
+  const path = require('path');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+  module.exports = {
++   mode: 'development',
+    entry: {
+      app: './src/index.js',
+      print: './src/print.js'
+    },
+    devtool: 'inline-source-map',
+    plugins: [
+      new CleanWebpackPlugin(['dist']),
+      new HtmlWebpackPlugin({
+        title: 'Development'
+      })
+    ],
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
+```
 
 ## Using source maps
 
@@ -37,6 +65,7 @@ __webpack.config.js__
   const CleanWebpackPlugin = require('clean-webpack-plugin');
 
   module.exports = {
+    mode: 'development',
     entry: {
       app: './src/index.js',
       print: './src/print.js'
@@ -174,6 +203,7 @@ __webpack.config.js__
   const CleanWebpackPlugin = require('clean-webpack-plugin');
 
   module.exports = {
+    mode: 'development',
     entry: {
       app: './src/index.js',
       print: './src/print.js'
@@ -258,6 +288,7 @@ __webpack.config.js__
   const CleanWebpackPlugin = require('clean-webpack-plugin');
 
   module.exports = {
+    mode: 'development',
     entry: {
       app: './src/index.js',
       print: './src/print.js'
@@ -298,7 +329,7 @@ __project__
 
 __server.js__
 
-``` js
+```javascript
 const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -378,9 +409,9 @@ When using automatic compilation of your code, you could run into issues when sa
 
 To disable this feature in some common editors, see the list below:
 
-- **Sublime Text 3**: Add `atomic_save: "false"` to your user preferences.
-- **JetBrains IDEs (e.g. WebStorm)**: Uncheck "Use safe write" in `Preferences > Appearance & Behavior > System Settings`.
-- **Vim**: Add `:set backupcopy=yes` to your settings.
+- __Sublime Text 3__: Add `atomic_save: 'false'` to your user preferences.
+- __JetBrains IDEs (e.g. WebStorm)__: Uncheck "Use safe write" in `Preferences > Appearance & Behavior > System Settings`.
+- __Vim__: Add `:set backupcopy=yes` to your settings.
 
 
 ## Conclusion
