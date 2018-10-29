@@ -144,7 +144,7 @@ For full library configuration and code please refer to [webpack-library-example
 
 Now let's bundle this library in a way that will achieve the following goals:
 
-- Without bundling `lodash`, but requiring it to be loaded by the consumer using `externals`.
+- Using `externals` to avoid bundling `lodash`, so the consumer is required to load it.
 - Setting the library name as `webpack-numbers`.
 - Exposing the library as a variable called `webpackNumbers`.
 - Being able to access the library inside Node.js.
