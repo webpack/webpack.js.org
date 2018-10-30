@@ -3,9 +3,12 @@ title: ContextReplacementPlugin
 contributors:
   - simon04
   - byzyk
+  - masives
 related:
   - title: Issue 2783 - ContextReplacementPlugin Description
     url: https://github.com/webpack/webpack/issues/2783#issuecomment-234137265
+  - title: Using context replacement module for date-fns
+    url: https://github.com/date-fns/date-fns/blob/master/docs/webpack.md
 ---
 
 *Context* refers to a [require with an expression](/guides/dependency-management/#require-with-expression) such as `require('./locale/' + name + '.json')`. When encountering such an expression, webpack infers the directory (`'./locale/'`) and a regular expression (`/^.*\.json$/`). Since the `name` is not known at compile time, webpack includes every file as module in the bundle.
@@ -31,18 +34,12 @@ If the resource (directory) matches `resourceRegExp`, the plugin replaces the de
 Here's a small example to restrict module usage:
 
 ```javascript
-// moment.js
 new webpack.ContextReplacementPlugin(
   /moment[/\\]locale$/,
   /de|fr|hu/
 );
-
-// date-fns
-new ContextReplacementPlugin(
-  /date\-fns[\/\\]/, 
-  /[/\\](de|fr|hu)[/\\]/
-);
 ```
+
 
 The `moment/locale` context is restricted to files matching `/de|fr|hu/`. Thus only those locales are included (see [this issue](https://github.com/moment/moment/issues/2373) for more information).
 
