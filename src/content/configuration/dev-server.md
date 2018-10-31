@@ -9,6 +9,7 @@ contributors:
   - orteth01
   - byzyk
   - EugeneHlushko
+  - Yiidiir
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
@@ -913,6 +914,22 @@ module.exports = {
     proxy: {
       context: () => true,
       target: 'http://localhost:1234'
+    }
+  }
+};
+```
+
+The origin of the host header is kept when proxying by default, you can set `changeOrigin` to `true` to override this behaviour. It is useful in some cases like using [name-based virtual hosted sites](https://en.wikipedia.org/wiki/Virtual_hosting#Name-based).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    proxy: {
+      '/api': 'http://localhost:3000',
+      changeOrigin: true
     }
   }
 };
