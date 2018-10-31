@@ -100,20 +100,20 @@ The [configuration](/configuration) properties should be ordered alphabetically 
 
 #### Blockquote
 
-**Syntax: \>**
+__Syntax: \>__
 
 > This is a blockquote.
 
 #### Tip
 
-**Syntax: T\>**
+__Syntax: T\>__
 
 T> This is a tip.
 
-**Syntax: W\>**
+__Syntax: W\>__
 
 W> This is a warning.
 
-**Syntax: ?\>**
+__Syntax: ?\>__
 
 ?> This is a todo.

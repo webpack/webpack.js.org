@@ -3,6 +3,7 @@ title: ProgressPlugin
 contributors:
   - elliottsj
   - EugeneHlushko
+  - byzyk
 ---
 
 The `ProgressPlugin` provides a way to customize how progress is reported during a compilation.
@@ -31,14 +32,14 @@ The following hooks report progress information to `ProgressPlugin`.
 
 T> _Hooks marked with * allow plugins to report progress information using `reportProgress`. For more, see [Plugin API: Reporting Progress](/api/plugins/#reporting-progress)_
 
-**Compiler**
+__Compiler__
 
 - compilation
 - emit*
 - afterEmit*
 - done
 
-**Compilation**
+__Compilation__
 
 - buildModule
 - failedModule

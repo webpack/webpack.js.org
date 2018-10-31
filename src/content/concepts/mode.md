@@ -36,11 +36,11 @@ webpack --mode=production
 
 The following string values are supported:
 
-Option                | Description
---------------------- | -----------------------
-`development`         | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `development`. Enables `NamedChunksPlugin` and `NamedModulesPlugin`.
-`production`          | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `production`. Enables `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin`, `OccurrenceOrderPlugin`, `SideEffectsFlagPlugin` and `UglifyJsPlugin`.
-`none`                | Opts out of any default optimization options
+| Option        | Description                                                                                                                                                                                                                                                       |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `development` | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `development`. Enables `NamedChunksPlugin` and `NamedModulesPlugin`.                                                                                                                                       |
+| `production`  | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `production`. Enables `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin`, `OccurrenceOrderPlugin`, `SideEffectsFlagPlugin` and `UglifyJsPlugin`. |
+| `none`        | Opts out of any default optimization options                                                                                                                                                                                                                      |
 
 If not set, webpack sets `production` as the default value for `mode`. The supported values for mode are:
 
@@ -57,7 +57,7 @@ module.exports = {
 - devtool: 'eval',
 - cache: true,
 - performance: {
--   hints: false  
+-   hints: false
 - },
 - output: {
 -   pathinfo: true
@@ -98,7 +98,7 @@ module.exports = {
 module.exports = {
 +  mode: 'production',
 - performance: {
--   hints: 'warning'  
+-   hints: 'warning'
 - },
 - output: {
 -   pathinfo: false
@@ -140,7 +140,7 @@ module.exports = {
 module.exports = {
 + mode: 'none',
 - performance: {
--  hints: false  
+-  hints: false
 - },
 - optimization: {
 -   flagIncludedChunks: false,
@@ -162,7 +162,7 @@ module.exports = {
 }
 ```
 
-If you want to change the behavior according to the **mode** variable inside the *webpack.config.js*, you have to export a function instead of an object:
+If you want to change the behavior according to the __mode__ variable inside the _webpack.config.js_, you have to export a function instead of an object:
 
 ```javascript
 var config = {

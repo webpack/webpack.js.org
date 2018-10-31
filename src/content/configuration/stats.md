@@ -32,13 +32,13 @@ module.exports = {
 };
 ```
 
-| Preset | Alternative | Description |
-|--------|-------------|-------------|
-| `"errors-only"` | *none*  | Only output when errors happen |
-| `"minimal"`     | *none*  | Only output when errors or new compilation happen |
-| `"none"`        | `false` | Output nothing |
-| `"normal"`      | `true`  | Standard output |
-| `"verbose"`     | *none*  | Output everything |
+| Preset          | Alternative | Description                                       |
+| --------------- | ----------- | ------------------------------------------------- |
+| `"errors-only"` | _none_      | Only output when errors happen                    |
+| `"minimal"`     | _none_      | Only output when errors or new compilation happen |
+| `"none"`        | `false`     | Output nothing                                    |
+| `"normal"`      | `true`      | Standard output                                   |
+| `"verbose"`     | _none_      | Output everything                                 |
 
 For more granular control, it is possible to specify exactly what information you want. Please note that all of the options in this object are optional.
 
@@ -74,7 +74,7 @@ module.exports = {
 
     // Add chunk information (setting this to `false` allows for a less verbose output)
     chunks: true,
-    
+
     // Add namedChunkGroups information
     chunkGroups: true,
 
