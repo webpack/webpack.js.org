@@ -7,12 +7,13 @@ contributors:
   - simon04
   - byzyk
   - madhavarshney
+  - dhurlburtusa
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
 
-Since version 4 webpack runs optimizations for you depending on the chosen `mode`, still all optimizations are available for manual configuration and overrides.
+Since version 4 webpack runs optimizations for you depending on the chosen  [`mode`](/concepts/mode/), still all optimizations are available for manual configuration and overrides.
 
 
 ## `optimization.minimize`

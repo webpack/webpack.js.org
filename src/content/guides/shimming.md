@@ -9,6 +9,7 @@ contributors:
   - svyandun
   - byzyk
   - EugeneHlushko
+  - dhurlburtusa
 related:
   - title: Reward modern browser users script
     url: https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665
@@ -425,7 +426,7 @@ If we run our build, another `polyfills.bundle.js` file will be emitted and ever
 
 ## Further Optimizations
 
-The `babel-preset-env` package uses [browserslist](https://github.com/browserslist/browserslist) to transpile only what is not supported in your browsers matrix. This preset comes with the `useBuiltIns` option, `false` by default, which converts your global `babel-polyfill` import to a more granular feature by feature `import` pattern:
+The `babel-preset-env` package uses [browserslist](https://github.com/browserslist/browserslist) to transpile only what is not supported in your browsers matrix. This preset comes with the [`useBuiltIns`](https://babeljs.io/docs/en/babel-preset-env#usebuiltins) option, `false` by default, which converts your global `babel-polyfill` import to a more granular feature by feature `import` pattern:
 
 ``` js
 import 'core-js/modules/es7.string.pad-start';
