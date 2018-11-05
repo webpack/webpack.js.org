@@ -264,7 +264,8 @@ These options allow webpack to display various [stats](/configuration/stats/) an
 
 Parameter                        | Explanation                                                        | Type
 -------------------------------- | ------------------------------------------------------------------ | -------
-`--color`, `--colors`            | Enables/Disables colors on the console [default: (supports-color)] | boolean
+`--color`, `--colors`            | Force colors on the console [default: enabled for TTY output only] | boolean
+`--no-color`, `--no-colors`      | Force no colors on the console                                     | boolean
 `--display`                      | Select [display preset](/configuration/stats) (verbose, detailed, normal, minimal, errors-only, none; since webpack 3.0.0) | string
 `--display-cached`               | Display also cached modules in the output                          | boolean
 `--display-cached-assets`        | Display also cached assets in the output                           | boolean
