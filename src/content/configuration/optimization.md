@@ -7,12 +7,13 @@ contributors:
   - simon04
   - byzyk
   - madhavarshney
+  - dhurlburtusa
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
 
-Since version 4 webpack runs optimizations for you depending on the chosen `mode`, still all optimizations are available for manual configuration and overrides.
+Since version 4 webpack runs optimizations for you depending on the chosen  [`mode`](/concepts/mode/), still all optimizations are available for manual configuration and overrides.
 
 
 ## `optimization.minimize`
@@ -168,6 +169,33 @@ module.exports = {
   //...
   optimization: {
     namedChunks: true
+  }
+};
+```
+
+## `optimization.moduleIds`
+
+`bool: false` `string: natural, named, hashed, size, total-size`
+
+Tells webpack which algorithm to use when choosing module ids. Setting `optimization.moduleIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. By default `optimization.moduleIds` is set to `false`.
+
+The following string values are supported:
+
+Option                | Description
+--------------------- | -----------------------
+`natural`             | Numeric ids in order of usage.
+`named`               | Readable ids for better debugging.
+`hashed`              | Short hashes as ids for better long term caching.
+`size`                | Numeric ids focused on minimal initial download size.
+`total-size`          | numeric ids focused on minimal total download size.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    moduleIds: 'hashed'
   }
 };
 ```

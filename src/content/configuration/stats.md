@@ -9,6 +9,8 @@ contributors:
   - jasonblanchard
   - byzyk
   - renjithvk
+  - Raiondesu
+  - EugeneHlushko
 ---
 
 The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
@@ -54,6 +56,8 @@ module.exports = {
 
     // Sort assets by a field
     // You can reverse the sort with `!field`.
+    // Some possible values: 'id' (default), 'name', 'size', 'chunks', 'failed', 'issuer'
+    // For a complete list of fields see the bottom of the page
     assetsSort: "field",
 
     // Add build date and time information
@@ -82,6 +86,8 @@ module.exports = {
 
     // Sort the chunks by a field
     // You can reverse the sort with `!field`. Default is `id`.
+    // Some other possible values: 'name', 'size', 'chunks', 'failed', 'issuer'
+    // For a complete list of fields see the bottom of the page
     chunksSort: "field",
 
     // Context directory for request shortening
@@ -132,6 +138,8 @@ module.exports = {
 
     // Sort the modules by a field
     // You can reverse the sort with `!field`. Default is `id`.
+    // Some other possible values: 'name', 'size', 'chunks', 'failed', 'issuer'
+    // For a complete list of fields see the bottom of the page
     modulesSort: "field",
 
     // Show dependencies and origin of warnings/errors (since webpack 2.5.0)
@@ -171,3 +179,27 @@ module.exports = {
   }
 }
 ```
+
+### Sorting fields
+
+For `assetsSort`, `chunksSort` and `moduleSort` there are several possible fields that you can sort items by:
+
+- `id` is the item's id;
+- `name` - a item's name that was assigned to it upon importing;
+- `size` - a size of item in bytes;
+- `chunks` - what chunks the item originates from (for example, if there are multiple subchunks for one chunk - the subchunks will be grouped together according to their main chunk);
+- `errors` - amount of errors in items;
+- `warnings` - amount of warnings in items;
+- `failed` - whether the item has failed compilation;
+- `cacheable` - whether the item is cacheable;
+- `built` - whether the asset has been built;
+- `prefetched` - whether the asset will be prefetched;
+- `optional` - whether the asset is optional;
+- `identifier` - identifier of the item;
+- `index` - item's processing index;
+- `index2`
+- `profile`
+- `issuer` - an identifier of the issuer;
+- `issuerId` - an id of the issuer;
+- `issuerName` - a name of the issuer;
+- `issuerPath` - a full issuer object. There's no real need to sort by this field;

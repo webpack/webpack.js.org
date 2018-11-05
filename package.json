@@ -71,7 +71,7 @@
     "duplexer": "^0.1.1",
     "eslint": "4.19.1",
     "eslint-loader": "^2.0.0",
-    "eslint-plugin-markdown": "git://github.com/byzyk/eslint-plugin-markdown.git#5927ccb78aff8a5464663730800503c6de3704e1",
+    "eslint-plugin-markdown": "^1.0.0-rc.0",
     "file-loader": "^1.1.11",
     "fontgen-loader": "git://github.com/EugeneHlushko/fontgen-loader.git#a26a73843900ca4b518853952b1fc3c816103512",
     "front-matter": "^2.2.0",

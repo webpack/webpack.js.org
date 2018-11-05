@@ -9,6 +9,7 @@ contributors:
   - WojciechKo
   - Calinou
   - GAumala
+  - EugeneHlushko
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
@@ -17,6 +18,34 @@ If you've been following the guides, you should have a solid understanding of so
 
 W> The tools in this guide are __only meant for development__, please __avoid__ using them in production!
 
+Before proceeding lets first set [`mode` to `'development'`](/concepts/mode/#mode-development).
+
+__webpack.config.js__
+
+``` diff
+  const path = require('path');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+  module.exports = {
++   mode: 'development',
+    entry: {
+      app: './src/index.js',
+      print: './src/print.js'
+    },
+    devtool: 'inline-source-map',
+    plugins: [
+      new CleanWebpackPlugin(['dist']),
+      new HtmlWebpackPlugin({
+        title: 'Development'
+      })
+    ],
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
+```
 
 ## Using source maps
 
@@ -36,6 +65,7 @@ __webpack.config.js__
   const CleanWebpackPlugin = require('clean-webpack-plugin');
 
   module.exports = {
+    mode: 'development',
     entry: {
       app: './src/index.js',
       print: './src/print.js'
@@ -68,22 +98,12 @@ __src/print.js__
 Run an `npm run build`, it should compile to something like this:
 
 ``` bash
-Hash: 7bf68ca15f1f2690e2d1
-Version: webpack 3.1.0
-Time: 1224ms
+...
           Asset       Size  Chunks                    Chunk Names
   app.bundle.js    1.44 MB    0, 1  [emitted]  [big]  app
 print.bundle.js    6.43 kB       1  [emitted]         print
      index.html  248 bytes          [emitted]
-   [0] ./src/print.js 84 bytes {0} {1} [built]
-   [1] ./src/index.js 403 bytes {0} [built]
-   [3] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [4] (webpack)/buildin/module.js 517 bytes {0} [built]
-    + 1 hidden module
-Child html-webpack-plugin for "index.html":
-       [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-       [3] (webpack)/buildin/module.js 517 bytes {0} [built]
-        + 2 hidden modules
+...
 ```
 
 Now open the resulting `index.html` file in your browser. Click the button and look in your console where the error is displayed. The error should say something like this:
@@ -183,6 +203,7 @@ __webpack.config.js__
   const CleanWebpackPlugin = require('clean-webpack-plugin');
 
   module.exports = {
+    mode: 'development',
     entry: {
       app: './src/index.js',
       print: './src/print.js'
@@ -267,6 +288,7 @@ __webpack.config.js__
   const CleanWebpackPlugin = require('clean-webpack-plugin');
 
   module.exports = {
+    mode: 'development',
     entry: {
       app: './src/index.js',
       print: './src/print.js'
@@ -307,7 +329,7 @@ __project__
 
 __server.js__
 
-``` js
+```javascript
 const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -367,26 +389,12 @@ Now in your terminal run `npm run server`, it should give you an output similar 
 
 ``` bash
 Example app listening on port 3000!
-webpack built 27b137af6d9d8668c373 in 1198ms
-Hash: 27b137af6d9d8668c373
-Version: webpack 3.0.0
-Time: 1198ms
+...
           Asset       Size  Chunks                    Chunk Names
   app.bundle.js    1.44 MB    0, 1  [emitted]  [big]  app
 print.bundle.js    6.57 kB       1  [emitted]         print
      index.html  306 bytes          [emitted]
-   [0] ./src/print.js 116 bytes {0} {1} [built]
-   [1] ./src/index.js 403 bytes {0} [built]
-   [2] ./node_modules/lodash/lodash.js 540 kB {0} [built]
-   [3] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [4] (webpack)/buildin/module.js 517 bytes {0} [built]
-Child html-webpack-plugin for "index.html":
-         Asset    Size  Chunks  Chunk Names
-    index.html  544 kB       0
-       [0] ./node_modules/html-webpack-plugin/lib/loader.js!./node_modules/html-webpack-plugin/default_index.ejs 538 bytes {0} [built]
-       [1] ./node_modules/lodash/lodash.js 540 kB {0} [built]
-       [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-       [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+...
 webpack: Compiled successfully.
 ```
 
@@ -401,9 +409,9 @@ When using automatic compilation of your code, you could run into issues when sa
 
 To disable this feature in some common editors, see the list below:
 
-* **Sublime Text 3**: Add `atomic_save: "false"` to your user preferences.
-* **JetBrains IDEs (e.g. WebStorm)**: Uncheck "Use safe write" in `Preferences > Appearance & Behavior > System Settings`.
-* **Vim**: Add `:set backupcopy=yes` to your settings.
+- __Sublime Text 3__: Add `atomic_save: 'false'` to your user preferences.
+- __JetBrains IDEs (e.g. WebStorm)__: Uncheck "Use safe write" in `Preferences > Appearance & Behavior > System Settings`.
+- __Vim__: Add `:set backupcopy=yes` to your settings.
 
 
 ## Conclusion

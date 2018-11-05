@@ -24,10 +24,10 @@ A plugin for webpack consists of
 ```javascript
 // A JavaScript class.
 class MyExampleWebpackPlugin {
-  // Define `apply` as it's prototype method which is supplied with compiler as it's argument
+  // Define `apply` as its prototype method which is supplied with compiler as its argument
   apply(compiler) {
     // Specify the event hook to attach to
-    compiler.hooks.compile.tapAsync(
+    compiler.hooks.emit.tapAsync(
       'MyExampleWebpackPlugin',
       (compilation, callback) => {
         console.log('This is an example plugin!');
@@ -97,7 +97,7 @@ The list of hooks available on the `compiler`, `compilation`, and other importan
 
 ## Async event hooks
 
-Some plugin hooks are asynchronous. To tap into them, we can use `tap` method which will behave in synchronous manner or use one of `tapAsync` method or `tapPromise` method which are asyncronous methods.
+Some plugin hooks are asynchronous. To tap into them, we can use `tap` method which will behave in synchronous manner or use one of `tapAsync` method or `tapPromise` method which are asynchronous methods.
 
 ### tapAsync
 
@@ -151,7 +151,7 @@ Let's write a simple example plugin that generates a new build file called `file
 class FileListPlugin {
   apply(compiler) {
     // emit is asynchronous hook, tapping into it using tapAsync, you can use tapPromise/tap(synchronous) as well
-    compiler.hooks.emit.tapAsync('FileListPlugin', (compiler, callback) => {
+    compiler.hooks.emit.tapAsync('FileListPlugin', (compilation, callback) => {
       // Create a header string for the generated file:
       var filelist = 'In this build:\n\n';
 
@@ -218,7 +218,7 @@ Various types of hooks supported are :-
     - Called using `call( ... params)` method
 
   Here each of the plugins are called one after the other with the arguments from the return value of the previous plugin. The plugin must take the order of its execution into account.
-  It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. Hence atleast 1 param must be supplied for waterfall hooks. This pattern is used in the Tapable instances which are related to the webpack templates like `ModuleTemplate`, `ChunkTemplate` etc.
+  It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. Hence at least 1 param must be supplied for waterfall hooks. This pattern is used in the Tapable instances which are related to the webpack templates like `ModuleTemplate`, `ChunkTemplate` etc.
 
 ### Asynchronous Hooks
 

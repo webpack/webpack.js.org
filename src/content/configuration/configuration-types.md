@@ -8,6 +8,7 @@ contributors:
   - simon04
   - fadysamirsadek
   - byzyk
+  - EugeneHlushko
 ---
 
 Besides exporting a single config object, there are a few more ways that cover other needs as well.
@@ -19,8 +20,8 @@ Eventually you will find the need to disambiguate in your `webpack.config.js` be
 
 One option is to export a function from your webpack config instead of exporting an object. The function will be invoked with two arguments:
 
-* An environment as the first parameter. See the [environment options CLI documentation](/api/cli#environment-options) for syntax examples.
-* An options map (`argv`) as the second parameter. This describes the options passed to webpack, with keys such as [`output-filename`](/api/cli/#output-options) and [`optimize-minimize`](/api/cli/#optimize-options).
+- An environment as the first parameter. See the [environment options CLI documentation](/api/cli#environment-options) for syntax examples.
+- An options map (`argv`) as the second parameter. This describes the options passed to webpack, with keys such as [`output-filename`](/api/cli/#output-options) and [`optimize-minimize`](/api/cli/#optimize-options).
 
 ```diff
 -module.exports = {

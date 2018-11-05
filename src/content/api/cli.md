@@ -264,7 +264,8 @@ These options allow webpack to display various [stats](/configuration/stats/) an
 
 Parameter                        | Explanation                                                        | Type
 -------------------------------- | ------------------------------------------------------------------ | -------
-`--color`, `--colors`            | Enables/Disables colors on the console [default: (supports-color)] | boolean
+`--color`, `--colors`            | Force colors on the console [default: enabled for TTY output only] | boolean
+`--no-color`, `--no-colors`      | Force no colors on the console                                     | boolean
 `--display`                      | Select [display preset](/configuration/stats) (verbose, detailed, normal, minimal, errors-only, none; since webpack 3.0.0) | string
 `--display-cached`               | Display also cached modules in the output                          | boolean
 `--display-cached-assets`        | Display also cached assets in the output                           | boolean
@@ -326,9 +327,9 @@ webpack --profile
 
 For each module, the following details are included in the output as applicable:
 
-* `factory`: time to collect module metadata (e.g. resolving the filename)
-* `building`: time to build the module (e.g. loaders and parsing)
-* `dependencies`: time to identify and connect the module’s dependencies
+- `factory`: time to collect module metadata (e.g. resolving the filename)
+- `building`: time to build the module (e.g. loaders and parsing)
+- `dependencies`: time to identify and connect the module’s dependencies
 
 Paired with `--progress`, `--profile` gives you an in depth idea of which step in the compilation is taking how long. This can help you optimise your build in a more informed manner.
 
