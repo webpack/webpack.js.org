@@ -36,6 +36,21 @@ __dist/index.html__
   </html>
 ```
 
+__webpack.config.js__
+
+``` diff
+  const path = require('path');
+
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+-     filename: 'main.js',
++     filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
+```
+
 
 ## Loading CSS
 
@@ -53,8 +68,7 @@ __webpack.config.js__
   module.exports = {
     entry: './src/index.js',
     output: {
--     filename: 'main.js',
-+     filename: 'bundle.js',
+      filename: 'bundle.js',
       path: path.resolve(__dirname, 'dist')
     },
 +   module: {
