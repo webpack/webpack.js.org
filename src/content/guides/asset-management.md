@@ -30,7 +30,8 @@ __dist/index.html__
 +    <title>Asset Management</title>
     </head>
     <body>
-      <script src="./bundle.js"></script>
+-     <script src="./main.js"></script>
++     <script src="./bundle.js"></script>
     </body>
   </html>
 ```
