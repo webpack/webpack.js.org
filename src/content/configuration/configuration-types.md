@@ -9,6 +9,7 @@ contributors:
   - fadysamirsadek
   - byzyk
   - EugeneHlushko
+  - dhurlburtusa
 ---
 
 Besides exporting a single config object, there are a few more ways that cover other needs as well.
@@ -81,4 +82,4 @@ module.exports = [{
 }];
 ```
 
-T> If you pass a name to `--config-name` flag, webpack will only build that specific configuration.
+T> If you pass a name to [`--config-name`](/api/cli/#config-options) flag, webpack will only build that specific configuration.
