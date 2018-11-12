@@ -32,6 +32,7 @@ To get started you only need to understand its __Core Concepts__:
 - [Loaders](#loaders)
 - [Plugins](#plugins)
 - [Mode](#mode)
+- [Browser Compatibility](#browser-compatibility)
 
 This document is intended to give a __high-level__ overview of these concepts, while providing links to detailed concept specific use cases.
 
@@ -61,7 +62,7 @@ T> Learn more in the [entry points](/concepts/entry-points) section.
 
 ## Output
 
-The __output__ property tells webpack where to emit the *bundles* it creates and how to name these files. It defaults to `./dist/main.js` for the main output file and to the `./dist` folder for any other generated file.
+The __output__ property tells webpack where to emit the _bundles_ it creates and how to name these files. It defaults to `./dist/main.js` for the main output file and to the `./dist` folder for any other generated file.
 
 You can configure this part of the process by specifying an `output` field in your configuration:
 

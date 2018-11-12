@@ -8,6 +8,7 @@ contributors:
   - smonusbonus
 ---
 
+
 The `DefinePlugin` allows you to create global constants which can be configured at __compile__ time. This can be useful for allowing different behavior between development builds and production builds. If you perform logging in your development build but not in the production build you might use a global constant to determine whether logging takes place. That's where `DefinePlugin` shines, set it and forget it rules for development and production builds.
 
 ``` javascript
@@ -43,6 +44,7 @@ new webpack.DefinePlugin({
 console.log('Running App version ' + VERSION);
 if(!BROWSER_SUPPORTS_HTML5) require('html5shiv');
 ```
+
 
 W> When defining values for `process` prefer `'process.env.NODE_ENV': JSON.stringify('production')` over `process: { env: { NODE_ENV: JSON.stringify('production') } }`. Using the latter will overwrite the `process` object which can break compatibility with some modules that expect other values on the process object to be defined.
 
