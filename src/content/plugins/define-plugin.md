@@ -8,7 +8,7 @@ contributors:
   - smonusbonus
 ---
 
-The `DefinePlugin` allows you to create global constants which can be configured at **compile** time. This can be useful for allowing different behavior between development builds and release builds. If you perform logging in your development build but not in the release build you might use a global constant to determine whether logging takes place. That's where `DefinePlugin` shines, set it and forget it rules for development and release builds.
+The `DefinePlugin` allows you to create global constants which can be configured at __compile__ time. This can be useful for allowing different behavior between development builds and release builds. If you perform logging in your development build but not in the release build you might use a global constant to determine whether logging takes place. That's where `DefinePlugin` shines, set it and forget it rules for development and release builds.
 
 ``` javascript
 new webpack.DefinePlugin({
@@ -44,7 +44,7 @@ console.log('Running App version ' + VERSION);
 if(!BROWSER_SUPPORTS_HTML5) require('html5shiv');
 ```
 
-T> Note that because the plugin does a direct text replacement, the value given to it must include **actual quotes** inside of the string itself. Typically, this is done either with alternate quotes, such as `'"production"'`, or by using `JSON.stringify('production')`.
+T> Note that because the plugin does a direct text replacement, the value given to it must include __actual quotes__ inside of the string itself. Typically, this is done either with alternate quotes, such as `'"production"'`, or by using `JSON.stringify('production')`.
 
 __index.js__
 
