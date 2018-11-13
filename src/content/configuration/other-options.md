@@ -203,7 +203,7 @@ module.exports = {
   //...
   cache: {
     type: 'filesystem',
-    store: 'background'
+    store: 'pack'
   }
 };
 ```
