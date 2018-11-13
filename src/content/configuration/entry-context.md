@@ -59,6 +59,10 @@ If a string or array of strings is passed, the chunk is named `main`. If an obje
 
 ### Dynamic entry
 
+If a function is passed then it will be invoked on every [make](https://webpack.js.org/api/compiler-hooks/#make) event.
+
+> Note that the `make` event triggers when webpack starts and for every invalidation in watch-mode.
+
 ```js
 module.exports = {
   //...
@@ -74,5 +78,7 @@ module.exports = {
   entry: () => new Promise((resolve) => resolve(['./demo', './demo2']))
 };
 ```
+
+> For example: you can use dynamic entries to get the actual entries from an external source (remote server, file system content or database)
 
 When combining with the [`output.library`](/configuration/output#output-library) option: If an array is passed only the last item is exported.
