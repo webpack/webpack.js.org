@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - terinjokes
   - byzyk
+  - EugeneHlushko
 related:
   - title: Using Records
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
@@ -60,7 +61,7 @@ This will force webpack to exit its bundling process.
 
 `boolean` `object`
 
-Cache the generated webpack modules and chunks to improve build speed. `cache` is set to `type: 'memory'` in [`development` mode](/concepts/mode/#mode-development) and disabled in [`production` mode](/concepts/mode/#mode-production). To disable caching simply pass `false`:
+Cache the generated webpack modules and chunks to improve build speed. `cache` is set to `type: 'memory'` in [`development` mode](/concepts/mode/#mode-development) and disabled in [`production` mode](/concepts/mode/#mode-production). `cache: true`is an alias to `cache: { type: 'memory' }`. To disable caching pass `false`:
 
 __webpack.config.js__
 
@@ -70,6 +71,7 @@ module.exports = {
   cache: false
 };
 ```
+
 
 ### `cache.type`
 
@@ -112,11 +114,13 @@ module.exports = {
 };
 ```
 
+W> The final location of the cache is a combination of `cache.cacheDirectory` + `cache.name`.
+
 ### `cache.hashAlgorithm`
 
 `string`
 
-Algorithm used the hash generation. See [Node.js crypto](https://nodejs.org/api/crypto.html) for more details. Defaults to `ml4`.
+Algorithm used the hash generation. See [Node.js crypto](https://nodejs.org/api/crypto.html) for more details. Defaults to `md4`.
 
 `cache.hashAlgorithm` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
 
@@ -134,13 +138,14 @@ module.exports = {
 
 ### `cache.loglevel`
 
-`string: 'debug' | 'info' | 'warning'`
+`string: 'debug' | 'info' | 'verbose' | 'warning'`
 
 `cache.loglevel` tells webpack how much of `cache` log info to display.
 
 - `'debug'`: all access and errors with stack trace
 - `'info'`: all access
-- `'warning'`: only failed serialization
+- `'verbose'`: all write access
+- `'warning'`: only failed serialization and deserialization
 
 `cache.loglevel` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
 
@@ -156,11 +161,13 @@ module.exports = {
 };
 ```
 
+T> Caching usually doesn't emit errors. All failures are warnings and fall back to not caching this item. The build will keep working. It makes sense to enable warnings if you want to investigate why caching isn't working or doesn't increase performance. It also makes sense when developing webpack plugins that affect caching. When reporting bugs for the filesystem cache, make sure to get the stack trace of warnings with the `loglevel: 'debug'` option.
+
 ### `cache.name`
 
-`string: 'default'`
+`string`
 
-Name for the cache. Different names will lead to different coexisting caches. Defaults to `'default'`.
+Name for the cache. Different names will lead to different coexisting caches. Defaults to `${config.name}-${config.mode}`. Using `cache.name` makes sense when you have multiple configurations which should have independent caches.
 
 `cache.name` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
 
@@ -178,13 +185,14 @@ module.exports = {
 
 ### `cache.store`
 
-`string: 'idle' | 'background' | 'instant'`
+`string: 'background' | 'idle' | 'instant' | 'pack'`
 
 `cache.store` tells webpack when to store data on the file system. Defaults to `'idle'`.
 
-- `'idle'`: Store data when compiler is idle
 - `'background'`: Store data in background while compiling, but doen't block the compilation
-- `'instant'`: Store data when instantly. Blocks compilation until data is stored.
+- `'idle'`: Store data when compiler is idle in one file per cached item
+- `'instant'`: Store data when instantly. Blocks compilation until data is stored
+- `'pack'`: Store data when compiler is idle in a single file for all cached items
 
 `cache.store` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
 
