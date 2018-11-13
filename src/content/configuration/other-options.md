@@ -189,7 +189,7 @@ module.exports = {
 
 `cache.store` tells webpack when to store data on the file system. Defaults to `'idle'`.
 
-- `'background'`: Store data in background while compiling, but doen't block the compilation
+- `'background'`: Store data in background while compiling, but doesn't block the compilation
 - `'idle'`: Store data when compiler is idle in one file per cached item
 - `'instant'`: Store data when instantly. Blocks compilation until data is stored
 - `'pack'`: Store data when compiler is idle in a single file for all cached items
