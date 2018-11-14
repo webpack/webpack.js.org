@@ -59,7 +59,7 @@ If a string or array of strings is passed, the chunk is named `main`. If an obje
 
 ### Dynamic entry
 
-If a function is passed then it will be invoked on every [make](https://webpack.js.org/api/compiler-hooks/#make) event.
+If a function is passed then it will be invoked on every [make](/api/compiler-hooks/#make) event.
 
 > Note that the `make` event triggers when webpack starts and for every invalidation in watch-mode.
 
