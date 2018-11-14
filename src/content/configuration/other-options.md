@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - terinjokes
   - byzyk
+  - EugeneHlushko
 related:
   - title: Using Records
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
@@ -60,29 +61,174 @@ This will force webpack to exit its bundling process.
 
 `boolean` `object`
 
-Cache the generated webpack modules and chunks to improve build speed. Caching is enabled by default while in watch mode. To disable caching simply pass:
+Cache the generated webpack modules and chunks to improve build speed. `cache` is set to `type: 'memory'` in [`development` mode](/concepts/mode/#mode-development) and disabled in [`production` mode](/concepts/mode/#mode-production). `cache: true` is an alias to `cache: { type: 'memory' }`. To disable caching pass `false`:
 
-```js
+__webpack.config.js__
+
+```javascript
 module.exports = {
   //...
   cache: false
 };
 ```
 
-If an object is passed, webpack will use this object for caching. Keeping a reference to this object will allow one to share the same cache between compiler calls:
+
+### `cache.type`
+
+`string: 'memory' | 'filesystem'`
+
+Sets the `cache` type to either in memory or on the file system. The `memory` option is very straightforward, it tells webpack to store cache in memory and doesn't allow additional configuration:
+
+__webpack.config.js__
 
 ```js
-let SharedCache = {};
+module.exports = {
+  //...
+  cache: {
+    type: 'memory'
+  }
+};
+```
+
+While setting `cache.type` to `filesystem` opens up more options for configuration.
+
+### `cache.cacheDirectory`
+
+`string`
+
+Base directory for the cache. Defaults to `node_modules/.cache/webpack`.
+
+`cache.cacheDirectory` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+
+__webpack.config.js__
+
+```javascript
+const path = require('path');
 
 module.exports = {
   //...
-  cache: SharedCache
+  cache: {
+    type: 'filesystem',
+    cacheDirectory: path.resolve(__dirname, '.temp_cache')
+  }
+};
+```
+
+W> The final location of the cache is a combination of `cache.cacheDirectory` + `cache.name`.
+
+### `cache.hashAlgorithm`
+
+`string`
+
+Algorithm used the hash generation. See [Node.js crypto](https://nodejs.org/api/crypto.html) for more details. Defaults to `md4`.
+
+`cache.hashAlgorithm` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    hashAlgorithm: 'md4'
+  }
+};
+```
+
+### `cache.loglevel`
+
+`string: 'debug' | 'info' | 'verbose' | 'warning'`
+
+`cache.loglevel` tells webpack how much of `cache` log info to display.
+
+- `'debug'`: all access and errors with stack trace
+- `'info'`: all access
+- `'verbose'`: all write access
+- `'warning'`: only failed serialization and deserialization
+
+`cache.loglevel` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    loglevel: 'debug'
+  }
+};
+```
+
+T> Caching usually doesn't emit errors. All failures are warnings and fall back to not caching this item. The build will keep working. It makes sense to enable warnings if you want to investigate why caching isn't working or doesn't increase performance. It also makes sense when developing webpack plugins that affect caching. When reporting bugs for the filesystem cache, make sure to get the stack trace of warnings with the `loglevel: 'debug'` option.
+
+### `cache.name`
+
+`string`
+
+Name for the cache. Different names will lead to different coexisting caches. Defaults to `${config.name}-${config.mode}`. Using `cache.name` makes sense when you have multiple configurations which should have independent caches.
+
+`cache.name` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    name: 'AppBuildCache'
+  }
+};
+```
+
+### `cache.store`
+
+`string: 'background' | 'idle' | 'instant' | 'pack'`
+
+`cache.store` tells webpack when to store data on the file system. Defaults to `'idle'`.
+
+- `'background'`: Store data in background while compiling, but doesn't block the compilation
+- `'idle'`: Store data when compiler is idle in one file per cached item
+- `'instant'`: Store data when instantly. Blocks compilation until data is stored
+- `'pack'`: Store data when compiler is idle in a single file for all cached items
+
+`cache.store` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    store: 'pack'
+  }
+};
+```
+
+### `cache.version`
+
+`string: ''`
+
+Version of the cache data. Different versions won't allow to reuse the cache and override existing content. Update the version when config changed in a way which doesn't allow to reuse cache. This will invalidate the cache. Defaults to `''`.
+
+`cache.version` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    version: 'your_version'
+  }
 };
 ```
 
 W> Don't share the cache between calls with different options.
-
-?> Elaborate on the warning and example - calls with different configuration options?
 
 
 ## `loader`
