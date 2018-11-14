@@ -16,6 +16,7 @@ contributors:
   - caryli
   - xgirma
   - EugeneHlushko
+  - Shashidhara
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
