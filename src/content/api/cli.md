@@ -153,8 +153,8 @@ Parameter                 | Explanation                                 | Input 
 `--config`                | Path to the config file                     | string     | webpack.config.js or webpackfile.js
 `--config-register, -r`   | Preload one or more modules before loading the webpack configuration | array |
 `--config-name`           | Name of the config to use                   | string     |
-`--env`                   | Environment passed to the config, when it is a function |
-`--mode`                  | Mode to use, either "development" or "production" | string      |
+`--env`                   | Environment passed to the config, when it is a function  | |
+`--mode`                  | Mode to use, either "development" or "production" | string |
 
 ### Output Options
 
