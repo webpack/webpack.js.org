@@ -284,6 +284,29 @@ module.exports = {
 };
 ```
 
+#### `splitChunks.cacheGroups.{cacheGroup}.enforce`
+
+`boolean: false`
+
+Tells webpack to ignore [`splitChunks.minSize`](#splitchunks-minsize), [`splitChunks.maxSize`](#splitchunks-maxsize), [`splitChunks.minChunks`](#splitchunks-minchunks), [`splitChunks.maxAsyncRequests`](#splitchunks-maxasyncrequests) and [`splitChunks.maxInitialRequests`](#splitchunks-maxinitialrequests) options and always create chunks for this cache group.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          enforce: true
+        }
+      }
+    }
+  }
+};
+```
+
 ## Examples
 
 ### Defaults: Example 1
