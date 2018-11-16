@@ -79,6 +79,16 @@ module.exports = {
 };
 ```
 
-> For example: you can use dynamic entries to get the actual entries from an external source (remote server, file system content or database)
+For example: you can use dynamic entries to get the actual entries from an external source (remote server, file system content or database):
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  entry() {
+    return fetchPathsFromSomeExternalSource(); // returns a promise that will be resolved with something like ['src/main-layout.js', 'src/admin-layout.js']
+  }
+};
+```
 
 When combining with the [`output.library`](/configuration/output#output-library) option: If an array is passed only the last item is exported.
