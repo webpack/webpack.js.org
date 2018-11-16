@@ -61,7 +61,7 @@ If a string or array of strings is passed, the chunk is named `main`. If an obje
 
 If a function is passed then it will be invoked on every [make](/api/compiler-hooks/#make) event.
 
-> Note that the `make` event triggers when webpack starts and for every invalidation in watch-mode.
+> Note that the make event triggers when webpack starts and for every invalidation when [watching for file changes](/configuration/watch/).
 
 ```js
 module.exports = {
