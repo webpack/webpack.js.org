@@ -7,6 +7,7 @@ contributors:
   - pksjce
   - e-cloud
   - byzyk
+  - EugeneHlushko
 ---
 
 Plugins are a key piece of the webpack ecosystem and provide the community with
@@ -59,18 +60,18 @@ However, for `run` which utilizes the `AsyncHook`, we can utilize `tapAsync`
 or `tapPromise` (as well as `tap`):
 
 ``` js
-compiler.hooks.run.tapAsync('MyPlugin', (compiler, callback) => {
+compiler.hooks.run.tapAsync('MyPlugin', (source, target, routesList, callback) => {
   console.log('Asynchronously tapping the run hook.');
   callback();
 });
 
-compiler.hooks.run.tapPromise('MyPlugin', compiler => {
+compiler.hooks.run.tapPromise('MyPlugin', (source, target, routesList) => {
   return new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
     console.log('Asynchronously tapping the run hook with a delay.');
   });
 });
 
-compiler.hooks.run.tapPromise('MyPlugin', async compiler => {
+compiler.hooks.run.tapPromise('MyPlugin', async (source, target, routesList) => {
   await new Promise(resolve => setTimeout(resolve, 1000));
   console.log('Asynchronously tapping the run hook with a delay.');
 });
@@ -127,8 +128,8 @@ The `reportProgress` function may be called with these arguments:
 reportProgress(percentage, ...args);
 ```
 
-* `percentage`: This argument is unused; instead, [`ProgressPlugin`](/plugins/progress-plugin/) will calculate a percentage based on the current hook.
-* `...args`: Any number of strings, which will be passed to the `ProgressPlugin` handler to be reported to the user.
+- `percentage`: This argument is unused; instead, [`ProgressPlugin`](/plugins/progress-plugin/) will calculate a percentage based on the current hook.
+- `...args`: Any number of strings, which will be passed to the `ProgressPlugin` handler to be reported to the user.
 
 Note that only a subset of compiler and compilation hooks support the `reportProgress` function. See [`ProgressPlugin`](/plugins/progress-plugin/#supported-hooks) for a full list.
 

@@ -3,6 +3,7 @@ title: Plugin Patterns
 sort: 5
 contributors:
   - nveenjain
+  - EugeneHlushko
 ---
 
 Plugins grant unlimited opportunity to perform customizations within the webpack build system. This allows you to create custom asset types, perform unique build modifications, or even enhance the webpack runtime while using middleware. The following are some features of webpack that become useful while writing plugins.

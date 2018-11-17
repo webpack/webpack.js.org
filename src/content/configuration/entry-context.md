@@ -16,7 +16,7 @@ The entry object is where webpack looks to start building the bundle. The contex
 
 `string`
 
-The base directory, an **absolute path**, for resolving entry points and loaders from configuration.
+The base directory, an __absolute path__, for resolving entry points and loaders from configuration.
 
 ``` js
 module.exports = {
@@ -36,7 +36,7 @@ By default the current directory is used, but it's recommended to pass a value i
 
 The point or points to enter the application. At this point the application starts executing. If an array is passed all items will be executed.
 
-A dynamically loaded module is **not** an entry point.
+A dynamically loaded module is __not__ an entry point.
 
 Simple rule: one entry point per HTML page. SPA: one entry point, MPA: multiple entry points.
 

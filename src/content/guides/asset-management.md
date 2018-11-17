@@ -7,6 +7,7 @@ contributors:
   - TheDutchCoder
   - sudarsangp
   - chenxsan
+  - EugeneHlushko
 ---
 
 If you've been following the guides from the start, you will now have a small project that shows "Hello webpack". Now let's try to incorporate some other assets, like images, to see how they can be handled.
@@ -29,7 +30,8 @@ __dist/index.html__
 +    <title>Asset Management</title>
     </head>
     <body>
-      <script src="./bundle.js"></script>
+-     <script src="./main.js"></script>
++     <script src="./bundle.js"></script>
     </body>
   </html>
 ```
@@ -121,20 +123,11 @@ Now run your build command:
 ``` bash
 npm run build
 
-Hash: 9a3abfc96300ef87880f
-Version: webpack 2.6.1
-Time: 834ms
-    Asset    Size  Chunks                    Chunk Names
-bundle.js  560 kB       0  [emitted]  [big]  main
-   [0] ./~/lodash/lodash.js 540 kB {0} [built]
-   [1] ./src/style.css 1 kB {0} [built]
-   [2] ./~/css-loader!./src/style.css 191 bytes {0} [built]
-   [3] ./~/css-loader/lib/css-base.js 2.26 kB {0} [built]
-   [4] ./~/style-loader/lib/addStyles.js 8.7 kB {0} [built]
-   [5] ./~/style-loader/lib/urls.js 3.01 kB {0} [built]
-   [6] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [7] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [8] ./src/index.js 351 bytes {0} [built]
+...
+    Asset      Size  Chunks             Chunk Names
+bundle.js  76.4 KiB       0  [emitted]  main
+Entrypoint main = bundle.js
+...
 ```
 
 Open up `index.html` in your browser again and you should see that `Hello webpack` is now styled in red. To see what webpack did, inspect the page (don't view the page source, as it won't show you the result) and look at the page's head tags. It should contain our style block that we imported in `index.js`.
@@ -241,22 +234,12 @@ Let's create a new build and open up the index.html file again:
 ``` bash
 npm run build
 
-Hash: 854865050ea3c1c7f237
-Version: webpack 2.6.1
-Time: 895ms
-                               Asset     Size  Chunks                    Chunk Names
-5c999da72346a995e7e2718865d019c8.png  11.3 kB          [emitted]
-                           bundle.js   561 kB       0  [emitted]  [big]  main
-   [0] ./src/icon.png 82 bytes {0} [built]
-   [1] ./~/lodash/lodash.js 540 kB {0} [built]
-   [2] ./src/style.css 1 kB {0} [built]
-   [3] ./~/css-loader!./src/style.css 242 bytes {0} [built]
-   [4] ./~/css-loader/lib/css-base.js 2.26 kB {0} [built]
-   [5] ./~/style-loader/lib/addStyles.js 8.7 kB {0} [built]
-   [6] ./~/style-loader/lib/urls.js 3.01 kB {0} [built]
-   [7] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [8] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [9] ./src/index.js 503 bytes {0} [built]
+...
+                               Asset      Size  Chunks                    Chunk Names
+da4574bb234ddc4bb47cbe1ca4b20303.png  3.01 MiB          [emitted]  [big]
+                           bundle.js  76.7 KiB       0  [emitted]         main
+Entrypoint main = bundle.js
+...
 ```
 
 If all went well, you should now see your icon as a repeating background, as well as an `img` element beside our `Hello webpack` text. If you inspect this element, you'll see that the actual filename has changed to something like `5c999da72346a995e7e2718865d019c8.png`. This means webpack found our file in the `src` folder and processed it!
@@ -351,24 +334,14 @@ Now run a new build and let's see if webpack handled our fonts:
 ``` bash
 npm run build
 
-Hash: b4aef94169088c79ed1c
-Version: webpack 2.6.1
-Time: 775ms
-                                Asset     Size  Chunks                    Chunk Names
- 5c999da72346a995e7e2718865d019c8.png  11.3 kB          [emitted]
-11aebbbd407bcc3ab1e914ca0238d24d.woff   221 kB          [emitted]
-                            bundle.js   561 kB       0  [emitted]  [big]  main
-   [0] ./src/icon.png 82 bytes {0} [built]
-   [1] ./~/lodash/lodash.js 540 kB {0} [built]
-   [2] ./src/style.css 1 kB {0} [built]
-   [3] ./~/css-loader!./src/style.css 420 bytes {0} [built]
-   [4] ./~/css-loader/lib/css-base.js 2.26 kB {0} [built]
-   [5] ./src/MyFont.woff 83 bytes {0} [built]
-   [6] ./~/style-loader/lib/addStyles.js 8.7 kB {0} [built]
-   [7] ./~/style-loader/lib/urls.js 3.01 kB {0} [built]
-   [8] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [9] (webpack)/buildin/module.js 517 bytes {0} [built]
-  [10] ./src/index.js 503 bytes {0} [built]
+...
+                                 Asset      Size  Chunks                    Chunk Names
+5439466351d432b73fdb518c6ae9654a.woff2  19.5 KiB          [emitted]
+ 387c65cc923ad19790469cfb5b7cb583.woff  23.4 KiB          [emitted]
+  da4574bb234ddc4bb47cbe1ca4b20303.png  3.01 MiB          [emitted]  [big]
+                             bundle.js    77 KiB       0  [emitted]         main
+Entrypoint main = bundle.js
+...
 ```
 
 Open up `index.html` again and see if our `Hello webpack` text has changed to the new font. If all is well, you should see the changes.
