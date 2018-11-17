@@ -7,12 +7,13 @@ contributors:
   - simon04
   - byzyk
   - madhavarshney
+  - dhurlburtusa
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
 
-Since version 4 webpack runs optimizations for you depending on the chosen `mode`, still all optimizations are available for manual configuration and overrides.
+Since version 4 webpack runs optimizations for you depending on the chosen  [`mode`](/concepts/mode/), still all optimizations are available for manual configuration and overrides.
 
 
 ## `optimization.minimize`
@@ -334,7 +335,7 @@ module.exports = {
 
 `bool`
 
-Tells webpack to figure out an order of modules which will result in the smallest initial bundle. By default `optimization.occurrenceOrder` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise. 
+Tells webpack to figure out an order of modules which will result in the smallest initial bundle. By default `optimization.occurrenceOrder` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise.
 
 __webpack.config.js__
 
@@ -351,7 +352,7 @@ module.exports = {
 
 `bool`
 
-Tells webpack to figure out which exports are provided by modules to generate more efficient code for `export * from ...`. By default  `optimization.providedExports` is enabled. 
+Tells webpack to figure out which exports are provided by modules to generate more efficient code for `export * from ...`. By default  `optimization.providedExports` is enabled.
 
 __webpack.config.js__
 
@@ -368,9 +369,9 @@ module.exports = {
 
 `bool`
 
-Tells webpack to determine used exports for each module. This depends on [`optimization.providedExports`](#optimization-occurrenceorder). Information collected by `optimization.usedExports` is used by other optimizations or code generation i.e. exports are not generated for unused exports, export names are mangled to single char identifiers when all usages are compatible. 
+Tells webpack to determine used exports for each module. This depends on [`optimization.providedExports`](#optimization-occurrenceorder). Information collected by `optimization.usedExports` is used by other optimizations or code generation i.e. exports are not generated for unused exports, export names are mangled to single char identifiers when all usages are compatible.
 Dead code elimination in minimizers will benefit from this and can remove unused exports.
-By default `optimization.usedExports` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise. 
+By default `optimization.usedExports` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise.
 
 __webpack.config.js__
 
@@ -388,7 +389,7 @@ module.exports = {
 `bool`
 
 Tells webpack to find segments of the module graph which can be safely concatenated into a single module. Depends on [`optimization.providedExports`](#optimization-providedexports) and [`optimization.usedExports`](#optimization-usedexports).
-By default `optimization.concatenateModules` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise. 
+By default `optimization.concatenateModules` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise.
 
 __webpack.config.js__
 
@@ -405,7 +406,7 @@ module.exports = {
 
 `bool`
 
-Tells webpack to recognise the [`sideEffects`](https://github.com/webpack/webpack/blob/master/examples/side-effects/README.md) flag in `package.json` or rules to skip over modules which are flagged to contain no side effects when exports are not used. 
+Tells webpack to recognise the [`sideEffects`](https://github.com/webpack/webpack/blob/master/examples/side-effects/README.md) flag in `package.json` or rules to skip over modules which are flagged to contain no side effects when exports are not used.
 
 __package.json__
 
@@ -421,7 +422,7 @@ T> Please note that `sideEffects` should be in the npm module's `package.json` f
 
 `optimization.sideEffects` depends on [`optimization.providedExports`](#optimization-providedexports) to be enabled. This dependency has a build time cost, but eliminating modules has positive impact on performance because of less code generation. Effect of this optimization depends on your codebase, try it for possible performance wins.
 
-By default `optimization.sideEffects` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise. 
+By default `optimization.sideEffects` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise.
 
 __webpack.config.js__
 

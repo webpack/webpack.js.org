@@ -353,17 +353,28 @@ Aside from the module syntaxes described above, webpack also allows a few custom
 require.context(
   directory: String,
   includeSubdirs: Boolean /* optional, default true */,
-  filter: RegExp /* optional */
+  filter: RegExp /* optional, default /^\.\/.*$/, any file */,
+  mode: String  /* optional, 'sync' | 'eager' | 'weak' | 'lazy' | 'lazy-once', default 'sync' */
 )
 ```
 
-Specify a whole group of dependencies using a path to the `directory`, an option to `includeSubdirs`, and a `filter` for more fine grained control of the modules included. These can then be easily resolved later on:
+Specify a whole group of dependencies using a path to the `directory`, an option to `includeSubdirs`, a `filter` for more fine grained control of the modules included, and a `mode` to define the way how loading will work. Underlying modules can then be easily resolved later on:
 
 ```javascript
 var context = require.context('components', true, /\.html$/);
 var componentA = context.resolve('componentA');
 ```
 
+If `mode` is specified as "lazy", the underlying modules will be loaded asynchronously:
+
+```javascript
+var context = require.context('locales', true, /\.json$/, 'lazy');
+context('localeA').then(locale => {
+  // do something with locale
+});
+```
+
+The full list of available modes and its behavior is described in [`import()`](#import-) documentation.
 
 ### `require.include`
 
@@ -408,4 +419,4 @@ const page = 'Foo';
 __webpack_modules__[require.resolveWeak(`./page/${page}`)];
 ```
 
-T> `require.resolveWeak` is the foundation of *universal rendering* (SSR + Code Splitting), as used in packages such as [react-universal-component](https://github.com/faceyspacey/react-universal-component). It allows code to render synchronously on both the server and initial page-loads on the client. It requires that chunks are manually served or somehow available. It's able to require modules without indicating they should be bundled into a chunk. It's used in conjunction with `import()` which takes over when user navigation triggers additional imports.
+T> `require.resolveWeak` is the foundation of _universal rendering_ (SSR + Code Splitting), as used in packages such as [react-universal-component](https://github.com/faceyspacey/react-universal-component). It allows code to render synchronously on both the server and initial page-loads on the client. It requires that chunks are manually served or somehow available. It's able to require modules without indicating they should be bundled into a chunk. It's used in conjunction with `import()` which takes over when user navigation triggers additional imports.

@@ -24,10 +24,10 @@ A plugin for webpack consists of
 ```javascript
 // A JavaScript class.
 class MyExampleWebpackPlugin {
-  // Define `apply` as it's prototype method which is supplied with compiler as it's argument
+  // Define `apply` as its prototype method which is supplied with compiler as its argument
   apply(compiler) {
     // Specify the event hook to attach to
-    compiler.hooks.compile.tapAsync(
+    compiler.hooks.emit.tapAsync(
       'MyExampleWebpackPlugin',
       (compilation, callback) => {
         console.log('This is an example plugin!');
@@ -97,7 +97,7 @@ The list of hooks available on the `compiler`, `compilation`, and other importan
 
 ## Async event hooks
 
-Some plugin hooks are asynchronous. To tap into them, we can use `tap` method which will behave in synchronous manner or use one of `tapAsync` method or `tapPromise` method which are asyncronous methods.
+Some plugin hooks are asynchronous. To tap into them, we can use `tap` method which will behave in synchronous manner or use one of `tapAsync` method or `tapPromise` method which are asynchronous methods.
 
 ### tapAsync
 
@@ -151,7 +151,7 @@ Let's write a simple example plugin that generates a new build file called `file
 class FileListPlugin {
   apply(compiler) {
     // emit is asynchronous hook, tapping into it using tapAsync, you can use tapPromise/tap(synchronous) as well
-    compiler.hooks.emit.tapAsync('FileListPlugin', (compiler, callback) => {
+    compiler.hooks.emit.tapAsync('FileListPlugin', (compilation, callback) => {
       // Create a header string for the generated file:
       var filelist = 'In this build:\n\n';
 
@@ -197,13 +197,13 @@ Various types of hooks supported are :-
 
 ### Synchronous Hooks
 
-- **SyncHook**
+- __SyncHook__
 
     - Defined as `new SyncHook([params])`
     - Tapped into using `tap` method.
     - Called using `call(...params)` method.
 
-- **Bail Hooks**
+- __Bail Hooks__
 
     - Defined using `SyncBailHook[params]`
     - Tapped into using `tap` method.
@@ -211,18 +211,18 @@ Various types of hooks supported are :-
 
   In these type of hooks, each of the plugin callbacks will be invoked one after the other with the specific `args`. If any value is returned except undefined by any plugin, then that value is returned by hook and no further plugin callback is invoked. Many useful events like `optimizeChunks`, `optimizeChunkModules` are SyncBailHooks.
 
-- **Waterfall Hooks**
+- __Waterfall Hooks__
 
     - Defined using `SyncWaterfallHook[params]`
     - Tapped into using `tap` method.
     - Called using `call( ... params)` method
 
   Here each of the plugins are called one after the other with the arguments from the return value of the previous plugin. The plugin must take the order of its execution into account.
-  It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. Hence atleast 1 param must be supplied for waterfall hooks. This pattern is used in the Tapable instances which are related to the webpack templates like `ModuleTemplate`, `ChunkTemplate` etc.
+  It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. Hence at least 1 param must be supplied for waterfall hooks. This pattern is used in the Tapable instances which are related to the webpack templates like `ModuleTemplate`, `ChunkTemplate` etc.
 
 ### Asynchronous Hooks
 
-- **Async Series Hook**
+- __Async Series Hook__
 
     - Defined using `AsyncSeriesHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
@@ -231,7 +231,7 @@ Various types of hooks supported are :-
   The plugin handler functions are called with all arguments and a callback function with the signature `(err?: Error) -> void`. The handler functions are called in order of registration. `callback` is called after all the handlers are called.
   This is also a commonly used pattern for events like `emit`, `run`.
 
-- **Async waterfall** The plugins will be applied asynchronously in the waterfall manner.
+- __Async waterfall__ The plugins will be applied asynchronously in the waterfall manner.
 
     - Defined using `AsyncWaterfallHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
@@ -240,7 +240,7 @@ Various types of hooks supported are :-
   The plugin handler functions are called with the current value and a callback function with the signature `(err: Error, nextValue: any) -> void.` When called `nextValue` is the current value for the next handler. The current value for the first handler is `init`. After all handlers are applied, callback is called with the last value. If any handler passes a value for `err`, the callback is called with this error and no more handlers are called.
   This plugin pattern is expected for events like `before-resolve` and `after-resolve`.
 
-- **Async Series Bail**
+- __Async Series Bail__
 
     - Defined using `AsyncSeriesBailHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
@@ -250,13 +250,13 @@ Various types of hooks supported are :-
   // Call a hook:
   this.hooks.compilation.call();
 
-- **Async Parallel**
+- __Async Parallel__
 
     - Defined using `AsyncParallelHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
     - Called using `callAsync( ... params)` method
 
-- **Async Series Bail**
+- __Async Series Bail__
 
     - Defined using `AsyncSeriesBailHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.

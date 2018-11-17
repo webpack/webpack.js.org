@@ -19,7 +19,7 @@ T> __consumer__ here is any end user application that includes the library that 
 
 `string` `object` `function`  `regex`
 
-__Prevent bundling__ of certain `import`ed packages and instead retrieve these *external dependencies* at runtime.
+__Prevent bundling__ of certain `import`ed packages and instead retrieve these _external dependencies_ at runtime.
 
 For example, to include [jQuery](https://jquery.com/) from a CDN instead of bundling it:
 

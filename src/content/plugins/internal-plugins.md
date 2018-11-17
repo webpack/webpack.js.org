@@ -1,6 +1,7 @@
 ---
 title: Internal webpack plugins
 contributors:
+  - iAziz786
   - EugeneHlushko
   - ooflorent
   - Legends
@@ -12,12 +13,12 @@ W> You should only care about them if you are building your own compiler based o
 
 Categories of internal plugins:
 
-* [environment](#environment)
-* [compiler](#compiler)
-* [entry](#entry)
-* [output](#output)
-* [source](#source)
-* [optimize](#optimize)
+- [environment](#environment)
+- [compiler](#compiler)
+- [entry](#entry)
+- [output](#output)
+- [source](#source)
+- [optimize](#optimize)
 
 ## environment
 
@@ -177,8 +178,8 @@ Tries to evaluate expressions in `if (...)` statements and ternaries to replace 
 
 There are multiple optimizations in production mode regarding dead branches:
 
-* The ones performed by [Terser](https://github.com/fabiosantoscode/terser)
-* The ones performed by webpack
+- The ones performed by [Terser](https://github.com/fabiosantoscode/terser)
+- The ones performed by webpack
 
 webpack will try to evaluate conditional statements. If it succeeds then the dead branch is removed. webpack can't do constant folding unless the compiler knows it. For example:
 
@@ -194,7 +195,7 @@ if (FOO === 0) {
 
 In the above example, webpack is unable to prune the branch, but Terser does. However, if `FOO` is defined using [DefinePlugin](/plugins/define-plugin/), webpack will succeed.
 
-It is imporant to mention that `import { calculateTax } from './tax';` will also get pruned because `calculateTax()` call was in the dead branch and got eliminated.
+It is important to mention that `import { calculateTax } from './tax';` will also get pruned because `calculateTax()` call was in the dead branch and got eliminated.
 
 ### ProvidePlugin
 
@@ -314,7 +315,7 @@ Adds chunk ids of chunks which are included in the chunk. This eliminates unnece
 
 ### OccurenceOrderPlugin
 
-`optimize/OccurenceOrderPlugin(preferEntry)`
+`optimize/OccurrenceOrderPlugin(preferEntry)`
 
 Order the modules and chunks by occurrence. This saves space, because often referenced modules and chunks get smaller ids.
 
