@@ -25,6 +25,8 @@ module.exports = {
 
 The single entry syntax for the `entry` property is a shorthand for:
 
+__webpack.config.js__
+
 ```javascript
 module.exports = {
   entry: {
