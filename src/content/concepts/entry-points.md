@@ -6,6 +6,7 @@ contributors:
   - chrisVillanueva
   - byzyk
   - sokra
+  - EugeneHlushko
 ---
 
 As mentioned in [Getting Started](/guides/getting-started/#using-a-configuration), there are multiple ways to define the `entry` property in your webpack configuration. We will show you the ways you __can__ configure the `entry` property, in addition to explaining why it may be useful to you.
