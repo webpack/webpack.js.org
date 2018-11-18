@@ -5,6 +5,7 @@ contributors:
   - simon04
   - neilkennedy
   - byzyk
+  - EugeneHlushko
 related:
   - title: Building Source Maps
     url: https://survivejs.com/webpack/building/source-maps/#-sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin-

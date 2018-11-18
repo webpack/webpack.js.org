@@ -5,6 +5,7 @@ sort: 2
 contributors:
   - byzyk
   - madhavarshney
+  - EugeneHlushko
 ---
 
 The `Compilation` module is used by the `Compiler` to create new compilations
