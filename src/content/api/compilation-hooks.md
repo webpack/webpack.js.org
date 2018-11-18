@@ -627,12 +627,7 @@ Parameters: `childCompiler` `compilerName` `compilerIndex`
 
 ### `normalModuleLoader`
 
-`SyncHook`
-
-The normal module loader is the function that actually loads all the modules
-in the module graph (one-by-one).
-
-Parameters: `loaderContext` `module`
+Since webpack v5 `normalModuleLoader` hook was removed. Now to access the loader use `NormalModule.getCompilationHooks(compilation).loader` instead.
 
 ### `dependencyReference`
 
