@@ -5,6 +5,7 @@ contributors:
   - simon04
   - neilkennedy
   - byzyk
+  - EugeneHlushko
 related:
   - title: Building Source Maps
     url: https://survivejs.com/webpack/building/source-maps/#-sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin-
@@ -30,12 +31,9 @@ The following options are supported:
 - `fallbackModuleFilenameTemplate` (`string`): See link above.
 - `module` (`boolean`): Indicates whether loaders should generate source maps (defaults to `true`).
 - `columns` (`boolean`): Indicates whether column mappings should be used (defaults to `true`).
-- `lineToLine` (`boolean` or `object`): Simplify and speed up source mapping by using line to line source mappings for matched modules.
 - `noSources` (`boolean`): Prevents the source file content from being included in the source map (defaults to `false`).
 - `publicPath` (`string`): Emits absolute URLs with public path prefix, e.g. `https://example.com/project/`.
 - `fileContext` (`string`): Makes the `[file]` argument relative to this directory.
-
-The `lineToLine` object allows for the same `test`, `include`, and `exclude` options described above.
 
 The `fileContext` option is useful when you want to store source maps in an upper level directory to avoid `../../` appearing in the absolute `[url]`.
 

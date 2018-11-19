@@ -136,28 +136,6 @@ A fallback used when the template string or function above yields duplicates.
 See [`output.devtoolModuleFilenameTemplate`](#output-devtoolmodulefilenametemplate).
 
 
-## `output.devtoolLineToLine`
-
-`boolean | object`
-
-> Avoid using this option as it is __deprecated__ and will soon be removed.
-
-Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines.
-
-Pass a boolean to enable or disable this feature for all modules (defaults to `false`). An object with `test`, `include`, `exclude` is also allowed. For example, to enable this feature for all javascript files within a certain directory:
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    devtoolLineToLine: { test: /\.js$/, include: 'src/utilities' }
-  }
-};
-```
-
-
 ## `output.devtoolModuleFilenameTemplate`
 
 `string | function(info)`
