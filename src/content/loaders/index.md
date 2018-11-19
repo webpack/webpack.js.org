@@ -19,7 +19,6 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 - [`val-loader`](/loaders/val-loader) Executes code as module and consider exports as JS code
 - [`url-loader`](/loaders/url-loader) Works like the file loader, but can return a [data URL](https://tools.ietf.org/html/rfc2397) if the file is smaller than a limit
 - [`file-loader`](/loaders/file-loader) Emits the file into the output folder and returns the (relative) URL
-- [`ref-loader`](https://www.npmjs.com/package/ref-loader) Create dependencies between any files manually
 
 
 ## JSON
