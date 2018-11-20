@@ -8,7 +8,7 @@ contributors:
 - EugeneHlushko
 ---
 
-To understand why you should use webpack let's do a recap of how we use JavaScript on the web before bundlers were a thing.
+To understand why you should use webpack let's do a recap of how we used JavaScript on the web before bundlers were a thing.
 
 There are two ways to run JavaScript in a browser. First, include a script for each functionality you want to implement, the issue is that the solution is hard to scale as loading too many scripts causes a network bottleneck. The other alternative is to load a big .js file containing all your project code, but this results in an unmaintainable scripts that causes problems in scope, size, readability, fragility and monolith files.
 
@@ -17,7 +17,7 @@ There are two ways to run JavaScript in a browser. First, include a script for e
 
 IIFEs solve scoping issues for large projects. When script files are wrapped by an IIFE, you can safely concatenate or safely combine files without concern of scope collision. 
 
-This lead to tools like Make, Gulp, Grunt, Broccoli or Brunch. These tools are known as task runners and they are used, among with other purposes, to concatenate all your project files together in order to solve some of the issues mentioned before.
+This lead to tools like Make, Gulp, Grunt, Broccoli or Brunch. These tools are known as task runners and they are used, among other purposes, to concatenate all your project files together in order to solve some of the issues mentioned before.
 
 However, anytime you want to change one file you have to rebuild the whole thing. Concatenating makes it trivial to reuse scripts across files and makes build optimizations more difficult to implement. How do you even know what code is being used and which is not?
 
