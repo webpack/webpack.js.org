@@ -119,9 +119,19 @@ export default class Navigation extends React.Component {
       });
 
       window.addEventListener('keyup', e => {
-        if (e.which === 9 && e.target.classList.contains('navigation__search-input')) {
-          this._openSearch();
+
+        switch(e.which) {
+          case 9: // `tab` key
+            if (e.target.classList.contains('navigation__search-input')) this._openSearch();
+            break;
+          case 191: // `/` key
+            this._openSearch(true);
+            break;
+          case 27: // `esc` key
+            this._closeSearch();
+            break;
         }
+
       });
     }
   }
@@ -168,8 +178,20 @@ export default class Navigation extends React.Component {
   /**
    * Expand the search input
    *
+   * 
+   * @param {boolean} andFocus - If this open should also focus the input
    */
-  _openSearch() {
+  _openSearch(andFocus = false) {
     this.container.classList.add('navigation--search-mode');
+
+    if ( andFocus === true ) this.searchInput.focus();
+  }
+
+  /**
+   * Closes the search input
+   *
+   */
+  _closeSearch() {
+    this.container.classList.remove('navigation--search-mode');
   }
 }
