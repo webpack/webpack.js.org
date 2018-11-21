@@ -7,9 +7,14 @@ import Links from './Links.json';
 
 // TODO: Migrate to React Banner
 export default class Navigation extends React.Component {
-  render() {
-    let { pageUrl = '' } = this.props;
 
+   // As this varaible is purly to track the state of the search,
+  // and it's state doesn't affect the renders' output. And to
+  // save react a re-render, we will not be storing this in the
+  // components state object. 
+  _searchOpen = false;
+
+  render() {
     return (
       <header className="navigation" ref={ container => this.container = container }>
         <Container className="navigation__inner">
@@ -118,21 +123,27 @@ export default class Navigation extends React.Component {
         inputSelector: '.navigation__search-input'
       });
 
-      window.addEventListener('keyup', e => {
-
-        switch(e.which) {
+      // Keydown so we can "stop" the event if need be. 
+      window.addEventListener("keydown", e => {
+        // Short circuit, as we only care about the "naked" key
+        if (e.shiftKey || e.ctrlKey || e.metaKey) return;
+      
+        switch (e.which) {
           case 9: // `tab` key
-            if (e.target.classList.contains('navigation__search-input')) this._openSearch();
+            if (e.target.classList.contains("navigation__search-input"))
+              this._openSearch();
             break;
           case 191: // `/` key
-            this._openSearch(true);
+            !this._searchOpen && this._openSearch();
+            e.preventDefault(); // to block entering a `/` if the input is already in focus.
             break;
           case 27: // `esc` key
-            this._closeSearch();
+            this._searchOpen && this._closeSearch();
             break;
         }
-
       });
+      
+
     }
   }
 
@@ -170,21 +181,19 @@ export default class Navigation extends React.Component {
    *
    */
   _toggleSearch() {
-    let state = this.container.classList.toggle('navigation--search-mode');
-
-    if ( state === true ) this.searchInput.focus();
+    this._searchOpen
+      ? this._closeSearch()
+      : this._openSearch();
   }
 
   /**
    * Expand the search input
    *
-   * 
-   * @param {boolean} andFocus - If this open should also focus the input
    */
-  _openSearch(andFocus = false) {
+  _openSearch() {
     this.container.classList.add('navigation--search-mode');
-
-    if ( andFocus === true ) this.searchInput.focus();
+    this.searchInput.focus();
+    this._searchOpen = true;
   }
 
   /**
@@ -193,5 +202,6 @@ export default class Navigation extends React.Component {
    */
   _closeSearch() {
     this.container.classList.remove('navigation--search-mode');
+    this._searchOpen = false;
   }
 }
