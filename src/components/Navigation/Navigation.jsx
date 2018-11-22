@@ -124,18 +124,21 @@ export default class Navigation extends React.Component {
       });
 
       // Keydown so we can "stop" the event if need be. 
-      window.addEventListener("keydown", e => {
+      window.addEventListener('keydown', e => {
         // Short circuit, as we only care about the "naked" key
         if (e.shiftKey || e.ctrlKey || e.metaKey) return;
       
         switch (e.which) {
           case 9: // `tab` key
-            if (e.target.classList.contains("navigation__search-input"))
+            if (e.target.classList.contains('navigation__search-input'))
               this._openSearch();
             break;
           case 191: // `/` key
-            !this._searchOpen && this._openSearch();
-            e.preventDefault(); // to block entering a `/` if the input is already in focus.
+            // We wrap this all in an if, so that the `/` key can still be used normally when the search is open.
+            if (!this._searchOpen) {
+              this._openSearch();
+              e.preventDefault(); // to block entering a `/` if the input is already in focus.
+            }
             break;
           case 27: // `esc` key
             this._searchOpen && this._closeSearch();
