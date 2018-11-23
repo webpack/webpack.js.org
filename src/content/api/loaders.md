@@ -547,6 +547,7 @@ module.exports = function(source){
 The module on which loader had thrown this error will get bundled like this:
 
 <!-- eslint-skip -->
+
 ```js
 
 /***/ "./src/loader.js!./src/lib.js":
