@@ -7,6 +7,7 @@ contributors:
   - pksjce
   - fadysamirsadek
   - byzyk
+  - zefman
 ---
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
@@ -18,7 +19,7 @@ T> __consumer__ here is any end user application that includes the library that 
 
 `string` `object` `function`  `regex`
 
-__Prevent bundling__ of certain `import`ed packages and instead retrieve these *external dependencies* at runtime.
+__Prevent bundling__ of certain `import`ed packages and instead retrieve these _external dependencies_ at runtime.
 
 For example, to include [jQuery](https://jquery.com/) from a CDN instead of bundling it:
 
@@ -148,5 +149,37 @@ module.exports = {
 
 In this case any dependency named `jQuery`, capitalized or not, or `$` would be externalized.
 
+### Combining syntaxes
+
+Sometimes you may want to use a combination of the above syntaxes. This can be done in the following manner:
+
+```js
+module.exports = {
+  //...
+  externals: [
+    {
+      // String
+      react: 'react',
+      // Object
+      lodash : {
+        commonjs: 'lodash',
+        amd: 'lodash',
+        root: '_' // indicates global variable
+      },
+      // Array
+      subtract: ['./math', 'subtract']
+    },
+    // Function
+    function(context, request, callback) {
+      if (/^yourregex$/.test(request)){
+        return callback(null, 'commonjs ' + request);
+      }
+      callback();
+    },
+    // Regex
+    /^(jquery|\$)$/i
+  ]
+};
+```
 
 For more information on how to use this configuration, please refer to the article on [how to author a library](/guides/author-libraries).
