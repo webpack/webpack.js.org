@@ -516,7 +516,7 @@ Hacky access to the Module object being loaded.
 You can report errors from inside a loader by:
 
 - Using [this.emitError](/api/loaders/#this-emiterror). Will report the errors without interrupting module's compilation.
-- Using throw (or other uncaught exception). Throwing an error while a loader is running will cause current module compilation failure.
+- Using `throw` (or other uncaught exception). Throwing an error while a loader is running will cause current module compilation failure.
 - Using `callback` (in async mode). Pass an error to the callback will also cause module compilation failure.
 
 For example:
