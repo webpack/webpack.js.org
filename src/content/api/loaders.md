@@ -25,7 +25,7 @@ Either `return` or `this.callback` can be used to return the transformed `conten
 
 __sync-loader.js__
 
-``` js
+``` javascript
 module.exports = function(content, map, meta) {
   return someSyncOperation(content);
 };
@@ -35,7 +35,7 @@ The `this.callback` method is more flexible as it allows multiple arguments to b
 
 __sync-loader-with-multiple-results.js__
 
-``` js
+``` javascript
 module.exports = function(content, map, meta) {
   this.callback(null, someSyncOperation(content), map, meta);
   return; // always return undefined when calling callback()
@@ -48,7 +48,7 @@ For asynchronous loaders, [`this.async`](/api/loaders#this-async) is used to ret
 
 __async-loader.js__
 
-``` js
+``` javascript
 module.exports = function(content, map, meta) {
   var callback = this.async();
   someAsyncOperation(content, function(err, result) {
@@ -60,7 +60,7 @@ module.exports = function(content, map, meta) {
 
 __async-loader-with-multiple-results.js__
 
-``` js
+``` javascript
 module.exports = function(content, map, meta) {
   var callback = this.async();
   someAsyncOperation(content, function(err, result, sourceMaps, meta) {
@@ -79,7 +79,7 @@ By default, the resource file is converted to a UTF-8 string and passed to the l
 
 __raw-loader.js__
 
-``` js
+``` javascript
 module.exports = function(content) {
   assert(content instanceof Buffer);
   return someSyncOperation(content);
@@ -94,7 +94,7 @@ module.exports.raw = true;
 
 Loaders are __always__ called from right to left. There are some instances where the loader only cares about the __metadata__ behind a request and can ignore the results of the previous loader. The `pitch` method on loaders is called from __left to right__ before the loaders are actually executed (from right to left). For the following [`use`](/configuration/module#rule-use) configuration:
 
-``` js
+``` javascript
 module.exports = {
   //...
   module: {
@@ -128,7 +128,7 @@ So why might a loader take advantage of the "pitching" phase?
 
 First, the `data` passed to the `pitch` method is exposed in the execution phase as well under `this.data` and could be useful for capturing and sharing information from earlier in the cycle.
 
-``` js
+``` javascript
 module.exports = function(content) {
   return someSyncOperation(content, this.data.value);
 };
@@ -140,7 +140,7 @@ module.exports.pitch = function(remainingRequest, precedingRequest, data) {
 
 Second, if a loader delivers a result in the `pitch` method the process turns around and skips the remaining loaders. In our example above, if the `b-loader`s `pitch` method returned something:
 
-``` js
+``` javascript
 module.exports = function(content) {
   return someSyncOperation(content);
 };
@@ -170,7 +170,7 @@ The loader context represents the properties that are available inside of a load
 Given the following example this require call is used:
 In `/abc/file.js`:
 
-``` js
+``` javascript
 require('./loader1?xyz!loader2!./resource?rrr');
 ```
 
@@ -213,7 +213,7 @@ A function that can be called synchronously or asynchronously in order to return
 
 <!-- eslint-skip -->
 
-```js
+``` javascript
 this.callback(
   err: Error | null,
   content: string | Buffer,
@@ -261,13 +261,13 @@ An array of all the loaders. It is writeable in the pitch phase.
 
 <!-- eslint-skip -->
 
-```js
+``` javascript
 loaders = [{request: string, path: string, query: string, module: function}]
 ```
 
 In the example:
 
-``` js
+``` javascript
 [
   {
     request: '/abc/loader1.js?xyz',
@@ -513,43 +513,47 @@ Hacky access to the Module object being loaded.
 
 ## Error Reporting
 
-Here are the ways to throw an error from inside a loader:
+You can report errors from inside a loader by:
 
-### Using `this.emitError`
-
-[this.emitError](/api/loaders/#this-emiterror) will report the errors without interrupting module's compilation.
-
-
-### Using `throw` (or other uncaught exception)
-
-Throwing an error while a loader is running will cause current module compilation failure.
+- Using [this.emitError](/api/loaders/#this-emiterror). Will report the errors without interrupting module's compilation.
+- Using throw (or other uncaught exception). Throwing an error while a loader is running will cause current module compilation failure.
+- Using `callback` (in async mode). Pass an error to the callback will also cause module compilation failure.
 
 For example:
 
 __./src/index.js__
 
-```js
-
+``` javascript
 require('./loader!./lib');
-
 ```
+
+Throwing an error from loader:
 
 __./src/loader.js__
 
-```js
-
-module.exports = function(source){
-  throw new Error('Here is a Fatal Error!');
+``` javascript
+module.exports = function(source) {
+  throw new Error('This is a Fatal Error!');
 };
-
 ```
 
-The module on which loader had thrown this error will get bundled like this:
+Or pass an error to the callback in async mode:
+
+__./src/loader.js__
+
+``` javascript
+module.exports = function(source) {
+  const callback = this.async();
+  //...
+  callback(new Error('This is a Fatal Error!'), source);
+};
+```
+
+The module will get bundled like this:
 
 <!-- eslint-skip -->
 
-```js
-
+``` javascript
 /***/ "./src/loader.js!./src/lib.js":
 /*!************************************!*\
   !*** ./src/loader.js!./src/lib.js ***!
@@ -557,22 +561,19 @@ The module on which loader had thrown this error will get bundled like this:
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./src/loader.js):\nError: Here is an fatal Error!\n    at Object.module.exports (/workspace/src/loader.js:3:9)");
+throw new Error("Module build failed (from ./src/loader.js):\nError: This is a Fatal Error!\n    at Object.module.exports (/workspace/src/loader.js:3:9)");
 
 /***/ })
-
 ```
 
 Then the build output will also display the error (Similar to `this.emitError`):
 
-```bash
-
+``` bash
 ERROR in ./src/lib.js (./src/loader.js!./src/lib.js)
 Module build failed (from ./src/loader.js):
-Error: Here is an fatal Error!
+Error: This is a Fatal Error!
     at Object.module.exports (/workspace/src/loader.js:2:9)
  @ ./src/index.js 1:0-25
-
 ```
 
 As you can see below, not only error message, but also details about which loader and module are involved:
@@ -583,23 +584,5 @@ As you can see below, not only error message, but also details about which loade
 - the caller path: `@ ./src/index.js 1:0-25`
 
 W> The loader path in the error is displayed since webpack 4.12
-
-### Using `callback` (in async mode)
-
-Pass an error to the callback.
-
-__./src/loader.js__
-
-```js
-
-module.exports = function(source){
-  const callback = this.async();
-  //...
-  callback(new Error('Here is an Error!'), source);
-};
-
-```
-
-Same as using throw, it will also cause module compilation failure and get an error module in the bundle.
 
 T> All the errors and warnings will be recorded into `stats`. Please see [Stats Data](/api/stats/#errors-and-warnings).
