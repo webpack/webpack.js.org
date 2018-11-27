@@ -345,7 +345,6 @@ WARNING in ./src/lib.js (./src/loader.js!./src/lib.js)
 Module Warning (from ./src/loader.js):
 Here is a Warning!
  @ ./src/index.js 1:0-25
-
  ```
 
 T> Note that the warnings will not be displayed if `stats.warnings` is set to `false`, or some other omit setting is used to `stats` such as `none` or `errors-only`. See the [stats configuration](/configuration/stats/#stats).
@@ -353,20 +352,16 @@ T> Note that the warnings will not be displayed if `stats.warnings` is set to `f
 ### `this.emitError`
 
 ``` typescript
-
 emitError(error: Error)
-
 ```
 
 Emit an error that also can be displayed in the output.
 
 ``` bash
-
 ERROR in ./src/lib.js (./src/loader.js!./src/lib.js)
 Module Error (from ./src/loader.js):
 Here is an Error!
  @ ./src/index.js 1:0-25
-
 ```
 
 T> Unlike throwing an Error directly, it will NOT interrupt the compilation process of the current module.
@@ -375,9 +370,7 @@ T> Unlike throwing an Error directly, it will NOT interrupt the compilation proc
 ### `this.loadModule`
 
 ``` typescript
-
 loadModule(request: string, callback: function(err, source, sourceMap, module))
-
 ```
 
 Resolves the given request to a module, applies all configured loaders and calls back with the generated source, the sourceMap and the module instance (usually an instance of [`NormalModule`](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js)). Use this function if you need to know the source code of another module to generate the result.
@@ -386,9 +379,7 @@ Resolves the given request to a module, applies all configured loaders and calls
 ### `this.resolve`
 
 ``` typescript
-
 resolve(context: string, request: string, callback: function(err, result: string))
-
 ```
 
 Resolve a request like a require expression.
@@ -397,10 +388,8 @@ Resolve a request like a require expression.
 ### `this.addDependency`
 
 ``` typescript
-
 addDependency(file: string)
 dependency(file: string) // shortcut
-
 ```
 
 Adds a file as dependency of the loader result in order to make them watchable. For example, [`html-loader`](https://github.com/webpack-contrib/html-loader) uses this technique as it finds `src` and `src-set` attributes. Then, it sets the url's for those attributes as dependencies of the html file that is parsed.
@@ -409,9 +398,7 @@ Adds a file as dependency of the loader result in order to make them watchable. 
 ### `this.addContextDependency`
 
 ``` typescript
-
 addContextDependency(directory: string)
-
 ```
 
 Add a directory as dependency of the loader result.
@@ -420,9 +407,7 @@ Add a directory as dependency of the loader result.
 ### `this.clearDependencies`
 
 ``` typescript
-
 clearDependencies()
-
 ```
 
 Remove all dependencies of the loader result. Even initial dependencies and these of other loaders. Consider using `pitch`.
@@ -431,9 +416,7 @@ Remove all dependencies of the loader result. Even initial dependencies and thes
 ### `this.emitFile`
 
 ``` typescript
-
 emitFile(name: string, content: Buffer|string, sourceMap: {...})
-
 ```
 
 Emit a file. This is webpack-specific.
@@ -452,9 +435,7 @@ W> The usage of these properties is highly discouraged since we are planning to 
 ### `this.exec`
 
 ``` typescript
-
 exec(code: string, filename: string)
-
 ```
 
 Execute some code fragment like a module. See [this comment](https://github.com/webpack/webpack.js.org/issues/1268#issuecomment-313513988) for a replacement method if needed.
@@ -463,9 +444,7 @@ Execute some code fragment like a module. See [this comment](https://github.com/
 ### `this.resolveSync`
 
 ``` typescript
-
 resolveSync(context: string, request: string) -> string
-
 ```
 
 Resolve a request like a require expression.
