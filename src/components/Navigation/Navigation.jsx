@@ -8,7 +8,7 @@ import Links from './Links.json';
 // TODO: Migrate to React Banner
 export default class Navigation extends React.Component {
 
-   // As this varaible is purly to track the state of the search,
+  // As this varaible is purly to track the state of the search,
   // and it's state doesn't affect the renders' output. And to
   // save react a re-render, we will not be storing this in the
   // components state object. 
@@ -127,7 +127,7 @@ export default class Navigation extends React.Component {
       window.addEventListener('keydown', e => {
         // Short circuit, as we only care about the "naked" key
         if (e.shiftKey || e.ctrlKey || e.metaKey) return;
-      
+
         switch (e.which) {
           case 9: // `tab` key
             if (e.target.classList.contains('navigation__search-input'))
@@ -145,7 +145,6 @@ export default class Navigation extends React.Component {
             break;
         }
       });
-      
 
     }
   }
