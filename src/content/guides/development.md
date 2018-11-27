@@ -92,7 +92,7 @@ __src/print.js__
 ``` diff
   export default function printMe() {
 -   console.log('I get called from print.js!');
-+   cosnole.log('I get called from print.js!');
++   console.log('I get called from print.js!');
   }
 ```
 
@@ -110,7 +110,7 @@ print.bundle.js    6.43 kB       1  [emitted]         print
 Now open the resulting `index.html` file in your browser. Click the button and look in your console where the error is displayed. The error should say something like this:
 
  ``` bash
- Uncaught ReferenceError: cosnole is not defined
+ Uncaught ReferenceError: console is not defined
     at HTMLButtonElement.printMe (print.js:2)
  ```
 
@@ -176,7 +176,7 @@ __src/print.js__
 
 ``` diff
   export default function printMe() {
--   cosnole.log('I get called from print.js!');
+-   console.error('I get called from print.js!');
 +   console.log('I get called from print.js!');
   }
 ```
