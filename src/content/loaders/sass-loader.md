@@ -6,7 +6,7 @@ repo: https://github.com/webpack-contrib/sass-loader
 ---
 Loads a Sass/SCSS file and compiles it to CSS.
 
-Use the [css-loader](/loaders/css-loader/) or the [raw-loader](/loaders/raw-loader/) to turn it into a JS module and the [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/) to extract it into a separate file.
+Use the [css-loader](/loaders/css-loader/) or the [raw-loader](/loaders/raw-loader/) to turn it into a JS module and the [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/) to extract it into a separate file.
 Looking for the webpack 1 loader? Check out the [archive/webpack-1 branch](https://github.com/webpack-contrib/sass-loader/tree/archive/webpack-1).
 
 ## Install
@@ -17,7 +17,7 @@ npm install sass-loader node-sass webpack --save-dev
 
 The sass-loader requires [webpack](https://github.com/webpack) as a
 [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies)
-and it requires you to install either [Node Sass][] or [Dart Sass][] on your
+and it requires you to install either [Node Sass](https://github.com/sass/node-sass) or [Dart Sass](https://github.com/sass/dart-sass) on your
 own. This allows you to control the versions of all your dependencies, and to
 choose which Sass implementation to use.
 
@@ -84,7 +84,7 @@ use Dart Sass, you'd pass:
     {
         loader: "sass-loader",
         options: {
-            implementation: require("dart-sass")
+            implementation: require("sass")
         }
     }
 // ...
@@ -113,7 +113,7 @@ module.exports = {
             }, {
                 loader: "sass-loader",
                 options: {
-                    implementation: require("dart-sass"),
+                    implementation: require("sass"),
                     fiber: Fiber
                 }
             }]
@@ -124,7 +124,7 @@ module.exports = {
 
 ##
 
-Usually, it's recommended to extract the style sheets into a dedicated file in production using the [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/). This way your styles are not dependent on JavaScript:
+Usually, it's recommended to extract the style sheets into a dedicated file in production using the [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/). This way your styles are not dependent on JavaScript:
 
 ```js
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -184,7 +184,7 @@ Bundling CSS with webpack has some nice advantages like referencing images and f
 There are two possibilities to extract a style sheet from the bundle:
 
 - [extract-loader](https://github.com/peerigon/extract-loader) (simpler, but specialized on the css-loader's output)
-- [extract-text-webpack-plugin](/plugins/extract-text-webpack-plugin/) (more complex, but works in all use-cases)
+- [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/) (use this, when using webpack 4 configuration. Works in all use-cases)
 
 ### Source maps
 

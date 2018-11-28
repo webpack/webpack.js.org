@@ -266,7 +266,7 @@ will write the _.html_ file for you. Example:
 ```js
 {
   test: /\.html$/,
-  use: [ 'file-loader?name=[path][name].[ext]!extract-loader!html-loader' ]
+  use: ['file-loader?name=[name].[ext]', 'extract-loader', 'html-loader'],
 }
 ```
 

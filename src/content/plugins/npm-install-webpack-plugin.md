@@ -6,7 +6,7 @@ repo: https://github.com/webpack-contrib/npm-install-webpack-plugin
 ---
 Speed up development by <b>automatically installing & saving dependencies</b> with Webpack.
 
-It sucks to <kbd>Ctrl-C</kbd> your
+It is inefficient to <kbd>Ctrl-C</kbd> your
 build script & server just to install
 a dependency you didn't know you needed until now.
 

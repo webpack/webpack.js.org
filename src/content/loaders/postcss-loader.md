@@ -19,7 +19,7 @@ npm i -D postcss-loader
 
 ##
 
-**postcss.config.js**
+**`postcss.config.js`**
 ```js
 module.exports = {
   parser: 'sugarss',
@@ -58,7 +58,7 @@ Config lookup starts from `path.dirname(file)` and walks the file tree upwards u
 
 After setting up your `postcss.config.js`, add `postcss-loader` to your `webpack.config.js`. You can use it standalone or in conjunction with `css-loader` (recommended). Use it **after** `css-loader` and `style-loader`, but **before** other preprocessor loaders like e.g `sass|less|stylus-loader`, if you use any.
 
-**webpack.config.js**
+**`webpack.config.js`**
 ```js
 module.exports = {
   module: {
@@ -74,7 +74,7 @@ module.exports = {
 
 > ⚠️  When `postcss-loader` is used standalone (without `css-loader`) don't use `@import` in your CSS, since this can lead to quite bloated bundles
 
-**webpack.config.js (recommended)**
+**`webpack.config.js` (recommended)**
 ```js
 module.exports = {
   module: {
@@ -108,6 +108,7 @@ module.exports = {
 
 If you use JS styles without the [`postcss-js`][postcss-js] parser, add the `exec` option.
 
+**`webpack.config.js`**
 ```js
 {
   test: /\.style.js$/,
@@ -134,7 +135,7 @@ You can manually specify the path to search for your config (`postcss.config.js`
 
 > ⚠️  Note that you **can't** use a **filename** other than the [supported config formats] (e.g `.postcssrc.js`, `postcss.config.js`), this option only allows you to manually specify the **directory** where config lookup should **start** from
 
-**webpack.config.js**
+**`webpack.config.js`**
 ```js
 {
   loader: 'postcss-loader',
@@ -159,7 +160,7 @@ You can manually specify the path to search for your config (`postcss.config.js`
 
 `postcss-loader` exposes context `ctx` to the config file, making your `postcss.config.js` dynamic, so can use it to do some real magic ✨
 
-**postcss.config.js**
+**`postcss.config.js`**
 ```js
 module.exports = ({ file, options, env }) => ({
   parser: file.extname === '.sss' ? 'sugarss' : false,
@@ -171,7 +172,7 @@ module.exports = ({ file, options, env }) => ({
 })
 ```
 
-**webpack.config.js**
+**`webpack.config.js`**
 ```js
 {
   loader: 'postcss-loader',
@@ -188,7 +189,7 @@ module.exports = ({ file, options, env }) => ({
 
 ### `Plugins`
 
-**webpack.config.js**
+**`webpack.config.js`**
 ```js
 {
   loader: 'postcss-loader',
@@ -215,7 +216,7 @@ module.exports = ({ file, options, env }) => ({
 
 #### `Parser`
 
-**webpack.config.js**
+**`webpack.config.js`**
 ```js
 {
   test: /\.sss$/,
@@ -228,7 +229,7 @@ module.exports = ({ file, options, env }) => ({
 
 #### `Syntax`
 
-**webpack.config.js**
+**`webpack.config.js`**
 ```js
 {
   test: /\.css$/,
@@ -241,7 +242,7 @@ module.exports = ({ file, options, env }) => ({
 
 #### `Stringifier`
 
-**webpack.config.js**
+**`webpack.config.js`**
 ```js
 {
   test: /\.css$/,
@@ -256,7 +257,7 @@ module.exports = ({ file, options, env }) => ({
 
 Enables source map support, `postcss-loader` will use the previous source map given by other loaders and update it accordingly, if no previous loader is applied before `postcss-loader`, the loader will generate a source map for you.
 
-**webpack.config.js**
+**`webpack.config.js`**
 ```js
 {
   test: /\.css/,
@@ -274,7 +275,7 @@ Enables source map support, `postcss-loader` will use the previous source map gi
 You can set the `sourceMap: 'inline'` option to inline the source map
 within the CSS directly as an annotation comment.
 
-**webpack.config.js**
+**`webpack.config.js`**
 ```js
 {
   loader: 'postcss-loader',
@@ -294,7 +295,7 @@ within the CSS directly as an annotation comment.
 
 ### `Stylelint`
 
-**webpack.config.js**
+**`webpack.config.js`**
 ```js
 {
   test: /\.css$/,
@@ -316,9 +317,9 @@ within the CSS directly as an annotation comment.
 }
 ```
 
-### Autoprefixing
+### `Autoprefixing`
 
-**webpack.config.js**
+**`webpack.config.js`**
 ```js
 {
   test: /\.css$/,
@@ -347,7 +348,7 @@ This loader [cannot be used] with [CSS Modules] out of the box due
 to the way `css-loader` processes file imports. To make them work properly,
 either add the css-loader’s [`importLoaders`] option.
 
-**webpack.config.js**
+**`webpack.config.js`**
 ```js
 {
   test: /\.css$/,
@@ -372,6 +373,7 @@ If you want to process styles written in JavaScript, use the [postcss-js] parser
 
 [postcss-js]: https://github.com/postcss/postcss-js
 
+**`webpack.config.js`**
 ```js
 {
   test: /\.style.js$/,
@@ -411,10 +413,11 @@ export default {
 
 [ExtractPlugin]: https://github.com/webpack-contrib/mini-css-extract-plugin
 
-**webpack.config.js**
+**`webpack.config.js`**
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const devMode = process.env.NODE_ENV !== 'production';
+const devMode = process.env.NODE_ENV !== 'production'
+
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   module: {
@@ -424,14 +427,14 @@ module.exports = {
         use: [
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
-          'postcss-loader',
+          'postcss-loader'
         ]
       }
     ]
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: devMode ? '[name].css' : '[name].[hash].css',
+      filename: devMode ? '[name].css' : '[name].[hash].css'
     })
   ]
 }

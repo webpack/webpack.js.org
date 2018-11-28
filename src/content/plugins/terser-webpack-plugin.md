@@ -51,7 +51,7 @@ And run `webpack` via your preferred method.
 
 ### `test`
 
-Type: `Sting|RegExp|Array<RegExp>`
+Type: `String|RegExp|Array<String|RegExp>`
 Default: `/\.js(\?.*)?$/i`
 
 Test to match files against.
@@ -65,7 +65,7 @@ new TerserPlugin({
 
 ### `include`
 
-Type: `Sting|RegExp|Array<RegExp>`
+Type: `String|RegExp|Array<String|RegExp>`
 Default: `undefined`
 
 Files to include.
@@ -79,7 +79,7 @@ new TerserPlugin({
 
 ### `exclude`
 
-Type: `String|RegExp|Array<String,RegExp>`
+Type: `String|RegExp|Array<String|RegExp>`
 Default: `undefined`
 
 Files to exclude.
@@ -264,11 +264,11 @@ new TerserPlugin({
 
 ### `extractComments`
 
-Type: `Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>`
+Type: `Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>|Object`
 Default: `false`
 
 Whether comments shall be extracted to a separate file, (see [details](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a)).
-By default extract only comments using `/^\**!|@preserve|@license|@cc_on/` regexp condition and remove remaining comments.
+By default extract only comments using `/^\**!|@preserve|@license|@cc_on/i` regexp condition and remove remaining comments.
 If the original file is named `foo.js`, then the comments will be stored to `foo.js.LICENSE`.
 The `terserOptions.output.comments` option specifies whether the comment will be preserved, i.e. it is possible to preserve some comments (e.g. annotations) while extracting others or even preserving comments that have been extracted.
 
@@ -285,7 +285,7 @@ new TerserPlugin({
 
 #### `String`
 
-Extract `all` or `some` (use `/^\**!|@preserve|@license|@cc_on/` RegExp) comments.
+Extract `all` or `some` (use `/^\**!|@preserve|@license|@cc_on/i` RegExp) comments.
 
 ```js
 // in your webpack.config.js
@@ -330,7 +330,7 @@ Allow to customize condition for extract comments, specify extracted file name a
 // in your webpack.config.js
 new TerserPlugin({
   extractComments: {
-    condition: /^\**!|@preserve|@license|@cc_on/,
+    condition: /^\**!|@preserve|@license|@cc_on/i,
     filename(file) {
       return `${file}.LICENSE`;
     },
@@ -364,7 +364,7 @@ new TerserPlugin({
 
 ##### `filename`
 
-Type: `Regex|Function<(string) -> {String}>`
+Type: `String|Function<(string) -> String>`
 Default: `${file}.LICENSE`
 
 The file where the extracted comments will be stored.
@@ -374,7 +374,7 @@ Default is to append the suffix `.LICENSE` to the original filename.
 // in your webpack.config.js
 new TerserPlugin({
   extractComments: {
-    condition: /^\**!|@preserve|@license|@cc_on/,
+    condition: /^\**!|@preserve|@license|@cc_on/i,
     filename: 'extracted-comments.js',
     banner(licenseFile) {
      return `License information can be found in ${licenseFile}`;
@@ -457,7 +457,7 @@ module.exports = {
 
 ### Preserve Comments
 
-Extract all legal comments (i.e. `/^\**!|@preserve|@license|@cc_on/`) and preserve `/@license/i` comments.
+Extract all legal comments (i.e. `/^\**!|@preserve|@license|@cc_on/i`) and preserve `/@license/i` comments.
 
 ```js
 // in your webpack.config.js
@@ -528,11 +528,11 @@ module.exports = {
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
-#### [CONTRIBUTING](https://raw.githubusercontent.com/webpack-contrib/terser-webpack-plugin/master/.github/CONTRIBUTING)
+[CONTRIBUTING](https://raw.githubusercontent.com/webpack-contrib/terser-webpack-plugin/master/.github/CONTRIBUTING.md)
 
 ## License
 
-#### [MIT](https://raw.githubusercontent.com/webpack-contrib/terser-webpack-plugin/master/LICENSE)
+[MIT](https://raw.githubusercontent.com/webpack-contrib/terser-webpack-plugin/master/LICENSE)
 
 [npm]: https://img.shields.io/npm/v/terser-webpack-plugin.svg
 [npm-url]: https://npmjs.com/package/terser-webpack-plugin

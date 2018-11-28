@@ -12,7 +12,7 @@ Adds CSS to the DOM by injecting a <code>&lt;style&gt;</code> tag
 npm install style-loader --save-dev
 ```
 
-## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
+## Usage
 
 It's recommended to combine `style-loader` with the [`css-loader`](/loaders/css-loader/)
 
@@ -78,9 +78,11 @@ import url from 'file.css'
 <link rel="stylesheet" href="path/to/file.css">
 ```
 
-> :information_source: Source maps and assets referenced with `url`: when style loader is used with `{ options: { sourceMap: true } }` option, the CSS modules will be generated as `Blob`s, so relative paths don't work (they would be relative to `chrome:blob` or `chrome:devtools`). In order for assets to maintain correct paths setting `output.publicPath` property of webpack configuration must be set, so that absolute paths are generated. Alternatively you can enable the `convertToAbsoluteUrls` option mentioned above.
+> ℹ️ Source maps and assets referenced with `url`: when style loader is used with `{ options: { sourceMap: true } }` option, the CSS modules will be generated as `Blob`s, so relative paths don't work (they would be relative to `chrome:blob` or `chrome:devtools`). In order for assets to maintain correct paths setting `output.publicPath` property of webpack configuration must be set, so that absolute paths are generated. Alternatively you can enable the `convertToAbsoluteUrls` option mentioned above.
 
 ### `Useable`
+
+The `style-loader` injects the styles lazily making them useable on-demand via `style.use()` / `style.unuse()`
 
 By convention the `Reference Counter API` should be bound to `.useable.css` and the `.css` should be loaded with basic `style-loader` usage.(similar to other file types, i.e. `.useable.less` and `.less`).
 
@@ -122,7 +124,7 @@ style.unuse(); // = style.unref();
 
 Styles are not added on `import/require()`, but instead on call to `use`/`ref`. Styles are removed from page if `unuse`/`unref` is called exactly as often as `use`/`ref`.
 
-:warning: Behavior is undefined when `unuse`/`unref` is called more often than `use`/`ref`. Don't do that.
+> ⚠️  Behavior is undefined when `unuse`/`unref` is called more often than `use`/`ref`. Don't do that.
 
 ## Options
 
@@ -237,6 +239,8 @@ import link from './file.css'
 A `transform` is a function that can modify the css just before it is loaded into the page by the style-loader.
 This function will be called on the css that is about to be loaded and the return value of the function will be loaded into the page instead of the original css.
 If the return value of the `transform` function is falsy, the css will not be loaded into the page at all.
+
+> ⚠️ In case you are using ES Module syntax in `tranform.js` then, you **need to transpile** it or otherwise it will throw an `{Error}`.
 
 **webpack.config.js**
 ```js

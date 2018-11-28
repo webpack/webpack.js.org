@@ -158,7 +158,7 @@ same directory, and will also use the same URI path to access the file._
 Type: `String|Function`
 Default: `undefined`
 
-Specify a filesystem path where target the file(s) will be placed.
+Specify a filesystem path where the target file(s) will be placed.
 
 ```js
 // webpack.config.js
@@ -373,11 +373,11 @@ path/to/file.png?e43b20c069c4a01867c31e98cbce33c9
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
-#### [CONTRIBUTING](https://raw.githubusercontent.com/webpack-contrib/file-loader/master/.github/CONTRIBUTING)
+[CONTRIBUTING](https://raw.githubusercontent.com/webpack-contrib/file-loader/master/.github/CONTRIBUTING.md)
 
 ## License
 
-#### [MIT](https://raw.githubusercontent.com/webpack-contrib/file-loader/master/LICENSE)
+[MIT](https://raw.githubusercontent.com/webpack-contrib/file-loader/master/LICENSE)
 
 [npm]: https://img.shields.io/npm/v/file-loader.svg
 [npm-url]: https://npmjs.com/package/file-loader

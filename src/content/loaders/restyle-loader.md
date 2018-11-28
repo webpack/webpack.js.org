@@ -10,6 +10,8 @@ repo: https://github.com/webpack-contrib/restyle-loader
 
 Updates style `<link>` href value with a hash to trigger a style reload
 
+Loader new home: [restyle-loader](https://github.com/danielverejan/restyle-loader)
+
 </div>
 
 ## Install

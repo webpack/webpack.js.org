@@ -4,422 +4,543 @@ source: https://raw.githubusercontent.com/webpack-contrib/uglifyjs-webpack-plugi
 edit: https://github.com/webpack-contrib/uglifyjs-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/uglifyjs-webpack-plugin
 ---
-This plugin uses <a href="https://github.com/mishoo/UglifyJS2/tree/harmony">UglifyJS v3 </a><a href="https://npmjs.com/package/uglify-es">(`uglify-es`)</a> to minify your JavaScript
 
-> ℹ️  `webpack < v4.0.0` currently contains [`v0.4.6`](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/tree/version-0.4) of this plugin under `webpack.optimize.UglifyJsPlugin` as an alias. For usage of the latest version (`v1.0.0`), please follow the instructions below. Aliasing `v1.0.0` as `webpack.optimize.UglifyJsPlugin` is scheduled for `webpack v4.0.0`
 
-## Install
+[![npm][npm]][npm-url]
+[![node][node]][node-url]
+[![deps][deps]][deps-url]
+[![tests][tests]][tests-url]
+[![cover][cover]][cover-url]
+[![chat][chat]][chat-url]
+[![size][size]][size-url]
 
-```bash
-npm i -D uglifyjs-webpack-plugin
+
+
+This plugin uses [uglify-js](https://github.com/mishoo/UglifyJS2) to minify your JavaScript.
+
+## Requirements
+
+This module requires a minimum of Node v6.9.0 and Webpack v4.0.0.
+
+## Getting Started
+
+To begin, you'll need to install `uglifyjs-webpack-plugin`:
+
+```console
+$ npm install uglifyjs-webpack-plugin --save-dev
 ```
 
-## Usage
+Then add the plugin to your `webpack` config. For example:
 
 **webpack.config.js**
+
 ```js
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+module.exports = {
+  //...
+  optimization: {
+    minimizer: [new UglifyJsPlugin()]
+  }
+};
+```
+
+And run `webpack` via your preferred method.
+
+## Options
+
+### `test`
+
+Type: `String|RegExp|Array<String|RegExp>`
+Default: `/\.js(\?.*)?$/i`
+
+Test to match files against.
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  test: /\.js(\?.*)?$/i
+})
+```
+
+### `include`
+
+Type: `String|RegExp|Array<String|RegExp>`
+Default: `undefined`
+
+Files to include.
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  include: /\/includes/
+})
+```
+
+### `exclude`
+
+Type: `String|RegExp|Array<String|RegExp>`
+Default: `undefined`
+
+Files to exclude.
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  exclude: /\/excludes/
+})
+```
+
+### `cache`
+
+Type: `Boolean|String`
+Default: `false`
+
+Enable file caching. 
+Default path to cache directory: `node_modules/.cache/uglifyjs-webpack-plugin`.
+
+> ℹ️ If you use your own `minify` function please read the `minify` section for cache invalidation correctly.
+
+#### `Boolean`
+
+Enable/disable file caching.
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  cache: true
+})
+```
+
+#### `String`
+
+Enable file caching and set path to cache directory.
+
+**webpack.config.js**
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  cache: 'path/to/cache'
+})
+```
+
+### `cacheKeys`
+
+Type: `Function<(defaultCacheKeys, file) -> Object>`
+Default: `defaultCacheKeys => defaultCacheKeys`
+
+Allows you to override default cache keys.
+
+Default cache keys:
+
+```js
+({
+  'uglify-js': require('uglify-js/package.json').version, // uglify version
+  'uglifyjs-webpack-plugin': require('../package.json').version, // plugin version
+  'uglifyjs-webpack-plugin-options': this.options, // plugin options
+  path: compiler.outputPath ? `${compiler.outputPath}/${file}` : file, // asset path
+  hash: crypto.createHash('md4').update(input).digest('hex'), // source file hash
+});
+```
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  cache: true,
+  cacheKeys: (defaultCacheKeys, file) => {
+    defaultCacheKeys.myCacheKey = 'myCacheKeyValue';
+
+    return defaultCacheKeys;
+  },
+})
+```
+
+### `parallel`
+
+Type: `Boolean|Number`
+Default: `false`
+
+Use multi-process parallel running to improve the build speed. 
+Default number of concurrent runs: `os.cpus().length - 1`.
+
+> ℹ️ Parallelization can speedup your build significantly and is therefore **highly recommended**.
+
+#### `Boolean`
+
+Enable/disable multi-process parallel running.
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  parallel: true
+})
+```
+
+#### `Number`
+
+Enable multi-process parallel running and set number of concurrent runs.
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  parallel: 4
+})
+```
+
+### `sourceMap`
+
+Type: `Boolean`
+Default: `false`
+
+Use source maps to map error message locations to modules (this slows down the compilation).
+If you use your own `minify` function please read the `minify` section for handling source maps correctly.
+
+> ⚠️ **`cheap-source-map` options don't work with this plugin**.
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  sourceMap: true
+})
+```
+
+### `minify`
+
+Type: `Function`
+Default: `undefined`
+
+Allows you to override default minify function. 
+By default plugin uses [uglify-js](https://github.com/mishoo/UglifyJS2) package.
+Useful for using and testing unpublished versions or forks.
+
+> ⚠️ **Always use `require` inside `minify` function when `parallel` option enabled**.
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  minify(file, sourceMap) {
+    const extractedComments = [];
+
+    // Custom logic for extract comments
+
+    const { error, map, code, warnings } = require('uglify-module') // Or require('./path/to/uglify-module')
+      .minify(file, {
+        /* Your options for minification */
+      });
+
+    return { error, map, code, warnings, extractedComments };
+  }
+})
+```
+
+### `uglifyOptions`
+
+Type: `Object`
+Default: [default](https://github.com/mishoo/UglifyJS2#minify-options)
+
+UglifyJS minify options.
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  uglifyOptions: {
+    warnings: false,
+    parse: {},
+    compress: {},
+    mangle: true, // Note `mangle.properties` is `false` by default.
+    output: null,
+    toplevel: false,
+    nameCache: null,
+    ie8: false,
+    keep_fnames: false,
+  }
+})
+```
+
+### `extractComments`
+
+Type: `Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>`
+Default: `false`
+
+Whether comments shall be extracted to a separate file, (see [details](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a)).
+By default extract only comments using `/^\**!|@preserve|@license|@cc_on/i` regexp condition and remove remaining comments.
+If the original file is named `foo.js`, then the comments will be stored to `foo.js.LICENSE`.
+The `uglifyOptions.output.comments` option specifies whether the comment will be preserved, i.e. it is possible to preserve some comments (e.g. annotations) while extracting others or even preserving comments that have been extracted.
+
+#### `Boolean`
+
+Enable/disable extracting comments.
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  extractComments: true
+})
+```
+
+#### `String`
+
+Extract `all` or `some` (use `/^\**!|@preserve|@license|@cc_on/i` RegExp) comments.
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  extractComments: 'all'
+})
+```
+
+#### `RegExp`
+
+All comments that match the given expression will be extracted to the separate file. 
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  extractComments: /@extract/i
+})
+```
+
+#### `Function<(node, comment) -> Boolean>`
+
+All comments that match the given expression will be extracted to the separate file. 
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  extractComments: function (astNode, comment) {
+    if (/@extract/i.test(comment.value)) {
+      return true;
+    }
+    
+    return false;
+  }
+})
+```
+
+#### `Object`
+
+Allow to customize condition for extract comments, specify extracted file name and banner.
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  extractComments: {
+    condition: /^\**!|@preserve|@license|@cc_on/i,
+    filename(file) {
+      return `${file}.LICENSE`;
+    },
+    banner(licenseFile) {
+      return `License information can be found in ${licenseFile}`;
+    }
+  }
+})
+```
+
+##### `condition`
+
+Type: `Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>`
+
+Condition what comments you need extract.
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  extractComments: {
+    condition: 'some',
+    filename(file) {
+     return `${file}.LICENSE`;
+    },
+    banner(licenseFile) {
+     return `License information can be found in ${licenseFile}`;
+    }
+  }
+})
+```
+
+##### `filename`
+
+Type: `Regex|Function<(string) -> String>`
+Default: `${file}.LICENSE`
+
+The file where the extracted comments will be stored.
+Default is to append the suffix `.LICENSE` to the original filename.
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  extractComments: {
+    condition: /^\**!|@preserve|@license|@cc_on/i,
+    filename: 'extracted-comments.js',
+    banner(licenseFile) {
+     return `License information can be found in ${licenseFile}`;
+    }
+  }
+})
+```
+
+##### `banner`
+
+Type: `Boolean|String|Function<(string) -> String>`
+Default: `/*! For license information please see ${commentsFile} */`
+
+The banner text that points to the extracted file and will be added on top of the original file. 
+Can be `false` (no banner), a `String`, or a `Function<(string) -> String>` that will be called with the filename where extracted comments have been stored. 
+Will be wrapped into comment.
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  extractComments: {
+    condition: true,
+    filename(file) {
+     return `${file}.LICENSE`;
+    },
+    banner(commentsFile) {
+     return `My custom banner about license information ${commentsFile}`;
+    }
+  }
+})
+```
+
+### `warningsFilter`
+
+Type: `Function<(warning, source) -> Boolean>`
+Default: `() => true`
+
+Allow to filter [uglify-js](https://github.com/mishoo/UglifyJS2) warnings.
+Return `true` to keep the warning, `false` otherwise.
+
+```js
+// in your webpack.config.js
+new UglifyJsPlugin({
+  warningsFilter: (warning, source) => {
+    if (/Dropping unreachable code/i.test(warning)) {
+      return true;
+    }
+
+    if (/filename\.js/i.test(source)) {
+      return true;
+    }
+
+    return false;
+  },
+})
+```
+
+## Examples
+
+### Cache And Parallel
+
+Enable cache and multi-process parallel running.
+
+```js
+// in your webpack.config.js
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   //...
   optimization: {
     minimizer: [
-      new UglifyJsPlugin()
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true
+      })
     ]
   }
-}
+};
 ```
 
-## Options
+### Preserve Comments
 
-|Name|Type|Default|Description|
-|:--:|:--:|:-----:|:----------|
-|**`test`**|`{RegExp\|Array<RegExp>}`| <code>/\\.js$/i</code>|Test to match files against|
-|**`include`**|`{RegExp\|Array<RegExp>}`|`undefined`|Files to `include`|
-|**`exclude`**|`{RegExp\|Array<RegExp>}`|`undefined`|Files to `exclude`|
-|**`cache`**|`{Boolean\|String}`|`false`|Enable file caching|
-|**`cacheKeys`**|`{Function(defaultCacheKeys, file) -> {Object}}`|`defaultCacheKeys => defaultCacheKeys`|Allows you to override default cache keys|
-|**`parallel`**|`{Boolean\|Number}`|`false`|Use multi-process parallel running to improve the build speed|
-|**`sourceMap`**|`{Boolean}`|`false`|Use source maps to map error message locations to modules (This slows down the compilation) ⚠️ **`cheap-source-map` options don't work with this plugin**|
-|**`minify`**|`{Function}`|`undefined`|Allows you to override default minify function|
-|**`uglifyOptions`**|`{Object}`|[`{...defaults}`](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/tree/master#uglifyoptions)|`uglify` [Options](https://github.com/mishoo/UglifyJS2/tree/harmony#minify-options)|
-|**`extractComments`**|`{Boolean\|RegExp\|Function<(node, comment) -> {Boolean\|Object}>}`|`false`|Whether comments shall be extracted to a separate file, (see [details](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a) (`webpack >= 2.3.0`)|
-|**`warningsFilter`**|`{Function(source) -> {Boolean}}`|`() => true`|Allow to filter uglify warnings|
+Extract all legal comments (i.e. `/^\**!|@preserve|@license|@cc_on/i`) and preserve `/@license/i` comments.
 
-##
-
-**webpack.config.js**
 ```js
-[
-  new UglifyJsPlugin({
-    test: /\.js($|\?)/i
-  })
-]
+// in your webpack.config.js
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+module.exports = {
+  //...
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          output: {
+            comments: /@license/i
+          }
+        },
+        extractComments: true
+      })
+    ]
+  }
+};
 ```
 
-### `include`
+### Custom Minify Function
 
-**webpack.config.js**
+Override default minify function - use [terser](https://github.com/fabiosantoscode/terser) for minification.
+
 ```js
-[
-  new UglifyJsPlugin({
-    include: /\/includes/
-  })
-]
-```
+// in your webpack.config.js
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-### `exclude`
-
-**webpack.config.js**
-```js
-[
-  new UglifyJsPlugin({
-    exclude: /\/excludes/
-  })
-]
-```
-
-### `cache`
-
-If you use your own `minify` function please read the `minify` section for cache invalidation correctly.
-
-#### `{Boolean}`
-
-**webpack.config.js**
-```js
-[
-  new UglifyJsPlugin({
-    cache: true
-  })
-]
-```
-
-Enable file caching.
-Default path to cache directory: `node_modules/.cache/uglifyjs-webpack-plugin`.
-
-#### `{String}`
-
-**webpack.config.js**
-```js
-[
-  new UglifyJsPlugin({
-    cache: 'path/to/cache'
-  })
-]
-```
-
-Path to cache directory.
-
-### `cacheKeys`
-
-**webpack.config.js**
-```js
-[
-  new UglifyJsPlugin({
-    cache: true,
-    cacheKeys: (defaultCacheKeys, file) => {
-      defaultCacheKeys.myCacheKey = 'myCacheKeyValue';
+module.exports = {
+  //...
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        // Uncomment lines below for cache invalidation correctly
+        // cache: true,
+        // cacheKeys(defaultCacheKeys) {
+        //   delete defaultCacheKeys['uglify-js'];
+        //
+        //   return Object.assign(
+        //     {},
+        //     defaultCacheKeys,
+        //     { 'uglify-js': require('uglify-js/package.json').version },
+        //   );
+        // },
+        minify(file, sourceMap) {
+          // https://github.com/mishoo/UglifyJS2#minify-options
+          const uglifyJsOptions = {
+            /* your `uglify-js` package options */
+          };
       
-      return defaultCacheKeys;
-    },
-  })
-]
-```
-
-Allows you to override default cache keys.
-
-Default keys:
-```js
-{
-  'uglify-es': versions.uglify, // uglify version
-  'uglifyjs-webpack-plugin': versions.plugin, // plugin version
-  'uglifyjs-webpack-plugin-options': this.options, // plugin options
-  path: compiler.outputPath ? `${compiler.outputPath}/${file}` : file, // asset path
-  hash: crypto.createHash('md4').update(input).digest('hex'), // source file hash
-}
-```
-
-### `parallel`
-
-#### `{Boolean}`
-
-**webpack.config.js**
-```js
-[
-  new UglifyJsPlugin({
-    parallel: true
-  })
-]
-```
-
-Enable parallelization.
-Default number of concurrent runs: `os.cpus().length - 1`.
-
-#### `{Number}`
-
-**webpack.config.js**
-```js
-[
-  new UglifyJsPlugin({
-    parallel: 4
-  })
-]
-```
-
-Number of concurrent runs.
-
-> ℹ️  Parallelization can speedup your build significantly and is therefore **highly recommended**
-
-### `sourceMap`
-
-If you use your own `minify` function please read the `minify` section for handling source maps correctly.
-
-**webpack.config.js**
-```js
-[
-  new UglifyJsPlugin({
-    sourceMap: true
-  })
-]
-```
-
-> ⚠️ **`cheap-source-map` options don't work with this plugin**
-
-### `minify`
-
-> ⚠️ **Always use `require` inside `minify` function when `parallel` option enabled**
-
-**webpack.config.js**
-```js
-[
-  new UglifyJsPlugin({
-     minify(file, sourceMap) {
-       const extractedComments = [];
-
-       // Custom logic for extract comments
+          if (sourceMap) {
+            uglifyJsOptions.sourceMap = {
+              content: sourceMap,
+            };
+          }
       
-       const { error, map, code, warnings } = require('uglify-module') // Or require('./path/to/uglify-module')
-         .minify(
-           file,
-           { /* Your options for minification */ },
-         );
-
-       return { error, map, code, warnings, extractedComments };
-      }
-  })
-]
+          return require('terser').minify(file, uglifyJsOptions);
+        },
+      })
+    ]
+  }
+};
 ```
 
-By default plugin uses `uglify-es` package.
+## Contributing
 
-Examples:
+Please take a moment to read our contributing guidelines if you haven't yet done so.
 
-#### `uglify-js`
+[CONTRIBUTING](https://raw.githubusercontent.com/webpack-contrib/uglifyjs-webpack-plugin/master/.github/CONTRIBUTING.md)
 
-```bash
-npm i -D uglify-js
-```
+## License
 
-**webpack.config.js**
-```js
-[
-  new UglifyJsPlugin({
-    // Uncomment lines below for cache invalidation correctly
-    // cache: true,
-    // cacheKeys(defaultCacheKeys) {
-    //   return Object.assign(
-    //     {},
-    //     defaultCacheKeys,
-    //     { 'uglify-js': require('uglify-js/package.json').version },
-    //   );
-    // },
-    minify(file, sourceMap) {
-      // https://github.com/mishoo/UglifyJS2#minify-options
-      const uglifyJsOptions = { /* your `uglify-js` package options */ };
-
-      if (sourceMap) {
-        uglifyJsOptions.sourceMap = {
-          content: sourceMap,
-        };
-      }
-
-      return require('uglify-js').minify(file, uglifyJsOptions);
-    }
-  })
-]
-```
-
-#### `terser`
-
-```bash
-npm i -D terser
-```
-
-**webpack.config.js**
-```js
-[
-  new UglifyJsPlugin({
-    // Uncomment lines below for cache invalidation correctly
-    // cache: true,
-    // cacheKeys(defaultCacheKeys) {
-    //   return Object.assign(
-    //     {},
-    //     defaultCacheKeys,
-    //     { terser: require('terser/package.json').version },
-    //   );
-    // },
-    minify(file, sourceMap) {
-      // https://github.com/fabiosantoscode/terser#minify-options
-      const terserOptions = { /* your `terser` package options */ };
-
-      if (sourceMap) {
-        terserOption.sourceMap = {
-          content: sourceMap,
-        };
-      }
-
-      return require('terser').minify(file, terserOptions);
-    }
-  })
-]
-```
-
-### [`uglifyOptions`](https://github.com/mishoo/UglifyJS2/tree/harmony#minify-options)
-
-|Name|Type|Default|Description|
-|:--:|:--:|:-----:|:----------|
-|**`ecma`**|`{Number}`|`undefined`|Supported ECMAScript Version (`5`, `6`, `7` or `8`). Affects `parse`, `compress` && `output` options|
-|**`warnings`**|`{Boolean}`|`false`|Display Warnings|
-|**[`parse`](https://github.com/mishoo/UglifyJS2/tree/harmony#parse-options)**|`{Object}`|`{}`|Additional Parse Options|
-|**[`compress`](https://github.com/mishoo/UglifyJS2/tree/harmony#compress-options)**|`{Boolean\|Object}`|`true`|Additional Compress Options|
-|**[`mangle`](https://github.com/mishoo/UglifyJS2/tree/harmony#mangle-options)**|`{Boolean\|Object}`|`{inline: false}`|Enable Name Mangling (See [Mangle Properties](https://github.com/mishoo/UglifyJS2/tree/harmony#mangle-properties-options) for advanced setups, use with ⚠️)|
-|**[`output`](https://github.com/mishoo/UglifyJS2/tree/harmony#output-options)**|`{Object}`|`{comments: extractComments ? false : /^\**!\|@preserve\|@license\|@cc_on/,}`|Additional Output Options (The defaults are optimized for best compression)|
-|**`toplevel`**|`{Boolean}`|`false`|Enable top level variable and function name mangling and to drop unused variables and functions|
-|**`nameCache`**|`{Object}`|`null`|Enable cache of mangled variable and property names across multiple invocations|
-|**`ie8`**|`{Boolean}`|`false`|Enable IE8 Support|
-|**`keep_classnames`**|`{Boolean}`|`undefined`|Enable prevent discarding or mangling of class names|
-|**`keep_fnames`**|`{Boolean}`|`false`| Enable prevent discarding or mangling of function names. Useful for code relying on `Function.prototype.name`. If the top level minify option `keep_classnames` is `undefined` it will be overriden with the value of the top level minify option `keep_fnames`|
-|**`safari10`**|`{Boolean}`|`false`|Enable work around Safari 10/11 bugs in loop scoping and `await`|
-
-**webpack.config.js**
-```js
-[
-  new UglifyJsPlugin({
-    uglifyOptions: {
-      ecma: 8,
-      warnings: false,
-      parse: {...options},
-      compress: {...options},
-      mangle: {
-        ...options,
-        properties: {
-          // mangle property options
-        }
-      },
-      output: {
-        comments: false,
-        beautify: false,
-        ...options
-      },
-      toplevel: false,
-      nameCache: null,
-      ie8: false,
-      keep_classnames: undefined,
-      keep_fnames: false,
-      safari10: false,
-    }
-  })
-]
-```
-
-### `extractComments`
-
-#### `{Boolean}`
-
-All comments that normally would be preserved by the `comments` option will be moved to a separate file. If the original file is named `foo.js`, then the comments will be stored to `foo.js.LICENSE`.
-
-#### `{RegExp|String}` or  `{Function<(node, comment) -> {Boolean}>}`
-
-All comments that match the given expression (resp. are evaluated to `true` by the function) will be extracted to the separate file. The `comments` option specifies whether the comment will be preserved, i.e. it is possible to preserve some comments (e.g. annotations) while extracting others or even preserving comments that have been extracted.
-
-#### `{Object}`
-
-|Name|Type|Default|Description|
-|:--:|:--:|:-----:|:----------|
-|**`condition`**|`{Regex\|Function}`|``|Regular Expression or function (see previous point)|
-|**`filename`**|`{String\|Function}`|`${file}.LICENSE`|The file where the extracted comments will be stored. Can be either a `{String}` or a `{Function<(string) -> {String}>}`, which will be given the original filename. Default is to append the suffix `.LICENSE` to the original filename|
-|**`banner`**|`{Boolean\|String\|Function}`|`/*! For license information please see ${filename}.js.LICENSE */`|The banner text that points to the extracted file and will be added on top of the original file. Can be `false` (no banner), a `{String}`, or a `{Function<(string) -> {String}` that will be called with the filename where extracted comments have been stored. Will be wrapped into comment|
-
-### `warningsFilter`
-
-**webpack.config.js**
-```js
-[
-  new UglifyJsPlugin({
-    warningsFilter: (src) => true
-  })
-]
-```
-
-## Maintainers
-
-<table>
-  <tbody>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/hulkish">
-          <img width="150" height="150" src="https://github.com/hulkish.png?size=150">
-          </br>
-          Steven Hargrove
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/bebraw">
-          <img width="150" height="150" src="https://github.com/bebraw.png?v=3&s=150">
-          </br>
-          Juho Vepsäläinen
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/d3viant0ne">
-          <img width="150" height="150" src="https://github.com/d3viant0ne.png?v=3&s=150">
-          </br>
-          Joshua Wiens
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/michael-ciniawsky">
-          <img width="150" height="150" src="https://github.com/michael-ciniawsky.png?v=3&s=150">
-          </br>
-          Michael Ciniawsky
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/evilebottnawi">
-          <img width="150" height="150" src="https://github.com/evilebottnawi.png?v=3&s=150">
-          </br>
-          Alexander Krasnoyarov
-        </a>
-      </td>
-    </tr>
-  <tbody>
-</table>
-
+[MIT](https://raw.githubusercontent.com/webpack-contrib/uglifyjs-webpack-plugin/master/LICENSE)
 
 [npm]: https://img.shields.io/npm/v/uglifyjs-webpack-plugin.svg
 [npm-url]: https://npmjs.com/package/uglifyjs-webpack-plugin
-
 [node]: https://img.shields.io/node/v/uglifyjs-webpack-plugin.svg
 [node-url]: https://nodejs.org
-
 [deps]: https://david-dm.org/webpack-contrib/uglifyjs-webpack-plugin.svg
 [deps-url]: https://david-dm.org/webpack-contrib/uglifyjs-webpack-plugin
-
-[test]: 	https://img.shields.io/circleci/project/github/webpack-contrib/uglifyjs-webpack-plugin.svg
-[test-url]: https://circleci.com/gh/webpack-contrib/uglifyjs-webpack-plugin
-
+[tests]: https://img.shields.io/circleci/project/github/webpack-contrib/uglifyjs-webpack-plugin.svg
+[tests-url]: https://circleci.com/gh/webpack-contrib/uglifyjs-webpack-plugin
 [cover]: https://codecov.io/gh/webpack-contrib/uglifyjs-webpack-plugin/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/uglifyjs-webpack-plugin
-
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
+[size]: https://packagephobia.now.sh/badge?p=uglifyjs-webpack-plugin
+[size-url]: https://packagephobia.now.sh/result?p=uglifyjs-webpack-plugin

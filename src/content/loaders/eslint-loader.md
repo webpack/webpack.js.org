@@ -104,8 +104,7 @@ See the [eslint docs](http://eslint.org/docs/developer-guide/nodejs-api#cliengin
 This option will enable
 [ESLint autofix feature](http://eslint.org/docs/user-guide/command-line-interface#fix).
 
-**Be careful: this option might cause webpack to enter an infinite build loop if
-some issues cannot be fixed properly.**
+**Be careful: this option will change source files.**
 
 #### `cache` (default: false)
 

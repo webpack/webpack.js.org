@@ -12,7 +12,7 @@ Bundle loader for webpack
 npm i bundle-loader --save
 ```
 
-## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
+## Usage
 
 **webpack.config.js**
 ```js
