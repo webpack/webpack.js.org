@@ -12,7 +12,7 @@ __Notes:__ Issues with the output should be reported on the babel [issue tracker
 
 ## 中文文档
 
-<a href="https://babel.docschina.org" target="_blank" style="font-size: 24px;">Babel 中文文档 - 印记中文</a>
+<a href="https://babel.docschina.org" target="_blank" style="font-size: 24px;">Babel 中文文档</a>
 
 ## 安装
 

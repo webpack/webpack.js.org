@@ -1,5 +1,5 @@
 ---
-title: 模块热替换插件(HotModuleReplacementPlugin)
+title: HotModuleReplacementPlugin
 contributors:
   - skipjack
 related:
