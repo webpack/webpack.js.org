@@ -33,7 +33,7 @@
     "init:generated": "mkdirp ./generated/loaders && mkdirp ./generated/plugins ",
     "lint": "run-s lint:*",
     "lint:js": "eslint . --ext .js,.jsx,.md",
-    "lint:markdown": "markdownlint --config ./.markdownlint.json *.md ./src/content/**/*.md",
+    "lint:markdown": "markdownlint --rules markdownlint-rule-emphasis-style --config ./.markdownlint.json *.md ./src/content/*.md ./src/content/**/*.md",
     "lint:social": "alex . -q",
     "lint:prose": "cp .proselintrc ~/ && proselint src/content",
     "test": "npm run lint",
@@ -41,8 +41,16 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm test"
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,jsx,md}": [
+      "npm run lint:js"
+    ],
+    "*.md": [
+      "npm run lint:markdown"
+    ]
   },
   "devDependencies": {
     "alex": "^4.1.0",
@@ -63,7 +71,7 @@
     "duplexer": "^0.1.1",
     "eslint": "4.19.1",
     "eslint-loader": "^2.0.0",
-    "eslint-plugin-markdown": "git://github.com/byzyk/eslint-plugin-markdown.git#5927ccb78aff8a5464663730800503c6de3704e1",
+    "eslint-plugin-markdown": "^1.0.0-rc.0",
     "file-loader": "^1.1.11",
     "fontgen-loader": "git://github.com/EugeneHlushko/fontgen-loader.git#a26a73843900ca4b518853952b1fc3c816103512",
     "front-matter": "^2.2.0",
@@ -73,11 +81,13 @@
     "http-server": "^0.10.0",
     "husky": "^1.0.0-rc.8",
     "hyperlink": "^3.0.1",
+    "lint-staged": "^7.2.0",
     "loader-utils": "^1.1.0",
     "lodash": "^4.17.4",
     "markdown-loader": "^2.0.1",
-    "markdownlint": "^0.6.0",
-    "markdownlint-cli": "^0.3.1",
+    "markdownlint": "^0.11.0",
+    "markdownlint-cli": "^0.13.0",
+    "markdownlint-rule-emphasis-style": "^1.0.0",
     "marked": "^0.3.7",
     "mini-css-extract-plugin": "^0.2.0",
     "mkdirp": "^0.5.1",
@@ -105,13 +115,13 @@
   },
   "dependencies": {
     "ajv": "^5.5.2",
+    "javascriptstuff-db": "^1.12.0",
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "tool-list": "^0.11.0",
     "webpack.vote": "^0.1.2",
     "whatwg-fetch": "^2.0.3"
   }

@@ -6,7 +6,10 @@ contributors:
   - simon04
   - tbroadley
   - chenxsan
+  - rencire
   - madhavarshney
+  - EugeneHlushko
+  - byzyk
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -21,11 +24,6 @@ related:
 ---
 
 For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the config file.
-
-Users have a choice between two CLI packages:
-
-* [webpack-cli](https://github.com/webpack/webpack-cli): the original webpack full-featured CLI.
-* [webpack-command](https://github.com/webpack-contrib/webpack-command): the lightweight, opinionated and modern CLI.
 
 Read the [installation guide](/guides/installation) if you don't already have webpack and CLI installed.
 
@@ -45,15 +43,15 @@ See [configuration](/configuration) for the options in the configuration file.
 webpack <entry> [<entry>] -o <output>
 ```
 
-**`<entry>`**
+__`<entry>`__
 
 A filename or a set of named filenames which act as the entry point to build your project. You can pass multiple entries (every entry is loaded on startup). If you pass a pair in the form `<name>=<request>` you can create an additional entry point. It will be mapped to the configuration option `entry`.
 
-**`<output>`**
+__`<output>`__
 
 A path and filename for the bundled file to be saved in. It will be mapped to the configuration options `output.path` and `output.filename`.
 
-**Example**
+__Example__
 
 If your project structure is as follows -
 
@@ -68,7 +66,7 @@ If your project structure is as follows -
 ```
 
 ```bash
-webpack ./src/index.js dist/bundle.js
+webpack src/index.js -o dist/bundle.js
 ```
 
 This will bundle your source code with entry as `index.js` and the output bundle file will have a path of `dist` and the filename will be `bundle.js`
@@ -101,14 +99,14 @@ This will form the bundle with both the files as separate entry points.
 
 W> Note that Command Line Interface has a higher precedence for the arguments you use it with than your configuration file. For instance, if you pass [`--mode="production"`](/concepts/mode/#usage) to webpack CLI and your configuration file uses `development`, `production` will be used.
 
-**List all of the options available on the cli**
+__List all of the options available on the cli__
 
 ```bash
 webpack --help
 webpack -h
 ```
 
-**Build source using a config file**
+__Build source using a config file__
 
 Specifies a different [configuration](/configuration) file to pick up. Use this if you want to specify something different than `webpack.config.js`, which is the default.
 
@@ -116,7 +114,7 @@ Specifies a different [configuration](/configuration) file to pick up. Use this 
 webpack --config example.config.js
 ```
 
-**Print result of webpack as a JSON**
+__Print result of webpack as a JSON__
 
 ```bash
 webpack --json
@@ -153,10 +151,10 @@ T> See the [environment variables](/guides/environment-variables) guide for more
 Parameter                 | Explanation                                 | Input type | Default
 ------------------------- | ------------------------------------------- | ---------- | ------------------
 `--config`                | Path to the config file                     | string     | webpack.config.js or webpackfile.js
-`--config-register, -r`   | Preload one or more modules before loading the webpack configuration | array | 
-`--config-name`           | Name of the config to use                   | string     | 
-`--env`                   | Environment passed to the config, when it is a function | 
-`--mode`                  | Mode to use, either "development" or "production" | string      | 
+`--config-register, -r`   | Preload one or more modules before loading the webpack configuration | array |
+`--config-name`           | Name of the config to use                   | string     |
+`--env`                   | Environment passed to the config, when it is a function  | |
+`--mode`                  | Mode to use, either "development" or "production" | string |
 
 ### Output Options
 
@@ -214,17 +212,17 @@ Parameter    | Explanation                                      | Input type | D
 `--debug`    | Switch loaders to debug mode                     | boolean    | false
 `--devtool`  | Define [source map type](/configuration/devtool/) for the bundled resources | string | -
 `--progress` | Print compilation progress in percentage         | boolean    | false
-`--display-error-details` | Display details about errors | boolean | false 
+`--display-error-details` | Display details about errors | boolean | false
 
 ### Module Options
 
 These options allow you to bind [modules](/configuration/module/) as allowed by webpack
 
-Parameter            | Explanation                        | Usage
--------------------- | ---------------------------------- | ----------------
-`--module-bind`      | Bind an extension to a loader      | `--module-bind js=babel-loader`
-`--module-bind-post` | Bind an extension to a post loader |
-`--module-bind-pre`  | Bind an extension to a pre loader  |
+Parameter            | Explanation                            | Usage
+-------------------- | -------------------------------------- | ----------------
+`--module-bind`      | Bind a file extension to a loader      | `--module-bind js=babel-loader`
+`--module-bind-post` | Bind a file extension to a post loader |
+`--module-bind-pre`  | Bind a file extension to a pre loader  |
 
 
 ### Watch Options
@@ -267,7 +265,8 @@ These options allow webpack to display various [stats](/configuration/stats/) an
 
 Parameter                        | Explanation                                                        | Type
 -------------------------------- | ------------------------------------------------------------------ | -------
-`--color`, `--colors`            | Enables/Disables colors on the console [default: (supports-color)] | boolean
+`--color`, `--colors`            | Force colors on the console [default: enabled for TTY output only] | boolean
+`--no-color`, `--no-colors`      | Force no colors on the console                                     | boolean
 `--display`                      | Select [display preset](/configuration/stats) (verbose, detailed, normal, minimal, errors-only, none; since webpack 3.0.0) | string
 `--display-cached`               | Display also cached modules in the output                          | boolean
 `--display-cached-assets`        | Display also cached assets in the output                           | boolean
@@ -296,7 +295,7 @@ Parameter         | Explanation                              | Usage
 ----------------- | ---------------------------------------- | -----
 `--bail`          | Abort the compilation on first error     |
 `--cache`         | Enable in memory caching [Enabled by default for watch] | `--cache=false`
-`--define`        | Define any free variable, see [shimming](/guides/shimming) | `--define process.env.NODE_ENV='development'`
+`--define`        | Define any free variable, see [shimming](/guides/shimming) | `--define process.env.NODE_ENV="'development'"`
 `--hot`           | Enables [Hot Module Replacement](/concepts/hot-module-replacement) | `--hot=true`
 `--labeled-modules` | Enables labeled modules [Uses LabeledModulesPlugin] |
 `--plugin`        | Load this [plugin](/configuration/plugins/) |
@@ -314,7 +313,6 @@ Shortcut | Replaces
 -d       | `--debug --devtool cheap-module-eval-source-map --output-pathinfo`
 -p       | `--optimize-minimize --define process.env.NODE_ENV="production"`, see [building for production](/guides/production)
 
-
 ### Profiling
 
 The `--profile` option captures timing information for each step of the compilation and includes this in the output.
@@ -329,9 +327,9 @@ webpack --profile
 
 For each module, the following details are included in the output as applicable:
 
-* `factory`: time to collect module metadata (e.g. resolving the filename)
-* `building`: time to build the module (e.g. loaders and parsing)
-* `dependencies`: time to identify and connect the module’s dependencies
+- `factory`: time to collect module metadata (e.g. resolving the filename)
+- `building`: time to build the module (e.g. loaders and parsing)
+- `dependencies`: time to identify and connect the module’s dependencies
 
 Paired with `--progress`, `--profile` gives you an in depth idea of which step in the compilation is taking how long. This can help you optimise your build in a more informed manner.
 

@@ -7,6 +7,7 @@ contributors:
   - pksjce
   - e-cloud
   - byzyk
+  - EugeneHlushko
 ---
 
 Plugins are a key piece of the webpack ecosystem and provide the community with
@@ -59,18 +60,18 @@ However, for `run` which utilizes the `AsyncHook`, we can utilize `tapAsync`
 or `tapPromise` (as well as `tap`):
 
 ``` js
-compiler.hooks.run.tapAsync('MyPlugin', (compiler, callback) => {
+compiler.hooks.run.tapAsync('MyPlugin', (source, target, routesList, callback) => {
   console.log('Asynchronously tapping the run hook.');
   callback();
 });
 
-compiler.hooks.run.tapPromise('MyPlugin', compiler => {
+compiler.hooks.run.tapPromise('MyPlugin', (source, target, routesList) => {
   return new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
     console.log('Asynchronously tapping the run hook with a delay.');
   });
 });
 
-compiler.hooks.run.tapPromise('MyPlugin', async compiler => {
+compiler.hooks.run.tapPromise('MyPlugin', async (source, target, routesList) => {
   await new Promise(resolve => setTimeout(resolve, 1000));
   console.log('Asynchronously tapping the run hook with a delay.');
 });
@@ -99,6 +100,38 @@ compiler.hooks.myCustomHook.call(a, b, c);
 Again, see the [documentation](https://github.com/webpack/tapable) for `tapable` to learn more about the
 different hook classes and how they work.
 
+## Reporting Progress
+
+Plugins can report progress via [`ProgressPlugin`](/plugins/progress-plugin/), which prints progress messages to stderr by default. In order to enable progress reporting, pass a `--progress` argument when running the [webpack CLI](/api/cli/).
+
+It is possible to customize the printed output by passing different arguments to the `reportProgress` function of [`ProgressPlugin`](/plugins/progress-plugin/).
+
+To report progress, a plugin must `tap` into a hook using the `context: true` option:
+
+```js
+compiler.hooks.emit.tapAsync({
+  name: 'MyPlugin',
+  context: true
+}, (context, compiler, callback) => {
+  const reportProgress = context && context.reportProgress;
+  if (reportProgress) reportProgress(0.95, 'Starting work');
+  setTimeout(() => {
+    if (reportProgress) reportProgress(0.95, 'Done work');
+    callback();
+  }, 1000);
+});
+```
+
+The `reportProgress` function may be called with these arguments:
+
+```js
+reportProgress(percentage, ...args);
+```
+
+- `percentage`: This argument is unused; instead, [`ProgressPlugin`](/plugins/progress-plugin/) will calculate a percentage based on the current hook.
+- `...args`: Any number of strings, which will be passed to the `ProgressPlugin` handler to be reported to the user.
+
+Note that only a subset of compiler and compilation hooks support the `reportProgress` function. See [`ProgressPlugin`](/plugins/progress-plugin/#supported-hooks) for a full list.
 
 ## Next Steps
 

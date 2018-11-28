@@ -50,7 +50,7 @@ webpack({
 });
 ```
 
-T> The `err` object **will not** include compilation errors and those must be handled separately using `stats.hasErrors()` which will be covered in detail in [Error Handling](#error-handling) section of this guide. The `err` object will only contain webpack-related issues, such as misconfiguration, etc.
+T> The `err` object __will not__ include compilation errors and those must be handled separately using `stats.hasErrors()` which will be covered in detail in [Error Handling](#error-handling) section of this guide. The `err` object will only contain webpack-related issues, such as misconfiguration, etc.
 
 T> You can provide the `webpack` function with an array of configurations. See
 the [MultiCompiler](#multicompiler) section below for more information.
@@ -73,8 +73,8 @@ lifecycle running. It delegates all the loading, bundling, and writing work to
 registered plugins.
 
 The `hooks` property on a `Compiler` instance is used to register a plugin to
-any hook event in the `Compiler`'s lifecycle. The [`WebpackOptionsDefaulter`]
-(https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js)
+any hook event in the `Compiler`'s lifecycle. The
+[`WebpackOptionsDefaulter`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js)
 and [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js)
 utilities are used by webpack to configure its `Compiler` instance with all the
 built-in plugins.
