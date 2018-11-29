@@ -34,7 +34,7 @@ class MyExampleWebpackPlugin {
         console.log('Here’s the `compilation` object which represents a single build of assets:', compilation);
 
         // Manipulate the build using the plugin API provided by webpack
-        console.log(`print assets`, Object.keys(compilation.assets))
+        console.log('print assets', Object.keys(compilation.assets));
         
 
         callback();
