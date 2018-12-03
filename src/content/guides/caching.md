@@ -24,7 +24,7 @@ This guide focuses on the configuration needed to ensure files produced by webpa
 
 ## Output Filenames
 
-We can use the `output.filename` [substitutions](/configuration/output#output-filename) setting to define the names of our output files. webpack provides a method of templating the filenames using bracketed strings called **substitutions**. The `[contenthash]` substitution will add a unique hash based on the content of an asset. When the asset's content changes, `[contenthash]` will change as well.
+We can use the `output.filename` [substitutions](/configuration/output#output-filename) setting to define the names of our output files. webpack provides a method of templating the filenames using bracketed strings called __substitutions__. The `[contenthash]` substitution will add a unique hash based on the content of an asset. When the asset's content changes, `[contenthash]` will change as well.
 
 Let's get our project set up using the example from [getting started](/guides/getting-started) with the `plugins` from [output management](/guides/output-management), so we don't have to deal with maintaining our `index.html` file manually:
 
