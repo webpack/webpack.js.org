@@ -122,6 +122,7 @@ export default class Support extends React.Component {
                className="support__item"
                title={ `$${formatMoney(supporter.totalDonations / 100)} by ${supporter.name || supporter.slug}` }
                target="_blank"
+               rel="noopener nofollow"
                href={ supporter.website || `https://opencollective.com/${supporter.slug}` }>
               {<img
                 className={ `support__${rank}-avatar` }
