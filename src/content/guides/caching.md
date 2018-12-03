@@ -338,4 +338,4 @@ We can see that both builds yielded `55e79e5927a639d21a1b` in the `vendor` bundl
 
 ## Conclusion
 
-Caching can be complicated, but the benefits to our application's users make it worth it. Hopefully this guide has given you a good foundation for deploying consistent, cacheable assets. See the _Further Reading_ section below to learn more.
+Caching can be complicated, but the benefit to application or site users makes it worth the effort. See the _Further Reading_ section below to learn more.
