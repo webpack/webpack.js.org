@@ -288,7 +288,7 @@ module.exports = {
 
 `boolean: false`
 
-Tells webpack to ignore [`splitChunks.minSize`](#splitchunks-minsize), [`splitChunks.maxSize`](#splitchunks-maxsize), [`splitChunks.minChunks`](#splitchunks-minchunks), [`splitChunks.maxAsyncRequests`](#splitchunks-maxasyncrequests) and [`splitChunks.maxInitialRequests`](#splitchunks-maxinitialrequests) options and always create chunks for this cache group.
+Tells webpack to ignore [`splitChunks.minSize`](#splitchunks-minsize), [`splitChunks.minChunks`](#splitchunks-minchunks), [`splitChunks.maxAsyncRequests`](#splitchunks-maxasyncrequests) and [`splitChunks.maxInitialRequests`](#splitchunks-maxinitialrequests) options and always create chunks for this cache group.
 
 __webpack.config.js__
 
