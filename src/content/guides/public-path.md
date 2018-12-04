@@ -5,6 +5,7 @@ contributors:
   - rafaelrinaldi
   - chrisVillanueva
   - gonzoyumo
+  - Knagis
 ---
 
 The `publicPath` configuration option can be quite useful in a variety of scenarios. It allows you to specify the base path for all the assets within your application.
@@ -58,4 +59,25 @@ W> Be aware that if you use ES6 module imports in your entry file the `__webpack
 // entry.js
 import './public-path';
 import './app';
+```
+
+### On The Fly - with plugin
+
+Similar result can be achieved by using a plugin to set the public path directly into the emitted chunks, without relying on the runtime `__webpack_public_path__` variable.
+
+```js
+export class DynamicPublicPathPlugin {
+    apply(compiler) {
+        compiler.hooks.thisCompilation.tap("DynamicPublicPathPlugin", compilation => {
+            const mainTemplate = compilation.mainTemplate;
+            const hook = mainTemplate.hooks.requireExtensions;
+
+            hook.tap("DynamicPublicPathPlugin", (source) => {
+                // replace `getWebpackPublicPath()` with code relevant to your application
+                source += `\n${mainTemplate.requireFn}.p = getWebpackPublicPath();`;
+                return source;
+            });
+        });
+    }
+}
 ```
