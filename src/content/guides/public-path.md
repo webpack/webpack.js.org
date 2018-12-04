@@ -67,17 +67,17 @@ Similar result can be achieved by using a plugin to set the public path directly
 
 ```js
 export class DynamicPublicPathPlugin {
-    apply(compiler) {
-        compiler.hooks.thisCompilation.tap("DynamicPublicPathPlugin", compilation => {
-            const mainTemplate = compilation.mainTemplate;
-            const hook = mainTemplate.hooks.requireExtensions;
+  apply(compiler) {
+    compiler.hooks.thisCompilation.tap('DynamicPublicPathPlugin', compilation => {
+      const mainTemplate = compilation.mainTemplate;
+      const hook = mainTemplate.hooks.requireExtensions;
 
-            hook.tap("DynamicPublicPathPlugin", (source) => {
-                // replace `getWebpackPublicPath()` with code relevant to your application
-                source += `\n${mainTemplate.requireFn}.p = getWebpackPublicPath();`;
-                return source;
-            });
-        });
-    }
+      hook.tap('DynamicPublicPathPlugin', (source) => {
+        // replace `getWebpackPublicPath()` with code relevant to your application
+        source += `\n${mainTemplate.requireFn}.p = getWebpackPublicPath();`;
+        return source;
+      });
+    });
+  }
 }
 ```
