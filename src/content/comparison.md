@@ -36,7 +36,7 @@ webpack is not the only module bundler out there. If you are choosing between us
 | Indirect require `var r = require; r("./file")` | __yes__ | no♦ | no | no | no | |
 | Load each file separate | no | yes | no | yes | no | no |
 | Mangle path names | __yes__ | no | partial | yes | not required (path names are not included in the bundle) | no |
-| Minimizing | uglify | uglify, closure compiler | [uglifyify](https://github.com/hughsk/uglifyify) | yes | [uglify-plugin](https://github.com/TrySound/rollup-plugin-uglify) | [UglifyJS-brunch](https://github.com/brunch/uglify-js-brunch)
+| Minimizing | terser | uglify, closure compiler | [uglifyify](https://github.com/hughsk/uglifyify) | yes | [uglify-plugin](https://github.com/TrySound/rollup-plugin-uglify) | [UglifyJS-brunch](https://github.com/brunch/uglify-js-brunch)
 | Multi pages build with common bundle | with manual configuration | __yes__ | with manual configuration | with bundle arithmetic | no | no|
 | Multiple bundles | __yes__ | with manual configuration | with manual configuration | yes | no | yes |
 | Node.js built-in libs `require("path")` | __yes__ | no | __yes__ | __yes__ | [node-resolve-plugin](https://github.com/rollup/rollup-plugin-node-resolve) | |
