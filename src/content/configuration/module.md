@@ -308,11 +308,26 @@ module.exports = {
 
 ## `Rule.use`
 
-A list of [UseEntries](#useentry) which are applied to modules. Each entry specifies a loader to be used.
+`array`
+
+An array of [UseEntry](#useentry) which are applied to modules. Each entry specifies a loader to be used.
 
 Passing a string (i.e. `use: [ 'style-loader' ]`) is a shortcut to the loader property (i.e. `use: [ { loader: 'style-loader '} ]`).
 
 Loaders can be chained by passing multiple loaders, which will be applied from right to left (last to first configured).
+
+`Function`
+
+A function which takes an object describing the module being loaded, and must return an array of `UseEntry`.
+
+The same shortcut as as an array can be used for the return value (i.e. `use: [ 'style-loader' ]`).
+
+The object parameter has the following fields:
+- `resource`: The path to the module being loaded
+- `realResource`: The path to the module being loaded
+- `resourceQuery`: ??
+- `compiler`: ?? (can be undefined)
+- `issuer`: The path to the module that is importing the module being loaded
 
 __webpack.config.js__
 
