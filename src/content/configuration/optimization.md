@@ -8,6 +8,7 @@ contributors:
   - byzyk
   - madhavarshney
   - dhurlburtusa
+  - josecolella
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -20,7 +21,7 @@ Since version 4 webpack runs optimizations for you depending on the chosen  [`mo
 
 `boolean`
 
-Tell webpack to minimize the bundle using the [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin/).
+Tell webpack to minimize the bundle using the [terser-webpack-plugin](/plugins/terser-webpack-plugin/).
 
 This is `true` by default in `production` mode.
 
@@ -40,21 +41,20 @@ T> Learn how [mode](/concepts/mode/) works.
 
 ## `optimization.minimizer`
 
-`[UglifyjsWebpackPlugin]`
+`[terser-webpack-plugin]`
 
-Allows you to override the default minimizer by providing a different one or more customized [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin/) instances.
+Allows you to override the default minimizer by providing a different one or more customized [terser-webpack-plugin](/plugins/terser-webpack-plugin/) instances.
 
 __webpack.config.js__
 
 
 ```js
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-
+const TerserPlugin = require('terser-webpack-plugin');
 module.exports = {
   //...
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({ /* your config */ })
+      new TerserPlugin({ /* your config */ })
     ]
   }
 };
