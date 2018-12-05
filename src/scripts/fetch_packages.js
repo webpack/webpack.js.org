@@ -130,7 +130,7 @@ function fetchPackageFiles(options, finalCb) {
             })
             // Replace lone h1 formats
             .replace(/<h1.*?>.+?<\/h1>/, '')
-            .replace(/# .+/, '')
+            .replace(/^# .+/m, '')
             // Resolve anchor hrefs to avoid broken relative references in the docs
             // Examples:
             // - [click here](LICENSE) --> [click here](https://raw.githubusercontent.com/user/repository/branch/LICENSE)
