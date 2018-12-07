@@ -411,7 +411,7 @@ Here is no need to change it.
 
 Only used when [`target`](/configuration/target) is web, which uses JSONP for loading on-demand chunks.
 
-A JSONP function name used to asynchronously load chunks or join multiple initial chunks (CommonsChunkPlugin, AggressiveSplittingPlugin).
+A JSONP function name used to asynchronously load chunks or join multiple initial chunks (CommonsChunkPlugin).
 
 This needs to be changed if multiple webpack runtimes (from different compilation) are used on the same webpage.
 
