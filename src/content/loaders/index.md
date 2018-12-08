@@ -44,7 +44,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 ## Templating
 
 - [`html-loader`](/loaders/html-loader) Exports HTML as string, require references to static resources
-- [`pug-loader`](https://github.com/pugjs/pug-loader) Loads Pug templates and returns a function
+- [`pug-loader`](https://github.com/pugjs/pug-loader) Loads Pug and Jade templates and returns a function
 - [`markdown-loader`](https://github.com/peerigon/markdown-loader) Compiles Markdown to HTML
 - [`react-markdown-loader`](https://github.com/javiercf/react-markdown-loader) Compiles Markdown to a React Component using the markdown-parse parser
 - [`posthtml-loader`](https://github.com/posthtml/posthtml-loader) Loads and transforms a HTML file using [PostHTML](https://github.com/posthtml/posthtml)
