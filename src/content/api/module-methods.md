@@ -105,7 +105,7 @@ import(/* webpackIgnore: true */ 'ignored-module.js');
 
 W> Note that setting `webpackIgnore` to `true` opts out of code splitting.
 
-`webpackChunkName`: A name for the new chunk. Since webpack 2.6.0, the placeholders `[index]` and `[request]` are supported within the given string to an incremented number or the actual resolved filename respectively. This will cause our separate bundle to be named [my-chunk-name].bundle.js instead of just [id].bundle.js.
+`webpackChunkName`: A name for the new chunk. Since webpack 2.6.0, the placeholders `[index]` and `[request]` are supported within the given string to an incremented number or the actual resolved filename respectively. This will cause our separate bundle to be named [my-chunk-name].js instead of just [id].js.
 
 `webpackMode`: Since webpack 2.6.0, different modes for resolving dynamic imports can be specified. The following options are supported:
 
