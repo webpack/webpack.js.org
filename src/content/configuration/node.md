@@ -33,13 +33,9 @@ These are the defaults:
 module.exports = {
   //...
   node: {
-    console: false,
-    global: true,
-    process: true,
+    global: false,
     __filename: 'mock',
     __dirname: 'mock',
-    Buffer: true,
-    setImmediate: true
 
     // See "Other node core libraries" for additional options.
   }
@@ -49,27 +45,11 @@ module.exports = {
 Since webpack 3.0.0, the `node` option may be set to `false` to completely turn off the `NodeStuffPlugin` and `NodeSourcePlugin` plugins.
 
 
-## `node.console`
-
-`boolean | "mock"`
-
-Default: `false`
-
-The browser provides a `console` object with a very similar interface to the Node.js `console`, so a polyfill is generally not needed.
-
-
-## `node.process`
-
-`boolean | "mock"`
-
-Default: `true`
-
-
 ## `node.global`
 
 `boolean`
 
-Default: `true`
+Default: `false`
 
 See [the source](https://github.com/webpack/webpack/blob/master/buildin/global.js) for the exact behavior of this object.
 
@@ -98,20 +78,6 @@ Options:
 - `true`: The dirname of the __input__ file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
 - `false`: The regular Node.js `__dirname` behavior. The dirname of the __output__ file when run in a Node.js environment.
 - `"mock"`: The fixed value `"/"`.
-
-
-## `node.Buffer`
-
-`boolean | "mock"`
-
-Default: `true`
-
-
-## `node.setImmediate`
-
-`boolean | "mock" | "empty"`
-
-Default: `true`
 
 
 ## Other node core libraries
