@@ -28,7 +28,7 @@ If you are only using one function from lodash or one date utility from moment.j
 
 webpack runs on Node.js, a JavaScript runtime that can be used in computers and servers outside a browser environment.
 
-When Node.js was released a new era started, and it came with new challenges. Now that JavaScript is not running in a browser, how are Node applications supposed to load new chunks of code? There is no html files and scripts tags that can be added to it.
+When Node.js was released a new era started, and it came with new challenges. Now that JavaScript is not running in a browser, how are Node applications supposed to load new chunks of code? There are no html files and script tags that can be added to it.
 
 CommonJS came out and introduced `require`, which allows you to load and use a module in the current file. This solves scope issues out of the box and which code is used becomes clear since we need to import each module that we are going to need.
 
@@ -47,8 +47,8 @@ The good news for web projects is that modules are becoming an official feature 
 
 ## Wouldn't it be nice…
 
-...to have something that will not only let us write modules but also support any module format (at least until we get to ESM) and that can handle resources and assets at the same time.
+...to have something that will not only let us write modules but also support any module format (at least until we get to ESM) and that can handle resources and assets at the same time?
 
-This is why webpack exists. It's a tool that not only let's you bundle your JavaScript applications, supporting both ESM and CommonJS, but can be extended to support all different kind of assets like images, fonts and stylesheets.
+This is why webpack exists. It's a tool that not only let's you bundle your JavaScript applications, supporting both ESM and CommonJS, but can be extended to support all different kinds of assets like images, fonts and stylesheets.
 
 webpack cares a lot about performance and it's always adding and improving features like async chunk loading and prefetching to help you deliver the best possible version of your project to the user, always caring about loading times and performance.
