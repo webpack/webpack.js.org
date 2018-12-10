@@ -75,7 +75,7 @@ W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/W
 
 ## Magic Comments
 
-The spec for `import` doesn't allow control over the chunk's name or other properties as "chunks" are only a concept within webpack. Luckily webpack allows some special parameters via comments so as to not break the spec. It really is as simple as just adding these comments in order to make these features work:
+Simple comments to make features work. Just by adding comments to the import we can do things such as name our chunk or select different modes. For a full list of these magic comments see the code below followed by an explanation of what these comments do. 
 
 ``` js
 // Single target
@@ -105,7 +105,7 @@ import(/* webpackIgnore: true */ 'ignored-module.js');
 
 W> Note that setting `webpackIgnore` to `true` opts out of code splitting.
 
-`webpackChunkName`: A name for the new chunk. Since webpack 2.6.0, the placeholders `[index]` and `[request]` are supported within the given string to an incremented number or the actual resolved filename respectively. This will cause our separate bundle to be named [my-chunk-name].js instead of just [id].js.
+`webpackChunkName`: A name for the new chunk. Since webpack 2.6.0, the placeholders `[index]` and `[request]` are supported within the given string to an incremented number or the actual resolved filename respectively. Adding this comment will cause our separate chunk to be named [my-chunk-name].js instead of just [id].js.
 
 `webpackMode`: Since webpack 2.6.0, different modes for resolving dynamic imports can be specified. The following options are supported:
 
@@ -114,9 +114,9 @@ W> Note that setting `webpackIgnore` to `true` opts out of code splitting.
 - `"eager"`: Generates no extra chunk. All modules are included in the current chunk and no additional network requests are made. A `Promise` is still returned but is already resolved. In contrast to a static import, the module isn't executed until the call to `import()` is made.
 - `"weak"`: Tries to load the module if the module function has already been loaded in some other way (i. e. another chunk imported it or a script containing the module was loaded). A `Promise` is still returned but, only successfully resolves if the chunks are already on the client. If the module is not available, the `Promise` is rejected. A network request will never be performed. This is useful for universal rendering when required chunks are always manually served in initial requests (embedded within the page), but not in cases where app navigation will trigger an import not initially served.
 
-`webpackPrefetch`:  This tells the browser that the resource is probably needed for some navigation in the future. Check out the guide for more information on [how webpackPrefetch works](https://webpack.js.org/guides/code-splitting/#prefetching-preloading-modules).
+`webpackPrefetch`: Tells the browser that the resource is probably needed for some navigation in the future. Check out the guide for more information on [how webpackPrefetch works](/guides/code-splitting/#prefetching-preloading-modules).
 
-`webpackPreload`:  This tells the browser that the resource might be needed during the current navigation. Check our the guide for more information on [how webpackPreload works](https://webpack.js.org/guides/code-splitting/#prefetching-preloading-modules).
+`webpackPreload`: Tells the browser that the resource might be needed during the current navigation. Check our the guide for more information on [how webpackPreload works](/guides/code-splitting/#prefetching-preloading-modules).
 
 T> Note that all options can be combined like so `/* webpackMode: "lazy-once", webpackChunkName: "all-i18n-data" */`. This is wrapped in a JavaScript object and executed using [node VM](https://nodejs.org/dist/latest-v8.x/docs/api/vm.html). You do not need to add curly brackets.
 
