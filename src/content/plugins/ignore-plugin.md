@@ -5,6 +5,7 @@ contributors:
   - byzyk
   - DullReferenceException
   - EugeneHlushko
+  - FadySamirSadek
 ---
 
 Prevent generation of modules for `import` or `require` calls matching the following regular expressions:
@@ -13,7 +14,7 @@ Prevent generation of modules for `import` or `require` calls matching the follo
 - `contextRegExp` (optional) A RegExp to test the context (directory) against.
 
 ``` js
-new webpack.IgnorePlugin(requestRegExp, [contextRegExp]);
+new webpack.IgnorePlugin({requestRegExp, contextRegExp});
 ```
 
 The following examples demonstrate a few ways this plugin can be used.
@@ -26,7 +27,7 @@ As of [moment](https://momentjs.com/) 2.18, all locales are bundled together wit
 The `requestRegExp` parameter passed to `IgnorePlugin` is not tested against the resolved file names or absolute module names being imported or required, but rather against the _string_ passed to `require` or `import` _within the source code where the import is taking place_. For example, if you're trying to exclude `node_modules/moment/locale/*.js`, this won't work:
 
 ```diff
--new webpack.IgnorePlugin(/moment\/locale\//);
+-new webpack.IgnorePlugin({requestRegExp: /moment\/locale\//});
 ```
 
 Rather, because `moment` imports with this code:
@@ -38,7 +39,10 @@ require('./locale/' + name);
 ...your first regexp must match that `'./locale/'` string. The second `contextRegExp` parameter is then used to select specific directories from where the import took place. The following will cause those locale files to be ignored:
 
 ```js
-new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/);
+new webpack.IgnorePlugin({
+  requestRegExp: /^\.\/locale$/,
+  contextRegExp: /moment$/
+});
 ```
 
 ...which means "any require statement matching `'./locale'` from any directories ending with `'moment'` will be ignored.
