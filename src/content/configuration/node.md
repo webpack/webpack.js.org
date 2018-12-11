@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - oneforwonder
   - Rob--W
+  - byzyk
 ---
 
 These options configure whether to polyfill or mock certain [Node.js globals](https://nodejs.org/docs/latest/api/globals.html) and modules. This allows code originally written for the Node.js environment to run in other environments like the browser.
@@ -29,17 +30,20 @@ W> Not every Node global supports all four options. The compiler will throw an e
 These are the defaults:
 
 ```js
-node: {
-  console: false,
-  global: true,
-  process: true,
-  __filename: "mock",
-  __dirname: "mock",
-  Buffer: true,
-  setImmediate: true
+module.exports = {
+  //...
+  node: {
+    console: false,
+    global: true,
+    process: true,
+    __filename: 'mock',
+    __dirname: 'mock',
+    Buffer: true,
+    setImmediate: true
 
-  // See "Other node core libraries" for additional options.
-}
+    // See "Other node core libraries" for additional options.
+  }
+};
 ```
 
 Since webpack 3.0.0, the `node` option may be set to `false` to completely turn off the `NodeStuffPlugin` and `NodeSourcePlugin` plugins.
@@ -78,8 +82,8 @@ Default: `"mock"`
 
 Options:
 
-- `true`: The filename of the **input** file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
-- `false`: The regular Node.js `__filename` behavior. The filename of the **output** file when run in a Node.js environment.
+- `true`: The filename of the __input__ file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
+- `false`: The regular Node.js `__filename` behavior. The filename of the __output__ file when run in a Node.js environment.
 - `"mock"`: The fixed value `"index.js"`.
 
 
@@ -91,8 +95,8 @@ Default: `"mock"`
 
 Options:
 
-- `true`: The dirname of the **input** file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
-- `false`: The regular Node.js `__dirname` behavior. The dirname of the **output** file when run in a Node.js environment.
+- `true`: The dirname of the __input__ file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
+- `false`: The regular Node.js `__dirname` behavior. The dirname of the __output__ file when run in a Node.js environment.
 - `"mock"`: The fixed value `"/"`.
 
 
@@ -125,11 +129,13 @@ T> To import a built-in module, use [`__non_webpack_require__`](/api/module-vari
 Example:
 
 ```js
-node: {
-  dns: "mock",
-  fs: "empty",
-  path: true,
-  url: false
-}
+module.exports = {
+  //...
+  node: {
+    dns: 'mock',
+    fs: 'empty',
+    path: true,
+    url: false
+  }
+};
 ```
-

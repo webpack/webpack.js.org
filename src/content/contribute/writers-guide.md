@@ -20,6 +20,7 @@ Each article contains a small section at the top written in [YAML Frontmatter](h
 ``` yaml
 ---
 title: My Article
+group: My Sub-Section
 sort: 3
 contributors:
   - [github username]
@@ -32,7 +33,8 @@ related:
 Let's break these down:
 
 - `title`: The name of the article.
-- `sort`: The order of the article within its section.
+- `group`: The name of the sub-section
+- `sort`: The order of the article within its section (or) sub-section if it is present.
 - `contributors`: A list of GitHub usernames who have contributed to this article.
 - `related`: Any related reading or useful examples.
 
@@ -86,7 +88,7 @@ Parameter   | Explanation                                      | Input Type | De
 --devtool   | Define source map type for the bundled resources | string     | -
 --progress  | Print compilation progress in percentage         | boolean    | false
 
-Same goes for tables.
+Tables should also be ordered alphabetically.
 
 ### Configuration Properties
 
@@ -100,20 +102,20 @@ The [configuration](/configuration) properties should be ordered alphabetically 
 
 #### Blockquote
 
-**Syntax: \>**
+__Syntax: \>__
 
 > This is a blockquote.
 
 #### Tip
 
-**Syntax: T\>**
+__Syntax: T\>__
 
 T> This is a tip.
 
-**Syntax: W\>**
+__Syntax: W\>__
 
 W> This is a warning.
 
-**Syntax: ?\>**
+__Syntax: ?\>__
 
 ?> This is a todo.
