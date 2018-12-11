@@ -25,7 +25,7 @@ This is an object where each property is the name of a Node global or module and
 - `"empty"`: Provide an empty object.
 - `false`: Provide nothing. Code that expects this object may crash with a `ReferenceError`. Code that attempts to import the module using `require('modulename')` may trigger a `Cannot find module "modulename"` error.
 
-W> Not every Node global supports all four options. The compiler will throw an error for property-value combinations that aren't supported (e.g. `process: 'empty'`). See the sections below for more details.
+W> Not every Node global supports all four options. The compiler will throw an error for property-value combinations that aren't supported (e.g. `global: 'empty'`). See the sections below for more details.
 
 These are the defaults:
 
