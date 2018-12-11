@@ -36,8 +36,6 @@ module.exports = {
     global: false,
     __filename: 'mock',
     __dirname: 'mock',
-
-    // See "Other node core libraries" for additional options.
   }
 };
 ```
@@ -78,30 +76,3 @@ Options:
 - `true`: The dirname of the __input__ file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
 - `false`: The regular Node.js `__dirname` behavior. The dirname of the __output__ file when run in a Node.js environment.
 - `"mock"`: The fixed value `"/"`.
-
-
-## Other node core libraries
-
-`boolean | "mock" | "empty"`
-
-W> This option is only activated (via `NodeSourcePlugin`) when the target is unspecified, "web" or "webworker".
-
-Polyfills for Node.js core libraries from [`node-libs-browser`](https://github.com/webpack/node-libs-browser) are used if available, when the `NodeSourcePlugin` plugin is enabled. See the list of [Node.js core libraries and their polyfills](https://github.com/webpack/node-libs-browser#readme).
-
-By default, webpack will polyfill each library if there is a known polyfill or do nothing if there is not one. In the latter case, webpack will behave as if the module name was configured with the `false` value.
-
-T> To import a built-in module, use [`__non_webpack_require__`](/api/module-variables/#__non_webpack_require__-webpack-specific-), i.e. `__non_webpack_require__('modulename')` instead of `require('modulename')`.
-
-Example:
-
-```js
-module.exports = {
-  //...
-  node: {
-    dns: 'mock',
-    fs: 'empty',
-    path: true,
-    url: false
-  }
-};
-```
