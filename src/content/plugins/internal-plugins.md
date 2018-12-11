@@ -26,7 +26,7 @@ Plugins affecting the environment of the compiler.
 
 ### NodeEnvironmentPlugin
 
-`webpack.node.NodeEnvironmentPlugin`
+`webpack.node.NodeEnvironmentPlugin()`
 
 Applies Node.js style filesystem to the compiler.
 
