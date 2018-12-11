@@ -10,7 +10,7 @@ contributors:
 
 Let's start by clearing up a common misconception. webpack is a module bundler like [Browserify](http://browserify.org/) or [Brunch](http://brunch.io/). It is _not a task runner_ like [Make](https://www.gnu.org/software/make/), [Grunt](https://gruntjs.com/), or [Gulp](https://gulpjs.com/). Task runners handle automation of common development tasks such as linting, building, or testing your project. Compared to bundlers, task runners have a higher level focus. You can still benefit from their higher level tooling while leaving the problem of bundling to webpack.
 
-Bundlers help you get your JavaScript and stylesheets ready for deployment, transforming them into a format that's suitable for the browser. For example, JavaScript can be [minified](/plugins/uglifyjs-webpack-plugin) or [split into chunks](/guides/code-splitting) and [lazy-loaded](/guides/lazy-loading) to improve performance. Bundling is one of the most important challenges in web development, and solving it well can remove a lot of pain from the process.
+Bundlers help you get your JavaScript and stylesheets ready for deployment, transforming them into a format that's suitable for the browser. For example, JavaScript can be [minified](/plugins/terser-webpack-plugin) or [split into chunks](/guides/code-splitting) and [lazy-loaded](/guides/lazy-loading) to improve performance. Bundling is one of the most important challenges in web development, and solving it well can remove a lot of pain from the process.
 
 The good news is that, while there is some overlap, task runners and bundlers can play well together if approached in the right way. This guide provides a high-level overview of how webpack can be integrated into some of the more popular task runners.
 

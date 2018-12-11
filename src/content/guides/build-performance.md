@@ -148,9 +148,9 @@ Be aware of the performance differences of the different `devtool` settings.
 
 ### Avoid Production Specific Tooling
 
-Certain utilities, plugins, and loaders only make sense when building for production. For example, it usually doesn't make sense to minify and mangle your code with the `UglifyJsPlugin` while in development. These tools should typically be excluded in development:
+Certain utilities, plugins, and loaders only make sense when building for production. For example, it usually doesn't make sense to minify and mangle your code with the `TerserPlugin` while in development. These tools should typically be excluded in development:
 
-- `UglifyJsPlugin`
+- `TerserPlugin`
 - `ExtractTextPlugin`
 - `[hash]`/`[chunkhash]`
 - `AggressiveSplittingPlugin`
