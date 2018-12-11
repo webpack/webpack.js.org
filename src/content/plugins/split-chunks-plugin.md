@@ -164,7 +164,9 @@ T> `maxSize` takes higher priority than `maxInitialRequest/maxAsyncRequests`. Ac
 
 `boolean: true | function (module) | string`
 
-The name of the split chunk. Providing `true` will automatically generate a name based on chunks and cache group key, while `false` will use an id as the name (a good value for production so that it doesn't change unnecessarily). Providing a string or function will allow you to use a custom name. If the name matches an entry point name, the entry point will be removed.
+The name of the split chunk. Providing `true` will automatically generate a name based on chunks and cache group key. Providing a string or function will allow you to use a custom name. If the name matches an entry point name, the entry point will be removed.
+
+T> It is recommended to set `splitChunks.name` to `false` for production builds so that it doesn't change names unnecessarily.
 
 __webpack.config.js__
 
