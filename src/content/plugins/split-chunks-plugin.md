@@ -162,7 +162,7 @@ T> `maxSize` takes higher priority than `maxInitialRequest/maxAsyncRequests`. Ac
 
 ### `splitChunks.name`
 
-`boolean: true | function (module) | string`
+`boolean: true | function (module, chunks, cacheGroup) | string`
 
 The name of the split chunk. Providing `true` will automatically generate a name based on chunks and cache group key. Providing a string or function will allow you to use a custom name. If the name matches an entry point name, the entry point will be removed.
 
@@ -175,7 +175,7 @@ module.exports = {
   //...
   optimization: {
     splitChunks: {
-      name (module) {
+      name (module, chunks, cacheGroup) {
         // generate a chunk name...
         return; //...
       }
