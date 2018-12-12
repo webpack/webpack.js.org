@@ -17,7 +17,7 @@ related:
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
 
-Originally, chunks (and modules imported inside them) were connected by a parent-child relationship in the internal webpack graph. The `CommonsChunkPlugin` was used to avoid duplicated dependencies across them, but further optimizations were not possible
+Originally, chunks (and modules imported inside them) were connected by a parent-child relationship in the internal webpack graph. The `CommonsChunkPlugin` was used to avoid duplicated dependencies across them, but further optimizations were not possible.
 
 Since webpack v4, the `CommonsChunkPlugin` was removed in favor of `optimization.splitChunks`.
 
@@ -165,6 +165,8 @@ T> `maxSize` takes higher priority than `maxInitialRequest/maxAsyncRequests`. Ac
 `boolean: true | function (module) | string`
 
 The name of the split chunk. Providing `true` will automatically generate a name based on chunks and cache group key. Providing a string or function will allow you to use a custom name. If the name matches an entry point name, the entry point will be removed.
+
+T> It is recommended to set `splitChunks.name` to `false` for production builds so that it doesn't change names unnecessarily.
 
 __webpack.config.js__
 
