@@ -1,0 +1,84 @@
+@import 'vars';
+@import 'mixins';
+@import 'functions';
+
+/* fiord, elephant, alto, malibu, concrete, mine-shaft */
+
+
+.ais-Hits-list  {
+    list-style: none;
+    display:flex;
+    flex-direction:column;
+    justify-content: flex-end;
+}
+.ais-SearchBox-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: .3rem 1.7rem;
+    width: 100%;
+    position: relative;
+    background-color: getColor(elephant);
+    border: 1px solid #c4c8d8;
+    border-radius: 5px;
+    color: getColor(white);
+    height: 50px;
+}
+ul.ais-Hits-list {
+    padding: 0;
+}
+
+
+.ais-SearchBox-reset svg,
+.ais-SearchBox-submit svg {
+    position: relative;
+    right: 0;
+    fill: getColor(white);
+    background-color: getColor(elephant);
+}
+
+.ais-SearchBox-reset {
+    display: none;
+}
+
+button.ais-SearchBox-submit {
+    border: none;
+    position: relative;
+    left: 5px;
+    bottom: 38px;
+    background-color: getColor(elephant);
+}
+
+.ais-Hits-item {
+    flex: 0 0 100%;
+}
+.product-wrapper {
+    border-top: 1px solid getColor(denim);
+    border-bottom: 1px solid getColor(denim);
+    margin: 5px;
+    
+}
+
+.product-summary {
+    margin-top: 10px;
+    display: flex;
+    float: right;
+}
+.product-desc {
+    padding: 5px;
+}
+
+.product-title {
+    padding: 5px 15px 5px 15px;
+}
+
+.product-name {
+    margin-top: 10px;
+}
+
+.product-avatar {
+    & img {
+        border-radius: 25px;
+        border: 1px solid getColor(denim);
+    }
+}
