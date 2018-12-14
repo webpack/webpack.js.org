@@ -4,6 +4,10 @@
 .footer {
   width: 100%;
   flex: 0 0 auto;
+
+  @media print {
+    display: none !important;
+  }
 }
 
 .footer__inner {

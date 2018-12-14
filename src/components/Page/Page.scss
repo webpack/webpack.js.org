@@ -29,3 +29,10 @@
     padding: 1.5em;
   }
 }
+
+.contributors__section, .interactive
+{
+  @media print {
+    display: none !important;
+  }
+}
