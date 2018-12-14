@@ -2,6 +2,10 @@
 @import 'functions';
 
 .page-links {
+  @media print {
+    display: none !important;
+  }
+
   position: absolute;
   display: none;
   top: 1.5em;

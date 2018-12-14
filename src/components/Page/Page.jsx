@@ -81,7 +81,7 @@ const Page = ({ page, section }) => {
         )}
 
         { contributors.length > 0 && (
-          <div>
+          <div className="contributors__section">
             <hr />
             <h3>Contributors</h3>
             <Contributors contributors={ contributors } />
