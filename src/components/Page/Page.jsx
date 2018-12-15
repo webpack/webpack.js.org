@@ -1,15 +1,15 @@
 // Import External Dependencies
-import React from 'react';
+import React from "react";
 
 // Import Components
-import PageLinks from '../PageLinks/PageLinks';
-import Markdown from '../Markdown/Markdown';
-import Contributors from '../Contributors/Contributors';
-import Placeholder from '../Placeholder/Placeholder';
-import Configuration from '../Configuration/Configuration';
+import PageLinks from "../PageLinks/PageLinks";
+import Markdown from "../Markdown/Markdown";
+import Contributors from "../Contributors/Contributors";
+import Placeholder from "../Placeholder/Placeholder";
+import Configuration from "../Configuration/Configuration";
 
 // Load Styling
-import './Page.scss';
+import "./Page.scss";
 
 class Page extends React.Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class Page extends React.Component {
         )
         .catch(error =>
           this.setState({
-            content: 'Error loading content.'
+            content: "Error loading content."
           })
         );
     }
@@ -54,8 +54,8 @@ class Page extends React.Component {
 
     let contentRender;
 
-    if (typeof content === 'function') {
-      contentRender = content(Configuration);
+    if (typeof content === "function") {
+      contentRender = content(Configuration).props.children.slice(4); // Cut frontmatter information
     } else {
       contentRender = (
         <div
