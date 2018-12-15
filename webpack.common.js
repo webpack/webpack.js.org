@@ -16,11 +16,7 @@ module.exports = (env = {}) => ({
   },
   resolve: {
     symlinks: false,
-    extensions: [
-      '.js',
-      '.jsx',
-      '.scss'
-    ]
+    extensions: ['.js', '.jsx', '.scss']
   },
   module: {
     rules: [
@@ -34,16 +30,34 @@ module.exports = (env = {}) => ({
               require('remark-mermaid'),
               require('./prism-links'),
               // require('remark-refractor'),
-              [require('remark-custom-blockquotes'), {
-                mapping: {
-                  'T>': 'tip',
-                  'W>': 'warning',
-                  '?>': 'todo'
+              [
+                require('remark-custom-blockquotes'),
+                {
+                  mapping: {
+                    'T>': 'tip',
+                    'W>': 'warning',
+                    '?>': 'todo'
+                  }
                 }
-              }],
-              [require('@rigor789/remark-autolink-headings'), {
-                behaviour: 'append'
-              }]
+              ],
+              [
+                require('@rigor789/remark-autolink-headings'),
+                {
+                  behaviour: 'append'
+                }
+              ],
+              [
+                require('remark-responsive-tables'),
+                {
+                  classnames: {
+                    title: 'title',
+                    description: 'description',
+                    content: 'content',
+                    mobile: 'mobile',
+                    desktop: 'desktop'
+                  }
+                }
+              ]
             ]
           }
         }
@@ -82,9 +96,7 @@ module.exports = (env = {}) => ({
             {
               loader: 'sass-loader',
               options: {
-                includePaths: [
-                  path.resolve(__dirname, './src/styles/partials')
-                ]
+                includePaths: [path.resolve(__dirname, './src/styles/partials')]
               }
             }
           ]

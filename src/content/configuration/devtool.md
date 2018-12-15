@@ -6,8 +6,9 @@ contributors:
   - skipjack
   - SpaceK33z
   - lricoy
+  - madhavarshney
 related:
-  - title: Enabling Sourcemaps
+  - title: Enabling Source Maps
     url: https://survivejs.com/webpack/developing-with-webpack/enabling-sourcemaps/
   - title: Webpack's Devtool Source Map
     url: http://cheng.logdown.com/posts/2016/03/25/679045
@@ -113,4 +114,4 @@ W> You should not deploy the Source Map file to the webserver. Instead only use 
 
 W> It still exposes filenames and structure for decompiling, but it doesn't expose the original code.
 
-T> When using the `uglifyjs-webpack-plugin` you must provide the `sourceMap: true` option to enable SourceMap support.
+T> When using the `terser-webpack-plugin` you must provide the `sourceMap: true` option to enable SourceMap support.

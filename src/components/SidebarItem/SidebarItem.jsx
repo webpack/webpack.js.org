@@ -89,6 +89,10 @@ export default class SidebarItem extends React.Component {
     if ( `/${currentPage}` === url ) {
       return `#${anchor.id}`;
 
-    } else return `${url}#${anchor.id}`;
+    } else if (!anchor.id) {
+      return url;
+    } else {
+      return `${url}#${anchor.id}`;
+    }
   }
 }

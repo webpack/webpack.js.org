@@ -55,19 +55,19 @@
 		"maintainer": "Spacek33z"
 	},
 	{
-		"repo": "webpack/file-loader",
+		"repo": "webpack-contrib/file-loader",
 		"npm": "file-loader",
 		"description": "A simple loader for copying and renaming files.",
 		"maintainer": "sokra"
 	},
 	{
-		"repo": "webpack/style-loader",
+		"repo": "webpack-contrib/style-loader",
 		"npm": "style-loader",
 		"description": "Load and inject stylesheets into the DOM.",
 		"maintainer": "sokra"
 	},
 	{
-		"repo": "webpack/css-loader",
+		"repo": "webpack-contrib/css-loader",
 		"npm": "css-loader",
 		"description": "Load CSS modules and resolve any dependencies.",
 		"maintainer": "sokra"
@@ -85,13 +85,13 @@
 		"maintainer": "sokra"
 	},
 	{
-		"repo": "webpack/json-loader",
+		"repo": "webpack-contrib/json-loader",
 		"npm": "json-loader",
 		"description": "Load JSON into a pre-parsed variable.",
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack/url-loader",
+		"repo": "webpack-contrib/url-loader",
 		"npm": "url-loader",
 		"description": "Load files into data urls based on byte limit.",
 		"maintainer": ""
@@ -103,55 +103,55 @@
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack/extract-text-webpack-plugin",
+		"repo": "webpack-contrib/extract-text-webpack-plugin",
 		"npm": "extract-text-webpack-plugin",
 		"description": "Extract text from a bundle into a file.",
 		"maintainer": ""
 	},
 	{
-		"repo": "jtangelder/sass-loader",
+		"repo": "webpack-contrib/sass-loader",
 		"npm": "sass-loader",
 		"description": "Load and parse SASS modules into CSS.",
 		"maintainer": "jhnns"
 	},
 	{
-		"repo": "webpack/karma-webpack",
+		"repo": "webpack-contrib/karma-webpack",
 		"npm": "karma-webpack",
 		"description": "Use webpack to pre-process files in karma.",
 		"maintainer": "MikaAK"
 	},
 	{
-		"repo": "webpack/imports-loader",
+		"repo": "webpack-contrib/imports-loader",
 		"npm": "imports-loader",
 		"description": "Detect and import libraries based on the use of certain variables.",
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack/raw-loader",
+		"repo": "webpack-contrib/raw-loader",
 		"npm": "raw-loader",
 		"description": "Load a module's contents as a string.",
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack/exports-loader",
+		"repo": "webpack-contrib/exports-loader",
 		"npm": "exports-loader",
 		"description": "Load a module's contents directly into export statements.",
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack/less-loader",
+		"repo": "webpack-contrib/less-loader",
 		"npm": "less-loader",
 		"description": "Load and parse LESS modules into CSS.",
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack/expose-loader",
+		"repo": "webpack-contrib/expose-loader",
 		"npm": "expose-loader",
 		"description": "Expose modules as global variables.",
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack/html-loader",
+		"repo": "webpack-contrib/html-loader",
 		"npm": "html-loader",
 		"description": "Load HTML modules/templates as strings.",
 		"maintainer": "hemanth"
@@ -163,7 +163,7 @@
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack/script-loader",
+		"repo": "webpack-contrib/script-loader",
 		"npm": "script-loader",
 		"description": "Load and execute scripts once in the global context.",
 		"maintainer": ""
@@ -175,109 +175,109 @@
 		"maintainer": "shama"
 	},
 	{
-		"repo": "webpack/source-map-loader",
+		"repo": "webpack-contrib/source-map-loader",
 		"npm": "source-map-loader",
 		"description": "Extract source-map comments from modules to pass to webpack.",
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack/null-loader",
+		"repo": "webpack-contrib/null-loader",
 		"npm": "null-loader",
 		"description": "Load an empty module.",
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack/compression-webpack-plugin",
+		"repo": "webpack-contrib/compression-webpack-plugin",
 		"npm": "compression-webpack-plugin",
 		"description": "Compress assets to serve with Content-Encoding.",
 		"maintainer": "palmerj3"
 	},
 	{
-		"repo": "webpack/transform-loader",
+		"repo": "webpack-contrib/transform-loader",
 		"npm": "transform-loader",
 		"description": "Load modules with browserify transforms.",
 		"maintainer": "minwe"
 	},
 	{
-		"repo": "webpack/grunt-webpack",
+		"repo": "webpack-contrib/grunt-webpack",
 		"npm": "grunt-webpack",
 		"description": "Integrate webpack into a grunt build process.",
 		"maintainer": "danez"
 	},
 	{
-		"repo": "webpack/jshint-loader",
+		"repo": "webpack-contrib/jshint-loader",
 		"npm": "jshint-loader",
 		"description": "Load and lint modules with JSHint.",
 		"maintainer": "kostasmanionis"
 	},
 	{
-		"repo": "webpack/bundle-loader",
+		"repo": "webpack-contrib/bundle-loader",
 		"npm": "bundle-loader",
 		"description": "Load a module and it's children into a separate bundle.",
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack/coffee-loader",
+		"repo": "webpack-contrib/coffee-loader",
 		"npm": "coffee-loader",
 		"description": "Load and parse coffee script modules into JS.",
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack/worker-loader",
+		"repo": "webpack-contrib/worker-loader",
 		"npm": "worker-loader",
 		"description": "Load modules as workers.",
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack/mocha-loader",
+		"repo": "webpack-contrib/mocha-loader",
 		"npm": "mocha-loader",
 		"description": "Load mocha modules for testing.",
 		"maintainer": "tricoder42"
 	},
 	{
-		"repo": "webpack/react-proxy-loader",
+		"repo": "webpack-contrib/react-proxy-loader",
 		"npm": "react-proxy-loader",
 		"description": "Wrap a react component in a proxy component to enable Code Splitting.",
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack/multi-loader",
+		"repo": "webpack-contrib/multi-loader",
 		"npm": "multi-loader",
 		"description": "Split a module and import each piece with different loaders.",
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack/val-loader",
+		"repo": "webpack-contrib/val-loader",
 		"npm": "val-loader",
 		"description": "Load and execute a module while compiling, returning the result.",
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack/i18n-webpack-plugin",
+		"repo": "webpack-contrib/i18n-webpack-plugin",
 		"npm": "i18n-webpack-plugin",
 		"description": "Embed localization into your bundle.",
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack/json5-loader",
+		"repo": "webpack-contrib/json5-loader",
 		"npm": "json5-loader",
 		"description": "Load JSON5 into a pre-parsed variable.",
 		"maintainer": "gdi2290"
 	},
 	{
-		"repo": "webpack/node-loader",
+		"repo": "webpack-contrib/node-loader",
 		"npm": "node-loader",
 		"description": "Load native node modules.",
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack/coverjs-loader",
+		"repo": "webpack-contrib/coverjs-loader",
 		"npm": "coverjs-loader",
 		"description": "Test modules' code coverage using CoverJS.",
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack/coffee-redux-loader",
+		"repo": "webpack-contrib/coffee-redux-loader",
 		"npm": "coffee-redux-loader",
 		"description": "Load coffee script modules.",
 		"maintainer": ""

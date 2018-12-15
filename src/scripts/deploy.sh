@@ -2,25 +2,9 @@
 # see https://gist.github.com/domenic/ec8b0fc8ab45f39403dd
 set -e # Exit with nonzero exit code if anything fails
 
-SOURCE_BRANCH="master"
-
-# Pull requests and commits to other branches shouldn't try to deploy, just build to verify
-if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]; then
-    echo "Skipping deploy; just doing a build and linting links/prose/js."
-    yarn test
-    yarn build
-    exit 0
-fi
-
 # Save some useful information
 REPO=`git config remote.origin.url`
 SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
-
-# Run tests
-yarn test
-
-# Run our build
-yarn build
 
 # Set some git options
 git config --global user.name "Travis CI"

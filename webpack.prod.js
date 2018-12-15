@@ -5,6 +5,7 @@ const merge = require('webpack-merge');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const SSGPlugin = require('static-site-generator-webpack-plugin');
 const RedirectWebpackPlugin = require('redirect-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const flattenContentTree = require('./src/utilities/flatten-content-tree');
 const contentTree = require('./src/_content.json');
 
@@ -12,7 +13,12 @@ const contentTree = require('./src/_content.json');
 const common = require('./webpack.common.js');
 
 // content tree to path array
-const paths = flattenContentTree(contentTree);
+const paths = [
+  ...flattenContentTree(contentTree),
+  '/vote',
+  '/organization',
+  '/starter-kits'
+];
 
 // Prod only config
 const prod = {
@@ -23,7 +29,14 @@ const prod = {
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: './assets/icon-square-small-slack.png',
+        to: './assets/'
+      },
+      'CNAME'
+    ])
   ]
 };
 

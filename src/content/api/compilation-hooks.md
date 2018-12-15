@@ -4,6 +4,7 @@ group: Plugins
 sort: 2
 contributors:
   - byzyk
+  - madhavarshney
 ---
 
 The `Compilation` module is used by the `Compiler` to create new compilations
@@ -301,7 +302,7 @@ Parameters: `modules`
 
 ...
 
-Paramters: `modules`
+Parameters: `modules`
 
 
 ### `moduleIds`
@@ -319,7 +320,7 @@ Parameters: `modules`
 
 ...
 
-Paramters: `chunks`
+Parameters: `chunks`
 
 
 ### `afterOptimizeModuleIds`
@@ -328,7 +329,7 @@ Paramters: `chunks`
 
 ...
 
-Paramters: `chunks`
+Parameters: `chunks`
 
 
 ### `reviveChunks`
@@ -355,7 +356,7 @@ Parameters: `chunks`
 
 Fired before chunk `id` optimization.
 
-Paramters: `chunks`
+Parameters: `chunks`
 
 
 ### `optimizeChunkIds`
@@ -373,7 +374,7 @@ Parameters: `chunks`
 
 Triggered after chunk `id` optimization has finished.
 
-Paramters: `chunks`
+Parameters: `chunks`
 
 
 ### `recordModules`
@@ -632,3 +633,11 @@ The normal module loader is the function that actually loads all the modules
 in the module graph (one-by-one).
 
 Parameters: `loaderContext` `module`
+
+### `dependencyReference`
+
+`SyncWaterfallHook`
+
+`Compilation.hooks.dependencyReference(depRef, dependency, module)` allows to change the references reported by dependencies.
+
+Parameters: `depRef` `dependency` `module`

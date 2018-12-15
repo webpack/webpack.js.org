@@ -5,6 +5,7 @@ sort: 1
 contributors:
   - rishantagarwal
   - byzyk
+  - madhavarshney
 ---
 
 The `Compiler` module is the main engine that creates a compilation instance
@@ -12,7 +13,7 @@ with all the options passed through the [CLI](/api/cli) or [Node API](/api/node)
 `Tapable` class in order to register and call plugins. Most user facing plugins
 are first registered on the `Compiler`.
 
-T> This module is exposed as `webpack.Compiler` and can be used directly.See
+T> This module is exposed as `webpack.Compiler` and can be used directly. See
 [this example](https://github.com/pksjce/webpack-internal-examples/tree/master/compiler-example)
 for more information.
 
@@ -41,7 +42,7 @@ compiler.hooks.someHook.tap(/* ... */);
 
 Depending on the hook type, `tapAsync` and `tapPromise` may also be available.
 
-For the description of hook types, see [the Tapable docs](https://github.com/webpack/tapable#hook-types).
+For the description of hook types, see [the Tapable docs](https://github.com/webpack/tapable#tapable).
 
 
 ### `entryOption`
@@ -188,13 +189,6 @@ Parameters: `compilation`
 Can return true/false at this point
 
 Parameters: `compilation`
-
-
-### `needAdditionalPass`
-
-`SyncBailHook`
-
-...
 
 
 ### `emit`

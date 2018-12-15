@@ -188,7 +188,7 @@ export default function(source) {
 
 ### Module Dependencies
 
-Depending the type of module, there may be a different schema used to specify dependencies. In CSS for example, the `@import` and `url(...)` statements are used. These dependencies should be resolved by the module system.
+Depending on the type of module, there may be a different schema used to specify dependencies. In CSS for example, the `@import` and `url(...)` statements are used. These dependencies should be resolved by the module system.
 
 This can be done in one of two ways:
 
@@ -226,7 +226,7 @@ For instance, the `sass-loader` [specifies `node-sass`](https://github.com/webpa
 
 ## Testing
 
-So you've written a loader, followed the guidelines above, and have it set up to run locally. What's next? Let's go through a simple unit testing example to ensure our loader is working the way we expect. We'll be using the [Jest](https://facebook.github.io/jest/) framework to do this. We'll also install `babel-jest` and some presets that will allow us to use the `import` / `export` and `async` / `await`. Let's start by installing and saving these as a `devDependencies`:
+So you've written a loader, followed the guidelines above, and have it set up to run locally. What's next? Let's go through a simple unit testing example to ensure our loader is working the way we expect. We'll be using the [Jest](https://jestjs.io/) framework to do this. We'll also install `babel-jest` and some presets that will allow us to use the `import` / `export` and `async` / `await`. Let's start by installing and saving these as a `devDependencies`:
 
 ``` bash
 npm install --save-dev jest babel-jest babel-preset-env

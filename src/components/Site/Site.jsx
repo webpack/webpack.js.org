@@ -20,6 +20,8 @@ import Footer from '../Footer/Footer';
 import Page from '../Page/Page';
 import Gitter from '../Gitter/Gitter';
 import Vote from '../Vote/Vote';
+import Organization from '../Organization/Organization';
+import StarterKits from '../StarterKits/StarterKits';
 
 // Load Styling
 import '../../styles/index';
@@ -52,7 +54,7 @@ class Site extends React.Component {
             {
               content: 'Documentation',
               url: '/concepts',
-              isActive: url => /^\/(api|concepts|configuration|guides|loaders|plugins)/.test(url),
+              isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
               children: this._strip(sections.filter(item => item.name !== 'contribute'))
             },
             { content: 'Contribute', url: '/contribute' },
@@ -61,7 +63,10 @@ class Site extends React.Component {
           ]}
         />
 
-        {isClient ? <SidebarMobile open={mobileSidebarOpen} sections={this._strip(Content.children)} /> : null}
+        {isClient ? <SidebarMobile
+          isOpen={mobileSidebarOpen}
+          sections={this._strip(Content.children)}
+          toggle={this._toggleSidebar} /> : null}
 
         <Switch>
           <Route path="/" exact component={Splash} />
@@ -69,6 +74,9 @@ class Site extends React.Component {
             render={props => (
               <Container className="site__content">
                 <Switch>
+                  <Route path="/vote" component={Vote} />
+                  <Route path="/organization" component={Organization} />
+                  <Route path="/starter-kits" component={StarterKits} />
                   {pages.map(page => (
                     <Route
                       key={page.url}
@@ -97,7 +105,6 @@ class Site extends React.Component {
                       }}
                     />
                   ))}
-                  <Route path="/vote" component={Vote} />
                   <Route render={props => '404 Not Found'} />
                 </Switch>
               </Container>

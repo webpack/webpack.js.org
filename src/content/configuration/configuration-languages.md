@@ -11,15 +11,17 @@ contributors:
   - byzyk
 ---
 
-webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found at the [node-interpret](https://github.com/js-cli/js-interpret) package. Using [node-interpret](https://github.com/js-cli/js-interpret), webpack can handle many different types of configuration files.
+webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found at the [node-interpret](https://github.com/gulpjs/interpret) package. Using [node-interpret](https://github.com/gulpjs/interpret), webpack can handle many different types of configuration files.
 
 
 ## TypeScript
 
-To write the webpack configuration in [TypeScript](http://www.typescriptlang.org/), you would first install the necessary dependencies:
+To write the webpack configuration in [TypeScript](http://www.typescriptlang.org/), you would first install the necessary dependencies, i.e., TypeScript and the relevant type definitions from the [DefinitelyTyped](https://definitelytyped.org/) project:
 
 ``` bash
 npm install --save-dev typescript ts-node @types/node @types/webpack
+# and, if using webpack-dev-server
+npm install --save-dev @types/webpack-dev-server
 ```
 
 and then proceed to write your configuration:
@@ -90,7 +92,7 @@ __package.json__
 
 ## CoffeeScript
 
-Similarly, to use [CoffeeScript](http://coffeescript.org/), you would first install the necessary dependencies:
+Similarly, to use [CoffeeScript](https://coffeescript.org/), you would first install the necessary dependencies:
 
 ``` bash
 npm install --save-dev coffee-script
@@ -118,7 +120,6 @@ config =
     use: 'babel-loader'
   } ]
   plugins: [
-    new (webpack.optimize.UglifyJsPlugin)
     new HtmlWebpackPlugin(template: './src/index.html')
   ]
 
@@ -167,10 +168,6 @@ export default (
       }} />
     </resolve>
     <plugins>
-      <uglify-js opts={{
-        compression: true,
-        mangle: false
-      }} />
       <CustomPlugin foo="bar" />
     </plugins>
   </webpack>
