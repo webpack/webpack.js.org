@@ -26,7 +26,7 @@ const Card = ({ body }) => {
   );
 };
 
-export class Modes extends React.Component {
+export class Details extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -76,7 +76,3 @@ export class Modes extends React.Component {
     );
   }
 }
-
-export const Entry = props => {
-  return <a href="#">{props.children}</a>;
-};

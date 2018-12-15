@@ -1,10 +1,11 @@
 module.exports = jslinks;
 
-jslinks.displayName = 'jslinks';
-jslinks.aliases = [];
+jslinks.displayName = "jslinks";
+jslinks.aliases = ["js-with-links"];
 
 function jslinks(Prism) {
-  Prism.languages['js-with-links-with-details'] = Prism.languages.extend('javascript', {
+  Prism.languages["js-with-links"] = Prism.languages.extend("javascript");
+  Prism.languages["js-with-links-with-details"] = Prism.languages.extend("javascript", {
     keyword: {
       // pattern: /<[a-z]+>(.|\n)*?<\/[a-z]+>/gi, // <mode>
       // pattern: /<[a-z]+ url=\"([^\"]+)\">(.|\n)*?<\/[a-z]+>/gi, <mode url="">
