@@ -8,6 +8,7 @@ contributors:
   - ahmehri
   - tbroadley
   - byzyk
+  - EugeneHlushko
 related:
   - title: CommonJS
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -79,9 +80,9 @@ See [node.js process](https://nodejs.org/api/process.html).
 
 Depending on the config option `node.__dirname`:
 
-* `false`: Not defined
-* `mock`: equal "/"
-* `true`: [node.js __dirname](https://nodejs.org/api/globals.html#globals_dirname)
+- `false`: Not defined
+- `mock`: equal "/"
+- `true`: [node.js __dirname](https://nodejs.org/api/globals.html#globals_dirname)
 
 If used inside a expression that is parsed by the Parser, the config option is treated as `true`.
 
@@ -90,9 +91,9 @@ If used inside a expression that is parsed by the Parser, the config option is t
 
 Depending on the config option `node.__filename`:
 
-* `false`: Not defined
-* `mock`: equal "/index.js"
-* `true`: [node.js __filename](https://nodejs.org/api/globals.html#globals_filename)
+- `false`: Not defined
+- `mock`: equal "/index.js"
+- `true`: [node.js __filename](https://nodejs.org/api/globals.html#globals_filename)
 
 If used inside a expression that is parsed by the Parser, the config option is treated as `true`.
 
@@ -126,8 +127,8 @@ The raw require function. This expression isn't parsed by the Parser for depende
 
 The internal chunk loading function. Takes two arguments:
 
-* `chunkId` The id for the chunk to load.
-* `callback(require)` A callback function called once the chunk is loaded.
+- `chunkId` The id for the chunk to load.
+- `callback(require)` A callback function called once the chunk is loaded.
 
 
 ### `__webpack_modules__` (webpack-specific)

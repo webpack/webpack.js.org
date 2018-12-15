@@ -5,12 +5,14 @@ contributors:
   - pksjce
   - bebraw
   - simon04
+  - EugeneHlushko
+  - sibiraj-s
 ---
 
 This guide goes through the various methods used to install webpack.
 
 
-## Pre-requisites
+## Prerequisites
 
 Before we begin, make sure you have a fresh version of [Node.js](https://nodejs.org/en/) installed. The current Long Term Support (LTS) release is an ideal starting point. You may run into a variety of issues with the older versions as they may be missing functionality webpack and/or its related packages require.
 
@@ -28,18 +30,11 @@ npm install --save-dev webpack
 npm install --save-dev webpack@<version>
 ```
 
-If you're using webpack v4 or later, you'll need to install a [CLI](/api/cli/).
+If you're using webpack v4 or later, you'll need to install the [CLI](/api/cli/).
 
 ``` bash
 npm install --save-dev webpack-cli
 ```
-
-or
-
-``` bash
-npm install --save-dev webpack-command
-```
-
 
 Installing locally is what we recommend for most projects. This makes it easier to upgrade projects individually when breaking changes are introduced. Typically webpack is run via one or more [npm scripts](https://docs.npmjs.com/misc/scripts) which will look for a webpack installation in your local `node_modules` directory:
 

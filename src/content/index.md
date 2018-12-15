@@ -15,6 +15,7 @@ import bar from './bar';
 
 bar();
 ```
+
 </div>
 <div class="splash__right">
 
@@ -25,6 +26,7 @@ export default function bar() {
   //
 }
 ```
+
 </div>
 </div>
 
@@ -47,6 +49,7 @@ module.exports = {
   }
 };
 ```
+
 </div>
 <div class="splash__right">
 
@@ -64,6 +67,7 @@ __page.html__
   </body>
 </html>
 ```
+
 </div>
 
 Then run `webpack` on the command-line to create `bundle.js`.
