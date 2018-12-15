@@ -77,6 +77,6 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 - [`polymer-loader`](https://github.com/webpack-contrib/polymer-webpack-loader) Process HTML & CSS with preprocessor of choice and `require()` Web Components like first-class modules
 - [`angular2-template-loader`](https://github.com/TheLarkInn/angular2-template-loader) Loads and compiles [Angular](https://angular.io/) Components
 
+## Awesome
 
-![Awesome](../assets/awesome-badge.svg)
 For more third-party loaders, see the list from [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#loaders).
