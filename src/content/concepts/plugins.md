@@ -10,14 +10,14 @@ contributors:
   - byzyk
 ---
 
-**Plugins** are the [backbone](https://github.com/webpack/tapable) of webpack. webpack itself is built on the **same plugin system** that you use in your webpack configuration!
+__Plugins__ are the [backbone](https://github.com/webpack/tapable) of webpack. webpack itself is built on the __same plugin system__ that you use in your webpack configuration!
 
-They also serve the purpose of doing **anything else** that a [loader](/concepts/loaders) cannot do.
+They also serve the purpose of doing __anything else__ that a [loader](/concepts/loaders) cannot do.
 
 
 ## Anatomy
 
-A webpack **plugin** is a JavaScript object that has an [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) method. This `apply` method is called by the webpack compiler, giving access to the **entire** compilation lifecycle.
+A webpack __plugin__ is a JavaScript object that has an [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) method. This `apply` method is called by the webpack compiler, giving access to the __entire__ compilation lifecycle.
 
 __ConsoleLogOnBuildWebpackPlugin.js__
 
@@ -37,7 +37,7 @@ The first parameter of the tap method of the compiler hook should be a camelized
 
 ## Usage
 
-Since **plugins** can take arguments/options, you must pass a `new` instance to the `plugins` property in your webpack configuration.
+Since __plugins__ can take arguments/options, you must pass a `new` instance to the `plugins` property in your webpack configuration.
 
 Depending on how you are using webpack, there are multiple ways to use plugins.
 

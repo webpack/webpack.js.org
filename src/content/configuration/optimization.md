@@ -7,19 +7,20 @@ contributors:
   - simon04
   - byzyk
   - madhavarshney
+  - dhurlburtusa
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
 
-Since version 4 webpack runs optimizations for you depending on the chosen `mode`, still all optimizations are available for manual configuration and overrides.
+Since version 4 webpack runs optimizations for you depending on the chosen  [`mode`](/concepts/mode/), still all optimizations are available for manual configuration and overrides.
 
 
 ## `optimization.minimize`
 
 `boolean`
 
-Tell webpack to minimize the bundle using the [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin/).
+Tell webpack to minimize the bundle using the [TerserPlugin](/plugins/terser-webpack-plugin/).
 
 This is `true` by default in `production` mode.
 
@@ -39,21 +40,21 @@ T> Learn how [mode](/concepts/mode/) works.
 
 ## `optimization.minimizer`
 
-`[UglifyjsWebpackPlugin]`
+`[TerserPlugin]`
 
-Allows you to override the default minimizer by providing a different one or more customized [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin/) instances.
+Allows you to override the default minimizer by providing a different one or more customized [TerserPlugin](/plugins/terser-webpack-plugin/) instances.
 
 __webpack.config.js__
 
 
 ```js
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   //...
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({ /* your config */ })
+      new TerserPlugin({ /* your config */ })
     ]
   }
 };
@@ -168,6 +169,33 @@ module.exports = {
   //...
   optimization: {
     namedChunks: true
+  }
+};
+```
+
+## `optimization.moduleIds`
+
+`bool: false` `string: natural, named, hashed, size, total-size`
+
+Tells webpack which algorithm to use when choosing module ids. Setting `optimization.moduleIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. By default `optimization.moduleIds` is set to `false`.
+
+The following string values are supported:
+
+Option                | Description
+--------------------- | -----------------------
+`natural`             | Numeric ids in order of usage.
+`named`               | Readable ids for better debugging.
+`hashed`              | Short hashes as ids for better long term caching.
+`size`                | Numeric ids focused on minimal initial download size.
+`total-size`          | numeric ids focused on minimal total download size.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    moduleIds: 'hashed'
   }
 };
 ```
@@ -379,6 +407,25 @@ module.exports = {
   //...
   optimization: {
     sideEffects: true
+  }
+};
+```
+
+## `optimization.portableRecords`
+
+`bool`
+
+`optimization.portableRecords` tells webpack to generate records with relative paths to be able to move the context folder.
+
+By default `optimization.portableRecords` is disabled. Automatically enabled if at least one of the records options provided to webpack config: [`recordsPath`](/configuration/other-options/#recordspath), [`recordsInputPath`](/configuration/other-options/#recordsinputpath), [`recordsOutputPath`](/configuration/other-options/#recordsoutputpath).
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    portableRecords: true
   }
 };
 ```
