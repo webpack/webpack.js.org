@@ -8,6 +8,7 @@ contributors:
   - dannycjones
   - fadysamirsadek
   - afontcu
+  - rosavage
   - saiprasad2595
   - EugeneHlushko
 related:
@@ -24,7 +25,7 @@ This guide focuses on the configuration needed to ensure files produced by webpa
 
 ## Output Filenames
 
-A simple way to ensure the browser picks up changed files is by using `output.filename` [substitutions](/configuration/output#output-filename). The `[hash]` substitution can be used to include a build-specific hash in the filename, however it's even better to use the `[contenthash]` substitution which is the hash of the content of a file, which is different for each asset.
+We can use the `output.filename` [substitutions](/configuration/output#output-filename) setting to define the names of our output files. webpack provides a method of templating the filenames using bracketed strings called __substitutions__. The `[contenthash]` substitution will add a unique hash based on the content of an asset. When the asset's content changes, `[contenthash]` will change as well.
 
 Let's get our project set up using the example from [getting started](/guides/getting-started) with the `plugins` from [output management](/guides/output-management), so we don't have to deal with maintaining our `index.html` file manually:
 
@@ -90,7 +91,7 @@ W> Output may differ depending on your current webpack version. Newer versions m
 
 ## Extracting Boilerplate
 
-As we learned in [code splitting](/guides/code-splitting), the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) can be used to split modules out into separate bundles. webpack provides an optimization feature which does split out runtime code into a separate chunk(s) according to the options provided, simply use [`optimization.runtimeChunk`](/configuration/optimization/#optimization-runtimechunk) set to `single` for creating one runtime bundle:
+As we learned in [code splitting](/guides/code-splitting), the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) can be used to split modules out into separate bundles. webpack provides an optimization feature to split runtime code into a separate chunk using the [`optimization.runtimeChunk`](/configuration/optimization/#optimization-runtimechunk) option. Set it to `single` to create a single runtime bundle for all chunks:
 
 __webpack.config.js__
 
@@ -233,9 +234,9 @@ Running another build, we would expect only our `main` bundle's hash to change, 
 ``` bash
 ...
                            Asset       Size  Chunks                    Chunk Names
-  vendor.a7561fb0e9a071baadb9.js     541 kB       0  [emitted]  [big]  vendor
-    main.b746e3eb72875af2caa9.js    1.22 kB       1  [emitted]         main
-manifest.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         manifest
+  runtime.1400d5af64fc1b7b3a45.js    5.85 kB      0  [emitted]         runtime
+  vendor.a7561fb0e9a071baadb9.js     541 kB       1  [emitted]  [big]  vendor
+    main.b746e3eb72875af2caa9.js    1.22 kB       2  [emitted]         main
                       index.html  352 bytes          [emitted]
 ...
 ```
@@ -338,4 +339,4 @@ We can see that both builds yielded `55e79e5927a639d21a1b` in the `vendor` bundl
 
 ## Conclusion
 
-Caching gets messy. Plain and simple. However the walk-through above should give you a running start to deploying consistent, cacheable assets. See the _Further Reading_ section below to learn more.
+Caching can be complicated, but the benefit to application or site users makes it worth the effort. See the _Further Reading_ section below to learn more.
