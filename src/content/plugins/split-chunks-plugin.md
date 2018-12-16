@@ -61,7 +61,6 @@ module.exports = {
       maxAsyncRequests: 6,
       maxInitialRequests: 4,
       automaticNameDelimiter: '~',
-      name: true,
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
@@ -325,6 +324,29 @@ module.exports = {
       cacheGroups: {
         vendors: {
           enforce: true
+        }
+      }
+    }
+  }
+};
+```
+
+#### `splitChunks.cacheGroups.{cacheGroup}.idHint`
+
+`string`
+
+Sets the hint for chunk id. It will be added to chunk's filename.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          idHint: 'vendors'
         }
       }
     }
