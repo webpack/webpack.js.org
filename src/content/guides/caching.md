@@ -8,6 +8,7 @@ contributors:
   - dannycjones
   - fadysamirsadek
   - afontcu
+  - rosavage
   - saiprasad2595
   - EugeneHlushko
 related:
@@ -233,9 +234,9 @@ Running another build, we would expect only our `main` bundle's hash to change, 
 ``` bash
 ...
                            Asset       Size  Chunks                    Chunk Names
-  vendor.a7561fb0e9a071baadb9.js     541 kB       0  [emitted]  [big]  vendor
-    main.b746e3eb72875af2caa9.js    1.22 kB       1  [emitted]         main
-manifest.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         manifest
+  runtime.1400d5af64fc1b7b3a45.js    5.85 kB      0  [emitted]         runtime
+  vendor.a7561fb0e9a071baadb9.js     541 kB       1  [emitted]  [big]  vendor
+    main.b746e3eb72875af2caa9.js    1.22 kB       2  [emitted]         main
                       index.html  352 bytes          [emitted]
 ...
 ```
