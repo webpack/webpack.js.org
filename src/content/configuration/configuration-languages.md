@@ -16,10 +16,12 @@ webpack accepts configuration files written in multiple programming and data lan
 
 ## TypeScript
 
-To write the webpack configuration in [TypeScript](http://www.typescriptlang.org/), you would first install the necessary dependencies:
+To write the webpack configuration in [TypeScript](http://www.typescriptlang.org/), you would first install the necessary dependencies, i.e., TypeScript and the relevant type definitions from the [DefinitelyTyped](https://definitelytyped.org/) project:
 
 ``` bash
 npm install --save-dev typescript ts-node @types/node @types/webpack
+# and, if using webpack-dev-server
+npm install --save-dev @types/webpack-dev-server
 ```
 
 and then proceed to write your configuration:
@@ -118,7 +120,6 @@ config =
     use: 'babel-loader'
   } ]
   plugins: [
-    new (webpack.optimize.UglifyJsPlugin)
     new HtmlWebpackPlugin(template: './src/index.html')
   ]
 
@@ -167,10 +168,6 @@ export default (
       }} />
     </resolve>
     <plugins>
-      <uglify-js opts={{
-        compression: true,
-        mangle: false
-      }} />
       <CustomPlugin foo="bar" />
     </plugins>
   </webpack>
