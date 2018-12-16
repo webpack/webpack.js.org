@@ -10,7 +10,7 @@ module.exports = function processREADME(body, options = {}) {
     })
     // Replace lone h1 formats
     .replace(/<h1.*?>.+?<\/h1>/, '')
-    .replace(/# .+/, '')
+    .replace(/^# .+/m, '')
     .replace(/.*\n=+/, '')
     // Replace local github links with absolute links to the github location
     // EXAMPLE: [Contributing](./.github/CONTRIBUTING.md)
