@@ -251,14 +251,14 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         vendors: {
-          test (module, chunks) {
+          test(module, chunks) {
             //...
-            return module.type === 'javascript/auto';
+            return module.type === "javascript/auto";
           }
         }
       }
-		}
-	}
+    }
+  }
 };
 ```
 
