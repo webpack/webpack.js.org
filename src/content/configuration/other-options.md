@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - terinjokes
   - byzyk
+  - vansosnin
 related:
   - title: Using Records
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
@@ -23,7 +24,9 @@ W> Help Wanted: This page is still a work in progress. If you are familiar with 
 
 Set the value of `require.amd` or `define.amd`:
 
-```js
+__webpack.config.js__
+
+```javascript
 module.exports = {
   //...
   amd: {
@@ -46,7 +49,9 @@ As it happens, the AMD support in webpack ignores the defined name anyways.
 
 Fail out on the first error instead of tolerating it. By default webpack will log these errors in red in the terminal, as well as the browser console when using HMR, but continue bundling. To enable it:
 
-```js
+__webpack.config.js__
+
+```javascript
 module.exports = {
   //...
   bail: true
@@ -62,7 +67,9 @@ This will force webpack to exit its bundling process.
 
 Cache the generated webpack modules and chunks to improve build speed. Caching is enabled by default while in watch mode. To disable caching simply pass:
 
-```js
+__webpack.config.js__
+
+```javascript
 module.exports = {
   //...
   cache: false
@@ -71,7 +78,9 @@ module.exports = {
 
 If an object is passed, webpack will use this object for caching. Keeping a reference to this object will allow one to share the same cache between compiler calls:
 
-```js
+__webpack.config.js__
+
+```javascript
 let SharedCache = {};
 
 module.exports = {
@@ -114,9 +123,13 @@ T> Combine with `parallelism: 1` for better results.
 
 ## `recordsPath`
 
+`string`
+
 Use this option to generate a JSON file containing webpack "records" -- pieces of data used to store module identifiers across multiple builds. You can use this file to track how modules change between builds. To generate one, simply specify a location:
 
-```js
+__webpack.config.js__
+
+```javascript
 module.exports = {
   //...
   recordsPath: path.join(__dirname, 'records.json')
@@ -132,17 +145,39 @@ W> Setting `recordsPath` will essentially set `recordsInputPath` and `recordsOut
 
 ## `recordsInputPath`
 
+`string`
+
 Specify the file from which to read the last set of records. This can be used to rename a records file. See the example below.
 
 
 ## `recordsOutputPath`
 
+`string`
+
 Specify where the records should be written. The following example shows how you might use this option in combination with `recordsInputPath` to rename a records file:
 
-```js
+__webpack.config.js__
+
+```javascript
 module.exports = {
   //...
   recordsInputPath: path.join(__dirname, 'records.json'),
   recordsOutputPath: path.join(__dirname, 'newRecords.json')
+};
+```
+
+
+## `name`
+
+`string`
+
+Name of the configuration. Used when loading multiple configurations.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  name: 'admin-app'
 };
 ```

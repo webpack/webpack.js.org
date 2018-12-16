@@ -3,6 +3,7 @@ title: HtmlWebpackPlugin
 contributors:
   - ampedandwired
   - simon04
+  - Sibiraj-S
 ---
 
 The [`HtmlWebpackPlugin`](https://github.com/jantimon/html-webpack-plugin) simplifies creation of HTML files to serve your webpack bundles. This is especially useful for webpack bundles that include a hash in the filename which changes every compilation. You can either let the plugin generate an HTML file for you, supply your own template using [lodash templates](https://lodash.com/docs#template), or use your own [loader](/loaders).
@@ -54,7 +55,7 @@ If you have multiple webpack entry points, they will all be included with `scrip
 tags in the generated HTML.
 
 If you have any CSS assets in webpack's output (for example, CSS extracted
-with the [ExtractTextPlugin](/plugins/extract-text-webpack-plugin))
+with the [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/))
 then these will be included with `<link>` tags in the HTML head.
 
 
@@ -65,4 +66,4 @@ For all configuration options, please see the [plugin documentation](https://git
 
 ## Third party addons
 
-The plugin supports addons. For a list see the [documentation](https://github.com/jantimon/html-webpack-plugin#third-party-addons).
+The plugin supports addons. For a list see the [documentation](https://github.com/jantimon/html-webpack-plugin#plugins).

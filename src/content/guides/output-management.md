@@ -6,6 +6,7 @@ contributors:
   - TheDutchCoder
   - sudarsangp
   - JGJP
+  - EugeneHlushko
 ---
 
 T> This guide extends on code examples found in the [`Asset Management`](/guides/asset-management) guide.
@@ -107,17 +108,11 @@ __webpack.config.js__
 Let's run `npm run build` and see what this generates:
 
 ``` bash
-Hash: aa305b0f3373c63c9051
-Version: webpack 3.0.0
-Time: 536ms
+...
           Asset     Size  Chunks                    Chunk Names
   app.bundle.js   545 kB    0, 1  [emitted]  [big]  app
 print.bundle.js  2.74 kB       1  [emitted]         print
-   [0] ./src/print.js 84 bytes {0} {1} [built]
-   [1] ./src/index.js 403 bytes {0} [built]
-   [3] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [4] (webpack)/buildin/module.js 517 bytes {0} [built]
-    + 1 hidden module
+...
 ```
 
 We can see that webpack generates our `print.bundle.js` and `app.bundle.js` files, which we also specified in our `index.html` file. if you open `index.html` in your browser, you can see what happens when you click the button.
@@ -159,23 +154,12 @@ __webpack.config.js__
 Before we do a build, you should know that the `HtmlWebpackPlugin` by default will generate its own `index.html` file, even though we already have one in the `dist/` folder. This means that it will replace our `index.html` file with a newly generated one. Let's see what happens when we do an `npm run build`:
 
 ``` bash
-Hash: 81f82697c19b5f49aebd
-Version: webpack 2.6.1
-Time: 854ms
+...
            Asset       Size  Chunks                    Chunk Names
  print.bundle.js     544 kB       0  [emitted]  [big]  print
    app.bundle.js    2.81 kB       1  [emitted]         app
       index.html  249 bytes          [emitted]
-   [0] ./~/lodash/lodash.js 540 kB {0} [built]
-   [1] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [2] (webpack)/buildin/module.js 517 bytes {0} [built]
-   [3] ./src/index.js 172 bytes {1} [built]
-   [4] multi lodash 28 bytes {0} [built]
-Child html-webpack-plugin for "index.html":
-       [0] ./~/lodash/lodash.js 540 kB {0} [built]
-       [1] ./~/html-webpack-plugin/lib/loader.js!./~/html-webpack-plugin/default_index.ejs 538 bytes {0} [built]
-       [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-       [3] (webpack)/buildin/module.js 517 bytes {0} [built]
+...
 ```
 
 If you open `index.html` in your code editor, you'll see that the `HtmlWebpackPlugin` has created an entirely new file for you and that all the bundles are automatically added.
