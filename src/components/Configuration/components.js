@@ -1,8 +1,9 @@
-import React from 'react';
-import Popover from 'react-tiny-popover';
-import './Configuration.scss';
+import React from "react";
+import Popover from "react-tiny-popover";
+import "./Configuration.scss";
+import { timeout } from "q";
 
-const isFirstChild = child => typeof child === 'string' && child !== ' ';
+const isFirstChild = child => typeof child === "string" && child !== " ";
 
 const removeSpaces = child => (isFirstChild(child) ? child.trim() : child);
 
@@ -41,7 +42,7 @@ export class Details extends React.Component {
 
     const closeDefault = children.findIndex(child => {
       if (React.isValidElement(child)) {
-        return child.props.props.className.includes('tag') && child.props.children.length === 4;
+        return child.props.props.className.includes("tag") && child.props.children.length === 4;
       }
     });
 
@@ -58,20 +59,30 @@ export class Details extends React.Component {
     });
   }
 
+  clickOutsideHandler = () => {
+    this.setState({ open: false });
+  };
+
+  toggleVisibility = () => {
+    this.setState({ open: !this.state.open });
+  };
+
   render() {
     const { open, summary, content } = this.state;
-    const className = open ? 'open' : '';
+    const className = open ? "open" : "";
     return (
       <Popover
         isOpen={open}
-        position={['right', 'top']}
+        position={["right", "top"]}
         disableReposition
         padding={0}
-        onClickOutside={() => this.setState({ open: false })}
-        containerClassName={'shadow'}
+        onClickOutside={this.clickOutsideHandler}
+        containerClassName={"shadow"}
         content={<Card body={content} />}
       >
-        <span className={`code-details-summary-span ${className}`} onClick={() => this.setState({ open: !this.state.open })}>{summary}</span>
+        <span className={`code-details-summary-span ${className}`} onClick={this.toggleVisibility}>
+          {summary}
+        </span>
       </Popover>
     );
   }

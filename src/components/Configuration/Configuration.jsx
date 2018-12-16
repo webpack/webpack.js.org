@@ -57,7 +57,7 @@ const components = {
 };
 
 const Pre = props => {
-  const newChildren = React.Children.map(props.children.props.children, (child, i) => {
+  const newChildren = React.Children.map(props.children.props.children, child => {
     if (React.isValidElement(child)) {
       if (child.props.props.className.includes("keyword")) {
         if (!components[child.props.props.componentname]) return child;
