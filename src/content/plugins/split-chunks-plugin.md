@@ -217,8 +217,6 @@ A module can belong to multiple cache groups. The optimization will prefer the c
 
 If the current chunk contains modules already split out from the main bundle, it will be reused instead of a new one being generated. This can impact the resulting file name of the chunk.
 
-#### `splitChunks.cacheGroups.cacheGroup.test`
-
 __webpack.config.js__
 
 ```js
@@ -257,8 +255,8 @@ module.exports = {
           }
         }
       }
-		}
-	}
+    }
+  }
 };
 ```
 
