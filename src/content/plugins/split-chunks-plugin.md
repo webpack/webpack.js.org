@@ -162,7 +162,7 @@ T> `maxSize` takes higher priority than `maxInitialRequest/maxAsyncRequests`. Ac
 
 ### `splitChunks.name`
 
-`boolean: true | function (module) | string`
+`boolean: true | function (module, chunks, cacheGroupKey) | string`
 
 The name of the split chunk. Providing `true` will automatically generate a name based on chunks and cache group key. Providing a string or function will allow you to use a custom name. If the name matches an entry point name, the entry point will be removed.
 
@@ -175,7 +175,7 @@ module.exports = {
   //...
   optimization: {
     splitChunks: {
-      name (module) {
+      name (module, chunks, cacheGroupKey) {
         // generate a chunk name...
         return; //...
       }
@@ -217,6 +217,8 @@ A module can belong to multiple cache groups. The optimization will prefer the c
 
 If the current chunk contains modules already split out from the main bundle, it will be reused instead of a new one being generated. This can impact the resulting file name of the chunk.
 
+#### `splitChunks.cacheGroups.cacheGroup.test`
+
 __webpack.config.js__
 
 ```js
@@ -249,7 +251,7 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         vendors: {
-          test (module, chunks) {
+          test(module, chunks) {
             //...
             return module.type === 'javascript/auto';
           }
@@ -290,7 +292,7 @@ module.exports = {
 
 `boolean: false`
 
-Tells webpack to ignore [`splitChunks.minSize`](#splitchunks-minsize), [`splitChunks.maxSize`](#splitchunks-maxsize), [`splitChunks.minChunks`](#splitchunks-minchunks), [`splitChunks.maxAsyncRequests`](#splitchunks-maxasyncrequests) and [`splitChunks.maxInitialRequests`](#splitchunks-maxinitialrequests) options and always create chunks for this cache group.
+Tells webpack to ignore [`splitChunks.minSize`](#splitchunks-minsize), [`splitChunks.minChunks`](#splitchunks-minchunks), [`splitChunks.maxAsyncRequests`](#splitchunks-maxasyncrequests) and [`splitChunks.maxInitialRequests`](#splitchunks-maxinitialrequests) options and always create chunks for this cache group.
 
 __webpack.config.js__
 
