@@ -308,9 +308,9 @@ module.exports = {
 
 ## `Rule.use`
 
-`array`
+`[UseEntry]` `function`
 
-An array of [UseEntry](#useentry) which are applied to modules. Each entry specifies a loader to be used.
+`Rule.use` can be an array of [UseEntry](#useentry) which are applied to modules. Each entry specifies a loader to be used.
 
 Passing a string (i.e. `use: [ 'style-loader' ]`) is a shortcut to the loader property (i.e. `use: [ { loader: 'style-loader '} ]`).
 
@@ -318,9 +318,9 @@ Loaders can be chained by passing multiple loaders, which will be applied from r
 
 `Function`
 
-A function which takes an object describing the module being loaded, and must return an array of `UseEntry`.
+`Rule.use` can be a function which receives the object argument describing the module being loaded, and must return an array of `UseEntry`.
 
-The same shortcut as as an array can be used for the return value (i.e. `use: [ 'style-loader' ]`).
+The same shortcut as an array can be used for the return value (i.e. `use: [ 'style-loader' ]`).
 
 The object parameter has the following fields:
 - `resource`: The path to the module being loaded
