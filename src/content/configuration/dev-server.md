@@ -638,13 +638,24 @@ module.exports = {
 };
 ```
 
+If no browser is provided (as shown above), your default browser will be used. To specify a different browser, just pass its name instead of boolean:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    open: 'Google Chrome'
+  }
+};
+```
+
 Usage via the CLI
 
 ```bash
 webpack-dev-server --open
 ```
 
-If no browser is provided (as shown above), your default browser will be used. To specify a different browser, just pass its name:
+Or with specified browser:
 
 __webpack.config.js__
 
