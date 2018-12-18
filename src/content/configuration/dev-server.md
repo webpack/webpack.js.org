@@ -640,8 +640,13 @@ module.exports = {
 
 If no browser is provided (as shown above), your default browser will be used. To specify a different browser, just pass its name instead of boolean:
 
-```js
-open: 'Google Chrome'
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    open: 'Google Chrome'
+  }
+};
 ```
 
 Usage via the CLI
