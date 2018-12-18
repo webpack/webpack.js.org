@@ -5,9 +5,13 @@ contributors:
   - sokra
   - skipjack
   - SpaceK33z
+  - EugeneHlushko
+  - byzyk
+  - spicalous
 ---
 
 webpack can watch files and recompile whenever they change. This page explains how to enable this and a couple of tweaks you can make if watching does not work properly for you.
+
 
 ## `watch`
 
@@ -16,10 +20,14 @@ webpack can watch files and recompile whenever they change. This page explains h
 Turn on watch mode. This means that after the initial build, webpack will continue to watch for changes in any of the resolved files. Watch mode is turned off by default:
 
 ```js
-watch: false
+module.exports = {
+  //...
+  watch: false
+};
 ```
 
 T> In webpack-dev-server and webpack-dev-middleware watch mode is enabled by default.
+
 
 ## `watchOptions`
 
@@ -28,11 +36,15 @@ T> In webpack-dev-server and webpack-dev-middleware watch mode is enabled by def
 A set of options used to customize watch mode:
 
 ```js
-watchOptions: {
-  aggregateTimeout: 300,
-  poll: 1000
-}
+module.exports = {
+  //...
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: 1000
+  }
+};
 ```
+
 
 ## `watchOptions.aggregateTimeout`
 
@@ -41,34 +53,69 @@ watchOptions: {
 Add a delay before rebuilding once the first file changed. This allows webpack to aggregate any other changes made during this time period into one rebuild. Pass a value in milliseconds:
 
 ```js
-aggregateTimeout: 300 // The default
+module.exports = {
+  //...
+  watchOptions: {
+    aggregateTimeout: 300 // The default
+  }
+};
 ```
+
 
 ## `watchOptions.ignored`
 
 For some systems, watching many file systems can result in a lot of CPU or memory usage. It is possible to exclude a huge folder like `node_modules`:
 
 ```js
-ignored: /node_modules/
+module.exports = {
+  //...
+  watchOptions: {
+    ignored: /node_modules/
+  }
+};
 ```
 
-It is also possible to use [anymatch](https://github.com/es128/anymatch) patterns:
+It is also possible to have and use multiple [anymatch](https://github.com/micromatch/anymatch) patterns:
 
 ```js
-ignored: "files/**/*.js"
+module.exports = {
+  //...
+  watchOptions: {
+    ignored: ['files/**/*.js', 'node_modules']
+  }
+};
 ```
+
+T> If you use `require.context`, webpack will watch your entire directory. You will need to ignore files and/or directories so that unwanted changes will not trigger a rebuild.
+
 
 ## `watchOptions.poll`
 
 `boolean` `number`
 
-Turn on [polling](http://whatis.techtarget.com/definition/polling) by passing `true`, or specifying a poll interval in milliseconds:
+Turn on [polling](https://whatis.techtarget.com/definition/polling) by passing `true`, or specifying a poll interval in milliseconds:
 
 ```js
-poll: 1000 // Check for changes every second
+module.exports = {
+  //...
+  watchOptions: {
+    poll: 1000 // Check for changes every second
+  }
+};
 ```
 
 T> If watching does not work for you, try out this option. Watching does not work with NFS and machines in VirtualBox.
+
+
+## `info-verbosity`
+
+`string`: `none` `info` `verbose`
+
+Controls verbosity of the lifecycle messaging, e.g. the `Started watching files...` log. Setting `info-verbosity` to `verbose` will also message to console at the beginning and the end of incremental build. `info-verbosity` is set to `info` by default.
+
+```bash
+webpack --watch --info-verbosity verbose
+```
 
 
 ## Troubleshooting
@@ -93,9 +140,9 @@ cat /proc/sys/fs/inotify/max_user_watches
 
 Arch users, add `fs.inotify.max_user_watches=524288` to `/etc/sysctl.d/99-sysctl.conf` and then execute `sysctl --system`. Ubuntu users (and possibly others), execute: `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`.
 
-### MacOS fsevents Bug
+### macOS fsevents Bug
 
-On MacOS, folders can get corrupted in certain scenarios. See [this article](https://github.com/livereload/livereload-site/blob/master/livereload.com/_articles/troubleshooting/os-x-fsevents-bug-may-prevent-monitoring-of-certain-folders.md).
+On macOS, folders can get corrupted in certain scenarios. See [this article](https://github.com/livereload/livereload-site/blob/master/livereload.com/_articles/troubleshooting/os-x-fsevents-bug-may-prevent-monitoring-of-certain-folders.md).
 
 ### Windows Paths
 
@@ -105,7 +152,7 @@ Use the correct separators. I.e. `path.resolve(__dirname, "app/folder")` or `pat
 
 ### Vim
 
-On some machines Vim is preconfigured with the [backupcopy option](http://vimdoc.sourceforge.net/htmldoc/options.html#'backupcopy') set to `auto`. This could potentially cause problems with the system's file watching mechanism. Switching this option to `yes` will make sure a copy of the file is made and the original one overwritten on save. 
+On some machines Vim is preconfigured with the [backupcopy option](http://vimdoc.sourceforge.net/htmldoc/options.html#'backupcopy') set to `auto`. This could potentially cause problems with the system's file watching mechanism. Switching this option to `yes` will make sure a copy of the file is made and the original one overwritten on save.
 
 `:set backupcopy=yes`
 

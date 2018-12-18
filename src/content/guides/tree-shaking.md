@@ -8,22 +8,25 @@ contributors:
   - avant1
   - MijaelWatts
   - dmitriid
+  - probablyup
+  - gish
+  - lumo10
+  - byzyk
+  - pnevares
+  - EugeneHlushko
+  - torifat
 related:
-  - title: Tree shaking with webpack 2, TypeScript and Babel
-    url: https://alexjoverm.github.io/2017/03/06/Tree-shaking-with-Webpack-2-TypeScript-and-Babel/
-  - title: Tree-shaking with webpack 2 and Babel 6
-    url: http://www.2ality.com/2015/12/webpack-tree-shaking.html
-  - title: webpack 2 Tree Shaking Configuration
-    url: https://medium.com/modus-create-front-end-development/webpack-2-tree-shaking-configuration-9f1de90f3233#.15tuaw71x
-  - title: Issue 2867
-    url: https://github.com/webpack/webpack/issues/2867
-  - title: Issue 4784
-    url: https://github.com/webpack/webpack/issues/4784
+  - title: "webpack 4 beta — try it today!"
+    url: https://medium.com/webpack/webpack-4-beta-try-it-today-6b1d27d7d7e2#9a67
+  - title: Debugging Optimization Bailouts
+    url: https://webpack.js.org/plugins/module-concatenation-plugin/#debugging-optimization-bailouts
+  - title: Issue 6074 - Add support for more complex selectors for sideEffects
+    url: https://github.com/webpack/webpack/issues/6074
 ---
 
 _Tree shaking_ is a term commonly used in the JavaScript context for dead-code elimination. It relies on the [static structure](http://exploringjs.com/es6/ch_modules.html#static-module-structure) of ES2015 module syntax, i.e. [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export). The name and concept have been popularized by the ES2015 module bundler [rollup](https://github.com/rollup/rollup).
 
-The webpack 2 release came with built-in support for ES2015 modules (alias _harmony modules_) as well as unused module export detection.
+The webpack 2 release came with built-in support for ES2015 modules (alias _harmony modules_) as well as unused module export detection. The new webpack 4 release expands on this capability with a way to provide hints to the compiler via the `"sideEffects"` `package.json` property to denote which files in your project are "pure" and therefore safe to prune if unused.
 
 T> The remainder of this guide will stem from [Getting Started](/guides/getting-started). If you haven't read through that guide already, please do so now.
 
@@ -43,13 +46,13 @@ webpack-demo
   |- index.html
 |- /src
   |- index.js
-  |- math.js
++ |- math.js
 |- /node_modules
 ```
 
 __src/math.js__
 
-``` javascript
+```javascript
 export function square(x) {
   return x * x;
 }
@@ -57,6 +60,27 @@ export function square(x) {
 export function cube(x) {
   return x * x * x;
 }
+```
+
+Set the `mode` configuration option to [development](/concepts/mode/#mode-development) to make sure that the bundle is not minified:
+
+__webpack.config.js__
+
+``` diff
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+- }
++ },
++ mode: 'development',
++ optimization: {
++   usedExports: true
++ }
+};
 ```
 
 With that in place, let's update our entry script to utilize one of these new methods and remove `lodash` for simplicity:
@@ -88,102 +112,108 @@ Note that we __did not `import` the `square` method__ from the `src/math.js` mod
 
 __dist/bundle.js (around lines 90 - 100)__
 
-``` js
+```js
 /* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
+  'use strict';
+  /* unused harmony export square */
+  /* harmony export (immutable) */ __webpack_exports__['a'] = cube;
+  function square(x) {
+    return x * x;
+  }
 
-"use strict";
-/* unused harmony export square */
-/* harmony export (immutable) */ __webpack_exports__["a"] = cube;
-function square(x) {
-  return x * x;
-}
-
-function cube(x) {
-  return x * x * x;
-}
+  function cube(x) {
+    return x * x * x;
+  }
+});
 ```
 
 Note the `unused harmony export square` comment above. If you look at the code below it, you'll notice that `square` is not being imported, however, it is still included in the bundle. We'll fix that in the next section.
 
 
-## Minify the Output
+## Mark the file as side-effect-free
 
-So we've cued up our "dead code" to be dropped by using the `import` and `export` syntax, but we still need to drop it from the bundle. To do that, we'll add a minifier that supports dead code removal -- the [`UglifyJSPlugin`](/plugins/uglifyjs-webpack-plugin) -- to our configuration...
+In a 100% ESM module world, identifying side effects is straightforward. However, we aren't there just yet, so in the mean time it's necessary to provide hints to webpack's compiler on the "pureness" of your code.
 
-Let's start by installing it:
+The way this is accomplished is the `"sideEffects"` package.json property.
 
-``` bash
-npm install --save-dev uglifyjs-webpack-plugin
+```json
+{
+  "name": "your-project",
+  "sideEffects": false
+}
 ```
 
-And then adding it into our config:
+All the code noted above does not contain side effects, so we can simply mark the property as `false` to inform webpack that it can safely prune unused exports.
+
+T> A "side effect" is defined as code that performs a special behavior when imported, other than exposing one or more exports. An example of this are polyfills, which affect the global scope and usually do not provide an export.
+
+If your code did have some side effects though, an array can be provided instead:
+
+```json
+{
+  "name": "your-project",
+  "sideEffects": [
+    "./src/some-side-effectful-file.js"
+  ]
+}
+```
+
+The array accepts relative, absolute, and glob patterns to the relevant files. It uses [micromatch](https://github.com/micromatch/micromatch#matching-features) under the hood.
+
+T> Note that any imported file is subject to tree shaking. This means if you use something like `css-loader` in your project and import a CSS file, it needs to be added to the side effect list so it will not be unintentionally dropped in production mode:
+
+```json
+{
+  "name": "your-project",
+  "sideEffects": [
+    "./src/some-side-effectful-file.js",
+    "*.css"
+  ]
+}
+```
+
+Finally, `"sideEffects"` can also be set from the [`module.rules` configuration option](/configuration/module/#module-rules).
+
+## Minify the Output
+
+So we've cued up our "dead code" to be dropped by using the `import` and `export` syntax, but we still need to drop it from the bundle. To do that set the `mode` configuration option to [`production`](/concepts/mode/#mode-production) configuration option.
 
 __webpack.config.js__
 
 ``` diff
 const path = require('path');
-+ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
+  },
+- mode: 'development',
+- optimization: {
+-   usedExports: true
 - }
-+ },
-+ plugins: [
-+   new UglifyJSPlugin()
-+ ]
++ mode: 'production'
 };
 ```
 
-T> Note that the `--optimize-minimize` flag can be used to insert the `UglifyJsPlugin` as well.
+T> Note that the `--optimize-minimize` flag can be used to enable `TerserPlugin` as well.
 
 With that squared away, we can run another `npm run build` and see if anything has changed.
 
 Notice anything different about `dist/bundle.js`? Clearly the whole bundle is now minified and mangled, but, if you look carefully, you won't see the `square` function included but will see a mangled version of the `cube` function (`function r(e){return e*e*e}n.a=r`). With minification and tree shaking our bundle is now a few bytes smaller! While that may not seem like much in this contrived example, tree shaking can yield a significant decrease in bundle size when working on larger applications with complex dependency trees.
 
-
-## Caveats
-
-Please note that webpack doesn't perform tree-shaking by itself. It relies on third party tools like [UglifyJS](/plugins/uglifyjs-webpack-plugin/) to perform actual dead code elimination. There are situations where tree-shaking may not be effective. For example, consider the following modules:
-
-__transforms.js__
-
-``` js
-import * as mylib from 'mylib';
-
-export const someVar = mylib.transform({
-  // ...
-});
-
-export const someOtherVar = mylib.transform({
-  // ...
-});
-```
-
-__index.js__
-
-``` js
-import { someVar } from './transforms.js';
-
-// Use `someVar`...
-```
-
-In the code above webpack cannot determine whether or not the call to `mylib.transform` triggers any side-effects. As a result, it errs on the safe side and leaves `someOtherVar` in the bundled code.
-
-In general, when a tool cannot guarantee that a particular code path doesn't lead to side-effects, this code may remain in the generated bundle even if you are sure it shouldn't. Common situations include invoking a function from a third-party module that webpack and/or the minifier cannot inspect, re-exporting functions imported from third-party modules, etc.
-
-The code used in this guide assumes you perform tree-shaking using UglifyJS plugin. However, there are other tools such as [webpack-rollup-loader](https://github.com/erikdesjardins/webpack-rollup-loader) that may produce different results depending on your setup.
-
+T> [ModuleConcatenationPlugin](/plugins/module-concatenation-plugin) is needed for the tree shaking to work. It is added by `mode: "production"`. If you are not using it, remember to add the [ModuleConcatenationPlugin](/plugins/module-concatenation-plugin) manually.
 
 ## Conclusion
 
 So, what we've learned is that in order to take advantage of _tree shaking_, you must...
 
 - Use ES2015 module syntax (i.e. `import` and `export`).
-- Include a minifier that supports dead code removal (e.g. the `UglifyJSPlugin`).
+- Ensure no compilers transform your ES2015 module syntax into CommonJS modules (this is the default behavior of popular Babel preset @babel/preset-env - see [documentation](https://babeljs.io/docs/en/babel-preset-env#modules) for more details).
+- Add a `"sideEffects"` property to your project's `package.json` file.
+- Use [`production`](/concepts/mode/#mode-production) `mode` configuration option to enable [various optimizations](/concepts/mode/#usage) including minification and tree shaking.
 
 You can imagine your application as a tree. The source code and libraries you actually use represent the green, living leaves of the tree. Dead code represents the brown, dead leaves of the tree that are consumed by autumn. In order to get rid of the dead leaves, you have to shake the tree, causing them to fall.
 

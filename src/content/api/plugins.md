@@ -2,75 +2,138 @@
 title: Plugin API
 group: Plugins
 sort: 0
+contributors:
+  - thelarkinn
+  - pksjce
+  - e-cloud
+  - byzyk
+  - EugeneHlushko
 ---
 
-T> For a high-level introduction to writing plugins, start with [writing a plugin](/contribute/writing-a-plugin).
+Plugins are a key piece of the webpack ecosystem and provide the community with
+a powerful way to tap into webpack's compilation process. A plugin is able to
+[hook](/api/compiler-hooks/#hooks) into key events that are fired throughout each compilation. Every step
+of the way, the plugin will have full access to the `compiler` and, when
+applicable, the current `compilation`.
 
-Many objects in webpack extend the `Tapable` class, which exposes a `plugin` method. And with the `plugin` method, plugins can inject custom build steps. You will see `compiler.plugin` and `compilation.plugin` used a lot. Essentially, each one of these plugin calls binds a callback to fire at specific steps throughout the build process.
+T> For a high-level introduction to writing plugins, start with
+[writing a plugin](/contribute/writing-a-plugin).
 
-There are two types of plugin interfaces...
+Let's start by going over `tapable` utility, which provides the backbone of
+webpack's plugin interface.
 
-__Timing Based__
 
-- sync (default): The plugin runs synchronously and returns its output.
-- async: The plugin runs asynchronously and uses the give `callback` to return its output.
-- parallel: The handlers are invoked in parallel.
+## Tapable
 
-__Return Value__
+This small library is a core utility in webpack but can also be used elsewhere
+to provide a similar plugin interface. Many objects in webpack extend the
+`Tapable` class. The class exposes `tap`, `tapAsync`, and `tapPromise` methods
+which plugins can use to inject custom build steps that will be fired
+throughout a compilation.
 
-- not bailing (default): No return value.
-- bailing: The handlers are invoked in order until one handler returns something.
-- parallel bailing: The handlers are invoked in parallel (async). The first returned value (by order) is significant.
-- waterfall: Each handler gets the result value of the last handler as an argument.
+Please see the [documentation](https://github.com/webpack/tapable) to learn
+more. An understanding of the three `tap` methods, as well as the hooks that
+provide them is crucial. The objects that extend `Tapable` (e.g. the compiler),
+the hooks they provide, and each hook's type (e.g. the `SyncHook`) will be
+noted.
 
-A plugin is installed once as webpack starts up. webpack installs a plugin by calling its `apply` method, and passes a reference to the webpack `compiler` object. You may then call `compiler.plugin` to access asset compilations and their individual build steps. An example would look like this:
 
-__my-plugin.js__
+## Plugin Types
+
+Depending on the hooks used and `tap` methods applied, plugins can function in
+a different number of ways. The way this works is closely related to the
+[hooks](https://github.com/webpack/tapable#tapable) provided by `Tapable`. The
+[compiler hooks](/api/compiler-hooks/#hooks) each note the underlying `Tapable` hook indicating which
+`tap` methods are available.
+
+So depending which event you `tap` into, the plugin may run differently. For
+example, when hooking into `compile` stage, only the synchronous `tap` method
+can be used:
 
 ``` js
-function MyPlugin(options) {
-  // Configure your plugin with options...
-}
+compiler.hooks.compile.tap('MyPlugin', params => {
+  console.log('Synchronously tapping the compile hook.');
+});
+```
 
-MyPlugin.prototype.apply = function(compiler) {
-  compiler.plugin("compile", function(params) {
-    console.log("The compiler is starting to compile...");
+However, for `run` which utilizes the `AsyncHook`, we can utilize `tapAsync`
+or `tapPromise` (as well as `tap`):
+
+``` js
+compiler.hooks.run.tapAsync('MyPlugin', (source, target, routesList, callback) => {
+  console.log('Asynchronously tapping the run hook.');
+  callback();
+});
+
+compiler.hooks.run.tapPromise('MyPlugin', (source, target, routesList) => {
+  return new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
+    console.log('Asynchronously tapping the run hook with a delay.');
   });
+});
 
-  compiler.plugin("compilation", function(compilation) {
-    console.log("The compiler is starting a new compilation...");
+compiler.hooks.run.tapPromise('MyPlugin', async (source, target, routesList) => {
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  console.log('Asynchronously tapping the run hook with a delay.');
+});
+```
 
-    compilation.plugin("optimize", function() {
-      console.log("The compilation is starting to optimize files...");
-    });
-  });
+The moral of the story is that there are a variety of ways to `hook` into the
+`compiler`, each one allowing your plugin to run as it sees fit.
 
-  compiler.plugin("emit", function(compilation, callback) {
-    console.log("The compilation is going to emit files...");
+
+## Custom Hooks
+
+In order to add a new hook to the compilation for other plugins to `tap` into,
+simply `require` the necessary hook class from `tapable` and create one:
+
+``` js
+const SyncHook = require('tapable').SyncHook;
+
+// Within the `apply` method...
+if (compiler.hooks.myCustomHook) throw new Error('Already in use');
+compiler.hooks.myCustomHook = new SyncHook(['a', 'b', 'c']);
+
+// Wherever/whenever you'd like to trigger the hook...
+compiler.hooks.myCustomHook.call(a, b, c);
+```
+
+Again, see the [documentation](https://github.com/webpack/tapable) for `tapable` to learn more about the
+different hook classes and how they work.
+
+## Reporting Progress
+
+Plugins can report progress via [`ProgressPlugin`](/plugins/progress-plugin/), which prints progress messages to stderr by default. In order to enable progress reporting, pass a `--progress` argument when running the [webpack CLI](/api/cli/).
+
+It is possible to customize the printed output by passing different arguments to the `reportProgress` function of [`ProgressPlugin`](/plugins/progress-plugin/).
+
+To report progress, a plugin must `tap` into a hook using the `context: true` option:
+
+```js
+compiler.hooks.emit.tapAsync({
+  name: 'MyPlugin',
+  context: true
+}, (context, compiler, callback) => {
+  const reportProgress = context && context.reportProgress;
+  if (reportProgress) reportProgress(0.95, 'Starting work');
+  setTimeout(() => {
+    if (reportProgress) reportProgress(0.95, 'Done work');
     callback();
-  });
-};
-
-module.exports = MyPlugin;
+  }, 1000);
+});
 ```
 
-__webpack.config.js__
+The `reportProgress` function may be called with these arguments:
 
-``` js
-plugins: [
-  new MyPlugin({
-    options: 'nada'
-  })
-]
+```js
+reportProgress(percentage, ...args);
 ```
 
+- `percentage`: This argument is unused; instead, [`ProgressPlugin`](/plugins/progress-plugin/) will calculate a percentage based on the current hook.
+- `...args`: Any number of strings, which will be passed to the `ProgressPlugin` handler to be reported to the user.
 
-## Tapable & Tapable Instances
+Note that only a subset of compiler and compilation hooks support the `reportProgress` function. See [`ProgressPlugin`](/plugins/progress-plugin/#supported-hooks) for a full list.
 
-The plugin architecture is mainly possible for webpack due to an internal library named `Tapable`.
-**Tapable Instances** are classes in the webpack source code which have been extended or mixed in from class `Tapable`.
+## Next Steps
 
-For plugin authors, it is important to know which are the `Tapable` instances in the webpack source code. These instances provide a variety of event hooks into which custom plugins can be attached.
-Hence, throughout this section are a list of all of the webpack `Tapable` instances (and their event hooks), which plugin authors can utilize.
-
-For more information on `Tapable` visit the [complete overview](/api/tapable) or the [tapable repository](https://github.com/webpack/tapable).
+See the [compiler hooks](/api/compiler-hooks/) section for a detailed listing of all the available
+`compiler` hooks and the parameters they make available.
