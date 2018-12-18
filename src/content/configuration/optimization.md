@@ -200,6 +200,32 @@ module.exports = {
 };
 ```
 
+## `optimization.chunkIds`
+
+`bool: false` `string: natural, named, size, total-size`
+
+Tells webpack which algorithm to use when choosing chunk ids. Setting `optimization.chunkIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. By default `optimization.chunkIds` is set to `false`.
+
+The following string values are supported:
+
+Option                | Description
+--------------------- | -----------------------
+`natural`             | Numeric ids in order of usage.
+`named`               | Readable ids for better debugging.
+`size`                | Numeric ids focused on minimal initial download size.
+`total-size`          | numeric ids focused on minimal total download size.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    chunkIds: 'named'
+  }
+};
+```
+
 ## `optimization.nodeEnv`
 
 `string` `bool: false`
