@@ -318,14 +318,15 @@ Loaders can be chained by passing multiple loaders, which will be applied from r
 
 `Rule.use` can be a function which receives the object argument describing the module being loaded, and must return an array of `UseEntry`.
 
-The same shortcut as an array can be used for the return value (i.e. `use: [ 'style-loader' ]`).
-
 The object parameter has the following fields:
-- `resource`: The path to the module being loaded
-- `realResource`: The path to the module being loaded
-- `resourceQuery`: ??
+
 - `compiler`: The current webpack compiler (can be undefined)
 - `issuer`: The path to the module that is importing the module being loaded
+- `resource`: The path to the module being loaded
+- `realResource`: The path to the module being loaded
+- `resourceQuery`
+
+The same shortcut as an array can be used for the return value (i.e. `use: [ 'style-loader' ]`).
 
 __webpack.config.js__
 
