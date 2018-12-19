@@ -16,6 +16,8 @@ contributors:
   - caryli
   - xgirma
   - EugeneHlushko
+  - aviyacohen
+  
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -103,7 +105,7 @@ __index.js__
 + }
 ```
 
-Start changing the `console.log` statement in `print.js`, and you should see the following output in the browser console.
+Start changing the `console.log` statement in `print.js`, and you should see the following output in the browser console (don't worry about that `button.onclick = printMe()` output for now, we will also update that part later).
 
 __print.js__
 
