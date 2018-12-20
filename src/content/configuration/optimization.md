@@ -200,6 +200,36 @@ module.exports = {
 };
 ```
 
+## `optimization.chunkIds`
+
+`bool: false` `string: natural, named, size, total-size`
+
+Tells webpack which algorithm to use when choosing chunk ids. Setting `optimization.chunkIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. There are couple of defaults for `optimization.chunkIds`:
+
+- if [`optimization.occurrenceOrder`](#optimization-occurrenceorder) is enabled `optimization.chunkIds` is set to `'total-size'`
+- Disregarding previous if, if [`optimization.namedChunks`](#optimization-namedchunks) is enabled `optimization.chunkIds` is set to `'named'`
+- if none of the above, `optimization.namedChunks` will be defaulted to `'natural'`
+
+The following string values are supported:
+
+Option                  | Description
+----------------------- | -----------------------
+`'natural'`             | Numeric ids in order of usage.
+`'named'`               | Readable ids for better debugging.
+`'size'`                | Numeric ids focused on minimal initial download size.
+`'total-size'`          | numeric ids focused on minimal total download size.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    chunkIds: 'named'
+  }
+};
+```
+
 ## `optimization.nodeEnv`
 
 `string` `bool: false`
