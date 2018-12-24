@@ -85,7 +85,7 @@ module.exports = {
     chunkOrigins: true,
 
     // Displays chunk parents, children and siblings
-    chunkRelations: true,
+    chunkRelations: false,
 
     // Sort the chunks by a field
     // You can reverse the sort with `!field`. Default is `id`.
