@@ -11,13 +11,13 @@ IgnorePlugin prevents generation of modules for `import` or `require` calls matc
 
 ## Using regular expressions
 
-- `requestRegExp`: A RegExp to test the request against.
+- `resourceRegExp`: A RegExp to test the resource against.
 - `contextRegExp`: (optional) A RegExp to test the context (directory) against.
 
 ```javascript
-new webpack.IgnorePlugin({requestRegExp, contextRegExp});
+new webpack.IgnorePlugin({resourceRegExp, contextRegExp});
 // old way, deprecated in webpack v5
-new webpack.IgnorePlugin(requestRegExp, [contextRegExp]);
+new webpack.IgnorePlugin(resourceRegExp, [contextRegExp]);
 ```
 
 ## Using filter functions
@@ -42,7 +42,7 @@ new webpack.IgnorePlugin({
 
 As of [moment](https://momentjs.com/) 2.18, all locales are bundled together with the core library (see [this GitHub issue](https://github.com/moment/moment/issues/2373)). 
 
-The `requestRegExp` parameter passed to `IgnorePlugin` is not tested against the resolved file names or absolute module names being imported or required, but rather against the _string_ passed to `require` or `import` _within the source code where the import is taking place_. For example, if you're trying to exclude `node_modules/moment/locale/*.js`, this won't work:
+The `resourceRegExp` parameter passed to `IgnorePlugin` is not tested against the resolved file names or absolute module names being imported or required, but rather against the _string_ passed to `require` or `import` _within the source code where the import is taking place_. For example, if you're trying to exclude `node_modules/moment/locale/*.js`, this won't work:
 
 ```diff
 -new webpack.IgnorePlugin(/moment\/locale\//);
@@ -58,7 +58,7 @@ require('./locale/' + name);
 
 ```javascript
 new webpack.IgnorePlugin({
-  requestRegExp: /^\.\/locale$/,
+  resourceRegExp: /^\.\/locale$/,
   contextRegExp: /moment$/
 });
 ```
