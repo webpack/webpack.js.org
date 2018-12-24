@@ -306,7 +306,7 @@ module.exports = {
       root: "React"
     }
   },
-  [externals](/configuration/externals): (request) => { /* ... */ return "commonjs " + request }
+  [externals](/configuration/externals): ({request}) => { /* ... */ return "commonjs " + request }
   </details>
   // Don't follow/bundle these modules, but request them at runtime from the environment
   [serve](https://github.com/webpack-contrib/webpack-serve#options): { //object

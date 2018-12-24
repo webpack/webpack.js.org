@@ -115,6 +115,8 @@ This syntax is used to describe all the possible ways that an external library c
 
 ### function
 
+`function ({ context, request }, callback)`
+
 It might be useful to define your own function to control the behavior of what you want to externalize from webpack. [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals), for example, excludes all modules from the `node_modules` directory and provides some options to, for example, whitelist packages.
 
 It basically comes down to this:
@@ -123,7 +125,7 @@ It basically comes down to this:
 module.exports = {
   //...
   externals: [
-    function(context, request, callback) {
+    function({ context, request }, callback) {
       if (/^yourregex$/.test(request)){
         return callback(null, 'commonjs ' + request);
       }
