@@ -322,9 +322,8 @@ The object parameter has the following fields:
 
 - `compiler`: The current webpack compiler (can be undefined)
 - `issuer`: The path to the module that is importing the module being loaded
-- `resource`: The path to the module being loaded
-- `realResource`: The path to the module being loaded
-- `resourceQuery`
+- `realResource`: Always the path to the module being loaded
+- `resource`: The path to the module being loaded, it is usually equal to `realResource` except when the resource name is overwritten via `!=!` in request string
 
 The same shortcut as an array can be used for the return value (i.e. `use: [ 'style-loader' ]`).
 
