@@ -20,23 +20,23 @@ webpack is not the only module bundler out there. If you are choosing between us
 | Feature | webpack/webpack | jrburke/requirejs | substack/node-browserify | jspm/jspm-cli | rollup/rollup | brunch/brunch | parcel-bundler/parcel |
 |---------|-----------------|-------------------|--------------------------|---------------|---------------|---------------|---------------------|
 | Additional chunks are loaded on demand | **yes** | **yes** | no | [System.import](https://github.com/systemjs/systemjs/blob/master/docs/system-api.md#systemimportmodulename--normalizedparentname---promisemodule) | no | no | yes |
-| AMD `define` | **yes** | **yes** | [deamdify](https://github.com/jaredhanson/deamdify) | yes | [rollup-plugin-amd](https://github.com/piuccio/rollup-plugin-amd) | yes | yes |
-| AMD `require` | **yes** | **yes** | no | yes | no | yes |
-| AMD `require` loads on demand | **yes** | with manual configuration | no | yes | no | no |
+| AMD `define` | **yes** | **yes** | [deamdify](https://github.com/jaredhanson/deamdify) | yes | [rollup-plugin-amd](https://github.com/piuccio/rollup-plugin-amd) | yes | yes | yes |
+| AMD `require` | **yes** | **yes** | no | yes | no | yes | yes |
+| AMD `require` loads on demand | **yes** | with manual configuration | no | yes | no | no | yes |
 | CommonJS `exports` | **yes** | only wrapping in `define` | **yes** | yes | yes |[commonjs-plugin](https://github.com/rollup/rollup-plugin-commonjs) | yes |
 | CommonJS `require` | **yes** | only wrapping in `define` | **yes** | yes | [commonjs-plugin](https://github.com/rollup/rollup-plugin-commonjs) | yes | yes |
 | CommonJS `require.resolve` | **yes** | no | no | no | no | | yes |
-| Concat in require `require("./fi" + "le")` | **yes** | no♦ | no | no | no | |
+| Concat in require `require("./fi" + "le")` | **yes** | no♦ | no | no | no | | no |
 | Debugging support | **SourceUrl, SourceMaps** | not required | SourceMaps | **SourceUrl, SourceMaps** | **SourceUrl, SourceMaps** | SourceMaps | SourceMaps |
-| Dependencies | 19MB / 127 packages | 11MB / 118 packages | **1.2MB / 1 package** | 26MB / 131 packages | ?MB / 3 packages | |
+| Dependencies | 19MB / 127 packages | 11MB / 118 packages | **1.2MB / 1 package** | 26MB / 131 packages | ?MB / 3 packages | | ?MB / 56 packages |
 | ES2015 `import`/`export` | **yes** (webpack 2) | no | no | **yes** | **yes** | yes, via [es6 module transpiler](https://github.com/gcollazo/es6-module-transpiler-brunch) | yes |
-| Expressions in require (guided) `require("./templates/" + template)` | **yes (all files matching included)** | no♦ | no | no | no | no |
+| Expressions in require (guided) `require("./templates/" + template)` | **yes (all files matching included)** | no♦ | no | no | no | no | no |
 | Expressions in require (free) `require(moduleName)` | with manual configuration | no♦ | no | no | no | |
 | Generate a single bundle | **yes** | yes♦ | yes | yes | yes | yes | no |
 | Indirect require `var r = require; r("./file")` | **yes** | no♦ | no | no | no | |
 | Load each file separate | no | yes | no | yes | no | no | no |
 | Mangle path names | **yes** | no | partial | yes | not required (path names are not included in the bundle) | no |
-| Minimizing | uglify | uglify, closure compiler | [uglifyify](https://github.com/hughsk/uglifyify) | yes | [uglify-plugin](https://github.com/TrySound/rollup-plugin-uglify) | [UglifyJS-brunch](https://github.com/brunch/uglify-js-brunch)
+| Minimizing | uglify | uglify, closure compiler | [uglifyify](https://github.com/hughsk/uglifyify) | yes | [uglify-plugin](https://github.com/TrySound/rollup-plugin-uglify) | [UglifyJS-brunch](https://github.com/brunch/uglify-js-brunch) | uglify |
 | Multi pages build with common bundle | with manual configuration | **yes** | with manual configuration | with bundle arithmetic | no | no | yes 
 | Multiple bundles | **yes** | with manual configuration | with manual configuration | yes | no | yes | yes |
 | Node.js built-in libs `require("path")` | **yes** | no | **yes** | **yes** | [node-resolve-plugin](https://github.com/rollup/rollup-plugin-node-resolve) | |
