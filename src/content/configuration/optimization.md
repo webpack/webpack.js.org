@@ -40,22 +40,42 @@ T> Learn how [mode](/concepts/mode/) works.
 
 ## `optimization.minimizer`
 
-`[TerserPlugin]`
+`[<plugin>]` and or `[function (compiler)]`
 
 Allows you to override the default minimizer by providing a different one or more customized [TerserPlugin](/plugins/terser-webpack-plugin/) instances.
 
 __webpack.config.js__
 
-
 ```js
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-  //...
   optimization: {
     minimizer: [
-      new TerserPlugin({ /* your config */ })
-    ]
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true, // Must be set to true if using source-maps in production
+        terserOptions: {
+          // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
+        }
+      }),
+    ],
+  }
+};
+```
+
+Or, as function:
+
+```js
+module.exports = {
+  optimization: {
+    minimizer: [
+      (compiler) => {
+        const TerserPlugin = require('terser-webpack-plugin');
+        new TerserPlugin({ /* your config */ }).apply(compiler);
+      }
+    ],
   }
 };
 ```
