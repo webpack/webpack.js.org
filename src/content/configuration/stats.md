@@ -11,6 +11,7 @@ contributors:
   - renjithvk
   - Raiondesu
   - EugeneHlushko
+  - grgur
 ---
 
 The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
@@ -224,3 +225,16 @@ For `assetsSort`, `chunksSort` and `moduleSort` there are several possible field
 - `issuerId` - an id of the issuer;
 - `issuerName` - a name of the issuer;
 - `issuerPath` - a full issuer object. There's no real need to sort by this field;
+
+### Colors
+
+You can specify your own terminal output colors using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code)
+
+```js
+module.exports = {
+  //...
+  colors: {
+    green: '\u001b[32m',
+  },
+};
+```
