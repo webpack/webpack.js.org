@@ -84,6 +84,9 @@ module.exports = {
     // Add the origins of chunks and chunk merging info
     chunkOrigins: true,
 
+    // Displays chunk parents, children and siblings
+    chunkRelations: false,
+
     // Sort the chunks by a field
     // You can reverse the sort with `!field`. Default is `id`.
     // Some other possible values: 'name', 'size', 'chunks', 'failed', 'issuer'
