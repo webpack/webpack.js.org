@@ -1226,3 +1226,36 @@ module.exports = {
 If this is too heavy on the file system, you can change this to an integer to set the interval in milliseconds.
 
 See [WatchOptions](/configuration/watch/) for more options.
+
+
+## `devServer.writeToDisk` 🔑
+
+`boolean` `function`
+
+Default: `false`. Tell dev-server to write generated assets to the disk.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    writeToDisk: true
+  }
+};
+```
+
+This option also accepts a Function value, which can be used to filter which files are written to disk. The function follows the same premise as [`Array#filter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) in which a return value of false will not write the file, and a return value of true will write the file to disk.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    writeToDisk: (filePath) => {
+      return /superman\.css$/.test(filePath);
+    }
+  }
+};
+```
