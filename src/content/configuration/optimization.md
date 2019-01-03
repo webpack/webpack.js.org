@@ -20,7 +20,7 @@ Since version 4 webpack runs optimizations for you depending on the chosen  [`mo
 
 `boolean`
 
-Tell webpack to minimize the bundle using the [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin/).
+Tell webpack to minimize the bundle using the [TerserPlugin](/plugins/terser-webpack-plugin/).
 
 This is `true` by default in `production` mode.
 
@@ -40,22 +40,42 @@ T> Learn how [mode](/concepts/mode/) works.
 
 ## `optimization.minimizer`
 
-`[UglifyjsWebpackPlugin]`
+`[<plugin>]` and or `[function (compiler)]`
 
-Allows you to override the default minimizer by providing a different one or more customized [UglifyjsWebpackPlugin](/plugins/uglifyjs-webpack-plugin/) instances.
+Allows you to override the default minimizer by providing a different one or more customized [TerserPlugin](/plugins/terser-webpack-plugin/) instances.
 
 __webpack.config.js__
 
-
 ```js
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-  //...
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({ /* your config */ })
-    ]
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true, // Must be set to true if using source-maps in production
+        terserOptions: {
+          // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
+        }
+      }),
+    ],
+  }
+};
+```
+
+Or, as function:
+
+```js
+module.exports = {
+  optimization: {
+    minimizer: [
+      (compiler) => {
+        const TerserPlugin = require('terser-webpack-plugin');
+        new TerserPlugin({ /* your config */ }).apply(compiler);
+      }
+    ],
   }
 };
 ```
@@ -196,6 +216,36 @@ module.exports = {
   //...
   optimization: {
     moduleIds: 'hashed'
+  }
+};
+```
+
+## `optimization.chunkIds`
+
+`bool: false` `string: natural, named, size, total-size`
+
+Tells webpack which algorithm to use when choosing chunk ids. Setting `optimization.chunkIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. There are couple of defaults for `optimization.chunkIds`:
+
+- if [`optimization.occurrenceOrder`](#optimization-occurrenceorder) is enabled `optimization.chunkIds` is set to `'total-size'`
+- Disregarding previous if, if [`optimization.namedChunks`](#optimization-namedchunks) is enabled `optimization.chunkIds` is set to `'named'`
+- if none of the above, `optimization.namedChunks` will be defaulted to `'natural'`
+
+The following string values are supported:
+
+Option                  | Description
+----------------------- | -----------------------
+`'natural'`             | Numeric ids in order of usage.
+`'named'`               | Readable ids for better debugging.
+`'size'`                | Numeric ids focused on minimal initial download size.
+`'total-size'`          | numeric ids focused on minimal total download size.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    chunkIds: 'named'
   }
 };
 ```

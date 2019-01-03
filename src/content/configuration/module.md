@@ -171,7 +171,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /.css$/,
+        test: /\.css$/,
         oneOf: [
           {
             resourceQuery: /inline/, // foo.css?inline
@@ -252,7 +252,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /.css$/,
+        test: /\.css$/,
         resourceQuery: /inline/,
         use: 'url-loader'
       }
@@ -308,11 +308,24 @@ module.exports = {
 
 ## `Rule.use`
 
-A list of [UseEntries](#useentry) which are applied to modules. Each entry specifies a loader to be used.
+`[UseEntry] | function`
+
+`Rule.use` can be an array of [UseEntry](#useentry) which are applied to modules. Each entry specifies a loader to be used.
 
 Passing a string (i.e. `use: [ 'style-loader' ]`) is a shortcut to the loader property (i.e. `use: [ { loader: 'style-loader '} ]`).
 
 Loaders can be chained by passing multiple loaders, which will be applied from right to left (last to first configured).
+
+`Rule.use` can be a function which receives the object argument describing the module being loaded, and must return an array of `UseEntry`.
+
+The object parameter has the following fields:
+
+- `compiler`: The current webpack compiler (can be undefined)
+- `issuer`: The path to the module that is importing the module being loaded
+- `realResource`: Always the path to the module being loaded
+- `resource`: The path to the module being loaded, it is usually equal to `realResource` except when the resource name is overwritten via `!=!` in request string
+
+The same shortcut as an array can be used for the return value (i.e. `use: [ 'style-loader' ]`).
 
 __webpack.config.js__
 

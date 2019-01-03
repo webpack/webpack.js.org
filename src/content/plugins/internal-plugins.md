@@ -98,7 +98,7 @@ Chunks are wrapped into JSONP-calls. A loading algorithm is included in entry ch
 
 `options.jsonpFunction` is the JSONP function.
 
-`options.publicPath` is uses as path for loading the chunks.
+`options.publicPath` is used as path for loading the chunks.
 
 `options.chunkFilename` is the filename under that chunks are expected.
 
@@ -178,7 +178,7 @@ Tries to evaluate expressions in `if (...)` statements and ternaries to replace 
 
 There are multiple optimizations in production mode regarding dead branches:
 
-- The ones performed by UglifyJS
+- The ones performed by Terser
 - The ones performed by webpack
 
 webpack will try to evaluate conditional statements. If it succeeds then the dead branch is removed. webpack can't do constant folding unless the compiler knows it. For example:
@@ -193,7 +193,7 @@ if (FOO === 0) {
 }
 ```
 
-In the above example, webpack is unable to prune the branch, but Uglify does. However, if `FOO` is defined using [DefinePlugin](/plugins/define-plugin/), webpack will succeed.
+In the above example, webpack is unable to prune the branch, but Terser does. However, if `FOO` is defined using [DefinePlugin](/plugins/define-plugin/), webpack will succeed.
 
 It is important to mention that `import { calculateTax } from './tax';` will also get pruned because `calculateTax()` call was in the dead branch and got eliminated.
 
@@ -312,14 +312,6 @@ Merges chunks until each chunk has the minimum size of `minChunkSize`.
 `optimize/FlagIncludedChunksPlugin()`
 
 Adds chunk ids of chunks which are included in the chunk. This eliminates unnecessary chunk loads.
-
-### UglifyJsPlugin
-
-`optimize/UglifyJsPlugin(options)`
-
-Minimizes the chunks with `uglify.js`.
-
-`options` are uglifyjs options.
 
 ### OccurrenceOrderPlugin
 

@@ -120,7 +120,6 @@ config =
     use: 'babel-loader'
   } ]
   plugins: [
-    new (webpack.optimize.UglifyJsPlugin)
     new HtmlWebpackPlugin(template: './src/index.html')
   ]
 
@@ -169,10 +168,6 @@ export default (
       }} />
     </resolve>
     <plugins>
-      <uglify-js opts={{
-        compression: true,
-        mangle: false
-      }} />
       <CustomPlugin foo="bar" />
     </plugins>
   </webpack>
