@@ -1230,9 +1230,9 @@ See [WatchOptions](/configuration/watch/) for more options.
 
 ## `devServer.writeToDisk` 🔑
 
-`boolean` `function`
+`boolean: false` `function (filePath)`
 
-Default: `false`. Tell dev-server to write generated assets to the disk.
+Tells `devServer` to write generated assets to the disk.
 
 __webpack.config.js__
 
