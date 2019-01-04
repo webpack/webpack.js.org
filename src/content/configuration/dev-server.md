@@ -1245,7 +1245,7 @@ module.exports = {
 };
 ```
 
-This option also accepts a Function value, which can be used to filter which files are written to disk. The function follows the same premise as [`Array#filter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) in which a return value of false will not write the file, and a return value of true will write the file to disk.
+Providing a `Function` to `devServer.writeToDisk` can be used for filtering. The function follows the same premise as [`Array#filter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) in which a boolean return value tells if the file should be written to disk.
 
 __webpack.config.js__
 
