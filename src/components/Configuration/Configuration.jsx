@@ -65,7 +65,7 @@ const Pre = props => {
       if (child.props.props.className.includes("keyword")) {
         if (!detailComponentsList.includes[child.props.props.componentname]) return child;
 
-        return components[child.props.props.componentname](
+        return detailsComponent(
           child.props.children.slice(4, React.Children.count(child.props.children) - 4),
           { url: child.props.props.url }
         );
