@@ -638,13 +638,24 @@ module.exports = {
 };
 ```
 
+If no browser is provided (as shown above), your default browser will be used. To specify a different browser, just pass its name instead of boolean:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    open: 'Google Chrome'
+  }
+};
+```
+
 Usage via the CLI
 
 ```bash
 webpack-dev-server --open
 ```
 
-If no browser is provided (as shown above), your default browser will be used. To specify a different browser, just pass its name:
+Or with specified browser:
 
 __webpack.config.js__
 
@@ -1215,3 +1226,36 @@ module.exports = {
 If this is too heavy on the file system, you can change this to an integer to set the interval in milliseconds.
 
 See [WatchOptions](/configuration/watch/) for more options.
+
+
+## `devServer.writeToDisk` 🔑
+
+`boolean: false` `function (filePath)`
+
+Tells `devServer` to write generated assets to the disk.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    writeToDisk: true
+  }
+};
+```
+
+Providing a `Function` to `devServer.writeToDisk` can be used for filtering. The function follows the same premise as [`Array#filter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) in which a boolean return value tells if the file should be written to disk.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    writeToDisk: (filePath) => {
+      return /superman\.css$/.test(filePath);
+    }
+  }
+};
+```
