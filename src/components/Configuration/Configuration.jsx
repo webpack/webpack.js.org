@@ -63,7 +63,7 @@ const Pre = props => {
   const newChildren = React.Children.map(props.children.props.children, child => {
     if (React.isValidElement(child)) {
       if (child.props.props.className.includes("keyword")) {
-        if (!components[child.props.props.componentname]) return child;
+        if (!detailComponentsList.includes[child.props.props.componentname]) return child;
 
         return components[child.props.props.componentname](
           child.props.children.slice(4, React.Children.count(child.props.children) - 4),
