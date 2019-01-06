@@ -1,9 +1,11 @@
-import React from "react";
-import Popover from "react-tiny-popover";
-import "./Configuration.scss";
-import { timeout } from "q";
+import React from 'react';
+import Popover from 'react-tiny-popover';
+import './Configuration.scss';
+import { timeout } from 'q';
 
-const isFirstChild = child => typeof child === "string" && child !== " ";
+const DEFAULT_CHILDREN_SIZE = 4;
+
+const isFirstChild = child => typeof child === 'string' && child !== ' ';
 
 const removeSpaces = child => (isFirstChild(child) ? child.trim() : child);
 
@@ -40,21 +42,27 @@ export class Details extends React.Component {
   componentDidMount() {
     const { children, url } = this.props;
 
-    const closeDefault = children.findIndex(child => {
+    // Find the index of </default>
+    const closeDefaultTagIndex = children.findIndex(child => {
       if (React.isValidElement(child)) {
-        return child.props.props.className.includes("tag") && child.props.children.length === 4;
+        return (
+          child.props.props.className.includes('tag') &&
+          child.props.children.length === DEFAULT_CHILDREN_SIZE
+        );
       }
     });
 
-    const newChildren = children
-      .splice(2, closeDefault - 3)
+    // Summary is the part of the snippet that would be shown in the code snippet,
+    // to get it we need to cut the <default></default> enclosing tags
+    const summary = children
+      .splice(2, closeDefaultTagIndex - 3)
       .map(removeSpaces)
       .map((child, i) => addLink(child, i, url));
 
-    children.splice(0, 4); // Remove <default></default>
+    children.splice(0, DEFAULT_CHILDREN_SIZE); // Remove <default></default> information
 
     this.setState({
-      summary: newChildren,
+      summary,
       content: children
     });
   }
@@ -69,18 +77,19 @@ export class Details extends React.Component {
 
   render() {
     const { open, summary, content } = this.state;
-    const className = open ? "open" : "";
     return (
       <Popover
         isOpen={open}
-        position={["right", "top"]}
-        disableReposition
+        position={['right', 'top']}
         padding={0}
         onClickOutside={this.clickOutsideHandler}
-        containerClassName={"shadow"}
+        containerClassName={'shadow'}
         content={<Card body={content} />}
       >
-        <span className={`code-details-summary-span ${className}`} onClick={this.toggleVisibility}>
+        <span
+          className='code-details-summary-span'
+          onClick={this.toggleVisibility}
+        >
           {summary}
         </span>
       </Popover>
