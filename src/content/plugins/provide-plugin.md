@@ -24,7 +24,7 @@ new webpack.ProvidePlugin({
 })
 ```
 
-Search path is current folder and node_modules.
+By default, module resolution path is current folder (`./**)` and `node_modules`.
 
 It is also possible to specify full path:
 
