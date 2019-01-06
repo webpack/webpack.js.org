@@ -2,7 +2,10 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import { Details } from "./components";
 
-const components = {
+const detailComponentsList = ['link', 'mode', 'entry', 'filename', 'publicPath', 'advancedOutput', 'expert', 'advancedModule', 'alias', 'advancedResolve', 'hints', 'devtool', 'target', 'externals', 'stats', 'advanced', 'libraryTarget'];
+const detailsComponent = (children, props) => {
+  return <Details children={children} {...props} />;
+}
   link: (children, props) => {
     return <Details children={children} {...props} />;
   },
