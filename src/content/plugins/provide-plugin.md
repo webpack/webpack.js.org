@@ -34,7 +34,7 @@ It is also possible to specify full path:
 new webpack.ProvidePlugin({
   identifier: path.resolve(path.join(__dirname, 'src/module1'))
   // ...
-})
+});
 ```
 
 Whenever the `identifier` is encountered as free variable in a module, the `module` is loaded automatically and the `identifier` is filled with the exports of the loaded `module` (or `property` in order to support named exports).
