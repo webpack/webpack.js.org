@@ -8,6 +8,10 @@ contributors:
   - pksjce
   - sebastiandeutsch
   - tbroadley
+  - byzyk
+  - numb86
+  - jgravois
+  
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
@@ -26,36 +30,46 @@ Configure how modules are resolved. For example, when calling `import "lodash"` 
 
 Create aliases to `import` or `require` certain modules more easily. For example, to alias a bunch of commonly used `src/` folders:
 
-``` js
-alias: {
-  Utilities: path.resolve(__dirname, 'src/utilities/'),
-  Templates: path.resolve(__dirname, 'src/templates/')
-}
+```js
+module.exports = {
+  //...
+  resolve: {
+    alias: {
+      Utilities: path.resolve(__dirname, 'src/utilities/'),
+      Templates: path.resolve(__dirname, 'src/templates/')
+    }
+  }
+};
 ```
 
 Now, instead of using relative paths when importing like so:
 
-``` js
+```js
 import Utility from '../../utilities/utility';
 ```
 
 you can use the alias:
 
-``` js
+```js
 import Utility from 'Utilities/utility';
 ```
 
 A trailing `$` can also be added to the given object's keys to signify an exact match:
 
-``` js
-alias: {
-  xyz$: path.resolve(__dirname, 'path/to/file.js')
-}
+```js
+module.exports = {
+  //...
+  resolve: {
+    alias: {
+      xyz$: path.resolve(__dirname, 'path/to/file.js')
+    }
+  }
+};
 ```
 
 which would yield these results:
 
-``` js
+```js
 import Test1 from 'xyz'; // Exact match, so path/to/file.js is resolved and imported
 import Test2 from 'xyz/file.js'; // Not an exact match, normal resolution takes place
 ```
@@ -86,12 +100,17 @@ The following table explains other cases:
 
 ### `resolve.aliasFields`
 
-`string`
+`array`
 
 Specify a field, such as `browser`, to be parsed according to [this specification](https://github.com/defunctzombie/package-browser-field-spec). Default:
 
-``` js
-aliasFields: ["browser"]
+```js
+module.exports = {
+  //...
+  resolve: {
+    aliasFields: ['browser']
+  }
+};
 ```
 
 
@@ -108,8 +127,13 @@ If unsafe cache is enabled, includes `request.context` in the cache key. This op
 
 The JSON files to use for descriptions. Default:
 
-``` js
-descriptionFiles: ["package.json"]
+```js
+module.exports = {
+  //...
+  resolve: {
+    descriptionFiles: ['package.json']
+  }
+};
 ```
 
 
@@ -120,7 +144,12 @@ descriptionFiles: ["package.json"]
 If `true`, it will not allow extension-less files. So by default `require('./foo')` works if `./foo` has a `.js` extension, but with this enabled only `require('./foo.js')` will work. Default:
 
 ```js
-enforceExtension: false
+module.exports = {
+  //...
+  resolve: {
+    enforceExtension: false
+  }
+};
 ```
 
 
@@ -130,8 +159,13 @@ enforceExtension: false
 
 Whether to require to use an extension for modules (e.g. loaders). Default:
 
-``` js
-enforceModuleExtension: false
+```js
+module.exports = {
+  //...
+  resolve: {
+    enforceModuleExtension: false
+  }
+};
 ```
 
 
@@ -141,17 +175,22 @@ enforceModuleExtension: false
 
 Automatically resolve certain extensions. This defaults to:
 
-``` js
-extensions: [".js", ".json"]
+```js
+module.exports = {
+  //...
+  resolve: {
+    extensions: ['.wasm', '.mjs', '.js', '.json']
+  }
+};
 ```
 
 which is what enables users to leave off the extension when importing:
 
-``` js
-import File from '../path/to/file'
+```js
+import File from '../path/to/file';
 ```
 
-W> Using this will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions. For modules that are imported with their extension, e.g. `import SomeFile from "./somefile.ext"`, to be properly resolved, a string containing "\*" must be included in the array.
+W> Using this will __override the default array__, meaning that webpack will no longer try to resolve modules using the default extensions. For modules that are imported with their extension, e.g. `import SomeFile from "./somefile.ext"`, to be properly resolved, a string containing "\*" must be included in the array.
 
 
 ### `resolve.mainFields`
@@ -163,29 +202,36 @@ When importing from an npm package, e.g. `import * as D3 from "d3"`, this option
 When the `target` property is set to `webworker`, `web`, or left unspecified:
 
 
-``` js
-mainFields: ["browser", "module", "main"]
+```js
+module.exports = {
+  //...
+  resolve: {
+    mainFields: ['browser', 'module', 'main']
+  }
+};
 ```
 
 For any other target (including `node`):
 
-``` js
-mainFields: ["module", "main"]
+```js
+module.exports = {
+  //...
+  resolve: {
+    mainFields: ['module', 'main']
+  }
+};
 ```
 
-For example, the `package.json` of [D3](https://d3js.org/) contains these fields:
+For example, consider an arbitrary library called `upstream` with a `package.json` that contains the following fields:
 
-``` js
+```json
 {
-  ...
-  main: 'build/d3.Node.js',
-  browser: 'build/d3.js',
-  module: 'index',
-  ...
+  "browser": "build/upstream.js",
+  "module": "index"
 }
 ```
 
-This means that when we `import * as D3 from "d3"` this will really resolve to the file in the `browser` property. The `browser` property takes precedence here because it's the first item in `mainFields`. Meanwhile, a Node.js application bundled by webpack will resolve by default to the file in the `module` field.
+When we `import * as Upstream from "upstream"` this will actually resolve to the file in the `browser` property. The `browser` property takes precedence because it's the first item in `mainFields`. Meanwhile, a Node.js application bundled by webpack will first try to resolve using the file in the `module` field.
 
 
 ### `resolve.mainFiles`
@@ -194,8 +240,13 @@ This means that when we `import * as D3 from "d3"` this will really resolve to t
 
 The filename to be used while resolving directories. Default:
 
-``` js
-mainFiles: ["index"]
+```js
+module.exports = {
+  //...
+  resolve: {
+    mainFiles: ['index']
+  }
+};
 ```
 
 
@@ -207,20 +258,30 @@ Tell webpack what directories should be searched when resolving modules.
 
 Absolute and relative paths can both be used, but be aware that they will behave a bit differently.
 
-A relative path will be scanned similarly to how Node scans for `node_modules`, by looking through the current directory as well as it's ancestors (i.e. `./node_modules`, `../node_modules`, and on).
+A relative path will be scanned similarly to how Node scans for `node_modules`, by looking through the current directory as well as its ancestors (i.e. `./node_modules`, `../node_modules`, and on).
 
 With an absolute path, it will only search in the given directory.
 
 `resolve.modules` defaults to:
 
-``` js
-modules: ["node_modules"]
+```js
+module.exports = {
+  //...
+  resolve: {
+    modules: ['node_modules']
+  }
+};
 ```
 
 If you want to add a directory to search in that takes precedence over `node_modules/`:
 
-``` js
-modules: [path.resolve(__dirname, "src"), "node_modules"]
+```js
+module.exports = {
+  //...
+  resolve: {
+    modules: [path.resolve(__dirname, 'src'), 'node_modules']
+  }
+};
 ```
 
 
@@ -228,16 +289,26 @@ modules: [path.resolve(__dirname, "src"), "node_modules"]
 
 `regex` `array` `boolean`
 
-Enable aggressive, but **unsafe**, caching of modules. Passing `true` will cache everything. Default:
+Enable aggressive, but __unsafe__, caching of modules. Passing `true` will cache everything. Default:
 
-``` js
-unsafeCache: true
+```js
+module.exports = {
+  //...
+  resolve: {
+    unsafeCache: true
+  }
+};
 ```
 
 A regular expression, or an array of regular expressions, can be used to test file paths and only cache certain modules. For example, to only cache utilities:
 
-``` js
-unsafeCache: /src\/utilities/
+```js
+module.exports = {
+  //...
+  resolve: {
+    unsafeCache: /src\/utilities/
+  }
+};
 ```
 
 W> Changes to cached paths may cause failure in rare cases.
@@ -247,10 +318,15 @@ W> Changes to cached paths may cause failure in rare cases.
 
 A list of additional resolve plugins which should be applied. It allows plugins such as [`DirectoryNamedWebpackPlugin`](https://www.npmjs.com/package/directory-named-webpack-plugin).
 
-``` js
-plugins: [
-  new DirectoryNamedWebpackPlugin()
-]
+```js
+module.exports = {
+  //...
+  resolve: {
+    plugins: [
+      new DirectoryNamedWebpackPlugin()
+    ]
+  }
+};
 ```
 
 
@@ -265,7 +341,12 @@ When enabled, symlinked resources are resolved to their _real_ path, not their s
 `resolve.symlinks` defaults to:
 
 ```js
-symlinks: true
+module.exports = {
+  //...
+  resolve: {
+    symlinks: true
+  }
+};
 ```
 
 
@@ -276,7 +357,12 @@ symlinks: true
 A function which decides whether a request should be cached or not. An object is passed to the function with `path` and `request` properties. Default:
 
 ```js
-cachePredicate: function() { return true }
+module.exports = {
+  //...
+  resolve: {
+    cachePredicate: function() { return true; }
+  }
+};
 ```
 
 
@@ -286,12 +372,15 @@ cachePredicate: function() { return true }
 
 This set of options is identical to the `resolve` property set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages. Default:
 
-``` js
-{
-  modules: [ 'node_modules' ],
-  extensions: [ '.js', '.json' ],
-  mainFields: [ 'loader', 'main' ]
-}
+```js
+module.exports = {
+  //...
+  resolveLoader: {
+    modules: [ 'node_modules' ],
+    extensions: [ '.js', '.json' ],
+    mainFields: [ 'loader', 'main' ]
+  }
+};
 ```
 
 T> Note that you can use alias here and other features familiar from resolve. For example `{ txt: 'raw-loader' }` would shim `txt!templates/demo.txt` to use `raw-loader`.
@@ -301,8 +390,13 @@ T> Note that you can use alias here and other features familiar from resolve. Fo
 
 `array`
 
-The extensions/suffixes which that are used when resolving loaders. Since version two, we [strongly recommend](/guides/migrating#automatic-loader-module-name-extension-removed) using the full name, e.g. `example-loader`, as much as possible for clarity. However, if you really wanted to exclude the `-loader` bit, i.e. just use `example`, you can use this option to do so:
+The extensions/suffixes that are used when resolving loaders. Since version two, we [strongly recommend](/migrate/3/#automatic-loader-module-name-extension-removed) using the full name, e.g. `example-loader`, as much as possible for clarity. However, if you really wanted to exclude the `-loader` bit, i.e. just use `example`, you can use this option to do so:
 
-``` js
-moduleExtensions: [ '-loader' ]
+```js
+module.exports = {
+  //...
+  resolveLoader: {
+    moduleExtensions: [ '-loader' ]
+  }
+};
 ```

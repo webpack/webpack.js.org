@@ -6,9 +6,10 @@ contributors:
   - skipjack
   - SpaceK33z
   - lricoy
+  - madhavarshney
 related:
-  - title: Enabling Sourcemaps
-    url: http://survivejs.com/webpack/developing-with-webpack/enabling-sourcemaps/
+  - title: Enabling Source Maps
+    url: https://survivejs.com/webpack/developing-with-webpack/enabling-sourcemaps/
   - title: Webpack's Devtool Source Map
     url: http://cheng.logdown.com/posts/2016/03/25/679045
 ---
@@ -35,8 +36,8 @@ eval                           | +++   | +++     | no         | generated code
 cheap-eval-source-map          | +     | ++      | no         | transformed code (lines only)
 cheap-module-eval-source-map   | o     | ++      | no         | original source (lines only)
 eval-source-map                | --    | +       | no         | original source
-cheap-source-map               | +     | o       | no         | transformed code (lines only)
-cheap-module-source-map        | o     | -       | no         | original source (lines only)
+cheap-source-map               | +     | o       | yes        | transformed code (lines only)
+cheap-module-source-map        | o     | -       | yes        | original source (lines only)
 inline-cheap-source-map        | +     | o       | no         | transformed code (lines only)
 inline-cheap-module-source-map | o     | -       | no         | original source (lines only)
 source-map                     | --    | --      | yes        | original source
@@ -65,7 +66,7 @@ T> See [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilena
 
 `without source content` - Contents for the sources are not included in the Source Maps. Browsers usually try to load the source from the webserver or filesystem. You have to make sure to set [`output.devtoolModuleFilenameTemplate`](/configuration/output/#output-devtoolmodulefilenametemplate) correctly to match source urls.
 
-`(lines only)` - Source Maps are simplified to a single mapping per line. This usually means a single mapping per statement (assuming you author is this way). This prevents you from debugging execution on statement level and from settings breakpoints on columns of a line. Combining with minimizing is not possible as minimizers usually only emit a single line.
+`(lines only)` - Source Maps are simplified to a single mapping per line. This usually means a single mapping per statement (assuming you author it this way). This prevents you from debugging execution on statement level and from settings breakpoints on columns of a line. Combining with minimizing is not possible as minimizers usually only emit a single line.
 
 
 ### Development
@@ -113,4 +114,4 @@ W> You should not deploy the Source Map file to the webserver. Instead only use 
 
 W> It still exposes filenames and structure for decompiling, but it doesn't expose the original code.
 
-T> When using the `uglifyjs-webpack-plugin` you must provide the `sourceMap: true` option to enable SourceMap support.
+T> When using the `terser-webpack-plugin` you must provide the `sourceMap: true` option to enable SourceMap support.

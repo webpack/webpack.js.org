@@ -8,6 +8,7 @@ contributors:
   - simon04
   - peterblazejewicz
   - youta1119
+  - byzyk
 ---
 
 webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found at the [node-interpret](https://github.com/js-cli/js-interpret) package. Using [node-interpret](https://github.com/js-cli/js-interpret), webpack can handle many different types of configuration files.
@@ -15,10 +16,12 @@ webpack accepts configuration files written in multiple programming and data lan
 
 ## TypeScript
 
-To write the webpack configuration in [TypeScript](http://www.typescriptlang.org/), you would first install the necessary dependencies:
+To write the webpack configuration in [TypeScript](http://www.typescriptlang.org/), you would first install the necessary dependencies, i.e., TypeScript and the relevant type definitions from the [DefinitelyTyped](https://definitelytyped.org/) project:
 
 ``` bash
 npm install --save-dev typescript ts-node @types/node @types/webpack
+# and, if using webpack-dev-server
+npm install --save-dev @types/webpack-dev-server
 ```
 
 and then proceed to write your configuration:
@@ -30,6 +33,7 @@ import path from 'path';
 import webpack from 'webpack';
 
 const config: webpack.Configuration = {
+  mode: 'production',
   entry: './foo.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -65,7 +69,8 @@ __tsconfig-for-webpack-config.json__
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es5"
+    "target": "es5",
+    "esModuleInterop": true
   }
 }
 ```
@@ -97,12 +102,15 @@ and then proceed to write your configuration:
 
 __webpack.config.coffee__
 
-```javascript
+<!-- eslint-skip -->
+
+```js
 HtmlWebpackPlugin = require('html-webpack-plugin')
 webpack = require('webpack')
 path = require('path')
 
 config =
+  mode: 'production'
   entry: './path/to/my/entry/file.js'
   output:
     path: path.resolve(__dirname, 'dist')
@@ -112,7 +120,6 @@ config =
     use: 'babel-loader'
   } ]
   plugins: [
-    new (webpack.optimize.UglifyJsPlugin)
     new HtmlWebpackPlugin(template: './src/index.html')
   ]
 
@@ -128,7 +135,7 @@ In the example below JSX (React JavaScript Markup) and Babel are used to create 
 
 First install the necessary dependencies:
 
-``` js
+``` bash
 npm install --save-dev babel-register jsxobj babel-preset-es2015
 ```
 
@@ -152,7 +159,7 @@ const CustomPlugin = config => ({
 });
 
 export default (
-  <webpack target="web" watch>
+  <webpack target="web" watch mode="production">
     <entry path="src/index.js" />
     <resolve>
       <alias {...{
@@ -161,10 +168,6 @@ export default (
       }} />
     </resolve>
     <plugins>
-      <uglify-js opts={{
-        compression: true,
-        mangle: false
-      }} />
       <CustomPlugin foo="bar" />
     </plugins>
   </webpack>

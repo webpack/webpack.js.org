@@ -7,6 +7,9 @@ contributors:
   - simon04
   - 5angel
   - marioacc
+  - byzyk
+  - EugeneHlushko
+  - chenxsan
 ---
 
 Aside from applications, webpack can also be used to bundle JavaScript libraries. The following guide is meant for library authors looking to streamline their bundling strategy.
@@ -37,26 +40,33 @@ npm install --save-dev webpack lodash
 
 __src/ref.json__
 
-```javascript
-[{
-  "num": 1,
-  "word": "One"
-}, {
-  "num": 2,
-  "word": "Two"
-}, {
-  "num": 3,
-  "word": "Three"
-}, {
-  "num": 4,
-  "word": "Four"
-}, {
-  "num": 5,
-  "word": "Five"
-}, {
-  "num": 0,
-  "word": "Zero"
-}]
+```json
+[
+  {
+    "num": 1,
+    "word": "One"
+  },
+  {
+    "num": 2,
+    "word": "Two"
+  },
+  {
+    "num": 3,
+    "word": "Three"
+  },
+  {
+    "num": 4,
+    "word": "Four"
+  },
+  {
+    "num": 5,
+    "word": "Five"
+  },
+  {
+    "num": 0,
+    "word": "Zero"
+  }
+]
 ```
 
 __src/index.js__
@@ -69,32 +79,39 @@ export function numToWord(num) {
   return _.reduce(numRef, (accum, ref) => {
     return ref.num === num ? ref.word : accum;
   }, '');
-};
+}
 
 export function wordToNum(word) {
   return _.reduce(numRef, (accum, ref) => {
     return ref.word === word && word.toLowerCase() ? ref.num : accum;
   }, -1);
-};
+}
 ```
 
 The usage specification for the library use will be as follows:
 
+- __ES2015 module import:__
+
 ``` js
-// ES2015 module import
 import * as webpackNumbers from 'webpack-numbers';
-// CommonJS module require
+// ...
+webpackNumbers.wordToNum('Two');
+```
+
+- __CommonJS module require:__
+
+``` js
 var webpackNumbers = require('webpack-numbers');
 // ...
-// ES2015 and CommonJS module use
 webpackNumbers.wordToNum('Two');
-// ...
-// AMD module require
+```
+
+- __AMD module require:__
+
+``` js
 require(['webpackNumbers'], function ( webpackNumbers) {
   // ...
-  // AMD module use
   webpackNumbers.wordToNum('Two');
-  // ...
 });
 ```
 
@@ -128,7 +145,7 @@ For full library configuration and code please refer to [webpack-library-example
 
 Now let's bundle this library in a way that will achieve the following goals:
 
-- Without bundling `lodash`, but requiring it to be loaded by the consumer using `externals`.
+- Using `externals` to avoid bundling `lodash`, so the consumer is required to load it.
 - Setting the library name as `webpack-numbers`.
 - Exposing the library as a variable called `webpackNumbers`.
 - Being able to access the library inside Node.js.
@@ -204,12 +221,15 @@ import B from 'library/two';
 You won't be able to exclude them from bundle by specifying `library` in the externals. You'll either need to exclude them one by one or by using a regular expression.
 
 ``` js
-externals: [
-  'library/one',
-  'library/two',
-  // Everything that starts with "library/"
-  /^library\/.+$/
-]
+module.exports = {
+  //...
+  externals: [
+    'library/one',
+    'library/two',
+    // Everything that starts with "library/"
+    /^library\/.+$/
+  ]
+};
 ```
 
 
@@ -312,4 +332,4 @@ W> The `module` property should point to a script that utilizes ES2015 module sy
 
 Now you can [publish it as an npm package](https://docs.npmjs.com/getting-started/publishing-npm-packages) and find it at [unpkg.com](https://unpkg.com/#/) to distribute it to your users.
 
-T> To expose stylesheets associated with your library, the [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin) should be used. Users can then consume and load these as they would any other stylesheet.
+T> To expose stylesheets associated with your library, the [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin) should be used. Users can then consume and load these as they would any other stylesheet.
