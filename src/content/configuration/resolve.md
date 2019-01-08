@@ -10,6 +10,8 @@ contributors:
   - tbroadley
   - byzyk
   - numb86
+  - jgravois
+  
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
@@ -220,17 +222,16 @@ module.exports = {
 };
 ```
 
-For example, the `package.json` of [D3](https://d3js.org/) contains these fields:
+For example, consider an arbitrary library called `upstream` with a `package.json` that contains the following fields:
 
 ```json
 {
-  "main": "build/d3.Node.js",
-  "browser": "build/d3.js",
+  "browser": "build/upstream.js",
   "module": "index"
 }
 ```
 
-This means that when we `import * as D3 from "d3"` this will really resolve to the file in the `browser` property. The `browser` property takes precedence here because it's the first item in `mainFields`. Meanwhile, a Node.js application bundled by webpack will resolve by default to the file in the `module` field.
+When we `import * as Upstream from "upstream"` this will actually resolve to the file in the `browser` property. The `browser` property takes precedence because it's the first item in `mainFields`. Meanwhile, a Node.js application bundled by webpack will first try to resolve using the file in the `module` field.
 
 
 ### `resolve.mainFiles`

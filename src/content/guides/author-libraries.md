@@ -9,6 +9,7 @@ contributors:
   - marioacc
   - byzyk
   - EugeneHlushko
+  - chenxsan
 ---
 
 Aside from applications, webpack can also be used to bundle JavaScript libraries. The following guide is meant for library authors looking to streamline their bundling strategy.
@@ -331,4 +332,4 @@ W> The `module` property should point to a script that utilizes ES2015 module sy
 
 Now you can [publish it as an npm package](https://docs.npmjs.com/getting-started/publishing-npm-packages) and find it at [unpkg.com](https://unpkg.com/#/) to distribute it to your users.
 
-T> To expose stylesheets associated with your library, the [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin) should be used. Users can then consume and load these as they would any other stylesheet.
+T> To expose stylesheets associated with your library, the [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin) should be used. Users can then consume and load these as they would any other stylesheet.

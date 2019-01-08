@@ -98,7 +98,7 @@ Chunks are wrapped into JSONP-calls. A loading algorithm is included in entry ch
 
 `options.jsonpFunction` is the JSONP function.
 
-`options.publicPath` is uses as path for loading the chunks.
+`options.publicPath` is used as path for loading the chunks.
 
 `options.chunkFilename` is the filename under that chunks are expected.
 
