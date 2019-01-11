@@ -176,7 +176,7 @@ The difference between `maxAsyncSize` and `maxSize` is that `maxAsyncSize` will 
 
 Like `maxSize`, `maxInitialSize` can be applied globally (`splitChunks.maxInitialSize`), to cacheGroups (`splitChunks.cacheGroups.{cacheGroup}.maxInitialSize`), or to the fallback cache group (`splitChunks.fallbackCacheGroup.maxInitialSize`).
 
-The difference between `maxInitialSize` and `maxSize` is that `maxInitialSize` will only be applied to chunks that are used for the initial load.
+The difference between `maxInitialSize` and `maxSize` is that `maxInitialSize` will only affect initial load chunks.
 
 ### `splitChunks.name`
 
