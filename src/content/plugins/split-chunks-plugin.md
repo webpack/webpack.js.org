@@ -168,7 +168,7 @@ Note that setting the value for `maxSize` sets the value for both `maxAsyncSize`
 
 Like `maxSize`, `maxAsyncSize` can be applied globally (`splitChunks.maxAsyncSize`), to cacheGroups (`splitChunks.cacheGroups.{cacheGroup}.maxAsyncSize`), or to the fallback cache group (`splitChunks.fallbackCacheGroup.maxAsyncSize`).
 
-The difference between `maxAsyncSize` and `maxSize` is that `maxAsyncSize` will only be applied to chunks that are loaded on-demand.
+The difference between `maxAsyncSize` and `maxSize` is that `maxAsyncSize` will only affect on-demand loading chunks.
 
 ### `splitChunks.maxInitialSize`
 
