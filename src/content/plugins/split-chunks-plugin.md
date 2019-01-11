@@ -10,6 +10,7 @@ contributors:
   - jacobangel
   - madhavarshney
   - sakhisheikh
+  - superburrito
 related:
   - title: webpack's automatic deduplication algorithm example
     url: https://github.com/webpack/webpack/blob/master/examples/many-pages/README.md
@@ -158,6 +159,24 @@ When the chunk has a name already, each part will get a new name derived from th
 `maxSize` options is intended to be used with HTTP/2 and long term caching. It increase the request count for better caching. It could also be used to decrease the file size for faster rebuilding.
 
 T> `maxSize` takes higher priority than `maxInitialRequest/maxAsyncRequests`. Actual priority is `maxInitialRequest/maxAsyncRequests < maxSize < minSize`.
+
+Note that setting the value for `maxSize` sets the value for both `maxAsyncSize` and `maxInitialSize`.
+
+### `splitChunks.maxAsyncSize`
+
+`number`
+
+Like `maxSize`, `maxAsyncSize` can be applied globally (`optimization.splitChunks.maxAsyncSize`), to cacheGroups (`optimization.splitChunks.cacheGroups[x].maxAsyncSize`), or to the fallback cache group (`optimization.splitChunks.fallbackCacheGroup.maxAsyncSize`).
+
+The difference between `maxAsyncSize` and `maxSize` is that `maxAsyncSize` will only be applied to chunks that are loaded on-demand.
+
+### `splitChunks.maxInitialSize`
+
+`number`
+
+Like `maxSize`, `maxInitialSize` can be applied globally (`optimization.splitChunks.maxInitialSize`), to cacheGroups (`optimization.splitChunks.cacheGroups[x].maxInitialSize`), or to the fallback cache group (`optimization.splitChunks.fallbackCacheGroup.maxInitialSize`).
+
+The difference between `maxInitialSize` and `maxSize` is that `maxInitialSize` will only be applied to chunks that are used for the initial load.
 
 ### `splitChunks.name`
 
