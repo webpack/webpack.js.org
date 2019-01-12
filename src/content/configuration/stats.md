@@ -181,7 +181,7 @@ module.exports = {
 }
 ```
 
-If you want to use one of the pre-defined behaviours e.g. `'minimal'` but still override one or more of the rules, see [the source code](https://github.com/webpack/webpack/blob/master/lib/Stats.js#L1394-L1401). You would want to copy the configuration options from `case 'minimal': ...` and add your additional rules while providing an object to `stats`.
+If you want to use one of the pre-defined behaviours e.g. `'minimal'` but still override one or more of the rules, see [the source code](https://github.com/webpack/webpack/blob/master/lib/Stats.js#L1394-L1401). You can either copy the configuration options from `case 'minimal': ...` and add your additional rules while providing an object to `stats`.
 
 __webpack.config.js__
 
@@ -198,6 +198,22 @@ module.exports = {
     // our additional options
     moduleTrace: true,
     errorDetails: true
+  }
+};
+```
+
+Or, simply use the `Stats.presetToOptions` static method when using Webpack programmatically.
+
+__webpack.config.js__
+```javascript
+const webpack = require('webpack');
+module.exports = {
+  //..
+  stats: {
+    // our additional options
+    moduleTrace: true,
+    errorDetails: true,
+    ...webpack.Stats.presetToOptions('minimal')
   }
 };
 ```
