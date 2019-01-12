@@ -205,6 +205,7 @@ module.exports = {
 Or, simply use the `Stats.presetToOptions` static method when using Webpack programmatically.
 
 __webpack.config.js__
+
 ```javascript
 const webpack = require('webpack');
 module.exports = {
