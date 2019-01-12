@@ -6,12 +6,13 @@ contributors:
   - bebraw
   - simon04
   - EugeneHlushko
+  - sibiraj-s
 ---
 
 This guide goes through the various methods used to install webpack.
 
 
-## Pre-requisites
+## Prerequisites
 
 Before we begin, make sure you have a fresh version of [Node.js](https://nodejs.org/en/) installed. The current Long Term Support (LTS) release is an ideal starting point. You may run into a variety of issues with the older versions as they may be missing functionality webpack and/or its related packages require.
 
@@ -39,7 +40,7 @@ Installing locally is what we recommend for most projects. This makes it easier 
 
 ```json
 "scripts": {
-	"start": "webpack --config webpack.config.js"
+	"build": "webpack --config webpack.config.js"
 }
 ```
 

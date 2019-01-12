@@ -15,6 +15,8 @@ contributors:
   - byzyk
   - yairhaimo
   - EugeneHlushko
+  - farskid
+  - LukeMwila
 ---
 
 At its core, __webpack__ is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it internally builds a [dependency graph](/concepts/dependency-graph/) which maps every module your project needs and generates one or more _bundles_.
@@ -30,6 +32,7 @@ To get started you only need to understand its __Core Concepts__:
 - [Loaders](#loaders)
 - [Plugins](#plugins)
 - [Mode](#mode)
+- [Browser Compatibility](#browser-compatibility)
 
 This document is intended to give a __high-level__ overview of these concepts, while providing links to detailed concept specific use cases.
 
@@ -59,7 +62,7 @@ T> Learn more in the [entry points](/concepts/entry-points) section.
 
 ## Output
 
-The __output__ property tells webpack where to emit the *bundles* it creates and how to name these files. It defaults to `./dist/main.js` for the main output file and to the `./dist` folder for any other generated file.
+The __output__ property tells webpack where to emit the _bundles_ it creates and how to name these files. It defaults to `./dist/main.js` for the main output file and to the `./dist` folder for any other generated file.
 
 You can configure this part of the process by specifying an `output` field in your configuration:
 
@@ -84,7 +87,7 @@ T> The `output` property has [many more configurable features](/configuration/ou
 
 ## Loaders
 
-Out of the box, webpack only understands JavaScript files. __Loaders__ allow webpack to process other types of files and convert them into valid [modules](/concepts/modules) that can be consumed by your application and added to the dependency graph.
+Out of the box, webpack only understands JavaScript and JSON files. __Loaders__ allow webpack to process other types of files and convert them into valid [modules](/concepts/modules) that can be consumed by your application and added to the dependency graph.
 
 W> Note that the ability to `import` any type of module, e.g. `.css` files, is a feature specific to webpack and may not be supported by other bundlers or task runners. We feel this extension of the language is warranted as it allows developers to build a more accurate dependency graph.
 
@@ -115,6 +118,8 @@ The configuration above has defined a `rules` property for a single module with 
 > "Hey webpack compiler, when you come across a path that resolves to a '.txt' file inside of a `require()`/`import` statement, __use__ the `raw-loader` to transform it before you add it to the bundle."
 
 W> It is important to remember that when defining rules in your webpack config, you are defining them under `module.rules` and not `rules`. For your benefit, webpack will warn you if this is done incorrectly.
+
+W> Keep in mind that when using regex to match files, you may not quote it. i.e `/\.txt$/` is not the same as `'/\.txt$/'`/ `"/\.txt$/"`. The former instructs webpack to match any file that ends with .txt and the later instructs webpack to match a single file with an absolute path '.txt'; this is likely not your intention. 
 
 You can check further customization when including loaders in the [loaders section](/concepts/loaders).
 

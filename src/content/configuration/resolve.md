@@ -9,6 +9,9 @@ contributors:
   - sebastiandeutsch
   - tbroadley
   - byzyk
+  - numb86
+  - jgravois
+  
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
@@ -97,7 +100,7 @@ The following table explains other cases:
 
 ### `resolve.aliasFields`
 
-`string`
+`array`
 
 Specify a field, such as `browser`, to be parsed according to [this specification](https://github.com/defunctzombie/package-browser-field-spec). Default:
 
@@ -187,7 +190,7 @@ which is what enables users to leave off the extension when importing:
 import File from '../path/to/file';
 ```
 
-W> Using this will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions. For modules that are imported with their extension, e.g. `import SomeFile from "./somefile.ext"`, to be properly resolved, a string containing "\*" must be included in the array.
+W> Using this will __override the default array__, meaning that webpack will no longer try to resolve modules using the default extensions. For modules that are imported with their extension, e.g. `import SomeFile from "./somefile.ext"`, to be properly resolved, a string containing "\*" must be included in the array.
 
 
 ### `resolve.mainFields`
@@ -219,17 +222,16 @@ module.exports = {
 };
 ```
 
-For example, the `package.json` of [D3](https://d3js.org/) contains these fields:
+For example, consider an arbitrary library called `upstream` with a `package.json` that contains the following fields:
 
 ```json
 {
-  "main": "build/d3.Node.js",
-  "browser": "build/d3.js",
+  "browser": "build/upstream.js",
   "module": "index"
 }
 ```
 
-This means that when we `import * as D3 from "d3"` this will really resolve to the file in the `browser` property. The `browser` property takes precedence here because it's the first item in `mainFields`. Meanwhile, a Node.js application bundled by webpack will resolve by default to the file in the `module` field.
+When we `import * as Upstream from "upstream"` this will actually resolve to the file in the `browser` property. The `browser` property takes precedence because it's the first item in `mainFields`. Meanwhile, a Node.js application bundled by webpack will first try to resolve using the file in the `module` field.
 
 
 ### `resolve.mainFiles`
@@ -287,7 +289,7 @@ module.exports = {
 
 `regex` `array` `boolean`
 
-Enable aggressive, but **unsafe**, caching of modules. Passing `true` will cache everything. Default:
+Enable aggressive, but __unsafe__, caching of modules. Passing `true` will cache everything. Default:
 
 ```js
 module.exports = {
@@ -388,7 +390,7 @@ T> Note that you can use alias here and other features familiar from resolve. Fo
 
 `array`
 
-The extensions/suffixes which that are used when resolving loaders. Since version two, we [strongly recommend](/guides/migrating#automatic-loader-module-name-extension-removed) using the full name, e.g. `example-loader`, as much as possible for clarity. However, if you really wanted to exclude the `-loader` bit, i.e. just use `example`, you can use this option to do so:
+The extensions/suffixes that are used when resolving loaders. Since version two, we [strongly recommend](/migrate/3/#automatic-loader-module-name-extension-removed) using the full name, e.g. `example-loader`, as much as possible for clarity. However, if you really wanted to exclude the `-loader` bit, i.e. just use `example`, you can use this option to do so:
 
 ```js
 module.exports = {
