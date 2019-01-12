@@ -3,72 +3,14 @@ import ReactMarkdown from "react-markdown";
 import { Details } from "./components";
 
 const detailComponentsList = ['link', 'mode', 'entry', 'filename', 'publicPath', 'advancedOutput', 'expert', 'advancedModule', 'alias', 'advancedResolve', 'hints', 'devtool', 'target', 'externals', 'stats', 'advanced', 'libraryTarget'];
-const detailsComponent = (children, props) => {
-  return <Details children={children} {...props} />;
-}
-  link: (children, props) => {
-    return <Details children={children} {...props} />;
-  },
-  mode: (children, props) => {
-    return <Details children={children} {...props} />;
-  },
-  entry: (children, props) => {
-    return <Details children={children} {...props} />;
-  },
-  filename: (children, props) => {
-    return <Details children={children} {...props} />;
-  },
-  publicPath: (children, props) => {
-    return <Details children={children} {...props} />;
-  },
-  advancedOutput: (children, props) => {
-    return <Details children={children} {...props} />;
-  },
-  expert: (children, props) => {
-    return <Details children={children} {...props} />;
-  },
-  advancedModule: (children, props) => {
-    return <Details children={children} {...props} />;
-  },
-  alias: (children, props) => {
-    return <Details children={children} {...props} />;
-  },
-  advancedResolve: (children, props) => {
-    return <Details children={children} {...props} />;
-  },
-  hints: (children, props) => {
-    return <Details children={children} {...props} />;
-  },
-  devtool: (children, props) => {
-    return <Details children={children} {...props} />;
-  },
-  target: (children, props) => {
-    return <Details children={children} {...props} />;
-  },
-  externals: (children, props) => {
-    return <Details children={children} {...props} />;
-  },
-  stats: (children, props) => {
-    return <Details children={children} {...props} />;
-  },
-  advanced: (children, props) => {
-    return <Details children={children} {...props} />;
-  },
-  libraryTarget: (children, props) => {
-    return <Details children={children} {...props} />;
-  }
-};
 
 const Pre = props => {
   const newChildren = React.Children.map(props.children.props.children, child => {
     if (React.isValidElement(child)) {
       if (child.props.props.className.includes("keyword")) {
-        if (!detailComponentsList.includes[child.props.props.componentname]) return child;
+        if (!detailComponentsList.includes(child.props.props.componentname)) return child;
 
-        return detailsComponent(
-          child.props.children.slice(4, React.Children.count(child.props.children) - 4),
-          { url: child.props.props.url }
-        );
+        return <Details children={child.props.children.slice(4, React.Children.count(child.props.children) - 4)} url={child.props.props.url} />;
       }
 
       if (child.props.props.className.includes("comment")) {
