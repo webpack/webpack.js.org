@@ -48,7 +48,3 @@ jobs:
       name: Deploy
       if: branch = master AND type = push
       script: bash ./src/scripts/deploy.sh
-
-    - stage: Post-build
-      name: External Link Check
-      script: yarn linkcheck
