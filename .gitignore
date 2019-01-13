@@ -10,3 +10,4 @@ starter-kits-data.json
 .DS_Store
 yarn-error.log
 package-lock.json
+src/content/**/*_all.md
