@@ -4,6 +4,40 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const mdPlugins = [
+  require('remark-slug'),
+  require('remark-mermaid'),
+  [
+    require('remark-custom-blockquotes'),
+    {
+      mapping: {
+        'T>': 'tip',
+        'W>': 'warning',
+        '?>': 'todo'
+      }
+    }
+  ],
+  [
+    require('@rigor789/remark-autolink-headings'),
+    {
+      behaviour: 'append'
+    }
+  ],
+  [
+    require('remark-responsive-tables'),
+    {
+      classnames: {
+        title: 'title',
+        description: 'description',
+        content: 'content',
+        mobile: 'mobile',
+        desktop: 'desktop'
+      }
+    }
+  ],
+  require('remark-refractor')
+];
+
 module.exports = (env = {}) => ({
   context: path.resolve(__dirname, './src'),
   entry: {
@@ -21,43 +55,23 @@ module.exports = (env = {}) => ({
   module: {
     rules: [
       {
+        test: /\.mdx$/,
+        use: [
+          'babel-loader',
+          {
+            loader: '@mdx-js/loader',
+            options: {
+              mdPlugins
+            }
+          }
+        ]
+      },
+      {
         test: /\.md$/,
         use: {
           loader: 'remark-loader',
           options: {
-            plugins: [
-              require('remark-slug'),
-              require('remark-mermaid'),
-              require('remark-refractor'),
-              [
-                require('remark-custom-blockquotes'),
-                {
-                  mapping: {
-                    'T>': 'tip',
-                    'W>': 'warning',
-                    '?>': 'todo'
-                  }
-                }
-              ],
-              [
-                require('@rigor789/remark-autolink-headings'),
-                {
-                  behaviour: 'append'
-                }
-              ],
-              [
-                require('remark-responsive-tables'),
-                {
-                  classnames: {
-                    title: 'title',
-                    description: 'description',
-                    content: 'content',
-                    mobile: 'mobile',
-                    desktop: 'desktop'
-                  }
-                }
-              ]
-            ]
+            plugins: mdPlugins
           }
         }
       },
