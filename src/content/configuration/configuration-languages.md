@@ -84,10 +84,12 @@ __package.json__
 ```json
 {
   "scripts": {
-    "build": "TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack"
+    "build": "cross-env TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack"
   }
 }
 ```
+
+W> We had been getting reports that `TS_NODE_PROJECT` might not work with `"TS_NODE_PROJECT" unrecognized command` error. Therefore running it with `cross-env` seems to fix the issue, for more info [see this issue](https://github.com/webpack/webpack.js.org/issues/2733).
 
 
 ## CoffeeScript
