@@ -202,7 +202,7 @@ module.exports = {
 };
 ```
 
-Or, simply use the `Stats.presetToOptions` static method when using webpack programmatically.
+Or use the `Stats.presetToOptions` static method when using webpack programmatically.
 
 __webpack.config.js__
 
