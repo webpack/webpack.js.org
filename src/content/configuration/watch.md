@@ -158,4 +158,4 @@ On some machines Vim is preconfigured with the [backupcopy option](http://vimdoc
 
 ### Saving in WebStorm
 
-When using the JetBrains WebStorm IDE, you may find that saving changed files does not trigger the watcher as you might expect. Try disabling the `safe write` option in the settings, which determines whether files are saved to a temporary location first before the originals are overwritten: uncheck `File > Settings... > Appearance & Behavior > System Settings > Use "safe write" (save changes to a temporary file first)`.
+When using the JetBrains WebStorm IDE, you may find that saving changed files does not trigger the watcher as you might expect. Try disabling the `safe write` option in the settings, which determines whether files are saved to a temporary location first before the originals are overwritten: uncheck `File > {Settings|Preferences} > Appearance & Behavior > System Settings > Use "safe write" (save changes to a temporary file first)`.
