@@ -10,6 +10,7 @@ contributors:
   - byzyk
   - EugeneHlushko
   - dhurlburtusa
+  - 1999
 ---
 
 Besides exporting a single config object, there are a few more ways that cover other needs as well.
@@ -26,10 +27,10 @@ One option is to export a function from your webpack config instead of exporting
 
 ```diff
 -module.exports = {
-+module.exports = function(env, argv) {
++module.exports = function(_, argv) {
 +  return {
-+    mode: env.production ? 'production' : 'development',
-+    devtool: env.production ? 'source-maps' : 'eval',
++    mode: argv.mode === 'production' ? 'production' : 'development',
++    devtool: argv.mode === 'production' ? 'source-maps' : 'eval',
      plugins: [
        new TerserPlugin({
          terserOptions: {
