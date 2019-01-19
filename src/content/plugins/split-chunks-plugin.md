@@ -160,7 +160,7 @@ When the chunk has a name already, each part will get a new name derived from th
 
 T> `maxSize` takes higher priority than `maxInitialRequest/maxAsyncRequests`. Actual priority is `maxInitialRequest/maxAsyncRequests < maxSize < minSize`.
 
-Note that setting the value for `maxSize` sets the value for both `maxAsyncSize` and `maxInitialSize`.
+T> Setting the value for `maxSize` sets the value for both `maxAsyncSize` and `maxInitialSize`.
 
 ### `splitChunks.maxAsyncSize`
 
