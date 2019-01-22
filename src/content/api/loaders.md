@@ -574,6 +574,10 @@ T> All the errors and warnings will be recorded into `stats`. Please see [Stats 
 
 A new inline request syntax was introduced in webpack v4. Prefixing `<match-resource>!=!` to a request will set the `matchResource` for this request.
 
+W> It is not recommended to use this syntax in application code.
+Inline request syntax is intended to only be used by loader generated code.
+Not following this recommendation will make your code webpack-specific and non-standard.
+
 T> A relative `matchResource` will resolve relative to the current context of the containing module.
 
 When a `matchResource` is set, it will be used to match with the [`module.rules`](/configuration/module/#module-rules) instead of the original resource. This can be useful if further loaders should be applied to the resource, or if the module type need to be changed. It's also displayed in the stats and used for matching [`Rule.issuer`](/configuration/module/#rule-issuer) and [`test` in `splitChunks`](/plugins/split-chunks-plugin/#splitchunks-cachegroups-cachegroup-test).
