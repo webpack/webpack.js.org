@@ -398,7 +398,7 @@ __package.json__
 
 ## Configuration file generators
 
-Want to rapidly generate webpack configuration file for your project requirements with few clicks away?
+Want to rapidly generate webpack configuration file for your project requirements with just a few clicks away?
 
 [Generate Custom Webpack Configuration](https://generatewebpackconfig.netlify.com/) is an interactive portal you can play around by selecting custom webpack configuration options tailored for your frontend project. It automatically generates a minimal webpack configuration based on your selection of loaders/plugins, etc.
 
