@@ -352,7 +352,7 @@ W> Changes to cached paths may cause failure in rare cases.
 
 ### `resolve.plugins`
 
-`[Plugin]`
+[`[Plugin]`](/plugins/)
 
 A list of additional resolve plugins which should be applied. It allows plugins such as [`DirectoryNamedWebpackPlugin`](https://www.npmjs.com/package/directory-named-webpack-plugin).
 
