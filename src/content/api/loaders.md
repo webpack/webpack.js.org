@@ -618,7 +618,7 @@ module.exports = function (source) {
     return `import ${stringifyRequest(`${this.resource}.css!=!${getStylesLoader}!${remReq}`)};${source}`;
   }
   return source;
-}
+};
 ```
 
 __extract-style-loader/getStyles.js__
@@ -627,5 +627,5 @@ __extract-style-loader/getStyles.js__
 module.exports = function(source) {
   const match = STYLES_REGEXP.match(source);
   return match[0];
-}
+};
 ```
