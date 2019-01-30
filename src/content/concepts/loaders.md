@@ -28,7 +28,7 @@ npm install --save-dev ts-loader
 
 And then instruct webpack to use the [`css-loader`](/loaders/css-loader) for every `.css` file and the [`ts-loader`](https://github.com/TypeStrong/ts-loader) for all `.ts` files:
 
-**webpack.config.js**
+__webpack.config.js__
 
 ``` js
 module.exports = {
@@ -54,7 +54,7 @@ There are three ways to use loaders in your application:
 ### Configuration
 
 [`module.rules`](/configuration/module/#module-rules) allows you to specify several loaders within your webpack configuration.
-This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader. 
+This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader.
 
 Loaders are evaluated/executed from right to left. In the example below execution starts with sass-loader, continues with css-loader and finally ends with style-loader. See ["Loader Features"](/concepts/loaders/#loader-features) for more information about loaders order.
 

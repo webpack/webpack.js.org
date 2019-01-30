@@ -5,14 +5,15 @@ contributors:
   - jhnns
   - skipjack
   - rouzbeh84
+  - byzyk
 ---
 
-Here you can find **webpack** project brand guidelines, assets, and license. See our official [media repository](https://github.com/webpack/media) for more information and to find the [license](https://github.com/webpack/media/blob/master/LICENSE) that governs this work. Click any of the images to download them.
+Here you can find __webpack__ project brand guidelines, assets, and license. See our official [media repository](https://github.com/webpack/media) for more information and to find the [license](https://github.com/webpack/media/blob/master/LICENSE) that governs this work. Click any of the images to download them.
 
 
 ## The Name
 
-webpack should **always** be written in lower-case letters, even at the beginning of a sentence.
+webpack should __always__ be written in lower-case letters, even at the beginning of a sentence.
 
 
 ## Logo
@@ -33,12 +34,12 @@ For dark backgrounds, you can use the negative version of the logo:
 
 [svg](https://github.com/webpack/media/blob/master/logo/logo-on-dark-bg.svg) | [png](https://github.com/webpack/media/blob/master/logo/logo-on-dark-bg.png) | [jpg](https://github.com/webpack/media/blob/master/logo/logo-on-dark-bg.jpg)
 
-T> Please use the **icon + text** whenever possible.
+T> Please use the __icon + text__ whenever possible.
 
 
 ## Icon only
 
-**The icon is designed to be used in layout-constrained areas. As previously stated, please prefer icon + text.**
+__The icon is designed to be used in layout-constrained areas. As previously stated, please prefer icon + text.__
 
 <img src="https://raw.githubusercontent.com/webpack/media/master/logo/icon.png" width="250" alt="icon example">
 
@@ -92,4 +93,4 @@ In addition, you can grab the following file types directly from these links:
 
 ## License
 
-The logo and the brand name are **not MIT licensed**. Please check [our LICENSE](https://github.com/webpack/media/blob/master/LICENSE) for usage guidelines.
+The logo and the brand name are __not MIT licensed__. Please check [our LICENSE](https://github.com/webpack/media/blob/master/LICENSE) for usage guidelines.

@@ -14,6 +14,7 @@ contributors:
   - jeremenichelli
   - dasarianudeep
   - byzyk
+  - kennetvu
 ---
 
 Out of the box, webpack won't require you to use a configuration file. However, it will assume the entry point of your project is `src/index` and will output the result in `dist/main.js` minified and optimized for production.
@@ -144,7 +145,7 @@ module.exports = {
         [loader](/configuration/module#rule-loader): "babel-loader",
         // the loader which should be applied, it'll be resolved relative to the context
         // -loader suffix is no longer optional in webpack2 for clarity reasons
-        // see [webpack 1 upgrade guide](/guides/migrating)
+        // see [webpack 1 upgrade guide](/migrate/3/#automatic-loader-module-name-extension-removed)
         [options](/configuration/module#rule-options-rule-query): {
           presets: ["es2015"]
         },
@@ -397,7 +398,7 @@ __package.json__
 
 ## Configuration file generators
 
-Want to rapidly generate webpack configuration file for your project requirements with few clicks away?
+Want to rapidly generate webpack configuration file for your project requirements with just a few clicks away?
 
 [Generate Custom Webpack Configuration](https://generatewebpackconfig.netlify.com/) is an interactive portal you can play around by selecting custom webpack configuration options tailored for your frontend project. It automatically generates a minimal webpack configuration based on your selection of loaders/plugins, etc.
 

@@ -82,8 +82,8 @@ Default: `"mock"`
 
 Options:
 
-- `true`: The filename of the **input** file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
-- `false`: The regular Node.js `__filename` behavior. The filename of the **output** file when run in a Node.js environment.
+- `true`: The filename of the __input__ file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
+- `false`: The regular Node.js `__filename` behavior. The filename of the __output__ file when run in a Node.js environment.
 - `"mock"`: The fixed value `"index.js"`.
 
 
@@ -95,8 +95,8 @@ Default: `"mock"`
 
 Options:
 
-- `true`: The dirname of the **input** file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
-- `false`: The regular Node.js `__dirname` behavior. The dirname of the **output** file when run in a Node.js environment.
+- `true`: The dirname of the __input__ file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
+- `false`: The regular Node.js `__dirname` behavior. The dirname of the __output__ file when run in a Node.js environment.
 - `"mock"`: The fixed value `"/"`.
 
 

@@ -15,18 +15,20 @@ webpack can watch files and recompile whenever they change. This page explains h
 
 ## `watch`
 
-`boolean`
+`boolean: false`
 
-Turn on watch mode. This means that after the initial build, webpack will continue to watch for changes in any of the resolved files. Watch mode is turned off by default:
+Turn on watch mode. This means that after the initial build, webpack will continue to watch for changes in any of the resolved files.
 
-```js
+__webpack.config.js__
+
+```javascript
 module.exports = {
   //...
-  watch: false
+  watch: true
 };
 ```
 
-T> In webpack-dev-server and webpack-dev-middleware watch mode is enabled by default.
+T> In [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) watch mode is enabled by default.
 
 
 ## `watchOptions`
@@ -35,7 +37,9 @@ T> In webpack-dev-server and webpack-dev-middleware watch mode is enabled by def
 
 A set of options used to customize watch mode:
 
-```js
+__webpack.config.js__
+
+```javascript
 module.exports = {
   //...
   watchOptions: {
@@ -48,15 +52,15 @@ module.exports = {
 
 ## `watchOptions.aggregateTimeout`
 
-`number`
+`number: 300`
 
 Add a delay before rebuilding once the first file changed. This allows webpack to aggregate any other changes made during this time period into one rebuild. Pass a value in milliseconds:
 
-```js
+```javascript
 module.exports = {
   //...
   watchOptions: {
-    aggregateTimeout: 300 // The default
+    aggregateTimeout: 600
   }
 };
 ```
@@ -64,9 +68,13 @@ module.exports = {
 
 ## `watchOptions.ignored`
 
+`RegExp` [`anymatch`](https://github.com/micromatch/anymatch)
+
 For some systems, watching many file systems can result in a lot of CPU or memory usage. It is possible to exclude a huge folder like `node_modules`:
 
-```js
+__webpack.config.js__
+
+```javascript
 module.exports = {
   //...
   watchOptions: {
@@ -77,7 +85,9 @@ module.exports = {
 
 It is also possible to have and use multiple [anymatch](https://github.com/micromatch/anymatch) patterns:
 
-```js
+__webpack.config.js__
+
+```javascript
 module.exports = {
   //...
   watchOptions: {
@@ -91,11 +101,13 @@ T> If you use `require.context`, webpack will watch your entire directory. You w
 
 ## `watchOptions.poll`
 
-`boolean` `number`
+`boolean: false` `number`
 
 Turn on [polling](https://whatis.techtarget.com/definition/polling) by passing `true`, or specifying a poll interval in milliseconds:
 
-```js
+__webpack.config.js__
+
+```javascript
 module.exports = {
   //...
   watchOptions: {
@@ -109,7 +121,7 @@ T> If watching does not work for you, try out this option. Watching does not wor
 
 ## `info-verbosity`
 
-`string`: `none` `info` `verbose`
+`string: 'none', 'info', 'verbose'`
 
 Controls verbosity of the lifecycle messaging, e.g. the `Started watching files...` log. Setting `info-verbosity` to `verbose` will also message to console at the beginning and the end of incremental build. `info-verbosity` is set to `info` by default.
 
@@ -146,9 +158,9 @@ On macOS, folders can get corrupted in certain scenarios. See [this article](htt
 
 ### Windows Paths
 
-Because webpack expects absolute paths for many config options such as `__dirname + "/app/folder"` the Windows `\` path separator can break some functionality.
+Because webpack expects absolute paths for many config options such as `__dirname + '/app/folder'` the Windows `\` path separator can break some functionality.
 
-Use the correct separators. I.e. `path.resolve(__dirname, "app/folder")` or `path.join(__dirname, "app", "folder")`.
+Use the correct separators. I.e. `path.resolve(__dirname, 'app/folder')` or `path.join(__dirname, 'app', 'folder')`.
 
 ### Vim
 
@@ -158,4 +170,4 @@ On some machines Vim is preconfigured with the [backupcopy option](http://vimdoc
 
 ### Saving in WebStorm
 
-When using the JetBrains WebStorm IDE, you may find that saving changed files does not trigger the watcher as you might expect. Try disabling the `safe write` option in the settings, which determines whether files are saved to a temporary location first before the originals are overwritten: uncheck `File > Settings... > System Settings > Use "safe write" (save changes to a temporary file first)`.
+When using the JetBrains WebStorm IDE, you may find that saving changed files does not trigger the watcher as you might expect. Try disabling the `safe write` option in the settings, which determines whether files are saved to a temporary location first before the originals are overwritten: uncheck `File > {Settings|Preferences} > Appearance & Behavior > System Settings > Use "safe write" (save changes to a temporary file first)`.

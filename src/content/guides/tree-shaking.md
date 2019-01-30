@@ -14,6 +14,7 @@ contributors:
   - byzyk
   - pnevares
   - EugeneHlushko
+  - torifat
 related:
   - title: "webpack 4 beta — try it today!"
     url: https://medium.com/webpack/webpack-4-beta-try-it-today-6b1d27d7d7e2#9a67
@@ -75,7 +76,10 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
 - }
 + },
-+ mode: 'development'
++ mode: 'development',
++ optimization: {
++   usedExports: true
++ }
 };
 ```
 
@@ -186,12 +190,15 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
-- mode: 'development'
+- mode: 'development',
+- optimization: {
+-   usedExports: true
+- }
 + mode: 'production'
 };
 ```
 
-T> Note that the `--optimize-minimize` flag can be used to enable `UglifyJSPlugin` as well.
+T> Note that the `--optimize-minimize` flag can be used to enable `TerserPlugin` as well.
 
 With that squared away, we can run another `npm run build` and see if anything has changed.
 

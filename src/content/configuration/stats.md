@@ -11,6 +11,7 @@ contributors:
   - renjithvk
   - Raiondesu
   - EugeneHlushko
+  - grgur
 ---
 
 The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
@@ -34,11 +35,11 @@ module.exports = {
 
 | Preset | Alternative | Description |
 |--------|-------------|-------------|
-| `"errors-only"` | *none*  | Only output when errors happen |
-| `"minimal"`     | *none*  | Only output when errors or new compilation happen |
+| `"errors-only"` | _none_  | Only output when errors happen |
+| `"minimal"`     | _none_  | Only output when errors or new compilation happen |
 | `"none"`        | `false` | Output nothing |
 | `"normal"`      | `true`  | Standard output |
-| `"verbose"`     | *none*  | Output everything |
+| `"verbose"`     | _none_  | Output everything |
 
 For more granular control, it is possible to specify exactly what information you want. Please note that all of the options in this object are optional.
 
@@ -74,7 +75,7 @@ module.exports = {
 
     // Add chunk information (setting this to `false` allows for a less verbose output)
     chunks: true,
-    
+
     // Add namedChunkGroups information
     chunkGroups: true,
 
@@ -180,6 +181,27 @@ module.exports = {
 }
 ```
 
+If you want to use one of the pre-defined behaviours e.g. `'minimal'` but still override one or more of the rules, see [the source code](https://github.com/webpack/webpack/blob/master/lib/Stats.js#L1394-L1401). You would want to copy the configuration options from `case 'minimal': ...` and add your additional rules while providing an object to `stats`.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //..
+  stats: {
+    // copied from `'minimal'`
+    all: false,
+    modules: true,
+    maxModules: 0,
+    errors: true,
+    warnings: true,
+    // our additional options
+    moduleTrace: true,
+    errorDetails: true
+  }
+};
+```
+
 ### Sorting fields
 
 For `assetsSort`, `chunksSort` and `moduleSort` there are several possible fields that you can sort items by:
@@ -203,3 +225,16 @@ For `assetsSort`, `chunksSort` and `moduleSort` there are several possible field
 - `issuerId` - an id of the issuer;
 - `issuerName` - a name of the issuer;
 - `issuerPath` - a full issuer object. There's no real need to sort by this field;
+
+### Colors
+
+You can specify your own terminal output colors using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code)
+
+```js
+module.exports = {
+  //...
+  colors: {
+    green: '\u001b[32m',
+  },
+};
+```

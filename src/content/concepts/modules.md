@@ -6,6 +6,7 @@ contributors:
   - simon04
   - rouzbeh84
   - EugeneHlushko
+  - byzyk
 related:
    - title: JavaScript Module Systems Showdown
      url: https://auth0.com/blog/javascript-module-systems-showdown/
@@ -35,7 +36,7 @@ T> webpack 1 requires a specific loader to convert ES2015 `import`, however this
 
 ## Supported Module Types
 
-webpack supports modules written in a variety of languages and preprocessors, via _loaders_. _Loaders_ describe to webpack **how** to process non-JavaScript _modules_ and include these _dependencies_ into your _bundles_.
+webpack supports modules written in a variety of languages and preprocessors, via _loaders_. _Loaders_ describe to webpack __how__ to process non-JavaScript _modules_ and include these _dependencies_ into your _bundles_.
 The webpack community has built _loaders_ for a wide variety of popular languages and language processors, including:
 
 - [CoffeeScript](http://coffeescript.org)
@@ -45,6 +46,6 @@ The webpack community has built _loaders_ for a wide variety of popular language
 - [Less](http://lesscss.org)
 - [Stylus](http://stylus-lang.com)
 
-And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for **any stack**, while staying **non-opinionated** about your development, testing, and production workflows.
+And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for __any stack__, while staying __non-opinionated__ about your development, testing, and production workflows.
 
-For a full list, see [**the list of loaders**](/loaders) or [**write your own**](/api/loaders).
+For a full list, see [__the list of loaders__](/loaders) or [__write your own__](/api/loaders).

@@ -9,6 +9,7 @@ contributors:
   - fadysamirsadek
   - byzyk
   - EugeneHlushko
+  - dhurlburtusa
 ---
 
 Besides exporting a single config object, there are a few more ways that cover other needs as well.
@@ -30,8 +31,10 @@ One option is to export a function from your webpack config instead of exporting
 +    mode: env.production ? 'production' : 'development',
 +    devtool: env.production ? 'source-maps' : 'eval',
      plugins: [
-       new webpack.optimize.UglifyJsPlugin({
-+        compress: argv['optimize-minimize'] // only if -p or --optimize-minimize were passed
+       new TerserPlugin({
+         terserOptions: {
++          compress: argv['optimize-minimize'] // only if -p or --optimize-minimize were passed
+         }
        })
      ]
 +  };
@@ -81,4 +84,4 @@ module.exports = [{
 }];
 ```
 
-T> If you pass a name to `--config-name` flag, webpack will only build that specific configuration.
+T> If you pass a name to [`--config-name`](/api/cli/#config-options) flag, webpack will only build that specific configuration.

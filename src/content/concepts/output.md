@@ -17,7 +17,7 @@ The minimum requirements for the `output` property in your webpack config is to 
 
 - A `filename` to use for the output file(s).
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```javascript
 module.exports = {
@@ -54,7 +54,7 @@ module.exports = {
 
 Here's a more complicated example of using a CDN and hashes for assets:
 
-**config.js**
+__config.js__
 
 ```javascript
 module.exports = {

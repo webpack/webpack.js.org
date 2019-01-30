@@ -21,10 +21,12 @@ SUPPORTERS.sort((a, b) => b.totalDonations - a.totalDonations);
 
 const ranks = {
   backer: {
-    maximum: 200
+    maximum: 200,
+    random: 100
   },
   latest: {
-    maxAge: 14 * 24 * 60 * 60 * 1000
+    maxAge: 14 * 24 * 60 * 60 * 1000,
+    limit: 10
   },
   bronze: {
     minimum: 200,
@@ -56,12 +58,14 @@ export default class Support extends React.Component {
     let { rank } = this.props;
 
     let supporters = SUPPORTERS;
-    let minimum, maximum, maxAge;
+    let minimum, maximum, maxAge, limit, random;
 
     if (rank && ranks[rank]) {
       minimum = ranks[rank].minimum;
       maximum = ranks[rank].maximum;
       maxAge = ranks[rank].maxAge;
+      limit = ranks[rank].limit;
+      random = ranks[rank].random;
     }
 
     if (typeof minimum === 'number') {
@@ -77,15 +81,33 @@ export default class Support extends React.Component {
       supporters = supporters.filter(item => item.firstDonation && (now - new Date(item.firstDonation).getTime() < maxAge));
     }
 
+    if (typeof limit === 'number') {
+      supporters = supporters.slice(0, limit);
+    }
+
+    if (typeof random === 'number') {
+      // Pick n random items
+      for (let i = 0; i < random; i++) {
+        const other = Math.floor(Math.random() * (supporters.length - i));
+        const temp = supporters[other];
+        supporters[other] = supporters[i];
+        supporters[i] = temp;
+      }
+      supporters = supporters.slice(0, random);
+
+      // resort to keep order
+      supporters.sort((a, b) => b.totalDonations - a.totalDonations);
+    }
+
     return (
       <div className="support">
         <div className="support__description">
           { rank === 'backer' ? (
             <p>
-              The following <b>Backers</b> are individuals who have contributed various amounts of money in order to help support webpack. Every little bit helps, and we appreciate even the smallest contributions.
+              The following <b>Backers</b> are individuals who have contributed various amounts of money in order to help support webpack. Every little bit helps, and we appreciate even the smallest contributions. This list shows {random} randomly chosen backers:
             </p>
           ) : rank === 'latest' ? (
-            <p>The following persons/organizations made their first donation in the last {Math.round(maxAge / (1000 * 60 * 60 * 24))} days.</p>
+            <p>The following persons/organizations made their first donation in the last {Math.round(maxAge / (1000 * 60 * 60 * 24))} days (limited to the top {limit}).</p>
           ) : (
             <p>
               <b className="support__rank">{ rank } sponsors</b>
@@ -100,6 +122,7 @@ export default class Support extends React.Component {
                className="support__item"
                title={ `$${formatMoney(supporter.totalDonations / 100)} by ${supporter.name || supporter.slug}` }
                target="_blank"
+               rel="noopener nofollow"
                href={ supporter.website || `https://opencollective.com/${supporter.slug}` }>
               {<img
                 className={ `support__${rank}-avatar` }

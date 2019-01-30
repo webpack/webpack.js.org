@@ -5,9 +5,10 @@ contributors:
   - morsdyce
   - kkamali
   - mtrivera
+  - byzyk
 ---
 
-T> This guide stems from the [*Getting Started*](/guides/getting-started/) guide.
+T> This guide stems from the [_Getting Started_](/guides/getting-started/) guide.
 
 [TypeScript](https://www.typescriptlang.org) is a typed superset of JavaScript that compiles to plain JavaScript. In this guide we will learn how to integrate TypeScript with webpack.
 

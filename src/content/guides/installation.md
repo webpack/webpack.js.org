@@ -40,7 +40,7 @@ Installing locally is what we recommend for most projects. This makes it easier 
 
 ```json
 "scripts": {
-	"start": "webpack --config webpack.config.js"
+	"build": "webpack --config webpack.config.js"
 }
 ```
 

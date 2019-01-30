@@ -7,9 +7,10 @@ contributors:
   - aretecode
   - eko3alpha
   - refactorized
+  - byzyk
 ---
 
-webpack has a rich plugin interface. Most of the features within webpack itself use this plugin interface. This makes webpack **flexible**.
+webpack has a rich plugin interface. Most of the features within webpack itself use this plugin interface. This makes webpack __flexible__.
 
 Name                                                     | Description
 -------------------------------------------------------- | -----------
@@ -39,6 +40,7 @@ Name                                                     | Description
 [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin)  | Enables a more fine grained control of source maps
 [`EvalSourceMapDevToolPlugin`](/plugins/eval-source-map-dev-tool-plugin)  | Enables a more fine grained control of eval source maps
 [`UglifyjsWebpackPlugin`](/plugins/uglifyjs-webpack-plugin)      | Enables control of the version of UglifyJS in your project
+[`TerserPlugin`](/plugins/terser-webpack-plugin)      | Enables control of the version of Terser in your project
 [`ZopfliWebpackPlugin`](/plugins/zopfli-webpack-plugin)          | Prepare compressed versions of assets with node-zopfli
 
 For more third-party plugins, see the list from [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#webpack-plugins).

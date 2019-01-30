@@ -10,6 +10,8 @@ contributors:
   - Calinou
   - GAumala
   - EugeneHlushko
+  - byzyk
+  - trivikr
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
@@ -33,7 +35,6 @@ __webpack.config.js__
       app: './src/index.js',
       print: './src/print.js'
     },
-    devtool: 'inline-source-map',
     plugins: [
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({

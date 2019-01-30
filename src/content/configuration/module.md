@@ -19,7 +19,7 @@ These options determine how the [different types of modules](/concepts/modules) 
 
 ## `module.noParse`
 
-`RegExp | [RegExp] | function | string | [string]`
+`RegExp` `[RegExp]` `function(resource)` `string` `[string]`
 
 Prevent webpack from parsing any files matching the given regular expression(s). Ignored files __should not__ have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries.
 
@@ -171,7 +171,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /.css$/,
+        test: /\.css$/,
         oneOf: [
           {
             resourceQuery: /inline/, // foo.css?inline
@@ -252,7 +252,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /.css$/,
+        test: /\.css$/,
         resourceQuery: /inline/,
         use: 'url-loader'
       }
@@ -308,7 +308,11 @@ module.exports = {
 
 ## `Rule.use`
 
-A list of [UseEntries](#useentry) which are applied to modules. Each entry specifies a loader to be used.
+`[UseEntry]` `function(info)`
+
+__`[UseEntry]`__
+
+`Rule.use` can be an array of [UseEntry](#useentry) which are applied to modules. Each entry specifies a loader to be used.
 
 Passing a string (i.e. `use: [ 'style-loader' ]`) is a shortcut to the loader property (i.e. `use: [ { loader: 'style-loader '} ]`).
 
@@ -338,6 +342,46 @@ module.exports = {
             }
           }
         ]
+      }
+    ]
+  }
+};
+```
+
+__`function(info)`__
+
+`Rule.use` can also be a function which receives the object argument describing the module being loaded, and must return an array of `UseEntry` items.
+
+The `info` object parameter has the following fields:
+
+- `compiler`: The current webpack compiler (can be undefined)
+- `issuer`: The path to the module that is importing the module being loaded
+- `realResource`: Always the path to the module being loaded
+- `resource`: The path to the module being loaded, it is usually equal to `realResource` except when the resource name is overwritten via `!=!` in request string
+
+The same shortcut as an array can be used for the return value (i.e. `use: [ 'style-loader' ]`).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        use: (info) => ([
+          {
+            loader: 'custom-svg-loader'
+          },
+          {
+            loader: 'svgo-loader',
+            options: {
+              plugins: [{
+                cleanupIDs: { prefix: basename(info.resource) }
+              }]
+            }
+          }
+        ])
       }
     ]
   }
@@ -391,13 +435,19 @@ module.exports = {
 
 ## `UseEntry`
 
-`object`
+`object` `function(info)`
+
+__`object`__
 
 It must have a `loader` property being a string. It is resolved relative to the configuration [`context`](/configuration/entry-context#context) with the loader resolving options ([resolveLoader](/configuration/resolve#resolveloader)).
 
 It can have an `options` property being a string or object. This value is passed to the loader, which should interpret it as loader options.
 
 For compatibility a `query` property is also possible, which is an alias for the `options` property. Use the `options` property instead.
+
+Note that webpack needs to generate a unique module identifier from the resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9% of cases, but may be not unique if you apply the same loaders with different options to the resource and the options have some stringified values.
+
+It also breaks if the options object cannot be stringified (i.e. circular JSON). Because of this you can have a `ident` property in the options object which is used as unique identifier.
 
 __webpack.config.js__
 
@@ -417,9 +467,42 @@ module.exports = {
 };
 ```
 
-Note that webpack needs to generate a unique module identifier from the resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9% of cases, but may be not unique if you apply the same loaders with different options to the resource and the options have some stringified values.
+__`function(info)`__
 
-It also breaks if the options object cannot be stringified (i.e. circular JSON). Because of this you can have a `ident` property in the options object which is used as unique identifier.
+A `UseEntry` can also be a function which receives the object argument describing the module being loaded, and must return an options object. This can be used to vary the loader options on a per-module basis.
+
+The `info` object parameter has the following fields:
+
+- `compiler`: The current webpack compiler (can be undefined)
+- `issuer`: The path to the module that is importing the module being loaded
+- `realResource`: Always the path to the module being loaded
+- `resource`: The path to the module being loaded, it is usually equal to `realResource` except when the resource name is overwritten via `!=!` in request string
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        loader: 'file-loader',
+        options: {
+          outputPath: 'svgs'
+        }
+      },
+      (info) => ({
+        loader: 'svgo-loader',
+        options: {
+          plugins: [{
+            cleanupIDs: { prefix: basename(info.resource) }
+          }]
+        }
+      })
+    ]
+  }
+};
+```
 
 
 ## Module Contexts

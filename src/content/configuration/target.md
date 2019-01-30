@@ -32,7 +32,7 @@ Option                | Description
 `electron-renderer`   | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules.
 `node`                | Compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks)
 `node-webkit`         | Compile for usage in WebKit and uses JSONP for chunk loading. Allows importing of built-in Node.js modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental)
-`web`                 | Compile for usage in a browser-like environment **(default)**
+`web`                 | Compile for usage in a browser-like environment __(default)__
 `webworker`           | Compile as WebWorker
 
 For example, when the `target` is set to `"electron-main"`, webpack includes multiple electron specific variables. For more information on which templates and externals are used, you can refer to webpack's [source code](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js#L148-L183).
