@@ -43,7 +43,7 @@ Triggered when evaluating the `typeof` of an identifier.
 Parameters: `expression`
 
 ```js
-parser.hooks.evaluateTypeof.for('myIdentifier').tap('MyPlugin', expression => {
+parser.hooks.evaluateTypeof.for('identifier').tap('MyPlugin', expression => {
   /* ... */
   return expressionResult;
 });
@@ -54,7 +54,7 @@ parser.hooks.evaluateTypeof.for('myIdentifier').tap('MyPlugin', expression => {
 
 `SyncBailHook`
 
-Called when evaluating an expression.
+Called when evaluating an expression, requires an expression type.
 
 Parameters: `expression`
 
@@ -91,7 +91,7 @@ Where the expressions types are:
 
 `SyncBailHook`
 
-Evaluate an identifier that is a free variable.
+Evaluate an identifier that is a free variable, requires an identifier.
 
 Parameters: `expression`
 
@@ -118,52 +118,36 @@ Parameters: `expression` `param`
 
 `SyncBailHook`
 
-General purpose hook that is called when parsing statements in a code fragment.
+General purpose hook that is called for every parsed statement in a code fragment.
 
 Parameters: `statement`
 
 ```js
-parser.hooks.statement.tap('MyPlugin', statement => {/* ... */});
+parser.hooks.statement.tap('MyPlugin', statement => { /* ... */ });
 ```
 
 Where the `statement.type` could be:
 
 - `'BlockStatement'`
+- `'VariableDeclaration'`
+- `'FunctionDeclaration'`
+- `'ReturnStatement'`
 - `'ClassDeclaration'`
-- `'DoWhileStatement'`
+- `'ExpressionStatement'`
+- `'ImportDeclaration'`
 - `'ExportAllDeclaration'`
 - `'ExportDefaultDeclaration'`
 - `'ExportNamedDeclaration'`
+- `'IfStatement'`
+- `'SwitchStatement'`
 - `'ForInStatement'`
 - `'ForOfStatement'`
 - `'ForStatement'`
-- `'FunctionDeclaration'`
-- `'IfStatement'`
-- `'ImportDeclaration'`
-- `'LabeledStatement'`
-- `'SwitchStatement'`
-- `'TryStatement'`
-- `'VariableDeclaration'`
 - `'WhileStatement'`
-- `'WithStatement'`
-- `'BlockStatement'`
-- `'ClassDeclaration'`
 - `'DoWhileStatement'`
-- `'ExportDefaultDeclaration'`
-- `'ExportNamedDeclaration'`
-- `'ExpressionStatement'`
-- `'ForInStatement'`
-- `'ForOfStatement'`
-- `'ForStatement'`
-- `'FunctionDeclaration'`
-- `'IfStatement'`
-- `'LabeledStatement'`
-- `'ReturnStatement'`
-- `'SwitchStatement'`
 - `'ThrowStatement'`
 - `'TryStatement'`
-- `'VariableDeclaration'`
-- `'WhileStatement'`
+- `'LabeledStatement'`
 - `'WithStatement'`
 
 
@@ -171,7 +155,7 @@ Where the `statement.type` could be:
 
 `SyncBailHook`
 
-Called when parsing an if statement. Is the same as the `statement` hook, but is triggered only when `statement.type == "IfStatement"`
+Called when parsing an if statement. It's the same as the `statement` hook, but is triggered only when `statement.type == 'IfStatement'`
 
 Parameters: `statement`
 
@@ -180,7 +164,8 @@ Parameters: `statement`
 
 `SyncBailHook`
 
-...
+Called when parsing statement with a [label](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label).
+It requires a `label` and is triggered for statements having `statement.type === 'LabeledStatement'`.
 
 Parameters: `statement`
 
@@ -189,18 +174,45 @@ Parameters: `statement`
 
 `SyncBailHook`
 
-...
+Called for every import statement in a code fragment. The `source` parameter contains the name of the imported file
 
 Parameters: `statement` `source`
+
+```js
+import _ from 'lodash';
+
+// MyPlugin.js
+parser.hooks.import.tap('MyPlugin', (statement, source) => {
+  /* source == 'lodash' */
+});
+```
 
 
 ### importSpecifier
 
 `SyncBailHook`
 
-...
+Called for every specifier of every `import` statement.
 
 Parameters: `statement` `source` `exportName` `identifierName`
+
+```js
+import _, { has } from 'lodash';
+
+// MyPlugin.js
+parser.hooks.import.tap('MyPlugin', (statement, source, exportName, identifierName) => {
+  /* First call
+    source == 'lodash'
+    exportName == 'default'
+    identifierName == '_'
+  */
+  /* Second call
+    source == 'lodash'
+    exportName == 'has'
+    identifierName == 'has'
+  */
+});
+```
 
 
 ### export
@@ -261,7 +273,7 @@ Parameters: `statement` `source` `identifierName` `exportName` `index`
 
 `SyncBailHook`
 
-...
+Called when parsing a variable declaration.
 
 Parameters: `declaration`
 
@@ -270,7 +282,7 @@ Parameters: `declaration`
 
 `SyncBailHook`
 
-...
+Called when parsing a variable declaration defined using `let`
 
 Parameters: `declaration`
 
@@ -279,7 +291,7 @@ Parameters: `declaration`
 
 `SyncBailHook`
 
-...
+Called when parsing a variable declaration defined using `const`
 
 Parameters: `declaration`
 
@@ -288,7 +300,7 @@ Parameters: `declaration`
 
 `SyncBailHook`
 
-...
+Called when parsing a variable declaration defined using `var`
 
 Parameters: `declaration`
 
