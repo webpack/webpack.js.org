@@ -290,7 +290,6 @@ There are many misconceptions in the community, as well, that modern browsers "d
 The best practice thus remains to unconditionally and synchronously load all polyfills/shims, despite the bundle size cost this incurs.
 
 If you feel that you have mitigated these concerns and wish to incur the risk of brokenness, here's one way you might do it:
-d
 Let's move our `import` to a new file and add the [`whatwg-fetch`](https://github.com/github/fetch) polyfill:
 
 ``` bash
