@@ -45,7 +45,7 @@ Parameters: `expression`
 ```js
 parser.hooks.evaluateTypeof.for('myIdentifier').tap('MyPlugin', expression => {
   /* ... */
-  return expressionResult
+  return expressionResult;
 });
 ```
 
@@ -59,31 +59,31 @@ Called when evaluating an expression.
 Parameters: `expression`
 
 ```js
-parser.hooks.evaluate.for(/* expression type */).tap(/* ... */)
+parser.hooks.evaluate.for(/* expression type */).tap(/* ... */);
 ```
+
 Where the expressions types are:
-```js
-"ArrowFunctionExpression"
-"AssignmentExpression"
-"AwaitExpression"
-"BinaryExpression"
-"CallExpression"
-"ClassExpression"
-"ConditionalExpression"
-"FunctionExpression"
-"Identifier"
-"LogicalExpression"
-"MemberExpression"
-"NewExpression"
-"ObjectExpression"
-"SequenceExpression"
-"SpreadElement"
-"TaggedTemplateExpression"
-"TemplateLiteral"
-"ThisExpression"
-"UnaryExpression"
-"UpdateExpression"
-```
+
+- `'ArrowFunctionExpression'`
+- `'AssignmentExpression'`
+- `'AwaitExpression'`
+- `'BinaryExpression'`
+- `'CallExpression'`
+- `'ClassExpression'`
+- `'ConditionalExpression'`
+- `'FunctionExpression'`
+- `'Identifier'`
+- `'LogicalExpression'`
+- `'MemberExpression'`
+- `'NewExpression'`
+- `'ObjectExpression'`
+- `'SequenceExpression'`
+- `'SpreadElement'`
+- `'TaggedTemplateExpression'`
+- `'TemplateLiteral'`
+- `'ThisExpression'`
+- `'UnaryExpression'`
+- `'UpdateExpression'`
 
 
 
@@ -123,50 +123,48 @@ General purpose hook that is called when parsing statements in a code fragment.
 Parameters: `statement`
 
 ```js
-parser.hooks.statement.tap("MyPlugin" statement => {/* ... */})
+parser.hooks.statement.tap('MyPlugin', statement => {/* ... */});
 ```
 
 Where the `statement.type` could be:
 
-```js
-"BlockStatement"
-"ClassDeclaration"
-"DoWhileStatement"
-"ExportAllDeclaration"
-"ExportDefaultDeclaration"
-"ExportNamedDeclaration"
-"ForInStatement"
-"ForOfStatement"
-"ForStatement"
-"FunctionDeclaration"
-"IfStatement"
-"ImportDeclaration"
-"LabeledStatement"
-"SwitchStatement"
-"TryStatement"
-"VariableDeclaration"
-"WhileStatement"
-"WithStatement"
-"BlockStatement"
-"ClassDeclaration"
-"DoWhileStatement"
-"ExportDefaultDeclaration"
-"ExportNamedDeclaration"
-"ExpressionStatement"
-"ForInStatement"
-"ForOfStatement"
-"ForStatement"
-"FunctionDeclaration"
-"IfStatement"
-"LabeledStatement"
-"ReturnStatement"
-"SwitchStatement"
-"ThrowStatement"
-"TryStatement"
-"VariableDeclaration"
-"WhileStatement"
-"WithStatement"
-```
+- `'BlockStatement'`
+- `'ClassDeclaration'`
+- `'DoWhileStatement'`
+- `'ExportAllDeclaration'`
+- `'ExportDefaultDeclaration'`
+- `'ExportNamedDeclaration'`
+- `'ForInStatement'`
+- `'ForOfStatement'`
+- `'ForStatement'`
+- `'FunctionDeclaration'`
+- `'IfStatement'`
+- `'ImportDeclaration'`
+- `'LabeledStatement'`
+- `'SwitchStatement'`
+- `'TryStatement'`
+- `'VariableDeclaration'`
+- `'WhileStatement'`
+- `'WithStatement'`
+- `'BlockStatement'`
+- `'ClassDeclaration'`
+- `'DoWhileStatement'`
+- `'ExportDefaultDeclaration'`
+- `'ExportNamedDeclaration'`
+- `'ExpressionStatement'`
+- `'ForInStatement'`
+- `'ForOfStatement'`
+- `'ForStatement'`
+- `'FunctionDeclaration'`
+- `'IfStatement'`
+- `'LabeledStatement'`
+- `'ReturnStatement'`
+- `'SwitchStatement'`
+- `'ThrowStatement'`
+- `'TryStatement'`
+- `'VariableDeclaration'`
+- `'WhileStatement'`
+- `'WithStatement'`
 
 
 ### statementIf
