@@ -16,7 +16,7 @@ repo: https://github.com/webpack-contrib/terser-webpack-plugin
 
 
 
-This plugin uses [terser](https://github.com/fabiosantoscode/terser) to minify your JavaScript.
+This plugin uses [terser](https://github.com/terser-js/terser) to minify your JavaScript.
 
 ## Requirements
 
@@ -38,10 +38,9 @@ Then add the plugin to your `webpack` config. For example:
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-  //...
   optimization: {
-    minimizer: [new TerserPlugin()]
-  }
+    minimizer: [new TerserPlugin()],
+  },
 };
 ```
 
@@ -52,15 +51,22 @@ And run `webpack` via your preferred method.
 ### `test`
 
 Type: `String|RegExp|Array<String|RegExp>`
-Default: `/\.js(\?.*)?$/i`
+Default: `/\.m?js(\?.*)?$/i`
 
 Test to match files against.
 
+**webpack.config.js**
+
 ```js
-// in your webpack.config.js
-new TerserPlugin({
-  test: /\.js(\?.*)?$/i
-})
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        test: /\.js(\?.*)?$/i,
+      }),
+    ],
+  },
+};
 ```
 
 ### `include`
@@ -70,11 +76,18 @@ Default: `undefined`
 
 Files to include.
 
+**webpack.config.js**
+
 ```js
-// in your webpack.config.js
-new TerserPlugin({
-  include: /\/includes/
-})
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        include: /\/includes/,
+      }),
+    ],
+  },
+};
 ```
 
 ### `exclude`
@@ -84,11 +97,47 @@ Default: `undefined`
 
 Files to exclude.
 
+**webpack.config.js**
+
 ```js
-// in your webpack.config.js
-new TerserPlugin({
-  exclude: /\/excludes/
-})
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        exclude: /\/excludes/,
+      }),
+    ],
+  },
+};
+```
+
+### `chunkFilter`
+
+Type: `Function<(chunk) -> boolean>`
+Default: `() => true`
+
+Allowing to filter which chunks should be uglified (by default all chunks are uglified).
+Return `true` to uglify the chunk, `false` otherwise.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        chunkFilter: (chunk) => {
+          // Exclude uglification for the `vendor` chunk
+          if (chunk.name === 'vendor') {
+            return false;
+          }
+
+          return true;
+        },
+      }),
+    ],
+  },
+};
 ```
 
 ### `cache`
@@ -96,7 +145,7 @@ new TerserPlugin({
 Type: `Boolean|String`
 Default: `false`
 
-Enable file caching. 
+Enable file caching.
 Default path to cache directory: `node_modules/.cache/terser-webpack-plugin`.
 
 > ℹ️ If you use your own `minify` function please read the `minify` section for cache invalidation correctly.
@@ -105,11 +154,18 @@ Default path to cache directory: `node_modules/.cache/terser-webpack-plugin`.
 
 Enable/disable file caching.
 
+**webpack.config.js**
+
 ```js
-// in your webpack.config.js
-new TerserPlugin({
-  cache: true
-})
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        cache: true,
+      }),
+    ],
+  },
+};
 ```
 
 #### `String`
@@ -119,10 +175,15 @@ Enable file caching and set path to cache directory.
 **webpack.config.js**
 
 ```js
-// in your webpack.config.js
-new TerserPlugin({
-  cache: 'path/to/cache'
-})
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        cache: 'path/to/cache',
+      }),
+    ],
+  },
+};
 ```
 
 ### `cacheKeys`
@@ -140,20 +201,30 @@ Default cache keys:
   'terser-webpack-plugin': require('../package.json').version, // plugin version
   'terser-webpack-plugin-options': this.options, // plugin options
   path: compiler.outputPath ? `${compiler.outputPath}/${file}` : file, // asset path
-  hash: crypto.createHash('md4').update(input).digest('hex'), // source file hash
+  hash: crypto
+    .createHash('md4')
+    .update(input)
+    .digest('hex'), // source file hash
 });
 ```
 
-```js
-// in your webpack.config.js
-new TerserPlugin({
-  cache: true,
-  cacheKeys: (defaultCacheKeys, file) => {
-    defaultCacheKeys.myCacheKey = 'myCacheKeyValue';
+**webpack.config.js**
 
-    return defaultCacheKeys;
+```js
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        cache: true,
+        cacheKeys: (defaultCacheKeys, file) => {
+          defaultCacheKeys.myCacheKey = 'myCacheKeyValue';
+
+          return defaultCacheKeys;
+        },
+      }),
+    ],
   },
-})
+};
 ```
 
 ### `parallel`
@@ -161,7 +232,7 @@ new TerserPlugin({
 Type: `Boolean|Number`
 Default: `false`
 
-Use multi-process parallel running to improve the build speed. 
+Use multi-process parallel running to improve the build speed.
 Default number of concurrent runs: `os.cpus().length - 1`.
 
 > ℹ️ Parallelization can speedup your build significantly and is therefore **highly recommended**.
@@ -170,22 +241,36 @@ Default number of concurrent runs: `os.cpus().length - 1`.
 
 Enable/disable multi-process parallel running.
 
+**webpack.config.js**
+
 ```js
-// in your webpack.config.js
-new TerserPlugin({
-  parallel: true
-})
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+      }),
+    ],
+  },
+};
 ```
 
 #### `Number`
 
 Enable multi-process parallel running and set number of concurrent runs.
 
+**webpack.config.js**
+
 ```js
-// in your webpack.config.js
-new TerserPlugin({
-  parallel: 4
-})
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        parallel: 4,
+      }),
+    ],
+  },
+};
 ```
 
 ### `sourceMap`
@@ -198,11 +283,18 @@ If you use your own `minify` function please read the `minify` section for handl
 
 > ⚠️ **`cheap-source-map` options don't work with this plugin**.
 
+**webpack.config.js**
+
 ```js
-// in your webpack.config.js
-new TerserPlugin({
-  sourceMap: true
-})
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        sourceMap: true,
+      }),
+    ],
+  },
+};
 ```
 
 ### `minify`
@@ -210,56 +302,70 @@ new TerserPlugin({
 Type: `Function`
 Default: `undefined`
 
-Allows you to override default minify function. 
-By default plugin uses [terser](https://github.com/fabiosantoscode/terser) package.
+Allows you to override default minify function.
+By default plugin uses [terser](https://github.com/terser-js/terser) package.
 Useful for using and testing unpublished versions or forks.
 
 > ⚠️ **Always use `require` inside `minify` function when `parallel` option enabled**.
 
+**webpack.config.js**
+
 ```js
-// in your webpack.config.js
-new TerserPlugin({
-  minify(file, sourceMap) {
-    const extractedComments = [];
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        minify: (file, sourceMap) => {
+          const extractedComments = [];
 
-    // Custom logic for extract comments
+          // Custom logic for extract comments
 
-    const { error, map, code, warnings } = require('uglify-module') // Or require('./path/to/uglify-module')
-      .minify(file, {
-        /* Your options for minification */
-      });
+          const { error, map, code, warnings } = require('uglify-module') // Or require('./path/to/uglify-module')
+            .minify(file, {
+              /* Your options for minification */
+            });
 
-    return { error, map, code, warnings, extractedComments };
-  }
-})
+          return { error, map, code, warnings, extractedComments };
+        },
+      }),
+    ],
+  },
+};
 ```
 
 ### `terserOptions`
 
 Type: `Object`
-Default: [default](https://github.com/fabiosantoscode/terser#minify-options)
+Default: [default](https://github.com/terser-js/terser#minify-options)
 
-Terser minify options.
+Terser minify [options](https://github.com/terser-js/terser#minify-options).
+
+**webpack.config.js**
 
 ```js
-// in your webpack.config.js
-new TerserPlugin({
-  terserOptions: {
-    ecma: undefined,
-    warnings: false,
-    parse: {},
-    compress: {},
-    mangle: true, // Note `mangle.properties` is `false` by default.
-    module: false,
-    output: null,
-    toplevel: false,
-    nameCache: null,
-    ie8: false,
-    keep_classnames: undefined,
-    keep_fnames: false,
-    safari10: false
-  }
-})
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          ecma: undefined,
+          warnings: false,
+          parse: {},
+          compress: {},
+          mangle: true, // Note `mangle.properties` is `false` by default.
+          module: false,
+          output: null,
+          toplevel: false,
+          nameCache: null,
+          ie8: false,
+          keep_classnames: undefined,
+          keep_fnames: false,
+          safari10: false,
+        },
+      }),
+    ],
+  },
+};
 ```
 
 ### `extractComments`
@@ -276,69 +382,104 @@ The `terserOptions.output.comments` option specifies whether the comment will be
 
 Enable/disable extracting comments.
 
+**webpack.config.js**
+
 ```js
-// in your webpack.config.js
-new TerserPlugin({
-  extractComments: true
-})
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: true,
+      }),
+    ],
+  },
+};
 ```
 
 #### `String`
 
 Extract `all` or `some` (use `/^\**!|@preserve|@license|@cc_on/i` RegExp) comments.
 
+**webpack.config.js**
+
 ```js
-// in your webpack.config.js
-new TerserPlugin({
-  extractComments: 'all'
-})
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: 'all',
+      }),
+    ],
+  },
+};
 ```
 
 #### `RegExp`
 
-All comments that match the given expression will be extracted to the separate file. 
+All comments that match the given expression will be extracted to the separate file.
+
+**webpack.config.js**
 
 ```js
-// in your webpack.config.js
-new TerserPlugin({
-  extractComments: /@extract/i
-})
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: /@extract/i,
+      }),
+    ],
+  },
+};
 ```
 
 #### `Function<(node, comment) -> Boolean>`
 
-All comments that match the given expression will be extracted to the separate file. 
+All comments that match the given expression will be extracted to the separate file.
+
+**webpack.config.js**
 
 ```js
-// in your webpack.config.js
-new TerserPlugin({
-  extractComments: function (astNode, comment) {
-    if (/@extract/i.test(comment.value)) {
-      return true;
-    }
-    
-    return false;
-  }
-})
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: (astNode, comment) => {
+          if (/@extract/i.test(comment.value)) {
+            return true;
+          }
+
+          return false;
+        },
+      }),
+    ],
+  },
+};
 ```
 
 #### `Object`
 
 Allow to customize condition for extract comments, specify extracted file name and banner.
 
+**webpack.config.js**
+
 ```js
-// in your webpack.config.js
-new TerserPlugin({
-  extractComments: {
-    condition: /^\**!|@preserve|@license|@cc_on/i,
-    filename(file) {
-      return `${file}.LICENSE`;
-    },
-    banner(licenseFile) {
-      return `License information can be found in ${licenseFile}`;
-    }
-  }
-})
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: {
+          condition: /^\**!|@preserve|@license|@cc_on/i,
+          filename: (file) => {
+            return `${file}.LICENSE`;
+          },
+          banner: (licenseFile) => {
+            return `License information can be found in ${licenseFile}`;
+          },
+        },
+      }),
+    ],
+  },
+};
 ```
 
 ##### `condition`
@@ -347,19 +488,26 @@ Type: `Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>`
 
 Condition what comments you need extract.
 
+**webpack.config.js**
+
 ```js
-// in your webpack.config.js
-new TerserPlugin({
-  extractComments: {
-    condition: 'some',
-    filename(file) {
-     return `${file}.LICENSE`;
-    },
-    banner(licenseFile) {
-     return `License information can be found in ${licenseFile}`;
-    }
-  }
-})
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: {
+          condition: 'some',
+          filename: (file) => {
+            return `${file}.LICENSE`;
+          },
+          banner: (licenseFile) => {
+            return `License information can be found in ${licenseFile}`;
+          },
+        },
+      }),
+    ],
+  },
+};
 ```
 
 ##### `filename`
@@ -370,17 +518,24 @@ Default: `${file}.LICENSE`
 The file where the extracted comments will be stored.
 Default is to append the suffix `.LICENSE` to the original filename.
 
+**webpack.config.js**
+
 ```js
-// in your webpack.config.js
-new TerserPlugin({
-  extractComments: {
-    condition: /^\**!|@preserve|@license|@cc_on/i,
-    filename: 'extracted-comments.js',
-    banner(licenseFile) {
-     return `License information can be found in ${licenseFile}`;
-    }
-  }
-})
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: {
+          condition: /^\**!|@preserve|@license|@cc_on/i,
+          filename: 'extracted-comments.js',
+          banner: (licenseFile) => {
+            return `License information can be found in ${licenseFile}`;
+          },
+        },
+      }),
+    ],
+  },
+};
 ```
 
 ##### `banner`
@@ -388,23 +543,30 @@ new TerserPlugin({
 Type: `Boolean|String|Function<(string) -> String>`
 Default: `/*! For license information please see ${commentsFile} */`
 
-The banner text that points to the extracted file and will be added on top of the original file. 
-Can be `false` (no banner), a `String`, or a `Function<(string) -> String>` that will be called with the filename where extracted comments have been stored. 
+The banner text that points to the extracted file and will be added on top of the original file.
+Can be `false` (no banner), a `String`, or a `Function<(string) -> String>` that will be called with the filename where extracted comments have been stored.
 Will be wrapped into comment.
 
+**webpack.config.js**
+
 ```js
-// in your webpack.config.js
-new TerserPlugin({
-  extractComments: {
-    condition: true,
-    filename(file) {
-     return `${file}.LICENSE`;
-    },
-    banner(commentsFile) {
-     return `My custom banner about license information ${commentsFile}`;
-    }
-  }
-})
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: {
+          condition: true,
+          filename: (file) => {
+            return `${file}.LICENSE`;
+          },
+          banner: (commentsFile) => {
+            return `My custom banner about license information ${commentsFile}`;
+          },
+        },
+      }),
+    ],
+  },
+};
 ```
 
 ### `warningsFilter`
@@ -412,24 +574,31 @@ new TerserPlugin({
 Type: `Function<(warning, source) -> Boolean>`
 Default: `() => true`
 
-Allow to filter [terser](https://github.com/fabiosantoscode/terser) warnings.
+Allow to filter [terser](https://github.com/terser-js/terser) warnings.
 Return `true` to keep the warning, `false` otherwise.
 
+**webpack.config.js**
+
 ```js
-// in your webpack.config.js
-new TerserPlugin({
-  warningsFilter: (warning, source) => {
-    if (/Dropping unreachable code/i.test(warning)) {
-      return true;
-    }
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        warningsFilter: (warning, source) => {
+          if (/Dropping unreachable code/i.test(warning)) {
+            return true;
+          }
 
-    if (/filename\.js/i.test(source)) {
-      return true;
-    }
+          if (/filename\.js/i.test(source)) {
+            return true;
+          }
 
-    return false;
+          return false;
+        },
+      }),
+    ],
   },
-})
+};
 ```
 
 ## Examples
@@ -438,20 +607,18 @@ new TerserPlugin({
 
 Enable cache and multi-process parallel running.
 
-```js
-// in your webpack.config.js
-const TerserPlugin = require('terser-webpack-plugin');
+**webpack.config.js**
 
+```js
 module.exports = {
-  //...
   optimization: {
     minimizer: [
       new TerserPlugin({
         cache: true,
-        parallel: true
-      })
-    ]
-  }
+        parallel: true,
+      }),
+    ],
+  },
 };
 ```
 
@@ -459,24 +626,44 @@ module.exports = {
 
 Extract all legal comments (i.e. `/^\**!|@preserve|@license|@cc_on/i`) and preserve `/@license/i` comments.
 
-```js
-// in your webpack.config.js
-const TerserPlugin = require('terser-webpack-plugin');
+**webpack.config.js**
 
+```js
 module.exports = {
-  //...
   optimization: {
     minimizer: [
       new TerserPlugin({
         terserOptions: {
           output: {
-            comments: /@license/i
-          }
+            comments: /@license/i,
+          },
         },
-        extractComments: true
-      })
-    ]
-  }
+        extractComments: true,
+      }),
+    ],
+  },
+};
+```
+
+### Remove Comments
+
+If you avoid building with comments, set **terserOptions.output.comments** to **false** as in this config:
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          output: {
+            comments: false,
+          },
+        },
+      }),
+    ],
+  },
 };
 ```
 
@@ -484,18 +671,16 @@ module.exports = {
 
 Override default minify function - use `uglify-js` for minification.
 
-```js
-// in your webpack.config.js
-const TerserPlugin = require('terser-webpack-plugin');
+**webpack.config.js**
 
+```js
 module.exports = {
-  //...
   optimization: {
     minimizer: [
       new TerserPlugin({
         // Uncomment lines below for cache invalidation correctly
         // cache: true,
-        // cacheKeys(defaultCacheKeys) {
+        // cacheKeys: (defaultCacheKeys) => {
         //   delete defaultCacheKeys.terser;
         //
         //   return Object.assign(
@@ -504,23 +689,23 @@ module.exports = {
         //     { 'uglify-js': require('uglify-js/package.json').version },
         //   );
         // },
-        minify(file, sourceMap) {
+        minify: (file, sourceMap) => {
           // https://github.com/mishoo/UglifyJS2#minify-options
           const uglifyJsOptions = {
             /* your `uglify-js` package options */
           };
-      
+
           if (sourceMap) {
             uglifyJsOptions.sourceMap = {
               content: sourceMap,
             };
           }
-      
+
           return require('uglify-js').minify(file, uglifyJsOptions);
         },
-      })
-    ]
-  }
+      }),
+    ],
+  },
 };
 ```
 

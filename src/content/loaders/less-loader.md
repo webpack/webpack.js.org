@@ -277,7 +277,7 @@ file paths in `url(...)` statements.
 Please take a moment to read our contributing guidelines if you haven't yet done
 so.
 
-#### [CONTRIBUTING](https://raw.githubusercontent.com/webpack-contrib/less-loader/master/.github/CONTRIBUTING)
+#### [CONTRIBUTING](https://raw.githubusercontent.com/webpack-contrib/less-loader/master/.github/CONTRIBUTING.md)
 
 ## License
 

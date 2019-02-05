@@ -298,7 +298,7 @@ If you'd like to extract the media queries from the extracted CSS (so mobile use
 
 ## License
 
-#### [MIT](https://raw.githubusercontent.com/webpack-contrib/mini-css-extract-plugin/master/LICENSE)
+[MIT](https://raw.githubusercontent.com/webpack-contrib/mini-css-extract-plugin/master/LICENSE)
 
 [npm]: https://img.shields.io/npm/v/mini-css-extract-plugin.svg
 [npm-url]: https://npmjs.com/package/mini-css-extract-plugin

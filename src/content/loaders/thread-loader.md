@@ -55,7 +55,8 @@ use: [
     loader: "thread-loader",
     // loaders with equal options will share worker pools
     options: {
-      // the number of spawned workers, defaults to number of cpus
+      // the number of spawned workers, defaults to (number of cpus - 1) or
+      // fallback to 1 when require('os').cpus() is undefined
       workers: 2,
 
       // number of jobs a worker processes in parallel
@@ -64,6 +65,11 @@ use: [
 
       // additional node.js arguments
       workerNodeArgs: ['--max-old-space-size=1024'],
+
+      // Allow to respawn a dead worker pool
+      // respawning slows down the entire compilation
+      // and should be set to false for development
+      poolRespawn: false,
 
       // timeout for killing the worker processes when idle
       // defaults to 500 (ms)

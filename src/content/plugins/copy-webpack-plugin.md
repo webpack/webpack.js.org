@@ -255,7 +255,7 @@ and so on...
     {
       from: 'src/*.png',
       to: 'dest/',
-      transform (targePath, absolutePath) {
+      transformPath (targePath, absolutePath) {
         return Promise.resolve('newPath')
       }
   }
