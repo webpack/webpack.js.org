@@ -172,7 +172,7 @@ __dist/index.html__
    </head>
    <body>
 -    <script src="./src/index.js"></script>
-+    <script src="main.js"></script>
++    <script src="./dist/main.js"></script>
    </body>
   </html>
 ```
