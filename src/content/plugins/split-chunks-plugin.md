@@ -167,7 +167,7 @@ T> `maxSize` takes higher priority than `maxInitialRequest/maxAsyncRequests`. Ac
 
 The name of the split chunk. Providing `true` will automatically generate a name based on chunks and cache group key.
 
-Providing a string or a function allows you to use a custom name. Specifying a string (or a function that always returns the same string) will merge all common modules and vendors into a single chunk. This probably leads to more code downloaded than needed.
+Providing a string or a function allows you to use a custom name. Specifying either a string or a function that always returns the same string will merge all common modules and vendors into a single chunk. This might lead to bigger initial downloads and slow down page loads.
 
 If the name matches an [entry point](/configuration/entry-context/#entry) name, the entry point will be removed.
 
