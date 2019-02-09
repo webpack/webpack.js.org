@@ -5,7 +5,7 @@ sort: 4
 contributors:
   - byzyk
   - DeTeam
-  - MisterDev
+  - misterDev
 ---
 
 The `parser` instance, found in the `compiler`, is used to parse each module
@@ -38,15 +38,28 @@ as such:
 
 `SyncBailHook`
 
-Triggered when evaluating the `typeof` of an identifier.
+Triggered when evaluating an expression consisting in a `typeof` of a free variable
 
-Parameters: `expression`
+- Hook Parameters: `identifier`
+
+- Callback Parameters: `expression`
 
 ```js
-parser.hooks.evaluateTypeof.for('identifier').tap('MyPlugin', expression => {
+parser.hooks.evaluateTypeof.for('myIdentifier').tap('MyPlugin', expression => {
   /* ... */
   return expressionResult;
 });
+```
+
+```js
+// This will trigger the evaluateTypeof hook
+const a = typeof myIdentifier;
+```
+
+```js
+// This won't
+const myIdentifier = 0;
+const b = typeof myIdentifier;
 ```
 
 
@@ -54,9 +67,11 @@ parser.hooks.evaluateTypeof.for('identifier').tap('MyPlugin', expression => {
 
 `SyncBailHook`
 
-Called when evaluating an expression, requires an expression type.
+Called when evaluating an expression.
 
-Parameters: `expression`
+- Hook parameters: `expressionType`
+
+- Callback parameters: `expression`
 
 ```js
 parser.hooks.evaluate.for(/* expression type */).tap(/* ... */);
@@ -86,14 +101,15 @@ Where the expressions types are:
 - `'UpdateExpression'`
 
 
-
 ### evaluateIdentifier
 
 `SyncBailHook`
 
-Evaluate an identifier that is a free variable, requires an identifier.
+Evaluate an identifier that is a free variable.
 
-Parameters: `expression`
+- Hook Parameters: `identifier`
+
+- Callback Parameters: `expression`
 
 
 ### evaluateDefinedIdentifier
@@ -102,7 +118,9 @@ Parameters: `expression`
 
 Evaluate an identifier that is a defined variable.
 
-Parameters: `expression`
+- Hook Parameters: `identifier`
+
+- Callback Parameters: `expression`
 
 
 ### evaluateCallExpressionMember
@@ -111,7 +129,14 @@ Parameters: `expression`
 
 Evaluate a call to a member function of a successfully evaluated expression.
 
-Parameters: `expression` `param`
+- Hook Parameters: `identifier`
+
+- Callback Parameters: `expression` `param`
+
+```js
+// This will trigger the hook for('myFunc')
+const a = expression.myFunc();
+```
 
 
 ### statement
@@ -120,7 +145,7 @@ Parameters: `expression` `param`
 
 General purpose hook that is called for every parsed statement in a code fragment.
 
-Parameters: `statement`
+- Callback Parameters: `statement`
 
 ```js
 parser.hooks.statement.tap('MyPlugin', statement => { /* ... */ });
@@ -155,28 +180,29 @@ Where the `statement.type` could be:
 
 `SyncBailHook`
 
-Called when parsing an if statement. It's the same as the `statement` hook, but is triggered only when `statement.type == 'IfStatement'`
+Called when parsing an if statement. Same as the `statement` hook, but triggered only when `statement.type == "IfStatement"`
 
-Parameters: `statement`
+- Callback Parameters: `statement`
 
 
 ### label
 
 `SyncBailHook`
 
-Called when parsing statement with a [label](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label).
-It requires a `label` and is triggered for statements having `statement.type === 'LabeledStatement'`.
+Called when parsing statements with a [label](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label). Those statements have `statement.type === 'LabeledStatement'`.
 
-Parameters: `statement`
+- Hook Parameters: `labelName`
+
+- Callback Parameters: `statement`
 
 
 ### import
 
 `SyncBailHook`
 
-Called for every import statement in a code fragment. The `source` parameter contains the name of the imported file
+Called for every import statement in a code fragment. The `source` parameter contains the name of the imported file.
 
-Parameters: `statement` `source`
+- Callback Parameters: `statement` `source`
 
 ```js
 import _ from 'lodash';
@@ -194,7 +220,7 @@ parser.hooks.import.tap('MyPlugin', (statement, source) => {
 
 Called for every specifier of every `import` statement.
 
-Parameters: `statement` `source` `exportName` `identifierName`
+- Callback Parameters: `statement` `source` `exportName` `identifierName`
 
 ```js
 import _, { has } from 'lodash';
@@ -219,54 +245,63 @@ parser.hooks.import.tap('MyPlugin', (statement, source, exportName, identifierNa
 
 `SyncBailHook`
 
-...
+Called for every `export` statement in a code fragment.
 
-Parameters: `statement`
+- Callback Parameters: `statement`
 
 
 ### exportImport
 
 `SyncBailHook`
 
-...
+Called for every `export`-import statement eg: `export * from 'otherModule';`.
 
-Parameters: `statement` `source`
+- Callback Parameters: `statement` `source`
 
 
 ### exportDeclaration
 
 `SyncBailHook`
 
-...
+Called for every `export` statement exporting a declaration.
 
-Parameters: `statement` `declaration`
+- Callback Parameters: `statement` `declaration`
+
+
+```js
+// Those will trigger the hook
+// also var, let
+export const myVar = 'hello';
+export function FunctionName(){}
+export class ClassName {}
+```
 
 
 ### exportExpression
 
 `SyncBailHook`
 
-...
+Called for every `export` statement exporting an expression e.g.`export default expression;`.
 
-Parameters: `statement` `declaration`
+- Callback Parameters: `statement` `declaration`
 
 
 ### exportSpecifier
 
 `SyncBailHook`
 
-...
+Called for every specifier of every `export` statement.
 
-Parameters: `statement` `identifierName` `exportName` `index`
+- Callback Parameters: `statement` `identifierName` `exportName` `index`
 
 
 ### exportImportSpecifier
 
 `SyncBailHook`
 
-...
+Called for every specifier of every `export`-import statement.
 
-Parameters: `statement` `source` `identifierName` `exportName` `index`
+- Callback Parameters: `statement` `source` `identifierName` `exportName` `index`
 
 
 ### varDeclaration
@@ -275,7 +310,7 @@ Parameters: `statement` `source` `identifierName` `exportName` `index`
 
 Called when parsing a variable declaration.
 
-Parameters: `declaration`
+- Callbak Parameters: `declaration`
 
 
 ### varDeclarationLet
@@ -284,7 +319,7 @@ Parameters: `declaration`
 
 Called when parsing a variable declaration defined using `let`
 
-Parameters: `declaration`
+- Callbak Parameters: `declaration`
 
 
 ### varDeclarationConst
@@ -293,7 +328,7 @@ Parameters: `declaration`
 
 Called when parsing a variable declaration defined using `const`
 
-Parameters: `declaration`
+- Callbak Parameters: `declaration`
 
 
 ### varDeclarationVar
@@ -302,7 +337,7 @@ Parameters: `declaration`
 
 Called when parsing a variable declaration defined using `var`
 
-Parameters: `declaration`
+- Callbak Parameters: `declaration`
 
 
 ### canRename
