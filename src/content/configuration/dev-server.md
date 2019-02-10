@@ -174,7 +174,7 @@ webpack-dev-server --bonjour
 
 When using _inline mode_, the console in your DevTools will show you messages e.g. before reloading, before an error or when [Hot Module Replacement](/concepts/hot-module-replacement/) is enabled. Defaults to `info`.
 
-`devServer.clientLogLevel` may be too verbose, you can turn to log off by setting it to  `'none'`.
+`devServer.clientLogLevel` may be too verbose, you can turn logging off by setting it to  `'none'`.
 
 __webpack.config.js__
 
@@ -930,7 +930,7 @@ module.exports = {
 };
 ```
 
-The origin of the host header is kept when proxying by default, you can set `changeOrigin` to `true` to override this behavior. It is useful in some cases like using [name-based virtual hosted sites](https://en.wikipedia.org/wiki/Virtual_hosting#Name-based).
+The origin of the host header is kept when proxying by default, you can set `changeOrigin` to `true` to override this behaviour. It is useful in some cases like using [name-based virtual hosted sites](https://en.wikipedia.org/wiki/Virtual_hosting#Name-based).
 
 __webpack.config.js__
 
