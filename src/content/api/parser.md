@@ -5,7 +5,7 @@ sort: 4
 contributors:
   - byzyk
   - DeTeam
-  - misterDev
+  - misterdev
 ---
 
 The `parser` instance, found in the `compiler`, is used to parse each module
@@ -105,7 +105,7 @@ Where the expressions types are:
 
 `SyncBailHook`
 
-Evaluate an identifier that is a free variable.
+Called when evaluating an identifier that is a free variable.
 
 - Hook Parameters: `identifier`
 
@@ -116,7 +116,7 @@ Evaluate an identifier that is a free variable.
 
 `SyncBailHook`
 
-Evaluate an identifier that is a defined variable.
+Called when evaluating an identifier that is a defined variable.
 
 - Hook Parameters: `identifier`
 
@@ -127,7 +127,7 @@ Evaluate an identifier that is a defined variable.
 
 `SyncBailHook`
 
-Evaluate a call to a member function of a successfully evaluated expression.
+Called when evaluating a call to a member function of a successfully evaluated expression.
 
 - Hook Parameters: `identifier`
 
@@ -205,6 +205,7 @@ Called for every import statement in a code fragment. The `source` parameter con
 - Callback Parameters: `statement` `source`
 
 ```js
+// index.js
 import _ from 'lodash';
 
 // MyPlugin.js
@@ -223,6 +224,7 @@ Called for every specifier of every `import` statement.
 - Callback Parameters: `statement` `source` `exportName` `identifierName`
 
 ```js
+// index.js
 import _, { has } from 'lodash';
 
 // MyPlugin.js
@@ -270,8 +272,7 @@ Called for every `export` statement exporting a declaration.
 
 ```js
 // Those will trigger the hook
-// also var, let
-export const myVar = 'hello';
+export const myVar = 'hello'; // also var, let
 export function FunctionName(){}
 export class ClassName {}
 ```
@@ -344,36 +345,71 @@ Called when parsing a variable declaration defined using `var`
 
 `SyncBailHook`
 
-...
+Triggered before renaming an identifier to determine if the renaming is allowed. This is usually used together with the `rename` hook.
 
-Parameters: `initExpression`
+- Hook Parameters: `identifier`
+- Callback Parameters: `expression`
+
+```js
+var a = b;
+
+parser.hooks.canRename.for('b').tap('MyPlugin', expression => {
+  // returning true allows renaming
+  return true;
+});
+```
 
 
 ### rename
 
 `SyncBailHook`
 
-...
+Triggered when renaming to get the new identifier. This hook will be called only if `canRename` returns `true`.
 
-Parameters: `initExpression`
+- Hook Parameters: `identifier`
+- Callback Parameters: `expression`
+
+```js
+var a = b;
+
+parser.hooks.rename.for('b').tap('MyPlugin', expression => {});
+```
 
 
 ### assigned
 
 `SyncBailHook`
 
-...
+Called when parsing an `AssignmentExpression` before parsing the assigned expression.
 
-Parameters: `expression`
+- Hook Parameters: `identifier`
+- Callback Parameters: `expression`
+
+```js
+a += b;
+
+parser.hooks.assigned.for('a').tap('MyPlugin', expression => {
+  /* this is called before parsing b */
+});
+```
 
 
 ### assign
 
 `SyncBailHook`
 
-...
+Called when parsing an `AssignmentExpression` before parsing the assign expression.
 
-Parameters: `expression`
+- Hook Parameters: `identifier`
+- Callback Parameters: `expression`
+
+```js
+a += b;
+
+parser.hooks.assigned.for('a').tap('MyPlugin', expression => {
+  /* this is called before parsing a */
+});
+```
 
 
 ### typeof
@@ -382,61 +418,97 @@ Parameters: `expression`
 
 Triggered when parsing the `typeof` of an identifier
 
-Parameters: `expression`
+- Hook Parameters: `identifier`
+- Callback Parameters: `expression`
 
 
 ### call
 
 `SyncBailHook`
 
-...
+Called when parsing a function call.
 
-Parameters: `expression`
+- Hook Paramaeters: `identifier`
+- Callback Parameters: `expression`
+
+```js
+eval(/* something */);
+
+parser.hooks.call.for('eval').tap('MyPlugin', expression => {});
+```
 
 
 ### callAnyMember
 
 `SyncBailHook`
 
-...
+Triggered when parsing a call to a member function of an object. 
 
-Parameters: `expression`
+- Hook Parameters: `objectIdentifier`
+- Callback Parameters: `expression`
+
+```js
+myObj.anyFunc();
+
+parser.hooks.callAnyMember.for('myObj').tap('MyPlugin', expression => {});
+```
 
 
 ### new
 
 `SyncBailHook`
 
-...
+Invoked when parsing a `new` expression. 
 
-Parameters: `expression`
+- Hook Parameters: `identifier`
+- Callback Parameters: `expression`
+
+```js
+new MyClass();
+
+parser.hooks.new.for('MyClass').tap('MyPlugin', expression => {});
+```
 
 
 ### expression
 
 `SyncBailHook`
 
-...
+Called when parsing an expression.
 
-Parameters: `expression`
+- Hook Parameters: `identifier`
+- Callback Parameters: `expression`
+
+```js
+const a = this;
+
+parser.hooks.new.for('this').tap('MyPlugin', expression => {});
+```
 
 
 ### expressionAnyMember
 
 `SyncBailHook`
 
-...
+Executed when parsing a `MemberExpression`.
 
-Parameters: `expression`
+- Hook Parameters: `identifier`
+- Callback Parameters: `expression`
+
+```js
+const a = process.env;
+
+parser.hooks.new.for('process').tap('MyPlugin', expression => {});
+```
 
 
 ### expressionConditionalOperator
 
 `SyncBailHook`
 
-...
+Called when parsing a `ConditionalExpression` e.g. `condition ? a : b`
 
-Parameters: `expression`
+- Callback Parameters: `expression`
 
 
 ### program
