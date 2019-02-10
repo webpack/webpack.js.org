@@ -1,5 +1,5 @@
 ---
-title: Parser
+title: Parser Hooks
 group: Plugins
 sort: 4
 contributors:
