@@ -169,7 +169,7 @@ The name of the split chunk. Providing `true` will automatically generate a name
 
 Providing a string or a function allows you to use a custom name. Specifying either a string or a function that always returns the same string will merge all common modules and vendors into a single chunk. This might lead to bigger initial downloads and slow down page loads.
 
-If the name matches an [entry point](/configuration/entry-context/#entry) name, the entry point will be removed.
+If the `splitChunks.name` matches an [entry point](/configuration/entry-context/#entry) name, the entry point will be removed.
 
 T> It is recommended to set `splitChunks.name` to `false` for production builds so that it doesn't change names unnecessarily.
 
