@@ -111,7 +111,7 @@ module.exports = (env) => ({
         'api/plugins/compiler': '/api/compiler-hooks/',
         'api/plugins/compilation': '/api/compilation/',
         'api/plugins/module-factories': '/api/module-methods/',
-        'api/plugins/parser': '/api/parser-hooks/',
+        'api/plugins/parser': '/api/parser/',
         'api/plugins/tapable': '/api/tapable/',
         'api/plugins/template': '/api/template/',
         'api/plugins/resolver': '/api/resolver/',
