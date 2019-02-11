@@ -42,7 +42,7 @@ Option                | Description
 `production`          | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `production`. Enables `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin`, `OccurrenceOrderPlugin`, `SideEffectsFlagPlugin` and `TerserPlugin`.
 `none`                | Opts out of any default optimization options
 
-If not set, webpack sets `production` as the default value for `mode`. The supported values for mode are:
+If not set, webpack sets `production` as the default value for `mode`.
 
 T> Please remember that setting `NODE_ENV` doesn't automatically set `mode`.
 
