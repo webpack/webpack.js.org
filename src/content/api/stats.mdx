@@ -134,7 +134,7 @@ What good would these statistics be without some description of the compiled app
   ],
   "errors": 0, // Number of errors when resolving or processing the module
   "failed": false, // Whether or not compilation failed on this module
-  "id": 0, // The ID of the module (analagous to [`module.id`](/api/module-variables#module-id-commonjs-))
+  "id": 0, // The ID of the module (analogous to [`module.id`](/api/module-variables#module-id-commonjs-))
   "identifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // A unique ID used internally
   "name": "./lib/index.web.js", // Path to the actual file
   "optional": false, // All requests to this module are with `try... catch` blocks (irrelevant with ESM)

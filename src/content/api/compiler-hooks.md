@@ -81,7 +81,7 @@ Runs a plugin before the environment is prepared.
 
 `SyncHook`
 
-Executes a plugin a environment setup is complete.
+Executes a plugin after the environment setup is complete.
 
 
 ### `beforeRun`
