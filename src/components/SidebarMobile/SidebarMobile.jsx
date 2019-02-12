@@ -1,35 +1,37 @@
 import React from 'react';
 import Link from '../Link/Link';
+import './SidebarMobile.scss';
 
-let initialTouchPosition = {};
-let lastTouchPosition = {};
-
+// TODO: Check to make sure all pages are shown and properly sorted
 export default class SidebarMobile extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this._handleBodyClick = this._handleBodyClick.bind(this);
-  }
+  _container = null
+  _initialTouchPosition = {}
+  _lastTouchPosition = {}
 
   render() {
+    let { isOpen, toggle } = this.props;
+    let openMod = isOpen ? ' sidebar-mobile--visible' : '';
+
+    this._toggleBodyListener(isOpen);
+
     return (
       <nav
-        className="sidebar-mobile"
-        ref={ ref => this.container = ref }
-        onTouchStart={this._handleTouchStart.bind(this)}
-        onTouchMove={this._handleTouchMove.bind(this)}
-        onTouchEnd={this._handleTouchEnd.bind(this)}>
+        className={ `sidebar-mobile${openMod}` }
+        ref={ ref => this._container = ref }
+        onTouchStart={ this._handleTouchStart }
+        onTouchMove={ this._handleTouchMove }
+        onTouchEnd={ this._handleTouchEnd }>
 
         <div
           className="sidebar-mobile__toggle"
-          onTouchStart={this._handleTouchStart.bind(this)}
-          onTouchMove={this._handleOpenerTouchMove.bind(this)}
-          onTouchEnd={this._handleTouchEnd.bind(this)} />
+          onTouchStart={ this._handleTouchStart }
+          onTouchMove={ this._handleOpenerTouchMove }
+          onTouchEnd={ this._handleTouchEnd } />
 
         <div className="sidebar-mobile__content">
           <i
             className="sidebar-mobile__close icon-cross"
-            onClick={ this._close.bind(this) } />
+            onClick={ toggle.bind(null, false) } />
 
           { this._getSections() }
         </div>
@@ -37,18 +39,9 @@ export default class SidebarMobile extends React.Component {
     );
   }
 
-  componentDidMount() {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('click', this._handleBodyClick);
-      window.addEventListener('touchstart', this._handleBodyClick);
-    }
-  }
-
-  componentWillUnmount() {
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('click', this._handleBodyClick);
-      window.removeEventListener('touchstart', this._handleBodyClick);
-    }
+  _toggleBodyListener(add) {
+    let actionName = add ? 'addEventListener' : 'removeEventListener';
+    window[actionName]('mousedown', this._handleBodyClick);
   }
 
   /**
@@ -59,27 +52,26 @@ export default class SidebarMobile extends React.Component {
   _getSections() {
     let pathname = '';
 
-    if (typeof window !== 'undefined') {
+    if (window && window.location !== undefined) {
       pathname = window.location.pathname;
     }
 
     return this.props.sections.map(section => {
-      let active = pathname === section.url || pathname.includes(`/${section.url}`),
-          absoluteUrl = (section.url == '/') ? '/' : `/${section.url}`;
+      let active = section.url !== '/' && pathname.startsWith(section.url);
 
       return (
         <div
           className={ `sidebar-mobile__section ${active ? 'sidebar-mobile__section--active' : ''}` }
-          key={ absoluteUrl }>
+          key={ section.url }>
           <Link
             className="sidebar-mobile__section-header"
-            key={ absoluteUrl }
-            to={ absoluteUrl }
-            onClick={ this._close.bind(this) }>
+            key={ section.url }
+            to={ section.url }
+            onClick={ this.props.toggle.bind(null, false) }>
             <h3>{ section.title || section.url }</h3>
           </Link>
 
-          { this._getPages(section.pages) }
+          { this._getPages(section.children) }
         </div>
       );
     });
@@ -94,20 +86,20 @@ export default class SidebarMobile extends React.Component {
   _getPages(pages) {
     let pathname = '';
 
-    if (typeof window !== 'undefined') {
+    if (window.location !== undefined) {
       pathname = window.location.pathname;
     }
 
     return pages.map(page => {
       let url = `${page.url}`,
-        active = pathname === url || pathname.includes(`${url}/`);
+        active = pathname === url;
 
       return (
         <Link
           key={ url }
           className={ `sidebar-mobile__page ${active ? 'sidebar-mobile__page--active' : ''}` }
           to={ url }
-          onClick={ this._close.bind(this) }>
+          onClick={ this.props.toggle.bind(null, false) }>
           { page.title }
         </Link>
       );
@@ -121,74 +113,65 @@ export default class SidebarMobile extends React.Component {
    */
   _handleBodyClick = e => {
     if (
-      !e.target.classList.contains('icon-menu') &&
-      !this.container.contains(e.target)
+      this.props.isOpen &&
+      !this._container.contains(e.target)
     ) {
-      this._close();
+      this.props.toggle(false);
     }
   }
 
-  /**
-   * Hide the sidebar
-   *
-   */
-  _close() {
-    this.container.classList.remove(
-      'sidebar-mobile--visible'
-    );
-  }
-
-  _open() {
-    this.container.classList.add(
-      'sidebar-mobile--visible'
-    );
-  }
-
-  _handleTouchStart(e){
-    initialTouchPosition.x = e.touches[0].pageX;
-    initialTouchPosition.y = e.touches[0].pageY;
+  _handleTouchStart = e => {
+    this._initialTouchPosition.x = e.touches[0].pageX;
+    this._initialTouchPosition.y = e.touches[0].pageY;
 
     // For instant transform along with the touch
-    this.container.classList.add('no-delay');
+    this._container.classList.add('no-delay');
   }
 
-  _handleTouchMove(e){
-    let xDiff = initialTouchPosition.x - e.touches[0].pageX;
-    let yDiff = initialTouchPosition.y - e.touches[0].pageY;
+  _handleTouchMove = e => {
+    let xDiff = this._initialTouchPosition.x - e.touches[0].pageX;
+    let yDiff = this._initialTouchPosition.y - e.touches[0].pageY;
     let factor = Math.abs(yDiff / xDiff);
 
     // Factor makes sure horizontal and vertical scroll dont take place together
-    if (xDiff>0 && factor < 0.8) {
+    if (xDiff > 0 && factor < 0.8) {
       e.preventDefault();
-      this.container.style.transform = `translateX(-${xDiff}px)`;
-      lastTouchPosition.x = e.touches[0].pageX;
-      lastTouchPosition.y = e.touches[0].pageY;
+      this._container.style.transform = `translateX(-${xDiff}px)`;
+      this._lastTouchPosition.x = e.touches[0].pageX;
+      this._lastTouchPosition.y = e.touches[0].pageY;
     }
   }
 
-  _handleOpenerTouchMove(e){
-    let xDiff = e.touches[0].pageX - initialTouchPosition.x;
-    let yDiff = initialTouchPosition.y - e.touches[0].pageY;
+  _handleOpenerTouchMove = e => {
+    let xDiff = e.touches[0].pageX - this._initialTouchPosition.x;
+    let yDiff = this._initialTouchPosition.y - e.touches[0].pageY;
     let factor = Math.abs(yDiff / xDiff);
 
     // Factor makes sure horizontal and vertical scroll dont take place together
     if (xDiff > 0 && xDiff < 295 && factor < 0.8) {
       e.preventDefault();
-      this.container.style.transform = `translateX(calc(-100% + ${xDiff}px))`;
-      lastTouchPosition.x = e.touches[0].pageX;
-      lastTouchPosition.y = e.touches[0].pageY;
+      this._container.style.transform = `translateX(calc(-100% + ${xDiff}px))`;
+      this._lastTouchPosition.x = e.touches[0].pageX;
+      this._lastTouchPosition.y = e.touches[0].pageY;
     }
   }
 
-  _handleTouchEnd(e){
-    // Free up all the inline styling
-    this.container.classList.remove('no-delay');
-    this.container.style.transform = '';
+  _handleTouchEnd = e => {
+    const { isOpen } = this.props;
+    const threshold = 20;
 
-    if (initialTouchPosition.x - lastTouchPosition.x > 100) {
-      this._close();
-    } else if (lastTouchPosition.x - initialTouchPosition.x > 100) {
-      this._open();
+    // Free up all the inline styling
+    this._container.classList.remove('no-delay');
+    this._container.style.transform = '';
+
+    // are we open?
+    if (isOpen && this._initialTouchPosition.x - this._lastTouchPosition.x > threshold) {
+      // this is in top level nav callback
+      this.props.toggle(false);
+    } else if (!isOpen && this._lastTouchPosition.x - this._initialTouchPosition.x > threshold) {
+      this.props.toggle(true);
+      e.preventDefault();
+      e.stopPropagation();
     }
   }
 }

@@ -98,6 +98,6 @@ Use a different service URL in production/development builds:
 
 ```javascript
 new webpack.DefinePlugin({
-  'SERVICE_URL': JSON.stringify('http://dev.example.com')
+  'SERVICE_URL': JSON.stringify('https://dev.example.com')
 });
 ```
