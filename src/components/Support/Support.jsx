@@ -137,7 +137,6 @@ export default class Support extends React.Component {
                 src={ supporter.avatar || SmallIcon }
                 alt={ supporter.name || supporter.slug ? `${supporter.name || supporter.slug}'s avatar` : 'avatar' }
                 onError={ this._handleImgError } />}
-              { rank === 'backer' ? <figure className="support__outline" /> : null }
             </a>
           ))
         }
