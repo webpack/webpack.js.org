@@ -453,3 +453,22 @@ module.exports = {
   }
 };
 ```
+
+## `optimization.mangleExports`
+
+`bool`
+
+`optimization.mangleExports` allows to control export mangling.
+
+By default `optimization.mangleExports` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    mangleExports: true
+  }
+};
+```
