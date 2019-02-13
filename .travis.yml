@@ -19,8 +19,6 @@ stages:
 
 jobs:
   fast_finish: true
-  allow_failures:
-    - name: External Link Check
 
   include:
     - stage: Build
@@ -48,7 +46,3 @@ jobs:
       name: Deploy
       if: branch = master AND type = push
       script: bash ./src/scripts/deploy.sh
-
-    - stage: Post-build
-      name: External Link Check
-      script: yarn linkcheck
