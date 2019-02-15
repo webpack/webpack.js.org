@@ -52,7 +52,7 @@ module.exports = (env = {}) => ({
     symlinks: false,
     extensions: ['.js', '.jsx', '.scss'],
     alias: {
-      "/content/vote": path.resolve(__dirname, "app/components/vote")
+      '/content/vote': path.resolve(__dirname, 'app/components/vote')
     }
   },
   module: {
