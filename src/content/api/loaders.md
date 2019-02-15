@@ -17,6 +17,7 @@ The first loader is passed one argument: the content of the resource file. The c
 
 A single result can be returned in __sync mode__. For multiple results the `this.callback()` must be called. In __async mode__ `this.async()` must be called to indicate that the [loader runner](https://github.com/webpack/loader-runner) should wait for an asynchronous result. It returns `this.callback()`. Then the loader must return `undefined` and call that callback.
 
+TODO: Add info about loader overrides
 
 ## Examples
 
