@@ -33,13 +33,7 @@ if (isClient) {
         render={ props => (
           <Site
             { ...props }
-            import={ path => {
-              if (path === entryPath) {
-                return import(`./content/${path}`);
-              } else {
-                return import(`./content/${path}`);
-              }
-            }} />
+            import={ path => import(`./content/${path}`) } />
         )} />
     </Router>
   ), document.getElementById('root'));
