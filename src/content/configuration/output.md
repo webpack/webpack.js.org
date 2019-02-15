@@ -16,6 +16,7 @@ contributors:
   - harshwardhansingh
   - eemeli
   - EugeneHlushko
+  - g-plane
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -338,6 +339,11 @@ The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (de
 If using a function for this option, the function will be passed an object containing the substitutions in the table above.
 
 T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
+
+
+## `output.globalObject`
+
+When targeting a library, especially the `libraryTarget` is `'umd'`, this option indicates what global object will be used to mount the library. Default value is `'window'`. If you want to make your UMD build available on both browsers and Node.js, you should set this option to `'this'`.
 
 
 ## `output.hashDigest`
