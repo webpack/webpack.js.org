@@ -36,8 +36,6 @@ if (isClient) {
             import={ path => {
               if (path === entryPath) {
                 return import(`./content/${path}`);
-              } else if (path === '/vote') {
-                return import(`./components/${path}`);
               } else {
                 return import(`./content/${path}`);
               }
