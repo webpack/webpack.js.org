@@ -346,6 +346,22 @@ T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plu
 
 When targeting a library, especially the `libraryTarget` is `'umd'`, this option indicates what global object will be used to mount the library. To make UMD build available on both browsers and Node.js, set `output.globalObject` option to `'this'`.
 
+For example:
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  // ...
+  output: {
+    library: 'myLib',
+    libraryTarget: 'umd',
+    filename: 'myLib.js',
+    globalObject: 'this'
+  }
+};
+```
+
 
 ## `output.hashDigest`
 
