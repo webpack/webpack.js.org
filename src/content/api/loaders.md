@@ -17,7 +17,6 @@ The first loader is passed one argument: the content of the resource file. The c
 
 A single result can be returned in __sync mode__. For multiple results the `this.callback()` must be called. In __async mode__ `this.async()` must be called to indicate that the [loader runner](https://github.com/webpack/loader-runner) should wait for an asynchronous result. It returns `this.callback()`. Then the loader must return `undefined` and call that callback.
 
-TODO: Add info about loader overrides
 
 ## Examples
 
@@ -96,7 +95,11 @@ module.exports.raw = true;
 
 ### Pitching Loader
 
-Loaders are __always__ called from right to left. There are some instances where the loader only cares about the __metadata__ behind a request and can ignore the results of the previous loader. The `pitch` method on loaders is called from __left to right__ before the loaders are actually executed (from right to left). For the following [`use`](/configuration/module#rule-use) configuration:
+Loaders are __always__ called from right to left. There are some instances where the loader only cares about the __metadata__ behind a request and can ignore the results of the previous loader. The `pitch` method on loaders is called from __left to right__ before the loaders are actually executed (from right to left). 
+
+Note that loaders may be added inline in requests and disabled via inline prefixes, which will impact the order in which they are "pitched" and executed. See the section on [`use`](/configuration/module#rule-use) for more details.
+
+For the following configuration of [`use`](/configuration/module#rule-use):
 
 ``` javascript
 module.exports = {
