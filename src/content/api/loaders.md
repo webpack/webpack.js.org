@@ -98,7 +98,7 @@ module.exports.raw = true;
 
 Loaders are __always__ called from right to left. There are some instances where the loader only cares about the __metadata__ behind a request and can ignore the results of the previous loader. The `pitch` method on loaders is called from __left to right__ before the loaders are actually executed (from right to left). 
 
-Note that loaders may be added inline in requests and disabled via inline prefixes, which will impact the order in which they are "pitched" and executed. See the section on [`enforce`](/configuration/module#ruleenforce) for more details.
+T> Loaders may be added inline in requests and disabled via inline prefixes, which will impact the order in which they are "pitched" and executed. See [`Rule.enforce`](/configuration/module#ruleenforce) for more details.
 
 For the following configuration of [`use`](/configuration/module#rule-use):
 
