@@ -51,16 +51,18 @@ __project__
 __src/index.js__
 
 ``` javascript
-function component() {
-  let element = document.createElement('div');
+document.addEventListener('DOMContentLoaded', function(){ 
+  function component() {
+    let element = document.createElement('div');
 
-  // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    // Lodash, currently included via a script, is required for this line to work
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
-  return element;
-}
+    return element;
+  }
 
-document.body.appendChild(component());
+  document.body.appendChild(component());
+}, false);
 ```
 
 __index.html__
@@ -146,6 +148,7 @@ __src/index.js__
 ``` diff
 + import _ from 'lodash';
 +
+document.addEventListener('DOMContentLoaded', function(){ 
   function component() {
     let element = document.createElement('div');
 
@@ -156,6 +159,7 @@ __src/index.js__
   }
 
   document.body.appendChild(component());
+}, false);
 ```
 
 Now, since we'll be bundling our scripts, we have to update our `index.html` file. Let's remove the lodash `<script>`, as we now `import` it, and modify the other `<script>` tag to load the bundle, instead of the raw `/src` file:
