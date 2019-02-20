@@ -270,8 +270,9 @@ __package.json__
     "version": "1.0.0",
     "description": "",
     "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-+     "build": "webpack"
+-      "test": "echo \"Error: no test specified\" && exit 1" 
++      "test": "echo \"Error: no test specified\" && exit 1",
++      "build": "webpack"
     },
     "keywords": [],
     "author": "",
