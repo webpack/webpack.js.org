@@ -56,7 +56,7 @@ W> Be aware that when [exporting multiple configurations](/configuration/configu
 
 T> If you're having trouble, navigating to the `/webpack-dev-server` route will show where files are served. For example, `http://localhost:9000/webpack-dev-server`.
 
-_**Note**: Though both of the methods(`webpack.config.js` and `cli`) are recommended to use this module. However, you need atleast an `index.html` file or a html template to serve the bundle. Also, note that webpack-dev-server doesn't inject script references into the html file, so make sure you add them manually. However, you can also use [proxy](https://github.com/webpack/webpack.js.org/blob/master/src/content/configuration/dev-server.md#devserverproxy)._
+T> HTML template is required to serve the bundle, usually it is an `index.html` file. Make sure that script references are added into HTML, webpack-dev-server doesn't inject them automatically.
 
 ## `devServer.after`
 
