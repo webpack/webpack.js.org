@@ -309,8 +309,13 @@ export default (fixture, options = {}) => {
 
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
-      if (err || stats.hasErrors()) reject(err);
-
+      if (err || stats.hasErrors()) {
+        const config = {
+          chunks: false,
+          colors: true,
+        };
+        reject(err || stats.toString(config));
+      }
       resolve(stats);
     });
   });
