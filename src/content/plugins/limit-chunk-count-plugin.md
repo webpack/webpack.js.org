@@ -6,6 +6,7 @@ contributors:
   - tbroadley
   - byzyk
   - EugeneHlushko
+  - erykpiast
 ---
 
 While writing your code, you may have already added many code split points to load stuff on demand. After compiling you might notice that some chunks are too small - creating larger HTTP overhead. `LimitChunkCountPlugin` can post-process your chunks by merging them.
