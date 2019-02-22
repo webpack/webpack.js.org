@@ -13,7 +13,7 @@ The `DefinePlugin` allows you to create global constants which can be configured
 
 ``` javascript
 new webpack.DefinePlugin({
-  // Definitions...
+  BUILT_AT: webpack.DefinePlugin.runtimeValue(Date.now, [fileDep, fileDep])
 });
 ```
 
