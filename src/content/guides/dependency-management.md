@@ -94,7 +94,7 @@ This can be useful if you want to require all files in a directory or matching a
 
 ```javascript
 function importAll (r) {
-  r.keys().forEach(r);
+  return r.keys().map(r);
 }
 
 importAll(require.context('../components/', true, /\.js$/));
