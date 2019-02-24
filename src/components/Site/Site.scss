@@ -1,3 +1,12 @@
+@media print {
+
+  header,
+  nav,
+  footer {
+    display: none !important;
+  }
+}
+
 .site {
   display: flex;
   flex-direction: column;
