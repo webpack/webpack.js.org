@@ -11,3 +11,4 @@ package-lock.json
 .cache
 internal-links.tap
 stats.json
+src/content/**/*_all.md
