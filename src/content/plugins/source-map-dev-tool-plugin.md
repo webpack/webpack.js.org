@@ -43,7 +43,7 @@ T> Setting `module` and/or `columns` to `false` will yield less accurate source 
 
 T> If you want to use a custom configuration for this plugin in [development mode](/concepts/mode/#mode-development), make sure to disable the default one. I.e. set `devtool: false`.
 
-W> Remember that when using the [`UglifyJSPlugin`](/plugins/uglifyjs-webpack-plugin), you must utilize the `sourceMap` option.
+W> Remember that when using the [`TerserPlugin`](/plugins/terser-webpack-plugin), you must utilize the `sourceMap` option.
 
 ## Examples
 
@@ -80,7 +80,7 @@ Set a URL for source maps. Useful for hosting them on a host that requires autho
 
 ```js
 new webpack.SourceMapDevToolPlugin({
-  append: '\n//# sourceMappingURL=http://example.com/sourcemap/[url]',
+  append: '\n//# sourceMappingURL=https://example.com/sourcemap/[url]',
   filename: '[name].map'
 });
 ```

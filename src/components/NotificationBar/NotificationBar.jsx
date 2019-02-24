@@ -1,29 +1,34 @@
 import React from 'react';
 import Container from '../Container/Container';
 import testLocalStorage from '../../utilities/test-local-storage';
+import './NotificationBar.scss';
 
 const version = '2';
 const localStorageIsEnabled = testLocalStorage() !== false;
 
-export default class NotificationBar extends React.Component {
-  render() {
-    let dismissedMod = this._dismissed ? 'notification-bar--dismissed' : '';
+const barDismissed = () => {
+  if (localStorageIsEnabled) {
+    return localStorage.getItem('notification-dismissed') === version;
+  }
+  return false;
+};
 
+class MessageBar extends React.Component {
+  render() {
     return (
-      <div className={ `notification-bar ${dismissedMod}` }>
+      <div className="notification-bar">
         <Container className="notification-bar__inner">
           <p>
-            Sponsor webpack and get apparel from the <a href="https://webpack.threadless.com">official shop</a>!{' '}
-            All proceeds go to our{' '}
-            <a href="https://opencollective.com/webpack">open collective</a>!
+            Sponsor webpack and get apparel from the <a href="https://webpack.threadless.com">official shop</a>! All
+            proceeds go to our <a href="https://opencollective.com/webpack">open collective</a>!
           </p>
-          { localStorageIsEnabled ?
+          {localStorageIsEnabled ? (
             <button
               aria-label="Dismiss"
               className="notification-bar__close icon-cross"
-              onClick={ this._close.bind(this) } /> :
-            null
-          }
+              onClick={this.close.bind(this)}
+            />
+          ) : null}
         </Container>
       </div>
     );
@@ -34,22 +39,32 @@ export default class NotificationBar extends React.Component {
    *
    * @param {object} e - Click event
    */
-  _close(e) {
-    if (localStorageIsEnabled) {
-      localStorage.setItem('notification-dismissed', version);
-    }
-    this.forceUpdate();
+  close(e) {
+    localStorage.setItem('notification-dismissed', version);
+    this.props.onClose();
+  }
+}
+
+export default class NotificationBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onClose = this.onClose.bind(this);
+    this.state = {
+      dismissed: barDismissed()
+    };
   }
 
-  /**
-   * Determine whether or not the current message was dismissed
-   *
-   * @return {boolean} - Whether or not the current message was dismissed
-   */
-  get _dismissed() {
-    if (localStorageIsEnabled) {
-      return localStorage.getItem('notification-dismissed') === version;
+  onClose() {
+    this.setState(state => {
+      return {
+        dismissed: !state.dismissed
+      };
+    });
+  }
 
-    } else return false;
+  render() {
+    const { dismissed } = this.state;
+
+    return <React.Fragment>{!dismissed ? <MessageBar onClose={this.onClose} /> : null}</React.Fragment>;
   }
 }

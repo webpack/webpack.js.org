@@ -30,7 +30,7 @@ Read the [installation guide](/guides/installation) if you don't already have we
 
 ## Usage with config file
 
-```sh
+```bash
 webpack [--config webpack.config.js]
 ```
 
@@ -153,8 +153,8 @@ Parameter                 | Explanation                                 | Input 
 `--config`                | Path to the config file                     | string     | webpack.config.js or webpackfile.js
 `--config-register, -r`   | Preload one or more modules before loading the webpack configuration | array |
 `--config-name`           | Name of the config to use                   | string     |
-`--env`                   | Environment passed to the config, when it is a function |
-`--mode`                  | Mode to use, either "development" or "production" | string      |
+`--env`                   | Environment passed to the config, when it is a function  | |
+`--mode`                  | Mode to use, either "development" or "production" | string |
 
 ### Output Options
 
@@ -245,7 +245,7 @@ Parameter                   | Explanation                                       
 --------------------------- | -------------------------------------------------------|----------------------
 `--optimize-max-chunks`     | Try to keep the chunk count below a limit              | [LimitChunkCountPlugin](/plugins/limit-chunk-count-plugin)
 `--optimize-min-chunk-size` | Try to keep the chunk size above a limit               | [MinChunkSizePlugin](/plugins/min-chunk-size-plugin)
-`--optimize-minimize`       | Minimize javascript and switches loaders to minimizing | [UglifyJsPlugin](/plugins/uglifyjs-webpack-plugin/) & [LoaderOptionsPlugin](/plugins/loader-options-plugin/)
+`--optimize-minimize`       | Minimize javascript and switches loaders to minimizing | [TerserPlugin](/plugins/terser-webpack-plugin/) & [LoaderOptionsPlugin](/plugins/loader-options-plugin/)
 
 
 ### Resolve Options

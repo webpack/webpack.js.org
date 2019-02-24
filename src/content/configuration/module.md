@@ -12,6 +12,7 @@ contributors:
   - fadysamirsadek
   - nerdkid93
   - EugeneHlushko
+  - superburrito
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -19,7 +20,7 @@ These options determine how the [different types of modules](/concepts/modules) 
 
 ## `module.noParse`
 
-`RegExp | [RegExp] | function | string | [string]`
+`RegExp` `[RegExp]` `function(resource)` `string` `[string]`
 
 Prevent webpack from parsing any files matching the given regular expression(s). Ignored files __should not__ have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries.
 
@@ -68,7 +69,7 @@ There are two input values for the conditions:
 
 __Example:__ When we `import './style.css'` within `app.js`, the resource is `/path/to/style.css` and the issuer is `/path/to/app.js`.
 
-In a Rule the properties [`test`](#rule-test), [`include`](#rule-include), [`exclude`](#rule-exclude) and [`resource`](#rule-resource) are matched with the resource and the property [`issuer`](#rule-issuer) is matched with the issuer.
+In a Rule the properties [`test`](#ruletest), [`include`](#ruleinclude), [`exclude`](#ruleexclude) and [`resource`](#ruleresource) are matched with the resource and the property [`issuer`](#ruleissuer) is matched with the issuer.
 
 When using multiple conditions, all conditions must match.
 
@@ -84,18 +85,18 @@ There are two output values of a Rule:
 1. Applied loaders: An array of loaders applied to the resource.
 2. Parser options: An options object which should be used to create the parser for this module.
 
-These properties affect the loaders: [`loader`](#rule-loader), [`options`](#rule-options-rule-query), [`use`](#rule-use).
+These properties affect the loaders: [`loader`](#ruleloader), [`options`](#ruleoptions--rulequery), [`use`](#ruleuse).
 
-For compatibility also these properties: [`query`](#rule-options-rule-query), [`loaders`](#rule-loaders).
+For compatibility also these properties: [`query`](#ruleoptions--rulequery), [`loaders`](#ruleloaders).
 
-The [`enforce`](#rule-enforce) property affects the loader category. Whether it's a normal, pre- or post- loader.
+The [`enforce`](#ruleenforce) property affects the loader category. Whether it's a normal, pre- or post- loader.
 
-The [`parser`](#rule-parser) property affects the parser options.
+The [`parser`](#ruleparser) property affects the parser options.
 
 
 ## Nested rules
 
-Nested rules can be specified under the properties [`rules`](#rule-rules) and [`oneOf`](#rule-oneof).
+Nested rules can be specified under the properties [`rules`](#rulerules) and [`oneOf`](#ruleoneof).
 
 These rules are evaluated when the Rule condition matches.
 
@@ -121,17 +122,28 @@ All normal and pre loaders can be omitted (overridden) by prefixing `-!` in the 
 
 All normal, post and pre loaders can be omitted (overridden) by prefixing `!!` in the request.
 
+``` javascript
+// Disable preloaders
+import { a } from '!./file1.js';
+
+// Disable preloaders and normal loaders
+import { b } from  '-!./file2.js';
+
+// Disable all loaders
+import { c } from  '!!./file3.js';
+```
+
 Inline loaders and `!` prefixes should not be used as they are non-standard. They may be use by loader generated code.
 
 
 ## `Rule.exclude`
 
-`Rule.exclude` is a shortcut to `Rule.resource.exclude`. If you supply a `Rule.exclude` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#rule-resource) and [`Condition.exclude`](#condition) for details.
+`Rule.exclude` is a shortcut to `Rule.resource.exclude`. If you supply a `Rule.exclude` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.exclude`](#condition) for details.
 
 
 ## `Rule.include`
 
-`Rule.include` is a shortcut to `Rule.resource.include`. If you supply a `Rule.include` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#rule-resource) and [`Condition.include`](#condition) for details.
+`Rule.include` is a shortcut to `Rule.resource.include`. If you supply a `Rule.include` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.include`](#condition) for details.
 
 
 ## `Rule.issuer`
@@ -149,14 +161,14 @@ This option can be used to apply loaders to the dependencies of a specific modul
 
 ## `Rule.loader`
 
-`Rule.loader` is a shortcut to `Rule.use: [ { loader } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.loader`](#useentry) for details.
+`Rule.loader` is a shortcut to `Rule.use: [ { loader } ]`. See [`Rule.use`](#ruleuse) and [`UseEntry.loader`](#useentry) for details.
 
 
 ## `Rule.loaders`
 
 W> This option is __deprecated__ in favor of `Rule.use`.
 
-`Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#rule-use) for details.
+`Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#ruleuse) for details.
 
 
 ## `Rule.oneOf`
@@ -171,7 +183,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /.css$/,
+        test: /\.css$/,
         oneOf: [
           {
             resourceQuery: /inline/, // foo.css?inline
@@ -190,7 +202,7 @@ module.exports = {
 
 ## `Rule.options` / `Rule.query`
 
-`Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#rule-use) and [`UseEntry.options`](#useentry) for details.
+`Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#ruleuse) and [`UseEntry.options`](#useentry) for details.
 
 W> `Rule.query` is deprecated in favor of `Rule.options` and `UseEntry.options`.
 
@@ -252,7 +264,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /.css$/,
+        test: /\.css$/,
         resourceQuery: /inline/,
         use: 'url-loader'
       }
@@ -276,7 +288,7 @@ Indicate what parts of the module contain side effects. See [Tree Shaking](/guid
 
 ## `Rule.test`
 
-`Rule.test` is a shortcut to `Rule.resource.test`. If you supply a `Rule.test` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#rule-resource) and [`Condition.test`](#condition) for details.
+`Rule.test` is a shortcut to `Rule.resource.test`. If you supply a `Rule.test` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.test`](#condition) for details.
 
 
 ## `Rule.type`
@@ -308,7 +320,11 @@ module.exports = {
 
 ## `Rule.use`
 
-A list of [UseEntries](#useentry) which are applied to modules. Each entry specifies a loader to be used.
+`[UseEntry]` `function(info)`
+
+__`[UseEntry]`__
+
+`Rule.use` can be an array of [UseEntry](#useentry) which are applied to modules. Each entry specifies a loader to be used.
 
 Passing a string (i.e. `use: [ 'style-loader' ]`) is a shortcut to the loader property (i.e. `use: [ { loader: 'style-loader '} ]`).
 
@@ -338,6 +354,46 @@ module.exports = {
             }
           }
         ]
+      }
+    ]
+  }
+};
+```
+
+__`function(info)`__
+
+`Rule.use` can also be a function which receives the object argument describing the module being loaded, and must return an array of `UseEntry` items.
+
+The `info` object parameter has the following fields:
+
+- `compiler`: The current webpack compiler (can be undefined)
+- `issuer`: The path to the module that is importing the module being loaded
+- `realResource`: Always the path to the module being loaded
+- `resource`: The path to the module being loaded, it is usually equal to `realResource` except when the resource name is overwritten via `!=!` in request string
+
+The same shortcut as an array can be used for the return value (i.e. `use: [ 'style-loader' ]`).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        use: (info) => ([
+          {
+            loader: 'custom-svg-loader'
+          },
+          {
+            loader: 'svgo-loader',
+            options: {
+              plugins: [{
+                cleanupIDs: { prefix: basename(info.resource) }
+              }]
+            }
+          }
+        ])
       }
     ]
   }
@@ -391,13 +447,19 @@ module.exports = {
 
 ## `UseEntry`
 
-`object`
+`object` `function(info)`
+
+__`object`__
 
 It must have a `loader` property being a string. It is resolved relative to the configuration [`context`](/configuration/entry-context#context) with the loader resolving options ([resolveLoader](/configuration/resolve#resolveloader)).
 
 It can have an `options` property being a string or object. This value is passed to the loader, which should interpret it as loader options.
 
 For compatibility a `query` property is also possible, which is an alias for the `options` property. Use the `options` property instead.
+
+Note that webpack needs to generate a unique module identifier from the resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9% of cases, but may be not unique if you apply the same loaders with different options to the resource and the options have some stringified values.
+
+It also breaks if the options object cannot be stringified (i.e. circular JSON). Because of this you can have a `ident` property in the options object which is used as unique identifier.
 
 __webpack.config.js__
 
@@ -417,9 +479,42 @@ module.exports = {
 };
 ```
 
-Note that webpack needs to generate a unique module identifier from the resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9% of cases, but may be not unique if you apply the same loaders with different options to the resource and the options have some stringified values.
+__`function(info)`__
 
-It also breaks if the options object cannot be stringified (i.e. circular JSON). Because of this you can have a `ident` property in the options object which is used as unique identifier.
+A `UseEntry` can also be a function which receives the object argument describing the module being loaded, and must return an options object. This can be used to vary the loader options on a per-module basis.
+
+The `info` object parameter has the following fields:
+
+- `compiler`: The current webpack compiler (can be undefined)
+- `issuer`: The path to the module that is importing the module being loaded
+- `realResource`: Always the path to the module being loaded
+- `resource`: The path to the module being loaded, it is usually equal to `realResource` except when the resource name is overwritten via `!=!` in request string
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        loader: 'file-loader',
+        options: {
+          outputPath: 'svgs'
+        }
+      },
+      (info) => ({
+        loader: 'svgo-loader',
+        options: {
+          plugins: [{
+            cleanupIDs: { prefix: basename(info.resource) }
+          }]
+        }
+      })
+    ]
+  }
+};
+```
 
 
 ## Module Contexts

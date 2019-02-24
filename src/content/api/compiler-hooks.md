@@ -42,7 +42,7 @@ compiler.hooks.someHook.tap(/* ... */);
 
 Depending on the hook type, `tapAsync` and `tapPromise` may also be available.
 
-For the description of hook types, see [the Tapable docs](https://github.com/webpack/tapable#hook-types).
+For the description of hook types, see [the Tapable docs](https://github.com/webpack/tapable#tapable).
 
 
 ### `entryOption`
@@ -81,7 +81,7 @@ Runs a plugin before the environment is prepared.
 
 `SyncHook`
 
-Executes a plugin a environment setup is complete.
+Executes a plugin after the environment setup is complete.
 
 
 ### `beforeRun`

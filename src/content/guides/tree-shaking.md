@@ -198,7 +198,7 @@ module.exports = {
 };
 ```
 
-T> Note that the `--optimize-minimize` flag can be used to enable `UglifyJSPlugin` as well.
+T> Note that the `--optimize-minimize` flag can be used to enable `TerserPlugin` as well.
 
 With that squared away, we can run another `npm run build` and see if anything has changed.
 

@@ -1,5 +1,6 @@
 ---
 title: Hot Module Replacement
+sort: 4
 contributors:
   - sokra
   - skipjack

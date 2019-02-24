@@ -1,7 +1,7 @@
 // Custom functions
 
 @import 'vars';
-@import '~modularscale-sass/stylesheets/modularscale';
+@import '~modularscale-sass';
 
 @function getFontSize($step) {
   @return ms($step, 16px, $minor-third)

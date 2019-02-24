@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - terinjokes
   - byzyk
+  - liorgreenb
   - vansosnin
 related:
   - title: Using Records
@@ -105,9 +106,10 @@ Expose custom values into the loader context.
 
 ## `parallelism`
 
-`number`
+`number: 100`
 
 Limit the number of parallel processed modules. Can be used to fine tune performance or to get more reliable profiling results.
+
 
 
 ## `profile`

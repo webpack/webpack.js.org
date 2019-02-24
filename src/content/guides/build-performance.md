@@ -148,9 +148,9 @@ Be aware of the performance differences of the different `devtool` settings.
 
 ### Avoid Production Specific Tooling
 
-Certain utilities, plugins, and loaders only make sense when building for production. For example, it usually doesn't make sense to minify and mangle your code with the `UglifyJsPlugin` while in development. These tools should typically be excluded in development:
+Certain utilities, plugins, and loaders only make sense when building for production. For example, it usually doesn't make sense to minify and mangle your code with the `TerserPlugin` while in development. These tools should typically be excluded in development:
 
-- `UglifyJsPlugin`
+- `TerserPlugin`
 - `ExtractTextPlugin`
 - `[hash]`/`[chunkhash]`
 - `AggressiveSplittingPlugin`
@@ -227,7 +227,7 @@ Note: the `ts-loader` documentation suggests the use of `cache-loader`, but this
 
 To gain typechecking again, use the [`ForkTsCheckerWebpackPlugin`](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin).
 
-There is a [full example](https://github.com/TypeStrong/ts-loader/tree/master/examples/fast-incremental-builds) on the ts-loader github repository.
+There is a [full example](https://github.com/TypeStrong/ts-loader/tree/master/examples/fork-ts-checker-webpack-plugin) on the ts-loader github repository.
 
 ---
 

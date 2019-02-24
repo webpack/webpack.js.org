@@ -2,6 +2,9 @@
 @import 'mixins';
 
 .splash {
+  position: relative;
+  overflow: hidden;
+  
   &__section {
     position:relative;
     text-align:center;
