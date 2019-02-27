@@ -12,6 +12,7 @@ contributors:
   - fadysamirsadek
   - nerdkid93
   - EugeneHlushko
+  - superburrito
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -120,6 +121,17 @@ All normal loaders can be omitted (overridden) by prefixing `!` in the request.
 All normal and pre loaders can be omitted (overridden) by prefixing `-!` in the request.
 
 All normal, post and pre loaders can be omitted (overridden) by prefixing `!!` in the request.
+
+``` javascript
+// Disable preloaders
+import { a } from '!./file1.js';
+
+// Disable preloaders and normal loaders
+import { b } from  '-!./file2.js';
+
+// Disable all loaders
+import { c } from  '!!./file3.js';
+```
 
 Inline loaders and `!` prefixes should not be used as they are non-standard. They may be use by loader generated code.
 

@@ -109,7 +109,7 @@ webpackNumbers.wordToNum('Two');
 - __AMD module require:__
 
 ``` js
-require(['webpackNumbers'], function ( webpackNumbers) {
+require(['webpackNumbers'], function (webpackNumbers) {
   // ...
   webpackNumbers.wordToNum('Two');
 });

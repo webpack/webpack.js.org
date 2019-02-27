@@ -35,6 +35,10 @@ const prod = {
         from: './assets/icon-square-small-slack.png',
         to: './assets/'
       },
+      {
+        from: './assets/icon-square-big.svg',
+        to: './assets/'
+      },
       'CNAME'
     ])
   ]

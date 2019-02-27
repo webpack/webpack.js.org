@@ -56,6 +56,8 @@ W> Be aware that when [exporting multiple configurations](/configuration/configu
 
 T> If you're having trouble, navigating to the `/webpack-dev-server` route will show where files are served. For example, `http://localhost:9000/webpack-dev-server`.
 
+T> HTML template is required to serve the bundle, usually it is an `index.html` file. Make sure that script references are added into HTML, webpack-dev-server doesn't inject them automatically.
+
 ## `devServer.after`
 
 `function (app, server)`
