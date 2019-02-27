@@ -26,23 +26,23 @@ if (isClient) {
   let entryPage = findInContent(Content, item => item.url === trimmed);
   let entryPath = entryPage && entryPage.path.replace('src/content/', '');
 
-  import(`./content/${entryPath}`).then(entryModule => {
-    render((
-      <Router id="UA-46921629-2">
-        <Route
-          path="/"
-          render={ props => (
-            <Site
-              { ...props }
-              import={ path => {
-                if (path === entryPath) {
-                  return entryModule.default || entryModule;
-                } else {
-                  return import(`./content/${path}`);
-                }
-              }} />
-          )} />
-      </Router>
-    ), document.getElementById('root'));
-  });
+  render((
+    <Router id="UA-46921629-2">
+      <Route
+        path="/"
+        render={ props => (
+          <Site
+            { ...props }
+            import={ path => {
+              if (path === entryPath) {
+                return import(`./content/${path}`);
+              } else if (path === '/vote') {
+                return import(`./components/${path}`);
+              } else {
+                return import(`./content/${path}`);
+              }
+            }} />
+        )} />
+    </Router>
+  ), document.getElementById('root'));
 }
