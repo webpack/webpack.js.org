@@ -1,10 +1,18 @@
 {
   "presets": [
-    "env",
+    ["env", { "modules": false }],
     "react"
   ],
   "plugins": [
+    "syntax-dynamic-import",
     "transform-object-rest-spread",
     "transform-class-properties"
-  ]
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "react-hot-loader/babel"
+      ]
+    }
+  }
 }

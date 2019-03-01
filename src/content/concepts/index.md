@@ -14,7 +14,6 @@ contributors:
   - arjunsajeev
   - byzyk
   - yairhaimo
-  - EugeneHlushko
   - farskid
   - LukeMwila
 ---
