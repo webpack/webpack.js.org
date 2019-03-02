@@ -41,7 +41,6 @@ as such:
 Triggered when evaluating an expression consisting in a `typeof` of a free variable
 
 - Hook Parameters: `identifier`
-
 - Callback Parameters: `expression`
 
 ```js
@@ -51,13 +50,15 @@ parser.hooks.evaluateTypeof.for('myIdentifier').tap('MyPlugin', expression => {
 });
 ```
 
+This will trigger the `evaluateTypeof` hook:
+
 ```js
-// This will trigger the evaluateTypeof hook
 const a = typeof myIdentifier;
 ```
 
+This won't trigger:
+
 ```js
-// This won't
 const myIdentifier = 0;
 const b = typeof myIdentifier;
 ```
@@ -70,11 +71,23 @@ const b = typeof myIdentifier;
 Called when evaluating an expression.
 
 - Hook parameters: `expressionType`
-
 - Callback parameters: `expression`
 
+For example:
+
+__index.js__
+
 ```js
-parser.hooks.evaluate.for(/* expression type */).tap(/* ... */);
+const a = new String();
+```
+
+__MyPlugin.js__
+
+```js
+parser.hooks.evaluate.for('NewExpression').tap('MyPlugin', expression => {
+  /* ... */
+  return expressionResult;
+});
 ```
 
 Where the expressions types are:
@@ -108,7 +121,6 @@ Where the expressions types are:
 Called when evaluating an identifier that is a free variable.
 
 - Hook Parameters: `identifier`
-
 - Callback Parameters: `expression`
 
 
@@ -119,7 +131,6 @@ Called when evaluating an identifier that is a free variable.
 Called when evaluating an identifier that is a defined variable.
 
 - Hook Parameters: `identifier`
-
 - Callback Parameters: `expression`
 
 
@@ -130,12 +141,23 @@ Called when evaluating an identifier that is a defined variable.
 Called when evaluating a call to a member function of a successfully evaluated expression.
 
 - Hook Parameters: `identifier`
-
 - Callback Parameters: `expression` `param`
 
+This expression will trigger the hook:
+
+__index.js__
+
 ```js
-// This will trigger the hook for('myFunc')
 const a = expression.myFunc();
+```
+
+__MyPlugin.js__
+
+```js
+parser.hooks.evaluateCallExpressionMember.for('myFunc').tap('MyPlugin', (expression, param) => {
+  /* ... */
+  return expressionResult;
+});
 ```
 
 
@@ -180,7 +202,7 @@ Where the `statement.type` could be:
 
 `SyncBailHook`
 
-Called when parsing an if statement. Same as the `statement` hook, but triggered only when `statement.type == "IfStatement"`
+Called when parsing an if statement. Same as the `statement` hook, but triggered only when `statement.type == 'IfStatement'`.
 
 - Callback Parameters: `statement`
 
@@ -192,7 +214,6 @@ Called when parsing an if statement. Same as the `statement` hook, but triggered
 Called when parsing statements with a [label](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label). Those statements have `statement.type === 'LabeledStatement'`.
 
 - Hook Parameters: `labelName`
-
 - Callback Parameters: `statement`
 
 
@@ -204,13 +225,19 @@ Called for every import statement in a code fragment. The `source` parameter con
 
 - Callback Parameters: `statement` `source`
 
-```js
-// index.js
-import _ from 'lodash';
+The following import statement will trigger the hook once:
 
-// MyPlugin.js
+__index.js__
+
+```js
+import _ from 'lodash';
+```
+
+__MyPlugin.js__
+
+```js
 parser.hooks.import.tap('MyPlugin', (statement, source) => {
-  /* source == 'lodash' */
+  // source == 'lodash'
 });
 ```
 
@@ -223,11 +250,17 @@ Called for every specifier of every `import` statement.
 
 - Callback Parameters: `statement` `source` `exportName` `identifierName`
 
-```js
-// index.js
-import _, { has } from 'lodash';
+The following import statement will trigger the hook twice:
 
-// MyPlugin.js
+__index.js__
+
+```js
+import _, { has } from 'lodash';
+```
+
+__MyPlugin.js__
+
+```js
 parser.hooks.import.tap('MyPlugin', (statement, source, exportName, identifierName) => {
   /* First call
     source == 'lodash'
@@ -269,9 +302,9 @@ Called for every `export` statement exporting a declaration.
 
 - Callback Parameters: `statement` `declaration`
 
+Those exports will trigger this hook:
 
 ```js
-// Those will trigger the hook
 export const myVar = 'hello'; // also var, let
 export function FunctionName(){}
 export class ClassName {}
@@ -389,7 +422,7 @@ Called when parsing an `AssignmentExpression` before parsing the assigned expres
 a += b;
 
 parser.hooks.assigned.for('a').tap('MyPlugin', expression => {
-  /* this is called before parsing b */
+  // this is called before parsing b
 });
 ```
 
@@ -407,7 +440,7 @@ Called when parsing an `AssignmentExpression` before parsing the assign expressi
 a += b;
 
 parser.hooks.assigned.for('a').tap('MyPlugin', expression => {
-  /* this is called before parsing a */
+  // this is called before parsing a
 });
 ```
 
