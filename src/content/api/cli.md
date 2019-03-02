@@ -30,7 +30,7 @@ Read the [installation guide](/guides/installation) if you don't already have we
 
 ## Usage with config file
 
-```sh
+```bash
 webpack [--config webpack.config.js]
 ```
 

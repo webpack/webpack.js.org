@@ -1,9 +1,4 @@
-/**
- * Styling
- *
- * This file contains the base styling for the site.
- *
- */
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,600');
 
 @import 'vars';
 @import 'fonts';
@@ -23,7 +18,6 @@ html {
 body {
   font: 400 getFontSize(0) $font-stack-body;
   color: getColor(elephant);
-  @include fontantialias(true);
 }
 
 a {
@@ -48,42 +42,6 @@ a {
   }
 }
 
-details:focus, summary:focus{
-  outline: none;
-  background: rgba(255,255,255,0.03);
-  border-radius: 2px;
-}
-
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-  /* Style details arrow if on webkit */
-
-  details summary::-webkit-details-marker {
-    color: getColor(malibu);
-  }
-
-  summary::-webkit-details-marker {
-    display: none
-  }
-  summary:after {
-    content: "\F103";
-    float: left;
-    position: relative;
-    left: -2px;
-    text-align: center;
-    font-family: icons;
-    color: lighten(getColor(denim), 10%)
-  }
-
-  details[open] summary:after {
-    content: "\F101";
-    font-family: icons;
-  }
-}
-
-
-
 ::selection {
   background: transparentize(getColor(malibu), 0.65);
 }
-
-@import './markdown';

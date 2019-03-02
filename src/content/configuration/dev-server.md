@@ -56,6 +56,8 @@ W> Be aware that when [exporting multiple configurations](/configuration/configu
 
 T> If you're having trouble, navigating to the `/webpack-dev-server` route will show where files are served. For example, `http://localhost:9000/webpack-dev-server`.
 
+T> HTML template is required to serve the bundle, usually it is an `index.html` file. Make sure that script references are added into HTML, webpack-dev-server doesn't inject them automatically.
+
 ## `devServer.after`
 
 `function (app, server)`
@@ -232,7 +234,7 @@ webpack-dev-server --compress
 
 `boolean: false` `string` `[string]` `number`
 
-Tell the server where to serve content from. This is only necessary if you want to serve static files. [`devServer.publicPath`](#devserver-publicpath-) will be used to determine where the bundles should be served from, and takes precedence.
+Tell the server where to serve content from. This is only necessary if you want to serve static files. [`devServer.publicPath`](#devserverpublicpath-) will be used to determine where the bundles should be served from, and takes precedence.
 
 T> It is recommended to use an absolute path.
 
@@ -450,7 +452,7 @@ T> Note that [`webpack.HotModuleReplacementPlugin`](/plugins/hot-module-replacem
 
 `boolean`
 
-Enables Hot Module Replacement (see [`devServer.hot`](#devserver-hot)) without page refresh as fallback in case of build failures.
+Enables Hot Module Replacement (see [`devServer.hot`](#devserverhot)) without page refresh as fallback in case of build failures.
 
 __webpack.config.js__
 

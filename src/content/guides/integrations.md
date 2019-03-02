@@ -8,7 +8,7 @@ contributors:
   - skipjack
 ---
 
-Let's start by clearing up a common misconception. webpack is a module bundler like [Browserify](http://browserify.org/) or [Brunch](http://brunch.io/). It is _not a task runner_ like [Make](https://www.gnu.org/software/make/), [Grunt](https://gruntjs.com/), or [Gulp](https://gulpjs.com/). Task runners handle automation of common development tasks such as linting, building, or testing your project. Compared to bundlers, task runners have a higher level focus. You can still benefit from their higher level tooling while leaving the problem of bundling to webpack.
+Let's start by clearing up a common misconception. webpack is a module bundler like [Browserify](http://browserify.org/) or [Brunch](https://brunch.io/). It is _not a task runner_ like [Make](https://www.gnu.org/software/make/), [Grunt](https://gruntjs.com/), or [Gulp](https://gulpjs.com/). Task runners handle automation of common development tasks such as linting, building, or testing your project. Compared to bundlers, task runners have a higher level focus. You can still benefit from their higher level tooling while leaving the problem of bundling to webpack.
 
 Bundlers help you get your JavaScript and stylesheets ready for deployment, transforming them into a format that's suitable for the browser. For example, JavaScript can be [minified](/plugins/terser-webpack-plugin) or [split into chunks](/guides/code-splitting) and [lazy-loaded](/guides/lazy-loading) to improve performance. Bundling is one of the most important challenges in web development, and solving it well can remove a lot of pain from the process.
 
@@ -96,7 +96,7 @@ For more information, please visit the [repository](https://github.com/zinserjan
 
 ## Karma
 
-The [`karma-webpack`](https://github.com/webpack-contrib/karma-webpack) package allows you to use webpack to pre-process files in [Karma](http://karma-runner.github.io/1.0/index.html). It also makes use of [`webpack-dev-middleware`](https://github.com/webpack/webpack-dev-middleware) and allows passing configurations for both. A simple example may look something like this:
+The [`karma-webpack`](https://github.com/webpack-contrib/karma-webpack) package allows you to use webpack to pre-process files in [Karma](https://karma-runner.github.io/1.0/index.html). It also makes use of [`webpack-dev-middleware`](https://github.com/webpack/webpack-dev-middleware) and allows passing configurations for both. A simple example may look something like this:
 
 ``` bash
 npm install --save-dev webpack karma karma-webpack

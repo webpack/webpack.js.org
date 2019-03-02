@@ -22,7 +22,7 @@ Name                                                     | Description
 [`CopyWebpackPlugin`](/plugins/copy-webpack-plugin) | Copies individual files or entire directories to the build directory
 [`DefinePlugin`](/plugins/define-plugin)           | Allow global constants configured at compile time
 [`DllPlugin`](/plugins/dll-plugin)                 | Split bundles in order to drastically improve build time
-[`EnvironmentPlugin`](/plugins/environment-plugin) | Shorthand for using the [`DefinePlugin`](./define-plugin) on `process.env` keys
+[`EnvironmentPlugin`](/plugins/environment-plugin) | Shorthand for using the [`DefinePlugin`](/plugins/define-plugin) on `process.env` keys
 [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) | Extract text (CSS) from your bundles into a separate file
 [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin) | Enable Hot Module Replacement (HMR)
 [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin)          | Easily create HTML files to serve your bundles
@@ -44,5 +44,3 @@ Name                                                     | Description
 [`ZopfliWebpackPlugin`](/plugins/zopfli-webpack-plugin)          | Prepare compressed versions of assets with node-zopfli
 
 For more third-party plugins, see the list from [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#webpack-plugins).
-
-![Awesome](../assets/awesome-badge.svg)
