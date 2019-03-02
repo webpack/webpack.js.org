@@ -1,3 +1,6 @@
+// Import Images
+import SegmentLogo from './logos/segment.png';
+
 export default [
   {
     name: "MoonMail",
@@ -30,7 +33,7 @@ export default [
   },
   {
     name: "Segment",
-    avatar: require("./assets/segment-logo.png"),
+    avatar: SegmentLogo,
     website: "https://segment.com/?utm_source=webpack&utm_medium=documentation&utm_campaign=sponsorship",
     totalDonations: 2400000,
     reason: "Sponsorship 2017-07 - 2017-09"
