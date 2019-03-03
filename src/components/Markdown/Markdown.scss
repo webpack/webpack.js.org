@@ -181,6 +181,7 @@
     margin: 1em 0;
 
     @include break {
+      display: block;
       overflow-x: auto;
       overflow-y: hidden;
     }
