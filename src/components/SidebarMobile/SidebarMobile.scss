@@ -20,6 +20,10 @@
 
   &--visible {
     transform: translate3D(0, 0, 0);
+
+    .sidebar-mobile__toggle {
+      display: none;
+    }
   }
 
   &.no-delay{

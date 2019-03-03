@@ -80,7 +80,7 @@ console.log(config.title);
 
 And now you just get the right config imported depending on which target you're building for:
 
-``` shell
+```bash
 webpack --env.APP_TARGET VERSION_A
 => 'I am version A'
 
