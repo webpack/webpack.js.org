@@ -6,6 +6,7 @@ contributors:
   - rishantagarwal
   - byzyk
   - madhavarshney
+  - misterdev
 ---
 
 The `Compiler` module is the main engine that creates a compilation instance
@@ -37,95 +38,104 @@ The following lifecycle hooks are exposed by the `compiler` and can be accessed
 as such:
 
 ``` js
-compiler.hooks.someHook.tap(/* ... */);
+compiler.hooks.someHook.tap('MyPlugin', (params) => {
+  /* ... */
+});
 ```
 
 Depending on the hook type, `tapAsync` and `tapPromise` may also be available.
 
-For the description of hook types, see [the Tapable docs](https://github.com/webpack/tapable#hook-types).
+For the description of hook types, see [the Tapable docs](https://github.com/webpack/tapable#tapable).
 
 
 ### `entryOption`
 
 `SyncBailHook`
 
-Executes a plugin after [the `entry` configuration](https://webpack.js.org/configuration/entry-context/#entry) from webpack options has been processed.
+Called after the [`entry` configuration](https://webpack.js.org/configuration/entry-context/#entry) from webpack options has been processed.
+
+- Callback Parameters: [`context`](https://webpack.js.org/configuration/entry-context#context), [`entry`](https://webpack.js.org/configuration/entry-context#entry)
+
+```js
+compiler.hooks.entryOption.tap('MyPlugin', (context, entry) => {
+  /* ... */
+});
+```
 
 
 ### `afterPlugins`
 
 `SyncHook`
 
-Runs a plugin after setting up initial set of plugins.
+Called after setting up initial set of internal plugins.
 
-Parameters: `compiler`
+- Callback Parameters: `compiler`
 
 
 ### `afterResolvers`
 
 `SyncHook`
 
-Executes a plugin after resolver setup is complete.
+Triggered after resolver setup is complete.
 
-Parameters: `compiler`
+- Callback Parameters: `compiler`
 
 
 ### `environment`
 
 `SyncHook`
 
-Runs a plugin before the environment is prepared.
+Called while preparing the compiler environment, right after inizializing the plugins in the configuration file.
 
 
 ### `afterEnvironment`
 
 `SyncHook`
 
-Executes a plugin after the environment setup is complete.
+Called right after the `environment` hook, when the compiler environment setup is complete.
 
 
 ### `beforeRun`
 
 `AsyncSeriesHook`
 
-Adds a hook right before `compiler.run()` is executed.
+Adds a hook right before running the compiler.
 
-Parameters: `compiler`
+- Callback Parameters: `compiler`
 
 
 ### `run`
 
 `AsyncSeriesHook`
 
-Hook into the compiler before it begins reading records.
+Hook into the compiler before it begins reading ["records"](https://webpack.js.org/configuration/other-options/#recordspath). 
 
-Parameters: `compiler`
+- Callback Parameters: `compiler`
 
 
 ### `watchRun`
 
 `AsyncSeriesHook`
 
-Executes a plugin during watch mode after a new compilation is triggered
-but before the compilation is actually started.
+Executes a plugin during watch mode after a new compilation is triggered but before the compilation is actually started.
 
-Parameters: `compiler`
+- Callback Parameters: `compiler`
 
 
 ### `normalModuleFactory`
 
 `SyncHook`
 
-Runs a plugin after a `NormalModuleFactory` is created.
+Called after a `NormalModuleFactory` is created.
 
-Parameters: `normalModuleFactory`
+- Callback Parameters: `normalModuleFactory`
 
 
 ### `contextModuleFactory`
 
 Runs a plugin after a `ContextModuleFactory` is created.
 
-Parameters: `contextModuleFactory`
+- Callback Parameters: `contextModuleFactory`
 
 
 ### `beforeCompile`
@@ -134,16 +144,35 @@ Parameters: `contextModuleFactory`
 
 Executes a plugin after compilation parameters are created.
 
-Parameters: `compilationParams`
+- Callback Parameters: `compilationParams`
+
+The `compilationParams` variable is initialized as follows:
+
+```js
+compilationParams = {
+  normalModuleFactory,
+  contextModuleFactory,
+  compilationDependencies
+};
+```
+
+This hook can be used to add/modify the compilation parameters:
+
+```js
+compiler.hooks.beforeCompile.tapAsync('MyPlugin', (params, callback) => {
+  params['MyPlugin - data'] = 'important stuff my plugin will use later';
+  callback();
+});
+```
 
 
 ### `compile`
 
 `SyncHook`
 
-Hook into the compiler before a new compilation is created.
+Called right after `beforeCompile`, before a new compilation is created. 
 
-Parameters: `compilationParams`
+- Callback Parameters: `compilationParams`
 
 
 ### `thisCompilation`
@@ -152,7 +181,7 @@ Parameters: `compilationParams`
 
 Executed before emitting the `compilation` event (see below).
 
-Parameters: `compilation`
+- Callback Parameters: `compilation`, `compilationParams`
 
 
 ### `compilation`
