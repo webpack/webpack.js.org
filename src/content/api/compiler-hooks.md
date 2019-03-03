@@ -179,7 +179,7 @@ Called right after `beforeCompile`, before a new compilation is created.
 
 `SyncHook`
 
-Executed before emitting the `compilation` event (see below).
+Executed while initializing the compilation, right before emitting the `compilation` event.
 
 - Callback Parameters: `compilation`, `compilationParams`
 
@@ -190,83 +190,90 @@ Executed before emitting the `compilation` event (see below).
 
 Runs a plugin after a compilation has been created.
 
-Parameters: `compilation`
+- Callback Parameters: `compilation`, `compilationParams`
 
 
 ### `make`
 
 `AsyncParallelHook`
 
-...
+Executed before finishing the compilation.
 
-Parameters: `compilation`
+- Callback Parameters: `compilation`
 
 
 ### `afterCompile`
 
 `AsyncSeriesHook`
 
-...
+Called after finishing and sealing the compilation.  
 
-Parameters: `compilation`
+- Callback Parameters: `compilation`
 
 
 ### `shouldEmit`
 
 `SyncBailHook`
 
-Can return true/false at this point
+Called before emitting assets, should return a boolean to say wheter ot not emit.
 
-Parameters: `compilation`
+- Callback Parameters: `compilation`
+
+```js
+compiler.hooks.shouldEmit.tap('MyPlugin', (compilation) => {
+  // return true to emit the output, otherwise false
+  return true;
+});
+```
 
 
 ### `emit`
 
 `AsyncSeriesHook`
 
-Before emitting assets to output dir
+Executed right before emitting assets to output dir.
 
-Parameters: `compilation`
+- Callback Parameters: `compilation`
 
 
 ### `afterEmit`
 
 `AsyncSeriesHook`
 
-After emitting assets to output dir
+Called after emitting assets to output directory.
 
-Parameters: `compilation`
+- Callback Parameters: `compilation`
 
 
 ### `done`
 
 `AsyncSeriesHook`
 
-Compilation has completed.
+Executed when the compilation has completed.
 
-Parameters: `stats`
+- Callback Parameters: `stats`
 
 
 ### `failed`
 
 `SyncHook`
 
-Compilation has failed.
+Called if the compilation fails.
 
-Parameters: `error`
+- Callback Parameters: `error`
 
 
 ### `invalid`
 
 `SyncHook`
 
-Watch compilation has been invalidated.
+Executed when a watching compilation has been invalidated.
 
-Parameters: `fileName`, `changeTime`
+- Callback Parameters: `fileName`, `changeTime`
 
 
 ### `watchClose`
 
 `SyncHook`
 
-Watch mode has stopped.
+Called when a watching compilation has stopped.
