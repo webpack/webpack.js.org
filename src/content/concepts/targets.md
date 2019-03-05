@@ -30,7 +30,7 @@ In the example above, using `node` webpack will compile for usage in a Node.js-l
 
 Each _target_ has a variety of deployment/environment specific additions, support to fit its needs. See what [targets are available](/configuration/target/).
 
-?>Further expansion for other popular target values
+?> Further expansion for other popular target values
 
 ## Multiple Targets
 
