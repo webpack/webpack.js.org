@@ -5,6 +5,7 @@ sort: 2
 contributors:
   - byzyk
   - madhavarshney
+  - wizardofhogwarts
 ---
 
 The `Compilation` module is used by the `Compiler` to create new compilations
@@ -15,7 +16,7 @@ During the compilation phase, modules are loaded, sealed, optimized, chunked,
 hashed and restored.
 
 The `Compilation` class also extends `Tapable` and provides the following
-lifecycle hooks. They can be tapped the same way as compiler hooks:
+life-cycle hooks. They can be tapped the same way as compiler hooks:
 
 ``` js
 compilation.hooks.someHook.tap(/* ... */);
@@ -486,7 +487,6 @@ compilation.hooks.additionalAssets.tapAsync('MyPlugin', callback => {
 });
 ```
 
-
 ### `optimizeChunkAssets`
 
 `AsyncSeriesHook`
@@ -541,6 +541,8 @@ compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', chunks => {
 ```
 
 
+
+
 ### `optimizeAssets`
 
 `AsyncSeriesHook`
@@ -554,7 +556,7 @@ Parameters: `assets`
 
 `SyncHook`
 
-The assets has been optimized.
+The assets have been optimized.
 
 Parameters: `assets`
 
@@ -629,7 +631,7 @@ Parameters: `childCompiler` `compilerName` `compilerIndex`
 
 `SyncHook`
 
-The normal module loader is the function that actually loads all the modules
+The normal module loader is the function that loads all the modules
 in the module graph (one-by-one).
 
 Parameters: `loaderContext` `module`
@@ -638,6 +640,6 @@ Parameters: `loaderContext` `module`
 
 `SyncWaterfallHook`
 
-`Compilation.hooks.dependencyReference(depRef, dependency, module)` allows to change the references reported by dependencies.
+`Compilation.hooks.dependencyReference(depRef, dependency, module)` allows changing the references reported by dependencies.
 
 Parameters: `depRef` `dependency` `module`
