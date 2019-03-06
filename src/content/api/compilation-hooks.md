@@ -5,6 +5,7 @@ sort: 2
 contributors:
   - byzyk
   - madhavarshney
+  - misterdev
 ---
 
 The `Compilation` module is used by the `Compiler` to create new compilations
@@ -29,9 +30,18 @@ depending on the type of hook.
 
 `SyncHook`
 
-Triggered before a module build has started.
+Triggered before a module build has started, can be used to modify the module.
 
-Parameters: `module`
+- Callback Parameters: `module`
+
+
+```js
+compilation.hooks.buildModule.tap('SourceMapDevToolModuleOptionsPlugin',
+  module => {
+    module.useSourceMap = true;
+  }
+);
+```
 
 
 ### `rebuildModule`
@@ -40,7 +50,7 @@ Parameters: `module`
 
 Fired before rebuilding a module.
 
-Parameters: `module`
+- Callback Parameters: `module`
 
 
 ### `failedModule`
@@ -49,7 +59,7 @@ Parameters: `module`
 
 Run when a module build has failed.
 
-Parameters: `module` `error`
+- Callback Parameters: `module` `error`
 
 
 ### `succeedModule`
@@ -58,25 +68,25 @@ Parameters: `module` `error`
 
 Executed when a module has been built successfully.
 
-Parameters: `module`
+- Callback Parameters: `module`
 
 
 ### `finishModules`
 
 `SyncHook`
 
-All modules have been built.
+Called when all modules have been built without errors.
 
-Parameters: `modules`
+- Callback Parameters: `modules`
 
 
 ### `finishRebuildingModule`
 
 `SyncHook`
 
-A module has been rebuilt.
+Executed when a module has been rebuilt successfully or with errors.
 
-Parameters: `module`
+- Callback Parameters: `module`
 
 
 ### `seal`
@@ -93,83 +103,47 @@ Fired when the compilation stops accepting new modules.
 Fired when a compilation begins accepting new modules.
 
 
-### `optimizeDependenciesBasic`
-
-`SyncBailHook`
-
-...
-
-Parameters: `modules`
-
-
 ### `optimizeDependencies`
 
 `SyncBailHook`
 
 Fired at the beginning of dependency optimization.
 
-Parameters: `modules`
-
-
-### `optimizeDependenciesAdvanced`
-
-`SyncBailHook`
-
-...
-
-Parameters: `modules`
+- Callback Parameters: `modules`
 
 
 ### `afterOptimizeDependencies`
 
 `SyncHook`
 
-...
+Fired after the dependency optimization.
 
-Parameters: `modules`
+- Callback Parameters: `modules`
 
 
 ### `optimize`
 
 `SyncHook`
 
-Triggered at the beginning of the optimization phase.
-
-
-### `optimizeModulesBasic`
-
-`SyncBailHook`
-
-...
-
-Parameters: `modules`
+Triggered at the beginning of the optimization phase, that 
 
 
 ### `optimizeModules`
 
 `SyncBailHook`
 
-...
+Called before optimizing modules. ...
 
-Parameters: `modules`
-
-
-### `optimizeModulesAdvanced`
-
-`SyncBailHook`
-
-...
-
-Parameters: `modules`
+- Callback Parameters: `modules`
 
 
 ### `afterOptimizeModules`
 
 `SyncHook`
 
-...
+Fired after modules optimization has completed.
 
-Parameters: `modules`
+- Callback Parameters: `modules`
 
 
 ### `optimizeChunksBasic`
@@ -178,7 +152,7 @@ Parameters: `modules`
 
 ...
 
-Parameters: `chunks`
+- Callback Parameters: `chunks`
 
 
 ### `optimizeChunks`
@@ -187,7 +161,7 @@ Parameters: `chunks`
 
 Optimize the chunks.
 
-Parameters: `chunks`
+- Callback Parameters: `chunks`
 
 
 ### `optimizeChunksAdvanced`
@@ -196,7 +170,7 @@ Parameters: `chunks`
 
 ...
 
-Parameters: `chunks`
+- Callback Parameters: `chunks`
 
 
 ### `afterOptimizeChunks`
@@ -205,7 +179,7 @@ Parameters: `chunks`
 
 Fired after chunk optimization has completed.
 
-Parameters: `chunks`
+- Callback Parameters: `chunks`
 
 
 ### `optimizeTree`
@@ -214,16 +188,16 @@ Parameters: `chunks`
 
 Optimize the dependency tree asynchronously.
 
-Parameters: `chunks` `modules`
+- Callback Parameters: `chunks` `modules`
 
 
 ### `afterOptimizeTree`
 
 `SyncHook`
 
-...
+Fired after the dependency three optimization has completed.
 
-Parameters: `chunks` `modules`
+- Callback Parameters: `chunks` `modules`
 
 
 ### `optimizeChunkModulesBasic`
@@ -232,7 +206,7 @@ Parameters: `chunks` `modules`
 
 ...
 
-Parameters: `chunks` `modules`
+- Callback Parameters: `chunks` `modules`
 
 
 ### `optimizeChunkModules`
@@ -241,7 +215,7 @@ Parameters: `chunks` `modules`
 
 ...
 
-Parameters: `chunks` `modules`
+- Callback Parameters: `chunks` `modules`
 
 
 ### `optimizeChunkModulesAdvanced`
@@ -250,7 +224,7 @@ Parameters: `chunks` `modules`
 
 ...
 
-Parameters: `chunks` `modules`
+- Callback Parameters: `chunks` `modules`
 
 
 ### `afterOptimizeChunkModules`
@@ -259,14 +233,14 @@ Parameters: `chunks` `modules`
 
 ...
 
-Parameters: `chunks` `modules`
+- Callback Parameters: `chunks` `modules`
 
 
 ### `shouldRecord`
 
 `SyncBailHook`
 
-...
+Called to determine wheter or not storing records. Returning anything `!== false` will prevent every other "record" hook from being executed (`record`, `recordModules`, `recordChunks` and `recordHash` )
 
 
 ### `reviveModules`
@@ -275,7 +249,7 @@ Parameters: `chunks` `modules`
 
 Restore module information from records.
 
-Parameters: `modules` `records`
+- Callback Parameters: `modules` `records`
 
 
 ### `optimizeModuleOrder`
@@ -284,7 +258,7 @@ Parameters: `modules` `records`
 
 Sort the modules in from most to least important.
 
-Parameters: `modules`
+- Callback Parameters: `modules`
 
 
 ### `advancedOptimizeModuleOrder`
@@ -293,7 +267,7 @@ Parameters: `modules`
 
 ...
 
-Parameters: `modules`
+- Callback Parameters: `modules`
 
 
 ### `beforeModuleIds`
@@ -302,7 +276,7 @@ Parameters: `modules`
 
 ...
 
-Parameters: `modules`
+- Callback Parameters: `modules`
 
 
 ### `moduleIds`
@@ -311,7 +285,7 @@ Parameters: `modules`
 
 ...
 
-Parameters: `modules`
+- Callback Parameters: `modules`
 
 
 ### `optimizeModuleIds`
@@ -320,7 +294,7 @@ Parameters: `modules`
 
 ...
 
-Parameters: `chunks`
+- Callback Parameters: `chunks`
 
 
 ### `afterOptimizeModuleIds`
@@ -329,7 +303,7 @@ Parameters: `chunks`
 
 ...
 
-Parameters: `chunks`
+- Callback Parameters: `chunks`
 
 
 ### `reviveChunks`
@@ -338,7 +312,7 @@ Parameters: `chunks`
 
 Restore chunk information from records.
 
-Parameters: `modules` `records`
+- Callback Parameters: `modules` `records`
 
 
 ### `optimizeChunkOrder`
@@ -347,7 +321,7 @@ Parameters: `modules` `records`
 
 Sort the chunks in from most to least important.
 
-Parameters: `chunks`
+- Callback Parameters: `chunks`
 
 
 ### `beforeOptimizeChunkIds`
@@ -356,7 +330,7 @@ Parameters: `chunks`
 
 Fired before chunk `id` optimization.
 
-Parameters: `chunks`
+- Callback Parameters: `chunks`
 
 
 ### `optimizeChunkIds`
@@ -365,7 +339,7 @@ Parameters: `chunks`
 
 Optimize the `id` of each chunk.
 
-Parameters: `chunks`
+- Callback Parameters: `chunks`
 
 
 ### `afterOptimizeChunkIds`
@@ -374,7 +348,7 @@ Parameters: `chunks`
 
 Triggered after chunk `id` optimization has finished.
 
-Parameters: `chunks`
+- Callback Parameters: `chunks`
 
 
 ### `recordModules`
@@ -383,7 +357,7 @@ Parameters: `chunks`
 
 Store module info to the records.
 
-Parameters: `modules` `records`
+- Callback Parameters: `modules` `records`
 
 
 ### `recordChunks`
@@ -392,7 +366,7 @@ Parameters: `modules` `records`
 
 Store chunk info to the records.
 
-Parameters: `chunks` `records`
+- Callback Parameters: `chunks` `records`
 
 
 ### `beforeHash`
@@ -415,7 +389,7 @@ After the compilation is hashed.
 
 ...
 
-Parameters: `records`
+- Callback Parameters: `records`
 
 
 ### `record`
@@ -424,7 +398,7 @@ Parameters: `records`
 
 Store information about the `compilation` to the `records`.
 
-Parameters: `compilation` `records`
+- Callback Parameters: `compilation` `records`
 
 
 ### `beforeModuleAssets`
@@ -454,7 +428,7 @@ Before creating the chunk assets.
 
 Create additional assets for the chunks.
 
-Parameters: `chunks`
+- Callback Parameters: `chunks`
 
 
 ### `records`
@@ -463,7 +437,7 @@ Parameters: `chunks`
 
 ...
 
-Parameters: `compilation` `records`
+- Callback Parameters: `compilation` `records`
 
 
 ### `additionalAssets`
@@ -495,7 +469,7 @@ Optimize any chunk assets. The assets are stored in `compilation.assets`. A
 `Chunk` has a property `files` which points to all files created by a chunk.
 Any additional chunk assets are stored in `compilation.additionalChunkAssets`.
 
-Parameters: `chunks`
+- Callback Parameters: `chunks`
 
 Here's an example that simply adds a banner to each chunk.
 
@@ -524,7 +498,7 @@ compilation.hooks
 
 The chunk assets have been optimized.
 
-Parameters: `chunks`
+- Callback Parameters: `chunks`
 
 Here's an example plugin from [@boopathi](https://github.com/boopathi) that outputs exactly what went into each chunk.
 
@@ -547,7 +521,7 @@ compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', chunks => {
 
 Optimize all assets stored in `compilation.assets`.
 
-Parameters: `assets`
+- Callback Parameters: `assets`
 
 
 ### `afterOptimizeAssets`
@@ -556,7 +530,7 @@ Parameters: `assets`
 
 The assets has been optimized.
 
-Parameters: `assets`
+- Callback Parameters: `assets`
 
 
 ### `needAdditionalSeal`
@@ -579,7 +553,7 @@ Parameters: `assets`
 
 ...
 
-Parameters: `chunk` `chunkHash`
+- Callback Parameters: `chunk` `chunkHash`
 
 
 ### `moduleAsset`
@@ -588,7 +562,7 @@ Parameters: `chunk` `chunkHash`
 
 An asset from a module was added to the compilation.
 
-Parameters: `module` `filename`
+- Callback Parameters: `module` `filename`
 
 
 ### `chunkAsset`
@@ -597,7 +571,7 @@ Parameters: `module` `filename`
 
 An asset from a chunk was added to the compilation.
 
-Parameters: `chunk` `filename`
+- Callback Parameters: `chunk` `filename`
 
 
 ### `assetPath`
@@ -606,7 +580,7 @@ Parameters: `chunk` `filename`
 
 ...
 
-Parameters: `filename` `data`
+- Callback Parameters: `filename` `data`
 
 
 ### `needAdditionalPass`
@@ -622,7 +596,7 @@ Parameters: `filename` `data`
 
 ...
 
-Parameters: `childCompiler` `compilerName` `compilerIndex`
+- Callback Parameters: `childCompiler` `compilerName` `compilerIndex`
 
 
 ### `normalModuleLoader`
@@ -632,7 +606,7 @@ Parameters: `childCompiler` `compilerName` `compilerIndex`
 The normal module loader is the function that actually loads all the modules
 in the module graph (one-by-one).
 
-Parameters: `loaderContext` `module`
+- Callback Parameters: `loaderContext` `module`
 
 ### `dependencyReference`
 
@@ -640,4 +614,4 @@ Parameters: `loaderContext` `module`
 
 `Compilation.hooks.dependencyReference(depRef, dependency, module)` allows to change the references reported by dependencies.
 
-Parameters: `depRef` `dependency` `module`
+- Callback Parameters: `depRef` `dependency` `module`
