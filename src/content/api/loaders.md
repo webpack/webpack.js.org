@@ -338,7 +338,7 @@ T> Loaders were originally designed to also work as Babel transforms. Therefore 
 
 ### `this.sourceMap`
 
-Should a source map be generated? Since generating source maps can be an expensive task, you should check if source maps are actually requested.
+Tells if source map should be generated. Since generating source maps can be an expensive task, you should check if source maps are actually requested.
 
 
 ### `this.emitWarning`
