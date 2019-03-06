@@ -481,7 +481,7 @@ A boolean flag. It is set when in debug mode.
 
 ### `this.minimize`
 
-Should the result be minimized?
+Tells if result should be minimized.
 
 
 ### `this._compilation`
