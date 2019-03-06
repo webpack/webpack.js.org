@@ -168,7 +168,7 @@ W> Module ID is a number in webpack (in contrast to NodeJS where it is a string 
 
 ### `require.cache`
 
-Multiple requires in the same module result in only one module execution and only one export. Therefore a cache in the runtime exists. Removing values from this cache cause new module execution and a new export.
+Multiple requires of the same module result in only one module execution and only one export. Therefore a cache in the runtime exists. Removing values from this cache cause new module execution and a new export.
 
 W> This is only needed in rare cases for compatibility!
 
