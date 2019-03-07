@@ -125,14 +125,14 @@ Fired after the dependency optimization.
 
 `SyncHook`
 
-Triggered at the beginning of the optimization phase, that 
+Triggered at the beginning of the optimization phase.  
 
 
 ### `optimizeModules`
 
 `SyncBailHook`
 
-Called before optimizing modules. ...
+Called at the beginning of the modules optimization phase. A plugin can tap this hook to perform modules optimizations.
 
 - Callback Parameters: `modules`
 
@@ -150,7 +150,7 @@ Fired after modules optimization has completed.
 
 `SyncBailHook`
 
-...
+W> This hook will be removed in v5.0.0
 
 - Callback Parameters: `chunks`
 
@@ -159,7 +159,7 @@ Fired after modules optimization has completed.
 
 `SyncBailHook`
 
-Optimize the chunks.
+Called at the beginning of the chunks optimizion phase. A plugin can tap this hook to perform chunks optimizations.
 
 - Callback Parameters: `chunks`
 
@@ -168,7 +168,7 @@ Optimize the chunks.
 
 `SyncBailHook`
 
-...
+W> This hook will be removed in v5.0.0
 
 - Callback Parameters: `chunks`
 
@@ -186,7 +186,7 @@ Fired after chunk optimization has completed.
 
 `AsyncSeriesHook`
 
-Optimize the dependency tree asynchronously.
+Called before optimizing the dependency tree. A plugin can tap this hook to perform a dependency tree optimization.
 
 - Callback Parameters: `chunks` `modules`
 
@@ -195,7 +195,7 @@ Optimize the dependency tree asynchronously.
 
 `SyncHook`
 
-Fired after the dependency three optimization has completed.
+Fired after the dependency three optimization has completed with success.
 
 - Callback Parameters: `chunks` `modules`
 
@@ -204,7 +204,7 @@ Fired after the dependency three optimization has completed.
 
 `SyncBailHook`
 
-...
+W> This hook will be removed in v5.0.0
 
 - Callback Parameters: `chunks` `modules`
 
@@ -213,7 +213,7 @@ Fired after the dependency three optimization has completed.
 
 `SyncBailHook`
 
-...
+Called after the three optimization, at the beginning of the chunkmodules optimization. A plugin can tap this hook to perform a chunkmodules optimization.
 
 - Callback Parameters: `chunks` `modules`
 
@@ -222,7 +222,7 @@ Fired after the dependency three optimization has completed.
 
 `SyncBailHook`
 
-...
+W> This hook will be removed in v5.0.0
 
 - Callback Parameters: `chunks` `modules`
 
@@ -231,7 +231,7 @@ Fired after the dependency three optimization has completed.
 
 `SyncHook`
 
-...
+Fired after the chunkmodules optimization has completed with success.
 
 - Callback Parameters: `chunks` `modules`
 
@@ -256,6 +256,8 @@ Restore module information from records.
 
 `SyncHook`
 
+W> This hook will be removed in v5.0.0
+
 Sort the modules in from most to least important.
 
 - Callback Parameters: `modules`
@@ -265,7 +267,7 @@ Sort the modules in from most to least important.
 
 `SyncHook`
 
-...
+W> This hook will be removed in v5.0.0
 
 - Callback Parameters: `modules`
 
@@ -274,7 +276,7 @@ Sort the modules in from most to least important.
 
 `SyncHook`
 
-...
+Executed before assigning an `id` to each module.
 
 - Callback Parameters: `modules`
 
@@ -283,7 +285,7 @@ Sort the modules in from most to least important.
 
 `SyncHook`
 
-...
+Called to assign an `id` to each module.
 
 - Callback Parameters: `modules`
 
@@ -292,18 +294,18 @@ Sort the modules in from most to least important.
 
 `SyncHook`
 
-...
+Fired at the beginning of the modules `id` optimization.
 
-- Callback Parameters: `chunks`
+- Callback Parameters: `modules`
 
 
 ### `afterOptimizeModuleIds`
 
 `SyncHook`
 
-...
+Called when the modules `id` optimization phase has completed.
 
-- Callback Parameters: `chunks`
+- Callback Parameters: `modules`
 
 
 ### `reviveChunks`
@@ -312,23 +314,42 @@ Sort the modules in from most to least important.
 
 Restore chunk information from records.
 
-- Callback Parameters: `modules` `records`
+- Callback Parameters: `chunks` `records`
 
 
 ### `optimizeChunkOrder`
 
 `SyncHook`
 
+W> This hook will be removed in v5.0.0
+
 Sort the chunks in from most to least important.
 
 - Callback Parameters: `chunks`
+  
+### `beforeChunkIds`
+
+`SyncHook`
+
+Executed before assigning an `id` to each chunks.
+
+- Callback Parameters: `chunks`
+
+
+### `chunkIds`
+
+`SyncHook`
+
+Called to assign an `id` to each chunks.
+
+- Callback Parameters: `modules`
 
 
 ### `beforeOptimizeChunkIds`
 
 `SyncHook`
 
-Fired before chunk `id` optimization.
+Fired before chunks `id` optimization.
 
 - Callback Parameters: `chunks`
 
@@ -337,7 +358,7 @@ Fired before chunk `id` optimization.
 
 `SyncHook`
 
-Optimize the `id` of each chunk.
+Fired at the beginning of the chunks `id` optimization phase.
 
 - Callback Parameters: `chunks`
 
@@ -355,7 +376,7 @@ Triggered after chunk `id` optimization has finished.
 
 `SyncHook`
 
-Store module info to the records.
+Store module info to the records. This is triggered only if 
 
 - Callback Parameters: `modules` `records`
 
@@ -369,25 +390,37 @@ Store chunk info to the records.
 - Callback Parameters: `chunks` `records`
 
 
+### `optimizeCodeGeneration`
+
+- Callback Parameters: `modules`
+
+### `beforeModuleHash`
+
+### `afterModuleHash`
+
+### `beforeRuntimeRequirements`
+
+### `afterRuntimeRequirements`
+
 ### `beforeHash`
 
 `SyncHook`
 
-Before the compilation is hashed.
+Called before the compilation is hashed.
 
 
 ### `afterHash`
 
 `SyncHook`
 
-After the compilation is hashed.
+Called after the compilation is hashed.
 
 
 ### `recordHash`
 
 `SyncHook`
 
-...
+Store information about record hash to the `records`.
 
 - Callback Parameters: `records`
 
@@ -405,21 +438,7 @@ Store information about the `compilation` to the `records`.
 
 `SyncHook`
 
-...
-
-
-### `shouldGenerateChunkAssets`
-
-`SyncBailHook`
-
-...
-
-
-### `beforeChunkAssets`
-
-`SyncHook`
-
-Before creating the chunk assets.
+Executed before module assets creation.
 
 
 ### `additionalChunkAssets`
@@ -431,11 +450,25 @@ Create additional assets for the chunks.
 - Callback Parameters: `chunks`
 
 
+### `shouldGenerateChunkAssets`
+
+`SyncBailHook`
+
+Called to determine wheter or not generate chunk assets. Returning anything `!== false` will allow chunk assets generation.
+
+
+### `beforeChunkAssets`
+
+`SyncHook`
+
+Executed before creating the chunk assets.
+
+
 ### `records`
 
 `SyncHook`
 
-...
+Removed in v5.
 
 - Callback Parameters: `compilation` `records`
 
@@ -537,21 +570,21 @@ The assets has been optimized.
 
 `SyncBailHook`
 
-...
+Called to determine if the compilation needs to be unsealed to include other files.
 
 
 ### `afterSeal`
 
 `AsyncSeriesHook`
 
-...
+Executed right after `needAdditionalSeal`.
 
 
 ### `chunkHash`
 
 `SyncHook`
 
-...
+Triggered to emit the hash for each chunk.
 
 - Callback Parameters: `chunk` `chunkHash`
 
@@ -560,7 +593,7 @@ The assets has been optimized.
 
 `SyncHook`
 
-An asset from a module was added to the compilation.
+Called when an asset from a module was added to the compilation.
 
 - Callback Parameters: `module` `filename`
 
@@ -569,7 +602,7 @@ An asset from a module was added to the compilation.
 
 `SyncHook`
 
-An asset from a chunk was added to the compilation.
+Triggered when an asset from a chunk was added to the compilation.
 
 - Callback Parameters: `chunk` `filename`
 
@@ -578,23 +611,23 @@ An asset from a chunk was added to the compilation.
 
 `SyncWaterfallHook`
 
-...
+Called to determine the path of an asset.
 
-- Callback Parameters: `filename` `data`
+- Callback Parameters: `path` `options`
 
 
 ### `needAdditionalPass`
 
 `SyncBailHook`
 
-...
+Called to determine if a asset need to be processed further after being emitted. 
 
 
 ### `childCompiler`
 
 `SyncHook`
 
-...
+Executed after setting up a child compiler.
 
 - Callback Parameters: `childCompiler` `compilerName` `compilerIndex`
 
@@ -602,6 +635,8 @@ An asset from a chunk was added to the compilation.
 ### `normalModuleLoader`
 
 `SyncHook`
+
+W> This hook will be removed in v5.0.0
 
 The normal module loader is the function that actually loads all the modules
 in the module graph (one-by-one).
@@ -612,6 +647,6 @@ in the module graph (one-by-one).
 
 `SyncWaterfallHook`
 
-`Compilation.hooks.dependencyReference(depRef, dependency, module)` allows to change the references reported by dependencies.
+This hooks allows to change the references reported by dependencies.
 
-- Callback Parameters: `depRef` `dependency` `module`
+- Callback Parameters: `depRef` `dependency`
