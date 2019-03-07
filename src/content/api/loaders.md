@@ -186,7 +186,7 @@ require('./loader1?xyz!loader2!./resource?rrr');
 
 ### `this.version`
 
-__Loader API version.__ Currently `2`. This is useful for providing backward compatibility. Using the version you can specify custom logic or fallbacks for breaking changes.
+__Loader API version.__ Currently `2`. This is useful for providing backwards compatibility. Using the version you can specify custom logic or fallbacks for breaking changes.
 
 
 ### `this.context`
