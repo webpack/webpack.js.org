@@ -102,12 +102,29 @@ Fired when the compilation stops accepting new modules.
 
 Fired when a compilation begins accepting new modules.
 
+### `optimizeDependenciesBasic`
+
+`SyncBailHook`
+
+W> This hook will be removed in v5.0.0
+
+Parameters: `modules`
+
 
 ### `optimizeDependencies`
 
 `SyncBailHook`
 
 Fired at the beginning of dependency optimization.
+
+- Callback Parameters: `modules`
+
+
+### `optimizeDependenciesAdvanced`
+
+`SyncBailHook`
+
+W> This hook will be removed in v5.0.0
 
 - Callback Parameters: `modules`
 
@@ -128,11 +145,29 @@ Fired after the dependency optimization.
 Triggered at the beginning of the optimization phase.  
 
 
+### `optimizeModulesBasic`
+
+`SyncBailHook`
+
+W> This hook will be removed in v5.0.0
+
+- Callback Parameters: `modules`
+
+
 ### `optimizeModules`
 
 `SyncBailHook`
 
 Called at the beginning of the modules optimization phase. A plugin can tap this hook to perform modules optimizations.
+
+- Callback Parameters: `modules`
+
+
+### `optimizeModulesAdvanced`
+
+`SyncBailHook`
+
+W> This hook will be removed in v5.0.0
 
 - Callback Parameters: `modules`
 
@@ -468,7 +503,7 @@ Executed before creating the chunk assets.
 
 `SyncHook`
 
-Removed in v5.
+W> This hook will be removed in v5.0.0
 
 - Callback Parameters: `compilation` `records`
 
