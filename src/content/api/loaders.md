@@ -1,5 +1,5 @@
 ---
-title: Loader API
+title: Loader Interface
 sort: 4
 contributors:
   - TheLarkInn
@@ -9,6 +9,7 @@ contributors:
   - sokra
   - EugeneHlushko
   - jantimon
+  - superburrito
 ---
 
 A loader is just a JavaScript module that exports a function. The [loader runner](https://github.com/webpack/loader-runner) calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by webpack and the [loader runner](https://github.com/webpack/loader-runner) with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters.
@@ -95,7 +96,11 @@ module.exports.raw = true;
 
 ### Pitching Loader
 
-Loaders are __always__ called from right to left. There are some instances where the loader only cares about the __metadata__ behind a request and can ignore the results of the previous loader. The `pitch` method on loaders is called from __left to right__ before the loaders are actually executed (from right to left). For the following [`use`](/configuration/module#rule-use) configuration:
+Loaders are __always__ called from right to left. There are some instances where the loader only cares about the __metadata__ behind a request and can ignore the results of the previous loader. The `pitch` method on loaders is called from __left to right__ before the loaders are actually executed (from right to left). 
+
+T> Loaders may be added inline in requests and disabled via inline prefixes, which will impact the order in which they are "pitched" and executed. See [`Rule.enforce`](/configuration/module#ruleenforce) for more details.
+
+For the following configuration of [`use`](/configuration/module#rule-use):
 
 ``` javascript
 module.exports = {

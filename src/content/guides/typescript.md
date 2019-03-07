@@ -154,7 +154,7 @@ See the [devtool documentation](/configuration/devtool/) for more information.
 
 ## Using Third Party Libraries
 
-When installing third party libraries from npm, it is important to remember to install the typing definition for that library. These definitions can be found at [TypeSearch](http://microsoft.github.io/TypeSearch/).
+When installing third party libraries from npm, it is important to remember to install the typing definition for that library. These definitions can be found at [TypeSearch](https://microsoft.github.io/TypeSearch/).
 
 For example if we want to install lodash we can run the following command to get the typings for it:
 
