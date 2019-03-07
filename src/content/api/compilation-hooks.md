@@ -84,7 +84,7 @@ Called when all modules have been built without errors.
 
 `SyncHook`
 
-Executed when a module has been rebuilt successfully or with errors.
+Executed when a module has been rebuilt, in case of both success or with errors.
 
 - Callback Parameters: `module`
 
@@ -101,6 +101,7 @@ Fired when the compilation stops accepting new modules.
 `SyncHook`
 
 Fired when a compilation begins accepting new modules.
+
 
 ### `optimizeDependenciesBasic`
 
@@ -158,7 +159,7 @@ W> This hook will be removed in v5.0.0
 
 `SyncBailHook`
 
-Called at the beginning of the modules optimization phase. A plugin can tap this hook to perform modules optimizations.
+Called at the beginning of the modules optimization phase. A plugin can tap into  this hook to perform modules optimizations.
 
 - Callback Parameters: `modules`
 
@@ -194,7 +195,7 @@ W> This hook will be removed in v5.0.0
 
 `SyncBailHook`
 
-Called at the beginning of the chunks optimizion phase. A plugin can tap this hook to perform chunks optimizations.
+Called at the beginning of the chunks optimizion phase. A plugin can tap into this hook to perform chunks optimizations.
 
 - Callback Parameters: `chunks`
 
@@ -221,7 +222,7 @@ Fired after chunk optimization has completed.
 
 `AsyncSeriesHook`
 
-Called before optimizing the dependency tree. A plugin can tap this hook to perform a dependency tree optimization.
+Called before optimizing the dependency tree. A plugin can tap into this hook to perform a dependency tree optimization.
 
 - Callback Parameters: `chunks` `modules`
 
@@ -248,7 +249,7 @@ W> This hook will be removed in v5.0.0
 
 `SyncBailHook`
 
-Called after the three optimization, at the beginning of the chunkmodules optimization. A plugin can tap this hook to perform a chunkmodules optimization.
+Called after the three optimization, at the beginning of the chunkmodules optimization. A plugin can tap into this hook to perform a chunkmodules optimization.
 
 - Callback Parameters: `chunks` `modules`
 
@@ -362,6 +363,7 @@ Sort the chunks in from most to least important.
 
 - Callback Parameters: `chunks`
   
+
 ### `beforeChunkIds`
 
 `SyncHook`
@@ -375,6 +377,8 @@ Executed before assigning an `id` to each chunks.
 
 `SyncHook`
 
+T> This hook will be available in v5.0.0
+
 Called to assign an `id` to each chunks.
 
 - Callback Parameters: `modules`
@@ -383,6 +387,8 @@ Called to assign an `id` to each chunks.
 ### `beforeOptimizeChunkIds`
 
 `SyncHook`
+
+T> This hook will be available in v5.0.0
 
 Fired before chunks `id` optimization.
 
@@ -427,15 +433,42 @@ Store chunk info to the records.
 
 ### `optimizeCodeGeneration`
 
+T> This hook will be available in v5.0.0
+
+A plugin can tap into this hook to optimize the generated code.
+
 - Callback Parameters: `modules`
+
 
 ### `beforeModuleHash`
 
+T> This hook will be available in v5.0.0
+
+Called before hashing modules.
+
+
 ### `afterModuleHash`
+
+T> This hook will be available in v5.0.0
+
+Called after hashing modules.
+
 
 ### `beforeRuntimeRequirements`
 
+T> This hook will be available in v5.0.0
+
+Called before processing the modules required at runtime.
+
+- Callback Parameters: `entrypoints`
+
+
 ### `afterRuntimeRequirements`
+
+T> This hook will be available in v5.0.0
+
+Called after processing the runtime requirements.
+
 
 ### `beforeHash`
 
@@ -498,14 +531,6 @@ Called to determine wheter or not generate chunk assets. Returning anything `!==
 
 Executed before creating the chunk assets.
 
-
-### `records`
-
-`SyncHook`
-
-W> This hook will be removed in v5.0.0
-
-- Callback Parameters: `compilation` `records`
 
 
 ### `additionalAssets`
@@ -684,4 +709,6 @@ in the module graph (one-by-one).
 
 This hooks allows to change the references reported by dependencies.
 
-- Callback Parameters: `depRef` `dependency`
+- Callback Parameters: `depRef` `dependency` `module`
+
+W> The `module` parameter will be removed in v5.0.0
