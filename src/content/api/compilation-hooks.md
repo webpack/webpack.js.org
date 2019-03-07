@@ -16,7 +16,7 @@ During the compilation phase, modules are loaded, sealed, optimized, chunked,
 hashed and restored.
 
 The `Compilation` class also extends `Tapable` and provides the following
-life-cycle hooks. They can be tapped the same way as compiler hooks:
+lifecycle hooks. They can be tapped the same way as compiler hooks:
 
 ``` js
 compilation.hooks.someHook.tap(/* ... */);
