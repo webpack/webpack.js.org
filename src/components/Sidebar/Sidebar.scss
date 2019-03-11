@@ -17,7 +17,12 @@
   padding: 1.5em;
   position: sticky;
   top: -1px;
-  overflow: hidden;
+  overflow: scroll;
+  max-height: 100vh;
+
+  &::-webkit-scrollbar {
+    width: 0 !important;
+  }
 }
 
 .sidebar__group {
