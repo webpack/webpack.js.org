@@ -44,7 +44,7 @@ Installing locally is what we recommend for most projects. This makes it easier 
 }
 ```
 
-T> To run the local installation of webpack you can access its bin version as `node_modules/.bin/webpack`.
+T> To run the local installation of webpack you can access its binary version as `node_modules/.bin/webpack`. Alternatively, if you are using npm v5.2.0 or greater, you can run 'npx webpack' to do it.
 
 
 ## Global Installation

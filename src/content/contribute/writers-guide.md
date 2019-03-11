@@ -119,3 +119,19 @@ W> This is a warning.
 __Syntax: ?\>__
 
 ?> This is a todo.
+
+### Assumptions and simplicity
+
+Do not make assumptions when writing the documentation.
+
+```diff
+- You might already know how to optimize bundle for production...
++ As we've learned in [production guide](/guides/production/)...
+```
+
+Please do not assume things are simple. Avoid words like 'just', 'simply'.
+
+```diff
+- Simply run command...
++ Run the `command-name` command...
+```
