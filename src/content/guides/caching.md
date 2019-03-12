@@ -106,6 +106,7 @@ __webpack.config.js__
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
         title: 'Caching'
+      })
     ],
     output: {
       filename: '[name].[contenthash].js',
