@@ -252,42 +252,8 @@ module.exports = class WebpackGenerator extends Generator {
 ```
 
 
-## Part 4-B
 
-Let's go ahead and create our utility. We've got an utility for this in `webpack-scaffold`, so if you do `const createCommonsChunkPlugin = require('@webpack-cli/webpack-scaffold').commonChunksPluginCreate;`, you get the same thing. I'm doing this for demonstration purposes, so that you can better know how to compose a scaffold. First, I'm going to create a `create-chunk.js`, followed up by an import in `dev-config.js`.
-
-__dev-config.js__
-
-```js
-const createCommonsChunkPlugin = require('./commons-chunk');
-
-module.exports = function createDevConfig(answer) {
-  let entryProp = answer.entry ? ( '\'' + answer.entry + '\'') : '\'index.js\'';
-  let devConfig = {
-    entry: entryProp,
-    output: {
-      filename: '\'[name].js\''
-    },
-    context: 'path.join(__dirname, "src")',
-    plugins: [
-      createCommonsChunkPlugin(answer.plugin)
-    ]
-  };
-  return devConfig;
-};
-```
-
-__commons-chunk.js__
-
-```js
-module.exports = function createCommonsChunkPlugin(chunk) {
-
-};
-```
-
-
-
-## Part 4-C
+## Create string with chunks
 
 Now, we've got to create a string with our chunk. This is how it looks.
 
@@ -304,7 +270,7 @@ Sweet! We've now created a scaffold with `entry`, `output`, `context` and a `plu
 
 
 
-## Part 5-A
+## Defining scopes
 
 In order for webpack to compile correctly, we've got to import `path`. For this, we've got to define something called `topScope`. This is where our code before `module.exports` are going, where you can add everything from imports, variables, to functions. The syntax is the same as with the plugins, except that the `topScope` property expects an array. In `topScope` you can define whatever you want.
 
@@ -346,7 +312,7 @@ module.exports = class WebpackGenerator extends Generator {
 
 
 
-## Part 5-B
+## Nomenclature of configs
 
 You also might want to name your config file something you've got strong personal attachments to, like my love for penguins. To do so, you can do the following.
 
@@ -386,7 +352,7 @@ module.exports = class WebpackGenerator extends Generator {
 };
 ```
 
-## Part 5-C
+## Introducing .yo-rc.json
 
 To write the actual configuration, webpack-cli creates a `.yo-rc.json` file for it to parse the ast. For the CLI to understand how to parse the configuration, we need to write to the `.yo-rc.json`. This is done using the `writing` lifecycle method built in by yeoman.
 
