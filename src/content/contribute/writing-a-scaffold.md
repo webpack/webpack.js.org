@@ -254,7 +254,7 @@ module.exports = class WebpackGenerator extends Generator {
 
 ## Part 4-B
 
-Let's go ahead and create our utility. We've got an utility for this in `webpack-scaffold`, so if you do `const createCommonsChunkPlugin = require('@webpack-cli/webpack-scaffold').commonChunksPluginCreate;`, you get the same thing. I'm doing this for demonstration purposes, so that you can better know how to compose a scaffold in good faith. First, I'm going to create a `create-chunk.js`, followed up by an import in `dev-config.js`.
+Let's go ahead and create our utility. We've got an utility for this in `webpack-scaffold`, so if you do `const createCommonsChunkPlugin = require('@webpack-cli/webpack-scaffold').commonChunksPluginCreate;`, you get the same thing. I'm doing this for demonstration purposes, so that you can better know how to compose a scaffold. First, I'm going to create a `create-chunk.js`, followed up by an import in `dev-config.js`.
 
 __dev-config.js__
 
