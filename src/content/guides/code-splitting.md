@@ -217,12 +217,12 @@ __src/index.js__
 -
 - function component() {
 + function getComponent() {
--   var element = document.createElement('div');
+-   let element = document.createElement('div');
 -
 -   // Lodash, now imported by this script
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +   return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
-+     var element = document.createElement('div');
++     let element = document.createElement('div');
 +
 +     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +
@@ -258,14 +258,14 @@ __src/index.js__
 - function getComponent() {
 + async function getComponent() {
 -   return import(/* webpackChunkName: "lodash" */ 'lodash').then({ default: _ } => {
--     var element = document.createElement('div');
+-     let element = document.createElement('div');
 -
 -     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 -
 -     return element;
 -
 -   }).catch(error => 'An error occurred while loading the component');
-+   var element = document.createElement('div');
++   let element = document.createElement('div');
 +   const { default: _ } = await import(/* webpackChunkName: "lodash" */ 'lodash');
 +
 +   element.innerHTML = _.join(['Hello', 'webpack'], ' ');

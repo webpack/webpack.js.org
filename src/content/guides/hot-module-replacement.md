@@ -57,9 +57,11 @@ __webpack.config.js__
 +     hot: true
     },
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Hot Module Replacement'
+-       title: 'Development'
++       title: 'Hot Module Replacement'
       }),
 +     new webpack.HotModuleReplacementPlugin()
     ],
@@ -81,8 +83,8 @@ __index.js__
   import printMe from './print.js';
 
   function component() {
-    var element = document.createElement('div');
-    var btn = document.createElement('button');
+    let element = document.createElement('div');
+    let btn = document.createElement('button');
 
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
@@ -178,8 +180,8 @@ __index.js__
   import printMe from './print.js';
 
   function component() {
-    var element = document.createElement('div');
-    var btn = document.createElement('button');
+    let element = document.createElement('div');
+    let btn = document.createElement('button');
 
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
@@ -247,7 +249,8 @@ __webpack.config.js__
 +     ]
 +   },
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement'
       }),
@@ -292,8 +295,8 @@ __index.js__
 + import './styles.css';
 
   function component() {
-    var element = document.createElement('div');
-    var btn = document.createElement('button');
+    let element = document.createElement('div');
+    let btn = document.createElement('button');
 
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 

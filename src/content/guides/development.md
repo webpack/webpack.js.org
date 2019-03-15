@@ -36,9 +36,11 @@ __webpack.config.js__
       print: './src/print.js'
     },
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Development'
+-       title: 'Output Management'
++       title: 'Development'
       })
     ],
     output: {
@@ -214,7 +216,8 @@ __webpack.config.js__
 +     contentBase: './dist'
 +   },
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Development'
       })
@@ -236,29 +239,14 @@ __package.json__
 
 ``` diff
   {
-    "name": "development",
-    "version": "1.0.0",
-    "description": "",
-    "main": "webpack.config.js",
+    ...
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "watch": "webpack --watch",
 +     "start": "webpack-dev-server --open",
       "build": "webpack"
     },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-      "clean-webpack-plugin": "^0.1.16",
-      "css-loader": "^0.28.4",
-      "csv-loader": "^2.1.1",
-      "file-loader": "^0.11.2",
-      "html-webpack-plugin": "^2.29.0",
-      "style-loader": "^0.18.2",
-      "webpack": "^3.0.0",
-      "xml-loader": "^1.2.1"
-    }
+    ...
   }
 ```
 
@@ -301,7 +289,7 @@ __webpack.config.js__
     plugins: [
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
-        title: 'Output Management'
+        title: 'Development'
       })
     ],
     output: {
@@ -357,10 +345,7 @@ __package.json__
 
 ``` diff
   {
-    "name": "development",
-    "version": "1.0.0",
-    "description": "",
-    "main": "webpack.config.js",
+    ...
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "watch": "webpack --watch",
@@ -368,21 +353,7 @@ __package.json__
 +     "server": "node server.js",
       "build": "webpack"
     },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-      "clean-webpack-plugin": "^0.1.16",
-      "css-loader": "^0.28.4",
-      "csv-loader": "^2.1.1",
-      "express": "^4.15.3",
-      "file-loader": "^0.11.2",
-      "html-webpack-plugin": "^2.29.0",
-      "style-loader": "^0.18.2",
-      "webpack": "^3.0.0",
-      "webpack-dev-middleware": "^1.12.0",
-      "xml-loader": "^1.2.1"
-    }
+    ...
   }
 ```
 

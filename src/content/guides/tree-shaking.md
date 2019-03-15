@@ -92,8 +92,8 @@ __src/index.js__
 + import { cube } from './math.js';
 
   function component() {
--   var element = document.createElement('div');
-+   var element = document.createElement('pre');
+-   let element = document.createElement('div');
++   let element = document.createElement('pre');
 
 -   // Lodash, now imported by this script
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');

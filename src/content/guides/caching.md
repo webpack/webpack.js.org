@@ -51,7 +51,8 @@ __webpack.config.js__
   module.exports = {
     entry: './src/index.js',
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
 -       title: 'Output Management'
 +       title: 'Caching'
@@ -103,7 +104,8 @@ __webpack.config.js__
   module.exports = {
     entry: './src/index.js',
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Caching'
       })
@@ -147,7 +149,8 @@ __webpack.config.js__
   module.exports = {
     entry: './src/index.js',
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Caching'
       }),
@@ -218,7 +221,7 @@ __src/index.js__
 + import Print from './print';
 
   function component() {
-    var element = document.createElement('div');
+    let element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -261,7 +264,8 @@ __webpack.config.js__
   module.exports = {
     entry: './src/index.js',
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Caching'
       }),
@@ -309,7 +313,7 @@ __src/index.js__
 + // import Print from './print';
 
   function component() {
-    var element = document.createElement('div');
+    let element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');

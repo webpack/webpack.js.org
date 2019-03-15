@@ -56,7 +56,7 @@ __src/index.js__
 - import _ from 'lodash';
 -
   function component() {
-    var element = document.createElement('div');
+    let element = document.createElement('div');
 
 -   // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -107,7 +107,7 @@ __src/index.js__
 
 ``` diff
   function component() {
-    var element = document.createElement('div');
+    let element = document.createElement('div');
 
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +   element.innerHTML = join(['Hello', 'webpack'], ' ');
